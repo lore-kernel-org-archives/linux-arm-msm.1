@@ -1,126 +1,91 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8FED37F741;
-	Fri,  3 Jul 2026 11:29:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 444BF3CDBD6;
+	Fri,  3 Jul 2026 11:57:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783078186; cv=none; b=OMi1m5/K9Mpeq3hw+U/XNJDqKgJtCGmKqXhxhQZqrFyibOKsFVf+qdY0zcBBxPnaZXpKEIU9pVEVvsG3uXRFRTupeRwU57+lC/hD9RYZzafMhmLveh7RAKrKpozQ8RhkwYlrtY4PVrWaXwdmcxyRIYhkQQxO1cjDEJNVrWusmkE=
+	t=1783079831; cv=none; b=qsHoUkIRihsHmzPhVmsdiAw//pJGCbB6xUiNgFo/11uRriysQk80ubQIF0i5ibHDAY3a0+1a1l7TU4QF8L2ZgcN6yBmUdSwY5+Lkcypc514bI5AqxyWLDF6Yg89caaOeE0Ziv8BGq6y2fd+fs7A/TxRio52FYMEzBHmm8r2jos0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783078186; c=relaxed/simple;
-	bh=0cYoLEYs9X9wTn88kAigm9XVjDA3+bWiT4BH16XqZrA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=GM5+2GDuv6edbMoq4Fz+Pq0NCwFIYQQ6t9jm/lk6NHcS7NjPIYdXZf6lpZ0PGo0Y2ElpYXBgFN5RLFhfIOWBopnIuywFgfsBwxSwP15MCFw4lLvqHHOHsVrgVqidrOo+l9/Gj/+sWCdAOdgcGn2q4fHnHd0GDb9zB6rvR/91vf0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GbhdNwgB; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783079831; c=relaxed/simple;
+	bh=LeylfFUIQskpyq+rX+I/Qjb4cjZ9FVn1dRTqv2pVQOg=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=pilUJ6ojobWje5YCHv7wd9JND8Nds2A9zt5a2Peew1RmuA1ScEycCKthHE/aK2g312t0Zgw/VdBZrc/hkK+aSymWYwBtTsPTwSmrSJds0nqVoHjPJXC/NgLKaZ3ZHoPKcjYfHiO04jwLBDostUseb5eUafmAVsT0MU0rUQVm/7o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=i9WwAHEO; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GbhdNwgB"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 18FF41F000E9;
-	Fri,  3 Jul 2026 11:29:42 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="i9WwAHEO"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A72911F000E9;
+	Fri,  3 Jul 2026 11:57:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783078185;
-	bh=1X0pwBrndRwtVXIIRI7/KtzrNV8k9Wlfh0Mwy1h+EW4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=GbhdNwgB5AHqZ4dZTAptUc9ANi8hcq5SKUOgKa+4Jv2A0KC45Ta1ezIXlPZzy5+m3
-	 7oOunAZKJxD7LZ2tonVzotEjgO5GmEWhYsGYaunfCE/uj+cyTEynyzjZPqmeNp+qdl
-	 iJKLSwnorM4wVGnEAnmb7x7/uF+/9n1zXwK3hJNFbBbo31rJQEXxhh1IX3qnicuV9N
-	 7IKibNaL7Gae/YH/0RiNmlRX1ZSO8T1J5MTLqRmL49/SqzhgbBhSAwsd7d5uWCe6b4
-	 KCvEsg4Qo2iJkaIaOdX7Nzi7CZ3AHgMO+4co2n3IISntkmq7gjFnGm81r9SuHsvOEH
-	 M7WvPtSJcOHbg==
-Message-ID: <b475b5d0-608b-4af3-a125-84cfdcddcfcd@kernel.org>
-Date: Fri, 3 Jul 2026 12:29:41 +0100
+	s=k20260515; t=1783079829;
+	bh=MD41EKc3eGDZUpvmSMHMNkbaQrXeEqhnCbpQ/t29/sY=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=i9WwAHEOlTLzJWHMReiFUP+4nidFNWQPoi9oXVVgj3ygsMYgxoc+uZmBU7PwGnfbn
+	 wolP1RBGhTxkLouA+NwNRqHCXXIaur9fxbfmY9743Mec9dpkpbr2W9bduSGbSQjHtj
+	 WGiJLooN5IDMeluefz8tCz3O3V30Se8cXt+hAc6eQVajZqTPwBYAKyDP4IAJ2bqzBR
+	 gMJbY3qOGyjbNYgiYRLDNAvposcxEJSHl7qluZr2vtwMtSobdC3gpQ/k/v5z9gzMrr
+	 xgfArr4rTXsEmwYQDO9PhS+xpomVWocDm6ySKB2LbX2rXpM0FpR2wJSI9hi4ESTYj9
+	 ADV+ZQd4ZOfKA==
+From: Mark Brown <broonie@kernel.org>
+To: andersson@kernel.org, mathieu.poirier@linaro.org, 
+ Uday Khare <udaykhare77@gmail.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20260618132054.11010-1-udaykhare77@gmail.com>
+References: <20260618132054.11010-1-udaykhare77@gmail.com>
+Subject: Re: (subset) [PATCH 1/4] remoteproc: qcom: Fix glink->node
+ reference leak in qcom_add_glink_subdev
+Message-Id: <178290544322.38925.3535198559099213437.b4-ty@b4>
+Date: Wed, 01 Jul 2026 12:30:43 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] arm64: dts: qcom: Fix pm4125 vbus regulator
- compatible and constraints
-To: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Wesley Cheng <quic_wcheng@quicinc.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
- jishnu.prakash@oss.qualcomm.com, kamal.wadhwa@oss.qualcomm.com
-References: <20260701-add_pm4125-vbus-reg-v2-0-6bac2bac7131@oss.qualcomm.com>
- <F11CmcSG0NfJxCD_094ercweXNrSY-fxOnTpyBxukPPcM3UdumRt4yZahLT-uKJabq_1WaDBldjbgUvBxpeAQA==@protonmail.internalid>
- <20260701-add_pm4125-vbus-reg-v2-3-6bac2bac7131@oss.qualcomm.com>
- <3a0e3c81-b559-4961-8e58-cad8dc171578@kernel.org>
- <HNlPJm_ENIaW7IC8zj9-9_SMwvX1l-pyFmJnf3dt53XeHI82XgSFYyD4obb2AEIe_2c-ev0MRppu3gYKgAU_LA==@protonmail.internalid>
- <20260702080228.tegosnl6uwt5hy7c@hu-kotarake-hyd.qualcomm.com>
- <4de2970b-884d-47e2-ba52-514f973f14b9@kernel.org>
- <3DUPJ5lL3SFPZTl4vKlN6fZlPTssrNZX7FwuWHQnPsT2IlcFqBxq0DgGBVeOP35NZEbuBxExIv7kiAa9ea68Iw==@protonmail.internalid>
- <20260703090012.wqpepzr24iaehpmr@hu-kotarake-hyd.qualcomm.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=bod@kernel.org; keydata=
- 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
-In-Reply-To: <20260703090012.wqpepzr24iaehpmr@hu-kotarake-hyd.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1167; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=LeylfFUIQskpyq+rX+I/Qjb4cjZ9FVn1dRTqv2pVQOg=;
+ b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqR6OTwKErpwcXSCiuJPcD6UDGBeBMbBL+zM5DQ
+ T1eTpQripqJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCakejkwAKCRAk1otyXVSH
+ 0Jw5B/9RzWRqnBaQK462RVzNBQMPT2tRk00nxoepHygwDuiI1f1KIfXkR6HwqHeemAaRLSxOvpU
+ 9tWpDQ3I8F40rtGMJy0KwVn0vNK8ZP1zCNDEfKwK8wVcF/RB0k9pFUr97a5yCKB/IFA6Qr5Duic
+ 25Gy/GH6Y+8qDiNIjJBx6Py+8IZ6Z53TCkV20ehcXKZT7MJQnrD9dy48zKcI06cFq3xQHLHs77/
+ jpV7dP3ENHDT7hWqrd9iQS6SMXEegC+aAxnRRdrfC+3x3oT74sVwQJ6mMRb8WBEl2+WrW7c8k2I
+ TI7vyPsMTZr6ynhagimrLJnZLbb8wW7ZNo8EN2L+3VAvOL+K
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On 03/07/2026 10:00, Rakesh Kota wrote:
->> You can add the register abstraction logic, then add the new compatible no ?
->>
-> Are you talking about the driver change ? if yes, for the driver change
-> I can split it into:
->    - Patch 1: Add register abstraction logic + PM8150B support
->    - Patch 2: Add PM4125 compatible
+On Thu, 18 Jun 2026 18:50:54 +0530, Uday Khare wrote:
+> remoteproc: qcom: Fix glink->node reference leak in qcom_add_glink_subdev
 
-Exactly this.
-> However, splitting the DT change is not straightforward — the PM4125
-> compatible and its voltage constraints live in the same .yaml
-> file. If we split them, dtbs_check will fail on intermediate states
-> since the compatible would reference voltage properties that aren't yet
-> defined (or vice versa).
+Applied to
 
-Driver only is the ask not DT.
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/regulator.git for-7.3
 
-Go raibh maith agat.
+Thanks!
 
----
-bod
+[4/4] regulator: tps6594: Fix device node reference leaks in multiphase loop
+      https://git.kernel.org/broonie/regulator/c/7fd28093b3ef
+
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
+
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
+
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
+
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
+
+Thanks,
+Mark
+
