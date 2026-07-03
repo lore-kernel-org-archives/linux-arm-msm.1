@@ -1,38 +1,38 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B1C03403E8;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5240733EB1B;
 	Fri,  3 Jul 2026 05:02:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783054922; cv=none; b=Mn2VyZg0kr61krZid7B6XgJIfJamdHV/DFsO5d3+nvGqEYrq5+RYJ7fSsyF8bB7wa+o97/f9dTzwPScv/ag87X7s4Ko3EI/nvwEaaBppnRXOFJh/TpUOujPcQj/gXHieVAtdy0ezUra82liTfi3XGaq2HhPD1XLV2Pg/WvmRvXc=
+	t=1783054922; cv=none; b=asGXBbj9XCkO1ukr4GTaQxCMsTaSUFp0r5Z9I4aiZc1NQDLimUMXdA9Iuf5t6u7yMedlVlvYMjYVLT4gIy985J+FO+BT/NeZGQ9eFcyzyjUMUMgPiQjLxwCUxo0vKW54IdGS79ClJROhowaIiJQw02dUHoG8WUNOP+77tC86Ujs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1783054922; c=relaxed/simple;
-	bh=c0m4PMeN5o8unC7bCLyrC/imCnarrxFyVW2BtWa/MBw=;
+	bh=ruRDsLiRVJS672K5oo8OA4gOAKdVmvXkKSjCKbHPxU8=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=uduPxDwTpPefl4xfeV8q3y3IjOn9MCjByXVO28Lw3CwyyWquVfXKDQ9id9+GPz3aKxm2VLABU/Zq3b7yPunezd7NoO9Rb+fMXGQsjkp2XzyPVNeVAQP30N677Wsy+MRlQnVYsO4wSFLGdFIH8g20QlLhWqUiBgKH/CYX3dvWzI4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SL3srDkT; arc=none smtp.client-ip=10.30.226.201
+	 In-Reply-To:To:Cc; b=cthfOg+sUMpF3Gyw/ngGFfx4R3rpF+IkGNUpAczyHSZOTKtNZlqdIOZY7999bMMYbHio06tjeNBeS2984z7/g5fpJb+0aj1e0OvDOw/+Yep10IAuHxH/nGYAomZrwDnbur1pSQHea6DOdMSUBhASX/FzRd9nBv4VJfY5fj6/n9Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bXeLB3U6; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SL3srDkT"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 3BCBFC2BCB9;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bXeLB3U6"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 819A2C2BD05;
 	Fri,  3 Jul 2026 05:02:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1783054921;
-	bh=c0m4PMeN5o8unC7bCLyrC/imCnarrxFyVW2BtWa/MBw=;
+	bh=ruRDsLiRVJS672K5oo8OA4gOAKdVmvXkKSjCKbHPxU8=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=SL3srDkTZf2e/XXYu5qiuW0NaRe34YZmM8s80qyjNDkOaHmvvVBBEIjR7szTWjlev
-	 ecoQF7pNIPv4P+uMMZjgXau6rqf3F4i57uQSBaYxNMxZkzwCidMZqt5rz3/eOjsx8b
-	 csBG+s8tiJuedUTgC5lqNGgvEq6zlHBjwQs4uyDHvTN9opgnDQsQvHBuGusdL2eN/4
-	 Sz8iErPIAlejWpXhz3b55XRjBgUNliRLaN47AjyJpjEwE0r38c/wnMWsQEffI6kP/H
-	 +g7UNPksfytiNz9Q5NGWwGRvB9YP8GZx7pa8kDkAIFNgEbaow+LZ/vB1GtIiU7HDzj
-	 UnrI+rIcV8YgA==
+	b=bXeLB3U6yQm2dXWm2NCHItX6pqksGIi3ASnLd4uio/VaejhsI5OP+ZKxfq1oo9/Wk
+	 dFcG0RttORwXtlGHeDLKYnYfueGcFJzqjt1rmyEiD49cL2d71q1QK1Vm/K9gmhHQEC
+	 /oohR3+Ij5Lk8HAB3/QhoR1lKGBKkdK4McaZ1SyuaNRYgPeYcDTIHSi2aFUH7Yfp7k
+	 3v1KLhTpvElpLJWNMfBPHeaM/1LkjxO89/K6IgAI8xj5k09PfRtTiayNc/WMRDg60K
+	 UvYvdrb79Oybm4myi6qcny8IEcAXzfN0UWFe4+u4Xqhq3tGgNDgnSsApkm/YyAPf4m
+	 t0rmNz7Nic5pg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D4F5C43602;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6ED84C43458;
 	Fri,  3 Jul 2026 05:02:01 +0000 (UTC)
 From: George Moussalem via B4 Relay <devnull+george.moussalem.outlook.com@kernel.org>
-Date: Fri, 03 Jul 2026 09:01:49 +0400
-Subject: [PATCH v3 1/6] dt-bindings: net: bluetooth: Document Qualcomm
- IPQ5018 Bluetooth controller
+Date: Fri, 03 Jul 2026 09:01:53 +0400
+Subject: [PATCH v3 5/6] arm64: dts: qcom: ipq5018: add nodes required for
+ Bluetooth support
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,7 +41,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260703-ipq5018-bluetooth-v3-1-62da72818ab3@outlook.com>
+Message-Id: <20260703-ipq5018-bluetooth-v3-5-62da72818ab3@outlook.com>
 References: <20260703-ipq5018-bluetooth-v3-0-62da72818ab3@outlook.com>
 In-Reply-To: <20260703-ipq5018-bluetooth-v3-0-62da72818ab3@outlook.com>
 To: Bartosz Golaszewski <brgl@kernel.org>, 
@@ -53,14 +53,13 @@ To: Bartosz Golaszewski <brgl@kernel.org>,
  Philipp Zabel <p.zabel@pengutronix.de>
 Cc: linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org, 
  devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- George Moussalem <george.moussalem@outlook.com>, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+ George Moussalem <george.moussalem@outlook.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1783054918; l=2835;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1783054918; l=1634;
  i=george.moussalem@outlook.com; s=20250321; h=from:subject:message-id;
- bh=d1Mw/yAsL63HsWWol0YJxbOQeRLt9sHgbZjS0kdvWbI=;
- b=N1y7JzAtrrCecAKlmLN/asjDH3yHF7hO7rhy/Vl65Dt4XTiixB2H6YPOXIqzhQzV4O0acDQ89
- /+3kqA3406fDoVeKVL/3yFc23TA1OeKUFI99+HLDDkCwASayky5qdHs
+ bh=W34SYW/fjbOsDklvwrwSAhVsxNGBAP8d0fG4MddytFo=;
+ b=odimwWqx4LOzTR3PXrfLhZJHoOeqpZSyfolbErDBbi4U7QejQr3mrRdwJlblQGu9ncqCpWzvW
+ UkDUEWENAMmBphY0kKnIvOUrCNbRxV+D4PvhQOmHbE9BBslrwcCLJbX
 X-Developer-Key: i=george.moussalem@outlook.com; a=ed25519;
  pk=/PuRTSI9iYiHwcc6Nrde8qF4ZDhJBlUgpHdhsIjnqIk=
 X-Endpoint-Received: by B4 Relay for george.moussalem@outlook.com/20250321
@@ -70,106 +69,63 @@ Reply-To: george.moussalem@outlook.com
 
 From: George Moussalem <george.moussalem@outlook.com>
 
-Document the Qualcomm IPQ5018 Bluetooth controller.
+Add nodes for the reserved memory carveout and Bluetooth.
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 Signed-off-by: George Moussalem <george.moussalem@outlook.com>
 ---
- .../bindings/net/bluetooth/qcom,ipq5018-bt.yaml    | 86 ++++++++++++++++++++++
- 1 file changed, 86 insertions(+)
+ arch/arm64/boot/dts/qcom/ipq5018.dtsi | 25 ++++++++++++++++++++++++-
+ 1 file changed, 24 insertions(+), 1 deletion(-)
 
-diff --git a/Documentation/devicetree/bindings/net/bluetooth/qcom,ipq5018-bt.yaml b/Documentation/devicetree/bindings/net/bluetooth/qcom,ipq5018-bt.yaml
-new file mode 100644
-index 000000000000..2119162994e0
---- /dev/null
-+++ b/Documentation/devicetree/bindings/net/bluetooth/qcom,ipq5018-bt.yaml
-@@ -0,0 +1,86 @@
-+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/net/bluetooth/qcom,ipq5018-bt.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
+diff --git a/arch/arm64/boot/dts/qcom/ipq5018.dtsi b/arch/arm64/boot/dts/qcom/ipq5018.dtsi
+index 6f8004a22a1f..65a47ba7d3a3 100644
+--- a/arch/arm64/boot/dts/qcom/ipq5018.dtsi
++++ b/arch/arm64/boot/dts/qcom/ipq5018.dtsi
+@@ -17,6 +17,23 @@ / {
+ 	#address-cells = <2>;
+ 	#size-cells = <2>;
+ 
++	bluetooth: bluetooth {
++		compatible = "qcom,ipq5018-bt";
 +
-+title: Qualcomm IPQ5018 Bluetooth
++		firmware-name = "qca/bt_fw_patch.mbn";
 +
-+maintainers:
-+  - George Moussalem <george.moussalem@outlook.com>
++		clocks = <&gcc GCC_BTSS_LPO_CLK>;
++		clock-names = "lpo";
++		resets = <&gcc GCC_BTSS_BCR>;
 +
-+properties:
-+  compatible:
-+    enum:
-+      - qcom,ipq5018-bt
++		qcom,ipc = <&apcs_glb 8 23>;
++		interrupts = <GIC_SPI 162 IRQ_TYPE_EDGE_RISING>;
 +
-+  clocks:
-+    items:
-+      - description: Bluetooth Subsystem low power oscillator clock
++		memory-region = <&btss_region>;
 +
-+  clock-names:
-+    items:
-+      - const: lpo
++		status = "disabled";
++	};
 +
-+  firmware-name:
-+    maxItems: 1
+ 	clocks {
+ 		gephy_rx_clk: gephy-rx-clk {
+ 			compatible = "fixed-clock";
+@@ -136,6 +153,11 @@ reserved-memory {
+ 		#size-cells = <2>;
+ 		ranges;
+ 
++		btss_region: bluetooth@7000000 {
++			reg = <0x0 0x07000000 0x0 0x58000>;
++			no-map;
++		};
 +
-+  memory-region:
-+    items:
-+      - description: |
-+          Reserved memory carveout for firmware loading and runtime data
-+          transport between the host and the Bluetooth controller.
-+
-+  interrupts:
-+    maxItems: 1
-+
-+  qcom,ipc:
-+    $ref: /schemas/types.yaml#/definitions/phandle-array
-+    items:
-+      - items:
-+          - description: syscon node representing the APCS registers
-+          - description: offset to the register within the syscon
-+          - description: IPC bit within the register
-+    description: |
-+      The outgoing IPC bit used for signaling the Bluetooth controller of a host
-+      event or for sending an ACK if the remote processor expects it.
-+
-+  resets:
-+    items:
-+      - description: Bluetooth Subsystem reset
-+
-+required:
-+  - compatible
-+  - clocks
-+  - clock-names
-+  - firmware-name
-+  - interrupts
-+  - qcom,ipc
-+  - resets
-+
-+allOf:
-+  - $ref: bluetooth-controller.yaml#
-+  - $ref: qcom,bluetooth-common.yaml
-+
-+unevaluatedProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/clock/qcom,gcc-ipq5018.h>
-+    #include <dt-bindings/interrupt-controller/arm-gic.h>
-+    #include <dt-bindings/reset/qcom,gcc-ipq5018.h>
-+
-+    bluetooth {
-+      compatible = "qcom,ipq5018-bt";
-+
-+      firmware-name = "qca/bt_fw_patch.mbn";
-+
-+      clocks = <&gcc GCC_BTSS_LPO_CLK>;
-+      clock-names = "lpo";
-+      resets = <&gcc GCC_BTSS_BCR>;
-+
-+      qcom,ipc = <&apcs_glb 8 23>;
-+      interrupts = <GIC_SPI 162 IRQ_TYPE_EDGE_RISING>;
-+
-+      memory-region = <&btss_region>;
-+    };
+ 		bootloader@4a800000 {
+ 			reg = <0x0 0x4a800000 0x0 0x200000>;
+ 			no-map;
+@@ -647,7 +669,8 @@ watchdog: watchdog@b017000 {
+ 
+ 		apcs_glb: mailbox@b111000 {
+ 			compatible = "qcom,ipq5018-apcs-apps-global",
+-				     "qcom,ipq6018-apcs-apps-global";
++				     "qcom,ipq6018-apcs-apps-global",
++				     "syscon";
+ 			reg = <0x0b111000 0x1000>;
+ 			#clock-cells = <1>;
+ 			clocks = <&a53pll>, <&xo_board_clk>, <&gcc GPLL0>;
 
 -- 
 2.53.0
