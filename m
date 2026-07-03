@@ -1,119 +1,104 @@
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EE793112AB
-	for <linux-arm-msm@vger.kernel.org>; Fri,  3 Jul 2026 18:09:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E94882E06D2;
+	Fri,  3 Jul 2026 19:19:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783102193; cv=none; b=DAVciXe+JJNnNnZ0n9ROI4W2BV3Q/d51coNFNMRKmDDqXk/+gVV/mGLj9xuYTJPBzfoMw9epeF2RHf4wGQtWlIGybd+WcuLWpEnigt1Gq6rI4/MLcKiuLTB+7sZkHjBEfMuQAvVX7UL/lgAg8VQ8V3FSEPxl/6+zUXS3p5DjAZc=
+	t=1783106344; cv=none; b=bj9u8A6/7t0khhj415xZ4cUDk4NfnoH6zTjyvBPEnoixXKIlAEbCmU/KYDsWZJaZg/uHn3WwL4JLL2nzjhldg/bqtb9PGkeH0l/N/y+EPFyaf0qD37tFGps9lDTPios5uB3MitmDXtP4f4oTWnNEq5RuQGeIXTfXVeEo9ahM88g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783102193; c=relaxed/simple;
-	bh=tgraSq/9gwcx1TlvQJClsEB9nYR8gJqZ8hIiRgK1PwI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=c/lOPeDhQqIz8Z5+tHu5xICEBGE2jxcOylxfg1fxU102KzqmhlDmBn9pq69Hk6T7tqPKC3dwbUQP97qsmhDSQonfpotAuIt8nVRmnK2nTDTXaHuL1FKaTs95IiIpTSi5/ciGHs0y1BJk/3fWUAskvLWYj9Qj70Gft/PcOcvAqMY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ra4xy5wv; arc=none smtp.client-ip=209.85.128.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1783106344; c=relaxed/simple;
+	bh=xJuVLJzroWMBD9DD71kNfwj90ClarasYnSkGTpNHemU=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=PKbsgdYcweyfMpd/5NNz4ghHPpQ3oHKKb+D0secc7JCFySvZH3wzIhZzj1EPnvjfoatUZkEiRj9uMf0Pt5RKT0YOw9sqSjMuRea4GlBJEZHs1+3ZG9x0ZuRscpbt/OmKNuZhXUAj4mE79N+ZY173uKyHnO88tOD1p2IqQtdXo0k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AcrLOfl8; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ra4xy5wv"
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-493c52cde9eso8112335e9.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 03 Jul 2026 11:09:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783102190; x=1783706990; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :sender:from:to:cc:subject:date:message-id:reply-to;
-        bh=v0DdjgoNvkE0UKI8hOQQ2MWCAbcQBGlfDeboRpCm0gA=;
-        b=ra4xy5wvOi/TPR2Z34MK32O/ruNxzV+1v6h5iMDy1P1Fn3UGUdPZM2687Pony5MH/s
-         WLLI7YRHTn4SPDcZsIu7rwolyAPhKocKplLXYQIeCbqypXDo9Bgn9zyBZg+AYgdPS3c1
-         aC0uv6QHm9h7b6sKySLAA0Ho1VbwhCEAwnI9dTQ4gsjtlUt+MTijdQasxwuPvJmyQaOV
-         k9IObRwH0OUTZ17q3WKTOsLRgxAQMxGvzdvs/u9wU4so5i/GhP1eYPxkJggBq5exxNCC
-         umrd9HSyTHQypGHWdLak08XO0Qr3hi3XOCH5195z4JS1UN6UInIl2mW0V978DqbgDTOT
-         D3vA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783102190; x=1783706990;
-        h=content-transfer-encoding:in-reply-to:from:content-language
-         :references:cc:to:subject:user-agent:mime-version:date:message-id
-         :sender:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=v0DdjgoNvkE0UKI8hOQQ2MWCAbcQBGlfDeboRpCm0gA=;
-        b=oTv1zi4enKF+1XYr+iGKoXtJEyQmFXx+rQw0C1AhVN0JBHF1GQ14SO2v1kZ0vt/cLk
-         rkiHckg7dKg4hjCHySUb6iENYMtWX1MNy0LEJ7dn3qOJftE+agsNUAmEUPlRrp3hjnqU
-         jNpCILMqjswk1ltSIzvcpV7YPcCsGoDjF+6JYs2HMwgMn5KuWuzCh9Zh9JdS5q+X5upm
-         gkKT3y3bOogvueao/akR22bSLfkknSIKbvxNQnHY/Gee5vCi9tI0qj5vA4zCXXpfAeUl
-         3r7WQd9WzsxkA2BrexUDLCLUnO2ie/HhkgNTRGksFJSPwLAKCZfGGuCWXnY4+byDOx2E
-         6Wyg==
-X-Gm-Message-State: AOJu0Yy30Ztd/gNbm/NDCHov4RKL1eG6hvgEzAYSU8GBz40qYeF0kjg9
-	/TX/luZPnWOVKCRXJj4R8XlcZ3BLmx9BtaS2pQKBMxaS/ArOrzYxMZDW
-X-Gm-Gg: AfdE7cle4/UQXSS11VvsRNdeq71IQrZvK8DcWuT8sLWJYm2BT28fM1/SUPSN0pk20wG
-	/aXNLayLjwMcuX/r/waPqUFRyhJsRhhPYA34NRXN3860DaycTTv6Hd/W74W9VZTrh+BXlJ2b/TE
-	RtUCBg91qS1X/nwfryg/obH8CdtFeuSOd4qasvz+OruCVJUT0cpx8xgMMcLzgIoa5vCGpv9PFbF
-	VgN5bSlFKur2/hnz9ksL8bRSuQ0BWND/nVGFkRd0IIBrRwrZQANJr6BlnemC8gTbdXramwmYQ6u
-	cA4+jh4w7bsvXwvaL51T4BSWSrj8QMPboLQvXV6JwDMmJ0QEf3A2yQAmpXlXC8RuGmkmXYs+0SD
-	REAnlJQ/YgTV/ixfXCx4HAaIt1ht7/VFJgW116KtIFVRohi1L3q4VODOT7OiSc4ayAT0/2lMAUd
-	R/BA+KvQ4sHVoA1StQ8Q5WVGxXgKLmkwbFiLN5wa1CEatHliX8b1vyfe5CIQD7ICcqvAFLtzFat
-	MIix9De
-X-Received: by 2002:a05:600c:314f:b0:493:b2c1:b2f9 with SMTP id 5b1f17b1804b1-493d11cf274mr4122605e9.8.1783102190297;
-        Fri, 03 Jul 2026 11:09:50 -0700 (PDT)
-Received: from [10.128.11.240] (195-23-151-163.net.novis.pt. [195.23.151.163])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47aa0f214d2sm1044214f8f.33.2026.07.03.11.09.48
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 03 Jul 2026 11:09:49 -0700 (PDT)
-Sender: Julian Braha <julian.braha@gmail.com>
-Message-ID: <8a418031-4bfc-4212-a7e7-0d88aa4621c7@gmail.com>
-Date: Fri, 3 Jul 2026 19:09:48 +0100
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AcrLOfl8"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E99A51F000E9;
+	Fri,  3 Jul 2026 19:19:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783106342;
+	bh=i5y2X3HFGbM7t4zbeA3K3meHSTZdNQp9aSf6Dom1Xwk=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=AcrLOfl8B4z2JUdJyLFQAe6iR/8N0ju4KeavUvXaCrsxSJcXf+Sd49VTbj+g4bX6N
+	 3QoZ3008RgXNBC8wDahrTCycDczKMiRvw+gLDN0fKnmIQtXVvrmgkrqAJWHmjP0edY
+	 YwQQfuw/bM1wNysUf9juOFrMa0KS3t9u/47sIlQ3q3s6cDmzNPkCGnXexgMh/Wwwfg
+	 O0w+M3ZaaQAE1d0hVCPfpmBBn39sXfQFxKZ0e0Xxv+ay7gbjdABhzHL3q/ZJkuwZS/
+	 SW6fxZNUARfThHbGNn7uZV4Jm3tMuWCB3lxRLT8dxNGOEc6RPI3b4MZjXjA3LRr4j1
+	 K++m+7O58IxzQ==
+From: Mark Brown <broonie@kernel.org>
+To: Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>, Srinivas Kandagatla <srini@kernel.org>, 
+ Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+Cc: linux-sound@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260702-xo-sd-codec-v7-b4-v8-0-d39d0fdb7859@oss.qualcomm.com>
+References: <20260702-xo-sd-codec-v7-b4-v8-0-d39d0fdb7859@oss.qualcomm.com>
+Subject: Re: [PATCH v8 0/3] ASoC: qcom: lpass: Switch VA/WSA macros to PM
+ clock framework
+Message-Id: <178308705893.53103.838784798451369843.b4-ty@b4>
+Date: Fri, 03 Jul 2026 14:57:38 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 03/10] soc: qcom: Add QMI TMD support for remote
- thermal mitigation
-To: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Mathieu Poirier <mathieu.poirier@linaro.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
- Amit Kucheria <amit.kucheria@oss.qualcomm.com>,
- Manivannan Sadhasivam <mani@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Kees Cook <kees@kernel.org>,
- "Gustavo A. R. Silva" <gustavoars@kernel.org>,
- cros-qcom-dts-watchers@chromium.org
-Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-hardening@vger.kernel.org,
- Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>,
- Casey Connolly <casey.connolly@linaro.org>
-References: <20260703-qmi-tmd-v4-0-3882189c1f83@oss.qualcomm.com>
- <20260703-qmi-tmd-v4-3-3882189c1f83@oss.qualcomm.com>
-Content-Language: en-US
-From: Julian Braha <julianbraha@gmail.com>
-In-Reply-To: <20260703-qmi-tmd-v4-3-3882189c1f83@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1591; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=xJuVLJzroWMBD9DD71kNfwj90ClarasYnSkGTpNHemU=;
+ b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqSAsjRF0Ry17bJGK5+GHbUbUg/TJoZ4yshEzSY
+ /r0ECHBARuJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCakgLIwAKCRAk1otyXVSH
+ 0EBbB/0TXgJGgUK4XdbWCpEU42NWKXx+ghMyla2oUGD8TD2DYyf8jX22czJ48zyVf9qsGNgbV74
+ AxKMTT0HBsk8+A+jY2hRCVDJWqpMl8PXwX4d+d/Zq+dmpuc68JILsjgUqPpoFKPP8qTgyHGzKsF
+ /25vhLzpq+nGWbO8TiISw8GNMj4WFVBGeJBpsrLSPoR8OH1HHB8+XoH7YbZdxr8qpZ8AXkZ7XpF
+ uIR0M/9lowk7ptV4z8cnhB+QWh56bzM0hwUOz5tGjQIkTXmo3QE5Qls/sW3TlNzwX0/QUfLoBfM
+ ZTt0hxlWBZuySq7Ff+wiP+cuYTWz+7xb2pS3fHJNAmfRI7J/
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-Hi all,
+On Thu, 02 Jul 2026 00:14:56 +0530, Ajay Kumar Nandam wrote:
+> ASoC: qcom: lpass: Switch VA/WSA macros to PM clock framework
+> 
+> Hi,
+> 
+> This series converts the LPASS WSA and VA macro codec drivers to the
+> PM clock framework for runtime PM clock handling.
+> 
+> [...]
 
-On 7/3/26 06:03, Gaurav Kohli wrote:
-> +config QCOM_QMI_TMD
-> +	bool "Qualcomm remote subsystem TMD" if COMPILE_TEST
-> +	depends on ARCH_QCOM
-> +	select QCOM_QMI_HELPERS
-> +	help
-> +	  This enables Qualcomm Messaging Interface (QMI) based Thermal Mitigation
-> +	  Device (TMD) support for Qualcomm remote subsystems. It manages
-> +	  TMD messaging and handles QMI communication with remote processors
-> +	  to exchange mitigation state and apply thermal mitigation requests.
-> +
+Applied to
 
-QCOM_QMI_TMD can trigger an unmet dependency and build failure due to
-selecting QCOM_QMI_HELPERS, without ensuring NET is enabled:
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.3
 
-WARNING: unmet direct dependencies detected for QCOM_QMI_HELPERS
-  Depends on [n]: NET [=n]
-  Selected by [y]:
-  - QCOM_QMI_TMD [=y] && ARCH_QCOM [=y]
+Thanks!
 
-- Julian Braha
+[1/3] ASoC: codecs: lpass-wsa-macro: Switch to PM clock framework for runtime PM
+      https://git.kernel.org/broonie/sound/c/cd054a6e272c
+[2/3] ASoC: codecs: lpass-va-macro: Switch to PM clock framework for runtime PM
+      https://git.kernel.org/broonie/sound/c/eb667d0fbdd3
+[3/3] ASoC: codecs: lpass-wsa-macro: Use devm_clk_hw_register() for MCLK output
+      https://git.kernel.org/broonie/sound/c/541735571578
+
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
+
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
+
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
+
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
+
+Thanks,
+Mark
+
