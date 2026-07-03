@@ -1,68 +1,86 @@
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8589A3D9527
-	for <linux-arm-msm@vger.kernel.org>; Fri,  3 Jul 2026 10:32:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D4693C818D
+	for <linux-arm-msm@vger.kernel.org>; Fri,  3 Jul 2026 10:38:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783074759; cv=none; b=boAnUYQbhAmtAYwD+ko+YVfnNNVUPEcEgPAugdhbFarC6NmHZfjpqcn5Qqs7bHjYmwsUg49vhg9uDctXVQoVaeoe3YnJtf+eKBCwWTdaTkHRmblF8e+CNHjMyzdu5tevbEUE7bb0rgWPdpuQjebAdTT2ITCoV0k+P0FBzZ8ndd8=
+	t=1783075133; cv=none; b=cRcwPnsgyQFa/3l45WITIQcGhBZsrISAI57WPL9u49iiVXxD5JgqQ69K8ZQ3vQnsi3RkGRg9Kl1r3n/Kw1A2E0hRTGI8A/D1LE6lvTVgF3jHVh1+ofzQ96R2BtFTj+NT6g5MW3/OMu9JywV//Rffrcm1IX/KVbfJLxksnaqktWQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783074759; c=relaxed/simple;
-	bh=D5ijQV3bUdGx6RAeOYDDyhV2oxFHO7V4Y7ge4JRyKaw=;
+	s=arc-20240116; t=1783075133; c=relaxed/simple;
+	bh=TLZfpXNa4jTlpCICpFrGEXH2rtYeXj7nHX5GHDbou8Y=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=PMFaj3AEgu+c74wdSVfKmtWA71CiV3ZcUlT+heFRUJeGXaBwbWo2FP1fnzyvt8umXTplwl+hO8u1/nhcATw0bWOK+v7bDX2h94yJK0veY8RRME6uO3eWFzD7wt8W2E0ACBwhAg069vP5XBdIETa73KAFaVJGcn8D+74OoPYJY7g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=oGbcWFTh; arc=none smtp.client-ip=209.85.221.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	 In-Reply-To:Content-Type; b=R8gTlf89rAUCFihMg833xrrq6z0ip8SU6n8oPNh7M9tJWF8FUh17wTl5bSzTln6Gr0XpuEZFPYihY7vHPHzBPqtB+yaqYQmyNGOGdK/qtUUb7zzVPteyVnPjk5jl4u0a3MspHHI/yKLixKGiadJOJmgrT1yBH4FqOIRH26JPR6s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=eRvXERMv; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OOZ00OBl; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="oGbcWFTh"
-Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-46ed4f66256so371917f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 03 Jul 2026 03:32:35 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="eRvXERMv";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OOZ00OBl"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6635roNk3108984
+	for <linux-arm-msm@vger.kernel.org>; Fri, 3 Jul 2026 10:38:49 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	a3RaEfFYDUv0hytKdheuNDDTJLMkZO6ds3f7R+dKZTQ=; b=eRvXERMvJqO0khyF
+	nE45Jp5cvL8zvZtV71e5sx2xQn9KD7LdVoOD8hU+jjZRdfArthDN/z2DMUDOQ7AB
+	dQwRPb2637T/vXZhg9ACdZn0S2AWnOe4Ip2hdTsduVyxCJHGA5SRoYCma+pU2rFf
+	/i3Z5/iIkStFR4QiU96wDkqaX3QH+ssHPACrsXeLg2ZwAYwBuhtbrZ4O3uYH9dM9
+	ScbqyI8mEGA8FFc0Ckp8GuNBS0QZOYyReOrQz/Yzr+XEpDSDTLD7xhGRCoGhB45k
+	Irp9u+gGWoG8i8wdcGtwuiSrqnxxlKsZAlPhAJi6ZfeVJcM1rjSgENMf4xNSDjFD
+	byCAGw==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f60eyak1t-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 03 Jul 2026 10:38:49 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-51bfa45b280so991611cf.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 03 Jul 2026 03:38:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1783074754; x=1783679554; darn=vger.kernel.org;
-        h=content-transfer-encoding:in-reply-to:organization:autocrypt
-         :content-language:from:references:cc:to:subject:reply-to:user-agent
-         :mime-version:date:message-id:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=xXqnKE5BVSq5meuyy3aSxrzRU5PavHRibtLm4NqA0hs=;
-        b=oGbcWFTheGuatgzxnFFH6wuCsl5Qb0XbSOH9emVtGr4Wp/p5s+9UGaT95T1+QNp7ON
-         OjOMktfU4yUNmVI4+pIrLqLCBkk0FE6P4Ta8ytqAkknc2s4WZtR6c7+C0imbjlcez0X8
-         dASoyUvGlF1CG5/vebFc49OJPPn9VTc5aabfhIRDhy/GDoAyyIWjFAI+P5FQzJ9B60nZ
-         cqVW28q5hG/KiFo1ghr7nsW6YugyyvvIqIvRN86V9ioulgmGEL7vt/p/LuKHkfsYfxtB
-         RyvccYfrVkfssvIPiALGePd+e2g2UY8nuXHA9rk48upBsR+KjS3nV6PCFR1ckRIp3CpU
-         +nXA==
+        d=oss.qualcomm.com; s=google; t=1783075129; x=1783679929; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=a3RaEfFYDUv0hytKdheuNDDTJLMkZO6ds3f7R+dKZTQ=;
+        b=OOZ00OBl15fsaLUrkLQ/i6e1Gl3OW4gLCoFapxrzbwlE8n6JeEtUYJQfiRby8y+7G8
+         79mF1v27MKLOlcietanv5AO0LKrM3zW7LuAqdOJ1+rH0BaIWzXvWEjxanQHYlDiVQwae
+         Z61BQbb/M9O6D6Ss1EI3vmAy/LC8SuqVUhRQAa11SRnf1nCPasfb4e3hk6tWl7ZbHrYA
+         iuCgTVR9Xy3f8onoCrCV+ONRIRdrjI6xTHOwPQ9oZZLgmlzMZrn3vwDfVMBj0bRrP84R
+         8MnR+Ks6GHijLM6Srgo1pqEKi50BoGvhV+PZ/ErA78HSK/6AH0bMQQHRJ3cOSUT809Sq
+         C49A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783074754; x=1783679554;
-        h=content-transfer-encoding:in-reply-to:organization:autocrypt
-         :content-language:from:references:cc:to:subject:reply-to:user-agent
-         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to;
-        bh=xXqnKE5BVSq5meuyy3aSxrzRU5PavHRibtLm4NqA0hs=;
-        b=nDNX7WR+fpoUBiGno4PRJyaVXvF4mtgzhsc+qdFNbomeAPmKzqVg17WOOO03wMyoYk
-         RxJ3QOUsrC0vCIRY57Yt7xwIoLRnk6W8y6vXI1J9KHLZ8c1egvWlS7nFtCiqkC7Mf8sL
-         m2kmNmuXrLf27GJlv/HSHuPV3sEuZHQu1S4h3Ts2YCAI+5SkKLL/RCMJlN6JbksQeatz
-         d2LWDOsh477ga85W5CgViwRKNO7m598hQ3X+e35RHWT9yHkhdYI69N5/LDmWqY8LYlH6
-         REexMH4li3tQ/C+k19GzcSUTglDvtHa2d1c6BY+6bA5V6fjInksV2EoDtPql7Iu71MyB
-         h9Bg==
-X-Forwarded-Encrypted: i=1; AHgh+RrtRL+demP0yDflC9tVZgCEdW7Iiek8PQ+/bEy2mCjQ0YpP2Uu3VERPbHu7kBzqO7j3TW2Kup3fdRfgFNcM@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw/JxgLp/M/cPAUeSc74zYA0AIUoaQkkIxe67ZWaYZditplwhyP
-	T+BIvErmeVlGqOdxcfwzM9dVlEccE1oVuzs1BI6dNY5jvG/BaQsSLZaMcNASnOAeqJI=
-X-Gm-Gg: AfdE7cl+JyjxlYmwTOOnfJ7M43F8NhDoar7JAQWWEmpI963VJ826EQfbpPkeVJw1Ni/
-	9/OJMM9M/pKvNldc3DyYeGrHxPHJeduSkMnPTloerXUcCwG8x1PGCrTHPB3rVB0+PoECGykG13s
-	w+PRZBKRlVu6ePrC8rb4jeWZjIUTYaZDhc9f+JwOeHGklHzbczqsdH3x+vf43VhcUtX+muebjVu
-	wiWyjTYHg2Jtrg6TcnBWhuOP7ud8KOaLpkCaqPdcY03xDFM2LKhpJioL6zsiWwoJmUwJYVsDxKE
-	fGO0yVPLiOncz0AqcmL+TUVGXr/WKZVLkaNrPw7sUakoKBJcFnMWPV3m3K/2AqiF3lXsqSy/r2J
-	y4cer5Y8YyNN14PDs97ys0RLuSbdRcms1qdkqrvJHU/W5WMRiB0Q0Dja7ERgFjLWnFP5oltqGHk
-	LL/BH3aXEbrb5wFgpw4XwchK3oDNHV5e+xabxzznRigs0imK/5QrTPrlhCEb1irMR7kwDQR2uQX
-	ncq2c4=
-X-Received: by 2002:a05:6000:601:b0:476:5eec:309c with SMTP id ffacd0b85a97d-4775a7cb888mr13583163f8f.24.1783074753843;
-        Fri, 03 Jul 2026 03:32:33 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:9b13:921f:4f13:6cbb? ([2a01:e0a:106d:1080:9b13:921f:4f13:6cbb])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-477db8a4ad4sm18103306f8f.11.2026.07.03.03.32.32
+        d=1e100.net; s=20251104; t=1783075129; x=1783679929;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=a3RaEfFYDUv0hytKdheuNDDTJLMkZO6ds3f7R+dKZTQ=;
+        b=HhS8ANF2T7hN1OStv8UOgxRbzBlLwwB0c4vOk7tM81YV8J66+/MrcIO55UTmwZUX2J
+         5nXoi1vrq1crpUtpVxvxu7cThj34GebtpWbJ9y5uTDNMVLGmgk5AbDQYk5+Et3vZ6fKq
+         uG41+UPTqt8XkyFiZvzBcsAMs9TuTkJXvxcFpmG0RCMW3ijCwyfedp1Om6MO44K4mr6l
+         EYWCN5OmAn0SqL++n8daVOqrnSG7y1O8A8VS+dG61KReQyFu5JNLgXiXRI4EUJxV1L8R
+         RtYu2hYNMlJrqE0qcPLpCgCf5V2wNdi969K1NyCMVuTpqRuLl0BRZzS2bf9+IE9zvqP0
+         aNaQ==
+X-Gm-Message-State: AOJu0Yyax2aDEzOQvfHnQLoySf1Ojh6Om8VkoHn+uWmDeslMpQriJ1aI
+	2sEXuidlsjWLEJzmHU3uXrVkV1iMv4MRUC5YRJF+uGEUmXaZ8N1NdjhoK8q7nN9A4g44HEvUm8q
+	glR7xRJUAV19eXQ/CTwNyljLJOID4fgYvn0K032ef+ng8bw9IM3YxAtYO7yOY+JZ8BmTE
+X-Gm-Gg: AfdE7cmNSO6xrTUcpElQAOq9Gt7C0bbRx0TjaqTq/IkgXcSCwghYP+4MfhWhlGF8wpx
+	ojIwv+pbVvV5BiY01WztWSgD5BEW0KkMHj+NNyZQ/pVMFrOGxt1sUoWubfXtkO4JqpxNxkEjwNi
+	R5QbELsJiHrlJ9iiHsZYO9RIAIZukK5O7/E67/rlh5GwVoIyk5zQpzsdhDogrtUrIcfhQ401+27
+	9vr7slltIDZYoqTHAbPNsOS5xhzZ8vkwL7tpPvBC/FT5peypqE+CnP7eclY9//KoJ7nGURfdYyb
+	UcOnfhNp2iH+50tJf3p2iI05dTTpdvn5iaRCCfr/Q+tw/tr27X/sHIBhlo/kAZFJdp/HuKtDxaq
+	8DDxwfUKm/su9DFvoLkAVyQ+Ey1NIrEE4uUU=
+X-Received: by 2002:ac8:7e8d:0:b0:51a:88bd:95a0 with SMTP id d75a77b69052e-51c26a41ddemr98177281cf.1.1783075129089;
+        Fri, 03 Jul 2026 03:38:49 -0700 (PDT)
+X-Received: by 2002:ac8:7e8d:0:b0:51a:88bd:95a0 with SMTP id d75a77b69052e-51c26a41ddemr98177071cf.1.1783075128715;
+        Fri, 03 Jul 2026 03:38:48 -0700 (PDT)
+Received: from [192.168.120.193] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c12b6091b60sm261765966b.14.2026.07.03.03.38.46
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 03 Jul 2026 03:32:33 -0700 (PDT)
-Message-ID: <5edfa760-b5b1-4f0e-8a14-2a39d2b99090@linaro.org>
-Date: Fri, 3 Jul 2026 12:32:32 +0200
+        Fri, 03 Jul 2026 03:38:47 -0700 (PDT)
+Message-ID: <bfd5b522-da85-499e-a36e-b303bde791ef@oss.qualcomm.com>
+Date: Fri, 3 Jul 2026 12:38:45 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -70,107 +88,73 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v3 0/2] Lenovo ThinkPad T14s EC thermal monitoring and
- thermal zone integration
-To: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>, sre@kernel.org,
- hansg@kernel.org, ilpo.jarvinen@linux.intel.com, linux@roeck-us.net,
- andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org,
- krzk+dt@kernel.org, conor+dt@kernel.org
-Cc: bryan.odonoghue@linaro.org, platform-driver-x86@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org
-References: <20260701103714.22583-1-daniel.lezcano@oss.qualcomm.com>
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260701103714.22583-1-daniel.lezcano@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v3 5/6] arm64: dts: qcom: ipq5018: add nodes required for
+ Bluetooth support
+To: george.moussalem@outlook.com, Bartosz Golaszewski <brgl@kernel.org>,
+        Marcel Holtmann <marcel@holtmann.org>,
+        Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+        Rob Herring
+ <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Philipp Zabel <p.zabel@pengutronix.de>
+Cc: linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260703-ipq5018-bluetooth-v3-0-62da72818ab3@outlook.com>
+ <20260703-ipq5018-bluetooth-v3-5-62da72818ab3@outlook.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260703-ipq5018-bluetooth-v3-5-62da72818ab3@outlook.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzAzMDEwMyBTYWx0ZWRfX0VfuBtaZR0MA
+ NRKHl+p4zaBwuc0gHK4SbzyjMKtOKyK9DLrKyz+SQ5h5pvf55PVOHriXdErLAwArSxE+LdfTej4
+ 0coPc2l3cF+YlPW40LANLook8Y31HNoN0icLDJFf75vdDZfJUh9pgYffrhrwRU2cWJw2t1y/lk1
+ 1d8RRriGcndPNs5L5S8G1/hQ7elTuRx3TpDRreh0XM9B0evrwAnrjVZv2zsc3s0a5EhJVDhApd3
+ Uwj9O15txYvS4aP29PL8S9MrqsC2y8UwgQhgjAVrvgVVrVfJsUVcB7O3yrhCWuYYWojRjSNCu6K
+ lrIrorDIajpWO5Nt1T1I8mddfo211beAMNmQmtUuH1TYJ1XZ3yqDiZn8P40mxvsliKq0ejlsp2g
+ dK1mzAbYpcEfMBce3cJAzUz8b0UrIj0TWCuXfdYBUj3xxat5UZLQoC7g/WkVBYpW06GLJ/owRYt
+ ymlbKGwV8U5EukMwbvQ==
+X-Proofpoint-GUID: KOt319SXo2Un8pB9cNxwUFQTiNU1BRAf
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzAzMDEwMyBTYWx0ZWRfX6ZslynpK8pCg
+ X4zWXN39ifhRfiZeziClpf5etbiGQdYdJ9cvFcn73xaUwkMkyvzti/m1oM1rKe8hVrQHPxpVWml
+ 74IcIc+LYb6/pmFj4dbff0L6uOrO8Og=
+X-Authority-Analysis: v=2.4 cv=SPRykuvH c=1 sm=1 tr=0 ts=6a479139 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=UqCG9HQmAAAA:8 a=t82OjkPGvLD1vuDj7LAA:9 a=QEXdDO2ut3YA:10
+ a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-ORIG-GUID: KOt319SXo2Un8pB9cNxwUFQTiNU1BRAf
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
+ definitions=2026-07-03_02,2026-06-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 adultscore=0 malwarescore=0 bulkscore=0 priorityscore=1501
+ lowpriorityscore=0 phishscore=0 spamscore=0 suspectscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607030103
 
-On 7/1/26 12:37, Daniel Lezcano wrote:
-> Hi,
+On 7/3/26 7:01 AM, George Moussalem via B4 Relay wrote:
+> From: George Moussalem <george.moussalem@outlook.com>
 > 
-> This series extends the Lenovo ThinkPad T14s embedded controller driver
-> with environmental monitoring capabilities and integrates the exposed
-> sensors into the Linux thermal framework.
+> Add nodes for the reserved memory carveout and Bluetooth.
 > 
-> The EC provides access to several platform temperature sensors
-> covering the SoC, keyboard area, bottom cover, charging circuitry, QTM
-> module and SSD. These sensors are currently used by the firmware for
-> thermal management but are not exposed to Linux.
-> 
-> The first patch adds hwmon support for the EC temperature sensors.
-> 
-> The second patch exposes the EC as a thermal sensor provider in the
-> device tree and defines thermal zones for the keyboard skin
-> temperature and the charging circuitry temperature. This allows the
-> generic thermal framework to react to EC-reported temperatures and
-> apply standard Linux thermal mitigation policies.
-> 
-> As the EC protocol is not fully decoded, the passive trip points
-> get/set actions are missing, so it is not possible to program a
-> threshold and receive an interrupt when crossed the way up or
-> down. Consequently, the thermal zone related to the charging circuitry
-> is polled every two seconds until we can set the trip points in the
-> EC.
-> 
-> This series fixes critical thermal issues happening on this platform
-> where a kernel compilation, or heavy workloads, lead to a system
-> reboot.
-> 
-> Tested on a Lenovo ThinkPad T14s Gen 6 (Snapdragon X Elite).
-> 
-> Thanks,
-> 
-> Daniel
-> 
+> Signed-off-by: George Moussalem <george.moussalem@outlook.com>
 > ---
->   Changelog:
-> 	v3:
-> 	 - Removed event based because trip point are not yet well supported
-> 	 - Added an empty line after variable declaration (Ilpo Järvinen)
-> 	 - Used MILLIDEGREE_PER_DEGREE from units.h (Ilpo Järvinen)
-> 	 - Made switch consistent (Ilpo Järvinen)
-> 	v2:
-> 	 - Fixed patch 1 subject prefix
-> 	 - Removed the fan information part
-> 	 - Added HWMON_T_ALARM
-> 	 - Fixed DT change description to reflect what it does really
-> 
-> Daniel Lezcano (2):
->    platform: arm64: lenovo-thinkpad-t14s-ec: Add hwmon support for
->      temperatures
->    arm64: dts: qcom: x1e78100-t14s: Add thermal zones for keyboard skin
->      and charging sensors
-> 
->   .../qcom/x1e78100-lenovo-thinkpad-t14s.dtsi   |  68 ++++++++-
->   drivers/platform/arm64/lenovo-thinkpad-t14s.c | 130 ++++++++++++++++++
->   2 files changed, 197 insertions(+), 1 deletion(-)
-> 
 
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on T14s OLED
+[...]
+
+>  		apcs_glb: mailbox@b111000 {
+>  			compatible = "qcom,ipq5018-apcs-apps-global",
+> -				     "qcom,ipq6018-apcs-apps-global";
+> +				     "qcom,ipq6018-apcs-apps-global",
+> +				     "syscon";
+
+You'd have to alter dt-bindings for this to be allowed. But I
+don't think it is. The functions to grab a regmap from an OF
+node create one on the fly
+
+Konrad
