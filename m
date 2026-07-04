@@ -1,199 +1,369 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from ixit.cz (ixit.cz [185.100.197.86])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 547FE38E8A8
-	for <linux-arm-msm@vger.kernel.org>; Sat,  4 Jul 2026 12:33:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADC4A288BA;
+	Sat,  4 Jul 2026 14:05:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.100.197.86
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783168396; cv=none; b=oVGqWBhZs8Yz3tZkWQuR7trxmHKUNraUG8QXCnc/EZzCGdGS7u4VSPBmYMGqCM/FY9K4eSstHYBByhZSUCeyXGDEfgQtQdGQyXPaXDAlSViQ0ulLarrcsGqQXuKEeNHwaTjBgVu1vk1XqOknJpcU/BBHtWBlIkar7Wstj7CAkis=
+	t=1783173940; cv=none; b=J46guvfEYBEKoAAHuCVeG8fnTZiJTTd93n/T5DgpexmjVzFE5n5p7pdfvTy1rGzogtvVIpmdyoSeS/jRJuvRI1diDbB7e4/oAiZiysVly8KuKuLsM0pVFzyZjZ90F6TyY7s7y7qiUD9OtlHRWTAlNEEjQK3yHIcoBMiqdaTBWn4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783168396; c=relaxed/simple;
-	bh=ZqLIdjiIL4PaEbHPy9ZDj4gnrcQqTesCsBp7hGwIhYU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ZXb9J6ROvYOpkPcG7cPFvPf0TjicUpQ6vGB53Tp8KEVZZHzyq1j/Corr1A9TPNWRo+jv2Q2L36O4Y4ap63l0KzDIZNhwB5wx54u6rB5PWU8ifbh2yEzDDJd+5nIBtt3uHm+8xaRHFPq1oEc/sBFBQuWM8rp8zukbzKFVyOFGHuQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NxwSLxln; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=dAjpIz61; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1783173940; c=relaxed/simple;
+	bh=85yg9uwIapESEcAZLgoMfN21ra+0H+FZBzcXl27xzFo=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=tSAD2dHeRTZ588SiBzH4adv7KNtRCANDmfoYQPZQ1O86Mk4jJap38tduC/3cBrv2y7qrqvNWaqgIg7A0Ww32Pb+ySkMpFsVuaxD/UsQYN+wwLPvwiTfPmWeIiEx8N2XVPCIzvpj6KSYb3g1l4ado3qcbpcbW6Aq1DUv2MDic/YI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=AwnVd9jo; arc=none smtp.client-ip=185.100.197.86
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NxwSLxln";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dAjpIz61"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6646hjwN2302194
-	for <linux-arm-msm@vger.kernel.org>; Sat, 4 Jul 2026 12:33:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	n7l+w1LkFRue1ZQFudjsniOqbsa/avBSZQtqmMh9NKg=; b=NxwSLxlnSUC+g1lR
-	7NVdxQqrD2X5yEP9GceoXfoUjZh44a4vGxUoQ8nhE390jEYQSfUgen9jyHzUGs2O
-	D5Bl7af9JbE0T9NtOGr0BWCOaaI/RPPDRqSAZ7ibwp8/GjX8JJKrJ5IUoBJ/STIc
-	+byoJEJ2LJJmEaI7i3sGeBmcuG4zYZaRNqHV3Fsai3x4XZzu6f2irzrW+JvBADal
-	b5PT7fNps+909/4cB/5uNGhJBY20GRg74igOXJGhxGlzsszkWnqmmQQK+isRhf31
-	R2Lcit6DPc0dptb0CaKNoy4YmEUg73b2VE0vlpNyqpNIjBPTuI2dbAMqlqCfDgFB
-	5JyiQQ==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f6s4sry1v-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 04 Jul 2026 12:33:13 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-92e4f946461so147870485a.2
-        for <linux-arm-msm@vger.kernel.org>; Sat, 04 Jul 2026 05:33:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1783168392; x=1783773192; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=n7l+w1LkFRue1ZQFudjsniOqbsa/avBSZQtqmMh9NKg=;
-        b=dAjpIz61viQQyRrlNsw/I+ankT8iHVgb2aWrCNZrdecMj3v21cfowC2JhZY+QK3RZE
-         n7DBEXQn6u42svyDOec9i1ZWfIlSamiCxUJP4pPCyYpwda/8jXEMLMkobuWvsdb8Vdru
-         BQSSy6Lma4sATD+2HDjiSLAtYOy7MOq3asNiF5Fk/Wfc7bk4u/OFoL3CUI/8hVJpG7KR
-         Jcjp0+Ukf5In4CPET7svUiPQo6atK9bs4YECmDxftExhyJGcR1CCXnLHVYQrIp84GxYn
-         2DnvtgPqVbu011GJmufLMIxCHoPJ4J613wNTpXOArXWh4VFIlzblZRcR2azeXWshhnSP
-         tVKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783168392; x=1783773192;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
-        bh=n7l+w1LkFRue1ZQFudjsniOqbsa/avBSZQtqmMh9NKg=;
-        b=ljIqoe6HYwil7rQ8ptpEM9lWrX8dOwSOCbAH1L9Xgx2Zs8nqfNwjUydURSGXnMvO5V
-         edCCdDz08OOy8iCw5RFNFDWNGcJyYG7RdOExqQy6mcI6qpZIg1JRYjBkiAua4ujN+kHm
-         xCSC/m7CcMohCA2kUYVUVwX1bOkTS+Fhj9EPkrRGR+n8Pm9IUEMl3jwenjsG0OVgkyCX
-         JKPzKsz3Hm6sq/LAolgnLGWMkBMrYEXKMXf/jOZaJb2sDx2I5DknwzUxPiBRLz0r8XLI
-         hsYDkL0CdK8p2i/nDbEq/AsfysVVFVuJTeNoJAXXr+spXlIXRdDnwKuBGlvIC1MZKFpX
-         7DOQ==
-X-Forwarded-Encrypted: i=1; AFNElJ+ZjGGZojBA271UCjbG7jVvrXS6+6V9ZEAPhHZ9iv3xhL7bG0/gPNCpvZN/gvXK5o56qEV3civ/ay4/Sx+w@vger.kernel.org
-X-Gm-Message-State: AOJu0YycXYx7XOGB2v9J++dK5A3YeUzYh1wsmNSA1i9SsGsbyNKI+u8J
-	KTgtQeS5kfE4WORI44rFaBvYiDwjrDvbiSg4lS/Yz0ngIEWCb0h9/0CJzPqtDBHo/svahPSxqbe
-	YLBKbFORJ6gLHVjoKMzJzN+EM31XWcu6VLh1NQQOPs+zCyxz+ihNXcMqwZhJh5JcoLYDF
-X-Gm-Gg: AfdE7cl3OwiqXZnc6lT8mIOcPXWlkeqYo0youXkzmJajMUcbAVUeUAaPoF7TerbW1/p
-	HyN/12IflZNOF2A4sXJpRbeRF2bP2/3YBRY2bI2NNwygDnjhTtBQmVfgiOlcQHImVt/7UZ/ZaKc
-	Zr7f12zvL4vxv7/xUlZ2XMt7DY3TuJwDc3jmEiUz1CQ0oImc9AGak6bxlpfPenzENL1olTQjGi/
-	pTY3lw9PsaLAyZ4rzgOTQE9S8IYl0hwd6nrllTrcaEwB5mku9fvYDflmO/RZ7WI4lK67I2WPqE+
-	7YaobHQtNOW/+gC3PWvZ6BNsIkXAiTJo/OgIvCMlmT+HfxBX5MUMVVHDUl3DTnhjzuM353JMmDj
-	Fuae2Hu55c8upHYPMFILZSvpiwmD9LEfZb6dajs9rNyUPcx7rQ0OKxsqJpy3WZFqEqSS9LBNbzk
-	XctXcrofsRQUqEL/slx80VN07K
-X-Received: by 2002:a05:620a:4398:b0:915:9d08:94e1 with SMTP id af79cd13be357-92e9a43b335mr448897985a.46.1783168392439;
-        Sat, 04 Jul 2026 05:33:12 -0700 (PDT)
-X-Received: by 2002:a05:620a:4398:b0:915:9d08:94e1 with SMTP id af79cd13be357-92e9a43b335mr448892785a.46.1783168391916;
-        Sat, 04 Jul 2026 05:33:11 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-39b4aba9ef2sm8519151fa.0.2026.07.04.05.33.08
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 04 Jul 2026 05:33:10 -0700 (PDT)
-Date: Sat, 4 Jul 2026 15:33:07 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Aastha Pandey <aastha.pandey@oss.qualcomm.com>
-Cc: Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Will Deacon <will@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>,
-        "Joerg Roedel (AMD)" <joro@8bytes.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        iommu@lists.linux.dev
-Subject: Re: [PATCH v4 6/9] arm64: dts: qcom: shikra: Add GPU cooling
-Message-ID: <qqdaoc4tacx3dlh6bp43gu56w44cezkm345iconc7iqngircxm@hoywvq57otpm>
-References: <20260704-shikra-gpu-v4-0-90cf1a52e539@oss.qualcomm.com>
- <20260704-shikra-gpu-v4-6-90cf1a52e539@oss.qualcomm.com>
- <opgj6twppqwhb77itqelmyzniaifcja3wdazyzeal5axstr25g@a7v634mnimbm>
- <ca8f3731-3f23-45f5-82ed-ba1a65514b95@oss.qualcomm.com>
+	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="AwnVd9jo"
+Received: from [172.20.10.2] (78-80-20-180.customers.tmcz.cz [78.80.20.180])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id EA48A5341BA0;
+	Sat, 04 Jul 2026 16:05:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1783173925;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=6UUJxdtelhYrr+VCZpbztlO/VhgiOAMMYGZdjo+bdyM=;
+	b=AwnVd9joofvY7kp2FkL7LJHpZ1T6uF64HafFyJMwMU3hGO0MI6gvBbcWg7M9Q0q0JN7Wzw
+	j+RhCuN2EWgjFt36BW7PZMt7NoSIWxjTRHZwJslHMD2xfpG7XSaxemJtr8YbT+icoRUFm/
+	3TQAIbDd4r08M7WtWRzqG+qakWHZj0E=
+Message-ID: <d4708a56-cf6d-4e70-9acf-79292caa3f44@ixit.cz>
+Date: Sat, 4 Jul 2026 16:05:24 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <ca8f3731-3f23-45f5-82ed-ba1a65514b95@oss.qualcomm.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA0MDEyNiBTYWx0ZWRfX+YD9Dh1oXxu7
- AE7s3oV1XaTn6shGb0gH/boFQzp8Co/6Xg800p2a2+YK5VJssU2GXyYOShTYWkBtrM2TYjmm4B8
- grxOX6IbVeA06e4qjNFaoJXXC4IJ6oU=
-X-Proofpoint-ORIG-GUID: 7ZuDinSmjloS_aOpND04l17S9aW52Hrd
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA0MDEyNiBTYWx0ZWRfX1YhP2O4d2Q+A
- VkFqUi/wZAPAasczHCE4KfR3IcGf9XFFH2BOOCNYztcPS5w3xNUJLiFkX2B9tq+75NnvrqDzKwb
- Yx7liTjWTKF+dfrjy2ZH9wdivZceZWPJmiVMUkpw80z3vtun+uhFleGD3Spv8R7wUFESnQYjHD7
- S6s+NKfY/fuApQeTHEU2T1yjDUiPvtkYza3NnOkbdog9ridwxOG1qz8BAy0oVk8kXdbCDBn4jPx
- q+EQ8Aqu0tw708xxxx/2aditl9HXhr+bBSyNZMXTryNZPLTj6eSSncoJHpjuQzNvSBfkd6kvDMi
- slIn8ocv3cobo2xJLTIWVFKGtndFAfGHmk/oZjPZzMS2XwD7cWR5VYuf34mGZYrXnqjaxdn1Rvh
- nDaPCrPCW7AwMggJDffXAdMmi80Aj4Q12TfkiCTWu0Xsp2KCwPK8kaeNwA9c7prHdVHVyZFZP7k
- dZ29ToYoNw5h8Kux2Pg==
-X-Proofpoint-GUID: 7ZuDinSmjloS_aOpND04l17S9aW52Hrd
-X-Authority-Analysis: v=2.4 cv=ZfQt8MVA c=1 sm=1 tr=0 ts=6a48fd89 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=8nJEP1OIZ-IA:10
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
- a=CvX1hmVerT4HThdZ_8QA:9 a=3ZKOabzyN94A:10 a=wPNLvfGTeEIA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.125,FMLib:17.12.100.49
- definitions=2026-07-04_01,2026-07-03_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 bulkscore=0 impostorscore=0 adultscore=0 phishscore=0
- priorityscore=1501 clxscore=1015 suspectscore=0 malwarescore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607040126
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/3] arm64: dts: qcom: sm7125-samsung: add initial device
+ tree
+To: Erikas Bitovtas <xerikasxx@gmail.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>,
+ Kees Cook <kees@kernel.org>, Tony Luck <tony.luck@intel.com>,
+ "Guilherme G. Piccoli" <gpiccoli@igalia.com>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Stefan Hansson <newbyte@postmarketos.org>,
+ phone-devel@vger.kernel.org
+References: <20260703-sm7125-samsung-v1-0-3e5f752048c1@gmail.com>
+ <20260703-sm7125-samsung-v1-3-3e5f752048c1@gmail.com>
+Content-Language: en-US
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <20260703-sm7125-samsung-v1-3-3e5f752048c1@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Sat, Jul 04, 2026 at 01:56:30PM +0530, Aastha Pandey wrote:
-> will update why part in commit message.
-
-A. I should not
-Q. Should I top-post on the mailing lists?
-
+On 03/07/2026 09:59, Erikas Bitovtas wrote:
+> Samsung Galaxy A52/A72 are devices released on atoll (SM7125) platform
+> in 2021. Add initial device tree for SM7125 Samsung platform with
+> support for:
+> - Framebuffer
+> - GPIO keys
+> - Hall sensor
+> - Vibrator
+> - Regulators
+> - Reset input
+> - Real-time clock
+> - SD card
+> - UFS
+> - USB
 > 
-> On 7/4/2026 4:41 AM, Dmitry Baryshkov wrote:
-> > On Sat, Jul 04, 2026 at 02:04:32AM +0530, Akhil P Oommen wrote:
-> > > From: Aastha Pandey <aastha.pandey@oss.qualcomm.com>
-> > > 
-> > > Unlike the CPU, the GPU does not throttle its speed automatically when it
-> > > reaches high temperatures.
-> > > 
-> > > Set up GPU cooling by throttling the GPU speed
-> > > when reaching 115°C.
-> > 
-> > Nit: 72 chars. It looks really strange to see two paragraphs with
-> > different line wrapping.
-> > 
-> > > 
-> > > Signed-off-by: Aastha Pandey <aastha.pandey@oss.qualcomm.com>
-> > > Signed-off-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
-> > > ---
-> > >   arch/arm64/boot/dts/qcom/shikra.dtsi | 16 +++++++++++++++-
-> > >   1 file changed, 15 insertions(+), 1 deletion(-)
-> > > 
-> > > diff --git a/arch/arm64/boot/dts/qcom/shikra.dtsi b/arch/arm64/boot/dts/qcom/shikra.dtsi
-> > > index 34261221664b..eeeaa369d3a7 100644
-> > > --- a/arch/arm64/boot/dts/qcom/shikra.dtsi
-> > > +++ b/arch/arm64/boot/dts/qcom/shikra.dtsi
-> > > @@ -2510,6 +2510,7 @@ cpuss0-critical {
-> > >   		};
-> > >   		gpuss-thermal {
-> > > +			polling-delay-passive = <10>;
-> > 
-> > Why?
-> > 
-> > >   			thermal-sensors = <&tsens0 6>;
-> > >   			trips {
-> > 
+> Tested-by: Stefan Hansson <newbyte@postmarketos.org>
+> Signed-off-by: Erikas Bitovtas <xerikasxx@gmail.com>
+> ---
+>   arch/arm64/boot/dts/qcom/Makefile                  |   2 +
+>   arch/arm64/boot/dts/qcom/sm7125-samsung-a52q.dts   |  31 ++
+>   arch/arm64/boot/dts/qcom/sm7125-samsung-a72q.dts   |  31 ++
+>   .../arm64/boot/dts/qcom/sm7125-samsung-common.dtsi | 518 +++++++++++++++++++++
+>   4 files changed, 582 insertions(+)
 > 
-> -- 
-> Thanks & Regards,
-> Aastha Pandey
-> 
+> diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+> index 6f33c4e2f09c..d90311806e21 100644
+> --- a/arch/arm64/boot/dts/qcom/Makefile
+> +++ b/arch/arm64/boot/dts/qcom/Makefile
+> @@ -344,6 +344,8 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sm6125-xiaomi-laurel-sprout.dtb
+>   dtb-$(CONFIG_ARCH_QCOM)	+= sm6125-xiaomi-willow.dtb
+>   dtb-$(CONFIG_ARCH_QCOM)	+= sm6350-sony-xperia-lena-pdx213.dtb
+>   dtb-$(CONFIG_ARCH_QCOM)	+= sm6375-sony-xperia-murray-pdx225.dtb
+> +dtb-$(CONFIG_ARCH_QCOM)	+= sm7125-samsung-a52q.dtb
+> +dtb-$(CONFIG_ARCH_QCOM)	+= sm7125-samsung-a72q.dtb
+>   dtb-$(CONFIG_ARCH_QCOM)	+= sm7125-xiaomi-curtana.dtb
+>   dtb-$(CONFIG_ARCH_QCOM)	+= sm7125-xiaomi-joyeuse.dtb
+>   dtb-$(CONFIG_ARCH_QCOM)	+= sm7225-fairphone-fp4.dtb
+> diff --git a/arch/arm64/boot/dts/qcom/sm7125-samsung-a52q.dts b/arch/arm64/boot/dts/qcom/sm7125-samsung-a52q.dts
+> new file mode 100644
+> index 000000000000..e4d005054b00
+> --- /dev/null
+> +++ b/arch/arm64/boot/dts/qcom/sm7125-samsung-a52q.dts
+> @@ -0,0 +1,31 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * SM7125 Samsung Galaxy A52 (a52q) specific device tree source
+> + *
+> + * Copyright (c) 2026, The Linux Foundation. All rights reserved.
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include "sm7125-samsung-common.dtsi"
+> +
+> +/ {
+> +	model = "Samsung Galaxy A52";
+> +	compatible = "samsung,a52q", "qcom,sm7125";
+> +	qcom,board-id = <0x22 0x6>;
+> +
+> +	reserved-memory {
+> +		#address-cells = <2>;
+> +		#size-cells = <2>;
+> +		ranges;
+> +
+> +		rmtfs_mem: memory@f4f01000 {
+> +			compatible = "qcom,rmtfs-mem";
+> +			reg = <0 0xf4f01000 0 0x200000>;
 
--- 
-With best wishes
-Dmitry
+Hi Erikas!
+
+the start on the 0x1000 offset sounds suspicious, doesn't it need 0xf4f0 0000 
+and size 0x202000  with qcom,use-guard-pages ?
+
+You can also share most of the properties and define it in the -common.dtsi
+
+
+> +			no-map;
+> +
+> +			qcom,client-id = <1>;
+> +			qcom,vmid = <QCOM_SCM_VMID_MSS_MSA>;
+> +		};
+> +	};
+> +};
+> diff --git a/arch/arm64/boot/dts/qcom/sm7125-samsung-a72q.dts b/arch/arm64/boot/dts/qcom/sm7125-samsung-a72q.dts
+> new file mode 100644
+> index 000000000000..df8d637ef16f
+> --- /dev/null
+> +++ b/arch/arm64/boot/dts/qcom/sm7125-samsung-a72q.dts
+> @@ -0,0 +1,31 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * SM7125 Samsung Galaxy A72 (a72q) specific device tree source
+> + *
+> + * Copyright (c) 2026, The Linux Foundation. All rights reserved.
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include "sm7125-samsung-common.dtsi"
+> +
+> +/ {
+> +	model = "Samsung Galaxy A72";
+> +	compatible = "samsung,a72q", "qcom,sm7125";
+> +	qcom,board-id = <0x22 0x5>;
+> +
+> +	reserved-memory {
+> +		#address-cells = <2>;
+> +		#size-cells = <2>;
+> +		ranges;
+> +
+> +		rmtfs_mem: memory@f3701000 {
+> +			compatible = "qcom,rmtfs-mem";
+> +			reg = <0 0xf3701000 0 0x200000>;
+
+same rmtfs comment as above
+
+> +			no-map;
+> +
+> +			qcom,client-id = <1>;
+> +			qcom,vmid = <QCOM_SCM_VMID_MSS_MSA>;
+> +		};
+> +	};
+> +};
+> diff --git a/arch/arm64/boot/dts/qcom/sm7125-samsung-common.dtsi b/arch/arm64/boot/dts/qcom/sm7125-samsung-common.dtsi
+> new file mode 100644
+> index 000000000000..836dc9b8b1a5
+> --- /dev/null
+> +++ b/arch/arm64/boot/dts/qcom/sm7125-samsung-common.dtsi
+> @@ -0,0 +1,518 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * SM7125 Samsung common device tree source
+> + *
+> + * Copyright (c) 2026, The Linux Foundation. All rights reserved.
+> + */
+> +
+> +#include <dt-bindings/arm/qcom,ids.h>
+> +#include <dt-bindings/gpio/gpio.h>
+> +#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
+> +#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
+> +#include "sm7125.dtsi"
+> +#include "pm6150.dtsi"
+> +#include "pm6150l.dtsi"
+> +
+> +/delete-node/ &rmtfs_mem;
+> +/delete-node/ &ipa_fw_mem;
+> +/delete-node/ &tz_mem;
+> +
+> +/ {
+> +	chassis-type = "handset";
+> +
+> +	qcom,msm-id = <QCOM_ID_SM7125 0>;
+> +
+> +	chosen {
+> +		#address-cells = <2>;
+> +		#size-cells = <2>;
+> +		ranges;
+> +
+> +		framebuffer@9c000000 {
+> +			compatible = "simple-framebuffer";
+> +			reg = <0x0 0x9c000000 0x0 (1080 * 2400 * 4)>;
+
+use memory-region = <&cont_splash_mem>; instead of reg
+
+David
+
+> +			width = <1080>;
+> +			height = <2400>;
+> +			stride = <(1080 * 4)>;
+> +			format = "a8r8g8b8";
+> +			clocks = <&gcc GCC_DISP_HF_AXI_CLK>;
+> +		};
+> +	};
+> +
+> +	gpio-keys {
+> +		compatible = "gpio-keys";
+> +
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&key_vol_up_default>, <&hall_sensor_default>;
+> +
+> +		vol-up {
+> +			label = "Volume up";
+> +			gpios = <&pm6150l_gpios 8 GPIO_ACTIVE_LOW>;
+> +			linux,code = <KEY_VOLUMEUP>;
+> +			debounce-interval = <15>;
+> +		};
+> +
+> +		event-hall-sensor {
+> +			label = "Hall Effect Sensor";
+> +			gpios = <&pm6150_gpios 10 GPIO_ACTIVE_LOW>;
+> +			linux,input-type = <EV_SW>;
+> +			linux,code = <SW_LID>;
+> +			debounce-interval = <15>;
+> +		};
+> +	};
+> +
+> +	reserved-memory {
+> +		#address-cells = <2>;
+> +		#size-cells = <2>;
+> +		ranges;
+> +
+> +		tz_mem: memory@80b00000 {
+> +			reg = <0x0 0x80b00000 0x0 0x7100000>;
+> +			no-map;
+> +		};
+> +
+> +		mpss_mem: memory@8b000000 {
+> +			reg = <0x0 0x8b000000 0x0 0x8900000>;
+> +			no-map;
+> +		};
+> +
+> +		wlan_mem: memory@93900000 {
+> +			reg = <0x0 0x93900000 0x0 0x200000>;
+> +			no-map;
+> +		};
+> +
+> +		ipa_fw_mem: memory@93b00000 {
+> +			reg = <0x0 0x93b00000 0x0 0x10000>;
+> +			no-map;
+> +		};
+> +
+> +		ipa_gsi_region: memory@93b10000 {
+> +			reg = <0x0 0x93b10000 0x0 0x5000>;
+> +			no-map;
+> +		};
+> +
+> +		gpu_mem: memory@93b15000 {
+> +			reg = <0x0 0x93b15000 0x0 0x2000>;
+> +			no-map;
+> +		};
+> +
+> +		adsp_mem: memory@93c00000 {
+> +			reg = <0x0 0x93c00000 0x0 0x3e00000>;
+> +			no-map;
+> +		};
+> +
+> +		camera_region: memory@97a00000 {
+> +			reg = <0x0 0x97a00000 0x0 0x500000>;
+> +			no-map;
+> +		};
+> +
+> +		pil_npu_region: memory@97f00000 {
+> +			reg = <0x0 0x97f00000 0x0 0x500000>;
+> +			no-map;
+> +		};
+> +
+> +		venus_mem: memory@98400000 {
+> +			reg = <0x0 0x98400000 0x0 0x500000>;
+> +			no-map;
+> +		};
+> +
+> +		cdsp_mem: memory@98900000 {
+> +			reg = <0x0 0x98900000 0x0 0x1e00000>;
+> +			no-map;
+> +		};
+> +
+> +		cont_splash_mem: memory@9c000000 {
+> +			reg = <0x0 0x9c000000 0x0 (1080 * 2400 * 4)>;
+> +			no-map;
+> +		};
+> +
+
+[...]
