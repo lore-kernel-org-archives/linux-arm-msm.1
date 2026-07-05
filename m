@@ -1,49 +1,50 @@
 Received: from abb.hmeau.com (abb.hmeau.com [180.181.231.80])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB7A3433E7A;
-	Sun,  5 Jul 2026 08:33:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22C7336CE06;
+	Sun,  5 Jul 2026 08:38:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=180.181.231.80
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783240420; cv=none; b=pOZdW3nygaQtxRbQm3ItL6oMGApqzPkEMLmPeoQplf8Q3QEAGMQACWuCg91EX2nmx7fq+eSz0ZZS3hVoLU+Y3QiBiYIn2kvza/YXmFg+P7G4SiNRORz+deqqTyZDUP0o70rOUgzfcgyYhnPFlWsF8P8iJcBfRobMVBQ7ViTNO78=
+	t=1783240713; cv=none; b=SzAADQ01tplhS7s40U5x7eFWHCJv0N63O2MZ97/PKKb49gwGorwxe/nKEXNUYlsdBQqDZM3BAHA9CvUigdHmNQYFAi1mZ4vokIALmqemuVapmSBzteujUKohlIcXMnmg1EAO6wQ76OL7fqx+STwkbjEQB72KB7bS9LXy0/0d2tk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783240420; c=relaxed/simple;
-	bh=ZYfWVZBwE87UsI5RQSs+53jrp0ELz2YHyiPdy6sEhvE=;
+	s=arc-20240116; t=1783240713; c=relaxed/simple;
+	bh=7s0KonSwT+ADSLZHft7mPJ/7WejFR1vU9didABypiUQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Qt38wRhN+wqiUR+gYgtjQGt/PH7mQ84JGZHvvp2yOIoBePCanzYeOJK09+I2ieLDmdGxUJ/KAIH+W4PcIIOWO9fX5nFznrgBp6YPzzlJPL61a/FPbCvEd6xPcRhAmP5oqLNtSJrntVl5aqQ9hEbBzdIaiNpW+jNuXtgOUzBkJ+Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au; spf=pass smtp.mailfrom=gondor.apana.org.au; dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b=D6I3DI8N; arc=none smtp.client-ip=180.181.231.80
+	 Content-Type:Content-Disposition:In-Reply-To; b=g27aaluTvujDIcdx7H8E40pmt9D46QY09Jme9668dCQI372nZUHybccL6+9GTPPAMmDBhoNh9NKMHUU63YnKoQ1sAdLl7o3J4eJvHPe3LRwuJfceSdjgl6pYQ620ARDbHnMHfCCK1klI8xqJGq8yhSuDMFgFnpDfYBeNJveiSqs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au; spf=pass smtp.mailfrom=gondor.apana.org.au; dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b=arscSYLH; arc=none smtp.client-ip=180.181.231.80
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gondor.apana.org.au
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b="D6I3DI8N"
+	dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b="arscSYLH"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=gondor.apana.org.au; s=h01; h=In-Reply-To:Content-Type:MIME-Version:
 	References:Message-ID:Subject:Cc:To:From:Date:cc:to:subject:message-id:date:
-	from:content-type:reply-to; bh=tVOBl3pFmHo3gQUWye2S7BCioHkaAaDOttuAOXMpMbY=; 
-	b=D6I3DI8NrIG+5KjAQ09sHY2/wH31qmCbqLiknGddMJKS9tBOvhOicIexz/4/iaI7I+gKiNIW/ox
-	McyPSUScfuTFcJdzyTNalysnm1OCOX3KZpkjG23n8Aj+F6Slu2qSEDy/iFPxDou8ST4LSWqYNSK5X
-	kZxCElPJaZwznrpqj9rl0yCPRoggt9srb2dJj9b8khFJn1scLeG0ouRJWUo+hETj7chyRkxY3xnZE
-	ZeYVOaMovC4vGOWZu5FVPHG8PjYCCPaBOtmh/XcaHWFgNXDTtAsLE+WUb973YH95R1TdQvz49F11Z
-	57l76GmNBEOMuDQtZQg47wsLf7Rcs24/+BOQ==;
+	from:content-type:reply-to; bh=6PIbcn5LuVyrvGq13RKK5l9fGE1EpF75wfm5PwmwfFg=; 
+	b=arscSYLHogbrDIvkjwyWp89EmL6Z2+WHVwTkyFDHrmuGlnCjzzMrhD9sdewuX9kpZYzqT5Nog+T
+	OYwTafRE1IiDumvGEYvsw8I2JOb159xKDI7+5irRIL2/5+KbuHWpGCy4I/pHYg4Xc/c1JKWBJmbyM
+	B1cetEJESZ27/nJ2nQu2w8zfNUnx3t9/UIEA9SH081HiAIl6skLZvJKjHrHZiKxsqBvyWYtwmFZmA
+	z+e7ctDr2/Uz2NPnWP0Pic0YWtgJs5MLo650/OGmoQlxdY6ABCP96zuKtx+cL3UZqsAP7f6YGvTCX
+	2u63p8GYzorI2PhiwO/JjtMMLyvfzCac16qw==;
 Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
 	by formenos.hmeau.com with smtp (Exim 4.98.2 #2 (Debian))
-	id 1wgII8-0000000Al1Q-02x1;
-	Sun, 05 Jul 2026 16:33:33 +0800
-Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Sun, 05 Jul 2026 16:33:32 +0800
-Date: Sun, 5 Jul 2026 16:33:32 +0800
+	id 1wgIMo-0000000Al5S-3jCu;
+	Sun, 05 Jul 2026 16:38:23 +0800
+Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Sun, 05 Jul 2026 16:38:22 +0800
+Date: Sun, 5 Jul 2026 16:38:22 +0800
 From: Herbert Xu <herbert@gondor.apana.org.au>
-To: Eric Biggers <ebiggers@kernel.org>
-Cc: linux-crypto@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Gaurav Jain <gaurav.jain@nxp.com>,
-	Horia =?utf-8?Q?Geant=C4=83?= <horia.geanta@nxp.com>,
-	Pankaj Gupta <pankaj.gupta@nxp.com>,
-	Corentin Labbe <clabbe.montjoie@gmail.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH 0/7] Finish removing crypto_rng from drivers/crypto/
-Message-ID: <akoW3D0-IEaNP9Zj@gondor.apana.org.au>
-References: <20260615224131.69370-1-ebiggers@kernel.org>
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: Thara Gopinath <thara.gopinath@gmail.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Stanimir Varbanov <svarbanov@mm-sol.com>,
+	Eneas U de Queiroz <cotequeiroz@gmail.com>,
+	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+	Eric Biggers <ebiggers@kernel.org>, linux-crypto@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	brgl@kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH v4 1/8] crypto: qce - Remove unsafe/deprecated algorithms
+Message-ID: <akoX_suAitZhXWTu@gondor.apana.org.au>
+References: <20260622-qce-fix-self-tests-v4-0-4f82ffa716c6@oss.qualcomm.com>
+ <20260622-qce-fix-self-tests-v4-1-4f82ffa716c6@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -52,62 +53,37 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260615224131.69370-1-ebiggers@kernel.org>
+In-Reply-To: <20260622-qce-fix-self-tests-v4-1-4f82ffa716c6@oss.qualcomm.com>
 
-On Mon, Jun 15, 2026 at 03:41:24PM -0700, Eric Biggers wrote:
-> This series finishes removing the unused, redundant, and frequently
-> broken crypto_rng support from drivers/crypto/.  It applies to
-> cryptodev/master.
+On Mon, Jun 22, 2026 at 03:18:09PM +0200, Bartosz Golaszewski wrote:
+> Remove algorithms that are either unsafe or deprecated and have no
+> in-kernel users that cannot be served by the ARM CE implementations.
 > 
-> Patches 1-4 are a resend of
-> https://lore.kernel.org/linux-crypto/20260608175848.2045229-1-ebiggers@kernel.org/
+> AES-ECB reveals plaintext patterns (identical plaintext blocks produce
+> identical ciphertext blocks) and should not be exposed as a hardware-
+> accelerated primitive. DES, Triple DES and HMAC-SHA1 have been
+> deprecated for years.
 > 
-> Please consider these patches for 7.2, considering that most of these
-> drivers had security vulnerabilities which would have needed to be fixed
-> right away anyway.  And the qcom hwrng fixes are important too.
+> Remove sha1, ecb(aes), ecb(des), cbc(des), ecb(des3_ede), cbc(des3_ede),
+> hmac(sha1) and all AEAD variants built on these primitives as well as
+> authenc(hmac(sha256),cbc(des)). Also clean up the - now dead - code,
+> flags and constants.
 > 
-> Eric Biggers (7):
->   crypto: qcom-rng - Enable clock in hwrng case
->   crypto: qcom-rng - Allow zero as a random number
->   crypto: qcom-rng - Remove crypto_rng interface
->   hwrng: qcom - Move qcom-rng.c into drivers/char/hw_random/
->   crypto: sun8i-ce - Remove crypto_rng interface
->   crypto: sun8i-ss - Remove crypto_rng interface
->   crypto: caam - Remove crypto_rng interface
-> 
->  arch/arm/configs/multi_v7_defconfig           |   2 +-
->  arch/arm/configs/qcom_defconfig               |   2 +-
->  arch/arm64/configs/defconfig                  |   2 +-
->  drivers/char/hw_random/Kconfig                |  11 +
->  drivers/char/hw_random/Makefile               |   1 +
->  drivers/{crypto => char/hw_random}/qcom-rng.c | 156 ++----------
->  drivers/crypto/Kconfig                        |  12 -
->  drivers/crypto/Makefile                       |   1 -
->  drivers/crypto/allwinner/Kconfig              |  16 --
->  drivers/crypto/allwinner/sun8i-ce/Makefile    |   1 -
->  .../crypto/allwinner/sun8i-ce/sun8i-ce-core.c |  63 -----
->  .../crypto/allwinner/sun8i-ce/sun8i-ce-prng.c | 159 ------------
->  drivers/crypto/allwinner/sun8i-ce/sun8i-ce.h  |  29 ---
->  drivers/crypto/allwinner/sun8i-ss/Makefile    |   1 -
->  .../crypto/allwinner/sun8i-ss/sun8i-ss-core.c |  45 ----
->  .../crypto/allwinner/sun8i-ss/sun8i-ss-prng.c | 177 -------------
->  drivers/crypto/allwinner/sun8i-ss/sun8i-ss.h  |  23 --
->  drivers/crypto/caam/Kconfig                   |   9 -
->  drivers/crypto/caam/Makefile                  |   1 -
->  drivers/crypto/caam/caamprng.c                | 241 ------------------
->  drivers/crypto/caam/intern.h                  |  15 --
->  drivers/crypto/caam/jr.c                      |   2 -
->  drivers/gpu/drm/ci/arm64.config               |   2 +-
->  23 files changed, 41 insertions(+), 930 deletions(-)
->  rename drivers/{crypto => char/hw_random}/qcom-rng.c (53%)
->  delete mode 100644 drivers/crypto/allwinner/sun8i-ce/sun8i-ce-prng.c
->  delete mode 100644 drivers/crypto/allwinner/sun8i-ss/sun8i-ss-prng.c
->  delete mode 100644 drivers/crypto/caam/caamprng.c
-> 
-> 
-> base-commit: 6ea0ce3a19f9c37a014099e2b0a46b27fa164564
+> Cc: stable@vger.kernel.org
+> Acked-by: Eric Biggers <ebiggers@kernel.org>
+> Tested-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> ---
+>  drivers/crypto/qce/aead.c     | 56 +------------------------
+>  drivers/crypto/qce/common.c   | 55 ++++++------------------
+>  drivers/crypto/qce/common.h   | 16 ++-----
+>  drivers/crypto/qce/regs-v5.h  |  4 --
+>  drivers/crypto/qce/sha.c      | 30 +------------
+>  drivers/crypto/qce/sha.h      |  1 -
+>  drivers/crypto/qce/skcipher.c | 97 +------------------------------------------
+>  7 files changed, 20 insertions(+), 239 deletions(-)
 
-Patches 4-7 applied.  Thanks.
+Patch applied.  Thanks.
 -- 
 Email: Herbert Xu <herbert@gondor.apana.org.au>
 Home Page: http://gondor.apana.org.au/~herbert/
