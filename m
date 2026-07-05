@@ -1,133 +1,187 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43AA2288B8;
-	Sun,  5 Jul 2026 01:08:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+Received: from azure-sdnproxy.icoremail.net (azure-sdnproxy.icoremail.net [52.175.55.52])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 3D33F26D4DD;
+	Sun,  5 Jul 2026 03:26:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=52.175.55.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783213692; cv=none; b=BYEgfV6F9Kq1hjmWKdaW234gDnWqhjhECztYcW/bxlMHSWLhhPN3BWtWpe3iE8DOl0ypWOauf9zyrEOG4IzBWLm0gLZ5x0g091G2Da70ahe2sqjkNpMXt3E3iRBh2bl1egSpprPHd8uTYdH2N6eCmcrR0VcFte32Qj66wLH2N+w=
+	t=1783222001; cv=none; b=OxkvI9dfpcTV9j1LTcWDYvr8nsaX+eUZx31pJLu4K3J6/LRVnwbPmrI8o7a7AuW34NVbAvGRFwjiZ7UsWYWgXDyIwqlZImh75nXxgB66fcB42pg97Ngr44buMTj51agGL099DdYdZA70zJmoUuKGbkyQS+0AFvPF6qKYtZZOT8Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783213692; c=relaxed/simple;
-	bh=awuH/XulbEDqs59Vh0utt3MvxPA6suHkTxBELRtA09I=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=tF4uzpFTD985dSIxGFi5YmZ8XEGIf4E8jPtpsQ4opIR5ZlIrfzltVVUfuzrtSfMaaDKP+ScrpF0gYs8Pw2pNVRTCpyrVKmwdc+HvCT+uiJ+cl4gELQjhj3pD+Q2UyzjiXWoBd/bG8hfeJ4Ebc39IVUF0P+kxYI8zwuJLidr41mE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RBkPSMZz; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RBkPSMZz"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4F2BF1F000E9;
-	Sun,  5 Jul 2026 01:08:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783213690;
-	bh=3duzwyHdi6RgshCaFz1ynAPla1JdMO1NFXgABI7Eh3s=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=RBkPSMZz/BRsU6kDJgLsvltCHl/7nmfEQhY9exVykMN2oKxRiBkjx0bffH+fLPUYH
-	 2ck3iltRsWHYzSENjgVtJrOJreGEUuUNSVj3Lw6/17RResfLk3hMjVq8SFBY9BhwDf
-	 sKGEtqWnoWO1tu5pP6nXAc6xmwVh8UNIja+d2sdcRPZaulrROXaGk/79+rxatMNbsr
-	 c2v95I5UOD7pAE9DXeaUhAJJOM+Z8Ue+In01tEjX7ZGwWogIhtIPwhvb1sf0fVcC/Q
-	 IwJtuFvlG/z8wx2ctp0O4Cx1DHR5NHBJURe7Lg72aFRhuLvN9Mldzb+6xKPfPOkOCm
-	 T0vQCQ2/MHtEg==
-Date: Sun, 5 Jul 2026 02:07:58 +0100
-From: Jonathan Cameron <jic23@kernel.org>
-To: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-Cc: Romain Gantois <romain.gantois@bootlin.com>, MyungJoo Ham
- <myungjoo.ham@samsung.com>, Chanwoo Choi <cw00.choi@samsung.com>, Guenter
- Roeck <linux@roeck-us.net>, Peter Rosin <peda@axentia.se>, David Lechner
- <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, Andy
- Shevchenko <andy@kernel.org>, Lars-Peter Clausen <lars@metafoo.de>, Michael
- Hennerich <Michael.Hennerich@analog.com>, Mariel Tinaco
- <Mariel.Tinaco@analog.com>, Kevin Tsai <ktsai@capellamicro.com>, Linus
- Walleij <linus.walleij@linaro.org>, Eugen Hristev
- <eugen.hristev@linaro.org>, Vinod Koul <vkoul@kernel.org>, Kishon Vijay
- Abraham I <kishon@kernel.org>, Sebastian Reichel <sre@kernel.org>, Chen-Yu
- Tsai <wens@csie.org>, Hans de Goede <hansg@kernel.org>, Support Opensource
- <support.opensource@diasemi.com>, Paul Cercueil <paul@crapouillou.net>,
- Iskren Chernev <me@iskren.info>, Krzysztof Kozlowski <krzk@kernel.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>, Matheus Castello
- <matheus@castello.eng.br>, Saravanan Sekar <sravanhome@gmail.com>, Matthias
- Brugger <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno
- <angelogioacchino.delregno@collabora.com>, Casey Connolly
- <casey.connolly@linaro.org>, Pali =?UTF-8?B?Um9ow6Fy?= <pali@kernel.org>,
- Orson Zhai <orsonzhai@gmail.com>, Baolin Wang
- <baolin.wang@linux.alibaba.com>, Chunyan Zhang <zhang.lyra@gmail.com>, Amit
- Kucheria <amitk@kernel.org>, Thara Gopinath <thara.gopinath@gmail.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>, Daniel Lezcano
- <daniel.lezcano@linaro.org>, Zhang Rui <rui.zhang@intel.com>, Lukasz Luba
- <lukasz.luba@arm.com>, Claudiu Beznea <claudiu.beznea.uj@bp.renesas.com>,
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, Sylwester
- Nawrocki <s.nawrocki@samsung.com>, Olivier Moysan
- <olivier.moysan@foss.st.com>, Arnaud Pouliquen
- <arnaud.pouliquen@foss.st.com>, Maxime Coquelin
- <mcoquelin.stm32@gmail.com>, Alexandre Torgue
- <alexandre.torgue@foss.st.com>, Thomas Petazzoni
- <thomas.petazzoni@bootlin.com>, linux-kernel@vger.kernel.org,
- linux-hwmon@vger.kernel.org, linux-iio@vger.kernel.org,
- linux-input@vger.kernel.org, linux-phy@lists.infradead.org,
- linux-pm@vger.kernel.org, linux-mips@vger.kernel.org,
- linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org,
- linux-sound@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
- Sebastian Reichel <sebastian.reichel@collabora.com>, Andy Shevchenko
- <andriy.shevchenko@intel.com>
-Subject: Re: [PATCH v2 2/2] iio: inkern: Use namespaced exports
-Message-ID: <20260705020758.011f4f3c@jic23-huawei>
-In-Reply-To: <20260603182052.7d23c067@jic23-huawei>
-References: <20251209-iio-inkern-use-namespaced-exports-v2-0-9799a33c4b7f@bootlin.com>
-	<20251209-iio-inkern-use-namespaced-exports-v2-2-9799a33c4b7f@bootlin.com>
-	<acBr-W2ILu9tnMyd@google.com>
-	<20260603182052.7d23c067@jic23-huawei>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	s=arc-20240116; t=1783222001; c=relaxed/simple;
+	bh=dkreYVcX1uYyR6dZ+wOjFG/ekHUBS5MgFEMPxWHM/vU=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=TX1/+78BrBw5/47pprkxLeC5kyTROKY+ajD+DDrnCJzUjB307vBn7tzUwi6JQONaRKf4Q7ag/ep/0KIN3jD/YexCh6h4xYKl9xcMReXkThR+rgiLxOVtstfOE1zaNomtFikAvES0Xp80R0m55x6HMQU8UqflKxppiReYgEW6ZNM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=zju.edu.cn; spf=pass smtp.mailfrom=zju.edu.cn; arc=none smtp.client-ip=52.175.55.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=zju.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zju.edu.cn
+Received: from zju.edu.cn (unknown [10.98.66.117])
+	by mtasvr (Coremail) with SMTP id _____wA3Eabhzklq4ysHAA--.13475S3;
+	Sun, 05 Jul 2026 11:26:26 +0800 (CST)
+Received: from localhost.localdomain (unknown [10.98.66.117])
+	by mail-app1 (Coremail) with SMTP id yy_KCgAXiKHgzklqOMSSAg--.50065S2;
+	Sun, 05 Jul 2026 11:26:24 +0800 (CST)
+From: Fan Wu <fanwu01@zju.edu.cn>
+To: vikash.garodia@oss.qualcomm.com,
+	dikshita.agarwal@oss.qualcomm.com
+Cc: abhinav.kumar@linux.dev,
+	bod@kernel.org,
+	mchehab@kernel.org,
+	linux-media@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org,
+	Fan Wu <fanwu01@zju.edu.cn>
+Subject: [PATCH] media: iris: prevent sys_error_handler from restarting core during remove
+Date: Sun,  5 Jul 2026 03:25:29 +0000
+Message-Id: <20260705032529.2439425-1-fanwu01@zju.edu.cn>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:yy_KCgAXiKHgzklqOMSSAg--.50065S2
+X-CM-SenderInfo: qrstjiaswqq6lmxovvfxof0/
+X-CM-DELIVERINFO: =?B?joUb2AXKKxbFmtjJiESix3B1w3vZ3A9ovKVTomAyoQazvoRs/NHSP8GI2EvgeEEW7R
+	sfnVCjTgEH9dVomQuWcozCBBFPrdXRH3UZVhak3gHVbiGEBh9VZZxX0tgRfxAjX6EEgSVV
+	fHE+BDvbNLEvXezgMYmp9E6mavGmQbzmcFsnzP86
+X-Coremail-Antispam: 1Uk129KBj93XoW3Gr15ZFykAFy3tw4DKF45urX_yoW7ZF47pF
+	n0k34akrW8WF40vw1UXa1j9F90yw1FgFWUWF93u34xAr15ur4Y9r10ka4rWFyDAFsFva43
+	AF4YqrZ8uFZ0qrcCm3ZEXasCq-sJn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7ZEXa
+	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
+	0xBIdaVrnRJUUU9Gb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2
+	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
+	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
+	0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AK
+	xVW0oVCq3wAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc804V
+	CY07AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AK
+	xVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48Icx
+	kI7VAKI48JM4x0Y48IcxkI7VAKI48G6xCjnVAKz4kxMxAIw28IcxkI7VAKI48JMxC20s02
+	6xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_Jr
+	I_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v2
+	6r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj4
+	0_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8
+	JrUvcSsGvfC2KfnxnUUI43ZEXa7IU85l1PUUUUU==
 
-On Wed, 3 Jun 2026 18:20:52 +0100
-Jonathan Cameron <jic23@kernel.org> wrote:
+iris_remove() does not cancel the sys_error_handler delayed work, which is
+armed from the HFI response path on system errors. The handler calls
+iris_core_deinit() followed by iris_core_init(), so a pending handler can
+restart the core after iris_remove() has started tearing it down.
 
-> On Sun, 22 Mar 2026 15:24:21 -0700
-> Dmitry Torokhov <dmitry.torokhov@gmail.com> wrote:
-> 
-> > On Tue, Dec 09, 2025 at 09:25:56AM +0100, Romain Gantois wrote:  
-> > > Use namespaced exports for IIO consumer API functions.
-> > > 
-> > > This will make it easier to manage the IIO export surface. Consumer drivers
-> > > will only be provided access to a specific set of functions, thereby
-> > > restricting usage of internal IIO functions by other parts of the kernel.
-> > > 
-> > > This change cannot be split into several parts without breaking
-> > > bisectability, thus all of the affected drivers are modified at once.
-> > > 
-> > > Acked-by: Sebastian Reichel <sebastian.reichel@collabora.com> # for power-supply
-> > > Acked-by: Guenter Roeck <linux@roeck-us.net>
-> > > Reviewed-by: Andy Shevchenko <andriy.shevchenko@intel.com>
-> > > Signed-off-by: Romain Gantois <romain.gantois@bootlin.com>    
-> > 
-> > For input:
-> > 
-> > Acked-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
-> > 
-> > Thanks.
-> >   
-> 
-> For anyone wondering what happened to this... I forgot to apply this at the
-> beginning of the cycle and by the time I remembered we had too much queued up
-> so it would have been messy to do an immutable branch.   Anyhow, I plan to
-> sort this at start of next cycle.
+Set an unregistering flag under the core mutex and make
+iris_core_init() refuse to re-initialize the core once removal has begun.
+Check the same flag while holding the core mutex in the HFI response
+handlers before arming the delayed work, so a system-error interrupt
+cannot queue new work after removal starts.
 
-Immutable branch created as: iio-inkern-namespace-ib based on v7.2-rc1
-on https://git.kernel.org/pub/scm/linux/kernel/git/jic23/iio.git
+Cancel any delayed work that was queued before the flag was set before
+destroying the core mutex.
 
-I've merged it into the testing branch of iio.git so if anyone else does
-need to merge this to avoid conflicts, perhaps wait a day or two until
-I've pushed it out as togreg for linux-next to pick up.
+Fixes: fb583a214337 ("media: iris: introduce host firmware interface with necessary hooks")
+Cc: stable@vger.kernel.org
+Signed-off-by: Fan Wu <fanwu01@zju.edu.cn>
+---
+ drivers/media/platform/qcom/iris/iris_core.c           |  5 +++++
+ drivers/media/platform/qcom/iris/iris_core.h           |  4 ++++
+ .../media/platform/qcom/iris/iris_hfi_gen1_response.c  |  5 +++--
+ .../media/platform/qcom/iris/iris_hfi_gen2_response.c  |  5 +++--
+ drivers/media/platform/qcom/iris/iris_probe.c          | 10 ++++++++++
+ 5 files changed, 25 insertions(+), 4 deletions(-)
 
-Thanks,
-
-Jonathan
-> 
-> Jonathan
+diff --git a/drivers/media/platform/qcom/iris/iris_core.c b/drivers/media/platform/qcom/iris/iris_core.c
+index 52bf56e517f9..b843ab0d484c 100644
+--- a/drivers/media/platform/qcom/iris/iris_core.c
++++ b/drivers/media/platform/qcom/iris/iris_core.c
+@@ -48,6 +48,11 @@ int iris_core_init(struct iris_core *core)
+ 	int ret;
+ 
+ 	mutex_lock(&core->lock);
++	if (core->unregistering) {
++		ret = -EINVAL;
++		goto exit;
++	}
++
+ 	if (core->state == IRIS_CORE_INIT) {
+ 		ret = 0;
+ 		goto exit;
+diff --git a/drivers/media/platform/qcom/iris/iris_core.h b/drivers/media/platform/qcom/iris/iris_core.h
+index 24da60448cf2..a52d2a1f07c4 100644
+--- a/drivers/media/platform/qcom/iris/iris_core.h
++++ b/drivers/media/platform/qcom/iris/iris_core.h
+@@ -74,6 +74,9 @@ struct qcom_ubwc_cfg_data;
+  * @core_init_done: structure of signal completion for system response
+  * @intr_status: interrupt status
+  * @sys_error_handler: a delayed work for handling system fatal error
++ * @unregistering: set under @lock in iris_remove() to block core re-init
++ *	and sys_error re-arming; checked under @lock in iris_core_init() and
++ *	the HFI system-error handlers
+  * @instances: a list_head of all instances
+  * @inst_fw_caps_dec: an array of supported instance capabilities by decoder
+  * @inst_fw_caps_enc: an array of supported instance capabilities by encoder
+@@ -119,6 +122,7 @@ struct iris_core {
+ 	struct completion			core_init_done;
+ 	u32					intr_status;
+ 	struct delayed_work			sys_error_handler;
++	bool					unregistering;
+ 	struct list_head			instances;
+ 	/* encoder and decoder have overlapping caps, so two different arrays are required */
+ 	struct platform_inst_fw_cap		inst_fw_caps_dec[INST_FW_CAP_MAX];
+diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c b/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
+index bfd7495bf44f..c9100112d07b 100644
+--- a/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
++++ b/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
+@@ -230,9 +230,10 @@ iris_hfi_gen1_sys_event_notify(struct iris_core *core, void *packet)
+ 	mutex_lock(&core->lock);
+ 	list_for_each_entry(instance, &core->instances, list)
+ 		iris_inst_change_state(instance, IRIS_INST_ERROR);
++	if (!core->unregistering)
++		schedule_delayed_work(&core->sys_error_handler,
++				      msecs_to_jiffies(10));
+ 	mutex_unlock(&core->lock);
+-
+-	schedule_delayed_work(&core->sys_error_handler, msecs_to_jiffies(10));
+ }
+ 
+ static void
+diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
+index 25162ae71357..7f0c121866f2 100644
+--- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
++++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
+@@ -285,10 +285,11 @@ static int iris_hfi_gen2_handle_system_error(struct iris_core *core,
+ 	mutex_lock(&core->lock);
+ 	list_for_each_entry(instance, &core->instances, list)
+ 		iris_inst_change_state(instance, IRIS_INST_ERROR);
++	if (!core->unregistering)
++		schedule_delayed_work(&core->sys_error_handler,
++				      msecs_to_jiffies(10));
+ 	mutex_unlock(&core->lock);
+ 
+-	schedule_delayed_work(&core->sys_error_handler, msecs_to_jiffies(10));
+-
+ 	return 0;
+ }
+ 
+diff --git a/drivers/media/platform/qcom/iris/iris_probe.c b/drivers/media/platform/qcom/iris/iris_probe.c
+index c2dcb50a2782..c8553bc7619f 100644
+--- a/drivers/media/platform/qcom/iris/iris_probe.c
++++ b/drivers/media/platform/qcom/iris/iris_probe.c
+@@ -200,7 +200,17 @@ static void iris_remove(struct platform_device *pdev)
+ 	if (!core)
+ 		return;
+ 
++	/*
++	 * Prevent the system-error work from re-initializing the core once
++	 * teardown begins.  Then drain any work that was queued before the
++	 * flag was set, before destroying the mutex used by the work function.
++	 */
++	mutex_lock(&core->lock);
++	core->unregistering = true;
++	mutex_unlock(&core->lock);
++
+ 	iris_core_deinit(core);
++	cancel_delayed_work_sync(&core->sys_error_handler);
+ 
+ 	video_unregister_device(core->vdev_dec);
+ 	video_unregister_device(core->vdev_enc);
+-- 
+2.34.1
 
