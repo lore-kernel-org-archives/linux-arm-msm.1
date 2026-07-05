@@ -1,67 +1,66 @@
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D92F258EE9
-	for <linux-arm-msm@vger.kernel.org>; Sun,  5 Jul 2026 19:14:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7C823A2E08
+	for <linux-arm-msm@vger.kernel.org>; Sun,  5 Jul 2026 19:14:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783278872; cv=none; b=klSQfpap/yv5dqzZVUGoeT3kYsmWSfsOucfIzq/HOBjGfQuZMPIDgQObsW+g/zUM5QQQ64BJrU8F9Qy32VllBa46770rKOs1KbQKzTd1yJoIYaDXMLZbHYL1W5wP5WoDHSeln1psc592vtaQ+B9QjmTufhIcP+ZN3h3LP8K5HL0=
+	t=1783278875; cv=none; b=YmwI3E80pLPMZIeicaPOEaMTgOI/ZCizS3IVE0SjUFuoZIwUmdpxhp47tpHBxQTizMn8scRSHakDWUTNsZxc82xocN5+NaLge3c3nyAQ/+8zeRiMAunF3C0NfUbDjfBU8HHmOlvwdcFUeZKPvRoVfecUlZI0jBjV0YAN26Mk1Ao=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783278872; c=relaxed/simple;
-	bh=CTSVd/0edKxTFOAN7N2IneJxadcZY86l85ROlQLsf6k=;
+	s=arc-20240116; t=1783278875; c=relaxed/simple;
+	bh=gKbn7DxHBfW8SLIM+L0EECSMebRwKa2NPKVJkQ/QPPw=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=X1QWzxCp5NLfpcwvMJCwrjFrQOsxmjnBKry4M7Mp3CPVTBvu97sv7vkECn8F+cQMZnMGgvIsO9LXY5A1fW+IAT4fSNYPuvRd6mVJ9pXAi42TplzEqjwfUwD6O6NThdrysBMRclFZAfq8ehYkrjjqtVRgvHwpnadkuz6gxASV4E8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cDgFlUYu; arc=none smtp.client-ip=209.85.221.54
+	 In-Reply-To:To:Cc; b=NAeUF/b4KqV2bbO017btGhLsontm/8sSBzdqoGAlgU2qFhjj1CbSkvTJHOlz3mZYib5chO7D8QX8jvu555TOMirR0OwCfmIaussvrLnYAKA20vE24IM1oeWsAoWiyH/8vgf7cAA8lbkiVCdwS8jHEl05qZah4wrFWcnlHfA0T2I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=UXLRzrXg; arc=none smtp.client-ip=209.85.221.43
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cDgFlUYu"
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-471eee9b7d5so380255f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 05 Jul 2026 12:14:28 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="UXLRzrXg"
+Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-47ddf7b09aaso246897f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 05 Jul 2026 12:14:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783278867; x=1783883667; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1783278871; x=1783883671; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to;
-        bh=FOJQZsuitJv3y9s8sz3fzgy77bgdsy3S43prspkqpPY=;
-        b=cDgFlUYuB4w9Jlitem81bhYbN7rFzvcwnHGU6i0V6jW2DkDs8ix8BQUeraRduPWs+m
-         LQzlifTrGyibOyLDUnQOrD2bxJa7kgQSx7TQAlcGp8D/vT9P3s2igx8H++ljt0g2ukHn
-         wHgirOSiUq5AaFJ08tVUy7c6GkLLZ7HjWsOghXMGvgxMlJOxUQqysO42lyje4WgMGlMJ
-         SlOhr9DD6u43tyX1nMi6WsyRUqT4K0fnfb9NhUvnN0ukAHGXuOhLBW+9Wh65ByIlKcx1
-         n6GHufSoZo7E0aQQzUUipw2vWctQdtf6VgOhEGzh8xdyINJbci2UvjxCiM5DlUgsNH3c
-         ARTg==
+        bh=Zjiz7ZnbyxVfBfvfi0uSyQjszdJNoTxi1eUy+vx48jY=;
+        b=UXLRzrXgiUwBX+Yny/lR14o5DlpvbgiL7IyO2Q/RzFrBLkWvspzN4W+d+YWu+i6d1O
+         DujGYLG2+2doWgSJMXYb7BDAdmQ1kD1ZIzcls/8S+pd+2z9qdMol/Rqb2zBxJOMRR+2Q
+         oThF5ZKvirUCwb5bByfkApqCdihGpDw59DIEg35916/Z29tYCC+FrglJuv3KGmh0vKHu
+         CTwduV73ct1bLQqjj6At2KGASmeTjuiESxHfYc65L0F7LYBxLINjr9sNwql+IZ506SKw
+         M0bmdFTCa9rumY2XCRw/LhQfToNUGkkskewx0FNpwAsbKU/NX6LlnlC08rXIbn9eADMk
+         NhVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783278867; x=1783883667;
+        d=1e100.net; s=20251104; t=1783278871; x=1783883671;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to;
-        bh=FOJQZsuitJv3y9s8sz3fzgy77bgdsy3S43prspkqpPY=;
-        b=hw+w1uWaCz/L79Hag7ikSgOuKckib/mBDKZ3afLJfuj+TT1VUWVdOFTfhlYQJP2zj1
-         yPz1368lnK3ODY7ZBoAF8DWwEBkWPuJ9AayyXN5BSO8u0i3PXJy0H54VEHtWnLRhLAM0
-         KzGWurXKVqMik2BqElkHfUK0CNvYY/flcEs/o4kjDc3MJ+3E/P0gasVw724ok06YBvS2
-         0D83JkkZzaeG0XyPFo8s6UP9FEaklTw0r/FOWf0qW6nR870BbGn1loG33y0Ed0iJWvjq
-         EX4pawoa4iyFEvsTMc0sxZr2YxQGuVRv4t7QblU+TG2HirLE0lO7R9iSpTnkV9J+jsXH
-         XpQA==
-X-Forwarded-Encrypted: i=1; AHgh+Ro1bt0nyTjYuCOFSXi0Ee6AMszm98bzKmnOBXqGf6fG6lqUnR22GDo9qkswlsA+WhwX6wZPG+PgVXGF/iTF@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz84ZsE9Uv455S3I4Md0PwRbLU9egSvWm+sjZLtGjzYtAKjOf55
-	T4GxLr7zHjnn4IyPVQQWfhVRBq38+Vs+kvO4sl+e/ChSvT43jF3YpR8=
-X-Gm-Gg: AfdE7ckuHzhXp1hcH/D3ORYQcIEUdlkwJn69BebPqjz55jiAiKPgnDLof/Dz+AiqHFd
-	fk4qvHwT04jdvNPk7q+mbGDEk+ToBZLQ8CJfWdLz0J8sKRgCS7f/c8oLTWDDA0ubwOvRPtEmYW9
-	Ns7HFUDfZPGXH5mohRA//dN9tLxzcsITdlYDnYYTBEIK7QeWctIEz8gubqq/GWVjpmpAlubNpGm
-	CRD4pjNoZ4cpWEsEKA0Ap5dlQKl+prxDC9UYSOUzqjlkN8hXhqW4G51R5h9AQ/DCaXYOpuLDLwV
-	WNET3XX+QCYYDWEoPOxr8U+MLL9rjxvMAVMuZXxjVkNpJwmlswj1vsjyry5Vz4jE54333/cAO8r
-	E6h2auxieknxCKDZJfJvp0+tjCzd0luDaQTXIRsFa7LP7zGy5oFV1ELPAqgLwUCCleTGIIBUQ3A
-	RVx1rvg4UGJCQhzp4cwduu2r+SLspXGQ==
-X-Received: by 2002:a05:6000:2689:b0:477:6874:542c with SMTP id ffacd0b85a97d-47aab487abdmr8336510f8f.22.1783278867370;
-        Sun, 05 Jul 2026 12:14:27 -0700 (PDT)
+        bh=Zjiz7ZnbyxVfBfvfi0uSyQjszdJNoTxi1eUy+vx48jY=;
+        b=iAzzMXw/SlGLIy76phPkBmhmclNbQV/7Sf/fsUNueePeCLb7DPqIf/1ionnPjTEd1e
+         wr3b3C/lcly+H9hKWXCfqE6X1RuqR6KucXkGP+uWEjkdlr7W0DIefGBfgZsRTQj11bK1
+         +Mqg4dmFNJRFF6yQPgmJ/6+WVLAlVtwKuKAyfcaSA6n3ML+FjBD7Fn6Ui9szf+IZZXdU
+         RtRbaqvBvBTdrTQJ7kCRUygMyKPHBEHNmGqzblYuiL1rH36f4PsoaWqJk0R4JGM82gn6
+         F3yxrrsGeVPJ66CqqckQB4Xqw0Xeo+XxTcprTHK6oUTjdzTWGxM6o0XsuDfht4c/6G0a
+         J7FA==
+X-Forwarded-Encrypted: i=1; AHgh+RotH38mzX5jxwBCafFx533KXFwTzdpguVzs2EGiYjI4TTO+7Vs3qV1c2qteZpTBVv54Bx1hd800wc5yT1cQ@vger.kernel.org
+X-Gm-Message-State: AOJu0YzBzpXJwMABijDaS8kVe1eJ3316+y8ZSSPz10M20H9Snc2TcHn8
+	M5aFkfk/WJHYski4zmwlIG/uIpXLc78cJXjSRv3V3fBZVaPjycLQm2yikpUI1MUplg==
+X-Gm-Gg: AfdE7cmcSGOIcqh6l3iuJwuHbKm7hL21JOZVHtfB/hSa/c6EM3cCw3XWxC7luD1OQh5
+	GN7Y7F3wmY0IWVz34D0rC3tUtvhqpd5BdmHlDZ71zINEq6xKYQPZwN0C5qb+LnvsCAcLXL0Erh6
+	DQeBHybMX/a0weZOXTftmVdJPoFQtyTnRyoMuHMMTDZ88Z3M1cgQIO+x2eMt1CJO9uXoASID6rf
+	CTYxc1RJOcrBLpX8/j0Fd598ixT9d+qKDOt6MpUObk9eufXXTV1jcJPxe7ohYAGcXKlCoMw1upJ
+	uppZnbwnHYHwrvft0ffKGF+5Nyn42Xl/G4xQNHelNEb/sHj/V/xOt1QiFly+axb1PnAMVpETBgY
+	HPFlwfaQkf6hxsJ+xe3lQlhNOESGtcZvVse001wc6fsNPA0LHVhNcINjxkTXThQ/IpAMDU2332Z
+	qCrWC3ewubLqMJ3tnqAj6YeI18HSa5cg==
+X-Received: by 2002:a05:6000:2c05:b0:47d:df96:c9f4 with SMTP id ffacd0b85a97d-47ddf96cc37mr2857980f8f.10.1783278871226;
+        Sun, 05 Jul 2026 12:14:31 -0700 (PDT)
 Received: from [192.168.1.67] ([2001:b07:2ec:601d:4b26:1672:75c7:805a])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47aa0960634sm19209528f8f.26.2026.07.05.12.14.25
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47aa0960634sm19209528f8f.26.2026.07.05.12.14.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 05 Jul 2026 12:14:27 -0700 (PDT)
+        Sun, 05 Jul 2026 12:14:30 -0700 (PDT)
 From: Anna Maniscalco <anna.maniscalco2000@gmail.com>
-Date: Sun, 05 Jul 2026 21:13:41 +0200
-Subject: [PATCH RFC 07/13] iommu: arm-smmu-qcom: Fixed mapping between sid
- and cb for gpu and lpac
+Date: Sun, 05 Jul 2026 21:13:43 +0200
+Subject: [PATCH RFC 09/13] temp: add LPAC regs
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -70,7 +69,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260705-descriptive-name-lpac-upstream-v1-7-01d50c3e0c99@gmail.com>
+Message-Id: <20260705-descriptive-name-lpac-upstream-v1-9-01d50c3e0c99@gmail.com>
 References: <20260705-descriptive-name-lpac-upstream-v1-0-01d50c3e0c99@gmail.com>
 In-Reply-To: <20260705-descriptive-name-lpac-upstream-v1-0-01d50c3e0c99@gmail.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>, Will Deacon <will@kernel.org>, 
@@ -92,68 +91,76 @@ Cc: iommu@lists.linux.dev, linux-arm-msm@vger.kernel.org,
  dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
  devicetree@vger.kernel.org, Anna Maniscalco <anna.maniscalco2000@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1783278851; l=1792;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1783278851; l=3442;
  i=anna.maniscalco2000@gmail.com; s=20240815; h=from:subject:message-id;
- bh=CTSVd/0edKxTFOAN7N2IneJxadcZY86l85ROlQLsf6k=;
- b=N1CzOkGooWs0D7hEFfO64qs+XczQExJuyhhzPJnlf0WwJlRgmpU6QS/Q3PibSJHKmN1K6WJPv
- WALfNWTwDnSBfYHo0sDNPhrc2jlfRyjKisM+ctCA7C/dwWocYLjvP6b
+ bh=gKbn7DxHBfW8SLIM+L0EECSMebRwKa2NPKVJkQ/QPPw=;
+ b=kVEoEECsDH8lgKuRlOjhb0NLej7gAlbXc+I8b7Z8Y6BmwMTjsJI23i+SxwgE0fdda9uz24tEH
+ NoA9v8TbOQcCAGwLTW9/mUY/YNUbybJ8jacr99G3tWrk2UifXc4ttFe
 X-Developer-Key: i=anna.maniscalco2000@gmail.com; a=ed25519;
  pk=0zicFb38tVla+iHRo4kWpOMsmtUrpGBEa7LkFF81lyY=
 
-We want to map context bank 0 to SID 0 and context bank 1 to SID 1 as it
-makes it simpler to deal with.
+https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/39416
+
+should we merged and we should sync to mesa instead
 
 Signed-off-by: Anna Maniscalco <anna.maniscalco2000@gmail.com>
 ---
- drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c | 24 +++++++++++++++++++++---
- 1 file changed, 21 insertions(+), 3 deletions(-)
+ drivers/gpu/drm/msm/registers/adreno/a6xx.xml | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
-index ae6152bddf8f..e605a535f328 100644
---- a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
-+++ b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
-@@ -225,6 +225,25 @@ static void qcom_adreno_smmu_set_prr_addr(const void *cookie, phys_addr_t page_a
- #define QCOM_ADRENO_SMMU_GPU_SID 0
- #define QCOM_ADRENO_SMMU_LPAC_SID 1
+diff --git a/drivers/gpu/drm/msm/registers/adreno/a6xx.xml b/drivers/gpu/drm/msm/registers/adreno/a6xx.xml
+index 3349c01646e1..bb49f6a61a9a 100644
+--- a/drivers/gpu/drm/msm/registers/adreno/a6xx.xml
++++ b/drivers/gpu/drm/msm/registers/adreno/a6xx.xml
+@@ -276,6 +276,11 @@ by a particular renderpass/blit.
+ 		<bitfield pos="1" name="ACCESS_FAULT_ON_VIOL_EN" type="boolean"/>
+ 		<bitfield pos="0" name="ACCESS_PROT_EN" type="boolean"/>
+ 	</bitset>
++	<reg32 offset="0x0B09" name="CP_LPAC_PROTECT_CNTL">
++		<bitfield pos="3" name="LAST_SPAN_INF_RANGE" type="boolean"/>
++		<bitfield pos="1" name="ACCESS_FAULT_ON_VIOL_EN" type="boolean"/>
++		<bitfield pos="0" name="ACCESS_PROT_EN" type="boolean"/>
++	</reg32>
  
-+static bool qcom_adreno_smmu_is_lpac_device(struct device *dev)
-+{
-+	struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
-+	int i;
-+
-+	/*
-+	 * The GPU will always use SID 0 so that is a handy way to uniquely
-+	 * identify it and configure it for per-instance pagetables
-+	 */
-+	for (i = 0; i < fwspec->num_ids; i++) {
-+		u16 sid = FIELD_GET(ARM_SMMU_SMR_ID, fwspec->ids[i]);
-+
-+		if (sid == QCOM_ADRENO_SMMU_LPAC_SID)
-+			return true;
-+	}
-+
-+	return false;
-+}
-+
- static bool qcom_adreno_smmu_is_gpu_device(struct device *dev)
- {
- 	struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
-@@ -312,13 +331,12 @@ static int qcom_adreno_smmu_alloc_context_bank(struct arm_smmu_domain *smmu_doma
- 	 * switch pagetables
- 	 */
- 	if (qcom_adreno_smmu_is_gpu_device(dev)) {
--		start = 0;
--		count = 2;
-+		start = !!qcom_adreno_smmu_is_lpac_device(dev);
-+		count = start + 1;
- 	} else {
- 		start = 2;
- 		count = smmu->num_context_banks;
- 	}
--
- 	return __arm_smmu_alloc_bitmap(smmu->context_map, start, count);
- }
+ 	<reg32 offset="0x084f" name="CP_PROTECT_CNTL" type="a6xx_cp_protect_cntl" variants="A6XX-A7XX"/>
+ 	<bitset name="a8xx_cp_protect_cntl" inline="yes">
+@@ -333,6 +338,11 @@ by a particular renderpass/blit.
+ 	<reg32 offset="0x0845" name="CP_CRASH_DUMP_STATUS" variants="A8XX-"/>
+ 	<reg32 offset="0x0908" name="CP_SQE_STAT_ADDR" variants="A6XX-A7XX"/>
+ 	<reg32 offset="0x0909" name="CP_SQE_STAT_DATA" variants="A6XX-A7XX"/>
++	<reg64 offset="0x0b00" name="CP_LPAC_RB_BASE" variants="A7XX-"/>
++	<reg32 offset="0x0b02" name="CP_LPAC_RB_CNTL" variants="A7XX-"/>
++	<reg64 offset="0x0b04" name="CP_LPAC_RB_RPTR_ADDR" variants="A7XX-"/>
++	<reg32 offset="0x0b06" name="CP_LPAC_RB_RPTR" variants="A7XX-"/>
++	<reg32 offset="0x0b07" name="CP_LPAC_RB_WPTR" variants="A7XX-"/>
+ 	<reg32 offset="0x090a" name="CP_DRAW_STATE_ADDR" variants="A6XX-A7XX"/>
+ 	<reg32 offset="0x090b" name="CP_DRAW_STATE_DATA" variants="A6XX-A7XX"/>
+ 	<reg32 offset="0x090c" name="CP_ROQ_DBG_ADDR" variants="A6XX-A7XX"/>
+@@ -521,6 +531,7 @@ by a particular renderpass/blit.
+ 	<reg32 offset="0x0b29" name="CP_SQE_AC_STAT_ADDR" variants="A7XX"/>
+ 	<reg32 offset="0x0b2a" name="CP_SQE_AC_STAT_DATA" variants="A7XX"/>
  
++	<reg32 offset="0x0b30" name="CP_LPAC_CHICKEN_DBG" variants="A7XX-"/>
+ 	<reg32 offset="0x0b31" name="CP_LPAC_APRIV_CNTL" variants="A7XX"/>
+ 	<reg32 offset="0x0b34" name="CP_LPAC_PROG_FIFO_SIZE" variants="A7XX"/>
+ 	<reg32 offset="0x0b35" name="CP_LPAC_ROQ_DBG_DATA" variants="A7XX"/>
+@@ -1207,6 +1218,7 @@ by a particular renderpass/blit.
+ 	<reg64 offset="0x0E08" name="UCHE_TRAP_BASE" variants="A8XX-"/>
+ 	<reg64 offset="0x0E0B" name="UCHE_GMEM_RANGE_MIN" variants="A6XX-A7XX"/>
+ 	<reg64 offset="0x0E0D" name="UCHE_GMEM_RANGE_MAX" variants="A6XX-A7XX"/>
++	<reg32 offset="0x0E12" name="UCHE_DEBUG_CNTL_1" usage="cmd"/>
+ 	<reg32 offset="0x0e17" name="UCHE_CACHE_WAYS" variants="A6XX-A7XX" usage="init"/>
+ 	<reg32 offset="0x0e04" name="UCHE_CACHE_WAYS" variants="A8XX-"/>
+ 	<reg32 offset="0x0E18" name="UCHE_FILTER_CNTL"/>
+@@ -4406,6 +4418,8 @@ by a particular renderpass/blit.
+ 
+ 	<array offset="0xaec0" name="SP_PERFCTR_HLSQ_SEL_2" stride="1" length="6" variants="A7XX-"/>
+ 
++	<reg32 offset="0xaf84" name="SP_LPAC_CHICKEN_BITS_2" variants="A7XX-" usage="cmd"/>
++
+ 	<!--
+ 	The downstream kernel calls the debug cluster of registers
+ 	"a6xx_sp_ps_tp_cluster" but this actually specifies the border
 
 -- 
 2.54.0
