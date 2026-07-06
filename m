@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9255A2EEE6C;
-	Mon,  6 Jul 2026 17:33:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D5372BDC0F;
+	Mon,  6 Jul 2026 17:36:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783359227; cv=none; b=UxxqdkF5N3Brisk63AHj2cBkyJ3uw8rNEXSC6v4yKCRSsdPy/rxrezDMBq5NDcpuy7UIApr0UJ+Sewj5ihZ8VoiR/Ke+UlbF2L6KNSojW8bk3SvbliF+WhXXWek8f6R+fJo3+4lAPEqllv3OxKBmMpixeHa83J1LtRScFnYThKM=
+	t=1783359361; cv=none; b=dWmi7MSEVSSmSK41TV95umByyANa83MF3glD5x5n5g5BxTu+f2L9ND4s44KLdbCLWNKtjne4f9mtog4gaxelA1yr2FLQ19xj6B2fUZ1Vy1gREHBuPY61pEJAuSMIZYXYGqNfwl4as7nfKHuF6865VhCbAgfUeVaq/owiBtzsr/A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783359227; c=relaxed/simple;
-	bh=gOY8Q86uM/Zk+74GMjD7OybSWUIMP9sunYXT6qrs0bQ=;
+	s=arc-20240116; t=1783359361; c=relaxed/simple;
+	bh=93T0tN/G9cfvziFKEpEZSvupGoO9POTEtxNVOkJPpm0=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=PHupjhj0eVBzhhPHihqR6CvIBYcpfi0jPSVKX+E+owgJWOPj5fFBcVp3WvFPdwNe4y3r/U3PHhtpumYFf98JUjussXTnbkVJwm0YCAEcIWN4ItibsIndS21vpfwVpY9JGNbKLK9D7l0K3GWoJJQW6p+4/b5mxBp6NwTPlv5uDT0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZzyUVoZT; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=LHEkly5L3LyaS4Y1HrSClcrk9rBDRsOFu+5DcJBeXbevxyB4IFuPYGPRBekGmvLmPnQOZpeTRKU0bZ7n3SKYSUoukE6iV6icYDfXBITAlg80lmyidGmzCueA/Er9qqMRGfZghycNU32/Uzr8Zp+1j2ekU/w693ztek1U08hNnuQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=igVkf1Kx; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZzyUVoZT"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 25AE11F000E9;
-	Mon,  6 Jul 2026 17:33:39 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="igVkf1Kx"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id ADAAB1F000E9;
+	Mon,  6 Jul 2026 17:35:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783359226;
-	bh=VrY40nC2sEAC7pHLNVK+hWJob25lrd9yzaHazRkBI0w=;
+	s=k20260515; t=1783359360;
+	bh=Zem70rbrr5mUsndrvjYMmanzu4feubA1RPvcfc4ftqA=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=ZzyUVoZTLU2k0ka9yPOVTzpVS2+/c64QiJiBQiN0Z0jz458/AqrRtslQq5KgtjDKe
-	 AxrFTssC100Euge4Uo9R2iCEmYtHTC6BgowxEOep7+c8iAsHjP1+0u7tOqJgFghSrZ
-	 4iog1VwUJTcAeTAJWvgI3Rt9dEfmdVGiVWhuyl7lo8X2zeqbLyuWmPI5P8O+gLsXKs
-	 DwQLRfBlvGaejmqNmvNbgzzGUWA8fDpyf2u/vpZYtWZKEmdcMQGwPXpOaMffRXdoOz
-	 jOOjP54VLiJUzsV8dt8v2iVMbQHZae8yc9dNn1qB6zySRWiqTvAxkuMG+eSB4HDBEH
-	 ZLnahuMlqFgfg==
-Message-ID: <549ff994-6b6d-49c3-a764-4c1e134a4a14@kernel.org>
-Date: Mon, 6 Jul 2026 19:33:37 +0200
+	b=igVkf1KxZZdtNaZ6adhBxDvm4bALwcjPPLH8xGbuVOGvTR9fbEh/QnmSsaXMEu0vu
+	 QJNLtuH2W1AsvrzhmgwzZyr72u7h6GfAop1eoQmxJ0ti+zaLpA+zsa9flIH2X/Wi8v
+	 uboVxH0488sf3lKkEMWQ4l0nhIK0CPxyNRJWUkl++Bd5jdIbInC9hPVf+23ZP4YVzp
+	 EhtwQ7FIP5Nezi8gcJW5LEh4umMnXeT8tsTxZ8JC751lr/oQY7ZRGlZD9uN5KBpnYz
+	 jt92pPeLTQAuuY5tQsRAPnH/zue7qdSzqj4kMxI5pRDWyaCDz76hajTf3SaeosqUYa
+	 JNV1s0Sjrqtyg==
+Message-ID: <9967f1a0-a9e3-4d62-b5df-7f625610a89d@kernel.org>
+Date: Mon, 6 Jul 2026 19:35:52 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,25 +35,23 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RESEND] dt-bindings: crypto: qcom,inline-crypto-engine:
- Document Nord ICE
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: Shawn Guo <shengchao.guo@oss.qualcomm.com>,
- Herbert Xu <herbert@gondor.apana.org.au>, Rob Herring <robh@kernel.org>,
+Subject: Re: [PATCH 1/2] dt-bindings: pci: qcom,hawi-pcie: Add Maili PCIe
+ compatible
+To: Manivannan Sadhasivam <mani@kernel.org>
+Cc: Vivek Pernamitta <vivek.pernamitta@oss.qualcomm.com>,
+ Lorenzo Pieralisi <lpieralisi@kernel.org>,
+ =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+ Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
  Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
  <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Dmitry Baryshkov <lumag@kernel.org>,
- Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Deepti Jaggi <deepti.jaggi@oss.qualcomm.com>, linux-crypto@vger.kernel.org,
- devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org,
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
- Harshal Dev <harshal.dev@oss.qualcomm.com>,
- Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-References: <20260704004408.2303468-1-shengchao.guo@oss.qualcomm.com>
- <b693a9d2-4f1d-4c17-8a63-99c7ac79ed41@oss.qualcomm.com>
- <20260706-busy-grumpy-limpet-c59789@quoll>
- <CAMRc=Mcg-6XajFJCjTDgGACQ7YLGggw5TEtHv4QMEA=dFLOhTg@mail.gmail.com>
+ Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+ linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-phy@lists.infradead.org
+References: <20260703-vdev_maili_dt_bindings-v1-0-c9df0916cd5e@oss.qualcomm.com>
+ <20260703-vdev_maili_dt_bindings-v1-1-c9df0916cd5e@oss.qualcomm.com>
+ <20260706-pastoral-okapi-of-reading-e5bdb3@quoll>
+ <yntj62kr7tixc7capwdr6xhv2zpisfrjg62bwftgiuujf4fzt5@cjdrkglo4dv5>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -99,58 +97,39 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <CAMRc=Mcg-6XajFJCjTDgGACQ7YLGggw5TEtHv4QMEA=dFLOhTg@mail.gmail.com>
+In-Reply-To: <yntj62kr7tixc7capwdr6xhv2zpisfrjg62bwftgiuujf4fzt5@cjdrkglo4dv5>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 06/07/2026 19:13, Bartosz Golaszewski wrote:
-> On Mon, 6 Jul 2026 08:54:22 +0200, Krzysztof Kozlowski <krzk@kernel.org> said:
->> On Sun, Jul 05, 2026 at 11:15:45PM +0530, Kuldeep Singh wrote:
->>> On 04-07-2026 06:14, Shawn Guo wrote:
->>>> Document Inline Crypto Engine (ICE) on Qualcomm Nord SoC.
->>>>
->>>> Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
->>>> Reviewed-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
->>>> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
->>>> ---
->>>> It was included in the Nord SA8797P DTS series [1] due to that
->>>> the prerequisite changes were picked up by Bjorn for 7.2. Resend it to
->>>> Herbert as the dependency is gone now with 7.2-rc1.
->>>>
->>>> [1] https://lore.kernel.org/all/20260526051300.1669201-1-shengchao.guo@oss.qualcomm.com/
->>>>
->>>>  .../devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml   | 2 ++
->>>>  1 file changed, 2 insertions(+)
->>>>
->>>> diff --git a/Documentation/devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml b/Documentation/devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml
->>>> index db895c50e2d2..d690eff2e86d 100644
->>>> --- a/Documentation/devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml
->>>> +++ b/Documentation/devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml
->>>> @@ -17,6 +17,7 @@ properties:
->>>>            - qcom,hawi-inline-crypto-engine
->>>>            - qcom,kaanapali-inline-crypto-engine
->>>>            - qcom,milos-inline-crypto-engine
->>>> +          - qcom,nord-inline-crypto-engine
->>>>            - qcom,qcs8300-inline-crypto-engine
->>>>            - qcom,sa8775p-inline-crypto-engine
->>>>            - qcom,sc7180-inline-crypto-engine
->>>> @@ -63,6 +64,7 @@ allOf:
->>>>              enum:
->>>>                - qcom,eliza-inline-crypto-engine
->>>>                - qcom,milos-inline-crypto-engine
->>>> +              - qcom,nord-inline-crypto-engine
+On 06/07/2026 18:36, Manivannan Sadhasivam wrote:
+> On Mon, Jul 06, 2026 at 08:46:41AM +0200, Krzysztof Kozlowski wrote:
+>> On Fri, Jul 03, 2026 at 05:38:40PM +0530, Vivek Pernamitta wrote:
+>>> Add qcom,maili-pcie as a compatible string that falls back to
+>>> qcom,hawi-pcie, as the Maili SoC reuses the Hawi PCIe controller IP.
 >>>
->>> With below patch, we don't need nord entry here.
->>> https://lore.kernel.org/lkml/20260702-b4-shikra_crypto_changse-v2-1-66173f2f28b3@qti.qualcomm.com/
+>>> The Maili SoC is a derivative of Hawi and shares the same PCIe
+>>> controller architecture, allowing reuse of the existing Hawi PCIe
+>>> DT bindings.
+>>>
+>>> Signed-off-by: Vivek Pernamitta <vivek.pernamitta@oss.qualcomm.com>
+>>> ---
+>>> Dependencies:
+>>> - PCI: qcom: Add PCIe support for upcoming Hawi SoC
+>>>   https://lore.kernel.org/all/20260625-hawi-pcie-v4-0-1a578603cd86@oss.qualcomm.com/
 >>
->> Patch has conflict. This (Nord) should go after above one, with this
->> fixed.
+>> Squash the patches then.
 >>
 > 
-> The other series still hasn't made its way upstream. This one's simple, can we
-> queue it now and rebase the other one?
+> But these are two independent SoC additions, isn't it?
 
-This is not point of rebase, but conflicting work.
+It's adding a single compatible, no? If a patch adding a single
+compatible cannot be done without multi-patchset dependencies making
+testing by tooling impossible, then probably that work should not be
+sent separately or even as separate patch. And I am not saying anything
+new because half a year ago (around Kaanapali and Glymur) I voiced
+strong opinion about that.
+
+But really, you do not need to add two compatibles in two separate patches.
 
 
 Best regards,
