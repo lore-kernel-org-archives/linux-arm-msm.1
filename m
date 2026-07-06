@@ -1,88 +1,33 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 42D3542378D
-	for <linux-arm-msm@vger.kernel.org>; Mon,  6 Jul 2026 12:07:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B3283FDBE2;
+	Mon,  6 Jul 2026 12:09:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783339636; cv=none; b=Y1F/agGmAiWH4QCrrbHJpp45XRk711PT4D331CtfvZxgJThS8M2n6ZGwjKDyJvFNfO54w116TPzuhTocwnPTGfwsvwX55vrsrY5vg6kB4aN1tfr+bNlThv42kXsZo7CsVfjk/uBAzwQ96Un4xLnP84d8/FF7xoU3/yA/lEJOCNA=
+	t=1783339796; cv=none; b=mQbi4bq5IdvwTOrWJ1+gJDaT5A38deOpbuxoN2SqBT2nKIA6pK3M95frkbXdzm5K//+0CIuKI1iq5wPhYjTZsLaZOOHQqWDIRiY2ViSDbSmjFjvhddOm94ylXukrWXE4EFuGON8PkBkA80fmcmLaVQKy6yz/fCRpr58SeHqacSc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783339636; c=relaxed/simple;
-	bh=qWTjPqDLGc6UFeJaIHNML9p3hZ3NmfrLS1LYIRLfcw4=;
+	s=arc-20240116; t=1783339796; c=relaxed/simple;
+	bh=DvPc9QqRm1LHXaDbJX26sgs2Ta2R/ToTJQ6Inhepy4o=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=rv049vxGAe/1XlGxrHSQmMUeVVXtNVG6tUfNn63u7LAsGTkIHjiDIz8BP1DC/7k4kp/mee5pp25t9pKQv3xiUOSj8aZ4lmyPHLetORsgq4v05oLcKua05C75UdQkwkoHDL0rbRTJaAEkpW4h7crgb2jzAhHfQNecF8vM85kiHBs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Ozq9EFv4; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ijUrqeAv; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=fv5qz7cRHqwv4YuWQog6mdqLHJcjR2ZrP9/CVjcP416kdogfh07zUFAfZG0o8SOWUOPcGD+snWksLVwsxoZq2Zb2E5imUdcYzM6CnHZJBeeU7r4RKsyCcTv8Ukp90xMRajJM0OhwFHFfB18ENYdqTybvCV7+txv24ETj3QLq44k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ISTz2Nbn; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ozq9EFv4";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ijUrqeAv"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 666AxJfE316462
-	for <linux-arm-msm@vger.kernel.org>; Mon, 6 Jul 2026 12:07:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	rc55guwUAO7TOCB1xSuJbiUNgYsAUSIwtv+3EK0dT0w=; b=Ozq9EFv4nHOcKDUf
-	CqObyb7p6KT4C56FDXh3dGzoMPhZf4ordV+J6wvdxaT1f8bzmvWIUyc07mgkQRmY
-	BByd7MA97pMop2XZJkQagSxMjos1eM+C8dxFyrfH+JxISYLZoYEcElZdzj3kH3j+
-	in0TMY+Y1w+XAkTZKPfWLogORp0egMHzebFiDQtJakRApCNkEZG2P8xn6qN+CLwT
-	zr7Yg6qlFIGB6sQ906nIG1hbgcRRVxskawFnZF60Y7dVCNohP0SKPBDbbD1+ED8w
-	GdJRgQjiRs0InRxwkGRajn6oFk3qnDpqfRA2uVHx9ASNYBB1nJkRa1nk2JTXKm6M
-	nlfmhg==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f87q7h4qa-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 06 Jul 2026 12:07:13 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c2d2dd52eso1715991cf.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 06 Jul 2026 05:07:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1783339633; x=1783944433; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=rc55guwUAO7TOCB1xSuJbiUNgYsAUSIwtv+3EK0dT0w=;
-        b=ijUrqeAvPxZbF/CHE3o3Y3eP2amC27cP21pemoSjHQBgPHDvsAf+jZqkaHlkW2ro1F
-         Vcc4yMJ3OQCdZdO17YFRK+KU9oEEMSATsPqenqEqceIfY/4KUOkghWsvfy6yS9IiwzrG
-         DTFlcmDJ8Yv0Q82kPx4YCcSnFWC9Ld7Q+Ha2B+FJIvuYGMxQVl0ZeA5tREAMb4sdvg85
-         lsMUCmcp5HaUBPteC570AGCTByLhgId6pEbwSXYyyZq6IDQ+bswu0tYVYqQS8ISYm+yf
-         r+MhNp578F3NMy2W0nRF7e8w3GjZE4TRT2+KInkB3YNilFCB7DjqUtD5oD0zNzKHFm5X
-         KsBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783339633; x=1783944433;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=rc55guwUAO7TOCB1xSuJbiUNgYsAUSIwtv+3EK0dT0w=;
-        b=r/UL1TlcN52maKnZEz6R0KQazqw+DebZsh8vtvA9n5cxq+4uAg45HctvPbRs6aAjXQ
-         CshpMgYBfjG7kmGkchLqIbONdbA0RdFXaYqyajfhRB1db9bwSuH3lLDpkDdAitz7PtMc
-         C7Tbf+OYX8D6eRhDzIzEuRSt+VSS6Ig24RcEIWfpExKEwnAzKyUiDzIZGE4NX7FmUZ2/
-         uzojhvjCLjzFngU1DVTbVNjRmFw7dlbKYVgsLidJ9yuwuIww+DMPZWfEBn8UBjlNncQq
-         LNX4+7wBtb5JgRJTbmC8XLExpMRgG8X18is12+a4JiXg0NhM6umS2RSAp5loKTdF8mrK
-         h2xw==
-X-Forwarded-Encrypted: i=1; AHgh+Rq6OqNmS5HEoIwACWQT4QPXE4T+dhVb0HQu5Yh41q+k88ednx1IXJcYxmv9EqgJJliC236ZNLjydKrc7qTD@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx4vHGrnqIqjoXpE86dJ24F51NluPcW1bzCDoese8by3xPY6D2v
-	3oJfI0PagYeAXf+Nbptlvj9AEoUjreQLjEFZy5oLRwMTODvOCeemFhJgoJmaodGSMH0aOjGBE5Y
-	KDaUKh2wNLYSxoNrL8Grz8tGMXenlaia+PnEFGkUpLxdgt0F1PngSdEVSH4KxpmNzjjL350yIJh
-	+M
-X-Gm-Gg: AfdE7cnU5kL5/75ADRCCIYoM4wEI443qTnlZMUOz4LDSpQoq1C1RcQWFawCvBSZWsV9
-	nA133RBSS5IP8atUvsV9WemsZMPFuIBe/ta5jVD6enk0LO2ylrXGXIUhE1ChuHcpsyOqw0usLgX
-	5KHr/mB1/9OmzEtAgVq+16y3DLQJuLWnvvsM7cMXHVWPxy6FPjUFhSAloWfHkTeceRc+HIQ7GRJ
-	atIJt1AtqRlGikcm1LQlepq+XLAOcUPcM5HGNIn5FfWZwDDTFmS3J9iw5sZxoZGZ/KK4vZmpxUO
-	KE2xUybE42nfeeoKun6uOejIsd+XwCqksLi14CCLJ8mHHSOUAjR+L0/rkhwlwFsiAfm4pXZZpyn
-	pUC+JsN2tBI75Yi5W4mggETrMWwWlrUNB51I=
-X-Received: by 2002:ac8:58d2:0:b0:517:5e32:f3ac with SMTP id d75a77b69052e-51c4ba380f1mr84445271cf.0.1783339633237;
-        Mon, 06 Jul 2026 05:07:13 -0700 (PDT)
-X-Received: by 2002:a05:620a:4447:b0:92c:b769:ad1f with SMTP id af79cd13be357-92e9a091291mr945865585a.6.1783339219863;
-        Mon, 06 Jul 2026 05:00:19 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c12b6095b7dsm726569366b.19.2026.07.06.05.00.17
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 06 Jul 2026 05:00:18 -0700 (PDT)
-Message-ID: <71e04eae-7826-4f51-bd6a-318ea1108c08@oss.qualcomm.com>
-Date: Mon, 6 Jul 2026 14:00:16 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ISTz2Nbn"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5FA001F000E9;
+	Mon,  6 Jul 2026 12:09:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783339795;
+	bh=iFXj9diZ+LOixsk0T0ZaJQIX3INk/Tdi8RYdMzt4pzc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=ISTz2NbnE6igIuSvNFQgoRmkkp3NsyugcMLwLD0l3oJd5NGkfs9htVjyMhl3FrARC
+	 s0K3hrt9KPSqtEaxKz4bnG/e5oY9UyW43/Du9AUgIMxusFXfudcKDzIpTN84SWD8yu
+	 29lwdkCNpqIqMi52NAMFKzpsdteg5N8usalNYUTQV/TEj3n672tsWqYaKO1ICRjSLP
+	 yP5wJ5kpDdv9nM3HQdyghEklAhxCO0wKry1BNiWq0EcmF7PAOp9sKIg4ETep2Y810e
+	 4fRRX6jsKEo9KDK+xunsU/eSko8XTA1hZlT0XFcaJRAVkGY43w5NZINLEcJj2fUSck
+	 r2kIp+P095zJw==
+Message-ID: <389ff33a-b319-4f2e-9410-8ae962f2e844@kernel.org>
+Date: Mon, 6 Jul 2026 14:09:46 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,111 +35,76 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC 6/6] arm64: dts: qcom: sdm845-google: Add basic audio
- support
-To: david@ixit.cz, Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-        David Rhodes <david.rhodes@cirrus.com>,
-        Richard Fitzgerald <rf@opensource.cirrus.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        David Rhodes <drhodes@opensource.cirrus.com>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, patches@opensource.cirrus.com,
-        devicetree@vger.kernel.org, phone-devel@vger.kernel.org
-References: <20260705-pixel3-audio-v1-0-3b66f33859f1@ixit.cz>
- <20260705-pixel3-audio-v1-6-3b66f33859f1@ixit.cz>
+Subject: Re: [PATCH v4 1/5] media: qcom: camss: Populate CAMSS child devices
+ via DT
+To: Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
+ linux-media@vger.kernel.org
+Cc: bryan.odonoghue@linaro.org, vladimir.zapolskiy@linaro.org,
+ loic.poulain@oss.qualcomm.com, mchehab@kernel.org, robh@kernel.org,
+ krzk+dt@kernel.org, conor+dt@kernel.org, andersson@kernel.org,
+ konradybcio@kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
+References: <20260706071113.383215-1-atanas.filipov@oss.qualcomm.com>
+ <20260706071113.383215-2-atanas.filipov@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260705-pixel3-audio-v1-6-3b66f33859f1@ixit.cz>
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260706071113.383215-2-atanas.filipov@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA2MDEyMiBTYWx0ZWRfX5atDLXxJxa9I
- ZQXhJVmNxcANhRW7UGNbrdA0vVtxO+w9Nrtf22IcBOfqUJkDcG6ML6h+tcA1BAYfJovulxoS7oT
- I7BwV3bqlYcQnxK7wEkJxDkAMndsKdMSogh9Z6uERvoS6EcCTy1t2ZTWCee8Ghki6dy9qsqL625
- x5VCGXvHe4jHjhaLmszWYg2hiVGmqgB80vO+6Zevw6wxo+Zd593kzAsWiFMxVuz6KcO29TFrTKk
- zOaXyINt761ogX2DVfK6HKvO+e8X/OsDqaryQrB8ZPr5SAScNXSj23lThzPbix5ET35nObA8/R9
- REjJvRjGf2anztTZPjqvFCmc3wWf9h2QMbwNk6piY26auOFehbFH9OgPklT8wQpIYD7ge4pwNzK
- x6Ty74cvedaJtW0wJWFrO0bttlIhS6t2N1imxUAWf0aWP3iAx3g8zK0Ssn7JvGgx/0hla2kzbH5
- YjtA7hJVqIgUN9FTLdg==
-X-Proofpoint-ORIG-GUID: f2irI3HR5DzL1mgQq4-AICI7PgnETK8f
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA2MDEyMiBTYWx0ZWRfXwk/FT0DBDeM+
- 7tz1bud+N/hJhOAT9La5+UY3Ma4f4pr/7C3D0q1CkLrKbjXx7s9+nao+BUlA9NUTO6623Sf6PTz
- rx5N/qgs3FEsUnCQWMtqbzY6LOQnpRc=
-X-Proofpoint-GUID: f2irI3HR5DzL1mgQq4-AICI7PgnETK8f
-X-Authority-Analysis: v=2.4 cv=f9N4wuyM c=1 sm=1 tr=0 ts=6a4b9a71 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=1P2StzUqvI1H_hqdaE8A:9 a=QEXdDO2ut3YA:10
- a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-06_01,2026-07-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 adultscore=0 impostorscore=0 bulkscore=0 suspectscore=0
- clxscore=1015 spamscore=0 phishscore=0 priorityscore=1501 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607060122
 
-On 7/5/26 10:06 PM, David Heidelberg via B4 Relay wrote:
-> From: David Heidelberg <david@ixit.cz>
+On 06/07/2026 09:11, Atanas Filipov wrote:
+> From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 > 
-> Introduce support for sound card and wire two CS35L36 audio codecs for
-> top and bottom speakers.
-> 
-> Inspired by commit from Joel Selvaraj.
-> 
-> Signed-off-by: David Heidelberg <david@ixit.cz>
-> ---
+> Use devm_of_platform_populate() so that child nodes declared under the
+> CAMSS device tree node (e.g. OPE) are automatically instantiated as
+> platform devices. This is required now that CAMSS is modelled as a
+> simple-bus and ISP blocks such as OPE are described as child nodes.
 
-[...]
+I do not understand this rationale. How is this required now? Are
+existing DTS broken and do not work? Then this needs to be explained.
 
-> +	/* CS35L36, Bottom Speaker */
-> +	cs35l36_bottom: audio-codec@40 {
-> +		compatible = "cirrus,cs35l36";
-> +		reg = <0x40>;
-> +		reset-gpios = <&tlmm 112 GPIO_ACTIVE_HIGH>;
-> +		#sound-dai-cells = <0>;
-> +		sound-name-prefix = "Right"; /* Bottom */
-
-One comment's enough (either above the node or here)
-
-[...]
-
-> +	mm1-dai-link {
-> +		link-name = "MultiMedia1";
-> +
-> +		cpu {
-> +			sound-dai = <&q6asmdai MSM_FRONTEND_DAI_MULTIMEDIA1>;
-> +		};
-> +	};
-> +
-> +	cs35l36-dai-link {
-> +		link-name = "Speaker Playback";
-> +
-> +		cpu {
-> +			sound-dai = <&q6afedai QUATERNARY_TDM_RX_0>;
-> +		};
-> +
-> +		platform {
-> +			sound-dai = <&q6routing>;
-> +		};
-> +
-> +		codec {
-> +			sound-dai = <&cs35l36_bottom>, <&cs35l36_top>;
-> +		};
-
-nit: 'co'dec < 'cp'u < 'p'latform
-
-also 'c's35l36-dai-link < `m`m1-dai-link
-
-otherwise:
-
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
- 
-Konrad
-
+Best regards,
+Krzysztof
