@@ -1,80 +1,174 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2732130C16A;
-	Tue,  7 Jul 2026 01:27:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B084C42087E
+	for <linux-arm-msm@vger.kernel.org>; Tue,  7 Jul 2026 01:30:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783387679; cv=none; b=FIJglhoKkUV/Mnel7cXioTdy5Wdsv1Y/WNlGes65TL9XJqRvaM22/bt/I8I8msNpIUqSWUs8x9UtVYljWALFg7GJFofOW80p7M7S/LWYLODlR2sVvaG2Usut1igJ4MwpTTom7wroK0WEXkSi+jbDAtzSMMTODk4Aj1jrQ8DPs2E=
+	t=1783387844; cv=none; b=YID3JnGCW6URoWZyDLmGCS/1SofSIm3S9A3vRQs/l+wPRzA7P7gu1GMPXCn6s764N+GIhmArzQUqRpK3YsR818TcJJKzSmBOn9y2J7PTWeGFdl4U4UIjheAoBe5ZUPaZi/eGuQQZh44exP/rh0Orfoxjee+SiyWK52S3Giqtwt8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783387679; c=relaxed/simple;
-	bh=m5PU0A7DZLqhTpU9zZv+4Jbxih3GSwFAK9QaULuxcV8=;
+	s=arc-20240116; t=1783387844; c=relaxed/simple;
+	bh=hlzNnsVV1o1LCgnMnPlGAyIjyXfohOSH516CMeMRHeA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=WMgTd8fxRzg8VLKI35AmjiHGpJs73vG7oL4ZAqzJpahrYXekLwDkvXb4STgTVB3YyFUfNHRRjJ7qyaHPlG/BCwRJHOyUwUIhb78XTwMXLzS5SIRFcmzBtyxNMsGLKBRlZ4XDcCiiVu4xZ7GyJ6sXRnh4CymGBQdNlULVy9zMpKo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FFYZu6Ah; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version; b=m+6PGIThLi6UqmlIfvg4PXTjgj4wyx++W5MNFdEq2r13WcSsdVh8MW3V4xFas1/+QHu5SRAHZKh3QtOB66JCW33WV1WbDd7Js12hOogxTDGbaCCSzQCTLHRicraM43ClCz6TYgT/RQSZSJ0fe1N2qxydcP75Xnz+hJfOyjRHIAk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=pHaIJQ0x; arc=none smtp.client-ip=209.85.214.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FFYZu6Ah"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 320A51F00A3D;
-	Tue,  7 Jul 2026 01:27:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783387663;
-	bh=enJKCZJS7OYEUEz9Bxcaj5lxbZmcFfs2ilffkyxLUOw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=FFYZu6Ahus8P/Z5QLwe3zK8jsTddPEJyJY2ahoMgwE6QrNf2h40mAxFDKAGibLEMl
-	 BKcT2OdR+VJnYKxFrPjAckqYeuU5UFn3joyJVScAoa5M8wCNqwNJ/Dzos4tJk9gl4Y
-	 2pQX4m7hnrZ/0ZCJMQbwXtuLF5Pql4a0jvxUjS4MCSgAYMijjICvWE4kamxW5tP8On
-	 FI98fwvPYfUu0tmRQdXAKPlaciOc7Cz9V8WcZO3V65FEA9H9OoyGxvi3s97Tp/dXKK
-	 CdmFXZPxiqu93U5PE6/FaPkQgehviYz2Ylp0+y9eLmbvDa14SXwVNUDj3kWTG7CiFA
-	 4jLYlmwh5gGhw==
-From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Luca Weiss <luca.weiss@fairphone.com>
-Cc: ~postmarketos/upstreaming@lists.sr.ht,
-	phone-devel@vger.kernel.org,
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="pHaIJQ0x"
+Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-2cab31bcc06so2554895ad.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 06 Jul 2026 18:30:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1783387842; x=1783992642; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ROUC3cgy4QtTAai8fuwZ/i9UUpJYp/TQoiTouEVN0vM=;
+        b=pHaIJQ0xeZJB1D+gX7nlpC3oz/xmmdw/1EyKN4id4/+x9EeAPpTVxlWtzik8mZRw03
+         hBzYVGCDtAo0bmP/dNK34zc0bKFc6dy8XEQtZMBkNtCNaGp85He8zBWPMv8d4fPpPQRZ
+         qrHDm0oM6TsngwbMlQUvHpRyzeKPVWm0sB9KLD62KmhD4ap51zQWvnMMrRj3qvkFsBK7
+         fcpd95vDaOcY5Xm1vKuDiFMXTxZNBbFBayZ1n7LbCu9BzbPeoOqcpwzyQK5DjFaW0u1Z
+         lWCT09L0FI0HmCovHSlK9KRDSq62qGRm0bH/Z1wxSpzWZoMySQYsFdj17JVUEK3PTo5K
+         4p7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783387842; x=1783992642;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=ROUC3cgy4QtTAai8fuwZ/i9UUpJYp/TQoiTouEVN0vM=;
+        b=b+EPwpWXSBrM0JE4j/YGNUu95BUlIHBL1yZZ7/cUWLkEBMhqzLxe54ZiATG9ErE8VA
+         q/EItbaCsfBnlyD1b6OJ6dGH0P68POYSDFuQ5QZgl9a2yW2EKX9TkichIEWSo86oJdR+
+         lmCalueR+xJiM1+w6hYOcViZt0yxHkmooYnCPb4gAa8gqNtdlMHQC2QC4Wij21flN4jB
+         bPe3jPrJzeIOc//swTvzcq6S5yEbBZImIUGuTy5/caqVNW9J5zK8JiD5wEmsfGZ3jCB6
+         nJn++JgL2JY82dZhd9DGaKx+UtAz/VH7eRs01HIFaPxPNxC0sJ5U1KeXhStZ6FZQsL3r
+         XLbQ==
+X-Forwarded-Encrypted: i=1; AHgh+RoDTYSW4syf0Cq9GWPipVAvE0Ij2nr2nZbYpDIXyS8U7u3UPlkATe7q5VpQFWODSre4BqpZK5XuyzW4qa9Q@vger.kernel.org
+X-Gm-Message-State: AOJu0YyTt1mUG9seFPRQOq6nDEvfc/LHxJnCF/2PFnAAtZ1eBLXfEXmV
+	V8biZ2JCHoYVMRWdI00UlI4XqfogUIEI9mzbJljI0W27ALUo9zljXyvY
+X-Gm-Gg: AfdE7cnFOh+nNFcw6heSvm2DgHaOW5onrg6k/igCY3qGX7oTR3NSAsbjW3C6jCP17ll
+	soeXS4oWd3sx6Vso/dLHxvtNRXUBP8QJnLkc/43H6Wv+IQd2LeNuqONtVE+24Zu5Qscfw18HKSJ
+	6R5Og34NxpRpiqm4741FE7m3OBo4+2ysj4hVuvm4uGupJaIrlQJEJGoAh8auayOFsT+EHWOXlqF
+	MoyZOtq+06ALUVWYRGEU7yyUy7vtd6XEfwiCTR+fEiHabDc6+3jK8zfyNdX3OM+VbDyXP4z9Zmg
+	gn3uJIz3MVcF6s1s9ZX6YJ3T6BKZX6knaeiM3ZdUh6PtYHX7kwoCHummPgL6yCWHb72dEn6mUm4
+	oGnfPGtpnRvYZhSBSD9k6L51vU6El4HXNOc3rtwlltk4O96z76KPiUh/iSRXEO8jegbB6UasOp6
+	WsCEVqS2ALCJJDUCoUMqCeNI1nRgy/FQ==
+X-Received: by 2002:a17:903:41cf:b0:2c9:e9ef:bdd9 with SMTP id d9443c01a7336-2cccad90e8cmr5468245ad.7.1783387841900;
+        Mon, 06 Jul 2026 18:30:41 -0700 (PDT)
+Received: from kavandesktop.local.lan ([50.46.174.241])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ccc9d1e279sm2653435ad.45.2026.07.06.18.30.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 06 Jul 2026 18:30:41 -0700 (PDT)
+From: Kavan Smith <kavansmith82@gmail.com>
+To: robdclark@gmail.com,
+	quic_abhinavk@quicinc.com,
+	dmitry.baryshkov@oss.qualcomm.com
+Cc: sean@poorly.run,
+	marijn.suijten@somainline.org,
+	airlied@gmail.com,
+	simona@ffwll.ch,
 	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: Re: [PATCH v2 0/2] IPA v5.2 support for Milos and Fairphone (Gen. 6)
-Date: Mon,  6 Jul 2026 20:27:25 -0500
-Message-ID: <178338764549.1558388.6860652303646519518.b4-ty@kernel.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260410-milos-ipa-v2-0-c699b6b8cf27@fairphone.com>
-References: <20260410-milos-ipa-v2-0-c699b6b8cf27@fairphone.com>
+	stable@vger.kernel.org,
+	Kavan Smith <kavansmith82@gmail.com>,
+	Daniel Mack <daniel@zonque.org>
+Subject: [PATCH v2] drm/msm/dsi: round 6G byte clock rate to the PLL-achievable value
+Date: Mon,  6 Jul 2026 18:32:40 -0700
+Message-ID: <20260707013240.681012-1-kavansmith82@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260706180753.408753-1-kavansmith82@gmail.com>
+References: <20260706180753.408753-1-kavansmith82@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
+MSM8916 runtime DSI commands still go through
+msm_dsi_host_xfer_prepare(), which re-applies the link clock rate before
+enabling the link clocks. That is fine in principle, but on DSI 6G the
+requested byte clock rate often does not exactly match the DSI PHY PLL's
+realizable rate. For example, the driver can request 56250000 Hz while the
+PLL actually runs at 56246337 Hz.
 
-On Fri, 10 Apr 2026 10:17:00 +0200, Luca Weiss wrote:
-> Add support for IPA v5.2 which can be found in the Milos SoC. And
-> finally enable it on Fairphone (Gen. 6) so that mobile data (4G/5G/..)
-> starts working.
-> 
-> Depends on:
-> * IPA v5.2 support
->   https://lore.kernel.org/linux-arm-msm/20260410-ipa-v5-2-v2-0-778422a05060@fairphone.com/T/
-> * Describe IMEM on Milos
->   https://lore.kernel.org/linux-arm-msm/20260410-milos-imem-v3-0-d215385fa5ab@fairphone.com/T/
-> 
-> [...]
+Because the requested and actual rates differ slightly, every later
+link_clk_set_rate() call is treated as a real clock change and re-locks
+the PLL. On a video-mode panel without an internal timing generator, such
+as samsung,s6d7aa0 / lsl080al03 on MSM8916, that live-clock glitch makes
+the panel lose pixel lock and visibly corrupts scanout on each runtime DCS
+command, including backlight writes.
 
-Applied, thanks!
+Fix this by rounding the computed 6G byte clock rate up front, before it is
+stored in msm_host->byte_clk_rate and reused by later transfers. Once the
+host carries the PLL-achievable rate instead of the idealized one,
+repeated link_clk_set_rate() calls become no-ops in the common clock
+framework and no longer re-lock the PLL.
 
-[1/2] arm64: dts: qcom: milos: Add IPA node
-      commit: 5b372595d4b4cd471f49901498a920c983310c47
-[2/2] arm64: dts: qcom: milos-fairphone-fp6: Enable IPA
-      commit: 47dd81735741b60b53dc2ccd4a48b0ec74c9adc7
+This keeps the normal transfer callback sequencing intact, preserves the
+OPP vote path in link_clk_set_rate(), and matches the fix direction
+suggested in the original 2018 discussion.
 
-Best regards,
+Reported-by: Daniel Mack <daniel@zonque.org>
+Closes: https://lore.kernel.org/all/1a682c5b-7fc9-3aaa-120b-64b239a355a3@zonque.org/
+Fixes: 6b16f05aa39f ("drm/msm/dsi: Split clk rate setting and enable")
+Cc: stable@vger.kernel.org
+Signed-off-by: Kavan Smith <kavansmith82@gmail.com>
+---
+ drivers/gpu/drm/msm/dsi/dsi_host.c | 25 +++++++++++++------------
+ 1 file changed, 13 insertions(+), 12 deletions(-)
+
+diff --git a/drivers/gpu/drm/msm/dsi/dsi_host.c b/drivers/gpu/drm/msm/dsi/dsi_host.c
+index eabdaa4..5119862 100644
+--- a/drivers/gpu/drm/msm/dsi/dsi_host.c
++++ b/drivers/gpu/drm/msm/dsi/dsi_host.c
+@@ -603,12 +603,24 @@ static void dsi_calc_pclk(struct msm_dsi_host *msm_host, bool is_bonded_dsi)
+ 
+ int dsi_calc_clk_rate_6g(struct msm_dsi_host *msm_host, bool is_bonded_dsi)
+ {
++	long rounded_byte_clk_rate;
++
+ 	if (!msm_host->mode) {
+ 		pr_err("%s: mode not set\n", __func__);
+ 		return -EINVAL;
+ 	}
+ 
+ 	dsi_calc_pclk(msm_host, is_bonded_dsi);
++
++	rounded_byte_clk_rate = clk_round_rate(msm_host->byte_clk,
++					       msm_host->byte_clk_rate);
++	if (rounded_byte_clk_rate < 0) {
++		pr_err("%s: failed to round byte clock rate, %ld\n",
++		       __func__, rounded_byte_clk_rate);
++		return rounded_byte_clk_rate;
++	}
++
++	msm_host->byte_clk_rate = rounded_byte_clk_rate;
+ 	msm_host->esc_clk_rate = clk_get_rate(msm_host->esc_clk);
+ 	return 0;
+ }
+@@ -2056,18 +2068,7 @@ int msm_dsi_host_xfer_prepare(struct mipi_dsi_host *host,
+ 	 * mdp clock need to be enabled to receive dsi interrupt
+ 	 */
+ 	pm_runtime_get_sync(&msm_host->pdev->dev);
+-	/*
+-	 * Do NOT re-set the link clock rate when the link is already up and
+-	 * streaming. On MSM8916 the requested byte-clock rate never exactly equals
+-	 * the DSI PHY PLL's achievable rate, so clk_set_rate() re-locks the PLL on
+-	 * every command. For a video-mode panel with no internal timing generator
+-	 * (e.g. s6d7aa0), that clock glitch makes the panel lose pixel lock mid-
+-	 * scanout -> ~1s of displaced/wrapped image on every DCS write (backlight).
+-	 * The rate is already correct from power-on; downstream MDSS only refcount-
+-	 * enables the clocks here (CMD_CLK_CTRL) and never re-sets the rate.
+-	 */
+-	if (!msm_host->power_on)
+-		cfg_hnd->ops->link_clk_set_rate(msm_host);
++	cfg_hnd->ops->link_clk_set_rate(msm_host);
+ 	cfg_hnd->ops->link_clk_enable(msm_host);
+ 
+ 	/* TODO: vote for bus bandwidth */
 -- 
-Bjorn Andersson <andersson@kernel.org>
+2.43.0
+
