@@ -1,131 +1,105 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.21])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 693E4329E46;
-	Tue,  7 Jul 2026 16:05:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.21
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91A06434E2C;
+	Tue,  7 Jul 2026 16:19:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783440360; cv=none; b=eE+Uhb4WZZxjJ5EOG6CSmMeqixvNKtw7V55/nnbFmkvLONS6FvZLbW4akRsP0ZnMQwp9GKTTtwRWmPmurRXuEHM0TjVXKAaeZEUavtmIbOcKnMDzyKgxkhbVrbWLI7E/8N3TYna3qbm7fIoxbpoH70jjxWQbIxQEisKyIOJ1PaU=
+	t=1783441164; cv=none; b=KBxiK0ZErtuDJygPbTAAui+A6EaZDIeUKhNj3TTHI+AgPltz7mRydGTEH9MDM+cpZvQeDEtW8WiEfXHQSpVy9rJPMntpupUkfEL3UDuX960fQCrO+sYXP5DoocVmvXJQV1/YWU5CfCSNxqCZqf/27l+mwShveuxUMSzDTM2Vj74=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783440360; c=relaxed/simple;
-	bh=WGu1H7KZ2YHXBPQTafzG2nNs51jULw2SwYV9eRAWAxk=;
+	s=arc-20240116; t=1783441164; c=relaxed/simple;
+	bh=r/WV+1AM9CAJd99NwXYSLV+fuIJbi7qrwMD2d2330Os=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ghv95dlUoUbfEY5YNnjG0dwcVHZJ36Y3IyIM1ecuLLxF0gjT2Td6q+EfL3kPfwjlhzjqi0Z14aYaJSS5hRsLY65VrAkplKKYgZ41b1vVI5w9A3mn9NLPB4q+Sygt2oismqPQBjZdq7dpkWqR7Utsejwy0AlC4oll6t/49oCzB8A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=MEIXCluI; arc=none smtp.client-ip=198.175.65.21
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=ShhbAqrl7EnTuS9GZPnzO7aLvWW22/G9w1Cs/qrwLNmNhCsuN5V4cEAkmMOaZZ3c+kIJNovb6pOd8wK+NJBU7+ZQvNPXzSSwhUZWSSAu6L08AIMFcKV6XAEjAF3sMvj+06qplmWXR/azosRBiylFZB+vtB0PpxLcKnftO8YaMxI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WErHPRd4; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="MEIXCluI"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1783440359; x=1814976359;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=WGu1H7KZ2YHXBPQTafzG2nNs51jULw2SwYV9eRAWAxk=;
-  b=MEIXCluINVipPSbqGAF5bhnDWYsbrB96QXVkCG0NuRGNKI7Ymjr9A/E9
-   33czbQRNNPAIBkVjhOtx/7AhFVfUyAlOTGMOvokm54GUfTaYYX9iu2NHR
-   PqxyjxH+XOqfD6apck727CPh3rjJvFFTPFiEkqHXDHXAiZsXufT6k+TKc
-   NPgxWTFpCSiskdC6lmAKBpPw1MnbhcRehj9FjnjjcP/Y8Bcw9axK/F929
-   QYHiX7mjkdIV2AqpMR+avm6kcOrAExLFiG8OhvNe0AFlEozUuhkAezJBl
-   qi7lOi3zNOi4UjfjpeFLPDDxFYoyUpE8VDZZZVKrOMAThQdICv/c+NoSf
-   A==;
-X-CSE-ConnectionGUID: cGs7XXHkTum8i9btrvKFkg==
-X-CSE-MsgGUID: 3YRJNqBcTji5bLz3V7OxJA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11840"; a="83952075"
-X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; 
-   d="scan'208";a="83952075"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by orvoesa113.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2026 09:05:47 -0700
-X-CSE-ConnectionGUID: tBOk0B/0SG6kjtraoD2mfg==
-X-CSE-MsgGUID: bDNaWP1RQpiCsfz4/eJ9hQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,153,1779174000"; 
-   d="scan'208";a="254117548"
-Received: from slindbla-desk.ger.corp.intel.com (HELO localhost) ([10.245.245.36])
-  by orviesa007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Jul 2026 09:05:33 -0700
-Date: Tue, 7 Jul 2026 19:05:29 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Cc: Lee Jones <lee@kernel.org>,
-	Mark Brown <broonie@opensource.wolfsonmicro.com>,
-	Thierry Reding <thierry.reding@avionic-design.de>,
-	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Vinod Koul <vkoul@kernel.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Danilo Krummrich <dakr@kernel.org>, Rob Herring <robh@kernel.org>,
-	Saravana Kannan <saravanak@kernel.org>,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
-	Andi Shyti <andi.shyti@kernel.org>, Joerg Roedel <joro@8bytes.org>,
-	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
-	Doug Berger <opendmb@gmail.com>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Ulf Hansson <ulfh@kernel.org>, Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	Matthew Brost <matthew.brost@intel.com>,
-	Thomas =?iso-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>,
-	Rodrigo Vivi <rodrigo.vivi@intel.com>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Peter Chen <peter.chen@kernel.org>,
-	Paul Cercueil <paul@crapouillou.net>, Bin Liu <b-liu@ti.com>,
-	Philipp Zabel <p.zabel@pengutronix.de>,
-	Maximilian Luz <luzmaximilian@gmail.com>,
-	Hans de Goede <hansg@kernel.org>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Benjamin Herrenschmidt <benh@kernel.crashing.org>, brgl@kernel.org,
-	linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org,
-	driver-core@lists.linux.dev, devicetree@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org, linux-i2c@vger.kernel.org,
-	iommu@lists.linux.dev, linux-pm@vger.kernel.org,
-	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
-	intel-xe@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-	linux-usb@vger.kernel.org, linux-mips@vger.kernel.org,
-	platform-driver-x86@vger.kernel.org, mfd@lists.linux.dev,
-	Manuel Ebner <manuelebner@mailbox.org>
-Subject: Re: [PATCH v3 05/20] driver core: update kerneldoc for
- platform_device_alloc()
-Message-ID: <ak0jyUbNonSRiP_g@ashevche-desk.local>
-References: <20260706-pdev-fwnode-ref-v3-0-1ff028e33779@oss.qualcomm.com>
- <20260706-pdev-fwnode-ref-v3-5-1ff028e33779@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WErHPRd4"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BCE7E1F01558;
+	Tue,  7 Jul 2026 16:19:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783441163;
+	bh=Pe5c0lRRYuehiikG2q/D86iz7XJppM5GvK+gT5FGJ6Q=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=WErHPRd4NVutyTsOu/YGaANkh7LNzzdntLiXzo4T+7OKglJ+aCD3wRS3BuKVSnP3f
+	 9o0OTrY1YBAjFgEpF23wthcqVYvc74eK58wqf7AF1nF0SZj/LpSZ4B7sWP6bdpNW5C
+	 R1ZA+pesnMVHABwcsGr6AwUT5JzuT9LPGoA7Mf9M7rjr4qF3I6yO2wHCuHsJMM4a4y
+	 wGF2no8lKK5gw7usIk+Cfw5pe3raWpMHjSSCj1b/9gfCvWZUy8Pxo/ZCIy15qVB9g9
+	 iquse/r9vyR6Oal5vdmMws7m0pRCRzP+igAMzFu+jA6ycjCJgPDcv79MlE0NkpKPsE
+	 14RHIuw0HncuQ==
+Date: Tue, 7 Jul 2026 17:19:18 +0100
+From: Conor Dooley <conor@kernel.org>
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Lee Jones <lee@kernel.org>, Pavel Machek <pavel@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>, linux-leds@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH v3 2/4] dt-bindings: leds: nxp,pca963x: add multicolor
+ LED support
+Message-ID: <20260707-spoken-anemia-68fb54a6ab34@spud>
+References: <20260706-monza-leds-v3-0-37ea8c988363@oss.qualcomm.com>
+ <20260706-monza-leds-v3-2-37ea8c988363@oss.qualcomm.com>
+ <20260706-account-harsh-093c6354bca5@spud>
+ <CAFEp6-2k1O80iY9f8WeoHHRZPMdKGcOTYuEsDvpZmZZXTz3xbw@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="6c5OipnhGJoLhAAx"
+Content-Disposition: inline
+In-Reply-To: <CAFEp6-2k1O80iY9f8WeoHHRZPMdKGcOTYuEsDvpZmZZXTz3xbw@mail.gmail.com>
+
+--6c5OipnhGJoLhAAx
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260706-pdev-fwnode-ref-v3-5-1ff028e33779@oss.qualcomm.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 06, 2026 at 02:44:17PM +0200, Bartosz Golaszewski wrote:
-> Users of platform_device_alloc() + platform_device_add() must not modify
-> certain fields of the dynamically created platform device object. Update
-> the kernel doc to say which fields are affected and which functions to
-> use.
+On Tue, Jul 07, 2026 at 11:03:44AM +0200, Loic Poulain wrote:
+> > > +        "^multi-led@[0-9a-f]+$":
+> > > +          patternProperties:
+> > > +            "^led@[0-9a-f]+$":
+> > > +              properties:
+> > > +                reg:
+> > > +                  maximum: 15
+> >
+> > Is this 15 the maximum for all devices?
+>=20
+> 15 is the hardware max for pca9635, and serves as the default for any
+> future/unlisted compatible via the else branch. Per your comment
+> above, I'll move it into the non-conditional block so it's enforced
+> unconditionally instead of only through else.
+>=20
+> > If so, why does your regex permit values greater than 15?
+>=20
+> The unit-address regex only validates that the name is well-formed
+> hex, and not the numeric bound. DT convention requires the unit
+> address to equal the node's reg value in hex, so in practice this is
+> limited to 15.
+> This is again a copy of what the yaml already describes for other
+> device's constraints. However, I can tighten the regex itself instead
+> if you'd prefer that approach, but that would make the yaml a bit
+> inconsistent.
 
-Consider using __private checker attribute for them as well. It will make
-sparse scream.
+I don't see any value in the regexes permitting things that are not
+possible with the hardware. The + should probably be trimmed from the
+existing regexes IMO.
 
-> Suggested-by: Manuel Ebner <manuelebner@mailbox.org>
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+--6c5OipnhGJoLhAAx
+Content-Type: application/pgp-signature; name=signature.asc
 
--- 
-With Best Regards,
-Andy Shevchenko
+-----BEGIN PGP SIGNATURE-----
 
+iHUEABYKAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCak0nBgAKCRB4tDGHoIJi
+0oGuAPwIlUU6nZvmDo3hOAwp6hWklBGrOjVFR3rsxGvoK3GMvwD+P6VMD80XnmH9
+dgvz6wHIaSdmzAIz9sNj2yqz4sdzMAE=
+=j/LD
+-----END PGP SIGNATURE-----
 
+--6c5OipnhGJoLhAAx--
