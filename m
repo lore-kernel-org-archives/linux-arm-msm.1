@@ -1,60 +1,48 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6E4B37266D;
-	Tue,  7 Jul 2026 03:22:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3168037C91E;
+	Tue,  7 Jul 2026 03:22:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783394530; cv=none; b=MbATW9+i0lD8MxJeY0EbNoeGKN0xme0gYpPMsgn2hPu+6fSD2QDAVs+Vqwdgx+aLQGN9PwAxzISECb8yyJnyIn4ZXYpJcfqD8YSBO8z3+aQeA3G+6KUi/6zy0Sx+guCLBI5VQKuoQtdb67HEwRD4QHRBjrTLARW5PTsokUvO3m8=
+	t=1783394530; cv=none; b=uOq7tBiPK51Rx68RtnfpqHH71uXquHN2abtTNXh04Fq4z2Hh/MRM91QPME4L3e83wsMC4cRWtkgU6ZOULpmc6mI9DUQ5f7xXrscV5C/q3PVxwI79yTsWb/LiMNsDOIhAGOQb9j89OFIp9N6kw/8VWIi8fB0p85LE1zb1+BzW7Lo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1783394530; c=relaxed/simple;
-	bh=uifYgKU3HWleDJ1V51l/6/3x0LKaVLQJVdYJHTT2Nk8=;
+	bh=W9p4hNOOLf8mGe1ZtENPDTQeNXj5KWhf4/+5s5yeaXA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=RHHqrIhvUCat7whvIXYwexeG+0GzRhCVRv0rSq/DFxXwwpGdbVdD3UaGNOIBfSmfQ/yBvZmLSbOCYqkT4xrnq/L4D7kDX/g6ZuIMGCzF7tVYZv5yg4GHVMSBvQqxwkKVTVt4UL34B3j919IPOwxSbbzrABFej78qQuVwk1NFa74=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GkGBTtwg; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=eNHxy0YsDytTadirZTItKtSEdjsqfZoJmZdAn3WtOkj672ml4IZJLO9lyJIRUY2BJqu0105PMLmKNJxPk/O8TyT2Hx3BkuWrEytuihPxUt6aVwfuLMD1E0fei6wBeU8pd/eMM0goGB/hXeL/DLVTLuzoaOuXxEhX5h/oCsaLTvI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KiBlwugn; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GkGBTtwg"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B3B901F00A3A;
-	Tue,  7 Jul 2026 03:21:58 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KiBlwugn"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 40D101F00A3D;
+	Tue,  7 Jul 2026 03:22:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783394520;
-	bh=Pp3QGx4MI0wMm1/tu5AIhwHgnRl0wO+oCUAfozdxYPU=;
+	s=k20260515; t=1783394522;
+	bh=vZwlutgfXIhP3JfSPnEATD6YUC9EW/RGVOREU5dLc/M=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=GkGBTtwg3fkvelnnB9ePsx319TKYpkyY120ukz7J9mXwDL3F2SzlhOQXOykAPNXSt
-	 T9hTCoVaRJNePFrs/NDXVp9wnzqatoW7OMOdbknTQe4P2M33cfbuNxRW1tDwUvEfYl
-	 nBCh0bG1DBfJOf5Xg7RmIxDkxQUIeZnxvrZQsCAOCC2QNoSqb067N2oG8Yl7LQIwer
-	 usfq7vYi3tzceYNHbKDJblKy4Z9Q7q2t3rW9isJVflPWzWU90TN5g6OHh4KHeiQe1O
-	 FB814nrxxka8MCU/ItGGi5evHQqyZLk7NJMLo5TpplcLD+OcCau2vm+UB1jehnriqH
-	 5OBWbiPk5xgew==
+	b=KiBlwugn/4gIIESSPIpxrxjSbVZxxuF11zmeasYglJh9wLu8tjpOy6l1x4B3VSGG5
+	 A3t9YSJnYbsZgcBrqYz7ByJEURPHJY8FZs7/aa+X1IzhQq6gV3AIru8CPGyWw4CZeF
+	 eC4P4DQG2E27JLQ0dIekUfEkd4ufdLOaJAZUqM/oDpaDJoq6jcicKgr1Ceh6eektQF
+	 YZFyOb5t8iG12zOFCqjZ/vzXmLvxl30b7f6eiWCmCdMPTcg4qJ8LkJ+KToKubZe5qR
+	 TM5ljd70ZgEe4nwe11/iupr8wdKagdcJhGipJS/PQ147uUQ+5xQuwLVTtyzPkrFelF
+	 iEl3C0ZJ+5sSw==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
+To: Georgi Djakov <djakov@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Lee Jones <lee@kernel.org>,
-	Pavel Machek <pavel@kernel.org>,
-	Sean Young <sean@mess.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Martin Botka <martin.botka@somainline.org>,
-	Biswapriyo Nath <nathbappai@gmail.com>
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Xilin Wu <sophon@radxa.com>
 Cc: linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-leds@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	~postmarketos/upstreaming@lists.sr.ht,
-	phone-devel@vger.kernel.org,
-	kernel test robot <lkp@intel.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH v3 0/7] Add vibrator, IR transmitter and USB-C handling in xiaomi-ginkgo
-Date: Mon,  6 Jul 2026 22:21:33 -0500
-Message-ID: <178339449904.1938770.3052050232768803324.b4-ty@kernel.org>
+	linux-kernel@vger.kernel.org
+Subject: Re: (subset) [PATCH 0/3] Enable QoS configuration on SC8280XP
+Date: Mon,  6 Jul 2026 22:21:36 -0500
+Message-ID: <178339449906.1938770.13092252233496253130.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260330-ginkgo-add-usb-ir-vib-v3-0-c4b778b0d7f8@gmail.com>
-References: <20260330-ginkgo-add-usb-ir-vib-v3-0-c4b778b0d7f8@gmail.com>
+In-Reply-To: <20260507-sc8280xp-qos-v1-0-15135858cd98@radxa.com>
+References: <20260507-sc8280xp-qos-v1-0-15135858cd98@radxa.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -65,29 +53,25 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Mon, 30 Mar 2026 10:13:47 +0000, Biswapriyo Nath wrote:
-> This patch series add support for various components in Xiaomi Redmi
-> Note 8.
+On Thu, 07 May 2026 22:25:11 +0800, Xilin Wu wrote:
+> This series enables QoS configuration for QNOC type device which
+> can be found on SC8280XP platform. It enables QoS configuration
+> for master ports with predefined priority and urgency forwarding.
+> This helps in prioritizing the traffic originating from different
+> interconnect masters at NOC (Network On Chip).
 > 
-> Most notably:
-> - IR transmitter
-> - USB-C OTG
-> - Vibrator
+> The system may function normally without this feature. However,
+> enabling QoS helps optimize latency and bandwidth across subsystems
+> like CPU, GPU, and multimedia engines, which becomes important in
+> high-throughput scenarios. This is a feature aimed at performance
+> enhancement to improve system performance under concurrent workloads.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/7] arm64: dts: qcom: sm6125: Use 64 bit addressing
-      commit: 88f8e2ca76ee9999c1f21d020362e6588a6d5ef5
-[3/7] arm64: dts: qcom: sm6125-xiaomi-ginkgo: Enable vibrator
-      commit: 222f161a873f198301497f22ae0dd089f30e9b75
-[4/7] arm64: dts: qcom: sm6125: Enable USB-C port handling
-      commit: 3df39679bfcb46a3475b0e8d0b31cfcb07def9c4
-[5/7] arm64: dts: qcom: sm6125-xiaomi-ginkgo: Add PMI632 Type-C property
-      commit: c1da9374c3e08c6eb06106256cac3875fb5c467f
-[7/7] arm64: dts: qcom: sm6125-xiaomi-ginkgo: Add IR transmitter
-      commit: 474dedd7f653be26ce5385f46ff2b7a3282a359f
+[3/3] arm64: dts: qcom: sc8280xp: Add reg and clocks for QoS configuration
+      commit: 204242d747e67e7483256fc927d0ab19a63a54d2
 
 Best regards,
 -- 
