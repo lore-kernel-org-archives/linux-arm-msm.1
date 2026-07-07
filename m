@@ -1,46 +1,46 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C8D4221546;
-	Tue,  7 Jul 2026 06:40:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 627AA3AB285;
+	Tue,  7 Jul 2026 06:48:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783406403; cv=none; b=F+KF04454cdIQK3HZXXUGe7xCjLJHa3e0Hw4EGn1DAezVcvFKRKmcGqN3QuLynLHEgG0aLqCi4MV2p1hejJAkysfmFBKqjdgfIXjNjMqwS71pBC3yczM1i0S8S7+Jvv386sfFHB7cuoHDq5wR7g1nmdIz9cbycwi+QyUBqhnseE=
+	t=1783406899; cv=none; b=XQvzvr8fLMQHohrWvU102uZ9U75pLWYmiqy2pYh7+zaIGr0Ay4oC5KVpsw4zz4YbBzYKx5u+S26nLyyObFgU+XjUrcfh/pR4ZbaGF8kFGD77Pq9LD2EVUZJxlAmcbsTsSoS6IMAfh7qwwGP14a65nrEiFRnOWOAQcSefrdZVeTg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783406403; c=relaxed/simple;
-	bh=qM0hDuXyKzE8shzXBS864JDFVSj0uqWGlsm7xlLjiPA=;
+	s=arc-20240116; t=1783406899; c=relaxed/simple;
+	bh=UwUjbwSrwUSMFsUgMlKlenkSVxB9MMMg7w0wXZ/EZEs=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Pe3g0riFW42uvx6hW+yIaydevdu768LvvoLJl9yvn3HCpvGIIlCRkOem8nkH/JhMRD5USEHcUwIFiKWaB5Xkf/OvMxfwneISq+ULqqhI+1He4dE6/j1l4bWcr0IB5Ygu6NDl3MUUuBecOW+4b8ftWol6unnm9tJy1idM3uNhP9M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Zf+ADeX7; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=iPpFKvl2F2+9aYFqH1uaL75SM+IU6Sz9AMJf5CkGG/NJZ5aKw6Im+wrVYv+A031jGwX9toHXNjOeDrNAE88ECp+tzJF6wW5ze5PkckphrpAJBjIxVfooftj+cdvKDBJO+r4CZ/iBCIrC3KVIQzBKq/n2BNttexXWgHLPsz3gsVE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TH9OBtFk; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Zf+ADeX7"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 853281F000E9;
-	Tue,  7 Jul 2026 06:40:00 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TH9OBtFk"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 886F51F000E9;
+	Tue,  7 Jul 2026 06:48:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783406401;
-	bh=S5O4/ahBKvaYgtYKaJDznh0lfg+kgCemB1pgNHMlBKs=;
+	s=k20260515; t=1783406898;
+	bh=Hac1D+DwkuFoG+G5po4P0T2lLHD81goBLdqm6cccAAY=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Zf+ADeX7zsKvXTlAk0xQteskUKFMuykxPe5HaLid0JEyFyyYJsfx5YkAtzUBFUehA
-	 2gLOBrjTHX/Pucpc/uRtVwukcZN5K2cSwZfNX9TiHZ40v7oPW09/Zoxt8X2umvBq9+
-	 2doz2qGKKz5Euco2IvvchlG53ubR3kGcfq3HBP5Koibv9lgvxycHJbncvovXvXsVSp
-	 ngi/RXqd9hOzZE8C+3w8XMUmCdwNgB8fwwylulOa4qIuQwXiuCu9Z0dkoDmKYLh14e
-	 GlM0bYkepdJlMfImJX93KHWZ3TBy0oe26imubI0xlm1byuQkiCaqfwCxbY8J+Zel60
-	 ZYiaKQXfAc6Pg==
-Date: Tue, 7 Jul 2026 08:39:57 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
-Cc: sre@kernel.org, hansg@kernel.org, ilpo.jarvinen@linux.intel.com, 
-	linux@roeck-us.net, andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org, 
-	krzk+dt@kernel.org, conor+dt@kernel.org, bryan.odonoghue@linaro.org, 
-	platform-driver-x86@vger.kernel.org, linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, neil.armstrong@linaro.org, 
-	gaurav.kohli@oss.qualcomm.com, manaf.pallikunhi@oss.qualcomm.com, 
-	priyansh.jain@oss.qualcomm.com
-Subject: Re: [PATCH v5 2/3] platform: arm64: lenovo-thinkpad-t14s-ec: Add
- hwmon support for temperatures
-Message-ID: <20260707-accomplished-hare-of-success-ddcfb4@quoll>
-References: <20260706184648.35613-1-daniel.lezcano@oss.qualcomm.com>
- <20260706184648.35613-3-daniel.lezcano@oss.qualcomm.com>
+	b=TH9OBtFkWh6yDb+swE9L0AP0Cfza5ifewJC9fCyNVxzdtFX654XOAQxmTCIdwkF5c
+	 roEsiK2qWY5xCEu2XhpkJE+Cmfle4Wo8HAabFOyCG6VIwXhDzZrQJws5B9GPtecC8J
+	 KFEUfU9X4jbwcoD6inu5drqF13ClAh/qGkKr+/3xXumgYeQAqhEO9wYsd3+zID3DMk
+	 FRwjkVSOr75iihiK3gkw4Z6Gq50N5pBmoIEIgix0/J2VfcTR3+XZFDmuJ+m2uUoLVj
+	 nD/DNGbw5E6kErE0yg63oi2Lr4mtbZgJlPmreVJwo/M4mq9pZ6CdNRByUJ6CPt2/F6
+	 QQxnhtlwEhecQ==
+Date: Tue, 7 Jul 2026 08:48:08 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Sushrut Shree Trivedi <sushrut.trivedi@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bjorn Helgaas <bhelgaas@google.com>, Lorenzo Pieralisi <lpieralisi@kernel.org>, 
+	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, Bartosz Golaszewski <brgl@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org
+Subject: Re: [PATCH 3/9] dt-bindings: PCI: Add bindings for endpoint gpios
+Message-ID: <34ao6p6f3alyqynyscpdmc7k4svmbcrlmamzhwjq2qdn47lnm5@u5bpordfbams>
+References: <20260701-shikra-upstream-v1-0-e1a721eb8943@oss.qualcomm.com>
+ <20260701-shikra-upstream-v1-3-e1a721eb8943@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -49,55 +49,74 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260706184648.35613-3-daniel.lezcano@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260701-shikra-upstream-v1-3-e1a721eb8943@oss.qualcomm.com>
 
-On Mon, Jul 06, 2026 at 08:46:47PM +0200, Daniel Lezcano wrote:
-> +static int t14s_ec_hwmon_probe(struct t14s_ec *ec)
-> +{
-> +	struct device *dev;
-> +	struct t14s_ec_hwmon_sys_thermx sys_thermx[] = {
-> +		{ .label = "soc",	.reg = T14S_EC_SYS_THERM0 },
-> +		{ .label = "keyboard",	.reg = T14S_EC_SYS_THERM1 },
-> +		{ .label = "base",	.reg = T14S_EC_SYS_THERM2 },
-> +		{ .label = "charging",	.reg = T14S_EC_SYS_THERM3 },
-> +		{ .label = "qtm",	.reg = T14S_EC_SYS_THERM6 },
-> +		{ .label = "ssd",	.reg = T14S_EC_SYS_THERM7 },
-> +	};
-> +
-> +	ec->ec_hwmon.sys_thermx = devm_kmemdup_array(ec->dev, sys_thermx,
-> +						     ARRAY_SIZE(sys_thermx),
-> +						     sizeof(sys_thermx[0]), GFP_KERNEL);
-> +	if (!ec->ec_hwmon.sys_thermx)
-> +		return -ENOMEM;
-> +
-> +	dev = devm_hwmon_device_register_with_info(ec->dev, "t14s_ec", ec,
-> +						   &t14s_ec_chip_info, NULL);
-> +
-> +	return PTR_ERR_OR_ZERO(dev);
+On Wed, Jul 01, 2026 at 12:32:45AM +0530, Sushrut Shree Trivedi wrote:
 
-... and this ...
+Use proper prefix for the subject.
 
-> +}
-> +
->  static int t14s_ec_probe(struct i2c_client *client)
->  {
->  	struct device *dev = &client->dev;
-> @@ -590,6 +717,10 @@ static int t14s_ec_probe(struct i2c_client *client)
->  	if (ret < 0)
->  		return ret;
+> Add devicetree bindings for TC9563 GPIO's which are
+> used to control endpoint power and reset.
+> 
+> Signed-off-by: Sushrut Shree Trivedi <sushrut.trivedi@oss.qualcomm.com>
+> ---
+>  .../devicetree/bindings/pci/toshiba,tc9563.yaml    | 22 +++++++++++++++++++++-
+>  1 file changed, 21 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/pci/toshiba,tc9563.yaml b/Documentation/devicetree/bindings/pci/toshiba,tc9563.yaml
+> index b3ad05d90201..f9f71f28aa92 100644
+> --- a/Documentation/devicetree/bindings/pci/toshiba,tc9563.yaml
+> +++ b/Documentation/devicetree/bindings/pci/toshiba,tc9563.yaml
+> @@ -26,6 +26,11 @@ properties:
+>    reg:
+>      maxItems: 1
 >  
-> +	ret = t14s_ec_hwmon_probe(ec);
-> +	if (ret < 0)
-> +		return ret;
+> +  gpio-controller: true
+> +
+> +  '#gpio-cells':
+> +        const: 2
 
-... and this is actual implemented ABI break, if I understood hwmon and
-thermal code correctly.
+Fix indent.
 
 > +
->  	ret = devm_request_threaded_irq(dev, client->irq, NULL,
->  					t14s_ec_irq_handler,
->  					IRQF_ONESHOT, dev_name(dev), ec);
+>    resx-gpios:
+>      maxItems: 1
+>      description:
+> @@ -69,6 +74,17 @@ $defs:
+>      type: object
+>  
+>      properties:
+> +      reset-gpios:
+> +        description:
+> +          Specify the TC9563 GPIO used to reset the endpoint
+> +          connected to the particular TC9563 downstream port.
+> +
 
-Best regards,
-Krzysztof
+This the PERST# signal, isn't it? If so, mention it as-is.
 
+> +      ep-pwr-en-gpios:
+> +        description:
+> +          Specify the TC9563 GPIO used for enabling power to
+> +          the endpoint connected to the particular TC9563
+> +          downstream port.
+> +
+
+So this GPIO controls 3.3v supply to the endpoint? If so, it should be described
+as a GPIO controlled regulator:
+
+	vreg_pcie_3v3: regulator-pcie-3v3 {
+		compatible = "regulator-fixed";		
+		...
+		gpio = <&tc9563 2 GPIO_ACTIVE_HIGH>;
+		...
+	};
+
+And then you should let the pwrctrl driver control the upstream port. The upside
+here is that the pwrctrl driver already controls both 3.3v and reset-gpios
+(PERST#). So you do not need to have any change in the TC9563 driver.
+
+- Mani
+
+-- 
+மணிவண்ணன் சதாசிவம்
