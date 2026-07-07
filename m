@@ -1,207 +1,123 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 551D73F1AC8
-	for <linux-arm-msm@vger.kernel.org>; Tue,  7 Jul 2026 10:46:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A34383F1AC8;
+	Tue,  7 Jul 2026 10:47:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783421192; cv=none; b=Fu4cdRavtqhfbFoAYbFFpDpZobsqgXvE4zDMnpcYScoAna+7rijuQlXrl63mny2B9FzU0NTtEjgYmV8GUCMGt9o050adj1LvfNb6wKvO1pif3rzMARCPWsGD1HBRwpHIBA8yWnyBx1bnCO0JzZbXBMY0ZUo2AjsZUoUpc0GJZsE=
+	t=1783421262; cv=none; b=TclHGrPec0fHZ6cX74uAPHfe5JZqnItT9SsbFDNvdnrgM3zPHc/vZOmxjzTXSoURRezGSYwxWAGRZrdJtKqIiYu64joC/dmGHxVMNd04ZtXQx2lO5vmfEjk/Au0drFE+e6OKr+Jp1KqRyP6aff0nc7l/E4ETYdLGcVgRXBp9fds=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783421192; c=relaxed/simple;
-	bh=dJGZm6xgrWNtliSU9OgWPi2p5VsIjPkNDtyZPFEpkRI=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Qrl8dw4VxOzzHWzgR8I0AP/BqsmoehP8XmO1hSiDm+mKvPNCpn/sSbGpIURtlIuKJn27VvUh2n8879pzATSFUhPv4hb3mrhGAIe8V3RHC5X4AmjSvnZhzCUSjiizv6Apc9VswwC6omQiB8BubyQGFkq3QN8eM9VPx34xOBKwurg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=EHfO6r/J; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=K73B1P9W; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1783421262; c=relaxed/simple;
+	bh=K6XhXZvdxeZA7r5A4Qd3KUVGcGcAP3v98yAItEXMLbs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=f3GkjkvKE2epH65fvIw5FZ+E6RFNPL8iz04hICiL7ObezhLBrCNJ2d311ro1qGxVDyKnZ86MlSPVNZKGrziXH8LBC+osOwoOPoslMPJC/WZBMxowro/la17oXWhN+X21tCSP3wMz+3ji3RaAQC0i0lbj7rRVmWESvfCkm9rfQmY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nAwcbqQZ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="EHfO6r/J";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="K73B1P9W"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6678DjJQ3138631
-	for <linux-arm-msm@vger.kernel.org>; Tue, 7 Jul 2026 10:46:29 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=TCbdthLbsJdhdDNxeC6UmL
-	z4Tj//MHtLYfViflFsHgM=; b=EHfO6r/J6gr3azxlAc+sUdUsold6wc4ilO26Ep
-	bzeYC2qFPeAALOFzbe4FeQOi53aenaZhlZMVn5e2RUdgAj8o8FeycuYbPagb/YWE
-	rFb5qkSm+ubdfTriUNm3l+/Qx9VvLaxhvkjbM4LNuxh45qrKs0T6r/YOk2RUlU3v
-	wUr1CNwHmP4F71/7UDblbS/nnGk4VZRcSVZDd9HkAhlNuwob6e6rm+z8Ma4LCd3d
-	ynJtCuqdi9Qx1wHMNBFaCBLv9LEel+0UVc0FdIAZNJIzcRUO8sohkkL4aPdqorcg
-	nkxiJIk1B6MTJuQVyJAks2cLkG/CvNxGLN4LSXfJqDut9nyQ==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f8t159jfj-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 07 Jul 2026 10:46:29 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2ccafc5e82cso22268325ad.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 07 Jul 2026 03:46:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1783421188; x=1784025988; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=TCbdthLbsJdhdDNxeC6UmLz4Tj//MHtLYfViflFsHgM=;
-        b=K73B1P9W+Zkt6jClEiW8VhiMh1ayN9D78Al3NPFEj9dZQjxA7L/CjagY1nCx1V7hdI
-         2eLOHL4ueZfiZVvGv7LeIKV+5XPze6NwyZJ2Vr5qb4mnbBFanV2Tz3a5v6WArjKX14cY
-         x58hvX4bktGSjkpIe/NWR3puYzFAK3/j/TAhsfSPs8A0CIgLlvvPi8EaOkH9CBJnzfT1
-         nE1KXvfsGkUdB+6FB8imzB3HAz6PcKE6ldsbgekUH8Lb7pDFW/KFm917AaZXKsJlduL7
-         +Jatmyp6STDTj+42lCdh9j1FIEMsCcpFsQzBNoqbdSu8qGYcEF+J+uL4rtyug2xk6aJZ
-         7yxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783421188; x=1784025988;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=TCbdthLbsJdhdDNxeC6UmLz4Tj//MHtLYfViflFsHgM=;
-        b=SlZjFYDqEtzLcnDQKkqDqV78F37FUJUei1wPK2S7pOIOkCcOJJRonpTtBsg2R0yy0K
-         KPqwtffZMA/pn6pQRQlfCVUu1U0bdSE5mo487/1G+4VmgeYs3NwF3ZED6/oiyu/hZTOU
-         dcW+NtAPbPjQMRyZfh95mQbPrL1dVxZxpA5HdWtWaQqV1XHbYM6n4UUdfqmTGB2kXccd
-         hsZj5TRuIJdHtkc+HhL9yYsziWihgJF5TWrDyoOcjsX15B4gDLjUvJp+bR+7PMPFNQc3
-         f8kIzkPmnr7At/3kSkqOlWCAoAqzSmfYPmMghfMO0n8MQeSiaKLzop3bR3t9Db669QD/
-         PouA==
-X-Gm-Message-State: AOJu0YzNAkWJnE15+hAmpGJVu1QJw+l8CUZucSJ6qaFwDShtwO29Q/D+
-	lo5WPV16u2PxaZQuYZ/xdlIrLszwUnxEKp22l6XtLU+RcbrEI+0LUxRInnYWRxkdygsXPeSPXWL
-	//ywJkEHE81D5EJ3OXXDNX/b38C6JodrlvH9COQs0Y71mvVF3GvcDekkA3+vLNSGt2s7et16zF7
-	Wz
-X-Gm-Gg: AfdE7cnlmndDTqgQkWbn9SIfVB4khL8SGMx3RyGf+1Nlwxy+pa005mPh68rcnKtlry+
-	NY/S053YwFUKPVvNp18LQfr1uxaHfJdwJBbVqGxBoZJKUabot9TPA/nfweqb1NryNsuQfcaIwJP
-	VQm10BPVZn7unN1tQo2lVijp5S7JKSbvPpc+73+5R8HKIOpGcQNvhhcqe1rtebXv4+F4spfxoAZ
-	cOFVvtUw4zz8CX+Iwc3IXAu4IkAdm+3ifK2iJmeB5HvCI/YXPANUTrzcSbUGMIhwDIkGL5EZPp+
-	jpSE8oA2c8KHzUrB+J4/Uf6rTUTMmLFefz1VcKWcme4sM/luU8w45uF9fg6GKkEM7qth9N0FpP6
-	T9dbzgExXoCzcxP0nMhftzKH1U7zrTUonccPswEjX
-X-Received: by 2002:a17:902:e845:b0:2ca:ddbd:a19b with SMTP id d9443c01a7336-2ccbed26577mr45888505ad.28.1783421188096;
-        Tue, 07 Jul 2026 03:46:28 -0700 (PDT)
-X-Received: by 2002:a17:902:e845:b0:2ca:ddbd:a19b with SMTP id d9443c01a7336-2ccbed26577mr45888295ad.28.1783421187635;
-        Tue, 07 Jul 2026 03:46:27 -0700 (PDT)
-Received: from hu-gkohli-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ccc9c100adsm9388115ad.32.2026.07.07.03.46.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Jul 2026 03:46:27 -0700 (PDT)
-From: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-Date: Tue, 07 Jul 2026 16:16:16 +0530
-Subject: [PATCH v2] arm64: dts: qcom: purwa-iot-evk: Update TSENS thermal
- zone
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nAwcbqQZ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1BA301F000E9;
+	Tue,  7 Jul 2026 10:47:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783421260;
+	bh=LLhzkk/JgHcYgAhLZKjLeN62LByel6fmISiRV1ITuB4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=nAwcbqQZ6EYWFhU6Pa79F4DwZWj+s50w7KhSPUgAeSGSsvopOpj4c3CR6Dc4BvSKY
+	 UI/T4Y1V/RDDoyeFB8sXD2vSc8XMgX7PuHapXBY0cr7IWraSANQSAw1tuqycqvya7H
+	 EOLCy/nYmsu9fsBZZUMJw29VxKcXmmkS6wgUhpYDSoopqSIeazhcGwCvu+qGCZzZfm
+	 i6rrFcDrq00hFMpsTT5W6KK6td/K2YCAI1AB22h3luD//ahG1ub28FDnVRKZXh9KJy
+	 yczJHuo2utfhmEijYANtSxrq9T9w4QGeuL41lVe4jp1n6hobidMgbC6xXylCzlyKTK
+	 rSE3IBUcHgXTg==
+Date: Tue, 7 Jul 2026 11:47:16 +0100
+From: Lorenzo Stoakes <ljs@kernel.org>
+To: Pedro Falcato <pfalcato@suse.de>
+Cc: Andrew Morton <akpm@linux-foundation.org>, 
+	Russell King <linux@armlinux.org.uk>, Dinh Nguyen <dinguyen@kernel.org>, 
+	Simon Schuster <schuster.simon@siemens-energy.com>, 
+	"James E . J . Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
+	Jarkko Sakkinen <jarkko@kernel.org>, Thomas Gleixner <tglx@kernel.org>, 
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, Ian Abbott <abbotti@mev.co.uk>, 
+	H Hartley Sweeten <hsweeten@visionengravers.com>, Lucas Stach <l.stach@pengutronix.de>, 
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+	Patrik Jakobsson <patrik.r.jakobsson@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+	Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
+	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, Thierry Reding <thierry.reding@kernel.org>, 
+	Mikko Perttunen <mperttunen@nvidia.com>, Jonathan Hunter <jonathanh@nvidia.com>, 
+	Christian Koenig <christian.koenig@amd.com>, Huang Rui <ray.huang@amd.com>, Ankit Agrawal <ankita@nvidia.com>, 
+	Alex Williamson <alex@shazbot.org>, Alexander Viro <viro@zeniv.linux.org.uk>, 
+	Christian Brauner <brauner@kernel.org>, Dan Williams <djbw@kernel.org>, 
+	Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, 
+	David Hildenbrand <david@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
+	"Liam R . Howlett" <liam@infradead.org>, Matthew Wilcox <willy@infradead.org>, 
+	Marek Szyprowski <m.szyprowski@samsung.com>, Peter Zijlstra <peterz@infradead.org>, 
+	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>, 
+	Steven Rostedt <rostedt@goodmis.org>, SeongJae Park <sj@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>, 
+	Hugh Dickins <hughd@google.com>, Mike Rapoport <rppt@kernel.org>, Kees Cook <kees@kernel.org>, 
+	Paolo Bonzini <pbonzini@redhat.com>, linux-kernel@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org, linux-sgx@vger.kernel.org, 
+	etnaviv@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
+	freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org, kvm@vger.kernel.org, 
+	linux-fsdevel@vger.kernel.org, nvdimm@lists.linux.dev, linux-mm@kvack.org, 
+	iommu@lists.linux.dev, linux-perf-users@vger.kernel.org, 
+	linux-trace-kernel@vger.kernel.org, kasan-dev@googlegroups.com, damon@lists.linux.dev, 
+	Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>, Jann Horn <jannh@google.com>
+Subject: Re: [PATCH 29/30] tools/testing/vma: default VMA flag bits to 64-bit
+Message-ID: <akzZBrZC_ja-R-nJ@lucifer>
+References: <cover.1782735110.git.ljs@kernel.org>
+ <27cd07f6dd862d92410cf9db03f7c11e5f66854d.1782735110.git.ljs@kernel.org>
+ <akZO3xI4Lt1iSbms@pedro-suse.lan>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Message-Id: <20260707-purwa_high_tj-v2-1-b66f10ebf1cb@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAPfYTGoC/3WMQQ6CMBQFr0L+2hJagRZX3sMQUmih3wjFFlBDe
- ncrezcvmZfM7OC1Q+3hkuzg9IYe7RSBnRLojJwGTVBFBpaxMstpSebVvWRjcDDNcidFL3jLtSp
- 4V0F0Zqd7fB+9Wx3ZoF+s+xz5jf7ef6WNEkra4iz6SqicKXm13qfPVT46O45pHKhDCF/vOUNts
- QAAAA==
-X-Change-ID: 20260416-purwa_high_tj-5f87b7ed57c9
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, manaf.pallikunhi@oss.qualcomm.com,
-        Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1783421184; l=1556;
- i=gaurav.kohli@oss.qualcomm.com; s=20260302; h=from:subject:message-id;
- bh=dJGZm6xgrWNtliSU9OgWPi2p5VsIjPkNDtyZPFEpkRI=;
- b=dOjlVisINVRWXIbg5c3/Hs5y/8WUmIKpoJr8SXLeLtjeWGMob0pks6WVuLQGy7jfeZ/T2xxns
- ZiCnjtA+t/yAzcUe4tAW8UkaoLHSirPFVl+h1EzrvQhN3NxGdvUScYs
-X-Developer-Key: i=gaurav.kohli@oss.qualcomm.com; a=ed25519;
- pk=IdNsqe8rWsF6dbpGHfwPEH9zM0nbOdRH72HxUT9qPak=
-X-Proofpoint-GUID: ydMahGCYsh-JaCHgAK-SzIgLIAuibQgv
-X-Authority-Analysis: v=2.4 cv=HstG3UTS c=1 sm=1 tr=0 ts=6a4cd905 cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=rnUGh-oqUXyQQgXjzFoA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-ORIG-GUID: ydMahGCYsh-JaCHgAK-SzIgLIAuibQgv
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA3MDEwNCBTYWx0ZWRfX4RROfRXLE2lM
- r+f9rNyHpeEOpdzcWqNd5ilPj+ODJMCzwcSTHpkvtjJyw2ElGK9kTUzBEKZBBJRMdDMfychMBVP
- cJVzM/+fW+MuFWE4UYe37gU5KWElIUc=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA3MDEwNCBTYWx0ZWRfX63NG8hOZzWGf
- suBuc2QVNv6bof7UBrdAfSfN7ZRxEV6ZTrpklZ9/J6ZRhtysG8ikIvyWxqlvdQtTdvXRemlyCcR
- L5iMfKl+SvST0De3i7QjV+dx2t5SIYpDBSYX9seQSbDT9qlKUSqnkbMuh1WZbsyGyDumx2TUKXp
- vh3dHjdE3m48O2v5tS50mlRcPnG+6d/nsCn7chZbCzGjYWHzEyavb5FrEPFy6WvkBJmAbuQ3NDe
- ucUjQNNAmnDG/2YrIRymL8K9Lfw6vrI8WDRpC2T6JuwSHRaOOKalY1+/ECvpfSI9EoUUGq3vyaS
- u8bP+Bpcd8sf0ZenhV2LzR1h4KA01ETjGxgDE/Q6dQctvqtbg6w+99SbjT5RRa9Rsfrym9YP0Sc
- Mq3SHHQMJzl9Zz9B8rfjlWYEqpEl1KEaIqr2IjJD0K/bMOSx3bZmO4W/TqVpP5+EmdpfPp5svMH
- O26A7umiwDkyLlej03A==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-07_02,2026-07-06_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 impostorscore=0 suspectscore=0 malwarescore=0 bulkscore=0
- clxscore=1015 spamscore=0 adultscore=0 lowpriorityscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607070104
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <akZO3xI4Lt1iSbms@pedro-suse.lan>
 
-Purwa IOT boards support a different thermal junction temperature
-specification compared to the base Purwa platform due to package
-level differences.
+On Thu, Jul 02, 2026 at 12:44:21PM +0100, Pedro Falcato wrote:
+> On Mon, Jun 29, 2026 at 01:23:40PM +0100, Lorenzo Stoakes wrote:
+> > With all of the sanitisers turned on, setting the VMA flag bits depth to
+> > 128 by default results in overly long build times.
+> >
+> > Reduce this to 64 - we can always manipulate these later for testing of
+> > larger bitmaps as needed.
+> >
+>
+> Hmm, what's the problem with the sanitizers? Shouldn't this just result in
+> slightly different codegen?
 
-Update the passive trip thresholds to 105°C to align with the higher
-temperature specification.
+I'm not sure but it results in vastly longer build times. It was a fun idea but
+it partly defeats the point of the VMA userland tests.
 
-Signed-off-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
----
-Changes in v2:
-- Rebased patch to latest linux-next tip.
-- Link to v1: https://lore.kernel.org/r/20260416-purwa_high_tj-v1-1-b538f98d42da@oss.qualcomm.com
----
- arch/arm64/boot/dts/qcom/purwa-iot-evk.dts | 32 ++++++++++++++++++++++++++++++
- 1 file changed, 32 insertions(+)
+Rather than spend too long investigating I'd rather we move to a sane default.
 
-diff --git a/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts b/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-index ad503beec1d3..261d1e85651d 100644
---- a/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-+++ b/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-@@ -1325,6 +1325,38 @@ right_tweeter: speaker@0,1 {
- 	};
- };
- 
-+&thermal_gpuss_0 {
-+	trips {
-+		trip-point0 {
-+			temperature = <105000>;
-+		};
-+	};
-+};
-+
-+&thermal_gpuss_1 {
-+	trips {
-+		trip-point0 {
-+			temperature = <105000>;
-+		};
-+	};
-+};
-+
-+&thermal_gpuss_2 {
-+	trips {
-+		trip-point0 {
-+			temperature = <105000>;
-+		};
-+	};
-+};
-+
-+&thermal_gpuss_3 {
-+	trips {
-+		trip-point0 {
-+			temperature = <105000>;
-+		};
-+	};
-+};
-+
- &tlmm {
- 	edp_reg_en: edp-reg-en-state {
- 		pins = "gpio70";
+>
+> > Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
+> > ---
+> >  tools/testing/vma/Makefile | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/tools/testing/vma/Makefile b/tools/testing/vma/Makefile
+> > index e72b45dedda5..ef6cc558afe1 100644
+> > --- a/tools/testing/vma/Makefile
+> > +++ b/tools/testing/vma/Makefile
+> > @@ -10,7 +10,7 @@ OFILES = $(SHARED_OFILES) main.o shared.o maple-shim.o
+> >  TARGETS = vma
+> >
+> >  # These can be varied to test different sizes.
+> > -CFLAGS += -DNUM_VMA_FLAG_BITS=128 -DNUM_MM_FLAG_BITS=128
+> > +CFLAGS += -DNUM_VMA_FLAG_BITS=64 -DNUM_MM_FLAG_BITS=64
+> >
+> >  main.o: main.c shared.c shared.h vma_internal.h tests/merge.c tests/mmap.c tests/vma.c ../../../mm/vma.c ../../../mm/vma_init.c ../../../mm/vma_exec.c ../../../mm/vma.h include/custom.h include/dup.h include/stubs.h
+> >
+> > --
+> > 2.54.0
+> >
+>
+> --
+> Pedro
 
----
-base-commit: 8e9685d3c41c35dd1b37df70d854137abcb2fbac
-change-id: 20260416-purwa_high_tj-5f87b7ed57c9
-
-Best regards,
--- 
-Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-
+Thanks, Lorenzo
