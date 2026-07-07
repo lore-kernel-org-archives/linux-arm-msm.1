@@ -1,165 +1,254 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from bali.collaboradmins.com (bali.collaboradmins.com [148.251.105.195])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DD3A830D403;
-	Tue,  7 Jul 2026 10:17:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA68738E8BE;
+	Tue,  7 Jul 2026 10:18:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=148.251.105.195
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783419443; cv=none; b=iFd30XJHRb4+HAQ2gBYV0vfBmIhkaGoNPkKsq4hENdld5xPen3Q3ROiujeem/lRJb9NGQf/nND9JtXgz1FbLdRmThq59pTmOMEiXtZ4090UcHozBg4zAnl17N4agyJ3i1iQuLokiiF5O44j9w0A2pliSmlwDYR9+9wJLc74NvFg=
+	t=1783419509; cv=none; b=b1mY/VDWBxMF0hmq9I1rOrw91XaTQdCdGVwgzLUgQD4exigOZQvOXpcMhG9TFYN/ITEi1+cFunjVZ/xNAhF5r8D/0KYsLS9x4xtshelm/7ipXLyD8gC1FRx9fBMszdGl5RTfAm1m1iyYogo5eudO+PPeRivCB+4Or03gE+Gv634=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783419443; c=relaxed/simple;
-	bh=otIkrJ34PwtSzdRkCKl+4UR6U9X1i0nmtukZH91G9+Q=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ddDxQwLTl5LjZ533n9UswvuEJu4ExJa7TIWsZuzn3lg5rq8ELphr7y5l3ScoulaLoF8BDfeYIt1I794JwiKgy0THpg/6YLvEwD791I9dXmADynqBtzgEer83+/aZaAlbw6TdQMysiMnBpqa/xLw3ddnsg9c6jy1kAoslQKsUo9M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cGH+4V3q; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783419509; c=relaxed/simple;
+	bh=kZQRAY0+wf7tANwdQEEzmn2adWvwm631GfvPmgo1bcw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=DDf5vzLcFYImVExJjB9EEFR3mam4d0+JLqUbWaZkDI33KDZgp2IbQ4eZQVYsYOPM21PrCb02PDvuP6uARAAtt7M9Pb49m7K5zaotMDpX+nVxt56I35boCebMx/+CXtXFXbvHrnofvhbgNHH8yziJQPuBOef+2D1NL0yrgCHWkHE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b=W48hkeBy; arc=none smtp.client-ip=148.251.105.195
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cGH+4V3q"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 122461F000E9;
-	Tue,  7 Jul 2026 10:17:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783419441;
-	bh=mnyEnVNjUbkl63yjftBd6ZAUslZHuhLMLE5i1q1dbiA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=cGH+4V3qnWn/h2ntR4JOMP1MeFASTJyb/ukIFIKga6vmMPs4hWnZeyozgnP8o9zcj
-	 4aOepXlE5yG0XgvATIbejO38So9984JOSQXxfemV7MrbXTQdbQqJryZ7by0rmLtk6g
-	 KbyecrBlOO6RxZhZHoEJHQvN3lfQ+IRVIfllVkFrcFe5jzAzy0lAaGw02N38CG8Xem
-	 bIuNc24pIIBeQZLitf75XKOixE/v2BoAd9XaTV+y7NflJFaBKiVOSfh8s3qL1kjbV3
-	 QtnOkHzUZcffKxdXoostqrwbOmOdDgDEYFoMQefdIk5SYi6OuZQQ8BSF6bkbad2igD
-	 ZZ2I4X8hc6i0g==
-Date: Tue, 7 Jul 2026 11:16:56 +0100
-From: Lorenzo Stoakes <ljs@kernel.org>
-To: Zi Yan <ziy@nvidia.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>, 
-	Thomas Bogendoerfer <tsbogend@alpha.franken.de>, Madhavan Srinivasan <maddy@linux.ibm.com>, 
-	Michael Ellerman <mpe@ellerman.id.au>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Lucas Stach <l.stach@pengutronix.de>, Inki Dae <inki.dae@samsung.com>, 
-	Seung-Woo Kim <sw0312.kim@samsung.com>, Kyungmin Park <kyungmin.park@samsung.com>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, Peter Griffin <peter.griffin@linaro.org>, 
-	Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
-	Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>, 
-	Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>, 
-	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, Sandy Huang <hjc@rock-chips.com>, 
-	Heiko =?utf-8?Q?St=C3=BCbner?= <heiko@sntech.de>, Andy Yan <andy.yan@rock-chips.com>, 
-	Thierry Reding <thierry.reding@kernel.org>, Mikko Perttunen <mperttunen@nvidia.com>, 
-	Jonathan Hunter <jonathanh@nvidia.com>, Gerd Hoffmann <kraxel@redhat.com>, 
-	Dmitry Osipenko <dmitry.osipenko@collabora.com>, Zack Rusin <zack.rusin@broadcom.com>, 
-	Matthew Brost <matthew.brost@intel.com>, Thomas Hellstrom <thomas.hellstrom@linux.intel.com>, 
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, Helge Deller <deller@gmx.de>, Benjamin LaHaise <bcrl@kvack.org>, 
-	Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, 
-	Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, 
-	David Hildenbrand <david@kernel.org>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
-	"Liam R . Howlett" <liam@infradead.org>, Nico Pache <npache@redhat.com>, 
-	Ryan Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>, 
-	Lance Yang <lance.yang@linux.dev>, Hugh Dickins <hughd@google.com>, 
-	Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, 
-	Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, Jann Horn <jannh@google.com>, 
-	Pedro Falcato <pfalcato@suse.de>, Kees Cook <kees@kernel.org>, Jaroslav Kysela <perex@perex.cz>, 
-	Takashi Iwai <tiwai@suse.com>, linux-mips@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linuxppc-dev@lists.ozlabs.org, dri-devel@lists.freedesktop.org, etnaviv@lists.freedesktop.org, 
-	linux-arm-kernel@lists.infradead.org, linux-samsung-soc@vger.kernel.org, 
-	intel-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
-	nouveau@lists.freedesktop.org, linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org, 
-	virtualization@lists.linux.dev, intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org, 
-	linux-fbdev@vger.kernel.org, linux-aio@kvack.org, linux-fsdevel@vger.kernel.org, 
-	linux-mm@kvack.org, linux-sound@vger.kernel.org
-Subject: Re: [PATCH 03/13] mm: convert __get_unmapped_area() to use
- vma_flags_t
-Message-ID: <akzR7JQuaKEQpH5Y@lucifer>
-References: <cover.1782760670.git.ljs@kernel.org>
- <b1ad7c4443f5cba622e4c48c5a9ef15427001a93.1782760670.git.ljs@kernel.org>
- <DJRZGEZU5ESV.3IP5LEAUQJCBK@nvidia.com>
+	dkim=pass (2048-bit key) header.d=collabora.com header.i=@collabora.com header.b="W48hkeBy"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+	s=mail; t=1783419506;
+	bh=kZQRAY0+wf7tANwdQEEzmn2adWvwm631GfvPmgo1bcw=;
+	h=From:To:Cc:Subject:Date:From;
+	b=W48hkeByz7O/ceb8s8R92eJ1nVmwF26Prc8pDQvGBVVVdTivuKyzmsvNqma39qKES
+	 /kTyDCDsom0/cQxnWMc65uLFdgcrgCzI9Yi0efKLVLVirqIYujMpVsTGGd661pJbXe
+	 2WRp6m3tIm4+bxEhsVo1I8V8VZ0pie5k9i1Sl4cJt9uQPntDulqbicFBs4pQDNyh9+
+	 jgAI3lSy9eCrMPSa0lKbTB4CmPJrrwMPMBdqfW9b7Bcc8o6LYW4Lq7FE97Z+U1f6zA
+	 i43ZhiPpr1c/6fuqUcpN7sBJJY54c+uBodvqA6kNbruyTD1DfFq94vyCtVUze4rucp
+	 3xSkzYLY+sUJw==
+Received: from IcarusMOD.eternityproject.eu (unknown [100.64.1.21])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange x25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	(No client certificate requested)
+	(Authenticated sender: kholk11)
+	by bali.collaboradmins.com (Postfix) with ESMTPSA id 1B44217E0795;
+	Tue, 07 Jul 2026 12:18:25 +0200 (CEST)
+From: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+To: jic23@kernel.org,
+	sboyd@kernel.org
+Cc: dlechner@baylibre.com,
+	nuno.sa@analog.com,
+	andy@kernel.org,
+	arnd@arndb.de,
+	gregkh@linuxfoundation.org,
+	srini@kernel.org,
+	vkoul@kernel.org,
+	neil.armstrong@linaro.org,
+	sre@kernel.org,
+	angelogioacchino.delregno@collabora.com,
+	krzk@kernel.org,
+	dmitry.baryshkov@oss.qualcomm.com,
+	quic_wcheng@quicinc.com,
+	melody.olvera@oss.qualcomm.com,
+	quic_nsekar@quicinc.com,
+	ivo.ivanov.ivanov1@gmail.com,
+	abelvesa@kernel.org,
+	luca.weiss@fairphone.com,
+	konrad.dybcio@oss.qualcomm.com,
+	mitltlatltl@gmail.com,
+	krishna.kurapati@oss.qualcomm.com,
+	linux-arm-msm@vger.kernel.org,
+	linux-iio@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-phy@lists.infradead.org,
+	linux-pm@vger.kernel.org,
+	kernel@collabora.com
+Subject: [PATCH v11 00/12] SPMI: Implement sub-devices and migrate drivers
+Date: Tue,  7 Jul 2026 12:18:09 +0200
+Message-ID: <20260707101821.173319-1-angelogioacchino.delregno@collabora.com>
+X-Mailer: git-send-email 2.54.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <DJRZGEZU5ESV.3IP5LEAUQJCBK@nvidia.com>
+Content-Transfer-Encoding: 8bit
 
-On Mon, Jul 06, 2026 at 10:28:24PM -0400, Zi Yan wrote:
-> On Mon Jun 29, 2026 at 3:25 PM EDT, Lorenzo Stoakes wrote:
-> > Update __get_unmapped_area() to be parameterised by vma_flags_t rather than
-> > vm_flags_t as part of the effort to move VMA flags from a system word to a
-> > bitmap.
-> >
-> > We cascade the changes up to arch_get_unmapped_area_topdown() and
-> > arch_get_unmapped_area(), where, for now, we use vma_flags_to_legacy() in
-> > order to propagate the VMA flags.
-> >
-> > No functional change intended.
-> >
-> > Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
-> > ---
-> >  fs/hugetlbfs/inode.c     |  3 ++-
-> >  include/linux/huge_mm.h  | 10 +++++-----
-> >  include/linux/mm.h       |  6 ++++--
-> >  include/linux/sched/mm.h | 12 ++++++------
-> >  mm/huge_memory.c         | 21 ++++++++++++---------
-> >  mm/mmap.c                | 27 ++++++++++++++-------------
-> >  6 files changed, 43 insertions(+), 36 deletions(-)
-> >
-> <snip>
->
-> > diff --git a/include/linux/sched/mm.h b/include/linux/sched/mm.h
-> > index 95d0040df584..b301ec90740a 100644
-> > --- a/include/linux/sched/mm.h
-> > +++ b/include/linux/sched/mm.h
-> > @@ -193,12 +193,12 @@ unsigned long mm_get_unmapped_area(struct file *filp, unsigned long addr,
-> >  				   unsigned long len, unsigned long pgoff,
-> >  				   unsigned long flags);
-> >
-> > -unsigned long mm_get_unmapped_area_vmflags(struct file *filp,
-> > -					   unsigned long addr,
-> > -					   unsigned long len,
-> > -					   unsigned long pgoff,
-> > -					   unsigned long flags,
-> > -					   vm_flags_t vm_flags);
-> > +unsigned long mm_get_unmapped_area_vmaflags(struct file *filp,
-> > +					    unsigned long addr,
-> > +					    unsigned long len,
-> > +					    unsigned long pgoff,
-> > +					    unsigned long flags,
-> > +					    vma_flags_t vma_flags);
->
-> Want to use two-tab indentation while at it?
+Changes in v11:
+ - Use kzalloc_obj() in spmi_subdevice_alloc_and_add()
+ - Introduced new helper to get a parent SPMI device which verifies
+   both if the device has parent and if that parent is effectively
+   a SPMI device type
+ - Removed dev->parent NULL checks in all migration code, as that
+   is now being checked in the new helper instead, reducing the
+   amount of required lines of code to instantiate a SPMI subdevice
+ - Moved of_node reference dropping to dev release callback (Sashiko)
+ - Rebased over next-20260706
 
-Yeah sure will fix on respin!
+Changes in v10:
+ - Add use-after-free fix rebased to before this series, as the v1 of
+   that did not apply cleanly on a tree without this series applied
+ - Replace unsafe to_spmi_device() with spmi_find_device_by_of_node() (Sashiko)
+ - Fix -Wformat warning in dev_set_name call (Sashiko)
 
->
-> <snip>
->
-> > @@ -812,19 +811,20 @@ arch_get_unmapped_area_topdown(struct file *filp, unsigned long addr,
-> >  }
-> >  #endif
-> >
-> > -unsigned long mm_get_unmapped_area_vmflags(struct file *filp, unsigned long addr,
-> > -					   unsigned long len, unsigned long pgoff,
-> > -					   unsigned long flags, vm_flags_t vm_flags)
-> > +unsigned long mm_get_unmapped_area_vmaflags(struct file *filp, unsigned long addr,
-> > +					    unsigned long len, unsigned long pgoff,
-> > +					    unsigned long flags, vma_flags_t vma_flags)
->
-> Ditto.
+Changes in v9:
+ - Added check for dev->parent where missing (Sashiko)
+ - Changed %d to %u in dev_set_name() call as arg is unsigned (Sashiko)
+ - Propagating error code from devm_regmap_init_spmi_ext() instead of
+   returning -ENODEV in phy-qcom-eusb2-repeater.c (Sashiko)
+ - Rebased over next-20260605 (no conflicts anyway)
 
-Ack will fix!
+Changes in v8:
+ - Renamed *res to *sub_sdev in devm_spmi_subdevice_remove() (Andy)
+ - Changed kerneldoc wording to "error pointer" for function
+   spmi_subdevice_alloc_and_add() (Andy)
+ - Shuffled around some assignments in spmi_subdevice_alloc_and_add() (Andy)
+ - Used device_property_read_u32() instead of of_property_read_u32()
+   in all of the migrated drivers (Andy)
+ - Changed .max_register field in all of the migrated drivers from
+   0x100 to 0xff (Andy)
+ - Kept `sta1` declaration in reversed xmas tree order in function
+   iadc_poll_wait_eoc() of qcom-spmi-iadc.c (Andy)
 
->
-> LGTM.
->
-> Reviewed-by: Zi Yan <ziy@nvidia.com>
+Changes in v7:
+ - Added commit to cleanup redundant dev_name() in the pre-existing
+   spmi_device_add() function
+ - Added commit removing unneeded goto and improving spmi_device_add()
+   readability by returning error in error path, and explicitly zero
+   for success at the end.
 
-Thanks!
+Changes in v6:
+ - Added commit to convert spmi.c to %pe error format and used
+   %pe error format in spmi_subdevice code as wanted by Uwe Kleine-Konig
 
->
->
-> --
-> Best Regards,
-> Yan, Zi
->
+Changes in v5:
+ - Changed dev_err to dev_err_probe in qcom-spmi-sdam (and done
+   that even though I disagree - because I wanted this series to
+   *exclusively* introduce the minimum required changes to
+   migrate to the new API, but okay, whatever....!);
+ - Added missing REGMAP dependency in Kconfig for qcom-spmi-sdam,
+   phy-qcom-eusb2-repeater and qcom-coincell to resolve build
+   issues when the already allowed COMPILE_TEST is enabled
+   as pointed out by the test robot's randconfig builds.
 
-Cheers, Lorenzo
+Changes in v4:
+ - Added selection of REGMAP_SPMI in Kconfig for qcom-coincell and
+   for phy-qcom-eusb2-repeater to resolve undefined references when
+   compiled with some randconfig
+
+Changes in v3:
+ - Fixed importing "SPMI" namespace in spmi-devres.c
+ - Removed all instances of defensive programming, as pointed out by
+   jic23 and Sebastian
+ - Removed explicit casting as pointed out by jic23
+ - Moved ida_free call to spmi_subdev_release() and simplified error
+   handling in spmi_subdevice_alloc_and_add() as pointed out by jic23
+
+Changes in v2:
+ - Fixed missing `sparent` initialization in phy-qcom-eusb2-repeater
+ - Changed val_bits to 8 in all Qualcomm drivers to ensure
+   compatibility as suggested by Casey
+ - Added struct device pointer in all conversion commits as suggested
+   by Andy
+ - Exported newly introduced functions with a new "SPMI" namespace
+   and imported the same in all converted drivers as suggested by Andy
+ - Added missing error checking for dev_set_name() call in spmi.c
+   as suggested by Andy
+ - Added comma to last entry of regmap_config as suggested by Andy
+
+While adding support for newer MediaTek platforms, featuring complex
+SPMI PMICs, I've seen that those SPMI-connected chips are internally
+divided in various IP blocks, reachable in specific contiguous address
+ranges... more or less like a MMIO, but over a slow SPMI bus instead.
+
+I recalled that Qualcomm had something similar... and upon checking a
+couple of devicetrees, yeah - indeed it's the same over there.
+
+What I've seen then is a common pattern of reading the "reg" property
+from devicetree in a struct member and then either
+ A. Wrapping regmap_{read/write/etc}() calls in a function that adds
+    the register base with "base + ..register", like it's done with
+    writel()/readl() calls; or
+ B. Doing the same as A. but without wrapper functions.
+
+Even though that works just fine, in my opinion it's wrong.
+
+The regmap API is way more complex than MMIO-only readl()/writel()
+functions for multiple reasons (including supporting multiple busses
+like SPMI, of course) - but everyone seemed to forget that regmap
+can manage register base offsets transparently and automatically in
+its API functions by simply adding a `reg_base` to the regmap_config
+structure, which is used for initializing a `struct regmap`.
+
+So, here we go: this series implements the software concept of an SPMI
+Sub-Device (which, well, also reflects how Qualcomm and MediaTek's
+actual hardware is laid out anyway).
+
+               SPMI Controller
+                     |                ______
+                     |               /       Sub-Device 1
+                     V              /
+              SPMI Device (PMIC) ----------- Sub-Device 2
+                                    \
+                                     \______ Sub-Device 3
+
+As per this implementation, an SPMI Sub-Device can be allocated/created
+and added in any driver that implements a... well.. subdevice (!) with
+an SPMI "main" device as its parent: this allows to create and finally
+to correctly configure a regmap that is specific to the sub-device,
+operating on its specific address range and reading, and writing, to
+its registers with the regmap API taking care of adding the base address
+of a sub-device's registers as per regmap API design.
+
+All of the SPMI Sub-Devices are therefore added as children of the SPMI
+Device (usually a PMIC), as communication depends on the PMIC's SPMI bus
+to be available (and the PMIC to be up and running, of course).
+
+Summarizing the dependency chain (which is obvious to whoever knows what
+is going on with Qualcomm and/or MediaTek SPMI PMICs):
+    "SPMI Sub-Device x...N" are children "SPMI Device"
+    "SPMI Device" is a child of "SPMI Controller"
+
+(that was just another way to say the same thing as the graph above anyway).
+
+Along with the new SPMI Sub-Device registration functions, I have also
+performed a conversion of some Qualcomm SPMI drivers and only where the
+actual conversion was trivial.
+
+I haven't included any conversion of more complex Qualcomm SPMI drivers
+because I don't have the required bandwidth to do so (and besides, I think,
+but haven't exactly verified, that some of those require SoCs that I don't
+have for testing anyway).
+
+AngeloGioacchino Del Regno (12):
+  spmi: Fix potential use-after-free by grabbing of_node reference
+  spmi: Remove redundant dev_name() print in spmi_device_add()
+  spmi: Print error status with %pe format
+  spmi: Remove unneeded goto in spmi_device_add() error path
+  spmi: Implement spmi_subdevice_alloc_and_add() and devm variant
+  spmi: Add helper to get a parent SPMI device
+  nvmem: qcom-spmi-sdam: Migrate to devm_spmi_subdevice_alloc_and_add()
+  power: reset: qcom-pon: Migrate to devm_spmi_subdevice_alloc_and_add()
+  phy: qualcomm: eusb2-repeater: Migrate to
+    devm_spmi_subdevice_alloc_and_add()
+  misc: qcom-coincell: Migrate to devm_spmi_subdevice_alloc_and_add()
+  iio: adc: qcom-spmi-iadc: Migrate to
+    devm_spmi_subdevice_alloc_and_add()
+  iio: adc: qcom-spmi-iadc: Remove regmap R/W wrapper functions
+
+ drivers/iio/adc/qcom-spmi-iadc.c              | 116 ++++++++--------
+ drivers/misc/Kconfig                          |   2 +
+ drivers/misc/qcom-coincell.c                  |  45 +++++--
+ drivers/nvmem/Kconfig                         |   1 +
+ drivers/nvmem/qcom-spmi-sdam.c                |  41 ++++--
+ drivers/phy/qualcomm/Kconfig                  |   2 +
+ .../phy/qualcomm/phy-qcom-eusb2-repeater.c    |  52 +++++---
+ drivers/power/reset/qcom-pon.c                |  31 +++--
+ drivers/spmi/spmi-devres.c                    |  24 ++++
+ drivers/spmi/spmi.c                           | 124 ++++++++++++++++--
+ include/linux/spmi.h                          |  17 +++
+ 11 files changed, 328 insertions(+), 127 deletions(-)
+
+-- 
+2.54.0
+
