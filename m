@@ -1,210 +1,347 @@
-Received: from leonov.paulk.fr (leonov.paulk.fr [185.233.101.22])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yx1-f48.google.com (mail-yx1-f48.google.com [74.125.224.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2BF842A171;
-	Tue,  7 Jul 2026 14:06:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.233.101.22
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783433200; cv=none; b=d8AcAJLf0WL6Gk/8uPDAjKCdA6Ax53ayVD2A1x/85KOBRsr5KIEhSrTcFeliIn2c/AWCRbTiPMszSFTmff5/+nL01AFQHY4ukA1jOSZMQ2jt5wf8gJDwmCXdc7oJG235WXWA/rBE0UyIGXb224hpdCToHWjSGgCPFKvikyeWx34=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783433200; c=relaxed/simple;
-	bh=cDkkd24TuEhRoo77Q3IfPX4+7jMgAhu1podNsQgsZr4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=hmrxCc78Fs6pc0cJqNCuW0UxNSQ0Tl4JKaSrPDfJxOOLtBqA9hSG073KiwBAkKloMxLlAFJv1g/ZUk73i8YWyfkeBf3Y6/AhNqh9uUm0Gahtz2GMezBRickUbNWATDUsolzu3piujGy6SNFUVov8bwmop+oucBOqElA7InOtJ7Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sys-base.io; spf=pass smtp.mailfrom=sys-base.io; arc=none smtp.client-ip=185.233.101.22
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sys-base.io
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sys-base.io
-Received: from laika.paulk.fr (12.234.24.109.rev.sfr.net [109.24.234.12])
-	by leonov.paulk.fr (Postfix) with ESMTPS id 0779A3700300;
-	Tue,  7 Jul 2026 14:05:41 +0000 (UTC)
-Received: by laika.paulk.fr (Postfix, from userid 65534)
-	id D50AEAE5EC0; Tue,  7 Jul 2026 14:05:33 +0000 (UTC)
-X-Spam-Level: 
-Received: from shepard (unknown [192.168.1.1])
-	by laika.paulk.fr (Postfix) with ESMTPSA id B6432AE5EB6;
-	Tue,  7 Jul 2026 14:05:21 +0000 (UTC)
-Date: Tue, 7 Jul 2026 16:05:19 +0200
-From: Paul Kocialkowski <paulk@sys-base.io>
-To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Liviu Dudau <liviu.dudau@arm.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-	Joel Stanley <joel@jms.id.au>,
-	Andrew Jeffery <andrew@codeconstruct.com.au>,
-	Paul Cercueil <paul@crapouillou.net>,
-	Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
-	Linus Walleij <linusw@kernel.org>, Chen-Yu Tsai <wens@kernel.org>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Samuel Holland <samuel@sholland.org>,
-	Alexey Brodkin <abrodkin@synopsys.com>,
-	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
-	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
-	Michal Simek <michal.simek@amd.com>,
-	Daniel Scally <dan.scally@ideasonboard.com>,
-	Jacopo Mondi <jacopo.mondi@ideasonboard.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Eddie James <eajames@linux.ibm.com>,
-	Tiffany Lin <tiffany.lin@mediatek.com>,
-	Andrew-CT Chen <andrew-ct.chen@mediatek.com>,
-	Yunfei Dong <yunfei.dong@mediatek.com>,
-	Minghsiu Tsai <minghsiu.tsai@mediatek.com>,
-	Houlong Wei <houlong.wei@mediatek.com>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	Joseph Liu <kwliu@nuvoton.com>, Marvin Lin <kflin@nuvoton.com>,
-	Dmitry Osipenko <dmitry.osipenko@collabora.com>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Thierry Reding <thierry.reding@kernel.org>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Arnd Bergmann <arnd@arndb.de>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Ge Gordon <gordon.ge@bst.ai>,
-	Adrian Hunter <adrian.hunter@intel.com>,
-	Ulf Hansson <ulfh@kernel.org>, Rob Herring <robh@kernel.org>,
-	Saravana Kannan <saravanak@kernel.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>,
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-	Shengjiu Wang <shengjiu.wang@gmail.com>,
-	Xiubo Li <Xiubo.Lee@gmail.com>, Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>, Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Peter Ujfalusi <peter.ujfalusi@linux.intel.com>,
-	Bard Liao <yung-chuan.liao@linux.intel.com>,
-	Daniel Baluta <daniel.baluta@nxp.com>,
-	Orson Zhai <orsonzhai@gmail.com>,
-	Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Peter Chen <peter.chen@cixtech.com>,
-	Fugang Duan <fugang.duan@cixtech.com>,
-	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
-	BST Linux Kernel Upstream Group <bst-upstream@bstai.top>,
-	Fabio Estevam <festevam@gmail.com>,
-	Nicolin Chen <nicoleotsuka@gmail.com>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Kai Vehmanen <kai.vehmanen@linux.intel.com>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	Vijendar Mukunda <Vijendar.Mukunda@amd.com>,
-	Chunyan Zhang <zhang.lyra@gmail.com>,
-	CIX Linux Kernel Upstream Group <cix-kernel-upstream@cixtech.com>,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, linux-aspeed@lists.ozlabs.org,
-	linux-arm-kernel@lists.infradead.org, linux-mips@vger.kernel.org,
-	linux-sunxi@lists.linux.dev, linux-media@vger.kernel.org,
-	openbmc@lists.ozlabs.org, linux-mediatek@lists.infradead.org,
-	kernel@collabora.com, linux-tegra@vger.kernel.org,
-	linux-mmc@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-remoteproc@vger.kernel.org, linux-staging@lists.linux.dev,
-	linux-sound@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-	imx@lists.linux.dev, sound-open-firmware@alsa-project.org
-Subject: Re: [PATCH 30/42] staging: media: cedrus: Use
- devm_of_reserved_mem_device_init()
-Message-ID: <ak0HnzMzGT_WZ9u1@shepard>
-References: <20260703193855.110619-1-mukesh.ojha@oss.qualcomm.com>
- <20260703193855.110619-31-mukesh.ojha@oss.qualcomm.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51AA5313E29
+	for <linux-arm-msm@vger.kernel.org>; Tue,  7 Jul 2026 14:09:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.224.48
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783433363; cv=pass; b=l+Gc3ldWs2Nm9nuzeg47g/ubozj/QfAgKc3c6+VStk6/KH8bR3PSuge0nGDNOnj3pFCJXCX2Okp0dyuwfhfuc88EnQ1JLxnHQHRsQbBhOd9nUf1nGhUVFeLl+r3DVl7CP6oK7Ft3boQvvdfeHqKCklIjlCjXYQmJmggJs+sohPs=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783433363; c=relaxed/simple;
+	bh=4Gk/T7gcb9Frs7VwcGVHH2iC1ABibfBUNLCg4sA29Ho=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=oPUY9PAhTqGjOGSI7EF99FGrlPvjtY0GH510Me/YI+eeoVTPjt1iKOliTzHRuKbQn/XMys6FplGMrssWyZ/tidOJY2Ewvf+nxrlhwNUMwQX8wHb2hUODK9jxoJO5m+nU3zx1cgqItYhBOY+QW1m6FqACdFbtWNUAu7HVgq16sTU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=igV8La/b; arc=pass smtp.client-ip=74.125.224.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="igV8La/b"
+Received: by mail-yx1-f48.google.com with SMTP id 956f58d0204a3-664ce3000e6so3550197d50.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 07 Jul 2026 07:09:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783433360; cv=none;
+        d=google.com; s=arc-20260327;
+        b=bvIWDsS3QE710urRAzc+7A+tLqsG8qW96b+oJxuEpADXPI9/Sf/ZTF5wVOTvhhU0Mu
+         /x4zvddFeOEZg/FYYvUzatrCoXn5yMDcQ7vh3i84vnyBcr0F1yQ17eCvI/JWNjbjJDTJ
+         rkcWiO6dfsmVyYIetK+Wd3pKRtM0uNyIG9Va9GNqQ2eJd7g6Wm87leu+FCIaMuTXP9ES
+         /23OW7lT31mkEIxn91qiWp3gUiBoat1qx36mgA1VzSSaH9MbH+uX7A/Fskl3NbJ9Zshs
+         ocZJE9fQuQ3SPBRWmWXcfhGQSjJDT8xxGBNAnsZnC2pEgx9KNk1wbbaxzmdUfjqrsESJ
+         WBMg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=AdoCQ4ZX5BtlQtLCqarU4DocdJVuupPvE5g+WnHkPbY=;
+        fh=A2cj0DJNfZ3fW3+GtmQ2Ks6B/s+JXJ8uoK2RMH4OBkE=;
+        b=q1fwys4VAmjP9gfzkaFsv2Umb1Fs8Gr/qtWyBflwDk+9ect2KhLm8y+gLzwLF9SzKl
+         0JybFyQWgrMSj3x/i38pf+WMP2MWSAWuFNKP5obUjZ1rCk2zYqKMWMnrWSec0Wileg7V
+         kAGwWX2vDBHr07MjFAUNkVb+dR8psgEH5PioPZazheMotp7vYM4H+7sq9YDFUqt3du9S
+         mFBd3zXTprKv9rWLPFLyauBlaAGC5W7y3p2HagHbYoA3vP+HbG/2tUFZCBo6tBLZrecc
+         s0d3wVocO+11ylE+dCG9MCAVw9GFObREDQCWujYyInwu2ddCK0x1L+Wz4oVzOOFB1rxH
+         L0OA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1783433360; x=1784038160; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=AdoCQ4ZX5BtlQtLCqarU4DocdJVuupPvE5g+WnHkPbY=;
+        b=igV8La/bD7l0S3iQ8CEZJyztpRYbJ8r69cKY2/4pp+PjZeuN6BII0gPCZMBTlMmW+8
+         s2R03uC3fiNd2DLLh/QPhA1kxWhyMqnpe/GpXmv+ZLwGQnLKVTk50yXr5NXKFNsX9Ayj
+         lrKlpt+pVhHSd54FDMYlJxg4UNlqZqrJTRm9Vl/UYXAvaIchRrmMtWfQvBUYBqBLBSHG
+         IVzBnAqo8Dv1eFNoTgzUhSYd28M292oCcD56GEx90tr1WokrXJuxav1H6kNO0BweQH7m
+         sIJqyVuoy427zWAjlSs0n54QPqMMYRj4yX1v2Webr6SVFX+/qgEVNxWtOOOsATvZ1xPS
+         8vgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783433360; x=1784038160;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=AdoCQ4ZX5BtlQtLCqarU4DocdJVuupPvE5g+WnHkPbY=;
+        b=ZSyVaXrSdUPExm5EMB6TljjgUtOkCaZ3GZGfGJYobqOy4FMTknH3xd6XS/HvHU0jK8
+         POpiyovwRXzKGFQXnsuNiOxxkDamk7Rq6mXQIkitHITA96UAG+yZerSC0MBhs0GL1UPN
+         1VNl9tOS8Ce35DMUXs0kODml8pgM+XFvpqrIcTS1S3eQf+12+9R+GKB2Igx/Z2PzYBdW
+         7rEXXa2AKJMinnYh4fzN0MSbo3pq1MMgMM9QAD1Ra51jKk/byJLJE0FAzIrtkwyHqMKz
+         yxOWopaQEEmvru5YcbSVIMb9gOQK7Rn1Hx8h9l9qSwx74GQima+qPJhP43sJnYIG6td2
+         V5sQ==
+X-Forwarded-Encrypted: i=1; AHgh+RqD+WAVmybWjBrR4MPRm4XljsvE1bTz0JNkkQuiEeFHSK4nTLpKaHVuRmoUj6SP1C23vMbEJSs7wmAvUgbp@vger.kernel.org
+X-Gm-Message-State: AOJu0YydXLFrwHdNBmSh+ZcHdraEYpF7//RVxs9bTIWPQ19EEvdQlQ3D
+	lRmllbWaanXP94miG03Vxp0x8ap1RVpVek/OtCsqliwBZ2ag7tqwi00XxMOPTWlbams7O2FWSnI
+	qWRKsV4sL9tkwMu8n1qyBoit/GRAfuCE=
+X-Gm-Gg: AfdE7cn+/VhPyQpIoq4umCsNy1bzY6DLgvX+Vu30zIr8LRFk0J5pGZXbVhntZd0gz08
+	960yv2yjXn57UJVj1C1uRVJIIFuDSS2RNmuR5bbbM7eJYvA9dDAKat2Nju2HjGebzivr2y1pPHD
+	08udij4zNkBGmwtnF35kcyhX8OdBcogb0mBaY+1TGBPjZ1QkKP7lu5L0IfRXp+my02yF4tLd8vD
+	9rqDTMcYIDEKoAWCtFNzEvD30wBXNkN1r85R7qeiWyhxJcVXzmvIG07AHebqch3VIbAjKefm3cK
+	U8+OOP2Ej7mxGOK6ZBdkZ5w6ACMaiTfInCJRa+ZpMyLuryYCB3hDl58LE/I=
+X-Received: by 2002:a05:690e:1c08:b0:667:7750:14cb with SMTP id
+ 956f58d0204a3-6677f7ec627mr3586743d50.0.1783433359929; Tue, 07 Jul 2026
+ 07:09:19 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="L/gXhcj/KYS6Adou"
-Content-Disposition: inline
-In-Reply-To: <20260703193855.110619-31-mukesh.ojha@oss.qualcomm.com>
-
---L/gXhcj/KYS6Adou
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+References: <20260707093426.372897-1-xiuzhuo.shang@oss.qualcomm.com>
+In-Reply-To: <20260707093426.372897-1-xiuzhuo.shang@oss.qualcomm.com>
+From: Luiz Augusto von Dentz <luiz.dentz@gmail.com>
+Date: Tue, 7 Jul 2026 10:09:07 -0400
+X-Gm-Features: AVVi8CdhspMrbH2pvJNN8ASf_Zebyq0dNRZdvHpxPbku9FW2X3yUDminqy4JhvU
+Message-ID: <CABBYNZ+X-+ZJYz-V-_QSP5kCJpJJaBiyO=wMHD+Ut+b=639t2Q@mail.gmail.com>
+Subject: Re: [PATCH v1] Bluetooth: MGMT: Fix discovery state race against
+ cmd_sync worker
+To: Xiuzhuo Shang <xiuzhuo.shang@oss.qualcomm.com>
+Cc: Bartosz Golaszewski <brgl@kernel.org>, Marcel Holtmann <marcel@holtmann.org>, linux-arm-msm@vger.kernel.org, 
+	linux-bluetooth@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	cheng.jiang@oss.qualcomm.com, quic_chezhou@quicinc.com, 
+	wei.deng@oss.qualcomm.com, shuai.zhang@oss.qualcomm.com, 
+	mengshi.wu@oss.qualcomm.com, jinwang.li@oss.qualcomm.com
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi Mukesh,
+Hi Xiuzhuo,
 
-On Sat 04 Jul 26, 01:08, Mukesh Ojha wrote:
-> Use the devres-managed devm_of_reserved_mem_device_init() instead of
-> the manual of_reserved_mem_device_init()/of_reserved_mem_device_release()
-> pair, letting the device resource manager handle cleanup automatically.
+On Tue, Jul 7, 2026 at 5:34=E2=80=AFAM Xiuzhuo Shang
+<xiuzhuo.shang@oss.qualcomm.com> wrote:
+>
+> start_discovery_internal(), start_service_discovery() and stop_discovery(=
+)
+> queue a cmd_sync work item and only then move the discovery state machine
+> into its transient value (DISCOVERY_STARTING / DISCOVERY_STOPPING):
+>   err =3D hci_cmd_sync_queue(hdev, ..._sync, cmd, ..._complete);
+>   if (err < 0) { ... }
+>   hci_discovery_set_state(hdev, DISCOVERY_STARTING /* or STOPPING */);
+> The matching completion callbacks run on hdev->req_workqueue serialised
+> by hci_req_sync_lock, which is independent of hdev->lock. So once the
+> work has been queued, the worker can be scheduled, run the sync function
+> and invoke the completion before the caller has executed the trailing
+> hci_discovery_set_state(). The completion's success path writes the
+> terminal state (DISCOVERY_STOPPED for stop, DISCOVERY_FINDING for start);
+> the caller then overwrites it with the transient value, and the state
+> machine is wedged: every subsequent Start (Service) Discovery is
+> rejected by the DISCOVERY_STOPPED gate with MGMT_STATUS_BUSY (0x0a),
+> with no HCI traffic generated, until bluetoothd or the adapter is
+> restarted.
+> Fix it in three parts:
+>   1. In all three call sites move hci_discovery_set_state(STARTING /
+>      STOPPING) to before hci_cmd_sync_queue(). The transient state is
+>      therefore always published before any worker can run the
+>      completion. On queue-submit failure, roll back to
+>      DISCOVERY_STOPPED.
+>   2. In start_discovery_complete() and stop_discovery_complete(), wrap
+>      the terminal hci_discovery_set_state() call with
+>      hci_dev_lock() / hci_dev_unlock(). These callbacks run without
+>      hdev->lock; serialising the state write matches the pattern used
+>      by mgmt_set_powered_complete() and removes any residual ordering
+>      hazard against a concurrent mgmt path holding hdev->lock.
+>   3. Generalise the "ignore -ECANCELED" early return in both completion
+>      callbacks to "on any err < 0, also reset the transient state to
+>      STOPPED". With (1) in place the state observed at completion time
+>      is always known.
+>      For the stop path this also fixes a pre-existing wedge: when any
+>      sub-command issued from hci_stop_discovery_sync() returns an
+>      error, stop_discovery_complete() is invoked with err < 0. The
+>      existing "if (!err) set_state(STOPPED)" tail then skips the reset
+>      and the state machine sits in DISCOVERY_STOPPING forever.
 
-Thanks for your work!
+Needs the Fixes tag since we might want to backport.
 
-> Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+> Signed-off-by: Xiuzhuo Shang <xiuzhuo.shang@oss.qualcomm.com>
 > ---
->  drivers/staging/media/sunxi/cedrus/cedrus_hw.c | 6 +-----
->  1 file changed, 1 insertion(+), 5 deletions(-)
->=20
-> diff --git a/drivers/staging/media/sunxi/cedrus/cedrus_hw.c b/drivers/sta=
-ging/media/sunxi/cedrus/cedrus_hw.c
-> index 444fb53878d1..7b5aa94064a1 100644
-> --- a/drivers/staging/media/sunxi/cedrus/cedrus_hw.c
-> +++ b/drivers/staging/media/sunxi/cedrus/cedrus_hw.c
-> @@ -266,7 +266,7 @@ int cedrus_hw_probe(struct cedrus_dev *dev)
->  		return ret;
->  	}
-> =20
-> -	ret =3D of_reserved_mem_device_init(dev->dev);
-> +	ret =3D devm_of_reserved_mem_device_init(dev->dev);
->  	if (ret && ret !=3D -ENODEV) {
->  		dev_err(dev->dev, "Failed to reserve memory\n");
-> =20
-> @@ -341,8 +341,6 @@ int cedrus_hw_probe(struct cedrus_dev *dev)
->  err_sram:
->  	sunxi_sram_release(dev->dev);
->  err_mem:
-
-Could you also remove this label and switch the goto user to a regular
-return ret?
-
-Thanks!
-
-All the best,
-
-Paul
-
-> -	of_reserved_mem_device_release(dev->dev);
-> -
->  	return ret;
+>  net/bluetooth/mgmt.c | 86 +++++++++++++++++++++++++++++++++++++-------
+>  1 file changed, 74 insertions(+), 12 deletions(-)
+>
+> diff --git a/net/bluetooth/mgmt.c b/net/bluetooth/mgmt.c
+> index 733a4b70e10c..25ad9c10740d 100644
+> --- a/net/bluetooth/mgmt.c
+> +++ b/net/bluetooth/mgmt.c
+> @@ -5975,15 +5975,38 @@ static void start_discovery_complete(struct hci_d=
+ev *hdev, void *data, int err)
+>
+>         bt_dev_dbg(hdev, "err %d", err);
+>
+> -       if (err =3D=3D -ECANCELED || !mgmt_pending_valid(hdev, cmd))
+> +       if (err < 0) {
+> +               /* The queued start-discovery work failed before the norm=
+al
+> +                * completion path could advance the state machine. The
+> +                * caller already moved the state to DISCOVERY_STARTING
+> +                * (under hdev->lock, before queueing). Reset it here so =
+the
+> +                * gate in start_discovery_internal()/start_service_disco=
+very()
+> +                * does not wedge in STARTING and reject every future Sta=
+rt
+> +                * (Service) Discovery with MGMT_STATUS_BUSY.
+> +                */
+> +               hci_dev_lock(hdev);
+> +               if (hdev->discovery.state =3D=3D DISCOVERY_STARTING)
+> +                       hci_discovery_set_state(hdev, DISCOVERY_STOPPED);
+> +               hci_dev_unlock(hdev);
+> +
+> +               if (err =3D=3D -ECANCELED)
+> +                       return;
+> +       }
+> +
+> +       if (!mgmt_pending_valid(hdev, cmd))
+>                 return;
+>
+>         mgmt_cmd_complete(cmd->sk, cmd->hdev->id, cmd->opcode, mgmt_statu=
+s(err),
+>                           cmd->param, 1);
+>         mgmt_pending_free(cmd);
+>
+> -       hci_discovery_set_state(hdev, err ? DISCOVERY_STOPPED:
+> +       /* Serialise discovery.state writes against any concurrent mgmt p=
+ath
+> +        * holding hdev->lock; this callback runs on req_workqueue withou=
+t it.
+> +        */
+> +       hci_dev_lock(hdev);
+> +       hci_discovery_set_state(hdev, err ? DISCOVERY_STOPPED :
+>                                 DISCOVERY_FINDING);
+> +       hci_dev_unlock(hdev);
 >  }
-> =20
-> @@ -353,6 +351,4 @@ void cedrus_hw_remove(struct cedrus_dev *dev)
->  		cedrus_hw_suspend(dev->dev);
-> =20
->  	sunxi_sram_release(dev->dev);
+>
+>  static int start_discovery_sync(struct hci_dev *hdev, void *data)
+> @@ -6051,15 +6074,23 @@ static int start_discovery_internal(struct sock *=
+sk, struct hci_dev *hdev,
+>                 goto failed;
+>         }
+>
+> +       /* Publish the transient state BEFORE queueing the work. The
+> +        * completion callback runs on hdev->req_workqueue serialised by
+> +        * hci_req_sync_lock, which is independent of hdev->lock; setting
+> +        * the state after the queue allowed the worker to win the race
+> +        * and have its terminal STOPPED/FINDING write overwritten by thi=
+s
+> +        * trailing STARTING write, wedging discovery in STARTING.
+> +        */
+> +       hci_discovery_set_state(hdev, DISCOVERY_STARTING);
+
+Hmm, do we really need to do this if hdev lock is taken at
+start_discovery_sync? Because that should then synchronize the
+callback won't be able to change the state before it is set to
+DISCOVERY_STARTING.
+
+>         err =3D hci_cmd_sync_queue(hdev, start_discovery_sync, cmd,
+>                                  start_discovery_complete);
+>         if (err < 0) {
+> +               hci_discovery_set_state(hdev, DISCOVERY_STOPPED);
+>                 mgmt_pending_remove(cmd);
+>                 goto failed;
+>         }
+>
+> -       hci_discovery_set_state(hdev, DISCOVERY_STARTING);
 > -
-> -	of_reserved_mem_device_release(dev->dev);
+>  failed:
+>         hci_dev_unlock(hdev);
+>         return err;
+> @@ -6178,15 +6209,19 @@ static int start_service_discovery(struct sock *s=
+k, struct hci_dev *hdev,
+>                 }
+>         }
+>
+> +       /* Publish the transient state BEFORE queueing; see the comment i=
+n
+> +        * start_discovery_internal() for the race details.
+> +        */
+> +       hci_discovery_set_state(hdev, DISCOVERY_STARTING);
+
+Ditto.
+
+>         err =3D hci_cmd_sync_queue(hdev, start_discovery_sync, cmd,
+>                                  start_discovery_complete);
+>         if (err < 0) {
+> +               hci_discovery_set_state(hdev, DISCOVERY_STOPPED);
+>                 mgmt_pending_remove(cmd);
+>                 goto failed;
+>         }
+>
+> -       hci_discovery_set_state(hdev, DISCOVERY_STARTING);
+> -
+>  failed:
+>         hci_dev_unlock(hdev);
+>         return err;
+> @@ -6196,17 +6231,40 @@ static void stop_discovery_complete(struct hci_de=
+v *hdev, void *data, int err)
+>  {
+>         struct mgmt_pending_cmd *cmd =3D data;
+>
+> -       if (err =3D=3D -ECANCELED || !mgmt_pending_valid(hdev, cmd))
+> -               return;
+> -
+>         bt_dev_dbg(hdev, "err %d", err);
+>
+> +       if (err < 0) {
+> +               /* The queued stop-discovery work failed before the norma=
+l
+> +                * completion path could advance the state machine. The
+> +                * caller already moved the state to DISCOVERY_STOPPING
+> +                * (under hdev->lock, before queueing). Reset it here so
+> +                * the gate does not wedge in STOPPING.
+> +                */
+> +               hci_dev_lock(hdev);
+> +               if (hdev->discovery.state =3D=3D DISCOVERY_STOPPING)
+> +                       hci_discovery_set_state(hdev, DISCOVERY_STOPPED);
+> +               hci_dev_unlock(hdev);
+> +
+> +               if (err =3D=3D -ECANCELED)
+> +                       return;
+> +       }
+> +
+> +       if (!mgmt_pending_valid(hdev, cmd))
+> +               return;
+> +
+>         mgmt_cmd_complete(cmd->sk, cmd->hdev->id, cmd->opcode, mgmt_statu=
+s(err),
+>                           cmd->param, 1);
+>         mgmt_pending_free(cmd);
+>
+> -       if (!err)
+> +       if (!err) {
+> +               /* Serialise discovery.state writes against any concurren=
+t
+> +                * mgmt path holding hdev->lock; this callback runs on
+> +                * req_workqueue without it.
+> +                */
+> +               hci_dev_lock(hdev);
+>                 hci_discovery_set_state(hdev, DISCOVERY_STOPPED);
+> +               hci_dev_unlock(hdev);
+> +       }
 >  }
-> --=20
-> 2.53.0
->=20
+>
+>  static int stop_discovery_sync(struct hci_dev *hdev, void *data)
+> @@ -6248,15 +6306,19 @@ static int stop_discovery(struct sock *sk, struct=
+ hci_dev *hdev, void *data,
+>                 goto unlock;
+>         }
+>
+> +       /* Publish the transient state BEFORE queueing; see the comment i=
+n
+> +        * start_discovery_internal() for the race details.
+> +        */
+> +       hci_discovery_set_state(hdev, DISCOVERY_STOPPING);
+
+Ditto.
+
+>         err =3D hci_cmd_sync_queue(hdev, stop_discovery_sync, cmd,
+>                                  stop_discovery_complete);
+>         if (err < 0) {
+> +               hci_discovery_set_state(hdev, DISCOVERY_STOPPED);
+>                 mgmt_pending_remove(cmd);
+>                 goto unlock;
+>         }
+>
+> -       hci_discovery_set_state(hdev, DISCOVERY_STOPPING);
+> -
+>  unlock:
+>         hci_dev_unlock(hdev);
+>         return err;
+> --
+> 2.43.0
+>
+
 
 --=20
-Paul Kocialkowski,
-
-Independent contractor - sys-base - https://www.sys-base.io/
-Free software developer - https://www.paulk.fr/
-
-Expert in multimedia, graphics and embedded hardware support with Linux.
-
---L/gXhcj/KYS6Adou
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEAbcMXZQMtj1fphLChP3B6o/ulQwFAmpNB58ACgkQhP3B6o/u
-lQyTjg//fLyoug7RFssI1dop/066e79975deN6blykU3a96LxKKn7ru6j0LCnfu4
-VTSFjvO7qjkf2yQeXqxnQWvrXBT/JiPMb/nPvBW0MGDi1M1+4kT7238LR5fuNLU0
-eBAuY181rHDg+ftoXP7Rzj0XZlZ/dck0119WsWFEUk9gP0Q8BlgTs7QTUu3k2E+E
-VUftOitNophkc0JUvgUi5wKODfIgzgp/nj9ZnCsjF9QSDjcr3Wjn2qwvdS4hG43H
-m8QkFdiim8NX6PKzgqcjLNOUEXjjphI6+onlAT3qREs2ThXycXu0m5/+r+5IP6AT
-OeVpkJQ9zrx91+tL94Yi4iXPERdq1zcnpUsiE1YhOnlB/KfCAXX3WeS6ZjLfF5aW
-7/5j2Bd/rTlqCSH25ek2EQKZj476WJUgYplyAGFpLb/3iXyV89VpkdIk2VEc7ynK
-V99TGimHONG+iiDOl/z3pn+MX5RzXeMWhmevSrfiTJzsG5Kb+mOKr86er3oTehf0
-g8NOS3ITmO5IGHbfJSUx236uPw58QMEWKmKyZ/Sx7nDhhhskPBSgCJSvSPn0cbz9
-cXejK2y8wLRj1RaSjCGUdM9ZoZPlNDoyqDrWZDxI2tzgXFYDbcuFEHM19GIDPTTY
-2iujg05WmAKMP0jVtjzc7NoSbdBmeZG2atzsSP6M76kSPNdEJvI=
-=0n6x
------END PGP SIGNATURE-----
-
---L/gXhcj/KYS6Adou--
+Luiz Augusto von Dentz
