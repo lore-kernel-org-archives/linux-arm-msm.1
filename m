@@ -1,63 +1,53 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4C6F344DB5;
-	Tue,  7 Jul 2026 03:21:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A88DC3546F7;
+	Tue,  7 Jul 2026 03:21:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783394515; cv=none; b=eoipHwrHCpkyFEOeqlLS4IRpT69l8jSnztU+amgZpF/2qXS2JEOWX+Aln7kmv9Z+IdvhZrDHrBOss2N6LAGPrauSpCy2yV6bIpwK30C1N/i9XlwsLS6smu1RVlsC+GSoQdIMZuDqHbryXYjpmqrcJfRIF0kudmWZhs4nx17N00A=
+	t=1783394516; cv=none; b=Pz1CRiyowAkEwj8l1Em0fiqKMiIFrc17rA6V7g5yuS/X2aCER7BVTaYih2S1YKwbxYC2XldFr2AtVpabjVYsgCGOL1Wceby9zKCYmf8bSCN77Y5qOtoEpncmnE5eVYrJ7Jiz0ovesfIhHoysC44wgZtR0nV0ulqtgpFfx+kjAS0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783394515; c=relaxed/simple;
-	bh=pnaPgd1ljcJtytvq/ioU+HjHcTtXkaRIXAF/owqceJI=;
+	s=arc-20240116; t=1783394516; c=relaxed/simple;
+	bh=kh4IibeM4fF1k0dFcf6mYXDxT+Z6Ghu5JoYeDgn/yoY=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=mA0r9uYeBRSogAiaeVavJttpSu0B5MW83CKj5QTR0ujg+Y7+xWUcndziNXNV7lcIXQ6dAXiTh8LsJ6HQnclwJEGIXhV49iBCZYrzqPnxnDgW+wAgqc6TnA7WvXnZcxj/00CxQyJXcWHFEgW41Bf06IGVqOBXedP8MXhQJlN9Sy4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PlW6VQ0M; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=K/5BZ7Lt3haZiwVIMl9b7JV5I3ETQzK6mn7NhXJroFN4aeU0J2hyXvaa8pqGHsHnWq96zpA+7BUk92WO0cCri9ykk08nHzimcV9zJ5+OFSZ6XtPqoZ/btbzqSc8tcwaawVs3XziAltPiAqDszC1/xxKIFVIp4AyF+lkU+fA2RTA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=na1b5nWy; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PlW6VQ0M"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B41F11F00AC4;
-	Tue,  7 Jul 2026 03:21:52 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="na1b5nWy"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 867761F00ACF;
+	Tue,  7 Jul 2026 03:21:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783394514;
-	bh=Zo1j0X41TZWp7MtLyzXFSkH33VUbHq8e3f9IeM67dbk=;
+	s=k20260515; t=1783394515;
+	bh=NAxBnsOhCNMohiZgxhYyA4/g1a6bYnN0z8VGa2lwoaY=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=PlW6VQ0M7FupS+br9H0ybJVae1YSHbmCRGg4BEyZWHYtESvldaSiEgAbvlemt7PeX
-	 5908NFLrwB3VJouDd8u4cNunOL2ViQDmEtHq7GsNjoic3b+ScSNzR60M7ph2BmEdwc
-	 tARa4R5dU8P2R2ZlPSeKPBVRo9+fAzS0i/YyZzoVgdVOcnGcXEBBqU5eW/Ne20rZ/H
-	 n6Ar8V7LNH6FjkS2MGw5YW657mtp/4jOe3kD9qOnl3UZwsYS2lRyGCJX/xiFIk8F6L
-	 Arz4DcZQyy1AiCNvjKzwwTd8SQAEuSa5EA/Wm694mKzKcOBBh7aG+ILpVI8vkHhqst
-	 cCPKEM/DWhkgg==
+	b=na1b5nWylh+Y/YWMECNJk7FdvTkBOlMNo4bZAPwmvhkf5xb8Zs6XZ2ZhltP3nf4ja
+	 CpUHNvutWD9U2A804/ad9lag9Aho8QrBZGp4H1+kCcy2ftPiK0DuNK8AGT7MXgNLxv
+	 M9pFvVrzBV2LPcH/mDo0w1A3xyTvyIgF6EtBv68IGPulC70Tf3YqkghGcfxwqqINZN
+	 2JBepXwHVyiU3qqpFghlF3Ieaa7EjIszvuMLM9FSFkSw66bLWZJJyMqZFM1c071cLY
+	 +GOQxNaUwsWLxR0rfifjU8jtj68UM6HqYVDlR2+Ar2RWtD0XZAlr765K6BLBQ8MFdp
+	 +exwwSVmaVrgg==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Sean Paul <sean@poorly.run>,
-	Marijn Suijten <marijn.suijten@somainline.org>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
+To: Vinod Koul <vkoul@kernel.org>,
+	Frank Li <Frank.Li@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Kuogee Hsieh <quic_khsieh@quicinc.com>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
+	Andy Gross <agross@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
+	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+Cc: Harshal Dev <harshal.dev@oss.qualcomm.com>,
+	Arun Neelakantam <aneelaka@qti.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	dmaengine@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH v2 0/8] qcom: display / dts: Few corrections of address spaces.
-Date: Mon,  6 Jul 2026 22:21:28 -0500
-Message-ID: <178339449937.1938770.7041355905157380217.b4-ty@kernel.org>
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v2 0/3] Add support for qcrypto in kaanapali
+Date: Mon,  6 Jul 2026 22:21:29 -0500
+Message-ID: <178339449909.1938770.8933738266142836969.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260405-dts-qcom-display-regs-v2-0-34f4024c65dc@oss.qualcomm.com>
-References: <20260405-dts-qcom-display-regs-v2-0-34f4024c65dc@oss.qualcomm.com>
+In-Reply-To: <20260514-knp_qce-v2-0-890e3372eef8@oss.qualcomm.com>
+References: <20260514-knp_qce-v2-0-890e3372eef8@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -68,20 +58,20 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Sun, 05 Apr 2026 16:33:56 +0200, Krzysztof Kozlowski wrote:
-> Changes in v2:
-> - Patch #2: Add dai-common.yaml reference (Dmitry)
-> - Correct subject
-> - Rb tags
-> - Re-order Eliza bindings patch
-> - Link to v1: https://patch.msgid.link/20260402-dts-qcom-display-regs-v1-0-daa54ab448a3@oss.qualcomm.com
+On Thu, 14 May 2026 00:22:19 +0530, Kuldeep Singh wrote:
+> Add qcrypto and cryptobam DT nodes for enabling qcrypto on kaanapali.
+> Validations:
+> - make ARCH=arm64 DT_CHECKER_FLAGS=-m DT_SCHEMA_FILES=Documentation/devicetree/bindings/dma/qcom,bam-dma.yaml dt_binding_check
+> - make ARCH=arm64 qcom/kaanapali-mtp.dtb CHECK_DTBS=1 DT_SCHEMA_FILES=Documentation/devicetree/bindings/dma/qcom,bam-dma.yaml
+> - cryptobam and crypto driver probe
+> - kcapi test
 > 
 > [...]
 
 Applied, thanks!
 
-[8/8] arm64: dts: qcom: sm8750: Correct DPU VBIF address space size
-      commit: 4fd832d6aed496c7111746d2c1e36b006659f89d
+[3/3] arm64: dts: qcom: kaanapali: Add qcrypto node support
+      commit: 0a4015962f8115bdca3c0c4d0420f2ff85409194
 
 Best regards,
 -- 
