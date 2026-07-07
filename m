@@ -1,46 +1,52 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E802437C932;
-	Tue,  7 Jul 2026 03:22:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28138352005;
+	Tue,  7 Jul 2026 03:22:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783394530; cv=none; b=dB7OkJYECXFEKT0IlKuj3fdPnj9SlxI5MNqAE9M9EyhYmheRKjrQBMjRMK25MG9d4SlppEFYKl3KUYPbVjS1ttSOkXjPCKjSCTvqLv3lMEryG2PjgqDtVGhDHijLbxrLXtGYLdRKuGC2kzPy7NwvwgATtfQZUDL2liNBNlrit6g=
+	t=1783394531; cv=none; b=AFN0OVbofAUmU44tRaUCVjiL2vhCpfQ1wUPgGv/pp6lCjbJhgYpUALLBpTfG8xMLdXe/cWQRsb2kfk8jH7BY9B6ptsZiQWbpuUxY56fo3rpPBLbododyIL7hcapYO0gF4EJrAKYwjbP6U5GPLtj7nYmei46XCL1veEIoVfjnb1U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783394530; c=relaxed/simple;
-	bh=AzISUhyU8ls8tWJIuvglVArxyb0Iz1Q8GmdDSUYdfgk=;
+	s=arc-20240116; t=1783394531; c=relaxed/simple;
+	bh=vYTupzQSvgPWt8PcUwfJO6cbQYYph/+J9IOnCW5TIGI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ASJLD11fvksrXubXaUimOpW+CfnSvtRrlem+0RNEuGMa89qtWfCJ6y6sCiM0b+N3Iyya0ndCLhXahh6CJZvq9wNcT40DnR1f8XZRwCYTgC0EVfhIT7pyvxDalaIaAKY9swzwSuERvxjMxCemi9v5xROXB3ePlqLZOI2Oh0QmKvw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A5WPserH; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=LbP0yQ0R0SXI1buC3pAk1A70NDcSVKjEAr4K6Co3bHsXoy8yH8Jy4TZL0a6OMsAIono/+HsU7pb3z6zUTVNkeNfEoeoBk/SEfl8/7k81EKnnFHlt/+HZI/pQrK0nmtyUe9Nuf/p8JMDC/lyjyDziRW+1yG8KyFRCBhdd2Du2r4o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZZSLyDEQ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="A5WPserH"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 267921F00ACF;
-	Tue,  7 Jul 2026 03:22:03 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZZSLyDEQ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2AF561F00ADF;
+	Tue,  7 Jul 2026 03:22:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783394523;
-	bh=r2m81evNFFaSA8QGN8H8zohHgVNrqJF2vk7UbAR8rP8=;
+	s=k20260515; t=1783394528;
+	bh=5gWzG0+HWgVZbxjFj069WpF26GbvtN+pMH1FDKn1SH8=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=A5WPserHDtGF6cBsrpSqkDSlsRcdxocukw8n+zBPp+GeKPooaN+cefqXLsaHo+WY0
-	 9ZaxxbXVHLEiA3+LwTSoIe8IaO/OlSN72FGKD6QbieRQKZNzZT6TiQ3w2VpTfNKvB4
-	 dZed19aCwMX81J+wj/iyYLnnkkZPy3o5FMF9avqTxAlwjqi8bxIEripAd6MHW1FT4x
-	 hmENYT8zcGJpDxVN0l6LYAbbFJnWWXUhdlsCG09B5rwcX0A1CCtcveA9b7J94U65PR
-	 5oX3gOChR8vOyx9BkFntlJ7x8LkLunHNx4xAj5WIKPIrkkjkgg3URx62/aClSMapFF
-	 6woyo+le7nn9Q==
+	b=ZZSLyDEQxyES23hQV7wA7vxillaNiRPQZvw1xCgJKDZfvFt9HKdrmACZa4DvU49nE
+	 yRWTPFDn0LRuwrbJpEJr0foEPod7oqwW7kzbeLKT3mMbt9RFFXYYegQLhmHBYoaDSZ
+	 2+EfhmeJohHmXvfEWYGyEMrW4lA1Cuwv9Fkir3uZu1oQay8nLEjpFEP2wjpD84syzq
+	 U5GMOn2CxDswthAlhAV8LWn3tbxDyvbSWzU8m752isj65zx8QFGpDRLYRnfNakgdGh
+	 cA4EG8ajt9Ad9fGNDPoTC3vyOcDjt9Kpm1O4roOp2tPOkd4RYuVskPfcMm7IbAPFAX
+	 9uMY/Kd9qSTmw==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
+To: Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney@redhat.com>,
 	Rob Herring <robh@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Conor Dooley <conor+dt@kernel.org>,
-	Xilin Wu <sophon@radxa.com>
+	Taniya Das <taniya.das@oss.qualcomm.com>,
+	Jagadeesh Kona <quic_jkona@quicinc.com>,
+	Lin Li <zhuolin.li@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: sc8280xp: Move PHY, PERST, and Wake GPIOs to PCIe port nodes
-Date: Mon,  6 Jul 2026 22:21:37 -0500
-Message-ID: <178339449890.1938770.7066889850779071034.b4-ty@kernel.org>
+	linux-kernel@vger.kernel.org,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH 0/2] clk: qcom: Add video clock controller support for Hawi
+Date: Mon,  6 Jul 2026 22:21:41 -0500
+Message-ID: <178339449928.1938770.5009440185841702031.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260507-8280-move-perst-wake-v1-1-5b33cef2d807@radxa.com>
-References: <20260507-8280-move-perst-wake-v1-1-5b33cef2d807@radxa.com>
+In-Reply-To: <20260702-hawi-videocc-v1-0-6c1e640b0954@oss.qualcomm.com>
+References: <20260702-hawi-videocc-v1-0-6c1e640b0954@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -51,27 +57,18 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Thu, 07 May 2026 22:16:07 +0800, Xilin Wu wrote:
-> Since describing the PCIe PHY directly under the RC node is now
-> deprecated, move the references to the respective PCIe port nodes.
+On Thu, 02 Jul 2026 10:08:06 -0700, Lin Li wrote:
+> This series adds support for the video clock controller (videocc)
+> required by the upcoming Qualcomm Hawi SoC.
 > 
-> And also move the PCIe PERST and wake GPIOs from the controller nodes to
-> the corresponding PCIe port nodes on sc8280xp-based platforms:
 > 
->  - sa8295p-adp
->  - sa8540p-ride
->  - sc8280xp-crd
->  - sc8280xp-huawei-gaokun3
->  - sc8280xp-lenovo-thinkpad-x13s
->  - sc8280xp-microsoft-arcata
->  - sc8280xp-microsoft-blackrock
-> 
-> [...]
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: sc8280xp: Move PHY, PERST, and Wake GPIOs to PCIe port nodes
-      commit: a8fd72fcf305534f0a8da095de2cce467b73e66c
+[1/2] dt-bindings: clock: qcom: Add Hawi video clock controller
+      commit: d9ef4ed45866531d37a2e9c62dc795cd678b5b0c
+[2/2] clk: qcom: Add support for VideoCC driver for Hawi
+      commit: edbd5d323183ca15676fac30344ec0713b98dc46
 
 Best regards,
 -- 
