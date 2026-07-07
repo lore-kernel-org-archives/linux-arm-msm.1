@@ -1,80 +1,132 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80FB738BF61;
-	Tue,  7 Jul 2026 03:22:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 569E82EC081;
+	Tue,  7 Jul 2026 03:30:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783394532; cv=none; b=u9YFQij25K+Rtklhi1QbKLFe1M+d7aXNAOSeKrG6KnTD3ypnmSC9jlPa/d5RVbIzjT53wzscesWrGJdvApFvQ5cuEMs35XRsfCs+5qabdSI9benImW57Tgsgh6krPcay32+BY+2KGQW9N15/OuQOhUN5zews50gp3kobZLIN0sQ=
+	t=1783395003; cv=none; b=hPiE45BWdtYJgcylp+Bbd0w6SmYPO/AbfAEcevx+HIlslPqkGbJz+hUEEb9ayNMEjYVkvFKV32ghoFSQcbeDrNuU3Goyr8GnYkwymMjSD5G/Pf3LZFSRp50p1sDU5oXwYcQMMVzxJj6zqgWJaPFIvFdynzApYWl5+h6280bCwxk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783394532; c=relaxed/simple;
-	bh=+Q6YYHLhvahJ1H7KchgsU99N7ZVa2sVOllalxe3zHf4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=bixk2Y/DvQjNWCnKvDxLDx77m/FaJzREJN4ojE74RdoWqVGxRXtpTC/FnzKxe9JAsIMbhFqJb4DpiT193fffcC55INu60JyJBL3x0gPFQbAdcrO93pa5tm7H34G9GRkKKijhq1SDIMWxZ0H+2aj4aO2YhpFtfeKeHMfCrIs9xHk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Cjyg+xT8; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783395003; c=relaxed/simple;
+	bh=vwTBaE6vqMPebBkKF7s+KPBrtgEj536dBlfksERdWc0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=VV14XVDAyrc4Ikxp0LXi/1FjPNwYJj74gTBpsZffIdtXrGj4Y9j2ADlaao5WqVtVB17+vllgGHfpT6Bhe1FcsJPnHRBzzh1YBahDtlTJPs7BUch1s5Vh7WCIPSl/8IG3Cqv3HKw+H4wEr0hBVECCIKgOo2V2ln3T70aODwW0sy0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ku8lRHNC; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Cjyg+xT8"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C27191F00ADE;
-	Tue,  7 Jul 2026 03:22:04 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ku8lRHNC"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BCD081F000E9;
+	Tue,  7 Jul 2026 03:30:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783394526;
-	bh=f9jizBEFpEuVKna4nQ4iZMy3xkuiSm5a1pkyONdWm54=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=Cjyg+xT8CGw+YJno/W5Vz11hjm0BGdYTl9zJRVPhRSTvozLVi7DREJNa02Y7N1B7/
-	 AUr2+RrbbRY7ERg5zHIJxg+0feapCf8SjA4RIoX7tK8xNqIvLhRAo2K8J/rA+4EKP0
-	 3N1rMpzq7X8e3FWe2iNT0os4hJbmgxj5B04qQLq2m/y+Jlxn96kAsQtm+1HbBBmxER
-	 P/eXC+4ApI19JaCQrIkx8Q59SMbYXUmClE3GaIfhVfcIh68ia2gZin8sP+59FqypVd
-	 r+zMc5GYz0RrlTB8yvi98JXiC9FeG4p+ZomP8QNxah1rDgC6NBRWTICMuG1XLaworF
-	 g2q4YYIOYWm1g==
+	s=k20260515; t=1783395002;
+	bh=BdSm9w9LnGQJ1pBIB81KY1z5WxN6VkGbTHYbagBNgrs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Ku8lRHNCf6CVUofmXA1M+X8vLitBCB4bGajAqHfEjRYVlj3ZBKiSd8nDs/NKWNmdv
+	 eFJl0dxLtt5dNsCVIB0fjasu2zLQV6tIf6zOtJi/Tg6su5wVcP4XiOruAF71+chXYy
+	 ySPwzzi2CikKrsisiTiFlc/GMAPO07pVMrzMtHBhwaReQCMC8Djl2EZKV1Tcoat/CB
+	 VKn8lV7ZNCSDgh+YeLShXKRrje5tBR4+ferJmiXbqIxzHsC/spkSWrhw6NCj5bFAvE
+	 ZPQu5d7QM2uEuEMH64UNi9YwPUT2ssxypt/27wNovIvXs9HVGChfYG0bSOP+l0JHDO
+	 4v4JWLDcvtQFg==
+Date: Mon, 6 Jul 2026 22:29:59 -0500
 From: Bjorn Andersson <andersson@kernel.org>
-To: Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney@redhat.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Taniya Das <taniya.das@oss.qualcomm.com>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-	Imran Shaik <imran.shaik@oss.qualcomm.com>,
-	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	devicetree@vger.kernel.org
-Subject: Re: (subset) [PATCH v2 0/4] clk: qcom: Add EVA clock controller support for Glymur SoC
-Date: Mon,  6 Jul 2026 22:21:39 -0500
-Message-ID: <178339449926.1938770.15333855977275297563.b4-ty@kernel.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260617-evacc_glymur-v2-0-905108dacaaa@oss.qualcomm.com>
-References: <20260617-evacc_glymur-v2-0-905108dacaaa@oss.qualcomm.com>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Ben Dooks <ben.dooks@codethink.co.uk>, 
+	Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Chris Lew <christopher.lew@oss.qualcomm.com>
+Subject: Re: [PATCH] soc: qcom: smp2p: fix __iomem annotation on entry->value
+ pointer
+Message-ID: <akxyWw03z9fGqO64@baldur>
+References: <20260623085931.589735-1-ben.dooks@codethink.co.uk>
+ <cc9cd039-83c1-479e-bb97-4c3b1345cf35@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cc9cd039-83c1-479e-bb97-4c3b1345cf35@oss.qualcomm.com>
 
-
-On Wed, 17 Jun 2026 16:37:51 +0530, Taniya Das wrote:
-> This series adds support for the Enhanced Video Analytics (EVA) clock
-> controller on the Qualcomm Glymur SoC.
+On Tue, Jun 23, 2026 at 11:30:47AM +0200, Konrad Dybcio wrote:
+> On 6/23/26 10:59 AM, Ben Dooks wrote:
+> > The entry->value is passed to readl() so should be marked __iomem
+> > so remove these sparse warnings by marking it __iomem and do the
+> > relevant casting to ensure no further warnings:
+> > 
+> > drivers/soc/qcom/smp2p.c:280:64: warning: incorrect type in argument 1 (different address spaces)
+> > drivers/soc/qcom/smp2p.c:280:64:    expected void const volatile [noderef] __iomem *addr
+> > drivers/soc/qcom/smp2p.c:280:64:    got unsigned int [usertype] *value
+> > drivers/soc/qcom/smp2p.c:318:34: warning: incorrect type in argument 1 (different address spaces)
+> > drivers/soc/qcom/smp2p.c:318:34:    expected void const volatile [noderef] __iomem *addr
+> > drivers/soc/qcom/smp2p.c:318:34:    got unsigned int [usertype] *value
+> > drivers/soc/qcom/smp2p.c:446:26: warning: incorrect type in argument 1 (different address spaces)
+> > drivers/soc/qcom/smp2p.c:446:26:    expected void const volatile [noderef] __iomem *addr
+> > drivers/soc/qcom/smp2p.c:446:26:    got unsigned int [usertype] *value
+> > drivers/soc/qcom/smp2p.c:501:33: warning: incorrect type in argument 1 (different address spaces)
+> > drivers/soc/qcom/smp2p.c:501:33:    expected void const volatile [noderef] __iomem *addr
+> > drivers/soc/qcom/smp2p.c:501:33:    got unsigned int [usertype] *value
+> > drivers/soc/qcom/smp2p.c:504:26: warning: incorrect type in argument 2 (different address spaces)
+> > drivers/soc/qcom/smp2p.c:504:26:    expected void volatile [noderef] __iomem *addr
+> > drivers/soc/qcom/smp2p.c:504:26:    got unsigned int [usertype] *value
+> > 
+> > Signed-off-by: Ben Dooks <ben.dooks@codethink.co.uk>
+> > ---
 > 
-> The EVA subsystem handles vision processing workloads and requires its
-> own clock controller (EVACC) to manage the PLL, RCGs, branch clocks,
-> GDSCs and resets.
+> +Chris, is this actually iomem, or should this be treated as normal
+> memory (since this is just coming from SMEM, perhaps just memmap()?)
 > 
-> [...]
 
-Applied, thanks!
+It's generally DDR, but in theory SMEM can dish out iomem, iff the item
+we're looking for happens to reside in a RPM "aux" memory region.
 
-[4/4] arm64: dts: qcom: glymur: Add EVA clock controller node
-      commit: f135aa4dc1aa43bd55edb028f02e96c7ec8b2e63
+It would have been nice if I figured out how to abstract this away when
+I wrote that code...
 
-Best regards,
--- 
-Bjorn Andersson <andersson@kernel.org>
+Regards,
+Bjorn
+
+> Konrad
+> 
+> >  drivers/soc/qcom/smp2p.c | 8 ++++----
+> >  1 file changed, 4 insertions(+), 4 deletions(-)
+> > 
+> > diff --git a/drivers/soc/qcom/smp2p.c b/drivers/soc/qcom/smp2p.c
+> > index af0ceeaf6e07..fef6f17c3257 100644
+> > --- a/drivers/soc/qcom/smp2p.c
+> > +++ b/drivers/soc/qcom/smp2p.c
+> > @@ -102,7 +102,7 @@ struct smp2p_entry {
+> >  	struct qcom_smp2p *smp2p;
+> >  
+> >  	const char *name;
+> > -	u32 *value;
+> > +	u32 __iomem *value;
+> >  	u32 last_value;
+> >  
+> >  	struct irq_domain *domain;
+> > @@ -276,7 +276,7 @@ static void qcom_smp2p_start_in(struct qcom_smp2p *smp2p)
+> >  		list_for_each_entry(entry, &smp2p->inbound, node) {
+> >  			memcpy(buf, in->entries[i].name, sizeof(buf));
+> >  			if (!strcmp(buf, entry->name)) {
+> > -				entry->value = &in->entries[i].value;
+> > +				entry->value = (u32 __iomem *)&in->entries[i].value;
+> >  				entry->last_value = readl(entry->value);
+> >  				break;
+> >  			}
+> > @@ -302,7 +302,7 @@ static void qcom_smp2p_notify_in(struct qcom_smp2p *smp2p)
+> >  		list_for_each_entry(entry, &smp2p->inbound, node) {
+> >  			memcpy(buf, in->entries[i].name, sizeof(buf));
+> >  			if (!strcmp(buf, entry->name)) {
+> > -				entry->value = &in->entries[i].value;
+> > +				entry->value = (u32 __iomem *)&in->entries[i].value;
+> >  				break;
+> >  			}
+> >  		}
+> > @@ -528,7 +528,7 @@ static int qcom_smp2p_outbound_entry(struct qcom_smp2p *smp2p,
+> >  	memcpy(out->entries[out->valid_entries].name, buf, SMP2P_MAX_ENTRY_NAME);
+> >  
+> >  	/* Make the logical entry reference the physical value */
+> > -	entry->value = &out->entries[out->valid_entries].value;
+> > +	entry->value = (u32 __iomem *)&out->entries[out->valid_entries].value;
+> >  
+> >  	out->valid_entries++;
+> >  
