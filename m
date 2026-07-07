@@ -1,162 +1,182 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD0A93ED3CC;
-	Tue,  7 Jul 2026 10:35:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08BF93DA7F8;
+	Tue,  7 Jul 2026 10:41:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783420553; cv=none; b=dMVN8C9mVfDmk1DpkFZbofplvGXvW3MJ33KxRSYivGWalSBGg2IxohPS4rlj5plVLkJRoOFZL8UGOA/kPaxnqgbmQXGJxcIqcLOzHvEvfhTpkduXDjwtE+QGbEiXpxOC6aDMNb04qUQpmxFraX7ApbPVrc+2oQmvY3AhG7wBSNo=
+	t=1783420885; cv=none; b=eyi33v76FxLckTf2oJuAIXGd7qjoh9yWkRJ0QLi8N6qlrI4xPEgTrRG0UULTQFqJwUzwAFWmT7mFikthGtcU5GzDFv4HsuK+XxMDDoDMHvvEYr5N5zFi32VALyiSS+VYiVr2RcqGxhArAWZAVeGSQBOhz6BsWNsTZVwZbZCEiiM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783420553; c=relaxed/simple;
-	bh=HvoDLh1pJSoqWDRA6onKpz1ZBpgF670CyjlLdi2zj/8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=kupQVxKiHfSu/fV81/6x2ynU8rUCbth6y+qfC9Hep2PKiVNcIZOME3rRzzJ6Fl5cd7hW5cRLbt4hYHVUyt2ZpNcTt/z6YDHh1gDChM6wQxnc8hbuCU3cOUIDy9Yj5oA8nUyFb+YFtw/PHR0mtZKj4LYKIdT//m1OWQ2kvlO3XUE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=muEHhNZS; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783420885; c=relaxed/simple;
+	bh=3O6Ysib/EBFDCN2Vf57xgj0WB8+cWDuMialRUyEyo7k=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ps22h5Uv789eiXmLITuSjnIcPWKs4/4o27iZU4Xq5k30KfUGz5nPXLOzmRywF5KJYx9Vj9uIGHSi2yZ8+6d0MrKz+C+plBnc/TTvx7SroO0tmtasrCAzI2CG2T8CAa34op60zuLJWfx1/u+9w13Qj/X1oLKLSZDLA3fv82RQGvs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CvCduiWw; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="muEHhNZS"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4AF751F000E9;
-	Tue,  7 Jul 2026 10:35:36 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CvCduiWw"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E36741F00A3A;
+	Tue,  7 Jul 2026 10:41:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783420551;
-	bh=ZIdJ2kWnZSzaIc2VKvx3tV02RUSZsKP0aF813USpRQY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=muEHhNZSQ0LSJO5dQUblRtk+3KNiW1Sexx9P7JyID1p9Hp3xGv0J4UbRG+fY5Nk5k
-	 lfNOH48QJc7HVhAUIDSaP4FNnIxe1mCFgX523zuLO4ghOrfTq4nTYzyBZzGlQjIANh
-	 G5dVcytVLi1Y4Go7lt7Hi1xf1O/iRDFx8vFh8b1fkkLSr//7hIoyAOX0XNg3mhaHuE
-	 /MZdzFdyC5bAY2+EfgYmdAJYL+l14uqVN6YBlzzFherZX3IvuvVVB4464w8KwAKHFR
-	 Cb6iDTk1N1p2T8kQle7lANNppyIF7SnaCJrLWMjV2fVD3A9nrBk/dbzE9PoWVE/mTu
-	 kXgj2SJWBNUbA==
-Date: Tue, 7 Jul 2026 11:35:27 +0100
-From: Lorenzo Stoakes <ljs@kernel.org>
-To: Pedro Falcato <pfalcato@suse.de>
-Cc: Andrew Morton <akpm@linux-foundation.org>, 
-	Russell King <linux@armlinux.org.uk>, Dinh Nguyen <dinguyen@kernel.org>, 
-	Simon Schuster <schuster.simon@siemens-energy.com>, 
-	"James E . J . Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
-	Jarkko Sakkinen <jarkko@kernel.org>, Thomas Gleixner <tglx@kernel.org>, 
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, Ian Abbott <abbotti@mev.co.uk>, 
-	H Hartley Sweeten <hsweeten@visionengravers.com>, Lucas Stach <l.stach@pengutronix.de>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Patrik Jakobsson <patrik.r.jakobsson@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, Thierry Reding <thierry.reding@kernel.org>, 
-	Mikko Perttunen <mperttunen@nvidia.com>, Jonathan Hunter <jonathanh@nvidia.com>, 
-	Christian Koenig <christian.koenig@amd.com>, Huang Rui <ray.huang@amd.com>, Ankit Agrawal <ankita@nvidia.com>, 
-	Alex Williamson <alex@shazbot.org>, Alexander Viro <viro@zeniv.linux.org.uk>, 
-	Christian Brauner <brauner@kernel.org>, Dan Williams <djbw@kernel.org>, 
-	Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, 
-	David Hildenbrand <david@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
-	"Liam R . Howlett" <liam@infradead.org>, Matthew Wilcox <willy@infradead.org>, 
-	Marek Szyprowski <m.szyprowski@samsung.com>, Peter Zijlstra <peterz@infradead.org>, 
-	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>, 
-	Steven Rostedt <rostedt@goodmis.org>, SeongJae Park <sj@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>, 
-	Hugh Dickins <hughd@google.com>, Mike Rapoport <rppt@kernel.org>, Kees Cook <kees@kernel.org>, 
-	Paolo Bonzini <pbonzini@redhat.com>, linux-kernel@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org, linux-sgx@vger.kernel.org, 
-	etnaviv@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
-	freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org, kvm@vger.kernel.org, 
-	linux-fsdevel@vger.kernel.org, nvdimm@lists.linux.dev, linux-mm@kvack.org, 
-	iommu@lists.linux.dev, linux-perf-users@vger.kernel.org, 
-	linux-trace-kernel@vger.kernel.org, kasan-dev@googlegroups.com, damon@lists.linux.dev, 
-	Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>, Jann Horn <jannh@google.com>
-Subject: Re: [PATCH 25/30] mm/vma: update vmg_adjust_set_range() to offset
- pgoff instead
-Message-ID: <akzVxx6vIeiXO-cV@lucifer>
-References: <cover.1782735110.git.ljs@kernel.org>
- <910f7b5be78232304dc7ca01cd57c6f5ca8f3d13.1782735110.git.ljs@kernel.org>
- <akZLhkjsJ_3sGdox@pedro-suse.lan>
+	s=k20260515; t=1783420883;
+	bh=KlgZ7P7IZ1tcZogmnB5NAiKND0y62Qae+ZrMg1gqv00=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=CvCduiWwq1y4A4HzQHMAcWHhMnt4TuGRs/+IANYYWeuPh0SFBxYdkZY0iZRMEm5hJ
+	 glDJVmyAGiKRPE911qxVo8M5sM5ssuwAO1WI+Q5XP3TgWgHFcTulS+OORrmrRZeI58
+	 4DwB+pf4hWfDPBJLKIPeEO0RNJzo8Qbi0FBfxynSiLRB++fbXsbYJMiGwfOpmB/WnE
+	 6LwKM94nkbSi0nLCUzoBJpIvqDAzOMvdbBJM6N6hplZIXNx5lZtR40TXIKpo0DRv2R
+	 +LcUZC5/jJ34NNJK8eUmaofcQ6sZpVIMgErfH9Rlb2qACsjBbRc6SsQ9nBF8u25FBb
+	 W5UGVhEYqhAMA==
+Message-ID: <d5407ab1-1af7-4678-ae67-5cf30ce8fa4b@kernel.org>
+Date: Tue, 7 Jul 2026 11:41:19 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <akZLhkjsJ_3sGdox@pedro-suse.lan>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/5] Add Qualcomm JPEG V4L2 encoder for SM8250
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Atanas Filipov <atanas.filipov@oss.qualcomm.com>, linux-media@vger.kernel.org
+Cc: loic.poulain@oss.qualcomm.com, mchehab@kernel.org, robh@kernel.org,
+ krzk+dt@kernel.org, conor+dt@kernel.org, andersson@kernel.org,
+ konradybcio@kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+References: <20260706071113.383215-1-atanas.filipov@oss.qualcomm.com>
+ <68e59764-5a10-4abc-849c-14ea2d9ef76e@linaro.org>
+ <d74d7839-d126-427a-b151-ca895a27a83e@linaro.org>
+ <437d1eb0-4495-406a-9501-b0515cfa3151@linaro.org>
+ <e04cb9dc-76dd-4fa8-92f4-be002bf7ee8b@linaro.org>
+ <8116c54e-4050-4e9d-b236-59d74846bd57@linaro.org>
+ <8a09875d-af5f-438b-b947-bc2b61219b70@oss.qualcomm.com>
+ <c8c38ec6-4422-4c91-a249-20bc20260e73@linaro.org>
+ <d0768c15-453f-4d3f-8110-886a5c697b02@oss.qualcomm.com>
+From: Bryan O'Donoghue <bod@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=bod@kernel.org; keydata=
+ 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
+In-Reply-To: <d0768c15-453f-4d3f-8110-886a5c697b02@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jul 02, 2026 at 12:29:54PM +0100, Pedro Falcato wrote:
-> On Mon, Jun 29, 2026 at 01:23:36PM +0100, Lorenzo Stoakes wrote:
-> > We are calculating the pgoff as an offset, since we have vma_add_pgoff()
-> > and vma_sub_pgoff() available, just offset this value directly and use
-> > __vma_set_range() for vma->vm_[start, end] values.
-> >
-> > We take care to update the range before offsetting the page offset, so the
-> > adjusted VMA's vm_start and vm_pgoff are mutually consistent at the point
-> > the page offset helpers operate - this matters once vma_set_pgoff() comes
-> > to assert invariants which relate the two.
-> >
-> > Doing so lays the foundation for future work which allows for use of
-> > virtual page offsets for MAP_PRIVATE-file backed mappings.
-> >
-> > No functional change intended.
-> >
-> > Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
-> > ---
-> >  mm/vma.c | 15 ++++-----------
-> >  1 file changed, 4 insertions(+), 11 deletions(-)
-> >
-> > diff --git a/mm/vma.c b/mm/vma.c
-> > index e3355eab11f2..0579fc8c9bd5 100644
-> > --- a/mm/vma.c
-> > +++ b/mm/vma.c
-> > @@ -714,9 +714,6 @@ void validate_mm(struct mm_struct *mm)
-> >   */
-> >  static void vmg_adjust_set_range(struct vma_merge_struct *vmg)
-> >  {
-> > -	struct vm_area_struct *adjust;
-> > -	pgoff_t pgoff;
-> > -
-> >  	if (vmg->__adjust_middle_start) {
-> >  		/*
-> >  		 * vmg->start    vmg->end
-> > @@ -735,8 +732,8 @@ static void vmg_adjust_set_range(struct vma_merge_struct *vmg)
-> >  		struct vm_area_struct *middle = vmg->middle;
-> >  		const unsigned long delta = vmg->end - middle->vm_start;
-> >
-> > -		pgoff = vma_start_pgoff(middle) + (delta >> PAGE_SHIFT);
-> > -		adjust = middle;
-> > +		__vma_set_range(middle, vmg->end, middle->vm_end);
-> > +		vma_add_pgoff(middle, delta >> PAGE_SHIFT);
-> >  	} else if (vmg->__adjust_next_start) {
-> >  		/*
-> >  		 *                Originally:
-> > @@ -764,13 +761,9 @@ static void vmg_adjust_set_range(struct vma_merge_struct *vmg)
-> >  		struct vm_area_struct *next = vmg->next;
-> >  		const unsigned long delta = next->vm_start - vmg->end;
-> >
-> > -		pgoff = vma_start_pgoff(next) - (delta >> PAGE_SHIFT);
-> > -		adjust = next;
-> > -	} else {
-> > -		return;
-> > +		__vma_set_range(next, vmg->end, next->vm_end);
-> > +		vma_sub_pgoff(next, delta >> PAGE_SHIFT);
-> >  	}
-> > -
-> > -	vma_set_range(adjust, vmg->end, adjust->vm_end, pgoff);
-> >  }
->
-> Maybe this should be squashed with That Other Patch that touches this.
+On 07/07/2026 11:11, Konrad Dybcio wrote:
+> On 7/7/26 12:00 PM, Bryan O'Donoghue wrote:
+>> On 07/07/2026 10:24, Konrad Dybcio wrote:
+>>> On 7/6/26 3:37 PM, Bryan O'Donoghue wrote:
+>>>> On 06/07/2026 14:02, Vladimir Zapolskiy wrote:
+>>
+>>>>>>
+>>>>>> The idea is to make all of these peers, eventually. Not particular block
+>>>>>> owns the TITAN_TOP_GDSC - the entire CAMSS block is a collapsible block.
+>>>>>>
+>>>>>
+>>>>> The statement provides the same information as before, e.g. it's found here:
+>>>>>
+>>>>> https://lore.kernel.org/linux-media/fbc018f5- c025-4747-85f2-53b45b0f0496@nxsw.ie/
+>>>>>
+>>>>>        There's no functional linkage between CAMSS/IFE and JPEG - they are
+>>>>>        peers within the CAMSS power-island.
+>>>>>
+>>>>> Thus "the CAMSS power-island" exists, and it got its hardware description
+>>>>> as the CAMSS top device tree node, and TITAN_TOP_GDSC power domain is
+>>>>> a natural resource of all devices on "CAMSS power-island",
+>>>>
+>>>> Vlad honestly, TITAN_TOP_GDSC is provided to the CAMSS island - all of the nodes within it depend on that and it is _external_ to the block.
+>>>>
+>>>> There is a CSID MUX on some SOC other than that I'll restate it again, I'm not sure why you won't accept it.
+>>>>
+>>>> There is no dependency between JPEG and IFE, one is _not_ subordinate to the other and trying to find ways to invalidate that statement runs counter to the facts.
+>>>
+>>> They are all subordinate to CAMSS_TOP - Vlad indeed said they are
+>>> peers (i.e. there's no co-dependence between them specifically, but
+>>> their parent is shared).
+>>>
+>>> You can't use any of these IP blocks if you don't first power up
+>>> TOP because of the physical layout.
+>>
+>> Yes and I'm asking for TOP to be listed in each of the subordinate nodes for reasons given below.
+>>
+>> But unlike MDSS - OPE for example doesn't require IFE or CSID to do its job.
+> 
+> MDSS also contains a number of unrelated peers - e.g. DP and DSI
+> controllers.
 
-Ah this separation makes more sense from the point of view of the virt pgoff
-stuff in the RFC (see [0]).
+OK, I can see how this thread is confusing.
 
-And would rather keep as vaguely bitesized as possible :>)
+The idea is to start to declare sub-nodes "on the road" to making camss 
+into a bus. The legacy binding we have is really for the IFE domain - 
+that is CSIPHY, CSID, IFE.
 
->
-> Anyway,
->
-> Reviewed-by: Pedro Falcato <pfalcato@suse.de>
+Right now the camss binding describes those things - so linking say OPE 
+or JPEG back to the thing that describes those isn't right.
 
-Thanks!
+OTOH we _want_ to make the top-level binding into a bus, we've discussed 
+that several times.
 
->
-> --
-> Pedro
+To transition from monolith IFE-domain only, to camss-bus, we should 
+have the sub-nodes fully describe themselves as "camss-bus" doesn't 
+exist yet.
 
-Cheers, Lorenzo
+Once we have compat="camss-bus" then fine, make that linkage, I fully 
+support that.
 
-[0]:https://lore.kernel.org/linux-mm/cover.1782745153.git.ljs@kernel.org/
+That roadmap BTW is why I'm asking Antanas and Loic to make JPEG and OPE 
+sub-nodes of camss - but make them complete sub-nodes - power-domains, 
+clocks, nocs, including the TOP_GDSC.
+
+It means we can work on splitting apart the existing camss node in 
+isolation to make CSID, IFE as peer sub-nodes.
+
+We definitely shouldn't be making those sub-nodes dependent on 
+compat="camss" but they definitely will be dependent once we finish 
+making compat="camss-bus".
+
+When that is done I fully agree TOP_GDSC belongs in the bus node, like MDSS.
+
+I hope that makes sense.
+
+---
+bod
