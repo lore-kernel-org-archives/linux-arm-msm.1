@@ -1,43 +1,47 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE80A435EDF;
-	Wed,  8 Jul 2026 14:57:54 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3F8E49218C;
+	Wed,  8 Jul 2026 14:57:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783522676; cv=none; b=O6H7IngZmsPglEuauJCNEzpxUlUUVHRuc0JneozPkVRywP7FHSfeoBbhqNBnuN4xoIT5uWapFpuDJlieFFeUc1gOoAgSHWG0ILYzSaBYEcj2WGkNksXK/i2EK0lYDRuth5bkN5MD5JOhrE6eERAN+tpYaifCnPLwuI4uFL+zvuc=
+	t=1783522676; cv=none; b=iQLJHrqTIJvFVl4pCzOA5Y/zc4BOTnlof47MaHjNmhg2ojNGY80MX2+FJ1rBtDZPevd86/hoh6DQsB3Gjhls8gurHkoh+wOe47cRE54Uxtf3/IIsn26ewt+dLqN4fo0/Nwa7TCdoNU3Ma9vDGX6cARc7mjowksaTecYgiq0PBgw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1783522676; c=relaxed/simple;
-	bh=tp52LrfSImDGSo+JlQyXbjMZIj+DCt3H9EfnuYSW88g=;
-	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=IdMJip3yetKaGhkBkvpCkdwvW1R7a9XiVHSufoOqFHRkuwBCPULKE8AFSoeJ3+OEbuycE4uagEu7SATt0isskjHLYRrZcCr97ouWbGI9MiNAGhKLelvT0C38UOHEdO9jjJG74ZMp26GLAKNmM7jVS/uFG2x9WeKmJmmlo6HeBBs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KsnO1C7T; arc=none smtp.client-ip=100.103.45.18
+	bh=WEzZkvJXxM3nGSJKeR6SCi1fHH11JDLpL+1IYT2YMUw=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=Yh27/jRd2pBFLNXvnuFPcaRwCorLAWR1bAJRW4mLSpcUYsg5IKJNyK5sBXrQy0gbTrXdIh9sb2lyIu3PPOkAUoJhGU7SZ2vGdHZ03i/jz6ci6oqHy1TD2BhJt14YwMVitSLCLIsiYSKgLb0JXXF9mC7CX3VZbImVK05YMjJFOxs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=enguU/9n; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KsnO1C7T"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6AA161F00A3E;
-	Wed,  8 Jul 2026 14:57:54 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="enguU/9n"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 12EC41F000E9;
+	Wed,  8 Jul 2026 14:57:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783522674;
-	bh=nOSag16RGbDVov1huGGhdnX22kBaj9opib/mHTetd/o=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=KsnO1C7TSW0ApOpwgtPr0c1cVeHFREu6Vw3bUiXZWNFCZrDEb1s5OfHdbe6m0F3Q/
-	 3k1MTCjsfO//yohbCkCuYeWINsBmiCfjZPN/Zj4oOk2I02HPEz518bvjNLeYYzqiP0
-	 EGlAWmo9DGljACi2zP3Xk6NsTC9AEKRVxuXwqkADOXcF9KPQGj9lR2AQTuI0x4wkAN
-	 eUUdHDD1XJO8GwfxARrOovDh8rGzW2htlFExD/OXM2eKT0UWa4euGhdIxs0t+OU0z2
-	 NxgGdXqH2DOpTK8QRFwa8XXfIM9jwRTnZnjeWdwV67ygbtdxGhWQxmRS46ietTCe5+
-	 ehdn0g0qDwoTA==
+	s=k20260515; t=1783522675;
+	bh=N3xqkpimVRy54peMWlpoAGI4ntIhVMRt/V2o1OmxrJk=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=enguU/9n4LE49KOnVy90+hoh2CuKC9U2b8h7QAUxw9erj6a7AuiWjKnIxiRSsplmy
+	 l9PtCFY5se+JNMY8tcbk0sGnrZQuif7QDqq3eJfNJa4zY8yd9v7ZHH54HmtBksnsmf
+	 jyQ0PRyZ8fOb/Dfap0xeHyAuk3oXjzA7FFxXQ1f4mN2BcTbtucCqNtrI9zhU10vwL2
+	 5hpKmuhOImf7oiIIiRh6ot4eDuMqcMqps48FY8pAcuEntxJH3vZkWolKlGhcnrEUk5
+	 ycktgOihBISq7V32iBso9+WjJ4e/oD2LbwBM9nllyzntqJ3OjKSVGw9IkOp6wc2JWg
+	 Da/wE5Up3SXGA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	bjorn.andersson@oss.qualcomm.com,
-	chris.lew@oss.qualcomm.com,
-	linux-arm-msm@vger.kernel.org,
-	Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
-Subject: Re: [PATCH] arm64: defconfig: Enable Qualcomm BAM-DMUX WWAN driver
-Date: Wed,  8 Jul 2026 09:56:56 -0500
-Message-ID: <178352261616.2235436.8120334079218318332.b4-ty@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Aaron Kling <webgeek1234@gmail.com>
+Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Teguh Sobirin <teguh@sobir.in>
+Subject: Re: [PATCH] arm64: dts: qcom: sm8750: Add UART15
+Date: Wed,  8 Jul 2026 09:56:57 -0500
+Message-ID: <178352261627.2235436.5422094904444622236.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260611-qcom-arm64-defconfig-bam-dmux-v1-1-599190f17fc9@oss.qualcomm.com>
-References: <20260611-qcom-arm64-defconfig-bam-dmux-v1-1-599190f17fc9@oss.qualcomm.com>
+In-Reply-To: <20260605-sm8750-uart15-v1-1-93e660722e61@gmail.com>
+References: <20260605-sm8750-uart15-v1-1-93e660722e61@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -48,17 +52,15 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Thu, 11 Jun 2026 12:10:10 +0530, Vishnu Santhosh wrote:
-> Enable the BAM Data Multiplexer WWAN driver as a module to support
-> modem data channels on Qualcomm Shikra SoC. The driver is also used
-> by other platforms with A2 BAM hardware such as MSM8916 and MSM8939.
+On Fri, 05 Jun 2026 17:49:39 -0500, Aaron Kling wrote:
+> Add uart15 node for the UART bus present on the sm8750 SoC.
 > 
 > 
 
 Applied, thanks!
 
-[1/1] arm64: defconfig: Enable Qualcomm BAM-DMUX WWAN driver
-      commit: 9c1bb154d40b36434e919865cbb2b23da58a963b
+[1/1] arm64: dts: qcom: sm8750: Add UART15
+      commit: 50c0854e2703b4e446f83680d7eb0dc0bd5bb34d
 
 Best regards,
 -- 
