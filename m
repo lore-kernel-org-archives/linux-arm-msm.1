@@ -1,55 +1,85 @@
-Received: from relay.yourmailgateway.de (relay.yourmailgateway.de [188.68.63.170])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4872A3F39F7;
-	Wed,  8 Jul 2026 07:26:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=188.68.63.170
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ECCED3EFFC3
+	for <linux-arm-msm@vger.kernel.org>; Wed,  8 Jul 2026 07:29:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783495591; cv=none; b=R0EFaQei/leVtktWkd50tMG/jH5ZGs+DQxcgRWn0o2bLoeHHir9ujd56QZE/qjfkNrmP1cRpkOVlu9fEyPQCdtDsOyoqP2YqWVFIcPK8ema+iqvckGXEsjSZbkxFgTwexL7XGLlg/ArowYVjOa8whu0uMTywG2YeoUdePJbWuh4=
+	t=1783495752; cv=none; b=PDdLifYC6OLeDUDMEDItcKpDFefu2ASCr6SV4gUTp1HuxG2JhbY+NpHfCiwjEA2mDrB1i284EaV1RDXPoO+Cs1ENz4U5Syo4zTE/UeDWIS8O8Q9vBuxlIS4dmM4/tdLkXnIFXuAeWwT0ZILSmK+T6JgbVYJrxK4ZQxQiRUAZuWI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783495591; c=relaxed/simple;
-	bh=5LY8bT/imNZ0hDGVYBvbl9k4q5/qGxMeYoSJ3UOyGZc=;
+	s=arc-20240116; t=1783495752; c=relaxed/simple;
+	bh=Ugb0YDtHFZrdU/ufa9BpgTebHed1Xy+3F4Qxx+d9MZA=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=I9BgVlA7CPq9WjQGWWJCOpe2VFOmqvx5GRTcvEgcnkPnvFimQTgDlaSqnWPXkYilPPy6td7k6A4sEbvKPP/TsCm9VPayKbuz5eGwIBi4LRmrEnkyZbrj8QErpOU132i+QV1LBxV9PWTpujVvytqgHe9kjubeiJn4Gt7hBXq7QTI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=Ytoxyc2O; arc=none smtp.client-ip=188.68.63.170
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
+	 In-Reply-To:Content-Type; b=HF9txNq7oPPXpdFrfz3Cn8i9Rx4UmG3aUGGXlYdXkfQcni8YTgzaeFH/xow/uIWWqm6LXUaDmJd831kWOEU4ltdHkVy8/Zh7RPf4EP4wy1hWyus+K3OKwzGF5OLVHOJvQs6irRr6JI8v/J1rwlDVGlfse2f2K7OlVmwF3DIIL7w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=XTDKM/RO; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Tiv98RjT; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="Ytoxyc2O"
-Received: from mors-relay8203.netcup.net (localhost [127.0.0.1])
-	by mors-relay8203.netcup.net (Postfix) with ESMTPS id 4gw8lh34ZRz8jSJ;
-	Wed,  8 Jul 2026 07:26:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=leemhuis.info;
-	s=key2; t=1783495568;
-	bh=5LY8bT/imNZ0hDGVYBvbl9k4q5/qGxMeYoSJ3UOyGZc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=Ytoxyc2OPyMSmUmUMu7ZeFnUOUzZncMUH40tlVsTO8Li29lqsDrRbUWH3oSTMioOb
-	 VehXUIwJdz99wPIW1QW5cP0eTW4YDcvGq6BvyLIpoGQt5n0paxWQHm+8jfPDITyU+P
-	 clwrLO+UPjxDBtdtRe0hZazd2NkzQQYBNQsIZ4UcXslzcjQRgSkrpHN/5p/0kCGM7T
-	 1dMNhrMM4jK/1n+8QXoFb+ZP2t8Xz3MUMxslfDk/uXNN/+VpBI2m7+o/8vnqpW/B0O
-	 U+1x3V1tedRHtmYBzqvsZL4u1coYa/60fZUjbIRYbJWxLjtYOSlbs+AR340HJFaQ+/
-	 ELwOep5dT5J3w==
-Received: from policy01-mors.netcup.net (unknown [46.38.225.35])
-	by mors-relay8203.netcup.net (Postfix) with ESMTPS id 4gw8lh2M55z8jS3;
-	Wed,  8 Jul 2026 07:26:08 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at policy01-mors.netcup.net
-X-Spam-Flag: NO
-X-Spam-Score: -2.901
-X-Spam-Level: 
-Received: from mxe9fb.netcup.net (unknown [10.243.12.53])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by policy01-mors.netcup.net (Postfix) with ESMTPS id 4gw8ld5ZtWz8tcn;
-	Wed,  8 Jul 2026 09:26:05 +0200 (CEST)
-Received: from [IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f] (unknown [IPv6:2a02:8108:8984:1d00:a0cf:1912:4be:477f])
-	by mxe9fb.netcup.net (Postfix) with ESMTPSA id 15ED960387;
-	Wed,  8 Jul 2026 09:26:05 +0200 (CEST)
-Authentication-Results: mxe9fb;
-        spf=pass (sender IP is 2a02:8108:8984:1d00:a0cf:1912:4be:477f) smtp.mailfrom=regressions@leemhuis.info smtp.helo=[IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f]
-Received-SPF: pass (mxe9fb: connection is authenticated)
-Message-ID: <493b8d4c-164e-43c9-93c8-40cc251b1c3b@leemhuis.info>
-Date: Wed, 8 Jul 2026 09:26:04 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="XTDKM/RO";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Tiv98RjT"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66842Do71637818
+	for <linux-arm-msm@vger.kernel.org>; Wed, 8 Jul 2026 07:28:58 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	dvh5gJVY8//gKF0mr/H5qtFP7jMpQbhKSM7yYtQ3njU=; b=XTDKM/ROgQW88A9J
+	4ceQC92h/kboQMOd1fmCWfZ8IYSXbZ6/H5KiGZw67SckXZuBdjfdOO4qfryYSD05
+	n7d5FYscK0bC86lRG4MltHZvMaKBFeaQ7fCFg/AVfRho56byqzhHPvzf84FkzL1p
+	wL2HD3HogKNLn4nT2wlStHldKeBn4DL4ncu+8/lpZCtpMWiVsw8QJybYd1duVr0v
+	eu6V+Tu8Ar9q6QqY/JtvU6iEe0ZHhevwLgyHTtH5ArSC/JRkFCrrgyO6XfrYpV8x
+	TVoVmqW+8nd1b2I4o0FatWOgO6JgABsjqL94LFSkIPpqNA8HBQwZxz7a4XUAyh3j
+	+g4PUw==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f9c6a9d3b-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 07:28:58 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2cccfa32670so6191685ad.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 00:28:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1783495737; x=1784100537; darn=vger.kernel.org;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=dvh5gJVY8//gKF0mr/H5qtFP7jMpQbhKSM7yYtQ3njU=;
+        b=Tiv98RjT4OW6m8gu6Zuf/LORu2SEB1EWZAnaLIVxK2WDrYnek6oNLPOsZqyeXlK0ZG
+         gnWZa7kQLhsTlgVJ+dZm23+cFLgnV+wnJHfvjYRImvXd634m/yFQOHXnZEGzv4yv1dFB
+         EFBx3Lad4wYTFdnLcEHNEy9+CbDIA7x3WcdElTED8AhWPnDp/v8lwG4v8ZplN47VXFUh
+         syX6UNYDPXeCIF41dKYaLJYCfe45LqhlcjIYAdjvQWTql4pEyXhFNnWr+LKKS14409GY
+         h0ncYTkX5x4cWQ2nWnlFpyLeNKLrFc5emK27UMZT+z2ecTNGjnyoXzAvOS6QXBkBnYo6
+         ognA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783495737; x=1784100537;
+        h=content-transfer-encoding:in-reply-to:from:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to;
+        bh=dvh5gJVY8//gKF0mr/H5qtFP7jMpQbhKSM7yYtQ3njU=;
+        b=VwtZMGt7IHCG4OE6AqLwkNn0GGCAf1+L4pbr4/kZyrbLIuhFFFvpG5wzRtgtKN5fRC
+         l8sn8OZuZB9WSkzQxSTKT2IM65No7yVz1sGf02hAWHh0NT2W+vgbIIEXjsrkXdmRTokU
+         SqmZ/nLkJhLmRIWaKgPe/60Obb0Af+NvTUO1wTqjDYImCxmcxhEQVAecOfys5NBp8Xca
+         8NMaR1JKke4hUWXH8o5VJKSGlGPhnLIlm/DacIAtlpgjNe4p9dU5Uq+fePWch/hIMhE5
+         Fa9ZDGK5SQNMdZCCcUitj7QRDFmOzUuMo+sD3cL5cTrS/iRO04RIJMrnCrMVrtlAZhN4
+         Eeiw==
+X-Gm-Message-State: AOJu0YzNnCJCrvUCXab7am/HRV+043O3YFtqnpvCzsTjvtXGSUELpyAd
+	ANGs6dubvtKvu1CLcPuC+y0LPC9ObHH9ayyJI7SFseMmqNGJPqU6/Iu05ULlJ7f8MCXvil4vsOM
+	vWkTmYeG/ppthE1SNyVbxnw6u+brS1eINcWedIaMxFrtl3+denSsLYWMtnGttrle6ReIy
+X-Gm-Gg: AfdE7cmxmrI8VJ999wHSAEkFIwdxoMdg6uchGnkK3rvi8hfwFMaNVEyflwvSAkNXArE
+	78gujaYXS0p5apyYvKHWi2o6AvAlLbL5sKQ65efMbt6C4AYUc8QhTyIZt1j2+giWLj65k+Mz9y+
+	8E19RUVrCFj1rmYgnAqOjKyxQmm3f3ANCSyDy40+YnRcWTuZUJN7/ytIQ+syyKdWBSvXUZ84wK3
+	/rQKFSBF0RHMzCl8HP/aTHuAOKdUvdh64LpgENumVgcKAcpe3I9qfvaVO7RiuFOYyLtk9fa5L40
+	y5MNe67tBmcV24K9vOcTXxfPYockA7vZ08zf5fEoJ7bMx3vu4OMIVXNHaku56KlH0h5IpRJAjwO
+	o/MCNwiWX/1e3rKx2QeyFxp6LNX0O3nEZYUJwozP+wNqP
+X-Received: by 2002:a17:902:e950:b0:2ca:ecf6:9104 with SMTP id d9443c01a7336-2ccea384155mr14778735ad.4.1783495737350;
+        Wed, 08 Jul 2026 00:28:57 -0700 (PDT)
+X-Received: by 2002:a17:902:e950:b0:2ca:ecf6:9104 with SMTP id d9443c01a7336-2ccea384155mr14778405ad.4.1783495736875;
+        Wed, 08 Jul 2026 00:28:56 -0700 (PDT)
+Received: from [10.217.219.87] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ccc99cc5aasm23834915ad.0.2026.07.08.00.28.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 08 Jul 2026 00:28:56 -0700 (PDT)
+Message-ID: <55298d53-9609-44fb-bf02-1d2e8ee03635@oss.qualcomm.com>
+Date: Wed, 8 Jul 2026 12:58:52 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -57,69 +87,61 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [REGRESSION] Resolutions broken after "drm/msm: dsi: fix PLL init
- in bonded mode"
-To: Mohit Dsor <mohit.dsor@oss.qualcomm.com>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: neil.armstrong@linaro.org, linux-arm-msm@vger.kernel.org,
- dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, vishnu.saini@qualcomm.oss.com,
- Linux kernel regressions list <regressions@lists.linux.dev>
-References: 
- <20251027-topic-sm8x50-fix-dsi-bonded-v1-1-a477cd3f907d@linaro.org>
- <ae07cef84AmXK43H@hu-mdsor-hyd.qualcomm.com>
- <wrhuksrzlxw2pjlvjm37dwjuztcv7qs5t6mqiav4ujecwqdkwj@ozbfxpbgaimt>
- <CAJfMnmEVwUwt=wMJ-8HKH1yz9+erWLrRGB+6wVYCdSGDK+_T_Q@mail.gmail.com>
- <114b9be8-1fca-4762-822e-1d53838d5de5@leemhuis.info>
- <o64cxeq5f4ffqpdmbai5cvsmxei2cnw3p6acvu55xl3cj5w3z3@6o6kokszvng7>
- <akt6z1irWlXA5UIy@hu-mdsor-hyd.qualcomm.com>
-From: Thorsten Leemhuis <regressions@leemhuis.info>
-Content-Language: de-DE, en-US
-In-Reply-To: <akt6z1irWlXA5UIy@hu-mdsor-hyd.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-PPP-Message-ID: 
- <178349556544.3070247.15236089481411826401@mxe9fb.netcup.net>
-X-NC-CID: RfHKFpT+VIRJGSr9fXRLCpQG9SZhPbl2OkmSxD8gg/EiR9ID1hk=
+Subject: Re: [PATCH v1] dt-bindings: dma: qcom,gpi: Document GPI DMA engine
+ for Maili
+To: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>,
+        Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260708-maili_upstream_gpi_binding-v1-1-e48cb7e216e3@oss.qualcomm.com>
+Content-Language: en-US
+From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
+In-Reply-To: <20260708-maili_upstream_gpi_binding-v1-1-e48cb7e216e3@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA4MDA3MCBTYWx0ZWRfX2WaeetrzMa5T
+ SLPU49vrbRbm3dVacaLkkTl35amcuDlT1+sjQ+RN75pDlvdfSd18AafONEIg7QU7r8UN6XkSMwu
+ zcBI5rjhCzByXC0YXCP3a9hD1yrVQ4DqeC7vEywk9RS0/Vj7ahEBjM2phtSTwktsa107aYTTHWj
+ 6brs77IBAtwJe02Zorwcj8dZVrV4oAKrOg+FbliwBBMTSAP9rlJkC6abTfeMBcHMLWTfb/AtYLl
+ 0veroCUn2SQH0+rUW1h+q3o4owHbHJHMgNISqBOfrPKpKbwd2t5dZEmewDRfjQvkueTU1fBBzZ3
+ Fj2NIZwEDlhv4yo+iHuN16IC3Iw0NvucqTMqYFHhLW6+Ln6ty2B920SQrd4k4NfjjwXf25LH7FR
+ RApHVgqWVdjdqe4BwjjqfkEKCzqECwbX67rI1S5WpGQ143bzD14RLPiRtN/CLo+9GKWjLnm89jK
+ onC/MqssdpxOPQwGrjA==
+X-Proofpoint-ORIG-GUID: exJjYoqMypQlzNw5ybGOifHbEWAHOXMT
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA4MDA3MCBTYWx0ZWRfX5FlepCLxI8uL
+ smqiKVPt4xXH8ycex43woYi/qCi4ymY+Yy11hSm/kvdVznM0UV/8DNFA9A6ksyyNHEK77XCJqFx
+ lohL3nmK+Bd0cU+Q4NLYTBvlNOv6Z98=
+X-Authority-Analysis: v=2.4 cv=UehhjqSN c=1 sm=1 tr=0 ts=6a4dfc3a cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=vY-R0Ho-sSes-qxfqNcA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-GUID: exJjYoqMypQlzNw5ybGOifHbEWAHOXMT
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-07_06,2026-07-06_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 suspectscore=0 spamscore=0 phishscore=0 adultscore=0
+ lowpriorityscore=0 clxscore=1015 priorityscore=1501 bulkscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607080070
 
-On 7/6/26 11:52, Mohit Dsor wrote:
-> On Wed, Jun 03, 2026 at 03:11:34PM +0300, Dmitry Baryshkov wrote:
->> On Wed, Jun 03, 2026 at 11:56:15AM +0200, Thorsten Leemhuis wrote:
->>> On 5/4/26 22:09, Mohit Dsor wrote:
->>>> Sorry for the late reply. I am attaching clk_summary and reg_dump in
->>>> working and non working case. Lilliput is just a normal display working
->>>> with hdmi and has 720p as preferred mode. Yes, I was talking about RB3
->>>> Gen2 only.
->>>
->>> Neil, Dmitry, and Mohit: what's the status here? From the outside it
->>> looks like this regression is still unfixed with nothing happening for
->>> weeks now. Or has progress been made and I just missed it?
->>
->> Thanks as a reminder. Unfortunately, it takes some more time (and I've
->> been a bit overloaded lately). Worst case I will send a revert soon.
->>
-> Just wanted to check if you had a chance to look into this issue and whether there's any update on the investigation from your side.
-Hmm, no reply. Given that we are entering holiday season and are way
-past what Linus expects in a situation like this[1] I'd say we should go
-for a revert, unless some fix shows up really soon now.
 
-Ciao, Thorsten
 
-[1] To quote Linus statements from
-https://www.kernel.org/doc/html/latest/process/handling-regressions.html#on-how-quickly-regressions-should-be-fixed
+On 7/8/2026 12:35 PM, Jyothi Kumar Seerapu wrote:
+> Document the GPI DMA engine on the Maili platform.
+> 
+> Signed-off-by: Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>
+> ---
+>   Documentation/devicetree/bindings/dma/qcom,gpi.yaml | 1 +
+>   1 file changed, 1 insertion(+)
+> 
 
-"""
-From 2026-01-22:
+Acked-by: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
 
- But a user complaining should basically result in an immediate fix -
- possibly a "revert and rethink".
 
-With a later clarification on 2026-01-28:
-
- It's also worth noting that "immediate" obviously doesn't mean "right
- this *second* when the problem has been reported".
-
- But if it's a regression with a known commit that caused it, I think
- the rule of thumb should generally be "within a week", preferably
- before the next rc.
-"""
