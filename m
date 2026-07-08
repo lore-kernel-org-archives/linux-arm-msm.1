@@ -1,44 +1,47 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBA5547886E;
-	Wed,  8 Jul 2026 14:57:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92DBC4C8FEA;
+	Wed,  8 Jul 2026 14:57:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783522639; cv=none; b=cdibG4ATJbiVwt18tof2zmKxm00qx8NlPIwKTwl1WO9rfaByShGlF1wCPIaVtOO6HS2ejiwe0SSMsjKzhNK+nagTpZRnqFLOjTr9JjHWNZ6s6YXWPaSgkdIVk/6khM+HuFJKUn/AQyOi7fHDzeYbArjR8XWfTRGrPuFhWifd3xs=
+	t=1783522639; cv=none; b=aB8z5C2mez48MAQrLP0G4JIhnRHHiqkLy7fpKFCWJrYd9QOsfcLmgy4ZvQ9NDl42MnpYSdlGcvxFbTDzwfxffxAJhPzlmO9bTT6klHVoeVZR7JWB8hflM1eirr6mdMP/JPBNxgPQ2Mzo3obN/v1Nu6egDETIID98YzKoKmTa6EA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1783522639; c=relaxed/simple;
-	bh=zva2rRBeHuEN2IolFxVcZjYpcR3Ar0pDSVTAlH0qH+4=;
+	bh=5kQi5NTnSGX/j5auue0b/PIKjVbuV9kP9Mi68KtrQOA=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=ksnzf1q3sC+bx5JibiL735PCbgpIjiAkFm+FQewYWQg8xN3kJ3SqpptEys8cBOR81Oc1f+hdfGRaiiaWp88IrhqyKn/vh+4j6T+eq/evEs6KJnaXblq1F2SI/Quf3ZlLG5aU4NKZZ5HbSyGrluyzzE1IbXW3dWV6RZ3PmhQ/yk8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=F4lmV3bs; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=VYlh+88HjZP98QCL1t3mSvF0VMMyV/c6Z7wSyFgl3wPKtxOuiXvliMm5xoEAQt9mrf8O79Qcu7a63++MJ8LljkFoMZgkIcMNCmqU0eU8uBwL+SIDjJ8gImeLiptAJNvCIUwyfZ6l0C3Uc43WE0j62EhLaQmqexpDjOmOCnkbr1o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fPjkldQS; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="F4lmV3bs"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2AB2F1F00AC4;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fPjkldQS"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CB3EB1F00A3D;
 	Wed,  8 Jul 2026 14:57:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783522637;
-	bh=AxbHpsGj+0x0gXgzF45YXJSN7mWnZiagdib1WnEcxr8=;
+	s=k20260515; t=1783522638;
+	bh=GFised6SOyOQAidEm8yAUitbjqRQiuOOtYkwkhPGTDA=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=F4lmV3bsnVjGFCi8Y7qcKZuYfA6DqYuG41ohsR0HFpOpEb+/cz1DJl8z+hqDZsZQ0
-	 z6A+xs3+OEtATZcowNqUyOj2Oo6+6YiBMlUtClUZXAJlOLwCS2+6sM/TzQ/FA/FfyU
-	 okts8SQAhc5qJzWXI7dgUFikylwrG4ghaJdXlM/MICUN1TQtbZuh4Xl7QaeZm25kyd
-	 vWgYj/UVTg7acUmaAXSk3ch7kvzIIDTNpZgBveB6QwkbSB51pcn8lNcFjec6NvrXV3
-	 n3ufyoTfJxQ7H6nQnc/l0MwggyEy+Tc2hOkLdVhNH/lopHBvPvEMRCwDJifjwaSZjA
-	 suVKz2MYt6w0g==
+	b=fPjkldQSwvN/mSSKl6lS40/mRLhi4VrWgESr1/ZMZEuLJH9omg5xUahd75mFWfNZt
+	 pYXFnKcvN0QseyjTP5DPrFpvkYv/RPpmftT6NvKmrN0Mg3XccjSnAdAYD/j4dVMGid
+	 QyVNgHMMyIQS4nPMJU2Y6dmfaYkXiTH+t2pO/8q2eFCg1e7/dFD4dft/ZCEX+ihuhn
+	 CYEo4cNiZqCxTEDahKKhtuo9sdiKO2REQ4E3UC1qVOeP2MvhW1kaP0F9RLKRMY1970
+	 Rxq1Ef06z61He1IlXMI4enQ4pdR8vjtPoPfn3gsgr1xj9JzQQO3L4GycYULOONkmzo
+	 HUEgT3YIH78ZA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Herman van Hazendonk <github.com@herrie.org>
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Rudraksha Gupta <guptarud@gmail.com>
 Cc: linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/3] clk: qcom: gdsc: three pre-existing correctness fixes
-Date: Wed,  8 Jul 2026 09:56:18 -0500
-Message-ID: <178352261579.2235436.1160754515486201566.b4-ty@kernel.org>
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Subject: Re: [PATCH v2] ARM: dts: qcom: msm8960: expressatt: Add coreriver,tc360-touchkey
+Date: Wed,  8 Jul 2026 09:56:19 -0500
+Message-ID: <178352261589.2235436.9498498267915599094.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260602140934.796697-1-github.com@herrie.org>
-References: <20260602140934.796697-1-github.com@herrie.org>
+In-Reply-To: <20260527-expressatt-touchkey-v2-1-049dca41fc3a@gmail.com>
+References: <20260527-expressatt-touchkey-v2-1-049dca41fc3a@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -49,24 +52,20 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Tue, 02 Jun 2026 16:09:31 +0200, Herman van Hazendonk wrote:
-> While preparing MSM8x60 support for the GDSC core (a separate series,
-> adding LEGACY_FOOTSWITCH and RPM_ALWAYS_ON), code review surfaced
-> three pre-existing correctness issues in drivers/clk/qcom/gdsc.c that
-> are independent of any new SoC enabling work. This series collects
-> those three fixes so each can be reviewed and queued on its own
-> schedule without blocking the MSM8x60 series.
+On Wed, 27 May 2026 19:13:41 -0700, Rudraksha Gupta wrote:
+> Add the tc360 touchkey. It's unknown if this is the actual model of the
+> touchkey, as downstream doesn't mention a variant, but this works.
+> 
+> Link:
+> https://github.com/LineageOS/android_kernel_samsung_d2/blob/stable/cm-12.0-YNG4N/drivers/input/keyboard/cypress_touchkey_236/Makefile#L5
+> 
 > 
 > [...]
 
 Applied, thanks!
 
-[1/3] clk: qcom: gdsc: propagate gdsc_check_status() errors from gdsc_poll_status
-      commit: d69f0c2b8d292b4890c9f0fbe184dfc26c4de86c
-[2/3] clk: qcom: gdsc: propagate gdsc_enable() failure for ALWAYS_ON domains
-      commit: eea55fc694e132aacbe2cf4be7f345115e3d1801
-[3/3] clk: qcom: gdsc: tear down per-domain genpds in gdsc_unregister()
-      commit: 86b23609d5e17a770d03037e53c6a443e742a6e6
+[1/1] ARM: dts: qcom: msm8960: expressatt: Add coreriver,tc360-touchkey
+      commit: 346e9112f3dab91a5cf3100a99ec256ff0b7f0fe
 
 Best regards,
 -- 
