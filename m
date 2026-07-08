@@ -1,45 +1,42 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DB304DBD96;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5491481AA2;
 	Wed,  8 Jul 2026 14:57:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783522654; cv=none; b=F7i8gdKIuOXzFgKD6EODneC9rdmqNFnrajTvtQQ9aQ313LVJiU+VT6o7ulSaCEfdsHIne84m0uXl1G/5YtLLDMGOh4ARy46F1ajHGb04cCiVgcMJFuSV5UUFQJegc4zXgH6OisrfwLboyPzeIisGcDaWCqgYmcLfB3WJRZjgfCY=
+	t=1783522654; cv=none; b=Nkd1OsFso2ByH/5mrQjpy2XDLqaz6nPEaaWSHCVJrL0+/yXs4uTtpBTBx0zHL/cvT8My1WuMUTTvyz3GhDZtToi8JFZ1X9euqEBFIFRuU2dVOQsC8M8Al5QFXPZmCW0cwSLpycA6QWgk/Ih+/NchxUTghyYc8w+/fRSrZYxBAMI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1783522654; c=relaxed/simple;
-	bh=P5DHpr9ClUsKnX04Srnimmbvt52JOhpiAio6zzOJyJU=;
+	bh=H5UNhHNF9ZEx4X6nbiytNR1sMHCh8+LPGKoOr31hNIo=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=TSBbX5xzRw0n7V/jY2jtiz0cJC5fSHu9+DlCWccIUL5scu9JbdiC82ZVNZoMgZKHaTMohm703OU9yzIrFFt4wqASZgqGCKXdlLIQjcY+8g7tNHspaZGbiewXLbuahz1yRAVAYsy5RYh6XUW4ANJvOdKyW/9mmm2WBge06I2dW4c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NK3tlUkf; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=fxJuCgrHPf6oP9g4Ij2RflB4CoMfcFDA0chuyT7lw7kRObCqnse5I2VTgB6SS2trJVtWH4iD6uOayZvMP+L+A9ePm2gYpEa8Pt155bevamKBW0TZ9xxOYGET24Tgw5lJfjRhnqEMH62/YGJKSv5MTQGizPVQvrJQoPlIuBI6A+A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WoVP50l8; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NK3tlUkf"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 84AE71F00A3D;
-	Wed,  8 Jul 2026 14:57:32 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WoVP50l8"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 481731F00A3F;
+	Wed,  8 Jul 2026 14:57:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
 	s=k20260515; t=1783522653;
-	bh=a0y4e/gWco9TabFBBmcEnz9gkKxDe+RCAaMIzW1DFQ8=;
+	bh=rQDDAh1UqzZleTCamOtk+oazQ+HIsh2cI0Oi5RA0Wgs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=NK3tlUkfyDJTyS2ySeT2bRNh7kB548nTYTJNpejoOL4GZ6M18Wy8tMbLRD+JSegVI
-	 FehNVa/lDO0sF3Ab6oyCrIpfCbBFicDsoZYisTSGruDcSw+fCN8lkuRl9g2QkWNIFK
-	 ToUwSVXHrr8MIZn7EWfOnyTZIMNx7wzJa6c/vKDpM+1UNpD66Iw43WWXky1cDWd5Ml
-	 CJrSmwfPbhBs28ISBB+1xMgUpyWMamMzksOtX4VA/DavWAJbGltc7DQ+8aVzltU/RW
-	 GuxPqWU1jSVNE1ipgHgIY9IRzM7j4/u1RJd8hi5jxQHYUNf6f13I1BdCBIWZj3V3Qk
-	 DA3JF4WSn6LfQ==
+	b=WoVP50l8Zpgc4BXcmg5/HI0saMNJXHuOfnKAo7H7bMmjthOyrDVUXXMgBG7gUcj1J
+	 XEwe15H7EHn+bY+2JDmYey5/vMQ6uf6+yirCbVx9HU4TaW/ZiC5YePPcuoP6qXmOVi
+	 TT4H3l1xZ98w8efc9jHasFtH/F/S6ocZhae0n1aZFsNsAVNcNXxLQs/aF1t8rUKc6R
+	 JDwOI9m8zHR738KS0qLcp67QuIL5A74RZMksoAr7C1q4hNTP/cd0hMiBTQNRFYbauS
+	 R0ofBJKGxN06eDafdfpftR5gLwtOK7M/QAzbm2yehugkyRlbNv/73T4CLvWaSxmMme
+	 g4mbaa6zddrJA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney@redhat.com>,
-	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Komal Bajaj <komal.bajaj@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] clk: qcom: gcc-ipq5424: drop the CLK_IGNORE_UNUSED flag
-Date: Wed,  8 Jul 2026 09:56:33 -0500
-Message-ID: <178352261617.2235436.213725716394979189.b4-ty@kernel.org>
+Subject: Re: [PATCH] soc: qcom: llcc: Add configuration data for Shikra SoC
+Date: Wed,  8 Jul 2026 09:56:34 -0500
+Message-ID: <178352261587.2235436.1532281778388805932.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260610-ipq5424_drop_clk_ignore_unused-v2-1-15240af073d6@oss.qualcomm.com>
-References: <20260610-ipq5424_drop_clk_ignore_unused-v2-1-15240af073d6@oss.qualcomm.com>
+In-Reply-To: <20260531-shikra_llcc_conf-v1-1-fa405f5a2404@oss.qualcomm.com>
+References: <20260531-shikra_llcc_conf-v1-1-fa405f5a2404@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -50,16 +47,15 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 10 Jun 2026 19:49:17 +0530, Kathiravan Thirumoorthy wrote:
-> Since PCIe and USB are enabled and consume GPLL4, there is no need to
-> keep the CLK_IGNORE_UNUSED flag. Drop it.
+On Sun, 31 May 2026 03:09:01 +0530, Komal Bajaj wrote:
+> Add Last Level Cache table and configs for the Shikra SoC.
 > 
 > 
 
 Applied, thanks!
 
-[1/1] clk: qcom: gcc-ipq5424: drop the CLK_IGNORE_UNUSED flag
-      commit: f3d8db39d91e52f5db14047547b3eb3467446f78
+[1/1] soc: qcom: llcc: Add configuration data for Shikra SoC
+      commit: 3467fec5322678463fa5e43556eb0216f6a0ca22
 
 Best regards,
 -- 
