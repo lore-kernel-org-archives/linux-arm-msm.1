@@ -1,281 +1,286 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05C7247B438
-	for <linux-arm-msm@vger.kernel.org>; Wed,  8 Jul 2026 14:19:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 978FB47884F
+	for <linux-arm-msm@vger.kernel.org>; Wed,  8 Jul 2026 14:19:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783520354; cv=none; b=Ah5Zm4p/WtQjpqyvgOPU7Pj6tYMF8YvL2mmPjtqg+MZJ9ejx/Q5o9Oe08alUcMbDJyYlA7LrPU3QwezCxKOe7/FeEyqGxAV9MB6TvRb+gG+MUgkMfI8MfKJfoOYx9SNjO81dsNTiIPReRGQryD91tMgjM3dTxp1UcgG4PH5uwkk=
+	t=1783520361; cv=none; b=AgD1x3A1tPRK22Bu0f3btar7kWcNmi2LaeGA+BqHrMC6dHVVTGFcuBW8H23xkfwYarUuQhrtVjjPhwcUW90p/vNW8Ni0u5ImnhnVwBeAVX0VnA4+mHqCc9ladrkR+DFSOPwjEEgHXMRZDxpSMkexkbUpyq9p8eOrm7TKhzfRx2E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783520354; c=relaxed/simple;
-	bh=+NBAVrPIo7sHJ7MgnZXaHhnNEpFD2cpSnzyBi8ZsiQQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=iToYkwuXlL5X4/4xRLEED8yjHjNDGAYvJzOoDjVJgFXtYZ9vtJzFTFk7kpxP3iBSqBnQaPxJbucMUdR3qU3gLIunFZZQAsw7viXCDbaMQU+UrwIOc6diJ7nrMy5U8jsY4EozCFyjC/kHFdkO/1k1+Y8hLA+VI0NG37iNraROq+4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jiAx/El8; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=JkTqNqD3; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1783520361; c=relaxed/simple;
+	bh=W+FH/hihk45TjXu/Dl+KwPA0SNPvmFDimRQIFSI/5qo=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=Utr55fu/7rbBzhQtTPSNiim3NcVEPf2i3W8hDWB0k4Gx6eAUf6LbMFBdjIjZSpt+o6dVmtJX9wEKoGEMzAQ0P8qRWm5+l8jctmrLzLlCwHluou54/4hjTXzaLPjkkiLReUFCIaMkiF9KYQ2jBZQLXACIFFwpL2lpFxZEQ5qpUZw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NzPIo79I; arc=none smtp.client-ip=209.85.214.173
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jiAx/El8";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JkTqNqD3"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 668C3ge52758970
-	for <linux-arm-msm@vger.kernel.org>; Wed, 8 Jul 2026 14:19:12 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	6/hI2Z5d+V7iRiB8SiYtwd77BV05jUQxuFx+qxsaBDo=; b=jiAx/El8MFkuvlra
-	XpDo8Ubre+ptbaxkbdfzFWMgAkQmo1ao1VB8UIry8FI4J6x4stk5MK98WKpw1Wqi
-	QXgDLMN4vuCaXjEV5Ju90sU/n56n0DUKkasrrvkQUut6x+x8XUzLEeESEdO467mS
-	wneYWDsPKhg08NVfWK1C0/0AjTylTfm8TltjJYKVhTnWK/suX9a1Exxo99YkhkGa
-	x5PtUnKrWc2cuq+OueuukwPDLUqMRMHChQU0B0IPyn1gIyvtpRXC/fTaK7NbWAk+
-	iEoSoMzb+UiDGPQK2b6IdeD1GIcq4XxGRZHf8mYNpHTdu3hQ4XQU7GfeFahDPiKT
-	6/Kuog==
-Received: from mail-ua1-f69.google.com (mail-ua1-f69.google.com [209.85.222.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f95e5vtkr-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 14:19:11 +0000 (GMT)
-Received: by mail-ua1-f69.google.com with SMTP id a1e0cc1a2514c-967973f71fcso233153241.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 07:19:11 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NzPIo79I"
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2cc61541f8cso25906655ad.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 07:19:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1783520351; x=1784125151; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1783520359; x=1784125159; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=6/hI2Z5d+V7iRiB8SiYtwd77BV05jUQxuFx+qxsaBDo=;
-        b=JkTqNqD3YThRN8+dkjYD3vV51EdObLS494579V1vqwYvnTRsAFyYVrtILLX2N1mKtM
-         pBUEUi+2042jEBqSCOptGsgOmL+I2W+2UtSBFbSa2Pon7VNrbm7Gnh5kDX3i6F6XCbCT
-         a6v6eeqgDI56awYNQyY5Ehht8Hg2VOw3Zd2RWPYE9iAJUUNjg0g2dJQ1vKJH7FaBjGLq
-         mMKXKe38IXPskuo9FqIU5mAusrSlYFxoH8eDP3O6RKN78UE0/OaKN/BAS0zzVPRca8lO
-         OfAWnkiIlOcfwyPSp41t9AVSJr0zKo914nFrjOcAPIPaW2vx/RtMWDB4IMRpVTfoENC7
-         ILEA==
+        bh=E63rONCybeKNZ9BBxLw4/pUgmeGU/hnyC6bCIs5It3Y=;
+        b=NzPIo79IJcseJXGb4t+kE41VwawpKTPSa5EXKw6vBU8dRDcr3vnmV9vvXjjDAiHt15
+         HWO5FEAmawjrSKvKvg8xheLfs7o42a++UrX3hZBliLs/TMDwh8eFp/lfKLV6lUXbKuWH
+         bvd5Pq3ZYanFnSjKGlyfa4J827PeMnqv3SBpkvtt+9oBWkhkmTgt9pAU7oBZle4+H2Cp
+         z0R6DEiVnavy+BerfY3tvZ7qV8N5fYCWmzEGBF5X5Up1bXzAX5tG5bmmYSN18gNPwGGm
+         RLnEWP2xopCk+PESQeP5JGHap8PT/n50OaTpUfo4e4LfT938JB+Qa4cqQIBL7OTrIl1U
+         KoFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783520351; x=1784125151;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=6/hI2Z5d+V7iRiB8SiYtwd77BV05jUQxuFx+qxsaBDo=;
-        b=VXpZS2bD7/06jAaEUICuChveJr5Kiq83V+R0p0UrXH38rLDf675Qub58Of/Tm+ZocE
-         SVCz/vRVvH0BMvTX7r38rvfrsDSmGnV7IuZqgFOJ+foSCKgBQYRzSz3aRTNCGx8P+gfA
-         FfNzxCvQ9WfClUhUq5/EiO+X4Xalt1ahWBozY4ime8wrPjcCD5avtm6tZOPhOASPDPoB
-         0+xf8RXkueUbGXEUDF8bS45DlgvA3/g7xx+hKIMqX3EkJfEOMlpzIJXtJg2HSgv6lC+A
-         oq1XJWpt35bX3i44X1vcGZ6fL0K4iAH5K5mSTFNDaAQ8QRR3krvqV89RrxgFgiH31MgC
-         O02g==
-X-Forwarded-Encrypted: i=1; AHgh+RpR4e9DMoVYl5djepGWjevulztk+m8NAIe2KL9s1agZ1bqQg8Miwh5qY/APk/QQ+JJHMNnvrMAsbccDfEVB@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz8YE1pfuoIWgKE3FPfCE4sm6aJC8bGDhj5LPuG3ebnMLfGzuFR
-	WZNFIhWCxUlvnyTDFi92Rrq5xY2Z24wcG/LI/xGNFLblTKO96g2P6t1RPvDdrL9gzNbJ9gzlVUc
-	t1Hbjy4yzQFlQ5iKZl4+ucJ80tUWZjv+wTdifVMKc7uGIhxRgk/G32jP9q2j+uLzWY0V3
-X-Gm-Gg: AfdE7ckKEJMadYVbbWdlW1r0Fbju2dCQySWnSI0LJBwB3GZwLNwo6MXewfWldUd35f9
-	fjhRlQE9x14kTCJ7Q7ykak7AGZJ4h0PTHmjKh2hHENVb094zo1l3KEO3eLBgpzpt3JkS+317/Gu
-	D3tZ6JWPcCfLC/ceg0kOj7u72rm7b4NL0zZXuCigdLT8LTpk9lBhIAFURao5BHijqc11TBLzSnV
-	ER06fh93hhs/ntgCHFPBy7L16w0hmqWOxrX2XLb5gcau0KfD9b5W5p/wbafpfPD4wvj1O0KAdBy
-	TOgR/5RUUNlNApA8jY1kXyrCiQJ0Wuaoa4yQKPXHWePjNoGp4gklGRLDkjdypm2xODEUfJD1QFf
-	wDnfL8VL5GW+eV0o/uGCyZFVl2teZDgFo7o4ezvGznhSo3hjML1t7m5jm7aQPA4LKTmANo6mZj+
-	fDAgk57eYxJAemwOJ2A0dF6sKtcBqPopVxzuu/nk/L1OppBoxekKu4tlhKZL+hq7pVZF7NrfVf7
-	D+KkCqvB51nBFNCvP0V
-X-Received: by 2002:a05:6102:5e8c:b0:633:f2bf:7de4 with SMTP id ada2fe7eead31-744dffb3680mr1400935137.10.1783520351156;
-        Wed, 08 Jul 2026 07:19:11 -0700 (PDT)
-X-Received: by 2002:a05:6102:5e8c:b0:633:f2bf:7de4 with SMTP id ada2fe7eead31-744dffb3680mr1400884137.10.1783520350378;
-        Wed, 08 Jul 2026 07:19:10 -0700 (PDT)
-Received: from QCOM-eG0v1AUPpu.na.qualcomm.com (82-64-236-198.subs.proxad.net. [82.64.236.198])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-69a9c4a4027sm3080829a12.29.2026.07.08.07.19.08
+        d=1e100.net; s=20251104; t=1783520359; x=1784125159;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=E63rONCybeKNZ9BBxLw4/pUgmeGU/hnyC6bCIs5It3Y=;
+        b=LsbMt4nVIFpW1TS24CvPuQSihTgGq2qk0nOIMPFkGwQ+e4HTZAiV/tGtogztWk/jkp
+         zRfOCjId/Tb/zYvAqjBP0VuB1WYMg3zSWy7jPNb+elVyQDgoZQio23X9lFjzubnSkre0
+         qHtJ1RiyApXKheyFYEFh2av1tb0H6cKEAVByHORS7aa+frpjJt6t0P+RQ0fU6NiWBIar
+         tCDALs3M2TEMPEaGiR+sBWaEUENoivxb5uGYsG7MAMEzI9mCf65nDWV3zJmWX1L6hPl5
+         a+ygl9r9Wx4SuK0+r6LA08axmG1N46ayNgsnvvuJPZMygYs7eIVO4QSexWJXOC5PAz34
+         4ZCg==
+X-Forwarded-Encrypted: i=1; AHgh+RoBk67iazy7lbETacu9OT5fNF2VJ9oXvavoFdP7PTt3RzY9oF2okaWWOp0bukNNkBQvbrsuXqce2699hiP6@vger.kernel.org
+X-Gm-Message-State: AOJu0YyJr/vWTOK3v03BOVQjH06Vl2UTcYQNUxN54l+BV9FlepxhOc1r
+	XMdorIhmUJLazD//ohOMZkPw/idR/ZdfwwGgmxcyyt7CV5kGoEjAqRIU
+X-Gm-Gg: AfdE7ckT1g8W08LQybYn4pR9zz/92oMV1DKrt/DEcAGoOGlRNgdbvXkhZ6fSeu/J00X
+	XD20KANDK67vLF+4Y9xov5Z4sZdpx5K29t1m/tAYAYqZum4ekZLvt8RRiB3j8SXiItgqXd5rjL2
+	bkdimrvR8aKnWvW7uQTeDMzXNelETUcpSWqPgZkV8S8CaPteuzsZEfiRYJGP9awv4qOPeL4n1Rn
+	g8UQ9SIQhVK865dznJ8bewJpZD2O8tATOuLiiK3VBOvc5zoHBINU908uwwrVBsRyYqPUR6GZFJM
+	c3XHUDShYOFENOQ+f5/2gzP7lozWAMJAtGwEQVF7DEjA6VV92lZb3sXlfHyO7eCvJq0FZqnU/aj
+	VymLvjrB7DQ3pQADt2XxRhxibYqW9DWjN4r82DGmtJx9LxOTfvUHmaC3bYWzJ2/VeLlHxeYz4Zh
+	yRV1lgWxRX8yF7uV+7enfcqNN47rX8zSBItx8hfL8pgpl9veI=
+X-Received: by 2002:a17:902:ce82:b0:2ca:9a9f:bb10 with SMTP id d9443c01a7336-2cccadc6e24mr67354425ad.22.1783520359028;
+        Wed, 08 Jul 2026 07:19:19 -0700 (PDT)
+Received: from phuc-desktop.. ([183.91.15.56])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ccc9d3bcc0sm28841575ad.67.2026.07.08.07.19.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jul 2026 07:19:08 -0700 (PDT)
-From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Wed, 08 Jul 2026 16:19:03 +0200
-Subject: [PATCH v4 4/4] arm64: dts: monaco-arduino-monza: microcontroller
- LEDs
+        Wed, 08 Jul 2026 07:19:18 -0700 (PDT)
+From: phucduc.bui@gmail.com
+To: Mark Brown <broonie@kernel.org>,
+	Takashi Iwai <tiwai@suse.com>,
+	Nick Li <nick.li@foursemi.com>,
+	Herve Codina <herve.codina@bootlin.com>
+Cc: Support Opensource <support.opensource@diasemi.com>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Charles Keepax <ckeepax@opensource.cirrus.com>,
+	Richard Fitzgerald <rf@opensource.cirrus.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Shenghao Ding <shenghao-ding@ti.com>,
+	Kevin Lu <kevin-lu@ti.com>,
+	Baojun Xu <baojun.xu@ti.com>,
+	Sen Wang <sen@ti.com>,
+	Oder Chiou <oder_chiou@realtek.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+	u.kleine-koenig@baylibre.com,
+	Zhang Yi <zhangyi@everest-semi.com>,
+	Marco Crivellari <marco.crivellari@suse.com>,
+	Kees Cook <kees@kernel.org>,
+	HyeongJun An <sammiee5311@gmail.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Qianfeng Rong <rongqianfeng@vivo.com>,
+	linux-sound@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	patches@opensource.cirrus.com,
+	linux-mediatek@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	bui duc phuc <phucduc.bui@gmail.com>
+Subject: [PATCH v2 02/27] ASoC: codecs: da7219: Use guard() for mutex locks
+Date: Wed,  8 Jul 2026 21:17:09 +0700
+Message-ID: <20260708141734.578926-3-phucduc.bui@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260708141734.578926-1-phucduc.bui@gmail.com>
+References: <20260708141734.578926-1-phucduc.bui@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260708-monza-leds-v4-4-a7acfc524c0b@oss.qualcomm.com>
-References: <20260708-monza-leds-v4-0-a7acfc524c0b@oss.qualcomm.com>
-In-Reply-To: <20260708-monza-leds-v4-0-a7acfc524c0b@oss.qualcomm.com>
-To: Lee Jones <lee@kernel.org>, Pavel Machek <pavel@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-leds@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Proofpoint-GUID: pqHxPADQuDgg6DwZiLijm1IIyLyltOg0
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA4MDE0MCBTYWx0ZWRfXxKGP7zUAoSAy
- WtqDYsz13RAj1+eRZa7r0/GQ4C5olD2yL02agZjDki3bZ1OIs9UlXYxTE1DFUlGAOqMWCSjiFYw
- Usk0/GZOarQKf5XF49C49Z6wLeFcKTA=
-X-Authority-Analysis: v=2.4 cv=CNoamxrD c=1 sm=1 tr=0 ts=6a4e5c5f cx=c_pps
- a=UbhLPJ621ZpgOD2l3yZY1w==:117 a=MDeckJw97qnk8wCBExTehA==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=1BEw5LmG3YzgyHxDt7YA:9 a=QEXdDO2ut3YA:10
- a=TOPH6uDL9cOC6tEoww4z:22
-X-Proofpoint-ORIG-GUID: pqHxPADQuDgg6DwZiLijm1IIyLyltOg0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA4MDE0MCBTYWx0ZWRfXzx9ew47TXz6h
- JhHemUAfvzlf/cHYn6KX84PMsF7bCdb0XAFOWdQKMp9MEczzMZsLkk1gA94fNm03WKo/1JZ68Q6
- sgljjgpJKZcW5a1gh9wPMqhg8VbidR0MLa50G9eXQDKzj5fs1Bu4B7c0yOz2i0kH9Ogn4wbET8R
- NCF5XwTcmjzFJrkffIspDeuTEF7hrIgxN6fAFHZhR+nK81V5/aog6+aCnQ0j66HIXxVk6nCzbU4
- NXo+icVGrmg7uM/CwdF59uQMR9Df6L9QnOMUtOErdLpGfp4PxCWF5iE+friHOaYF2Hg75Xe4pOu
- m2n6FdEEulTQOa0cAcz3KEBS0uFb1ArtrJASSHWtJmkFE+3ahR7hKr4ZxcBnwBEeV6Wam2B+8uK
- TDEV5KQqdjkovceoh1bWFgkKZDwwmgLEHpmQ63PNaw2APrqHmqtoSToqqax0VRjtVEsjiKqpRc7
- /wLqErZAfF9jt7DnY6g==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-08_02,2026-07-08_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 malwarescore=0 adultscore=0 phishscore=0 impostorscore=0
- priorityscore=1501 lowpriorityscore=0 bulkscore=0 spamscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607080140
+Content-Transfer-Encoding: 8bit
 
-Onboard MCU/STM32 implements a led controller compatible with PCA9635.
-There are four RGB LEDs controlled via channels 0-2, 3-5, 6-8 and 9-11.
+From: bui duc phuc <phucduc.bui@gmail.com>
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Clean up the code using guard() for mutex locks.
+Merely code refactoring, and no behavior change.
+
+Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
 ---
- arch/arm64/boot/dts/qcom/monaco-arduino-monza.dts | 110 ++++++++++++++++++++++
- 1 file changed, 110 insertions(+)
+ sound/soc/codecs/da7219.c | 62 ++++++++++++---------------------------
+ 1 file changed, 19 insertions(+), 43 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/monaco-arduino-monza.dts b/arch/arm64/boot/dts/qcom/monaco-arduino-monza.dts
-index 379b796f261f4c8f6b7712c5d340b20be1b9217c..83ccc4eec342328c78be37d4642b772d74a8ed37 100644
---- a/arch/arm64/boot/dts/qcom/monaco-arduino-monza.dts
-+++ b/arch/arm64/boot/dts/qcom/monaco-arduino-monza.dts
-@@ -7,6 +7,7 @@
+diff --git a/sound/soc/codecs/da7219.c b/sound/soc/codecs/da7219.c
+index f0874d891e12..f6d371e93549 100644
+--- a/sound/soc/codecs/da7219.c
++++ b/sound/soc/codecs/da7219.c
+@@ -8,6 +8,7 @@
+  */
  
- #include <dt-bindings/gpio/gpio.h>
- #include <dt-bindings/input/input.h>
-+#include <dt-bindings/leds/common.h>
- #include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
+ #include <linux/acpi.h>
++#include <linux/cleanup.h>
+ #include <linux/clk.h>
+ #include <linux/clkdev.h>
+ #include <linux/clk-provider.h>
+@@ -256,13 +257,10 @@ static int da7219_volsw_locked_get(struct snd_kcontrol *kcontrol,
+ {
+ 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+ 	struct da7219_priv *da7219 = snd_soc_component_get_drvdata(component);
+-	int ret;
  
- #include "monaco.dtsi"
-@@ -156,6 +157,115 @@ vreg_nvme: regulator-3p3-m2 {
- 	};
- };
+-	mutex_lock(&da7219->ctrl_lock);
+-	ret = snd_soc_get_volsw(kcontrol, ucontrol);
+-	mutex_unlock(&da7219->ctrl_lock);
++	guard(mutex)(&da7219->ctrl_lock);
  
-+&cci1 {
-+	status = "okay";
-+};
-+
-+&cci1_i2c1 {
-+	led-controller@22 {
-+		compatible = "nxp,pca9635";
-+		reg = <0x22>;
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		multi-led@0 {
-+			reg = <0>;
-+			label = "stm-led-1";
-+			color = <LED_COLOR_ID_RGB>;
-+			function = LED_FUNCTION_STATUS;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			led@0 {
-+				reg = <0>;
-+				color = <LED_COLOR_ID_RED>;
-+			};
-+
-+			led@1 {
-+				reg = <1>;
-+				color = <LED_COLOR_ID_GREEN>;
-+			};
-+
-+			led@2 {
-+				reg = <2>;
-+				color = <LED_COLOR_ID_BLUE>;
-+			};
-+		};
-+
-+		multi-led@1 {
-+			reg = <1>;
-+			label = "stm-led-2";
-+			color = <LED_COLOR_ID_RGB>;
-+			function = LED_FUNCTION_STATUS;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			led@3 {
-+				reg = <3>;
-+				color = <LED_COLOR_ID_RED>;
-+			};
-+
-+			led@4 {
-+				reg = <4>;
-+				color = <LED_COLOR_ID_GREEN>;
-+			};
-+
-+			led@5 {
-+				reg = <5>;
-+				color = <LED_COLOR_ID_BLUE>;
-+			};
-+		};
-+
-+		multi-led@2 {
-+			reg = <2>;
-+			label = "stm-led-3";
-+			color = <LED_COLOR_ID_RGB>;
-+			function = LED_FUNCTION_STATUS;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			led@6 {
-+				reg = <6>;
-+				color = <LED_COLOR_ID_RED>;
-+			};
-+
-+			led@7 {
-+				reg = <7>;
-+				color = <LED_COLOR_ID_GREEN>;
-+			};
-+
-+			led@8 {
-+				reg = <8>;
-+				color = <LED_COLOR_ID_BLUE>;
-+			};
-+		};
-+
-+		multi-led@3 {
-+			reg = <3>;
-+			label = "stm-led-4";
-+			color = <LED_COLOR_ID_RGB>;
-+			function = LED_FUNCTION_STATUS;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			led@9 {
-+				reg = <9>;
-+				color = <LED_COLOR_ID_RED>;
-+			};
-+
-+			led@a {
-+				reg = <10>;
-+				color = <LED_COLOR_ID_GREEN>;
-+			};
-+
-+			led@b {
-+				reg = <11>;
-+				color = <LED_COLOR_ID_BLUE>;
-+			};
-+		};
-+	};
-+};
-+
- &ethernet0 {
- 	phy-mode = "2500base-x";
- 	phy-handle = <&hsgmii_phy0>;
-
+-	return ret;
++	return snd_soc_get_volsw(kcontrol, ucontrol);
+ }
+ 
+ static int da7219_volsw_locked_put(struct snd_kcontrol *kcontrol,
+@@ -270,13 +268,10 @@ static int da7219_volsw_locked_put(struct snd_kcontrol *kcontrol,
+ {
+ 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+ 	struct da7219_priv *da7219 = snd_soc_component_get_drvdata(component);
+-	int ret;
+ 
+-	mutex_lock(&da7219->ctrl_lock);
+-	ret = snd_soc_put_volsw(kcontrol, ucontrol);
+-	mutex_unlock(&da7219->ctrl_lock);
++	guard(mutex)(&da7219->ctrl_lock);
+ 
+-	return ret;
++	return snd_soc_put_volsw(kcontrol, ucontrol);
+ }
+ 
+ static int da7219_enum_locked_get(struct snd_kcontrol *kcontrol,
+@@ -284,13 +279,10 @@ static int da7219_enum_locked_get(struct snd_kcontrol *kcontrol,
+ {
+ 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+ 	struct da7219_priv *da7219 = snd_soc_component_get_drvdata(component);
+-	int ret;
+ 
+-	mutex_lock(&da7219->ctrl_lock);
+-	ret = snd_soc_get_enum_double(kcontrol, ucontrol);
+-	mutex_unlock(&da7219->ctrl_lock);
++	guard(mutex)(&da7219->ctrl_lock);
+ 
+-	return ret;
++	return snd_soc_get_enum_double(kcontrol, ucontrol);
+ }
+ 
+ static int da7219_enum_locked_put(struct snd_kcontrol *kcontrol,
+@@ -298,13 +290,10 @@ static int da7219_enum_locked_put(struct snd_kcontrol *kcontrol,
+ {
+ 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+ 	struct da7219_priv *da7219 = snd_soc_component_get_drvdata(component);
+-	int ret;
+ 
+-	mutex_lock(&da7219->ctrl_lock);
+-	ret = snd_soc_put_enum_double(kcontrol, ucontrol);
+-	mutex_unlock(&da7219->ctrl_lock);
++	guard(mutex)(&da7219->ctrl_lock);
+ 
+-	return ret;
++	return snd_soc_put_enum_double(kcontrol, ucontrol);
+ }
+ 
+ /* ALC */
+@@ -422,9 +411,8 @@ static int da7219_tonegen_freq_get(struct snd_kcontrol *kcontrol,
+ 	__le16 val;
+ 	int ret;
+ 
+-	mutex_lock(&da7219->ctrl_lock);
+-	ret = regmap_raw_read(da7219->regmap, reg, &val, sizeof(val));
+-	mutex_unlock(&da7219->ctrl_lock);
++	scoped_guard(mutex, &da7219->ctrl_lock)
++		ret = regmap_raw_read(da7219->regmap, reg, &val, sizeof(val));
+ 
+ 	if (ret)
+ 		return ret;
+@@ -456,12 +444,11 @@ static int da7219_tonegen_freq_put(struct snd_kcontrol *kcontrol,
+ 	 */
+ 	val_new = cpu_to_le16(ucontrol->value.integer.value[0]);
+ 
+-	mutex_lock(&da7219->ctrl_lock);
++	guard(mutex)(&da7219->ctrl_lock);
+ 	ret = regmap_raw_read(da7219->regmap, reg, &val_old, sizeof(val_old));
+ 	if (ret == 0 && (val_old != val_new))
+ 		ret = regmap_raw_write(da7219->regmap, reg,
+-				&val_new, sizeof(val_new));
+-	mutex_unlock(&da7219->ctrl_lock);
++				       &val_new, sizeof(val_new));
+ 
+ 	if (ret < 0)
+ 		return ret;
+@@ -1167,15 +1154,12 @@ static int da7219_set_dai_sysclk(struct snd_soc_dai *codec_dai,
+ 	struct da7219_priv *da7219 = snd_soc_component_get_drvdata(component);
+ 	int ret = 0;
+ 
+-	mutex_lock(&da7219->pll_lock);
++	guard(mutex)(&da7219->pll_lock);
+ 
+-	if ((da7219->clk_src == clk_id) && (da7219->mclk_rate == freq)) {
+-		mutex_unlock(&da7219->pll_lock);
++	if (da7219->clk_src == clk_id && da7219->mclk_rate == freq)
+ 		return 0;
+-	}
+ 
+-	if ((freq < 2000000) || (freq > 54000000)) {
+-		mutex_unlock(&da7219->pll_lock);
++	if (freq < 2000000 || freq > 54000000) {
+ 		dev_err(codec_dai->dev, "Unsupported MCLK value %d\n",
+ 			freq);
+ 		return -EINVAL;
+@@ -1193,7 +1177,6 @@ static int da7219_set_dai_sysclk(struct snd_soc_dai *codec_dai,
+ 		break;
+ 	default:
+ 		dev_err(codec_dai->dev, "Unknown clock source %d\n", clk_id);
+-		mutex_unlock(&da7219->pll_lock);
+ 		return -EINVAL;
+ 	}
+ 
+@@ -1203,17 +1186,13 @@ static int da7219_set_dai_sysclk(struct snd_soc_dai *codec_dai,
+ 		freq = clk_round_rate(da7219->mclk, freq);
+ 		ret = clk_set_rate(da7219->mclk, freq);
+ 		if (ret) {
+-			dev_err(codec_dai->dev, "Failed to set clock rate %d\n",
+-				freq);
+-			mutex_unlock(&da7219->pll_lock);
++			dev_err(codec_dai->dev, "Failed to set clock rate %d\n", freq);
+ 			return ret;
+ 		}
+ 	}
+ 
+ 	da7219->mclk_rate = freq;
+ 
+-	mutex_unlock(&da7219->pll_lock);
+-
+ 	return 0;
+ }
+ 
+@@ -1296,13 +1275,10 @@ static int da7219_set_dai_pll(struct snd_soc_dai *codec_dai, int pll_id,
+ {
+ 	struct snd_soc_component *component = codec_dai->component;
+ 	struct da7219_priv *da7219 = snd_soc_component_get_drvdata(component);
+-	int ret;
+ 
+-	mutex_lock(&da7219->pll_lock);
+-	ret = da7219_set_pll(component, source, fout);
+-	mutex_unlock(&da7219->pll_lock);
++	guard(mutex)(&da7219->pll_lock);
+ 
+-	return ret;
++	return da7219_set_pll(component, source, fout);
+ }
+ 
+ static int da7219_set_dai_fmt(struct snd_soc_dai *codec_dai, unsigned int fmt)
 -- 
-2.34.1
+2.43.0
 
