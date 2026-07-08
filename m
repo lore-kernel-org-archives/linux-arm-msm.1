@@ -1,348 +1,223 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EA6147B438
-	for <linux-arm-msm@vger.kernel.org>; Wed,  8 Jul 2026 14:19:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF6EB47D938
+	for <linux-arm-msm@vger.kernel.org>; Wed,  8 Jul 2026 14:19:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783520352; cv=none; b=ECjbpd7WtX3RVuq63rqHPayjxGAmMepTgOJaW6QaYH3yOoGttlDaFKvdq0TBfDF6Phlv9R4zN0I3OYkEzEweVo+LUTtncFxR6L6rt5nSqJ1IbzFhZ/XBw6V4Zk4LYTa0CFTLhfHvAQahCMoCXIWvUvsYfa0FjeX/FwliDp5lZhA=
+	t=1783520354; cv=none; b=nTfnQr4FYsOeRw/xreZi0T0JRwST5mkzd364efttHfW/GblXyiysqySqSvBuhfULqT5G8fJ8L7+BvnLuLkRkZXrV5hlDBBCw4f6AfIen5ZCCuKHnsMVVCj+McOC4Jq9iFmqD5ZKNmH4/OW/Z5CSMMqMhnGrVPvR9z/vHKd9IFaM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783520352; c=relaxed/simple;
-	bh=1y47odj+NOJ9z0mS6+ykXCLNXopAlKlTgU+V3x/sXtk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=TreGi0YlUPsdoCrALGLZBWoassytsHbF0OoYTcrMnLwfZPWUUi/ZmRZDG+LCFXftHnyWUZH+5evs/nKQXTivSIJseNw6RG9UanYnK1xU95nuHkc5NetXlyifM5jhM8el2Q9VO36eZuAlFhwftk0J2jQVmuWNRmWMocmUZtpgukA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dRKZpFZn; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DIn8+kdv; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1783520354; c=relaxed/simple;
+	bh=WOalQFBHar3NvkPew2YrsEq8h801FlbaMFuTGotQNTc=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=nJQ+oe1MXM3cGkFmhVMrhOQ6W8QseT8W99EQIe/v8rzYpxKF3Pgar/d0UVUkMyTsuUzrwDbeIdn3HJFnvPCeFUEgDyy+E+M+lLqWQfVLY7qBhnPLl3CD4kpZSm8J5AE+8bh0XHAq1YPSTUh5r9iQcJLTs3qmt+Fp/eok36fcznk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=PFLtRF49; arc=none smtp.client-ip=209.85.214.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dRKZpFZn";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DIn8+kdv"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 668C3mIP2715656
-	for <linux-arm-msm@vger.kernel.org>; Wed, 8 Jul 2026 14:19:09 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	uUVrlO6McQy7XbenV1MuJ2C4u8WMipkYL6fUtxCmAXk=; b=dRKZpFZnXQNxXPa9
-	c9zZa7ppK4PBFfIcfHvh4OWrTqlbNfAwDO779yGux2XBqxnbYejrUC0lX2korZJ/
-	BnTyFcaH/eoJZmsk/mpsJqFgJV5nIMKQTutxkDGoMUQmwkOQj5wkgJ6BmiThX8Q2
-	i/grHNPtde0i1gCFwgBlWktqyxahcR6agJgC2UgRUOSMt22HaitrX6uROG2lkdt9
-	oIKVSUmQl65zIU7tyBw6/Wns7dx2L6HmC2FJh3IqwY/Bl2m72ywlpYXNrRxJVqrl
-	Alml/BIB9gT5YUEjd7ru7Vqt0+X7Ahecd/14w1bW4T6tisubrqbExMjgZZhrJjpq
-	qWBt6g==
-Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f95fd4ucx-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 14:19:09 +0000 (GMT)
-Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-6751db2792dso259035137.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 07:19:09 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PFLtRF49"
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2caed617615so7517975ad.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 07:19:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1783520348; x=1784125148; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to;
-        bh=uUVrlO6McQy7XbenV1MuJ2C4u8WMipkYL6fUtxCmAXk=;
-        b=DIn8+kdvjp0oESVsBs5dt3ODjTpRE4LUp9sNUK9BH0LvyPrewxqvjHfrcxRKZSj0J2
-         ZU0y7kwd2TxFreVNeQKltTGyMJMexJcPw7MJu9SYXmikk3Oxknf1S9++a/isVfxyTzw1
-         LuIEaPTaPnB7mWfrWreZN/l0H+2/JPIa/XYzrNfRo8MQquWvwZZrFd0HiFEfxuwlNj+1
-         VshX+dA77IgsExk8QAzW0kjPVhQuNEps165CrRQlz0vFGlw5CJ94MT8Ql2Pr4dkxYL6D
-         G+Uvv6UlHrl0ojSzygFkDnmr6/XpMARJB2rnVXanZUEKSyuzvnwiIGq25O3otWTtskRd
-         92Vw==
+        d=gmail.com; s=20251104; t=1783520351; x=1784125151; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to;
+        bh=i+E/hLMGoCFm2Bo6D9s4vrTO1A3cUntDy1XLWjBr550=;
+        b=PFLtRF49z6RnaKPh+ycuFCxr4iTTNU0r8lVzjN5ZsxxaTx+0kQ/6H9le3kdJAV03YH
+         AUDAHvBSNUISYHC5Zcju/SFJhElyZCv2I/Te9EI2QTMWfKxqApRFl7HlkNo+XvqHXuQy
+         qwNyL2T/uwT+s027qzIS55n9AkmjI5OB60r2+C87GFVj8RUIXWJ6IWV4Vg1EX/6qFX8c
+         gipPUyVVY9lqmmoOnepwCxVWck/kz+zCcIpMa8ZgTEEEFD9O9wx2vk16K09JiN58QcAg
+         9A4uBye1Skwpk2jzVYzPp/oZDGrwk8W6WxpynxYg2TFCwbUWhPs/Xf1PeiFwItg9YA7H
+         jy3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783520348; x=1784125148;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to;
-        bh=uUVrlO6McQy7XbenV1MuJ2C4u8WMipkYL6fUtxCmAXk=;
-        b=Zj3JKmN/ePlJsjpiWqmAO+2QFfs69Kpn4nERW6pf/9UBkKMflH1uF+0x1Dr8Ny2Z2B
-         ZjtbIY1Y2p08E3L0lvCryA+pqYEHHEqP/oZ2f3shMWE/faQVyGRse9pGcI36D74BWoLI
-         Hat57M/LtMWAlZ92w5EaFxd1QWXFTyS+mIjm8UA/Q2hetpwYkDcbgDBu3/+SCg+3R+HU
-         3azb+alvfMqeLjFLKg0nYtonxnw5+cx1fQc8HIMbVQkT3bRtXtom16sfgZgzsFFA4Nls
-         fF6B1mC0IUf4SpW+te0FRA7/MfHlirYD8u+n6AZxXe4M2+N1t4ZzuCX87LTD9OdUIQ1M
-         ZmLA==
-X-Forwarded-Encrypted: i=1; AHgh+RozJCg9fxJSt8+cDUE+9vGpPZ7dgIZ4ZAu5j9cPskhm3KZQg4aAv22YaERVT0N33skkBj/9vuYARTGKi041@vger.kernel.org
-X-Gm-Message-State: AOJu0YxyePTbJD2Oo7eDA8OZ/mW6jBX5EvzCLGJo+EEBEkwtIGN+wYtx
-	4SbvGH66cXcwIjfmidIhHTmKlExHr0GxIWKns8hV8WrnWR9cRq/kAd+oSlpkDpKjtcoHHAlHORK
-	OQxoa4dSWilsqR8PC+7jOQP+6/K2+UtdBkO32eIrF/ahO0QQvTuOh4wnE5dVo2b31nkjy
-X-Gm-Gg: AfdE7clTa9Fe7yrFYOmDEdy/vUA7S7/jOT051QjKpKIiEj4wvDaUokOYfF3cnwkupTB
-	6/np4sIgTovehuvN1zSc7Wap55+M0ALirxW7iC6vMTPnOW1IKponGvpRKMkVY95of1+7G745Gr7
-	STrjYmiQ86DoIWedxRQbBg/czBrwvQP5VF+T8g1oXf3KRm1hQ9mxtkAxeEjS7UUupfW9kcVpvvh
-	iu5qz1mv5HH+ckO4FUGDygSC8VQDVEpxoeReBzIfS2JBUjhSA5fwlFpm+lOEiB/dubYkX3YGFOr
-	EWk5cSc4GEZ59/tAwO4KVQ7mze/RziPBxX8R3BgMvg3FpjS333UauK3pAk88yp9Tk5Jh0SB78br
-	iw5teUvXGcbgOe2Dc8AgSTdWwpbjvlHJ3hZarfRX+gXFe5JK0lwIuI283qimf1MLzP+OEA2FLG5
-	ijzcQX2Pn5UqD2DOlZU4rmu6rECDT6TVKYM8+K0/gjgXZL4ie0z7Kp654lEwptmkcCxoVLKgWsP
-	qrrRfrbXyfBfAIyO9SG
-X-Received: by 2002:a05:6102:3753:b0:604:f849:462e with SMTP id ada2fe7eead31-744dff2d5e5mr1341428137.25.1783520348349;
-        Wed, 08 Jul 2026 07:19:08 -0700 (PDT)
-X-Received: by 2002:a05:6102:3753:b0:604:f849:462e with SMTP id ada2fe7eead31-744dff2d5e5mr1341396137.25.1783520347888;
-        Wed, 08 Jul 2026 07:19:07 -0700 (PDT)
-Received: from QCOM-eG0v1AUPpu.na.qualcomm.com (82-64-236-198.subs.proxad.net. [82.64.236.198])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-69a9c4a4027sm3080829a12.29.2026.07.08.07.19.06
+        d=1e100.net; s=20251104; t=1783520351; x=1784125151;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to;
+        bh=i+E/hLMGoCFm2Bo6D9s4vrTO1A3cUntDy1XLWjBr550=;
+        b=da/zckOSIpePIoYQxFridla9gpVa9r6MbeTFGPNnSXtAmZM4lRgKHS+HMuMZs/lNLo
+         AO5pESSw0Px7/KFIXZAYSu9ZyQq6WxLNjf1C5Mhl7Xobs2ZZQ/s5dGbsdYrCP+I1pcZv
+         oLPIoo7vHwxhspiykW8WRd+83QIXKPPxA/oactkySek+BZ0Z3KJrZa2JvZKH05OEBsuQ
+         UWKpR3FKqziduVoq+a0an5qbnrMNVwAsB2qb3jmw3xAu5DWqTu9Gfo798r7NOAKwJJzt
+         NLJXLW88jjH8mkwcqWPrN0j9ufbZljXwb7sxN23L4+9vpL+THaSJ2dXdlGPiS86TugFq
+         o4yA==
+X-Forwarded-Encrypted: i=1; AHgh+RrjXFen/dVW/WC7yjJPiacYmML5wdL/pZgss08Agl+IvvJtBl50h+o0bkxtCl1OBdnheCSSPsxoZI0fqhpe@vger.kernel.org
+X-Gm-Message-State: AOJu0YwBFy9xzf9MfjBgd31MVyjo8RceCtxS5Mqma8vG+VXxA6VuOHHX
+	013iBw5BLKVlN2cnEBqQ+Kej4xdWtQyzE9nH0lFKlTgfMviL/hWPqkZ2
+X-Gm-Gg: AfdE7ck0WfU/VQdvPf+47vOMIUsoUSZUgBsXRHJbSBrJhKURonXmh0PO5rX49hNbN4Z
+	byhqftPpC9Pm44+1Cct+hUeZRogbbDS5WERBIeNDhTg8bt9CLyJZ2RwsjAA/KkpVV8+SB7lPK5J
+	oj3wYKxIpJeOWO34lEZGrUrMmA0qLoj4/AImrVJTwRuYizpsmw5JiM8QmheT0t0iKTzUVfARjSL
+	TwrcvHu9aDwLqEenG4UtIuCQG2qPIVpHFNQ6hB3BLe1k4A/mLJs48DTRoNQxWJH9JZWInfmUReg
+	NOGP7QUS2X00AGGCa6O7C6cDfk2mbeBWCArInvO7UlIKj8Y+W6P9sMvfw6d2P+NEOAWHy0b4YN4
+	qjR9h/7v+QJYH7yZiEZN4J07/OsxU/MS3LK9Vv/KMbtbo93oQori5myKmMVki6AW78gJLBNRx4a
+	h6izM9L5/58bN+MYiMfuvnKTcLFOYK/rJ8HyIrDlSk9sgdoKY=
+X-Received: by 2002:a17:902:f64d:b0:2ca:b8d:e65e with SMTP id d9443c01a7336-2ccea48bc51mr27117655ad.37.1783520351057;
+        Wed, 08 Jul 2026 07:19:11 -0700 (PDT)
+Received: from phuc-desktop.. ([183.91.15.56])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ccc9d3bcc0sm28841575ad.67.2026.07.08.07.19.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jul 2026 07:19:07 -0700 (PDT)
-From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Wed, 08 Jul 2026 16:19:02 +0200
-Subject: [PATCH v4 3/4] leds: pca963x: add multicolor LED class support
+        Wed, 08 Jul 2026 07:19:10 -0700 (PDT)
+From: phucduc.bui@gmail.com
+To: Mark Brown <broonie@kernel.org>,
+	Takashi Iwai <tiwai@suse.com>,
+	Nick Li <nick.li@foursemi.com>,
+	Herve Codina <herve.codina@bootlin.com>
+Cc: Support Opensource <support.opensource@diasemi.com>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Charles Keepax <ckeepax@opensource.cirrus.com>,
+	Richard Fitzgerald <rf@opensource.cirrus.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Shenghao Ding <shenghao-ding@ti.com>,
+	Kevin Lu <kevin-lu@ti.com>,
+	Baojun Xu <baojun.xu@ti.com>,
+	Sen Wang <sen@ti.com>,
+	Oder Chiou <oder_chiou@realtek.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+	u.kleine-koenig@baylibre.com,
+	Zhang Yi <zhangyi@everest-semi.com>,
+	Marco Crivellari <marco.crivellari@suse.com>,
+	Kees Cook <kees@kernel.org>,
+	HyeongJun An <sammiee5311@gmail.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Qianfeng Rong <rongqianfeng@vivo.com>,
+	linux-sound@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	patches@opensource.cirrus.com,
+	linux-mediatek@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	bui duc phuc <phucduc.bui@gmail.com>
+Subject: [PATCH v2 01/27] ASoC: codecs: da7213: Use guard() for mutex locks
+Date: Wed,  8 Jul 2026 21:17:08 +0700
+Message-ID: <20260708141734.578926-2-phucduc.bui@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260708141734.578926-1-phucduc.bui@gmail.com>
+References: <20260708141734.578926-1-phucduc.bui@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260708-monza-leds-v4-3-a7acfc524c0b@oss.qualcomm.com>
-References: <20260708-monza-leds-v4-0-a7acfc524c0b@oss.qualcomm.com>
-In-Reply-To: <20260708-monza-leds-v4-0-a7acfc524c0b@oss.qualcomm.com>
-To: Lee Jones <lee@kernel.org>, Pavel Machek <pavel@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-leds@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA4MDE0MCBTYWx0ZWRfX4HlUPgoKwOqm
- MThsHA/Qs6R1fg+LL+pbwU5B3gxVHnelab3RryRGZlo7eruVneRGZmAW6/oQkibiWP1DEYvzqu1
- 5B4f6FF6FjFGkgzwbqt20bPxq11J94wIP15BoE6XZy11Bt7MfoN+eB1hC2sAHy2kGNZRjkdg8RE
- fPnkxgaME4hqO4auRwcnRHs6MP1XwpRhiUZg1hRSzr30V34MdW2OgF3mTI1IrdTclRM62h69j/p
- aCKt2hN7PRgI303St4lyXXaenGUYrveExn8xyUsRcO5pUjGTsRgViPQcrbpvF4DeeThfw6sjKaH
- umIJjzrx2gz9sqIXNIRdtI4ig9i/f1KhcAx3Rtne+3Xl2pJfykeiMA2ap8ukqvMelJQd8fTxfWW
- 2VYhDfW0rhstluPGpF9NlOUn75m+dCamYwdFyym4zfhlLqCMNDH/vGsDHfAVR0CfLNJOs7byeg7
- 6evwWutSoF9x9nTQ/VQ==
-X-Authority-Analysis: v=2.4 cv=VZLH+lp9 c=1 sm=1 tr=0 ts=6a4e5c5d cx=c_pps
- a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=MDeckJw97qnk8wCBExTehA==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=TXsEHxuGAXnH8Ii1pS8A:9 a=QEXdDO2ut3YA:10
- a=gYDTvv6II1OnSo0itH1n:22
-X-Proofpoint-ORIG-GUID: yepGIx-ILngchQJE-BNkInUOFC7xOENV
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA4MDE0MCBTYWx0ZWRfX8UNTjfJS70gX
- 19HumbV/4VPnVpTh4969dm2/J51lRorMqK0EnAk2Ii87yqDBb73/ic18+t+GsHm9mGG0SJH4H3N
- AW3ZGC1a5fy1m/n00FiiigXrDmSJt1s=
-X-Proofpoint-GUID: yepGIx-ILngchQJE-BNkInUOFC7xOENV
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-08_02,2026-07-08_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 priorityscore=1501 suspectscore=0
- lowpriorityscore=0 spamscore=0 malwarescore=0 adultscore=0 clxscore=1015
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607080140
+Content-Transfer-Encoding: 8bit
 
-Allow grouping of individual PCA963x PWM channels into a single
-multicolor LED device by adding support for the LED multicolor class.
+From: bui duc phuc <phucduc.bui@gmail.com>
 
-A child node with sub-children is treated as a multicolor group,
-others are treated as single leds, keeping full backwards compatibility.
+Clean up the code using guard() for mutex locks.
+Merely code refactoring, and no behavior change.
 
-Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
 ---
- drivers/leds/Kconfig        |   1 +
- drivers/leds/leds-pca963x.c | 126 ++++++++++++++++++++++++++++++++++++++------
- 2 files changed, 110 insertions(+), 17 deletions(-)
+ sound/soc/codecs/da7213.c | 37 ++++++++++++-------------------------
+ 1 file changed, 12 insertions(+), 25 deletions(-)
 
-diff --git a/drivers/leds/Kconfig b/drivers/leds/Kconfig
-index f4a0a3c8c8705e0f10ba26584277dbb2d5eac5b5..14df88f92b12bbe43908b67f9480cf23056e27e2 100644
---- a/drivers/leds/Kconfig
-+++ b/drivers/leds/Kconfig
-@@ -596,6 +596,7 @@ config LEDS_PCA963X
- 	tristate "LED support for PCA963x I2C chip"
- 	depends on LEDS_CLASS
- 	depends on I2C
-+	select LEDS_CLASS_MULTICOLOR
- 	help
- 	  This option enables support for LEDs connected to the PCA963x
- 	  LED driver chip accessed via the I2C bus. Supported
-diff --git a/drivers/leds/leds-pca963x.c b/drivers/leds/leds-pca963x.c
-index e3a81c60ee27c96e5050a829523dfd43e1f0663f..f6f6bafcc2bd5bad51a3184c4cb08fc50693a0a5 100644
---- a/drivers/leds/leds-pca963x.c
-+++ b/drivers/leds/leds-pca963x.c
-@@ -27,6 +27,7 @@
- #include <linux/string.h>
- #include <linux/ctype.h>
- #include <linux/leds.h>
-+#include <linux/led-class-multicolor.h>
- #include <linux/err.h>
- #include <linux/i2c.h>
+diff --git a/sound/soc/codecs/da7213.c b/sound/soc/codecs/da7213.c
+index 4bf91ab2553a..923b997efbc4 100644
+--- a/sound/soc/codecs/da7213.c
++++ b/sound/soc/codecs/da7213.c
+@@ -11,6 +11,7 @@
+ #include <linux/acpi.h>
+ #include <linux/of.h>
  #include <linux/property.h>
-@@ -101,8 +102,11 @@ struct pca963x;
- struct pca963x_led {
- 	struct pca963x *chip;
- 	struct led_classdev led_cdev;
-+	struct led_classdev_mc mc_cdev;
-+	struct mc_subled subleds[4];
- 	int led_num; /* 0 .. 15 potentially */
- 	bool blinking;
-+	bool is_mc;
- 	u8 gdc;
- 	u8 gfrq;
- };
-@@ -205,7 +209,7 @@ static int pca963x_power_state(struct pca963x_led *led)
- 	unsigned long *leds_on = &led->chip->leds_on;
- 	unsigned long cached_leds = *leds_on;
++#include <linux/cleanup.h>
+ #include <linux/clk.h>
+ #include <linux/delay.h>
+ #include <linux/i2c.h>
+@@ -216,13 +217,10 @@ static int da7213_volsw_locked_get(struct snd_kcontrol *kcontrol,
+ {
+ 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+ 	struct da7213_priv *da7213 = snd_soc_component_get_drvdata(component);
+-	int ret;
  
--	if (led->led_cdev.brightness)
-+	if (led->is_mc ? led->mc_cdev.led_cdev.brightness : led->led_cdev.brightness)
- 		set_bit(led->led_num, leds_on);
- 	else
- 		clear_bit(led->led_num, leds_on);
-@@ -237,6 +241,28 @@ static int pca963x_led_set(struct led_classdev *led_cdev,
- 	return ret;
+-	mutex_lock(&da7213->ctrl_lock);
+-	ret = snd_soc_get_volsw(kcontrol, ucontrol);
+-	mutex_unlock(&da7213->ctrl_lock);
++	guard(mutex)(&da7213->ctrl_lock);
+ 
+-	return ret;
++	return snd_soc_get_volsw(kcontrol, ucontrol);
  }
  
-+static int pca963x_led_mc_set(struct led_classdev *led_cdev,
-+			      enum led_brightness value)
-+{
-+	struct led_classdev_mc *mc_cdev = lcdev_to_mccdev(led_cdev);
-+	struct pca963x_led *led = container_of(mc_cdev, struct pca963x_led, mc_cdev);
-+	unsigned int i;
-+	int ret;
-+
-+	led_mc_calc_color_components(mc_cdev, value);
-+
-+	guard(mutex)(&led->chip->mutex);
-+
-+	for (i = 0; i < mc_cdev->num_colors; i++) {
-+		led->led_num = mc_cdev->subled_info[i].channel;
-+		ret = pca963x_brightness(led, mc_cdev->subled_info[i].brightness);
-+		if (ret < 0)
-+			return ret;
-+	}
-+
-+	return pca963x_power_state(led);
-+}
-+
- static unsigned int pca963x_period_scale(struct pca963x_led *led,
- 					 unsigned int val)
+ static int da7213_volsw_locked_put(struct snd_kcontrol *kcontrol,
+@@ -230,13 +228,10 @@ static int da7213_volsw_locked_put(struct snd_kcontrol *kcontrol,
  {
-@@ -300,6 +326,84 @@ static int pca963x_blink_set(struct led_classdev *led_cdev,
- 	return 0;
+ 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+ 	struct da7213_priv *da7213 = snd_soc_component_get_drvdata(component);
+-	int ret;
+ 
+-	mutex_lock(&da7213->ctrl_lock);
+-	ret = snd_soc_put_volsw(kcontrol, ucontrol);
+-	mutex_unlock(&da7213->ctrl_lock);
++	guard(mutex)(&da7213->ctrl_lock);
+ 
+-	return ret;
++	return snd_soc_put_volsw(kcontrol, ucontrol);
  }
  
-+static int pca963x_register_single_led(struct device *dev,
-+					struct pca963x_led *led, u32 reg,
-+					struct fwnode_handle *fwnode,
-+					bool hw_blink)
-+{
-+	struct led_init_data init_data = {};
-+	char default_label[32];
-+	struct i2c_client *client = led->chip->client;
-+
-+	led->led_num = reg;
-+	led->is_mc = false;
-+	led->led_cdev.brightness_set_blocking = pca963x_led_set;
-+	if (hw_blink)
-+		led->led_cdev.blink_set = pca963x_blink_set;
-+
-+	init_data.fwnode = fwnode;
-+	init_data.devicename = "pca963x";
-+	snprintf(default_label, sizeof(default_label), "%d:%.2x:%u",
-+		 client->adapter->nr, client->addr, reg);
-+	init_data.default_label = default_label;
-+
-+	return devm_led_classdev_register_ext(dev, &led->led_cdev, &init_data);
-+}
-+
-+static int pca963x_register_mc_led(struct device *dev,
-+				   struct pca963x_led *led, u32 reg,
-+				   struct fwnode_handle *fwnode,
-+				   const struct pca963x_chipdef *chipdef)
-+{
-+	struct mc_subled *subleds = led->subleds;
-+	unsigned int num_colors = 0;
-+	struct led_init_data init_data = {};
-+	char default_label[32];
-+	struct i2c_client *client = led->chip->client;
-+	int ret;
-+
-+	fwnode_for_each_child_node_scoped(fwnode, sub) {
-+		u32 color, subreg;
-+
-+		if (num_colors >= ARRAY_SIZE(led->subleds)) {
-+			dev_err(dev, "Too many sub-LEDs for node %pfw\n", fwnode);
-+			return -EINVAL;
-+		}
-+
-+		ret = fwnode_property_read_u32(sub, "reg", &subreg);
-+		if (ret || subreg >= chipdef->n_leds) {
-+			dev_err(dev, "Invalid 'reg' for sub-LED %pfw\n", sub);
-+			return -EINVAL;
-+		}
-+
-+		ret = fwnode_property_read_u32(sub, "color", &color);
-+		if (ret) {
-+			dev_err(dev, "Missing 'color' for sub-LED %pfw\n", sub);
-+			return ret;
-+		}
-+
-+		subleds[num_colors].channel = subreg;
-+		subleds[num_colors].color_index = color;
-+		subleds[num_colors].intensity = LED_FULL;
-+		num_colors++;
-+	}
-+
-+	led->led_num = reg;
-+	led->is_mc = true;
-+	led->mc_cdev.subled_info = subleds;
-+	led->mc_cdev.num_colors = num_colors;
-+	led->mc_cdev.led_cdev.max_brightness = LED_FULL;
-+	led->mc_cdev.led_cdev.brightness_set_blocking = pca963x_led_mc_set;
-+
-+	init_data.fwnode = fwnode;
-+	init_data.devicename = "pca963x";
-+	snprintf(default_label, sizeof(default_label), "%d:%.2x:%u",
-+		 client->adapter->nr, client->addr, reg);
-+	init_data.default_label = default_label;
-+
-+	return devm_led_classdev_multicolor_register_ext(dev, &led->mc_cdev, &init_data);
-+}
-+
- static int pca963x_register_leds(struct i2c_client *client,
- 				 struct pca963x *chip)
+ static int da7213_enum_locked_get(struct snd_kcontrol *kcontrol,
+@@ -244,13 +239,10 @@ static int da7213_enum_locked_get(struct snd_kcontrol *kcontrol,
  {
-@@ -338,9 +442,6 @@ static int pca963x_register_leds(struct i2c_client *client,
+ 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+ 	struct da7213_priv *da7213 = snd_soc_component_get_drvdata(component);
+-	int ret;
+ 
+-	mutex_lock(&da7213->ctrl_lock);
+-	ret = snd_soc_get_enum_double(kcontrol, ucontrol);
+-	mutex_unlock(&da7213->ctrl_lock);
++	guard(mutex)(&da7213->ctrl_lock);
+ 
+-	return ret;
++	return snd_soc_get_enum_double(kcontrol, ucontrol);
+ }
+ 
+ static int da7213_enum_locked_put(struct snd_kcontrol *kcontrol,
+@@ -258,13 +250,10 @@ static int da7213_enum_locked_put(struct snd_kcontrol *kcontrol,
+ {
+ 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+ 	struct da7213_priv *da7213 = snd_soc_component_get_drvdata(component);
+-	int ret;
+ 
+-	mutex_lock(&da7213->ctrl_lock);
+-	ret = snd_soc_put_enum_double(kcontrol, ucontrol);
+-	mutex_unlock(&da7213->ctrl_lock);
++	guard(mutex)(&da7213->ctrl_lock);
+ 
+-	return ret;
++	return snd_soc_put_enum_double(kcontrol, ucontrol);
+ }
+ 
+ /* ALC */
+@@ -465,9 +454,8 @@ static int da7213_tonegen_freq_get(struct snd_kcontrol *kcontrol,
+ 	__le16 val;
+ 	int ret;
+ 
+-	mutex_lock(&da7213->ctrl_lock);
+-	ret = regmap_raw_read(da7213->regmap, reg, &val, sizeof(val));
+-	mutex_unlock(&da7213->ctrl_lock);
++	scoped_guard(mutex, &da7213->ctrl_lock)
++		ret = regmap_raw_read(da7213->regmap, reg, &val, sizeof(val));
+ 
+ 	if (ret)
  		return ret;
+@@ -499,12 +487,11 @@ static int da7213_tonegen_freq_put(struct snd_kcontrol *kcontrol,
+ 	 */
+ 	val_new = cpu_to_le16(ucontrol->value.integer.value[0]);
  
- 	device_for_each_child_node_scoped(dev, child) {
--		struct led_init_data init_data = {};
--		char default_label[32];
--
- 		ret = fwnode_property_read_u32(child, "reg", &reg);
- 		if (ret || reg >= chipdef->n_leds) {
- 			dev_err(dev, "Invalid 'reg' property for node %pfw\n",
-@@ -348,22 +449,13 @@ static int pca963x_register_leds(struct i2c_client *client,
- 			return -EINVAL;
- 		}
+-	mutex_lock(&da7213->ctrl_lock);
++	guard(mutex)(&da7213->ctrl_lock);
+ 	ret = regmap_raw_read(da7213->regmap, reg, &val_old, sizeof(val_old));
+ 	if (ret == 0 && (val_old != val_new))
+ 		ret = regmap_raw_write(da7213->regmap, reg,
+ 				&val_new, sizeof(val_new));
+-	mutex_unlock(&da7213->ctrl_lock);
  
--		led->led_num = reg;
- 		led->chip = chip;
--		led->led_cdev.brightness_set_blocking = pca963x_led_set;
--		if (hw_blink)
--			led->led_cdev.blink_set = pca963x_blink_set;
- 		led->blinking = false;
- 
--		init_data.fwnode = child;
--		/* for backwards compatibility */
--		init_data.devicename = "pca963x";
--		snprintf(default_label, sizeof(default_label), "%d:%.2x:%u",
--			 client->adapter->nr, client->addr, reg);
--		init_data.default_label = default_label;
--
--		ret = devm_led_classdev_register_ext(dev, &led->led_cdev,
--						     &init_data);
-+		if (fwnode_get_child_node_count(child) > 0)
-+			ret = pca963x_register_mc_led(dev, led, reg, child, chipdef);
-+		else
-+			ret = pca963x_register_single_led(dev, led, reg, child, hw_blink);
- 		if (ret) {
- 			dev_err(dev, "Failed to register LED for node %pfw\n",
- 				child);
-
+ 	if (ret < 0)
+ 		return ret;
 -- 
-2.34.1
+2.43.0
 
