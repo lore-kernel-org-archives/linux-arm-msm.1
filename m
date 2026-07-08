@@ -1,49 +1,43 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D83D435EC7;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE80A435EDF;
 	Wed,  8 Jul 2026 14:57:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783522675; cv=none; b=nGemE/+xgwaUQYpztAHlByXetvA3q1sAZhAsQIX/8PbsizTcOuUB+sh0z4n9ALfIcTVfSpaSB/0Z7UQZPj2mjEtgzNQ+SP9rZDcymwzxtEavuKWOZtLMGn5LpwkhYSNkR4WM706CWz6ACsyerT+B3iyxFQRj5oC74Jp/bAjvYM0=
+	t=1783522676; cv=none; b=O6H7IngZmsPglEuauJCNEzpxUlUUVHRuc0JneozPkVRywP7FHSfeoBbhqNBnuN4xoIT5uWapFpuDJlieFFeUc1gOoAgSHWG0ILYzSaBYEcj2WGkNksXK/i2EK0lYDRuth5bkN5MD5JOhrE6eERAN+tpYaifCnPLwuI4uFL+zvuc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783522675; c=relaxed/simple;
-	bh=uuMSw6Dk4iYoG20x2JY3IpRhdtK5oRn6nHPTzzAdjRM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=d43vKOg6oTie8C+kxQ8Ho+lBVn8wZhfCbt+DXgVLR29XXOIjXUhjlSBqna6PFdupVaE6T6fq5NmsJ7MCTvX3DgWdUSLxwYNY/srm5CqgUTU/PNskktUWI0ZRr18Z4LYVroNgTZeQgNIH1boAFgQiSTy18xYqDDEk7YDo09amYzw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XMriGhP8; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783522676; c=relaxed/simple;
+	bh=tp52LrfSImDGSo+JlQyXbjMZIj+DCt3H9EfnuYSW88g=;
+	h=From:To:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=IdMJip3yetKaGhkBkvpCkdwvW1R7a9XiVHSufoOqFHRkuwBCPULKE8AFSoeJ3+OEbuycE4uagEu7SATt0isskjHLYRrZcCr97ouWbGI9MiNAGhKLelvT0C38UOHEdO9jjJG74ZMp26GLAKNmM7jVS/uFG2x9WeKmJmmlo6HeBBs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KsnO1C7T; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XMriGhP8"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 69FD91F00A3D;
-	Wed,  8 Jul 2026 14:57:53 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KsnO1C7T"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6AA161F00A3E;
+	Wed,  8 Jul 2026 14:57:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
 	s=k20260515; t=1783522674;
-	bh=vyfyghuXYCD3LhgDfkXl0FNzl+5sEqekPde3hzUTV1w=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=XMriGhP8oDWf5DLwqlbyhz7vY2SzRaxFJa9zhXsVxYWySGErP7O+Zwpv/4QJP0nbC
-	 dTI+nPylrtwI6VyzLrC+PxxVMnJP/59TUlmbc0QTXnr9+91blHN2bLBF9IBOIPrJ2B
-	 vN3JAMuqhf4OHwqTbu7XALdYxPpXzn8pWAy1+WMRBMNzgKMn14NiHcsoW1Tje5M7AV
-	 adT7e1G7bpCRZ0E152jpl1J7wRBv7iZdg6gO16PhsffVXm2sgA1OhkIbhKF+2kUBaU
-	 0lTj8wLrYNOYmXWRxmq/1rrTohzMbmcCivINxS+w8MqQpBkiYbEf9szb7WHf69uCkd
-	 AO4MznzyWstcw==
+	bh=nOSag16RGbDVov1huGGhdnX22kBaj9opib/mHTetd/o=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=KsnO1C7TSW0ApOpwgtPr0c1cVeHFREu6Vw3bUiXZWNFCZrDEb1s5OfHdbe6m0F3Q/
+	 3k1MTCjsfO//yohbCkCuYeWINsBmiCfjZPN/Zj4oOk2I02HPEz518bvjNLeYYzqiP0
+	 EGlAWmo9DGljACi2zP3Xk6NsTC9AEKRVxuXwqkADOXcF9KPQGj9lR2AQTuI0x4wkAN
+	 eUUdHDD1XJO8GwfxARrOovDh8rGzW2htlFExD/OXM2eKT0UWa4euGhdIxs0t+OU0z2
+	 NxgGdXqH2DOpTK8QRFwa8XXfIM9jwRTnZnjeWdwV67ygbtdxGhWQxmRS46ietTCe5+
+	 ehdn0g0qDwoTA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
-Cc: Bharath Kumar <bkumar@qti.qualcomm.com>,
-	Chenna Kesava Raju <chennak@qti.qualcomm.com>,
-	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+To: linux-kernel@vger.kernel.org,
+	bjorn.andersson@oss.qualcomm.com,
+	chris.lew@oss.qualcomm.com,
 	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: sm8250: Add memory-region for audio PD
-Date: Wed,  8 Jul 2026 09:56:55 -0500
-Message-ID: <178352261636.2235436.10420459601272958947.b4-ty@kernel.org>
+	Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
+Subject: Re: [PATCH] arm64: defconfig: Enable Qualcomm BAM-DMUX WWAN driver
+Date: Wed,  8 Jul 2026 09:56:56 -0500
+Message-ID: <178352261616.2235436.8120334079218318332.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260619-sm8250-audio-v1-1-8a76e033e209@oss.qualcomm.com>
-References: <20260619-sm8250-audio-v1-1-8a76e033e209@oss.qualcomm.com>
+In-Reply-To: <20260611-qcom-arm64-defconfig-bam-dmux-v1-1-599190f17fc9@oss.qualcomm.com>
+References: <20260611-qcom-arm64-defconfig-bam-dmux-v1-1-599190f17fc9@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -54,17 +48,17 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 19 Jun 2026 15:20:08 +0530, Vinayak Katoch wrote:
-> Reserve memory region for audio PD dynamic loading and remote heap
-> requirements. Add the required VMID list for memory ownership
-> transfers.
+On Thu, 11 Jun 2026 12:10:10 +0530, Vishnu Santhosh wrote:
+> Enable the BAM Data Multiplexer WWAN driver as a module to support
+> modem data channels on Qualcomm Shikra SoC. The driver is also used
+> by other platforms with A2 BAM hardware such as MSM8916 and MSM8939.
 > 
 > 
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: sm8250: Add memory-region for audio PD
-      commit: 531ce288b6dd43c1ce90e0b501c209783f0e0ab2
+[1/1] arm64: defconfig: Enable Qualcomm BAM-DMUX WWAN driver
+      commit: 9c1bb154d40b36434e919865cbb2b23da58a963b
 
 Best regards,
 -- 
