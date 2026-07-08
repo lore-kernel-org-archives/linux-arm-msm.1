@@ -1,206 +1,235 @@
-Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29DFA4D2EE4
-	for <linux-arm-msm@vger.kernel.org>; Wed,  8 Jul 2026 14:22:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD20847887F
+	for <linux-arm-msm@vger.kernel.org>; Wed,  8 Jul 2026 14:25:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783520566; cv=none; b=QCtNnAche7A/Ld/VpjWJypzfR5C4rwMKbluFKSDI4qJeXvTlN0NdxcnQROW+vNxi19nbdtXBff8Ipjrh0K4EvNdiJOKI9Iy9W+FDNmkvFpII9cpoUp3IRn33AtueuqzYlASYqCT7NXS4G0OOBy6B6BHM9aQ5+fztruO2nyxX21E=
+	t=1783520717; cv=none; b=s1CwHU379NU7slq8FacqJyH2CCjBVD5eeHpIRPy0WAOfh5iybwJFGZipMg9t0ZtMsrQobbSog94/PAGvZ00iPIU1/NkYM6gy2M6jS0omrjDqfGLVZkulBtGAxUziPKtOjeEfzfZnCPOWlOF575cFsZPnWMkQQjTA0NPzEyDK64k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783520566; c=relaxed/simple;
-	bh=fBZDeHAFDZr0SJjeir1J7nLoUKn2MLHuB+Y6RtEoAU0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=SGgfHJ4u7E94O7x2hOpnAGE8zegFO1lU6Lr/WHLIXIWhQQEpVIm/DXBp4x+P1uAKFXGxJSKtx5u6i4j2hYcx1vkX6JrXuMLCnqqPp7x2tUdg3PYw+6ckse1cyZNbaY+vsIhsPD+g0Srp8F6COYgDhJWUCxUOfvQQ55KBg1nZ8OU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=kF0Q5Mk2; arc=none smtp.client-ip=209.85.214.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1783520717; c=relaxed/simple;
+	bh=sSmsdnmJrwAPWW1KiyJRt8MCa+4Zum/gNQgF63z/D1o=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=azUMloxi4EVsGO+Gg+9bynTWJnAtxCsN8p0SOWFZP5X8BtN+W1l/fDNEO6PoyCgsEo3kec5gaL1I5u+T4cRPdu3zOSx9A4AZUj7AaAXgngpTlHKwYkq98j2E0/kMtzY5gzegNRWokMJ5zsNfQ9SeOQ8SALS+PEEEoDUGZJgrzx8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PyP7HEO3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KysYUSt/; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kF0Q5Mk2"
-Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-2ca64c3ce5fso9420585ad.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 07:22:45 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PyP7HEO3";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KysYUSt/"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 668D7q7m2677957
+	for <linux-arm-msm@vger.kernel.org>; Wed, 8 Jul 2026 14:25:15 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	GvPOfAqnErBt8ztKSYP7B2XU9RLRHl2bIpX+eaysQj4=; b=PyP7HEO3JF6XT+gG
+	EJuLTNmpvlkCRZfJUJSEB8ReOvor7VAA44TxaSxdLDVWeJhZ6vdU3jOojmVKBHtl
+	ks1eKw/63ND/vu+kjFJcAMFIQVKNeu62WpXECEAsV+Zx5uViAopvuE18Hue+ETs6
+	vSMurlyjcDwN+wwrH9JXxDvSlwPsxelBvAnh44CsYBtQIlnLvB6Vc4pq9JjgFEnb
+	B2REVAaXWJDnIJtMRZK9aa5158Eyen0EhQpPn7Sv2N+wEe9MlW745VtzHyXR3x8f
+	crwjvf1Bhs8ylRMHihreF1s8nJw2Wg7FZElD+gi2mcfUVv4Bio04PUNzn4lAMJl5
+	EttpbA==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f9q5s8ahc-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 14:25:14 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51c083f1818so7302031cf.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 07:25:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783520564; x=1784125364; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to;
-        bh=sA++AxO5NtmYTBb+M8Kemba0fl9Obtf3m3Dlj5iG+Uo=;
-        b=kF0Q5Mk2A03k0aOv/Kh65i/Yu0MZUe0ScPS+8ypYpirzOZVf+yjetzjW8N3KjxZZLD
-         00BmMOGYqnyku8GA1b/U9FFHyj643xtTx1j7huulajKrGe/y67pRbPctnSr7TPogxFj/
-         7ev2a0apQeN89CRSjvewE7UlQDoYNWMzG/NDKmVdu54iA/qKP6iWHuUkEm1/sXm4w7F9
-         yRxtChWpp4Ij0Tla8J5z0gOx/7Jwi4kOK+FUK/4MtNFH1EyjOmbp7hERPC03kPcZTas+
-         1PkDN9aoIJQXmzCQkjwAImDl1Jc3AMATg3H7h2KSd1J2+zWc75fZInKeY19MqImM9HF4
-         RqvA==
+        d=oss.qualcomm.com; s=google; t=1783520714; x=1784125514; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=GvPOfAqnErBt8ztKSYP7B2XU9RLRHl2bIpX+eaysQj4=;
+        b=KysYUSt/n7df9m0u4H206uG9MrZS1BzYIxUq55BC+0E4SJSU1QFpj3u9vt/pp3zr1m
+         MdezqKTfQlOvoAB+ETVxmqibI14Q92FSWj4nqF3EPcOYyBnLq+hzkU5VMUBun6Z00+yR
+         +nYoxfH7jtgRhq8wjCSHftLv0BfUf2kzPkObYqHspPM1vCR0LRWN+TnANX7LAuTMIykT
+         vHNnY0nhnJrUr+CyFefENO5ZLizsQa47ty4tB6s75ZguM6YB2dTGhG2tXWnaEv5BaiFW
+         qfLV97345i+i7wMLrG1Bt6I6GJwJgIzFdURmfHwfBXknvGOkyJJMlG2x+UOczRFVoPwN
+         VUzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783520564; x=1784125364;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to;
-        bh=sA++AxO5NtmYTBb+M8Kemba0fl9Obtf3m3Dlj5iG+Uo=;
-        b=rz535x/en1B4P2tXUQGybcIZQgp2/zCoJWV5zTsaN59DAubSDrYLDhApfwplk61R1y
-         cNXiAQLeIEnKijHLXENw54A432AtpCwKgFq+3FmMFaSAuaXjCuUIlJOOEyL3Ua6CQOfQ
-         EnuFvGMB3Ep/97/jKrRSzd7GjBJvfA7eWuLsZg9nmCDuYJXJd2E1paAKtA9OzuOT+5Rv
-         4mIn6vKFK1zB+BF5IFrxi4gCKvglX98C0kLcr/5vyb5hr7iFF+Isph1FdmIPLUdArCWA
-         D39Tzw37dhY/kEHhBuOJ6P2JjusqA9uzYJuqrWhEJnrD/cRnPBv7VLpgJPk33X8BSRUv
-         c8Bw==
-X-Forwarded-Encrypted: i=1; AHgh+RpY1RQpfd2NYtkhtiXQ7O//h4aSuIHAH60/H9OUEWsQotteUnxzGasuDQFJRc5bj2XduUfd5KAg3xVCeIjF@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyd4tXHkkWCIzx4ZuW41+cl1OhFpgUxGWu6O7YBxNtTqa6+aD1s
-	pNiKU5T3hEyFsIQJZhIX9Dkujlau54EICuZSVMaVogEH6Q+QbvM1Pwt9
-X-Gm-Gg: AfdE7cnNWXXLJkzISq/i4s5TaFTTRplxnSgKp8/nrHRS7VfSk3rx2AscoEgmrnmKavg
-	vFvlP3XxY921EODp5eYya35sZjT4UhmTiHftbaj3lUKkOodsKEtaUpbnpTcw4oMi+Pq5UZkP4r3
-	I6FygGJuQPokd5+psMLLQ4CO4BJ8jURPnve3CMY2Jn5GqRHgPuRxq8TaaN93c/aPz5+fCBy8yu0
-	A2jrqmd9wPw+i2pko1G0mZ9JAUCpibr6c/4Q7lADUkMuAD6th5M3/pQd9HluZeMGeZNiy1dwovM
-	bMFxwoO2VbEOaXpLOpdo0j+FJDW4ilX5IwzLbXq0FJ+81dPki+9g++q9LBp4y8eMWDOWyRKGvIQ
-	iE1yI66Eq5esPk/N7ZLBGP3OtFdAWRi+ofAOe6DeZtDa4aVF4xnUrBHdAhpiZcbZVVkxIZZI9Lb
-	aeQ3oXB8cv33yIqWmascYK+6sthyHwFkTpnod3m7Q/0W0/6fk=
-X-Received: by 2002:a17:903:234f:b0:2c9:97a8:8c17 with SMTP id d9443c01a7336-2ccea5962bemr27443295ad.42.1783520564494;
-        Wed, 08 Jul 2026 07:22:44 -0700 (PDT)
-Received: from phuc-desktop.. ([183.91.15.56])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2ccc9d3bcc0sm28841575ad.67.2026.07.08.07.22.37
+        d=1e100.net; s=20251104; t=1783520714; x=1784125514;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=GvPOfAqnErBt8ztKSYP7B2XU9RLRHl2bIpX+eaysQj4=;
+        b=ZnbKxMCMgKcE0a3E0JVAtAO0a2GKt7IKl+b49tKfrUfhAk6FPBL+r911wCzfgW0EIr
+         gWgGuBCHD4skrDAfvahGcEIfrvtNJixfdD7+XsrvNuvKYxq20hGHqchFdnrVFLEh5Inl
+         +bbeikJoa1a2VA0BIHMne8LYiIzSETqheLCsPWLvlzEWmrekuYK84lQMWJ2ws8nfWNtv
+         9GDDJFsrafZc8cyCBN3W9spsqIMPEUbUZnpN9/Akydjp07O5wbWNhanv98V/Vtd9FB/d
+         SGsfkg8heF5s7X/BwUnHdrWIVeq3FEAP0XnTU4i6OkMIa25o4KO6DlsS0z+Sr4dU/oem
+         bxwg==
+X-Forwarded-Encrypted: i=1; AHgh+RpB0uC9wvcRCKyRnLyEE8scXn4zKuwwUjasH+ppgov9wut3e00259IB9kuX74o8cXtJkVo0gdIYElVL7NJE@vger.kernel.org
+X-Gm-Message-State: AOJu0YzFBJIlaEUqrZrx6EVqkBqnZ2H9zT/koTIHODNgnOg+3+WF9nyM
+	KQalPuNKkC0NsJlmrMqvT7g1qVKx49MXZcKtnydUUKUFf5QGUnpJQmyUfu6Ry9kjJeCIz2JUxxH
+	vPkHWz1tZhpX95mMPEm9mNdiLfSG6hgvqztrNywZMnTb0Lz5h2UmXnp2beMMEHUZZTVVA
+X-Gm-Gg: AfdE7cmVPwG59H6Vrbqvqb2tqtUQo9Hus/4rfMIGyLWTFxOTkmZSpnRsO1s9OhS1xg4
+	Mgm71AId6MiAqd1axyYA0HQKHi2qXDt3z3fy5eKT93CjPNh4+GYUsW+jNTAc12vurjNh5+F6C9/
+	L0TBwGP4aVpZyx5gWHrO3Y+3Hh2HyRKJlPo7eUoHAESgjYuroq5aSEzRlO/1KqELoEm9e81i+Tg
+	cs1lEQHwpK3MOcTOCHhTdUaTFDqhSoig+HueTXY8HgjUtfGjlI/rKKEI3dQSK/sliONn46tbQrX
+	7bhuSi39N5bNNdEN5VUsLVxK4ZGNdVWxGhwJbzlX4tJYlX9wYWClXKEmcJ9OeprKFF7m/Sm3SAd
+	6i8XPM3RPHbaEajAdg57Iw9xPlMy91nCZbzo/hYWGDIiBnugO8VxjS2xp2812GmTzu1FE6hrsK6
+	/Jxrc2d+IQUMDo8WMUueUM2bMp
+X-Received: by 2002:a05:622a:1e1a:b0:51c:ecf:4eb3 with SMTP id d75a77b69052e-51c8b3cc299mr27193361cf.44.1783520713586;
+        Wed, 08 Jul 2026 07:25:13 -0700 (PDT)
+X-Received: by 2002:a05:622a:1e1a:b0:51c:ecf:4eb3 with SMTP id d75a77b69052e-51c8b3cc299mr27192631cf.44.1783520712722;
+        Wed, 08 Jul 2026 07:25:12 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5aed13c1c4dsm4527420e87.66.2026.07.08.07.25.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jul 2026 07:22:44 -0700 (PDT)
-From: phucduc.bui@gmail.com
-To: Mark Brown <broonie@kernel.org>,
-	Takashi Iwai <tiwai@suse.com>,
-	Nick Li <nick.li@foursemi.com>,
-	Herve Codina <herve.codina@bootlin.com>
-Cc: Support Opensource <support.opensource@diasemi.com>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Charles Keepax <ckeepax@opensource.cirrus.com>,
-	Richard Fitzgerald <rf@opensource.cirrus.com>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	Shenghao Ding <shenghao-ding@ti.com>,
-	Kevin Lu <kevin-lu@ti.com>,
-	Baojun Xu <baojun.xu@ti.com>,
-	Sen Wang <sen@ti.com>,
-	Oder Chiou <oder_chiou@realtek.com>,
-	Linus Walleij <linusw@kernel.org>,
-	Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
-	u.kleine-koenig@baylibre.com,
-	Zhang Yi <zhangyi@everest-semi.com>,
-	Marco Crivellari <marco.crivellari@suse.com>,
-	Kees Cook <kees@kernel.org>,
-	HyeongJun An <sammiee5311@gmail.com>,
-	Arnd Bergmann <arnd@arndb.de>,
-	Qianfeng Rong <rongqianfeng@vivo.com>,
-	linux-sound@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	patches@opensource.cirrus.com,
-	linux-mediatek@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	bui duc phuc <phucduc.bui@gmail.com>
-Subject: [PATCH v2 27/27] ASoC: codecs: rt722: Use guard() for mutex locks
-Date: Wed,  8 Jul 2026 21:17:34 +0700
-Message-ID: <20260708141734.578926-28-phucduc.bui@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260708141734.578926-1-phucduc.bui@gmail.com>
-References: <20260708141734.578926-1-phucduc.bui@gmail.com>
+        Wed, 08 Jul 2026 07:25:11 -0700 (PDT)
+Date: Wed, 8 Jul 2026 17:25:09 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+Cc: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Amit Kucheria <amit.kucheria@oss.qualcomm.com>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Kees Cook <kees@kernel.org>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+        cros-qcom-dts-watchers@chromium.org, linux-arm-msm@vger.kernel.org,
+        linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-hardening@vger.kernel.org,
+        Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
+Subject: Re: [PATCH v4 01/10] dt-bindings: firmware: qcom: tmd: add TMD
+ device type constants
+Message-ID: <2tu35aavp7sc2npni33ky5bve57idzy3bzp2pk7eh5lryq3r4v@gmm3dhayu4cf>
+References: <20260703-qmi-tmd-v4-0-3882189c1f83@oss.qualcomm.com>
+ <20260703-qmi-tmd-v4-1-3882189c1f83@oss.qualcomm.com>
+ <977711ef-c1fb-4735-b82a-4ca2f4797f51@oss.qualcomm.com>
+ <8ad14017-bce7-485e-9677-9cbf8ecb2742@oss.qualcomm.com>
+ <yvggh2zs6qkuyuzvwydkecswnjoyba2d7t27br6xpk6d2csp53@i25g6okdktz5>
+ <10a346d8-fbb1-4142-a650-507c3917b8f6@oss.qualcomm.com>
+ <dv4n4ntnfvhouv23asgshgs7wcolkmqs7lbuni52maexo4s44x@4bqhf33x4fr6>
+ <1aca8d60-8e39-4532-9095-a5260bba76ac@oss.qualcomm.com>
+ <e7eho7ezujbrdzgumshapf2r7hu2jaujib7lvotrqvcj5er5ut@xpd6l2kgipqu>
+ <9dc4b29e-e9fb-421a-b789-eb16a68ff915@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <9dc4b29e-e9fb-421a-b789-eb16a68ff915@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA4MDE0MSBTYWx0ZWRfX5t2Pa77wNRPT
+ hH/BWj2whsVIB82IjqcDVbaXOlcLBM18bhc4y4lx1qHpSdI4M2D/z1QZ1E04CNshkrbIvqBkwxx
+ qzyomvphh+UadUqA1EIUCSXQGe2V1pBaTw0XMAIuh3raqjPeZSM73GhXqMnqowA3FciK/DcUb/E
+ 2gyB9o8RiwyB48iFoNX1y0QxdyEzNVMROqDrC8ICxZ+9r8uFUro6VgjkiemJ7ELgrXTsBZHC25j
+ vPgI0KGT+erGyQeCOOXR6ql4Ac2y4nZJjVkwpDC7gEF8Yd3ZqcY0AeKpoiPbqkhgOwz8LV1LfMH
+ Y58rbDCoULkf3H5+VqZ6PSyji1doMV6nubqG4MRHZ4/xXjzoXxvXAj6x3ifVdmF/7Q5PlDv4L2w
+ ZerzUj9j2orbZ4IvWV5/o0qukvW4ekPUtaHBxlLY3cMCgn7Tia3lnm5fP4y/VSf6GJapgBqwL4X
+ cXN7yCjcWOU7dsHb5hg==
+X-Proofpoint-ORIG-GUID: B4yo1iC91EKCFOafFR9u4cI8Xx14c-CC
+X-Authority-Analysis: v=2.4 cv=NfTWEWD4 c=1 sm=1 tr=0 ts=6a4e5dca cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
+ a=DU7i0n-ryPtEfpeWOdgA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA4MDE0MSBTYWx0ZWRfXwnBwVdVQ9juC
+ VJrw5ETwg3YymT8OBuShLNQIi/73v7zvxVxHkiI/v3EN3qnoiIja0Vxo9d2Busdztpl5KdtjS/K
+ LMZMFTJIkY7tiNJb3PRKir1bNQ/KrbM=
+X-Proofpoint-GUID: B4yo1iC91EKCFOafFR9u4cI8Xx14c-CC
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-08_02,2026-07-08_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 suspectscore=0 phishscore=0 bulkscore=0 clxscore=1015
+ priorityscore=1501 impostorscore=0 malwarescore=0 adultscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607080141
 
-From: bui duc phuc <phucduc.bui@gmail.com>
+On Tue, Jul 07, 2026 at 03:55:13PM +0530, Gaurav Kohli wrote:
+> 
+> 
+> On 7/7/2026 1:04 AM, Dmitry Baryshkov wrote:
+> > On Mon, Jul 06, 2026 at 08:11:35PM +0200, Daniel Lezcano wrote:
+> > > On 7/6/26 19:47, Dmitry Baryshkov wrote:
+> > > > On Mon, Jul 06, 2026 at 07:03:18PM +0200, Daniel Lezcano wrote:
+> > > > > On 7/3/26 17:42, Dmitry Baryshkov wrote:
+> > > > > > On Fri, Jul 03, 2026 at 07:43:39PM +0530, Gaurav Kohli wrote:
+> > > > > > > 
+> > > > > > > 
+> > > > > > > On 7/3/2026 1:23 PM, Konrad Dybcio wrote:
+> > > > > > > > On 7/3/26 7:03 AM, Gaurav Kohli wrote:
+> > > > > > > > > Add Device Tree binding constants for Qualcomm Thermal Mitigation
+> > > > > > > > > Device (TMD) types used by remoteproc-backed thermal cooling devices.
+> > > > > > > > > 
+> > > > > > > > > Qualcomm remote processors expose thermal mitigation endpoints
+> > > > > > > > > through QMI. These endpoints can be registered with the thermal
+> > > > > > > > > framework via the `#cooling-cells` property on the remoteproc node.
+> > > > > > > > > 
+> > > > > > > > > The QMI TMD protocol identifies devices using string names (for example,
+> > > > > > > > > "pa", "modem", and "cdsp_sw"), while the DT cooling-device binding with
+> > > > > > > > > `#cooling-cells = <3>` requires numeric device id in the form:
+> > > > > > > > > 
+> > > > > > > > >       <&phandle device_id min_state max_state>
+> > > > > > > > > 
+> > > > > > > > > Define common TMD device index constants shared across currently
+> > > > > > > > > supported platforms. If a future target requires a different mapping,
+> > > > > > > > > additional target-specific constants can be introduced while preserving
+> > > > > > > > > existing DT ABI.
+> > > > > > > > > 
+> > > > > > > > > Signed-off-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+> > > 
+> > > [ ... ]
+> > > 
+> > > > > > Why are you using only those TMD devices?
+> > > > > > 
+> > > > > > > More constants can be added as needed.
+> > > > > > 
+> > > > > > Kodiak is one of the supported platforms.
+> > > > > 
+> > > > > What would be the benefit of having more than thirteen cooling devices
+> > > > > declared in the thermal framework and having only a couple of them mapped in
+> > > > > a thermal zone ?
+> > > > > 
+> > > > > I agree there are more TMDs but if they are unused for the moment, why do we
+> > > > > need to add them ? Can we do that incrementally ?
+> > > > 
+> > > > That's what I am trying to understand: why the implementation uses only
+> > > > the selected two devices, if the modem on Kodiak supports others. How
+> > > > can we find out, which TMDs to use on other devices.
+> > > 
+> > > My understanding is that is an initial thermal setup. Gaurav will add them
+> > > step by step while setting up all the thermal zones instead of sending a big
+> > > patchset. And TBH, that will be much easier to review.
+> > 
+> > In such a case it should be noted in the commit message and/or cover
+> > letter.
+> 
+> Thanks for the review/guidance. Not all TMD endpoints are relevant for
+> kernel thermal zone binding — some like BCL and cold temperature are handled
+> from userspace when needed. The constants here cover only
 
-Clean up the code using guard() for mutex locks.
-Merely code refactoring, and no behavior change.
+What if there is no userspace? Or the userspace is different from what
+you expect? I doubt we have TMD-speaking userspace yet.
 
-Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
----
- sound/soc/codecs/rt722-sdca-sdw.c | 29 ++++++++++++++++-------------
- sound/soc/codecs/rt722-sdca.c     |  4 ++--
- 2 files changed, 18 insertions(+), 15 deletions(-)
+> what is needed for modem and CDSP thermal zones on the currently posted
+> targets.
 
-diff --git a/sound/soc/codecs/rt722-sdca-sdw.c b/sound/soc/codecs/rt722-sdca-sdw.c
-index 284900933ebf..895b8b2ed607 100644
---- a/sound/soc/codecs/rt722-sdca-sdw.c
-+++ b/sound/soc/codecs/rt722-sdca-sdw.c
-@@ -6,6 +6,7 @@
- //
- //
- 
-+#include <linux/cleanup.h>
- #include <linux/delay.h>
- #include <linux/device.h>
- #include <linux/module.h>
-@@ -514,13 +515,13 @@ static int rt722_sdca_dev_system_suspend(struct device *dev)
- 	 * deferred work completes and before the parent disables
- 	 * interrupts on the link
- 	 */
--	mutex_lock(&rt722_sdca->disable_irq_lock);
--	rt722_sdca->disable_irq = true;
--	ret1 = sdw_update_no_pm(slave, SDW_SCP_SDCA_INTMASK1,
--				SDW_SCP_SDCA_INTMASK_SDCA_0, 0);
--	ret2 = sdw_update_no_pm(slave, SDW_SCP_SDCA_INTMASK2,
--				SDW_SCP_SDCA_INTMASK_SDCA_8, 0);
--	mutex_unlock(&rt722_sdca->disable_irq_lock);
-+	scoped_guard(mutex, &rt722_sdca->disable_irq_lock) {
-+		rt722_sdca->disable_irq = true;
-+		ret1 = sdw_update_no_pm(slave, SDW_SCP_SDCA_INTMASK1,
-+					SDW_SCP_SDCA_INTMASK_SDCA_0, 0);
-+		ret2 = sdw_update_no_pm(slave, SDW_SCP_SDCA_INTMASK2,
-+					SDW_SCP_SDCA_INTMASK_SDCA_8, 0);
-+	}
- 
- 	if (ret1 < 0 || ret2 < 0) {
- 		/* log but don't prevent suspend from happening */
-@@ -542,13 +543,15 @@ static int rt722_sdca_dev_resume(struct device *dev)
- 		return 0;
- 
- 	if (!slave->unattach_request) {
--		mutex_lock(&rt722->disable_irq_lock);
--		if (rt722->disable_irq == true) {
--			sdw_write_no_pm(slave, SDW_SCP_SDCA_INTMASK1, SDW_SCP_SDCA_INTMASK_SDCA_0);
--			sdw_write_no_pm(slave, SDW_SCP_SDCA_INTMASK2, SDW_SCP_SDCA_INTMASK_SDCA_8);
--			rt722->disable_irq = false;
-+		scoped_guard(mutex, &rt722->disable_irq_lock) {
-+			if (rt722->disable_irq) {
-+				sdw_write_no_pm(slave, SDW_SCP_SDCA_INTMASK1,
-+						SDW_SCP_SDCA_INTMASK_SDCA_0);
-+				sdw_write_no_pm(slave, SDW_SCP_SDCA_INTMASK2,
-+						SDW_SCP_SDCA_INTMASK_SDCA_8);
-+				rt722->disable_irq = false;
-+			}
- 		}
--		mutex_unlock(&rt722->disable_irq_lock);
- 	}
- 
- 	ret = sdw_slave_wait_for_init(slave, RT722_PROBE_TIMEOUT);
-diff --git a/sound/soc/codecs/rt722-sdca.c b/sound/soc/codecs/rt722-sdca.c
-index 1b6729f363fc..decf9407ab6d 100644
---- a/sound/soc/codecs/rt722-sdca.c
-+++ b/sound/soc/codecs/rt722-sdca.c
-@@ -6,6 +6,7 @@
- //
- //
- 
-+#include <linux/cleanup.h>
- #include <linux/bitops.h>
- #include <linux/delay.h>
- #include <linux/dmi.h>
-@@ -294,7 +295,7 @@ static void rt722_sdca_btn_check_handler(struct work_struct *work)
- 
- static void rt722_sdca_jack_init(struct rt722_sdca_priv *rt722)
- {
--	mutex_lock(&rt722->calibrate_mutex);
-+	guard(mutex)(&rt722->calibrate_mutex);
- 	if (rt722->hs_jack) {
- 		/* set SCP_SDCA_IntMask1[0]=1 */
- 		sdw_write_no_pm(rt722->slave, SDW_SCP_SDCA_INTMASK1,
-@@ -317,7 +318,6 @@ static void rt722_sdca_jack_init(struct rt722_sdca_priv *rt722)
- 		rt722_sdca_index_update_bits(rt722, RT722_VENDOR_HDA_CTL,
- 			RT722_GE_RELATED_CTL2, 0x4000, 0x4000);
- 	}
--	mutex_unlock(&rt722->calibrate_mutex);
- }
- 
- static int rt722_sdca_set_jack_detect(struct snd_soc_component *component,
+Again, SLPI, ADSP?
+
+> 
+> Will add a note in the cover letter clarifying for current tmd's.
+> Please let me if this is fine.
+> 
+> > 
+> > 
+> 
+
 -- 
-2.43.0
-
+With best wishes
+Dmitry
