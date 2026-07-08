@@ -1,235 +1,176 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD20847887F
-	for <linux-arm-msm@vger.kernel.org>; Wed,  8 Jul 2026 14:25:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 982FF2D662F;
+	Wed,  8 Jul 2026 14:30:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783520717; cv=none; b=s1CwHU379NU7slq8FacqJyH2CCjBVD5eeHpIRPy0WAOfh5iybwJFGZipMg9t0ZtMsrQobbSog94/PAGvZ00iPIU1/NkYM6gy2M6jS0omrjDqfGLVZkulBtGAxUziPKtOjeEfzfZnCPOWlOF575cFsZPnWMkQQjTA0NPzEyDK64k=
+	t=1783521021; cv=none; b=mrpuR/8wt9Kt0XD6WEvgcWvVuNOXFOrjmR86EcD/0sRqjN2aKHmD6/VdetxJmfYtxnPuDxlta4msmyWh96tWgQuhDSo8UCqnSnwn8UqBgyVxK8dbtLON7Ue2ZoZK5N9iK53LrgOonHIRaL15Py17e6eoxLx7H6bAWVv9OqIWexQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783520717; c=relaxed/simple;
-	bh=sSmsdnmJrwAPWW1KiyJRt8MCa+4Zum/gNQgF63z/D1o=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=azUMloxi4EVsGO+Gg+9bynTWJnAtxCsN8p0SOWFZP5X8BtN+W1l/fDNEO6PoyCgsEo3kec5gaL1I5u+T4cRPdu3zOSx9A4AZUj7AaAXgngpTlHKwYkq98j2E0/kMtzY5gzegNRWokMJ5zsNfQ9SeOQ8SALS+PEEEoDUGZJgrzx8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PyP7HEO3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KysYUSt/; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1783521021; c=relaxed/simple;
+	bh=TmLrFj8hFi2S6bgLQ4ZFE8c9fZx37+p1hBxYmJWj/yg=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=D2VtdhXLvOtcYf71t2icHzX5y3bUcoPWlaULNd7MKRAbezBhcxNvNkGexf+S/6SbHX11n2H559tWunYpCPnrPXatqBmQnPxvMF0iO1cH5cfS2fHg1TLX+9tNWfCnmlYJcTZfvSpPQZrGFhFKKmxr1WIK87nIbg6izVWG00L//n4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=rsESOzX6; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PyP7HEO3";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KysYUSt/"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 668D7q7m2677957
-	for <linux-arm-msm@vger.kernel.org>; Wed, 8 Jul 2026 14:25:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	GvPOfAqnErBt8ztKSYP7B2XU9RLRHl2bIpX+eaysQj4=; b=PyP7HEO3JF6XT+gG
-	EJuLTNmpvlkCRZfJUJSEB8ReOvor7VAA44TxaSxdLDVWeJhZ6vdU3jOojmVKBHtl
-	ks1eKw/63ND/vu+kjFJcAMFIQVKNeu62WpXECEAsV+Zx5uViAopvuE18Hue+ETs6
-	vSMurlyjcDwN+wwrH9JXxDvSlwPsxelBvAnh44CsYBtQIlnLvB6Vc4pq9JjgFEnb
-	B2REVAaXWJDnIJtMRZK9aa5158Eyen0EhQpPn7Sv2N+wEe9MlW745VtzHyXR3x8f
-	crwjvf1Bhs8ylRMHihreF1s8nJw2Wg7FZElD+gi2mcfUVv4Bio04PUNzn4lAMJl5
-	EttpbA==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4f9q5s8ahc-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 14:25:14 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51c083f1818so7302031cf.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 07:25:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1783520714; x=1784125514; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=GvPOfAqnErBt8ztKSYP7B2XU9RLRHl2bIpX+eaysQj4=;
-        b=KysYUSt/n7df9m0u4H206uG9MrZS1BzYIxUq55BC+0E4SJSU1QFpj3u9vt/pp3zr1m
-         MdezqKTfQlOvoAB+ETVxmqibI14Q92FSWj4nqF3EPcOYyBnLq+hzkU5VMUBun6Z00+yR
-         +nYoxfH7jtgRhq8wjCSHftLv0BfUf2kzPkObYqHspPM1vCR0LRWN+TnANX7LAuTMIykT
-         vHNnY0nhnJrUr+CyFefENO5ZLizsQa47ty4tB6s75ZguM6YB2dTGhG2tXWnaEv5BaiFW
-         qfLV97345i+i7wMLrG1Bt6I6GJwJgIzFdURmfHwfBXknvGOkyJJMlG2x+UOczRFVoPwN
-         VUzQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783520714; x=1784125514;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=GvPOfAqnErBt8ztKSYP7B2XU9RLRHl2bIpX+eaysQj4=;
-        b=ZnbKxMCMgKcE0a3E0JVAtAO0a2GKt7IKl+b49tKfrUfhAk6FPBL+r911wCzfgW0EIr
-         gWgGuBCHD4skrDAfvahGcEIfrvtNJixfdD7+XsrvNuvKYxq20hGHqchFdnrVFLEh5Inl
-         +bbeikJoa1a2VA0BIHMne8LYiIzSETqheLCsPWLvlzEWmrekuYK84lQMWJ2ws8nfWNtv
-         9GDDJFsrafZc8cyCBN3W9spsqIMPEUbUZnpN9/Akydjp07O5wbWNhanv98V/Vtd9FB/d
-         SGsfkg8heF5s7X/BwUnHdrWIVeq3FEAP0XnTU4i6OkMIa25o4KO6DlsS0z+Sr4dU/oem
-         bxwg==
-X-Forwarded-Encrypted: i=1; AHgh+RpB0uC9wvcRCKyRnLyEE8scXn4zKuwwUjasH+ppgov9wut3e00259IB9kuX74o8cXtJkVo0gdIYElVL7NJE@vger.kernel.org
-X-Gm-Message-State: AOJu0YzFBJIlaEUqrZrx6EVqkBqnZ2H9zT/koTIHODNgnOg+3+WF9nyM
-	KQalPuNKkC0NsJlmrMqvT7g1qVKx49MXZcKtnydUUKUFf5QGUnpJQmyUfu6Ry9kjJeCIz2JUxxH
-	vPkHWz1tZhpX95mMPEm9mNdiLfSG6hgvqztrNywZMnTb0Lz5h2UmXnp2beMMEHUZZTVVA
-X-Gm-Gg: AfdE7cmVPwG59H6Vrbqvqb2tqtUQo9Hus/4rfMIGyLWTFxOTkmZSpnRsO1s9OhS1xg4
-	Mgm71AId6MiAqd1axyYA0HQKHi2qXDt3z3fy5eKT93CjPNh4+GYUsW+jNTAc12vurjNh5+F6C9/
-	L0TBwGP4aVpZyx5gWHrO3Y+3Hh2HyRKJlPo7eUoHAESgjYuroq5aSEzRlO/1KqELoEm9e81i+Tg
-	cs1lEQHwpK3MOcTOCHhTdUaTFDqhSoig+HueTXY8HgjUtfGjlI/rKKEI3dQSK/sliONn46tbQrX
-	7bhuSi39N5bNNdEN5VUsLVxK4ZGNdVWxGhwJbzlX4tJYlX9wYWClXKEmcJ9OeprKFF7m/Sm3SAd
-	6i8XPM3RPHbaEajAdg57Iw9xPlMy91nCZbzo/hYWGDIiBnugO8VxjS2xp2812GmTzu1FE6hrsK6
-	/Jxrc2d+IQUMDo8WMUueUM2bMp
-X-Received: by 2002:a05:622a:1e1a:b0:51c:ecf:4eb3 with SMTP id d75a77b69052e-51c8b3cc299mr27193361cf.44.1783520713586;
-        Wed, 08 Jul 2026 07:25:13 -0700 (PDT)
-X-Received: by 2002:a05:622a:1e1a:b0:51c:ecf:4eb3 with SMTP id d75a77b69052e-51c8b3cc299mr27192631cf.44.1783520712722;
-        Wed, 08 Jul 2026 07:25:12 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5aed13c1c4dsm4527420e87.66.2026.07.08.07.25.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jul 2026 07:25:11 -0700 (PDT)
-Date: Wed, 8 Jul 2026 17:25:09 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-Cc: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Amit Kucheria <amit.kucheria@oss.qualcomm.com>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Kees Cook <kees@kernel.org>,
-        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
-        cros-qcom-dts-watchers@chromium.org, linux-arm-msm@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
-        linux-hardening@vger.kernel.org,
-        Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
-Subject: Re: [PATCH v4 01/10] dt-bindings: firmware: qcom: tmd: add TMD
- device type constants
-Message-ID: <2tu35aavp7sc2npni33ky5bve57idzy3bzp2pk7eh5lryq3r4v@gmm3dhayu4cf>
-References: <20260703-qmi-tmd-v4-0-3882189c1f83@oss.qualcomm.com>
- <20260703-qmi-tmd-v4-1-3882189c1f83@oss.qualcomm.com>
- <977711ef-c1fb-4735-b82a-4ca2f4797f51@oss.qualcomm.com>
- <8ad14017-bce7-485e-9677-9cbf8ecb2742@oss.qualcomm.com>
- <yvggh2zs6qkuyuzvwydkecswnjoyba2d7t27br6xpk6d2csp53@i25g6okdktz5>
- <10a346d8-fbb1-4142-a650-507c3917b8f6@oss.qualcomm.com>
- <dv4n4ntnfvhouv23asgshgs7wcolkmqs7lbuni52maexo4s44x@4bqhf33x4fr6>
- <1aca8d60-8e39-4532-9095-a5260bba76ac@oss.qualcomm.com>
- <e7eho7ezujbrdzgumshapf2r7hu2jaujib7lvotrqvcj5er5ut@xpd6l2kgipqu>
- <9dc4b29e-e9fb-421a-b789-eb16a68ff915@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="rsESOzX6"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 038E0C2BCB3;
+	Wed,  8 Jul 2026 14:30:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1783521021;
+	bh=TmLrFj8hFi2S6bgLQ4ZFE8c9fZx37+p1hBxYmJWj/yg=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
+	b=rsESOzX6vSmqdYlEZOM+bVRFqmZfd9GZ+rJAW8+lF02rXUE1LKMAgOXUQM461Zd4Q
+	 yXOdgHLD2VFgNXkZ3H0cxGLH1n8Xs7HklfOvKt4mHb9WXkFBGRwUXqlzjlugyX0WJx
+	 U6b7CLTFdfK1DgjhtBgd96Fqcx4Kjb5HizE4I/HXfh7H8Qlw6orHAXEcP+42bqZ9gg
+	 rRi/BBvIpSpsdM6PdTB9X4sBwbM2rrNrAE6vQQpDi21GJBZ8ASkHhfxIy+HKmew/zK
+	 SWriGf5pkTMnPCMPE46pXy3+MydqomO7NnLZ1RlHsozGYZRnoH70iuWn/79btSITzf
+	 5IlYVBto1j7iA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id D60C5C44501;
+	Wed,  8 Jul 2026 14:30:20 +0000 (UTC)
+From: Manivannan Sadhasivam <mani@kernel.org>
+Date: Wed, 08 Jul 2026 16:30:15 +0200
+Subject: [PATCH v3 1/8] PCI/ASPM: Always disable ASPM when driver requests
+ it
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <9dc4b29e-e9fb-421a-b789-eb16a68ff915@oss.qualcomm.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzA4MDE0MSBTYWx0ZWRfX5t2Pa77wNRPT
- hH/BWj2whsVIB82IjqcDVbaXOlcLBM18bhc4y4lx1qHpSdI4M2D/z1QZ1E04CNshkrbIvqBkwxx
- qzyomvphh+UadUqA1EIUCSXQGe2V1pBaTw0XMAIuh3raqjPeZSM73GhXqMnqowA3FciK/DcUb/E
- 2gyB9o8RiwyB48iFoNX1y0QxdyEzNVMROqDrC8ICxZ+9r8uFUro6VgjkiemJ7ELgrXTsBZHC25j
- vPgI0KGT+erGyQeCOOXR6ql4Ac2y4nZJjVkwpDC7gEF8Yd3ZqcY0AeKpoiPbqkhgOwz8LV1LfMH
- Y58rbDCoULkf3H5+VqZ6PSyji1doMV6nubqG4MRHZ4/xXjzoXxvXAj6x3ifVdmF/7Q5PlDv4L2w
- ZerzUj9j2orbZ4IvWV5/o0qukvW4ekPUtaHBxlLY3cMCgn7Tia3lnm5fP4y/VSf6GJapgBqwL4X
- cXN7yCjcWOU7dsHb5hg==
-X-Proofpoint-ORIG-GUID: B4yo1iC91EKCFOafFR9u4cI8Xx14c-CC
-X-Authority-Analysis: v=2.4 cv=NfTWEWD4 c=1 sm=1 tr=0 ts=6a4e5dca cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=DU7i0n-ryPtEfpeWOdgA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzA4MDE0MSBTYWx0ZWRfXwnBwVdVQ9juC
- VJrw5ETwg3YymT8OBuShLNQIi/73v7zvxVxHkiI/v3EN3qnoiIja0Vxo9d2Busdztpl5KdtjS/K
- LMZMFTJIkY7tiNJb3PRKir1bNQ/KrbM=
-X-Proofpoint-GUID: B4yo1iC91EKCFOafFR9u4cI8Xx14c-CC
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-08_02,2026-07-08_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 suspectscore=0 phishscore=0 bulkscore=0 clxscore=1015
- priorityscore=1501 impostorscore=0 malwarescore=0 adultscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607080141
+Message-Id: <20260708-pci-aspm-fix-v3-1-6bd72451746e@kernel.org>
+References: <20260708-pci-aspm-fix-v3-0-6bd72451746e@kernel.org>
+In-Reply-To: <20260708-pci-aspm-fix-v3-0-6bd72451746e@kernel.org>
+To: Bjorn Helgaas <bhelgaas@google.com>, 
+ Lorenzo Pieralisi <lpieralisi@kernel.org>, 
+ =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Nirmal Patel <nirmal.patel@linux.intel.com>, 
+ Jonathan Derrick <jonathan.derrick@linux.dev>, 
+ Jeff Johnson <jjohnson@kernel.org>
+Cc: linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-wireless@vger.kernel.org, 
+ ath12k@lists.infradead.org, ath11k@lists.infradead.org, 
+ ath10k@lists.infradead.org, 
+ Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, 
+ Qiang Yu <qiang.yu@oss.qualcomm.com>, mani@kernel.org, 
+ =?utf-8?q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4353; i=mani@kernel.org;
+ h=from:subject:message-id;
+ bh=D4w9YT637FWLwgGnXYf3ez0AiW99miyOiPTxsYowQUw=;
+ b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBqTl73FnTd3FyCB9aJRYE2UOKhmwqdo19Kc5ziJ
+ 7sAwr/kAXSJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCak5e9wAKCRBVnxHm/pHO
+ 9f50B/92ojehwpKQmD7fMrpHqUlkMXlLamTGMqdbknwGUnu/SaSgOmRdv6pQPrzr5EGUI3MBTIr
+ mZ+pcC9qimhjXzkzAfuMJaLtNLW1bM2Fyk/sTbPnG7cG3dkWx1Lo2UuCHZcppRdOjocDScSjuup
+ X7voUBR4odulK89JVh+URt2I2Dn/NF0mcrlU/dOVo7mS1tglGAHXlMSKZpLl+LiaSSQ7taZHfiH
+ TtYuOD03UTxXhCOoWYlkkVjM/fobA6tiE1aF4aDv/up2b1smVe/0V5xfF8RhOR2nm4DQY8whvho
+ ZF0E9epv6ByhHnflSnJuKlByNi4Ky1tPc0IltsOr9dYJl3t0
+X-Developer-Key: i=mani@kernel.org; a=openpgp;
+ fpr=C668AEC3C3188E4C611465E7488550E901166008
+X-Endpoint-Received: by B4 Relay for mani@kernel.org/default with
+ auth_id=787
 
-On Tue, Jul 07, 2026 at 03:55:13PM +0530, Gaurav Kohli wrote:
-> 
-> 
-> On 7/7/2026 1:04 AM, Dmitry Baryshkov wrote:
-> > On Mon, Jul 06, 2026 at 08:11:35PM +0200, Daniel Lezcano wrote:
-> > > On 7/6/26 19:47, Dmitry Baryshkov wrote:
-> > > > On Mon, Jul 06, 2026 at 07:03:18PM +0200, Daniel Lezcano wrote:
-> > > > > On 7/3/26 17:42, Dmitry Baryshkov wrote:
-> > > > > > On Fri, Jul 03, 2026 at 07:43:39PM +0530, Gaurav Kohli wrote:
-> > > > > > > 
-> > > > > > > 
-> > > > > > > On 7/3/2026 1:23 PM, Konrad Dybcio wrote:
-> > > > > > > > On 7/3/26 7:03 AM, Gaurav Kohli wrote:
-> > > > > > > > > Add Device Tree binding constants for Qualcomm Thermal Mitigation
-> > > > > > > > > Device (TMD) types used by remoteproc-backed thermal cooling devices.
-> > > > > > > > > 
-> > > > > > > > > Qualcomm remote processors expose thermal mitigation endpoints
-> > > > > > > > > through QMI. These endpoints can be registered with the thermal
-> > > > > > > > > framework via the `#cooling-cells` property on the remoteproc node.
-> > > > > > > > > 
-> > > > > > > > > The QMI TMD protocol identifies devices using string names (for example,
-> > > > > > > > > "pa", "modem", and "cdsp_sw"), while the DT cooling-device binding with
-> > > > > > > > > `#cooling-cells = <3>` requires numeric device id in the form:
-> > > > > > > > > 
-> > > > > > > > >       <&phandle device_id min_state max_state>
-> > > > > > > > > 
-> > > > > > > > > Define common TMD device index constants shared across currently
-> > > > > > > > > supported platforms. If a future target requires a different mapping,
-> > > > > > > > > additional target-specific constants can be introduced while preserving
-> > > > > > > > > existing DT ABI.
-> > > > > > > > > 
-> > > > > > > > > Signed-off-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-> > > 
-> > > [ ... ]
-> > > 
-> > > > > > Why are you using only those TMD devices?
-> > > > > > 
-> > > > > > > More constants can be added as needed.
-> > > > > > 
-> > > > > > Kodiak is one of the supported platforms.
-> > > > > 
-> > > > > What would be the benefit of having more than thirteen cooling devices
-> > > > > declared in the thermal framework and having only a couple of them mapped in
-> > > > > a thermal zone ?
-> > > > > 
-> > > > > I agree there are more TMDs but if they are unused for the moment, why do we
-> > > > > need to add them ? Can we do that incrementally ?
-> > > > 
-> > > > That's what I am trying to understand: why the implementation uses only
-> > > > the selected two devices, if the modem on Kodiak supports others. How
-> > > > can we find out, which TMDs to use on other devices.
-> > > 
-> > > My understanding is that is an initial thermal setup. Gaurav will add them
-> > > step by step while setting up all the thermal zones instead of sending a big
-> > > patchset. And TBH, that will be much easier to review.
-> > 
-> > In such a case it should be noted in the commit message and/or cover
-> > letter.
-> 
-> Thanks for the review/guidance. Not all TMD endpoints are relevant for
-> kernel thermal zone binding — some like BCL and cold temperature are handled
-> from userspace when needed. The constants here cover only
+From: Ilpo Järvinen <ilpo.jarvinen@linux.intel.com>
 
-What if there is no userspace? Or the userspace is different from what
-you expect? I doubt we have TMD-speaking userspace yet.
+PCI core/ASPM service driver allows controlling ASPM state through
+pci_disable_link_state() API. It was decided earlier (see the Link
+below), to not allow ASPM changes when OS does not have control over it
+but only log a warning about the problem 'commit 2add0ec14c25 ("PCI/ASPM:
+Warn when driver asks to disable ASPM, but we can't do it")'.
 
-> what is needed for modem and CDSP thermal zones on the currently posted
-> targets.
+A number of drivers have added workarounds to force ASPM off with own
+writes into the Link Control Register (some even with comments
+explaining why PCI core does not disable it under some circumstances).
+According to the comments, some drivers require ASPM to be off for
+reliable operation.
 
-Again, SLPI, ADSP?
+Having custom ASPM handling in drivers is problematic because the state
+kept in the ASPM service driver is not updated by the changes made
+outside the link state management API.
 
-> 
-> Will add a note in the cover letter clarifying for current tmd's.
-> Please let me if this is fine.
-> 
-> > 
-> > 
-> 
+As the first step to address this issue, make pci_disable_link_state()
+to unconditionally disable ASPM so the motivation for drivers to come
+up with custom ASPM handling code is eliminated.
+
+To fully take advantage of the ASPM handling core provides, the drivers
+that need to quirk ASPM have to be altered depend on PCIEASPM and the
+custom ASPM code is removed. This is to be done separately. As PCIEASPM
+is already behind EXPERT, it should be no problem to limit disabling it
+for configurations that do not require touching ASPM.
+
+Make pci_disable_link_state() function comment to comply kerneldoc
+formatting while changing the description.
+
+Link: https://lore.kernel.org/all/CANUX_P3F5YhbZX3WGU-j1AGpbXb_T9Bis2ErhvKkFMtDvzatVQ@mail.gmail.com/
+Link: https://lore.kernel.org/all/20230511131441.45704-1-ilpo.jarvinen@linux.intel.com/
+Signed-off-by: Ilpo Järvinen <ilpo.jarvinen@linux.intel.com>
+[mani: commit message fixup]
+Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+---
+ drivers/pci/pcie/aspm.c | 33 ++++++++++++++++++++-------------
+ 1 file changed, 20 insertions(+), 13 deletions(-)
+
+diff --git a/drivers/pci/pcie/aspm.c b/drivers/pci/pcie/aspm.c
+index 172783e7f519..1c15a14718e8 100644
+--- a/drivers/pci/pcie/aspm.c
++++ b/drivers/pci/pcie/aspm.c
+@@ -1449,16 +1449,23 @@ static int __pci_disable_link_state(struct pci_dev *pdev, int state, bool locked
+ 		return -EINVAL;
+ 	/*
+ 	 * A driver requested that ASPM be disabled on this device, but
+-	 * if we don't have permission to manage ASPM (e.g., on ACPI
++	 * if we might not have permission to manage ASPM (e.g., on ACPI
+ 	 * systems we have to observe the FADT ACPI_FADT_NO_ASPM bit and
+-	 * the _OSC method), we can't honor that request.  Windows has
+-	 * a similar mechanism using "PciASPMOptOut", which is also
+-	 * ignored in this situation.
++	 * the _OSC method), previously we chose to not honor disable
++	 * request in that case. Windows has a similar mechanism using
++	 * "PciASPMOptOut", which is also ignored in this situation.
++	 *
++	 * Not honoring the requests to disable ASPM, however, led to
++	 * drivers forcing ASPM off on their own. As such changes of ASPM
++	 * state are not tracked by this service driver, the state kept here
++	 * became out of sync.
++	 *
++	 * Therefore, honor ASPM disable requests even when OS does not have
++	 * ASPM control. Plain disable for ASPM is assumed to be slightly
++	 * safer than fully managing it.
+ 	 */
+-	if (aspm_disabled) {
+-		pci_warn(pdev, "can't disable ASPM; OS doesn't have ASPM control\n");
+-		return -EPERM;
+-	}
++	if (aspm_disabled)
++		pci_warn(pdev, "OS doesn't have ASPM control, disabling ASPM anyway\n");
+ 
+ 	if (!locked)
+ 		down_read(&pci_bus_sem);
+@@ -1485,13 +1492,13 @@ int pci_disable_link_state_locked(struct pci_dev *pdev, int state)
+ EXPORT_SYMBOL(pci_disable_link_state_locked);
+ 
+ /**
+- * pci_disable_link_state - Disable device's link state, so the link will
+- * never enter specific states.  Note that if the BIOS didn't grant ASPM
+- * control to the OS, this does nothing because we can't touch the LNKCTL
+- * register. Returns 0 or a negative errno.
+- *
++ * pci_disable_link_state - Disable device's link state
+  * @pdev: PCI device
+  * @state: ASPM link state to disable
++ *
++ * Disable device's link state so the link will never enter specific states.
++ *
++ * Return: 0 or a negative errno
+  */
+ int pci_disable_link_state(struct pci_dev *pdev, int state)
+ {
 
 -- 
-With best wishes
-Dmitry
+2.43.0
+
+
