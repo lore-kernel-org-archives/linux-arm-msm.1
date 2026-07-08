@@ -1,309 +1,406 @@
-Received: from mail-05.mail-europe.com (mail-05.mail-europe.com [85.9.206.169])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85AD93F6C5A
-	for <linux-arm-msm@vger.kernel.org>; Wed,  8 Jul 2026 21:36:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=85.9.206.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D394D3A6B81;
+	Wed,  8 Jul 2026 21:55:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783546568; cv=none; b=RRnJMBDhSD8TxcIwRGupFlz4MGWjdnhffKQikH0Lm5geJOOqDD1JUJv8AqXayZSjCRsv49bj4vrgm0i5ZmmCXkDcPd1fiHk+DdtYUZO5G+ytwUpZz8baI2pwlZiFmm4q8PQ8dRfdAKnuTAPUMQKru38YuH5vRR56Bf+VGnaDWwU=
+	t=1783547754; cv=none; b=Uz5n9jS9UyY5T6ZWD6Wwwsf05EYtF17pH8A7C932GML2oSgdmfpIHoZSO8LURCEm8Tv60w7uUha1NU9cYb+i6C+DGHS6p2oOJeWeGXo+hPIBadzj/I8EIaVDJyez9fUq+UNxnZiOzXygE8ynUu1GJiup+fBUKh4KTmOzVAPjcnw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783546568; c=relaxed/simple;
-	bh=uW3KpuuRhONSI4WnwH7ciiMe9KKhWTDUZaNxZJWu9ts=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=HU5+m8VhNzcgNebsrDDvpryNSQTIsEoFadRDHklSbk4Gd2+gHmsItPqkIMuIoHT3Uc1mbCrRrMY/d9ZLJPQ+iVdorZPSDdC+V5+oYNGd/gRDEzZK+yoxXShb9l1qGyqN3pNIh2rqdtBzY+EfSvCO0hGPccaJiKo7Ukl9iX+f/TU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=JBsx2lPo; arc=none smtp.client-ip=85.9.206.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proton.me
+	s=arc-20240116; t=1783547754; c=relaxed/simple;
+	bh=mQONm8E+JkVSZWfARwyuTio0dPnEF5IwNfcfzS9UkFw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=g+MX9qOe+WS2nDAKsaBPO0y/tj3F+fcYsIQ3jPZhulvn2t/gtmzhS7ag1ebTUTINykJ/MhUuxFkaEPogYGyBx5hefjMz45eOwEJikAloAkP0xW6+NrnExyagF9dNBGrzGdAz7vQPOaYwwjdlJ5xjdKJELx8J7TxwYpjEIUItThI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=T4pVv/DP; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="JBsx2lPo"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1783546555; x=1783805755;
-	bh=OaFK8xchxZpdcSqUAlwbyjWiLLlhU4uj9zauzAG6mTM=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=JBsx2lPoXe0XnnsfV7iz1fLtcAxOvIzUT5rz3EklYgZFTRxMnULH/axoylwiMmuzg
-	 XtnV7eewtqFFQHPhsmaNTZlvXu9NQWs7abX7HNm27R7HTphTiq/Rvi71d2F3wtQUpV
-	 d8/CIBPtzp42Ec9ZswoC0mLOKZ98GLY6Tong1397mTKCNqqUJxUCQROqG2K/bvZ1jo
-	 EJWqCTpvW1fdx43LrFuGkN9gyNKukcIgeo5BZR0nGYygvqyisQySJZdz/8q5+/UbmV
-	 Vo5riulTp/uK8YF2/lWlnJSJPlgUQK6t3ni1HldwTZ7TNTmG4Q44EKKI1rH3ZvvSyQ
-	 X7gEegdqacWfg==
-Date: Wed, 08 Jul 2026 21:35:51 +0000
-To: Alex Elder <elder@ieee.org>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Alex Elder <elder@kernel.org>
-From: Esteban Urrutia <esteuwu@proton.me>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, netdev@vger.kernel.org
-Subject: Re: [PATCH 3/3] net: ipa: Add IPA v5.1 data
-Message-ID: <e89985ff-adf2-4014-95c1-27fc32f774dc@proton.me>
-In-Reply-To: <b810c574-0f60-4d3d-ad5a-4205a119fe00@ieee.org>
-References: <20260622-sm8450-ipa-v1-0-532f0299f96e@proton.me> <20260622-sm8450-ipa-v1-3-532f0299f96e@proton.me> <b810c574-0f60-4d3d-ad5a-4205a119fe00@ieee.org>
-Feedback-ID: 147889766:user:proton
-X-Pm-Message-ID: 7c235c73f6aaaa99f540929f35efc5c8c9a7c78d
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="T4pVv/DP"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E81091F000E9;
+	Wed,  8 Jul 2026 21:55:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783547752;
+	bh=18M0o3bms/FWqXkbeCx1DIT7uNO8cNtKfuRe5v9zuL4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=T4pVv/DPQZeN1DflmRgh80MUtzF9ZIXol+CG7beLlbMqWe2yB0eeM23vHt6LrhzUP
+	 Kw2eAK9UensxbWIL3lmtHLMQaM+CgXE6N5jQsCwx4FcvBzJTqXzQglWYFJDAjXV8bD
+	 nnq/ckAfCDP50jZiHUcpG/Mzvupi+1WXoEYmPLEVWgBclB4GLDg/WkxJ7dagh8gIoj
+	 pcI8MdPYvWTJcPKC8NuNJRtynSVzH7MDXmIV2N6Bg9ktXYCJE5co0CMjyEMsrC8U7b
+	 aICTMh5iAcwZn2IJ73teHp1ATvjqvWmY9we+rhZpTgEHReWJEkNEupbSEytVjQ6cfg
+	 uRg1qhZhatayA==
+Message-ID: <3ab676ac-919b-4a80-8dd6-71dd7f6fe06c@kernel.org>
+Date: Wed, 8 Jul 2026 22:55:48 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 1/2] dt-bindings: phy: qcom: Add CSI2 C-PHY/DPHY schema
+To: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Vinod Koul
+ <vkoul@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
+ linux-media@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260708-x1e-csi2-phy-v9-0-0210b90c04cf@linaro.org>
+ <20260708-x1e-csi2-phy-v9-1-0210b90c04cf@linaro.org>
+ <YSunV_lNJ8xW_y-Aa2psZavniF6mcHJlJipuj1RYWMB8Zb8yLC-gb7eEnk0XMjfwQOneMGsZM5foFKutCNhYqw==@protonmail.internalid>
+ <b7baffda-b97c-4b83-8d9e-e381d0289682@linaro.org>
+From: Bryan O'Donoghue <bod@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=bod@kernel.org; keydata=
+ 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
+In-Reply-To: <b7baffda-b97c-4b83-8d9e-e381d0289682@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 7/8/26 4:06 PM, Alex Elder wrote:
-> I think the DDR values might be wrong, but it's difficult to be
-> sure.  In some cases, in arrays like this in the downstream code,
-> if there is no entry found in an array, the *earlier* version
-> values should be used.  (Unless someone better informed states
-> that this is wrong, I think it's fine as-is.)
->=20
-> This information is found in the ipa3_qmb_outstanding[IPA_5_1][]
-> array in the downstream code.  However there is no entry for that
-> version.  Given that, all zeroes (as you have it) makes sense.
-> But it's possible this applies instead:
->=20
->          [IPA_5_0][IPA_QMB_INSTANCE_DDR]         =3D {12, 12, 0},
->          [IPA_5_0][IPA_QMB_INSTANCE_PCIE]        =3D {0, 0, 0},
->=20
-> I have no way of knowing; perhaps someone from Qualcomm can
-> get confirmation that all zeroes is correct.
->=20
-> (Note the order of values presented in the downstream code
-> differs from upstream.)
-
-In downstream ipa_utils.c there's a function called ipa3_cfg_qsb() which
-is in charge of reading these values from ipa3_qmb_outstanding.
-Since these values are not present for IPA v5.1, one would assume
-they're not set and that, since this is the first time such behavior is
-found, additional changes would need to be made to the IPA driver.
-However, looking at this function, which I'll leave as a snippet below
-given its shortness:
-
-static void ipa3_cfg_qsb(void)
-{
-=09u8 hw_type_idx;
-=09const struct ipa_qmb_outstanding *qmb_ot;
-=09struct ipahal_reg_qsb_max_reads max_reads =3D { 0 };
-=09struct ipahal_reg_qsb_max_writes max_writes =3D { 0 };
-
-=09hw_type_idx =3D ipa3_ctx->hw_type_index;
-
-=09/*
-=09 * Read the register values before writing to them to ensure
-=09 * other values are not overwritten
-=09 */
-=09ipahal_read_reg_fields(IPA_QSB_MAX_WRITES, &max_writes);
-=09ipahal_read_reg_fields(IPA_QSB_MAX_READS, &max_reads);
-
-=09qmb_ot =3D &(ipa3_qmb_outstanding[hw_type_idx][IPA_QMB_INSTANCE_DDR]);
-=09max_reads.qmb_0_max_reads =3D qmb_ot->ot_reads;
-=09max_writes.qmb_0_max_writes =3D qmb_ot->ot_writes;
-=09max_reads.qmb_0_max_read_beats =3D qmb_ot->ot_read_beats;
-
-=09qmb_ot =3D &(ipa3_qmb_outstanding[hw_type_idx][IPA_QMB_INSTANCE_PCIE]);
-=09max_reads.qmb_1_max_reads =3D qmb_ot->ot_reads;
-=09max_writes.qmb_1_max_writes =3D qmb_ot->ot_writes;
-
-=09ipahal_write_reg_fields(IPA_QSB_MAX_WRITES, &max_writes);
-=09ipahal_write_reg_fields(IPA_QSB_MAX_READS, &max_reads);
-}
-
-There are no conditions for writing ot_reads, ot_writes and
-ot_read_beats, which would correspond to max_reads, max_writes and
-max_reads_beats in upstream.
-Since hw_type_idx is set to IPA_5_1, this should give a null pointer.
-With this info, there are two possibilities:
-
-1. Null pointer dereference, resulting in a kernel oops downstream.
-2. qmb_ot is set with all values to 0.
-
-I have never seen a null pointer dereference downstream, so I'm more
-inclined to believe option 2 is what's actually happening.
-IPA v5.0 also zeroes these values, but I wasn't able to actually confirm
-this.
-This because in downstream, IPA versions are split into subversions,
-which are:
-
-1. Normal IPA (IPA_X_Y)
-2. MHI IPA (IPA_X_Y_MHI)
-3. APQ IPA (IPA_X_Y_APQ)
-
-Data for IPA v5.0 seems to be of the MHI type, since it's only used in
-the SDX65 SoC, which I believe is mostly used in 5G modems.
-I realized this while cross-checking since some values didn't really
-match, so I had to cross-check with different ipa_data-vX.Y.c files
-because of this.
-
-> And although ipa_gsi_ep_config is not defined in this code
-> base, here is what it looks like:
->=20
-> struct ipa_gsi_ep_config {
->          int ipa_ep_num;
->          int ipa_gsi_chan_num;
->          int ipa_if_tlv;
->          int ipa_if_aos;
->          int ee;
->          enum gsi_prefetch_mode prefetch_mode;
->          uint8_t prefetch_threshold;
-> };
->=20
-> This might not be current; I'm using code found here:
->    https://git.codelinaro.org/clo/la/kernel/msm-5.15.git
-
-Many thanks for providing the declaration for this struct.
-
-> In the downstream code--confusingly--ipa_gsi_setup_channel()
-> doubles the desc_fifo_sz value (for GSI, versus the older BAM
-> interface).  So the ring size becomes 4096 bytes, and that
-> works out to 256 16-byte GSI TRE entries.  I'm not sure why
-> 512 is used for IPA v3.5.1, but it probably just means it's
-> bigger than it needs to be.
->=20
-> The event_count should be the same as the tre_count.  Again
-> I no longer know why that's not the case for IPA v3.5.1.
-
-For the record (since this is off-topic). I tried to get the modem up in
-a device whose SoC was using IPA v3.5.1 and I was experimenting weird
-behavior, such as IPA crashing the SoC when removing the module or when
-it automatically loaded at boot.
-The reason I mention this is because a warning similar to "channel 4
-limited to 256 TREs" appeared whenever IPA was loaded. That may be the
-reason I was experimenting those issues.
-
->> +static const struct ipa_mem ipa_mem_local_data[] =3D {
->=20
-> IPA has local memory that is partitioned as defined by this
-> array.  The regions are used by IPA/GSI firmware and/or
-> hardware.  The configuration defined here is sent to
-> the modem in an ipa_init_modem_driver_req QMI message
-> so both the modem and AP have a consistent view of
-> how the memory is used.
->=20
-> Many memory regions are preceded by 0-2 "canaries", which
-> are 32-byte values initialized to IPA_MEM_CANARY_VAL.
->=20
-> In the downstream code there is structure ipa3_mem_partition
-> that defines these things, and structures of this type are
-> defined in "ipa_utils.c".  For IPA v5.1, ipa_5_1_mem_part
-> defines them all.  The mapping between downstream and
-> upstream is not trivial and direct, but it should be
-> obvious how they get translated.
->=20
->=20
-> With two exceptions, what I see here looks like you
-> correctly transferred everything.  (The two exceptions
-> are entries that from what I can tell, should not be
-> present.)
-
-[...]
-
-> The next two entries look wrong to me.  Can you explain where
-> you got these offsets and sizes?  Is it from "ipa_data-v5.0.c"?
->=20
-> Here are the relevant entries I see in ipa_5_1_mem_part
-> in the downstream code:
->          .stats_flt_v4_ofst =3D 0,
->          .stats_flt_v4_size =3D 0,
->          .stats_flt_v6_ofst =3D 0,
->          .stats_flt_v6_size =3D 0,
->          .stats_rt_v4_ofst =3D 0,
->          .stats_rt_v4_size =3D 0,
->          .stats_rt_v6_ofst =3D 0,
->          .stats_rt_v6_size =3D 0,
-> (Since their size is zero, their entries can be omitted.)
->=20
->> +=09{
->> +=09=09.id=09=09=3D IPA_MEM_AP_V4_FILTER,
->> +=09=09.offset=09=09=3D 0x29b8,
->> +=09=09.size=09=09=3D 0x0188,
->> +=09=09.canary_count=09=3D 2,
->> +=09},
->> +=09{
->> +=09=09.id=09=09=3D IPA_MEM_AP_V6_FILTER,
->> +=09=09.offset=09=09=3D 0x2b40,
->> +=09=09.size=09=09=3D 0x0228,
->> +=09=09.canary_count=09=3D 0,
->> +=09},
->=20
-> The remaining entries (below) look good.
-
-While cross-referencing IPA data files upstream, I found these two
-regions to be present in data for IPA v5.5, even though they aren't
-defined in ipa_5_5_mem_part. At the start I assumed these were correct
-since they were present upstream, but I took a closer look at that file
-and I believe data for this version was directly added without going
-through a proper review process.
-
-The reason why I used IPA v5.5 memory regions in IPA v5.1 is because
-their memory partitions are identical.
-
-Now, with this information, I would like to ask whether both of these
-memory regions are correct for both IPA v5.1 and v5.5 data files.
-
->> +/* Memory configuration data for an SoC having IPA v5.1 */
->> +static const struct ipa_mem_data ipa_mem_data =3D {
->> +=09.local_count=09=3D ARRAY_SIZE(ipa_mem_local_data),
->> +=09.local=09=09=3D ipa_mem_local_data,
->> +=09.imem_addr=09=3D 0x146a8000,
->=20
-> I think I needed to look up the imem offset value
-> in Qualcomm documentation I no longer have access
-> to.  Perhaps someone from there could confirm you
-> are using the right values here.
-
-After cross-checking I believe this may be the qcom,additional-mapping
-property downstream, which specifies the IMEM starting address and size.
-I'll leave (2) and (3) for reference.
-(2) corresponds to SM8450, while (3) corresponds to SM8475.
-
->=20
->> +=09.imem_size=09=3D 0x00002000,
->> +=09/*
->> +=09 * While this value is 0xb000 on SM8450 and 0x9000 on SM8475,
->> +=09 * it has been left set to 0x9000 for compatibility with SM8475
->> +=09 */
->=20
-> As I said earlier, I'm not completely sure this will still
-> work on the SM8450.  Someone should confirm this, and it
-> really ought to be tested somehow.
-
-I have clarified this in my previous email (4), so I'll skip this part.
-
->=20
->> +=09.smem_size=09=3D 0x00009000,
->> +};
+On 08/07/2026 08:44, Vladimir Zapolskiy wrote:
+> On 7/8/26 02:39, Bryan O'Donoghue wrote:
+>> Add a base schema initially compatible with x1e80100 to describe MIPI CSI2
+>> PHY devices.
+>>
+>> The hardware can support both CPHY, DPHY and a special split-mode DPHY.
+>>
+>> The schema here defines two ports with three endpoints:
+>>
+>> port@0: Sensor input.
+>>             endpoint@0: primary sensor
+>>             endpoint@1: optional second sensor, implies DPHY split-mode
+>>
+>> port@1: Controller output.
+>>
+>> The CSIPHY devices have their own pinouts on the SoC as well as their own
+>> individual voltage rails.
+>>
+>> The need to model voltage rails on a per-PHY basis leads us to define
+>> CSIPHY devices as individual nodes.
+>>
+>> Two nice outcomes in terms of schema and DT arise from this change.
+>>
+>> 1. The ability to define on a per-PHY basis voltage rails.
+>> 2. The ability to require those voltage.
+>>
+>> We have had a complete bodge upstream for this where a single set of
+>> voltage rail for all CSIPHYs has been buried inside of CAMSS.
+>>
+>> Much like the I2C bus which is dedicated to Camera sensors - the CCI bus in
+>> CAMSS parlance, the CSIPHY devices should be individually modelled.
+>>
+>> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+>> ---
+>>    .../bindings/phy/qcom,x1e80100-csi2-phy.yaml       | 202 +++++++++++++++++++++
+>>    1 file changed, 202 insertions(+)
+>>
+>> diff --git a/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+>> new file mode 100644
+>> index 0000000000000..a7fbf6804cd9e
+>> --- /dev/null
+>> +++ b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+>> @@ -0,0 +1,202 @@
+>> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+>> +%YAML 1.2
+>> +---
+>> +$id: http://devicetree.org/schemas/phy/qcom,x1e80100-csi2-phy.yaml#
+>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
 >> +
->> +/* Interconnect rates are in 1000 byte/second units */
->> +static const struct ipa_interconnect_data ipa_interconnect_data[] =3D {
->> +=09{
->> +=09=09.name=09=09=09=3D "memory",
->> +=09=09.peak_bandwidth=09=09=3D 1900000,=09/* 1.9 GBps */
->> +=09=09.average_bandwidth=09=3D 590000,=09/* 590 MBps */
->=20
-> I no longer recall where to get these bandwidth values
-> for the interconnects.  Perhaps someone from Qualcomm
-> can find this out/confirm what you have.
+>> +title: Qualcomm SoC CSI2 PHY
+>> +
+>> +maintainers:
+>> +  - Bryan O'Donoghue <bod@kernel.org>
+>> +
+>> +description:
+>> +  Qualcomm MIPI CSI2 C-PHY/D-PHY combination PHY. Connects MIPI CSI2 sensors
+>> +  to Qualcomm's Camera CSI Decoder. The PHY supports both C-PHY and D-PHY
+>> +  modes.
+>> +
+>> +properties:
+>> +  compatible:
+>> +    const: qcom,x1e80100-csi2-phy
+>> +
+>> +  reg:
+>> +    maxItems: 1
+>> +
+>> +  "#phy-cells":
+>> +    const: 1
+>> +    description:
+>> +      The single cell specifies the PHY operating mode.
+> 
+> Unfortunately my review comment given before was ignored before publishing
+> this version, thus I will repeat.
+> 
+> There is a clash between the proposed phy cells value and 'bus-type' property
+> of the media endpoint, the proposed value of phy cells brings no information,
+> and therefore the whole proposed '#phy-cells' prorperty shall be removed.
+> 
+> There shall be no third link introduced between CAMSS and CAMSS CSIPHYs.
 
-This was a tricky part. These seem to come from the qcom,svs2 property
-which seems to be mapped to the interconnects specified downstream.
-Since the IPA interconnects declared in device trees are different in
-both downstream and upstream I had to make some adjustments, such as
-using the minimum value between both ipa_to_llcc and llcc_to_ebi1
-interconnects.
-An example of this can be seen in (5), which corresponds to the SM8350
-SoC using IPA v4.9.
+As explained in the cover letter: I'm following guidance from Rob on that.
 
-Again, thanks for taking the time to properly explain things.
+20260708-x1e-csi2-phy-v9-0-0210b90c04cf@linaro.org
 
-(1) https://github.com/LineageOS/android_kernel_qcom_sm8450-modules/blob/li=
-neage-20/qcom/opensource/dataipa/drivers/platform/msm/ipa/ipa_v3/ipa_utils.=
-c#L7881
-https://github.com/LineageOS/android_kernel_qcom_sm8450-devicetrees/blob/li=
-neage-20/qcom/waipio.dtsi#L3404
-https://github.com/LineageOS/android_kernel_qcom_sm8450-devicetrees/blob/li=
-neage-20/qcom/cape.dtsi#L2723
-(4) https://lore.kernel.org/all/3e70d77e-6bec-4e16-ae88-a4f5161f182e@proton=
-.me/
-(5) https://github.com/LineageOS/android_kernel_motorola_sm7325/blob/lineag=
-e-23.2/arch/arm64/boot/dts/vendor/qcom/lahaina.dtsi#L4683
+Old guidance granted, so let me see if I can get his attention to this 
+matter. Perhaps your suggestion is fine by him if so then fine, if not I 
+will stick to his original nudge, either way its up to him as the 
+original reviewer and senior schema maintainer to call this one.
+>> +
+>> +  clocks:
+>> +    maxItems: 3
+>> +
+>> +  clock-names:
+>> +    items:
+>> +      - const: core
+>> +      - const: timer
+>> +      - const: ahb
+>> +
+>> +  interrupts:
+>> +    maxItems: 1
+>> +
+>> +  operating-points-v2: true
+>> +
+>> +  power-domains:
+>> +    items:
+>> +      - description: Titan Top GDSC - Titan ISP Block, Global Distributed Switch Controller.
+>> +      - description: MMCX voltage rail
+>> +      - description: MXC or MXA voltage rail
+>> +
+>> +  power-domain-names:
+>> +    items:
+>> +      - const: top
+>> +      - const: mmcx
+>> +      - const: mx
+> 
+> None of the power domains finds its place in this device tree node, the
+> child device belongs to CAMSS, which already enables these power domains.
 
-Regards,
-Esteban
+Right, I think the whole subnode debate has run its course. Its a 
+problem for JPEG and a bit of a fake debate, there is no real "bus" here 
+so what is the point of mutating DT to look like a bus ? We are forever 
+lecturing people about "making fake DT stuff for convenience".
+
+Peer nodes with TITAN_TOP_GDSC will perfectly adequately describe this 
+hardware and the JPEG too.
+
+> 
+>> +
+>> +  vdda-0p8-supply:
+>> +    description: Phandle to a 0.8V regulator supply to a PHY.
+> 
+> The property name shall be vdda-0p9-supply, the description shall be
+> changed accordingly
+
+Hmm what ? I'll have to look back through my notes, I thought the opposite.
+
+Let me follow up in v10 after grepping for this again.
+
+> 
+>> +
+>> +  vdda-1p2-supply:
+>> +    description: Phandle to 1.2V regulator supply to a PHY.
+>> +
+>> +  ports:
+>> +    $ref: /schemas/graph.yaml#/properties/ports
+>> +
+>> +    properties:
+>> +      port@0:
+>> +        $ref: /schemas/graph.yaml#/$defs/port-base
+>> +        description:
+>> +          Sensor input. Always present. A single sensor is described by a
+>> +          single endpoint with one to four data lanes. DPHY split mode,
+>> +          where two independent sensors share the same PHY, is described
+>> +          by two endpoints; endpoint@0 with exactly two-data lanes and
+>> +          endpoint@1 with exactly one data-lane.
+>> +        unevaluatedProperties: false
+>> +
+>> +        patternProperties:
+>> +          "^endpoint(@[0-9a-f]+)?$":
+> 
+> This is too wide regexp mask for one or two endpoints only.
+
+Yeah you're right, this is just fluff.
+
+> 
+>> +            $ref: /schemas/media/video-interfaces.yaml#
+>> +            unevaluatedProperties: false
+>> +            properties:
+>> +              data-lanes:
+>> +                minItems: 1
+>> +                maxItems: 4
+>> +              remote-endpoint: true
+>> +            required:
+>> +              - data-lanes
+>> +              - remote-endpoint
+>> +
+>> +        allOf:
+>> +          - if:
+>> +              required:
+>> +                - endpoint@1
+>> +            then:
+>> +              properties:
+>> +                endpoint@0:
+>> +                  properties:
+>> +                    data-lanes:
+>> +                      minItems: 2
+>> +                      maxItems: 2
+>> +                endpoint@1:
+>> +                  properties:
+>> +                    data-lanes:
+>> +                      maxItems: 1
+>> +              required:
+>> +                - endpoint@0
+>> +
+>> +      port@1:
+>> +        $ref: /schemas/graph.yaml#/$defs/port-base
+>> +        description: Output to the CAMSS CSID controller.
+>> +        unevaluatedProperties: false
+>> +
+>> +        patternProperties:
+>> +          "^endpoint(@[0-9a-f]+)?$":
+>> +            $ref: /schemas/graph.yaml#/$defs/endpoint-base
+>> +            unevaluatedProperties: false
+>> +            properties:
+>> +              remote-endpoint: true
+>> +            required:
+>> +              - remote-endpoint
+>> +
+>> +    required:
+>> +      - port@0
+>> +      - port@1
+>> +
+>> +required:
+>> +  - compatible
+>> +  - reg
+>> +  - "#phy-cells"
+>> +  - clocks
+>> +  - clock-names
+>> +  - interrupts
+>> +  - operating-points-v2
+>> +  - power-domains
+>> +  - power-domain-names
+>> +  - vdda-0p8-supply
+>> +  - vdda-1p2-supply
+>> +  - ports
+>> +
+>> +additionalProperties: false
+>> +
+>> +examples:
+>> +  - |
+>> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
+>> +    #include <dt-bindings/clock/qcom,x1e80100-camcc.h>
+>> +    #include <dt-bindings/clock/qcom,x1e80100-gcc.h>
+>> +    #include <dt-bindings/power/qcom,rpmhpd.h>
+>> +
+>> +    phy@ace4000 {
+>> +        compatible = "qcom,x1e80100-csi2-phy";
+>> +        reg = <0x0ace4000 0x2000>;
+>> +        #phy-cells = <1>;
+>> +
+>> +        clocks = <&camcc CAM_CC_CSIPHY0_CLK>,
+>> +                 <&camcc CAM_CC_CSI0PHYTIMER_CLK>,
+>> +                 <&camcc CAM_CC_CORE_AHB_CLK>;
+>> +        clock-names = "core",
+>> +                      "timer",
+>> +                      "ahb";
+>> +
+>> +        interrupts = <GIC_SPI 477 IRQ_TYPE_EDGE_RISING>;
+>> +
+>> +        operating-points-v2 = <&csiphy_opp_table>;
+>> +
+>> +        power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>,
+>> +                        <&rpmhpd RPMHPD_MMCX>,
+>> +                        <&rpmhpd RPMHPD_MX>;
+>> +        power-domain-names = "top",
+>> +                             "mmcx",
+>> +                             "mx";
+>> +
+>> +        vdda-0p8-supply = <&vreg_l2c_0p8>;
+>> +        vdda-1p2-supply = <&vreg_l1c_1p2>;
+>> +
+>> +        ports {
+>> +            #address-cells = <1>;
+>> +            #size-cells = <0>;
+>> +
+>> +            port@0 {
+>> +                reg = <0>;
+>> +                csiphy0_in: endpoint {
+>> +                    data-lanes = <0 1 2 3>;
+> 
+> The previously given review comment about numeration of lanes was
+> not implemented.
+
+I understand your comment but as Nihal pointed out - CAMSS has an 
+established pattern for this - and I think his argument is convincing - 
+we should stick to that pattern.
+
+> 
+>> +                    remote-endpoint = <&sensor_out>;
+>> +                };
+>> +            };
+>> +
+>> +            port@1 {
+>> +                reg = <1>;
+>> +                csiphy0_out: endpoint {
+>> +                    remote-endpoint = <&csid_in>;
+>> +                };
+>> +            };
+>> +        };
+>> +    };
+>> +
+>> +    csiphy_opp_table: opp-table {
+>> +        compatible = "operating-points-v2";
+>> +
+>> +        opp-300000000 {
+>> +            opp-hz = /bits/ 64 <300000000>;
+>> +            required-opps = <&rpmhpd_opp_low_svs_d1>,
+>> +                            <&rpmhpd_opp_low_svs_d1>;
+>> +        };
+>> +    };
+>>
+> 
+> --
+> Best wishes,
+> Vladimir
 
