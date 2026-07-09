@@ -1,264 +1,278 @@
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0990C3FFF91
-	for <linux-arm-msm@vger.kernel.org>; Thu,  9 Jul 2026 11:41:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=210.118.77.12
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CA4E31E826;
+	Thu,  9 Jul 2026 11:51:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783597309; cv=none; b=NmFMTOLcqq1TMkwSP9X11FpLlqnVILLa/kIFk092+lkDuXB97GueZagprps/4lMfjBD6BpxJETu0kAsmmUtN1zI5+WlUPnQYdgORG7Dw9AbV5kB9/vxuM5YtGun9xmz6JckZ5O8Fcio+D7yxk4n2nb5JDwrJj+vapAzMJoG+w9c=
+	t=1783597864; cv=none; b=qQyNnELVadxZYNS8jUtCp0dvJJtQZDQPHY3rtL3uwGucnSsynBTNZUFekeJSI9OrpUQjUknySRPPyfQTjF9XbrZwIOmr7G4lVHmhKE/ruwW5u6COnBpb230pvpd+czmJweJGqpEyAUSPSmkEt/FjRJ6hJ44nTtHi1rRr0uOuXoQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783597309; c=relaxed/simple;
-	bh=U1dCIO2MyctJ6SmYyh0JUmjOQpbmkKGDTuDhpOoRBfc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:From:In-Reply-To:
-	 Content-Type:References; b=BX8DB/g1vGctitKYWkhOlsHaxYB1whU/4JTFotHM8cSR4o1v83fg7uVUmw2xa+R1mpv9j65d01QUByTVUDIOopz9Vnp421sW518OZw9YQRsNmXETpv3b7ADnx1ko9MetIJhVJEl/00jqMhthZMiwrtkgpoA6jyBOmdEi6dCWzIM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com; spf=pass smtp.mailfrom=samsung.com; dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b=lqRJ7n+Z; arc=none smtp.client-ip=210.118.77.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
+	s=arc-20240116; t=1783597864; c=relaxed/simple;
+	bh=JmRhDhqbmSAvKKkO6usOJ6CSLIocA/0NYxM/BFFcjzs=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=hytMW+xwL929+q8y/ngIDy4uDCtjUIAtDIK5LKGoSCXJYmWRq+xmppt8JwbhXsnBdbskCFqTll+w569ZCsgMoj33zd7i8yWj0ArAp5ppvwLckVrDM2gsNXVfvxsCo70IGONGRGIbAwLN1mrUKJ2R+J94PGSgjb/3/e/5YBmh6HY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=b8lQzUzN; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.b="lqRJ7n+Z"
-Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
-	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20260709114144euoutp02b582be6f279093d355bce5a8809106a3~AnExeh1610573105731euoutp02y
-	for <linux-arm-msm@vger.kernel.org>; Thu,  9 Jul 2026 11:41:44 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20260709114144euoutp02b582be6f279093d355bce5a8809106a3~AnExeh1610573105731euoutp02y
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1783597304;
-	bh=Y9DQkg6rMxHep3tCQiWIqrIxzviRHpty7VDOh1eSyAU=;
-	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
-	b=lqRJ7n+ZMW2FuZip1vN6rjAdZzueQPOENj8l+IflduuR3mkmh3EY8KdZAHJmlNDFs
-	 iCmOa7F6LG6cS5B5GQB34LOVxxQ78uy8Tppv2C57oS0yy0U221Iqs8r5zYZe+FY6bR
-	 lWFoRs7xiZ8DYkMiIRMpbkWXbPHD1U0hXZ3yXXUY=
-Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
-	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
-	20260709114143eucas1p18463122323bdeae8e63b1d13cd626b55~AnEw92OlE1788517885eucas1p1c;
-	Thu,  9 Jul 2026 11:41:43 +0000 (GMT)
-Received: from [106.210.134.192] (unknown [106.210.134.192]) by
-	eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
-	20260709114143eusmtip109ddf1157d363ce2e032b1b4a26659e9~AnEwUOH3C0267602676eusmtip1Y;
-	Thu,  9 Jul 2026 11:41:42 +0000 (GMT)
-Message-ID: <dadff7a9-bf04-49fb-8c55-5605e99be7fc@samsung.com>
-Date: Thu, 9 Jul 2026 13:41:42 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="b8lQzUzN"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CAAC71F000E9;
+	Thu,  9 Jul 2026 11:51:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783597863;
+	bh=HLZuilKn15UjlROjcEHBSkIw1f/U3/ZjhuuZ1CowQV8=;
+	h=From:Subject:Date:To:Cc;
+	b=b8lQzUzNugSFha+J2oAgQmeii3dX/XceaCkhPFiKHVNfsMh3yjL/xV3J6GlJtrIl8
+	 dzQQsGqJzJ57R7BsH80KdfPcCu+ALBASeuewJteDehE3tTjoKTcD/RkHIj8FfhE8HL
+	 tVYRfJGwoqjPK8SOXH463lg3sWUa9kiINxbJXKW1/r35P6x5XY+U2XxpJe0uh4ZtSc
+	 nkrz/r6VkedPz430fF5o2vbdMU24G33v3WPa0tcsuUruhaPuQImo1HMuVmdqju+7bZ
+	 ksQTUACIQ7N7mGLZcu+6xB7eYjqc6aewvvWjkzCdEw/TbxgQqC4HqpUGUWun8X+2VJ
+	 UrI2Q2Fnv+wAg==
+From: Maxime Ripard <mripard@kernel.org>
+Subject: [PATCH 00/60] drm/plane: Convert all drivers to
+ atomic_create_state and remove reset
+Date: Thu, 09 Jul 2026 13:50:26 +0200
+Message-Id: <20260709-drm-no-more-plane-reset-v1-0-302d986fe5f0@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Betterbird (Windows)
-Subject: Re: [PATCH 3/3] arm64: dts: qcom: qcm2290: Hook up MPM
-To: Konrad Dybcio <konradybcio@kernel.org>, Andy Gross <agross@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>, Rob Herring <robh+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>
-Cc: Konrad Dybcio <konrad.dybcio@somainline.org>,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, Ulf Hansson <ulf.hansson@linaro.org>,
-	"linux-pm@vger.kernel.org" <linux-pm@vger.kernel.org>
-Content-Language: en-US
-From: Marek Szyprowski <m.szyprowski@samsung.com>
-In-Reply-To: <20231215-topic-mpm_dt-v1-3-c6636fc75ce3@linaro.org>
-Content-Transfer-Encoding: 8bit
-X-CMS-MailID: 20260709114143eucas1p18463122323bdeae8e63b1d13cd626b55
-X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20260709114143eucas1p18463122323bdeae8e63b1d13cd626b55
-X-EPHeader: CA
-X-CMS-RootMailID: 20260709114143eucas1p18463122323bdeae8e63b1d13cd626b55
-References: <20231215-topic-mpm_dt-v1-0-c6636fc75ce3@linaro.org>
-	<20231215-topic-mpm_dt-v1-3-c6636fc75ce3@linaro.org>
-	<CGME20260709114143eucas1p18463122323bdeae8e63b1d13cd626b55@eucas1p1.samsung.com>
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x3MQQqEMAxG4atI1gZicRS9irgQ/TsT0FZSEUG8u
+ 2WW3+K9mxJMkagvbjKcmjSGjKosaP5N4QvWJZucuEYa1/FiG4fIWzTwvk4BbEg4WOruI752kNZ
+ TrneD1+t/HsbneQE0wdFXaQAAAA==
+X-Change-ID: 20260629-drm-no-more-plane-reset-04950f42e07f
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
+ Simona Vetter <simona@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org, Maxime Ripard <mripard@kernel.org>, 
+ javierm@redhat.com, ikerpedrosam@gmail.com, admin@kodeit.net, 
+ gargaditya08@proton.me, hamohammed.sa@gmail.com, louis.chauvet@bootlin.com, 
+ melissa.srw@gmail.com, alexander.deucher@amd.com, 
+ amd-gfx@lists.freedesktop.org, christian.koenig@amd.com, 
+ liviu.dudau@arm.com, alison.wang@nxp.com, stefan@agner.ch, 
+ jstultz@google.com, sumit.semwal@linaro.org, xinliang.liu@linaro.org, 
+ yongqin.liu@linaro.org, Frank.Li@nxp.com, 
+ Sascha Hauer <s.hauer@pengutronix.de>, festevam@gmail.com, 
+ imx@lists.linux.dev, kernel@pengutronix.de, victor.liu@nxp.com, 
+ l.stach@pengutronix.de, laurentiu.palcu@oss.nxp.com, 
+ linux-mips@vger.kernel.org, paul@crapouillou.net, 
+ anitha.chrisanthus@intel.com, paulk@sys-base.io, chenhuacai@kernel.org, 
+ jeffbai@aosc.io, lvjianmin@loongson.cn, wuqianhai@loongson.cn, 
+ xry111@xry111.site, zhengxingda@iscas.ac.cn, jbrunet@baylibre.com, 
+ khilman@baylibre.com, linux-amlogic@lists.infradead.org, 
+ martin.blumenstingl@googlemail.com, abhinav.kumar@linux.dev, 
+ freedreno@lists.freedesktop.org, jesszhan0024@gmail.com, 
+ linux-arm-msm@vger.kernel.org, lumag@kernel.org, 
+ marijn.suijten@somainline.org, robin.clark@oss.qualcomm.com, 
+ sean@poorly.run, marex@denx.de, airlied@redhat.com, kraxel@redhat.com, 
+ spice-devel@lists.freedesktop.org, virtualization@lists.linux.dev, 
+ andy.yan@rock-chips.com, heiko@sntech.de, hjc@rock-chips.com, 
+ linux-rockchip@lists.infradead.org, 
+ Baolin Wang <baolin.wang@linux.alibaba.com>, orsonzhai@gmail.com, 
+ zhang.lyra@gmail.com, alain.volmat@foss.st.com, rgallaispou@gmail.com, 
+ alexandre.torgue@foss.st.com, mcoquelin.stm32@gmail.com, 
+ philippe.cornu@foss.st.com, raphael.gallais-pou@foss.st.com, 
+ yannick.fertre@foss.st.com, linux-sunxi@lists.linux.dev, 
+ samuel@sholland.org, wens@kernel.org, jyri.sarha@iki.fi, 
+ tomi.valkeinen@ideasonboard.com, hansg@kernel.org, 
+ dmitry.osipenko@collabora.com, gurchetansingh@chromium.org, 
+ olvaffe@gmail.com, michal.simek@amd.com, harry.wentland@amd.com, 
+ siqueira@igalia.com, sunpeng.li@amd.com, linux@armlinux.org.uk, 
+ alexandre.belloni@bootlin.com, claudiu.beznea@tuxon.dev, 
+ dharma.b@microchip.com, manikandan.m@microchip.com, 
+ nicolas.ferre@microchip.com, alim.akhtar@samsung.com, inki.dae@samsung.com, 
+ krzk@kernel.org, kyungmin.park@samsung.com, 
+ linux-samsung-soc@vger.kernel.org, sw0312.kim@samsung.com, 
+ p.zabel@pengutronix.de, angelogioacchino.delregno@collabora.com, 
+ chunkuang.hu@kernel.org, matthias.bgg@gmail.com, dakr@kernel.org, 
+ lyude@redhat.com, nouveau@lists.freedesktop.org, geert+renesas@glider.be, 
+ kieran.bingham+renesas@ideasonboard.com, 
+ laurent.pinchart+renesas@ideasonboard.com, 
+ linux-renesas-soc@vger.kernel.org, magnus.damm@gmail.com, 
+ tomi.valkeinen+renesas@ideasonboard.com, biju.das.jz@bp.renesas.com, 
+ dave.stevenson@raspberrypi.com, kernel-list@raspberrypi.com, 
+ mcanal@igalia.com, bcm-kernel-feedback-list@broadcom.com, 
+ zack.rusin@broadcom.com, jonathanh@nvidia.com, linux-tegra@vger.kernel.org, 
+ mperttunen@nvidia.com, thierry.reding@kernel.org
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9472; i=mripard@kernel.org;
+ h=from:subject:message-id; bh=JmRhDhqbmSAvKKkO6usOJ6CSLIocA/0NYxM/BFFcjzs=;
+ b=owGbwMvMwCmsHn9OcpHtvjLG02pJDFn+3ZwXH8zfF77if3wb97yNrHGxvT6+qe94BZTz/y44y
+ pFRk8PZMZWFQZiTQVZMkeWJTNjp5e2LqxzsV/6AmcPKBDKEgYtTACbypIOx4ROf2yGJb31qtr9v
+ iUgGWElk8heukaq+0+V1ms2Na734mtTv9xvmyZeocU2Rip8uV2zGWMWkccCj/1Tp37PWIeKbZI4
+ LH7NtEA/X3LTswPQSJv6rK5M4l6e3KQeJ3b2bNkH637TXLgA=
+X-Developer-Key: i=mripard@kernel.org; a=openpgp;
+ fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
 
-On 15.12.2023 01:01, Konrad Dybcio wrote:
-> Wire up MPM and the interrupts it provides.
->
-> Signed-off-by: Konrad Dybcio <konrad.dybcio@linaro.org>
-> ---
->  arch/arm64/boot/dts/qcom/qcm2290.dtsi | 42 +++++++++++++++++++++++++++++------
->  1 file changed, 35 insertions(+), 7 deletions(-)
->
-> diff --git a/arch/arm64/boot/dts/qcom/qcm2290.dtsi b/arch/arm64/boot/dts/qcom/qcm2290.dtsi
-> index ce04d0acdede..0911fb08ed63 100644
-> --- a/arch/arm64/boot/dts/qcom/qcm2290.dtsi
-> +++ b/arch/arm64/boot/dts/qcom/qcm2290.dtsi
-> @@ -199,6 +199,7 @@ CPU_PD3: power-domain-cpu3 {
->  
->  		CLUSTER_PD: power-domain-cpu-cluster {
->  			#power-domain-cells = <0>;
-> +			power-domains = <&mpm>;
->  			domain-idle-states = <&CLUSTER_SLEEP>;
->  		};
->  	};
+This is a follow-up to the bridge reset removal series, and part of a
+larger effort to remove the reset hook from all KMS objects.
 
+The plane reset hook is overloaded: it is called both at probe time
+to create the initial software state and during suspend/resume to
+reset hardware and software state. These two roles have different
+requirements, and the reset hook is not fallible, making error
+handling difficult for the initial state allocation path.
 
-This patch landed long time ago in mainline as commit e3f6a6994041
-("arm64: dts: qcom: qcm2290: Hook up MPM").
+While reset has the semantics to reset both the software and hardware
+state, the vast majority of implementations and all the helpers only
+reset the software state, making them equivalent to
+atomic_create_state in practice. The atomic_create_state hook makes
+this explicit: it only allocates and initializes a pristine state
+without any side effect, and returns the state pointer or an ERR_PTR
+on failure.
 
-Recently I've added Arduino UnoQ board
-(arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts) to my test farm
-and found that this patch is responsible for the "Invalid wait context"
-warning [1] observed during boot of the recent kernels when
-CONFIG_PROVE_RAW_LOCK_NESTING is set (which is implicitly true when
-CONFIG_PROVE_LOCKING is set since commit d8fccd9ca5f90). This shows
-a real problem if one wants to run RT-enabled kernel.
+This series first adds the necessary infrastructure in the simple-kms
+and GEM atomic helpers, then converts all 51 plane drivers tree-wide
+from the reset hook to atomic_create_state. The conversions were done
+using a combination of Coccinelle semantic patches and manual
+adjustments. Once all drivers are converted, the old helpers and the
+reset hook itself are removed from struct drm_plane_funcs.
 
-This is because the above chunk adds the "mpm" as a parent power domain
-to the "cluster_pd" (in current arch/arm64/boot/dts/qcom/agatti.dtsi). 
-"cluster_pd" is initialized as "GENPD_FLAG_IRQ_SAFE | GENPD_FLAG_CPU_DOMAIN"
-(see psci_pd_init in drivers/cpuidle/cpuidle-psci-domain.c, which use
-raw_spinlock_t based locking), while the "mpm" power domain only as 
-"GENPD_FLAG_IRQ_SAFE" (see qcom_mpm_probe in drivers/irqchip/irq-qcom-mpm.c,
-which use spinlock_t locking).
+Signed-off-by: Maxime Ripard <mripard@kernel.org>
+---
+Maxime Ripard (60):
+      drm/simple-kms: Add create_plane_state hook
+      drm/gem-atomic-helper: Create drm_gem_create_shadow_plane_state()
+      drm/gem-atomic-helper: Convert simple-kms shadow helpers to create_plane_state
+      drm/gem-atomic-helper: Switch DRM_GEM_SHADOW_PLANE_FUNCS to atomic_create_state
+      drm/gem-atomic-helper: Remove drm_gem_reset_shadow_plane()
+      drm/sysfb: Convert to atomic_create_state
+      drm/simple-kms: Switch to atomic_create_state
+      drm/ssd130x: Convert to atomic_create_state
+      drm/st7920: Convert to atomic_create_state
+      drm/appletbdrm: Convert to atomic_create_state
+      drm/vkms: Convert to atomic_create_state
+      drm/gem-atomic-helper: Remove __drm_gem_reset_shadow_plane()
+      drm/amdgpu: Convert to atomic_create_state
+      drm/hdlcd: Convert to atomic_create_state
+      drm/fsl-dcu: Convert to atomic_create_state
+      drm/hisilicon/kirin: Convert to atomic_create_state
+      drm/imx/dc: Convert to atomic_create_state
+      drm/imx/dcss: Convert to atomic_create_state
+      drm/ingenic: Convert to atomic_create_state
+      drm/kmb: Convert to atomic_create_state
+      drm/logicvc: Convert to atomic_create_state
+      drm/loongson: Convert to atomic_create_state
+      drm/meson: Convert to atomic_create_state
+      drm/msm/mdp4: Convert to atomic_create_state
+      drm/lcdif: Convert to atomic_create_state
+      drm/mxsfb: Convert to atomic_create_state
+      drm/qxl: Convert to atomic_create_state
+      drm/rockchip: Convert to atomic_create_state
+      drm/sprd: Convert to atomic_create_state
+      drm/sti: Convert to atomic_create_state
+      drm/stm: Convert to atomic_create_state
+      drm/sun4i: sun8i: Convert to atomic_create_state
+      drm/tests: kunit: Convert to atomic_create_state
+      drm/tilcdc: Convert to atomic_create_state
+      drm/vboxvideo: Convert to atomic_create_state
+      drm/virtio: Convert to atomic_create_state
+      drm/xlnx: Convert to atomic_create_state
+      drm/atomic-state-helper: Remove drm_atomic_helper_plane_reset()
+      drm/amdgpu_dm: Convert to atomic_create_state
+      drm/komeda: Convert to atomic_create_state
+      drm/malidp: Convert to atomic_create_state
+      drm/armada: Convert to atomic_create_state
+      drm/atmel-hlcdc: Convert to atomic_create_state
+      drm/exynos: Convert to atomic_create_state
+      drm/imx/ipuv3: Convert to atomic_create_state
+      drm/mediatek: Convert to atomic_create_state
+      drm/msm/dpu1: Convert to atomic_create_state
+      drm/msm/mdp5: Convert to atomic_create_state
+      drm/nouveau: Convert to atomic_create_state
+      drm/omap: Convert to atomic_create_state
+      drm/rcar-du: Convert to atomic_create_state
+      drm/rz-du: Convert to atomic_create_state
+      drm/shmobile: Convert to atomic_create_state
+      drm/sun4i: layer: Convert to atomic_create_state
+      drm/vc4: Convert to atomic_create_state
+      drm/verisilicon: Convert to atomic_create_state
+      drm/vmwgfx: Convert to atomic_create_state
+      drm/atomic-state-helper: Remove __drm_atomic_helper_plane_reset()
+      drm/tegra: Convert to atomic_create_state
+      drm/plane: Remove reset
 
-I've check and there is no easy way to make the "mpm" power domain
-GENPD_FLAG_CPU_DOMAIN compatible. drivers/irqchip/irq-qcom-mpm.c driver
-uses mbox API, which internally uses spinlock_t based locking. Then
-there is a drivers/mailbox/qcom-apcs-ipc-mailbox.c driver and even
-more dependencies: mmio regmap, clocks and probably more (I've didn't
-check further).
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vkms.c           |   2 +-
+ .../drm/amd/display/amdgpu_dm/amdgpu_dm_plane.c    |  17 ++--
+ drivers/gpu/drm/arm/display/komeda/komeda_plane.c  |  18 ++--
+ drivers/gpu/drm/arm/hdlcd_crtc.c                   |   2 +-
+ drivers/gpu/drm/arm/malidp_planes.c                |  12 ++-
+ drivers/gpu/drm/armada/armada_overlay.c            |  39 ++++----
+ drivers/gpu/drm/armada/armada_plane.c              |  15 ++--
+ drivers/gpu/drm/atmel-hlcdc/atmel_hlcdc_plane.c    |  27 +++---
+ drivers/gpu/drm/drm_atomic_state_helper.c          |  41 ---------
+ drivers/gpu/drm/drm_gem_atomic_helper.c            | 100 +++++++++++----------
+ drivers/gpu/drm/drm_mode_config.c                  |   4 +-
+ drivers/gpu/drm/drm_simple_kms_helper.c            |  11 +--
+ drivers/gpu/drm/exynos/exynos_drm_plane.c          |  22 ++---
+ drivers/gpu/drm/fsl-dcu/fsl_dcu_drm_plane.c        |   2 +-
+ drivers/gpu/drm/hisilicon/kirin/kirin_drm_ade.c    |   2 +-
+ drivers/gpu/drm/imx/dc/dc-plane.c                  |   2 +-
+ drivers/gpu/drm/imx/dcss/dcss-plane.c              |   2 +-
+ drivers/gpu/drm/imx/ipuv3/ipuv3-plane.c            |  19 ++--
+ drivers/gpu/drm/ingenic/ingenic-drm-drv.c          |   2 +-
+ drivers/gpu/drm/ingenic/ingenic-ipu.c              |   2 +-
+ drivers/gpu/drm/kmb/kmb_plane.c                    |   2 +-
+ drivers/gpu/drm/logicvc/logicvc_layer.c            |   2 +-
+ drivers/gpu/drm/loongson/lsdc_plane.c              |   2 +-
+ drivers/gpu/drm/mediatek/mtk_plane.c               |  22 ++---
+ drivers/gpu/drm/meson/meson_overlay.c              |   2 +-
+ drivers/gpu/drm/meson/meson_plane.c                |   2 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c          |  18 ++--
+ drivers/gpu/drm/msm/disp/mdp4/mdp4_plane.c         |   2 +-
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c         |  16 ++--
+ drivers/gpu/drm/mxsfb/lcdif_kms.c                  |   2 +-
+ drivers/gpu/drm/mxsfb/mxsfb_kms.c                  |   2 +-
+ drivers/gpu/drm/nouveau/dispnv50/wndw.c            |  15 ++--
+ drivers/gpu/drm/omapdrm/omap_plane.c               |  13 ++-
+ drivers/gpu/drm/qxl/qxl_display.c                  |   4 +-
+ drivers/gpu/drm/renesas/rcar-du/rcar_du_plane.c    |  15 ++--
+ drivers/gpu/drm/renesas/rcar-du/rcar_du_vsp.c      |  15 ++--
+ drivers/gpu/drm/renesas/rz-du/rzg2l_du_vsp.c       |  15 ++--
+ drivers/gpu/drm/renesas/shmobile/shmob_drm_plane.c |  15 ++--
+ drivers/gpu/drm/rockchip/rockchip_drm_vop.c        |   2 +-
+ drivers/gpu/drm/rockchip/rockchip_drm_vop2.c       |   2 +-
+ drivers/gpu/drm/sitronix/st7920.c                  |  12 +--
+ drivers/gpu/drm/solomon/ssd130x.c                  |  12 +--
+ drivers/gpu/drm/sprd/sprd_dpu.c                    |   2 +-
+ drivers/gpu/drm/sti/sti_cursor.c                   |   2 +-
+ drivers/gpu/drm/sti/sti_gdp.c                      |   2 +-
+ drivers/gpu/drm/sti/sti_hqvdp.c                    |   2 +-
+ drivers/gpu/drm/stm/ltdc.c                         |   2 +-
+ drivers/gpu/drm/sun4i/sun4i_layer.c                |  12 ++-
+ drivers/gpu/drm/sun4i/sun8i_ui_layer.c             |   2 +-
+ drivers/gpu/drm/sun4i/sun8i_vi_layer.c             |   2 +-
+ drivers/gpu/drm/sysfb/drm_sysfb_helper.h           |   4 +-
+ drivers/gpu/drm/sysfb/drm_sysfb_modeset.c          |  30 +++++--
+ drivers/gpu/drm/tegra/plane.c                      |  28 +++---
+ drivers/gpu/drm/tests/drm_kunit_helpers.c          |   2 +-
+ drivers/gpu/drm/tilcdc/tilcdc_plane.c              |   2 +-
+ drivers/gpu/drm/tiny/appletbdrm.c                  |  12 +--
+ drivers/gpu/drm/vboxvideo/vbox_mode.c              |   2 +-
+ drivers/gpu/drm/vc4/vc4_plane.c                    |  15 ++--
+ drivers/gpu/drm/verisilicon/vs_cursor_plane.c      |   2 +-
+ drivers/gpu/drm/verisilicon/vs_plane.c             |  14 ++-
+ drivers/gpu/drm/verisilicon/vs_plane.h             |   2 +-
+ drivers/gpu/drm/verisilicon/vs_primary_plane.c     |   2 +-
+ drivers/gpu/drm/virtio/virtgpu_plane.c             |   2 +-
+ drivers/gpu/drm/vkms/vkms_plane.c                  |  15 ++--
+ drivers/gpu/drm/vmwgfx/vmwgfx_kms.c                |  17 ++--
+ drivers/gpu/drm/vmwgfx/vmwgfx_kms.h                |   2 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_ldu.c                |   4 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_scrn.c               |   4 +-
+ drivers/gpu/drm/vmwgfx/vmwgfx_stdu.c               |   4 +-
+ drivers/gpu/drm/xlnx/zynqmp_kms.c                  |   2 +-
+ include/drm/drm_atomic_state_helper.h              |   3 -
+ include/drm/drm_gem_atomic_helper.h                |  13 +--
+ include/drm/drm_plane.h                            |  12 ---
+ include/drm/drm_simple_kms_helper.h                |   1 +
+ 74 files changed, 331 insertions(+), 422 deletions(-)
+---
+base-commit: 671b7825dbfe9ea6e3ad3001003aeee0df48d1b5
+change-id: 20260629-drm-no-more-plane-reset-04950f42e07f
 
-The question is how to solve this issue? Is this dependency really
-required? Would it work if the "mpm" power domain is set as always
-on and genpd framework extended to support such case without
-triggering lockdep warning (it already has support for irq-safe
-device in non-irq-safe power domain)?
-
-
-
-[1] mentioned kernel log :
-
- =============================
- [ BUG: Invalid wait context ]
- 7.2.0-rc2-next-20260708+ #13154 Not tainted
- -----------------------------
- kworker/u16:1/44 is trying to lock:
- ffff000002517870 (&genpd->slock/1){....}-{3:3}, at: genpd_lock_nested_spin+0x1c/0x30
- other info that might help us debug this:
- context-{5:5}
- locks held by kworker/u16:1/44: 5, last CPU#3:
-  #0: ffff000000032140 ((wq_completion)events_unbound){+.+.}-{0:0}, at: process_one_work+0x6a8/0x86c
-  #1: ffff800080533d90 (deferred_probe_work){+.+.}-{0:0}, at: process_one_work+0x1f8/0x86c
-  #2: ffff00000036c138 (&dev->mutex){....}-{4:4}, at: __device_attach+0x3c/0x1b8
-  #3: ffffa850a0fca5f8 (gpd_list_lock){+.+.}-{4:4}, at: of_genpd_add_subdomain+0x30/0xc8
-  #4: ffff000001994750 (&genpd->raw_slock){....}-{2:2}, at: genpd_lock_raw_spin+0x1c/0x30
- stack backtrace:
- CPU: 3 UID: 0 PID: 44 Comm: kworker/u16:1 Not tainted 7.2.0-rc2-next-20260708+ #13154 PREEMPT
- Hardware name: Arduino UnoQ (DT)
- Workqueue: events_unbound deferred_probe_work_func
- Call trace:
-  show_stack+0x18/0x24 (C)
-  dump_stack_lvl+0x90/0xd0
-  dump_stack+0x18/0x24
-  __lock_acquire+0xa78/0x22a8
-  lock_acquire+0x1d8/0x404
-  _raw_spin_lock_irqsave_nested+0x64/0x8c
-  genpd_lock_nested_spin+0x1c/0x30
-  genpd_add_subdomain+0x8c/0x1d8
-  of_genpd_add_subdomain+0x68/0xc8
-  dt_idle_pd_init_topology+0x88/0x100
-  psci_cpuidle_domain_probe+0x1bc/0x31c
-  platform_probe+0x5c/0xac
-  really_probe+0xbc/0x298
-  __driver_probe_device+0x164/0x184
-  driver_probe_device+0xbc/0x11c
-  __device_attach_driver+0xb8/0x118
-  bus_for_each_drv+0x84/0xe4
-  __device_attach+0xac/0x1b8
-  device_initial_probe+0x50/0x54
-  bus_probe_device+0x38/0xa8
-  deferred_probe_work_func+0x8c/0xc8
-  process_one_work+0x248/0x86c
-  worker_thread+0x240/0x388
-  kthread+0x13c/0x148
-  ret_from_fork+0x10/0x20
- CPUidle PSCI: Initialized CPU PM domain topology using OSI mode
-
-
-
-> @@ -266,6 +267,24 @@ rpmpd_opp_turbo_plus: opp8 {
->  				};
->  			};
->  		};
-> +
-> +		mpm: interrupt-controller {
-> +			compatible = "qcom,mpm";
-> +			qcom,rpm-msg-ram = <&apss_mpm>;
-> +			interrupts = <GIC_SPI 197 IRQ_TYPE_EDGE_RISING>;
-> +			mboxes = <&apcs_glb 1>;
-> +			interrupt-controller;
-> +			#interrupt-cells = <2>;
-> +			#power-domain-cells = <0>;
-> +			interrupt-parent = <&intc>;
-> +			qcom,mpm-pin-count = <96>;
-> +			qcom,mpm-pin-map = <2 275>,  /* TSENS0 uplow */
-> +					   <5 296>,  /* Soundwire master_irq */
-> +					   <12 422>, /* DWC3 ss_phy_irq */
-> +					   <24 79>,  /* Soundwire wake_irq */
-> +					   <86 183>, /* MPM wake, SPMI */
-> +					   <90 260>; /* QUSB2_PHY DP+DM */
-> +		};
->  	};
->  
->  	reserved_memory: reserved-memory {
-> @@ -429,6 +448,7 @@ tlmm: pinctrl@500000 {
->  			interrupts = <GIC_SPI 227 IRQ_TYPE_LEVEL_HIGH>;
->  			gpio-controller;
->  			gpio-ranges = <&tlmm 0 0 127>;
-> +			wakeup-parent = <&mpm>;
->  			#gpio-cells = <2>;
->  			interrupt-controller;
->  			#interrupt-cells = <2>;
-> @@ -778,7 +798,7 @@ spmi_bus: spmi@1c40000 {
->  				    "obsrvr",
->  				    "intr",
->  				    "cnfg";
-> -			interrupts = <GIC_SPI 183 IRQ_TYPE_LEVEL_HIGH>;
-> +			interrupts-extended = <&mpm 86 IRQ_TYPE_LEVEL_HIGH>;
->  			interrupt-names = "periph_irq";
->  			qcom,ee = <0>;
->  			qcom,channel = <0>;
-> @@ -793,8 +813,8 @@ tsens0: thermal-sensor@4411000 {
->  			reg = <0x0 0x04411000 0x0 0x1ff>,
->  			      <0x0 0x04410000 0x0 0x8>;
->  			#qcom,sensors = <10>;
-> -			interrupts = <GIC_SPI 275 IRQ_TYPE_LEVEL_HIGH>,
-> -				     <GIC_SPI 190 IRQ_TYPE_LEVEL_HIGH>;
-> +			interrupts-extended = <&mpm 2 IRQ_TYPE_LEVEL_HIGH>,
-> +					      <&intc GIC_SPI 190 IRQ_TYPE_LEVEL_HIGH>;
->  			interrupt-names = "uplow", "critical";
->  			#thermal-sensor-cells = <1>;
->  		};
-> @@ -813,8 +833,15 @@ bimc: interconnect@4480000 {
->  		};
->  
->  		rpm_msg_ram: sram@45f0000 {
-> -			compatible = "qcom,rpm-msg-ram";
-> +			compatible = "qcom,rpm-msg-ram", "mmio-sram";
->  			reg = <0x0 0x045f0000 0x0 0x7000>;
-> +			#address-cells = <1>;
-> +			#size-cells = <1>;
-> +			ranges = <0 0x0 0x045f0000 0x7000>;
-> +
-> +			apss_mpm: sram@1b8 {
-> +				reg = <0x1b8 0x48>;
-> +			};
->  		};
->  
->  		sram@4690000 {
-> @@ -1293,9 +1320,10 @@ &qup_virt SLAVE_QUP_CORE_0 RPM_ALWAYS_TAG>,
->  		usb: usb@4ef8800 {
->  			compatible = "qcom,qcm2290-dwc3", "qcom,dwc3";
->  			reg = <0x0 0x04ef8800 0x0 0x400>;
-> -			interrupts = <GIC_SPI 260 IRQ_TYPE_LEVEL_HIGH>,
-> -				     <GIC_SPI 422 IRQ_TYPE_LEVEL_HIGH>;
-> -			interrupt-names = "hs_phy_irq", "ss_phy_irq";
-> +			interrupts-extended = <&intc GIC_SPI 260 IRQ_TYPE_LEVEL_HIGH>,
-> +					      <&mpm 12 IRQ_TYPE_LEVEL_HIGH>;
-> +			interrupt-names = "hs_phy_irq",
-> +					  "ss_phy_irq";
->  
->  			clocks = <&gcc GCC_CFG_NOC_USB3_PRIM_AXI_CLK>,
->  				 <&gcc GCC_USB30_PRIM_MASTER_CLK>,
->
-Best regards
+Best regards,
 -- 
-Marek Szyprowski, PhD
-Samsung R&D Institute Poland
+Maxime Ripard <mripard@kernel.org>
 
