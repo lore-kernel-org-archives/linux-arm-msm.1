@@ -1,144 +1,146 @@
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD39A42980C
-	for <linux-arm-msm@vger.kernel.org>; Thu,  9 Jul 2026 15:50:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3D3D426D18
+	for <linux-arm-msm@vger.kernel.org>; Thu,  9 Jul 2026 15:50:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783612233; cv=none; b=NM7+DfHOquz3YTuHo0L6TI/nWBPqU2lI5OXQJspEsG9WXMyOIvOZMM1HW65WPW+VNIFWh/r9GueowxoF3Yr3Y/ePTGTM6TOyuS+T8rzrke87yqvfzm7UFTKlTSl9AAmb2IS3z92BJ4+Z84sNXhG/JHSBKL4EIrYn3eq9/dB61A4=
+	t=1783612249; cv=none; b=ffD8ZiSp+W1MKP5lda095Ouu0Vwumznp5QQ684oY0gn0BoXQkGSBtaSelEecla+EX+V00Mzxs5SWrwqw2t6upMaiF/V/ktQKpmMCZbsiXV3+letbOMT1ruAYKzndkDegiOGEvjsTn5u10ru5lE95ugWINKsOHpgDzLiB7PvlyZo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783612233; c=relaxed/simple;
-	bh=eom0WPIbBG5Lak9ChFz39EfdnHARVndwf2X4ZpXwW98=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=YxMIvXWkYEM0ZhbDg20XzIlCSm3rrMb9XbKibA7grnn8wClX0N9q7EEAd6/9mV9IuwVCHgkfdutBgzOcegxShy9Yqq7+16b7Zvgmk6a9Ks2uWNMf2J8Jk/9fzPgtLDrGpiSriReWQ+SYqKxJ8IGkHKafEBTLGb2wnIKcPARZRxg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=SoTo8QRY; arc=none smtp.client-ip=209.85.218.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1783612249; c=relaxed/simple;
+	bh=ooFqL0kdzm3Mqvprf/ktKH8mQbzOh+NePJH/rGI4MOY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=TuPqacRz8n2bmt4Q9zuqTIZjP8+WJEkE0O31ZAKtRlsiOzNmjtvHw5oYeyJdlu+ysBakeMYkuOh5FIYm6rckk43w/drtD4e6p0lWj3rdtExG6YDoERI9OZsmbOutAeaeGlnB3WJ2u7ip7AF4SnuZoMppf/4JCj4XePoVakB2a3A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=ICpnBr24; arc=none smtp.client-ip=209.85.160.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gourry.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="SoTo8QRY"
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-c15c7c07a57so3728066b.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 09 Jul 2026 08:50:31 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b="ICpnBr24"
+Received: by mail-qt1-f179.google.com with SMTP id d75a77b69052e-51bfbe05683so13019311cf.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 09 Jul 2026 08:50:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1783612230; x=1784217030; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=AzNulL+Y3yaGtB2zj4UUmjmsfxIxbrKupidFWaMr/Xg=;
-        b=SoTo8QRYzRgHEUewqesNyHLSKMU+2EsHm5msBTW8T3pOQQwRvr/IdtPDiVVrbcr5aj
-         da0ZqE/P/r/vmA8IYiMkWaWovEFNXBEJyIVIAgGakNfRFZz1Cw3+Av8eBJsSFHUnQRGu
-         fYZc2cYEbfAOR7aHlzHhV6muKdaAmppCY0cmm5uWvZLgpN2+0+sthCOAXuDErb6Lbrgl
-         WPMqZAmVlEKmJSuRTnVrJoleRonRhrfb6pbd2LPy5aVqIEeqvm/UVjE9JrAUzs5bQzPq
-         Wjn6ww9AiqvFpnOIGCe7LdrmFrkhH6BGhDRuoeY72378cH/poF643VJFEQKcWaoIb+D8
-         v2SA==
+        d=gourry.net; s=google; t=1783612247; x=1784217047; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=4H58DRU6wxIzBQ0PfS3OOFxFy6X9tDniNwjExlFI+ak=;
+        b=ICpnBr246mLQLo6J/c6CeHFuXpKGWS+yv4AMt5rkdjgStwdTQfBJeXld2RX9OS3KxS
+         T1XZ0CZwHP2uMMpYQIu2MKkeDygOdG4vvodfYMESBetFa3AfxSeYFwNvlLie36mOY3Pe
+         R0zqfTMG7doZsH7uhykqwy8Nm9me5EkINJlDDHbizdvgrmWeujiQ50g8XcevN63m9l//
+         5mkwF44uINVA+qtg/OwITJbeeF57OE3ZcrBkL7593XeWfd2UC2z64c+0gHv4j6EjbdwG
+         /lRYBkU5BmTRVIw6iDSpw0UC5XgIySiXza1IeRpgrqXZdoRKJ7ISY10E+5yfZZzerBSO
+         5HLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783612230; x=1784217030;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=AzNulL+Y3yaGtB2zj4UUmjmsfxIxbrKupidFWaMr/Xg=;
-        b=clqCCcvAfmqTxwOzNykgnlpI4Gx3H/zJHMVy7mgbxCmZ2JJ3vATzBkGoL0mlGMWa+i
-         fM+NC7luRQfq+JGFezmJVVITOpVe4pK8EZglUzimw3viL1mDDtdqXvFxhcAV6Wp2npKP
-         bprg0pe3HYuPi5ZD6RojQ3cOl9OgmBQtRbKQMetmbcufNJq5qkOqorp13P1Bw4gelFpg
-         G/3mbQOPPGcV1n/VmKjxVkpWWL6eQM8xg1//x0mMW3DA29fEyzEePqjvTvQCD2820FKL
-         L50/2trpvBaQmHdd2LedrATaFeYGewU5Gj3ErTniJ/OE3895dbUW6p4bB3P66eqtYAxy
-         9LWg==
-X-Gm-Message-State: AOJu0Ywk3TKNT0XG8FUpdtRGXFYkGeLihhZu/SfIOnscMXO9RWibQNrd
-	RydR3OWpq2MrNMRbThl9YBG2edPZaq4J0IDdITDzT1b/8eRdYTM6UlpOI0Jzw0LFdwA=
-X-Gm-Gg: AfdE7cnLJ2+yPRO+SWvCwpj5MMmnd7WXwHnne9QD2EUG9FPbddREONu9vbX/oww9TIK
-	GtiIIkaCcITgdwjxr51mLxZlwO2MYa/i/36BVXmOrAQ9lCB7a+pb1pCeRfHNXP86afOsUZD6GGO
-	mAGq2fRuteQYPB5Gnle6HqxQ56bnp0XKEo416rzJOdmMEd0hzXfVBxgtQki6AEwF6VHqUraIAkL
-	SoO3rTRu9/TUSRR2opgETgtX6gj5nn6xD9dl6TTO7i85ELeb3uCnD10tA7ohX7Sf+evKpBUqSeV
-	Kp/sc+O+pGsBVh/ThuC7dKNPwCGpOKwW/uTVCKFyA0P1SmpL20/Niw9aEHWML3qp5X2zidu4TNl
-	ck6YyyU4lmZy2YIpHjpBOZlYeqgHrR5UU+kVwXFLvZ6iE/SMS2Mv5JrtHAlWQF5GIiu1fY48dcn
-	fVtnUXs81Bm17nsmZqhj+nwkzH
-X-Received: by 2002:a17:907:2684:b0:c12:cacc:92c6 with SMTP id a640c23a62f3a-c15ce229e98mr373985966b.59.1783612229849;
-        Thu, 09 Jul 2026 08:50:29 -0700 (PDT)
-Received: from [192.168.0.101] ([93.107.71.88])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c15d4bffdbesm284895766b.45.2026.07.09.08.50.28
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 09 Jul 2026 08:50:29 -0700 (PDT)
-Message-ID: <abb179ca-a3fb-4bcf-bf7c-9766f939431c@linaro.org>
-Date: Thu, 9 Jul 2026 16:50:26 +0100
+        d=1e100.net; s=20251104; t=1783612247; x=1784217047;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=4H58DRU6wxIzBQ0PfS3OOFxFy6X9tDniNwjExlFI+ak=;
+        b=giqypM7TpNuwVb3GOHID7W7TPX7pG6R+5JSDLZYFNo/guDMatwlRLREhriWhPXXaLK
+         Nv7OLv0bNUf9cnVOSR/Geu0WNfOh3HNu5fXGYp0Xw+D5d6UKHbIBlCGhidrq8CYxl+Q5
+         VwAkSvB1C4vQW3+ueGB0LdkuJZj9l3PmSIIOtuyQw2E9yc8tia8B1IjaShcKC+YhAkH2
+         BFjlSgUMBb95be4gHsLwUz2JTIQFYZ4g8wY3sV+IUOotPSyqyFAD3oFxxeCbDu/ce3SR
+         TVq2d3foFoMJj6XL7sAYNknzbuVjTVe4NSI4ItPMkhh57mOY5Ft9OvGed4v9BRV/VcHa
+         o4zg==
+X-Forwarded-Encrypted: i=1; AHgh+Rpyu4JU8zQ1Rnt7b/RFSj4zI8oXW04XIuIjM4F5hKXKOMmRcRgqM8k56X6FYRnydIeS19BYYgf3LoeVdI4Y@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy5o9BUHddpu9BrIXKGnq44Wy35KtwIhpwt3sm7tAvkKzgGdicQ
+	Nv/FTbQ7YdyMep0CIOc/iVTQI8IHNHpxpyULQoAUQCXO1ZAGdjpAtXFF2Mt0PzXNJwc=
+X-Gm-Gg: AfdE7cmSjSC9gPIUfg3h20wCECmWi6o8ELyCuxQ7a7JSWJD7YMclMlMge3gtE/3/+WY
+	IVAKiAZ+94uZGW6N1iZk9knLbtqRLFQuaWsMnt25sw30ytSIngan2RDczpCuVDjOLDeJ3Uigh/T
+	J/aHuUPVm0BbSWqrOrr3zpKH78VUCmI9liBnDwrd73hn/HUUSlAE5aTTJQ9yP4A5tD2SDUvUgXc
+	7cIQrcZTaxzcGidw53TBw16A8hAWdDuG32gnXKU3FGzFghGGUFVjqUbBwbiT+/UcyqivY4KPB0Z
+	F70EYlW706iio2qCIGxAfcY+9x/6KEXrSy+0K8sNM8SwMsJ9+1rzhMlX1Nuz8yXuRDllG42m2b5
+	WCKfCD9++NW2KUjFBpGtz0crP81BaLsX/JZz9cS2t2up9J8SCHLIMkGyqLOdLtl9JPgkoHGDkeZ
+	9D3/jn4npWHiv7k9tB7gLNqMH7lDBpg0y7UtssUzE/Ko1SxOUgE8Dkx9+nnOz0LwsL2Mny
+X-Received: by 2002:ac8:5f0a:0:b0:51a:8c9c:7f52 with SMTP id d75a77b69052e-51c8b40a675mr79940341cf.69.1783612246884;
+        Thu, 09 Jul 2026 08:50:46 -0700 (PDT)
+Received: from gourry-fedora-PF4VCD3F (pool-173-79-60-52.washdc.fios.verizon.net. [173.79.60.52])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-51c4202366csm161049781cf.30.2026.07.09.08.50.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 09 Jul 2026 08:50:45 -0700 (PDT)
+Date: Thu, 9 Jul 2026 11:50:40 -0400
+From: Gregory Price <gourry@gourry.net>
+To: Lorenzo Stoakes <ljs@kernel.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>,
+	Russell King <linux@armlinux.org.uk>,
+	Dinh Nguyen <dinguyen@kernel.org>,
+	Simon Schuster <schuster.simon@siemens-energy.com>,
+	"James E . J . Bottomley" <James.Bottomley@hansenpartnership.com>,
+	Helge Deller <deller@gmx.de>, Jarkko Sakkinen <jarkko@kernel.org>,
+	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+	Ian Abbott <abbotti@mev.co.uk>,
+	H Hartley Sweeten <hsweeten@visionengravers.com>,
+	Lucas Stach <l.stach@pengutronix.de>,
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+	Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+	Thierry Reding <thierry.reding@kernel.org>,
+	Mikko Perttunen <mperttunen@nvidia.com>,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Christian Koenig <christian.koenig@amd.com>,
+	Huang Rui <ray.huang@amd.com>, Ankit Agrawal <ankita@nvidia.com>,
+	Alex Williamson <alex@shazbot.org>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	Christian Brauner <brauner@kernel.org>,
+	Dan Williams <djbw@kernel.org>, Muchun Song <muchun.song@linux.dev>,
+	Oscar Salvador <osalvador@suse.de>,
+	David Hildenbrand <david@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	"Liam R . Howlett" <liam@infradead.org>,
+	Matthew Wilcox <willy@infradead.org>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Namhyung Kim <namhyung@kernel.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Oleg Nesterov <oleg@redhat.com>,
+	Steven Rostedt <rostedt@goodmis.org>, SeongJae Park <sj@kernel.org>,
+	Miaohe Lin <linmiaohe@huawei.com>, Hugh Dickins <hughd@google.com>,
+	Mike Rapoport <rppt@kernel.org>, Kees Cook <kees@kernel.org>,
+	Paolo Bonzini <pbonzini@redhat.com>, linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org,
+	linux-sgx@vger.kernel.org, etnaviv@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org,
+	kvm@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+	nvdimm@lists.linux.dev, linux-mm@kvack.org, iommu@lists.linux.dev,
+	linux-perf-users@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org, kasan-dev@googlegroups.com,
+	damon@lists.linux.dev, Pedro Falcato <pfalcato@suse.de>,
+	Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>,
+	Jann Horn <jannh@google.com>
+Subject: Re: [PATCH 18/30] mm/vma: remove duplicative vma_pgoff_offset()
+ helper
+Message-ID: <ak_DUDt-1tb-V3b2@gourry-fedora-PF4VCD3F>
+References: <cover.1782735110.git.ljs@kernel.org>
+ <10671c2fc5d0dd4e3bf497181923e63e46053df1.1782735110.git.ljs@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12 2/6] dt-bindings: media: qcom,x1e80100-camss: Describe
- iommu entries
-To: Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
- Bryan O'Donoghue <bod@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
- <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
- Todor Tomov <todor.too@gmail.com>, Mauro Carvalho Chehab
- <mchehab@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, Krzysztof Kozlowski <krzk@kernel.org>,
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-References: <20260708-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v12-0-f8588da41f16@linaro.org>
- <20260708-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v12-2-f8588da41f16@linaro.org>
- <HCPw5KYwtYb7jBFED4lssTvcaMo2bK808SHkTWNR77q0DXGPQklaADJXvuyeBrXh_GsEMKdiaaktkzQ9_xeseg==@protonmail.internalid>
- <cbc1b1eb-0064-4999-b829-2bec451c682a@oss.qualcomm.com>
- <f307848d-6abd-4e96-9183-36f8599026ce@kernel.org>
- <85a05836-6298-4111-97ca-80d7e3b3a9c4@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-US
-In-Reply-To: <85a05836-6298-4111-97ca-80d7e3b3a9c4@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <10671c2fc5d0dd4e3bf497181923e63e46053df1.1782735110.git.ljs@kernel.org>
 
-On 09/07/2026 16:28, Vikram Sharma wrote:
+On Mon, Jun 29, 2026 at 01:23:29PM +0100, Lorenzo Stoakes wrote:
+> This is doing what linear_page_index() does, so eliminate it and replace it
+> with linear_page_index().
 > 
-> On 7/9/2026 3:02 AM, Bryan O'Donoghue wrote:
->> On 08/07/2026 16:15, Vikram Sharma wrote:
->>>
->>> On 7/8/2026 5:36 AM, Bryan O'Donoghue wrote:
->>>>                iommus = <&apps_smmu 0x800 0x60>,
->>>> +                     <&apps_smmu 0x820 0x60>,
->>>> +                     <&apps_smmu 0x840 0x60>,
->>>>                         <&apps_smmu 0x860 0x60>,
->>>
->>> I think only "iommus = <&apps_smmu 0x800 0x60>" should be enough as mask which 0x60 is implicitly covering sids like 0x820, 0x840 and 0x860.
->>>
->>> Regards,
->>> Vikram
->>>
->>
->> These all come from the Hamoa iommu defintions in qcom docs.
->>
->> Can you double check for yourself and let me know.
-> Hi Bryan,
+> Update the VMA userland tests to reflect this change.
 > 
-> Confirmed — all four SIDs (0x800, 0x820, 0x840, 0x860) are valid and documented for IFE/SFE. My point was specifically about how the ARM SMMU SMR matching logic handles these with the given mask.
+> No functional change intended.
 > 
-> In SMR hardware, the mask field marks bits as "don't care" during stream ID comparison. With SID = 0x800 and MASK = 0x60:
-> 
-> MASK = 0x60 = 0b 0110 0000  →  bits [6:5] are don't-care
-> The four SIDs differ only in bits [6:5]:
-> 
-> 0x800 = 0b 1000 0000 0000  → bits[6:5] = 00
-> 0x820 = 0b 1000 0010 0000  → bits[6:5] = 01
-> 0x840 = 0b 1000 0100 0000  → bits[6:5] = 10
-> 0x860 = 0b 1000 0110 0000  → bits[6:5] = 11
-> 
-> Since 0x60 masks out exactly those differing bits, a single entry <&apps_smmu 0x800 0x60> will match all four SIDs.
-> 
-> That said, I'd say this is more of a preference — both forms are functionally correct, and if you prefer keeping the four explicit entries for clarity or to stay aligned with how the Qcom docs enumerate them, that's perfectly fine too.
-> 
-> Regards,
-> Vikram
+> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
 
-I rote-copied with my brain switched off.
+Reviewed-by: Gregory Price <gourry@gourry.net>
 
-Your suggestion seems correct to me.
-
----
-bod
