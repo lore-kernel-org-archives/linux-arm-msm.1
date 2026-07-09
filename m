@@ -1,95 +1,144 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 020C5309F08
-	for <linux-arm-msm@vger.kernel.org>; Thu,  9 Jul 2026 14:53:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17ACE2D594F;
+	Thu,  9 Jul 2026 14:54:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783608784; cv=none; b=oT0Us20IGX8UH8pJoacvM7VTqw2h5ez/L+oGMQbvjcspqCbl0ceTL4PEeob+BN1dmda7O0FZC/dlggRdbzrPlJYeLTH8TyzDBmn7xkAHRjhb3tjfXBrGRLDMgpnOK2kI0bHnjj4BoLdXP27D6K6ie0ymic7xSWgiFNIfSFflF9g=
+	t=1783608846; cv=none; b=Ye7VOvSgQStQQb+pEbRs7rDetx+jnPedMbhwmzr2LodnNW/UZlg0Ysrv/n8Yz00agCQ2khyhSPXkxTODH8TnFu5wThyndvQM1DiO4so52cvCUKD61koZDrrO0hswxMC+Muy83u9KAbcbfljmoXjP8sSPyAc3W+igs5QNUKsue9U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783608784; c=relaxed/simple;
-	bh=RLFiKybwqiRfaIacMSYfLnz5IphLQABbZGpGEz+/ci8=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=s0p1ZeIKhUA7CjpV43ugeWFBEaH+2B4oshrBss9eaBVAVyUVdeiYBV4xDlM8ruIe/iuGrc6RhJFpILFud/E0Y4zzSH/cUfzV1Qq1QdzpBw2Br03jvwl2ZScM80kCUel9qmRPuapLWjo6gWTg41fEouef0R/tfqch1k0Fx2TzIR4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Lrvz6pae; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783608846; c=relaxed/simple;
+	bh=KsqiLd+WP/dEzp/JtdS1jz3UBoP38vUKUrL26WhPsAo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=un2erJjttmYaKYN5oFeGuApKcoTM/4BwHLmK7acop0OexvAdGdiMde6viErTfkpT3iGY5Zbylw5o5oGOrYPV0qvRq4HWvooqqD0vfx9nBMPXTeuRdpIGoZg9kyI9n6ZskOptIb6QlNvk93tItzawKZ8pKV9hF73sPiL+mekzx78=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=E4N+VKkF; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Lrvz6pae"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DB4F71F00ACF
-	for <linux-arm-msm@vger.kernel.org>; Thu,  9 Jul 2026 14:53:02 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="E4N+VKkF"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C2C441F000E9;
+	Thu,  9 Jul 2026 14:53:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783608782;
-	bh=RLFiKybwqiRfaIacMSYfLnz5IphLQABbZGpGEz+/ci8=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=Lrvz6paed3fAUCv4rxFJJF8EyiDAKbAb9Klc6AOxsnMDoEjb3SMjPKEc7SWpgnLiT
-	 8L7nOZt8uUArhb2WiOyn1uI/SKvkafbxvilEBiqC6ylYrsxJdMiYbuZ0IyUfpQunRX
-	 lLCgaXDsJpN+wg5pPf3ACZ4vSPWhTHEH8+xJ287AR/gJFA5OdSw4PMqRyonIJ9Nuo7
-	 iDE+d+yHerGm+DifXN56RCUsVXV9VWYO5Scsln0RM4ikpF2uyH0y8kyYABFOXFuPJG
-	 sUevqLxyb7qr+LTtwXCiEPPaC2Zh/QhwYThjTjsptZ0USKUgkU+6cymV7LWg4G7oqn
-	 Xod0v+10zmdIg==
-Received: by mail-lj1-f182.google.com with SMTP id 38308e7fff4ca-39c7895ce05so17343201fa.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 09 Jul 2026 07:53:02 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RpSmOGlKlFG7XyD6Up+Kpq4DJ5ym6LEqyRf0uYQTiym4InD8FePhQSYmXtHXmXJqqgnfAMQ6cSm4c9Jh4Qi@vger.kernel.org
-X-Gm-Message-State: AOJu0YzEhiRc5BeDHLq+DNTo+YExdk+5QrQQy/DNUrTwaAuMhJ0eFpqT
-	OznhXDKgVV+URPeq0Z6Mrx8ZsRaM3wSinUzsn5hrH4uyr2qQIHgOs2EOxYR/oulajs3oQHVuRnL
-	gRBNxNi1nnwp5jW4XI4+XnckebOB8UCA=
-X-Received: by 2002:a05:6512:1418:b0:5ae:bce4:b696 with SMTP id
- 2adb3069b0e04-5b011457496mr1654043e87.15.1783608781260; Thu, 09 Jul 2026
- 07:53:01 -0700 (PDT)
+	s=k20260515; t=1783608844;
+	bh=u454d5mIhB0nOu1CqQBC0ybTPHcXpjed1DznN7MFSXs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=E4N+VKkFWWOS8bapsV8QXmtj6E1a5IrfEPvBLUpZDbV3x2oCUCv2sI3ZXTqzmOOoq
+	 p5Gnaz1AqvXrVp+DnTRXeqVHQuLv9w6hfPeLILoVV0TYOV+9fOTbkKRZF8papECTFy
+	 QxKzh4b1DYXzWcqj/9goODU1sXsYaHiHGox43v/ujz8IE2UB+sLm56ryHziFZKNSos
+	 JAq6u1/25pk6PvAxDpXFxLwnIJ3mOWHZSfFueyHLoWBjJhOZc539HlZfE4Ox2vrH2T
+	 lVVXs1dIygIi/6lnNTUq9jjv/12423Mv4WCXoAVQoZc2b50WK+jhDLrR6DY85v8yQs
+	 o15o3Gni1rTZg==
+Date: Thu, 9 Jul 2026 15:53:44 +0100
+From: Lorenzo Stoakes <ljs@kernel.org>
+To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Eugen Hristev <ehristev@kernel.org>, 
+	Arnd Bergmann <arnd@arndb.de>, Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>, 
+	Christoph Lameter <cl@gentwo.org>, Andrew Morton <akpm@linux-foundation.org>, 
+	Thomas Gleixner <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
+	Anna-Maria Behnsen <anna-maria@linutronix.de>, Frederic Weisbecker <frederic@kernel.org>, 
+	John Stultz <jstultz@google.com>, Stephen Boyd <sboyd@kernel.org>, Kees Cook <kees@kernel.org>, 
+	Ingo Molnar <mingo@redhat.com>, Juri Lelli <juri.lelli@redhat.com>, 
+	Vincent Guittot <vincent.guittot@linaro.org>, Dietmar Eggemann <dietmar.eggemann@arm.com>, 
+	Steven Rostedt <rostedt@goodmis.org>, Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>, 
+	Valentin Schneider <vschneid@redhat.com>, K Prateek Nayak <kprateek.nayak@amd.com>, 
+	David Hildenbrand <david@kernel.org>, "Liam R. Howlett" <liam@infradead.org>, 
+	Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, 
+	Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>, 
+	Brendan Jackman <jackmanb@google.com>, Johannes Weiner <hannes@cmpxchg.org>, Zi Yan <ziy@nvidia.com>, 
+	Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>, 
+	Kemeng Shi <shikemeng@huaweicloud.com>, Nhat Pham <nphamcs@gmail.com>, Baoquan He <baoquan.he@linux.dev>, 
+	Barry Song <baohua@kernel.org>, Youngjun Park <youngjun.park@lge.com>, 
+	Petr Mladek <pmladek@suse.com>, John Ogness <john.ogness@linutronix.de>, 
+	Sergey Senozhatsky <senozhatsky@chromium.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Mathieu Poirier <mathieu.poirier@linaro.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Saravana Kannan <saravanak@kernel.org>, 
+	workflows@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arch@vger.kernel.org, linux-mm@kvack.org, linux-arm-msm@vger.kernel.org, 
+	linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org
+Subject: Re: [PATCH v3 11/26] mm/swapfile: Annotate static information into
+ meminspect
+Message-ID: <ak-1HujOABoQ9wR_@lucifer>
+References: <20260708-meminspect-v3-v3-0-7aa5a0a74d5c@oss.qualcomm.com>
+ <20260708-meminspect-v3-v3-11-7aa5a0a74d5c@oss.qualcomm.com>
+ <ak4AgXqMnkn8rVGE@lucifer>
+ <20260708190535.fhqaddicljho44eq@hu-mojha-hyd.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260706-fix_sticky_-einval_after_pm_runtime_api_failure-v3-0-92feb5a7b926@oss.qualcomm.com>
- <20260706-fix_sticky_-einval_after_pm_runtime_api_failure-v3-1-92feb5a7b926@oss.qualcomm.com>
- <CAJZ5v0i4Zc4HNUdgJ_2=4=wv7vRDTugo71qsWnZxVRRqV+W8mw@mail.gmail.com>
- <9d271393-c500-46a9-8795-f1371585445c@sirena.org.uk> <CAJZ5v0g9AxpqUQUQ-vwG2LN3pfT3qXi3_S=So42=VdVtzg-=Dw@mail.gmail.com>
- <f6532e0f-a0b3-490d-8313-d6f5b72e8236@sirena.org.uk>
-In-Reply-To: <f6532e0f-a0b3-490d-8313-d6f5b72e8236@sirena.org.uk>
-From: "Rafael J. Wysocki (Intel)" <rafael@kernel.org>
-Date: Thu, 9 Jul 2026 16:52:49 +0200
-X-Gmail-Original-Message-ID: <CAJZ5v0jp6kds4tCPYgSSXUR8gY6RZeduDo4KT_C4SDe1LkO1vg@mail.gmail.com>
-X-Gm-Features: AUfX_mx_i-Ak0IpYfFQhE7YA2IxINgGGdh6jGUVBYlO8uF8CkL_5A8zDw-EN5zc
-Message-ID: <CAJZ5v0jp6kds4tCPYgSSXUR8gY6RZeduDo4KT_C4SDe1LkO1vg@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] PM: runtime: Only set runtime_error on suspend
- callback failures
-To: Mark Brown <broonie@kernel.org>, Praveen Talari <praveen.talari@oss.qualcomm.com>
-Cc: Dilip Kota <dkota@codeaurora.org>, Stephen Boyd <swboyd@chromium.org>, 
-	Girish Mahadevan <girishm@codeaurora.org>, Alok Chauhan <alokc@codeaurora.org>, 
-	bjorn.andersson@oss.qualcomm.com, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Len Brown <lenb@kernel.org>, 
-	Pavel Machek <pavel@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Danilo Krummrich <dakr@kernel.org>, Douglas Anderson <dianders@chromium.org>, linux-spi@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>, aniket.randive@oss.qualcomm.com, 
-	chandana.chiluveru@oss.qualcomm.com, jyothi.seerapu@oss.qualcomm.com, 
-	linux-pm@vger.kernel.org, driver-core@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260708190535.fhqaddicljho44eq@hu-mojha-hyd.qualcomm.com>
 
-On Mon, Jul 6, 2026 at 7:30=E2=80=AFPM Mark Brown <broonie@kernel.org> wrot=
-e:
+On Thu, Jul 09, 2026 at 12:35:35AM +0530, Mukesh Ojha wrote:
+> On Wed, Jul 08, 2026 at 08:47:51AM +0100, Lorenzo Stoakes wrote:
+> > On Wed, Jul 08, 2026 at 11:01:50AM +0530, Mukesh Ojha wrote:
+> > > From: Eugen Hristev <ehristev@kernel.org>
+> > >
+> > > Annotate vital static information into inspection table:
+> > >  - nr_swapfiles
+> > >
+> > > Information on these variables is stored in a dedicated meminspect
+> > > section.
+> > >
+> > > Signed-off-by: Eugen Hristev <eugen.hristev@linaro.org>
+> > > Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+> > > ---
+> > >  mm/swapfile.c | 2 ++
+> > >  1 file changed, 2 insertions(+)
+> > >
+> > > diff --git a/mm/swapfile.c b/mm/swapfile.c
+> > > index a602e5820513..d480727e4987 100644
+> > > --- a/mm/swapfile.c
+> > > +++ b/mm/swapfile.c
+> > > @@ -42,6 +42,7 @@
+> > >  #include <linux/suspend.h>
+> > >  #include <linux/zswap.h>
+> > >  #include <linux/plist.h>
+> > > +#include <linux/meminspect.h>
+> > >
+> > >  #include <asm/tlbflush.h>
+> > >  #include <linux/leafops.h>
+> > > @@ -65,6 +66,7 @@ static void move_cluster(struct swap_info_struct *si,
+> > >   */
+> > >  static DEFINE_SPINLOCK(swap_lock);
+> > >  static unsigned int nr_swapfiles;
+> > > +MEMINSPECT_SIMPLE_ENTRY(nr_swapfiles);
+> >
+> > Now the EXPORT_SYMBOL_GPL() is an EXPORT_SYMBOL() in effect no?
 >
-> On Mon, Jul 06, 2026 at 04:10:34PM +0200, Rafael J. Wysocki (Intel) wrote=
-:
-> > On Mon, Jul 6, 2026 at 3:21=E2=80=AFPM Mark Brown <broonie@kernel.org> =
-wrote:
->
-> > > I've got a bunch of other stuff in flight for that driver - I'll need=
- to
-> > > check but just in case perhaps a tag I could pull in?
->
-> > I'm wondering though if the patches in the series really depend on each=
- other.
->
-> > There doesn't appear to be any code dependency between them.
->
-> That would also work, a bit annoying for any bisects possibly but so
-> long as we land both in the same release we should be good.
+> The whole reason we had to tag most of the MM symbols is that
+> the crash tool looks for this information while launching itself.
 
-So I've applied the first patch only as 7.3 material.
+You're missing the point.
 
-If you need it to be exposed on an immutable branch, please let me know.
+EXPORT_SYMBOL_GPL() != EXPORT_SYMBOL().
 
-Thanks!
+We cannot and will not allow symbols that are GPL-only to be exported by the
+back door to non-GPL modules.
+
+Meminspect seems to ignore all of this and just exports symbols another way
+overriding kernel mechanisms which is just not acceptable...
+
+I also don't really understand what you're saying here either, what has what
+crash looks up on startup got to do with anything?
+
+>
+> e.g.,
+>
+> ./crash --no_modules --no_panic --no_kmem_cache --zero_excluded ./vmlinux  ./minidump.elf
+>
+>
+> >
+> > >  atomic_long_t nr_swap_pages;
+> > >  /*
+> > >   * Some modules use swappable objects and may try to swap them out under
+> > >
+> > > --
+> > > 2.53.0
+> > >
+>
+> --
+> -Mukesh Ojha
