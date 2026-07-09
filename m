@@ -1,166 +1,193 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com [209.85.160.172])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0CD3385D8E
-	for <linux-arm-msm@vger.kernel.org>; Thu,  9 Jul 2026 14:55:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F6003672BF
+	for <linux-arm-msm@vger.kernel.org>; Thu,  9 Jul 2026 15:18:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783608910; cv=none; b=F9vk0b2FzA7gNmgbuuKSrOO6dseTud3WelQ2EhubXOgL/jKwMDvh5bOEnjgs8ERQpF1TXaE8YkPM6w+j537EIBx53a8Rp5S84WMvg8Da0zd5ALAutRE10NpB/NT2oMVF/d/tmF8Q4d9WOM1Bg3SKODiYwTMqspjHRKvSc4Gzh/c=
+	t=1783610332; cv=none; b=h2zFcR2XduqKWPrcb3x3cyuMETKgYhxW45yjLgkn/HWrfgSuo3lHQ1vDtHDqvEA4QEygcolNuLQXYCYuCH3/7dWlJ+cL/sju5T1zoz6eQAbT1ZgLidhQbuSVWl9KBkpZlDXc0VVaupNJVd8etiSJaiTfRHOiTbrKnXyN4oYYJag=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783608910; c=relaxed/simple;
-	bh=g+sC/QZblXYDIcB9ooulCSeC1E+X3/Fd4MPLeB2SQsM=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=QxZwAx40dBnboEUb2S83lNrZt1WdwFEHVHEYk+Rg+CSKY5CyYk2szhL2NH7Q0rIBc8A3mbVcD0KnR3uRAt1kRGaxf2MoEK6BzfC6Q/RkkqqseekN7V4jwRx1aSoLczGaqVAUhZp38eS574rU49vLarxevOBuQwKDQ94Yvc+mpYI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CZ+uRmPk; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783610332; c=relaxed/simple;
+	bh=EmhDmZEzfDqtz+/wM5OYtSnBNKhNR5z6WmgKAnKqYZg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=fhv19IJZEx0CXyBL35NFQsgbyzDRSMc/nQ0KF2a1gmLsEKjxSJD9brAZ6IW/qd0KkOhRd5YVTNIXIEoUu0iHC8f4YdXj2I7++JBpjsQvWdik8+r06w82Vq8Yan0nWQl5N71+acMsN9UPLaDZG6jbgSojM9PDi81ocqwjMCBruuo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net; spf=pass smtp.mailfrom=gourry.net; dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b=XYuSc5IC; arc=none smtp.client-ip=209.85.160.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=gourry.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gourry.net
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CZ+uRmPk"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7DB9F1F00A3E
-	for <linux-arm-msm@vger.kernel.org>; Thu,  9 Jul 2026 14:55:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783608908;
-	bh=+uWDUc/+B8Zcl3RjgjlcAl1XfyqZh6uKOMuQl+0chAo=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=CZ+uRmPkArgS05FkAxTN/g1EJcQSaRs8dsL+F4Uujnmu94htT9jKoNWjcxH0hGaAM
-	 Sf1hkR2KF7IMxP8eTBaARyhpTX70W16qE4lh2fEvaK8Zeev/H+uKwIem1OhX8VkCf3
-	 5y+DH/OYNcOfP4oCjE35LUFb429cJDyNDD3Ft/8DO2gaBcbQoSs5W89AIglHIf6Zow
-	 RSSRot8AKZal/SBb2wkBogHeZxUlMMxWFutMvBimQbrR57brMo1OMEtNpCECFt4yHc
-	 PjHTXkPIi/LmfnRmfM/qFc/FXReMbJtO5tmsp31okTdinZWUPTV+rk8IFNLHLvcqtl
-	 o0y8R+Lfn6VGQ==
-Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-5b01146b205so1533759e87.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 09 Jul 2026 07:55:08 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rqo2NgNmb8fi0xJgaYt1dd/UK4LagbjnAZK3UeEvKvn0Bvie3DcjZgXJwNN8U8ky7adm9n5g6B1aEhUZKYA@vger.kernel.org
-X-Gm-Message-State: AOJu0YylOsUEI4eWqSTODKJj3kTa22k4KDn7qPnv5X5j+TpI4Ra51SeW
-	O1kh896wlT6kmgRItnZBKi5yZ7T3M4dkpR5WUMrTZMqBJvaeNr/ahxf7EBfglPwlLZiLoxuAN+V
-	jFeJ3ydpUv5IYY4G4L5j2ezpcWDlG11s=
-X-Received: by 2002:ac2:5203:0:b0:5ae:c563:f611 with SMTP id
- 2adb3069b0e04-5b011463233mr1492320e87.36.1783608906969; Thu, 09 Jul 2026
- 07:55:06 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gourry.net header.i=@gourry.net header.b="XYuSc5IC"
+Received: by mail-qt1-f172.google.com with SMTP id d75a77b69052e-51c16ac21acso11054011cf.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 09 Jul 2026 08:18:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gourry.net; s=google; t=1783610327; x=1784215127; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=D66HPeIJnm5ZDnK+VorUOpyiniaZPeUCt2fPIKMnyb4=;
+        b=XYuSc5IC+EVJbDWikpVPC9cDKrnWwVwEAM4vxRerghx9T5cLKor0lZn/3xvEy8MYvH
+         P4G8QPzYbfEZ/SuD19iQ/Y1IHWEN8FQYvrl4gGGNvM85yYx5CoTWRnrwozvd8buW/yZu
+         rTLr0Kl5kFm/eeBRVjl2lZuNMDx5WC8PeGDIx78E6vBCLlaGrNT+PUtAJ/u8INBmJnMf
+         RbCmKrzJydlT8MQRk1duN94/X88hvDTJtAhpiVN/Uddledvv9UkLMBn9POBFDX+NJflU
+         wUwaXNQ4tD3o84h7GQtBbwvEsPtUxnWPlr1FHKAANE+13sbK/9le7ZhU64POCONVaFwl
+         Syjg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783610327; x=1784215127;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=D66HPeIJnm5ZDnK+VorUOpyiniaZPeUCt2fPIKMnyb4=;
+        b=tZFtWarm/prBVp7jWdAyzHH1MLVQB/KdD00ih/DEmH8BO12ya9hM7CNsN7WnLsKowN
+         3O1BfrzjRlcKz5MaohK+yfk5ABekn7rmFD9Z/lxw+y1jzStnoHzZgS/hxRO1m64MG1WA
+         IoAPC70VP3tCzKu8mwCviMZpOjMS1HIA8XpAcqQYgjhROtOGtrRewZt5ONVD7EGvY7p/
+         xIvIUuO4XEm4iswu/tEusLCPYmH2zTF/PxgBZB1RiUxS73AoTQrsCBCBV5ZuGUJGsqnE
+         bQkeqW+4Pp4CLjGg2ozGgdLbAYb+z4cb5uP2pwEhxjMNwz2RsYwHhQSckVHxvnGMph1v
+         HFTw==
+X-Forwarded-Encrypted: i=1; AHgh+RoiW9YU7pUOqPV+oKyYya6BUdh9Zn0RUxGN8U8Vei4iG5OqzlaZwaexWAH9flCEDeUQBJWAOt9uexzutHkO@vger.kernel.org
+X-Gm-Message-State: AOJu0YyF/EqMShVwfcQVXzWyc62Wbknh5RhwF8+60WQZpf95+pglrqnW
+	cMFut7svrvfE8TzIzZwPV4Yb11KFBkw9egx/HlAwi5iAEuyxkrU8Xm33a7sSlp7AbM0=
+X-Gm-Gg: AfdE7clddCuTYrjR9zNOsBEdR8FTHWJK0T9+s81FE+2YDBkCp886cle7KVEyBTw6o4Q
+	T1nahUVLpUL00zi1Nskfu9DNgZ8VehLkWY2Mgy4iqSdpKlpWaktOdBbdc6ycpWCwjkZXM3PwzW2
+	A/2+v9m43UGAcwQIcMN/UjG19dpz17HEV+ZwBq8fqVLSx1BqhjeirIpgXCy6VTOqcUkZLgnanTY
+	l45y6xnevMgprZ0eZtOrJNTfWkFq8npdskuBR0VemgJaIHWAs50+oxhUI4zVckmiAZugypzze0o
+	WC0IrYxXRqGmyNlTECtz0Ss2FMdsnsaRFlcSu/U79UD9K4CdcnN8H40ZdIalonek3tnPvqIxT2s
+	6OckadVxgr/5k2VgYhnZrEvYlj9TRxqo9mxL11G4tYfvl00jjSJt9ikLl67o40NScYbdsVIFOQ8
+	SPdUepxws8o1PZwIT9A5pGE+2V0DOcBNOO3REexnIOHTa6UWV35a5UpbRTmgBNGjzQpic+EgJXv
+	Jrv4Mk=
+X-Received: by 2002:ac8:5cd4:0:b0:51c:1c2c:a8c9 with SMTP id d75a77b69052e-51c8b3e2e32mr79753441cf.43.1783610327278;
+        Thu, 09 Jul 2026 08:18:47 -0700 (PDT)
+Received: from gourry-fedora-PF4VCD3F (pool-173-79-60-52.washdc.fios.verizon.net. [173.79.60.52])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-51c41db4fb5sm158006781cf.25.2026.07.09.08.18.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 09 Jul 2026 08:18:45 -0700 (PDT)
+Date: Thu, 9 Jul 2026 11:18:40 -0400
+From: Gregory Price <gourry@gourry.net>
+To: Lorenzo Stoakes <ljs@kernel.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>,
+	Russell King <linux@armlinux.org.uk>,
+	Dinh Nguyen <dinguyen@kernel.org>,
+	Simon Schuster <schuster.simon@siemens-energy.com>,
+	"James E . J . Bottomley" <James.Bottomley@hansenpartnership.com>,
+	Helge Deller <deller@gmx.de>, Jarkko Sakkinen <jarkko@kernel.org>,
+	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+	Ian Abbott <abbotti@mev.co.uk>,
+	H Hartley Sweeten <hsweeten@visionengravers.com>,
+	Lucas Stach <l.stach@pengutronix.de>,
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+	Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+	Thierry Reding <thierry.reding@kernel.org>,
+	Mikko Perttunen <mperttunen@nvidia.com>,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Christian Koenig <christian.koenig@amd.com>,
+	Huang Rui <ray.huang@amd.com>, Ankit Agrawal <ankita@nvidia.com>,
+	Alex Williamson <alex@shazbot.org>,
+	Alexander Viro <viro@zeniv.linux.org.uk>,
+	Christian Brauner <brauner@kernel.org>,
+	Dan Williams <djbw@kernel.org>, Muchun Song <muchun.song@linux.dev>,
+	Oscar Salvador <osalvador@suse.de>,
+	David Hildenbrand <david@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	"Liam R . Howlett" <liam@infradead.org>,
+	Matthew Wilcox <willy@infradead.org>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Namhyung Kim <namhyung@kernel.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Oleg Nesterov <oleg@redhat.com>,
+	Steven Rostedt <rostedt@goodmis.org>, SeongJae Park <sj@kernel.org>,
+	Miaohe Lin <linmiaohe@huawei.com>, Hugh Dickins <hughd@google.com>,
+	Mike Rapoport <rppt@kernel.org>, Kees Cook <kees@kernel.org>,
+	Paolo Bonzini <pbonzini@redhat.com>, linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org,
+	linux-sgx@vger.kernel.org, etnaviv@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org,
+	kvm@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+	nvdimm@lists.linux.dev, linux-mm@kvack.org, iommu@lists.linux.dev,
+	linux-perf-users@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org, kasan-dev@googlegroups.com,
+	damon@lists.linux.dev, Pedro Falcato <pfalcato@suse.de>,
+	Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>,
+	Jann Horn <jannh@google.com>
+Subject: Re: [PATCH 13/30] mm/vma: refactor vmg_adjust_set_range() for clarity
+Message-ID: <ak-70CHGujkI5jJI@gourry-fedora-PF4VCD3F>
+References: <cover.1782735110.git.ljs@kernel.org>
+ <ada7972f49ea7f1ff1df6d11e4651f270444f8fd.1782735110.git.ljs@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260706-fix_sticky_-einval_after_pm_runtime_api_failure-v3-0-92feb5a7b926@oss.qualcomm.com>
- <20260706-fix_sticky_-einval_after_pm_runtime_api_failure-v3-2-92feb5a7b926@oss.qualcomm.com>
-In-Reply-To: <20260706-fix_sticky_-einval_after_pm_runtime_api_failure-v3-2-92feb5a7b926@oss.qualcomm.com>
-From: "Rafael J. Wysocki (Intel)" <rafael@kernel.org>
-Date: Thu, 9 Jul 2026 16:54:55 +0200
-X-Gmail-Original-Message-ID: <CAJZ5v0jAdUDrmqdZOofD_SOybX_riGygebZg28K1+biwCUwdoA@mail.gmail.com>
-X-Gm-Features: AUfX_mxObOw8riju13AyHbeASLKZvtZGFB_mGMk6sFqZ8O5AcMDNT22UDuZo1rM
-Message-ID: <CAJZ5v0jAdUDrmqdZOofD_SOybX_riGygebZg28K1+biwCUwdoA@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] spi: qcom-geni: Fix missing error check on pm_runtime_get_sync()
-To: Praveen Talari <praveen.talari@oss.qualcomm.com>
-Cc: Mark Brown <broonie@kernel.org>, Dilip Kota <dkota@codeaurora.org>, 
-	Stephen Boyd <swboyd@chromium.org>, Girish Mahadevan <girishm@codeaurora.org>, 
-	Alok Chauhan <alokc@codeaurora.org>, bjorn.andersson@oss.qualcomm.com, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Len Brown <lenb@kernel.org>, Pavel Machek <pavel@kernel.org>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Danilo Krummrich <dakr@kernel.org>, 
-	Douglas Anderson <dianders@chromium.org>, linux-spi@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>, aniket.randive@oss.qualcomm.com, 
-	chandana.chiluveru@oss.qualcomm.com, jyothi.seerapu@oss.qualcomm.com, 
-	linux-pm@vger.kernel.org, driver-core@lists.linux.dev
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ada7972f49ea7f1ff1df6d11e4651f270444f8fd.1782735110.git.ljs@kernel.org>
 
-On Mon, Jul 6, 2026 at 10:53=E2=80=AFAM Praveen Talari
-<praveen.talari@oss.qualcomm.com> wrote:
->
-> spi_geni_init() calls pm_runtime_get_sync() to power up the device
-> before accessing hardware registers, but never checks the return value.
-> If the runtime resume fails, the function silently proceeds to read and
-> write hardware registers on a device that may not be powered up, leading
-> to register access faults.
->
-> Fix this by replacing pm_runtime_get_sync() with the
-> PM_RUNTIME_ACQUIRE_IF_ENABLED() macro and checking the result via
-> PM_RUNTIME_ACQUIRE_ERR(), propagating any error back to the caller
-> immediately before any hardware access occurs.
->
-> Since the macro handles its own cleanup on failure, the out_pm label and
-> the corresponding pm_runtime_put() call are no longer needed. Replace
-> all goto out_pm paths with direct return ret statements and remove the
-> label entirely.
->
-> Fixes: 561de45f72bd ("spi: spi-geni-qcom: Add SPI driver support for GENI=
- based QUP")
-> Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
+On Mon, Jun 29, 2026 at 01:23:24PM +0100, Lorenzo Stoakes wrote:
+> Add comments with ASCII diagrams to describe what we're doing, avoid
+> dubious use of PHYS_PFN(), and use vma_start_pgoff().
+> 
+> The most complicated scenario represented here is vmg->__adjust_next_start
+> - when this is set, vmg->[start, end] actually indicate the range to be
+> retained, so take special care to describe this accurately.
+> 
+> No functional change intended.
+> 
+> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
 
-Reviewed-by: Rafael J. Wysocki (Intel) <rafael@kernel.org>
+Reviewed-by: Gregory Price <gourry@gourry.net>
 
-(no issues found)
+> +		/*
+> +		 * vmg->start    vmg->end
+> +		 * |             |
+> +		 * v    merge    v
+> +		 * <------------->
+> +		 *         delta
+> +		 *        <------>
+> +		 * |------|----------------|
+> +		 * | prev |    middle      |
+> +		 * |------|----------------|
+> +		 *        ^
+> +		 *        |
+> +		 *        middle->vm_start
+> +		 */
 
-> ---
->  drivers/spi/spi-geni-qcom.c | 18 ++++++++++--------
->  1 file changed, 10 insertions(+), 8 deletions(-)
->
-> diff --git a/drivers/spi/spi-geni-qcom.c b/drivers/spi/spi-geni-qcom.c
-> index 26e723cfea61..392accfd8515 100644
-> --- a/drivers/spi/spi-geni-qcom.c
-> +++ b/drivers/spi/spi-geni-qcom.c
-> @@ -613,25 +613,30 @@ static int spi_geni_init(struct spi_geni_master *ma=
-s)
->         u32 spi_tx_cfg, fifo_disable;
->         int ret =3D -ENXIO;
->
-> -       pm_runtime_get_sync(mas->dev);
-> +       PM_RUNTIME_ACQUIRE_IF_ENABLED(mas->dev, pm);
-> +       ret =3D PM_RUNTIME_ACQUIRE_ERR(&pm);
-> +       if (ret < 0) {
-> +               dev_err(mas->dev, "Failed to resume and get %d\n", ret);
-> +               return ret;
-> +       }
->
->         proto =3D geni_se_read_proto(se);
->
->         if (spi->target) {
->                 if (proto !=3D GENI_SE_SPI_SLAVE) {
->                         dev_err(mas->dev, "Invalid proto %d\n", proto);
-> -                       goto out_pm;
-> +                       return ret;
->                 }
->                 spi_slv_setup(mas);
->         } else if (proto =3D=3D GENI_SE_INVALID_PROTO) {
->                 ret =3D geni_load_se_firmware(se, GENI_SE_SPI);
->                 if (ret) {
->                         dev_err(mas->dev, "spi master firmware load faile=
-d ret: %d\n", ret);
-> -                       goto out_pm;
-> +                       return ret;
->                 }
->         } else if (proto !=3D GENI_SE_SPI) {
->                 dev_err(mas->dev, "Invalid proto %d\n", proto);
-> -               goto out_pm;
-> +               return ret;
->         }
->         mas->tx_fifo_depth =3D geni_se_get_tx_fifo_depth(se);
->
-> @@ -664,7 +669,7 @@ static int spi_geni_init(struct spi_geni_master *mas)
->                         dev_dbg(mas->dev, "Using GPI DMA mode for SPI\n")=
-;
->                         break;
->                 } else if (ret =3D=3D -EPROBE_DEFER) {
-> -                       goto out_pm;
-> +                       return ret;
->                 }
->                 /*
->                  * in case of failure to get gpi dma channel, we can stil=
-l do the
-> @@ -693,10 +698,7 @@ static int spi_geni_init(struct spi_geni_master *mas=
-)
->                 writel(spi_tx_cfg, se->base + SE_SPI_TRANS_CFG);
->         }
->
-> -out_pm:
-> -       pm_runtime_put(mas->dev);
->         return ret;
-> -}
->
->  static unsigned int geni_byte_per_fifo_word(struct spi_geni_master *mas)
->  {
->
-> --
-> 2.34.1
->
+Even with these diagrams, it's a bit difficult to understand what the
+actual intent/result of this chunk is (but that may be a limitation of
+me not spending enough time reading the surrounding code, not a comment
+of your work here).
+
+~Gregory
+
+> +		/*
+> +		 *                Originally:
+> +		 *
+> +		 *            vmg->start   vmg->end
+> +		 *            |            |
+> +		 *            v    merge   v
+> +		 *            <------------>
+> +		 *            .            .
+> +		 * merge_existing_range() updates to:
+> +		 *            .            .
+> +		 * vmg->start vmg->end     .
+> +		 * |          |            .
+> +		 * v  retain  v            .
+> +		 * <---------->            .
+> +		 *             delta       .
+> +		 *            <----->      .
+> +		 * |----------------|------|
+> +		 * |    middle      | next |
+> +		 * |----------------|------|
+> +		 *                  ^
+> +		 *                  |
+> +		 *                  next->vm_start
+> +		 */
