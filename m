@@ -1,138 +1,180 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 497253F8893;
-	Thu,  9 Jul 2026 09:18:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5FF73FBEC9;
+	Thu,  9 Jul 2026 09:18:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783588688; cv=none; b=lVd4YKZIpNgpRe/YkH3EypMbVEnottn9n3u314YHXXijxraCNM0GjxjS0v70dgg7VkyeaqO+pUiM8rDlD+cd1ZasM8Hso+ZE85v0u4/0MITRatFZ5FC1CNmkY0/bOsJ2heA90CdVb/LMWfihex989n11rRZy4LCAPzonzahdDXw=
+	t=1783588717; cv=none; b=l8s9ZC6+qVChHll27ncND9aKeeNgWzxBhs69sQgAKqSATX9HAipISPu0Im1Zmw5KHWVEqjvRkyUbHCY4qkT5PMH0m1xjwpdBVSolI+zTM84G5iCuIKEmfR4PaqUvH7KjLO1/9Y7+kutGgLrpRJ1sxmzDBE00RSUHSsvxlTjkMOg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783588688; c=relaxed/simple;
-	bh=N/gh54s4OihDfld7F9b4Mg6B69v+qijNBUDuZONwALI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Mlqo8CDrslmKaQURV57zBsSp3mrqPNCf8i1FdDTQNiubVlaNTPD7JUPAw0KS/NA0u7tjmNePPWDA7u644cO7umjmKTVKF4dnQsCsnb+7F0J7KbZCVlb7sJ+Ze66G+VAtZOmf8Q/ChWOoFNZTjldJWSpx3/6h18XuqRGrxvU8s84=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YEef0RU5; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783588717; c=relaxed/simple;
+	bh=lyUxfmF0LBkosbLRpYQs7h+GaQeX4a20whx1y6sHZZQ=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=nJz/KHnlakkRofeA2HR6e+rjGJEd7Ujrk0yceB4APFtteHFiBB90ZcDs27vaGBcICg9DI1YmKirD8EdJ2g7hKuanrvKSNZKP9R7ZkCBKruhVZfC3fBW3/CF8jnb9x9T8MSGzK4N+BqhR3gEKZ6TTCv/sPpazZRvP2qv9UNacad0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SiX9ojRG; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YEef0RU5"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A1F941F000E9;
-	Thu,  9 Jul 2026 09:17:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783588687;
-	bh=BEMcw8GAKz3jSF3iw3VgzW8YSfsS57654If934RMsrc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=YEef0RU5toiTWSQj+MtfBMxBIdpCg/Z74PvTPGyppad+87PHS31w6ZiUyJu16lDf2
-	 Ju/Vz2ah7RuFmP/GmKPoYZn5sOIG7izXpe8ctGxOa8fxtZSU3tS8U0Zr24fY8elcMG
-	 +ar0R0N+IXhM2ntjzlP3rcEsgmfoNKisWMAPrime76mCqFJnwl5Fr8ZjcqokRSSXFn
-	 HEtHcmKWZKKvH4KK0kxPZzYrs/srbIjrFbUkRkfWXkIB5qTJmGNn+NJHayOTCvYyGQ
-	 i1UOs8TpKv4HuBM/zjRUk1aO/61AGEz9pDfOJbu7Zn3G7WtkwTAA00pkNlW9dLnvm4
-	 bmX1p/Q/bC9xw==
-Message-ID: <458850b0-bf36-4784-9130-50dcfb30ee75@kernel.org>
-Date: Thu, 9 Jul 2026 11:17:56 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SiX9ojRG"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 5A0EFC2BCB7;
+	Thu,  9 Jul 2026 09:18:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1783588716;
+	bh=lyUxfmF0LBkosbLRpYQs7h+GaQeX4a20whx1y6sHZZQ=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=SiX9ojRGFOEVhP8J6sOmeM8RACKeqKR0bnbH+Mkc5RcnbKF6mxu3p+IomqWzM7Zh1
+	 6lhxUT/edvwimu6Hzd7lhZ18JLO2A3CPcOHKtlRY428kHdXMf8hHQQHfN4TGYh0q3s
+	 /j+EsCWp7XFvyAoYopazxI93KbTGQeg+86Od1OLXVQ1bME2fxJ5tY95PjzrXgA9KB1
+	 gZqEvr2iVDMG2WDqKq6zv7ookSY7l/+e8QO+aNFzpVieZaWQ/BqgTV7tQfakyH1tB/
+	 oeFaGosy0XDZPJJ5izOADCkI5R3964A1wzE5EpjSiOMuDugqKVFG5GXlZiLrOU4oVa
+	 dtQBDynhzcThw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 38DC7C44503;
+	Thu,  9 Jul 2026 09:18:36 +0000 (UTC)
+From: George Moussalem via B4 Relay <devnull+george.moussalem.outlook.com@kernel.org>
+Date: Thu, 09 Jul 2026 13:18:27 +0400
+Subject: [PATCH v5 1/6] dt-bindings: net: bluetooth: Document Qualcomm
+ IPQ5018 Bluetooth controller
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/5] dt-bindings: arm: coresight-tnoc: Drop
- arm,primecell to bind on platform bus
-To: Jie Gan <jie.gan@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
- Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
- Abel Vesa <abel.vesa@oss.qualcomm.com>,
- Suzuki K Poulose <suzuki.poulose@arm.com>, Mike Leach <mike.leach@arm.com>,
- James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>,
- Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
- Abel Vesa <abelvesa@kernel.org>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, coresight@lists.linaro.org,
- linux-arm-kernel@lists.infradead.org
-References: <20260707-fix-tracenoc-probe-issue-v5-0-bf733ed9ebd0@oss.qualcomm.com>
- <20260707-fix-tracenoc-probe-issue-v5-1-bf733ed9ebd0@oss.qualcomm.com>
- <20260709-versed-marvellous-pigeon-22e2ba@quoll>
- <e5876525-4568-43bd-8c91-6dc462b18fa3@oss.qualcomm.com>
- <02baada9-3f87-4e60-a469-44af5ebe1afe@kernel.org>
- <c120ec84-c125-4dec-945a-da12624d82e7@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <c120ec84-c125-4dec-945a-da12624d82e7@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260709-ipq5018-bluetooth-v5-1-e476c41f03b8@outlook.com>
+References: <20260709-ipq5018-bluetooth-v5-0-e476c41f03b8@outlook.com>
+In-Reply-To: <20260709-ipq5018-bluetooth-v5-0-e476c41f03b8@outlook.com>
+To: Bartosz Golaszewski <brgl@kernel.org>, 
+ Marcel Holtmann <marcel@holtmann.org>, 
+ Luiz Augusto von Dentz <luiz.dentz@gmail.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Philipp Zabel <p.zabel@pengutronix.de>
+Cc: linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ George Moussalem <george.moussalem@outlook.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1783588713; l=2939;
+ i=george.moussalem@outlook.com; s=20250321; h=from:subject:message-id;
+ bh=FUFR6bvdqLqm5h7c0TMuM1xLAxk28MFZv+PsDoVNsWU=;
+ b=EB+sgeNKPjxQ89m3oxISIrF4smtMJmyUoYw3VxagYKQQhiGaDKS1iQtXB9uflr10ceKsenpPI
+ 4kdTiBhbymoDWYWiGUrzMcg0a3djhSir+lEeRocSHMRWzyHmGv9znlT
+X-Developer-Key: i=george.moussalem@outlook.com; a=ed25519;
+ pk=/PuRTSI9iYiHwcc6Nrde8qF4ZDhJBlUgpHdhsIjnqIk=
+X-Endpoint-Received: by B4 Relay for george.moussalem@outlook.com/20250321
+ with auth_id=364
+X-Original-From: George Moussalem <george.moussalem@outlook.com>
+Reply-To: george.moussalem@outlook.com
 
-On 09/07/2026 11:02, Jie Gan wrote:
->>> The issue is that we are not allowed to introduce a DT property to
->>> bypass the AMBA bus validation, which reads the Component ID (CID)
->>
->> It is the first time "bypass the AMBU bus validation" appears in this
->> patch. You do not see that as a problem?
->>
->> Again, third time and the last: describe the actual hardware and the
->> actual problem coming from the hardware.
-> 
-> Understood, will focus on describe the hardware and the hardware issue.
-> 
-> Commit message description updated like below:
-> 
-> The Aggregator TraceNoC hardware exposes CID registers, but the 
-> Component ID value read from those registers is 0 instead of a valid 
-> AMBA Component ID. As a result, the device cannot be identified by the 
-> AMBA bus and is not discovered as an AMBA device.
-> 
-> Since the hardware does not provide a valid AMBA identification, 
-> describe the Aggregator TraceNoC using a dedicated compatible string and 
-> bind it to the existing platform driver.
-> 
+From: George Moussalem <george.moussalem@outlook.com>
 
-yes, that's good.
+Document the Qualcomm IPQ5018 Bluetooth controller.
 
-Best regards,
-Krzysztof
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Acked-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Signed-off-by: George Moussalem <george.moussalem@outlook.com>
+---
+ .../bindings/net/bluetooth/qcom,ipq5018-bt.yaml    | 87 ++++++++++++++++++++++
+ 1 file changed, 87 insertions(+)
+
+diff --git a/Documentation/devicetree/bindings/net/bluetooth/qcom,ipq5018-bt.yaml b/Documentation/devicetree/bindings/net/bluetooth/qcom,ipq5018-bt.yaml
+new file mode 100644
+index 000000000000..6bd74c01b821
+--- /dev/null
++++ b/Documentation/devicetree/bindings/net/bluetooth/qcom,ipq5018-bt.yaml
+@@ -0,0 +1,87 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/net/bluetooth/qcom,ipq5018-bt.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Qualcomm IPQ5018 Bluetooth
++
++maintainers:
++  - Bartosz Golaszewski <brgl@kernel.org>
++  - George Moussalem <george.moussalem@outlook.com>
++
++properties:
++  compatible:
++    enum:
++      - qcom,ipq5018-bt
++
++  reg:
++    items:
++      - description: |
++          Shared memory for firmware loading and runtime data transport between
++          the host and the Bluetooth controller.
++
++  clocks:
++    items:
++      - description: Bluetooth Subsystem low power oscillator clock
++
++  clock-names:
++    items:
++      - const: lpo
++
++  firmware-name:
++    maxItems: 1
++
++  interrupts:
++    maxItems: 1
++
++  qcom,ipc:
++    $ref: /schemas/types.yaml#/definitions/phandle-array
++    items:
++      - items:
++          - description: syscon node representing the APCS registers
++          - description: offset to the register within the syscon
++          - description: IPC bit within the register
++    description: |
++      The outgoing IPC bit used for signaling the Bluetooth controller of a host
++      event or for sending an ACK if the remote processor expects it.
++
++  resets:
++    items:
++      - description: Bluetooth Subsystem reset
++
++required:
++  - compatible
++  - clocks
++  - clock-names
++  - firmware-name
++  - interrupts
++  - qcom,ipc
++  - reg
++  - resets
++
++allOf:
++  - $ref: bluetooth-controller.yaml#
++  - $ref: qcom,bluetooth-common.yaml
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/clock/qcom,gcc-ipq5018.h>
++    #include <dt-bindings/interrupt-controller/arm-gic.h>
++    #include <dt-bindings/reset/qcom,gcc-ipq5018.h>
++
++    bluetooth@7000000 {
++      compatible = "qcom,ipq5018-bt";
++      reg = <0x07000000 0x58000>;
++
++      firmware-name = "qca/bt_fw_patch.mbn";
++
++      clocks = <&gcc GCC_BTSS_LPO_CLK>;
++      clock-names = "lpo";
++      resets = <&gcc GCC_BTSS_BCR>;
++
++      qcom,ipc = <&apcs_glb 8 23>;
++      interrupts = <GIC_SPI 162 IRQ_TYPE_EDGE_RISING>;
++    };
+
+-- 
+2.53.0
+
+
