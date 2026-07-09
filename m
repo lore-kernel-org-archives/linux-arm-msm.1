@@ -1,166 +1,150 @@
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.133.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7894F3859D7
-	for <linux-arm-msm@vger.kernel.org>; Wed,  8 Jul 2026 22:57:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.133.124
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783551459; cv=none; b=NDURk0RIENzHCbZgBosImDzeX8zEk/or7QKC0h+b9xiCGOB2RmXDRegdnqHNeMmzOsmTLlL8DLzH3am5Z2scI3YAcnbj4KsecoS7GZMytwJ0eky5SYv/7VQwGjprT3KJxTBrb0o/uhF/s2r9kwghRIQkOdx+rX9KaNyVip24xaI=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783551459; c=relaxed/simple;
-	bh=Z50bzthJNfs+JWY+/lA/BczsECHOt62WBTecp9PvTB0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=D9Fr4SBnE49d78RGkJlyk/OdJcN/Kj5VLSwg3NbP6i8zAsIa2ADhDMOYpLYdu7vxU8E47tFzPXdws28u2PaIz/pD1IejlzjwcOlpJwHlBD3gr2vbeuXLjBxLrNvCTL5GiCJTjiAHCwgGn43pnt3Gz+QgcJtR52E1HpQTvaceGKY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=A3rCNkaW; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=nHGV38MK; arc=none smtp.client-ip=170.10.133.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 164C217BA2
+	for <linux-arm-msm@vger.kernel.org>; Thu,  9 Jul 2026 00:06:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.210.181
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783555568; cv=pass; b=OGsveXy9t/UERec0s19XP5ezvdBV+RJ5eVV4L3A5/rbhCXYcd7G0t1bjCYGJNdu4MiUChMYO7OuMv1Wy85u6wC2rhqg639m2VNp9zk5cpeJveNoUjjBMM+RizdiVyvwLi3J+2fA2sQIdvE5z7OJZnFwJTSbCcXXK22rMs8qCgUc=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783555568; c=relaxed/simple;
+	bh=yJaHiIAKdt59/nUs88AHXAG1seHCynr9U+jmRjUBOEg=;
+	h=From:In-Reply-To:References:MIME-Version:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Xr8I7gO+FBZwTiL8OSr00MP+2+VWZooOFx912C0lL86rIGo2mBSyp540K2GSgFj8qb3BhxqLjFM0s/A8e5kA9Mu+WIO4IgR5FbHTESxTpmY0WZu3Evb69KzgQiwJ7rjJN+fIHul5UObb8eal5IhQe27HjmpuYpdAmm6PauxsI6g=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=km73nMuQ; arc=pass smtp.client-ip=209.85.210.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="A3rCNkaW";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="nHGV38MK"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1783551456;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding;
-	bh=fnfpnijAPGtHEmnLcDzWqhyrVqBME7LROfq58vNnkOM=;
-	b=A3rCNkaWqi5egaRC1BLnBBj4/klfQJ85/ADp1e+DMkg0AbLVKSdLM29XQXCOPAloQJxxqi
-	Vi5zEfmaTqWGAaAq4gmlZ3Hcu1Ye3opGuYeRtdi2VYs7Qm6MHv+1OycLCgFgeh8ngTOiqH
-	cDgmQLJYzVt+81MLhNegp3qsx6xNqAE=
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com
- [209.85.160.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-372-6Am_H1DTMKiTajdQZOOQQA-1; Wed, 08 Jul 2026 18:57:35 -0400
-X-MC-Unique: 6Am_H1DTMKiTajdQZOOQQA-1
-X-Mimecast-MFC-AGG-ID: 6Am_H1DTMKiTajdQZOOQQA_1783551455
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51c1d137a68so26968381cf.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 15:57:35 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="km73nMuQ"
+Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-8485bd28dd0so68821b3a.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 08 Jul 2026 17:06:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1783555565; cv=none;
+        d=google.com; s=arc-20260327;
+        b=FKR8q20EcU1Yt+277r/WVcmYTHKJSgifPe5XIHH/rsJ/oWxaIONsWmip1V8PuZ3kVu
+         IJ2gCWoZLyartq5HPJ5R9RGGPv5eKHdCAU1RUjTFteNWh9AjqcsSYhe08nVEDLC1txHy
+         4C6Olv1foGBVpcWs3xwMF0nfVM6quqTQNT8Q6GN8aJCSveMGie+qx6yTkDvJZ4KHyNSN
+         LI3SRzZaEzHRBy0hn+sZzC9i5H2b/gZ3UUtJcAD2zMlRqdjo94zaOOyO/70duHA4B7l1
+         4UkmclSpf0e5+SJ6gkjtDfKkdUtWlEVyZm4gwQOkZW4hFmFMpugHNXh2TFbkP//XQFhS
+         6Y7w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:mime-version:references:in-reply-to
+         :from:dkim-signature;
+        bh=yJaHiIAKdt59/nUs88AHXAG1seHCynr9U+jmRjUBOEg=;
+        fh=mb06rE4BNQwKp5h5GprzkcGWE+4P0icQqlmx00FxZgQ=;
+        b=sP1PvOJi1J+DMqjHcT0OIdpZrfCQpdoKurwBYW1GJEass+GtFNS+wyprgXvY/B/00a
+         fvjAPN+cpjSI3VsZzQfnJdn0jNwkChLvXZ1XK5xkcZCus1heP6hrKqMeD1bnr+1BrDnh
+         3RkbjTDBxKsCWJHE32x6rMcWlQmfq8dmLjh0g2sV47FHHxn8O1Aa195e9PhiMKOKTb4h
+         Ns32zPxfVn7DIse3ge2ap6rNQgItzQjMT9hdMSw1tdq4F4HiRBS4CUY3jObvhdT6oQSA
+         hrIl7xAb7islBplyl/UUQHKrDCQbkxoxzdLrBHPmHpTWVOOo6bnxEOq4Ra38Z5giErfK
+         85YQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1783551455; x=1784156255; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=fnfpnijAPGtHEmnLcDzWqhyrVqBME7LROfq58vNnkOM=;
-        b=nHGV38MKBh4JeA+mTUUWmduke6mKO9/iaOFbAcWvlQp6yzE19tf6f+ulw6/gjxMjYp
-         pTLVeOqasySj5ICsDrkA0gsiF21ybd5aVO4HqTuYvD9WGsLRVlUIoZh0dmR9+SD+CGCl
-         HIOqMTk3Tp0DJyPllXikFNSQlnRrHu/sc9P/C1nxbstD7YLDdj3VrKHgEMQNlAEyXfQ3
-         3RTPMdXiRbd1j7wKfrIwoC5e9NKkBatHEiE5mXJmw0v0l0B+2Nhym2rbD4F8BJ7PFWh1
-         SmBot/8YCRAHid0l6somPGHo5YmJf5+O8uV8ppUrMGATizmA+bdbYwxa4BTuUa5DSCnB
-         F+Xw==
+        d=google.com; s=20251104; t=1783555565; x=1784160365; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:mime-version:references
+         :in-reply-to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=yJaHiIAKdt59/nUs88AHXAG1seHCynr9U+jmRjUBOEg=;
+        b=km73nMuQirX6WkgaiDewtefUUpLqHsLA9lhojmRVu/O5GWXI+qspHLrIcP28hPedd1
+         IdrQ4w2WUGkGZnfsvZbX4i/0vv+f8zy6UYrbx+r+6VAltUS4BsKAcMEEAqGPcoKiR6RJ
+         oJPaYYcMOCkbcbYn6DUg2jPj6RwRgKn8b5KjbPN0LTaLwabP3wAFOO6JrbWd8+/V2xJm
+         8qmB+NxqEb/SagF5FxCEtMVuCK+ov8IPbs0gvdfNk2TGZa0FvtOnzr4ElVQGCDXTFRjv
+         zpPIU07tYAE6O/XcExlihB295hDnRUteCnX4/vklcg+GnLTnFl9WQaUB6cAitmsgQsSS
+         bmvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783551455; x=1784156255;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=fnfpnijAPGtHEmnLcDzWqhyrVqBME7LROfq58vNnkOM=;
-        b=TKipJcm/0Am8AYIA1pWEWBfSX22ZzqmRXlx9u4pslX1vs6YmAXYQuGXB/YN8bzJ+7H
-         JNTWlTV2iODZe5nO1Whb2G5OURPXcUh3zpzUYjGWaNoNXeaolnJzzruuF4ENRSK882aA
-         VzxI2qD4Hj1xa/+6x8BHnon3PI223zsIWrBc0Q7LqSsE+TZhI7IOHgWmvh09/PSCy/ql
-         NDH70bEKeEieCEEOqDiFgSDzC3kLpEz+I4I0p1zptT7Y5mVcxcNp7DLOakTBZZTjNISg
-         DXx+5dm4+8R4QuzwMGt+Q0TlTWRuinnCXUXJC8SSU8qRTVkwVW0i09JXL89eRhALiKH1
-         2hWg==
-X-Gm-Message-State: AOJu0YxoXBD8ELAUloHqECP3CuaQduTzwFSaaY2qKUKK15+OTSBDY9kv
-	ynMc/O/U1svmP2EyrR2+zJm41nGLYtIFVygDN2X52bwp8qLtp0Cf8ZOFN9Aqp9rzmLr66qJvVx7
-	DziPbPR9NjILYKABYtNvfe8Pyf3wTjfxtlJaulsKqSHTzr0zw45Mc0TC3N4+7kCdA0Uk=
-X-Gm-Gg: AfdE7cl2ffebCkWxztFaYP97hWKV+mJ1MNtXKfF0OTqy06vDFKoNvPMbIYB9CnFV+V0
-	YjkRu9sSX4RVmPhXF2t8pV7idtWTAq7yJEMYkbiNVT3uFcBd0yV9ydDZlxHW+tIjtHEGIA4LjMH
-	J4vTmJZShOYTIvlUA7RwhPys/IeevAHE54U9i47fXKldgQlYsUOwJouKv2/AfUQdhjbUtrMLDFl
-	Lpe9SECSECa1Th1rfZ/0s1OY41gNgLGVukVHziJaBF5CW2ofwXZnZ1D4H3lSQM2/heKRNyeReuL
-	sltMSeheieNyeTtOwK0He9aBb4gzftz/eEF02fveIp8zSm2Csu0HA0x+4rQcZGNYlUWT0DBhVuD
-	njtRMKqVyB3Hf
-X-Received: by 2002:ac8:5f8d:0:b0:517:6350:ed4f with SMTP id d75a77b69052e-51c8b3e426amr47450401cf.34.1783551454857;
-        Wed, 08 Jul 2026 15:57:34 -0700 (PDT)
-X-Received: by 2002:ac8:5f8d:0:b0:517:6350:ed4f with SMTP id d75a77b69052e-51c8b3e426amr47450201cf.34.1783551454372;
-        Wed, 08 Jul 2026 15:57:34 -0700 (PDT)
-Received: from [10.239.101.46] ([69.43.42.202])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-51c42038c4bsm145173721cf.31.2026.07.08.15.57.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Jul 2026 15:57:33 -0700 (PDT)
-From: Brian Masney <bmasney@redhat.com>
-Date: Wed, 08 Jul 2026 18:57:25 -0400
-Subject: [PATCH v2] dmaengine: qcom: gpi: correct gchan in error paths
+        d=1e100.net; s=20251104; t=1783555565; x=1784160365;
+        h=content-type:cc:to:subject:message-id:date:mime-version:references
+         :in-reply-to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=yJaHiIAKdt59/nUs88AHXAG1seHCynr9U+jmRjUBOEg=;
+        b=SNG32m9AA5MN1HRHlzA4f+n0Yj5C58UYzdUBj0cZqopB+SmK1Bh8fnR9Q3NHyFPvdH
+         K4b5+dNYkVlYnKmr1lP4GfvNzSClfI6N76kZ/ZTIyP9yVPAHXhiNJEABE/Dk7O+xt3fC
+         1+iYxUFuPYfFofFL+XqWYHF8rAHuT+XQTha8TWybga/cFy8qbv78MDud/S24mJtuMcNj
+         l2pQJS+4n1EVpKUsThFDPw6NeHSaid1GqM06HW+fNo+ajWVX2Nmj5EzPrFV+M17pzTFO
+         Oa9QutPTvqH5b/1cT8Az/hvJxbXSpjJhhenl1ohmEzbU4RkR3FElh15BOX/isrp9kjKh
+         g3Fg==
+X-Forwarded-Encrypted: i=1; AHgh+RrutVVSqcyA12g+XdCJb2g2DJROFmAblq6gC0H6uAKm0JLe9Uti+uZZtZ8YTs733xvZygGkJ8Pih4VAU9SG@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzf0YaZwxodwOgTXhlkK0W3jTmEnqwqzad40R9yGCqRdHsYKiTF
+	IDsEdJSiSRWOgUTxqyms+jQ1F5wIbj7jtXKCMOTP0v4Q3ZI4g38znwr8XpzsgWpZnoPKZtdRxeo
+	ez0z5jugM8Xqbh5XWpI9Nf9aLg549CAmQbtIQtUdv
+X-Gm-Gg: AfdE7clxrLgCSfwzv/AwhKwNYrU+X8oyqA8RB3p57QLjLVdjtUIc++TcNX4roBZQpUo
+	WtHwgvIf33kplthEKKl543vdMYUwYE28DUBl0CoXSOTEHBY4V35rBvS3SlxsSr/0izReJcZMIRS
+	Y/ybJ/2416h867JhE/tXmUCxdekSgPsa6JfzqzCJvwgIJJnIhMeebbpBpqjql04R6J/4139BaBH
+	4x41CocTCTLwH3NaFJhOwf7HxKG0XjP4BPwrWK0PdS+ntYG7EQUSBTqUEjj3ivTXLIoJIz/mG02
+	mLpgWfRzJMwvs+aiyIzrqmjicDVtQ28FKALC/KywYPKmBZvbs4Bkgn/KCALqAVQ4no+AKA==
+X-Received: by 2002:a05:6a21:7482:b0:3b4:669c:ee32 with SMTP id
+ adf61e73a8af0-3c0bcbc1353mr5760887637.37.1783555564841; Wed, 08 Jul 2026
+ 17:06:04 -0700 (PDT)
+Received: from 176938342045 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 8 Jul 2026 17:06:04 -0700
+Received: from 176938342045 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 8 Jul 2026 17:06:03 -0700
+From: Ackerley Tng <ackerleytng@google.com>
+In-Reply-To: <eedf589778aaab33e6df2ad6556dcde536e13460.1782735110.git.ljs@kernel.org>
+References: <cover.1782735110.git.ljs@kernel.org> <eedf589778aaab33e6df2ad6556dcde536e13460.1782735110.git.ljs@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260708-qcom-gpi-err-fix-v2-1-49c9be055501@redhat.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NTQ6CMBBGr0Jm7ZhpkYa48h6ERQNTOgsBp6TRE
- O5u5QAu38v3s0NiFU5wr3ZQzpJkmQvYSwVD9PPEKGNhsGQdOdvga1ieOK2CrIpB3kiOg2lvTe2
- ohVJblYs+J7u+cJS0Lfo5H7L52T9j2aDBZvB1IApsuX4oj9Fv1xKE/jiOL5TCgguxAAAA
-X-Change-ID: 20260625-qcom-gpi-err-fix-06ef18453608
-To: Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- Brian Masney <bmasney@redhat.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2152; i=bmasney@redhat.com;
- s=20250903; h=from:subject:message-id;
- bh=Z50bzthJNfs+JWY+/lA/BczsECHOt62WBTecp9PvTB0=;
- b=owGbwMvMwCW2/dJd9di6A+2Mp9WSGLL8rt5N6bn7Tj/l3IIND9cxLby0n/WZiPt08+UXPxnf6
- 97HJr8go6OUhUGMi0FWTJFlSa5RQUTqKtt7dzRZYOawMoEMYeDiFICJzLdl+Gd08HWX7+wkPs7+
- 9PAwcYOPj/nf5RvNMDGutRIUV+RTtmX4yZjf8EGxYsG9uP+lCgWGRcv5xFQnyOXLctYseLY17tM
- 8HgA=
-X-Developer-Key: i=bmasney@redhat.com; a=openpgp;
- fpr=A46D32705865AA3DDEDC2904B7D2DD275D7EC087
+Date: Wed, 8 Jul 2026 17:06:03 -0700
+X-Gm-Features: AVVi8Ceg-PSWltTScKU18ZF0mdbBsNHDv0s-VKhIaqzjwQ-q80D6zfZMKk_VWII
+Message-ID: <CAEvNRgE-JJAzC0jp+bY8+e1+gYSH+MjT6JqX_DfCcpaxOM-Dtw@mail.gmail.com>
+Subject: Re: [PATCH 15/30] mm: introduce and use linear_page_delta()
+To: Lorenzo Stoakes <ljs@kernel.org>, Andrew Morton <akpm@linux-foundation.org>
+Cc: Russell King <linux@armlinux.org.uk>, Dinh Nguyen <dinguyen@kernel.org>, 
+	Simon Schuster <schuster.simon@siemens-energy.com>, 
+	"James E . J . Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
+	Jarkko Sakkinen <jarkko@kernel.org>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
+	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, 
+	Ian Abbott <abbotti@mev.co.uk>, H Hartley Sweeten <hsweeten@visionengravers.com>, 
+	Lucas Stach <l.stach@pengutronix.de>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, Patrik Jakobsson <patrik.r.jakobsson@gmail.com>, 
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
+	Thomas Zimmermann <tzimmermann@suse.de>, Rob Clark <robin.clark@oss.qualcomm.com>, 
+	Dmitry Baryshkov <lumag@kernel.org>, Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, 
+	Thierry Reding <thierry.reding@kernel.org>, Mikko Perttunen <mperttunen@nvidia.com>, 
+	Jonathan Hunter <jonathanh@nvidia.com>, Christian Koenig <christian.koenig@amd.com>, 
+	Huang Rui <ray.huang@amd.com>, Ankit Agrawal <ankita@nvidia.com>, 
+	Alex Williamson <alex@shazbot.org>, Alexander Viro <viro@zeniv.linux.org.uk>, 
+	Christian Brauner <brauner@kernel.org>, Dan Williams <djbw@kernel.org>, 
+	Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, 
+	David Hildenbrand <david@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
+	"Liam R . Howlett" <liam@infradead.org>, Matthew Wilcox <willy@infradead.org>, 
+	Marek Szyprowski <m.szyprowski@samsung.com>, Peter Zijlstra <peterz@infradead.org>, 
+	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>, 
+	Steven Rostedt <rostedt@goodmis.org>, SeongJae Park <sj@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>, 
+	Hugh Dickins <hughd@google.com>, Mike Rapoport <rppt@kernel.org>, Kees Cook <kees@kernel.org>, 
+	Paolo Bonzini <pbonzini@redhat.com>, linux-kernel@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org, 
+	linux-sgx@vger.kernel.org, etnaviv@lists.freedesktop.org, 
+	dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
+	freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org, 
+	kvm@vger.kernel.org, linux-fsdevel@vger.kernel.org, nvdimm@lists.linux.dev, 
+	linux-mm@kvack.org, iommu@lists.linux.dev, linux-perf-users@vger.kernel.org, 
+	linux-trace-kernel@vger.kernel.org, kasan-dev@googlegroups.com, 
+	damon@lists.linux.dev, Pedro Falcato <pfalcato@suse.de>, Rik van Riel <riel@surriel.com>, 
+	Harry Yoo <harry@kernel.org>, Jann Horn <jannh@google.com>
+Content-Type: text/plain; charset="UTF-8"
 
-When attempting to start the Fedora graphical installer from a USB
-thumbdrive on the Lenovo Thinkpad x13s laptop, the following errors are
-shown in dmesg multiple times:
+Lorenzo Stoakes <ljs@kernel.org> writes:
 
-    kernel: gpi 800000.dma-controller: cmd: CH START completion timeout:0
-    kernel: gpi 800000.dma-controller: Error with cmd:CH START ret:-5
-    kernel: gpi 800000.dma-controller: Error start chan:-5
+> It's often useful to obtain the number of pages a given address lies at
+> within a VMA.
+>
+> Add linear_page_delta() to determine this and update linear_page_index() to
+> make use of it.
+>
+> Add comments to describe both linear_page_delta() and linear_page_index().
+>
+> No functional change intended.
+>
+> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
 
-Looking through the error path, gpi_send_cmd() sends the wrong gchan to
-gpi_send_cmd() in gpi_ch_init()'s error path. Fix this by passing the
-correct gchan in gpi_ch_init()'s error path of gpi_send_cmd().
+Reviewed-by: Ackerley Tng <ackerleytng@google.com>
 
-Fixes: 5d0c3533a19f ("dmaengine: qcom: Add GPI dma driver")
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Brian Masney <bmasney@redhat.com>
-Assisted-by: Claude:claude-opus-4-6
----
-There's a separate issue with the graphical Fedora installer not
-working that I haven't had time to dig into further. I can work
-around it by using the text installer.
-
-Changes in v2:
-- Commit message cleanup as suggested by Frank
-- Commit title cleanup as suggested Konrad
-- Add Konrad's Reviewed-by
-- Link to v1: https://lore.kernel.org/r/20260625-qcom-gpi-err-fix-v1-1-5ca3f00fe2e3@redhat.com
----
- drivers/dma/qcom/gpi.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
-index a5055a6273af..3f390b5821ab 100644
---- a/drivers/dma/qcom/gpi.c
-+++ b/drivers/dma/qcom/gpi.c
-@@ -1965,12 +1965,12 @@ static int gpi_ch_init(struct gchan *gchan)
- error_start_chan:
- 	for (i = i - 1; i >= 0; i--) {
- 		gpi_stop_chan(&gpii->gchan[i]);
--		gpi_send_cmd(gpii, gchan, GPI_CH_CMD_RESET);
-+		gpi_send_cmd(gpii, &gpii->gchan[i], GPI_CH_CMD_RESET);
- 	}
- 	i = 2;
- error_alloc_chan:
- 	for (i = i - 1; i >= 0; i--)
--		gpi_reset_chan(gchan, GPI_CH_CMD_DE_ALLOC);
-+		gpi_reset_chan(&gpii->gchan[i], GPI_CH_CMD_DE_ALLOC);
- error_alloc_ev_ring:
- 	gpi_disable_interrupts(gpii);
- error_config_int:
-
----
-base-commit: 6c94b38b83a04c43ea49004275f0391404051093
-change-id: 20260625-qcom-gpi-err-fix-06ef18453608
-
-Best regards,
--- 
-Brian Masney <bmasney@redhat.com>
-
+>
+> [...snip...]
+>
