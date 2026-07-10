@@ -1,88 +1,89 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8334321F2D
-	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 02:40:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63E2C3242B0
+	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 02:40:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783651214; cv=none; b=o9E00lCdQqfAuNzxLN5yFjyPo5ispPKNLeUSqY3vDxLSyL2iMteBIs/G107HGfnNPW13hBd953G/lsSpYxp/2w34AMDJ6+KHJ2UO75fQDgNQM0Ujld7i+EjfUpmmUL71dtO38FIyaSEKMxVBJjmhynO8aw2PJQg+aG+z7wMhY1s=
+	t=1783651221; cv=none; b=Na2rwROe1CShiOCGDpsUwN0keXfZykyJbvY2v1rEYv041+W+yESet69IPKA1maC/HqI2XWWbhKm7F3n7JUabFeozMiF/OxhEMVlm9uY34uUh61KQQAtcVDWLuSevzk1MGNB2ZU1rsfsuKZg3nnluhDeqvUj0cVjA9l0eujEPLmU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783651214; c=relaxed/simple;
-	bh=35bwKpdCP3dXZ0INIIP+IwE3pIKelQUJ8ujkrV7sSFI=;
+	s=arc-20240116; t=1783651221; c=relaxed/simple;
+	bh=4MVQmgwxUQUw39D/a4v3zOkEzV18aEDsQ8FTgHlTgXk=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=EmA0t7V9ePOK17GM3WxmhOL4cWR98E+CY/kIuvw4MbyoxhJN23a5UFfSPNksRwSwypmwpEvi9B2740omzu+sscoH09RQhvPmym5DI/4h9V8xZ10NCTUaLX7OUXLr0988khWLXWBOQ+3DLl26W7/4iwtT0iq1aHqk8lPJtc+d5pM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=j4i33xMJ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ETJsZ0FP; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=o4U08sMsRpnuReucP6/3AqwR1ep3MvnYB+05xvMMvwX6qH7TbqAvbT7Df8LajgCd3VcYUaIuaBvcnT6teOiPRntWqNMNZtRN0UjRRc0Lai4UshyCaMgaC/offgBtHL9v+CikWR0A3okaG1QXrJbMjB3eDs/VTl5eeExmvHBOdj4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OdkRUdt5; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iH5FLYpK; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="j4i33xMJ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ETJsZ0FP"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66A2WOJg2422271
-	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 02:40:10 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OdkRUdt5";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iH5FLYpK"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 669KZJTX2917921
+	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 02:40:14 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	q2zBHv+smXSmMK9iUNkIcZ5MPC+eZbRWW/+ogeNKyx0=; b=j4i33xMJX4s7gE4D
-	+TMsAfsECmTmDTkfZycjr7AqTezbEtQkJsYzjLp7FkcXDZckCtg8gYe5hcZJlWi+
-	71HrFewKAG4RleTEk1NHlf2zF87gut2GKViLOBA8Pd9RywsVXahWoGy7fz27vQSF
-	6JgKgnI6XfWEd8ssypqrliqiRSf/i7XAOeeVxqDLCxqhzzbIpezgfWVVSeGzSaMT
-	kzoWKcyD0+C29qI6YC/KAR43OfCCPDomCfe8BmHOh6DQ6EvpEllVWzHklGwRRzF9
-	h48WTLEKtp4X5aLlvqPjGG3pyjoAOTTSNDYnKuZkyS/Ggkh8nhuNhDhsoAjr51nS
-	qzmoIQ==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fadvjahua-1
+	8mNKTHss5RCMjCMw1FqMWARAA+Av+jdGhXhUgfnnAQ8=; b=OdkRUdt5AGZY24Ac
+	D4wv9Hd+nCoQCg0YwCcAWBYSpCx9Ce3ulqn9brMuqYEE6EUh+CarLNIE73FUEEbb
+	/B8U6Zuk5IryQaDigiKSULvrHc63C9oB6RSAevvp8RySHR/IIEgCyT9WVbTZqqu8
+	LMEOGoCeYQwi/g//w8LwhdKYt2g1AVvdVy8TJ84sMS7r1/nv0+t2GEmMIrQlXLss
+	bIeVw4FIUvFpHB2FY65TX81Hs6AI0dfUjC2LsbltpQDSmI24LSAJmd92/xLyXGpa
+	wFqppkAgqcSMGCTksXm+CUhfSIqnUVz0+CuYwerHVlJGoD2jp805i39/8KJxtMWV
+	5Mfg/Q==
+Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fajte0ysa-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 02:40:10 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-3855a987c0aso489943a91.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 09 Jul 2026 19:40:10 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 02:40:14 +0000 (GMT)
+Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-84865f326efso480886b3a.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 09 Jul 2026 19:40:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1783651210; x=1784256010; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1783651214; x=1784256014; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=q2zBHv+smXSmMK9iUNkIcZ5MPC+eZbRWW/+ogeNKyx0=;
-        b=ETJsZ0FPg7dSnpw5atbxCm5fLgrQ8ybjP9SVnnHDbngTU1IzuwQD8fm16DjNSCLNTv
-         5dQkTwUjHR/FVdff1ZHQ1iKkqK+T1r25LP+Hdg2ardLI+81Fs3jB3ZX+TtJcHe+PWs3k
-         LJ46U0jk/qZWk+Os+dgVrgwy4OYiBZ1Fx9DGGPAn4z72EbyxEzzlFCNNE3drkpVFEaC4
-         W2WTbPfu0KWq+C8v4emG0WpiUkcACVvnDBO9M+AUDRZdiJjTwzqf80CKf8MOMnIXGCu9
-         1pKLWMVCsYoSuTnJTgUf79fSl6C9j54u+V3BuWYCI91gfk2D3VQ53p4R8ZL/Ln6xoh3v
-         2k0A==
+        bh=8mNKTHss5RCMjCMw1FqMWARAA+Av+jdGhXhUgfnnAQ8=;
+        b=iH5FLYpKvxX8O9PJfRXIOWSOahdIH9pKNP5cQL/+auAjg5udt37q23nFWqRAFC49j2
+         SBx1MSrwcJ6Aicgs957Wh8ldtzKf8wK8Yna7WhKI0Ha5WhM3FpjwV5FnO3elFnETTgBL
+         aoZxFaHJSh4xTZXhggB9H71gC8dLrKaglQUNS/E5wXBEQVUEOR6I39dKw3ptoNu/xNk/
+         1Rh1f50jur274GS0gIR484nuJR4y9coictySVRXK7+PWuHwlfo3v9MXXfz7nL2uvmXWW
+         GLuhMS+LOJ/my3A96NkaiUdG1B95OS4In/lPf1DE255DAIrEgAgIBcBP7AxvE8lmeLNr
+         1MyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783651210; x=1784256010;
+        d=1e100.net; s=20251104; t=1783651214; x=1784256014;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=q2zBHv+smXSmMK9iUNkIcZ5MPC+eZbRWW/+ogeNKyx0=;
-        b=Gt0id38ZAealwHZxNTWT8yabX6CbAJnk/UKoy3fY2aAETf8ejGw/3fzDBNZpG51nhM
-         C5vTm+89IzxyKTyS29DSbsCFtGyXe23fvpL1a8uocKq3lz7uPsryym/x8Mt3dT5/VW4u
-         4Dvizy8iIAYB637LveyoSXhY5fIZSQX6mqGqyt/bxj/qgLQsl75OAvuxFyfo2Jn3nJ8i
-         aWddObI0hlQAmHSiEurIeeVI7+H2wh4aGnSe7wvYFP3y/omWaf3VfJyNZ4Q4Of2rcSCh
-         C8HFhQJVENYsatGhs1QujCAQTwb3/22jaUW6oK4Trl3gzDZNhbfWXGcuCNCL/sx1jbcK
-         TZGQ==
-X-Forwarded-Encrypted: i=1; AHgh+RpDWepFf4alaKHbbKkmHT8TVvRUfQbqR7jbZik3ThI2FFI2IUNRKmP+6ub4VWyUWp8RJOsGXE7hjs6tYEZa@vger.kernel.org
-X-Gm-Message-State: AOJu0YwAab3m3xgUgEprlUJ4WGIvVhmgW+L0tg4sAwvjuHGwjWrThaud
-	yIVokZW33RxGCYHT9rqDBzpXJueOb0Z75qzcABzjNJGy/ypX2EgypXhyU+1FJVGWND500zCl64F
-	gvCV0iLaBfweFJECV9PKWjiPL0a96bB88FXfCyEEm/YOs1pFZtH1eQYyXr3aA7aqIUvVk
-X-Gm-Gg: AfdE7clwjkVRKSlzXwgEZjOpx/YXCyYtXNNX0xc9H46J53+c4y7zLe2386PXACIeEhu
-	alIFiI1L/IE9l9g0XrrrYmu5cPXQdr8dJXRwJH4i9D64XFMNljo+47jXdelcXpQRoz7asAG6fG3
-	3lzq/Sl0L9udlh3yXU4EYDwn11hhDB4SvefNrKoOAYkPFvL4cjQPtPhH4eTBnCVz6GADNB/4sBo
-	hEB+vMYVSudD6bp44EiZ2ESZRSdGpFhF/UpqYN4DPDHPJua1rE/NhpVn8gEejAb18bmRQyHherN
-	qtAQvuu0ZyN7ygGBbsm30CHg1QWWtP4wmgS1s2LT4/TazQCFqYPA3iZuAXvYH64caPfYV2JgCI/
-	varfU3T3si52MR6MpyAhP57gN54wveD9jNiWKiqgiGr2w
-X-Received: by 2002:a17:90b:1d44:b0:37f:d9dc:557 with SMTP id 98e67ed59e1d1-38940638b51mr11721909a91.16.1783651209504;
-        Thu, 09 Jul 2026 19:40:09 -0700 (PDT)
-X-Received: by 2002:a17:90b:1d44:b0:37f:d9dc:557 with SMTP id 98e67ed59e1d1-38940638b51mr11721872a91.16.1783651209072;
-        Thu, 09 Jul 2026 19:40:09 -0700 (PDT)
-Received: from hu-bvisredd-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31174ae6cd9sm38300227eec.31.2026.07.09.19.40.05
+        bh=8mNKTHss5RCMjCMw1FqMWARAA+Av+jdGhXhUgfnnAQ8=;
+        b=b5NY3Svtz7iLW2mz0oCdExFB4vIOdlx3G3CBXn360/+qFGWyL0yZwHlC1EfPpSyBV+
+         asXP5rkj10AhBIzXmtIrWRvIebfRvrlY7nsPqQ3EWEkHtW5f0SHK9kzQHYUistcLtRU4
+         Dn+iyKOvyVDGAjaJthRqPjj2gAl++ZccdOUiSqTDaVHYGMiIE2Gebqzi+IU5ByKEuY4P
+         UJUdDJCJVi8BnjK330NGCiKzE3H2sxlmvFcawZ2LwcbkL7b0rphlwSq6FI6iOVLFJGE0
+         FL+lHJNSb3WRn0ILz7FrnM+2NvqEeEmBOjbQAYl6Op07zddxZA2WW3u8H3Lds+9/DfqC
+         848w==
+X-Forwarded-Encrypted: i=1; AHgh+Rq7TRWRjurKUcCOzpFhdBjlePwwrzaFW6xuVokR32T04icTszsMTvDB9iZHal6Nt1rV35VIWwgblnYzXp4I@vger.kernel.org
+X-Gm-Message-State: AOJu0YytrhGHxqQvithc8YSE3TfWL+8hFeXuWIM34iL23jqgoXr2qK7u
+	DLO0dH9Hq73gkB1UdbxxGAuxSAELuvhvuimPIyOYYs4ZR3DkYGGBxOI1N1Iw16dhfg8C7QQEOYB
+	RaciVHaGm0DOzRvIE5HywqCqUEe/I1Xtzc2KIsr9Gjem8ZCFFDy6Mmndf+1lIhJu7M+Rj
+X-Gm-Gg: AfdE7ck6pbpFe7Zb0HsWjUhKhOwviRgzfkq6JoSo2hfNKwp6/GCE+HhaGjm21ppRt58
+	DM70B9SAXIWYVzLdF4EcC522vWI8PWFMGm+3+XbdFiXRhZBYYApHvrUMQg+bGG5fKIktxDff1Ji
+	oW3YMzeHG/652sjKk6++lT8hwaaCfBvQv+CB8iVognSRqbezETrJ8yQV6t2Otj99nY/pjlK2tcX
+	RRbHgUcvfuVPduL4sJ6nGzGmkL46cxeNbqG7D+PlVgqE9zPOAlAQ+Y+xuuyTlWlHoQn5+fI6QV6
+	5VvdNEje19hv66KI8oaGBMamRRal5r3MxVpgLpww8p6m+bi0KIPWYeNl0xADbZ7FV5Q6q9EdrUa
+	h8cyCCYW9H/etspPRv1stpgkHF0Uf+Ex/q5VeGKFV56Z8JMM2DRK3R4rANAZyNFqRVeNl8gKq3g
+	==
+X-Received: by 2002:a05:6a00:b90:b0:847:439b:ae30 with SMTP id d2e1a72fcca58-84842edd72amr9032063b3a.20.1783651213901;
+        Thu, 09 Jul 2026 19:40:13 -0700 (PDT)
+X-Received: by 2002:a05:6a00:b90:b0:847:439b:ae30 with SMTP id d2e1a72fcca58-84842edd72amr9032022b3a.20.1783651213435;
+        Thu, 09 Jul 2026 19:40:13 -0700 (PDT)
+Received: from jiegan-gv.ap.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-ca5af6df87fsm4517611a12.5.2026.07.09.19.40.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Jul 2026 19:40:08 -0700 (PDT)
-From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-Date: Fri, 10 Jul 2026 08:09:13 +0530
-Subject: [PATCH 2/2] media: iris: add hierarchical coding support for
- ar50lt encoder
+        Thu, 09 Jul 2026 19:40:12 -0700 (PDT)
+From: Jie Gan <jie.gan@oss.qualcomm.com>
+Date: Fri, 10 Jul 2026 10:39:02 +0800
+Subject: [PATCH v6 3/5] arm64: dts: qcom: kaanapali: bind traceNoC on the
+ platform bus
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,261 +92,97 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260710-shikra_ltr_support-v1-2-458b587268ea@oss.qualcomm.com>
-References: <20260710-shikra_ltr_support-v1-0-458b587268ea@oss.qualcomm.com>
-In-Reply-To: <20260710-shikra_ltr_support-v1-0-458b587268ea@oss.qualcomm.com>
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
-        Gourav Kumar <gouravk@qti.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1783651196; l=6390;
- i=busanna.reddy@oss.qualcomm.com; s=20260216; h=from:subject:message-id;
- bh=zQke4TZ0Iyzuzkw4lcAoc8YECKGhYqJX9CxejxA5mFQ=;
- b=Rs0IruUuDUMLeaH68+GMHwMKBHW6T2T5PlOx36vIADaUbGCoKHx8XaJy4wuZDXR/MREkXky/I
- wHRQ09BKKh6DA5HaLnpiOLpm2PagFEAOoC3rD/8kSQDD0mWCxCd/P/J
-X-Developer-Key: i=busanna.reddy@oss.qualcomm.com; a=ed25519;
- pk=9vmy9HahBKVAa+GBFj1yHVbz0ey/ucIs1hrlfx+qtok=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEwMDAyMyBTYWx0ZWRfX5SOBxx+kg8Lt
- rQKU2MMyNmCpuEiaVKAL6tNkCl9L1oy+0m0UeJdCCe/M/S6sQAULT/X2VWwNK9j6Ie4FQ3KGMhp
- IslBEXSqL2GBh3okF0AqBz3HNjE7tq8GLZk6dmgRC8mkts0+7WlWrqwxEI9pl9mZniBRFupDsG/
- N4+3bWhX3HVPAFIHiBE+zkTbD/qVg84ljum6llYHF+EVioKqrn13txZiGb92WjISnLFIhTXad0j
- cFBigrlmHG/cJXVi8tPlxFD8WZ+VndkgG9kSKHsoQiXwWujsJ1AeJ0BUC07cP/q+m3nur/RiTSr
- j9Sd3CSdhFUCn1hwDsh8RDI9y8gyk5TKiuFm7aTcM9ztxzVP/uk/7PRP/Mh0ibHxeT1axiqoxiK
- a49d3aDti4yJEyp5tEO7G+VCDCO8TgFa192iczlCi2qnHScSkgHB+iaaYNf21hyTtJW9aePvPVJ
- 6xPbN/xrcdMG4cpuBGg==
-X-Authority-Analysis: v=2.4 cv=WpIb99fv c=1 sm=1 tr=0 ts=6a505b8a cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+Message-Id: <20260710-fix-tracenoc-probe-issue-v6-3-41eb36fef8d9@oss.qualcomm.com>
+References: <20260710-fix-tracenoc-probe-issue-v6-0-41eb36fef8d9@oss.qualcomm.com>
+In-Reply-To: <20260710-fix-tracenoc-probe-issue-v6-0-41eb36fef8d9@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
+        Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+        Jie Gan <jie.gan@oss.qualcomm.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Mike Leach <mike.leach@arm.com>, James Clark <james.clark@linaro.org>,
+        Leo Yan <leo.yan@arm.com>,
+        Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
+        Abel Vesa <abelvesa@kernel.org>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, coresight@lists.linaro.org,
+        linux-arm-kernel@lists.infradead.org
+X-Mailer: b4 0.14.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1783651186; l=1634;
+ i=jie.gan@oss.qualcomm.com; s=20250909; h=from:subject:message-id;
+ bh=4MVQmgwxUQUw39D/a4v3zOkEzV18aEDsQ8FTgHlTgXk=;
+ b=9id1mYjoy80wRtGxcFyPA7kI5SvnAWvY6ixcWCAoVlNUvjuYNtKp78orzdxBYjBm3CXiuwuyC
+ YYkFpe+JU/eBbIMC4Qiu2TzEhjOIALL95aS8NE6B/Vnki47ITGNGYJF
+X-Developer-Key: i=jie.gan@oss.qualcomm.com; a=ed25519;
+ pk=3LxxUZRPCNkvPDlWOvXfJNqNO4SfGdy3eghMb8puHuk=
+X-Proofpoint-GUID: z5ogsk5PjEXzL2hgfESDdOrXJFuK1FQ2
+X-Proofpoint-ORIG-GUID: z5ogsk5PjEXzL2hgfESDdOrXJFuK1FQ2
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEwMDAyMyBTYWx0ZWRfX51jUgEAY6oEb
+ 5Z+pID7PNp1A5+V9KSvvA39PfzTbGzuhOi3n/NX34xS1ZgIojY1lXVOdS6d0329wCHjwuoP/2bq
+ /fJ3CnCHEVJWh9/p3NVY8p683x4jZeH69lDayMAy1dD46yyZ3FcDK3aZrZWET1FGi8MSFdSrOK3
+ SIm4DpxyukYiw/ucYc9rd7KnLws5wLt5rsT3o33eZinVt5peRfwuo2eH1pbqhHl+Zq/7cNqgiGk
+ ic6SWInOw/ATiK+JBCq9WkxxMNTUfNg8dF1Dxl7Wch6BiLiuNpbrgGhBRAb7x9RcTfBEMV9VUk1
+ iBw8U35v/KO2FamG/AiAiA1kmb+7RacjA5+JFBMiOif306qzP/Fipqdd4bA7y8Tpm4Q1EQTFsfv
+ qhxAu21hYQkP6mYZSfy4rd1IU7MYnE6hR7r2fXZezRX7WnwCIZFzESbqcaVuarmceFeQJIu/BlX
+ OTBi1sktSKSPC4etW6A==
+X-Authority-Analysis: v=2.4 cv=N7MZ0W9B c=1 sm=1 tr=0 ts=6a505b8e cx=c_pps
+ a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=jI2tO5MT3nXOp3B53W8A:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-GUID: m4rJk5xzHaGHDh8iVww8F_1aaI-fPgAC
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEwMDAyMyBTYWx0ZWRfXxAJqkjYjstnN
- Stdm4bpDr+HmOUK52w61pIy407dhl/Ux1Pkw/TP6cpJN8TroiSeu1ICmsNZ8IG77YE0V3jBe191
- bYeI0BvETCi/t02kWFWHn9T4Sz627Xo=
-X-Proofpoint-ORIG-GUID: m4rJk5xzHaGHDh8iVww8F_1aaI-fPgAC
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=7Rut49xxg77_icr6qwgA:9 a=QEXdDO2ut3YA:10
+ a=zc0IvFSfCIW2DFIPzwfm:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEwMDAyMyBTYWx0ZWRfX77Fy+L4qoy9n
+ iuQ5iTHELgSghFkg9IgsL/SLEYg43E2wTLyAOJgUz+dP+qp/sJ2c6g1R2tJzqnBxgc3KP5CDN94
+ AWoq3IncB/GMinOuAgJyTjjbBLlYXQQ=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-09_04,2026-07-09_04,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 adultscore=0 lowpriorityscore=0
- clxscore=1015 malwarescore=0 phishscore=0 spamscore=0 bulkscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607100023
+ clxscore=1015 spamscore=0 impostorscore=0 suspectscore=0 adultscore=0
+ malwarescore=0 phishscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607100023
 
-From: Gourav Kumar <gouravk@qti.qualcomm.com>
+The traceNoC node used the "qcom,coresight-tnoc", "arm,primecell"
+compatible, which places the device on the AMBA bus. To bind an AMBA
+device, the bus reads the peripheral and component ID registers (PID/CID)
+at the top of the device's register block and matches them against the
+primecell ID. The traceNoC exposes the CID registers, but the Component ID
+value returned by the hardware is 0x00000000 instead of a valid AMBA
+Component ID, so the match never succeeds, the AMBA probe fails, and the
+device is left stuck in deferred probe indefinitely.
 
-Add LAYER_ENABLE, LAYER_TYPE_H264/HEVC, LAYER_COUNT_H264/HEVC and
-per-layer bitrate fw_caps entries to inst_fw_cap_gen2_ar50lt_enc,
-enabling V4L2_CID_MPEG_VIDEO_H264_HIERARCHICAL_CODING and related
-hierarchical/layered encoding controls for ar50lt platforms.
+Drop the "arm,primecell" entry and use the standalone "qcom,coresight-tnoc"
+compatible, which binds via the platform driver by compatible string and
+does not rely on the component ID register at all. This lets the device
+probe on hardware that does not return a valid CID, while remaining an
+Aggregator TNOC that retains ATID functionality.
 
-Signed-off-by: Gourav Kumar <gouravk@qti.qualcomm.com>
-Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+Fixes: f73959d86c15 ("arm64: dts: qcom: kaanapali: add coresight nodes")
+Signed-off-by: Jie Gan <jie.gan@oss.qualcomm.com>
 ---
- drivers/media/platform/qcom/iris/iris_hfi_gen2.c | 182 +++++++++++++++++++++++
- 1 file changed, 182 insertions(+)
+ arch/arm64/boot/dts/qcom/kaanapali.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
-index ae0512971e8a..74115e15edbc 100644
---- a/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
-+++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
-@@ -1699,6 +1699,188 @@ static const struct platform_inst_fw_cap inst_fw_cap_gen2_ar50lt_enc[] = {
- 		.flags = CAP_FLAG_INPUT_PORT | CAP_FLAG_DYNAMIC_ALLOWED,
- 		.set = iris_set_use_and_mark_ltr,
- 	},
-+	{
-+		.cap_id = LAYER_ENABLE,
-+		.min = 0,
-+		.max = 1,
-+		.step_or_mask = 1,
-+		.value = 0,
-+		.flags = CAP_FLAG_OUTPUT_PORT,
-+	},
-+	{
-+		.cap_id = LAYER_TYPE_H264,
-+		.min = V4L2_MPEG_VIDEO_H264_HIERARCHICAL_CODING_B,
-+		.max = V4L2_MPEG_VIDEO_H264_HIERARCHICAL_CODING_P,
-+		.step_or_mask = BIT(V4L2_MPEG_VIDEO_H264_HIERARCHICAL_CODING_B) |
-+				BIT(V4L2_MPEG_VIDEO_H264_HIERARCHICAL_CODING_P),
-+		.value = V4L2_MPEG_VIDEO_H264_HIERARCHICAL_CODING_P,
-+		.hfi_id = HFI_PROP_LAYER_ENCODING_TYPE,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_MENU,
-+		.set = iris_set_layer_type,
-+	},
-+	{
-+		.cap_id = LAYER_TYPE_HEVC,
-+		.min = V4L2_MPEG_VIDEO_HEVC_HIERARCHICAL_CODING_B,
-+		.max = V4L2_MPEG_VIDEO_HEVC_HIERARCHICAL_CODING_P,
-+		.step_or_mask = BIT(V4L2_MPEG_VIDEO_HEVC_HIERARCHICAL_CODING_B) |
-+				BIT(V4L2_MPEG_VIDEO_HEVC_HIERARCHICAL_CODING_P),
-+		.value = V4L2_MPEG_VIDEO_HEVC_HIERARCHICAL_CODING_P,
-+		.hfi_id = HFI_PROP_LAYER_ENCODING_TYPE,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_MENU,
-+		.set = iris_set_layer_type,
-+	},
-+	{
-+		.cap_id = LAYER_COUNT_H264,
-+		.min = 0,
-+		.max = 5,
-+		.step_or_mask = 1,
-+		.value = 0,
-+		.hfi_id = HFI_PROP_LAYER_COUNT,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_DYNAMIC_ALLOWED,
-+		.set = iris_set_layer_count_gen2,
-+	},
-+	{
-+		.cap_id = LAYER_COUNT_HEVC,
-+		.min = 0,
-+		.max = 5,
-+		.step_or_mask = 1,
-+		.value = 0,
-+		.hfi_id = HFI_PROP_LAYER_COUNT,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_DYNAMIC_ALLOWED,
-+		.set = iris_set_layer_count_gen2,
-+	},
-+	{
-+		.cap_id = LAYER0_BITRATE_H264,
-+		.min = 1,
-+		.max = BITRATE_MAX_AR50LT,
-+		.step_or_mask = 1,
-+		.value = BITRATE_DEFAULT_AR50LT,
-+		.hfi_id = HFI_PROP_BITRATE_LAYER1,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
-+			CAP_FLAG_DYNAMIC_ALLOWED,
-+		.set = iris_set_layer_bitrate,
-+	},
-+	{
-+		.cap_id = LAYER1_BITRATE_H264,
-+		.min = 1,
-+		.max = BITRATE_MAX_AR50LT,
-+		.step_or_mask = 1,
-+		.value = BITRATE_DEFAULT_AR50LT,
-+		.hfi_id = HFI_PROP_BITRATE_LAYER2,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
-+			CAP_FLAG_DYNAMIC_ALLOWED,
-+		.set = iris_set_layer_bitrate,
-+	},
-+	{
-+		.cap_id = LAYER2_BITRATE_H264,
-+		.min = 1,
-+		.max = BITRATE_MAX_AR50LT,
-+		.step_or_mask = 1,
-+		.value = BITRATE_DEFAULT_AR50LT,
-+		.hfi_id = HFI_PROP_BITRATE_LAYER3,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
-+			CAP_FLAG_DYNAMIC_ALLOWED,
-+		.set = iris_set_layer_bitrate,
-+	},
-+	{
-+		.cap_id = LAYER3_BITRATE_H264,
-+		.min = 1,
-+		.max = BITRATE_MAX_AR50LT,
-+		.step_or_mask = 1,
-+		.value = BITRATE_DEFAULT_AR50LT,
-+		.hfi_id = HFI_PROP_BITRATE_LAYER4,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
-+			CAP_FLAG_DYNAMIC_ALLOWED,
-+		.set = iris_set_layer_bitrate,
-+	},
-+	{
-+		.cap_id = LAYER4_BITRATE_H264,
-+		.min = 1,
-+		.max = BITRATE_MAX_AR50LT,
-+		.step_or_mask = 1,
-+		.value = BITRATE_DEFAULT_AR50LT,
-+		.hfi_id = HFI_PROP_BITRATE_LAYER5,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
-+			CAP_FLAG_DYNAMIC_ALLOWED,
-+		.set = iris_set_layer_bitrate,
-+	},
-+	{
-+		.cap_id = LAYER5_BITRATE_H264,
-+		.min = 1,
-+		.max = BITRATE_MAX_AR50LT,
-+		.step_or_mask = 1,
-+		.value = BITRATE_DEFAULT_AR50LT,
-+		.hfi_id = HFI_PROP_BITRATE_LAYER6,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
-+			CAP_FLAG_DYNAMIC_ALLOWED,
-+		.set = iris_set_layer_bitrate,
-+	},
-+	{
-+		.cap_id = LAYER0_BITRATE_HEVC,
-+		.min = 1,
-+		.max = BITRATE_MAX_AR50LT,
-+		.step_or_mask = 1,
-+		.value = BITRATE_DEFAULT_AR50LT,
-+		.hfi_id = HFI_PROP_BITRATE_LAYER1,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
-+			CAP_FLAG_DYNAMIC_ALLOWED,
-+		.set = iris_set_layer_bitrate,
-+	},
-+	{
-+		.cap_id = LAYER1_BITRATE_HEVC,
-+		.min = 1,
-+		.max = BITRATE_MAX_AR50LT,
-+		.step_or_mask = 1,
-+		.value = BITRATE_DEFAULT_AR50LT,
-+		.hfi_id = HFI_PROP_BITRATE_LAYER2,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
-+			CAP_FLAG_DYNAMIC_ALLOWED,
-+		.set = iris_set_layer_bitrate,
-+	},
-+	{
-+		.cap_id = LAYER2_BITRATE_HEVC,
-+		.min = 1,
-+		.max = BITRATE_MAX_AR50LT,
-+		.step_or_mask = 1,
-+		.value = BITRATE_DEFAULT_AR50LT,
-+		.hfi_id = HFI_PROP_BITRATE_LAYER3,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
-+			CAP_FLAG_DYNAMIC_ALLOWED,
-+		.set = iris_set_layer_bitrate,
-+	},
-+	{
-+		.cap_id = LAYER3_BITRATE_HEVC,
-+		.min = 1,
-+		.max = BITRATE_MAX_AR50LT,
-+		.step_or_mask = 1,
-+		.value = BITRATE_DEFAULT_AR50LT,
-+		.hfi_id = HFI_PROP_BITRATE_LAYER4,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
-+			CAP_FLAG_DYNAMIC_ALLOWED,
-+		.set = iris_set_layer_bitrate,
-+	},
-+	{
-+		.cap_id = LAYER4_BITRATE_HEVC,
-+		.min = 1,
-+		.max = BITRATE_MAX_AR50LT,
-+		.step_or_mask = 1,
-+		.value = BITRATE_DEFAULT_AR50LT,
-+		.hfi_id = HFI_PROP_BITRATE_LAYER5,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
-+			CAP_FLAG_DYNAMIC_ALLOWED,
-+		.set = iris_set_layer_bitrate,
-+	},
-+	{
-+		.cap_id = LAYER5_BITRATE_HEVC,
-+		.min = 1,
-+		.max = BITRATE_MAX_AR50LT,
-+		.step_or_mask = 1,
-+		.value = BITRATE_DEFAULT_AR50LT,
-+		.hfi_id = HFI_PROP_BITRATE_LAYER6,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
-+			CAP_FLAG_DYNAMIC_ALLOWED,
-+		.set = iris_set_layer_bitrate,
-+	},
- };
+diff --git a/arch/arm64/boot/dts/qcom/kaanapali.dtsi b/arch/arm64/boot/dts/qcom/kaanapali.dtsi
+index 7aa9653bd456..5d0e7e8c2e58 100644
+--- a/arch/arm64/boot/dts/qcom/kaanapali.dtsi
++++ b/arch/arm64/boot/dts/qcom/kaanapali.dtsi
+@@ -5004,7 +5004,7 @@ tpdm_pcie_rscc_out: endpoint {
+ 		};
  
- static const u32 iris_hfi_gen2_ar50lt_dec_ip_int_buf_tbl[] = {
+ 		tn@111b8000 {
+-			compatible = "qcom,coresight-tnoc", "arm,primecell";
++			compatible = "qcom,coresight-tnoc";
+ 			reg = <0x0 0x111b8000 0x0 0x4200>;
+ 
+ 			clocks = <&aoss_qmp>;
 
 -- 
 2.34.1
