@@ -1,65 +1,89 @@
-Received: from mail-ed1-f52.google.com (mail-ed1-f52.google.com [209.85.208.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A54033F1AC8
-	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 09:55:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB0323FAE09
+	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 09:57:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783677313; cv=none; b=dpjzcLtzAKIx2eOSVG3EGME0qV9NhULYU5va6Kwvunv3HN7mxD/Ce2DDRg6EWjsIaCtqj8RjCXASUilNyTdVK97wdmCkGp7Cw8w4ZOp2ogCPuYuaF+rpvuAgowD+8qrociY3i7d8xzM6LBj2NijX+kojOBCBmQEExjyz5NGzdVU=
+	t=1783677455; cv=none; b=gSCglIW7UO89/ygaYXSzIMiVwV8wK3V6+gCOyqEqKJmdIoLogyX5E+/7Gzu6WOuI/WgjzFlMmNY/k14/zomXEuKT4KeYsY0AccFyixhRgEBiwxPL8TKeWdUqk+rRLjcjNRLAeBb5gM0GmIb9CddybdVtAG676ppVD5lPoDc0S68=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783677313; c=relaxed/simple;
-	bh=PYaQlk7YAPrQ041M/bvdqcr1+tAUHuw1nB/hxRtlWPQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=ALGDRJ/XJLLUrwkGgW7oY6vNfYTMcBCouZn5qE0AsJfXqk+r6H7WgAzr2HyZagaOrpfYFVaz2Y7LU4W0i+aMaF76slVUWXM9GedpaKZraKRZPvR1K646XFCIhhFI74WLIqfkTRqmf7c3WF3XmG67UT6OZ4oqt41ZQYsq1I/W4/I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=oJ1OwsRU; arc=none smtp.client-ip=209.85.208.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+	s=arc-20240116; t=1783677455; c=relaxed/simple;
+	bh=BC1i5CTT8hEROlpRriYXpfyJBmL+KtWxwcFIQuJ74ik=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=GPNiRHjnOJlzsJgV2OtR4ww4L2M+foPiJCwvGHRFtRw3oCaStaq0DCF8wvb99VbPHgajKZCT6uJCltmpy4hGZ9eCMZTvEKuDcuR2QbJCkdLq1rzk5tIbVWJrIbwZaHrsoT9GABTbPQRLQPm4V62gKVuY9SdFvt5xyJKtT1z1efE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Fyf/j1sP; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SWn3+Q8Y; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="oJ1OwsRU"
-Received: by mail-ed1-f52.google.com with SMTP id 4fb4d7f45d1cf-698beff7178so1362827a12.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 02:55:10 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Fyf/j1sP";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SWn3+Q8Y"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66A7dhHh4156649
+	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 09:57:33 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=eCe+9upivq7I1QkHqTrfks
+	jrU/cl381iB5pepWLOaAk=; b=Fyf/j1sPQXJaruPX6ZgdSINKXnpfWASglcf39Q
+	hd/RgeCONCE1aCcn6LmVn6sMYC5ifOpqnvhL1VW5MJKds+jTUoQIDbWz7RQpEC0r
+	s6fHYdrO1goz3nIhC1+x5T8vVuPqAs8ZC81nSYftZCe5NgfEhSh+2zRoLI4f6URO
+	Rkrx8LEil+AydnyakdpOUUcqIhiuCAlV9zRkAMe+HKi5IX4LiHFnJH8VkWBeuFxO
+	hliK7P3Akc278C5aJii8WUJKZy4jHyu9Os/b+or1rHMFTWISvYZVbmSsCJwirR77
+	vIH918QNKrlgsPDaAy0QQQ6giN+QSHtQnu++yL/0q5w5R6iw==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fahv8jr0q-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 09:57:32 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c1c7f135bso13037581cf.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 02:57:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1783677309; x=1784282109; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+        d=oss.qualcomm.com; s=google; t=1783677452; x=1784282252; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=Au4v6cU7MBsP2sPvCvHMdLpV1qE/Ythj9i6e9ev27jE=;
-        b=oJ1OwsRUV46RFfdUQBdY1bFjrXlxV/DcYyafzidK7UlvZnEUC9TMJKqmwLy6iV7Ho9
-         I8jflLJjnC7mVyIVQOQCfATIQTjzTXg+vXQ32O0p8afiYWzBEhoVgUL+KPspRGRbjtVf
-         J6LOYQ+EXSZX0UcX8bTmjar5497jKhtWAqelMi8Ns5MU5j8ZsKWDHhCJ6mPh5iAZxCN5
-         g/Fnc3kSa3+N777cSRfm+vuUIWVXQpH3/FJg3Txb238wZk+3FhZa0bqk5mQlnngA1BXF
-         E8WIjMSlfRBGExVgQZuPT36FZ+1M4nYHNBXvMulV0dRGyqBKir6FR0xNqZShjYGraxjE
-         +rvg==
+        bh=eCe+9upivq7I1QkHqTrfksjrU/cl381iB5pepWLOaAk=;
+        b=SWn3+Q8YnbjgQaLMCHFwnUwRfumL1xp1UwF9eH53ml+QUZCy6K4tGFMs7xE0oNyrpD
+         0EFvxx82/829oTRYys0umuV7vZdjgK4+JzB4pKbyoZXlC6NCLegPP4GCq1jpgDJKDfdA
+         ZL1iYYQoeyEeIj/hZiJlto6fcHTbcH9QlTRBMm5QnArv4H6zrhyiJdeubzKXZ981IJ/C
+         3yTautOETutiiBu3xNhT9f6aDN3oA2qrEyGC3ZdzHrN0rKtpRAcO50oqDfkaF+qhhomQ
+         a147d+iagd+cDyvLs3ZOl2gvF1P7ycqiHXuXIPuMqBVHp0X37qR00d/LN/sxUVnc6Py5
+         2V/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783677309; x=1784282109;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=Au4v6cU7MBsP2sPvCvHMdLpV1qE/Ythj9i6e9ev27jE=;
-        b=Xm8HRbXYiPVG5OK6gjEekU8KP3VeJhgAIduXegN0c7WxZPnkXu2PU7vqX/ahFoeQkh
-         teZm6RQ4x4UoSOkZ2LVcMsJfec5cevfvrep8/iOYWQVjNQexXnKBk/ADfUDb5i8BrtAK
-         Uhy1sn6EUB24Z/J1Sde1YgSSf8ui33pKgy+ywDHYlUwCO/77ViD3Rmv83XmvDDLHpuhb
-         QZIul/wMGK7fj0wMFFkY0QwtX3+2+rmr6KLvyQInzU+El/GEAGy6aC1iiL7VxDvjA9B7
-         E768MHen8/HwyS7tm1CjrV7LlTNl2VS308qIBf1L7xexG7LIWIG3r9E6XZosN7j94CQ7
-         iklA==
-X-Forwarded-Encrypted: i=1; AHgh+Rp0i3JVMKFnhJ1CIFt9eJ4Ih9F4m2iu4A/EmGb2GEjJIiOfsvSvUcHfY9KabYmdr/q1UnM6VQT5ZoOuJ9E9@vger.kernel.org
-X-Gm-Message-State: AOJu0YxPnrMHA3IofLClIFWWWkb46IDL+JMaRsuf6dDRCuV7IM2xZI+R
-	vRp+Z7n5ncA3LB89BiTbioxh0624Y7467NVhZrS1VqrDuCEwk5+WdwT5/lM/NWlSynw=
-X-Gm-Gg: AfdE7cnNZ4E9ti8MYGhckAkbJprEEOSSfaZQerOlpDVFXrAujNlLfbHNNj1ngDXEAzF
-	ArK6vUuaSfTZyxUKolvIVATK48tUUMI+f2G3KayazPA7pe+bFtccT1ZYxre+i8sOriZwlfpiUg1
-	Lfjz0KeMCTCzrQ6j9TVSPZkHw7PtcyaRvS/JRV0s3hVF7dDV474ezLrD6jIy8XowvSfP+xBxo+e
-	X9mQ9v9vZwy22HUTMaViBHTL1med69Cw0juK3wpYwBzFmuspwhxXRpfEXDH9jfHi7gQnRoQNHiO
-	iy1GPkhWnyDPIHq0qFey9taAPtYIlJkieLlp9Lh3uhmlnj0cMdXevoI3JGMpu6OVKgb6267TPI0
-	GQqgxX0ofLIq9MySjRve3IwOw5WznO1aJLBUi+Cjg3I/yk6FmDEhz6pE0ebh8S5GMe/wqwyGtWa
-	gSaQ31/CSlf+4hPbNa/75vsFqAfnKrEqt/JVU/Mu+79xr5wF9WIVLUTHCMLXdOPLTpie0=
-X-Received: by 2002:a17:907:a2cb:b0:c06:f67e:ed9 with SMTP id a640c23a62f3a-c15ce06fb21mr479808066b.10.1783677309069;
-        Fri, 10 Jul 2026 02:55:09 -0700 (PDT)
-Received: from [172.16.220.101] (144-178-202-138.static.ef-service.nl. [144.178.202.138])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c15bb51af39sm502892966b.29.2026.07.10.02.55.08
+        d=1e100.net; s=20251104; t=1783677452; x=1784282252;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=eCe+9upivq7I1QkHqTrfksjrU/cl381iB5pepWLOaAk=;
+        b=hjCdnAnlIJ9ak3VIGOlQrQTuOLaSll7+3Z78aWBhtSRkAoh/LeslRQ97fxNQdDfBy9
+         AHqdu3ggna70T/tZK8PuFH725JxN0RYnif0FkUK4EsrqYBsCBVwMoCV5acIUzHWOJIyo
+         njRmJLDNU9Ii8SGi+AIqbupkL9uS2r38hFSz8ORLrZYGSiKK5yE9Kf/HwshnIUaTca9c
+         CYnTxHjKzO+c9rWk914WKnvL46S1i53o0LuelpOXfMs7hWuaVvqqUWgsdJSMU5H9cfTQ
+         NUQjEj9y+MeIVLkcVHGVk7sXJL5CqC+eW8zVXizopQMFe1rsPa+0Dz0ZNiOcSq5HC9DA
+         PDUw==
+X-Forwarded-Encrypted: i=1; AHgh+RoREj/4xHZf69B3GrLzAGsaqBtSz6g2YRQj5Hf6Okhsu0uTWexSP/kZBKsB1jrsNPqASBg0Y33cyiU8dCRQ@vger.kernel.org
+X-Gm-Message-State: AOJu0YyEE9DejTjp0Iu/C8ZTQMv/fhTswxQ1yxFYHShLFuTafCaMJihr
+	p0GhBAVqJVwToD2i+Nt2NzGfVT7iB00ZRsuxlZNsTsNH4L+y8pV02WauitrHhqi4CNHUMV4b/JB
+	jc1ErmjQdcJx9ksd2ZTRWvcwHZispum5oI73YX4U1p6diebRif3uPuP/VjPKOFN58aLWBdCCtri
+	7f4rw=
+X-Gm-Gg: AfdE7cmxSFnxA0jF5p6dJW9ODXmssCQrpxJ+lsFFBn//jqtAKTGiu1Oa0g5E9l8nyAZ
+	eHzyq8fblw2tNIRu/LYtwUHtE7/9k6DkQYRH2Vw0k//HtZ+t4ZiDoCrQTmHrecvrnbQwXtNxo1s
+	8gMFIptz5asevHmSnESxO+vHu+UdPt5utWuBTXQReRHe8Z4HXKmdJUkzVGtvDofy39DYHov0kyG
+	opfko85wUHuzl4Py1qaNoQLoMdspZQRokEEKScp1MVB7rOXw52ZvyjZJSQM4TiCqkcKk0jeXRDM
+	pKnZ/NbX1eDQM+Ir+Nr1nuSp4JBRbFgnRIji2iTK6T+MtSp9ypXfjxwguKzGZ4ksU3z0m5MhgjE
+	Y3q8cDQRNa8dP1yRwSL/UbooqJfLnodNgqptVJ8PveRMP66VPobZJsC+XS4uyiX3jblfxHjrjuv
+	aQ/wzG1n0I5PIIlUMi3APhtW4gJmLnj5O3l9aCIGHWr6ITfFeO4AF+WWyq10+6h9KyGHh0uSeUa
+	qFe6qEsLLlzqWULotAQ
+X-Received: by 2002:a05:622a:1c0d:b0:51a:8c97:fb94 with SMTP id d75a77b69052e-51c8b4bacb6mr108170081cf.61.1783677451902;
+        Fri, 10 Jul 2026 02:57:31 -0700 (PDT)
+X-Received: by 2002:a05:622a:1c0d:b0:51a:8c97:fb94 with SMTP id d75a77b69052e-51c8b4bacb6mr108169921cf.61.1783677451484;
+        Fri, 10 Jul 2026 02:57:31 -0700 (PDT)
+Received: from QCOM-eG0v1AUPpu.na.qualcomm.com (82-64-236-198.subs.proxad.net. [82.64.236.198])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c15dfda815dsm265357966b.36.2026.07.10.02.57.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 10 Jul 2026 02:55:08 -0700 (PDT)
-From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Fri, 10 Jul 2026 11:53:57 +0200
-Subject: [PATCH] arm64: dts: qcom: milos: Add reset for sdhc_2
+        Fri, 10 Jul 2026 02:57:30 -0700 (PDT)
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Subject: [PATCH v3 00/11] arm64: dts: monaco-arduino-monza: Add support for
+ LGA WiFi/BT module
+Date: Fri, 10 Jul 2026 11:57:26 +0200
+Message-Id: <20260710-monza-wireless-v3-0-46253587af64@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -68,56 +92,137 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260710-milos-sdhc2-reset-v1-1-c7a155a517ba@fairphone.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBBG4avIrDuQBEylVyld1PG3TmlVMiqCe
- Hdju/wW721kSAqjW7FRwqKmQ5/hLwVJ9+xfYG2yKbgQ3dU7/upnMLamk8AJhokrRO9jKVLWFeV
- uTGh1/T3vj79trt+Q6RzRvh/v8YP/dQAAAA==
-X-Change-ID: 20260710-milos-sdhc2-reset-8e61165cc5b8
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Luca Weiss <luca.weiss@fairphone.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1783677308; l=848;
- i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=PYaQlk7YAPrQ041M/bvdqcr1+tAUHuw1nB/hxRtlWPQ=;
- b=tBUxYIBAa0gg6mhoBBDXd7hHoXWxfEi7SSUfj8X/YkiBcJKxuJwdW6iSBv023QxwCayIGFH8I
- dmYEDZooJ8cDoA9dMOQgOhPC9SQ2bLu2B8Nr3kg6izhXLzS9N4BAP88
-X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
- pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
+X-B4-Tracking: v=1; b=H4sIAAbCUGoC/3WPy26DMBBFfwV53UF+YQdUVfmPqAsDQ2MphmATp
+ 23Ev9eYRRdpNyPdkeacuQ8S0FsMpCkexGO0wU5jCuKlIN3ZjB8Itk+ZcMoVrTgFN43fBu7W4wV
+ DAFQd6oEyMYgDSUdXj4P9zMDT+549zrfEXfYlcenMZG5TvO5YquF69wFncBzaBSIHCkxL2vZSH
+ ypRH6cQyvlmLt3kXJnG2+ZqTUDYNnZpiqhLBr6TZLOebVgm/5VbRZa1/xWILLnqQdWSC0ZVJZ5
+ cmRj5L0VT/kTZPtZtpZAbZVQv/6Cs6/oDoN8SCG8BAAA=
+X-Change-ID: 20260520-monza-wireless-e6ce7f013f38
+To: Manivannan Sadhasivam <mani@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Marcel Holtmann <marcel@holtmann.org>,
+        Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-pci@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-bluetooth@vger.kernel.org, devicetree@vger.kernel.org,
+        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Wei Deng <wei.deng@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Proofpoint-GUID: B7M4fmzdCng3NF57bMcoP8zSnXivZFvH
+X-Proofpoint-ORIG-GUID: B7M4fmzdCng3NF57bMcoP8zSnXivZFvH
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEwMDA5NyBTYWx0ZWRfX2+esQNDg+9iA
+ gsGm90IMtPEE23/SAys2zi81uMoTcxVJcqKnmwuM+vC9eRbPoA1pVQV6NGPWRlpxYIXvkoUMIBo
+ Zf1hdexOy3rQs/GE34H66YlRoC17rgs=
+X-Authority-Analysis: v=2.4 cv=funsol4f c=1 sm=1 tr=0 ts=6a50c20c cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=MDeckJw97qnk8wCBExTehA==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=5z_Ge3scFvwj-DIjt2UA:9 a=QEXdDO2ut3YA:10
+ a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEwMDA5NyBTYWx0ZWRfX00Nl9knsErud
+ UWDAbwfqDugI7Nilojkac3xr9htN7pWgWb6MrGrzFxlgvPV6o8KfoiD8hOS9AvlbkwaDqYvpc2l
+ sVI6IBvJ+Edrue2qdvgdZAG1a8hmIq/jEwci8YI3FSOgcJt1NWN9B9EqHSh7J5O0BJzQPJaRCOF
+ v2cMD7Aa82PM0aSuoSbjMmv5QRFasv5WlFflwVMjFEVaKo2f5DROISXiiFYVkqY1Bqi1+NUd4x1
+ ZdYzbbYCJlc1HgCKF/ee+fhjDbY4s9N1o+VVy8XZJHyZ0Yix7KIBNkvldID1+OvsxC8eE5FrN2P
+ ywq/hdrfXgdLeD12pXW8PbP0fROM+askK/zNFPCkoZE0E0hjtLxAgwdq0CWnKvUw9c8pHia6xK+
+ CjItwG/yCfK6qdxxCfrPxs8EooBxzhAKiVVhhDzLJUS4tdecIzdhhtnV6x9VkjJzsEH3Comoqw0
+ eRy2l2xh61blVkMrPgg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-10_02,2026-07-09_04,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 phishscore=0 clxscore=1015 lowpriorityscore=0 adultscore=0
+ bulkscore=0 suspectscore=0 malwarescore=0 priorityscore=1501 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607100097
 
-Add the missing reset (BCR) for sdhc_2.
+This series describes support for the onboard WiFi/Bluetooth module
+present on the Arduino VENTUNO Q (monaco) platform.
 
-Fixes: d9d59d105f98 ("arm64: dts: qcom: Add initial Milos dtsi")
-Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+The board provides LGA pads for a wireless module. On the VENTUNO Q
+these pads are populated with an NFA725B module featuring the
+QCA2066 WiFi/BT combo chip. While implemented as an LGA footprint,
+the design is functionally compatible with the M.2 Key E.
+
+The NFA725B exposes WiFi over PCIe and Bluetooth over a UART.
+Both interfaces are gated through the W_DISABLE1# and W_DISABLE2#
+signals, as defined by the M.2 specification and handled here via
+the pcie-m2 power sequencer.
+
+This series models the hardware using the existing pwrseq framework
+and connector bindings, allowing coordinated PCIe and UART bring-up.
+
+This series depends on:
+https://lore.kernel.org/linux-pci/20260507-pwrseq-m2-bt-v2-0-1740bd478539@oss.qualcomm.com
+
+Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/milos.dtsi | 2 ++
- 1 file changed, 2 insertions(+)
+Changes in v3:
+- Embed bt_power in struct qca_serdev instead of allocating it (Dmitry).
+- Add generic pwrseq_power_is_controllable() API + per-unit .is_controllable()
+  callback; use it in hci_qca instead of peeking at the W_DISABLE2# property.
+- Implement .is_controllable() in the pcie-m2 and qcom-wcn providers.
+- Treat non-controllable BT power as always-on.
+- Integrate the pending Bluetooth pwrseq patches from Mani.
+- Link to v2: https://lore.kernel.org/r/20260702-monza-wireless-v2-0-7b56e2a6a6d4@oss.qualcomm.com
 
-diff --git a/arch/arm64/boot/dts/qcom/milos.dtsi b/arch/arm64/boot/dts/qcom/milos.dtsi
-index 8c9232988953..262fa8801256 100644
---- a/arch/arm64/boot/dts/qcom/milos.dtsi
-+++ b/arch/arm64/boot/dts/qcom/milos.dtsi
-@@ -1724,6 +1724,8 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
- 
- 			iommus = <&apps_smmu 0x540 0>;
- 
-+			resets = <&gcc GCC_SDCC2_BCR>;
-+
- 			bus-width = <4>;
- 
- 			qcom,dll-config = <0x0007442c>;
+Changes in v2:
+- hci_qca: extract M.2 pwrseq into qca_serdev_get_m2_pwrseq() helper, called
+  outside the SoC switch; drop duplicated of_graph logic and redundant
+  bt_power NULL checks (Dmitry/Mani)
+- dts/bindings: use qcom,pcie-m2-1418-lga-connector (fallback
+  pcie-m2-e-connector) instead of the generic M.2 E-key compatible (Mani)
+- Link to v1: https://lore.kernel.org/r/20260520-monza-wireless-v1-0-9f6942310653@oss.qualcomm.com
 
 ---
-base-commit: 8cdeaa50eae8dad34885515f62559ee83e7e8dda
-change-id: 20260710-milos-sdhc2-reset-8e61165cc5b8
+Loic Poulain (9):
+      power: sequencing: Add pwrseq_power_is_controllable() API
+      power: sequencing: pcie-m2: Report power controllability
+      power: sequencing: qcom-wcn: Report power controllability
+      Bluetooth: hci_qca: Set 'bt_en_available' based on pwrseq power controllability
+      Bluetooth: hci_qca: Embed bt_power in struct qca_serdev
+      Bluetooth: hci_qca: Support QCA2066 on M.2 connector via pwrseq
+      dt-bindings: connector: pcie-m2-e: Add vendor LGA connector compatible
+      power: sequencing: pcie-m2: Add QCA2066 (QCNFA765) BT serdev ID
+      arm64: dts: qcom: monaco-arduino-monza: Add QCA2066 M.2 WiFi/BT support
+
+Manivannan Sadhasivam (2):
+      Bluetooth: hci_qca: Add M.2 Bluetooth device support using pwrseq
+      Bluetooth: hci_qca: Rename 'power_ctrl_enabled' to 'bt_en_available'
+
+ .../bindings/connector/pcie-m2-e-connector.yaml    |   7 +-
+ arch/arm64/boot/dts/qcom/monaco-arduino-monza.dts  |  64 ++++++++++++-
+ drivers/bluetooth/hci_qca.c                        | 101 ++++++++++++---------
+ drivers/power/sequencing/core.c                    |  39 ++++++++
+ drivers/power/sequencing/pwrseq-pcie-m2.c          |  28 ++++++
+ drivers/power/sequencing/pwrseq-qcom-wcn.c         |  30 ++++++
+ include/linux/pwrseq/consumer.h                    |   7 ++
+ include/linux/pwrseq/provider.h                    |   9 ++
+ 8 files changed, 238 insertions(+), 47 deletions(-)
+---
+base-commit: aa61612ab641d7d62b0b6889f2c7c9251489f6e3
+change-id: 20260520-monza-wireless-e6ce7f013f38
+prerequisite-message-id: <20260507-pwrseq-m2-bt-v2-0-1740bd478539@oss.qualcomm.com>
+prerequisite-patch-id: f4a7d1957c1776051608bf3d808b2786606c1ae2
+prerequisite-patch-id: 6cd3c33583a9af16b3f6f71517b16b32d8155b7c
+prerequisite-patch-id: 0550c57d69cf112fd4830e62f4388db6f8bf397c
+prerequisite-patch-id: cc10d8079e37ef0ba0c33d0984c95d76361df9dd
+prerequisite-patch-id: d7f4bb2bb4498ac619e67a94f8b59119a5caaf26
+prerequisite-patch-id: c00ce9095b2d3a412229796194828b55642d3d96
+prerequisite-patch-id: 09600595c2e80b12eda3aae39af192847d0f03d0
+prerequisite-patch-id: a6118ed2894c176780ba933750e1068f2819fa4c
+prerequisite-patch-id: 1dee41a33e032094e8dda74ac4e0bada928573d7
 
 Best regards,
---  
-Luca Weiss <luca.weiss@fairphone.com>
+-- 
+Loic Poulain <loic.poulain@oss.qualcomm.com>
 
