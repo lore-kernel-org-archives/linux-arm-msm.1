@@ -1,100 +1,122 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93C732EBDE9;
-	Fri, 10 Jul 2026 15:01:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68785285CAA;
+	Fri, 10 Jul 2026 15:07:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783695718; cv=none; b=GPorsR+9vHpgsv4oAf+IuZ6/NRWBMZEdRaOpi946vEueLdeh5nUdUe+qjWm06SqyJfRJozn3utprAHLmdJg2E0awNFGrNMxVVTRNzBFRU3U7ultt6Zk+TOLk5zY6avp6wsqLsuSd2j1u0QjO8d0DkrLVE9FhewLSxkSqdqoy3As=
+	t=1783696073; cv=none; b=LV36dr6Y36fM6ITSEADPgxtfxKD0qEKGL9FRA5UvxL3rlYQWrVHexj0cvkYwtt2I9KGNpiGKdCiH/gbhhLg7GHp7rG6JbLRvzRBR3LFQ3XpbGrnq+strTU4X13ReeeQWkH58ztbaIsyisMtOCgzVGxqbDVqRQ2/P8KvZBPV8zvc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783695718; c=relaxed/simple;
-	bh=Ci3fdpehI4rOiqy+LhAnJgJDnpCt62MiEiqcY4h5Diw=;
+	s=arc-20240116; t=1783696073; c=relaxed/simple;
+	bh=e4Ge5wzqZN1cG3hFCUVWm7MzT1hx5H3j2dwHOc1GSic=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=rYPBYUg26C8Mg+2vSV55/FsB8oz+5P2+yicW18cEqJZ102l5w9HAjDAh2srH5nCUl6C5zoFQMKcrSzYd4ovxR85B0Ha3Ts9mgZBiopQ4QG/dN+Z/HW4CHylVhGx7uRj5wrAv8ZRB9BNqOQWpLtDPkJldOdgrf8SfB/QBaf+/X5A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Aezvcf2o; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=R5L8WGyi+mzqWPc7RDWE3SO20jgYMbvgN6RLJJz3ug4qS8pBXiisAAerymI71gnBX0ipGI5JI/omsQX+yrdwMMyiJphx+a/GQDaE1WiCyaRZnrQXLXldBLAri+EkL6guGOUYEptMRNOvN2EKs6/yXQxIAnNjagg+Zek92xm3FZg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TlV85tcm; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Aezvcf2o"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65E8A1F000E9;
-	Fri, 10 Jul 2026 15:01:41 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TlV85tcm"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E4BC1F000E9;
+	Fri, 10 Jul 2026 15:07:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783695717;
-	bh=Nv6v5Gy5ZQKCjEDZ1CZd677nx3NlM5I4XdPHxBdo5us=;
+	s=k20260515; t=1783696072;
+	bh=6cLlwZEogPH8ppzA7eKtjjQx1kbEb1QU1EG0qOLtAlg=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Aezvcf2oBz8R5O/JgeqQKn1Iv07D3k4kEuvwCc1b7Uv9q44jdZfUS20v8wyrCa/9F
-	 sFEfI7dW7gs9z+SsSfhJ8kA/ge/LrGSSz9zC3Je135DOXWvwgHKHjr0HNZUKiB8R0Z
-	 6ZFI5o7wwOhve66iKnNqXpiMhf7SJFuqNWUQojN72CN7vt9E+8N+ylqWmq1V8VELbe
-	 6ISmJ6bIDd6gomwGV7FsmpP5iGhPAK7B4N+ljOCC/csygDMZAkTZJGZNY4oR569umI
-	 ng8odBspjBH26Pq4TIGI6qDk3zs12pR3kiMN2IWrXV9IPeu4GxV8o5adjm1flT9Viv
-	 C2o6tJaaVjqqw==
-Date: Fri, 10 Jul 2026 16:01:32 +0100
-From: Lorenzo Stoakes <ljs@kernel.org>
-To: Gregory Price <gourry@gourry.net>
-Cc: Andrew Morton <akpm@linux-foundation.org>, 
-	Russell King <linux@armlinux.org.uk>, Dinh Nguyen <dinguyen@kernel.org>, 
-	Simon Schuster <schuster.simon@siemens-energy.com>, 
-	"James E . J . Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
-	Jarkko Sakkinen <jarkko@kernel.org>, Thomas Gleixner <tglx@kernel.org>, 
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, Ian Abbott <abbotti@mev.co.uk>, 
-	H Hartley Sweeten <hsweeten@visionengravers.com>, Lucas Stach <l.stach@pengutronix.de>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Patrik Jakobsson <patrik.r.jakobsson@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, Thierry Reding <thierry.reding@kernel.org>, 
-	Mikko Perttunen <mperttunen@nvidia.com>, Jonathan Hunter <jonathanh@nvidia.com>, 
-	Christian Koenig <christian.koenig@amd.com>, Huang Rui <ray.huang@amd.com>, Ankit Agrawal <ankita@nvidia.com>, 
-	Alex Williamson <alex@shazbot.org>, Alexander Viro <viro@zeniv.linux.org.uk>, 
-	Christian Brauner <brauner@kernel.org>, Dan Williams <djbw@kernel.org>, 
-	Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, 
-	David Hildenbrand <david@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
-	"Liam R . Howlett" <liam@infradead.org>, Matthew Wilcox <willy@infradead.org>, 
-	Marek Szyprowski <m.szyprowski@samsung.com>, Peter Zijlstra <peterz@infradead.org>, 
-	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>, 
-	Steven Rostedt <rostedt@goodmis.org>, SeongJae Park <sj@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>, 
-	Hugh Dickins <hughd@google.com>, Mike Rapoport <rppt@kernel.org>, Kees Cook <kees@kernel.org>, 
-	Paolo Bonzini <pbonzini@redhat.com>, linux-kernel@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org, linux-sgx@vger.kernel.org, 
-	etnaviv@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
-	freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org, kvm@vger.kernel.org, 
-	linux-fsdevel@vger.kernel.org, nvdimm@lists.linux.dev, linux-mm@kvack.org, 
-	iommu@lists.linux.dev, linux-perf-users@vger.kernel.org, 
-	linux-trace-kernel@vger.kernel.org, kasan-dev@googlegroups.com, damon@lists.linux.dev, 
-	Pedro Falcato <pfalcato@suse.de>, Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>, 
-	Jann Horn <jannh@google.com>
-Subject: Re: [PATCH 19/30] mm: use linear_page_[index, delta]() consistently
-Message-ID: <alEJP-qEgSIUOp38@lucifer>
-References: <cover.1782735110.git.ljs@kernel.org>
- <bf56e2e98b512962a2fb88900d535a0e9e6769d8.1782735110.git.ljs@kernel.org>
- <ak_EivwcDDdn1Xvp@gourry-fedora-PF4VCD3F>
- <ak_E1Y-D2Twykusr@gourry-fedora-PF4VCD3F>
+	b=TlV85tcm3GYPMXPMjJ+66ZJISSVznxL5YsvYORoXyMKNfpGO9kEJ+vcYK2O/28Ywq
+	 CSwWSdQfw3petnzBz2bOF6kT5V2qZ+Cpq1U/fiXzitL0srT3PG0/XivHvEnZBJlOb5
+	 O5HAxKguIrVzr9Qfvk50N8aOO2Fa58+z/SEgvBUj2E4+KTQ/F/geWfwT8oH9EHD5Ch
+	 Yo+xiTD/3O9xyKVvM+axr7jlhQBrorsCR8tEuh0tZztoOKTzyTjllMQAgofly6YqiF
+	 U/xp32ANtZ8iPq/jFGrQ75f/tkyTL7zfhs+LdQpi6EEg9oLLWVb8CxS2prKGzbSPXI
+	 /HEcWg9kRGNLw==
+Date: Fri, 10 Jul 2026 16:07:43 +0100
+From: Mark Brown <broonie@kernel.org>
+To: phucduc.bui@gmail.com
+Cc: Takashi Iwai <tiwai@suse.com>, Nick Li <nick.li@foursemi.com>,
+	Herve Codina <herve.codina@bootlin.com>,
+	Support Opensource <support.opensource@diasemi.com>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Charles Keepax <ckeepax@opensource.cirrus.com>,
+	Richard Fitzgerald <rf@opensource.cirrus.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Shenghao Ding <shenghao-ding@ti.com>, Kevin Lu <kevin-lu@ti.com>,
+	Baojun Xu <baojun.xu@ti.com>, Sen Wang <sen@ti.com>,
+	Oder Chiou <oder_chiou@realtek.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+	u.kleine-koenig@baylibre.com, Zhang Yi <zhangyi@everest-semi.com>,
+	Marco Crivellari <marco.crivellari@suse.com>,
+	Kees Cook <kees@kernel.org>, HyeongJun An <sammiee5311@gmail.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Qianfeng Rong <rongqianfeng@vivo.com>, linux-sound@vger.kernel.org,
+	linux-kernel@vger.kernel.org, patches@opensource.cirrus.com,
+	linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH v3 25/27] ASoC: codecs: rt712: Use guard() for mutex locks
+Message-ID: <95f5d6ec-ecc5-4090-ac04-27cdcdc21b8a@sirena.org.uk>
+References: <20260709045902.498848-1-phucduc.bui@gmail.com>
+ <20260710050511.14439-1-phucduc.bui@gmail.com>
+ <20260710050511.14439-23-phucduc.bui@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="BDwogXtsq8RsMi6d"
+Content-Disposition: inline
+In-Reply-To: <20260710050511.14439-23-phucduc.bui@gmail.com>
+X-Cookie: Did I say I was a sardine?  Or a bus???
+
+
+--BDwogXtsq8RsMi6d
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <ak_E1Y-D2Twykusr@gourry-fedora-PF4VCD3F>
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 09, 2026 at 11:57:09AM -0400, Gregory Price wrote:
-> On Thu, Jul 09, 2026 at 11:55:54AM -0400, Gregory Price wrote:
-> > > @@ -2462,7 +2463,7 @@ static int comedi_vm_access(struct vm_area_struct *vma, unsigned long addr,
-> > >  {
-> > >  	struct comedi_buf_map *bm = vma->vm_private_data;
-> > >  	unsigned long offset =
-> > > -	    addr - vma->vm_start + (vma->vm_pgoff << PAGE_SHIFT);
-> > > +	    addr - vma->vm_start + (vma_start_pgoff(vma) << PAGE_SHIFT);
-> > >
-> >
-> > Obviously correct, but was this intended for a different patch?
-> >
-> > ~Gregory
->
-> bleh already caught, sorry for the noise :]
+On Fri, Jul 10, 2026 at 12:05:09PM +0700, phucduc.bui@gmail.com wrote:
 
-Haha no thanks for picking it up, many eyes bugs etc. etc. ;)
+> @@ -455,14 +456,15 @@ static int rt712_sdca_dev_resume(struct device *dev)
+>  		return 0;
+> =20
+>  	if (!slave->unattach_request) {
+> -		mutex_lock(&rt712->disable_irq_lock);
+> -		if (rt712->disable_irq =3D=3D true) {
+> -
+> -			sdw_write_no_pm(slave, SDW_SCP_SDCA_INTMASK1, SDW_SCP_SDCA_INTMASK_SD=
+CA_0);
+> -			sdw_write_no_pm(slave, SDW_SCP_SDCA_INTMASK2, SDW_SCP_SDCA_INTMASK_SD=
+CA_8);
+> -			rt712->disable_irq =3D false;
+> +		scoped_guard(mutex, &rt712->disable_irq_lock) {
+> +			if (rt712->disable_irq) {
+> +				sdw_write_no_pm(slave, SDW_SCP_SDCA_INTMASK1,
+> +						SDW_SCP_SDCA_INTMASK_SDCA_0);
+> +				sdw_write_no_pm(slave, SDW_SCP_SDCA_INTMASK2,
+> +						SDW_SCP_SDCA_INTMASK_SDCA_8);
+> +				rt712->disable_irq =3D false;
+> +			}
+>  		}
+> -		mutex_unlock(&rt712->disable_irq_lock);
+>  	}
 
-Cheers, Lorenzo
+This function does also have some goto based unwinding, there's a
+similar thing in the rt721 changes.
+
+--BDwogXtsq8RsMi6d
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmpRCr4ACgkQJNaLcl1U
+h9CpsQf/Zz5nqEo4Z/MJiZGvwJUID88/cEjWwK5VttpBJJMvdsC8J/zRa7/kWLDW
+tunq+2S+S/kMBpXjJdL2CCowgGN/5C3YJps7AHBvu+ZZTskmSAPM4Bf83pTKYq9j
+ADgruP/KcDzIn0D1ZDbFwOwIFVgLvTIqyTKftrvr+tTsJ8nXttcun+/3IJSoC+Ct
+ds2sN+glOg48dkd2cgPn5j1CBirm71zV0iPHMW7yxOhC2nf8YgpvtG6BuTkDHzo9
+8MfMTrqIll+jqK0KtkTcA6HEmlJ1AyNe2UJlb7XM+mFucpLmUESb7gCi7cAmsHBE
+mXgSotbSmxQ4GmCFa/b0sJMtdgkAKA==
+=oChm
+-----END PGP SIGNATURE-----
+
+--BDwogXtsq8RsMi6d--
