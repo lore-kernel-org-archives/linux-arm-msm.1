@@ -1,131 +1,114 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E93035F5E4;
-	Fri, 10 Jul 2026 19:36:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E044381AFC
+	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 19:36:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783712169; cv=none; b=aT16SYw4LVBoMSjbI4AEpXQ9GQL9E39XNr2ybOIiaDSgbuYAO30HEJqNeE0n+rVOk2R7RLGJkOqX3KisSzjZ1lxUEZisui/y5aA7bp4gGMMswi3dfbH2TzDOTHrlilOXbHoD4WljGSifW9lizRTT5BECVZE43e9jM68PUqoFxM4=
+	t=1783712194; cv=none; b=SX7Mymak5ApWsURe4yZv85dRMXhtImh1+71KhBYi4SknDt7ZcgurvM2xxOCrf3Et9gqmzjChxbhLrbWRgaIXy86vPTKw1vkehPQcZIKtw9Lf/CGly0biq8zFqknlD/o6kaG+0L69WwQiV9b4ZIbGIiRur3KQdSiWm9q0jT1SDKw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783712169; c=relaxed/simple;
-	bh=FfLPpKhOWsC/sVsNuiGUTkxCqQvuOvc9PrMkV9J6Kkg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Kx8zZV+iKjEOqJDBgoCQvAjvS/QqNLYPDV6QRyzFyHeTgGUgiPsNkxS5uFVl4klRUoOXpjLaAFLDq+xYmxADzp8XEHAt6ohsI2Bz4WWchm+aOeOQSDDheCCvP9xQ/MMe3oeSHY9EsmDCRPeg3wcHBZxxG5R5cLWN2Y8gBgE6tOI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GMSJQzHY; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783712194; c=relaxed/simple;
+	bh=wO1MPId3Vtrx5eVsLf+EKmRRPNbeNbSYmTHEZLEDlDI=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=iTxz7yysj91hsv4IEMATg5GcFh2Qf99ScRlJ4DcrGJxywJvwsHxkC+qihnmPVZ5Xf2oYOlV0dc2c4T0+2k9WA7fkDp61DTKTlLzoESQqy/XH17N+OsOF9fk1xdip8Duc/CShsx0ozS0FhZ9sahKQkJoOMIdNYeJ3TWR0WZ0NrAM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UJQjFMO5; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GMSJQzHY"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B8EA21F000E9;
-	Fri, 10 Jul 2026 19:35:52 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UJQjFMO5"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 605F91F01559
+	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 19:36:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783712168;
-	bh=FfLPpKhOWsC/sVsNuiGUTkxCqQvuOvc9PrMkV9J6Kkg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=GMSJQzHYzzqQWm9PYMzUnrJgvzs2G9TH47wDGMDemvUAcIBLvWbRt6SIta8fNBwpk
-	 4I1KzrcwinweqkCs0PIx0LTM6cTuB1EbRcqAQa1jYKzjr9JQ5Wtcz35zBJE5VHsTO2
-	 cG9UL0/p5mQIf6dJdIDATgnZoBwiS18qqWXfRPN1X9YuCai4Sxlbmwyp1iHn5oqaVT
-	 dYn1B2V/Mcdasv1lXZW09wtL6Km0Wa4YkT0iudkguHEDJPY6VHY2zx2FH0me1qiUli
-	 FT7YTboRx/zld4NxRHycYg9RobUPctsDzxrL3Ch4bqyHkHMgOJIWg31b9WaLtB1aK1
-	 q5GlLYmUSufqg==
-Date: Fri, 10 Jul 2026 20:35:43 +0100
-From: Lorenzo Stoakes <ljs@kernel.org>
-To: Gregory Price <gourry@gourry.net>
-Cc: Andrew Morton <akpm@linux-foundation.org>, 
-	Russell King <linux@armlinux.org.uk>, Dinh Nguyen <dinguyen@kernel.org>, 
-	Simon Schuster <schuster.simon@siemens-energy.com>, 
-	"James E . J . Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
-	Jarkko Sakkinen <jarkko@kernel.org>, Thomas Gleixner <tglx@kernel.org>, 
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
-	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, Ian Abbott <abbotti@mev.co.uk>, 
-	H Hartley Sweeten <hsweeten@visionengravers.com>, Lucas Stach <l.stach@pengutronix.de>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Patrik Jakobsson <patrik.r.jakobsson@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, Thierry Reding <thierry.reding@kernel.org>, 
-	Mikko Perttunen <mperttunen@nvidia.com>, Jonathan Hunter <jonathanh@nvidia.com>, 
-	Christian Koenig <christian.koenig@amd.com>, Huang Rui <ray.huang@amd.com>, Ankit Agrawal <ankita@nvidia.com>, 
-	Alex Williamson <alex@shazbot.org>, Alexander Viro <viro@zeniv.linux.org.uk>, 
-	Christian Brauner <brauner@kernel.org>, Dan Williams <djbw@kernel.org>, 
-	Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, 
-	David Hildenbrand <david@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
-	"Liam R . Howlett" <liam@infradead.org>, Matthew Wilcox <willy@infradead.org>, 
-	Marek Szyprowski <m.szyprowski@samsung.com>, Peter Zijlstra <peterz@infradead.org>, 
-	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>, 
-	Steven Rostedt <rostedt@goodmis.org>, SeongJae Park <sj@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>, 
-	Hugh Dickins <hughd@google.com>, Mike Rapoport <rppt@kernel.org>, Kees Cook <kees@kernel.org>, 
-	Paolo Bonzini <pbonzini@redhat.com>, linux-kernel@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org, linux-sgx@vger.kernel.org, 
-	etnaviv@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
-	freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org, kvm@vger.kernel.org, 
-	linux-fsdevel@vger.kernel.org, nvdimm@lists.linux.dev, linux-mm@kvack.org, 
-	iommu@lists.linux.dev, linux-perf-users@vger.kernel.org, 
-	linux-trace-kernel@vger.kernel.org, kasan-dev@googlegroups.com, damon@lists.linux.dev, 
-	Pedro Falcato <pfalcato@suse.de>, Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>, 
-	Jann Horn <jannh@google.com>
-Subject: Re: [PATCH 27/30] mm/vma: correct incorrect vma.h inclusion
-Message-ID: <alFJUfaGHVnKd-Nb@lucifer>
-References: <cover.1782735110.git.ljs@kernel.org>
- <22d0f4e3fe11f6fd1312734e242d008267ad142c.1782735110.git.ljs@kernel.org>
- <alFHR3fg8K1-SITK@gourry-fedora-PF4VCD3F>
+	s=k20260515; t=1783712192;
+	bh=WfoUlWEeuKtg5ji7K2r6ODJIVODJRvoxIKC//T1cf3I=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=UJQjFMO5Ru2ypG3zOfZ4hEANXRTwjm/9ejCDdL+TooLEtRU0lvKPAW1D8BqKGZ5DN
+	 zEvvZ5IrQFu2HlBI3YhN2lLdHplytIRiFJEYVKL5uQ6zKJSNEZcCZ/PvddjkctsLek
+	 ih3/t2hRqRPK4J0+kCQXiVOKCSvhe5higOtJ7/3l2k1z+YjT0o1ItDEZFSxD6dtV4x
+	 2Vo6d2iq/8Gns/ljNTKgJujR8e16p/tPYYz+2Ta1p+GlwWvhRPl+3uc9dAhpowXSfc
+	 P/J9a1UZInP7coH4/Q7zbMykGiVkgBjPrY1eX9612k4wVRs+hGMHFD5WQf5IGIG3yC
+	 MEBCiE5QSDZKg==
+Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-39c7ef2b1e2so11031401fa.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 12:36:32 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RoNNYRjhuMQ84cjU1mW70YfrYW1VefsMdEY63sU/y6mp3NkAkfaXyvPYqnCETYbZ8cI13h0ForAlb2pwZ0N@vger.kernel.org
+X-Gm-Message-State: AOJu0YwP0lq9tFgNo9CwMcF0Q458v/9sPIdwk39k8ZNbvPKJplXYpd9j
+	RMHRUTC2cKhkD5yg+WAL2r+09ZXzwJcOO3MAvTnxTeGQJqSpN57Objb6sQbXMD2rNXmZ/x3dcwa
+	/bI3IyNpmLcNS0dUVVDgakeWqNYo1YiY=
+X-Received: by 2002:a05:6512:40c4:20b0:5ae:c454:3740 with SMTP id
+ 2adb3069b0e04-5b0236ec2f0mr64636e87.60.1783712190489; Fri, 10 Jul 2026
+ 12:36:30 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <alFHR3fg8K1-SITK@gourry-fedora-PF4VCD3F>
+References: <cover.1783507945.git.u.kleine-koenig@baylibre.com> <ce43f6ec640a7835d64d3d696ff09229c3d31075.1783507945.git.u.kleine-koenig@baylibre.com>
+In-Reply-To: <ce43f6ec640a7835d64d3d696ff09229c3d31075.1783507945.git.u.kleine-koenig@baylibre.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Fri, 10 Jul 2026 21:36:17 +0200
+X-Gmail-Original-Message-ID: <CAD++jLkhkEVsLyoYobV9ZfD0o7YWXh74cNsy2rcFrajna4mRjg@mail.gmail.com>
+X-Gm-Features: AUfX_mxF7aXm1NUaeKv9tRmJ75XIeUyINM_M0uEJT4kZsHp0a8M3V6ZUZMQlacY
+Message-ID: <CAD++jLkhkEVsLyoYobV9ZfD0o7YWXh74cNsy2rcFrajna4mRjg@mail.gmail.com>
+Subject: Re: [PATCH v2 21/23] mfd: Unify style of of_device_id arrays
+To: =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>
+Cc: Lee Jones <lee@kernel.org>, Nicolas Ferre <nicolas.ferre@microchip.com>, 
+	Alexandre Belloni <alexandre.belloni@bootlin.com>, Claudiu Beznea <claudiu.beznea@tuxon.dev>, 
+	Chen-Yu Tsai <wens@kernel.org>, Florian Fainelli <florian.fainelli@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Ray Jui <rjui@broadcom.com>, 
+	Scott Branden <sbranden@broadcom.com>, Marek Vasut <marek.vasut+renesas@gmail.com>, 
+	James Ogletree <jogletre@opensource.cirrus.com>, Fred Treven <fred.treven@cirrus.com>, 
+	Ben Bright <ben.bright@cirrus.com>, David Rhodes <david.rhodes@cirrus.com>, 
+	Richard Fitzgerald <rf@opensource.cirrus.com>, 
+	Support Opensource <support.opensource@diasemi.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Peter Griffin <peter.griffin@linaro.org>, Alim Akhtar <alim.akhtar@samsung.com>, 
+	Tim Harvey <tharvey@gateworks.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	Charles Keepax <ckeepax@opensource.cirrus.com>, Sven Peter <sven@kernel.org>, 
+	Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>, 
+	Mathieu Dubois-Briand <mathieu.dubois-briand@bootlin.com>, Chanwoo Choi <cw00.choi@samsung.com>, 
+	Luca Ceresoli <luca.ceresoli@bootlin.com>, =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>, 
+	Saravanan Sekar <sravanhome@gmail.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, =?UTF-8?Q?Jonathan_Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>, 
+	Aaro Koskinen <aaro.koskinen@iki.fi>, Andreas Kemnade <andreas@kemnade.info>, 
+	Kevin Hilman <khilman@baylibre.com>, Roger Quadros <rogerq@kernel.org>, 
+	Tony Lindgren <tony@atomide.com>, Matti Vaittinen <mazziesaccount@gmail.com>, 
+	Orson Zhai <orsonzhai@gmail.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
+	Chunyan Zhang <zhang.lyra@gmail.com>, Fabrice Gasnier <fabrice.gasnier@foss.st.com>, 
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>, Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+	Jernej Skrabec <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>, 
+	Liviu Dudau <liviu.dudau@arm.com>, Sudeep Holla <sudeep.holla@kernel.org>, 
+	Lorenzo Pieralisi <lpieralisi@kernel.org>, Geert Uytterhoeven <geert+renesas@glider.be>, 
+	Magnus Damm <magnus.damm@gmail.com>, mfd@lists.linux.dev, linux-kernel@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, patches@opensource.cirrus.com, 
+	linux-rpi-kernel@lists.infradead.org, linux-renesas-soc@vger.kernel.org, 
+	linux-sound@vger.kernel.org, linux-samsung-soc@vger.kernel.org, 
+	linux-amlogic@lists.infradead.org, asahi@lists.linux.dev, 
+	linux-mediatek@lists.infradead.org, imx@lists.linux.dev, 
+	linux-omap@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-stm32@st-md-mailman.stormreply.com, linux-sunxi@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 10, 2026 at 03:25:59PM -0400, Gregory Price wrote:
-> On Mon, Jun 29, 2026 at 01:23:38PM +0100, Lorenzo Stoakes wrote:
-> > The only files which should be including vma.h are the implementation files
-> > for the core VMA logic - vma.c, vma_init.c, and vma_exec.c.
-> >
-> > This is in order to allow for userland testing of core VMA logic. In this
-> > cases, vma_internal.h and vma.h are included, providing both the
-> > dependencies upon which the core VMA logic requires and its declarations.
-> >
-> > Userland testable VMA logic is achieved by having separate vma_internal.h
-> > implementations for userland and kernel.
-> >
-> > Callers other than the core VMA implementation should include internal.h
-> > instead. This header does not need to include vma_internal.h as it only
-> > contains the vma.h declarations, for which the includes already present
-> > suffice.
-> >
-> > Update code to reflect this, update comments to reflect the fact there are
-> > 3 VMA implementation files and document things more clearly.
-> >
-> > While we're here, slightly improve the language of the comment describing
-> > vma_exec.c.
-> >
-> > No functional change intended.
-> >
-> > Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
->
-> Reviewed-by: Gregory Price <gourry@gourry.net>
->
-> > +/*
-> > + * To allow for userland testing we place internal dependencies in
-> > + * vma_internal.h and external VMA API declarations in vma.h.
-> > + */
-> ...
-> > +/*
-> > + * To allow for userland testing we place internal dependencies in
-> > + * vma_internal.h and external VMA API declarations in vma.h.
-> > + */
-> ...
-> > +/*
-> > + * To allow for userland testing we place internal dependencies in
-> > + * vma_internal.h and external VMA API declarations in vma.h.
-> > + */
->
-> Do you actually need 3 copies of this comment or just one copy in
-> vma_internal.h?
+On Wed, Jul 8, 2026 at 1:17=E2=80=AFPM Uwe Kleine-K=C3=B6nig (The Capable H=
+ub)
+<u.kleine-koenig@baylibre.com> wrote:
 
-I'd rather have it at a glance, it's a bit silly but C headers are silly :P
+> These arrays already mostly match the most used and generally
+> recommended coding style. That is:
+>
+>  - no comma after the list terminator;
+>  - a comma after an initializer if (and only if) the closing } is not
+>    directly following;
+>  - no explicit zeros in the list terminator;
+>  - a space after an opening { and before a closing }, a single space in
+>    the list terminator;
+>
+> Adapt the offenders accordingly.
+>
+> Signed-off-by: Uwe Kleine-K=C3=B6nig (The Capable Hub) <u.kleine-koenig@b=
+aylibre.com>
 
-BTW you're kinda racing against time here as I'm on the verge of sending v2
-:P
+Reviewed-by: Linus Walleij <linusw@kernel.org>
+
+Yours,
+Linus Walleij
