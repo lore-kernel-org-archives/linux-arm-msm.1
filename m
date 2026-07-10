@@ -1,92 +1,116 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 815942ED860;
-	Fri, 10 Jul 2026 17:37:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E010374A1B
+	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 17:46:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783705035; cv=none; b=YAAh7+IWszmNU/uB1D5bMa7E5DXmhkUahDh/xNOjKtJwWH5vXl2sPYBtg0jGVqZi2pNmG1wQniDAVc8g3XBmck/18eCzBF5cXcPkBCn22hZCc3LFgyG1Hbu1AM/jFZ2sA3pgChIQYOi0UI8hZrC2E9WzE26uUpzxI2eht85RHQY=
+	t=1783705564; cv=none; b=kE/64jzoL+7QPE3VaRRGwwbaZ4vdDHmI7NJ1S5p8R1w9DPH639TEM+OKPvupnnHiThLKOfKJEclhKQRZROatmNehty3IEMUIas2BSsO5mfmmouubrOcZ2isWTCJRhtzV8jJ4GZVJ278noXQM+182tdcCDSVvLmyZbFhGl97wTII=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783705035; c=relaxed/simple;
-	bh=x1GlKTg8FbOL0BWGdUPOCXDPn+D15oI3vKoYMmX6FWY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=f07Ce/UujoCf77/i8Rp/Acsm6PUFMfS+WiNhibo1UQGREgLfHhuIwN+qAw2Az1A7hkHSX3LWjq43g4O1eHCgYNkDCEmhpXSnH5mHe0u3fQm6EQwv7teT9u5tZhPmEheFX6joXVdu8Xd+TKrVSq78MsmBl8k+Q9Sx2z2rgkQOpUE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UH5ynHlt; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783705564; c=relaxed/simple;
+	bh=KvBYP+wl2IjCxMaSVmX25pjv+NEzDq5zeL7bHnenBoI=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=s6Dp2HqYqevUDqA/Is5a2scx/iB0Q9oWTjKzBc08YwJI4VKtiNvN6oAaZbvWz3SqWgiRiDhwJxkshfCdByrTcsxZlynQgU7sYqUrzbRk9u5+7HhPSL0YvXiComRo5HsLnbhn4e1WkpB9OiFyTKC5L3gEoTbLuNiYptTBwedfdHk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Kj7a6Pu5; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UH5ynHlt"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 803171F000E9;
-	Fri, 10 Jul 2026 17:37:11 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Kj7a6Pu5"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6BB991F01565
+	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 17:46:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783705034;
-	bh=u4OHDBQeXad2wbx5s3NZJrq/DrBuZJoBPcpehHKeabQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=UH5ynHltUWpeAZufCEwAbt04w3+OAyOCYh4EsAsKn5ZNW+bOEa9Zyw4NFl4e3I3Zu
-	 tsU0Owz5KQsV3iRoYQBsHmniNK7vME87FKgWz8QpeWr+oVuHhZtRcSZCWYkfBFKxID
-	 CGLpt/tR0o+I7OdX8XvWIrOcfqFyulrIr54MUgouLjn5B85ShulZr7wiWePVVX6NzM
-	 mCrh0t74BWmxgz+VrexcNGrZNe6NURyfE7mO8iAofbQqw9YLv07mwD6V8Fpgrr38VQ
-	 hmUlBh7LkhMVJIylKsyRhVLIPI2ye/27+XFywR35AS/9ODtUtkWbl4rFfU/qWugrE+
-	 1KJz3MadETS3w==
-Date: Fri, 10 Jul 2026 18:37:08 +0100
-From: Mark Brown <broonie@kernel.org>
-To: Praveen Talari <praveen.talari@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org, linux-spi@vger.kernel.org,
-	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-	aniket.randive@oss.qualcomm.com,
-	chandana.chiluveru@oss.qualcomm.com
-Subject: Re: [PATCH 1/2] soc: qcom: geni-se: trace: Add trace event support
- for GENI SE registers dump
-Message-ID: <a2491042-b7a4-429c-828f-905c07adbc5f@sirena.org.uk>
-References: <20260706-add-tracepoints-for-se-reg-dump-v1-0-48bd08e28cf2@oss.qualcomm.com>
- <20260706-add-tracepoints-for-se-reg-dump-v1-1-48bd08e28cf2@oss.qualcomm.com>
+	s=k20260515; t=1783705562;
+	bh=KvBYP+wl2IjCxMaSVmX25pjv+NEzDq5zeL7bHnenBoI=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=Kj7a6Pu5eehgdCmmTI+vwhf9nbZJIqM/gmnHg3wk7GzSc/sIfh4SLBJdGeaTBEiDv
+	 b8rDzUGmQ/ofpb+jeVOCzO/AAJvsUlpTJmujo/sCcFYlSo5w1qI5V62txkfh20z4kl
+	 8oUrAnr7A+VpIdb3rMwkdCVuO7ctSV2dTRn501mKvbH8XS7Ebz3yLokZ6BfsTxc9Bm
+	 bPq4gjzedbjsGFpMYyyq3+099H0QssWs4bvFBBUd2pgnTSl5SQ1f1xtuAKGKw076b6
+	 m1YLoNVUzOAFOWsUsdRS6GJyVcxI8PKE6nSaCG5S2VX3Fwb/kc2mr1aHX9vD75TnB0
+	 Uq2zAgam/8dZQ==
+Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-5b00ca000ceso1274205e87.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 10:46:02 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+Rol179ETT1kLGQ7tK+1aZkLYDKX9fbEFApfl2Pa4QWJ2mQXACtT/5qohXptTP4ScAQa31Wotw09nYysisPI@vger.kernel.org
+X-Gm-Message-State: AOJu0YyXbY51t1WbeAu4qw6BUABzbzpQlHaZlGbi+fFOImsc8PCercni
+	0THZ8vJX70KrBQKzxeqLqO39KyzTM9IvA4oaFwWafDBZlSuB9fVTih3ocGZKBmHBEq9l3SWdR4h
+	quavQ3VOD40Xvmm+4pY9rpiVrydFQOIw=
+X-Received: by 2002:a05:6512:688f:10b0:5b0:12d6:4c05 with SMTP id
+ 2adb3069b0e04-5b02369c6e8mr17375e87.36.1783705559836; Fri, 10 Jul 2026
+ 10:45:59 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="HutsUxBLtgJehPCC"
-Content-Disposition: inline
-In-Reply-To: <20260706-add-tracepoints-for-se-reg-dump-v1-1-48bd08e28cf2@oss.qualcomm.com>
-X-Cookie: No directory.
+References: <20260703193855.110619-1-mukesh.ojha@oss.qualcomm.com> <20260703193855.110619-11-mukesh.ojha@oss.qualcomm.com>
+In-Reply-To: <20260703193855.110619-11-mukesh.ojha@oss.qualcomm.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Fri, 10 Jul 2026 19:45:47 +0200
+X-Gmail-Original-Message-ID: <CAD++jLnUf6j8jPJogpuo4w55EHqgt7LChOQX5JY5h4n2VOf5nQ@mail.gmail.com>
+X-Gm-Features: AUfX_mz2mAY-nRqzEwN08-F9a7Mq7XiQwd_nI9Ppbf1sw-soYPlPLluIapY3fR0
+Message-ID: <CAD++jLnUf6j8jPJogpuo4w55EHqgt7LChOQX5JY5h4n2VOf5nQ@mail.gmail.com>
+Subject: Re: [PATCH 10/42] drm: pl111: Use devm_of_reserved_mem_device_init()
+To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Liviu Dudau <liviu.dudau@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Joel Stanley <joel@jms.id.au>, 
+	Andrew Jeffery <andrew@codeconstruct.com.au>, Paul Cercueil <paul@crapouillou.net>, 
+	Anitha Chrisanthus <anitha.chrisanthus@intel.com>, Paul Kocialkowski <paulk@sys-base.io>, 
+	Chen-Yu Tsai <wens@kernel.org>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
+	Samuel Holland <samuel@sholland.org>, Alexey Brodkin <abrodkin@synopsys.com>, 
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, Michal Simek <michal.simek@amd.com>, 
+	Daniel Scally <dan.scally@ideasonboard.com>, Jacopo Mondi <jacopo.mondi@ideasonboard.com>, 
+	Mauro Carvalho Chehab <mchehab@kernel.org>, Eddie James <eajames@linux.ibm.com>, 
+	Tiffany Lin <tiffany.lin@mediatek.com>, Andrew-CT Chen <andrew-ct.chen@mediatek.com>, 
+	Yunfei Dong <yunfei.dong@mediatek.com>, Minghsiu Tsai <minghsiu.tsai@mediatek.com>, 
+	Houlong Wei <houlong.wei@mediatek.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Joseph Liu <kwliu@nuvoton.com>, 
+	Marvin Lin <kflin@nuvoton.com>, Dmitry Osipenko <dmitry.osipenko@collabora.com>, 
+	Krzysztof Kozlowski <krzk@kernel.org>, Thierry Reding <thierry.reding@kernel.org>, 
+	Jonathan Hunter <jonathanh@nvidia.com>, Srinivas Kandagatla <srini@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Ge Gordon <gordon.ge@bst.ai>, 
+	Adrian Hunter <adrian.hunter@intel.com>, Ulf Hansson <ulfh@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Saravana Kannan <saravanak@kernel.org>, Mathieu Poirier <mathieu.poirier@linaro.org>, 
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, Shengjiu Wang <shengjiu.wang@gmail.com>, 
+	Xiubo Li <Xiubo.Lee@gmail.com>, Liam Girdwood <lgirdwood@gmail.com>, 
+	Mark Brown <broonie@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Peter Ujfalusi <peter.ujfalusi@linux.intel.com>, 
+	Bard Liao <yung-chuan.liao@linux.intel.com>, Daniel Baluta <daniel.baluta@nxp.com>, 
+	Orson Zhai <orsonzhai@gmail.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
+	Peter Chen <peter.chen@cixtech.com>, Fugang Duan <fugang.duan@cixtech.com>, 
+	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, 
+	BST Linux Kernel Upstream Group <bst-upstream@bstai.top>, Fabio Estevam <festevam@gmail.com>, 
+	Nicolin Chen <nicoleotsuka@gmail.com>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Kai Vehmanen <kai.vehmanen@linux.intel.com>, 
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>, 
+	Vijendar Mukunda <Vijendar.Mukunda@amd.com>, Chunyan Zhang <zhang.lyra@gmail.com>, 
+	CIX Linux Kernel Upstream Group <cix-kernel-upstream@cixtech.com>, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org, 
+	linux-mips@vger.kernel.org, linux-sunxi@lists.linux.dev, 
+	linux-media@vger.kernel.org, openbmc@lists.ozlabs.org, 
+	linux-mediatek@lists.infradead.org, kernel@collabora.com, 
+	linux-tegra@vger.kernel.org, linux-mmc@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
+	linux-staging@lists.linux.dev, linux-sound@vger.kernel.org, 
+	linuxppc-dev@lists.ozlabs.org, imx@lists.linux.dev, 
+	sound-open-firmware@alsa-project.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+On Fri, Jul 3, 2026 at 9:43=E2=80=AFPM Mukesh Ojha <mukesh.ojha@oss.qualcom=
+m.com> wrote:
 
---HutsUxBLtgJehPCC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+> Switch to devm_of_reserved_mem_device_init() so the reserved memory
+> region is released automatically on probe failure or device removal.
+> Remove the explicit of_reserved_mem_device_release() calls in the
+> dev_put error path and pl111_amba_remove().
+>
+> Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
 
-On Mon, Jul 06, 2026 at 04:38:12PM +0530, Praveen Talari wrote:
-> Add a new trace event header for the Qualcomm GENI Serial Engine (SE)
-> framework providing a geni_se_regs tracepoint. This tracepoint
-> captures a comprehensive snapshot of the GENI SE hardware state in a
-> single trace record, making it possible to correlate register values at
-> a precise point in time without multiple sequential reads.
+Looks good to me:
+Reviewed-by: Linus Walleij <linusw@kernel.org>
 
->  /* Common SE registers */
-> +#define SE_DMA_IF_EN			0x4
-
-drivers/soc/qcom/qcom-geni-se.c defines this as 0x2004, that'll break
-allmodconfig builds.
-
---HutsUxBLtgJehPCC
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmpRLcQACgkQJNaLcl1U
-h9DuxAf+JLBNnYSU484aZiUhk1zfUxqrLAyUYl5H403u8W2qRB6/LEKGSv2r/oVW
-O899oFRh2Vl9u94pqQwpZofaBp1pdCttuZYBVYunS2DsjemneduNFOlStqdD3SD8
-Cn1x9ra9tMq4jtAgtJkCiRWyCytal6VTQMA83pCMXWHkP3jXAacDDfkreUUD01aD
-3AO9XcAWFNXB7OHMFUGtARTrjzn4BW4GzY6kGZuGoeVqdOrWT7fcJghK6Qk3Yq/1
-CRmPYs78BajKU7qsY0DdCR/64HWpQRTHHeA8alEVNtlIkX3t0Xpl5T8rCte+R5+Y
-1SxalS8eBpf6UXg52/onGLE/gSJfaA==
-=Z2z+
------END PGP SIGNATURE-----
-
---HutsUxBLtgJehPCC--
+Yours,
+Linus Walleij
