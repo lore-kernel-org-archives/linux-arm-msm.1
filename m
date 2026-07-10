@@ -1,152 +1,92 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6528D3749E4;
-	Fri, 10 Jul 2026 17:30:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 815942ED860;
+	Fri, 10 Jul 2026 17:37:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783704659; cv=none; b=pey3xzXHDPyZI8AGxCThqRMoBQ7HXaDne+tInqB8VbE/6f58t3B+N5EbTXkYycrL3QPcNUgcjCghKzb+1ds7zDY6yr9Vu4RnuZKfyuY5uOVSsAwP8a/8l5T1trtxQe+JJ5MKkIYAp99gIh6QayWoldPt1rmgU42GidBG3GIA/+Y=
+	t=1783705035; cv=none; b=YAAh7+IWszmNU/uB1D5bMa7E5DXmhkUahDh/xNOjKtJwWH5vXl2sPYBtg0jGVqZi2pNmG1wQniDAVc8g3XBmck/18eCzBF5cXcPkBCn22hZCc3LFgyG1Hbu1AM/jFZ2sA3pgChIQYOi0UI8hZrC2E9WzE26uUpzxI2eht85RHQY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783704659; c=relaxed/simple;
-	bh=b67a0EPzaAw7rSE9bN4ze+rXB6DxeUA4NlxZQyt/Kp8=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To; b=EDWTSK56dTYM6GE1+isJq/06LAb6VuAsqkivLFlgsHBlGQKEvPC/r4ePnqkCuff51fsSqnsrGC8nNtHkwFvtznL7x26TAcMFTibxDEjHFbyHHN6ar03+4y0qaLvofWSLKRKiJLoC1hzzqvkjziTcZE7dTTKY89/odIaHKz1yfuE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=b8M3ltsW; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783705035; c=relaxed/simple;
+	bh=x1GlKTg8FbOL0BWGdUPOCXDPn+D15oI3vKoYMmX6FWY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=f07Ce/UujoCf77/i8Rp/Acsm6PUFMfS+WiNhibo1UQGREgLfHhuIwN+qAw2Az1A7hkHSX3LWjq43g4O1eHCgYNkDCEmhpXSnH5mHe0u3fQm6EQwv7teT9u5tZhPmEheFX6joXVdu8Xd+TKrVSq78MsmBl8k+Q9Sx2z2rgkQOpUE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UH5ynHlt; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="b8M3ltsW"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D46841F000E9;
-	Fri, 10 Jul 2026 17:30:57 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UH5ynHlt"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 803171F000E9;
+	Fri, 10 Jul 2026 17:37:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783704658;
-	bh=GuJryolNn69SO+2UKk9jEdCx7H4hM5LvaTK6HyZ4T28=;
-	h=Date:From:To:Cc:Subject:In-Reply-To;
-	b=b8M3ltsW27WGOAXEoyL1en/NtPEwhYelNvb6oeE7ISnxmirOA1ov9TzkBY8CIkWen
-	 7rsRMymcpsPPVUmdY8DM1ybH+ykPZBBSIEuZ7VkDkVjVGO1K+ercLGZILoyHow+/zQ
-	 37HOaokoEFaOmvp2NNCKdayUXM09FCruA7qqrrtfrF0FWYBQJCs2topqOqwlgBPJdD
-	 EYhGS6TPlOEZ9fmwEnl+14dL5W3aFtT5xPxmnVsDLiOtXi5+uNLvYMKsB0m6sq84nF
-	 LCCPBsnVnB1NQWjbzGmklt4Pwj8xYPlxidnuITSmS0TnWk9YyhmkdTmnmbQ08oiDLC
-	 3EJzXoxFl12NQ==
-Date: Fri, 10 Jul 2026 12:30:56 -0500
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Qiang Yu <qiang.yu@oss.qualcomm.com>
-Cc: Manivannan Sadhasivam <mani@kernel.org>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-	Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
-	linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] PCI: qcom: Clear Attention Button Present in Slot
- Capabilities
-Message-ID: <20260710173056.GA966003@bhelgaas>
+	s=k20260515; t=1783705034;
+	bh=u4OHDBQeXad2wbx5s3NZJrq/DrBuZJoBPcpehHKeabQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=UH5ynHltUWpeAZufCEwAbt04w3+OAyOCYh4EsAsKn5ZNW+bOEa9Zyw4NFl4e3I3Zu
+	 tsU0Owz5KQsV3iRoYQBsHmniNK7vME87FKgWz8QpeWr+oVuHhZtRcSZCWYkfBFKxID
+	 CGLpt/tR0o+I7OdX8XvWIrOcfqFyulrIr54MUgouLjn5B85ShulZr7wiWePVVX6NzM
+	 mCrh0t74BWmxgz+VrexcNGrZNe6NURyfE7mO8iAofbQqw9YLv07mwD6V8Fpgrr38VQ
+	 hmUlBh7LkhMVJIylKsyRhVLIPI2ye/27+XFywR35AS/9ODtUtkWbl4rFfU/qWugrE+
+	 1KJz3MadETS3w==
+Date: Fri, 10 Jul 2026 18:37:08 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Praveen Talari <praveen.talari@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org, linux-spi@vger.kernel.org,
+	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+	aniket.randive@oss.qualcomm.com,
+	chandana.chiluveru@oss.qualcomm.com
+Subject: Re: [PATCH 1/2] soc: qcom: geni-se: trace: Add trace event support
+ for GENI SE registers dump
+Message-ID: <a2491042-b7a4-429c-828f-905c07adbc5f@sirena.org.uk>
+References: <20260706-add-tracepoints-for-se-reg-dump-v1-0-48bd08e28cf2@oss.qualcomm.com>
+ <20260706-add-tracepoints-for-se-reg-dump-v1-1-48bd08e28cf2@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="HutsUxBLtgJehPCC"
+Content-Disposition: inline
+In-Reply-To: <20260706-add-tracepoints-for-se-reg-dump-v1-1-48bd08e28cf2@oss.qualcomm.com>
+X-Cookie: No directory.
+
+
+--HutsUxBLtgJehPCC
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260710-clear_abp_0710-v1-1-efd63ebdaa09@oss.qualcomm.com>
 
-On Fri, Jul 10, 2026 at 06:20:57AM -0700, Qiang Yu wrote:
-> Qcom PCIe Root Ports advertise the Attention Button Present (ABP) bit in
-> the Slot Capabilities register, but the slots have no attention button.
+On Mon, Jul 06, 2026 at 04:38:12PM +0530, Praveen Talari wrote:
+> Add a new trace event header for the Qualcomm GENI Serial Engine (SE)
+> framework providing a geni_se_regs tracepoint. This tracepoint
+> captures a comprehensive snapshot of the GENI SE hardware state in a
+> single trace record, making it possible to correlate register values at
+> a precise point in time without multiple sequential reads.
 
-I'm a little surprised that this would be hard-wired into the RP
-instead of being some kind of strapping or config option, which would
-allow the SoC to be used in platforms that do have Attention Buttons.
+>  /* Common SE registers */
+> +#define SE_DMA_IF_EN			0x4
 
-If it's actually hard-wired, this might be OK.  If ABP could be made
-to work in hypothetical platforms that include it, maybe this should
-be based on a DT property?
+drivers/soc/qcom/qcom-geni-se.c defines this as 0x2004, that'll break
+allmodconfig builds.
 
-> When ABP is set, pcie_enable_notification() in the pciehp driver enables
-> the Attention Button Pressed interrupt (ABPE) and leaves the Presence
-> Detect Changed interrupt (PDCE) disabled. As a result, presence detect
-> changes are never reported and surprise hot-plug detection that relies on
-> Presence Detect Changed events does not work.
-> 
-> While at it, rename qcom_pcie_set_slot_nccs() to qcom_pcie_set_slot_cap()
-> since it now programs more than just the NCCS field.
+--HutsUxBLtgJehPCC
+Content-Type: application/pgp-signature; name="signature.asc"
 
-It'd be nice if the rename were a separate preparatory patch so the
-functional part is by itself and obvious.
+-----BEGIN PGP SIGNATURE-----
 
-> Signed-off-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
-> ---
->  drivers/pci/controller/dwc/pcie-qcom.c | 15 ++++++++++-----
->  1 file changed, 10 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/pci/controller/dwc/pcie-qcom.c b/drivers/pci/controller/dwc/pcie-qcom.c
-> index b193c989b2b8..89c2d4cb1fbe 100644
-> --- a/drivers/pci/controller/dwc/pcie-qcom.c
-> +++ b/drivers/pci/controller/dwc/pcie-qcom.c
-> @@ -358,7 +358,7 @@ static void qcom_pcie_clear_aspm_l0s(struct dw_pcie *pci)
->  	dw_pcie_dbi_ro_wr_dis(pci);
->  }
->  
-> -static void qcom_pcie_set_slot_nccs(struct dw_pcie *pci)
-> +static void qcom_pcie_set_slot_cap(struct dw_pcie *pci)
->  {
->  	u16 offset = dw_pcie_find_capability(pci, PCI_CAP_ID_EXP);
->  	u32 val;
-> @@ -372,6 +372,11 @@ static void qcom_pcie_set_slot_nccs(struct dw_pcie *pci)
->  	 */
->  	val = readl(pci->dbi_base + offset + PCI_EXP_SLTCAP);
->  	val |= PCI_EXP_SLTCAP_NCCS;
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmpRLcQACgkQJNaLcl1U
+h9DuxAf+JLBNnYSU484aZiUhk1zfUxqrLAyUYl5H403u8W2qRB6/LEKGSv2r/oVW
+O899oFRh2Vl9u94pqQwpZofaBp1pdCttuZYBVYunS2DsjemneduNFOlStqdD3SD8
+Cn1x9ra9tMq4jtAgtJkCiRWyCytal6VTQMA83pCMXWHkP3jXAacDDfkreUUD01aD
+3AO9XcAWFNXB7OHMFUGtARTrjzn4BW4GzY6kGZuGoeVqdOrWT7fcJghK6Qk3Yq/1
+CRmPYs78BajKU7qsY0DdCR/64HWpQRTHHeA8alEVNtlIkX3t0Xpl5T8rCte+R5+Y
+1SxalS8eBpf6UXg52/onGLE/gSJfaA==
+=Z2z+
+-----END PGP SIGNATURE-----
 
-Need a blank line here.
-
-> +	/*
-> +	 * Qcom PCIe Root Ports do not support Attention Button, so clear
-> +	 * Attention Button Present in Slot Capabilities.
-> +	 */
-> +	val &= ~PCI_EXP_SLTCAP_ABP;
->  	writel(val, pci->dbi_base + offset + PCI_EXP_SLTCAP);
->  
->  	dw_pcie_dbi_ro_wr_dis(pci);
-> @@ -580,7 +585,7 @@ static int qcom_pcie_post_init_2_1_0(struct qcom_pcie *pcie)
->  	writel(CFG_BRIDGE_SB_INIT,
->  	       pci->dbi_base + AXI_MSTR_RESP_COMP_CTRL1);
->  
-> -	qcom_pcie_set_slot_nccs(pcie->pci);
-> +	qcom_pcie_set_slot_cap(pcie->pci);
->  
->  	return 0;
->  }
-> @@ -660,7 +665,7 @@ static int qcom_pcie_post_init_1_0_0(struct qcom_pcie *pcie)
->  		writel(val, pcie->parf + PARF_AXI_MSTR_WR_ADDR_HALT);
->  	}
->  
-> -	qcom_pcie_set_slot_nccs(pcie->pci);
-> +	qcom_pcie_set_slot_cap(pcie->pci);
->  
->  	return 0;
->  }
-> @@ -759,7 +764,7 @@ static int qcom_pcie_post_init_2_3_2(struct qcom_pcie *pcie)
->  	val |= EN;
->  	writel(val, pcie->parf + PARF_AXI_MSTR_WR_ADDR_HALT_V2);
->  
-> -	qcom_pcie_set_slot_nccs(pcie->pci);
-> +	qcom_pcie_set_slot_cap(pcie->pci);
->  
->  	return 0;
->  }
-> @@ -1078,7 +1083,7 @@ static int qcom_pcie_post_init_2_7_0(struct qcom_pcie *pcie)
->  		writel(WR_NO_SNOOP_OVERRIDE_EN | RD_NO_SNOOP_OVERRIDE_EN,
->  				pcie->parf + PARF_NO_SNOOP_OVERRIDE);
->  
-> -	qcom_pcie_set_slot_nccs(pcie->pci);
-> +	qcom_pcie_set_slot_cap(pcie->pci);
->  
->  	return 0;
->  }
-> 
-> ---
-> base-commit: 3edb3a038d423480efeb204dbc6ddc9a292f8ecb
-> change-id: 20260710-clear_abp_0710-2f81e92b9da4
-> 
-> Best regards,
-> --  
-> Qiang Yu <qiang.yu@oss.qualcomm.com>
-> 
+--HutsUxBLtgJehPCC--
