@@ -1,160 +1,225 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D3B039EF32;
-	Fri, 10 Jul 2026 20:25:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BECA239A7FE;
+	Fri, 10 Jul 2026 20:26:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783715149; cv=none; b=cj+78/VAwO1AHiSBKMB6hUQwNGtM7Vya7YwaZDax1l6LrB/z2LGgGvg5lPCIf6/wlLQVHMHGfc2ADwZCRXe8Yc1gD0rSdhu+Y0n8IL4mXjeMhMtAVUWU4xV/P8+FpSgxLlnWT5dleILt71BPuX8O0EnLp4mMW9WAXhy8784fYCI=
+	t=1783715163; cv=none; b=mttg1o8beIYoPXZCwP93aH2WnI+UQC7j5Iy9SVI0n3qMzJC8YvItqujwe3F5mOHA0ruZVJn/WASACpameoYG9LIa+RprCCTyneq9mWXhctwq50qZARUucbzei6y/0BTH7XH5BE9oDXGBy9OHXbGlANYHWJGX2yKgK/Hz9tW+9X4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783715149; c=relaxed/simple;
-	bh=MYkhLJjFzu/0shKCRegPVVOR3/cURK0eqPqvT6VmZW8=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To; b=Tp3AXTv5EcrAUDrG2wZWQG246NyalAQfupWunhCBojb4K3xbQEISrZKnRqkWnRKOPyyzkmuzlzdZWcHI9LYgo+5Ks6/giImNBiIS4E6tgU2iMkYA+vEE7e5tYPwhg2nIfL5Gdj6vL0LGEyzWRxrUjxHdRmD4OpOpSuVes3Cw3mw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Sd7sj++5; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783715163; c=relaxed/simple;
+	bh=viV3MpLqfUAe1sqc9evXVxPvdZ0z1c7yNCArBlJLKts=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=fbUeiBrGVmbP3Ra32CQJ7R4dD/N6GKRANyVUTFDYU0l05QVmjPA+TIwRpwPoJFJTxcVMx9BqgyaEheq63Ax9rwFflgZIVviNNwdEapttN8JTOcMC9b9pHStbtjnAhB2QahaSl2uFINVNMFbyC/urkRPQRJoGp8Y57oVu3N+ubyY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HwOfOxNY; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Sd7sj++5"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A0831F00A3A;
-	Fri, 10 Jul 2026 20:25:47 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HwOfOxNY"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD1A91F000E9;
+	Fri, 10 Jul 2026 20:25:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783715147;
-	bh=xkkm/ay4UwW+LKTRMQXsXHe7l4TsIKcsEKX51F7sGr4=;
-	h=Date:From:To:Cc:Subject:In-Reply-To;
-	b=Sd7sj++52Pz2Pz2wGW3mFCJs7y5zatPJ6wjFHodxWDPYb9ZC+NX15p0Uny3xfhysj
-	 wElnyMhbIk3ZUUOA5+t10GaPqjbbPsyfgHALPKW6KnJtDLUAyYaKU1fwOkEBJmolO7
-	 0ePWxShhOkhgF2fBtCCjMwYKKC/CunYss+mySjVw3PW+rxJBWmsEXZyIZ3w2KvOSp6
-	 a+wBIBpHFugDxxDB71+jUyYifB+wywDqnLXJE3CGR+A/MkdE1aESXoj8Lz8C+GBLyj
-	 naz9D8aUs4b4ooSPfrhUV/DJVq9hOpsig9yUtQzeTvdZ6tfLFPgzxALqrTBDe3In7h
-	 qzCiOIDuy6RgQ==
-Date: Fri, 10 Jul 2026 15:25:46 -0500
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: Manivannan Sadhasivam <mani@kernel.org>
-Cc: Bjorn Helgaas <bhelgaas@google.com>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Nirmal Patel <nirmal.patel@linux.intel.com>,
-	Jonathan Derrick <jonathan.derrick@linux.dev>,
-	Jeff Johnson <jjohnson@kernel.org>, linux-pci@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-wireless@vger.kernel.org, ath12k@lists.infradead.org,
-	ath11k@lists.infradead.org, ath10k@lists.infradead.org,
-	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-	Qiang Yu <qiang.yu@oss.qualcomm.com>,
-	Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>,
-	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-Subject: Re: [PATCH v3 6/8] wifi: ath12k: Use
- pci_{enable/disable}_link_state() APIs to enable/disable ASPM states
-Message-ID: <20260710202546.GA989860@bhelgaas>
+	s=k20260515; t=1783715161;
+	bh=bUGGYLPM184fXg7TuW5WlZpqNKDyTrGesm4GIDrm7/g=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc;
+	b=HwOfOxNYJr0ufnnwjsShvm8UoTFDoVDyZyLe5qM8luP+IyMfUureE/4/LdfG8uNvp
+	 l2fyy2sklIZ1g8zXU1h/Dujp91lJ3y/YMUEyIA0yaCkBv64dn7+eK6bnjONBXyGjkh
+	 2MdWVKmdvm7AgFGWE4NqEcl7KMYdmzXxx45wTsfG/uOos67hsa+uJWogpK3oSsHZLs
+	 PEoCxmuQR0OPyTuKW9A7PRu792Qxjs8eLhacq5hB9InGQR663cidPLcGe/v49JjENl
+	 kWNryTiYfujVP70WKEmXvqMUsNxPgx4q7+0bAV5xV/Oa57dgKbVLEJW9cwR83wMw30
+	 Xxu+4E6LLwm+Q==
+From: Lorenzo Stoakes <ljs@kernel.org>
+Date: Fri, 10 Jul 2026 21:17:03 +0100
+Subject: [PATCH v2 22/33] mm/vma: introduce vma_assert_can_modify()
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260708-pci-aspm-fix-v3-6-6bd72451746e@kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260710-b4-pre-scalable-cow-v2-22-2a5aa403d977@kernel.org>
+References: <20260710-b4-pre-scalable-cow-v2-0-2a5aa403d977@kernel.org>
+In-Reply-To: <20260710-b4-pre-scalable-cow-v2-0-2a5aa403d977@kernel.org>
+To: Andrew Morton <akpm@linux-foundation.org>, 
+ David Hildenbrand <david@kernel.org>, 
+ "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>, 
+ Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
+ Michal Hocko <mhocko@suse.com>, Rik van Riel <riel@surriel.com>, 
+ Harry Yoo <harry@kernel.org>, Jann Horn <jannh@google.com>, 
+ Lance Yang <lance.yang@linux.dev>, Pedro Falcato <pfalcato@suse.de>, 
+ Russell King <linux@armlinux.org.uk>, Dinh Nguyen <dinguyen@kernel.org>, 
+ Simon Schuster <schuster.simon@siemens-energy.com>, 
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, 
+ Helge Deller <deller@gmx.de>, Alexander Viro <viro@zeniv.linux.org.uk>, 
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
+ Dan Williams <djbw@kernel.org>, Matthew Wilcox <willy@infradead.org>, 
+ Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, 
+ Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>, 
+ Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, 
+ Arnaldo Carvalho de Melo <acme@kernel.org>, 
+ Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>, 
+ Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>, 
+ Adrian Hunter <adrian.hunter@intel.com>, 
+ James Clark <james.clark@linaro.org>, Zi Yan <ziy@nvidia.com>, 
+ Baolin Wang <baolin.wang@linux.alibaba.com>, Nico Pache <npache@redhat.com>, 
+ Ryan Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>, 
+ Barry Song <baohua@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>, 
+ Naoya Horiguchi <nao.horiguchi@gmail.com>, Xu Xin <xu.xin16@zte.com.cn>, 
+ Chengming Zhou <chengming.zhou@linux.dev>, SJ Park <sj@kernel.org>, 
+ Matthew Brost <matthew.brost@intel.com>, 
+ Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>, 
+ Byungchul Park <byungchul@sk.com>, Gregory Price <gourry@gourry.net>, 
+ Ying Huang <ying.huang@linux.alibaba.com>, 
+ Alistair Popple <apopple@nvidia.com>, Hugh Dickins <hughd@google.com>, 
+ Peter Xu <peterx@redhat.com>, Kees Cook <kees@kernel.org>, 
+ Marek Szyprowski <m.szyprowski@samsung.com>, 
+ Robin Murphy <robin.murphy@arm.com>, 
+ Andrey Konovalov <andreyknvl@gmail.com>, 
+ Alexander Potapenko <glider@google.com>, Dmitry Vyukov <dvyukov@google.com>, 
+ Steven Rostedt <rostedt@goodmis.org>, 
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+ Jarkko Sakkinen <jarkko@kernel.org>, 
+ Dave Hansen <dave.hansen@linux.intel.com>, 
+ Thomas Gleixner <tglx@kernel.org>, Borislav Petkov <bp@alien8.de>, 
+ x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
+ Ian Abbott <abbotti@mev.co.uk>, 
+ H Hartley Sweeten <hsweeten@visionengravers.com>, 
+ Lucas Stach <l.stach@pengutronix.de>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, 
+ Thierry Reding <thierry.reding@kernel.org>, 
+ Mikko Perttunen <mperttunen@nvidia.com>, 
+ Jonathan Hunter <jonathanh@nvidia.com>, 
+ Christian Koenig <christian.koenig@amd.com>, Huang Rui <ray.huang@amd.com>, 
+ Matthew Auld <matthew.auld@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>, 
+ Yishai Hadas <yishaih@nvidia.com>, 
+ Shameer Kolothum <skolothumtho@nvidia.com>, 
+ Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, 
+ Alex Williamson <alex@shazbot.org>, Paolo Bonzini <pbonzini@redhat.com>, 
+ Shakeel Butt <shakeel.butt@linux.dev>, Usama Arif <usama.arif@linux.dev>
+Cc: Lorenzo Stoakes <ljs@kernel.org>, linux-mm@kvack.org, 
+ linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ linux-parisc@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+ nvdimm@lists.linux.dev, linux-perf-users@vger.kernel.org, 
+ linux-trace-kernel@vger.kernel.org, damon@lists.linux.dev, 
+ iommu@lists.linux.dev, kasan-dev@googlegroups.com, 
+ linux-sgx@vger.kernel.org, etnaviv@lists.freedesktop.org, 
+ dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
+ freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org, 
+ kvm@vger.kernel.org, Russell King <linux+etnaviv@armlinux.org.uk>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3596; i=ljs@kernel.org;
+ h=from:subject:message-id; bh=viV3MpLqfUAe1sqc9evXVxPvdZ0z1c7yNCArBlJLKts=;
+ b=owGbwMvMwCV2fu7ZrsZH9SKMp9WSGLICg22Kz9fNu6eSNvvBXWZ7lRONX6ct3GUurDZVbbXAC
+ pPsR6V/OkpZGMS4GGTFFFmefxHfHyQSNq/zgr8bzBxWJpAhDFycAjCRhN8M/wz3Ji1evXiHVaSo
+ 7KH3RZOj9q/2tta+sizgwKoUXSbHeTEM/xOvbZzUJBNU59dnr7C7/JXw/aXmwrs9029wLZytnZn
+ xnhEA
+X-Developer-Key: i=ljs@kernel.org; a=openpgp;
+ fpr=E7F417BF5214569E89D04F46CF9DCD8A81E27F14
 
-On Wed, Jul 08, 2026 at 04:30:20PM +0200, Manivannan Sadhasivam wrote:
-> From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> 
-> It is not recommended to enable/disable the ASPM states on the back of the
-> PCI core directly using the LNKCTL register. It will break the PCI core's
-> knowledge about the device ASPM states. So use the APIs exposed by the PCI
-> core to enable/disable ASPM states.
-> 
-> Tested-on: WCN7850 hw2.0 PCI WLAN.HMT.1.0.c5-00481-QCAHMTSWPL_V1.0_V2.0_SILICONZ-3
-> 
-> Reported-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
-> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> ---
->  drivers/net/wireless/ath/ath12k/Kconfig |  2 +-
->  drivers/net/wireless/ath/ath12k/pci.c   | 19 +++----------------
->  drivers/net/wireless/ath/ath12k/pci.h   |  4 +++-
->  3 files changed, 7 insertions(+), 18 deletions(-)
-> 
-> diff --git a/drivers/net/wireless/ath/ath12k/Kconfig b/drivers/net/wireless/ath/ath12k/Kconfig
-> index 4a2b240f967a..7852ede3eaea 100644
-> --- a/drivers/net/wireless/ath/ath12k/Kconfig
-> +++ b/drivers/net/wireless/ath/ath12k/Kconfig
-> @@ -1,7 +1,7 @@
->  # SPDX-License-Identifier: BSD-3-Clause-Clear
->  config ATH12K
->  	tristate "Qualcomm Wi-Fi 7 support (ath12k)"
-> -	depends on MAC80211 && HAS_DMA && PCI
-> +	depends on MAC80211 && HAS_DMA && PCI && PCIEASPM
+vma_assert_write_locked() and vma_assert_attached() are useful for their
+own purposes, however VMA code absolutely does allow the modification of
+non-write locked VMAs if they are at that point detached (i.e. unreachable
+from anywhere).
 
-As Sashiko pointed out [1], I think adding the PCIEASPM dependency is
-an issue.  The PCI core should provide stubs or whatever is necessary
-to make ath12k work even if PCIEASPM isn't selected.
+It's therefore useful to be able to assert that a VMA is either
+detached (modification doesn't matter) or write locked (you're explicitly
+locked for modification).
 
-I'm guessing this hardware depends on the ability to disable ASPM even
-without PCIEASPM so we probably would need more than just empty stubs.
-We do build aspm.c unconditionally now and we provide LTR and L1SS
-save/restore regardless of PCIEASPM.  Maybe we need something similar
-here.
+Therefore introduce vma_assert_can_modify() for this purpose.
 
-[1] https://lore.kernel.org/all/20260708144904.0CC4F1F000E9@smtp.kernel.org
+While we're here, make vma_is_attached() available generally - if
+!CONFIG_PER_VMA_LOCK, then there's no sense in which a VMA is
+detached (vma_mark_detached() is a noop), so have this default to true in
+this case.
 
->  	select QCOM_QMI_HELPERS
->  	select MHI_BUS
->  	select QRTR
-> diff --git a/drivers/net/wireless/ath/ath12k/pci.c b/drivers/net/wireless/ath/ath12k/pci.c
-> index d9a22d6afbb0..6d48fb25690d 100644
-> --- a/drivers/net/wireless/ath/ath12k/pci.c
-> +++ b/drivers/net/wireless/ath/ath12k/pci.c
-> @@ -884,19 +884,9 @@ static void ath12k_pci_free_region(struct ath12k_pci *ab_pci)
->  
->  static void ath12k_pci_aspm_disable(struct ath12k_pci *ab_pci)
->  {
-> -	struct ath12k_base *ab = ab_pci->ab;
-> -
-> -	pcie_capability_read_word(ab_pci->pdev, PCI_EXP_LNKCTL,
-> -				  &ab_pci->link_ctl);
-> -
-> -	ath12k_dbg(ab, ATH12K_DBG_PCI, "pci link_ctl 0x%04x L0s %d L1 %d\n",
-> -		   ab_pci->link_ctl,
-> -		   u16_get_bits(ab_pci->link_ctl, PCI_EXP_LNKCTL_ASPM_L0S),
-> -		   u16_get_bits(ab_pci->link_ctl, PCI_EXP_LNKCTL_ASPM_L1));
-> +	ab_pci->aspm_states = pcie_aspm_enabled(ab_pci->pdev);
->  
-> -	/* disable L0s and L1 */
-> -	pcie_capability_clear_word(ab_pci->pdev, PCI_EXP_LNKCTL,
-> -				   PCI_EXP_LNKCTL_ASPMC);
-> +	pci_disable_link_state(ab_pci->pdev, PCIE_LINK_STATE_ASPM_ALL);
->  
->  	set_bit(ATH12K_PCI_ASPM_RESTORE, &ab_pci->flags);
->  }
-> @@ -925,10 +915,7 @@ static void ath12k_pci_aspm_restore(struct ath12k_pci *ab_pci)
->  {
->  	if (ab_pci->ab->hw_params->supports_aspm &&
->  	    test_and_clear_bit(ATH12K_PCI_ASPM_RESTORE, &ab_pci->flags))
-> -		pcie_capability_clear_and_set_word(ab_pci->pdev, PCI_EXP_LNKCTL,
-> -						   PCI_EXP_LNKCTL_ASPMC,
-> -						   ab_pci->link_ctl &
-> -						   PCI_EXP_LNKCTL_ASPMC);
-> +		pci_force_enable_link_state(ab_pci->pdev, ab_pci->aspm_states);
->  }
->  
->  static void ath12k_pci_cancel_workqueue(struct ath12k_base *ab)
-> diff --git a/drivers/net/wireless/ath/ath12k/pci.h b/drivers/net/wireless/ath/ath12k/pci.h
-> index 0e0e2020c6ae..409ef063cd69 100644
-> --- a/drivers/net/wireless/ath/ath12k/pci.h
-> +++ b/drivers/net/wireless/ath/ath12k/pci.h
-> @@ -128,7 +128,9 @@ struct ath12k_pci {
->  
->  	/* enum ath12k_pci_flags */
->  	unsigned long flags;
-> -	u16 link_ctl;
-> +
-> +	/* Cached PCIe ASPM states */
-> +	u32 aspm_states;
->  	unsigned long irq_flags;
->  	const struct ath12k_pci_ops *pci_ops;
->  	u32 qmi_instance;
-> 
-> -- 
-> 2.43.0
-> 
-> 
+Also update VMA userland tests to reflect this change, correcting the
+previously open-coded vma_assert_[attached,detached]() there.
+
+Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
+---
+ include/linux/mmap_lock.h       |  8 ++++++++
+ tools/testing/vma/include/dup.h | 15 +++++++++++++--
+ 2 files changed, 21 insertions(+), 2 deletions(-)
+
+diff --git a/include/linux/mmap_lock.h b/include/linux/mmap_lock.h
+index 04b8f61ece5d..d513286d8160 100644
+--- a/include/linux/mmap_lock.h
++++ b/include/linux/mmap_lock.h
+@@ -506,6 +506,8 @@ static inline __must_check
+ int vma_start_write_killable(struct vm_area_struct *vma) { return 0; }
+ static inline void vma_assert_write_locked(struct vm_area_struct *vma)
+ 		{ mmap_assert_write_locked(vma->vm_mm); }
++static inline bool vma_is_attached(struct vm_area_struct *vma)
++		{ return true; }
+ static inline void vma_assert_attached(struct vm_area_struct *vma) {}
+ static inline void vma_assert_detached(struct vm_area_struct *vma) {}
+ static inline void vma_mark_attached(struct vm_area_struct *vma) {}
+@@ -530,6 +532,12 @@ static inline void vma_assert_stabilised(struct vm_area_struct *vma)
+ 
+ #endif /* CONFIG_PER_VMA_LOCK */
+ 
++static inline void vma_assert_can_modify(struct vm_area_struct *vma)
++{
++	if (vma_is_attached(vma))
++		vma_assert_write_locked(vma);
++}
++
+ static inline void mmap_write_lock(struct mm_struct *mm)
+ {
+ 	__mmap_lock_trace_start_locking(mm, true);
+diff --git a/tools/testing/vma/include/dup.h b/tools/testing/vma/include/dup.h
+index 7ed165c8d9bc..e9ddc818f2c3 100644
+--- a/tools/testing/vma/include/dup.h
++++ b/tools/testing/vma/include/dup.h
+@@ -1163,6 +1163,11 @@ static inline struct vm_area_struct *vma_next(struct vma_iterator *vmi)
+ 	return mas_find(&vmi->mas, ULONG_MAX);
+ }
+ 
++static inline bool vma_is_attached(struct vm_area_struct *vma)
++{
++	return refcount_read(&vma->vm_refcnt);
++}
++
+ /*
+  * WARNING: to avoid racing with vma_mark_attached()/vma_mark_detached(), these
+  * assertions should be made either under mmap_write_lock or when the object
+@@ -1170,12 +1175,12 @@ static inline struct vm_area_struct *vma_next(struct vma_iterator *vmi)
+  */
+ static inline void vma_assert_attached(struct vm_area_struct *vma)
+ {
+-	WARN_ON_ONCE(!refcount_read(&vma->vm_refcnt));
++	WARN_ON_ONCE(!vma_is_attached(vma));
+ }
+ 
+ static inline void vma_assert_detached(struct vm_area_struct *vma)
+ {
+-	WARN_ON_ONCE(refcount_read(&vma->vm_refcnt));
++	WARN_ON_ONCE(vma_is_attached(vma));
+ }
+ 
+ static inline void vma_assert_write_locked(struct vm_area_struct *);
+@@ -1564,3 +1569,9 @@ static inline pgoff_t linear_page_index(const struct vm_area_struct *vma,
+ 	pgoff += vma_start_pgoff(vma);
+ 	return pgoff;
+ }
++
++static inline void vma_assert_can_modify(struct vm_area_struct *vma)
++{
++	if (vma_is_attached(vma))
++		vma_assert_write_locked(vma);
++}
+
+-- 
+2.55.0
+
