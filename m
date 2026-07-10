@@ -1,409 +1,160 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3CA339BFF1;
-	Fri, 10 Jul 2026 20:25:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D3B039EF32;
+	Fri, 10 Jul 2026 20:25:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783715140; cv=none; b=nNQETDMQfaQkwIGULwWoJJJE2FKbMFkHEB+TxjdVISnch/mjJFA5lpBlNaorZ2PpDOfAkz/lqa5sYPA5rH/qVQbNTgz9yqdKUy/zslcdPe/xCdSvL/YHlyd35hseu+T7IIihTCGzZ1HYMOKR4K8o4VyiCf/z+fWAkoxC5m27Yxc=
+	t=1783715149; cv=none; b=cj+78/VAwO1AHiSBKMB6hUQwNGtM7Vya7YwaZDax1l6LrB/z2LGgGvg5lPCIf6/wlLQVHMHGfc2ADwZCRXe8Yc1gD0rSdhu+Y0n8IL4mXjeMhMtAVUWU4xV/P8+FpSgxLlnWT5dleILt71BPuX8O0EnLp4mMW9WAXhy8784fYCI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783715140; c=relaxed/simple;
-	bh=ckvqCIz6u2cx+l/WDG6gaArVCUWUIRqrGc2wRGUU3cQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=uAfdXPjZnJXoMQg18lL28oVSjT2fY578lolqTCbuCAGl5O+hshNH9nvrMl1vHHZbjoAxBwqiw6O5dLOEh0URSa8FgK6BGDCpCNpbnjmfPEYoVgzD1lv1l8RYA1S3ZEUCv+z/op1pBmxcaZpsMFLQDAnZPjp92i5iakkqOG0lLBI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mab6I1St; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783715149; c=relaxed/simple;
+	bh=MYkhLJjFzu/0shKCRegPVVOR3/cURK0eqPqvT6VmZW8=;
+	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To; b=Tp3AXTv5EcrAUDrG2wZWQG246NyalAQfupWunhCBojb4K3xbQEISrZKnRqkWnRKOPyyzkmuzlzdZWcHI9LYgo+5Ks6/giImNBiIS4E6tgU2iMkYA+vEE7e5tYPwhg2nIfL5Gdj6vL0LGEyzWRxrUjxHdRmD4OpOpSuVes3Cw3mw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Sd7sj++5; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mab6I1St"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 606461F00A3A;
-	Fri, 10 Jul 2026 20:25:15 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Sd7sj++5"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A0831F00A3A;
+	Fri, 10 Jul 2026 20:25:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783715138;
-	bh=cISQtH1v9odRfIrbAbtNudocrvnlKFEn/zLm3RnWId0=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=mab6I1StgAzj9g7uw5lQ/WS5hP///Fjejk+W+vwBcSz7BidfRMMNLWK8hC9Ksatl1
-	 gswNJV0nG+cI3mkpyGUw9hZtSi8RjZ1Hn0Cks+8M6durix9KxdHBsmsEJpP4uzzED8
-	 nwaNmCyg7v5aq+9gb6aFja4/BRzqV03uXijWLCJhjJBaKoIksOwwmCoPQNjfcTWVdb
-	 zpnr4ozejDmTByYn3l1TvntcG2kUv26aOn0O+NTjRuERWfwlgXGwDF2AQ7fQQthSpO
-	 OM87sySq0K04/Zv6rZAF7yNU1yp1Yno0o5/2J89J8xL9KBaczByOCZaLm6M2KmLaJs
-	 Zd11QZPEcWKsQ==
-From: Lorenzo Stoakes <ljs@kernel.org>
-Date: Fri, 10 Jul 2026 21:17:02 +0100
-Subject: [PATCH v2 21/33] mm: use linear_page_[index, delta]() consistently
+	s=k20260515; t=1783715147;
+	bh=xkkm/ay4UwW+LKTRMQXsXHe7l4TsIKcsEKX51F7sGr4=;
+	h=Date:From:To:Cc:Subject:In-Reply-To;
+	b=Sd7sj++52Pz2Pz2wGW3mFCJs7y5zatPJ6wjFHodxWDPYb9ZC+NX15p0Uny3xfhysj
+	 wElnyMhbIk3ZUUOA5+t10GaPqjbbPsyfgHALPKW6KnJtDLUAyYaKU1fwOkEBJmolO7
+	 0ePWxShhOkhgF2fBtCCjMwYKKC/CunYss+mySjVw3PW+rxJBWmsEXZyIZ3w2KvOSp6
+	 a+wBIBpHFugDxxDB71+jUyYifB+wywDqnLXJE3CGR+A/MkdE1aESXoj8Lz8C+GBLyj
+	 naz9D8aUs4b4ooSPfrhUV/DJVq9hOpsig9yUtQzeTvdZ6tfLFPgzxALqrTBDe3In7h
+	 qzCiOIDuy6RgQ==
+Date: Fri, 10 Jul 2026 15:25:46 -0500
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: Manivannan Sadhasivam <mani@kernel.org>
+Cc: Bjorn Helgaas <bhelgaas@google.com>,
+	Lorenzo Pieralisi <lpieralisi@kernel.org>,
+	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Nirmal Patel <nirmal.patel@linux.intel.com>,
+	Jonathan Derrick <jonathan.derrick@linux.dev>,
+	Jeff Johnson <jjohnson@kernel.org>, linux-pci@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-wireless@vger.kernel.org, ath12k@lists.infradead.org,
+	ath11k@lists.infradead.org, ath10k@lists.infradead.org,
+	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+	Qiang Yu <qiang.yu@oss.qualcomm.com>,
+	Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>,
+	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Subject: Re: [PATCH v3 6/8] wifi: ath12k: Use
+ pci_{enable/disable}_link_state() APIs to enable/disable ASPM states
+Message-ID: <20260710202546.GA989860@bhelgaas>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260710-b4-pre-scalable-cow-v2-21-2a5aa403d977@kernel.org>
-References: <20260710-b4-pre-scalable-cow-v2-0-2a5aa403d977@kernel.org>
-In-Reply-To: <20260710-b4-pre-scalable-cow-v2-0-2a5aa403d977@kernel.org>
-To: Andrew Morton <akpm@linux-foundation.org>, 
- David Hildenbrand <david@kernel.org>, 
- "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>, 
- Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
- Michal Hocko <mhocko@suse.com>, Rik van Riel <riel@surriel.com>, 
- Harry Yoo <harry@kernel.org>, Jann Horn <jannh@google.com>, 
- Lance Yang <lance.yang@linux.dev>, Pedro Falcato <pfalcato@suse.de>, 
- Russell King <linux@armlinux.org.uk>, Dinh Nguyen <dinguyen@kernel.org>, 
- Simon Schuster <schuster.simon@siemens-energy.com>, 
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, 
- Helge Deller <deller@gmx.de>, Alexander Viro <viro@zeniv.linux.org.uk>, 
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
- Dan Williams <djbw@kernel.org>, Matthew Wilcox <willy@infradead.org>, 
- Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, 
- Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>, 
- Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, 
- Arnaldo Carvalho de Melo <acme@kernel.org>, 
- Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
- Alexander Shishkin <alexander.shishkin@linux.intel.com>, 
- Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>, 
- Adrian Hunter <adrian.hunter@intel.com>, 
- James Clark <james.clark@linaro.org>, Zi Yan <ziy@nvidia.com>, 
- Baolin Wang <baolin.wang@linux.alibaba.com>, Nico Pache <npache@redhat.com>, 
- Ryan Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>, 
- Barry Song <baohua@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>, 
- Naoya Horiguchi <nao.horiguchi@gmail.com>, Xu Xin <xu.xin16@zte.com.cn>, 
- Chengming Zhou <chengming.zhou@linux.dev>, SJ Park <sj@kernel.org>, 
- Matthew Brost <matthew.brost@intel.com>, 
- Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>, 
- Byungchul Park <byungchul@sk.com>, Gregory Price <gourry@gourry.net>, 
- Ying Huang <ying.huang@linux.alibaba.com>, 
- Alistair Popple <apopple@nvidia.com>, Hugh Dickins <hughd@google.com>, 
- Peter Xu <peterx@redhat.com>, Kees Cook <kees@kernel.org>, 
- Marek Szyprowski <m.szyprowski@samsung.com>, 
- Robin Murphy <robin.murphy@arm.com>, 
- Andrey Konovalov <andreyknvl@gmail.com>, 
- Alexander Potapenko <glider@google.com>, Dmitry Vyukov <dvyukov@google.com>, 
- Steven Rostedt <rostedt@goodmis.org>, 
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
- Jarkko Sakkinen <jarkko@kernel.org>, 
- Dave Hansen <dave.hansen@linux.intel.com>, 
- Thomas Gleixner <tglx@kernel.org>, Borislav Petkov <bp@alien8.de>, 
- x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>, 
- Ian Abbott <abbotti@mev.co.uk>, 
- H Hartley Sweeten <hsweeten@visionengravers.com>, 
- Lucas Stach <l.stach@pengutronix.de>, 
- Christian Gmeiner <christian.gmeiner@gmail.com>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- Rob Clark <robin.clark@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, 
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, 
- Thierry Reding <thierry.reding@kernel.org>, 
- Mikko Perttunen <mperttunen@nvidia.com>, 
- Jonathan Hunter <jonathanh@nvidia.com>, 
- Christian Koenig <christian.koenig@amd.com>, Huang Rui <ray.huang@amd.com>, 
- Matthew Auld <matthew.auld@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>, 
- Yishai Hadas <yishaih@nvidia.com>, 
- Shameer Kolothum <skolothumtho@nvidia.com>, 
- Kevin Tian <kevin.tian@intel.com>, Ankit Agrawal <ankita@nvidia.com>, 
- Alex Williamson <alex@shazbot.org>, Paolo Bonzini <pbonzini@redhat.com>, 
- Shakeel Butt <shakeel.butt@linux.dev>, Usama Arif <usama.arif@linux.dev>
-Cc: Lorenzo Stoakes <ljs@kernel.org>, linux-mm@kvack.org, 
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- linux-parisc@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
- nvdimm@lists.linux.dev, linux-perf-users@vger.kernel.org, 
- linux-trace-kernel@vger.kernel.org, damon@lists.linux.dev, 
- iommu@lists.linux.dev, kasan-dev@googlegroups.com, 
- linux-sgx@vger.kernel.org, etnaviv@lists.freedesktop.org, 
- dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
- freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org, 
- kvm@vger.kernel.org, Russell King <linux+etnaviv@armlinux.org.uk>, 
- Kai Huang <kai.huang@intel.com>, Ackerley Tng <ackerleytng@google.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=10399; i=ljs@kernel.org;
- h=from:subject:message-id; bh=ckvqCIz6u2cx+l/WDG6gaArVCUWUIRqrGc2wRGUU3cQ=;
- b=kA0DAAoWz53NioHifxQByyZiAGpRUzzIHD/Ww2NC0/pDOgUFGYibcK9BkNhLN7CJLfyH3DJ7B
- oh1BAAWCgAdFiEE5/QXv1IUVp6J0E9Gz53NioHifxQFAmpRUzwACgkQz53NioHifxTDZQD7BkHF
- NX9UQukSdl2VQHKwu0wreg7UTF/+bcMU3geRfBYA/0WbEVtZm+JfAzf9LjseOW526ZEuHJGrzmp
- uZYAiIK0F
-X-Developer-Key: i=ljs@kernel.org; a=openpgp;
- fpr=E7F417BF5214569E89D04F46CF9DCD8A81E27F14
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260708-pci-aspm-fix-v3-6-6bd72451746e@kernel.org>
 
-There are a number of places where we open code what linear_page_index()
-and linear_page_delta() calculate.
+On Wed, Jul 08, 2026 at 04:30:20PM +0200, Manivannan Sadhasivam wrote:
+> From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+> 
+> It is not recommended to enable/disable the ASPM states on the back of the
+> PCI core directly using the LNKCTL register. It will break the PCI core's
+> knowledge about the device ASPM states. So use the APIs exposed by the PCI
+> core to enable/disable ASPM states.
+> 
+> Tested-on: WCN7850 hw2.0 PCI WLAN.HMT.1.0.c5-00481-QCAHMTSWPL_V1.0_V2.0_SILICONZ-3
+> 
+> Reported-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
+> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+> ---
+>  drivers/net/wireless/ath/ath12k/Kconfig |  2 +-
+>  drivers/net/wireless/ath/ath12k/pci.c   | 19 +++----------------
+>  drivers/net/wireless/ath/ath12k/pci.h   |  4 +++-
+>  3 files changed, 7 insertions(+), 18 deletions(-)
+> 
+> diff --git a/drivers/net/wireless/ath/ath12k/Kconfig b/drivers/net/wireless/ath/ath12k/Kconfig
+> index 4a2b240f967a..7852ede3eaea 100644
+> --- a/drivers/net/wireless/ath/ath12k/Kconfig
+> +++ b/drivers/net/wireless/ath/ath12k/Kconfig
+> @@ -1,7 +1,7 @@
+>  # SPDX-License-Identifier: BSD-3-Clause-Clear
+>  config ATH12K
+>  	tristate "Qualcomm Wi-Fi 7 support (ath12k)"
+> -	depends on MAC80211 && HAS_DMA && PCI
+> +	depends on MAC80211 && HAS_DMA && PCI && PCIEASPM
 
-Replace this code with the appropriate functions for consistency.
+As Sashiko pointed out [1], I think adding the PCIEASPM dependency is
+an issue.  The PCI core should provide stubs or whatever is necessary
+to make ath12k work even if PCIEASPM isn't selected.
 
-No functional change intended.
+I'm guessing this hardware depends on the ability to disable ASPM even
+without PCIEASPM so we probably would need more than just empty stubs.
+We do build aspm.c unconditionally now and we provide LTR and L1SS
+save/restore regardless of PCIEASPM.  Maybe we need something similar
+here.
 
-Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de> # for DRM
-Acked-by: Kai Huang <kai.huang@intel.com> # for sgx
-Reviewed-by: Gregory Price <gourry@gourry.net>
-Reviewed-by: Pedro Falcato <pfalcato@suse.de> # for mm
-Reviewed-by: Ackerley Tng <ackerleytng@google.com> # for guest_memfd
-Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
----
- arch/arm/mm/fault-armv.c              | 2 +-
- arch/x86/kernel/cpu/sgx/virt.c        | 3 ++-
- drivers/gpu/drm/etnaviv/etnaviv_gem.c | 3 ++-
- drivers/gpu/drm/gma500/gem.c          | 2 +-
- drivers/gpu/drm/msm/msm_gem.c         | 3 ++-
- drivers/gpu/drm/omapdrm/omap_gem.c    | 5 +++--
- drivers/gpu/drm/tegra/gem.c           | 3 ++-
- drivers/gpu/drm/ttm/ttm_bo_vm.c       | 7 ++++---
- drivers/vfio/pci/nvgrace-gpu/main.c   | 3 ++-
- drivers/vfio/pci/vfio_pci_core.c      | 3 ++-
- mm/nommu.c                            | 2 +-
- mm/vma.c                              | 2 +-
- virt/kvm/guest_memfd.c                | 2 +-
- 13 files changed, 24 insertions(+), 16 deletions(-)
+[1] https://lore.kernel.org/all/20260708144904.0CC4F1F000E9@smtp.kernel.org
 
-diff --git a/arch/arm/mm/fault-armv.c b/arch/arm/mm/fault-armv.c
-index b505f1fd7984..2769b0f3325f 100644
---- a/arch/arm/mm/fault-armv.c
-+++ b/arch/arm/mm/fault-armv.c
-@@ -132,7 +132,7 @@ make_coherent(struct address_space *mapping, struct vm_area_struct *vma,
- 	pgoff_t pgoff;
- 	int aliases = 0;
- 
--	pgoff = vma->vm_pgoff + ((addr - vma->vm_start) >> PAGE_SHIFT);
-+	pgoff = linear_page_index(vma, addr);
- 
- 	/*
- 	 * If we have any shared mappings that are in the same mm
-diff --git a/arch/x86/kernel/cpu/sgx/virt.c b/arch/x86/kernel/cpu/sgx/virt.c
-index db6806c40483..6a1933ddc6fc 100644
---- a/arch/x86/kernel/cpu/sgx/virt.c
-+++ b/arch/x86/kernel/cpu/sgx/virt.c
-@@ -9,6 +9,7 @@
- #include <linux/miscdevice.h>
- #include <linux/mm.h>
- #include <linux/mman.h>
-+#include <linux/pagemap.h>
- #include <linux/sched/mm.h>
- #include <linux/sched/signal.h>
- #include <linux/slab.h>
-@@ -41,7 +42,7 @@ static int __sgx_vepc_fault(struct sgx_vepc *vepc,
- 	WARN_ON(!mutex_is_locked(&vepc->lock));
- 
- 	/* Calculate index of EPC page in virtual EPC's page_array */
--	index = vma->vm_pgoff + PFN_DOWN(addr - vma->vm_start);
-+	index = linear_page_index(vma, addr);
- 
- 	epc_page = xa_load(&vepc->page_array, index);
- 	if (epc_page)
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem.c b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-index b0436a1e103f..2e4d6d117ee2 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-@@ -6,6 +6,7 @@
- #include <drm/drm_prime.h>
- #include <drm/drm_print.h>
- #include <linux/dma-mapping.h>
-+#include <linux/pagemap.h>
- #include <linux/shmem_fs.h>
- #include <linux/spinlock.h>
- #include <linux/vmalloc.h>
-@@ -188,7 +189,7 @@ static vm_fault_t etnaviv_gem_fault(struct vm_fault *vmf)
- 	}
- 
- 	/* We don't use vmf->pgoff since that has the fake offset: */
--	pgoff = (vmf->address - vma->vm_start) >> PAGE_SHIFT;
-+	pgoff = linear_page_delta(vma, vmf->address);
- 
- 	pfn = page_to_pfn(pages[pgoff]);
- 
-diff --git a/drivers/gpu/drm/gma500/gem.c b/drivers/gpu/drm/gma500/gem.c
-index 88f1e86c8903..2708e8c68f4c 100644
---- a/drivers/gpu/drm/gma500/gem.c
-+++ b/drivers/gpu/drm/gma500/gem.c
-@@ -288,7 +288,7 @@ static vm_fault_t psb_gem_fault(struct vm_fault *vmf)
- 
- 	/* Page relative to the VMA start - we must calculate this ourselves
- 	   because vmf->pgoff is the fake GEM offset */
--	page_offset = (vmf->address - vma->vm_start) >> PAGE_SHIFT;
-+	page_offset = linear_page_delta(vma, vmf->address);
- 
- 	/* CPU view of the page, don't go via the GART for CPU writes */
- 	if (pobj->stolen)
-diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.c
-index efd3d3c9a449..cbf723a5d86f 100644
---- a/drivers/gpu/drm/msm/msm_gem.c
-+++ b/drivers/gpu/drm/msm/msm_gem.c
-@@ -9,6 +9,7 @@
- #include <linux/spinlock.h>
- #include <linux/shmem_fs.h>
- #include <linux/dma-buf.h>
-+#include <linux/pagemap.h>
- 
- #include <drm/drm_dumb_buffers.h>
- #include <drm/drm_prime.h>
-@@ -360,7 +361,7 @@ static vm_fault_t msm_gem_fault(struct vm_fault *vmf)
- 	}
- 
- 	/* We don't use vmf->pgoff since that has the fake offset: */
--	pgoff = (vmf->address - vma->vm_start) >> PAGE_SHIFT;
-+	pgoff = linear_page_delta(vma, vmf->address);
- 
- 	pfn = page_to_pfn(pages[pgoff]);
- 
-diff --git a/drivers/gpu/drm/omapdrm/omap_gem.c b/drivers/gpu/drm/omapdrm/omap_gem.c
-index 8e013e4f2c6b..00404fb6c29a 100644
---- a/drivers/gpu/drm/omapdrm/omap_gem.c
-+++ b/drivers/gpu/drm/omapdrm/omap_gem.c
-@@ -5,6 +5,7 @@
-  */
- 
- #include <linux/dma-mapping.h>
-+#include <linux/pagemap.h>
- #include <linux/seq_file.h>
- #include <linux/shmem_fs.h>
- #include <linux/spinlock.h>
-@@ -359,7 +360,7 @@ static vm_fault_t omap_gem_fault_1d(struct drm_gem_object *obj,
- 	pgoff_t pgoff;
- 
- 	/* We don't use vmf->pgoff since that has the fake offset: */
--	pgoff = (vmf->address - vma->vm_start) >> PAGE_SHIFT;
-+	pgoff = linear_page_delta(vma, vmf->address);
- 
- 	if (omap_obj->pages) {
- 		omap_gem_cpu_sync_page(obj, pgoff);
-@@ -407,7 +408,7 @@ static vm_fault_t omap_gem_fault_2d(struct drm_gem_object *obj,
- 	const int m = DIV_ROUND_UP(omap_obj->width << fmt, PAGE_SIZE);
- 
- 	/* We don't use vmf->pgoff since that has the fake offset: */
--	pgoff = (vmf->address - vma->vm_start) >> PAGE_SHIFT;
-+	pgoff = linear_page_delta(vma, vmf->address);
- 
- 	/*
- 	 * Actual address we start mapping at is rounded down to previous slot
-diff --git a/drivers/gpu/drm/tegra/gem.c b/drivers/gpu/drm/tegra/gem.c
-index 436394e04812..1d8d27a5ea89 100644
---- a/drivers/gpu/drm/tegra/gem.c
-+++ b/drivers/gpu/drm/tegra/gem.c
-@@ -13,6 +13,7 @@
- #include <linux/dma-buf.h>
- #include <linux/iommu.h>
- #include <linux/module.h>
-+#include <linux/pagemap.h>
- #include <linux/vmalloc.h>
- 
- #include <drm/drm_drv.h>
-@@ -564,7 +565,7 @@ static vm_fault_t tegra_bo_fault(struct vm_fault *vmf)
- 	if (!bo->pages)
- 		return VM_FAULT_SIGBUS;
- 
--	offset = (vmf->address - vma->vm_start) >> PAGE_SHIFT;
-+	offset = linear_page_delta(vma, vmf->address);
- 	page = bo->pages[offset];
- 
- 	return vmf_insert_page(vma, vmf->address, page);
-diff --git a/drivers/gpu/drm/ttm/ttm_bo_vm.c b/drivers/gpu/drm/ttm/ttm_bo_vm.c
-index a80510489c45..88babf435ac2 100644
---- a/drivers/gpu/drm/ttm/ttm_bo_vm.c
-+++ b/drivers/gpu/drm/ttm/ttm_bo_vm.c
-@@ -32,6 +32,7 @@
- #define pr_fmt(fmt) "[TTM] " fmt
- 
- #include <linux/export.h>
-+#include <linux/pagemap.h>
- 
- #include <drm/ttm/ttm_bo.h>
- #include <drm/ttm/ttm_placement.h>
-@@ -208,9 +209,9 @@ vm_fault_t ttm_bo_vm_fault_reserved(struct vm_fault *vmf,
- 	if (unlikely(err != 0))
- 		return VM_FAULT_SIGBUS;
- 
--	page_offset = ((address - vma->vm_start) >> PAGE_SHIFT) +
--		vma->vm_pgoff - drm_vma_node_start(&bo->base.vma_node);
--	page_last = vma_pages(vma) + vma->vm_pgoff -
-+	page_offset = linear_page_index(vma, address) -
-+		drm_vma_node_start(&bo->base.vma_node);
-+	page_last = vma_end_pgoff(vma) -
- 		drm_vma_node_start(&bo->base.vma_node);
- 
- 	if (unlikely(page_offset >= PFN_UP(bo->base.size)))
-diff --git a/drivers/vfio/pci/nvgrace-gpu/main.c b/drivers/vfio/pci/nvgrace-gpu/main.c
-index d07dcacb76bd..963fd8ded20d 100644
---- a/drivers/vfio/pci/nvgrace-gpu/main.c
-+++ b/drivers/vfio/pci/nvgrace-gpu/main.c
-@@ -11,6 +11,7 @@
- #include <linux/jiffies.h>
- #include <linux/sched.h>
- #include <linux/pci-p2pdma.h>
-+#include <linux/pagemap.h>
- #include <linux/pm_runtime.h>
- #include <linux/memory-failure.h>
- 
-@@ -385,7 +386,7 @@ static unsigned long addr_to_pgoff(struct vm_area_struct *vma,
- 	u64 pgoff = vma->vm_pgoff &
- 		((1U << (VFIO_PCI_OFFSET_SHIFT - PAGE_SHIFT)) - 1);
- 
--	return ((addr - vma->vm_start) >> PAGE_SHIFT) + pgoff;
-+	return linear_page_delta(vma, addr) + pgoff;
- }
- 
- static vm_fault_t nvgrace_gpu_vfio_pci_huge_fault(struct vm_fault *vmf,
-diff --git a/drivers/vfio/pci/vfio_pci_core.c b/drivers/vfio/pci/vfio_pci_core.c
-index 3f11a9624b9c..a113c55845e1 100644
---- a/drivers/vfio/pci/vfio_pci_core.c
-+++ b/drivers/vfio/pci/vfio_pci_core.c
-@@ -20,6 +20,7 @@
- #include <linux/module.h>
- #include <linux/mutex.h>
- #include <linux/notifier.h>
-+#include <linux/pagemap.h>
- #include <linux/pci.h>
- #include <linux/pm_runtime.h>
- #include <linux/slab.h>
-@@ -1780,7 +1781,7 @@ static vm_fault_t vfio_pci_mmap_huge_fault(struct vm_fault *vmf,
- 	struct vm_area_struct *vma = vmf->vma;
- 	struct vfio_pci_core_device *vdev = vma->vm_private_data;
- 	unsigned long addr = vmf->address & ~((PAGE_SIZE << order) - 1);
--	unsigned long pgoff = (addr - vma->vm_start) >> PAGE_SHIFT;
-+	unsigned long pgoff = linear_page_delta(vma, addr);
- 	unsigned long pfn = vma_to_pfn(vma) + pgoff;
- 	vm_fault_t ret = VM_FAULT_FALLBACK;
- 
-diff --git a/mm/nommu.c b/mm/nommu.c
-index 52074ea90acb..c0a0869cd0d6 100644
---- a/mm/nommu.c
-+++ b/mm/nommu.c
-@@ -1355,7 +1355,7 @@ static int split_vma(struct vma_iterator *vmi, struct vm_area_struct *vma,
- 	*region = *vma->vm_region;
- 	new->vm_region = region;
- 
--	npages = (addr - vma->vm_start) >> PAGE_SHIFT;
-+	npages = linear_page_delta(vma, addr);
- 
- 	if (new_below) {
- 		region->vm_top = region->vm_end = new->vm_end = addr;
-diff --git a/mm/vma.c b/mm/vma.c
-index 4a4d096ba86a..7aa0149f076c 100644
---- a/mm/vma.c
-+++ b/mm/vma.c
-@@ -517,7 +517,7 @@ __split_vma(struct vma_iterator *vmi, struct vm_area_struct *vma,
- 		new->vm_end = addr;
- 	} else {
- 		new->vm_start = addr;
--		new->vm_pgoff += ((addr - vma->vm_start) >> PAGE_SHIFT);
-+		new->vm_pgoff += linear_page_delta(vma, addr);
- 	}
- 
- 	err = -ENOMEM;
-diff --git a/virt/kvm/guest_memfd.c b/virt/kvm/guest_memfd.c
-index db57c5766ab6..f0e5da490866 100644
---- a/virt/kvm/guest_memfd.c
-+++ b/virt/kvm/guest_memfd.c
-@@ -440,7 +440,7 @@ static int kvm_gmem_set_policy(struct vm_area_struct *vma, struct mempolicy *mpo
- static struct mempolicy *kvm_gmem_get_policy(struct vm_area_struct *vma,
- 					     unsigned long addr, pgoff_t *ilx)
- {
--	pgoff_t pgoff = vma->vm_pgoff + ((addr - vma->vm_start) >> PAGE_SHIFT);
-+	pgoff_t pgoff = linear_page_index(vma, addr);
- 	struct inode *inode = file_inode(vma->vm_file);
- 
- 	*ilx = inode->i_ino;
-
--- 
-2.55.0
-
+>  	select QCOM_QMI_HELPERS
+>  	select MHI_BUS
+>  	select QRTR
+> diff --git a/drivers/net/wireless/ath/ath12k/pci.c b/drivers/net/wireless/ath/ath12k/pci.c
+> index d9a22d6afbb0..6d48fb25690d 100644
+> --- a/drivers/net/wireless/ath/ath12k/pci.c
+> +++ b/drivers/net/wireless/ath/ath12k/pci.c
+> @@ -884,19 +884,9 @@ static void ath12k_pci_free_region(struct ath12k_pci *ab_pci)
+>  
+>  static void ath12k_pci_aspm_disable(struct ath12k_pci *ab_pci)
+>  {
+> -	struct ath12k_base *ab = ab_pci->ab;
+> -
+> -	pcie_capability_read_word(ab_pci->pdev, PCI_EXP_LNKCTL,
+> -				  &ab_pci->link_ctl);
+> -
+> -	ath12k_dbg(ab, ATH12K_DBG_PCI, "pci link_ctl 0x%04x L0s %d L1 %d\n",
+> -		   ab_pci->link_ctl,
+> -		   u16_get_bits(ab_pci->link_ctl, PCI_EXP_LNKCTL_ASPM_L0S),
+> -		   u16_get_bits(ab_pci->link_ctl, PCI_EXP_LNKCTL_ASPM_L1));
+> +	ab_pci->aspm_states = pcie_aspm_enabled(ab_pci->pdev);
+>  
+> -	/* disable L0s and L1 */
+> -	pcie_capability_clear_word(ab_pci->pdev, PCI_EXP_LNKCTL,
+> -				   PCI_EXP_LNKCTL_ASPMC);
+> +	pci_disable_link_state(ab_pci->pdev, PCIE_LINK_STATE_ASPM_ALL);
+>  
+>  	set_bit(ATH12K_PCI_ASPM_RESTORE, &ab_pci->flags);
+>  }
+> @@ -925,10 +915,7 @@ static void ath12k_pci_aspm_restore(struct ath12k_pci *ab_pci)
+>  {
+>  	if (ab_pci->ab->hw_params->supports_aspm &&
+>  	    test_and_clear_bit(ATH12K_PCI_ASPM_RESTORE, &ab_pci->flags))
+> -		pcie_capability_clear_and_set_word(ab_pci->pdev, PCI_EXP_LNKCTL,
+> -						   PCI_EXP_LNKCTL_ASPMC,
+> -						   ab_pci->link_ctl &
+> -						   PCI_EXP_LNKCTL_ASPMC);
+> +		pci_force_enable_link_state(ab_pci->pdev, ab_pci->aspm_states);
+>  }
+>  
+>  static void ath12k_pci_cancel_workqueue(struct ath12k_base *ab)
+> diff --git a/drivers/net/wireless/ath/ath12k/pci.h b/drivers/net/wireless/ath/ath12k/pci.h
+> index 0e0e2020c6ae..409ef063cd69 100644
+> --- a/drivers/net/wireless/ath/ath12k/pci.h
+> +++ b/drivers/net/wireless/ath/ath12k/pci.h
+> @@ -128,7 +128,9 @@ struct ath12k_pci {
+>  
+>  	/* enum ath12k_pci_flags */
+>  	unsigned long flags;
+> -	u16 link_ctl;
+> +
+> +	/* Cached PCIe ASPM states */
+> +	u32 aspm_states;
+>  	unsigned long irq_flags;
+>  	const struct ath12k_pci_ops *pci_ops;
+>  	u32 qmi_instance;
+> 
+> -- 
+> 2.43.0
+> 
+> 
