@@ -1,289 +1,78 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C7F73B0AE3
-	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 06:52:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A85793BFAC8;
+	Fri, 10 Jul 2026 07:03:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783666366; cv=none; b=HoMnSdg+iwg/MT2UIWP6FMMeU7oU4doex2hef30f0Wf5SL6CMbvZgv6HetWomWXRzmfXSiIImx+QMsD2CE/vHInCOZhK2uh7sd6JFbb7diJbi5yZW+0kRMu7gTPgAEBnju77bCQYzvffgMihRr57tQRucWJm+91hNglLJ4WnHeQ=
+	t=1783667024; cv=none; b=nVHOtD+5R0Efvr6hDDWAYLhQUPvcFmtPW9BEbWsmxvBbXboYRqcXuwIQTxWjP/RUzh2qzjD71IbM/r4kqVl/5edSR177x2S4zGG+duz6Drpa1u0KxqNiXm7xQ2Nng1VZgDIwFJE4+nz8o598CRV7tzefD5/mMHEhoOBqjZUnymU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783666366; c=relaxed/simple;
-	bh=bp5L5N4e5uX9KDVnsGLbH09fAwvEF/nOE8lPJ6RWh2Q=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=p8714tsfJf9TZaDLlxPitisgj9yKkBgmgKum3CI04DkXhc+tevSWYCc2K0ozvAyu52J4nyNpEP6xQufftuLnJCozy7ynb8raJX6fNIRqRPIFD9rTLn3qvkzXkgUnYQSH4GnacpJo2VAeiJeMSsjV0msIh4cTNph4yLQkossRsWU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=HTwHgtFx; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gAMFp/0b; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1783667024; c=relaxed/simple;
+	bh=4jvl6rk4X89gpWX4mrKH9TCVaTeZSfapdIhYU3YONMc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=eIxSs7vRmH7wZ7K4POAXjjP58CCC6D91FMWy8ZHj9FUrZqRjENkn/31ppaZJnBScmORM7nMn/wqf2IldP6gEIaqwywyNbstMoE4B7bfZRc1RcjQnCjOyNOBqSEY4q+GTsIPeWRPDnhJ2aF3oPmWBibtB3mTDcO6Pzy1aAnrUDO0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HkJ1qk3p; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="HTwHgtFx";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gAMFp/0b"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66A3n6wY3661819
-	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 06:52:41 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ojbU85U1GoN1gyrRvs6pqpnlSRI0JRvbIqx1Yv3QQ1g=; b=HTwHgtFxCX6gKC3r
-	r2HwkCAStEX8sKnDrjE19y18ucPIx0p8hx9GGWmvEQGGu/f4g/6PbwCIWmcz/DMY
-	+7SZMFRkzxoS7hpupctdOhkFlIobg6M/P1E3OksnvvHjClvr/9C6IqNCNdEwh6+Y
-	LfwOytiW56En4tzgrXaozQ3bxRHqwdsO/H1bioSU/0s6RbhKgcoB2quCzHvoCtaG
-	1z8YuC9u3EPyAmRDoOMFCpiLJIBBHapwwnsLR5O7KQi2oOv8SDxfC7F/MQ8vsJfe
-	u7A/+KK4WUVwH7xYOZ0HLq3kjZn32kisjJGxUY0/cJfebUc6ACMB5EkqQovJjRN8
-	fnVsgQ==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4faf24u0ut-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 06:52:40 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-c88aab7c1fcso1087690a12.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 09 Jul 2026 23:52:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1783666360; x=1784271160; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ojbU85U1GoN1gyrRvs6pqpnlSRI0JRvbIqx1Yv3QQ1g=;
-        b=gAMFp/0bKtuMQ9fghUvrEi218WJ4pcv0HxtmeD/5vFg7lxDD/3lh7PSOBzljyyyy3t
-         VIS25uErj5l3m85hOpPXZEK/G29f6po/K7IlWeQYuiljbZYlmTUgw5kneIn0MSpDl+3w
-         F+0juCsIqM4cMju2libho7PNrVKL31L74a5MsP+Lt4ffczFYw7D3ti/5lP0hkjBDG7Qf
-         d7eL4csS2ZI9NLwX2u8QQ2y5LEWYoy8q3wVtiyZgwNs1tMG2uYPJ7sNnckywMBa1ZWzu
-         G5JR9sAxDtDcjDzNic6me3d+fxJhWYaAoVSp2TeC9byViHL6LLBRhtmtxE7gBLBQjmXn
-         2+Qw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783666360; x=1784271160;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ojbU85U1GoN1gyrRvs6pqpnlSRI0JRvbIqx1Yv3QQ1g=;
-        b=G/RoL4Xk3gsc3RwyfQAocN1Sv/tI0LVySbdKMipGCWR5jSgKaWJmmi1hJOlJa1p9G0
-         qGZiHhWpJNPPAqD3Q9QwEu0l2cmH8jn3P3n0t4jf37gqwqnSVhMJRHJt6DIuomLeRKgi
-         ZeEqafb5KSD59Akov3ksdkFX9dR3N7Se4iym2QMIOonNgrt6VmQ9E3kA293+Rblq1HGA
-         FFDreoPCPWuecU2+IVCxrz7eWddT3uAv++Bo+4Z7Ge4VsjSfFj0oUDW5i+96djnSIHYO
-         zJWq37wYSeXU/5DXEXTsqy0Xd9iwXvaI+bTlpPz4MGNGlYRZPdNXEDLg5X/+7wgSA0cE
-         pjrQ==
-X-Gm-Message-State: AOJu0YzPjHgxXMJF43dddhvIXDqAd12LMz7lgjAxfWuChqq0LNG8QX7k
-	lKxeJn1RT41hA2FMFbxxDDEvaECDmfQhqC4Y0ncByirrlMc9sNxlinhbTj+yxFJ12Q9NofSE35s
-	aCsGYvIKpnmt+X0zbFX7PSdfPLZrQlVrD2Mf2cgkk87dFi74F4y/ksQwXBkoCC7r1WB9i
-X-Gm-Gg: AfdE7clf/Dj7HT/Zz0M4/jXKQKjlwL5HNlT6Xpzcn+Kh3+/0UQsNQcMWbr8bPb9lsQP
-	v09Rt6d1g1uuLXRJfPTL9PovvgoyBtwA/8swCx5HT8T3iA1my1b8dsQt0bOiAFL1TP7yZMSb+el
-	BfpyXZ3Nt5LfFtLKNbWxabqdJnG4qoX8m3v0sfTDnlcaRp6O+7YiBF07kJODIYY9js7/H0hoddN
-	Et7dsvQIuerK/kZckQfj/+ZPuPecGmGd7ki/JGEkGKpV3Jc2DkXUzFz1eUpcTycDxGX4iHgSTg9
-	gdL7ar6DAjntnArzzNiDYzZFMp79JcjiBZWo7RR+s4IhsL52SZ312sshzyZ/KwFzoziMTKuwHqw
-	/zDg6dwZ1LVKzQ+LpxSYCYjUJWO+4CQ==
-X-Received: by 2002:a05:6300:2207:b0:3bf:7f0b:2f70 with SMTP id adf61e73a8af0-3c0bcf4ffe9mr12318628637.34.1783666360061;
-        Thu, 09 Jul 2026 23:52:40 -0700 (PDT)
-X-Received: by 2002:a05:6300:2207:b0:3bf:7f0b:2f70 with SMTP id adf61e73a8af0-3c0bcf4ffe9mr12318595637.34.1783666359634;
-        Thu, 09 Jul 2026 23:52:39 -0700 (PDT)
-Received: from [10.213.109.130] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-311838c9235sm31618301eec.21.2026.07.09.23.52.36
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 09 Jul 2026 23:52:39 -0700 (PDT)
-From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Date: Fri, 10 Jul 2026 12:22:11 +0530
-Subject: [PATCH v3 4/4] arm64: dts: qcom: Add PMIC thermal support for
- Shikra IQ2390S SoM platform
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HkJ1qk3p"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E0A71F00A3A;
+	Fri, 10 Jul 2026 07:03:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783667020;
+	bh=ffR7ZryagVGOEuQIJ783LXqlEOLErcxNTF8ceIZ6QJs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=HkJ1qk3pVg1gNUsVBpd65sgOKOB4CRDg/CH/bZFHYVMz/b02CI7Oy/8lJBqD895Rr
+	 QXi94LZLSIuiKmbwV/bp2HgA4hCZc0zi9eXKzfGK4jg6Fhd61aGKCf+iDRTLKG0u6A
+	 XEBPoLrh9WKkmLWh7Ul+zBA2dptxL4+SO1xt0CgPFL4BB2pFsF3VwVWLsfpO4XrljB
+	 Y1CZowWo+d9HUZqvgFlTI1yAqNiRQXybjjz6C7AdTv/f7hkP6PIoG8R2z/DcV/ilOe
+	 NnB1d3bAIhKBtmwcACu/6Bu2gVCYva8FXuqks/N3SZBF6baXrVD9k+ND374UA6s+0j
+	 2JVL1iulOtwZQ==
+Date: Fri, 10 Jul 2026 09:03:36 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Jie Gan <jie.gan@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>, Jingyi Wang <jingyi.wang@oss.qualcomm.com>, 
+	Abel Vesa <abel.vesa@oss.qualcomm.com>, Suzuki K Poulose <suzuki.poulose@arm.com>, 
+	Mike Leach <mike.leach@arm.com>, James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>, 
+	Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>, Abel Vesa <abelvesa@kernel.org>, 
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH v6 1/5] dt-bindings: arm: coresight-tnoc: Bind on
+ platform bus instead of AMBA
+Message-ID: <20260710-sweet-loutish-lynx-8698f2@quoll>
+References: <20260710-fix-tracenoc-probe-issue-v6-0-41eb36fef8d9@oss.qualcomm.com>
+ <20260710-fix-tracenoc-probe-issue-v6-1-41eb36fef8d9@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260710-shikra_adc_support-v3-4-ddc840fca0a0@oss.qualcomm.com>
-References: <20260710-shikra_adc_support-v3-0-ddc840fca0a0@oss.qualcomm.com>
-In-Reply-To: <20260710-shikra_adc_support-v3-0-ddc840fca0a0@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-        Rakesh Kota <rakesh.kota@oss.qualcomm.com>,
-        Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1783666340; l=3374;
- i=jishnu.prakash@oss.qualcomm.com; s=20251014; h=from:subject:message-id;
- bh=bp5L5N4e5uX9KDVnsGLbH09fAwvEF/nOE8lPJ6RWh2Q=;
- b=Hn9V7hRuGe4fwsCkL/1z8dZh3uS6vQr2sYmISXUQdjIaWrBOml0Tl7QsoSSv2iDX4y/2gph3i
- dSJM3+NriQuDQ3yf4A6T2JCOx0LFRw619CtHnZIf30d+vLTWF/pkjDp
-X-Developer-Key: i=jishnu.prakash@oss.qualcomm.com; a=ed25519;
- pk=g89pXdLVwRjdTeQ+uX1QzvBO346E3hQAc1N7fcTXgmk=
-X-Proofpoint-GUID: 1Q-TeI48k1ldh7kraY0vSimrAIj7_emM
-X-Proofpoint-ORIG-GUID: 1Q-TeI48k1ldh7kraY0vSimrAIj7_emM
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEwMDA2MyBTYWx0ZWRfX+wElPdC7x/SG
- qC2jppV8CJM95SXCbse4yRrf4JxU98RSUWTZf2yODHPXOY3svZJLzOwhuLHjs2qA5Q+p/j3nqC0
- 5koMp3mlD+XR1LXjTlghZRdgBA9upu0=
-X-Authority-Analysis: v=2.4 cv=daKwG3Xe c=1 sm=1 tr=0 ts=6a5096b8 cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=eSwfGQiZR0SxMorl76cA:9 a=QEXdDO2ut3YA:10
- a=_Vgx9l1VpLgwpw_dHYaR:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEwMDA2MyBTYWx0ZWRfXxiVHiUMMRH1m
- 2GonnAvQjrYoCDM535OEOFfxLYlBZbmbr4YIBURJzuJGsC0M/5J6OTy8ot+Sp/g9U6LZaiiUs8f
- BYs5tcFVMjrZ6qk+jNSsaLU5XG0di/SKqcJ3Pdt2k7pQ5izhOSaQbFE2dqLiXCVEWIWMazZSZ8r
- vfkIUhLNTS4V0JyveGH1kAJqDgqbZzwMzSohs8VxCdwdO1Yz9zAPR9YLyzS7l4aa9+mXREaVuj/
- ISniw/cGX0vvj8PNEaqK6Kxv84NONfswuo99r0gQS9iElnnZqAQcRcRrE5rYEtxnRQOLjh27kNW
- U6Ef4GeOkSRnznq7fdRUF6gHWWJeKzHNt/hS9EzX93FdDcvU5ocqbncOzBTQzGU+oFWNKFaogKQ
- xJgQsqSuauMp4OOVZ2sAJvVtg9zhGV0MZrXzPR/BgCO6BoSwOuBTrLHB9dy4nUVt1UR/3P23Wq/
- DNodutbZAYU4Vh8u6KQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-10_01,2026-07-09_04,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 adultscore=0 suspectscore=0 lowpriorityscore=0
- clxscore=1015 malwarescore=0 priorityscore=1501 bulkscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607100063
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260710-fix-tracenoc-probe-issue-v6-1-41eb36fef8d9@oss.qualcomm.com>
 
-Add ADC channels for system thermistors, used for thermal mitigation.
-Add ADC_TM nodes for pa/quiet/msm thermistors and also thermal zones
-for them.
+On Fri, Jul 10, 2026 at 10:39:00AM +0800, Jie Gan wrote:
+> The Aggregator TraceNoC hardware exposes CID registers, but the Component
+> ID value returned by the hardware is 0x00000000 instead of a valid AMBA
+> Component ID. As a result, the device cannot be identified on the AMBA
+> bus.
+> 
+> Describe the Aggregator TraceNoC with a dedicated single
+> "qcom,coresight-tnoc" compatible instead of the two-string AMBA form
+> "qcom,coresight-tnoc", "arm,primecell". This creates the device on the
+> platform bus so it is bound by the platform driver through its compatible
+> string rather than as an AMBA device.
+> 
+> Signed-off-by: Jie Gan <jie.gan@oss.qualcomm.com>
+> ---
+>  .../devicetree/bindings/arm/qcom,coresight-tnoc.yaml     | 16 ++--------------
+>  1 file changed, 2 insertions(+), 14 deletions(-)
 
-Co-developed-by: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
-Signed-off-by: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
-Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi | 113 +++++++++++++++++++++++++++
- 1 file changed, 113 insertions(+)
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
-diff --git a/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi b/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
-index 73945bf42112..9ab0b44b00be 100644
---- a/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
-+++ b/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
-@@ -4,6 +4,7 @@
-  */
- 
- #include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/iio/qcom,spmi-vadc.h>
- #include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
- 
- #include "shikra.dtsi"
-@@ -26,9 +27,121 @@ key-volume-up {
- 			linux,can-disable;
- 		};
- 	};
-+
-+	thermal-zones {
-+		sys-1-thermal {
-+			thermal-sensors = <&pm8150_adc_tm 0>;
-+
-+			trips {
-+				active-config0 {
-+					temperature = <125000>;
-+					hysteresis = <1000>;
-+					type = "passive";
-+				};
-+			};
-+		};
-+
-+		sys-2-thermal {
-+			thermal-sensors = <&pm8150_adc_tm 1>;
-+
-+			trips {
-+				active-config0 {
-+					temperature = <125000>;
-+					hysteresis = <1000>;
-+					type = "passive";
-+				};
-+			};
-+		};
-+
-+		sys-3-thermal {
-+			thermal-sensors = <&pm8150_adc_tm 2>;
-+
-+			trips {
-+				active-config0 {
-+					temperature = <125000>;
-+					hysteresis = <1000>;
-+					type = "passive";
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&pm8150_adc {
-+	pinctrl-0 = <&pm8150_adc_gpio2_default>, <&pm8150_adc_gpio3_default>;
-+	pinctrl-names = "default";
-+
-+	channel@4d {
-+		reg = <ADC5_AMUX_THM1_100K_PU>;
-+		label = "msm_therm";
-+		qcom,ratiometric;
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+	};
-+
-+	channel@4e {
-+		reg = <ADC5_AMUX_THM2_100K_PU>;
-+		label = "quiet_therm";
-+		qcom,ratiometric;
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+	};
-+
-+	channel@52 {
-+		reg = <ADC5_GPIO1_100K_PU>;
-+		label = "gnss_therm";
-+		qcom,ratiometric;
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+	};
-+
-+	channel@55 {
-+		reg = <ADC5_GPIO4_100K_PU>;
-+		label = "pa_therm";
-+		qcom,ratiometric;
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+	};
-+};
-+
-+&pm8150_adc_tm {
-+	status = "okay";
-+
-+	pa-therm@0 {
-+		reg = <0>;
-+		io-channels = <&pm8150_adc ADC5_GPIO4_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time-us = <200>;
-+	};
-+
-+	quiet-therm@1 {
-+		reg = <1>;
-+		io-channels = <&pm8150_adc ADC5_AMUX_THM2_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time-us = <200>;
-+	};
-+
-+	msm-therm@2 {
-+		reg = <2>;
-+		io-channels = <&pm8150_adc ADC5_AMUX_THM1_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time-us = <200>;
-+	};
- };
- 
- &pm8150_gpios {
-+	pm8150_adc_gpio2_default: pm8150-adc-gpio2-state {
-+		pins = "gpio2";
-+		function = PMIC_GPIO_FUNC_NORMAL;
-+		bias-high-impedance;
-+	};
-+
-+	pm8150_adc_gpio3_default: pm8150-adc-gpio3-state {
-+		pins = "gpio3";
-+		function = PMIC_GPIO_FUNC_NORMAL;
-+		bias-high-impedance;
-+	};
-+
- 	vol_up_n: vol-up-n-state {
- 		pins = "gpio6";
- 		function = PMIC_GPIO_FUNC_NORMAL;
-
--- 
-2.43.0
+Best regards,
+Krzysztof
 
