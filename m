@@ -1,116 +1,182 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1E010374A1B
-	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 17:46:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 148892E413
+	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 17:46:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783705564; cv=none; b=kE/64jzoL+7QPE3VaRRGwwbaZ4vdDHmI7NJ1S5p8R1w9DPH639TEM+OKPvupnnHiThLKOfKJEclhKQRZROatmNehty3IEMUIas2BSsO5mfmmouubrOcZ2isWTCJRhtzV8jJ4GZVJ278noXQM+182tdcCDSVvLmyZbFhGl97wTII=
+	t=1783705617; cv=none; b=qSPQe4CyDT/ymiTReLC8/gZn29ClrtM+Q1EoXVQYEu84N8YraiZ5nZeE5Xr1ApOsgJQ3cfc+/L9XzDXxeB1j0qAHxqJRD4yD0cfV6nmyTsnEsQXPjV5BgLS5MktDVnyLKr2rzHJCYOFChLctIuD4CMcPu9JXqypLrwHcwj8M4Uo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783705564; c=relaxed/simple;
-	bh=KvBYP+wl2IjCxMaSVmX25pjv+NEzDq5zeL7bHnenBoI=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=s6Dp2HqYqevUDqA/Is5a2scx/iB0Q9oWTjKzBc08YwJI4VKtiNvN6oAaZbvWz3SqWgiRiDhwJxkshfCdByrTcsxZlynQgU7sYqUrzbRk9u5+7HhPSL0YvXiComRo5HsLnbhn4e1WkpB9OiFyTKC5L3gEoTbLuNiYptTBwedfdHk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Kj7a6Pu5; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783705617; c=relaxed/simple;
+	bh=Y8JPCXG0ZhSLrMqKLkgn2ObmahE6GfacoqYF1bj80OI=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=iZqyjwZqDUwPJrhmoaOh/oYxSM6Mlf5ZyRfuAA+bUK5X3aHkOikshByTeCL8QeYmWY71tzcg9aK5BGfml7vjD+lqIm9hzXgyQmKS0nzvKDIh1UpMpxJbuaUcjOzoDSs/3z3NBIN3Lg8JiEi55KXP3f7V343ckh3OddOibd8J2SY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Xm+N4F6L; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kv/Eyly0; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Kj7a6Pu5"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6BB991F01565
-	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 17:46:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783705562;
-	bh=KvBYP+wl2IjCxMaSVmX25pjv+NEzDq5zeL7bHnenBoI=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=Kj7a6Pu5eehgdCmmTI+vwhf9nbZJIqM/gmnHg3wk7GzSc/sIfh4SLBJdGeaTBEiDv
-	 b8rDzUGmQ/ofpb+jeVOCzO/AAJvsUlpTJmujo/sCcFYlSo5w1qI5V62txkfh20z4kl
-	 8oUrAnr7A+VpIdb3rMwkdCVuO7ctSV2dTRn501mKvbH8XS7Ebz3yLokZ6BfsTxc9Bm
-	 bPq4gjzedbjsGFpMYyyq3+099H0QssWs4bvFBBUd2pgnTSl5SQ1f1xtuAKGKw076b6
-	 m1YLoNVUzOAFOWsUsdRS6GJyVcxI8PKE6nSaCG5S2VX3Fwb/kc2mr1aHX9vD75TnB0
-	 Uq2zAgam/8dZQ==
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-5b00ca000ceso1274205e87.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 10:46:02 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rol179ETT1kLGQ7tK+1aZkLYDKX9fbEFApfl2Pa4QWJ2mQXACtT/5qohXptTP4ScAQa31Wotw09nYysisPI@vger.kernel.org
-X-Gm-Message-State: AOJu0YyXbY51t1WbeAu4qw6BUABzbzpQlHaZlGbi+fFOImsc8PCercni
-	0THZ8vJX70KrBQKzxeqLqO39KyzTM9IvA4oaFwWafDBZlSuB9fVTih3ocGZKBmHBEq9l3SWdR4h
-	quavQ3VOD40Xvmm+4pY9rpiVrydFQOIw=
-X-Received: by 2002:a05:6512:688f:10b0:5b0:12d6:4c05 with SMTP id
- 2adb3069b0e04-5b02369c6e8mr17375e87.36.1783705559836; Fri, 10 Jul 2026
- 10:45:59 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Xm+N4F6L";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kv/Eyly0"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66AH3cQ21502096
+	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 17:46:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=mlfY5KW2Ubph8SuUrGt9q/
+	dW8huEOfRAa2uT5hWsy2k=; b=Xm+N4F6L2DAuL2F3+Fsixh/2+uQPBknj2boS4L
+	XLEboubLolcTPHdFENet6F0k/mE9lHPUVvWaQJRwL7yMpjR4O0VPgnniBT1KDNYg
+	nvcAbBq1D6qRmRJzJ7wV+G5ne0Ozim+vnYrMiQ7fZmK+WMOM/ZMPX9cORfScQy/Q
+	qQ8EUR9aymM9W+DOUo91roC/6OwPa0Iy4KVo5axEP6kzPM0H1JqEtZ9S3wrjYBEN
+	LbA1t4J1PIqtUcP0TqKsbTpMJ/m+fMMc5b16yeVq/jX89ePOi/hPoAea+31guCq/
+	UPJzEzsAPlsQ7+S7jNU3FiMlyEAVK3yzjDasIatW8ZbP2mLg==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fb3xvrbuy-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 17:46:55 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-381abcccbf4so1084875a91.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 10:46:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1783705615; x=1784310415; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=mlfY5KW2Ubph8SuUrGt9q/dW8huEOfRAa2uT5hWsy2k=;
+        b=kv/Eyly0l9cnA10DzhHkHxLJfxaBdV92S14kFoF+yJ5cu11YySFkQ918rH/c8NwV8Y
+         E4W7GfaqsLkOowU2wAxqfWCkXSN6lnkzP2BHk6eXjoqnT1UycI1ZUzrV5XMHwbnAqGre
+         1MvSxV5GbkJEFBtDZb2dqIUxRnSbXjqvz8Z31jSQ+NVCP5AWZHdAYoJIlrtNKMVmTrfp
+         cuafqIgXg0Uz880KOtswbHC+1WOn86c9OmAFFk50h9zegE0prsuQQ3dAsHSC2I2C0GkK
+         2mbhBqKCNAD1ORVQ8SDnXtk+0Hk6gGa1aw+l7twZkIFA71RPrI/cXonvdapRQmmBF04r
+         h51g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783705615; x=1784310415;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=mlfY5KW2Ubph8SuUrGt9q/dW8huEOfRAa2uT5hWsy2k=;
+        b=hR//k3Wnib3dtwqMp96ZC216NeiUJTRICkB2jl8PKMcUYpqBcO8v5j/n80NdMxRZiC
+         9KnMdW6UJINPxWpLRdqN+BwqqU63A921+q0BVHddyqz9RPdyzNL0oMd/K1ZG6eHl0e9g
+         p5hgLogalgMck7GPsP7Wue5HzSeIgVllTCRvYDib4fDbPDka4ZLW8vU0TEkzdf1EtpuI
+         1b6mu0zD9U0TvuoNCjSoGoRuO0daD3V6GTFIgcw0H8TZaIdRA9Q9vx7KlTyJ3RdDlUOy
+         KiregmRuUrzplX3sTvOujHhk5brs3AutA0P4XPqsXi5KIWpZlBm6copujPXKcoVJIGtF
+         HLEQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrkdQhKOJuErguw4eai1HIlX+kTzw7uIyrjA9kf2rUR91KT0ElseibmuwE7kwrq577vDZ9rdk25oeaXBfjp@vger.kernel.org
+X-Gm-Message-State: AOJu0YwS/9cBKSKfzm4xVPutKdZIHRw2P1ikgzg9a+gmajG1x0Zb5jNX
+	GZZgzMQjiXLa+rjQ4GNbYU/l04Fwhcr7C4iadPFoeFGNNaYLBxTX6bm88v44PlhAUUjCLkWclOU
+	N3C2CDsIKYdWnPI7ggjaTl1xsNcnZ/M9QPuB9wvNvPFC8c9/9yvvZbCP6CkOd+FV36V7l
+X-Gm-Gg: AfdE7cnuSJaLbL7Sl6oz0K4kjcZshFVOYZFHrTeyIZiFgbtwsEwsjAMz8TXVAom83rf
+	xoaRgEGI9K3ZJhY/VdPOyQyIcge8xApur6xRKWvZVH7disO3OgKyQgPSIkK++xzRBOkX1OWotmu
+	Pjf+9EbGT1jeda5R6OFB612fLV2gXIUzfv7CmHF2Xnia+0FA/LainFek8gNp651uM7NbDZle1nC
+	CA05Zg1zyISneIGtsz3DZLwZse8VYO5YqRzGNjHImjkSuLT2Q+J4R3q3j+coC9Qx66NWSnnnBfI
+	nAraMjtI/IZ/Bb9vw9t5C70Pg8fgpJBhzn/5MQS3XKcxmB48jsRhStz0ZEBiHtL41TMEyRSjWDY
+	wSkoJuE0matR+p7SszXW18dMyNSp5kkfhrTUHatUtLTiTg+13rsLv7QNVRpeRCFvGKIyoSB9RlI
+	c+bECTly+uflW1iy3MEhWvhxAQe+f+SKzHdH8y+ASdlTb+iA==
+X-Received: by 2002:a17:90b:3943:b0:37f:9ce1:735a with SMTP id 98e67ed59e1d1-38dc7777c02mr2429a91.27.1783705614705;
+        Fri, 10 Jul 2026 10:46:54 -0700 (PDT)
+X-Received: by 2002:a17:90b:3943:b0:37f:9ce1:735a with SMTP id 98e67ed59e1d1-38dc7777c02mr2391a91.27.1783705614218;
+        Fri, 10 Jul 2026 10:46:54 -0700 (PDT)
+Received: from hu-kathirav-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31189cd8234sm33008273eec.9.2026.07.10.10.46.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 10 Jul 2026 10:46:53 -0700 (PDT)
+From: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+Subject: [PATCH v3 0/2] Add support for the QMP PCIe PHYs in Qualcomm
+ IPQ9650
+Date: Fri, 10 Jul 2026 23:16:39 +0530
+Message-Id: <20260710-ipq9650_pcie_phy-v3-0-ef6018818d33@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260703193855.110619-1-mukesh.ojha@oss.qualcomm.com> <20260703193855.110619-11-mukesh.ojha@oss.qualcomm.com>
-In-Reply-To: <20260703193855.110619-11-mukesh.ojha@oss.qualcomm.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Fri, 10 Jul 2026 19:45:47 +0200
-X-Gmail-Original-Message-ID: <CAD++jLnUf6j8jPJogpuo4w55EHqgt7LChOQX5JY5h4n2VOf5nQ@mail.gmail.com>
-X-Gm-Features: AUfX_mz2mAY-nRqzEwN08-F9a7Mq7XiQwd_nI9Ppbf1sw-soYPlPLluIapY3fR0
-Message-ID: <CAD++jLnUf6j8jPJogpuo4w55EHqgt7LChOQX5JY5h4n2VOf5nQ@mail.gmail.com>
-Subject: Re: [PATCH 10/42] drm: pl111: Use devm_of_reserved_mem_device_init()
-To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Liviu Dudau <liviu.dudau@arm.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Joel Stanley <joel@jms.id.au>, 
-	Andrew Jeffery <andrew@codeconstruct.com.au>, Paul Cercueil <paul@crapouillou.net>, 
-	Anitha Chrisanthus <anitha.chrisanthus@intel.com>, Paul Kocialkowski <paulk@sys-base.io>, 
-	Chen-Yu Tsai <wens@kernel.org>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
-	Samuel Holland <samuel@sholland.org>, Alexey Brodkin <abrodkin@synopsys.com>, 
-	Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
-	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, Michal Simek <michal.simek@amd.com>, 
-	Daniel Scally <dan.scally@ideasonboard.com>, Jacopo Mondi <jacopo.mondi@ideasonboard.com>, 
-	Mauro Carvalho Chehab <mchehab@kernel.org>, Eddie James <eajames@linux.ibm.com>, 
-	Tiffany Lin <tiffany.lin@mediatek.com>, Andrew-CT Chen <andrew-ct.chen@mediatek.com>, 
-	Yunfei Dong <yunfei.dong@mediatek.com>, Minghsiu Tsai <minghsiu.tsai@mediatek.com>, 
-	Houlong Wei <houlong.wei@mediatek.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Joseph Liu <kwliu@nuvoton.com>, 
-	Marvin Lin <kflin@nuvoton.com>, Dmitry Osipenko <dmitry.osipenko@collabora.com>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, Thierry Reding <thierry.reding@kernel.org>, 
-	Jonathan Hunter <jonathanh@nvidia.com>, Srinivas Kandagatla <srini@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Ge Gordon <gordon.ge@bst.ai>, 
-	Adrian Hunter <adrian.hunter@intel.com>, Ulf Hansson <ulfh@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Saravana Kannan <saravanak@kernel.org>, Mathieu Poirier <mathieu.poirier@linaro.org>, 
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, Shengjiu Wang <shengjiu.wang@gmail.com>, 
-	Xiubo Li <Xiubo.Lee@gmail.com>, Liam Girdwood <lgirdwood@gmail.com>, 
-	Mark Brown <broonie@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
-	Sascha Hauer <s.hauer@pengutronix.de>, Peter Ujfalusi <peter.ujfalusi@linux.intel.com>, 
-	Bard Liao <yung-chuan.liao@linux.intel.com>, Daniel Baluta <daniel.baluta@nxp.com>, 
-	Orson Zhai <orsonzhai@gmail.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
-	Peter Chen <peter.chen@cixtech.com>, Fugang Duan <fugang.duan@cixtech.com>, 
-	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>, 
-	BST Linux Kernel Upstream Group <bst-upstream@bstai.top>, Fabio Estevam <festevam@gmail.com>, 
-	Nicolin Chen <nicoleotsuka@gmail.com>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
-	Kai Vehmanen <kai.vehmanen@linux.intel.com>, 
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>, 
-	Vijendar Mukunda <Vijendar.Mukunda@amd.com>, Chunyan Zhang <zhang.lyra@gmail.com>, 
-	CIX Linux Kernel Upstream Group <cix-kernel-upstream@cixtech.com>, linux-arm-msm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org, 
-	linux-mips@vger.kernel.org, linux-sunxi@lists.linux.dev, 
-	linux-media@vger.kernel.org, openbmc@lists.ozlabs.org, 
-	linux-mediatek@lists.infradead.org, kernel@collabora.com, 
-	linux-tegra@vger.kernel.org, linux-mmc@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
-	linux-staging@lists.linux.dev, linux-sound@vger.kernel.org, 
-	linuxppc-dev@lists.ozlabs.org, imx@lists.linux.dev, 
-	sound-open-firmware@alsa-project.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAP8vUWoC/yXMyw7CIBBA0V9pZi0Jj4CPXzENsTDIuKgIbWND+
+ HdRl2dxb4WCmbDAZaiQcaNCz7lDHQZw8TbfkZHvBsml4VoKRul1Nprb5Ahtijsz3B99UFKfhIO
+ epYyB3r/ldfy7rNMD3fL9QGsfnr9q+3QAAAA=
+X-Change-ID: 20260521-ipq9650_pcie_phy-60d7df32581c
+To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Proofpoint-ORIG-GUID: kB5k61bCKthpFK3Ph9uYxtrd3s_jasUH
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEwMDE3NyBTYWx0ZWRfX91aL+4f+vVzO
+ sreeUIIHrDVhCXMRPyVmfINkBqnf7UcpQDDM3ezEGNsRDooYJWjS2vb4VoJLppDK6/XL/xcc6qE
+ SMpcXN6qQ58REJiIc3DYZurE8r3WQnBQGqrp9/w6ROFumzRR0Pg9PVGDW49RyvwImtDblBA+3J8
+ XlF+w+HPeLdeBbhVqlrRy7GIsrEF48++Ne/XISv+CvB4WBrH9c7sbVa7oOIq5QrTNnmJd5OLLZj
+ b5l8l3AeUTuxyaGomHUYk3PqCDZ2dXZMZ8Ax7OJ7NzRYy1RIuWk1VsGmnlZ8YdlOlTDHu2FdTFv
+ k8BqA8FWe7IE/JFfy6gc6qlfxeg+AzhLNvt9bD/xeB29Zm7B/RPKx9vFLYtOg4iQbcRnRLeIdDy
+ z92bFCD5fiQ9tAo8dUaQ1gvbmJ79AxwZ5MHEXFAUHY1Smc7wNkOYuTJgvzuOobbZMKY7UCeWaeR
+ e+rlM9ioEO+avSwOK1g==
+X-Proofpoint-GUID: kB5k61bCKthpFK3Ph9uYxtrd3s_jasUH
+X-Authority-Analysis: v=2.4 cv=HInz0Itv c=1 sm=1 tr=0 ts=6a51300f cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=JfrnYn6hAAAA:8
+ a=_lxU6AF3MxErEUeOnbgA:9 a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22
+ a=cvBusfyB2V15izCimMoJ:22 a=1CNFftbPRP8L7MoqJWF3:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEwMDE3NyBTYWx0ZWRfX+pYZXYktFfqq
+ e4USCV89SEEEbOPNYRSsJ1YAClc6OQrScsOYccZNEPjEkaYR3ahkpWHuBe7+emr8F5PZd+zOJFa
+ B5Dysze4MGqNZOiTYMTebtXLqouN4/8=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-10_05,2026-07-10_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 malwarescore=0 impostorscore=0 suspectscore=0 lowpriorityscore=0
+ bulkscore=0 phishscore=0 clxscore=1015 priorityscore=1501 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607100177
 
-On Fri, Jul 3, 2026 at 9:43=E2=80=AFPM Mukesh Ojha <mukesh.ojha@oss.qualcom=
-m.com> wrote:
+Qualcomm's IPQ9650 SoC has 3 Gen3 dual lane and 2 Gen3 single lane
+controllers with the QMP PHYs. Unlike the PHYs in the other IPQ SoC,
+refgen supply is needed to bringup the PHYs. Both single and dual lane
+shares the same HW init sequence. So reuse the tables.
 
-> Switch to devm_of_reserved_mem_device_init() so the reserved memory
-> region is released automatically on probe failure or device removal.
-> Remove the explicit of_reserved_mem_device_release() calls in the
-> dev_put error path and pl111_amba_remove().
->
-> Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Document the compatible along with refgen supply and add the phy driver
+support for it.
 
-Looks good to me:
-Reviewed-by: Linus Walleij <linusw@kernel.org>
+Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+---
+Changes in v3:
+- Rebased on linux-next: next-20260710
+- Pick up R-b tag
+- Incorporate the link stability issue fix (QSERDES_V4_RX_RX_MODE_00_HIGH4
+  from 0x35 to 0x3a) recommended by the IP team.
+Changes in v2:
+- rebase on phy-next
+- pick up R-b tag
+- Link to v1:
+  https://lore.kernel.org/linux-arm-msm/20260602-ipq9650_pcie_phy-v1-0-d8c32a36dbd9@oss.qualcomm.com/
 
-Yours,
-Linus Walleij
+To: Vinod Koul <vkoul@kernel.org>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: linux-phy@lists.infradead.org
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+
+---
+Kathiravan Thirumoorthy (2):
+      dt-bindings: phy: qcom,ipq8074-qmp-pcie: document IPQ9650 QMP PCIe PHYs
+      phy: qcom: qmp-pcie: Add IPQ9650 PCIe PHY support
+
+ .../bindings/phy/qcom,ipq8074-qmp-pcie-phy.yaml    |  19 ++
+ drivers/phy/qualcomm/phy-qcom-qmp-pcie.c           | 220 +++++++++++++++++++++
+ 2 files changed, 239 insertions(+)
+---
+base-commit: bee763d5f341b99cf472afeb508d4988f62a6ca1
+change-id: 20260521-ipq9650_pcie_phy-60d7df32581c
+
+Best regards,
+--  
+Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+
