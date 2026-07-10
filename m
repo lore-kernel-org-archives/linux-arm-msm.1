@@ -1,43 +1,43 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39F1F423152;
-	Fri, 10 Jul 2026 11:48:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF2F43BE16F;
+	Fri, 10 Jul 2026 11:50:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783684124; cv=none; b=gCMuPzTjEG9DB8f13/EvLIY+42NLLu8amK2BxIqXh4nEY2d4DRwjCq32BTdbzGq7ElZrkktFsPiDJoaifED3ZJMH1xIb0xBzWW7upOobuVvvkF2mFdW++bWi2wd5nS9+SnA6tJ+Hu4st/g4rbXdo6vcKc3KlRTbGfeo2On7STxs=
+	t=1783684229; cv=none; b=APuWS/92Hs94+bE/IKR5sQrVU2hKXrsycGeBPK7b9O6eyMh23MdBuHTU1tQYzG1UnpYZtBbp5ZamQDBT7nqvAT6KT1PLXCQRtwt8lZUTEZOXKW+Zfe9Ro4qc5FvaLmh8vNjvaP7sdc/GBEmS42X7HohX/2l/yRcF/lSKMAmNyuY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783684124; c=relaxed/simple;
-	bh=JY5uy/2SFkrZy4QL93cSVfHPbR6M+HMHhXAKsGBWNQw=;
+	s=arc-20240116; t=1783684229; c=relaxed/simple;
+	bh=AFd3zwSCY2Cwpz5juit1hOsnW7ZjONoUMY4cNCm9v1g=;
 	h=From:To:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=VvXl/G6jOEEM4Y21zG8zv7TnXG375vyP8wjtwtzNejo8YBqI1065bEiG4Rn+tdH8uSYua6GYcH84qsiKBRcVZvkPgfXTQ209dLuljBOf/0xZE5C4YTc1jz6ACp/vDCXxYGbKOfrN0IW0QDNI7eTrxzQySgLYT5FKpNT8+vtHZXU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fA7LnibO; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=FyMTjDNb/4MVC0/rv4VQd+mWwwGetEuUabQk5x1wKdeF3LbjeKFDj5+rSEB4Q+zFme6rWfzQ5PP+Px7AZfs5octCxJkr91DQJk6BEOXl8C0orXiQ3q1+U2xxyV+upmtBNRTeCVicyozF0kRnfuHiBqP8vMvnCtRvvSU0mZd5H7Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WtKC9VJV; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fA7LnibO"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 97ACF1F00A3D;
-	Fri, 10 Jul 2026 11:48:31 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WtKC9VJV"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5D1321F00A3E;
+	Fri, 10 Jul 2026 11:50:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783684113;
-	bh=7z42eCI0lC74JHZmqrmkrhBvBorw3Axq/rT/mbua++c=;
+	s=k20260515; t=1783684220;
+	bh=dgBZBK6ARfH71OmeAF5+eVVSqE90TSwV3YTJXLycdpo=;
 	h=From:To:In-Reply-To:References:Subject:Date;
-	b=fA7LnibOpQ3thBNBZi7E/0UtOhanX+uKP80o8Po6oyC+mSb+umMwYD+n5iYio0mZ6
-	 WZoTi2OVgWuXfl/lDtVOdc6ztvDPGm2a0UyGQJ4Me2ta2ERzRRDI2NYxoP9p/Q/3Of
-	 y0+4wliLt4pMJs1viZx5YasbhVu7GNt6jAbCTZ48a0jm3pVib1RbYTzt4CMo6N8/HG
-	 lG51L1+KRSl7QVCe1eh06PjwdwkLyZTQ09GSN7lDr80b/tWZbAVy3Qr/BOcQLapF4D
-	 BT44hLMvDn4fYcQDxgr0OMRe2kL6SR2cSDCEQGgO+RytLPpstJSRVnly9C+xkSjgKo
-	 MjJvalid1CBiA==
+	b=WtKC9VJVpVPuKmMcNom7s/5PtC5DLNWqLrU1mTLkCvLaP5nAL/DYym9rWZcFMnv2m
+	 wkqO46ZYjwzss3WcjwbN4AkhM4PRp53XAFnXfBiLqBlIt/gDic+yX9vwfnsbAA4KEf
+	 PX7joJ92VcGFfeLhyWi4+ejqdz7rAcShkHYWxPO6ZNHyDd5loVbleLg3Sj0iTMnTjB
+	 YYFS3IDqZXauuBbW+EZ1OnzKDETnRM89PtgImpwAZQi+F6AgO4gw7G3gr7BZC6yb8/
+	 vFCdAAvrzqTHGRdSgFhuG/4DTtmoVBEAmDxQhdi99/nboIjX+xPt8Lk4Nn+nP0JBFz
+	 OBR8n1E853Owg==
 From: Mark Brown <broonie@kernel.org>
 To: Srinivas Kandagatla <srini@kernel.org>, 
  Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
  Takashi Iwai <tiwai@suse.com>, linux-sound@vger.kernel.org, 
  linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
  Pengpeng Hou <pengpeng@iscas.ac.cn>
-In-Reply-To: <20260704072454.80981-1-pengpeng@iscas.ac.cn>
-References: <20260704072454.80981-1-pengpeng@iscas.ac.cn>
-Subject: Re: [PATCH] ASoC: codecs: wsa883x: Propagate regcache_sync()
+In-Reply-To: <20260704072236.70862-1-pengpeng@iscas.ac.cn>
+References: <20260704072236.70862-1-pengpeng@iscas.ac.cn>
+Subject: Re: [PATCH] ASoC: codecs: wcd937x-sdw: Propagate regcache_sync()
  errors
-Message-Id: <178361267218.100558.15533929411931278993.b4-ty@b4>
-Date: Thu, 09 Jul 2026 16:57:52 +0100
+Message-Id: <178368419268.82617.5071102264345021448.b4-ty@b4>
+Date: Fri, 10 Jul 2026 12:49:52 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -47,20 +47,20 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1128; i=broonie@kernel.org;
- h=from:subject:message-id; bh=JY5uy/2SFkrZy4QL93cSVfHPbR6M+HMHhXAKsGBWNQw=;
- b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqUNwOGTewTfTi0H2HWf8XxXAYrTdOh7MJvV6cx
- JcvMCPdm0CJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCalDcDgAKCRAk1otyXVSH
- 0PW+B/409XOELMokk5RQ4MAiuUkb/vcP2+TpeKVtMf3yWW4CucLf5dLfhLH8s4Jf2qOdbWoRTLr
- F4RUs7zFrNwrAKX72BTR9h3XAeyKaO7s9yLS+LaMLZLaEKCzBro7JHNs6UJ6hi7Km0IGj05zWqi
- 7s7NGWl5FbhBTx/vTs6pwa0Hfp0NmzmiL5f6YqdJ/kH19ucx7GNyLetesU1myvn+7EuzGgj1tj7
- U15JJNrT8NlkuLgIvc5y65QXnKM0BneSROPJ8gbcPZgAVfG/NvtekOVMs7DNCTsHGEvB3ME0P8P
- SH8xB/B/9EZryvsZyHN6c3tTaEfKjY1GKMtYEThwULMnpBuC
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1136; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=AFd3zwSCY2Cwpz5juit1hOsnW7ZjONoUMY4cNCm9v1g=;
+ b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqUNx6lMsCA6U+LSVq7AVnU96nxJVOREA3iqN4t
+ 7D42wiAazqJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCalDcegAKCRAk1otyXVSH
+ 0A9OB/4jypgo99vdsdM9GI9UhufucgcdrRTI0kI2CO+lG/9h0TKB1LiqM2tviqoToQHqvA9dpQC
+ KJ7ZtvGLfFBIlym9CBwSdSWFe2QPF7kzSP1d76jxqftPBxH+JtpP4diyzmwlSSh6GnPdjYDn/Yw
+ MJEgo+O/QqXqDMbibD5fbk9FhJCbWSQdYP2WuJ67R+vYezf68KdZLtvdGGDff0FcjMpn+fRRlAU
+ V36cqjXcMgQrQ2EoHyrrTuaWgZL7EHHA/wFy5Ayl5DOPYM4Rocw2EDkORInLzB2GaKDiy2USn4k
+ ex58Irt8hvTC3kcBngYnkMbEZCDtvKJV2h+tq2Jv6JTYQl2h
 X-Developer-Key: i=broonie@kernel.org; a=openpgp;
  fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On Sat, 04 Jul 2026 15:24:54 +0800, Pengpeng Hou wrote:
-> ASoC: codecs: wsa883x: Propagate regcache_sync() errors
+On Sat, 04 Jul 2026 15:22:36 +0800, Pengpeng Hou wrote:
+> ASoC: codecs: wcd937x-sdw: Propagate regcache_sync() errors
 
 Applied to
 
@@ -68,8 +68,8 @@ Applied to
 
 Thanks!
 
-[1/1] ASoC: codecs: wsa883x: Propagate regcache_sync() errors
-      https://git.kernel.org/broonie/sound/c/cc5c698bbca0
+[1/1] ASoC: codecs: wcd937x-sdw: Propagate regcache_sync() errors
+      https://git.kernel.org/broonie/sound/c/a1d01870b45d
 
 All being well this means that it will be integrated into the linux-next
 tree (usually sometime in the next 24 hours) and sent to Linus during
