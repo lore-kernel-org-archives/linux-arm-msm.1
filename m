@@ -1,43 +1,48 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 178FC37B00C;
-	Fri, 10 Jul 2026 18:07:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55C9537C0F6;
+	Fri, 10 Jul 2026 18:07:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783706847; cv=none; b=AcHHs/YfAhFJ+7k1qNSIx2WLb9awzFk5uMvpkK6JBcuFqLmLuqtqHbBh4LxadC7xdva00IUPhgsHRFp/vRHLndtvjCbotPbT8ER15BrkWib1WNfTwG0dEjcVVGfpZetRZAM6YeAqsRnk9zLUm6Pg3NTw5pmomFwc64u/yRmu3DI=
+	t=1783706848; cv=none; b=M66oXFrm4kGqJOD/Xa7ZlipeGdPCzwC9/wnZJmKRcPID6/M29uWECAAyaVabvy+El8bzsi5m3OPm9JtWPkbQWlFPLQLpkWJKWF/jaIfW1Jjg8G1ayIm9IWinA5jDZh5pTC2s7Z9ioNeHnlQsTfup3DBZk0g9p2LYMYJN6qvfe6c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783706847; c=relaxed/simple;
-	bh=aGN9UFD3p475WZ6QXcEiVRxsI4VaSpdbdcP+8eMNjsE=;
+	s=arc-20240116; t=1783706848; c=relaxed/simple;
+	bh=Q6wt/h32zDSUjWgfmdr6fSoDRafx4CxAPkUIm3xpkFs=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=VKXDG/9DgBNoK+DtbWjIBXP6vKnLLmlhD6Q0FBJ/SZHYt8RxhZ+Pl53yi64UXuzWxlRgkfHmQcBCpSGbuNVPJnNedJx3Th+S7sIgbmjAKsppUXDy2Q5wadP0gUI+6waM0Do3Ksz8eUl7+JI4MQJyszjVZFCbep5ldXzmKVzTy7Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WsppvxBC; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=S5xvEqr5NhTxZmDY4p3Wghg5dypvLCt4k/DSsc8JxGjdi1AuBP0orPIz1sQouhW386IDIFArRnLNe75Db8pw17p3umhdSkWhnva5CYzE60mKbiNm4ODCA6KsmSE2g8+DumxBaUCDD+OwZOXbTb9lh27l8Ojyy25PeNYcJuIpiNc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=c59BW8eg; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WsppvxBC"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 510801F00A3E;
-	Fri, 10 Jul 2026 18:07:21 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="c59BW8eg"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 85F041F00ACF;
+	Fri, 10 Jul 2026 18:07:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783706841;
-	bh=CkkWKKS0uGZCaAHGZBZy/8v2NW2sWpG1nQLGD//HsUQ=;
+	s=k20260515; t=1783706847;
+	bh=nkV2DbaHgVJj2/IyHSADBCUmwwWfdOmmFIDSoyqP328=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=WsppvxBCzNiHA7uoHo0VR2TJVPWjt9pSO/0hSJCG1lkGLBe5DyuwNAe3fKC+XOwtT
-	 n9wKT+g36dNs2uaIzJdV5Cj32Wx6PQ0IiT0h10udXo8vg6HUbtL1w9slXsY/USPYnr
-	 RJPd7w3FiCbGwhznkeP8RMY7foGPkjqIEJ0ZjCeh2YWkPILgE6i6kKbMHpD5QQ2ltL
-	 OzjSQMuD4Ryxl3sPI3AVcBgZ/FAEOmE1HNbYWQbj1qS6RP6wUFZwQxPAg4rJLLqoXH
-	 E+m0L9qwLlSB4lbhXP6fi8dfo3IvXVLYJb66i2o0k5SNW9yeww4r+LITe1SlE6Gzd2
-	 7NO5dqZSJQj0Q==
+	b=c59BW8egSe/iCT+/S3F9Ac5W+7YufsoalW/9Is4ju4zE8CxN23RV+qKv3xHiuCPJb
+	 4Rcnkwyf2X4FadHlAglA+aPBFn+XJOKKN9YlqA6aVDcVv2K3YHpGn+C2sHIOc9OecJ
+	 BiKnLaN3KA4a0VKeOifFVU4+168tna5nPZ8N6XC7DBypPoYQeINd0rbafcYO0iAG3C
+	 FvxfhQx9BgfRyjmSUZzwLPCliUX0Eok6KZ5XVelejsM1o8zCnDsBASkd85eAqvBXXC
+	 TT6JLt3TDVqq6eFYDLHsGwrJX50PGJhraLuZ/PtlKvEAzyNV9f7fH++H/vQpovWxMs
+	 qfubzMf+T6gTw==
 From: Bjorn Andersson <andersson@kernel.org>
-To: mathieu.poirier@linaro.org,
-	Uday Khare <udaykhare77@gmail.com>
+To: Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Yijie Yang <yijie.yang@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org,
 	linux-remoteproc@vger.kernel.org,
+	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: (subset) [PATCH 1/4] remoteproc: qcom: Fix glink->node reference leak in qcom_add_glink_subdev
-Date: Fri, 10 Jul 2026 13:07:06 -0500
-Message-ID: <178370682991.2572738.9046057904322921905.b4-ty@kernel.org>
+Subject: Re: [PATCH RESEND] dt-bindings: remoteproc: qcom,sm8550-pas: Add Qualcomm Maili ADSP and CDSP
+Date: Fri, 10 Jul 2026 13:07:12 -0500
+Message-ID: <178370682993.2572738.16116733255201981104.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260618132054.11010-1-udaykhare77@gmail.com>
-References: <20260618132054.11010-1-udaykhare77@gmail.com>
+In-Reply-To: <20260615-remoteproc-v1-1-67721b4b052a@oss.qualcomm.com>
+References: <20260615-remoteproc-v1-1-67721b4b052a@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -48,22 +53,20 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Thu, 18 Jun 2026 18:50:54 +0530, Uday Khare wrote:
-> In qcom_add_glink_subdev(), the device node reference acquired via
-> of_get_child_by_name() is stored in glink->node. If the subsequent
-> kstrdup_const() allocation for glink->ssr_name fails, the function
-> returns early without calling of_node_put() on glink->node, leaking
-> the reference count.
+On Mon, 15 Jun 2026 16:30:21 +0800, Yijie Yang wrote:
+> Document compatible strings for the ADSP and CDSP Peripheral Authentication
+> Services on the Qualcomm Maili SoC. Both are compatible with the Qualcomm
+> SM8550 PAS and can fallback to SM8550 except for one additional interrupt
+> ("shutdown-ack"). For CDSP, similar to Kaanapali, "global_sync_mem" is
+> not managed by the kernel.
 > 
-> Fix this by adding of_node_put(glink->node) on the error path before
-> returning.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/4] remoteproc: qcom: Fix glink->node reference leak in qcom_add_glink_subdev
-      commit: ed5dd2a9b716568ff7d6446322ee60846af313aa
+[1/1] dt-bindings: remoteproc: qcom,sm8550-pas: Add Qualcomm Maili ADSP and CDSP
+      commit: d7f6a97be70592cf3906c95428f8f1dbbc9f38dd
 
 Best regards,
 -- 
