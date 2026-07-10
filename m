@@ -1,146 +1,131 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8B4F382299
-	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 19:27:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E93035F5E4;
+	Fri, 10 Jul 2026 19:36:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783711668; cv=none; b=QxaWDz4keXKcrpvbvMCoe8a5ajJFqCG9WNORyHPyjIhOopFcx6NeOhh3FuCQUWjZa/xSUCFB81QEA5Y4ewJPXPxKX7yHkJMpL5z62VBYHwAtsd2M58npNi9ACjMBWn7K09WkIc9tOhSUEmHboiIPQK8KRNai5xqVKtI7PFmXcs8=
+	t=1783712169; cv=none; b=aT16SYw4LVBoMSjbI4AEpXQ9GQL9E39XNr2ybOIiaDSgbuYAO30HEJqNeE0n+rVOk2R7RLGJkOqX3KisSzjZ1lxUEZisui/y5aA7bp4gGMMswi3dfbH2TzDOTHrlilOXbHoD4WljGSifW9lizRTT5BECVZE43e9jM68PUqoFxM4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783711668; c=relaxed/simple;
-	bh=35hLHc2b/IQ8hICngb2fk5Ut8HJYVBZcjh5HU6E5GD4=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=EEVYgpNTkRBdx35G2UstXpoiJiyzUUygsgDt4AXPftgMC9DV5bVuIjLW+WjV0wEUk8DtOFzpbpJ44aqF6KCjTDG/3He7GeoZq8h9yolMFWo6gD34k54MgY6fyNjeN3etL9h3oqjucH2uQ7XkrlDPN0MIRB8KNNl7YgY5Hy2DUtI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dbzvZFUr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=JUk8L1qx; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1783712169; c=relaxed/simple;
+	bh=FfLPpKhOWsC/sVsNuiGUTkxCqQvuOvc9PrMkV9J6Kkg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Kx8zZV+iKjEOqJDBgoCQvAjvS/QqNLYPDV6QRyzFyHeTgGUgiPsNkxS5uFVl4klRUoOXpjLaAFLDq+xYmxADzp8XEHAt6ohsI2Bz4WWchm+aOeOQSDDheCCvP9xQ/MMe3oeSHY9EsmDCRPeg3wcHBZxxG5R5cLWN2Y8gBgE6tOI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GMSJQzHY; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dbzvZFUr";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JUk8L1qx"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66AH3lav1307259
-	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 19:27:46 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=p3MbDHiDYlrOTzVBICqzsrmh6cPzGyKK6S1
-	kNRIY/CA=; b=dbzvZFUrSyMfS39s70Li9NfQtd6RN3iB96qfN/5SGJEgmKknCwd
-	s5YGJhTZM9K+MgquB4lHwdlCI2QF1BWApyR4ly6jG5XuUAVV60hyorcJKk37jIZR
-	AKBMHMNqntb3nRfiA2nibkOhNNMUX4L2OU1+467oDh29vSiyQkiMIDqZSqIWyP0D
-	tYZUFNSl5iFidL+Iuk/29PIW9cH9pkDvZFGgdP1BxC9YOz4WYm0s81JOD0twB5RX
-	rEk2SIcrzobLHg0Yb7+CBkAawY1dBlUQWEnx/DZe+SuSb3I4qQC9HlzWNC8Cm5CI
-	LmWu3M+HhVO0m84RVVbWJi3DQh3OLTHaTaA==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fax5dj5kc-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 19:27:45 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2cacd6d37edso16531535ad.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 10 Jul 2026 12:27:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1783711665; x=1784316465; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=p3MbDHiDYlrOTzVBICqzsrmh6cPzGyKK6S1kNRIY/CA=;
-        b=JUk8L1qxpusamFInjIqS3mnS3wCORAI8akIavU1/5MbGwBUNNRKqBZKZTaqXSdLJxE
-         G2yyYyOX0fF1mM8ARI6pteo6I+hzA4DVGfMOmODFk6CZcoqckMc0j0ajVigdXN2D3gEM
-         XaKXKfxx8fs4uAvWc9NnAurPeSss2L5HfYlxQXfQZD9gZCDIJ0/dAXMP7OCOHR8ScMJs
-         1Y1DZ/8R3i9GFAmhjzvFkqSnkT+fV4NxF98o1/PVfD1R0YQGO4qB7iS0B0b961dzYdgT
-         SLyW6H0fFXdShlZMBjXfxk4DQ68tPlvhz5oh7y3szXsdeNSaX1+M8p4qRwC0M5Buyazy
-         A/0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783711665; x=1784316465;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=p3MbDHiDYlrOTzVBICqzsrmh6cPzGyKK6S1kNRIY/CA=;
-        b=ISGapFdPW1bABtPTp3GT01rf6XtxiiH5gcrxw+0KPu3TLI+0BL6nGovP2GxR1qjkx7
-         gMSWSOvgqAg99R8SIBA2iNAVG3loblkGvrjRJxzjoF5tNTltwujxe0RSE8eu9CPcZPXB
-         mWpVt2A91hz5nuVkeVV2anUTGxlZrJXnMz48u6IwsOqRwsh3nV18aWmA5/P3AkprWV/8
-         fBxKDvTCC/G8DJ8zZV9xMF79hka9uJdXzrxTePTc3eBUq/cG7lKAW6B2OmcqDTHqPCIm
-         OZCUdZ8TOZkoagAN7esp6yJ+/u/QAhlJ33o7RM3RA3D22SY09tOfbRbs5M6dviZah4ME
-         0qTQ==
-X-Gm-Message-State: AOJu0Yx3yOrN51GzRYE04gL0wsW3m5spT4rT5asyvc8KtMIS9tcXkn1t
-	5K6Ah9/V2V0HaCrteTeseAq0NBH8KqebdZ5uCRyz9JNHRHt4QLKwSeyECThUJjc5SIIZN+HqNFL
-	bE4JYkwVuOOzrOvL/XqtVC03hkYkEt/lvNfVU3sZ/9p7QpQdZaZNWCXpdT0lIHticYs9b
-X-Gm-Gg: AfdE7clSGlJ3da4gnsMpuzHtmelQznD8I44stxULH6+ttY/E7kYZdfxLzUuWMOrMKV3
-	KZXA+FZWYXDH7HhmmbJUf7qSJElIX/uJrbq0u1BMlX9ukc8rprT7wR1uK26zTg+a1MJpyFhrZ8i
-	+KAMDfMNxeuA5O98G+gRHAJdm3f9OvtZ/4opr02tMflf7FhLVup7SVejN31/nXwkP/3D9fgPbGp
-	lDlQ+5qb7T6wiHpSOPv25GUO+eaqvtspWX4+dvf4SdTh1ILRlJamYrio3G/Zy6+7iz+PUXW0k2d
-	AJGnyaWlfT3PA5AnkV4LeT4MvC32PqsQ2HY38m66xjyVdy3wqVRvWMskdddY89pRzgB9od0FHu5
-	RYBTM5tRJ6eXjQVA3z+qCwkCDXELMvtkTbA2WdA==
-X-Received: by 2002:a17:90b:5585:b0:37f:ad5c:d18 with SMTP id 98e67ed59e1d1-38dc75ed90dmr278460a91.11.1783711665119;
-        Fri, 10 Jul 2026 12:27:45 -0700 (PDT)
-X-Received: by 2002:a17:90b:5585:b0:37f:ad5c:d18 with SMTP id 98e67ed59e1d1-38dc75ed90dmr278424a91.11.1783711664432;
-        Fri, 10 Jul 2026 12:27:44 -0700 (PDT)
-Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31174ac14f2sm45817907eec.27.2026.07.10.12.27.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 10 Jul 2026 12:27:44 -0700 (PDT)
-From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-To: Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, mfd@lists.linux.dev,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Subject: [PATCH] dt-bindings: mfd: qcom,tcsr: Add compatible for Hawi and Maili SoCs
-Date: Sat, 11 Jul 2026 00:57:37 +0530
-Message-ID: <20260710192737.1689453-1-mukesh.ojha@oss.qualcomm.com>
-X-Mailer: git-send-email 2.53.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GMSJQzHY"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B8EA21F000E9;
+	Fri, 10 Jul 2026 19:35:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1783712168;
+	bh=FfLPpKhOWsC/sVsNuiGUTkxCqQvuOvc9PrMkV9J6Kkg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=GMSJQzHYzzqQWm9PYMzUnrJgvzs2G9TH47wDGMDemvUAcIBLvWbRt6SIta8fNBwpk
+	 4I1KzrcwinweqkCs0PIx0LTM6cTuB1EbRcqAQa1jYKzjr9JQ5Wtcz35zBJE5VHsTO2
+	 cG9UL0/p5mQIf6dJdIDATgnZoBwiS18qqWXfRPN1X9YuCai4Sxlbmwyp1iHn5oqaVT
+	 dYn1B2V/Mcdasv1lXZW09wtL6Km0Wa4YkT0iudkguHEDJPY6VHY2zx2FH0me1qiUli
+	 FT7YTboRx/zld4NxRHycYg9RobUPctsDzxrL3Ch4bqyHkHMgOJIWg31b9WaLtB1aK1
+	 q5GlLYmUSufqg==
+Date: Fri, 10 Jul 2026 20:35:43 +0100
+From: Lorenzo Stoakes <ljs@kernel.org>
+To: Gregory Price <gourry@gourry.net>
+Cc: Andrew Morton <akpm@linux-foundation.org>, 
+	Russell King <linux@armlinux.org.uk>, Dinh Nguyen <dinguyen@kernel.org>, 
+	Simon Schuster <schuster.simon@siemens-energy.com>, 
+	"James E . J . Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
+	Jarkko Sakkinen <jarkko@kernel.org>, Thomas Gleixner <tglx@kernel.org>, 
+	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>, 
+	Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, Ian Abbott <abbotti@mev.co.uk>, 
+	H Hartley Sweeten <hsweeten@visionengravers.com>, Lucas Stach <l.stach@pengutronix.de>, 
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+	Patrik Jakobsson <patrik.r.jakobsson@gmail.com>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+	Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
+	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, Thierry Reding <thierry.reding@kernel.org>, 
+	Mikko Perttunen <mperttunen@nvidia.com>, Jonathan Hunter <jonathanh@nvidia.com>, 
+	Christian Koenig <christian.koenig@amd.com>, Huang Rui <ray.huang@amd.com>, Ankit Agrawal <ankita@nvidia.com>, 
+	Alex Williamson <alex@shazbot.org>, Alexander Viro <viro@zeniv.linux.org.uk>, 
+	Christian Brauner <brauner@kernel.org>, Dan Williams <djbw@kernel.org>, 
+	Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, 
+	David Hildenbrand <david@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
+	"Liam R . Howlett" <liam@infradead.org>, Matthew Wilcox <willy@infradead.org>, 
+	Marek Szyprowski <m.szyprowski@samsung.com>, Peter Zijlstra <peterz@infradead.org>, 
+	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>, 
+	Steven Rostedt <rostedt@goodmis.org>, SeongJae Park <sj@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>, 
+	Hugh Dickins <hughd@google.com>, Mike Rapoport <rppt@kernel.org>, Kees Cook <kees@kernel.org>, 
+	Paolo Bonzini <pbonzini@redhat.com>, linux-kernel@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org, linux-sgx@vger.kernel.org, 
+	etnaviv@lists.freedesktop.org, dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
+	freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org, kvm@vger.kernel.org, 
+	linux-fsdevel@vger.kernel.org, nvdimm@lists.linux.dev, linux-mm@kvack.org, 
+	iommu@lists.linux.dev, linux-perf-users@vger.kernel.org, 
+	linux-trace-kernel@vger.kernel.org, kasan-dev@googlegroups.com, damon@lists.linux.dev, 
+	Pedro Falcato <pfalcato@suse.de>, Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>, 
+	Jann Horn <jannh@google.com>
+Subject: Re: [PATCH 27/30] mm/vma: correct incorrect vma.h inclusion
+Message-ID: <alFJUfaGHVnKd-Nb@lucifer>
+References: <cover.1782735110.git.ljs@kernel.org>
+ <22d0f4e3fe11f6fd1312734e242d008267ad142c.1782735110.git.ljs@kernel.org>
+ <alFHR3fg8K1-SITK@gourry-fedora-PF4VCD3F>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEwMDE5NSBTYWx0ZWRfX85owbh9blxhh
- ypSCjZ4NddJJL29tBgDXawydkz2tIobiLn+LyekEzOHQNu625Y+KsEkt5H27GCTAWe3uge40Jmf
- RPisicZ2lY60LEl04l8+NZ6pfySR4h8=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEwMDE5NSBTYWx0ZWRfXxrKxXNw4vogp
- DJTPwhUntz1Q74RXnKjRAOKrqGZsVxWGSrhx+KUe6yKmAhK2ZB8S+Tzz7Dr5gVBztdcowHhL5xt
- 7M+eV6PWFxKZz4fA26AMDjEdRJvs/W51FlHsPDom1rPP2v0zpGOFLySCTFW0iKPCwHBSO/jgoF6
- txnm/C8rkHbROq38nonSQjhYow0u8aiNKbv4dH0yzpfwUBtpmF46f9OY5jNoFqBaEjEI8yeDdh4
- dTCrKHjQGyC9LZP8RwvBzT+gjICPQazUspryH2664LR/ECKPxqgGVrPh6nN7CYCWjbj7l9M+1ba
- eHIc3YZhvO7jTuMKjzWN6PV6UqEGIUw0jOZoOgkxCSIqynozRZEa6bufXL6hYWYmib8B8nk/ycE
- 9b7jb3GsYYjB0lhLqv8WcLS3nGwGVk5RCdAcgpm0ZWQCz2uT27/Uz/96Q3WYIpdvD9voTatMWMZ
- qX0knRlIiHt88XDz4sw==
-X-Proofpoint-GUID: Ho_J_YT609iPJ5M2KrdegZjMhB_HLR76
-X-Proofpoint-ORIG-GUID: Ho_J_YT609iPJ5M2KrdegZjMhB_HLR76
-X-Authority-Analysis: v=2.4 cv=M/x97Sws c=1 sm=1 tr=0 ts=6a5147b1 cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
- a=w03f12j0Wgemb4Z29XEA:9 a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-10_05,2026-07-10_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 adultscore=0 bulkscore=0 malwarescore=0 suspectscore=0
- phishscore=0 spamscore=0 clxscore=1015 priorityscore=1501 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607100195
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <alFHR3fg8K1-SITK@gourry-fedora-PF4VCD3F>
 
-Document Top Control and Status Register (TCSR) controller for
-Qualcomm Hawi and Maili SoCs.
+On Fri, Jul 10, 2026 at 03:25:59PM -0400, Gregory Price wrote:
+> On Mon, Jun 29, 2026 at 01:23:38PM +0100, Lorenzo Stoakes wrote:
+> > The only files which should be including vma.h are the implementation files
+> > for the core VMA logic - vma.c, vma_init.c, and vma_exec.c.
+> >
+> > This is in order to allow for userland testing of core VMA logic. In this
+> > cases, vma_internal.h and vma.h are included, providing both the
+> > dependencies upon which the core VMA logic requires and its declarations.
+> >
+> > Userland testable VMA logic is achieved by having separate vma_internal.h
+> > implementations for userland and kernel.
+> >
+> > Callers other than the core VMA implementation should include internal.h
+> > instead. This header does not need to include vma_internal.h as it only
+> > contains the vma.h declarations, for which the includes already present
+> > suffice.
+> >
+> > Update code to reflect this, update comments to reflect the fact there are
+> > 3 VMA implementation files and document things more clearly.
+> >
+> > While we're here, slightly improve the language of the comment describing
+> > vma_exec.c.
+> >
+> > No functional change intended.
+> >
+> > Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
+>
+> Reviewed-by: Gregory Price <gourry@gourry.net>
+>
+> > +/*
+> > + * To allow for userland testing we place internal dependencies in
+> > + * vma_internal.h and external VMA API declarations in vma.h.
+> > + */
+> ...
+> > +/*
+> > + * To allow for userland testing we place internal dependencies in
+> > + * vma_internal.h and external VMA API declarations in vma.h.
+> > + */
+> ...
+> > +/*
+> > + * To allow for userland testing we place internal dependencies in
+> > + * vma_internal.h and external VMA API declarations in vma.h.
+> > + */
+>
+> Do you actually need 3 copies of this comment or just one copy in
+> vma_internal.h?
 
-Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
----
- Documentation/devicetree/bindings/mfd/qcom,tcsr.yaml | 2 ++
- 1 file changed, 2 insertions(+)
+I'd rather have it at a glance, it's a bit silly but C headers are silly :P
 
-diff --git a/Documentation/devicetree/bindings/mfd/qcom,tcsr.yaml b/Documentation/devicetree/bindings/mfd/qcom,tcsr.yaml
-index 7dd2fe035e6d..297e91a54a1f 100644
---- a/Documentation/devicetree/bindings/mfd/qcom,tcsr.yaml
-+++ b/Documentation/devicetree/bindings/mfd/qcom,tcsr.yaml
-@@ -17,6 +17,8 @@ properties:
-   compatible:
-     items:
-       - enum:
-+          - qcom,hawi-tcsr
-+          - qcom,maili-tcsr
-           - qcom,msm8976-tcsr
-           - qcom,msm8998-tcsr
-           - qcom,nord-tcsr
--- 
-2.53.0
-
+BTW you're kinda racing against time here as I'm on the verge of sending v2
+:P
