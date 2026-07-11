@@ -1,56 +1,48 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF3A03CAA54;
-	Sat, 11 Jul 2026 16:40:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF3F23CBE6E;
+	Sat, 11 Jul 2026 16:40:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783788051; cv=none; b=EdA1BuUprt0f4UySdcViU/t8L0OguuY2NtIXf139rzxKJYTx+LZlJXs52lj3pjydTbXfNO/WgvCia1PuSfEUgqnV7GoNICDLdwWOX3CXhiwFeBn7v0FL28OLNWHCMWKtO8NlsGOPWwCb8An2pqcz5TACnRnd4pD96O6URL85+qY=
+	t=1783788051; cv=none; b=YAiwMd0CUOQPw3SCPZQ6yTgvogGYjUjFsc7NhrKPb0n41jRSDq+OnpUwd0ljK/tRNAnKVWQftwZx612+q+Y4Oxex8Bn/G7BM2/dMkRFT37EMYtMl3XHsh9fbYcM25Iu/VxCbz29O8tqw7eosBFBMCErn6v5j+rM6v26f0rQs27Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1783788051; c=relaxed/simple;
-	bh=AJTBzz1seoXPE7X19l9bOj98BnrfotS6pXLG/JYE4JM=;
+	bh=KtPshX9G9ZZQeHqyymbVjRXdMrWL0vFAzZUOHIyWLL0=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=dz5y9KY+oP+h3ni4kft1KtAsHwh3Mq8xdMPVSW4IxvQ7zh1VH2WxzChs/pz845r9JzgkWCQZ8a+BBLfCOB2B0pHkSl0TpHRfyW9IrXCmDknH5T1ny4gys1heUNW87qlVUEG/XOaBIioWzpLIqANN6b8vH2vGjNTDOD5bVbIUWXM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YEQVHrVd; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=hegeakUXtCh03+iX7/Vp+nc7yjC0h7T5J//gmQ1QuB9MTa46grjdIEU3uMoHv/Z74GcUKu8KdUEUno/E9bnM22/vq6fF2/oKeoxkINQixBLSsomveRT4wJTywRnZskoy6b5/QPsxpC7kKKi21jmJMCPAYbm/uFrhYWdlWJynh5U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XTKhlx7I; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YEQVHrVd"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 76A8D1F00A3E;
-	Sat, 11 Jul 2026 16:40:48 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XTKhlx7I"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E29C11F000E9;
+	Sat, 11 Jul 2026 16:40:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783788049;
-	bh=yVw5mffjnIlZHE4iDxRvoUQvwFWcH1yBdkxrebziRVQ=;
+	s=k20260515; t=1783788050;
+	bh=CQX698hxn3C0qIZ9h+t7i/by2l02GA/EGgvpb0ocGFs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=YEQVHrVd11nlZpECX6vCnMb7RudmJv30BvInh6+88kn0iVanvmX5eHBHVXWExGHoc
-	 6OEHfiAslurz6q7OQIRX/Agn0GAXZtneoDjbm95l8O9bQOkGCq0PnQqkL5mwUds3II
-	 oCmzXUZ0SPAeGJ2Gc5t/Evsz1k06vPAHqLMs/Gkej2BQ/tVGsiAVe6eefmjTBXOZZG
-	 CVhm8RiF8RoYBL6sIXJjvEv0DvQUCU7I9enCYgOjopEPSWy8K6gB192XYtakMZ/oBg
-	 SQZJWzs87JOY4IENCErr6Wx93MlGzqkVWRagMD5Md8WAq1RtXks3mT45Teghh8WZ5p
-	 MaInSlzd9T1OQ==
+	b=XTKhlx7Ibk5O9aoBEMG47TEDPcWhPRYN7ttEf+azuSgyXgiyMszDO9+tAEcK6Dbgs
+	 x+GVA81Ba0JZqiitNLoZviS1aDe5aD4rM5sbEgyW8wILl/+cHId4bCc0uhM+Im4qA1
+	 vG6v5sVNcPE15cj34Kc9tkDSTjoBM3Pgd1kIp+2eL090/8eQoe80sgmSfI8R+gVkMf
+	 /mBOhatCxh274YsDh3SvSJlHzTPjljgdcERIBOScsEn0b6h+wyaIAoWIF+VUq9qg8H
+	 I4YS9JpJKDpXSgaT9d8dRoYjOGr1ooIxHUKQgohAmUVJwiVMYzDg7ed9rTkhwP+PA0
+	 BIVTLRxMNGc1w==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney@redhat.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Christian Loehle <christian.loehle@arm.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Taniya Das <taniya.das@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH v5 0/3] Add camera clock controller support on Glymur platform
-Date: Sat, 11 Jul 2026 11:40:36 -0500
-Message-ID: <178378800448.138068.15504604554748644272.b4-ty@kernel.org>
+	linux-arm-kernel@lists.infradead.org,
+	linux-pm@vger.kernel.org,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v2 0/5] soc: qcom: Kconfig improvements
+Date: Sat, 11 Jul 2026 11:40:37 -0500
+Message-ID: <178378800460.138068.14941627413672684925.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260624-glymur_camcc-v5-0-a321df74b1a1@oss.qualcomm.com>
-References: <20260624-glymur_camcc-v5-0-a321df74b1a1@oss.qualcomm.com>
+In-Reply-To: <20260711-qcom-soc-kconfig-v2-0-4a907e064281@oss.qualcomm.com>
+References: <20260711-qcom-soc-kconfig-v2-0-4a907e064281@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -61,16 +53,29 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 24 Jun 2026 20:20:28 +0530, Jagadeesh Kona wrote:
-> Add support for camera clock controller on Glymur platform
-> for camera clients to be able to request for camcc clocks.
+On Sat, 11 Jul 2026 15:25:00 +0200, Krzysztof Kozlowski wrote:
+> Merging
+> =======
+> Defconfig change (last commit) depends on earlier changes, thus that
+> patch could wait a cycle.
+> Alternatively, everything through Qualcomm SoC tree, but then please
+> keep these on a dedicated branch in case defconfig has to be shared
+> with soc tree to avoid conflicts.
 > 
-> 
+> [...]
 
 Applied, thanks!
 
-[3/3] arm64: dts: qcom: glymur: Add camera clock controller support
-      commit: 7df7325ffc4b959cabedb2e41827c1b9a39c8dab
+[1/5] soc: qcom: Hide all drivers behind selectable menu
+      commit: f2866e6a27f7cc26111ce195ddf00d4050bb27e5
+[2/5] soc: qcom: Restrict drivers per ARM/ARM64
+      commit: e10b198a94c66f7105dbd535f66631c96579c903
+[3/5] soc: qcom: Make important drivers default
+      commit: 9b3daac1d0eed2564e49a08636e5044c0bfac0b1
+[4/5] soc: qcom: Avoid SCM and SPM for cpuidle drivers
+      commit: f6540105e0aaf6c1d3fec6070217f199bdc351f7
+[5/5] ARM: defconfig: qcom: Drop Qualcomm SoC drivers with defaults
+      (no commit info)
 
 Best regards,
 -- 
