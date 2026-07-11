@@ -1,221 +1,200 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F2422989B5;
-	Sat, 11 Jul 2026 17:04:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F37D3C945B
+	for <linux-arm-msm@vger.kernel.org>; Sat, 11 Jul 2026 17:10:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783789482; cv=none; b=kweeeDFOrCiacfDzX6ly+bcdJdWMAAMhcAKF4DoHAmEkD6YCFxDLryLkFkBYz+q7H61iu0r4ujLt+X2rOXstN5qXTV2mSB6TRaVUjECRrEKNoJ+2UYW0lUNLj3MQXHSX4mMEOsTcXPB7kPmM9N/H9uE+jC0v44seBeZ7Q1SJqko=
+	t=1783789802; cv=none; b=Oz0+hLMlC/+dyiqPI9akvFyOehAbUk+pDKRylVvBgr/4nenQMGpkQf+Xa1QfvA3f0xPbl0aMvErshQN9cewy0Pk/iGqiaMAiu5x1GhzoVdE123QcofdcHPbSUbvIyW1lFXJoDOH8Gz35Xfa+FzrqgO20OgEXmFK+vBSz13Os1hU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783789482; c=relaxed/simple;
-	bh=4ftnfHEVOIUNZgtypiyukJdzYo8ug9kOYC/sNKqQOZM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=M/5NmRc94fi6CFr51Jkd/psJiRzAnsPqdIH+vlLNk4dMR1uUbdVYr2ggnHpvWM5HUCRr/dBLjG2IdP4LxwvV8DbbJjiFVywux+b9UIYeaHXjMo81NL+JohFTvOx1HxwlzXWkJGfAxBFNtcwjD88YGWkSWSJg7fJQskDGL1QkCfo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=k75eMTHb; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783789802; c=relaxed/simple;
+	bh=f5M5hytx1ky2qfopaUhBZoYqxyomhDfuBgV0wm3ocnQ=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=RFv6wl28/heOsqpyvuZTnTl80WQhhuWK4hTYQJtqQHbmVEezJfXQiXobMOLHDZXNLNby5PhoSWk9vKsNms12yFHKZ2i0zl+0b34dkDdaqRnO2z06iq2VQd6AfObPObxXOG0WrLLLxaxvEvq+bDZR/ZslqD8QX6BkC1oSVQaVxss=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZJn6bLnP; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UX0NP1N5; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="k75eMTHb"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44FBE1F000E9;
-	Sat, 11 Jul 2026 17:04:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783789480;
-	bh=+Kwd9D5Wl2KO1Q3Bx8l5+fiMeXu2P1OtbVPUfZ/bfbo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=k75eMTHbfY5dLiist6X1WccVv3k4otHBJCwIOTe46YBHnqrIF1xmytrUrRJODV0h2
-	 NFmVNF/K5+hQkIVW3bv6RCnCkOSV5BteTL51MGqvOw9+FwfCEdTh0lJASD7uVwbR0D
-	 7id+6F1QOheKs0/qV7VtYbBBrYuorsecGOcn4P+Aedutt57oKLfai/LPb47xTkHe2v
-	 Vxu5p2eAfg3qWGWcIPsPlaAGCDayA6g0QKSaIAbXO2OSh1LdCes8X+y9FM6C+1Eu7H
-	 /PK8nbJzJ0+/7/dPZ2uAj/ztBJv5OD5W3R7oCXqO8Y2s8cuPNpie8Ma1uT2vWb6Thl
-	 oZYPNvSdCQdnQ==
-Date: Sat, 11 Jul 2026 18:04:14 +0100
-From: Lorenzo Stoakes <ljs@kernel.org>
-To: Zi Yan <ziy@nvidia.com>
-Cc: Lance Yang <lance.yang@linux.dev>, akpm@linux-foundation.org, 
-	tsbogend@alpha.franken.de, maddy@linux.ibm.com, mpe@ellerman.id.au, 
-	maarten.lankhorst@linux.intel.com, mripard@kernel.org, tzimmermann@suse.de, airlied@gmail.com, 
-	simona@ffwll.ch, l.stach@pengutronix.de, inki.dae@samsung.com, 
-	sw0312.kim@samsung.com, kyungmin.park@samsung.com, krzk@kernel.org, 
-	peter.griffin@linaro.org, jani.nikula@linux.intel.com, joonas.lahtinen@linux.intel.com, 
-	rodrigo.vivi@intel.com, tursulin@ursulin.net, robin.clark@oss.qualcomm.com, 
-	lumag@kernel.org, lyude@redhat.com, dakr@kernel.org, 
-	tomi.valkeinen@ideasonboard.com, hjc@rock-chips.com, heiko@sntech.de, andy.yan@rock-chips.com, 
-	thierry.reding@kernel.org, mperttunen@nvidia.com, jonathanh@nvidia.com, kraxel@redhat.com, 
-	dmitry.osipenko@collabora.com, zack.rusin@broadcom.com, matthew.brost@intel.com, 
-	thomas.hellstrom@linux.intel.com, oleksandr_andrushchenko@epam.com, deller@gmx.de, bcrl@kvack.org, 
-	viro@zeniv.linux.org.uk, brauner@kernel.org, muchun.song@linux.dev, osalvador@suse.de, 
-	david@kernel.org, baolin.wang@linux.alibaba.com, liam@infradead.org, 
-	npache@redhat.com, ryan.roberts@arm.com, dev.jain@arm.com, baohua@kernel.org, 
-	hughd@google.com, vbabka@kernel.org, rppt@kernel.org, surenb@google.com, 
-	mhocko@suse.com, jannh@google.com, pfalcato@suse.de, kees@kernel.org, 
-	perex@perex.cz, tiwai@suse.com, linux-mips@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, dri-devel@lists.freedesktop.org, 
-	etnaviv@lists.freedesktop.org, linux-arm-kernel@lists.infradead.org, 
-	linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
-	freedreno@lists.freedesktop.org, nouveau@lists.freedesktop.org, 
-	linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org, virtualization@lists.linux.dev, 
-	intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org, linux-fbdev@vger.kernel.org, 
-	linux-aio@kvack.org, linux-fsdevel@vger.kernel.org, linux-mm@kvack.org, 
-	linux-sound@vger.kernel.org
-Subject: Re: [PATCH 12/13] mm/mprotect: convert mprotect code to use
- vma_flags_t
-Message-ID: <alJ3CDR7zTvAv2XL@lucifer>
-References: <7ef626d8a12dc742cfc09d080be5dc09850e873a.1782760670.git.ljs@kernel.org>
- <20260701160917.91435-1-lance.yang@linux.dev>
- <akaIfhfbTCAdJm3H@lucifer>
- <DJTOG7IBZKEE.87TLWNXOCHR8@nvidia.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZJn6bLnP";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UX0NP1N5"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66BEOXAa3916523
+	for <linux-arm-msm@vger.kernel.org>; Sat, 11 Jul 2026 17:09:59 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=62TjJ0RY6VeZ5IOBdjTqk2
+	iAOTl905RMhzB3iESIMIU=; b=ZJn6bLnPlKsXEqftIeuZ1GwNFtzcOKaheZRZpE
+	oHnVV2+vOxaR3yhmj2EMBk22qA91i/ekI2vmPBY4JTB2n9wTzfnCklqYSoJdhKVj
+	MoiE6SbdN7sMYy6eiCS1J1PAg1igFDYEqWhGi4rNIl3Q3P4Hel3O8Xz0pgnCVz45
+	cfwidpvjS9dWC0UVHZV4d8CRoLLqSguACr/u/pNQphMng43JyAh9D4Z05BX+jFq8
+	UOdipfFuMTldtRXjpq47+crdx2SqNgYjc9p+oNVDm94/1Z6X2BehWwG2LFFRBl+k
+	FX/Ypl9FgT1eLCEwCvypw0VyLslhpVPKYI6mMzj/Rbf9Q0dg==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fbee9h94h-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 11 Jul 2026 17:09:59 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-c889d1eedcdso2975804a12.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 11 Jul 2026 10:09:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1783789799; x=1784394599; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=62TjJ0RY6VeZ5IOBdjTqk2iAOTl905RMhzB3iESIMIU=;
+        b=UX0NP1N5NcMGrz7psz3Y5IPIVwoRCm9u0agPGp3/hrztwE9TF2V/FV7+DTPFkrv+W7
+         9kb608lITxiyEjkxHEqs6Ur2IBNfgRYvXngf4ohyBGP0L+lE6ne56K/fHedI7JdhKjMO
+         hKTSrNVOFWjOwHq52YlwWqSmom3dlb3t4njwFtxsDKpOShK/7qwH/1reiXqaupQ3jMT2
+         PIGiwMqk5AaE6qIGsvNWlJym6CHo8K4lCVqBkzJJQJCaeVDLVL5S6qh0a60KszW6rDS8
+         uG5aDAjFVseb3WQEst8MHhX1fZeydYhr76CafrHFJVLar8+DuDrNO+OsCnMNBI97lijq
+         5wAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783789799; x=1784394599;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=62TjJ0RY6VeZ5IOBdjTqk2iAOTl905RMhzB3iESIMIU=;
+        b=Mk1e9nexqTJ4+i1CYQKmLntEdEdlE94EKKJiLGjRvhj0u8nwRcli4uNI7+D/xjOqkY
+         mUBeyRIK1ruknpp/s4f7lXpG0KfNeCnhLqG7amIGG8yPniDqcTN2CqmWcxbWgJd7RP5J
+         x5zqE4CbhryexvfW+4h7tPdVlzPQwouWN9vOm9hj5BbG6XjAaXo2Rak6HwvJ0USJ/Cmo
+         Pa5IoIlL/Eye+Tx3R8bcFFeUDKsuUyJDFiV/kil66WE7k4zIo7AnME9j8VGxlvDqZHPs
+         djop4urZajbHriOML6ofYoE1pZCP83WrMN+UYYjF+taMXZUBKkNFCiQuNOHEYcU4eRuQ
+         FfCQ==
+X-Gm-Message-State: AOJu0YxWNDAUBRWy0L9GQHU8ADULs0Pjdh19cht5Y1BE2yx/oReVkGbC
+	5wRGC36gu9j+GUaI8LksuTlpy3O5Y2uRMk6CAfpwGOe/mOYP8LfST7EZKeGQ9dD9/UCZhc42E29
+	yaLLgUJ+uNvbvMAOMu8pWAofdMFKz+UcrCpxYyecSX/gGv4JsrJjN0ycuvAw4lHhmIfii
+X-Gm-Gg: AfdE7ckrH6204C3PbqUtqDwpsO7Ztismq9USO8W0a/sTeOMSFIg8+CcpgmhsWdfkX/t
+	JjoQ77Dkyb463AmvpCKlA2cz2sQ8QanGDrQfB2gpVWIiPWC/kcvypTu/mGprGoO2AY1iypAeutT
+	ef1j3cdZ9fdziqGdrwFCOsR3XKSEI6KNTWjh8yhDMhY29PFHJemUrFwVVQ3VmEwpF6NFRovWXf3
+	PSuo+AbqHOrO18f8BAOADsfsNrOzv+oYqtdXllOcKwg2nvaQNHuFx+jxC4pFD8b94/4z0t1PkrV
+	xX0L6013VJNAFLVO164IdgyrSYL5JpACwqa7YHmSgGcnPmA4AfvKuHxM9/jY8UMKbxxRhFi3k2W
+	bzMzs4/Rdq1PHc13krP4aGX26rMgukr128+8EwMZHuRJT/iKuQhkSMKRellcmd8DFVFn9TYH1bd
+	IWyKBA
+X-Received: by 2002:a05:6a21:a109:b0:3c1:142e:762d with SMTP id adf61e73a8af0-3c1142e7916mr2962347637.1.1783789798586;
+        Sat, 11 Jul 2026 10:09:58 -0700 (PDT)
+X-Received: by 2002:a05:6a21:a109:b0:3c1:142e:762d with SMTP id adf61e73a8af0-3c1142e7916mr2962331637.1.1783789798131;
+        Sat, 11 Jul 2026 10:09:58 -0700 (PDT)
+Received: from hu-kriskura-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-313b9ca880fsm12943635eec.23.2026.07.11.10.09.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 11 Jul 2026 10:09:57 -0700 (PDT)
+From: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+Subject: [PATCH v5 0/4] Add USB Phy driver and binding changes for Qualcomm
+ Shikra SoC
+Date: Sat, 11 Jul 2026 22:39:49 +0530
+Message-Id: <20260711-shikra-usbphy-v5-v5-0-229ba3602737@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <DJTOG7IBZKEE.87TLWNXOCHR8@nvidia.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAN14UmoC/yXMQQqDMBBA0avIrB1IQmOhVxEXGidmWogho9Ii3
+ r1Rl2/x/w5CmUngVe2QaWPhORbYugIX+jgR8lgMRplGPbVGCfzJPa4ypPDDzaLXRln9cOT9CCV
+ LmTx/r2Xb3ZZ1eJNbzg8cxx8z8kzvdAAAAA==
+X-Change-ID: 20260711-shikra-usbphy-v5-f120514ceffd
+To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Wesley Cheng <quic_wcheng@quicinc.com>,
+        Xiangxu Yin <xiangxu.yin@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1783789793; l=2238;
+ i=krishna.kurapati@oss.qualcomm.com; s=20260707; h=from:subject:message-id;
+ bh=f5M5hytx1ky2qfopaUhBZoYqxyomhDfuBgV0wm3ocnQ=;
+ b=3hRKKt8/B9PBUko5BUNEyYK6WYFA4VpMX778qo08Ux0D6etYTvZja932rpmm6tfzfGQQzrQxR
+ fL61e6Dh2cpB43MyQFsFs2vbxxDQ7YkQDJSTBuSXCO2n0SQk9DVouKm
+X-Developer-Key: i=krishna.kurapati@oss.qualcomm.com; a=ed25519;
+ pk=6PmiuwGCdov3wRO+bdmRlRxRtmJyDKz3ED57LLPVgds=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzExMDE3MyBTYWx0ZWRfX49+qGw1ZfwJv
+ QPSmn1/spRYhYCVpuidRTKpSSWQXcWWyZY8hLtcTCv/0N+Deegce5n2QV7BwyqCIipUR0eRx7QJ
+ 58eEs3df/RctxisU62ZC5TTzzDFEPnw=
+X-Proofpoint-GUID: IkDHGdgDhVqU8obxRnG8yr-NMm3KP5JG
+X-Authority-Analysis: v=2.4 cv=a7UAM0SF c=1 sm=1 tr=0 ts=6a5278e7 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=snenXNZ0Rr6npqWaDuoA:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzExMDE3MyBTYWx0ZWRfX7HQGb9uE/bMv
+ mwGO6Q1smJaGLvjLeUGee0qs6F+4k7LQQcarP7exhm75xKSROESq0idpvHRHaJoPDbdmQ6pUnGB
+ 78pRRP+JudWEGkLfPUDPYIsTG4akwUoLyYRGp5/OPAHLvkj7qyEaYk9gTT391uWlE3CfugatkBh
+ WwdJjH92E1fov9/FOZv8I03FXkmf0GRawKlLV8y5Lq+yPCSyhfa6eyoXijL8aXvsiBShYVxwwJ9
+ A+fGn1pAdVxUXllqfmEiPO9wShMKwaDRnlbuY20i2ovQ9cNoY+QXA+lqd1k3BFhENwTRdhU9GJc
+ nYpisDVNfWsIiw+oSAY4+H68alUY0IJZoCb4NVhNHiU0LQi7WNEUUzO32eBcB8rr9VdA7w+PZyq
+ OaKWLI43WWwCDiITsmMbd0gYe2IlFl5Pca17z/Cbjo35uCMrgiZJuCKzPaKcQXZiPzwYnipXreW
+ ePBvvH5cVwIS+pTSGXQ==
+X-Proofpoint-ORIG-GUID: IkDHGdgDhVqU8obxRnG8yr-NMm3KP5JG
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-11_04,2026-07-10_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 phishscore=0 priorityscore=1501 malwarescore=0 adultscore=0
+ clxscore=1015 spamscore=0 suspectscore=0 lowpriorityscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607110173
 
-On Wed, Jul 08, 2026 at 10:16:15PM -0400, Zi Yan wrote:
-> On Thu Jul 2, 2026 at 11:53 AM EDT, Lorenzo Stoakes wrote:
-> > On Thu, Jul 02, 2026 at 12:09:17AM +0800, Lance Yang wrote:
-> >>
-> >> On Mon, Jun 29, 2026 at 08:25:35PM +0100, Lorenzo Stoakes wrote:
-> >> >Replace use of the legacy vm_flags_t flags with vma_flags_t values
-> >> >throughout the mprotect logic.
-> >> >
-> >> >Note that we retain the legacy vm_flags_t bit shifting code in
-> >> >do_mprotect_key(), deferring a vma_flags_t approach to this for the time
-> >> >being.
-> >> >
-> >> >Additionally update comments to reflect the changes to be consistent.
-> >> >
-> >> >No functional change intended.
-> >> >
-> >> >Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
-> >> >---
-> >> > mm/mprotect.c | 16 ++++++++--------
-> >> > 1 file changed, 8 insertions(+), 8 deletions(-)
-> >> >
-> >> >diff --git a/mm/mprotect.c b/mm/mprotect.c
-> >> >index 9cbf932b028c..c9504b2a2525 100644
-> >> >--- a/mm/mprotect.c
-> >> >+++ b/mm/mprotect.c
-> >> >@@ -40,7 +40,7 @@
-> >> >
-> >> > static bool maybe_change_pte_writable(struct vm_area_struct *vma, pte_t pte)
-> >> > {
-> >> >-	if (WARN_ON_ONCE(!(vma->vm_flags & VM_WRITE)))
-> >> >+	if (WARN_ON_ONCE(!vma_test(vma, VMA_WRITE_BIT)))
-> >> > 		return false;
-> >> >
-> >> > 	/* Don't touch entries that are not even readable. */
-> >> >@@ -97,7 +97,7 @@ static bool can_change_shared_pte_writable(struct vm_area_struct *vma,
-> >> > bool can_change_pte_writable(struct vm_area_struct *vma, unsigned long addr,
-> >> > 			     pte_t pte)
-> >> > {
-> >> >-	if (!(vma->vm_flags & VM_SHARED))
-> >> >+	if (!vma_test(vma, VMA_SHARED_BIT))
-> >> > 		return can_change_private_pte_writable(vma, addr, pte);
-> >> >
-> >> > 	return can_change_shared_pte_writable(vma, pte);
-> >> >@@ -194,7 +194,7 @@ static __always_inline void set_write_prot_commit_flush_ptes(struct vm_area_stru
-> >> > {
-> >> > 	bool set_write;
-> >> >
-> >> >-	if (vma->vm_flags & VM_SHARED) {
-> >> >+	if (vma_test(vma, VMA_SHARED_BIT)) {
-> >> > 		set_write = can_change_shared_pte_writable(vma, ptent);
-> >> > 		prot_commit_flush_ptes(vma, addr, ptep, oldpte, ptent, nr_ptes,
-> >> > 				       /* idx = */ 0, set_write, tlb);
-> >> >@@ -811,8 +811,8 @@ mprotect_fixup(struct vma_iterator *vmi, struct mmu_gather *tlb,
-> >> > 		vm_unacct_memory(nrpages);
-> >> >
-> >> > 	/*
-> >> >-	 * Private VM_LOCKED VMA becoming writable: trigger COW to avoid major
-> >> >-	 * fault on access.
-> >> >+	 * Private VMA_LOCKED_BIT VMA becoming writable: trigger COW to avoid
-> >> >+	 * major fault on access.
-> >> > 	 */
-> >> > 	if (vma_flags_test(&new_vma_flags, VMA_WRITE_BIT) &&
-> >> > 	    vma_flags_test(&old_vma_flags, VMA_LOCKED_BIT) &&
-> >> >@@ -886,7 +886,7 @@ static int do_mprotect_pkey(unsigned long start, size_t len,
-> >> > 			goto out;
-> >> > 		start = vma->vm_start;
-> >> > 		error = -EINVAL;
-> >> >-		if (!(vma->vm_flags & VM_GROWSDOWN))
-> >> >+		if (!vma_test(vma, VMA_GROWSDOWN_BIT))
-> >> > 			goto out;
-> >> > 	} else {
-> >> > 		if (vma->vm_start > start)
-> >> >@@ -894,7 +894,7 @@ static int do_mprotect_pkey(unsigned long start, size_t len,
-> >> > 		if (unlikely(grows & PROT_GROWSUP)) {
-> >> > 			end = vma->vm_end;
-> >> > 			error = -EINVAL;
-> >> >-			if (!(vma->vm_flags & VM_GROWSUP))
-> >> >+			if (!vma_test(vma, VMA_GROWSUP_BIT))
-> >>
-> >> IIUC, should this be
-> >>
-> >> if (!vma_test_single_mask(vma, VMA_GROWSUP))
-> >>
-> >> instead?
-> >>
-> >> #elif defined(CONFIG_PARISC)
-> >> #define VM_GROWSUP	INIT_VM_FLAG(GROWSUP)
-> >> ...
-> >> #ifndef VM_GROWSUP
-> >> #define VM_GROWSUP	VM_NONE
-> >> ...
-> >>
-> >> VM_GROWSUP is only defined as GROWSUP on parisc and becomes VM_NONE
-> >> elsewhere. But VMA_GROWSUP_BIT is the raw ARCH_1 bit, which is also used
-> >> for other arch-specific VMA flags:
-> >>
-> >> 	DECLARE_VMA_BIT_ALIAS(SAO, ARCH_1),		/* Strong Access Ordering (powerpc) */
-> >> 	DECLARE_VMA_BIT_ALIAS(GROWSUP, ARCH_1),		/* parisc */
-> >> 	DECLARE_VMA_BIT_ALIAS(SPARC_ADI, ARCH_1),	/* sparc64 */
-> >> 	DECLARE_VMA_BIT_ALIAS(ARM64_BTI, ARCH_1),	/* arm64 */
-> >> 	DECLARE_VMA_BIT_ALIAS(ARCH_CLEAR, ARCH_1),	/* sparc64, arm64 */
-> >> 	DECLARE_VMA_BIT_ALIAS(MAPPED_COPY, ARCH_1),	/* !CONFIG_MMU */
-> >>
-> >> Other vma_test() changes look fine to me: just fixed INIT_VM_FLAG()
-> >> masks matching their VMA_*_BIT :)
-> >
-> > Thanks you're right, will fix!
-> >
-> > Again I swear I ran claude on all of this so it's failing me here :)
-> >
->
-> Is it better to add something like below to avoid misuse these mutually
-> exclusive bit aliases?
->
-> An example for VMA_GROWSUP_BIT:
->
-> #if defined(CONFIG_PARISC)
-> DECLARE_VMA_BIT_ALIAS(GROWSUP, ARCH_1),		/* parisc */
-> #else
-> /* make VMA_GROWSUP_BIT a build bug on */
-> #endif
+This series adds Driver and binding changes for USB Phys on Shikra.
+There are two USB controllers - One of them is SS capable and other is
+highspeed only capable.
 
-Nah we can't...
+Changes in v5:
+- Fixed shikra specific minItems property for qmp bindings
+- Rebased qusb2 driver changes on top of Dmitry's change [1]
 
->
-> Hmm, these VMA_*_BIT are enum items, so the above might not be possible.
+Link to v4:
+https://lore.kernel.org/all/20260701165051.4122259-1-krishna.kurapati@oss.qualcomm.com/
 
-...because of this but also this is the canonical definition and we want to use
-it for the VMA_xxx form.
+Changes in v4:
+- Moved to using qcs615-usb3-dp-phy and added resets specific to shikra
+- Updated bindings to reflect that there are 3 resets used in qmp phy
+- Add remote endpoints and orientation-switch for Type-c handling
 
-> An alternative is to only define them for the corresponding config and
-> you will get build errors when trying to use them directly and the
-> config is not enabled. Otherwise, misuses like "vma_test(vma,
-> VMA_GROWSUP_BIT)" is harder to uncover.
+Link to v3:
+https://lore.kernel.org/all/20260526184401.3959717-1-pratham.pratap@oss.qualcomm.com/
 
-Yeah good idea, I may add a new DECLARE_INTERNAL_VMA_BIT() that gives you
-__VMA_xxx_BIT, so nobody makes the obvious mistake and we force uses of safe
-VMA_xxx form. Hmm :)
+Changes in v3:
+- Moved to using qcs615-usb3-dp-phy since the DP Phy is present although
+not operational.
+- Using Talos as a fallback for shikra in qmp driver
+- Add required "phy" reset in qmp usbc driver since its needed on Shikra
 
->
->
-> --
-> Best Regards,
-> Yan, Zi
->
+Link to v2:
+https://lore.kernel.org/all/20260504170659.282532-1-krishna.kurapati@oss.qualcomm.com/
 
-Thanks, Lorenzo
+Changes in v2:
+- Separated the usb controller binding changes
+- Updated commit texts.
+
+Link to v1:
+https://lore.kernel.org/all/20260430-shikra-usb-v1-0-c9c108536fdc@oss.qualcomm.com/
+
+[1]: https://lore.kernel.org/all/20260706-fix-qusb2-v2-0-8d9cd73b1db7@oss.qualcomm.com/
+
+Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+---
+Krishna Kurapati (4):
+      dt-bindings: phy: qcom,qusb2: Document QUSB2 Phy for Shikra
+      dt-bindings: phy: qcs615-qmp-usb3dp: Add support for Shikra SoC
+      phy: qcom-qusb2: Add support for Shikra
+      phy: qcom: qmp-usbc: Add qmp configuration for Shikra
+
+ .../bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml   | 54 +++++++++++++++++++++-
+ .../devicetree/bindings/phy/qcom,qusb2-phy.yaml    |  1 +
+ drivers/phy/qualcomm/phy-qcom-qmp-usbc.c           | 53 +++++++++++++++++++--
+ drivers/phy/qualcomm/phy-qcom-qusb2.c              | 14 ++++++
+ 4 files changed, 118 insertions(+), 4 deletions(-)
+---
+base-commit: b7296e82650f0130b8811ef79c5e17aadbf85bd1
+change-id: 20260711-shikra-usbphy-v5-f120514ceffd
+
+Best regards,
+--  
+Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+
