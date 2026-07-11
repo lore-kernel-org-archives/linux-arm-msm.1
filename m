@@ -1,44 +1,43 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 351DC3C3451;
-	Sat, 11 Jul 2026 16:40:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C2F43C9EF4;
+	Sat, 11 Jul 2026 16:40:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783788058; cv=none; b=L7d3+2Lb0ftxlnXGIaVkD95udTQFNIa3qcfjZb8j45anN+s4iR0pFlgoZr0Afx9eDyajpUHhjhMrbpmmyH7V6pkVGeCts4xM1YFZ5ohtJ183c4biUWcburh5jQkr2E3z+69EEuw7+KpH8P0Uf2UotjWctWqDP/UwhhZ70j+m8gI=
+	t=1783788059; cv=none; b=lalhZ1F2+b73uRBewdAboWoodlQqNOhA7iAQh/ZxX4Jek/VAgY13zjMBqnzRGbclRYlN6gOrMZ2o8KuwaW4OmNQPdYnUXuMiSnR6GXbCUgmh1IZOzav46b7bXyjzbdu/+0mpFePKjtH/XlYAwMa+NEDP0bs238rNhmktvoAs2Lk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783788058; c=relaxed/simple;
-	bh=Qm0dwyYF1p+AfwFruiP8NNbyeHOFzwPvV7o0lSwoIUs=;
+	s=arc-20240116; t=1783788059; c=relaxed/simple;
+	bh=+l68dU0dR+99ZPwyCDJAGnECFoPpPHbBNf7jDQlDhME=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=AWV8n3IalAyM7K0/wAFrVfQ3Bxpbl5lAAH/Qkwj4bFo2KK96pmrHKZOIDiyhtw9PislE9SBoaCkeVcwhRy9/UIKkZIAMRvDBIIin/oa2+W1f96FPKg645+KeImKE+G/ZhoeDV4LKKRKq35UjkaZArW6RNStl1/w2727TMbKt4HE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YUnlKhGZ; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=FKpxxYnxTNLlWa0/wDHTG7jWowCEIjaBH6FySUnBDU7VMdFvWXMCL3/tL1QSzWm+MOl+dV/Dw+nDtP6oFi+SqcluP1Oz8U84obZmNFqqLy2OdcKcy+LNLpLISZJ3ifLaDPkfAGRIN/B7EMc3hx/WlZxbNdoaAuU9z6/DfuyMeNw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DKT8T9lD; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YUnlKhGZ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 930A01F00AC4;
-	Sat, 11 Jul 2026 16:40:54 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DKT8T9lD"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 34CE01F00A3A;
+	Sat, 11 Jul 2026 16:40:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783788055;
-	bh=whzJt6Vhv1jhzZApuy8pQLYJ33OkfBpmMcQ/isuFQ44=;
+	s=k20260515; t=1783788053;
+	bh=Luf3aj5S+Ieuk57MG3szVaEm68e7eHP7Po/Pn3Xt2LU=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=YUnlKhGZzWUfior3gmETNva8REnt+prLJDKH0i3rsywiTEOCBzHsilgZbIrZJ/Tsl
-	 DjiKY3ZbQgzOO+juU7B07LNskQvE9QfdqWt/QMOv70EVRY5cNe9NYlhp+E+uHTI1uQ
-	 LI/9/FqKbbvYZz719R0MSL8WLtGh/syF+kazUM4OkGBUNMf1ZeECjm2TwXaobdAk5W
-	 ogT1zVukDNJjmbUhLcBX4M+xgOhBQa7BRh5uTv6DfgaXnK1LgG/PWWsYLixf4h3C9C
-	 4KJMjdNEIJpxe43AXHrSHCGBCXjDURE4PxLXICd3izgHNkg6pTMB623j2Yfq+6qwuP
-	 9vG3NxrYvkiaw==
+	b=DKT8T9lDMYhwuB+XkwQ8YGyCk8N0pOfotwmxFTjOHYAzuVBmac47qMFD15IeS9VzV
+	 QZMzTEi5k55YbCaWAJqqjOrZ/Fiq0KGo5YOy2FsXNoJm42oKIlgJoWxurP5BFUa3zr
+	 xWvgRM+REe9ToaIJBmn2OZIfkbkrq68daeHSWX8N7WdP94Rpo+297cEimMHX4JK9WU
+	 34g0xoP5wj2LlAEk/8+uyt4ONPiGnNBGDUDm2JoC1aX8FF39d4FBPmDAp6h6HEGptE
+	 t0/n6W/bb6a1uXRbOb6J6YooYmk0NqgFOs6rNNiCiCZXW1g12izklObmnSKDMP4VcZ
+	 Mu/eAKoam+uqw==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Konrad Dybcio <konradybcio@kernel.org>,
-	Yuvaraj Ranganathan <yuvaraj.ranganathan@oss.qualcomm.com>
-Cc: kernel@oss.qualcomm.com,
-	linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v2 0/2] firmware: qcom: scm: add tracepoints for the SMC call interface
-Date: Sat, 11 Jul 2026 11:40:42 -0500
-Message-ID: <178378800438.138068.7175582268598977713.b4-ty@kernel.org>
+	Linus Walleij <linusw@kernel.org>,
+	Pengpeng Hou <pengpeng@iscas.ac.cn>
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] bus: qcom-ebi2: use managed resources for clocks and children
+Date: Sat, 11 Jul 2026 11:40:40 -0500
+Message-ID: <178378800458.138068.2861861016801192645.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260522-scm-tracepoints-v2-0-e27cdbe0c585@oss.qualcomm.com>
-References: <20260522-scm-tracepoints-v2-0-e27cdbe0c585@oss.qualcomm.com>
+In-Reply-To: <20260623015415.26975-1-pengpeng@iscas.ac.cn>
+References: <20260623015415.26975-1-pengpeng@iscas.ac.cn>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -49,22 +48,23 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 22 May 2026 12:08:58 +0530, Yuvaraj Ranganathan wrote:
-> The Qualcomm SCM driver is the sole gateway between the kernel and
-> TrustZone firmware. When firmware issues manifest — unexpected error
-> codes, calls that never return, or WAITQ sleep/resume cycles that stall
-> — there is currently no low-overhead way to observe what the driver is
-> doing without inserting temporary printk statements and rebuilding the
-> kernel.
+On Tue, 23 Jun 2026 09:54:15 +0800, Pengpeng Hou wrote:
+> qcom_ebi2_probe() enables the EBI2 clocks manually and populates child
+> devices manually. Several later failure paths can then return without
+> disabling the clocks or without relying on the driver core to undo child
+> population.
+> 
+> Use devm_clk_get_enabled() for both clocks and
+> devm_of_platform_populate() for children. This lets the driver core
+> unwind the resources automatically and removes the hand-written error
+> labels.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/2] firmware: qcom: scm: add trace events for the SMC call interface
-      commit: f6bb2daa4584229af155c2488b83151999315293
-[2/2] firmware: qcom: scm: instrument SMC call path with tracepoints
-      commit: 41329e72363c02facfeae063ef304aa7ced68c3b
+[1/1] bus: qcom-ebi2: use managed resources for clocks and children
+      commit: d19a46f7ed8eb54fea61e0eaf7db53ff7babb03c
 
 Best regards,
 -- 
