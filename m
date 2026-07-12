@@ -1,70 +1,72 @@
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E50C358D00
-	for <linux-arm-msm@vger.kernel.org>; Sun, 12 Jul 2026 13:46:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94DC93ACA5B
+	for <linux-arm-msm@vger.kernel.org>; Sun, 12 Jul 2026 13:46:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783863977; cv=none; b=rNlexggjrfFzsEhVwyzK/VFxL5ONpaLTiGWaxYfPx80YW7bZkBUsdYY2o9YeLj9spdOwRYVWm3pREQkClkYzRyTHxV3xkIotmwxzlT/ZFbiqPmYgoQpakLU2FNOlRBQ38KUEp9B9joYb1rrc+/xmak+v7GiXiB31pjyjXLwttfc=
+	t=1783863982; cv=none; b=suBUWF0cB2q5o2mHBeDaOv5vgVgKGjMWMK4ZusUpWmO6eaupLUhvAxiqxfG5WRLMv0VrOg03EEDBLHiVQBbFn5TQFzJSn6R8+8oH3HIhV6Quq10dT5jMxfG+/PPoHEVshFaYlB61sx94iacqdKFRZ5S368YGyEbFGWRrWNTgtw8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783863977; c=relaxed/simple;
-	bh=745xk+d8bU62cDW9chGbuU96+vAIrE7f3vnioeAiqf4=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=bazFf8KBD9R0SSlDKcG8v4ySiRxhlCY31UxI0SWszsZquqay6gP3GhTcLvS7NN5vf0X3U8B/2LNW7jqvVEj0s7HQUe5eVpAP7GGvEobFyiJoF99vhvk17zo+bsKZb7iH40l6le+SDZo+H1t2jcJuP+9azjxdWg5j1quQOMn8pZw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=quora.org; spf=pass smtp.mailfrom=quora.org; dkim=pass (1024-bit key) header.d=quora.org header.i=@quora.org header.b=POmDG+sG; arc=none smtp.client-ip=209.85.216.53
+	s=arc-20240116; t=1783863982; c=relaxed/simple;
+	bh=87hn5TFUDcNPqNEFDrMHeJsAgwkmV6iykor7Fs/0wnM=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=rcjuyvg74yB3lAXVzNpfIXEqM8RHBZVJhN1GLpY6ob2q9AWX2pvFBWT4ZdXSvNP3SkSreBwreD6ims7T8iPM/0UZRNi6XdsmJSTLxzgRkmP/F7nx8HmsDFuYn6EX42qb298JWht+vUVt1QePvdMZir10PwLYLEaOTw3QIf6XeWE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=quora.org; spf=pass smtp.mailfrom=quora.org; dkim=pass (1024-bit key) header.d=quora.org header.i=@quora.org header.b=kzr7Fioa; arc=none smtp.client-ip=209.85.216.48
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=quora.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quora.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=quora.org header.i=@quora.org header.b="POmDG+sG"
-Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-3856d6fbcb3so1933405a91.2
-        for <linux-arm-msm@vger.kernel.org>; Sun, 12 Jul 2026 06:46:15 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=quora.org header.i=@quora.org header.b="kzr7Fioa"
+Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-383b4a3755fso2221486a91.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 12 Jul 2026 06:46:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=quora.org; s=google; t=1783863975; x=1784468775; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Zij5vWCaKi9JF5NLKqK6c8ikNCjMvtbTlKZgqjFTiHQ=;
-        b=POmDG+sGNBoO4oCyM2S2dvC/aDGpXo2WlhvcSGvRxwq+EARfK76phSVYQUpbrT4egH
-         HYADuFWq08f1ZpVncTyqiIzkS4Fe7mRHhdncv4r9eNhO7kavkzNJ4pV4Yt+9ynkQWjLi
-         I1iY6uSOoCEeCY698hrX1nAKYZjlLqaPEuqKw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783863975; x=1784468775;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=quora.org; s=google; t=1783863981; x=1784468781; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Zij5vWCaKi9JF5NLKqK6c8ikNCjMvtbTlKZgqjFTiHQ=;
-        b=IAQcss8MpNH4Cn/K3CW1RwLwUye6B13Mo/RNYbp50CWU3IlNxtYnn2sZnFhDtKZYEg
-         paNGWIjXhrtcv9fcHohFT6qDBsEGbasfFeaDj2Os8fCvcaZxBC4RtEPpLwev4nK3C6aS
-         sc7/tSp28dBtnPI7Uh/Tc5tqWel6LmKLWYMphTlk/ME84A30bUVf/ER3uaPT/TDxDO/Y
-         r0eE/ApOUyxXJXa1es8AnVFCnXJ2PrjthRKAgi/L2VY1MmPNDHzVyVCXF+YCoUY3Azmr
-         LOr9/6Ld/9OfUpyMZkCbRAKUpmeLMT30NRSzWWFaNwLivNdAfbUWe+MWCp2gNpNvpKgL
-         M5lg==
-X-Gm-Message-State: AOJu0YyySeRlwvtz6zdrZ/eyqteN57DXk80Jyi54CSk6tKq3BgAR8KYX
-	ZjUWqbAMVclIRxvbr+mZGUPybgSrSjsJAyd6SviFFY5rUsR/djm483qFOkCtc7rRUJg=
-X-Gm-Gg: AfdE7ckD3A+mlH3o9qFN8dDenk4Wt5kdn7Zr0Fre1DWiWnpVALQGiK9civuKf8VlRya
-	sAL4Q7h/fBHejUIqB4/VjcdiYQE/MDa7ZcAw3oq++gOglA3StVIEa7zaSxd1Dch3OR2ZtRNTfho
-	xHRmhLcKOXHPHOL+R4S1cKm81YRIE4+4HxXP4KiPWRVeovWK/myYXVvbz1gRGE/q3e5N5+Qmq4R
-	BeqTic+mbp+fxSHsqvbfUC7vkGr1gATwmRPxV9kmZ3av2FiPf9bS9FHyimCXxj2hlq1lmFnWGLi
-	ovjSsc2gE5wA1gLld+yIzQ9Yc/ECgwtPkODrJrk64fJ6/igC28tcQjYhVYwUjfnbzwXHkNqRyqp
-	ZbKJJd+AESRtscU+28UvSfFOJ00yy8tLaysmx/PTWQyVBXLFXuZUfFPzhaH2+WGtuFdwd9U8kdZ
-	A3OBheNG9VRAXbY6u0Gk4oFXX/MMhDwkp5YWpBsQ43kOa4Y19HHk2jAxuyth3iYDHlV0mCZGNxd
-	26AT5p+wFdjAiAK8XSyQmVwjzCGCCcaB+bopEgH0Qi2hY3xmy8YewEaWfAitwTl4rTznGEDuij+
-	XyE8Os6VeC4QFiuecS1qMG1JxApr7MOvR+S2i0pWvbOZZeES7SRcnw==
-X-Received: by 2002:a17:90b:3502:b0:387:e0db:bc32 with SMTP id 98e67ed59e1d1-38dc7bbdb04mr5323087a91.40.1783863975485;
-        Sun, 12 Jul 2026 06:46:15 -0700 (PDT)
+        bh=eIM+uNh/QyNlbPgrqlOmJt4o8sZ8tvceUtl7h0dqrqk=;
+        b=kzr7FioafEpNOkSGKDqXWf3Ql3KSTZMloHCfPu7aWKKUMro4cDIZj+CCPwteZKGDGZ
+         1b248MameRptuTRQz21WcDRJWG5BiqCpcBemy9H0B3jw6YtZQ/jI12l4z/rjypv+NcfU
+         bobcpFuRvL0tt191my4jF1bsG33vxLSvcqpZY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783863981; x=1784468781;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=eIM+uNh/QyNlbPgrqlOmJt4o8sZ8tvceUtl7h0dqrqk=;
+        b=tXs0kTdgDJkFjVL3QeQDeGkCxsJCCPU4YjX9iGalUcZKYKgPzpBhafmE+ejOOjiujB
+         iavyxhJBk405l+hqIvuRFNcVh1eOGb/MPgSsGcYy+nArBNhSCo2hKoT1XB5amS+aptLU
+         tHo3IsU4S5o2nrXgfD0crxNu2cr4Uf3C7mY6TINiN7+UL/E0vnKlT3a8DFF93UN1Ed7n
+         LEuhHvdQmE/G+wpDWgWTEt9nr7tFSQOvs9M9m6/QHa9HXM++hDoXA5teTODFAxWAExfr
+         4ryq6KchdibZ1b1wyvWpLSN8pb/PX1R+UDLZI/uHjXMbZWDhUgS3vU17y6gBjA0yEyKM
+         3fKg==
+X-Gm-Message-State: AOJu0YycoIc2TP7OeOXi7EqjsY+/s4xFt334CW7iFNdQy7+U4JxFOdao
+	e9n3kFwoT38nTgWBhkEIRJz6a6S7Ot2yikRUOR1JeixzRq5rRXYoGT1EajLb+LKDjFk=
+X-Gm-Gg: AfdE7ckFvHxqX8syWoDrdTMvAGeoaYxh2T4Kczl9jrTokpiNHW0xtDZmgG3TJ07Ufkh
+	Ia0zHjW4fBFUtW5fqX/IQH/b7mclmMgl8K1AuQ8auduzTPnPqn08hl4jpeAD+vUNxJ1RM593dPH
+	Zu9NB6jVui1f8qtQ97tGB9pWo4a35NXaKCFMKiQJMP3Y1UMAzkekQSqrn/S/w5ibCrhr+PJ0kr5
+	gBYBZ0aKnkzhirMHRCpUbGUImUfbzT/Nx06D6CJQi61bP6dkyaJ1XOBmWCNpYDo3Sw+aeTg1M/I
+	1myPNcuPVorEaGi2Tl5ECL7luxOKzFgBMtIa/vNAAYGeQMnKnNMz45vsc8CR0QNGJkQqz5On67+
+	FyJFycEnSOlQGqZ42vWWk0mS9GOenFNaPxVxfrjrkj1vcIkeS0PwNOlDQaffuqlmqmF9Jl0pIir
+	fA8r1jVo4WjfHeWa3KxnFGr25Sw8dnNUGWyikz/Oh6k2NQ7ukoKCbxcsMWILsoTk/JIeuavKBKl
+	VjCTGChP+XFfLys5gTBPaS35dTYavmqPxn6JFnNA9fWQQ15xqOY3+fDxRQs3zjZz9n3SQq7yNxd
+	VwFFSwGZ9/oS/P1eaRFCyWMoYJF+Poo0IyHa2hmZqliRqqYXyTJevg==
+X-Received: by 2002:a17:90b:4f81:b0:387:e0db:3faa with SMTP id 98e67ed59e1d1-38dc7775133mr5507488a91.35.1783863981052;
+        Sun, 12 Jul 2026 06:46:21 -0700 (PDT)
 Received: from aegis ([2001:fd8:4d03:6b00:edd2:3bb4:3b99:6291])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38d11b82d32sm2122434a91.0.2026.07.12.06.46.10
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38d11b82d32sm2122434a91.0.2026.07.12.06.46.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 12 Jul 2026 06:46:14 -0700 (PDT)
+        Sun, 12 Jul 2026 06:46:20 -0700 (PDT)
 From: Daniel J Blueman <daniel@quora.org>
 To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
 	"Bjorn Andersson" <andersson@kernel.org>
 Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	"Sibi Sankar" <sibi.sankar@oss.qualcomm.com>,
-	"Randy Dunlap" <rdunlap@infradead.org>,
 	"Rob Herring" <robh@kernel.org>,
 	"Krzysztof Kozlowski" <krzk+dt@kernel.org>,
 	"Conor Dooley" <conor+dt@kernel.org>,
 	"Hans de Goede" <hansg@kernel.org>,
+	"Randy Dunlap" <rdunlap@infradead.org>,
 	"Bryan O'Donoghue" <bryan.odonoghue@linaro.org>,
 	linux-kernel@vger.kernel.org,
 	Anvesh Jain P <anvesh.p@oss.qualcomm.com>,
@@ -75,10 +77,12 @@ Cc: linux-arm-msm@vger.kernel.org,
 	Abel Vesa <abel.vesa@oss.qualcomm.com>,
 	Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>,
 	Daniel J Blueman <daniel@quora.org>
-Subject: [PATCH v4 RESEND 1/2] dt-bindings: embedded-controller: qcom,hamoa-crd-ec: add Lenovo Yoga Slim 7x
-Date: Sun, 12 Jul 2026 21:45:55 +0800
-Message-ID: <20260712134601.99191-1-daniel@quora.org>
+Subject: [PATCH v4 RESEND 2/2] arm64: dts: qcom: x1e80100-lenovo-yoga-slim7x: Add Embedded Controller node
+Date: Sun, 12 Jul 2026 21:45:56 +0800
+Message-ID: <20260712134601.99191-2-daniel@quora.org>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260712134601.99191-1-daniel@quora.org>
+References: <20260712134601.99191-1-daniel@quora.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -87,40 +91,65 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The Lenovo Yoga Slim 7x uses the same Embedded Controller as the Qualcomm
-Hamoa X1 CRD. Add a board-specific compatible with qcom,hamoa-crd-ec as
-the fallback.
+The Lenovo Slim7x uses the same Embedded Controller as the Qualcomm Hamoa
+X1 Customer Reference Device. Use the lenovo,yoga-slim7x-ec compatible
+for fan control, thermal sensor and suspend behaviour.
 
 Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Reviewed-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Signed-off-by: Daniel J Blueman <daniel@quora.org>
 ---
 v4:
-- add reviews and acknowledgements
-- updated dependency URL
-v3: https://lore.kernel.org/lkml/20260526112409.66325-1-daniel@quora.org/
-- new patch with DT bindings
-v2: https://lore.kernel.org/lkml/20260502063518.15153-1-daniel@quora.org/
-v1: https://lore.kernel.org/lkml/20260429103301.17449-1-daniel@quora.org/
+- add reviews
+v3:
+- use lenovo,yoga-slim7x-ec compatible (introduced by patch 1)
+v2:
+- corrected DT compatible node
 
-Dependencies:
-https://lore.kernel.org/lkml/20260511-add-driver-for-ec-v9-0-e5437c39b7f8@oss.qualcomm.com/
+ .../dts/qcom/x1e80100-lenovo-yoga-slim7x.dts  | 22 +++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
- .../bindings/embedded-controller/qcom,hamoa-crd-ec.yaml          | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/Documentation/devicetree/bindings/embedded-controller/qcom,hamoa-crd-ec.yaml b/Documentation/devicetree/bindings/embedded-controller/qcom,hamoa-crd-ec.yaml
-index ac5a08f8f76d..813d41769c0b 100644
---- a/Documentation/devicetree/bindings/embedded-controller/qcom,hamoa-crd-ec.yaml
-+++ b/Documentation/devicetree/bindings/embedded-controller/qcom,hamoa-crd-ec.yaml
-@@ -20,6 +20,7 @@ properties:
-     oneOf:
-       - items:
-           - enum:
-+              - lenovo,yoga-slim7x-ec
-               - qcom,glymur-crd-ec
-               - qcom,hamoa-iot-evk-ec
-           - const: qcom,hamoa-crd-ec
+diff --git a/arch/arm64/boot/dts/qcom/x1e80100-lenovo-yoga-slim7x.dts b/arch/arm64/boot/dts/qcom/x1e80100-lenovo-yoga-slim7x.dts
+index beb1475d7fa0..1ee2a2296129 100644
+--- a/arch/arm64/boot/dts/qcom/x1e80100-lenovo-yoga-slim7x.dts
++++ b/arch/arm64/boot/dts/qcom/x1e80100-lenovo-yoga-slim7x.dts
+@@ -951,6 +951,22 @@ retimer_ss0_con_sbu_out: endpoint {
+ 	};
+ };
+ 
++&i2c5 {
++	clock-frequency = <400000>;
++
++	status = "okay";
++
++	embedded-controller@76 {
++		compatible = "lenovo,yoga-slim7x-ec", "qcom,hamoa-crd-ec";
++		reg = <0x76>;
++
++		interrupts-extended = <&tlmm 66 IRQ_TYPE_EDGE_FALLING>;
++
++		pinctrl-0 = <&ec_int_n_default>;
++		pinctrl-names = "default";
++	};
++};
++
+ &i2c7 {
+ 	clock-frequency = <400000>;
+ 
+@@ -1352,6 +1368,12 @@ &tlmm {
+ 			       <44 4>, /* SPI (TPM) */
+ 			       <238 1>; /* UFS Reset */
+ 
++	ec_int_n_default: ec-int-n-state {
++		pins = "gpio66";
++		function = "gpio";
++		bias-disable;
++	};
++
+ 	edp_reg_en: edp-reg-en-state {
+ 		pins = "gpio70";
+ 		function = "gpio";
 -- 
 2.53.0
 
