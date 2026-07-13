@@ -1,96 +1,70 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-244122.protonmail.ch (mail-244122.protonmail.ch [109.224.244.122])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BFE529ACC5;
-	Mon, 13 Jul 2026 21:22:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A81FF20ADF8;
+	Mon, 13 Jul 2026 22:47:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.122
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783977779; cv=none; b=KBHJcRmAL+lEUZenHDXiaOVObjbztVvz/Jd97TbXTP05R3q55jVmIIMUhfcJzTuFELFKQX5J+6K4dD2V3zekymaEPHrfvQngNVQjJ0xOPU4bDFdTrwXr4+B6jn/u8OhRiJV/CWvwxT0unH+hxd+XLd7geKFJi7Eh6ypXxvgqhJw=
+	t=1783982852; cv=none; b=pW37RoTvm+OMb3YNqi2sZSf/ju0EeMmfQH1HIKpOB4v772oxkH6MzYX1G1hOFs6rEUOKeMhqC1QOmIV/+/2JgOLoGQfKVG+OkZn7vOBY0ynIGHzGbJnApH1jj6UppC/g+cgIiRhMPMpVWR50qhy0+P4XvUrpc172G9qXoxYxspU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783977779; c=relaxed/simple;
-	bh=DtMAoPkaZZ/TOwAv+N+0avcFzt9PPbgv2ZN0LuHdpqs=;
-	h=Date:Content-Type:MIME-Version:From:Cc:To:In-Reply-To:References:
-	 Message-Id:Subject; b=eBk6F4hZ+gvI/W1IYghvdnVhp1qzjG5EGk+V3FN2cDzJPn8IgLGLm6u41JtpnTABIWuv7fpWz5XzTTGr0lKvXy1+kh/2ceI9BMJKeBFklfd6eOl0Oj8yovWYSeHg09szfszdKew1Lie2TQTUmH9pvFO3r+gW3BjzqgwEBku6788=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XjHDV3q/; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1783982852; c=relaxed/simple;
+	bh=jMGWE8tA/29DhQ/N6afaPNZfUuTNcd/k2GMf4/rve6U=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=JyMJT0AJ9tLlv5qS+3FGITtiPbsdJYoC8dB2H4opKUtEABg6xW1PfMa/YyF04yO9tiUvhpIZSZP5SwMcdVuTi18ApCNj+qG6aBoqBlgFqJi9zPaNYU9JhTvhPJg1O+NMMksLFRQ7fqXXnmSb4P7lBp8zhM3u7fZhKEPAOJ9g8Fg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=In+B9Cui; arc=none smtp.client-ip=109.224.244.122
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proton.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XjHDV3q/"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8709E1F000E9;
-	Mon, 13 Jul 2026 21:22:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1783977777;
-	bh=jWG0/rB6xvK8ubb2dgXTEYCJoQiVYSZPHeWSP24sv5E=;
-	h=Date:From:Cc:To:In-Reply-To:References:Subject;
-	b=XjHDV3q/o3y2O7ADrG/mJ7ILKj/XbnAsAY8MRtW1MDghH+ZN3cgusyX8uKt7K+AO3
-	 ejUOvsa+RVzCm4KajFtYakiWo1qhCn9F/1HHlvGJBc0cpB2HPemvTny+BfqMdJryc1
-	 4XOrum0jmJZCS/LAjuSzzRhjn5YjKgRBX0tZujGy9BMWrgy27qHfGYSWYAU56CAmsh
-	 2ZYwGqfqy9jp6dFCBph7dJ1SDn8S1p6fdg6VzkWTdlklKrhA/3bD174rNBfWNuy+qX
-	 6YnIj4CB5mhLs82J9ztfyjp+HZeqU9Yj1TdA0tEsdAoNEdkbR4R8diQY71zZrV2CAg
-	 PJG1buZvPxstA==
-Date: Mon, 13 Jul 2026 16:22:56 -0500
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="In+B9Cui"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=3dkiarpw4bg4zokmj73yonjex4.protonmail; t=1783982844; x=1784242044;
+	bh=jMGWE8tA/29DhQ/N6afaPNZfUuTNcd/k2GMf4/rve6U=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=In+B9CuiPaRuzaxYQwMp4IgoG2wMQ656Nifnp9pcE8NftRUttLfb9sztvdrtvADkJ
+	 oFla/PDOyY9uXaJ5dYYvfLgKVjz4RhYwmpfre5fLa7bHz342234qyhm4yai/VJfS+n
+	 RPgK0oNWGMX+XAKc3vDt8sGSOWkIS7AW+M+iZwgo/rgfQZFHQbSGFMj8M/rZ4oQRWE
+	 nAmPZ8hIskIq/Wgxq8zyBXEwHE7O/fpIdERP0ikOoMRBrunvY8u/hkVm5BBLGcPswP
+	 NBLMQuVxsLXKc5i5245lqlGgFOvonNOcqNFCpk7GppFmoIf7Giqg9aav+dMZsrFnrq
+	 wcKS8TVh02ciQ==
+Date: Mon, 13 Jul 2026 22:47:19 +0000
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Bjorn Andersson <andersson@kernel.org>, Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>, Dmitry Baryshkov <lumag@kernel.org>, Danila Tikhonov <danila@jiaxyga.com>
+From: Esteban Urrutia <esteuwu@proton.me>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org
+Subject: Re: [PATCH v2 3/3] clk: qcom: dispcc-sm8450: Keep pll types as is for SM8475
+Message-ID: <d58a72e3-fbb3-4dad-a706-a61b8267825a@proton.me>
+In-Reply-To: <d6a56ee7-2380-4e2a-b217-6d7398944279@oss.qualcomm.com>
+References: <20260711-sm8450-qol-dispcc-v2-0-fc1a07ac5601@proton.me> <20260711-sm8450-qol-dispcc-v2-3-fc1a07ac5601@proton.me> <d6a56ee7-2380-4e2a-b217-6d7398944279@oss.qualcomm.com>
+Feedback-ID: 147889766:user:proton
+X-Pm-Message-ID: 31ff9d771682dc8a421c67293ce9b4f8748cda45
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-From: "Rob Herring (Arm)" <robh@kernel.org>
-Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>, linux-sound@vger.kernel.org, 
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, 
- Conor Dooley <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, 
- linux-arm-msm@vger.kernel.org, prasad.kumpatla@oss.qualcomm.com, 
- Mark Brown <broonie@kernel.org>, linux-kernel@vger.kernel.org, 
- Takashi Iwai <tiwai@suse.com>, Srinivas Kandagatla <srini@kernel.org>, 
- devicetree@vger.kernel.org, Jaroslav Kysela <perex@perex.cz>
-To: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
-In-Reply-To: <20260714-master-v1-1-1ebe5993225e@oss.qualcomm.com>
-References: <20260714-master-v1-0-1ebe5993225e@oss.qualcomm.com>
- <20260714-master-v1-1-1ebe5993225e@oss.qualcomm.com>
-Message-Id: <178397777689.3016926.7029134483948462437.robh@kernel.org>
-Subject: Re: [PATCH 1/2] ASoC: dt-bindings: qcom,lpass-va-csr: Add
- HeartBeat pulse clock
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
+On 7/13/26 6:57 AM, Konrad Dybcio wrote:
+> No, these are two separate hardware designs and you can't mix the
+> configuration like that just because it so happens to circumvent a bug.
+>=20
+> Taking a peek at clk_lucid_evo_pll_configure, there's an early bailout:
+>=20
+> if (trion_pll_is_enabled(pll, regmap)) {
+> =09pr_debug("Lucid Evo PLL is already enabled, skipping configuration\n")=
+;
+> =09return;
+> }
+>=20
+> I think it should be fine to copy-paste it as-is for LUCID_OLE. Please
+> check if that resolves your issue.
+Indeed, this solves the issue and the display no longer glitches out at
+boot.
+Will correct in v3; thanks for pointing me in the right direction.
 
-On Tue, 14 Jul 2026 01:35:32 +0530, Sarath Ganapathiraju wrote:
-> Add Qualcomm LPASS VA CSR rate generator node that exposes
-> the lpass_heartbeat_pulse clock on hawi. Also extend the
-> qcom,lpass-va-macro binding to add qcom,hawi-lpass-va-macro with
-> its four-clock constraint (mclk, macro, dcodec, heartbeatpulse).
-> 
-> The HeartBeat Pulse (also known as RateGen Pulse) synchronizes the
-> start of the DMAs and Codec Interfaces for the audio usecase
-> and can serve as a periodic wakeup source for the DSP.
-> 
-> Signed-off-by: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
-> ---
->  .../bindings/sound/qcom,lpass-va-csr.yaml          | 47 ++++++++++++++++++++++
->  .../bindings/sound/qcom,lpass-va-macro.yaml        | 18 +++++++++
->  2 files changed, 65 insertions(+)
-> 
-
-My bot found errors running 'make dt_binding_check' on your patch:
-
-yamllint warnings/errors:
-
-dtschema/dtc warnings/errors:
-/builds/robherring/dt-review-ci/linux/Documentation/devicetree/bindings/sound/qcom,lpass-va-csr.example.dtb: va-csr@7ee0000 (qcom,hawi-lpass-va-csr): reg: [[0, 133038080], [0, 57344]] is too long
-	from schema $id: http://devicetree.org/schemas/sound/qcom,lpass-va-csr.yaml
-
-doc reference errors (make refcheckdocs):
-
-See https://patchwork.kernel.org/project/devicetree/patch/20260714-master-v1-1-1ebe5993225e@oss.qualcomm.com
-
-The base for the series is generally the latest rc1. A different dependency
-should be noted in *this* patch.
-
-If you already ran 'make dt_binding_check' and didn't see the above
-error(s), then make sure 'yamllint' is installed and dt-schema is up to
-date:
-
-pip3 install dtschema --upgrade
-
-Please check and re-submit after running the above command yourself. Note
-that DT_SCHEMA_FILES can be set to your schema file to speed up checking
-your schema. However, it must be unset to test all examples with your schema.
+Regards,
+Esteban
 
