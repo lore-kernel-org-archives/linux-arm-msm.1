@@ -1,144 +1,87 @@
-Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from abb.hmeau.com (abb.hmeau.com [180.181.231.80])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01A1E2DA765
-	for <linux-arm-msm@vger.kernel.org>; Mon, 13 Jul 2026 02:26:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.214.179
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783909588; cv=pass; b=YJY1vPz5l0LZATfIxaKp6ewVpq2rMh7b5QG+r9G11eqNFf2aQGy8iEjT8xdWHD8mVMhELsE5qVNNgSwCqhcLHlg05r6sgww1gJkNkfh5taheORi0KjXc96Gwi4hkOumSDTbLtKiv9z5izFv+XOqAHYAHPSvK5biv7P7z8LC2IJE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783909588; c=relaxed/simple;
-	bh=2vB+uhwFIY8gMPcGZcmqL/ngXLkazwzz1dcL9UAOl3k=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=NS3mEXoZoN+NL+ZVqrvU8q1dq1G/qrzDzKTXkPFlY59g2Cij0/ZcoCwzV9U7w09tnEm9o3TOt0VhioRay7MIBG3yiAdj/8jQZH7ozwWVe1MBHC5hF9lILiZkHubzmzd11Rzg5O74d2K8MIp4Kh/9T/rtZdS0K240gFfmNQBbodw=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MEJWx1BY; arc=pass smtp.client-ip=209.85.214.179
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BADAC1F3BA4;
+	Mon, 13 Jul 2026 03:42:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=180.181.231.80
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1783914139; cv=none; b=Bg6KOGFUXi1nKciSoIdFdQ8z5MLBTiDvGthv2sdBNyjMWyM3zuk74GC2JGIbb5u2z+E66503kSkVuRl5bpRe86EA3tEoOB4uKzAqzg8HLnvXBk4a+99Eop15iI/gK3EZOe02CDEbkOjpLv6mXbTt7w0GIm0QaV89+NAETCLUbeQ=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1783914139; c=relaxed/simple;
+	bh=viFaBWiMYiXNWA4jLXpBiJLpNrYbbMfjMI1CIpubu4c=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=NVgTCtVtv8SYyLkyKmWbyuETpfml/lkgZ1WmWVQcvkAA0aA9/mKPA98BaVOesyYMOD5NSNCdO6ijJOysd0/578+C+MitO/G6pw+3vGycidzneex0MuWGKQiqPeATXmnRFp9QGtlkXJeLKzOzF7qhmnU+zZ2jzqjU7GMyN7VR+d0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au; spf=pass smtp.mailfrom=gondor.apana.org.au; dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b=Qb2bWov7; arc=none smtp.client-ip=180.181.231.80
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gondor.apana.org.au
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MEJWx1BY"
-Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2cc97653887so29332835ad.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 12 Jul 2026 19:26:26 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1783909586; cv=none;
-        d=google.com; s=arc-20260327;
-        b=c19mWc0YaYycMa++HwKh6hEPfDVUJxbgykD35vnh7nTzRMq+5wxmTx0Ft1TpvJp0W8
-         dht6dgfkvv/2fjLS8wsQr/fj0ia/Iy4z0yeAsGJAC4y0u4KlsMaO7hnRfk6Z+2AlWknt
-         PRcioUkliTQzGt/+To8W5ytguirk+eddsmcM8TLHvz9gC7Jx5jA6pPIaEewUIp3CPhsi
-         Ry1cpunkVxQa8dLdo2czvFMu5/U9BgdyFpUXQd0E4SACTsx5Am7XIS3vYmf9dk34yft7
-         CDZ/DLd65WCc6u5RQnubVwYf9j/1uWczsq7aoDWppbrpPj/ftV3hxnaxEdkYoniUsGLe
-         W5kg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=Ei7lzooVNqPcmPvnGQUWAzZynen8CdGkVpkx9IfRm2g=;
-        fh=ieuJKp5wokMxhmkVZMVauK3QCcTUYDrfeGqY12N06d4=;
-        b=ORxwq3ROad45zNf1McuWPaspiJ3A89rbcGShq6bovGlHknmbLjaZjx8AE5GvxHwgSz
-         NEC9xLrFvOoA4RrfZS432zJGJ+ZwgxhhFUoN2m1djzkKL/MCZoofkuEVhBKMymZHrLdr
-         oxJrMrfDgu8i5LsP8yGyFLiUXIEVaQ3SXHut0GRRYi892dfdrEzVi1g4QT19m9iinWuz
-         03senb76TMAQS3Z6haaaBFkWrC3gj++AShAIEf6AoeK8e0ZxNTVgntpaAHBjMaUguYd8
-         Vc8WaRxrjOoYQeZpZc2hWa7yPPHR+UiUbUzGD1SrIK99YJiO1ixv38b0EBz8SAyKidBo
-         j+zw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1783909586; x=1784514386; darn=vger.kernel.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Ei7lzooVNqPcmPvnGQUWAzZynen8CdGkVpkx9IfRm2g=;
-        b=MEJWx1BYAAU6IPK72aJg9fQ+Vu0P9xWBzhLndGfqra3sgzedHSVHhkLuib8Ohfr8IY
-         WE8oi0OvcLAr1VG77cgaF8rXcziXB2lhv09JiMV0bnhXNdbuDb6KLxexQzlvX2XN5qRC
-         nBnpbHM5gN5wGRLtApHX9L/FB50ix9rnS3b0h7AnWj2K/JAFDtOUvioqaaas0g+HMRQw
-         kxrVt1eUWLM36E1QutLQ37PU5SRJib3us5wzSk+yi8mM3xlQsdfvfQC/mdmKBmG/v6mD
-         2mAibClTDMSEURw3kF4v8aKRS0HXzdQwz3E/EdKQPrMu7UbCKGyZriSJDcAhy9xtOJuF
-         Hxhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1783909586; x=1784514386;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=Ei7lzooVNqPcmPvnGQUWAzZynen8CdGkVpkx9IfRm2g=;
-        b=AEKTOvWWllXvTzb9Ps164xTJuoYE8WU2bYsroSnhkJVMW96CRHhbVmmlKpzzjqtV0G
-         xaCVFPJ2uVveHhRHK5dj0S9g4akHo7jyiSxvHGtlQYEWW3Ax6Q9Ve/2IEi6widSHSgpp
-         /nVCqB/FgBjsdb9QytnWtURRqMHJCZZi2tSg8msRD4VqpVZOFhY9JP72GyW6tk5DBJdz
-         yAfgR1dIAUb/jmeaCS001gQhS3Y+m5rTwIxbT8rshmtFzo2xUjGhQb/LWCvq9mf/1AcH
-         lerAsdiqejfc/gfDzt0FU1BeZXlbj6yZp3X1elpS3yJBBW926ajrMXOVFQAodOOwQuGd
-         F8Rw==
-X-Forwarded-Encrypted: i=1; AHgh+RokjZE268rucXNvOC6QVE6JJp5bPULWEirrSsHtkA+vnKmuY6k3F3W2hdPlzhGG+SLNi6//kdtHEReusOS3@vger.kernel.org
-X-Gm-Message-State: AOJu0YwmA+5ZifFiU15WIiyyZUsD6D7WfptZgP8Ar9GZz4aD6cFh4woo
-	DW7bu+wrv0DgP0T4IDY06XVu+Vymcc8SFJiA5QsyeaM5+3z3FJjW+ciHPOy44LCUz100bf931bI
-	1OWd6RYXlSgiXyDWZlQ9XcEQkEejDS7I=
-X-Gm-Gg: AfdE7ckq7wOsftizq9lVqRsCFgKVQAZSTk5o3CV2X3HnpJeWvecQNDxCPwr1/cQ6nkW
-	gvjqy2hwuoeKhXsXBFyRITUwd8Ucdi63vs32ol3o8Lwo2kd/awYAHCoOMZzC6ajuwFu0Quktm/8
-	mCIIkP0OFR+32sONTfNZo3LoCk3ZQFi73vHj+y9Fympof00BHCcwbq/PCVclZIeNHpqCYE4+ZF9
-	AfpsXBgWGuD6x9grsRo7PYskQsRZl/kKsK2qWgzBULd5krKMEJoXsOBNDvQFLd7ukip0sIufNQa
-	f2tOSMQwkkeAOOHPLkMpDoAAHKbgqTkTtOFD9Q==
-X-Received: by 2002:a17:902:fc8f:b0:2c9:97a8:afe5 with SMTP id
- d9443c01a7336-2ce9f27e6dbmr67887935ad.40.1783909586414; Sun, 12 Jul 2026
- 19:26:26 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b="Qb2bWov7"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=gondor.apana.org.au; s=h01; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:cc:to:subject:message-id:date:
+	from:content-type:reply-to; bh=89rWfb/GKA0YbwlF/rC1Uqb+AHHDfcTsgnf6prS00ms=; 
+	b=Qb2bWov7fDBLJ4II8sHjsLbeIXS4BXEzwIlOgSn1BDBcp1Vkbk9yo6voNd5z1BnQaDm8W8bfCHd
+	6oWRW1VN1NYQYo93R6N9AsmmaOoB3y1Oo77s1Z4cyz0khXh+AnHUmHOKi8URHGJhKGnu7F7lXgtAM
+	U2spVQE/Ax9CwwX1VQF9iUSRDTTyXpHpWLpb9aqQqnIOWDJ5gVTcQfNwBzRztQ2ZFmVEoAakRC5AD
+	nz9LzgWWhBTq+8UuLXPQ17GIcDCVFRMopIY0NkTkHwICMORLitb42bdHqebl4sPB/vZpmoKlm5qgo
+	fjWbWEw6hABQ1T1+auOa2NMplNFQ2I5NJLMw==;
+Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
+	by formenos.hmeau.com with smtp (Exim 4.98.2 #2 (Debian))
+	id 1wj7Yb-0000000CyEH-3axH;
+	Mon, 13 Jul 2026 11:42:14 +0800
+Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Mon, 13 Jul 2026 13:42:13 +1000
+Date: Mon, 13 Jul 2026 13:42:13 +1000
+From: Herbert Xu <herbert@gondor.apana.org.au>
+To: Jingyi Wang <jingyi.wang@oss.qualcomm.com>
+Cc: "David S. Miller" <davem@davemloft.net>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>, aiqun.yu@oss.qualcomm.com,
+	tingwei.zhang@oss.qualcomm.com, trilok.soni@oss.qualcomm.com,
+	yijie.yang@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+	linux-crypto@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: [PATCH v2 0/3] dt-bindings: crypto: Add Qualcomm Maili crypto
+ support
+Message-ID: <alRelRyJDvTdNTgJ@gondor.apana.org.au>
+References: <20260628-maili-crypto-v2-0-f8ce760f71d6@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260709045902.498848-1-phucduc.bui@gmail.com>
- <20260710050511.14439-1-phucduc.bui@gmail.com> <20260710050511.14439-23-phucduc.bui@gmail.com>
- <95f5d6ec-ecc5-4090-ac04-27cdcdc21b8a@sirena.org.uk> <CAABR9nHUc3KvC4t=hJ9osyw93aXa+kEL07G1posnYJdLvjHEkA@mail.gmail.com>
- <CAABR9nEQWYzvxDduP=+9qYEJNzXVbu587Aq9eGR7Tyo-K-u1GQ@mail.gmail.com> <CAABR9nHKCYvev=owQVw2sisGRiQPc5gFcW8d2O3RvhsRn_Sr+w@mail.gmail.com>
-In-Reply-To: <CAABR9nHKCYvev=owQVw2sisGRiQPc5gFcW8d2O3RvhsRn_Sr+w@mail.gmail.com>
-From: Bui Duc Phuc <phucduc.bui@gmail.com>
-Date: Mon, 13 Jul 2026 09:26:14 +0700
-X-Gm-Features: AVVi8CcDb4bcqHg1Mp91TuPyHToFqGPv1UxLDhLLf3L4cwg_2AzYrLa7QzDha2M
-Message-ID: <CAABR9nFwGjed9SOUZwuPNu58KPQD-aWnCKj7YTTM8LdF9dig-Q@mail.gmail.com>
-Subject: Re: [PATCH v3 25/27] ASoC: codecs: rt712: Use guard() for mutex locks
-To: Mark Brown <broonie@kernel.org>
-Cc: Takashi Iwai <tiwai@suse.com>, Nick Li <nick.li@foursemi.com>, 
-	Herve Codina <herve.codina@bootlin.com>, 
-	Support Opensource <support.opensource@diasemi.com>, Liam Girdwood <lgirdwood@gmail.com>, 
-	Jaroslav Kysela <perex@perex.cz>, Srinivas Kandagatla <srini@kernel.org>, 
-	Charles Keepax <ckeepax@opensource.cirrus.com>, 
-	Richard Fitzgerald <rf@opensource.cirrus.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
-	Shenghao Ding <shenghao-ding@ti.com>, Kevin Lu <kevin-lu@ti.com>, Baojun Xu <baojun.xu@ti.com>, 
-	Sen Wang <sen@ti.com>, Oder Chiou <oder_chiou@realtek.com>, Linus Walleij <linusw@kernel.org>, 
-	Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>, u.kleine-koenig@baylibre.com, 
-	Zhang Yi <zhangyi@everest-semi.com>, Marco Crivellari <marco.crivellari@suse.com>, 
-	Kees Cook <kees@kernel.org>, HyeongJun An <sammiee5311@gmail.com>, Arnd Bergmann <arnd@arndb.de>, 
-	Qianfeng Rong <rongqianfeng@vivo.com>, linux-sound@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, patches@opensource.cirrus.com, 
-	linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260628-maili-crypto-v2-0-f8ce760f71d6@oss.qualcomm.com>
 
-Another point is: when should regcache_sync() be considered to have failed?
+On Sun, Jun 28, 2026 at 11:44:34PM -0700, Jingyi Wang wrote:
+> Add crypto(ICE and TRNG) dt-binding support for Qualcomm upcoming Maili
+> SoC. Meanwhile fix the power-domain and clk missing on Hawi.
+> 
+> Signed-off-by: Jingyi Wang <jingyi.wang@oss.qualcomm.com>
+> ---
+> Changes in v2:
+> - add power-domain and clk constraint
+> - add acked-by tag
+> - Link to v1: https://lore.kernel.org/r/20260609-maili-crypto-v1-0-0f577df56a61@oss.qualcomm.com
+> 
+> ---
+> Jingyi Wang (3):
+>       dt-bindings: crypto: qcom,prng: Document Maili TRNG
+>       dt-bindings: crypto: qcom,inline-crypto-engine: Document Maili ICE
+>       dt-bindings: crypto: qcom,ice: Fix missing power-domain and iface clk on Hawi
+> 
+>  .../devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml          | 3 +++
+>  Documentation/devicetree/bindings/crypto/qcom,prng.yaml                | 1 +
+>  2 files changed, 4 insertions(+)
+> ---
+> base-commit: a87737435cfa134f9cdcc696ba3080759d04cf72
+> change-id: 20260609-maili-crypto-5d612f629acf
 
-From my understanding, if patch application or cache synchronization fails
-before reaching the out: label, then regcache_sync() has already failed and
-should return that error.
-However, the function currently uses a single ret variable throughout
-the entire flow.
-To make the failure semantics clearer, I'm planning to submit the
-following follow-up patch.
-I'd appreciate any feedback.
-
-------------------
-int paging_ret = 0;
- /* ... */
-  out:
-/* ... */
-
-paging_ret = _regmap_write(map, this->selector_reg, i);
-if (paging_ret) {
-        dev_err(...);
-        map->cache_dirty = true;
-        break;
-}
-/* ... */
-return ret ? ret : paging_ret;
--------------------
-
-This preserves any error that occurred before out: while also
-reporting errors that occur after out:.
-
-Best regards.
-Phuc
+All applied.  Thanks.
+-- 
+Email: Herbert Xu <herbert@gondor.apana.org.au>
+Home Page: http://gondor.apana.org.au/~herbert/
+PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
