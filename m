@@ -1,137 +1,212 @@
-Received: from smtpbguseast3.qq.com (smtpbguseast3.qq.com [54.243.244.52])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5C8F6367F4D;
-	Mon, 13 Jul 2026 07:26:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=54.243.244.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48A1C3546C6
+	for <linux-arm-msm@vger.kernel.org>; Mon, 13 Jul 2026 07:27:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783927597; cv=none; b=InQbwMLB7KRtQX7WopGuPTf4z8jojrOe+gxkOiWUkT3ZRNcCqxDKhYKP062N89nYMDVY3BTWZCOni0HigD1e6lBTqngXwZmu7O5GgKzSzVWgBN2a8OFQARH+4Ezlf6QSlmIBVyZoNcVoUA3DpuVaC46vWPF/afQm0UPUqJ79i7o=
+	t=1783927634; cv=none; b=hMA4vySEHyJOmAU/6Z5GMLoi+llvVvI5tRsOGJ2/dQnKqTJqw/MolJByVdqPlnYPK9HZkQYfJ1cnN91/mKK0jvVJgUuvd0bktQucthYMutaxF/rApzp/qQm9aQcLAVKmtyqIwueoMgAh7GVHE8DfIhvgc5lfQ1RA8uOFUQIyqMQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783927597; c=relaxed/simple;
-	bh=L7xoaJrUdDXlvGuljK/J3/a4RlGKUVh9PitZfk3Islc=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=G00qdkDgirlEXGQKafVX4oRR6dxcx7V3DhpYpsfw4GK9MWQw8iPy8AK8oW6GvZAzx2mnBZbvCJrVsuGKMsKycTsGKVFyQngxcrpNy7qenaahjCbK+oP65Ge8jqZcbIigMUxUgGHGMkZ0hMZUWAofpMCBUX4YiQ5gKAPUXElrZNo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uniontech.com; spf=pass smtp.mailfrom=uniontech.com; dkim=pass (1024-bit key) header.d=uniontech.com header.i=@uniontech.com header.b=AxB4HHZD; arc=none smtp.client-ip=54.243.244.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=uniontech.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=uniontech.com
+	s=arc-20240116; t=1783927634; c=relaxed/simple;
+	bh=rzmaf5Nx+QMbOMDy0JTb5Od0rGnZuwwsagTUEYpVYjE=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=pFMWwVQxiguYmC6Om7EogVhcNDl0eAEeuzRzj9X4P75Ix1nrTbknjsf05LY1A0stKQM5aaj11SWwQlTjpo2gPexDE/ZJYSw8QgYidzFSjYjNIjWmaabhGiHcpAu7uFvjvSjtc+IUYWfQbeT34ZB+L8PalVW1HvvGjtRHgefjzBg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Q+Jjp9n6; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CQiOSKNM; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=uniontech.com header.i=@uniontech.com header.b="AxB4HHZD"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=uniontech.com;
-	s=onoh2408; t=1783927553;
-	bh=v5zHyTWnlXl2131UmamubukTuUePJf2rxwslkzR5zyE=;
-	h=From:To:Subject:Date:Message-ID:MIME-Version;
-	b=AxB4HHZDb2NYqK8qyKuRzBYwOLMAoZ+II24Zs1BWZx3a4VJ7Cmi2FoHXXzztYIhk9
-	 P16pAnzbjmxtETVfdiOKTEWvnwiR4AtDQ1QVi4CQ96yCv0VQG7QiyU7gAzVAobbrzm
-	 eOgCyA5tOmRG1kz88k4mQN5i5m3sCFeS8hRA5yCQ=
-X-QQ-mid: zesmtpgz6t1783927546t46037448
-X-QQ-Originating-IP: aUH+avv7FL44AIbU3VNg7RDj7c57+bpD6izfgXkE3Sc=
-Received: from PEN202512010004 ( [113.57.152.160])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Mon, 13 Jul 2026 15:25:44 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 1
-X-BIZMAIL-ID: 8809296686197180074
-EX-QQ-RecipientCnt: 8
-From: raoxu <raoxu@uniontech.com>
-To: brgl@kernel.org
-Cc: marcel@holtmann.org,
-	luiz.dentz@gmail.com,
-	linux-arm-msm@vger.kernel.org,
-	linux-bluetooth@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	raoxu@uniontech.com,
-	stable@vger.kernel.org
-Subject: [PATCH] Bluetooth: btqcomsmd: destroy RPMsg endpoints before freeing hci_dev
-Date: Mon, 13 Jul 2026 15:25:43 +0800
-Message-ID: <0CB2D8D715AB9933+20260713072543.3348755-1-raoxu@uniontech.com>
-X-Mailer: git-send-email 2.50.1
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Q+Jjp9n6";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CQiOSKNM"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66D6NufU568062
+	for <linux-arm-msm@vger.kernel.org>; Mon, 13 Jul 2026 07:27:12 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	b7+R+IEwGTa+tW+AFP3lb1nudfQDALMgZxFV8QusXX4=; b=Q+Jjp9n6AOakwWLd
+	sZb73+z9Vlt9Hd5YTvKP1ayCn3AUxjmfoWeWhr16oqG4wcLX4wPBoQJxZ7VaPslQ
+	xerjjswTr8aBuBPkj9DhvFBmdAXV7dCwx5WF9AhAdU2HGF3cv0pLwyoG38OlK3OS
+	uiE6PaRNG4fMNS14+xWC4u+QKMJm7t/uaHt+p8DPmBKl9yaCBsdhZBcM2Z1pRIWI
+	8lYkuMfqL7p98q7qHUcIWhx0gNLVEg254J2d+wNAiHMqrKIxrpBOA1QKEsneXqCz
+	FOZyAFA3MBm1Gz3g8/N21k5HZD41WMGxyqNFNMXhZHmThEOW9yvcpIhP89ZQVF5M
+	NVmJMA==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fbe914y41-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 13 Jul 2026 07:27:12 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-8483e038efeso3126299b3a.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 13 Jul 2026 00:27:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1783927631; x=1784532431; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=b7+R+IEwGTa+tW+AFP3lb1nudfQDALMgZxFV8QusXX4=;
+        b=CQiOSKNMqdXn6gCwBhEA9Bxvstn+XUWChzVRiY65plgVrvRo7eQkW5ycVyip9r0jsp
+         e1MQpFa1Q7xDC9kO9e4VllBSs0XDOMv6EJN/QuipqnvO/3VReug5UmVFxAwXdXaai+Nu
+         rGOJq0s8pEDPeGh2MQToxWkca9+Jr89zl4cn9U0Rj0VYK8D5by6w2uvA3g063WBjbbOo
+         WhoyPwC2ubaIIdu0SsQIy1fVIJr/GeF/zP5uqGEgzhRIEj/c3ckDGOo/kxvHwd0cEgdv
+         dRhIRRYTXnxU1VLrnbiWpOQDUc2u/yyXfT6o5Rt7B5D5jPaOFFm0usBTJ6DmvDiATsTh
+         Zh4g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1783927631; x=1784532431;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=b7+R+IEwGTa+tW+AFP3lb1nudfQDALMgZxFV8QusXX4=;
+        b=EaZ+Pod4PDZXsHzexHHQL0eoyWB8wxq28MWNbOZYJOu3bm5Hp8eKM4yQw3qcrpTMQo
+         19wmot7pVl3+cQaZOA099DiWEzJedVjmsJuc621nWWOyarJWf1tPgqQoY65zbMVb0kl5
+         OVv2G6UIMJAQQRXMavrR2y4SzEFtxdeZ9II4LgBS6NKQXgeI6yvhbLDpGG6ZqvZVz7Ty
+         Xs1kctCPNvPon16Hh/yCBLd+OuDRKlIrs7Vx0ZD4FCzCWHqK319aB7sCgq+vQid7wLBv
+         l+7xWS5B2nwvq2jv9ekDEHYn+29vVozTn5y4YpJv7IKRcFAEh5xbBAbo5q8PA4VmdzeJ
+         UWaA==
+X-Forwarded-Encrypted: i=1; AHgh+Rpo1pXtpnAlydYzI3D+WBidJCNGGp9LzTWFmNb2SEfOQL39XCdB1ZP1xC/5qIJuomCCY6IwLh5EvC8YXgAd@vger.kernel.org
+X-Gm-Message-State: AOJu0YxlPEKeunzZ3W1pW6s1V4IHpA/BbIFqOHQ5TbNi+j+BlyeUCxdv
+	S1wLMTBvn5HXHg7UbbgxOH9dNdC+vy3VWbOjCviqVG05V1AGJpoRMyarIA24XbFoQ+qsSMMAAvu
+	sFWG4BP6XFhZj63B7mGSFj8+BWnYUr+i2RO1/n0/79brvBdSCqWkM5lswKXCqzulLC9C9
+X-Gm-Gg: AfdE7ckFYjN36jpOyVvR8XxZlVabpPe65dboTG+eEOsXQLVBUDG1mlndq/3nk4uDa+1
+	zPhAMit2RuUeWDbyDdSF6N9CnxxjBxWXuOZxNzD/fpu87LiR34fZjQJhpIORNmfDqos4mzpuSPY
+	FI8c+13RDwh8t3aRgACKI1YybyBpnnz24rt7Jqshq9QnL1ttxUV/Ng0pTG0ngUlx5me2Yx0CnCn
+	jTRsHthorE2VrO2Ep5dWhIOP4bhDdY2XkE9yXmlRIMqstwz0777s9KoVGFLh1EFkzwKxvspQ4k5
+	dTpMwTHEFips8GByMXgQr82jq0YkNdkdqYRbIm504vJfTEZnMu9uKoJdvVegPyZsJvoMK1opsRB
+	9XJTLKVpf27zpnZROBmUTmaohf4GT7u6naSghIA6rEkE=
+X-Received: by 2002:a05:6a00:a117:b0:848:824d:aff4 with SMTP id d2e1a72fcca58-848896fee6fmr6817091b3a.56.1783927630859;
+        Mon, 13 Jul 2026 00:27:10 -0700 (PDT)
+X-Received: by 2002:a05:6a00:a117:b0:848:824d:aff4 with SMTP id d2e1a72fcca58-848896fee6fmr6817067b3a.56.1783927630381;
+        Mon, 13 Jul 2026 00:27:10 -0700 (PDT)
+Received: from [10.217.219.169] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84a15e36158sm2055595b3a.47.2026.07.13.00.27.06
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 13 Jul 2026 00:27:09 -0700 (PDT)
+Message-ID: <d8d0818f-4f3b-4efa-a89e-e304be91f3cb@oss.qualcomm.com>
+Date: Mon, 13 Jul 2026 12:57:04 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpgz:uniontech.com:qybglogicsvrgz:qybglogicsvrgz6b-0
-X-QQ-XMAILINFO: NU4e3V92LJuQ9l5gE0EGAvqalUZ1/hFlYUh31zQ9FdX8lx6a86yPen5b
-	EClUpMl2HJyNeydsSc88dqA3DqUIG2bCEJFUXeTCk+Subr3EtxXBCiGsUDYjqerUoqN6x3j
-	HtnmVF+mw7Fzro35EsUUQ5lWT+5YLedGe/O3u+pThDonU03Hm+zZ9LDAOQYctTvbjUoXWIc
-	wBX78JO77BAYFctuF3KK2Hy/C+wLn4R+Ihdq3iEkmgSllqqfj1i4r4l5qBTUX4em3EQ0cVy
-	Czc9aD1m3JDD+lw0ZZw+/nlSbYo5Ba8uOTOpkfCIfNIq2YtResI0xSGBVmzeYqZLDk5DOQs
-	jKqbEQBo3S2KzsplznS7NTf3Yn6Ic3DstKE48+7Nt/5vfz0SP3NoXTf/Y7o6VfOkFQr9jZN
-	2/kivbhVF/mqlciZ7I1Nxiu0ZYm8uG88+FDwoCCwx9viC42IZ+Gujn+NCpCVCBCutt/Sfqn
-	+PNIkPU5IHqvWQzg3hTf56dvZpTxK5iyWzNUe/UDaPvgpjQkJM+F2aIyU3xdvXmpnpuEU77
-	55uha1gKN5ZTuSZuoXnYIDx8Nbt/OUeHgAkQvtcI+r2QqWoh9CDFasD59/fEjOWgXs7Mmaa
-	WW7n7mupa4ZKtWajwtQZfBIteDRbbHW2ZVVr01rmMjGLciNgX10hHIkydJ25U3Z587W7qz6
-	1oMg0es+9ol0fh8X4Tn0fzE1KZx7IOfHb/UDi4K5VrbSHZWZI2r9wDkqVjixfAUq/VvyEmp
-	Y/QrEgUt6kayVzS/gpwFIjr/+aqKXOBU26xQTMAbs4l3dfTkESAdyqMuBH4AMa9+UVLfEb3
-	ageoJkUNesXGGcIhGVcomwE/+7t5Dj3ZDkcGYzxTaDaFRhulbDxHVXcWBeYYwuz3URinldW
-	rktJyltNuSxJ1heuaL8gk7eLiLhRgXcQHnT65t0i7zDkR0b6haIa2ysUlENjrNyf7o6DBTb
-	Xx1JsU/V8STpz4TRok6P9io4jspzjV6YDwTq3QlsXHPB2Aw9wuCu1/JmBHApD3TM4vSuCxS
-	J0s9//hbf8Lwfv3c/J9aPeA2gSyFsM0AfAkSsS8NRocvFNYM3WUL66iHXVHPIbdPM2wXjcB
-	A==
-X-QQ-XMRINFO: OWPUhxQsoeAVwkVaQIEGSKwwgKCxK/fD5g==
-X-QQ-RECHKSPAM: 0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 5/7] bus: mhi: Load DDR training data using device
+ serial number
+To: Manivannan Sadhasivam <mani@kernel.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+        Jeff Hugo <jeff.hugo@oss.qualcomm.com>,
+        Carl Vanderlip <carl.vanderlip@oss.qualcomm.com>,
+        Oded Gabbay <ogabbay@kernel.org>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, mhi@lists.linux.dev
+References: <20260701-sahara_protocol_new_v2-v6-0-3a78362c4741@oss.qualcomm.com>
+ <20260701-sahara_protocol_new_v2-v6-5-3a78362c4741@oss.qualcomm.com>
+ <ysumvduurfx5jq7r2eaa4ik24eqk5at24frvjl3zyif4wc4ojj@2bhq4vzuqlnw>
+Content-Language: en-US
+From: Kishore Batta <kishore.batta@oss.qualcomm.com>
+In-Reply-To: <ysumvduurfx5jq7r2eaa4ik24eqk5at24frvjl3zyif4wc4ojj@2bhq4vzuqlnw>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=TbymcxQh c=1 sm=1 tr=0 ts=6a549350 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=BmEjwzUHSYKQsWGf9k0A:9 a=QEXdDO2ut3YA:10
+ a=OpyuDcXvxspvyRM73sMx:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzEzMDA3NSBTYWx0ZWRfXw+XArgjfeMbh
+ RegJMClTmOrEUGQGs+MAqUnNeiR4ohbrLuAULPoCKFtphA/NiEH5GwIJT+YHIhd55q5+am0c43A
+ gW8MSB1mK6cAg3nnVsfn52tUQhfUCT0=
+X-Proofpoint-GUID: B5ZSCfv0pK92WgF_6zdwPlopMDNZjBzK
+X-Proofpoint-ORIG-GUID: B5ZSCfv0pK92WgF_6zdwPlopMDNZjBzK
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzEzMDA3NSBTYWx0ZWRfXyiIEi3AhJo+D
+ ShVMo38cjlF34Yq6Tqc44cqXRR/nND+Z4gsOBUh7MW/K7e7TZX1js2Z+SdirBLI5ZtEtizSdDwW
+ IP/8XTrNrXoQVCghMIuilfuotN456+J+bK0paF8BpKzcFR7EPn7eq5+0or81gX9tSlQr86IksQJ
+ 4rjIdCTOUaVBCHk1RqrRSGgNsyQ+MBJl7fCMmzqjuEZevC6VPeLiDFmIxASC5S0XlivI9PHTooa
+ nN3hSl2NfBDlznOmaY5/AP30xhqc2bA+Qq5zAlyLk8IkQE4sh+SX0v07K/9g9xS18YsOyv9ef17
+ vn4cYZ//9LKeSNHQlbLtWPIqoDsZ10T92TTkSGpnzpQmvY7TO93XDGL88/UAC0j5s7QG7B+/3jY
+ zp6c0ZHPer0PMRldV+aGutYI3v9CZZPJdQ3KHLr03XphnxNMRSxr6nHdffzkemEIZSdvXgUkH9F
+ 7TBrVSDroTn6Pp7avZQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-13_02,2026-07-10_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 bulkscore=0 priorityscore=1501 suspectscore=0 impostorscore=0
+ adultscore=0 lowpriorityscore=0 phishscore=0 spamscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607130075
 
-From: Xu Rao <raoxu@uniontech.com>
 
-The command and ACL RPMsg endpoints store struct btqcomsmd as their
-callback private data.  The receive callbacks dereference btq->hdev
-without taking an hci_dev reference.
+On 7/9/2026 11:51 AM, Manivannan Sadhasivam wrote:
+> On Wed, Jul 01, 2026 at 04:07:39PM +0530, Kishore Batta wrote:
+>> Devices may provide device specific DDR training data that can be reused
+>> across boot to avoid retraining and reduce boot time. The Sahara driver
+>> currently always falls back to the default DDR training image, even when
+>> serial specific training data is available.
+>>
+>> Extend the firmware loading logic for the DDR training image to first
+>> attempt loading a per-device image dervied from the device serial number.
+>> If the serial-specific image is not present, fall back to the existing
+>> default image, preserving current behavior.
+>>
+>> This allows reuse of previously generated DDR training data when available,
+>> while keeping the existing training flow unchanged for devices without
+>> saved data or for all other firmware images.
+>>
+>> Signed-off-by: Kishore Batta <kishore.batta@oss.qualcomm.com>
+>> ---
+>>   drivers/bus/mhi/host/clients/sahara/sahara.c | 25 ++++++++++++++++++++++++-
+>>   1 file changed, 24 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/bus/mhi/host/clients/sahara/sahara.c b/drivers/bus/mhi/host/clients/sahara/sahara.c
+>> index 9adbd84859073d8024ba2a5fcfa33897439d6759..b5ca6353540dc3815db6539e7424afdb749fd3f6 100644
+>> --- a/drivers/bus/mhi/host/clients/sahara/sahara.c
+>> +++ b/drivers/bus/mhi/host/clients/sahara/sahara.c
+>> @@ -59,6 +59,7 @@
+>>   #define SAHARA_RESET_LENGTH		0x8
+>>   #define SAHARA_MEM_DEBUG64_LENGTH	0x18
+>>   #define SAHARA_MEM_READ64_LENGTH	0x18
+>> +#define SAHARA_DDR_TRAINING_IMG_ID	34
+>>   
+>>   struct sahara_packet {
+>>   	__le32 cmd;
+>> @@ -226,6 +227,27 @@ static int sahara_find_image(struct sahara_context *context, u32 image_id)
+>>   		return 0;
+>>   	}
+>>   
+>> +	/* DDR training special case: Try per-serial number file first */
+>> +	if (image_id == SAHARA_DDR_TRAINING_IMG_ID && context->fw_folder) {
+>> +		u32 serial_num = context->mhi_dev->mhi_cntrl->serial_number;
+>> +
+>> +		fw_path = kasprintf(GFP_KERNEL,
+>> +				    "qcom/%s/mdmddr_0x%x.mbn",
+>> +				    context->fw_folder, serial_num);
+>> +		if (!fw_path)
+>> +			return -ENOMEM;
+>> +
+>> +		ret = firmware_request_nowarn(&context->firmware,
+>> +					      fw_path,
+>> +					      &context->mhi_dev->dev);
+>> +		kfree(fw_path);
+>> +
+>> +		if (!ret) {
+>> +			context->active_image_id = image_id;
+>> +			return 0;
+>> +		}
+>> +	}
+>> +
+>>   	/*
+>>   	 * This image might be optional. The device may continue without it.
+>>   	 * Only the device knows. Suppress error messages that could suggest an
+>> @@ -235,7 +257,8 @@ static int sahara_find_image(struct sahara_context *context, u32 image_id)
+>>   				      context->image_table[image_id],
+>>   				      &context->mhi_dev->dev);
+>>   	if (ret) {
+>> -		dev_dbg(&context->mhi_dev->dev, "request for image id %d / file %s failed %d\n",
+>> +		dev_dbg(&context->mhi_dev->dev,
+>> +			"request for image id %d / file %s failed %d\n",
+> Spurious change.
+>
+> - Mani
 
-The current teardown order frees the hci_dev before destroying the RPMsg
-endpoints in both the hci_register_dev() error path and the driver remove
-path.  If WCNSS delivers data in that window, the endpoint callback can
-run with an already freed hci_dev and pass it to the Bluetooth core.
+ACK. Will remove it in next version.
 
-For qcom_smd endpoints, rpmsg_destroy_ept() closes the channel and clears
-the callback under the channel recv_lock.  The receive path holds the same
-lock while invoking the callback, so destroying the endpoints first both
-prevents new callbacks and serializes with any callback already running.
-
-Destroy the command and ACL endpoints before hci_free_dev().  Keep
-hci_unregister_dev() first during remove so the HCI core stops issuing
-operations before the transport endpoints are shut down.  In the full
-registration-error cleanup path, return directly after freeing the hci_dev
-to avoid falling through to the partial-construction labels and destroying
-the endpoints twice.
-
-Fixes: 5052de8deff5 ("soc: qcom: smd: Transition client drivers from smd to rpmsg")
-Fixes: 9a39a927be01 ("Bluetooth: btqcomsmd: Fix a resource leak in error handling paths in the probe function")
-Cc: stable@vger.kernel.org
-Signed-off-by: Xu Rao <raoxu@uniontech.com>
----
- drivers/bluetooth/btqcomsmd.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/bluetooth/btqcomsmd.c b/drivers/bluetooth/btqcomsmd.c
-index d2e13fcb6bab..d669ea4eb3eb 100644
---- a/drivers/bluetooth/btqcomsmd.c
-+++ b/drivers/bluetooth/btqcomsmd.c
-@@ -188,7 +188,10 @@ static int btqcomsmd_probe(struct platform_device *pdev)
- 	return 0;
-
- hci_free_dev:
-+	rpmsg_destroy_ept(btq->cmd_channel);
-+	rpmsg_destroy_ept(btq->acl_channel);
- 	hci_free_dev(hdev);
-+	return ret;
- destroy_cmd_channel:
- 	rpmsg_destroy_ept(btq->cmd_channel);
- destroy_acl_channel:
-@@ -202,10 +205,11 @@ static void btqcomsmd_remove(struct platform_device *pdev)
- 	struct btqcomsmd *btq = platform_get_drvdata(pdev);
-
- 	hci_unregister_dev(btq->hdev);
--	hci_free_dev(btq->hdev);
-
- 	rpmsg_destroy_ept(btq->cmd_channel);
- 	rpmsg_destroy_ept(btq->acl_channel);
-+
-+	hci_free_dev(btq->hdev);
- }
-
- static const struct of_device_id btqcomsmd_of_match[] = {
---
-2.50.1
 
