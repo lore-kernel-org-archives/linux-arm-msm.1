@@ -1,29 +1,30 @@
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
+Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B46253D3CF6;
-	Tue, 14 Jul 2026 06:10:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C86CC3D8912;
+	Tue, 14 Jul 2026 06:10:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.5
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784009436; cv=none; b=NGVksOX6rwVMD+YZDYnieAeN67C5UkDOrFScOZtsl0X8Ie3DO8U4JF0g9HXrJE0ziBmq7/T9JAAr73y9+O1mzkHuUfDwsS4fKBWMDT8KIgR54MOf13jV2+JtIhOILryyp3ZT9QZ832mvzeUuBZYZY+0qs0Z9GvTieCqAA9zXL7o=
+	t=1784009437; cv=none; b=AowAc8zUv3QRWr74efmJ39M8gy3CMC3jHJJ35x/83bzl76qyfyvyI6Tp8nsOg6YWVthep26nwxhU1XYErntbk1E5jS5yniWxzFJIEtqvgaDQws6x0xvB5ql77c8w1UrjET9kt83Bbm9LWGHXyOML7zHdYe12v/OFbaPLi+yjFkM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784009436; c=relaxed/simple;
-	bh=4xPqYvlq9Nfls+v7bxOV7lBCChf+ugfxubUKqn9mCi8=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=knM6/sDj3Tqon4RVQPHOtDWF4m50llfZjisEt8gwoX3ORNmK2KW4srXVM5odhn1+Z4BbKwIAj5OCok/xL68u6G/8Vsdrq4djh79jkQFQ4CMDdirqz+twK7dXEDikEsrdA13A6VzLLf2PCTA1H8535Y1v9doT8V0R+SN9L+ojr54=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=OwtK6mD4; arc=none smtp.client-ip=117.135.210.2
+	s=arc-20240116; t=1784009437; c=relaxed/simple;
+	bh=h1rcSZIJCx1s78fckibab2t0DEvvfwOPISuMFxICZCI=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=aVPbMYj5f9rC+9wL9+1PVnvs8TDxCKiqAt9wszqVTonHQyWEtCxOYRH1szkApSZcOOvoJmva0qGmJmB/0JYNGzTkN/6FuyC7NME3T8PjMJvs3BKClCQIPqnIxqwqMnkpuFb4bEthulMu8AAJQNa7jlIGJ96HSCxZc/DSYicmz5M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=iqI/ShWL; arc=none smtp.client-ip=220.197.31.5
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="OwtK6mD4"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="iqI/ShWL"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=bn
-	7zqv7BhhO4u2hyqtDUkagNf7vxIqH4Kedjj5Ao8gg=; b=OwtK6mD4hKcXDiM1hO
-	qPwRv5qhI/mzDULJimzH9Y9IxR/J8+QkKfrm5IWPi6H8Yy+INj2zjIAD1hDcdNPT
-	0CUv6LutuOvjYBSSUq0bsOiXWHGMpH61vh4m5CUSXe7TpFdXwXQsKVr+/fP0zDbW
-	M8LHhjuo2Nw4aSpm+Gt/o4u8w=
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=fO
+	rVLDpGjRjUa+f8VzrtP6B9hFELin8qYtwTJlLmQHk=; b=iqI/ShWLN0QGPUqjSJ
+	HV4sJ1rtMWL3tWOLVElIvwBK6ZSAS4vfu0sssBfLo/bYGEpI3L73sIP+ni1SSqUT
+	CmAr7QEESbFj+puJ3v3C2uYKuvXUwn8posOU/mE9sIfmLZjymxF95WZIUJm21bsD
+	UnPKkFa6CVRl/0wW+XDTRAaMM=
 Received: from xwm-TianYi510Pro-14IMB.. (unknown [])
-	by gzsmtp4 (Coremail) with SMTP id PygvCgAnwyab0lVqrG_HHA--.5129S2;
-	Tue, 14 Jul 2026 14:09:47 +0800 (CST)
+	by gzsmtp4 (Coremail) with SMTP id PygvCgAnwyab0lVqrG_HHA--.5129S5;
+	Tue, 14 Jul 2026 14:09:48 +0800 (CST)
 From: weimin xiong <xiongwm2026@163.com>
 To: Will Deacon <will@kernel.org>,
 	Robin Murphy <robin.murphy@arm.com>,
@@ -35,10 +36,12 @@ Cc: Benjamin Gaignard <benjamin.gaignard@collabora.com>,
 	linux-kernel@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	weimin xiong <xiongwm2026@163.com>
-Subject: [PATCH v1 0/4] iommu: Fix device lookup lifetime and probe cleanup
-Date: Tue, 14 Jul 2026 14:09:26 +0800
-Message-ID: <20260714060930.220277-1-xiongwm2026@163.com>
+Subject: [PATCH v1 3/4] iommu/vsi: Fix fwnode lookup lifetime handling
+Date: Tue, 14 Jul 2026 14:09:29 +0800
+Message-ID: <20260714060930.220277-4-xiongwm2026@163.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260714060930.220277-1-xiongwm2026@163.com>
+References: <20260714060930.220277-1-xiongwm2026@163.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -46,36 +49,58 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:PygvCgAnwyab0lVqrG_HHA--.5129S2
-X-Coremail-Antispam: 1Uf129KBjvdXoW7Xr4kGryxKF15JFW8Kr4DJwb_yoWDGFX_ur
-	yrZ3srXw1rZFWxZa42qF47ZrZYkr4IvF97GrWjg3s3Jr17XrWkGa1qvFn5Ja1xWw1jyFn7
-	tw4Ykr1xG342gjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-	9fnUUvcSsGvfC2KfnxnUUI43ZEXa7IUUuHq3UUUUU==
-X-CM-SenderInfo: x0lr0wdzpsijqw6rljoofrz/xtbCzgvOXmpV0qudxAAA3K
+X-CM-TRANSID:PygvCgAnwyab0lVqrG_HHA--.5129S5
+X-Coremail-Antispam: 1Uf129KBjvJXoW7KFyrGF1DJw1fCw47uF45Jrb_yoW8Ww45pF
+	WUGayYkrWUXF10gF47C3W5CFyYvws2va4I9rW5tw4v9w1rtrW8ta4UJryjqryrCFZ5J3W7
+	Kw13ta97CFy5A3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jeg4fUUUUU=
+X-CM-SenderInfo: x0lr0wdzpsijqw6rljoofrz/xtbCzgzPX2pV0qyd0gAA3c
 
-Fix a few IOMMU driver lifetime and error-path issues found while
-auditing fwnode-based device lookup and probe cleanup paths.
+bus_find_device_by_fwnode() returns a device with its reference count
+incremented. vsi_iommu_get_from_dev() drops that reference before
+reading the driver data, which leaves the returned pointer derived from
+a device after its reference has been released.
 
-The first three patches avoid deriving driver private data after
-dropping the device reference returned by bus_find_device_by_fwnode().
-They also make the ARM SMMU v2 and VSI probe paths fail cleanly when the
-IOMMU lookup fails.
+Read the driver data before put_device(). Also make
+vsi_iommu_probe_device() fail with -ENODEV when the IOMMU cannot be
+found instead of dereferencing a NULL pointer.
 
-The last patch unwinds msm_iommu_probe() state if sysfs setup or
-iommu_device_register() fails.
+Signed-off-by: weimin xiong <xiongwm2026@163.com>
+---
+ drivers/iommu/vsi-iommu.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-weimin xiong (4):
-  iommu/arm-smmu: Fix fwnode lookup lifetime handling
-  iommu/arm-smmu-v3: Fix fwnode lookup lifetime handling
-  iommu/vsi: Fix fwnode lookup lifetime handling
-  iommu/msm: Clean up probe state on registration failure
-
- drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c |  8 +++++++-
- drivers/iommu/arm/arm-smmu/arm-smmu.c       | 12 +++++++++++-
- drivers/iommu/msm_iommu.c                   | 10 ++++++++--
- drivers/iommu/vsi-iommu.c                   | 10 +++++++++-
- 4 files changed, 35 insertions(+), 5 deletions(-)
-
+diff --git a/drivers/iommu/vsi-iommu.c b/drivers/iommu/vsi-iommu.c
+index 42c424496..d19db561e 100644
+--- a/drivers/iommu/vsi-iommu.c
++++ b/drivers/iommu/vsi-iommu.c
+@@ -220,10 +220,15 @@ static struct vsi_iommu *vsi_iommu_get_from_dev(struct device *dev)
+ 	struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
+ 	struct device *iommu_dev = bus_find_device_by_fwnode(&platform_bus_type,
+ 							     fwspec->iommu_fwnode);
++	struct vsi_iommu *iommu;
++
++	if (!iommu_dev)
++		return NULL;
+ 
++	iommu = dev_get_drvdata(iommu_dev);
+ 	put_device(iommu_dev);
+ 
+-	return iommu_dev ? dev_get_drvdata(iommu_dev) : NULL;
++	return iommu;
+ }
+ 
+ static struct iommu_domain *vsi_iommu_domain_alloc_paging(struct device *dev)
+@@ -619,6 +624,9 @@ static struct iommu_device *vsi_iommu_probe_device(struct device *dev)
+ 	struct vsi_iommu *iommu = vsi_iommu_get_from_dev(dev);
+ 	struct device_link *link;
+ 
++	if (!iommu)
++		return ERR_PTR(-ENODEV);
++
+ 	link = device_link_add(dev, iommu->dev,
+ 			       DL_FLAG_STATELESS | DL_FLAG_PM_RUNTIME);
+ 	if (!link)
 -- 
 2.43.0
 
