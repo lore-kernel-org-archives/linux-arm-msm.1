@@ -1,30 +1,30 @@
 Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A2F53D6493;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD37B3D9043;
 	Tue, 14 Jul 2026 06:10:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784009443; cv=none; b=PlO1DoiVg3McDA5NkQpjfekE/8JwSoiNpsmbzgm+lb0xPDqm3gDyOvbW3eHssukOrd51zc99SQMk84FSa7BAX/fP3NsAwwBGxZCDlmdqKTqn3OS230pT9L59yLyLonPsXduS7bORO9bg++XGFcNe8o8qWdiw23QswEp1lDDF65Q=
+	t=1784009444; cv=none; b=GgjFBmrR7tnCPVe4h5aotnQb8s2YXhFH4/eMYHa6ZGUSPf0/xsk4t8uPAgKOkw9lvZPZOL62kCTKStb4fkap1X01g4lSWyWLRV0dmzxt9k8ech9ypKdoAByzovgeB9sjljqKZHYCPG+H7JpW02DpRPqZ83MJiSyts0mxWB6cH08=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784009443; c=relaxed/simple;
-	bh=CbzYCqfUOj4SifOJuD5PCQjjfoR5mDCOVqJzrEwDTU0=;
+	s=arc-20240116; t=1784009444; c=relaxed/simple;
+	bh=OK6F+QADPy1VWZWq5kaE5EqHcErchmyJYXKrGpnsvXE=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=DZefM7qJr9ogy+5oDmepnlwFY9q0DbtXCPQCklS1PSznAmI6J0GsmwiOROPM6NOR8sH5B2zbpsPYdvqM2QtDRDTZDxxzXtvFbdTRbGarQ2kH+ni+QTu1+IJQUA73OlW6nA9kqSf/YHZ3BWuZX+62q/7JBo1X4P1T0pdZQXNIJ1M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=eAVwSu2R; arc=none smtp.client-ip=220.197.31.4
+	 MIME-Version; b=Sn3EUuN2NlCHtxVKJCLt95uv77b2a9Gv+wcp9G9tdZtyKxTZfXUFutRbrhmXunbSbD/04s0sxYx5eCGX1KPTAlwy7a6falRTvdqejyKGPvhNe63QT4f/0qxhofsZsyfJeRPKFFUHFqJ2NV++mpig3a3v6w3fQkc5db2EHQzc3Kw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=DdqhWYc6; arc=none smtp.client-ip=220.197.31.4
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="eAVwSu2R"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="DdqhWYc6"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=Qg
-	KBOpsQ6v0plaOyS+PBWO+c7M1uIEDREuFLY6J4zik=; b=eAVwSu2R1PeW98TO1z
-	HbKR78s3Gp2nH32r/6OXX2wxmQXBkkFuPfbaEg8n8+L7WLyA18yG3ZhgvNPSRkC0
-	P5lN1Lxdfp8vwGxv2Ziz6R/yuEMAwwdFeqkwnnXiwSOBh8opXdsDuXJwc9VfTDUm
-	7rk8iTcMKZWoHYD870tzUMsxw=
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=dS
+	Md5BPF4fYsYrSjBZEUKbIw8wpxukNBKTZpcMK3Duo=; b=DdqhWYc66UcFUgEnhy
+	cf1r+XH3UNq0EIYmW8zU6iHHiZf1TLAWcUBEyJQ221DA601xIR1WzSQzIU3abw4Q
+	8DBC1TkBft4NfF7z0vtaHEMl3B2MhtPkj1zWtttsII1AyGQ5hZdxbvDz91Xtkfnd
+	d8OJBbnJgKXcALciSuMVeZOs8=
 Received: from xwm-TianYi510Pro-14IMB.. (unknown [])
-	by gzsmtp4 (Coremail) with SMTP id PygvCgAnwyab0lVqrG_HHA--.5129S6;
-	Tue, 14 Jul 2026 14:09:48 +0800 (CST)
+	by gzsmtp4 (Coremail) with SMTP id PygvCgAnwyab0lVqrG_HHA--.5129S3;
+	Tue, 14 Jul 2026 14:09:47 +0800 (CST)
 From: weimin xiong <xiongwm2026@163.com>
 To: Will Deacon <will@kernel.org>,
 	Robin Murphy <robin.murphy@arm.com>,
@@ -36,9 +36,9 @@ Cc: Benjamin Gaignard <benjamin.gaignard@collabora.com>,
 	linux-kernel@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	weimin xiong <xiongwm2026@163.com>
-Subject: [PATCH v1 4/4] iommu/msm: Clean up probe state on registration failure
-Date: Tue, 14 Jul 2026 14:09:30 +0800
-Message-ID: <20260714060930.220277-5-xiongwm2026@163.com>
+Subject: [PATCH v1 1/4] iommu/arm-smmu: Fix fwnode lookup lifetime handling
+Date: Tue, 14 Jul 2026 14:09:27 +0800
+Message-ID: <20260714060930.220277-2-xiongwm2026@163.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260714060930.220277-1-xiongwm2026@163.com>
 References: <20260714060930.220277-1-xiongwm2026@163.com>
@@ -49,59 +49,58 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:PygvCgAnwyab0lVqrG_HHA--.5129S6
-X-Coremail-Antispam: 1Uf129KBjvJXoW7Ww48JFy3tF4kCFW5ZFW7CFg_yoW8XrWxpF
-	47W3909r1kK3WfKF47AF18uFn0krZFya45uF4fWa9F9r15ArWUXFZ3KFW5tr45GrWkGa17
-	Aay3Jr4S9F15Cr7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UVlk3UUUUU=
-X-CM-SenderInfo: x0lr0wdzpsijqw6rljoofrz/xtbCzgzPX2pV0qyd1wAA3Z
+X-CM-TRANSID:PygvCgAnwyab0lVqrG_HHA--.5129S3
+X-Coremail-Antispam: 1Uf129KBjvJXoW7CryDZr43Ar15GF1ruw1fCrg_yoW8Xw15pF
+	WUCFyYvrWUWF1jkr4DJw1rAF1Y9a10yas5CrW8C3s09w13ta45tFy8KFyagwn5CrZ5J3W3
+	tr9Fq3yrCF98ArJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UH6wtUUUUU=
+X-CM-SenderInfo: x0lr0wdzpsijqw6rljoofrz/xtbC7wvOXmpV0qsbnwAA32
 
-msm_iommu_probe() adds the IOMMU to qcom_iommu_devices before creating
-the IOMMU sysfs device and registering the IOMMU. If either of those
-later steps fails, the function returns without undoing the list
-insertion. The iommu_device_register() failure path also leaves the
-sysfs device behind.
+bus_find_device_by_fwnode() returns a device with its reference count
+incremented. arm_smmu_get_by_fwnode() drops that reference before
+reading the driver data, which leaves the returned pointer derived from
+a device after its reference has been released.
 
-Add shared error labels so the list entry and sysfs device are unwound
-in the reverse order of setup.
+Read the driver data before put_device(). Also handle a failed lookup in
+arm_smmu_probe_device() before dereferencing the returned SMMU pointer.
 
 Signed-off-by: weimin xiong <xiongwm2026@163.com>
 ---
- drivers/iommu/msm_iommu.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ drivers/iommu/arm/arm-smmu/arm-smmu.c | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/iommu/msm_iommu.c b/drivers/iommu/msm_iommu.c
-index 0ad5ff431..d0d926be7 100644
---- a/drivers/iommu/msm_iommu.c
-+++ b/drivers/iommu/msm_iommu.c
-@@ -784,19 +784,25 @@ static int msm_iommu_probe(struct platform_device *pdev)
- 				     "msm-smmu.%pa", &ioaddr);
- 	if (ret) {
- 		pr_err("Could not add msm-smmu at %pa to sysfs\n", &ioaddr);
--		return ret;
-+		goto err_remove_list;
- 	}
- 
- 	ret = iommu_device_register(&iommu->iommu, &msm_iommu_ops, &pdev->dev);
- 	if (ret) {
- 		pr_err("Could not register msm-smmu at %pa\n", &ioaddr);
--		return ret;
-+		goto err_remove_sysfs;
- 	}
- 
- 	pr_info("device mapped at %p, irq %d with %d ctx banks\n",
- 		iommu->base, iommu->irq, iommu->ncb);
- 
- 	return ret;
+diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu.c b/drivers/iommu/arm/arm-smmu/arm-smmu.c
+index 0bd21d206..b70c307b8 100644
+--- a/drivers/iommu/arm/arm-smmu/arm-smmu.c
++++ b/drivers/iommu/arm/arm-smmu/arm-smmu.c
+@@ -1426,9 +1426,15 @@ static
+ struct arm_smmu_device *arm_smmu_get_by_fwnode(struct fwnode_handle *fwnode)
+ {
+ 	struct device *dev = bus_find_device_by_fwnode(&platform_bus_type, fwnode);
++	struct arm_smmu_device *smmu;
 +
-+err_remove_sysfs:
-+	iommu_device_sysfs_remove(&iommu->iommu);
-+err_remove_list:
-+	list_del(&iommu->dev_node);
-+	return ret;
++	if (!dev)
++		return NULL;
+ 
++	smmu = dev_get_drvdata(dev);
+ 	put_device(dev);
+-	return dev ? dev_get_drvdata(dev) : NULL;
++
++	return smmu;
  }
  
- static const struct of_device_id msm_iommu_dt_match[] = {
+ static struct iommu_device *arm_smmu_probe_device(struct device *dev)
+@@ -1451,6 +1457,10 @@ static struct iommu_device *arm_smmu_probe_device(struct device *dev)
+ 			goto out_free;
+ 	} else {
+ 		smmu = arm_smmu_get_by_fwnode(fwspec->iommu_fwnode);
++		if (!smmu) {
++			ret = -ENODEV;
++			goto out_free;
++		}
+ 	}
+ 
+ 	ret = -EINVAL;
 -- 
 2.43.0
 
