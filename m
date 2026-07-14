@@ -1,61 +1,63 @@
-Received: from mail-wr1-f48.google.com (mail-wr1-f48.google.com [209.85.221.48])
+Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F321D46AF18
-	for <linux-arm-msm@vger.kernel.org>; Tue, 14 Jul 2026 13:05:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F13246AF21
+	for <linux-arm-msm@vger.kernel.org>; Tue, 14 Jul 2026 13:05:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784034312; cv=none; b=bdb4Wd93Q6mo6XMlzGYDbwExrYFvmM0KdGW/79vCbmyvWsStMaJ0Sf08ka+fxeHJ3YxYlXsc5ucM/AGrDaQAw1ij17KyW4JIY401Ipk0TQcwYbAJaILrGo6iXqLEDFSf3lggPiJ2keEGErd02rgwn1Ymx0K8MEJFJrnrimrEnaY=
+	t=1784034313; cv=none; b=dePQliFJ1Xrsmmemz960ftu1/bPRFbX6L3rCXefQhWhqWmMnUaowVSm4AZSQRN9Xj9oKOb8NeSglMiWTVnHLctK6qsTBLOrCOG/6kKYqTyy2QBQpmdSmDN0yE/Q33MrUBq0cW6jl+zwXL2oU+uODkYEb+LMxtU+omYGeRb8xoh4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784034312; c=relaxed/simple;
-	bh=VOMTGOfRoJ5Rdr+KHFMcafRgWYnlPdDlGpYkrvPKcNk=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Z/Vuu35MzJ4Y/Qllw9q8ztqLdVaOl0V4evua24HlS2O66C5MjKP68I12oiZAq7Y8kTYDuvmhP5Jf1APoYyZHKDHxMMcegSk85yG+ihC37NIEsRqX0ZdstYcl53k+xAQv9vdkjqm7/ItdTbf61YHpccK8lHWf/9zggDv1vyB4BAo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=qMJNRbOf; arc=none smtp.client-ip=209.85.221.48
+	s=arc-20240116; t=1784034313; c=relaxed/simple;
+	bh=236unSeVwnwnwtnjaBsb30cBdIDCZYuX+cT8wVq+Nds=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=KAnOiId6NosEg5MTK/OvroiRXQuqs4J1ccv77pBxal8aIJfGIrciSlS+L6y/t7FiZ7XdvMA/ODovXLNp656cY0Yt8W/zFlQNSn45XAYfTz9VCDkUKvvDDJH/20Py5dVi5uIuyrk1YOvnymHcZ8TerNOmGi2FsoMm1FPANo1stuc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Efp+9Rb1; arc=none smtp.client-ip=209.85.221.51
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="qMJNRbOf"
-Received: by mail-wr1-f48.google.com with SMTP id ffacd0b85a97d-47dec32798aso4367610f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 14 Jul 2026 06:05:10 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Efp+9Rb1"
+Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-471eeac43bfso4220030f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 14 Jul 2026 06:05:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784034309; x=1784639109; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=WL8L6KsMjnQpZyewy/NTC9SiE2jOxkz1VcH1kHCfURE=;
-        b=qMJNRbOf0M3w285d9KLTy+aAEWflNl/ve2n04STE9l5unPMpEjihby5Tn/gBIhk44j
-         mfBg25qG7bAixlB8Q9NNF35oBJHyfuvHF01hAPjDqb7Gmuc4kNoS4cPC4jYDp9g0Xqs6
-         axt0ruLReZadA/rIxF8sNhg0zWyC6BQTWgzI2mYf1poQzCKx89woMcFD6K4PK5VMmeA9
-         QLlzVx1uB3nQs9S8XJ4Rq35Thqj9tQon+mmFMap0Fv/xd4am7j3YsNGdpfWgyPDDE66c
-         Po8/eaolGAG6B1CDSeDqtYKKWGxdBPF4CVJe5a+os4V3kqB+qTfiZnoeXq4bBdFT9Klm
-         ZmKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784034309; x=1784639109;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1784034310; x=1784639110; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=WL8L6KsMjnQpZyewy/NTC9SiE2jOxkz1VcH1kHCfURE=;
-        b=eD05UgjCTRE4Zw0Rjdw0BVtShaZtEF/82Ui5oKMjoBfopz1IKRmJ+lkLl0p73MuD6t
-         bswteycn1kJxSki3zZ9NgToAM9bh1No9/l8AST/cNbCAxl6HuTu/W2/x44ZCwRZzbf0x
-         Kxw8w+l4IDAocR6IacikQ5todri2syMQ7nvKoGny1i2P+FRoifAvfVSreViffcnbCfn1
-         teZXyjyUjfg6EAV4iUkgPrNOrvkd7fkJ2rOdOdVeatMwvIOmoaRQ5a9/kS4RQZw0/a2c
-         zRBlAgJ1xCK5WysYoW0SpDb7VLJCvPJU+ZnnQ4ko6ReJyBVjOykCla0xLlVLcnVkY9m/
-         uRag==
-X-Forwarded-Encrypted: i=1; AHgh+RoFu9aSdThpSiuGGaxkAz7Ed34/qb9zInRqgN2Plx3lN9bAIHju/9ioQDHlhR33pPUTcKIUL7mFLQfVeXHi@vger.kernel.org
-X-Gm-Message-State: AOJu0YzeiVQ5opcH+7SPI7Wl7R3wXh8F1lXzLU5ywF5nISeqsPRjj/lP
-	Zn6PQ548P6jwF2bTJz8vyB03DBvriX5/15VbXz4QrQIpACa2MMwXmcKUNLH1Ug==
-X-Gm-Gg: AfdE7clN49nLfqPv8UAz0oZOPYUsSKwPQBGDwo2ex28qC0HvSdiOigof6Jaw5kY8gxl
-	3dnxiHNodXEYJ2eH/bTIo5Poc7BAZ60Dcx6U+Q5sSQWyDwkmOCu2onmA9Od4gatwSz5xWBb+Upf
-	LjfHR149RaQTMekRsQk5qOHAxSU5wVU6Om66RCoJ6eWVytUGfTBDdmT+DQe3I+5NXH+2Qjm3Y6t
-	kJ1wk9vdymigUkvH/Jm9Wn0VaCnGDIWcdiVqQydCqtLPn9TUygClwAW8GHFJhbR73UuSD5e8CYj
-	wHpkAya09kAw7Yi9vefmmIvLqVKhn+GWgnHFNx5+R8mvkJ3ESNUaYftGUedfDAr9qMLIxKLZOHS
-	M4G7rWYalK5bbf13Sou1d4hVKT/veMqPwajHEaHFqpSE3gkqupUkiOM4WZYHs86HjhQ3HNv0Ik+
-	bOCsHErXu+fgIu1lbquAXsbFTSw3ZbBw==
-X-Received: by 2002:a05:6000:2207:b0:46f:7d90:811c with SMTP id ffacd0b85a97d-47f4885699cmr2979583f8f.13.1784034309005;
-        Tue, 14 Jul 2026 06:05:09 -0700 (PDT)
+        bh=3VsQ/KzpbmIPz/ijHmyGGKeW2JGVH1BkLtqfTcLEshA=;
+        b=Efp+9Rb1qCcFdBUS6dI1xDjyCmHfN1Br8T8He+aHgHo/5XXK3YTcVeHsfJgtdsXTpE
+         V5BUoKduBQca/qWIn7Tsz/PUQi180XgT6CsY4s3Nh1YQadqt0csXBPu1WylaL2pS+wBL
+         0WTua4FFoPuxxahpgt24ljboaMvmgjeqq0MMdZ5nC/6NTzKGpc42GsnVfzvQcqxAukS0
+         A73WS57hM/uW0NTqWHtLGbQHuiIukPo5tvmrkR1K1LTAN2w3hjwD4gUtxntXI6ru8kez
+         qhd4p+R6TVc70jhgtdjOV8shhpEhP1iSpazdKsh8bOxDtiCCYyo55QG8Gk1BCy0tK9Zi
+         Ywfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784034310; x=1784639110;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=3VsQ/KzpbmIPz/ijHmyGGKeW2JGVH1BkLtqfTcLEshA=;
+        b=c4lIbefNc56+bgmMyDtqHXemFC9YDTSCcvw66XO0G/Dnotc2J+97TGnr74zKh0nZrk
+         FxPqCJ89mnDkLn+olGTpiy/oFbJJxJCKQT308RMhOBZaL1HM5rZXwrcaN2z5AUro3qHO
+         WjO9DMcxHIJiJ8Ge3dPpJpF2JjOSAcrRg7kYvPU6LyBUvLSew9YfSt9s29rkxn4LVawn
+         baydLSc4V/Uhhl2M/ErCAryxTBhrJYnMC4BxTFpg5xZYXMmOnSFhzaOAzUuw9H5t6aK7
+         uQNEg/hO9JMLlK5FhIIEaZvCK/wiF2IXMoDU8cgFhOxvrlfL8+qMOVJ3uw0e92aY2Hm4
+         ZcUg==
+X-Forwarded-Encrypted: i=1; AHgh+RoGO5j4Wby4aM8D4pNBNyqDglGWsHt/c820onyHi2r70x13ibL2o7GTuMibzXhyai1toSBJV4Xn231kd5Pc@vger.kernel.org
+X-Gm-Message-State: AOJu0YzWpVRRVwCKTLEhKdXvok3kp+ATn3SJWNLf/SzHy2atfG2ly7MI
+	m2Q+Q+kdqaQBBvAcZH9KwtWZoBOXpFfBA0+0N2BoLFWi3xtOoJimlW+v
+X-Gm-Gg: AfdE7ckfFkbK7+nSch8TDX3SQHqmK/XSikkdBlUUlvA4rITxpTLQOzxpf+p7LGVcx4Y
+	AX38iOSpRxh1TlVuxx0MhQZ3eN2dnsMoWEbMhRcnRC/msz57YD3H67nO/8TKCC18mBjixrVJA72
+	fxisTSR93O8C2mtLyyznWezMJmoszls0kjdTQp9CP2xcP24m4V3iV+VPx/3fYgE/wbmVO7hd44f
+	Io19BBdRPNCDiU8MMPGhTmONL/pfqU0ABkgGqu4H7BWxmXva/AZwA81wQw46xqHeexNY5gEC8JB
+	kRuF0cXycdrqO1tNu5+2sAzsSpKGCKuwYpNBOMfZJhpwFEiLoPgE/uGTOVlW/pt/hV+UjX4zM+4
+	Q3Pu0ipg3aBkJFHo08eBFrilyWgPHfbj6ZoZI2+j3CRvwBJvoJ7hbgKl4sqrurOWaVn76M/4dal
+	zHKidsZ7XniPKmUhCdtFaHP8ZPz/ih5g==
+X-Received: by 2002:a5d:59c9:0:b0:472:edc7:b4c9 with SMTP id ffacd0b85a97d-47f2dce91aemr14973551f8f.38.1784034310061;
+        Tue, 14 Jul 2026 06:05:10 -0700 (PDT)
 Received: from localhost.localdomain ([151.27.210.52])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f464c30a9sm7670107f8f.31.2026.07.14.06.05.07
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f464c30a9sm7670107f8f.31.2026.07.14.06.05.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Jul 2026 06:05:08 -0700 (PDT)
+        Tue, 14 Jul 2026 06:05:09 -0700 (PDT)
 From: Oleksii Onchul <oleksiionchul@gmail.com>
 To: Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>
@@ -65,11 +67,14 @@ Cc: Rob Herring <robh@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Oleksii Onchul <oleksiionchul@gmail.com>
-Subject: [PATCH v2 0/2] arm64: dts: qcom: Add Xiaomi 11 Lite 5G NE
-Date: Tue, 14 Jul 2026 14:58:04 +0200
-Message-ID: <20260714125806.310708-1-oleksiionchul@gmail.com>
+	Oleksii Onchul <oleksiionchul@gmail.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: [PATCH v2 1/2] dt-bindings: arm: qcom: Add Xiaomi 11 Lite 5G NE
+Date: Tue, 14 Jul 2026 14:58:05 +0200
+Message-ID: <20260714125806.310708-2-oleksiionchul@gmail.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260714125806.310708-1-oleksiionchul@gmail.com>
+References: <20260714125806.310708-1-oleksiionchul@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -78,39 +83,27 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add initial support for the Xiaomi 11 Lite 5G NE, codenamed lisa.
+Add the compatible for the Xiaomi 11 Lite 5G NE, codenamed lisa,
+which is based on the Qualcomm SM7325 SoC.
 
-The supported hardware includes regulators, UFS, USB, GPU, remote
-processors, Wi-Fi, Bluetooth, touchscreen, flash LED, thermal sensors
-and the hardware buttons.
+Signed-off-by: Oleksii Onchul <oleksiionchul@gmail.com>
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+---
+ Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-Link to v1: https://lore.kernel.org/all/20260711184934.55701-1-oleksiionchul@gmail.com/
-
-Changes in v2:
-- Drop SD card support because card detection is not reliable yet.
-- Constrain the UFS VCC rail to 2.952 V.
-- Drop the unused FSA4480 interrupt.
-- Add the touchscreen pinctrl state.
-- Reference the reserved framebuffer through memory-region.
-- Enable ramoops ECC and use decimal notation for mem-type.
-- Allow the unused camera PMIC regulators to be disabled.
-- Document all GPIO reserved ranges inline.
-- Replace underscores in node names with hyphens.
-- Drop the unverified USB limitation comment.
-- Drop IPA properties now provided by kodiak.dtsi.
-- Drop redundant USB role properties.
-
-Oleksii Onchul (2):
-  dt-bindings: arm: qcom: Add Xiaomi 11 Lite 5G NE
-  arm64: dts: qcom: Add Xiaomi 11 Lite 5G NE
-
- .../devicetree/bindings/arm/qcom.yaml         |    1 +
- arch/arm64/boot/dts/qcom/Makefile             |    1 +
- .../boot/dts/qcom/sm7325-xiaomi-lisa.dts      | 1106 +++++++++++++++++
- 3 files changed, 1108 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/sm7325-xiaomi-lisa.dts
-
-
-base-commit: 1c553b3d0cfca9cac2186daea6e2f81808ce7d8b
+diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
+index 0b4c17419..494d1425d 100644
+--- a/Documentation/devicetree/bindings/arm/qcom.yaml
++++ b/Documentation/devicetree/bindings/arm/qcom.yaml
+@@ -1080,6 +1080,7 @@ properties:
+           - enum:
+               - motorola,dubai
+               - nothing,spacewar
++              - xiaomi,lisa
+               - xiaomi,taoyao
+           - const: qcom,sm7325
+ 
 -- 
 2.55.0
+
