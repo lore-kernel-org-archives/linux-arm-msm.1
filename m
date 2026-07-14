@@ -1,97 +1,150 @@
-Received: from cstnet.cn (smtp81.cstnet.cn [159.226.251.81])
-	(using TLSv1.2 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E222233EC;
-	Tue, 14 Jul 2026 03:25:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=159.226.251.81
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A8E7D18D636;
+	Tue, 14 Jul 2026 03:28:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1783999513; cv=none; b=OQ/d3TX4O82oRmwv0cYwhW+5nzaEGIlLfRzIsX5jWAV4zIWOnQd+e2njHjfa7eTBDCfOWvXY46CEeMoYO+V+onRey9FnuH3MHRuxMME26DK4GMPDbeK/8CrzzgA951Lw2qiDf22ig5Ljlir++OOu7oTiSnUNq4g5M4MMtcL83g8=
+	t=1783999718; cv=none; b=p/7rJYPjSxW6qHbqJWnC/IDfim1d2kQ/c6MuaWMfsES/3uWnvJ5zD1SIjNZUzA4nfED77ilDhXpgcnq4aYXRn7I44tqyPGfGf61DNAcb3S5VWsYl8LfG03UxlrtC3qLoY6vk5nCErbpDPp3qYE/hUkoSXJ6djggUIpb1+9S26KM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1783999513; c=relaxed/simple;
-	bh=57INZ5EIZXPkNkQ5ksZwJnwQ5tsWiS7zNlFQbIGZ1Zw=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=nTsf0WZecSPrjIL8/NhtsYa+ZZkckj+NQbN7Ad2AF3k918Z2CccRXSqO5Rls9zsNW3a0Hmg0J0FHu78oLU4x2dci72SD0TQtSOgRRsPvv56z8EkFCS0SjaPyPk8ZcAPhoLC82nJ1rPWe69zetdtILQBphvkANL1TjuIaf7fpvBQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn; spf=pass smtp.mailfrom=iscas.ac.cn; arc=none smtp.client-ip=159.226.251.81
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=iscas.ac.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=iscas.ac.cn
-Received: from localhost (unknown [36.110.52.2])
-	by APP-03 (Coremail) with SMTP id rQCowADXyK8SrFVqM8qkFw--.52595S2;
-	Tue, 14 Jul 2026 11:25:06 +0800 (CST)
-From: Chen Ni <nichen@iscas.ac.cn>
-To: andersson@kernel.org,
-	mathieu.poirier@linaro.org
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-remoteproc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Chen Ni <nichen@iscas.ac.cn>
-Subject: [PATCH] remoteproc: qcom_q6v5_wcss: remove unneeded semicolon
-Date: Tue, 14 Jul 2026 11:22:53 +0800
-Message-Id: <20260714032253.2768008-1-nichen@iscas.ac.cn>
-X-Mailer: git-send-email 2.25.1
+	s=arc-20240116; t=1783999718; c=relaxed/simple;
+	bh=tuOyGc2HvqsLhhkEBIqIuJ5wQ1fqizUe9vaqx38ybbk=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=Mgy1VKHl1nP7KvQu+LOSiJx1cCNnQmZ707lFE619OgyBRVlQ1OV2EtmAQPU2s7lpYLGYvCPaQQOhCWdotS7GjXCyvaxW3vstnpNIgxG9/ZXJSS8icVVhz+Ks8fEvQGVAQ2bgoakYwqSFtOt2keobKXrz/pyimeKyPCi3MunzI7o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mqef01Uk; arc=none smtp.client-ip=10.30.226.201
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mqef01Uk"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 70055C2BCF7;
+	Tue, 14 Jul 2026 03:28:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1783999718;
+	bh=tuOyGc2HvqsLhhkEBIqIuJ5wQ1fqizUe9vaqx38ybbk=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=mqef01UkobXMx7cBupSiuGbj2JnGgxFaxzbq+2sQN2AzWBcTgAe0UskH4u6fIoMND
+	 ie4C2JTsnDoQ2Y9SdgpmtaJkA1bWL+iFgd+mzOy5AmCc7kZ8J71fY5DzZiBFGlwk4c
+	 ik54x/midVfTpUe01FDhT3IXKFd7Q2AiveyMH5ei7qzsSFZJnbWNqWjpG8LTvr6Yya
+	 L6yRoj+sdb81QFu6S5fuuV6Jh3MvsmK4Mk9bJu/P0V3gdb9Y9EAp/+4Voe2TxW9pMR
+	 lBXkYjlWOCgpgegTRHzgSdeqcMxeJ7DbhxzvZTw3kdrqytkO0WXGbBK8xuTI4kRpgx
+	 MqScvwCa1FRIw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 54408C44507;
+	Tue, 14 Jul 2026 03:28:38 +0000 (UTC)
+From: Esteban Urrutia via B4 Relay <devnull+esteuwu.proton.me@kernel.org>
+Date: Mon, 13 Jul 2026 23:28:18 -0400
+Subject: [PATCH v3 2/3] clk: qcom: dispcc-sm8450: Migrate to
+ qcom_cc_driver_data
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:rQCowADXyK8SrFVqM8qkFw--.52595S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7WFy8Ww4DtF1kZw1DJr4xWFg_yoW8GrW8pF
-	sxWa10kry7tw4FgFsxZr4kAF15uay7tFyxGrsrG34xXw1YyryUJF4rGFy8tFZ5XFZYg3y3
-	XFsF9r1UuF17AFJanT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvj14x267AKxVWUJVW8JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
-	1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4U
-	JVWxJr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I8E87Iv6xkF7I0E14v26F
-	4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
-	7VC0I7IYx2IY67AKxVWUAVWUtwAv7VC2z280aVAFwI0_Gr1j6F4UJwAm72CE4IkC6x0Yz7
-	v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkF7I0En4kS
-	14v26r126r1DMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I
-	8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWU
-	twCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x
-	0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_
-	Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfU5k
-	u4UUUUU
-X-CM-SenderInfo: xqlfxv3q6l2u1dvotugofq/
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260713-sm8450-qol-dispcc-v3-2-56fd05822270@proton.me>
+References: <20260713-sm8450-qol-dispcc-v3-0-56fd05822270@proton.me>
+In-Reply-To: <20260713-sm8450-qol-dispcc-v3-0-56fd05822270@proton.me>
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Michael Turquette <mturquette@baylibre.com>, 
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Jagadeesh Kona <quic_jkona@quicinc.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org, 
+ Esteban Urrutia <esteuwu@proton.me>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1783999716; l=2981;
+ i=esteuwu@proton.me; s=20260622; h=from:subject:message-id;
+ bh=Jbnp8p29U7ihTi5nzGMIrBxFlgzT7kH3/JhcN7BtyIQ=;
+ b=fP44rtzAgx+pYQdrFCgjsq+g5In/H5GO93GUDY8+TCs1kWxhPt+TMwL+PeYzvO77jEhEIK7Oj
+ R4ZGbcf7QKNDewMBceIhAYdqOkN+s4BSBYxICimdeSXj+da/4Pgc53q
+X-Developer-Key: i=esteuwu@proton.me; a=ed25519;
+ pk=wToFt4mOAWkzbqb15Ye1hrhevI13vK9BcMUFiQ/me1M=
+X-Endpoint-Received: by B4 Relay for esteuwu@proton.me/20260622 with
+ auth_id=835
+X-Original-From: Esteban Urrutia <esteuwu@proton.me>
+Reply-To: esteuwu@proton.me
 
-Remove unnecessary semicolons reported by Coccinelle/coccicheck and the
-semantic patch at scripts/coccinelle/misc/semicolon.cocci.
+From: Esteban Urrutia <esteuwu@proton.me>
 
-Signed-off-by: Chen Ni <nichen@iscas.ac.cn>
+Migrate to qcom_cc_driver_data, which is used by other clock controller
+drivers.
+
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: Esteban Urrutia <esteuwu@proton.me>
 ---
- drivers/remoteproc/qcom_q6v5_wcss.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ drivers/clk/qcom/dispcc-sm8450.c | 38 ++++++++++++++++++++++++++++----------
+ 1 file changed, 28 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/remoteproc/qcom_q6v5_wcss.c b/drivers/remoteproc/qcom_q6v5_wcss.c
-index a6737b2d96da..318bb1a490b3 100644
---- a/drivers/remoteproc/qcom_q6v5_wcss.c
-+++ b/drivers/remoteproc/qcom_q6v5_wcss.c
-@@ -263,7 +263,7 @@ static int q6v7_wcss_reset(struct q6v5_wcss *wcss, struct rproc *rproc)
- 	if (ret) {
- 		dev_err(wcss->dev, "failed to enable clocks, err=%d\n", ret);
- 		return ret;
--	};
-+	}
+diff --git a/drivers/clk/qcom/dispcc-sm8450.c b/drivers/clk/qcom/dispcc-sm8450.c
+index c7e04bd315d5..facbf040ab9a 100644
+--- a/drivers/clk/qcom/dispcc-sm8450.c
++++ b/drivers/clk/qcom/dispcc-sm8450.c
+@@ -1778,6 +1778,29 @@ static const struct regmap_config disp_cc_sm8450_regmap_config = {
+ 	.fast_io = true,
+ };
  
- 	/* Write bootaddr to Q6WCSS */
- 	writel(rproc->bootaddr >> 4, wcss->reg_base + Q6SS_RST_EVB);
-@@ -324,7 +324,7 @@ static int q6v7_wcss_reset(struct q6v5_wcss *wcss, struct rproc *rproc)
- 	if (ret) {
- 		dev_err(wcss->dev, "failed to enable clocks, err=%d\n", ret);
- 		goto assert_aon_reset;
--	};
-+	}
++static struct clk_alpha_pll *disp_cc_sm8450_plls[] = {
++	&disp_cc_pll0,
++	&disp_cc_pll1,
++};
++
++static const u32 disp_cc_sm8450_critical_cbcrs[] = {
++	0xe05c, /* DISP_CC_XO_CLK */
++};
++
++static void disp_cc_sm8450_clk_regs_configure(struct device *dev, struct regmap *regmap)
++{
++	/* Enable clock gating for MDP clocks */
++	regmap_set_bits(regmap, DISP_CC_MISC_CMD, BIT(4));
++}
++
++static const struct qcom_cc_driver_data disp_cc_sm8450_driver_data = {
++	.alpha_plls = disp_cc_sm8450_plls,
++	.num_alpha_plls = ARRAY_SIZE(disp_cc_sm8450_plls),
++	.clk_cbcrs = disp_cc_sm8450_critical_cbcrs,
++	.num_clk_cbcrs = ARRAY_SIZE(disp_cc_sm8450_critical_cbcrs),
++	.clk_regs_configure = disp_cc_sm8450_clk_regs_configure,
++};
++
+ static const struct qcom_cc_desc disp_cc_sm8450_desc = {
+ 	.config = &disp_cc_sm8450_regmap_config,
+ 	.clks = disp_cc_sm8450_clocks,
+@@ -1786,6 +1809,7 @@ static const struct qcom_cc_desc disp_cc_sm8450_desc = {
+ 	.num_resets = ARRAY_SIZE(disp_cc_sm8450_resets),
+ 	.gdscs = disp_cc_sm8450_gdscs,
+ 	.num_gdscs = ARRAY_SIZE(disp_cc_sm8450_gdscs),
++	.driver_data = &disp_cc_sm8450_driver_data,
+ };
  
- 	return 0;
+ static const struct of_device_id disp_cc_sm8450_match_table[] = {
+@@ -1823,19 +1847,13 @@ static int disp_cc_sm8450_probe(struct platform_device *pdev)
+ 		disp_cc_pll1.regs = clk_alpha_pll_regs[CLK_ALPHA_PLL_TYPE_LUCID_OLE];
+ 		disp_cc_pll1.clkr.hw.init = &sm8475_disp_cc_pll1_init;
  
-@@ -424,7 +424,7 @@ static int q6v5_wcss_qcs404_power_on(struct q6v5_wcss *wcss)
- 	if (ret) {
- 		dev_err(wcss->dev, "failed to enable q6 clocks, err=%d\n", ret);
- 		goto disable_gcc_abhs_cbcr_clk;
--	};
-+	}
+-		clk_lucid_ole_pll_configure(&disp_cc_pll0, regmap, &sm8475_disp_cc_pll0_config);
+-		clk_lucid_ole_pll_configure(&disp_cc_pll1, regmap, &sm8475_disp_cc_pll1_config);
++		disp_cc_pll0.config = &sm8475_disp_cc_pll0_config;
++		disp_cc_pll1.config = &sm8475_disp_cc_pll1_config;
+ 	} else {
+-		clk_lucid_evo_pll_configure(&disp_cc_pll0, regmap, &disp_cc_pll0_config);
+-		clk_lucid_evo_pll_configure(&disp_cc_pll1, regmap, &disp_cc_pll1_config);
++		disp_cc_pll0.config = &disp_cc_pll0_config;
++		disp_cc_pll1.config = &disp_cc_pll1_config;
+ 	}
  
- 	/* Enable the Q6AHBS CBC, Q6SSTOP_Q6SS_AHBS_CBCR clock */
- 	ret = clk_prepare_enable(wcss->ahbs_cbcr);
+-	/* Enable clock gating for MDP clocks */
+-	regmap_update_bits(regmap, DISP_CC_MISC_CMD, 0x10, 0x10);
+-
+-	/* Keep some clocks always-on */
+-	qcom_branch_set_clk_en(regmap, 0xe05c); /* DISP_CC_XO_CLK */
+-
+ 	ret = qcom_cc_really_probe(&pdev->dev, &disp_cc_sm8450_desc, regmap);
+ 	if (ret)
+ 		goto err_put_rpm;
+
 -- 
-2.25.1
+2.55.0
+
 
