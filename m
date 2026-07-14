@@ -1,1224 +1,172 @@
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E1C546AF3D
-	for <linux-arm-msm@vger.kernel.org>; Tue, 14 Jul 2026 13:05:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1E9847276C
+	for <linux-arm-msm@vger.kernel.org>; Tue, 14 Jul 2026 13:06:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784034316; cv=none; b=UpC1ue0xpfQFP8+T/e0hVW1WA/1LPYQ+lFPgkjlDDMYpEBTEaEs7sv1nhLiuvx1VuL3e8EuI1XWcV1C7ICTRwDCWdBDV7CKsnua5u994TR2pz/UttsnMyv/XTwqivmMnrQnVZtVflJ2Bvuu8wK/4vW5xqmLFz21uJTbO/Y+2YE0=
+	t=1784034384; cv=none; b=uaPdygbWumwDDYbqLQ+uKrQf0sWFaGV3IWFrIJn0P2czlwuYhTIazDEjVvKPCbuy0uy/XB/qXisfWduzirYhV92rGfSs7qcaudqGsdlTAIFCGYLy8XRT619rDHyi6FNrt6Yp8F/yjrgS1Vtk220sB0rPrJ/aOlVRc0Tm2mvbuNo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784034316; c=relaxed/simple;
-	bh=C0ZEVXGLZrjvL0UNYcpR1gBGFBuhTppwSNTSJ+Di5WU=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=hM2ViAbP1YrPqKzRhL9ufZDTZ5cQc7XKTsvvxF90XeKgJpuKTUGEdJHtMXk/2mXAhtgb6AbtJ3jiDuwVyhn9apoS4Lx3awiBK2igQmP6B1wCntTZcSW8zd3xVDt9+50sbH4D+DHtgALaruvsJ2cXwFYLHIjF+tE7VzxOslH7IA4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=XeCmAT/p; arc=none smtp.client-ip=209.85.128.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1784034384; c=relaxed/simple;
+	bh=WgltQu4rBO97NE7AGv98oHbaEqfGh3fT6SDmoWy7vMc=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=VbulV51MaCQlY/jFAwa00TlIZBzZ2XM8qfEHlNa5XVekkR7IhRkE4Su0HoGMQgpvFNGi5cXYdmuJZho0zYneXCRxVylpmVj4qbYRTUyMxrgbDgIhG1+uY9S3siwJzdXqg7EfWefjweIYSK1u8yWb7olMSLlhoJhYnkn9PKxymcA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MTKcjYQm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ZeA5Wg8k; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XeCmAT/p"
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-493e8d4f4dcso33242115e9.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 14 Jul 2026 06:05:13 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MTKcjYQm";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZeA5Wg8k"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66EBO9Hu108278
+	for <linux-arm-msm@vger.kernel.org>; Tue, 14 Jul 2026 13:06:22 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=rpMhj+1GgnqY6rP0XzyhWl
+	Qv24rH02IBFpIK/76iZP8=; b=MTKcjYQmbseSAL/DqSWgq1Lcb4o3w6tbZSi0AO
+	vxa5eDqHXoy4mWAi/eit7XHTzCCy1zAQZ5H+I+70riSFAZ3JAB3VtZLhkycLoqJU
+	ya/PtyDM31WSRMhZSLXOKKaJ8lox4tKpPvIw9JHipuRVprd0eP0nYlKT1IsUy0U+
+	E8eUV1mNC89Vn0cSNwZFg9gfPPcxAvR0w6Y5z0/Xjw3V3bhDgzqdhSLF9BMlz0Oc
+	StKq4pYcsni5wKicabs3AW4OVIkA0siW7qve2gF9TQrPBklat+gj+1dPlKtX86YK
+	wIcjUQFeZ8yUfEnCqUOPpGzxjxHX7Yh87lLQP0a/1lxK9l1A==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fdesa9rda-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 14 Jul 2026 13:06:21 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c2af04aeeso12606831cf.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 14 Jul 2026 06:06:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784034311; x=1784639111; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=KEPsVtxqdVz89zFNyLuUKEXH2CpdrmX7g7K48xS61nM=;
-        b=XeCmAT/ph2v4vsbwK+m6t6iCWxqHCFQvyvcC9WderVmTsv3ARERYki9uhuMuTyxFu1
-         ml4STDSo8T9CsXmDxwaQ1ZbG3m2OP7GpDg7G0yOk/kmxQhhymAA6HrMB87Pth+GDhD5W
-         i+tCSEV+ibg3fROIDAQxcXz9G4FY3IAvb36SwcC149v6YH+WYTNEhEd9IqRg2mGcRwYw
-         /tYmI9KsXiIl/cW3CMHiS3pMehFbPb33UtMVnBreMz+xxvO+7wG+cuInhyStI2cCYFWj
-         EKh/bcr5CwgW0ga7wXWZicTofWC79m9eLwYgILXLpvURoTOAhuQrAGNiWsBbQ9H2+/ZJ
-         JExg==
+        d=oss.qualcomm.com; s=google; t=1784034381; x=1784639181; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=rpMhj+1GgnqY6rP0XzyhWlQv24rH02IBFpIK/76iZP8=;
+        b=ZeA5Wg8ko+R2dpL7ZyBjFim+STd/e7vEkdjAN/EvWLX6SuIEzbZ3IHjhz0tu2uhliv
+         6VOQUP4UmhQtPZ3xnp19gmKbfxsGVhcxlgf0wiHlD6vUxwWLYMJ8+fG0tYOTzusa1vBc
+         BqeqCyWTWKfGE15cJHPHqqsMuWDNCaYjfRC8cs8Y5DucIKzgqc6jovrAgsvqFzCi6b4u
+         WcBP6QSbK8kuXpS6PydRaqFSChguPzvwoW/P+Bi4fa+nMK3W/R8dLIFX5U0IwpuSwCng
+         A2N/e47hxVjA6/UlYXd6g+aD1nZLO6QF63PFfmoIlPepq9G4VWoV1zyFnp52Xf2sBvG9
+         f+/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784034311; x=1784639111;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=KEPsVtxqdVz89zFNyLuUKEXH2CpdrmX7g7K48xS61nM=;
-        b=hxUa3WniPZ/B4PCEqGBIeJyZt8plyJHZPxSqlHNild/zddA6iqlEDDnFKq7niux8s2
-         mGBLZG3y5/WPXwLQMOuFW4Ar46b+FL7ZymXUreYfbfzOoadnYy2rhFPESefCzdjN3m7B
-         e8jVd9/toMhkZQSN2wD+LKuJ8w5ciM6NQCJ1RSlaAlmES2VwAqCVcnFUe91L4HKB+tod
-         L4s6asYwYo/29M5paAteTS9yrNLAoGthn28LPgOgSzKu5z5/A0iDiUkEn3SAzUqKNiHc
-         25voqqo1kMcHzQXGgYbD0VegnNFQXk+p2TB6t3U/Ki4haec/U6iH9DvL35ejcZolzxIc
-         96fA==
-X-Forwarded-Encrypted: i=1; AHgh+RonqaNvxF6sBnLW5U9B+4kZ8nz/vHwnb16t7jhYxK88r7RvYWqJMbd+LKl37QSk2Rr31uudSduaZOGSsNVU@vger.kernel.org
-X-Gm-Message-State: AOJu0YyISS4wYbilvNaTC0a6l0anNAwfLzKS9VruC7DNxj5NvZW8kRH1
-	v3Mn/iFL6cytFrr/0rJwFnqxtjO4obL9j4hVJRWCfLmgYyz6GlMFPe94dgDkcA==
-X-Gm-Gg: AfdE7cnTm6sXjVcjLBHDQ3Ez/aeM+iihUDRI4dlVrUdOnWQWX087fscfcJLvzXOr0yS
-	xNpZZEw/2qlIkPOoq56oQOYJdJtHZfQIo4IASOBsIkE2QIReSLX6+Zw4hrWTYpvkWiGF2n3/0bK
-	i3xahIiSDQnpSFlEDV2AW7qirRhR6YjNyKftTQ0Pa+EjNIrul+cMv8Ux0SYw359aVEg9qvpmQ9i
-	t+kpxJNnl/DeD+jb/wlNep6+Bdws1Nc5N26pQdWtT9ZN2IivNsQ5JZmLn7UiedODNNq3meCfnzh
-	IyX1iIpE2rC1swsWjQRh9vfQAHvO0RVzeAXbos8lVbPai7iLJa4Xyv4s/fnthjlH6EqrfoD8rwB
-	9EgVnbsmiUhurBOiSErHkYux+Bp+bkouG/RORNdL0ZaXQVM1gy1vNr/MTtsbCjVyOz5vnOO1V99
-	nSxy3BdRPwhh1amvw9IRcX+CXe3AabI4iCKGQ/6VQb
-X-Received: by 2002:a05:600c:4693:b0:493:a6b7:cae5 with SMTP id 5b1f17b1804b1-493f883173fmr134917835e9.28.1784034311215;
-        Tue, 14 Jul 2026 06:05:11 -0700 (PDT)
-Received: from localhost.localdomain ([151.27.210.52])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f464c30a9sm7670107f8f.31.2026.07.14.06.05.10
+        d=1e100.net; s=20251104; t=1784034381; x=1784639181;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=rpMhj+1GgnqY6rP0XzyhWlQv24rH02IBFpIK/76iZP8=;
+        b=bso6ZPEB+x+b5ut2DNOhdzpt469IKikczM3EzQlJ9iJsMgeM/kw+zSGjR4FMRWKKO+
+         D8n76J6bdTMk/y+H2MgPojqSOeC4AkG+E4NwSk1zhMUrP6UUtsNFqgArokHGHvmK9TTW
+         LAyzEzLsnDyG9BW7Q19aWkY453KNIvETLGV01fpeQ5rAdylUmqvSfjKA9oUB2Kv/0JQV
+         ktOAzHls0H/4DWLAjPfiuh0Jk0nkL0T4biXszJUK7FOg8Exu9ntiiJPOv1oCHd8NS2NC
+         klvxrfZOY4MoF5zAhBaa0d73Onih0LT+uAjjFWVq4uZMZ62zk7cQo0Hqfw2+0ITwp2Wb
+         4Grw==
+X-Gm-Message-State: AOJu0Yy7FG092yzZ9FGjPKk8KfNzrqJYY9eDAcRkJfmJ3Ga18SbOyH/S
+	Q3POK8d8FXU19kaZGf8H6+p3PTt58W78m29bakmJU3+xCbGtrsGtZFWPNAXmnT9FniYttfGmcKm
+	sZli39gCHppJvJ7fpd42GP2etj3TWqZGO8fIJqycHiNM4MNHMssfKrnlabjsujdqWJz/k
+X-Gm-Gg: AfdE7cmPl6Ru2UIlZ71dbWkUx0Cd6ZrCb/j5gCqCqyynAAj9HFzwAZ14Tf9d6GCOubc
+	NScP13tpOFUFZqrxcze8uHozvphgTZ1UKRJnpgHxJpkQ0h9xvmJs9m651FB4FMUuPujEk/iJlsx
+	VdrFzTQ7iIQ06WLExM+jFxDVnn8O320auGhdboH2f4lu2Yq6mwf4NNiiGlB42d5Lcya2OWErXaq
+	49IulEMUCziX1aKskNuoHLrKLX6/6ogYG+CIIYBFHoXHtOf4BhOhW+sm02Mm85ftTxizhTBm/wl
+	8nHpkhqVXBPFVeZMQxHRYE3Lh83NgWQ1YRj1454jktQmVhIxDOYkY72QsNpJOU+/tGj40qhJ8xw
+	DhqDnIN7qakweRzU=
+X-Received: by 2002:a05:622a:95:b0:517:c65c:4987 with SMTP id d75a77b69052e-51caa128585mr180200441cf.22.1784034380920;
+        Tue, 14 Jul 2026 06:06:20 -0700 (PDT)
+X-Received: by 2002:a05:622a:95:b0:517:c65c:4987 with SMTP id d75a77b69052e-51caa128585mr180199951cf.22.1784034380380;
+        Tue, 14 Jul 2026 06:06:20 -0700 (PDT)
+Received: from hackbox.lan ([5.12.73.156])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f47688f29sm6323742f8f.21.2026.07.14.06.06.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 14 Jul 2026 06:05:10 -0700 (PDT)
-From: Oleksii Onchul <oleksiionchul@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Oleksii Onchul <oleksiionchul@gmail.com>
-Subject: [PATCH v2 2/2] arm64: dts: qcom: Add Xiaomi 11 Lite 5G NE
-Date: Tue, 14 Jul 2026 14:58:06 +0200
-Message-ID: <20260714125806.310708-3-oleksiionchul@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260714125806.310708-1-oleksiionchul@gmail.com>
-References: <20260714125806.310708-1-oleksiionchul@gmail.com>
+        Tue, 14 Jul 2026 06:06:19 -0700 (PDT)
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: [PATCH 0/3] arm64: dts: qcom: eliza: Add CDSP support and enable
+ it on MTP and CQS SoM
+Date: Tue, 14 Jul 2026 16:06:07 +0300
+Message-Id: <20260714-dts-qcom-eliza-add-cdsp-v1-0-525e757a23b0@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAD80VmoC/yXMQQ6CQAxA0auQrm0yTIiMXsW4GNuCNQo4RUIg3
+ N1Rlm/x/womScXgXKyQZFLTvssoDwXQPXatoHI2eOePri4r5NHwTf0L5alLxMiMxDag8yE0XJ8
+ okIdcD0kanf/ny3W3fW4PofG3g237ArHhQhZ7AAAA
+X-Change-ID: 20260714-dts-qcom-eliza-add-cdsp-0288fd79c8c2
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-Mailer: b4 0.15-dev-bc6c4
+X-Developer-Signature: v=1; a=openpgp-sha256; l=915;
+ i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
+ bh=WgltQu4rBO97NE7AGv98oHbaEqfGh3fT6SDmoWy7vMc=;
+ b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBqVjRF7g7vH7IkSslpwwpm7/FtXO6GBekSwfL9S
+ w58Y8FdBTiJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCalY0RQAKCRAbX0TJAJUV
+ VibKD/wPoE8o2OYe7esii9RZ/mP8uhAPDBv92KXNwLrG+x0NhtpMZFq35bMZV3mjdk7AIpggFB2
+ E/mInJKtOxrYVrIbKcIa8n3XEDII+BhbHUqmdm2xgLXUMM8TF31RTUDqJOBPMqewUYhOqLpN3xf
+ Jv3qso4Hrc5OJVFpjnly6EE5ODXgpFIGrmWb5CU12cRANxpOopqsyuOhkr1CjSCSXcY4UaQLLEU
+ rN5JUpH1w0uN52G38l70TmScwujDVoBDtVceDw6xo1Xfb2fVGl5zDQJ0tWXb+U4x8YuZoTl6tLe
+ KQYqNwdRB+u8CJWgzTq/WujZYV2LAjaxRIStzBI4VuAc1XwIwvlv8+8CykhAdAuTkSoOdIu9wan
+ lYYiK+4rMVBXQ9uwoeKeZ9j51/O4ZN4NNc71K7ZGKxJaDwxxOA6/t8Rk75vMPkTESXJd1KzyCru
+ s5bfn1l0iswd3px0A+PXs36te3JOkvY4vVWt9hE9PNEGc9UOKX6dn4Wtbk5dH3dqzarcj8Tx5KF
+ idQXaHEhqzTwcd07lFXIhdgIXYZFnVL2GByJXNp+92yWHa3nbvR1myFyC9AWphvfyPhewU8swXD
+ L8GLhtx1MZDYkZ48G6XPeR2EiSLPi8MKau2tm08Czfc7+TrI52eTOx/MCbhrztG6CSGWMcHIcdu
+ X2ULzS8BhK0jAxA==
+X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
+ fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE0MDEzNiBTYWx0ZWRfX1iRzXIWHZMal
+ OuodY6yTjeGVJij0SAOEM1q+p33DUIzH6z+aKBd35yEKXg40Nylc/DGLytG9LrvZjCL61uczm/3
+ X5WcF94w/OtCjJVWDLdWXRpggHhECH4=
+X-Proofpoint-GUID: zs6OkijTy81frdeWxu33QF5jTysa_y7O
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE0MDEzNiBTYWx0ZWRfX4nrx/H7FrO8p
+ gxiDI/4ckNff4x9CL2lp215I1/d1QyJuOwCo2tnqZKLw9uLYW0x7uQVgnEYk8ymXqe5snveYKbo
+ UjDlyNyKnrozG/2ogpce9h9OBGwsTS/jVz0fGgdPFaJJlsFHcJ+mGza8b6MB+PK1eu53KSNp3yo
+ faJlDxysgSUZhkcgGXsyb7zEq+uwpuZq7ny5GPAr3Z2AjqWk1vx/RIkYJzKT2/fCd9pXvle1qky
+ 80s4n9czECQVBMZ89paTdx+RRBviz4NgmPhMbpMs90EX54IDGhhI7I3zRPqybyyGe5ey3kMsjxJ
+ yWflKck9coel2a8DRYxtvB/7qI2ZEGF6kwcjPrOaktYJLui48sisLua9C+A6DZI5GjnoiHWwYIg
+ U39SaU6M1a8QiSLs4OasGYPSRhhYXTmSNpOoAADt0KsIomequAITTSdv5LNKGDHGoh9WyiAJJdy
+ oDUFiMuql7+CMZoljEw==
+X-Authority-Analysis: v=2.4 cv=PZLPQChd c=1 sm=1 tr=0 ts=6a56344e cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=qUYP/O48JsHWwiZSxXr1NQ==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=GS9eBAP2CcFxjFPammsA:9 a=QEXdDO2ut3YA:10
+ a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-ORIG-GUID: zs6OkijTy81frdeWxu33QF5jTysa_y7O
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-14_03,2026-07-10_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 malwarescore=0 suspectscore=0 priorityscore=1501
+ lowpriorityscore=0 adultscore=0 clxscore=1015 impostorscore=0 bulkscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607140136
 
-Add initial support for the Xiaomi 11 Lite 5G NE, codenamed lisa.
+Describe the CDSP node and the related SMP2P, then enable the CDSP on
+both the MTP and CQS SoM.
 
-The supported hardware includes regulators, UFS, USB, GPU, remote
-processors, Wi-Fi, Bluetooth, touchscreen, flash LED, thermal sensors
-and the hardware buttons.
+Driver support and bindings update are here:
+https://lore.kernel.org/all/20260714-remoteproc-eliza-cdsp-v1-0-32eb7a1f2c59@oss.qualcomm.com/
 
-Signed-off-by: Oleksii Onchul <oleksiionchul@gmail.com>
+Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/Makefile             |    1 +
- .../boot/dts/qcom/sm7325-xiaomi-lisa.dts      | 1106 +++++++++++++++++
- 2 files changed, 1107 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/sm7325-xiaomi-lisa.dts
+Abel Vesa (3):
+      arm64: dts: qcom: eliza: Describe the CDSP remoteproc
+      arm64: dts: qcom: eliza-mtp: Enable CDSP remoteproc
+      arm64: dts: qcom: eliza-cqs-som: Enable CDSP remoteproc
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index e05414290..c25ac4954 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -355,6 +355,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sm7325-motorola-dubai.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm7325-motorola-dubai-csot.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm7325-motorola-dubai-tianma.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm7325-nothing-spacewar.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= sm7325-xiaomi-lisa.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm7325-xiaomi-taoyao.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-hdk.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-microsoft-surface-duo.dtb
-diff --git a/arch/arm64/boot/dts/qcom/sm7325-xiaomi-lisa.dts b/arch/arm64/boot/dts/qcom/sm7325-xiaomi-lisa.dts
-new file mode 100644
-index 000000000..71680f467
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/sm7325-xiaomi-lisa.dts
-@@ -0,0 +1,1106 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) 2024, Jens Reidel <adrian@travitia.xyz>
-+ * Copyright (c) 2026, Oleksii Onchul <oleksiionchul@gmail.com>
-+ */
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/iio/qcom,spmi-adc7-pm7325.h>
-+#include <dt-bindings/iio/qcom,spmi-adc7-pm8350b.h>
-+#include <dt-bindings/iio/qcom,spmi-adc7-pmk8350.h>
-+#include <dt-bindings/leds/common.h>
-+#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
-+#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
-+
-+#include "sm7325.dtsi"
-+#include "pm7325.dtsi"
-+#include "pm8350b.dtsi" /* PM7325B */
-+#include "pm8350c.dtsi" /* PM7350C */
-+#include "pmk8350.dtsi" /* PMK7325 */
-+
-+/* The following reserved memory regions have different addresses or sizes */
-+/delete-node/ &adsp_mem;
-+/delete-node/ &adsp_rpc_remote_heap_mem;
-+/delete-node/ &cdsp_mem;
-+/delete-node/ &rmtfs_mem;
-+
-+/ {
-+	model = "Xiaomi 11 Lite 5G NE";
-+	compatible = "xiaomi,lisa", "qcom,sm7325";
-+	chassis-type = "handset";
-+
-+	aliases {
-+		serial0 = &uart5;
-+		serial1 = &uart7;
-+	};
-+
-+	chosen {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		stdout-path = "serial0:115200n8";
-+
-+		framebuffer0: framebuffer {
-+			compatible = "simple-framebuffer";
-+			memory-region = <&framebuffer_mem>;
-+			width = <1080>;
-+			height = <2400>;
-+			stride = <(1080 * 4)>;
-+			format = "a8r8g8b8";
-+
-+			clocks = <&gcc GCC_DISP_HF_AXI_CLK>,
-+				 <&dispcc DISP_CC_MDSS_MDP_CLK>,
-+				 <&dispcc DISP_CC_MDSS_BYTE0_CLK>,
-+				 <&dispcc DISP_CC_MDSS_BYTE0_INTF_CLK>,
-+				 <&dispcc DISP_CC_MDSS_PCLK0_CLK>,
-+				 <&dispcc DISP_CC_MDSS_VSYNC_CLK>;
-+			power-domains = <&dispcc DISP_CC_MDSS_CORE_GDSC>;
-+		};
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+
-+		pinctrl-0 = <&volume_up_default>;
-+		pinctrl-names = "default";
-+
-+		key-volume-up {
-+			label = "Volume Up";
-+			gpios = <&pm7325_gpios 6 GPIO_ACTIVE_LOW>;
-+			linux,code = <KEY_VOLUMEUP>;
-+		};
-+	};
-+
-+	pmic-glink {
-+		compatible = "qcom,sm7325-pmic-glink",
-+			     "qcom,qcm6490-pmic-glink",
-+			     "qcom,pmic-glink";
-+
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		orientation-gpios = <&tlmm 140 GPIO_ACTIVE_HIGH>;
-+
-+		connector@0 {
-+			compatible = "usb-c-connector";
-+			reg = <0>;
-+			power-role = "dual";
-+			data-role = "dual";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@0 {
-+					reg = <0>;
-+
-+					pmic_glink_hs_in: endpoint {
-+						remote-endpoint = <&usb_1_dwc3_hs>;
-+					};
-+				};
-+
-+				port@2 {
-+					reg = <2>;
-+
-+					pmic_glink_sbu: endpoint {
-+						remote-endpoint = <&fsa4480_sbu_mux>;
-+					};
-+				};
-+			};
-+		};
-+	};
-+
-+	reserved-memory {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		cdsp_secure_heap_mem: cdsp-secure-heap@81800000 {
-+			reg = <0x0 0x81800000 0x0 0x1e00000>;
-+			no-map;
-+		};
-+
-+		adsp_mem: adsp@86700000 {
-+			reg = <0x0 0x86700000 0x0 0x4000000>;
-+			no-map;
-+		};
-+
-+		/* Mainline video_mem is downstream cvp_mem */
-+		real_video_mem: video@8ad00000 {
-+			reg = <0x0 0x8ad00000 0x0 0x500000>;
-+			no-map;
-+		};
-+
-+		ipa_gsi_mem: ipa-gsi@8b710000 {
-+			reg = <0x0 0x8b710000 0x0 0xa000>;
-+			no-map;
-+		};
-+
-+		cdsp_mem: cdsp@9c700000 {
-+			reg = <0x0 0x9c700000 0x0 0x1e00000>;
-+			no-map;
-+		};
-+
-+		adsp_rpc_remote_heap_mem: adsp-rpc-remote-heap@9e500000 {
-+			reg = <0x0 0x9e500000 0x0 0x800000>;
-+			no-map;
-+		};
-+
-+		ramoops@a9000000 {
-+			compatible = "ramoops";
-+			reg = <0x0 0xa9000000 0x0 0x200000>;
-+			pmsg-size = <0x200000>;
-+			ecc-size = <16>;
-+			mem-type = <2>;
-+		};
-+
-+		removed_mem: removed@c0000000 {
-+			reg = <0x0 0xc0000000 0x0 0x5100000>;
-+			no-map;
-+		};
-+
-+		pil_trustedvm_mem: pil-trustedvm-region@d0800000 {
-+			reg = <0x0 0xd0800000 0x0 0x76f7000>;
-+			no-map;
-+		};
-+
-+		qrtr_shmem: qrtr-shmem@d7ef7000 {
-+			reg = <0x0 0xd7ef7000 0x0 0x9000>;
-+			no-map;
-+		};
-+
-+		neuron_block_0_mem: neuron-block@d7f00000 {
-+			reg = <0x0 0xd7f00000 0x0 0x80000>;
-+			no-map;
-+		};
-+
-+		neuron_block_1_mem: neuron-block@d7f80000 {
-+			reg = <0x0 0xd7f80000 0x0 0x80000>;
-+			no-map;
-+		};
-+
-+		framebuffer_mem: framebuffer@e1000000 {
-+			reg = <0x0 0xe1000000 0x0 (1080 * 2400 * 4)>;
-+			no-map;
-+		};
-+
-+		rmtfs_mem: rmtfs@ef500000 {
-+			compatible = "qcom,rmtfs-mem";
-+			reg = <0x0 0xef500000 0x0 0x280000>;
-+			no-map;
-+
-+			qcom,client-id = <1>;
-+			qcom,vmid = <QCOM_SCM_VMID_MSS_MSA>,
-+				    <QCOM_SCM_VMID_NAV>;
-+		};
-+	};
-+
-+	vph_pwr: vph-pwr-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vph_pwr";
-+		regulator-min-microvolt = <3700000>;
-+		regulator-max-microvolt = <3700000>;
-+	};
-+
-+	/* S2B is really ebi.lvl but it's there for supply map completeness sake. */
-+	vreg_s2b_0p7: smpa3-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vreg_s2b_0p7";
-+
-+		regulator-min-microvolt = <700000>;
-+		regulator-max-microvolt = <700000>;
-+		regulator-always-on;
-+		vin-supply = <&vph_pwr>;
-+	};
-+};
-+
-+&apps_rsc {
-+	regulators-0 {
-+		compatible = "qcom,pm7325-rpmh-regulators";
-+		qcom,pmic-id = "b";
-+
-+		vdd-s1-supply = <&vph_pwr>;
-+		vdd-s2-supply = <&vph_pwr>;
-+		vdd-s7-supply = <&vph_pwr>;
-+		vdd-s8-supply = <&vph_pwr>;
-+
-+		vdd-l1-l4-l12-l15-supply = <&vreg_s7b_0p952>;
-+		vdd-l2-l7-supply = <&vreg_bob>;
-+		vdd-l3-supply = <&vreg_s2b_0p7>;
-+		vdd-l5-supply = <&vreg_s2b_0p7>;
-+		vdd-l6-l9-l10-supply = <&vreg_s8b_1p256>;
-+		vdd-l8-supply = <&vreg_s7b_0p952>;
-+		vdd-l11-l17-l18-l19-supply = <&vreg_s1b_1p856>;
-+		vdd-l13-supply = <&vreg_s7b_0p952>;
-+		vdd-l14-l16-supply = <&vreg_s8b_1p256>;
-+
-+		/*
-+		 * S2, L4-L5 are ARCs:
-+		 * S2 - ebi.lvl,
-+		 * L4 - lmx.lvl,
-+		 * l5 - lcx.lvl.
-+		 *
-+		 * L10 are unused.
-+		 */
-+
-+		vdd19_pmu_rfa_i:
-+		vreg_s1b_1p856: smps1 {
-+			regulator-name = "vreg_s1b_1p856";
-+			regulator-min-microvolt = <1840000>;
-+			regulator-max-microvolt = <2040000>;
-+		};
-+
-+		vreg_s7b_0p952: smps7 {
-+			regulator-name = "vreg_s7b_0p952";
-+			regulator-min-microvolt = <535000>;
-+			regulator-max-microvolt = <1120000>;
-+		};
-+
-+		vdd13_pmu_rfa_i:
-+		vreg_s8b_1p256: smps8 {
-+			regulator-name = "vreg_s8b_1p256";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1500000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_RET>;
-+		};
-+
-+		vreg_l1b_0p912: ldo1 {
-+			regulator-name = "vreg_l1b_0p912";
-+			regulator-min-microvolt = <825000>;
-+			regulator-max-microvolt = <925000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vdd_a_usbhs_3p1:
-+		vreg_l2b_3p072: ldo2 {
-+			regulator-name = "vreg_l2b_3p072";
-+			regulator-min-microvolt = <2700000>;
-+			regulator-max-microvolt = <3544000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l3b_0p6: ldo3 {
-+			regulator-name = "vreg_l3b_0p6";
-+			regulator-min-microvolt = <312000>;
-+			regulator-max-microvolt = <910000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vdd_a_dsi_0_1p2:
-+		vdd_a_ufs_0_1p2:
-+		vreg_l6b_1p2: ldo6 {
-+			regulator-name = "vreg_l6b_1p2";
-+			regulator-min-microvolt = <1140000>;
-+			regulator-max-microvolt = <1260000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l7b_2p96: ldo7 {
-+			regulator-name = "vreg_l7b_2p96";
-+			/* Constrained for UFS VCC, at least until UFS driver scales voltage */
-+			regulator-min-microvolt = <2952000>;
-+			regulator-max-microvolt = <2952000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l8b_0p904: ldo8 {
-+			regulator-name = "vreg_l8b_0p904";
-+			regulator-min-microvolt = <870000>;
-+			regulator-max-microvolt = <970000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l9b_1p2: ldo9 {
-+			regulator-name = "vreg_l9b_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1304000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l11b_1p776: ldo11 {
-+			regulator-name = "vreg_l11b_1p776";
-+			regulator-min-microvolt = <1504000>;
-+			regulator-max-microvolt = <2000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l12b_0p8: ldo12 {
-+			regulator-name = "vreg_l12b_0p8";
-+			regulator-min-microvolt = <751000>;
-+			regulator-max-microvolt = <824000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l13b_0p8: ldo13 {
-+			regulator-name = "vreg_l13b_0p8";
-+			regulator-min-microvolt = <530000>;
-+			regulator-max-microvolt = <824000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l14b_1p2: ldo14 {
-+			regulator-name = "vreg_l14b_1p2";
-+			regulator-min-microvolt = <1080000>;
-+			regulator-max-microvolt = <1304000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l15b_0p88: ldo15 {
-+			regulator-name = "vreg_l15b_0p88";
-+			regulator-min-microvolt = <765000>;
-+			regulator-max-microvolt = <1020000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l16b_1p2: ldo16 {
-+			regulator-name = "vreg_l16b_1p2";
-+			regulator-min-microvolt = <1100000>;
-+			regulator-max-microvolt = <1300000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l17b_1p8: ldo17 {
-+			regulator-name = "vreg_l17b_1p8";
-+			regulator-min-microvolt = <1700000>;
-+			regulator-max-microvolt = <1900000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l18b_1p8: ldo18 {
-+			regulator-name = "vreg_l18b_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <2000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l19b_1p8: ldo19 {
-+			regulator-name = "vreg_l19b_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <2000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+	};
-+
-+	regulators-1 {
-+		compatible = "qcom,pm8350c-rpmh-regulators";
-+		qcom,pmic-id = "c";
-+
-+		vdd-s1-supply = <&vph_pwr>;
-+		vdd-s2-supply = <&vph_pwr>;
-+		vdd-s5-supply = <&vph_pwr>;
-+		vdd-s7-supply = <&vph_pwr>;
-+		vdd-s9-supply = <&vph_pwr>;
-+		vdd-s10-supply = <&vph_pwr>;
-+
-+		vdd-l1-l12-supply = <&vreg_s1b_1p856>;
-+		vdd-l2-l8-supply = <&vreg_s1b_1p856>;
-+		vdd-l3-l4-l5-l7-l13-supply = <&vreg_bob>;
-+		vdd-l6-l9-l11-supply = <&vreg_bob>;
-+		vdd-l10-supply = <&vreg_s7b_0p952>;
-+
-+		vdd-bob-supply = <&vph_pwr>;
-+
-+		/*
-+		 * S2, S5, S7, S10 are ARCs:
-+		 * S2 - cx.lvl,
-+		 * S5 - mss.lvl,
-+		 * S7 - gfx.lvl,
-+		 * S10 - mx.lvl.
-+		 */
-+
-+		vreg_s1c_2p2: smps1 {
-+			regulator-name = "vreg_s1c_2p2";
-+			regulator-min-microvolt = <2190000>;
-+			regulator-max-microvolt = <2210000>;
-+		};
-+
-+		vreg_s9c_0p676: smps9 {
-+			regulator-name = "vreg_s9c_0p676";
-+			regulator-min-microvolt = <1010000>;
-+			regulator-max-microvolt = <1170000>;
-+		};
-+
-+		vdd_a_usbhs_1p8:
-+		vdd_qfprom:
-+		vreg_l1c_1p8: ldo1 {
-+			regulator-name = "vreg_l1c_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1980000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l2c_1p8: ldo2 {
-+			regulator-name = "vreg_l2c_1p8";
-+			regulator-min-microvolt = <1620000>;
-+			regulator-max-microvolt = <1980000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l4c_1p8_3p0: ldo4 {
-+			regulator-name = "vreg_l4c_1p8_3p0";
-+			regulator-min-microvolt = <1620000>;
-+			regulator-max-microvolt = <3300000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l5c_1p8_3p0: ldo5 {
-+			regulator-name = "vreg_l5c_1p8_3p0";
-+			regulator-min-microvolt = <1620000>;
-+			regulator-max-microvolt = <3300000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l6c_2p96: ldo6 {
-+			regulator-name = "vreg_l6c_2p96";
-+			regulator-min-microvolt = <1650000>;
-+			regulator-max-microvolt = <3544000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l7c_3p0: ldo7 {
-+			regulator-name = "vreg_l7c_3p0";
-+			regulator-min-microvolt = <3000000>;
-+			regulator-max-microvolt = <3544000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l8c_1p8: ldo8 {
-+			regulator-name = "vreg_l8c_1p8";
-+			regulator-min-microvolt = <1620000>;
-+			regulator-max-microvolt = <2000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-always-on;
-+		};
-+
-+		vreg_l9c_2p96: ldo9 {
-+			regulator-name = "vreg_l9c_2p96";
-+			regulator-min-microvolt = <2700000>;
-+			regulator-max-microvolt = <3544000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vdd_a_dsi_0_0p9:
-+		vdd_a_dsi_0_pll_0p9:
-+		vdd_a_ufs_0_core:
-+		vdd_a_usbhs_core:
-+		vreg_l10c_0p88: ldo10 {
-+			regulator-name = "vreg_l10c_0p88";
-+			regulator-min-microvolt = <720000>;
-+			regulator-max-microvolt = <1050000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l11c_2p8: ldo11 {
-+			regulator-name = "vreg_l11c_2p8";
-+			regulator-min-microvolt = <2800000>;
-+			regulator-max-microvolt = <3544000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l12c_1p8: ldo12 {
-+			regulator-name = "vreg_l12c_1p8";
-+			regulator-min-microvolt = <1650000>;
-+			regulator-max-microvolt = <2000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l13c_3p0: ldo13 {
-+			regulator-name = "vreg_l13c_3p0";
-+			regulator-min-microvolt = <2700000>;
-+			regulator-max-microvolt = <3544000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vdd_flash:
-+		vdd_iris_rgb:
-+		vdd_mic_bias:
-+		vreg_bob: bob {
-+			regulator-name = "vreg_bob";
-+			regulator-min-microvolt = <3008000>;
-+			regulator-max-microvolt = <3960000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+		};
-+	};
-+};
-+
-+&gcc {
-+	protected-clocks = <GCC_CFG_NOC_LPASS_CLK>,
-+			   <GCC_MSS_CFG_AHB_CLK>,
-+			   <GCC_MSS_OFFLINE_AXI_CLK>,
-+			   <GCC_MSS_Q6SS_BOOT_CLK_SRC>,
-+			   <GCC_MSS_Q6_MEMNOC_AXI_CLK>,
-+			   <GCC_MSS_SNOC_AXI_CLK>,
-+			   <GCC_QSPI_CNOC_PERIPH_AHB_CLK>,
-+			   <GCC_QSPI_CORE_CLK>,
-+			   <GCC_QSPI_CORE_CLK_SRC>,
-+			   <GCC_SEC_CTRL_CLK_SRC>,
-+			   <GCC_WPSS_AHB_BDG_MST_CLK>,
-+			   <GCC_WPSS_AHB_CLK>,
-+			   <GCC_WPSS_RSCP_CLK>;
-+};
-+
-+&gpi_dma0 {
-+	status = "okay";
-+};
-+
-+&gpi_dma1 {
-+	status = "okay";
-+};
-+
-+&gpu {
-+	status = "okay";
-+};
-+
-+&gpu_zap_shader {
-+	firmware-name = "qcom/sm7325/xiaomi/lisa/a660_zap.mbn";
-+};
-+
-+&i2c1 {
-+	clock-frequency = <100000>;
-+	status = "okay";
-+
-+	pm8008: pmic@8 {
-+		compatible = "qcom,pm8008";
-+		reg = <0x8>;
-+
-+		interrupts-extended = <&tlmm 25 IRQ_TYPE_EDGE_RISING>;
-+		reset-gpios = <&pm8350c_gpios 3 GPIO_ACTIVE_LOW>;
-+
-+		vdd-l1-l2-supply = <&vreg_s8b_1p256>;
-+		vdd-l3-l4-supply = <&vreg_bob>;
-+		vdd-l5-supply = <&vreg_s1b_1p856>;
-+		vdd-l6-supply = <&vreg_bob>;
-+		vdd-l7-supply = <&vreg_bob>;
-+
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pm8008_int_default>, <&pm8008_reset_n_default>;
-+
-+		gpio-controller;
-+		#gpio-cells = <2>;
-+		gpio-ranges = <&pm8008 0 0 2>;
-+
-+		interrupt-controller;
-+		#interrupt-cells = <2>;
-+
-+		#thermal-sensor-cells = <0>;
-+
-+		regulators {
-+			vreg_l1p: ldo1 {
-+				regulator-name = "vreg_l1p";
-+				regulator-min-microvolt = <1000000>;
-+				regulator-max-microvolt = <1200000>;
-+			};
-+
-+			vreg_l2p: ldo2 {
-+				regulator-name = "vreg_l2p";
-+				regulator-min-microvolt = <950000>;
-+				regulator-max-microvolt = <1200000>;
-+			};
-+
-+			vreg_l3p: ldo3 {
-+				regulator-name = "vreg_l3p";
-+				regulator-min-microvolt = <2700000>;
-+				regulator-max-microvolt = <3000000>;
-+			};
-+
-+			vreg_l4p: ldo4 {
-+				regulator-name = "vreg_l4p";
-+				regulator-min-microvolt = <2700000>;
-+				regulator-max-microvolt = <2900000>;
-+			};
-+
-+			vreg_l5p: ldo5 {
-+				regulator-name = "vreg_l5p";
-+				regulator-min-microvolt = <1700000>;
-+				regulator-max-microvolt = <1900000>;
-+			};
-+
-+			vreg_l6p: ldo6 {
-+				regulator-name = "vreg_l6p";
-+				regulator-min-microvolt = <2700000>;
-+				regulator-max-microvolt = <2900000>;
-+			};
-+
-+			vreg_l7p: ldo7 {
-+				regulator-name = "vreg_l7p";
-+				regulator-min-microvolt = <2700000>;
-+				regulator-max-microvolt = <3000000>;
-+			};
-+		};
-+	};
-+
-+	fsa4480: typec-mux@42 {
-+		compatible = "fcs,fsa4480";
-+		reg = <0x42>;
-+
-+		vcc-supply = <&vreg_bob>;
-+		mode-switch;
-+		orientation-switch;
-+
-+		port {
-+			fsa4480_sbu_mux: endpoint {
-+				remote-endpoint = <&pmic_glink_sbu>;
-+			};
-+		};
-+	};
-+};
-+
-+&i2c4 {
-+	clock-frequency = <100000>;
-+	status = "okay";
-+
-+	/* awinic,aw8624_haptic @ 5a */
-+};
-+
-+&ipa {
-+	firmware-name = "qcom/sm7325/xiaomi/lisa/ipa_fws.mbn";
-+
-+	status = "okay";
-+};
-+
-+&pm7325_gpios {
-+	volume_up_default: volume-up-default-state {
-+		pins = "gpio6";
-+		function = PMIC_GPIO_FUNC_NORMAL;
-+		power-source = <1>;
-+		bias-pull-up;
-+		input-enable;
-+	};
-+};
-+
-+&pm8350c_gpios {
-+	pm8008_reset_n_default: pm8008-reset-n-default-state {
-+		pins = "gpio3";
-+		function = PMIC_GPIO_FUNC_NORMAL;
-+		bias-pull-down;
-+	};
-+};
-+
-+&pm8350c_flash {
-+	status = "okay";
-+
-+	led-0 {
-+		function = LED_FUNCTION_FLASH;
-+		color = <LED_COLOR_ID_WHITE>;
-+		led-sources = <1>, <4>;
-+		led-max-microamp = <500000>;
-+		flash-max-microamp = <1500000>;
-+		flash-max-timeout-us = <1280000>;
-+	};
-+};
-+
-+&pmk8350_adc_tm {
-+	status = "okay";
-+
-+	/* PMK8350 */
-+	xo-therm@0 {
-+		reg = <0>;
-+		io-channels = <&pmk8350_vadc PMK8350_ADC7_AMUX_THM1_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time-us = <200>;
-+	};
-+
-+	/* PM7325 */
-+	quiet-therm@1 {
-+		reg = <1>;
-+		io-channels = <&pmk8350_vadc PM7325_ADC7_AMUX_THM1_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time-us = <200>;
-+	};
-+
-+	cam-flash-therm@2 {
-+		reg = <2>;
-+		io-channels = <&pmk8350_vadc PM7325_ADC7_AMUX_THM2_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time-us = <200>;
-+	};
-+
-+	sdm-skin-therm@3 {
-+		reg = <3>;
-+		io-channels = <&pmk8350_vadc PM7325_ADC7_AMUX_THM3_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time-us = <200>;
-+	};
-+
-+	wide-rfc-therm@4 {
-+		reg = <4>;
-+		io-channels = <&pmk8350_vadc PM7325_ADC7_AMUX_THM4_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time-us = <200>;
-+	};
-+
-+	5g-pa-therm@5 {
-+		reg = <5>;
-+		io-channels = <&pmk8350_vadc PM7325_ADC7_AMUX_THM5_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time-us = <200>;
-+	};
-+
-+	4g-pa-therm@6 {
-+		reg = <6>;
-+		io-channels = <&pmk8350_vadc PM7325_ADC7_GPIO3_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time-us = <200>;
-+	};
-+
-+	/* PM8350B */
-+	chg-skin-therm@7 {
-+		reg = <7>;
-+		io-channels = <&pmk8350_vadc PM8350B_ADC7_GPIO2_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time-us = <200>;
-+	};
-+};
-+
-+&pmk8350_rtc {
-+	status = "okay";
-+};
-+
-+&pmk8350_vadc {
-+	/* PMK8350 */
-+	channel@44 {
-+		reg = <PMK8350_ADC7_AMUX_THM1_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+		label = "pmk8350_xo_therm";
-+	};
-+
-+	/* PM7325 */
-+	channel@144 {
-+		reg = <PM7325_ADC7_AMUX_THM1_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+		label = "pm7325_quiet_therm";
-+	};
-+
-+	channel@145 {
-+		reg = <PM7325_ADC7_AMUX_THM2_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+		label = "pm7325_cam_flash_therm";
-+	};
-+
-+	channel@146 {
-+		reg = <PM7325_ADC7_AMUX_THM3_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+		label = "pm7325_sdm_skin_therm";
-+	};
-+
-+	channel@147 {
-+		reg = <PM7325_ADC7_AMUX_THM4_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+		label = "pm7325_wide_rfc_therm";
-+	};
-+
-+	channel@148 {
-+		reg = <PM7325_ADC7_AMUX_THM5_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+		label = "pm7325_5g_pa_therm";
-+	};
-+
-+	channel@14c {
-+		reg = <PM7325_ADC7_GPIO3_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+		label = "pm7325_4g_pa_therm";
-+	};
-+
-+	/* PM8350B */
-+	channel@34b {
-+		reg = <PM8350B_ADC7_GPIO2_100K_PU>;
-+		qcom,ratiometric;
-+		qcom,hw-settle-time = <200>;
-+		qcom,pre-scaling = <1 1>;
-+		label = "pm8350b_chg_skin_therm";
-+	};
-+};
-+
-+&pon_pwrkey {
-+	status = "okay";
-+};
-+
-+&pon_resin {
-+	linux,code = <KEY_VOLUMEDOWN>;
-+
-+	status = "okay";
-+};
-+
-+&qfprom {
-+	vcc-supply = <&vdd_qfprom>;
-+};
-+
-+&qup_spi13_cs {
-+	drive-strength = <6>;
-+	bias-disable;
-+};
-+
-+&qup_spi13_data_clk {
-+	drive-strength = <6>;
-+	bias-disable;
-+};
-+
-+&qup_uart5_rx {
-+	drive-strength = <2>;
-+	bias-disable;
-+};
-+
-+&qup_uart5_tx {
-+	drive-strength = <2>;
-+	bias-disable;
-+};
-+
-+&qupv3_id_0 {
-+	status = "okay";
-+};
-+
-+&qupv3_id_1 {
-+	status = "okay";
-+};
-+
-+&remoteproc_adsp {
-+	firmware-name = "qcom/sm7325/xiaomi/lisa/adsp.mbn";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_cdsp {
-+	firmware-name = "qcom/sm7325/xiaomi/lisa/cdsp.mbn";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_mpss {
-+	firmware-name = "qcom/sm7325/xiaomi/lisa/modem.mbn";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_wpss {
-+	firmware-name = "qcom/sm7325/xiaomi/lisa/wpss.mbn";
-+
-+	status = "okay";
-+};
-+
-+&spi13 {
-+	status = "okay";
-+
-+	touchscreen@0 {
-+		compatible = "goodix,gt9897";
-+		reg = <0>;
-+		spi-max-frequency = <6000000>;
-+
-+		interrupt-parent = <&tlmm>;
-+		interrupts = <81 IRQ_TYPE_LEVEL_LOW>;
-+
-+		reset-gpios = <&tlmm 105 GPIO_ACTIVE_LOW>;
-+
-+		avdd-supply = <&vreg_l7c_3p0>;
-+		vddio-supply = <&vreg_l2c_1p8>;
-+
-+		pinctrl-0 = <&touchscreen_default>;
-+		pinctrl-names = "default";
-+
-+		touchscreen-size-x = <1080>;
-+		touchscreen-size-y = <2400>;
-+	};
-+};
-+
-+&tlmm {
-+	gpio-reserved-ranges = <32 2>, /* SMB1394 (SPMI) */
-+			       <48 4>, /* Presumably NFC SE */
-+			       <56 4>; /* Presumably fingerprint reader */
-+
-+	qup_uart7_sleep_cts: qup-uart7-sleep-cts-state {
-+		pins = "gpio28";
-+		function = "gpio";
-+		/*
-+		 * Configure a bias-bus-hold on CTS to lower power
-+		 * usage when Bluetooth is turned off. Bus hold will
-+		 * maintain a low power state regardless of whether
-+		 * the Bluetooth module drives the pin in either
-+		 * direction or leaves the pin fully unpowered.
-+		 */
-+		bias-bus-hold;
-+	};
-+
-+	qup_uart7_sleep_rts: qup-uart7-sleep-rts-state {
-+		pins = "gpio29";
-+		function = "gpio";
-+		/*
-+		 * Configure pull-down on RTS. As RTS is active low
-+		 * signal, pull it low to indicate the BT SoC that it
-+		 * can wakeup the system anytime from suspend state by
-+		 * pulling RX low (by sending wakeup bytes).
-+		 */
-+		bias-pull-down;
-+	};
-+
-+	qup_uart7_sleep_tx: qup-uart7-sleep-tx-state {
-+		pins = "gpio30";
-+		function = "gpio";
-+		/*
-+		 * Configure pull-up on TX when it isn't actively driven
-+		 * to prevent BT SoC from receiving garbage during sleep.
-+		 */
-+		bias-pull-up;
-+	};
-+
-+	qup_uart7_sleep_rx: qup-uart7-sleep-rx-state {
-+		pins = "gpio31";
-+		function = "gpio";
-+		/*
-+		 * Configure a pull-up on RX. This is needed to avoid
-+		 * garbage data when the TX pin of the Bluetooth module
-+		 * is floating which may cause spurious wakeups.
-+		 */
-+		bias-pull-up;
-+	};
-+
-+	bluetooth_enable_default: bluetooth-enable-default-state {
-+		pins = "gpio85";
-+		function = "gpio";
-+		output-low;
-+		bias-disable;
-+	};
-+
-+	sw_ctrl_default: sw-ctrl-default-state {
-+		pins = "gpio86";
-+		function = "gpio";
-+		bias-pull-down;
-+	};
-+
-+	touchscreen_default: touchscreen-default-state {
-+		pins = "gpio81", "gpio105";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-pull-up;
-+	};
-+
-+	pm8008_int_default: pm8008-int-default-state {
-+		pins = "gpio25";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+};
-+
-+&uart5 {
-+	compatible = "qcom,geni-debug-uart";
-+	status = "okay";
-+};
-+
-+&uart7 {
-+	/delete-property/interrupts;
-+	interrupts-extended = <&intc GIC_SPI 608 IRQ_TYPE_LEVEL_HIGH>,
-+			      <&tlmm 31 IRQ_TYPE_EDGE_FALLING>;
-+
-+	pinctrl-1 = <&qup_uart7_sleep_cts>,
-+		    <&qup_uart7_sleep_rts>,
-+		    <&qup_uart7_sleep_tx>,
-+		    <&qup_uart7_sleep_rx>;
-+	pinctrl-names = "default", "sleep";
-+
-+	status = "okay";
-+
-+	bluetooth: bluetooth {
-+		compatible = "qcom,wcn6750-bt";
-+
-+		pinctrl-0 = <&bluetooth_enable_default>, <&sw_ctrl_default>;
-+		pinctrl-names = "default";
-+
-+		enable-gpios = <&tlmm 85 GPIO_ACTIVE_HIGH>;
-+		swctrl-gpios = <&tlmm 86 GPIO_ACTIVE_HIGH>;
-+
-+		vddio-supply = <&vreg_l19b_1p8>;
-+		vddaon-supply = <&vreg_s7b_0p952>;
-+		vddbtcxmx-supply = <&vreg_s7b_0p952>;
-+		vddrfacmn-supply = <&vreg_s7b_0p952>;
-+		vddrfa0p8-supply = <&vreg_s7b_0p952>;
-+		vddrfa1p2-supply = <&vdd13_pmu_rfa_i>;
-+		vddrfa1p7-supply = <&vdd19_pmu_rfa_i>;
-+		vddrfa2p2-supply = <&vreg_s1c_2p2>;
-+		vddasd-supply = <&vreg_l11c_2p8>;
-+		max-speed = <3200000>;
-+
-+		qcom,local-bd-address-broken;
-+	};
-+};
-+
-+&ufs_mem_hc {
-+	reset-gpios = <&tlmm 175 GPIO_ACTIVE_LOW>;
-+
-+	vcc-supply = <&vreg_l7b_2p96>;
-+	vcc-max-microamp = <800000>;
-+	/*
-+	 * Technically l9b enables an eLDO (supplied by s1b) which then powers
-+	 * VCCQ2 of the UFS.
-+	 */
-+	vccq-supply = <&vreg_l9b_1p2>;
-+	vccq-max-microamp = <900000>;
-+
-+	status = "okay";
-+};
-+
-+&ufs_mem_phy {
-+	vdda-phy-supply = <&vdd_a_ufs_0_core>;
-+	vdda-pll-supply = <&vdd_a_ufs_0_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&usb_1 {
-+	qcom,select-utmi-as-pipe-clk;
-+
-+	maximum-speed = "high-speed";
-+	phys = <&usb_1_hsphy>;
-+	phy-names = "usb2-phy";
-+
-+	status = "okay";
-+};
-+
-+&usb_1_dwc3_hs {
-+	remote-endpoint = <&pmic_glink_hs_in>;
-+};
-+
-+&usb_1_hsphy {
-+	vdda-pll-supply = <&vdd_a_usbhs_core>;
-+	vdda18-supply = <&vdd_a_usbhs_1p8>;
-+	vdda33-supply = <&vdd_a_usbhs_3p1>;
-+
-+	status = "okay";
-+};
-+
-+&venus {
-+	firmware-name = "qcom/sm7325/xiaomi/lisa/vpu20_1v.mbn";
-+
-+	status = "okay";
-+};
-+
-+&wifi {
-+	status = "okay";
-+};
--- 
-2.55.0
+ arch/arm64/boot/dts/qcom/eliza-cqs-som.dtsi |  7 ++++
+ arch/arm64/boot/dts/qcom/eliza-mtp.dts      |  7 ++++
+ arch/arm64/boot/dts/qcom/eliza.dtsi         | 64 +++++++++++++++++++++++++++++
+ 3 files changed, 78 insertions(+)
+---
+base-commit: 49362394dad7df66c274c867a271394c10ca2bb8
+change-id: 20260714-dts-qcom-eliza-add-cdsp-0288fd79c8c2
+
+Best regards,
+--  
+Abel Vesa <abel.vesa@oss.qualcomm.com>
 
