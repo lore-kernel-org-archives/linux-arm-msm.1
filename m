@@ -1,29 +1,29 @@
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.5])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.3])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C86CC3D8912;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3AE93D890E;
 	Tue, 14 Jul 2026 06:10:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.5
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.3
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784009437; cv=none; b=AowAc8zUv3QRWr74efmJ39M8gy3CMC3jHJJ35x/83bzl76qyfyvyI6Tp8nsOg6YWVthep26nwxhU1XYErntbk1E5jS5yniWxzFJIEtqvgaDQws6x0xvB5ql77c8w1UrjET9kt83Bbm9LWGHXyOML7zHdYe12v/OFbaPLi+yjFkM=
+	t=1784009438; cv=none; b=SRkP2KXU7ofdGgVmlvuhnPLZavDaLMTbsdv9EXBG9/PsheYgbFYscsv8n3G/3yA+k80sEUwUq5hOY3YIp53VzaOdbWmwzv/sgw2Bez7k2iACVTc7Vvbz2hx/1jYKR9eDYlBJej6/b38sAF+mCFvp788y4pdjY63htRPbMQnz6jg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784009437; c=relaxed/simple;
-	bh=h1rcSZIJCx1s78fckibab2t0DEvvfwOPISuMFxICZCI=;
+	s=arc-20240116; t=1784009438; c=relaxed/simple;
+	bh=/zk7nGNl3dB++t62aMOiEHIuhmWOXP6KRdHJMEJHOjk=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=aVPbMYj5f9rC+9wL9+1PVnvs8TDxCKiqAt9wszqVTonHQyWEtCxOYRH1szkApSZcOOvoJmva0qGmJmB/0JYNGzTkN/6FuyC7NME3T8PjMJvs3BKClCQIPqnIxqwqMnkpuFb4bEthulMu8AAJQNa7jlIGJ96HSCxZc/DSYicmz5M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=iqI/ShWL; arc=none smtp.client-ip=220.197.31.5
+	 MIME-Version; b=HynT60w42LQ3qvF/v9Mdt4BF+XQRq4IqNW1PVKdoEgwCKjepK8ZMlATdQebrmffsihcGbeJCYfTT1SQx+9zJNTPRVBvO9ZCfTYC5oqPsi756xYFGYkvZ8p/iNjWd696JuH5sT636fG3tbjhHG0l+wLz6zDTEQWJIIWXmfHr+GBE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=U+wYA/Ea; arc=none smtp.client-ip=117.135.210.3
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="iqI/ShWL"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="U+wYA/Ea"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=fO
-	rVLDpGjRjUa+f8VzrtP6B9hFELin8qYtwTJlLmQHk=; b=iqI/ShWLN0QGPUqjSJ
-	HV4sJ1rtMWL3tWOLVElIvwBK6ZSAS4vfu0sssBfLo/bYGEpI3L73sIP+ni1SSqUT
-	CmAr7QEESbFj+puJ3v3C2uYKuvXUwn8posOU/mE9sIfmLZjymxF95WZIUJm21bsD
-	UnPKkFa6CVRl/0wW+XDTRAaMM=
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=ZW
+	71BHzQut9m5+gFs8IhfBSqnJb/qt1PIQnhKAHYDfM=; b=U+wYA/EaIbmtWiu60G
+	8is+Hhskr2gPlrIcjjkeNGnGs5PSEgmQMc478N+VTetIwYyid9BRnMGeVULMHOov
+	zgW1A2/dO3Dx8kMXl44k20dcnexHpGYagNm0rlfr6HPWpFZgtVfw/aU7zW3Mm8K+
+	4Ix1BbjdwX7qaVp0Z8XFBktMY=
 Received: from xwm-TianYi510Pro-14IMB.. (unknown [])
-	by gzsmtp4 (Coremail) with SMTP id PygvCgAnwyab0lVqrG_HHA--.5129S5;
+	by gzsmtp4 (Coremail) with SMTP id PygvCgAnwyab0lVqrG_HHA--.5129S4;
 	Tue, 14 Jul 2026 14:09:48 +0800 (CST)
 From: weimin xiong <xiongwm2026@163.com>
 To: Will Deacon <will@kernel.org>,
@@ -36,9 +36,9 @@ Cc: Benjamin Gaignard <benjamin.gaignard@collabora.com>,
 	linux-kernel@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	weimin xiong <xiongwm2026@163.com>
-Subject: [PATCH v1 3/4] iommu/vsi: Fix fwnode lookup lifetime handling
-Date: Tue, 14 Jul 2026 14:09:29 +0800
-Message-ID: <20260714060930.220277-4-xiongwm2026@163.com>
+Subject: [PATCH v1 2/4] iommu/arm-smmu-v3: Fix fwnode lookup lifetime handling
+Date: Tue, 14 Jul 2026 14:09:28 +0800
+Message-ID: <20260714060930.220277-3-xiongwm2026@163.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260714060930.220277-1-xiongwm2026@163.com>
 References: <20260714060930.220277-1-xiongwm2026@163.com>
@@ -49,58 +49,47 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:PygvCgAnwyab0lVqrG_HHA--.5129S5
-X-Coremail-Antispam: 1Uf129KBjvJXoW7KFyrGF1DJw1fCw47uF45Jrb_yoW8Ww45pF
-	WUGayYkrWUXF10gF47C3W5CFyYvws2va4I9rW5tw4v9w1rtrW8ta4UJryjqryrCFZ5J3W7
-	Kw13ta97CFy5A3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jeg4fUUUUU=
-X-CM-SenderInfo: x0lr0wdzpsijqw6rljoofrz/xtbCzgzPX2pV0qyd0gAA3c
+X-CM-TRANSID:PygvCgAnwyab0lVqrG_HHA--.5129S4
+X-Coremail-Antispam: 1Uf129KBjvJXoW7Gr1DWr48urWrJF47JF18Zrb_yoW8JF45pa
+	yUuF90kryDW3W2k3srXF1ayFy5ua1Fya4rtrW8u3s09wn5tryfGryxtF9Fgrn5CrWrJF13
+	trn2q3yrCFn8ArJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07Ul4iUUUUUU=
+X-CM-SenderInfo: x0lr0wdzpsijqw6rljoofrz/xtbCzQzPX2pV0qz4CQAA3h
 
 bus_find_device_by_fwnode() returns a device with its reference count
-incremented. vsi_iommu_get_from_dev() drops that reference before
+incremented. arm_smmu_get_by_fwnode() drops that reference before
 reading the driver data, which leaves the returned pointer derived from
 a device after its reference has been released.
 
-Read the driver data before put_device(). Also make
-vsi_iommu_probe_device() fail with -ENODEV when the IOMMU cannot be
-found instead of dereferencing a NULL pointer.
+Read the driver data before put_device() and return NULL directly when
+the lookup fails.
 
 Signed-off-by: weimin xiong <xiongwm2026@163.com>
 ---
- drivers/iommu/vsi-iommu.c | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/iommu/vsi-iommu.c b/drivers/iommu/vsi-iommu.c
-index 42c424496..d19db561e 100644
---- a/drivers/iommu/vsi-iommu.c
-+++ b/drivers/iommu/vsi-iommu.c
-@@ -220,10 +220,15 @@ static struct vsi_iommu *vsi_iommu_get_from_dev(struct device *dev)
- 	struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
- 	struct device *iommu_dev = bus_find_device_by_fwnode(&platform_bus_type,
- 							     fwspec->iommu_fwnode);
-+	struct vsi_iommu *iommu;
+diff --git a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
+index a10affb48..ef53dd703 100644
+--- a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
++++ b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c
+@@ -3980,9 +3980,15 @@ static
+ struct arm_smmu_device *arm_smmu_get_by_fwnode(struct fwnode_handle *fwnode)
+ {
+ 	struct device *dev = bus_find_device_by_fwnode(&platform_bus_type, fwnode);
++	struct arm_smmu_device *smmu;
 +
-+	if (!iommu_dev)
++	if (!dev)
 +		return NULL;
  
-+	iommu = dev_get_drvdata(iommu_dev);
- 	put_device(iommu_dev);
- 
--	return iommu_dev ? dev_get_drvdata(iommu_dev) : NULL;
-+	return iommu;
++	smmu = dev_get_drvdata(dev);
+ 	put_device(dev);
+-	return dev ? dev_get_drvdata(dev) : NULL;
++
++	return smmu;
  }
  
- static struct iommu_domain *vsi_iommu_domain_alloc_paging(struct device *dev)
-@@ -619,6 +624,9 @@ static struct iommu_device *vsi_iommu_probe_device(struct device *dev)
- 	struct vsi_iommu *iommu = vsi_iommu_get_from_dev(dev);
- 	struct device_link *link;
- 
-+	if (!iommu)
-+		return ERR_PTR(-ENODEV);
-+
- 	link = device_link_add(dev, iommu->dev,
- 			       DL_FLAG_STATELESS | DL_FLAG_PM_RUNTIME);
- 	if (!link)
+ static bool arm_smmu_sid_in_range(struct arm_smmu_device *smmu, u32 sid)
 -- 
 2.43.0
 
