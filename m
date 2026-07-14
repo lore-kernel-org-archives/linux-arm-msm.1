@@ -1,33 +1,37 @@
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id EBA394968E3;
-	Tue, 14 Jul 2026 15:56:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49FC9496915;
+	Tue, 14 Jul 2026 15:57:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784044616; cv=none; b=pI4nWyT+tlHLaAoo/6rI/v5PWZ6clqwfRmSMgoUjAmND8xIB+wMfunW/FAfXqjCCVAlqSpIP9z7nhdsF6TzfNHytvG/eFaUeo4UHyKNBZ+F5aLiyW4/zZBbLDqJFtl5Ygi44O7CrX4Oj0JYekjRCA/na98c9LJwxF77NuNRAnT4=
+	t=1784044634; cv=none; b=ecpft3nFM3/wjdle30uuWkbo9FZUvVcqPrlIl0twT2nbXA6i9nOKKp+H3lIaimG1aCQpHyNfQo/r/2te1msapwUQm5VXQyTV6nRwr/5yOPFY4vnBdEy8OUIWtMMuVNZxl+yq4RI8Ih+pe6XyWDd3QUSF8Jf31x/b1i+39ZlvTqk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784044616; c=relaxed/simple;
-	bh=jlDWHc+QVt9k7HkTB6RbuYA4PZFVH9ssR+9+zo3598c=;
+	s=arc-20240116; t=1784044634; c=relaxed/simple;
+	bh=hDyismpOozAEVoOmgUQ54uCo1ccwIl3ZMVhVq1Kij1Y=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=nKIzfxCQGC9q3ub5DxZIJvdYX8k8OBqUz49YhRQdoyWUQKSONb/+TIE9is27JwtfRxjR3CwrhruDkA1fRMWQHy5cwehqtoIXNwyUJkLaavb3lhAidH3M5jwECc8jRRcC6KQ3QkPF3Xa9OQqh7/ugpFEw6r3uIzqwXX/X8M+MNU0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=Ab/B3gqk; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+	 In-Reply-To:Content-Type; b=ixIpVxP3pFKCOdoHIVsTCx88pe5dClncs0W+Np/4lQL2uW2dP/SgafFj2/zPyV8yQbIU2lea08fR/UfW3iagC+KKpQehhwhemgRi9KrFIJxNzjB2RfE5Z4U6Ib7cZ9LSMTCI6/okVc1lL/2hrBfTJBlu+YNba5kpwxcE0aQDJB0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=BaFalSuM; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=infradead.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="Ab/B3gqk"
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 15AFD339;
-	Tue, 14 Jul 2026 08:56:50 -0700 (PDT)
-Received: from [10.2.212.23] (e121345-lin.cambridge.arm.com [10.2.212.23])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2A0223F915;
-	Tue, 14 Jul 2026 08:56:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1784044614; bh=jlDWHc+QVt9k7HkTB6RbuYA4PZFVH9ssR+9+zo3598c=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=Ab/B3gqkVvxeSWk9m22lT60CDPxipry6LYSeJo0GLLNUbs9fhDIntrVO0Eu6x8Hgb
-	 h5xnMvaElwcevH+hvea19kQ3qUVqh4vQ0tItMzcOFYaeLFcnomQj67iUdQiexxoY56
-	 jljvdomivta+hgdUgK4J+9LD+PT4oDA5vK/4Rj94=
-Message-ID: <0e405cb3-1227-4ad2-96ff-aa0db3124381@arm.com>
-Date: Tue, 14 Jul 2026 16:56:50 +0100
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="BaFalSuM"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+	Content-Type:In-Reply-To:From:References:Cc:To:Subject:MIME-Version:Date:
+	Message-ID:Sender:Reply-To:Content-ID:Content-Description;
+	bh=4EdELFsK3TvoDo1OMXUEr2bHgQdAjo0lXA1gte5k2tg=; b=BaFalSuMIYIBOpv5sb8ytE9jq+
+	9UFkYQr90pmZseA7QDTg6VAsshHx1w2EUJ5xT9v4t1wzW762jSKWLMXiMWFv+wkcADAxaftVRTqb9
+	4e20qv2O713Oth8rVW8uxvw12yDdTGNa8ojvklYCacQOVcchKiudwJ0mPTMeui6g4TPJFowpTpQjI
+	wUlWEkQUVHLX8YnVFXUOmkR5+da1quumuUZbLlnR4iL01ibx55uEzJ+S4HR5wT873I/kuQAXPsSJl
+	xmQ7FNrp8pG7SPk/sXREAAueh2OkCjpNPNN/KRTrlfx5uqGyk3Y2Epo61HnuUBzzeharizc2aToz5
+	m/ddrYjg==;
+Received: from [50.53.43.113] (helo=[192.168.254.34])
+	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wjfVM-0000000CbSi-3elQ;
+	Tue, 14 Jul 2026 15:57:08 +0000
+Message-ID: <1a885ccd-77bb-4537-89c9-6b031c2f3812@infradead.org>
+Date: Tue, 14 Jul 2026 08:57:06 -0700
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,60 +39,45 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 0/4] iommu: Fix device lookup lifetime and probe
- cleanup
-To: Pranjal Shrivastava <praan@google.com>, weimin xiong <xiongwm2026@163.com>
-Cc: Will Deacon <will@kernel.org>, Joerg Roedel <joro@8bytes.org>,
- Benjamin Gaignard <benjamin.gaignard@collabora.com>,
- Rob Clark <robin.clark@oss.qualcomm.com>,
- linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
-References: <20260714060930.220277-1-xiongwm2026@163.com>
- <alZCbIIuawpugaQe@google.com>
-From: Robin Murphy <robin.murphy@arm.com>
-Content-Language: en-GB
-In-Reply-To: <alZCbIIuawpugaQe@google.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH 01/14] ASoC: codecs: NeoFidelity: repair the kernel-doc
+ format
+To: Mark Brown <broonie@kernel.org>
+Cc: linux-sound@vger.kernel.org, Jaroslav Kysela <perex@perex.cz>,
+ Takashi Iwai <tiwai@suse.com>, Shengjiu Wang <shengjiu.wang@gmail.com>,
+ Xiubo Li <Xiubo.Lee@gmail.com>, Fabio Estevam <festevam@gmail.com>,
+ Nicolin Chen <nicoleotsuka@gmail.com>, linuxppc-dev@lists.ozlabs.org,
+ Charles Keepax <ckeepax@opensource.cirrus.com>,
+ Maciej Strozek <mstrozek@opensource.cirrus.com>,
+ Bard Liao <yung-chuan.liao@linux.intel.com>,
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+ patches@opensource.cirrus.com, Srinivas Kandagatla <srini@kernel.org>,
+ linux-arm-msm@vger.kernel.org, Liam Girdwood <lgirdwood@gmail.com>
+References: <20260714014445.569992-1-rdunlap@infradead.org>
+ <20260714014445.569992-2-rdunlap@infradead.org>
+ <4eddcb03-3c2a-4ef4-8825-e750e8109476@sirena.org.uk>
+Content-Language: en-US
+From: Randy Dunlap <rdunlap@infradead.org>
+In-Reply-To: <4eddcb03-3c2a-4ef4-8825-e750e8109476@sirena.org.uk>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 14/07/2026 3:06 pm, Pranjal Shrivastava wrote:
-> On Tue, Jul 14, 2026 at 02:09:26PM +0800, weimin xiong wrote:
->> Fix a few IOMMU driver lifetime and error-path issues found while
->> auditing fwnode-based device lookup and probe cleanup paths.
->>
->> The first three patches avoid deriving driver private data after
->> dropping the device reference returned by bus_find_device_by_fwnode().
->> They also make the ARM SMMU v2 and VSI probe paths fail cleanly when the
->> IOMMU lookup fails.
+
+
+On 7/14/26 3:20 AM, Mark Brown wrote:
+> On Mon, Jul 13, 2026 at 06:44:32PM -0700, Randy Dunlap wrote:
+>> Don't use "/**" for a non-kernel-doc comment.
+>> Use kernel-doc notation to document the parameters and return value of
+>> ntpfw_load().
 > 
-> I'm not sure if that's really needed? All these drivers are doing is
-> dropping the "extra" refcount (incremented by calling find_device)  back
-> to the state *before* the fwnode function call. If you find that this
-> put_device caused the count to drop to 0, I believe that's the real
-> problem/bug. These fwnode functions are usually called in probe and the
-> refcount shouldn't be 0 inside probe.
-> 
-> Could you share your observation / failing logs where this fails? Maybe
-> something else is wrong with the system?
+> As mentioned in submitting-patches.rst when submitting a patch series
+> you should supply a cover letter for that patch series which describes
+> the overall content of the series.  This helps people understand what
+> they are looking at and how things fit together.
 
-I don't have any trace of the original patches (thanks, Microsoft...) 
-but looking on lore, yes these "lifetime" concerns are spurious; it's 
-just a particular situation where due to the API, the drivers are taking 
-a slightly roundabout route to look up their own valid device instance.
+Are you saying that my cover letter was insufficient?
 
-The IOMMU device must already have at least one held reference from way 
-back in its device_initialise(), which will not be released unless and 
-until device_unregister() is called (which is probably never for a 
-non-hotpluggable platform device once it has been successfully created). 
-If someone unregistered a platform device while it still had a driver 
-bound, or the IOMMU driver could be unbound without unregistering the 
-iommu_device through which its ->of_xlate or ->probe_device could be 
-called, so many other things would be blowing up already that this would 
-still be irrelevant.
+https://lore.kernel.org/all/20260714014445.569992-1-rdunlap@infradead.org/
 
-Since 17de3f5fdd35 ("iommu: Retire bus ops") these lookups should also 
-never return NULL for the same reasons, so do feel free to clean up 
-those redundant checks if it helps make things a bit clearer.
+-- 
+~Randy
 
-Thanks,
-Robin.
