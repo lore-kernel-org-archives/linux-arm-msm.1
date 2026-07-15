@@ -1,87 +1,106 @@
-Received: from h8.fbrelay.privateemail.com (h8.fbrelay.privateemail.com [162.0.218.231])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f172.google.com (mail-qt1-f172.google.com [209.85.160.172])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F55C43F0BC;
-	Wed, 15 Jul 2026 21:19:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=162.0.218.231
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F29363C7690
+	for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 22:58:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784150395; cv=none; b=miZmJt77XuEBQMPnTUFYF8BdX4plUuPDG910ANjaXFGIUSa+zCZY9CinP83TqBVRb9mR3FqBLoa0ZkhaEtkJib3A+m2OP1dpZS368DjoGWRQnyUrAFoo+51XiwhoGc6sBDlxitaivhqa2QO01nTAMI6Ibl79wtX1KhQ87OItsQw=
+	t=1784156329; cv=none; b=rYV+tbRd7iqlx8vhsl2hCNxVJWMiDc1/QVds3df6f//tzVo65heicENXH9kEVS+mFvQTRTK8NKnuTj25HxMcRzQJCWFZq6Ud/D3BjiXXPGj/D6EkxvhcAhBP+2a8M5ldbKN1fXlhV/EcTak85c/0o9X23UGMQNbk/19ZOdBRCoY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784150395; c=relaxed/simple;
-	bh=HF8ErXeW3JqNaFVALXMqrMLCy0svZlnruyZ2J4g+wZQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=T4RK9GtrNktHagx0FIUQaHvfUJETi3UKUbDk9kqmL0rfGWW54nM+MjxI3rVAwtC5kjsSrUH8AWT7ZNOMo+xH5CbGInM1MRA+KsFGl0FPrqnTtk9o4IXbKGvPAYJziMDezkj1LS9wOLBjTOSKZfzPdfXuCAybVkyJOV8cs3sAbro=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net; spf=pass smtp.mailfrom=catcrafts.net; arc=none smtp.client-ip=162.0.218.231
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=catcrafts.net
-Received: from MTA-09-4.privateemail.com (mta-09.privateemail.com [198.54.127.58])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
-	(No client certificate requested)
-	by h7.fbrelay.privateemail.com (Postfix) with ESMTPSA id 4h0pwQ3dLLz2xgH;
-	Wed, 15 Jul 2026 17:19:50 -0400 (EDT)
-Received: from mail.privateemail.com (K8S-PROD-WORKER-08 [87.215.145.39])
-	by mta-09.privateemail.com (Postfix) with ESMTPA id 4h0pvx3xvlz3hhTD;
-	Wed, 15 Jul 2026 17:19:25 -0400 (EDT)
-From: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
-To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Mark Brown <broonie@kernel.org>,
-	Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Cc: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Val Packett <val@packett.cool>,
-	Luca Weiss <luca.weiss@fairphone.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Jianfeng Liu <liujianfeng1994@gmail.com>,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [RFC PATCH] ASoC: qcom: q6apm-lpass-dais: start the graph at prepare
-Date: Wed, 15 Jul 2026 23:19:19 +0200
-Message-ID: <20260715211919.49462-1-jorijnvdgraaf@catcrafts.net>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <b099f316-0e30-40f6-8e6d-5717d96fce5c@oss.qualcomm.com>
-References: <20260705033830.305907-1-jorijnvdgraaf@catcrafts.net> <dee62f9f-1df3-4f57-a072-12b0b4b8a1a3@sirena.org.uk> <20260708215539.150590-1-jorijnvdgraaf@catcrafts.net> <137a9c85-67ab-434b-880b-d9d4efa5bccf@kernel.org> <20260710143214.142017-1-jorijnvdgraaf@catcrafts.net> <b099f316-0e30-40f6-8e6d-5717d96fce5c@oss.qualcomm.com>
+	s=arc-20240116; t=1784156329; c=relaxed/simple;
+	bh=kG2F/h/PEEQZLiJEZD5ZWH6vRmxnrzHxv6qCSCD+15A=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=pBk+w5mPN9/X09xNKIv9zRCpjf5L1bURHr58BExtKBPSJrnLhF1A2q2L3cAvVNpsRFd/tYHyDVODA0yJF4YfnvESWSR7TvQnHNWDRfZ/jbRf9259/6XxIGbsE+Ijcrvo2Qb8TB31POALoNmfXzhYP2sCmXnBlT4bQgYJjACLXg4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=jlKKP/dQ; arc=none smtp.client-ip=209.85.160.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jlKKP/dQ"
+Received: by mail-qt1-f172.google.com with SMTP id d75a77b69052e-517dc520840so43324531cf.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 15:58:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1784156327; x=1784761127; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=MYKThW6S+/ysG3sBUcQ38b0+BGQHjFHSJabT0tpeyio=;
+        b=jlKKP/dQZVoBE5EOud86rdOYX5uezG2eHV3BZQM9TPgluRN+YpCkoSQINr7gGLcgQY
+         CDG8PeHvseYiG8vYMOYE6+WhcMIvK2SocXxYoODxBpnneLX1v5SweqS3DnLlpxAFC9Df
+         Z4hiAP0VbKhncIt+tM3ZYVcl3sYy5OozlVUMOzmWjiyRtG5lG8p0AW9t2Vk0h0p7iWLC
+         g6d3oZnIf3oSo4r6jA4+96A3wb/nSoUPBS3MvPgBjyztjxMFYrjn9dwRQncCNaL6hgWZ
+         fA5y5kuGXEwUou/d1Txnj68XYoma3oR7ZZ8Uq9p03jJa9CR9TiEHA3Y33E4T5KeAWY2n
+         Pj1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784156327; x=1784761127;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=MYKThW6S+/ysG3sBUcQ38b0+BGQHjFHSJabT0tpeyio=;
+        b=VQjyJmTGEcF8HC6UfLNAjcyEVjA+O4fAJE6e/hhFEhJjB1pX6plfV75y9RMCwPispq
+         hl5K1NKSWlyrh5jIfUzDbZz5/oP3iZyIziZhZzq+aztGkBRvnH/3bfUw5+3isAPOS4Qw
+         M/oBFfiJCSh1oBupixd5+crUGGnOZkkEyjxC7VVc2QYgc3rjA666Z4apLlREon/MaomL
+         uLlUfHpID8/yEbqflz3q+9j7c+IYElxk6Wh97O7XmtXnAxG86qNFhA8h7XjRBOhiKvIP
+         x2Pg4gxewVT31espSLIyVGGyHoMp4+hF0e8P1a5yL2oevKZnnEqS5UOP/xceTJ36t2qU
+         L77A==
+X-Gm-Message-State: AOJu0YyQEVZMKNJWD3BM8TateUmpcHHbIEMOo7jS8W0f3n5rinukjbF6
+	+HsLOOgJG17OUpoSa9d8bF9ZMA+LYKt+Nl2g65Pg6HUMhcE51g/Y6OVs
+X-Gm-Gg: AfdE7cmZPWQ9WzAT9HW4NpHh9OkFFV9mU6pFemqe7edYOvenI9n9eCXkm+I6bCTNitt
+	RaHMId+wnoBrmuFx5Q0beNHrq9tSwwbGHPHYYJAfUChEpxOYztIuQxFueSGVxejA6M6QF7uRRv8
+	oVKtlxcgjL6371ZGV2ZrIdZTNVefC5uJ4T1V72DHAa1yPgrkCftfRFp0WppC5Q/Ic6Xqe+a4k7c
+	ri0vHponCsCLjYeQbvnGD+bKqpHsk9b1yita3rNWehBTvt3YyJo2oJYFL8xAQvX3CVQXtRbOy7G
+	pexz2DNzDwjE5SfCHAp1JXH+Nhknv8QdyHKYKVBI0aIxOOYGqKmBCKyxMBo1nNLIMpCdzFYeVXH
+	7aznexE3R6942xLM51lQpJ0+tARNxkvm0AjNCrJ5dqFCpB3+C7d5OcGP3lFp3YcxMVBbO/8m4px
+	efDqqhxDppbeyv+NrAaiyrXx/E1b8Q3LUTQv1gZvxYPBGC1Z/whpu0Q8ZcdgKeU+gibPxHWAobU
+	R9DaE2qZk4NsMRU
+X-Received: by 2002:a05:622a:15c9:b0:51c:18b3:ed99 with SMTP id d75a77b69052e-51e4f0fd621mr56429541cf.61.1784156326506;
+        Wed, 15 Jul 2026 15:58:46 -0700 (PDT)
+Received: from ?IPV6:2607:fb90:9361:a991:79a6:af7e:57fc:e61d? ([2607:fb90:9361:a991:79a6:af7e:57fc:e61d])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-51f1abc739asm12333561cf.1.2026.07.15.15.58.44
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 15 Jul 2026 15:58:45 -0700 (PDT)
+Sender: Julian Braha <julian.braha@gmail.com>
+Message-ID: <9bb44840-c3fe-4bcd-af2d-149dbc2c7c8c@gmail.com>
+Date: Wed, 15 Jul 2026 23:58:43 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/5] soc: qcom: Hide all drivers behind selectable menu
+To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, "Rafael J. Wysocki"
+ <rafael@kernel.org>, Daniel Lezcano <daniel.lezcano@kernel.org>,
+ Christian Loehle <christian.loehle@arm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-pm@vger.kernel.org
+References: <20260711-qcom-soc-kconfig-v2-0-4a907e064281@oss.qualcomm.com>
+ <20260711-qcom-soc-kconfig-v2-1-4a907e064281@oss.qualcomm.com>
+Content-Language: en-US
+From: Julian Braha <julianbraha@gmail.com>
+In-Reply-To: <20260711-qcom-soc-kconfig-v2-1-4a907e064281@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jul 14, 2026 at 05:22:51PM +0100, Srinivas Kandagatla wrote:
-> IBIT clocks should start clocking once we vote for it using prm.
-> Do you see any errors while enabling this clock?
+Hi Krzysztof,
 
-That answers the question from my previous mail - thank you. And I
-see no errors anywhere in that path. A refused vote would also have
-been visible: a DSP error or timeout fails clk_prepare_enable() and
-aborts hw_params. Here hw_params completes, the stream plays, and
-clk_summary shows the clock prepared and enabled at the requested
-1536000 during the stream, so the DSP accepted the request and
-reported success.
+On 7/11/26 14:25, Krzysztof Kozlowski wrote:
+> 1. Allow compile testing of QCOM_OCMEM, which previously required
+>    ARCH_QCOM.
+> 
+> 2. Hide behind ARCH_QCOM or COMPILE_TEST drivers specific to Qualcomm
+>    which should not be available to other kernel builds:
+>    QCOM_PMIC_PDCHARGER_ULOG, QCOM_PMIC_GLINK, QCOM_SPM and QCOM_PBS.
 
-In case it helps the comparison on your hardware, the exact setup
-here: LPASS_CLK_ID_SEN_MI2S_IBIT with LPASS_CLK_ATTRIBUTE_COUPLE_NO
-at 1536000 Hz (48 kHz x 2 ch x 16 bit), voted at hw_params via the
-MI2S clock control series - v3 at the time; the v3->v5 changes to
-that path (clk_set_rate error check, cleanup) do not change the
-enable sequence, so the result should carry over. The codec's
-failing clock check runs at DAPM power-up during prepare, i.e. after
-the vote, before the trigger-time graph start. The ADSP firmware
-here reports QC_IMAGE_VERSION LPAIDSP.HT.1.0-01111-LANAI-1 (variant
-milos.adsp.prodQ).
+I think this patch introduced an unmet dependency:
 
-> This week, I will try to pull some wires out and check that on my
-> hardware too.
+WARNING: unmet direct dependencies detected for QCOM_PDR_MSG
+  Depends on [n]: QCOM_SOC [=n]
+  Selected by [y]:
+  - QCOM_PDR_HELPERS [=y] && ARCH_QCOM [=y] && NET [=y]
 
-That comparison should tell us which side to look at. If your board
-does drive the bit clock from the vote alone, I am happy to dig on
-the milos side; any pointer on what to check next would be welcome.
-
-Thanks,
-Jorijn
+- Julian Braha
