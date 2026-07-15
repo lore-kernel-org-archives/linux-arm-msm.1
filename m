@@ -1,137 +1,105 @@
-Received: from mail.tipi-net.de (mail.tipi-net.de [194.13.80.246])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f174.google.com (mail-qt1-f174.google.com [209.85.160.174])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89E0031F9B7;
-	Wed, 15 Jul 2026 19:17:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=194.13.80.246
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E7B843B71B7
+	for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 19:37:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.174
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784143043; cv=none; b=ILelWLPVyBJ3EmUDnfCMQMJNOE/ohZUtFE6V+3VwO/jWdu3nYaMOoGTw4hnN4f4QVyGaviqAy+LENmJXfxjF0t9bmGGgKfdpZdBrnpvWUR0WW+yE5aAXFWxbZs1aDLeS9mkiqw/EG35MRrbNgKqPSDGahyYmhqiTF9VxPBsl3Es=
+	t=1784144257; cv=none; b=WZnToceEg4nEgVufKjY9FbZiAADGW6v9T+LHHU4x+JZf8kgGy0TRcT9e9q8Q10DUC9tDxtnQoaGe7r2gD8GwkazFTIjxQVlnUaP/Zxw3NAf0wUb0JWEW2kV96DCBEQSEXPJ8bsEaouTVu1fZ6zUMNd4MP6WT7YLU7ua57V2UAgY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784143043; c=relaxed/simple;
-	bh=U/37O++Bmi/Jd0n+jDQY/s6xGJ8a2ievmvzU7NeBUZs=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:Message-ID:
-	 MIME-Version:Content-Type; b=gvLSr6S+ZLAuiZSLOZtFrX6eSchtHS7ABETURucesGyXOvld8r0lqTgHIrUTar9cRfD9jBxFMxuggtVlZh568fZ11jlUIm0K1V1MBCOn2axfmu3uClRbRFzxep7RV+A2lkBWaEu++7ArAKod4/8pEgqzWFq3q+yMJ4qPysFMCgM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tipi-net.de; spf=pass smtp.mailfrom=tipi-net.de; dkim=pass (2048-bit key) header.d=tipi-net.de header.i=@tipi-net.de header.b=e02c33De; arc=none smtp.client-ip=194.13.80.246
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=tipi-net.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=tipi-net.de
+	s=arc-20240116; t=1784144257; c=relaxed/simple;
+	bh=eYNN6RWU07VAIXpqxw2a0aPtaKc6eCAW3usyhGGWdKI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=H9teJcTjsQKrymXHSPmQYvhi2iapXrdjiOEcMMVrgS+uznWYPWtL2k5B4vVBe6o5w8jjCufC4vfY+ovitRwo93UTpKd0q5pPCps4loZ5zwKdHptW3tkGbc1upo37Muu2ErA/o9N3vDPiMIh5+2s4248B0OIKsY1CThQ2x3f2qJE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca; spf=pass smtp.mailfrom=ziepe.ca; dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b=CXg3Mfk4; arc=none smtp.client-ip=209.85.160.174
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=tipi-net.de header.i=@tipi-net.de header.b="e02c33De"
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 075B0A52C4;
-	Wed, 15 Jul 2026 21:17:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tipi-net.de; s=dkim;
-	t=1784143026; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=2VVH/7Yd5khrMIykiuT8v/P0iIITSr71VM6VksaHUVg=;
-	b=e02c33DejakXNXBwefDQc4Qj9qB4u0AWavFEXX0JRKfxywU6Pm0m09GXhXMyRhM6qSHv5B
-	oFVScRAjicUHjMTFWmwUJYvtFpEtsEM8Wp4PPqkb3ek/QR6GaXYfVgYnTnfWJcdimwHuUt
-	FCwoiC6Bgu09OJQ3tv2ZmGXtdfOBcu5jCOPzvdooagkjdvy2eYjhweXdqXvLiiT2EbBemn
-	s9lS4TYuosJwEiDQSfCnAbQ01oELZKuOjeXR/42884pYJKzvpwtjXJP2MWtQQJoCjhIlYm
-	qLctZn4ECTqIep5k8k2HYdACGTmmExbuTBMzars/vBfUAsJUkqw6sBWApIdwcw==
-Date: Wed, 15 Jul 2026 21:17:03 +0200
-From: Nicolai Buchwitz <nb@tipi-net.de>
-To: Maxime Chevallier <maxime.chevallier@bootlin.com>,
- Andrew Lunn <andrew+netdev@lunn.ch>, davem@davemloft.net,
- Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>, Russell King <linux@armlinux.org.uk>,
- Heiner Kallweit <hkallweit1@gmail.com>
-CC: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- thomas.petazzoni@bootlin.com, linux-arm-msm@vger.kernel.org
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_net-next=5D_net=3A_phy=3A_at803x=3A_Use?=
- =?US-ASCII?Q?_a_helper_to_check_for_phy_reset_existence?=
-User-Agent: Thunderbird for Android
-In-Reply-To: <20260715101355.88536-1-maxime.chevallier@bootlin.com>
-References: <20260715101355.88536-1-maxime.chevallier@bootlin.com>
-Message-ID: <E3E933B2-2DC1-449B-AEFA-101A439A2D21@tipi-net.de>
+	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.b="CXg3Mfk4"
+Received: by mail-qt1-f174.google.com with SMTP id d75a77b69052e-51c21495722so38496081cf.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 12:37:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google; t=1784144254; x=1784749054; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=OujpRFSpw/QAEHNMk5YVjM7csawMlwgTgeHiHNUlLio=;
+        b=CXg3Mfk44UKY2OlQ5cxM/HMuAzWWPxeToNPW6Kb4bgasUVGfWX9Q0/ut8HJiWfyFbA
+         T/0eRzuUIJQe/keEcSit8xGP0p+nGVQTBRYGBeiQ3zK0XRjeVVL1C6D0pcRGTIwXXE8m
+         qG143U+zw+cSIAF7Q1q7z1AEi2n7l1AIdje5/5vb1G6/TirBj+tkJ/jKQMPAyX6aVUX1
+         PwkTbT56h0lwLANhEMf8H8tfUTXa9RV2GrQmUighLOil11Kz4j40Ug0yQ/RlcK7UZtXC
+         FX06fEfPe+xB0ZP1iWv4Rz8AeN27rHP/Owsy++7pOJsJKZJdtuuQzAz9u+azjOua8Jxn
+         R7dQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784144254; x=1784749054;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=OujpRFSpw/QAEHNMk5YVjM7csawMlwgTgeHiHNUlLio=;
+        b=p6zjGJDB741lCTxFWOyj+WLymYfODA/LQwWxnD4FT0jU53Uhroc/ZzL2QtScUhMSVF
+         aPa4X9nhrzekSK0PF8bGGpYU1u/23v6h2e1kkQ6etsxYT9lWAUn0X6Z9ggWwoKJ86G3M
+         lPMMJSt+DKBcCVogFgL1xsQFfR1l7ysNtqOY9daAf0dFhb8f9LJ8tAV4ujwMXkJPEvVn
+         qHK01z1A2s2LFJZyn9NQCFzU6E4UKY+hX0wGAwsPgTSH3kNcFvewpl09rDSRYJu1qe2y
+         QpAaLWnO5gAqKfq/alLy9x2+uuYHpZrXzUiNo6G+6S0swDOTNNZxRMwOOztI/u324gsk
+         6IMg==
+X-Forwarded-Encrypted: i=1; AHgh+RrOJ/3Sa+a2KUfEYWOhJ14Oh4lSWu3+TGloAPtao/PsGgu+m+2rscQwV6rKDTGu7jNtCj7y2a4ELtLNIoiy@vger.kernel.org
+X-Gm-Message-State: AOJu0YxtSgNZWJZCx2V/onwc5SRA6cEP8ExJORcD4zVOOdNZjwcMieim
+	RQClNmvJ/XIhemhe56WekqK21T08MJHGZYahPXFFKWebGGv0ZPsrL3SwFlfdCJEIja4=
+X-Gm-Gg: AfdE7clxrEP53ZSYy7Cc5B1kqteTtdhOU9fGBWmWgYb1lRKiZKglfnES1eQ9YTtF2DH
+	xf/ymzlv58jL7kil3B8N/O39rvdD0g+sDqutrIISlh7NVLoF0yZGqitCAsUJ7xbdE+m+SW8BO2A
+	HNJsTNvNtKELhSjsTerOw79R7g4nSbfyyvaXsZnYrSutdHdR2sLueqFXL3aa4cBT2G97j71aNTj
+	Xeel9t1o50LNWdOf++K2oxKVvID3CsBxqQbskgMfzElnmdt3u2ysIifyoIwHgvPXumFr/+cDhsY
+	GjYYjqH2tadMaYqebeB3RpsnFUQDsrilCV6HvZBf3f7chqyY8IK3BsmaEn02gpBLiT18XFdL1/9
+	5JVVrrPPn2diwRdNFo9Y9ZYUo0sAPrajwnnJFuuV8lPv4r6q4ioVhTSMmn4Dx
+X-Received: by 2002:ac8:5805:0:b0:51c:12bf:d4a3 with SMTP id d75a77b69052e-51e3c2cc193mr94283961cf.52.1784144253535;
+        Wed, 15 Jul 2026 12:37:33 -0700 (PDT)
+Received: from ziepe.ca ([159.2.72.92])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-51caab6e9f4sm144211471cf.2.2026.07.15.12.37.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 15 Jul 2026 12:37:32 -0700 (PDT)
+Received: from jgg by wakko with local (Exim 4.97)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1wk5QC-00000000tnI-0nFm;
+	Wed, 15 Jul 2026 16:37:32 -0300
+Date: Wed, 15 Jul 2026 16:37:32 -0300
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: weimin xiong <xiongwm2026@163.com>
+Cc: Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
+	Joerg Roedel <joro@8bytes.org>,
+	Benjamin Gaignard <benjamin.gaignard@collabora.com>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev,
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH v1 2/4] iommu/arm-smmu-v3: Fix fwnode lookup lifetime
+ handling
+Message-ID: <20260715193732.GA210048@ziepe.ca>
+References: <20260714060930.220277-1-xiongwm2026@163.com>
+ <20260714060930.220277-3-xiongwm2026@163.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260714060930.220277-3-xiongwm2026@163.com>
 
-Hi Maxime=20
+On Tue, Jul 14, 2026 at 02:09:28PM +0800, weimin xiong wrote:
+> bus_find_device_by_fwnode() returns a device with its reference count
+> incremented. arm_smmu_get_by_fwnode() drops that reference before
+> reading the driver data, which leaves the returned pointer derived from
+> a device after its reference has been released.
+> 
+> Read the driver data before put_device() and return NULL directly when
+> the lookup fails.
+> 
+> Signed-off-by: weimin xiong <xiongwm2026@163.com>
+> ---
+>  drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c | 8 +++++++-
+>  1 file changed, 7 insertions(+), 1 deletion(-)
 
-On July 15, 2026 12:13:54 PM GMT+02:00, Maxime Chevallier <maxime=2Echeval=
-lier@bootlin=2Ecom> wrote:
->The at803x family of devices are subjected to an errata that requires
->hard-reseting the PHY upon link change=2E
->
->That can only work if there's a physical reset line wired to the PHY,
->which the driver checks by looking if there's a reset GPIO configured
->for the MDIO device=2E
->
->The reset may however be controlled through a reset controller, which
->isn't accounted for in the errata handling=2E
->
->Besides that, PHY drivers aren't expected to directly access the
->mdiodev's resources directly, let's therefore wrap this with a phylib
->helper, that uses a similar mdio helper to check for reset existence=2E
->
->This was found in preparation for bus-level resource management for
->better mdio scan support=2E
->
->Signed-off-by: Maxime Chevallier <maxime=2Echevallier@bootlin=2Ecom>
->---
-> drivers/net/phy/qcom/at803x=2Ec | 2 +-
-> include/linux/mdio=2Eh          | 5 +++++
-> include/linux/phy=2Eh           | 5 +++++
-> 3 files changed, 11 insertions(+), 1 deletion(-)
->
->diff --git a/drivers/net/phy/qcom/at803x=2Ec b/drivers/net/phy/qcom/at803=
-x=2Ec
->index ba4dc07752b6=2E=2E6872dbf77856 100644
->--- a/drivers/net/phy/qcom/at803x=2Ec
->+++ b/drivers/net/phy/qcom/at803x=2Ec
->@@ -537,7 +537,7 @@ static void at803x_link_change_notify(struct phy_devi=
-ce *phydev)
-> 	 * in the FIFO=2E In such cases, the FIFO enters an error mode it
-> 	 * cannot recover from by software=2E
-> 	 */
->-	if (phydev->state =3D=3D PHY_NOLINK && phydev->mdio=2Ereset_gpio) {
->+	if (phydev->state =3D=3D PHY_NOLINK && phy_device_has_reset(phydev)) {
-> 		struct at803x_context context;
->=20
-> 		at803x_context_save(phydev, &context);
->diff --git a/include/linux/mdio=2Eh b/include/linux/mdio=2Eh
->index 300805e66592=2E=2Ea7d9e3ae362a 100644
->--- a/include/linux/mdio=2Eh
->+++ b/include/linux/mdio=2Eh
->@@ -86,6 +86,11 @@ static inline void *mdiodev_get_drvdata(struct mdio_de=
-vice *mdio)
-> 	return dev_get_drvdata(&mdio->dev);
-> }
->=20
->+static inline bool mdiodev_has_reset(struct mdio_device *mdio)
->+{
->+	return (mdio->reset_gpio || mdio->reset_ctrl);
->+}
->+
-> void mdio_device_free(struct mdio_device *mdiodev);
-> struct mdio_device *mdio_device_create(struct mii_bus *bus, int addr);
-> int mdio_device_register(struct mdio_device *mdiodev);
->diff --git a/include/linux/phy=2Eh b/include/linux/phy=2Eh
->index fc680901275b=2E=2Ebeff1d6fcc7c 100644
->--- a/include/linux/phy=2Eh
->+++ b/include/linux/phy=2Eh
->@@ -2231,6 +2231,11 @@ static inline void phy_device_reset(struct phy_dev=
-ice *phydev, int value)
-> 	mdio_device_reset(&phydev->mdio, value);
-> }
->=20
->+static inline bool phy_device_has_reset(struct phy_device *phydev)
->+{
->+	return mdiodev_has_reset(&phydev->mdio);
->+}
->+
-> #define phydev_err(_phydev, format, args=2E=2E=2E)	\
-> 	dev_err(&_phydev->mdio=2Edev, format, ##args)
->=20
+Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 
-Reviewed-by: Nicolai Buchwitz <nb@tipi-net=2Ede>
-
-Thanks,
-Nicolai
+Jason
