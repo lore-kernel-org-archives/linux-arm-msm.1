@@ -1,153 +1,286 @@
-Received: from mail-m32107.qiye.163.com (mail-m32107.qiye.163.com [220.197.32.107])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D87F0480950;
-	Wed, 15 Jul 2026 15:19:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.32.107
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EFB840EBA9;
+	Wed, 15 Jul 2026 15:23:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784128759; cv=none; b=EFXLJUgPL6qi8hsGVgyOGfpiAPzyHffrBltcicuZirAsY7iIg8SzIr5yWgj4zTuXeA2Fvvm+aY8e0uc0Z02ZMZaVjpPKAaGid57/UcOoRRT+7XNPaGDRAIyTAytMhrC4OBFhXXvPMOTLTj79uHXdJ9Ycav2OPqcRJm8/JbHq5qA=
+	t=1784129015; cv=none; b=TFN+bKZjvz00aq1X+GcCrPdWiTitVGmPD7/mig7wgFepy6DUvO/YcOPky9lTS7Q2ESfIcibCXl4Uc+YFo0DIX7xejCOqGtTHLlA3MWSezX14qeGHnfq3OluZVyAW6DLT3lWfyb27yiOhlFtK/glexQLlMtRaQeytJH54U0NjPk8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784128759; c=relaxed/simple;
-	bh=bq8g9xkHiuWTkk3XAF0GfB67818hIQ3ys42KjTG2uy4=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Ty9FBUXaFiO1OxLPgXMi49lSDa54tH/uGvkoe0PylbYJLPEO0xMDKAuV2LJ7bjOnX64YP1OMy2RDUt33SpBSHsr4AQaaDEuVLzsMXhTex66fSSD274+V4bl24eEZNbAly4lTCGEhy1EIhGh69s7p9gZGmxpJVxRC1uqWOEPvGWg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com; spf=pass smtp.mailfrom=thundersoft.com; dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b=k+egMmu7; arc=none smtp.client-ip=220.197.32.107
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thundersoft.com
+	s=arc-20240116; t=1784129015; c=relaxed/simple;
+	bh=9qP5LTAAk44gQZWTOXHoo7e15j4FHHXFk9sg8XT9+0Q=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=u03MzYz3xa6h66jCcaIBK9vHWA9H6o0xbd/kAtalWra2u7LemVbnTirWdid7nFS1XTcmsOlVrnfI3W6JxRF5m9ZRMtKvzmG12/3ni2gYR+KmTFtk/PoENoruO1cdNaOczfrjfSur2Q1b3zvx00M27orqs83+Zdwl5EoU6TfuW2w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZHFyZ3/E; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b="k+egMmu7"
-Received: from [127.0.1.1] (unknown [36.129.139.90])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 464e8f2f7;
-	Wed, 15 Jul 2026 22:03:29 +0800 (GMT+08:00)
-From: Hongyang Zhao <hongyang.zhao@thundersoft.com>
-Date: Wed, 15 Jul 2026 22:02:54 +0800
-Subject: [PATCH v2 5/6] ASoC: qcom: sc8280xp: Add RubikPi 3 sound card
- support
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZHFyZ3/E"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75C0D1F000E9;
+	Wed, 15 Jul 2026 15:23:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784129013;
+	bh=gADdUqFqdyogeafk3zRAASxcmVNA8sWMqOF6K7MzJug=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=ZHFyZ3/ESAlbGMLodf52X6TrDO35Fk0c445fZjc/iDIOmZR8ceLOBcpqvIoraEE/T
+	 zeZLVqqi8htF9IPg8x+JFm/Ztq0YO7W22l91dvkihGZ/j+CaDbNRZ39M+h2IRRAPJn
+	 gOwM6i12c2CphR2jeaPmOSZdn2QRqByY6vZbMn4L22uOeN5KpZu94g9LE+GSWDYy6a
+	 desBFAJqgZSmmDqsf6sL7guf2TNq50pwPkhffsRmu0Wzj0YQUUSEp7cTuNMhMWtN9x
+	 FtkNO+2bfvmhwRnIK4YG/8FPR+l9FBnCEYqbL8I9dQIXx97pCo7on9ZfnrfGoOLbdP
+	 TCsIyKOC40Lgg==
+Message-ID: <e98110da-f26a-46ca-8360-fc84fc159bd8@kernel.org>
+Date: Wed, 15 Jul 2026 17:23:09 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 18/33] mm/vma: use vma_start_pgoff(),
+ linear_page_index() in mm code
+Content-Language: en-US
+To: Lorenzo Stoakes <ljs@kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ David Hildenbrand <david@kernel.org>, "Liam R. Howlett"
+ <liam@infradead.org>, Mike Rapoport <rppt@kernel.org>,
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+ Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>,
+ Jann Horn <jannh@google.com>, Lance Yang <lance.yang@linux.dev>,
+ Pedro Falcato <pfalcato@suse.de>, Russell King <linux@armlinux.org.uk>,
+ Dinh Nguyen <dinguyen@kernel.org>,
+ Simon Schuster <schuster.simon@siemens-energy.com>,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ Helge Deller <deller@gmx.de>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
+ Dan Williams <djbw@kernel.org>, Matthew Wilcox <willy@infradead.org>,
+ Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>,
+ Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>,
+ Arnaldo Carvalho de Melo <acme@kernel.org>,
+ Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+ Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
+ Adrian Hunter <adrian.hunter@intel.com>, James Clark
+ <james.clark@linaro.org>, Zi Yan <ziy@nvidia.com>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>, Nico Pache <npache@redhat.com>,
+ Ryan Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>,
+ Barry Song <baohua@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
+ Naoya Horiguchi <nao.horiguchi@gmail.com>, Xu Xin <xu.xin16@zte.com.cn>,
+ Chengming Zhou <chengming.zhou@linux.dev>, SJ Park <sj@kernel.org>,
+ Matthew Brost <matthew.brost@intel.com>,
+ Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
+ Byungchul Park <byungchul@sk.com>, Gregory Price <gourry@gourry.net>,
+ Ying Huang <ying.huang@linux.alibaba.com>,
+ Alistair Popple <apopple@nvidia.com>, Hugh Dickins <hughd@google.com>,
+ Peter Xu <peterx@redhat.com>, Kees Cook <kees@kernel.org>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Robin Murphy <robin.murphy@arm.com>, Andrey Konovalov
+ <andreyknvl@gmail.com>, Alexander Potapenko <glider@google.com>,
+ Dmitry Vyukov <dvyukov@google.com>, Steven Rostedt <rostedt@goodmis.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Jarkko Sakkinen <jarkko@kernel.org>,
+ Dave Hansen <dave.hansen@linux.intel.com>, Thomas Gleixner
+ <tglx@kernel.org>, Borislav Petkov <bp@alien8.de>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, Ian Abbott <abbotti@mev.co.uk>,
+ H Hartley Sweeten <hsweeten@visionengravers.com>,
+ Lucas Stach <l.stach@pengutronix.de>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
+ <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+ Thierry Reding <thierry.reding@kernel.org>,
+ Mikko Perttunen <mperttunen@nvidia.com>,
+ Jonathan Hunter <jonathanh@nvidia.com>,
+ Christian Koenig <christian.koenig@amd.com>, Huang Rui <ray.huang@amd.com>,
+ Matthew Auld <matthew.auld@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum
+ <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>,
+ Ankit Agrawal <ankita@nvidia.com>, Alex Williamson <alex@shazbot.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Shakeel Butt <shakeel.butt@linux.dev>,
+ Usama Arif <usama.arif@linux.dev>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, nvdimm@lists.linux.dev,
+ linux-perf-users@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+ damon@lists.linux.dev, iommu@lists.linux.dev, kasan-dev@googlegroups.com,
+ linux-sgx@vger.kernel.org, etnaviv@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org,
+ kvm@vger.kernel.org, Russell King <linux+etnaviv@armlinux.org.uk>
+References: <20260710-b4-pre-scalable-cow-v2-0-2a5aa403d977@kernel.org>
+ <20260710-b4-pre-scalable-cow-v2-18-2a5aa403d977@kernel.org>
+From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
+Autocrypt: addr=vbabka@kernel.org; keydata=
+ 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
+In-Reply-To: <20260710-b4-pre-scalable-cow-v2-18-2a5aa403d977@kernel.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260715-rubikpi-next-20260605-v2-5-67601d7a8581@thundersoft.com>
-References: <20260715-rubikpi-next-20260605-v2-0-67601d7a8581@thundersoft.com>
-In-Reply-To: <20260715-rubikpi-next-20260605-v2-0-67601d7a8581@thundersoft.com>
-To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Daniel Drake <drake@endlessm.com>, 
- Katsuhiro Suzuki <katsuhiro@katsuster.net>, 
- Matteo Martelli <matteomartelli3@gmail.com>, 
- Binbin Zhou <zhoubinbin@loongson.cn>, 
- Srinivas Kandagatla <srini@kernel.org>, Jaroslav Kysela <perex@perex.cz>, 
- Takashi Iwai <tiwai@suse.com>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- Roger Shimizu <rosh@debian.org>, linux-sound@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, 
- Hongyang Zhao <hongyang.zhao@thundersoft.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784124199; l=2744;
- i=hongyang.zhao@thundersoft.com; s=20260127; h=from:subject:message-id;
- bh=bq8g9xkHiuWTkk3XAF0GfB67818hIQ3ys42KjTG2uy4=;
- b=TU7Y/vfqmmE3PBsbqNs4aV/CQQffqcLkoSLbTM0lIPPmV0JfO1gyXi39GOLkApezBiAvz6Tp6
- WZu4NSZ8D/4AkOgJKsOXi6Qz2qjcZAYPqFQJK6BbFtQd+TjpRj+xR/O
-X-Developer-Key: i=hongyang.zhao@thundersoft.com; a=ed25519;
- pk=D9yL5W9Zj0lPBDAq9gzY++1849VlXuTWAkROzZ88J/4=
-X-HM-Tid: 0a9f6616f8a409d5kunm638899c2110dd
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkZGhlKVkwfHUsYHklKQh1JSVYVFA
-	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlITVVKSUJVSkhCVUJLWVdZFhoPEhUdFFlBWU9LSFVKS0
-	lPT09IVUpLS1VKQktLWQY+
-DKIM-Signature: a=rsa-sha256;
-	b=k+egMmu7mBB0s1EmV64EDydgX7fiejPU7BYLztvt0twcKzu5Ah7CkB0NnFPkxIX06ZmnuDDEQnuCLtzT2Lq0IkiqTb725a0E+TbH9/gzBpr8fn5/NrULl4+A0LMEc2xHhxgIYZ/zObH5e/Gss1zuonGYPxYteAXVITeJni14AfQ=; c=relaxed/relaxed; s=default; d=thundersoft.com; v=1;
-	bh=sF1yQe3cHSrdtvnwidVs42rm5Q0btdZJti8KGLZLjp4=;
-	h=date:mime-version:subject:message-id:from;
 
-RubikPi 3 connects an ES8316 codec to the primary MI2S interface for
-headset playback and capture, and an LT9611 bridge to the quaternary
-MI2S interface for HDMI audio.
+On 7/10/26 22:16, Lorenzo Stoakes wrote:
+> There are many instances in which linear_page_index() (as well as
+> linear_page_delta()) is open-coded, which is confusing and inconsistent.
+> 
+> Additionally, vma->vm_pgoff doesn't necessarily make it clear that this is
+> the page offset of the start of the VMA range.
+> 
+> Doing so also aids greppability.
+> 
+> So use vma_start_pgoff() in favour of directly accessing vma->vm_pgoff, and
+> linear_page_index() where we can.
+> 
+> This also lays the ground for future changes which will add an anonymous
+> page offset in order to be able to index MAP_PRIVATE-file backed anon
+> folios in terms of their virtual page offset.
+> 
+> No functional change intended.
+> 
+> Reviewed-by: Gregory Price <gourry@gourry.net>
+> Reviewed-by: SJ Park <sj@kernel.org>
+> Reviewed-by: Pedro Falcato <pfalcato@suse.de>
+> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
 
-Add board-specific DAI data for these links. Configure both directions
-of the primary interface for I2S with normal clock polarity and the
-codec as bit and frame clock consumer. Program the LPASS MCLK and BCLK,
-drive the ES8316 with its required 19.2 MHz MCLK, and enable the generic
-codec jack-detection setup on the playback link.
+Reviewed-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
 
-Configure the quaternary playback link with the same I2S clock format.
-Do not request a codec sysclk for this link because the LT9611 HDMI
-codec DAI does not implement set_sysclk().
+Nit:
 
-Select this configuration through the RubikPi 3 sound-card compatible.
+> diff --git a/mm/damon/vaddr.c b/mm/damon/vaddr.c
+> index 2058db9c01d5..d10b8042adb5 100644
+> --- a/mm/damon/vaddr.c
+> +++ b/mm/damon/vaddr.c
+> @@ -10,6 +10,7 @@
+>  #include <linux/mman.h>
+>  #include <linux/mmu_notifier.h>
+>  #include <linux/page_idle.h>
+> +#include <linux/pagemap.h>
+>  #include <linux/pagewalk.h>
+>  #include <linux/sched/mm.h>
+>  
+> @@ -623,8 +624,8 @@ static void damos_va_migrate_dests_add(struct folio *folio,
+>  	}
+>  
+>  	order = folio_order(folio);
+> -	ilx = vma->vm_pgoff >> order;
+> -	ilx += (addr - vma->vm_start) >> (PAGE_SHIFT + order);
+> +	ilx = vma_start_pgoff(vma) >> order;
+> +	ilx += linear_page_delta(vma, addr) >> order;
 
-Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
----
- sound/soc/qcom/sc8280xp.c | 39 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 39 insertions(+)
+Could these be combined to linear_page_index(vma, addr) >> order?
 
-diff --git a/sound/soc/qcom/sc8280xp.c b/sound/soc/qcom/sc8280xp.c
-index 885ec1e3e575..1354eecb56c9 100644
---- a/sound/soc/qcom/sc8280xp.c
-+++ b/sound/soc/qcom/sc8280xp.c
-@@ -410,6 +410,41 @@ static const struct snd_soc_common qcs6490_priv_data = {
- 	}),
- };
- 
-+static const struct snd_soc_common qcs6490_rubikpi3_priv_data = {
-+	.driver_name = "qcs6490",
-+	.dapm_widgets = sc8280xp_dapm_widgets,
-+	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+	SC8280XP_DAI_DATA(
-+		{
-+			.id = PRIMARY_MI2S_RX,
-+			.codec_dai_fmt = SND_SOC_DAIFMT_I2S |
-+					 SND_SOC_DAIFMT_NB_NF |
-+					 SND_SOC_DAIFMT_BC_FC,
-+			.mclk_rate = 19200000,
-+			.codec_sysclk_set = true,
-+			.mi2s_mclk_enable = true,
-+			.mi2s_bclk_enable = true,
-+			.jack_setup = SC8280XP_JACK_SETUP_CODEC,
-+		},
-+		{
-+			.id = PRIMARY_MI2S_TX,
-+			.codec_dai_fmt = SND_SOC_DAIFMT_I2S |
-+					 SND_SOC_DAIFMT_NB_NF |
-+					 SND_SOC_DAIFMT_BC_FC,
-+			.mclk_rate = 19200000,
-+			.codec_sysclk_set = true,
-+			.mi2s_mclk_enable = true,
-+			.mi2s_bclk_enable = true,
-+		},
-+		{
-+			.id = QUATERNARY_MI2S_RX,
-+			.codec_dai_fmt = SND_SOC_DAIFMT_I2S |
-+					 SND_SOC_DAIFMT_NB_NF |
-+					 SND_SOC_DAIFMT_BC_FC,
-+		}
-+	),
-+};
-+
- static const struct snd_soc_common qcs8275_priv_data = {
- 	.driver_name = "qcs8300",
- 	.dapm_widgets = sc8280xp_dapm_widgets,
-@@ -480,6 +515,10 @@ static const struct of_device_id snd_sc8280xp_dt_match[] = {
- 	{ .compatible = "qcom,sm8550-sndcard", .data = &sm8550_priv_data },
- 	{ .compatible = "qcom,sm8650-sndcard", .data = &sm8650_priv_data },
- 	{ .compatible = "qcom,sm8750-sndcard", .data = &sm8750_priv_data },
-+	{
-+		.compatible = "thundercomm,qcs6490-rubikpi3-sndcard",
-+		.data = &qcs6490_rubikpi3_priv_data,
-+	},
- 	{}
- };
- 
+>  
+>  	for (i = 0; i < dests->nr_dests; i++)
+>  		weight_total += dests->weight_arr[i];
 
--- 
-2.43.0
+> diff --git a/mm/filemap.c b/mm/filemap.c
+> index b39111abdc4b..1dbb4c6f824e 100644
+> --- a/mm/filemap.c
+> +++ b/mm/filemap.c
+> @@ -3411,8 +3411,8 @@ static struct file *do_sync_mmap_readahead(struct vm_fault *vmf)
+>  		 * of memory.
+>  		 */
+>  		struct vm_area_struct *vma = vmf->vma;
+> -		unsigned long start = vma->vm_pgoff;
+> -		unsigned long end = start + vma_pages(vma);
+> +		const unsigned long start = vma_start_pgoff(vma);
+> +		const unsigned long end = vma_end_pgoff(vma);
+>  		unsigned long ra_end;
+>  
+>  		ra->order = exec_folio_order();
+> @@ -3930,7 +3930,8 @@ vm_fault_t filemap_map_pages(struct vm_fault *vmf,
+>  		goto out;
+>  	}
+>  
+> -	addr = vma->vm_start + ((start_pgoff - vma->vm_pgoff) << PAGE_SHIFT);
+> +	addr = vma->vm_start +
+> +		((start_pgoff - vma_start_pgoff(vma)) << PAGE_SHIFT);
 
+This could be linear_page_index(vma, start_pgoff) <<
+
+>  	vmf->pte = pte_offset_map_lock(vma->vm_mm, vmf->pmd, addr, &vmf->ptl);
+>  	if (!vmf->pte) {
+>  		folio_unlock(folio);
+
+> --- a/mm/mempolicy.c
+> +++ b/mm/mempolicy.c
+> @@ -2049,8 +2049,8 @@ struct mempolicy *get_vma_policy(struct vm_area_struct *vma,
+>  		pol = get_task_policy(current);
+>  	if (pol->mode == MPOL_INTERLEAVE ||
+>  	    pol->mode == MPOL_WEIGHTED_INTERLEAVE) {
+> -		*ilx += vma->vm_pgoff >> order;
+> -		*ilx += (addr - vma->vm_start) >> (PAGE_SHIFT + order);
+> +		*ilx += vma_start_pgoff(vma) >> order;
+> +		*ilx += linear_page_delta(vma, addr) >> order;
+
+Also?
+
+>  	}
+>  	return pol;
+>  }
+
+> --- a/mm/nommu.c
+> +++ b/mm/nommu.c
+> @@ -975,7 +975,7 @@ static int do_mmap_private(struct vm_area_struct *vma,
+>  		/* read the contents of a file into the copy */
+>  		loff_t fpos;
+>  
+> -		fpos = vma->vm_pgoff;
+> +		fpos = vma_start_pgoff(vma);
+>  		fpos <<= PAGE_SHIFT;
+>  
+>  		ret = kernel_read(vma->vm_file, base, len, &fpos);
+> @@ -1378,7 +1378,8 @@ static int split_vma(struct vma_iterator *vmi, struct vm_area_struct *vma,
+>  	delete_nommu_region(vma->vm_region);
+>  	if (new_below) {
+>  		vma->vm_region->vm_start = vma->vm_start = addr;
+> -		vma->vm_region->vm_pgoff = vma->vm_pgoff += npages;
+
+yuck, good to remove that ugly construct
+it's not the only occurence in this function
+oh well
+
+> +		vma->vm_pgoff += npages;
+> +		vma->vm_region->vm_pgoff = vma_start_pgoff(vma);
+>  	} else {
+>  		vma->vm_region->vm_end = vma->vm_end = addr;
+>  		vma->vm_region->vm_top = addr;
