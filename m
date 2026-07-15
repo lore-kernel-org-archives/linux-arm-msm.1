@@ -1,405 +1,150 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.14])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E2EF431A31
-	for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 18:17:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE7843A7D9E;
+	Wed, 15 Jul 2026 18:58:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.14
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784139478; cv=none; b=Z0comOgdaCuX6XC+yoxDI8n/dknyonths+OQJD0Gykv0vtwKQbPVgBruXbwNyvRVwTsxOzXSQKIcGpK01xXiFLF30b9mARL6Da4a+ft8lSrhX3S1dWHo1X54pBggqZgfyoje37PQBCZqlVlSMX1d4XwuM8dMqI5M+fwEjJL9I0g=
+	t=1784141925; cv=none; b=jBkK6uRSr5ikJnpO5AJzDPYNacI/PT7Pyp7ZVTEbaGgJpDHDmOHXcvpeNWfl0+wmJhB3c+nvgmSWZneWjiJfC0FlwTVbfC2/1qJR/6Ohp+QaO7odRxAMwuWOVvPMgHtC5nz4gWxT1gQPMZnug3Kn4OxCdU3eY5Mw9pmkYEKZ4/4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784139478; c=relaxed/simple;
-	bh=hEc5PN66rn79NzpBQU3rsBRq7NY/VY/unhGC5vPHt+o=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=L2Eo/SgeS9CqrChIL8UTU5o945X4Gh5OJZBx/Msa7EGAiw3xJtQridWJTqYadG7cfKlmGkG7aIJsyN1fqYCPCn9UKnIJP5n1lOYKXVONOyO9fEf0X82ba+kGBcV814Y3rauTMtNm/FBOnrryq3b+EiE915XTchsv2lPVQAj2WkU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=KNqUGHPR; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DaG2YYc9; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784141925; c=relaxed/simple;
+	bh=o1wdb3hvZg8Mwx/nf5Q5Kz1h9rVn80wGsO8ZhPlCSqA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=RzyIhloKsu3XgdTsSlWBELjrqkWqm8brC0IGN0hxE6z5y6YDqGIeUwn5EgsNNGglKTeWxFgM+Fb0gZyD6r+pO54ERW+ZY2ZctE8+MeDznXuIh/oD/NbDM3Y5q6cI2qrYqWwEk5DRdUu6lAhH8EC7OQ77bDdk/XEqv7ls5xceVb8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=n/Hbkcke; arc=none smtp.client-ip=192.198.163.14
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="KNqUGHPR";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DaG2YYc9"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66FHBdln4098403
-	for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 18:17:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	oXiHdssRC7lJ3rFr84TqM3Lg5rx2BEdEQ8SGPePL4RU=; b=KNqUGHPRZ8l3/71Q
-	fsTtTdl18Ka17s6x6kwIuA0aJnij+/snEsrSXrijNmiwX8NzhtxK/SoA0MVrhAYJ
-	G9QHJs4v85zP6i+zmKPzoFjYU9CWa1A5fiudc4X8gcjDv8asxhsn3N5YeCvUYa1x
-	fczCS5ypAHg/ndY+FkmJ6YvxHZXeEAtyxYMMLlyjQtgNPPTzJMk8Tw/YnWVDAXkl
-	cLAK6FMUkqNZM/BNjmN+W+7hqJKwMKnyWk20peDiuv/beN6NeZfJdbF2dAgukCuH
-	8cieD2oaYkyjAc9ofbT0/Ueozg1mf/eXxgc3G0YXDQbmhBKomVWTXh52lOsEeqtB
-	mu3d/g==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fed060s6q-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 18:17:52 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-c916d17dd43so9485341a12.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 11:17:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784139472; x=1784744272; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=oXiHdssRC7lJ3rFr84TqM3Lg5rx2BEdEQ8SGPePL4RU=;
-        b=DaG2YYc95p5gZ9pc181NmD/+wBHwSLeG6Ce03LfP6j8lxIsn2M7TYXSoQpnNms7St7
-         ElduMvgmdN936rzsPxCJcoTqARLe2tHk2M6jjK+vR6ONoHrAZY1evaQPTq/z48s0rogy
-         eWndtBQNzxanlc6mpDo2zVPrl0suflVwqbC+qOxE4kMshTkyLt15UhlrLaICng5KAoTa
-         j8CeCDJ5Ve2TTSlh6xmk5ESUffCkDt7p08OZfDlaTzV7mxLsJZQF4X+2a/wlyI1gX351
-         2yTBx26b3F8/nLpYgGCeYxIdixc9afkLjKbpRdYBxE8y5bK6tfOyEaIFcOzA5uUP+ktd
-         RRdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784139472; x=1784744272;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=oXiHdssRC7lJ3rFr84TqM3Lg5rx2BEdEQ8SGPePL4RU=;
-        b=byURYXZPqLkFGsRSV82MU9pCs2lCDn1xhQ4Ro0xNJKVgFwc8ASY3XKfXbrIyeDtrT0
-         iGNXpWzuAMJsaeNcb7skM93qppR5/l3+Q9F2tTLbogRyjFx76UEMpUFNcXbioajHd5fB
-         rN7TE8moo0oUXW3aGglAUokfcYlQ/4DXcn9apsHd4IU0E/UpZ9ki++Vpx8ns/TKD8nS0
-         Kz4pbCh/pZvheW0pW5jLZ7ER3HNlr7PbrmqapJTgsfB70PFwS14mHkfrjjj28uWtZ8tA
-         +XtznzghdTrNmA6LuITP2KnbWhE2uLOltnuENtVe7jimc0bdbFtDBeTAxH6lUQ9BEcK1
-         5iUQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rroccn899mcU+QwAIu7SW1thKMbiydDX5HB5vI73GK/31k1XwUssT2HjDS5MXaYZhCJcNHPHt8vn+3jgLdD@vger.kernel.org
-X-Gm-Message-State: AOJu0YxHag8GoC2BOrAL1S9FLyJY7aeArxUZ2mjL6yidCN1D1JkxtNW2
-	sd1AJrg5tV2bY/yQp00OpvBhvLLmut5++1xmyhlW5qix6JRo+LTXMGw4COscWGidOyhrnaKzRLi
-	uEktBWATnnViz/59CvTH0WfCP5hxdMFemRDBMraoRshD93wnKgF5rh3bgrujCsCDd6HSX
-X-Gm-Gg: AfdE7ckaI1UqtQ/WLqPiIDmjd3tkyHWKSxgK1m3wbtCpNf8megFG7TLuG1biAIgntuv
-	IuGp9cqx2AR+X44lBQ5NLgxKw4NlCreWZd0g/2twtqDQYDk95yaoAQoN4yEa7QHcZWaDdq7r4E/
-	D7KHY6+lWpqBg8hUuIeBEOxGPq4fN93HbC7aqFMNXjHwUeDzm3ortAR+sWoS3jmv8Y30ahqSxUb
-	DgSG5cNOaqB0mviMQeZvqe0N4OygtD2lemH01Kam/m6rd64O+jSjEZ1cJmuqd5dZ/8KNrkyprBH
-	EK68596uCVHIEvgoZjTdNYPICvo/qxmN3Fq3N/ktRn4VfNPEWasJHkRZXsKGP6IGxXWX4jSdVVv
-	c3pIa24Mg8LlstqA0tL/h3BlYAM9h1fE477HjutwXlJCKPoCvfA==
-X-Received: by 2002:a05:6a21:2291:b0:3b4:6f7e:d0f9 with SMTP id adf61e73a8af0-3c36c0f6eb4mr4393097637.3.1784139472052;
-        Wed, 15 Jul 2026 11:17:52 -0700 (PDT)
-X-Received: by 2002:a05:6a21:2291:b0:3b4:6f7e:d0f9 with SMTP id adf61e73a8af0-3c36c0f6eb4mr4393064637.3.1784139471373;
-        Wed, 15 Jul 2026 11:17:51 -0700 (PDT)
-Received: from [192.168.1.5] ([122.164.226.74])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3140e4fcd31sm3878330eec.4.2026.07.15.11.17.44
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 15 Jul 2026 11:17:50 -0700 (PDT)
-Message-ID: <7c905a1c-f65e-4ef5-a65c-2be83ff820ba@oss.qualcomm.com>
-Date: Wed, 15 Jul 2026 23:47:42 +0530
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="n/Hbkcke"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1784141922; x=1815677922;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=o1wdb3hvZg8Mwx/nf5Q5Kz1h9rVn80wGsO8ZhPlCSqA=;
+  b=n/HbkckensbobOzm7FcgRY5B/EIJXpWbPY7XMHVrTdI5Bag3fD5KFM/M
+   rYY5MXH2u6rDULz8of0eOz9mTiWx/NvlhaHH9U+vQdo3WLL3Eg5USG5PR
+   kjz4Wq5RmqtDzd8td4lKfn9YGlm/pz5TRMX1uwt5BBsWq6NOWnI5PJ2gM
+   QAg8nUhG2/zPV8AZ+S4PXDTspYjrIi5fBra8DFp45eE7jwmldUzE4FPNC
+   jJoU/EoG3kIekm++PXZVYZg2MSUDs14qOFDmaN0IqTTCxPB0Sf7++VzLT
+   B/3WVNffEetl/HSKSuA2442pj469CoAE8+t7gv9xik+EOT4QZ3aOLzwAd
+   A==;
+X-CSE-ConnectionGUID: YBTg6K9ZSzefdbahi2FzjA==
+X-CSE-MsgGUID: Krh71h4vRoiVHTdsc4T49A==
+X-IronPort-AV: E=McAfee;i="6800,10657,11847"; a="84834934"
+X-IronPort-AV: E=Sophos;i="6.25,166,1779174000"; 
+   d="scan'208";a="84834934"
+Received: from fmviesa008.fm.intel.com ([10.60.135.148])
+  by fmvoesa108.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Jul 2026 11:58:31 -0700
+X-CSE-ConnectionGUID: 49XMinnBQ1q16eL0jxD8dg==
+X-CSE-MsgGUID: kjqxmeOcQsKaDHlmEkIC5Q==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,166,1779174000"; 
+   d="scan'208";a="253661823"
+Received: from mkosciow-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.244.129])
+  by fmviesa008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Jul 2026 11:58:10 -0700
+Date: Wed, 15 Jul 2026 21:58:08 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Link Mauve <linkmauve@linkmauve.fr>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Jerome Brunet <jbrunet@baylibre.com>,
+	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+	Jonathan Cameron <jic23@kernel.org>,
+	David Lechner <dlechner@baylibre.com>,
+	Nuno =?iso-8859-1?Q?S=E1?= <nuno.sa@analog.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Sakari Ailus <sakari.ailus@linux.intel.com>,
+	Tianshu Qiu <tian.shu.qiu@intel.com>,
+	Bingbu Cao <bingbu.cao@intel.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Aaro Koskinen <aaro.koskinen@iki.fi>,
+	Andreas Kemnade <andreas@kemnade.info>,
+	Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
+	Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	"Vaibhaav Ram T.L" <vaibhaavram.tl@microchip.com>,
+	Kumaravel Thiagarajan <kumaravel.thiagarajan@microchip.com>,
+	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Vladimir Zapolskiy <vz@mleia.com>,
+	=?iso-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>,
+	Orson Zhai <orsonzhai@gmail.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Chunyan Zhang <zhang.lyra@gmail.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Praveen Teja Kundanala <praveen.teja.kundanala@amd.com>,
+	Kalyani Akula <kalyani.akula@amd.com>,
+	Michal Simek <michal.simek@amd.com>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Joshua Kinard <linux@kumba.dev>,
+	Antoniu Miclaus <antoniu.miclaus@analog.com>,
+	Chen-Yu Tsai <wens@kernel.org>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Samuel Holland <samuel@sholland.org>,
+	Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
+	Gary Guo <gary@garyguo.net>,
+	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+	Benno Lossin <lossin@kernel.org>,
+	Andreas Hindborg <a.hindborg@kernel.org>,
+	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	Tamir Duberstein <tamird@kernel.org>,
+	Alexandre Courbot <acourbot@nvidia.com>,
+	Onur =?iso-8859-1?Q?=D6zkan?= <work@onurozkan.dev>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Johan Hovold <johan@kernel.org>,
+	Ronald Claveau <linux-kernel-dev@aliel.fr>,
+	Salah Triki <salah.triki@gmail.com>, Yury Norov <ynorov@nvidia.com>,
+	David Carlier <devnexen@gmail.com>,
+	Achim Gratz <Achim.Gratz@stromeko.de>,
+	Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+	Patrick Wicki <patrick.wicki@siemens.com>,
+	Markus Heidelberg <m.heidelberg@cab.de>,
+	Markus Perkins <markus@notsyncing.net>,
+	Uwe =?iso-8859-1?Q?Kleine-K=F6nig_=28The_Capable_Hub=29?= <u.kleine-koenig@baylibre.com>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Abd-Alrhman Masalkhi <abd.masalkhi@gmail.com>,
+	Chen Ni <nichen@iscas.ac.cn>, Kees Cook <kees@kernel.org>,
+	linux-arm-kernel@lists.infradead.org,
+	linux-amlogic@lists.infradead.org, linux-kernel@vger.kernel.org,
+	linux-iio@vger.kernel.org, linux-media@vger.kernel.org,
+	linux-omap@vger.kernel.org, mfd@lists.linux.dev,
+	linux-i2c@vger.kernel.org, linux-gpio@vger.kernel.org,
+	imx@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com, linux-rtc@vger.kernel.org,
+	linux-sunxi@lists.linux.dev, rust-for-linux@vger.kernel.org
+Subject: Re: [PATCH 1/8] nvmem: core: make reg_write() take a const void *
+Message-ID: <alfYQP4a1U9pI6UR@ashevche-desk.local>
+References: <20260715175229.24672-1-linkmauve@linkmauve.fr>
+ <20260715175229.24672-2-linkmauve@linkmauve.fr>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/6] arm64: dts: qcom: qcs6490-rubikpi3: Add audio
- support
-To: Hongyang Zhao <hongyang.zhao@thundersoft.com>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Daniel Drake <drake@endlessm.com>,
-        Katsuhiro Suzuki <katsuhiro@katsuster.net>,
-        Matteo Martelli <matteomartelli3@gmail.com>,
-        Binbin Zhou <zhoubinbin@loongson.cn>,
-        Srinivas Kandagatla
- <srini@kernel.org>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Roger Shimizu <rosh@debian.org>, linux-sound@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org
-References: <20260715-rubikpi-next-20260605-v2-0-67601d7a8581@thundersoft.com>
- <20260715-rubikpi-next-20260605-v2-6-67601d7a8581@thundersoft.com>
-Content-Language: en-US
-From: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-In-Reply-To: <20260715-rubikpi-next-20260605-v2-6-67601d7a8581@thundersoft.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE1MDE4MiBTYWx0ZWRfX2YjfD9OBDqxu
- oT/YxT2TYLIrF17Xd+z3XW+nmdSJwfMM1pvJ/LqvgIub5+MFYciJJU+uM/+czCYoIIPFOsh9KQv
- xQVbBw3r23h4KtYjg/er7qNnrdaIE+8=
-X-Proofpoint-GUID: XrkHaziaYRUy-vIBsksyIOB3PGUsfMfU
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE1MDE4MiBTYWx0ZWRfXz5FYuM1F2baY
- hw5YCpm5Bwir5uBJngZpBsNZ4d36rwk8vpFaaZkaY89PF2qk6bGLBj5Oz9QpDAQfK6JijZxGoNk
- ZL5ZwjwvVaShMqokALbVaPvAxHSuOoQjtbR29eW/OmC0yCOMYp27nROxtUi53MBT/naoa1uSbGP
- anRXfH3EUBj3IUkj8Ob5KliV46zEYuOaeWuoANXP1O38csrFut3T95CnVXcZHpvu/jOeZ3zd3eJ
- 823gRwKwyNCrchTJzXZKm2rH+HK1obi8jDbjlyOCVBxcmIxtkStLGaYIFUM1t/OoUqWr8Lm+pui
- I7GxLxpSW8z9z77u1QUlR/3SrqSj6ipsZqaTeAGDOLeGTDC4qnPUDIfQy+SY1GBSHvCLa+m0wUJ
- t01lrYeSpsLIDeiC/vrgYI5nAJ/aKv6rdzSTb5bNf2QBhrr5CajPuafZXGCS8ulNlNrsprwjuRR
- CbtMMwTcTqm+d5LF4gw==
-X-Authority-Analysis: v=2.4 cv=Xb25Co55 c=1 sm=1 tr=0 ts=6a57ced0 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=n9TYrBAzqQq97mF55NlG6Q==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=Wdb1h0LgAAAA:8 a=0R1nZIO2IiU70gt1Wv8A:9 a=QEXdDO2ut3YA:10
- a=x9snwWr2DeNwDh03kgHS:22 a=j5gyrzqu0rbr1vhfHjzO:22
-X-Proofpoint-ORIG-GUID: XrkHaziaYRUy-vIBsksyIOB3PGUsfMfU
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-15_04,2026-07-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 priorityscore=1501 suspectscore=0 bulkscore=0
- impostorscore=0 malwarescore=0 adultscore=0 lowpriorityscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607150182
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260715175229.24672-2-linkmauve@linkmauve.fr>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
+On Wed, Jul 15, 2026 at 07:52:17PM +0200, Link Mauve wrote:
+> This callback used to take a mutable void * for no reason, this was
+> found while drafting the Rust abstraction.
 
+I don't understand how it was compiled. const void * != void * in C and can't
+be implicitly covered, if I am not mistaken. So, this patch heavily should
+break the build. What did I miss?
 
-On 7/15/2026 7:32 PM, Hongyang Zhao wrote:
-> RubikPi 3 uses the AudioReach firmware path for its external audio
-> interfaces. The primary MI2S interface connects to an ES8316 codec for
-> headset playback and capture, while the quaternary MI2S interface feeds
-> the LT9611 HDMI bridge.
-> 
-> Enable the AudioReach description and add the three DAI links. Describe
-> the primary MI2S MCLK and bit clock inputs under the backend DAI so the
-> machine driver can control them. Add the primary and quaternary pin
-> configurations to the sound card and make the LT9611 codec DAI
-> addressable.
-> 
-> Describe the ES8316, its 3.3 V enable supply, 19.2 MHz MCLK and inverted
-> GPIO jack-detect signal. Route the codec headphone outputs and microphone
-> input to the board headset connector.
-> 
-> Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
-> ---
->   .../boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts | 159 +++++++++++++++++++++
->   1 file changed, 159 insertions(+)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
-> index d8a9a7e47bdc..7b010823d692 100644
-> --- a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
-> +++ b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
-> @@ -19,6 +19,7 @@
->   #include "pm7325.dtsi"
->   #include "pm8350c.dtsi" /* PM7350C */
->   #include "pmk8350.dtsi" /* PMK7325 */
-> +#include "qcs6490-audioreach.dtsi"
->   
->   /delete-node/ &adsp_mem;
->   /delete-node/ &cdsp_mem;
-> @@ -128,6 +129,23 @@ fan0: pwm-fan {
->   		pinctrl-names = "default";
->   	};
->   
-> +	vreg_es8316_3v3: regulator-es8316-3v3 {
-> +		compatible = "regulator-fixed";
-> +
-> +		regulator-name = "vreg_es8316_3v3";
-> +		regulator-min-microvolt = <3300000>;
-> +		regulator-max-microvolt = <3300000>;
-> +
-> +		gpio = <&tlmm 117 GPIO_ACTIVE_HIGH>;
-> +		enable-active-high;
-> +
-> +		pinctrl-0 = <&es8316_power_on>;
-> +		pinctrl-names = "default";
-> +
-> +		regulator-always-on;
-> +		regulator-boot-on;
-> +	};
-> +
->   	vreg_eth_1v8: regulator-eth-1v8 {
->   		compatible = "regulator-fixed";
->   
-> @@ -727,6 +745,26 @@ &gpu_zap_shader {
->   	firmware-name = "qcom/qcs6490/a660_zap.mbn";
->   };
->   
-> +&i2c0 {
-> +	status = "okay";
-> +
-> +	es8316: audio-codec@11 {
-> +		compatible = "everest,es8316";
-> +		reg = <0x11>;
-> +		#sound-dai-cells = <0>;
-> +
-> +		clocks = <&q6prmcc LPASS_CLK_ID_MCLK_1 LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-> +		clock-names = "mclk";
-> +
-> +		interrupts-extended = <&tlmm 63 IRQ_TYPE_LEVEL_HIGH>;
-> +
-> +		pinctrl-0 = <&es8316_jack_detect>;
-> +		pinctrl-names = "default";
-> +
-> +		everest,jack-detect-inverted;
-> +	};
-> +};
-> +
->   /* Pin 3, 5 in 40-pin connector */
->   &i2c1 {
->   	status = "okay";
-> @@ -740,6 +778,7 @@ &i2c9 {
->   	lt9611_codec: hdmi-bridge@39 {
->   		compatible = "lontium,lt9611";
->   		reg = <0x39>;
-> +		#sound-dai-cells = <1>;
->   
->   		interrupts-extended = <&tlmm 20 IRQ_TYPE_EDGE_FALLING>;
->   		reset-gpios = <&tlmm 21 GPIO_ACTIVE_HIGH>;
-> @@ -978,6 +1017,27 @@ &pon_resin {
->   	status = "okay";
->   };
->   
-> +&q6apmbedai {
-> +	#address-cells = <1>;
-> +	#size-cells = <0>;
-> +
-> +	dai@10 {
-> +		reg = <PRIMARY_MI2S_RX>;
-> +		clocks = <&q6prmcc LPASS_CLK_ID_MCLK_1 LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
+-- 
+With Best Regards,
+Andy Shevchenko
 
-Drop this; it is already enabled from the codec node.
-
-Why is the same clock being enabled in two places?
-
-> +			 <&q6prmcc LPASS_CLK_ID_PRI_MI2S_IBIT LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-> +		clock-names = "mclk",
-> +			      "bclk";
-> +	};
-> +
-> +	dai@11 {
-> +		reg = <PRIMARY_MI2S_TX>;
-> +		clocks = <&q6prmcc LPASS_CLK_ID_MCLK_1 LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
-> +			 <&q6prmcc LPASS_CLK_ID_PRI_MI2S_IBIT LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-> +		clock-names = "mclk",
-> +			      "bclk";
-> +	};
-> +};
-> +
->   &qupv3_id_0 {
->   	firmware-name = "qcom/qcm6490/qupv3fw.elf";
->   
-> @@ -1014,6 +1074,69 @@ &sdhc_2 {
->   	status = "okay";
->   };
->   
-> +&sound {
-> +	compatible = "thundercomm,qcs6490-rubikpi3-sndcard";
-> +	model = "QCS6490-Thundercomm-RubikPi3";
-> +
-> +	pinctrl-0 = <&mi2s0_data0>, <&mi2s0_data1>, <&mi2s0_mclk>,
-> +		    <&mi2s0_sclk>, <&mi2s0_ws>,
-> +		    <&lpass_qua_mi2s_sclk>, <&lpass_qua_mi2s_ws>,
-> +		    <&lpass_qua_mi2s_data>;
-> +	pinctrl-names = "default";
-> +
-> +	audio-routing = "Headphone Jack", "HPOL",
-> +			"Headphone Jack", "HPOR",
-> +			"MIC2", "Mic Jack";
-> +
-> +	mi2s-playback-dai-link {
-> +		link-name = "MI2S-LPAIF-RX-PRIMARY";
-> +
-
-What does "MI2S-LPAIF-RX-PRIMARY" represents?
-
-> +		codec {
-> +			sound-dai = <&es8316>;
-> +		};
-> +
-> +		cpu {
-> +			sound-dai = <&q6apmbedai PRIMARY_MI2S_RX>;
-> +		};
-> +
-> +		platform {
-> +			sound-dai = <&q6apm>;
-> +		};
-> +	};
-> +
-> +	mi2s-capture-dai-link {
-> +		link-name = "MI2S-LPAIF-TX-PRIMARY";
-> +
-> +		codec {
-> +			sound-dai = <&es8316>;
-> +		};
-> +
-> +		cpu {
-> +			sound-dai = <&q6apmbedai PRIMARY_MI2S_TX>;
-> +		};
-> +
-> +		platform {
-> +			sound-dai = <&q6apm>;
-> +		};
-> +	};
-> +
-> +	quaternary-mi2s-playback-dai-link {
-> +		link-name = "MI2S-LPAIF_RXTX-RX-PRIMARY";
-> +
-> +		codec {
-> +			sound-dai = <&lt9611_codec 0>;
-> +		};
-> +
-> +		cpu {
-> +			sound-dai = <&q6apmbedai QUATERNARY_MI2S_RX>;
-> +		};
-> +
-> +		platform {
-> +			sound-dai = <&q6apm>;
-> +		};
-> +	};
-> +};
-> +
->   /* Pin 19, 21, 23, 24 in 40-pin connector */
->   &spi12 {
->   	status = "okay";
-> @@ -1228,6 +1351,29 @@ &sdc2_data {
->   	drive-strength = <10>;
->   };
->   
-> +&lpass_tlmm {
-> +	lpass_qua_mi2s_sclk: qua-mi2s-sclk-state {
-> +		pins = "gpio0";
-> +		function = "qua_mi2s_sclk";
-> +		drive-strength = <8>;
-> +		bias-disable;
-> +	};
-> +
-> +	lpass_qua_mi2s_ws: qua-mi2s-ws-state {
-> +		pins = "gpio1";
-> +		function = "qua_mi2s_ws";
-> +		drive-strength = <8>;
-> +		bias-disable;
-> +	};
-> +
-> +	lpass_qua_mi2s_data: qua-mi2s-data-state {
-> +		pins = "gpio2", "gpio3", "gpio4";
-> +		function = "qua_mi2s_data";
-> +		drive-strength = <8>;
-> +		bias-disable;
-> +	};
-> +};
-> +
->   &tlmm {
->   	pcie1_reset_n: pcie1-reset-n-state {
->   		pins = "gpio2";
-> @@ -1366,6 +1512,12 @@ m2_vcc_pin: m2-vcc-state {
->   		input-disable;
->   	};
->   
-> +	es8316_jack_detect: es8316-jack-detect-state {
-> +		pins = "gpio63";
-> +		function = "gpio";
-> +		bias-disable;
-> +	};
-> +
->   	lt9611_vcc_pin: lt9611-vcc-pin-state {
->   		pins = "gpio83";
->   		function = "gpio";
-> @@ -1395,6 +1547,13 @@ pcie0_wake_n: pcie0-wake-n-state {
->   		bias-pull-up;
->   	};
->   
-> +	es8316_power_on: es8316-power-on-state {
-> +		pins = "gpio117";
-> +		function = "gpio";
-> +		drive-strength = <2>;
-> +		bias-pull-down;
-> +	};
-> +
->   	wifi_power_on: wifi-power-on-state {
->   		pins = "gpio125";
->   		function = "gpio";
-> 
 
