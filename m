@@ -1,160 +1,163 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from BL2PR02CU003.outbound.protection.outlook.com (mail-eastusazon11011021.outbound.protection.outlook.com [52.101.52.21])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40FE246AEF2
-	for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 12:27:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784118476; cv=none; b=PCO/aRVMSKVHrXQI12ZEDPjyKpdJ+ghj5eGGBY5s5OmfiQxld6uRyUK5lEzhYKuSOZ+vT2775IaKxRFYfl7f3BUEoIhYq34MPdNjNOqszAcZZ87QSuTvsgUqWVnU1XrLUT8mT02U+pR3M+mQHrGgvufJA5TE/L/5uFHl80SgTpI=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784118476; c=relaxed/simple;
-	bh=FyvVJli3cTKUMPT5HpsOpQIxQvLLkFu+nSooG+r5XBo=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=XQkEdH4y1URrfOPwa84zRo0U/qIS2vMvGkQG5ypcXNU25EVySzdIvlwb46zgjiBFfzyY5LgJNUG/UfLFGHwqO2Cdg4s1zhKNP91XVQIVYcNwn/CHhcaauNbitIA2LEzKE7EJSIJ8vS4k2n/plQqN7XTe5Z1OkJlpTB72s6b3aM0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QloyeeZA; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C289448CEE;
+	Wed, 15 Jul 2026 12:28:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.52.21
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784118517; cv=fail; b=CRLQsB+ncW/q7QzJ7qrTnSkqwZK/IIxRjVINAJZGIEwC+o4MUoHCIQSQj3I8oJUx3hbIlu+ApSHByHTg4lkXhXLsHKa0ncWCJ37NvVmSKJULpDnr8CG9GJi6pJw7Wbl6xnUt4m0ngj3K5JVt1veUuDhQdl639M5xYrrX0Up6mig=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784118517; c=relaxed/simple;
+	bh=jc03ho4zpTeiZIgkmXzmDdigVbSwdPFXwIv5PN+rEj8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
+	 Content-Disposition:In-Reply-To:MIME-Version; b=CBpjNsqB2MHzkMOCuf6tIXsS/5nFUOKgWN62xYp5fW6UzB/wHxRuihY8cCruOJhozSwQY+ImOP6KX9qQFePfczf1C6i+Uhn1uyef2I/1dMrkLdso+YzVPTktlZsL/QOwPlSe+iv6X60hq3zAPbes01yBGZTmPYEBmwYVQqnrhAo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=AnYDMpKw; arc=fail smtp.client-ip=52.101.52.21
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QloyeeZA"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EDAFC1F00A3A
-	for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 12:27:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784118475;
-	bh=j28hcJjQkZPaS3yZ4782JQxyz8Zd4wPyi3h2uE2kkXA=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=QloyeeZA+L0U0Nakkwr/lWVJ2epmV8vXIHzwlA6j94fp0HUd+UPMioZEIUHbjDN8W
-	 iKIdi3aCx+rXYWbmwTIh1ICFS6PFQssNjQAquhZJqFjg0wA+njAN4N57PbyX7F9jNB
-	 WUXt06OccYpYq0vonrNCnwKy5yOELeoBdgAtUg/Q36E0h9C2Ls8aJLO14r7o82lxGp
-	 /FiDjbu1eD3n4ltGunskB6hppF21R6j9g5Zujnk0NI6TvUJOrZ4jy2IsFX0nUWRTwf
-	 qsO7X2nTHn4u7dgR8dLHesPpOA7XOin9U5dPJEmjhmViRqSGvWZNPtZNbaLKb5KvK4
-	 fP5r1UYPLKo9w==
-Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-5aeba09900bso1530531e87.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 05:27:54 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rp6q38dDqQfmnF8XFofySQfgioCHidURriumg4dRNQB92UZ3zYLZGcexSGgQB97K+FTMXEWtbS3KKw8bC5Q@vger.kernel.org
-X-Gm-Message-State: AOJu0YxT8kTvIIqd1pEHMoV6cUHLXRnv19vuEGZvo18zToOtc0xs/jb0
-	4ZSRKSAOidCDxYAhEViMfDFyPpK//BmhaIDcxXzUO3KxD1iuWl54/UMy03X52T1JZChVkSk4mB/
-	X+bjPYn2zj+i7aGgXf9ghbrqIo+30BPt6frz23L2PGg==
-X-Received: by 2002:a05:6512:250f:b0:5b1:544e:7185 with SMTP id
- 2adb3069b0e04-5b1544e721amr2489500e87.40.1784118473678; Wed, 15 Jul 2026
- 05:27:53 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 15 Jul 2026 05:27:51 -0700
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 15 Jul 2026 05:27:51 -0700
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260714-arm-psci-system_reset2-vendor-reboots-v23-0-e7453c548c21@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="AnYDMpKw"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=cWD/8JbH3A7wLsCX4CTQ+bfRbn28WbRjk33D0KE9ZJs0LPnptHZToV+GkjTzE3nLjdDDUhZAD++qgfNQDYnC5l0qjZfuiad9WxpHSv8RLErvAh8sCH8JX8jXbELdxll5DsTm4iTKwWdCJwoypeKvb+gOUnHinSzHYZksGReUVFgEjJWJYaa9dlo6DvDn5Y/GqPMiVjwxvGxx5c3MxPBfV/zJ3FmfJ+5jalxrkPvD/gNtnxgHgVH6Oj6/PZl6cQOyU5mj8R9Sa4J/3lUwCwig9p7LeYk6pXYpFSabD5L4m3vtDj0TWosyVZo31xzXecIMQ0RKJUXPtomjER+QnQ2zYQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OqlFfh1vcigZYeBrbeHJVURj7mAIuSTt1J48yfaOaIM=;
+ b=x6EREodjo41IFyNsn6bwxgdfRqKhiFYlaRC7Tnx1wqCdm+1rvNSJZZGTb4FwmcGgTcTIHzkcTOyuAAyj9RzAE+hgik8mk/4GB/jECQwfZKJIHSSfw08p9Idl4f0pQbkZ/CscGsAt3TGFt+nyvH+z5xCs+VrIz4MmY3R67gkSNA3zxMJVlIU30N0LuIE7sSQ3FmdRaFBueNHoE2F954mpuyg2AGjkq+wIDv1JA2f1mU+iWqAt2ihoRpiwn0lK3zbd69LxCRy5RD9vyq1tbr71X8Qa8y/By7Ni4OjX6r4g2ubliW5FyHZAS7NZIf8SGMLEBk0UzY2GReYJJp5XNnKJWA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OqlFfh1vcigZYeBrbeHJVURj7mAIuSTt1J48yfaOaIM=;
+ b=AnYDMpKwhXmG7Q1gyjDq9KKToDowyLbQdZ78vvPNYLLM2IBuEpgEA//VYAj/HSORxW+FkO0/nU0zKRV1+5Mht2LT4CaYeQU3umXm9AyHXPn8y9+kkcFWxDHx4cgxEVebsuzMKl8/tZkbYuBplDEAtmSCkeIKIkDqXGY+D0SD6Ml3ZdaUHsXhdFilpoorYI/GFiojxV4a0qcpSVIH4Nm99UeYTqRn0NuJjvro8/7BhiCkDu05syrzGsVOB+y9LSSECV7t5ViC/gSyEt7SXb6JbScaI+2j5d6r5JMZciFNyEQ8/6VmsOhqB4rk4ZWn51WcEB4E3/kOk1+vTrt4Dm/r7g==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from LV8PR12MB9620.namprd12.prod.outlook.com (2603:10b6:408:2a1::19)
+ by MW4PR12MB7240.namprd12.prod.outlook.com (2603:10b6:303:226::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.10; Wed, 15 Jul
+ 2026 12:28:31 +0000
+Received: from LV8PR12MB9620.namprd12.prod.outlook.com
+ ([fe80::299d:f5e0:3550:1528]) by LV8PR12MB9620.namprd12.prod.outlook.com
+ ([fe80::299d:f5e0:3550:1528%4]) with mapi id 15.21.0202.014; Wed, 15 Jul 2026
+ 12:28:31 +0000
+Date: Wed, 15 Jul 2026 09:28:30 -0300
+From: Jason Gunthorpe <jgg@nvidia.com>
+To: Will Deacon <will@kernel.org>
+Cc: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>,
+	"Joerg Roedel (AMD)" <joro@8bytes.org>,
+	Robin Murphy <robin.murphy@arm.com>, linux-arm-msm@vger.kernel.org,
+	iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	Prakash Gupta <prakash.gupta@oss.qualcomm.com>
+Subject: Re: [PATCH] iommu/io-pgtable-arm: Add support for contiguous hint bit
+Message-ID: <20260715122830.GB3775915@nvidia.com>
+References: <20260618-iommu_contig_hint-v1-1-4502a59e6388@oss.qualcomm.com>
+ <20260703161228.GA1948451@nvidia.com>
+ <b7224dff-7e51-49cb-8421-14d090492dfc@oss.qualcomm.com>
+ <20260715113913.GA3775915@nvidia.com>
+ <ald3CuddY6I7gml1@willie-the-truck>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ald3CuddY6I7gml1@willie-the-truck>
+X-ClientProxiedBy: MN2PR06CA0025.namprd06.prod.outlook.com
+ (2603:10b6:208:23d::30) To LV8PR12MB9620.namprd12.prod.outlook.com
+ (2603:10b6:408:2a1::19)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260714-arm-psci-system_reset2-vendor-reboots-v23-0-e7453c548c21@oss.qualcomm.com>
-Date: Wed, 15 Jul 2026 05:27:51 -0700
-X-Gmail-Original-Message-ID: <CAMRc=Mc4e1Rso5Vr1ZoRTkAp4WYUz8H-dQWUjkyBg5sgXiDLOw@mail.gmail.com>
-X-Gm-Features: AUfX_mxYq9w3t7suoGM2tbsXEv1g058iRFyDqupc6ScLWcGXZxK2WeoKHlbXNCk
-Message-ID: <CAMRc=Mc4e1Rso5Vr1ZoRTkAp4WYUz8H-dQWUjkyBg5sgXiDLOw@mail.gmail.com>
-Subject: Re: [PATCH v23 00/13] Implement PSCI reboot mode driver for PSCI resets
-To: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	devicetree@vger.kernel.org, Florian Fainelli <florian.fainelli@broadcom.com>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
-	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, Andre Draszik <andre.draszik@linaro.org>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>, mfd@lists.linux.dev, 
-	Srinivas Kandagatla <srini@kernel.org>, Sebastian Reichel <sebastian.reichel@collabora.com>, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, Song Xue <quic_songxue@quicinc.com>, 
-	Sebastian Reichel <sre@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
-	Lorenzo Pieralisi <lpieralisi@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Christian Loehle <christian.loehle@arm.com>, 
-	Ulf Hansson <ulfh@kernel.org>, Lee Jones <lee@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Arnd Bergmann <arnd@arndb.de>, Souvik Chakravarty <Souvik.Chakravarty@arm.com>, 
-	Andy Yan <andy.yan@rock-chips.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
-	John Stultz <john.stultz@linaro.org>, Moritz Fischer <moritz.fischer@ettus.com>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Sudeep Holla <sudeep.holla@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV8PR12MB9620:EE_|MW4PR12MB7240:EE_
+X-MS-Office365-Filtering-Correlation-Id: 59cf8531-af0e-44b6-e8f1-08dee26c94a7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|23010399003|1800799024|366016|18002099003|22082099003|10067099003|56012099006|11063799006|4143699003;
+X-Microsoft-Antispam-Message-Info:
+	1PHnyWYD4zoC7R4+ytze2fwZ5xtnoFb++C1Diqm0zd23X10AEOXvlAn+paizOuoBvIbjDe1g1sysCDtobYWgVY1j5rSJoAYtJJZyyyP3zXZIGmtswVePOZ6ay6hpFQZjHitCTZdONDo24bmgl8jfhoPFfXiUjpcTDEDZblfP2OUwKE3VEf7akRYxnX+yxuR66at+DpZaXV9fHsZ2TjFYAnpsoIXUk23UxeVVbgmlDXw/T6AkxE7F1YA/kbXD88YSxaPL45SAzKHIi2vRfCUU15yPpTENLnlWo4GUn6iMx3zBR4nHslQquJ6SoY0ExBdLF7m0Yoh0xnh9Czq25xoobMYjMOX2Y6x0v/7H7KpmqbGm5GQ2y62UKlLp1SFjWfHBapYqtjMrdu7k4+aNMMv0B6RLMXP2a/6oWIKUle83TOOMPdlU9CVolnQTOo06hx7ePThvKnohgP91svSb3VHz/o+eylCkHl0sNsrDwoL2qMdiSreHQJRVgi7VXckQjdNYVeKURj/ZHRvh3Obnz9msxhInpgBvptGu1KwQYZVQH2cYsRBDA7eodH8KFbI14Bsm4VXhkLrHsrYKTLNTI+KUREnznUQahhu2ItI8OWGFXmyhG7mAqVv4pHu5qp9fnf3arjChb1l4px/sJBWWnjXVBRWZPXG0PCeyhq8gkeAy+ew=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV8PR12MB9620.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(18002099003)(22082099003)(10067099003)(56012099006)(11063799006)(4143699003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?nW4lhVJL6VvF/ZQoBZBP+vUW+zwHaRggfGyRIy9IEE8dS2JPLE0l9hpnZMhS?=
+ =?us-ascii?Q?IZJ0rBMqsqd1ZuHhYIW18/dYJTqkVo1DwOkzLW1bgDg8Yg3UWikk3+QMTRuz?=
+ =?us-ascii?Q?gn8sl1lWbafEORLJhCMjILZy2zmIQajVHlEUVpn9YIJk6YlQFaYK0jbXWR5I?=
+ =?us-ascii?Q?p/alXF/vV/iBN8Gyc8st+QRlJQztk0peSGmVtTnUf+S7vkMK9gFsp4lzl59E?=
+ =?us-ascii?Q?RJQTntjGsTCMBP9+dp/JOik9gTdsunqIsuS7M/V1M550XRERtcbF7rmdrDMl?=
+ =?us-ascii?Q?nlGLQkvpMhIUOhv9Zg8WczkX5Ew7Lm6F4rzbW7LHquaVu5eB3T16oBsjso/A?=
+ =?us-ascii?Q?/feGVa28Igw9dfh4OI+DA+Dwvsm5hE/Ncc2nL7gd9tJwOtQ/djhcPS6CDLJg?=
+ =?us-ascii?Q?52LSZgByyhcSI/zAUxSLUh4/aCG0WKDKuiHgGZ82rlf+1kmxeHW7fwOg5A0S?=
+ =?us-ascii?Q?wqcVE1+81AcVx1ez6qu3CErEwDOr67OMv2d2DYLPbzImWCmIXKpq77kAu8uW?=
+ =?us-ascii?Q?6blPEX1By5fiFUGYa3s0TXjdgKuJFBNVJ1MhuAPIJoSUHMaR1afKaS+x/Y6i?=
+ =?us-ascii?Q?F8a0XrHAoogHUlPwQX74U3Fo+hI1S4XwrQxLxR8dqH2o+aEsTqDk5YwY99rC?=
+ =?us-ascii?Q?WDdvOp5jfvWd+mwLsn7dZmNvKkAxFcKBGPJH3VYC7uBA6wYgmsmjS/c+rKXu?=
+ =?us-ascii?Q?5Q5Vrq1fjPGzWA6AitbKvE9AT9zbXGPYrjfB8ry8jR+YAo802qc+5UGZ0w60?=
+ =?us-ascii?Q?6ESctdQ0MrJ6rbEns16N0Q6RvnRyDB76a1e+Kv+pfE+CKEVxyJujPmdCnYl7?=
+ =?us-ascii?Q?NlYNH6AOk54tvDUHJzc8OmSP3hiFrWZlmxaALBqZNe1yecuylJNKJRUhv1Wy?=
+ =?us-ascii?Q?vpo1V9ApuXeZ1DTM/pFW99Y8gaHO8wDpKm+joEz86+QaUK5KzppmfcjcB+af?=
+ =?us-ascii?Q?XVtInpJgjXjAQABpyqpd7UZG0Uf61ceWhUMNZNgR1gO1I8PERrHeobybTUJS?=
+ =?us-ascii?Q?c/vndO+1HWpUSEYGLmRJrbxZxM7a3S2ZHA5MbcslgPrzbyIM+lZWdk7SNWAu?=
+ =?us-ascii?Q?5wEHpO4eTMvZhlGY88VTeqGp90tTC8+W/vIgqr0ytYbhcx+7g4bKqAtqyu8B?=
+ =?us-ascii?Q?Zzpv+1sxDYHKJ+rH3X5DooQtJyEbwzgQSSXGU86rn3NKAQWOOeZv3DjN2adg?=
+ =?us-ascii?Q?zMCUsYTTW5UeQAK9ZRwMLsAGJcT4h+cpDS3iPY3aRZg3P5n9vHgLOZGDuiUI?=
+ =?us-ascii?Q?bCmXzhT0OkRc0yW1DtVQpOLhug7PZxQnxCdpFJT3mBIfM1A+xcwnzPE/teL3?=
+ =?us-ascii?Q?DV8NVF+ZIjJPrUg5H2bhn7ioo8h+LJkNS17MNs4g5bfx8PewZdN0CBDW+o/B?=
+ =?us-ascii?Q?LNJzCE745qpQwuVyZ/ncG79+/9Cbek2AV60URc8DMrxo0PbaDJHROkQCP48h?=
+ =?us-ascii?Q?3y6arV/+aIOZXcD/6D8zOAL5wk5eLUZ2q94CBMfV/YfudcljLBjrS9JbFhH7?=
+ =?us-ascii?Q?uP+dYKlYMxqZZu1s9lD939n1mVdCILwvRWKa+Y5CDWzxVsNkIkMVnPuhd1l7?=
+ =?us-ascii?Q?qAOx41tYZzHCbYJUsB+EazWqpkxxCGpG3nyWHjO+sTPZlj6awP1eU9w2WDNL?=
+ =?us-ascii?Q?gnDuUKqDBY6vcP49P06Lximw43YilWE4+a7tHAB2/7e+i7Jeni6kQXVIPP/k?=
+ =?us-ascii?Q?fNftWFzyU5AJAZeEtT7VhHlj+JnQTdDzECjfy2GdQhZ1lmyk?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 59cf8531-af0e-44b6-e8f1-08dee26c94a7
+X-MS-Exchange-CrossTenant-AuthSource: LV8PR12MB9620.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Jul 2026 12:28:31.3162
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: cQD9aDI+DbkVHgtUSBQA18xhWNfslw8VV0L9we2Htu/id3HQMFlLpqjS4O3myAZ5
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR12MB7240
 
-On Tue, 14 Jul 2026 19:16:28 +0200, Shivendra Pratap
-<shivendra.pratap@oss.qualcomm.com> said:
-> Userspace should be able to initiate device reboots using the various
-> PSCI SYSTEM_RESET and SYSTEM_RESET2 types defined by PSCI spec. This
-> patch series introduces psci-reboot-mode driver that will induce
-> command-based resets to psci driver for executing the device reset.
->
-> The PSCI system reset calls takes two arguments: reset_type and cookie.
-> It defines predefined reset types, such as warm and cold reset, and
-> vendor-specific reset types which are SoC vendor specific. To support
-> these requirements, the reboot-mode framework is enhanced in two key
-> ways:
-> 1. 64-bit magic support: Extend reboot-mode to handle two 32-bit
-> arguments (reset_type and cookie) by encoding them into a single 64-bit
-> magic value.
-> 2. Predefined modes: Add support for predefined reboot modes in the
-> framework.
->
-> With these enhancements, the patch series enables:
->  - Arch Warm reset and system reset cold as predefined reboot modes.
->  - Vendor-specific resets, configurable via the SoC-specific device tree.
->
-> Together, these changes allow userspace to trigger all above PSCI resets
-> from userspace.
->
-> Note on introducing PSCI-MFD:
-> In v19/20, psci-reboot-mode was implemented as a faux-device. Review
-> discussion suggested this may not be the best model for firmware-backed
-> consumers, and that representing PSCI users as regular platform devices
-> would be better. One suggestion was to add a PSCI-MFD driver, allowing
-> multiple consumers tied to a single PSCI node "arm,psci-1.0" be probed
-> as MFD cells.
->
-> Following this, the series adds a PSCI-MFD driver and introduces
-> cpuidle-psci-domain and psci-reboot-mode as child cells. To meet the
-> psci-reboot-mode requirement, the MFD core is extended to support
-> fwnode.
-> Reference discussions on this:
-> https://lore.kernel.org/all/20260306-faux-dev-with-fwnode-v1-1-792a86a62530@oss.qualcomm.com/
->
-> ---
-> The patch is tested on rb3Gen2, lemans-ride, lemans-evk, monaco-ride,
-> qcs615-ride.
->
-> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
->
-> Changes in v23:
-> mfd: core: Add firmware-node support to MFD cells
->  - Add named_fwnode-based firmware node support in MFD cells.(by Bart)
->  - Update the release path. (by Bart)
->  - Add checks for duplicate fwnodes.
->  - Update documentation for usage and limitations.
-> mfd: psci-mfd: Add psci-reboot-mode child cell
->  - Update for a named_fwnode-based reboot-mode child cell. (By Bart)
->  - Split psci-reboot-mode and psci-cpuidle-domain into separate child
->    cells.
-> power: reset: Add psci-reboot-mode driver
->  - Add COMPILE_TEST in Kconfig. (by Bart)
->  - Update to support up to three u32 arguments to accommodate a
->    32-bit reset_type and a 64-bit cookie. (By Sashiko, Lorenzo)
-> dt-bindings: arm: Document reboot mode magic
->  - Update to support up to three u32 arguments to accommodate a
->    32-bit reset_type and a 64-bit cookie.
->  - Dropped reviewed by from Bart and Rob due to considerable changes.
-> firmware: psci: Introduce command-based resets
->  - Update to support a 64-bit cookie. (By Sashiko, Lorenzo)
->  - Update the flow so unsupported reset commands and any failures during
->    reset command execution fall back to the
->    Linux reboot_mode path. (By Sashiko)
-> power: reset: reboot-mode: Add support for predefined reboot modes
->  - Handle errors and free lists in devm_reboot_mode_register(). (by Sashiko)
->  - Update to support up to three u32 arguments.
-> power: reset: reboot-mode: Support up to 3 magic values per mode
->  - Patch for 64 bit magic renamed.
->  - Update to support up to three u32 arguments to accommodate a 32-bit
->    reset_type and a 64-bit cookie.
->  - Dropped reviewed by from Bart and Sebastian due to considerable changes.
-> - Link to v22: https://lore.kernel.org/r/20260514-arm-psci-system_reset2-vendor-reboots-v22-0-28a5bde07483@oss.qualcomm.com
->
+On Wed, Jul 15, 2026 at 01:03:22PM +0100, Will Deacon wrote:
 
-Just wanted to say: thanks for being persistent, we'll get there eventually. :)
+> From what I can tell, the fiddly parts for iommupt will be:
+> 
+>   1. Hardware bugs / quirks. Some of the simpler ones could probably be
+>      handled but for the more invasive stuff like the Mali format
+>      format, io-pgtable will probably need to hang around. Perhaps
+>      it becomes io-pgtable-mali.c?
 
-Bart
+I briefly looked at Mali a while back and it didn't seem so bad, but
+that was for a GPU driver not the iommu so a bit different
+issue. Exactly what the GPU drivers should be doing is less clear to
+me, they don't really fit well with the iommu focused interface (eg
+the memory preload issues/etc).
+
+>   2. The pKVM work from Mostafa. We'll probably end up with something
+>      separate at EL2 for this (ideally, just reusing the CPU page-table
+>      code when it learns about BBML3).
+
+Yeah, I'm not sure here, it isn't great that is adding another user
+and open coding some of the logic (eg smmu_pgsize_idmap). It would be
+much better if it could just use all the existing flow more directly
+somehow.
+
+>   3. Non-coherent walkers, although I think this might actually be fine
+>      because x86 needs it anyway?
+
+This is done already, the smmuv3 conversion I've posted supports it.
+
+> So, for now, I wouldn't require new drivers to use iommupt but I'm
+
+The recently posted broadcom driver used iommupt and I thought it
+turned out very clean, it actually seems like less work to do it this
+way than try to write your own page table like that rockchip driver
+did which required several review rounds.
+
+Jason
