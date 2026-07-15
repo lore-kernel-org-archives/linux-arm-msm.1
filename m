@@ -1,196 +1,167 @@
-Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2A88400988;
-	Wed, 15 Jul 2026 18:06:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F625400993
+	for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 18:07:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784138830; cv=none; b=PQG9e110S12X4yDp8uaVoqIjdSXbhK9Op+xoBQ0yIy60xYYs0RMWL88BVbVimR6RbzoYeLYLX8rqnaf0IGWPEZng3nYAR5pumzGBJkpC9XSXUd28CcD7W1bhwF6G35cRQ9jp9EvY68qxBUKJ03nsN+Y0QtbWsom+KyA339rUOfU=
+	t=1784138882; cv=none; b=C58150g7T+ksgQyKnOAsg6TB7WzSm2HoBI9K5rVN1Bwe3MOybwJo9GOP/5lDNlzYR0RuXxuqb0GLmtrwQLw9K0OdvYaZzWJNblBWPYZU1S5PK2XQBdflShFaFpx61wpmkJS8z/SWYPiQT6vjzgtc59i122GFpO1PMVHNmC7806Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784138830; c=relaxed/simple;
-	bh=676EW54ZjlPi1U7mS9yBnZCxtv8/ZyBZqJfh6gJIWHc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=VHR6BRrb0N9A/x+n5NR8gt4DfK6OvMfqC5DLBse+SBwZzXdpTxL8cgdsKBKxIUeU4Rm9wB+sQJZf3gEbHr83nRUWE9rwAEg1EbugNm3zncI5FP1Q/gOViEBcY4GmEUwWgJX1RIGWMqB8dV4GuB9ozJzaPkvVsj4BPZAcWSQxkXU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=pass smtp.mailfrom=infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=ep4rwIOo; arc=none smtp.client-ip=198.137.202.133
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=infradead.org
+	s=arc-20240116; t=1784138882; c=relaxed/simple;
+	bh=yk81vj59l2TmlXH4K+qJfCYvv46f+EWu/61vbJd9hyU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=VMGei8IHnik4JLv1X2EZey9OsMr7XnEygwk8QVrWgNVS1fPqHBkpyPhdwqqTblJXH5FFoqKUjTzxXj2hnwk9pZWKpwAx3Gk8Dfa19vnsh/yz7J97c/C26zm/XrgDfej8wsDCGIAd7LHBGoRoJLWm/EYblT+H65W62rGga9IMGw4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QG0j9kE3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=dWN8+BfN; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="ep4rwIOo"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
-	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=qngtohDCDGKOAZ2UVf9Yg6jMkSiGUEfIvWoLem96Mp4=; b=ep4rwIOo/ExvDfJmbtyA8cKzMw
-	0K/f7VDtaU/DLWnU8uwYuMWewE/dC3S1ac1go5eVbtwF80qPWn5KvA3OvHqfcuRIXpW4OY5odfN5U
-	weSzRKDDHCZ2JEhPfQKlDUbJQdhIg5wO+rloHvOBdYg7m1s/mQdTBwtZ0KOy4bDybM+1nE6KlB7Ux
-	57bMIakkBMvb4B9//cOXUVMiSdXw67CFBTK9w74YZdPjPkP37w3eKwbO9XcT9HNqvpacpkQaqu1I2
-	3hGgEFOXqCguSeUIllYGOWMxmlxPIA4nF3mzmcU+fuz7v4+2Qrd3UJCpm6P357Gsn91/sNfi6dOHa
-	ZDhmCkMg==;
-Received: from [38.23.173.23] (helo=localhost)
-	by bombadil.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
-	id 1wk3zd-0000000FcKu-2dgd;
-	Wed, 15 Jul 2026 18:06:01 +0000
-Date: Wed, 15 Jul 2026 14:05:42 -0400
-From: "Liam R. Howlett" <liam@infradead.org>
-To: Lorenzo Stoakes <ljs@kernel.org>
-Cc: Andrew Morton <akpm@linux-foundation.org>, 
-	David Hildenbrand <david@kernel.org>, Vlastimil Babka <vbabka@kernel.org>, 
-	Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
-	Michal Hocko <mhocko@suse.com>, Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>, 
-	Jann Horn <jannh@google.com>, Lance Yang <lance.yang@linux.dev>, 
-	Pedro Falcato <pfalcato@suse.de>, Russell King <linux@armlinux.org.uk>, 
-	Dinh Nguyen <dinguyen@kernel.org>, Simon Schuster <schuster.simon@siemens-energy.com>, 
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
-	Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
-	Dan Williams <djbw@kernel.org>, Matthew Wilcox <willy@infradead.org>, 
-	Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>, 
-	Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, 
-	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, 
-	Mark Rutland <mark.rutland@arm.com>, Alexander Shishkin <alexander.shishkin@linux.intel.com>, 
-	Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>, 
-	Adrian Hunter <adrian.hunter@intel.com>, James Clark <james.clark@linaro.org>, Zi Yan <ziy@nvidia.com>, 
-	Baolin Wang <baolin.wang@linux.alibaba.com>, Nico Pache <npache@redhat.com>, 
-	Ryan Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>, 
-	Miaohe Lin <linmiaohe@huawei.com>, Naoya Horiguchi <nao.horiguchi@gmail.com>, 
-	Xu Xin <xu.xin16@zte.com.cn>, Chengming Zhou <chengming.zhou@linux.dev>, 
-	SJ Park <sj@kernel.org>, Matthew Brost <matthew.brost@intel.com>, 
-	Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>, Byungchul Park <byungchul@sk.com>, 
-	Gregory Price <gourry@gourry.net>, Ying Huang <ying.huang@linux.alibaba.com>, 
-	Alistair Popple <apopple@nvidia.com>, Hugh Dickins <hughd@google.com>, Peter Xu <peterx@redhat.com>, 
-	Kees Cook <kees@kernel.org>, Marek Szyprowski <m.szyprowski@samsung.com>, 
-	Robin Murphy <robin.murphy@arm.com>, Andrey Konovalov <andreyknvl@gmail.com>, 
-	Alexander Potapenko <glider@google.com>, Dmitry Vyukov <dvyukov@google.com>, 
-	Steven Rostedt <rostedt@goodmis.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Jarkko Sakkinen <jarkko@kernel.org>, Dave Hansen <dave.hansen@linux.intel.com>, 
-	Thomas Gleixner <tglx@kernel.org>, Borislav Petkov <bp@alien8.de>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Ian Abbott <abbotti@mev.co.uk>, 
-	H Hartley Sweeten <hsweeten@visionengravers.com>, Lucas Stach <l.stach@pengutronix.de>, 
-	Christian Gmeiner <christian.gmeiner@gmail.com>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Patrik Jakobsson <patrik.r.jakobsson@gmail.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Rob Clark <robin.clark@oss.qualcomm.com>, 
-	Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
-	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
-	Marijn Suijten <marijn.suijten@somainline.org>, Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, 
-	Thierry Reding <thierry.reding@kernel.org>, Mikko Perttunen <mperttunen@nvidia.com>, 
-	Jonathan Hunter <jonathanh@nvidia.com>, Christian Koenig <christian.koenig@amd.com>, 
-	Huang Rui <ray.huang@amd.com>, Matthew Auld <matthew.auld@intel.com>, 
-	Jason Gunthorpe <jgg@ziepe.ca>, Yishai Hadas <yishaih@nvidia.com>, 
-	Shameer Kolothum <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>, 
-	Ankit Agrawal <ankita@nvidia.com>, Alex Williamson <alex@shazbot.org>, 
-	Paolo Bonzini <pbonzini@redhat.com>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Usama Arif <usama.arif@linux.dev>, linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
-	nvdimm@lists.linux.dev, linux-perf-users@vger.kernel.org, 
-	linux-trace-kernel@vger.kernel.org, damon@lists.linux.dev, iommu@lists.linux.dev, 
-	kasan-dev@googlegroups.com, linux-sgx@vger.kernel.org, etnaviv@lists.freedesktop.org, 
-	dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
-	linux-tegra@vger.kernel.org, kvm@vger.kernel.org, 
-	Russell King <linux+etnaviv@armlinux.org.uk>
-Subject: Re: [PATCH v2 01/33] mm: move vma_start_pgoff() into mm.h and clean
- up
-Message-ID: <uqfnbb7knn5gs2symluouczdbxehpwuubek3ypziavv776jncb@l7r4zlatslxd>
-References: <20260710-b4-pre-scalable-cow-v2-0-2a5aa403d977@kernel.org>
- <20260710-b4-pre-scalable-cow-v2-1-2a5aa403d977@kernel.org>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QG0j9kE3";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dWN8+BfN"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66FHB9TZ252981
+	for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 18:07:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	owjCSr9b7MMLyEnv0fXfg5oQfeA8x1a4DWRxMp1KHH8=; b=QG0j9kE3UmnyuZrj
+	W4iQ2dWKlxRnnw7FTXVk2auEnp72Uh/2ZGA7lk+BSspZMU9zm3WrT/ImHx2b8B7Y
+	3DIqBChIsZ4wLPCDPt7vlBstlYgPQ92bHFz2DE6WMvu+CjSHC+4Wefiet5iXdimU
+	IecgsAb5JcNUPZ6qtZHd42Dziqs8+bbRSTje/tFYlUTrUcVyT9XSVxl9gD/7U6P4
+	+foflPMir01mHnNwF0Z7SvNCvMl+MbFWHXUUCmws+IvDp/MNr/uLotWBpsbfR5RE
+	PWxt5v10JHpNiwo4ZoJrDM/+3GZoh2VNu8Xpue+/w+jcwHGgfW0ptv8/5WGufR8p
+	Cfp7Ow==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fe652anx3-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 18:07:56 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cab3e9cd922so2059765a12.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 11:07:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784138875; x=1784743675; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=owjCSr9b7MMLyEnv0fXfg5oQfeA8x1a4DWRxMp1KHH8=;
+        b=dWN8+BfNKDQUZyROXjWzVUCCrYINSf7VcgDzfhnJ4OFALaCUniyK34OVn44uv9RKtl
+         5Hyhr4kSh1RCbNBer5bVzo/C30TBirbc7srirMReHGNtJVft/GSEoVmjpctM+q1ZHVcK
+         RJsxULf08o68HjVuCWM0ud5rqcnxrNYZxJe7pmQmCli7atrbyXlz397yJ1IuiUxg2HEt
+         BBsjiauRq4/D+95lrTHMwbQ5vXSNLY6U2y5wX/b+NbSI2RrqhGJp73uSZxWEOylmJ+rg
+         6qXxPVQN+9lpKTtjDskbWQwmYYjjNv0ws7iZdY2rc4HNLURoFyjHlUFySR+XRuO4QQsY
+         P9jg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784138875; x=1784743675;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=owjCSr9b7MMLyEnv0fXfg5oQfeA8x1a4DWRxMp1KHH8=;
+        b=BAksrnBqKXvVm1HA9h++fcV2ODoe7GdxbhusiWzHnCupnKUYNw9jNS6tDPiwfV2C+S
+         2IDXLGCvJizylRFSUzcPQdYjeCM43OjgQNTGplBrRVOdP7120JPfyHzJzcsXQCXQ4vet
+         fNSr7BpFISwRWOOsmQ3ZLaMq7Ozj428u9VNlT99U9dbYOybwAnoUfbJRUn5Xd/dvonSQ
+         m1pWO9CVZt63KbP+quTaGhY34Ljnt5gAp6sBrKYpy+6NXEpEP4xVUT9fwNA/nRARuNZo
+         cDq+3k2iNUMXII5TG3xH97rqSkGkUrhrw9WR7rTCf80vvFhCIpFuspliKvznV72PqbUS
+         O1Eg==
+X-Forwarded-Encrypted: i=1; AHgh+RoK0atWyOEzV7iIN2QMROtTFuKuAuM908+nwQ08VwoY1cc8SU6KHLx7S0+NY42+OtkUEh8PfhcwV1rmbu+T@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy91vXim/DMwqVDWNpgVFTwCM8jPCkJKBxAxw1epw+1nSTWvzIm
+	rbMYvtf0YGiXec4uJKylajM/STMBiIsZ+Q14Tw5FKYCez4CNBCHCyOasLZLGcptMXZ8R7DBT/TZ
+	21unJIu6fZiwT2VXWthLZDGcieOep0TNDbsK6O7q1WVQvvbHfNbX3A4BrkKpZxWwLFoqP
+X-Gm-Gg: AfdE7cnzQJilJEoQzwZAiZxlR1i4W6y38X/KcrlukP0ahWqCvjOBLMH/jhUwwJUFtvG
+	KB0Lu+/wmFYURoLVxtXsEuAOX3527yasj5xZJga7nEf3nUkt+gBQ64wQpY4gV21QcezDHilv6jE
+	EyGI0MpY1caCdoTuN80L48KPH+tQSHI+N91mwanTM5usuoTTLYH8XhlGDr/42XTwOy5FZ8lTu1p
+	20qauMiv4FlnP5itDs07K5LEviQO+gojRtC7JNYOJVrsdHYrllnDM9Xlyc7b17RbeoQ83B/B/Ou
+	dP2pJngiDQjKEaEfrBuJeL2fI2n9QRA8F8Y1wmxvscRCj9kmkCrt6Lw+EzElNf9MtWYtP99W7B5
+	awrexJMQHI5MUsh/er1W6UDRGMsckNtrkNw9UCjsCPblf
+X-Received: by 2002:a05:6a21:1798:b0:3c0:9c1a:8952 with SMTP id adf61e73a8af0-3c110b35019mr19226577637.74.1784138875476;
+        Wed, 15 Jul 2026 11:07:55 -0700 (PDT)
+X-Received: by 2002:a05:6a21:1798:b0:3c0:9c1a:8952 with SMTP id adf61e73a8af0-3c110b35019mr19226551637.74.1784138874931;
+        Wed, 15 Jul 2026 11:07:54 -0700 (PDT)
+Received: from [192.168.1.9] ([106.222.231.43])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13cd432f1cesm5187074c88.11.2026.07.15.11.07.50
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 15 Jul 2026 11:07:54 -0700 (PDT)
+Message-ID: <312315da-699f-48c6-8331-6dce3abb899c@oss.qualcomm.com>
+Date: Wed, 15 Jul 2026 23:37:48 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260710-b4-pre-scalable-cow-v2-1-2a5aa403d977@kernel.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH V5] i2c: qcom-geni: Add dynamic transfer timeout based on
+ transfer length and frequency
+To: Dmitry Guzman <Dmitry.Guzman@mobileye.com>,
+        Aniket Randive <aniket.randive@oss.qualcomm.com>
+Cc: viken.dadhaniya@oss.qualcomm.com, andi.shyti@kernel.org,
+        sumit.semwal@linaro.org, christian.koenig@amd.com,
+        linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, linaro-mm-sig@lists.linaro.org,
+        naresh.maramaina@oss.qualcomm.com
+References: <20260715101805.3615166-1-aniket.randive@oss.qualcomm.com>
+ <20260715144558.abf5078829bfd2a0973019a9@mobileye.com>
+Content-Language: en-US
+From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
+In-Reply-To: <20260715144558.abf5078829bfd2a0973019a9@mobileye.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE1MDE4MCBTYWx0ZWRfXwaJ97cDBzbKo
+ foYi2S+CYG1IcHFnMZBBW4BAyBaAnDMpX92TqAzdAbj33pHLJruB1+sBT1dxt91DKbHhgSHd9ph
+ rTwvxdixzcblwx3Q+mThenNfUaBU/T/VAGv7L/1jo3wu81aU0wk5jqwKiVGZ9kFIzCrP+mUDOpG
+ mCVbZOkO39nAnSw2zjzctoMbrcF2Zj9IGOfLVldr57e0fD8zM7tzGq3l1UJ9Rld0fECLi1CFAx5
+ vpZlXSFIP4wvAkE5OJv7WMdCPFo97zO1VKB4OAtwe/WYKdF75TUishfDLeVkNaOt3CgnL5STRyZ
+ YbbV/w2GCj4RlaOP/PyZ7PUASM+FtMBbYjg5QeolBwunkR24SFWT4QZq4ECGnR4G7yhZURMFaMC
+ 6BADHRaU7VFkZNsaTc6igUiITWCQAIuSZo8dewD+zU6P9HP8ZlIRJ0S1lddWwjIe9jQxWIw9av0
+ UgY52pd2wWj9d+47tTA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE1MDE4MCBTYWx0ZWRfX92rqu2JRucth
+ GTCQv3Vu/mpd4FduMjRAMVhHrc7/s/qaK7GFv69tdRnHHsb+7RyQe8FmFT4b+rSMnDle1W+CdeO
+ PFsMksKR7UIiEfG/UPS9SUCN0pvOHvQ=
+X-Authority-Analysis: v=2.4 cv=bKcm5v+Z c=1 sm=1 tr=0 ts=6a57cc7c cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=OlrBKP18NtReKxGUJ9moaA==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=SU41Sc21RSR5G0VrqPMA:9 a=QEXdDO2ut3YA:10
+ a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-ORIG-GUID: C6zWiV0qDMKCbcHk-JqRureuHOtHKjUX
+X-Proofpoint-GUID: C6zWiV0qDMKCbcHk-JqRureuHOtHKjUX
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-15_04,2026-07-15_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 spamscore=0 bulkscore=0 clxscore=1015 adultscore=0
+ malwarescore=0 impostorscore=0 suspectscore=0 priorityscore=1501 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607150180
 
-On 26/07/10 09:16PM, Lorenzo Stoakes wrote:
-> vma_last_pgoff() already lives there, so it's a bit odd to keep
-> vma_start_pgoff() in mm/interval_tree.c. Move them together.
-> 
-> These each return unsigned long, which pgoff_t is typedef'd to. Make this
-> consistent and have these functions return pgoff_t instead.
-> 
-> Additionally, express vma_last_pgoff() in terms of vma_start_pgoff(), since
-> we wrap the vma->vm_pgoff access, we may as well use it here.
-> 
-> Also while we're here, const-ify the VMA and cleanup a bit.
-> 
-> Also update the VMA userland tests to reflect the change.
 
-This patch could have been 01/35?  Disappointing, but I will try to get
-over it.
 
+On 7/15/2026 5:15 PM, Dmitry Guzman wrote:
+> On Wed, 15 Jul 2026 15:48:05 +0530
+> Aniket Randive <aniket.randive@oss.qualcomm.com> wrote:
 > 
-> No functional change intended.
+>> This replaces the fixed 1-second timeout with a transfer-specific
+>> timeout while preserving sufficient margin for software overheads and
+>> bus-level delays.
+>>
 > 
-> Reviewed-by: Gregory Price <gourry@gourry.net>
-> Acked-by: David Hildenbrand (Arm) <david@kernel.org>
-> Reviewed-by: Pedro Falcato <pfalcato@suse.de>
-> Reviewed-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
-> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
+> The dynamic timeout may be useful for any I2C bus controller, not only
+> for qcom-geni. Structure i2c_adapter already has field "timeout". Isn't
+This is good, thanks for pointing. For geni driver, please review 
+gi2c->adap.timeout (client->adapter->timeout) can be used and you may 
+explore retries also in case you want to retry.
+> it worth to move the timeout calculation to i2c-core, so that the core
+> updates the timeout field in i2c_adapter structure, and the controller
+> driver just uses this value, instead of duplicating the calculation in
+> every driver that will use this feature?
+> 
+> Also, such parameters as I2C_TIMEOUT_SAFETY_COEFFICIENT and
+> I2C_TIMEOUT_MIN_USEC may be configurable by user (for example, in
+> device tree) for more flexibility.
+> 
+I think it's good to keep it within driver, not to expose as 
+configurable. This would keep changing per user/system load, but ideal 
+timing is theoretical + some offset, hence can be better managed by driver.
 
-Reviewed-by: Liam R. Howlett (Oracle) <liam@infradead.org>
+> Best regards,
 
-> ---
->  include/linux/mm.h              | 9 +++++++--
->  mm/interval_tree.c              | 5 -----
->  tools/testing/vma/include/dup.h | 5 +++++
->  3 files changed, 12 insertions(+), 7 deletions(-)
-> 
-> diff --git a/include/linux/mm.h b/include/linux/mm.h
-> index 25e669632d2c..09b06d8fea74 100644
-> --- a/include/linux/mm.h
-> +++ b/include/linux/mm.h
-> @@ -4307,9 +4307,14 @@ static inline unsigned long vma_pages(const struct vm_area_struct *vma)
->  	return (vma->vm_end - vma->vm_start) >> PAGE_SHIFT;
->  }
->  
-> -static inline unsigned long vma_last_pgoff(struct vm_area_struct *vma)
-> +static inline pgoff_t vma_start_pgoff(const struct vm_area_struct *vma)
->  {
-> -	return vma->vm_pgoff + vma_pages(vma) - 1;
-> +	return vma->vm_pgoff;
-> +}
-> +
-> +static inline pgoff_t vma_last_pgoff(const struct vm_area_struct *vma)
-> +{
-> +	return vma_start_pgoff(vma) + vma_pages(vma) - 1;
->  }
->  
->  static inline unsigned long vma_desc_size(const struct vm_area_desc *desc)
-> diff --git a/mm/interval_tree.c b/mm/interval_tree.c
-> index 32bcfbfcf15f..344d1f5946c7 100644
-> --- a/mm/interval_tree.c
-> +++ b/mm/interval_tree.c
-> @@ -10,11 +10,6 @@
->  #include <linux/rmap.h>
->  #include <linux/interval_tree_generic.h>
->  
-> -static inline unsigned long vma_start_pgoff(struct vm_area_struct *v)
-> -{
-> -	return v->vm_pgoff;
-> -}
-> -
->  INTERVAL_TREE_DEFINE(struct vm_area_struct, shared.rb,
->  		     unsigned long, shared.rb_subtree_last,
->  		     vma_start_pgoff, vma_last_pgoff, /* empty */, vma_interval_tree)
-> diff --git a/tools/testing/vma/include/dup.h b/tools/testing/vma/include/dup.h
-> index bf26b3f48d3a..668650067c7c 100644
-> --- a/tools/testing/vma/include/dup.h
-> +++ b/tools/testing/vma/include/dup.h
-> @@ -1301,6 +1301,11 @@ static inline unsigned long vma_pages(const struct vm_area_struct *vma)
->  	return (vma->vm_end - vma->vm_start) >> PAGE_SHIFT;
->  }
->  
-> +static inline pgoff_t vma_start_pgoff(const struct vm_area_struct *vma)
-> +{
-> +	return vma->vm_pgoff;
-> +}
-> +
->  static inline int vfs_mmap_prepare(struct file *file, struct vm_area_desc *desc)
->  {
->  	return file->f_op->mmap_prepare(desc);
-> 
-> -- 
-> 2.55.0
-> 
