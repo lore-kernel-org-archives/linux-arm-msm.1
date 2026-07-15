@@ -1,320 +1,245 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D11753EB81B
-	for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 14:43:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F1FF7395ADD;
+	Wed, 15 Jul 2026 14:49:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784126607; cv=none; b=Bi+iHtvCeuyVQsDmAfGqfZ0CwqO5dxc/q3tivWpw+tzmE9fFo57iPovW8zQtV/tvGbgnEyUnHB+nVU76vOltI3UCgS4EF35p8MhmGBmpDhIRB9VH5HkA47Fz+8Ga0165B8A1SvIcEjW601AvJaoRthMfvW450gzGfnkrzS9TSGo=
+	t=1784126987; cv=none; b=jXUKk8WWib8q1J8l73a+KaCpQoq/eHUPbrxM0pCx1kdQVf86blqmifG4BXfOmFv0DExBCvAjMdbQAN4EWURpYhFcUbRXlflgJEPvjlnNmbYlIJo9QJtR24y8IXt0C9zw7tUR8dEX6pKixfjNABfkXcFI0tIFs2ALIzXL7sChd08=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784126607; c=relaxed/simple;
-	bh=X68c1nYcCWv51v8mSTJWPYgBW9OqZPEcLkd+ji0RP3s=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=HuYESHmdL3KtTCfhScmRft5jXp502V79VktWmbHl9PG0QdUcSoS2b2yHmvdrXJhdKAmoihyEytquwnIenEK7Pbvv6HED9Ho/JF+spVShg+H21H1Cn8Db8fBO9AZBZ5wZeADxjChs3Wzv2Y8nNniveDlkQxJz7Zb0zstplVGzWrY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZDOeV5yc; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784126987; c=relaxed/simple;
+	bh=DDPTcPtals6DTuwz0cfl0JfwDatTjkJZ5bnKg6xIVXY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=oFRWARaoDzuCbUpwpwSHT0mWudVHkSSRHim+LIWdxR8o0wcITffhOi8N/biVatfd8UksXpm18CVToBlq0OGP7tWMjhqkc9kravAuUwVGYaDSqr27kL4NJ6ivXOWu3GluLmXv22Ari3MTOaVUsI/MoZbQLtseIXVOGO5o3ZPeOus=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Fw52mmgr; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZDOeV5yc"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 58F0D1F01560
-	for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 14:43:25 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Fw52mmgr"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 476B91F00A3A;
+	Wed, 15 Jul 2026 14:49:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784126605;
-	bh=mexSkd/L7M+JcqMlYSpV/uW631x4GMkwLLLY8A/EWBA=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=ZDOeV5ycp3foMgCcNX9Z+3ELyYPAxIObDsdGg1YjY8Hl2ZHIYqvb/fWhlioqKp1dC
-	 hbHqECScHSZ9M/uAiofWtjItzDAgIFZWSuebPrEqQqqIcXvi3VHoxCF/P4QcZlDP+n
-	 oNUkLOXKxyporwe966ny5RtpqPJN9MdIZ0XFhACGRqA2m2J9sGUk8AyLb3H/xcMW8o
-	 7mEAVa2SRpwrt+ryieuM4FZg0SgdI9iIW/4+dgAM9TYUVHRjecJV+9GFiQhP2Pps8F
-	 8Hw1gHVgjXGNY5yLic7rx0PGd7mDfCqX2lVo4pCG3KoCS7fMvg7j21BHIg9If8zpR2
-	 RXyUpImiQlMxA==
-Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-5b013aa02b2so1042259e87.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 07:43:25 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rryq3JF675X460hB0XXP/lU6wxNQDmjcfzbvp4/mSDbVHeiMAGji9X+qVUDbwSaM6FZFow5/yNzmcBvHRpo@vger.kernel.org
-X-Gm-Message-State: AOJu0YzTKaltc2GHCHp2toJKnYiEfNQzsKl5jE4fJNdIym8RrgwnOjh8
-	TbjU5bMxrDOCNpe4+kkS1VuXLa+9gK2lpmirGLHNrHyG9AfK5NRZyYyhfcLy8YeQavPbc4kAWkz
-	KG9ddP4lSdHG95Yr+67oIq3zyIJSoDF6YLMppMShuJA==
-X-Received: by 2002:a05:6512:230e:b0:5b0:1186:fdf with SMTP id
- 2adb3069b0e04-5b023d119b6mr4054246e87.11.1784126603717; Wed, 15 Jul 2026
- 07:43:23 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 15 Jul 2026 14:43:21 +0000
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 15 Jul 2026 14:43:21 +0000
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <alYGGu7_3G6mJAzQ@linaro.org>
+	s=k20260515; t=1784126985;
+	bh=87AXpHBd0iv4TTy368Q/Q/UJb9Kqr8Gw4rcYfu4tUzw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=Fw52mmgrQV0ypMwmPeUbXHs2PV7Q6iuHdZpMDS0WtFeD3OitbvvZjBMj+irKiF3dp
+	 PYtDAvEqTN9L/GMvzvNdEfg4kaq7c+zSVA4w5Q0v2iOKQbO1qbzodSHgDLF3CtV+A/
+	 sb/1UdFFE6Oqw5YCsxuY1hfXCt5Ei6+8VX6QAudc4ZqUzq9PYAzTuw8s5gUeYv4x3d
+	 1v4b29vy5ZzTucemN5P4Zr5HytjLIPdwvJafKlDNMuSWGladOxxqZAORBc9RPPQxhZ
+	 vmKp2IpCyLTKLk+1u71RNWu0lCfJCDsa+6+N9R+aOZl5qYBs88adESru+K2p3t9DoR
+	 0C9dzb1dLUfRQ==
+Message-ID: <c398dd9d-dff8-4af7-8a25-7f10ece442c9@kernel.org>
+Date: Wed, 15 Jul 2026 16:49:21 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260713-qcom-qce-cmd-descr-v21-0-bc2583e18475@oss.qualcomm.com>
- <20260713-qcom-qce-cmd-descr-v21-6-bc2583e18475@oss.qualcomm.com> <alYGGu7_3G6mJAzQ@linaro.org>
-Date: Wed, 15 Jul 2026 14:43:21 +0000
-X-Gmail-Original-Message-ID: <CAMRc=MevqXga1u-XC8LYc3hnjjzmdESntsSGYP25XECeeySfJA@mail.gmail.com>
-X-Gm-Features: AUfX_mz84E27Q1EUpA_PNW8nZwsEDXDnWfdcPZvHlIEcElHMR4d25WVPlOXxIfA
-Message-ID: <CAMRc=MevqXga1u-XC8LYc3hnjjzmdESntsSGYP25XECeeySfJA@mail.gmail.com>
-Subject: Re: [PATCH v21 06/14] dmaengine: qcom: bam_dma: add support for BAM locking
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Thara Gopinath <thara.gopinath@gmail.com>, Herbert Xu <herbert@gondor.apana.org.au>, 
-	"David S. Miller" <davem@davemloft.net>, Udit Tiwari <quic_utiwari@quicinc.com>, 
-	Md Sadre Alam <mdalam@qti.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Manivannan Sadhasivam <mani@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Peter Ujfalusi <peter.ujfalusi@gmail.com>, Michal Simek <michal.simek@amd.com>, 
-	Frank Li <Frank.Li@kernel.org>, Andy Gross <agross@codeaurora.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, dmaengine@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, brgl@kernel.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 15/33] mm/vma: refactor vmg_adjust_set_range() for
+ clarity
+Content-Language: en-US
+To: Lorenzo Stoakes <ljs@kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ David Hildenbrand <david@kernel.org>, "Liam R. Howlett"
+ <liam@infradead.org>, Mike Rapoport <rppt@kernel.org>,
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+ Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>,
+ Jann Horn <jannh@google.com>, Lance Yang <lance.yang@linux.dev>,
+ Pedro Falcato <pfalcato@suse.de>, Russell King <linux@armlinux.org.uk>,
+ Dinh Nguyen <dinguyen@kernel.org>,
+ Simon Schuster <schuster.simon@siemens-energy.com>,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ Helge Deller <deller@gmx.de>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
+ Dan Williams <djbw@kernel.org>, Matthew Wilcox <willy@infradead.org>,
+ Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>,
+ Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>,
+ Arnaldo Carvalho de Melo <acme@kernel.org>,
+ Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+ Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
+ Adrian Hunter <adrian.hunter@intel.com>, James Clark
+ <james.clark@linaro.org>, Zi Yan <ziy@nvidia.com>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>, Nico Pache <npache@redhat.com>,
+ Ryan Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>,
+ Barry Song <baohua@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
+ Naoya Horiguchi <nao.horiguchi@gmail.com>, Xu Xin <xu.xin16@zte.com.cn>,
+ Chengming Zhou <chengming.zhou@linux.dev>, SJ Park <sj@kernel.org>,
+ Matthew Brost <matthew.brost@intel.com>,
+ Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
+ Byungchul Park <byungchul@sk.com>, Gregory Price <gourry@gourry.net>,
+ Ying Huang <ying.huang@linux.alibaba.com>,
+ Alistair Popple <apopple@nvidia.com>, Hugh Dickins <hughd@google.com>,
+ Peter Xu <peterx@redhat.com>, Kees Cook <kees@kernel.org>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Robin Murphy <robin.murphy@arm.com>, Andrey Konovalov
+ <andreyknvl@gmail.com>, Alexander Potapenko <glider@google.com>,
+ Dmitry Vyukov <dvyukov@google.com>, Steven Rostedt <rostedt@goodmis.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Jarkko Sakkinen <jarkko@kernel.org>,
+ Dave Hansen <dave.hansen@linux.intel.com>, Thomas Gleixner
+ <tglx@kernel.org>, Borislav Petkov <bp@alien8.de>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, Ian Abbott <abbotti@mev.co.uk>,
+ H Hartley Sweeten <hsweeten@visionengravers.com>,
+ Lucas Stach <l.stach@pengutronix.de>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
+ <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+ Thierry Reding <thierry.reding@kernel.org>,
+ Mikko Perttunen <mperttunen@nvidia.com>,
+ Jonathan Hunter <jonathanh@nvidia.com>,
+ Christian Koenig <christian.koenig@amd.com>, Huang Rui <ray.huang@amd.com>,
+ Matthew Auld <matthew.auld@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum
+ <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>,
+ Ankit Agrawal <ankita@nvidia.com>, Alex Williamson <alex@shazbot.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Shakeel Butt <shakeel.butt@linux.dev>,
+ Usama Arif <usama.arif@linux.dev>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org,
+ linux-fsdevel@vger.kernel.org, nvdimm@lists.linux.dev,
+ linux-perf-users@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+ damon@lists.linux.dev, iommu@lists.linux.dev, kasan-dev@googlegroups.com,
+ linux-sgx@vger.kernel.org, etnaviv@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org,
+ kvm@vger.kernel.org, Russell King <linux+etnaviv@armlinux.org.uk>
+References: <20260710-b4-pre-scalable-cow-v2-0-2a5aa403d977@kernel.org>
+ <20260710-b4-pre-scalable-cow-v2-15-2a5aa403d977@kernel.org>
+From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
+Autocrypt: addr=vbabka@kernel.org; keydata=
+ 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
+In-Reply-To: <20260710-b4-pre-scalable-cow-v2-15-2a5aa403d977@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, 14 Jul 2026 11:49:14 +0200, Stephan Gerhold
-<stephan.gerhold@linaro.org> said:
-> On Mon, Jul 13, 2026 at 03:01:07PM +0200, Bartosz Golaszewski wrote:
->> Add support for BAM pipe locking. To that end: when starting DMA on an RX
->> channel - prepend the existing queue of issued descriptors with an
->> additional "dummy" command descriptor with the LOCK bit set. Once the
->> transaction is done (no more issued descriptors), issue one more dummy
->> descriptor with the UNLOCK bit.
->>
->> We *must* wait until the transaction is signalled as done because we
->> must not perform any writes into config registers while the engine is
->> busy.
->>
->> The dummy writes must be issued into a scratchpad register of the client
->> so provide a mechanism to communicate the right address via descriptor
->> metadata.
->>
->> Reviewed-by: Manivannan Sadhasivam <mani@kernel.org>
->> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->
-> Thanks for the fixes. The lock/unlock sequence looks good to me now,
-> I commented on a couple of minor things below that would be good to fix
-> (some of them are also reported by Sashiko).
->
+On 7/10/26 22:16, Lorenzo Stoakes wrote:
+> Add comments with ASCII diagrams to describe what we're doing, avoid
+> dubious use of PHYS_PFN(), and use vma_start_pgoff().
+> 
+> The most complicated scenario represented here is vmg->__adjust_next_start
+> - when this is set, vmg->[start, end] actually indicate the range to be
+> retained, so take special care to describe this accurately.
+> 
+> No functional change intended.
+> 
+> Reviewed-by: Pedro Falcato <pfalcato@suse.de>
+> Reviewed-by: Gregory Price <gourry@gourry.net>
+> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
 
-Thanks.
+Reviewed-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
 
->> ---
->>  drivers/dma/qcom/bam_dma.c       | 191 +++++++++++++++++++++++++++++++++++++--
->>  include/linux/dma/qcom_bam_dma.h |  14 +++
->>  2 files changed, 198 insertions(+), 7 deletions(-)
->>
->> diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
->> index f3e713a5259c2c7c24cfdcec094814eb1202971a..f08549ee3872eece85884606d6ee9e540ee688ca 100644
->> --- a/drivers/dma/qcom/bam_dma.c
->> +++ b/drivers/dma/qcom/bam_dma.c
->> [...]
->> @@ -686,6 +702,35 @@ static int bam_slave_config(struct dma_chan *chan,
->>  	return 0;
->>  }
->>
->> +static int bam_metadata_attach(struct dma_async_tx_descriptor *desc, void *data, size_t len)
->> +{
->> +	struct bam_chan *bchan = to_bam_chan(desc->chan);
->> +	const struct bam_device_data *bdata = bchan->bdev->dev_data;
->> +	struct bam_desc_metadata *metadata = data;
->> +
->> +	if (!data)
->
-> Doesn't really matter much, but since the parameter exists you might as
-> well add
->
-> 	&& len == sizeof(*metadata)
->
-> here to be sure.
->
+> ---
+>  mm/vma.c | 51 +++++++++++++++++++++++++++++++++++++++++++++++----
+>  1 file changed, 47 insertions(+), 4 deletions(-)
+> 
+> diff --git a/mm/vma.c b/mm/vma.c
+> index 084afdf37385..7265a054cfa3 100644
+> --- a/mm/vma.c
+> +++ b/mm/vma.c
+> @@ -704,11 +704,54 @@ static void vmg_adjust_set_range(struct vma_merge_struct *vmg)
+>  	pgoff_t pgoff;
+>  
+>  	if (vmg->__adjust_middle_start) {
+> -		adjust = vmg->middle;
+> -		pgoff = adjust->vm_pgoff + PHYS_PFN(vmg->end - adjust->vm_start);
+> +		/*
+> +		 * vmg->start    vmg->end
+> +		 * |             |
+> +		 * v    merge    v
+> +		 * <------------->
+> +		 *         delta
+> +		 *        <------>
+> +		 * |------|----------------|
+> +		 * | prev |    middle      |
+> +		 * |------|----------------|
+> +		 *        ^
+> +		 *        |
+> +		 *        middle->vm_start
+> +		 */
+> +		struct vm_area_struct *middle = vmg->middle;
+> +		const unsigned long delta = vmg->end - middle->vm_start;
+> +
+> +		pgoff = vma_start_pgoff(middle) + (delta >> PAGE_SHIFT);
+> +		adjust = middle;
+>  	} else if (vmg->__adjust_next_start) {
+> -		adjust = vmg->next;
+> -		pgoff = adjust->vm_pgoff - PHYS_PFN(adjust->vm_start - vmg->end);
+> +		/*
+> +		 *                Originally:
+> +		 *
+> +		 *            vmg->start   vmg->end
+> +		 *            |            |
+> +		 *            v    merge   v
+> +		 *            <------------>
+> +		 *            .            .
+> +		 * merge_existing_range() updates to:
+> +		 *            .            .
+> +		 * vmg->start vmg->end     .
+> +		 * |          |            .
+> +		 * v  retain  v            .
+> +		 * <---------->            .
+> +		 *             delta       .
+> +		 *            <----->      .
+> +		 * |----------------|------|
+> +		 * |    middle      | next |
+> +		 * |----------------|------|
+> +		 *                  ^
+> +		 *                  |
+> +		 *                  next->vm_start
+> +		 */
+> +		struct vm_area_struct *next = vmg->next;
+> +		const unsigned long delta = next->vm_start - vmg->end;
+> +
+> +		pgoff = vma_start_pgoff(next) - (delta >> PAGE_SHIFT);
+> +		adjust = next;
+>  	} else {
+>  		return;
+>  	}
+> 
 
-Ok.
-
->> +		return -EINVAL;
->> +
->> +	if (!bdata->pipe_lock_supported)
->> +		/*
->> +		 * The client wants to use locking but this BAM version doesn't
->> +		 * support it. Don't return an error here as this will stop the
->> +		 * client from using DMA at all for no reason.
->> +		 */
->> +		return 0;
->> +
->> +	guard(spinlock_irqsave)(&bchan->vc.lock);
->> +
->> +	bchan->scratchpad_addr = metadata->scratchpad_addr;
->> +	bchan->direction = metadata->direction;
->> +
->> +	return 0;
->> +}
->> +
->> +static const struct dma_descriptor_metadata_ops bam_metadata_ops = {
->> +	.attach = bam_metadata_attach,
->> +};
->
-> I'm not sure if we have discussed this before, but could we avoid
-> re-programming the scratchpad_addr all the time by placing it into
-> struct dma_slave_config -> peripheral_config? It still feels awkward to
-> me to place a global constant configuration value into per-descriptor
-> metadata.
->
-
-Yes, this was discussed several versions ago. I went with using
-dmaengine_slave_config() until v11. I think Vinod or Dmitry requested we change
-it to the metadata.
-
->> +
->>  /**
->>   * bam_prep_slave_sg - Prep slave sg transaction
->>   *
->> [...]
->> @@ -802,6 +851,7 @@ static int bam_dma_terminate_all(struct dma_chan *chan)
->>  		}
->>
->>  		vchan_get_all_descriptors(&bchan->vc, &head);
->> +		bchan->bam_locked = false;
->
-> I wonder about the implications of this. If the LOCK descriptor was
-> already processed, will we cause a deadlock if we never submit the
-> UNLOCK descriptor? Or I guess bam_reset_channel() might reset the lock
-> as well?
->
-
-I'll look into it.
-
->>  	}
->>
->>  	vchan_dma_desc_free_list(&bchan->vc, &head);
->> [...]
->> @@ -870,6 +929,7 @@ static u32 process_channel_irqs(struct bam_device *bdev)
->>  {
->>  	u32 i, srcs, pipe_stts, offset, avail;
->>  	struct bam_async_desc *async_desc, *tmp;
->> +	struct bam_desc_hw *hdesc;
->>
->>  	srcs = readl_relaxed(bam_addr(bdev, 0, BAM_IRQ_SRCS_EE));
->>
->> @@ -919,13 +979,20 @@ static u32 process_channel_irqs(struct bam_device *bdev)
->>  			 * push back to front of desc_issued so that
->>  			 * it gets restarted by the work queue.
->>  			 */
->> +
->> +			list_del(&async_desc->desc_node);
->>  			if (!async_desc->num_desc) {
->> -				vchan_cookie_complete(&async_desc->vd);
->> +				hdesc = async_desc->desc;
->> +				u16 flags = le16_to_cpu(hdesc->flags);
->
-> Is this unused? Also a bit odd to have hdesc declared outside of the
-> loop and flags declared inside.
->
->> +
->> +				if (async_desc->is_lock_desc)
->> +					bam_dma_free_lock_desc(&async_desc->vd);
->> +				else
->> +					vchan_cookie_complete(&async_desc->vd);
->>  			} else {
->>  				list_add(&async_desc->vd.node,
->>  					 &bchan->vc.desc_issued);
->>  			}
->> -			list_del(&async_desc->desc_node);
->>  		}
->>  	}
->>
->> @@ -1046,13 +1113,102 @@ static void bam_apply_new_config(struct bam_chan *bchan,
->>  	bchan->reconfigure = 0;
->>  }
->>
->> +static struct bam_async_desc *
->> +bam_make_lock_desc(struct bam_chan *bchan, unsigned long flag)
->> +{
->> +	struct dma_chan *chan = &bchan->vc.chan;
->> +	struct bam_async_desc *async_desc;
->> +	struct bam_desc_hw *desc;
->> +	struct virt_dma_desc *vd;
->> +	struct virt_dma_chan *vc;
->> +	unsigned int mapped;
->> +
->> +	async_desc = kzalloc_flex(*async_desc, desc, 1, GFP_NOWAIT);
->> +	if (!async_desc) {
->> +		dev_err(bchan->bdev->dev, "failed to allocate the BAM lock descriptor\n");
->> +		return ERR_PTR(-ENOMEM);
->> +	}
->> +
->> +	sg_init_table(&async_desc->lock_sg, 1);
->> +
->> +	async_desc->num_desc = 1;
->> +	async_desc->curr_desc = async_desc->desc;
->> +	async_desc->dir = DMA_MEM_TO_DEV;
->> +	async_desc->is_lock_desc = true;
->> +
->> +	desc = async_desc->desc;
->> +
->> +	bam_prep_ce_le32(&async_desc->lock_ce, bchan->scratchpad_addr, BAM_WRITE_COMMAND, 0);
->> +	sg_set_buf(&async_desc->lock_sg, &async_desc->lock_ce, sizeof(async_desc->lock_ce));
->> +
->> +	mapped = dma_map_sg(chan->slave, &async_desc->lock_sg, 1, DMA_TO_DEVICE);
->
-> I agree with Sashiko that mapping using the BAM device
-> (bchan->bdev->dev) would be more precise, since the BAM will be reading
-> the descriptor. (It doesn't matter in practice since both BAM and
-> consumer usually have the same IOMMUs defined.)
->
-
-Ok
-
->> +	if (!mapped) {
->> +		kfree(async_desc);
->> +		return ERR_PTR(-ENOMEM);
->> +	}
->> +
->> +	desc->flags |= cpu_to_le16(DESC_FLAG_CMD | flag);
->> +	desc->addr = sg_dma_address(&async_desc->lock_sg);
->
-> cpu_to_le32()
->
-
-Right.
-
->> +	desc->size = cpu_to_le16(sizeof(struct bam_cmd_element));
->> +
->> +	vc = &bchan->vc;
->> +	vd = &async_desc->vd;
->> +
->> +	dma_async_tx_descriptor_init(&vd->tx, &vc->chan);
->> +	vd->tx.flags = DMA_PREP_CMD;
->> +	vd->tx_result.result = DMA_TRANS_NOERROR;
->> +	vd->tx_result.residue = 0;
->> +
->> +	return async_desc;
->> +}
->> +
->> [...]
->> @@ -1072,6 +1229,18 @@ static void bam_start_dma(struct bam_chan *bchan)
->>  		return;
->>
->>  	while (vd && !IS_BUSY(bchan)) {
->> +		/*
->> +		 * Open a LOCK/UNLOCK bracket around each fresh sequence.
->> +		 * Sentinels inserted by bam_setup_pipe_lock() are skipped: they
->> +		 * already have bam_locked set and must not trigger a second pair.
->> +		 */
->> +		if (!bchan->bam_locked &&
->> +		    !container_of(vd, struct bam_async_desc, vd)->is_lock_desc) {
->
-> Do we need the ->is_lock_desc check here? Looks redundant to me.
->
-
-I don't remember anymore but I think I did it on purpose for some reason. I'll
-double check.
-
->> +			ret = bam_setup_pipe_lock(bchan);
->> +			if (ret == 0 && bchan->bam_locked)
->> +				vd = vchan_next_desc(&bchan->vc);
->
-> Do we want some error handling here? If there is an error, this will
-> silently continue queuing everything without any locking.
->
-
-Ok, makes sense.
-
-Bart
