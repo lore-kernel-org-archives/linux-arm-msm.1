@@ -1,79 +1,98 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE2953BE154;
-	Thu, 16 Jul 2026 07:40:04 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB459388E7A
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 07:43:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784187607; cv=none; b=VeZG26MrPp1T5zsmJ6GNlwS7KRMZ0Ky0T/oCSQiEMSKRsjdyk/afT7GVH/ZaFVvqK7ynu2sSEXZigMQVWy5lf5n3WByyn7ER7OV5dvvh+7p5OYe1f/VJTfEnbe3ClFV/TnpRmfKSNkeHuRRy0Rtids/Uc6vJPqzzXVHce8aLa+0=
+	t=1784187788; cv=none; b=iNn/e5jK3ldtP6DlrOhQP5XN557LKsMkXJH3qFvtgKCVn51AnngTrhCsbFzhhq0PEb7DpSPJY+ZF6/M19KItCdYHRJd0cWSnMEReR1EqR2gqiZw+1QIAzaecL2/Aqd6kD0aWfRpceDMNgKhSvkW/xmEvEDPdfzoG5CJMlzuZC3s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784187607; c=relaxed/simple;
-	bh=KXlVTc3SRCvXiKLZmQ8/NCRXmu7FBjsJG2tFz0DMl/k=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Qii1btmMNpwxH4HfR49bH2BH5TFItpE7XKIbF0QoYx+Y7szIv9+Bhs31eG3gtr+Rf5m3HHr9OzAegikczQ++uvxk+jPrMQa0UCfr0PGoeDhtSy6kYX92EjcHJ45mxrE+pD9qP4oSFFO/hQg118BXiPuSP4zm2fbflLqSt3rZHXU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=U3m6LlMd; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784187788; c=relaxed/simple;
+	bh=Z3WoiBwaBMuJQ2HDEWUbzUshEOFUjZRXGdz3c8S0ItE=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=Ygob5GSmAXGlktTgYgCiLcYK3bfArp5ewN4RyNaBDCiinyjuklSAD/fJoVYsFv6UtLsEEIYzBF+pZRN5UwVuEzrgHRc+/uC38UG0VClnt8JmiZfu7AKHEvQR8YdJRTrNgiUZ0YoJKCITepNZHm9najqbc6MTCQhOK3cULcBUxCE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GKvlLjti; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="U3m6LlMd"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9F80E1F000E9;
-	Thu, 16 Jul 2026 07:40:02 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GKvlLjti"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C47C91F01562
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 07:43:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784187603;
-	bh=dojcUCCxlLBrqpQJPv4c8YU3OBh/MSH4vqKe8+qyO8c=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=U3m6LlMdue8PsJAdVgF57knst0IDMQwv96C041zLDkTI4/QWZxs0OOx/K84ByTf0/
-	 VBb+gEPGRBwdeFHvNDv11E6tQyO8pbmqhy+DHfxQjKIC6jCBmS5ldwWlnimQUhpHE7
-	 K2CBh0uknPZ8ush5uy97zeqfZkUGB2nQ6ESn9Uf1WFOxJcCeZ2yYTZeIs6/DjLTlo+
-	 C+0AeJIGCCutlT7Fr8dxHY7TWX7SmBVQX42817Vj65gDYFZLxJQen4uk6CXCjEmNx8
-	 Gf5+CogGuXzY1bOD/I8LSDUdEpSA6Et/qjQpQ5EzXneutfIQctevmKvKg/UVL+cQUq
-	 8+3x1bHj1Vb8A==
-Date: Thu, 16 Jul 2026 09:40:00 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-Cc: Vikash Garodia <vikash.garodia@oss.qualcomm.com>, 
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
-	Bryan O'Donoghue <bod@kernel.org>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
-	Mauro Carvalho Chehab <mchehab@kernel.org>, "Joerg Roedel (AMD)" <joro@8bytes.org>, 
-	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Stanimir Varbanov <stanimir.k.varbanov@gmail.com>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	iommu@lists.linux.dev, devicetree@vger.kernel.org, 
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Subject: Re: [PATCH v9 01/14] dt-bindings: media: qcom,glymur-iris: Add
- glymur video codec
-Message-ID: <20260716-soft-dexterous-adder-badb49@quoll>
-References: <20260715-glymur-v9-0-8cf2cbe12a07@oss.qualcomm.com>
- <20260715-glymur-v9-1-8cf2cbe12a07@oss.qualcomm.com>
+	s=k20260515; t=1784187787;
+	bh=vClHeog58KNqWH8CCWBc/ZspAK1VXs4jFJuykhl903U=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=GKvlLjtigec06rS4zHMLnidYeHW74IQ4uSCnp0hcH1K/O2C3GQDf3Q7fg24nHNU2A
+	 A1WEo5w5u/YwtkWERLdLHscDGFED0JTEYBup+wz4dWIzRuhfDLXi9jvMyEl6+dM2cI
+	 +lU43pEiPZ2HZeY1xziYypsiej0SdJuAAoPU64gSltHwKwJJ9d3yEXLmBTW4Un/Zn0
+	 87uHk9TQuQbHVn4Io0AnCuqOhZheuEC9iWnZbkFQBdO1gjYXTuwRb5ENItRaWTHjXz
+	 NKlVugm5FhmvKa1Yc7FK14JbY3T1BCS2CemvjYVFqhpj5y4MPBd/aAozyKAEbu9e7D
+	 4zgS2Gz5WKdhA==
+Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-5aeb11c7347so4995925e87.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 00:43:07 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+Rptai897PbMcCSSj34IS9gLAWMTCwlH2up8IhhfmbQdaW7GIWywWOjzxKM/5E4A3yMkViByT0ndPvNYTegZ@vger.kernel.org
+X-Gm-Message-State: AOJu0YxHoKaLx4veOIgOi7XpZ7VeYIqrtO0be0H2b2Ggf01UpyAQX8Dw
+	zIAwOlzq0JK/qdA3OL+vDkkNH14dLJHZUS+iPz0HFEAHKpDgN5MnzQHKgA4i0SXOqG+uumrFefq
+	gdsLYkrUaGBwf6JXcRb5J/dgRA5nPtMcUM6sxeI6uPQ==
+X-Received: by 2002:a05:6512:131f:b0:5ae:b130:1e1 with SMTP id
+ 2adb3069b0e04-5b15d78ec38mr1636875e87.28.1784187786412; Thu, 16 Jul 2026
+ 00:43:06 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 16 Jul 2026 00:43:04 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 16 Jul 2026 00:43:04 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <alewA9ubkYKHpnuj@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260715-glymur-v9-1-8cf2cbe12a07@oss.qualcomm.com>
+References: <20260713-qcom-qce-cmd-descr-v21-0-bc2583e18475@oss.qualcomm.com>
+ <20260713-qcom-qce-cmd-descr-v21-6-bc2583e18475@oss.qualcomm.com>
+ <alYGGu7_3G6mJAzQ@linaro.org> <CAMRc=MevqXga1u-XC8LYc3hnjjzmdESntsSGYP25XECeeySfJA@mail.gmail.com>
+ <alepDnRJmRLbFGRQ@vaman> <alewA9ubkYKHpnuj@linaro.org>
+Date: Thu, 16 Jul 2026 00:43:04 -0700
+X-Gmail-Original-Message-ID: <CAMRc=McZK1=S2SFgpCjtHSRecY0SiQWbBqsUxGX1w4229s2yKg@mail.gmail.com>
+X-Gm-Features: AUfX_mzRskw0QsuLe9nseN2xcUB6TP8BPyj9JPMV-mxeetGr6n2mWyZ5pOfIYHc
+Message-ID: <CAMRc=McZK1=S2SFgpCjtHSRecY0SiQWbBqsUxGX1w4229s2yKg@mail.gmail.com>
+Subject: Re: [PATCH v21 06/14] dmaengine: qcom: bam_dma: add support for BAM locking
+To: Stephan Gerhold <stephan.gerhold@linaro.org>
+Cc: Jonathan Corbet <corbet@lwn.net>, Thara Gopinath <thara.gopinath@gmail.com>, 
+	Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>, 
+	Udit Tiwari <quic_utiwari@quicinc.com>, Md Sadre Alam <mdalam@qti.qualcomm.com>, 
+	Dmitry Baryshkov <lumag@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, Peter Ujfalusi <peter.ujfalusi@gmail.com>, 
+	Michal Simek <michal.simek@amd.com>, Frank Li <Frank.Li@kernel.org>, 
+	Andy Gross <agross@codeaurora.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	dmaengine@vger.kernel.org, linux-doc@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-crypto@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	Bartosz Golaszewski <bartosz.golaszewski@linaro.org>, 
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Jul 15, 2026 at 07:39:55PM +0530, Vishnu Reddy wrote:
-> Add device tree binding for the Qualcomm Glymur Iris video codec. Glymur
-> is a new generation of video IP that introduces a dual-core architecture.
-> The second core brings its own power domain, clocks, and reset lines,
-> requiring additional power domains and clocks in the power sequence.
-> The current maxItems constraints for clocks and power-domains in the
-> common venus schema were sized for platforms available at the time of
-> authoring. The glymur platform introduces a dual core architecture
-> that requires more clocks and power domains, exceeding these limits.
-> Raise maxItems for clocks, clock-names, power-domains and
-> power-domain-names to accommodate the glymur platform.
-> The glymur platform-specific schema have fixed constraints for these
-> properties, so the common schema only acts as an upper bound.
-> 
-> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+On Wed, 15 Jul 2026 18:06:27 +0200, Stephan Gerhold
+<stephan.gerhold@linaro.org> said:
+> On Wed, Jul 15, 2026 at 09:06:46PM +0530, Vinod Koul wrote:
+>> On 15-07-26, 14:43, Bartosz Golaszewski wrote:
+>> > On Tue, 14 Jul 2026 11:49:14 +0200, Stephan Gerhold
+>
 
-You must drop the tag, you changed the binding significantly without any
-doubts.
+...
 
-Best regards,
-Krzysztof
+> I would avoid using struct dma_slave_config->dst_addr (like in v11) [1]
+> though, since it's more a "address to dummy register" now than the
+> actual dst_addr of the peripheral. That's why I suggested
+> struct dma_slave_config->peripheral_config.
 
+As in:
+
+struct bam_dma_peripheral_config {
+	phys_addr_t scratchpad_addr;
+};
+
+struct dma_slave_config cfg = { .peripheral_config = &scratchpad_addr };
+
+?
+
+Bart
