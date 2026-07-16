@@ -1,89 +1,89 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E14A37C0F5
-	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 16:18:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6ED4539183B
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 16:18:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784218740; cv=none; b=jX6knef3cuXagZPyEXa2hjc8Z/Wl0CYOtu77UEG+wgSAQG7XIF6BZF37zY/u+J8/QpKezq63+t7BARbVAbDxNEf5VjTVx6QdJ74sx14M4LPOGON+n1U6iYu4XkfQ0c6dsv35L0B4Fw0/hmeqmuw6Osm1wd110Y9PA72W85Fz5kA=
+	t=1784218744; cv=none; b=CIjiYJCdRuZ/8Msl5Ko7utN/Iuuzfy4ew2SXUNwfH4sdv6bUvqVdp2M+VLhdnu44WwGsu6N3iBQbxpqjM5bSeH6ijmc+q6dHNTLBTij4FJ3A6B3YZ1m1uCHHSVlkmVpAnXcrSakH9kR8+HecoGdsLR8J2blTTlZdP/W7j4OgwpY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784218740; c=relaxed/simple;
-	bh=AKJ2rYuq3UXtw84o9Wv2rgBoSN8Fv9N585Y291G3LZY=;
+	s=arc-20240116; t=1784218744; c=relaxed/simple;
+	bh=EILi4Z/HlIjZKXIC4ZrM+OocFMeGQtXeC7RenzsUUVA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=IMWEtkX7/rsYjbAj9hYAVHgyTx7ZWegPKnZ9Z/yBVgW1RGOoWWpTb374SEBEHcv1BpBD6Auwg9mW+H8eC8mYj85CfHQgm88FY2+8R0cTDfDLp38Eeejixtve/kVUFI5FRu5HqiW1ooWV62ZKprOwkZXVnucDmxkqbYENgAYi4as=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=iASYWyQi; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=USWxPA0d; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=SYA/ojMO+7cPDdjs58wHW40nMPZollXHpsvvg9HN99uqD5czW23cayEijmpMPdmkMDvUE0j6dQDEB02aqn3EwAHZYjfn6DbCE9UtamouPb2neH4kijySX7+WmrkLBNHJeXG+U8FiKx91iMjdftlSrqT2y7VEWih1AqLqdzmH8a4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=c/rtDTJD; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YthqtWeP; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="iASYWyQi";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="USWxPA0d"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66GDJj5v3043231
-	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 16:18:48 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="c/rtDTJD";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YthqtWeP"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66GDJwI13988661
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 16:18:55 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	lSQgtm9Gy/goYjkRUPvH4fsLeTRSZbUNnPPwbkXFunA=; b=iASYWyQiOGz5VgA/
-	XTn0KGINXOl7iwun+L+oaK4UAkSppUti72AQRZkNnhLuR7vlGMy9mYHpJZTlL1AS
-	UCOFvEyNexd/9B8cYqhNYm874EsqBHlM2inRvqdW77kI96fLNTftVFb/lYiKLtsG
-	izL6/2U1hmISKnZKom+b04CJLrwYK/woloqfhSEsBa29akkHZBX4MrQzNyd+LEbG
-	YONpu/dlF9TLwyHAXLY1UknVarwA3a50abYjFz/NLt7GhRneucqbDGu+n6johAq5
-	POp/1A0LGxxHL8eQfEhXIKFoL1sxcvK77aXu5LiRBgZT/jAy/9+35RjtxI8XPFoE
-	ub5I5Q==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fetcf2c6c-1
+	A3c/IYji9aAg2mwzDYhmuLrQNs2xKPwSpSPEjBK9EwM=; b=c/rtDTJD2bBUuIJM
+	hdttu0V9zXhG5WmLieds7CmF3jBFmc5tJNz1pjRl487UTSU+uw3uRYydfFzSkqhZ
+	c/Czndk/hi7/yUnUcl0RfatlbRBMkd3LU8YLsZlbstfG0L9idsCR06LcWQqwuE34
+	AApHWciA5NMznkYM0E58V2lGQLnnjoxY31mZdBllmQVbVX5O7F0wtM4cVBPYgKKH
+	zkiaC3Ltn0qRnxvX/5/gv0RMHkuS4h0Q7jqE/ssWa9uIn/xtXID8l7poUdphyT9z
+	b3pMOC1ekGaOK2yEI9UM+j/HOLBSDkyfzMaGDf2HHyiPS7Q0Ag02nAqfLySMVeh2
+	2uO5aw==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4feq3pk73v-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 16:18:48 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c19493ac2so119581621cf.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 09:18:48 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 16:18:54 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51c083f1818so59054101cf.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 09:18:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784218728; x=1784823528; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784218734; x=1784823534; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=lSQgtm9Gy/goYjkRUPvH4fsLeTRSZbUNnPPwbkXFunA=;
-        b=USWxPA0dquVSQCqvRP/vyS8ZY0IzO7Jnh0OHbV+D/3D4RPjH7zGsTYDLljjG4kU9QU
-         0IV4wBID7q2wPFNRuUmYo99CUraiqK2SvWuyp14RKFcZKGiD52es1696Rp9oe2KaRyu0
-         bzL3pveUsKO1jOFvwSlftMq1LiscsWRo6IyeDK7Kiyt/Mqft+r2KzF4f29qZR1iWiqYW
-         RU2CzbBWDEUDgDB0dJFOIh7gvyCuRaVhAvIGNk+lep2tRFgvFJzqwW+Cdnvkapf0uTZp
-         xgD8b1DOobcKRlYN/Zd7JCjzopJUTx6YutGEIzJTx9o+jzjzvMjtjpuBtcEdo1SmogWg
-         ln8A==
+        bh=A3c/IYji9aAg2mwzDYhmuLrQNs2xKPwSpSPEjBK9EwM=;
+        b=YthqtWePpi+QLwcmo0UlVsjHLio28YYGYWRTUPbFcYpCzMtrWEVOG3qF7y0oyT+RVF
+         Hhml9PdrEUD2/KPVpuUAvJR5m9cBs8Fg4HnuEJBnqDdcSEpON+PcioPfo21uGNqUjJj2
+         CSEbmGORx1v/TOXTPMqbqOPUrCTQzrkiYHmMJCP30LgvPAT/x463QPJVUiOqRdXtKgg4
+         b6DtMv1DqbiDXmvbXOw4qTgvATe/E2w7UzO/QrHwyYP2wTDd+lWVFheBIvpWCDSJPsLT
+         L25OVab6z/DC3nBnbJPR3h8u1eQHoOyoywI+vi0b87Y/VyBtn6n/SVMOYRTJbdOI3CsL
+         pKdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784218728; x=1784823528;
+        d=1e100.net; s=20251104; t=1784218734; x=1784823534;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=lSQgtm9Gy/goYjkRUPvH4fsLeTRSZbUNnPPwbkXFunA=;
-        b=pH+zBNMxdBtAUBhmCPqm99Tvrt0fg3CRECZGV53ZmkJkZFyGPWc70q7xHHbVpdmseZ
-         50yA/VCIboh/JWaTJXPwsEng24bod0aG+iRrNxkI5tGkVBw1nuKDZAZmXKP2lZTDpwfM
-         7smnb/J3N/p/HSW6J01Gj5ie2j6YcGD0EUut5jNrY5H7tpCaLdHeBUVtp9T95bfTSwP3
-         6yWu+Ok9dbd7i+gSb0gP+5UY+lRlWqf1PpGuEptmOWq+A7nNUmM7ac5NlyOWA/udAssR
-         CBgnGdaIODctXOkfVYksA32sukeL+Rf6AoL5KqYSWYre62pAS9pDbW0qNOGMX8hyEvgy
-         Udew==
-X-Forwarded-Encrypted: i=1; AHgh+Rq4UWFpYPOUGOx7hDqOE9kGDYCM47zF36TVy87cfMMxKf4Atk9BMcp6GuwXS5qphaqRGCcdf30dQQfugLmJ@vger.kernel.org
-X-Gm-Message-State: AOJu0YwhD3TYP1Bg1kyElJqrdyT1HLUFnxHwxX60iAJ87NwYwITllwBg
-	DaMogVC3rm8xv9en+vJ3cMOkl4lebtZ6Ys9eOm0l/+QAlCipcrW/xOjU8el8lfnOfxDzugsiB9b
-	Q+CDNkkDnL2xo23eWaNCKCpcryIij1LbRu+X9o1avK3jwzSlXIv5Gcfd0Ekp+B0++Oe35
-X-Gm-Gg: AfdE7ckHvkZNszoAFj91q4c4RWsJz1rPpl4eNZ+VS1vI/t1ZviPy8zfWjEeVT7VnfV0
-	NF94A0k2LJ8Wr8MCWbWndgPIRsO4zgekxz/EC9Ut+b/RZF0erF4u6yC/jdsQcSWimtxigsbpsv3
-	RA5TZpFQrpXJMGhQtD/KaDePNL66G4GsUFXlLnKifNljeMbRBKJ9M3UaUYzPVev27e/rBS1lY+n
-	W8pknXyQkuengh+xls82hqGmoZ3nbKOU0DzNpNvtOBCpnJGEs5K4FyKXt1fpOTtI1P4iw8Gi77x
-	iXg4JC1P3XJFJfpmilq/3asCy6pC9QiJTnsS/RUtIm8xPXHcmBlHctIl4b+SvyoSHawWaQJxD6S
-	qBMluHX0dtSH1O2AjaMGM0Hndc23H0ru93gFXcgWpncM06hqFDhhl5+zTsYM+hA+WhePHx1SKMi
-	4vxYitNAfxm5zthxmMK03dkX6J3SaOwc87r/ZLSWGv7nVGRdkzmbU=
-X-Received: by 2002:ac8:7f92:0:b0:51a:8c9c:7f3e with SMTP id d75a77b69052e-51e424dc615mr122134641cf.65.1784218727538;
-        Thu, 16 Jul 2026 09:18:47 -0700 (PDT)
-X-Received: by 2002:ac8:7f92:0:b0:51a:8c9c:7f3e with SMTP id d75a77b69052e-51e424dc615mr122134121cf.65.1784218726995;
-        Thu, 16 Jul 2026 09:18:46 -0700 (PDT)
+        bh=A3c/IYji9aAg2mwzDYhmuLrQNs2xKPwSpSPEjBK9EwM=;
+        b=iPybbEMa+UgqU5IWoFz2RnIeoUyV7bnwFKSgos1ndRn0/QrJWmc65N/KHrW6gl9iNi
+         OFRkkMMkK3kLNRYVRbGuY/Arcfy3XPrDJbEvfEPPaN/Npn2tjI+jARNH0zIdNdjd90vM
+         5qKOhg8wGJ+1ZJ/N4mlNVsX8KLk60ci4hGEgIlCAMOL+yaIoKGvbgkkk1jD34Czxy4Iq
+         usxcfOw6ET6TdYAjQ5CaZo4PtVhQYDhGmA1/iE1qvGq6TQiHNqX8bdj53OdaKSV+hEoZ
+         Zlu5+liZDYthj0WD5W6ZrmuUq/ULb399Yqu3pZwFBvCT0esMhjXGbPjX2aLeeyJiHa+/
+         8MuQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rrrn+Lv05nLaV7x8u9Z6ULQwAdq/qtPz7v//jO8ZSYiYgFLBusqLG4EvpJVv9mFkBUn+Kalq6K2/mpzY2S+@vger.kernel.org
+X-Gm-Message-State: AOJu0YybYvhhcQB1P0Yd63LqxcgqyShy2WJjsNw7rr4bJnHLZYraRJsh
+	/DSUtq1Xtseot3E8xKlUDdkCtbRsP+x/W50SvklPS0HakAcA68YZdAc6Yix+CPFI3RdjBCKIg1V
+	t62wqFTHM4SlF/eZxRlDdE5bzB2Bucrb5nF/iQFUJGx6gDzTMNY9t1IVkPbUD248QfX7F
+X-Gm-Gg: AfdE7clNLR9DIJyIzwKfGCV7gGIDHNPLO6wID5btxgQoXONIOFBtS5PkXRS28dXzZyx
+	pGdQtGydZPJExX9HLyQuR30fn9rmxbQEImDuZaWFEu4aZXhD4R1D3lRMamvPaLguctwLIHl55e3
+	ksQrGTCZFcaW7VLB1SwzPATeJFDCxXV86ZlIWn0E3D50TbDZiKM9lefzPaU7GGeBoex6+ZQZ1oT
+	731gKsy+rA0rfjgnirwmd/izbgEIOWxtV5fnDN1LxPCfqonHtBZZUQ1k2lFHtIaHmXxHxDw89Am
+	F9xlUs+84EQLvWPE1Zr95gFi91Iq6FBuVvybinW+e7KYX1CeFkzD7+bmJsKPw1r2FbvvGeHfDL2
+	ZD3+MhzN1XOVRhNjB2VLG5cIm3KFPeTWO/i+qq7bK4XehdoI8jCEypSSCabVDPmm8asPL2DqxR+
+	jE7lluLjB3w3IwF0OOaVxpIkYzoekPKTa7NQ2Bb2M9ezMHLsL1zTA=
+X-Received: by 2002:a05:622a:1aa1:b0:51c:c37:df31 with SMTP id d75a77b69052e-520bc709f45mr3031661cf.7.1784218733755;
+        Thu, 16 Jul 2026 09:18:53 -0700 (PDT)
+X-Received: by 2002:a05:622a:1aa1:b0:51c:c37:df31 with SMTP id d75a77b69052e-520bc709f45mr3031111cf.7.1784218733144;
+        Thu, 16 Jul 2026 09:18:53 -0700 (PDT)
 Received: from QCOM-eG0v1AUPpu.na.qualcomm.com ([2a01:e0a:830:450:751c:d61c:c91:60dd])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c168744bdddsm257262866b.48.2026.07.16.09.18.38
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c168744bdddsm257262866b.48.2026.07.16.09.18.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Jul 2026 09:18:39 -0700 (PDT)
+        Thu, 16 Jul 2026 09:18:49 -0700 (PDT)
 From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Thu, 16 Jul 2026 18:18:26 +0200
-Subject: [PATCH v4 09/11] dt-bindings: connector: pcie-m2-e: Add vendor LGA
- connector compatible
+Date: Thu, 16 Jul 2026 18:18:28 +0200
+Subject: [PATCH v4 11/11] arm64: dts: qcom: monaco-arduino-monza: Add
+ QCA2066 M.2 WiFi/BT support
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -92,7 +92,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260716-monza-wireless-v4-9-9b02e6f549d7@oss.qualcomm.com>
+Message-Id: <20260716-monza-wireless-v4-11-9b02e6f549d7@oss.qualcomm.com>
 References: <20260716-monza-wireless-v4-0-9b02e6f549d7@oss.qualcomm.com>
 In-Reply-To: <20260716-monza-wireless-v4-0-9b02e6f549d7@oss.qualcomm.com>
 To: Manivannan Sadhasivam <mani@kernel.org>,
@@ -108,75 +108,156 @@ Cc: linux-pci@vger.kernel.org, linux-pm@vger.kernel.org,
         linux-bluetooth@vger.kernel.org, devicetree@vger.kernel.org,
         Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
         Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Proofpoint-ORIG-GUID: Q_Tl1lKh8ZqrnKRrECODaewEUiCcQt54
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDE2NiBTYWx0ZWRfX4RUYvBUS6Zie
- FWmFdue5+/TFQ2r7CazFOJZ6JMvdqUEMlAJERSDI8viEG1H7yj39/NistFJS7xGCW5tUBiCQJju
- za5d+kMsiAA+k8NXqWhYxh9Y5pwMWgrWylnLpjsV2wH8/x3NWCe4lAxxjcE9tTW2bzcm4MFzFmU
- Q3zEdk3uAwz3IiUonbAL0L+d88l9RaNunHZRSEtpwEBtzShbRZJRjHj+xU2U0ecXMZkLlAGgEqF
- sN7seiPiHs5dFsmLWDjBwG5grNHO363I4MgRaxTbPmH7Uiq0OWWU3xfdPj/TWx9Sah04LkiFKNz
- SdsvxECFv3TYEECD/rKrMASOIw80poDPSafTVTGUzFt7gUw+7jjaHbn3KBwETDNmDimfz0Hfl5H
- 6UTtS8M7/eLqUNiBiIQ2KcmhgTCplsZUWR0HJ78LjqA777GjUC0SIpqzqkoPiGRMuyBnuLeEtH3
- Ejpof//+IjJv2i9SPEA==
-X-Authority-Analysis: v=2.4 cv=f8R4wuyM c=1 sm=1 tr=0 ts=6a590468 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-ORIG-GUID: LBdE1OgSv37H70aiAgDsChk3tAXZO0-6
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDE2NyBTYWx0ZWRfXwgUXqZLhIY0e
+ IdOpGguBEfpHrdqgnBdv7brKXG9tMHDLaccni6Kp3DvoHzSzazgaEX4XJHi7KpZr8VMlnM9hho3
+ ijphjv7EsnR9W6Jh4kSHHWb2iEPXZ+M=
+X-Proofpoint-GUID: LBdE1OgSv37H70aiAgDsChk3tAXZO0-6
+X-Authority-Analysis: v=2.4 cv=PN8/P/qC c=1 sm=1 tr=0 ts=6a59046e cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
- a=VwQbUJbxAAAA:8 a=M8sXMW5dAYDte-7YvdsA:9 a=QEXdDO2ut3YA:10
- a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-GUID: Q_Tl1lKh8ZqrnKRrECODaewEUiCcQt54
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDE2NiBTYWx0ZWRfX3f2x/a/q8VCy
- yA2BNh0nm+lkbBxUzAClTvHKVPSxa62aZEKIFqLDuEyyCYLxhydSUVeshtDxSHFMfY7EbaMqE1z
- L4cCk3vIXTdl85nNUBpmRZPSBaHnhBo=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
+ a=VwQbUJbxAAAA:8 a=EzCDy3pf2FPqfMyO2-oA:9 a=QEXdDO2ut3YA:10
+ a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDE2NyBTYWx0ZWRfX8pBp+bMDUCGW
+ 4tfqsq88q3qXjqArJj7Kds8f4Bbp9PvSQdJoQXueHjvQ2lY2oNrrUdk9c0X+s1/37VCa8q+szFC
+ zXw1OwGMrElIpDJYCyYqKQ3ThsHwNWtBK5PsEfsQk1dPlCOFNGwB7DdVdP1YL0dA1sQSUT6XUqj
+ jOVtJsQx4ocx1dsT3Yz9W5mt7+6NEKziJGZcrsmUAjuTBO7x9XeXCP6fFIqzlCvGCcinyBAw2C/
+ eMzLY0WfosT3+2uf6iKtwhREPmiPL2o5khue1NAaaQ5j54/byLVccShSF8gsc/Y6NDdyqluFKDO
+ jz71SmOqVTXh11tpdgsdJAchHE/Vv72uZzQlQGydTWjJvxv6tizVy8z+QoLGhD/z6LmY7RXNxcZ
+ vxE/j36fl6ug6D+FpK082Knny4d1pyhHVs8Z++hwyUxa+70PUEJh7TdM3Zw0JsLRxPpgw669dSL
+ duLdNUK5u7tSJ/uto4w==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-16_05,2026-07-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 clxscore=1015 impostorscore=0 priorityscore=1501 bulkscore=0
- phishscore=0 suspectscore=0 lowpriorityscore=0 malwarescore=0 adultscore=0
+ bulkscore=0 malwarescore=0 lowpriorityscore=0 phishscore=0 adultscore=0
+ priorityscore=1501 impostorscore=0 clxscore=1015 suspectscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160166
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160167
 
-Some modules (e.g. the Qualcomm QCA2066/QCNFA765) expose the same M.2
-Key E interface signals but are physically soldered as an LGA package
-rather than plugged into a real M.2 Key E connector socket. Such designs
-are not actual M.2 Key E connectors, so describe them with a dedicated
-vendor-specific compatible while keeping "pcie-m2-e-connector" as a
-fallback for the shared signal semantics.
+Add support for the QCA2066 (QCNFA765) WiFi/Bluetooth module on the
+Arduino VENTUNO Q board. The module is interfaced via LGA and is
+compatible with the M.2 Key E.
 
-Add "qcom,pcie-m2-1418-lga-connector" for the M.2 LGA 1418 found on
-Arduino Ventuno Q (Monaco Monza).
+Add wireless-lga-connector node using pcie-m2-e-connector binding,
+connecting PCIe port 0 to the WiFi interface and UART10 port 3 to
+the Bluetooth interface.
 
-Add "qcom,pcie-m2-1620-lga-connector" for the M.2 LGA 1620 found on
-The Lenovo Thinkpad T14s.
+Add pcie@1,0 downstream port node with pciclass,0604 compatible so
+the pci-pwrctrl driver can acquire the power sequencer and enable
+the M.2 slot before PCIe enumeration.
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Add nfa725b_default_state pinctrl for the W_DISABLE1/2 GPIOs
+(gpio56/gpio55) used by the power sequencer.
+
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 Reviewed-by: Manivannan Sadhasivam <mani@kernel.org>
 Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 ---
- .../devicetree/bindings/connector/pcie-m2-e-connector.yaml        | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ arch/arm64/boot/dts/qcom/monaco-arduino-monza.dts | 64 +++++++++++++++++++++--
+ 1 file changed, 60 insertions(+), 4 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/connector/pcie-m2-e-connector.yaml b/Documentation/devicetree/bindings/connector/pcie-m2-e-connector.yaml
-index f7859aa9b63469cb43919c0b5719c18694c5364d..ce6173a0ec41cfe8ab4a5780940999c18674ab7e 100644
---- a/Documentation/devicetree/bindings/connector/pcie-m2-e-connector.yaml
-+++ b/Documentation/devicetree/bindings/connector/pcie-m2-e-connector.yaml
-@@ -17,7 +17,13 @@ description:
+diff --git a/arch/arm64/boot/dts/qcom/monaco-arduino-monza.dts b/arch/arm64/boot/dts/qcom/monaco-arduino-monza.dts
+index f67a554adf956696aeac2348e478dbd0b74f0e62..5e41e637c1c705ce0f3847aa71b229261a1e3664 100644
+--- a/arch/arm64/boot/dts/qcom/monaco-arduino-monza.dts
++++ b/arch/arm64/boot/dts/qcom/monaco-arduino-monza.dts
+@@ -155,6 +155,40 @@ vreg_nvme: regulator-3p3-m2 {
+ 		enable-active-high;
+ 		startup-delay-us = <20000>;
+ 	};
++
++	wireless-lga-connector {
++		compatible = "qcom,pcie-m2-1418-lga-connector",
++			     "pcie-m2-e-connector";
++		vpcie3v3-supply = <&vdc_3v3>;
++		vpcie1v8-supply = <&vdc_1v8>;
++		w-disable1-gpios = <&tlmm 56 GPIO_ACTIVE_LOW>;
++		w-disable2-gpios = <&tlmm 55 GPIO_ACTIVE_LOW>;
++		pinctrl-0 = <&nfa725b_default_state>;
++		pinctrl-names = "default";
++
++		ports {
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			/* WiFi/PCIe */
++			port@0 {
++				reg = <0>;
++
++				lga_pcie_ep: endpoint {
++					remote-endpoint = <&pcie_ep>;
++				};
++			};
++
++			/* Bluetooth/UART */
++			port@3 {
++				reg = <3>;
++
++				lga_uart_ep: endpoint {
++					remote-endpoint = <&uart10_ep>;
++				};
++			};
++		};
++	};
+ };
  
- properties:
-   compatible:
--    const: pcie-m2-e-connector
-+    oneOf:
-+      - const: pcie-m2-e-connector
-+      - items:
-+          - enum:
-+              - qcom,pcie-m2-1418-lga-connector
-+              - qcom,pcie-m2-1620-lga-connector
-+          - const: pcie-m2-e-connector
+ &cci1 {
+@@ -409,6 +443,22 @@ pci@0,0 {
+ 		ranges;
+ 		reg = <0x010000 0x00 0x00 0x00 0x00>;
  
-   vpcie3v3-supply:
-     description: A phandle to the regulator for 3.3v supply.
++		pcie@1,0 {
++			#address-cells = <3>;
++			#size-cells = <2>;
++			device_type = "pci";
++			compatible = "pciclass,0604";
++			bus-range = <0x00 0xff>;
++			ranges;
++			reg = <0x020800 0x00 0x00 0x00 0x00>;
++
++			port {
++				pcie_ep: endpoint {
++					remote-endpoint = <&lga_pcie_ep>;
++				};
++			};
++		};
++
+ 		pci@2,0 {
+ 			#address-cells = <3>;
+ 			#size-cells = <2>;
+@@ -501,6 +551,12 @@ max98091_default: max98091-default-state {
+ 		bias-pull-up;
+ 	};
+ 
++	nfa725b_default_state: nfa725b-default-state {
++		pins = "gpio55", "gpio56";
++		function = "gpio";
++		bias-disable;
++	};
++
+ 	pcie1_default_state: pcie1-default-state {
+ 		wake-pins {
+ 			pins = "gpio21";
+@@ -544,10 +600,10 @@ &uart7 {
+ &uart10 {
+ 	status = "okay";
+ 
+-	bluetooth: bluetooth {
+-		compatible = "qcom,qca2066-bt";
+-		enable-gpios = <&tlmm 55 GPIO_ACTIVE_HIGH>;
+-		clocks = <&sleep_clk>;
++	port {
++		uart10_ep: endpoint {
++			remote-endpoint = <&lga_uart_ep>;
++		};
+ 	};
+ };
+ 
 
 -- 
 2.34.1
