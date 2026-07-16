@@ -1,221 +1,124 @@
-Received: from mail-m49205.qiye.163.com (mail-m49205.qiye.163.com [45.254.49.205])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A85E141BA99;
-	Thu, 16 Jul 2026 11:38:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.205
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id B0C4C414A30;
+	Thu, 16 Jul 2026 11:59:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784201917; cv=none; b=cqtkR+358Dpjqi2rivsMBqOexE5Vb2sukka9JbhS+bfpftfLG/LSuSfKtEex0IAPyNSo/TKrSiL/G99T04gbeufU1SBjh++SBdzEbTMOiqhjYdJZyi6tRkfKjJsPSYxTp8pZLRuQbPYc6RG+WnQ05bLN29CVumeK9S5zfNNZj+E=
+	t=1784203186; cv=none; b=lKSakWTWRY6M2a18cBm78b5wd0AXK6EfpXyd1AB8qRCRQP5yo85c7TadtDMuNi+AxJjnYCozfozxTHiRkm7qdSQIGA0+5/vj0lGTneYPSnc+Q2R0VbvmpGQKrNgYjeiIUxfNy5M7xhFCZlTVSK9mT1rpv5zAdmimqhbQSlHR5XI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784201917; c=relaxed/simple;
-	bh=NSSbjOJArliCkaBo8gNxUgoRpFPjYh8M/g5jlxQNKwI=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=VQnQZSY4CRXlnpVU90+GNRHTjaURjFk9hbSAJR9Kb2VRdX2o5h6px+6wEfODeGtV4n88ewM6tbTO6y10YPYTCBy5d6qfW9bGG6TIOQSCqnixnCRJR4jAdt8U/z88N/crIVSNqoD09nuGfN6pvNQwmDobHjNW8/oFgiKiigAR5Do=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com; spf=pass smtp.mailfrom=thundersoft.com; dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b=XyDsH925; arc=none smtp.client-ip=45.254.49.205
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thundersoft.com
+	s=arc-20240116; t=1784203186; c=relaxed/simple;
+	bh=CWyPb+R0+N4Z/Vgs9/kGkVD+YdhxfJbynRCEFK6cF/M=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=cu1n1/0KDiwALXvtxBPn8/HMPxzrl/GZNqhE70QGgbm4Ulkp9ezdl7d0lL83R47YSHMW7kvraOKOZramw4Tsz3HNgCXrPG3sa+kCdVz4hOWexJ+BS5S4YGzZoW+YQEfBmAn8U9GEwmR7FnTD8mLIxv2UXfnj7LIj+gcTLz/wY0E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=b+npfWF0; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b="XyDsH925"
-Received: from tsdl-HP-EliteDesk-880-G6-Tower-PC.. (unknown [36.129.139.90])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 466dc86e3;
-	Thu, 16 Jul 2026 17:15:53 +0800 (GMT+08:00)
-From: Hongyang Zhao <hongyang.zhao@thundersoft.com>
-To: mohammad.rafi.shaik@oss.qualcomm.com
-Cc: andersson@kernel.org,
-	broonie@kernel.org,
-	conor+dt@kernel.org,
-	devicetree@vger.kernel.org,
-	dmitry.baryshkov@oss.qualcomm.com,
-	drake@endlessm.com,
-	hongyang.zhao@thundersoft.com,
-	katsuhiro@katsuster.net,
-	konradybcio@kernel.org,
-	krzk+dt@kernel.org,
-	lgirdwood@gmail.com,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-sound@vger.kernel.org,
-	matteomartelli3@gmail.com,
-	neil.armstrong@linaro.org,
-	perex@perex.cz,
-	robh@kernel.org,
-	rosh@debian.org,
-	srini@kernel.org,
-	tiwai@suse.com,
-	zhoubinbin@loongson.cn
-Subject: Re: [PATCH v2 5/6] ASoC: qcom: sc8280xp: Add RubikPi 3 sound card support
-Date: Thu, 16 Jul 2026 17:15:48 +0800
-Message-ID: <20260716091548.2844369-1-hongyang.zhao@thundersoft.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <847396bb-2cc1-4f45-bd81-33ab55d3af6f@oss.qualcomm.com>
-References: <847396bb-2cc1-4f45-bd81-33ab55d3af6f@oss.qualcomm.com>
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="b+npfWF0"
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9B0641476;
+	Thu, 16 Jul 2026 04:59:38 -0700 (PDT)
+Received: from [10.2.212.23] (e121345-lin.cambridge.arm.com [10.2.212.23])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AA1DB3F905;
+	Thu, 16 Jul 2026 04:59:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1784203182; bh=CWyPb+R0+N4Z/Vgs9/kGkVD+YdhxfJbynRCEFK6cF/M=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=b+npfWF0cfwHFNmNPVct1qEf8bMDflTEDKtn/6W+8HEmGJEQFI2AB7iHaQl1AuZ3f
+	 aiFRBinnnhNQ3KY6tEKkSjcZbXMyJ/Jwa79wtrNwVm7NexbCKYlwF+1uXXYGHvaZ3m
+	 uogedz+vvjuCpxLSCy1zzsNDYFUg6xuzKgx99j6s=
+Message-ID: <787fa0d3-c1d4-442e-beaa-91a03238f511@arm.com>
+Date: Thu, 16 Jul 2026 12:59:40 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9f6a36054f09d5kunm310692a7996b5
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkZHRpCVktCGkkaGE4aQ04eGVYVFA
-	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlITVVKSUJVSkhCVUJLWVdZFhoPEhUdFFlBWU9LSFVCQk
-	lOS1VKS0tVSkJLQlkG
-DKIM-Signature: a=rsa-sha256;
-	b=XyDsH925Au7I7JxnQvdmNAv/rf+TB8LDsDhcBn5hy6tsal9wJ5gsiUnW8yyaF7BcGHCbXAVe/jmM8TSIsuOuF1lParHqoVsnwWBTuo2XYn6xoFCevGdA6dxT9GAQ6xBxJK0+gCh1HlqaRvOBFScoKf7O85H9N4LpYwq6JxrXHLQ=; c=relaxed/relaxed; s=default; d=thundersoft.com; v=1;
-	bh=Eb18BN/yHG243dJ2m5Qb3w7CIglh4wqlllocwyASBAI=;
-	h=date:mime-version:subject:message-id:from;
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] iommu/io-pgtable-arm: Add support for contiguous hint bit
+To: Jason Gunthorpe <jgg@nvidia.com>
+Cc: Will Deacon <will@kernel.org>,
+ Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>,
+ "Joerg Roedel (AMD)" <joro@8bytes.org>, linux-arm-msm@vger.kernel.org,
+ iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org,
+ Prakash Gupta <prakash.gupta@oss.qualcomm.com>
+References: <20260618-iommu_contig_hint-v1-1-4502a59e6388@oss.qualcomm.com>
+ <20260703161228.GA1948451@nvidia.com>
+ <b7224dff-7e51-49cb-8421-14d090492dfc@oss.qualcomm.com>
+ <20260715113913.GA3775915@nvidia.com> <ald3CuddY6I7gml1@willie-the-truck>
+ <2ce09e84-c57f-4087-9dda-07245fadfc02@arm.com>
+ <20260715125039.GA50536@nvidia.com>
+ <d20d258d-d970-4ef1-bbb6-cdc83fc20c9d@arm.com>
+ <20260715180949.GD3775915@nvidia.com>
+From: Robin Murphy <robin.murphy@arm.com>
+Content-Language: en-GB
+In-Reply-To: <20260715180949.GD3775915@nvidia.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Rafi,
+On 15/07/2026 7:09 pm, Jason Gunthorpe wrote:
+> On Wed, Jul 15, 2026 at 06:45:09PM +0100, Robin Murphy wrote:
+> 
+>>> AFAICR the biggest issue with arm-smmu was it using IO_PGTABLE_ARMV7S
+>>> as well. I think it would be fine to implement all the unique LPAE
+>>> features it needs in iommupt, I did most of them already.
+>>>
+>>> I do have an ARMV7S implementation for iommupt, but I did not solve
+>>> the sub page problem. So while it is functionally working it is not
+>>> usable since it wastes so much memory. That's a tricky problem to
+>>> solve since the algorithms depend on the gather->freelist.
+>>>
+>>> I didn't spend any time trying to do anything about this as I was not
+>>> intending to touch arm-smmu
+>>
+>> Indeed between the irregular table sizes (before you even get to the
+>> Mediatek shenanigans...), and the awkward GFP_DMA limitations and/or reality
+>> that many of the systems using it really don't have memory to waste, I'd
+>> have considered v7s pretty much terminally incompatible with iommu_pages and
+>> the abstraction that iommupt is trying to be... :/
+> 
+> At least Matthew has talked about having a sub page allocator with
+> meta data, maybe with the memdesc support someday. Even today we could
+> have iommu-pages allocate a companion struct pointed to from struct
+> page that was sized 4x so it could be used for the freelist.
+> 
+> There are some other options for alterantive algorithms that could
+> work without requiring the free list. I had some thoughts about placing
+> the free list inside the data itself as a non-present entry.
+> 
+> It is not insolvable, I'm just not sure it is worth doing vs leaving
+> arm-smmu to keep using iopgtable from ARMv7.
 
-Thank you for the review.
+Yeah, if you did want to keep bashing at it, then ultimately there are 
+at least a couple more short-descriptor inspired implementations in 
+exynos and omap too, however at this point I don't see the cost:benefit 
+ratio looking at all favourable...
 
-> On 7/15/2026 7:32 PM, Hongyang Zhao wrote:
-> > RubikPi 3 connects an ES8316 codec to the primary MI2S interface for
-> > headset playback and capture, and an LT9611 bridge to the quaternary
-> > MI2S interface for HDMI audio.
-> >
-> > Add board-specific DAI data for these links. Configure both directions
-> > of the primary interface for I2S with normal clock polarity and the
-> > codec as bit and frame clock consumer. Program the LPASS MCLK and BCLK,
-> > drive the ES8316 with its required 19.2 MHz MCLK, and enable the generic
-> > codec jack-detection setup on the playback link.
-> >
-> > Configure the quaternary playback link with the same I2S clock format.
-> > Do not request a codec sysclk for this link because the LT9611 HDMI
-> > codec DAI does not implement set_sysclk().
-> >
-> > Select this configuration through the RubikPi 3 sound-card compatible.
-> >
-> > Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
-> > ---
-> >   sound/soc/qcom/sc8280xp.c | 39 +++++++++++++++++++++++++++++++++++++++
-> >   1 file changed, 39 insertions(+)
-> >
-> > diff --git a/sound/soc/qcom/sc8280xp.c b/sound/soc/qcom/sc8280xp.c
-> > index 885ec1e3e575..1354eecb56c9 100644
-> > --- a/sound/soc/qcom/sc8280xp.c
-> > +++ b/sound/soc/qcom/sc8280xp.c
-> > @@ -410,6 +410,41 @@ static const struct snd_soc_common qcs6490_priv_data = {
-> >   	}),
-> >   };
-> >
-> > +static const struct snd_soc_common qcs6490_rubikpi3_priv_data = {
-> > +	.driver_name = "qcs6490",
-> > +	.dapm_widgets = sc8280xp_dapm_widgets,
-> > +	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-> > +	SC8280XP_DAI_DATA(
->
-> Where is SC8280XP_DAI_DATA() defined?
+> Otherwise to have arm-smmu use iommupt you'd end up with two
+> iommu_domains specialized to 32 and 64 bit page tables, with their own
+> ops and a shared invalidation like how the tlbi struct is providing
+> for smmuv3.
+> 
+> It is not outrageously bad, but it certainly is a chunk of work.
+> 
+> If the goal is arm-smmu support of CONT then maybe there is some merit
+> in doing iopgtable as a one off feature. But there have been many
+> attempts so far to add CONT and they all had troubles, I had the
+> impression is is not so easy..
 
-It is introduced by the preceding patch 4/6.
+I think now that partial unmaps are firmly ruled out and we already have 
+the multi-page map/unmap design it should be pretty minor. I'm also more 
+than happy to stop there, have dirty tracking, splitting/merging and all 
+the fancy new IOMMUFD stuff require iommupt, and keep io-pgtable 
+strictly for the GPUs and "media" IOMMUs that only need to keep 
+providing map/unmap/iova_to_phys for iommu-dma or equivalent usage. By 
+now I'd also say we can reasonably park arm-smmu in the latter category 
+- while technically it could try to support stuff like nesting and 
+vIOMMU (at least on MMU-500), the hardware is in embedded platforms 
+which either don't care at all, or at worst where virtualisation is 
+Xen's problem not ours. As far as I'm aware even the NXP Layerscape 
+platforms are happy with the status quo of just basic VFIO type 1 for DPDK.
 
-https://lore.kernel.org/linux-arm-msm/20260715-rubikpi-next-20260605-v2-4-67601d7a8581@thundersoft.com/
-
-It initializes snd_soc_common::dai_data with an array of
-struct sc8280xp_dai_data and sets num_dai_data.
-
-Patch 4/6 reached the mailing list after your reply, so the definition
-was not visible when you reviewed this patch.
-
->
-> > +		{
-> > +			.id = PRIMARY_MI2S_RX,
-> > +			.codec_dai_fmt = SND_SOC_DAIFMT_I2S |
-> > +					 SND_SOC_DAIFMT_NB_NF |
-> > +					 SND_SOC_DAIFMT_BC_FC,
->
-> codec_dai_fmt appears to be identical for all MI2S DAIs. Can this be
-> moved into the common initialization path instead of being specified per
-> DAI.
->
-> > +			.mclk_rate = 19200000,
->
-> Is this mclk frequency fixed ?
->
-> Typically, audio MCLK is expected to be 12.288 MHz or 24.576 MHz.
-
-Yes. The RubikPi 3 machine configuration intentionally sets the ES8316
-sysclk to 19.2 MHz. At the fixed 48 kHz backend rate this gives an
-MCLK/LRCK ratio of 400, which is explicitly supported and documented by
-the ES8316 driver.
-
->
-> > +			.codec_sysclk_set = true,
-> > +			.mi2s_mclk_enable = true,
->
-> Drop this mclk_enable flag; your already enabled from the codec node.
->
-> is not ?
-
-Agreed. The ES8316 codec node is now the only MCLK consumer. The Primary
-MI2S RX and TX CPU backends only configure BCLK. The machine driver
-still calls the ES8316 set_sysclk() operation with 19.2 MHz to set the
-clock rate and sample-rate constraints, but it no longer enables MCLK
-through the CPU DAI.
-
->
-> +&i2c0 {
-> +	status = "okay";
-> +
-> +	es8316: audio-codec@11 {
-> +		compatible = "everest,es8316";
-> +		reg = <0x11>;
-> +		#sound-dai-cells = <0>;
-> +
-> +		clocks = <&q6prmcc LPASS_CLK_ID_MCLK_1 LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-> +		clock-names = "mclk";
-> +
->
-> > +			.mi2s_bclk_enable = true,
-> > +			.jack_setup = SC8280XP_JACK_SETUP_CODEC,
->
-> .jack_setup is not part of snd_soc_common
-
-jack_setup is a member of struct sc8280xp_dai_data, introduced in 4/6.
-SC8280XP_DAI_DATA() places these entries in snd_soc_common::dai_data.
-This was also obscured by patch 4/6 arriving after your review.
-
->
-> Best regards,
-> Rafi
->
-> > +		},
-> > +		{
-> > +			.id = PRIMARY_MI2S_TX,
-> > +			.codec_dai_fmt = SND_SOC_DAIFMT_I2S |
-> > +					 SND_SOC_DAIFMT_NB_NF |
-> > +					 SND_SOC_DAIFMT_BC_FC,
-> > +			.mclk_rate = 19200000,
-> > +			.codec_sysclk_set = true,
-> > +			.mi2s_mclk_enable = true,
-> > +			.mi2s_bclk_enable = true,
-> > +		},
-> > +		{
-> > +			.id = QUATERNARY_MI2S_RX,
-> > +			.codec_dai_fmt = SND_SOC_DAIFMT_I2S |
-> > +					 SND_SOC_DAIFMT_NB_NF |
-> > +					 SND_SOC_DAIFMT_BC_FC,
-> > +		}
-> > +	),
-> > +};
-> > +
-> >   static const struct snd_soc_common qcs8275_priv_data = {
-> >   	.driver_name = "qcs8300",
-> >   	.dapm_widgets = sc8280xp_dapm_widgets,
-> > @@ -480,6 +515,10 @@ static const struct of_device_id snd_sc8280xp_dt_match[] = {
-> >   	{ .compatible = "qcom,sm8550-sndcard", .data = &sm8550_priv_data },
-> >   	{ .compatible = "qcom,sm8650-sndcard", .data = &sm8650_priv_data },
-> >   	{ .compatible = "qcom,sm8750-sndcard", .data = &sm8750_priv_data },
-> > +	{
-> > +		.compatible = "thundercomm,qcs6490-rubikpi3-sndcard",
-> > +		.data = &qcs6490_rubikpi3_priv_data,
-> > +	},
-> >   	{}
-> >   };
-> >
-> >
-
-Best regards,
-Hongyang
+Thanks,
+Robin.
