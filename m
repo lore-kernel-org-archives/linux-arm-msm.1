@@ -1,127 +1,109 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.19])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yw1-f170.google.com (mail-yw1-f170.google.com [209.85.128.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28C3337D126;
-	Thu, 16 Jul 2026 17:49:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.19
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3BBF332913
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 17:49:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784224151; cv=none; b=U+s7Me+8D2HTzq+BTrStew6qfAYqqPX1mGMHD2nHx1WJTt8oTccLqD3wMs+qm0KYGGFR6XrIJIrDbgA4ewipO9bo5Fkd38UksLJ2CuHph7Dsn3Qed9SKexFq9gvIMxvDbO6puQPOMviC21d+iiZYJB6TIcMy4EXbObrkF3uaDis=
+	t=1784224185; cv=none; b=iXUDHiQ+JKqURWdFrwj4PrjRM73h9eDgQKn95Q960vH8HaeDwI5VFPkbfLVkdfRhL+PuIbbCsQKcdwRM5/nvlsom9jqwudAuJAxCM/M3dvtw6qY2+I6Dgxub3EOUxa3tdQGdTmtpOp74GcAcNlfrWpwJhRXDrZQ/Q/aq3q1g4Oo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784224151; c=relaxed/simple;
-	bh=WDOpxcwFle75xJgV45Y3mz4ze1wpcOya2GSWIlnO6Qg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=LpfYNr3Nt+hCBIvzEVHbV85lx0RQ7fmVKnrhJqhaEdZncYrFNypSwpS32SWDSV6MFOEc2dP/V7hCwMfyGOK2kQvJuCk6WVyCt6BSVL45ZNBI//29LWD9g5RduqQKfmIn5vKhl6mTMdEDB1ZZRMT1VW3DEPyZa8YQPJnest0FDOk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=EHKxKrpy; arc=none smtp.client-ip=198.175.65.19
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	s=arc-20240116; t=1784224185; c=relaxed/simple;
+	bh=h8dMwf2MXhdAxkhcE0UScQxJ/befx1264d3qYo6rnCY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=PnogM58x4NX7UH8wvJ6m8l13K5OjwHJ5FT+qetgO51dK0+QywyspR6vlXZSxElOK9jrBwnJMri3EHrNjCiDk5m7TL+6aA8ZboJxPiH9iNNizKJIlpvrm+Gq4MHEO12AjbbrQf9t2KgPdgPmLcdUCDB7gea14+s5hEDod9ROLGWA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Tf0EdxTB; arc=none smtp.client-ip=209.85.128.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="EHKxKrpy"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1784224150; x=1815760150;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:content-transfer-encoding:in-reply-to;
-  bh=WDOpxcwFle75xJgV45Y3mz4ze1wpcOya2GSWIlnO6Qg=;
-  b=EHKxKrpypfwt/Hy6uUdYyp3klYP5s5/RREy7f3rxX+50j7JYfdacii34
-   zQR6OIRHl3hgi5w2d43Mp35XKGtHHmVTBQt7lMpAoaJT9uSNkOHIm71VJ
-   0oQ41eTE3GofMZYvBuelWArVHJ6DOFEwWPJr4VAFQqTncRoIIYvKENDgy
-   Evn6qI+axGWNI8x+o5V2h38/ulUt89sSKeP3cXTMoLnGbWFf4fcaYw37o
-   RDABEa/74HwVcWqkqkAn/+pvrKZleX7JDKLeKtVTkelXJ0p+9xFRDRJmH
-   oaXLi/dUG86ufSihMmaqtXMPCbA40ZHO3uQyLmVGDVV+dEgvP4m9WVFIM
-   Q==;
-X-CSE-ConnectionGUID: ZE3O0oDEScmQvAqK2p5JQw==
-X-CSE-MsgGUID: eD0MXmxbQSKf2dye9iYuoQ==
-X-IronPort-AV: E=McAfee;i="6800,10657,11848"; a="84853710"
-X-IronPort-AV: E=Sophos;i="6.25,167,1779174000"; 
-   d="scan'208";a="84853710"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
-  by orvoesa111.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jul 2026 10:49:10 -0700
-X-CSE-ConnectionGUID: XfGCLMq2TIOWPCEFC2xIgw==
-X-CSE-MsgGUID: kOYF/zaMQF25P48lYMtL6A==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,167,1779174000"; 
-   d="scan'208";a="255415130"
-Received: from conormcd-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.245.26])
-  by orviesa010-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Jul 2026 10:49:00 -0700
-Date: Thu, 16 Jul 2026 20:48:58 +0300
-From: Andy Shevchenko <andriy.shevchenko@intel.com>
-To: Link Mauve <linkmauve@linkmauve.fr>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-	Andy Shevchenko <andy@kernel.org>, Sven Peter <sven@kernel.org>,
-	Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>,
-	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	Vladimir Zapolskiy <vz@mleia.com>,
-	=?iso-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Kevin Hilman <khilman@baylibre.com>,
-	Jerome Brunet <jbrunet@baylibre.com>,
-	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-	Orson Zhai <orsonzhai@gmail.com>,
-	Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Chunyan Zhang <zhang.lyra@gmail.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Kalyani Akula <kalyani.akula@amd.com>,
-	Michal Simek <michal.simek@amd.com>,
-	Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
-	Gary Guo <gary@garyguo.net>,
-	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
-	Benno Lossin <lossin@kernel.org>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	Tamir Duberstein <tamird@kernel.org>,
-	Alexandre Courbot <acourbot@nvidia.com>,
-	Onur =?iso-8859-1?Q?=D6zkan?= <work@onurozkan.dev>,
-	asahi@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org, imx@lists.linux.dev,
-	linux-amlogic@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	rust-for-linux@vger.kernel.org
-Subject: Re: [PATCH v2 0/2] nvmem: fix a const-unsoundness in reg_write
-Message-ID: <alkZiozKVGlAYVUb@ashevche-desk.local>
-References: <20260715195520.25410-1-linkmauve@linkmauve.fr>
- <alieVR1cOtOySi4_@ashevche-desk.local>
- <ali7bki3jqpd8ckE@luna>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Tf0EdxTB"
+Received: by mail-yw1-f170.google.com with SMTP id 00721157ae682-81e9f7491ffso87020067b3.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 10:49:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1784224183; x=1784828983; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=h8dMwf2MXhdAxkhcE0UScQxJ/befx1264d3qYo6rnCY=;
+        b=Tf0EdxTBG9LXBtKNyW1iUKNQsX6YyW5St8VfvfhqO4vo0aI3iCtUNY6uliizJKCjCB
+         pu5xBHMxlsM/eJyFPPv+Tli/smphfLsqEBfNj/l1tbDxPxCCJ/2NMCO5nepIkmSir07m
+         kKpyv/8Zb34l52CdU9z2s7I+45looCr4wRxkrjudM9Kr/yI9zjyH3Rgik+fDcZTCipNb
+         jWyrmd10/TWbxHQUZz1/nEDqefdBYvhTLZBaJro8uis6PLC+2YHrUA5+uENbyLAPF5JM
+         LfH22EG1jMazYxJPl6bpuI6W+N+LikZgRmARgDjhqtwYh3m2TpK3gqBiL9rKccLcvsG4
+         9S4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784224183; x=1784828983;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=h8dMwf2MXhdAxkhcE0UScQxJ/befx1264d3qYo6rnCY=;
+        b=pFTm3O0ijKOpTMsEcc0mYbQMjiq0lfYzuL2OmDqfMYhciP+elQ01uCbJfeGEfOAM4a
+         DzSBGdmEUWbbPJNnMuiOptUN8UASl/FaIfxx3r5v02/7arVBNw6l5BJ41TP7BypS+L5Z
+         0CdSKM2eawT9DupevgD6qxI6VYTtUMeS29rjjoz9aydnY7mHdVcUP0T7yb2otr5j8lPe
+         E71+K4z4i4UuAWY5FZIGA0dCkLe4GBqrhj3TeiLppPu79ICTD7OT5MCeNbr2nsCazN6l
+         dVglkjZc4bjN289iJoxeFq7QWvP7ZdGOO4gqK+6p3lvuW6D4TUvYgO2iydxwu7QFe03u
+         VSBw==
+X-Gm-Message-State: AOJu0YxABIqjF6YyvDbLdeL729qWk2ecQ6uPwHfGh3tcEUhK6eLWea1S
+	U2cx0YYtEUcrDgXnqbwvkuTJ8KAuta2y8s0ljEZinJzQM+X8vAdzpyyGQ+l67Nyl
+X-Gm-Gg: AfdE7cmoaHDhjVOKdkI0Ndg1qfvfF7b4NQRUx2cBheCngn4UnzooA2I2QFULuc+ZrNK
+	mrzOk7XyVscnIh477BT0vSkVIb0KYrQkzqUCDpiZ5Gddpyh3Yx5cKGAIAXHa2Z8ToY8/ZfXqyx9
+	W0fBRrGSIVr8gsIO7cY3NqvKLZV8NGtLfmCd5V603B208Wt4t1r01q3bpTid87ak6tOhaSI9hAQ
+	zySpeLmJNdYntQboibHdjeJyrzYB3aqOwOAf6wMrtnZTMzUeOF4Q6rO2OvIpDqJQ71oPnZfWRzR
+	5L2MquIEeNG9/OQcXKaxuB/uFY7zYYmVd2d+IVRfTQ7niLDbGGamdX2fViqbvIBB86YUrkh4gZ3
+	jQ6OBkiTU3Qke1hmMoB+Piy85zXAx3c8453GrbhraecQDzupUcDiSC5Lp+TN+3VopgiOK2i4HOr
+	6Kvlc3UcIVPDTmv/ApCeP1PJGW0Vcdcjh1ls/gOdNUv0DpTlprigXuztzZkd3M9SGyfs/R+q8q8
+	hdkCpsNZyS3upE=
+X-Received: by 2002:a05:690c:6c12:b0:80b:dc35:6a2 with SMTP id 00721157ae682-81ebfe0453cmr90014527b3.18.1784224182692;
+        Thu, 16 Jul 2026 10:49:42 -0700 (PDT)
+Received: from ?IPV6:2600:1700:566e:ba00:93df:11a7:3aae:a53c? ([2600:1700:566e:ba00:93df:11a7:3aae:a53c])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-81e6c1ee792sm201943927b3.38.2026.07.16.10.49.41
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 16 Jul 2026 10:49:42 -0700 (PDT)
+Sender: Julian Braha <julian.braha@gmail.com>
+Message-ID: <9688c5bd-db01-4234-b9da-809747e8cdd8@gmail.com>
+Date: Thu, 16 Jul 2026 18:49:41 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <ali7bki3jqpd8ckE@luna>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/5] soc: qcom: Hide all drivers behind selectable menu
+To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, "Rafael J. Wysocki"
+ <rafael@kernel.org>, Daniel Lezcano <daniel.lezcano@kernel.org>,
+ Christian Loehle <christian.loehle@arm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-pm@vger.kernel.org
+References: <20260711-qcom-soc-kconfig-v2-0-4a907e064281@oss.qualcomm.com>
+ <20260711-qcom-soc-kconfig-v2-1-4a907e064281@oss.qualcomm.com>
+ <9bb44840-c3fe-4bcd-af2d-149dbc2c7c8c@gmail.com>
+ <5a69bb8e-8a06-4678-bf20-f0dbf76f47c4@oss.qualcomm.com>
+Content-Language: en-US
+From: Julian Braha <julianbraha@gmail.com>
+In-Reply-To: <5a69bb8e-8a06-4678-bf20-f0dbf76f47c4@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jul 16, 2026 at 01:07:26PM +0200, Link Mauve wrote:
-> On Thu, Jul 16, 2026 at 12:03:17PM +0300, Andy Shevchenko wrote:
-> > On Wed, Jul 15, 2026 at 09:55:16PM +0200, Link Mauve wrote:
+Hi Krzysztof,
 
-...
+On 7/16/26 06:48, Krzysztof Kozlowski wrote:
+> Can you share the options leading to that? or config? Without
+> reproduction steps that's really incomplete report.
 
-> I’ve attached a patch fixing this particular issue, I will include it in
-> my v3 if that’s ok with you (or it could go as a different series, I
-> don’t care much).
+Sorry, I spend a lot of time looking at unmet dependencies. I forget
+sometimes that these are actually pretty rare and not obvious to
+resolve.
 
-Works for me.
+To replicate, enable QCOM_PDR_HELPERS without QCOM_SOC.
 
-> I think I’ve found another bug in that driver, it says .max_register =
-> 0xffff but .size = 0xffff, one or the other is probably off-by-one, and
-> I suspect .size should be 0x10000 instead.
+The problem is that QCOM_PDR_MSG depends on QCOM_SOC because of an
+'if QCOM_SOC', but QCOM_PDR_HELPERS selects QCOM_PDR_MSG without also
+selecting or depending on QCOM_SOC.
 
-Yeah, max_register means offset of the last _accessible_ register.
-So, 0xffff sounds about right there. As for size being 0xffff, I weakly
-remember that there was a discussion about these values. Can you dig the
-lore archive?
+I'll send a patch to resolve this.
 
--- 
-With Best Regards,
-Andy Shevchenko
-
-
+- Julian Braha
