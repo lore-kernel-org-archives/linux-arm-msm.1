@@ -1,54 +1,93 @@
-Received: from mail-m49206.qiye.163.com (mail-m49206.qiye.163.com [45.254.49.206])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9556D31716D;
-	Thu, 16 Jul 2026 09:57:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.206
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1D233DA5D1
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 09:58:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784195865; cv=none; b=LprAGKj6z66IE1PdAWP/JJHi88Ora5vVb1JNDOzzHxn6yBBwIZN6UNt1CmZo5AxBFZQAxW3d3ueCWFlL1pw6u+OtG7DaTJkATncdM+rfA5+U1zWETErC4rPzsdkQYyDZBdr4tenWz+GfMiFrEvAV5H8BPj8hC39JXOgGFGMRMVY=
+	t=1784195938; cv=none; b=gsw4MN1WDmPnJslxE3oLykKj7i3Zwt67GXsV69PAB3FQ69xWEm2JGgGqHBuOpLKOilPVEwo1KzvCEH/X+CHGObqayvqgcqhKc/T86vJKvgnmnKv9cyb/kDyOj+9CwmtHSyRTT4uWGSasImJCI+LccomX41e/BuqqafwXzaKpvhw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784195865; c=relaxed/simple;
-	bh=9MVu3h2TTHAPPzWoTWilO603EJ1DSCcmYvinWFklY+A=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=I4OUHsxoZR+gKEnysblHKeauqDJ1X3tPhI2RXuipxOXGJlh9zWb5dWKo6k+/XRCT9i74R9FSDL4Rzi2sjRS7jzGY2EJuAAh8BRhWmW5AbRjzEBaIikN5s3Xw8QlXgOqY+q+htijUsIiy4Rrke4aHqAOr+s1+hugiNpEgDX4rLQY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com; spf=pass smtp.mailfrom=thundersoft.com; dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b=YmfBkgub; arc=none smtp.client-ip=45.254.49.206
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thundersoft.com
+	s=arc-20240116; t=1784195938; c=relaxed/simple;
+	bh=AcQZtosfYtemaOyDM5dybG0Xlv62DeVMOciM0zdWtaw=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=ODi7GBq9lPcttNWw68yi5jeA0eaQqH/cNMkQ8HrivelqzR1rCKDr4JnKpMBOvPe83i/XVG/uE5DcNdhHTjo18oN3HRWOXtInmgGvyecpEa2lsKV1p5XH0uW1zR9PO+uA1xSqw2L7p7bnnhg+W5yVdaUHTNprA/iFr7uJR6PtLRg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Mn1mPHle; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ekAmoPja; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b="YmfBkgub"
-Received: from tsdl-HP-EliteDesk-880-G6-Tower-PC.. (unknown [36.129.139.90])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 466f33bfd;
-	Thu, 16 Jul 2026 17:52:24 +0800 (GMT+08:00)
-From: Hongyang Zhao <hongyang.zhao@thundersoft.com>
-To: mohammad.rafi.shaik@oss.qualcomm.com
-Cc: andersson@kernel.org,
-	broonie@kernel.org,
-	conor+dt@kernel.org,
-	devicetree@vger.kernel.org,
-	dmitry.baryshkov@oss.qualcomm.com,
-	drake@endlessm.com,
-	hongyang.zhao@thundersoft.com,
-	katsuhiro@katsuster.net,
-	konradybcio@kernel.org,
-	krzk+dt@kernel.org,
-	lgirdwood@gmail.com,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-sound@vger.kernel.org,
-	matteomartelli3@gmail.com,
-	neil.armstrong@linaro.org,
-	perex@perex.cz,
-	robh@kernel.org,
-	rosh@debian.org,
-	srini@kernel.org,
-	tiwai@suse.com,
-	zhoubinbin@loongson.cn
-Subject: Re: [PATCH v2 6/6] arm64: dts: qcom: qcs6490-rubikpi3: Add audio support
-Date: Thu, 16 Jul 2026 17:52:17 +0800
-Message-ID: <20260716095217.2855206-1-hongyang.zhao@thundersoft.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <7c905a1c-f65e-4ef5-a65c-2be83ff820ba@oss.qualcomm.com>
-References: <7c905a1c-f65e-4ef5-a65c-2be83ff820ba@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Mn1mPHle";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ekAmoPja"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66G9r90Y2215293
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 09:58:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=JpsEaLu0rCn/373mwwPv0+tBDrJYa0gBUv7
+	uufH8JPg=; b=Mn1mPHleX9Hw7rD+D5QvPF6SsK7uarwmjRavhwEOsQ3TkeiWkBH
+	9jt/rxINC+Z/hQEboic21wqhS1gOamod0cDTdbNmYxdrblK4mkek7iOlywJRzCKU
+	8xsQXWvwBUgrkxoWri7F7TxX7t2P5XeRC9sTlKFt2WBLIoV+Yry8aMSzf5Qm7IIL
+	8VqGoMTBUzk29OhkD7hMqs4QpPuvV0S8OsSx6s754jjDBpzTqY0fyfiHQlQNCxjH
+	7nUfbej3dnsxEHyQBj+Z6z/WTT0S+KE150Ji97MM8uxJUEnXoQ2qKomV5Smarg/z
+	0CoPDDhyAMnPg+HO3JQHIASLHUCfbGNrRMQ==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fetb7rqrt-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 09:58:55 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2cf1c86963bso923855ad.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 02:58:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784195935; x=1784800735; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=JpsEaLu0rCn/373mwwPv0+tBDrJYa0gBUv7uufH8JPg=;
+        b=ekAmoPjaUyAWmB3yTPzFzE/JxUfxiYabstgxudsoNMQl7FBHdXo2VHhQTFtqrV9MPx
+         w21MgiVcSO5RNNH08QXl/dhF7NRjEzAS4q1nenwwP5JPUZ6qg+kUFatRCIbaFKK2dEgx
+         Ku4rCVclnUv+bmXQW8fhOqS82HxJiFHoNOt1sBNynPWRSRz9CNK2Txxsv9ZOl/kmKXII
+         ICqQGgZ1LOmdBwtcdt8A/CIxH0uPUYS7NlZG4lU9wNW9tK4h8HNDy5tFM1H52HTAIEEr
+         ZHn7O2g8J4XSvQhzmamtA0igaJjLJ7sR0PMbsewwQHmbJMHJL8ybDv3/RtNuL1z+kPYX
+         8bVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784195935; x=1784800735;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=JpsEaLu0rCn/373mwwPv0+tBDrJYa0gBUv7uufH8JPg=;
+        b=CJq4IKUm9dYkzQnFc8F+BV4Vq80ritZJNT3asKOY7f2AUB9vApq0QJjg4HBRESO/bX
+         x8O6UlyojeoHvl1YubA1L7Q3M4iytQzR4iHsiO/gw8RTbBwauPOypZEy6SKauli1BwQ7
+         fBZ+EYG0sVUJHhB0jYPMEzqHTE8clswz45pyvqFmtnDrdqTuTUng/mXnj4/7sG9w0kgg
+         Ja5KfswYDG1i3ckXBKT4rerN91b8eZbxco83B7BBW46Tql2SDtJieQH+X+MEjkWYzVa1
+         iW4XOzPPmRlPigwtu3zelq+owFbvaJnupR+ye29zOFOSk0z/qC3SOdDJpLYtbmdB3Pm5
+         g8ig==
+X-Forwarded-Encrypted: i=1; AHgh+RqQa2tvGtopuDGcA5QfFKfdyE7VvvWrtUO6HX4MEFAdrsErR3TmIwTTVWztGH0sEfYInqV01kLj8Rg6YZZK@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywl7V21GtyR8JcC2ge3ySOeKpGKGDPzsOEDwvOcv2VuzAeQpMNl
+	zgR5LNKPhUm3eqO79TEsdXr/XVFrk5Cqo8Vwxc+P/zylFFTBn0QsQc4gJ+Pt1s0wBCI5QQzi88E
+	8VjIW3z0GO2k6xx+T5A9esg1DMjl1P0dPHHNeUhI/woWzd2FlDoQCTktY53b2Dk34G7sl
+X-Gm-Gg: AfdE7ck6r6U2Oukf6BHzZWsQNGzfyE1+RCMyOvt9zVkZclRL59OGH08R1kZueJHrRtZ
+	fveBy7iDRJb3959BcodYFDQLgh4C8MNym83cr+XNkD/08WqJ3BymVcZs4983CZp9QNxlTTCHtff
+	JDMjlmelmup7ajlRK9XpU2Gdr+psb0kq/7m2Tzeaa6iOinqEalFnwDRSrALe5ocSjOXvoHuDSyf
+	Q95NK1V9tSy8V9SO+NIIEK4PpoDrcDcIII0Mv/CHKPBnmQj2zLbgtbnD5BpcqmXm94w0PDCFw5N
+	JT1tJ5njdX1D7fS75TjLQWRb/8ujsEnD/XHXMrZRdzndqSmxdu2QzF/a39ASSNuTWYaKhamVpje
+	uV1KUaTEok+WNrtNH7jMlj1J0gNYy3el0dQ5vSyRcgDOqaeG2J2faEOcBnd/V7VuUlo6S309A+g
+	==
+X-Received: by 2002:a17:903:1aa3:b0:2cc:89ce:2f07 with SMTP id d9443c01a7336-2cf1f27ef69mr19283305ad.1.1784195935183;
+        Thu, 16 Jul 2026 02:58:55 -0700 (PDT)
+X-Received: by 2002:a17:903:1aa3:b0:2cc:89ce:2f07 with SMTP id d9443c01a7336-2cf1f27ef69mr19283035ad.1.1784195934598;
+        Thu, 16 Jul 2026 02:58:54 -0700 (PDT)
+Received: from QCOM-SocCW5bzXR.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf1015e45bsm17581045ad.33.2026.07.16.02.58.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Jul 2026 02:58:54 -0700 (PDT)
+From: Jianping Li <jianping.li@oss.qualcomm.com>
+To: Srinivas Kandagatla <srini@kernel.org>,
+        Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+Cc: Jianping Li <jianping.li@oss.qualcomm.com>, Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+        quic_chennak@quicinc.com, stable@kernel.org
+Subject: [PATCH v10] misc: fastrpc: Allocate entire reserved memory for Audio PD in probe
+Date: Thu, 16 Jul 2026 17:58:47 +0800
+Message-Id: <20260716095847.479-1-jianping.li@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -56,301 +95,283 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9f6a5773b009d5kunme5e0f0279f142
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVlCSkhCVkNDTkpJGkxCSklDQ1YVFA
-	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlITVVKSUJVSkhCVUJLWVdZFhoPEhUdFFlBWU9LSFVCQk
-	lOS1VKS0tVSkJLQlkG
-DKIM-Signature: a=rsa-sha256;
-	b=YmfBkgubYcqBt7KESDAwVsm/f3kvdhBO3c5JvG54aA96QnMVWsbgevRq4lWu+1mnF2qhrDXcUaQF2HOKEridxXZaDb7EecycWjLdMr+WdcT5o+/ggpQnMeJwTxVIoPfxlw8n160IV79+vBgOQRe3HnaZTU6O09X8X6gn4l4fc2I=; c=relaxed/relaxed; s=default; d=thundersoft.com; v=1;
-	bh=Ep01KusOgUcg83aHRrCrtmBum+1A5c5+kWDQYQuYo4M=;
-	h=date:mime-version:subject:message-id:from;
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDEwMiBTYWx0ZWRfX9fLdk4ebJ5F7
+ joAZ3SOl+uB1h/fVYJD4gboOLJOvyVeVve76bUNOqgTJzLJXp1mD7NUVud5jKMdLjRs1jrz015G
+ 81ZS2j7N1W+1ZVPwx4OqIdJz7uOmcJE=
+X-Authority-Analysis: v=2.4 cv=dM2WXuZb c=1 sm=1 tr=0 ts=6a58ab5f cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=0G0rfPxOs2MEFri9fakA:9 a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDEwMiBTYWx0ZWRfX5w8lxHKzqBJk
+ 4CronnAlmNVxCVc+m5shNXX6PPNU0GdJuHuFaEKRbwAEPP9iCBBZEDaJEavGCnHLc2Tae6A7m7X
+ Hxm0ybkG1WHmieE/G/AYQ6c5iz7giYyPnNIjfbClWUSpYMsfMZR7xtG/s8pb90EtAi/yGsnHce+
+ ntUH5cxnG5pgabw96VDTYVgCf48xN0uQlbXg0leFPzxpH5+ycH0N2FVB8G6ZxEgdr/kzeB/JQPI
+ CzleVP+pqtDTPAH8m2XvvkWPTuhm61RXqFpGLwYvkdQVGC8m9IZ3OFzgeUgIVGvvKaRKDDY7uJ9
+ L2v/01rEFwP8TfJJpMPRD1GM7YTY2p3nZQahmoIOv3ivyw2MUojC1pSffbFLO4GjCgjEd5rbWHc
+ 0kriqMLQ1t9P2COnfac0HivONBwnU25PaMq6Daj6/Ha9F04NgR59+ngHpDb8mNQOopNFIu2CRnI
+ +kpHRjzLleVsGoluBrg==
+X-Proofpoint-ORIG-GUID: FVLyQaE4dbySRMeD6DQnMD2N12GpwaYK
+X-Proofpoint-GUID: FVLyQaE4dbySRMeD6DQnMD2N12GpwaYK
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-16_04,2026-07-15_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 priorityscore=1501 adultscore=0 spamscore=0
+ lowpriorityscore=0 phishscore=0 bulkscore=0 clxscore=1015 malwarescore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607160102
 
-Hi Rafi,
+Allocating and freeing Audio PD memory from userspace is unsafe because
+the kernel cannot reliably determine when the DSP has finished using the
+memory. Userspace may free buffers while they are still in use by the DSP,
+and remote free requests cannot be safely trusted.
 
-Thank you for the review.
+Additionally, the current implementation allows userspace to repeatedly
+grow the Audio PD heap, but does not support shrinking it. This can lead
+to unbounded memory usage over time, effectively causing a memory leak.
 
-On 7/15/2026 7:32 PM, Hongyang Zhao wrote:
-> > RubikPi 3 uses the AudioReach firmware path for its external audio
-> > interfaces. The primary MI2S interface connects to an ES8316 codec for
-> > headset playback and capture, while the quaternary MI2S interface feeds
-> > the LT9611 HDMI bridge.
-> >
-> > Enable the AudioReach description and add the three DAI links. Describe
-> > the primary MI2S MCLK and bit clock inputs under the backend DAI so the
-> > machine driver can control them. Add the primary and quaternary pin
-> > configurations to the sound card and make the LT9611 codec DAI
-> > addressable.
-> >
-> > Describe the ES8316, its 3.3 V enable supply, 19.2 MHz MCLK and inverted
-> > GPIO jack-detect signal. Route the codec headphone outputs and microphone
-> > input to the board headset connector.
-> >
-> > Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
-> > ---
-> >   .../boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts | 159 +++++++++++++++++++++
-> >   1 file changed, 159 insertions(+)
-> >
-> > diff --git a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
-> > index d8a9a7e47bdc..7b010823d692 100644
-> > --- a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
-> > +++ b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
-> > @@ -19,6 +19,7 @@
-> >   #include "pm7325.dtsi"
-> >   #include "pm8350c.dtsi" /* PM7350C */
-> >   #include "pmk8350.dtsi" /* PMK7325 */
-> > +#include "qcs6490-audioreach.dtsi"
-> >
-> >   /delete-node/ &adsp_mem;
-> >   /delete-node/ &cdsp_mem;
-> > @@ -128,6 +129,23 @@ fan0: pwm-fan {
-> >   		pinctrl-names = "default";
-> >   	};
-> >
-> > +	vreg_es8316_3v3: regulator-es8316-3v3 {
-> > +		compatible = "regulator-fixed";
-> > +
-> > +		regulator-name = "vreg_es8316_3v3";
-> > +		regulator-min-microvolt = <3300000>;
-> > +		regulator-max-microvolt = <3300000>;
-> > +
-> > +		gpio = <&tlmm 117 GPIO_ACTIVE_HIGH>;
-> > +		enable-active-high;
-> > +
-> > +		pinctrl-0 = <&es8316_power_on>;
-> > +		pinctrl-names = "default";
-> > +
-> > +		regulator-always-on;
-> > +		regulator-boot-on;
-> > +	};
-> > +
-> >   	vreg_eth_1v8: regulator-eth-1v8 {
-> >   		compatible = "regulator-fixed";
-> >
-> > @@ -727,6 +745,26 @@ &gpu_zap_shader {
-> >   	firmware-name = "qcom/qcs6490/a660_zap.mbn";
-> >   };
-> >
-> > +&i2c0 {
-> > +	status = "okay";
-> > +
-> > +	es8316: audio-codec@11 {
-> > +		compatible = "everest,es8316";
-> > +		reg = <0x11>;
-> > +		#sound-dai-cells = <0>;
-> > +
-> > +		clocks = <&q6prmcc LPASS_CLK_ID_MCLK_1 LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-> > +		clock-names = "mclk";
-> > +
-> > +		interrupts-extended = <&tlmm 63 IRQ_TYPE_LEVEL_HIGH>;
-> > +
-> > +		pinctrl-0 = <&es8316_jack_detect>;
-> > +		pinctrl-names = "default";
-> > +
-> > +		everest,jack-detect-inverted;
-> > +	};
-> > +};
-> > +
-> >   /* Pin 3, 5 in 40-pin connector */
-> >   &i2c1 {
-> >   	status = "okay";
-> > @@ -740,6 +778,7 @@ &i2c9 {
-> >   	lt9611_codec: hdmi-bridge@39 {
-> >   		compatible = "lontium,lt9611";
-> >   		reg = <0x39>;
-> > +		#sound-dai-cells = <1>;
-> >
-> >   		interrupts-extended = <&tlmm 20 IRQ_TYPE_EDGE_FALLING>;
-> >   		reset-gpios = <&tlmm 21 GPIO_ACTIVE_HIGH>;
-> > @@ -978,6 +1017,27 @@ &pon_resin {
-> >   	status = "okay";
-> >   };
-> >
-> > +&q6apmbedai {
-> > +	#address-cells = <1>;
-> > +	#size-cells = <0>;
-> > +
-> > +	dai@10 {
-> > +		reg = <PRIMARY_MI2S_RX>;
-> > +		clocks = <&q6prmcc LPASS_CLK_ID_MCLK_1 LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
->
-> Drop this; it is already enabled from the codec node.
->
-> Why is the same clock being enabled in two places?
+Fix this by allocating the entire Audio PD reserved-memory region during
+rpmsg probe and tying its lifetime to the rpmsg channel. This removes
+userspace-controlled alloc/free and ensures that memory is reclaimed only
+when the DSP process is torn down.
 
-Agreed. I removed MCLK from both Primary MI2S backend nodes. They now
-describe only BCLK, for example:
+Add explicit validation for remote_heap presence and size before sending
+the memory to DSP, and fail early if the reserved-memory region is
+missing or incomplete.
 
-	dai@10 {
-		reg = <PRIMARY_MI2S_RX>;
-		clocks = <&q6prmcc LPASS_CLK_ID_PRI_MI2S_IBIT LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-		clock-names = "bclk";
-	};
+Fixes: 0871561055e66 ("misc: fastrpc: Add support for audiopd")
+Cc: stable@kernel.org
+Signed-off-by: Jianping Li <jianping.li@oss.qualcomm.com>
 
-The ES8316 codec node is the sole MCLK consumer. The corresponding
-machine data also no longer enables CPU-side MCLK.
+Patch [v9]: https://lore.kernel.org/all/20260707061733.495-1-jianping.li@oss.qualcomm.com/
 
->
-> > +			 <&q6prmcc LPASS_CLK_ID_PRI_MI2S_IBIT LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-> > +		clock-names = "mclk",
-> > +			      "bclk";
-> > +	};
-> > +
-> > +	dai@11 {
-> > +		reg = <PRIMARY_MI2S_TX>;
-> > +		clocks = <&q6prmcc LPASS_CLK_ID_MCLK_1 LPASS_CLK_ATTRIBUTE_COUPLE_NO>,
-> > +			 <&q6prmcc LPASS_CLK_ID_PRI_MI2S_IBIT LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
-> > +		clock-names = "mclk",
-> > +			      "bclk";
-> > +	};
-> > +};
-> > +
-> >   &qupv3_id_0 {
-> >   	firmware-name = "qcom/qcm6490/qupv3fw.elf";
-> >
-> > @@ -1014,6 +1074,69 @@ &sdhc_2 {
-> >   	status = "okay";
-> >   };
-> >
-> > +&sound {
-> > +	compatible = "thundercomm,qcs6490-rubikpi3-sndcard";
-> > +	model = "QCS6490-Thundercomm-RubikPi3";
-> > +
-> > +	pinctrl-0 = <&mi2s0_data0>, <&mi2s0_data1>, <&mi2s0_mclk>,
-> > +		    <&mi2s0_sclk>, <&mi2s0_ws>,
-> > +		    <&lpass_qua_mi2s_sclk>, <&lpass_qua_mi2s_ws>,
-> > +		    <&lpass_qua_mi2s_data>;
-> > +	pinctrl-names = "default";
-> > +
-> > +	audio-routing = "Headphone Jack", "HPOL",
-> > +			"Headphone Jack", "HPOR",
-> > +			"MIC2", "Mic Jack";
-> > +
-> > +	mi2s-playback-dai-link {
-> > +		link-name = "MI2S-LPAIF-RX-PRIMARY";
-> > +
->
-> What does "MI2S-LPAIF-RX-PRIMARY" represents?
+Changes in v10:
+ - Move Audio PD remote heap validation into
+   fastrpc_rpmsg_probe().
 
-The original name was intended to describe the primary MI2S receive
-path through LPAIF, but I agree that it was not clear.
+ - Treat Audio PD remote heap as a mandatory
+   resource and fail probe if the reserved
+   memory region is missing.
 
-Following the naming used by other Qualcomm sound card device trees, I
-have changed the DAI link names to:
+Changes in v9:
+ - Make sure fastrpc_init_create_static_process()
+   only sets audio_init_mem to false when the sent
+   address is actually invalid.
+---
+ drivers/misc/fastrpc.c | 121 +++++++++++++++++++++++------------------
+ 1 file changed, 69 insertions(+), 52 deletions(-)
 
-- "Primary MI2S Playback"
-- "Primary MI2S Capture"
-- "HDMI Playback"
+diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
+index d86e79134c68..03f633028c00 100644
+--- a/drivers/misc/fastrpc.c
++++ b/drivers/misc/fastrpc.c
+@@ -276,6 +276,8 @@ struct fastrpc_channel_ctx {
+ 	struct kref refcount;
+ 	/* Flag if dsp attributes are cached */
+ 	bool valid_attributes;
++	/* Flag if audio PD init mem was allocated */
++	bool audio_init_mem;
+ 	u32 dsp_attributes[FASTRPC_MAX_DSP_ATTRIBUTES];
+ 	struct fastrpc_device *secure_fdevice;
+ 	struct fastrpc_device *fdevice;
+@@ -1344,15 +1346,17 @@ static int fastrpc_init_create_static_process(struct fastrpc_user *fl,
+ 	struct fastrpc_init_create_static init;
+ 	struct fastrpc_invoke_args *args;
+ 	struct fastrpc_phy_page pages[1];
++	struct fastrpc_channel_ctx *cctx = fl->cctx;
+ 	char *name;
+ 	int err;
+-	bool scm_done = false;
+ 	struct {
+ 		int client_id;
+ 		u32 namelen;
+ 		u32 pageslen;
+ 	} inbuf;
+ 	u32 sc;
++	unsigned long flags;
++	bool sent_heap = false;
+ 
+ 	args = kzalloc_objs(*args, FASTRPC_CREATE_STATIC_PROCESS_NARGS);
+ 	if (!args)
+@@ -1376,31 +1380,6 @@ static int fastrpc_init_create_static_process(struct fastrpc_user *fl,
+ 	inbuf.client_id = fl->client_id;
+ 	inbuf.namelen = init.namelen;
+ 	inbuf.pageslen = 0;
+-	if (!fl->cctx->remote_heap) {
+-		err = fastrpc_remote_heap_alloc(fl, fl->sctx->dev, init.memlen,
+-						&fl->cctx->remote_heap);
+-		if (err)
+-			goto err_name;
+-
+-		/* Map if we have any heap VMIDs associated with this ADSP Static Process. */
+-		if (fl->cctx->vmcount) {
+-			u64 src_perms = BIT(QCOM_SCM_VMID_HLOS);
+-
+-			err = qcom_scm_assign_mem(fl->cctx->remote_heap->dma_addr,
+-							(u64)fl->cctx->remote_heap->size,
+-							&src_perms,
+-							fl->cctx->vmperms, fl->cctx->vmcount);
+-			if (err) {
+-				dev_err(fl->sctx->dev,
+-					"Failed to assign memory with dma_addr %pad size 0x%llx err %d\n",
+-					&fl->cctx->remote_heap->dma_addr,
+-					fl->cctx->remote_heap->size, err);
+-				goto err_map;
+-			}
+-			scm_done = true;
+-			inbuf.pageslen = 1;
+-		}
+-	}
+ 
+ 	fl->pd = USER_PD;
+ 
+@@ -1412,8 +1391,25 @@ static int fastrpc_init_create_static_process(struct fastrpc_user *fl,
+ 	args[1].length = inbuf.namelen;
+ 	args[1].fd = -1;
+ 
+-	pages[0].addr = fl->cctx->remote_heap->dma_addr;
+-	pages[0].size = fl->cctx->remote_heap->size;
++	/*
++	 * Audio PD is a static PD and retains the remote heap
++	 * information across daemon restarts. Therefore only
++	 * the first attach should provide heap information to
++	 * DSP. Subsequent attaches reuse the previously
++	 * initialized memory pool.
++	 */
++	spin_lock_irqsave(&cctx->lock, flags);
++	if (!cctx->audio_init_mem) {
++		pages[0].addr = cctx->remote_heap->dma_addr;
++		pages[0].size = cctx->remote_heap->size;
++		cctx->audio_init_mem = true;
++		inbuf.pageslen = 1;
++		sent_heap = true;
++	} else {
++		pages[0].addr = 0;
++		pages[0].size = 0;
++	}
++	spin_unlock_irqrestore(&cctx->lock, flags);
+ 
+ 	args[2].ptr = (u64)(uintptr_t) pages;
+ 	args[2].length = sizeof(*pages);
+@@ -1431,27 +1427,11 @@ static int fastrpc_init_create_static_process(struct fastrpc_user *fl,
+ 
+ 	return 0;
+ err_invoke:
+-	if (fl->cctx->vmcount && scm_done) {
+-		u64 src_perms = 0;
+-		struct qcom_scm_vmperm dst_perms;
+-		u32 i;
+-
+-		for (i = 0; i < fl->cctx->vmcount; i++)
+-			src_perms |= BIT(fl->cctx->vmperms[i].vmid);
+-
+-		dst_perms.vmid = QCOM_SCM_VMID_HLOS;
+-		dst_perms.perm = QCOM_SCM_PERM_RWX;
+-		err = qcom_scm_assign_mem(fl->cctx->remote_heap->dma_addr,
+-						(u64)fl->cctx->remote_heap->size,
+-						&src_perms, &dst_perms, 1);
+-		if (err)
+-			dev_err(fl->sctx->dev, "Failed to assign memory dma_addr %pad size 0x%llx err %d\n",
+-				&fl->cctx->remote_heap->dma_addr, fl->cctx->remote_heap->size, err);
++	if (sent_heap) {
++		spin_lock_irqsave(&cctx->lock, flags);
++		cctx->audio_init_mem = false;
++		spin_unlock_irqrestore(&cctx->lock, flags);
+ 	}
+-err_map:
+-	fastrpc_buf_free(fl->cctx->remote_heap);
+-	fl->cctx->remote_heap = NULL;
+-err_name:
+ 	kfree(name);
+ err:
+ 	kfree(args);
+@@ -2418,12 +2398,29 @@ static int fastrpc_rpmsg_probe(struct rpmsg_device *rpdev)
+ 		}
+ 	}
+ 
+-	if (domain_id == SDSP_DOMAIN_ID) {
++	if (domain_id == SDSP_DOMAIN_ID || domain_id == ADSP_DOMAIN_ID) {
+ 		struct resource res;
+ 		u64 src_perms;
+ 
+ 		err = of_reserved_mem_region_to_resource(rdev->of_node, 0, &res);
++
++		if (err && domain_id == ADSP_DOMAIN_ID) {
++			dev_err(rdev, "missing mandatory remote heap memory-region\n");
++			goto err_free_data;
++		}
++
+ 		if (!err) {
++			if (domain_id == ADSP_DOMAIN_ID) {
++				data->remote_heap =
++					kzalloc_obj(*data->remote_heap);
++				if (!data->remote_heap) {
++					err = -ENOMEM;
++					goto err_free_data;
++				}
++
++				data->remote_heap->dma_addr = res.start;
++				data->remote_heap->size = resource_size(&res);
++			}
+ 			src_perms = BIT(QCOM_SCM_VMID_HLOS);
+ 
+ 			err = qcom_scm_assign_mem(res.start, resource_size(&res), &src_perms,
+@@ -2431,7 +2428,6 @@ static int fastrpc_rpmsg_probe(struct rpmsg_device *rpdev)
+ 			if (err)
+ 				goto err_free_data;
+ 		}
+-
+ 	}
+ 
+ 	secure_dsp = !(of_property_read_bool(rdev->of_node, "qcom,non-secure-domain"));
+@@ -2490,6 +2486,7 @@ static int fastrpc_rpmsg_probe(struct rpmsg_device *rpdev)
+ 		misc_deregister(&data->secure_fdevice->miscdev);
+ 
+ err_free_data:
++	kfree(data->remote_heap);
+ 	kfree(data);
+ 	return err;
+ }
+@@ -2512,6 +2509,7 @@ static void fastrpc_rpmsg_remove(struct rpmsg_device *rpdev)
+ 	struct fastrpc_buf *buf, *b;
+ 	struct fastrpc_user *user;
+ 	unsigned long flags;
++	int err, i;
+ 
+ 	/* No invocations past this point */
+ 	spin_lock_irqsave(&cctx->lock, flags);
+@@ -2529,8 +2527,27 @@ static void fastrpc_rpmsg_remove(struct rpmsg_device *rpdev)
+ 	list_for_each_entry_safe(buf, b, &cctx->invoke_interrupted_mmaps, node)
+ 		list_del(&buf->node);
+ 
+-	if (cctx->remote_heap)
+-		fastrpc_buf_free(cctx->remote_heap);
++	if (cctx->remote_heap && cctx->vmcount) {
++		u64 src_perms = 0;
++		struct qcom_scm_vmperm dst_perms;
++
++		for (i = 0; i < cctx->vmcount; i++)
++			src_perms |= BIT(cctx->vmperms[i].vmid);
++
++		dst_perms.vmid = QCOM_SCM_VMID_HLOS;
++		dst_perms.perm = QCOM_SCM_PERM_RWX;
++
++		err = qcom_scm_assign_mem(cctx->remote_heap->dma_addr,
++					  cctx->remote_heap->size, &src_perms,
++					  &dst_perms, 1);
++		if (err)
++			dev_err(&rpdev->dev,
++				"Failed to assign memory back to HLOS: dma_addr %pad size %#llx err %d\n",
++				&cctx->remote_heap->dma_addr, cctx->remote_heap->size, err);
++	}
++
++	kfree(cctx->remote_heap);
++	cctx->remote_heap = NULL;
+ 
+ 	of_platform_depopulate(&rpdev->dev);
+ 
+-- 
+2.43.0
 
->
-> > +		codec {
-> > +			sound-dai = <&es8316>;
-> > +		};
-> > +
-> > +		cpu {
-> > +			sound-dai = <&q6apmbedai PRIMARY_MI2S_RX>;
-> > +		};
-> > +
-> > +		platform {
-> > +			sound-dai = <&q6apm>;
-> > +		};
-> > +	};
-> > +
-> > +	mi2s-capture-dai-link {
-> > +		link-name = "MI2S-LPAIF-TX-PRIMARY";
-> > +
-> > +		codec {
-> > +			sound-dai = <&es8316>;
-> > +		};
-> > +
-> > +		cpu {
-> > +			sound-dai = <&q6apmbedai PRIMARY_MI2S_TX>;
-> > +		};
-> > +
-> > +		platform {
-> > +			sound-dai = <&q6apm>;
-> > +		};
-> > +	};
-> > +
-> > +	quaternary-mi2s-playback-dai-link {
-> > +		link-name = "MI2S-LPAIF_RXTX-RX-PRIMARY";
-> > +
-> > +		codec {
-> > +			sound-dai = <<9611_codec 0>;
-> > +		};
-> > +
-> > +		cpu {
-> > +			sound-dai = <&q6apmbedai QUATERNARY_MI2S_RX>;
-> > +		};
-> > +
-> > +		platform {
-> > +			sound-dai = <&q6apm>;
-> > +		};
-> > +	};
-> > +};
-> > +
-> >   /* Pin 19, 21, 23, 24 in 40-pin connector */
-> >   &spi12 {
-> >   	status = "okay";
-> > @@ -1228,6 +1351,29 @@ &sdc2_data {
-> >   	drive-strength = <10>;
-> >   };
-> >
-> > +&lpass_tlmm {
-> > +	lpass_qua_mi2s_sclk: qua-mi2s-sclk-state {
-> > +		pins = "gpio0";
-> > +		function = "qua_mi2s_sclk";
-> > +		drive-strength = <8>;
-> > +		bias-disable;
-> > +	};
-> > +
-> > +	lpass_qua_mi2s_ws: qua-mi2s-ws-state {
-> > +		pins = "gpio1";
-> > +		function = "qua_mi2s_ws";
-> > +		drive-strength = <8>;
-> > +		bias-disable;
-> > +	};
-> > +
-> > +	lpass_qua_mi2s_data: qua-mi2s-data-state {
-> > +		pins = "gpio2", "gpio3", "gpio4";
-> > +		function = "qua_mi2s_data";
-> > +		drive-strength = <8>;
-> > +		bias-disable;
-> > +	};
-> > +};
-> > +
-> >   &tlmm {
-> >   	pcie1_reset_n: pcie1-reset-n-state {
-> >   		pins = "gpio2";
-> > @@ -1366,6 +1512,12 @@ m2_vcc_pin: m2-vcc-state {
-> >   		input-disable;
-> >   	};
-> >
-> > +	es8316_jack_detect: es8316-jack-detect-state {
-> > +		pins = "gpio63";
-> > +		function = "gpio";
-> > +		bias-disable;
-> > +	};
-> > +
-> >   	lt9611_vcc_pin: lt9611-vcc-pin-state {
-> >   		pins = "gpio83";
-> >   		function = "gpio";
-> > @@ -1395,6 +1547,13 @@ pcie0_wake_n: pcie0-wake-n-state {
-> >   		bias-pull-up;
-> >   	};
-> >
-> > +	es8316_power_on: es8316-power-on-state {
-> > +		pins = "gpio117";
-> > +		function = "gpio";
-> > +		drive-strength = <2>;
-> > +		bias-pull-down;
-> > +	};
-> > +
-> >   	wifi_power_on: wifi-power-on-state {
-> >   		pins = "gpio125";
-> >   		function = "gpio";
-> >
-
-Best regards,
-Hongyang
