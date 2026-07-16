@@ -1,228 +1,160 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7FF33BB126;
-	Thu, 16 Jul 2026 09:36:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFEE83A7F6D
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 09:42:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784194603; cv=none; b=N9mgmQsmcOfgazajJEbCLS9q0y392y0XMBLyoA3DX08UyDHKy7t2jVKPFFf+xD5MiGI7e6ri/MTaFlOgsdjg6hf4lXYThour60tmumiYnLfbqDhVG8SE9Ybf9gr5eKE8RW6CbTxR3SaCZ7WDWnv8bt1oFzZd8meJQDoT0PNGQT0=
+	t=1784194947; cv=none; b=O8Sr/kEPli4w7kQGaghl9c94taZaylWIBdhnoSIklRm35XhLrRWCpDKlXVoofmZQojyWiUo9gRDlcucF1PlFOWhP9jfEWkZcuyk/YgsmnWCOwm+83rHMgDIHrC9XzmrPCcvL/5qaE987D6+KjAUiOVXCgHS23blb53uSDlwqwoI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784194603; c=relaxed/simple;
-	bh=hJH4yG48JfZTWrhLzphPH7J/2K7VhJiq+izQbmOi3No=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=QbJtPz1z9Gf52XVJ+Q/if/gdTgX9uWZ2GXmkYuQt8Yb/9VSfCyQMR/GsjTlP/jKWY6aLu9DkQWOkq+53yBo5Bmkr+HYX09KYZv/mlcXoxPuZzeFElpzGiZ0j0HxofIzQtzcatyuS8Oh7NTvtPRiav8EmG/sjM0/2e2ywwGAwarw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YHRhRgI1; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784194947; c=relaxed/simple;
+	bh=39XAndTQmo1NBabNFph+WMyYTOzWodq39/QO5d975ec=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Kp0BXtMEZscxkvWY5iUXncm4VRv+dDncm8qS0FysEa1lodSTBgSUMcT7GTl6q7Y7Dyxe2TQH+s2TFWYH6BW7bEezUwlhfpYT3uN7YHo+ad/iG5qHqJzW1Mk5cwJgmLvwWW+hCU93wtOYgHJM7GlNdNvIGXshoNxCV/+1ZPVkGRA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=wVnzoGim; arc=none smtp.client-ip=209.85.208.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YHRhRgI1"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D029A1F000E9;
-	Thu, 16 Jul 2026 09:36:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784194601;
-	bh=Mw498kcdRvtwf0TpnGBwleBL9K3C9jrPcH99BicHGcY=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=YHRhRgI1niM3PlrZwisO9rOxfS9iIj2SYZEGwL3nW9xTChS885ATXnOpZrMbCmfcO
-	 TEfa1QQhY3PrSN+0+QhLp18PfrTV/Vbj6oj1ihy3kDX5+yLPpiLN7IqJIXodmXMTxA
-	 oeuc8fvAK3hIiP354563i84BomUHhL9TK1MpwY9jIW5Q9akTwY3BjKHgxm/xB0scRP
-	 CjozPQeYUlzQgbZcJcn3/ZlAoQ4/7QzR/d6WwcwX3rQBBAiyttlcUrcNx6eCqL3EsE
-	 VoVo3toLwNuiCOlGj3wlj1VmkF8ZUmOJMRu5lq+kk0xKz6iw5plXK5qO3T06uw8h73
-	 wwA2M2VwCazzg==
-Date: Thu, 16 Jul 2026 10:36:05 +0100
-From: "Lorenzo Stoakes (ARM)" <ljs@kernel.org>
-To: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
-Cc: Andrew Morton <akpm@linux-foundation.org>, 
-	David Hildenbrand <david@kernel.org>, "Liam R. Howlett" <liam@infradead.org>, 
-	Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
-	Michal Hocko <mhocko@suse.com>, Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>, 
-	Jann Horn <jannh@google.com>, Lance Yang <lance.yang@linux.dev>, 
-	Pedro Falcato <pfalcato@suse.de>, Russell King <linux@armlinux.org.uk>, 
-	Dinh Nguyen <dinguyen@kernel.org>, Simon Schuster <schuster.simon@siemens-energy.com>, 
-	"James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>, Helge Deller <deller@gmx.de>, 
-	Alexander Viro <viro@zeniv.linux.org.uk>, Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>, 
-	Dan Williams <djbw@kernel.org>, Matthew Wilcox <willy@infradead.org>, 
-	Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>, 
-	Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, 
-	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, 
-	Mark Rutland <mark.rutland@arm.com>, Alexander Shishkin <alexander.shishkin@linux.intel.com>, 
-	Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>, 
-	Adrian Hunter <adrian.hunter@intel.com>, James Clark <james.clark@linaro.org>, Zi Yan <ziy@nvidia.com>, 
-	Baolin Wang <baolin.wang@linux.alibaba.com>, Nico Pache <npache@redhat.com>, 
-	Ryan Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>, 
-	Miaohe Lin <linmiaohe@huawei.com>, Naoya Horiguchi <nao.horiguchi@gmail.com>, 
-	Xu Xin <xu.xin16@zte.com.cn>, Chengming Zhou <chengming.zhou@linux.dev>, 
-	SJ Park <sj@kernel.org>, Matthew Brost <matthew.brost@intel.com>, 
-	Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>, Byungchul Park <byungchul@sk.com>, 
-	Gregory Price <gourry@gourry.net>, Ying Huang <ying.huang@linux.alibaba.com>, 
-	Alistair Popple <apopple@nvidia.com>, Hugh Dickins <hughd@google.com>, Peter Xu <peterx@redhat.com>, 
-	Kees Cook <kees@kernel.org>, Marek Szyprowski <m.szyprowski@samsung.com>, 
-	Robin Murphy <robin.murphy@arm.com>, Andrey Konovalov <andreyknvl@gmail.com>, 
-	Alexander Potapenko <glider@google.com>, Dmitry Vyukov <dvyukov@google.com>, 
-	Steven Rostedt <rostedt@goodmis.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Jarkko Sakkinen <jarkko@kernel.org>, Dave Hansen <dave.hansen@linux.intel.com>, 
-	Thomas Gleixner <tglx@kernel.org>, Borislav Petkov <bp@alien8.de>, x86@kernel.org, 
-	"H. Peter Anvin" <hpa@zytor.com>, Ian Abbott <abbotti@mev.co.uk>, 
-	H Hartley Sweeten <hsweeten@visionengravers.com>, Lucas Stach <l.stach@pengutronix.de>, 
-	Christian Gmeiner <christian.gmeiner@gmail.com>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Patrik Jakobsson <patrik.r.jakobsson@gmail.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Rob Clark <robin.clark@oss.qualcomm.com>, 
-	Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
-	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
-	Marijn Suijten <marijn.suijten@somainline.org>, Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, 
-	Thierry Reding <thierry.reding@kernel.org>, Mikko Perttunen <mperttunen@nvidia.com>, 
-	Jonathan Hunter <jonathanh@nvidia.com>, Christian Koenig <christian.koenig@amd.com>, 
-	Huang Rui <ray.huang@amd.com>, Matthew Auld <matthew.auld@intel.com>, 
-	Jason Gunthorpe <jgg@ziepe.ca>, Yishai Hadas <yishaih@nvidia.com>, 
-	Shameer Kolothum <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>, 
-	Ankit Agrawal <ankita@nvidia.com>, Alex Williamson <alex@shazbot.org>, 
-	Paolo Bonzini <pbonzini@redhat.com>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Usama Arif <usama.arif@linux.dev>, linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-parisc@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
-	nvdimm@lists.linux.dev, linux-perf-users@vger.kernel.org, 
-	linux-trace-kernel@vger.kernel.org, damon@lists.linux.dev, iommu@lists.linux.dev, 
-	kasan-dev@googlegroups.com, linux-sgx@vger.kernel.org, etnaviv@lists.freedesktop.org, 
-	dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
-	linux-tegra@vger.kernel.org, kvm@vger.kernel.org, 
-	Russell King <linux+etnaviv@armlinux.org.uk>
-Subject: Re: [PATCH v2 25/33] mm/vma: make vma_set_range() static, drop
- insert_vm_struct() decl
-Message-ID: <alilxy8lRdNIbtS-@lucifer>
-References: <20260710-b4-pre-scalable-cow-v2-0-2a5aa403d977@kernel.org>
- <20260710-b4-pre-scalable-cow-v2-25-2a5aa403d977@kernel.org>
- <b470eb19-d59c-4dd6-bf57-648b51281691@kernel.org>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="wVnzoGim"
+Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-69c600f76ccso5103671a12.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 02:42:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1784194943; x=1784799743; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=rWQ9oJo6FYvzxfcIJtWdNxYH0ur72y3xrCIEL4tMOu8=;
+        b=wVnzoGimyIuFYJpQ+bs41iY0dB9gOxUSZbBh97G0xWGZpgKyYvQy3vWv2r+gnFwudb
+         VM1UPrkQYTKCGp5f/2lLd/gHL8ZVziQ3lDhMwpxTsIHV4B32B5Sr8IBzFx5epym+4GcL
+         7oStHBLNWPcILe1NpsOOkwjY/MWIg0oHi+iqbRijHn5eB8RRzJVSRUbXBkkBKcuujNv6
+         uMhyBwnb6/thgYFaZVYvWq/6tf5lAZihrZEBxtHevBst2+CuwUpqdi6oChAfVCbmHC9c
+         COb741tB3SW2JEhuQSc3jTT08b7MXIIl1lC9QRVZZGd9jRXZLsPa2YRMpmJaZIZBPGd0
+         gzrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784194943; x=1784799743;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=rWQ9oJo6FYvzxfcIJtWdNxYH0ur72y3xrCIEL4tMOu8=;
+        b=bQ7xuv5K0W/62fkmQ+68vVWvhcqitFzpqwXiyz1bEGADu2Gtxln+kiDUN/mZjuwQod
+         jivZ/jcp3Vld9dcORB/MTtbdTRm2JVyDzWjNpW7eQu27SFwxnOXdki1t45d2YeIXleAi
+         YIdtpXXNYXTvT5Xn/FJoNvCO6SG7kTDpdhZOEpkTYFQqVWdbdPx9OrShT/qEb8Fxv8Oq
+         iP+YhQqmZywqPNCwkrQb944elPhvjQEAGPXFeAHcyKGGRwnEmhiLQMWBMy2UQC7bf67N
+         BS5kvpGFvOhBfbFeqQVLgyc/xjOo0y+XC0FIvqqwm7iMP+xbg0ob2ZmG0NAIXh5c55or
+         me/Q==
+X-Forwarded-Encrypted: i=1; AHgh+RpKNHaYbx98Of7pAMUkyq9r4dtmetBjnXt2Kwwl9ClocZqQ4O2Og3KnLO+2+WhUyEuPl03DZgI2uePi+XzE@vger.kernel.org
+X-Gm-Message-State: AOJu0YwZu8Z/q1B9Lye3RGsNdJJkxhVeiSZRtpvtLVMxirYYFCbz0+Fc
+	n6E/G4fsm+un6lZQluMcCC9bxVewPK1ouIXDAbdj6f8MYWSYsnOwVy/rMCl/lu/FbIU=
+X-Gm-Gg: AfdE7ckNn00EiZF3BW2yIY/G+L8HYnm+ZEzirSXc5+jvWpWXngfrG7JcVFfJNfDKRJD
+	z+hf9oL89aBEN1XNUCbF1OR9vyWrZ3xggFZwNQMqUcotw9ojNWUsaHHNKrmbi7Kzg00ODs+CRgy
+	TE6bjl1/FnIO7AsyncW0cumESAXygFNwsTOztigaQA3lGiyy4iuz5/aZNKKnNxVCJeXoZNsdX46
+	2iMGlTNzyiE/cvy1ls+rYYNyWSJkdJvb1MWZ5MUCHfp3qtwwPQjOy/H16L6L8JJSC/RMClPQu4u
+	IFVx04/mKv+AOZoSlS21HAFAJKfWswGJVjPRGOprhuEI2Bi3jc0L9LUun1UMuFud7QDm/SgCdrY
+	e39iE6znm1/ECYwKyk2jwFB/tHdUbsb/3n1gnI0eiTXULIkhoHTyJ6U8g1kgqAiG06rme7cLAT6
+	bn9WmrA5XINoO1Jl7merXANXQ=
+X-Received: by 2002:a05:6402:51cb:b0:699:39c5:204b with SMTP id 4fb4d7f45d1cf-69c5f0be27dmr11018264a12.18.1784194942921;
+        Thu, 16 Jul 2026 02:42:22 -0700 (PDT)
+Received: from [192.168.0.35] ([109.77.36.131])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-69cd294fb1asm4400218a12.26.2026.07.16.02.42.21
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 16 Jul 2026 02:42:22 -0700 (PDT)
+Message-ID: <c731b03e-b550-48af-b338-37ac53018247@linaro.org>
+Date: Thu, 16 Jul 2026 10:42:20 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <b470eb19-d59c-4dd6-bf57-648b51281691@kernel.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 1/2] dt-bindings: phy: qcom: Add CSI2 C-PHY/DPHY schema
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Bryan O'Donoghue <bod@kernel.org>
+Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Vinod Koul <vkoul@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, linux-arm-msm@vger.kernel.org,
+ linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260708-x1e-csi2-phy-v9-0-0210b90c04cf@linaro.org>
+ <20260708-x1e-csi2-phy-v9-1-0210b90c04cf@linaro.org>
+ <YSunV_lNJ8xW_y-Aa2psZavniF6mcHJlJipuj1RYWMB8Zb8yLC-gb7eEnk0XMjfwQOneMGsZM5foFKutCNhYqw==@protonmail.internalid>
+ <b7baffda-b97c-4b83-8d9e-e381d0289682@linaro.org>
+ <3ab676ac-919b-4a80-8dd6-71dd7f6fe06c@kernel.org>
+ <-iN0mG5nS2joxEn49UrxFlORE3R6Ji3HRebfOMNMGnupMIobTBdRDvnwjRHAXHeLmGf6O4JJENVauduwZXwhiA==@protonmail.internalid>
+ <b834e9a0-a61c-4912-b57c-36d571938b75@linaro.org>
+ <4d7a0e59-7c34-4557-a475-8cd7fd2ad2d9@kernel.org>
+ <CAFEp6-2J0WGF6g0K7s--PxciO+d9MR-SCVnrWJ3u=sgQNwA59A@mail.gmail.com>
+Content-Language: en-US
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+In-Reply-To: <CAFEp6-2J0WGF6g0K7s--PxciO+d9MR-SCVnrWJ3u=sgQNwA59A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Wed, Jul 15, 2026 at 07:45:59PM +0200, Vlastimil Babka (SUSE) wrote:
-> On 7/10/26 22:17, Lorenzo Stoakes wrote:
-> > With __install_special_mapping() moved to vma.c, vma_set_range() can be
-> > made into a static function there and is now completely isolated from the
-> > rest of mm.
->
-> Pedantic nit: it was already "static", but in a .h file
-> Yeah it was also "inline" but that's not the important part of this change.
->
-> So I'd say it was rather moved to vma.c, but you can ignore this nit if you
-> want.
+On 16/07/2026 09:56, Loic Poulain wrote:
+> On Mon, Jul 13, 2026 at 1:18 AM Bryan O'Donoghue <bod@kernel.org> wrote:
+>>
+>> On 09/07/2026 08:40, Vladimir Zapolskiy wrote:
+>>>> As explained in the cover letter: I'm following guidance from Rob on that.
+>>> Pehaps you've misread a given review comment, because Rob's guidance is
+>>> to remove 'phy-type' property,
+>>
+>> I'll just quote verbatim "Perhaps putting this in phy cells would be
+>> better because the consumer decides on the mode."
+>>
+>> That is not "remove phy-type" - it's "move the mode into the cell". I'm
+>> shifting this back to the DT schema maintainers since, I take their
+>> feedback literally, seriously and canonically.
+>>
+>> Any of the triumvirate will do, Rob, Krzysztof or Conor.
+>>
+>> Absent a different answer from the DT schema guys, v10 ships with the
+>> consumer deciding the mode as per Rob's original guidance.
+> 
+> On the #phy-cells question, IMO we should drop #phy-cells to 0 and
+> derive the C-PHY/D-PHY mode from the endpoint bus-type. The operating
+> mode is really a configuration of the link rather than a hardware
+> description/limitation of the PHY block itself,and the sensor endpoint
+> is conventionally where the bus type originates. I guess this costs us
+> nothing on the driver side today, we only support D-PHY, so the
+> mode-check just moves into the endpoint parsing we already do in
+> phy_qcom_mipi_csi2_parse_routing(). It can be a minimal
+> fwnode_property_read_u32(ep, "bus-type", ...) sanity check and adding
+> C-PHY later is then a one-line case MEDIA_BUS_TYPE_CSI2_CPHY
+> with no DT ABI change.
 
-That is pretty pedantic ;) I mean to say bare 'static' here obvs. I can fix if
-any respin but I think ok as-is for now.
+So I take your point on link-type - in theory you can select the mode 
+from the sensor @ config time. The established practice is that the 
+consumer decides the PHY mode, so if we wanted to make this a _runtime_ 
+configuration - then that should be information that is passed to the 
+PHY via configure() not via DT because we've said its a link-mode 
+abstracted from the DT entirely.
 
->
-> > While we're here, we can also remove the insert_vm_struct() declaration
-> > from mm.h - the function is implemented in vma.c and already declared in
-> > vma.h, and has no users outside of mm.
-> >
-> > Also update the VMA userland tests to reflect this change.
-> >
-> > No functional change intended.
-> >
-> > Reviewed-by: Pedro Falcato <pfalcato@suse.de>
-> > Reviewed-by: Gregory Price <gourry@gourry.net>
-> > Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
->
-> Reviewed-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
+In the extreme case I have a user-space utility selecting sensor mode, 
+which the CSI controller parses and then signals the PHY to switch modes.
 
-Thanks! :)
+If its a run-time config, then its a run-time config and DT should be 
+excluded from the mode selection tree.
 
->
-> > ---
-> >  include/linux/mm.h         | 1 -
-> >  mm/internal.h              | 9 ---------
-> >  mm/vma.c                   | 8 ++++++++
-> >  tools/testing/vma/shared.c | 9 ---------
-> >  tools/testing/vma/shared.h | 5 -----
-> >  5 files changed, 8 insertions(+), 24 deletions(-)
-> >
-> > diff --git a/include/linux/mm.h b/include/linux/mm.h
-> > index 3d69b597b9b1..762313b47301 100644
-> > --- a/include/linux/mm.h
-> > +++ b/include/linux/mm.h
-> > @@ -4130,7 +4130,6 @@ void anon_rmap_tree_verify(struct anon_vma_chain *avc);
-> >
-> >  /* mmap.c */
-> >  extern int __vm_enough_memory(const struct mm_struct *mm, long pages, int cap_sys_admin);
-> > -extern int insert_vm_struct(struct mm_struct *, struct vm_area_struct *);
-> >  extern void exit_mmap(struct mm_struct *);
-> >  bool mmap_read_lock_maybe_expand(struct mm_struct *mm, struct vm_area_struct *vma,
-> >  				 unsigned long addr, bool write);
-> > diff --git a/mm/internal.h b/mm/internal.h
-> > index 01a762bcc2b2..2c650d280e90 100644
-> > --- a/mm/internal.h
-> > +++ b/mm/internal.h
-> > @@ -1540,15 +1540,6 @@ extern bool mirrored_kernelcore;
-> >  bool memblock_has_mirror(void);
-> >  void memblock_free_all(void);
-> >
-> > -static __always_inline void vma_set_range(struct vm_area_struct *vma,
-> > -					  unsigned long start, unsigned long end,
-> > -					  pgoff_t pgoff)
-> > -{
-> > -	vma->vm_start = start;
-> > -	vma->vm_end = end;
-> > -	vma->vm_pgoff = pgoff;
-> > -}
-> > -
-> >  static inline bool vma_soft_dirty_enabled(struct vm_area_struct *vma)
-> >  {
-> >  	/*
-> > diff --git a/mm/vma.c b/mm/vma.c
-> > index 5308aa5a8c91..cc0e449ad0be 100644
-> > --- a/mm/vma.c
-> > +++ b/mm/vma.c
-> > @@ -70,6 +70,14 @@ struct mmap_state {
-> >  		.state = VMA_MERGE_START,				\
-> >  	}
-> >
-> > +static void vma_set_range(struct vm_area_struct *vma, unsigned long start,
-> > +			  unsigned long end, pgoff_t pgoff)
-> > +{
-> > +	vma->vm_start = start;
-> > +	vma->vm_end = end;
-> > +	vma->vm_pgoff = pgoff;
-> > +}
-> > +
-> >  /* Was this VMA ever forked from a parent, i.e. maybe contains CoW mappings? */
-> >  static bool vma_is_fork_child(struct vm_area_struct *vma)
-> >  {
-> > diff --git a/tools/testing/vma/shared.c b/tools/testing/vma/shared.c
-> > index 2565a5aecb80..bea9ea6db02a 100644
-> > --- a/tools/testing/vma/shared.c
-> > +++ b/tools/testing/vma/shared.c
-> > @@ -120,12 +120,3 @@ unsigned long rlimit(unsigned int limit)
-> >  {
-> >  	return (unsigned long)-1;
-> >  }
-> > -
-> > -void vma_set_range(struct vm_area_struct *vma,
-> > -		   unsigned long start, unsigned long end,
-> > -		   pgoff_t pgoff)
-> > -{
-> > -	vma->vm_start = start;
-> > -	vma->vm_end = end;
-> > -	vma->vm_pgoff = pgoff;
-> > -}
-> > diff --git a/tools/testing/vma/shared.h b/tools/testing/vma/shared.h
-> > index 8b9e3b11c3cb..ca4f1238f1c7 100644
-> > --- a/tools/testing/vma/shared.h
-> > +++ b/tools/testing/vma/shared.h
-> > @@ -125,8 +125,3 @@ void __vma_set_dummy_anon_vma(struct vm_area_struct *vma,
-> >  /* Provide a simple dummy VMA/anon_vma dummy setup for testing. */
-> >  void vma_set_dummy_anon_vma(struct vm_area_struct *vma,
-> >  			    struct anon_vma_chain *avc);
-> > -
-> > -/* Helper function to specify a VMA's range. */
-> > -void vma_set_range(struct vm_area_struct *vma,
-> > -		   unsigned long start, unsigned long end,
-> > -		   pgoff_t pgoff);
-> >
->
+I'm in fact willing to entertain this idea - but it will require passing 
+the PHY mode to configure() not consuming - DT data from the endpoint.
 
-Cheers, Lorenzo
+My core point here is both acknowleding Rob's point the consumer decides 
+the mode - and _if_ we go the runtime configuration route, then actually 
+making the selection @ configure not at probe/dt parse time.
+
+I just wonder if there's any real upside to all that additional work and 
+delay/churn.
+
+> On data-lanes numbering, I don't have a strong opinion here. Keeping
+> the current 0-based values is defensible, in this driver the value is
+> used as a physical lane index and it selects the per-lane register
+> bank (0x200 * n), so 0 maps to physical LN0. In that sense 0-based is
+> a faithful representation of the physical lane position on the SoC.
+> 
+> Regards,
+> Loic
+
