@@ -1,176 +1,289 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A9D63CF661;
-	Thu, 16 Jul 2026 08:40:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67C2F3F86EE
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 08:48:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784191219; cv=none; b=HQT/Yq8XDKwx8P2j9w8T4p+TNte97kQAOqrL3ZBh1SVmV7RFIVqGZ2FcGudMHMAU43hiGNK/TTG9nMljLorboQ8zF1xFaaVitBceAaK92yrKQDUlksCiRtYXjGaML4fAsO55nfxMWRSSO14va6TzyWTvga7oq5avK/fJadRB3S4=
+	t=1784191723; cv=none; b=jB/2WVDXAZots2v4NfKFmsOvwCYLypZW/LHw3Bq7mDol0gB7daYSE+h5cJUwkrQOdwO04en8POlOTT9Ee0+qEYL/t6SWzdTwdEjGhrxCJsQCR3yXLuR+3W+TdheeEYkisA5vgcVYY8Svpbf3yqolbR/9TazrTNBOWxVmJm/9VBQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784191219; c=relaxed/simple;
-	bh=5Bjj8pvZPawyu0paZBNTWFSnkf00wqhCzrNLa0iw1JU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Ae3Oqx3FCvUOgd2Zy7p7JgE5oYCKUxJcMxkJkyDDCeoUsigu8hm0NN2Ahsq5YMisyUajF/Rra+ywEwCf7w3xN1aXTzEnO4ROEOhMGPUsfAfzBeHSIuFDiIn1YEI3ftVCGfQd745xJiVH0BBEAuQ6wHpGVYO7MSK2XRBtrjDNVVo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mFTdKJBv; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784191723; c=relaxed/simple;
+	bh=axHqb1mN2GhgTYXeefA9dpqaSA3EzsSJmCI3ycQRWeU=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=NPt3Ba+NXUdla3Q39uiPrjcgEmc5NIIMaqUHJtg5/OSn3gOJfJJU3iz3DX99aqpTe7FtDArc6bCuxaU3gogExY7OeWVcaqSu9031+I1i6CZarCiYUl0po/hJqxSaYSy0ePJsH8hFM85sfzzWSVxzcKFYkQPnbnrXcIeWhcyjm90=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=BPt+akIb; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=WT+lNX7P; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mFTdKJBv"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 592CC1F000E9;
-	Thu, 16 Jul 2026 08:39:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784191217;
-	bh=BwEiU6teZIE3flR9vElc+4yj0i8+JAFfTjNxsGNdNcI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=mFTdKJBvFjlR0fJPqcox865iCgzD3SqVt1ekSBxJwXUCAe40Yjcs2Fcj/mdEY9ZO0
-	 uv/zu+Oi9pQHZauwCE+hu2Jk9XJ8vzl990ylL3HlbjoOt5SnC5BdBK7goJE6+B/QtK
-	 8fOlS0ofrTIrKqeKev9zI2/bPrSMIW6+CtG/cS5ypXB+4kLi32O+r7PZXQkutzqs7J
-	 lUJYHuF+YQ4AE1nU97nlky3lhy7KKC3TRuE3282XbLOydNZNtuGqrKkfY1KEZtpYSg
-	 lfpDMZYDnPvrjfuQTMIMxAy1w+FstOikPijx3fqV+Kz6EFMFcgiVZ4waFiHhwnz8bI
-	 gLMDgglX0qAcg==
-Message-ID: <ff9d266a-b037-4b40-a94e-3f059c6e0459@kernel.org>
-Date: Thu, 16 Jul 2026 10:39:54 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="BPt+akIb";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="WT+lNX7P"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66G7DVOh1892197
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 08:48:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=5yev/2pWNLUj4eHfGzFolI
+	Dle6s+OQ2A1WFsv3+50nQ=; b=BPt+akIbd6r73OcXb9oUAH+cRkttAySs9nClxv
+	3cDYrcMImhwFZnWc5VsJnCHaKBIJC+sIMpiT05HSoN2WX+3kvHcd7eReZ7Ir6RTP
+	T2XkFdHIRHOF6GjkD8ItK4aYcmycl+xAV5lwOPC1aiefixqB/G4g9Gpk/7voevCF
+	7hpWhqwsMy5DtC0BPuZzbphSZ1tLbElrA5/0LkkTl5eHkpYPjeft+nb3eoGAaA+p
+	lF79cfJK0RL8e3geOKoLTkFaa0ZgQR6PwlpPnK3FG1T8fA54+2p9FFk1BkP6fDBm
+	8CklnXo9/z5k29tslEvktnuJaquZ32w6JAqfE+E85dnUqoQA==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fecnybg87-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 08:48:28 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c2af04aeeso5107191cf.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 01:48:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784191708; x=1784796508; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=5yev/2pWNLUj4eHfGzFolIDle6s+OQ2A1WFsv3+50nQ=;
+        b=WT+lNX7PGGFvwCFML0fMrSQAi6Ij5pOo9cyDtIjOWM1G0l0ZCn0vH9WoCdbWq1W3Ue
+         iCouJCd7rnE2LozMsdjB7G4BeiluGLXpqa1VOByci9Ch69jMT7kBRTvCycr/DUmxC1GH
+         3Xfv94vpOMDF9cRqSWxFbbKG3y7TpnTBbaGJCE/IxfNKVC9SeXPbkJWSgcyw2kvo7Wfn
+         /fxWu2REosYlXbmeygFecbPbjVRxkKlvQMo+i00ycJRQlfOydeleAKflPzmYe+8yDUPy
+         vBp/Wib9jSdswxgk991vf7PLSYF61QPTKKsGcHXG1f3qa6k4DLx7TMGQ2h+y9NJeDSSY
+         bEzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784191708; x=1784796508;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=5yev/2pWNLUj4eHfGzFolIDle6s+OQ2A1WFsv3+50nQ=;
+        b=eKwOxi3C0Vdpi6wVpvCu3hqxkNqhOCyGkfLVCiMEIeLQNkZGNH/BLf79H8ajgtzk3/
+         OXks6m4l1Dbe5I8wOscFgaF1/9EODktW/kcYzFDKTtWe6sTpe9PVQ3lDLYk5RQw18hSa
+         qjguaVQhV7Uee/c61tj/LSIC/KnAryyB6DXfvxEdlTt0TG35GKDOBwcnWq3qk7MnDKuf
+         uHQMjp1FExPooQE538h87m/Ml/KcLxWoBuRZChc95HOnDXvGUheFsoPr7XCW9Mi+qZlY
+         n0SZ00BrKx+Eijc9FiZvmxWXL3F4otPW2kMh+SdDMpFJ2JqWYqP4ZV8bJW2RbDegkcb2
+         gIOg==
+X-Gm-Message-State: AOJu0YzoapTChZiyBGV1Q2/jxMwvN7vvOgkVmraAEwxnjLQ0SYZa59A/
+	SwqBzyTfnCMYV0fplNvBcpZMcsmb+X5fMTT3+GjcDWXdZKlEY6vFZcdb/tzFBQ+QXMfB8PKz20g
+	KtTrM+Wb1qyDg/XDW+/V3SbF6ESZPiJwuYzBlAPCfm005RS7SszjyBrmwIxpv6djUzoyv
+X-Gm-Gg: AfdE7cn9Fs9mZ2FXRUKQ7ZbZ8VgABhgnXevhYQCbh5J+bWcvwQ3VOV+dVEr0Hulpmqb
+	zfi3pezBwRYsokZIDnUFYOYT29Atf93ra7Wj2BiiKskqYB3T05W0x26c2ZepmB714U7fXms+zCG
+	N/yzau22R4j7nXbExpajK1ZGbILGmRi6AB8gJXMAyMwSaw0u638Tpzm+guqoGN2cUc9FB/X/3Sn
+	wq8A3N9wysEuIlkGH/FwSNj4NnhHae+A5S1QNNqLqs/q6JiDuM81AcZWR6oyrkCjTJZoPqZAPw3
+	954GGKeANrPRJW5DqBAI+js9SjHpErUUK5GTOtQYsgPMQfwA5QK3fWjGDNfLvqJkAHL2HrnYeGY
+	xOesV
+X-Received: by 2002:a05:622a:14d2:b0:51c:86b:3487 with SMTP id d75a77b69052e-51fc19747c8mr15502291cf.33.1784191707490;
+        Thu, 16 Jul 2026 01:48:27 -0700 (PDT)
+X-Received: by 2002:a05:622a:14d2:b0:51c:86b:3487 with SMTP id d75a77b69052e-51fc19747c8mr15501961cf.33.1784191706942;
+        Thu, 16 Jul 2026 01:48:26 -0700 (PDT)
+Received: from hackbox.lan ([5.12.73.156])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49541e7d21fsm45063715e9.2.2026.07.16.01.48.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Jul 2026 01:48:25 -0700 (PDT)
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Date: Thu, 16 Jul 2026 11:48:16 +0300
+Subject: [PATCH v2] arm64: dts: qcom: eliza-evk: Add support for USB and SD
+ card
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 31/33] mm/vma: use guard clauses in
- can_vma_merge_[before, after]()
-Content-Language: en-US
-To: Lorenzo Stoakes <ljs@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- David Hildenbrand <david@kernel.org>, "Liam R. Howlett"
- <liam@infradead.org>, Mike Rapoport <rppt@kernel.org>,
- Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
- Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>,
- Jann Horn <jannh@google.com>, Lance Yang <lance.yang@linux.dev>,
- Pedro Falcato <pfalcato@suse.de>, Russell King <linux@armlinux.org.uk>,
- Dinh Nguyen <dinguyen@kernel.org>,
- Simon Schuster <schuster.simon@siemens-energy.com>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- Helge Deller <deller@gmx.de>, Alexander Viro <viro@zeniv.linux.org.uk>,
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
- Dan Williams <djbw@kernel.org>, Matthew Wilcox <willy@infradead.org>,
- Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
- Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>,
- Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>,
- Arnaldo Carvalho de Melo <acme@kernel.org>,
- Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
- Adrian Hunter <adrian.hunter@intel.com>, James Clark
- <james.clark@linaro.org>, Zi Yan <ziy@nvidia.com>,
- Baolin Wang <baolin.wang@linux.alibaba.com>, Nico Pache <npache@redhat.com>,
- Ryan Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>,
- Barry Song <baohua@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
- Naoya Horiguchi <nao.horiguchi@gmail.com>, Xu Xin <xu.xin16@zte.com.cn>,
- Chengming Zhou <chengming.zhou@linux.dev>, SJ Park <sj@kernel.org>,
- Matthew Brost <matthew.brost@intel.com>,
- Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
- Byungchul Park <byungchul@sk.com>, Gregory Price <gourry@gourry.net>,
- Ying Huang <ying.huang@linux.alibaba.com>,
- Alistair Popple <apopple@nvidia.com>, Hugh Dickins <hughd@google.com>,
- Peter Xu <peterx@redhat.com>, Kees Cook <kees@kernel.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Robin Murphy <robin.murphy@arm.com>, Andrey Konovalov
- <andreyknvl@gmail.com>, Alexander Potapenko <glider@google.com>,
- Dmitry Vyukov <dvyukov@google.com>, Steven Rostedt <rostedt@goodmis.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Jarkko Sakkinen <jarkko@kernel.org>,
- Dave Hansen <dave.hansen@linux.intel.com>, Thomas Gleixner
- <tglx@kernel.org>, Borislav Petkov <bp@alien8.de>, x86@kernel.org,
- "H. Peter Anvin" <hpa@zytor.com>, Ian Abbott <abbotti@mev.co.uk>,
- H Hartley Sweeten <hsweeten@visionengravers.com>,
- Lucas Stach <l.stach@pengutronix.de>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
- <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
- Thierry Reding <thierry.reding@kernel.org>,
- Mikko Perttunen <mperttunen@nvidia.com>,
- Jonathan Hunter <jonathanh@nvidia.com>,
- Christian Koenig <christian.koenig@amd.com>, Huang Rui <ray.huang@amd.com>,
- Matthew Auld <matthew.auld@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>,
- Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum
- <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>,
- Ankit Agrawal <ankita@nvidia.com>, Alex Williamson <alex@shazbot.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Shakeel Butt <shakeel.butt@linux.dev>,
- Usama Arif <usama.arif@linux.dev>
-Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
- linux-parisc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- nvdimm@lists.linux.dev, linux-perf-users@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, damon@lists.linux.dev,
- iommu@lists.linux.dev, kasan-dev@googlegroups.com,
- linux-sgx@vger.kernel.org, etnaviv@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org,
- kvm@vger.kernel.org, Russell King <linux+etnaviv@armlinux.org.uk>
-References: <20260710-b4-pre-scalable-cow-v2-0-2a5aa403d977@kernel.org>
- <20260710-b4-pre-scalable-cow-v2-31-2a5aa403d977@kernel.org>
-From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
-Autocrypt: addr=vbabka@kernel.org; keydata=
- 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
-In-Reply-To: <20260710-b4-pre-scalable-cow-v2-31-2a5aa403d977@kernel.org>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260716-dts-qcom-eliza-cqs-evk-enable-usb-sdcard-v2-1-e53b1fef5705@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAM+aWGoC/52O0Q6CMAxFf4Xs2RKYMKNP/ofhYWxVpsBk3YhK+
+ HcHmvhumja5ze3tmRihM0jskEzM4WjI2D4KvkmYamR/QTA6asYzLjKxzUB7gkHZDrA1LwlqIMD
+ xBtjLukUIVANpJZ0G3O0KnXOsy1ywGHd3eDaP9dWp+mgK9RWVX/K/DodDiAz+Z2sMeeueK+CYL
+ 9s/WMYcYhWCi9hlti+PligdgmzjdZfGwap5nt9Gg1B+DgEAAA==
+X-Change-ID: 20260630-dts-qcom-eliza-cqs-evk-enable-usb-sdcard-e774d12eb516
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-Mailer: b4 0.15-dev-bc6c4
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3135;
+ i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
+ bh=axHqb1mN2GhgTYXeefA9dpqaSA3EzsSJmCI3ycQRWeU=;
+ b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBqWJrUWmuG08l5FtqV+oL/3ypCP1T2ieZTx3ysP
+ iraP1uKnHKJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCalia1AAKCRAbX0TJAJUV
+ VgaOEAC/2hWPPtlDjkmeK8+fEFGq1z6CCgxzaH3gx1Gh/OvV1H86eZtWQAWRaWwkuJvmh4qEbuw
+ f9KmqpJJW3eLR7DRUE3XF+c3QMscMvChO4Vv7VaaxOxKvKXYVB2WQBZFBa5y0khyGhp3BzF4EqB
+ mrjAHObbSbSlvLHWyb/Cv3yvBBMc30UcmabGA5rx5zHYUSKmJSrGdjt9mp3i8uTf4MeNarf2USq
+ LYP0IHfFi86pNMtWkntCdjagVHmwzaLIQE4W1APSQe7MozZ2mx0HNn3J8br+pOkyGZEn/riVcvq
+ mwaqYyOS6M2Wfo1UryD4IthUKDtgIJV5YscBFkdsQebgTnNJXMatWlphbrsbzJa7dVTZXQPbR4b
+ JDeVfxQ9/6hpZNFMvFwhmHe/Ng5Qvlwb0nSH8JOyLYlhaLNJZjms0mfzaNKNiweyChBRwAE2EXp
+ 1lCQFTy3o8mw90ZEzwSiqhQsN7R4CVXZRpkVrBUhk22RTv2aONdtvAFdeGgg3shyPxDfIGkvMVw
+ 56eX9UryVZACpC9KggWGDvPCsvVH2D1tdxD3VP+7TaBjLM+jq3EWGAyH9Aa+Vrqb42KsCJ2AaHj
+ FUMwzsp8yx6mi1+cM7qjtSj4OvTkaRmX64PlRQTEPYR9RnlJsKmT9Q9z9oDlQpdJ//ed1tUDq06
+ 8DTI4xS+bLFNtjw==
+X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
+ fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDA5MCBTYWx0ZWRfX3IKrq1nnftS7
+ O2aY56u4DiChkzb3fqsMaeSp5V6QzyM7nfnJsf0J/sqFf5CvOa/iNqwSrDxMUCE4IDdkqwZxXr9
+ JDDUyJfRMv7+SicjiRyX8VH+bnadPYs=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDA5MCBTYWx0ZWRfXwp/CiS1nU9iL
+ 7w2pmSDJiEvnoujpkowoktfTl4KMYAE5BwPiLuk/sMCkysE8r0wujy/GDDZ/s5qIldltpDg4hpq
+ N/NS8CIfGcrfS+AWIGDq2TEPBZiuJNCAGCGeJAUVC1YyFALNwMwH4wPOM9ishdhSS6/GpREthA/
+ TI6p/Sq59hnFms9Sa6CF1+S1vp+hA4boc5wdcG+UBBYjSopLg4t99VKF9aKWjrYAdTYwJYHPnms
+ kdVJ4Z0lReqOUa35fgnGNahONXd51O6eQ6fXqh1LOFEqhI2TNtJfVKND/6sUE62dYJ0r3WhOC/1
+ TMDkPX/XvIBkSKbwFOnVBaZeiVfFztfUD2N3j0CSHpkbm+IlDXFS8g1kpOz8YoYy6CuAduW3QKX
+ VvMuTNHncpplKVmRfUVu0jE803xwvJXZtyTIUPpsRfFuXDMFkJAkOgG6mHFzcJEJVzyVfRwQl28
+ adTjhqLTFPsYlVyif6g==
+X-Proofpoint-ORIG-GUID: xvsDyuJ2yZBsSvKgIkGtukNtOVGP-avI
+X-Authority-Analysis: v=2.4 cv=Lt2iDHdc c=1 sm=1 tr=0 ts=6a589adc cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=qUYP/O48JsHWwiZSxXr1NQ==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=BsmgAWSu4p_AeSiVXQUA:9 a=QEXdDO2ut3YA:10
+ a=dawVfQjAaf238kedN5IG:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-GUID: xvsDyuJ2yZBsSvKgIkGtukNtOVGP-avI
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-16_03,2026-07-15_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 impostorscore=0 lowpriorityscore=0 priorityscore=1501
+ malwarescore=0 adultscore=0 spamscore=0 suspectscore=0 clxscore=1015
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607160090
 
-On 7/10/26 22:17, Lorenzo Stoakes wrote:
-> Rather than combining a bunch of conditionals in a single expression,
-> simplify by inverting the mergeability requirements into guard clauses.
-> 
-> that is - instead of checking what must be true for the conditions to be
-> met, instead check the inverse of the requirements and return false if any
-> are true, defaulting to true.
-> 
-> No functional change intended.
-> 
-> Reviewed-by: Pedro Falcato <pfalcato@suse.de>
-> Reviewed-by: Gregory Price <gourry@gourry.net>
-> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
+Even though the EVK comes with 3 Type-C ports, the Eliza EVK only has
+one USB controller and a single set of PHYs, which are connected to
+the port marked as JUSB.
 
-Reviewed-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
+Also, the EVK comes with an SD card slot.
+
+So describe the PMIC GLINK node, the connector graph, the PHYs and repeater
+supplies and enable the USB controller.
+
+Also enable the second SD host controller, describe the card detect GPIO
+and the board specific supplies.
+
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+---
+Changes in v2:
+- Rebased on next-20260715.
+- Picked up Konrad's R-b tag.
+- Link to v1: https://patch.msgid.link/20260630-dts-qcom-eliza-cqs-evk-enable-usb-sdcard-v1-1-146264625095@oss.qualcomm.com
+---
+ arch/arm64/boot/dts/qcom/eliza-evk.dtsi | 92 +++++++++++++++++++++++++++++++++
+ 1 file changed, 92 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/eliza-evk.dtsi b/arch/arm64/boot/dts/qcom/eliza-evk.dtsi
+index e47b24f8b827..2fc945658300 100644
+--- a/arch/arm64/boot/dts/qcom/eliza-evk.dtsi
++++ b/arch/arm64/boot/dts/qcom/eliza-evk.dtsi
+@@ -11,6 +11,70 @@ aliases {
+ 	chosen {
+ 		stdout-path = "serial0:115200n8";
+ 	};
++
++	pmic-glink {
++		compatible = "qcom,eliza-pmic-glink",
++			     "qcom,sm8550-pmic-glink",
++			     "qcom,pmic-glink";
++		#address-cells = <1>;
++		#size-cells = <0>;
++		orientation-gpios = <&tlmm 122 GPIO_ACTIVE_HIGH>;
++
++		connector@0 {
++			compatible = "usb-c-connector";
++			reg = <0>;
++
++			power-role = "dual";
++			data-role = "dual";
++
++			ports {
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				port@0 {
++					reg = <0>;
++
++					pmic_glink_hs_in: endpoint {
++						remote-endpoint = <&usb_dwc3_hs>;
++					};
++				};
++
++				port@1 {
++					reg = <1>;
++
++					pmic_glink_ss_in: endpoint {
++						remote-endpoint = <&usb_dp_qmpphy_out>;
++					};
++				};
++			};
++		};
++	};
++};
++
++&pm7550ba_eusb2_repeater {
++	vdd18-supply = <&vreg_l7b>;
++	vdd3-supply = <&vreg_l17b>;
++};
++
++&sdhc_2 {
++	vmmc-supply = <&vreg_l13b>;
++	vqmmc-supply = <&vreg_l23b>;
++
++	cd-gpios = <&tlmm 58 GPIO_ACTIVE_LOW>;
++
++	pinctrl-0 = <&sdc2_default>, <&sd_cd>;
++	pinctrl-1 = <&sdc2_sleep>, <&sd_cd>;
++	pinctrl-names = "default", "sleep";
++
++	status = "okay";
++};
++
++&tlmm {
++	sd_cd: sd-cd-state {
++		pins = "gpio58";
++		function = "gpio";
++		bias-pull-up;
++	};
+ };
+ 
+ &uart13 {
+@@ -18,3 +82,31 @@ &uart13 {
+ 
+ 	status = "okay";
+ };
++
++&usb {
++	status = "okay";
++};
++
++&usb_dp_qmpphy {
++	vdda-phy-supply = <&vreg_l3g>;
++	vdda-pll-supply = <&vreg_l7k>;
++
++	status = "okay";
++};
++
++&usb_dp_qmpphy_out {
++	remote-endpoint = <&pmic_glink_ss_in>;
++};
++
++&usb_dwc3_hs {
++	remote-endpoint = <&pmic_glink_hs_in>;
++};
++
++&usb_hsphy {
++	vdd-supply = <&vreg_l7k>;
++	vdda12-supply = <&vreg_l4b>;
++
++	phys = <&pm7550ba_eusb2_repeater>;
++
++	status = "okay";
++};
+
+---
+base-commit: b8809969e1d7a591e0f49dd464a5d04b3cf02ab1
+change-id: 20260630-dts-qcom-eliza-cqs-evk-enable-usb-sdcard-e774d12eb516
+
+Best regards,
+--  
+Abel Vesa <abel.vesa@oss.qualcomm.com>
 
