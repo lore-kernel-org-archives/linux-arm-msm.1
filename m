@@ -1,91 +1,124 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 511AB351C28;
-	Thu, 16 Jul 2026 19:42:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3E442F546D;
+	Thu, 16 Jul 2026 19:51:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784230958; cv=none; b=s+Yrx1xfoPvPhUtPSV9sDc6ASosUZyLkyeuieClNN+S7osCeU6P7IIwa/2ZoMwOu1tq9W3Ot5rIUT2fxtah6h38zsrLRJG8ZZr+8/nRB6PxWyQ/lQ6kCwY8v0/I30aZGvJjkXqLQ68l3xxBcFh95ogV2KzuXNnsv3YK97vxvrVk=
+	t=1784231496; cv=none; b=Ed+733WmuKo51lkAzu1QXbAI2+Ikzpg07OxhQfzwioAgEc1lownkVkhXHDgnzuIr0UTqiQv0540MBX2d5CUoRTaoQ2s1/B+JNnD0irxTJudLY7Zt3Va9LBeH02+Palh5fvjXggatl4BAruLByy0MhI9NqIqs8Y+1S8CYwuzYRcM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784230958; c=relaxed/simple;
-	bh=Ig+GsN0kMZ05cJ4o3ugakK8qv+geJHudqh6YgXHniOg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=aKup+n8BzicQaKIlFgg3eghOlxjzjXLP704KAC3zIHHdnr9g7Z3R2BrTEILNAml6SFeSwikkIaTi3mkZe9S8egMRzdTVQkjQ53XeCyWVBDpDAJa80UbbgLoJExeqBHsipr/bS0j1EIYWzFf5h3tnHqyhJxjIlEj+Cx64FQWirZM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WHHnrgri; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784231496; c=relaxed/simple;
+	bh=G4bnGmOO5plEsBfAujTOmpUkEStvPYgl6gKTH4QdAro=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=ISvCIl8u6shSEobH+9CaFEzsgR6DJNRlxLSpExJQgk9bf7PSppT5zh0S+DbEgNk6VqW8erNuRINGYAC8qWjF2rS/0bp4r63MW+qQBIMynh4K1KH0TnOxnRZQFJeNR9j7OjTEaJTZtI+L35S6XfGpCIrgBjeyCcQEUTxtW+AsaAI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OrMbzcrm; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WHHnrgri"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A51D21F000E9;
-	Thu, 16 Jul 2026 19:42:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784230956;
-	bh=usR4FsGWwyujnpLuckLUoYL0cDU6hXmHk5b1uovpKno=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=WHHnrgriO+KrWCsVg+TwAvkOfNWs/YkXkGQ1U3xxZ9mhjMX3Lr0Grm7vAzXVHIJn9
-	 ctA9QM3HGp2Ze1NRWtDy+wSs4UuXRVpkGjl53T2V9mNgDburjmXXR24tRt7uTBUPcZ
-	 gvfyaboifn0XGp/WKn7chqa5qTHjN/l/ohrNaoCX8v1PPDHA27mbyj3jg0NA9n1W5r
-	 V6FqBhqa44TF2LcNoN0AlORsEzAkH2F6DUDbbVsbisfdmubF9TrArc3v/RikOrhMsQ
-	 c3OZAX2Pcba9r7LV5Ibx4dxMN7aD1XwfuHYJK2o3rEXm01PWu3oy44quzApuD+uemy
-	 elvvQxD+O5t8g==
-Date: Thu, 16 Jul 2026 14:42:36 -0500
-From: "Rob Herring (Arm)" <robh@kernel.org>
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Andrew Lunn <andrew@lunn.ch>, Bjorn Andersson <andersson@kernel.org>,
-	linux-wireless@vger.kernel.org,
-	Johannes Berg <johannes@sipsolutions.net>, daniel@makrotopia.org,
-	linux-block@vger.kernel.org, linux-mmc@vger.kernel.org,
-	Paolo Abeni <pabeni@redhat.com>, Eric Dumazet <edumazet@google.com>,
-	Conor Dooley <conor+dt@kernel.org>, netdev@vger.kernel.org,
-	Balakrishna Godavarthi <quic_bgodavar@quicinc.com>,
-	Simon Horman <horms@kernel.org>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
-	Marcel Holtmann <marcel@holtmann.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Russell King <linux@armlinux.org.uk>, Jens Axboe <axboe@kernel.dk>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Jeff Johnson <jjohnson@kernel.org>,
-	"David S. Miller" <davem@davemloft.net>,
-	Saravana Kannan <saravanak@kernel.org>,
-	linux-bluetooth@vger.kernel.org,
-	Rocky Liao <quic_rjliao@quicinc.com>,
-	Christian Marangi <ansuelsmth@gmail.com>,
-	Ulf Hansson <ulfh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Heiner Kallweit <hkallweit1@gmail.com>, devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	ath10k@lists.infradead.org, Jakub Kicinski <kuba@kernel.org>
-Subject: Re: [PATCH v8 1/9] dt-bindings: mmc: Document fixed-layout NVMEM
- provider support
-Message-ID: <178423095566.1177840.10999909737617285520.robh@kernel.org>
-References: <20260703-block-as-nvmem-v8-0-98ae32bfc49a@oss.qualcomm.com>
- <20260703-block-as-nvmem-v8-1-98ae32bfc49a@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OrMbzcrm"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id A4D34C2BCC7;
+	Thu, 16 Jul 2026 19:51:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1784231495;
+	bh=G4bnGmOO5plEsBfAujTOmpUkEStvPYgl6gKTH4QdAro=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=OrMbzcrm03GAuul9UD6cBF28DHbmPnBkxWaJioLgXIRjUy9fLYUUwdJ17X21CXIFS
+	 C/BzKTVj3Jn1+8dW88rTjis9pOfe6mYv3O9zjncQ1RmNRb1Ox1RPF3jxEGD8Bur/PG
+	 k3I2oSLqeRvjVAijiG5KIKJD8/kgA6zE6jy06Df46IT0TCzj5XXKaD7ccoDquTNqgK
+	 rOl3Y97G8bxxyTpFYV+3gp/rivhNi4XM1xAlWDvLDY+Fdx30jHhMwUNHU0duB9D43t
+	 G755pRZxG/gAznH/I8rrt2UxNlD4olBUnJUGVA+HRU7PfVBhO8l2lg+4yMAmXdQS8a
+	 3vy17ZqVmX3fA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 89A06C44514;
+	Thu, 16 Jul 2026 19:51:35 +0000 (UTC)
+From: Sarath Ganapathiraju via B4 Relay <devnull+sarath.ganapathiraju.oss.qualcomm.com@kernel.org>
+Date: Fri, 17 Jul 2026 01:21:16 +0530
+Subject: [PATCH v2 2/3] ASoC: dt-bindings: qcom,lpass-va-macro: Add hawi
+ heartbeatpulse clock
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260703-block-as-nvmem-v8-1-98ae32bfc49a@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260717-master-v2-2-ae200627ad62@oss.qualcomm.com>
+References: <20260717-master-v2-0-ae200627ad62@oss.qualcomm.com>
+In-Reply-To: <20260717-master-v2-0-ae200627ad62@oss.qualcomm.com>
+To: Srinivas Kandagatla <srini@kernel.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>
+Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, 
+ linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ prasad.kumpatla@oss.qualcomm.com, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784231493; l=1568;
+ i=sarath.ganapathiraju@oss.qualcomm.com; s=default;
+ h=from:subject:message-id;
+ bh=wmQ8OjdIV+ggh2217ROVouCyWwoJQ4NDy6vn2YVHcG0=;
+ b=yySkd+ybybOOPR+Mp3EHCeg9BsMlxA9Lg/+eMnDvleD0k2A+Ak8sH8VWTcrKuk48lLIU1enCw
+ lEJ1RMVlw7eAKE6m79Q6W0dH7yhvTqQLyugQGM6q05LDZg8MSL0gjZJ
+X-Developer-Key: i=sarath.ganapathiraju@oss.qualcomm.com; a=ed25519;
+ pk=4p2FWGXM+F2sir13Lu5stw5aKX5trUymK/ttESvgxQg=
+X-Endpoint-Received: by B4 Relay for
+ sarath.ganapathiraju@oss.qualcomm.com/default with auth_id=870
+X-Original-From: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
+Reply-To: sarath.ganapathiraju@oss.qualcomm.com
 
+From: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
 
-On Fri, 03 Jul 2026 15:45:14 +0200, Loic Poulain wrote:
-> Allow an eMMC hardware partition node to describe an NVMEM layout so the
-> partition can be exposed as an NVMEM provider. This lets a partition
-> (e.g. an eMMC boot partition) store device-specific information such as a
-> WiFi MAC address or a Bluetooth BD address and reference it through NVMEM
-> cells.
-> 
-> Accept "fixed-layout" as the partition node compatible, in addition to
-> "fixed-partitions", so the layout can be described directly on the
-> partition node.
-> 
-> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-> ---
->  .../devicetree/bindings/mmc/mmc-card.yaml          | 23 +++++++++++++++++++++-
->  1 file changed, 22 insertions(+), 1 deletion(-)
-> 
+Extend the qcom,lpass-va-macro to add the qcom,hawi-lpass-va-macro
+compatible, which consumes an additional heartbeatpulse clock
+alongside its existing mclk, macro, and dcodec clocks, for a total
+four-clock constraint.
 
-Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
+Signed-off-by: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
+---
+ .../devicetree/bindings/sound/qcom,lpass-va-macro.yaml | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+diff --git a/Documentation/devicetree/bindings/sound/qcom,lpass-va-macro.yaml b/Documentation/devicetree/bindings/sound/qcom,lpass-va-macro.yaml
+index aea31fbdad..ae4df89678 100644
+--- a/Documentation/devicetree/bindings/sound/qcom,lpass-va-macro.yaml
++++ b/Documentation/devicetree/bindings/sound/qcom,lpass-va-macro.yaml
+@@ -19,6 +19,7 @@ properties:
+           - qcom,sm8450-lpass-va-macro
+           - qcom,sm8550-lpass-va-macro
+           - qcom,sc8280xp-lpass-va-macro
++          - qcom,hawi-lpass-va-macro
+       - items:
+           - enum:
+               - qcom,eliza-lpass-va-macro
+@@ -168,6 +169,23 @@ allOf:
+             - const: macro
+             - const: dcodec
+ 
++  - if:
++      properties:
++        compatible:
++          contains:
++            const: qcom,hawi-lpass-va-macro
++    then:
++      properties:
++        clocks:
++          minItems: 4
++          maxItems: 4
++        clock-names:
++          items:
++            - const: mclk
++            - const: macro
++            - const: dcodec
++            - const: heartbeatpulse
++
+ unevaluatedProperties: false
+ 
+ examples:
+
+-- 
+2.34.1
+
 
