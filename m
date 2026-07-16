@@ -1,66 +1,33 @@
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1356741F34D
-	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 12:52:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.51
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0444C422551;
+	Thu, 16 Jul 2026 13:09:39 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784206334; cv=none; b=ARldQmSNCj9n8ocMMP/qrc/D2urZQ1h0pcESN0G0kGAeQxDnObRP9mddOzwJNH6fLieg79AUguY3jARjNdWpFc5FqmfmqfMkr7AEU6bUdzSvro74iDt+ePqYQP81P+r3VON1TggWnmn65VKBFlkomhBD6MK20Eqh7TBmkP4MEzA=
+	t=1784207382; cv=none; b=T/c2RZKtXu4EIWyrjtvNsFsEcFBe0HyJbimxUqmDv9kRLKtR6KlaTjImzVZB1hGFaib/ZyBJVjb3HiMGvzgHTc8L4GwOBxfUTLoGQYDR2l9MTKowJgnZBg0MQLbAdc8rw8AkLKQNKNfgam1Etdmehbw1H/n6ChgCpOHVbvsISK0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784206334; c=relaxed/simple;
-	bh=vAA8pxZ5/QO9WJwQ0ohnXcdfj+/EDTgsdWHMG8PbNak=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=TC4DrcW7V/Atjx3XKA99L0svqPbhM0/2+mR6BY5WF785QaPR42B0HRmH92iyDzhZZSfOohihYGQZDJito4Gy5/mrT53RqL/WYyoOhF5uSEkQd5uZhbh2I8E7Rs0dn7f5RMQ7JhPDNlvtIpfvlq0lIpbIJIzllFDXGXeWsZOjFKw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=PsWZshiS; arc=none smtp.client-ip=209.85.221.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1784207382; c=relaxed/simple;
+	bh=XhpvexryAh1HFBU8MAXPYUlkIzW12Wg+/TI9/A+/jM8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:References:From:
+	 In-Reply-To:Content-Type; b=SJPPwzJIE3mnFqIunp8oAziL4vVr3TmvFbBFOP7Si0wEg/kw8oiwdUf0sHEZi4WskRdf7kLOjXd1hWzq+luohyJYrJfEB17ZTymTtcd0f8J1Nzl+XZX1advAu1wnVqk8CXeQbxT1X3ZTt9SOPr7GG/FfPYKjcLVXkIVtsHFLu+o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=eatQ5NIf; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="PsWZshiS"
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-47f365afc5aso2741847f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 05:52:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1784206331; x=1784811131; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=CL1+h+Sv7ciDTM5rA1EiT5WxOx+c/keG9qg756/bbt0=;
-        b=PsWZshiSjWBZHHBj5BSL8W61Ht8s9oLWMvGafStEr1/tOZeOa6lWeg+2wsg2DSSHuW
-         +AZTZ5uzuJb5RkoYARw2PL5xmBuG1UmPf9GX8QvxOKCA3pBtY8GQ+x/eyOk6cLpTavXz
-         N3GTD4zZgVpSZ8AzxXCKmlAunxXmYR/DDIYSqgihyYEbc1wBIXAp45CvOFOyO7bKA6V/
-         CYxxCv6hv8hcUJcJ0TyYRvmsMeEzqU1Ok63GIh/nrzy5rXoS4+9ZbopDkAxtlhroZeQs
-         tRWCe1knq5C19+aA52QCp/GPNJgffgIluQP8/9gip9RaLlOv88dIVWluhJ5yWMTQQC6A
-         5VFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784206331; x=1784811131;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=CL1+h+Sv7ciDTM5rA1EiT5WxOx+c/keG9qg756/bbt0=;
-        b=cIgtpwKmWuCVBPEcX9WgQIBPaLPZbdxl46DBPWZIanjlo5zSdvMKHNRlt1t/aJmlp0
-         0DQsRGMAUPmFZZ4mrsXqc0afGfs8+3s6bocNynH2/o7I1Ysb2e085LJBxVMZRpuF/nJY
-         iiEQUBTN27pGTb90YQfMMGFmxQ/mMt5TIsqk1afgqINoGzXMFW7+REdZM7m7fpWC3Dq2
-         lrDrclUtkCXNMrQlVF6jVosh7LhWeQnXI8rdBLy0WUV3wduJoFNqKrv1h5fSjHly5aOp
-         kcz/pIkS0h9OW8d6qAMTT/I1LLX+/VI2Tuf+5X0eiraLJh/VtctsTWNzMGGOURuMkPH/
-         VqAA==
-X-Forwarded-Encrypted: i=1; AHgh+Rr6wUADiINq327PGZ1qHDQz2DPqE1eF7hFWqxNs+6yCMKbgIVKBXDxYggZuf3/jdKa9tYTK2NpFT4NwPWgQ@vger.kernel.org
-X-Gm-Message-State: AOJu0Yws5pG1kQbo9W59flGTMMUiO+u3fdgOJ13djztVvYEJpaYHel/g
-	y4dFxQjWIBnHDnlwkj42kisXcWaFk+xjdoy45sLn+dxpm7MnDgs1p1khEd8lmZ4/tdE=
-X-Gm-Gg: AfdE7cku/OEv8bKmU2XGqPw/MSgIEPDEDwhdUYElmdJJ2ZRUt8twBJNpAW/1kOBJVsY
-	bDolqpyBDaThqY8FIzjT7v3A8dAi16FfWaJUETN7GsuXRRvdRQRnOsSlDteP6ft7UTA5+DN2KJL
-	EOZUzpa2DULOas3aUTCbj0ekqRQv7E1jlIsriiRLUJ/NAC7jc1oI5YyKYL+aQbUtAwscrQYKw54
-	NuYoBx1jwEbLYouo9p8x8l79ii6MoYl4x9y5AyS8n2x1d4NkyrCAr6pnS2Gs0PjXi0R4sJ2rHfd
-	QRGfGddNfoCGdeZakiekCOvBy2Hl7SuQfEc5iRXZ12GeIOFjV3z2X/LnaXc/Nn6q9sQqZdl+Tj8
-	NOro+2sByxE9esD1BOdg4JN0n8DTc+3JLVzx+kRRo/N/CSwBHS6n6iD4kBbIOt71z1s8gduoUyL
-	LgeCd+awC+H7cbjw==
-X-Received: by 2002:a05:6000:4b19:b0:47f:56f7:7a57 with SMTP id ffacd0b85a97d-47f56f77d04mr3955700f8f.28.1784206331245;
-        Thu, 16 Jul 2026 05:52:11 -0700 (PDT)
-Received: from [192.168.0.101] ([109.77.36.131])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f464a9879sm25433837f8f.22.2026.07.16.05.52.10
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 16 Jul 2026 05:52:10 -0700 (PDT)
-Message-ID: <c6015615-278b-4840-a79a-9c7520141341@linaro.org>
-Date: Thu, 16 Jul 2026 13:52:09 +0100
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="eatQ5NIf"
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 08D731476;
+	Thu, 16 Jul 2026 06:09:35 -0700 (PDT)
+Received: from [10.2.212.23] (e121345-lin.cambridge.arm.com [10.2.212.23])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A1EE03F905;
+	Thu, 16 Jul 2026 06:09:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1784207379; bh=XhpvexryAh1HFBU8MAXPYUlkIzW12Wg+/TI9/A+/jM8=;
+	h=Date:Subject:To:References:From:In-Reply-To:From;
+	b=eatQ5NIfTjWDJY8nZuTno5h2B6yKkgBeiKhNZ0hSekJs/WYcshz1H3ItRnLcVIFXt
+	 anMYbp+Y7cGDwuvLwLw6d/WLX1MlcjX0TqJUx5FIh0q6cIcZ/h2JgULhYueqEZ7Kkm
+	 59MDXcuqCQiujxDcXxi1WNvMb1qpByQZjih8NJB4=
+Message-ID: <38a1a39d-b72e-4433-815e-a01c691c0249@arm.com>
+Date: Thu, 16 Jul 2026 14:09:36 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -68,48 +35,89 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 1/2] dt-bindings: phy: qcom: Add CSI2 C-PHY/DPHY schema
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Bryan O'Donoghue <bod@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Vinod Koul <vkoul@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, linux-arm-msm@vger.kernel.org,
- linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260708-x1e-csi2-phy-v9-0-0210b90c04cf@linaro.org>
- <20260708-x1e-csi2-phy-v9-1-0210b90c04cf@linaro.org>
- <YSunV_lNJ8xW_y-Aa2psZavniF6mcHJlJipuj1RYWMB8Zb8yLC-gb7eEnk0XMjfwQOneMGsZM5foFKutCNhYqw==@protonmail.internalid>
- <b7baffda-b97c-4b83-8d9e-e381d0289682@linaro.org>
- <3ab676ac-919b-4a80-8dd6-71dd7f6fe06c@kernel.org>
- <-iN0mG5nS2joxEn49UrxFlORE3R6Ji3HRebfOMNMGnupMIobTBdRDvnwjRHAXHeLmGf6O4JJENVauduwZXwhiA==@protonmail.internalid>
- <b834e9a0-a61c-4912-b57c-36d571938b75@linaro.org>
- <4d7a0e59-7c34-4557-a475-8cd7fd2ad2d9@kernel.org>
- <CAFEp6-2J0WGF6g0K7s--PxciO+d9MR-SCVnrWJ3u=sgQNwA59A@mail.gmail.com>
- <c731b03e-b550-48af-b338-37ac53018247@linaro.org>
- <CAFEp6-3U66hvi0iZrtRbyY3B-uwEap6xDFHFkVoaEBwWhV74Uw@mail.gmail.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Subject: Re: [PATCH] iommu: arm: Remove redundant dev_err()/dev_err_probe()
+To: Pan Chuang <panchuang@vivo.com>, Will Deacon <will@kernel.org>,
+ "Joerg Roedel (AMD)" <joro@8bytes.org>,
+ Rob Clark <robin.clark@oss.qualcomm.com>, Joerg Roedel
+ <joerg.roedel@amd.com>, Kevin Tian <kevin.tian@intel.com>,
+ Jason Gunthorpe <jgg@ziepe.ca>, Nicolin Chen <nicolinc@nvidia.com>,
+ Kees Cook <kees@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
+ "moderated list:ARM SMMU DRIVERS" <linux-arm-kernel@lists.infradead.org>,
+ "open list:IOMMU SUBSYSTEM" <iommu@lists.linux.dev>,
+ open list <linux-kernel@vger.kernel.org>,
+ "open list:QUALCOMM IOMMU" <linux-arm-msm@vger.kernel.org>
+References: <20260714133246.575556-1-panchuang@vivo.com>
+From: Robin Murphy <robin.murphy@arm.com>
 Content-Language: en-GB
-In-Reply-To: <CAFEp6-3U66hvi0iZrtRbyY3B-uwEap6xDFHFkVoaEBwWhV74Uw@mail.gmail.com>
+In-Reply-To: <20260714133246.575556-1-panchuang@vivo.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 16/07/2026 12:28, Loic Poulain wrote:
->> I just wonder if there's any real upside to all that additional work and
->> delay/churn.
-> There is no really need to support runtime configuration as of now
-> since we only support D-PHY, so the delta for v10*should* be tiny,
-> either a bus-type sanity read in parse_routing(), or even nothing at
-> DT parse and a future configure() branch when C-PHY lands.
+On 14/07/2026 2:32 pm, Pan Chuang wrote:
+> Since commit 55b48e23f5c4 ("genirq/devres: Add error handling in
+> devm_request_*_irq()"), devm_request_irq() and devm_request_threaded_irq()
+> automatically log detailed error messages on failure. Remove
+> the now-redundant driver-specific dev_err() and dev_err_probe() calls.
 
-Right, well I tend to agree that a runtime configure() is out of scope, 
-so, I'm going to stick to Rob's guidance.
+FWIW, the arm-smmu messages do provide contextual information about 
+precisely *which* IRQ in SMMU terms was at fault, which generic code 
+cannot do - the context/global index gives the developer enough to go 
+and directly check the relevant DT/ACPI entry, without first having to 
+figure out what hardware resource the Linux vIRQ number represents. 
+However I do concur that the generic code is now more than enough for 
+the general "something is terribly wrong" case, and beyond that we 
+really don't need to optimise Linux for people writing bad firmware...
 
-If you look at other upstream stuff you will see phy-cells = 0 for 
-single mode PHYs and phy-cells = 1 for PHYs that can be in any mode.
+Reviewed-by: Robin Murphy <robin.murphy@arm.com>
 
-Consumer configures the mode in DT like every other upstream MIPI CSI2 PHY.
+> Signed-off-by: Pan Chuang <panchuang@vivo.com>
+> ---
+>   drivers/iommu/arm/arm-smmu/arm-smmu.c   | 9 ++-------
+>   drivers/iommu/arm/arm-smmu/qcom_iommu.c | 4 +---
+>   2 files changed, 3 insertions(+), 10 deletions(-)
+> 
+> diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu.c b/drivers/iommu/arm/arm-smmu/arm-smmu.c
+> index 0bd21d206eb3..889a0966d36c 100644
+> --- a/drivers/iommu/arm/arm-smmu/arm-smmu.c
+> +++ b/drivers/iommu/arm/arm-smmu/arm-smmu.c
+> @@ -865,11 +865,8 @@ static int arm_smmu_init_domain_context(struct arm_smmu_domain *smmu_domain,
+>   		ret = devm_request_irq(smmu->dev, irq, context_fault, IRQF_SHARED,
+>   				       "arm-smmu-context-fault", smmu_domain);
+>   
+> -	if (ret < 0) {
+> -		dev_err(smmu->dev, "failed to request context IRQ %d (%u)\n",
+> -			cfg->irptndx, irq);
+> +	if (ret < 0)
+>   		cfg->irptndx = ARM_SMMU_INVALID_IRPTNDX;
+> -	}
+>   
+>   	mutex_unlock(&smmu_domain->init_mutex);
+>   
+> @@ -2219,9 +2216,7 @@ static int arm_smmu_device_probe(struct platform_device *pdev)
+>   		err = devm_request_irq(dev, irq, global_fault, IRQF_SHARED,
+>   				       "arm-smmu global fault", smmu);
+>   		if (err)
+> -			return dev_err_probe(dev, err,
+> -					"failed to request global IRQ %d (%u)\n",
+> -					i, irq);
+> +			return err;
+>   	}
+>   
+>   	platform_set_drvdata(pdev, smmu);
+> diff --git a/drivers/iommu/arm/arm-smmu/qcom_iommu.c b/drivers/iommu/arm/arm-smmu/qcom_iommu.c
+> index a1e8cf29f594..2b57262b076f 100644
+> --- a/drivers/iommu/arm/arm-smmu/qcom_iommu.c
+> +++ b/drivers/iommu/arm/arm-smmu/qcom_iommu.c
+> @@ -712,10 +712,8 @@ static int qcom_iommu_ctx_probe(struct platform_device *pdev)
+>   			       IRQF_SHARED,
+>   			       "qcom-iommu-fault",
+>   			       ctx);
+> -	if (ret) {
+> -		dev_err(dev, "failed to request IRQ %u\n", irq);
+> +	if (ret)
+>   		return ret;
+> -	}
+>   
+>   	ret = get_asid(dev->of_node);
+>   	if (ret < 0) {
 
----
-bod
