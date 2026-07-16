@@ -1,67 +1,87 @@
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFEE83A7F6D
-	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 09:42:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE2513CDBD3
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 09:42:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784194947; cv=none; b=O8Sr/kEPli4w7kQGaghl9c94taZaylWIBdhnoSIklRm35XhLrRWCpDKlXVoofmZQojyWiUo9gRDlcucF1PlFOWhP9jfEWkZcuyk/YgsmnWCOwm+83rHMgDIHrC9XzmrPCcvL/5qaE987D6+KjAUiOVXCgHS23blb53uSDlwqwoI=
+	t=1784194968; cv=none; b=QC8Gnb8m0AwhC1AXbrlh3QVvjPMAOAgaptDg+wooS5qv+PNPUgqWKpstV6a5GbJYBZE6MYrqvE4cbTfNd0SOza2iAADzw8g5ofno2M9LDo3EAJNzS80JMs/wxESvPk6a0H6bYCuh97eVClQiFPeVaCDHWLWUsY40RgLAOkk6ejA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784194947; c=relaxed/simple;
-	bh=39XAndTQmo1NBabNFph+WMyYTOzWodq39/QO5d975ec=;
+	s=arc-20240116; t=1784194968; c=relaxed/simple;
+	bh=5HkbT5VTjQEbCphRnfj+qtVR3I6tfp3ysrSh9PXdd8g=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Kp0BXtMEZscxkvWY5iUXncm4VRv+dDncm8qS0FysEa1lodSTBgSUMcT7GTl6q7Y7Dyxe2TQH+s2TFWYH6BW7bEezUwlhfpYT3uN7YHo+ad/iG5qHqJzW1Mk5cwJgmLvwWW+hCU93wtOYgHJM7GlNdNvIGXshoNxCV/+1ZPVkGRA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=wVnzoGim; arc=none smtp.client-ip=209.85.208.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	 In-Reply-To:Content-Type; b=FIWIKM4Z39pW02PHd3D66Af8GgOu4AONvM0qlOii93pTqmBtGp66XQXFSoz5aaPH+jJdSaQJkEr5bmncrathufHWrzuThYBfffFynzj83rzzi29yZmvhhTs35OJHsQJmjyG7cFatMaM4tH8RGmo5gNKW+7G9ER4n5xZBmSv71mU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=HaDXCFgl; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bi5rqSQX; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="wVnzoGim"
-Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-69c600f76ccso5103671a12.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 02:42:24 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="HaDXCFgl";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bi5rqSQX"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66G9MjlU2187973
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 09:42:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	HzsM35EiZJ/yzPPIs0XjKw5tRsijyewrzXg6CrcCnPo=; b=HaDXCFglMZs0ti8S
+	pzu3gBUeeawMCDZsYTLiTxpDkYKE9KNf+CRRt9U1jbC8Fb/hQYixA8KGO7puSrsS
+	7ljMkbD2umyqmI97nEHvFoMZZ4wdLNRNQ0DtSqg/lZWVq8TYBp0FweIWkAmeCSNC
+	tjLLDpCvEKHKaCfNFRSlStd/xTDo0kfdu9B+TGGSCq1/tNXthCMFKlIziL22xBHs
+	quYjWGBaIyx9hqWsE6lJq+2lAv8P86Y81cojjd1XLeG2U0XqOUBDtgZ6PuXOeRpD
+	b766iclZDEZkSd6cjegBOWvS/Pv+AIbD7X41mO+NV+elMXqkA6iyNGXDTWXDqvar
+	C9OlzA==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fevkv02v6-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 09:42:45 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-92e4ecd1ae4so106213485a.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 02:42:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1784194943; x=1784799743; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784194965; x=1784799765; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=rWQ9oJo6FYvzxfcIJtWdNxYH0ur72y3xrCIEL4tMOu8=;
-        b=wVnzoGimyIuFYJpQ+bs41iY0dB9gOxUSZbBh97G0xWGZpgKyYvQy3vWv2r+gnFwudb
-         VM1UPrkQYTKCGp5f/2lLd/gHL8ZVziQ3lDhMwpxTsIHV4B32B5Sr8IBzFx5epym+4GcL
-         7oStHBLNWPcILe1NpsOOkwjY/MWIg0oHi+iqbRijHn5eB8RRzJVSRUbXBkkBKcuujNv6
-         uMhyBwnb6/thgYFaZVYvWq/6tf5lAZihrZEBxtHevBst2+CuwUpqdi6oChAfVCbmHC9c
-         COb741tB3SW2JEhuQSc3jTT08b7MXIIl1lC9QRVZZGd9jRXZLsPa2YRMpmJaZIZBPGd0
-         gzrw==
+        bh=HzsM35EiZJ/yzPPIs0XjKw5tRsijyewrzXg6CrcCnPo=;
+        b=bi5rqSQXKy1zt/i0HCqX8BhJC88RyM+jubVRVk3y9bfGbSCpW7sX1Lx0p13UDcmA14
+         68NFGhVpon45+z00KrVFrkF+HQl1bZEoTTGAW0B9/ery0oGpodLlvs8H2pjIGwQhF/WV
+         A3s/G4BL6+hWRIrn4eaLWoT4L/YToWo+AvRp6rXjOPzULRsah8C6r05kKfnTBBTUGoPN
+         QLWfONJfgUk4C0zUI5Xu/+LmRuKQoDhGJd3tEuubD6+vATHOJl5krNTYdES9Ba/XegLJ
+         IrtgX8ziCSLgHQ0X2NFCUHIQ2lcvF8yYIbr9LqdO5LVbiZc0cHxhIL80Y6hAnr5BUaRE
+         DaIg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784194943; x=1784799743;
+        d=1e100.net; s=20251104; t=1784194965; x=1784799765;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=rWQ9oJo6FYvzxfcIJtWdNxYH0ur72y3xrCIEL4tMOu8=;
-        b=bQ7xuv5K0W/62fkmQ+68vVWvhcqitFzpqwXiyz1bEGADu2Gtxln+kiDUN/mZjuwQod
-         jivZ/jcp3Vld9dcORB/MTtbdTRm2JVyDzWjNpW7eQu27SFwxnOXdki1t45d2YeIXleAi
-         YIdtpXXNYXTvT5Xn/FJoNvCO6SG7kTDpdhZOEpkTYFQqVWdbdPx9OrShT/qEb8Fxv8Oq
-         iP+YhQqmZywqPNCwkrQb944elPhvjQEAGPXFeAHcyKGGRwnEmhiLQMWBMy2UQC7bf67N
-         BS5kvpGFvOhBfbFeqQVLgyc/xjOo0y+XC0FIvqqwm7iMP+xbg0ob2ZmG0NAIXh5c55or
-         me/Q==
-X-Forwarded-Encrypted: i=1; AHgh+RpKNHaYbx98Of7pAMUkyq9r4dtmetBjnXt2Kwwl9ClocZqQ4O2Og3KnLO+2+WhUyEuPl03DZgI2uePi+XzE@vger.kernel.org
-X-Gm-Message-State: AOJu0YwZu8Z/q1B9Lye3RGsNdJJkxhVeiSZRtpvtLVMxirYYFCbz0+Fc
-	n6E/G4fsm+un6lZQluMcCC9bxVewPK1ouIXDAbdj6f8MYWSYsnOwVy/rMCl/lu/FbIU=
-X-Gm-Gg: AfdE7ckNn00EiZF3BW2yIY/G+L8HYnm+ZEzirSXc5+jvWpWXngfrG7JcVFfJNfDKRJD
-	z+hf9oL89aBEN1XNUCbF1OR9vyWrZ3xggFZwNQMqUcotw9ojNWUsaHHNKrmbi7Kzg00ODs+CRgy
-	TE6bjl1/FnIO7AsyncW0cumESAXygFNwsTOztigaQA3lGiyy4iuz5/aZNKKnNxVCJeXoZNsdX46
-	2iMGlTNzyiE/cvy1ls+rYYNyWSJkdJvb1MWZ5MUCHfp3qtwwPQjOy/H16L6L8JJSC/RMClPQu4u
-	IFVx04/mKv+AOZoSlS21HAFAJKfWswGJVjPRGOprhuEI2Bi3jc0L9LUun1UMuFud7QDm/SgCdrY
-	e39iE6znm1/ECYwKyk2jwFB/tHdUbsb/3n1gnI0eiTXULIkhoHTyJ6U8g1kgqAiG06rme7cLAT6
-	bn9WmrA5XINoO1Jl7merXANXQ=
-X-Received: by 2002:a05:6402:51cb:b0:699:39c5:204b with SMTP id 4fb4d7f45d1cf-69c5f0be27dmr11018264a12.18.1784194942921;
-        Thu, 16 Jul 2026 02:42:22 -0700 (PDT)
-Received: from [192.168.0.35] ([109.77.36.131])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-69cd294fb1asm4400218a12.26.2026.07.16.02.42.21
+        bh=HzsM35EiZJ/yzPPIs0XjKw5tRsijyewrzXg6CrcCnPo=;
+        b=aWd2EUL1+kuakBmCJKjpr5m7HwLU7Raj5CbRpJN6ic9OXMCoGRytlHRuNXcQixiOdh
+         3433D/mcAJXrxgwPK4yYpresYW69bGtESiFAL9urfx8B12PfpTXXt4qvRYD/4+5i8CmB
+         tp4jkN2GfXgXqGtALKRmGLCDJAbfwpE8FWhzOwvUcUchErEA0g4zzTQzXA0wIknEcFdo
+         1YQ+i8/bSM+hq6LrI1h4qp5jJ1VJmHL5EMSogicTGYKNCyjcJO+cbYmrij9ogate6TR9
+         UOXzJJFiZHj0jvlJFWFwJ82TBV9Bri1eYWWpruVPj/Zj9l2X2o2P34KGo9cJMRbsLKSu
+         vrNg==
+X-Forwarded-Encrypted: i=1; AHgh+RolSNvZF38pysUYy37fqYKMBVKRmeOJWvod8jtwxe46Mgrq5GRxeGnntPK0JOExlmbh2jGdI2W0ZMe5A+W1@vger.kernel.org
+X-Gm-Message-State: AOJu0YzbII/exuCb+UckFrXtxOleDkBQvS2m4kYsY9lLHFLbM4tyoqPt
+	doJouFqRtKfMgxlU7JK1y8D3nxIDv3vvgt3Ai02X+qVyYGLq1Opa2Z493klWkTyRNFk8E9IFQwm
+	V+T4O/9aPnwy3IkSaLZPfcgYci3KQJCDeJSVKmMthlYz4VOMYPBTzdhE6IR/19R0x9eFq
+X-Gm-Gg: AfdE7ckDP/5NvJW0ITbV9s/uWWXX/3jGjjFu6pTrP6mGTRcpw0FKWK9RSJz+JZ3SX+S
+	BdKfc7Mei6ZIcTGLH7JjovqneRIltb6pbaX8gM4TonbLPLrHEvlpnED7WpPVnfjUJ/bJ3lf/rnF
+	HUYT3F+LYYpRitH7HUHwrZaqKGRx9cc+w0eUNX8WxWNJrpcNLku6s0DrjIV3S+1cbm26FwIH6a5
+	7f2mdYGKdSdzVl26/q9ui7jNkeF8ZEWMZix0BpRNziCYuJu76aJdH/77TCtxDetujE0pbcoHtK6
+	efkLXQJXneI3Wac50ZFa6f6UaKbs/QYmc2SvuFKCxXeAKIajO2J25DD76at89YnVyK0xdUuXJf4
+	i3qr6PHje/Gv/K5MDZLMo/wk2
+X-Received: by 2002:a05:620a:318f:b0:92e:705f:1626 with SMTP id af79cd13be357-92ef2c65077mr1810282585a.6.1784194965170;
+        Thu, 16 Jul 2026 02:42:45 -0700 (PDT)
+X-Received: by 2002:a05:620a:318f:b0:92e:705f:1626 with SMTP id af79cd13be357-92ef2c65077mr1810281085a.6.1784194964806;
+        Thu, 16 Jul 2026 02:42:44 -0700 (PDT)
+Received: from [192.168.120.193] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c16871264basm176210666b.7.2026.07.16.02.42.42
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 16 Jul 2026 02:42:22 -0700 (PDT)
-Message-ID: <c731b03e-b550-48af-b338-37ac53018247@linaro.org>
-Date: Thu, 16 Jul 2026 10:42:20 +0100
+        Thu, 16 Jul 2026 02:42:44 -0700 (PDT)
+Message-ID: <6caf8ca0-8be5-4935-9766-10d21c71ac37@oss.qualcomm.com>
+Date: Thu, 16 Jul 2026 11:42:41 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,92 +89,60 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 1/2] dt-bindings: phy: qcom: Add CSI2 C-PHY/DPHY schema
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Bryan O'Donoghue <bod@kernel.org>
-Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Vinod Koul <vkoul@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, linux-arm-msm@vger.kernel.org,
- linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260708-x1e-csi2-phy-v9-0-0210b90c04cf@linaro.org>
- <20260708-x1e-csi2-phy-v9-1-0210b90c04cf@linaro.org>
- <YSunV_lNJ8xW_y-Aa2psZavniF6mcHJlJipuj1RYWMB8Zb8yLC-gb7eEnk0XMjfwQOneMGsZM5foFKutCNhYqw==@protonmail.internalid>
- <b7baffda-b97c-4b83-8d9e-e381d0289682@linaro.org>
- <3ab676ac-919b-4a80-8dd6-71dd7f6fe06c@kernel.org>
- <-iN0mG5nS2joxEn49UrxFlORE3R6Ji3HRebfOMNMGnupMIobTBdRDvnwjRHAXHeLmGf6O4JJENVauduwZXwhiA==@protonmail.internalid>
- <b834e9a0-a61c-4912-b57c-36d571938b75@linaro.org>
- <4d7a0e59-7c34-4557-a475-8cd7fd2ad2d9@kernel.org>
- <CAFEp6-2J0WGF6g0K7s--PxciO+d9MR-SCVnrWJ3u=sgQNwA59A@mail.gmail.com>
+Subject: Re: [PATCH v3] iommu/msm: Fix dangling list entry on probe failure
+To: Weimin Xiong <xiongwm2026@163.com>
+Cc: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, robin.clark@oss.qualcomm.com,
+        joro@8bytes.org, will@kernel.org, robin.murphy@arm.com,
+        linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev,
+        linux-kernel@vger.kernel.org, stable@vger.kernel.org
+References: <20260716013229.91014-1-xiongwm2026@163.com>
+ <20260716085313.207069-1-xiongwm2026@163.com>
 Content-Language: en-US
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-In-Reply-To: <CAFEp6-2J0WGF6g0K7s--PxciO+d9MR-SCVnrWJ3u=sgQNwA59A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260716085313.207069-1-xiongwm2026@163.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDA5OSBTYWx0ZWRfX7oh32xaDi84D
+ mWLIlOIBid4hKj+dLOiOcOGypr/oKBktn5sqy95JlvWJTwMTLQZlLnV1m3uSUeeaHAdNxi8HUob
+ POY81bG+RDtVoSkI/L30uUwgJVm8pKHBttgJ4VWMWeceIDKTmteC2voQJfm4UPJ+sULJKlUojq1
+ YI0eqJBDH20lMGaNeoSwRf5WNyp2HljOAByr5QBfL8LDCB8v49/7buiQ1nzOmeA9GHoUtfZyogO
+ Tb2Y49iy0NsJkVygRfGBVRUOZi28Xyb2/Qdx/Gtv0KXybheqyTQpzgxnfogbACOjsEhXYu4xcxM
+ S6s4M0r4LDjV4kZEC+0QFWVEyY6ooHDJP2rb5ePfKQf4DvOEVQsd0C+GZD7plR5T0p50eGanpH+
+ lXnducoytSudQoQ2BL2bfXUdtBKgKuK5JRzdLWMA0cK4Y6ZQcNfUCQ1mDacitMd3e2E7KI+pS5N
+ y0YFGF62uj8cfJLopUQ==
+X-Authority-Analysis: v=2.4 cv=WrEb99fv c=1 sm=1 tr=0 ts=6a58a795 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=n3OY92c7DukLRWByAxYA:9 a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22
+X-Proofpoint-GUID: BhBEMt9wK76hOaDQK2SkXq7FPMbDnR5-
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDA5OSBTYWx0ZWRfX70+g7Wk27ubp
+ AIL69FUx7DsQQiMC2UiMlXJtVGg7cu/H3Vi7Dvnl5MNz8Iq7KXP3dV+Hp7fNsGHj6V1UBxepE/F
+ PwmYk9OyCZdFHlpc2R1GtcBjdMuz7m0=
+X-Proofpoint-ORIG-GUID: BhBEMt9wK76hOaDQK2SkXq7FPMbDnR5-
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-16_03,2026-07-15_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 clxscore=1015 spamscore=0 priorityscore=1501
+ adultscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160099
 
-On 16/07/2026 09:56, Loic Poulain wrote:
-> On Mon, Jul 13, 2026 at 1:18 AM Bryan O'Donoghue <bod@kernel.org> wrote:
->>
->> On 09/07/2026 08:40, Vladimir Zapolskiy wrote:
->>>> As explained in the cover letter: I'm following guidance from Rob on that.
->>> Pehaps you've misread a given review comment, because Rob's guidance is
->>> to remove 'phy-type' property,
->>
->> I'll just quote verbatim "Perhaps putting this in phy cells would be
->> better because the consumer decides on the mode."
->>
->> That is not "remove phy-type" - it's "move the mode into the cell". I'm
->> shifting this back to the DT schema maintainers since, I take their
->> feedback literally, seriously and canonically.
->>
->> Any of the triumvirate will do, Rob, Krzysztof or Conor.
->>
->> Absent a different answer from the DT schema guys, v10 ships with the
->> consumer deciding the mode as per Rob's original guidance.
+On 7/16/26 10:53 AM, Weimin Xiong wrote:
+> Move the list_add() call to the end of msm_iommu_probe() instead of
+> adding cleanup paths, which avoids the dangling list entry problem
+> entirely (suggested by Mukesh Ojha).
 > 
-> On the #phy-cells question, IMO we should drop #phy-cells to 0 and
-> derive the C-PHY/D-PHY mode from the endpoint bus-type. The operating
-> mode is really a configuration of the link rather than a hardware
-> description/limitation of the PHY block itself,and the sensor endpoint
-> is conventionally where the bus type originates. I guess this costs us
-> nothing on the driver side today, we only support D-PHY, so the
-> mode-check just moves into the endpoint parsing we already do in
-> phy_qcom_mipi_csi2_parse_routing(). It can be a minimal
-> fwnode_property_read_u32(ep, "bus-type", ...) sanity check and adding
-> C-PHY later is then a one-line case MEDIA_BUS_TYPE_CSI2_CPHY
-> with no DT ABI change.
-
-So I take your point on link-type - in theory you can select the mode 
-from the sensor @ config time. The established practice is that the 
-consumer decides the PHY mode, so if we wanted to make this a _runtime_ 
-configuration - then that should be information that is passed to the 
-PHY via configure() not via DT because we've said its a link-mode 
-abstracted from the DT entirely.
-
-In the extreme case I have a user-space utility selecting sensor mode, 
-which the CSI controller parses and then signals the PHY to switch modes.
-
-If its a run-time config, then its a run-time config and DT should be 
-excluded from the mode selection tree.
-
-I'm in fact willing to entertain this idea - but it will require passing 
-the PHY mode to configure() not consuming - DT data from the endpoint.
-
-My core point here is both acknowleding Rob's point the consumer decides 
-the mode - and _if_ we go the runtime configuration route, then actually 
-making the selection @ configure not at probe/dt parse time.
-
-I just wonder if there's any real upside to all that additional work and 
-delay/churn.
-
-> On data-lanes numbering, I don't have a strong opinion here. Keeping
-> the current 0-based values is defensible, in this driver the value is
-> used as a physical lane index and it selects the per-lane register
-> bank (0x200 * n), so 0 maps to physical LN0. In that sense 0-based is
-> a faithful representation of the physical lane position on the SoC.
+> This approach simplifies the code by ensuring the iommu device is
+> never added to the global list until after all potential failure
+> points have passed.
 > 
-> Regards,
-> Loic
+> Changes in v3:
+> - Move list_add() to the end instead of adding cleanup labels
+>   (suggested by Mukesh Ojha)
 
+I think this approach introduces a race condition, because e.g.
+iommu_ops->of_xlate() depends on the item being present in this list
+
+Konrad
