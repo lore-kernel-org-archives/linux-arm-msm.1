@@ -1,264 +1,171 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBB2F346E6C
-	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 06:39:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C6352F290B
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 06:47:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784183951; cv=none; b=mAxHYfpVoJEpGBrBQOT5xWXEDzxvW1DOvOSYnr3xqkcE0lzOcwZf58yWJSetUQMsGVXD6KP2hSFZD+GzxfJXs9v59h7Cp1MW0jt3rPjtxKGpAiGO9GrP49EBPOh9L11MYFY8oGCqQombeea9fDL3cKl0QbmvdLssnXyg9GlfiWA=
+	t=1784184464; cv=none; b=ltOCjAIngImIBOWfXiL6B//JPnQe53o8AQzIRvaFb93p4QJv4Qrf3ws6L1/D5puRQ8hc6zyuGjG1o3AR7ThVeUohFX17yaFoX5GTAvGcWOzgnINeuO72C55n3hmg3ZrS0YDvh05rS/T9W7VOz54t542hrihwsEkewTacRGro0e8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784183951; c=relaxed/simple;
-	bh=uqzz3N+P6+FNeoSvCQyuRHyX3pwmPddM0+AKGis1MLM=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=lgy+ZNbuKGx//m98EatFnyYBD4G91q0PSdXf+aFlP1k7BNjitmLLB2FawIOnVxo5W/3xAWy7QxM/Cb/FY2Tr0434Y9mTrJQM2yB3K9yVbnZdDsNdiC0WYvDaJl+13j+5caVWi+10moK2yjPjDpOCLEu4ypqM/myr9lR/st2tF0U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=j1mjbVXk; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IEfZKZyg; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1784184464; c=relaxed/simple;
+	bh=qAMiaXRikbhi2a8I0S//Dr1NE46jknV8BsFBBvQxi+M=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=MwUt2PqJTZLfMh4BmJefDWVyWcawQBlpBf9fjxSQNpKbVfOweR+2tQpMNckWOXX+BO1HqVmzVmisOnB50rv/vll2cUZnJYhwlt2bB4b0pPqVGsO7xtcxbbuq/MT2E1fOUtLTVfPIi0Uw9TaH3EK8HHWqfAkqD9sYTjKCRQFT4bA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TDjrefrn; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SfwGohBw; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="j1mjbVXk";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IEfZKZyg"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66G3wNeV1299369
-	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 06:39:09 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TDjrefrn";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SfwGohBw"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66G404wQ1677600
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 06:47:42 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	skp8VRIl4KbIukNLkOh6qeVxvl4TbXnB0PjjVXS77sA=; b=j1mjbVXkaM5A8Nc2
-	+1MH+xcyFC4pPa1j1+hsA9HR3iBc6hsYB6HPmPa6I5ZHm2FexREEOnyNOObIhL+u
-	2XBOeOUAQxYudKAvyy6lZvtT/PG7dqPa3akJsIFGFkpC5yTvOngU/+6iUVIFtZuK
-	F1DxblXhhjJPYDUH4nVh2rUh56OznPIcl81CB7C2y7zLmsVS1P5EPhAGvU2A2INa
-	lZ7OPrLk744oGG7Hg3vnsd/rhBrH3Aelo9DAqaga3hao5hwZN27thV55yMlTFZED
-	Wf5+gFqrjh6dQ7LyYAir1BwW0XhyH2ZBSn+IIwaY8j59HNVwCXSiy3IZHA8YMDYP
-	Uo0ocA==
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fed062ywe-1
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=YaE06lxzdsOzAYkYeqtz96/h
+	FbOKK6JdCC8M719sNGc=; b=TDjrefrnOafTGzCWgD/1CRYrVElUVPHJYp4GwxhO
+	cKmxYv28iEGbwooY4Py45V9cA3KknPHlUfPGxtz5U82LnSN8fdpxnvW3SrHT1TyU
+	y7joCi7MV/e1A19G2BBuN0QJTBn15yv/TQtxrQTITXetpka6oDH3qZSEb7wrO2gT
+	Viv3eWthuyQUjWtF9FIEOnaA2SpPJfkrLLX0duAB10gvLsBDZ/HqCEaAKlmP+3Ou
+	HKp+mrKnIQ8kOAxVKHDy/wZZZ0ntg08vxo+9RTnXnIhES3gB3x/nwecf8tH60/aF
+	1cl+zti7uyh3+voVWXT+6DZMPPYqfrO3q0bunBTy8wV1FA==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4feeg1jf8r-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 06:39:09 +0000 (GMT)
-Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-848452dd146so7206954b3a.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 23:39:09 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 06:47:42 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2cca5e0a0c9so121857025ad.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 15 Jul 2026 23:47:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784183948; x=1784788748; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=skp8VRIl4KbIukNLkOh6qeVxvl4TbXnB0PjjVXS77sA=;
-        b=IEfZKZygzlbv5iIsXw+7+EBb4+zzWs/9tBBN5e1pD0/w6qxAxsg8VSU4qIo+E3VOfs
-         C73J4EDN4cDD5LUEcJ3u+8o/orMGCRywlrpTUSF1i0dq0BqVBRFcgrHdOKv9iJhaQf0M
-         GCm6YwAKSb7i2dAtJOcKAniLwUi1tS8toOW9/JWUgOBwv6UCB3dc9huuOSslRYC+Qwfu
-         3HBgGhpTueLRSx3sLKsbmf3auxnUGlGWkm2XFDUtFEdFYsmquVAMywBIdqTIopbEjGNi
-         eoYgL1XUsaa4iE94scOMwo0j69KG4ypiEqT3i8M2nuxJW+F84VzS6HwYkAZqeMCGmXA5
-         J6Ng==
+        d=oss.qualcomm.com; s=google; t=1784184461; x=1784789261; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=YaE06lxzdsOzAYkYeqtz96/hFbOKK6JdCC8M719sNGc=;
+        b=SfwGohBwf4+67dZZ2AFXpb90RcO84BzM6bO/RT1IkoB4QIWTcXJ3NKK6KvQ6C6u6kH
+         x4YSy+UxhsU/GR68gZHl/5L/Qoh/zmARuJj4tFdrbWD9Y7/iMpRQPvk9H8C8IUqt6FM6
+         c+dQeqx2TWDmrZqZk5dV53oQLTwm1PBwqOYR/v3bhVD9ngfPY9hS5mj0mixSJm49WGeE
+         yHcxTj9MRs8MvRm/p55UIXnoYN/I3oDNaWZGJXTb0+9QVRDY7Iu5nEcduUHfu4tlUBE1
+         i8JgY2plKxNxmLslPFUftiL/IcpjIVJuuO8cv8IH2DuHx2n7K3EvQjAcgoW1BNi5RHqo
+         whxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784183948; x=1784788748;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
+        d=1e100.net; s=20251104; t=1784184461; x=1784789261;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=skp8VRIl4KbIukNLkOh6qeVxvl4TbXnB0PjjVXS77sA=;
-        b=YNBwdOHTwq3cOOZnLyfcRMsS4iyjlxjLAlIX9Dk7dnjS8ER8UDlGNX93yc+VW0hCdY
-         6DyHstAWm4dGAIGN1qhp5zkL98JmrJeWwH+lfHK72DYt5E1jWKtvpft6QSN7b8aZLp2J
-         3g8hGZZQXup3NSD4CtYxTXlzJe6SOOm2WL6AzRuRwZlmo49JJBL1pXmlLaTFzanPQW3j
-         kCH6FyJsTpR28E9uU/ui1BfOS8AAlTf51zeUYvlc8+B4CBN3Yo9w618RJBxlDugULVop
-         nBUHwaxoptUcXGLqOoVKdz9fu04ImFW/g1hl5HtDMOqP6vF1/u8x33TKOe/xs7ng83K3
-         hF/g==
-X-Gm-Message-State: AOJu0Yy6pxoCK6YtgHSbziWXVwzN2t3kK1k3C6vRt6VfQFowrfhUslVA
-	b4d6PuBSOgCmtO5ECexfuhnpfldcMut2nCeHr6ACKotIRuvpaySiRWb87YeurlLn+rbpgwkyVkz
-	5hfIypvBBoHqzWmrEDCv5CXjj8WG5NtIQZdAbd8b/dWp79dVAV/dt0slTNctvykwIU3ik
-X-Gm-Gg: AfdE7cnf6B+3AwAjzVwn4epmaAPPzckPP3X5X7qY6KxGm8BArCsB2nIKUyb3Qrv2F+f
-	qN7THyKJCe20eV5CYpC3N99YPWj8GwokIGgFkzqITvsPTHTL68pGLFW0epFXS1uHSVGUQudwOd5
-	Ew9LuHcjzS1GmCW60LoBnjxr943mLWZ/OXNHsEwsMsqxMRU+txsEnmZfOSMQOE1vy6TOrRfYyN/
-	GZkwquqG90380XHpZF3qE2CGt22g8t033Q5oCuUVTBfbwkWn+iZu8ph6wx6crJsSFkRqkQO4Gwt
-	kKZIRXXqY7J8NI3K+9f0x/z3hr1JDWZVVmjU+fgr6nTC8VZbK0AbUszmK4b1NvOwZkvXEArImox
-	qDtKgLq/y7uAtw9wPFQciRw6yKfS1jT/u4A==
-X-Received: by 2002:a05:6a00:9501:b0:848:50a5:a70b with SMTP id d2e1a72fcca58-8488962feb7mr20031115b3a.21.1784183948384;
-        Wed, 15 Jul 2026 23:39:08 -0700 (PDT)
-X-Received: by 2002:a05:6a00:9501:b0:848:50a5:a70b with SMTP id d2e1a72fcca58-8488962feb7mr20031095b3a.21.1784183947835;
-        Wed, 15 Jul 2026 23:39:07 -0700 (PDT)
-Received: from hu-ptalari-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cb258eb82desm1320870a12.2.2026.07.15.23.39.05
+        bh=YaE06lxzdsOzAYkYeqtz96/hFbOKK6JdCC8M719sNGc=;
+        b=amRhv4BT0zL/TK1lzVj8atcSwlcjPiCtin/OTmBzGHL7Yifl1f0uxrYfkTra3Hr4B8
+         pNISZ8yGtVRVl21S5kEs4r/9ZSn2AUyBzl6ixZwiWDCsXvtJb5XT+FT5WYfqKS2b4Al5
+         uo70MiuFD1kM7s62/94LDqt2zO+RfdfmwAPqHK05IwNxnH+5sQIJdpD6Mu4JLxMO//S+
+         d7wEyz7ERQ1/hEIiCNg3PYD0D9xNhNXXC7TpuJDJO6pmd+bkoaXVWpiW4nYmHthoqWo7
+         xBWfLLASBPSyiTZYmRvo/2e6agbLEIPxRv+zrirubNHLgUmUuYhsfMG2nF4N/7PRB06c
+         o2Ew==
+X-Forwarded-Encrypted: i=1; AHgh+RraGNjBRRde1G4kYLZlIO1Lsh34QtwVGoRZQRFU4MtkFrp1gAbhzmYM1Aqr4Rag3AvgpXy5wtplC07mEWz7@vger.kernel.org
+X-Gm-Message-State: AOJu0YwdzjYIZ73ywk831V2SWQBpEenVvyKwPkLAaLbK5ma5LRrkWVQT
+	gIXxTR3geLVP4PZQ4Wxjm8fnhSPMvjdqrMjk7S1+fArq5cPKwyt0RCzexmFBppSNEIqfHKQSmd0
+	8g7dc8yoW4dvUJgBwwdF2tBXfpaGLwCetz/e0mlJODrVlZQ2wf59b0g/FALFoUw6+AzJg
+X-Gm-Gg: AfdE7cm83iDocPZi2q94N1uIXe5Jx6pCnuw5PSCBqWyiuCkRdZ5hWZPsBXZmxO/v8ZU
+	dhu0UDmBP6AG8bF5cze9fsvq6jjF1bLFW70b1L7A+TpMAGfg09nnUNZ0VIVH6dqv/OX08hz0kHt
+	QWlDHptk6IXT0iI9ox6pE9mxPewRcheo1mPe3R5Zs9WWbgbbvCy77yA+vo2wqnlw+o7xuPGKoPP
+	e70xFgBjys7CcJ80L0z0ZfyXKxmGwBVUQ4npDdflTkNsY7wm/FJNyS8GRKRS3CBZjLR1iiXUQvU
+	VTpgpFUMcQ4i+mUd0UoWra3CMjnrcjEkG80GEveHSW3JGS2quFfzTy9k+w30NMwfg4KWRykVi4S
+	NZ6V1od5aK+HMdlCtGDBfpJuhgSA=
+X-Received: by 2002:a05:6a21:2e14:b0:3c0:9c19:65c0 with SMTP id adf61e73a8af0-3c36c4c567cmr6578855637.72.1784184461041;
+        Wed, 15 Jul 2026 23:47:41 -0700 (PDT)
+X-Received: by 2002:a05:6a21:2e14:b0:3c0:9c19:65c0 with SMTP id adf61e73a8af0-3c36c4c567cmr6578813637.72.1784184460519;
+        Wed, 15 Jul 2026 23:47:40 -0700 (PDT)
+Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3140e6e9edfsm8110337eec.28.2026.07.15.23.47.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 15 Jul 2026 23:39:07 -0700 (PDT)
-From: Praveen Talari <praveen.talari@oss.qualcomm.com>
-Date: Thu, 16 Jul 2026 12:08:45 +0530
-Subject: [PATCH v3 3/3] i2c: qcom-geni: distinguish address-phase and
- data-phase NACK
+        Wed, 15 Jul 2026 23:47:39 -0700 (PDT)
+Date: Thu, 16 Jul 2026 12:17:33 +0530
+From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+To: Md Sadre Alam <md.alam@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/3] Enable quad SPI mode for SPI-NAND on IPQ RDP boards
+Message-ID: <20260716064733.3nzgioduu7kruglv@hu-mojha-hyd.qualcomm.com>
+References: <20260716-quad_dts-v1-0-74d86792944a@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260716-fix_cancel_sequence_on_failure_for_i2c-v3-3-9091315a33a0@oss.qualcomm.com>
-References: <20260716-fix_cancel_sequence_on_failure_for_i2c-v3-0-9091315a33a0@oss.qualcomm.com>
-In-Reply-To: <20260716-fix_cancel_sequence_on_failure_for_i2c-v3-0-9091315a33a0@oss.qualcomm.com>
-To: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        Andi Shyti <andi.shyti@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Praveen Talari <praveen.talari@oss.qualcomm.com>,
-        Naresh Maramaina <naresh.maramaina@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784183935; l=4780;
- i=praveen.talari@oss.qualcomm.com; s=20251114; h=from:subject:message-id;
- bh=uqzz3N+P6+FNeoSvCQyuRHyX3pwmPddM0+AKGis1MLM=;
- b=IOn7XZAr/KGNzDe8dYlDpdJ/MJmxxl7rMDtaWjHPdO7jBcZrf8orkmLIYwPj4bdZxNAq8VJbn
- S0PukxN2YvxA3UQwmN+GGoyiZ9+4mQDJtaTxzDCwM9w23UKEh089yTc
-X-Developer-Key: i=praveen.talari@oss.qualcomm.com; a=ed25519;
- pk=NGK/88fjyHXgfhIKwag7+uIytOmyOypvZ/hDFaYPEss=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDA2NyBTYWx0ZWRfX1kbTqBN4jdO/
- JlWMdYLRVeNAZ+asZ+kOvQ3pFXguM7OWxtyow7NpKTKcZxvLnuNHOwtw//UOAn512njXiyJvXMW
- k3HhO+jmasE2d/D5++vgGxzwD3RsNEs=
-X-Proofpoint-GUID: 31tj4PhvoLoHPMaaAUQFKdJmpF5Af3kP
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDA2NyBTYWx0ZWRfX6HRTnrgq+MSw
- wcr5PrkfZ2ukzasYDJparFblqaJy0zOgcfaBcpwV18a9yCPwaA+W/Vm/hf7ugoIvvVrjaskljAs
- ZTV3HqDCDAtGpthIbroG/TtYSwynp9fXxei+mlc4z4vqlhwIQUs3uoAaFhr7ewdU9UG61oPeJMw
- jpPQhD+BBn5Y9MnS2x0T2r0J6yvgqGo+LUR19/IDmrNznXyBlHt4GTeVxlxZnISY1wLvOIiijtO
- MmFUu4SbckWWGTUGvW1lE9FsSJQBdhiX15J+Zt6ZgGPdtIYs+8XYXEMVuDI8mqUY3GdGIYl9jg7
- Jd4fXAIh4jX1Q9CdA73xBU0qT6DMDxU2KeX3sSP0+K6jhwILdsbc2tosXm9RLc21eUDhslRhLRa
- sSa6d4789pEOL6ag9vP0pktToI0B8bQAMaP47BRCKOGNKR19jhHeWZRPFAyI4EpZigZZwV8ZpUg
- WyiuzoxrCdCw1xg8z1Q==
-X-Authority-Analysis: v=2.4 cv=Xb25Co55 c=1 sm=1 tr=0 ts=6a587c8d cx=c_pps
- a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=wcK_sNrN2goZDBkbqrQA:9 a=QEXdDO2ut3YA:10
- a=zc0IvFSfCIW2DFIPzwfm:22
-X-Proofpoint-ORIG-GUID: 31tj4PhvoLoHPMaaAUQFKdJmpF5Af3kP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260716-quad_dts-v1-0-74d86792944a@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDA2NyBTYWx0ZWRfX6c1LbODWE5un
+ jcBX6viwmYwWE8Ja3mpJZqPhb7cSehWSMtivAgwu6VAPsGaQ1kQOF7YRKPS4mrEPTPbwJ+YZujv
+ 9V4vFwUjB/XvfBV/8YqCcJFik7PLy2mfc75x/slOByEVh4/aXCyzjIUIB0845AzElGbNJwEjWos
+ YG91RGVozIrZ3v9aRFlZRVmFXPaRhETyZevjShqDmlTER4Zy42Dt5d6gd/XdeDO+XlKHea4fH5A
+ IcgJgUS3hdP0lOin3Nt2/YmXpqnw9j1Xc4KlpCycvDcuxO1Mt4lkcGSGBEZ9ZU9RtRMH591z8Gw
+ eQUkhHy9Ezp0YHj9674oaYG7FZohq7lSeyYqr32ZvqzI+s2ZIRceaDLXApZ2xOIVtcaDmWapS9g
+ 1i0BKSkZ50wwjxBWN2CzWvX6X35QdiKHUnioOZ0Z3TXwmfjigRKhQ6g5mn41u3dUQDBLxJ6wjl9
+ f81yKJz1Ywk9ygpy0yw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDA2NyBTYWx0ZWRfX0l4t8MzFsw8U
+ tQc94JBwE09AS5zYNNgqv0fCmMi29dNuCCKnUUBldD8o7A3fxHiFcGUiP/fwLfLSqFDg/NgfJ1E
+ nCp0ImttB5A4qdUhk4komaCdSGtjzUc=
+X-Proofpoint-GUID: DLzB0AuhX--E9VurDM4Y5-I7VLV_GSF9
+X-Proofpoint-ORIG-GUID: DLzB0AuhX--E9VurDM4Y5-I7VLV_GSF9
+X-Authority-Analysis: v=2.4 cv=SsOgLvO0 c=1 sm=1 tr=0 ts=6a587e8e cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=UvOjeE5WzWDoS12IaKkA:9 a=CjuIK1q_8ugA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-16_02,2026-07-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 priorityscore=1501 suspectscore=0 bulkscore=0
- impostorscore=0 malwarescore=0 adultscore=0 lowpriorityscore=0 phishscore=0
+ phishscore=0 lowpriorityscore=0 suspectscore=0 priorityscore=1501 bulkscore=0
+ malwarescore=0 spamscore=0 impostorscore=0 adultscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160067
 
-The M_GP_IRQ_1 interrupt signals a NACK condition, but does not
-distinguish whether it occurred during the address phase or the data
-phase.  The driver always attempted cancel and DMA FSM reset on any
-NACK, which is incorrect for an address NACK since the DMA engine was
-never armed and the hardware requires no recovery.
+On Thu, Jul 16, 2026 at 11:25:11AM +0530, Md Sadre Alam wrote:
+> Several Qualcomm IPQ RDP platforms support quad (x4) SPI transfers
+> between the QPIC SPI-NAND controller and the attached SPI-NAND device.
+> However, the corresponding device trees do not currently describe the
+> bus width capabilities of the flash device, causing transfers to fall
+> back to the default single-bit (x1) mode.
+> 
+> This series enables quad SPI operation on supported IPQ reference
+> design platforms by adding spi-rx-bus-width and spi-tx-bus-width
+> properties to the SPI-NAND device nodes.
+> 
+> The series updates the IPQ9574, IPQ5424 and IPQ5332 based RDPs.
+> 
+> Signed-off-by: Md Sadre Alam <md.alam@oss.qualcomm.com>
+> ---
+> Md Sadre Alam (3):
+>       arm64: dts: qcom: ipq9574-rdp-common: Enable quad SPI mode for SPI-NAND
+>       arm64: dts: qcom: ipq5424-rdp466: Enable quad SPI mode for SPI-NAND
+>       arm64: dts: qcom: ipq5332-rdp-common: Enable quad SPI mode for SPI-NAND
+> 
+>  arch/arm64/boot/dts/qcom/ipq5332-rdp-common.dtsi | 2 ++
+>  arch/arm64/boot/dts/qcom/ipq5424-rdp466.dts      | 2 ++
+>  arch/arm64/boot/dts/qcom/ipq9574-rdp-common.dtsi | 2 ++
+>  3 files changed, 6 insertions(+)
+> ---
+> base-commit: 19827e7930a5511c68e12aac6e4522f3661a1709
+> change-id: 20260716-quad_dts-6bac0484c08c
+> prerequisite-change-id: 20260716-quad-ec2765317214:v1
 
-Add geni_i2c_check_addr_data_nack() to distinguish the two cases by
-reading SE_GENI_M_GP_LENGTH after the NACK event.  A zero value means
-the address phase was NACKed (ADDR_NACK) and no DMA recovery is needed.
-A non-zero value on a write transfer means a data byte was NACKed
-(DATA_NACK) and the normal cancel and DMA FSM reset path must run.
+Above does not help.  Be explicit here in the cover letter by
+providing the dependency link directly.
 
-Co-developed-by: Naresh Maramaina <naresh.maramaina@oss.qualcomm.com>
-Signed-off-by: Naresh Maramaina <naresh.maramaina@oss.qualcomm.com>
-Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
----
- drivers/i2c/busses/i2c-qcom-geni.c | 29 ++++++++++++++++++++---------
- 1 file changed, 20 insertions(+), 9 deletions(-)
-
-diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
-index 9490aee4928c..c8562c06bf74 100644
---- a/drivers/i2c/busses/i2c-qcom-geni.c
-+++ b/drivers/i2c/busses/i2c-qcom-geni.c
-@@ -56,7 +56,8 @@
- 
- enum geni_i2c_err_code {
- 	GP_IRQ0,
--	NACK,
-+	ADDR_NACK,
-+	DATA_NACK,
- 	GP_IRQ2,
- 	BUS_PROTO,
- 	ARB_LOST,
-@@ -67,7 +68,7 @@ enum geni_i2c_err_code {
- 	GENI_TIMEOUT,
- };
- 
--#define DM_I2C_CB_ERR		((BIT(NACK) | BIT(BUS_PROTO) | BIT(ARB_LOST)) \
-+#define DM_I2C_CB_ERR		((BIT(ADDR_NACK) | BIT(BUS_PROTO) | BIT(ARB_LOST)) \
- 									<< 5)
- 
- #define I2C_AUTO_SUSPEND_DELAY	250
-@@ -143,7 +144,8 @@ struct geni_i2c_err_log {
- 
- static const struct geni_i2c_err_log gi2c_log[] = {
- 	[GP_IRQ0] = {-EIO, "Unknown I2C err GP_IRQ0"},
--	[NACK] = {-ENXIO, "NACK: slv unresponsive, check its power/reset-ln"},
-+	[ADDR_NACK] = {-ENXIO, "NACK: target device unresponsive, check its power/reset-ln"},
-+	[DATA_NACK] = {-EIO, "Data NACK: TX transfer NACK"},
- 	[GP_IRQ2] = {-EIO, "Unknown I2C err GP IRQ2"},
- 	[BUS_PROTO] = {-EPROTO, "Bus proto err, noisy/unexpected start/stop"},
- 	[ARB_LOST] = {-EAGAIN, "Bus arbitration lost, clock line undriveable"},
-@@ -258,7 +260,8 @@ static void geni_i2c_err(struct geni_i2c_dev *gi2c, int err)
- 
- 	switch (err) {
- 	case GENI_ABORT_DONE:
--	case NACK:
-+	case ADDR_NACK:
-+	case DATA_NACK:
- 	case GENI_TIMEOUT:
- 		dev_dbg(gi2c->se.dev, "%s\n", gi2c_log[err].msg);
- 		break;
-@@ -269,6 +272,14 @@ static void geni_i2c_err(struct geni_i2c_dev *gi2c, int err)
- 	}
- }
- 
-+static void geni_i2c_check_addr_data_nack(struct geni_i2c_dev *gi2c)
-+{
-+	if (!readl_relaxed(gi2c->se.base + SE_GENI_M_GP_LENGTH))
-+		geni_i2c_err(gi2c, ADDR_NACK);
-+	else if (!(gi2c->cur->flags & I2C_M_RD))
-+		geni_i2c_err(gi2c, DATA_NACK);
-+}
-+
- static irqreturn_t geni_i2c_irq(int irq, void *dev)
- {
- 	struct geni_i2c_dev *gi2c = dev;
-@@ -294,7 +305,7 @@ static irqreturn_t geni_i2c_irq(int irq, void *dev)
- 	    m_stat & (M_CMD_FAILURE_EN | M_CMD_ABORT_EN) ||
- 	    dm_rx_st & (DM_I2C_CB_ERR)) {
- 		if (m_stat & M_GP_IRQ_1_EN)
--			geni_i2c_err(gi2c, NACK);
-+			geni_i2c_check_addr_data_nack(gi2c);
- 		if (m_stat & M_GP_IRQ_3_EN)
- 			geni_i2c_err(gi2c, BUS_PROTO);
- 		if (m_stat & M_GP_IRQ_4_EN)
-@@ -443,7 +454,7 @@ static void geni_i2c_rx_msg_cleanup(struct geni_i2c_dev *gi2c,
- {
- 	gi2c->cur_rd = 0;
- 	if (gi2c->dma_buf) {
--		if (gi2c->err)
-+		if (gi2c->err && gi2c->err != gi2c_log[ADDR_NACK].err)
- 			geni_i2c_rx_fsm_rst(gi2c);
- 		geni_se_rx_dma_unprep(&gi2c->se, gi2c->dma_addr, gi2c->xfer_len);
- 		i2c_put_dma_safe_msg_buf(gi2c->dma_buf, cur, !gi2c->err);
-@@ -455,7 +466,7 @@ static void geni_i2c_tx_msg_cleanup(struct geni_i2c_dev *gi2c,
- {
- 	gi2c->cur_wr = 0;
- 	if (gi2c->dma_buf) {
--		if (gi2c->err)
-+		if (gi2c->err && gi2c->err != gi2c_log[ADDR_NACK].err)
- 			geni_i2c_tx_fsm_rst(gi2c);
- 		geni_se_tx_dma_unprep(&gi2c->se, gi2c->dma_addr, gi2c->xfer_len);
- 		i2c_put_dma_safe_msg_buf(gi2c->dma_buf, cur, !gi2c->err);
-@@ -493,7 +504,7 @@ static int geni_i2c_rx_one_msg(struct geni_i2c_dev *gi2c, struct i2c_msg *msg,
- 
- 	cur = gi2c->cur;
- 	time_left = wait_for_completion_timeout(&gi2c->done, XFER_TIMEOUT);
--	if (!time_left)
-+	if (!time_left || (gi2c->err && gi2c->err != gi2c_log[ADDR_NACK].err))
- 		geni_i2c_cancel_xfer(gi2c);
- 
- 	geni_i2c_rx_msg_cleanup(gi2c, cur);
-@@ -535,7 +546,7 @@ static int geni_i2c_tx_one_msg(struct geni_i2c_dev *gi2c, struct i2c_msg *msg,
- 
- 	cur = gi2c->cur;
- 	time_left = wait_for_completion_timeout(&gi2c->done, XFER_TIMEOUT);
--	if (!time_left)
-+	if (!time_left || (gi2c->err && gi2c->err != gi2c_log[ADDR_NACK].err))
- 		geni_i2c_cancel_xfer(gi2c);
- 
- 	geni_i2c_tx_msg_cleanup(gi2c, cur);
+> prerequisite-patch-id: 912ede01168ddf0476ba69ab0db786186073f817
+> prerequisite-patch-id: cdb88acd348e7dc5136fa9b94cc06dcafb0f478d
+> prerequisite-patch-id: 932ca3dc3893df6de25928b24c7c24550907088d
+> 
+> Best regards,
+> -- 
+> Md Sadre Alam <md.alam@oss.qualcomm.com>
+> 
 
 -- 
-2.34.1
-
+-Mukesh Ojha
