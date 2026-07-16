@@ -1,165 +1,228 @@
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF5DB3CCFB4
-	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 08:13:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51DB430DD10;
+	Thu, 16 Jul 2026 08:21:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784189606; cv=none; b=p89RMHf/bNrygwDSle64KikrYR4EM0I8kEhaD7fk2Q5J4QfAJ55oZA8OQ65jXIl8SXRTmmvOciYe558EJvp+GPK2GpEFQ/nAmHCHo5PSWkoHx5+fz/PnjgpFSgs4AKIuF+5loEGaLKUQthFXR1XzleP2AnD6BJ+HpEMi3b5IbXE=
+	t=1784190075; cv=none; b=C2puRXR7PL/gB/jZq03qcQ/LPm9wWTiiaVqOVYRPX6oZzw+qeCE1sl12RyndF9OxR/H38OjJpV2wiFdaiL+/Fuylgi2qHAp8Ju4+quyxx8bOlk8tn5iztY8DuYfbq6NJxVUa/E4rp2tICxIyca/AO4TYvjrtB0DjX7bHP7lsFRE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784189606; c=relaxed/simple;
-	bh=BHGXzZt1d8W8ecIZ1QwyHNFQkiYMz+073p25eXAQcz8=;
-	h=Content-Type:Date:Message-Id:To:Cc:Subject:From:Mime-Version:
-	 References:In-Reply-To; b=fIK30pv/W8QEfZqP9ESaKdYM7tMhd7whhylCJBoAXqOeDVMVgdkN7d9Y74aAEcWK+cq5qMgeFDtkXwkl6EuDKpdAcMcko/DWSEl03nKV4O+6Zv6YrXC1L6YuP/pOO+y/n5pCMC2MuUIVDpCIwgMEW8GW6CfM6cJ0gAET/3yrMtk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=GiCIbKKf; arc=none smtp.client-ip=209.85.218.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+	s=arc-20240116; t=1784190075; c=relaxed/simple;
+	bh=u9wKlX7HZtVfoT2a/pM57RBeVSB/hMiOGSutkGW9v8s=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=JEOmFPywly3oB6d/H1D91EK3ITTYSUrYhJggMjcyD+R6wMs18onZSwKik89k3HqywKMXP3+HV7ewNIQIg0zOsRfEJvqOYAjBenAYtxy4JblXNxX+oCiF8WlDouX24YAmg+WjiIIit169+ouFrH5+c5/9ZkEypiDhbgDYv8VPIm8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EcJ1ZExC; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="GiCIbKKf"
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-c15d111ca99so625331866b.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 01:13:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1784189602; x=1784794402; darn=vger.kernel.org;
-        h=in-reply-to:references:content-transfer-encoding:mime-version:from
-         :subject:cc:to:message-id:date:content-type:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=AeCiWXObqZMn+CXaMwaIUj0LKi01F1mPNxBE7Xp9sFM=;
-        b=GiCIbKKfH1g/0PW3SwLqwBJftZrRKlH/J+yXbaV5gbzNkIHdJK+Fpx/Ty0keVU5IJy
-         W4lgrg6qw9wv08GZoCakp/pRhvfKVdyWjyrYClrx6UAo9QhPwdAlgSN95sPWv1bhF1Qb
-         lmKalNUi4vJY20bGREFx44Wgkj3UDu4fW562LvAzS15TDSBH0Bw4Uq+Gme0iBnyi6lVo
-         yaMe8bexFwHJD3xR5bnnQ4uX3IICh/TeVDDo5IM7tx6GTnA8CrwPRSUldeJlxMHMwd3X
-         tcJZg93Ueq5JQ3UFms48G3sKp7m1QX66ZwE6ATo8UbBcHiKYGhp2AzLILeDSaYDQFHbl
-         dsIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784189602; x=1784794402;
-        h=in-reply-to:references:content-transfer-encoding:mime-version:from
-         :subject:cc:to:message-id:date:content-type:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=AeCiWXObqZMn+CXaMwaIUj0LKi01F1mPNxBE7Xp9sFM=;
-        b=ZpNjRktTi+5OhoSAn0S3+2jhj1soW5RlkXOZk0mwSRZ24kntjHIUlkXd1ioaxWKCyl
-         Zrp3wooceeamlf5gkaWdm4o2OMkprLiJBQ7YeUqGGJ0Y6NCvDgxJFR6jdlHaN4DK6KxE
-         ER839wpDkKqVlLCeY6e22h8FtEdTC9J2O65/CgCmV5DFnBz4hkalGCHxNtgPi81VR94V
-         88EpM3hRqRdb1WPkYoWtbgghDGiexdihgMoPq5zkME+tePjmUEpQK1d3zsFs0rDEGotI
-         s5pEJwx74Sio2F/+2u1//brOgJhsVFOojCJLi6HWw9cfBOiqidU3OQTdGpmsGsRPkJYZ
-         Ae5Q==
-X-Forwarded-Encrypted: i=1; AHgh+RopyasMyHmOkGLSVIIn444sMGXmRYbUd4FU3So8SG5uOhp1DleFjuxhYX9stwfsCWz11II8wYyh8opz5f7C@vger.kernel.org
-X-Gm-Message-State: AOJu0YxuVOf91QzolH9+nggsYEBiyRrq4/NNbMGJO72qsVSj+hqYz+th
-	gSeOYV5Q9/zmoIgTWAkfUmt5w8JLapDZXxDiWiQbZowarn8Ar2ZE1tFzSrnnXT1h12A=
-X-Gm-Gg: AfdE7cl7bQqHzxlSTbrqY9I/jjGdmima1oIG07s2Luc6ErbpjGhX3j+sg6alUPnUp/Q
-	k+1edLUqatE1YGMbv6opsPmaCHddlT4QsSnNiQUGr+goo/5Y2V12BGKA1pNgZgWbpUmqPcaSuQ+
-	Ec7lxx4L9dVm9c1i5107qmjRo689+LmQEhJCmnHcwiIyrrI7ouarC6aAmDrcj6mVGD+SKeP0k3v
-	fbzpcdHqoqew0cTanNZvhUNuloHDd2VncHNav7/Ye6IywjR1se6lgyM5XHRTHOpEtdSBPnS6wTR
-	P7FnITFfm9xO4AWtte8avPz1aR+uCw5ON0a43Jt8Zvge3+59EbkAEndrU7/QYfEKaXxSKdPk8S2
-	YaKtmp3+HYYaW9CRijrWAj+1l8Gr2sBoCHNEcSrda1W5WmbwVKKNtjbzfwFaKz8P1wD+JY58VzI
-	ldNrxL9xc3IpaqIQw5zVebXSV8hzlBanEpUu/i/m/3AIyVbxU=
-X-Received: by 2002:a17:906:ef0c:b0:c12:9b93:61fd with SMTP id a640c23a62f3a-c167921baa3mr388583566b.6.1784189601892;
-        Thu, 16 Jul 2026 01:13:21 -0700 (PDT)
-Received: from localhost (144-178-202-142.static.ef-service.nl. [144.178.202.142])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1687166b94sm156110066b.17.2026.07.16.01.13.21
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 16 Jul 2026 01:13:21 -0700 (PDT)
-Content-Type: text/plain; charset=UTF-8
-Date: Thu, 16 Jul 2026 10:13:21 +0200
-Message-Id: <DJZUFFHFXZBK.3S5A9OPE7XYEZ@fairphone.com>
-To: "Jorijn van der Graaf" <jorijnvdgraaf@catcrafts.net>, "Mark Brown"
- <broonie@kernel.org>
-Cc: "Srinivas Kandagatla" <srini@kernel.org>, "Liam Girdwood"
- <lgirdwood@gmail.com>, "Rob Herring" <robh@kernel.org>, "Krzysztof
- Kozlowski" <krzk+dt@kernel.org>, "Luca Weiss" <luca.weiss@fairphone.com>,
- "Conor Dooley" <conor+dt@kernel.org>, "Jaroslav Kysela" <perex@perex.cz>,
- "Takashi Iwai" <tiwai@suse.com>, "Mohammad Rafi Shaik"
- <mohammad.rafi.shaik@oss.qualcomm.com>, <linux-sound@vger.kernel.org>,
- <devicetree@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH 0/3] ASoC: codecs: add the Qualcomm WCD9378 audio codec
-From: "Luca Weiss" <luca.weiss@fairphone.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EcJ1ZExC"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 014761F000E9;
+	Thu, 16 Jul 2026 08:20:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784190073;
+	bh=KnjMIDCod9I0T4C//k43rf+YCepYxv+BR7uQHADw3nM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=EcJ1ZExC6m6pFPSJ/GG3vVVPZ64xO+OlYabJaaQKG5S7lh3gT1vt+DUvJUebMwTfi
+	 iHpC+PV0e0pfdrrfUF3G9pCCswqwpgHRVQuAVi0JkD6UZo2SqC2Ms9C0eVz34EtCMp
+	 l2gmisCD6iG4u9cyvaQN1mt+rL+u1760LL/z7akRpfIMhF7/rfw/kGHExaQdHrzwMH
+	 3aR5vubkjamQnnYJfaoIugUobtSLRf9txOSM8HCufOU7LtSEwwRWCwath3cEHrdus3
+	 j+oI9yNAqjQUR4Bi3BCRHSWAruUUs/RVWo/iRiLiZb8Y80NukuB6o/l1w8TaNIruHC
+	 Raqet4KRSwOfQ==
+Message-ID: <8c7240a2-59c6-4c56-8a29-14be272fc1d9@kernel.org>
+Date: Thu, 16 Jul 2026 10:20:50 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-Mailer: aerc 0.21.0-0-g5549850facc2
-References: <20260706192229.144137-1-jorijnvdgraaf@catcrafts.net>
-In-Reply-To: <20260706192229.144137-1-jorijnvdgraaf@catcrafts.net>
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 27/33] mm/vma: update vmg_adjust_set_range() to offset
+ pgoff instead
+Content-Language: en-US
+To: Lorenzo Stoakes <ljs@kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ David Hildenbrand <david@kernel.org>, "Liam R. Howlett"
+ <liam@infradead.org>, Mike Rapoport <rppt@kernel.org>,
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+ Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>,
+ Jann Horn <jannh@google.com>, Lance Yang <lance.yang@linux.dev>,
+ Pedro Falcato <pfalcato@suse.de>, Russell King <linux@armlinux.org.uk>,
+ Dinh Nguyen <dinguyen@kernel.org>,
+ Simon Schuster <schuster.simon@siemens-energy.com>,
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+ Helge Deller <deller@gmx.de>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
+ Dan Williams <djbw@kernel.org>, Matthew Wilcox <willy@infradead.org>,
+ Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
+ Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>,
+ Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>,
+ Arnaldo Carvalho de Melo <acme@kernel.org>,
+ Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+ Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
+ Adrian Hunter <adrian.hunter@intel.com>, James Clark
+ <james.clark@linaro.org>, Zi Yan <ziy@nvidia.com>,
+ Baolin Wang <baolin.wang@linux.alibaba.com>, Nico Pache <npache@redhat.com>,
+ Ryan Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>,
+ Barry Song <baohua@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
+ Naoya Horiguchi <nao.horiguchi@gmail.com>, Xu Xin <xu.xin16@zte.com.cn>,
+ Chengming Zhou <chengming.zhou@linux.dev>, SJ Park <sj@kernel.org>,
+ Matthew Brost <matthew.brost@intel.com>,
+ Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
+ Byungchul Park <byungchul@sk.com>, Gregory Price <gourry@gourry.net>,
+ Ying Huang <ying.huang@linux.alibaba.com>,
+ Alistair Popple <apopple@nvidia.com>, Hugh Dickins <hughd@google.com>,
+ Peter Xu <peterx@redhat.com>, Kees Cook <kees@kernel.org>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Robin Murphy <robin.murphy@arm.com>, Andrey Konovalov
+ <andreyknvl@gmail.com>, Alexander Potapenko <glider@google.com>,
+ Dmitry Vyukov <dvyukov@google.com>, Steven Rostedt <rostedt@goodmis.org>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Jarkko Sakkinen <jarkko@kernel.org>,
+ Dave Hansen <dave.hansen@linux.intel.com>, Thomas Gleixner
+ <tglx@kernel.org>, Borislav Petkov <bp@alien8.de>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, Ian Abbott <abbotti@mev.co.uk>,
+ H Hartley Sweeten <hsweeten@visionengravers.com>,
+ Lucas Stach <l.stach@pengutronix.de>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
+ <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+ Thierry Reding <thierry.reding@kernel.org>,
+ Mikko Perttunen <mperttunen@nvidia.com>,
+ Jonathan Hunter <jonathanh@nvidia.com>,
+ Christian Koenig <christian.koenig@amd.com>, Huang Rui <ray.huang@amd.com>,
+ Matthew Auld <matthew.auld@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+ Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum
+ <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>,
+ Ankit Agrawal <ankita@nvidia.com>, Alex Williamson <alex@shazbot.org>,
+ Paolo Bonzini <pbonzini@redhat.com>, Shakeel Butt <shakeel.butt@linux.dev>,
+ Usama Arif <usama.arif@linux.dev>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+ linux-parisc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+ nvdimm@lists.linux.dev, linux-perf-users@vger.kernel.org,
+ linux-trace-kernel@vger.kernel.org, damon@lists.linux.dev,
+ iommu@lists.linux.dev, kasan-dev@googlegroups.com,
+ linux-sgx@vger.kernel.org, etnaviv@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org,
+ kvm@vger.kernel.org, Russell King <linux+etnaviv@armlinux.org.uk>
+References: <20260710-b4-pre-scalable-cow-v2-0-2a5aa403d977@kernel.org>
+ <20260710-b4-pre-scalable-cow-v2-27-2a5aa403d977@kernel.org>
+From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
+Autocrypt: addr=vbabka@kernel.org; keydata=
+ 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
+In-Reply-To: <20260710-b4-pre-scalable-cow-v2-27-2a5aa403d977@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi Jorijn,
+On 7/10/26 22:17, Lorenzo Stoakes wrote:
+> We are calculating the pgoff as an offset, since we have vma_add_pgoff()
+> and vma_sub_pgoff() available, just offset this value directly and use
+> __vma_set_range() for vma->vm_[start, end] values.
+> 
+> We take care to update the range before offsetting the page offset, so the
+> adjusted VMA's vm_start and vm_pgoff are mutually consistent at the point
+> the page offset helpers operate - this matters once vma_set_pgoff() comes
+> to assert invariants which relate the two.
+> 
+> Doing so lays the foundation for future work which allows for use of
+> virtual page offsets for MAP_PRIVATE-file backed mappings.
+> 
+> No functional change intended.
+> 
+> Reviewed-by: Pedro Falcato <pfalcato@suse.de>
+> Reviewed-by: Gregory Price <gourry@gourry.net>
+> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
 
-On Mon Jul 6, 2026 at 9:22 PM CEST, Jorijn van der Graaf wrote:
-> This series adds bindings and a codec driver for the Qualcomm WCD9378,
-> found on SM7635 boards such as the Fairphone 6. The chip pairs a
-> WCD937x-compatible analog core with SDCA-style function blocks whose
-> built-in sequencers handle the analog power-up/down; all control
-> registers, analog core included, sit in a 32-bit paged SDCA control
-> address space behind the TX SoundWire slave.
->
-> The driver implements the TX/capture paths (three ADCs fed from four
-> analog microphone inputs, three mic bias supplies) and is modeled on
-> wcd937x, reusing the wcd-common helpers. RX/playback, MBHC and the
-> SmartAMP function are follow-up work. Register sequences come from the
-> GPL downstream wcd9378 driver in Qualcomm's audio-kernel-ar tree; the
-> chip has no public datasheet.
->
-> One dependency outside this series: the paged register map needs the
-> Qualcomm SoundWire controller to implement SCP address paging, posted
-> separately to the soundwire tree as
-> "soundwire: qcom: add SCP address paging support". Without it the
-> codec enumerates but every paged register access silently reads zero.
-> There is no compile-time dependency, so the two can go through their
-> respective trees in any order; capture just needs both to land.
->
-> Patch 1 moves the qcom,micbias4-microvolt requirement out of
-> qcom,wcd93xx-common.yaml into the codecs that have four mic bias
-> supplies, so the three-bias WCD9378 binding in patch 2 can reference
-> the common schema. Patch 3 is the driver itself.
->
-> Tested on the Fairphone 6 (SM7635): handset mic capture through the
-> LPASS TX macro at 48 kHz across reboots, including UCM-driven use by
-> PipeWire in a Plasma Mobile session. The board DTS follows once these
-> bindings are accepted.
+Reviewed-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
 
-Many thanks for all your work on the Fairphone (Gen. 6)!
-
-If possible, can you share also dts patches with me, so I can try out
-your patches, and provide at least Tested-by?
-
-Also for audio, UCM and AudioReach topology if it differs from
-https://github.com/z3ntu/audioreach-topology/commits/fp6/ or what you've
-used to test the changes.
-
-So for NFC, speaker, microphone and magnetometer would be great.
-
-A git branch with your changes also works of course if you have that
-pushed somewhere.
-
-Regards
-Luca
-
->
-> Jorijn van der Graaf (3):
->   ASoC: dt-bindings: qcom,wcd93xx-common: don't require micbias4
->   ASoC: dt-bindings: add the Qualcomm WCD9378 audio codec
->   ASoC: codecs: wcd9378: add TX/capture codec driver
->
->  .../bindings/sound/qcom,wcd9378-codec.yaml    |   76 +
->  .../bindings/sound/qcom,wcd9378-sdw.yaml      |  122 ++
->  .../bindings/sound/qcom,wcd937x.yaml          |    1 +
->  .../bindings/sound/qcom,wcd938x.yaml          |    1 +
->  .../bindings/sound/qcom,wcd939x.yaml          |    1 +
->  .../bindings/sound/qcom,wcd93xx-common.yaml   |    1 -
->  sound/soc/codecs/Kconfig                      |   19 +
->  sound/soc/codecs/Makefile                     |    7 +
->  sound/soc/codecs/wcd9378-sdw.c                |  495 ++++++
->  sound/soc/codecs/wcd9378.c                    | 1382 +++++++++++++++++
->  sound/soc/codecs/wcd9378.h                    |  246 +++
->  11 files changed, 2350 insertions(+), 1 deletion(-)
->  create mode 100644 Documentation/devicetree/bindings/sound/qcom,wcd9378-=
-codec.yaml
->  create mode 100644 Documentation/devicetree/bindings/sound/qcom,wcd9378-=
-sdw.yaml
->  create mode 100644 sound/soc/codecs/wcd9378-sdw.c
->  create mode 100644 sound/soc/codecs/wcd9378.c
->  create mode 100644 sound/soc/codecs/wcd9378.h
+> ---
+>  mm/vma.c | 15 ++++-----------
+>  1 file changed, 4 insertions(+), 11 deletions(-)
+> 
+> diff --git a/mm/vma.c b/mm/vma.c
+> index a474920a25b3..0699fa07c40f 100644
+> --- a/mm/vma.c
+> +++ b/mm/vma.c
+> @@ -714,9 +714,6 @@ void validate_mm(struct mm_struct *mm)
+>   */
+>  static void vmg_adjust_set_range(struct vma_merge_struct *vmg)
+>  {
+> -	struct vm_area_struct *adjust;
+> -	pgoff_t pgoff;
+> -
+>  	if (vmg->__adjust_middle_start) {
+>  		/*
+>  		 * vmg->start    vmg->end
+> @@ -735,8 +732,8 @@ static void vmg_adjust_set_range(struct vma_merge_struct *vmg)
+>  		struct vm_area_struct *middle = vmg->middle;
+>  		const unsigned long delta = vmg->end - middle->vm_start;
+>  
+> -		pgoff = vma_start_pgoff(middle) + (delta >> PAGE_SHIFT);
+> -		adjust = middle;
+> +		__vma_set_range(middle, vmg->end, middle->vm_end);
+> +		vma_add_pgoff(middle, delta >> PAGE_SHIFT);
+>  	} else if (vmg->__adjust_next_start) {
+>  		/*
+>  		 *                Originally:
+> @@ -764,13 +761,9 @@ static void vmg_adjust_set_range(struct vma_merge_struct *vmg)
+>  		struct vm_area_struct *next = vmg->next;
+>  		const unsigned long delta = next->vm_start - vmg->end;
+>  
+> -		pgoff = vma_start_pgoff(next) - (delta >> PAGE_SHIFT);
+> -		adjust = next;
+> -	} else {
+> -		return;
+> +		__vma_set_range(next, vmg->end, next->vm_end);
+> +		vma_sub_pgoff(next, delta >> PAGE_SHIFT);
+>  	}
+> -
+> -	vma_set_range(adjust, vmg->end, adjust->vm_end, pgoff);
+>  }
+>  
+>  /*
+> 
 
