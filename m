@@ -1,146 +1,192 @@
-Received: from h6.fbrelay.privateemail.com (h6.fbrelay.privateemail.com [162.0.218.229])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DE5C2D5412;
-	Thu, 16 Jul 2026 16:01:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=162.0.218.229
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B07FC37C0EB
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 16:18:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784217667; cv=none; b=sCimP4evuG3r0MQb2rslOjzYFE+4HfXlT175hrE7HkwPKWzLCP8qy15XqrdrgtuMrzn9oSaLx5t5Fxv39Zx6SDnl9FvDRWINtSWcd4QpD3aVG7z0W4/81AOrOSWM0K0gvdk+F38aiRpE61kHy9fBpuiTtBBB5svter1hrcYG66U=
+	t=1784218715; cv=none; b=IKX0VOVbP/KZDab/ApFMwIgu7zQQFftU0EbCX2c3FiTei8GzOqxFkdGd4R8Jg7Uylilrjm2OWdHAANBXP5lrApimKlE80BRXMVWU/p9gGrudiLzLYemKhyYmEpf1US05NHvQwSpEmNGnEwrbDsxFAe1iFNUUKwaCCIdbL1qU8P0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784217667; c=relaxed/simple;
-	bh=j3xLloUiFKnQ2xhPuFCjH8HLy09+4RFKm8QCqeRZvDw=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=c/uKH0one28sityrIcwkHjfcek1B+/L6cSGQLbJN5Ts6425XGdXm1kd4ZUrbD8me6ni4m2TlQDeeIRaxNUq985cvY5Vgmug/rAm4nYWxGyq/kTx39w34sjj1hJz6XeSQi53MsPnv91rW3PxSFPJGg9s5SZjFc3vZg+Dcej4Ywoc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net; spf=pass smtp.mailfrom=catcrafts.net; arc=none smtp.client-ip=162.0.218.229
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=catcrafts.net
-Received: from MTA-10-3.privateemail.com (mta-10.privateemail.com [198.54.118.218])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
-	(No client certificate requested)
-	by h5.fbrelay.privateemail.com (Postfix) with ESMTPSA id 4h1Hny10S6z2xj2;
-	Thu, 16 Jul 2026 16:00:54 +0000 (UTC)
-Received: from mail.privateemail.com (K8S-PROD-WORKER-08 [87.215.145.39])
-	by mta-10.privateemail.com (Postfix) with ESMTPA id 4h1HnS6vpbz3hhTK;
-	Thu, 16 Jul 2026 12:00:28 -0400 (EDT)
-From: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
-To: Luca Weiss <luca.weiss@fairphone.com>
-Cc: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
-	Mark Brown <broonie@kernel.org>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
-	linux-sound@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/3] ASoC: codecs: add the Qualcomm WCD9378 audio codec
-Date: Thu, 16 Jul 2026 18:00:15 +0200
-Message-ID: <20260716160015.165574-1-jorijnvdgraaf@catcrafts.net>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <DJZUFFHFXZBK.3S5A9OPE7XYEZ@fairphone.com>
-References: <20260706192229.144137-1-jorijnvdgraaf@catcrafts.net> <DJZUFFHFXZBK.3S5A9OPE7XYEZ@fairphone.com>
+	s=arc-20240116; t=1784218715; c=relaxed/simple;
+	bh=KEpaGYLJg/HFUQ4VCnAAAa4/K+FU5Ww1paHM4mUD9UU=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=OX2ZOsyxumhk4MAeiY3o2CAvTdv97y4pL8yKDjNA8XULHc920OfLpxrnyLD4A6zcwCOykFzkFprvWdmtq53QmkL86pKaUGHxUj5ssGaBMwtUszljAbi8qx0yijXPTW+ZjvRL6yjFKMmleTFZ6CP4kNbMp+bYb2hOnirXiys3bc4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jOXqOVLZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gAzxOuzu; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jOXqOVLZ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gAzxOuzu"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66GFNdnc3006271
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 16:18:30 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	9xHOUNHGElRK8fUN+Vx3VXwXih6zrlUor3vLrF9tWE0=; b=jOXqOVLZC6BBHj+3
+	XLMie+g+71G9u/wYEPDYrJ3KKe4zYFaauBBV8N/SmJsnKitT5CT2VUecq1mcCWHd
+	um/6RrZ6wvAw4iTGGChmed0ie0RpdXigKmiabE+7Lkp3RnzRArloONiBnbL/JLcl
+	GBHQ+mtFO5m81hFdr8wH1JH88pDI+0FWeVHV/3A5AUvynHR6ULBhxjLxBwMhz5/H
+	gScdlUkHFPFMBUToCkgWmH9i/dt8bwP311Qm4zuS2mGfMRxTPhOHAbYVJW5CSQXM
+	VxCwHmYkPLvmDoPrVJ1v8iRkIE59KJJzcQ3eFWtBhNI3osy2GrpBfn0t8vrH/kyO
+	zjl0gg==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ff1we87k6-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 16:18:29 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51bec738909so58676471cf.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 09:18:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784218706; x=1784823506; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=9xHOUNHGElRK8fUN+Vx3VXwXih6zrlUor3vLrF9tWE0=;
+        b=gAzxOuzuXgVrE2WxsjQyQGxnU6sKbjC6yCuSrsXogOxf68BZwF+psvgBI4jMpa3tkk
+         bvuIGIeGvOG2puIc7eJMjuSENfWZPmwaXwrufCDPEw7DWARmGw5nul7IFeVqUZ95VzaI
+         dly4Uv3PiLOqlnMYaSBy02WwNRd5ab3CpCQiyCC9XCCn9AfvDe9CuBfkVhMv4TMVGOlq
+         pk3n5EPID2ipOoAya3E0249bJhFVEG1ky0mAwDDKQgv5LI8hfCmi5750UdMlYmKG0qAP
+         EAdGvRMGsIxzNCrEXJ8vXYOSLoopVScZPoSAOrRyGZADrtiK9uLMz2/U5f76OVrurn6C
+         GkcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784218706; x=1784823506;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=9xHOUNHGElRK8fUN+Vx3VXwXih6zrlUor3vLrF9tWE0=;
+        b=cVUqEKdDNapwbhp2IG4zpXJklmG1SejSomYThB3LKVqzQOWfrKh1kv4bJjAXDuG1Rh
+         nxTS7OszFtmIR3/NNOVBb5C24Wtm9NrSBAkkhvlzsebs2aJ/l4V4uHVx+TlD6DxKcr8B
+         i0q4UXrKI7wx5p+WARe5dIJPeoFBi7wcO3VVfwevsX80KOmneUWGnxfwCCOffAsCIJPQ
+         zPQQqssm0Lnkurn3HSzV0ijFO3oDdsnIrbo3s1N2zIlNQU7stzQmgnj5XHGGQI/96Fhv
+         6g/LxT6S1ct2SRG0VKsL/flejbqdbzZw4Yk1bc5quAtvh3FmPZwkxY4WV3wLfOiROefY
+         RD5w==
+X-Forwarded-Encrypted: i=1; AHgh+RrmlL7C9tOuQIQxfNrDFgRWh+WLGAlw0rXwUILrWvIvybhgj4vCgfvVdWasxNYuteFvL6H0sHK8za/BOmGI@vger.kernel.org
+X-Gm-Message-State: AOJu0YwtZIgzBya+AdA7IMOCbh5RstECeM1UpOYp3nUmVK6bGjy+9GHt
+	yIq0XfZrfK7Tiv7mGTdzxkLFTQZTKf5YrM779gJdhbriFUIS2g5GsrVr0UJZbMSrJwCePuIHiqJ
+	AH0EFY8nWSdUAbS9l/LJD8d7HgMC7/hSJt2Hupwl6nB6HMviuy/BVAE0febkrJvCrVNKp
+X-Gm-Gg: AfdE7clAecVyru93WxHMBT1rNSSXwnClib/CXESA0Dr5L0usOB+id9PkiVxiRxZD15f
+	aBBgrwtQJYLnN8KOzkUOWheTLqJoC31YH23KCErfK64mqD2X3nC4xHAAyBDXnmT9ac3V1Cb3Ezw
+	19gUCjvc4x6lIFCXORlT/ilhgPUw1paRf4GofoyreABB1B50rSQezyxl9rQg0KmVOUjeC8lVVVQ
+	NefJiuP9CrUR0VllQe3xPC5hAKtlCdKpd14zG6y/1+bb8Z+B1f335bQkaY5LLBGIahxn5TZvlbR
+	sjl2OUSvPRbuk8JWqObDpPL4HPNMs9ZOVUJgjgZbQCNOXqmzNkL10ciRBHNW1gsqRwX5fAnVoOQ
+	Pk4gnmX/yXc59NHst0DkhBaiv+1nxn++Au+11nnuhxWoErS1R/H1cTcqPBLz6GNrclmO1Uzd6sZ
+	5P395IlncaATV1Ft/kPwIMSyCVbMlT2dx78NFnSyhhWPQtWt5cR0o=
+X-Received: by 2002:a05:622a:a888:b0:51c:43d8:8604 with SMTP id d75a77b69052e-51e42453df2mr108397871cf.51.1784218705259;
+        Thu, 16 Jul 2026 09:18:25 -0700 (PDT)
+X-Received: by 2002:a05:622a:a888:b0:51c:43d8:8604 with SMTP id d75a77b69052e-51e42453df2mr108397371cf.51.1784218704675;
+        Thu, 16 Jul 2026 09:18:24 -0700 (PDT)
+Received: from QCOM-eG0v1AUPpu.na.qualcomm.com ([2a01:e0a:830:450:751c:d61c:c91:60dd])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c168744bdddsm257262866b.48.2026.07.16.09.18.23
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Jul 2026 09:18:23 -0700 (PDT)
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Date: Thu, 16 Jul 2026 18:18:18 +0200
+Subject: [PATCH v4 01/11] Bluetooth: hci_qca: Add M.2 Bluetooth device
+ support using pwrseq
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4h1Hny10S6z2xj2
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260716-monza-wireless-v4-1-9b02e6f549d7@oss.qualcomm.com>
+References: <20260716-monza-wireless-v4-0-9b02e6f549d7@oss.qualcomm.com>
+In-Reply-To: <20260716-monza-wireless-v4-0-9b02e6f549d7@oss.qualcomm.com>
+To: Manivannan Sadhasivam <mani@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Marcel Holtmann <marcel@holtmann.org>,
+        Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-pci@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-bluetooth@vger.kernel.org, devicetree@vger.kernel.org,
+        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Wei Deng <wei.deng@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE2MDE2NiBTYWx0ZWRfX5/VNvxYvUiE6
+ jptWd158KQoHqDX7k6gygevy7AZUveh7BbN5DVrKR+3ljukPN+S6aVS8rQlPJ5XlsSjYyImH8ze
+ x6f53fBGhjiduCBvNNe3zquNSClJukpdG4R3UpOpRXn0ZaRnV0XUJLAFu5q+wL489JDFgtNflRX
+ MNvIYpFGRp1fN4A1DIGTMKdCZEZu1FcCE/BDsvIFFEuRpaEZ23bY9gAVLC/QIuRmviy/al+jadz
+ n6Ore6lcZ76srqhTLpJw8EX+LZ/IoXtOtVi8l/e+bg6/Fu7vV7qgstX8px2bAY0OTvAsQ5QmQDB
+ TzlR/nPthILviA3JPEVWucEJd+jVvUSDGn7aEEmkpg9/4ou++YwG2gKafQjcZLDestG3lfyhdYg
+ cwWWGkxulXhNc9o6oKfBx+a76qYfo7q6bIYvUyOEPCy/Yv9UHQVqw+GtS8tsriAAY4h2Mews0I4
+ Im+JJelia+N00ZjHVIQ==
+X-Authority-Analysis: v=2.4 cv=JJ8LdcKb c=1 sm=1 tr=0 ts=6a590455 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
+ a=14bN-6-z4zEjTU3E0XQA:9 a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE2MDE2NiBTYWx0ZWRfX4PFM0G0Gvr3t
+ mUqmeP+4l3ckmNZZbFuiG9eZLXOPq6Tg4pXlgnb47ABuVOQWFgZxGBhQH4umUIFEauf01fNlxAv
+ hgxQtJgT/zgoWnQ0g9EdxziQ4zoR9Ak=
+X-Proofpoint-ORIG-GUID: 3-wW25md6eis-RLthnvOzFm4vMnldHCr
+X-Proofpoint-GUID: 3-wW25md6eis-RLthnvOzFm4vMnldHCr
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-16_05,2026-07-15_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 spamscore=0 bulkscore=0 lowpriorityscore=0 clxscore=1015
+ priorityscore=1501 adultscore=0 suspectscore=0 phishscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607160166
 
-On Thu, 16 Jul 2026 10:13:21 +0200, Luca Weiss wrote:
-> Many thanks for all your work on the Fairphone (Gen. 6)!
->
-> If possible, can you share also dts patches with me, so I can try out
-> your patches, and provide at least Tested-by?
+From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
-Thanks! Everything is now public on my Forgejo:
+Power supply to the M.2 Bluetooth device attached to the host using M.2
+connector is controlled using the 'uart' pwrseq device. So add support for
+getting the pwrseq device if the OF graph link is present. Once obtained,
+the existing pwrseq APIs can be used to control the power supplies of the
+M.2 card.
 
-  https://forgejo.catcrafts.net/Catcrafts/milos-linux
+Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Tested-by: Wei Deng <wei.deng@oss.qualcomm.com>
+---
+ drivers/bluetooth/hci_qca.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-The default branch, combined-stable, is what I run on the phone minus
-experiments: the pure v7.1.2-milos tag plus carries for NFC (reader
-mode; card emulation is still open), speakers, microphone and the
-magnetometer -- the DTS changes plus mirrors of the driver series, so
-one branch has everything needed. Topic branches (nfc, audio, mic,
-sensors) exist too, and every DTS change is its own commit.
+diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
+index 2444471956197bae62a1c4c3a776c5591780ec02..135c79e696aefe2b37ee7a7a668715360a1e2d75 100644
+--- a/drivers/bluetooth/hci_qca.c
++++ b/drivers/bluetooth/hci_qca.c
+@@ -26,6 +26,7 @@
+ #include <linux/mod_devicetable.h>
+ #include <linux/module.h>
+ #include <linux/of.h>
++#include <linux/of_graph.h>
+ #include <linux/acpi.h>
+ #include <linux/platform_device.h>
+ #include <linux/pwrseq/consumer.h>
+@@ -2445,6 +2446,18 @@ static int qca_serdev_probe(struct serdev_device *serdev)
+ 	case QCA_WCN6750:
+ 	case QCA_WCN6855:
+ 	case QCA_WCN7850:
++		/*
++		 * OF graph link is only present for BT devices attached through
++		 * the M.2 Key E connector.
++		 */
++		if (of_graph_is_present(dev_of_node(&serdev->ctrl->dev))) {
++			qcadev->bt_power->pwrseq = devm_pwrseq_get(&serdev->ctrl->dev,
++								   "uart");
++			if (IS_ERR(qcadev->bt_power->pwrseq))
++				return PTR_ERR(qcadev->bt_power->pwrseq);
++			break;
++		}
++
+ 		if (!device_property_present(&serdev->dev, "enable-gpios")) {
+ 			/*
+ 			 * Backward compatibility with old DT sources. If the
 
-What the driver carries mirror, status-wise:
-- mic: this series (v1), plus "soundwire: qcom: add SCP address paging
-  support", which Vinod applied to soundwire.git next for 7.3
-  (commit 999f80904763).
-- speaker: "ASoC: qcom: sc8280xp: support Senary MI2S" (v2 on the
-  list), "ASoC: codecs: aw88261: only check PLL and clock state at
-  power-up" (applied to sound.git for-7.3, commit 06b6f1245567) plus a
-  backport of the aw88261 format-negotiation work that is already in
-  mainline but not in the 7.1.2 base, and the q6apm-lpass-dais
-  graph-at-prepare RFC that is still under discussion.
-- NFC: the s3fwrn5 S3NRN4V series (v2) on netdev; binding has Conor's
-  ack, driver still waiting.
-- magnetometer: "iio: magnetometer: add support for QST QMC6308" (v1
-  on linux-iio); a v2 with review rework is pending, so binding and
-  DTS node may still change.
+-- 
+2.34.1
 
-The board DTS itself I still intend to send to linux-arm-msm properly
-once the bindings land, as per the cover letter.
-
-> Also for audio, UCM and AudioReach topology if it differs from
-> https://github.com/z3ntu/audioreach-topology/commits/fp6/ or what
-> you've used to test the changes.
-
-It differs, yes:
-
-  https://forgejo.catcrafts.net/Catcrafts/audioreach-topology (branch fp6)
-
-That branch is your two WIP commits with one commit on top, so a plain
-diff shows the delta. The functional changes:
-
-- The backend is named SEN_MI2S_RX: the tplg backend name has to match
-  the DAI name the kernel exposes, which is "SEN_MI2S_RX" in
-  q6dsp-lpass-ports.c.
-- Playback goes through a device subgraph that inserts an MFC between
-  the logger and the I2S endpoint: the frontend stream is S16 while
-  the AW88261 boost converter needs 32-bit slots (3.072 MHz BCLK), so
-  the DSP has to convert on the way out.
-- There is a capture path now (MultiMedia2 -> TX_CODEC_DMA_TX_3) for
-  the WCD9378 mics -- that is the part needed to test this series.
-
-One gotcha: the CMake entry emits
-qcom/milos/MILOS-Fairphone-Gen6-tplg.bin, but the kernel requests
-qcom/<driver_name>/<card_name>-tplg.bin, i.e.
-"qcom/milos/Fairphone (Gen. 6)-tplg.bin", so the file has to be
-installed under that name.
-
-The UCM is here, speaker + handset mic (AMIC1) so far:
-
-  https://forgejo.catcrafts.net/Catcrafts/alsa-ucm-conf (branch fp6)
-
-laid out upstream-style (ucm2/Qualcomm/milos/Fairphone-Gen6/ plus the
-conf.d/milos symlink).
-
-> So for NFC, speaker, microphone and magnetometer would be great.
-
-All four are in combined-stable. One more thing the speakers need: the
-amps' ACF firmware, loaded as
-qcom/milos/fairphone/fp6/aw88261_acf.bin. I pulled it out of an FP6
-vendor image (vendor/firmware/aw882xx_acf.bin, 4328 bytes; the
-mainline aw88395 ACF parser reads it as-is). I have deliberately not
-put it in the public repos since I don't know its redistribution
-status -- something you are in a better position to answer than
-anyone: could Fairphone clear this file for redistribution, so it can
-eventually go to linux-firmware with a proper WHENCE entry? Happy to
-send it your way off-list in the meantime, though you likely have
-easier access to it than I do.
-
-Since Srinivas mentioned on the 3/3 thread that he plans to post his
-SDCA driver for this codec, the mic carry in the branch is simply this
-series' v1; I'll keep the branches refreshed as the series evolve.
-
-Regards,
-Jorijn
