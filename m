@@ -1,236 +1,132 @@
-Received: from CWXP265CU009.outbound.protection.outlook.com (mail-ukwestazon11021107.outbound.protection.outlook.com [52.101.100.107])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADE6D3385B9;
-	Thu, 16 Jul 2026 15:23:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.100.107
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784215435; cv=fail; b=ndG1q+iRc2DO2T8INXMn0ojiomHI23qDxvyINLeFZc+/jwjBAKKDEc3WiXXLX6C0pBmPX+VLwgD56lwSjFt0RnwYy7JbXhc9LTe/QMh5NRJary8ziNdGRXljOtlH8tkRkGc6UYZEIsXFY6rXDaFwLbUAo8vzovhoA+ffEQpfY/Q=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784215435; c=relaxed/simple;
-	bh=ElX0ovtlsMmQpEGZbL2eevmXwy+n0OY4GwxQUFchUFs=;
-	h=Content-Type:Date:Message-Id:To:Cc:Subject:From:References:
-	 In-Reply-To:MIME-Version; b=lcHk6g43jm0DZtmBNV/+Q9H2hfdTGFWbhZJ8EgGE2/Pupt267xpTo4aQwi9l562Lz+ejlM5W9MpyPFi31BOgWjoJ+V9lAiojbmFbQ0NSvpsEZN3Qhj14dSgZ2HvLcHiKUekwcEJyCDJUGUcL3PAgZxl9UaxB80qDGQMTnA7gHds=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=garyguo.net; spf=pass smtp.mailfrom=garyguo.net; dkim=pass (1024-bit key) header.d=garyguo.net header.i=@garyguo.net header.b=UI2h/GFf; arc=fail smtp.client-ip=52.101.100.107
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=garyguo.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=garyguo.net
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85F3A32D45B
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 15:43:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.42
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784216623; cv=none; b=QbgpJl1P2ugPGQ4FyUCqMid+R3YrspN4K03iXArySJN9Pmv0WSwYt/TizLR23uo4A0NWBL8nf3CObcND3puSxzwCa22ckyWt+m4FUAzzm3KBINUQZ0g2PADRE/4rlbLQDGPwPi/tG3QHMMdMbgnPOlRSS8QB5t6IU0cm6z26yO4=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784216623; c=relaxed/simple;
+	bh=rH75EzXICa0XdEgVwHY4Yfy9qWAaivBxfj522dz1C6k=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=SnwYl9V0VllVNa0Da9nByhXw6jb1AA5dJWwsLK2P2o2/EGvB1VOuZjOblIEfCWAFi4mO+4mKj+yMNU+t/QIHbNt9ddxGyOaE9KlEbP0DSJ9ihfEA14rd9Rn4VUHUwzMYnx5+IKaHNJil5ZNLmFIMx1PVz8EeISKFyns98elFCUY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Qx0g773o; arc=none smtp.client-ip=209.85.218.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=garyguo.net header.i=@garyguo.net header.b="UI2h/GFf"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HF6vgeCcAwVwak/CZC1G8m18yZtJAY1tZlplX9GRsT3xwY38EZx5iRTOHnuNFKx61nCvJVGffD+kCzjGWZtNUePLn093BX7/TF2jfR2kVwHKb6xL6WzHwofMo3jiJaLqAIUpwj6E9JSmK+Scon1Nj/KcND0pGdDOdBuuqcxwWsG84L/OKFttW5McqIxpveqLoHvISX8/pdw2DTMJVTTB62gtxHAHlj2L9LvUutATEn6iWZUKuelFbMMd/vTeEEXERyTj49MVd9gCyvRW2L0uUA9ueaG6dMh6oqMEpbI0i9NuUJmE7pOMs0l50azelgAaqA+g8sVyoyZ5IfTt4foIXg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jjta1IMoeWuR+Tk3AelrBcb43oQk+2/qwBFW4GV0pK0=;
- b=Tn7t72u36x+trkZBpogVd9pCrsJVs2ilHITwEiWca0gcM2rVY6RGdKTtyuThxGgAIQdCphamu7CMV3XCa22g2UiUfpvfjZ/x0FNy7/raQTFsGoYoqQ95UA5CPXLdn7v6+D7QYfvzEt+ju0d+hq8Sydp5P2rOh0pHHI4QuZxiXPEvBPFAOqHVUWp2NgMPky4s3ZGUxtF6nDrYgr0z5l8GwlaakwSNc10IJ2Q6AM/IG8qIdo7MSlRkYmCrVJzhe4hohGhLHan2q5Lx7Fd/wqGVRVJU3V/mr/+vtlysMxJOPjofkZ7Dd+2C0YqJIk+gQe4W43qcC+RI90of0GzwrzsAKg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=garyguo.net; dmarc=pass action=none header.from=garyguo.net;
- dkim=pass header.d=garyguo.net; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=garyguo.net;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jjta1IMoeWuR+Tk3AelrBcb43oQk+2/qwBFW4GV0pK0=;
- b=UI2h/GFfWGjRvYr/peuvAhKLIAnxYZSJLQZ4BuPefWncIZ80lfQgE3d32go6BOzgtATVcmXdOeJK8NFk1fJhr+B8mNzY3ZFFnWjFrpYd6oW3uymZGIspUbeqDZetARXhGfXhjMsswZPW8EXNc7xo7VuMkU9KD1lBSyOExC6ihYM=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=garyguo.net;
-Received: from LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:488::16)
- by LO7P265MB8325.GBRP265.PROD.OUTLOOK.COM (2603:10a6:600:466::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.11; Thu, 16 Jul
- 2026 15:23:47 +0000
-Received: from LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
- ([fe80::1c3:ceba:21b4:9986]) by LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
- ([fe80::1c3:ceba:21b4:9986%4]) with mapi id 15.21.0223.008; Thu, 16 Jul 2026
- 15:23:47 +0000
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Thu, 16 Jul 2026 16:23:46 +0100
-Message-Id: <DK03KZBE5E3T.3VQJY9DIBYON7@garyguo.net>
-To: "Link Mauve" <linkmauve@linkmauve.fr>, "Srinivas Kandagatla"
- <srini@kernel.org>
-Cc: "Andy Shevchenko" <andriy.shevchenko@intel.com>, "Neil Armstrong"
- <neil.armstrong@linaro.org>, "Kevin Hilman" <khilman@baylibre.com>, "Jerome
- Brunet" <jbrunet@baylibre.com>, "Martin Blumenstingl"
- <martin.blumenstingl@googlemail.com>, "Sven Peter" <sven@kernel.org>,
- "Janne Grunau" <j@jannau.net>, "Neal Gompa" <neal@gompa.dev>, "Frank Li"
- <Frank.Li@nxp.com>, "Sascha Hauer" <s.hauer@pengutronix.de>, "Pengutronix
- Kernel Team" <kernel@pengutronix.de>, "Fabio Estevam" <festevam@gmail.com>,
- "Vladimir Zapolskiy" <vz@mleia.com>, =?utf-8?q?Andr=C3=A9_Draszik?=
- <andre.draszik@linaro.org>, "Orson Zhai" <orsonzhai@gmail.com>, "Baolin
- Wang" <baolin.wang@linux.alibaba.com>, "Chunyan Zhang"
- <zhang.lyra@gmail.com>, "Maxime Coquelin" <mcoquelin.stm32@gmail.com>,
- "Alexandre Torgue" <alexandre.torgue@foss.st.com>, "Kalyani Akula"
- <kalyani.akula@amd.com>, "Michal Simek" <michal.simek@amd.com>, "Miguel
- Ojeda" <ojeda@kernel.org>, "Boqun Feng" <boqun@kernel.org>, "Gary Guo"
- <gary@garyguo.net>, =?utf-8?q?Bj=C3=B6rn_Roy_Baron?=
- <bjorn3_gh@protonmail.com>, "Benno Lossin" <lossin@kernel.org>, "Andreas
- Hindborg" <a.hindborg@kernel.org>, "Alice Ryhl" <aliceryhl@google.com>,
- "Trevor Gross" <tmgross@umich.edu>, "Danilo Krummrich" <dakr@kernel.org>,
- "Daniel Almeida" <daniel.almeida@collabora.com>, "Tamir Duberstein"
- <tamird@kernel.org>, "Alexandre Courbot" <acourbot@nvidia.com>,
- =?utf-8?q?Onur_=C3=96zkan?= <work@onurozkan.dev>, "Johan Hovold"
- <johan@kernel.org>, "Ronald Claveau" <linux-kernel-dev@aliel.fr>, "Daniel
- Lezcano" <daniel.lezcano@kernel.org>,
- <linux-arm-kernel@lists.infradead.org>,
- <linux-amlogic@lists.infradead.org>, <linux-kernel@vger.kernel.org>,
- <asahi@lists.linux.dev>, <imx@lists.linux.dev>,
- <linux-arm-msm@vger.kernel.org>,
- <linux-stm32@st-md-mailman.stormreply.com>,
- <rust-for-linux@vger.kernel.org>
-Subject: Re: [PATCH v3 0/4] nvmem: fix a const-unsoundness in reg_write
-From: "Gary Guo" <gary@garyguo.net>
-X-Mailer: aerc 0.21.0
-References: <20260716142415.28718-1-linkmauve@linkmauve.fr>
-In-Reply-To: <20260716142415.28718-1-linkmauve@linkmauve.fr>
-X-ClientProxiedBy: LO4P123CA0647.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:296::22) To LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:488::16)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Qx0g773o"
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-c1671ec8692so311112066b.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 08:43:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1784216620; x=1784821420; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=zBypqS7GnltF0qflde2eBCHFe4sgdKQRHHH8Z6tCV90=;
+        b=Qx0g773oFC9yHmm0fB4xBDoVtAGZmJbBHJTgVyo0ju7t8AsVJ45zSImShPZpH4GlTl
+         8ckZWmjde9Rj913GfB3aj+0RmpKDiTA3idKum3GFnkY2xTCiw/3ZGivzoJVBwuyY+yV/
+         Wnh9VPDD9r+Ub3P8/xaOfq0vhEr2dW8YDTYZqK62llV2xVVA9kV8jONrFeuBL4G/oXAC
+         NMG/EiK51bDrZIq8SPVnS9Zg5fxSGe0AclL74UIT6Pko1rjRkHFBUkBwfkNQGfJuphat
+         KNrNwlMdOEZ0beLEn6f5NBjcG5WdAmavabCroOdU4p2HF/m+UzNyWLXwW5UJCONAf3BQ
+         Sarw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784216620; x=1784821420;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=zBypqS7GnltF0qflde2eBCHFe4sgdKQRHHH8Z6tCV90=;
+        b=X2KlK1TzyroeKUIsjk/6jBZKZNrX/NUYN8VjmrraIb7T8r7HaHb1SRf9nAnwASWJzy
+         Oqv6e55ilmEm1/l5E6Q6ZCakdp7muNYzsQxnqeki5KGLgBYjSQ9HOtz9+7ffiTaXUlc3
+         IKpDV3PjZ5/ftczr9LHvR91U2YHWH63lyd36cfno6eitRstrw3oEy9n+WKej/522JH6T
+         8GD0o1fCEuKtPNseO014xOIH7AY4/1M0MXKSqz4sKwavoJq2TUQu7E+5RSBkO9nKC/IO
+         rdPIL58jmalBixOtAr7JsD9tRYNnISv8UNIowGu1Wtd3a86fAUgqyIR3vidkqudWt6sz
+         36TA==
+X-Forwarded-Encrypted: i=1; AHgh+RrB60VkzyksCZBLGYrqGo3VKzwFyjpv3OdSyk0/X5Oo3SCt3XuEzSiT/yYgY6MrpW+x5sW6jLQJLdFc8vwA@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyl9q3Vru0Se5Mhu65RTKX+iWnuM+mBRvQ30M4CWe2+DGYbWupL
+	Bc4bOFcXJAI48IfPEMjpsTtfPPj3AW9ED7MLM5qY5tURb3ymz1UXNvcc
+X-Gm-Gg: AfdE7cli2vlJ+l0BpL14TUNWxX0zezu1XyDa0rNi/e6AHJz185O6bl74E423t6b+DhW
+	VTQbjVyWlU6aZsPPPrqj7gppICXJp/4uri0BfnySQyyhqvN05wtO/h8LYKIgGvweSmVBOgrgpJP
+	wfGoR2SXEuExeSn5uB3jXOdTGT3JYpI8SmQ500t3yK8tWHcpt3ufFb8DSptWlqNOtD6mkkLj/np
+	5GIdB5h7OTeekUP54wji96FGlCo6ko+VYl6j24PHgN4JCHAwBtWm3Y94MfO+KBGUN1XG61e2vqU
+	IWNBLsP9dgVRgtT4iA7EqhgWSedqq0dBD2IkQAHwPagbv/5cXeuAFaTE5d3B7f6CYyKL90JgkdO
+	xYUxiC7/d2F+oIWp0r0lJD/irmgwrnjv1WZn86mxcdgXxfvU0N9UBq7WtmT+94tvqCA3L+A==
+X-Received: by 2002:a17:907:3e12:b0:c12:8664:6aec with SMTP id a640c23a62f3a-c1679364167mr456134966b.53.1784216619477;
+        Thu, 16 Jul 2026 08:43:39 -0700 (PDT)
+Received: from beelink.. ([164.5.253.70])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c168a1083c7sm195166566b.30.2026.07.16.08.43.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Jul 2026 08:43:38 -0700 (PDT)
+From: Aldo Ariel Panzardo <qwe.aldo@gmail.com>
+To: Manivannan Sadhasivam <mani@kernel.org>,
+	"David S . Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>
+Cc: Simon Horman <horms@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	netdev@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Aldo Ariel Panzardo <qwe.aldo@gmail.com>
+Subject: [PATCH net] net: qrtr: restrict socket creation to the initial network namespace
+Date: Thu, 16 Jul 2026 12:43:19 -0300
+Message-ID: <20260716154319.3297699-1-qwe.aldo@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LOVP265MB8871:EE_|LO7P265MB8325:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1764aef4-e3ca-43ee-5c86-08dee34e3af1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|10070799003|1800799024|23010399003|7416014|376014|366016|5023799004|56012099006|6133799003|22082099003|18002099003|10067099003;
-X-Microsoft-Antispam-Message-Info:
-	n9p6E+IQ5Ec24YRxYYSTdUZ2t1WbiFfsOeKKBN6ok7WaTx+SaoK4AJZaAkH8gf+qACSFJZQgDPvhtEaGSiloOEfkdnkQlOtgdS5fKtRUn49/FAWfGa94naofpPnhDC7mjfvZKXLBMjYy9zNR5nbO5+RY/CCHRzyYOC8GuN86nRmVAHunE/+KO3/gEIAvcMJ1c2BobPL7Rzp/cEBVvjHGnL4rp5H+xcnkxBSq4qAoQawbwQkOXPxray83/IEinGouxslBP0VYuPqwjMYSRt5BpGcSTi6Shv5ltb21cPyhjvEhGRRAxriu6WAzyJs00jaBGEEJoWXmp4i3SeBk4gzFlFvptNN2ZH+GBrUxQDmh6wEVerjdnnX2etOTCZAhW6cylCn0OhfiTRa9RhP6yG6HlYQXvZyg5WPWcCA2Z0lXWD5GAchykEsDg0YC6HwYogv3iZg48VylJxqtMeCHAZDjEv2heqlM914SfpxhlC3nlYY6l86wOgg4x82q0Q2ovFrgP8IDt7ktTior/NQ9U2Tpy/3gtQ2CxNlAHqc8HrF7O5e3AOTgce7ALe03u3Aw6iBYESazteXiXvNpH9yP+sHqto1rVSdkpwHNovspR6/WxMlhXaofG8PAF0jL04rQ0LPfLaWbe+P4rvTYsHHg/Rm3ne8gvRkbsVCa2oH7T7lfF9Q=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(10070799003)(1800799024)(23010399003)(7416014)(376014)(366016)(5023799004)(56012099006)(6133799003)(22082099003)(18002099003)(10067099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?VVNWbS9PQ2tTVDVLMDBZQXphUEVZRk94anlDMjhjVm4yblJGbnNFK0F0blQy?=
- =?utf-8?B?a0tXQ1VlSzhWTm5DS2tQM3BOWGlPNDVpVTBZVHZXWi9vL1MvMThWWnB1V2dx?=
- =?utf-8?B?NmE3TW84RG93VXpYd1pmQUxtQkE3L09DUXUyT1UwSlk2R3BweVdiQitSTDlS?=
- =?utf-8?B?Q29CQXFURGdKamYya1JpZXRydVZaeUUvV1ZRbjliNlB4d2R1aS9XeDNlUW03?=
- =?utf-8?B?NjBhMjVFcHJEeVZnMU95U0wxQnBZUG9RTks4eHpHYlltdHZzU2dWTlBoNmlX?=
- =?utf-8?B?MlU4WE9abnJLQmlUclJsZ3lvVjFxTHFyU3puTVNYVFFTQThscis5MmZoek9l?=
- =?utf-8?B?blFxVmF1bUd4UGRlUXhrcHJ1cnlUVnRNTmg3QitsQkgzVWRRdHlWT3VlWkdm?=
- =?utf-8?B?QlFDaHFMUmcvR3Y3QVBPVjlhYnQ2Ui9xMWlzaE1pUXdHVmpsTW9BMVdJMDd1?=
- =?utf-8?B?RmJGNnE4b2VYT2EwZzIvc1VSb29QSnc2elE4a3hLaFFKNnRjVWhDUSswdU5V?=
- =?utf-8?B?UVZkd2QwWHB6dS9YempibXdoQ00wNkpUQVZwZmFXa2dYTVJDQzdKdENKNHFj?=
- =?utf-8?B?azlhTHh3dlNjS1lxTkR2b3RMUjczTGE4ZVRCY2lxVFhiNEdaa29tZmc5TkJx?=
- =?utf-8?B?MGZnNTJUWjJFcjRPVTNHNklUUWJ4NSt1WmhsTGRCelREQmJrZmdPUS9URDEr?=
- =?utf-8?B?QVAzS1JVZkNYQXBlMTJjUytXZGh0Q1V2QnlqZUgyRkgyVFFsb3dEdXNyNStl?=
- =?utf-8?B?YU1zRDFaY1JBeUJwNy95L0gyajFWa2tPQ0NzRnRvTUpId1FZMHl4dXdEbXRn?=
- =?utf-8?B?ajBPRURkbGk1ajVDNzRteityV1JYalNjam9mUlc1WnZWdWFoU1EreFdIY3dL?=
- =?utf-8?B?WHdqNmNsUi9WYVVNYXVqR1VuTmRURXFWRGpYdExYL2hqZ0hrOUFJOS91cHZH?=
- =?utf-8?B?aU05Q0FSSnRUT3VZUjRMMnBIL0NCVGRTaFQzaHNGRHF4dnF4QzhYclJJNEZi?=
- =?utf-8?B?VHFWZExWZkZpZEZWODNDcC9WUjk4b3dFYmNNUEwvcjRzTGdJWFJoOWFva2w3?=
- =?utf-8?B?Q1czZkJMR04rSlRHbDI5TU51Q1ZOVCtKb3lKWXNWOGxIL2RCY3hWbGZGUU9s?=
- =?utf-8?B?MGkrUnA4dDN2R1U4MVAxVzVEaXQzMGhyUEEyVUNYTlorYjd0UjZMcSs0MHFp?=
- =?utf-8?B?U21NR2tpbW52TWcvbEo2MHF2Z2xRbTFIS2JBWTZFOWxaUzZwVmxkWXhkdDc5?=
- =?utf-8?B?cXZETDhING1ZY0NNTk1rVU5jdnR3dmFqSDJ3eUViS1d1SmZlQlREWnVRQkdC?=
- =?utf-8?B?SEpDc3NZRkl1OHRWeno0eUN2WlBhWFNRazhjb3JKYnBXUmlodTEvMWFZVGxW?=
- =?utf-8?B?QkpvT1kxbkNjY2FkTG1KSnowVEUwTE44ekpLdlNZWUd0RkRmOHZhZ1ZJbGFR?=
- =?utf-8?B?K09JYmFKU3FVVG5JdnhUaUdKZURuZjI2c0dYUS9xNnhZbzlsSXJXWWMrMjJ2?=
- =?utf-8?B?QUVRblJFTTJLWm9JUmVaSUlXYTUwVG56bFF6QVhqN0lCSHM5UFJ4Zkwxdm5I?=
- =?utf-8?B?VElDS1NZZUgzMzBLcDZ0VDZyc3Q1YzR0WXV1N2tlVXN3REtqTGpxbUhhbWtM?=
- =?utf-8?B?Q3g1Z0dtMlMrQktLVStCb29hMDlWUnhLOXRhTnU5SXJ6T3ZZZWtjeGgrVzVI?=
- =?utf-8?B?SW9yTDd4WUpkSzh1YzNvaFJxTHRmL3BxTno2WG1wU3VBRkpJOGdNV0lrQXB4?=
- =?utf-8?B?ajhpRWFxM2MxSGpXOTN0Nld4aWpoYjZ1ME9FaitIbS8zeE5BR2dvQ3VKQ3hw?=
- =?utf-8?B?dGJhemk1Z0R5Z3pCVk1NMjVIVFpJdCtQMktlZ2lITnlGZURhMWc1eDEyckZN?=
- =?utf-8?B?R1A1U2JTUU1OK0pRa2hQeFNzdTJSekZIc3p4YzRkUks0YXdyQktUelJjTSs3?=
- =?utf-8?B?eFpRaE9YZWlma3Rac2x5L25Ldm1tN2oycVIwbTFkL2gyUzdjWUtoOGdrc2Nm?=
- =?utf-8?B?aStMaE1zK3VLYnUzUU43cFhsd1ZyN1hydXRjazdjY3hMeW5GOW9Db3cvNjlD?=
- =?utf-8?B?TDZWQVlRanZKd1N6a3I4WTRjYlc0cVgwQkZpOW5NSXh5STV2M0Y3c2puV0Mv?=
- =?utf-8?B?ajI5cXZEZ2lSREY3QVBZcW9zUGRnS25NeWNUL0ttZW9SRGZtKzBodS9WN2Zm?=
- =?utf-8?B?TTJQeFlEblJ2TWxJRGZPTFhlREdMS21EV090ejZkdDdlaU9nM2dMaGZSOFdY?=
- =?utf-8?B?Vk9sZFJ1SzE0UHZGN2haZnEwTzdjbVk2SDloS2RDMW81UTVvbVArdmJFMWlH?=
- =?utf-8?B?QXBCeFZWOXArbTB2VytVL2cwN0wrcEFjaDJqTnpDbzFaUnhCeEwyUT09?=
-X-OriginatorOrg: garyguo.net
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1764aef4-e3ca-43ee-5c86-08dee34e3af1
-X-MS-Exchange-CrossTenant-AuthSource: LOVP265MB8871.GBRP265.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jul 2026 15:23:47.0178
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: bbc898ad-b10f-4e10-8552-d9377b823d45
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 345MzfAWA8p8zb/1ZFejTJFcYJiUP4HsDAYwK3bX3MopVX3NQuFyGBlZf6BdR7sFub/du2/gw1nEgU0mrLqZyQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LO7P265MB8325
+Content-Transfer-Encoding: 8bit
 
-On Thu Jul 16, 2026 at 3:24 PM BST, Link Mauve wrote:
-> This callback used to take a mutable void * for no reason, which causes
-> the compiler to be unaware that the val buffer should never be modified
-> by the callback.
->
-> This was found while drafting the nvmem-provider Rust abstraction.
->
-> Thanks to the guidance of Andy Shevchenko, this now introduces a new
-> callback and deprecates the existing one, with the goal of renaming the
-> new one into the old one once no user remains in the kernel.
+QRTR keeps its entire port and node state in module-global variables
+that are not partitioned per network namespace: qrtr_local_nid is a
+single global node id (always 1) and qrtr_ports is a single global
+xarray. qrtr_port_lookup() and qrtr_local_enqueue() operate on that
+global state with no network-namespace check, and qrtr_create() places
+no restriction on the namespace a socket is created in.
 
-I wouldn't call the series "const-unsoundness fix". There's nothing wrong (=
-in
-the sense of UB) in using "void *" for constant data as long as it is not
-actually mutated. Yes, it's better to use "const void *", but just call it
-"migrate to const void * in reg_write" or something similar.
+As a result an unprivileged process that creates an AF_QIPCRTR socket
+in a separate network namespace, e.g. via
+unshare(CLONE_NEWUSER | CLONE_NEWNET), can send QRTR datagrams -
+including control-plane messages such as QRTR_TYPE_NEW_SERVER - to QRTR
+sockets owned by another namespace, and vice versa. The receiving
+socket sees such a message as coming from node id 1, indistinguishable
+from a legitimate local client, breaking the isolation that network
+namespaces are expected to provide.
 
-Best,
-Gary
+QRTR is a transport to global hardware endpoints (the modem and other
+remote processors) and has no per-namespace semantics; its in-kernel
+name service already creates its socket in init_net only. Confine the
+socket family to the initial network namespace, as other
+non-namespace-aware socket families do (see llc_ui_create() and the
+ieee802154 socket code).
 
->
-> Changes since v2:
-> - Link to v2:
->   https://lore.kernel.org/rust-for-linux/aljAqBNVXV1aVJqx@luna/T/
-> - Rebase on top of linux-next/master.
-> - Fix logic error which made all devices read-only.
-> - Remove a blanket cast of function pointers to void * in
->   apple-spmi-nvmem (patch 3).
-> - Also fix constness of write buffer in firmware: meson, which is used
->   exclusively by meson-efuse (patch 4).
-> - Re-review all changes to make sure the passed types are more correct
->   than they were before.
-> - Actually test with COMPILE_TEST, which I forgot to enable before=E2=80=
-=A6
->
-> Changes since v1:
-> - Link to v1:
->   https://lore.kernel.org/rust-for-linux/20260715175229.24672-1-linkmauve=
-@linkmauve.fr/
-> - Removed all changes to other subsystems than nvmem.
-> - Added a new reg_write_const callback instead of changing the exisitng
->   reg_write.
-> - Deprecated the existing reg_write callback, it will get removed once
->   all users in the kernel will be done migrating to the new one.
->
-> Link Mauve (4):
->   nvmem: core: deprecate reg_write callback and add reg_write_const
->   nvmem: make all reg_write callbacks take const void *
->   nvmem: apple-spmi: improve calling safety with wrapper functions
->   firmware: meson: pass a const buffer to meson_sm_call_write()
->
->  drivers/firmware/meson/meson_sm.c       |  2 +-
->  drivers/nvmem/apple-spmi-nvmem.c        | 18 ++++++++++++++--
->  drivers/nvmem/bcm-ocotp.c               |  8 +++----
->  drivers/nvmem/core.c                    | 28 ++++++++++++++-----------
->  drivers/nvmem/imx-ocotp-scu.c           |  6 +++---
->  drivers/nvmem/imx-ocotp.c               |  6 +++---
->  drivers/nvmem/internals.h               |  1 +
->  drivers/nvmem/lan9662-otpc.c            |  6 +++---
->  drivers/nvmem/lpc18xx_eeprom.c          |  6 +++---
->  drivers/nvmem/max77759-nvmem.c          |  4 ++--
->  drivers/nvmem/meson-efuse.c             |  8 +++----
->  drivers/nvmem/qcom-spmi-sdam.c          |  6 +++---
->  drivers/nvmem/qfprom.c                  |  6 +++---
->  drivers/nvmem/rave-sp-eeprom.c          |  6 +++---
->  drivers/nvmem/snvs_lpgpr.c              |  4 ++--
->  drivers/nvmem/sprd-efuse.c              |  6 +++---
->  drivers/nvmem/stm32-bsec-optee-ta.c     |  2 +-
->  drivers/nvmem/stm32-bsec-optee-ta.h     |  4 ++--
->  drivers/nvmem/stm32-romem.c             | 10 ++++-----
->  drivers/nvmem/zynqmp_nvmem.c            |  6 +++---
->  include/linux/firmware/meson/meson_sm.h |  2 +-
->  include/linux/nvmem-provider.h          |  6 +++++-
->  22 files changed, 87 insertions(+), 64 deletions(-)
->
->
-> base-commit: b8809969e1d7a591e0f49dd464a5d04b3cf02ab1
+Fixes: bdabad3e363d ("net: Add Qualcomm IPC router")
+Signed-off-by: Aldo Ariel Panzardo <qwe.aldo@gmail.com>
+---
+ net/qrtr/af_qrtr.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
+diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
+index d02ef9a74c3c..a30fa56e6aa3 100644
+--- a/net/qrtr/af_qrtr.c
++++ b/net/qrtr/af_qrtr.c
+@@ -1263,6 +1263,14 @@ static int qrtr_create(struct net *net, struct socket *sock,
+ 	if (sock->type != SOCK_DGRAM)
+ 		return -EPROTOTYPE;
+ 
++	/* QRTR keeps its port and node state in module-global variables that
++	 * are not partitioned per network namespace, and the in-kernel name
++	 * service only operates in init_net. Confine the family to init_net so
++	 * a socket in another namespace cannot reach the global control plane.
++	 */
++	if (!net_eq(net, &init_net))
++		return -EAFNOSUPPORT;
++
+ 	sk = sk_alloc(net, AF_QIPCRTR, GFP_KERNEL, &qrtr_proto, kern);
+ 	if (!sk)
+ 		return -ENOMEM;
+-- 
+2.43.0
 
