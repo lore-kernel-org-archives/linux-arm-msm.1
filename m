@@ -1,207 +1,199 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 39F0E3DDB04;
-	Thu, 16 Jul 2026 08:29:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 90A833EE1EC
+	for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 08:31:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784190542; cv=none; b=uumNesU1+TXO74S7CMbGCBshg44PqC4Fq5gYZFysUh+MX8mB7LkIqMXSVCUzPs46C16Ci3h/VTBzi8IM7gGxYsZsORPKzRswHPSrV+MuaVh5SCsMzmK9cuhWWmWh2iMMgB6OikETP+8gPc9DKNAm78Fk54vA0FxSrCxRABfn+ys=
+	t=1784190709; cv=none; b=eK+0jwl2psBfAxNCEa5vBLiUIs/H2vhDh4ORGRr2xXyfRPirKO3tvKAFV8LSKcY/XxoIrPgTb88225s5S5+SC2HnVr7U4txF5ZoW3sm4Z73cMbPMu1q6d3mTA+/akbZICczgHhvMoix5Cyo26YGcgwrXlrYXWI0VZtwrGyciyOA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784190542; c=relaxed/simple;
-	bh=wLCMV3fF1Jx9BJa6AR9Lfi3FLZub8Knw3/xrFQKXrxY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=c+qj6o8CBYorkVjaW1NoBV8UpXm6wpdvDaKC8dkhUbGA0YxwOR5DpbroP8ZGSuRq9gvEk1l2McRL7oQ5TK2TuiICkK5od6t/YkiWPQaFHndbC8o9okgfS+aEYIj7Tu70F3FUf6rW0wJpsUlkJC+ap6h4k2rFjpdTHZW2NrrFVLg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=NHnt8pNF; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784190709; c=relaxed/simple;
+	bh=6DHfUJVqQheLEpAIKU2YHLWqGBbQ8kKr9sjbdC1PERk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=M0FRemImFcxxsNU/yOhCJwTwakYa3pjxjxHU4Nq3XFtDPY+58/CWdAiMWoo1WVy9A7mDfgTgAZOLfyDLK0wPVCqHOW0cgeMv2FqIsur6w65ZvSJdVasvWqrfAqbMuq5uhpwJN9jIq/6rQIxm8ooThrD7uuX75yiJduGxZDg/eu8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=cKJ0mHMg; arc=none smtp.client-ip=209.85.216.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="NHnt8pNF"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3BF2F1F000E9;
-	Thu, 16 Jul 2026 08:28:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784190540;
-	bh=LBMzZungojnJJzsOyamokZKaxeJBCdcl1wVHPQtN5pg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=NHnt8pNF/luhx1IUKLfNB43r0drBog4E0VUSo065z+H/o7vU8pNlpSzXKE1MwYXoV
-	 MRO4KHZBs2UlMYfdxAHyqxLxFmtj93jA3MpRZ8npBboI89TpGXJDVRL0FOJjwzqG38
-	 bb/T0Qf0FMmi7lFhdlyYBPZa/Po1IStCw4ASZJSrz9iTzuige8SbKSqhotDOoawCom
-	 UyQT6MbGtwmGXmQcfWpT59QXcumpjvtqPz21P6+CTGPjMDZeivEoZEhQFwPB9f5Z/E
-	 fCWhUK6cXIQdyRypfOZG+EyjS6oJgfOelF/hgARxUd/mWyySEGAb2pwcWRayxgP4MK
-	 ebaFUAbeiMxmQ==
-Message-ID: <acd03aae-9d41-44d5-974b-5deb751b48b3@kernel.org>
-Date: Thu, 16 Jul 2026 10:28:37 +0200
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="cKJ0mHMg"
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-38dc69c74b8so4504971a91.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 01:31:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google; t=1784190707; x=1784795507; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Bc4d8vqk+lliMKPmpqbLIgPhIFDsMX/hIWVD5yj9aEU=;
+        b=cKJ0mHMg6aEmy0v65cg1aQr6syhYObFrAAz3Ipw+5pyERDObvZIzibmBLAiGagP3hC
+         aRtfqHQLa8QGwLsgtmh7oillq20h7IeK0W9uE3ybzhwz9W1Uji6/vw7l/CSFdGv6znBv
+         i7dFNY2eg56Mjp71OZbFuVxetr78jDR48UPQM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784190707; x=1784795507;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Bc4d8vqk+lliMKPmpqbLIgPhIFDsMX/hIWVD5yj9aEU=;
+        b=JInjnNMxquQXZmo1RSb61CtYjSknsDUlcnfHZAZo96/0rrOrsNWYMljlpMnHjvzMIS
+         9Ia+7sZveRck7wiN+9e3ANxzwBhMN3StT6iVnJ9zrRT2FM1YVhbQXPPc2u1bUpo075ra
+         2qZqeyCQSAOgU/U2bgdrokFStf5Sz82uAuTfrHGzzZRz7G/SEH12mJybSZ1hFmjdWwPb
+         0bPvgo4+CW25J5h7V7n94ZWCY4E1fFZNJC+zkAikUEFAVtAHOKz0Ea3n96l8IIF8SwZt
+         fIAhFrDn/C4GSYd9fv1bJ8AIaV24jIak1NQiv/6TMz3mN8JZDK//KuN2uNJH/9Nrq4h/
+         AsHQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrOaozGIhzZDTlV1dITqHmrUznz1Yxm974SaEUWO4TLdeQwT09Rm3dDQlWlMzYBIImqTAWTO0h54pQEx8RX@vger.kernel.org
+X-Gm-Message-State: AOJu0YwkuIsCauP/7PC7noGaD4yDP/vb4wrN8FYcydZX0ZvY4/2R0M00
+	zaG21vhMrWVOmn9vpg0kMlBKsKpXP4OIVfHSvjV03I4E1Aq/1HpCbk2Sinb8gGDv4Q==
+X-Gm-Gg: AfdE7cnmoj73paeqzWpWxeNzf2I6+rKfZObdo8eFBRaZNjiM2ySMOoVaS1fM3zqvEW1
+	dfOg831nBWVliR33Jw96ipCjxKGoaVsx/ID/5ts3+v8i8WfQd2Ug4ZWn/fTY/c+Gul+yGU+l0iy
+	h090qv6G1X2fKUXu7qB2mjdJQbn5ITKtL/jSTd2g231AxlndS+AnJ7sQ29j26SmMwLKpx2P5QiN
+	TwqzixUKOYR2eU/bjSnarNRuVdaJV8K7Q9oteS+IIax2++u47qZ1HNaouAKdkVeovrgTJv8A8Y8
+	5QQKDaQlXgMpXkHc2qNaozmmNFRljkbkz2J6eai+dZYjqbPCkc/IAtjTgBf6a98t/8ZkVKRx30J
+	+AbreRIBHqLOCdwKqekU3dRxg8KucVboK0NXHuSmgf9EUwSUyUiwZ8ajZ2Wh+7IrpUtJGzjktxk
+	jCMy18jCcwW7smUinRTzj45jByufErT9SbRQ==
+X-Received: by 2002:a17:90b:4a04:b0:387:e0bb:5802 with SMTP id 98e67ed59e1d1-38e2a12332amr5930901a91.41.1784190706821;
+        Thu, 16 Jul 2026 01:31:46 -0700 (PDT)
+Received: from google.com ([2a00:79e0:201d:8:8cee:ac9c:232c:cca3])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38e39e5f713sm923742a91.14.2026.07.16.01.31.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Jul 2026 01:31:46 -0700 (PDT)
+Date: Thu, 16 Jul 2026 16:31:41 +0800
+From: Chen-Yu Tsai <wenst@chromium.org>
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Manivannan Sadhasivam <mani@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Marcel Holtmann <marcel@holtmann.org>,
+	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, linux-pci@vger.kernel.org,
+	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Subject: Re: [PATCH v3 08/11] Bluetooth: hci_qca: Support QCA2066 on M.2
+ connector via pwrseq
+Message-ID: <20260716083141.GA4101439@google.com>
+References: <20260710-monza-wireless-v3-0-46253587af64@oss.qualcomm.com>
+ <20260710-monza-wireless-v3-8-46253587af64@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 29/33] mm/vma: introduce and use vma_set_pgoff()
-Content-Language: en-US
-To: Lorenzo Stoakes <ljs@kernel.org>,
- Andrew Morton <akpm@linux-foundation.org>,
- David Hildenbrand <david@kernel.org>, "Liam R. Howlett"
- <liam@infradead.org>, Mike Rapoport <rppt@kernel.org>,
- Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
- Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>,
- Jann Horn <jannh@google.com>, Lance Yang <lance.yang@linux.dev>,
- Pedro Falcato <pfalcato@suse.de>, Russell King <linux@armlinux.org.uk>,
- Dinh Nguyen <dinguyen@kernel.org>,
- Simon Schuster <schuster.simon@siemens-energy.com>,
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
- Helge Deller <deller@gmx.de>, Alexander Viro <viro@zeniv.linux.org.uk>,
- Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
- Dan Williams <djbw@kernel.org>, Matthew Wilcox <willy@infradead.org>,
- Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
- Masami Hiramatsu <mhiramat@kernel.org>, Oleg Nesterov <oleg@redhat.com>,
- Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>,
- Arnaldo Carvalho de Melo <acme@kernel.org>,
- Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
- Adrian Hunter <adrian.hunter@intel.com>, James Clark
- <james.clark@linaro.org>, Zi Yan <ziy@nvidia.com>,
- Baolin Wang <baolin.wang@linux.alibaba.com>, Nico Pache <npache@redhat.com>,
- Ryan Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>,
- Barry Song <baohua@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
- Naoya Horiguchi <nao.horiguchi@gmail.com>, Xu Xin <xu.xin16@zte.com.cn>,
- Chengming Zhou <chengming.zhou@linux.dev>, SJ Park <sj@kernel.org>,
- Matthew Brost <matthew.brost@intel.com>,
- Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
- Byungchul Park <byungchul@sk.com>, Gregory Price <gourry@gourry.net>,
- Ying Huang <ying.huang@linux.alibaba.com>,
- Alistair Popple <apopple@nvidia.com>, Hugh Dickins <hughd@google.com>,
- Peter Xu <peterx@redhat.com>, Kees Cook <kees@kernel.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Robin Murphy <robin.murphy@arm.com>, Andrey Konovalov
- <andreyknvl@gmail.com>, Alexander Potapenko <glider@google.com>,
- Dmitry Vyukov <dvyukov@google.com>, Steven Rostedt <rostedt@goodmis.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Jarkko Sakkinen <jarkko@kernel.org>,
- Dave Hansen <dave.hansen@linux.intel.com>, Thomas Gleixner
- <tglx@kernel.org>, Borislav Petkov <bp@alien8.de>, x86@kernel.org,
- "H. Peter Anvin" <hpa@zytor.com>, Ian Abbott <abbotti@mev.co.uk>,
- H Hartley Sweeten <hsweeten@visionengravers.com>,
- Lucas Stach <l.stach@pengutronix.de>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Patrik Jakobsson <patrik.r.jakobsson@gmail.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
- <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
- Thierry Reding <thierry.reding@kernel.org>,
- Mikko Perttunen <mperttunen@nvidia.com>,
- Jonathan Hunter <jonathanh@nvidia.com>,
- Christian Koenig <christian.koenig@amd.com>, Huang Rui <ray.huang@amd.com>,
- Matthew Auld <matthew.auld@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>,
- Yishai Hadas <yishaih@nvidia.com>, Shameer Kolothum
- <skolothumtho@nvidia.com>, Kevin Tian <kevin.tian@intel.com>,
- Ankit Agrawal <ankita@nvidia.com>, Alex Williamson <alex@shazbot.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Shakeel Butt <shakeel.butt@linux.dev>,
- Usama Arif <usama.arif@linux.dev>
-Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
- linux-parisc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- nvdimm@lists.linux.dev, linux-perf-users@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, damon@lists.linux.dev,
- iommu@lists.linux.dev, kasan-dev@googlegroups.com,
- linux-sgx@vger.kernel.org, etnaviv@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org,
- freedreno@lists.freedesktop.org, linux-tegra@vger.kernel.org,
- kvm@vger.kernel.org, Russell King <linux+etnaviv@armlinux.org.uk>
-References: <20260710-b4-pre-scalable-cow-v2-0-2a5aa403d977@kernel.org>
- <20260710-b4-pre-scalable-cow-v2-29-2a5aa403d977@kernel.org>
-From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
-Autocrypt: addr=vbabka@kernel.org; keydata=
- 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
-In-Reply-To: <20260710-b4-pre-scalable-cow-v2-29-2a5aa403d977@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260710-monza-wireless-v3-8-46253587af64@oss.qualcomm.com>
 
-On 7/10/26 22:17, Lorenzo Stoakes wrote:
-> In order to lay the foundation for work that permits us to track the
-> virtual page offset of MAP_PRIVATE file-backed mappings, we abstract the
-> assignment of vma->vm_pgoff to vma_set_pgoff().
+On Fri, Jul 10, 2026 at 11:57:34AM +0200, Loic Poulain wrote:
+> For QCA2066 (and other QCA chips) on M.2 connectors, the UART enable is
+> controlled by the W_DISABLE2# signal managed by the pcie-m2 power sequencer
+> rather than a dedicated BT enable GPIO.
 > 
-> We additionally add a lock check here using the newly introduced
-> vma_assert_can_modify(). This asserts the VMA write lock if the VMA is
-> attached.
+> When the serdev controller has an OF graph (indicating it is connected to
+> an M.2 connector), acquire the 'uart' pwrseq target from the connector's
+> power sequencer and use it to control BT power instead of the bt-enable
+> GPIO. This is factored out into qca_serdev_get_m2_pwrseq().
 > 
-> We also assert that, if this is an anonymous VMA and unfaulted, that its
-> (virtual) page offset is equal to the page offset of the VMA's address.
+> Reviewed-by: Manivannan Sadhasivam <mani@kernel.org>
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> ---
+>  drivers/bluetooth/hci_qca.c | 35 ++++++++++++++++++++++++-----------
+>  1 file changed, 24 insertions(+), 11 deletions(-)
 > 
-> We must be careful about MAP_PRIVATE-/dev/zero which violates fundamental
-> assumptions about anonymous memory, so we check for !vma->vm_file after
-> using vma_is_anonymous() which these mappings satisfy.
-> 
-> Additionally, we only perform the assert if CONFIG_MMU is defined, as nommu
-> does not set vma->vm_pgoff = addr >> PAGE_SHIFT. This isn't really relevant
-> to rmap as it has no anon rmap (nor needs it), but we must avoid it
-> asserting falsely.
-> 
-> All of this logic is kept in assert_sane_pgoff() to keep things clear.
-> 
-> In order to maintain correctness given this assert, we also update
-> __install_special_mapping() to invoke vma_set_range() after it's set
-> vma->vm_ops (which determine whether the VMA is anonymous or not).
-> 
-> We do not use vma_set_pgoff() in vm_area_init_from(), as at the point of
-> forking, we don't necessarily have correct locking state.
-> 
-> Updating vma_set_range() covers most cases, but in addition to this we also
-> update insert_vm_struct(), compat_set_vma_from_desc() and nommu callers.
-> 
-> We also update vma_add_pgoff() and vma_sub_pgoff() to use vma_set_pgoff().
-> 
-> While we're here, we drop a BUG_ON() and update insert_vm_struct()'s
-> comment to reflect the fact anonymous mappings can be added here.
-> 
-> Finally, we update the CONFIG_MMU, CONFIG_PER_VMA_LOCK defines in the VMA
-> userland tests so IS_ENABLED() will work correctly with them.
-> 
-> No functional change intended.
-> 
-> Reviewed-by: Pedro Falcato <pfalcato@suse.de>
-> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
+> diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
+> index 24dc5bf6d192be7e1d500df6bdf36e6184f9eaf7..f6529d359ffbd97f8a3c4c0593680ab200215b36 100644
+> --- a/drivers/bluetooth/hci_qca.c
+> +++ b/drivers/bluetooth/hci_qca.c
+> @@ -1872,6 +1872,9 @@ static int qca_power_on(struct hci_dev *hdev)
+>  			/* Controller needs time to bootup. */
+>  			msleep(150);
+>  		}
+> +
+> +		if (qcadev->bt_power.pwrseq)
+> +			pwrseq_power_on(qcadev->bt_power.pwrseq);
+>  	}
+>  
+>  	clear_bit(QCA_BT_OFF, &qca->flags);
+> @@ -2387,6 +2390,20 @@ static int qca_init_regulators(struct qca_power *qca,
+>  	return 0;
+>  }
+>  
+> +static int qca_serdev_get_m2_pwrseq(struct qca_serdev *qcadev)
+> +{
+> +	struct serdev_device *serdev = qcadev->serdev_hu.serdev;
+> +
+> +	if (!of_graph_is_present(dev_of_node(&serdev->ctrl->dev)))
+> +		return 0;
+> +
+> +	qcadev->bt_power.pwrseq = devm_pwrseq_get(&serdev->ctrl->dev, "uart");
 
-Reviewed-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
+Note that this ultimately ties the lifecycle of the returned pwrseq
+descriptor to the uart, which is probably not what you want.
 
+I ended up manually doing pwrseq_get() with devm_add_action_or_reset()
+so that the descriptor is released when the serdev driver is unbound.
+This was for the Realtek driver. I haven't sent patches yet.
+
+> +	if (IS_ERR(qcadev->bt_power.pwrseq))
+> +		return PTR_ERR(qcadev->bt_power.pwrseq);
+> +
+> +	return 0;
+> +}
+> +
+>  static int qca_serdev_probe(struct serdev_device *serdev)
+>  {
+>  	struct qca_serdev *qcadev;
+> @@ -2417,6 +2434,10 @@ static int qca_serdev_probe(struct serdev_device *serdev)
+>  	else
+>  		qcadev->btsoc_type = QCA_ROME;
+>  
+> +	err = qca_serdev_get_m2_pwrseq(qcadev);
+> +	if (err)
+> +		return err;
+> +
+>  	switch (qcadev->btsoc_type) {
+>  	case QCA_WCN3950:
+>  	case QCA_WCN3988:
+> @@ -2426,17 +2447,9 @@ static int qca_serdev_probe(struct serdev_device *serdev)
+>  	case QCA_WCN6750:
+>  	case QCA_WCN6855:
+>  	case QCA_WCN7850:
+> -		/*
+> -		 * OF graph link is only present for BT devices attached through
+> -		 * the M.2 Key E connector.
+> -		 */
+> -		if (of_graph_is_present(dev_of_node(&serdev->ctrl->dev))) {
+> -			qcadev->bt_power.pwrseq = devm_pwrseq_get(&serdev->ctrl->dev,
+> -								  "uart");
+
+It's already incorrect here. But I think the original patch that
+introduces this hasn't landed?
+
+
+ChenYu
+
+> -			if (IS_ERR(qcadev->bt_power.pwrseq))
+> -				return PTR_ERR(qcadev->bt_power.pwrseq);
+> +		/* M.2 connector modules are powered by the pwrseq acquired above. */
+> +		if (qcadev->bt_power.pwrseq)
+>  			break;
+> -		}
+>  
+>  		if (!device_property_present(&serdev->dev, "enable-gpios")) {
+>  			/*
+> @@ -2528,7 +2541,7 @@ static int qca_serdev_probe(struct serdev_device *serdev)
+>  			return PTR_ERR(qcadev->susclk);
+>  		}
+>  	}
+> -	
+> +
+>  	if (qcadev->bt_power.pwrseq) {
+>  		bt_en_available = pwrseq_power_is_controllable(qcadev->bt_power.pwrseq);
+>  		if (!bt_en_available) {
+> 
+> -- 
+> 2.34.1
+> 
