@@ -1,169 +1,142 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from luna.linkmauve.fr (82-65-109-163.subs.proxad.net [82.65.109.163])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDF2F28505E;
-	Thu, 16 Jul 2026 14:22:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFEDA400982;
+	Thu, 16 Jul 2026 14:24:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.65.109.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784211773; cv=none; b=Mg/01JoiDjLItpRWdj3FcwoLXIBrMOw6/ftoe8OlrrRqzojspI0T8Rh+veYmO6mL7f+nWsf60h5aaAa/Voe9YuPnv+yEgTUhcta9EDsqMlCAl8bgHmEzh9ZiYlYs3tZeA5fg6ouIqJXCZBB1sBohcVoJznVlW+wnT5X4jPe31EM=
+	t=1784211873; cv=none; b=ErEbW8tKpyDzHQvNaqLuukmu6+ORt0IaPMnXiu6jZmKcw38dkjJZ7I32C9VULkb/K79mJT/FInUfkkSflax4Oute+0Eg3KIO3+udRxRUIIGh55lKHhYnNrSgVA2GVEiastyRkBlmaxDrbHfLfIQN5NGZ+hkDYkW9crbxkGfA+Z8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784211773; c=relaxed/simple;
-	bh=/rxFCHiIu4BymJ9k7FwUsZBizafix6bETAM21VjXyQ4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=KpTJi+Bbh5DGuVfVqo79ON/kxlYSiw2fU4SYhLcnP/FU1zcXdLkvoOuXdVLmIdOyvd/lB/fmlXbUfq2fQHHzYLgyHlwFBAKtFgX8LHgni84smtrejROWsBwhRV9pypEsIXd/JH+rBh7qdJwU8aCt0obDEE5XwIaxl+uhmJR9xpc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fYguP7bL; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fYguP7bL"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ADB871F00A3D;
-	Thu, 16 Jul 2026 14:22:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784211771;
-	bh=0i50oMqMo7EK4tKCQkAZLW1pM6qYZ5tZD+YzTRBl4vw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=fYguP7bLjJbvVfprFBF/wlTNW5FU9py3NCBTOISr+ekP0fhWKDYl69Z5n4uHKR9SI
-	 8I3YRlE0LlTE2nTyRBPKf37N6f1VqZm9Sc4XpL1+FK4GlzEERIhb9gWN2nrcyYbyID
-	 XgJL1SiB9cjocFrP88+4Eh8tyokpiUaRpPynvYslcQBPYJSUBs/KbqWAbjfLGKAaeK
-	 Gs6lqHtNrGKxaIvx4WVjGas5o8RiOv0057V+91cvQfcpr36PjvLMT9ztmfWf7Gkx1y
-	 nqNuxMdV+nGiPD1IaV6ob+LbsJXYr0TYromMgQrk7oymdZuArCtBYmfGKC83FCuEt/
-	 DD+10XYS8E4Tw==
-Date: Thu, 16 Jul 2026 16:22:37 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>, 
-	linux-pci@vger.kernel.org, linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org, devicetree@vger.kernel.org, 
-	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, Marcel Holtmann <marcel@holtmann.org>, 
-	Luiz Augusto von Dentz <luiz.dentz@gmail.com>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
-Subject: Re: [PATCH v3 03/11] power: sequencing: Add
- pwrseq_power_is_controllable() API
-Message-ID: <di2rdanp4hgmflhcrenjbohr3rzzmk6v7m3w7tjffe3it2mjla@46vkm2qat27c>
-References: <20260710-monza-wireless-v3-0-46253587af64@oss.qualcomm.com>
- <20260710-monza-wireless-v3-3-46253587af64@oss.qualcomm.com>
- <CAMRc=MckiTUBCF+UvmFi-ceLpjWW71LXTTHDiY+s5Qn7NCbD6Q@mail.gmail.com>
+	s=arc-20240116; t=1784211873; c=relaxed/simple;
+	bh=4oUXBcR6zeOwaBNh+bQp4Z78oNqV2MBaE5uHHU6QNBc=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=rhrgKHB8wWlj7daTb+MJ6q2OtoNJ7moAH8FUfHA+wNU+l23MMnr72tjY2/Aa3auEO2d1dYtIuo/TuOFZg83CyIN+LBCvWsgH+WbEOYF9vQNNsi1bp5BxqdoXmCMAfOHdTa2IIpQQZ+Dv5P809dUmmYsC5l0gpide1e53huoP8GY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linkmauve.fr; spf=pass smtp.mailfrom=linkmauve.fr; arc=none smtp.client-ip=82.65.109.163
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linkmauve.fr
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linkmauve.fr
+Received: by luna.linkmauve.fr (Postfix, from userid 1000)
+	id 9B9B3F40D36; Thu, 16 Jul 2026 16:24:29 +0200 (CEST)
+From: Link Mauve <linkmauve@linkmauve.fr>
+To: Srinivas Kandagatla <srini@kernel.org>
+Cc: Link Mauve <linkmauve@linkmauve.fr>,
+	Andy Shevchenko <andriy.shevchenko@intel.com>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Jerome Brunet <jbrunet@baylibre.com>,
+	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+	Sven Peter <sven@kernel.org>,
+	Janne Grunau <j@jannau.net>,
+	Neal Gompa <neal@gompa.dev>,
+	Frank Li <Frank.Li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Vladimir Zapolskiy <vz@mleia.com>,
+	=?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@linaro.org>,
+	Orson Zhai <orsonzhai@gmail.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Chunyan Zhang <zhang.lyra@gmail.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Kalyani Akula <kalyani.akula@amd.com>,
+	Michal Simek <michal.simek@amd.com>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Boqun Feng <boqun@kernel.org>,
+	Gary Guo <gary@garyguo.net>,
+	=?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
+	Benno Lossin <lossin@kernel.org>,
+	Andreas Hindborg <a.hindborg@kernel.org>,
+	Alice Ryhl <aliceryhl@google.com>,
+	Trevor Gross <tmgross@umich.edu>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	Tamir Duberstein <tamird@kernel.org>,
+	Alexandre Courbot <acourbot@nvidia.com>,
+	=?UTF-8?q?Onur=20=C3=96zkan?= <work@onurozkan.dev>,
+	Johan Hovold <johan@kernel.org>,
+	Ronald Claveau <linux-kernel-dev@aliel.fr>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	linux-arm-kernel@lists.infradead.org,
+	linux-amlogic@lists.infradead.org,
+	linux-kernel@vger.kernel.org,
+	asahi@lists.linux.dev,
+	imx@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	rust-for-linux@vger.kernel.org
+Subject: [PATCH v3 4/4] firmware: meson: pass a const buffer to meson_sm_call_write()
+Date: Thu, 16 Jul 2026 16:24:11 +0200
+Message-ID: <20260716142415.28718-5-linkmauve@linkmauve.fr>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260716142415.28718-1-linkmauve@linkmauve.fr>
+References: <20260716142415.28718-1-linkmauve@linkmauve.fr>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAMRc=MckiTUBCF+UvmFi-ceLpjWW71LXTTHDiY+s5Qn7NCbD6Q@mail.gmail.com>
 
-On Fri, Jul 10, 2026 at 06:13:55AM -0700, Bartosz Golaszewski wrote:
-> On Fri, 10 Jul 2026 11:57:29 +0200, Loic Poulain
-> <loic.poulain@oss.qualcomm.com> said:
-> > On some boards a power sequencing target has no host-controllable enable
-> > for its function, for instance when the enable line is not wired up to a
-> > GPIO and is hardwired to an always-on level. The pcie-m2 "uart" target is
-> > one such example: when the M.2 connector does not route the W_DISABLE2#
-> > signal to a host GPIO, its enable/disable are no-ops and the host cannot
-> > gate the Bluetooth function at all or exclusively.
-> >
-> > Add a generic pwrseq_power_is_controllable() helper. It reports whether the
-> > target's final unit provides a host-controllable dedicated power actuator.
-> > The unit can implement a new optional per-unit is_controllable() callback,
-> > reporting whether that actuator is effective on this instance (for example
-> > depending on GPIO presence). If the unit does not provide the callback, it
-> > is assumed to be controllable.
-> >
-> > Note this only describes the target's own enable actuator. It does not
-> > imply that a power-off reaches an electrical OFF state as a target may
-> > have multiple consumers. Also, this does not restrict consumers from
-> > calling pwrseq_power_off() either, which remains valid to drop a vote
-> > on shared unit resources/dependencies.
-> >
-> 
-> Thanks. In general it looks good, though I would extend the last paragraph by
-> mentioning that the fact that the target's final unit doesn't guarantee power
-> control for the host, doesn't mean that the power is not controlled for its
-> dependencies. This is what you basically said but it may not be clear to
-> someone new to this API what a "vote on shared unit resources" exactly means.
-> 
-> > Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-> > ---
-> >  drivers/power/sequencing/core.c | 39 +++++++++++++++++++++++++++++++++++++++
-> >  include/linux/pwrseq/consumer.h |  7 +++++++
-> >  include/linux/pwrseq/provider.h |  9 +++++++++
-> >  3 files changed, 55 insertions(+)
-> >
-> > diff --git a/drivers/power/sequencing/core.c b/drivers/power/sequencing/core.c
-> > index 02f42da915985339d3de507fc36dd158b0035a99..35df55312a71e9dfd3f24a8199b539746466af36 100644
-> > --- a/drivers/power/sequencing/core.c
-> > +++ b/drivers/power/sequencing/core.c
-> > @@ -72,6 +72,8 @@ static DECLARE_RWSEM(pwrseq_sem);
-> >   *          this unit.
-> >   * @disable: Callback running the part of the power-off sequence provided
-> >   *           by this unit.
-> > + * @is_controllable: Optional callback reporting whether this unit's
-> > + *                   enable/disable actually control power.
-> >   * @enable_count: Current number of users that enabled this unit. May be the
-> >   *                consumer of the power sequencer or other units that depend
-> >   *                on this one.
-> > @@ -83,6 +85,7 @@ struct pwrseq_unit {
-> >  	struct list_head deps;
-> >  	pwrseq_power_state_func enable;
-> >  	pwrseq_power_state_func disable;
-> > +	pwrseq_is_controllable_func is_controllable;
-> 
-> Is there any reason not to put it in struct pwrseq_target? That would avoid
-> needless duplication of NULL pointers across all units, right?
-> 
-> >  	unsigned int enable_count;
-> >  };
-> >
-> > @@ -104,6 +107,7 @@ static struct pwrseq_unit *pwrseq_unit_new(const struct pwrseq_unit_data *data)
-> >  	INIT_LIST_HEAD(&unit->deps);
-> >  	unit->enable = data->enable;
-> >  	unit->disable = data->disable;
-> > +	unit->is_controllable = data->is_controllable;
-> >
-> >  	return unit;
-> >  }
-> > @@ -991,6 +995,41 @@ struct device *pwrseq_to_device(struct pwrseq_desc *desc)
-> >  }
-> >  EXPORT_SYMBOL_GPL(pwrseq_to_device);
-> >
-> > +/**
-> > + * pwrseq_power_is_controllable() - Check whether the target provides a
-> > + *                                  host-controllable power actuator.
-> > + * @desc: Descriptor referencing the power sequencer.
-> > + *
-> > + * Some power sequencing targets provide no host-controllable enable for their
-> > + * function on a given board, for instance when the enable line is not wired up
-> > + * and is instead hardwired to an always-on level. For such targets a call to
-> > + * pwrseq_power_off() is still allowed, so that the consumer can drop its vote
-> > + * on the (possibly shared) resources, but the host cannot gate the function
-> > + * on its own.
-> > + *
-> > + * Returns:
-> > + * True if the target provides a host-controllable power actuator, false
-> > + * otherwise. Also returns false if @desc is NULL.
-> > + */
-> > +bool pwrseq_power_is_controllable(struct pwrseq_desc *desc)
-> 
-> I think, we should call it simply pwrseq_is_controllable(). I was thinking
-> about pwrseq_target_is_controllable() but it's redundant: a pwrseq handle is
-> already associated with a concrete target. When you say "power" it suggests
-> a concrete thing that's "controllable" but it may be a ragulator, it may be
-> a GPIO or reset. I'd just go with pwrseq_is_controllable().
-> 
+This was found while introducing the new nvmem-provider reg_write_const
+callback in meson_sm_call_write()’s only user, in meson-efuse.
 
-But what does pwrseq_is_controllable() mean to the clients? What is
-controllable? pwrseq itself is controllable? If so, then what does
-pwrseq_power_{on/off} provide?
+Signed-off-by: Link Mauve <linkmauve@linkmauve.fr>
+---
+ drivers/firmware/meson/meson_sm.c       | 2 +-
+ drivers/nvmem/meson-efuse.c             | 4 ++--
+ include/linux/firmware/meson/meson_sm.h | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-pwrseq_power_is_controllable() also suffers from the same ambiguity. The goal
-of this API is to tell the clients whether a specific GPIO or some signal is
-available that enables/disables the radio on the device. But that is not same as
-controlling power to the sequencer, which is controlled by the regulator.
-
-But TBH, I don't have any suggestion for the generic API name :/
-
-- Mani
-
+diff --git a/drivers/firmware/meson/meson_sm.c b/drivers/firmware/meson/meson_sm.c
+index ab9751a59b55..5d4da2e3c3a9 100644
+--- a/drivers/firmware/meson/meson_sm.c
++++ b/drivers/firmware/meson/meson_sm.c
+@@ -196,7 +196,7 @@ EXPORT_SYMBOL(meson_sm_call_read);
+  *
+  * Return:	size of sent data on success, a negative value on error
+  */
+-int meson_sm_call_write(struct meson_sm_firmware *fw, void *buffer,
++int meson_sm_call_write(struct meson_sm_firmware *fw, const void *buffer,
+ 			unsigned int size, unsigned int cmd_index, u32 arg0,
+ 			u32 arg1, u32 arg2, u32 arg3, u32 arg4)
+ {
+diff --git a/drivers/nvmem/meson-efuse.c b/drivers/nvmem/meson-efuse.c
+index c922c5bcbd10..5e056e707a96 100644
+--- a/drivers/nvmem/meson-efuse.c
++++ b/drivers/nvmem/meson-efuse.c
+@@ -20,7 +20,7 @@ static int meson_efuse_read(void *context, unsigned int offset,
+ 	struct meson_sm_firmware *fw = context;
+ 	int ret;
+ 
+-	ret = meson_sm_call_read(fw, (u8 *)val, bytes, SM_EFUSE_READ, offset,
++	ret = meson_sm_call_read(fw, val, bytes, SM_EFUSE_READ, offset,
+ 				 bytes, 0, 0, 0);
+ 
+ 	return ret < 0 ? ret : 0;
+@@ -32,7 +32,7 @@ static int meson_efuse_write(void *context, unsigned int offset,
+ 	struct meson_sm_firmware *fw = context;
+ 	int ret;
+ 
+-	ret = meson_sm_call_write(fw, (u8 *)val, bytes, SM_EFUSE_WRITE, offset,
++	ret = meson_sm_call_write(fw, val, bytes, SM_EFUSE_WRITE, offset,
+ 				  bytes, 0, 0, 0);
+ 
+ 	return ret < 0 ? ret : 0;
+diff --git a/include/linux/firmware/meson/meson_sm.h b/include/linux/firmware/meson/meson_sm.h
+index 3ebc2bd9a976..92cc61f3a1c0 100644
+--- a/include/linux/firmware/meson/meson_sm.h
++++ b/include/linux/firmware/meson/meson_sm.h
+@@ -21,7 +21,7 @@ struct meson_sm_firmware;
+ 
+ int meson_sm_call(struct meson_sm_firmware *fw, unsigned int cmd_index,
+ 		  s32 *ret, u32 arg0, u32 arg1, u32 arg2, u32 arg3, u32 arg4);
+-int meson_sm_call_write(struct meson_sm_firmware *fw, void *buffer,
++int meson_sm_call_write(struct meson_sm_firmware *fw, const void *buffer,
+ 			unsigned int b_size, unsigned int cmd_index, u32 arg0,
+ 			u32 arg1, u32 arg2, u32 arg3, u32 arg4);
+ int meson_sm_call_read(struct meson_sm_firmware *fw, void *buffer,
 -- 
-மணிவண்ணன் சதாசிவம்
+2.55.0
+
