@@ -1,167 +1,210 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f50.google.com (mail-ej1-f50.google.com [209.85.218.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F308442D75E
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 14:46:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 477A33DC4B3
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 14:51:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784299608; cv=none; b=Cm7DoYwuwod3kf/md16R468iptuwmPWtQCgHeHpFd+vuMgm+DHiTNeoQ4pRbTl6eYqdF2FVphqjss3nmaUbcYuKdJ0f3zb5QLQ0/KrSJMXD/5wcT6u5f01ErDMwLh43kFPhSaun7yyYcU9FCPrsUxvTfGhexjb1xhRhwtjzmY9g=
+	t=1784299889; cv=none; b=uxdnD33o0w/l2gC8AEQBl0fkVHmGZrhjiAw7AeVHlmeZCOjhLUi2/hZnCgYUyHlqpM7Ce7SRmuEueWa51oDftrEvFbu452MiAZyi1AzepyiIQUzbGNFI1MaEXvSsPIMA7mIh+DWLOQ3DRL4m4e7biEKWskinGSUH8n6t6q/YMwU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784299608; c=relaxed/simple;
-	bh=oxWmsAM+twLfUwPG6xTjeDdTAauKY9ZVnOSmNHJl3x4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=h1Qpv/q8Vk0IILJgH5jSOz6eYCpC50DgZOkXCqjMLx2P86hkdms3mLdklR/YJ1gprqDTNvKArdTPdiBtFMg3z4VFNekSFh/wOdCHznfLdJmFX1IDB3Jv+6y+M1LALYTlXaMokkSD9axAgoIfuWUs/EhrIp73BoAHC4Nh0FgHEPI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QFmBSEvm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CAz3z5St; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784299889; c=relaxed/simple;
+	bh=v6KGcwddb0l8IcWTqCRDb4zO+LUewoltHwDvvn+vphg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=lNcukg6Nn1QkkSCoJq1fi94e7Cep6y29wUye9LtUSlD2BWLoT1b0o9KjCl2PJHg5J0HwIABrI+DugGGbEVFx9v3EpfxRuf+7sQ7UqMiOkNRRZLkirzb4+sZSw9a7BQLdZMXQvZJCKmEGq15sAA+CJ5/JTHY7EONnAPH+MBpcfYU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=VPKWYCQS; arc=none smtp.client-ip=209.85.218.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QFmBSEvm";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CAz3z5St"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66HE7qDr1875183
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 14:46:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=4z0ymWVrqeq
-	o9gDHe0QR+vDogR/CFdnt/t7HVorr9fc=; b=QFmBSEvm/dWDDiIafCacepPcjO0
-	Dzs5trvnUgoOOYLlOjQ5KmnXdYre9sG7etR3hQoYxjj/FB2zfRkVOj0QTb5kzP/3
-	q+b0MqRlnlJiW7yJoC32vUe6nkxaQmAea9WN3ZdhpPyyYCcH9FB5DxQkOuLUdUhu
-	vicC7ZfWrUov00yCEEZeJgaQuchyy9Y1pmyv8y+CWUvvFstdrpFRr32jKCuL3EwG
-	+7d5wgGh6c/lFUmmhd9GbvMX9vhpC/xWiWoYVEoS6zKe/bQLc/V4EplFu58sZAnc
-	D4Tu2pLRh66HzgHJCoy5NbCWWFNXLFahfY2+Rd4iTi1YGXXtLQ4ibwZBUXA==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fff9p9u5u-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 14:46:45 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c01ff996dso53988871cf.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 07:46:45 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="VPKWYCQS"
+Received: by mail-ej1-f50.google.com with SMTP id a640c23a62f3a-c15ba5b151dso613379966b.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 07:51:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784299605; x=1784904405; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=4z0ymWVrqeqo9gDHe0QR+vDogR/CFdnt/t7HVorr9fc=;
-        b=CAz3z5StLUvN6zP1X0rgKydcp+a6GhyujUxPbwaLjy25rAvxEtXJzQtkgjeUr5vkJW
-         WxAaylUjJJkLPrl3Mkzj24mQAKzelkNgMH9yd1N6xRwZajmAwB11uDc1tr88CNJN/zrs
-         6glWT/RUz2O4p38vNBIK/apwbUDXPxDZtO/KQN9u7Y/UZqOyvtVuAszEydqeq8vbTAUL
-         yWLeRTXZR+RkRhpcrs8Zb0w6irLw+XvkfClkRLK8nY/LFXvtfw3WO9hXKgLXiPI9/28n
-         MD49k55q1RsQG2s+rJna0JW++L7Rtz48TMgoMJMVKG1FMjGAseMm77o1JS1STr2KVoCR
-         ik6w==
+        d=baylibre.com; s=google; t=1784299884; x=1784904684; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=8AdUtRfzJF8aQtS4v5fF5lPXueRGdYBtCeyt7x5EaDI=;
+        b=VPKWYCQS+YZJNYLUEnZd6HFolZZz6jg747L+LkgCtF7dL/dcQsLrRiPrj8sFC9OGqJ
+         DKeN9pTTjUqpb9nD0ohYXan+sazgFjmJJZ5k/GQURPu7F04TO+DmKDhi8Dlbng/Dt/hm
+         3g5eSIoHOmuDeFbxyXwTQA+vGlFtVZ3DSVTjcN3CTX6cntVAsHFpRg7zGpWYItpjxcwk
+         Khq9+GxGmpWXA9KUJJ+7WGqGikzyV9oYlde3TAPN6c6PjOb8z1uKaPBuaB7jiLDImLLF
+         Cc2o7Fs5anIwwevTBGe8tinGUgELov27wv26NPJI76ppavec3ptQi8ZfAeleMPTHFTqa
+         O2TA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784299605; x=1784904405;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=4z0ymWVrqeqo9gDHe0QR+vDogR/CFdnt/t7HVorr9fc=;
-        b=Q5f1C4C4pUypxZpv2RKeUDns9bMKMLf/7pORvHA31s5yqVMFEhvZN63LHSpSg7Bg1I
-         /+ucKGOjRpFx0vHH/LZVu3SyxGy2byEan7MOwexYJcCQ0SVnzl/6pTmfvWYSDzUZ2/ME
-         fLl6Kx9ccLr5xCH3CAIZF8B697AHUshnxfr36IFxmYy2rKJ/9UDin2HJiDPgazNpD7qE
-         fKxqtyHFR+FnnmsLolq+kYxq0+j+6psc9c9Wl76RBLEKRBR3O+OzyPITsXrxRImN6bQg
-         0x/3gvNwB9emarYIgRtcdUXfJAL4sgGI7fLgB9uZrotweqi1JE9QrqVfywRRFv4k5IUp
-         vrtQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrRVgbH/mewnYjJjSU1ReoCxxbfmSVS6KoEF/2mW1upZad4OTayPHan6fndosb4e1bITL1JJIvFBrNnhz+b@vger.kernel.org
-X-Gm-Message-State: AOJu0YyX+hwJ1OzNKxkGRg9hdnOBqXx1eNrYWgpqC2xuBGh9gm+vg8wJ
-	kw4tEsAKCBVqS8tPW6+IMTsVWlyImRHfAkSZL3veB1Eb9tpfTNKvNoy57B3a/gf0PGvjYpexl2c
-	UZaxogYUn3Oue8Z2yUIMA/inuySWUf7Xn+6s/ZlDlC9h9x3fpNNX9T0X1JnbDK6bShUe0
-X-Gm-Gg: AfdE7cn6kKmk8Od7/2iW5lByBz3ei+GoAvKHH6DUJ24KzvGRpUwrEsmDfvzv6XvVH/d
-	h0lIP6qGqs+c1KNsDLcHWxh6Ez/X/Gve5Nfe8Rldataa6nivc1+loo2APBD7o0oZmCOqInJxcNP
-	c3/7wdBFSEDPsihDBmx5UVgAYSwEOj23EcV6dHh//bs9c5mgwdd8t38YR0HFLraKJdPV++vr6Ym
-	BjlMeWHfUCb6C+r522gFDSzeq6MWJy+WLi9NoiEcbagPWza9G3j7daBQ2WaKsJhqq/4hB4rMwaE
-	WKZ1zZxBiztTOeqVcLky7xlVi04f3stvos5sTbJVo6ZwchG10Ue6vuiIsETsc8hOiaFxXjZfKeS
-	1HvilYomVnO/bkFU3GCcSiwHvVBE=
-X-Received: by 2002:a05:622a:2b0f:b0:51c:19a3:4ec with SMTP id d75a77b69052e-5213eb7f5e1mr27613681cf.69.1784299604989;
-        Fri, 17 Jul 2026 07:46:44 -0700 (PDT)
-X-Received: by 2002:a05:622a:2b0f:b0:51c:19a3:4ec with SMTP id d75a77b69052e-5213eb7f5e1mr27613171cf.69.1784299604436;
-        Fri, 17 Jul 2026 07:46:44 -0700 (PDT)
-Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d75a77b69052e-52149a3ce4fsm13414801cf.0.2026.07.17.07.46.40
+        d=1e100.net; s=20251104; t=1784299884; x=1784904684;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=8AdUtRfzJF8aQtS4v5fF5lPXueRGdYBtCeyt7x5EaDI=;
+        b=h9m6/AnWJZG++0nrThWnTt6j7NCQzlaTFtiGoOUuN5jkHg6uWjw+K/BXQoHFl2lPsk
+         KXcRuYqmxqIB5lUZq4NNZf7b1nSIEKwzCe/jPTZXuBBZOG6/rQDRMTsqoDDGb5DzpdF/
+         on5ju2Voy7ohcAF+MF7Mwcdm9FZF3+Cd6lFYYa7HSN+e5PVOtPSX5pQfRwRJWyc1drwk
+         RELjq6KYq8g+nEIfxHkaJzSa6/9sB2TNX1CTPX1gQb/nbMQ2tgpp5ChgGAMeJGxdMvmC
+         EiOBAztLi+nu/ZHhCzN3h6WLfb7vK/oGLj1R/PTBGSYh2Ej/RYvP3tt6yZ6C11Q5jC8c
+         pYTA==
+X-Forwarded-Encrypted: i=1; AHgh+Rqp4yeyoW2WvtvC6GYTPgUIatjh0tG1rgLhlD157hJ3TUtwVkoMUPfxxbRcAPXcOh/9FW7Qk95fgXzjd3lO@vger.kernel.org
+X-Gm-Message-State: AOJu0YzZzh7ROu7/LABGlMOlVHPgVKES39zcdfZOH4ui+SO+1eduYbfM
+	5zkqCSaZB+BmQHbsmsP9Mn0oAIRx25/dG3cjIhHiYDLSWkyDj0O+Qflqn8EXz1Gffok=
+X-Gm-Gg: AfdE7cmuSZxXWk2eXUUmRg1dmRejvAa3LJUfHmzIcGfGoNMMEaOBq4xV+pIA3x/mlcy
+	xaSeYTG3jMt0ox3vvDEX7mnnEd/hL8Xx0qdDkRA8HwJFvTrVFB2VKT7Uwmzl1KeqjSMFRyRw5Uw
+	obAqSxu0zXnLkY7if/lScHw/bpVg3WgvjnqFB2TSCxmdP1LHvlnWd95CALSrhp1+D88/8Nan5dU
+	EMyw9qVNPbWv46MeTMhhf3+9JiDXx/4tdxOXNK9dzCs6eTiK3QLYwOeS44vwq5U+sWI+3mX1sUj
+	u0ppcrSFrBBK8IUGwT0k1JBqH0wt/CGWHgRq/KNGA7RCwE7kHTQJH/uMD3LZAvywBNG2rsMKC+0
+	JjpN4nKJomm/qVvaxEucvc0psdmbvwn5FPRvOPzMiZLfmpz/1gCFof3Hsm9hQstJK+ovG6RhZRh
+	cZqxwNL7urTBRHXyg6b4yAzPWfs/pPzfV2zoK5kLIaNGoKNl8Uvx9G6G9AncYEwhytyw==
+X-Received: by 2002:a17:907:1b1f:b0:c15:c1fb:e8ca with SMTP id a640c23a62f3a-c16b4699441mr149267966b.12.1784299884353;
+        Fri, 17 Jul 2026 07:51:24 -0700 (PDT)
+Received: from localhost (p200300f65f47db047d2d8b161e35ab77.dip0.t-ipconnect.de. [2003:f6:5f47:db04:7d2d:8b16:1e35:ab77])
+        by smtp.gmail.com with UTF8SMTPSA id a640c23a62f3a-c1712a5f986sm89319766b.40.2026.07.17.07.51.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Jul 2026 07:46:44 -0700 (PDT)
-From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-To: Rob Clark <robin.clark@oss.qualcomm.com>, Will Deacon <will@kernel.org>,
-        "Joerg Roedel (AMD)" <joro@8bytes.org>,
-        Alex Williamson <alex@shazbot.org>
-Cc: Robin Murphy <robin.murphy@arm.com>, iommu@lists.linux.dev,
-        linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-kernel@vger.kernel.org,
-        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: [PATCH v2 6/6] iommu/qcom: Enable clocks before hardware access in qcom_iommu_ctx_probe()
-Date: Fri, 17 Jul 2026 20:16:08 +0530
-Message-ID: <20260717144608.3216274-7-mukesh.ojha@oss.qualcomm.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260717144608.3216274-1-mukesh.ojha@oss.qualcomm.com>
-References: <20260717144608.3216274-1-mukesh.ojha@oss.qualcomm.com>
+        Fri, 17 Jul 2026 07:51:23 -0700 (PDT)
+From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>
+To: Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-kernel@vger.kernel.org,
+	Danilo Krummrich <dakr@kernel.org>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Takashi Sakamoto <o-takashi@sakamocchi.jp>,
+	Frank Haverkamp <haver@linux.ibm.com>,
+	Kees Cook <kees@kernel.org>,
+	Eric Piel <eric.piel@tremplin-utc.net>,
+	Akshay Gupta <Akshay.Gupta@amd.com>,
+	Naveen Krishna Chatradhi <naveenkrishna.chatradhi@amd.com>,
+	Alexander Usyskin <alexander.usyskin@intel.com>,
+	Brad Warrum <bwarrum@linux.ibm.com>,
+	Ritu Agarwal <rituagar@linux.ibm.com>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+	John Stultz <jstultz@google.com>,
+	Romain Gantois <romain.gantois@bootlin.com>,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	Scott Branden <scott.branden@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	=?utf-8?b?TWljaGHFgiBNaXJvc8WCYXc=?= <mirq-linux@rere.qmqm.pl>,
+	Keng-Yu Lin <keng-yu.lin@hpe.com>,
+	"Vaibhaav Ram T.L" <vaibhaavram.tl@microchip.com>,
+	Kumaravel Thiagarajan <kumaravel.thiagarajan@microchip.com>,
+	Vamsi Attunuru <vattunuru@marvell.com>,
+	Alexander Graf <graf@amazon.com>,
+	The AWS Nitro Enclaves Team <aws-nitro-enclaves-devel@amazon.com>,
+	Mahesh J Salgaonkar <mahesh@linux.ibm.com>,
+	Andrew Donnellan <andrew+kernel@donnellan.id.au>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	=?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+	Kishon Vijay Abraham I <kishon@kernel.org>,
+	Frank Li <Frank.Li@kernel.org>,
+	Jiri Slaby <jirislaby@kernel.org>,
+	Andrea della Porta <andrea.porta@suse.com>,
+	Bryan Tan <bryan-bt.tan@broadcom.com>,
+	Vishnu Dasa <vishnu.dasa@broadcom.com>,
+	linux-gpio@vger.kernel.org,
+	linuxppc-dev@lists.ozlabs.org,
+	linux-pci@vger.kernel.org
+Subject: [PATCH v2 00/12] misc: Improvements around *_device_id defintions
+Date: Fri, 17 Jul 2026 16:50:46 +0200
+Message-ID: <cover.1784299069.git.u.kleine-koenig@baylibre.com>
+X-Mailer: git-send-email 2.55.0.11.g153666a7d9bb
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4565; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=v6KGcwddb0l8IcWTqCRDb4zO+LUewoltHwDvvn+vphg=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBqWkFG1z8C4NRHLFUNeuqopgHw00qW+nI9nFAsy Lfpc0JrQqqJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCalpBRgAKCRCPgPtYfRL+ TgjPB/9mDiKAMUXV0wTB+CyNHbQLJZIEXYEmWQVuhH9QRBDgKl1H4iFu+J0C1cRYAMVVBXeWFKm bptw/U5yGNddrGZvPJIizrYRpjxAnbfRAeB11r9vDLxDKnILPO0Gvw8AZGCVsF0Y8eD40XySF0I 4wW5eRLSjMmzGU85S2ppLQevXoWQJKNEG7yr3Iqo2otnw5M0yZi7bzrfo0svgyXHp0KRM4CSb0V 17EyD29NvMnGBXwhZFUY2b6eghbBe8aTG7/1aR4zbNON8LPAmHRIFWIEMu0jgHftV26VB3u4Of1 3S89MPmxjLcxL6oF/2/xjjiCEz0G0TxVyXHqaWkJMimv5c5w
+X-Developer-Key: i=u.kleine-koenig@baylibre.com; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 1JcGJunfqnPhZtKyL7gtrt9Vz2EYPVHp
-X-Proofpoint-ORIG-GUID: 1JcGJunfqnPhZtKyL7gtrt9Vz2EYPVHp
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDE1MCBTYWx0ZWRfXy9PtEJ+r/W3R
- zUbTqI/zFt3P5mEqVHqrFNyOnvDyi6DqsfVwtzqyg+8O+J9QjmKKEYknll/nEC06YlMysN7HcKK
- a7fL/0B4aYWze/p/O1Wu5KFAFRHNZggEKoez0iUtkCczDQmSYnOCDT5WnUWlbwNtSgqR6q2qYAl
- eppCdHthKurOoqS83sT9XwA8sbExVgKXtmRbqNrJwuhlcZFIXfDHfP25ukbbyttNi/Bpvg/s2MF
- L5XfxnF2OKWlZKa+z+hRGW8NjXwE36JFnBQ0YXEDrqLUPjjJeaDBFgQnYcTczZGa9ROmT/RHKJc
- xARhmKP1Fs8Ak5vdXpNbdGTUCk7L06snkgNbjADbPf3JTqZkPgIOJEkcjV1IFwCv1bkkuTS8u8G
- pge7pUSPktjDIeiH0pGq752TjdQBwZ2z3ncg60P8/UBPCdkXA9DwWMOrZCy4vkSz7Dciwt5YDXR
- z0IK3YiZWYmYt7MtmwQ==
-X-Authority-Analysis: v=2.4 cv=TaqmcxQh c=1 sm=1 tr=0 ts=6a5a4055 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=8cASqgOsboiLGU4YZykA:9 a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDE1MCBTYWx0ZWRfX+RKrokTb7NbV
- yfdZgsf+2gbJM4nDv887OeiZ4prqT6MQyO/I0BHTomfMYO4ABIZ1YfvWlNdt1B7VFjEkRfsztjO
- 74He3SPSLC6N8io83zneJ192LQwwJrU=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-17_04,2026-07-17_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 suspectscore=0 lowpriorityscore=0 phishscore=0
- adultscore=0 spamscore=0 bulkscore=0 priorityscore=1501 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170150
 
-qcom_iommu_ctx_probe() reads and writes the CB_FSR register to clear any
-stale IRQ left by the bootloader. This happens during
-devm_of_platform_populate() which is called from the parent device's
-probe before any pm_runtime_get(). The parent's clocks (iface, bus, tbu)
-are therefore not guaranteed to be on, making the register access
-unreliable on rebind or after a suspend cycle.
+Hello,
 
-Use pm_runtime_resume_and_get() on the parent device to ensure clocks
-are enabled before the register access, and release the reference
-immediately after.
+the main motivation for this series are the patches that introduce named
+initializers to these arrays. The reason I want these is that I plan to
+make .driver_data a union, see
+https://lore.kernel.org/all/cover.1780048925.git.u.kleine-koenig@baylibre.com/
+for more details about this quest.
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
----
- drivers/iommu/arm/arm-smmu/qcom_iommu.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+This series superseds a patch that only handled i2c_device_id, which is
+available at
+https://lore.kernel.org/all/20260515162734.469327-2-u.kleine-koenig@baylibre.com/.
 
-diff --git a/drivers/iommu/arm/arm-smmu/qcom_iommu.c b/drivers/iommu/arm/arm-smmu/qcom_iommu.c
-index ecde5ca2d476..5a9f8b39a99c 100644
---- a/drivers/iommu/arm/arm-smmu/qcom_iommu.c
-+++ b/drivers/iommu/arm/arm-smmu/qcom_iommu.c
-@@ -704,8 +704,13 @@ static int qcom_iommu_ctx_probe(struct platform_device *pdev)
- 	/* clear IRQs before registering fault handler, just in case the
- 	 * boot-loader left us a surprise:
- 	 */
--	if (!ctx->secured_ctx)
-+	if (!ctx->secured_ctx) {
-+		ret = pm_runtime_resume_and_get(dev->parent);
-+		if (ret)
-+			return ret;
- 		iommu_writel(ctx, ARM_SMMU_CB_FSR, iommu_readl(ctx, ARM_SMMU_CB_FSR));
-+		pm_runtime_put_sync(dev->parent);
-+	}
- 
- 	ret = devm_request_irq(dev, irq,
- 			       qcom_iommu_fault,
+Changes since then:
+
+ - Also handle all the other *_device_id to ideally only have to bother
+   about drivers/misc once for all the similar quests
+ - split drivers/misc/eeprom in separate patches
+ - rebased to yeserday's next
+
+Best regards
+Uwe
+
+Uwe Kleine-König (The Capable Hub) (12):
+  misc: Drop unused assignment of spi_device_id driver data
+  misc/pvpanic: Drop unused assignment of acpi_device_id driver data
+  misc: genwqe: Drop unused assignment of pci_device_id driver data
+  misc: eeprom: Use named initializers for arrays of i2c_device_data
+  misc: Use named initializers for arrays of i2c_device_data
+  misc: Use named initializers for arrays of spi_device_data
+  misc: mei: Use named initializers for acpi_device_id array
+  misc: mei: Use named initializer for platform_device_id array
+  misc: ibmvmc: Use named initializers for vio_device_id array
+  misc: eeprom: idt_89hpesx: Unify style of of_device_id array
+  misc: Unify style of of_device_id arrays
+  misc: Unify code style for various *_device_id arrays
+
+ drivers/misc/ad525x_dpot-i2c.c                |  52 ++---
+ drivers/misc/ad525x_dpot-spi.c                |  58 ++---
+ drivers/misc/amd-sbi/rmi-i2c.c                |   6 +-
+ drivers/misc/apds9802als.c                    |   2 +-
+ drivers/misc/bcm-vk/bcm_vk_dev.c              |   2 +-
+ drivers/misc/bh1770glc.c                      |   6 +-
+ drivers/misc/cardreader/alcor_pci.c           |   2 +-
+ drivers/misc/cb710/core.c                     |   5 +-
+ drivers/misc/ds1682.c                         |   6 +-
+ drivers/misc/eeprom/idt_89hpesx.c             | 202 +++++++++---------
+ drivers/misc/eeprom/max6875.c                 |   2 +-
+ drivers/misc/fastrpc.c                        |   6 +-
+ drivers/misc/gehc-achc.c                      |   4 +-
+ drivers/misc/genwqe/card_base.c               |  88 +++-----
+ drivers/misc/hi6421v600-irq.c                 |   2 +-
+ drivers/misc/hisi_hikey_usb.c                 |   2 +-
+ drivers/misc/hmc6352.c                        |   2 +-
+ drivers/misc/hpilo.c                          |   6 +-
+ drivers/misc/ibmasm/module.c                  |   2 +-
+ drivers/misc/ibmvmc.c                         |   4 +-
+ drivers/misc/ics932s401.c                     |   2 +-
+ drivers/misc/isl29003.c                       |   4 +-
+ drivers/misc/isl29020.c                       |   2 +-
+ drivers/misc/keba/lan9252.c                   |   4 +-
+ drivers/misc/lattice-ecp3-config.c            |   4 +-
+ drivers/misc/lis3lv02d/lis3lv02d_i2c.c        |   8 +-
+ drivers/misc/lis3lv02d/lis3lv02d_spi.c        |   2 +-
+ drivers/misc/mchp_pci1xxxx/mchp_pci1xxxx_gp.c |   2 +-
+ .../misc/mchp_pci1xxxx/mchp_pci1xxxx_gpio.c   |   4 +-
+ .../misc/mchp_pci1xxxx/mchp_pci1xxxx_otpe2p.c |   4 +-
+ drivers/misc/mei/pci-csc.c                    |   2 +-
+ drivers/misc/mei/pci-me.c                     | 166 +++++++-------
+ drivers/misc/mei/pci-txe.c                    |   6 +-
+ drivers/misc/mei/platform-vsc.c               |   2 +-
+ drivers/misc/mei/vsc-tp.c                     |  10 +-
+ drivers/misc/mrvl_cn10k_dpi.c                 |   2 +-
+ drivers/misc/nsm.c                            |   2 +-
+ drivers/misc/ocxl/pci.c                       |   2 +-
+ drivers/misc/open-dice.c                      |   2 +-
+ drivers/misc/pci_endpoint_test.c              |  16 +-
+ drivers/misc/phantom.c                        |   6 +-
+ drivers/misc/pvpanic/pvpanic-mmio.c           |   8 +-
+ drivers/misc/pvpanic/pvpanic-pci.c            |   4 +-
+ drivers/misc/qcom-coincell.c                  |   4 +-
+ drivers/misc/rp1/rp1_pci.c                    |   2 +-
+ drivers/misc/sram.c                           |   2 +-
+ drivers/misc/ti_fpc202.c                      |   2 +-
+ drivers/misc/tsl2550.c                        |   2 +-
+ drivers/misc/vcpu_stall_detector.c            |   4 +-
+ drivers/misc/vmw_vmci/vmci_guest.c            |   4 +-
+ 50 files changed, 362 insertions(+), 381 deletions(-)
+
+
+base-commit: 1a1757b76427f6201bfe0bf1bea9f7574f332a93
 -- 
-2.53.0
+2.55.0.11.g153666a7d9bb
 
