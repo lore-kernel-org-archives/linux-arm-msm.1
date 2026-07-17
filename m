@@ -1,180 +1,117 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE58619AD90
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 00:31:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 779BB17B50A;
+	Fri, 17 Jul 2026 01:15:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784248265; cv=none; b=mOenKQMeY+QHL5Hr1AiRUVBoyvR578j+RZw1K+tjZopJVFMIETSqCkza1SYazwiP6vTvLV8eXJcAJ4NkVnQEd1PQ6Cjj5TyMtoB4WzsP+RyODQ8FuMpcDAeJCZh7sAvY2egOn2ZECxBMwwzA74N9e5fzuQN9qtMrHW1LAXRA8Mg=
+	t=1784250917; cv=none; b=NZ92fEBYwGmktOtoKj1emQzAEQASv/iKx24mNxSyZGaCsC20LVD3JeomcEZJNcFNyzrfyvf7Mcy8w6BlPcRcUU+trQNRmZOzx00UqBu8xyeJOY6whNKGX2hzmYtDLW2qGQi+v2zH5HkaH51okbPFlaLlZGRXcwovVU9uU2+Nl+w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784248265; c=relaxed/simple;
-	bh=ytJd3IGSAL1N+rwcJpzr/vFDhEwruTPMalUoBQnrxXg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=aZUarYw+DbACTZ0g2JCghOWqZ1LyyUEJ3J27bezMvIRkaE5/Fy1KhW9VUxnb7wIBoTeTv5t47r3Jn5yQLatJ1kYlv0RbSOoKAfdBbyvvgOZI7z2Le+ek0S9Linr79bRKTKRtIUYwAWAFNbuZhYtF5rY2QV2YUvXFU+/sVyXKP+w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=XVyJOzoP; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Miey3vxU; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784250917; c=relaxed/simple;
+	bh=IT/rhUvKxnUjwSTnczEX0JUrUPEt6H0YklyOCcJpNYs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=YnBUuk0wzVGzFB4TfPwI5LWmSnrwn1VgcjSUSzZ/Y9OQErlqoBJiIR4IW1tiRemD0Re7WGZNlmKbei7bxkmDuBQnAYvx0vOmq1aJA5G5s9XXl1jPXHFiUh94pJ5mmOBUepN5ThzTIScPTTD9tJMaZgTl7vbBlCQvMO96v9Z2Zys=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=R/6fl00O; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="XVyJOzoP";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Miey3vxU"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66GNIZRi010471
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 00:31:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	KLhv4uLuj2a0CwkzFlguBw7pHPr92MMB0a10TBLdZz0=; b=XVyJOzoPVLGEGKHk
-	0Z58+V3wLWE/gQjodIn+fi2m248drcXqjWT+pAqorhGvlYVBAcMhwQJMQ9pBIcwp
-	/EG4KBCaFgdOAJoK21OMH3VHUsMadLsMvTQhRp4u8AFkxpm/ETUnc6RgPm0X+a1a
-	0jg8lBMZ3i0mb8iwSY1xPN3vLxTJubyEdtSDRQiJLhR0j5uKu8VWAzam2EMtIdfE
-	NonB3MX7vZwb65PD60WwlaRJe7KEfkhH4VVFJfbe6woGqcuvfTgNvemdaMA3LsWT
-	Hpl9w85km2Dx3l1ow87/iVr9Fcs5FCUQLlJRMivDZwk64F71Cj/6ZFvof4hZwsSA
-	sntTjA==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4feuex3vy6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 00:31:02 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-c88aab7c1d4so11058572a12.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 17:31:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784248262; x=1784853062; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=KLhv4uLuj2a0CwkzFlguBw7pHPr92MMB0a10TBLdZz0=;
-        b=Miey3vxUv6zQ6J0Haibc7hKwD68G8G9VLkpGEj0ilooVTAmx8slIP4ykQGVslskxEP
-         Vefp5xkfp0PTs7HBGln6WwvnXjSG+WJaX45Kzn3V6/Z0MPf971Hg3yHFJKJb8Er24qlz
-         X1ridboB0+pG7umPK1rvjAw5NzIG+EX82PEK1qeHzJzH4jhpkZl3jsfwwqzPzk914EA/
-         /7oYdC2lLvYE6/Tj181997DGJ/9alojpdjR/h2CxB2CLN7PH4xVSBnPyt0WY+IzlbBhe
-         DgZcbr7rh3Is75g2kCHHjOB3s+1+9jSy2v7jI4r/XFRhflL/Jv3/iHP6U8le5Epf/JLj
-         Nbsg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784248262; x=1784853062;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=KLhv4uLuj2a0CwkzFlguBw7pHPr92MMB0a10TBLdZz0=;
-        b=rfYHDiKDwAnjoHRSoEDG2h6tcs48H9XO4mmiZpv+F/CFHs3onHjZE2und5HtA6w2zy
-         isnzFrJCIMJLcXGQGMhT0RZBW/+6cMNSm9NM7tEIf6AoefjkzLU5oQd2J2NZL4gnQ7Tr
-         1dkTxZJv1gvXPsJ8SkWMaHw5+DXn3uq6gFLP/Vc1h39KQs8lffIEEcg5eVRb53cZdlki
-         0ePdQSb1US1yz13UH/qka7k9kjoCWIlCsiZeDjqNM3OxsTMjpF5K/+7VUZodbefmldf6
-         SuocbrzIAV+t0eAFdQMg24ClTP1yZdwzte1cSt1ABBHspFAyw6660W4NMy36tYXoVLFS
-         m0Ag==
-X-Gm-Message-State: AOJu0YySDXRoCcS0b+okJLIKvwx9jJpKXq7yTbOcEgZ9ENH5xq+I5ntQ
-	+XiEM89sBe30doGaeeSBYjKHUEHqV8PqhVp5c40D30fH1kB/kex6nbYfazooAfoUVMeQ0r3FWrV
-	GkeB4gW/GobHjq57pdQxYdO8vG9M+MB6Rb6BUjGU55u/B0lrnGHtrv9de5JNhK2NYwvSs
-X-Gm-Gg: AfdE7cnBkPxNj1DX8XjyMPQpWHliFvRlgDdCMW9D9DA/fAOk8Qtlyf4mi98TekwsQN2
-	7cxbRw4BHeSNWD/vi0sarMT8AmxVWIrbHGERluk+PyQuTyyK2DYG/3evIGM0JVx5kV1ojfjoGv0
-	8qzokDLe7NSfRu/9w2d41g0s5WoM4V6D3EypLQ8rvMNBVh8przA1UG/QDLSKEat7P7aq9yERhI2
-	7FxgkSj3k/s46FVoufeKmFpKHwYKp09cQxD/ILumkIYUCWX9L1UR3ZfVHsmZpwt8TqqBpDSmCKR
-	yICfgXuw7KdgIHT4+sQ8HlYvhu8LxGMdNE57NZ2yyFGUE4cLjhWNcgl+S6NXzeYjh32DZFYk1dS
-	TM2ylJWSOUJVtP7h+wp/pqn1foaF/lMsEVbcaMH2q4AUKHv6kupy8D2GK6nc47gnvo/pd
-X-Received: by 2002:a05:6a20:cc0b:b0:3a3:a9c4:3d60 with SMTP id adf61e73a8af0-3c3ad7ac045mr262470637.27.1784248261594;
-        Thu, 16 Jul 2026 17:31:01 -0700 (PDT)
-X-Received: by 2002:a05:6a20:cc0b:b0:3a3:a9c4:3d60 with SMTP id adf61e73a8af0-3c3ad7ac045mr262407637.27.1784248260974;
-        Thu, 16 Jul 2026 17:31:00 -0700 (PDT)
-Received: from [192.168.1.7] ([122.177.244.170])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cb519de26a5sm37551a12.22.2026.07.16.17.30.57
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 16 Jul 2026 17:31:00 -0700 (PDT)
-Message-ID: <3763d264-e958-4a2a-ad7b-204e6af37655@oss.qualcomm.com>
-Date: Fri, 17 Jul 2026 06:00:55 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="R/6fl00O"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 53C8F1F000E9;
+	Fri, 17 Jul 2026 01:15:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784250916;
+	bh=Ms8NC8oprBVh+kGhcsMCSQTckEuQU9O/j7JwpEqpIJQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=R/6fl00OTNQ9ncBL70U71NKLytxHnn4SkDA7b8uxWve0TnB1VGs/Vfr3vIZE9Igxk
+	 jA7/AVZeGBChTjxK0q2jM/n0uiD1nC+i7gfX7VzU5mBR97rCKP8mSFC+Xi92NBjk7B
+	 0Noo34qANgciuIewns3xDuujxyAwM1Hv38SDV9+ngKdhjX1BN+lt2YR9FWtabUGjUi
+	 SxO6aXbNGnsTnHzQ6CxjZ7if+PD/tmo53b6LlIXqZ3RSECtpb2kDDAm7zv8rDHVW6q
+	 UpsoRIa0iCoB0Xwk/p6jyoipLv1M/jtHB9Y364F7/gdVDb0uT7/s79YN2DEjjhtE9N
+	 YiL3Vld3JivCg==
+Date: Thu, 16 Jul 2026 20:15:11 -0500
+From: Bjorn Andersson <andersson@kernel.org>
+To: Taniya Das <taniya.das@oss.qualcomm.com>
+Cc: Abel Vesa <abel.vesa@oss.qualcomm.com>, 
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Maulik Shah <maulik.shah@oss.qualcomm.com>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Brian Masney <bmasney@redhat.com>, 
+	Krzysztof Kozlowski <krzk@kernel.org>, Sibi Sankar <sibi.sankar@oss.qualcomm.com>, 
+	Pankaj Patil <pankaj.patil@oss.qualcomm.com>, Akhil P Oommen <akhilpo@oss.qualcomm.com>, 
+	linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>, 
+	Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com>, Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>, 
+	Qiang Yu <qiang.yu@oss.qualcomm.com>, 
+	Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>, Abel Vesa <abelvesa@kernel.org>
+Subject: Re: [PATCH v3 1/3] dt-bindings: clock: qcom: glymur-gcc: Add missing
+ CX power domain
+Message-ID: <almBxBhYxTR9n5FZ@baldur>
+References: <20260715-glymur-fix-gcc-cx-scaling-v3-0-72eb5adad156@oss.qualcomm.com>
+ <20260715-glymur-fix-gcc-cx-scaling-v3-1-72eb5adad156@oss.qualcomm.com>
+ <4b543abe-2482-4381-b41e-623cdf5be9a2@oss.qualcomm.com>
+ <olkjcrfq5t32gvqgpcqiuyp5jhf72f4piowz6osxhain77f7bc@ggwuk4nz2ak2>
+ <316fd37b-9936-4bca-8521-9a11ee65cbd6@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/4] arm64: dts: qcom: Enable USB controllers on Shikra
- IQS platform
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-References: <20260716-shikra-usb-dt-v3-v3-0-13f73a0571bb@oss.qualcomm.com>
- <20260716-shikra-usb-dt-v3-v3-4-13f73a0571bb@oss.qualcomm.com>
- <606db992-446c-4601-805a-d86d0fb74110@oss.qualcomm.com>
-Content-Language: en-US
-From: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-In-Reply-To: <606db992-446c-4601-805a-d86d0fb74110@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=JeeMa0KV c=1 sm=1 tr=0 ts=6a5977c6 cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=HtVcTGqVJrL9f/+MTxaKuA==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=KWuMA8URoD_tUPs-JecA:9 a=QEXdDO2ut3YA:10
- a=_Vgx9l1VpLgwpw_dHYaR:22
-X-Proofpoint-ORIG-GUID: 4lS_LJWUg08D03s5O74b-7H2ytXC7-FB
-X-Proofpoint-GUID: 4lS_LJWUg08D03s5O74b-7H2ytXC7-FB
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDAwMyBTYWx0ZWRfXyrxFlNiNenA4
- v7HdnPP0AmQSuDul+NsZ4/3aYVRVnGgWD7Mq88qy7bGgDv4zgbYIFd4PPdushOHCYO/dEJxEq7E
- 2KW7CP6Bt/cymMCW+tCqa+eaPGQz4/4=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDAwMyBTYWx0ZWRfX6OkQTayZiSbh
- V+7rGfMu2AHiNWWR9Fh9HWMcpVtI6Mn+O8rVnqeSm2B2GfQqOZnwUiin9TW4xU1RDIacTXFCRie
- yaSBO/aJme2dUOnBQy4c7RavbqUa/tZEIPDEh92wgdZtqisHVtsIXCZ8NcB5Kn+NjR8LyAt9vDm
- dLq/qoItjaTlTYA6TLm8M85JMqi+pLimVtS+nMqEBbiEEomYHVEuMXBickVo8hCJ+cmXYHKZrtA
- F04ZUSzfSE179zdGBq3hJTl56vmgcFa5WNjdaQpJtp7KOjs7a8TJ9jiRcVh3i04KLDQoCkfL90R
- C6KBNi0GZlTXmMUqRaH30my/iN8hEuL8YYaDqgGbHwRoxYgVYDY60gevnAkNmnqTOiKYurSXLVn
- 3AYMjdo5YOSmM0MAINjXqlwx2fkdX26zs3TYPlyJu39MXF2HCslURyc2ppXxXhUT8uoynIyfGCc
- 26Opw1lt0Nc1U3iNAvQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-16_08,2026-07-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 adultscore=0 clxscore=1015 suspectscore=0 lowpriorityscore=0
- priorityscore=1501 impostorscore=0 phishscore=0 malwarescore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170003
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <316fd37b-9936-4bca-8521-9a11ee65cbd6@oss.qualcomm.com>
 
-
-
-On 7/16/2026 11:10 PM, Konrad Dybcio wrote:
-> On 7/16/26 6:29 PM, Krishna Kurapati wrote:
->> Enable both usb controllers in device mode on Shikra IQS platform.
->>
->> Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
->> ---
->>   arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts | 35 +++++++++++++++++++++++++++++
->>   1 file changed, 35 insertions(+)
->>
->> diff --git a/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts b/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts
->> index 3003a47bd759..2d4e34ec3b82 100644
->> --- a/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts
->> +++ b/arch/arm64/boot/dts/qcom/shikra-iqs-evk.dts
->> @@ -38,3 +38,38 @@ &sdhc_1 {
->>   
->>   	status = "okay";
->>   };
->> +
->> +&usb_1 {
->> +	dr_mode = "peripheral";
+On Thu, Jul 16, 2026 at 04:42:11PM +0530, Taniya Das wrote:
 > 
-> Why does this one have to be peripheral if the other boards are otg?
+> 
+> On 7/16/2026 12:52 PM, Abel Vesa wrote:
+> > On 26-07-16 10:13:48, Taniya Das wrote:
+> >>
+> >>
+> >> On 7/15/2026 6:59 PM, Abel Vesa wrote:
+> >>> The GDSCs provided by the Glymur GCC are supplied by the RPMh CX power
+> >>> domain. Model that parent domain in the GCC binding so the provider can
+> >>> describe the dependency in devicetree.
+> >>>
+> >>> Add a single CX power-domain entry to the binding and make it required,
+> >>> matching the hardware description needed by the GCC node.
+> >>>
+> >>> Fixes: ee2d967030fe ("dt-bindings: clock: qcom: document the Glymur Global Clock Controller")
+> >>> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> >>> ---
+> >>>  Documentation/devicetree/bindings/clock/qcom,glymur-gcc.yaml | 8 ++++++++
+> >>>  1 file changed, 8 insertions(+)
+> >>
+> >>
+> >> Abel, I feel we should add the 'required-opps' as well which will ensure
+> >> the clock controllers minimum voltage requirement.
+> > 
+> > But it was agreed in v1 that we should not add the required-opps. So we
+> > dropped it in v2.
+> > 
+> 
+> Okay, sorry, may be I missed that comment.
+> 
+> 
+> > Can you give more details to why you think it is needed ?
+> 
+> My reasoning is that if a clock controller requires a rail, it is
+> preferable to explicitly specify the required operating level rather
+> than rely on system/client vote. This makes the dependency
+> self-contained and easier to reason about. Clients that require a higher
+> operating level than the clock controller's minimum requirement remain
+> free to vote for a higher level as needed.
 > 
 
-Actually I missed adding dr_mode as peripheral for other boards. I put 
-in commit message that I want them to work in device mode but missed 
-adding dr_mode property. Since the default behavior is peripheral mode, 
-i saw no functional issue while testing. Shall I send v2 with either 
-removing dr mode here in iqs or adding it in cqs/cqm ?
+You're expressing this in generic terms, can you please provide the
+concrete example of what this would look for in the Glymur GCC case? 
 
-> [...]
-> 
->> +&usb_2 {
->> +	dr_mode = "peripheral";
->> +
->> +	status = "okay";
-> 
-> And why do the other boards lack the secondary USB?
-As mentioned in cover letter, on pure upstream build, I validated both 
-controllers on iqs platform and only primary controller on cqs/cqm 
-platform on a remote access setup.
+What is the required-opps for the Glymur GCC?
 
 Regards,
-Krishna,
+Bjorn
+
+> 
+> -- 
+> Thanks,
+> Taniya Das
+> 
