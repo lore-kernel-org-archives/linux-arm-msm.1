@@ -1,138 +1,161 @@
-Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0CBF43FD97F
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 13:20:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A84BE3F9F37
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 13:24:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784294433; cv=none; b=pmh1kqOpBb6P5UWOkHPkYclr196pmH51V8hb+SfB9aGgzEpj6ImRM2jstY0p9a7F/3BtAku3G6vb9u2Vc94ENjLwnXlXpHFXnNVyVHgWEIySQJ0mrDfjfiL6uheL4WRg4Q4h8wTgiEYBLxC9H0nH0QpJPEYGhGea7t0fOlqlV0g=
+	t=1784294662; cv=none; b=XzMjZ3F4MxSRZJgkqoDVCuWYZLIxaIK+fc7LcCHWL9hMlD+neOcKzc/Z2y127L13XJtHpIUQ+pLz/7fjmDJH4PqRH8Iw4hxVDLvRAy+TLYoGn/ublnd3rqo8eUMMPpvtyiRGu5sBvbKkUVPGe1m3/v+vxBMZB+Xd4Gp8Kzdk8E8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784294433; c=relaxed/simple;
-	bh=4tg7Tw9YFwtuTaNFXfaHJYmypQcA98LC9ovUCSBOML8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=kDIrAHJP41Bs0BGv3hKyarlYWfG7MkfqOXTGXpYAgn/XefmRhTtwdXRoBfnML7R4wXwojqB7ChXfO1rcYUE5YflxVubIN4rN8ICtQbraq2v9li1YE0RSBGlK+16HkuQ8N9dzxFBSlw/LkRjiKPhy6btfS8GOMUngFonfqXvMC6E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=mFCWzBiP; arc=none smtp.client-ip=209.85.128.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+	s=arc-20240116; t=1784294662; c=relaxed/simple;
+	bh=+Bw4yHL3Sn4ayZ7mBhJPQ7Omr7VihtfhmDEPBiph2bk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Gg4woFW/9JLziDYOrZXurRCKErrluZOcDPmE8u9JJO/+2e6szKJAgU6skgtn0c8AT+vi40/SH652t9mohYHCrCAJjbFz4IcRArH0iPpNf8oGzfy19QUC0SHmjKIf1RrD8/gtErFkcgP7vDudRBhLTdnygHbx7od8/D3IhCZrwTI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=P+1uLXOR; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YRsxCD6j; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="mFCWzBiP"
-Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-4954c0833b4so2986175e9.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 06:20:31 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="P+1uLXOR";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YRsxCD6j"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66HCSn1q1883966
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 13:24:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	HtvPtu5Wyax1N1NQKVynka6PC2SH8vK4pP3GpnJlqZA=; b=P+1uLXORsKCPXldN
+	mzHgtk+fl0rwthFakwd9jvxwx4ucEdj6yd3bnEkaZa8ezlVpaat+yvViTUMeiAGk
+	49ITyDj+V5zIEK7zJE7vo7onVMhC3tIr7r5IgMtx9T4QIj3S1yxYUiqSAityf53c
+	wgdXeEa4x+Jvod0aqHeR5OOZDVeqRjH9yjQezUsJC54b3/iO4OzZHPZ+DHy+VLee
+	gkj12hU4QGJoZan7auQH6M02EBVaNFcEeaBnTE3vq9qETFgBEx2IWG7m8Ri/PW0W
+	fYFG4zE6C0nleJ7gtLxgcEb6NaWVe/hWNNU7S2IqYVadfPse4vufOj3bmMY/YGEG
+	M4MRfw==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ffhpfgv59-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 13:24:20 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51c07313be5so15594171cf.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 06:24:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1784294430; x=1784899230; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=hw/Yv8W0bG7wwTURy/Xky2RJZ2FwJjbfAnGBUOVKvuM=;
-        b=mFCWzBiPH+/ufK2FUBdbJZ/hY2APpxUtA2lKFZjSYXWH3HI+30svivl/52lqjcNpxT
-         27N/GuCIQd2RiQ+KwuU1B2hWzIYq9auWvAbAyqvGs2zznOjFgThSuz6f4eJMGigCCEeG
-         lc1xIMff5LWPmmzOeSU7FiBP4kTJZMMMcfsX44WgLvIhKWCbyp3zMxgwop11Fs50Ra3o
-         Rz2W6kuCNnH+u+zYxXX64Gynwf/eAn3JzUbs6QB7kfEhdxGEXnOUjrYSrBWOFgX9GC6f
-         qq5cKIq6lwfufl35Xv9inRM9IqCpoH1QbKSMHmzN/ef+0JzaeMUWIjEd9ZBzx+iToyFV
-         bL5Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784294430; x=1784899230;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1784294660; x=1784899460; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=hw/Yv8W0bG7wwTURy/Xky2RJZ2FwJjbfAnGBUOVKvuM=;
-        b=nHXKyq32+/aZJvkTD7LTkvVBQUvL2WV3TlZ/nwcKovTEzrnYT1Rcd7I4L6/w8JgdJR
-         fxMGfyhQ004RH5oWCFnAwnVOwi+0/axoSPU7hy0tjTIfLQC17+De3GtEceY1D8luaeEE
-         pXcCkRkAECflhnVUQaRFgU/eXzKzKVeWxbQSNWK6zDYf1JFLRU75N8mmHEUmpbQLfVXi
-         LK5PKI6Ks6DOPQGtyqzonSC8kEd1LOwbXclcda0QugPZnpxe0e+UtZpbY2uWFvCreMjQ
-         6wWJEIfP1kwj1bKSTYwaVAVJpkx0VR60V2T9xmXK3qsXtZ3epq4/QKeC6ZTX57UDGn+z
-         zFnQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqR1vlP2fgDk56iKrDgstR4wgSbVkVakD46i8A6orV8kV5HbBMdmKgNpIera2JzvqyA0pVPVwmuODKnViYY@vger.kernel.org
-X-Gm-Message-State: AOJu0YwgEm1me+C/+rTm9IL1GuZiUk4xs4/vnmWL/SyMdIG5JSs0gw/m
-	JW2e2j55x4xhGBofZomUaKdPnN9sMbx+u0YdXhzFR0InwElfKC9F5ToaUR8qtknDbMU=
-X-Gm-Gg: AfdE7ckj0prmPkG9ubj3B2Idnods5da5bSyHV22dJgYGDnM0cfCAnjYBbHY7OPYtVDe
-	QEg4K6cjNz4g3HEJbYujwzMnFeLJKYVtGL/rfbYM/sgyNa9ZSAczWYYhyYBRlsc/B1nk6H8hZSn
-	46VzEsI3n7BdetXqKJkPlvfq+0OeiE074xWAN9v28dmLEEeSR7ofUG/Li7MhJ3vq67/cERVQ6dc
-	qJFeIc5aRRfdnrHXohaZZHw/uThDaybtvpLc3ie6YTEZ1YPWJV9bVuXB5GH70gqhp9c/XjCh/Ap
-	f4LzG3MGQgp1PykAY+uU23aWR8poWZb0P7rm0T/XQhgRjDJ9tUe74l5mJJzeSLgUZOuJuSITPKG
-	P0RHEAWKK5HaLVIMpjr0kicf7FdCR7F1tWd/3jH3U1sDWcqmPdV956ITSF7ys5WVkF0JGXlRvhI
-	8hy7x6ZBJLcR/UvUE=
-X-Received: by 2002:a05:600c:5943:b0:493:c4e1:40a6 with SMTP id 5b1f17b1804b1-4954a514619mr20541645e9.32.1784294430288;
-        Fri, 17 Jul 2026 06:20:30 -0700 (PDT)
-Received: from [172.18.170.139] ([185.104.138.147])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4954ba2abd0sm28220295e9.15.2026.07.17.06.20.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Jul 2026 06:20:30 -0700 (PDT)
-From: Luca Weiss <luca.weiss@fairphone.com>
-Date: Fri, 17 Jul 2026 15:19:34 +0200
-Subject: [PATCH v2 3/3] arm64: dts: qcom: qcs6490-rb3gen2-vision-mezzanine:
- Use common pinctrl
+        bh=HtvPtu5Wyax1N1NQKVynka6PC2SH8vK4pP3GpnJlqZA=;
+        b=YRsxCD6jnQW19J/kXaoGdE89ipg5fZbpDS5bLTW1MZs4uglNQcd4wP4oMmeCYHagUP
+         aaJQ62yOFP9mvv1WrzV935mlOoEBvTMwgb+6Gv5+EBVjQnW5KS9QtH9A3InX0U8Fd5k5
+         0s+orW5f3JSUBjECAKsF73lOonv1CXxPnuuXjEttHZYjYYf8Q/6UtTWPSZBSx8MkpwC9
+         Obt4b0mdhH56f7y8NaR1dr+K4u4YJM2fRQ3wXR5JcXyWLRHJ3NpYMdT40QW7+0W3do02
+         MjmKF1CcGiKcb9OPxMSTr7i4IPC3iY6xkPfPx1yWLEzn1XxTMZOXw7k0HeAmsztTk/oN
+         YZSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784294660; x=1784899460;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=HtvPtu5Wyax1N1NQKVynka6PC2SH8vK4pP3GpnJlqZA=;
+        b=Sf5LTZ6l8IRuD2/R4OoHBAz/NMoDnY2ZQakLOT3aOKxZv9s6JR/pCJ4Q3ekXlPM6rS
+         zR/yusHAd/swyUfEsl9A0oxvairH20qAitLLG7Oz+9hWi8AjmUXrHRIEOKSia3znWuRB
+         o2IWcxN+GrT0nR+ScXERw4FOk/whzHKn7fgm4b81BCqZGsr32lbdpJ6GJmNvKKCMkGrK
+         jBjbFMeYj4R8ekTuSTLNKPWJGJR/J+RO0fmvKEzJHP9cp+W9I1wDtRjm3Sf8T2/XlsFf
+         44jvQ/5hcYGAyubff3cQMK9Qj++vR2T8XMdMOHhcBh7hdJtKl6NFgDbGMjt8a0M2ZXPH
+         tisg==
+X-Forwarded-Encrypted: i=1; AHgh+Rq8LXLj/pOce8RWeme8BXHJt9n6H7ghJ3pfgcjtJvPxUtv7Tu9pXDrysIe8GEwlR7foq4yKLdVG8t5DoMUs@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxap/h+XnA8sixXjDbi2VGFnkUtBuspNOgYcxAZ8PNAveNawHZy
+	dIWxSb+XSJWPGnQp+JKm9VHyFQVNrEaEvh7x1BRioPl5jTWjPKq1vLkW12CYrXaSxkwW107KG54
+	Y22/DHgbvM4QjGUE6RVhMKmaFnbSZrT+fRk5XV+8Y9OuCYfPWG3l7dbPwtuSapCDHIpTo
+X-Gm-Gg: AfdE7ckdZCrxldPHtQ3H+ee8FTCXXOoMaLTVgyoIzs8qak+5yaxjhJjYwUUQHhZONjf
+	1tXQ9hLVJSiOqkdtm/K9WyvJg0qtkpw5IRKTGQjRqYJXwoYCbLGGGG7cEuV+akbrNL4xBeoO1VQ
+	2MqWUF8nRA3pgDQSA5OX64Mgqe9LXFkOBKvulFTzCViBmzqHQewGcxwue7oGpU+fazk26G83i0D
+	1zXgprhqqVX/uKTwMVSvGkauJ92YLzoRYvY2s3w/A7fRWtjbDWxJR5hL2Yya+H1Fl8GTix+n2iW
+	0MclmY/1O3G2IirXuHFn6kWwuYI0ZoJinIFZMW8f+VVzZkPiCg71K+yXSE1iUt/xTXUmZbE1BPn
+	fdUrvoZsntG1x9jlzTw79PzCy
+X-Received: by 2002:a05:622a:2295:b0:51c:f3e:781e with SMTP id d75a77b69052e-5213d0c1fbemr17925261cf.6.1784294659822;
+        Fri, 17 Jul 2026 06:24:19 -0700 (PDT)
+X-Received: by 2002:a05:622a:2295:b0:51c:f3e:781e with SMTP id d75a77b69052e-5213d0c1fbemr17924731cf.6.1784294659281;
+        Fri, 17 Jul 2026 06:24:19 -0700 (PDT)
+Received: from [192.168.120.193] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1724f50b72sm75411966b.48.2026.07.17.06.24.16
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 17 Jul 2026 06:24:18 -0700 (PDT)
+Message-ID: <375ebce3-c019-4ce6-963e-3f27c12f5c55@oss.qualcomm.com>
+Date: Fri, 17 Jul 2026 15:24:15 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/4] arm64: dts: qcom: Add Glymur QCB
+To: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Anvesh Jain P <anvesh.p@oss.qualcomm.com>,
+        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
+        Pankaj Patil <pankaj.patil@oss.qualcomm.com>
+Cc: Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260717-glymur-qcb-v1-0-aaf1cff84aab@oss.qualcomm.com>
+ <20260717-glymur-qcb-v1-4-aaf1cff84aab@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260717-glymur-qcb-v1-4-aaf1cff84aab@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260717-kodiak-cam-mclk-v2-3-04451f1374bd@fairphone.com>
-References: <20260717-kodiak-cam-mclk-v2-0-04451f1374bd@fairphone.com>
-In-Reply-To: <20260717-kodiak-cam-mclk-v2-0-04451f1374bd@fairphone.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Luca Weiss <luca.weiss@fairphone.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784294383; l=1451;
- i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
- bh=4tg7Tw9YFwtuTaNFXfaHJYmypQcA98LC9ovUCSBOML8=;
- b=jn/P0MbHPLHJEwkXoOznJmDcj62GIY+xc3oyTXDgT6bxcM6l0FG4aHB4MlI4ZJHIuVm01DwUG
- UricQafvBmjDhgy2FIMwjTYFK54nEngYu9Pm3CFo6fsT1tqQfMTaNZG
-X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
- pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDEzNiBTYWx0ZWRfX8wUuORIyJzyJ
+ KbjD9ha8ARWWDp0Sh5xbRhCXjn4GVmF5BeI2M+XWk8ESTCruWlNj4dzAq3qFj//M2B7PddmvUug
+ u1vnnrv18JQmTHGqmLhIdsDDXdbvyvKkHWinOUH+3jzb8dBwShwkw6itumAeNNFu5rhbx7uYVDX
+ twnp/uPesnS13LbiKNQIXt9pHjVjEhNmmJAJBZIXtdkv3HGN+m7Bq0xwfG4BApmwD1sNiW3mPme
+ SXvWSLL90ZGOlM8ZEE+3EJ19L/FFnIPCPgJnauyGJoWsi6vNgP0Ocniu1zs7onnzmEhGjiFdLmo
+ chAgwrpfUihiqJ2/jKz0NnLWKGS5fsgJ+LhK5GaYCo4HJXpDdNIbXc9Mtdp5QUYUI4iMhA7t3Hi
+ dbozoHtnPPFjNtbZFb9CKbmC2lN7v04fCVhfv712iVvVcQknPAghSxCRNhblL4L1JPu7ZlyFQ0b
+ Q27ws8KCjPuL/Oeao9g==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDEzNiBTYWx0ZWRfX+vV/0ZYZfPyH
+ CGqPBOgfwZHe+bbZZhAex6w7vQTOAaw4IQ/M61gFtjPDFjUOOcY79Qujczx8mMyjSo4n9LcJwe4
+ jzdCPMqvpJErXVFyhkrqGTeFNFT5Uaw=
+X-Authority-Analysis: v=2.4 cv=YeWNIQRf c=1 sm=1 tr=0 ts=6a5a2d04 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=dXkGG8lSNh7L0qOfzMQA:9 a=QEXdDO2ut3YA:10
+ a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-GUID: OQH6krxXsnXtm3CXH2nxtcG9WDH9TRSP
+X-Proofpoint-ORIG-GUID: OQH6krxXsnXtm3CXH2nxtcG9WDH9TRSP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-17_03,2026-07-17_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 bulkscore=0 suspectscore=0 priorityscore=1501 clxscore=1015
+ spamscore=0 lowpriorityscore=0 adultscore=0 phishscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170136
 
-Since there's already a define for gpio67 (mclk3) in kodiak.dtsi, use
-that instead of defining an extra pinctrl state. Also rename the suspend
-state to match naming.
+On 7/17/26 1:54 PM, Gopikrishna Garmidi wrote:
+> The Glymur QCB (Qualcomm Compute Board) is a Glymur-based board in an
+> open form factor, aimed at compute bring-up and power/signal measurement
+> rather than the closed enclosure of the CRD.
+> 
+> Add its device tree. The board boots to a shell over the uart21 console
+> with its root filesystem on NVMe. Enabled so far:
+> 
+> - Board and sleep clocks
+> - Volume up/down keys
+> - PMIC RPMH regulators (banks 0 - 4) and the NVMe, WWAN and WCN rails
+> - PCIe4/5/6 controllers and PHYs, with their PERST/WAKE/CLKREQ lines
+> - WCN7850 WiFi on PCIe4 and Bluetooth on UART14
+> - Embedded controller on I2C9
+> - ADSP,CDSP and SoCCP remote processors
+> 
+> Signed-off-by: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
+> ---
 
-No functional change intended.
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
----
- .../boot/dts/qcom/qcs6490-rb3gen2-vision-mezzanine.dtso     | 13 +++----------
- 1 file changed, 3 insertions(+), 10 deletions(-)
-
-diff --git a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2-vision-mezzanine.dtso b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2-vision-mezzanine.dtso
-index b9e4a5214f70..aceafea45343 100644
---- a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2-vision-mezzanine.dtso
-+++ b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2-vision-mezzanine.dtso
-@@ -51,8 +51,8 @@ camera@1a {
- 
- 		reset-gpios = <&tlmm 78 GPIO_ACTIVE_LOW>;
- 		pinctrl-names = "default", "suspend";
--		pinctrl-0 = <&cam2_default>;
--		pinctrl-1 = <&cam2_suspend>;
-+		pinctrl-0 = <&cam_mclk3_default>;
-+		pinctrl-1 = <&cam_mclk3_suspend>;
- 
- 		clocks = <&camcc CAM_CC_MCLK3_CLK>;
- 		assigned-clocks = <&camcc CAM_CC_MCLK3_CLK>;
-@@ -73,14 +73,7 @@ imx577_ep: endpoint {
- };
- 
- &tlmm {
--	cam2_default: cam2-default-state {
--		pins = "gpio67";
--		function = "cam_mclk";
--		drive-strength = <2>;
--		bias-disable;
--	};
--
--	cam2_suspend: cam2-suspend-state {
-+	cam_mclk3_suspend: cam-mclk3-suspend-state {
- 		pins = "gpio67";
- 		function = "cam_mclk";
- 		drive-strength = <2>;
-
--- 
-2.55.0
-
+Konrad
