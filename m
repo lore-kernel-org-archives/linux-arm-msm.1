@@ -1,264 +1,227 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C920A285CBC
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 03:39:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33D8631AAA3
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 03:41:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784259552; cv=none; b=BrAXG9jqMOyCe0fkIIeXmlwJiilAr/GTywyTnU/Yj69T/lO36+zv+UnjxnmaGqBD1lx5oOZqSFJnvoUTQIzvjul12U9mT7tcwzYbbjNhrwK83W4BzIXhN/Q/2hTosiPQ7luTxL/N91Em/COjbkEW6SymFjjINPn/AF3S8rZ0qbw=
+	t=1784259698; cv=none; b=IUpkDdZim/z5plySIZIVgVMyN6qaRNyulPSVmaGZVIz5JKsHJlOXZi7lswZ+CcS+gR4Kd2NW/f5OBCXMqHWo2Jdgtmiyu1wGF2zZGUKW0AIzUvoWg89R2R43AKVUzmX6MRZfDiWeuHd7ZXM2SzqCemXruANcIdq4WaoKRNmFL5U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784259552; c=relaxed/simple;
-	bh=yMkPvwdMfDowWXtBET9evp24tjqTr+r93/Qa4/P1ypE=;
+	s=arc-20240116; t=1784259698; c=relaxed/simple;
+	bh=p53ALYQS+L5bADI3ICQaxcHUx5mc/nr55b6UmAc5ry8=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RxrfUEaIneqDYZFK/jAwb1XRcSfYdOyNnwpPyoUnJGEWxHd4eML5s3gWId69uhSCnG4tB5iO2JfS0LVtKwOvvdO2vfE81R1ftMATUgfz//vQw17uczf5I2aAZfy5rc5VkriqGlmBf79qu2FOgghUtBmJoftdMMH6e/PSEmfjtqk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=oXwOQxzE; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ks9M7TYZ; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=EAW0Ux+QowTyb3w5ynSWgz9SxrLKvDsE7h/K9aTaCb2CxYfXMvkvBkfXnjWSEtCAMDrnyxzs4GUUfyx2sqjdYj8XImB4ysI1G72BE0kjFrLaGhBzQr/Fauujz3VwjIrVJIInR7mZe+Owsfrx1IwzUyhUea6gsUyRyf1CTRgutMs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=H7CAZJXz; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jV6DEmqa; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="oXwOQxzE";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ks9M7TYZ"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66H33nwY1617187
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 03:39:10 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="H7CAZJXz";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jV6DEmqa"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66H33ddB580712
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 03:41:36 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	XNyud4vuwDzfpyACJSMTgyNZvqHzuJLECor+03HpS70=; b=oXwOQxzEVNFoURZP
-	nEvEn2ge6FVdCog0Hx7Zr6I6RR7kpnRorHx8J7LlfwLMadV7uwDWeImOhLHTc1Yt
-	uwRbXSmLM3wRtJ0n2HzLjgBwICaNkFsbqXXv3Gd0+gHpFg1ZUFXeo/aSBdMp4PPu
-	n6mz2QtsY5tSwzAHMYBKW8fS8S1j6T/2RLTQjzyfQ/UOi2TS5sDo2DF1XniPucqf
-	O63YhfxxECpzc4Ad8V70S7MLen5CNaAweE9i/MeB035c8x7pFzyGmbApyc2Jdc9k
-	n6Vy+esf9MRjXKwiteE2kQ2AYMc9evC0FiShybVf+zVxQHDAWxQuXGF8XjaIFUzh
-	IthgMg==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ff3u6htfw-1
+	7kq0ypRTY8LlhSggMVl3rvqS4X9hu7uUgtI9ZDu2lTU=; b=H7CAZJXz4re/nHaP
+	3Lnac1Ktq/K/Y6zifF/w1YIE38869QBnUgoRL0tI7rKQOe0Zw/XUSvYhZGUFonRa
+	MgVjOdF9RWEL9Cjbu3UsHz0iKOJr3LXeTfPa6etpLZwmSaUOYImu69Qhc/t0FWqQ
+	GNGQzu4MDcYTxRq+YXPm180kOxfHR1b0/PBarP6bSTFIy83oM2n1dG3VEjtP5jHf
+	af1cuEFwu3CpTa65lKpx1E7/BkCjBlQQFSKwIp+DiA72j8uIN8KRv2x3jcD4dwEu
+	0VDAY+fdiJyqk8epN38wyTZFJqkZ72JCMvooq+S7aERSNORu9Um4dhQqKwV9I11T
+	/5ZomQ==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ffbqug66n-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 03:39:09 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2cacf17c7e0so58557575ad.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 20:39:09 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 03:41:36 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cc5faecf01so141923615ad.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 20:41:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784259549; x=1784864349; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784259696; x=1784864496; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=XNyud4vuwDzfpyACJSMTgyNZvqHzuJLECor+03HpS70=;
-        b=ks9M7TYZV5yTA+VUQ0EXbFOAnS1sOZx2zOM0BK+BjLmTrvLIKDaI3LnJ5PXWvs2Ivf
-         u08IdQ5wDTqZeKaZggIz0vfS3GTlcohW+KvZT/tB6JdGBsacJxhl9CqKxIw21BsOjBj7
-         dFRrpH4es7uw6MdeOQQg6Zk6et50JkV23FBhcGXQWHzvTluNN+aBYDwrixq0eJsQRA6a
-         eseOnID7Q2yFuzXuONpQZqWJVroirw7l0NfzrcfBeImqq0eY+u9rXh7KeIQv8WEnepyj
-         0g+kdfy/qpvwKZFLKbWPHwzC62fpPegtpIa5jG5V2+CCHGRC6Te5dhfiIe3z4+VCQB7X
-         DM2A==
+        bh=7kq0ypRTY8LlhSggMVl3rvqS4X9hu7uUgtI9ZDu2lTU=;
+        b=jV6DEmqaD4HxFKZvnkz5fvxykJLX1g6R1SUidAoIA8wvj6Q8KZrNHOh/gsyZtTIl85
+         QvOf864Rlu62zynwQ3RF53/7LDcT2ywhz/lLRreFQHgBkiN9D9ocyY8vXQdvXn9qVIGL
+         4qp6CSs9ltWp5rsxKGzldu3W+OkH1WYaf0Xw3DQLhsZFXN+XJsYcLq1vYmeQfA+KHw1k
+         Hw6Sf8Yyc8jpr/VjgGr8S7wrwU2vMwxM2ObEOMdtRMOEmbv7hiYbMobN8hnLNn8zSOSz
+         zBN4pZRpB8yElBA46wH7pJeuJ3vwOOPPQSU48mNqWsjpImAIJaK7aQa2dYgYif/1GJp4
+         vQ7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784259549; x=1784864349;
+        d=1e100.net; s=20251104; t=1784259696; x=1784864496;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=XNyud4vuwDzfpyACJSMTgyNZvqHzuJLECor+03HpS70=;
-        b=J6U8zFFfXO5JZlKfmC55SyV3mgiM91wMS0JSx2jwoeQtjE87Lr9+INebGtzKMFqX9a
-         8t/YVaGnsm6VhD4eR5y+bOQvSEYDvWOuA7Hzj23XERXEonNeMLrYSD96qma7iKWACcXK
-         cOvwGDAzznIl5LA2H8puwcf0tLoSQ6IFkygcAh1kI6RShDZdjqNHEWgcamem20wBSd9O
-         sGLcd08/+qPjRRQNSb3cFcbxL4McvdFuS3ASXvHTCVuxPNM7dcORN40ailuZwxI2h85P
-         ZD/5ScTVfVcW6ILgSZZXXbHEyEVJmhjWzPs9jUNmClfBVTJgbayVyaahzs3VN+VFnFuM
-         Q++Q==
-X-Forwarded-Encrypted: i=1; AHgh+RpHq3gRrWfz6LfrAiicmytOHgNC8YQL7DscHkJseXns0dQXP8qC+BKP6z3PK0YSb+v+nUTNRF1nKf2fRaV9@vger.kernel.org
-X-Gm-Message-State: AOJu0YxQqZ8kNo/u/YUoff4VWJjoC5KZ5nQaDmdm7aua/DcyuPBGnyFa
-	kLkbagVlUEr9ZGU4VxfPe0U8pU9PS5GwVxi9HlBKkmFaXG92Fs9+JegDZ3clVa7OMaM/ZkNxyk9
-	2JEAEdHKvm9aEur6Ireur3kbNQp0Q7yhhQ4sUth1D4gTc/R6N+Z4rTgAZzgH/Q02AcToN
-X-Gm-Gg: AfdE7cnBTczFgnnQ7DT4f5RptSVmIv738KwlQ9w2rjAOqib5o0zp0yz86NxCmIv8DDv
-	lvzq5ckDgZxXKE+vYjueUPnaagIo3o8Ulg9PbLNOwpyLV2fqBNl4gu1E0R2mK5N7u3MBWPniGz7
-	V59+rp73L0nIQQooG/GijtpWgBmrGyg8xRLR51ceV9JaGM3GzkC5cl+0X+6ZT9xPCrfxQX9rjvP
-	DqiXDKXEkQKi/GFH++2CyD6h2nZgAYjOJCLCIyqEla5SMDDW9RzAMUtM/mqi0DVYKXSvI1cfp85
-	wYwXR/hL9zCdT1cXwD1ZRUNTsaYby+EKxS0w3vPb+CFGTpILbjzB/xBRanPoNEfsegxrQmFt7rQ
-	8xokX62kag7p5EmyTpg+Bn/xbO9gp9bh3
-X-Received: by 2002:a05:6a20:734b:b0:3c0:b766:750c with SMTP id adf61e73a8af0-3c3ada90661mr794852637.58.1784259549194;
-        Thu, 16 Jul 2026 20:39:09 -0700 (PDT)
-X-Received: by 2002:a05:6a20:734b:b0:3c0:b766:750c with SMTP id adf61e73a8af0-3c3ada90661mr794810637.58.1784259548602;
-        Thu, 16 Jul 2026 20:39:08 -0700 (PDT)
-Received: from [10.206.105.200] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3142a1bb8a4sm1698546eec.14.2026.07.16.20.39.02
+        bh=7kq0ypRTY8LlhSggMVl3rvqS4X9hu7uUgtI9ZDu2lTU=;
+        b=n2IWmldWdyeUjjs/g4PR99uRY5Va+d8zOchpWBn/GFIreCByPJy3VmGJqOBML6d0Ss
+         14zspN1H3TxXPyhH2+n9qsLiJh9ksR/t9AsKovuKeUZEYxHSKQ2n2WnuZVTID3/TQxjo
+         rH/iXI62y27PPwAf1MSW5pUmnt8gX3hUAaE3w0jGA/v+ObaZnGFvE4+MEjj0QwEir7mS
+         NBNAmFd7TTdvSKPRnr5HzysMz/jEyueJzfRVLp82e6KjIY9xz/XXfr5biC/BJvKPzfRU
+         +DIGGJydU7Bnuo2VOTsDLb3j3eOeqUl7IJfq6fgtZdHzk1zDu+F4XcEy1bCwbJUkxnvk
+         v/jw==
+X-Forwarded-Encrypted: i=1; AHgh+RqjD8wMav/O5uaOkoJT2nndXeN6zdry5nzr8B9scIYUG+k+P1sUr9q/YKDk3AOxesXxlsdfMdlvbgZWvTfZ@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzhq+rkrCrfPod876vY1Mn5KsHfLFbYTSq8MkbVfwLHpwieElLU
+	xOXLdcmqXWRHnXI+RPITJDAErniHiON8ogcJBtoqh+QuKTJ0bZt4eYiI+Z9VxauUR6e3hTke5MK
+	+TJT+rcthK3+GFKys1HdiOEoaqZDPkdhOgJEpUDHc7neGjR5EebO7jRaNZtCRs7PTzcPl
+X-Gm-Gg: AfdE7cmY95RTkL8juHFjWT9wlRMXuNz0EqqtJeVwCnnkAyRy+/2JyjiHdpIl7WR4k4F
+	F1kHoExdxMO9VpVQw0YD+A4768T/PzHt7+BtprO2NZbssP6LIm6epHlcrNZPmD/HaPqjgEM5V1m
+	TAeJIxQ328ImnZbegtCWbeJmtgYT6LYkU74WuuICzBNa/BKjLKP/nMF9sbVnHPfiPSmg9KYjpF4
+	WP3E4GwK/EEO06eUZ5gJFq/lIOsbJbYELxBNvvCMP8HNZBcws0ZT+9+zrSsaQSasVZIndA1oW7G
+	bzdBlBRjDeoZMh+d1BLXsSQ4Ca8rgV7hwszb4Hn8Y54dhDUVTyn7k1MvqNHmkLRroChDQgHPLtl
+	/DWxp1yBqmkBs1svCD86Wa7lhbyGfTA==
+X-Received: by 2002:a17:90b:4c8e:b0:37e:2005:6509 with SMTP id 98e67ed59e1d1-38e4b417444mr741494a91.3.1784259695587;
+        Thu, 16 Jul 2026 20:41:35 -0700 (PDT)
+X-Received: by 2002:a17:90b:4c8e:b0:37e:2005:6509 with SMTP id 98e67ed59e1d1-38e4b417444mr741468a91.3.1784259695109;
+        Thu, 16 Jul 2026 20:41:35 -0700 (PDT)
+Received: from [10.217.198.242] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31429f9d44fsm1553673eec.1.2026.07.16.20.41.31
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 16 Jul 2026 20:39:07 -0700 (PDT)
-Message-ID: <e5abe3c6-a8b1-b4b5-1fe6-10f19d026d4c@oss.qualcomm.com>
-Date: Fri, 17 Jul 2026 09:08:58 +0530
+        Thu, 16 Jul 2026 20:41:34 -0700 (PDT)
+Message-ID: <64bf3979-51cc-42ed-b66b-c7af04536481@oss.qualcomm.com>
+Date: Fri, 17 Jul 2026 09:11:28 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.8.0
-Subject: Re: [PATCH v7 03/18] media: iris: drop IRIS_FMT_foo enumeration
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/3] arm64: dts: qcom: purwa: Drop the Hamoa workaround
+ for PDC
+To: Bjorn Andersson <andersson@kernel.org>,
+        Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Thomas Gleixner <tglx@kernel.org>, Rob Herring <robh@kernel.org>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
         linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
-References: <20260709-iris-ar50lt-v7-0-76af9dd4d1f6@oss.qualcomm.com>
- <20260709-iris-ar50lt-v7-3-76af9dd4d1f6@oss.qualcomm.com>
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+References: <20260715-purwa-pdc-v3-0-be08934dc916@oss.qualcomm.com>
+ <20260715-purwa-pdc-v3-2-be08934dc916@oss.qualcomm.com>
+ <20260716-starling-of-heavenly-symmetry-09a73a@quoll>
+ <almDHnEcruBl-I3l@baldur>
 Content-Language: en-US
-From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-In-Reply-To: <20260709-iris-ar50lt-v7-3-76af9dd4d1f6@oss.qualcomm.com>
+From: "Maulik Shah (mkshah)" <maulik.shah@oss.qualcomm.com>
+In-Reply-To: <almDHnEcruBl-I3l@baldur>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDAzMSBTYWx0ZWRfXxTSoVxOzIUHo
- w4L01j6y2nr/qIw8iNyrr0M5+ITahh/4j739xFolQyumpCcesMcUQdP+leOqQc/HXXyd8KzZCJ9
- oB9VzI2ijtL6kK7ZHBlo4csYMWoDqVr7d3ki+jScjCFJrZcTsgSaATJXg35oJj/hFtRDxUW3tI0
- 8ip3jQsdrQrQr1R6FY/cC+x39DOnl5yKk47jJlS9z/RVrEGKudxycNImpw8Rqk3CelISX3K/i7M
- PxuZTy5deoWyaEiDnT20SxXAy+CPRlNxinWxIeVzZe0aG+wcJw2/qCeagGKV4gDn5AtM+M3lXLY
- dBwp9B5gb4uxTzEMkg3Rkz8fcQJW4Dno+cvc9D8AswTb9OQISuqNtsQekD0LbuMY2bndFi8/5pP
- qv/R7xyMbnMM2lyByzoL65GTaXXYco4cTYi9nVLFLyRnCqBss2DxcKGSM9HyVc3zgoSEHS2EFTC
- /1Yf7RoI1gBx+UVZJXQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDAzMSBTYWx0ZWRfX0VG84nuzzkvG
- AICGRBdj7liDxh4Ykqrp32v2cplF4+OLQasMUpC68pz70A2OOi3iFSyEcUtInO+7Rcq40zJs6w/
- hyQgRdio40sOH/4hDQS51iU+efUOSRI=
-X-Authority-Analysis: v=2.4 cv=DYMnbPtW c=1 sm=1 tr=0 ts=6a59a3dd cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-GUID: lFSvB0B96q5qvm0hXBllHT50fdEJHZ5q
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDAzMSBTYWx0ZWRfX6cYHT12jiXjf
+ b7u8ydHilyHhmmio/XwRGIcyh4wQmDr8IclKE68Lq9hTedcgDCYXOWymq2oomUOsSgqCXImMvel
+ KcUV9GwxwNQENh54nQKndHSL7W1a1MCCfLEixvJvngDTBqJbdo82ihJ/2RjqbmWCKQBTaFUOwuW
+ MUML7zwGYnYdjgc+ZVSQGR/o1zKNHWDLnzO7dYze3+bhgwsGnK1/Rlu7696c/pgtvsEClf5Ju4v
+ B2fa2QXpgPHCkDXX9bOb4ZUrSRYZL90JF5EuJ3l1HNcsMrBET8oIjjS93dwe68hB8EnMKJoT1lJ
+ LDslLkH6eo+yOaChW2vPK+ITl1WjqCyrn53znHGA9so30tKl+kT11nJvv/uX+JHxHXlkVh5Jad/
+ xxNlS6sPO2Vjz6wUxwJ1USPHAMSwdZz/RnNiZMdeJhcJEyzfodoEiaa+r7HLWu4yaUZEKp1mPWz
+ NYP0RkPwMY+CSeWvBcA==
+X-Authority-Analysis: v=2.4 cv=NZ3WEWD4 c=1 sm=1 tr=0 ts=6a59a470 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=tVthWWLC-BWYOXQWUWQA:9 a=QEXdDO2ut3YA:10
- a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-GUID: -HVg-LpQZ49XyU6HGRdnKscREqRJ2NJ8
-X-Proofpoint-ORIG-GUID: -HVg-LpQZ49XyU6HGRdnKscREqRJ2NJ8
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=AKtfWkbxmUR3Wn90oXcA:9
+ a=QEXdDO2ut3YA:10 a=1OuFwYUASf3TG4hYMiVC:22
+X-Proofpoint-ORIG-GUID: lFSvB0B96q5qvm0hXBllHT50fdEJHZ5q
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDAzMSBTYWx0ZWRfX31AA4puN3TVr
+ udFlxR6PHLzQU8BIzLf1qhI9ghnvln/lEmUQrXdCANiSGN85S/FyXelAE4+vkZ47aspv/mrdTHD
+ /bfVs69u0RP4XFaGcNviHPWawuUxr40=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-17_01,2026-07-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 lowpriorityscore=0 bulkscore=0 phishscore=0
- adultscore=0 priorityscore=1501 spamscore=0 malwarescore=0 suspectscore=0
+ spamscore=0 lowpriorityscore=0 malwarescore=0 clxscore=1015 adultscore=0
+ bulkscore=0 phishscore=0 suspectscore=0 priorityscore=1501 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170031
 
 
-On 7/9/2026 7:11 PM, Dmitry Baryshkov wrote:
-> The IRIS_FMT_foo defines are only used for indexing values in the format
-> enumeration arrays. However this kind of enumeration doesn't follow the
-> V4L2 logic (which expects an array with consequtive indexing rather
-> than a sparse array) and complicates adding support for platforms which
-> support different sets of formats. Drop this enumeration and use flat
-> lists of supported formats.
->
-> Reviewed-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> ---
->  drivers/media/platform/qcom/iris/iris_instance.h       | 14 --------------
->  drivers/media/platform/qcom/iris/iris_platform_vpu2.c  |  6 +++---
->  drivers/media/platform/qcom/iris/iris_platform_vpu3x.c |  8 ++++----
->  drivers/media/platform/qcom/iris/iris_vdec.c           |  8 ++++----
->  drivers/media/platform/qcom/iris/iris_venc.c           |  8 ++++----
->  5 files changed, 15 insertions(+), 29 deletions(-)
->
-> diff --git a/drivers/media/platform/qcom/iris/iris_instance.h b/drivers/media/platform/qcom/iris/iris_instance.h
-> index a770331d1675..ffdbbd20901a 100644
-> --- a/drivers/media/platform/qcom/iris/iris_instance.h
-> +++ b/drivers/media/platform/qcom/iris/iris_instance.h
-> @@ -17,20 +17,6 @@
->  
->  struct iris_hfi_session_ops;
->  
-> -enum iris_fmt_type_out {
-> -	IRIS_FMT_H264,
-> -	IRIS_FMT_HEVC,
-> -	IRIS_FMT_VP9,
-> -	IRIS_FMT_AV1,
-> -};
-> -
-> -enum iris_fmt_type_cap {
-> -	IRIS_FMT_NV12,
-> -	IRIS_FMT_QC08C,
-> -	IRIS_FMT_TP10,
-> -	IRIS_FMT_QC10C,
-> -};
-> -
->  /**
->   * struct iris_inst - holds per video instance parameters
->   *
-> diff --git a/drivers/media/platform/qcom/iris/iris_platform_vpu2.c b/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
-> index 961dce2e6aa9..ba91672df1bb 100644
-> --- a/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
-> +++ b/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
-> @@ -35,9 +35,9 @@ static const struct iris_firmware_desc iris_vpu20_p4_gen1_desc = {
->  };
->  
->  static const u32 iris_fmts_vpu2_dec[] = {
-> -	[IRIS_FMT_H264] = V4L2_PIX_FMT_H264,
-> -	[IRIS_FMT_HEVC] = V4L2_PIX_FMT_HEVC,
-> -	[IRIS_FMT_VP9] = V4L2_PIX_FMT_VP9,
-> +	V4L2_PIX_FMT_H264,
-> +	V4L2_PIX_FMT_HEVC,
-> +	V4L2_PIX_FMT_VP9,
->  };
->  
->  static struct platform_inst_caps platform_inst_cap_vpu2 = {
-> diff --git a/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c b/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
-> index 74626b35d9cb..7098b652c117 100644
-> --- a/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
-> +++ b/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
-> @@ -49,10 +49,10 @@ static const struct iris_firmware_desc iris_vpu35_p4_gen2_desc = {
->  };
->  
->  static const u32 iris_fmts_vpu3x_dec[] = {
-> -	[IRIS_FMT_H264] = V4L2_PIX_FMT_H264,
-> -	[IRIS_FMT_HEVC] = V4L2_PIX_FMT_HEVC,
-> -	[IRIS_FMT_VP9] = V4L2_PIX_FMT_VP9,
-> -	[IRIS_FMT_AV1] = V4L2_PIX_FMT_AV1,
-> +	V4L2_PIX_FMT_H264,
-> +	V4L2_PIX_FMT_HEVC,
-> +	V4L2_PIX_FMT_VP9,
-> +	V4L2_PIX_FMT_AV1,
->  };
->  
->  static const struct icc_info iris_icc_info_vpu3x[] = {
-> diff --git a/drivers/media/platform/qcom/iris/iris_vdec.c b/drivers/media/platform/qcom/iris/iris_vdec.c
-> index 9e228b70420e..4c8bc7aac135 100644
-> --- a/drivers/media/platform/qcom/iris/iris_vdec.c
-> +++ b/drivers/media/platform/qcom/iris/iris_vdec.c
-> @@ -63,10 +63,10 @@ int iris_vdec_inst_init(struct iris_inst *inst)
->  }
->  
->  static const u32 iris_vdec_formats_cap[] = {
-> -	[IRIS_FMT_NV12] = V4L2_PIX_FMT_NV12,
-> -	[IRIS_FMT_QC08C] = V4L2_PIX_FMT_QC08C,
-> -	[IRIS_FMT_TP10] =  V4L2_PIX_FMT_P010,
-> -	[IRIS_FMT_QC10C] =  V4L2_PIX_FMT_QC10C,
-> +	V4L2_PIX_FMT_NV12,
-> +	V4L2_PIX_FMT_QC08C,
-> +	V4L2_PIX_FMT_P010,
-> +	V4L2_PIX_FMT_QC10C,
->  };
->  
->  static bool check_format(struct iris_inst *inst, u32 pixfmt, u32 type)
-> diff --git a/drivers/media/platform/qcom/iris/iris_venc.c b/drivers/media/platform/qcom/iris/iris_venc.c
-> index a945992f63aa..16c52ad07e2c 100644
-> --- a/drivers/media/platform/qcom/iris/iris_venc.c
-> +++ b/drivers/media/platform/qcom/iris/iris_venc.c
-> @@ -80,13 +80,13 @@ int iris_venc_inst_init(struct iris_inst *inst)
->  }
->  
->  static const u32 iris_venc_formats_cap[] = {
-> -	[IRIS_FMT_H264] = V4L2_PIX_FMT_H264,
-> -	[IRIS_FMT_HEVC] = V4L2_PIX_FMT_HEVC,
-> +	V4L2_PIX_FMT_H264,
-> +	V4L2_PIX_FMT_HEVC,
->  };
->  
->  static const u32 iris_venc_formats_out[] = {
-> -	[IRIS_FMT_NV12] = V4L2_PIX_FMT_NV12,
-> -	[IRIS_FMT_QC08C] = V4L2_PIX_FMT_QC08C,
-> +	V4L2_PIX_FMT_NV12,
-> +	V4L2_PIX_FMT_QC08C,
->  };
->  
->  static bool check_format(struct iris_inst *inst, u32 pixfmt, u32 type)
 
-Reviewed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+On 7/17/2026 7:38 AM, Bjorn Andersson wrote:
+> On Thu, Jul 16, 2026 at 09:59:44AM +0200, Krzysztof Kozlowski wrote:
+>> On Wed, Jul 15, 2026 at 06:52:01PM +0530, Maulik Shah wrote:
+>>> X1P42100 (Purwa) shares the X1E80100 (Hamoa) PDC device, but the hardware
+>>> register bug addressed in commit e9a48ea4d90b ("irqchip/qcom-pdc:
+>>> Workaround hardware register bug on X1E80100") is already fixed in
+>>> X1P42100 silicon.
+>>>
+>>> X1E80100 compatible forces the software workaround. Use the X1P42100
+>>> specific compatible string for the PDC node to remove the workaround.
+>>>
+>>> Fixes: f08edb529916 ("arm64: dts: qcom: Add X1P42100 SoC and CRD")
+>>> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+>>> Signed-off-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
+>>> ---
+>>>  arch/arm64/boot/dts/qcom/purwa.dtsi | 5 +++++
+>>>  1 file changed, 5 insertions(+)
+>>
+>> Why does the DT change appear in the middle of the patchset? Please read
+>> submitting patches documents - both of them - and maintainer-soc
+>> profile.
+>>
+> 
+> I thought I had figured it out, but I'm not sure anymore.
+> 
+> The claim from the cover letter is that patch 1 and 2 are completely
+> independent, but patch 3 depends on Bartosz's thank you letter [2] that
+> arrived a week before this series was sent out.
+> 
+> We're not merging the three changes through the same tree and there's no
+> expressed dependency between patch 2 and 3 (only implicitly by the order
+> in the series). But as Konrad points out, in-between patch 2 and 3 we
+> would not enable the secondary GPIO in the PDC driver, so Purwa would
+> have broken GPIOs for a while (not ok). I think merging them in the
+> opposite order would be what we want (i.e. 1, 3, then 2)
+
+purwa-iot-evk.dts where firmware sets pass through mode, so current order of the patch seems to be ok.
+(patch 3 as such is no impact for iot evk)
+
+x1p42100-crd.dts where firmware sets secondary mode, applying in 1, 2, and then 3 may leave crd boards
+in broken GPIOs for a while after [2],  so yes order 1, 3, and then 2 makes more sense.
+
+patch 1/2 - fixes the purwa to operate on correct registers.
+patch 3 - Allow crd boards to re-set the mode to pass through
+
+> 
+> 
+> But this series implies that Purwa has been broken from the start - that
+> the PDC driver has always operated on the wrong registers.
+
+yes, purwa always operated on the wrong registers.
+
+> 
+> Perhaps the impact of this was limited as there's not that many direct
+> &pdc references in the DT, but the patch that Bartosz's thank-you email
+> was sent for got merged as 77fbc756d9cb ("Revert "pinctrl: qcom:
+> x1e80100: Bypass PDC wakeup parent for now""), and that would make a lot
+> more use of the PDC.
+> 
+> So while nothing in this series states it, it sounds like Purwa might be
+> completely broken right now and this series aims to fix it?
+> 
+> 
+> It's not clear to me why the driver change doesn't have a Fixes tag, it
+> seems like the patch that introduced x1e_quirk was broken and should be
+> marked as Fixes.
+
+x1e_quirk in the driver via commit e9a48ea4d90b ("irqchip/qcom-pdc: Workaround hardware register bug on X1E80100")
+says only about x1e/ hamoa specific bug, it seemed it never wanted to enable the quirk for x1p / purwa. the quirk
+rather got anyway enabled for purwa due to both hamoa/purwa sharing the same compatible.
+
+Patch 1/2 of the series aims to fix this (and patch-2 carries the fixes: tag).
+
+Thanks,
+Maulik
+
+> 
+> [2] https://lore.kernel.org/linux-arm-msm/CAMRc=MeU0QuRozMscv02M59+a66S05Jm18CyvNE-qSYrY=S7hQ@mail.gmail.com/
+> 
+> Regards,
+> Bjorn
+> 
+>> Best regards,
+>> Krzysztof
+>>
 
