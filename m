@@ -1,169 +1,300 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D55473890E4;
-	Fri, 17 Jul 2026 07:26:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8895C3DDAE3
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 07:29:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784273184; cv=none; b=cZVBL3ZrsXs3WTuVQEPbD6TVH/+1HP98/AJZtIU5PVnxOZAidx++jTNfPTKjbXecl3rsDBzPKLbx4lHTFsnG23MyeVFHVo4gpheiF64kt4GtoQjO7i15+xcPwQ4uw1haMth+KBc6e3MrfJrwp0P1P5bznwgF2rzYeNBrpLpz730=
+	t=1784273357; cv=none; b=Zc2R/6Dgmuw7lqhMlo1S65Mr4Jr4ZXPbPXD5xRiWjVO+chRur6DttFm0q1ND4OOslRPLqE2mY34yLEMmEg7x/OZZBzD0WkJMTDYGNBC25abaG2eh04NPlO10DaL5vU7LhQZ6fhsvaxx5V0VHnbsmbIScYnhIZHBYUUGIXuVyy9I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784273184; c=relaxed/simple;
-	bh=UIbui/chiiJBvHN7sGhVyTjdeFSvelYT+4T85sPAmXU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=BGSqxsIsEBbwZdiS48Jz0GJXXYQHsgegxjOQyCyVNVUE2BTGYjjIvu3ihlcvhhUauW7u7t7b+B/wOAeaVqtqM0PQ2Cu77SL0mb1eAcciem1CSinpeKU/2H9L/BCpe38pFlPkfD11sNhi5TPKqboqihMMfvCCoUnpEosgN5aoAX4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TpwQT8xZ; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784273357; c=relaxed/simple;
+	bh=6OpzcuW/vXrBd8EEvVAzR0F/OfZ6uSTpUvNzXmgWi9w=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=EHNe6U+k4TU+9I+oXbIAswQHj4z2spabIkfgI2dum7PM4j4cOxVSQYsKmy2rMGiNyG8UWjza0OCCw2zMzWtqihBZ7uCV4NbtsRmJyQrxyguHLJ5Shaa26pMsBTAWGsOZhNjT4vyAckJIlgMRuf6doCJBUMXJt9/NqI93T2du+Z8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fYBxCXtY; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gpFnaHDW; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TpwQT8xZ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B17B91F000E9;
-	Fri, 17 Jul 2026 07:26:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784273182;
-	bh=Rtmrjy1XM2eI2QUHDorJnuTSC4NyenPnYLnBGTLi//w=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=TpwQT8xZ60u7kgvS/+KEGOVaxnME2jKRo6ECe+cziU/pvy/XOqgX9FerRi1YIgsxY
-	 CGxurGd1kzb/w5who+0KPzdPHSguPN8bVGdFIeV1wbCKuJ4AV/E4aTKHMpLSvRhit8
-	 AKa5x8KulMpVTnHzHe66900M4weLVjX3qHLMtkK6DZ6l+/EoSF62xEthv/V1VwLRnD
-	 bbbh6gd0QqMNhYgpZvUnV2Se6n1d+zjU41IYMDJKsdi0OOrN3mCRRDSsx8Og4d2E3C
-	 TvYLgGrH5vHEGvgclq81QwII+mIUSkLi+IB6z3UOXopR3YxVvGH7gkE0L/Sju62tgO
-	 BAeyl7ih+BDxQ==
-Message-ID: <b5c0de1f-75e3-443e-9e29-a70fbdbf4441@kernel.org>
-Date: Fri, 17 Jul 2026 08:26:18 +0100
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fYBxCXtY";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gpFnaHDW"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66H6cP4N1018913
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 07:29:06 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	68gUZ7LqB0jU7pBbWZu2QhSNvnpL1hcdM6zSdwGD5Nw=; b=fYBxCXtYZkeNo41o
+	uyRZpBnHJ5TxP2jE/HAnBX9qM1DId9iHDawfJvmwAgOE4fog+2uXQaQLYTjU4e/R
+	LOauO3m9jfmsO3LgRcgew3DWHKKM9vU8mciy9EtuWWNkj+JkXQmZ4/yfcvHGGvuk
+	vgZ7kEq9+IOQ+fntuzl7Tk+l7PKB4Mqd/nyQY0NQHwRvohLC3tSkQRAwQGQ3uAOl
+	w/a9ODbuH3zRfUl57NfKgLNd5iM3BoWHw/z3Q1x2SP/X7GkgUDTIvNVdjUnjMEDQ
+	/P3wq1NPGctotM+9qbfhJ0BQZAfLZebKkbO4S7vRcdJPBPHbgC0Kw35qXHdRqn38
+	ezh8Zw==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fff810761-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 07:29:06 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2cae455cf6dso104287235ad.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 00:29:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784273345; x=1784878145; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=68gUZ7LqB0jU7pBbWZu2QhSNvnpL1hcdM6zSdwGD5Nw=;
+        b=gpFnaHDW0fludPs3VD5Dq13X1KzIY+xLfdG6k42tJyVYryqCn9C8wx2NL9mipWcVeH
+         Zath6vdi2pBLq9C/Fz6gACKKWI/3ReQV2lyDNScn7KxZgLZiV4ATGBbXCVYRIwEeeaY5
+         8t4SeG4ih8NlG/ytw1KGQ2LHDrtq3kReCi5DqHb+wl79l/gVADJhJ+pd+PxZGaaNwtBS
+         pQvVkyLI1MA3W7NCBDxQgdEQ+kr4M4HFwn1XwxJuwNwCmtBePrmWiM22m9jiNLzYPusI
+         Xe3j8ySwh6NebdcozLfDf9gjiNWGMyd55EEYI8SQNt6qpdaaAjLBin90svjarHKw468h
+         Ym+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784273345; x=1784878145;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=68gUZ7LqB0jU7pBbWZu2QhSNvnpL1hcdM6zSdwGD5Nw=;
+        b=jIG/eNh40JoCI2DF9kCRRTSZwlOsi+RmbAbylwx4RPqGwN/sUlyvb+uT7ayMjBBfRt
+         Skpa/qw0vEHNULmCtAqSmjJvXRpn2oD7zf1YILRCTkDSn/Bo87lb5H3jC7KSGKBOAsbn
+         77wh3h9gXesKtThf7jHa6O8MsxMeOS2Ddyv2LZBWp09SptBWFESWKOn+RezO9Cc10lz3
+         JP/1CwOtquBgUC+60tyZMGtKQkIiB1cBdwB6wrgnm65Dh0TxhqdIhiA5FX7ZQjefthEc
+         t0sjqyJpwEXro1ssYFyxrzEWxebvqmz3NHddcLFD/cg2oKLhcB/+oj9O+T0wvaBV6pyC
+         9R0A==
+X-Gm-Message-State: AOJu0YxfYRP00qZVfV2pWgk2QNNZljwzFRPv9ywNhXgORVEHQ6uwb6Q+
+	kWBa2eq4PcCX0wfX95T37tp34hLIuD9L+N6DMNz1yEZAxcHI3M+fISQcbmi6ZuNmWZDKqAVz+Cg
+	QDLDYwjEJv/hv5NyZGwGzDYS5jNnixo2HFgOwXoP9uTqAu81fMXS+gZePDQuAmW1SGTwA
+X-Gm-Gg: AfdE7cmZy3VUVUKeCofeyQ6ihjjzHu3/dE077qDDcA5Dz3OL8w6UMW961Kl1z0h/D5v
+	jbeP29jOuM3vRj36eknopCC6G5JJvTrYfW/5bN96wIjxIxAXZro0ocrckTzj0Q3IBEjmpfGY9Ua
+	UfEBHFbaqx7LtHUujF5Xk1UJhFJ3abfn0lBBUdrsmTyUcN+MCUyeeiLvtvUzlmg00JwIjlULcjl
+	fAITENTPLiZ4a7ETUTQbL6gz6z9Xcw/9sKyXTGaKQKbh1Eey2hpeM1xKD2zAI/ul4by+KM/Gdwi
+	Tj3mar/uEIpRc5qpr1riY5+4M5xI2YGPnDrP12CkXlz7fC96g9/3cBG8SweQS64OC2TjEi94Q6S
+	YthncXk/4vBKlPHj3pJ9ysaZd5GaCJYEGv7FgJAY25r/DZYhLxASA
+X-Received: by 2002:a17:903:40cc:b0:2ca:e5c:7fba with SMTP id d9443c01a7336-2cf349f210fmr16115805ad.39.1784273345377;
+        Fri, 17 Jul 2026 00:29:05 -0700 (PDT)
+X-Received: by 2002:a17:903:40cc:b0:2ca:e5c:7fba with SMTP id d9443c01a7336-2cf349f210fmr16115575ad.39.1784273344902;
+        Fri, 17 Jul 2026 00:29:04 -0700 (PDT)
+Received: from hu-fenglinw-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf346da071sm5724065ad.47.2026.07.17.00.29.03
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 17 Jul 2026 00:29:04 -0700 (PDT)
+From: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+Date: Fri, 17 Jul 2026 00:28:59 -0700
+Subject: [PATCH v4 1/3] dt-bindings: input: Add Qualcomm SPMI PMIC haptics
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1] drm/msm/dp: return 0 from audio_prepare when cable is
- disconnected
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- sashiko-reviews@lists.linux.dev, Kumar Anurag
- <kumar.singh@oss.qualcomm.com>, Rob Clark <robin.clark@oss.qualcomm.com>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Mark Brown <broonie@kernel.org>
-Cc: dri-devel@lists.freedesktop.org, Abhinav Kumar <abhinav.kumar@linux.dev>,
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Liam Girdwood <lgirdwood@gmail.com>,
- linux-sound@vger.kernel.org
-References: <20260616151252.3599089-2-kumar.singh@oss.qualcomm.com>
- <20260616152536.D81FB1F000E9@smtp.kernel.org>
- <5ixuxbgngzobl5c5fsyahdsouohwuykoat7s4hy6sczrye7vwf@rj7nmn7x3c56>
-Content-Language: en-US
-From: Srinivas Kandagatla <srini@kernel.org>
-In-Reply-To: <5ixuxbgngzobl5c5fsyahdsouohwuykoat7s4hy6sczrye7vwf@rj7nmn7x3c56>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260717-qcom-spmi-haptics-v4-1-b0fe0ed30849@oss.qualcomm.com>
+References: <20260717-qcom-spmi-haptics-v4-0-b0fe0ed30849@oss.qualcomm.com>
+In-Reply-To: <20260717-qcom-spmi-haptics-v4-0-b0fe0ed30849@oss.qualcomm.com>
+To: linux-arm-msm@vger.kernel.org, Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: David Collins <david.collins@oss.qualcomm.com>,
+        Subbaraman Narayanamurthy <subbaraman.narayanamurthy@oss.qualcomm.com>,
+        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>, kernel@oss.qualcomm.com,
+        linux-input@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Fenglin Wu <fenglin.wu@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.16-dev-17187
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784273341; l=6327;
+ i=fenglin.wu@oss.qualcomm.com; s=20260324; h=from:subject:message-id;
+ bh=6OpzcuW/vXrBd8EEvVAzR0F/OfZ6uSTpUvNzXmgWi9w=;
+ b=IJOaTBrSz2TSiz/oZ08xrnlS4x34XLA3wVRdhBIROx29351X1ibEmuT4KXyiABnMl8kxVS4Ls
+ FNUTqP4X90EDl4gEdD7BlQrKcCv0ZxqbACv2yYCN+0S1yPCsKaHzPzr
+X-Developer-Key: i=fenglin.wu@oss.qualcomm.com; a=ed25519;
+ pk=hJdt3E7o54lql+miD2GaxwF74cDyhgNwMbmFOZ46bRU=
+X-Authority-Analysis: v=2.4 cv=RbqgzVtv c=1 sm=1 tr=0 ts=6a59d9c2 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=bI6yuv9Qsz7HNVLwNVgA:9 a=QEXdDO2ut3YA:10
+ a=GvdueXVYPmCkWapjIL-Q:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-GUID: V-Z1K4GnPpz-zxMBm5knyesxclLCbgDx
+X-Proofpoint-ORIG-GUID: V-Z1K4GnPpz-zxMBm5knyesxclLCbgDx
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDA3MyBTYWx0ZWRfX/VBfjpG3+0u7
+ /KK5S59HWQi/Rpk/Sai4TtYjSZHmIXKXZWENPjjczjIiDdEkpYiTxI5FsiJY3uM/dARoPpy2zzD
+ XWWxbNxvpsKlzWBdVWaTCJncw+T/gK0WDch/WPXaCykQtg4xu8BOWbxVDkf+qfsPqKKx/l36zMu
+ YOyjt2SGqauTBmOvjds+Q/EIef7yIEVXw3HCshXZ9Xrhunf1K9meC1ImNWG1x8oLgxv1/hCGavE
+ tupDKYXeufKGUVstW9dG0f45ea5iKRqScMBS0tnGwChMT/SQZfhLAyGN5IzCBcUd/B9kWCxHeZi
+ vH1bP37JXAsvbUYLJ8fBZ339pZDmpodFhrQehVJpjUnHjbPwAZdRpWCOtQt8e5TJg0TaAZMSyZn
+ bZHDBvhwzFwwzuDhlSaZ7iPfUIdYDJQv6ifc1IhGRta5p5+DJCtjSyhHVP6ptgNW5GNz5NqIJgS
+ a0rmF2vAdLC/piO5YJg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDA3MyBTYWx0ZWRfX1tv7B0lmFz7R
+ 7ed7NApox8Y7zkxB+rSSLUgbR29xEkmouipcb5whqjVCx2kDIKU04d48BXNEy1g7wbXDBIAyWds
+ JdV7cyir6nTWfn8xXq0M1Rp+beXFnUk=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-17_02,2026-07-15_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 clxscore=1015 suspectscore=0 priorityscore=1501
+ lowpriorityscore=0 impostorscore=0 bulkscore=0 phishscore=0 adultscore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607170073
 
-On 7/12/26 11:16 AM, Dmitry Baryshkov wrote:
-> On Tue, Jun 16, 2026 at 03:25:36PM +0000, sashiko-bot@kernel.org wrote:
->> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
->>
->> New issues:
->> - [High] Returning success (0) from `msm_dp_audio_prepare` when the display is disconnected causes silent audio failures upon hotplug and NoC errors due to unclocked DSP hardware access.
->>
->> Pre-existing issues:
->> - [High] Race condition between `msm_dp_audio_prepare` and `msm_dp_display_disable` causes unclocked MMIO accesses.
->> --
->>
->> commit bfb65364e66313dc1385a42e09172f44a1e1fbd1
->> Author: Kumar Anurag <kumar.singh@oss.qualcomm.com>
->>
->> drm/msm/dp: return 0 from audio_prepare when cable is disconnected
->>
->> PipeWire treats a non-zero return from prepare as fatal, marking the
->> DP audio device as a dummy sink when the cable is unplugged.
->>
->>> The active_stream_cnt guard already prevents any unclocked hardware access,
->>> so return success instead of -EINVAL when the link is not active.
->>
->> [Severity: High]
->> Is this commit message accurate for the upstream tree? There doesn't appear
->> to be an active_stream_cnt guard in the mainline driver. Without this guard,
->> will the DSP push data to powered-off, unclocked DP hardware and cause NoC
->> errors?
-> 
-> $ git describe
-> v7.2-rc2-4669-gb9810cd75b9f
-> $ git grep active_stream_cnt
-> $
-> 
-> Which tree has this commit message been based on?
-> 
->>
->>> diff --git a/drivers/gpu/drm/msm/dp/dp_audio.c b/drivers/gpu/drm/msm/dp/dp_audio.c
->>> index 41018e82efa10..df222943ae57f 100644
->>> --- a/drivers/gpu/drm/msm/dp/dp_audio.c
->>> +++ b/drivers/gpu/drm/msm/dp/dp_audio.c
->>> @@ -284,10 +284,8 @@ int msm_dp_audio_prepare(struct drm_bridge *bridge,
->>>  	 * such cases check for connection status and bail out if not
->>>  	 * connected.
->>>  	 */
->>> -	if (!msm_dp_display->power_on) {
->>> -		rc = -EINVAL;
->>> +	if (!msm_dp_display->power_on)
->>>  		goto end;
->>
->> [Severity: High]
->> Does returning 0 here trick the ALSA/ASoC framework into marking the stream
->> as successfully prepared?
->>
->> If the stream is marked RUNNING, ALSA won't re-invoke prepare() when the
->> display is later connected. Could this regression result in silent playback
->> because the DP hardware is never actually configured?
->>
->> [Severity: High]
->> This is a pre-existing issue, but does this lockless check of power_on
->> race with msm_dp_display_disable()?
->>
->> If msm_dp_display_disable() runs concurrently (e.g., from a hotplug interrupt)
->> immediately after this check but before audio_enabled is set to true, it will
->> skip waiting and disable the DP link and clocks.
->>
->> When msm_dp_audio_prepare() resumes, it will call msm_dp_audio_setup_sdp() and
->> attempt MMIO operations on unclocked DP audio registers. Could this lead to a
->> synchronous external abort?
-> 
-> I'd agree with Sashiko here. Do we guard against the unlocked access? Or
-> how do we ensure that the stream will be prepared later?
-> 
-> I think this needs to be fixed on the other side of the pipe. Do we need
-> to define a special prepare error code, which means "working, but not
-> available now" and make PulseAudio / PipeWire handle those errors
-> specially? How is it solved for other platforms? I don't think that
-> msm/dp is unique here.
+Add binding document for the haptics module inside Qualcomm PMIC
+PMIH0108.
 
-AFAIU,There is no special error code for prepare to flag that cable is
-not connected, the standard way is to read Jack events. Wireplumber is
-is one which deals with Jack event, even before getting to there
-pipewire will fail to probe the devices on the card if prepare fails.
+Assisted-by: Claude:claude-4-8-opus
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+---
+ .../bindings/input/qcom,spmi-haptics.yaml          | 136 +++++++++++++++++++++
+ 1 file changed, 136 insertions(+)
 
-Once we are at Wireplumber level we are good, and stream will never sent
-to the sinks which are in disconnected state (via Jack).
+diff --git a/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml b/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml
+new file mode 100644
+index 000000000000..b1a69e9886ee
+--- /dev/null
++++ b/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml
+@@ -0,0 +1,136 @@
++# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/input/qcom,spmi-haptics.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Haptics device inside Qualcomm Technologies, Inc. PMIC
++
++maintainers:
++  - Fenglin Wu <fenglin.wu@oss.qualcomm.com>
++
++description: |
++  Certain Qualcomm PMICs integrate a haptics module, such as the HAP530_HV haptics
++  module in the PMIH0108 PMIC, which drives an LRA (Linear Resonant Actuator) with
++  an output voltage up to 10 V. Several play modes are supported in HAP530_HV:
++
++    DIRECT_PLAY: The hardware outputs sinusoidal waveforms whose period is
++      defined by qcom,lra-period-us and whose peak voltage is defined by
++      qcom,vmax-microvolt. The driving amplitude can be scaled in the range
++      [0, 255] via a single register byte.  Hardware-based LRA auto-resonance
++      tracking is enabled by default in this mode, allowing the haptics engine
++      to follow the actual resonant frequency of the LRA and update the driving
++      period accordingly to achieve stronger vibration magnitude.
++
++    FIFO: The hardware can play an arbitrary waveform composed of a sequence
++      of 8-bit samples at a configurable play rate.  Samples are pre-filled
++      into the internal FIFO memory of the haptics module and continuously
++      replenished via the FIFO-empty IRQ until all samples have been played.
++      An 8K-byte FIFO memory bank is available in the HAP530_HV haptics module,
++      shared between the FIFO and PAT_MEM play modes. The memory partition
++      between the two modes is configurable via registers, and FIFO mode always
++      uses the 1st partition starting from offset 0.
++
++    PAT_MEM: This mode is very similar to FIFO streaming mode but without the
++      data refilling capability. It is designed mainly for short, latency-critical
++      vibrations. The memory space for PAT_MEM mode must be reserved for dedicated
++      usage, and the waveform data should be preloaded and remain unchanged
++      thereafter. The haptics module can play the waveform data from the memory
++      region specified by the PAT_MEM play start address and length registers.
++
++    In either FIFO mode or PAT_MEM mode, the following play rates are supported:
++      -- 0(T_LRA): each FIFO byte drives one full sinusoidal cycle with the
++        period defined in qcom,lra-period-us.
++      -- 1/2/3(T_LRA_DIV_2/4/8): each FIFO byte drives a half/quarter/eighth
++        sinusoidal cycle with the period defined in qcom,lra-period-us.
++      -- 4/5/6(T_LRA_X_2/4/8): each FIFO byte drives 2/4/8 sinusoidal cycles
++        with the period defined in qcom,lra-period-us.
++      -- 8/9/10/11/12/13(8KHz/16KHz/24KHz/32KHz/44.1KHz/48KHz): the FIFO
++        data is treated as PCM samples and drives the output with an
++        arbitrarily shaped waveform.  This mode is typically used to define
++        custom driving waveforms for specific vibration effects such as fast
++        attack, crisp brake, etc.
++
++    The drive voltage in FIFO or PAT_MEM mode can exceed the value defined in
++    qcom,vmax-microvolt to achieve a special vibration effect, but the waveform
++    must be short enough to prevent the LRA from being damaged by operating at
++    an overvoltage.
++
++    Also, hardware-based LRA auto-resonance tracking is normally disabled in
++    FIFO or PAT_MEM mode, as these modes are intended to drive arbitrary
++    waveforms that may not follow the resonant frequency; autonomous hardware
++    resonance correction would interfere with the intended output.
++
++properties:
++  compatible:
++    items:
++      - const: qcom,pmih0108-haptics
++      - const: qcom,spmi-haptics
++
++  reg:
++    items:
++      - description: HAP_CFG module base address
++      - description: HAP_PTN module base address
++
++  reg-names:
++    items:
++      - const: cfg
++      - const: ptn
++
++  interrupts:
++    maxItems: 1
++
++  interrupt-names:
++    items:
++      - const: fifo-empty
++
++  qcom,vmax-microvolt:
++    description:
++      Maximum allowed output driving voltage in microvolts, must be a multiple
++      of 50,000 uV. This is the peak driving voltage in DIRECT_PLAY mode,
++      which outputs sinusoidal waveforms. The value should be equal to the
++      square root of 2 times the Vrms voltage of the LRA.
++    minimum: 50000
++    maximum: 10000000
++    multipleOf: 50000
++
++  qcom,lra-period-us:
++    description:
++      LRA actuator initial resonance period in microseconds
++      (1,000,000 / resonant_freq_hz).  Used to configure T_LRA-based play
++      rates and the auto-resonance zero-crossing window. It could be also used
++      as the initial period if the LRA wants to be driven off resonance.
++    minimum: 5
++    maximum: 20475
++    multipleOf: 5
++
++required:
++  - compatible
++  - reg
++  - reg-names
++  - interrupts
++  - interrupt-names
++  - qcom,vmax-microvolt
++  - qcom,lra-period-us
++
++additionalProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/interrupt-controller/irq.h>
++
++    pmic {
++        #address-cells = <1>;
++        #size-cells = <0>;
++
++        haptics@f000 {
++            compatible = "qcom,pmih0108-haptics", "qcom,spmi-haptics";
++            reg = <0xf000>, <0xf100>;
++            reg-names = "cfg", "ptn";
++            interrupts = <0x7 0xf0 0x1 IRQ_TYPE_EDGE_RISING>;
++            interrupt-names = "fifo-empty";
++
++            qcom,vmax-microvolt = <1300000>;
++            qcom,lra-period-us = <5880>;
++        };
++    };
 
-This has been a known issue for very long time, most of the codecs like
-
-Its also interesting to note that same Qualcomm SoC drivers deal with
-this situation by returning zero, so why dp has to be different?
-
-drivers/gpu/drm/msm/hdmi/hdmi_audio.c
-
-Other drivers that do not care about plug state in prepare are.
-sound/x86/intel_hdmi_audio.c
-drivers/gpu/drm/mediatek/mtk_hdmi.c
-sound/hda/codecs/hdmi/hdmi.c
-drivers/gpu/drm/xlnx/zynqmp_dp_audio.c
-
-
-I think there is enough evidence how this is handled in the codec
-drivers, we should consider this patch.
-
---srini
-
-
-> 
-> Mark, would you have any particular recommendations?
-> 
+-- 
+2.43.0
 
