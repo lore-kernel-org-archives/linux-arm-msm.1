@@ -1,142 +1,128 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9FFCB332623
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 04:41:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B2FD34B1A3
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 04:50:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784263288; cv=none; b=CqUvLZkbYZ0xVuY81FoiLbK533wsFjPpv+DSt+oqgGlhs6RZLc1/zbE2AbFtL3VKX/SF3ClBPtfvDU3r3Do6iiS+PUEgu3tyCcFhsOyd++yDOpULSxO6cNVHVmYbqLVNzliu85WtDUgLbctWr2axw875kBBcKI+zg0d+GLv75NM=
+	t=1784263817; cv=none; b=aJqjKJ2O5NdnpPLzl7LIFpQWgeWMVRABk4bRfWD6KaTNgshipFRYxmAIjHirWLeauw0m+W8x8kiLdHun2ScvOGEEN4XsAII5r3oaL5DBjFfG/h4lBgVgJcnRcgjWFOIfwN7HXfihilveKFsMEkTkzWHOdPS8/Bx7dCJ1Z43euMw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784263288; c=relaxed/simple;
-	bh=qw3UlfHqx9g7QO6+Mmao8Q1/I71j8qvLvF1DF9oIM9w=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=tupGEAIQY04XA9PE2pdPbhbOAGt+yNTFs+nqj4Yk0ml5jW9R4snmMGS1Hr0n0d/VsnA89l/dEEQ1nOV2IU5zYYkBtOdFbW+WumnKk7DsizdJq0mTeLKk7KKGFO6fW4l01rH3lSGHXENxQp7eWGkFydy4VHPQiKPoANlAtkZLPZk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PcHlIJ5b; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XzLqURzL; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1784263817; c=relaxed/simple;
+	bh=wegNo8nVQQHvJX2jvTfyunU2PslvpToIjVqkca5C45c=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=pEldUs6d39ELoBi6073bUZgBNNVT1rruZ11gOl3nrujikpO0TLRHMEnlmGTfH5jOK0jU/l84ECnsLz7pywY2moG5yD1ZCtljYLY74K1CYutjHLDOX1i6VXYj3Q+Ri3DdA8JVG8RhIJwZgH7x642ARU6mhAAxSWDTYxJjjW5pt/Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MJeouIH6; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=HUfSnsZV; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PcHlIJ5b";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XzLqURzL"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MJeouIH6";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="HUfSnsZV"
 Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66H348QC496843
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 04:41:25 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66H33uqE496423
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 04:50:15 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=FRBWIdccCY+PmppSXcBYV3
-	S4pjZTWpMiCSXziGIBsQs=; b=PcHlIJ5b8O3SVu5n3G0BaeJ+tz1w+fTeccmhQH
-	wElHDzdp8d4FJucDnDWwkU8OX0CLMLB6UmqhijeGlJfu3SPcHB7yWEvhIqazn3Bk
-	LrQNWg8Q4FHhkloM0M3/6jJmjqMHjO6r5p6gWBLqJ2exKTTrFm1xhs4kSJvKT/kB
-	yL6sEuxzSQPyha0OfK49VQFtPba9fNDhQWsRg0q8cI2w8yx7E3+lEZb0DYSgUUhg
-	PAdFSlHnXF5d4J40ZYc7Lvc5F6K8llHdYHuqC60FGzfNQWciVKylT86+wYG5l54R
-	OnwLLkL53j4W+w9H8fPaWbAfkDAKyust6TWOTjriUdz0OROA==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4feuex4kvk-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	pS3hGNdU3fs5am1KSoTDnSdOUbpCQRoLxtrURiIei5E=; b=MJeouIH63+2BbAMa
+	PoU1abc7u2+QA+fNvfYM7GSLQyGPBOZL24El5Pvd5NY2BXTZYRLFgmJsMo1Mbryk
+	8o4aLC09ayGSB4ELB/biiJtkt9hUH+DRnXuO7KU1ttI+A4XaG+d1vxvRVKpNNNKv
+	8jVwl7UbRtJl/mKttHqjtdEOyYbyeC7t1TvytavPXcaZdBcI8cAAwo/g/0WxmnUu
+	Zsg+egrp75GeMd4rNeyZqXoqbP57tQGt7BhcpuB4coGNz8sdP0kPRlYaZwK35Zga
+	cpzc2ZJwRHNIBd75b8bbi0hF4n+Dgls2s/L8e9CFyezxDmuc+RWNaTKCj74EpvZ6
+	/Vm0Ow==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4feuex4mh9-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 04:41:25 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38e4758ab46so688879a91.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 21:41:25 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 04:50:14 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-ca124bf0189so732825a12.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 21:50:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784263284; x=1784868084; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=FRBWIdccCY+PmppSXcBYV3S4pjZTWpMiCSXziGIBsQs=;
-        b=XzLqURzLMjac2GvdVQdAqjjLGl9phXDqpVxiCbeReOMVwyGYedGFBMvMpgFq2CvVss
-         ksB1Gagr6XHDOdLnaKWbskXfQVwUx3Jqq92lm0eFX7+DJjJC5rkwiy1cb+x2cyMJoFbU
-         H0MERWGgEhEt9h/gZUWKgqo00xo4dJX21Y3sjAmNBsjg8bVBJxXPJ/jSP69CrIiE965H
-         OFwR2AI2AoZCNZe3aO0GqQkCYLyn2gGsINdS2RMcoM1ocYCJsswgIAvV0uHQCbu6uFhU
-         G7D0dqlpF+tuCFzOabgB72d/KKdJgzXYEG/kFG3P7ciChcqykw3gXKKI7ahSda/IKSh0
-         eZig==
+        d=oss.qualcomm.com; s=google; t=1784263814; x=1784868614; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=pS3hGNdU3fs5am1KSoTDnSdOUbpCQRoLxtrURiIei5E=;
+        b=HUfSnsZV9F6xDxNFWZI4KwsIPVI5/d+lHfdpvx38vQfaheasQ++BX2sTewvvLpmlLV
+         aLBhRjKLThcE07n8/kddXctALmg0CrsopE+zbvZHOmK2UARtzaPlLohC5Ld2yPZjPKtd
+         PF6OuVRtSJBzkagPgBr6eAtaTG4F6qUtPu58/CAxAbhVTufMQFXFjK+O0koR5dJFL2dr
+         FFDay5tXBoeQcZH7bdSEtCFj7ZjmbTLpF1AZEzb75ZXGaP+Fb135S1k3lREsc2uUZOny
+         xNTACmEHBHR5b/u3/NWqTFKTepD6bzHISpP4AxvwayvUS4FdesYpgbhsgYmiKU4cD+ML
+         qnIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784263284; x=1784868084;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=FRBWIdccCY+PmppSXcBYV3S4pjZTWpMiCSXziGIBsQs=;
-        b=JruwP90SOFVB+oAQAcieyDwC2Qvc6AWRGs7Oah5Y3xEmbIef1pW3PUoMFpr+MnQzDv
-         xGgLAoGSOTvYnedyUOPVCTH7vhJ/lXWmXXgq2gwamIyLquIbyIWe8aVrsCPamNhF2c5t
-         3nfUf7dbqK9JKMcKZ7ZsdUU3PvkS+qfeKsLbPKqXfdBpURlNsB+0QnYbtT+N/FIOYnqj
-         QIEJlgOPt2Cdn+23nXO1jj+fQzGwNW9q83BHF1F/cW8dt+76DPJXV03iJT97kEdZvlb9
-         uQ7R7SnuSfkEIZXbHUd3HGjIfsCA69g1BsgphEmGocNMb3pG6oy73HY0f95UufbOpn6w
-         CYzQ==
-X-Gm-Message-State: AOJu0Yw29NDEth9eIp6R1RCAAlSL37ZHl+VXzfu0RHThpIZnFnghgK6M
-	LqQ5joL49aUbY8zi0XAKmAVS/r20ctur1qD1H7X0Vpr3jXin3sCD61dT8EdNe0ej47Lhkyuwzcw
-	Qbqrty4caayh5D3tsYuLYgNmXLSQxpasi1ewukH6CTlDLi4DgwfV8td1CLblHra5rZJTj
-X-Gm-Gg: AfdE7ckHi8wnkBNI7oWD1Ua/Pq5PiwIUo+ThLr2Ci8BXUaTHamFTcFGYF3B4G/PpUAD
-	FbjrjkGPct5ijOhjhQdwCcik1WSZfcqX5T4d4Gb5nxrxBq3LO0/Mm/kCFInae28aDMo28PpzhaN
-	5pSSLexMlTM6GbWHopjTSuCoRHI45DM1FMmfvNAfd0JzgU6pYY2OfaMlv5ZNrwrpFiZT5fJ6o5w
-	HnYBy92xMCRy/kdZmHHXy/NW2BBY7mZaBFbwht53AQFFHK1++ddqIJgtffz9IRYIel3f4PhwLDQ
-	FENw37klp4E72YXjEssOVJ+LybV/NAf1ceNCYgLOQoUxyrz3vkNBhcafHolpZXkYcBM0vHAiC3D
-	SSbIwu6K7NaHauVFDjaFE1Y7CreX98HovnMq4mnQXmFNnk8lq2mIi
-X-Received: by 2002:a17:90b:5344:b0:38e:2e86:ed02 with SMTP id 98e67ed59e1d1-38e4b423596mr959857a91.14.1784263284075;
-        Thu, 16 Jul 2026 21:41:24 -0700 (PDT)
-X-Received: by 2002:a17:90b:5344:b0:38e:2e86:ed02 with SMTP id 98e67ed59e1d1-38e4b423596mr959824a91.14.1784263283507;
-        Thu, 16 Jul 2026 21:41:23 -0700 (PDT)
-Received: from hu-fenglinw-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3142a1ddeb6sm2451437eec.20.2026.07.16.21.41.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Jul 2026 21:41:22 -0700 (PDT)
-From: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
-Date: Thu, 16 Jul 2026 21:41:17 -0700
-Subject: [PATCH v6] leds: rgb: leds-qcom-lpg: Fix LED color balancing in HW
- pattern mode
+        d=1e100.net; s=20251104; t=1784263814; x=1784868614;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=pS3hGNdU3fs5am1KSoTDnSdOUbpCQRoLxtrURiIei5E=;
+        b=NkegzkQzuuXFshJz27wbcLuNsO6CKDSf2fQCCxQPEHIwxd7vltd+IihPa8x3fjWwl3
+         uvwA7LR+4ihMVEx/WBI7rbdW2tjTsRfwB1p7UEg6+ZQ4TD1ntRsDzwac3nrZks7pQ1dC
+         +6fJXOE1Xryv7sHV96oIC58GktBK6nle6Xx91DENZbgAUipukii2YHwn715rVDDO7Eu4
+         tp/srzAoX1/Qd+k0kljxBIuFY4ywliW+W+UYdW9Qjyc1EXm+BMFvGB34EKodPBXcW5Vh
+         9Nhk0y6sz7xWKDQXMQlB4oBXMSLr8NeohWx0khmCZ+biChf1lzCLHaBC9QA5z+k3enkH
+         E7OQ==
+X-Gm-Message-State: AOJu0YwZfp9mvJwFY0kXL4utmmKfcZenv4WLobGHkJINedBkCHrs7hnV
+	rm/YP1KAuisOV71zqQSSBY9XC03M2LrkdGF0UFMskCgH1dqS6ElYPrH5aa59TBvfXypSDvmPYh6
+	24e6rZXzIMLXrQlwuc6hY1KgRixU61MqBdliWbcYfmsGjvCusWX9zsqgWt25n10Jgd0lv
+X-Gm-Gg: AfdE7ckOwvrqnR3ViLk2jwPjw5lJxfxEDMbzdxtGqX7r7ykt12GwNrf8y5uXafbf3kW
+	EIiIbNPFiG7HLSENxeFtXfeF6qREDAJt+7xUacKL7Fj3E+wXLDnNtokvgfpRg5E5jNYq7dc5O0J
+	OQPHDEv/JSLZAp8W657DIzUePBpvh99tqx44tT1rWbM4izREsmimJoj8Ac770+TPFauXUG8g806
+	UYgUuCcD5zq+9SemN9iKvl5VrnZvodu6vAQs/8nX8FUXBzIjNjTGq1lHpLymC+bYpBtMvSCUFBn
+	/WHQpSG2DstGb58XAO6pV3fbMoE+UDulqt3QE6F4i2XpFSqFtwM/h3aitWRmQ/21kAPidN47v4K
+	7vO+JjIOqqu2MV19IiT5v3bW1810Z4ruUD8KHBKo=
+X-Received: by 2002:a05:6a20:da08:b0:3a2:ed4a:5d7e with SMTP id adf61e73a8af0-3c38db3187cmr5683890637.22.1784263814030;
+        Thu, 16 Jul 2026 21:50:14 -0700 (PDT)
+X-Received: by 2002:a05:6a20:da08:b0:3a2:ed4a:5d7e with SMTP id adf61e73a8af0-3c38db3187cmr5683864637.22.1784263813529;
+        Thu, 16 Jul 2026 21:50:13 -0700 (PDT)
+Received: from [192.168.1.16] ([27.34.253.228])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13ce2a18a47sm1090614c88.8.2026.07.16.21.50.09
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 16 Jul 2026 21:50:13 -0700 (PDT)
+Message-ID: <1498c6f4-e23a-403e-b5c2-883c0ef5a671@oss.qualcomm.com>
+Date: Fri, 17 Jul 2026 10:20:03 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] arm64: dts: qcom: smb2370: Disable SMB2370_2 by
+ default
+To: Konrad Dybcio <konradybcio@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+References: <20260716-topic-smb2370_port2-v1-0-83d02b2ba4b0@oss.qualcomm.com>
+ <20260716-topic-smb2370_port2-v1-1-83d02b2ba4b0@oss.qualcomm.com>
+Content-Language: en-US
+From: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
+In-Reply-To: <20260716-topic-smb2370_port2-v1-1-83d02b2ba4b0@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260716-lpg-rgb-color-balance-fix-v6-1-b49d51528f61@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAG2yWWoC/43PzY7CIBQF4FcxrAcDXH6KK99jMgugUJnUoqDNT
- EzfXaqLcTFt3Nzk3Fy+E26o+Bx9QbvNDWU/xhLTUIP82CB3MEPncWxrRowwSSQRuD91OHcWu9S
- njK3pzeA8DvEHN4yDlFwbGwDV96fs6/phf349c7nab+8uMzhfHGK5pPz7KB/pfPdOz0gxxcAAJ
- OcGoBH7VMr2fDW9S8fjtg40143sBWR8DWQVdIRa4gVxJsgFEF5BvQZCBalSWhoiW6X1AsjfBnk
- FeWsboVmw4Ja+LP5ARdQaKCqotWetAtLw4P4Bp2m6A6A9xm0fAgAA
-X-Change-ID: 20260605-lpg-rgb-color-balance-fix-82436649abf3
-To: linux-arm-msm@vger.kernel.org, Lee Jones <lee@kernel.org>,
-        Pavel Machek <pavel@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        Anjelique Melendez <quic_amelende@quicinc.com>,
-        Guru Das Srinagesh <linux@gurudas.dev>,
-        Nathan Chancellor <nathan@kernel.org>,
-        Nick Desaulniers <nick.desaulniers+lkml@gmail.com>,
-        Bill Wendling <morbo@google.com>,
-        Justin Stitt <justinstitt@google.com>
-Cc: David Collins <david.collins@oss.qualcomm.com>,
-        Subbaraman Narayanamurthy <subbaraman.narayanamurthy@oss.qualcomm.com>,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>, kernel@oss.qualcomm.com,
-        Pavel Machek <pavel@ucw.cz>, linux-leds@vger.kernel.org,
-        linux-kernel@vger.kernel.org, llvm@lists.linux.dev,
-        Fenglin Wu <fenglin.wu@oss.qualcomm.com>
-X-Mailer: b4 0.16-dev-17187
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784263282; l=10916;
- i=fenglin.wu@oss.qualcomm.com; s=20260324; h=from:subject:message-id;
- bh=qw3UlfHqx9g7QO6+Mmao8Q1/I71j8qvLvF1DF9oIM9w=;
- b=kYkQjIOuGiFnhdeBQez7iOOUk6LDE4LC9699I+Mdz2HnEe4+14N4NbrQdV+v/K5kbIVRqQzd7
- 4gAR7JK9f6LBKVmYzsiDSxhU1DPd9ZBz2ep4HYN6dHcF15Kfyttep0f
-X-Developer-Key: i=fenglin.wu@oss.qualcomm.com; a=ed25519;
- pk=hJdt3E7o54lql+miD2GaxwF74cDyhgNwMbmFOZ46bRU=
-X-Authority-Analysis: v=2.4 cv=JeeMa0KV c=1 sm=1 tr=0 ts=6a59b275 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+X-Authority-Analysis: v=2.4 cv=JeeMa0KV c=1 sm=1 tr=0 ts=6a59b487 cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=EFAlAs44/J+PPaf1aCL80Q==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=63AshnvTA_EL1TQD_80A:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22 a=FO4_E8m0qiDe52t0p3_H:22
-X-Proofpoint-ORIG-GUID: pMGwkkYK4Fmy6WFQeCRsxGr-PRe32ADR
-X-Proofpoint-GUID: pMGwkkYK4Fmy6WFQeCRsxGr-PRe32ADR
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDA0MiBTYWx0ZWRfXzR1SU9FS8bD7
- UEEsFmLGiXEkKX7O8u+QTz6gM6ftbJKPQQlNErZFvbK562oLms5i5zjCUqnSbMaE+Cjj4VtfsJ8
- 9/IpmI2vuFVciF7q+1R5hWmipQA0Q3M=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDA0MiBTYWx0ZWRfXzak8HpC+u9+1
- 8KZ9uC/akY7UVOzT/Gw4sKvRcTKO8gEUaGXu1TWe3s7CHOyg705y+nrdEXr7HP6i50Qb/AZyqNG
- REflzkJ/vNMH0yrexpO80vMHNs3Vihu5yNyoqFDJiw3ZXki0Trz1Jxcwas6+VFSN54WGkJfm3da
- K2aFC81OW1DkDYrIwxgNmT8tXESRWchGrOEEn511bqO160fJ2VQwRr/yY9xPtDqAe2TMWjYsz2L
- C3qqDZ8he7Pgx7XC5kW26RtaX4P8+ZDXde5iyvjzeWk/ajb0ShKv53OAwaYPFmYLUlJ06axXaPW
- 6z5va7foXoyoDSZ668qGUTmKaaafbE60YBAEARsaiEOJkJ5SwBhVe7PAPLSaUHr2HHOVtmHU8Uo
- ZrO8oHpbOtsNBHSY3RlkKVfF2iMXobp3MzEp4Qxw6TSrFDZB7D1Aobzqx3WGxcJZC8nxsF83JzF
- CNJn72aeoh7kbRNMZ7g==
+ a=EUspDBNiAAAA:8 a=BB0AK1rG8zphIdw4350A:9 a=QEXdDO2ut3YA:10
+ a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-ORIG-GUID: ZYO9uePOt61Ox5vA22EO-ymFDHhjsNIK
+X-Proofpoint-GUID: ZYO9uePOt61Ox5vA22EO-ymFDHhjsNIK
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDA0NCBTYWx0ZWRfX5So7qOP+QV+A
+ GVeJNA46zp6es40pYEkyU2m9mjnLVff7AG3EQ4LgUCTUy/WIOkteDmuP3E+swFZb4B6SYGOCug8
+ vS7OqqdGb8THVXrzJggekW1pfJPOonM=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDA0NCBTYWx0ZWRfX5ptJzNqJEwAa
+ SoIFjyD1nkMyO2jZ+DlBUEJUiJsEJ/MFNxGLT6X9yv4n77IP1xEedo5MoPEfhLef4vy0+1RF3bb
+ ha2jO7o2a0pjKkxBht15TYRSzWXGmnAZrYKQG5Ur+BpOqliWL+KAOqB8RrB5OCzddV1B6fk/Wju
+ iCRqOTd2AeO3/dvMOq9uY/utUunkZJHrjEAx3cVclC4oHTKnlFHmb8/dYnoGSMRiaJhi8pCP6BS
+ OtzdzrwVs7DCJ/mSdTISlhpnV2kS7Dtq/qoKFPKG7P1F3WXQUk7vRLa7ieqKvKiaoP+EZOdpuDP
+ PyR4m4U3RKbklda0zRggwD/aEtILVbu8q/gcyT/DzREtrF6+VvTDySmimKMDCJ8ORkXPtzbe1Vp
+ LEfqbIXaiGKtJvypq2IGti1ABqRXLsk+31sIdLMq1OI5H7/4AzKzsqAHIE/o/7Lb1FXZfJddrna
+ ldKnWJFLRq+NMI7nb5Q==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-17_01,2026-07-15_02,2025-10-01_01
@@ -144,338 +130,34 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  spamscore=0 adultscore=0 clxscore=1015 suspectscore=0 lowpriorityscore=0
  priorityscore=1501 impostorscore=0 phishscore=0 malwarescore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170042
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170044
 
-Currently, when the LED is configured as a RGB LED or a multi-color
-LED device, the same pattern is programmed for all LED channels
-regardless of the sub-led intensities when triggered by HW pattern.
-It results that the LED device is always working in a white-balanced
-mode regardless of the intensity settings.
 
-To fix this, scale the pattern data according to the sub-led intensity
-and program the HW pattern separately for each LPG channel.
 
-Fixes: 24e2d05d1b68 ("leds: Add driver for Qualcomm LPG")
-Fixes: 6ab1f766a80a ("leds: rgb: leds-qcom-lpg: Add support for PPG through single SDAM")
-Fixes: 5e9ff626861a ("leds: rgb: leds-qcom-lpg: Include support for PPG with dedicated LUT SDAM")
-Assisted-by: Claude:claude-4-6-sonnet
-Signed-off-by: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
----
-Changes in v6:
-- Fixed comments form Sashiko, and transfer 'pattern.data' to a
-  '__free(kree)' local variable to get rid of the goto.
-- Link to v5: https://patch.msgid.link/20260707-lpg-rgb-color-balance-fix-v5-1-99e2d73084fc@oss.qualcomm.com
-
-Changes in v5:
-- Add no_free_ptr(pattern) to avoid it being cleaned up
-- Link to v4: https://patch.msgid.link/20260629-lpg-rgb-color-balance-fix-v4-1-4db8592fb3c5@oss.qualcomm.com
-
-Changes in v4:
-- Fixing LLVM compilation issue: avoid jumping over guard(mutex) initialization
-- Link to v3: https://patch.msgid.link/20260629-lpg-rgb-color-balance-fix-v3-1-17796a06d799@oss.qualcomm.com
-
-Changes in v3:
-- update to use __free() and guard(mutex) for easy cleanup
-- Link to v2: https://patch.msgid.link/20260624-lpg-rgb-color-balance-fix-v2-1-c01b0e50caf6@oss.qualcomm.com
-
-Changes in v2:
-- Change to use tab for the indention in the comments of 'struct lpg_pattern'
-- Remove the comment in lpg_prepare_pattern() as the function name is
-  self-explantory.
-- Link to v1: https://patch.msgid.link/20260605-lpg-rgb-color-balance-fix-v1-1-3233644a3385@oss.qualcomm.com
----
- drivers/leds/rgb/leds-qcom-lpg.c | 172 +++++++++++++++++++++++++++++----------
- 1 file changed, 130 insertions(+), 42 deletions(-)
-
-diff --git a/drivers/leds/rgb/leds-qcom-lpg.c b/drivers/leds/rgb/leds-qcom-lpg.c
-index d7d6518de30f..24b1f570f524 100644
---- a/drivers/leds/rgb/leds-qcom-lpg.c
-+++ b/drivers/leds/rgb/leds-qcom-lpg.c
-@@ -148,6 +148,24 @@ struct lpg_channel {
- 	unsigned int pattern_hi_idx;
- };
- 
-+/**
-+ * struct lpg_pattern - The LPG pattern normalized from the LED pattern
-+ * @data:	The pattern data array (caller must kfree)
-+ * @len:	number of entries to write to the LUT
-+ * @delta_t:	common step duration in ms
-+ * @lo_pause:	low-pause duration in ms
-+ * @hi_pause:	high-pause duration in ms
-+ * @ping_pong:	true if the pattern support reverse
-+ */
-+struct lpg_pattern {
-+	struct led_pattern *data;
-+	unsigned int len;
-+	unsigned int delta_t;
-+	unsigned int lo_pause;
-+	unsigned int hi_pause;
-+	bool ping_pong;
-+};
-+
- /**
-  * struct lpg_led - logical LED object
-  * @lpg:		lpg context reference
-@@ -959,23 +977,15 @@ static int lpg_blink_mc_set(struct led_classdev *cdev,
- 	return ret;
- }
- 
--static int lpg_pattern_set(struct lpg_led *led, struct led_pattern *led_pattern,
--			   u32 len, int repeat)
-+static int lpg_prepare_pattern(struct lpg *lpg, struct led_pattern *led_pattern,
-+				u32 len, int repeat, struct lpg_pattern *prep)
- {
--	struct lpg_channel *chan;
--	struct lpg *lpg = led->lpg;
--	struct led_pattern *pattern;
- 	unsigned int brightness_a;
- 	unsigned int brightness_b;
--	unsigned int hi_pause = 0;
--	unsigned int lo_pause = 0;
- 	unsigned int actual_len;
- 	unsigned int delta_t;
--	unsigned int lo_idx;
--	unsigned int hi_idx;
- 	unsigned int i;
- 	bool ping_pong = true;
--	int ret = -EINVAL;
- 
- 	/* Hardware only support oneshot or indefinite loops */
- 	if (repeat != -1 && repeat != 1)
-@@ -995,15 +1005,16 @@ static int lpg_pattern_set(struct lpg_led *led, struct led_pattern *led_pattern,
- 	if (len % 2)
- 		return -EINVAL;
- 
--	pattern = kzalloc_objs(*pattern, len / 2);
-+	struct led_pattern *pattern __free(kfree) = kzalloc_objs(*pattern, len / 2);
-+
- 	if (!pattern)
- 		return -ENOMEM;
- 
- 	for (i = 0; i < len; i += 2) {
- 		if (led_pattern[i].brightness != led_pattern[i + 1].brightness)
--			goto out_free_pattern;
-+			return -EINVAL;
- 		if (led_pattern[i + 1].delta_t != 0)
--			goto out_free_pattern;
-+			return -EINVAL;
- 
- 		pattern[i / 2].brightness = led_pattern[i].brightness;
- 		pattern[i / 2].delta_t = led_pattern[i].delta_t;
-@@ -1016,7 +1027,7 @@ static int lpg_pattern_set(struct lpg_led *led, struct led_pattern *led_pattern,
- 	 * through the entire LUT, so prohibit this.
- 	 */
- 	if (len < 2)
--		goto out_free_pattern;
-+		return -EINVAL;
- 
- 	/*
- 	 * The LPG plays patterns with at a fixed pace, a "low pause" can be
-@@ -1073,13 +1084,13 @@ static int lpg_pattern_set(struct lpg_led *led, struct led_pattern *led_pattern,
- 			 * specify hi pause. Reject other variations.
- 			 */
- 			if (i != actual_len - 1)
--				goto out_free_pattern;
-+				return -EINVAL;
- 		}
- 	}
- 
- 	/* LPG_RAMP_DURATION_REG is a 9bit */
- 	if (delta_t >= BIT(9))
--		goto out_free_pattern;
-+		return -EINVAL;
- 
- 	/*
- 	 * Find "low pause" and "high pause" in the pattern in the LUT case.
-@@ -1087,43 +1098,64 @@ static int lpg_pattern_set(struct lpg_led *led, struct led_pattern *led_pattern,
- 	 * duration of all steps.
- 	 */
- 	if (lpg->lut_base || lpg->lut_sdam) {
--		lo_pause = pattern[0].delta_t;
--		hi_pause = pattern[actual_len - 1].delta_t;
-+		prep->lo_pause = pattern[0].delta_t;
-+		prep->hi_pause = pattern[actual_len - 1].delta_t;
- 	} else {
- 		if (delta_t != pattern[0].delta_t || delta_t != pattern[actual_len - 1].delta_t)
--			goto out_free_pattern;
-+			return -EINVAL;
-+		prep->lo_pause = 0;
-+		prep->hi_pause = 0;
- 	}
- 
-+	prep->data = no_free_ptr(pattern);
-+	prep->len = actual_len;
-+	prep->delta_t = delta_t;
-+	prep->ping_pong = ping_pong;
- 
--	mutex_lock(&lpg->lock);
-+	return 0;
-+}
-+
-+static int lpg_pattern_set(struct lpg_led *led, struct led_pattern *led_pattern,
-+			   u32 len, int repeat)
-+{
-+	struct lpg_channel *chan;
-+	struct lpg *lpg = led->lpg;
-+	struct lpg_pattern pattern;
-+	unsigned int lo_idx;
-+	unsigned int hi_idx;
-+	unsigned int i;
-+	int ret;
-+
-+	ret = lpg_prepare_pattern(lpg, led_pattern, len, repeat, &pattern);
-+	if (ret < 0)
-+		return ret;
-+
-+	struct led_pattern *prep_data __free(kfree) = pattern.data;
-+
-+	guard(mutex)(&lpg->lock);
- 
- 	if (lpg->lut_base)
--		ret = lpg_lut_store(lpg, pattern, actual_len, &lo_idx, &hi_idx);
-+		ret = lpg_lut_store(lpg, prep_data, pattern.len, &lo_idx, &hi_idx);
- 	else
--		ret = lpg_lut_store_sdam(lpg, pattern, actual_len, &lo_idx, &hi_idx);
-+		ret = lpg_lut_store_sdam(lpg, prep_data, pattern.len, &lo_idx, &hi_idx);
- 
- 	if (ret < 0)
--		goto out_unlock;
-+		return ret;
- 
- 	for (i = 0; i < led->num_channels; i++) {
- 		chan = led->channels[i];
- 
--		chan->ramp_tick_ms = delta_t;
--		chan->ramp_ping_pong = ping_pong;
-+		chan->ramp_tick_ms = pattern.delta_t;
-+		chan->ramp_ping_pong = pattern.ping_pong;
- 		chan->ramp_oneshot = repeat != -1;
- 
--		chan->ramp_lo_pause_ms = lo_pause;
--		chan->ramp_hi_pause_ms = hi_pause;
-+		chan->ramp_lo_pause_ms = pattern.lo_pause;
-+		chan->ramp_hi_pause_ms = pattern.hi_pause;
- 
- 		chan->pattern_lo_idx = lo_idx;
- 		chan->pattern_hi_idx = hi_idx;
- 	}
- 
--out_unlock:
--	mutex_unlock(&lpg->lock);
--out_free_pattern:
--	kfree(pattern);
--
- 	return ret;
- }
- 
-@@ -1144,23 +1176,81 @@ static int lpg_pattern_single_set(struct led_classdev *cdev,
- }
- 
- static int lpg_pattern_mc_set(struct led_classdev *cdev,
--			      struct led_pattern *pattern, u32 len,
-+			      struct led_pattern *led_pattern, u32 len,
- 			      int repeat)
- {
- 	struct led_classdev_mc *mc = lcdev_to_mccdev(cdev);
- 	struct lpg_led *led = container_of(mc, struct lpg_led, mcdev);
-+	struct lpg *lpg = led->lpg;
-+	struct lpg_channel *chan;
-+	struct lpg_pattern pattern;
- 	unsigned int triled_mask = 0;
--	int ret, i;
--
--	for (i = 0; i < led->num_channels; i++)
--		triled_mask |= led->channels[i]->triled_mask;
--	triled_set(led->lpg, triled_mask, 0);
-+	unsigned int lo_idx;
-+	unsigned int hi_idx;
-+	unsigned int scale;
-+	unsigned int i, j;
-+	int ret;
- 
--	ret = lpg_pattern_set(led, pattern, len, repeat);
-+	ret = lpg_prepare_pattern(lpg, led_pattern, len, repeat, &pattern);
- 	if (ret < 0)
- 		return ret;
- 
-+	struct led_pattern *prep_data __free(kfree) = pattern.data;
-+
-+	/* Allocate buffer for the per-channel scaled pattern copy */
-+	struct led_pattern *scaled __free(kfree) =
-+			   kmalloc_array(pattern.len, sizeof(*scaled), GFP_KERNEL);
-+	if (!scaled)
-+		return -ENOMEM;
-+
-+	for (i = 0; i < led->num_channels; i++)
-+		triled_mask |= led->channels[i]->triled_mask;
-+	triled_set(lpg, triled_mask, 0);
-+
- 	led_mc_calc_color_components(mc, LED_FULL);
-+
-+	/*
-+	 * Each channel gets its own LUT block scaled by subled_info[i].brightness
-+	 * so the pattern respects the configured colour balance.
-+	 */
-+	guard(mutex)(&lpg->lock);
-+
-+	for (i = 0; i < led->num_channels; i++) {
-+		chan = led->channels[i];
-+		scale = mc->subled_info[i].brightness;
-+
-+		for (j = 0; j < pattern.len; j++) {
-+			scaled[j].brightness = DIV_ROUND_CLOSEST(
-+				(u32)prep_data[j].brightness * scale, LED_FULL);
-+			scaled[j].delta_t = prep_data[j].delta_t;
-+		}
-+
-+		if (lpg->lut_base)
-+			ret = lpg_lut_store(lpg, scaled, pattern.len, &lo_idx, &hi_idx);
-+		else
-+			ret = lpg_lut_store_sdam(lpg, scaled, pattern.len, &lo_idx, &hi_idx);
-+
-+		if (ret < 0) {
-+			/* Free LUT slots already allocated for previous channels */
-+			while (i-- > 0) {
-+				chan = led->channels[i];
-+				lpg_lut_free(lpg, chan->pattern_lo_idx, chan->pattern_hi_idx);
-+				chan->pattern_lo_idx = 0;
-+				chan->pattern_hi_idx = 0;
-+			}
-+
-+			return ret;
-+		}
-+
-+		chan->ramp_tick_ms = pattern.delta_t;
-+		chan->ramp_ping_pong = pattern.ping_pong;
-+		chan->ramp_oneshot = repeat != -1;
-+		chan->ramp_lo_pause_ms = pattern.lo_pause;
-+		chan->ramp_hi_pause_ms = pattern.hi_pause;
-+		chan->pattern_lo_idx = lo_idx;
-+		chan->pattern_hi_idx = hi_idx;
-+	}
-+
- 	lpg_brightness_set(led, cdev, mc->subled_info);
- 
- 	return 0;
-@@ -1174,11 +1264,9 @@ static int lpg_pattern_clear(struct lpg_led *led)
- 
- 	mutex_lock(&lpg->lock);
- 
--	chan = led->channels[0];
--	lpg_lut_free(lpg, chan->pattern_lo_idx, chan->pattern_hi_idx);
--
- 	for (i = 0; i < led->num_channels; i++) {
- 		chan = led->channels[i];
-+		lpg_lut_free(lpg, chan->pattern_lo_idx, chan->pattern_hi_idx);
- 		lpg_sdam_configure_triggers(chan, 0);
- 		lpg_clear_pbs_trigger(chan->lpg, chan->lut_mask);
- 		chan->pattern_lo_idx = 0;
-
----
-base-commit: 1795fd2dbe84ef4d393b69a0b2a3b371f810bde5
-change-id: 20260605-lpg-rgb-color-balance-fix-82436649abf3
-
-Best regards,
---  
-Fenglin Wu <fenglin.wu@oss.qualcomm.com>
-
+On 7/16/2026 11:03 PM, Konrad Dybcio wrote:
+> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> 
+> It's absent on laptops that only have 2 type-C ports (the majority so
+> far, including the CRD). Keep it disabled by default, following
+> established practice from the previous generation.
+> 
+> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> ---
+>   arch/arm64/boot/dts/qcom/smb2370.dtsi | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/smb2370.dtsi b/arch/arm64/boot/dts/qcom/smb2370.dtsi
+> index 80f3fdae5705..1e02578e4ee3 100644
+> --- a/arch/arm64/boot/dts/qcom/smb2370.dtsi
+> +++ b/arch/arm64/boot/dts/qcom/smb2370.dtsi
+> @@ -36,6 +36,8 @@ smb2370_l_e2: pmic@b {
+>   		#address-cells = <1>;
+>   		#size-cells = <0>;
+>   
+> +		status = "disabled";
+> +
+>   		smb2370_l_e2_eusb2_repeater: phy@fd00 {
+>   			compatible = "qcom,smb2370-eusb2-repeater";
+>   			reg = <0xfd00>;
+> 
+Reviewed-by: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
