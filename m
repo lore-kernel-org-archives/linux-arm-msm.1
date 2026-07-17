@@ -1,180 +1,322 @@
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+Received: from TYDPR03CU002.outbound.protection.outlook.com (mail-japaneastazon11013058.outbound.protection.outlook.com [52.101.127.58])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6663D36AB7C;
-	Fri, 17 Jul 2026 06:35:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=60.244.123.138
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6478421ABBD;
+	Fri, 17 Jul 2026 06:52:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.127.58
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784270157; cv=fail; b=P5aimYjb7kMj006ZNTzpVKCCdfP+/TRi3IbVIAkKKzwwVT2HEBf8S+V7k4J+Q5+wnE394p3KO3FFYHfeRDWZOuzriOSs/G6gBATm538q3MY6VYSP4LH8gGq3YJiip25NHa0xj2sb8P7Wh0YC7aUB8b8XIYtvmplBFfSO74XqKXE=
+	t=1784271163; cv=fail; b=rWozDv/9tkO8z93We+XNamjHXaWe40Rp97JqI5JI/CZwPkYck0gQCphJ1fVg56GHYqWv8rCD1L1L040y/OPSTBiPbxS7m1CM9bFZ4WQkKYXmuKmt9wMZhUHxnk7JEqyTQE3oAunwCiy2LO2YQlvm0dV4aAhoxqOTZY6LmIhqjug=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784270157; c=relaxed/simple;
-	bh=D3ydcY7Iyr3c/JkLifvtDbjxSONccZ9ahbu3s/Ti4Gg=;
-	h=From:To:Subject:Date:Message-ID:References:In-Reply-To:
-	 Content-Type:MIME-Version; b=egskctdFzZBw0WL+iZKv8EvMnfyFhQTgULgNB26rRa2fvg64RlX21RNUHNnfdrXZ9VLc4jZv3heWhrgLSJ+tvWqcMgKPG+a4EYlugFGmhM6WXMw+eycHd8hpa5B5IULPL0wU5j7ZiILx4jWT1oRrwZh+CC7+yZq2/lX7w98XkLY=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com; spf=pass smtp.mailfrom=mediatek.com; dkim=pass (1024-bit key) header.d=mediatek.com header.i=@mediatek.com header.b=MQ71gekM; dkim=pass (1024-bit key) header.d=mediateko365.onmicrosoft.com header.i=@mediateko365.onmicrosoft.com header.b=ZCo3J0VG; arc=fail smtp.client-ip=60.244.123.138
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mediatek.com
+	s=arc-20240116; t=1784271163; c=relaxed/simple;
+	bh=veS9CnzVIvafmZg6NUcxKQkHTQFEHMuy8JDi0oJJPN0=;
+	h=From:To:Cc:Subject:Date:Message-Id:Content-Type:MIME-Version; b=ULuUlyZGRBX8yLYhmXxL2c9ZDQOk7XEvU8s6mqB810fWP0KBEetI3bSMcymDYOik+kedFnAx+BfjUfkV/tIkjmVsqybLy8RAziq4eTrOoaaft7WRveECXwp/HQ1/R7m+fwXxtIukGxqX4wmr74wxKuI/Cyl75g8iNqUFbIqDNIg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vivo.com; spf=pass smtp.mailfrom=vivo.com; dkim=pass (2048-bit key) header.d=vivo.com header.i=@vivo.com header.b=j07O2XSS; arc=fail smtp.client-ip=52.101.127.58
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vivo.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=vivo.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mediatek.com header.i=@mediatek.com header.b="MQ71gekM";
-	dkim=pass (1024-bit key) header.d=mediateko365.onmicrosoft.com header.i=@mediateko365.onmicrosoft.com header.b="ZCo3J0VG"
-X-UUID: bbaa0eea81a911f1b1788b6acf885367-20260717
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
-	h=MIME-Version:Content-Transfer-Encoding:Content-ID:Content-Type:In-Reply-To:References:Message-ID:Date:Subject:To:From; bh=D3ydcY7Iyr3c/JkLifvtDbjxSONccZ9ahbu3s/Ti4Gg=;
-	b=MQ71gekMLXrXGE83LOMWqg5B64qJnNcMNPIIiguK2LQEkP9TT8PITmtWNE1zV2zlpOkA8LxROp1iHaAtJLKLGXYrP36eTYWxBbm3yfzYPUXpSxS2p8XAv57tjRbACQEhvv5wCcbj3v5ytYmiGohzvpYzmnLT6L4cSmLT04tXdOY=;
-X-CID-CACHE: Type:Local,Time:202607171435+08,HitQuantity:2
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.3.18,REQID:86f07141-d4c3-4805-a2f4-086876619eaa,IP:0,U
-	RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
-	release,TS:0
-X-CID-META: VersionHash:8a735a6,CLOUDID:b7a1955f-762a-4584-baab-4eebe609beea,B
-	ulkID:nil,BulkQuantity:0,SF:80|81|82|83|102|110|111|836|865|888|898,TC:-5,
-	Content:0|15|50|99,EDM:-3,IP:nil,URL:0,File:130,RT:0,Bulk:nil,QS:nil,BEC:-
-	1,COL:0,OSI:0,OSA:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 2,SSN|SDN
-X-CID-BAS: 2,SSN|SDN,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-CID-RHF: D41D8CD98F00B204E9800998ECF8427E
-X-UUID: bbaa0eea81a911f1b1788b6acf885367-20260717
-Received: from mtkmbs10n1.mediatek.inc [(172.21.101.34)] by mailgw01.mediatek.com
-	(envelope-from <peter.wang@mediatek.com>)
-	(Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
-	with ESMTP id 145884762; Fri, 17 Jul 2026 14:35:42 +0800
-Received: from mtkmbs10n1.mediatek.inc (172.21.101.34) by
- mtkmbs11n1.mediatek.inc (172.21.101.185) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.29; Fri, 17 Jul 2026 14:35:41 +0800
-Received: from SG2PR04CU010.outbound.protection.outlook.com (172.21.101.237)
- by mtkmbs10n1.mediatek.inc (172.21.101.34) with Microsoft SMTP Server id
- 15.2.2562.29 via Frontend Transport; Fri, 17 Jul 2026 14:35:41 +0800
+	dkim=pass (2048-bit key) header.d=vivo.com header.i=@vivo.com header.b="j07O2XSS"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=HilL54X4j+Ha8AhigP0VdChLbWsaoDBtjU4P1eT9U0vYA00kbmNmNK4/9RRuzXHIk/szYE6TSNhiVRCWm23+tG258QHNoTZCF5w9u35gqEzg1YnkD15aWzyI4f880p9i+fN3fMqZgHZzhXwYSLSmF4mGV2H09YFXmcIsQEWWL5EmQ3qdT0iCJ9jJcJqmEmShQycuadkFhBmffMR4a61M0a7VeMUOVvg9jZJwTloXFYoRmilb98K95DgI/dkpTqeMyicGc0DMoCMFFgwVGGSoQc6llOlbsFo/IoRGHohVODNBg6cZLcITuDbAa9LaR7CnGJKWQfhlJbVwT1N8H7W5jQ==
+ b=JtLbpPrKjWcMFsszDSW3svAIJF2TG2kunDbT68whJzn4H3JOQv/FOHa8tjcHrLXMLOkFWN8wbKDXI2bS/zJyVgO3ij0NnsG27fjg2YmLyWFsHnoZBwVsma9zlJEVGv2Yg+zq/UZzDoZ/z13vJp03zGjhc/UV0u7K07MtXxDR9w6EaNOL793O/kXSuYP4keBjOIQHwusYOk93UZrJeFKu3GwOXsBZwzgB5WWFj6JjamyIliU8KOFCivZ3BmMXyUqc1tG4MtCzlXqJICGLhyIcmXs9SK9I3+1SHNz3mMnYuiRYQDa5LCDhW3eJsW+5K5xh62tNQN/ct/QsVfn5gaAvfg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=D3ydcY7Iyr3c/JkLifvtDbjxSONccZ9ahbu3s/Ti4Gg=;
- b=X4WQilnBM1TGCmQCdkA+VKyAre2hlYJDgJeKHkEQlhiA96QFlA4x5gAeL6Szh9UwXDoOzPrvuTo31holMSJZz+wL9AcEqf3ajhFP+zES2veeJSQ9Q7EY1Mci6psGwgh0gMOM1J05W7kjRnRNaDmeF4wlKIkTCGGVll7sFioVHmjHabNBdzU0Cjh0XWVbskxSoVkcC1/aXzvg1xWBI9aETR2wET4cc3PnsoVDZZLw5tDeXyozn/O7iJ11zO3pbymvvHP1ethRwMM33JxSKjRk4yKidwo4SPoAr7ehHJGByjebmbB9VKrW3chRkYskvAZ1BSh2mv/95iAMpQwP2XWeTg==
+ bh=OwSPbj6bHus/PVje4mHauNVjyk5PMc2+vdtb3EqrvNA=;
+ b=xifRvttdX+EVzFBuFgCwjEYqDhklFEChFyda90tMpuurY24WfYGd5m23EON5Rc4PY9Ezydbpa7RGDIW/gIoJIxLRwzodGGle8OafivjEuOCW+gH63s8pBbk7pFdBffeVeINbSafuqKA6T6ROYuzyj/HrZhClGWf7GKL//BM+8rVVLltOlBKRVooZujR7L7lS4eCsrVgjsLpKkbZviGi33gWaXk2H7cPJoXQOELQF/FftT8wAUS+wcaRQA/LrvbABNQRl/rQNsgL4KGX/BO5KSuWC3YLLQtkK9qF18usJMTpG1alhOgwRbqWmFGWZ9Q7qSt9Oae/Cn+rNLMWdCIA46A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=mediatek.com; dmarc=pass action=none header.from=mediatek.com;
- dkim=pass header.d=mediatek.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=mediateko365.onmicrosoft.com; s=selector2-mediateko365-onmicrosoft-com;
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=D3ydcY7Iyr3c/JkLifvtDbjxSONccZ9ahbu3s/Ti4Gg=;
- b=ZCo3J0VGjg8nPQeudLPtALlMYqaghUrwh6U5mb3VwLW1xEPeHn0snIJ6I0TxEMZn8MYT0LnZwZl5HF+3FQTTWRbV57p/UZUit4l+8kzw1Y6inULO9EmAo3E4vt0DXVxc+oABi8zkUzEtFilVUXL7185CPQdTguGfX9jF3lQkJws=
-Received: from PSAPR03MB5605.apcprd03.prod.outlook.com (2603:1096:301:66::6)
- by SEYPR03MB8179.apcprd03.prod.outlook.com (2603:1096:101:1a2::8) with
+ bh=OwSPbj6bHus/PVje4mHauNVjyk5PMc2+vdtb3EqrvNA=;
+ b=j07O2XSSYyod2ElAVJNAaSmz7NLcwHVSXqPYQUftNLMjsIShCO2dJff/YQ9DkZsf9xG71iYEsjJ2Emfl2z3nPnCRi4x7cwInOrL1nE4JBLhUuH2TRmPIyv3J2rSkX89mUdyx79FslS47hNj0H1O6P4qloCgVInLkQWMhZ+xkH4wknrXm63V9dP46BsyGt5qGCeynAuGI2ISWsZELuYJI2WD8RZjiJ9ljYJ1cKdHENJzijY1Y1i4CBmLB9acdCqAJtWOqsXZNyW4jzsZfW3CSMC05IBikUVs1f9OtLdtcij+Io94Nn6rJVeswL52c5rrNESHf8ONrfhh67QbU1Q8xCg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from SEZPR06MB5832.apcprd06.prod.outlook.com (2603:1096:101:c8::12)
+ by KUXPR06MB9155.apcprd06.prod.outlook.com (2603:1096:d10:68::23) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.10; Fri, 17 Jul
- 2026 06:35:37 +0000
-Received: from PSAPR03MB5605.apcprd03.prod.outlook.com
- ([fe80::165:d36a:3f76:2925]) by PSAPR03MB5605.apcprd03.prod.outlook.com
- ([fe80::165:d36a:3f76:2925%6]) with mapi id 15.21.0223.011; Fri, 17 Jul 2026
- 06:35:36 +0000
-From: =?utf-8?B?UGV0ZXIgV2FuZyAo546L5L+h5Y+LKQ==?= <peter.wang@mediatek.com>
-To: "linux-arm-kernel@lists.infradead.org"
-	<linux-arm-kernel@lists.infradead.org>, "chu.stanley@gmail.com"
-	<chu.stanley@gmail.com>, AngeloGioacchino Del Regno
-	<angelogioacchino.delregno@collabora.com>, "linux-scsi@vger.kernel.org"
-	<linux-scsi@vger.kernel.org>,
-	=?utf-8?B?Q2hhb3RpYW4gSmluZyAo5LqV5pyd5aSpKQ==?=
-	<Chaotian.Jing@mediatek.com>, "panchuang@vivo.com" <panchuang@vivo.com>,
-	"linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>,
-	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-	"matthias.bgg@gmail.com" <matthias.bgg@gmail.com>,
-	"James.Bottomley@HansenPartnership.com"
-	<James.Bottomley@HansenPartnership.com>, "mani@kernel.org" <mani@kernel.org>,
-	"linux-mediatek@lists.infradead.org" <linux-mediatek@lists.infradead.org>,
-	"martin.petersen@oracle.com" <martin.petersen@oracle.com>
-Subject: Re: [PATCH] ufs: host: Remove redundant dev_err()
-Thread-Topic: [PATCH] ufs: host: Remove redundant dev_err()
-Thread-Index: AQHdFZ+A0Y6pSX5ueE2s+rLzBXpaZLZxQbOA
-Date: Fri, 17 Jul 2026 06:35:36 +0000
-Message-ID: <111ba20c5227b22b19b8924e09a4c6bce720ee49.camel@mediatek.com>
-References: <20260717035013.563791-1-panchuang@vivo.com>
-In-Reply-To: <20260717035013.563791-1-panchuang@vivo.com>
-Accept-Language: zh-TW, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=mediatek.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PSAPR03MB5605:EE_|SEYPR03MB8179:EE_
-x-ms-office365-filtering-correlation-id: 3d46daec-fa83-4bbd-426a-08dee3cd9c89
-x-ld-processed: a7687ede-7a6b-4ef6-bace-642f677fbe31,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|376014|23010399003|7416014|1800799024|366016|56012099006|11063799006|38070700021|10067099003|921020|6133799003|18002099003|22082099003;
-x-microsoft-antispam-message-info: aJsDt50T3f+KUjv/sO1VSj63qADIOIGqH4u8YG3cIWGe3j/+J/Cxhy6W13muNYHH6lRA5C/Wc3JVtSeStJygQMtIRn0yZK9AhWe3MxT8USoB9I9AQqsJghuJkAWlsgrCT6HB7TEqppogC3N4+1xLhmm637nFvKRcWgKvo5GofRlaayOxGFQfp8hdYam3XNWc7RsLvlbuSFjTGF+65y0x/fS0uLm3++vVDS35fSU6jtYp7VwmloKsY2kzCCSGCxwWsQr97CxWiVf1B4GtKxMZUdPiCOKXEdN/w1Qeskecy5UrA2uJui9lCD0Fd5AR0MRcjJwozx3+vMgPx3+ppIeEvGFvO6ZMSmAWntv74/y7Wj4h2BtfZujj9ca/xOB6+WytJhJ8OGm49MDF4JtDM/KLLGIgmN+Qj+uTK43akBWcKqaMBBW8sSLKKfBomjuNsWl+X0zvZyhl8VtH6CS67gvPGFHDsAKCvKU2hwr6PY4RB8trAaCkC2eHUajl+MbtxQqXT5QDCOGId5BgFrXiLUAAUeIW4Ytx0KM5izr7b292y3BpnjbLtwAeEWEMfkuX04Zy8ZMstZvy/GR0XDXyzFalE5CQ7liyVJFUhIBh2Ma4f2kt/vzjRlhTQqSpn1B8Lyhszm/8JhvJ/1eAp2iN6G6KWwoasRgkQztJljJ95XNT5+v7pzeeNuz+G/OGNZeVhYcRsD3dXXmob8NtkZqEhn1cwjv0zEx9KiAZaCSv6Il/k5iy10j5i8sM9K6PI3icI9wx
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PSAPR03MB5605.apcprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(7416014)(1800799024)(366016)(56012099006)(11063799006)(38070700021)(10067099003)(921020)(6133799003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?aEJodlpvVlUrblU5ekdBVDJuMjJvQk44aGlIL1VPSXJSQSs1V3Z4aXMwWWgv?=
- =?utf-8?B?eWNtQUswOVprdHZIM2hlblhlUStYcElaTEdSWUpkK2FUYTNydVBOdzNzVkhK?=
- =?utf-8?B?dXJmOWJCMlN2U1Z4cWc1Tlc5TTNrNHRuSEJkcVZ0eW4waHpTaUZhR0pGcDQw?=
- =?utf-8?B?dEtNYVVFV0xIbjh2ZlBPZHF2OWJmUGZjdmFoeG4yaVppSHcyVG43NTRSM1Y3?=
- =?utf-8?B?NUVqQTljMG52bUtLNnNvTnBUaEhTUkJBNDZxTWtEZUx0elJIaVE0TksxOGxC?=
- =?utf-8?B?QVR3OWFrRnNsOWQzTkFXdUlaWml2Nkp4ekNlZ0E5N2lxWW1VM1VpZGF5WjI0?=
- =?utf-8?B?Q0FMMTg2R2dxMVZWVzlFSndnZXZMZzZMZ25KdGNrK2pEOVF1YU92ZFVUdjdk?=
- =?utf-8?B?SU1tTktSV2h2em1ET2NZcWs1SU5aYldZYmRHc2NYVTF4SjJuNElJZGZISExG?=
- =?utf-8?B?MzIwYmYzcE9JcEdYdlAwa04wUEJBdk5GSXY3SUVEN0libnU0bkJ5SFZuNmRI?=
- =?utf-8?B?UkMwRHp3SFhacXBNNmROT3F3M0taKzd6dE5iS2t0Y2ZvRWM2Q25ObTlNTzJs?=
- =?utf-8?B?S2R0WFJUOFpLclU1UXAwd0Z5Z1RWL3pHanBOekNSUnJNNndvWmxUUGI5TW9p?=
- =?utf-8?B?alJpTmpmU1c4YnEvLzZST0Yydk5SMXIvRllYeUZIZENRUzFiK09mTGZxOTJq?=
- =?utf-8?B?c0h1Y051NFlTekhpWDhSM1Zsb2ZXaHFyR3grcEh4ZDFJek55NWt4UTJDMEVF?=
- =?utf-8?B?bUg3ckgyZjdSRmhielpobVdEZnFxQnAyLzJsa2VZZ0lSdWRzTGI3blB4a3hu?=
- =?utf-8?B?RzZqZUtRZWNrRTA1SmNuVGErQXJ2Um5WMmNPNk9vRVR0QXV3dEp4UER5REtS?=
- =?utf-8?B?NFpXT3JwOHJzQWJ4MUNYVU55aWRGcm5hRWNkNE92MzNod2dwRVZLYXZ4ZVV6?=
- =?utf-8?B?Q2FaN2FoREtZV0Z6czBOOGozaTRMMmVJcTlBUXNOOU1vc3lyRWh3Qk9leGxk?=
- =?utf-8?B?cTFxdklLY2Ewcjh0QmtBWVhsM05GM21UV0RyY0NPc0lDRkhrMjhPNllILzlG?=
- =?utf-8?B?WGt0OHVlME9UNDVldFIwSmNpUDVlVGZBVXlzMmFzNkQydW0wdU9ZQnZ5RmZM?=
- =?utf-8?B?Ykk5cEpsdit0alRKRm9NMnhlbVEwdDlFNVpndnVtMU5VWFIyQTB5Y1dBM0NF?=
- =?utf-8?B?ZnBFTVpnTTJlK04rRUQ3YVVJUTB0dWc3SWFBcm8vaFFUVUdlZ1cwMEMxcElJ?=
- =?utf-8?B?QlM5b0ticHlDUGo2ZW1rNFJHZ2VsMURGRWs3OER1a1V0RHNHakZXWGpIZWJI?=
- =?utf-8?B?UStpMzgzODd0MjhZWWhiZjdhNjB4d3ZyYk42OHNEMTVIb01zM1Q4VW1lWW9Y?=
- =?utf-8?B?dGRpZXRoK3dOSTdlN0kxNGRzNTdpUVN5KzRueG5tdWx6M0NZdjBtcVVFdDhP?=
- =?utf-8?B?SkdIMHlKbFJVTnpkcjBGYUswOTlBUUkzQitpRWUxL2pGVTlVQ25wa25FZzc4?=
- =?utf-8?B?NGErQ3RINy9qTE9aZmVvUnVtK1NoT0E2YnZRSDE4SjE5Y0U1YmhzczlwSUJY?=
- =?utf-8?B?dG1zeFNuc0p1ZkpvMnJWSWRQMzhHRGJqT3o1Y292Rlcwd3VEcXhOVGRzR2p3?=
- =?utf-8?B?WHIrL3R6L2NzK2JuaXpwVTdSWm10VlRaZDgzR25nb1dMQm03NTdHNnErTUFo?=
- =?utf-8?B?WndaOXM2bDNXVXRxcVNLRVdMZlFSU1pYMHBsKzd6ZEk1ZXBTYk1wU0VQMEpD?=
- =?utf-8?B?SGFaRUtDNWhBLy9jc3lLTWpPWnVBQ3NHODBJK3E1aXNJRkxRZE1jaVFvS05Y?=
- =?utf-8?B?WWdTbVU3dFVVbFhhalVBRkZNMVVJQ2loYVBRU1orc3JTZDFLT29TenZEeTcx?=
- =?utf-8?B?T3FBbGxxYmQxNk83SlRyeVFPWlFRWFdZeDBxSGNremcwL09qTlZxb042a2J3?=
- =?utf-8?B?Wm9Sd0Qvd3hEajFTbmJ2UWUvbFBrcCtxYWhUUFU5V0hSeE82TVQzVjEzdFdK?=
- =?utf-8?B?RjJYaWRMZG5DNzFsYk1CZVliKzJUZHAwUzZNUlNONlcwZHIrZ3pMZzAvckEy?=
- =?utf-8?B?TGJPcnEwbFUxVDNyTDVwQjNoMEJGZUQ4Wlp2ZDJPeURSSk1UNzFZY1k3TE1k?=
- =?utf-8?B?ZGN0WUNybXZPektMSHVNNWpySzh6WmhEUTR4OEhmQTR1b3Y5ZTNiOUNvWWFt?=
- =?utf-8?B?cHM2aTdxeEFsQnRvZmdNRG1mL3RXSHp4WTVIMFRpS2V3MncyV0F6VUQ3d2tI?=
- =?utf-8?B?b3lIbU9aSEJtN3dSVHNRMGk5bFRVWkRlejVjRmJNazVSaS84N3ZiUE44alB4?=
- =?utf-8?B?bXpOSHIrK3g0eW14R2Fla3ZLL004YkQ1cmhOazhLRjZhVTRUeXBQL3RlSlZU?=
- =?utf-8?Q?ojK2FO/QHlAgdjl0=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <4A528EAB6431A5498CA422262A52529C@apcprd03.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.11; Fri, 17 Jul
+ 2026 06:52:36 +0000
+Received: from SEZPR06MB5832.apcprd06.prod.outlook.com
+ ([fe80::f98:5e32:4ccb:d07b]) by SEZPR06MB5832.apcprd06.prod.outlook.com
+ ([fe80::f98:5e32:4ccb:d07b%6]) with mapi id 15.21.0223.011; Fri, 17 Jul 2026
+ 06:52:36 +0000
+From: Pan Chuang <panchuang@vivo.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Paul Cercueil <paul@crapouillou.net>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	linux-remoteproc@vger.kernel.org (open list:REMOTE PROCESSOR (REMOTEPROC) SUBSYSTEM),
+	linux-kernel@vger.kernel.org (open list),
+	linux-mips@vger.kernel.org (open list:INGENIC JZ47xx SoCs),
+	linux-arm-kernel@lists.infradead.org (moderated list:ARM/Mediatek SoC support),
+	linux-mediatek@lists.infradead.org (moderated list:ARM/Mediatek SoC support),
+	linux-arm-msm@vger.kernel.org (open list:ARM/QUALCOMM MAILING LIST),
+	linux-stm32@st-md-mailman.stormreply.com (moderated list:ARM/STM32 ARCHITECTURE)
+Cc: Pan Chuang <panchuang@vivo.com>
+Subject: [PATCH] remoteproc: Remove redundant dev_err()/dev_err_probe()
+Date: Fri, 17 Jul 2026 14:52:23 +0800
+Message-Id: <20260717065224.600593-1-panchuang@vivo.com>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TP0P295CA0013.TWNP295.PROD.OUTLOOK.COM
+ (2603:1096:910:2::18) To SEZPR06MB5832.apcprd06.prod.outlook.com
+ (2603:1096:101:c8::12)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: GOEswxsZOeCYEdIENfJLU13cXm50uKF0eBSQyCA/5nLgS69HUJvBm1RNyvjh3EZhyE8EjPLYmVqwNWZDXLSGR1DAltqSXBWla5EjJe79qyuyXMwqz5CXyxljjHhlvnC1GjAKS+1D0L/txhq4jhFTNSmtUgjznceXJOdfkH47CsHbBjJwK+LZDyxSQnHVTH6MrDZsvYf7ULe/TzHm9bChgiSH6OBPfCI4nmoX76qdFWQTTRhXcNmqI0UsFPlI8ItDEvecPCrLldHBMwnHdHY7U4Fymnl4qfBtpzmn8GG4rsDtTS7DqtktC5TnMoAL4xW+P1o0MXkdKd1KGKxXG6WlHQ==
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5832:EE_|KUXPR06MB9155:EE_
+X-MS-Office365-Filtering-Correlation-Id: 19dfb515-8789-4359-fb7c-08dee3cffbf4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|366016|376014|7416014|23010399003|52116014|56012099006|11063799006|6133799003|18002099003|921020|10067099003|38350700014;
+X-Microsoft-Antispam-Message-Info:
+	+jj+22Zq9fSwJ35DWs/NRlp0kgZJFGx/nB5ER1Y2aZWljreNKVES9wbTCTh4N6ReebpG9wIe36iUqOxHC8IPLck0v46FUxzTNDWyk+OdC+VhuUGWh6nYZfE3AzU8d8PW3ARPhYSl787nH8l3T4NOmbyArUrZgd3WJ1l/O6XkHu3SpAmLRlhyAxbYQpr/8zyTp28433GCe8/FMA/HHzq30cP+M6YJv2pZoZqum7YK8l99JCgCnSdgu4IvSjsHGB4Do0/i1mjG30Dn495nQXZX8qK/EnpJMTsk1SkJ7nh4/jMIt8xkW5pbeNRsB4JGIVckIcUAQP+Y7G6sg59ai8PryI7c4dvIirIWtu4/N1LQY5BQIiQcgvdb4OIaE6A+IPD5ByEeouEkYXjWOxbMaIjRDv/AG1pOcMpFFmRAvvrLKDYpzofQXoGs1+mQwm1myE8UtV3XCu87pgSL0ECRQ1F4LY2moSAN57/PNEsL8nvsQ8txSeXOM8Nk7ab8vImsXH975EaCfc2qkDBFzz8YNLcvk0nFTCq31rWrO0lVzmAjdb7VfXS/ZQ7lNvi4s4r2AB0AGuzyatESC7em+mkdX1JKmtD1IMeayL1iNbhl5k5YU+WD0fW1orUQgM3YqFF9B+rKEzPwVww+/46Ql4WG0r5jqb8+imSP+DrxpXMYYfSINP5mSt6HmMductDYRDjPxUF8VNXJ9uc93IqZ6NaIfL2kvpXRA3OES+Bj6BbGJhLjIB8=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB5832.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(7416014)(23010399003)(52116014)(56012099006)(11063799006)(6133799003)(18002099003)(921020)(10067099003)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?wakMZhJ0Ge0AcXm8yvmqUz+e7mx6CEf6iE/F1TsgxVUkJo3VQphKmMaJJmHt?=
+ =?us-ascii?Q?6w+ri1aMcW+5Q+GXB8TsHUB6uE3+K0kTIAQeik6ioci2DvGt0o0EDNTGx6U5?=
+ =?us-ascii?Q?8zz6zGc/71h/5hBjMX1X+Bq2TjlxigrGcF2SkOR5qU36hgdcylozhecJMwwk?=
+ =?us-ascii?Q?fgPp/kdoyhGmo7KbFbkdqR/SkZTTzAEfX6tFnqTlv0YBXh5ZT95nyIBmABpB?=
+ =?us-ascii?Q?xi7XoWjkanen1JQqOXJz0BLWaKNtAlJfUrOiTJ5e4v2gBm/f4C/Wi+Da/5jH?=
+ =?us-ascii?Q?GLmaBrwEE2wgD5wmudRFv6Ms4nwMw4BbJqWzM5SkRC9MNx2slGkUHbavmG75?=
+ =?us-ascii?Q?mRqSH1aU20hK6HVodXjtYGH09FjnLVSJGP3sL+ILHykYPtxGeQHrgcAIrSZ3?=
+ =?us-ascii?Q?Z/jFZGixBRWCbf3W7wtcAqxahIH0rkKQ07rIiUtwniwt0JamkOjK4XGXtezC?=
+ =?us-ascii?Q?/Td4LTNbt5baQeiejlAtUcN1NF3x+F2RKBzI71i1NsSOgVyhyL5IltcNTHc+?=
+ =?us-ascii?Q?U5P122pz/mE6J4o2VUSyFpAXJ7jk5d6hyt0FPeMuHeLysA9PNkrOEj7wI+Mg?=
+ =?us-ascii?Q?KsNHNpkskg9HE3IWkXK5iRQDJ3wx5FXCFK7jQw+hsnQfRS3KvooQ0rsw8Geg?=
+ =?us-ascii?Q?mLEu93g6OR7Jko+7uiW1Wt9L2dFkzyj1fOnsU8TdLF64DLyBTTIcnMT61CJr?=
+ =?us-ascii?Q?KGpaoKuaDiOZlRkbbkN+5jpe3+lbyztumaT9psm1M6P6bdLYXuPvb3J0gL9X?=
+ =?us-ascii?Q?kwnO2Z//xyXzm5FluyBnb3bQ6+ueoAo7/yX8hV2aEdum98gChZgE+jnCx75k?=
+ =?us-ascii?Q?BLKLSeE8atVznMJKKuCYYaxTCEn00lCz9vsHIDQRJinvGaOid0dYURjMNEUm?=
+ =?us-ascii?Q?DSxfIVo+LLZtLoYDLVHvOOBKO48IABJ1CTZw8rE550vTQkr/5gmSxs90W766?=
+ =?us-ascii?Q?dNF9rcsgalqVq4aM/2FJ0Raoqn4DFQw4oacQ74fTbbcAkXom9F1C9ynV7mcE?=
+ =?us-ascii?Q?tqV4Gm1WMf+VOhnObQaBq9zfMaGMfbOrdt3wfukhPi6D/ObdX//xqGWyhFiU?=
+ =?us-ascii?Q?6Tk7wcx5hEj6+q5adR6Nf6Grdj9c37zJ3eVKPtleB1aKy7co/wgRJ0rZShEt?=
+ =?us-ascii?Q?XgEwa9EGKlnyFcf2TaHHayLC6z5hLcDNXqR/kHZyFSghLHaUWGXKKaXCJ4V3?=
+ =?us-ascii?Q?H6FaR4SkQFis/p/r5fRa+NDd6Dw+FuWtm6nZEt5TgURlgQgBsb6//aON4sVZ?=
+ =?us-ascii?Q?Ckci8brpND0Jo+6EAH/tX+WD3CPKNQAuPFhHG8ntQ0T95qgYhTP/pj6EeqcS?=
+ =?us-ascii?Q?KW6TusA/6xTi2QFstelSL0f0aYxyjZBVBas027YEtzsKyg7knvt3yHGvHts5?=
+ =?us-ascii?Q?NgsalfLDeTxMCZuPjsfixlQjSbkO/AZzksJwKADhghTlaSC3eublPERdHoFX?=
+ =?us-ascii?Q?TIYUdRRA/Kxf68V6f7N8SHzphfBTsAVbrEkFcQgiL8zxO2GW6ZOrPk0nnJDn?=
+ =?us-ascii?Q?XQUwAoWZEMRKOSn2zvoP6zrs5repTLefRGTVEj1xR7tG8FHF6td/sgQMHSAs?=
+ =?us-ascii?Q?C3VMisfW+FQ2oKW4jiPyqEzdZRmONF9+GREloEGM0CiwMoHsLv2VndUQyZ/P?=
+ =?us-ascii?Q?6RUtQciVuYsoVQxj4+TxJ10dhYvL6P3M0bH+lXYQoeCs+6ck3WiLHIF+F5Zm?=
+ =?us-ascii?Q?zEPhD1a5zT5Vsug5TgcsGs68w9D8vdjah582QDBsR6Cl8cSUWDSZ84op56tT?=
+ =?us-ascii?Q?RY3LLRLmyQ=3D=3D?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 19dfb515-8789-4359-fb7c-08dee3cffbf4
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5832.apcprd06.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PSAPR03MB5605.apcprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3d46daec-fa83-4bbd-426a-08dee3cd9c89
-X-MS-Exchange-CrossTenant-originalarrivaltime: 17 Jul 2026 06:35:36.6667
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 06:52:36.0752
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: a7687ede-7a6b-4ef6-bace-642f677fbe31
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Jgm9PGEJsh7iTwKDwtUAeU7QZckf+7l0ZkcYzGeAWMRUFaIQzwVRHRSNMrJtVr55KD6OJnVj6VGXnZBz6fVjPA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR03MB8179
-X-MTK: N
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2oF8UeBL/8/0q0/DLe6uKSvBvys4lIyujK6MDurR+hbt0ujMnmGhae0zaVdrWbppYYNsKVvqG6I6IKRCDUcCAw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: KUXPR06MB9155
 
-T24gRnJpLCAyMDI2LTA3LTE3IGF0IDExOjUwICswODAwLCBQYW4gQ2h1YW5nIHdyb3RlOg0KPiBT
-aW5jZSBjb21taXQgNTViNDhlMjNmNWM0ICgiZ2VuaXJxL2RldnJlczogQWRkIGVycm9yIGhhbmRs
-aW5nIGluDQo+IGRldm1fcmVxdWVzdF8qX2lycSgpIiksIGRldm1fcmVxdWVzdF9pcnEoKSBhdXRv
-bWF0aWNhbGx5IGxvZ3MNCj4gZGV0YWlsZWQgZXJyb3IgbWVzc2FnZXMgb24gZmFpbHVyZS4gUmVt
-b3ZlIHRoZSBub3ctcmVkdW5kYW50DQo+IGRyaXZlci1zcGVjaWZpYyBkZXZfZXJyKCkgY2FsbHMu
-DQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBQYW4gQ2h1YW5nIDxwYW5jaHVhbmdAdml2by5jb20+DQo+
-IC0tLQ0KDQpSZXZpZXdlZC1ieTogUGV0ZXIgV2FuZyA8cGV0ZXIud2FuZ0BtZWRpYXRlay5jb20+
-DQoNCg==
+Since commit 55b48e23f5c4 ("genirq/devres: Add error handling in
+devm_request_*_irq()"), devm_request_irq() and devm_request_threaded_irq()
+automatically log detailed error messages on failure. Remove the
+now-redundant driver-specific dev_err() and dev_err_probe() calls.
+
+Signed-off-by: Pan Chuang <panchuang@vivo.com>
+---
+ drivers/remoteproc/da8xx_remoteproc.c    |  2 +-
+ drivers/remoteproc/ingenic_rproc.c       |  4 +---
+ drivers/remoteproc/keystone_remoteproc.c |  4 ++--
+ drivers/remoteproc/mtk_scp.c             |  4 +---
+ drivers/remoteproc/qcom_q6v5.c           | 20 +++++---------------
+ drivers/remoteproc/qcom_sysmon.c         |  2 --
+ drivers/remoteproc/qcom_wcnss.c          |  4 +---
+ drivers/remoteproc/stm32_rproc.c         |  3 +--
+ 8 files changed, 12 insertions(+), 31 deletions(-)
+
+diff --git a/drivers/remoteproc/da8xx_remoteproc.c b/drivers/remoteproc/da8xx_remoteproc.c
+index 23fca7176539..006fa7b56727 100644
+--- a/drivers/remoteproc/da8xx_remoteproc.c
++++ b/drivers/remoteproc/da8xx_remoteproc.c
+@@ -298,7 +298,7 @@ static int da8xx_rproc_probe(struct platform_device *pdev)
+ 					handle_event, 0, "da8xx-remoteproc",
+ 					rproc);
+ 	if (ret)
+-		return dev_err_probe(dev, ret, "devm_request_threaded_irq error\n");
++		return ret;
+ 
+ 	/*
+ 	 * rproc_add() can end up enabling the DSP's clk with the DSP
+diff --git a/drivers/remoteproc/ingenic_rproc.c b/drivers/remoteproc/ingenic_rproc.c
+index 1b78d8ddeacf..252519f48964 100644
+--- a/drivers/remoteproc/ingenic_rproc.c
++++ b/drivers/remoteproc/ingenic_rproc.c
+@@ -219,10 +219,8 @@ static int ingenic_rproc_probe(struct platform_device *pdev)
+ 
+ 	ret = devm_request_irq(dev, vpu->irq, vpu_interrupt, IRQF_NO_AUTOEN,
+ 			       "VPU", rproc);
+-	if (ret < 0) {
+-		dev_err(dev, "Failed to request IRQ\n");
++	if (ret < 0)
+ 		return ret;
+-	}
+ 
+ 	ret = devm_rproc_add(dev, rproc);
+ 	if (ret) {
+diff --git a/drivers/remoteproc/keystone_remoteproc.c b/drivers/remoteproc/keystone_remoteproc.c
+index 83763d640c4e..407d6034f748 100644
+--- a/drivers/remoteproc/keystone_remoteproc.c
++++ b/drivers/remoteproc/keystone_remoteproc.c
+@@ -411,7 +411,7 @@ static int keystone_rproc_probe(struct platform_device *pdev)
+ 	ret = devm_request_irq(dev, ksproc->irq_ring, keystone_rproc_vring_interrupt,
+ 			       IRQF_NO_AUTOEN, dev_name(dev), ksproc);
+ 	if (ret)
+-		return dev_err_probe(dev, ret, "failed to request vring interrupt\n");
++		return ret;
+ 
+ 	ksproc->irq_fault = platform_get_irq_byname(pdev, "exception");
+ 	if (ksproc->irq_fault < 0)
+@@ -419,7 +419,7 @@ static int keystone_rproc_probe(struct platform_device *pdev)
+ 	ret = devm_request_irq(dev, ksproc->irq_fault, keystone_rproc_exception_interrupt,
+ 			       IRQF_NO_AUTOEN, dev_name(dev), ksproc);
+ 	if (ret)
+-		return dev_err_probe(dev, ret, "failed to enable exception interrupt\n");
++		return ret;
+ 
+ 	ksproc->kick_gpio = devm_gpiod_get(dev, "kick", GPIOD_ASIS);
+ 	ret = PTR_ERR_OR_ZERO(ksproc->kick_gpio);
+diff --git a/drivers/remoteproc/mtk_scp.c b/drivers/remoteproc/mtk_scp.c
+index 436656bdfa8b..9751acc2bf83 100644
+--- a/drivers/remoteproc/mtk_scp.c
++++ b/drivers/remoteproc/mtk_scp.c
+@@ -1246,10 +1246,8 @@ static struct mtk_scp *scp_rproc_init(struct platform_device *pdev,
+ 					scp_irq_handler, IRQF_ONESHOT,
+ 					pdev->name, scp);
+ 
+-	if (ret) {
+-		dev_err(dev, "failed to request irq\n");
++	if (ret)
+ 		goto remove_subdev;
+-	}
+ 
+ 	return scp;
+ 
+diff --git a/drivers/remoteproc/qcom_q6v5.c b/drivers/remoteproc/qcom_q6v5.c
+index 0206a4a19254..1075ef4027b7 100644
+--- a/drivers/remoteproc/qcom_q6v5.c
++++ b/drivers/remoteproc/qcom_q6v5.c
+@@ -302,10 +302,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5, struct platform_device *pdev,
+ 					NULL, q6v5_wdog_interrupt,
+ 					IRQF_TRIGGER_RISING | IRQF_ONESHOT,
+ 					"q6v5 wdog", q6v5);
+-	if (ret) {
+-		dev_err(&pdev->dev, "failed to acquire wdog IRQ\n");
++	if (ret)
+ 		return ret;
+-	}
+ 
+ 	q6v5->fatal_irq = platform_get_irq_byname(pdev, "fatal");
+ 	if (q6v5->fatal_irq < 0)
+@@ -315,10 +313,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5, struct platform_device *pdev,
+ 					NULL, q6v5_fatal_interrupt,
+ 					IRQF_TRIGGER_RISING | IRQF_ONESHOT,
+ 					"q6v5 fatal", q6v5);
+-	if (ret) {
+-		dev_err(&pdev->dev, "failed to acquire fatal IRQ\n");
++	if (ret)
+ 		return ret;
+-	}
+ 
+ 	q6v5->ready_irq = platform_get_irq_byname(pdev, "ready");
+ 	if (q6v5->ready_irq < 0)
+@@ -328,10 +324,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5, struct platform_device *pdev,
+ 					NULL, q6v5_ready_interrupt,
+ 					IRQF_TRIGGER_RISING | IRQF_ONESHOT,
+ 					"q6v5 ready", q6v5);
+-	if (ret) {
+-		dev_err(&pdev->dev, "failed to acquire ready IRQ\n");
++	if (ret)
+ 		return ret;
+-	}
+ 
+ 	q6v5->handover_irq = platform_get_irq_byname(pdev, "handover");
+ 	if (q6v5->handover_irq < 0)
+@@ -342,10 +336,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5, struct platform_device *pdev,
+ 					IRQF_TRIGGER_RISING | IRQF_ONESHOT |
+ 					IRQF_NO_AUTOEN,
+ 					"q6v5 handover", q6v5);
+-	if (ret) {
+-		dev_err(&pdev->dev, "failed to acquire handover IRQ\n");
++	if (ret)
+ 		return ret;
+-	}
+ 
+ 	q6v5->stop_irq = platform_get_irq_byname(pdev, "stop-ack");
+ 	if (q6v5->stop_irq < 0)
+@@ -355,10 +347,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5, struct platform_device *pdev,
+ 					NULL, q6v5_stop_interrupt,
+ 					IRQF_TRIGGER_RISING | IRQF_ONESHOT,
+ 					"q6v5 stop", q6v5);
+-	if (ret) {
+-		dev_err(&pdev->dev, "failed to acquire stop-ack IRQ\n");
++	if (ret)
+ 		return ret;
+-	}
+ 
+ 	q6v5->state = devm_qcom_smem_state_get(&pdev->dev, "stop", &q6v5->stop_bit);
+ 	if (IS_ERR(q6v5->state)) {
+diff --git a/drivers/remoteproc/qcom_sysmon.c b/drivers/remoteproc/qcom_sysmon.c
+index a0830a48b1f4..61e1038328e8 100644
+--- a/drivers/remoteproc/qcom_sysmon.c
++++ b/drivers/remoteproc/qcom_sysmon.c
+@@ -662,8 +662,6 @@ struct qcom_sysmon *qcom_add_sysmon_subdev(struct rproc *rproc,
+ 						IRQF_TRIGGER_RISING | IRQF_ONESHOT,
+ 						"q6v5 shutdown-ack", sysmon);
+ 		if (ret) {
+-			dev_err(sysmon->dev,
+-				"failed to acquire shutdown-ack IRQ\n");
+ 			kfree(sysmon);
+ 			return ERR_PTR(ret);
+ 		}
+diff --git a/drivers/remoteproc/qcom_wcnss.c b/drivers/remoteproc/qcom_wcnss.c
+index 3392c9380202..e9a00efe97f6 100644
+--- a/drivers/remoteproc/qcom_wcnss.c
++++ b/drivers/remoteproc/qcom_wcnss.c
+@@ -521,10 +521,8 @@ static int wcnss_request_irq(struct qcom_wcnss *wcnss,
+ 					NULL, thread_fn,
+ 					IRQF_TRIGGER_RISING | IRQF_ONESHOT,
+ 					"wcnss", wcnss);
+-	if (ret) {
+-		dev_err(&pdev->dev, "request %s IRQ failed\n", name);
++	if (ret)
+ 		return ret;
+-	}
+ 
+ 	/* Return the IRQ number if the IRQ was successfully acquired */
+ 	return irq_number;
+diff --git a/drivers/remoteproc/stm32_rproc.c b/drivers/remoteproc/stm32_rproc.c
+index 0e5d64fbe52c..1fe4cdc0a13a 100644
+--- a/drivers/remoteproc/stm32_rproc.c
++++ b/drivers/remoteproc/stm32_rproc.c
+@@ -682,8 +682,7 @@ static int stm32_rproc_parse_dt(struct platform_device *pdev,
+ 		err = devm_request_irq(dev, irq, stm32_rproc_wdg, 0,
+ 				       dev_name(dev), pdev);
+ 		if (err)
+-			return dev_err_probe(dev, err,
+-					     "failed to request wdg irq\n");
++			return err;
+ 
+ 		ddata->wdg_irq = irq;
+ 
+-- 
+2.34.1
+
