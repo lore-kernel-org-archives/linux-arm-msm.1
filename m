@@ -1,164 +1,309 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from TYPPR03CU001.outbound.protection.outlook.com (mail-japaneastazon11012025.outbound.protection.outlook.com [52.101.126.25])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1D7943AC0F4
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 10:11:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784283106; cv=none; b=IVZE5tjnsqo4/qLlrReL5s0wwcQCT5anqW4fCSU607J2bVRdl2vQY/bThN0iw8fZyZ31IZgW323gW0w22ydLDDGOJWG0+zM2m6yBCJrLYOd+8FsMiZIOlhshzbQZhHFBtmVpVPmiXLigFboeh2KzLrif5igMeq3MzRx3AoX2n+c=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784283106; c=relaxed/simple;
-	bh=L/O1iAq6+atDhuVBjxvUN1vUvgMn7GUQFHZhyFnCgEs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=GGh6iiK4XBgKK9hA0cma/E2XwYbcXGP5W/1Qbp30Hs43VcPcXY3IsOzVEY0/moRHGMShKkeisNp112lLxyxVuZz1eqtcTZi1WKePi9Pt1vWLdOqNUHwRzkueuGFTWjuGKGdPvbklI4rYzxrbh3cll+V8ZXFxaXDS8GaheeAi5rQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZHdtxi27; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hfFQtuNQ; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A52413BE627;
+	Fri, 17 Jul 2026 10:17:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.126.25
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784283456; cv=fail; b=p/Y19NRIGMLlTj4hCRfq5LwMSA2z61JKhiVGj0MKVO4tPDc/UWnauy7vmcYSNTZX40ca5pwSfMX1Rl3apr4iaZh4aFsDJz5eTx9sZMFuT4LMaP4I3MdjeNttKycdFPVeUz+UNu4XYsj3hp2STFSIbFBoIWJBMIblxUwl+N0Xkgc=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784283456; c=relaxed/simple;
+	bh=J3NFrYDKgFSBpjMeAq7a+gArADW7jP8JsDGz7QtGB0k=;
+	h=From:To:Subject:Date:Message-Id:Content-Type:MIME-Version; b=MM2pJWjM3LU5ZnMA27XQ9pV/NbzI6FBXx6EqYQqTBpARsRy4VfPfnm6LiXwk8MCqN84XWsEKjT5TcwTpYMcUNnKhwnO4yRw2fJe1rWYrGqMKUeQZuzDaL6l73n5HIiBuFVu9I6lSYu6F4petlF7NoWLBCc9W39Q4FyLMWEIJ/Ls=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vivo.com; spf=pass smtp.mailfrom=vivo.com; dkim=pass (2048-bit key) header.d=vivo.com header.i=@vivo.com header.b=G9VS29Hk; arc=fail smtp.client-ip=52.101.126.25
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vivo.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=vivo.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZHdtxi27";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hfFQtuNQ"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66H6cKcx1161165
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 10:11:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	o6NcGdJD2SJbC+6pbz4eT093TTMm6bTq2YROpOJJcrc=; b=ZHdtxi27ytVvjJB5
-	MJXMJoC9oIP+eK/dNfbiVEWyhsgduyq5QYO00PfHTLRCWR6Rl6sxdghvc9He/XE7
-	lTuLWUuQvlYUTEo788TEWmG4eV9FHH4PJ1KaKETz2meOeo/9O1HJ4PDjCOQc6Itu
-	0ZMVAWkspeoqz0JliDadxKDQKmTUAklPLmIg+ABTK+eQpXP7b/wDlbP67lKOXZJi
-	fwQjxS5Lj6JqBSWzJMY+4arjddUDDBzqDyFPyIHVpXaa2mxbd3Us2oShxuQ+qjxF
-	BLPefinXXfZl6o8v0IxVNnAX9IQBIv6kj+tfN6hnc4y9F8RTC5fIj/Azc04FYN0r
-	lgn6Pw==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ffd3as9v9-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 10:11:44 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51bfd1772d8so12809681cf.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 03:11:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784283103; x=1784887903; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=o6NcGdJD2SJbC+6pbz4eT093TTMm6bTq2YROpOJJcrc=;
-        b=hfFQtuNQYWsPK+KB94k+60J5jY5Z9/l+a359qJKY3VP0bgV8RgYBu1TcCrc0rrSk+u
-         9Malm4V+cSAdTDziIYssLKjKWbWkqlWEqFm1g5dXpBXwHjlJoulzw+TbT/VBoWq+d2fM
-         TTYPIvo1ykda3YhT6Yz4Ej8bR/okUDRjpdxenjPSTCBOkGnsiO6Noeo7Wysq3DiyHBve
-         pLZfimOzEsUCImAVsUM8G9A0G0FthIrLy9zTKU5kSueH7nTPdJoCvy9GI2YD+O0T19T4
-         NXnfIm1/OpI9YVfIg/o7+8FlLF11OT3gKAuNAMYwrWxRVXRLWkncUzThXgR0ykvduOHb
-         9sfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784283103; x=1784887903;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=o6NcGdJD2SJbC+6pbz4eT093TTMm6bTq2YROpOJJcrc=;
-        b=RahowL0WwPkdWXrpQsI5VRDXdG+4Fu4MhTFzUkVG/AUsvfphiH8DWgV7I+lJXDs9YB
-         ISUFmeaeozcQUP2OQpyI5iqGvbtV/gEH+AbioIkmgo0UsprVLB3U+ALNnxZJ6tyhC4Ta
-         /K20/lJr1oJ6Ucy07O39xO+b8zHXv20IdnBSNGfHUXEftsoL94tKM4avFZwI+3XxhtJm
-         IcIU1IF9Y/M4nvp9URbHa+nSEDl5uTIBl2Hc6hv2qJVZW7myBXiGgFQCVRPmsU0+b8R0
-         xVU/EWieFIk9bkhginbccfTZkVMtTNst5Fo1VO4c6rIX4hW26bu9HPMoKvhwP1iiS284
-         kUvw==
-X-Forwarded-Encrypted: i=1; AHgh+RokUXdFaneDUDBPxq2D002LQfOafTOLr+GSLNfVevu1LezYlqh8hKKwjDA/TIcIqTPX4AsXuK3YsQDAwUv/@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxy589RKFFVJiK9vl/xu6+aGxOPWvmPGO9EzOaZuq2f4UhEGe8Z
-	7OEOLuc/ukpXbGP6toQT4n4YSNX6PXxHMCXCW2cbY+B0lGVhTfgwBJwsH0D4exIhMjVJA0Iq4tv
-	J8sjfHAtY3eynSM1ITe1zrZi6XwQSMQoELGCZ3eQgiy+hB3tYgtV3gI2NsnzGnRtgRJAa
-X-Gm-Gg: AfdE7ckfMlyt1QAQpE/xT9eEvJh0WFyk14JeqvOMeMDB+Bx64cWmairHfsnLae5SoJu
-	/PEIPdAcYKotXwAveksG4cAol05KPrcmAdMhBng2UyuU4g6HtPU8jOvolQw7THUmuI8L23o/6ZB
-	BRsSQ9G23XvVhz9zEn/c1pp6yJCDaq37G9OxReSa0N2KgSHFCR2oCx9ovPXfVgi2Er41HzId8QK
-	AXiZDmw9x8q9jWFHdKbKCqFvCvw+u0hnUwFWWoMSP1L6d7NznL41aHpExWxehlOVlVceUQjK+T/
-	3C3twMZzBj5YsMyP34MCMnt3C7dD2GBR9AuYCzUyejN/H5FiojD1B9XY2+zFQ9fTIqwpPfgOoO9
-	jzPpklwDc/hL/0VlY2KEznPkR
-X-Received: by 2002:a05:622a:1901:b0:51c:4ffa:9b71 with SMTP id d75a77b69052e-5213e084841mr13148171cf.6.1784283103244;
-        Fri, 17 Jul 2026 03:11:43 -0700 (PDT)
-X-Received: by 2002:a05:622a:1901:b0:51c:4ffa:9b71 with SMTP id d75a77b69052e-5213e084841mr13147971cf.6.1784283102812;
-        Fri, 17 Jul 2026 03:11:42 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1724f50b72sm51742466b.48.2026.07.17.03.11.39
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 17 Jul 2026 03:11:41 -0700 (PDT)
-Message-ID: <bd067052-ea72-41f4-a665-2f54242d12a6@oss.qualcomm.com>
-Date: Fri, 17 Jul 2026 12:11:39 +0200
+	dkim=pass (2048-bit key) header.d=vivo.com header.i=@vivo.com header.b="G9VS29Hk"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=c1OR1Ztd+r+GzXaXdOtCkMgul6zjSX9GgjIWtjaZ944MMXO9+TgevaSurUNu7T3oHL9bVvkIr/FkLLmcteBZtXjNiDHFhoT6VDX1fN39Lv7ah9JvxjMt3CVO9W3LILQH8lp4tONlRyW8lHiiDbhdghRBRocmjEX34w/Erex6JfrurLodW1wlS9rjz0qbAjrvJ/L379u7A0VNVEPxFHsxV5r/hd21h5EpaW/yNi6x3EzRQLiQz9MxfT8fKuuhO25jwZXaZhS/ue8IE9G85wy1sgCd6FWHXPzoOghniDqA02lXM4ZymWSw7D/mZZbk6Q/GTXX3c0ZEZ/OdM7zEG97+wg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QlCXnuVJLtgpwozbDJuuBWH1wFu7oE+TtVH9lNTRAv4=;
+ b=fD5IoZXtFiNdDKJTkMvnCVdJoKwh852GNe4OE/jqVfUQYd6Ro/BHG5ir+vO1FivsfeO4A080osqORXbJBO09K7Tc/DEzwjk21hyyQ+8QLf8y4sUbemBnxzraa5nyd4meV6NePZdAC7P5CYNdCaT+qpMtJ0CguaZ3ltqjeIOgKA9Vby5V+JTWa6JXadZwXdjb6qSttiul9Ycs7KLYT31QJgSlkUWWbB6tbZGKsXNa1+qUEeYuhPfme3boyEbxr1IYi0GgquPx/rBv/6doG4WF7MHI0IEi0oFesyAtYesKwi4m3N6JA4yST1w5fAcn10pU4eOcC5Zuh8/0fliVXr3bZQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
+ dkim=pass header.d=vivo.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QlCXnuVJLtgpwozbDJuuBWH1wFu7oE+TtVH9lNTRAv4=;
+ b=G9VS29Hkx8WVCXj8JIfNddhvVKc4DywXPVf9PjxPlx7T0Y0iLTRT5Ewr2EeF7Kw7mtdhKbJia+IOJqSSCRELC2keCwoaFKAqPRSAQz27Als3SzmcEtLrHFGj2HnYQ2DYaHfhCU5a7AJsFRehpTHi0h8CUaGKC8T2GW24/5BPD84e0PUOqeUNtKiKIwixfZ+LukCsmJG3XkIcn4cJhzXcoLIWtaCNoAogaSZ/oua5kSoO+XCFMalhIwr/xtvv2xekg10fcwPf7vfp42H177miz9R0bh1eWfXTs/ENiHvSurazu2GUbVwCLV5fU9P1w9tbXmvpTLk9rjwCUuileOevcw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=vivo.com;
+Received: from SEZPR06MB5832.apcprd06.prod.outlook.com (2603:1096:101:c8::12)
+ by SEYPR06MB5940.apcprd06.prod.outlook.com (2603:1096:101:d2::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.12; Fri, 17 Jul
+ 2026 10:17:26 +0000
+Received: from SEZPR06MB5832.apcprd06.prod.outlook.com
+ ([fe80::f98:5e32:4ccb:d07b]) by SEZPR06MB5832.apcprd06.prod.outlook.com
+ ([fe80::f98:5e32:4ccb:d07b%6]) with mapi id 15.21.0223.011; Fri, 17 Jul 2026
+ 10:17:25 +0000
+From: Pan Chuang <panchuang@vivo.com>
+To: Ulf Hansson <ulfh@kernel.org>,
+	Robert Richter <rric@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Jerome Brunet <jbrunet@baylibre.com>,
+	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+	Nicolas Pitre <nico@fluxnic.net>,
+	=?UTF-8?q?Andreas=20F=C3=A4rber?= <afaerber@suse.de>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Adrian Hunter <adrian.hunter@intel.com>,
+	Jisheng Zhang <jszhang@kernel.org>,
+	Pan Chuang <panchuang@vivo.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Linus Walleij <linusw@kernel.org>,
+	Thomas Fourier <fourier.thomas@gmail.com>,
+	Pedro Demarchi Gomes <pedrodemargomes@gmail.com>,
+	=?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Takashi Sakamoto <o-takashi@sakamocchi.jp>,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	linux-mmc@vger.kernel.org (open list:MULTIMEDIA CARD (MMC), SECURE DIGITAL (SD) AND...),
+	linux-kernel@vger.kernel.org (open list),
+	linux-arm-kernel@lists.infradead.org (moderated list:ARM/Amlogic Meson SoC support),
+	linux-amlogic@lists.infradead.org (open list:ARM/Amlogic Meson SoC support),
+	linux-omap@vger.kernel.org (open list:OMAP HS MMC SUPPORT),
+	linux-actions@lists.infradead.org (moderated list:ARM/ACTIONS SEMI ARCHITECTURE),
+	linux-arm-msm@vger.kernel.org (open list:ARM/QUALCOMM MAILING LIST)
+Subject: [PATCH] mmc: host: Remove redundant dev_err()/dev_err_probe()
+Date: Fri, 17 Jul 2026 18:14:49 +0800
+Message-Id: <20260717101508.635969-1-panchuang@vivo.com>
+X-Mailer: git-send-email 2.34.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: TY4P286CA0109.JPNP286.PROD.OUTLOOK.COM
+ (2603:1096:405:380::15) To SEZPR06MB5832.apcprd06.prod.outlook.com
+ (2603:1096:101:c8::12)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/5] clk: qcom: gcc-hawi: Add support for global clock
- controller on Maili
-To: Taniya Das <taniya.das@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd
- <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Vivek Aknurwar <vivek.aknurwar@oss.qualcomm.com>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-        Imran Shaik <imran.shaik@oss.qualcomm.com>,
-        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260713-maili_initial_clock-v2-0-79548f0bb58f@oss.qualcomm.com>
- <20260713-maili_initial_clock-v2-4-79548f0bb58f@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260713-maili_initial_clock-v2-4-79548f0bb58f@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDEwMSBTYWx0ZWRfX5jkEGmY5vhRq
- J5VHHbCRxO38cCEqF2H0AnG03cbUVI+hd4+oUCmvxrD/yv0WR9aeglFC44E/wzbmuXQyry/hjIS
- syAm7Moz5JYALPMb9hJIRlBd/zVqPI8=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDEwMSBTYWx0ZWRfXyYVTw8fHMzaJ
- O8sld1T7ozsEUQX+js2cUMQgzsvbNMMjCk+DRvBrPO8706RNudoqZX57MzoQsMo9qLJKFUIIGId
- fm0t4j4FMveFMxENDKUuVL0Ox6cjz0qQKXtkqOtJNJ6Pubex4vT5s5uMGdSW5kqC1gCy9dNvBZ1
- 4DF3VAvkfh1f5o7AepfDPMM9djPLCwNW4ndM6V6vvPOrXRgSHbrsFmbhXtbKOotybff/+k4XCF/
- FW3CJq4nuuxXeFvBcrSDXkNKVGaTn84fZBbBuxCeAbEgmMT65BRySDIZqbgb+8cUP5SDLmYOtaZ
- AV3WzrmBTZ4wkSgDRWsYDJKrIy4o4IecHpzxzfY+55M7q/XWw3AySoSr00VZ7GfsYFDds1wIKCQ
- ztPwT29daxaWelrS4rv8wjr44Okhym8tHe4sAXubX7W6juL8zQHupl1BiE3e6gvU1YuhKQeDg89
- uIjGsg8KS6355dNX7kg==
-X-Proofpoint-GUID: WHEGvA9B9Y-yzjT7Gc7d-JSeudJB83OJ
-X-Proofpoint-ORIG-GUID: WHEGvA9B9Y-yzjT7Gc7d-JSeudJB83OJ
-X-Authority-Analysis: v=2.4 cv=e/M2j6p/ c=1 sm=1 tr=0 ts=6a59ffe0 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=FjjYY-ANMnpf8f3CrbkA:9 a=QEXdDO2ut3YA:10
- a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-17_02,2026-07-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0 suspectscore=0 phishscore=0 priorityscore=1501
- spamscore=0 malwarescore=0 clxscore=1015 lowpriorityscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170101
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEZPR06MB5832:EE_|SEYPR06MB5940:EE_
+X-MS-Office365-Filtering-Correlation-Id: 92fbbbec-fb2d-4b95-87fb-08dee3ec991b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|52116014|7416014|23010399003|366016|1800799024|6133799003|18002099003|56012099006|11063799006|10067099003|921020|38350700014;
+X-Microsoft-Antispam-Message-Info:
+	xoNfW4hMvV1k/cnKs8eFDPwk4rBYb2OHFuwrYiPny+OFrP+L8bydW+PWco84Uk7d55uq4foUPGxGKJoamdYtR6hBHd7JVP+OiGQaedTcfBl7JNsSyvRWwAQ2gyugJDqpwm+2ptvUrQGAKVAOKd3b/Z8bYy5WH9EymQmKUQcdy7ChAeDK+7TqrSe8Qkxqy6zLaEDo5Tw9ikP6NGNRflROOFI+G2hLXY0mXqV0ob/pxwPvInXSrz/NFAvm2F307/1+zgEC25Wmi9b3fDFkl3R8G8cmrGJ0sQsTWGSBlo4A1l0cA1oy2GPMpLsi792SgL+vnjWsmYcnbjEUvgzowHag3kUfoUnx43001zAvCUG2nYJ8v98DBaPjGgnMQVRaL1Q7vxNhg6URJcU4XMaFgTFPn9+Z0vRzliPXZv/Siyun2YJQDfmdeP6uIlCtL2iuwxmoSbzLCX0lg4pXavHp2cMdppnF0xP83t2qKdGr+kt5yHnp43OwMdNBW45qHJ/rSvrxzvMb5lb2H6acNyLcm9iniITizEs7EkIrhyUK0jEwVqHVZfzP6QWbseyp+VyGpZ6iuCth8mAv8F9aBAGE3m7QBxtzF6HLGXF/fOsRbstaL0SM1a5733HjjpBTz/6s+KN1dh0Z7pqNDL35FyDBjsSSXKomJb/Ww/N1F6L/Ewv3gMAMYRwlkCvQcwCLskgXC1ThAXkvy5HJ7v55pczQpwYsL0VtWGDaFPikkvjTEPMmjVYViECWR7GV2NKSOzm/Uogh
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB5832.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(52116014)(7416014)(23010399003)(366016)(1800799024)(6133799003)(18002099003)(56012099006)(11063799006)(10067099003)(921020)(38350700014);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?cUveRhYOqkorN/3wiWFS+AT037dH2uQ4yMZ2dA4o15rhjHRL/bP1i/UKkwpw?=
+ =?us-ascii?Q?OkXrrvypoTHom2tK99heDKSQD0hSDtottfmvtMNlKEtPkVfEngvA1pvDiBJO?=
+ =?us-ascii?Q?jhwkktMmYfCoAeCubyJw41TXkiKiTrfipUrJyGhe5z+NJjH5T7s2R0ckkZP3?=
+ =?us-ascii?Q?OVFQAlEF3jVrMKvCM2nzl3LJLYnfert/kbDQhjNtA1WW/TARFmQtzt1eoGjm?=
+ =?us-ascii?Q?P6zxqQ2ka2BOfLnLwuSNXAhRux74CvlBCUspL074FFct3oVmZSf/mrUjmQVg?=
+ =?us-ascii?Q?CHI01RqdYAYuiKh0zppD2zTI9ELiz5sq7f7V765nvP0Vd/N7NNr5QWE+yD5v?=
+ =?us-ascii?Q?uQx9QnVBeMowiZRXjbwekqQD4tSRxxrmU51Uwe1CJKszaSTq8WKTQJFkGmOJ?=
+ =?us-ascii?Q?VJ8a/5Hjd8lg0XLccz5b9GWpxu7KT+eNQEL3hiMmV7heaa1qXhU/pTMCsr5j?=
+ =?us-ascii?Q?3qwUfpAju/RxKXt3KOFuvJww5OS8Ns5Erb/OnesEaHIS6FrVuv/Z2P+qrsmX?=
+ =?us-ascii?Q?pqFnEQSQd3tlAoaY+3wrkvhzVDmxFBPEjfYAi7MjTyLuk4FB9URV9LmG2/NG?=
+ =?us-ascii?Q?k6dnDimyjPSbjgzirrg5EHRF878JSLjI7/iN4KA6ksAGWz5SMfmlLRxCzzFb?=
+ =?us-ascii?Q?v1GtqKL02cB7qSm6TT1nEEzLUYZwF3NMv6EDxGWyiLMa3J3VipsiwzSvniSa?=
+ =?us-ascii?Q?DXyVllfma7Jiwt7LcyMlZN3hq6EUj7fnFWg0Mi/lFTkwuCqc0ufzCavKhovz?=
+ =?us-ascii?Q?QiumUBD50MQjZqnEXIQ/jsJomNcmLfB6/jJsVgWcd2JmQN2JYrZlG2xMT/zW?=
+ =?us-ascii?Q?WiGMqXn6dCKSIkCEC8Xc6TRdqiZIkdi1zaN0bR+/t8K0muNrQEHeWbRqwzlL?=
+ =?us-ascii?Q?4FJRHIeGF1KCu4SZuwahf4ghyDhDMcqni4WUKSY5IVnNh7t+d6ApbAncrO+K?=
+ =?us-ascii?Q?KGzxjhAjMnzTRcOOUh4ONe3CNK35w8ozymXRFKGiJ4ZWPoy6AQ1oW368wMZL?=
+ =?us-ascii?Q?qBZb5JTH2PW/Ku4n0Yg5rkVUW+skHOWSYK/K+5oxUcfW8DdZnSDaBV1wLw3+?=
+ =?us-ascii?Q?zSo3FUSN61XHT/+aLMMLvIDq6Bbrq/P4emhFSLPqYRBUb/9ATGPtdhsCjsDT?=
+ =?us-ascii?Q?Y3JZ/1ITRd9lQyQKzff2abmiGu+naOoJfxx7hB5htzaMfbgkblGo6MhIRtsM?=
+ =?us-ascii?Q?Tn9c84wSnnaw7+p8AXSxgnz54RQz0vMOTrAapRTZ/BhHaesbrJfdSW4mDn4/?=
+ =?us-ascii?Q?sk8amB8gfYuMhgQEMw+2fuaeQbr2QMuThfPr8hWcoGzG5IBM22yslZ5YJNo9?=
+ =?us-ascii?Q?SDQLdTgwV1vA0ciyEtL92iWmHGf4GIkWqKjRyBF5dI2hlqtdLhzDJ4V58HC7?=
+ =?us-ascii?Q?Mz3KkMbTEUl+7dvdGmzJOpmF+3TLdNtVXIZK7swA7nTtwzFUdjZlytebdiwG?=
+ =?us-ascii?Q?5vEe3dK/Cvc9GsRbVwLssAIBGn8VqZEXTRBnFYDD3q7S1Ct2g6b/9Vk2szmy?=
+ =?us-ascii?Q?5MzA/6k4CF4Mm2wbKf0gfTy/z4SU264G+Q/rnia+EGTeasULe+2plTJfEdyi?=
+ =?us-ascii?Q?yM2Tvmq4vHEkSi7vABp3HiSb52xBf39GT5INxXnmbQyPN/mTPIqxf4T2poSH?=
+ =?us-ascii?Q?CJcQWOngT3dF38otWH6/DKDND6aj3ay75nnCW/ygMrw49+PyTlRmQtPD5fnM?=
+ =?us-ascii?Q?zvjcsfRQHEdOkMTXPs4gFoM8WZetMwGsYpJZPoz8r2pkK7Q1UWiTdMVJVEGJ?=
+ =?us-ascii?Q?0tFVhpUu8Q=3D=3D?=
+X-OriginatorOrg: vivo.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 92fbbbec-fb2d-4b95-87fb-08dee3ec991b
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5832.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 10:17:25.5382
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: om+aYqPkmGZYnKXFzzGgfEpBERCrsOzazsdeVPSGKTOcXVZqPkGtzl7fOS12JyrSxC8yg59CaF+dCkui/sm4yQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR06MB5940
 
-On 7/13/26 11:04 AM, Taniya Das wrote:
-> Add support for the global clock controller (GCC) on the Qualcomm Maili
-> SoC by extending the Hawi global clock controller since Maili is identical
-> to Hawi and has few additional clocks.
-> 
-> Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
-> ---
+Since commit 55b48e23f5c4 ("genirq/devres: Add error handling in
+devm_request_*_irq()"), devm_request_irq() and devm_request_threaded_irq()
+automatically log detailed error messages on failure. Remove the
+now-redundant driver-specific dev_err() and dev_err_probe() calls.
 
-[...]
+Signed-off-by: Pan Chuang <panchuang@vivo.com>
+---
+ drivers/mmc/host/alcor.c         |  3 +--
+ drivers/mmc/host/cavium-octeon.c | 10 ++--------
+ drivers/mmc/host/meson-mx-sdio.c |  5 +----
+ drivers/mmc/host/mvsdio.c        |  4 +---
+ drivers/mmc/host/omap_hsmmc.c    |  4 +---
+ drivers/mmc/host/owl-mmc.c       |  5 +----
+ drivers/mmc/host/sdhci-msm.c     |  4 +---
+ drivers/mmc/host/sh_mmcif.c      |  8 ++------
+ 8 files changed, 10 insertions(+), 33 deletions(-)
 
-> +	/*
-> +	 * Maili-only clocks: NULL here to size the array to the highest Maili
-> +	 * clock index.
-> +	 */
-> +	[GCC_QUPV3_WRAP_5_S_AHB_CLK] = NULL,
+diff --git a/drivers/mmc/host/alcor.c b/drivers/mmc/host/alcor.c
+index 721db54739c1..45528909a758 100644
+--- a/drivers/mmc/host/alcor.c
++++ b/drivers/mmc/host/alcor.c
+@@ -1103,8 +1103,7 @@ static int alcor_pci_sdmmc_drv_probe(struct platform_device *pdev)
+ 			alcor_irq, alcor_irq_thread, IRQF_SHARED,
+ 			DRV_NAME_ALCOR_PCI_SDMMC, host);
+ 	if (ret)
+-		return dev_err_probe(&pdev->dev, ret,
+-				     "Failed to get irq for data line\n");
++		return ret;
+ 
+ 	mutex_init(&host->cmd_mutex);
+ 	INIT_DELAYED_WORK(&host->timeout_work, alcor_timeout_timer);
+diff --git a/drivers/mmc/host/cavium-octeon.c b/drivers/mmc/host/cavium-octeon.c
+index 8a0daddd9200..1bfc1a4f9fe9 100644
+--- a/drivers/mmc/host/cavium-octeon.c
++++ b/drivers/mmc/host/cavium-octeon.c
+@@ -240,21 +240,15 @@ static int octeon_mmc_probe(struct platform_device *pdev)
+ 			ret = devm_request_irq(&pdev->dev, mmc_irq[i],
+ 					       cvm_mmc_interrupt,
+ 					       0, cvm_mmc_irq_names[i], host);
+-			if (ret < 0) {
+-				dev_err(&pdev->dev, "Error: devm_request_irq %d\n",
+-					mmc_irq[i]);
++			if (ret < 0)
+ 				return ret;
+-			}
+ 		}
+ 	} else {
+ 		ret = devm_request_irq(&pdev->dev, mmc_irq[0],
+ 				       cvm_mmc_interrupt, 0, KBUILD_MODNAME,
+ 				       host);
+-		if (ret < 0) {
+-			dev_err(&pdev->dev, "Error: devm_request_irq %d\n",
+-				mmc_irq[0]);
++		if (ret < 0)
+ 			return ret;
+-		}
+ 	}
+ 
+ 	host->global_pwr_gpiod = devm_gpiod_get_optional(&pdev->dev,
+diff --git a/drivers/mmc/host/meson-mx-sdio.c b/drivers/mmc/host/meson-mx-sdio.c
+index 5921e2cb2180..bef5e843f449 100644
+--- a/drivers/mmc/host/meson-mx-sdio.c
++++ b/drivers/mmc/host/meson-mx-sdio.c
+@@ -683,11 +683,8 @@ static int meson_mx_mmc_probe(struct platform_device *pdev)
+ 					meson_mx_mmc_irq,
+ 					meson_mx_mmc_irq_thread, IRQF_ONESHOT,
+ 					NULL, host);
+-	if (ret) {
+-		dev_err_probe(host->controller_dev, ret,
+-			      "Failed to request IRQ\n");
++	if (ret)
+ 		goto error_unregister_slot_pdev;
+-	}
+ 
+ 	core_clk = devm_clk_get_enabled(host->controller_dev, "core");
+ 	if (IS_ERR(core_clk)) {
+diff --git a/drivers/mmc/host/mvsdio.c b/drivers/mmc/host/mvsdio.c
+index 79df2fa89a3f..cf705b265e21 100644
+--- a/drivers/mmc/host/mvsdio.c
++++ b/drivers/mmc/host/mvsdio.c
+@@ -764,10 +764,8 @@ static int mvsd_probe(struct platform_device *pdev)
+ 	mvsd_power_down(host);
+ 
+ 	ret = devm_request_irq(&pdev->dev, irq, mvsd_irq, 0, DRIVER_NAME, host);
+-	if (ret) {
+-		dev_err(&pdev->dev, "cannot assign irq %d\n", irq);
++	if (ret)
+ 		goto out;
+-	}
+ 
+ 	timer_setup(&host->timer, mvsd_timeout_timer, 0);
+ 	platform_set_drvdata(pdev, mmc);
+diff --git a/drivers/mmc/host/omap_hsmmc.c b/drivers/mmc/host/omap_hsmmc.c
+index 58c881f2725b..63a9fb970975 100644
+--- a/drivers/mmc/host/omap_hsmmc.c
++++ b/drivers/mmc/host/omap_hsmmc.c
+@@ -1915,10 +1915,8 @@ static int omap_hsmmc_probe(struct platform_device *pdev)
+ 	/* Request IRQ for MMC operations */
+ 	ret = devm_request_irq(&pdev->dev, host->irq, omap_hsmmc_irq, 0,
+ 			mmc_hostname(mmc), host);
+-	if (ret) {
+-		dev_err(mmc_dev(host->mmc), "Unable to grab HSMMC IRQ\n");
++	if (ret)
+ 		goto err_irq;
+-	}
+ 
+ 	ret = omap_hsmmc_reg_get(host);
+ 	if (ret)
+diff --git a/drivers/mmc/host/owl-mmc.c b/drivers/mmc/host/owl-mmc.c
+index 349082d76a99..d5b8a110267b 100644
+--- a/drivers/mmc/host/owl-mmc.c
++++ b/drivers/mmc/host/owl-mmc.c
+@@ -635,11 +635,8 @@ static int owl_mmc_probe(struct platform_device *pdev)
+ 
+ 	ret = devm_request_irq(&pdev->dev, owl_host->irq, owl_irq_handler,
+ 			       0, dev_name(&pdev->dev), owl_host);
+-	if (ret) {
+-		dev_err(&pdev->dev, "Failed to request irq %d\n",
+-			owl_host->irq);
++	if (ret)
+ 		goto err_release_channel;
+-	}
+ 
+ 	ret = mmc_add_host(mmc);
+ 	if (ret) {
+diff --git a/drivers/mmc/host/sdhci-msm.c b/drivers/mmc/host/sdhci-msm.c
+index ceed47ccfda8..4aff965f0e2e 100644
+--- a/drivers/mmc/host/sdhci-msm.c
++++ b/drivers/mmc/host/sdhci-msm.c
+@@ -2864,10 +2864,8 @@ static int sdhci_msm_probe(struct platform_device *pdev)
+ 	ret = devm_request_threaded_irq(&pdev->dev, msm_host->pwr_irq, NULL,
+ 					sdhci_msm_pwr_irq, IRQF_ONESHOT,
+ 					dev_name(&pdev->dev), host);
+-	if (ret) {
+-		dev_err(&pdev->dev, "Request IRQ failed (%d)\n", ret);
++	if (ret)
+ 		goto clk_disable;
+-	}
+ 
+ 	msm_host->mmc->caps |= MMC_CAP_WAIT_WHILE_BUSY | MMC_CAP_NEED_RSP_BUSY;
+ 
+diff --git a/drivers/mmc/host/sh_mmcif.c b/drivers/mmc/host/sh_mmcif.c
+index 9831956de1c8..7706d01b149e 100644
+--- a/drivers/mmc/host/sh_mmcif.c
++++ b/drivers/mmc/host/sh_mmcif.c
+@@ -1505,18 +1505,14 @@ static int sh_mmcif_probe(struct platform_device *pdev)
+ 	name = irq[1] < 0 ? dev_name(dev) : "sh_mmc:error";
+ 	ret = devm_request_threaded_irq(dev, irq[0], sh_mmcif_intr,
+ 					sh_mmcif_irqt, 0, name, host);
+-	if (ret) {
+-		dev_err(dev, "request_irq error (%s)\n", name);
++	if (ret)
+ 		goto err_clk;
+-	}
+ 	if (irq[1] >= 0) {
+ 		ret = devm_request_threaded_irq(dev, irq[1],
+ 						sh_mmcif_intr, sh_mmcif_irqt,
+ 						0, "sh_mmc:int", host);
+-		if (ret) {
+-			dev_err(dev, "request_irq error (sh_mmc:int)\n");
++		if (ret)
+ 			goto err_clk;
+-		}
+ 	}
+ 
+ 	mutex_init(&host->thread_lock);
+-- 
+2.34.1
 
-This is unnecessary/wrong, as desc->num_clks validates the index in
-qcom_cc_clk_hw_get().
-
-Without this, we'd get an -EINVAL, with this we get a silent nullptr
-
-Konrad
