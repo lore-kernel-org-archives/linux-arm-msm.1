@@ -1,86 +1,86 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8895C3DDAE3
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 07:29:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68EE93BB672
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 07:29:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784273357; cv=none; b=Zc2R/6Dgmuw7lqhMlo1S65Mr4Jr4ZXPbPXD5xRiWjVO+chRur6DttFm0q1ND4OOslRPLqE2mY34yLEMmEg7x/OZZBzD0WkJMTDYGNBC25abaG2eh04NPlO10DaL5vU7LhQZ6fhsvaxx5V0VHnbsmbIScYnhIZHBYUUGIXuVyy9I=
+	t=1784273359; cv=none; b=p3GCKv+8143fGydvGFkdVzulQeo7vsT3hljgfiBE71OAQJHMvrvrB3IdTdgDBRPEB/fhX2MJNV9x+eouHVjy/Pf5rJoGpjU9OSMzEkjPhiIYQpJJKtYBA64oeSwhkNUvuwB9d6jq8lU9fWd3OOJCIZn1iuvEuKIjUdTdG0sN0ws=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784273357; c=relaxed/simple;
-	bh=6OpzcuW/vXrBd8EEvVAzR0F/OfZ6uSTpUvNzXmgWi9w=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=EHNe6U+k4TU+9I+oXbIAswQHj4z2spabIkfgI2dum7PM4j4cOxVSQYsKmy2rMGiNyG8UWjza0OCCw2zMzWtqihBZ7uCV4NbtsRmJyQrxyguHLJ5Shaa26pMsBTAWGsOZhNjT4vyAckJIlgMRuf6doCJBUMXJt9/NqI93T2du+Z8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fYBxCXtY; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gpFnaHDW; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1784273359; c=relaxed/simple;
+	bh=/GptjR6O6rD4eEhdtk1yscF+FxhFlo1Lmp4HIWbr7w0=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Lk2CccDMdxLHzhwCI3rQkYgGb6UZsfmD+KmsgIq7/mEp54mdsaEWpIJATfYUiIEl+heTphkEMldL/hKzuapDBHWU4WoZbMB9FpNmqn/Q2qAQBnHviW2XQAHhRAARK3kfnbw2M7PKS8xaOfGm8YyjuhRfT2B98fxhnk6RMIn4FZ0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kVA0qUrm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Z/sx7RCy; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fYBxCXtY";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gpFnaHDW"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kVA0qUrm";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Z/sx7RCy"
 Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66H6cP4N1018913
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 07:29:06 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66H6cb0K1019128
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 07:29:05 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	68gUZ7LqB0jU7pBbWZu2QhSNvnpL1hcdM6zSdwGD5Nw=; b=fYBxCXtYZkeNo41o
-	uyRZpBnHJ5TxP2jE/HAnBX9qM1DId9iHDawfJvmwAgOE4fog+2uXQaQLYTjU4e/R
-	LOauO3m9jfmsO3LgRcgew3DWHKKM9vU8mciy9EtuWWNkj+JkXQmZ4/yfcvHGGvuk
-	vgZ7kEq9+IOQ+fntuzl7Tk+l7PKB4Mqd/nyQY0NQHwRvohLC3tSkQRAwQGQ3uAOl
-	w/a9ODbuH3zRfUl57NfKgLNd5iM3BoWHw/z3Q1x2SP/X7GkgUDTIvNVdjUnjMEDQ
-	/P3wq1NPGctotM+9qbfhJ0BQZAfLZebKkbO4S7vRcdJPBPHbgC0Kw35qXHdRqn38
-	ezh8Zw==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fff810761-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=rlxXAgc4Ja+lYYqhl6LIDR
+	odEiocqjvsejHeQSWPPpM=; b=kVA0qUrmxYBNU+yZBspCgVam8F/M22X7cbhRFc
+	7K4Bgmp2Ptnv575k5zYdoV6TRwWdJS1GTvsZgUN/zFYS6kIoE6rfSHZD/ozGEWZn
+	GdZQS/turDp1vS4NiYPoiVsI0qFguFyvE6PwwSr5WZPCvbM8erdioqn7buwAtYVE
+	nBXN+bZizqmIIHZwVexICIpwhh2187E4OjF2q3X2BaXjaE/+d/v9l3L9lG5CqhCi
+	r3kgMw620aAlaXaSpZ7yhp5PDAc/nAdhENgl6slZ6VEf9/MwsBgep9GcQEMVnoRA
+	o3Y0OuvReTQeEJGNPHDq75wCx8WwuNgBcaxGEH8Xse5sP1+A==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fff81075w-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 07:29:06 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2cae455cf6dso104287235ad.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 00:29:06 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 07:29:05 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cc86a9ef97so162439525ad.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 00:29:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784273345; x=1784878145; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=68gUZ7LqB0jU7pBbWZu2QhSNvnpL1hcdM6zSdwGD5Nw=;
-        b=gpFnaHDW0fludPs3VD5Dq13X1KzIY+xLfdG6k42tJyVYryqCn9C8wx2NL9mipWcVeH
-         Zath6vdi2pBLq9C/Fz6gACKKWI/3ReQV2lyDNScn7KxZgLZiV4ATGBbXCVYRIwEeeaY5
-         8t4SeG4ih8NlG/ytw1KGQ2LHDrtq3kReCi5DqHb+wl79l/gVADJhJ+pd+PxZGaaNwtBS
-         pQvVkyLI1MA3W7NCBDxQgdEQ+kr4M4HFwn1XwxJuwNwCmtBePrmWiM22m9jiNLzYPusI
-         Xe3j8ySwh6NebdcozLfDf9gjiNWGMyd55EEYI8SQNt6qpdaaAjLBin90svjarHKw468h
-         Ym+w==
+        d=oss.qualcomm.com; s=google; t=1784273344; x=1784878144; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=rlxXAgc4Ja+lYYqhl6LIDRodEiocqjvsejHeQSWPPpM=;
+        b=Z/sx7RCyRjByFXJAcFK2ELwK5R9KBkhc0JdwtlnOxwCwXWPZkrZNxhHFgHgst1vsds
+         +yinOOWx1OLcDYcfjgojQLpS6rHe+J7pLoeDCwadReD8ZDaNNCTIrG0PE9pHBtjmvmRG
+         GXtHa1npD4A/YK38qhfTFJim01qyjrQ1yUKQsvy0PzKWcfZI/qLC1hFZaD52Y6ANy+A+
+         TNSLmBMLE4DM04Rn09tYUH1nlnTphxpf6+a9WB1M7meeHluzgEcBXicP92iNUp3bgz3V
+         Pj49hA1QFdPyt4ZWIJNG7LL52RGzBM3cmOkI3oEwlQEF/19T2FH2Uwelh9mBqVoRenJy
+         YUWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784273345; x=1784878145;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=68gUZ7LqB0jU7pBbWZu2QhSNvnpL1hcdM6zSdwGD5Nw=;
-        b=jIG/eNh40JoCI2DF9kCRRTSZwlOsi+RmbAbylwx4RPqGwN/sUlyvb+uT7ayMjBBfRt
-         Skpa/qw0vEHNULmCtAqSmjJvXRpn2oD7zf1YILRCTkDSn/Bo87lb5H3jC7KSGKBOAsbn
-         77wh3h9gXesKtThf7jHa6O8MsxMeOS2Ddyv2LZBWp09SptBWFESWKOn+RezO9Cc10lz3
-         JP/1CwOtquBgUC+60tyZMGtKQkIiB1cBdwB6wrgnm65Dh0TxhqdIhiA5FX7ZQjefthEc
-         t0sjqyJpwEXro1ssYFyxrzEWxebvqmz3NHddcLFD/cg2oKLhcB/+oj9O+T0wvaBV6pyC
-         9R0A==
-X-Gm-Message-State: AOJu0YxfYRP00qZVfV2pWgk2QNNZljwzFRPv9ywNhXgORVEHQ6uwb6Q+
-	kWBa2eq4PcCX0wfX95T37tp34hLIuD9L+N6DMNz1yEZAxcHI3M+fISQcbmi6ZuNmWZDKqAVz+Cg
-	QDLDYwjEJv/hv5NyZGwGzDYS5jNnixo2HFgOwXoP9uTqAu81fMXS+gZePDQuAmW1SGTwA
-X-Gm-Gg: AfdE7cmZy3VUVUKeCofeyQ6ihjjzHu3/dE077qDDcA5Dz3OL8w6UMW961Kl1z0h/D5v
-	jbeP29jOuM3vRj36eknopCC6G5JJvTrYfW/5bN96wIjxIxAXZro0ocrckTzj0Q3IBEjmpfGY9Ua
-	UfEBHFbaqx7LtHUujF5Xk1UJhFJ3abfn0lBBUdrsmTyUcN+MCUyeeiLvtvUzlmg00JwIjlULcjl
-	fAITENTPLiZ4a7ETUTQbL6gz6z9Xcw/9sKyXTGaKQKbh1Eey2hpeM1xKD2zAI/ul4by+KM/Gdwi
-	Tj3mar/uEIpRc5qpr1riY5+4M5xI2YGPnDrP12CkXlz7fC96g9/3cBG8SweQS64OC2TjEi94Q6S
-	YthncXk/4vBKlPHj3pJ9ysaZd5GaCJYEGv7FgJAY25r/DZYhLxASA
-X-Received: by 2002:a17:903:40cc:b0:2ca:e5c:7fba with SMTP id d9443c01a7336-2cf349f210fmr16115805ad.39.1784273345377;
-        Fri, 17 Jul 2026 00:29:05 -0700 (PDT)
-X-Received: by 2002:a17:903:40cc:b0:2ca:e5c:7fba with SMTP id d9443c01a7336-2cf349f210fmr16115575ad.39.1784273344902;
-        Fri, 17 Jul 2026 00:29:04 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1784273344; x=1784878144;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=rlxXAgc4Ja+lYYqhl6LIDRodEiocqjvsejHeQSWPPpM=;
+        b=op7SbFUV58Gr6M056cGHvl5Q9R1L+iUsEB1QwA5mdAKgpNkroIRZxvbf4naxMtUD28
+         hpMZAHvTo07+Hea6UCseIePC89UPPVRUJGOlmGP7XqpFxJABS7CkQkNJnSJo0WXC+mCf
+         VAjemXoxcUSNJosY7LGtCOWEvbBdjgxLEGL6PFSwy2o0J4zrIMcd6eJ+AB0f0jSrlLxB
+         7ofeZFC7Enhvb2Ie7yU0QWbmnkusc/DTaNtISZH9TQtPp/RtkJhwY3bek3ttbhsEyJJ8
+         gpG4PzEcR8oX2WlWV97C1dmzWLGFIbwrALQKVGo7Hpv8Og8WEFTecQa+Tl+PnNd9XoG/
+         UhFw==
+X-Gm-Message-State: AOJu0YyXcWPRQ5k0RfRXevgtJoQLPI+d+9osApisS3OGQneqUH9S4fAX
+	MLbhyqZ39QzziwbuodueRod9qBKuXgX0Swm3zpnUMOSBR80Onl7PiWqY7MkjhznP+NmppqZGeVz
+	5n0iQrxvnAdXP5IyUEDSMTxeNtZtJWZa0vcrPrypydNRbWRpd41W9Eiv/VbKog5cFu++UQxIwTp
+	2O6XgUQw==
+X-Gm-Gg: AfdE7cm72L7aFEFQwtRtkPLW+04TDRO/sJW8M9YgzH/LcDka/mgpCO+ftKxu7B3WMsk
+	XhXbOXiXmVB1H3u8/tqRa7M3QoEiCF3u35Inij10o8EHzbPEz+Y2C7ogJwisRjqKmDKj0f3ak3C
+	PGKb6AMpAwg4LIoHkMSawnygQJY/7YcF4ACT0vagVD1dS3M62cRc89A8hZ+ghnhp0QRpadX63D7
+	p4MjlHVQCm2XWI7AcvAWe/TzuFxO8Itl1YEEwLMhC1kqsLf7b3HJcEMTnlzMh5fULq2r7q+hghC
+	GTRCleJqKhl7PX0NAeflSgG/f3aPHnirhwogf5fTt0wYGevidEMyvrVVrcLLuo0ADqEuOF8Ym5w
+	cOFbs8O+S+cxY8+t0G86M/af8Z3qU5aGz0Z7O6U4vFTzBdq3+bvKO
+X-Received: by 2002:a17:902:da8d:b0:2ca:10c6:f69b with SMTP id d9443c01a7336-2cf3482135fmr16252575ad.5.1784273343818;
+        Fri, 17 Jul 2026 00:29:03 -0700 (PDT)
+X-Received: by 2002:a17:902:da8d:b0:2ca:10c6:f69b with SMTP id d9443c01a7336-2cf3482135fmr16252035ad.5.1784273342962;
+        Fri, 17 Jul 2026 00:29:02 -0700 (PDT)
 Received: from hu-fenglinw-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf346da071sm5724065ad.47.2026.07.17.00.29.03
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf346da071sm5724065ad.47.2026.07.17.00.29.01
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Jul 2026 00:29:04 -0700 (PDT)
+        Fri, 17 Jul 2026 00:29:02 -0700 (PDT)
 From: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
-Date: Fri, 17 Jul 2026 00:28:59 -0700
-Subject: [PATCH v4 1/3] dt-bindings: input: Add Qualcomm SPMI PMIC haptics
+Subject: [PATCH v4 0/3] input: misc: Add an initial driver for haptics
+ inside Qcom PMIH010x PMIC
+Date: Fri, 17 Jul 2026 00:28:58 -0700
+Message-Id: <20260717-qcom-spmi-haptics-v4-0-b0fe0ed30849@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,9 +89,11 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260717-qcom-spmi-haptics-v4-1-b0fe0ed30849@oss.qualcomm.com>
-References: <20260717-qcom-spmi-haptics-v4-0-b0fe0ed30849@oss.qualcomm.com>
-In-Reply-To: <20260717-qcom-spmi-haptics-v4-0-b0fe0ed30849@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIALvZWWoC/33NTQ6CMBAF4KuQri1pp00RV97DuKBlkEnkr0WiI
+ dzdwkYX6GaSN3nzzcwCesLATsnMPE4UqGtj0IeEubpob8ipjJmBACOMNHxwXcND3xCvi34kF7h
+ yLs8ws6AAWbzrPVb03MzLNeaawtj51/Zikuv2nzZJLngJGjVAicbqcxdCOjyKe6w2aRxsRSf4g
+ kDvQRAhm0t5RCMqheoHpD5QJtUepCLkciWtzZzNdbUDLcvyBiM0bHRLAQAA
+X-Change-ID: 20260616-qcom-spmi-haptics-3cc97e7b232e
 To: linux-arm-msm@vger.kernel.org, Dmitry Torokhov <dmitry.torokhov@gmail.com>,
         Rob Herring <robh@kernel.org>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
@@ -106,32 +108,32 @@ Cc: David Collins <david.collins@oss.qualcomm.com>,
         linux-kernel@vger.kernel.org, Fenglin Wu <fenglin.wu@oss.qualcomm.com>,
         Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 X-Mailer: b4 0.16-dev-17187
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784273341; l=6327;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784273341; l=5721;
  i=fenglin.wu@oss.qualcomm.com; s=20260324; h=from:subject:message-id;
- bh=6OpzcuW/vXrBd8EEvVAzR0F/OfZ6uSTpUvNzXmgWi9w=;
- b=IJOaTBrSz2TSiz/oZ08xrnlS4x34XLA3wVRdhBIROx29351X1ibEmuT4KXyiABnMl8kxVS4Ls
- FNUTqP4X90EDl4gEdD7BlQrKcCv0ZxqbACv2yYCN+0S1yPCsKaHzPzr
+ bh=/GptjR6O6rD4eEhdtk1yscF+FxhFlo1Lmp4HIWbr7w0=;
+ b=yaG1vd8C5a9GL0iuraqsDtFOnt7o75sG0Pc7mFNaJq4IPg/5jBjksITjNjjf1Xn/rfQ7nqFBW
+ uJ8YeYZFBMSDyGaCi+ulGG3UZkJIKzPV/Zt6CiQ9QApKsGEwoYfdUaL
 X-Developer-Key: i=fenglin.wu@oss.qualcomm.com; a=ed25519;
  pk=hJdt3E7o54lql+miD2GaxwF74cDyhgNwMbmFOZ46bRU=
-X-Authority-Analysis: v=2.4 cv=RbqgzVtv c=1 sm=1 tr=0 ts=6a59d9c2 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+X-Authority-Analysis: v=2.4 cv=RbqgzVtv c=1 sm=1 tr=0 ts=6a59d9c1 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=bI6yuv9Qsz7HNVLwNVgA:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22 a=sptkURWiP4Gy88Gu7hUp:22
-X-Proofpoint-GUID: V-Z1K4GnPpz-zxMBm5knyesxclLCbgDx
-X-Proofpoint-ORIG-GUID: V-Z1K4GnPpz-zxMBm5knyesxclLCbgDx
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDA3MyBTYWx0ZWRfX/VBfjpG3+0u7
- /KK5S59HWQi/Rpk/Sai4TtYjSZHmIXKXZWENPjjczjIiDdEkpYiTxI5FsiJY3uM/dARoPpy2zzD
- XWWxbNxvpsKlzWBdVWaTCJncw+T/gK0WDch/WPXaCykQtg4xu8BOWbxVDkf+qfsPqKKx/l36zMu
- YOyjt2SGqauTBmOvjds+Q/EIef7yIEVXw3HCshXZ9Xrhunf1K9meC1ImNWG1x8oLgxv1/hCGavE
- tupDKYXeufKGUVstW9dG0f45ea5iKRqScMBS0tnGwChMT/SQZfhLAyGN5IzCBcUd/B9kWCxHeZi
- vH1bP37JXAsvbUYLJ8fBZ339pZDmpodFhrQehVJpjUnHjbPwAZdRpWCOtQt8e5TJg0TaAZMSyZn
- bZHDBvhwzFwwzuDhlSaZ7iPfUIdYDJQv6ifc1IhGRta5p5+DJCtjSyhHVP6ptgNW5GNz5NqIJgS
- a0rmF2vAdLC/piO5YJg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDA3MyBTYWx0ZWRfX1tv7B0lmFz7R
- 7ed7NApox8Y7zkxB+rSSLUgbR29xEkmouipcb5whqjVCx2kDIKU04d48BXNEy1g7wbXDBIAyWds
- JdV7cyir6nTWfn8xXq0M1Rp+beXFnUk=
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=AP9v1xrwSQ01pfBQjooA:9 a=QEXdDO2ut3YA:10
+ a=1OuFwYUASf3TG4hYMiVC:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-GUID: SmWWlW_509A4cfHu5AonCqZwOhAwIarM
+X-Proofpoint-ORIG-GUID: SmWWlW_509A4cfHu5AonCqZwOhAwIarM
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDA3MyBTYWx0ZWRfX1K6xDK08d0a2
+ aBvQQ+6yDD5giMV7OE2L8CXV0xF6NAyqyIsueV9VgpDNIB4GCW1K+9bBpTMjxyenz9OoWjYb51w
+ YyMAJDCm1BeMZP0Nxd3dVNP7sdZ7+foi3gqQeRN0rBUfDbn60+JMVUnjAqGoxk+wcmG260DJJ9f
+ nZATiuBRpBvnx1kkvePbFSTUqmU2z13OnH4GLsJPq+HXh1aOzzi25Zuy1Xtc1dMV5Afx0BAMDjv
+ 3D+cI2U0s17CozmEJft9zZc4QW9/nOAgdN8sogUceyE8Uz6SF4LwghqNEvY4rzuBjksXDsINfia
+ 6I22/2APLRBUUhvs3eIgwolHksqkMgwFicipmZNHSsrKw7ke7c8kgfVetTRy1yK+Jpp8Xb16g5u
+ AVUans8jGdnzxrR1Gxy33+QKLOhwjcBufUapXblWJqC35+pKSzEDViOPJjizq3QpfqH9wOlSB+L
+ LravjLbTSylIVasPg6g==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDA3MyBTYWx0ZWRfX64wFzNKtVksh
+ XaawXUbXRd2TuccCOXSiFWYEYstRodEhA7gAofhQxhyhelPZzka4UdP7Ni26K2B9VWfQoJBw78Q
+ k+NGwevUi4iRrBHdZeQvIKKLe5X5vuE=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-17_02,2026-07-15_02,2025-10-01_01
@@ -142,159 +144,120 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
  definitions=main-2607170073
 
-Add binding document for the haptics module inside Qualcomm PMIC
-PMIH0108.
+Dependencies:
+ - [patch 2/3] depends on [patch 1/3] and they should be applied together
 
-Assisted-by: Claude:claude-4-8-opus
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Qualcomm PMIH0108 PMIC has a haptics module inside and it could drive
+a LRA actuator with several play modes, including: DIRECT_PLAY, FIFO,
+PAT_MEM, SWR, etc. Add an initial driver to support two of the play
+modes using the input force-feedback framework:
+
+-- FF_CONSTANT effect for DIRECT_PLAY mode which drives sinusoidual
+  waveforms with fixed period and amplitude, which would generate
+  a constant vibration effect on the LRA actuator.
+
+-- FF_PERIODIC effect with FF_CUSTOM for FIFO streaming mode, which
+  can play an arbitrary waveform composed of a sequence of 8-bit
+  samples at a configurable play rate.
+
+Also, add the device node in the existing pmih0108 dtsi files, and enble
+the haptics device for several boards by updating the vmax and
+lra-period sttings according to the LRA components that mounted on each
+of them.
+
 Signed-off-by: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
 ---
- .../bindings/input/qcom,spmi-haptics.yaml          | 136 +++++++++++++++++++++
- 1 file changed, 136 insertions(+)
+Changes in v4:
+Fixed Sashiko AI review comments in the driver:
+- In haptics_start_fifo(), remove the goto and do the clear in the error
+  paths directly, also add a comment to explain that disabling the IRQ
+  synchronously won't cause a deadlock.
+- When data refilling failed in IRQ handler, stop the play and disable
+  the IRQ to avoid the potential IRQ storming issue
+- in play_work(), check if the effect_id in the request is the one which
+  under playing before stopping the play.
+- Link to v3: https://patch.msgid.link/20260713-qcom-spmi-haptics-v3-0-c931bb7cb94f@oss.qualcomm.com
 
-diff --git a/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml b/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml
-new file mode 100644
-index 000000000000..b1a69e9886ee
---- /dev/null
-+++ b/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml
-@@ -0,0 +1,136 @@
-+# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/input/qcom,spmi-haptics.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Haptics device inside Qualcomm Technologies, Inc. PMIC
-+
-+maintainers:
-+  - Fenglin Wu <fenglin.wu@oss.qualcomm.com>
-+
-+description: |
-+  Certain Qualcomm PMICs integrate a haptics module, such as the HAP530_HV haptics
-+  module in the PMIH0108 PMIC, which drives an LRA (Linear Resonant Actuator) with
-+  an output voltage up to 10 V. Several play modes are supported in HAP530_HV:
-+
-+    DIRECT_PLAY: The hardware outputs sinusoidal waveforms whose period is
-+      defined by qcom,lra-period-us and whose peak voltage is defined by
-+      qcom,vmax-microvolt. The driving amplitude can be scaled in the range
-+      [0, 255] via a single register byte.  Hardware-based LRA auto-resonance
-+      tracking is enabled by default in this mode, allowing the haptics engine
-+      to follow the actual resonant frequency of the LRA and update the driving
-+      period accordingly to achieve stronger vibration magnitude.
-+
-+    FIFO: The hardware can play an arbitrary waveform composed of a sequence
-+      of 8-bit samples at a configurable play rate.  Samples are pre-filled
-+      into the internal FIFO memory of the haptics module and continuously
-+      replenished via the FIFO-empty IRQ until all samples have been played.
-+      An 8K-byte FIFO memory bank is available in the HAP530_HV haptics module,
-+      shared between the FIFO and PAT_MEM play modes. The memory partition
-+      between the two modes is configurable via registers, and FIFO mode always
-+      uses the 1st partition starting from offset 0.
-+
-+    PAT_MEM: This mode is very similar to FIFO streaming mode but without the
-+      data refilling capability. It is designed mainly for short, latency-critical
-+      vibrations. The memory space for PAT_MEM mode must be reserved for dedicated
-+      usage, and the waveform data should be preloaded and remain unchanged
-+      thereafter. The haptics module can play the waveform data from the memory
-+      region specified by the PAT_MEM play start address and length registers.
-+
-+    In either FIFO mode or PAT_MEM mode, the following play rates are supported:
-+      -- 0(T_LRA): each FIFO byte drives one full sinusoidal cycle with the
-+        period defined in qcom,lra-period-us.
-+      -- 1/2/3(T_LRA_DIV_2/4/8): each FIFO byte drives a half/quarter/eighth
-+        sinusoidal cycle with the period defined in qcom,lra-period-us.
-+      -- 4/5/6(T_LRA_X_2/4/8): each FIFO byte drives 2/4/8 sinusoidal cycles
-+        with the period defined in qcom,lra-period-us.
-+      -- 8/9/10/11/12/13(8KHz/16KHz/24KHz/32KHz/44.1KHz/48KHz): the FIFO
-+        data is treated as PCM samples and drives the output with an
-+        arbitrarily shaped waveform.  This mode is typically used to define
-+        custom driving waveforms for specific vibration effects such as fast
-+        attack, crisp brake, etc.
-+
-+    The drive voltage in FIFO or PAT_MEM mode can exceed the value defined in
-+    qcom,vmax-microvolt to achieve a special vibration effect, but the waveform
-+    must be short enough to prevent the LRA from being damaged by operating at
-+    an overvoltage.
-+
-+    Also, hardware-based LRA auto-resonance tracking is normally disabled in
-+    FIFO or PAT_MEM mode, as these modes are intended to drive arbitrary
-+    waveforms that may not follow the resonant frequency; autonomous hardware
-+    resonance correction would interfere with the intended output.
-+
-+properties:
-+  compatible:
-+    items:
-+      - const: qcom,pmih0108-haptics
-+      - const: qcom,spmi-haptics
-+
-+  reg:
-+    items:
-+      - description: HAP_CFG module base address
-+      - description: HAP_PTN module base address
-+
-+  reg-names:
-+    items:
-+      - const: cfg
-+      - const: ptn
-+
-+  interrupts:
-+    maxItems: 1
-+
-+  interrupt-names:
-+    items:
-+      - const: fifo-empty
-+
-+  qcom,vmax-microvolt:
-+    description:
-+      Maximum allowed output driving voltage in microvolts, must be a multiple
-+      of 50,000 uV. This is the peak driving voltage in DIRECT_PLAY mode,
-+      which outputs sinusoidal waveforms. The value should be equal to the
-+      square root of 2 times the Vrms voltage of the LRA.
-+    minimum: 50000
-+    maximum: 10000000
-+    multipleOf: 50000
-+
-+  qcom,lra-period-us:
-+    description:
-+      LRA actuator initial resonance period in microseconds
-+      (1,000,000 / resonant_freq_hz).  Used to configure T_LRA-based play
-+      rates and the auto-resonance zero-crossing window. It could be also used
-+      as the initial period if the LRA wants to be driven off resonance.
-+    minimum: 5
-+    maximum: 20475
-+    multipleOf: 5
-+
-+required:
-+  - compatible
-+  - reg
-+  - reg-names
-+  - interrupts
-+  - interrupt-names
-+  - qcom,vmax-microvolt
-+  - qcom,lra-period-us
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/interrupt-controller/irq.h>
-+
-+    pmic {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        haptics@f000 {
-+            compatible = "qcom,pmih0108-haptics", "qcom,spmi-haptics";
-+            reg = <0xf000>, <0xf100>;
-+            reg-names = "cfg", "ptn";
-+            interrupts = <0x7 0xf0 0x1 IRQ_TYPE_EDGE_RISING>;
-+            interrupt-names = "fifo-empty";
-+
-+            qcom,vmax-microvolt = <1300000>;
-+            qcom,lra-period-us = <5880>;
-+        };
-+    };
+Also, add trailers in the binding changes.
 
--- 
-2.43.0
+Changes in v3:
+
+In the binding:
+- Removed the ref for qcom,vmax-microvolt as the property with standard
+  unit already has a ref in dtschema
+- Added 'qcom,pmih0108-haptics' as a device-specific compatible
+
+In the driver, fixed Sashiko AI review comments with below changes:
+- Added a list to queue and serialize all of the request, which helps to
+  avoid the races between playback(), which is protected by evdev's event_lock,
+  and play_work(), which is protected by play_lock.
+- Changed to use guard(mutex) or scoped_guard(mutex, ) for cleaner mutex logic
+  usages, and update protection section to prevent race conditions.
+- Added runtime pm control in haptics_stop() function, use it as an unified interface
+  under the guard of 'play_lock' in play_work()/erase()/remove()/suspend(),
+  to ensure the runtime pm control correctness in race conditions.
+- Removed unnecessary stop play sequence in fifo_empty_irq() as the HW would
+  automatically stop after the FIFO samples are played out.
+- Added a common interface haptics_clear_effect() to clear the FIFO data with gaurd
+  of 'fifo_lock', and use it before upload() and in erase() to prevent race
+  condition.
+- used __free() for safe memory cleanup
+- Checked play_rate against negative value when loading FF_PERIOD effect
+- Limited the custom_data length to 48K prevent potential OOM
+
+- Link to v2: https://patch.msgid.link/20260624-qcom-spmi-haptics-v2-0-b9118e60f3e3@oss.qualcomm.com
+
+Changes in v2:
+
+Dropped dtsi change and I will resend them after the driver and binding changes get accepted.
+
+Updated haptics binding and addressed review comments from Krzysztof and Konrad:
+- Extended the description to clarify the 'PAT_MEM' mode (not yet supported in the driver)
+  by comparing it with the 'FIFO' mode.
+- Updated the compatible string to 'qcom,spmi-haptics' to match the file name and removed
+  the PMIC wildcard.
+- Simplified register names to 'cfg' and 'ptn'.
+- Corrected the unit naming for the 'qcom,vmax-microvolt' property.
+- Added an additional clarification for the 'qcom,lra-period-us' property.
+
+Updated the driver to address review comments from Konrad and Julian:
+- In haptics_write_fifo_chunk(), separated variable declaration and assignment, and added
+  comments explaining the 4-byte and 1-byte FIFO writes.
+- Replaced manual 'x * n / d' calculations with mult_frac().
+- Switched to disable_irq() to prevent late IRQs after device removal.
+- Replaced property reads with device_property_read_u32().
+- Remove the 'INPUT' dependency in Kconfig
+
+Updated the driver to address feedback from Sashiko AI:
+- Guarded pm_runtime_resume()/suspend() with 'pm_ref_held' to prevent runtime PM reference leaks.
+- Replaced spinlock with a mutex to protect FIFO data during playback and avoid calling
+  sleepable regmap APIs under spinlock.
+- Adjusted suspend/remove() sequence to stop playback before canceling work, and freed
+  FIFO buffers to prevent potential memory leaks.
+- In FF_PERIODIC handling, allocated 'fifo_data' before assigning data to ensure its
+  consistency with 'data_len'.
+- Registered the input device after enabling runtime PM.
+- Unify to use 'h->dev' pointer in probe()
+
+- Link to v1: https://patch.msgid.link/20260616-qcom-spmi-haptics-v1-0-d24e422de6b4@oss.qualcomm.com
+
+---
+Fenglin Wu (3):
+      dt-bindings: input: Add Qualcomm SPMI PMIC haptics
+      dt-bindings: mfd: qcom,spmi-pmic: Document haptics device
+      input: misc: Add Qualcomm SPMI PMIC haptics driver
+
+ .../bindings/input/qcom,spmi-haptics.yaml          |  136 +++
+ .../devicetree/bindings/mfd/qcom,spmi-pmic.yaml    |    4 +
+ drivers/input/misc/Kconfig                         |   11 +
+ drivers/input/misc/Makefile                        |    1 +
+ drivers/input/misc/qcom-spmi-haptics.c             | 1178 ++++++++++++++++++++
+ 5 files changed, 1330 insertions(+)
+---
+base-commit: 66725039f7090afe14c31bd259e2059a68f04023
+change-id: 20260616-qcom-spmi-haptics-3cc97e7b232e
+
+Best regards,
+--  
+Fenglin Wu <fenglin.wu@oss.qualcomm.com>
 
