@@ -1,171 +1,124 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from ixit.cz (ixit.cz [185.100.197.86])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C4BC3A4267
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 20:49:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E7B02F6560;
+	Fri, 17 Jul 2026 21:04:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.100.197.86
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784321363; cv=none; b=mVKTvt7+WSCikssCZkb+AOyjIYt52bNeYDOjh/T6gzaz4XuWmlwkEqV7uyn3Wy7/H/KIgjbbGhg9KoX0HFLPK18moSNqFJS4c4p5EtbPM6xEhiUs8P3AIgnCGOmGm+9irdSnEBoA9RTrMSwB1F9VY36YJw34fmAtt9GkbOA3alk=
+	t=1784322268; cv=none; b=nwP5qLyhGrVhzFZpn6aQyQPEU5C0swNEkAuFe7lQt0i+wrSxM41NsTU1gnzKr8w4WvZwAMunglr3zP/U5a9awym2yhJBlhMDuAE2jFdCJrS6g3GTYpr4BVJBug2MowCVSk3XC2MjAet4dv9VIoFblT2zL6PTdNw7g92wOCF9feY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784321363; c=relaxed/simple;
-	bh=5jusFGwn3Qm4zEYz94oUfi+TSGTz9Tl8cBbI4B7YQDk=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=gKIcDHEm2vJMmNy0Sg9TSk2DyYyxNKycIpD0TbAXOoMtDUScf/ZbSn9WSpCi3z8Mw8iuTRJgIJGIo+eGJHApoYkJ/Aqu3EEP/EDIbUqRVMTQ5y+5VWnJQ0XL/0Vr2FJCXE/OsieQzKW6U1hV3KoI5HHsvjKnFGFTVWlZ0drinSM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=RNkF/IDT; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=asMdpM8Z; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784322268; c=relaxed/simple;
+	bh=tcBsvlAtSpPMBcAz8qshWjkmRpMsGtUzftMHBrdxQF0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=YvA/cX0fkM0zKs0ebOVhLJTOZq0xWmSA4qWvMOvQFX/p1a10KggQSh8AmaAd8TdlqNF6C1sJEZ6+p4EJH7Oa1eeXl/Ky56ukpwMazQ1zmH3YB7sLXtMepWTYw3MSifmI048u4Fuc2FY7zkDa5pYnc0E5kTow93qY9j6gRUPcDDw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=lyf/zbfo; arc=none smtp.client-ip=185.100.197.86
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="RNkF/IDT";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="asMdpM8Z"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66HJtSA23901526
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 20:49:12 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=4y99CIHhO7Z
-	Ma20JkU9vG7q5Jf/ock0IskJ460LHt8I=; b=RNkF/IDTdB/8cjkd877OsA0iNJx
-	Ijt0TcpsLXlUxHxa8yrB64zdCa2GR47qr620wPjFoH/yaYVDx6FFqxWuZwQcYt0d
-	D1eNFOxcJaSGlY1dVrUfq2WiUXgU/C7kjw0z7OAPH3wjbEfXH3TJhepuGWuQ1i/7
-	4Dw0vG5RmKKJYvDz96ryZDtgV4Ot9AYNxV7+i0wc/gGYx6dSBEoQeXBDY2O9oWWX
-	V6laMNUaPDj0RzcwpDCNBeJaT1hjGnhc42agsPpJSIKAfvuqfFT5C1NDsyKFUkax
-	7QebA0diTVVW3XpY/1eRTrftgcOxArw4ZekoI+y9Q85wMDV9e6BOP3f3Qqg==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ffqvf90cn-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 20:49:12 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38e1118e4abso7197157a91.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 13:49:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784321352; x=1784926152; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=4y99CIHhO7ZMa20JkU9vG7q5Jf/ock0IskJ460LHt8I=;
-        b=asMdpM8ZZbMU4U5CwxE3DNcfUOPtr3ditw2W+5cD3Uw3pKlHbej700+xuuFnMipCdQ
-         C9zBTAm7QZJr0qc4tid1BpVOYhUCkrQW3UuC245Fvin8S9A9abW37vDA76jMraGUKYsG
-         b5N8V6rmjPhItYomiai4GWU35d81KAlQ6Gb3cp195Y75MXSOm0a6XsrypFseJCgvQfoj
-         cjmxrYiUTkHd2BXH52khAs59UxI4Vckm5bYFYTfA6tVUH85bbBXSRC9NjbspCFVSjMfs
-         +8a5qU9TYl6RL6Zm7CFh7Nku4pjHiKZWtk/TJtSQd0ftjikz1lfYwdPw0saX/neLjfn9
-         BzoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784321352; x=1784926152;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=4y99CIHhO7ZMa20JkU9vG7q5Jf/ock0IskJ460LHt8I=;
-        b=CVme7ST8kkXJTL/nJ1mEdIT57OUWFzTAijDVyp1yW1fkrqjAXeK2ptlziZ8Jt2FHrD
-         +pGwmPo7va2pQ+pYNSym9PUZ3gPq9VM1v2NPSxlhogE0osriOObM4GwA08w+BEo816Mv
-         R5PKjWzPsabSwJAI2N8rejgjevSzZEuLrmmt/FKUbsaOKMKyRaJSRW4npMFyiqE2BeRi
-         PjU4vLZM8hIPHtw4qN0YJoeclFWG44ZQZlecn+ATFyNh5ocZkPp14a/Mx6jE2bEPfTLM
-         TjzsVyFtjvM4gJl4S8PYhoqqKvpdaRFgP72bBjG5VFtzeJuPrh/UYvDMg+AcK3hbcVgb
-         /FXg==
-X-Gm-Message-State: AOJu0Ywtcq1ryHVpvIYNlsglt7SuarGDYFzn+pvU0NlQySpVOr5plVo5
-	Fhijul4c0mi275JeW8r8S5AtyVXOHqFUIQVJMBC08uHa481RXSUuLIAuj8k3iEdtGeeAwxVKtOy
-	O9uMMhUcrE3jFXXCGevAVZDRtlKm5QWCra2y9HtvsqThgaucm3nbHlxYt3Td1vkkzMZ39
-X-Gm-Gg: AfdE7cl7A4XfeF6KRNyTE7sal4QJvWfTZzaDtTx8TIqCg+0kd9mH2nubTkLLMVZ//aG
-	111pOWL0L+sUP944beo1lmZ9FHT+EB8YIKiNeuwSFik+4MOqfe+jHyZOnEsph6Q04bx+yDdF0QD
-	2PggTAJpnJ4aXRLvP89/9BoXMVrWvmrH/c2nt4bTds/1QI7WL/94y5pMfvQ+toN9NGMeBdGoajK
-	tzzGAwpIhIepISExnKB044dWKIxtkiOrNdPOBrv4llssk+moy0gEbjwegF6NdOBXcUJu6IQM7vb
-	kTCyIqSCVPb0JoKh3z6LnY3VhoVAuSUEgbDTKSa7v78hu55CFRe+RZgLj1buWW2LmuVDGCsA1QK
-	74bGftAwT8uv0ZYcq/gphMZLF8XZ3w6ZOed6a5I/2z7ba1g0=
-X-Received: by 2002:a17:90b:1844:b0:37f:9ce1:cdb2 with SMTP id 98e67ed59e1d1-38e4b55aeebmr4534804a91.32.1784321351948;
-        Fri, 17 Jul 2026 13:49:11 -0700 (PDT)
-X-Received: by 2002:a17:90b:1844:b0:37f:9ce1:cdb2 with SMTP id 98e67ed59e1d1-38e4b55aeebmr4534758a91.32.1784321351503;
-        Fri, 17 Jul 2026 13:49:11 -0700 (PDT)
-Received: from localhost (c-73-37-105-206.hsd1.or.comcast.net. [73.37.105.206])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38e3a11e36fsm3627781a91.17.2026.07.17.13.49.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Jul 2026 13:49:10 -0700 (PDT)
-From: Rob Clark <robin.clark@oss.qualcomm.com>
-To: dri-devel@lists.freedesktop.org
-Cc: linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        linux-kernel@vger.kernel.org (open list)
-Subject: [PATCH v6 14/16] drm/msm: Don't fallback to shared VM for VM_BIND
-Date: Fri, 17 Jul 2026 13:48:30 -0700
-Message-ID: <20260717204841.26120-15-robin.clark@oss.qualcomm.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260717204841.26120-1-robin.clark@oss.qualcomm.com>
-References: <20260717204841.26120-1-robin.clark@oss.qualcomm.com>
+	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="lyf/zbfo"
+Received: from [192.168.1.182] (ip-62-24-73-79.bb.vodafone.cz [62.24.73.79])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id 40CCE53403BB;
+	Fri, 17 Jul 2026 23:04:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1784322261;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=CQr7QuU6rNfGQjeOhr67iZ0L0PzYiU0lqA4hYXfpOiA=;
+	b=lyf/zbfo/D7AH7bWPFixM9GwauXS01iM2aUf3w+R47UIm7FNWNZKjU8XEBM14RfRLH9Lmx
+	dDoqRgJPGXdJsKjh4VlChW6mhwxPBHhfC9+2ATRPqLisUdD5PNVC47Ze1WpSyI1pCD0YdN
+	3AefX2CHKzp3KpPubz/aReCxYbdqrrE=
+Message-ID: <88a87da7-ffa0-4f34-aba8-e8aa995aa79f@ixit.cz>
+Date: Fri, 17 Jul 2026 23:04:20 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: _MNYut6yOTHCCkV16XhzuW_EABikuInP
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDIxNCBTYWx0ZWRfX5mF6cLC1UfKG
- FKGRWIkyvVOIm6yJBOFAnlYnAqxmv4rWih4uhoqB1v8PShoO2H218HWmWng9Jp0nLwbDdhJ/DkH
- w6JaOc3OS/cceIUmp2Y/Ia5C0fCgp9TJTqr7GB4FfC2sAGHJNdC6+aGsnxsIBiuFlyksvVDPL2R
- cPQZu7PPoWZXOGqB167KbwOQiVI36miRtN/EZpLQoInv2JXWH1L1QE1bdZW/vTKTxNYfbB1I84c
- JsU0F6zj3LAjKQiYjrvmOzTeH4gJz1nAlOiaL5HomB/wAnoeKJMAAULzqPhsXswPbNsQWUSuw+h
- gSrzO++6Ewe7NYOX5CiK77WeIH60sWAq5FAHgVWExeOhAoy89ZiptHvBvays2lpNJarjFtmh2jh
- pvDBJItws974Xy1V2Yydl+OPa7RU9sV+pOCAtIgnk7xVeo0/MFq++Mal7Zo4HYzhoIXv95QUdC3
- qusuelZGoSd4H83dXrw==
-X-Proofpoint-ORIG-GUID: _MNYut6yOTHCCkV16XhzuW_EABikuInP
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDIxNCBTYWx0ZWRfX4ZwojauRbzLy
- gxUtkfozpcKMsw2mIc05XoxLLdEzgZN8eWCk+YZAjcGapMNclJHsah+iRnJHdH8POdGwVPQujPR
- XdyXeO+oirM4tapXs+g07nLgnGuolHs=
-X-Authority-Analysis: v=2.4 cv=OPMXGyaB c=1 sm=1 tr=0 ts=6a5a9548 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=19Wyn7e3V/0aNffMjNCMQw==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
- a=isCY8TonHXl0-fnU9HAA:9 a=0bXxn9q0MV6snEgNplNhOjQmxlI=:19
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-17_06,2026-07-17_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 lowpriorityscore=0 clxscore=1015 priorityscore=1501
- malwarescore=0 bulkscore=0 suspectscore=0 adultscore=0 phishscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607170214
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/2] SM8450 QoL changes (dts)
+To: Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Esteban Urrutia <esteuwu@proton.me>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+References: <20260711-sm8450-qol-dts-v2-0-5eb2e86468c5@proton.me>
+ <178425854592.1084804.16144771627314071470.b4-ty@kernel.org>
+Content-Language: en-US
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <178425854592.1084804.16144771627314071470.b4-ty@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-If the user wants a userspace managed VM (EN_VM_BIND) don't silently
-fall back to shared VM.
+On 17/07/2026 05:23, Bjorn Andersson wrote:
+> 
+> On Sat, 11 Jul 2026 23:12:26 -0400, Esteban Urrutia wrote:
+>> These patches focus on correcting some details on the DTS for the SM8450
+>> SoC.
+>>
+>>
+> 
+> Applied, thanks!
+> 
+> [1/2] arm64: dts: qcom: sm8450: Remove unneeded reserved memory nodes
+>        commit: 0ed8261e0ebdac5f1f08dcbfc209efe36937ed2d
+> [2/2] arm64: dts: qcom: sm8450: Add mode-switch property to qmpphy
+>        commit: 8a2b4481b66c802af293e55eee07406971d5aa7b
+> 
+> Best regards,
 
-Signed-off-by: Rob Clark <robin.clark@oss.qualcomm.com>
----
- drivers/gpu/drm/msm/msm_drv.c | 3 ++-
- drivers/gpu/drm/msm/msm_gpu.c | 2 +-
- 2 files changed, 3 insertions(+), 2 deletions(-)
+I'm afraid there is v3 of this patchset :(
 
-diff --git a/drivers/gpu/drm/msm/msm_drv.c b/drivers/gpu/drm/msm/msm_drv.c
-index 52ff72d8e17a..73d99bde26f1 100644
---- a/drivers/gpu/drm/msm/msm_drv.c
-+++ b/drivers/gpu/drm/msm/msm_drv.c
-@@ -234,7 +234,8 @@ struct drm_gpuvm *msm_context_vm(struct drm_device *dev, struct msm_context *ctx
- 	if (!ctx->vm) {
- 		vm = msm_gpu_create_private_vm(
- 			priv->gpu, current, !ctx->userspace_managed_vm);
--		smp_store_release(&ctx->vm, vm);
-+		if (!IS_ERR_OR_NULL(vm))
-+			smp_store_release(&ctx->vm, vm);
- 	}
- 
- 	return ctx->vm;
-diff --git a/drivers/gpu/drm/msm/msm_gpu.c b/drivers/gpu/drm/msm/msm_gpu.c
-index 18ed00e5f143..a1c4adcac128 100644
---- a/drivers/gpu/drm/msm/msm_gpu.c
-+++ b/drivers/gpu/drm/msm/msm_gpu.c
-@@ -875,7 +875,7 @@ msm_gpu_create_private_vm(struct msm_gpu *gpu, struct task_struct *task,
- 			to_msm_vm(vm)->pid = get_pid(task_pid(task));
- 	}
- 
--	if (IS_ERR_OR_NULL(vm))
-+	if (IS_ERR_OR_NULL(vm) && kernel_managed)
- 		vm = drm_gpuvm_get(gpu->vm);
- 
- 	return vm;
--- 
-2.55.0
+https://lore.kernel.org/all/20260713-sm8450-qol-dispcc-v3-0-56fd05822270@proton.me/
 
+David
