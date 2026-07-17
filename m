@@ -1,585 +1,197 @@
-Received: from OS8PR02CU002.outbound.protection.outlook.com (mail-japanwestazon11012063.outbound.protection.outlook.com [40.107.75.63])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A944E2F5A29;
-	Fri, 17 Jul 2026 02:49:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.75.63
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784256546; cv=fail; b=OYwDvSO9oxzM+XgG84NqxRfOsTMhoBDurOsoBxO7nJ/ANdqQIuAunCtASIP+Lmsw4hVCqln4IHrkaRnW193EoFuqzXHhyA4FDHcET2y0B6KNOk2lXwKMH3PIcc5RwtV0NWcp1VrIrdnKfgd09us1H5PwRkqjqbWYyTgIPOBDWSY=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784256546; c=relaxed/simple;
-	bh=ROJBcd6Yy3rWWtZ1Rag2EkcVzFfXHmxS5s7SdzwTc4c=;
-	h=From:To:Cc:Subject:Date:Message-Id:Content-Type:MIME-Version; b=GIwyLB8WrzgZHo4ddS1/Uq1Kbo+/87hC8MDlGdt9wFWlIKssE3oLZ3GV6Wc3+34MX/fLeH+lQxD5q7LqRIvq7WE47lfAH/y5LYdbm62lAlEK0Ibo5BXzlhdytf5ntUcNX/C4dbBGHwjGaREv0SmEsHzy88zI7KH/B30+vPwzYkM=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vivo.com; spf=pass smtp.mailfrom=vivo.com; dkim=pass (2048-bit key) header.d=vivo.com header.i=@vivo.com header.b=ZLgcvov3; arc=fail smtp.client-ip=40.107.75.63
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vivo.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=vivo.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A782A35E95E
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 03:02:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784257352; cv=none; b=ZbdhFbEOsuvgeEin4U+msBFJGqjlqEJLF7f1wQRb4YL6rP/3/MZZDmuHUSFWi+V8P6Cxd9BMn9V96Nd46gbX543LQ3Y3CSS1FD/DkOtdXQEYc1eXuH3Yi7mwk72zdbpKrgGOP/Kvq6ijAJCS2RooNcK30efM/KEn6ha6c3H8JmA=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784257352; c=relaxed/simple;
+	bh=EVFdOQcBCUSWCKMzoYkRLwEZ54RS0XimYZS8kpTkYUQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=JH1tsDaHlYywh43iQdy2S+ZnZ9XUTNL4TP8WaYsMl1HCtMxb7z1VPm6ZJYBNYumUd4WKsamVMNzV0yNypiaKa4PaoyKuJhObT3EWnkt/+xezedGWtt1EMPWdifPeOkujGU9SxaEXk+8D5TJKed/G5bzKWffr5jHeeY9DhO1pQks=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=n+xO3t4q; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=irVNHFx8; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=vivo.com header.i=@vivo.com header.b="ZLgcvov3"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=hBefqG+FWXUwJmV92s1FT/J0xwPlT59S0mAvpWfElzHnui23E/eLvqbjnieCvgchZjs0osU9z7A/Pr7iwJAIJrXIp7ITPmBsArrpLkxWfFPmAUs5K6vYw9O3/A/yNcCFBaf2OUv8oQO7SzQaQEhxwbKyceXuF4I3QW435iD++ZFqb+7NDhtYg1WhfhMk1PzA5XbZo9kq0GVQo9DkrN59jLvthLNI7vle+bkWnxKX7wPYH0/rVq0cf2ILm4A9VhqJPZGFJk2CvVwnuJes6VxV7sb8MdDh7R1xVg3bHoJgomWR0XqNoghQgsvJEqJKi4UjlcpyrFMxoDl38LMjGkUTIw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zxBEU4MvMeVM6Vm0++C1uC5yOORNlw8Oh5q3SstrPL8=;
- b=CplcAE7md9iJiTKUUg5cnN1cLY2pHQfqsM9HO01OMzshLSmqfy/kMNxtJXkjdOscoEAbUsPPINdp4sH28cz2zwzrGljuH7h305BVaNBAHvrxosUNQNU9Yn99f8L63TsRUY0OidLLFSTXPF1mfa62HQVaBbEGanVFeb+JGf0izaufwRZ7Wknkgd4RrretSGjUVh+DF/SdkS/prXDHLW7ODa66bAc9rMNtW9X0bvX5xZ5I66X9wOKp+TeZsYxrGA4Me9PBnc+CX3XreWjNurtdxzSsuL5U2u9pGvH1cUs9ZOljdM9OEuy5aFKYN3bW91GrVLkrL7qFAm91Lbym0vCtzA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zxBEU4MvMeVM6Vm0++C1uC5yOORNlw8Oh5q3SstrPL8=;
- b=ZLgcvov3YcxuawdQQCnq8XlfNNMIylYnOtB52WMEkHMFcNPKsDTGkHUGvjWApTKRm0Po5zjnk0N+4UTL3PChS+aMptwPW+wnAmUuB/TTFJsT+TrIsEwFl3rGMtiK0aC7XHvJ2yZTVswB+HLWitDQjfghOKVXULaIDoELaSKPfZzPRRlOFf57FJlCDRglA9xhc7SSBeXG8CTJEELjm7a72Jyk3uPIrUDb3yFgr3YU8shwPPW2iEOxP3eiIqBGKtfdVKZM4gfWt6IVvn3iEfZo4NQnjkCZ1EYh5meOpccKu3cbDU8ZaQQU68WLqMGyXxVn+MZsXZKnKy6hHXFHdVVcNA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB5832.apcprd06.prod.outlook.com (2603:1096:101:c8::12)
- by TYNPR06MB8504.apcprd06.prod.outlook.com (2603:1096:405:3d6::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.10; Fri, 17 Jul
- 2026 02:48:58 +0000
-Received: from SEZPR06MB5832.apcprd06.prod.outlook.com
- ([fe80::f98:5e32:4ccb:d07b]) by SEZPR06MB5832.apcprd06.prod.outlook.com
- ([fe80::f98:5e32:4ccb:d07b%6]) with mapi id 15.21.0223.011; Fri, 17 Jul 2026
- 02:48:58 +0000
-From: Pan Chuang <panchuang@vivo.com>
-To: "Rafael J. Wysocki" <rafael@kernel.org>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>,
-	Lukasz Luba <lukasz.luba@arm.com>,
-	Miquel Raynal <miquel.raynal@bootlin.com>,
-	Markus Mayer <mmayer@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	zhanghongchen <zhanghongchen@loongson.cn>,
-	Yinbo Zhu <zhuyinbo@loongson.cn>,
-	Amit Kucheria <amitk@kernel.org>,
-	Thara Gopinath <thara.gopinath@gmail.com>,
-	=?UTF-8?q?Niklas=20S=C3=B6derlund?= <niklas.soderlund@ragnatech.se>,
-	Geert Uytterhoeven <geert+renesas@glider.be>,
-	Magnus Damm <magnus.damm@gmail.com>,
-	John Madieu <john.madieu.xa@bp.renesas.com>,
-	Heiko Stuebner <heiko@sntech.de>,
-	Bartlomiej Zolnierkiewicz <bzolnier@gmail.com>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Peter Griffin <peter.griffin@linaro.org>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Thierry Reding <thierry.reding@kernel.org>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Pan Chuang <panchuang@vivo.com>,
-	Laura Nao <laura.nao@collabora.com>,
-	Fei Shao <fshao@chromium.org>,
-	Chen-Yu Tsai <wenst@chromium.org>,
-	Jiapeng Chong <jiapeng.chong@linux.alibaba.com>,
-	Frank Wunderlich <frank-w@public-files.de>,
-	Mikko Perttunen <mperttunen@nvidia.com>,
-	Svyatoslav Ryhel <clamor95@gmail.com>,
-	linux-pm@vger.kernel.org (open list:THERMAL),
-	linux-kernel@vger.kernel.org (open list),
-	linux-arm-kernel@lists.infradead.org (moderated list:BROADCOM BCM7XXX ARM ARCHITECTURE),
-	imx@lists.linux.dev (open list:ARM/FREESCALE IMX / MXC ARM ARCHITECTURE),
-	linux-arm-msm@vger.kernel.org (open list:ARM/QUALCOMM MAILING LIST),
-	linux-renesas-soc@vger.kernel.org (open list:RENESAS R-CAR THERMAL DRIVERS),
-	linux-rockchip@lists.infradead.org (open list:ARM/Rockchip SoC support),
-	linux-samsung-soc@vger.kernel.org (open list:SAMSUNG THERMAL DRIVER),
-	linux-stm32@st-md-mailman.stormreply.com (moderated list:ARM/STM32 ARCHITECTURE),
-	linux-tegra@vger.kernel.org (open list:TEGRA ARCHITECTURE SUPPORT),
-	linux-mediatek@lists.infradead.org (moderated list:ARM/Mediatek SoC support:Keyword:mediatek)
-Cc: Niklas S?derlund <niklas.soderlund+renesas@ragnatech.se>
-Subject: [PATCH v2] thermal/drivers: Remove redundant error messages on IRQ request failure
-Date: Fri, 17 Jul 2026 10:47:10 +0800
-Message-Id: <20260717024733.374913-1-panchuang@vivo.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TPYP295CA0003.TWNP295.PROD.OUTLOOK.COM
- (2603:1096:7d0:9::14) To SEZPR06MB5832.apcprd06.prod.outlook.com
- (2603:1096:101:c8::12)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="n+xO3t4q";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="irVNHFx8"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66GNIHew4023154
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 03:02:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=okulbd00eydxfaiTL/nAM2B3
+	jvDdNW3YSh5leBM4+pc=; b=n+xO3t4qsPeC6rrx9GgP3CBI1bo01PCVS6kthSLo
+	DuC5FEWWpxyPMvgWVupXD+VuNS1B67YFuUsyQEvVBcgsGseLrkwipaDXPTfbLtCU
+	F946p6LxnHYx/KOYoqqyTBbjGju7onlVLXpC77oDjZzARIdAacepDRGvDnqnN/we
+	wOO03JnYf+v+kIPiX80AKrBz7/MiAeWw7zRX2kJELT84RWUj6RwU8WXQvGY7Oinc
+	Dedayg6y7R6a9rKOeiYyZst2EIHqI/Pt3Pd+t679Inh4DiVAZD9xFVGghvGFA+EA
+	FA3yJj5X4iIyakP2NbDCVNK5zC1tQAdFLzI9wk8fzGXiRg==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ff3u8hrph-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 03:02:27 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38e4758ab46so587305a91.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 20:02:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784257347; x=1784862147; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=okulbd00eydxfaiTL/nAM2B3jvDdNW3YSh5leBM4+pc=;
+        b=irVNHFx837qfAuyD61dXjxGn3T8QF9CPQNfG0zWmcDv/CKw7160fZSMMBvC0vxzRzk
+         dSdHmGQRkZzxQOsV4MPNPvi4A1mmcb+Ej3r/dEuOd8VOUjj3XIKw4kZUBnBT1rhfVOuk
+         kpseZzlnnWeF+dz8D5Gk6zx9snPsxO1QZh2MqevJrn8i23Q9PapKobJyA1zEctSjaPFt
+         XIaQUNf0ea79IQq6QUIS8e3rxpfBRZ7e0RQy5k6xzLD16jYGgmtXzH1MHBMGLVfqw3tL
+         QrskxqIh+UAgOLLn8PS5eAzKPtfDaFTDtIpbh/2s/TogbIO2b1cXo2BUE8m9QO/YFoVK
+         GhRA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784257347; x=1784862147;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=okulbd00eydxfaiTL/nAM2B3jvDdNW3YSh5leBM4+pc=;
+        b=WLkK2oa1uG8uJQMwrdwPZ/83BHiszlKTIzoTMuJh6JTXIcLRG4Au1QnmF0bWCHfG3c
+         3/3SQvGnwtw5bNbE3xSeWvFT1HnBXgRHAXlTcu1Oi2UH/4toXrGtPF1mT1gfna6EKrhA
+         M3x49sSr/6oJDl+SoOCRyjT3kCHGxQh4AKRjOZtXsG16HrNtkM1727RSYg2LT5LiZlpf
+         aR6c4F041YvT7vvcjWOBjTVqqtqoMwkpicqLV4WSbsE4Fa9MqSdZt/v3miNehZ0xocep
+         NUfzkVJ1RInvrUJ/GR1t//5c9A5JnfcEVpprL5ydaaX1leLcG0mj48+lzuxJ9qazIdqM
+         dkyQ==
+X-Forwarded-Encrypted: i=1; AHgh+RpEA3YiIXbdTkbtXfKNACRgkje9zynBjYPpAVVLpRXcbdxpJEOW3w6ZoE8Y6bSNe2R/fm+T84tNz/3SkwYi@vger.kernel.org
+X-Gm-Message-State: AOJu0YzSGkVqmApFH3cJ+OOx5DKe3Pl1jOI+UAsVYq6Cyxz9836rVZgd
+	+C2L3ZTLr9ll4mjxfXjzcvTuCeysA1LbDBfPd+gJiMqtnfbIEjiEfXTvXXArnDyF+R61UyqUgA+
+	c4UZqjlCvlcrS1xk4xNhGlMVbBLmseX7fFgmqtbAQWWENGRxMcXJ5/lfwbSEvA9ZGCiM0
+X-Gm-Gg: AfdE7clwTyVV9nTD6kW8ewAMNkRX1F3+g78uqJm7aSWnyJLrEoNEAB2rEbifPWZSH9F
+	D4Hp172G+C0+JKkTOvbp3ZXZ3VHnAKClgr59/3fk2M4flPf0TqWNL0kusz6XnXuU1d28UoRid3g
+	n+j1fwaSgAsiTDVdj5+4iFVXA8Yn7izoso/1JKOAwhvAbkK/US8Y2AVh3hMwANLLLgsCv044u+C
+	cgra7pWbnOP28IrCxLgyfepk+oXCYT6CPQk62s2pCmBVjrOUubQ3fc2iZ0v2c7qlDBprPLJfjS5
+	SoKdG2sdF/dU4MH78NeSTI+7xhUF3Gaz31JmKd5W84huy7CvGSDY4ZLffz8FB/7zOoRROnT6HET
+	pw/lEmkpIJtzFYuo6wie+QQ+rDsmK8H9FbK2bZB9O7CZSCbo=
+X-Received: by 2002:a17:90b:3c43:b0:37f:9ce1:735e with SMTP id 98e67ed59e1d1-38e4b537ddemr669529a91.31.1784257347124;
+        Thu, 16 Jul 2026 20:02:27 -0700 (PDT)
+X-Received: by 2002:a17:90b:3c43:b0:37f:9ce1:735e with SMTP id 98e67ed59e1d1-38e4b537ddemr669511a91.31.1784257346642;
+        Thu, 16 Jul 2026 20:02:26 -0700 (PDT)
+Received: from hu-qianyu-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3142a1de21asm1298743eec.23.2026.07.16.20.02.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Jul 2026 20:02:25 -0700 (PDT)
+Date: Thu, 16 Jul 2026 20:02:23 -0700
+From: Qiang Yu <qiang.yu@oss.qualcomm.com>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Philipp Zabel <p.zabel@pengutronix.de>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH RFC v4 9/9] arm64: dts: qcom: glymur: Wire PCIe3a/3b to
+ shared Gen5x8 PHY
+Message-ID: <almbPzGy/G5GIctP@hu-qianyu-lv.qualcomm.com>
+References: <20260518-link_mode_0519-v4-0-269cd73cc5d1@oss.qualcomm.com>
+ <20260518-link_mode_0519-v4-9-269cd73cc5d1@oss.qualcomm.com>
+ <ab21f1c7-f861-4961-9287-84cae280d8c1@oss.qualcomm.com>
+ <akH9LKxqhciznM2x@hu-qianyu-lv.qualcomm.com>
+ <ae2e1bdd-59b0-4ff7-bd6f-ddd57267c2d9@oss.qualcomm.com>
+ <alBWrK8X7fW+UC7L@hu-qianyu-lv.qualcomm.com>
+ <6802dc29-d783-40df-bbb8-8b2dbd94be29@oss.qualcomm.com>
+ <alDvnSiplhEg2yhD@hu-qianyu-lv.qualcomm.com>
+ <f83556e7-dbb1-4926-a2a0-4690cdbad941@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5832:EE_|TYNPR06MB8504:EE_
-X-MS-Office365-Filtering-Correlation-Id: b6c0ec1a-9f13-4380-d939-08dee3adf31a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|366016|52116014|7416014|376014|921020|38350700014|10067099003|18002099003|6133799003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	pQx9aTDciwY3fdv/LB0skxjAywhJDNyGBmkRCFVFW1FOv+ib+NQVtBYuBDA+Gau7Clv0LXi/roHs8qq27fbv3Ns9NJwJDmIwbE0vbWGwFm7RinGJPFCb8DL9PRW/lzm36auCo5AcS/cEVEyJv21kLNshNV1EBNO9erT20iIVaXYY3tK2LjYJSVkccvndBT7ypPIbDxSx5JngH6xQVK2ofPk56ju8ke7qyfehQ9PKagvSQf/548Mpc1FWyhmWJY68w2rhVT5ZEudK4Va4gSZJkp5DIEznUME7Gw5vLmW5P4RtOAgdTFPBPCL8fuE2y+gRFYBbHZ1PGTEv+350p+Fp2hVFPqZkEdLH5Agy4znx84/Uk3CbQbWKiLvMX282siqnf0/p10zt9Mogf7eYucmLXUx0fHomDLKVjHIS+c5n4EnmYmL5e6xrHU0HnYqHEg/vOJsIwJ6d/uK9m8aMovhhNEECkVJysImQPeX/QSHtEUJ2GWErgaVpqeKOmY4pJC1BaoPF/1FqxB6YTmKDW9oK3y1282wS7BrvvO8gKdZ2HfN2e65aHgHz4Vm2MXROLEmC4sGN61nnZU9jRnIfq1FcDHLhXz7lo5k/c/zC35vEWIZCpZ+wbDXxwAwijZpDM9lc6shMB/FnYxhCNvVtbDp3l72Ge51ykdlYqC6q11dsliHKLqETOWA+Z+K0fO5l3HtnV8eX4DR3eNZJmJhJLqqGdeNgfE3nNFEyFE94Y/TbHd9ztzQflqUaFLkrNfKEDTHB
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB5832.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(366016)(52116014)(7416014)(376014)(921020)(38350700014)(10067099003)(18002099003)(6133799003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?eIZ2kEO8stSwN0i6bFGwDgmL4kv/A6Af0JJ1OtpXa/K3aQ0+Gsyw0frJQO3M?=
- =?us-ascii?Q?L2i0EcEioms8fmhMldYBebDeVXabJAMmvyLRk4bh+eC5nP07mwVpwZ8suF7H?=
- =?us-ascii?Q?jTC8+WX0Pd7QuDOlydmRv+J2f0ybFnywHYy5HmYn1epvZJ2h3U9A3aA7vE4M?=
- =?us-ascii?Q?mdmZEFwhwyEspBvirR4WlxAIV+dwLVOIPEKkHC28TKT2DV1iR0PABcndIL+p?=
- =?us-ascii?Q?GWzfqCPS9AY8bwvJnxJWHr02zwvjDI2evG+W9KVgdGpKdMyTVH51fMAg+kC7?=
- =?us-ascii?Q?nTJOO5eEJ+RdPZiMs7Rp84YesJtGGu+YYkgK/Zo1CJkCseSlmymxq5zSH0DA?=
- =?us-ascii?Q?2vs3e8qZI4AHD0uYGFj3hRLnXbx5NyHINHctIaCSsasjriqvJF+FF6HQrm1Y?=
- =?us-ascii?Q?GSoHYjmCDuFpDa6VTB1qFk4u6ShJgSzLPp7sgPZpWMMxg4I1I/ZVVmwHlb/S?=
- =?us-ascii?Q?nk+XDO03vyJ0TV57Fz5TyE6Gg8ArVH4iW2d3cmuExfB4TdJHa6HIEXSmDjOZ?=
- =?us-ascii?Q?ePi1tbdLnnKXSQuTsPhDWBDHghwLB2LmjC91zz+EGQUUj8GoI5OFSOaCIf1U?=
- =?us-ascii?Q?3gxocIinCmfhqzRk/mILkgLqoYv7HjvMl4nqOrD/yDbasdfUrZO963t9FJzA?=
- =?us-ascii?Q?wPTH7Vl2d6oQ9TIgyBuXhFrnKnWux0h1n0iHtcFztzMCtvgRyRA09+tAjip6?=
- =?us-ascii?Q?wjvsCRhny3YOeLb9eFFr/MBX2kgHTDxCXASmuDLA7avk024YcI5F9N8/iDk/?=
- =?us-ascii?Q?KKD6d41aM7Lakz+T6xx4WxOQizyg8GL969VqKlca4NQDHBT2edPFUOhB48Ya?=
- =?us-ascii?Q?0X3LPWqfufZ3JlDOJAmENTa7p4KQKxK1pzW2uBc+SoRJd9IJOF0KYEtOwF5T?=
- =?us-ascii?Q?H2FvlHxobiPVYmMFrIL35L91O0rD3iKPnfn/vQ7jvxW6XXDnglbKPnjJ8iD3?=
- =?us-ascii?Q?57ltuGtXUBx1v8gc2U4gkvd0TUoRigS3sPS/l0D+tRyq3rzPnP5fOENdvId+?=
- =?us-ascii?Q?QHmnL007tB6fZpk6UZeRv5dodbcZLd0uS7uXPFgF2ev772zEGxyZTtvCWRhq?=
- =?us-ascii?Q?NVdlZ5aHKImC7PlGCJrJ39jk98xd+bT2FH8L6iSfx9aX/0vmLjAsktnRdSqN?=
- =?us-ascii?Q?ihouWkWxeXggLfvDTFyBqyNZv+q/Q6Xj2goOHbpDKGYgEFfSeo3Uzxhfkf40?=
- =?us-ascii?Q?ayI/CUReX5RNLwHwEBPTdi+y2yI9bKPn7WZyGATPtbVrRiEItE+bvPeYtsbH?=
- =?us-ascii?Q?yD3uUL/2S25C1WrTw+JUIUd82uaKnK5QHIa7iWQnSnnyeXegw7zReXecCqCf?=
- =?us-ascii?Q?/lliq13+lqeTyD5oLouussUii2vnXuS+lnbh9HdEgjBD+ieuK9ZoknF2KI1B?=
- =?us-ascii?Q?kZlCKchVhz/gq8mL1cs4Yk2DtWG+ioBmMi/lkSilOqFXOsS699W/WctDzMxy?=
- =?us-ascii?Q?WINHCcbNNLxTZqqC+52xgA/p+7ntECLx1xycYiftoNKZ3i4r1dePoDEq7tp9?=
- =?us-ascii?Q?Nbi1SWfV1QRfrqNiXbLXESRQaeYfmjMBeUjSPEG+hTRS+brr4zkL0Km/s00L?=
- =?us-ascii?Q?gYprrOcXSkHk3bgp3mMmjucGGalkVaUPaVCYTB4QPVzFXypz2P5KK9BGqiJ8?=
- =?us-ascii?Q?DiCv5ahtZeFOfUiyvXshU7yMT5JrUCa1h9E/65/KTQ3IfRKxrbI8cjj8nXYb?=
- =?us-ascii?Q?JhKPpjm1XVgJVMAFSQNRLfvGqJPewcqdmKRyg023y0IMtCdQnlhJWcZ6c7Ab?=
- =?us-ascii?Q?fqzr9j3MAA=3D=3D?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b6c0ec1a-9f13-4380-d939-08dee3adf31a
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5832.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 02:48:58.3533
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JDmfT3eVGpTCfnzJSUqOYvkzEyfz5gUSLoaUy67aaRecoEoP3WPykM0OA801gtQdz4xPEqBPYigAsQ/rB3jLvQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYNPR06MB8504
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <f83556e7-dbb1-4926-a2a0-4690cdbad941@oss.qualcomm.com>
+X-Proofpoint-GUID: -8FxkM72EdNmaJeG4lyg5A3YpJDvYwu2
+X-Proofpoint-ORIG-GUID: -8FxkM72EdNmaJeG4lyg5A3YpJDvYwu2
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDAyNiBTYWx0ZWRfXzQP07cTR1K/V
+ 6VPIakZzC6t+V7qVwwsZrQTfnEGsekLrF9cBcENRSdA0tyu76FpafTh7CXxonEZz/fXqq7qcUqz
+ 3dTgKQfQwHRtt7wutqIF4kd1vRsxzfQ=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDAyNiBTYWx0ZWRfX/xIKY/MC9nmo
+ pDyd/bdBQZsH75exy848JfZCeZqJ4lyJYL86hJphaBFO6AMUFzNTkGBUBlpryXPc423AcMsBJf3
+ Un2Ai/0NCsxxnzcXJEoaxImouHWcJmt5ehb0VaZc0g1nmeGXB6Sx7WtbUkZq/Y6nDhPIGguRGh5
+ CEzFZiBYknwlxTMUwkUnnPHB5TzbDN/knbE/OxsssETGMU98PyRuwgTO2e7Vbi8sWuZAeg6vglX
+ nL45v2HGcpjT/L+sm7+9dCd1NaYyCF3uD9FW81xJ8c4l4B9+ksjXmPOx5pLuTShWW0hOVIB/2u/
+ MbIBg4k8gFQpx6tAICfhChsvXZ9KJfA/CObMYFveC0NGGg2scEX/ly3zhFdqjNqrEuYhYzRbtT3
+ yWgk1h38zX9EkJ6Cz3362OJkkamDCjaY9aS9hkCi0pjuE4wGiV5hsPYCvhJiP4iyjVV9IlXoJqU
+ n5AQFQ4AlOObYgNtx2A==
+X-Authority-Analysis: v=2.4 cv=TL11jVla c=1 sm=1 tr=0 ts=6a599b43 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=p66J1l9MvY5bjjRUTH8A:9 a=CjuIK1q_8ugA:10 a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-16_08,2026-07-15_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 priorityscore=1501 clxscore=1015 lowpriorityscore=0
+ spamscore=0 bulkscore=0 malwarescore=0 suspectscore=0 adultscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607170026
 
-Since commit 55b48e23f5c4 ("genirq/devres: Add error handling in
-devm_request_*_irq()"), devm_request_irq() and devm_request_threaded_irq()
-automatically log detailed error messages on failure. Remove the
-now-redundant driver-specific dev_err() and dev_err_probe() calls.
+On Fri, Jul 10, 2026 at 03:25:37PM +0200, Konrad Dybcio wrote:
+> On 7/10/26 3:11 PM, Qiang Yu wrote:
+> > On Fri, Jul 10, 2026 at 10:44:20AM +0200, Konrad Dybcio wrote:
+> >> On 7/10/26 4:19 AM, Qiang Yu wrote:
+> >>> On Mon, Jun 29, 2026 at 11:20:07AM +0200, Konrad Dybcio wrote:
+> >>>> On 6/29/26 7:05 AM, Qiang Yu wrote:
+> >>>>> On Wed, Jun 17, 2026 at 01:19:49PM +0200, Konrad Dybcio wrote:
+> >>>>>> On 5/19/26 7:47 AM, Qiang Yu wrote:
+> >>>>>>> Glymur PCIe3 uses a single shared Gen5x8 QMP PHY block. Model PCIe3a and
+> >>>>>>> PCIe3b as consumers of that shared PHY provider instead of separate PHY
+> >>>>>>> nodes.
+> 
+> [...]
+> 
+> >>>>>>> +			linux,pci-domain = <3>;
+> >>>>>>> +			num-lanes = <8>;
+> >>>>>>
+> >>>>>> Is it fine to keep num-lanes 8 here even for configurations with
+> >>>>>> bifurcated PHY?
+> >>>>>>
+> >>>>>> I would assume so, given essentially this is a x8 host, whose 4
+> >>>>>> lanes may simply be effectively NC 
+> >>>>>>
+> >>>>> Actually, on existing platforms, the PCIe3a and PCIe3b controllers are
+> >>>>> never enabled at the same time. When PCIe3a is exposed, it is always in an
+> >>>>> x8 slot. But if we have a x4+x4 platform in future, we can simply override
+> >>>>> num-lanes to 4 in the board.dts.
+> >>>>
+> >>>> My question is whether that will be necessary - if yes, sure, we
+> >>>> can do it, but if not, we can conclude on this early and not have
+> >>>> to fight over it in a couple months
+> >>>>
+> >>> I think we do need to override it in that case. If both PCIe3a and PCIe3b
+> >>> are enabled in x4+x4 mode but PCIe3a keeps num-lanes = <8>, userspace
+> >>> will see an 8-lane slot. If an x8-capable EP is connected to that slot,
+> >>> both ends will advertise x8 support, but the link is up at x4. That looks
+> >>> like a genuine bug from the user's point of view.
+> >>
+> >> Do we know what's advertised on x86 PCs with bifurcated lanes?
+> >>
+> > On QCB, it advertise x8. On CRD, PCIe3a is hidden.
+> 
+> No no, I meant to ask whether we know what the userspace gets to see on
+> e.g. an AMD system with a bifurcated slot. I would expect that LnkCap
+> may report a different value, but not necessarily. I would assume we
+> should probably mimic whatever that does, unless the spec takes a
+> stance on what should be done.
+>
+I don't have any AMD/Intel hardware with a bifurcated slot at hand,
+and I couldn't find an lspci example showing what LnkCap reports in
+that case either, so I can't confirm what x86 does here.
 
-Signed-off-by: Pan Chuang <panchuang@vivo.com>
-Reviewed-by: Frank Li <Frank.Li@nxp.com>
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
-Reviewed-by: Niklas S?derlund <niklas.soderlund+renesas@ragnatech.se>
----
- drivers/thermal/airoha_thermal.c                          | 4 +---
- drivers/thermal/armada_thermal.c                          | 5 +----
- drivers/thermal/broadcom/brcmstb_thermal.c                | 3 +--
- drivers/thermal/db8500_thermal.c                          | 8 ++------
- drivers/thermal/hisi_thermal.c                            | 4 +---
- drivers/thermal/imx91_thermal.c                           | 2 +-
- drivers/thermal/imx_thermal.c                             | 4 +---
- .../intel/int340x_thermal/processor_thermal_device_pci.c  | 8 ++------
- drivers/thermal/intel/intel_bxt_pmic_thermal.c            | 4 +---
- drivers/thermal/loongson2_thermal.c                       | 2 +-
- drivers/thermal/max77620_thermal.c                        | 8 ++------
- drivers/thermal/mediatek/lvts_thermal.c                   | 2 +-
- drivers/thermal/qcom/lmh.c                                | 1 -
- drivers/thermal/qcom/tsens.c                              | 5 +----
- drivers/thermal/renesas/rcar_thermal.c                    | 4 +---
- drivers/thermal/renesas/rzg3e_thermal.c                   | 4 +---
- drivers/thermal/rockchip_thermal.c                        | 3 +--
- drivers/thermal/samsung/exynos_tmu.c                      | 4 +---
- drivers/thermal/st/st_thermal_memmap.c                    | 4 +---
- drivers/thermal/st/stm_thermal.c                          | 5 +----
- drivers/thermal/tegra/soctherm.c                          | 8 ++------
- drivers/thermal/tegra/tegra30-tsensor.c                   | 3 +--
- 22 files changed, 25 insertions(+), 70 deletions(-)
+But can you elaborate on what is the benefits to set it to 8 in x4+x4
+mode?
 
-diff --git a/drivers/thermal/airoha_thermal.c b/drivers/thermal/airoha_thermal.c
-index b9fd6bfc88e5..b1c2bf28a90e 100644
---- a/drivers/thermal/airoha_thermal.c
-+++ b/drivers/thermal/airoha_thermal.c
-@@ -444,10 +444,8 @@ static int airoha_thermal_probe(struct platform_device *pdev)
- 	ret = devm_request_threaded_irq(&pdev->dev, irq, NULL,
- 					airoha_thermal_irq, IRQF_ONESHOT,
- 					pdev->name, priv);
--	if (ret) {
--		dev_err(dev, "Can't get interrupt working.\n");
-+	if (ret)
- 		return ret;
--	}
- 
- 	airoha_thermal_setup_monitor(priv);
- 	airoha_thermal_setup_adc_val(dev, priv);
-diff --git a/drivers/thermal/armada_thermal.c b/drivers/thermal/armada_thermal.c
-index c2fbdb534f61..44910a953439 100644
---- a/drivers/thermal/armada_thermal.c
-+++ b/drivers/thermal/armada_thermal.c
-@@ -913,11 +913,8 @@ static int armada_thermal_probe(struct platform_device *pdev)
- 						armada_overheat_isr,
- 						armada_overheat_isr_thread,
- 						0, NULL, priv);
--		if (ret) {
--			dev_err(&pdev->dev, "Cannot request threaded IRQ %d\n",
--				irq);
-+		if (ret)
- 			return ret;
--		}
- 	}
- 
- 	/*
-diff --git a/drivers/thermal/broadcom/brcmstb_thermal.c b/drivers/thermal/broadcom/brcmstb_thermal.c
-index a9ffa596f7c0..5e23f9e00847 100644
---- a/drivers/thermal/broadcom/brcmstb_thermal.c
-+++ b/drivers/thermal/broadcom/brcmstb_thermal.c
-@@ -356,8 +356,7 @@ static int brcmstb_thermal_probe(struct platform_device *pdev)
- 						IRQF_ONESHOT,
- 						DRV_NAME, priv);
- 		if (ret < 0)
--			return dev_err_probe(&pdev->dev, ret,
--						"could not request IRQ\n");
-+			return ret;
- 	}
- 
- 	dev_info(&pdev->dev, "registered AVS TMON of-sensor driver\n");
-diff --git a/drivers/thermal/db8500_thermal.c b/drivers/thermal/db8500_thermal.c
-index cf1706569e6d..46005b476722 100644
---- a/drivers/thermal/db8500_thermal.c
-+++ b/drivers/thermal/db8500_thermal.c
-@@ -167,10 +167,8 @@ static int db8500_thermal_probe(struct platform_device *pdev)
- 	ret = devm_request_threaded_irq(dev, low_irq, NULL,
- 		prcmu_low_irq_handler, IRQF_NO_SUSPEND | IRQF_ONESHOT,
- 		"dbx500_temp_low", th);
--	if (ret < 0) {
--		dev_err(dev, "failed to allocate temp low irq\n");
-+	if (ret < 0)
- 		return ret;
--	}
- 
- 	high_irq = platform_get_irq_byname(pdev, "IRQ_HOTMON_HIGH");
- 	if (high_irq < 0)
-@@ -179,10 +177,8 @@ static int db8500_thermal_probe(struct platform_device *pdev)
- 	ret = devm_request_threaded_irq(dev, high_irq, NULL,
- 		prcmu_high_irq_handler, IRQF_NO_SUSPEND | IRQF_ONESHOT,
- 		"dbx500_temp_high", th);
--	if (ret < 0) {
--		dev_err(dev, "failed to allocate temp high irq\n");
-+	if (ret < 0)
- 		return ret;
--	}
- 
- 	/* register of thermal sensor and get info from DT */
- 	th->tz = devm_thermal_of_zone_register(dev, 0, th, &thdev_ops);
-diff --git a/drivers/thermal/hisi_thermal.c b/drivers/thermal/hisi_thermal.c
-index 4307161533a7..17ed0c5b7767 100644
---- a/drivers/thermal/hisi_thermal.c
-+++ b/drivers/thermal/hisi_thermal.c
-@@ -578,10 +578,8 @@ static int hisi_thermal_probe(struct platform_device *pdev)
- 						hisi_thermal_alarm_irq_thread,
- 						IRQF_ONESHOT, sensor->irq_name,
- 						sensor);
--		if (ret < 0) {
--			dev_err(dev, "Failed to request alarm irq: %d\n", ret);
-+		if (ret < 0)
- 			return ret;
--		}
- 
- 		ret = data->ops->enable_sensor(sensor);
- 		if (ret) {
-diff --git a/drivers/thermal/imx91_thermal.c b/drivers/thermal/imx91_thermal.c
-index 25915bb702be..274eee303142 100644
---- a/drivers/thermal/imx91_thermal.c
-+++ b/drivers/thermal/imx91_thermal.c
-@@ -331,7 +331,7 @@ static int imx91_tmu_probe(struct platform_device *pdev)
- 					IRQF_ONESHOT, "imx91_thermal", tmu);
- 
- 	if (ret < 0)
--		return dev_err_probe(dev, ret, "failed to request alarm irq\n");
-+		return ret;
- 
- 	pm_runtime_put(dev);
- 
-diff --git a/drivers/thermal/imx_thermal.c b/drivers/thermal/imx_thermal.c
-index 5aaacbc53478..416d89c6287a 100644
---- a/drivers/thermal/imx_thermal.c
-+++ b/drivers/thermal/imx_thermal.c
-@@ -732,10 +732,8 @@ static int imx_thermal_probe(struct platform_device *pdev)
- 	ret = devm_request_threaded_irq(dev, data->irq,
- 			imx_thermal_alarm_irq, imx_thermal_alarm_irq_thread,
- 			0, "imx_thermal", data);
--	if (ret < 0) {
--		dev_err(dev, "failed to request alarm irq: %d\n", ret);
-+	if (ret < 0)
- 		goto thermal_zone_unregister;
--	}
- 
- 	pm_runtime_put(data->dev);
- 
-diff --git a/drivers/thermal/intel/int340x_thermal/processor_thermal_device_pci.c b/drivers/thermal/intel/int340x_thermal/processor_thermal_device_pci.c
-index c693d934103a..c5131423ec9b 100644
---- a/drivers/thermal/intel/int340x_thermal/processor_thermal_device_pci.c
-+++ b/drivers/thermal/intel/int340x_thermal/processor_thermal_device_pci.c
-@@ -308,10 +308,8 @@ static int proc_thermal_setup_msi(struct pci_dev *pdev, struct proc_thermal_pci
- 		ret = devm_request_threaded_irq(&pdev->dev, irq, proc_thermal_irq_handler,
- 						proc_thermal_irq_thread_handler,
- 						0, KBUILD_MODNAME, pci_info);
--		if (ret) {
--			dev_err(&pdev->dev, "Request IRQ %d failed\n", irq);
-+		if (ret)
- 			goto err_free_msi_vectors;
--		}
- 
- 		proc_thermal_msi_map[i] = irq;
- 	}
-@@ -394,10 +392,8 @@ static int proc_thermal_pci_probe(struct pci_dev *pdev, const struct pci_device_
- 		ret = devm_request_threaded_irq(&pdev->dev, irq, proc_thermal_irq_handler,
- 						proc_thermal_irq_thread_handler, irq_flag,
- 						KBUILD_MODNAME, pci_info);
--		if (ret) {
--			dev_err(&pdev->dev, "Request IRQ %d failed\n", pdev->irq);
-+		if (ret)
- 			goto err_ret_tzone;
--		}
- 	}
- 
- 	ret = thermal_zone_device_enable(pci_info->tzone);
-diff --git a/drivers/thermal/intel/intel_bxt_pmic_thermal.c b/drivers/thermal/intel/intel_bxt_pmic_thermal.c
-index 6312c6ba081f..aeaefbbd5d8f 100644
---- a/drivers/thermal/intel/intel_bxt_pmic_thermal.c
-+++ b/drivers/thermal/intel/intel_bxt_pmic_thermal.c
-@@ -245,10 +245,8 @@ static int pmic_thermal_probe(struct platform_device *pdev)
- 				NULL, pmic_thermal_irq_handler,
- 				IRQF_ONESHOT, "pmic_thermal", pdev);
- 
--		if (ret) {
--			dev_err(dev, "request irq(%d) failed: %d\n", virq, ret);
-+		if (ret)
- 			return ret;
--		}
- 		pmic_irq_count++;
- 	}
- 
-diff --git a/drivers/thermal/loongson2_thermal.c b/drivers/thermal/loongson2_thermal.c
-index 88f87badfdf6..4d40fc706a53 100644
---- a/drivers/thermal/loongson2_thermal.c
-+++ b/drivers/thermal/loongson2_thermal.c
-@@ -173,7 +173,7 @@ static int loongson2_thermal_probe(struct platform_device *pdev)
- 	ret = devm_request_threaded_irq(dev, irq, NULL, loongson2_thermal_irq_thread,
- 					IRQF_ONESHOT, "loongson2_thermal", tzd);
- 	if (ret < 0)
--		return dev_err_probe(dev, ret, "failed to request alarm irq\n");
-+		return ret;
- 
- 	devm_thermal_add_hwmon_sysfs(dev, tzd);
- 
-diff --git a/drivers/thermal/max77620_thermal.c b/drivers/thermal/max77620_thermal.c
-index 85a12e98d6dc..f4a1535f4806 100644
---- a/drivers/thermal/max77620_thermal.c
-+++ b/drivers/thermal/max77620_thermal.c
-@@ -121,19 +121,15 @@ static int max77620_thermal_probe(struct platform_device *pdev)
- 					max77620_thermal_irq,
- 					IRQF_ONESHOT | IRQF_SHARED,
- 					dev_name(&pdev->dev), mtherm);
--	if (ret < 0) {
--		dev_err(&pdev->dev, "Failed to request irq1: %d\n", ret);
-+	if (ret < 0)
- 		return ret;
--	}
- 
- 	ret = devm_request_threaded_irq(&pdev->dev, mtherm->irq_tjalarm2, NULL,
- 					max77620_thermal_irq,
- 					IRQF_ONESHOT | IRQF_SHARED,
- 					dev_name(&pdev->dev), mtherm);
--	if (ret < 0) {
--		dev_err(&pdev->dev, "Failed to request irq2: %d\n", ret);
-+	if (ret < 0)
- 		return ret;
--	}
- 
- 	return 0;
- }
-diff --git a/drivers/thermal/mediatek/lvts_thermal.c b/drivers/thermal/mediatek/lvts_thermal.c
-index a9617d5e0077..d357968f362b 100644
---- a/drivers/thermal/mediatek/lvts_thermal.c
-+++ b/drivers/thermal/mediatek/lvts_thermal.c
-@@ -1491,7 +1491,7 @@ static int lvts_probe(struct platform_device *pdev)
- 	ret = devm_request_threaded_irq(dev, irq, NULL, lvts_irq_handler,
- 					IRQF_ONESHOT, dev_name(dev), lvts_td);
- 	if (ret)
--		return dev_err_probe(dev, ret, "Failed to request interrupt\n");
-+		return ret;
- 
- 	platform_set_drvdata(pdev, lvts_td);
- 
-diff --git a/drivers/thermal/qcom/lmh.c b/drivers/thermal/qcom/lmh.c
-index 3d072b7a4a6d..99396b93eff5 100644
---- a/drivers/thermal/qcom/lmh.c
-+++ b/drivers/thermal/qcom/lmh.c
-@@ -223,7 +223,6 @@ static int lmh_probe(struct platform_device *pdev)
- 			       IRQF_NO_THREAD | IRQF_NO_SUSPEND,
- 			       "lmh-irq", lmh_data);
- 	if (ret) {
--		dev_err(dev, "Error %d registering irq %x\n", ret, lmh_data->irq);
- 		irq_domain_remove(lmh_data->domain);
- 		return ret;
- 	}
-diff --git a/drivers/thermal/qcom/tsens.c b/drivers/thermal/qcom/tsens.c
-index 6e3714ecab1d..b5ec70201e2f 100644
---- a/drivers/thermal/qcom/tsens.c
-+++ b/drivers/thermal/qcom/tsens.c
-@@ -1258,10 +1258,7 @@ static int tsens_register_irq(struct tsens_priv *priv, char *irqname,
- 							dev_name(&pdev->dev),
- 							priv);
- 
--		if (ret)
--			dev_err(&pdev->dev, "%s: failed to get irq\n",
--				__func__);
--		else
-+		if (!ret)
- 			*irq_num = irq;
- 	}
- 
-diff --git a/drivers/thermal/renesas/rcar_thermal.c b/drivers/thermal/renesas/rcar_thermal.c
-index 6e5dcac5d47a..cf80e2655416 100644
---- a/drivers/thermal/renesas/rcar_thermal.c
-+++ b/drivers/thermal/renesas/rcar_thermal.c
-@@ -446,10 +446,8 @@ static int rcar_thermal_probe(struct platform_device *pdev)
- 
- 		ret = devm_request_irq(dev, irq, rcar_thermal_irq,
- 				       IRQF_SHARED, dev_name(dev), common);
--		if (ret) {
--			dev_err(dev, "irq request failed\n");
-+		if (ret)
- 			goto error_unregister;
--		}
- 
- 		/* update ENR bits */
- 		if (chip->irq_per_ch)
-diff --git a/drivers/thermal/renesas/rzg3e_thermal.c b/drivers/thermal/renesas/rzg3e_thermal.c
-index f0e29fe633db..c44f5b8858d0 100644
---- a/drivers/thermal/renesas/rzg3e_thermal.c
-+++ b/drivers/thermal/renesas/rzg3e_thermal.c
-@@ -461,10 +461,8 @@ static int rzg3e_thermal_probe(struct platform_device *pdev)
- 	ret = devm_request_threaded_irq(dev, irq, rzg3e_thermal_irq,
- 					rzg3e_thermal_irq_thread,
- 					IRQF_ONESHOT, "rzg3e_thermal", priv);
--	if (ret) {
--		dev_err(dev, "Failed to request IRQ: %d\n", ret);
-+	if (ret)
- 		goto err_pm_put;
--	}
- 
- 	/* Add hwmon sysfs interface */
- 	ret = devm_thermal_add_hwmon_sysfs(dev, priv->zone);
-diff --git a/drivers/thermal/rockchip_thermal.c b/drivers/thermal/rockchip_thermal.c
-index c49ddf70f86e..08891608baa6 100644
---- a/drivers/thermal/rockchip_thermal.c
-+++ b/drivers/thermal/rockchip_thermal.c
-@@ -1773,8 +1773,7 @@ static int rockchip_thermal_probe(struct platform_device *pdev)
- 					  IRQF_ONESHOT,
- 					  "rockchip_thermal", thermal);
- 	if (error)
--		return dev_err_probe(&pdev->dev, error,
--				     "failed to request tsadc irq.\n");
-+		return error;
- 
- 	thermal->chip->control(thermal->regs, true);
- 
-diff --git a/drivers/thermal/samsung/exynos_tmu.c b/drivers/thermal/samsung/exynos_tmu.c
-index 47a99b3c5395..56717bb50d60 100644
---- a/drivers/thermal/samsung/exynos_tmu.c
-+++ b/drivers/thermal/samsung/exynos_tmu.c
-@@ -1102,10 +1102,8 @@ static int exynos_tmu_probe(struct platform_device *pdev)
- 					IRQF_TRIGGER_RISING
- 						| IRQF_SHARED | IRQF_ONESHOT,
- 					dev_name(dev), data);
--	if (ret) {
--		dev_err(dev, "Failed to request irq: %d\n", data->irq);
-+	if (ret)
- 		goto err_sclk;
--	}
- 
- 	exynos_tmu_control(pdev, true);
- 	return 0;
-diff --git a/drivers/thermal/st/st_thermal_memmap.c b/drivers/thermal/st/st_thermal_memmap.c
-index 8f76e50ea567..e3dbe4df80cb 100644
---- a/drivers/thermal/st/st_thermal_memmap.c
-+++ b/drivers/thermal/st/st_thermal_memmap.c
-@@ -101,10 +101,8 @@ static int st_mmap_register_enable_irq(struct st_thermal_sensor *sensor)
- 					NULL, st_mmap_thermal_trip_handler,
- 					IRQF_TRIGGER_RISING | IRQF_ONESHOT,
- 					dev->driver->name, sensor);
--	if (ret) {
--		dev_err(dev, "failed to register IRQ %d\n", sensor->irq);
-+	if (ret)
- 		return ret;
--	}
- 
- 	return st_mmap_enable_irq(sensor);
- }
-diff --git a/drivers/thermal/st/stm_thermal.c b/drivers/thermal/st/stm_thermal.c
-index 5d8170bfb382..3290da7ab607 100644
---- a/drivers/thermal/st/stm_thermal.c
-+++ b/drivers/thermal/st/stm_thermal.c
-@@ -390,11 +390,8 @@ static int stm_register_irq(struct stm_thermal_sensor *sensor)
- 					stm_thermal_irq_handler,
- 					IRQF_ONESHOT,
- 					dev->driver->name, sensor);
--	if (ret) {
--		dev_err(dev, "%s: Failed to register IRQ %d\n", __func__,
--			sensor->irq);
-+	if (ret)
- 		return ret;
--	}
- 
- 	dev_dbg(dev, "%s: thermal IRQ registered", __func__);
- 
-diff --git a/drivers/thermal/tegra/soctherm.c b/drivers/thermal/tegra/soctherm.c
-index d8e988a0d43e..f74acf13b24d 100644
---- a/drivers/thermal/tegra/soctherm.c
-+++ b/drivers/thermal/tegra/soctherm.c
-@@ -2007,10 +2007,8 @@ static int soctherm_interrupts_init(struct platform_device *pdev,
- 					IRQF_ONESHOT,
- 					dev_name(&pdev->dev),
- 					tegra);
--	if (ret < 0) {
--		dev_err(&pdev->dev, "request_irq 'thermal_irq' failed.\n");
-+	if (ret < 0)
- 		return ret;
--	}
- 
- 	ret = devm_request_threaded_irq(&pdev->dev,
- 					tegra->edp_irq,
-@@ -2019,10 +2017,8 @@ static int soctherm_interrupts_init(struct platform_device *pdev,
- 					IRQF_ONESHOT,
- 					"soctherm_edp",
- 					tegra);
--	if (ret < 0) {
--		dev_err(&pdev->dev, "request_irq 'edp_irq' failed.\n");
-+	if (ret < 0)
- 		return ret;
--	}
- 
- 	return 0;
- }
-diff --git a/drivers/thermal/tegra/tegra30-tsensor.c b/drivers/thermal/tegra/tegra30-tsensor.c
-index 6245f6b97f43..10a5ab1fe1b9 100644
---- a/drivers/thermal/tegra/tegra30-tsensor.c
-+++ b/drivers/thermal/tegra/tegra30-tsensor.c
-@@ -602,8 +602,7 @@ static int tegra_tsensor_probe(struct platform_device *pdev)
- 					tegra_tsensor_isr, IRQF_ONESHOT,
- 					"tegra_tsensor", ts);
- 	if (err)
--		return dev_err_probe(&pdev->dev, err,
--				     "failed to request interrupt\n");
-+		return err;
- 
- 	return 0;
- }
--- 
-2.34.1
-
+- Qiang Yu
