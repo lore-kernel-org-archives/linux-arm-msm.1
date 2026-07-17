@@ -1,185 +1,109 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E54E03EEAC8
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 10:54:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64F613F412F;
+	Fri, 17 Jul 2026 11:00:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784285676; cv=none; b=ouuQpNzihM5B2kQ7hCr/5kDrIqJAVRxFV4vDYefbf14NsIRQ2JG/vCJqaZJq9iMPzB4fra2VfqYCbER5qmL5VYS0TkHjD0AQfJ82VV6IfA1pLaiA19noIT1ZxS/OgVpc/xH+QRU7hMcBlffKy47qcuATqtNjbVsvh5DNG1JfyVE=
+	t=1784286014; cv=none; b=kIhXuBIaZMKylBDxWILbovRmKMKuc2ZXwjs/qIGZ0XUh67QA2iJYJBGNoPtGWo8msWjt8AcAbVgNCqwj3222pMRfz0GXdXmZccKNHU8iOFSnWrQwjSjNFEL53I/SfltXIzgn7FjMBalmZCvaBsW5SnHfAfwHvnz6ZvM+Z8vZlT0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784285676; c=relaxed/simple;
-	bh=e++fRFLE9xONlyH77w/Q1DtmPMosUmEuqZ3QDq01xak=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=HTDj0Sbj/jSfgVuz4lx4YzaA8MD7bzn/zhmYMKoitC/YX4fiOm2c3+os1n4bNZTnAfnIaiIhwohn3U4KJBBurdcelqRlnydpahw8gFbatmyvmqTb0ylDsCjSnPQiN212jDp/QKXbPQk7IA08rvMFtfP1+/l1Ub93zSsHX4dzWzc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=JjUJsuUB; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QIE3s5BQ; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784286014; c=relaxed/simple;
+	bh=ozwm+ESiufs5A479a9txe0ioWp1X9kyFiU+g77nvRTQ=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=LsLbcjf2BkXCbvtHuVqZhJETQWFwjtAFb6dFOZknuUew26T+uBiU4dDBBTv2M0nfJg3ddf+2xDQWllVv+qdHQW8gGadhgtw9GJopb6NzavtcvRpfZr5hMoZJz1T7ddlm9SE8uPmOpZ9GQ8ElcMH7pbi2klKS/a0niLa7d6efdVs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A98mbBkP; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="JjUJsuUB";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QIE3s5BQ"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66HAT7jA1604050
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 10:54:32 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	gbIOXqvXhHXmY126DaOodYajWxb9I3NsGeAgdKh9VZ8=; b=JjUJsuUBIGkFSVnb
-	CBKqo6IhxRT3geWUswYIKZXZjS+RJVtXsx0skqs12O7rIKfyOe5Fo+bCPCmWqKv8
-	IIM5nDe8i5JJM0fGyITRf+m1KwNS5dHGmitlWCKamxiORbt1HKwC+tHwu7PSsNRH
-	ioU81vQ3JnS7Lkrwy/aSf4sKuTJGlIYrdYa7na6FTJYMvWIHDBp162YUp/QBM8cj
-	XcbwJHTz9cF/3aqtcIJWn3gnlhPlRCO5YSh/U37TaniG+PZJTVZHAFaSJs5UMCvn
-	bnv1LeqQlO0z7+S/cuVaDaIkGJdBZr8Du+GIAMs1jfRRxoET+pPWCEKTj23M6qMw
-	o8zOMA==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ffbquhqum-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 10:54:31 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c1e777a15so16633301cf.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 03:54:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784285671; x=1784890471; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=gbIOXqvXhHXmY126DaOodYajWxb9I3NsGeAgdKh9VZ8=;
-        b=QIE3s5BQQuWxeCBZ210LMeqOym7wgjFb3Jt6y28ZCsZSS3Y+n4MaPdlKlHLwfsGRvX
-         q+JEPrvegNJiimsdvR1D84aOu2eIKFIHVYS8qT43ncAIln+CKDoGYxvALx1Y8GPC46Oq
-         eZ1Ae1B5NDGKmlNBkj7FTOT/nikNHV5f18QciE11/jCuUwA3G4BQnvl2/VrAhc0aBSrC
-         CSQCSXPKeOEsH4ztw5+kybAzH4mbhIb77jfvo7Nr/feBbt53EPXdCfw7yLLsCJZ6t27c
-         fU2Olzt3a/1mygkqhQUvlnskOu0i8LcocULjmzgltIaTFHVAhVDe4F16bKKcB1IlfkoP
-         XHwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784285671; x=1784890471;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=gbIOXqvXhHXmY126DaOodYajWxb9I3NsGeAgdKh9VZ8=;
-        b=Eb7phNYKQkPNVtBeVwcpbPPHfGSi9srV9hl6Rl/kdQrre5HEV49MBFNcjgbYrfGVd/
-         AteYq8D1LmvnNG8ziJyF7ohy9umUQ4Zdorg2vlTogF885+4raH2D8FGLiO3GDO/WSzx+
-         BTXnS4/LU3LyCziSumpcNs/nzocWVmLNf5bzegSuWql5oSgbpjjFQ8ZW9OUPBVvte3xX
-         ZgAk7Jffihlz05M2L12o4b0MNx/gCoR/69ykYB3iRU/KhuyRObe4iE+9PiDyj3T76HMo
-         yuRCM8wj3S4lJVSVcsnREZI5tqt8U1LRbYzF5zfACcCFJIzmAJsA0v3wlC1DLseoxipx
-         3Usg==
-X-Gm-Message-State: AOJu0YwoKy9wxQcfiTxaaFa/vlgLhqh39knzA79gwC/QAc2AEFLjwnUh
-	zFnhvCZ3jl8if7svci7LD/4KiQrpUhCQFIdzlrTFuYfTAhJZ50Q1X9NuuylQfPhnOT+JyOLzQv/
-	H92FBthMp298ZRw1rH53cqb2dYjqHGiu/kbCJUPVWa5lS62quVYh+RFcmAM/PXF+YFZZh
-X-Gm-Gg: AfdE7cmprFdBa3f3ZAABmDFCi2g+qmFyhXhUC1tcOgF9mXRfk39OTQO+uqk1V6WPeI2
-	LUZgdfHdJvV0HWpKji4gtC+SjVUTkq0D8tsKNp63FLABM72VXk6VbpnVIvfoBCErfgSAYMDPNDH
-	JB6sv3cyQo1omujYCu2VJv1cqbRj5vLBvFQ968Ao7/4Ueivx4GMxaxBPAaFTBiWgTlFLI73DvJ3
-	GkQtyR4Xr/bSxpVAszXlgy/fN9ImshgjhF6JJ0CDOjQE34e2cpPiT03MBZeNWxuVYpZvcJBJMGz
-	5F2pM/BOtjWeQlEiGUXHeNjtdoxg07uG9YQCu0dNtwgbdRZmY+f76MRaNosTSxAzUzK7hG4G7C6
-	oRjmy6LCzBieMesRFGFIcJO6N
-X-Received: by 2002:ac8:7e8d:0:b0:51c:857f:9c1c with SMTP id d75a77b69052e-5213f861e63mr12662871cf.11.1784285670807;
-        Fri, 17 Jul 2026 03:54:30 -0700 (PDT)
-X-Received: by 2002:ac8:7e8d:0:b0:51c:857f:9c1c with SMTP id d75a77b69052e-5213f861e63mr12662631cf.11.1784285670418;
-        Fri, 17 Jul 2026 03:54:30 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-69e6fee321dsm475960a12.6.2026.07.17.03.54.28
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 17 Jul 2026 03:54:29 -0700 (PDT)
-Message-ID: <2be76246-3430-4f76-b6a9-11de39a961e7@oss.qualcomm.com>
-Date: Fri, 17 Jul 2026 12:54:27 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="A98mbBkP"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2D7E31F000E9;
+	Fri, 17 Jul 2026 11:00:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784286005;
+	bh=mYsxrW/LpSpNLz4FJ7ENPJA3upWCqcYKhYSHrpDliEw=;
+	h=From:Subject:Date:To:Cc;
+	b=A98mbBkPD4pGQqD7ul14/5ZfbrpYKwCiFmgmv0PA2aOBEveKa/wcNv1pHpC54xpUh
+	 bw0iGv4c1iuI8ZbQ46zTzdHwKj4oeQ3sfDydAa4akYf2wQj+A1a2x7bwyzksUWoiAc
+	 oLQEMaBjPDohRYySor1t28PTYvVcKmplWRO/n2KLMhCCtHidTJ8hZe91nAYgJCLZCM
+	 kKsGEe6V9Yo3W34xqBq6njWjOKuaThL+Lo6Cn2+w1gU1zUEQLojo3R3fAbp/12LZs2
+	 qmstH/L2Y9kzNklg4lAMz//NmNToHQc0MfFE8WmwHH9lkA8eMvtTNQYky1R5pSsHKN
+	 yQXW0fC1V1WgQ==
+From: Konrad Dybcio <konradybcio@kernel.org>
+Subject: [PATCH v2 0/5] Minor dt warnings fixes
+Date: Fri, 17 Jul 2026 12:59:57 +0200
+Message-Id: <20260717-topic-june26_dts_fixes-v2-0-797cd46e5d9f@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] rpmsg: glink: Split protocol start out of native_probe
-To: Chunkai Deng <chunkai.deng@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, chris.lew@oss.qualcomm.com,
-        tony.truong@oss.qualcomm.com
-References: <20260618-rpmsg-glink-split-protocol-start-v1-1-c4f93986cdb4@oss.qualcomm.com>
- <43293037-99bd-457a-b190-31fb24625b1c@oss.qualcomm.com>
- <0585ee18-5bd3-424b-93b1-eb841c26b63d@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <0585ee18-5bd3-424b-93b1-eb841c26b63d@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: 0JJgabGZV1GlKYyL0ElQlL9QtSc55mJx
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDEwOCBTYWx0ZWRfX3mgKMuaFBHOG
- C5Vik0m22nUuwYaJWf6WdLzyGSKSglTj3Sax1KEvPti8UcF1DycWyvylwCalvv3X/UpXYmq3vB0
- Nb/r2Vm/lgaPT6W9d5W7a8nI899ulUIBoyxPnHPubIyBEzW6xWNUNEZnm2aMHZxTWVW/NKI3X5n
- 0qmEAE7bmN6IhgI2M13WNweiI609o3lHw/OnSzVaVxcHRc1I70kV3kkiqGynlj3+KNgSsIF+X00
- oYxuUSOLnI1T0h+WbL26CO9jxqLkGizN/J0Lx7urtpnxZr6jafLCe1EAbWBfcQ+ztZYormdBoCj
- oY8VT1uqCMrTdbmr+hduyXeZUYdcgqVcW2x6GfJLE6LQ1t8emDusOrJmdhGX07rdeJnsDUkUOJt
- 3ChymEpb3qqRtKbdZY3v01u+PZaiG1N6aVCq4F0XCQqNoRieIP/Kvq9Fj2+zY2IbZHCN6fv4KXV
- LSDaGGTYoZU8Kz1vd7Q==
-X-Authority-Analysis: v=2.4 cv=NZ3WEWD4 c=1 sm=1 tr=0 ts=6a5a09e7 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=qV3TpINTj3GmVv13LMoA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-ORIG-GUID: 0JJgabGZV1GlKYyL0ElQlL9QtSc55mJx
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDEwOCBTYWx0ZWRfXxDHwVYwzCoKl
- KqH4IZ4Tz3Hl+T4bT+dciG3SDyMtF8rVYsNt59zcZE80GrDs1NdzUQAF8u8dbILjNh/zFFE5c0Z
- j1urFVKKE98XBTHMIWCYdpZJ2NOVR70=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-17_03,2026-07-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 malwarescore=0 clxscore=1015 adultscore=0
- bulkscore=0 phishscore=0 suspectscore=0 priorityscore=1501 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170108
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/4WNTQ6CMBCFr0JmbUkpoUFX3sMQgsNUSoRipxAN4
+ e4WPICbl3x5fysweUsMl2QFT4tl68YI6pQAds34IGHbyKCk0lJnUgQ3WRT9PJLSdRu4NvZNLDB
+ XlKMpC9MaiOXJ02HE7q36Mc/3njDsa3uisxyc/xzPS7bn/p4smZBCkcRzkTcaZXl1zOlrbp7oh
+ iGNAtW2bV+lcx/H1QAAAA==
+X-Change-ID: 20260610-topic-june26_dts_fixes-c32e3cf85fdf
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ =?utf-8?q?Andr=C3=A9_Apitzsch?= <git@apitzsch.eu>, 
+ Luca Weiss <luca@lucaweiss.eu>, Gabriela David <ultracoolguy@disroot.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784286000; l=1841;
+ i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
+ bh=ozwm+ESiufs5A479a9txe0ioWp1X9kyFiU+g77nvRTQ=;
+ b=DF77fHTA+T4+rvu7DJjyt+kD4TbiX3b3zSddME6Nkbpt8YP1FicCYcR089JGgzp1VGTw9o+2L
+ ZHl6Ox4yeaKB3OAL8BA8Zmjt8Ced70aITXmWwT6UeMRUx+UQWgXIAsv
+X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
+ pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
 
-On 7/6/26 10:59 AM, Chunkai Deng wrote:
-> On 6/29/2026 8:47 PM, Konrad Dybcio wrote:
-> 
->> On 6/19/26 7:01 AM, Chunkai Deng wrote:
->>> The SMEM and RPM transports request their receive interrupt with
->>> IRQF_NO_AUTOEN and enable it only after qcom_glink_native_probe()
->>> returns. Since native_probe() sends the initial version command, the
->>> remote may ACK before the local IRQ is enabled, stalling the version
->>> handshake on a fast remote.
->>>
->>> Split the protocol start (qcom_glink_send_version() and
->>> qcom_glink_create_chrdev()) into a new qcom_glink_native_start().
->>> Transports now enable their IRQ first, then call native_start(), so the
->>> version ACK is guaranteed to be serviced.
->>>
->>> Signed-off-by: Chunkai Deng <chunkai.deng@oss.qualcomm.com>
->>> ---
->> Would it not be simpler to just move the devm_request_irq a bit down
->> and remove the NO_AUTOEN flag then?
-> 
-> Thanks for the suggestion.
-> I analyzed and verified it locally,but I'd personally still lean towards
-> keeping the current change as-is. My reasoning:
-> 
-> (1) The IRQ must be live before the version handshake — that's the core
-> point that can't change. The version command is sent from native_start(),
-> so we need to request/enable the IRQ first and only then call
-> native_start(). That ordering is only possible with the version send
-> kept out of native_probe(), so the split needs to stay.
-> 
-> (2) Dropping IRQF_NO_AUTOEN does make the structure a little simpler,
-> and functionally it's equivalent, but I'd lean towards keeping the
-> request-disabled + explicit enable_irq() form. It makes the ordering
-> constraint visible at the call site: the IRQ is requested up front,
-> and enable_irq() marks the exact point where the handler becomes safe
-> to run(glink assigned) and where we want RX servicing to begin. Folding
-> that into an implicit auto-enable hides that intent, and I think the
-> explicit form is easier to maintain.
-> 
-> That said, if you'd prefer the simpler form, I'm happy to do the IRQ
-> cleanup as a separate follow-up patch on top of this fix rather than
-> mixing the refactor into the race fix.
+Nothing particularly of note, mechanical fixes
 
-Please don't paste AI responses into your email client, there's a human
-on the other side..
+Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+---
+Changes in v2:
+- Improve commit messages on patches 4 and 5
+- Rework patch 1
+- Pick up tags
+- Link to v1: https://patch.msgid.link/20260610-topic-june26_dts_fixes-v1-0-2e0c953a6c08@oss.qualcomm.com
 
-If this patch was also created with the use of a coding agent, it must
-be disclosed and follow the rules established in:
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+To: André Apitzsch <git@apitzsch.eu>
+To: Gabriela David <ultracoolguy@disroot.org>
+To: Luca Weiss <luca@lucaweiss.eu>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
 
-Documentation/process/coding-assistants.rst
+---
+Konrad Dybcio (5):
+      arm64: dts: qcom: msm8998: Don't pull-up I2C pins by default in sleep
+      arm64: dts: qcom: msm8976-longcheer-l9360: Fix accidental node override
+      arm64: dts: qcom: sdm632-motorola-ocean: Fix LED default trigger property
+      arm64: dts: qcom: qcs8300-ride: Fix BT RFA supply name
+      arm64: dts: qcom: talos-evk-som: Fix BT RFA supply name
 
-Konrad
+ .../boot/dts/qcom/msm8976-longcheer-l9360.dts      |  4 ++--
+ .../boot/dts/qcom/msm8998-sony-xperia-yoshino.dtsi |  4 ----
+ arch/arm64/boot/dts/qcom/msm8998-xiaomi-sagit.dts  |  5 -----
+ arch/arm64/boot/dts/qcom/msm8998.dtsi              | 24 +++++++++++-----------
+ arch/arm64/boot/dts/qcom/qcs8300-ride.dts          |  2 +-
+ arch/arm64/boot/dts/qcom/sdm632-motorola-ocean.dts |  2 +-
+ arch/arm64/boot/dts/qcom/talos-evk-som.dtsi        |  2 +-
+ 7 files changed, 17 insertions(+), 26 deletions(-)
+---
+base-commit: 1a1757b76427f6201bfe0bf1bea9f7574f332a93
+change-id: 20260610-topic-june26_dts_fixes-c32e3cf85fdf
+
+Best regards,
+--  
+Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+
