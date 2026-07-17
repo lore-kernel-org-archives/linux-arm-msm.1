@@ -1,117 +1,85 @@
-Received: from smtpout-04.galae.net (smtpout-04.galae.net [185.171.202.116])
+Received: from abb.hmeau.com (abb.hmeau.com [180.181.231.80])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 769D63DD533;
-	Fri, 17 Jul 2026 07:37:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.171.202.116
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A432F2EEE94;
+	Fri, 17 Jul 2026 07:45:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=180.181.231.80
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784273868; cv=none; b=PsgRbUuMAdXWhHpyG0xCiuRoWtLTFHMHpN0fK3fqc3BdKfDvQcAGdYXP34TYJDqB+2BBXMjucJK3M2foiIHPld6H2a6/Ddz4HY+DZnVJymkcgiWHsBxYet+PiGuFZdyklGTG5yIHU+fp+M5D/nto+k36Rz+kAl1GDitXqTgEJok=
+	t=1784274338; cv=none; b=sExJ+Svv7HJvMH2w97M2vYI+CLCgHKEYC9YLhDBNQ9uS36ivYkNmSv3FigFdPMXMLW31y+Ljyfg8tyTs4sgWpGENVBo2pF0UzYAtmj4x5RRW6jE5b1xVghea8wRBc/qQd4csJyaPkSQMiVL7r4HQZzu3OWPUPIYYRh0HdaXBHQA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784273868; c=relaxed/simple;
-	bh=qZkQOIOG8Kl3936adbYcP2Yh8w6XNbgYkOrvcA3q2GM=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=kSBA2uPTtJLLMbyQY++W4TXn1sZEnQ9bnxt52jRnl+4Dmm7d0qD7d88T+k6hLXbkO/oh5uEx5rpoamtKixGerkjGtDyn3T9AS3C4RWMW9pkJ40UR9sN+fjBex4JPaOgdIC20hMOkuYTVfhbp0B75wkwJry6GtJZkcAt49rlm1aI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=kon2YfH/; arc=none smtp.client-ip=185.171.202.116
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
+	s=arc-20240116; t=1784274338; c=relaxed/simple;
+	bh=wMwMzb/E8bpvHWyoLwAsjrOKGxAhEc4/y2WQhOKEALg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=J8oEy1I+Iu5uUFc01mu3v8xenxaDR3+607LVzJ6PYCaGvs5l2OV2gW5NfDpJawVVkCt0454SUYbMqNRFyAsTPbcrtM/p8CdcpPbYBOXrUz+Bpyn9yqax4nPl6zzF9W2j5E+y6/+Vu3Y5x36h0CEirAmbhhQ4i6hMQbRkYNOfwZQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au; spf=pass smtp.mailfrom=gondor.apana.org.au; dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b=qFS3WRgf; arc=none smtp.client-ip=180.181.231.80
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=gondor.apana.org.au
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gondor.apana.org.au
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="kon2YfH/"
-Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
-	by smtpout-04.galae.net (Postfix) with ESMTPS id 6485BC2B9F5;
-	Fri, 17 Jul 2026 07:37:52 +0000 (UTC)
-Received: from mail.galae.net (mail.galae.net [212.83.136.155])
-	by smtpout-01.galae.net (Postfix) with ESMTPS id 943D660361;
-	Fri, 17 Jul 2026 07:37:34 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id DC0A611BD3D44;
-	Fri, 17 Jul 2026 09:37:18 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
-	t=1784273852; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=Cdb0RCCdG1Y5r/It8CwrJzVJ0JbWRfQ0sD99bdj9c+M=;
-	b=kon2YfH/dOK4tDt53OBaDo5FFMl+LDNwDVUop5ds1NRI/Wg1uSfOdRPoX//xppPkYw4F4k
-	i7WIsxXBl1un2FVxbtH0z+MNg/Pxf/kDZFkkmQMF7GWX2KDvfCGfcNPlsGE/XeWd6UWU5+
-	GU0KvK2Qz5NhcKTqLYeMaoODnDSsLW8zaf8j7HAZsl2HX2a+q1UNwnNfj8/t2YSHY0CoOJ
-	iuHvYWwy+oF8TF5SvX8WUIAoCWzZZkD3fHymApMwuHuo/Ci0SwMn3oduihoRjpk8TrJJuw
-	dKfxpFRA4xRbQoh0VoLeExcl0443IzDaZd45c4NSu8UobUALaKN9EhlqiiNUTA==
-From: Miquel Raynal <miquel.raynal@bootlin.com>
-To: Pan Chuang <panchuang@vivo.com>
-Cc: "Rafael J. Wysocki" <rafael@kernel.org>,  Daniel Lezcano
- <daniel.lezcano@kernel.org>,  Zhang Rui <rui.zhang@intel.com>,  Lukasz
- Luba <lukasz.luba@arm.com>,  Markus Mayer <mmayer@broadcom.com>,  Broadcom
- internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-  Florian Fainelli <florian.fainelli@broadcom.com>,  Frank Li
- <Frank.Li@nxp.com>,  Sascha Hauer <s.hauer@pengutronix.de>,  Pengutronix
- Kernel Team <kernel@pengutronix.de>,  Fabio Estevam <festevam@gmail.com>,
-  zhanghongchen <zhanghongchen@loongson.cn>,  Yinbo Zhu
- <zhuyinbo@loongson.cn>,  Amit Kucheria <amitk@kernel.org>,  Thara Gopinath
- <thara.gopinath@gmail.com>,  Niklas =?utf-8?Q?S=C3=B6derlund?=
- <niklas.soderlund@ragnatech.se>,  Geert Uytterhoeven
- <geert+renesas@glider.be>,  Magnus Damm <magnus.damm@gmail.com>,  John
- Madieu <john.madieu.xa@bp.renesas.com>,  Heiko Stuebner <heiko@sntech.de>,
-  Bartlomiej Zolnierkiewicz <bzolnier@gmail.com>,  Krzysztof Kozlowski
- <krzk@kernel.org>,  Peter Griffin <peter.griffin@linaro.org>,  Alim Akhtar
- <alim.akhtar@samsung.com>,  Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-  Alexandre Torgue <alexandre.torgue@foss.st.com>,  Thierry Reding
- <thierry.reding@kernel.org>,  Jonathan Hunter <jonathanh@nvidia.com>,
-  Matthias Brugger <matthias.bgg@gmail.com>,  AngeloGioacchino Del Regno
- <angelogioacchino.delregno@collabora.com>,  Srinivas Pandruvada
- <srinivas.pandruvada@linux.intel.com>,  Andy Shevchenko
- <andriy.shevchenko@linux.intel.com>,  Laura Nao <laura.nao@collabora.com>,
-  Fei Shao <fshao@chromium.org>,  Chen-Yu Tsai <wenst@chromium.org>,
-  Jiapeng Chong <jiapeng.chong@linux.alibaba.com>,  Frank Wunderlich
- <frank-w@public-files.de>,  Mikko Perttunen <mperttunen@nvidia.com>,
-  Svyatoslav Ryhel <clamor95@gmail.com>,  linux-pm@vger.kernel.org (open
- list:THERMAL),  linux-kernel@vger.kernel.org (open list),
-  linux-arm-kernel@lists.infradead.org (moderated list:BROADCOM BCM7XXX ARM
- ARCHITECTURE),  imx@lists.linux.dev (open list:ARM/FREESCALE IMX / MXC ARM
- ARCHITECTURE),  linux-arm-msm@vger.kernel.org (open list:ARM/QUALCOMM
- MAILING LIST),  linux-renesas-soc@vger.kernel.org (open list:RENESAS R-CAR
- THERMAL DRIVERS),  linux-rockchip@lists.infradead.org (open
- list:ARM/Rockchip SoC support),  linux-samsung-soc@vger.kernel.org (open
- list:SAMSUNG THERMAL DRIVER),  linux-stm32@st-md-mailman.stormreply.com
- (moderated list:ARM/STM32 ARCHITECTURE),  linux-tegra@vger.kernel.org
- (open list:TEGRA ARCHITECTURE SUPPORT),
-  linux-mediatek@lists.infradead.org (moderated list:ARM/Mediatek SoC
- support:Keyword:mediatek),  Niklas S?derlund
- <niklas.soderlund+renesas@ragnatech.se>
-Subject: Re: [PATCH v2] thermal/drivers: Remove redundant error messages on
- IRQ request failure
-In-Reply-To: <20260717024733.374913-1-panchuang@vivo.com> (Pan Chuang's
-	message of "Fri, 17 Jul 2026 10:47:10 +0800")
-References: <20260717024733.374913-1-panchuang@vivo.com>
-User-Agent: mu4e 1.12.7; emacs 30.2
-Date: Fri, 17 Jul 2026 09:37:18 +0200
-Message-ID: <87v7aekqxd.fsf@bootlin.com>
+	dkim=pass (2048-bit key) header.d=gondor.apana.org.au header.i=@gondor.apana.org.au header.b="qFS3WRgf"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=gondor.apana.org.au; s=h01; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:cc:to:subject:message-id:date:
+	from:content-type:reply-to; bh=zXLlo12uGh+Q43CGcDppKId8OmLaUv2wT03uxv6KRcI=; 
+	b=qFS3WRgfQ75IjLIkKY4mwsrNIAcKUG005CDrQV5D8CtWn20F0oxQclbKQL7qPnaIFqgGj0kjuzb
+	laqsxGyC3B1OpP9Quvmd1W8AvICQhFYXFs9B+y/QLhF1zhd1fACFIXxn0ouintf6ijeJ1zcobNTw7
+	t5Mt1dERYEwqxgE0o7IryPo51qq4PfltkHtI/VIB7jemyre23nUh8H2Gnn8F8kAY8BBpRRigLfAeY
+	8ZKd5Uy52zA73uR18gXytRgHT1IHcVLljHqYlxXB1w3WvOI94nYooGOCw6FpcYbUrvnNRF054sfJc
+	8cDh3sIQ3ZPhL9mXdoeP9mTnJg6kzgbHMktw==;
+Received: from loth.rohan.me.apana.org.au ([192.168.167.2])
+	by formenos.hmeau.com with smtp (Exim 4.98.2 #2 (Debian))
+	id 1wkdG0-0000000ENR6-0V3T;
+	Fri, 17 Jul 2026 15:45:17 +0800
+Received: by loth.rohan.me.apana.org.au (sSMTP sendmail emulation); Fri, 17 Jul 2026 17:45:16 +1000
+Date: Fri, 17 Jul 2026 17:45:16 +1000
+From: Herbert Xu <herbert@gondor.apana.org.au>
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: Thara Gopinath <thara.gopinath@gmail.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Stanimir Varbanov <svarbanov@mm-sol.com>,
+	Eneas U de Queiroz <cotequeiroz@gmail.com>,
+	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+	Eric Biggers <ebiggers@kernel.org>, linux-crypto@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	brgl@kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH v5 1/7] crypto: qce - Fix HMAC self-test failures for
+ empty messages
+Message-ID: <alndjORIwYXPxU-C@gondor.apana.org.au>
+References: <20260706-qce-fix-self-tests-v5-0-86f461ff1829@oss.qualcomm.com>
+ <20260706-qce-fix-self-tests-v5-1-86f461ff1829@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260706-qce-fix-self-tests-v5-1-86f461ff1829@oss.qualcomm.com>
 
-On 17/07/2026 at 10:47:10 +08, Pan Chuang <panchuang@vivo.com> wrote:
-
-> Since commit 55b48e23f5c4 ("genirq/devres: Add error handling in
-> devm_request_*_irq()"), devm_request_irq() and devm_request_threaded_irq()
-> automatically log detailed error messages on failure. Remove the
-> now-redundant driver-specific dev_err() and dev_err_probe() calls.
+On Mon, Jul 06, 2026 at 03:53:52PM +0200, Bartosz Golaszewski wrote:
 >
-> Signed-off-by: Pan Chuang <panchuang@vivo.com>
-> Reviewed-by: Frank Li <Frank.Li@nxp.com>
-> Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-> Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
-> Reviewed-by: Niklas S?derlund <niklas.soderlund+renesas@ragnatech.se>
+> @@ -280,6 +299,8 @@ static int qce_ahash_final(struct ahash_request *req)
+>  		if (tmpl->hash_zero)
+>  			memcpy(req->result, tmpl->hash_zero,
+>  					tmpl->alg.ahash.halg.digestsize);
+> +		else if (IS_SHA_HMAC(rctx->flags))
+> +			return qce_ahash_hmac_zero(req);
+>  		return 0;
+>  	}
 
-                       ^
-There is an encoding issue here
+This is still broken because the user can import a non-zero partial
+hash state with no buffer held for your hardware.  So you need to make
+the driver able to handle the case of finalization with no extra
+data.
 
->  drivers/thermal/armada_thermal.c                          | 5 +----
+The easiest is to re-import the partial hash state into the fallback
+and finalize that instead.
 
-Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
+IOW change this so that it handles all zero-length finalizations and
+not just the empty hash case.
 
-Thanks,
-Miqu=C3=A8l
-
+Cheers,
+-- 
+Email: Herbert Xu <herbert@gondor.apana.org.au>
+Home Page: http://gondor.apana.org.au/~herbert/
+PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
