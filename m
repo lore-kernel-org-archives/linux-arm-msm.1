@@ -1,221 +1,124 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDF043BBFD7
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 09:30:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B24DE3C3F67
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 09:30:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784280625; cv=none; b=HN34kURcGO0RnAah/g6XP78anwz7HDlMpDZ4cIEiqDxvoozyZNj4e/Xv7HLOXZsHDOmlPtz9TEzdXEUbCtqa+RjO5k1146y7h8y8UUc1yyWwSNWkXiHPEfB5aYhDY8gHuHjB+jSSgBVkEZ0L1fAsz1se6ySyA4fegluTDunAh3g=
+	t=1784280653; cv=none; b=ulCKkEZlmav6Km9CTVbEzVN7cUj1EU+39FiHaNFdT89S4snqhYhZkf16u+0F5sh1Mhe8VIdaQOQFVE0CjvUvURjp9HUZQ4mjWg9ZB7rXiRkWJALCBnpdOlv85lng7ObRSX3zr8VK5cOgLohCJjl+Tk1EyHVxCwD7Am8kELCmuvA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784280625; c=relaxed/simple;
-	bh=sW39zPxE9KCDrhtE5RxDgtxp+wa5oNRnPHM5iQvak9A=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=mNbqZqmWDnzd9kgogx0xhAEBddnyKbu1n1xjR4KeZK3y7OGU2yZAlp2Ucb6agQ0JVw65aY/rm/zA3TRrzOwePw851tqvA+RklDko249QZ2ob/8fghuw+BTAS2v3EUy8yRhXYGHYcLANmDAkcLROmWM2j7PHOWoYceULudXl4kps=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=oaAi9IR3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=PqiFdqI6; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784280653; c=relaxed/simple;
+	bh=tbCI00YSlwDRg6JIkFR/niiKWVVn+eRN2wiQbbOWrWU=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=H8udN+e1PJQiNqrO0+Qk7+1+fjpXsFXybvcRh4IuzHX0nCZJEkR7LV6YZxTbXDXMTkaJuwWu0w2qtiKclRkeetdC9OwaMiDI4Yb/O1KUDOrW0DHF+mYQsBMyzFCR9K/8u1wJjsQP7ttZ4j/USAJLq/mDpv5z7m14+SX0w0i1lWw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TTfTZXMb; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="oaAi9IR3";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PqiFdqI6"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66H6cHJb2098529
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 09:30:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	TnVo3dTONDwo1Ybr6ny1brTgUFSId0p7SO+cCeMTRgQ=; b=oaAi9IR3JYz5La5X
-	ooCE/hmwAzHRm7UAezhUauUYoWb3Os2Wu0QH3KPm0mtKZX3CLCk6RBFDv2mE15hB
-	5oLLfdIMwF79vdKk9Y26EUmyXxKZsqeiNBQS4YUjX4HN1wbxdY5/3hKW/pBJpms1
-	Dx/vJ+FPsLxSYlo48lt4UywRXANIzHZrGRse8Nogp0DEH1NvnaSmbWUGUIMcVTE9
-	ZT9fkVMMi+DjYalROdE5tKjlJzvlxMcO3a4yggLfo24Miljy3P3iWj80EPPU8ilR
-	h8pSaYGwZSeE6I+eUFIdKYGcPdP/8hKiuvVBAzaTN9681FRpzE3ESc5jiBs0v35F
-	h0z5/g==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ff3u6k22k-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 09:30:22 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2cee1ec30f2so60148245ad.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 02:30:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784280622; x=1784885422; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=TnVo3dTONDwo1Ybr6ny1brTgUFSId0p7SO+cCeMTRgQ=;
-        b=PqiFdqI6hQWxfOT7u+JdxSC4pdGfazRK/SRPYnqxbb2kjSp78q5D5ia71glCoSxx8c
-         ZW7JvqZ9xdwa6OIh1ULr3/lx74wRIut/DCLyfYwzhdJuM9w4O/Mzk6nvZk4WNjJf+vGN
-         qMx4RLhnLaSSAx30TuHSfWtD3ZDASes9d6KE91evbK93ndV0qU+K8UzcAUh5AY++IDKR
-         u8Gkgmnbp4Il2mjKOn/iK/N268E1W4a41QjmsHcIMQB+zhIoZ4HoxZthz8DX/vPSefkd
-         ynQEr3NJDABxWWHgm/xfc3d2Jd1Riea2ItY7FOHGpoY6WmcD2aAQsPJ40wzHEBVLqoUX
-         0awA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784280622; x=1784885422;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=TnVo3dTONDwo1Ybr6ny1brTgUFSId0p7SO+cCeMTRgQ=;
-        b=sOcoZ1M/HA/MTR2rpLopfyuEN3Ha/plbLnlSsMtQcFLyj+bg8ebEQfbPIjzY5DtNfk
-         bCZM5kmfB4A5QhpYVrDyQ+h8WxOFWRzY5wkDDpf9Ku9+RKthFv8YHVa3VNKXfBKw+Aml
-         QY2ukYsO/UfFTfjPpHzq+Ebj+e5S5sCygcj/QD0vzMZjZGUWzrAR+2+XdVPNF6cmbTqx
-         0h0Vz1dqhIBU1qZ6I4wN/xqa+HfwnadX9lLmgqoAexEjVW50h6Zt9aTFtsQlQgVyCfrG
-         3i51M+FunuMixbOo5HHRPewY2Rpe/iZfKBVRlAevAaavHSeX+I6WQRifQp1+7pQitx+0
-         GsRA==
-X-Forwarded-Encrypted: i=1; AHgh+RqjX7YMqnqNLv/f94j856ek19Xim42cDMAytnU3SCqMp8y2VBGO9ePiQYd3yv+PWuox1K5XvhhsPf/X1KDO@vger.kernel.org
-X-Gm-Message-State: AOJu0YzuPEuijjN9NSbfdiTxJrzjCdsIsy7qiH5q6SL5bdediQF4S8ta
-	mMb/T+3rdPWHp2TInHWf547Zp4NfdgQcXjSP4SWc5oUno9vaS9agTasOhwWuiwHVRG2j2el0wW7
-	q4B9bbTSNzy4fgz5cSbq4mV+7ypVUkB1ks2Gj65BI/yufGDE21f1FJ8B0dhd7mcsVBHX7
-X-Gm-Gg: AfdE7cmP7ZRm3yelGwrwGHGW63a8pG/MN8cy5/bezYucH5IF4bCZHaLo+Kf8L71C+WL
-	dmDIzDTzTm5XnrkdUOffnFUAlpEHch+W8ZUU4yyzB3Q1CP2cYu1l00NRrT4OqHaQUZOHaD99Nxh
-	MQdnzLDCG4GtZo/hvCQW1XkDAAtLBvDkU+aLNfjT3cPBozvuSO9u7AiRFiznTIyHaa3ROmLdB/3
-	zsbx9Nej7IBG7g0ughfAbp4G5PmKUv/epl1fb4VVzp034FUTkEWBnslOgtGJC4uHrVq0Df2OnuZ
-	B8P3YIt0Hx+QaOpWbjAuWRJfQ4BDuEPB/6tHCQBfaotVnp6TU4GPQhkKvpmZlSq0ssnGFgrg87m
-	e0L8SeBklGdNBeEfbiALYMh7snhs=
-X-Received: by 2002:a17:903:3c46:b0:2c9:97a8:afef with SMTP id d9443c01a7336-2cf349f4a51mr17753145ad.40.1784280622086;
-        Fri, 17 Jul 2026 02:30:22 -0700 (PDT)
-X-Received: by 2002:a17:903:3c46:b0:2c9:97a8:afef with SMTP id d9443c01a7336-2cf349f4a51mr17752525ad.40.1784280621313;
-        Fri, 17 Jul 2026 02:30:21 -0700 (PDT)
-Received: from [10.217.216.90] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf344f4481sm7415285ad.32.2026.07.17.02.30.13
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 17 Jul 2026 02:30:20 -0700 (PDT)
-Message-ID: <2e9a211d-a877-419a-ba8d-40bfc42e65ef@oss.qualcomm.com>
-Date: Fri, 17 Jul 2026 15:00:11 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TTfTZXMb"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 731191F00A3E
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 09:30:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784280652;
+	bh=iyJ4B2wLQ9s15BrAYrM1DXNCJwAOqNuA61/FpLM63sE=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=TTfTZXMbAPYTlaw0Apg12nkkjFAKZd8c8OsOaSFQzFpYgsh2ORh/KG5gyqelszTN8
+	 BXhdphF3n+OXSnNsN9acPO+7ogLCuV6aJwvEDSyGw1gUrDfEYGvuVkHsiwXjjrNNmM
+	 fDWIiyK4O8s15X4mz1vxrTH6D7qJTIlKTTYvMTCajLEWSGcy5q3lOSlel4Ax6+8K8o
+	 OF6dlP4PPa8+F4A57hE2ci0nwnjx0cJvGj30LDTvGQwjbBv3DKulZe4OlP4eoQp/ZU
+	 UUYpY3ZXIEfnYGxYqzbD2th6su/ry1aC5QOLtwThGyssBrSd7DPhKKTv8yfr1AFGP8
+	 xtqfOyLjiFkWg==
+Received: by mail-lj1-f182.google.com with SMTP id 38308e7fff4ca-39d4c864bfbso46606181fa.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 02:30:52 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RoTIaC6+bYYNALH/uvLvw8Oh4rv7igW8wMfkOH9ucJEgv/rIVPkUwsPAAbxAVoor9osMmz5G+cmZxZrruOq@vger.kernel.org
+X-Gm-Message-State: AOJu0YyOcZZ9JePmjt1NlIO4NODkdAPkXod+mYRFCxsSfUJbvaY7xhfN
+	i5tCSmGphLk3zm6uAMOUdvaxeYpeomliT5VywrKU02oEGi+/caQSUmbQkz1ZCkgUqXFhGbuff9a
+	4zTcs3yK/EScw0g4Kkbc0CN6QreV4s3LKV2N8P5P+9Q==
+X-Received: by 2002:ac2:550f:0:b0:5b0:163b:e2d6 with SMTP id
+ 2adb3069b0e04-5b28fabab20mr360225e87.62.1784280651204; Fri, 17 Jul 2026
+ 02:30:51 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Fri, 17 Jul 2026 02:30:50 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Fri, 17 Jul 2026 02:30:50 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260716-monza-wireless-v4-6-9b02e6f549d7@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/3] dt-bindings: clock: qcom: glymur-gcc: Add missing
- CX power domain
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Abel Vesa <abel.vesa@oss.qualcomm.com>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd
- <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Maulik Shah <maulik.shah@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Jyothi Kumar Seerapu <jyothi.seerapu@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Brian Masney <bmasney@redhat.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
-        Pankaj Patil <pankaj.patil@oss.qualcomm.com>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
-        Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com>,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-        Qiang Yu <qiang.yu@oss.qualcomm.com>,
-        Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>,
-        Abel Vesa <abelvesa@kernel.org>
-References: <20260715-glymur-fix-gcc-cx-scaling-v3-0-72eb5adad156@oss.qualcomm.com>
- <20260715-glymur-fix-gcc-cx-scaling-v3-1-72eb5adad156@oss.qualcomm.com>
- <4b543abe-2482-4381-b41e-623cdf5be9a2@oss.qualcomm.com>
- <olkjcrfq5t32gvqgpcqiuyp5jhf72f4piowz6osxhain77f7bc@ggwuk4nz2ak2>
- <316fd37b-9936-4bca-8521-9a11ee65cbd6@oss.qualcomm.com>
- <almBxBhYxTR9n5FZ@baldur>
-Content-Language: en-US
-From: Taniya Das <taniya.das@oss.qualcomm.com>
-In-Reply-To: <almBxBhYxTR9n5FZ@baldur>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDA5NCBTYWx0ZWRfXz5VZkNMf05G0
- /wUQN3ktiXtIeVpz8w3rk3XMasM7fgHy5B8EAf+kOKRzeu/Erwb2vlgIbl27zmTtfK0xvy/as0I
- IJr9MGujzYIYLlTGsDKw4m8xwhIllckdWUzkgq1/Qp/XI0c0V3PLHTwBEVD6ceWy4H9VvDlALhL
- ZSYugl7vCZA5V0ah97aiG6a7O5Y3C+e+DNstdhZN/uxC3jippwbO1gUDX6/Dj1BeSV4Tws2Aogz
- F96nmEYg4xbiLW5skU+U916ITSl6JJMuj3gR05C6MzMH2MnZo9ovRIyVjQX7khVQEbsDDJTLXvx
- 4xXKoevkIFOEWTcTsI1Mf7PtsAE9kffLGmXuOFTbNZdw9XPCZDVaOOg9BzfUIlXezSh7EBLRna9
- zRSxFd1NeccW9Wk1ZrZBsQAa4MgSV0PchNdHxuAfdd8tyPTpRn6Pp9c3K3w3mF31gZtiPdrJIhu
- 8I/lsPF8whjXgfvOKDg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDA5NCBTYWx0ZWRfX6NgyqgvMyT/v
- uUwmQwdK44kxP2l3gopeq/IvcTC1PkuCty8RsEu1Gj5Ukw2F4lndmgLnSkZ73VyFffsd/mN0Syt
- eVvaPvr0pJyNK8WKMYO7PriQVXRg8EY=
-X-Authority-Analysis: v=2.4 cv=DYMnbPtW c=1 sm=1 tr=0 ts=6a59f62e cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=ZdHkocIOR6SBK6D-yKIA:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-GUID: jhRKqy8rJfBcWFj4teBUdRbH8npYADNu
-X-Proofpoint-ORIG-GUID: jhRKqy8rJfBcWFj4teBUdRbH8npYADNu
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-17_02,2026-07-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 lowpriorityscore=0 bulkscore=0 phishscore=0
- adultscore=0 priorityscore=1501 spamscore=0 malwarescore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170094
+References: <20260716-monza-wireless-v4-0-9b02e6f549d7@oss.qualcomm.com> <20260716-monza-wireless-v4-6-9b02e6f549d7@oss.qualcomm.com>
+Date: Fri, 17 Jul 2026 02:30:50 -0700
+X-Gmail-Original-Message-ID: <CAMRc=Mcr8dCAeHe48LBOQ_Rg0iSQaHmL_HrC44ohqEUdjg12aA@mail.gmail.com>
+X-Gm-Features: AUfX_mw7JByjcuNC_OA-Xwp9N1-sIdcb6nu73GcpC0DTViDxeC5IKKiUyNbwp_I
+Message-ID: <CAMRc=Mcr8dCAeHe48LBOQ_Rg0iSQaHmL_HrC44ohqEUdjg12aA@mail.gmail.com>
+Subject: Re: [PATCH v4 06/11] Bluetooth: hci_qca: Set 'bt_en_available' based
+ on pwrseq power controllability
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: linux-pci@vger.kernel.org, linux-pm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-bluetooth@vger.kernel.org, devicetree@vger.kernel.org, 
+	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, 
+	Manivannan Sadhasivam <mani@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, Marcel Holtmann <marcel@holtmann.org>, 
+	Luiz Augusto von Dentz <luiz.dentz@gmail.com>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
+On Thu, 16 Jul 2026 18:18:23 +0200, Loic Poulain
+<loic.poulain@oss.qualcomm.com> said:
+> A Bluetooth device only needs the non-persistent setup if the host can
+> gate its power, so that it is actually reset on the next power-on. When the
+> power is controlled by a power sequencer, whether the host can gate it
+> depends on the hardware wiring, e.g. the presence of the BT_EN or
+> W_DISABLE2# line.
+>
+> Query the generic pwrseq_is_controllable() helper whenever the BT power
+> comes from a sequencer, regardless of which provider it is (M2, WCN, ...).
+> If the power is not controllable, clear 'bt_en_available' so that
+> HCI_QUIRK_NON_PERSISTENT_SETUP is not set.
+>
+> This is based on Manivannan's original patch that keyed the decision off
+> the W_DISABLE2# device tree property, it now uses the generic pwrseq helper
+> and handles the always-on case.
+>
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> ---
+>  drivers/bluetooth/hci_qca.c | 13 ++++++++++++-
+>  1 file changed, 12 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
+> index 17f436484e1e74d1dd690ada22134315abb767c4..41e8c302abc2a820022d1783f1fad76b358ae67c 100644
+> --- a/drivers/bluetooth/hci_qca.c
+> +++ b/drivers/bluetooth/hci_qca.c
+> @@ -2548,7 +2548,18 @@ static int qca_serdev_probe(struct serdev_device *serdev)
+>  			return PTR_ERR(qcadev->susclk);
+>  		}
+>  	}
+> -
+> +
+> +	if (qcadev->bt_power->pwrseq) {
+> +		bt_en_available = pwrseq_is_controllable(qcadev->bt_power->pwrseq);
+> +		if (!bt_en_available) {
+> +			/* The host cannot gate the BT power individually.
+> +			 * Treat it as always-on and drop the pwrseq handle.
+> +			 */
+> +			pwrseq_power_on(qcadev->bt_power->pwrseq);
+> +			qcadev->bt_power->pwrseq = NULL;
 
+Maybe a little comment saying this will be released by devres? It looks like
+a leak otherwise.
 
-On 7/17/2026 6:45 AM, Bjorn Andersson wrote:
-> On Thu, Jul 16, 2026 at 04:42:11PM +0530, Taniya Das wrote:
->>
->>
->> On 7/16/2026 12:52 PM, Abel Vesa wrote:
->>> On 26-07-16 10:13:48, Taniya Das wrote:
->>>>
->>>>
->>>> On 7/15/2026 6:59 PM, Abel Vesa wrote:
->>>>> The GDSCs provided by the Glymur GCC are supplied by the RPMh CX power
->>>>> domain. Model that parent domain in the GCC binding so the provider can
->>>>> describe the dependency in devicetree.
->>>>>
->>>>> Add a single CX power-domain entry to the binding and make it required,
->>>>> matching the hardware description needed by the GCC node.
->>>>>
->>>>> Fixes: ee2d967030fe ("dt-bindings: clock: qcom: document the Glymur Global Clock Controller")
->>>>> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
->>>>> ---
->>>>>  Documentation/devicetree/bindings/clock/qcom,glymur-gcc.yaml | 8 ++++++++
->>>>>  1 file changed, 8 insertions(+)
->>>>
->>>>
->>>> Abel, I feel we should add the 'required-opps' as well which will ensure
->>>> the clock controllers minimum voltage requirement.
->>>
->>> But it was agreed in v1 that we should not add the required-opps. So we
->>> dropped it in v2.
->>>
->>
->> Okay, sorry, may be I missed that comment.
->>
->>
->>> Can you give more details to why you think it is needed ?
->>
->> My reasoning is that if a clock controller requires a rail, it is
->> preferable to explicitly specify the required operating level rather
->> than rely on system/client vote. This makes the dependency
->> self-contained and easier to reason about. Clients that require a higher
->> operating level than the clock controller's minimum requirement remain
->> free to vote for a higher level as needed.
->>
-> 
-> You're expressing this in generic terms, can you please provide the
-> concrete example of what this would look for in the Glymur GCC case? 
-> 
+Bart
 
-Yes, Bjorn, this is indeed a general requirement for a clock controller.
-
-In Glymur I do see that CX could drop to retention corner in case there
-is no vote from any subsystem and so it is better to vote from clock
-controller a level above retention using the required-opps.
-
-> What is the required-opps for the Glymur GCC?
-
-LOW_SVS(rpmhpd_opp_low_svs) corner should be good for GCC controller.
-
--- 
-Thanks,
-Taniya Das
-
+> +		}
+> +	}
+> +
+>  	err = hci_uart_register_device(&qcadev->serdev_hu, &qca_proto);
+>  	if (err) {
+>  		BT_ERR("serdev registration failed");
+>
+> --
+> 2.34.1
+>
+>
