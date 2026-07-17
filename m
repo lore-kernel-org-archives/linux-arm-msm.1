@@ -1,285 +1,158 @@
-Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD47642D76D
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 14:51:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D54073ADBA3
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 15:04:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784299904; cv=none; b=LX2g8B1qHmTgw49PuDbH4LqypzIGCJ9Am1EPsi5DKTEe4keKwuWI2c5EJxSnhZ35h+KN2/rFDABF8iYH1TaEtLoIOdIGI65bGV02M0jp4UDhhTMR22WOM6n0HFwyUZOEf7HZrh8c9Ki2YU9j7SIlhnjZUsVWeWjHAhk55+hpAro=
+	t=1784300684; cv=none; b=k2zidKCrnxG39iQNcPzNriQXDoFITIZQ1rw7c37loLoEKDCEsaf4skVz2c7e/FAnb1fgHF98w7BRVxYY/bGmXqmSFOjQhigr85YD8cilIyD2VAigs3aDve6NbZOs/dU26fbl9WF6QmWvMDwivBPcYByCMrLc+hBICLLcRXQ49bc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784299904; c=relaxed/simple;
-	bh=HHmWBx8/WEy0P+2R3GXn3gqnRQXJL8NR17O07WlcvG4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=oQDYgZMOAcWl3Sl0c3QYYpGz1HX+O4t9DQVOtmWaC81cdA0ShJ7464WNxn8yK5AoHc+OdHTgzCKlvJR3ocsjttvPP+ls/D1Te0Ei+l8/yP3DtAF4Nd5wUNp/+7CKa9sqj4wSE3kCPcyhXhWBE51yZG9A6N57ovVVCubkC5vRTIc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=VARdPnDB; arc=none smtp.client-ip=209.85.128.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	s=arc-20240116; t=1784300684; c=relaxed/simple;
+	bh=2QVwQq54txjm+tz8crvzEY6MS5j3yuO8G5yksIevunc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=r/ZP/EZP+7tazrQRWeeuAg5+P+atmL8hJSeYvKbG/9XXOlhc7Qo6KJs9d39CCbSnFb3CX5hLWz0keeb398eqnE51mqhEsYOH+kelqJVPZtrmlcmPfxqoq8AsMycG5YLEOeoKdsDSTOh83sQ2q+uX5JQ5vLBlZSuny2GR5krY4No=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=JSDFHSmS; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CuZOSlEC; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="VARdPnDB"
-Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-493f25d47dcso29406325e9.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 07:51:41 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="JSDFHSmS";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CuZOSlEC"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66HE7maT2002015
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 15:04:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=8mFE4Zuem6D5GuQC7kLvFWE/
+	dtUJIComejuqrkkbY3o=; b=JSDFHSmSQFFx/hexVJNiyKN2vqwoVtyxqD9L+lQ6
+	twtkyHBAnroclehLzOhzHJdkowq1vF1++CS2F1RiRpicatk2UprFYJCEYQIXMyPw
+	oYJ0daKUcfz0eOVTRNizhV7UeeY2adUCtiStIRC9DfmFdg26B64sBGv4mFjVR+CD
+	CMRHO9UCud3PlKYXlNzkpvoI9C19XiK+JnlkKOtH0/ovdWwocVGdUaOKkX/1stiS
+	t57L/82PJpk60CKL+ipVG3E6uGGfuFj7nzyncSeh9zMWgiCh0ElfIhsNCYCe78Bf
+	3isxBgUu/thBn2WEM/KBFJP41CoSUpeWB1WTzDe1AN4OiQ==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fff9gsxeq-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 15:04:35 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-c891ed872ddso13862575a12.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 08:04:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1784299900; x=1784904700; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+        d=oss.qualcomm.com; s=google; t=1784300674; x=1784905474; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=IVNSEzVeVDEr/t5gffuEITndGKVn2+8lXoaYf3eYvUM=;
-        b=VARdPnDBETJAY0shzr6PsmI+pyM8YQ19b3AzUvS18icO/zoX0gas0VDlj0yyolWDC7
-         GfiHQ2fz0PrikyMM4oGpL61kE1RhzHbEmFCrlvuzIAiP2waR8KYf+sbWo/ak3mJFlzKJ
-         KY5pM6EF+HvcalCpcFgBoM3MyT84pm+RyCdpv/ZMaTr88E9mN0U27a24XtnQKlCW4DkW
-         3OfhOBRiwREw7P5BuvHrI8Wb+UL5meKmUy8XvUDI4OhaNkYET8GoVrZVL8TakIl4nZWo
-         TMps/nJMzGHfA4H9jgVxJysi0z6/3GAfnbMVjck5LAOKoC9nieeQgut2cgcO5uvCrq7w
-         Zxgw==
+        bh=8mFE4Zuem6D5GuQC7kLvFWE/dtUJIComejuqrkkbY3o=;
+        b=CuZOSlECOxlWokMWAYAna5lV+dzKjA+Fwi+UO+5gIWrVT4h72onAsxwX8xaGVgDSLS
+         +Q21UAbDwvZjsP+zAdxxDT5DXsx0yoXha6UHwAiGxrmjY2cXG5g9WnQ2dN8qaqGDCfwR
+         OYuH51CSW4P+1/EyPBDcc9+pnmJMDF3HxU3dARusPXE2lbyx574STKEF6gWZ4KualNeu
+         Kv/j1DD1l7LwN5hbPTWXwdQjNrKbM7P9kseFr/vDcpn5LwEaZ14g3W2XODwtK4JuWPFq
+         7qS+YLG0W6euwo4/KabVLbUXCVANVe6rafkQNuRNGg51ksSt9RTI4HKiqDbhukChtUfn
+         HOtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784299900; x=1784904700;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+        d=1e100.net; s=20251104; t=1784300674; x=1784905474;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=IVNSEzVeVDEr/t5gffuEITndGKVn2+8lXoaYf3eYvUM=;
-        b=PRswMqN4k0qlYxV1BMDAfqMKltR7TbTiJB/NlOCw5V/KyOQonJx8ORV/HYmAe9oHO3
-         CsyKnB8cTtRfhMFZLfzUgTNq1L6mj3ImtPJg7UzpdyU/v4feBv+qVnGZXw3lQJgmqM3g
-         GzEujAhc5p4WhFHBuxVv/tG55140g0VQIiDccJWGBkT3praFkPK4z5RU5fNhvqn1aZSp
-         Vq33yL20oPhCh6zehA4krNt034l22glO11q0USq+ehGrRFn0tY9hw/Y8ghn5gv0XgVvo
-         uNmffckb5ngyG2vfZUAMQQowCpiAanjkXYBCVLNDaCYk/K8mtnJNKqgxWa8J5AG75nfr
-         jZAA==
-X-Forwarded-Encrypted: i=1; AHgh+RqN670CYxGeYqd0OINS/ZGl6OshqjS0fQbfvtJ8NR1xKY2Bj8LUMVsLRKG3TjTL3yxJUMvO49G5Miwf9aQh@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw4WKnzsv0nBxjQ8APCEbKwAr7bKMl2QIdzLVs55WrhTlbSJzL9
-	U2ycQHNxQjj4Gw8W2SHh1G88//12XZxcGxwcwwW4zn4HBKCX3KTg+lS8+BB9ILomlrXoNZWmtOx
-	vtdkG
-X-Gm-Gg: AfdE7clrQhREeSk38HLE6V9vtVetRj7XNzvo/NPHGT7XOrXs46e/lX2VBC+w5oWzd6O
-	/LmXWL/zcRUVo1z2boVyJxtpbFcMLZeQ1nnazS2JLy7cfB7PrI1pj5XCCNHmkVysBqenH/4QwYr
-	XWA1Xj62W1I7Id6rMZMaPOmRF+TWZBO0vaXMf0vEaM6vf5cqlzeZtcWS79NcqTTbR8Gectkr7YH
-	zlQ6//DFJ/S/X06P1rW2ZL1zHo70rOeH1Ef5rWfWuKDZ3n5ciEJxm4YPoE3xJoXTnRd87ECRjhm
-	y2Ud66M3bbPW+j7hYo9Se6HrjpBAS0CtkClA16qY5e5S0jR/rwhtqqWDEDojMdwOkhfemaseHPQ
-	EpdinJaaOCiFnh9Yr4awHZSlqZW7V5HdK2r0zsPc2Q80oT9eLATmZN3FLxNJIQ/qjDNio/gxvzq
-	TE3O47/pjhZSuk0J3JAI4I5juuuxUorYDX7Nylq5lBBzoeW+J3nDJosIlzdvSxPWbWqw==
-X-Received: by 2002:a05:600c:4685:b0:495:4a77:1327 with SMTP id 5b1f17b1804b1-4954a771521mr35673365e9.33.1784299899945;
-        Fri, 17 Jul 2026 07:51:39 -0700 (PDT)
-Received: from localhost (p200300f65f47db047d2d8b161e35ab77.dip0.t-ipconnect.de. [2003:f6:5f47:db04:7d2d:8b16:1e35:ab77])
-        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-47f63e519f4sm4299068f8f.14.2026.07.17.07.51.39
+        bh=8mFE4Zuem6D5GuQC7kLvFWE/dtUJIComejuqrkkbY3o=;
+        b=b8X2ZCHl0glnzD9mgSlD/f9PMgqMha7SJhD22Iu+YBlTMEoBX6EEjMOwp40+vvktW0
+         lxdNN5gU+tuoRGaUuRlsiB3z+oDhKVNgJN0JXPFQNR4r4h7wVsQU+fWu+ieNiCIF7YNd
+         okKBm1WTbH9T9OKhz5jovnvgRCiaAUfY95z2O6hmNwXcXkDJlWuThGfSWj1YQy5gGJ7U
+         6MOBI5D/hjIqWnvbV98jINuDfbRWoK6PVkeconcu8u8xPsvYuSGnhCOpT2Gw/sAJZqEl
+         HetMUsTcz6rVCWZUe1a4neWfiSJ7F21YArFcUiXjPybbJyP/mUWfYuWWOZxRD9YM5eOI
+         OjFw==
+X-Forwarded-Encrypted: i=1; AHgh+Rr4x576KvCGegAJ9UjCR/YygM0dSUJj4zCNJtsc04j0t5BuR1xeejxAS3sDRJv4jiJg9TIq9ijI3fN/p4To@vger.kernel.org
+X-Gm-Message-State: AOJu0YxIVYgpk0jIdYzxRhumfTXxcx7aHsLuH+x47bxOvauV+RiPebwh
+	aaG2phgbSHZ41EgyS4UCFhurMOdLOeaL1usr2yv2WDRkuPgbLe1M71FduDH73JeFd+cb12Q15av
+	Oy2ZSdPHPoqw8N1BQVIIgmqOEpAwfxRyMZK26Ffd3Ii+s+6M937qa4acChV1byZc+asXF
+X-Gm-Gg: AfdE7cn/sG9sWn9g94X5rKn/Allw+56OKiPE7PVqfmZQCy8C9p5hQ1wmzlQGNKZdaQ2
+	EPPVks/2FKM7ZJZ4qaLQiQHSC3hIttfb8rTQgr6xjpW0tVeSTQEUudPlH3SDWGCfI1EyNdD//J+
+	MF1uMUde+mJKQwaCAJlmCe1Yf9nNwdkAxYvONMLHcfbF1Z39GfVNz9QT1cUJ69NQhzXufjjw+WN
+	ktiRK1z1htF3nh5bLh2mmXMyJ7R/0ZtGgfpgmbxbChWBasPkrWTRPsDZ7m/OVs4J9JFZKJXj1lH
+	Go7efnkm8Cm5fXalCOOFJSWMZ4k3hSL82Z5d6l7+5x8JRmsNUypOZM1xItj7X7uC/WurwVhp4jz
+	QkKLma/BYPBGV7jsznX/DD2EammQ=
+X-Received: by 2002:a17:90a:c885:b0:380:83fc:4315 with SMTP id 98e67ed59e1d1-38e4b538938mr3291392a91.21.1784300673718;
+        Fri, 17 Jul 2026 08:04:33 -0700 (PDT)
+X-Received: by 2002:a17:90a:c885:b0:380:83fc:4315 with SMTP id 98e67ed59e1d1-38e4b538938mr3291259a91.21.1784300672917;
+        Fri, 17 Jul 2026 08:04:32 -0700 (PDT)
+Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13ce29ffb13sm6280032c88.6.2026.07.17.08.04.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Jul 2026 07:51:39 -0700 (PDT)
-From: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>
-To: Arnd Bergmann <arnd@arndb.de>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
-	John Stultz <jstultz@google.com>,
-	Eric Piel <eric.piel@tremplin-utc.net>,
-	Romain Gantois <romain.gantois@bootlin.com>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Takashi Sakamoto <o-takashi@sakamocchi.jp>,
-	linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org
-Subject: [PATCH v2 11/12] misc: Unify style of of_device_id arrays
-Date: Fri, 17 Jul 2026 16:50:57 +0200
-Message-ID:  <fbf51b8f413c516977e2c8a81896221795df77e4.1784299069.git.u.kleine-koenig@baylibre.com>
-X-Mailer: git-send-email 2.55.0.11.g153666a7d9bb
-In-Reply-To: <cover.1784299069.git.u.kleine-koenig@baylibre.com>
-References: <cover.1784299069.git.u.kleine-koenig@baylibre.com>
+        Fri, 17 Jul 2026 08:04:32 -0700 (PDT)
+Date: Fri, 17 Jul 2026 20:34:25 +0530
+From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+To: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Anvesh Jain P <anvesh.p@oss.qualcomm.com>,
+        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
+        Pankaj Patil <pankaj.patil@oss.qualcomm.com>,
+        Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 3/4] firmware: qcom: scm: Allow QSEECOM on the Glymur QCB
+Message-ID: <20260717150425.nfynctjnqi47upw3@hu-mojha-hyd.qualcomm.com>
+References: <20260717-glymur-qcb-v1-0-aaf1cff84aab@oss.qualcomm.com>
+ <20260717-glymur-qcb-v1-3-aaf1cff84aab@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6864; i=u.kleine-koenig@baylibre.com; h=from:subject:message-id; bh=HHmWBx8/WEy0P+2R3GXn3gqnRQXJL8NR17O07WlcvG4=; b=owEBbQGS/pANAwAKAY+A+1h9Ev5OAcsmYgBqWkFheLOxpzkeXb41Of5vsSxAFSWsNYn3qoDLa sVQVyuD1KOJATMEAAEKAB0WIQQ/gaxpOnoeWYmt/tOPgPtYfRL+TgUCalpBYQAKCRCPgPtYfRL+ TtQ2B/40I147YY2V/Z/qLnO9Ezo8Zc72HgCjFbi//E3M9gtm6YpPq6tuye/pWfJ3YBUbO74D1Ay 3knvQXFIbD7y0mOguO11kx0e9cdEc5cG2+nlocq3475zdQPdlg/PS3DItckLAnQ46gkMofqu/0c HFXMGEhTHcCjIIhcFzdl2m+C1bM1CbJaysivoHYxX8XrhZ7TB5nekeUD7VDiCIEp5fMzOzChC1l rElel9cvpiwBYERH4GPxpfgEKe5ftez6Xr/af9+5sesGr5W/7PuF9n8HpniRRG8rx9UhVsu8ZKr aqnMDQIzWdMbpcrbhrMnsGNlTWlYqcZ2wb6ZD4+pwe4WN7CY
-X-Developer-Key: i=u.kleine-koenig@baylibre.com; a=openpgp; fpr=0D2511F322BFAB1C1580266BE2DCDD9132669BD6
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260717-glymur-qcb-v1-3-aaf1cff84aab@oss.qualcomm.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDE1NCBTYWx0ZWRfX9kPPZ94rxmox
+ LMqwfN7ykGAb3EzWaRv9ZKFfHP5rqM7mDYi/Biga3cqLu9vPrAPPLLuZAphWc6sz73BCt8wbw9N
+ kQx/Yb2901iq3kkKukETJOAcB5qs4Sg=
+X-Proofpoint-ORIG-GUID: iUpuDU3W6pgW870mDvbAMicBD6UJL2QV
+X-Proofpoint-GUID: iUpuDU3W6pgW870mDvbAMicBD6UJL2QV
+X-Authority-Analysis: v=2.4 cv=TaumcxQh c=1 sm=1 tr=0 ts=6a5a4483 cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=IXoLagY9VYqCqr7K_xUA:9 a=CjuIK1q_8ugA:10 a=zZCYzV9kfG8A:10
+ a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDE1NCBTYWx0ZWRfXwEjQhxfeDHWy
+ FZ8Q1EzU446yLSdEG8EGC4eW9WbQ8DWKX1IqmgLL1j4SSAJLSCnzkHKwrvDz780QSxHJpn7EspV
+ p0hgqVCHtEbsipNmfilPZjaiALp7BhEOMiuaJAHchkZdI/O3FP1MK8uTtKmkT7qtUCfHFfJs9/e
+ XFMPndONVrA6kNSAj3oYjyfhZJwdnKr0j+7A1NrwPrQlGxpVcj1Uax+1+m9MkrN+Kf2XPGwq7N+
+ gmdoA+oIyYHogBmDvNQqDELy4XlIlPcyVYDuxMTlt5oV66hlZNBLgUbuSqt6r004oGXDQnPGX5+
+ 2gZuX6D8urDeuwwwpzb0UJyDz0mwJboyV9TkS11gmulNATkV/EKFCvHtRf6Q4kevfG+kytCziLo
+ r8fR+KJ9s7axYfzDTPIVmnqoYmGz+fPl5OYVCK1J5ljGZiniQry5pYt/ihePl4C8aMrqtJC6I6F
+ SVmvvIxy49qC3nQu0wA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-17_04,2026-07-17_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 impostorscore=0 clxscore=1015 adultscore=0 phishscore=0
+ spamscore=0 bulkscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170154
 
-Update the various of_device_id arrays to conform to the most used and
-generally recommended coding style. That is:
+On Fri, Jul 17, 2026 at 04:54:11AM -0700, Gopikrishna Garmidi wrote:
+> Add Glymur QCB board to the QSEECOM allowlist for enabling access to
+> efivars and uefi bootloader.
+> 
+> Signed-off-by: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
+> ---
+>  drivers/firmware/qcom/qcom_scm.c | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
+> index f35f2ee39130..e0ea40b4302c 100644
+> --- a/drivers/firmware/qcom/qcom_scm.c
+> +++ b/drivers/firmware/qcom/qcom_scm.c
+> @@ -2326,6 +2326,7 @@ static const struct of_device_id qcom_scm_qseecom_allowlist[] __maybe_unused = {
+>  	{ .compatible = "microsoft,romulus13", },
+>  	{ .compatible = "microsoft,romulus15", },
+>  	{ .compatible = "qcom,glymur-crd" },
+> +	{ .compatible = "qcom,glymur-qcb" },
 
- - No comma after the list terminator;
- - A comma after an initializer if (and only if) the closing } is not
-   directly following;
- - No explicit zeros in the list terminator;
- - A space after an opening { and before a closing }, a single space in
-   the list terminator;
+Reviewed-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
 
-Adapt the few offenders accordingly.
 
-Signed-off-by: Uwe Kleine-König (The Capable Hub) <u.kleine-koenig@baylibre.com>
----
- drivers/misc/ds1682.c                  | 4 ++--
- drivers/misc/fastrpc.c                 | 6 +++---
- drivers/misc/hisi_hikey_usb.c          | 2 +-
- drivers/misc/lis3lv02d/lis3lv02d_i2c.c | 2 +-
- drivers/misc/lis3lv02d/lis3lv02d_spi.c | 2 +-
- drivers/misc/open-dice.c               | 2 +-
- drivers/misc/pvpanic/pvpanic-mmio.c    | 4 ++--
- drivers/misc/qcom-coincell.c           | 4 ++--
- drivers/misc/sram.c                    | 2 +-
- drivers/misc/ti_fpc202.c               | 2 +-
- drivers/misc/vcpu_stall_detector.c     | 4 ++--
- 11 files changed, 17 insertions(+), 17 deletions(-)
-
-diff --git a/drivers/misc/ds1682.c b/drivers/misc/ds1682.c
-index f073a5067fc8..4500d7d0ea77 100644
---- a/drivers/misc/ds1682.c
-+++ b/drivers/misc/ds1682.c
-@@ -277,8 +277,8 @@ static const struct i2c_device_id ds1682_id[] = {
- MODULE_DEVICE_TABLE(i2c, ds1682_id);
- 
- static const struct of_device_id ds1682_of_match[] = {
--	{ .compatible = "dallas,ds1682", },
--	{}
-+	{ .compatible = "dallas,ds1682" },
-+	{ }
- };
- MODULE_DEVICE_TABLE(of, ds1682_of_match);
- 
-diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
-index d86e79134c68..f7b6aba8b71d 100644
---- a/drivers/misc/fastrpc.c
-+++ b/drivers/misc/fastrpc.c
-@@ -2299,8 +2299,8 @@ static void fastrpc_cb_remove(struct platform_device *pdev)
- }
- 
- static const struct of_device_id fastrpc_match_table[] = {
--	{ .compatible = "qcom,fastrpc-compute-cb", },
--	{}
-+	{ .compatible = "qcom,fastrpc-compute-cb" },
-+	{ }
- };
- 
- static struct platform_driver fastrpc_cb_driver = {
-@@ -2579,7 +2579,7 @@ static int fastrpc_rpmsg_callback(struct rpmsg_device *rpdev, void *data,
- static const struct of_device_id fastrpc_rpmsg_of_match[] = {
- 	{ .compatible = "qcom,kaanapali-fastrpc", .data = &kaanapali_soc_data },
- 	{ .compatible = "qcom,fastrpc", .data = &default_soc_data },
--	{ },
-+	{ }
- };
- MODULE_DEVICE_TABLE(of, fastrpc_rpmsg_of_match);
- 
-diff --git a/drivers/misc/hisi_hikey_usb.c b/drivers/misc/hisi_hikey_usb.c
-index 79f06001259b..e68bc6e384d5 100644
---- a/drivers/misc/hisi_hikey_usb.c
-+++ b/drivers/misc/hisi_hikey_usb.c
-@@ -254,7 +254,7 @@ static void hisi_hikey_usb_remove(struct platform_device *pdev)
- 
- static const struct of_device_id id_table_hisi_hikey_usb[] = {
- 	{ .compatible = "hisilicon,usbhub" },
--	{}
-+	{ }
- };
- MODULE_DEVICE_TABLE(of, id_table_hisi_hikey_usb);
- 
-diff --git a/drivers/misc/lis3lv02d/lis3lv02d_i2c.c b/drivers/misc/lis3lv02d/lis3lv02d_i2c.c
-index 36032fc125f3..7c3ca6d604d1 100644
---- a/drivers/misc/lis3lv02d/lis3lv02d_i2c.c
-+++ b/drivers/misc/lis3lv02d/lis3lv02d_i2c.c
-@@ -95,7 +95,7 @@ static union axis_conversion lis3lv02d_axis_map =
- #ifdef CONFIG_OF
- static const struct of_device_id lis3lv02d_i2c_dt_ids[] = {
- 	{ .compatible = "st,lis3lv02d" },
--	{}
-+	{ }
- };
- MODULE_DEVICE_TABLE(of, lis3lv02d_i2c_dt_ids);
- #endif
-diff --git a/drivers/misc/lis3lv02d/lis3lv02d_spi.c b/drivers/misc/lis3lv02d/lis3lv02d_spi.c
-index 203a108b8883..5bf95176a00e 100644
---- a/drivers/misc/lis3lv02d/lis3lv02d_spi.c
-+++ b/drivers/misc/lis3lv02d/lis3lv02d_spi.c
-@@ -60,7 +60,7 @@ static union axis_conversion lis3lv02d_axis_normal =
- #ifdef CONFIG_OF
- static const struct of_device_id lis302dl_spi_dt_ids[] = {
- 	{ .compatible = "st,lis302dl-spi" },
--	{}
-+	{ }
- };
- MODULE_DEVICE_TABLE(of, lis302dl_spi_dt_ids);
- #endif
-diff --git a/drivers/misc/open-dice.c b/drivers/misc/open-dice.c
-index 45060fb4ea27..77ab0c1e83d3 100644
---- a/drivers/misc/open-dice.c
-+++ b/drivers/misc/open-dice.c
-@@ -177,7 +177,7 @@ static void open_dice_remove(struct platform_device *pdev)
- 
- static const struct of_device_id open_dice_of_match[] = {
- 	{ .compatible = "google,open-dice" },
--	{},
-+	{ }
- };
- 
- static struct platform_driver open_dice_driver = {
-diff --git a/drivers/misc/pvpanic/pvpanic-mmio.c b/drivers/misc/pvpanic/pvpanic-mmio.c
-index 43a094bfdaec..724dfddf69e4 100644
---- a/drivers/misc/pvpanic/pvpanic-mmio.c
-+++ b/drivers/misc/pvpanic/pvpanic-mmio.c
-@@ -51,8 +51,8 @@ static int pvpanic_mmio_probe(struct platform_device *pdev)
- }
- 
- static const struct of_device_id pvpanic_mmio_match[] = {
--	{ .compatible = "qemu,pvpanic-mmio", },
--	{}
-+	{ .compatible = "qemu,pvpanic-mmio" },
-+	{ }
- };
- MODULE_DEVICE_TABLE(of, pvpanic_mmio_match);
- 
-diff --git a/drivers/misc/qcom-coincell.c b/drivers/misc/qcom-coincell.c
-index 3c57f7429147..b58bd34fc471 100644
---- a/drivers/misc/qcom-coincell.c
-+++ b/drivers/misc/qcom-coincell.c
-@@ -124,8 +124,8 @@ static int qcom_coincell_probe(struct platform_device *pdev)
- }
- 
- static const struct of_device_id qcom_coincell_match_table[] = {
--	{ .compatible = "qcom,pm8941-coincell", },
--	{}
-+	{ .compatible = "qcom,pm8941-coincell" },
-+	{ }
- };
- 
- MODULE_DEVICE_TABLE(of, qcom_coincell_match_table);
-diff --git a/drivers/misc/sram.c b/drivers/misc/sram.c
-index 1919d24c8236..c8990e83a65a 100644
---- a/drivers/misc/sram.c
-+++ b/drivers/misc/sram.c
-@@ -370,7 +370,7 @@ static const struct of_device_id sram_dt_ids[] = {
- 	{ .compatible = "nvidia,tegra186-sysram", .data = &tegra_sysram_config },
- 	{ .compatible = "nvidia,tegra194-sysram", .data = &tegra_sysram_config },
- 	{ .compatible = "nvidia,tegra234-sysram", .data = &tegra_sysram_config },
--	{}
-+	{ }
- };
- 
- static int sram_probe(struct platform_device *pdev)
-diff --git a/drivers/misc/ti_fpc202.c b/drivers/misc/ti_fpc202.c
-index 2aac83ec4a39..9e2d24f89457 100644
---- a/drivers/misc/ti_fpc202.c
-+++ b/drivers/misc/ti_fpc202.c
-@@ -718,7 +718,7 @@ static void fpc202_remove(struct i2c_client *client)
- 
- static const struct of_device_id fpc202_of_match[] = {
- 	{ .compatible = "ti,fpc202" },
--	{}
-+	{ }
- };
- MODULE_DEVICE_TABLE(of, fpc202_of_match);
- 
-diff --git a/drivers/misc/vcpu_stall_detector.c b/drivers/misc/vcpu_stall_detector.c
-index 26166357b255..1306b2c1ef99 100644
---- a/drivers/misc/vcpu_stall_detector.c
-+++ b/drivers/misc/vcpu_stall_detector.c
-@@ -224,8 +224,8 @@ static void vcpu_stall_detect_remove(struct platform_device *pdev)
- }
- 
- static const struct of_device_id vcpu_stall_detect_of_match[] = {
--	{ .compatible = "qemu,vcpu-stall-detector", },
--	{}
-+	{ .compatible = "qemu,vcpu-stall-detector" },
-+	{ }
- };
- 
- MODULE_DEVICE_TABLE(of, vcpu_stall_detect_of_match);
 -- 
-2.55.0.11.g153666a7d9bb
-
+-Mukesh Ojha
