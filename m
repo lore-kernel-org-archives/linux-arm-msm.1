@@ -1,275 +1,119 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CDA13D330B
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 11:40:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B66613F6615
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 11:45:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784288419; cv=none; b=ZAs5hXCjNW2scDOMA1U8V+F9k1KiyrJxA6bPmlHmyspQYjKGqYz6KHcPruuqQXyzPHrti7G5rUDMu/LTOdvXtXSYPomTj889qTsbl8v21GmZDGo4JqhbqPgfHpNmMPshaVzIybFFAFzqBgd1sE7Cx26JXoyQ8Kvh4WvY5KkS+rM=
+	t=1784288734; cv=none; b=KzkK4UCoKHid1NgywdBxZFoJ3I1x3ASvBnRJL7hF7CVRddZFCEUfNdW0dC9JL6gOL350kCczwsDVsxvMbDD4NDtUVKGYIuhZRnxP10mUp+n4toHCSEwt3l0z4NxJ6Y65TkpAsmtNjFhvgj879xPVvq9D2OXkbAaPa9vVAnPuWSw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784288419; c=relaxed/simple;
-	bh=0M54LK+e+ZsqutDKWxmQf1vKliGbRxbhOcJFvzG1A0g=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=DMX2n7Xeli91t8iTJFvrjoh56Rhs3jYriAM8mahQvZgfYo2beUzg3iqaC5ySUNBFy7e9VYq98Kr64/owguTxAIC4oWo7QUjziz1zcHwAOmpD4K6mjiyeodMtXSigkVM6oXbhb9WBsdQNkvYnyexvBRd/T73OlHtRSu8iHWey88M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=a2v8hqQK; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DZsPZuv1; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784288734; c=relaxed/simple;
+	bh=9LbC1FHVDDMZdYZI0WqN7RgRzl9vDprPfnVnjf9MUaI=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=UqjrnDOnYy3BKumBh7J21gg+kZfJhDdCdSfY7/6XQOBydECfEM4hWCHOUiJKXAsamb3z9/8n7zLAyU+GcUn+hKQHcClInA+Ao3x0dm4Qn7Ozt63ZFMN59yIxq08Bjrqwr9ZLOoH+xrVk+BEZZtw2D4ZQM763CThH+8UuSlrH65w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=3ryjejuU; arc=none smtp.client-ip=209.85.128.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="a2v8hqQK";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DZsPZuv1"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66HASrq81603659
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 11:40:16 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	KXuugUouKlB/CUW4LY6w9L6J1o6zPDA0wz2TTB2Kat4=; b=a2v8hqQK+5NFF89D
-	97D6u2gu1GhLs3KiOzhJ9ucraCDlBeBTtrCFilTzkcsuq9OcGN9kl9X0Up4NKBW0
-	k8plGKaONU2Bzc6E1gTHBP91QyRnTHCCKPUs7Eocnr7Lw/AYnrWS8mWgabM3brTf
-	zNzQfLgUss/CGIKIpFSeoxa5zrxGstJ0SuHwOhNKlxP+dS73z/EQae0t3glkeB9f
-	2yO4euksQGEzVf/SST7/9nJAgB6TdMC6y1iWmS/hunc/ene9xhV9+RTFBFHUlYqd
-	cLZIT408D4tIFli89y1czok8b1kU2nzfSKyDjgwSyDMlN1joZXxW9XCuCDxt+qvJ
-	rrlsCw==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ffbquhvpd-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 11:40:16 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-84a4d8fd6deso5746370b3a.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 04:40:16 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="3ryjejuU"
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4954c0833b4so2334705e9.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 04:45:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784288416; x=1784893216; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:subject:from:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=KXuugUouKlB/CUW4LY6w9L6J1o6zPDA0wz2TTB2Kat4=;
-        b=DZsPZuv11/DzLlnEauAkeWSg+vK0mkzgPVZBn6OU47LqEDVmlL2fzMZlPIKHHcLL4e
-         xQ96W7527hEuh9o/QT8rNpd7FnamiLVmI3eKt446cv+duJZlm+d3tqQ5DEAOjSCDhG2a
-         G81dpVP93ZT98Uj1FUnjHLM9U8CNJzwERuiBIFRBHzPXjkFtqCdA3UUJrZBizI6ACMAz
-         lAMEYIq6TyWQvVGBm5zAdpVyLT7Ewo/lbgrFPRMicrTv/dM3TsIyYD4l0y0E4+YQGEmf
-         8hjtbHqY5Pc4yvaFoPbYvJyOBlYBTsbtDELXuAtW9hZ2rcNnTUP//Xo1TXplqf0Lqlk9
-         IxRg==
+        d=fairphone.com; s=fair; t=1784288728; x=1784893528; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=EpUodwbhkAxMkmXtH6zvZRrKPhM41ygJzANZM/9HTt0=;
+        b=3ryjejuUxYTfUqthX+6JVN6mV4yYEwMcwwceDmQrFthpdosF7FuHqRBin/WkCEZnfc
+         bVroc8hCNxndz7pvXLUvmwl6p7CCRJNsPbGMba9+tUWK55Wcj+Tk1RVGU8ugzl5QddW2
+         q8Iufr+sGixnWj8+4asi8Im4TMPkuzSvcO5lnxNomVM7MGWX+lrcSJkZziP0Xo3ksALM
+         rsrDM1NcP0yxr+dGz6BE6jP1NmUrmCclnYszoHLLq8F3LQZniEoZR1rJmj4miHCWWSkA
+         6Jr023hi1rYPAIR6gqEQbwektat4iwt4gHgQhkBgEKNdGr4MBQr9wzigV1U7jcf46svq
+         t5FQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784288416; x=1784893216;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:subject:from:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=KXuugUouKlB/CUW4LY6w9L6J1o6zPDA0wz2TTB2Kat4=;
-        b=CIy6JKjFTO04t0zq2KvhbF/2kqqdoN0xIeEPbaqvkUB4Xp+B+J1K77Zd+MAPIyDDMY
-         /Kle8xiUNsKRFthcW7EgKzC9v7kp9WXXTvLXxv3Xn+mss3n4pQ4BhlteqzFM4isHKw/X
-         3DCksxschExlTa9vu7+xqfIloYWesNtrMae6vMxLYdWcR3XdKn3r7crfr6oXxPotwdW9
-         jLLFVUjkyPowSbakssx17uCSCd2dP3IEG8uIObfBvLpWjT8gi/r+KI/2JsJIVErK3iPn
-         k/M1P4y22Ut14o4qvFeEaF+/AMtvj9gs8Ycjz9+1Bkw8RHIc+quNMIj/OsULSM0Z10dR
-         JCZA==
-X-Forwarded-Encrypted: i=1; AHgh+RrTdrLDjT49mXc9JY6J2edXHJ6QW2RSVuBcL1yfuSAilBaAgJ/DL6Igm+RSkQPtL5dZxhlCbNdJ4jS/kXN6@vger.kernel.org
-X-Gm-Message-State: AOJu0YwWSibBYwtl+1yAgf64R+aUAIo9wUpiU+ixlLDTJkKR55iiHVE2
-	Z7oGVs/wjNz8w+LoNQSOSenbUbyQRfZb0peZgeHNNB4c7ptQq60QcuNeVFiT9H+VgbjpQWGF1tJ
-	kkiE1CKdBW8CNJ4f4lyaz2BvcdPgQDcUORymMKbfWc4yzQdQk2UUPKboMZxVknk0zfK/Q
-X-Gm-Gg: AfdE7cl7XD1WTdV3S7rUNQoQjcnm9pjMEhLfqptSNhiA0tqt/INQ6SCo6y0q9XqaAn/
-	JGJoc1LeHLOQCxs5KuXf5hI1n6rCNki7LhiD06i7qCR2+x1qTXMs+YV8rCbLv7F1D3aByQpTT9L
-	MzVFgPJEfNqBEta/f5SDVzMb5Ayzo7yq4GsYqblKxL7M7lJWxZdiBfei1ZIVWMKxcoGJje3bbxB
-	Q42x6Gy/j6KGVWaZYHsKhoHYV5qUqTpxg+Hnz4hAUCPi8HTkg/aijlTjJ0Nti2RqfJpN3XKMqTL
-	9AVvfUtG1X3GKjCCKuaeqkxmOnB42eleTxxdYB/SmYBnXgEC7kmKsux2oMha05R/BSSD1lcyPR3
-	46M1m4yLqCyEi+4gpS+kAuu6nna8u
-X-Received: by 2002:a05:6a00:80a:b0:847:97a4:d6b3 with SMTP id d2e1a72fcca58-84c2922630cmr2362985b3a.16.1784288415352;
-        Fri, 17 Jul 2026 04:40:15 -0700 (PDT)
-X-Received: by 2002:a05:6a00:80a:b0:847:97a4:d6b3 with SMTP id d2e1a72fcca58-84c2922630cmr2362945b3a.16.1784288414707;
-        Fri, 17 Jul 2026 04:40:14 -0700 (PDT)
-Received: from [10.218.33.224] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84c2af317c8sm859795b3a.30.2026.07.17.04.40.09
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 17 Jul 2026 04:40:14 -0700 (PDT)
-Message-ID: <2c21041d-f84c-4fa7-a977-555f9203d8b5@oss.qualcomm.com>
-Date: Fri, 17 Jul 2026 17:10:08 +0530
+        d=1e100.net; s=20251104; t=1784288728; x=1784893528;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=EpUodwbhkAxMkmXtH6zvZRrKPhM41ygJzANZM/9HTt0=;
+        b=OQ4ICL+fJ3Ql3X3us7xesVmEEOkwzPJStsC0Vx9tXnXoO/eD6c8bQgABfRUQTWN3aw
+         kk7NTOzaKU3AnFXEBugx9Aw6mAwe/8Oj/M6FXvSNRjOQEnAMaZBigjYhHvGT6Nn9MYsi
+         HqLLs52p8LxGrmld7Vkp2lAG7Xxda7nuUEgwZ5XqK2h2/IsQJmrOpQwMqIrz5YWeY1Zo
+         qDtqA3d4UKGXoZLdeTz+i2TTl7q+ZsZM8+6zOr/uYhT1Ck3Lk9IMfWli03PMUtCwamDP
+         9c1alg6O6fM1dbUFozjNiRFDepgOmP+erbpWgThw04Lggs9GT0qu2ZFZhV1g1fI5Ama4
+         E1CA==
+X-Forwarded-Encrypted: i=1; AHgh+RrgB5FVj1J/QeZmIIK4qgyAd9l2pC0roSaNx3Zp3OY7zmyoXzv81F18C923QmbbTivX5UYOsQsZxR00ilyH@vger.kernel.org
+X-Gm-Message-State: AOJu0YyVKj1POKTJXNVMQtPuuqbjvkVNxnsyr7F3455pMW2w+ng8Vz/O
+	lXh2buyy0dR+b+Lu70tg5ljXHqtjnB6utowxmB+5ToZJWybA+lYXPpnZQ0q/vx9eaGI=
+X-Gm-Gg: AfdE7clp6eWdROVwyWzupK+eae5/JVFNVUVidy3AwrQMQIBVQFR1B9FMTReWCHnK7bO
+	IUW14dFJmzSCx9Cw1dcGFxpoXCZHCPU396UG2L5/HtEvI/cw4WEF62U3WsPyPSQj0vOsklssHz/
+	vEYeoDsN0Hio6EaRbytTy3FbFeVTraIVqv4XYF0sw578tVV5YSp4UxK0GZRkuYzc0nRi0EISvto
+	I++oBjNL38uWQP/tn+1860/BvGPQYUgXWktjBjoCF5sjo7bqnVUhshUYSi5kd6YvS7PVXzaRQPF
+	KzNN3q4UVZd4I+7WntK8FxEZOsciynoKEvz+2KpaUXqXadZFXECLPFMiR1d6fRQVculUP3eLVgp
+	hOGsanEPQ1R+tRfZO5yweUozqKPtQDxQ19mDJ2sJAxEPQ+bRaTqID1zwAzkm5UgDiHLaJZTkT7W
+	dqzinvwctD1jMYLXg=
+X-Received: by 2002:a05:600c:1396:b0:493:b150:c607 with SMTP id 5b1f17b1804b1-4954a3f36a9mr25499865e9.12.1784288727673;
+        Fri, 17 Jul 2026 04:45:27 -0700 (PDT)
+Received: from [172.18.170.139] ([185.104.138.147])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-495499f3f99sm41353855e9.0.2026.07.17.04.45.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 17 Jul 2026 04:45:27 -0700 (PDT)
+From: Luca Weiss <luca.weiss@fairphone.com>
+Subject: [PATCH 0/2] Add Milos CPU-to-DDR BWMON support
+Date: Fri, 17 Jul 2026 13:45:01 +0200
+Message-Id: <20260717-milos-cpu-bwmon-v1-0-dfe0bac9898c@fairphone.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
-Subject: Re: [PATCH v3 3/6] arm64: dts: qcom: kodiak: Add GEM_NOC interconnect
- for adreno SMMU
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
-        Joerg Roedel <joro@8bytes.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org
-References: <20260706-smmu_interconnect_addition-v3-0-afdca0125a65@oss.qualcomm.com>
- <20260706-smmu_interconnect_addition-v3-3-afdca0125a65@oss.qualcomm.com>
- <h6opbtr2ced3sannj3ym573qc2sjk7ek3clpto5j5mtqfrfk6w@34sk2zraoqtj>
- <807f145d-88d3-460a-9862-b63fe2a52cf7@oss.qualcomm.com>
- <a4f5sod3aflubxkk4mm4k5ozddydqcnqeac4s6vnozkd2nvxbi@hmh6zclsw5z3>
- <4e5a3d82-b946-4490-885a-ea7061939c32@oss.qualcomm.com>
- <ak5qkRKk2eHHLYmo@baldur>
-Content-Language: en-US
-In-Reply-To: <ak5qkRKk2eHHLYmo@baldur>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: AAVuMjbj73_G5trtq7DASU8kSbGJYpjO
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDExOCBTYWx0ZWRfX6tCUauqcYRhC
- f5kLkcpNP3CYW6VJsdJo3X4jDwatkFUYd1ppIfrpPqgg74a2p6QfuHNAhDrvzcn1fFwSWMv5Sm4
- r7nIs0kh3Lgl8mGtL2VKBlBop5UVlhAa4GMHS+58zAZlKWikySYC7o6tsyA0oLfSmrTWE82co/W
- Zmv8JXCTk5Qm+YBIuP4oH6H30nOuHxISeKC1X90dMqRAteCXcn7Cum1SfObdhW9V86s1yJ1HtmJ
- AeXBQsIbk9hQHMnR8bMsvgSWCFkKy39LfAaNeetlMJQovOdPp88Xel67aNNE230UIC+OH1g/km0
- KDplqsGFjJB3cxd8d7llI+kJPPhfmeHX0sUG6+m9CFlM+1kYnxuuKgVP6ancbaS3eudUc5wuKrb
- MefIN69L12Yi5VKeKO1IEhZaCB/8lQcpcjnNBcJKMPiCd02IROX310Um4swjNa02aOXpKI1uxc3
- V7z0np1YpZJwe82L/Nw==
-X-Authority-Analysis: v=2.4 cv=NZ3WEWD4 c=1 sm=1 tr=0 ts=6a5a14a0 cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=qc56rwwszmrP7wb0vM8A:9 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-ORIG-GUID: AAVuMjbj73_G5trtq7DASU8kSbGJYpjO
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDExOCBTYWx0ZWRfX0A+rBUQCFqEj
- tDf8Ac251CNEZH7qcDTRq96kK/RPpdJCqp0+/atD/+H6buRp/9Nq49J8C9VH6nrYEJFuQUNnuiH
- 9vGTYtUZ9ovG9wrronFMKQSKv2WpAOc=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-17_03,2026-07-15_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 malwarescore=0 clxscore=1015 adultscore=0
- bulkscore=0 phishscore=0 suspectscore=0 priorityscore=1501 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170118
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/y2Nyw6CMBBFf4XM2klofTTyK4YFrVMdY1vsQ0kI/
+ 24Vlic599wZEkWmBF0zQ6Q3Jw6+gtg1YO6DvxHytTLIVp5aJRQ6foaEZiyoPy54tIb28qwOZLW
+ AuhojWZ7+xUu/cir6QSb/MpsR6VXqVV410EMiNME5zl3jacq43R2hX5YvqiRshKQAAAA=
+X-Change-ID: 20260717-milos-cpu-bwmon-fce32974efb1
+To: Krzysztof Kozlowski <krzk@kernel.org>, 
+ Georgi Djakov <djakov@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>
+Cc: ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Luca Weiss <luca.weiss@fairphone.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784288726; l=983;
+ i=luca.weiss@fairphone.com; s=20250611; h=from:subject:message-id;
+ bh=9LbC1FHVDDMZdYZI0WqN7RgRzl9vDprPfnVnjf9MUaI=;
+ b=vrKpPTrZL0S2ljLXdwMb0KdZ1gBG0K3Q0BF4hIQXj4WiGn98nVZ7Q45EATOPjPOb57d+Gw0ZR
+ mTE7gVnOQtHB+UYaxZoWMscEQIhJFqmq0SKKNOpYD723i7Eq4WoxpWu
+X-Developer-Key: i=luca.weiss@fairphone.com; a=ed25519;
+ pk=O1aw+AAust5lEmgrNJ1Bs7PTY0fEsJm+mdkjExA69q8=
 
+Add support for the bandwidth monitoring block on Milos which lets the
+driver vote on interconnect bandwidth based on monitored throughput.
 
+Similar to the CPU OPP table series[0], this would benefit from driver
+support that can differentiate between DDR4 and DDR5 RAM since different
+votes would be correct.
 
-On 7/8/2026 8:56 PM, Bjorn Andersson wrote:
-> On Wed, Jul 08, 2026 at 03:31:07PM +0530, Bibek Kumar Patro wrote:
->>
->>
->> On 7/7/2026 10:14 PM, Dmitry Baryshkov wrote:
->>> On Tue, Jul 07, 2026 at 06:37:24PM +0530, Bibek Kumar Patro wrote:
->>>>
->>>>
->>>> On 7/6/2026 11:12 PM, Dmitry Baryshkov wrote:
->>>>> On Mon, Jul 06, 2026 at 10:26:36PM +0530, Bibek Kumar Patro wrote:
->>>>>> On Kodiak platforms, the Adreno SMMU requires a bandwidth vote on
->>>>>> the GEM_NOC path (MASTER_GPU_TCU -> SLAVE_EBI1) before its registers
->>>>>> are accessible. Without this vote, the SMMU may become unreachable,
->>>>>> leading to intermittent probe failures and runtime issues.
->>>>>>
->>>>>> Add the required interconnect to ensure reliable register access.
->>>>>>
->>>>>> Signed-off-by: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
->>>>>> ---
->>>>>>     arch/arm64/boot/dts/qcom/kodiak.dtsi | 2 ++
->>>>>>     1 file changed, 2 insertions(+)
->>>>>>
->>>>>> diff --git a/arch/arm64/boot/dts/qcom/kodiak.dtsi b/arch/arm64/boot/dts/qcom/kodiak.dtsi
->>>>>> index 90e50c245c0c..721526f023dd 100644
->>>>>> --- a/arch/arm64/boot/dts/qcom/kodiak.dtsi
->>>>>> +++ b/arch/arm64/boot/dts/qcom/kodiak.dtsi
->>>>>> @@ -3389,6 +3389,8 @@ adreno_smmu: iommu@3da0000 {
->>>>>>     			power-domains = <&gpucc GPU_CC_CX_GDSC>;
->>>>>>     			dma-coherent;
->>>>>> +			interconnects = <&gem_noc MASTER_GPU_TCU QCOM_ICC_TAG_ALWAYS
->>>>>> +					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>;
->>>>>
->>>>> Why is it ALWAYS? Would it be better to declare it as ACTIVE_ONLY and
->>>>
->>>> Added QCOM_ICC_TAG_ALWAYS, to hold the vote in SLEEP bucket as well
->>>> preventing gem_noc going to sleep when icc_set_bw is being called.
->>>
->>> _why_?
->>>
->>
->> Now when i think of where we implemented the hooks, ALWAYS is not needed. We
->> should keep it ACTIVE_ONLY since we are already voting it
->> back in resume pah. I'll fix it in next revision.
->>
-> 
-> The path is between the SMMU and DDR, so clearly it has to do with the
-> TCU's ability to fetch things from DDR.
-> 
+[0] https://lore.kernel.org/linux-arm-msm/20260710-milos-cpu-opp-v1-0-ae7f4b09bc77@fairphone.com/
 
-Yes as you rightly mentioned, this series is helping to resolve the race 
-in TCU DDR clink
+Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
+---
+Luca Weiss (2):
+      dt-bindings: interconnect: qcom-bwmon: Add Milos cpu-bwmon compatible
+      arm64: dts: qcom: milos: Add CPU-to-DDR BWMON support
 
-> ACTIVE_ONLY states that the vote should only be applied when the
-> application subsystem (CPUSS) is not in low-power mode (CPU is active).
-> 
-> So, are you saying that in all cases that cpuidle might select such
-> low-power state the GPU TCU is "stopped", and does not need to perform
-> any memory transactions?
-> 
+ .../bindings/interconnect/qcom,msm8998-bwmon.yaml  |  1 +
+ arch/arm64/boot/dts/qcom/milos.dtsi                | 49 ++++++++++++++++++++++
+ 2 files changed, 50 insertions(+)
+---
+base-commit: 19827e7930a5511c68e12aac6e4522f3661a1709
+change-id: 20260717-milos-cpu-bwmon-fce32974efb1
 
-I rechecked the architectural block diagram, GPU TCU is
-independent of the CPUSS, unlike system TCU.
-
-This means CPUSS can be powered down while the GPU TCU remains voted up. 
-While this series was intended to avoid a DDR voting race between the
-GPU TCU and its clients, using ACTIVE_ONLY could have possibly
-introduced a race between CPUSS and the GPU TCU itself.
-
-Thanks for catching this in my reply Bjorn.
-
-ACTIVE_ONLY would have been suitable for system TCU (apps_smmu)
-for which the interconnect field is anyways not needed, but
-unsuitable for GPU TCU.
-
-> 
-> To me these two are orthogonal and TAG_ALWAYS is logically correct, but
-> perhaps there's some practical dependency that I'm missing?
-> 
-
-We can ignore my acknowledgment [1] on previous response, Dmitry.
-ALWAYS TAG is correct here instead of ACTIVE_ONLY in the interconnect 
-field for adreno SMMU.
-
-[1]: 
-https://lore.kernel.org/all/4e5a3d82-b946-4490-885a-ea7061939c32@oss.qualcomm.com/#:~:text=Yes%2C%20I%20think%20we%20should%20go%20with%20the%20ACTIVE_ONLY%20flag
-
-Thanks & regards,
-Bibek
-
-> Regards,
-> Bjorn
-> 
->>>>
->>>>> then drop the extra suspend/resume play?
->>>>
->>>> Not sure if I understood it correctly.
->>>> Did you mean the extra suspend/resume play in arm_smmu_runtime_suspend
->>>> or in arm_smmu_device_shutdown() path?
->>>
->>> runtime_suspend/resume. I might be incorrect here, but I think it is
->>> exactly what you need.
->>>
->>
->> Yes, I think we should go with the ACTIVE_ONLY flag and we would need
->> this voting in suspend resume path (For the same reason mentioned in commit
->> description and cover letter of the series).
->>
->> ALWAYS would avoid the need for this handling, it would keep the vote active
->> unnecessarily, but still that would have been nondeterministic.
->>
->> Thanks & regards,
->> Bibek
->>
->>>>
->>>> Thanks & regards,
->>>> Bibek
->>>>
->>>>>
->>>>>>     		};
->>>>>>     		gfx_0_tbu: tbu@3dd9000 {
->>>>>>
->>>>>> -- 
->>>>>> 2.34.1
->>>>>>
->>>>>
->>>>
->>>
->>
+Best regards,
+--  
+Luca Weiss <luca.weiss@fairphone.com>
 
