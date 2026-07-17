@@ -1,87 +1,86 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 693D93F44D4
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 11:33:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9CDA13D330B
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 11:40:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784287984; cv=none; b=IQqAXGm3h9cVRDo84CF+ncjFuto4E1SNy0dx16WP2bsc7NpxnYkOyfDEUsjFuv7Tx/6WqW3MqdVNvt9W1fvv8leEMgkUbJ1012we50ENWavIw12ntFOFYz+EH8Us5XpMFYtV7MbsVPNHJkAjX6XjLuMZMDvNzCg5XyktC6wamWs=
+	t=1784288419; cv=none; b=ZAs5hXCjNW2scDOMA1U8V+F9k1KiyrJxA6bPmlHmyspQYjKGqYz6KHcPruuqQXyzPHrti7G5rUDMu/LTOdvXtXSYPomTj889qTsbl8v21GmZDGo4JqhbqPgfHpNmMPshaVzIybFFAFzqBgd1sE7Cx26JXoyQ8Kvh4WvY5KkS+rM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784287984; c=relaxed/simple;
-	bh=Ei7YCl18wuW6Pxk9gS2iZPPB1ZFP4W3PO+F2VT911Pg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=UzAga3oLGjeNtmygGtLJvqc3fGnj/MQP+cyPw0VlqDhnNXwYu0mavX3kfoBOgOEzh21ac2TDPfL/4DXldUkUVoqSty9Kw7TL7JUVigZCC8pIVOMU5+rAqyHQsWWpJRzgQ6+B9AD0Cr6IphnhcByQulsp9XuCM+7ejn8fB1vK4v8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Gb/z5oEj; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VKFeEb4b; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1784288419; c=relaxed/simple;
+	bh=0M54LK+e+ZsqutDKWxmQf1vKliGbRxbhOcJFvzG1A0g=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=DMX2n7Xeli91t8iTJFvrjoh56Rhs3jYriAM8mahQvZgfYo2beUzg3iqaC5ySUNBFy7e9VYq98Kr64/owguTxAIC4oWo7QUjziz1zcHwAOmpD4K6mjiyeodMtXSigkVM6oXbhb9WBsdQNkvYnyexvBRd/T73OlHtRSu8iHWey88M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=a2v8hqQK; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DZsPZuv1; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Gb/z5oEj";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VKFeEb4b"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66HASlTm2634663
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 11:33:01 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="a2v8hqQK";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DZsPZuv1"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66HASrq81603659
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 11:40:16 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Ueu/iOFbUnianrV9Fi+TMS2hFdG1bHSGmXED9Y7SgRU=; b=Gb/z5oEjXr5hxopF
-	OrHiboeuW9As3N6xUsQM8LzDv4Ayc6+LDXKuLK2zpL2MyNCvQbCNKep3ZC0Rcmpw
-	Dc4gUcVd7BM1UMFOD8KrKfLXH03GyJHCPKDxvpn+cRS/ycuQKbscr++/D2xQSoId
-	yUD1ei7lfY5gIVhTii9q5zEILSuOoEbqfyNcvN6JbxfiDKXemdvrdSsa8kJHoNDL
-	GU7tpf7DPPWFRiiBPpmzZ8LcjiIoU9kBIVmu6Y+o0KcLqcDZdshu2YqYssvmcYoR
-	Qiy3jHHPvzQSng/s5GtvqZKGX1CKOQ/D5cWTOn7m4RDwkETdeQn6tKrOzC/1/rHt
-	vCy/KQ==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ff3u6kg10-1
+	KXuugUouKlB/CUW4LY6w9L6J1o6zPDA0wz2TTB2Kat4=; b=a2v8hqQK+5NFF89D
+	97D6u2gu1GhLs3KiOzhJ9ucraCDlBeBTtrCFilTzkcsuq9OcGN9kl9X0Up4NKBW0
+	k8plGKaONU2Bzc6E1gTHBP91QyRnTHCCKPUs7Eocnr7Lw/AYnrWS8mWgabM3brTf
+	zNzQfLgUss/CGIKIpFSeoxa5zrxGstJ0SuHwOhNKlxP+dS73z/EQae0t3glkeB9f
+	2yO4euksQGEzVf/SST7/9nJAgB6TdMC6y1iWmS/hunc/ene9xhV9+RTFBFHUlYqd
+	cLZIT408D4tIFli89y1czok8b1kU2nzfSKyDjgwSyDMlN1joZXxW9XCuCDxt+qvJ
+	rrlsCw==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ffbquhvpd-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 11:33:01 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51caa0b48ccso14155321cf.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 04:33:01 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 11:40:16 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-84a4d8fd6deso5746370b3a.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 04:40:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784287980; x=1784892780; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Ueu/iOFbUnianrV9Fi+TMS2hFdG1bHSGmXED9Y7SgRU=;
-        b=VKFeEb4bCY7SYPcDeRNd/reWnA6/HSiEKRN0oV+LFSSo2vq+5fpKpzstU5GcAW2Lq+
-         /umVOkNNth73fi+DffgZoRUimnMjfXlRJEu92p74Cw5VkiGhyQOecFBujF7u9eYvCU92
-         8BBytCJSAhEshu7YUhIblpoQLRJ1EUxFAY2s1uxSG8N4JRX5BWepk388Cwhs5TbkFtkF
-         2hlfOphNT1DRz8V7B7TJu82uUv3VguWYXK+fOX5SqgiVmmx0IU2f2pnFXHZ1ott7DD6b
-         7m6IeugCKB8xbBUgfYg9HYUxPHbn5pvIqJ8u5gyekAJyryiW+RnmmqZdd4xNx7ZmJfjJ
-         to4Q==
+        d=oss.qualcomm.com; s=google; t=1784288416; x=1784893216; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=KXuugUouKlB/CUW4LY6w9L6J1o6zPDA0wz2TTB2Kat4=;
+        b=DZsPZuv11/DzLlnEauAkeWSg+vK0mkzgPVZBn6OU47LqEDVmlL2fzMZlPIKHHcLL4e
+         xQ96W7527hEuh9o/QT8rNpd7FnamiLVmI3eKt446cv+duJZlm+d3tqQ5DEAOjSCDhG2a
+         G81dpVP93ZT98Uj1FUnjHLM9U8CNJzwERuiBIFRBHzPXjkFtqCdA3UUJrZBizI6ACMAz
+         lAMEYIq6TyWQvVGBm5zAdpVyLT7Ewo/lbgrFPRMicrTv/dM3TsIyYD4l0y0E4+YQGEmf
+         8hjtbHqY5Pc4yvaFoPbYvJyOBlYBTsbtDELXuAtW9hZ2rcNnTUP//Xo1TXplqf0Lqlk9
+         IxRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784287980; x=1784892780;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1784288416; x=1784893216;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Ueu/iOFbUnianrV9Fi+TMS2hFdG1bHSGmXED9Y7SgRU=;
-        b=EEWEP2PtXyIVCyqUAtGofUlOHTmkG7yHKCpAdp73IOLDMInsw2Sw3ZMwF98c0ZIEcA
-         She4iuVZDOAODzV34LiDwoV5zr5UewPm99o9BWVCpZ9ENG6bWgWbNrhCWasntJf6NI2C
-         nN7QlHlP0V1XTrJjMU9PMRyUOcI0H4wObDRiE77kq5TwuR2EGyJI67HoYyDDTwWLpu0J
-         Pfw6yjPlvMeT8WZK7wgtI+zJRZijk4ohK4kXLGeuYAvz4x41W4xm3K5lJmmLIkAA67bW
-         hT+ZyNbjJh9a23bhvM4UhQfwKkmpasZgahSVL5CJQG8w/WOgRgv8teEIh2S1Z/lL4RNQ
-         f7og==
-X-Forwarded-Encrypted: i=1; AHgh+Rqr8SlCZaKD/JSJyPtg8MEWB+csYSQrBKSAqzbqeHyutW/yGQcDKF7ksuFXG9kcW/3M4Z+rfr/HFuYd382O@vger.kernel.org
-X-Gm-Message-State: AOJu0YwM4TFzGboVVoLks6e0d0axeAQUL0PVJuTk+U14G2nkf4yGgqEA
-	6zt/Id+9AkpVRJ3pllYzVT5udByzqvRL/rZVexLXDzHez3I6wFxvYTPi9K9uzhgDoQZCZi/tiHE
-	Cs2Li27jikY8wUPTpkKICIVjn7iABzH3j4okf3t2yqr8NMwvsqHipnDcKc7rJtioqWO5o
-X-Gm-Gg: AfdE7clXWrCUPA0A2J4S4LM4txuscLwciAZmBvRKoGetS6xq51p3n0hZQrsLeKZfxWP
-	EYEB9u/mJlV38vdUUuQucg20394PaOfgSGgv8aWoBwEl+kx1tkUK9fRm9BGldSm1Wg6AOutpKYz
-	pZH0eEr8F2kQjJLCx9hwt6tp35c5fAo78gId7sUhNg1OXTj2tsXOhJoKZFx/Q0Bm+5/txOwG0V7
-	luJktK8YAjG+6yJHn5AXQ4+S1LgudcJDgmZQ/q3c/owYG3c2lRltuCZdKwVNZPg7KbeKfuG1Y+o
-	1S5zy6PWk4avcC27aDw2fz3rG+maFFvHg8pgEB84xF5hqGHaOFU1UYgNLE84hf9T1HU6JbvNa8K
-	sN0pBdVyM+ze2SqZB7RP81D6c
-X-Received: by 2002:a05:622a:6848:10b0:51c:1c73:51a6 with SMTP id d75a77b69052e-5213bc1dffemr11225961cf.5.1784287980401;
-        Fri, 17 Jul 2026 04:33:00 -0700 (PDT)
-X-Received: by 2002:a05:622a:6848:10b0:51c:1c73:51a6 with SMTP id d75a77b69052e-5213bc1dffemr11225711cf.5.1784287979821;
-        Fri, 17 Jul 2026 04:32:59 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1705afeb98sm61675766b.22.2026.07.17.04.32.57
+        bh=KXuugUouKlB/CUW4LY6w9L6J1o6zPDA0wz2TTB2Kat4=;
+        b=CIy6JKjFTO04t0zq2KvhbF/2kqqdoN0xIeEPbaqvkUB4Xp+B+J1K77Zd+MAPIyDDMY
+         /Kle8xiUNsKRFthcW7EgKzC9v7kp9WXXTvLXxv3Xn+mss3n4pQ4BhlteqzFM4isHKw/X
+         3DCksxschExlTa9vu7+xqfIloYWesNtrMae6vMxLYdWcR3XdKn3r7crfr6oXxPotwdW9
+         jLLFVUjkyPowSbakssx17uCSCd2dP3IEG8uIObfBvLpWjT8gi/r+KI/2JsJIVErK3iPn
+         k/M1P4y22Ut14o4qvFeEaF+/AMtvj9gs8Ycjz9+1Bkw8RHIc+quNMIj/OsULSM0Z10dR
+         JCZA==
+X-Forwarded-Encrypted: i=1; AHgh+RrTdrLDjT49mXc9JY6J2edXHJ6QW2RSVuBcL1yfuSAilBaAgJ/DL6Igm+RSkQPtL5dZxhlCbNdJ4jS/kXN6@vger.kernel.org
+X-Gm-Message-State: AOJu0YwWSibBYwtl+1yAgf64R+aUAIo9wUpiU+ixlLDTJkKR55iiHVE2
+	Z7oGVs/wjNz8w+LoNQSOSenbUbyQRfZb0peZgeHNNB4c7ptQq60QcuNeVFiT9H+VgbjpQWGF1tJ
+	kkiE1CKdBW8CNJ4f4lyaz2BvcdPgQDcUORymMKbfWc4yzQdQk2UUPKboMZxVknk0zfK/Q
+X-Gm-Gg: AfdE7cl7XD1WTdV3S7rUNQoQjcnm9pjMEhLfqptSNhiA0tqt/INQ6SCo6y0q9XqaAn/
+	JGJoc1LeHLOQCxs5KuXf5hI1n6rCNki7LhiD06i7qCR2+x1qTXMs+YV8rCbLv7F1D3aByQpTT9L
+	MzVFgPJEfNqBEta/f5SDVzMb5Ayzo7yq4GsYqblKxL7M7lJWxZdiBfei1ZIVWMKxcoGJje3bbxB
+	Q42x6Gy/j6KGVWaZYHsKhoHYV5qUqTpxg+Hnz4hAUCPi8HTkg/aijlTjJ0Nti2RqfJpN3XKMqTL
+	9AVvfUtG1X3GKjCCKuaeqkxmOnB42eleTxxdYB/SmYBnXgEC7kmKsux2oMha05R/BSSD1lcyPR3
+	46M1m4yLqCyEi+4gpS+kAuu6nna8u
+X-Received: by 2002:a05:6a00:80a:b0:847:97a4:d6b3 with SMTP id d2e1a72fcca58-84c2922630cmr2362985b3a.16.1784288415352;
+        Fri, 17 Jul 2026 04:40:15 -0700 (PDT)
+X-Received: by 2002:a05:6a00:80a:b0:847:97a4:d6b3 with SMTP id d2e1a72fcca58-84c2922630cmr2362945b3a.16.1784288414707;
+        Fri, 17 Jul 2026 04:40:14 -0700 (PDT)
+Received: from [10.218.33.224] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84c2af317c8sm859795b3a.30.2026.07.17.04.40.09
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 17 Jul 2026 04:32:59 -0700 (PDT)
-Message-ID: <b67a425f-1fc2-44fc-bb70-2a7efa7b68e8@oss.qualcomm.com>
-Date: Fri, 17 Jul 2026 13:32:57 +0200
+        Fri, 17 Jul 2026 04:40:14 -0700 (PDT)
+Message-ID: <2c21041d-f84c-4fa7-a977-555f9203d8b5@oss.qualcomm.com>
+Date: Fri, 17 Jul 2026 17:10:08 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,86 +88,188 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] arm64: dts: qcom: Add Xiaomi 11 Lite 5G NE
-To: Oleksii Onchul <oleksiionchul@gmail.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260714125806.310708-1-oleksiionchul@gmail.com>
- <20260714125806.310708-3-oleksiionchul@gmail.com>
+From: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
+Subject: Re: [PATCH v3 3/6] arm64: dts: qcom: kodiak: Add GEM_NOC interconnect
+ for adreno SMMU
+To: Bjorn Andersson <andersson@kernel.org>
+Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
+        Joerg Roedel <joro@8bytes.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Rob Clark <robin.clark@oss.qualcomm.com>,
+        linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org
+References: <20260706-smmu_interconnect_addition-v3-0-afdca0125a65@oss.qualcomm.com>
+ <20260706-smmu_interconnect_addition-v3-3-afdca0125a65@oss.qualcomm.com>
+ <h6opbtr2ced3sannj3ym573qc2sjk7ek3clpto5j5mtqfrfk6w@34sk2zraoqtj>
+ <807f145d-88d3-460a-9862-b63fe2a52cf7@oss.qualcomm.com>
+ <a4f5sod3aflubxkk4mm4k5ozddydqcnqeac4s6vnozkd2nvxbi@hmh6zclsw5z3>
+ <4e5a3d82-b946-4490-885a-ea7061939c32@oss.qualcomm.com>
+ <ak5qkRKk2eHHLYmo@baldur>
 Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260714125806.310708-3-oleksiionchul@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <ak5qkRKk2eHHLYmo@baldur>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDExNyBTYWx0ZWRfXzMkH9Qf40d2t
- UezOvr1QS4nxWY6KqhbgZMC+jF82EroUEIPljK1d5dfFmc77BEXSyYXsbYtwsk5aOOv0LPZn24j
- VOljsyB3kqaL08GsxVmzBgZbg+dg+XNTTykTwrVXnYmRREUB7GLTOSJ6p8b3FKH+HGMtMPg+3VZ
- 7tzPtQFUBq8UcZ3bF7UuQUA30H83LpGFRM5YfTtXS23jLx65HYukdqozZquqwsmxN9rGDkCTVfH
- 3XUIXQ5p2RNWgPEMLgpM5bbKbgMV+OrlZ+EFIVNTG2gvip9fk+F/7gy8mnTiAONviZhE1RohTzY
- YUXHtur9AbO3M3cnE5e2mRD+FNQZUecxjh6SyRFueMoR7TrUD3/Hw1KlP/A9pwH6kepwf2kHYPa
- LKxAqYbpFeY6y0IBhAFIE114K3Ld+vgcVLCekWnq2SPEK0WoLThLMgQdxuVlNLcbFFiprnSeCpQ
- 3sZbR4kaIm2XCD9a2Qg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDExNyBTYWx0ZWRfX4gGdusC6iPeR
- lLTlHSbzk/tpAkT6tHrV3XNpBOKNuLp/Ne47RcLZRX8am8878PRFedc1XFDXuJYdJUt4iu+jGu/
- 0ASjh/tE5crY9LEkXkmkZGSrQ2256f0=
-X-Authority-Analysis: v=2.4 cv=DYMnbPtW c=1 sm=1 tr=0 ts=6a5a12ed cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+X-Proofpoint-GUID: AAVuMjbj73_G5trtq7DASU8kSbGJYpjO
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDExOCBTYWx0ZWRfX6tCUauqcYRhC
+ f5kLkcpNP3CYW6VJsdJo3X4jDwatkFUYd1ppIfrpPqgg74a2p6QfuHNAhDrvzcn1fFwSWMv5Sm4
+ r7nIs0kh3Lgl8mGtL2VKBlBop5UVlhAa4GMHS+58zAZlKWikySYC7o6tsyA0oLfSmrTWE82co/W
+ Zmv8JXCTk5Qm+YBIuP4oH6H30nOuHxISeKC1X90dMqRAteCXcn7Cum1SfObdhW9V86s1yJ1HtmJ
+ AeXBQsIbk9hQHMnR8bMsvgSWCFkKy39LfAaNeetlMJQovOdPp88Xel67aNNE230UIC+OH1g/km0
+ KDplqsGFjJB3cxd8d7llI+kJPPhfmeHX0sUG6+m9CFlM+1kYnxuuKgVP6ancbaS3eudUc5wuKrb
+ MefIN69L12Yi5VKeKO1IEhZaCB/8lQcpcjnNBcJKMPiCd02IROX310Um4swjNa02aOXpKI1uxc3
+ V7z0np1YpZJwe82L/Nw==
+X-Authority-Analysis: v=2.4 cv=NZ3WEWD4 c=1 sm=1 tr=0 ts=6a5a14a0 cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=uZAEgtoqDJZVUE3vR7EA:9 a=QEXdDO2ut3YA:10
- a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-GUID: V26L0CkBkchsHQrISJkJw7luKubUmuLM
-X-Proofpoint-ORIG-GUID: V26L0CkBkchsHQrISJkJw7luKubUmuLM
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=qc56rwwszmrP7wb0vM8A:9 a=QEXdDO2ut3YA:10
+ a=2VI0MkxyNR6bbpdq8BZq:22
+X-Proofpoint-ORIG-GUID: AAVuMjbj73_G5trtq7DASU8kSbGJYpjO
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDExOCBTYWx0ZWRfX0A+rBUQCFqEj
+ tDf8Ac251CNEZH7qcDTRq96kK/RPpdJCqp0+/atD/+H6buRp/9Nq49J8C9VH6nrYEJFuQUNnuiH
+ 9vGTYtUZ9ovG9wrronFMKQSKv2WpAOc=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-17_03,2026-07-15_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 lowpriorityscore=0 bulkscore=0 phishscore=0
- adultscore=0 priorityscore=1501 spamscore=0 malwarescore=0 suspectscore=0
+ spamscore=0 lowpriorityscore=0 malwarescore=0 clxscore=1015 adultscore=0
+ bulkscore=0 phishscore=0 suspectscore=0 priorityscore=1501 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170117
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170118
 
-On 7/14/26 2:58 PM, Oleksii Onchul wrote:
-> Add initial support for the Xiaomi 11 Lite 5G NE, codenamed lisa.
+
+
+On 7/8/2026 8:56 PM, Bjorn Andersson wrote:
+> On Wed, Jul 08, 2026 at 03:31:07PM +0530, Bibek Kumar Patro wrote:
+>>
+>>
+>> On 7/7/2026 10:14 PM, Dmitry Baryshkov wrote:
+>>> On Tue, Jul 07, 2026 at 06:37:24PM +0530, Bibek Kumar Patro wrote:
+>>>>
+>>>>
+>>>> On 7/6/2026 11:12 PM, Dmitry Baryshkov wrote:
+>>>>> On Mon, Jul 06, 2026 at 10:26:36PM +0530, Bibek Kumar Patro wrote:
+>>>>>> On Kodiak platforms, the Adreno SMMU requires a bandwidth vote on
+>>>>>> the GEM_NOC path (MASTER_GPU_TCU -> SLAVE_EBI1) before its registers
+>>>>>> are accessible. Without this vote, the SMMU may become unreachable,
+>>>>>> leading to intermittent probe failures and runtime issues.
+>>>>>>
+>>>>>> Add the required interconnect to ensure reliable register access.
+>>>>>>
+>>>>>> Signed-off-by: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
+>>>>>> ---
+>>>>>>     arch/arm64/boot/dts/qcom/kodiak.dtsi | 2 ++
+>>>>>>     1 file changed, 2 insertions(+)
+>>>>>>
+>>>>>> diff --git a/arch/arm64/boot/dts/qcom/kodiak.dtsi b/arch/arm64/boot/dts/qcom/kodiak.dtsi
+>>>>>> index 90e50c245c0c..721526f023dd 100644
+>>>>>> --- a/arch/arm64/boot/dts/qcom/kodiak.dtsi
+>>>>>> +++ b/arch/arm64/boot/dts/qcom/kodiak.dtsi
+>>>>>> @@ -3389,6 +3389,8 @@ adreno_smmu: iommu@3da0000 {
+>>>>>>     			power-domains = <&gpucc GPU_CC_CX_GDSC>;
+>>>>>>     			dma-coherent;
+>>>>>> +			interconnects = <&gem_noc MASTER_GPU_TCU QCOM_ICC_TAG_ALWAYS
+>>>>>> +					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>;
+>>>>>
+>>>>> Why is it ALWAYS? Would it be better to declare it as ACTIVE_ONLY and
+>>>>
+>>>> Added QCOM_ICC_TAG_ALWAYS, to hold the vote in SLEEP bucket as well
+>>>> preventing gem_noc going to sleep when icc_set_bw is being called.
+>>>
+>>> _why_?
+>>>
+>>
+>> Now when i think of where we implemented the hooks, ALWAYS is not needed. We
+>> should keep it ACTIVE_ONLY since we are already voting it
+>> back in resume pah. I'll fix it in next revision.
+>>
 > 
-> The supported hardware includes regulators, UFS, USB, GPU, remote
-> processors, Wi-Fi, Bluetooth, touchscreen, flash LED, thermal sensors
-> and the hardware buttons.
+> The path is between the SMMU and DDR, so clearly it has to do with the
+> TCU's ability to fetch things from DDR.
 > 
-> Signed-off-by: Oleksii Onchul <oleksiionchul@gmail.com>
-> ---
 
-[...]
+Yes as you rightly mentioned, this series is helping to resolve the race 
+in TCU DDR clink
 
-> +&i2c1 {
-> +	clock-frequency = <100000>;
-> +	status = "okay";
+> ACTIVE_ONLY states that the vote should only be applied when the
+> application subsystem (CPUSS) is not in low-power mode (CPU is active).
+> 
+> So, are you saying that in all cases that cpuidle might select such
+> low-power state the GPU TCU is "stopped", and does not need to perform
+> any memory transactions?
+> 
 
-nit: let's keep a \n before 'status', file-wide
+I rechecked the architectural block diagram, GPU TCU is
+independent of the CPUSS, unlike system TCU.
 
-[...]
+This means CPUSS can be powered down while the GPU TCU remains voted up. 
+While this series was intended to avoid a DDR voting race between the
+GPU TCU and its clients, using ACTIVE_ONLY could have possibly
+introduced a race between CPUSS and the GPU TCU itself.
 
+Thanks for catching this in my reply Bjorn.
 
-> +&spi13 {
-> +	status = "okay";
-> +
-> +	touchscreen@0 {
-> +		compatible = "goodix,gt9897";
-> +		reg = <0>;
-> +		spi-max-frequency = <6000000>;
-> +
-> +		interrupt-parent = <&tlmm>;
-> +		interrupts = <81 IRQ_TYPE_LEVEL_LOW>;
+ACTIVE_ONLY would have been suitable for system TCU (apps_smmu)
+for which the interconnect field is anyways not needed, but
+unsuitable for GPU TCU.
 
-interrupts-extended = <&tlmm 81 IRQ..
+> 
+> To me these two are orthogonal and TAG_ALWAYS is logically correct, but
+> perhaps there's some practical dependency that I'm missing?
+> 
 
-With that:
+We can ignore my acknowledgment [1] on previous response, Dmitry.
+ALWAYS TAG is correct here instead of ACTIVE_ONLY in the interconnect 
+field for adreno SMMU.
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+[1]: 
+https://lore.kernel.org/all/4e5a3d82-b946-4490-885a-ea7061939c32@oss.qualcomm.com/#:~:text=Yes%2C%20I%20think%20we%20should%20go%20with%20the%20ACTIVE_ONLY%20flag
 
-Konrad
+Thanks & regards,
+Bibek
 
+> Regards,
+> Bjorn
+> 
+>>>>
+>>>>> then drop the extra suspend/resume play?
+>>>>
+>>>> Not sure if I understood it correctly.
+>>>> Did you mean the extra suspend/resume play in arm_smmu_runtime_suspend
+>>>> or in arm_smmu_device_shutdown() path?
+>>>
+>>> runtime_suspend/resume. I might be incorrect here, but I think it is
+>>> exactly what you need.
+>>>
+>>
+>> Yes, I think we should go with the ACTIVE_ONLY flag and we would need
+>> this voting in suspend resume path (For the same reason mentioned in commit
+>> description and cover letter of the series).
+>>
+>> ALWAYS would avoid the need for this handling, it would keep the vote active
+>> unnecessarily, but still that would have been nondeterministic.
+>>
+>> Thanks & regards,
+>> Bibek
+>>
+>>>>
+>>>> Thanks & regards,
+>>>> Bibek
+>>>>
+>>>>>
+>>>>>>     		};
+>>>>>>     		gfx_0_tbu: tbu@3dd9000 {
+>>>>>>
+>>>>>> -- 
+>>>>>> 2.34.1
+>>>>>>
+>>>>>
+>>>>
+>>>
+>>
 
