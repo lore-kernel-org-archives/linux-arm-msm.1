@@ -1,322 +1,200 @@
-Received: from TYDPR03CU002.outbound.protection.outlook.com (mail-japaneastazon11013058.outbound.protection.outlook.com [52.101.127.58])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6478421ABBD;
-	Fri, 17 Jul 2026 06:52:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.127.58
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784271163; cv=fail; b=rWozDv/9tkO8z93We+XNamjHXaWe40Rp97JqI5JI/CZwPkYck0gQCphJ1fVg56GHYqWv8rCD1L1L040y/OPSTBiPbxS7m1CM9bFZ4WQkKYXmuKmt9wMZhUHxnk7JEqyTQE3oAunwCiy2LO2YQlvm0dV4aAhoxqOTZY6LmIhqjug=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784271163; c=relaxed/simple;
-	bh=veS9CnzVIvafmZg6NUcxKQkHTQFEHMuy8JDi0oJJPN0=;
-	h=From:To:Cc:Subject:Date:Message-Id:Content-Type:MIME-Version; b=ULuUlyZGRBX8yLYhmXxL2c9ZDQOk7XEvU8s6mqB810fWP0KBEetI3bSMcymDYOik+kedFnAx+BfjUfkV/tIkjmVsqybLy8RAziq4eTrOoaaft7WRveECXwp/HQ1/R7m+fwXxtIukGxqX4wmr74wxKuI/Cyl75g8iNqUFbIqDNIg=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vivo.com; spf=pass smtp.mailfrom=vivo.com; dkim=pass (2048-bit key) header.d=vivo.com header.i=@vivo.com header.b=j07O2XSS; arc=fail smtp.client-ip=52.101.127.58
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vivo.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=vivo.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0F9E3B0AF8
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 06:52:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784271176; cv=none; b=S9DicLOmI6qf9Cdo+osWoNANPHBwrvvj8fHlgX+bMIVK0S6OgQ4ec8wyYCRb0E74AAGLCKaAL5DKYG1jfU1jhf4BKT2Qjt+Ag8/KtsZsyv51M9rLqKFzaIK2SnLEybg3lOiqD7kvIPdRvCTb5Apam1R8ix2v7OfJ7h42UUGGUOs=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784271176; c=relaxed/simple;
+	bh=Q+TOHXsToQub8NlMkN8CaDGAJy3c2iReLuURCfB6wQs=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Hl2BrOpIdQgORfpMbIB1WE4eMLYvb+0GPdTBQo3hc+hdW4kBl+GivTivagAawx6tOecEwQCMfVDNaIi3pdzT77ayCWtrGCniRfr7EaBdUmBwJvBLKUcjspHTKphbawbNGqH5iDo/sMyUbWD7UskuGsY1i9hKwX7D/cgpp0n8S9w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=daDyvAr/; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=holM1kLY; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=vivo.com header.i=@vivo.com header.b="j07O2XSS"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JtLbpPrKjWcMFsszDSW3svAIJF2TG2kunDbT68whJzn4H3JOQv/FOHa8tjcHrLXMLOkFWN8wbKDXI2bS/zJyVgO3ij0NnsG27fjg2YmLyWFsHnoZBwVsma9zlJEVGv2Yg+zq/UZzDoZ/z13vJp03zGjhc/UV0u7K07MtXxDR9w6EaNOL793O/kXSuYP4keBjOIQHwusYOk93UZrJeFKu3GwOXsBZwzgB5WWFj6JjamyIliU8KOFCivZ3BmMXyUqc1tG4MtCzlXqJICGLhyIcmXs9SK9I3+1SHNz3mMnYuiRYQDa5LCDhW3eJsW+5K5xh62tNQN/ct/QsVfn5gaAvfg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OwSPbj6bHus/PVje4mHauNVjyk5PMc2+vdtb3EqrvNA=;
- b=xifRvttdX+EVzFBuFgCwjEYqDhklFEChFyda90tMpuurY24WfYGd5m23EON5Rc4PY9Ezydbpa7RGDIW/gIoJIxLRwzodGGle8OafivjEuOCW+gH63s8pBbk7pFdBffeVeINbSafuqKA6T6ROYuzyj/HrZhClGWf7GKL//BM+8rVVLltOlBKRVooZujR7L7lS4eCsrVgjsLpKkbZviGi33gWaXk2H7cPJoXQOELQF/FftT8wAUS+wcaRQA/LrvbABNQRl/rQNsgL4KGX/BO5KSuWC3YLLQtkK9qF18usJMTpG1alhOgwRbqWmFGWZ9Q7qSt9Oae/Cn+rNLMWdCIA46A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OwSPbj6bHus/PVje4mHauNVjyk5PMc2+vdtb3EqrvNA=;
- b=j07O2XSSYyod2ElAVJNAaSmz7NLcwHVSXqPYQUftNLMjsIShCO2dJff/YQ9DkZsf9xG71iYEsjJ2Emfl2z3nPnCRi4x7cwInOrL1nE4JBLhUuH2TRmPIyv3J2rSkX89mUdyx79FslS47hNj0H1O6P4qloCgVInLkQWMhZ+xkH4wknrXm63V9dP46BsyGt5qGCeynAuGI2ISWsZELuYJI2WD8RZjiJ9ljYJ1cKdHENJzijY1Y1i4CBmLB9acdCqAJtWOqsXZNyW4jzsZfW3CSMC05IBikUVs1f9OtLdtcij+Io94Nn6rJVeswL52c5rrNESHf8ONrfhh67QbU1Q8xCg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB5832.apcprd06.prod.outlook.com (2603:1096:101:c8::12)
- by KUXPR06MB9155.apcprd06.prod.outlook.com (2603:1096:d10:68::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.11; Fri, 17 Jul
- 2026 06:52:36 +0000
-Received: from SEZPR06MB5832.apcprd06.prod.outlook.com
- ([fe80::f98:5e32:4ccb:d07b]) by SEZPR06MB5832.apcprd06.prod.outlook.com
- ([fe80::f98:5e32:4ccb:d07b%6]) with mapi id 15.21.0223.011; Fri, 17 Jul 2026
- 06:52:36 +0000
-From: Pan Chuang <panchuang@vivo.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Mathieu Poirier <mathieu.poirier@linaro.org>,
-	Paul Cercueil <paul@crapouillou.net>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	linux-remoteproc@vger.kernel.org (open list:REMOTE PROCESSOR (REMOTEPROC) SUBSYSTEM),
-	linux-kernel@vger.kernel.org (open list),
-	linux-mips@vger.kernel.org (open list:INGENIC JZ47xx SoCs),
-	linux-arm-kernel@lists.infradead.org (moderated list:ARM/Mediatek SoC support),
-	linux-mediatek@lists.infradead.org (moderated list:ARM/Mediatek SoC support),
-	linux-arm-msm@vger.kernel.org (open list:ARM/QUALCOMM MAILING LIST),
-	linux-stm32@st-md-mailman.stormreply.com (moderated list:ARM/STM32 ARCHITECTURE)
-Cc: Pan Chuang <panchuang@vivo.com>
-Subject: [PATCH] remoteproc: Remove redundant dev_err()/dev_err_probe()
-Date: Fri, 17 Jul 2026 14:52:23 +0800
-Message-Id: <20260717065224.600593-1-panchuang@vivo.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TP0P295CA0013.TWNP295.PROD.OUTLOOK.COM
- (2603:1096:910:2::18) To SEZPR06MB5832.apcprd06.prod.outlook.com
- (2603:1096:101:c8::12)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="daDyvAr/";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="holM1kLY"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66H6cRJw979774
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 06:52:52 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=fQFQIdc1G6cXPZtnLJil3C
+	nJ/uYl/+ZjtDzxtSC+s6I=; b=daDyvAr/p404kuXz33LkvNaft8zDSUvetCdO6h
+	+0I/LZynSZsvKsc4jwHShcRTeBucOcgahVGgzLUNDShQ6RukLQ6WvxcLyLoLg3fH
+	Z11WaniokJ8EMr7P/wk65y7CzfWsxz8fcQJ4SeBP9LKOZj9xVwVlVRvzqKw6/1jP
+	4I8K6GrztsaMj4JbppAMd3qJ/O2C+L3h7v2KiNZmFctasXmYX+UK7fjAlZ/s3vUw
+	fvbZiTr++N4Zo0leDcyyvekBUUCE/JlUF6h2CzcrToS+6Ti06DBwdDFANJ2IzNWF
+	6kM/24xoc99tz18rJGaOF5b/kE+I5xidM5ckl8iIYBQQ7hAA==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fff9gr1wx-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 06:52:52 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-84877b362f6so2626805b3a.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 16 Jul 2026 23:52:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784271171; x=1784875971; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=fQFQIdc1G6cXPZtnLJil3CnJ/uYl/+ZjtDzxtSC+s6I=;
+        b=holM1kLYg9HQAYPSlSsDEPz6+GUhSWGmAjno0N6F+wFX6mejwre3K87H+xIila/FjT
+         AEHdSKjVF7M0SU0GhHMGVhN5UJ96CUyWrbH+bsuOarUX0CVjLsSCcoOOEf6nhjToiEg4
+         ylfi8z11VvBSzs6Vh0SQVM4qyJEYXt0yPIh4+xRdXKdwvkAXcgRDx8smOn4GKojlRGi3
+         a5fLWVfJLYRkep2uyUoMkdebu1gIJQ/uaJMGci4+sGVQJt705zPcN5VOZ6NlQcRhouw0
+         xBKZNvxJnDQBcRIUXSTPSEOROHogpFMoTLlpUyidI2UaeOhDuojJ42dtRGIhrjHTh1lw
+         KjRA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784271171; x=1784875971;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=fQFQIdc1G6cXPZtnLJil3CnJ/uYl/+ZjtDzxtSC+s6I=;
+        b=RgvbZrpQ4T1e9RezVKcvRthyvb7SuBIY2niUoz22zlE20Fb0SQ1ITSMfLgG0Ko2gfb
+         Xz/qFhTB9cojzyudDTTipkvDoSRInzr+owxOudFLZTezKxV3VMniyd5XyCat20NnyBH9
+         ddiI9Itii7togIGQeQvb3yvtO4CW17I05UtZ3vSpnJfz3WsboS43oo2E5n3SNblpWR0J
+         Ge3GjLAFsrjT3PE/q3KlYLe1KHw2DYjlXssIFjI1wekLqGXo98QB+UpIQZhLni1TYsUA
+         CkJdOn4PYhVaZO4KZMd3LayQvnBqUYIQEyyr4Dxh6gS6/LpJqOPQGO/AjDSDqDfyLWiG
+         OP5g==
+X-Forwarded-Encrypted: i=1; AHgh+RqfpcDO9PoQ5lixspNe98iWkIbgDhDnbHh/uKSwjGd5QjLInhVlGnWt8qEz1izYO4s5c3XuhpACw64Ag5ro@vger.kernel.org
+X-Gm-Message-State: AOJu0YzcLLWM61gsivEmwl6Trt4ewAFDIGbWRiRlyXp96z8x+8suN4Oi
+	9sIQNP4f9vCNH+wLcd/nuSxg9Bu83v6TE79shnnqtjy+1VGuM2mJ/O18t65FM2AqBm/Oma6hjlm
+	bnb5wEHhDkPDEZy68Fkb4fjnd/iDaZQRD8ULeDJuLiF33odgmYHX5xn7onA0WWcvUfcFq
+X-Gm-Gg: AfdE7cl1qj4dEpa2VjEziSXa0zlZBXWs0vos04e4kJzZpm4YeCivJlX7joqa/Lwiuet
+	fpT9lb6iBoYZMYUy9NijrnQipQ+1hZ39qXnsfzE5k7SRA5BvODXdT4irwEJDe6qtFnWqOgqEY7K
+	trZPU6WUOKqwpph14zQBZ7M9s38y3N0wFonVQzVRpUD7kj4eL0Hxu9jqSTUFFycMs4Ra8nbY5Ko
+	9ko/sMttYZBSB01zmyr+wHMs7O2E9gSVbZ4UBpCgvLhFPks+Oj8d/wPRohSDwm8+NaSQpu8k7Ea
+	m0R8E9dSk5cEP8vpLSssirBDCTr0dlOX3mrZwWU2RsWwc3MwI7XgVumX/E0aWakklftlnE83Vfp
+	pkosSZ1NjUfUnifmymFVkYYkrSo3Ny90=
+X-Received: by 2002:a05:6a00:400f:b0:848:6ba2:4139 with SMTP id d2e1a72fcca58-84c29487c9amr1324433b3a.36.1784271171080;
+        Thu, 16 Jul 2026 23:52:51 -0700 (PDT)
+X-Received: by 2002:a05:6a00:400f:b0:848:6ba2:4139 with SMTP id d2e1a72fcca58-84c29487c9amr1324405b3a.36.1784271170622;
+        Thu, 16 Jul 2026 23:52:50 -0700 (PDT)
+Received: from hu-sachinku-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84c2adc3466sm437651b3a.15.2026.07.16.23.52.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 16 Jul 2026 23:52:50 -0700 (PDT)
+From: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
+Subject: [PATCH v2 0/2] media: qcom: iris: add multi slice support
+Date: Fri, 17 Jul 2026 12:21:43 +0530
+Message-Id: <20260717-iris_multi_slice-v2-0-9550b1feb39b@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5832:EE_|KUXPR06MB9155:EE_
-X-MS-Office365-Filtering-Correlation-Id: 19dfb515-8789-4359-fb7c-08dee3cffbf4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|376014|7416014|23010399003|52116014|56012099006|11063799006|6133799003|18002099003|921020|10067099003|38350700014;
-X-Microsoft-Antispam-Message-Info:
-	+jj+22Zq9fSwJ35DWs/NRlp0kgZJFGx/nB5ER1Y2aZWljreNKVES9wbTCTh4N6ReebpG9wIe36iUqOxHC8IPLck0v46FUxzTNDWyk+OdC+VhuUGWh6nYZfE3AzU8d8PW3ARPhYSl787nH8l3T4NOmbyArUrZgd3WJ1l/O6XkHu3SpAmLRlhyAxbYQpr/8zyTp28433GCe8/FMA/HHzq30cP+M6YJv2pZoZqum7YK8l99JCgCnSdgu4IvSjsHGB4Do0/i1mjG30Dn495nQXZX8qK/EnpJMTsk1SkJ7nh4/jMIt8xkW5pbeNRsB4JGIVckIcUAQP+Y7G6sg59ai8PryI7c4dvIirIWtu4/N1LQY5BQIiQcgvdb4OIaE6A+IPD5ByEeouEkYXjWOxbMaIjRDv/AG1pOcMpFFmRAvvrLKDYpzofQXoGs1+mQwm1myE8UtV3XCu87pgSL0ECRQ1F4LY2moSAN57/PNEsL8nvsQ8txSeXOM8Nk7ab8vImsXH975EaCfc2qkDBFzz8YNLcvk0nFTCq31rWrO0lVzmAjdb7VfXS/ZQ7lNvi4s4r2AB0AGuzyatESC7em+mkdX1JKmtD1IMeayL1iNbhl5k5YU+WD0fW1orUQgM3YqFF9B+rKEzPwVww+/46Ql4WG0r5jqb8+imSP+DrxpXMYYfSINP5mSt6HmMductDYRDjPxUF8VNXJ9uc93IqZ6NaIfL2kvpXRA3OES+Bj6BbGJhLjIB8=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB5832.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(7416014)(23010399003)(52116014)(56012099006)(11063799006)(6133799003)(18002099003)(921020)(10067099003)(38350700014);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?wakMZhJ0Ge0AcXm8yvmqUz+e7mx6CEf6iE/F1TsgxVUkJo3VQphKmMaJJmHt?=
- =?us-ascii?Q?6w+ri1aMcW+5Q+GXB8TsHUB6uE3+K0kTIAQeik6ioci2DvGt0o0EDNTGx6U5?=
- =?us-ascii?Q?8zz6zGc/71h/5hBjMX1X+Bq2TjlxigrGcF2SkOR5qU36hgdcylozhecJMwwk?=
- =?us-ascii?Q?fgPp/kdoyhGmo7KbFbkdqR/SkZTTzAEfX6tFnqTlv0YBXh5ZT95nyIBmABpB?=
- =?us-ascii?Q?xi7XoWjkanen1JQqOXJz0BLWaKNtAlJfUrOiTJ5e4v2gBm/f4C/Wi+Da/5jH?=
- =?us-ascii?Q?GLmaBrwEE2wgD5wmudRFv6Ms4nwMw4BbJqWzM5SkRC9MNx2slGkUHbavmG75?=
- =?us-ascii?Q?mRqSH1aU20hK6HVodXjtYGH09FjnLVSJGP3sL+ILHykYPtxGeQHrgcAIrSZ3?=
- =?us-ascii?Q?Z/jFZGixBRWCbf3W7wtcAqxahIH0rkKQ07rIiUtwniwt0JamkOjK4XGXtezC?=
- =?us-ascii?Q?/Td4LTNbt5baQeiejlAtUcN1NF3x+F2RKBzI71i1NsSOgVyhyL5IltcNTHc+?=
- =?us-ascii?Q?U5P122pz/mE6J4o2VUSyFpAXJ7jk5d6hyt0FPeMuHeLysA9PNkrOEj7wI+Mg?=
- =?us-ascii?Q?KsNHNpkskg9HE3IWkXK5iRQDJ3wx5FXCFK7jQw+hsnQfRS3KvooQ0rsw8Geg?=
- =?us-ascii?Q?mLEu93g6OR7Jko+7uiW1Wt9L2dFkzyj1fOnsU8TdLF64DLyBTTIcnMT61CJr?=
- =?us-ascii?Q?KGpaoKuaDiOZlRkbbkN+5jpe3+lbyztumaT9psm1M6P6bdLYXuPvb3J0gL9X?=
- =?us-ascii?Q?kwnO2Z//xyXzm5FluyBnb3bQ6+ueoAo7/yX8hV2aEdum98gChZgE+jnCx75k?=
- =?us-ascii?Q?BLKLSeE8atVznMJKKuCYYaxTCEn00lCz9vsHIDQRJinvGaOid0dYURjMNEUm?=
- =?us-ascii?Q?DSxfIVo+LLZtLoYDLVHvOOBKO48IABJ1CTZw8rE550vTQkr/5gmSxs90W766?=
- =?us-ascii?Q?dNF9rcsgalqVq4aM/2FJ0Raoqn4DFQw4oacQ74fTbbcAkXom9F1C9ynV7mcE?=
- =?us-ascii?Q?tqV4Gm1WMf+VOhnObQaBq9zfMaGMfbOrdt3wfukhPi6D/ObdX//xqGWyhFiU?=
- =?us-ascii?Q?6Tk7wcx5hEj6+q5adR6Nf6Grdj9c37zJ3eVKPtleB1aKy7co/wgRJ0rZShEt?=
- =?us-ascii?Q?XgEwa9EGKlnyFcf2TaHHayLC6z5hLcDNXqR/kHZyFSghLHaUWGXKKaXCJ4V3?=
- =?us-ascii?Q?H6FaR4SkQFis/p/r5fRa+NDd6Dw+FuWtm6nZEt5TgURlgQgBsb6//aON4sVZ?=
- =?us-ascii?Q?Ckci8brpND0Jo+6EAH/tX+WD3CPKNQAuPFhHG8ntQ0T95qgYhTP/pj6EeqcS?=
- =?us-ascii?Q?KW6TusA/6xTi2QFstelSL0f0aYxyjZBVBas027YEtzsKyg7knvt3yHGvHts5?=
- =?us-ascii?Q?NgsalfLDeTxMCZuPjsfixlQjSbkO/AZzksJwKADhghTlaSC3eublPERdHoFX?=
- =?us-ascii?Q?TIYUdRRA/Kxf68V6f7N8SHzphfBTsAVbrEkFcQgiL8zxO2GW6ZOrPk0nnJDn?=
- =?us-ascii?Q?XQUwAoWZEMRKOSn2zvoP6zrs5repTLefRGTVEj1xR7tG8FHF6td/sgQMHSAs?=
- =?us-ascii?Q?C3VMisfW+FQ2oKW4jiPyqEzdZRmONF9+GREloEGM0CiwMoHsLv2VndUQyZ/P?=
- =?us-ascii?Q?6RUtQciVuYsoVQxj4+TxJ10dhYvL6P3M0bH+lXYQoeCs+6ck3WiLHIF+F5Zm?=
- =?us-ascii?Q?zEPhD1a5zT5Vsug5TgcsGs68w9D8vdjah582QDBsR6Cl8cSUWDSZ84op56tT?=
- =?us-ascii?Q?RY3LLRLmyQ=3D=3D?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 19dfb515-8789-4359-fb7c-08dee3cffbf4
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5832.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Jul 2026 06:52:36.0752
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2oF8UeBL/8/0q0/DLe6uKSvBvys4lIyujK6MDurR+hbt0ujMnmGhae0zaVdrWbppYYNsKVvqG6I6IKRCDUcCAw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: KUXPR06MB9155
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAP/QWWoC/2XMQQ6CMBCF4auQri2hA7TAynsYQ2odZBJKtQPEh
+ HB3Gzcu3LzkW7x/F4yRkEWX7SLiRkxhToBTJtxo5wdKuicLKEAXRmlJkbj367RQzxM5lLWuDDT
+ GtrUuRbo9Iw70/iYv1+QhBi+XMaL9hSpo/kObkkq24EowWrV4G86BOX+tdnLB+zyNOI4PGNJIj
+ rEAAAA=
+X-Change-ID: 20260716-iris_multi_slice-5647287a9563
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784271167; l=2636;
+ i=sachin.garg@oss.qualcomm.com; s=20260211; h=from:subject:message-id;
+ bh=Q+TOHXsToQub8NlMkN8CaDGAJy3c2iReLuURCfB6wQs=;
+ b=/UYV4CdNnR1nFuMe4wNTvxgZDoV+O4ZjaMMCJwbHbgQc68cSQT3WerSxKRezUM2ms8ppdQlJt
+ qf7k+HghVAtD1uWG3zbdd/Wfr9+hLbtvbuZzwbc5fu4MlEeb5gt1U9j
+X-Developer-Key: i=sachin.garg@oss.qualcomm.com; a=ed25519;
+ pk=KcRhp4CP9cR1V2tg6xSNRnB2STYaU0vVigdUF4Actu0=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE3MDA2NiBTYWx0ZWRfX8uOnjLciyFXx
+ QqYKDGbXKpw5crdfyygwn0UYNAa03+v0FOKJQJfSlASN6IyoIyf3rtwLPQCJYy1EFzb0lFE1QkL
+ eZvNgxptwwV02tfuqHge4Vt3vCdj5kM=
+X-Proofpoint-ORIG-GUID: zCE8PtFBp9v42g_DNMEcoSbts3l6BI0J
+X-Proofpoint-GUID: zCE8PtFBp9v42g_DNMEcoSbts3l6BI0J
+X-Authority-Analysis: v=2.4 cv=TaumcxQh c=1 sm=1 tr=0 ts=6a59d144 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=b6dZZY6aNiEbEsjWt0cA:9 a=QEXdDO2ut3YA:10
+ a=OpyuDcXvxspvyRM73sMx:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE3MDA2NiBTYWx0ZWRfX+HXZ3lJr9KWW
+ LoOygDcE4WPtt3i/xB/GYJ0mLNOswZGdSIWwGNNQ8yhMGbZN4fMXLo/lsv+lx9ZwnjmDTfobRQX
+ X82dFUIsV/2DnARReR/Mh4mNV43kR+GOn1SutYlSVIEvVd73idX5lUb1VYuoTaokc1PZ1Y7dVZX
+ 30NSDlStKXVztq3AE/N+6aG712gD+PnuneEqThFEknK2eFooFLc4i6ePmONiddok37EHdeReuC2
+ huQCPWq+9nuClMIpC35FkglLZ7EgVwg3kxedeuaE3OxPUVY2HA35Ze9jLV3+kjDNzddICDXH6bU
+ PuW5E/ZovRhb9bxFYnMCahF6cliw/I1W0JQI8EzkgVKYlEauGS9HfRQ75xh8dFUZbhARd0jNmY9
+ elbLNgb7NwJdxITa40CUxIVLOdsFS6z9V+0u3wt67qETcDVKGHrF1TtwlSBnmtACQWtA6fHBdk8
+ 2/B6ZU8tUl6AqzxfKeA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-17_02,2026-07-15_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 impostorscore=0 clxscore=1011 adultscore=0 phishscore=0
+ spamscore=0 bulkscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607170066
 
-Since commit 55b48e23f5c4 ("genirq/devres: Add error handling in
-devm_request_*_irq()"), devm_request_irq() and devm_request_threaded_irq()
-automatically log detailed error messages on failure. Remove the
-now-redundant driver-specific dev_err() and dev_err_probe() calls.
+This series adds support for multi-slice encoding in the Qualcomm Iris
+driver.
 
-Signed-off-by: Pan Chuang <panchuang@vivo.com>
+Multi-slice mode allows encoding a single frame into multiple slices,
+which can improve error resilience and enable parallel processing.
+The feature supports two slice modes:
+- MAX_MB mode: slices are created based on macroblock count, controlled
+  via V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_MB
+- MAX_BYTES mode: slices are created based on byte size, controlled via
+  V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_BYTES
+
+Clients can enable slice mode using the V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MODE
+control.
+
+Patch 1 is a prerequisite fix: iris_set_stage() currently always selects
+STAGE_2 work mode for encoder sessions, but CBR rate control requires
+STAGE_1. This is fixed by forcing STAGE_1 when BITRATE_MODE is set to
+CBR.
+
+Patch 2 adds the multi-slice support itself for Iris HFI Gen2 based
+targets (qcs8300, sm8550 and other SM8550-derived targets).
+Support for HFI Gen1 targets will be added in a follow-up series.
+
+This series has been verified with GST level testing.
+Command used:
+gst-launch-1.0 -v videotestsrc ! video/x-raw,format=NV12, \
+width=1280,height=720,framerate=30/1 ! v4l2h264enc output-io-mode=4 |
+capture-io-mode=4 extra-controls="controls,video_bitrate_mode=1, \
+slice_partitioning_method=1,number_of_mbs_in_a_slice=460;" \
+! filesink location=/opt/test_enc.h264
+
+Changes in v2:
+- Added a prerequisite patch to force STAGE_1 work mode for CBR rate
+  control on the encoder, required for multi-slice encoding to work
+  correctly.
+- Addressed review comments on the multi-slice patch (updated commit
+  subject and description).
+
+Signed-off-by: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
 ---
- drivers/remoteproc/da8xx_remoteproc.c    |  2 +-
- drivers/remoteproc/ingenic_rproc.c       |  4 +---
- drivers/remoteproc/keystone_remoteproc.c |  4 ++--
- drivers/remoteproc/mtk_scp.c             |  4 +---
- drivers/remoteproc/qcom_q6v5.c           | 20 +++++---------------
- drivers/remoteproc/qcom_sysmon.c         |  2 --
- drivers/remoteproc/qcom_wcnss.c          |  4 +---
- drivers/remoteproc/stm32_rproc.c         |  3 +--
- 8 files changed, 12 insertions(+), 31 deletions(-)
+Sachin Kumar Garg (2):
+      media: iris: force stage 1 work mode for CBR RC on encoder
+      media: iris: add support for multi_slice in iris encoder
 
-diff --git a/drivers/remoteproc/da8xx_remoteproc.c b/drivers/remoteproc/da8xx_remoteproc.c
-index 23fca7176539..006fa7b56727 100644
---- a/drivers/remoteproc/da8xx_remoteproc.c
-+++ b/drivers/remoteproc/da8xx_remoteproc.c
-@@ -298,7 +298,7 @@ static int da8xx_rproc_probe(struct platform_device *pdev)
- 					handle_event, 0, "da8xx-remoteproc",
- 					rproc);
- 	if (ret)
--		return dev_err_probe(dev, ret, "devm_request_threaded_irq error\n");
-+		return ret;
- 
- 	/*
- 	 * rproc_add() can end up enabling the DSP's clk with the DSP
-diff --git a/drivers/remoteproc/ingenic_rproc.c b/drivers/remoteproc/ingenic_rproc.c
-index 1b78d8ddeacf..252519f48964 100644
---- a/drivers/remoteproc/ingenic_rproc.c
-+++ b/drivers/remoteproc/ingenic_rproc.c
-@@ -219,10 +219,8 @@ static int ingenic_rproc_probe(struct platform_device *pdev)
- 
- 	ret = devm_request_irq(dev, vpu->irq, vpu_interrupt, IRQF_NO_AUTOEN,
- 			       "VPU", rproc);
--	if (ret < 0) {
--		dev_err(dev, "Failed to request IRQ\n");
-+	if (ret < 0)
- 		return ret;
--	}
- 
- 	ret = devm_rproc_add(dev, rproc);
- 	if (ret) {
-diff --git a/drivers/remoteproc/keystone_remoteproc.c b/drivers/remoteproc/keystone_remoteproc.c
-index 83763d640c4e..407d6034f748 100644
---- a/drivers/remoteproc/keystone_remoteproc.c
-+++ b/drivers/remoteproc/keystone_remoteproc.c
-@@ -411,7 +411,7 @@ static int keystone_rproc_probe(struct platform_device *pdev)
- 	ret = devm_request_irq(dev, ksproc->irq_ring, keystone_rproc_vring_interrupt,
- 			       IRQF_NO_AUTOEN, dev_name(dev), ksproc);
- 	if (ret)
--		return dev_err_probe(dev, ret, "failed to request vring interrupt\n");
-+		return ret;
- 
- 	ksproc->irq_fault = platform_get_irq_byname(pdev, "exception");
- 	if (ksproc->irq_fault < 0)
-@@ -419,7 +419,7 @@ static int keystone_rproc_probe(struct platform_device *pdev)
- 	ret = devm_request_irq(dev, ksproc->irq_fault, keystone_rproc_exception_interrupt,
- 			       IRQF_NO_AUTOEN, dev_name(dev), ksproc);
- 	if (ret)
--		return dev_err_probe(dev, ret, "failed to enable exception interrupt\n");
-+		return ret;
- 
- 	ksproc->kick_gpio = devm_gpiod_get(dev, "kick", GPIOD_ASIS);
- 	ret = PTR_ERR_OR_ZERO(ksproc->kick_gpio);
-diff --git a/drivers/remoteproc/mtk_scp.c b/drivers/remoteproc/mtk_scp.c
-index 436656bdfa8b..9751acc2bf83 100644
---- a/drivers/remoteproc/mtk_scp.c
-+++ b/drivers/remoteproc/mtk_scp.c
-@@ -1246,10 +1246,8 @@ static struct mtk_scp *scp_rproc_init(struct platform_device *pdev,
- 					scp_irq_handler, IRQF_ONESHOT,
- 					pdev->name, scp);
- 
--	if (ret) {
--		dev_err(dev, "failed to request irq\n");
-+	if (ret)
- 		goto remove_subdev;
--	}
- 
- 	return scp;
- 
-diff --git a/drivers/remoteproc/qcom_q6v5.c b/drivers/remoteproc/qcom_q6v5.c
-index 0206a4a19254..1075ef4027b7 100644
---- a/drivers/remoteproc/qcom_q6v5.c
-+++ b/drivers/remoteproc/qcom_q6v5.c
-@@ -302,10 +302,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5, struct platform_device *pdev,
- 					NULL, q6v5_wdog_interrupt,
- 					IRQF_TRIGGER_RISING | IRQF_ONESHOT,
- 					"q6v5 wdog", q6v5);
--	if (ret) {
--		dev_err(&pdev->dev, "failed to acquire wdog IRQ\n");
-+	if (ret)
- 		return ret;
--	}
- 
- 	q6v5->fatal_irq = platform_get_irq_byname(pdev, "fatal");
- 	if (q6v5->fatal_irq < 0)
-@@ -315,10 +313,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5, struct platform_device *pdev,
- 					NULL, q6v5_fatal_interrupt,
- 					IRQF_TRIGGER_RISING | IRQF_ONESHOT,
- 					"q6v5 fatal", q6v5);
--	if (ret) {
--		dev_err(&pdev->dev, "failed to acquire fatal IRQ\n");
-+	if (ret)
- 		return ret;
--	}
- 
- 	q6v5->ready_irq = platform_get_irq_byname(pdev, "ready");
- 	if (q6v5->ready_irq < 0)
-@@ -328,10 +324,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5, struct platform_device *pdev,
- 					NULL, q6v5_ready_interrupt,
- 					IRQF_TRIGGER_RISING | IRQF_ONESHOT,
- 					"q6v5 ready", q6v5);
--	if (ret) {
--		dev_err(&pdev->dev, "failed to acquire ready IRQ\n");
-+	if (ret)
- 		return ret;
--	}
- 
- 	q6v5->handover_irq = platform_get_irq_byname(pdev, "handover");
- 	if (q6v5->handover_irq < 0)
-@@ -342,10 +336,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5, struct platform_device *pdev,
- 					IRQF_TRIGGER_RISING | IRQF_ONESHOT |
- 					IRQF_NO_AUTOEN,
- 					"q6v5 handover", q6v5);
--	if (ret) {
--		dev_err(&pdev->dev, "failed to acquire handover IRQ\n");
-+	if (ret)
- 		return ret;
--	}
- 
- 	q6v5->stop_irq = platform_get_irq_byname(pdev, "stop-ack");
- 	if (q6v5->stop_irq < 0)
-@@ -355,10 +347,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5, struct platform_device *pdev,
- 					NULL, q6v5_stop_interrupt,
- 					IRQF_TRIGGER_RISING | IRQF_ONESHOT,
- 					"q6v5 stop", q6v5);
--	if (ret) {
--		dev_err(&pdev->dev, "failed to acquire stop-ack IRQ\n");
-+	if (ret)
- 		return ret;
--	}
- 
- 	q6v5->state = devm_qcom_smem_state_get(&pdev->dev, "stop", &q6v5->stop_bit);
- 	if (IS_ERR(q6v5->state)) {
-diff --git a/drivers/remoteproc/qcom_sysmon.c b/drivers/remoteproc/qcom_sysmon.c
-index a0830a48b1f4..61e1038328e8 100644
---- a/drivers/remoteproc/qcom_sysmon.c
-+++ b/drivers/remoteproc/qcom_sysmon.c
-@@ -662,8 +662,6 @@ struct qcom_sysmon *qcom_add_sysmon_subdev(struct rproc *rproc,
- 						IRQF_TRIGGER_RISING | IRQF_ONESHOT,
- 						"q6v5 shutdown-ack", sysmon);
- 		if (ret) {
--			dev_err(sysmon->dev,
--				"failed to acquire shutdown-ack IRQ\n");
- 			kfree(sysmon);
- 			return ERR_PTR(ret);
- 		}
-diff --git a/drivers/remoteproc/qcom_wcnss.c b/drivers/remoteproc/qcom_wcnss.c
-index 3392c9380202..e9a00efe97f6 100644
---- a/drivers/remoteproc/qcom_wcnss.c
-+++ b/drivers/remoteproc/qcom_wcnss.c
-@@ -521,10 +521,8 @@ static int wcnss_request_irq(struct qcom_wcnss *wcnss,
- 					NULL, thread_fn,
- 					IRQF_TRIGGER_RISING | IRQF_ONESHOT,
- 					"wcnss", wcnss);
--	if (ret) {
--		dev_err(&pdev->dev, "request %s IRQ failed\n", name);
-+	if (ret)
- 		return ret;
--	}
- 
- 	/* Return the IRQ number if the IRQ was successfully acquired */
- 	return irq_number;
-diff --git a/drivers/remoteproc/stm32_rproc.c b/drivers/remoteproc/stm32_rproc.c
-index 0e5d64fbe52c..1fe4cdc0a13a 100644
---- a/drivers/remoteproc/stm32_rproc.c
-+++ b/drivers/remoteproc/stm32_rproc.c
-@@ -682,8 +682,7 @@ static int stm32_rproc_parse_dt(struct platform_device *pdev,
- 		err = devm_request_irq(dev, irq, stm32_rproc_wdg, 0,
- 				       dev_name(dev), pdev);
- 		if (err)
--			return dev_err_probe(dev, err,
--					     "failed to request wdg irq\n");
-+			return err;
- 
- 		ddata->wdg_irq = irq;
- 
+ drivers/media/platform/qcom/iris/iris_ctrls.c      | 84 ++++++++++++++++++++++
+ drivers/media/platform/qcom/iris/iris_ctrls.h      |  1 +
+ drivers/media/platform/qcom/iris/iris_hfi_gen2.c   | 33 ++++++++-
+ .../platform/qcom/iris/iris_hfi_gen2_defines.h     |  2 +
+ .../platform/qcom/iris/iris_platform_common.h      | 12 ++++
+ .../platform/qcom/iris/iris_platform_qcs8300.h     |  9 +++
+ .../platform/qcom/iris/iris_platform_sm8550.h      |  9 +++
+ .../media/platform/qcom/iris/iris_platform_vpu2.c  |  9 +++
+ 8 files changed, 158 insertions(+), 1 deletion(-)
+---
+base-commit: 42f83a32259a82c4481d3cccf560c3bfeb32c892
+change-id: 20260716-iris_multi_slice-5647287a9563
+
+Best regards,
 -- 
-2.34.1
+Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
 
