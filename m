@@ -1,185 +1,260 @@
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from PH8PR06CU001.outbound.protection.outlook.com (mail-westus3azon11012045.outbound.protection.outlook.com [40.107.209.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E9AB280A20
-	for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 02:45:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.49
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784342737; cv=none; b=l/pmCnd6sKxppoer73qh25MCmR/KOChWv4gnhqDNklLT9eOAMJqBXM4ZAkGhvfRSCp7nBJblYVvsul+UixVySYJsrWeLq9xCrI5vwNYDhZYMUohFA63bvgEntFgKa1gmBGHhXk1y7UOwdmw0yuHTVjZvYPzSLfyblwHMyaSIQiU=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784342737; c=relaxed/simple;
-	bh=EzqyYmBPaZIxfSvNj9HW+FHirJDDeOZGcrGA2ymSfWw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=iTnjaRqXmySuedgNq4AwAAitXj8X/hdFfXHBHRvnywxlbuOGkKQEf+W8Ezapityobs6XgJ/YV39tYJ0nuj5LhozWEcJl+49se9nu4KnBSOB1YqORAIAMt8Wz3IfTAuSL7np/Ku0s6Rr/b53RyzBLPrvmRwknP777f+13b5klklE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=OB/kWNVs; arc=none smtp.client-ip=209.85.128.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32E6C27E05E;
+	Sat, 18 Jul 2026 02:46:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.209.45
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784342785; cv=fail; b=qh27RgFJUW6r1rE1Nnd++lvBFEOdXxP5OF3QshKKZmjiV7M2W4f6wZxXOly1KIS1/AqN3pRNhDzeFfEW7zShw2xIy+T9DFuq6RC39JfAGVUTXHkDwFuroUXtM9of1dssPWvThC/BjFONeEnI8crSE/zvHK/WtkLdfkpa8z9AX5c=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784342785; c=relaxed/simple;
+	bh=b9C378Aj041U9GABxn0XKcB5WN271gzZP/FF+JOdnUE=;
+	h=Content-Type:Date:Message-Id:Subject:Cc:To:From:References:
+	 In-Reply-To:MIME-Version; b=BkCzZP1O8HPRX8a/h8GlRR4zQw+26hPIYvscLiiAXaVP4yHNb4/VglqN1SseyTYXVgaqxZaOxlDQAche2Pnpboiq7ATKLJwyp4NRd9qAefhih0ROUDQqWgzg4E306qCgXqBylC2yw6Ss/Hi2pmWBm3fYOQmwh2v9lLMhbieqQYY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=gA9NP4HB; arc=fail smtp.client-ip=40.107.209.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="OB/kWNVs"
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4953ddae026so24999565e9.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 17 Jul 2026 19:45:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1784342732; x=1784947532; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=VkJMM3uGJvAjbd6BrzjAmq3zIo30sUU7oRO1KxdmACY=;
-        b=OB/kWNVs7We4RlwNG0MaEaRzTKgIEKyqndFenr6dXvODFIoWTpmuxACNjCn0/XtIK0
-         tDl5PinggC5jH8ZI8d6jRX/ZIADkFOvh93UxDzPjlYE/NXkwuf9niCorYTFsA6vUtGdc
-         UzEjYd8FV4tY9IKabKPhEX8TrAKtMm6HddqUhzybivMsW9o8r9pyjDX03ClxTR9LqnvL
-         Lkt2rU08izFDjf42yvtVkqZDQuSb1/BjcuWXc358s2JaHiJtCP202XmfzbQS2JcdeEKa
-         3DvAwGvmUJAOW9xHT6fXy/VMq9orbbM4aboAAojLxFxZgkIKhXHw7CAf2ZCQMyH5HTJW
-         SBTg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784342732; x=1784947532;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=VkJMM3uGJvAjbd6BrzjAmq3zIo30sUU7oRO1KxdmACY=;
-        b=oOntVosIdGW44IFrriWgBdAm83sNlNDZ9YBOJabwgHOkbky+4D59AnKuF6g1E0Y8HC
-         YB3D0je1QMGuY8XsQISXvj59e4FwKn0AARHpLYzATiQXOBSF85UsY7LfmrZQuiYiADQW
-         a3OeMlcD+3VQy8lID0Ga0wPbkcVVbAJ1IeDIU8NOvEs02wF9Ti1SdrBXoJZ7iuWfGMFt
-         VbnmlCJMk5+xG6jCf/xU4smJU0FAYETyMRjv0fo6IZe71n8irwCyk3NNzjzIHeO0pE8u
-         tx0o/p7spPcaVKoE6pdRTdgXs/LBhIso7irnyI9qe1tWOqIyNe8XwRGEC7UI1KkIJMuU
-         3t3w==
-X-Gm-Message-State: AOJu0YxrEnBA39F/giV/lJZnt6WrUSazY3XdJRuASdM80vM8Gusgxxsd
-	oGJaLQ+IrhkLxSpAJ8by7N02Qf/tPpHrJtEcN0cMx0W8naCFvhlyjbEwlrRquyLWurw=
-X-Gm-Gg: AfdE7cmp8NeSgsgzo9g7CSp7kZTiOOCtulrNLtCQKeSpHY3CQQ/OxcGArzUGvOxDt/u
-	OXRhOajynv6/aYfH60EIYk28npfrgJR5TLL8aMdeFmkAEuyVu9XkU9RKYr3s92vfQBV92EMTPoP
-	+Ah59Los/AD1zohnZaGidXcJJGRAOyyPq1tjUwxG0v1EyIwLDuYhyG83w0emrDQk5PK9UW+KF1h
-	OQ40nSfVsn75sZFixmZWLxt72/taTguNPqoB22hmeSaSkHe7WMuaXiqMxe0bveGW1po9Mq+l/2Y
-	UhqyKK0gMUFxO5xVh0qbTvckgow97FxGCkFTJGDucK9hNfhZw9DEvN/1JfYda0lwmICWxXlBOwY
-	1eHwRKkLrwLTX/b2GXx76qfUiLvm5m2U3bE8FHX7PtmkE91u1APlAU4E/QiK+zzHlsiC36Ft0ww
-	E8Eqbc0UYYck4B
-X-Received: by 2002:a05:600c:6a0c:b0:493:a5d0:d1a1 with SMTP id 5b1f17b1804b1-4954a40bd0fmr41829915e9.31.1784342732154;
-        Fri, 17 Jul 2026 19:45:32 -0700 (PDT)
-Received: from [192.168.0.35] ([109.76.77.100])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f63eddd27sm8614952f8f.28.2026.07.17.19.45.29
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 17 Jul 2026 19:45:30 -0700 (PDT)
-Message-ID: <61d91ac1-636f-4b0e-b3c2-d51207cbd8bb@linaro.org>
-Date: Sat, 18 Jul 2026 03:45:29 +0100
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="gA9NP4HB"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yrDEmwfiu16q73Zf+8XjcPjnwpufC9DZ7HaBqkBrs0adSNG8L1oX9GpkXRDh1hgmy42Ny0wyGtGNQ0TqQ6yCrHrjA/dMC3Q2WOrQcuSzH7Z5IPCzQOngYxEhCX8dpTbp2UaWmCw8+kfpC1apkQnlJS2mbzoGww5l2HgcNzTEubs0pjH8Fp59+W0e/r5nbLX6vpqzYZNSQ2hnL5wBn9WhC/0RQoD41/JByJojUPK4naHgw7zxMVzQfTvI3r0/c+4kFInaBin+/MJauWu8X6fji8IGffnhR83pKYwJDwR/IlaUTf845wlzz2XIlC+jM2dO30FuA7ifhFMumr+0s0q3Dw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rN4Th1+pO0v51ps14kZ9sxg7w38DmItOS/VU4cdy1bk=;
+ b=Hma3oY0+X975HqWjbijsJMt5F5iCOf3optKCJnQooGECJzpGZlxKY/gNGSMDOL0FQgJBhMl8VFT0cpniKkrwZYF3CKWiRNbwoAVxFneCpVfww21xgn58xxktMqf6aIXoqdX4m25PfBszsoLQAEvdt7QVMTnepEi947zu491buhS2/ocCt+btQfpTHy7sIllIOo4d1S0hGyTdffv7EixrjEl5g8LdcTFmCCVDbRlcMHJZ/A5107EcaSBDs3F6l0rMyTVd+0IJ0swPb06O/Rh3h6Unkhki12iZyhTFmKzCxGLw37naW5+69Rm7eGDmX0uSR1gk42Hgm7XQPzwob4CpBw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rN4Th1+pO0v51ps14kZ9sxg7w38DmItOS/VU4cdy1bk=;
+ b=gA9NP4HBi/7cCob/1T+3JyH0hrCGK6G/EiR03qj1seQcgfGG5/VWWmBM2/+rk11nZiXFvmnbYQFSXIzfdvU5WmI4fo5wwP9anG8sAWK7WJHDCp+S3k+5pG4H91DRzc5FLwT3iOhXDNA7LPONjwy52mbMSHnEpFA8cWi4YSqtNJT3iYxB+62xTw0dg8FOstErSc/2kC2afifrYLZKmpUgpEv3dhK0MWK1gX8+0rcM6O2yWjdg3//+HrDeMEotf5X67lm7aGGn2gcWlLLGwVpaM+R0XdhVLmJe8kIAw7VL12YFnIae3vu7XpVX9wVQTJUCxNNEB0V1ZtzJTR/oJVZEPw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from IA0PR12MB8374.namprd12.prod.outlook.com (2603:10b6:208:40e::7)
+ by CH3PR12MB7571.namprd12.prod.outlook.com (2603:10b6:610:147::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.12; Sat, 18 Jul
+ 2026 02:46:04 +0000
+Received: from IA0PR12MB8374.namprd12.prod.outlook.com
+ ([fe80::d85f:4c87:ae84:3f16]) by IA0PR12MB8374.namprd12.prod.outlook.com
+ ([fe80::d85f:4c87:ae84:3f16%5]) with mapi id 15.21.0223.012; Sat, 18 Jul 2026
+ 02:46:04 +0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 17 Jul 2026 22:46:01 -0400
+Message-Id: <DK1CPW8JK0UC.194RLAY6RVQDY@nvidia.com>
+Subject: Re: [PATCH v2 06/33] mm/rmap: parameterise vma_interval_tree_*() by
+ address_space
+Cc: <linux-mm@kvack.org>, <linux-kernel@vger.kernel.org>,
+ <linux-arm-kernel@lists.infradead.org>, <linux-parisc@vger.kernel.org>,
+ <linux-fsdevel@vger.kernel.org>, <nvdimm@lists.linux.dev>,
+ <linux-perf-users@vger.kernel.org>, <linux-trace-kernel@vger.kernel.org>,
+ <damon@lists.linux.dev>, <iommu@lists.linux.dev>,
+ <kasan-dev@googlegroups.com>, <linux-sgx@vger.kernel.org>,
+ <etnaviv@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
+ <linux-arm-msm@vger.kernel.org>, <freedreno@lists.freedesktop.org>,
+ <linux-tegra@vger.kernel.org>, <kvm@vger.kernel.org>, "Russell King"
+ <linux+etnaviv@armlinux.org.uk>
+To: "Lorenzo Stoakes" <ljs@kernel.org>, "Andrew Morton"
+ <akpm@linux-foundation.org>, "David Hildenbrand" <david@kernel.org>, "Liam
+ R. Howlett" <liam@infradead.org>, "Vlastimil Babka" <vbabka@kernel.org>,
+ "Mike Rapoport" <rppt@kernel.org>, "Suren Baghdasaryan"
+ <surenb@google.com>, "Michal Hocko" <mhocko@suse.com>, "Rik van Riel"
+ <riel@surriel.com>, "Harry Yoo" <harry@kernel.org>, "Jann Horn"
+ <jannh@google.com>, "Lance Yang" <lance.yang@linux.dev>, "Pedro Falcato"
+ <pfalcato@suse.de>, "Russell King" <linux@armlinux.org.uk>, "Dinh Nguyen"
+ <dinguyen@kernel.org>, "Simon Schuster"
+ <schuster.simon@siemens-energy.com>, "James E.J. Bottomley"
+ <James.Bottomley@HansenPartnership.com>, "Helge Deller" <deller@gmx.de>,
+ "Alexander Viro" <viro@zeniv.linux.org.uk>, "Christian Brauner"
+ <brauner@kernel.org>, "Jan Kara" <jack@suse.cz>, "Dan Williams"
+ <djbw@kernel.org>, "Matthew Wilcox" <willy@infradead.org>, "Muchun Song"
+ <muchun.song@linux.dev>, "Oscar Salvador" <osalvador@suse.de>, "Masami
+ Hiramatsu" <mhiramat@kernel.org>, "Oleg Nesterov" <oleg@redhat.com>, "Peter
+ Zijlstra" <peterz@infradead.org>, "Ingo Molnar" <mingo@redhat.com>,
+ "Arnaldo Carvalho de Melo" <acme@kernel.org>, "Namhyung Kim"
+ <namhyung@kernel.org>, "Mark Rutland" <mark.rutland@arm.com>, "Alexander
+ Shishkin" <alexander.shishkin@linux.intel.com>, "Jiri Olsa"
+ <jolsa@kernel.org>, "Ian Rogers" <irogers@google.com>, "Adrian Hunter"
+ <adrian.hunter@intel.com>, "James Clark" <james.clark@linaro.org>, "Baolin
+ Wang" <baolin.wang@linux.alibaba.com>, "Nico Pache" <npache@redhat.com>,
+ "Ryan Roberts" <ryan.roberts@arm.com>, "Dev Jain" <dev.jain@arm.com>,
+ "Barry Song" <baohua@kernel.org>, "Miaohe Lin" <linmiaohe@huawei.com>,
+ "Naoya Horiguchi" <nao.horiguchi@gmail.com>, "Xu Xin"
+ <xu.xin16@zte.com.cn>, "Chengming Zhou" <chengming.zhou@linux.dev>, "SJ
+ Park" <sj@kernel.org>, "Matthew Brost" <matthew.brost@intel.com>, "Joshua
+ Hahn" <joshua.hahnjy@gmail.com>, "Rakie Kim" <rakie.kim@sk.com>, "Byungchul
+ Park" <byungchul@sk.com>, "Gregory Price" <gourry@gourry.net>, "Ying Huang"
+ <ying.huang@linux.alibaba.com>, "Alistair Popple" <apopple@nvidia.com>,
+ "Hugh Dickins" <hughd@google.com>, "Peter Xu" <peterx@redhat.com>, "Kees
+ Cook" <kees@kernel.org>, "Marek Szyprowski" <m.szyprowski@samsung.com>,
+ "Robin Murphy" <robin.murphy@arm.com>, "Andrey Konovalov"
+ <andreyknvl@gmail.com>, "Alexander Potapenko" <glider@google.com>, "Dmitry
+ Vyukov" <dvyukov@google.com>, "Steven Rostedt" <rostedt@goodmis.org>,
+ "Mathieu Desnoyers" <mathieu.desnoyers@efficios.com>, "Jarkko Sakkinen"
+ <jarkko@kernel.org>, "Dave Hansen" <dave.hansen@linux.intel.com>, "Thomas
+ Gleixner" <tglx@kernel.org>, "Borislav Petkov" <bp@alien8.de>,
+ <x86@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>, "Ian Abbott"
+ <abbotti@mev.co.uk>, "H Hartley Sweeten" <hsweeten@visionengravers.com>,
+ "Lucas Stach" <l.stach@pengutronix.de>, "Christian Gmeiner"
+ <christian.gmeiner@gmail.com>, "David Airlie" <airlied@gmail.com>, "Simona
+ Vetter" <simona@ffwll.ch>, "Patrik Jakobsson"
+ <patrik.r.jakobsson@gmail.com>, "Maarten Lankhorst"
+ <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>, "Rob Clark"
+ <robin.clark@oss.qualcomm.com>, "Dmitry Baryshkov" <lumag@kernel.org>,
+ "Abhinav Kumar" <abhinav.kumar@linux.dev>, "Jessica Zhang"
+ <jesszhan0024@gmail.com>, "Sean Paul" <sean@poorly.run>, "Marijn Suijten"
+ <marijn.suijten@somainline.org>, "Tomi Valkeinen"
+ <tomi.valkeinen@ideasonboard.com>, "Thierry Reding"
+ <thierry.reding@kernel.org>, "Mikko Perttunen" <mperttunen@nvidia.com>,
+ "Jonathan Hunter" <jonathanh@nvidia.com>, "Christian Koenig"
+ <christian.koenig@amd.com>, "Huang Rui" <ray.huang@amd.com>, "Matthew Auld"
+ <matthew.auld@intel.com>, "Jason Gunthorpe" <jgg@ziepe.ca>, "Yishai Hadas"
+ <yishaih@nvidia.com>, "Shameer Kolothum" <skolothumtho@nvidia.com>, "Kevin
+ Tian" <kevin.tian@intel.com>, "Ankit Agrawal" <ankita@nvidia.com>, "Alex
+ Williamson" <alex@shazbot.org>, "Paolo Bonzini" <pbonzini@redhat.com>,
+ "Shakeel Butt" <shakeel.butt@linux.dev>, "Usama Arif"
+ <usama.arif@linux.dev>
+From: "Zi Yan" <ziy@nvidia.com>
+X-Mailer: aerc 0.21.0
+References: <20260710-b4-pre-scalable-cow-v2-0-2a5aa403d977@kernel.org>
+ <20260710-b4-pre-scalable-cow-v2-6-2a5aa403d977@kernel.org>
+In-Reply-To: <20260710-b4-pre-scalable-cow-v2-6-2a5aa403d977@kernel.org>
+X-ClientProxiedBy: MN2PR18CA0006.namprd18.prod.outlook.com
+ (2603:10b6:208:23c::11) To IA0PR12MB8374.namprd12.prod.outlook.com
+ (2603:10b6:208:40e::7)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/6] media: qcom: camss: Add C-PHY support for sa8775p,
- sa8300 and sm8250
-To: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>,
- linux-media@vger.kernel.org
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- jigarkumar.zala@oss.qualcomm.com, gjorgji.rosikopulos@oss.qualcomm.com
-References: <20260717231331.1229693-1-anusha.nandi@oss.qualcomm.com>
-Content-Language: en-US
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-In-Reply-To: <20260717231331.1229693-1-anusha.nandi@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA0PR12MB8374:EE_|CH3PR12MB7571:EE_
+X-MS-Office365-Filtering-Correlation-Id: 95fef3f7-19db-4254-e308-08dee476b5f4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|7416014|376014|23010399003|1800799024|921020|6133799003|56012099006|11063799006|4143699003|10067099003|3023799007|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	+qRVs8T4Aa/LXc28alBD0asz1HphROAbEEmlCHRMjOVyDDYaopM9evK5S/Z1c4QC1O6oWBnL3EN0Ebj0QnszS88v9IkK8YW7r3Y64kQwI+ywpSYM00O2h68iSxs8p3EM1RxCrOSi68LC6f9suGxN9F8RWK5axeP2eJaHZ+IARnrNVSG/yB6QtFb9NjqmO4KcL6ISoq9g3YKCUnOCeGkA74OLTh0xeLdewUee0QpuSr+JfEhUjjNwNLZNSIHcHDcgdERuiB+BeAdVQ1t08S49wRH8Y3fTH+U6Vc+Z3WoKfgDqr+ilsQ1acepgWNzuRgKnb+91BuHl6/5RMlMjrs1YtAkANv4+dlpaAYgZXuuHnBWE6gKCArpmKh/LGupHxrFLGuSPNoyq0y9yhGt7cE51mTAlLodVL4tR8NNFLwpNBgocXFvatbQcgi6K3zETDXo0N1yI2dZp404zDpXwrx9iLZXFHU5z6r8l80A8ZiuIwvjBZvfCMO9P+57JtBxV3pk0ZFC71U/4F5vDfRFTKwBHnsXRbfhESqLmBClESre4ia+GU1GI5yIrDjNKVsr0jd2rqbrt50WO+dhJYbtpZWf6KSwv8UlnEDgbxKTZgX/kJY6R8t+ZiGK40w+cLUkods+rbjZ2rQVjhoOJH+v67jxtapdcdlm3yHzdV5gGxNj59j31bSe0LuHApRMeHqpxHQzOY77wDeLUFrINzdZGHsfEXw==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR12MB8374.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(7416014)(376014)(23010399003)(1800799024)(921020)(6133799003)(56012099006)(11063799006)(4143699003)(10067099003)(3023799007)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?YzBRNFJqWXh3Vk9ZeXBaTWw5SGMxWHJPZGkxc1ZpVUo1bEF0Vjh5SDRmcDg4?=
+ =?utf-8?B?dWtUcWlteGlhTFM4cWoxOGJneWF1MjRmODB5a1MwMUc4NzBSWEo2UmZ4ZXdz?=
+ =?utf-8?B?dUp6ZVlCWE1TaUN0ZWJNUnpNNHgxbzZLaitJMlp3SnRFa0dOV0JyNDJMK3hX?=
+ =?utf-8?B?cjFqd2h0Y3JCMDRnZUZjVmo1Nk5aVlU5N3gvME1sRzdGdU5NNEZIR3AyZVNx?=
+ =?utf-8?B?emJCUnorcm1WOVBHU1FDU0xNUkdDQVZnMWFLR0dqOGxpSDZJNFA5UEJhcUIw?=
+ =?utf-8?B?ZWF1WjZGUW9YTXRUNEovVm5vU2hVT21VdzNBUkVabEdKRGZTQ3NVODRxVjVz?=
+ =?utf-8?B?MVB0SVBHbWEvalErdUE0QmxnTzBIN0puWVc1VWdqUDgrUEQ0N1BtODJFSWNW?=
+ =?utf-8?B?VFVTUElHT2tkS0NabWs2OTZMWXNGdER0S1RXejIxZTFmdXpqVTd0OGVmN1RP?=
+ =?utf-8?B?L05TVFZkdzBGYXNoeGMraVhUZ2F6MVluZERiZVA0ZEpUK0JSUGtaRlBhV29G?=
+ =?utf-8?B?RlN4V1k3VUlLSnpwR1NSZXZHQ3pkYk5FZE9nWG9YUTdLY2RCVWd4NzZvdGRQ?=
+ =?utf-8?B?RW9nR1JqYWZVeEN6Z2t4TEtZamJXcCtnZUNtZ1JuOVVXV0xtSCsrUEZUZWRF?=
+ =?utf-8?B?dU11K3BORmsyVGk2QmhWdWttdkZzWVJSZjhsd2FIUHhIL0hxNVlGOExJL1FW?=
+ =?utf-8?B?Y05uRXRuTlBPWEg0TXgvTVBmUHp5dFc4eWhMWFBJdWlwS3kxOWl5dzU4aDdX?=
+ =?utf-8?B?WWpBRDdKb0YvdDFFUVZsMmJFM2xMYW1BejFjaHZ1LzBEdm5wbHNXQWJPSlh6?=
+ =?utf-8?B?OGkyNFNVSnZmdWM3MFhoQU51RlZYWHhtUk5JQUtIMFV6T3haUFJqSFh2S0w5?=
+ =?utf-8?B?dFdSSi9kSW5obkNuK24zZjFCWEhOMXFmMXh4MndVUHdmYVRkT05xUDR4T3I2?=
+ =?utf-8?B?N2xMdUZvNzNRVXpIdDhiMXRPeUdacWx1Tno3YWdOVnJzVjd3QWk3ZXNROWpu?=
+ =?utf-8?B?NWg3amx1b0owWWpHTGYxN25WVXVXM1p3Nnlob3JwbWpwemZyQ3d1dUdFd1hW?=
+ =?utf-8?B?MkN6bUJHdlgwb0tXT1BiVno5Y1ZBZHEreVJIYkpUeUZMVkZyaUp6M3hQeFVy?=
+ =?utf-8?B?Ti9VVWptcXRkbHoza1U5ekxLK1FXK0ptWXFWbXBENmhmSDJQM09WSjJvM2p5?=
+ =?utf-8?B?K1ZYdi83M0ludkZWZFZxRGFLQnpEeE1FVDVtR201VW1lcGU0VWtZWDdjUzM2?=
+ =?utf-8?B?bWgxRzFTblJPOFF5eUo5UUF6aEtraGdFQTVaUmRuZEcrbTcvTmRuazBPNDBF?=
+ =?utf-8?B?bTFoNkQzWWl2dlVkV3hBRjIyWUNtemhxb0wvQ3JjYkJRNzZhdVBOSmRvRTFI?=
+ =?utf-8?B?WkdGUFpBR0FucTk3ZGl5TTNuZ2RKQkFSN2lDbTdpQnd2cnR3TnJFMG8wL2Zn?=
+ =?utf-8?B?amt6eWIwQTRkd0IwejBJSWxIelo5Z2J6SDBMZE5vdUtmcGZUL1U0ald6MEJG?=
+ =?utf-8?B?TGZrVWI1eHRXNGljbjdXV04rKzNnZmNiMDdlOXJLYWFwazBGbGNRL0NCenFW?=
+ =?utf-8?B?TzZsNFM4a1QveHNjcnpjZGxmQzRUbDAxWFRLRWxYamU1emZUUFlocGtxcXVS?=
+ =?utf-8?B?QmRXdjNaajl2VG9pUG5saGFHaTgva21WL1l5TnN6eW14T0VSd2UxZE1UUHVp?=
+ =?utf-8?B?QUxSWXU0ODNQc3ROelhQeWc3Vmh6UXg3ZlBOc2YwRVorbXcyN1J2WDZTV21N?=
+ =?utf-8?B?THFaYmJwV1BHVy8zazMzOUtza1VrOEs5UzZKR1JXUG5VUVJSQVJxczRxQUVv?=
+ =?utf-8?B?VlBnY1Fkc0Q0Zmp4OW1JS2xjNFg2S3VoNEduU0RRWXlJSmtrRlJzSVVpUnpF?=
+ =?utf-8?B?WmJnYkc0SkdsL09SdHpUNGp1aG50N0JXQW80dUdCbGZqZFJkd1RFV3ZPWkFR?=
+ =?utf-8?B?QitZd052ZTlkQ241WlNGbVZQMjluMUtHU21ELzB1Z2JjVjdyWmtBWmVZbXFQ?=
+ =?utf-8?B?eVlmOEFiOVpyS1NVUjZnRXFodUt6ZmZSQ2UyNHpCcVpVUTVXcktMbHc0bStB?=
+ =?utf-8?B?V1pZNE94SHJlNDhZYnpuT2pYOFFETFhwbTN0c3NwL2NRUFR4eklFNkRKRGtU?=
+ =?utf-8?B?Z1hObTdnTGU2U3FxOXZ5VUh2SlVHcWJ0U0RKaHk4T2NhWVhkWWU5cFNLbXEr?=
+ =?utf-8?B?Z2REUWIxa2VDdlBaQTErUEU4SUdDVFN6MmlNcE5OTy9sVHd2Y1duSytXWnor?=
+ =?utf-8?B?NjBSdkxzek9EWjFEV0tPYlVheXd5ZDV3cWQvUThCNEF1TDlJTXZVQWpmR0ha?=
+ =?utf-8?Q?D/zh73ZbZxNV92Tz2m?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 95fef3f7-19db-4254-e308-08dee476b5f4
+X-MS-Exchange-CrossTenant-AuthSource: IA0PR12MB8374.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jul 2026 02:46:04.4489
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: qc3N0KyxBUzQYzv8scuRxpPyDfDRlRgc5/mqyDxfPPPFqvQ93HsTJormcP8HPxrR
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB7571
 
-On 18/07/2026 00:13, Anusha Arun Nandi wrote:
-> This series extends the Qualcomm CAMSS (Camera Subsystem) C-PHY support to
-> the Gen3 platforms, adding C-PHY mode configuration for sa8775p
-> (CAMSS_8775P) and sa8300 (CAMSS_8300), along with a dynamic, data-rate
-> specific C-PHY register programming mechanism.
-> 
-> It builds on David Heidelberg's C-PHY enablement work for Qualcomm
-> platforms:
-> 
->    - Program the common control registers and prepare the CSID RX path
->      to select between C-PHY and D-PHY for Gen3.
->    - Add the sa8775p C-PHY 3ph lane register table and wire it up for
->      sa8775p and sa8300.
->    - Introduce a data-rate selection mechanism so the C-PHY PHY register
->      overrides vary with the negotiated link (symbol) data rate, with
->      tables for sa8775p/8300 (1.5/1.7/2.5/3.5/4.5 GSpS) and sm8250
->      (2.5/3.5/4.5 GSpS).
->    - Validate that the local (CSIPHY) and remote (sensor) endpoint
->      bus-types agree, catching C-PHY/D-PHY mismatches early at probe.
-> 
-> Rebased on David Heidelberg's C-PHY series (v9):
->    https://lore.kernel.org/all/20260617-qcom-cphy-v9-0-83da8a8e4e44@ixit.cz/
-> 
-> Tested on sm8250, sa8775p and sa8300, on top of the v4 revision of that series:
->    https://lore.kernel.org/all/20260301-qcom-cphy-v4-0-e53316d2cc65@ixit.cz/
-> 
-> Anusha Arun Nandi (3):
->    media: qcom: camss: Add sa8300 C-PHY 3ph lane config
->    media: qcom: camss: Dynamic data-rate specific C-PHY register settings
->    media: qcom: camss: validate local/remote endpoint bus-type
-> 
-> Jigarkumar Zala (3):
->    media: qcom: camss: Program CSIPHY common control registers
->    media: qcom: camss: Prepare CSID for C-PHY support in gen3
->    media: qcom: camss: Add sa8775p C-PHY 3ph lane config
-> 
->   .../platform/qcom/camss/camss-csid-gen3.c     |   2 +
->   .../qcom/camss/camss-csiphy-3ph-1-0.c         | 394 +++++++++++++++++-
->   .../media/platform/qcom/camss/camss-csiphy.h  |   6 +
->   drivers/media/platform/qcom/camss/camss.c     |  28 +-
->   4 files changed, 420 insertions(+), 10 deletions(-)
+On Fri Jul 10, 2026 at 4:16 PM EDT, Lorenzo Stoakes wrote:
+> The file-backed mapping interval tree functions vma_interval_tree_*()
+> accept a raw rb_root_cached pointer to determine the tree in which they a=
+re
+> operating.
+>
+> However, in each case, this is always associated with an address_space da=
+ta
+> type.
+>
+> So simply pass a pointer to that instead to simplify the code, and more
+> clearly differentiate between these operations and those concerning
+> anonymous mappings.
+>
+> While we're here, make the generated interval tree functions static as th=
+ey
+> do not need to be used externally (any previously existing external users
+> have now been removed).
+>
+> We also rename VMA parameters from 'node' to 'vma' as calling this a node
+> is simply confusing, update the input index types to pgoff_t since they
+> reference page offsets and rename the parameters to pgoff_start and
+> pgoff_last.
+>
+> No functional change intended.
+>
+> Reviewed-by: Pedro Falcato <pfalcato@suse.de>
+> Reviewed-by: Gregory Price <gourry@gourry.net>
+> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
 > ---
-> base-commit: 0e35b9b6ec0ffcc5e23cbdec09f5c622ad532b53
-> change-id: 20251109-qcom-cphy-bb8cbda1c644
-> 
-> Best regards,
+>  arch/arm/mm/fault-armv.c          |  2 +-
+>  arch/arm/mm/flush.c               |  2 +-
+>  arch/nios2/mm/cacheflush.c        |  2 +-
+>  arch/parisc/kernel/cache.c        |  2 +-
+>  fs/dax.c                          |  2 +-
+>  fs/hugetlbfs/inode.c              | 15 +++++-----
+>  include/linux/mm.h                | 34 ++++++++++++-----------
+>  kernel/events/uprobes.c           |  2 +-
+>  mm/hugetlb.c                      |  4 +--
+>  mm/interval_tree.c                | 58 +++++++++++++++++++++++++++++----=
+------
+>  mm/khugepaged.c                   |  4 +--
+>  mm/memory-failure.c               |  7 ++---
+>  mm/memory.c                       |  8 +++---
+>  mm/mmap.c                         |  3 +-
+>  mm/nommu.c                        |  8 +++---
+>  mm/pagewalk.c                     |  2 +-
+>  mm/rmap.c                         |  3 +-
+>  mm/vma.c                          | 14 ++++------
+>  tools/testing/vma/include/stubs.h |  4 +--
+>  19 files changed, 100 insertions(+), 76 deletions(-)
+>
 
-This is great work, thank you.
+Thanks for the cleanup.
 
-That said, I think CPHY embedded in CAMSS is the wrong architectural 
-direction.
+Reviewed-by: Zi Yan <ziy@nvidia.com>
 
-I was thinking we could add in David's CPHY stuff as a holding position 
-and also because its at v9 BUT if that means adding three more SoCs 
-ontop of that... that won't fly.
+--=20
+Best Regards,
+Yan, Zi
 
-I understand its a priority for you to get this stuff upstream but, I 
-think this _shouldn't_ be done at the expense of adding up more and more 
-technical debt.
-
-CPHY as a monolith in CAMSS is technical debt and adding it in to the 
-existing CAMSS as monolith is just a shortcut around a problem - that we 
-haven't merged the CSIPHY rewrite yet.
-
-CPHY should land in the new driver.
-
-Aside from anything else - upstream Linux needs CPHY definitions that 
-make sense for the community.
-
-inspiron14p-linux:linux (arm64-laptops-v7.2-rc2-camss-v9*) $ grep dphy 
-include/linux/phy* -r
-include/linux/phy/phy.h:#include <linux/phy/phy-mipi-dphy.h>
-include/linux/phy/phy.h: * @mipi_dphy:	Configuration set applicable for 
-phys supporting
-include/linux/phy/phy.h:	struct phy_configure_opts_mipi_dphy	mipi_dphy;
-include/linux/phy/phy-mipi-dphy.h: * struct phy_configure_opts_mipi_dphy 
-- MIPI D-PHY configuration set
-include/linux/phy/phy-mipi-dphy.h:struct phy_configure_opts_mipi_dphy {
-include/linux/phy/phy-mipi-dphy.h:int 
-phy_mipi_dphy_get_default_config(unsigned long pixel_clock,
-include/linux/phy/phy-mipi-dphy.h:				    struct 
-phy_configure_opts_mipi_dphy *cfg);
-include/linux/phy/phy-mipi-dphy.h:int 
-phy_mipi_dphy_get_default_config_for_hsclk(unsigned long long hs_clk_rate,
-include/linux/phy/phy-mipi-dphy.h:					      struct 
-phy_configure_opts_mipi_dphy *cfg);
-include/linux/phy/phy-mipi-dphy.h:int 
-phy_mipi_dphy_config_validate(struct phy_configure_opts_mipi_dphy *cfg);
-inspiron14p-linux:linux (arm64-laptops-v7.2-rc2-camss-v9*) $ grep cphy 
-include/linux/phy* -r
-
-Lets do _that_ work even if it takes a few cycles. Great to see qcom 
-engaging with CPHY - IMO if we do it right in the qcom stack it will 
-establish a good base for others to follow.
-
-I'll go ahead and ask David nicely to rework his stuff into this new 
-driver. Very nicely, we like him.
-
-https://lore.kernel.org/all/220260718-x1e-csi2-phy-v10-0-5720a7888953@linaro.org
-
----
-bod
