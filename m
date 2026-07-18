@@ -1,157 +1,235 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from SN4PR0501CU005.outbound.protection.outlook.com (mail-southcentralusazon11011065.outbound.protection.outlook.com [40.93.194.65])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EBEE9EEBB;
-	Sat, 18 Jul 2026 01:15:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784337360; cv=none; b=NmERxW9LR3TElDQA9haCJQZzEBffaN6r+mjFGu1uBRMovw0nLj8+SoESVQyDyqZGMsqhN5EQR1Wi4yczX2bdMgA19t6QU8ljW6UrZ6w46Lmn1Xt/nmV3ycl1PSrjM3Jil3RZhrKvzQfLAOQTM/bXNEt6iPERZsLb5tDoL/7BV7k=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784337360; c=relaxed/simple;
-	bh=HMEiEKRyrlVeI4n96MFVWZNhD7UgL9b2ux929+71Tjg=;
-	h=From:To:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=gQNs/YidXpTMtFRlc1LLwRslftVK9+H1Pap/Qk0xdXmu7qLlyFqdbxxl0nHJ6C88YOvtPO8FjRc3OC6Jj9KAT0X7HrACXIJI/TAgL100sSqJ89n5+5mKO1BnHsDz8taDaApwy+sbkYvlARvk2wBM/fUvonU5MUA4yYCbiBchEnc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 67B5E1F000E9;
-	Sat, 18 Jul 2026 01:15:58 +0000 (UTC)
-Received: by venus (Postfix, from userid 1000)
-	id 132EA181D34; Sat, 18 Jul 2026 03:15:56 +0200 (CEST)
-From: Sebastian Reichel <sebastian.reichel@collabora.com>
-To: Sebastian Reichel <sre@kernel.org>, Linus Walleij <linusw@kernel.org>, 
- Chen-Yu Tsai <wens@kernel.org>, Hans de Goede <hansg@kernel.org>, 
- Support Opensource <support.opensource@diasemi.com>, 
- Amit Sunil Dhamne <amitsd@google.com>, 
- Saravanan Sekar <sravanhome@gmail.com>, 
- Matthias Brugger <matthias.bgg@gmail.com>, 
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
- Samuel Kayode <samkay014@gmail.com>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Orson Zhai <orsonzhai@gmail.com>, 
- Baolin Wang <baolin.wang@linux.alibaba.com>, 
- Chunyan Zhang <zhang.lyra@gmail.com>, linux-pm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- linux-mediatek@lists.infradead.org, imx@lists.linux.dev, 
- linux-arm-msm@vger.kernel.org, Pan Chuang <panchuang@vivo.com>
-In-Reply-To: <20260709033428.362970-1-panchuang@vivo.com>
-References: <20260709033428.362970-1-panchuang@vivo.com>
-Subject: Re: [PATCH 00/43] power: Remove redundant error messages on IRQ
- request failure
-Message-Id: <178433735604.414021.16202847796535992443.b4-ty@collabora.com>
-Date: Sat, 18 Jul 2026 03:15:56 +0200
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 757CC25B09F;
+	Sat, 18 Jul 2026 02:29:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.93.194.65
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784341762; cv=fail; b=K7/jJQI6LHXD8zqRyyFqyBkuT1oc70qzLN15dY65KqLwCYGtmYuM1ZH4xmRjJA1kn5Ri372rTrak9cNndJ6zHbhtKaFXvwcMSOcgMDypmQLAMb3NzPvfK072FBGeNJJKSIvhdrlRF91cz1CUOJsRBSoL707QU53m2a7nBmM8TWM=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784341762; c=relaxed/simple;
+	bh=t5s1beX22HEgOi+4xRnFk9o1Nlsu6qB0Kn2ejJAUxVQ=;
+	h=Content-Type:Date:Message-Id:From:Subject:Cc:To:References:
+	 In-Reply-To:MIME-Version; b=jab54Pi1HoqgOCka6JPApS+922IUyv5o+BdHiMNVORkHktreIynazgeKSeGJuNfTWo4pN/MeMkaakNb+hKyACsw/kVhGPX71TUIuc3mfFmhu5IR/6ANOuly0JFQK926Oi6+m+ThchB6Fb3za3f61AbDPdb/0nit4LAWRBlXymuE=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com; spf=fail smtp.mailfrom=nvidia.com; dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b=QkJ9lzv5; arc=fail smtp.client-ip=40.93.194.65
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nvidia.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=Nvidia.com header.i=@Nvidia.com header.b="QkJ9lzv5"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=yeknUtwfkgS5WqRe+fnd5QACydjsHcbV99V18heNUjnamZnoG1GZxRs9Ky/EY7ZtJO77YYq7L33BPfEMOFaDKczIeaTq/JEA1HjondK3upueMDXBxBNSGA3/o5QVe7cwKPN3ECReSomziK35Kfqh3e70ptrw1g6O2taAsTpXhVeMO+V/dXflFuT2Ouu1Mz3T6u1gO4kiYjjDjNGPhga4RB97PtyLG/7uUWU8YayExlJ0HGJcrjsV5afLqY8zsZjKKVE4wJUBpJbC72dEcy9a9G8lcTwS8O1HmB08MPIOYRiv/Ignil0YGn7fJyLrlXcEKIPWL7+ulMSkxhpTny9Gjw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oXj8bnBdLhkKSDZOuc1OyK/vquSlEaXtBgRHVDjXnE0=;
+ b=n1RxgTrkQGnIXt5TzXm5F1yIura7dn5b7bXhz5S5NC4L6kCD7j0G+H1eX4z9JrwLMkW1FiOv5Yqngd3GqPihhHLzfOUmoSy3n5fe/HyjY6sIshZ3hk33uHy+21CdLT9PWauSg57lUcDg/CbgyAJKXaun5X4TUJbjJQQd7xEEHkhpK+sxk2EpqrOFHBG+ra/+dI7HjV3vhtV9qBo17lv+eRp7HjzT1T/mwlRxL5oHqT1CAfvx60DsLfIVTL8GyzT0hCBtje5f+fe3eVsFGCD2K6ntaV8ygbQlpwgPQsDOVhKqTRAt/pwxSSxNGlJB0SVqMHNZoTc9WxSTbUDNLkkqRw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oXj8bnBdLhkKSDZOuc1OyK/vquSlEaXtBgRHVDjXnE0=;
+ b=QkJ9lzv5UiTBRPyJe09J9xmBYAuZq2yv/ib81XnEWhnnALsQqjj1eVwaHA0EbAfK+8h9ve7i86kVFdVx9rGWHQupTngMFWf4Sjh5Y1pq5Up1BDJwfSMqQHlYm3/e3TpxgMJ9nNEinXngJptEHsTaQ6viK3cS5YYAIAUJid9tBJM55ISr6tni/bUxBhcy5r7tNQzj+muY1i8nzAJcr8AZZu6Ul3BJqJiDh4jm6C9jhe3SQPHm6dGe2kGMQtlzfqQzGq3r5T3Kp889wN+FD24epqJ2QLKyxCye5aF5JXQNpXdnW8MbUYACJL7fcsMpsgWo5J8n3aTztMijT3pjuvcTDg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Received: from IA0PR12MB8374.namprd12.prod.outlook.com (2603:10b6:208:40e::7)
+ by LV9PR12MB9782.namprd12.prod.outlook.com (2603:10b6:408:2f2::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.223.13; Sat, 18 Jul
+ 2026 02:29:13 +0000
+Received: from IA0PR12MB8374.namprd12.prod.outlook.com
+ ([fe80::d85f:4c87:ae84:3f16]) by IA0PR12MB8374.namprd12.prod.outlook.com
+ ([fe80::d85f:4c87:ae84:3f16%5]) with mapi id 15.21.0223.012; Sat, 18 Jul 2026
+ 02:29:12 +0000
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 17 Jul 2026 22:29:09 -0400
+Message-Id: <DK1CCZLJK94M.M2YF388E68NK@nvidia.com>
+From: "Zi Yan" <ziy@nvidia.com>
+Subject: Re: [PATCH v2 01/33] mm: move vma_start_pgoff() into mm.h and clean
+ up
+Cc: <linux-mm@kvack.org>, <linux-kernel@vger.kernel.org>,
+ <linux-arm-kernel@lists.infradead.org>, <linux-parisc@vger.kernel.org>,
+ <linux-fsdevel@vger.kernel.org>, <nvdimm@lists.linux.dev>,
+ <linux-perf-users@vger.kernel.org>, <linux-trace-kernel@vger.kernel.org>,
+ <damon@lists.linux.dev>, <iommu@lists.linux.dev>,
+ <kasan-dev@googlegroups.com>, <linux-sgx@vger.kernel.org>,
+ <etnaviv@lists.freedesktop.org>, <dri-devel@lists.freedesktop.org>,
+ <linux-arm-msm@vger.kernel.org>, <freedreno@lists.freedesktop.org>,
+ <linux-tegra@vger.kernel.org>, <kvm@vger.kernel.org>, "Russell King"
+ <linux+etnaviv@armlinux.org.uk>
+To: "Lorenzo Stoakes" <ljs@kernel.org>, "Andrew Morton"
+ <akpm@linux-foundation.org>, "David Hildenbrand" <david@kernel.org>, "Liam
+ R. Howlett" <liam@infradead.org>, "Vlastimil Babka" <vbabka@kernel.org>,
+ "Mike Rapoport" <rppt@kernel.org>, "Suren Baghdasaryan"
+ <surenb@google.com>, "Michal Hocko" <mhocko@suse.com>, "Rik van Riel"
+ <riel@surriel.com>, "Harry Yoo" <harry@kernel.org>, "Jann Horn"
+ <jannh@google.com>, "Lance Yang" <lance.yang@linux.dev>, "Pedro Falcato"
+ <pfalcato@suse.de>, "Russell King" <linux@armlinux.org.uk>, "Dinh Nguyen"
+ <dinguyen@kernel.org>, "Simon Schuster"
+ <schuster.simon@siemens-energy.com>, "James E.J. Bottomley"
+ <James.Bottomley@HansenPartnership.com>, "Helge Deller" <deller@gmx.de>,
+ "Alexander Viro" <viro@zeniv.linux.org.uk>, "Christian Brauner"
+ <brauner@kernel.org>, "Jan Kara" <jack@suse.cz>, "Dan Williams"
+ <djbw@kernel.org>, "Matthew Wilcox" <willy@infradead.org>, "Muchun Song"
+ <muchun.song@linux.dev>, "Oscar Salvador" <osalvador@suse.de>, "Masami
+ Hiramatsu" <mhiramat@kernel.org>, "Oleg Nesterov" <oleg@redhat.com>, "Peter
+ Zijlstra" <peterz@infradead.org>, "Ingo Molnar" <mingo@redhat.com>,
+ "Arnaldo Carvalho de Melo" <acme@kernel.org>, "Namhyung Kim"
+ <namhyung@kernel.org>, "Mark Rutland" <mark.rutland@arm.com>, "Alexander
+ Shishkin" <alexander.shishkin@linux.intel.com>, "Jiri Olsa"
+ <jolsa@kernel.org>, "Ian Rogers" <irogers@google.com>, "Adrian Hunter"
+ <adrian.hunter@intel.com>, "James Clark" <james.clark@linaro.org>, "Baolin
+ Wang" <baolin.wang@linux.alibaba.com>, "Nico Pache" <npache@redhat.com>,
+ "Ryan Roberts" <ryan.roberts@arm.com>, "Dev Jain" <dev.jain@arm.com>,
+ "Barry Song" <baohua@kernel.org>, "Miaohe Lin" <linmiaohe@huawei.com>,
+ "Naoya Horiguchi" <nao.horiguchi@gmail.com>, "Xu Xin"
+ <xu.xin16@zte.com.cn>, "Chengming Zhou" <chengming.zhou@linux.dev>, "SJ
+ Park" <sj@kernel.org>, "Matthew Brost" <matthew.brost@intel.com>, "Joshua
+ Hahn" <joshua.hahnjy@gmail.com>, "Rakie Kim" <rakie.kim@sk.com>, "Byungchul
+ Park" <byungchul@sk.com>, "Gregory Price" <gourry@gourry.net>, "Ying Huang"
+ <ying.huang@linux.alibaba.com>, "Alistair Popple" <apopple@nvidia.com>,
+ "Hugh Dickins" <hughd@google.com>, "Peter Xu" <peterx@redhat.com>, "Kees
+ Cook" <kees@kernel.org>, "Marek Szyprowski" <m.szyprowski@samsung.com>,
+ "Robin Murphy" <robin.murphy@arm.com>, "Andrey Konovalov"
+ <andreyknvl@gmail.com>, "Alexander Potapenko" <glider@google.com>, "Dmitry
+ Vyukov" <dvyukov@google.com>, "Steven Rostedt" <rostedt@goodmis.org>,
+ "Mathieu Desnoyers" <mathieu.desnoyers@efficios.com>, "Jarkko Sakkinen"
+ <jarkko@kernel.org>, "Dave Hansen" <dave.hansen@linux.intel.com>, "Thomas
+ Gleixner" <tglx@kernel.org>, "Borislav Petkov" <bp@alien8.de>,
+ <x86@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>, "Ian Abbott"
+ <abbotti@mev.co.uk>, "H Hartley Sweeten" <hsweeten@visionengravers.com>,
+ "Lucas Stach" <l.stach@pengutronix.de>, "Christian Gmeiner"
+ <christian.gmeiner@gmail.com>, "David Airlie" <airlied@gmail.com>, "Simona
+ Vetter" <simona@ffwll.ch>, "Patrik Jakobsson"
+ <patrik.r.jakobsson@gmail.com>, "Maarten Lankhorst"
+ <maarten.lankhorst@linux.intel.com>, "Maxime Ripard" <mripard@kernel.org>,
+ "Thomas Zimmermann" <tzimmermann@suse.de>, "Rob Clark"
+ <robin.clark@oss.qualcomm.com>, "Dmitry Baryshkov" <lumag@kernel.org>,
+ "Abhinav Kumar" <abhinav.kumar@linux.dev>, "Jessica Zhang"
+ <jesszhan0024@gmail.com>, "Sean Paul" <sean@poorly.run>, "Marijn Suijten"
+ <marijn.suijten@somainline.org>, "Tomi Valkeinen"
+ <tomi.valkeinen@ideasonboard.com>, "Thierry Reding"
+ <thierry.reding@kernel.org>, "Mikko Perttunen" <mperttunen@nvidia.com>,
+ "Jonathan Hunter" <jonathanh@nvidia.com>, "Christian Koenig"
+ <christian.koenig@amd.com>, "Huang Rui" <ray.huang@amd.com>, "Matthew Auld"
+ <matthew.auld@intel.com>, "Jason Gunthorpe" <jgg@ziepe.ca>, "Yishai Hadas"
+ <yishaih@nvidia.com>, "Shameer Kolothum" <skolothumtho@nvidia.com>, "Kevin
+ Tian" <kevin.tian@intel.com>, "Ankit Agrawal" <ankita@nvidia.com>, "Alex
+ Williamson" <alex@shazbot.org>, "Paolo Bonzini" <pbonzini@redhat.com>,
+ "Shakeel Butt" <shakeel.butt@linux.dev>, "Usama Arif"
+ <usama.arif@linux.dev>
+X-Mailer: aerc 0.21.0
+References: <20260710-b4-pre-scalable-cow-v2-0-2a5aa403d977@kernel.org>
+ <20260710-b4-pre-scalable-cow-v2-1-2a5aa403d977@kernel.org>
+In-Reply-To: <20260710-b4-pre-scalable-cow-v2-1-2a5aa403d977@kernel.org>
+X-ClientProxiedBy: IA4P221CA0009.NAMP221.PROD.OUTLOOK.COM
+ (2603:10b6:208:559::11) To IA0PR12MB8374.namprd12.prod.outlook.com
+ (2603:10b6:208:40e::7)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA0PR12MB8374:EE_|LV9PR12MB9782:EE_
+X-MS-Office365-Filtering-Correlation-Id: 73d19c07-b58c-4be1-4125-08dee4745afe
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|23010399003|376014|7416014|1800799024|22082099003|18002099003|10067099003|11063799006|56012099006|4143699003|921020|6133799003;
+X-Microsoft-Antispam-Message-Info:
+	Uk7dNbIES91Jw5bLDfNNIhIzoMWljZeDLhn9j0zTCUhpB6WBeP3wbnzP4dEYTMOeMVlWQXrgKSXgZ2Fj0Nv93ee3l/+jP2SRn1vk1/cSbWAIChvKcfxwJXS979uMzTBrh5SeBTOsgY8li83s0lcqS8Nm0Uf7iONYGSNF9MyTLdXM+h41HDp48BhxjW4WdwPbg54Sk3G02gJkDBbD6fysY4WrNPxTwKF+juCG/z/6815zNCAtJ5HJMFTgrm5wP8208PuGCkR5FlWZfc90MMx0Yhvn8iRSAFk8JQdFlrwh/TXNZpxUz/8qtPa9yx7E9ViH9HZRaa0l+2+tCSrqgJde8FxAOCBQXGq26JJEDmBMPilxHE+WBAPGxWrrZeMgd2rCrt8tssBcWDO6tex4UBiIKFW3wyOR6KRbzd+XsZif9chy3CDMF39Oq8ah/G4gUOy32/cDSQWXrGrxYgJwBJZXpy4DcCdHiqjq1g60p6SHXUc1DCAT8A91J9yjXZVmQfnpj7wxcb/brD8VqS0KGJFyJjjrwPzYRLk3JkVlimxtUpdP8AAThIrNzZoTHVbApXNCkIBkZVZcreG4hDZEoGwOfYHftZrGz6IsWHEG8Zu8QcYKXviU0Wrhb8HgK+PsJOTFTCsUDd+08J7mU5N0M4CpJ9SgT7Ov12NqBWDlb6hOh2koUjGcIRhwhQyB4vqfQA0IEZAcb1DeYPBpWbeC2AiP3Q==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR12MB8374.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(376014)(7416014)(1800799024)(22082099003)(18002099003)(10067099003)(11063799006)(56012099006)(4143699003)(921020)(6133799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?cFE0TDZuTXJSclRaTis0eEMzdGp2elRRNURRQnl1TnoxWS9tSEdJQVZRUnVv?=
+ =?utf-8?B?SVlzNEV3NUxqdjYxSUhEWitKYW9RTXF4bGVSVnFpYTB5QVk0V1I0ZjRXWGlT?=
+ =?utf-8?B?SWdsdjZnMlBzT0ZYQ1FHa2VvM1hQb0tHbzl2bmVHeFNqUllRQ3Z6bGpwZ0RW?=
+ =?utf-8?B?Myt0ciswemlLRGNUWjdNWEZsVXJQVVQxUFc1VnJGNEZFWXhGOThiQmFhcmVV?=
+ =?utf-8?B?UE5kWjNBSkdTMlVVbjZCRTdvTHBZSjcvdjlwWFQ3NjFjd1RSQ0VJWk5FTjYz?=
+ =?utf-8?B?Wnorb0szaDlPWEl3cjRvenJNR2luNWFjRDRuQzRraU5HR1N6NUNkL1M0aWZa?=
+ =?utf-8?B?MnN6dDZhMXdGUGt0eEtiYXBJUi9zSnV2a0hieGUxbi81NzZMQzVHOVJyVElU?=
+ =?utf-8?B?Y0poRTdYc1ZwbmVSUDh1QURid0s4LzhCTGd3Y0pCN01kU1h5N3JFeUlTUkNz?=
+ =?utf-8?B?RzZCS2NKSjZCMGhWUXZXTlNrY3ZRZno4M1BKSk9TWXQ5R2hUTTZTNEplTFk2?=
+ =?utf-8?B?SytqRG96ZGZwdFRlTVhCeEdhclhOc0RQVTNhcU9DVGpiczdnblovM3FzdUtm?=
+ =?utf-8?B?U2tTeFZ4bTVCMlFPYmlYYzhtMWNqb3p0RFhvWHZyRkVnNHgrcG1NMFBKSGtm?=
+ =?utf-8?B?aFprQys2cWlSRnUwYUowU0Q5enFFU3JIMVY1L1VDNWFHZlJkRlZIMDdWRmhY?=
+ =?utf-8?B?emVxWms0MzhyZGMvZmk4a0xlaEQvUDE1M2ZnWTJOMFJ4cE5YaTRBaFNzd0Nx?=
+ =?utf-8?B?QS9jYlVpRWc4aXB0Qm0rdWhyeS9NUEl1NndMV1JUN2U2ZXY0MThqWjd3SHB4?=
+ =?utf-8?B?VUNrN2g2ckdqcXg1N0U5S2FCK1ZpRmN1UVUwTmszaGpreTFRTE4zMHNERDJ2?=
+ =?utf-8?B?U1h0S1JJVHUyV0lVc08vQzFleXdFWkROMmFETHB0QktCREFrUEtMNFdTWlAr?=
+ =?utf-8?B?OVM3aUR0RW5uWDlzTjBibkM2L0pkQTJ6dVpUalRndXhhaTBESDZzcjlUZ1RT?=
+ =?utf-8?B?akl3ODZzRmJpdTFXUEEzN3Z6RHNPUlRhcFFRZEErV3F1TWJ0cTFNOFJDQlZi?=
+ =?utf-8?B?YTk0NzBYTzJuRDdwa2pUTkExRHZ3akNPdFpsS1dsSzBlS1ROU2dmNWw4VWkr?=
+ =?utf-8?B?cFVpYTFWYzhUdjVlL25sdHBpbkxmdUhISEY0ZzUxVXh2WHBNRVFTK204QU1D?=
+ =?utf-8?B?d21TUVo2TnZkbnVjaE93TUVoc2R1OEFKYUF5RENZeERzOHp6OXFTMGkwTDdF?=
+ =?utf-8?B?TUc3ZmJpSmthUEJ4QVBMM0gxVG9CTURBakUycUdFN1BMU0NQdmhIMzB3TFRM?=
+ =?utf-8?B?bHNzRkZERnNhR0sraklLUkREc3Z3NG5HSTNMRXA1NEtOKzlhZDI0M3dZaXM0?=
+ =?utf-8?B?STdJRCtkQnpWSTBDb0FRejcrM01wQy9oQy80bVVVd2xaRU55WFNOeUt4VWxX?=
+ =?utf-8?B?c1hBOHBWbjEvbDNudVRnRzN0ZkZCQ2psN0V5VkFLOXhIQUNqRm9PMks1RXJ6?=
+ =?utf-8?B?bGRvc3R1Z0ZDU3hHSW1sT0VsZHhqNEdHVmdaV2dSKy85THlLOGVDYm1TRXlS?=
+ =?utf-8?B?RHlpT0pJSFBvR0ltWmVMZEpkZEU0MFNrWWtEYk5PVFNUdFRrbGR0NWdwMHcw?=
+ =?utf-8?B?L2FtR1Evb0dCb0ZmalR3YURPdDdNOFRwRWZucVozNmR6SzN1aWZCT0dVRWM1?=
+ =?utf-8?B?RVJpZGhPeGEyQnpxdjUrQ2VwK1lva09yNkZXTlhJVE9WalV5eGl2MXVKNlNt?=
+ =?utf-8?B?bGkrMksyaUpiMkxQWUlOSkdHbW10dkNWY3lvWEd3K2NwWStKQXFtaUVtNGtD?=
+ =?utf-8?B?UnU0c3JwUjc4dWh2RUVNYkFGS3FiTkdnVmRuTlZ1UmlrSVU2WlBSMkpGdmZ3?=
+ =?utf-8?B?MVpQR3dNYURjcUpHVmZwT0ZhTTNTd1RvVjVjWVYwdVJ5UGFGeUMwZ2xONGx1?=
+ =?utf-8?B?c2xTYWkzUTVkQmhLN2UyU3V2ZkE5RTBzSjcxSkI2Z2xtKy9CdXRkTmhHbEN6?=
+ =?utf-8?B?NUpsaHBYdFBvTHNXT0RNVldwL2RGQnlod3lRQnNNMXNaOEtHZXZYOUgxY3VX?=
+ =?utf-8?B?T05aZXhMMTN2WkJOazFQTUdBRzNwUHN2NHpBYzVLd09uYjZpWVBxN2w2c1lR?=
+ =?utf-8?B?VXIyMmpuQkpLQndpbjVlcjRFQks1VTR6Z1RrSWRMMGtxV0V3SnQvcTdoSGd0?=
+ =?utf-8?B?THV1M24rZXN6MW93bVFXdDI1VkZYUmNUKzlBcVd1SkhETHUxZm9TZnVIdm5z?=
+ =?utf-8?B?VTIvZFdrT0NvOGNtZ1dDcWxwaTArcGIvOXd3S3dQVTI2VVVyVU03c3Y5aGtl?=
+ =?utf-8?Q?g2CA3RSpfU1yyyWa8Q?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 73d19c07-b58c-4be1-4125-08dee4745afe
+X-MS-Exchange-CrossTenant-AuthSource: IA0PR12MB8374.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Jul 2026 02:29:12.8409
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: VNx1oIY2hUrlouv2w4t+/TaMcE4gXfb02xxyttS9NxunUen8ih+ifNnJ9Ze7GV1S
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV9PR12MB9782
 
+On Fri Jul 10, 2026 at 4:16 PM EDT, Lorenzo Stoakes wrote:
+> vma_last_pgoff() already lives there, so it's a bit odd to keep
+> vma_start_pgoff() in mm/interval_tree.c. Move them together.
+>
+> These each return unsigned long, which pgoff_t is typedef'd to. Make this
+> consistent and have these functions return pgoff_t instead.
+>
+> Additionally, express vma_last_pgoff() in terms of vma_start_pgoff(), sin=
+ce
+> we wrap the vma->vm_pgoff access, we may as well use it here.
+>
+> Also while we're here, const-ify the VMA and cleanup a bit.
+>
+> Also update the VMA userland tests to reflect the change.
+>
+> No functional change intended.
+>
+> Reviewed-by: Gregory Price <gourry@gourry.net>
+> Acked-by: David Hildenbrand (Arm) <david@kernel.org>
+> Reviewed-by: Pedro Falcato <pfalcato@suse.de>
+> Reviewed-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
+> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
+> ---
+>  include/linux/mm.h              | 9 +++++++--
+>  mm/interval_tree.c              | 5 -----
+>  tools/testing/vma/include/dup.h | 5 +++++
+>  3 files changed, 12 insertions(+), 7 deletions(-)
+>
+LGTM.
 
-On Thu, 09 Jul 2026 11:33:39 +0800, Pan Chuang wrote:
-> Commit 55b48e23f5c4b6f5ca9b7ab09599b17dcf501c10 ("genirq/devres: Add
-> error handling in devm_request_*_irq()") added automatic error logging
-> to devm_request_threaded_irq() and devm_request_any_context_irq() via
-> the new devm_request_result() helper. The helper prints device name,
-> IRQ number, handler functions, and error code on failure.
-> 
-> Since devm_request_irq() is a static inline wrapper around
-> devm_request_threaded_irq(), it also benefits from this automatic
-> logging.
-> 
-> [...]
+Reviewed-by: Zi Yan <ziy@nvidia.com>
 
-Applied, thanks!
-
-[01/43] power: reset: pwr-mlxbf: Remove redundant dev_err()/dev_err_probe()
-        commit: e896e0d29ba30d462176c7611399c10297a6845f
-[02/43] power: supply: 88pm860x_battery: Remove redundant dev_err()/dev_err_probe()
-        commit: 098e2181f76fbcdd1592c1878a812bc9dbadc669
-[03/43] power: supply: 88pm860x_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: a446886a5c112d6a7d019161cf520b1d6f10470f
-[04/43] power: supply: ab8500_btemp: Remove redundant dev_err()/dev_err_probe()
-        commit: 2865c7e80aee424a5266f8d089f7926394fe2d7c
-[05/43] power: supply: ab8500_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: defdb28de9b3afb4811423a302ff11526595d098
-[06/43] power: supply: ab8500_fg: Remove redundant dev_err()/dev_err_probe()
-        commit: aa5f4decedfb4fc5cd0fe49ab256ad4304d192e4
-[07/43] power: supply: act8945a_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 88a66a3c93fe21f8fb6904a2ef95d53e637b355b
-[08/43] power: supply: axp20x_ac_power: Remove redundant dev_err()/dev_err_probe()
-        commit: daa60df947f41198defb37acef01b0c6cb819056
-[09/43] power: supply: axp20x_usb_power: Remove redundant dev_err()/dev_err_probe()
-        commit: d8b7f5b39c3487349f77676a78e44093ec42b7c4
-[10/43] power: supply: axp288_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 5ec359933b7cd110e35aa298438cc4beeff5cc4b
-[11/43] power: supply: axp288_fuel_gauge: Remove redundant dev_err()/dev_err_probe()
-        commit: dfb7997da1df482f29d19b18071bd9a18f35704c
-[12/43] power: supply: bq24190_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 6d5c4deea04580a08ad1ed3a13c11fac0dbefa7b
-[13/43] power: supply: bq24257_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 1fa348a2a1825a23ab7836671f067640c98174bd
-[14/43] power: supply: bq24735-charger: Remove redundant dev_err()/dev_err_probe()
-        commit: d77b6dd6903da71896aa20863ee51df7f54b9e7c
-[15/43] power: supply: bq256xx_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 4f22a6bd5130779014d19a9946bda07768325930
-[16/43] power: supply: bq257xx_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: c1de2a3f1f4170105db56003be42c079dbc264dc
-[17/43] power: supply: cpcap-battery: Remove redundant dev_err()/dev_err_probe()
-        commit: fb5ce24c6e907165022a7df627bdf573d2c8fd1f
-[18/43] power: supply: cpcap-charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 16447b9ef408768d94b9b15b589f287eb8ff2127
-[19/43] power: supply: da9150-fg: Remove redundant dev_err()/dev_err_probe()
-        commit: 79993fd38d1848c4cfc5d51b185c534cc4ed0b87
-[20/43] power: supply: generic-adc-battery: Remove redundant dev_err()/dev_err_probe()
-        commit: 9c6283da58db46a0cc747c87d187939fb53aa326
-[21/43] power: supply: max14656_charger_detector: Remove redundant dev_err()/dev_err_probe()
-        commit: 5fe1b9dfa5c3c51a9d4d68b407ad9c49096e4b3e
-[22/43] power: supply: max77759_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 05c9bf35a036944171344711e664e032bf518e08
-[23/43] power: supply: max8903_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 28b94b06c64a1b423e64357f4c2cf3256f3a35f7
-[24/43] power: supply: max8971_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 342b3ce23061ff9ad5c033596c60a663d15af116
-[25/43] power: supply: mp2629_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: f73b8c7c3ee61e08819a688bef98c8c454b6d4d5
-[26/43] power: supply: mt6360_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 576014dbc39716304c7ee22dc5c0998222ae6676
-[27/43] power: supply: mt6370-charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 1a3d312038e6e1d19b8fd9146fc544f09336c8bd
-[28/43] power: supply: pf1550-charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 4fed9665ab09cb7c40f894506b8ee2730ed9f3e1
-[29/43] power: supply: qcom_smbb: Remove redundant dev_err()/dev_err_probe()
-        commit: cd05fa1ffae4e21c520b64e203f50b7d76d35a4f
-[30/43] power: supply: qcom_smbx: Remove redundant dev_err()/dev_err_probe()
-        commit: c01b2be3845ffae11a067cf93a7833ca840d7d1c
-[31/43] power: supply: rk817_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 6d5c18483f0cf12eb636dcf46be452054f3aef4f
-[32/43] power: supply: rn5t618_power: Remove redundant dev_err()/dev_err_probe()
-        commit: a69f6b1e30f72c5fdeab81319c378ebb6e539803
-[33/43] power: supply: rt9455_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 406b652bf9c47d6e784fd2ab723e6798d322ef47
-[34/43] power: supply: rt9467-charger: Remove redundant dev_err()/dev_err_probe()
-        commit: 1683815ef8892a56c2e07548b879f341bfda2952
-[35/43] power: supply: rt9471: Remove redundant dev_err()/dev_err_probe()
-        commit: 94f491a228bdde8982a3fd72cd1d46b12eef378e
-[36/43] power: supply: sbs-charger: Remove redundant dev_err()/dev_err_probe()
-        commit: bfae8c8ad5adc1796d7982feb2dd4a0bd947ba84
-[37/43] power: supply: sc27xx_fuel_gauge: Remove redundant dev_err()/dev_err_probe()
-        commit: 139c9e37448d215647d8c1a98974c0d8309af1de
-[38/43] power: supply: surface-rt-ec: Remove redundant dev_err()/dev_err_probe()
-        commit: 4e8ef72bbd3ef34e1137d365e7719399f45d5c0b
-[39/43] power: supply: tps65090-charger: Remove redundant dev_err()/dev_err_probe()
-        commit: ceaee7db26ffaeb78b64df9f21be4a1c7823793a
-[40/43] power: supply: tps65217_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: abd5cd2d712cae2a7abc3852d9fbd05696d4b9eb
-[41/43] power: supply: twl4030_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: ca5cb9488b800a5b39954391530244da41076f79
-[42/43] power: supply: twl6030_charger: Remove redundant dev_err()/dev_err_probe()
-        commit: c2d8a2b01bef42f4e50a87e5880f75401be1290c
-[43/43] power: supply: ucs1002_power: Remove redundant dev_err()/dev_err_probe()
-        commit: 5a6b9c36c56340812d49817524a5d96f7522c74d
-
-Best regards,
--- 
-Sebastian Reichel <sebastian.reichel@collabora.com>
+--=20
+Best Regards,
+Yan, Zi
 
