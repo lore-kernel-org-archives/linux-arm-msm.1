@@ -1,229 +1,133 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41C5E35979
-	for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 14:21:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784384508; cv=pass; b=EgDwy4eEmqygz/MuySv4pnxJQmftRw9N8oqOhXBhcUi4rjxniKO3zzMowfsBA3dhaYZ2rGOk4fNNheHC4WB4eK2W+nFslyS3gQ7eWR1vglfR7YqBM+vYT3ZCyE68KaJ0/v8cK7cZoiIkMe68tFlW1Y5jXcqo4obgSoQCdDu8zHo=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784384508; c=relaxed/simple;
-	bh=bosjcTn2pIH6tMnMHx2oYXNrYEuhyJIbSRTQoYGztok=;
-	h=MIME-Version:From:Date:Message-ID:Subject:To:Cc:Content-Type; b=Lv6wIGRoLYUZWFbO+hsWSjDpz3kHqizdWSkQakx9b2WDwl1khD2Tfz+yAhsO0LovWB5CuGilW9j1FLBSkw0+23n+3LFgLlSwy9U42fAf1MNuD0lJ14KlatFrgGzmOqHsrlCSRjgMD2aFwWL/HQNIRRYKaTSeJMAiE1wbLy97G5Y=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NLb/8G2M; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=eRljqg1k; arc=pass smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F4323D5221
+	for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 15:21:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.46
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784388097; cv=none; b=QzHPPBRB7mhDMTy2mfBeLw8nzVs+ilymafuYtLTXNfjK+EJV0Yj56H+zGmKn/kIvvmb7TqlA5W+h2fxe4ttGCRwzxO3A48qUlcqE/cbfeEbOumrnNqDgp4vnEThrVb1/GT4soHYqRD/zmrcUlyyAvXbYat0EjlFDml7GNuQ16ac=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784388097; c=relaxed/simple;
+	bh=pDPn99N+ICG1K7TKp4PgKMOzXmJllsI8p04WRkYOgbQ=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=JhFKICvmqfY8CmQtSkCsDenNAM8xqJDN4DUaAoS1pR2XLHnDIXSGHzLLCI+nDvJszFRNqS9SeA7J5RJ7Tq+mX3xE3O14fKHVetob8kEU3YCum/mA6BF6hlV7euNXtT11ZPmKh9L8YgS7EjuEshtdDhUKC9DmVXb0J/oVDqcfaTQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=r0PTt4WX; arc=none smtp.client-ip=209.85.216.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NLb/8G2M";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="eRljqg1k"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66IDCuiW781152
-	for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 14:21:46 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:message-id:mime-version:reply-to
-	:subject:to; s=qcppdkim1; bh=qJbihdpS5pMhZFxXprWpaELXaJzDUAQpSlA
-	nQGYaGus=; b=NLb/8G2M6G1oy7nK3nwILVH9ch7NkWR7pTCOKcxyA/XCn1A152/
-	/7pMQxc7elw5nOijGtNTXoFcyQKXhiNpa450nOFsZkajYU8EWwwaZ82+XjRDtJAM
-	ciFDQbpmDNfigp1IydDYO3MzMYPQWGwJk3SRuJo1z1DfpExw5DRES3ZvCzt8JzFE
-	dnghWC15WU0ZlmUq35CgXopkGHSN+PJicGCsWwE5GCI+crtZwNEAE+7bAMpxNjsv
-	IPqkVDzB9xF3kAwhL1Vdsj1gMPoJnjpyRqXwgUWJp7UmrpX8nugrLrqXA1wNmXSn
-	VwQ7kqyjkF0pA957b5HNmEbVMS3tO1FTcRg==
-Received: from mail-oa1-f72.google.com (mail-oa1-f72.google.com [209.85.160.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fg2dc0wfk-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 14:21:45 +0000 (GMT)
-Received: by mail-oa1-f72.google.com with SMTP id 586e51a60fabf-43ccd5d5357so5224750fac.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 07:21:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784384505; cv=none;
-        d=google.com; s=arc-20260327;
-        b=WpKF7mFvhJEvHrXqhT3/hu0xIAiZMR0EIlM3IR3+8zACZh/hqu2JzCah3Aj3nPJ1aO
-         6JebEH58FC7KE/yebC1vgdQm8YSOgxU2SOQu8ECMpgKI83uHSXSFGc82aLVAdNNyCh6K
-         tq6mK+miAqPLsBkbzjGOERtyxR1QPlDlQljp+rD+HTeccvvhH6ZL3a3OfqJzBhLq+uFH
-         kw7eR6PLiULwaAZKCehEMeIBENKDv5Gtr5WwJDEh6usm//8hMbLwc8qerrDg5HGHwXk5
-         QskBp4Xd/59p5O9zofTtgu/lNlY9RzUD9xGLwfqLkpOhSIYGMk/5ztXqk12RA1fQ1DOI
-         6cLQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:reply-to:mime-version
-         :dkim-signature;
-        bh=qJbihdpS5pMhZFxXprWpaELXaJzDUAQpSlAnQGYaGus=;
-        fh=mIHGzPWScBb+KnZvKGxLmI+7WZZSDy+tlmbw3tP781k=;
-        b=eNof0I1whPJUuscD/pW21OnkPiuvfWerxj6fDN1Eygogeg3nH3dlThS2O8vV9QddaK
-         xG2hfkPJxGr4oRWHGIknHcSJ8Zt9JTsliV0SjEdBZfYIJ1PZ44wDdk4Fa9a46IvMmtPu
-         QWnMfvT8cYAtneSJ9pNm0GBFbjaCWSomBOAcb5N+rrbNm1rpKlwZ3YevxZYNrdm0ifQs
-         23WRTB+0x3GnHamC9wADpTDVlBVs+Yp52axCNxvbLa1XPJpxDphGW0zEKJ9n/DvxyXD6
-         pVt88oNoz9HFneu65MHi4o+3BQTvKdiGJu1K3+vtIWI9LE/Oj1ouQC1ArxQKfsFltNRW
-         /qxg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="r0PTt4WX"
+Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-38511175ad3so7289562a91.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 08:21:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784384505; x=1784989305; darn=vger.kernel.org;
-        h=content-type:cc:to:subject:message-id:date:from:reply-to
-         :mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=qJbihdpS5pMhZFxXprWpaELXaJzDUAQpSlAnQGYaGus=;
-        b=eRljqg1kbfAyZNDhU78o6T/YpsBkYbIUefnNPqf57HanOsDaTiFVa1L+lYOJotJidO
-         keUuUARNjlW4X7HN64ST8osC33iertXSpv2sP0/3WbZkhJ+0ICVp9ZtRoLwi7qcNfplM
-         Nb75/W64wKkICLwH2SKmaF9C0aEEVroKHeXr6o57MJjPKHWjuolAGc9OpAtxaZf5CBDb
-         DPeJHiRlh1kkH9vujzqeH6ATgtTPnqmlxuqOLRTZoAcdBqzh0Gx8qIt06VoUR3w9GKZH
-         cW4wApr1F75J2K/5EIGYKpFvw8BKPfHoo0DLKcZJ2Lzx0Xtzt5MPROVj8Huus+eGR8sO
-         SxIQ==
+        d=gmail.com; s=20251104; t=1784388095; x=1784992895; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=yEoG8yRI+aYCT3H+YBQOUKD8pSL6ReWVyutnSqA0MV0=;
+        b=r0PTt4WXtJ3v2C/rv9/7EShJe/7MQFeGy3Ybudc5nJvVH3QKTchPNorZSG60Gz/wZA
+         /f3gN+/t7alJc5svO5W/dfZXltyVbW+t4t45BHa9UozbX4PEaWnOo3vk/tofYKkaSEP6
+         UCN/GMGprNpUcZXTuvvgvpEyxkpnxjlwhGER4rcXgAIrK/8h20o67SaugyoTVAPIrsXR
+         Z6/w2RqJxVj4hUi5BQ5R5ngZG//n+c2UKw79jLLuIIJIM//wd1CxlmaJZOqkMVoMkkrp
+         fwL3I52jdjVv4Z5CtLWDpESku2xTHPE2Z1hv1iaN6+/XcwrjIlEmGjT9zPdnkEHtqVnU
+         xMNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784384505; x=1784989305;
-        h=content-type:cc:to:subject:message-id:date:from:reply-to
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=qJbihdpS5pMhZFxXprWpaELXaJzDUAQpSlAnQGYaGus=;
-        b=ip9Z6HQWjOdwYUTkf5JsUagzu/x4mecVHgk5s8gShj8BNFeeUhfQfw/9Sm5asJTrxd
-         TW3sFn29plXyluFrKDwlftAQcI3m1o1k1Lkr/z38H2xgbIOoaepvomv3t7IPmv8Zcyy/
-         pTDFUwGD75gf7ChPKTnbm7rrmX5j6vOJMaEZ0Be9OKhGBF2BWZcEm/COQ5BxsA+nilGW
-         Oyg/Ip/FzbzezvRA2h5noMDltn1sVi/eut/aYtqg8zY9+V7V3j5/0US3qY2Hv+qm+SGV
-         pdxKeXgMfy4GOQwNhCi5PwV4LQv5Tcq36JRCA2vXpSybMURfkLPrLP5v58x4pbwkSq/u
-         D/+Q==
-X-Forwarded-Encrypted: i=1; AHgh+RrKnF/phuvxALzxSmbQlEyIUYM0vWi7li2xR/sDg9b7yfhLU1/lkTuOn7DvRvy4mAiMdFWoWoj5qp0SuwyB@vger.kernel.org
-X-Gm-Message-State: AOJu0YwjIFpFMsz9PafYG3roq3DH3liJ1mLZcYAiRojLH3GKqMhduf7y
-	4E26Cl/po7quBruIUF/xeW5rTVESusCKN53YGmDE2WhBD3oQffszn/GTZzXXfQj799FDHR7y/Rh
-	uQkBD6g6LuQ/QdFwa7hB2CUOk2Wrmf8Nie61RNq9I+7l6X5FXRa/K/HVzVHa9EnTBwDchhzpC/M
-	sTahspNjKqpuQk2bCL0pYPEus0DOF5+YlajANCT6Vifo2a6vIU1xiOFg==
-X-Gm-Gg: AfdE7ck/w7hxO5hMi3HthXtFFPRlRvI3K2ygalimut0Hb8KJTQt7oWfi/rCnXYzQKsB
-	seW3F3YxN5erih3LhAV+iKJWthYDQK91ygA5qDuOuPcWnOMkx9W8BBz6jUQaiCLS+S77ASlMD3M
-	nxX5C9dss443RSQCkInDz3Y3XgNfeFQMRdwi2l3y8FkuvOuw3gqLGC4nQe
-X-Received: by 2002:a05:6870:36cf:b0:448:558c:d820 with SMTP id 586e51a60fabf-4569042f516mr3046261fac.35.1784384505226;
-        Sat, 18 Jul 2026 07:21:45 -0700 (PDT)
-X-Received: by 2002:a05:6870:36cf:b0:448:558c:d820 with SMTP id
- 586e51a60fabf-4569042f516mr3046251fac.35.1784384504857; Sat, 18 Jul 2026
- 07:21:44 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1784388095; x=1784992895;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=yEoG8yRI+aYCT3H+YBQOUKD8pSL6ReWVyutnSqA0MV0=;
+        b=BsrpNeorL3EYAKNBtYZpqaQh3A+8pmp4PLHcQ6JZ3edXwyuHaDKulHOqubWltS7qel
+         Cg8UGfz/v6OqCuK5A3zwkAhe2GueKP98aKq+4BU6ELFx0G5P2t6BsCL4JJfY83GZo45C
+         LGCdL5urEv7H2Y3bWyvXljnpziCkbukzwB8XMaU9NcOpPZb8UomFNTy4eQpXuflrnuJv
+         OZjitk6wPWl9WYlGsTweYH7YV/Bxn4TYm3XoLp+CM4hdt/ya7n+rgvr5Xx9WD8r153wr
+         TfqJMKdye5HVbh4ehkgB3NXt51wCiXOYWcX8Zz6m3NwB+CDkHAEg4CpC5zPhAkieNDo0
+         kFyw==
+X-Forwarded-Encrypted: i=1; AHgh+RpHnWO4cadbCrY8HiOGy/GaDaWhLdLxslrskA8fHDTCaJAjBWYivDbJ1p0hB+XylPSvmO7FoWT6hBQxbRNv@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz+m+D6NoBtaczFVhtjM4idLgZtM6iNA4xlxIqYSmH3M+Zh5lUp
+	IZfBFPyvFF8llDLa/FeSxmQj/6OLQg/GYvOljrHkQitPZkAUxh5DuBak
+X-Gm-Gg: AfdE7ckKMYSShpPucZaU73dcKHlCnQtOQlrS/vmJ6e8eAdgryLAv2GemV+u3hF/A/YI
+	EGW3Tuixk8YqG0NR/HRb4SZNhW1j2x3I8mQ/Xh74VaTd2GWm6WCWRfJApMYqtxnTZ3k0NN75Ivo
+	Yl8Zm//iio+marynEdp0aR/8L5A5RQ1SVqgJEA7R3P/ddeUn8XiFSmkaUUVZkyH1SP+pPe8OPLh
+	jyhAJW1sdX5kC2KyGETbDky2HITbakhp2va3lDheGXAdKn4ClsPF8H5pryLEKqFzjnXL/WcWPlT
+	GBYTlmxq6Ed8rAmyQzBSMHP3/HGiLT4q4K+8pj1h8yPC5seexwDnHqINP9aXpaV98au9gwtx+KW
+	41GJ5zh8jHCMFV8ndb5BnhWs86mPdny8mY9LhJUMU+nNdemRbM6zEp4DDiPeJNrBqK8qKhe6fGg
+	z82YnD3sON
+X-Received: by 2002:a17:90b:1f8d:b0:38d:c0f9:30be with SMTP id 98e67ed59e1d1-38e4b578797mr7711017a91.38.1784388094777;
+        Sat, 18 Jul 2026 08:21:34 -0700 (PDT)
+Received: from [192.168.0.103] ([45.113.100.172])
+        by smtp.googlemail.com with ESMTPSA id 5a478bee46e88-31429f9bcccsm21303405eec.4.2026.07.18.08.21.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 18 Jul 2026 08:21:34 -0700 (PDT)
+From: Biswapriyo Nath <nathbappai@gmail.com>
+Date: Sat, 18 Jul 2026 15:21:25 +0000
+Subject: [PATCH] arm64: dts: qcom: sm6125-xiaomi-ginkgo: Add vbus-supply in
+ Type-C connector
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Reply-To: rob.clark@oss.qualcomm.com
-From: Rob Clark <rob.clark@oss.qualcomm.com>
-Date: Sat, 18 Jul 2026 07:21:33 -0700
-X-Gm-Features: AUfX_mwkKFGoMcHJEmH0d92IozyRwgE3dPW85xlwmC5VF7kYwUWibss20bzR2dQ
-Message-ID: <CACSVV00hU=Ab__jEErEfC9tMn5DqC9MdgTVZA6p9U3iutDyZMA@mail.gmail.com>
-Subject: drm/msm: drm-msm-fixes-2026-07-18 for v7.2-rc4
-To: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: "open list:DRM DRIVER for Qualcomm Adreno GPUs" <dri-devel@lists.freedesktop.org>,
-        "open list:DRM DRIVER for Qualcomm Adreno GPUs" <freedreno@lists.freedesktop.org>,
-        "open list:DRM DRIVER for Qualcomm Adreno GPUs" <linux-arm-msm@vger.kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE4MDE0OSBTYWx0ZWRfX9FB4BLUv6QhQ
- s2XpCdu+HbBQfO0Eh4ZSM6PyabZFjs7U2Rj2ETL1frxiZB+FeKTE37SPlIRKRJRqqI9kW7bzll/
- jBm3e2Ntamagg29c5PuAiVccXmDq+vY=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE4MDE0OSBTYWx0ZWRfX7cGT1xYnauwn
- Vq2zztO/toIBeK3n/fM8rpH+ESDYs5ecR0eS3R6qUXFNqKbwXBZpPX3U9jSTc1I8prDM8jCQNPd
- U9ZTzpgWM7x9cFR+ndmUxSrnPzvgnvRaT02vg2lbQ85nghoaGTFQstx3zlY9WpdDNH0UUxR9ne4
- 2sCu3qzraF5D4BBRJ0OC8sPmOw9lvlyUkIBycIYoSPe9u/lW0xITSvSAjn9w5dbOlV7hQ4wl3SO
- FA2+QvZYGALGqECqLk+C+M1nBbFae9GMQkad0YZgechm48/wtLlzzYd0DrEPLgWavLnM3TNsrO2
- SHK5JX3r0UBP45JfJtZuNhTm5/3RXDx5BnvsPBp592z5LAm9gDkMeK3VL3Xci7/WcrCOWQ2P73r
- eOVkU1mVMDKNMMkxRcfS0wapjYiMJsAIV87P2hkEPSAr9/0oLLqoS/U03bzuJzIFg//uA7byNwS
- kWC2lX5/GVXNeVOSDiA==
-X-Proofpoint-ORIG-GUID: Ziu28D_4BjzmBAvjc0Rw7xZakExxIjEY
-X-Proofpoint-GUID: Ziu28D_4BjzmBAvjc0Rw7xZakExxIjEY
-X-Authority-Analysis: v=2.4 cv=FOQrAeos c=1 sm=1 tr=0 ts=6a5b8bf9 cx=c_pps
- a=Z3eh007fzM5o9awBa1HkYQ==:117 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=gowsoOTTUOVcmtlkKump:22 a=e5mUnYsNAAAA:8 a=zdhE6EiQQNMlgiWoPcUA:9
- a=QEXdDO2ut3YA:10 a=eBU8X_Hb5SQ8N-bgNfv4:22 a=Vxmtnl_E_bksehYqCbjh:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-18_04,2026-07-17_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 adultscore=0 bulkscore=0 spamscore=0
- malwarescore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607180149
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260718-ginkgo-vbus-typec-v1-1-d5ed0aa6b78b@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/y2Nyw6CMBBFf4V07RDLu8QY/8OwKO2IVctrCtEQ/
+ t0KbiY5yZ1zFkY4GiRWBgsbcTZkutYDPwRM3WXbIBjtmUXHKDvmvIDGtM+mg7meCNynRwVS5Fr
+ EhdAy1sz/9SPezHtzXqudaaofqNxP9F+MOEw+5vYZs0gkt1gZnLZWygV4DTjV2702c8iAJ3maZ
+ CKNikhfOqJwmORLddaG/pxZta5fYhs829MAAAA=
+X-Change-ID: 20260718-ginkgo-vbus-typec-a97d9389da3d
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, ~postmarketos/upstreaming@lists.sr.ht, 
+ phone-devel@vger.kernel.org, Biswapriyo Nath <nathbappai@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784388090; l=1616;
+ i=nathbappai@gmail.com; s=20260718; h=from:subject:message-id;
+ bh=pDPn99N+ICG1K7TKp4PgKMOzXmJllsI8p04WRkYOgbQ=;
+ b=7KDba2OaRdEYGWz/amL5v2WMGbUjUZyEWGEv+7QG7GQ5sPQLIaaMv/Wc6kT0U0i4LK470diaV
+ WR9/mCnqATqCZqIstaZea6CsLysP2O7o4Ckvq4SAaMlNZNQjl97OBpZ
+X-Developer-Key: i=nathbappai@gmail.com; a=ed25519;
+ pk=ATtK28d7wNTkFPtwgWLEaJ1T7ikcnGabljPw7CKsQ0Q=
 
-Hi Dave, Simona,
+VBUS supply property was moved from pmi632 typec node to USB-C connector.
+This fixes the following warning in kernel message.
+pmic@2:typec@1500: supply vdd-vbus not found, using dummy regulator
 
-A few fixes for v7.2 as described below.
+Fixes: c1da9374c3e0 ("arm64: dts: qcom: sm6125-xiaomi-ginkgo: Add PMI632 Type-C property")
+Signed-off-by: Biswapriyo Nath <nathbappai@gmail.com>
+---
+ arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi | 2 ++
+ 1 file changed, 2 insertions(+)
 
-The following changes since commit 9a967125427e03c7ebc24d7ad26e9307e8403d4e:
+diff --git a/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi b/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
+index a5458ab41629..59042a593753 100644
+--- a/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
+@@ -133,6 +133,8 @@ connector {
+ 		typec-power-opmode = "default";
+ 		pd-disable;
+ 
++		vbus-supply = <&pmi632_vbus>;
++
+ 		port {
+ 			pmi632_hs_in: endpoint {
+ 				remote-endpoint = <&usb_dwc3_hs>;
 
-  drm/msm/adreno: add Adreno 810 GPU support (2026-05-29 07:07:31 -0700)
+---
+base-commit: 0718283ab28bc3907e10b61a6b4be6fefa1cbb2f
+change-id: 20260718-ginkgo-vbus-typec-a97d9389da3d
+prerequisite-message-id: <20260519-fix-tcpm-vbus-v1-6-14754695282d@oss.qualcomm.com>
+prerequisite-patch-id: 6c6c95591d4aff3681de3a3bbeae9d23f77040c5
+prerequisite-patch-id: 51a84aabba9117f91505cc9c17f2c7064768ca33
+prerequisite-patch-id: 2432fbca7762ddb799b5c64f932760083ff0ea85
+prerequisite-patch-id: e3fe6166b11e43616b406a1ff6a8ac28611e7cdf
+prerequisite-patch-id: fe4070481a2bfc530e1a869bd981c32a8147f7e9
+prerequisite-patch-id: 4fc9afebebdfadfe644126dcdcdfe30f8e0ae685
 
-are available in the Git repository at:
+Best regards,
+--  
+Biswapriyo Nath <nathbappai@gmail.com>
 
-  https://gitlab.freedesktop.org/drm/msm.git tags/drm-msm-fixes-2026-07-18
-
-for you to fetch changes up to e2332abed2a4d3caa59052095dc16e4ce44791ea:
-
-  drm/msm: Only fini scheduler after successful init (2026-07-16 13:41:36 -0700)
-
-----------------------------------------------------------------
-Fixes for v7.2-rc4:
-
-DSI:
-- Fixed the rate setting to prevent extra clock glitches
-- Reverted the patch for the DSI bonded mode
-
-DP:
-- Added missing drm_edid_connector_update(), fixing the modes setting
-
-DPU:
-- Fixed the documentation warning
-
-GPU:
-- a3xx pm suspend fix
-- a6xx stale rpmh fix
-- recovery fix
-- a621 and a663 gpu snapshot fixes
-- fix irq storm with igt msm_recovery test
-- few error path fixes
-
-----------------------------------------------------------------
-Alexandre MINETTE (1):
-      drm/msm/a3xx: Drain VBIF before GPU suspend
-
-Dan Carpenter (1):
-      drm/msm/adreno: fix use after free on error path in a6xx_gpu_init()
-
-Dmitry Baryshkov (1):
-      Revert "drm/msm: dsi: fix PLL init in bonded mode"
-
-Jens Glathe (1):
-      drm/msm/dp: add missing drm_edid_connector_update() before
-add_modes on cached EDID
-
-Jie Zhang (5):
-      drm/msm: Recover HW before retire hung submit
-      drm/msm/a6xx: Fix A663 GPUCC register list for state capture
-      drm/msm/a6xx: Fix A621 GPUCC register list for state capture
-      drm/msm/a6xx: Fix IRQ storm during msm_recovery test
-      drm/msm: Fix task_struct reference leak in recover_worker
-
-Kavan Smith (1):
-      drm/msm/dsi: round 6G byte clock rate to the PLL-achievable value
-
-Rosen Penev (1):
-      drm/msm/dpu: fix parameter name in
-dpu_core_perf_adjusted_mode_clk kernel-doc
-
-Ruoyu Wang (1):
-      drm/msm: Only fini scheduler after successful init
-
-Shivam Rawat (1):
-      drm/msm/a6xx: Fix stale rpmh votes after suspend
-
- drivers/gpu/drm/msm/adreno/a3xx_gpu.c         | 36 ++++++++++++++++++++++++++-
- drivers/gpu/drm/msm/adreno/a5xx_gpu.c         |  5 ++++
- drivers/gpu/drm/msm/adreno/a6xx_gmu.c         |  5 +++-
- drivers/gpu/drm/msm/adreno/a6xx_gpu.c         |  8 ++++--
- drivers/gpu/drm/msm/adreno/a6xx_gpu_state.c   |  5 +++-
- drivers/gpu/drm/msm/adreno/a6xx_gpu_state.h   | 12 +++++++++
- drivers/gpu/drm/msm/adreno/a8xx_gpu.c         |  5 +++-
- drivers/gpu/drm/msm/disp/dpu1/dpu_core_perf.c |  2 +-
- drivers/gpu/drm/msm/dp/dp_panel.c             |  4 ++-
- drivers/gpu/drm/msm/dsi/dsi_host.c            | 12 +++++++++
- drivers/gpu/drm/msm/dsi/phy/dsi_phy.h         |  1 +
- drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c     | 18 ++++++++++++--
- drivers/gpu/drm/msm/msm_gpu.c                 |  8 ++++--
- drivers/gpu/drm/msm/msm_ringbuffer.c          |  7 +++---
- drivers/gpu/drm/msm/msm_ringbuffer.h          |  1 +
- drivers/gpu/drm/msm/registers/adreno/a3xx.xml |  2 ++
- 16 files changed, 116 insertions(+), 15 deletions(-)
