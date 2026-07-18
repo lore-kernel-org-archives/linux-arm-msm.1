@@ -1,442 +1,149 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D79C53016E9;
-	Sat, 18 Jul 2026 17:06:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0608B375F8A
+	for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 20:11:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784394392; cv=none; b=Dks5lm4vSskd4Y4wuPK3P5SkeEsZR8XyKS20QtvpecxsNQsbfOSmtIrbKzXSbIk/Q5+qK70P8THh6fKtlO/Rw5tFXdSem3EDsmxya8Fz1PZg+U25lnhmiRC7YYt/qYnm0itfyEmw23GPIl0q0lO/JisMwUV6hrat740xx3yoiF4=
+	t=1784405505; cv=none; b=nRqjDR+VCOGXs/DqO8E2fr7rqmvQDCCuiuPapgUZfTYmSAT6JoUQeh/wt/SzkBnhaxm0BhWTkeOp+sZ/JeZe2sfDVPK4zjynguh6+a0RfTdOPUVFTUtuOfNs0pI9KkpiFRZfO+0ILcHkYm9yMFpYjIvMlPr2R5zF7nAW/IyvHXw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784394392; c=relaxed/simple;
-	bh=flQxxyDGkNUZoBzNF8N+d/9NpxfyJZHQ27EXOZvmc/0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=qzZ2RQP/9U8EArDAPXgvJQ9zLZk5d1nHxWsj6saDD5DxbpSrjbbMHWWSPRkEhIsfHjcCUCiNyRVf8abybkGA4FUlPduj3/ublWyV38Dqm4lEqiRVKfs9LKGp99sbujxOrD1Ugc761eUDeyiimOFKfe1Uku3XvlNmCsHH6fraU6o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Mfwz+kQn; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1784405505; c=relaxed/simple;
+	bh=rsYCqbczMV4w4qUMEvfd3jp4oJxT0/vk7KoPV4tloAg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=hX8KI82pgygY1wxAkZfMxhPSpHl2GUgijgQuI63XKCWlTTc1NbNbY+fTN9CaDGwcAD0hbUyoMoXM8iLeMZAHixVEZmMo4XrGQZj56MwYQjgA5UxK1Ehq6mfDBSxeOIBMrh8WLpRw6XbTEPiXvysyLSfJz+gs1dvYjKJmOQXVse0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com; spf=pass smtp.mailfrom=google.com; dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b=KkN/NQyZ; arc=none smtp.client-ip=209.85.128.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=google.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=google.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Mfwz+kQn"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 5D4BBC2BD00;
-	Sat, 18 Jul 2026 17:06:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1784394392;
-	bh=flQxxyDGkNUZoBzNF8N+d/9NpxfyJZHQ27EXOZvmc/0=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=Mfwz+kQnIvxM436oqg7hjkaPkG/lBaKOJX5vG6O7DwtUlfB1TmsXh+Himit7F4s7n
-	 zG012+f6ZQU538kmC1OSInmOGn2e/+/LMEzuot+ZDhEnZIVJJIm2UW1RB6K/Z6+8xS
-	 UGm2pwfM3eD8ZwZ1H6Y6rFiOK3XVi7MDuT9O7CqcrqAEqRoVKT2kYQOd1r+pC9HEe/
-	 m8d9UA6Tb32suJrkI06pXIx1af6nLnBTfzeI8Kv4hOvtCW6Qf9jMtVoSXy0JKH48zE
-	 48xSYVLC31zfwhaCo/Bqbr2Qy8IU+hokv9xoKRa04D3LxExy0IsxaeuyGngc+N91sG
-	 aH3hGp32bSmcw==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 41C9FC4451B;
-	Sat, 18 Jul 2026 17:06:32 +0000 (UTC)
-From: Jens Glathe via B4 Relay <devnull+jens.glathe.oldschoolsolutions.biz@kernel.org>
-Date: Sat, 18 Jul 2026 19:06:33 +0200
-Subject: [PATCH 5/5] arm64: dts: qcom: x1: disable ps883x USB4 capability
+	dkim=pass (2048-bit key) header.d=google.com header.i=@google.com header.b="KkN/NQyZ"
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-495509b08ebso23685e9.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 13:11:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20251104; t=1784405502; x=1785010302; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=yHFeM/dPfGA4sFtsC9fMsOxlubs1dV+bQ3yag0vQkBw=;
+        b=KkN/NQyZiOYbimWC4FOBB1vZznZHInMAqOtZW83iooIyaXU2ngEqTwkTGsfdNiNl9w
+         kZUpyOcbcLNcjvnEyaRAkjHbZSEugXfHC+fNAzZLQJ0GkAx4C/tiYWAI5q9aE93TdijD
+         EmxGQ7CJ4TdQC7iFvhvipWp1uky1QAyELAYoa654BRwk7OP+bB5GTXSqzMOcOlyWRvWe
+         bKQP31cTa+X5UoCfcK6pgplOxw/wAjJgoY3PUOQfgK5XjnRDr/l1Tt++M8nzfkIFqgYP
+         7VQshEWrwns0TjRe9qmBCOEvms+VEE0juIc1J05TSiUpL+tibHfsrG2zK9+MtIZh/LCm
+         KTUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784405502; x=1785010302;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=yHFeM/dPfGA4sFtsC9fMsOxlubs1dV+bQ3yag0vQkBw=;
+        b=Iuuj0dDeFo5Lvh6Y8ikcjoAFAxjNOVaPFnTKqdzWz+WEAeokzOTB63j0JpbTg5apEi
+         nqHwhgvOZDKUwxqhHlkp8nSwDzMa0MFjFk/oH8Mz6YEe4l4H6mh+iS2AZCL0lBNZ5Sbk
+         23HElRAOGRNBzxyjm1GJ0IUSs/fTHXKZyHW5YSl9H6hJykK1ZYPZF4VlQzw0B/PzuAVM
+         j28DiKd6Apuk94U3y1yXK/ZsRjFzf+UHdNmqM1eIUJSAYAFcUKQSXPR52LDXMySOOHqV
+         b/0Kaa5Y2kQaYFR4Nus66Lqi5UUxZCyCcYu6TgGWmZEXlsOkhxX39hJQAf3++b7yRm/I
+         SODQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrvEuQUNt906Ed1s3eRj91Ca6ubjaGYjluKQU7wQ+cHiW6Tg+cx+OYXZIhxkAhdtrdYCzBZB4IjAtS89Eq8@vger.kernel.org
+X-Gm-Message-State: AOJu0YyWGrqCMLAcJy3ofWpBAevOt0qtmIpJcTD2AJgGk2pvZNzlgOGg
+	32xPvrIdCwAUyB+YDBPT0h5DxHaNVNs2U98+n8zagn2+AFfyrSQmPfV62HUtN/b7uA==
+X-Gm-Gg: AfdE7cmpIlUJnzuumz/e8PZdDrFDYl2tuAVMT2tx5WweQseNPRWL8nxOB/7bC2fq8g8
+	Q0Vz0dXn1WZAIgplZdTqdyVq2ZNVSlr6kb7HzW4wYUYjQxnGfpfj/9IDuHyiceZemak118XBRRC
+	sPyIT++dsFUB8aqZBU9G96/ncs7Yg9JdAAyvmF2Ua55NSZhv7KM4SIJbtNJ1AgbesCdz6EDS4En
+	1VHKNCIofOoKzegEw/5i2KPO5tp4HaxHmdY3Sx+qgtu0aD33Z0EDutRaTmylYexp83U8sfBzCbB
+	ThQmODH3lVs9zMJa8kKWSkTDBZCdXgr9dtKBNdXYnzAsQExgrNd+qN7xMPWzt1W0MkZJH6Xzc/b
+	wWF39Tsufv9dA9vkrdJCttyvaFb4M/PxRIb9NHaKGWRFsJ0XI28l7F7c9SPZn9lHBw5kXkb4Kw4
+	d9tSsCTD/haHoRZW/pmaDOwqNKdlg3v9lHw68Gjw==
+X-Received: by 2002:a05:600c:3f0b:b0:48a:623c:8859 with SMTP id 5b1f17b1804b1-49550691e94mr1258705e9.7.1784405501768;
+        Sat, 18 Jul 2026 13:11:41 -0700 (PDT)
+Received: from google.com (220.60.76.34.bc.googleusercontent.com. [34.76.60.220])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49558cb8433sm3398395e9.2.2026.07.18.13.11.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 18 Jul 2026 13:11:40 -0700 (PDT)
+Date: Sat, 18 Jul 2026 20:11:35 +0000
+From: Mostafa Saleh <smostafa@google.com>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Cc: Will Deacon <will@kernel.org>,
+	Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>,
+	"Joerg Roedel (AMD)" <joro@8bytes.org>,
+	Robin Murphy <robin.murphy@arm.com>, linux-arm-msm@vger.kernel.org,
+	iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	Prakash Gupta <prakash.gupta@oss.qualcomm.com>
+Subject: Re: [PATCH] iommu/io-pgtable-arm: Add support for contiguous hint bit
+Message-ID: <alvd9zPeXQVQ7l2l@google.com>
+References: <20260618-iommu_contig_hint-v1-1-4502a59e6388@oss.qualcomm.com>
+ <20260703161228.GA1948451@nvidia.com>
+ <b7224dff-7e51-49cb-8421-14d090492dfc@oss.qualcomm.com>
+ <20260715113913.GA3775915@nvidia.com>
+ <ald3CuddY6I7gml1@willie-the-truck>
+ <20260715122830.GB3775915@nvidia.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260718-ps883x-disable-usb4-v1-5-cec86d0b909e@oldschoolsolutions.biz>
-References: <20260718-ps883x-disable-usb4-v1-0-cec86d0b909e@oldschoolsolutions.biz>
-In-Reply-To: <20260718-ps883x-disable-usb4-v1-0-cec86d0b909e@oldschoolsolutions.biz>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Heikki Krogerus <heikki.krogerus@linux.intel.com>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-usb@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- stable@vger.kernel.org, "Dr. David Alan Gilbert" <dave@treblig.org>, 
- Jens Glathe <jens.glathe@oldschoolsolutions.biz>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784394390; l=11157;
- i=jens.glathe@oldschoolsolutions.biz; s=20240919;
- h=from:subject:message-id;
- bh=fJSmHKoLvyhaB/YtE0COu2+cIXH4xBGgcS2JfmoUp44=;
- b=p47O4I33BvemI+8ybEtxPmTyjzDNLwtKY6QPUgXt+88kDv8y7mID89ZaVszJ0OIJOVZAeSoBK
- cKxTibSTfryAwrzqQ/GBR5fPSM6kWlxNMUaze4CHV2lY3yrynb+eK2r
-X-Developer-Key: i=jens.glathe@oldschoolsolutions.biz; a=ed25519;
- pk=JcRJqJc/y8LsxOlPakALD3juGfOKmFBWtO+GfELMJVg=
-X-Endpoint-Received: by B4 Relay for
- jens.glathe@oldschoolsolutions.biz/20240919 with auth_id=216
-X-Original-From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
-Reply-To: jens.glathe@oldschoolsolutions.biz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260715122830.GB3775915@nvidia.com>
 
-From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+On Wed, Jul 15, 2026 at 09:28:30AM -0300, Jason Gunthorpe wrote:
+> On Wed, Jul 15, 2026 at 01:03:22PM +0100, Will Deacon wrote:
+> 
+> > From what I can tell, the fiddly parts for iommupt will be:
+> > 
+> >   1. Hardware bugs / quirks. Some of the simpler ones could probably be
+> >      handled but for the more invasive stuff like the Mali format
+> >      format, io-pgtable will probably need to hang around. Perhaps
+> >      it becomes io-pgtable-mali.c?
+> 
+> I briefly looked at Mali a while back and it didn't seem so bad, but
+> that was for a GPU driver not the iommu so a bit different
+> issue. Exactly what the GPU drivers should be doing is less clear to
+> me, they don't really fit well with the iommu focused interface (eg
+> the memory preload issues/etc).
+> 
+> >   2. The pKVM work from Mostafa. We'll probably end up with something
+> >      separate at EL2 for this (ideally, just reusing the CPU page-table
+> >      code when it learns about BBML3).
+> 
+> Yeah, I'm not sure here, it isn't great that is adding another user
+> and open coding some of the logic (eg smmu_pgsize_idmap). It would be
+> much better if it could just use all the existing flow more directly
+> somehow.
 
-Add the "parade,disable-usb4" property to the PS883x node so that the
-retimer driver treats USB4 as USB3. This allows the combo PHY to remain
-in a DP-capable mode, restoring working DisplayPort output over the
-dock while keeping USB functional.
+I was under the impression that io-pgtable-arm will remain the same,
+but if it is going to be removed (or at least the LPAE format) I need
+to figure out an alternative for pKVM:
+- Compile iommupt for the hypervisor (similar to what we do with
+  io-pgtable-arm in the SMMUv3 pKVM series which compiles in both)
+  I am not sure how easy is that for iommupt, I have the SMMUv3
+  iommupt series on my review list, I will check that.
+- Support the hypervisor page table in the IOMMU, that requires some
+  extra support changes, I recently posted BBM support, but there is
+  more as avoiding lazy mapping when unmapping, TLB hooks...).
+  There is another problem with that for android, as we still need
+  stage-1 as some SMMUs only support single stage (used with pv)
+- Write a small IO page table implementation just for the hypervisor,
+  that's not ideal as it would benefit also from features as CONTPTE.
 
-This is a temporary platform workaround until proper USB4 DP tunneling
-support is available.
+I will look more into this, solution 1) seems the best case if
+practical, otherwise, 2) might be reasonable for upstream.
 
-Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
----
- arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts                        | 4 ++++
- arch/arm64/boot/dts/qcom/hamoa-lenovo-ideacentre-mini-01q8x10.dts | 2 ++
- arch/arm64/boot/dts/qcom/purwa-iot-evk.dts                        | 6 ++++++
- arch/arm64/boot/dts/qcom/x1-asus-vivobook-s15.dtsi                | 4 ++++
- arch/arm64/boot/dts/qcom/x1-asus-zenbook-a14.dtsi                 | 4 ++++
- arch/arm64/boot/dts/qcom/x1-crd.dtsi                              | 6 ++++++
- arch/arm64/boot/dts/qcom/x1-dell-thena.dtsi                       | 4 ++++
- arch/arm64/boot/dts/qcom/x1-hp-omnibook-x14.dtsi                  | 2 ++
- arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi                 | 4 ++++
- arch/arm64/boot/dts/qcom/x1e001de-devkit.dts                      | 6 ++++++
- arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi       | 4 ++++
- arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts             | 4 ++++
- arch/arm64/boot/dts/qcom/x1e80100-lenovo-yoga-slim7x.dts          | 6 ++++++
- arch/arm64/boot/dts/qcom/x1e80100-medion-sprchrgd-14-s1.dts       | 2 ++
- arch/arm64/boot/dts/qcom/x1e80100-microsoft-romulus.dtsi          | 4 ++++
- 15 files changed, 62 insertions(+)
+Thanks,
+Mostafa
 
-diff --git a/arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts b/arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts
-index 9fa86bb6438ec..5ec77c5912f8e 100644
---- a/arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts
-+++ b/arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts
-@@ -762,6 +762,8 @@ typec-mux@8 {
- 		orientation-switch;
- 		retimer-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -877,6 +879,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm64/boot/dts/qcom/hamoa-lenovo-ideacentre-mini-01q8x10.dts b/arch/arm64/boot/dts/qcom/hamoa-lenovo-ideacentre-mini-01q8x10.dts
-index bfb7cea56df96..328a360843f4c 100644
---- a/arch/arm64/boot/dts/qcom/hamoa-lenovo-ideacentre-mini-01q8x10.dts
-+++ b/arch/arm64/boot/dts/qcom/hamoa-lenovo-ideacentre-mini-01q8x10.dts
-@@ -601,6 +601,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts b/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-index ad503beec1d3d..9ce080b9ae896 100644
---- a/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-+++ b/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-@@ -703,6 +703,8 @@ typec-mux@8 {
- 		orientation-switch;
- 		retimer-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -760,6 +762,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -865,6 +869,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm64/boot/dts/qcom/x1-asus-vivobook-s15.dtsi b/arch/arm64/boot/dts/qcom/x1-asus-vivobook-s15.dtsi
-index 48c4ad648354e..d67ded1da5875 100644
---- a/arch/arm64/boot/dts/qcom/x1-asus-vivobook-s15.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1-asus-vivobook-s15.dtsi
-@@ -678,6 +678,8 @@ typec-mux@8 {
- 		orientation-switch;
- 		retimer-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -798,6 +800,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm64/boot/dts/qcom/x1-asus-zenbook-a14.dtsi b/arch/arm64/boot/dts/qcom/x1-asus-zenbook-a14.dtsi
-index 66d566808f583..e1033d3bef359 100644
---- a/arch/arm64/boot/dts/qcom/x1-asus-zenbook-a14.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1-asus-zenbook-a14.dtsi
-@@ -845,6 +845,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -945,6 +947,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm64/boot/dts/qcom/x1-crd.dtsi b/arch/arm64/boot/dts/qcom/x1-crd.dtsi
-index 9602d65c8b3db..002a974c88751 100644
---- a/arch/arm64/boot/dts/qcom/x1-crd.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1-crd.dtsi
-@@ -967,6 +967,8 @@ typec-mux@8 {
- 		orientation-switch;
- 		retimer-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -1024,6 +1026,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -1112,6 +1116,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm64/boot/dts/qcom/x1-dell-thena.dtsi b/arch/arm64/boot/dts/qcom/x1-dell-thena.dtsi
-index d6de4da02dcd3..fa17cdafc07b4 100644
---- a/arch/arm64/boot/dts/qcom/x1-dell-thena.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1-dell-thena.dtsi
-@@ -852,6 +852,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -947,6 +949,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm64/boot/dts/qcom/x1-hp-omnibook-x14.dtsi b/arch/arm64/boot/dts/qcom/x1-hp-omnibook-x14.dtsi
-index 02708f23a8657..4dd62092b8809 100644
---- a/arch/arm64/boot/dts/qcom/x1-hp-omnibook-x14.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1-hp-omnibook-x14.dtsi
-@@ -917,6 +917,8 @@ typec-mux@8 {
- 		orientation-switch;
- 		retimer-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-index 7559557610ed4..1aa075d6eeda5 100644
---- a/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1-microsoft-denali.dtsi
-@@ -759,6 +759,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -822,6 +824,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm64/boot/dts/qcom/x1e001de-devkit.dts b/arch/arm64/boot/dts/qcom/x1e001de-devkit.dts
-index 2e38402e2c140..ada5da526634a 100644
---- a/arch/arm64/boot/dts/qcom/x1e001de-devkit.dts
-+++ b/arch/arm64/boot/dts/qcom/x1e001de-devkit.dts
-@@ -795,6 +795,8 @@ typec-mux@8 {
- 		orientation-switch;
- 		retimer-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -852,6 +854,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -943,6 +947,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
-index 5d49df41be02a..c8bfb38c64ad5 100644
---- a/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1e78100-lenovo-thinkpad-t14s.dtsi
-@@ -895,6 +895,8 @@ typec-mux@8 {
- 		orientation-switch;
- 		retimer-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -1018,6 +1020,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-index ce7b10ea89b6d..11412099eaec1 100644
---- a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-+++ b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-@@ -726,6 +726,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -789,6 +791,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm64/boot/dts/qcom/x1e80100-lenovo-yoga-slim7x.dts b/arch/arm64/boot/dts/qcom/x1e80100-lenovo-yoga-slim7x.dts
-index beb1475d7fa0c..d16d3627796b8 100644
---- a/arch/arm64/boot/dts/qcom/x1e80100-lenovo-yoga-slim7x.dts
-+++ b/arch/arm64/boot/dts/qcom/x1e80100-lenovo-yoga-slim7x.dts
-@@ -863,6 +863,8 @@ typec-mux@8 {
- 		orientation-switch;
- 		retimer-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -920,6 +922,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -977,6 +981,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm64/boot/dts/qcom/x1e80100-medion-sprchrgd-14-s1.dts b/arch/arm64/boot/dts/qcom/x1e80100-medion-sprchrgd-14-s1.dts
-index f95b1f9f439d3..55f9df8e5f403 100644
---- a/arch/arm64/boot/dts/qcom/x1e80100-medion-sprchrgd-14-s1.dts
-+++ b/arch/arm64/boot/dts/qcom/x1e80100-medion-sprchrgd-14-s1.dts
-@@ -857,6 +857,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-diff --git a/arch/arm64/boot/dts/qcom/x1e80100-microsoft-romulus.dtsi b/arch/arm64/boot/dts/qcom/x1e80100-microsoft-romulus.dtsi
-index 28342cb84ded7..4ccfbe7e14eb8 100644
---- a/arch/arm64/boot/dts/qcom/x1e80100-microsoft-romulus.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1e80100-microsoft-romulus.dtsi
-@@ -902,6 +902,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-@@ -984,6 +986,8 @@ typec-mux@8 {
- 		retimer-switch;
- 		orientation-switch;
- 
-+		parade,disable-usb4;
-+
- 		ports {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
-
--- 
-2.53.0
-
-
+> 
+> >   3. Non-coherent walkers, although I think this might actually be fine
+> >      because x86 needs it anyway?
+> 
+> This is done already, the smmuv3 conversion I've posted supports it.
+> 
+> > So, for now, I wouldn't require new drivers to use iommupt but I'm
+> 
+> The recently posted broadcom driver used iommupt and I thought it
+> turned out very clean, it actually seems like less work to do it this
+> way than try to write your own page table like that rockchip driver
+> did which required several review rounds.
+> 
+> Jason
