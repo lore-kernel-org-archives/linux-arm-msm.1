@@ -1,87 +1,86 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70304383C77
-	for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 12:06:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3276F3612EC
+	for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 12:56:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784376396; cv=none; b=aYvtm+QJi1kydxXljxUan4CgDRG8BEJWVz5MEZfR1Xb43bdDsKTey/znxUfom75FwJVeBCMOYNLCp9rsu781iH6Gz3pZJOuQviWpiJeErg6aLBZHP6wzABFdhONkuVS97nCLIjiSjAzkNQ1qmXpeGnwTCQnJj5dUZ3Cm6Q7AzvQ=
+	t=1784379388; cv=none; b=KAmjazH2Mo9ZDYOCBVJjhXuFhO5OqLXIV29Om05P0iYOYLVCHwANRdnNcCTTsDMYENkdmw7fzhoMi+wvv0v1Df22bSy7o29krPLipqAhmHl//8ugOgdht4xuhogjUCcAskQ80NjaCy62S8l74ijzC/xiqhi6h2Vf6i3ArUl2Q4c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784376396; c=relaxed/simple;
-	bh=hwbEZ61VnK2nKsRjLCEmewXTb0y3Wzi0UBMhIY7quxA=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=IxONA9pLuTmcFxLxWyEntMFnEEan+noS3PNoqD9bx8qzovNZah90uZK3XQSJMOYaioeT8yXWOyQPXF0tsODHbdrzuvl84T9wGqzRyPpyeYGN3OC4pBRSr/4R63XtP9T0xUqDX+AwWvI6DQj6w9kjza71Kx6NLfuiAaA6X4IiWsU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ENRdstDc; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DIcic67P; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1784379388; c=relaxed/simple;
+	bh=rh2XhYb9Y0A67WdVNJ2cfhj/MALONQN8WmX6Glr3VgA=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=VtLt47u8BhvNLXRBDhyKQY0fHKbTzZT8oaOy5njY105+K+3Ll9d2MdHQfWCUJV8VP3aXnpBeSYYhfdBPgIPymArfQW1fTHDkEwYCB+23L6APGswKQHh9m/vm0/0d4KNCpKKqCy1xFzmbzmFRT9K3lFE9IEluWE6Fml8ONbrYBKM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gZMJVYvZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=eoAhwtWG; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ENRdstDc";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DIcic67P"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66IAHGZX178546
-	for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 12:06:31 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gZMJVYvZ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="eoAhwtWG"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66IAHqqn244201
+	for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 12:56:25 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	jZWSsCvgKiuo+AJo54olYSKNAIZtjfGBfdSkV0cJL70=; b=ENRdstDcF+MXDYqo
-	4/dfDGO6Ee0kpLWggE50hoYukMBjYjFfakv5Ym+RXiYybtVrCP7tgB8PjoGcuixv
-	2GYrDfqOoey3MCum4j84poymRAhEVzruFq4f7QPHHeKjWhZfbOAUHJzKCNuGlPqn
-	+i35HUdf6GbxcdGNJzgaVyXQTGr8BfAzikDB/Zriv+4WPne+CjDbXkWoQLzc7iis
-	kW+xSsDNVFym+r5qnTRQ8N4vRcRI99KTwiQhMpDcrq9n3DeP4Z1gfs0JmNzx7DtN
-	fp4uzjn3wvtCLtE2h/JttnJ82v80qmaa5zRxZxvHb+ZluoUzZ2M0GC4Er/LIEH0v
-	sTmkZA==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fg2s7rmty-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=AdR7vRy5XBtV40I2ljwZ7F
+	KFKDRSO+UZ/5LcwdVSpBs=; b=gZMJVYvZg9/SnmsV2xmONc0UR6Iyfb/Hp5Jbxl
+	xY/mDdqGJml69TS8JFkZB4oNBlDJFnJdmD3+jePL90FJ6DGp2iLpu7/5sCQkVVHH
+	u37GWRvAmPVAyE5+9LXr6nRHau6h8Eiv5lZ44Sukjoum7de/KxzWo02nqX4Q0MaM
+	nshOzL/+gnNvD8fZNTNiasLpJfkVLItUSNzdsaEouLYqw13HkkHeIwJtV+PR5wNh
+	DLxQcn2CIGmRCLxLN19J97/OEineafuAUUbk6lt87KurEX1vufthyeLyvvrls6L8
+	ZKgTe9GSL5sc6inQecW62ew8LyVAn6aW0OVkXHr9Dta39X4A==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fg2chgre0-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 12:06:31 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cee894b3d8so96246625ad.2
-        for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 05:06:31 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 12:56:25 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38dc085b0a7so12590493a91.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 05:56:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784376390; x=1784981190; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=jZWSsCvgKiuo+AJo54olYSKNAIZtjfGBfdSkV0cJL70=;
-        b=DIcic67PQF/tjH3yEkUdT0Fd33CRIb4zQUYWX7dBRyZX5z/w7osrM99l/WFhESbDLa
-         XihyjOy1xQO9A8WnZG2MLIAKD1sK2QMCW5LDyyPPbY2bbpxx2OrNmkK/eTh08eVcq3lb
-         0nfQbblDGgJOkWwAKQdbprPBfvi/W4n6djRLOBdYfO/A0xKE7NFH3GP4Ilsw3nWTKV5b
-         lgeuALqi5STNqmGvs/WnxqZ7SoQ3qKeFmsQGZR2hH9WvMMRGkmQZ7Mk9b/9IKOFDUYbx
-         1192TpeHkvbc8QywId/xUg+TS5bLrR0B6kFAomPp9WdQGJ7IhXVCLP8k7AfL89rh5f9P
-         5jrA==
+        d=oss.qualcomm.com; s=google; t=1784379384; x=1784984184; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=AdR7vRy5XBtV40I2ljwZ7FKFKDRSO+UZ/5LcwdVSpBs=;
+        b=eoAhwtWG473Gw5/NZzRqzkhJ5WZNF/dQfGTR0gs5Cg59ceflde8R7VL0lwO/1snwLE
+         7XD/BdoLsZoFw0RMiiWIWnOIoDeEP+1GUvD81u/ym/c2bFY12LtpVBHKCzKwHE8dyu79
+         ttN1qo1wJrjmf2RVJxzv1la/asIxW1uv6MvIZEp2i/BQTFjUvLw1+v1ltKcGAoOODD0h
+         Gz3igmmMtYxdD+0JWR+zEPYnyW10SDcjMxt4iNbgvrb3wUi82H5Q+5Jfo+dK1PBCZtOe
+         e7uLWJiLfdmQMFn7BD081AK6GOCgjDBizQuVtIcvVv0Op1y5WJyF24yi0BJJQSV4OI7B
+         1FGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784376390; x=1784981190;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=jZWSsCvgKiuo+AJo54olYSKNAIZtjfGBfdSkV0cJL70=;
-        b=Yr+12TesJSwlwvXlFEF7UEkiT796UYeN8RLl5RiiU47Xsp8u+xK/MwCaeoTOGxaUC1
-         STw9ANT0rlYIBweSASSx3ZNsuQyKWHGvGnXrf93sRflwOunjf1FSd+adB7E46DEHxRCp
-         v/Sq5Otkgt3h24taR6rOY/QvXXnREo5EnsfAFUKCkOccd0G81momFMqXv3ITiiJmx1fC
-         VXu+teuXwewZLcIJWuNPJ/qsHjP80ksVpCrFeUo7hHH0eHWEy8ml3incAKryqzY+f+oR
-         3p5it3BekxNYcO0tUJhdJG5OCLa3APD6DTaf0jakN2GM7V28JvDTZ9/ujaTb8jifRx83
-         4xIA==
-X-Forwarded-Encrypted: i=1; AHgh+Roa2CKPCntdrdvq/qr9fsk6DrDIHyk0+9fHfYvMah6HfEXJbrQhENqVp29BM32SCgHFtyid6lahimfwccqJ@vger.kernel.org
-X-Gm-Message-State: AOJu0YzbmCZ5vd4jnO4A7zMs3Ji6BnFWUqGKrXCzWl+xsMTjmOEluLRM
-	QFyEVALqy7C4SlBlcqVsdY9ryAS0xYI8laxkFKD9dliC5yYzKTU7yKWqe6SUIoi6cQePCZgSjDv
-	OMtJw9v6lPCtgMoLywEUVFVOuf9jU3ivCLLNne1E9kh+h9gUOhv6RIPI3ETvvJ9Os9+Q8
-X-Gm-Gg: AfdE7cnDZbpjCe4OkE6UvnTZLxFzC6UfDoEv5iVcH/Sh/YXed5nSMhZqVNB8j3O4TcD
-	f8Qd2+g3hX6e4ykt/8FfMLZcEOTCRcjLIcn/hNoKYopG4ee5maSIvqWXsBbPOnPe8jwFoxeI4Au
-	0d6ysxyNyS63Gn0ukowpDz+9xQ+RzTkexrEAtF8KSeEe4Xug+6YhlLrR7cc/7CoPRYq7KfpP6SE
-	Q+AxeQucY4Q73yPu4XY3CO5vvZ6c+Q3Do8niXZX0sBWBlhxaXWCzjRREGo7r42zFvIl4mrftNSM
-	XsRqSJXyPVrZC5ih5sX1+Rg2HHn2+Dlx/6FNUtHQNFQ9rXe4v9wx22ueSOdLGTU9rJiSrtE3u2Z
-	yg4S6ABsIiloHfRtthXQg913hG2Hovh+5i3eay5zkZDvhDpOut8XWciV2PN/EnCKU
-X-Received: by 2002:a05:6a20:4303:b0:3c3:92aa:4302 with SMTP id adf61e73a8af0-3c3adab4e3bmr7238294637.70.1784376390538;
-        Sat, 18 Jul 2026 05:06:30 -0700 (PDT)
-X-Received: by 2002:a05:6a20:4303:b0:3c3:92aa:4302 with SMTP id adf61e73a8af0-3c3adab4e3bmr7238247637.70.1784376390038;
-        Sat, 18 Jul 2026 05:06:30 -0700 (PDT)
-Received: from hu-ggarmidi-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31429cf22b3sm17666314eec.0.2026.07.18.05.06.29
+        d=1e100.net; s=20251104; t=1784379384; x=1784984184;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=AdR7vRy5XBtV40I2ljwZ7FKFKDRSO+UZ/5LcwdVSpBs=;
+        b=hCuC6dG98ZPhhe26bniBegmltFM40sGa/OE6U9XFRiDdndZUdCb3hfafVckyzI2eE3
+         XBu5X0/BaLnuf9KW1euPjz1S3HHtPP3SbMjifBNh4XkDckuCI+hwT5DzWQwmbJaRDEwF
+         +yITlWoezxAe1a5G7pkhauWUrPI3evUvd6W2ycDmOq4+LVP0s2VKWKp8PYAiJNhv22bm
+         iJUON45AJ0sGwVrYXCMIpN+yX8ck4CNzDWmShFwO0jH9HJ1xyXRcGLeSDvvGF1PP4WLe
+         RXrOJinRjlMCNVMjXzxEqo/hcauRHdoWR19B2WsizoecxFgzFksQYeHNcBx/sJcVS7xA
+         zPUw==
+X-Forwarded-Encrypted: i=1; AHgh+RpelJWM9QQpxeMOIUn5b9AtVlcH7W3kYEfnb+7LqM3wRLAnQ5vui0/EV5Z3oZ3esLbvwI1x6x7VqW/n1i+Y@vger.kernel.org
+X-Gm-Message-State: AOJu0YzVLE5E9BHczkIiyQtwIsmT5E1OVAJqxZA+X7ItaQ4R/eekzxru
+	mzmqGDJXLI2AGj6D6huZWuMB5B6mKxoWkR4hHYlVnWoZ7TL23Gfejd9oka0mBSNz5Ml4W1Hzg7T
+	u0yW61Jmtsf2iocNFNN1xdH1FkeEE0xX0qp5SF8BqH9J4MHahVIizuttWL0I/Dyn0Bkox
+X-Gm-Gg: AfdE7cn/ohmLXxHEfTiHkuh5zVVtLkzCk92ooE73J18PVwi/6hZ6Q0WjzYzVI91Hii0
+	y7Gq5Wj8ON9cIJJzz29SlYpv/TaSFTxu7DEPNnT5rtVACo4N/mX/KgU7qiDLWWWU8l3Rjs7T/ns
+	syoEx5WbYCy2DxhgoUcnyVGnI8e5/XmVihhOPBjg45r7yWZ0bAlcYqbMH0Yz95tJ1HqIFvO8jok
+	m+MendhYsTsK7iyZZakIvL+FaXr0RQR6bYTI2T1zu64BkNxlZwXCbTv0SprTorbJiZdoBOBobxn
+	5FhSWUSDGy3DBcuQ88bnmfSrh+NR+RQowJPE+eTMeo0peHj4q0aBWq2zp1S7fJ+GzGyHvsCjTWN
+	M+nZZzzZTE7EYVnZ6ZZxC9v3yK3SvaOs=
+X-Received: by 2002:a17:90b:57c5:b0:38e:2860:253f with SMTP id 98e67ed59e1d1-38e4b447cd5mr7158285a91.12.1784379384381;
+        Sat, 18 Jul 2026 05:56:24 -0700 (PDT)
+X-Received: by 2002:a17:90b:57c5:b0:38e:2860:253f with SMTP id 98e67ed59e1d1-38e4b447cd5mr7158234a91.12.1784379383894;
+        Sat, 18 Jul 2026 05:56:23 -0700 (PDT)
+Received: from hu-imrashai-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13ce2a18a47sm14238910c88.8.2026.07.18.05.56.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Jul 2026 05:06:29 -0700 (PDT)
-From: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
-Date: Sat, 18 Jul 2026 05:06:25 -0700
-Subject: [PATCH 5/5] soc: qcom: ubwc: Add Kalambo UBWC config
+        Sat, 18 Jul 2026 05:56:23 -0700 (PDT)
+From: Imran Shaik <imran.shaik@oss.qualcomm.com>
+Subject: [PATCH v6 00/16] clk: qcom: Add DISPCC and GPUCC support for the
+ Qualcomm Shikra SoC
+Date: Sat, 18 Jul 2026 18:26:07 +0530
+Message-Id: <20260718-shikra-dispcc-gpucc-v6-0-62703e05ef0f@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,78 +89,144 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260718-b4-kalambo-crd-v1-5-a1069b5a2757@oss.qualcomm.com>
-References: <20260718-b4-kalambo-crd-v1-0-a1069b5a2757@oss.qualcomm.com>
-In-Reply-To: <20260718-b4-kalambo-crd-v1-0-a1069b5a2757@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAOd3W2oC/33Qu27DMAwF0F8JNFeBSD1sd+p/FB1kPWKhTexIs
+ ZEg8L+XSQdnsLsQuBfgIcA7KyGnUNj77s5ymFJJ/YmCedsx19nTIfDkKTMUaIQGyUuXvrPlPpX
+ BOX4YRpom6sahFCiiZrQ55BDT9al+fv3lHM4j4Zel7FK59Pn2vDzBo/3/yARccB29qSQoY1v86
+ EvZn0f74/rjcU+DPdgJXyis1ykkqtEyIkEitu0GJRfKCFinJFEGHLRWVlKHeoNSr5RapxRRNQo
+ VQWAjATYovVCV2PiVJso5kDUar7y2K9Q8z7+TkF4z/gEAAA==
+X-Change-ID: 20260513-shikra-dispcc-gpucc-6f59c23020f5
 To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
         Conor Dooley <conor+dt@kernel.org>,
-        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
-        Pankaj Patil <pankaj.patil@oss.qualcomm.com>
-Cc: Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784376384; l=1077;
- i=gopikrishna.garmidi@oss.qualcomm.com; s=20260102;
- h=from:subject:message-id; bh=hwbEZ61VnK2nKsRjLCEmewXTb0y3Wzi0UBMhIY7quxA=;
- b=g8UW8Dsic1c49ffwsKY4JRINpR2pyk3c9xaK3A6YqJK8OndCS7fTZr0RrRnPDccYjJ7EKX2RG
- d4OcWfT9DegCUw/BwkpMbVeJVaLsykRXuuVMlsFFZyV4fww4wls9icE
-X-Developer-Key: i=gopikrishna.garmidi@oss.qualcomm.com; a=ed25519;
- pk=TkSjNEhrfsj90i3wkABTZtAjLNr2cfYsujaTvyOIDsE=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE4MDEyMiBTYWx0ZWRfX4+lSMK2JH0XQ
- AFUK3+OkK2/vOvtVgJE2FSfUlig49tBVNmpveqzlrvqD68/IiELAnuwroxAdQCV6zps0SN+I42S
- dFPwLiAg6ViOKF51y2gJh3jfTC20ys5jKmgMwCXpNSVygM4qlP3HvN+RT6q6qRRqo4o6WFfza8Z
- AVFS2UDGy2RICpV8Ay+BBqHw7oG8zNqTtsEcs+DTdJICzkPINn01Xue9mosCgfPN7EnMzt60lXs
- UBedO6Nq5IJgtA9OXdUfToXK7ZpKR55rR02RSTcZ8yyQGt5NBX2li4xLlxJ1F8yricER1t8ppvV
- A9dP9zy+7QBe9c3NtGv8MX1r67vVQYb0GQunQzBQaVzCSrs/6I0uPplPOerwjWy+fyDN9eFXR4D
- MK91KAwRBpjrIOZcvXQH8lAlkfcEmwDXIiT8WY4WmWK2nZOX32yEarHPIl0nSNVc74hffYMZwh8
- 9dUJ8KAYEasBWQvzt8A==
-X-Authority-Analysis: v=2.4 cv=eKsjSnp1 c=1 sm=1 tr=0 ts=6a5b6c47 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Brian Masney <bmasney@redhat.com>, Dmitry Baryshkov <lumag@kernel.org>
+Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+        Taniya Das <taniya.das@oss.qualcomm.com>,
+        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Imran Shaik <imran.shaik@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE4MDEzMyBTYWx0ZWRfXwA30yt6N9mkk
+ OFEkNuxUdDUAz72bCy5jWXGPy2rSsl+VJ4Ed9acvp3mpL+XUB2xc3uo0Pw09E4Gu/J6QAtv12eF
+ AebmmLF7TcHiQAugpGN3kcGIDrkMasE=
+X-Proofpoint-GUID: EnA69y55cFhOE1tT8AKvHecNtBa700Th
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE4MDEzMyBTYWx0ZWRfX52tAcr0G7BZD
+ KyN0vt/PPpMcFJFSj6qgyygYhbt9wbrU4fYp6NqMnGWQeXcpafbxMRZ41DXh6/voyyoTkUnooel
+ FXHsYL1uKL+eWos1QklUtgNJogheZb1mP8ttBGLeNsrA7XLeZ5N8EY8t2v2S750HR0rxs3OK0IW
+ uh8RIz3aKERR+8in+vlIuoZiJ/QP2QTrVSc5dxzVm22WnPiQCT9MWWhkUH7nCNYQF/Fpg0ChQWv
+ 1WgqYd5GPL+ec+ES5urupRQtl/+XUhccrTtfW2XFdUytTKsEwzcJdQ0VHnGzkintZkwes3Dq7on
+ 8H/aZdU8G+NQ5gqQlNtnuo5DGNx4w1Yj1j8SVDGEVuAjNqeFfUL4yIgx++/4ESftzE8/InSIJ76
+ Ro5UZ1XTq0tKWBys9+XpvZxT1sSfneEegFwsEuuegcXnycQ6BP0npdx9u78HA97PZBN7AIEpsj2
+ 2br2w2ajZivf5igieJQ==
+X-Authority-Analysis: v=2.4 cv=T5K8ifKQ c=1 sm=1 tr=0 ts=6a5b77f9 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=vwhQhcXuLYmSI6hVBhoA:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-ORIG-GUID: sZxoxAlS-PfEv8N4h8ifQH4GwBGxjTPZ
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE4MDEyMiBTYWx0ZWRfX+IJEBfEXsZL2
- 4sN56z1lm1LjxlYZbfx0zdaHgBJ145gSWgH742OL7KSSxhb5lQImoRM01umHSBOv3TeZDbVCk2w
- 6EuXcWDFlW9xQGbth7NQApC8iSCVvHA=
-X-Proofpoint-GUID: sZxoxAlS-PfEv8N4h8ifQH4GwBGxjTPZ
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Jt_u-2xrBEiAwH-zeXIA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-ORIG-GUID: EnA69y55cFhOE1tT8AKvHecNtBa700Th
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-18_03,2026-07-17_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 impostorscore=0 malwarescore=0
- clxscore=1015 phishscore=0 lowpriorityscore=0 bulkscore=0 spamscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ phishscore=0 malwarescore=0 impostorscore=0 bulkscore=0 adultscore=0
+ suspectscore=0 lowpriorityscore=0 spamscore=0 clxscore=1015
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607180122
+ definitions=main-2607180133
 
-Qualcomm Kalambo is a derivative of the Mahua SoC and shares the same
-Universal Bandwidth Compression (UBWC) configuration. Add the Kalambo
-compatible to the UBWC configuration table to enable support.
+This series adds support for the Display clock controller (DISPCC) and
+GPU Clock Controller (GPUCC) on Qualcomm Shikra SoC, by reusing the
+respective QCM2290 SoC drivers, and adds fix-ups for the QCM2290 Clock
+drivers.
 
-Signed-off-by: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
+Signed-off-by: Imran Shaik <imran.shaik@oss.qualcomm.com>
 ---
- drivers/soc/qcom/ubwc_config.c | 1 +
- 1 file changed, 1 insertion(+)
+Changes in v6:
+- Rebased on next-20260716, as the dependent RPMCC/GCC and Shikra base DTS
+  changes were merged.
+- Collected all Reviewed-by tags received on v5.
+- Added the Fixes tags to relevant patches [Dmitry/Konrad]
+- Reordered the series to place the fix patches at top of the series [Dmitry]
+- Updated the DISPCC driver to use use_rpm, as required by the
+  power-domain fix-up changes [Konrad]
+- Dropped the additional external clock, index-based driver, and DTS
+  changes to avoid an ABI change that has no functional impact [Krzysztof/Konrad]
+- Updated the commit text for few patches [Konard/Dmitry]
+- Link to v5: https://lore.kernel.org/r/20260703-shikra-dispcc-gpucc-v5-0-cc13826d4d5a@oss.qualcomm.com
 
-diff --git a/drivers/soc/qcom/ubwc_config.c b/drivers/soc/qcom/ubwc_config.c
-index 0209a02c390f..c5f79210ad52 100644
---- a/drivers/soc/qcom/ubwc_config.c
-+++ b/drivers/soc/qcom/ubwc_config.c
-@@ -112,6 +112,7 @@ static const struct of_device_id qcom_ubwc_configs[] __maybe_unused = {
- 	{ .compatible = "qcom,eliza", .data = &ubwc_5_0_hbb15 },
- 	{ .compatible = "qcom,glymur", .data = &glymur_data},
- 	{ .compatible = "qcom,kaanapali", .data = &ubwc_6_0_hbb16 },
-+	{ .compatible = "qcom,kalambo", .data = &glymur_data },
- 	{ .compatible = "qcom,mahua", .data = &glymur_data },
- 	{ .compatible = "qcom,milos", .data = &milos_data },
- 	{ .compatible = "qcom,msm8226", .data = &no_ubwc_data },
+Changes in v5:
+- Collected all Reviewed-by tags received on v4.
+- Updated the commit text of the bindings patches [Krzysztof]
+- Converted only the critical GCC clocks to the latest clk_cbcr convention
+- Reorganize the series into logically independent patches [Krzysztof/Dmitry]
+- Added CX power domain support for DISPCC [Konrad]
+- Dropped DSI1 PHY clock input support from the driver, as these clocks
+  are not referenced by any frequency table.
+- Dropped moving dispcc driver to DT index approach patch as the
+  external sleep_clk is not there in the DTS, and no functional impact.
+- Dropped HW_CTRL_TRIGGER patch as it is not applicable [Konrad]
+- Link to v4: https://lore.kernel.org/r/20260604-shikra-dispcc-gpucc-v4-0-8204f1029311@oss.qualcomm.com
 
+Changes in v4:
+- Included new patch for Shikra DISPCC/GPUCC DT node support
+- Link to v3: https://lore.kernel.org/r/20260601-shikra-dispcc-gpucc-v3-0-61c1ba3735e8@oss.qualcomm.com
+
+Changes in v3:
+- Updated the QCM2290 GCC patch to use the .clk_cbcr convention
+- Extended the QCM2290 GPUCC bindings to add DSI1 PHY and Sleep clocks
+- Separated the patches as per the review comments in v2 series
+- Added Agatti DISPCC DT node changes as per the latest bindings changes
+- Link to v2: https://lore.kernel.org/r/20260528-shikra-dispcc-gpucc-v2-0-953f246a0fbb@oss.qualcomm.com
+
+Changes in v2:
+- Dropped QCM2290 GCC critical clocks modelling to kept them ON from probe.
+- Updated the QCM2290 DISPCC/GPUCC bindings to align for Shikra drivers reuse.
+- Reused the QCM2290 DISPCC driver for Shikra without modernizing
+  (keeping the clock-names approach) for now to avoid potential bindings ABI breakage.
+- Modernized QCM2290 GPUCC driver to use common qcom_cc_probe() model
+  and reuse for Shikra. 
+- Link to v1: https://lore.kernel.org/r/20260513-shikra-dispcc-gpucc-v1-0-5fd673146ab2@oss.qualcomm.com
+
+---
+Imran Shaik (16):
+      dt-bindings: clock: qcom,qcm2290-dispcc: Add missing power-domains property
+      clk: qcom: gcc-qcm2290: Keep the critical clocks always-on from probe
+      clk: qcom: dispcc-qcm2290: Move to the latest common qcom_cc_probe() model
+      clk: qcom: dispcc-qcm2290: Enable runtime PM support
+      clk: qcom: qcm2290: Set POLL_CFG_GDSCR flag for DISPCC and GPUCC GDSCs
+      clk: qcom: qcm2290: Add RETAIN_FF_ENABLE flag for DISPCC and GPUCC GDSCs
+      clk: qcom: qcm2290: Update DISPCC and GPUCC GDSC *wait_val values
+      clk: qcom: gpucc-qcm2290: Drop pm_clk handling
+      clk: qcom: gpucc-qcm2290: Move to the latest common qcom_cc_probe() model
+      clk: qcom: gpucc-qcm2290: Keep the critical clocks always-on from probe
+      clk: qcom: gpucc-qcm2290: Park RCG's clk source at XO during disable
+      arm64: dts: qcom: agatti: Add missing CX power domain to DISPCC
+      dt-bindings: clock: qcom: Add Qualcomm Shikra Display clock controller
+      dt-bindings: clock: qcom: Add Qualcomm Shikra GPU clock controller
+      clk: qcom: Add support for Qualcomm GPU Clock Controller on Shikra
+      arm64: dts: qcom: shikra: Add support for DISPCC/GPUCC nodes
+
+ .../bindings/clock/qcom,qcm2290-dispcc.yaml        |  15 ++-
+ .../bindings/clock/qcom,qcm2290-gpucc.yaml         |   4 +-
+ arch/arm64/boot/dts/qcom/agatti.dtsi               |   1 +
+ arch/arm64/boot/dts/qcom/shikra.dtsi               |  36 +++++++
+ drivers/clk/qcom/dispcc-qcm2290.c                  |  44 ++++----
+ drivers/clk/qcom/gcc-qcm2290.c                     | 113 +++------------------
+ drivers/clk/qcom/gpucc-qcm2290.c                   | 102 ++++++++-----------
+ 7 files changed, 137 insertions(+), 178 deletions(-)
+---
+base-commit: 1a1757b76427f6201bfe0bf1bea9f7574f332a93
+change-id: 20260513-shikra-dispcc-gpucc-6f59c23020f5
+
+Best regards,
 -- 
-2.34.1
+Imran Shaik <imran.shaik@oss.qualcomm.com>
 
