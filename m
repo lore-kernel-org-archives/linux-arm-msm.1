@@ -1,66 +1,38 @@
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F4323D5221
-	for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 15:21:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C5E62DFF04;
+	Sat, 18 Jul 2026 17:06:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784388097; cv=none; b=QzHPPBRB7mhDMTy2mfBeLw8nzVs+ilymafuYtLTXNfjK+EJV0Yj56H+zGmKn/kIvvmb7TqlA5W+h2fxe4ttGCRwzxO3A48qUlcqE/cbfeEbOumrnNqDgp4vnEThrVb1/GT4soHYqRD/zmrcUlyyAvXbYat0EjlFDml7GNuQ16ac=
+	t=1784394392; cv=none; b=cTEoJdrWby7AOL9+DTybwA+7KP9rLvQcVRbkfqc6uSmw3M8dHi3lvmFqR0Pe8QDC0fXRJFSl93KbauIEAkgqlPNzhhA25YTHElnyCsL8kyaqza/t7ba8wjvMVWmDlzKUHyf2KBbQt7m3nQv4e5TOmxESQ2+qvxDZppWN0/mtoMg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784388097; c=relaxed/simple;
-	bh=pDPn99N+ICG1K7TKp4PgKMOzXmJllsI8p04WRkYOgbQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=JhFKICvmqfY8CmQtSkCsDenNAM8xqJDN4DUaAoS1pR2XLHnDIXSGHzLLCI+nDvJszFRNqS9SeA7J5RJ7Tq+mX3xE3O14fKHVetob8kEU3YCum/mA6BF6hlV7euNXtT11ZPmKh9L8YgS7EjuEshtdDhUKC9DmVXb0J/oVDqcfaTQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=r0PTt4WX; arc=none smtp.client-ip=209.85.216.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1784394392; c=relaxed/simple;
+	bh=+pzC4MgggAqh94dvxJCxx/cQIdDxbqD+7O8JFQFFrks=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=aWv9Rdb05CwYxZrC7AnRGY6WJUYtLJcZ/lq31z4OQy20CyTto4SfK8TSBvh9lUIuxOVcOJzN3w723dHiBibT7UoQzQT3luhlUz1NNdVal7MhP2lWNCN/qhCFOxeNdJxDcrC2B3TfRSJrpTSAl+Z+8fZESfCPfETtaCzqDLIuytQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ChnISspS; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="r0PTt4WX"
-Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-38511175ad3so7289562a91.2
-        for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 08:21:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784388095; x=1784992895; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=yEoG8yRI+aYCT3H+YBQOUKD8pSL6ReWVyutnSqA0MV0=;
-        b=r0PTt4WXtJ3v2C/rv9/7EShJe/7MQFeGy3Ybudc5nJvVH3QKTchPNorZSG60Gz/wZA
-         /f3gN+/t7alJc5svO5W/dfZXltyVbW+t4t45BHa9UozbX4PEaWnOo3vk/tofYKkaSEP6
-         UCN/GMGprNpUcZXTuvvgvpEyxkpnxjlwhGER4rcXgAIrK/8h20o67SaugyoTVAPIrsXR
-         Z6/w2RqJxVj4hUi5BQ5R5ngZG//n+c2UKw79jLLuIIJIM//wd1CxlmaJZOqkMVoMkkrp
-         fwL3I52jdjVv4Z5CtLWDpESku2xTHPE2Z1hv1iaN6+/XcwrjIlEmGjT9zPdnkEHtqVnU
-         xMNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784388095; x=1784992895;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=yEoG8yRI+aYCT3H+YBQOUKD8pSL6ReWVyutnSqA0MV0=;
-        b=BsrpNeorL3EYAKNBtYZpqaQh3A+8pmp4PLHcQ6JZ3edXwyuHaDKulHOqubWltS7qel
-         Cg8UGfz/v6OqCuK5A3zwkAhe2GueKP98aKq+4BU6ELFx0G5P2t6BsCL4JJfY83GZo45C
-         LGCdL5urEv7H2Y3bWyvXljnpziCkbukzwB8XMaU9NcOpPZb8UomFNTy4eQpXuflrnuJv
-         OZjitk6wPWl9WYlGsTweYH7YV/Bxn4TYm3XoLp+CM4hdt/ya7n+rgvr5Xx9WD8r153wr
-         TfqJMKdye5HVbh4ehkgB3NXt51wCiXOYWcX8Zz6m3NwB+CDkHAEg4CpC5zPhAkieNDo0
-         kFyw==
-X-Forwarded-Encrypted: i=1; AHgh+RpHnWO4cadbCrY8HiOGy/GaDaWhLdLxslrskA8fHDTCaJAjBWYivDbJ1p0hB+XylPSvmO7FoWT6hBQxbRNv@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz+m+D6NoBtaczFVhtjM4idLgZtM6iNA4xlxIqYSmH3M+Zh5lUp
-	IZfBFPyvFF8llDLa/FeSxmQj/6OLQg/GYvOljrHkQitPZkAUxh5DuBak
-X-Gm-Gg: AfdE7ckKMYSShpPucZaU73dcKHlCnQtOQlrS/vmJ6e8eAdgryLAv2GemV+u3hF/A/YI
-	EGW3Tuixk8YqG0NR/HRb4SZNhW1j2x3I8mQ/Xh74VaTd2GWm6WCWRfJApMYqtxnTZ3k0NN75Ivo
-	Yl8Zm//iio+marynEdp0aR/8L5A5RQ1SVqgJEA7R3P/ddeUn8XiFSmkaUUVZkyH1SP+pPe8OPLh
-	jyhAJW1sdX5kC2KyGETbDky2HITbakhp2va3lDheGXAdKn4ClsPF8H5pryLEKqFzjnXL/WcWPlT
-	GBYTlmxq6Ed8rAmyQzBSMHP3/HGiLT4q4K+8pj1h8yPC5seexwDnHqINP9aXpaV98au9gwtx+KW
-	41GJ5zh8jHCMFV8ndb5BnhWs86mPdny8mY9LhJUMU+nNdemRbM6zEp4DDiPeJNrBqK8qKhe6fGg
-	z82YnD3sON
-X-Received: by 2002:a17:90b:1f8d:b0:38d:c0f9:30be with SMTP id 98e67ed59e1d1-38e4b578797mr7711017a91.38.1784388094777;
-        Sat, 18 Jul 2026 08:21:34 -0700 (PDT)
-Received: from [192.168.0.103] ([45.113.100.172])
-        by smtp.googlemail.com with ESMTPSA id 5a478bee46e88-31429f9bcccsm21303405eec.4.2026.07.18.08.21.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Jul 2026 08:21:34 -0700 (PDT)
-From: Biswapriyo Nath <nathbappai@gmail.com>
-Date: Sat, 18 Jul 2026 15:21:25 +0000
-Subject: [PATCH] arm64: dts: qcom: sm6125-xiaomi-ginkgo: Add vbus-supply in
- Type-C connector
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ChnISspS"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 2A1E5C2BCF4;
+	Sat, 18 Jul 2026 17:06:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1784394392;
+	bh=+pzC4MgggAqh94dvxJCxx/cQIdDxbqD+7O8JFQFFrks=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=ChnISspS8HzuW5859ZIErhewOP5Svk/r+BQN5bVBbYFQ1FJ0UyU40mO/XLY4vjHbI
+	 l1v+zEKduIVR3cs0g5B3uEcNoN+4a+7IwLDPg/SN0qqLmDfUNXsr/Q98iP9XJGPOcd
+	 vQZ+s1cxkIfPe7RuNsE5nRlIU+T0pVeueS0UOmxsi736zAP0dJvoFJ78275M+mnDU6
+	 pjNP79TXct3glV3hYQAIOgnfcrZ5aeTTxpvjpJ3dmFUt8QU9jLKVxdIDaECI0GB752
+	 P0Gc3OERjSQ4IrEuEUgrCdlFe1FzHjgIwDv8QE8MysD21CQ2YNWoDuBEve9n9Nv9j6
+	 0JGnq97Ni98pA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 04E24C4450A;
+	Sat, 18 Jul 2026 17:06:32 +0000 (UTC)
+From: Jens Glathe via B4 Relay <devnull+jens.glathe.oldschoolsolutions.biz@kernel.org>
+Date: Sat, 18 Jul 2026 19:06:29 +0200
+Subject: [PATCH 1/5] dt-bindings: usb: parade,ps8830: Add
+ parade,disable-usb4 property
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,65 +41,64 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260718-ginkgo-vbus-typec-v1-1-d5ed0aa6b78b@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/y2Nyw6CMBBFf4V07RDLu8QY/8OwKO2IVctrCtEQ/
- t0KbiY5yZ1zFkY4GiRWBgsbcTZkutYDPwRM3WXbIBjtmUXHKDvmvIDGtM+mg7meCNynRwVS5Fr
- EhdAy1sz/9SPezHtzXqudaaofqNxP9F+MOEw+5vYZs0gkt1gZnLZWygV4DTjV2702c8iAJ3maZ
- CKNikhfOqJwmORLddaG/pxZta5fYhs829MAAAA=
-X-Change-ID: 20260718-ginkgo-vbus-typec-a97d9389da3d
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, ~postmarketos/upstreaming@lists.sr.ht, 
- phone-devel@vger.kernel.org, Biswapriyo Nath <nathbappai@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784388090; l=1616;
- i=nathbappai@gmail.com; s=20260718; h=from:subject:message-id;
- bh=pDPn99N+ICG1K7TKp4PgKMOzXmJllsI8p04WRkYOgbQ=;
- b=7KDba2OaRdEYGWz/amL5v2WMGbUjUZyEWGEv+7QG7GQ5sPQLIaaMv/Wc6kT0U0i4LK470diaV
- WR9/mCnqATqCZqIstaZea6CsLysP2O7o4Ckvq4SAaMlNZNQjl97OBpZ
-X-Developer-Key: i=nathbappai@gmail.com; a=ed25519;
- pk=ATtK28d7wNTkFPtwgWLEaJ1T7ikcnGabljPw7CKsQ0Q=
+Message-Id: <20260718-ps883x-disable-usb4-v1-1-cec86d0b909e@oldschoolsolutions.biz>
+References: <20260718-ps883x-disable-usb4-v1-0-cec86d0b909e@oldschoolsolutions.biz>
+In-Reply-To: <20260718-ps883x-disable-usb4-v1-0-cec86d0b909e@oldschoolsolutions.biz>
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Heikki Krogerus <heikki.krogerus@linux.intel.com>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-usb@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ stable@vger.kernel.org, "Dr. David Alan Gilbert" <dave@treblig.org>, 
+ Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784394390; l=1158;
+ i=jens.glathe@oldschoolsolutions.biz; s=20240919;
+ h=from:subject:message-id;
+ bh=yrl6VP90X+qBDgzq2kPIZXWW8gy8rpei3j/WcM153qs=;
+ b=6G4y8ZLykC2QUUG4dfWiXI32wWerJe6esfFw3KbJfJZLUiI4JDqQYl/7mj88BqmQqJssaMILn
+ 21ybx/ri+6fDQP7ERROm3WUmrOprk1reEvYPHWR76UqnDwVSutt4EJ2
+X-Developer-Key: i=jens.glathe@oldschoolsolutions.biz; a=ed25519;
+ pk=JcRJqJc/y8LsxOlPakALD3juGfOKmFBWtO+GfELMJVg=
+X-Endpoint-Received: by B4 Relay for
+ jens.glathe@oldschoolsolutions.biz/20240919 with auth_id=216
+X-Original-From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+Reply-To: jens.glathe@oldschoolsolutions.biz
 
-VBUS supply property was moved from pmi632 typec node to USB-C connector.
-This fixes the following warning in kernel message.
-pmic@2:typec@1500: supply vdd-vbus not found, using dummy regulator
+From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
 
-Fixes: c1da9374c3e0 ("arm64: dts: qcom: sm6125-xiaomi-ginkgo: Add PMI632 Type-C property")
-Signed-off-by: Biswapriyo Nath <nathbappai@gmail.com>
+Document a new optional boolean property "parade,disable-usb4".
+When present, the retimer rejects USB4 mode by returning -EOPNOTSUPP,
+forcing a fallback to USB3 + DP Alternate Mode.
+
+Assisted-by: Grok(xAI):4.3
+Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
 ---
- arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi | 2 ++
- 1 file changed, 2 insertions(+)
+ Documentation/devicetree/bindings/usb/parade,ps8830.yaml | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi b/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
-index a5458ab41629..59042a593753 100644
---- a/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm6125-xiaomi-ginkgo-common.dtsi
-@@ -133,6 +133,8 @@ connector {
- 		typec-power-opmode = "default";
- 		pd-disable;
+diff --git a/Documentation/devicetree/bindings/usb/parade,ps8830.yaml b/Documentation/devicetree/bindings/usb/parade,ps8830.yaml
+index eaeab1c01a594..44242907461eb 100644
+--- a/Documentation/devicetree/bindings/usb/parade,ps8830.yaml
++++ b/Documentation/devicetree/bindings/usb/parade,ps8830.yaml
+@@ -66,6 +66,12 @@ properties:
+           Sideband Use (SBU) AUX lines endpoint to the Type-C connector for the purpose of
+           handling altmode muxing and orientation switching.
  
-+		vbus-supply = <&pmi632_vbus>;
++  parade,disable-usb4:
++    type: boolean
++    description:
++      When present, the retimer rejects USB4 mode (returns -EOPNOTSUPP).
++      This forces the Type-C stack to fall back to USB3 + DP Alternate Mode.
 +
- 		port {
- 			pmi632_hs_in: endpoint {
- 				remote-endpoint = <&usb_dwc3_hs>;
+ required:
+   - compatible
+   - reg
 
----
-base-commit: 0718283ab28bc3907e10b61a6b4be6fefa1cbb2f
-change-id: 20260718-ginkgo-vbus-typec-a97d9389da3d
-prerequisite-message-id: <20260519-fix-tcpm-vbus-v1-6-14754695282d@oss.qualcomm.com>
-prerequisite-patch-id: 6c6c95591d4aff3681de3a3bbeae9d23f77040c5
-prerequisite-patch-id: 51a84aabba9117f91505cc9c17f2c7064768ca33
-prerequisite-patch-id: 2432fbca7762ddb799b5c64f932760083ff0ea85
-prerequisite-patch-id: e3fe6166b11e43616b406a1ff6a8ac28611e7cdf
-prerequisite-patch-id: fe4070481a2bfc530e1a869bd981c32a8147f7e9
-prerequisite-patch-id: 4fc9afebebdfadfe644126dcdcdfe30f8e0ae685
+-- 
+2.53.0
 
-Best regards,
---  
-Biswapriyo Nath <nathbappai@gmail.com>
 
