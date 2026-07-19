@@ -1,45 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F396E347BDC;
-	Sun, 19 Jul 2026 06:28:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63E13F507;
+	Sun, 19 Jul 2026 06:43:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784442493; cv=none; b=q6YDoxFqSHNYRl+vzKqXrIz/Pqp5HR+XcDjWLNIyKs4etEURfb+bYXlyhfd9QkJP3rVPKS63FrMYtzHIbf7BnT74EFpFvbpNt8zyDghD1TESZwc/YPl3gXyWIfz6uPA5wOLdtuHqj4CKfDJ05mgyx9AmVi2u+bx+9ML3bYQ93+o=
+	t=1784443430; cv=none; b=AaodIQHdFg5rCHR65bOl++wXVTVbo7YZRV4RlPbkQJgngftfShAqvLt49PV2AGT5xxxSrlg7eIyV0Y8vXhhqzaknbb1Wwd0rsPVbNnNb2M+JIKT7Dr7OX1/2ZM9CXPB6wmYZkCXRHXHjDbt5FciQrnVZ4NY4g1IFlaoW+EKpRJI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784442493; c=relaxed/simple;
-	bh=9iw4M/eOzCAdUXCT4u6tAhY/unOg/V+D7Fc32V5Uzi4=;
+	s=arc-20240116; t=1784443430; c=relaxed/simple;
+	bh=GBjgmtAqD+aw7/cCyrWxT5N4xxE/egaH2Bp6QVMBsM8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=oWCoJn1PIr0KEmgJu7aEupVeVzgwpdp2cbZdOlGfEYdR3zeq9LgwQcCUGtLhJCKVKLHytTnT1Z2x13VMqXlqHMBAoQZ5hK6p7NaS2ZVTpUMaeIHlCFrodhL79Ev6gI4oT9DcQFCRXOVfo2qz2n8IpjKxNu0m5w9oeHUS9HUFCYM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=m6Yl3eow; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=NUzDYl537T2i25xIo2k5MQVb+Lc+ADpjAxUvcsc11ow8DshXktbMGXeLSJ1pxAtrLtZypY7wV6FlIE+zjDPUjsE63H7x7R6Bq+oQkb/XnhIdj9xHPak/paueKDWSDQ0SRhh0CMCadOPqEbJl4HtQABGQvFmC1c5l+yYPOhT+yIs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UQdnVp+8; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="m6Yl3eow"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 96D6D1F000E9;
-	Sun, 19 Jul 2026 06:28:10 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UQdnVp+8"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBF451F000E9;
+	Sun, 19 Jul 2026 06:43:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784442491;
-	bh=UQoXqfEBpAt6v+emI5izvhq1VvHsMHK/ap376N19A8A=;
+	s=k20260515; t=1784443428;
+	bh=SLQl6/ZZUHU837YWcDE8ts1N0/0M5SUGrVQi06gSLno=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=m6Yl3eowjZffPDvmmVJ55kv2AJc2VODML6zPwXABUiXiMUgci8v+ocgEnHEVKoL4K
-	 3KyXezS2Ee4JG7dTbkf9+vJ9Tf0SZ2LLtxzaKdh9Hf3REXGjwOIQv8ffAegBQlODd7
-	 DQaJ16fN0DRr1PZK/9jijyGS6OOTIa5cjdPC6IduaDmN3PIDq+jJrWGOtfAERVRXqy
-	 EnlqwTknoZZvoZ4zuoJV72+ztodAof1SMcgCQ04bZOpjFYcWvwMRlyCvDyhFPVfPww
-	 4yo9oYN8qPDf570GHVQqLGfmVJK9WVsxpcDS3ZslEzRa0KfkSPRD4Ra9mEGwxCtegh
-	 AzB9aJqSekWUQ==
-Date: Sun, 19 Jul 2026 08:28:07 +0200
+	b=UQdnVp+8dvCoRsUVrVpgGCNt39oqqv8caElyU3XF1drfpkXoXs9GJwY6VJdBZL/qe
+	 x54S5jVM6fDfNwfQoKv5n4vIu5NdrH+XktoF72MO7SIwlJ+1je2FczVBTLVTe3dvsX
+	 b5JvUAE5wfInIzK7x3GeP5b99QUoXQd3mOTlLugXRY+MPFLZmepafOgyxx41R2sZEp
+	 ElysEV9Ib0EfOYV7f7MCMxnYxZ0ZOIJYtETqCu/pYYRYyW9TURJhoGLVLpvSnVoYZP
+	 7cE0TqfY1tjfXVa3Mf+bf9qNH82IgnIpa8jZyMjyKJPXumc2vLsCJCvp7XKL2BgKln
+	 kPFro7/CZcx4A==
+Date: Sun, 19 Jul 2026 08:43:43 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+To: Qiang Yu <qiang.yu@oss.qualcomm.com>
 Cc: Vinod Koul <vkoul@kernel.org>, 
-	Kishon Vijay Abraham I <kishon@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
 	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Bryan O'Donoghue <bod@kernel.org>, 
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
-	linux-media@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v10 1/2] dt-bindings: phy: qcom: Add CSI2 C-PHY/DPHY
- schema
-Message-ID: <20260719-electronic-swine-from-hyperborea-b1edbc@quoll>
-References: <20260718-x1e-csi2-phy-v10-0-5720a7888953@linaro.org>
- <20260718-x1e-csi2-phy-v10-1-5720a7888953@linaro.org>
+	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, Philipp Zabel <p.zabel@pengutronix.de>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5 0/3] Add QMP PCIe multiple link-mode PHY support
+Message-ID: <20260719-beautiful-pheasant-of-variation-61b8cd@quoll>
+References: <20260717-glymur_linkmode_0717-v5-0-4f9e87a61463@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -48,23 +47,44 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260718-x1e-csi2-phy-v10-1-5720a7888953@linaro.org>
+In-Reply-To: <20260717-glymur_linkmode_0717-v5-0-4f9e87a61463@oss.qualcomm.com>
 
-On Sat, Jul 18, 2026 at 03:38:17AM +0100, Bryan O'Donoghue wrote:
-> Add a base schema for the MIPI CSI2 PHYs on Qualcomm SoCs. This PHY
-> supports both DPHY and CPHY operation. A special mode of DPHY operation -
-> called variously split-mode or combo-mode also allows for two sensors to be
-> connected to one PHY.
+On Fri, Jul 17, 2026 at 02:58:32AM -0700, Qiang Yu wrote:
+> Hi all,
 > 
-> The submitted binding here describes the DPHY modes of operation only. CPHY
-> is left to future work.
+> Some QMP PCIe PHY hardware blocks can be configured through a link-mode
+> register into different link topologies, such as a single wide link, or
+> multiple independent narrower links (e.g. x8 or x4+x4 mode on the Glymur
+> PCIe3 PHY).
 > 
-> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-> ---
->  .../bindings/phy/qcom,x1e80100-csi2-phy.yaml       | 195 +++++++++++++++++++++
->  1 file changed, 195 insertions(+)
+> Earlier revisions tried to extend the existing single-instance
+> phy-qcom-qmp-pcie.c driver to cover this hardware. That added a large
+> amount of conditional, multi-PHY logic to a driver whose data model
+> assumes one PHY per node.
+> 
+> This series adds a dedicated PHY provider driver,
+> phy-qcom-qmp-pcie-multiphy.c:
+> 
+> A single PHY provider node describes the shared hardware block. A new
+> "qcom,link-mode" property points at the TCSR syscon register that reports
+> the active topology; the driver reads it once at probe. #phy-cells = <1>
+> lets consumers pass a logical PHY index to obtain their sub-PHY. Match
+> data is indexed by link mode, and each link mode has its own array of
+> per-PHY config tables, so one shared provider exposes a different set of
+> logical PHYs depending on the active mode. The driver inherits the PHY
+> settings and link mode already programmed by UEFI, so only the no-CSR
+> reset is used, and no PHY setting tables or related structures are
+> defined. Each sub-PHY owns its register regions and power domain, so in a
+> bifurcated mode the links are brought up, and powered independently.
+> 
+> The driver is implemented and validated on Glymur, and is intended to
+> be extensible to other multi-mode QMP PCIe PHYs.
+> 
+> This series depends on a prerequisite patch by Krzysztof Kozlowski:
+> https://lore.kernel.org/r/20260420133616.88740-2-krzysztof.kozlowski@oss.qualcomm.com
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+There was a v2, still not applied I think:
+https://lore.kernel.org/all/20260609141608.354186-2-krzysztof.kozlowski@oss.qualcomm.com/
 
 Best regards,
 Krzysztof
