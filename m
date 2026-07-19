@@ -1,329 +1,324 @@
-Received: from aposti.net (aposti.net [185.119.170.32])
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C81F4153BE9;
-	Sun, 19 Jul 2026 12:55:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.119.170.32
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 157BF25C818
+	for <linux-arm-msm@vger.kernel.org>; Sun, 19 Jul 2026 13:47:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784465713; cv=none; b=ASHezExJILtw2irlrE4voDmZLWWAdT1Sl5XoNFL/fNZlFxfthKfIqtj0qIe6qmnBurWXHZRj5zftTPl4hQpewMTQpcGIDJMa843y3dLY+G5yLuyLUqVKmfxbQJzuV4bBLLy/rUGTxjh9IUB2fJ+c1nNNQSnil6opjQ5cleEdLGw=
+	t=1784468869; cv=none; b=pOA0htGWChZ6PloRp8HEPFpp26Zn10lY8Ue5XbbiYJd1IR3Ilk/KsFQT0NJCsda+qK4FShDj8XBHL8nY1SK3N25YhGzvMmsgDTTeTTZNYS3h+a+yIvwRa9/1NTz9WOEuqQ2TNTrumpu9Naot6Tsrg3LAexF9bGhVpiZQ9RfQqsE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784465713; c=relaxed/simple;
-	bh=gEhWSVkmaiCRRHw/wZCbCrw1IuLU51WzeuYRKtzSQY4=;
-	h=Message-ID:Subject:From:To:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=HqTQIeM2qA9kyAORYzlB57jChhwvmXJKfIngkJBFBbkkysyuEOyBa2BYuvQkm9/T2jZodvKIZa0zaxGjBFhNeHWoeJGniOeLlJ1wBDU5sN1nhiVC7JeEz6LnHxlUEZfClF6L59dD6ligUoA/wqI0EQRFmctKEyELOJjZI4p7nHQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=crapouillou.net; spf=pass smtp.mailfrom=crapouillou.net; dkim=pass (1024-bit key) header.d=crapouillou.net header.i=@crapouillou.net header.b=z63wrtdR; arc=none smtp.client-ip=185.119.170.32
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=crapouillou.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=crapouillou.net
+	s=arc-20240116; t=1784468869; c=relaxed/simple;
+	bh=AC1MUPJeho28pBdVYrHItIRHxia1fJXAF7Xy5HQMoms=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=rj5yUIl0D4oxM67gyIkR3L07qSwg2U6OR4myDTEVinQds1xSUz4Bni1cn1cqCeXD/14IkHHzSPRvoKNa8qRiAIM9P3bJogeBCpX8JKeC2AU2yXhJmZzBOi0nkh6dedo49iycEsyBygtjekmW0iUvo02Hg3l4FUvC6zC+0T1U7rE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=mGgAum+n; arc=none smtp.client-ip=209.85.128.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=crapouillou.net header.i=@crapouillou.net header.b="z63wrtdR"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=crapouillou.net;
-	s=mail; t=1784465709;
-	bh=gEhWSVkmaiCRRHw/wZCbCrw1IuLU51WzeuYRKtzSQY4=;
-	h=Subject:From:To:Date:In-Reply-To:References:From;
-	b=z63wrtdRW4T1uLwNAZv5/g3vU404MEwJYWT09pHMfbx2DJaEOlmj7VspONMYXCsqI
-	 R8REf49NPFrMSzR/OvMiDVruqKaWbGSUB1ottcguFk+1m56L3Y6lDofIiE791ilBX1
-	 XVQPwBGP8UXIEgxTyAcFXsbd0BrMi37v97Pc/sgU=
-Message-ID: <0cb39a3e2f2fc0efeed2b1bd5847655f7c8edbcf.camel@crapouillou.net>
-Subject: Re: [PATCH] remoteproc: Remove redundant dev_err()/dev_err_probe()
-From: Paul Cercueil <paul@crapouillou.net>
-To: Pan Chuang <panchuang@vivo.com>, Bjorn Andersson <andersson@kernel.org>,
-  Mathieu Poirier <mathieu.poirier@linaro.org>, Matthias Brugger
- <matthias.bgg@gmail.com>, AngeloGioacchino Del Regno
- <angelogioacchino.delregno@collabora.com>, Maxime Coquelin
- <mcoquelin.stm32@gmail.com>,  Alexandre Torgue
- <alexandre.torgue@foss.st.com>, "open list:REMOTE PROCESSOR (REMOTEPROC)
- SUBSYSTEM"	 <linux-remoteproc@vger.kernel.org>, open list
- <linux-kernel@vger.kernel.org>,  "open list:INGENIC JZ47xx SoCs"	
- <linux-mips@vger.kernel.org>, "moderated list:ARM/Mediatek SoC support"	
- <linux-arm-kernel@lists.infradead.org>, "moderated list:ARM/Mediatek SoC
- support" <linux-mediatek@lists.infradead.org>, "open list:ARM/QUALCOMM
- MAILING LIST"	 <linux-arm-msm@vger.kernel.org>, "moderated list:ARM/STM32
- ARCHITECTURE"	 <linux-stm32@st-md-mailman.stormreply.com>
-Date: Sun, 19 Jul 2026 14:55:05 +0200
-In-Reply-To: <20260717065224.600593-1-panchuang@vivo.com>
-References: <20260717065224.600593-1-panchuang@vivo.com>
-Autocrypt: addr=paul@crapouillou.net; prefer-encrypt=mutual;
- keydata=mQENBF0KhcEBCADkfmrzdTOp/gFOMQX0QwKE2WgeCJiHPWkpEuPH81/HB2dpjPZNW03ZM
- LQfECbbaEkdbN4YnPfXgcc1uBe5mwOAPV1MBlaZcEt4M67iYQwSNrP7maPS3IaQJ18ES8JJ5Uf5Uz
- FZaUawgH+oipYGW+v31cX6L3k+dGsPRM0Pyo0sQt52fsopNPZ9iag0iY7dGNuKenaEqkYNjwEgTtN
- z8dt6s3hMpHIKZFL3OhAGi88wF/21isv0zkF4J0wlf9gYUTEEY3Eulx80PTVqGIcHZzfavlWIdzhe
- +rxHTDGVwseR2Y1WjgFGQ2F+vXetAB8NEeygXee+i9nY5qt9c07m8mzjABEBAAG0JFBhdWwgQ2VyY
- 3VlaWwgPHBhdWxAY3JhcG91aWxsb3UubmV0PokBTgQTAQoAOBYhBNdHYd8OeCBwpMuVxnPua9InSr
- 1BBQJdCoXBAhsDBQsJCAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEHPua9InSr1BgvIH/0kLyrI3V0f
- 33a6D3BJwc1grbygPVYGuC5l5eMnAI+rDmLR19E2yvibRpgUc87NmPEQPpbbtAZt8On/2WZoE5OIP
- dlId/AHNpdgAtGXo0ZX4LGeVPjxjdkbrKVHxbcdcnY+zzaFglpbVSvp76pxqgVg8PgxkAAeeJV+ET
- 4t0823Gz2HzCL/6JZhvKAEtHVulOWoBh368SYdolp1TSfORWmHzvQiCCCA+j0cMkYVGzIQzEQhX7U
- rf9N/nhU5/SGLFEi9DcBfXoGzhyQyLXflhJtKm3XGB1K/pPulbKaPcKAl6rIDWPuFpHkSbmZ9r4KF
- lBwgAhlGy6nqP7O3u7q23hRU=
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="mGgAum+n"
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-49558ce01afso3841895e9.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 19 Jul 2026 06:47:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1784468866; x=1785073666; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=4XnV+FykkybVqG+qJ/ggN1ABFG87UERnEoUc/FfnJBw=;
+        b=mGgAum+nijmAjUbNnUbqDpSChCWusmIM4QSEZioO58O4EA69VXxFZhKwVrr/Ralz54
+         g6LSnLPsMuzLMu2cDAA16jqX0nRJ+lklaj4A9VYica4zADpL260AbGic7xeOiKpl09Gh
+         pU4MQethWodTV9gvZ1FvznB3VRAEpKAJDcpEVYAueomNXaWGaY1Rt5Nf2CQOjJ6fgI4m
+         ByyqwLN0vja2H6I0gw7fEA4bnVLmpbM5d8WuSna0UgD1ZNC/gPjluMXT69Ar55K+aQHj
+         V20xUkieEXKmRDVg97LTcUec+ATrImxyU3yhjiHek2kYeN0Fyq+gg/GZHtyOWnI1c8VI
+         RWqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784468866; x=1785073666;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=4XnV+FykkybVqG+qJ/ggN1ABFG87UERnEoUc/FfnJBw=;
+        b=r/PKlYBXvOYyz+Co/RAgd2qIkBslf8RWzEV//bUV6xm8j1nLroaTT1DlkGtbEN7hBp
+         S+wkL4Fe/9sc2t8c5g6b99AmfSciDThPxc+W0T5jGN0PHgL0Cy3nktxh/rqtwan7RjYN
+         y61UFQU8RFl1cEDDemdK3QlhbyTugHwrEt23HRRKLJ3+OyRyWGEMgDBMqTlQgBAVevTN
+         DWqwhH6m7ppW4AjnorGVqQ8g4kNu4ymaKURIFFotWhsXBM3pRKZ/gubqYGDWTVNAovo7
+         /cs0EQrggq6Nbd6tuDMVLDWm6kHHGKn1zZwvyX50II6fwNbddb8WHXSfllgSn7rIChcH
+         peVA==
+X-Forwarded-Encrypted: i=1; AHgh+RptsNj31G1eLsqHSqn6KbMZ4PIKhWZPpjEh2eXEz+/vYGfB1LrvPO2mcyqAwVQdHnSk7TJn3K6mmtk/nz0y@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzq9JPCcWpynSQimZsm61JURkhAul1sRL+5VaA0Rf7sTp2OgFCv
+	jihvtS3JrerX26YZVAVKo0tRV894zMi+KP4t1FmvBBKdPPCddRAEBl0SzzyVfg97kRY=
+X-Gm-Gg: AfdE7clGhVDvFIBp0aTEkjSel/RnyYSnDd41Vws3nydn1FCVcBYqCkni8fKrfecMnuW
+	E98ID9YMz8TxgZcs7G6VTi5+CV1QfjIgUAmhMj3plxEVf+Avh+NLleGZOtDmzlNiw11vFVd2Y/j
+	Atwi/IbQL+D6serUI1VfZ7I3C0cPw2+Xm7sq2zePyzkDpZBSCVw/cFRsx98+ns7uzHuLkKeIa2o
+	FJYjkps+dyyI93tSmB71qkOhNDenCLI9MeFyeIuAsRcNjN+FNKbfgKTgbrS0BKgdlxcLLXfy3wj
+	l6iXLtqnDWDwwo3p9k9MWLdocTIvEYNwo3Fbmv3nSwNNmon3mZUcOOpQmSYehwQDQXLCz3W5vz4
+	8tp3eQ/3xa0dnge8SbwLoIgUBnIom1qAWD5or7KFYreCESANurTf2MnY4gXntkTMlQwahzqR8Qy
+	siaig9EnAruKUe
+X-Received: by 2002:a05:6000:29c3:b0:460:3233:beee with SMTP id ffacd0b85a97d-47f6232e402mr7551351f8f.42.1784468866196;
+        Sun, 19 Jul 2026 06:47:46 -0700 (PDT)
+Received: from [192.168.0.35] ([109.76.79.119])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f63ed1911sm22345902f8f.22.2026.07.19.06.47.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 19 Jul 2026 06:47:45 -0700 (PDT)
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Date: Sun, 19 Jul 2026 14:47:40 +0100
+Subject: [PATCH v12 1/2] dt-bindings: phy: qcom: Add CSI2 C-PHY/DPHY schema
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260719-x1e-csi2-phy-v12-1-cc7311326d1b@linaro.org>
+References: <20260719-x1e-csi2-phy-v12-0-cc7311326d1b@linaro.org>
+In-Reply-To: <20260719-x1e-csi2-phy-v12-0-cc7311326d1b@linaro.org>
+To: Vinod Koul <vkoul@kernel.org>, 
+ Kishon Vijay Abraham I <kishon@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Bryan O'Donoghue <bod@kernel.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
+ linux-media@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6235;
+ i=bryan.odonoghue@linaro.org; h=from:subject:message-id;
+ bh=AC1MUPJeho28pBdVYrHItIRHxia1fJXAF7Xy5HQMoms=;
+ b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBqXNV+sD+2HdNBVGJbrmz7Ftn1cKJQuBNo+KzVj
+ ZykSc+USbCJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCalzVfgAKCRAicTuzoY3I
+ OhyrEACyT5DLK7ogJQq65UBK/r/kVSsvJyZIetufSjelyZLyoTkVFiUDD1AKDxy9JgkgpRpCoAn
+ uwvxw4AndHAJY1CEcUS/CBO0MCutBZCwnnnOKpABm92+a4a2jQCOTpHvQ782Ywsz7xcmt4tF7FQ
+ dniETf2ylH61bgyEnP9AbULHVYfLBU3NbFtKuMgAlaR0O/LyieHDQL6N1D8XNyw/dhAPQumvLns
+ miqdlg8xXji7dJ2/EK40hRtw8hsPGE7Pp2K2ojXGHIc3c8JpELtMO6MwJOBy7kmWZQs8o5jKpJo
+ XDI4DPbbLLeecGkr2La6Rm06wsMxTBmdazh8ukK9Ucv1LRkfdMGdWycV59KAd5nU9p9GwlNp3XZ
+ TrRGFigK/+Oe5XYMYjAuosyrZof8GD2YSVMJ88wbkf9fo4youbKzd1BEpovU4Ys33FCzDLC9+X/
+ 41AMfAGl/D7Wqvl28outJOJSvZKdoKRqcaw1mmMl0GGMrxBISgev5lxxa79REiwo6M1ZXopSzGA
+ GQgz+2FPg1jP4n1amii1eBB+ceqoQ6jaf/Cm5TTHs1SQI8a936gVOr8kN5NJkJ6u6qRfhSkzvjw
+ 2tZQ3LLhT4Byb0rT8hI2bgNES8o/4uK/+/sD8NdwdnekRb2kYQMf0ZOF30iJJTTIQCJshDIpVkA
+ A4YRmBT6Jau4lGA==
+X-Developer-Key: i=bryan.odonoghue@linaro.org; a=openpgp;
+ fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
-Hi,
+Add a base schema for the MIPI CSI2 PHYs on Qualcomm SoCs. This PHY
+supports both DPHY and CPHY operation. A special mode of DPHY operation -
+called variously split-mode or combo-mode also allows for two sensors to be
+connected to one PHY.
 
-Le vendredi 17 juillet 2026 =C3=A0 14:52 +0800, Pan Chuang a =C3=A9crit=C2=
-=A0:
-> Since commit 55b48e23f5c4 ("genirq/devres: Add error handling in
-> devm_request_*_irq()"), devm_request_irq() and
-> devm_request_threaded_irq()
-> automatically log detailed error messages on failure. Remove the
-> now-redundant driver-specific dev_err() and dev_err_probe() calls.
->=20
-> Signed-off-by: Pan Chuang <panchuang@vivo.com>
+The submitted binding here describes the DPHY modes of operation only. CPHY
+is left to future work.
 
-For Ingenic:
-Acked-by: Paul Cercueil <paul@crapouillou.net>
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+---
+ .../bindings/phy/qcom,x1e80100-csi2-phy.yaml       | 195 +++++++++++++++++++++
+ 1 file changed, 195 insertions(+)
 
-Cheers,
--Paul
+diff --git a/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+new file mode 100644
+index 0000000000000..880fe602945cb
+--- /dev/null
++++ b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+@@ -0,0 +1,195 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/phy/qcom,x1e80100-csi2-phy.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Qualcomm X1E80100 SoC CSI2 PHY
++
++maintainers:
++  - Bryan O'Donoghue <bod@kernel.org>
++
++description:
++  Qualcomm MIPI CSI2 C-PHY/D-PHY combination PHY. Connects MIPI CSI2 sensors
++  to Qualcomm's Camera CSI Decoder. The PHY supports both C-PHY and D-PHY
++  modes.
++
++properties:
++  compatible:
++    const: qcom,x1e80100-csi2-phy
++
++  reg:
++    maxItems: 1
++
++  "#phy-cells":
++    const: 1
++    description:
++      The single cell specifies the PHY operating mode.
++
++  clocks:
++    maxItems: 3
++
++  clock-names:
++    items:
++      - const: core
++      - const: timer
++      - const: ahb
++
++  interrupts:
++    maxItems: 1
++
++  operating-points-v2: true
++
++  opp-table:
++    type: object
++
++  power-domains:
++    items:
++      - description: Titan Top GDSC - Titan ISP Block, Global Distributed Switch Controller.
++      - description: MMCX voltage rail
++      - description: MXC or MXA voltage rail
++
++  power-domain-names:
++    items:
++      - const: top
++      - const: mmcx
++      - const: mx
++
++  vdda-0p9-supply:
++    description: Phandle to a 0.9V regulator supply to a PHY.
++
++  vdda-1p2-supply:
++    description: Phandle to 1.2V regulator supply to a PHY.
++
++  ports:
++    $ref: /schemas/graph.yaml#/properties/ports
++
++    properties:
++      port@0:
++        $ref: /schemas/graph.yaml#/$defs/port-base
++        description:
++          Sensor input. Always present. A single sensor is described by a
++          single endpoint with one to four data lanes. DPHY split mode,
++          where two independent sensors share the same PHY, is described
++          by two endpoints; endpoint@0 with exactly two data-lanes and
++          endpoint@1 with exactly one data-lane.
++        unevaluatedProperties: false
++
++        patternProperties:
++          "^endpoint(@[0-9a-f]+)?$":
++            $ref: /schemas/media/video-interfaces.yaml#
++            unevaluatedProperties: false
++            properties:
++              data-lanes:
++                minItems: 1
++                maxItems: 4
++
++            required:
++              - data-lanes
++              - remote-endpoint
++
++        allOf:
++          - if:
++              required:
++                - endpoint@1
++            then:
++              properties:
++                endpoint@0:
++                  properties:
++                    data-lanes:
++                      minItems: 2
++                      maxItems: 2
++                endpoint@1:
++                  properties:
++                    data-lanes:
++                      maxItems: 1
++              required:
++                - endpoint@0
++
++      port@1:
++        $ref: /schemas/graph.yaml#/properties/port
++        description: Output to the CAMSS CSID controller.
++
++    required:
++      - port@0
++      - port@1
++
++required:
++  - compatible
++  - reg
++  - "#phy-cells"
++  - clocks
++  - clock-names
++  - interrupts
++  - operating-points-v2
++  - power-domains
++  - power-domain-names
++  - vdda-0p9-supply
++  - vdda-1p2-supply
++  - ports
++
++additionalProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/interrupt-controller/arm-gic.h>
++    #include <dt-bindings/clock/qcom,x1e80100-camcc.h>
++    #include <dt-bindings/clock/qcom,x1e80100-gcc.h>
++    #include <dt-bindings/power/qcom,rpmhpd.h>
++
++    phy@ace4000 {
++        compatible = "qcom,x1e80100-csi2-phy";
++        reg = <0x0ace4000 0x2000>;
++        #phy-cells = <1>;
++
++        clocks = <&camcc CAM_CC_CSIPHY0_CLK>,
++                 <&camcc CAM_CC_CSI0PHYTIMER_CLK>,
++                 <&camcc CAM_CC_CORE_AHB_CLK>;
++        clock-names = "core",
++                      "timer",
++                      "ahb";
++
++        interrupts = <GIC_SPI 477 IRQ_TYPE_EDGE_RISING>;
++
++        operating-points-v2 = <&csiphy_opp_table>;
++
++        power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>,
++                        <&rpmhpd RPMHPD_MMCX>,
++                        <&rpmhpd RPMHPD_MX>;
++        power-domain-names = "top",
++                             "mmcx",
++                             "mx";
++
++        vdda-0p9-supply = <&vreg_l2c_0p9>;
++        vdda-1p2-supply = <&vreg_l1c_1p2>;
++
++        ports {
++            #address-cells = <1>;
++            #size-cells = <0>;
++
++            port@0 {
++                reg = <0>;
++                csiphy0_in: endpoint {
++                    data-lanes = <0 1 2 3>;
++                    remote-endpoint = <&sensor_out>;
++                };
++            };
++
++            port@1 {
++                reg = <1>;
++                csiphy0_out: endpoint {
++                    remote-endpoint = <&csid_in>;
++                };
++            };
++        };
++
++        csiphy_opp_table: opp-table {
++            compatible = "operating-points-v2";
++
++            opp-300000000 {
++                opp-hz = /bits/ 64 <300000000>;
++                required-opps = <&rpmhpd_opp_low_svs_d1>,
++                                <&rpmhpd_opp_low_svs_d1>;
++            };
++        };
++    };
 
-> ---
-> =C2=A0drivers/remoteproc/da8xx_remoteproc.c=C2=A0=C2=A0=C2=A0 |=C2=A0 2 +=
--
-> =C2=A0drivers/remoteproc/ingenic_rproc.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0 |=C2=A0 4 +---
-> =C2=A0drivers/remoteproc/keystone_remoteproc.c |=C2=A0 4 ++--
-> =C2=A0drivers/remoteproc/mtk_scp.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 4 +---
-> =C2=A0drivers/remoteproc/qcom_q6v5.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 | 20 +++++---------------
-> =C2=A0drivers/remoteproc/qcom_sysmon.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 |=C2=A0 2 --
-> =C2=A0drivers/remoteproc/qcom_wcnss.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 |=C2=A0 4 +---
-> =C2=A0drivers/remoteproc/stm32_rproc.c=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 |=C2=A0 3 +--
-> =C2=A08 files changed, 12 insertions(+), 31 deletions(-)
->=20
-> diff --git a/drivers/remoteproc/da8xx_remoteproc.c
-> b/drivers/remoteproc/da8xx_remoteproc.c
-> index 23fca7176539..006fa7b56727 100644
-> --- a/drivers/remoteproc/da8xx_remoteproc.c
-> +++ b/drivers/remoteproc/da8xx_remoteproc.c
-> @@ -298,7 +298,7 @@ static int da8xx_rproc_probe(struct
-> platform_device *pdev)
-> =C2=A0					handle_event, 0, "da8xx-
-> remoteproc",
-> =C2=A0					rproc);
-> =C2=A0	if (ret)
-> -		return dev_err_probe(dev, ret,
-> "devm_request_threaded_irq error\n");
-> +		return ret;
-> =C2=A0
-> =C2=A0	/*
-> =C2=A0	 * rproc_add() can end up enabling the DSP's clk with the
-> DSP
-> diff --git a/drivers/remoteproc/ingenic_rproc.c
-> b/drivers/remoteproc/ingenic_rproc.c
-> index 1b78d8ddeacf..252519f48964 100644
-> --- a/drivers/remoteproc/ingenic_rproc.c
-> +++ b/drivers/remoteproc/ingenic_rproc.c
-> @@ -219,10 +219,8 @@ static int ingenic_rproc_probe(struct
-> platform_device *pdev)
-> =C2=A0
-> =C2=A0	ret =3D devm_request_irq(dev, vpu->irq, vpu_interrupt,
-> IRQF_NO_AUTOEN,
-> =C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 "VPU", rproc);
-> -	if (ret < 0) {
-> -		dev_err(dev, "Failed to request IRQ\n");
-> +	if (ret < 0)
-> =C2=A0		return ret;
-> -	}
-> =C2=A0
-> =C2=A0	ret =3D devm_rproc_add(dev, rproc);
-> =C2=A0	if (ret) {
-> diff --git a/drivers/remoteproc/keystone_remoteproc.c
-> b/drivers/remoteproc/keystone_remoteproc.c
-> index 83763d640c4e..407d6034f748 100644
-> --- a/drivers/remoteproc/keystone_remoteproc.c
-> +++ b/drivers/remoteproc/keystone_remoteproc.c
-> @@ -411,7 +411,7 @@ static int keystone_rproc_probe(struct
-> platform_device *pdev)
-> =C2=A0	ret =3D devm_request_irq(dev, ksproc->irq_ring,
-> keystone_rproc_vring_interrupt,
-> =C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 IRQF_NO_AUTOEN, dev_name(de=
-v),
-> ksproc);
-> =C2=A0	if (ret)
-> -		return dev_err_probe(dev, ret, "failed to request
-> vring interrupt\n");
-> +		return ret;
-> =C2=A0
-> =C2=A0	ksproc->irq_fault =3D platform_get_irq_byname(pdev,
-> "exception");
-> =C2=A0	if (ksproc->irq_fault < 0)
-> @@ -419,7 +419,7 @@ static int keystone_rproc_probe(struct
-> platform_device *pdev)
-> =C2=A0	ret =3D devm_request_irq(dev, ksproc->irq_fault,
-> keystone_rproc_exception_interrupt,
-> =C2=A0			=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 IRQF_NO_AUTOEN, dev_name(de=
-v),
-> ksproc);
-> =C2=A0	if (ret)
-> -		return dev_err_probe(dev, ret, "failed to enable
-> exception interrupt\n");
-> +		return ret;
-> =C2=A0
-> =C2=A0	ksproc->kick_gpio =3D devm_gpiod_get(dev, "kick", GPIOD_ASIS);
-> =C2=A0	ret =3D PTR_ERR_OR_ZERO(ksproc->kick_gpio);
-> diff --git a/drivers/remoteproc/mtk_scp.c
-> b/drivers/remoteproc/mtk_scp.c
-> index 436656bdfa8b..9751acc2bf83 100644
-> --- a/drivers/remoteproc/mtk_scp.c
-> +++ b/drivers/remoteproc/mtk_scp.c
-> @@ -1246,10 +1246,8 @@ static struct mtk_scp *scp_rproc_init(struct
-> platform_device *pdev,
-> =C2=A0					scp_irq_handler,
-> IRQF_ONESHOT,
-> =C2=A0					pdev->name, scp);
-> =C2=A0
-> -	if (ret) {
-> -		dev_err(dev, "failed to request irq\n");
-> +	if (ret)
-> =C2=A0		goto remove_subdev;
-> -	}
-> =C2=A0
-> =C2=A0	return scp;
-> =C2=A0
-> diff --git a/drivers/remoteproc/qcom_q6v5.c
-> b/drivers/remoteproc/qcom_q6v5.c
-> index 0206a4a19254..1075ef4027b7 100644
-> --- a/drivers/remoteproc/qcom_q6v5.c
-> +++ b/drivers/remoteproc/qcom_q6v5.c
-> @@ -302,10 +302,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5,
-> struct platform_device *pdev,
-> =C2=A0					NULL, q6v5_wdog_interrupt,
-> =C2=A0					IRQF_TRIGGER_RISING |
-> IRQF_ONESHOT,
-> =C2=A0					"q6v5 wdog", q6v5);
-> -	if (ret) {
-> -		dev_err(&pdev->dev, "failed to acquire wdog IRQ\n");
-> +	if (ret)
-> =C2=A0		return ret;
-> -	}
-> =C2=A0
-> =C2=A0	q6v5->fatal_irq =3D platform_get_irq_byname(pdev, "fatal");
-> =C2=A0	if (q6v5->fatal_irq < 0)
-> @@ -315,10 +313,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5,
-> struct platform_device *pdev,
-> =C2=A0					NULL, q6v5_fatal_interrupt,
-> =C2=A0					IRQF_TRIGGER_RISING |
-> IRQF_ONESHOT,
-> =C2=A0					"q6v5 fatal", q6v5);
-> -	if (ret) {
-> -		dev_err(&pdev->dev, "failed to acquire fatal
-> IRQ\n");
-> +	if (ret)
-> =C2=A0		return ret;
-> -	}
-> =C2=A0
-> =C2=A0	q6v5->ready_irq =3D platform_get_irq_byname(pdev, "ready");
-> =C2=A0	if (q6v5->ready_irq < 0)
-> @@ -328,10 +324,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5,
-> struct platform_device *pdev,
-> =C2=A0					NULL, q6v5_ready_interrupt,
-> =C2=A0					IRQF_TRIGGER_RISING |
-> IRQF_ONESHOT,
-> =C2=A0					"q6v5 ready", q6v5);
-> -	if (ret) {
-> -		dev_err(&pdev->dev, "failed to acquire ready
-> IRQ\n");
-> +	if (ret)
-> =C2=A0		return ret;
-> -	}
-> =C2=A0
-> =C2=A0	q6v5->handover_irq =3D platform_get_irq_byname(pdev,
-> "handover");
-> =C2=A0	if (q6v5->handover_irq < 0)
-> @@ -342,10 +336,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5,
-> struct platform_device *pdev,
-> =C2=A0					IRQF_TRIGGER_RISING |
-> IRQF_ONESHOT |
-> =C2=A0					IRQF_NO_AUTOEN,
-> =C2=A0					"q6v5 handover", q6v5);
-> -	if (ret) {
-> -		dev_err(&pdev->dev, "failed to acquire handover
-> IRQ\n");
-> +	if (ret)
-> =C2=A0		return ret;
-> -	}
-> =C2=A0
-> =C2=A0	q6v5->stop_irq =3D platform_get_irq_byname(pdev, "stop-ack");
-> =C2=A0	if (q6v5->stop_irq < 0)
-> @@ -355,10 +347,8 @@ int qcom_q6v5_init(struct qcom_q6v5 *q6v5,
-> struct platform_device *pdev,
-> =C2=A0					NULL, q6v5_stop_interrupt,
-> =C2=A0					IRQF_TRIGGER_RISING |
-> IRQF_ONESHOT,
-> =C2=A0					"q6v5 stop", q6v5);
-> -	if (ret) {
-> -		dev_err(&pdev->dev, "failed to acquire stop-ack
-> IRQ\n");
-> +	if (ret)
-> =C2=A0		return ret;
-> -	}
-> =C2=A0
-> =C2=A0	q6v5->state =3D devm_qcom_smem_state_get(&pdev->dev, "stop",
-> &q6v5->stop_bit);
-> =C2=A0	if (IS_ERR(q6v5->state)) {
-> diff --git a/drivers/remoteproc/qcom_sysmon.c
-> b/drivers/remoteproc/qcom_sysmon.c
-> index a0830a48b1f4..61e1038328e8 100644
-> --- a/drivers/remoteproc/qcom_sysmon.c
-> +++ b/drivers/remoteproc/qcom_sysmon.c
-> @@ -662,8 +662,6 @@ struct qcom_sysmon *qcom_add_sysmon_subdev(struct
-> rproc *rproc,
-> =C2=A0						IRQF_TRIGGER_RISING
-> | IRQF_ONESHOT,
-> =C2=A0						"q6v5 shutdown-ack",
-> sysmon);
-> =C2=A0		if (ret) {
-> -			dev_err(sysmon->dev,
-> -				"failed to acquire shutdown-ack
-> IRQ\n");
-> =C2=A0			kfree(sysmon);
-> =C2=A0			return ERR_PTR(ret);
-> =C2=A0		}
-> diff --git a/drivers/remoteproc/qcom_wcnss.c
-> b/drivers/remoteproc/qcom_wcnss.c
-> index 3392c9380202..e9a00efe97f6 100644
-> --- a/drivers/remoteproc/qcom_wcnss.c
-> +++ b/drivers/remoteproc/qcom_wcnss.c
-> @@ -521,10 +521,8 @@ static int wcnss_request_irq(struct qcom_wcnss
-> *wcnss,
-> =C2=A0					NULL, thread_fn,
-> =C2=A0					IRQF_TRIGGER_RISING |
-> IRQF_ONESHOT,
-> =C2=A0					"wcnss", wcnss);
-> -	if (ret) {
-> -		dev_err(&pdev->dev, "request %s IRQ failed\n",
-> name);
-> +	if (ret)
-> =C2=A0		return ret;
-> -	}
-> =C2=A0
-> =C2=A0	/* Return the IRQ number if the IRQ was successfully
-> acquired */
-> =C2=A0	return irq_number;
-> diff --git a/drivers/remoteproc/stm32_rproc.c
-> b/drivers/remoteproc/stm32_rproc.c
-> index 0e5d64fbe52c..1fe4cdc0a13a 100644
-> --- a/drivers/remoteproc/stm32_rproc.c
-> +++ b/drivers/remoteproc/stm32_rproc.c
-> @@ -682,8 +682,7 @@ static int stm32_rproc_parse_dt(struct
-> platform_device *pdev,
-> =C2=A0		err =3D devm_request_irq(dev, irq, stm32_rproc_wdg, 0,
-> =C2=A0				=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 dev_name(dev), pdev);
-> =C2=A0		if (err)
-> -			return dev_err_probe(dev, err,
-> -					=C2=A0=C2=A0=C2=A0=C2=A0 "failed to request wdg
-> irq\n");
-> +			return err;
-> =C2=A0
-> =C2=A0		ddata->wdg_irq =3D irq;
-> =C2=A0
+-- 
+2.54.0
+
