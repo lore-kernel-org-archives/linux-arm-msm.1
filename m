@@ -1,137 +1,313 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4429229C33F;
-	Sun, 19 Jul 2026 19:58:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D42C2F851;
+	Sun, 19 Jul 2026 21:45:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784491140; cv=none; b=X9skxSpJ1LZfLoqKtXUPhjFw8DxlE4p+OwF7Vqg3Mq1P2V/ZIC/KjzTH11BVc87cBB+tN6qBGorVAfHfShlLtlT9E/GALJpjWeZPI4yAJXaz7So87aKWnE+9m8AsO3R4qwlO9imcHxglYG0qzWkXTYx3ShyV0/200+iMwJDKYWo=
+	t=1784497516; cv=none; b=PYNrsMkoFUJv/agGlym5i60K7u3+c8MRpfGBHZiYhxh42tEA/Cz7+UOmZv9O6D6m2cIA/tvfaXoeqGey4LvrHW4K1bEFYSJwle70D1VTNGFbT+8yR9pOgDYUK9ni6Z8Gdo6o1ttE65hOc+R8Ec2T4C38FDp/M99g0U/QUrFW00s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784491140; c=relaxed/simple;
-	bh=MdGf/q8cH48YhOxGOU9vZCobhS12SJhHSg09QFu6zFo=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=e1oFPAfuZLmKKF0Zam2V8j81Rhgf618Nf5JCjJfslrze+S1HH0GmWHZy0UdH/uxejkV9jdGQ+Hs2q97eXWlQWLyD9ZfgaJay5mXZFraFGwudcp/7vJ8qy+4CwECq8pwRQesuDIv12W18gy7h/NXb19QY6HFBjqDAhgR3asWU1Kw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=aAAXNh5g; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
+	s=arc-20240116; t=1784497516; c=relaxed/simple;
+	bh=06RORYZVy+l1c/0jcgQo/Nfh2IBrxjzShSvFNl87FvY=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=QZ6gRb5RisONNflfhdN91iZJi/Fc/3BunYWY6AEhlBUbgy1UpcsfNnK29KgbDUFxWUVV6DtutJb4JGbXlLkQZMh2p9o0F355GVxRFsU/NtrXlInNrigW339N/u8YKLei2pFtwE73fAMwhsQUiOnyt7qcEFw5KfPvr9xLRWUZvgw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Waa1AFQM; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="aAAXNh5g"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66JHIITM090900;
-	Sun, 19 Jul 2026 19:58:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=tEzDJvW5UDDMSbpE5FQiM9F8jUc4zEDNPh3
-	tDkslJfI=; b=aAAXNh5gwQh0mZfFM8o1ssxD3tL+qktnUwQ9wFsgrvwU9VmhpEB
-	WiSyGIOy5ogqrLiYJr7yYH2/OwLpudTcPUjVyhd/UQbj7YavJZIXQibRgRs2tBk7
-	gvQdx0tPYnH/viZsvkGCsgoBH5H4ZhesvkdwZJTY985G2XTIaTKkD5wkwz8Qi5oJ
-	A2Vh/EudwcbW1rpETnUyHPEbYhUK8U+EQk9zLsN4KbAA9Q5/bNByVjifNfgANpFp
-	FwU6R7CbGCyAIU5wnBJvj0zkCt8JmeUQCZcmZRYX2gKhZ57Gf9464LI5rUfTufOs
-	+aSv9vLH0Mu2vwxgaCv1MGU1V7CxTB5/OUQ==
-Received: from apblrppmta02.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fg2bnkdfv-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sun, 19 Jul 2026 19:58:40 +0000 (GMT)
-Received: from pps.filterd (APBLRPPMTA02.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA02.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTP id 66JJwa1x003189;
-	Sun, 19 Jul 2026 19:58:36 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 4fgj3v6h06-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sun, 19 Jul 2026 19:58:36 +0000 (GMT)
-Received: from APBLRPPMTA02.qualcomm.com (APBLRPPMTA02.qualcomm.com [127.0.0.1])
-	by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 66JJwa8j003184;
-	Sun, 19 Jul 2026 19:58:36 GMT
-Received: from hu-devc-hyd-u22-c.qualcomm.com ([10.213.101.157])
-	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 66JJwaRv003182
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sun, 19 Jul 2026 19:58:36 +0000 (GMT)
-Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 2342877)
-	id 52B5D647; Mon, 20 Jul 2026 01:28:35 +0530 (+0530)
-From: Nitin Rawat <nitin.rawat@oss.qualcomm.com>
-To: krzk+dt@kernel.org, robh@kernel.org, andersson@kernel.org, mani@kernel.org,
-        alim.akhtar@samsung.com, bvanassche@acm.org, avri.altman@wdc.com,
-        conor+dt@kernel.org
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-scsi@vger.kernel.org,
-        Nitin Rawat <nitin.rawat@oss.qualcomm.com>
-Subject: [PATCH V2] scsi: ufs: dt-bindings: Document the Maili UFS Controller
-Date: Mon, 20 Jul 2026 01:28:33 +0530
-Message-Id: <20260719195833.136543-1-nitin.rawat@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Waa1AFQM"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B7592C2BCF7;
+	Sun, 19 Jul 2026 21:45:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1784497515;
+	bh=06RORYZVy+l1c/0jcgQo/Nfh2IBrxjzShSvFNl87FvY=;
+	h=From:Date:Subject:To:Cc:Reply-To:From;
+	b=Waa1AFQM/65PVNjwfFz1Bt+9wb5JOn6uO+1zPZS9lsgCo36JW0I+CbxEaQVaST/pF
+	 +6SNFi7oDcAfXIRlBvKNTnbmTrzBkq/FPDDJGtKMymRBqFZ9dUF1ERldMPAMJdjF06
+	 kTfogolMK4UP5DUOJeveJf+9u8eqI3Bb/CP958dD+bq1ZrwnENme15EbbtfTvEzvvQ
+	 fv7X27/ex6geFtw6kvoT/+hQ65RBedrBBXobhhXlGkQQo7EeVjm6RTwXtGJJPqqhBw
+	 KIGrEJtWp8BfSlycjm0pssimBnPXMDlf5/6Wn32AKxmzeNq6ncr2NhZEOBg9s/dheX
+	 3ik1yW2kLUBqA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 93E5AC44512;
+	Sun, 19 Jul 2026 21:45:15 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Sun, 19 Jul 2026 23:45:05 +0200
+Subject: [PATCH RFC v2] wifi: ath10k: make in-order rx amsdu buffers
+ persistent
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE5MDIyMyBTYWx0ZWRfX3KiFHkWARBdf
- 06kVuASVwPMXpr30/kHhZ9LBJsT40+kgUmLvoOLWhm+zp4ubyAsFtyi3Y9OljBFGtULDwjaVhJ9
- TPJ8CouYYtk5IEOKWhOjcCus0Qh/QBKEw4zZwrrn1CaLcptxQ0UarYk5C9Hd5dOEOPosD3/ZVhT
- I4GhLCXgXeH75KJg9Ywse547DKiSU31e/CIrP3I+RInGWgLoFfFq+hwH8v1mBa97hkTgtiZFiy3
- zAhiYPjjxnkf6RgiZGqB9qXSQ1Lb0oKk+OndEH8wO0mYLEtJGB0AgFAWP2OCeGzP4uhr4pXdCgT
- K1Ez2NfGCvv+jucR22CAWxg2wtT2754R8q5IlFC9Let25d3W6SCP8RHTU4IAPZXL4zQWhH4vsMD
- wxnRl8yzTDzcriyRVzPF55uHw/69zd2QT+KWZVW9a7r3nH3SlnBugs0vBg1b5HzW7HKmBLDPhX4
- 263lLkgy0AWWTI3bBzg==
-X-Proofpoint-ORIG-GUID: HXdRCbFW1qHbusG2gpMYE73xQEZtFZiu
-X-Proofpoint-GUID: HXdRCbFW1qHbusG2gpMYE73xQEZtFZiu
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE5MDIyMyBTYWx0ZWRfX3Gu0SI8/+dEj
- iwkP+2eRNMWc/L37hUkgfrxLxGamzzAspP9DFJFk3bt9TTXYTq4ETRwSVlQyXy0duxk40+G7mss
- 2Ser6vq7GEc0Fr5GDbKfu0+YqwHSfaE=
-X-Authority-Analysis: v=2.4 cv=deOwG3Xe c=1 sm=1 tr=0 ts=6a5d2c70 cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8 a=3pRFFtUwbMGDAvonun0A:9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-19_06,2026-07-17_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 malwarescore=0 clxscore=1015 phishscore=0
- suspectscore=0 impostorscore=0 lowpriorityscore=0 adultscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607190223
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260719-ath10k-a-msdu-v2-1-f479bb9d1217@ixit.cz>
+X-B4-Tracking: v=1; b=H4sIAGBFXWoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHQUlJIzE
+ vPSU3UzU4B8JSMDIzMDc0NL3cSSDEODbN1E3dzilFLdZBNLY2OT1CQDS8MUJaCegqLUtMwKsHn
+ RSkFuzkqxtbUASGkunmQAAAA=
+X-Change-ID: 20260719-ath10k-a-msdu-c49334eb091d
+To: Jeff Johnson <jjohnson@kernel.org>, 
+ Johannes Berg <johannes.berg@intel.com>, 
+ Kalle Valo <kvalo@qca.qualcomm.com>, 
+ Michal Kazior <michal.kazior@tieto.com>
+Cc: linux-wireless@vger.kernel.org, ath10k@lists.infradead.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ phone-devel@vger.kernel.org, Richard Acayan <mailingradian@gmail.com>, 
+ David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8018; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=eJO73j6StWvYoT6k/tDaKaIZy8rPtLgZblz2V5IMI5w=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqXUVqGCRYP+kPct4/I2100bua9kIokiDzlCmsh
+ Is1Hny2IVSJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCal1FagAKCRBgAj/E00kg
+ clEpD/9nZOZRFFop8rj3IcW7WAwZGdTRjwGyv2KtHSpDFMsr0PrHD0lyP0m2iU3FMDMyO1JL/hO
+ 5zmtvaE/dSMLMJ32Hu1Enf2cP6wIMYiEieADJGj9qDArxxDv0sUhTPz1h4n4mpVQThW8sLBPVok
+ GnnDtAAp5x+Bxx6kP3h+RU+rQyxdzoMYz0nas7W3hcS05ch6e04MJuLlfEvHDy3WzDoM1DQT8W7
+ qX7lEDuNx7fo74LWvh8vMJJae8eC0ig2cuCq9aXR4hjYZXtXOvdZRqBNvVANkZEJXLDSng0WV4M
+ KkfQmagU51s9YjR9iZq+YN88bbsM9A3oehzOFmRcVynspSM3At0TJvNN5O7OPtec1eibU/4L6BX
+ Kv+oJ//9lAprcfOpSJwRyOajeW+K8dN27tCOcjmW2qCrQmX3zXu23EmomF0gxL8Tjn01M6KdVoU
+ n0VI57tB7DwOPcmit9CtdxWFCJ1aujywefrCEPQRbPqWIh9tigQeD/Opc7So0oxw63ADxptLfR3
+ 0A3zwheiUCO0F+T08MF4jP6sKzVOxgSRUUwhFJMue1c06szlQO2e95sOd6xUri1fBUqql2yt/iL
+ rssawXoe9hnrnQi8Sf5LXfhAxW4TYN5MLRluNE8D5x9By0e9Dbd0wJhXbhzuD7ospFdMqUFxd0x
+ dzHns4MoZKJZlHQ==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-Document the UFS Controller on Maili SoC.
+From: Richard Acayan <mailingradian@gmail.com>
 
-Signed-off-by: Nitin Rawat <nitin.rawat@oss.qualcomm.com>
+The WCN3990 might split MSDUs among multiple "in-order" indications. The
+driver needs information from previous indications to handle MPDUs that
+are not started by the same indications that complete them. Move the
+list that tracks unprocessed MSDUs to the driver state so the driver can
+handle MPDUs that are split in this way and be less confused.
+
+Fixes: c545070e404b ("ath10k: implement rx reorder support")
+Signed-off-by: Richard Acayan <mailingradian@gmail.com>
+Co-developed-by: David Heidelberg <david@ixit.cz>
+Signed-off-by: David Heidelberg <david@ixit.cz>
 ---
-Change from v1:
-1. Addressed Krzysztof's comment to update 'qcom,maili-ufshc'
-   to the allOf condition required for MCQ targets.
----
- Documentation/devicetree/bindings/ufs/qcom,sm8650-ufshc.yaml | 3 +++
- 1 file changed, 3 insertions(+)
+This one we have in-tree forever.
 
-diff --git a/Documentation/devicetree/bindings/ufs/qcom,sm8650-ufshc.yaml b/Documentation/devicetree/bindings/ufs/qcom,sm8650-ufshc.yaml
-index b441f0d26081..d03295806657 100644
---- a/Documentation/devicetree/bindings/ufs/qcom,sm8650-ufshc.yaml
-+++ b/Documentation/devicetree/bindings/ufs/qcom,sm8650-ufshc.yaml
-@@ -18,6 +18,7 @@ select:
-           - qcom,eliza-ufshc
-           - qcom,hawi-ufshc
-           - qcom,kaanapali-ufshc
-+          - qcom,maili-ufshc
-           - qcom,nord-ufshc
-           - qcom,sm8650-ufshc
-           - qcom,sm8750-ufshc
-@@ -31,6 +32,7 @@ properties:
-           - qcom,eliza-ufshc
-           - qcom,hawi-ufshc
-           - qcom,kaanapali-ufshc
-+          - qcom,maili-ufshc
-           - qcom,nord-ufshc
-           - qcom,sm8650-ufshc
-           - qcom,sm8750-ufshc
-@@ -78,6 +80,7 @@ allOf:
-           contains:
-             enum:
-               - qcom,eliza-ufshc
-+              - qcom,maili-ufshc
-               - qcom,nord-ufshc
-     then:
-       properties:
---
-2.34.1
+Changes in v2:
+- checkpatch & style. (Jeff)
+- Improve comments.
+- Link to v1: https://lore.kernel.org/linux-wireless/20260210021249.12132-2-mailingradian@gmail.com/
+---
+ drivers/net/wireless/ath/ath10k/htt.h    |  4 +++
+ drivers/net/wireless/ath/ath10k/htt_rx.c | 50 +++++++++++++++++++++++++-------
+ 2 files changed, 43 insertions(+), 11 deletions(-)
+
+diff --git a/drivers/net/wireless/ath/ath10k/htt.h b/drivers/net/wireless/ath/ath10k/htt.h
+index 25c6b2e2f81c8..07c3dc088f07b 100644
+--- a/drivers/net/wireless/ath/ath10k/htt.h
++++ b/drivers/net/wireless/ath/ath10k/htt.h
+@@ -1924,16 +1924,20 @@ struct ath10k_htt {
+ 
+ 	bool tx_mem_allocated;
+ 	const struct ath10k_htt_tx_ops *tx_ops;
+ 	const struct ath10k_htt_rx_ops *rx_ops;
+ 	bool disable_tx_comp;
+ 	bool bundle_tx;
+ 	struct sk_buff_head tx_req_head;
+ 	struct sk_buff_head tx_complete_head;
++
++	u8 rx_in_ord_split_tid;
++	u16 rx_in_ord_split_peer_id;
++	struct sk_buff_head rx_in_ord_split;
+ };
+ 
+ struct ath10k_htt_tx_ops {
+ 	int (*htt_send_rx_ring_cfg)(struct ath10k_htt *htt);
+ 	int (*htt_send_frag_desc_bank_cfg)(struct ath10k_htt *htt);
+ 	int (*htt_alloc_frag_desc)(struct ath10k_htt *htt);
+ 	void (*htt_free_frag_desc)(struct ath10k_htt *htt);
+ 	int (*htt_tx)(struct ath10k_htt *htt, enum ath10k_hw_txrx_mode txmode,
+diff --git a/drivers/net/wireless/ath/ath10k/htt_rx.c b/drivers/net/wireless/ath/ath10k/htt_rx.c
+index ab2d373b4750d..732bd3a2f9992 100644
+--- a/drivers/net/wireless/ath/ath10k/htt_rx.c
++++ b/drivers/net/wireless/ath/ath10k/htt_rx.c
+@@ -291,16 +291,18 @@ void ath10k_htt_rx_free(struct ath10k_htt *htt)
+ 		return;
+ 
+ 	timer_delete_sync(&htt->rx_ring.refill_retry_timer);
+ 
+ 	skb_queue_purge(&htt->rx_msdus_q);
+ 	skb_queue_purge(&htt->rx_in_ord_compl_q);
+ 	skb_queue_purge(&htt->tx_fetch_ind_q);
+ 
++	skb_queue_purge(&htt->rx_in_ord_split);
++
+ 	spin_lock_bh(&htt->rx_ring.lock);
+ 	ath10k_htt_rx_ring_free(htt);
+ 	spin_unlock_bh(&htt->rx_ring.lock);
+ 
+ 	dma_free_coherent(htt->ar->dev,
+ 			  ath10k_htt_get_rx_ring_size(htt),
+ 			  ath10k_htt_get_vaddr_ring(htt),
+ 			  htt->rx_ring.base_paddr);
+@@ -841,16 +843,18 @@ int ath10k_htt_rx_alloc(struct ath10k_htt *htt)
+ 	htt->rx_ring.sw_rd_idx.msdu_payld = 0;
+ 	hash_init(htt->rx_ring.skb_table);
+ 
+ 	skb_queue_head_init(&htt->rx_msdus_q);
+ 	skb_queue_head_init(&htt->rx_in_ord_compl_q);
+ 	skb_queue_head_init(&htt->tx_fetch_ind_q);
+ 	atomic_set(&htt->num_mpdus_ready, 0);
+ 
++	skb_queue_head_init(&htt->rx_in_ord_split);
++
+ 	ath10k_dbg(ar, ATH10K_DBG_BOOT, "htt rx ring size %d fill_level %d\n",
+ 		   htt->rx_ring.size, htt->rx_ring.fill_level);
+ 	return 0;
+ 
+ err_dma_idx:
+ 	dma_free_coherent(htt->ar->dev,
+ 			  ath10k_htt_get_rx_ring_size(htt),
+ 			  vaddr_ring,
+@@ -3156,16 +3160,20 @@ static int ath10k_htt_rx_extract_amsdu(struct ath10k_hw_params *hw,
+ 	struct rx_msdu_end_common *rxd_msdu_end_common;
+ 
+ 	if (skb_queue_empty(list))
+ 		return -ENOBUFS;
+ 
+ 	if (WARN_ON(!skb_queue_empty(amsdu)))
+ 		return -EINVAL;
+ 
++	msdu = skb_peek(list);
++	rxd = HTT_RX_BUF_TO_RX_DESC(hw,
++				    (void *)msdu->data - hw->rx_desc_ops->rx_desc_size);
++
+ 	while ((msdu = __skb_dequeue(list))) {
+ 		__skb_queue_tail(amsdu, msdu);
+ 
+ 		rxd = HTT_RX_BUF_TO_RX_DESC(hw,
+ 					    (void *)msdu->data -
+ 					    hw->rx_desc_ops->rx_desc_size);
+ 
+ 		rxd_msdu_end_common = ath10k_htt_rx_desc_get_msdu_end(hw, rxd);
+@@ -3257,17 +3265,16 @@ static void ath10k_htt_rx_h_rx_offload(struct ath10k *ar,
+ 	}
+ }
+ 
+ static int ath10k_htt_rx_in_ord_ind(struct ath10k *ar, struct sk_buff *skb)
+ {
+ 	struct ath10k_htt *htt = &ar->htt;
+ 	struct htt_resp *resp = (void *)skb->data;
+ 	struct ieee80211_rx_status *status = &htt->rx_status;
+-	struct sk_buff_head list;
+ 	struct sk_buff_head amsdu;
+ 	u16 peer_id;
+ 	u16 msdu_count;
+ 	u8 vdev_id;
+ 	u8 tid;
+ 	bool offload;
+ 	bool frag;
+ 	int ret;
+@@ -3292,64 +3299,85 @@ static int ath10k_htt_rx_in_ord_ind(struct ath10k *ar, struct sk_buff *skb)
+ 		   "htt rx in ord vdev %i peer %i tid %i offload %i frag %i msdu count %i\n",
+ 		   vdev_id, peer_id, tid, offload, frag, msdu_count);
+ 
+ 	if (skb->len < msdu_count * sizeof(*resp->rx_in_ord_ind.msdu_descs32)) {
+ 		ath10k_warn(ar, "dropping invalid in order rx indication\n");
+ 		return -EINVAL;
+ 	}
+ 
+-	/* The event can deliver more than 1 A-MSDU. Each A-MSDU is later
+-	 * extracted and processed.
++	if (!skb_queue_empty(&htt->rx_in_ord_split)) {
++		/*
++		 * It might still be possible to handle this case if there is
++		 * only one peer that splits at each given moment. We are
++		 * bailing out because we should have a test case for this
++		 * before trying to fix it.
++		 */
++		if (tid != htt->rx_in_ord_split_tid ||
++		    peer_id != htt->rx_in_ord_split_peer_id ||
++		    offload) {
++			ath10k_warn(ar, "split amsdu did not resume immediately\n");
++			htt->rx_confused = true;
++			ath10k_core_start_recovery(ar);
++			return -EIO;
++		}
++	}
++
++	/*
++	 * The event can deliver more than 1 A-MSDU or continue a previous one.
++	 * Each A-MSDU is later extracted and processed.
+ 	 */
+-	__skb_queue_head_init(&list);
+ 	if (ar->hw_params.target_64bit)
+ 		ret = ath10k_htt_rx_pop_paddr64_list(htt, &resp->rx_in_ord_ind,
+-						     &list);
++						     &htt->rx_in_ord_split);
+ 	else
+ 		ret = ath10k_htt_rx_pop_paddr32_list(htt, &resp->rx_in_ord_ind,
+-						     &list);
++						     &htt->rx_in_ord_split);
+ 
+ 	if (ret < 0) {
+ 		ath10k_warn(ar, "failed to pop paddr list: %d\n", ret);
+ 		htt->rx_confused = true;
+ 		ath10k_core_start_recovery(ar);
+ 		return -EIO;
+ 	}
+ 
+ 	/* Offloaded frames are very different and need to be handled
+ 	 * separately.
+ 	 */
+ 	if (offload)
+-		ath10k_htt_rx_h_rx_offload(ar, &list);
++		ath10k_htt_rx_h_rx_offload(ar, &htt->rx_in_ord_split);
+ 
+-	while (!skb_queue_empty(&list)) {
++	while (!skb_queue_empty(&htt->rx_in_ord_split)) {
+ 		__skb_queue_head_init(&amsdu);
+-		ret = ath10k_htt_rx_extract_amsdu(&ar->hw_params, &list, &amsdu);
++		ret = ath10k_htt_rx_extract_amsdu(&ar->hw_params,
++						  &htt->rx_in_ord_split, &amsdu);
+ 		switch (ret) {
+ 		case 0:
+ 			/* Note: The in-order indication may report interleaved
+ 			 * frames from different PPDUs meaning reported rx rate
+ 			 * to mac80211 isn't accurate/reliable. It's still
+ 			 * better to report something than nothing though. This
+ 			 * should still give an idea about rx rate to the user.
+ 			 */
+ 			ath10k_htt_rx_h_ppdu(ar, &amsdu, status, vdev_id);
+ 			ath10k_htt_rx_h_filter(ar, &amsdu, status, NULL);
+ 			ath10k_htt_rx_h_mpdu(ar, &amsdu, status, false, NULL,
+ 					     NULL, peer_id, frag);
+ 			ath10k_htt_rx_h_enqueue(ar, &amsdu, status);
+ 			break;
+ 		case -EAGAIN:
+-			fallthrough;
++			htt->rx_in_ord_split_tid = tid;
++			htt->rx_in_ord_split_peer_id = peer_id;
++
++			return -EIO;
+ 		default:
+ 			/* Should not happen. */
+ 			ath10k_warn(ar, "failed to extract amsdu: %d\n", ret);
+ 			htt->rx_confused = true;
+-			__skb_queue_purge(&list);
++			__skb_queue_purge(&htt->rx_in_ord_split);
+ 			ath10k_core_start_recovery(ar);
+ 			return -EIO;
+ 		}
+ 	}
+ 	return ret;
+ }
+ 
+ static void ath10k_htt_rx_tx_fetch_resp_id_confirm(struct ath10k *ar,
+
+---
+base-commit: 0718283ab28bc3907e10b61a6b4be6fefa1cbb2f
+change-id: 20260719-ath10k-a-msdu-c49334eb091d
+
+Best regards,
+-- 
+David Heidelberg <david@ixit.cz>
+
 
