@@ -1,38 +1,86 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 28DC33B6C05;
-	Sun, 19 Jul 2026 18:03:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A254925C818
+	for <linux-arm-msm@vger.kernel.org>; Sun, 19 Jul 2026 18:05:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784484237; cv=none; b=tMeVcvZ+oT8ini50wklNreb/hvOkc01M5cynQaZOSQVn3c5fLJd+/Tph21n5Ms0Hyz/AWwSMToFNx/E/X0ghInKqFKdHlW4v/gQfRJQ+psz8RKCWInWFEf8fjN3IhtGaRuc9oyZjDGbNzyCEyAH/7i4j1Dy0Wz9M0aHNxnkaCyI=
+	t=1784484321; cv=none; b=GyXRlhJ/lDHZ7hx3brS9l3yKGu5tN5xsE7p289ZBFHHQScP3DmL1ovSmJkJINPZLudm/uOxb4YGSBp5yuwj1XB9D+nv0vp98YkF0cNNxfEc01vHUiZGmXwFv6mjDPE87+CBAmgoR1oc94hFzOeZLfFRXThyCXYiR9fx7psscyYw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784484237; c=relaxed/simple;
-	bh=9IK7s2pPNUfDsWJGspBxUn6AiQyUzX4A9mk6XW5ob/I=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=is2JZqy5XjAcUzfpSHpE+5VBod4a4yAHMBHiQylE7zZoAhSUE1HOx7guP8oPoE3MrTTa3knuk2TvkLw5Sor439LTZx8yocvGsrBo8Ume72oxTN+O68oF+1er+eOh40HVuFbirGRvtg4pxP4BlQZ0nQJWruiU4E3xemdJVuEOLGg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Fg+O41RQ; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1784484321; c=relaxed/simple;
+	bh=MmDU6SBM1cxkuGMuxXd26/xdmRkaBvlel84fJ3SdDHc=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=OEC33dXXKEGz8inKAqU7pOTw6B2QkYJ6T++M1A7/HmpMNCCeq/BHRSQBUemFWGkfTagx2Kp+sXrbR590ALIBYKXbOxpDiy3dfu68naanyGl8UACW/f6r3YKpoYnlZp7sE16biGMo+kShgmvpgHGmib5HWDyANoDt/IH1HxqpQ5Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fg6naEgk; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DCPiEueu; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Fg+O41RQ"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 3E39BC2BCC7;
-	Sun, 19 Jul 2026 18:03:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1784484236;
-	bh=9IK7s2pPNUfDsWJGspBxUn6AiQyUzX4A9mk6XW5ob/I=;
-	h=From:Subject:Date:To:Cc:Reply-To:From;
-	b=Fg+O41RQa56yH0JYpz767gx+ozW3nNl293MvnS4Pn51gH5IxHTR2EMuDFKN+igRYG
-	 9i+5a/D7x3Ov1uAXGka+6CcO927jBb/sBZpDTbdvHekq5TCb8vsB28zuFhRQfsTsvY
-	 s1Q7+ZAkpIzR/xh73BfFmDgQ7zXW+v5C1oG1uvmgRBDeZBDKWq3XeIqm1HH+iEpsQg
-	 0O7cW+u6GHZcIyLP6IGcuUdcKDgECfD8FnGLx90fgkn0KjXThrvKpTt+60mKla+K47
-	 1mvuhngbxBefU0iNmLXhrpY4RjXIm4FIBnQNGUbp5ulthRWQGfVckrM3FM4MpwVdAX
-	 dMRytLrXjLpsw==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 192F0C4450A;
-	Sun, 19 Jul 2026 18:03:56 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Subject: [PATCH v5 0/2] Add initial dual front camera and rear flash
- support for Pixel 3 / 3 XL
-Date: Sun, 19 Jul 2026 20:03:51 +0200
-Message-Id: <20260719-pixel3-camera-v5-0-99593f1bd8ec@ixit.cz>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fg6naEgk";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DCPiEueu"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66JHIsvd4186404
+	for <linux-arm-msm@vger.kernel.org>; Sun, 19 Jul 2026 18:05:14 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=y4UXr/4v0gm3ivl/dUJ8uN
+	v553fe++rQ1qsr3MyIOcY=; b=fg6naEgkYBk6zSZdDvPLDwPALHUQuDqqe+LroO
+	f2n8DGl2XWNhrr9jUOQFz3yHB07ale6Kmj658F9dRvQz1CbpvF8JBViPc3pHzZrO
+	Qk83Ftn7wN3ZR31c9BU1T0AVtziQxkJjrEaSqHfZCnekItt2f5OUbXgyMs4Qxpwc
+	YiOKKZpmKozfGGBQRCV7NWu34FhPWMmzf2Vg+Vm7v/7/juRQTbPMblr55gT6cH0O
+	t0UvIUamBEifO5uLh2UpWd7nUX/a/UTBNqQOIUWaiiycOOWu8bP8p5d+2Y9o7GUX
+	XuF1TjSv4cDk788zfEY/DUb6RPcmoITX6pxOOcq4Qwn5awog==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fgd04t6e4-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 19 Jul 2026 18:05:14 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-3883dc4ad23so2718932a91.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 19 Jul 2026 11:05:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784484313; x=1785089113; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=y4UXr/4v0gm3ivl/dUJ8uNv553fe++rQ1qsr3MyIOcY=;
+        b=DCPiEueugVw+1WClpA0c3Facqc26QsYRjAO+Vkw7vUerTZY9ZdsRTbPwYbzcZoE68c
+         Ct02gs3X7V0g2aYDAgcbURz2SYFn1kBrRZZlUYRK4eY6U6mhhfL+s3Nqt88/c3syUoKT
+         dMdQxUsdU5CpCdttj/vv/HPNeJ0misoqXMD+9l/EhOhBS01+LXMyAb6beq529CCJO5tv
+         PfxiccyySCAIcvRbF3Evd1SbOobHXl898cT+4nFMrua9HcBVx4SF8Uev27PYmZD1KAGD
+         idJmYpujHUyff4MJK3WGKzOlxJ5nKdMR0GdZ83dDS0Dc+PJ5mLqHGA9EWS8Tkz2bxylq
+         kA5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784484313; x=1785089113;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=y4UXr/4v0gm3ivl/dUJ8uNv553fe++rQ1qsr3MyIOcY=;
+        b=hEsc4d/vikmdvzGuMjm4Jg2/k01PW4t3LwBSSM+vh35xUxOtpaheJfwdRPpB7catlH
+         hC1oCmuStQDwFPqKi4yZjLD1JBYLICwnHvZGUu4T10FEIhXiiJbxhD2ELlinAjDB62P6
+         f1pcxwSM9RF4Hs+GTOi0wqGdtTZj6SbiEWlw4Sunbizo6jRZr3unmsWmGGLNpK2nrCpC
+         UdwoCDU+4CbOKozFMzlE5o/SYULN41fpcyDEXlty1zWD3bjfRrnPIoCEpvMkL8e3kB/6
+         oiNY1lxk5/m+oqB/FOAUjnxa7CmZF38S88XgvAiAqJZ1qsxjanHmsRGjH3rVWoK3jugo
+         +z3g==
+X-Gm-Message-State: AOJu0YzAerbyKXam+72MRjHwShLSRaIIRLaDDGjXLhDeY7FCJkmpQtc2
+	J3vHuQagQWt4UaON1a0U3Pfv5e9Q/H9ppO/tw+rn/+pZAriC7hW1Dr3Scu4PTHZo7aRFJUFvArK
+	V7kTu2SGiwO8nA1G2X0tj6SlqOLFRaIhQywGiNvHYRWdSt5FxlwAW/N+gDvHSNcGnfbsb
+X-Gm-Gg: AfdE7cmomPSKdDgdMQmXqRsO/bTU1fe+ZZs+cJVgFZksKkGRr5u9kGdmieI9UCopSZ2
+	R82Y9ajO8wQD2pROzEuiS8qlTSTxAyHe9/g45kWOzOTHRvUGskrEz4pgychLkcMFjTQQnFy0Yv2
+	ps8Helj1YS30QyaLh5n9kzPzHNGlkf9fofDOdptUMRu+uWK2tWTVWt4W+2rEUAIJbJQeI+QtwRG
+	XxL8TSIXYzQ3MEDpMkIRURqT7tN004SmmtQObsRckBCv6uIL7WSz3WtqXq5wkzok19tZQnS1o0l
+	HDCOU5/gWQI+ZLalJkHUIHJ/kXy44CwnNE/uaaYdY1sBdYMPeHbpld3rTYrN1Q1TZpfpzylJ/QV
+	e2teMWHQya1Kdwy9UrlW9nkqOV0OAhwjIq5NgJWBO7OyJxWvGrTf/O3nm53LaeRMUY/AMhFExMZ
+	JVPdFRoqYo+AuXIIA89xZa
+X-Received: by 2002:a17:90b:28c3:b0:37f:eda5:516f with SMTP id 98e67ed59e1d1-38e4b2be9aamr8323688a91.0.1784484313493;
+        Sun, 19 Jul 2026 11:05:13 -0700 (PDT)
+X-Received: by 2002:a17:90b:28c3:b0:37f:eda5:516f with SMTP id 98e67ed59e1d1-38e4b2be9aamr8323653a91.0.1784484312889;
+        Sun, 19 Jul 2026 11:05:12 -0700 (PDT)
+Received: from hu-vishsain-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3142a20b1f3sm28037681eec.26.2026.07.19.11.05.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 19 Jul 2026 11:05:12 -0700 (PDT)
+From: Vishnu Saini <vishnu.saini@oss.qualcomm.com>
+Subject: [PATCH 0/3] arm64: dts: qcom: Add LVDS display overlays for
+ lemans, monaco and rb3gen2
+Date: Sun, 19 Jul 2026 23:35:05 +0530
+Message-Id: <20260719-lvds-support-v1-0-1f1aca3213ba@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,88 +89,107 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAIcRXWoC/33Qyw7CIBAF0F8xrMUww6Pgyv8wLgBHJfFJa+Mj/
- XepmqhduLwTziW5d1ZTTlSz6ejOMrWpTod9CXo8YnHj92viaVkyQ4FGSND8mC60lTz6HWXPvXP
- WhZW2jogVc8y0Kg/6vvmi5E2qm0O+Putb6K+vJgUwaGqBC46VrowwGnQws3RJzSTeWN/T4l+Lx
- SoI1jofAqj4a+W3xaGVxRKaIJzwBkD8WvWxFbihVf2/NvoAKI3V+LHda4xMp3PZtHkv0nUPoOZ
- ef3EBAAA=
-X-Change-ID: 20260315-pixel3-camera-a9989bf589ee
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: Petr Hodina <petr.hodina@protonmail.com>, 
- Richard Acayan <mailingradian@gmail.com>, linux-arm-msm@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- phone-devel@vger.kernel.org, David Heidelberg <david@ixit.cz>
+X-B4-Tracking: v=1; b=H4sIANERXWoC/3WP3WrDMAxGXyX4eiqWEztOKGPvUXrhWMpmyF/tJ
+ BRK331uc7vdCI6Qjj49ROIYOIm2eIjIe0hhnjLgRyH8j5u+GQJlFkoqI2tpYdgpQdqWZY4rKKo
+ kGWl01aPIK0vkPtzfusv14Mi3LVvXoyk6lxj8PI5hbYveGl2XbCxr42rqa9IVd9qiROcrLDtXl
+ 9g05qUeOSX3jtMW5yMNNuCIYFgbheihi4HywG5AQhaSUqiVtuZrTul029zwOnvK5fN/X1cdDy5
+ u4gFo9rAjIBiH1issver/0l2fz1+36HuUSQEAAA==
+X-Change-ID: 20260708-lvds-support-2d40d60654f1
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Vishnu Saini <vishnu.saini@oss.qualcomm.com>,
+        venkata.valluru@oss.qualcomm.com,
+        Jessica Zhang <jesszhan0024@gmail.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1946; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=9IK7s2pPNUfDsWJGspBxUn6AiQyUzX4A9mk6XW5ob/I=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqXRGK6x+kS5ZKp+BykqFFaTFnPKfntJ9N+eyRL
- ZfM8iS7uK+JAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCal0RigAKCRBgAj/E00kg
- cljrD/0atHf6ROhLCReAiBODQvK9PYgrzTDheFfwThVEdTTBsw6Ov+B383VnOEscKme2KWFo/LT
- faQ5p37yJ9imksgQlWy5DsshIauT04emgd3K8sVTG0mHBVSE8LswD+d2IQIWxJUDZz1Ku56y5qG
- Dnuj61Z9SkSJPYiEX4urTO5ViGY/LndSYLkB1qym5CgZjRqeXGnwFl85bdsZy6rg1UUIyvs0+XW
- 812EBozUrikO5CfyXiULYXK27keLs+2Nzn+MH2j4qi7wa5FpSZ8qIQGtTxvEfldDOlZVmS5DFU0
- Uj/d7ySPcAEUHtZ526IxMcc0gDeX/szSXBFupZ2Adi7xxmGJt868FhPAzJPpDe5dsQA7T6vVSJ7
- btzXcDn2GbXfIVmuGOp2IWLwRFxZswL57BZfugtbwBDzeVZL9N2zvm2M3NfeEf9q4ILbyJ/O8ct
- gf7WKhiTJoyVN+Gh2E2+r59Pgvwg6JeCjxGzaFghULh2OqH3dfcIkzunlFeZ1JEvKZGao6fSK5m
- 4XY23yJlht1/wToxmqySB25dzan5wUCXrJZIwj/3PfGKhLEe/bHaeKrXxIM5VOHeCSILtRPA6mi
- IAL5bKgl3CSlBYlGNvg3zVhZvSLxnkKfT8zvS3Ic9tORj9OzmB6VEjAATYtI4ymn/akyOn3zfaK
- 0OtBkrifVYPKkRw==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784484308; l=2562;
+ i=vishnu.saini@oss.qualcomm.com; s=20251113; h=from:subject:message-id;
+ bh=MmDU6SBM1cxkuGMuxXd26/xdmRkaBvlel84fJ3SdDHc=;
+ b=9g3MXRxIv4AUybHQrRDVAgXKOatkw57p91uL2u5B9Alg3bJxlrZ1iBCa8Hnw68c3aikpa/e/D
+ 59gkINFXqgMBIZ2EWPUErn2w5Hr2juo67aiSkofdq/ljr7AlHgZLzxD
+X-Developer-Key: i=vishnu.saini@oss.qualcomm.com; a=ed25519;
+ pk=8hlXlF8j/3GeOaDK3w2LYhkv9FanCQru0c7kRH/It7k=
+X-Authority-Analysis: v=2.4 cv=POs/P/qC c=1 sm=1 tr=0 ts=6a5d11da cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=7Z2I1jc64i5zuNuQ5A4A:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzE5MDIwMSBTYWx0ZWRfX0fQODj3FHk0D
+ nFjUT7+iEBshKzJs8sIXcnqGxbSKmAnKjnzmQCt7cgcVaP9c94s5AUpnHHa/syJJZEgNmX01iJK
+ fjfLhhD9Vb8alPGCpgcn+AH+0qkOWN1A3gfkWYXmShkaH3dnYMshmlWYGWoKDIFP8KyMmg1gIq6
+ O2rNaikMVk6bAuRoaUL+O7a+yLnZuV+gRGlkiQVUSSylcRqAPoNigBsf8X6O36E2Lag/HE24IOy
+ caT7yCGRebgunfoYI1gZCFAHhCOZ8oCgKtMjVwa0DaRnTtqn1YAoZOskb0Ikvyociz0FshrXB+G
+ F8t0cC4TaGAs+s2+N0swiOAtT9etraENR+Rx+ol5Nl0VqIKLlc9H3bC1cJuTRz6fYFUO5NnNnLA
+ B6Nf/TR06mApnmQZzD2LDFniB/grTCVR4wQueKcekqlcPAcG3u7ZUrs9865c2Gunv3reF+PFtGm
+ P/o3g3IstcOoFvWnRUw==
+X-Proofpoint-ORIG-GUID: BG3CdQpfaBD2TcP48DC6iP-5sVazJAVi
+X-Proofpoint-GUID: BG3CdQpfaBD2TcP48DC6iP-5sVazJAVi
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzE5MDIwMSBTYWx0ZWRfX80Wkrzhoeche
+ IOc/TVllE38InPsFQDdwK3mRJSpX13CTQbJ4STCCASMJ3LasyTrR5RA7q4sro3GmuGFzmY9QkZ2
+ nbSwlL9WUjC09MqeyTALbqZ+QTgswXQ=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-19_06,2026-07-17_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 spamscore=0 adultscore=0 clxscore=1011 suspectscore=0
+ priorityscore=1501 malwarescore=0 impostorscore=0 phishscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607190201
 
-Describe the dual front-facing IMX355 sensors (standard and wide)
-and enable the PMI8998 flash LED with hardware-accurate limits.
+This series adds LVDS display support via device tree overlays for three
+Qualcomm platforms: SA8775P Lemans EVK, SA8295P/QCS8300 Monaco EVK, and
+QCS6490 RB3 Gen2 industrial mezzanine.
 
-This brings up the basic camera topology and flash support in DT.
+All three platforms use the Lontium LT9211C DSI-to-LVDS bridge chip, which
+converts DSI output to dual-channel LVDS for driving 1920x1080 panels.
+The overlays follow the established composite-DTB pattern already in use
+on these platforms (IFP mezzanine, camera, el2) and are structured to be
+applied on top of the existing IFP mezzanine overlay.
 
-Signed-off-by: David Heidelberg <david@ixit.cz>
+Each overlay:
+  - Wires the LT9211C bridge to the DSI output via an I2C node
+  - Defines a generic dual-channel panel-lvds node with VESA-24 mapping
+    targeting a 1920x1080 (476x268mm) panel at 148.5 MHz pixel clock
+  - Provides an LCD bias regulator through the GPIO expander
+
+This series depends on:
+  [PATCH v6 0/2] This series adds LT9211C bridge driver by extending LT9211
+  https://lore.kernel.org/all/20260719-add-lt9211c-bridge-v6-0-e56d22152586@oss.qualcomm.com/
+
+which adds lontium,lt9211c compatible support to the lontium-lt9211 driver
+and extends the binding YAML accordingly, and:
+
+  [PATCH] dt-bindings: display: panel-lvds: Add boe,dv215fhm-r01
+  https://lore.kernel.org/all/20260719-b4-lvds-panel-doc-v1-1-6a18c213c2f6@oss.qualcomm.com/
+
+which documents the boe,dv215fhm-r01 panel compatible used by these overlays.
+
+Signed-off-by: Vishnu Saini <vishnu.saini@oss.qualcomm.com>
 ---
-Changes in v5:
-- Added function-enumarator to flash LEDs. (Sashiko)
-- Dropped l22a regulator needed only for NFOV actuator. (Sashiko)
-- Dropped vdda-csi[0-2]-supply, as it was unused. (Sashiko).
-- Added previously omited cam_mclk2_sleep sleep state.
-- Link to v4: https://lore.kernel.org/r/20260719-pixel3-camera-v4-0-48cab1236852@ixit.cz
+Vishnu Saini (3):
+      arm64: dts: qcom: lemans-evk: Add LVDS display overlay
+      arm64: dts: qcom: monaco-evk: Add LVDS display overlay
+      arm64: dts: qcom: qcs6490-rb3gen2: Add LVDS display overlay
 
-Changes in v4:
-- Use 24 MHz ext clock for the cameras, as the downstream does, since
-  the upstream driver can now support it.
-- Added additional LED, as the phone contains two separately controlled
-  white LEDs flash (upper and bottom, in one module).
-- Increase flash-max-microamp, as I took wrong "flash" from the
-  downstream sources and dropped Dmitry R-b.
-- Address formatting issues. (Konrad)
-- Link to v3: https://lore.kernel.org/r/20260412-pixel3-camera-v3-0-e26b090a6110@ixit.cz
-
-Changes in v3:
-- Dropped cam_vio label. (Dmitry)
-- Move the MCLK2 pinctrl from cameras to common camss. (Dmitry)
-- Link to v2: https://lore.kernel.org/r/20260411-pixel3-camera-v2-0-41b889abb14c@ixit.cz
-
-Changes in v2:
-- leds.h include escaped the initial submission. Fixed.
-- Link to v1: https://lore.kernel.org/r/20260411-pixel3-camera-v1-0-2757606515b6@ixit.cz
-
+ arch/arm64/boot/dts/qcom/Makefile                  |  12 ++
+ .../dts/qcom/lemans-evk-lvds-boe,dv215fhm-r01.dtso | 127 ++++++++++++++++++++
+ .../dts/qcom/monaco-evk-lvds-boe,dv215fhm-r01.dtso | 131 +++++++++++++++++++++
+ ...industrial-mezzanine-lvds-boe,dv215fhm-r01.dtso | 110 +++++++++++++++++
+ 4 files changed, 380 insertions(+)
 ---
-David Heidelberg (2):
-      arm64: dts: qcom: sdm845-google: Add dual front IMX355 cameras
-      arm64: dts: qcom: sdm845-google: Enable PMI8998 camera flash LEDs
-
- arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi | 197 ++++++++++++++++++++-
- 1 file changed, 196 insertions(+), 1 deletion(-)
----
-base-commit: 0718283ab28bc3907e10b61a6b4be6fefa1cbb2f
-change-id: 20260315-pixel3-camera-a9989bf589ee
+base-commit: f86573e68e56a7df7d54eb58101ac413ba731996
+change-id: 20260708-lvds-support-2d40d60654f1
+prerequisite-message-id: <20260719-add-lt9211c-bridge-v6-0-e56d22152586@oss.qualcomm.com>
+prerequisite-patch-id: dbba64d1ace696df388c5df3d1cb05a0701df194
+prerequisite-patch-id: 7729b9c67a7c274b25fea08635dfede3fc604ae9
+prerequisite-message-id: <20260719-b4-lvds-panel-doc-v1-1-6a18c213c2f6@oss.qualcomm.com>
+prerequisite-patch-id: 4e67c4a837c7fe490e7c5d34a243543c76685eb5
 
 Best regards,
 -- 
-David Heidelberg <david@ixit.cz>
-
+Vishnu Saini <vishnu.saini@oss.qualcomm.com>
 
