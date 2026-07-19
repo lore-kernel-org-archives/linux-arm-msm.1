@@ -1,139 +1,137 @@
-Received: from mx.treblig.org (mx.treblig.org [46.235.229.95])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yx1-f46.google.com (mail-yx1-f46.google.com [74.125.224.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 877C31E531;
-	Sun, 19 Jul 2026 01:18:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=46.235.229.95
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B703C246788
+	for <linux-arm-msm@vger.kernel.org>; Sun, 19 Jul 2026 02:22:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784423940; cv=none; b=swoCdgwO6xcZgd6DsXevEq3/XZtzMYKyR8678Tl723AzO6jGqv8N+/gxfl6ybifXVRP47ZZck7QT2ty2MbFw0l6DSOotIaizpDkVTbYRpQop3Py1lIrZjmUeoAjGlAsnTfnUx3q+jmrpcsgHgHh2bO0vhTAH0X2syw0e+0iv0Ac=
+	t=1784427770; cv=none; b=N8md/9xv5AIGTeIDbWBM+yRSKwBoLMkLwAAk0VHQmp81059Kc8Zl11M5Wdq/dHqHgFUnO8JHFvR0k311kOzqQ/Zq3MbVa8wrC0bg5+OL7o3pC1ywFrdUnE1AEjAV0nvbKQq+b/oaPnZwoBp/nKuUFVAUogysC+4gC9aQw/+t9EA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784423940; c=relaxed/simple;
-	bh=HpKzQwdWnZXfUFVyjvn4Y1ma8GYpPUZe84X7AWEHGWQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=bjXovKwGXSvXbGAIwexfySd8egpdQBRkj+8Q/ri51V66+FQp5fhbrmPPZeOeXTg09S+TKIt/G21gZVWOttOcih2YWsbfhBki/X3A/9u+SBLJMyDB71yejr/48WGDrVP3F1nV2zioh+f/PFSEw8R0CSREUr/14EwmPTUqFXGAkWY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=treblig.org; spf=pass smtp.mailfrom=treblig.org; dkim=pass (2048-bit key) header.d=treblig.org header.i=@treblig.org header.b=ZNVybkf5; arc=none smtp.client-ip=46.235.229.95
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=treblig.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=treblig.org
+	s=arc-20240116; t=1784427770; c=relaxed/simple;
+	bh=205PGOhWA3GiaPzxyZjcK2paETYLYmho/eXrULg/4NA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=ZWOwh28DlX3KBvkh6DiswQ4xhna02MLimzzDCFQa2b6nLIXG+m9AezTKPGPEbnWAhL4ETCgKqwJthc09RGMwM0GBmNNF6NW7dN4dswFugbheCxibw/vEHunwRrEJzcNnMjAu8MiWzi91jGTwdzIvbSQjqW1+nLc6dl2aMI1V8BU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=RgMd3UGw; arc=none smtp.client-ip=74.125.224.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=treblig.org header.i=@treblig.org header.b="ZNVybkf5"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=treblig.org
-	; s=bytemarkmx; h=Content-Type:MIME-Version:Message-ID:Subject:From:Date:From
-	:Subject; bh=+hR30FyCx6dJ/Rb8n97v+rar2Y0DFtw7gllu3+XUFXE=; b=ZNVybkf58ijbRjJV
-	8ur2h6gkcxxaXGwLxsGBpIRMMHmgqx8cTFfHxjox0oQ8T4Wcqfk1wQb5773dsKNstVeMUf8gfsiNp
-	C+8kJ38MdwTPam9MSBC0+Ok6EYY1f5yKbuD20RRZo9Wmm3L5Q3hRgXleWRXgiVcyEc3tcq8tIb+wS
-	jKQ4lWtuhc/zCM8uRVIcsZJEzMDuk/2vGYQjRqVWd1CO5gu8jcAn9M/CbkJBMTWiQ9wgh5VXIMCi/
-	f+NHiPH7/j1bX/ETI3uwoENzTfsC/dUcnnSYK1nkdE3Bw92AF2bsG6YJvvnnUHDoaRT57vWd0MPBh
-	nR/snDsliRQec5dOlw==;
-Received: from dg by mx.treblig.org with local (Exim 4.98.2)
-	(envelope-from <dg@treblig.org>)
-	id 1wlG78-00000003ZUc-0bBQ;
-	Sun, 19 Jul 2026 01:14:42 +0000
-Date: Sun, 19 Jul 2026 01:14:42 +0000
-From: "Dr. David Alan Gilbert" <dave@treblig.org>
-To: jens.glathe@oldschoolsolutions.biz
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-	Heikki Krogerus <heikki.krogerus@linux.intel.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>, linux-usb@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
-Subject: Re: [PATCH 2/5] usb: typec: ps883x: Return -EOPNOTSUPP for USB4 when
- parade,disable-usb4 is set
-Message-ID: <alwlAgUQnzfg75hp@gallifrey>
-References: <20260718-ps883x-disable-usb4-v1-0-cec86d0b909e@oldschoolsolutions.biz>
- <20260718-ps883x-disable-usb4-v1-2-cec86d0b909e@oldschoolsolutions.biz>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="RgMd3UGw"
+Received: by mail-yx1-f46.google.com with SMTP id 956f58d0204a3-66771ded50aso12122454d50.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 18 Jul 2026 19:22:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1784427767; x=1785032567; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:sender:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=eflu4Al3WySioMoQONHlRvylppCSuqZirkAbybWJ4Ns=;
+        b=RgMd3UGwl+d7XSbZz8/xVUUayKtnDSdl9UuDNalV+KfynfZZy6MUWam6PSmgFgngUY
+         F4sQ+kg3ec2FhBkWSmsbrCQmBytpWpVW8mk/s95DlC85PmpGMdOLQDfRFLptpkda6vjW
+         N7zoVFy7adHFBnXwPLxv/wFP2j/1MCKJLarWUXTQWOeI+UX2Gbt0V9kCYQ++C/KJDt74
+         iQtPLmQQJukH+8oANp9stXKvue+9DNmQwFj6BGWXr+G3E0W13FLutz30dRvT+mD+rnsB
+         Uvfdar4b5T4o82ZgTxf1b9PtfZNCF/LBiNvNmn6tGcl6cU8qjYyQdPSAjlY+nAqqbN+7
+         0ftA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784427767; x=1785032567;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:sender:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=eflu4Al3WySioMoQONHlRvylppCSuqZirkAbybWJ4Ns=;
+        b=W8/AsTG6Ws0ii1eX4CIXJH7+zHOIvtHqFbYhjZvbYONjgSbYBnRo/jd4lW9d+y0Klm
+         mT4NzIG/lIxtEFdVcAwVOajiPkOspeReQiAqrAs/E+hhsrM+0ZVSu0W3163dX0JAKOTO
+         eib7Ta0O1Q+W03jut0qteV7BgiMDU6O7t1cJLOjjLW3tC9yxVHuQoICw8jc1eawoGb/5
+         EcOHjwZWVlTNrNanwjkYrJmES5l5v6WztTWMeZwxFiTLA1/nTAIPl+cnAAOi21ScrgO+
+         enKhElHuP1k04VM6Xu+3hXPu28tnaw8t6pUiJGX18C3OQBt/BOC/HqQB6N7jLij3y8E8
+         Jcpw==
+X-Forwarded-Encrypted: i=1; AHgh+RqafB5oJxkQMKlpT0KpPwm2yuUB9ZfAfU8iMwoUWi75/K5SiBZg9qxyN9JMPYUK8Je7aXy1q+o2GrCO7bAg@vger.kernel.org
+X-Gm-Message-State: AOJu0YwgJuW2W8zeNusDbpM8BWZ989LATT9SMigWXDlgd17BrpHebiFj
+	vmtc9ZIydZFcBAF8/5hewRAF7h9ZT7fVS4ND87YW4cZxbwAMUn50Mrrt
+X-Gm-Gg: AfdE7clyGAa8orLFvIgNAviNo2jki2LkcsHszhazOYirwqq8v9LLwPVeaRb/64uRzLy
+	kEB4kjGJT5joL2USDBxy5r4Oz5h51DVryFmM3y3qaF++dUuN4eaECC0ywvcFaIcrZl8oiwLsN0b
+	EtlNHcODPK/LHsw0MNCVgSUzTRYp0SFzVaSclZQsNV/xE0rTvzT+bhs3ID1KTKaER4vCEEsxdCc
+	jLbmykfAL8RDEuFaKVaetimtc0aLBukAUUa5Q6oDa2zS6+6OY3Mtz11BxXyNYxXBk+JdeaWaYRg
+	VtPZUvRTcyU4ftRqVy2zJeSGwxTs7R6gfh6xO+0zMgq3HvdQDTjw1n4NnIuYl3jF4Ol7vboUEai
+	LwwH6NSrevOa1HEfCMyGXSklhL8+a7rJqvGeTJZq9UR2PVWHMTlSYKA6lGo0giKH1Z3efKsJg+k
+	LOEW6KH77By5UhzsvF+pNYT2k2eKO69UT04jY0hnukfIkzYydvk6hoCl/UY6zqK4wm5AbTuw==
+X-Received: by 2002:a05:690c:4d84:b0:80c:2874:67b8 with SMTP id 00721157ae682-81ef254a7d6mr29568917b3.32.1784427767541;
+        Sat, 18 Jul 2026 19:22:47 -0700 (PDT)
+Received: from nixos-office.attlocal.net ([2600:1700:566e:ba00:173e:d781:2a07:621c])
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-81ef4033935sm37247817b3.11.2026.07.18.19.22.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 18 Jul 2026 19:22:45 -0700 (PDT)
+Sender: Julian Braha <julian.braha@gmail.com>
+From: Julian Braha <julianbraha@gmail.com>
+To: srini@kernel.org,
+	andersson@kernel.org,
+	konradybcio@kernel.org
+Cc: linux-sound@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	arnd@arndb.de,
+	Julian Braha <julianbraha@gmail.com>
+Subject: [PATCH] soc: qcom: fix unmet dependency for QCOM_PDR_MSG
+Date: Sun, 19 Jul 2026 03:22:41 +0100
+Message-ID: <20260719022242.139472-1-julianbraha@gmail.com>
+X-Mailer: git-send-email 2.54.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-In-Reply-To: <20260718-ps883x-disable-usb4-v1-2-cec86d0b909e@oldschoolsolutions.biz>
-X-Chocolate: 70 percent or better cocoa solids preferably
-X-Operating-System: Linux/6.12.95+deb13-amd64 (x86_64)
-X-Uptime: 01:13:18 up 13 days, 54 min,  3 users,  load average: 0.00, 0.00,
- 0.00
-User-Agent: Mutt/2.2.13 (2024-03-09)
+Content-Transfer-Encoding: 8bit
 
-* Jens Glathe via B4 Relay (devnull+jens.glathe.oldschoolsolutions.biz@kernel.org) wrote:
-> From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
-> 
-> On Qualcomm X1E80100 platforms using the Parade PS883x retimer (like
-> Lenovo ThinkPad T14s Gen6), hotplugging USB4-capable docks such as the
-> Lenovo 40B0 results in working USB but no DisplayPort output on the
-> dock's HDMI/DP ports.
-> 
-> When the dock negotiates USB4, the retimer receives TYPEC_MODE_USB4
-> and forwards it via typec_mux_set(). The qmp_combo PHY then selects
-> QMPPHY_MODE_USB3_ONLY because no classic DP altmode SVID is present in
-> the state, leaving the DP transmitter and AUX channel disabled.
-> 
-> Add a DT property "parade,disable-usb4" that, when present, makes the
-> PS883x driver reject USB4 modes as not supported. DP altmode
-> configuration is still applied if negotiated, so both USB and
-> DisplayPort continue to work.
-> 
-> This is a temporary workaround until proper USB4 DP tunneling support
-> is available in the X1E USB4 controller and qmp_combo PHY stack.
-> 
-> Link: https://patch.msgid.link/20260312101431.2375709-1-krishna.kurapati@oss.qualcomm.com
-> Assisted-by: Grok(xAI):4.3
-> Signed-off-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+QCOM_PDR_MSG is defined in an 'if QCOM_SOC..endif', so its selectors
+QCOM_PDR_HELPERS and SLIM_QCOM_NGD_CTRL also need to ensure QCOM_SOC is
+enabled. Otherwise, QCOM_PDR_MSG has an unmet dependency, such as:
 
-Tested-by: Dr. David Alan Gilbert <dave@treblig.org>
-  On zenbook a14 with the following patches and a TB cable
+WARNING: unmet direct dependencies detected for QCOM_PDR_MSG
+  Depends on [n]: QCOM_SOC [=n]
+  Selected by [y]:
+  - QCOM_PDR_HELPERS [=y] && ARCH_QCOM [=y] && NET [=y]
 
-> ---
->  drivers/usb/typec/mux/ps883x.c | 10 ++++++++++
->  1 file changed, 10 insertions(+)
-> 
-> diff --git a/drivers/usb/typec/mux/ps883x.c b/drivers/usb/typec/mux/ps883x.c
-> index 64e0a61b776a1..3fa26ce01a9c9 100644
-> --- a/drivers/usb/typec/mux/ps883x.c
-> +++ b/drivers/usb/typec/mux/ps883x.c
-> @@ -62,6 +62,7 @@ struct ps883x_retimer {
->  
->  	enum typec_orientation orientation;
->  	bool in_reset;
-> +	bool disable_usb4;
->  };
->  
->  static int ps883x_enable_vregs(struct ps883x_retimer *retimer)
-> @@ -249,6 +250,13 @@ static int ps883x_set(struct ps883x_retimer *retimer, struct typec_retimer_state
->  			cfg0 |= CONN_STATUS_0_USB_3_1_CONNECTED;
->  			break;
->  		case TYPEC_MODE_USB4:
-> +			if (retimer->disable_usb4) {
-> +				dev_info(&retimer->client->dev,
-> +					 "USB4 disabled via DT property, rejecting USB4 mode\n");
-> +				return -EOPNOTSUPP;
-> +			}
-> +
-> +			/* Normal USB4 handling */
->  			eudo_data = state->data;
->  
->  			cfg2 |= CONN_STATUS_2_USB4_CONNECTED;
-> @@ -378,6 +386,8 @@ static int ps883x_retimer_probe(struct i2c_client *client)
->  
->  	retimer->client = client;
->  
-> +	retimer->disable_usb4 = device_property_read_bool(dev, "parade,disable-usb4");
-> +
->  	mutex_init(&retimer->lock);
->  
->  	retimer->regmap = devm_regmap_init_i2c(client, &ps883x_retimer_regmap);
-> 
-> -- 
-> 2.53.0
-> 
-> 
+This unmet dependency was found by kconfirm, a static analysis tool for
+Kconfig.
+
+Fixes: f2866e6a27f7 ("soc: qcom: Hide all drivers behind selectable menu")
+Signed-off-by: Julian Braha <julianbraha@gmail.com>
+---
+ drivers/slimbus/Kconfig  | 2 +-
+ drivers/soc/qcom/Kconfig | 3 ++-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/slimbus/Kconfig b/drivers/slimbus/Kconfig
+index 60b0dcbc0ebb..5dded61191e0 100644
+--- a/drivers/slimbus/Kconfig
++++ b/drivers/slimbus/Kconfig
+@@ -17,7 +17,7 @@ config SLIM_QCOM_NGD_CTRL
+ 	tristate "Qualcomm SLIMbus Satellite Non-Generic Device Component"
+ 	depends on HAS_IOMEM && DMA_ENGINE && NET
+ 	depends on QCOM_RPROC_COMMON || (COMPILE_TEST && !QCOM_RPROC_COMMON)
+-	depends on ARCH_QCOM || COMPILE_TEST
++	depends on QCOM_SOC && (ARCH_QCOM || COMPILE_TEST)
+ 	select QCOM_QMI_HELPERS
+ 	select QCOM_PDR_HELPERS
+ 	help
+diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
+index fd4d4ecd2df0..ef844947593c 100644
+--- a/drivers/soc/qcom/Kconfig
++++ b/drivers/soc/qcom/Kconfig
+@@ -292,7 +292,7 @@ config QCOM_PBS
+ 	  This module provides the APIs to the client drivers that wants to send the
+ 	  PBS trigger event to the PBS RAM.
+ 
+-endif
++endif # QCOM_SOC
+ 
+ # Options selected by other drivers from different subsystems must be outside
+ # of the menuconfig if-block:
+@@ -314,6 +314,7 @@ config QCOM_PDR_HELPERS
+ 	select QCOM_QMI_HELPERS
+ 	select QCOM_PDR_MSG
+ 	depends on NET
++	depends on QCOM_SOC
+ 
+ config QCOM_QMI_HELPERS
+ 	tristate
 -- 
- -----Open up your eyes, open up your mind, open up your code -------   
-/ Dr. David Alan Gilbert    |       Running GNU/Linux       | Happy  \ 
-\        dave @ treblig.org |                               | In Hex /
- \ _________________________|_____ http://www.treblig.org   |_______/
+2.54.0
+
