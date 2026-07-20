@@ -1,46 +1,66 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.12])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F37A33B6D0;
-	Mon, 20 Jul 2026 11:23:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1775C3438B6;
+	Mon, 20 Jul 2026 11:25:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.12
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784546596; cv=none; b=seVOk02xkIcNeeOq991rgBUxPGlIRbfpl1munYH4+7wfNPIjk5OtFCrdCoI6W1KBgCExN3+p2reXdKsw11CikkhiFwIXJ+BmRqj4z4gYuBaQOfW3hEBzWgLCAgMzbWRI02HUQANlnTqm+Oc+VpUsYxuT4oonS+mZhAh62illIu4=
+	t=1784546718; cv=none; b=LoKVCrNOhazpAQf2xDwzCh6t+X0/pcziUYNLlYNG8R8sHRapapzbcHo+IsVqNkFWD2azXDjq3skjGk/kpxbolsNIfQ5RzQM63EAdJUQaNxWAawmVbzyIhf6RZpZz0S5/3fGDYRKy71TyjsiMKg4ZGQlJXwshcqKk7sXdwmygY/Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784546596; c=relaxed/simple;
-	bh=oYH1UWv4eBuTf8gp/Chf9rss8aJNv0or7XfrIoUTeYk=;
+	s=arc-20240116; t=1784546718; c=relaxed/simple;
+	bh=CJX8fznzPc9Nj5imz58fb6QIOpYCrCWvGYvGxBv5MH0=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=KmLjVDJHqn8+/1hY1csJTxrdQxSf1Zo0x3ieYtRBAaWUZgnbBAxsW8DA6I+k9VSe27bbW8iGeuZfso7jT1f6sVXrRjBqO7oZxIUqVGqpQU+YlT3nQHGmndZYo4l4+w+feD/icptPXE0pXRNHgF0vUc5aJGR8lisG45svrVWjyu4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Iz8W+HLA; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=miyd9IW9g50/3mvZ8lZ7Eq+GQshP7NmF4PezHcesU+j0K8iRqJxaODtehKjtouRRQ2tJd5zPO2DZ3ktCgsBsPCmAfpU9mmdhkJFmk+d6Wq1yUOknN+SKWNn1+s0RAwi3IKHoA4DgH9V07G3sqnaTEVDQ3v1s8uYWaCxM2ZsjzrI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=R8TuNfPi; arc=none smtp.client-ip=192.198.163.12
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Iz8W+HLA"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CAA991F000E9;
-	Mon, 20 Jul 2026 11:23:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784546595;
-	bh=d3xVK9YMrUjVB7REq1T+TRl9bzVEeUEnV0J6SaPCm8U=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Iz8W+HLAWCJ4bghTZP1THbxM0UQQIHKCUmYXoLG5G7ynOYVIJxEutNCnsm1FmQE53
-	 ky0gwJQzBzRx/c+BZkAv1kZRCfN+HnETIt9oneWLozvcfoIUJc9WnfxQbMrThMkCCH
-	 lUQ00c2c8aobetivIjWBuoLdb+U9q7+ZRedCFF1FY3+WhdCvdDHR7WYTX6mykula6S
-	 Q1aQduXZqYoBTDoPAwndsTCl0DwZCiccVzZLoG8i/qHgS+yFaTsFekyDfrrYMNrMdT
-	 52xMpuTLeV54CnrppZwVhQMHmIPdPMCRQ9fh6ApCbo70W7a+1KuYpaux7vNNmOWb78
-	 6i+YIvpXVdJbg==
-Date: Mon, 20 Jul 2026 16:53:12 +0530
-From: Vinod Koul <vkoul@kernel.org>
-To: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
-	Rob Herring <robh@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
-	Wesley Cheng <quic_wcheng@quicinc.com>,
-	Xiangxu Yin <xiangxu.yin@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v6 2/4] dt-bindings: phy: qcs615-qmp-usb3dp: Add support
- for Shikra SoC
-Message-ID: <al4FICuDRLYdPE_8@vaman>
-References: <20260712-usb-shikra-phy-v6-v6-0-1b3e51bf1541@oss.qualcomm.com>
- <20260712-usb-shikra-phy-v6-v6-2-1b3e51bf1541@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="R8TuNfPi"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1784546717; x=1816082717;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=CJX8fznzPc9Nj5imz58fb6QIOpYCrCWvGYvGxBv5MH0=;
+  b=R8TuNfPisZiL77LahOlinwsL0ZqDgHPJJRfzmvMAs6x5ToXBbWTEw9Mc
+   AbhuMXZxU8ctxho7afElwmBOoON5OJBuv7lERgeTrDpkqfsUjlTgGWYEC
+   p6nABXwLK6k3ecHCqMYapdbEg6HyGv7Mc0AvY+oXcIMZu5ivlmPtH3UKY
+   mn0Pf/urzen7Igp6++RRG4ZxmF2krlHQZ68+lsTdgs+H9iUtDNfHmffol
+   Dj23Aqx4/JMhPjzO5OoyZTZIqBkLvAiVBdSaEcacAwjHwOyVMA62x/wjW
+   BwYlr8EzUpJXrBihLp04OgUwXsH5kR09yphDKrmtRzymISKYQg/x5/1Fh
+   Q==;
+X-CSE-ConnectionGUID: vmR1lS4VRg6NK8HoETYRbw==
+X-CSE-MsgGUID: DNzFi2dpSa6+xP7TG6epig==
+X-IronPort-AV: E=McAfee;i="6800,10657,11851"; a="88947208"
+X-IronPort-AV: E=Sophos;i="6.25,174,1779174000"; 
+   d="scan'208";a="88947208"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+  by fmvoesa106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jul 2026 04:25:16 -0700
+X-CSE-ConnectionGUID: p4Al4b5hTry/r7sRPCQT6Q==
+X-CSE-MsgGUID: 2taNrxjPQwWJ2eB9d9FEtw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,174,1779174000"; 
+   d="scan'208";a="256256367"
+Received: from conormcd-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.175])
+  by orviesa010-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 20 Jul 2026 04:25:13 -0700
+Date: Mon, 20 Jul 2026 14:25:10 +0300
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: Ajay Kumar Nandam <ajay.nandam@oss.qualcomm.com>
+Cc: linux-kernel@vger.kernel.org, Saravana Kannan <saravanak@google.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>, spatakok@qti.qualcomm.com,
+	linux-arm-msm@vger.kernel.org, alsa-devel@alsa-project.org,
+	ravi.hothi@oss.qualcomm.com, dakr@kernel.org
+Subject: Re: [DISCUSSION] fw_devlink: incorrect ancestor fallback for
+ intermediate bus topologies breaks audio dependency resolution
+Message-ID: <al4Flj5ntmqCKbH4@ashevche-desk.local>
+References: <20260701131733.870079-1-ajay.nandam@oss.qualcomm.com>
+ <d224b1e5-99a0-4794-b043-d6335f98753c@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -49,113 +69,28 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260712-usb-shikra-phy-v6-v6-2-1b3e51bf1541@oss.qualcomm.com>
+In-Reply-To: <d224b1e5-99a0-4794-b043-d6335f98753c@oss.qualcomm.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On 12-07-26, 20:58, Krishna Kurapati wrote:
+On Mon, Jul 20, 2026 at 04:42:21PM +0530, Ajay Kumar Nandam wrote:
+> Hi All,
+> 
+> Gentle Ping on this discussion.
 
-Krzysztof okay with this..?
+> CC'ing Danilo Krummrich and Andy Shevchenko
 
-> Declare the USB-C QMP PHY present on the Qualcomm Shikra SoC. Shikra uses
-> 3 resets to be programmed before initialising the phy. As per the hardware
-> documentation, the third reset is PHY_PRIM_SP0_BCR, hence naming it "phy".
-> 
-> Also, add remote endpoints and orientation switch support for getting
-> Type-C orientation information.
-> 
-> Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-> ---
->  .../bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml   | 49 +++++++++++++++++++++-
->  1 file changed, 48 insertions(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml
-> index efb465c71c1b..98397006fa62 100644
-> --- a/Documentation/devicetree/bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml
-> +++ b/Documentation/devicetree/bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml
-> @@ -18,6 +18,7 @@ properties:
->    compatible:
->      enum:
->        - qcom,qcs615-qmp-usb3-dp-phy
-> +      - qcom,shikra-qmp-usb3-dp-phy
->  
->    reg:
->      maxItems: 1
-> @@ -33,12 +34,15 @@ properties:
->        - const: pipe
->  
->    resets:
-> -    maxItems: 2
-> +    minItems: 2
-> +    maxItems: 3
->  
->    reset-names:
-> +    minItems: 2
->      items:
->        - const: phy_phy
->        - const: dp_phy
-> +      - const: phy
->  
->    vdda-phy-supply: true
->  
-> @@ -63,6 +67,22 @@ properties:
->            - description: offset of the PHY mode register
->      description: Clamp and PHY mode register present in the TCSR
->  
-> +  orientation-switch:
-> +    description:
-> +      Flag the PHY as possible handler of USB Type-C orientation switching
-> +    type: boolean
-> +
-> +  ports:
-> +    $ref: /schemas/graph.yaml#/properties/ports
-> +    properties:
-> +      port@0:
-> +        $ref: /schemas/graph.yaml#/properties/port
-> +        description: Output endpoint of the PHY
-> +
-> +      port@1:
-> +        $ref: /schemas/graph.yaml#/properties/port
-> +        description: Incoming endpoint from the USB controller
-> +
->  required:
->    - compatible
->    - reg
-> @@ -78,6 +98,33 @@ required:
->  
->  additionalProperties: false
->  
-> +allOf:
-> +  - if:
-> +      properties:
-> +        compatible:
-> +          contains:
-> +            enum:
-> +              - qcom,shikra-qmp-usb3-dp-phy
-> +    then:
-> +      properties:
-> +        resets:
-> +          minItems: 3
-> +        reset-names:
-> +          minItems: 3
-> +
-> +  - if:
-> +      properties:
-> +        compatible:
-> +          contains:
-> +            enum:
-> +              - qcom,qcs615-qmp-usb3-dp-phy
-> +    then:
-> +      properties:
-> +        resets:
-> +          maxItems: 2
-> +        reset-names:
-> +          maxItems: 2
-> +
->  examples:
->    - |
->      #include <dt-bindings/clock/qcom,qcs615-gcc.h>
-> 
-> -- 
-> 2.34.1
+I'm not sure how I can be helpful here, but it would be nice to see a small
+summary (a few sentences) to understand what this is all about.
+
+
+> On 7/1/2026 6:47 PM, Ajay Kumar Nandam wrote:
+> > Hi Saravana Kannan,
+
+And yes, Saravana, is the main expert in FW devlinks AFAIK.
 
 -- 
-~Vinod
+With Best Regards,
+Andy Shevchenko
+
+
