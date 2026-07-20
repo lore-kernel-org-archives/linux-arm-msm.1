@@ -1,85 +1,93 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF2304189DD
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 13:42:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEA16428464
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 13:48:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784554934; cv=none; b=DGG3/A894Dra2aEnRvZX1PRPJuSizxykPaii5ZMwdHHUM0kFsxpRE/E3JkhTKt7CZzWwxbZ+3bcOH/DYSgwESPiiJs0RYjxoXVfrczV8doA+GwL3bQF+ckKN2lpZcjxziuUIWA0w6HjrY+j9DdqhtXOTgNAcizT5R5OJG42JmbM=
+	t=1784555333; cv=none; b=n6eAkIzxCWcuQLMGJ+zkt+siHCeBmAwpqMfon8S6bFV8gxZ2qTzItitvulMrJ6bDc8JKJ9RY9dNNUPwhBhRopm7Kwzbgm2yphm5XFCKBR3Ux67EyYY/NmNa6kbnGuxxP19qfpZE4pEL8/BQD7967LNAh1mPRYJISUGtkOVP0olg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784554934; c=relaxed/simple;
-	bh=AufKo+x9e+YTdFLLkWDq/9s35hno6ztNd/WNA1wwc3M=;
+	s=arc-20240116; t=1784555333; c=relaxed/simple;
+	bh=VXTL0nWUs6ARY7/mBgCqD9/Pk4RANoGqiEM640qRpmI=;
 	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Sea+nyXBfF4PY8Bl6P0kFU/LUP/fUtWfsYlWqWsDChw7PhvzEDYUgKUSzEpb+hvzZxYeHGNqQOTgcFil9yiO1U0xSeMSK4MuDahnKRwe0LgnxQ6HbXaL8t9zxhBCr/R6LhJIwph4PDw4g22pkE/KDt7oV1MrDgIBLai8mXP/iDY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=krAYSCer; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=dlWMmUcLvuZGbiDR7akQ4/hRXlYOva3DGrmQwiWbu601j9mJqtBCiak16AujmKIj/G8cMtQkqoTqeKB/EUKdIyW6jUDNxPc2qfXcwddYB8qtMatspxTt0OgOxLhJ0pzDIns5VaT6iBqtGQz6P5U/614rOK/i19Or0oTLKedmZwE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I7Uuk7al; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="krAYSCer"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 11D441F0155A
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 13:42:09 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I7Uuk7al"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CED371F00A3F
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 13:48:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784554930;
-	bh=AufKo+x9e+YTdFLLkWDq/9s35hno6ztNd/WNA1wwc3M=;
+	s=k20260515; t=1784555329;
+	bh=L8C49SuWPc7UrHJM/7J+so26KwjGuUOI0PDx4EtC0qI=;
 	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=krAYSCerPbAECToptJptyTSvTQt7Kqimf8k+M4PHZeg6rRF79l5bokUGb5Bm5N0A8
-	 G+9sSA6KjlEz4F7A1BXsYQJ/RXnqf1kUsNeAqhCZnbfS7cCJHACJdeoBBip6HMlvED
-	 uHGd3QwRKS/e61Ck1rt4R3Dag+/GXhyeBFARYWJ2yEXuANbNUSB5gkjF+KWLvkfFNB
-	 cGRJ403bqJjvtVE+j7FG3oCkLdqEcATk47NMOQZc/myax3lbpFx7BEvMduC8b8UK21
-	 rHNp7EiK/d0IjT5BABx0nbBaJ4Afs8PjeCpHanZWmtx0oXz7QyrSS/pVpLwfzYPDl+
-	 UtaSQw5TblhNw==
-Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-5aec201b582so10085512e87.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 06:42:09 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RoE8Fg5P3Bp2qvJ1WsR7iPyIxRMR7ngJ7siWDWVzd8vEZsWO35RTlM8gce9ArG54SFaFWaWJK7i7iZ9YH0Y@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzvf9jf4jUAsuwEVPHbsX8mcQkKHbgQLjhTl0spKUxXtpRj2DaJ
-	RMW4qeOQoqwZvBLI99d+Uqo0wpSz3Ayv4efrv9XPHiaL68RxTZ9lHbBeXFkbOJe4zjb+OPqcZGe
-	t/FYGXBTiJKjdmHkqM9hd1PUc5rzlZ3kJtFdiuRG0dA==
-X-Received: by 2002:a05:6512:696:b0:5b2:9f9c:4634 with SMTP id
- 2adb3069b0e04-5b29f9c46c3mr777376e87.45.1784554928648; Mon, 20 Jul 2026
- 06:42:08 -0700 (PDT)
+	b=I7Uuk7al+n5XzzlG/XnQBVnxY7TZgxpnqsXwWLApjhiG+g/vX4f98U+9S4j0CuOXN
+	 3f85WqSEv7syaPxiHzQNQt7OXy6syNK2q7cc8W0pj/Y7HK/HdExnrG+gYCzoqwoslx
+	 FF7lHTtj0dMj/7AaOrUc/qaand8UNGH6rnk7uON6qph/amzVe0/rfHH4YXUZuMaNPW
+	 hrQvGv5q/f9cdOg/MJfA3xaJHSU1Uc6oN9dpTDjHlNFKwrKTHHWeBTuhCAyPp/AFfS
+	 PVzDT0ntC4ezmV4fp7k7KfN/X1o3xm+Z9hkDTMPiTclh8toIYxO6KVl/MzhQaV/SZE
+	 WiVTMz5Vr8aEA==
+Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-5b159850b16so6334118e87.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 06:48:49 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RoJbTMzCKQGXRzSAhtg89rNK+Ag94P6kDfeVWcUYPVKTVlzEazcy6B3ZJzPuQev01v/20kYjAGh/cQwH7Cv@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy9BYu+87hloeQKB94Ud3qyrvdER2ERQryv94KxBf5EJdc+rMlq
+	PkWwO3w3O6MyIEWJ8PpnCyQ8+RVIG0INswSnubp2BCqXTEjKsB/LN1kJ4oJnQCvTZQvvrqeVHvS
+	DBlYQR2pOxog75FcaDNp2nzRpkxhXu6TFDdASt0DigA==
+X-Received: by 2002:a05:6512:282:b0:5ae:b24c:7723 with SMTP id
+ 2adb3069b0e04-5b28f875b5bmr2211818e87.17.1784555328484; Mon, 20 Jul 2026
+ 06:48:48 -0700 (PDT)
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 20 Jul 2026 06:42:07 -0700
+ HTTPREST; Mon, 20 Jul 2026 06:48:46 -0700
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 20 Jul 2026 06:42:07 -0700
+ HTTPREST; Mon, 20 Jul 2026 06:48:46 -0700
 From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260720130511.493295-1-prasad.kumpatla@oss.qualcomm.com>
+In-Reply-To: <0CB2D8D715AB9933+20260713072543.3348755-1-raoxu@uniontech.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260720130511.493295-1-prasad.kumpatla@oss.qualcomm.com>
-Date: Mon, 20 Jul 2026 06:42:07 -0700
-X-Gmail-Original-Message-ID: <CAMRc=MfvfVvJ4anwY5WZUr5K8fSGkcvejah72fUDLc7ZC59jNw@mail.gmail.com>
-X-Gm-Features: AUfX_mzkKRJxqWtXztybEccZih4vaheradj3-Hfi7e4EOBdahV046NLAZZdxguU
-Message-ID: <CAMRc=MfvfVvJ4anwY5WZUr5K8fSGkcvejah72fUDLc7ZC59jNw@mail.gmail.com>
-Subject: Re: [PATCH v4 0/4] ASoC: qcom and pinctrl: add LPASS LPR voting and
- Hawi LPASS LPI TLMM
-To: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>, 
-	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
-	linux-gpio@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org, 
-	Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Srinivas Kandagatla <srini@kernel.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+References: <0CB2D8D715AB9933+20260713072543.3348755-1-raoxu@uniontech.com>
+Date: Mon, 20 Jul 2026 06:48:46 -0700
+X-Gmail-Original-Message-ID: <CAMRc=McFRb8iZaDLY=DfLfDDA9WFJeNG94CaQeF3RJDgyqe8bg@mail.gmail.com>
+X-Gm-Features: AUfX_mw4AS4rGrPFiCIt4A6Wg2v_GfsNMetY7jsTwq9BAgndocjnJSk4IIzAsLs
+Message-ID: <CAMRc=McFRb8iZaDLY=DfLfDDA9WFJeNG94CaQeF3RJDgyqe8bg@mail.gmail.com>
+Subject: Re: [PATCH] Bluetooth: btqcomsmd: destroy RPMsg endpoints before
+ freeing hci_dev
+To: raoxu <raoxu@uniontech.com>
+Cc: marcel@holtmann.org, luiz.dentz@gmail.com, linux-arm-msm@vger.kernel.org, 
+	linux-bluetooth@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	stable@vger.kernel.org, brgl@kernel.org
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, 20 Jul 2026 15:05:07 +0200, Prasad Kumpatla
-<prasad.kumpatla@oss.qualcomm.com> said:
-> This series adds support for LPASS low-power resource (LPR) voting
-> through PRM and introduces LPASS LPI TLMM pinctrl support for newer
-> platforms such as Hawi.
+On Mon, 13 Jul 2026 09:25:43 +0200, raoxu <raoxu@uniontech.com> said:
+> From: Xu Rao <raoxu@uniontech.com>
 >
-> On such platforms, LPASS requires LPR resource voting via PRM to keep
-> the subsystem active. This is handled by adding a new clock ID and
-> support for PARAM_ID_RSC_CPU_LPR in q6prm.
+> The command and ACL RPMsg endpoints store struct btqcomsmd as their
+> callback private data.  The receive callbacks dereference btq->hdev
+> without taking an hci_dev reference.
 >
-> Additionally, a new LPASS LPI TLMM block is introduced, requiring a
-> dedicated DT binding and pinctrl driver.
+> The current teardown order frees the hci_dev before destroying the RPMsg
+> endpoints in both the hci_register_dev() error path and the driver remove
+> path.  If WCNSS delivers data in that window, the endpoint callback can
+> run with an already freed hci_dev and pass it to the Bluetooth core.
+>
+> For qcom_smd endpoints, rpmsg_destroy_ept() closes the channel and clears
+> the callback under the channel recv_lock.  The receive path holds the same
+> lock while invoking the callback, so destroying the endpoints first both
+> prevents new callbacks and serializes with any callback already running.
+>
+> Destroy the command and ACL endpoints before hci_free_dev().  Keep
+> hci_unregister_dev() first during remove so the HCI core stops issuing
+> operations before the transport endpoints are shut down.  In the full
+> registration-error cleanup path, return directly after freeing the hci_dev
+> to avoid falling through to the partial-construction labels and destroying
+> the endpoints twice.
+>
+> Fixes: 5052de8deff5 ("soc: qcom: smd: Transition client drivers from smd to rpmsg")
+> Fixes: 9a39a927be01 ("Bluetooth: btqcomsmd: Fix a resource leak in error handling paths in the probe function")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Xu Rao <raoxu@uniontech.com>
+> ---
 
-What is the merging strategy? Is an Ack from Mark required and the series
-should go together through the pinctrl tree?
-
-Bart
+Acked-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
