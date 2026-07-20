@@ -1,87 +1,86 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1983F3CF211
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:34:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC847395AE7
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:35:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784543659; cv=none; b=P6zKPKARBSWHyNXAP1AtjJHzBX7gauA0KcKkK8nxacbnwksOUhzcELQhQ8ut+k5PqvKyDsF/Wgn6vZ5M3qCyAC5FPdCN85IMYrKwEanh9peUo4qZD4BD5XglMpMqT38xC1Dlnsvihoq+Wr90D10OL4f3zr0hAJMKtEAXGtXHMNI=
+	t=1784543738; cv=none; b=qG0QWOK2+PBLkR1kimODfycaFqT3PYz5dE0e43hmPlJG7yxd0nbSr1TyzDhWH4tikCCLlWKfNmbnYsvSBYbMr+jxYX+nNp3ZDkobVd0JdfhEBIbYuBn0YzL0ATLibkr4i6gJm9mZ6QKer6UbdS8ZaeE7AxLW5K9x6/uYLmC5RAg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784543659; c=relaxed/simple;
-	bh=nfb9wr1IkGcOE/xOB087/ooy5UHg3twujjs8ono0J50=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=JATwh4vsGCxdYS2d263RGItr1lTtdmDAArgkIISLH6bY2P6HRD+usMzHnyIQ8BzfInAPBCiMufrGhay4SWO1O/kBczqzU1/yfyVYLZDGciUx4dLfzIogI90fqgsfWp+wfaAoxuEwlAYLtZ/kkTrEhfmKXwOWhEfJca5LLlR0rXw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hwhQA1Ms; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=JDYzPe5g; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1784543738; c=relaxed/simple;
+	bh=gS52Jb9Lr4yRWxZraCQvcHHB+nkdhUanDAxrT4OUIS0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=mahhraRfnw+P57s2DLKa/brf09JwAg/lSJJWRsb4lz6Aty2ifjR7mYp5XFNS/VPZcrlCaDQQgmVXnf4f87SaqNqBgpPH9aLmY6zGYEIcIPi+y22pNQCKehpNsyLkmduI4VljQTUEB7UkigYAREveo2XFCf+VITfT/bxHUbJQfLQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=UjT+1A5+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=O0BOOtXV; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hwhQA1Ms";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JDYzPe5g"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="UjT+1A5+";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="O0BOOtXV"
 Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66K9vTc43295643
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:34:17 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66K9vT4f3295679
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:35:36 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	dHewdeqeVNcntSNtq50xsoiwCnZXmMXQMckL5dStHcY=; b=hwhQA1MsitD5btdd
-	JqsR13zTYhd8UuvDpj3UXwKAUPj0TaA5iOiiU4fX3Dl0h9mYVWFrxWQnM99+iJ4g
-	ANjDaLE4FRRQuJu80TqDoXekVCzaxkVLwtmfcI6PJATKmGrTqGCbOwiZ6OYuFEI8
-	jOh4DmrE1VTsI8P1lcjSb7gPcsmo/WiWwBtB1y7hkqOgW7fehnlM2UbgKLWXfV/O
-	0zqdnt3bPWdecuslW7LhPv33ZFqcWXsEp5FqPXPeNcHWCq9XKRAlNqK/qi2+P7In
-	a+NLjlbpaVpOdDkCchhe5vLBtRiXesNklo53o2kwUF+jj/a2DAXWu6+yKeS9pNvl
-	II1jsg==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhfpg0qjr-1
+	gS52Jb9Lr4yRWxZraCQvcHHB+nkdhUanDAxrT4OUIS0=; b=UjT+1A5+QV94i2BB
+	8R8IY0JjmldJqgx3Pu18ee6N+fPINGEqIqqjeKY6xVDuppQ1cRi/QGnT7Oq5a+b0
+	HE2ATAoz6ACJuErlb1hwHcs/XMN17KTyDzoWMYmcqmnLE+aY0zb0FJRQic5wJwcW
+	vRtAGqUxc3Xy3WaFAKMIz7fR9AIORfds2W1Z3atmRVJuszVSgzwMC0yoz6uCOJzg
+	gv5X79MUb4qcdK0innH/fJ9sEi0FWxGKVFogslvnlqLRpCeSCKJu1QnETUCpV09I
+	1/dQpo3L87YLm7MpomOw5QfBsD6QrSiP1AZc6jOtl0pkkpgkS7e1xKVwzmkyffPc
+	cnUVGw==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhfpg0qqw-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:34:17 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c0f0a0760so238057831cf.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 03:34:17 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:35:36 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cefa1a2be6so77637635ad.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 03:35:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784543656; x=1785148456; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:subject:from:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=dHewdeqeVNcntSNtq50xsoiwCnZXmMXQMckL5dStHcY=;
-        b=JDYzPe5gSFLBXpr0jn2UytSwo/xvsKQ7ZbV/6tTuv96WzY1QALl9SvYfYcWUSHJUry
-         LM523S9jKJqQQHurk/iiU+Deb7lwSsPamTYcK0cJt0jrd+Selie8m1oO14gW9fyLAr8L
-         6XdjzcEJ3FCqb0KimAFBHcvphQhX0RqjWmemVWNOVZ2ijbhYwq5P0FG2QxZ34aWejg/c
-         22ueaFihn8CaAO6LXAd1TOhtaHr9oafftuLYpFY0mCUjlZcsvX0fTRQRLyidwVGTjpcA
-         RAc8zmeLKR47KeDJbZ/4y8h3QSRPlJZkahAheqKrEsFf/938F7Y0vKew7nQQlOTwymmz
-         3MiA==
+        d=oss.qualcomm.com; s=google; t=1784543735; x=1785148535; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=gS52Jb9Lr4yRWxZraCQvcHHB+nkdhUanDAxrT4OUIS0=;
+        b=O0BOOtXVDZuKF5cvBUV9qABo7nM1oNQCr4pdTEs4WJ3F7o4JmXzBqWidOgRA3Rfhw5
+         ICH7ZmEBUJHsO+k94ONrInKgPr0w01mPONvx+waurmUWfhL4JfNCtIYuGPxsPvrRHDlw
+         LaRkr8hfOhkHRQpxzUUHjcfzPixTb5mRQTrwZbhTC9sH1AZGpW66pec4AZSN0ZY9r64W
+         g6vBeOSfEgLhLyYDZmt09l2d+Y1iyP6iAnN0CAMTy1a8hLK52wKhOM9cGy3K/kHuhP+k
+         bqKZN6WdI00tm/UZoP4+ntlJc8cpCCZ7rDUSCzXc88Uu34v/9SFze9f46me0Hk3B1bXV
+         3AiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784543656; x=1785148456;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:subject:from:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1784543735; x=1785148535;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=dHewdeqeVNcntSNtq50xsoiwCnZXmMXQMckL5dStHcY=;
-        b=RbT7W6GUerJTAJIdD7vfncrQzGdCl2Xtwj5gJqRobsIupJ4FXOT90+52zl5NLtZFuQ
-         //M0BFwyhh9ZajkCb4necoYIo2CEYk3GYXxLQ+s8Co0rHjqiN5J+Wsh4tIstqYmm9HoZ
-         /FGQF6NbF9CbNDPrsPVZ2/p5/g0PHtpO/gMb2WqEztsZCc8nO7dTYkVbGqidWXb4XLfd
-         M7P/lIUWdd3SOTvuJBIQrp9SnzlV0sIL2KTVtmooVzQtlr/j4y0BCR4VLvY7PBI2y9Rc
-         EXwUixcUB3TZ0hHFQwJxBC3Ekqbzb4qyR1bIm1XopQUAu31n4RG20PQbl253s2xJKJbh
-         SUlw==
-X-Forwarded-Encrypted: i=1; AHgh+Rr+7A4qi/iA0TAs9fRh74m038+BIHC1irGrisAVLcOIBSobqCT7eOlVdo8ts4sQ92mtBoVXrviQCAH2Dw+a@vger.kernel.org
-X-Gm-Message-State: AOJu0YwYC/LkAKsJUs/b82lXCs0UpCN0HYQVLDapwAm9qh5N5WS31CVz
-	+mJlb1QAQNteNNwwpo5XmZQ6qcuv8FqaTIeiMJstsqeU5ATq8f1lmI/At910xGICSmEag6oYYtR
-	tPdYqubta5lw/y8mrqplCvUN/8ZRJZIGdPuD87mEKfJ31MCsfvAEqcBxg6o1vlYrAYvRk
-X-Gm-Gg: AfdE7cmBTkcqJ9EhpZGVSdfEnou9eGq0bGbMudhgGxlyeI86APJJQ3fFLcbGaUGgiOz
-	Nh+xTbCdhODkLvkjx6c6Uh/34PTyTtPjyhngW5JTT9cNFaA/H51Urrkuq5m5EHbarYg54n0pMlW
-	k59LSWs+lP0kF+n9HYCun3pXt/wbztGpseWdmpMQo6DFrvt5wL+NexFq6W/1/O0FNahnmBrDyIW
-	EiUGcPVFhKPfleDsNRMx+AdMunvP0y0Iqz4NSjqjlCDvyr4joOead4W8sirFM9piArCCU8WlE7D
-	UQMjaJnypClVvzstV1H0NoLtH8rFy4ikDB5Ubqa+URyzU1mtmT9knZbTEll1NdZNRYIUzr845Zx
-	Zpf9A/MR/vITIcG0eAotk7mGq2mESkJKjvm6veeLIERWiQYyktMzA3kZWQGbF547djAQhTF38Cb
-	UXYsP9qQpmwgu640Ins3tzKcsDUi95daF74XOPxGsgXWwlANUgBTszqSRlJa9jdHpomyA=
-X-Received: by 2002:ac8:5d88:0:b0:519:55c0:a1e5 with SMTP id d75a77b69052e-5213c8e3aa1mr118700921cf.8.1784543655099;
-        Mon, 20 Jul 2026 03:34:15 -0700 (PDT)
-X-Received: by 2002:ac8:5d88:0:b0:519:55c0:a1e5 with SMTP id d75a77b69052e-5213c8e3aa1mr118700261cf.8.1784543654369;
-        Mon, 20 Jul 2026 03:34:14 -0700 (PDT)
-Received: from ?IPV6:2001:1c00:c32:7800:5bfa:a036:83f0:f9ec? (2001-1c00-0c32-7800-5bfa-a036-83f0-f9ec.cable.dynamic.v6.ziggo.nl. [2001:1c00:c32:7800:5bfa:a036:83f0:f9ec])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c17009adff3sm439489566b.2.2026.07.20.03.34.12
+        bh=gS52Jb9Lr4yRWxZraCQvcHHB+nkdhUanDAxrT4OUIS0=;
+        b=RMxfZiwJMZw09KIx3i3cG68WSZrbULLiJpZkE6uPunfwRkQalPOCTAx3Ck+RUGL6UT
+         SwwAqqsJEai1GkOzWddwYoQGSRgMB1Jb9vx/wJ35SnaADj6F1md9kU8T82Ts6mGnSgVz
+         CIgg8RywXPaVIQPoNSyyuJn8n8/9QpCLQ9WWU2uf3lE0wsyik6L71XUYem8W94xdkvX+
+         Zzgq6uYikSLTSKG90OaL1hxvTkgScu0GiO7z6c0GHGt4cJiEOwc0P0KWgadtcAO+6dr5
+         QTSkgQriIDiJfnaxbIPkluOYfrbkCJZRfJEmkavKZ4BJ0F2zMEUrAQzktedb8dae1EAG
+         D/4A==
+X-Gm-Message-State: AOJu0Yyw5lOf7VBz+lJYJc2FW9Bw7FQbFXgmyCc/GKSm6qn/oMcwHLC3
+	GRfX5U0Eh+UxDpKgiv1R3nTMdhcWzp35t02FIEAY0csNtoaTPR3uXhYXZLVIi1hkXEmyFhJvFd9
+	MD+rq+Bxy17G6szpyAxa2KxhEnXj7bVgnNeRA61nJPFS8847z+r8EoFWnJZqkWyA/7nRh
+X-Gm-Gg: AfdE7ckqDcEHyznB5PiYZKKyfzgoH5rFKvV1XRq/VN0IGHQxh39m5+N5k9Siysp0eij
+	usbp+Qb07KUirCcB6DddjS2lDS9K36JMYHCEvfOY2YMOdM8REDpNNYVmCwBkgnVoGGQT1aTrToT
+	jItpadL4iUKd3PwgIPxDOSwWdRV0HoPl7/mI30ErVeeSldjpZ83zGyw0qCJiusn0604taZq0Cvq
+	V1yDO2PZSHDpd3wfRAJde5w9FQ/nOwWuEIpR3YQYvAHbbPA929SN2QTQLJxAMO30B0LIBRLAXfw
+	jX07Ag8cux1CDp4FDksc/hGbNo1TNmEDkAa+kD+jukOq1Z/o9vaP+cF7AHOFd3idD3nXr8o9HOg
+	lNO3fRtRjr/GgYqJKGPQfdnXBrZ/IO2Mw6YS5T7kYxrMkJBqoayi0SYVobSVlUyGiZKCJePaO
+X-Received: by 2002:a17:903:1b0c:b0:2c9:e5e6:8621 with SMTP id d9443c01a7336-2cf3496bdf7mr142578795ad.25.1784543735150;
+        Mon, 20 Jul 2026 03:35:35 -0700 (PDT)
+X-Received: by 2002:a17:903:1b0c:b0:2c9:e5e6:8621 with SMTP id d9443c01a7336-2cf3496bdf7mr142578485ad.25.1784543734602;
+        Mon, 20 Jul 2026 03:35:34 -0700 (PDT)
+Received: from [10.133.33.169] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf3448f614sm53959155ad.5.2026.07.20.03.35.31
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 20 Jul 2026 03:34:13 -0700 (PDT)
-Message-ID: <8d86ca46-d329-4e65-a7bf-2b79fccddf05@oss.qualcomm.com>
-Date: Mon, 20 Jul 2026 12:34:10 +0200
+        Mon, 20 Jul 2026 03:35:34 -0700 (PDT)
+Message-ID: <9c648fca-b55a-48c2-8fa3-27083c03e826@oss.qualcomm.com>
+Date: Mon, 20 Jul 2026 18:35:29 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,110 +88,41 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: johannes.goede@oss.qualcomm.com
-Subject: Re: [PATCH 8/8] media: ov2740: remove NULL reg_write callback
-To: Sakari Ailus <sakari.ailus@linux.intel.com>,
-        Link Mauve <linkmauve@linkmauve.fr>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Kevin Hilman <khilman@baylibre.com>,
-        Jerome Brunet <jbrunet@baylibre.com>,
-        Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-        Jonathan Cameron <jic23@kernel.org>,
-        David Lechner <dlechner@baylibre.com>,
-        =?UTF-8?Q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
-        Andy Shevchenko <andy@kernel.org>,
-        Tianshu Qiu <tian.shu.qiu@intel.com>,
-        Bingbu Cao <bingbu.cao@intel.com>,
-        Mauro Carvalho Chehab
- <mchehab@kernel.org>,
-        Aaro Koskinen <aaro.koskinen@iki.fi>,
-        Andreas Kemnade <andreas@kemnade.info>,
-        Roger Quadros <rogerq@kernel.org>, Tony Lindgren <tony@atomide.com>,
-        Lee Jones <lee@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        "Vaibhaav Ram T.L" <vaibhaavram.tl@microchip.com>,
-        Kumaravel Thiagarajan <kumaravel.thiagarajan@microchip.com>,
-        Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
-        Pengutronix Kernel Team <kernel@pengutronix.de>,
-        Fabio Estevam <festevam@gmail.com>, Vladimir Zapolskiy <vz@mleia.com>,
-        =?UTF-8?Q?Andr=C3=A9_Draszik?= <andre.draszik@linaro.org>,
-        Orson Zhai <orsonzhai@gmail.com>,
-        Baolin Wang
- <baolin.wang@linux.alibaba.com>,
-        Chunyan Zhang <zhang.lyra@gmail.com>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-        Alexandre Torgue <alexandre.torgue@foss.st.com>,
-        Praveen Teja Kundanala <praveen.teja.kundanala@amd.com>,
-        Kalyani Akula <kalyani.akula@amd.com>,
-        Michal Simek <michal.simek@amd.com>,
-        Alexandre Belloni <alexandre.belloni@bootlin.com>,
-        Joshua Kinard <linux@kumba.dev>,
-        Antoniu Miclaus
- <antoniu.miclaus@analog.com>,
-        Chen-Yu Tsai <wens@kernel.org>,
-        Jernej Skrabec <jernej.skrabec@gmail.com>,
-        Samuel Holland <samuel@sholland.org>, Miguel Ojeda <ojeda@kernel.org>,
-        Boqun Feng <boqun@kernel.org>, Gary Guo <gary@garyguo.net>,
-        =?UTF-8?Q?Bj=C3=B6rn_Roy_Baron?= <bjorn3_gh@protonmail.com>,
-        Benno Lossin <lossin@kernel.org>,
-        Andreas Hindborg <a.hindborg@kernel.org>,
-        Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
-        Danilo Krummrich <dakr@kernel.org>,
-        Daniel Almeida <daniel.almeida@collabora.com>,
-        Tamir Duberstein <tamird@kernel.org>,
-        Alexandre Courbot
- <acourbot@nvidia.com>,
-        =?UTF-8?Q?Onur_=C3=96zkan?= <work@onurozkan.dev>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Johan Hovold <johan@kernel.org>,
-        Ronald Claveau <linux-kernel-dev@aliel.fr>,
-        Salah Triki <salah.triki@gmail.com>, Yury Norov <ynorov@nvidia.com>,
-        David Carlier <devnexen@gmail.com>,
-        Achim Gratz <Achim.Gratz@stromeko.de>,
-        Alexander Sverdlin <alexander.sverdlin@siemens.com>,
-        Patrick Wicki <patrick.wicki@siemens.com>,
-        Markus Heidelberg <m.heidelberg@cab.de>,
-        Markus Perkins <markus@notsyncing.net>,
-        =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig_=28The_Capable_Hub=29?=
- <u.kleine-koenig@baylibre.com>,
-        Bjorn Helgaas <bhelgaas@google.com>,
-        Abd-Alrhman Masalkhi <abd.masalkhi@gmail.com>,
-        Chen Ni <nichen@iscas.ac.cn>, Kees Cook <kees@kernel.org>,
-        linux-arm-kernel@lists.infradead.org,
-        linux-amlogic@lists.infradead.org, linux-kernel@vger.kernel.org,
-        linux-iio@vger.kernel.org, linux-media@vger.kernel.org,
-        linux-omap@vger.kernel.org, mfd@lists.linux.dev,
-        linux-i2c@vger.kernel.org, linux-gpio@vger.kernel.org,
-        imx@lists.linux.dev, linux-arm-msm@vger.kernel.org,
-        linux-stm32@st-md-mailman.stormreply.com, linux-rtc@vger.kernel.org,
-        linux-sunxi@lists.linux.dev, rust-for-linux@vger.kernel.org
-References: <20260715175229.24672-1-linkmauve@linkmauve.fr>
- <20260715175229.24672-9-linkmauve@linkmauve.fr>
- <al3sxMUgeK49dwNs@kekkonen.localdomain>
-Content-Language: en-US, nl
-In-Reply-To: <al3sxMUgeK49dwNs@kekkonen.localdomain>
+Subject: Re: [PATCH] rpmsg: glink: Split protocol start out of native_probe
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, chris.lew@oss.qualcomm.com,
+        tony.truong@oss.qualcomm.com
+References: <20260618-rpmsg-glink-split-protocol-start-v1-1-c4f93986cdb4@oss.qualcomm.com>
+ <43293037-99bd-457a-b190-31fb24625b1c@oss.qualcomm.com>
+ <0585ee18-5bd3-424b-93b1-eb841c26b63d@oss.qualcomm.com>
+ <2be76246-3430-4f76-b6a9-11de39a961e7@oss.qualcomm.com>
+Content-Language: en-US
+From: Chunkai Deng <chunkai.deng@oss.qualcomm.com>
+In-Reply-To: <2be76246-3430-4f76-b6a9-11de39a961e7@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDExNyBTYWx0ZWRfX/2C8NKW5VI3j
- QFpZz3FRUEEda+oGw5sJ0Fd7qYdb7MsMRY1+N7qMwsL2gpbcxzQlwT0X2/ndpOO9EE3K4SgKQr1
- 9iYykzlyRZnskX92RjzCH6vxzGOaBSQ=
-X-Proofpoint-GUID: Gnze4F1K337S5pgYGuoDMMaWllkA0HTF
-X-Proofpoint-ORIG-GUID: Gnze4F1K337S5pgYGuoDMMaWllkA0HTF
-X-Authority-Analysis: v=2.4 cv=c+6bhx9l c=1 sm=1 tr=0 ts=6a5df9a9 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=VwQbUJbxAAAA:8
- a=2y0c4oOAfBMx015UTLoA:9 a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDExNyBTYWx0ZWRfX6DV8tbiFKLWX
- cffJD2uSwUWO2yg9Mr1yL/ScgobQH29nP1KYo+MgW6r1TtOpD8I8Q54DvRGsaTZRKnrYXzAXArG
- Fh0VIw+6zorrWPFVziZaDdV+hSG8PH0IFEMlsywWBT52XglBJz0m1XfMMSNvYy+CB7ZDsEkFHf6
- eh3iHTfDPz7WeqnRMpkEiW/20WO9DfwVjyQ0EBz7McbmRLTXtJ+A9nx5HxEuvnXbDwicz9d426/
- wAApC3E2CFRjaLNfvq9RewX2e5i9w2y/x8P3hUtGqgn2YETxQuXs/YfF1VkrXX8Ya+4y46Xq1wD
- No4cokBckJev8OVDA3G9ubwzdB3YKn8N+pUKt9UlDqK3Y2fsXluHZHbp0ti/fNBmFjlGP9gLi85
- opf9xZTqNTTLiZWz7KVEq156iqN9N+1btUYGCFXF378baKJvDBegvqtx62JLHvSlb5XJCBj4FPD
- RQekNMpyA9xIxUv5e/g==
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDExNyBTYWx0ZWRfX1WEd7IpuBwGq
+ s2EI0GSLP/WAO6758sOiWMUqY7rrTfLMoM0RcGLbPI4KLYPPweFR9sXDn24juy0//WYp1ZczwWx
+ q2xSijlq7LU9mOuL16TC50WA+p6YCjc=
+X-Proofpoint-GUID: oUuRBtvIHB6puNCaomSjnl8xNKaBCklt
+X-Proofpoint-ORIG-GUID: oUuRBtvIHB6puNCaomSjnl8xNKaBCklt
+X-Authority-Analysis: v=2.4 cv=c+6bhx9l c=1 sm=1 tr=0 ts=6a5df9f8 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=X5oELPwlFjtDxv7hUZQA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=1OuFwYUASf3TG4hYMiVC:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDExNyBTYWx0ZWRfX8LtHU7ZoHx4T
+ WxRYx3M1lef7Ilbc0TtONx2aCxT2WLKZyLorMnEmnTfhRUvCkodbwSW+XbLxfRfE1CfDpWM6jGA
+ 0/JO+N+yiOC5HJruWYpuPPFGZGmEM4ikCNr7L0Mn0kq9j/nFqHWCU7blDuTltyNBfGbbgwAtLNG
+ 8Lf7LVzfmqAPksVFJa3UfubGc/HbA6owKAGhBb/g6/BGtPqlv+fkhzOVUCVUp1NeBW3yzs4ikHh
+ EkiKlQ0y9UXYU0TqrPKtBhOilWgIRb4L/uUpwSUjzFvLR9pIVRic+ppdld8fQwPn0mVRbOatT2E
+ YaYJZG0uEAR74Qz7WvJpS+/kggq943aaZJM7ofPO/mZZZdUDKSEH8KgjIGsryHprffv4W3TMy/h
+ c9FLGNfLgEFpXTrWx+qDs924K+IDEBA0vklz480VSgtXjIdOe9+aIZwzk5zABXrHtb5y6+pC+JH
+ ihXNlbsus9k+BtsPLVQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-20_02,2026-07-17_01,2025-10-01_01
@@ -202,55 +132,58 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200117
 
-Hi Sakari,
+On 7/17/2026 6:54 PM, Konrad Dybcio wrote:
 
-On 20-Jul-26 11:39, Sakari Ailus wrote:
-> Hi,
-> 
-> On Wed, Jul 15, 2026 at 07:52:24PM +0200, Link Mauve wrote:
->> This field is already initialized to NULL, so there is no reason to
->> write it again.
+> On 7/6/26 10:59 AM, Chunkai Deng wrote:
+>> On 6/29/2026 8:47 PM, Konrad Dybcio wrote:
 >>
->> This prevents it from appearing while grepping for reg_write in the
->> future.
+>>> On 6/19/26 7:01 AM, Chunkai Deng wrote:
+>>>> The SMEM and RPM transports request their receive interrupt with
+>>>> IRQF_NO_AUTOEN and enable it only after qcom_glink_native_probe()
+>>>> returns. Since native_probe() sends the initial version command, the
+>>>> remote may ACK before the local IRQ is enabled, stalling the version
+>>>> handshake on a fast remote.
+>>>>
+>>>> Split the protocol start (qcom_glink_send_version() and
+>>>> qcom_glink_create_chrdev()) into a new qcom_glink_native_start().
+>>>> Transports now enable their IRQ first, then call native_start(), so the
+>>>> version ACK is guaranteed to be serviced.
+>>>>
+>>>> Signed-off-by: Chunkai Deng <chunkai.deng@oss.qualcomm.com>
+>>>> ---
+>>> Would it not be simpler to just move the devm_request_irq a bit down
+>>> and remove the NO_AUTOEN flag then?
+>> Thanks for the suggestion.
+>> I analyzed and verified it locally,but I'd personally still lean towards
+>> keeping the current change as-is. My reasoning:
 >>
->> Signed-off-by: Link Mauve <linkmauve@linkmauve.fr>
-> 
-> I believe we need a real name here.
-
-We don't need a real name / official name here, just a "known identity",
-IOW not "anonoymous1234" since Link has clearly is using Link Mauve as
-their internet identity (given they went through the trouble of
-registering it as a domain) I believe the S-o-b here is fine as is.
-
-See: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=d4563201f33a022fc0353033d9dfeb1606a88330
-where the "real name" policy was weakened to "known identity".
-
-Regards,
-
-Hans
-
-
-
-> 
->> ---
->>  drivers/media/i2c/ov2740.c | 1 -
->>  1 file changed, 1 deletion(-)
+>> (1) The IRQ must be live before the version handshake — that's the core
+>> point that can't change. The version command is sent from native_start(),
+>> so we need to request/enable the IRQ first and only then call
+>> native_start(). That ordering is only possible with the version send
+>> kept out of native_probe(), so the split needs to stay.
 >>
->> diff --git a/drivers/media/i2c/ov2740.c b/drivers/media/i2c/ov2740.c
->> index fb590dfadda1..799eca4023da 100644
->> --- a/drivers/media/i2c/ov2740.c
->> +++ b/drivers/media/i2c/ov2740.c
->> @@ -1271,7 +1271,6 @@ static int ov2740_register_nvmem(struct i2c_client *client,
->>  	nvmem_config.compat = true;
->>  	nvmem_config.base_dev = dev;
->>  	nvmem_config.reg_read = ov2740_nvmem_read;
->> -	nvmem_config.reg_write = NULL;
->>  	nvmem_config.priv = nvm;
->>  	nvmem_config.stride = 1;
->>  	nvmem_config.word_size = 1;
-> 
-> I think it'd be nicer to do the initialisation in variable declaration --
-> all the information is available already there.
-> 
+>> (2) Dropping IRQF_NO_AUTOEN does make the structure a little simpler,
+>> and functionally it's equivalent, but I'd lean towards keeping the
+>> request-disabled + explicit enable_irq() form. It makes the ordering
+>> constraint visible at the call site: the IRQ is requested up front,
+>> and enable_irq() marks the exact point where the handler becomes safe
+>> to run(glink assigned) and where we want RX servicing to begin. Folding
+>> that into an implicit auto-enable hides that intent, and I think the
+>> explicit form is easier to maintain.
+>>
+>> That said, if you'd prefer the simpler form, I'm happy to do the IRQ
+>> cleanup as a separate follow-up patch on top of this fix rather than
+>> mixing the refactor into the race fix.
+> Please don't paste AI responses into your email client, there's a human
+> on the other side..
+>
+> If this patch was also created with the use of a coding agent, it must
+> be disclosed and follow the rules established in:
+>
+> Documentation/process/coding-assistants.rst
+
+Understood, and sorry about that. I'll pay more attention to this going forward.
+I did use AI tools to help with some of the analysis, but thatwas my initial view from the beginning. The potential issue here is that send_version() run before the IRQ is enabled. If the send_version ACK arrives during that window, it may not be handled. While removing IRQF_NO_AUTOEN and rearranging the devm_request_irq may simplify things a bit, it doesn't really address that race.
+Thanks, Chunkai Deng
 
