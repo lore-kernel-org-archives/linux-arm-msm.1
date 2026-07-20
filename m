@@ -1,86 +1,66 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE98D3B27FA
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 20:03:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F738449B08
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 20:06:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784577828; cv=none; b=plUCF4Y4Fy2ext1VXZ7xqveBFc4bPRRQxLQG3mY4GuCnJurQygQRmYxc3dS6yPHgtpH//YIawWnZ1F1edUTdh97W4ZyUfiuvvHGkskgSLu8oyh6lKBVXbteIIqYk9JyscLNDeWj65ob7G3ts3ECcYwL9gsAr7U9cfNqQ9bhco8Y=
+	t=1784577988; cv=none; b=tSXsl9XSeWrJOIklu5AckJEiL6F3YCQPp1qDg90bDs5Ff9nZe3WqWxJkrQLe3fBDN6GjGnhzpFnVvC+f8siCD63eO0WxKOxyRKEUlGoxcCiy5lWRlOjhYe8sAtfSXIFQwTnac7SdAvo5gYJ1tFT4Tuhu1vQSV3F6WHpAZjXUf8k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784577828; c=relaxed/simple;
-	bh=vO/oHDtiBeK08zj99SdGvx+O+AqtAveazytcmdamWNo=;
+	s=arc-20240116; t=1784577988; c=relaxed/simple;
+	bh=Qr4/zlfGO+ip6wZ/F+qhAFCtp+uypkDyk3NHaUSmcAM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=L+UYiaZpAd9yL4BAiotcT1otxkSAWBjTiW2FdA1KQrbFmgfmDT8kxgXd2SCch+iSFvIEpr+TT+yKMc65wGD2kN6slK+MpfFIKt4kESXxEBpaIlJUI7RhSLQoXwWDkPj87J0mjFtTloIagoQ+FYGYFPZ2cPTjOtKLWKG/Q4xnwGU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=U8+9F8Za; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=E6rJ/12R; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=bwzgkyM/jFoZBoEDwun4vPoI5DIarDbR5jyMQucwvr5sBUX60CHcSS0DsP9Pma8IRnhkCTToglQXD3KzXIIpLCoqST6LRlbLsSBn4DkBW9nWgkypAue7cgdbFXEyYJtHfw9C4XuV+rqrV4YU9pT7/KZTbx/oVyRJ15Na28nZQeo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=obf6Z7Vu; arc=none smtp.client-ip=209.85.128.50
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="U8+9F8Za";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="E6rJ/12R"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66KJTNm13752617
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 20:03:46 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	zqOluQK39isveZavwoVq1wksiLK91zYzzkBRNEfjOpM=; b=U8+9F8ZauaXSKAKV
-	09HkI1bnYwNsdI7bdnYTPPm/mxMMDE2lkCUBCCBA/2juPasq6ypYauSGhj260u+k
-	Y0az3kIc30HeDNc5ddbVD+fzpQMlQPy16Ss/i1B5xMYGsSqzotOlOgauuhnVC7Le
-	V/bR87/J11YrRY2JDYYwoWS0ckadKvEmHZHnbAHtT6rGaSKaRVGkXe8x+bCKCk1D
-	PsWeBMgzV1LTOeZnCJJ7jsEIDYDZFQ0o3KC3diYVGaDpw1Wxpu18P0C8AigDnSoy
-	HuGWEGqvHiwKNYUFlaRWZNZkCuYrQrLN4dPIUEDGEgkowjYuoK5WpvYyDi+oht8O
-	jIJ+GQ==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhqv5rpp9-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 20:03:46 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-51c1d7886cdso97342861cf.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 13:03:46 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="obf6Z7Vu"
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-495590dde14so18100765e9.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 13:06:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784577825; x=1785182625; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1784577985; x=1785182785; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :from:references:cc:to:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=zqOluQK39isveZavwoVq1wksiLK91zYzzkBRNEfjOpM=;
-        b=E6rJ/12RhVu28SzXq1jncVWQH7kwyoeGm7l/pXfpSolw7Rh0Wd6ytom33MshXmfkwe
-         zAW+D/ySq0JMz4QFUdBHs1HhYQRYaiSEAxnGf/7GUBZln1DY3u0VloQUuc9FT7XTY6Fr
-         mq7YqYOdsr7lpSVw2ypaolrFkejjemA0ITkxOCMxkOSQz/07252BsZc5ahPqvQlja+JW
-         ERGuz212/z1DVky95UsMa+9IQTpq4ke/CC/Cg1A1fp/aM9zKugRBZVhAkTch7FSHsqee
-         7MVU7txZFQ96WHgE/UPnHoXitc5pn6M0TraxCI9EF1oi/zg5KiuOrvOKYYGMlExDVGHv
-         4I8Q==
+        bh=90hzxiWfvmc2pNodPHMrUN3Ni18ZS0Dy7y/7ObcbFrk=;
+        b=obf6Z7VuyyGOhzSPoOj9gBchbqPF1AqPM+ZV3CYKQt//aU6ejYaNH76wPcMhD76tuM
+         5RkfRagJf/sA1NIVUdGPAUOjnjLYRrhFZ16WrJ/eio08mBChVV3xERFl9TvqxaTpLd5A
+         6vzsDJYgKVYTUHO4HCS3KzgaTz4jNfIdmKOzwDVJClz0P43MVL4Uf+DN7WgcHnZHjH9W
+         oomXxnB3BP3qp17/Jd/RSVJr0ch4oC7IiCLC2WPUqdvWhVn5Iy3n6SrpfszFQebVDtH9
+         jxdZohD2WJk55ELGgV6/4c0Tt+yuTg4rkgBnWsBYz0QnI0MYK08WlLoTKbszKnkvwt/e
+         vfQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784577825; x=1785182625;
+        d=1e100.net; s=20251104; t=1784577985; x=1785182785;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :from:references:cc:to:subject:user-agent:mime-version:date
          :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=zqOluQK39isveZavwoVq1wksiLK91zYzzkBRNEfjOpM=;
-        b=Cu5fgHmMLyjA3mYWbIqNo5HJNNk09KRReOqI//vYfHrMUkatto7S0wXx+M72T/cCM+
-         g9T/8X44B7oBELvu67dbsJhkuHcJ8D0rb4k6WNTIS576zqejbn4pP4+qEWlhd/zluAx/
-         PlG58MRZlJ0z/wz/pyqgnUDm4XgUFu64zjiCnv6lwVcuoGePPxE3cQ7qY70mTSvasRCG
-         Ix4McCsU9LZ1fjryTLMyUWXfEVQg4sDtMc/jnB4+gcgoaDEiIiYlhs4qQ1YkTYpRKENe
-         YEXvqizAwdUnAHOTSWibD4x2M4jBzgFfSx8Tx+pJmYL9TAp2n0Tm9bT+juKYYmFf91uF
-         mlxg==
-X-Forwarded-Encrypted: i=1; AHgh+RrfxDgJR6TBz/pvkDLF/NtvCjrX8KULdwWuKpLWi1NH1gczBMix3oXzrw9eoCLFPbJcbiv1KMi2es0Nw7wJ@vger.kernel.org
-X-Gm-Message-State: AOJu0YzAq4c2f1OVXy/6vEJordWzf1CV9XVHaDCOD5TbW6n3hpSbtxpa
-	TZs/aDrr0WU1PWeX60SGUyH+UPSVUBSOKGoXvp+pBIIoQyYYh3ImIHikHxwKqOI734m018jIYfj
-	/ip35BtR8na3SwLRIpl29RgUZ8Y8pd3g2k3iSi3hBDh0XbFBwSFaKkaKfbhvcPaCEQrTQ
-X-Gm-Gg: AfdE7claAl0Bt4LvCu9b1QPOI8jm1ikPJvvDDv/rl29DggfsdMjmCPyttyS+Lp3xZqM
-	xt0cxbN5ci3m1u2QexAh25VkAyJeiZ/bsZjuYgsw6KidHIdcpB9l35xXnQge2AEd3uxMNyN7C3m
-	mcO2oPAdUKxDQOdB5+qDcKhdUhvY5DkflIcOgL/169R8K/2hQJd66s0BCrdY41mSgQK48a036F3
-	TJ5OvKrqncyJ2cvHuGfRFjxz/1Vch7X0KFXVf4xxG4Kq/coLNIEfxWJTLOxlxicbh191v8dXCHI
-	TEac/nYVFzxtnk2UnhU26O1cpqFNXlVasWkxv/YyoqenRUegtWbgTzNT6PimKURGsYbMQ1lYX4O
-	OH/nzMDfID8uiLiAbpS7z+WAdR7H4Sg==
-X-Received: by 2002:a05:622a:11d3:b0:517:7188:c47a with SMTP id d75a77b69052e-5213a383d99mr155225041cf.2.1784577825112;
-        Mon, 20 Jul 2026 13:03:45 -0700 (PDT)
-X-Received: by 2002:a05:622a:11d3:b0:517:7188:c47a with SMTP id d75a77b69052e-5213a383d99mr155224681cf.2.1784577824676;
-        Mon, 20 Jul 2026 13:03:44 -0700 (PDT)
-Received: from [192.168.1.110] ([178.197.223.174])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f6980582csm25074273f8f.13.2026.07.20.13.03.42
+        bh=90hzxiWfvmc2pNodPHMrUN3Ni18ZS0Dy7y/7ObcbFrk=;
+        b=jyWPK4sAnW/ZyxYvKgDNuvc7P8Jdj0ZCzFbN0p8N5DQE+QwzLotUnK+dnuvq16HcQY
+         jo4BLztXnlBMNbRyD51AzSRslr+JJDB+oyLLksk6zdPeoy2IfgBEYITXR0gJ9i2BmVjr
+         Xe1cu5m4xUvOvqfGbBM7OZ0q6yNb0B6KIiRnhWsx9gZ7FrDh1MZIwCMqLJgP32XXnCbf
+         4m25CC3Fjybybr4hzIcTjAp7g3vyS2L7pCyWwQFaEc/2PQs36eWLB/nzpIUUteu4CKdj
+         nCDdwHiHKe/E3d/AKcB71DudcY6F14lPhKVMjF9Q04Aq457+827GcVWPHBXvGyCrmWXs
+         eRsQ==
+X-Forwarded-Encrypted: i=1; AHgh+RqMMpiJ/i9gmYIgF4T2TkQ26aTZKQlZIGNUYdSe30XOc8gBWEV2BY/JV1Q6FqKPNx7mddV/whF1ka4eHZ5w@vger.kernel.org
+X-Gm-Message-State: AOJu0YxS7qjJ58Aehg1djv8M8c6hTsebWPnax49wpqaWk805zcBGftC3
+	RiCWGiHYs4HRPepQ6XBlm+lvYCsGPqiPeaw/ahk+hAEqzGcNLSbnZnXkWSeUUjOeCUM=
+X-Gm-Gg: AfdE7cnBkVydfVu+WC8LBOS8XormHIaIwfb1zLeKYuJZgT4YkY6IpqxKEe8M14Q7avC
+	y4iJYD160/Vs7Xn/7eql9ATL9CDvCJz5CelpVlyV1+74Gre9UmXq+4jV1bTOw0t3rnwx8pYzOJc
+	YIEsY51IHW28E65PH6+z/QOCOSsqF05FNigLbfdJwPoS08dJaW5P0HtfBU6pX3R0uAMbPphmZX5
+	z6GxbuC6sQFuzN/tz2vUYYaDdw9x+hdooTbwpGms2DPwU0dLgTYjLZ59E0x5ictChxDJJv5bpkr
+	9dcilIIMlF4aULlIjKjIp5TPQzFvmozM3S7ye3rooO28fmgedYRz5vhic48eQoCBWBUiKAXecqk
+	0gyusiR6hvpusz4XXmJoJ7Aewypp3qV4XOVa+yVJ3mL62NzBd0SQsT6VQ3DzwnXI5IGbVd6NFr8
+	86zJ7OBPhoUkFnjlz65a800vqG
+X-Received: by 2002:a05:600c:c04c:b0:495:63e4:3a91 with SMTP id 5b1f17b1804b1-49563e43af2mr28266835e9.35.1784577984824;
+        Mon, 20 Jul 2026 13:06:24 -0700 (PDT)
+Received: from [192.168.0.101] ([109.77.26.223])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49563e4573bsm28844795e9.0.2026.07.20.13.06.23
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 20 Jul 2026 13:03:43 -0700 (PDT)
-Message-ID: <86d72cb4-ec52-457b-a175-a7123e341b32@oss.qualcomm.com>
-Date: Mon, 20 Jul 2026 22:03:41 +0200
+        Mon, 20 Jul 2026 13:06:24 -0700 (PDT)
+Message-ID: <286a1fc6-bd58-4ade-b183-e53776ba7a09@linaro.org>
+Date: Mon, 20 Jul 2026 21:06:23 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,98 +68,116 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/4] dt-bindings: arm: qcom-soc: Validate nodes with
- fallbacks
-To: Rob Herring <robh@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260707-dt-bindings-qcom-soc-naming-v2-0-1b7d695be2e1@oss.qualcomm.com>
- <20260707-dt-bindings-qcom-soc-naming-v2-3-1b7d695be2e1@oss.qualcomm.com>
- <20260716211439.GA1290290-robh@kernel.org>
-From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <20260716211439.GA1290290-robh@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDIxOSBTYWx0ZWRfX3F4cxiZLRWx1
- 4l/GeH9mWStrMG+x4mDr1NQVqD6/OOPQ78DOo6/u1tEu3ffHAh7hk3Lt9lz40A0wPUFrt4PNZx4
- L46yBrYdioCld4pQMjNRt7K6HICWiGhxzAo99xpYsl0KW4fOHkz/DUHOnegxjgFHLSXgvor5QfG
- sktRfLOTW2uO7IykjUSVDzkDtMVJd9XAbNziI7X/NiW8NH7zwU8jNlL1d9Gv8svjzr0e98wpYnT
- L040EpNOPlgZ7rphCkY8KygcgumfoF/7f5dSvym6ypaeI73YQodilkbH/vo+VKi8ZWlk1TEAeDh
- upcCLnHqcLQbukM6jU0jkpBOiZMbYPVwgyFKCdki2xkjoqYxo1NsM3t8Jipl8VrKETPVbobhT+x
- jagcWD7SCKobAzxhdfgNzdvsbsJNvm4qkghtzrSEhI9gEgucWQj3oWxkUtSirKFRHz/X0SyVzhL
- QVJ5KVi/QkoEvLSIotA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDIxOSBTYWx0ZWRfXzv9RKlmVKaRn
- qr1WSfO2Qr7abdqBW6CGzcYir3g9sgK+9GWzNuJepygWMVnj48CeFY8MF6EzDvvkOqwgvJETuoj
- ex1ePzZyxOXijuGyzQibqAg7mbrilL8=
-X-Authority-Analysis: v=2.4 cv=WNpPmHsR c=1 sm=1 tr=0 ts=6a5e7f22 cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=N6niishs+lR9UBL1FN3Qrw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=qU11fmIgajKyYpnEY5wA:9 a=QEXdDO2ut3YA:10 a=uxP6HrT_eTzRwkO_Te1X:22
-X-Proofpoint-GUID: uGze5RfHv-XznEclniAWbAqq4UjDHPQq
-X-Proofpoint-ORIG-GUID: uGze5RfHv-XznEclniAWbAqq4UjDHPQq
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-20_05,2026-07-20_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 clxscore=1015 suspectscore=0 spamscore=0 malwarescore=0
- priorityscore=1501 impostorscore=0 phishscore=0 bulkscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607200219
+Subject: Re: [PATCH 1/6] media: qcom: camss: Program CSIPHY common control
+ registers
+To: Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, jigarkumar.zala@oss.qualcomm.com,
+ gjorgji.rosikopulos@oss.qualcomm.com, hariramp@quicinc.com
+References: <20260717231331.1229693-1-anusha.nandi@oss.qualcomm.com>
+ <20260717231331.1229693-2-anusha.nandi@oss.qualcomm.com>
+ <CAFEp6-2epusvgnSthNRBvOq0vONk3hu7v6tq6SF-HjnSWgpstw@mail.gmail.com>
+ <530a9493-24c7-4812-8ada-591c7b63b651@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <530a9493-24c7-4812-8ada-591c7b63b651@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 16/07/2026 23:14, Rob Herring wrote:
->> +            - qcom,smmu-500
->> +            - qcom,smmu-v2
->> +            - qcom,snps-dwc3
->> +            - qcom,ssc-block-bus
->> +            - qcom,tcsr-mutex
->> +            - qcom,trng
->> +            - qcom,tsens-v0_1
->> +            - qcom,tsens-v1
->> +            - qcom,tsens-v2
->> +            - qcom,ufshc
->> +            - qcom,usb-hs-phy
->> +            - qcom,usb-hsic-phy
->> +            - qcom,usb-snps-hs-5nm-phy
->> +            - qcom,usb-snps-hs-7nm-phy
->> +            - simple-mfd
->> +            - snps,dwmac
->> +            - syscon
-> 
-> You lost me here... 
-> 
-> This all looks pretty unmaintainable. Perhaps you should give up on old 
-> SoCs and only do something on new(er) ones:
+On 20/07/2026 20:38, Anusha Arun Nandi wrote:
+>> I don't really like this big camss-version switch case with magic,
+>> which also introduces more magic values. Maybe we should have a
+>> different version of csiphy_lanes_enable, based on the phy compatible
+>> or revision.
+>>
+> Thank you for the feedback! We agree with your suggestion and will
+> refactor this to use a version-specific implementation of
+> csiphy_lanes_enable, based on the PHY compatible or revision, in the
+> upcoming patchset.
 
-Yeah, I think I over complicated this.
+Hmm.
 
-> 
-> select:
->   properties:
->     compatible:
->       contains:
->         pattern: '^qcom,'
-> 
-> allOf:
->   - if:
->       properties:
->         compatible:
->           contains:
->             pattern: '^qcom,.+foosoc'
->     then:
->       properties:
->         compatible:
->           contains:
->             pattern: '^qcom,foosoc'
+Please don't do that. Instead work with David to get CPHY support into 
+the dedicated driver - including whatever additional work is required - 
+perhaps nothing more than reusing the existing dphy_opts structure for 
+cphy purposes.
 
-This seems to work well, I'll try more, thanks!
+Proceeding in the direction elucidated above would mean inclusion of 
+four CPHYs into the exiting infrastructure - that's not "stopgap" that's 
+established precedent.
+
+A big no from me I'm afraid.
+
+There's a real upstream gap to be addresses for CPHY. Let's address it 
+not work-around it in a specific way for our platform.
+
+I'd expect to see some kind of subset of
 
 
-Best regards,
-Krzysztof
+include/linux/phy/phy-mipi-cphy.h
+struct phy_configure_opts_mipi_cphy
+
+or perhaps we can reuse/abuse struct phy_configure_opts_mipi_dphy - for 
+example could it be changed into a generic structure to contain both 
+cphy and dphy data - with an appropriate name change ?
+
+My feeling is a phy_configure_opts_mipi_cphy structure is required but, 
+perhaps both cphy and dphy can exist in one structure or in a union of 
+structs.
+
+TBD
+
+deckard@sagittarius-a: /home/deckard/Development/qualcomm/qlt-kernel 
+git:(arm64-laptops-v7.2-rc1-camss-v6-ife-bringup) ✗
+➜   grep dphy include/* -r
+include/drm/bridge/dw_mipi_dsi.h:struct dw_mipi_dsi_dphy_timing {
+include/drm/bridge/dw_mipi_dsi.h:			 struct dw_mipi_dsi_dphy_timing 
+*timing);
+include/linux/phy/phy.h:#include <linux/phy/phy-mipi-dphy.h>
+include/linux/phy/phy.h: * @mipi_dphy:	Configuration set applicable for 
+phys supporting
+include/linux/phy/phy.h:	struct phy_configure_opts_mipi_dphy	mipi_dphy;
+include/linux/phy/phy-mipi-dphy.h: * struct phy_configure_opts_mipi_dphy 
+- MIPI D-PHY configuration set
+include/linux/phy/phy-mipi-dphy.h:struct phy_configure_opts_mipi_dphy {
+include/linux/phy/phy-mipi-dphy.h:int 
+phy_mipi_dphy_get_default_config(unsigned long pixel_clock,
+include/linux/phy/phy-mipi-dphy.h:				    struct 
+phy_configure_opts_mipi_dphy *cfg);
+include/linux/phy/phy-mipi-dphy.h:int 
+phy_mipi_dphy_get_default_config_for_hsclk(unsigned long long hs_clk_rate,
+include/linux/phy/phy-mipi-dphy.h:					      struct 
+phy_configure_opts_mipi_dphy *cfg);
+include/linux/phy/phy-mipi-dphy.h:int 
+phy_mipi_dphy_config_validate(struct phy_configure_opts_mipi_dphy *cfg);
+include/linux/platform_data/media/mmp-camera.h:enum dphy3_algo {
+include/linux/platform_data/media/mmp-camera.h:	int dphy[3];		/* DPHY: 
+CSI2_DPHY3, CSI2_DPHY5, CSI2_DPHY6 */
+include/linux/platform_data/media/mmp-camera.h:	enum dphy3_algo 
+dphy3_algo;	/* algos for calculate CSI2_DPHY3 */
+include/media/ipu-bridge.h:	u32 dphylinkenfuses;
+deckard@sagittarius-a: /home/deckard/Development/qualcomm/qlt-kernel 
+git:(arm64-laptops-v7.2-rc1-camss-v6-ife-bringup) ✗
+➜   grep cphy include/* -r
+include/media/v4l2-mediabus.h: * enum 
+v4l2_mbus_csi2_cphy_line_orders_type - CSI-2 C-PHY line order
+include/media/v4l2-mediabus.h:enum v4l2_mbus_csi2_cphy_line_orders_type {
+include/media/v4l2-mediabus.h:	enum v4l2_mbus_csi2_cphy_line_orders_type 
+line_orders[V4L2_MBUS_CSI2_MAX_DATA_LANES];
+
+deckard@sagittarius-a: /home/deckard/Development/qualcomm/qlt-kernel 
+git:(arm64-laptops-v7.2-rc1-camss-v6-ife-bringup) ✗
+➜
+
+But to be 100% - I'm fully against burying inline CPHY code into CAMSS.
+
+The long term objective of cleaning things up and reducing technical 
+debt can't be realised by - adding more technical debt.
+
+And I'll reiterate the right-thing-to-do (tm) is to expand the kernel's 
+understanding/definition of PHYs to encompass CPHY for the benefit of 
+users and the entire community - instead of a qcom-specific hack.
+
+---
+bod
