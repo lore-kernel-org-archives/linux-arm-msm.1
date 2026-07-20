@@ -1,282 +1,436 @@
-Received: from mail-pl1-f228.google.com (mail-pl1-f228.google.com [209.85.214.228])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 170412F8EA6
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 17:03:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.228
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C368442FC5
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 17:14:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784567008; cv=none; b=HgwQcNdvbPDZ7wJ/w5c0CsKhO1ekMzNYRx5qgL6Rk0zoeBAlZmS7O/X0y5wLTBl9MMm/b2RzHj8oAZ1JzxD8Wo6FrezL8knAPOdQ7NFdVFli3DFdBE2hEZykYWQOggxYot4TYngK+umRQV3ENEyRjoHYHhtxBDsnBZWyj0z+Sek=
+	t=1784567672; cv=none; b=sTYAd1X+9QMk9XtF5L0VrJ7QtB1W0UOJ/Gg1dBFj5ui9XPUhlypsJ5Ms64+KfNgS/c3qVQuA/8AEIT7MeEuo7vt7bAfAuyMHzas9VHWKWlI9D1olYbnbX9dSV05NHWhGfy1butcS8eWF4PQFE3+VOzfnhXNU64N7PsIQtBZITBU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784567008; c=relaxed/simple;
-	bh=wj5669yyLx5WdMNuaQRw0s+F9c/U7LMRYtICst4tktI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=i6LCy2C80IN7X6pVtpvLCkUl6fxMX8y3FFyGhWQ9kEI8CABpTOiCe0nEU+4wdd16hOTVvGPrx6PDcXYO3Qj26pfhYe2QBmqByasvkM6bxMmzK0dcSGGCKoJlPaAVON7xeRzm468NkMj0BiuCtP2RGToRz8I9HwvF+MXAMnkozsY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=broadcom.com; spf=fail smtp.mailfrom=broadcom.com; dkim=pass (1024-bit key) header.d=broadcom.com header.i=@broadcom.com header.b=R1HPKxRW; arc=none smtp.client-ip=209.85.214.228
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=broadcom.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=broadcom.com
+	s=arc-20240116; t=1784567672; c=relaxed/simple;
+	bh=1ceuByS+KorQxsHHoWFtaQThgygJItBnF+JMEb9EC5E=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=EUMbAOpCFoO87YXnboBAPQBU5vTjxS+TV1WP+6y9re5FZrlAM1YizQZW2id7cXfZ8lSLDaprkrwnAjrgnymK96vasHbriuPEMLW/YT4bJKo2Vq7BIxZwAma1k5PYdFSwSgbjX5S+92KvuRwBPufNQ6/rem2DwcZdj1ITwHpyIMo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=SQHquzqu; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YIq4T9Ev; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=broadcom.com header.i=@broadcom.com header.b="R1HPKxRW"
-Received: by mail-pl1-f228.google.com with SMTP id d9443c01a7336-2cc7e86e7aeso76142925ad.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:03:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784567006; x=1785171806;
-        h=content-type:in-reply-to:autocrypt:from:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:dkim-signature:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=BoZHavppdgs80kRRaTh3bjy6R0CCGJ3Xe49f6tRPvns=;
-        b=k3hzYBfm/tAMl/MEqDXOUbzhVCnuT7kNedr9qrfE+O+9yW3bUwBAX6U+5jZOfpKwpN
-         Xjxh0rIjC/7cyf7PBIVPA0cCd/P9yzFAok+YFOQCxya16mf33y5WQpH9sv3LreOC87IP
-         FSipcl8o3LUQ6kZ2wwx9EH5XjdCt6yWmasXg0xTHCOd+tlQkJL4NqhZbkrGGuYstRIwP
-         SdbtBUn4GXc1FdUmCl1l5ys3RHm+rtSy9g/r9BIcJabCNU8HZ8Lw17+YduQ/CdJlDxnQ
-         NCRj8jMc/iO+HsHIDc07Vd8isvAZp3YcVyagrFcEaT+N/xgEAT1hztvH90euElFQt4N9
-         Zkrw==
-X-Forwarded-Encrypted: i=1; AHgh+RoJx8r2KxOZN4cjHgjRW8Z7dP+7ukDFw1pPZoGRatXWrCFhhZ/RlsGKHcnQLOH9NH7nUDaw8Hjhsef8lv/Q@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx8HB1aQn/7nj4i9J1+aTAs/d2Tga7ln29Cf7oAzn6i8qMKeFtj
-	VyvqJA4CcDwUP7yoCVMIXGzgqAbSWH8JQAbmucIK5tBMnTr+tMBntkQirgQLfI0b7zWjv+Cl2D3
-	Ejp1Duxh3b1rwRnEBZbVEyag69FAY2A2cfN00VYtL0waJTr8ssaLY982eVapJxcKLrC2QsPtfto
-	O+nbkbT6P4fPEKdosgll0guhgsi2Za/sdqWg4FkQk/XRJev7aoNvf85mOWxsd27l1BpbVG2Cy5Q
-	iyEIA7lh9YHhQGgbVHqY+rf8g==
-X-Gm-Gg: AR+sD11PhuD9+8YQfqJimsbze0F3OIZSExTa4HwJEB51rZ4yHIF0gJBWtqV6Wldp1QU
-	TkfvG9fCPBMKi2PH4/hh2B5oQ3arqRVMqg0wf8hQUi4gTGd2LNd8XcMtbIs08/NUDODQQM5RKXL
-	OuRjl/gmCQ6+M8P8PYhG9mS/1yBrqHsIBqWegN+sp7YT/1kJq3O5DwpYQQAW8LGPEJxhgMMLf+O
-	stMJZVFK4iZKojJdcs0GB/dKShFc7DzkcjPyFTeQR/rkE63IwCuksyUYVXlHIThXD8Vd/LJHnHH
-	CC/LAZEZloeoqLMtxgVJwPUDbI9IS/vS2A+gDXiMG2eSbGOmFN99so+AP6tqU833S6P7/jHnqHo
-	24j2AOVKhS9yA/5PYazR/8KvLBXtHbdmj+4KOLr0E8J2OfQusv4Loue90Va8YpDTL4c/yl0iwtC
-	C9pTIJ9qPT84fWknTe0ocq60HJozVNzYT+J6bEE1iO
-X-Received: by 2002:a17:902:f681:b0:2ca:3e3f:4956 with SMTP id d9443c01a7336-2cf34a35445mr160489815ad.44.1784567006055;
-        Mon, 20 Jul 2026 10:03:26 -0700 (PDT)
-Received: from smtp-us-east1-p01-i01-si01.dlp.protect.broadcom.com (address-144-49-247-12.dlp.protect.broadcom.com. [144.49.247.12])
-        by smtp-relay.gmail.com with ESMTPS id d9443c01a7336-2cf34660c2esm10125875ad.31.2026.07.20.10.03.25
-        for <linux-arm-msm@vger.kernel.org>
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Mon, 20 Jul 2026 10:03:26 -0700 (PDT)
-X-Relaying-Domain: broadcom.com
-X-CFilter-Loop: Reflected
-Received: by mail-lj1-f200.google.com with SMTP id 38308e7fff4ca-39b1937b6d6so31234171fa.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:03:24 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="SQHquzqu";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YIq4T9Ev"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66KHBreT3442628
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 17:14:26 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=8MEgIdUNJ+fERL7JplvYVI
+	TwRlm+Lk6oTqq0HqaWyX0=; b=SQHquzquhLGpMKREkm372Z/5mUVgitINZ01ttk
+	IGlNstfqk7EDAvmOkc5RldLkb1Cm7VkH6yPKVtTyVD7+ixURly7ykhFJCTEx3erG
+	xWMUcn2RY7RZa19I670huZWEMzcZ4VEqRcuXk57nOcaahTzYuQ0M692rGp6XKNOi
+	1A91cDpfiLBc8gppU8ZOYx5j2Vr1y1wfkkuLwDVGjK+NqIDPhdtmo742ap+QIRvM
+	hW5kyh6Vwy+BMriuHuiCDHOHzP9DJZwTKngYu+GpSUnqZVJVqfouRfbW7fg+gRu/
+	J9/iOBtXChrkEJ/EhLoqflz3DewNW4K7Z6WEKxbWML2/D9xw==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhqv5r0cj-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 17:14:26 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-c85798977dcso12241702a12.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:14:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=broadcom.com; s=google; t=1784567003; x=1785171803; darn=vger.kernel.org;
-        h=content-type:in-reply-to:autocrypt:from:references:cc:to:subject
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=BoZHavppdgs80kRRaTh3bjy6R0CCGJ3Xe49f6tRPvns=;
-        b=R1HPKxRW82bGhR/XUeluU58ZFJfPQylM+bAixBm4xjGBPREPKPfJCCkMeCttI0GmP4
-         9l3nkXTABzKw4V3kf3JYZuau1nngsPmjlqVXLUwFrlzukJJON64aR9ZPzVyA8CoxgtAw
-         GMqwGM9TLpH0+RghewEzT7fIFqqtk3xUJtqn4=
-X-Forwarded-Encrypted: i=1; AHgh+RqHHKpNfQfA47rac/CzrgobxQE7CGCmqYM7vUqHEv+GlGHhzBSmPD2MFe0P24dtzoK4ZnihOScya8HO3fr6@vger.kernel.org
-X-Received: by 2002:a05:6512:b93:b0:5aa:8822:c945 with SMTP id 2adb3069b0e04-5b28f9b72bdmr3591661e87.47.1784566668673;
-        Mon, 20 Jul 2026 09:57:48 -0700 (PDT)
-X-Received: by 2002:a05:6512:b93:b0:5aa:8822:c945 with SMTP id 2adb3069b0e04-5b28f9b72bdmr3591622e87.47.1784566668133;
-        Mon, 20 Jul 2026 09:57:48 -0700 (PDT)
-Received: from [10.67.48.245] ([192.19.223.252])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b291e1887esm2450178e87.59.2026.07.20.09.57.29
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 20 Jul 2026 09:57:39 -0700 (PDT)
-Message-ID: <b8062978-128c-4129-a803-1d02910122c8@broadcom.com>
-Date: Mon, 20 Jul 2026 09:57:27 -0700
+        d=oss.qualcomm.com; s=google; t=1784567666; x=1785172466; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=8MEgIdUNJ+fERL7JplvYVITwRlm+Lk6oTqq0HqaWyX0=;
+        b=YIq4T9Ev7YXzc2Xk6t0cDao59xuabLpt8+VUIY+9zP3y94a+LLtjExyeObp/jy2khJ
+         cBC6S6RxjdNpsZ8ii4puiZ/lF3jtM+9kUviRUF7wHs5P0msr3YUdBP7lvUeXHZTgs/h4
+         tEjlmSHjsJT21Z1iEYvJ3QLisEFMbPJO1KjuGX8a9a943Ueu867njcpokE3Kmo4PDYwm
+         jQKjsuEsD/c+gQCEVau4rRoNrjVw9BjbMBmfJP3fX2i5hvxJas3zGXEGnJ/oVhv/wK/h
+         GqJPgevefELGpbV8kyrNSPUyVgCfOFJGn5AhNt7qYxTVhcTVq9jU+n6mulu6X+uKbhbE
+         Ge+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784567666; x=1785172466;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=8MEgIdUNJ+fERL7JplvYVITwRlm+Lk6oTqq0HqaWyX0=;
+        b=jbWNIec6vx0M5iNTAN1dqy0aupf4NRbT5A/onuRYT3Vu8m6L70LyCTK1zgQhwChrzT
+         8HJ3y7yJv3jilSIdtlXpmKyfUY6HkWE9rr8cy+cwZpLxDtZraWDPHYTgZ41hII7jItz1
+         749KaaQI8Cyi1nUXMCoqyabcxP14nTjvTCXF1rjH6lHBI3cn0QC3lzG5dR6E5RvMMFvi
+         AUmDo68nIjey/IpPXCUMCXtqo3NzkMNUGGhwmxdroIJ8nKN1iRq8USbd4yZDw3vdrX1K
+         ToW0Zrfcpyv32AfAdbuVwdz21uUxMcS7UNiWuA/TCKruaZYYatYW5Mj+ssOVPz9FGqV3
+         5uNw==
+X-Forwarded-Encrypted: i=1; AHgh+Rqvl0lAinkShTLPB7cq/V1FRwawLJ+2TFlYxxBUIqJgkRBZVhMY7fdQjcXrcoamym/0nliGjTwcc3At5QlA@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyq2qoAJYGnA5xgMWGsHrYPO1q4Ecvelf/shDRrgzn4TZ2pwFsy
+	4B83Dlub0o8Crwqb526IlRyFexJfrQetG9Zj+Pd/fXLXG25HKKB0YusjQPgBelaEJ+w1vjC10mm
+	Px4A09JF+TDlbHQOHi+VPT8tzfojf/D0sWBs/ac3CGhc1vt4igJgAIW/9+wOuwzNwaSrB
+X-Gm-Gg: AfdE7claylGQtNVg4xXXqqUQz2ug+H+ta2ZCBD5SxnkNzOhSBZXnO3uZdUGPO1yBYie
+	zXUhdslFSxIF/Os+8dXtpRDLB/RyNuLs3FHehNA/B6jrX8+YSAZx2/ITMYE+x0/Nicp6drL952w
+	E05jGxjbF2WFo3FRaDRI8Ana449o3b9rIo2ey94y1dC7BQ4B3g/QwT7AfGmp6qrw9WN4u4kiQjy
+	Op0XGDDzmH9Jhyaw7P0jZ1Z4O+Lk2jw5YSfiX/OtXJGoQDsuSK9rvpV38M690yFfjUXM6UFK5lG
+	RmRqTcUApPu+YxRuRZcheDbRD9zKw7Zja3+T1adgbbg8sVzwh4WsKbIls0lrKKvokq//rVl0nxL
+	JydUq9zvPvyShlEhaioSCZw4lb3AZy1M=
+X-Received: by 2002:a05:6a21:7d06:b0:3bf:e24e:3afe with SMTP id adf61e73a8af0-3c3ad949d5dmr16131256637.43.1784567665710;
+        Mon, 20 Jul 2026 10:14:25 -0700 (PDT)
+X-Received: by 2002:a05:6a21:7d06:b0:3bf:e24e:3afe with SMTP id adf61e73a8af0-3c3ad949d5dmr16131207637.43.1784567665204;
+        Mon, 20 Jul 2026 10:14:25 -0700 (PDT)
+Received: from hu-sachinku-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3142a20cfe3sm41239012eec.30.2026.07.20.10.14.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 20 Jul 2026 10:14:24 -0700 (PDT)
+From: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
+Date: Mon, 20 Jul 2026 22:44:19 +0530
+Subject: [PATCH v2] media: iris: add new rate control type MBR for encoder
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/8] net: bcmgenet: use platform_device_set_fwnode()
-To: Andrew Lunn <andrew@lunn.ch>,
- Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
- Madhavan Srinivasan <maddy@linux.ibm.com>,
- Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
- "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
- Andi Shyti <andi.shyti@kernel.org>, "Joerg Roedel (AMD)" <joro@8bytes.org>,
- Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
- Doug Berger <opendmb@gmail.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Andrew Lunn
- <andrew+netdev@lunn.ch>, "David S. Miller" <davem@davemloft.net>,
- Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>, Ulf Hansson <ulfh@kernel.org>,
- Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>, Lee Jones <lee@kernel.org>,
- Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
- Srinivas Kandagatla <srini@kernel.org>, brgl@kernel.org,
- driver-core@lists.linux.dev, linuxppc-dev@lists.ozlabs.org,
- linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org,
- iommu@lists.linux.dev, netdev@vger.kernel.org, linux-pm@vger.kernel.org,
- imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
- mfd@lists.linux.dev, linux-arm-msm@vger.kernel.org,
- linux-sound@vger.kernel.org
-References: <20260720-pdev-set-fwnode-instead-of-of-node-v1-0-2dee93f42c54@oss.qualcomm.com>
- <20260720-pdev-set-fwnode-instead-of-of-node-v1-4-2dee93f42c54@oss.qualcomm.com>
- <ae9da5dd-3528-4270-ada0-d17ed14478e0@lunn.ch>
-From: Florian Fainelli <florian.fainelli@broadcom.com>
-Autocrypt: addr=florian.fainelli@broadcom.com; keydata=
- xsBNBFPAG8ABCAC3EO02urEwipgbUNJ1r6oI2Vr/+uE389lSEShN2PmL3MVnzhViSAtrYxeT
- M0Txqn1tOWoIc4QUl6Ggqf5KP6FoRkCrgMMTnUAINsINYXK+3OLe7HjP10h2jDRX4Ajs4Ghs
- JrZOBru6rH0YrgAhr6O5gG7NE1jhly+EsOa2MpwOiXO4DE/YKZGuVe6Bh87WqmILs9KvnNrQ
- PcycQnYKTVpqE95d4M824M5cuRB6D1GrYovCsjA9uxo22kPdOoQRAu5gBBn3AdtALFyQj9DQ
- KQuc39/i/Kt6XLZ/RsBc6qLs+p+JnEuPJngTSfWvzGjpx0nkwCMi4yBb+xk7Hki4kEslABEB
- AAHNMEZsb3JpYW4gRmFpbmVsbGkgPGZsb3JpYW4uZmFpbmVsbGlAYnJvYWRjb20uY29tPsLB
- IQQQAQgAywUCZWl41AUJI+Jo+hcKAAG/SMv+fS3xUQWa0NryPuoRGjsA3SAUAAAAAAAWAAFr
- ZXktdXNhZ2UtbWFza0BwZ3AuY29tjDAUgAAAAAAgAAdwcmVmZXJyZWQtZW1haWwtZW5jb2Rp
- bmdAcGdwLmNvbXBncG1pbWUICwkIBwMCAQoFF4AAAAAZGGxkYXA6Ly9rZXlzLmJyb2FkY29t
- Lm5ldAUbAwAAAAMWAgEFHgEAAAAEFQgJChYhBNXZKpfnkVze1+R8aIExtcQpvGagAAoJEIEx
- tcQpvGagWPEH/2l0DNr9QkTwJUxOoP9wgHfmVhqc0ZlDsBFv91I3BbhGKI5UATbipKNqG13Z
- TsBrJHcrnCqnTRS+8n9/myOF0ng2A4YT0EJnayzHugXm+hrkO5O9UEPJ8a+0553VqyoFhHqA
- zjxj8fUu1px5cbb4R9G4UAySqyeLLeqnYLCKb4+GklGSBGsLMYvLmIDNYlkhMdnnzsSUAS61
- WJYW6jjnzMwuKJ0ZHv7xZvSHyhIsFRiYiEs44kiYjbUUMcXor/uLEuTIazGrE3MahuGdjpT2
- IOjoMiTsbMc0yfhHp6G/2E769oDXMVxCCbMVpA+LUtVIQEA+8Zr6mX0Yk4nDS7OiBlvOwE0E
- U8AbwQEIAKxr71oqe+0+MYCc7WafWEcpQHFUwvYLcdBoOnmJPxDwDRpvU5LhqSPvk/yJdh9k
- 4xUDQu3rm1qIW2I9Puk5n/Jz/lZsqGw8T13DKyu8eMcvaA/irm9lX9El27DPHy/0qsxmxVmU
- pu9y9S+BmaMb2CM9IuyxMWEl9ruWFS2jAWh/R8CrdnL6+zLk60R7XGzmSJqF09vYNlJ6Bdbs
- MWDXkYWWP5Ub1ZJGNJQ4qT7g8IN0qXxzLQsmz6tbgLMEHYBGx80bBF8AkdThd6SLhreCN7Uh
- IR/5NXGqotAZao2xlDpJLuOMQtoH9WVNuuxQQZHVd8if+yp6yRJ5DAmIUt5CCPcAEQEAAcLB
- gQQYAQIBKwUCU8AbwgUbDAAAAMBdIAQZAQgABgUCU8AbwQAKCRCTYAaomC8PVQ0VCACWk3n+
- obFABEp5Rg6Qvspi9kWXcwCcfZV41OIYWhXMoc57ssjCand5noZi8bKg0bxw4qsg+9cNgZ3P
- N/DFWcNKcAT3Z2/4fTnJqdJS//YcEhlr8uGs+ZWFcqAPbteFCM4dGDRruo69IrHfyyQGx16s
- CcFlrN8vD066RKevFepb/ml7eYEdN5SRALyEdQMKeCSf3mectdoECEqdF/MWpfWIYQ1hEfdm
- C2Kztm+h3Nkt9ZQLqc3wsPJZmbD9T0c9Rphfypgw/SfTf2/CHoYVkKqwUIzI59itl5Lze+R5
- wDByhWHx2Ud2R7SudmT9XK1e0x7W7a5z11Q6vrzuED5nQvkhAAoJEIExtcQpvGagugcIAJd5
- EYe6KM6Y6RvI6TvHp+QgbU5dxvjqSiSvam0Ms3QrLidCtantcGT2Wz/2PlbZqkoJxMQc40rb
- fXa4xQSvJYj0GWpadrDJUvUu3LEsunDCxdWrmbmwGRKqZraV2oG7YEddmDqOe0Xm/NxeSobc
- MIlnaE6V0U8f5zNHB7Y46yJjjYT/Ds1TJo3pvwevDWPvv6rdBeV07D9s43frUS6xYd1uFxHC
- 7dZYWJjZmyUf5evr1W1gCgwLXG0PEi9n3qmz1lelQ8lSocmvxBKtMbX/OKhAfuP/iIwnTsww
- 95A2SaPiQZA51NywV8OFgsN0ITl2PlZ4Tp9hHERDe6nQCsNI/Us=
-In-Reply-To: <ae9da5dd-3528-4270-ada0-d17ed14478e0@lunn.ch>
-X-DetectorID-Processed: b00c1d49-9d2e-4205-b15f-d015386d3d5e
-Content-Type: multipart/signed; protocol="application/pkcs7-signature"; micalg=sha-256;
-	boundary="00000000000058c32c06570de2d3"
-
---00000000000058c32c06570de2d3
-Content-Language: en-US, fr-FR
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260720-b4-add_sc7280_mbr-v2-1-a2a86f630f57@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAGpXXmoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyjHQUlJIzE
+ vPSU3UzU4B8JSMDIzMDI0Mj3SQT3cSUlPjiZHMjC4P43KQiXVNL88RkM0PTJEtjQyWgvoKi1LT
+ MCrCZ0bG1tQAHTLpdYwAAAA==
+X-Change-ID: 20260212-b4-add_sc7280_mbr-597ac615b931
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784567661; l=11940;
+ i=sachin.garg@oss.qualcomm.com; s=20260211; h=from:subject:message-id;
+ bh=1ceuByS+KorQxsHHoWFtaQThgygJItBnF+JMEb9EC5E=;
+ b=pNXi2vhzbjMoPe8ipIaYuH7f5XUkxfUti3jUYN4P594jjhY4QvIg22Si/1zXoKYqVo8iCl78c
+ ++1D5TnvsaqBI6gkr7KbyU41cynQExPT8cQeOd3Q8d061JoTYVd2a4S
+X-Developer-Key: i=sachin.garg@oss.qualcomm.com; a=ed25519;
+ pk=KcRhp4CP9cR1V2tg6xSNRnB2STYaU0vVigdUF4Actu0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDE5MSBTYWx0ZWRfX51WO9Upe/g8h
+ c2pU60VO6MuR3wxp+RLcnwCDwKJ+fJUZLceuHQ6P/Hj7mlCBhTzYxqWbm06lFO/0gUNlEbpg1TX
+ TF7A+LrTQJ+5URAEB+Rd6qRS+eyF2lL2oYXpWYQATs9qkCxXTzk5RIHGJwxcRYHmMIoJve02QF8
+ l7Qmz/ig4CkCun4sZG7WM6MVjjtJxmZjet2TjnWZ03QagrNcu7l6NGI3FQCtzhhtDyv13IR3w3l
+ wgFpqdp+qGfA6s1mmNZ/96o6vevDD91TATB+rgFp9+VBkH9GBvr76w0ZsGufzIwVU7srGKX9qPM
+ LnNT9qWcs1BiasVpQGakQkNr6Ukkz4UrQlRX2Daug+V+e9zvJNKOpGbAtGqNt7oI0y4UhfDMuA+
+ qNMt9eNijOmajQv3qVu49RFCHkJiF4YNYvfDenGzDF7d9JfzHwu1fbg1hIMnWgTLOPjU+EB/yFD
+ +ivUh1w5A5T8f3iH4Hg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDE5MSBTYWx0ZWRfX7J8UUvFYDn6V
+ gQQSHD776ADF/cB4UppXC958WxAiiVGlCXWinXqxEG4rtpbstp9vFAyxoyw68qCgnHHTQzcO23N
+ qj+0qmHq3dh1ZBzdBAtGkPo9sC43zeM=
+X-Authority-Analysis: v=2.4 cv=WNpPmHsR c=1 sm=1 tr=0 ts=6a5e5772 cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=1QIxuLaiHgt7Oux3S1AA:9 a=QEXdDO2ut3YA:10
+ a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-GUID: Ly3fh4TYXqRD4xH5U8UJDExXRni6Z-GP
+X-Proofpoint-ORIG-GUID: Ly3fh4TYXqRD4xH5U8UJDExXRni6Z-GP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-20_04,2026-07-20_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 clxscore=1015 suspectscore=0 spamscore=0 malwarescore=0
+ priorityscore=1501 impostorscore=0 phishscore=0 bulkscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607200191
 
-On 7/20/26 07:38, Andrew Lunn wrote:
-> On Mon, Jul 20, 2026 at 11:24:51AM +0200, Bartosz Golaszewski wrote:
->> Prefer the higher-level platform_device_set_fwnode() over the
->> OF-specific platform_device_set_of_node() for dynamically allocated
->> platform devices.
-> 
-> Why?
-> 
-> This driver is OF only. It does not support ACPI, and probably never
-> will. In general, networking and ACPI don't go together, ACPI is not
-> sufficiently advanced.
-> 
-> What is you use case here?
+Add support for the MBR rate-control mode on the encoder.
+MBR has no corresponding V4L2-spec definition, it is exposed as a
+Qualcomm IRIS vendor-specific control rather than a generic
+bitrate-mode value.
 
-The driver has been, or was used on ACPI-based platforms:
+Reserve V4L2_CID_USER_QCOM_IRIS_BASE for Qualcomm IRIS driver
+specific controls and add a new boolean control,
+V4L2_CID_QCOM_MBR_RATE_CONTROL, to enable it. When set, the driver
+programs the firmware with HFI_RATE_CONTROL_MBR, taking priority
+over V4L2_CID_MPEG_VIDEO_BITRATE_MODE when both are client-set.
 
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=99c6b06a37d4cab118c45448fef9d28df62d35d8
+MBR is currently supported only on sc7280. Rather than duplicating
+the encoder capability table per platform, add a mbr_rc_supported
+flag to struct iris_platform_data, and merge in a small
+platform-specific capability table containing only the MBR cap for
+platforms that support it.
+
+Signed-off-by: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
+---
+This patch adds support for the MBR rate-control mode in the Iris driver.
+
+Changes in v2:
+- Per upstream review feedback, convert MBR enablement from the
+  generic V4L2_MPEG_VIDEO_BITRATE_MODE_MBR menu value to a new
+  Qualcomm IRIS vendor-specific boolean control,
+  V4L2_CID_QCOM_MBR_RATE_CONTROL.
+- Drop the now-unneeded generic V4L2_MPEG_VIDEO_BITRATE_MODE_MBR
+  enum, its "Maximum Bitrate" menu string, and its documentation
+  (previously sent as a separate patch 1/2).
+- Drop the separate inst_fw_cap_sc7280_enc[] table (a near-complete
+  duplicate of inst_fw_cap_sm8250_enc[]); sc7280 now reuses the
+  shared encoder cap table and layers in only the MBR-specific cap
+  entry via the new mbr_rc_supported flag.
+- Link to v1: https://lore.kernel.org/linux-media/20260213-b4-add_sc7280_mbr-v1-0-e8d95b4e4809@oss.qualcomm.com/
+---
+ drivers/media/platform/qcom/iris/iris_ctrls.c      | 101 +++++++++++++++++----
+ drivers/media/platform/qcom/iris/iris_ctrls.h      |   4 +
+ .../platform/qcom/iris/iris_hfi_gen1_defines.h     |   1 +
+ .../platform/qcom/iris/iris_platform_common.h      |   2 +
+ .../media/platform/qcom/iris/iris_platform_vpu2.c  |   1 +
+ include/uapi/linux/v4l2-controls.h                 |   6 ++
+ 6 files changed, 98 insertions(+), 17 deletions(-)
+
+diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.c b/drivers/media/platform/qcom/iris/iris_ctrls.c
+index 10e33b8a73f6..0a979649663b 100644
+--- a/drivers/media/platform/qcom/iris/iris_ctrls.c
++++ b/drivers/media/platform/qcom/iris/iris_ctrls.c
+@@ -154,6 +154,8 @@ static enum platform_inst_fw_cap_type iris_get_cap_id(u32 id)
+ 		return LAYER4_BITRATE_HEVC;
+ 	case V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L5_BR:
+ 		return LAYER5_BITRATE_HEVC;
++	case V4L2_CID_QCOM_MBR_RATE_CONTROL:
++		return MBR_RATE_CONTROL;
+ 	default:
+ 		return INST_FW_CAP_MAX;
+ 	}
+@@ -297,6 +299,8 @@ static u32 iris_get_v4l2_id(enum platform_inst_fw_cap_type cap_id)
+ 		return V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L4_BR;
+ 	case LAYER5_BITRATE_HEVC:
+ 		return V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L5_BR;
++	case MBR_RATE_CONTROL:
++		return V4L2_CID_QCOM_MBR_RATE_CONTROL;
+ 	default:
+ 		return 0;
+ 	}
+@@ -335,6 +339,17 @@ static const struct v4l2_ctrl_ops iris_ctrl_ops = {
+ 	.s_ctrl = iris_op_s_ctrl,
+ };
+ 
++static const struct v4l2_ctrl_config iris_mbr_rate_control_ctrl_config = {
++	.ops = &iris_ctrl_ops,
++	.id = V4L2_CID_QCOM_MBR_RATE_CONTROL,
++	.name = "MBR Rate Control",
++	.type = V4L2_CTRL_TYPE_BOOLEAN,
++	.min = 0,
++	.max = 1,
++	.step = 1,
++	.def = 0,
++};
++
+ int iris_ctrls_init(struct iris_inst *inst)
+ {
+ 	struct platform_inst_fw_cap *cap = &inst->fw_caps[0];
+@@ -368,7 +383,11 @@ int iris_ctrls_init(struct iris_inst *inst)
+ 			goto error;
+ 		}
+ 
+-		if (cap[idx].flags & CAP_FLAG_MENU) {
++		if (v4l2_id == V4L2_CID_QCOM_MBR_RATE_CONTROL) {
++			ctrl = v4l2_ctrl_new_custom(&inst->ctrl_handler,
++						    &iris_mbr_rate_control_ctrl_config,
++						    NULL);
++		} else if (cap[idx].flags & CAP_FLAG_MENU) {
+ 			ctrl = v4l2_ctrl_new_std_menu(&inst->ctrl_handler,
+ 						      &iris_ctrl_ops,
+ 						      v4l2_id,
+@@ -411,6 +430,39 @@ int iris_ctrls_init(struct iris_inst *inst)
+ 	return ret;
+ }
+ 
++static const struct platform_inst_fw_cap inst_fw_cap_sc7280_only_enc[] = {
++	{
++		.cap_id = MBR_RATE_CONTROL,
++		.min = 0,
++		.max = 1,
++		.step_or_mask = 1,
++		.value = 0,
++		.flags = CAP_FLAG_OUTPUT_PORT,
++		.set = iris_set_mbr_rate_control,
++	},
++};
++
++static void iris_copy_enc_caps(struct iris_core *core, const struct platform_inst_fw_cap *caps,
++			       u32 num_cap)
++{
++	u32 i, cap_id;
++
++	for (i = 0; i < num_cap; i++) {
++		cap_id = caps[i].cap_id;
++		if (!iris_valid_cap_id(cap_id))
++			continue;
++
++		core->inst_fw_caps_enc[cap_id].cap_id = caps[i].cap_id;
++		core->inst_fw_caps_enc[cap_id].min = caps[i].min;
++		core->inst_fw_caps_enc[cap_id].max = caps[i].max;
++		core->inst_fw_caps_enc[cap_id].step_or_mask = caps[i].step_or_mask;
++		core->inst_fw_caps_enc[cap_id].value = caps[i].value;
++		core->inst_fw_caps_enc[cap_id].flags = caps[i].flags;
++		core->inst_fw_caps_enc[cap_id].hfi_id = caps[i].hfi_id;
++		core->inst_fw_caps_enc[cap_id].set = caps[i].set;
++	}
++}
++
+ void iris_session_init_caps(struct iris_core *core)
+ {
+ 	const struct platform_inst_fw_cap *caps;
+@@ -444,23 +496,12 @@ void iris_session_init_caps(struct iris_core *core)
+ 		}
+ 	}
+ 
+-	caps = core->iris_firmware_data->inst_fw_caps_enc;
+-	num_cap = core->iris_firmware_data->inst_fw_caps_enc_size;
+-
+-	for (i = 0; i < num_cap; i++) {
+-		cap_id = caps[i].cap_id;
+-		if (!iris_valid_cap_id(cap_id))
+-			continue;
++	iris_copy_enc_caps(core, core->iris_firmware_data->inst_fw_caps_enc,
++			   core->iris_firmware_data->inst_fw_caps_enc_size);
+ 
+-		core->inst_fw_caps_enc[cap_id].cap_id = caps[i].cap_id;
+-		core->inst_fw_caps_enc[cap_id].min = caps[i].min;
+-		core->inst_fw_caps_enc[cap_id].max = caps[i].max;
+-		core->inst_fw_caps_enc[cap_id].step_or_mask = caps[i].step_or_mask;
+-		core->inst_fw_caps_enc[cap_id].value = caps[i].value;
+-		core->inst_fw_caps_enc[cap_id].flags = caps[i].flags;
+-		core->inst_fw_caps_enc[cap_id].hfi_id = caps[i].hfi_id;
+-		core->inst_fw_caps_enc[cap_id].set = caps[i].set;
+-	}
++	if (core->iris_platform_data->mbr_rc_supported)
++		iris_copy_enc_caps(core, inst_fw_cap_sc7280_only_enc,
++				   ARRAY_SIZE(inst_fw_cap_sc7280_only_enc));
+ }
+ 
+ static u32 iris_get_port_info(struct iris_inst *inst,
+@@ -761,6 +802,11 @@ int iris_set_bitrate_mode_gen1(struct iris_inst *inst, enum platform_inst_fw_cap
+ 	u32 hfi_id = inst->fw_caps[cap_id].hfi_id;
+ 	u32 rc_mode = 0;
+ 
++	/* MBR_RATE_CONTROL takes priority over BITRATE_MODE when both are client-set */
++	if ((inst->fw_caps[MBR_RATE_CONTROL].flags & CAP_FLAG_CLIENT_SET) &&
++	    inst->fw_caps[MBR_RATE_CONTROL].value)
++		return iris_set_mbr_rate_control(inst, MBR_RATE_CONTROL);
++
+ 	if (!frame_rc)
+ 		rc_mode = HFI_RATE_CONTROL_OFF;
+ 	else if (bitrate_mode == V4L2_MPEG_VIDEO_BITRATE_MODE_VBR)
+@@ -779,6 +825,27 @@ int iris_set_bitrate_mode_gen1(struct iris_inst *inst, enum platform_inst_fw_cap
+ 				     &rc_mode, sizeof(u32));
+ }
+ 
++int iris_set_mbr_rate_control(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id)
++{
++	const struct iris_hfi_session_ops *hfi_ops = inst->hfi_session_ops;
++	u32 mbr_enable = inst->fw_caps[cap_id].value;
++	u32 hfi_id = inst->fw_caps[BITRATE_MODE].hfi_id;
++	u32 rc_mode;
++
++	if (mbr_enable)
++		rc_mode = HFI_RATE_CONTROL_MBR;
++	else
++		return iris_set_bitrate_mode_gen1(inst, BITRATE_MODE);
++
++	inst->hfi_rc_type = rc_mode;
++
++	return hfi_ops->session_set_property(inst, hfi_id,
++					 HFI_HOST_FLAGS_NONE,
++				     iris_get_port_info(inst, BITRATE_MODE),
++				     HFI_PAYLOAD_U32_ENUM,
++				     &rc_mode, sizeof(u32));
++}
++
+ int iris_set_bitrate_mode_gen2(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id)
+ {
+ 	const struct iris_hfi_session_ops *hfi_ops = inst->hfi_session_ops;
+diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.h b/drivers/media/platform/qcom/iris/iris_ctrls.h
+index 3c462ec9190b..730d2d66ae2c 100644
+--- a/drivers/media/platform/qcom/iris/iris_ctrls.h
++++ b/drivers/media/platform/qcom/iris/iris_ctrls.h
+@@ -7,6 +7,9 @@
+ #define __IRIS_CTRLS_H__
+ 
+ #include "iris_platform_common.h"
++#include <linux/videodev2.h>
++
++#define V4L2_CID_QCOM_MBR_RATE_CONTROL (V4L2_CID_USER_QCOM_IRIS_BASE + 0)
+ 
+ struct iris_core;
+ struct iris_inst;
+@@ -27,6 +30,7 @@ int iris_set_bitrate_gen2(struct iris_inst *inst, enum platform_inst_fw_cap_type
+ int iris_set_peak_bitrate(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
+ int iris_set_bitrate_mode_gen1(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
+ int iris_set_bitrate_mode_gen2(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
++int iris_set_mbr_rate_control(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
+ int iris_set_entropy_mode_gen1(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
+ int iris_set_entropy_mode_gen2(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
+ int iris_set_min_qp(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
+diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen1_defines.h b/drivers/media/platform/qcom/iris/iris_hfi_gen1_defines.h
+index 0e4dee192384..d737d3aba0aa 100644
+--- a/drivers/media/platform/qcom/iris/iris_hfi_gen1_defines.h
++++ b/drivers/media/platform/qcom/iris/iris_hfi_gen1_defines.h
+@@ -130,6 +130,7 @@
+ #define HFI_RATE_CONTROL_VBR_CFR		0x1000003
+ #define HFI_RATE_CONTROL_CBR_VFR		0x1000004
+ #define HFI_RATE_CONTROL_CBR_CFR		0x1000005
++#define HFI_RATE_CONTROL_MBR			0x1000006
+ #define HFI_RATE_CONTROL_CQ				0x1000008
+ 
+ #define HFI_H264_ENTROPY_CAVLC			0x1
+diff --git a/drivers/media/platform/qcom/iris/iris_platform_common.h b/drivers/media/platform/qcom/iris/iris_platform_common.h
+index c9256f2323dc..08b660d3285c 100644
+--- a/drivers/media/platform/qcom/iris/iris_platform_common.h
++++ b/drivers/media/platform/qcom/iris/iris_platform_common.h
+@@ -183,6 +183,7 @@ enum platform_inst_fw_cap_type {
+ 	LAYER3_BITRATE_HEVC,
+ 	LAYER4_BITRATE_HEVC,
+ 	LAYER5_BITRATE_HEVC,
++	MBR_RATE_CONTROL,
+ 	INST_FW_CAP_MAX,
+ };
+ 
+@@ -319,6 +320,7 @@ struct iris_platform_data {
+ 	u32 tz_cp_config_data_size;
+ 	u32 num_vpp_pipe;
+ 	bool no_aon;
++	bool mbr_rc_supported;
+ 	u32 max_session_count;
+ 	/* max number of macroblocks per frame supported */
+ 	u32 max_core_mbpf;
+diff --git a/drivers/media/platform/qcom/iris/iris_platform_vpu2.c b/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
+index 6e06a32822bb..2e160710d6af 100644
+--- a/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
++++ b/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
+@@ -87,6 +87,7 @@ const struct iris_platform_data sc7280_data = {
+ 	.tz_cp_config_data_size = ARRAY_SIZE(tz_cp_config_vpu2),
+ 	.num_vpp_pipe = 1,
+ 	.no_aon = true,
++	.mbr_rc_supported = true,
+ 	.max_session_count = 16,
+ 	.max_core_mbpf = 4096 * 2176 / 256 * 2 + 1920 * 1088 / 256,
+ 	/* max spec for SC7280 is 4096x2176@60fps */
+diff --git a/include/uapi/linux/v4l2-controls.h b/include/uapi/linux/v4l2-controls.h
+index affec0ab4781..04ac1c6532f7 100644
+--- a/include/uapi/linux/v4l2-controls.h
++++ b/include/uapi/linux/v4l2-controls.h
+@@ -234,6 +234,12 @@ enum v4l2_colorfx {
+  */
+ #define V4L2_CID_USER_MALI_C55_BASE		(V4L2_CID_USER_BASE + 0x1230)
+ 
++/*
++ * The base for the Qualcomm iris driver controls.
++ * We reserve 16 controls for this driver.
++ */
++#define V4L2_CID_USER_QCOM_IRIS_BASE		(V4L2_CID_USER_BASE + 0x1240)
++
+ /* MPEG-class control IDs */
+ /* The MPEG controls are applicable to all codec controls
+  * and the 'MPEG' part of the define is historical */
+
+---
+base-commit: a52e6f7923c17a672135b485ffd96fbd72f46267
+change-id: 20260212-b4-add_sc7280_mbr-597ac615b931
+
+Best regards,
 -- 
-Florian
+Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
 
---00000000000058c32c06570de2d3
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Description: S/MIME Cryptographic Signature
-
-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
-tJVewHuOmXgWQxNWV7Oiszu1d9xAcqyj65s1PrEIIaHnxEM3eTK+teecLEy8QymZjjDTrCHg4x36
-2AczdlQAIiq5TSAucGja5VP8g1zTnfL/RAxEZvLS471GABptArolXY2hMVHdVEYcTduZlu8aHARc
-phXveOB5/l3bPqpMVf2aFalv4ab733Aw6cPuQkbtwpMFifp9Y3s/0HGBfADomK4OeDTDJfuvCp8g
-a907E48SjOJBGkh6c6B3ace2XH+CyB7+WBsoK6hsrV5twAXSe7frgP4lN/4Cm2isQl3D7vXM3PBQ
-ddI2aZzmewTfbgZptt4KCUhZh+t7FGB6ZKppQ++Rx0zsGN1s71MtjJnhXvJyPs9UyL1n7KQPTEX/
-07kwIwdMjxC/hpbZmVq0mVccpMy7FYlTuiwFD+TEnhmxGDTVTJ267fcfrySVBHioA7vugeXaX3yL
-SqGQdCWnsz5LyCxWvcfI7zjiXJLwefechLp0LWEBIH5+0fJPB1lfiy1DUutGDJTh9WZHeXfVVFsf
-rSQ3y0VaTqBESMjYsJnFFYQJ9tZJScBluOYacW6gqPGC6EU+bNYC1wpngwVayaQQMIIGnzCCBIeg
-AwIBAgIMaT9V748TBL0gqLOFMA0GCSqGSIb3DQEBCwUAMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
-ExBHbG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9iYWxTaWduIEdDQyBSNiBTTUlNRSBDQSAy
-MDIzMB4XDTI1MDYxOTA4NDMwM1oXDTI3MDYyMDA4NDMwM1owgeMxCzAJBgNVBAYTAlVTMRMwEQYD
-VQQIEwpDYWxpZm9ybmlhMREwDwYDVQQHEwhTYW4gSm9zZTEZMBcGA1UEYRMQTlRSVVMrREUtNjYx
-MDExNzERMA8GA1UEBBMIRmFpbmVsbGkxEDAOBgNVBCoTB0Zsb3JpYW4xFjAUBgNVBAoTDUJST0FE
-Q09NIElOQy4xJjAkBgNVBAMMHWZsb3JpYW4uZmFpbmVsbGlAYnJvYWRjb20uY29tMSwwKgYJKoZI
-hvcNAQkBFh1mbG9yaWFuLmZhaW5lbGxpQGJyb2FkY29tLmNvbTCCASIwDQYJKoZIhvcNAQEBBQAD
-ggEPADCCAQoCggEBAK9u0aBdl51z/nEmpFSqdvC3Bu87AnBaOq1NGLM4vKTwCRuh1hSPhQOJkIB0
-X3lGlHAEUufNmKYb1aeLHW2kToCe+9mr2cBXqHP0aWl/Oy/ZjQabOsXzOzE0SfGLnLfGJMLV7yFB
-pwKwqxC8t5MBK+6zhQZGcnnuz9wF1tWGdczOeCmQCTO9+MlB1fNac8pKSB8bUhOSC4fr0ev7BfPA
-KmfMr9BBremQmDCaHeTwYy6wZLdj4dZzGMfF6PZOLiV5DU61ehA+spBd00RbowgJfmI525dEWihB
-DaLZim3cCy0sCU9GfGm2sHUX+3B0S6twomZzsrTE02PfoUuxXAqf0gMCAwEAAaOCAeEwggHdMA4G
-A1UdDwEB/wQEAwIFoDAMBgNVHRMBAf8EAjAAMIGTBggrBgEFBQcBAQSBhjCBgzBGBggrBgEFBQcw
-AoY6aHR0cDovL3NlY3VyZS5nbG9iYWxzaWduLmNvbS9jYWNlcnQvZ3NnY2NyNnNtaW1lY2EyMDIz
-LmNydDA5BggrBgEFBQcwAYYtaHR0cDovL29jc3AuZ2xvYmFsc2lnbi5jb20vZ3NnY2NyNnNtaW1l
-Y2EyMDIzMGUGA1UdIAReMFwwCQYHZ4EMAQUDAzALBgkrBgEEAaAyASgwQgYKKwYBBAGgMgoDAjA0
-MDIGCCsGAQUFBwIBFiZodHRwczovL3d3dy5nbG9iYWxzaWduLmNvbS9yZXBvc2l0b3J5LzBBBgNV
-HR8EOjA4MDagNKAyhjBodHRwOi8vY3JsLmdsb2JhbHNpZ24uY29tL2dzZ2NjcjZzbWltZWNhMjAy
-My5jcmwwKAYDVR0RBCEwH4EdZmxvcmlhbi5mYWluZWxsaUBicm9hZGNvbS5jb20wEwYDVR0lBAww
-CgYIKwYBBQUHAwQwHwYDVR0jBBgwFoAUACk2nlx6ug+vLVAt26AjhRiwoJIwHQYDVR0OBBYEFCuk
-Rbf0cgc52/dpv3u8tk5QBzfLMA0GCSqGSIb3DQEBCwUAA4ICAQCEf8H6iR/fp2Yv2FycUR0XNfkZ
-5C5jGago+UGEiNDE1ZEz27RO9dIuFrh6TPwC7Z9zkRxSSEPoXEF9UmaNZpUK9hIOLja4nh2xD83z
-udss8gNXHS7AePBy6asDTxJVl+S+Ls7j1mr9udBw4WCD6pSa8PfyTKjG+zhD6BWxBuajysSfyXNJ
-lQkOmI4EW0SH3VOIIwZRb1QjxFhPyJI6rqp4osvjzNY3YFtK/F1ylmGI5m0RkwtqgJ/0Lx115i9U
-uIo/v/g1BPD0rQqHpVtLvfH4s75U0vw8Cd+Wg7QQUk21PxweqcwnuFakkHi6xarxwnlijKgv9vZn
-5p3Gf6TWVrCD7mXWDbl4D+KndfIa6E7hc4xPUA+idcQ02s1s6lfZ36s9f/5ZY9L+BwR12LFvzKcf
-JhVO78ugQDvSIrbq4lgDk4HILUi7se+UWdSWg/GvaglFs28PE9DoxG3MOX4wrbXPqpD3lrnZDFMM
-uPID5U7ukJqoVbHLZU3u11CcI5k9ko1s9A1Q11sOaUcJHvma/vYz0K0mub0Li4MBym/O5K+kJ98p
-sguXKkldCDDtyTm5mFBVXOqbXFDn/oBPRIcHEgjXf8xZVEU6Sh90+k87Vm91WZMWona3POJKJVhe
-9sd9RXscJiiFPaZ7E2d3IHNuRetYSfVr9qZl1mOcJIB1i0f1djGCAlcwggJTAgEBMGIwUjELMAkG
-A1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24g
-R0NDIFI2IFNNSU1FIENBIDIwMjMCDGk/Ve+PEwS9IKizhTANBglghkgBZQMEAgEFAKCBxzAvBgkq
-hkiG9w0BCQQxIgQgtguLygfxrhNVB5QxIrqOmU3TKZb0RS+lv6/SRrX5y/UwGAYJKoZIhvcNAQkD
-MQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjYwNzIwMTcwMzIzWjBcBgkqhkiG9w0BCQ8x
-TzBNMAsGCWCGSAFlAwQBKjALBglghkgBZQMEARYwCwYJYIZIAWUDBAECMAoGCCqGSIb3DQMHMAsG
-CSqGSIb3DQEBBzALBglghkgBZQMEAgEwDQYJKoZIhvcNAQEBBQAEggEAMcm1NeFQk5PKhiZFnCbd
-yTkJVIlY5GZdS/XJRDbD9oPCH681MNs8WjHI5/NzPjggkL8yFMG6IiNmIjxQhq7VZyB1GXfivM6T
-tAOChHEZJYkzhVdW0uH9KTh5n/9QHRS1LDpaOHYpYzhJtjWnuNdnPPTxdXhhmGl1RmRk4Jx5G7S4
-SX8Kbfd3eX9oJ6UZ9eJrk9YapohRP5q9W51mLJwN3CrAVpY0psXtVm465yh4zq6NNqAfX+x9/OCj
-2dK9WpDZ62IVT15pR4M5r9W2XMlqbBPrRBJPFaji1ECKkgnrFbDNIbYF3AoSRf980PqvyhSvsyNS
-l2TW9L12oL7i3c42zQ==
---00000000000058c32c06570de2d3--
