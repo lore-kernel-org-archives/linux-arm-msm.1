@@ -1,87 +1,87 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF2623559DF
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 06:11:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE85C391E4C
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 06:11:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784527872; cv=none; b=USw9zL+q9rafWGnFCsUUSCu1EOQIS706yPqcB2CHnFdAW9XzANHkdmfpX/4g3tGBJE/OZHFfUl1YXq3PmqXHyYvK89ICEUZ5zhScXaOnllHTH5mFcXqasQczL0jBjT5GdGcXxGRfMGQfnHpq0hBQ+o5lG0LRPXzLoNUs0FfXm8w=
+	t=1784527875; cv=none; b=TX+zO7zdkzJq3LTlVJ+6bvOQz47Ces32KQH3lDNHju+q8TM5YjNe/yc8mDlym+a7cSMT5ojGJH5PatIA59W4oNxv5Wd9+i+MOMIx1wN/a7jEqlQJLBHCCOLdY7ffJA7eRV48B2iXo1DNF8QsQ3tQx48EXhYkk88EngAzp0KGZpo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784527872; c=relaxed/simple;
-	bh=SrK8XPLCsmlyTunIHhCIODHVtqwW8w2A+TJGN2u59pA=;
+	s=arc-20240116; t=1784527875; c=relaxed/simple;
+	bh=fjfAwVLsdfXG3E29OVHK9sjfJONiXlZlAdNcpfnkhYY=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=EAUHnA3m6hyEIgUZ0VFtkhtDj+TptbCT+cd41QFZubPvLb7d/9WxwLRg+VcscrjC411JdFZcO3wILfry2idZOQu4+tfkW5uRwXvzF1u2iLnBbiEyL1FBUi+oxuT1oXCbG5Jprvxpfgjq0xEIAIWW1eyBIh2wtybvELIJkKASRls=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WndxS/QP; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=M5hFPf6b; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=Eyv0yDIcaNUfe2b9QV5xOOMkoDc84e7G0EWbJpCNwNl9QIbp+atv8lNjEJoGlLf421WDjqbiqlYKE2ClMehFpV1mG68MY6ULl4UAWLDXQ8Kou81JqKzECZhMHXjs4c9NKtnGXu4pD40cvPFVp6R1MbBkUoJgSngm++UsEUlK8dA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dXQCIhXU; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=D6F89mC5; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WndxS/QP";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="M5hFPf6b"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66JNtOLj941061
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 06:11:06 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dXQCIhXU";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="D6F89mC5"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66JNtS6f805640
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 06:11:01 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	O3MczQC0wTWVeQ3mq3nzNIjw2qe0TzQXQZvphNTOvUY=; b=WndxS/QPPX3O3W7h
-	apgN/FzlGp5My5diaKTMW+q8HE43PsOII0jCocYj9iD76BByg5qOZrFCHYm1Z+Wp
-	QZBF4VTTYGuq28W8Xyqdji1efYiOB6Mb6enbeDJAWlp4cwbpJFoy3OhwJ783p1hC
-	EoiMB6ncHVkWzj/GtNGabN+qX9LJPpiNLxiqsAFPzFKQLCxBzGOLQe9IcNfv+F6P
-	S9G1F5wkZ+eIR0g8n4X5OJ/p4C6R8lMzvMAWZFvoM3o2MrcJNca9MwrXdPS2H7qJ
-	KFAs6H4/9LGJENfFs0ddCKX4SP+JbASSeF+Em32EZiJyik7/RYxy6CzTS6vv5Wn5
-	uDznFQ==
-Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fg2c6cn7b-1
+	IF3qUvx1/jD02Z3xEjWvYCh3QU/bPLh9lfZzorOGlGs=; b=dXQCIhXUG3EFYJ2K
+	cQlfDIYdM11C3xeIWATqJ2mrrkhSvm6hGbrK6e5Zg7qNz2cqDYFe3jjesVdmDevB
+	tFusiqpbIX9Fj6UTYAb0TuB/lzJ5VoDBbW7JwHrrx4/9WJFrwbulERI6AcCIO2Yg
+	DMjzrfIgoqgBIuC8UoK9Ho2nmv9KO85khiJZWQo+hUdS37n+kuuq8bCO9fp26jKq
+	DmO6aTnGAWUrnF1I+fvmPbqDlfxZghvJ+gh1GFrJ6Wvkq6X/qxk93BKjztMvOblm
+	nt/k2f7cm2DpJytSGgzo/A7Duh3di9lSpq3O8NNk5VNUqNJ2AwkF2oo04WiWwdAU
+	giy9yA==
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fgd04umfa-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 06:11:05 +0000 (GMT)
-Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-90410c668adso199110916d6.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 19 Jul 2026 23:11:05 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 06:11:01 +0000 (GMT)
+Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-8fdace20927so71663226d6.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 19 Jul 2026 23:11:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784527865; x=1785132665; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784527860; x=1785132660; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=O3MczQC0wTWVeQ3mq3nzNIjw2qe0TzQXQZvphNTOvUY=;
-        b=M5hFPf6bIq2+wl2oJ9o26lpksdrZrwPQdOQcjD/BiTFTHtjoBMrzRnesYH9B+1NHGL
-         umHH3geWnwUsjThL7dKsLFhiYnypdArUKmuaibmfShFKAtCGo6yCTqavT3l7462iPdtH
-         ubrHf9Q1lHfd9dMqjTAABAnaeqgt5abHXEX0o71WWQKVRkeVgfN1HnlRjayZMfpzx7RV
-         2WlxmFvUzdfhyggpf+smT9SltJAVEPVu/T1HXuUcWVQ1GWIJaugPr/tT8A3S6VJWhBSk
-         rpzcaEgID2xW/gkqz5VNkJxJogIErBYJU/dtW6iqbdN0Eg34D7HMXc5LbGdENgmce1L/
-         hc9Q==
+        bh=IF3qUvx1/jD02Z3xEjWvYCh3QU/bPLh9lfZzorOGlGs=;
+        b=D6F89mC5BvqfY2YciQYlgAwilhwOoEjKkBSXG9LW+G9I64hQz0cRu9KZofH/xrT5pB
+         yqgCY6DlDi+VHowMK3CRVILKb6+sVA7F5rG4OZsFHc0QMCoT7r6+wTPUabIN6mmt4Rjd
+         2ObreFUClkRXXZ1Ow0JdKSUoMxlNdXvJwn+flKRPKj+Cs3jI/werWyk8pKrIeHnTfi2r
+         z3vtiDZ0GcYUcRccaHeih7RqvXpDUGVdvQ0YR/jbxWp0mrstP9/1M58kjbEUJdYk5zTt
+         OxbWmub9hYc5N2TJ2NLu+VxEzhFssWwltNd6VJu1JIOIDD3KIbEcJkgv4uk6Mlw5Sy71
+         gh5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784527865; x=1785132665;
+        d=1e100.net; s=20251104; t=1784527860; x=1785132660;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=O3MczQC0wTWVeQ3mq3nzNIjw2qe0TzQXQZvphNTOvUY=;
-        b=tRnQd+n1WhGoXg+kgf2Rgg5ZgqA1P05MQ36AOjD8+3KF+B4WoW5oOWKtPbDQpxLVDY
-         wVtsSHpGLUG8t9kMZjxmtPDEfMer2nsItykJo1cue6d2Mk+Ec+W8Y4RVvCGz/guFT2lx
-         NeLHLRxl5HsoDiJOlCtQifJXd9Gq17p3uPg88XheIXa6Scd8Kdxks0TUcpoFiQZ6dWSG
-         ZhUmPe+CV00/T8ZnRJNf26ip3AOangAuKDIRI4UHRFgwmjDACN8fSaQYqtp8FtRfIwjA
-         qw0wIfm1j83W5bujMRGl+FyWPQ27TN+l+0ueZKGjRTeg/AVeuZ1fUaAjEddXi6XjjG8K
-         7bJg==
-X-Gm-Message-State: AOJu0YwrqIo9aLdtQ6+FO6QczjUuImvuaNqdkjDDFGNjlV93+ulypjjA
-	hqz3y3y5wvYWjnf2ScP1vIQwvz2dYduAP+P9iFZ3ZY2sb+no873uCsFN/h3zJktKcP5VAJH1tG8
-	cxxcYNxPMBy7hoC3EkTVYyzDVlHnUXAhR/gvZ0r0e73/W6CB2BPdxussIuLFSxeYSO0Y/
-X-Gm-Gg: AfdE7ckpDZP6qh6Nv4gxpKgzmFW3qORbjJwVG04ltjeHq7BRSPSjyu3zizPQrRgyGvh
-	EMfQ6ci01sn3QCrSV+nHaDSu33078+AK56iTRWan1INjCNiC3RprspJ899PHwgLhkSwaT0vYR6j
-	VuwHg9+toP7tDs8pAvtg0dG0ot33XLP7gIJdJN0J/SpMr7s86oedlCxqLMyO3tAvCVXILp/Mesr
-	V4bm6xMzHU1NVXYi2uDaHL0JSFwJ3JauJMkcr0aaSW0588gZS5RID0YUYXm9gRVIELOIsmlfjfO
-	UZbbj1Gh9NdOs+ylNOY4EYNgjRoziQKqVoA49ixTDmvOCmIx6Qf6okGpr/yoJfM1utSX2AHjciM
-	bHwAFvcE6J8vsyxH+pHfITE4Yc5sSmB9udhNhH+o8b82Pn1rTg2ZoK2hc2TOQMpM=
-X-Received: by 2002:a05:6214:2f8f:b0:904:2a2a:d3 with SMTP id 6a1803df08f44-907783d1c8bmr154829066d6.47.1784527865237;
-        Sun, 19 Jul 2026 23:11:05 -0700 (PDT)
-X-Received: by 2002:a05:6214:2f8f:b0:904:2a2a:d3 with SMTP id 6a1803df08f44-907783d1c8bmr154828896d6.47.1784527864761;
-        Sun, 19 Jul 2026 23:11:04 -0700 (PDT)
+        bh=IF3qUvx1/jD02Z3xEjWvYCh3QU/bPLh9lfZzorOGlGs=;
+        b=go+aENNmN1Syr3Cr8i6p5rcrodMzeWqusLbklw5M/LrrTNC7YTHxNiWuG2SqitiLhU
+         liYq6ns6Oo7kiafdMai7o4DJx4F8wPpgBaZlPrxvPrcrTwOPUQRn5Ww+lyfHP5r+I1Ur
+         sthIPPSdk/ENeAsd1ObO3UAP50O1Aek9sXKbYAEoqrki+n4+urALu5WS5maSqq27b4+Z
+         FIMowC5Z09jQubcouP9epZLnNVc+ipdHGd882h7LQn65I19eprJydJsBV6bcNZrGI8vH
+         s0JA2KpjHYU5bgDEtVl4yRNSyX75tcaC96S2a+EFkczwawZ0ohlZkXTry9U2tYBp+N/g
+         KPNA==
+X-Gm-Message-State: AOJu0YyxxGUC72K4Dv4J7m1/0UN1PDGLyH8ubSYov20HobZj+nEo5JGC
+	oXa7gLC5MUNmVr+iskYXGxX03Of7odrVKE9/oBbVEDKrnBkF/GGrBuk+3lz1vgwjRHwRmK7T95q
+	/nvQBH+2NOzZRy5dD/jxXjFdW8qKnllk3IiRcRZByiM+VPmcVbf4TF1wpUhobkAzqNIyA
+X-Gm-Gg: AfdE7clH16muLLHhg6oXbunvPA2RcmVHxU/YIwmcxn/hxGyqcaUN7lMErkmGdm8lFdh
+	IyFYaXlif0aHlenmCcdbODQkTRJjrjRkxhEUK/jHCOBmovsKCkwkCMpwTADCoD0vzZfpygzgwLJ
+	h4jan2jG9ZO09aN29TxEZhr+ADDKhq/Ju8R+9pGhpLJIbHUAs8RFUgKRXeAOtOnntcSUvek3XEt
+	q3zAFvOVw2LHsVAOrjMdFCtjAMv6lBuzpXa7ws8GoLPe6s2u/tg0ig3OGGa9tyzvsUHW9wc7kr/
+	G0YoxwEFDF/5Erm6l97IWmXRqnGIIH31F4syR1Me16RxDHVpebAiQtDj6Ai+DnhBz0eaBNtTKTR
+	73q5GRbDrf7KK5Y7ZMdqvmOmQeHGFn9PBeTCmMtt+1hMvQFt9A2y5tfYYX/y+z2I=
+X-Received: by 2002:a05:6214:5001:b0:8f3:6c2:222 with SMTP id 6a1803df08f44-907783317b0mr130905266d6.14.1784527860428;
+        Sun, 19 Jul 2026 23:11:00 -0700 (PDT)
+X-Received: by 2002:a05:6214:5001:b0:8f3:6c2:222 with SMTP id 6a1803df08f44-907783317b0mr130905056d6.14.1784527860032;
+        Sun, 19 Jul 2026 23:11:00 -0700 (PDT)
 Received: from yongmou2.ap.qualcomm.com (Global_NAT1_IAD_FW.qualcomm.com. [129.46.232.65])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-90778588a39sm84793216d6.20.2026.07.19.23.11.00
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-90778588a39sm84793216d6.20.2026.07.19.23.10.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 19 Jul 2026 23:11:04 -0700 (PDT)
+        Sun, 19 Jul 2026 23:10:59 -0700 (PDT)
 From: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
-Date: Mon, 20 Jul 2026 14:08:11 +0800
-Subject: [PATCH v8 04/15] drm/msm/dp: split msm_dp_ctrl_config_ctrl() into
- link parts and stream parts
+Date: Mon, 20 Jul 2026 14:08:10 +0800
+Subject: [PATCH v8 03/15] drm/msm/dp: move mode setup into
+ msm_dp_panel_init_panel_info()
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260720-dp_mstclean-v8-4-bea261bf4e7d@oss.qualcomm.com>
+Message-Id: <20260720-dp_mstclean-v8-3-bea261bf4e7d@oss.qualcomm.com>
 References: <20260720-dp_mstclean-v8-0-bea261bf4e7d@oss.qualcomm.com>
 In-Reply-To: <20260720-dp_mstclean-v8-0-bea261bf4e7d@oss.qualcomm.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>,
@@ -104,142 +104,132 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
         Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
         Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784527840; l=3888;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784527840; l=4086;
  i=yongxing.mou@oss.qualcomm.com; s=20250910; h=from:subject:message-id;
- bh=SrK8XPLCsmlyTunIHhCIODHVtqwW8w2A+TJGN2u59pA=;
- b=+rSu5mCBvXZ9+4i/Vd/ZLhxxgCDl3t+6LMh2BqGQgJLSYpIalrMWK4zRJDcxpdiiRs+QGLRm7
- JEJxoB1+oB2DOxsDP9OB3TeSTfAAsuzi+84+GOPm1ubNGjgEt4XGX1a
+ bh=fjfAwVLsdfXG3E29OVHK9sjfJONiXlZlAdNcpfnkhYY=;
+ b=+IpbxiGAPbEa5G7QwCsrybPKxF3rVBed2emWYd4YGTPKSRh7Sh9ZaJmiW/wl6FVXGiTHxgGje
+ 9QRG/40n1KvC48AdQ2FbTnyAPmQTmRrs2uFhZlp0Yhu9TjmTFgfylea
 X-Developer-Key: i=yongxing.mou@oss.qualcomm.com; a=ed25519;
  pk=rAy5J1eP+V7OXqH5FJ7ngMCtUrnHhut30ZTldOj52UM=
-X-Proofpoint-GUID: O_AtEVx-l_OHfSHN_ov9ewFwTLJwJ1B5
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDA2NiBTYWx0ZWRfXwZSq5vrN8pG/
- 0nWo7DJU+P3G17l3Eemf/uyoE5vXD/eOsJ7EiaaxsFUXiSEZmv38UyxALcy5qDyDqr3Vc7JWQf2
- Kkec8ncDJoF65lCVscxQURuihoTFjoI5onYzl9FL9shWYGnfW4NNhvAsK4j7oA0Mxfsu090Y5G+
- KMJ9RnfTQqQbEihYze3TvlhZEc3VdV/zNAW+24Ho1mL2v15H56SlD+I4eb15FvUswIHzf/D91fM
- LtDzPzhycEwYaDpgx1DtU12kg9lXKOfatDgzBGjIvUIPoul6124jga8GYku3sNs7STEZwmX1OkT
- T5xtr5K8qKAIYo2rl3xMcfg7G/QAJ47zOtqpB7TM/704b18zqL8121wSU/vDKTujvOWggF2Ytwu
- RtnYRLdiR4ocL9QgmG65Xi4NmZs+AMivzungancqAekQ5C+D6pjVwrMWjmDNg+Qagqa36LpL+hB
- hT9sqRhLJHQfcxfAzvg==
-X-Proofpoint-ORIG-GUID: O_AtEVx-l_OHfSHN_ov9ewFwTLJwJ1B5
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDA2NiBTYWx0ZWRfXyn8+HI4W5LHZ
- BCurZiwkXlyQxJvpvcmzxTlYHH6vKl4QldlkhnFYtOLOtTjTJx30leVpAhRLI/YwHIRFdiJy4ZW
- Hm0PQHdY+57wLpteOIUcdjrQ2CLqUVk=
-X-Authority-Analysis: v=2.4 cv=CJQamxrD c=1 sm=1 tr=0 ts=6a5dbbf9 cx=c_pps
- a=UgVkIMxJMSkC9lv97toC5g==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
+X-Authority-Analysis: v=2.4 cv=POs/P/qC c=1 sm=1 tr=0 ts=6a5dbbf5 cx=c_pps
+ a=oc9J++0uMp73DTRD5QyR2A==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=N4WGanfLxQUAwF0MUGsA:9 a=QEXdDO2ut3YA:10
- a=1HOtulTD9v-eNWfpl4qZ:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=RRF978PcF5p4qF5CYGQA:9 a=QEXdDO2ut3YA:10
+ a=iYH6xdkBrDN1Jqds4HTS:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDA2NiBTYWx0ZWRfX8tQXXivxlbLf
+ Ue/tjLXB6v8oeph2w50voy/FifXmp/CzNT1696kfMVAfUEYh1hmw0AwVt9Pu91betVRSvKL4+eF
+ ycuxN/+E65Ga+CLtX/aTiGM23XS0DPNlCAsiBvkK2c1D9ng8G7hivpcG6v4xI1lvfUXvikcKT7y
+ ytu38kdr2/AjTVdaAHkBlBLIIlpyk5n1CH5I/IBo44e9F+USHy2j3S231XbxfgN3Z9f9d5oVWJQ
+ C5QqIKtiezgRfwcMsjOEUsUBbk8X40bC/UEhhCPsFcP9f6jsBvSfwxNrEV72vf8eYzOgYamj/i3
+ i2nNWFiixuFbRyD7d/xmLoji6WT1Db79o4whHUiJSzFD7cBDhXfgmdDhY5YJx4EGiUnQuXEQehb
+ +RhwulvnY6Jm3+Q8L2SsfodAHwubeJtD7tZqzesOWcuITJq+WbWhKmFPyqluSkzGPrc0+RNIgIb
+ Ic8QFYB+sxIDaos5JSg==
+X-Proofpoint-ORIG-GUID: -tDwwujkW262k9-yGpCS-DzJhcu0DMRy
+X-Proofpoint-GUID: -tDwwujkW262k9-yGpCS-DzJhcu0DMRy
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDA2NiBTYWx0ZWRfX85UTW4kmeJh6
+ lUj+3j1rn2cqPrfByZu7rUcTgN2ujBtaMlz4jEssJZUMtw4xofNzY3b9o3EflB75wKgFjqQJcrA
+ wtvC3Sou+mNHpaeY0vA1akMo35GOJDQ=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-19_08,2026-07-17_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 adultscore=0 impostorscore=0 lowpriorityscore=0 malwarescore=0
- suspectscore=0 phishscore=0 priorityscore=1501 spamscore=0 clxscore=1015
+ lowpriorityscore=0 spamscore=0 adultscore=0 clxscore=1015 suspectscore=0
+ priorityscore=1501 malwarescore=0 impostorscore=0 phishscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200066
 
-The DP_CONFIGURATION_CTRL register contains both link-level and
-stream-specific fields. Currently, msm_dp_ctrl_config_ctrl() configures
-all of them together. Separate the configuration into link parts and
-stream parts to support MST.
+The display layer directly assigns msm_dp_panel mode fields (bpp,
+sync polarity, yuv420 flag) instead of letting the panel manage its
+own state. Pass adjusted_mode and bpp as parameters to
+msm_dp_panel_init_panel_info() and move the assignments inside it.
 
+Suggested-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 Signed-off-by: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
 Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 ---
- drivers/gpu/drm/msm/dp/dp_ctrl.c | 47 +++++++++++++++++++++++++++-------------
- 1 file changed, 32 insertions(+), 15 deletions(-)
+ drivers/gpu/drm/msm/dp/dp_display.c | 11 +----------
+ drivers/gpu/drm/msm/dp/dp_panel.c   | 18 +++++++++++++++---
+ drivers/gpu/drm/msm/dp/dp_panel.h   |  4 +++-
+ 3 files changed, 19 insertions(+), 14 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-index 86ef8c89ad44..4c62b0e137c3 100644
---- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
-+++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-@@ -388,26 +388,44 @@ void msm_dp_ctrl_push_idle(struct msm_dp_ctrl *msm_dp_ctrl)
- 	drm_dbg_dp(ctrl->drm_dev, "mainlink off\n");
+diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
+index 57eafd472462..155beefdfdef 100644
+--- a/drivers/gpu/drm/msm/dp/dp_display.c
++++ b/drivers/gpu/drm/msm/dp/dp_display.c
+@@ -604,21 +604,12 @@ static int msm_dp_display_set_mode(struct msm_dp *msm_dp_display,
+ 
+ 	dp = container_of(msm_dp_display, struct msm_dp_display_private, msm_dp_display);
+ 
+-	drm_mode_copy(&msm_dp_panel->msm_dp_mode.drm_mode, adjusted_mode);
+ 	if (msm_dp_display_check_video_test(msm_dp_display))
+ 		bpp = msm_dp_display_get_test_bpp(msm_dp_display);
+ 	else
+ 		bpp = msm_dp_panel->connector->display_info.bpc * 3;
+ 
+-	msm_dp_panel->msm_dp_mode.bpp = bpp ? bpp : 24; /* Default bpp */
+-	msm_dp_panel->msm_dp_mode.v_active_low =
+-		!!(adjusted_mode->flags & DRM_MODE_FLAG_NVSYNC);
+-	msm_dp_panel->msm_dp_mode.h_active_low =
+-		!!(adjusted_mode->flags & DRM_MODE_FLAG_NHSYNC);
+-	msm_dp_panel->msm_dp_mode.out_fmt_is_yuv_420 =
+-		drm_mode_is_420_only(&msm_dp_panel->connector->display_info, adjusted_mode) &&
+-		msm_dp_panel->vsc_sdp_supported;
+-	msm_dp_panel_init_panel_info(msm_dp_panel);
++	msm_dp_panel_init_panel_info(msm_dp_panel, adjusted_mode, bpp ? bpp : 24);
+ 
+ 	/* populate wide_bus_support to different layers */
+ 	dp->ctrl->wide_bus_en =
+diff --git a/drivers/gpu/drm/msm/dp/dp_panel.c b/drivers/gpu/drm/msm/dp/dp_panel.c
+index bde4a772d22c..e76dad0f6663 100644
+--- a/drivers/gpu/drm/msm/dp/dp_panel.c
++++ b/drivers/gpu/drm/msm/dp/dp_panel.c
+@@ -647,15 +647,27 @@ int msm_dp_panel_timing_cfg(struct msm_dp_panel *msm_dp_panel, bool wide_bus_en)
+ 	return 0;
  }
  
--static void msm_dp_ctrl_config_ctrl(struct msm_dp_ctrl_private *ctrl)
-+static void msm_dp_ctrl_config_ctrl_streams(struct msm_dp_ctrl_private *ctrl,
-+					    struct msm_dp_panel *msm_dp_panel)
+-int msm_dp_panel_init_panel_info(struct msm_dp_panel *msm_dp_panel)
++int msm_dp_panel_init_panel_info(struct msm_dp_panel *msm_dp_panel,
++				 const struct drm_display_mode *adjusted_mode,
++				 u32 bpp)
  {
- 	u32 config = 0, tbd;
-+
-+	/*
-+	 * RMW: Called from atomic_enable(). Serialized by the DRM atomic framework.
-+	 */
-+	config = msm_dp_read_link(ctrl, REG_DP_CONFIGURATION_CTRL);
-+
-+	if (msm_dp_panel->msm_dp_mode.out_fmt_is_yuv_420)
-+		config |= DP_CONFIGURATION_CTRL_RGB_YUV; /* YUV420 */
-+
-+	tbd = msm_dp_link_get_test_bits_depth(ctrl->link,
-+					      msm_dp_panel->msm_dp_mode.bpp);
-+
-+	config |= tbd << DP_CONFIGURATION_CTRL_BPC_SHIFT;
-+
-+	if (msm_dp_panel->psr_cap.version)
-+		config |= DP_CONFIGURATION_CTRL_SEND_VSC;
-+
-+	drm_dbg_dp(ctrl->drm_dev, "stream DP_CONFIGURATION_CTRL=0x%x\n", config);
-+
-+	msm_dp_write_link(ctrl, REG_DP_CONFIGURATION_CTRL, config);
-+}
-+
-+static void msm_dp_ctrl_config_ctrl_link(struct msm_dp_ctrl_private *ctrl)
-+{
-+	u32 config = 0;
- 	const u8 *dpcd = ctrl->panel->dpcd;
+ 	struct drm_display_mode *drm_mode;
+ 	struct msm_dp_panel_private *panel;
  
- 	/* Default-> LSCLK DIV: 1/4 LCLK  */
- 	config |= (2 << DP_CONFIGURATION_CTRL_LSCLK_DIV_SHIFT);
- 
--	if (ctrl->panel->msm_dp_mode.out_fmt_is_yuv_420)
--		config |= DP_CONFIGURATION_CTRL_RGB_YUV; /* YUV420 */
+-	drm_mode = &msm_dp_panel->msm_dp_mode.drm_mode;
 -
- 	/* Scrambler reset enable */
- 	if (drm_dp_alternate_scrambler_reset_cap(dpcd))
- 		config |= DP_CONFIGURATION_CTRL_ASSR;
+ 	panel = container_of(msm_dp_panel, struct msm_dp_panel_private, msm_dp_panel);
  
--	tbd = msm_dp_link_get_test_bits_depth(ctrl->link,
--			ctrl->panel->msm_dp_mode.bpp);
--
--	config |= tbd << DP_CONFIGURATION_CTRL_BPC_SHIFT;
--
- 	/* Num of Lanes */
- 	config |= ((ctrl->link->link_params.num_lanes - 1)
- 			<< DP_CONFIGURATION_CTRL_NUM_OF_LANES_SHIFT);
-@@ -421,10 +439,7 @@ static void msm_dp_ctrl_config_ctrl(struct msm_dp_ctrl_private *ctrl)
- 	config |= DP_CONFIGURATION_CTRL_STATIC_DYNAMIC_CN;
- 	config |= DP_CONFIGURATION_CTRL_SYNC_ASYNC_CLK;
++	drm_mode_copy(&msm_dp_panel->msm_dp_mode.drm_mode, adjusted_mode);
++	msm_dp_panel->msm_dp_mode.bpp = bpp;
++	msm_dp_panel->msm_dp_mode.v_active_low =
++		!!(adjusted_mode->flags & DRM_MODE_FLAG_NVSYNC);
++	msm_dp_panel->msm_dp_mode.h_active_low =
++		!!(adjusted_mode->flags & DRM_MODE_FLAG_NHSYNC);
++	msm_dp_panel->msm_dp_mode.out_fmt_is_yuv_420 =
++		drm_mode_is_420_only(&msm_dp_panel->connector->display_info, adjusted_mode) &&
++		msm_dp_panel->vsc_sdp_supported;
++
++	drm_mode = &msm_dp_panel->msm_dp_mode.drm_mode;
++
+ 	/*
+ 	 * print resolution info as this is a result
+ 	 * of user initiated action of cable connection
+diff --git a/drivers/gpu/drm/msm/dp/dp_panel.h b/drivers/gpu/drm/msm/dp/dp_panel.h
+index 53b7b4463551..4519ac374220 100644
+--- a/drivers/gpu/drm/msm/dp/dp_panel.h
++++ b/drivers/gpu/drm/msm/dp/dp_panel.h
+@@ -43,7 +43,9 @@ struct msm_dp_panel {
+ 	u32 max_bw_code;
+ };
  
--	if (ctrl->panel->psr_cap.version)
--		config |= DP_CONFIGURATION_CTRL_SEND_VSC;
--
--	drm_dbg_dp(ctrl->drm_dev, "DP_CONFIGURATION_CTRL=0x%x\n", config);
-+	drm_dbg_dp(ctrl->drm_dev, "link DP_CONFIGURATION_CTRL=0x%x\n", config);
- 
- 	msm_dp_write_link(ctrl, REG_DP_CONFIGURATION_CTRL, config);
- }
-@@ -450,7 +465,8 @@ static void msm_dp_ctrl_configure_source_params(struct msm_dp_ctrl_private *ctrl
- 	msm_dp_ctrl_lane_mapping(ctrl);
- 	msm_dp_setup_peripheral_flush(ctrl);
- 
--	msm_dp_ctrl_config_ctrl(ctrl);
-+	msm_dp_ctrl_config_ctrl_link(ctrl);
-+	msm_dp_ctrl_config_ctrl_streams(ctrl, ctrl->panel);
- 
- 	test_bits_depth = msm_dp_link_get_test_bits_depth(ctrl->link, ctrl->panel->msm_dp_mode.bpp);
- 	colorimetry_cfg = msm_dp_link_get_colorimetry_config(ctrl->link);
-@@ -1628,7 +1644,8 @@ static int msm_dp_ctrl_link_train(struct msm_dp_ctrl_private *ctrl,
- 	u8 assr;
- 	struct msm_dp_link_info link_info = {0};
- 
--	msm_dp_ctrl_config_ctrl(ctrl);
-+	msm_dp_ctrl_config_ctrl_link(ctrl);
-+	msm_dp_ctrl_config_ctrl_streams(ctrl, ctrl->panel);
- 
- 	link_info.num_lanes = ctrl->link->link_params.num_lanes;
- 	link_info.rate = ctrl->link->link_params.rate;
+-int msm_dp_panel_init_panel_info(struct msm_dp_panel *msm_dp_panel);
++int msm_dp_panel_init_panel_info(struct msm_dp_panel *msm_dp_panel,
++				 const struct drm_display_mode *adjusted_mode,
++				 u32 bpp);
+ int msm_dp_panel_deinit(struct msm_dp_panel *msm_dp_panel);
+ int msm_dp_panel_timing_cfg(struct msm_dp_panel *msm_dp_panel, bool wide_bus_en);
+ int msm_dp_panel_read_link_caps(struct msm_dp_panel *msm_dp_panel,
 
 -- 
 2.43.0
