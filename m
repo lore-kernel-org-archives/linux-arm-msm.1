@@ -1,121 +1,193 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FF2E383319
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 16:01:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E0683DB326
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 16:03:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784563302; cv=none; b=dykS6KUHBeKUnGvco3Khu25ilrbWdi54X4NXIZH6wXC5CDbFNtFLMDncsmgvJHmwQJu3wk8MByX8e8+xhS89soSJH3y3iGHeHzyl2tapM28d1T+4feVBC9S15Velwq4aXXN0MouKUzwzqvfyBf+WCTZMc9knhTOFUsfjp3criQo=
+	t=1784563384; cv=none; b=ZPO2W1FaPLM/mloTv7IA/nLNSLCZrZHWEjSszOhmFwoj38/wQAgsSUkT/L0eAV5vMaWfT2KAtFab0tIsbP2voQOKBPmTcScHuaqS2rKWtNQep6aWSjwI2qM2IuFdorR4MfnUj4O5EW5kX7bpJiotQhH+UnTkFfIJFDC8X76G8uo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784563302; c=relaxed/simple;
-	bh=ikfWm5DL/5sYnkDYH488sa/zQcW6oHrRAu4seAl+qa4=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=HQq4pm6TR/o/RFktMwKpzp63P4u3XT5YqmoZhxiQCq3nU54jA8DQ3LFhKeVK+co0dmIadrcvvSzmugxLSJZ33FfCdgmH6S4xycuqrtIvzqZO0UVzwpk+oOBc97+/nJOkbpkB2V33xFjDAJ6UrVdNf+6kixit5/m5pYUISJ5NEFM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CmI9exjG; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784563384; c=relaxed/simple;
+	bh=sQl7WPJ5J5BoF002nBCIMZf/2vH/R29fDZ+vXQkKnNo=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Type; b=MzPHWsKGNiQ2WDur6Jjr5ZuagDAqdk6IzzpGWKqMHaccSTsHZldvRKdhRcDK4kGd+Qmdxd0VFB1UHRG1mJ8tLXN7urf0OTHhkGpca71I4ua8O3TbGJzyiN4rF0fceQ0mvr56bqlisP4Dy7ACA42NHm159IJ0LE9bYeaZpfZhdiU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=K7aOBaWs; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=U2CoMZDi; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CmI9exjG"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0E1341F00A3A
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 16:01:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784563301;
-	bh=cy2ZkxCpNVSDLVTKtd8tQZtQMok6N80r7SDOQ9XS6Ps=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=CmI9exjGe/Q9lpN/jDKjGYcZAhE82h4JhNs/XWbdbT2QKOv9Vt/lJRkWSNzc2sTDK
-	 bT7H2HlxBn7PRd35GrUlcJXAkBZ/htEGpxajzqT8x+LQ9JKk55GrVmyrUIS+VwrASy
-	 ex7zrBxyL4kKER0PbZqRA66QIdxuVaYzzXmIP4+VcaHIcdtYLEOA+9DLMG2S+JTXPB
-	 7Dja9EFj7xhGycntJmC877y3Ph7X6yhMSvvn0ClkvGzRg4VXz75VMJGEj8vEBkESvB
-	 HWh8zfEm7bAVxCLzbZXYqaMpxHTM9TEEaYT8KSHa+fLKy+x1CPl/UGD5zTR0ZeiVqX
-	 P9CvaeVK0zUyg==
-Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-5b2a4359d16so7574e87.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 09:01:40 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RrAK6jOOcLrM/YyNIm/NoSWrdu+BXArOGjBZBCe/tA949RtaoSYYf2nCCKQKAW459/OsZ24upPT69PiKqgg@vger.kernel.org
-X-Gm-Message-State: AOJu0YwlN4/R8x+qPQEUqH7bI9NfkziJXXD0cFFJw8YZlKxmVzM1ZSDq
-	kkiOseUQ9tFrs0eRLTFeFfFrKU5gIlozEA6apgLcOUaKUJtLut34vNhlL1ICMH6C4euCdmw824V
-	rHhNUYUQEUVK3tZmyHfuWyIFdtPrkImWK2Bk4xbvWCA==
-X-Received: by 2002:a05:6512:23a5:b0:5b0:1ab1:2640 with SMTP id
- 2adb3069b0e04-5b28f9a56f2mr2858457e87.41.1784563299555; Mon, 20 Jul 2026
- 09:01:39 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 20 Jul 2026 18:01:37 +0200
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 20 Jul 2026 18:01:37 +0200
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <86b2aba7-b049-47e6-bc94-6cb499b30ce4@lunn.ch>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="K7aOBaWs";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="U2CoMZDi"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66KFw1Wm3259623
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 16:03:01 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=Salwr7ZkvoC+W+zP0O+9TJ
+	cZbgxlmEgTJU1zU+SmQIc=; b=K7aOBaWsMXSEGRUmlJmnfnKGcRbX9y+oWuXlyD
+	PTtQZtE2uWcSqscd7988pIr9sAb3Tslz1PbdqmI5uqB/kmY1TEvHIMRl7XOQBMAM
+	zpRKdNupWwEE6/VCQdj92ANtQKy7idgqaCZiHs+ZZ4JPawdzLXxrWxSR+BR3ruzJ
+	BakVElzaUN9EagwlI7UC/YyxrK3Z2OU2yclLS+TITxfjvPnasTF9bZpJcTEKUa5D
+	MfZai4pObhgUFKL4aCyiPd+eJdcuF9GbCSV/+lJBLh4RznW1Ont/P1xM4RKBccn9
+	LDqMFp8haO8b4u9hZJXEFX+wfICQCwNus5q6LkDH307rEhXQ==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhfdcj8ah-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 16:03:00 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cb5ea36f969so2946675a12.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 09:03:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784563380; x=1785168180; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Salwr7ZkvoC+W+zP0O+9TJcZbgxlmEgTJU1zU+SmQIc=;
+        b=U2CoMZDiYbibYDn16M+u78KeyOwiJCpKQeM3gB5qOz6YczMdpHD2iux31N/qoN1Oej
+         Qq+fRFAEWuk1WLSg5Zvah66TKuAYnxkoo2D9bkFIP4FxmdKrjIDn6huuNC46a8XJdjRm
+         ycW5HWZCZHNbslA5NmRt8I/+25XZzhvSfM8uaZFCNtvvoQSKCFVc6LwiE74F9ZmOp7Ly
+         A+rHjyrkDQjYUUOFbxSQNxX6o1yITVdNat9p0TZjiCpQ7gr92U4OoNjLsjgh/1lPFESe
+         SGNWr6zwZ4l+gka6huh43StwsZuXReDHyvmkvZwux5abpkUCjyS3E7mbp3NYOYZlKIfC
+         Ry+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784563380; x=1785168180;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Salwr7ZkvoC+W+zP0O+9TJcZbgxlmEgTJU1zU+SmQIc=;
+        b=F3ZagJJbNaHZkq9ICfF2ESw29DOi9bVczXwz4u4Nyo/IrFYNUQjlUeG/3h8ztzKKbG
+         HLeJDVW2hFvWAe4Siin2gqHrxVdUGIwvJ2G8UGe+B5ZXjNbaGDeoIcXdwXxabT2lPBR+
+         giPZiM6Rqvs52pIAOXcy4njssqmB51/M2RKF2CakpeF0ULjtN3T4q3/8CHTaaowZ3/Ay
+         ly3UXklEoqKPKVFtjxB/pY5+YU7u5uwvxFGUY90VgA9Lan6eLKUTk/OlwImuj93EGcxf
+         BZ5kFGC7gIOPVjRyPG+cDZw+iUCKLD+sra2JyIA6+5lw9WO5EhGbN3xhyltE3rOtNIjh
+         hk6g==
+X-Forwarded-Encrypted: i=1; AHgh+RoneHX7kU1PHsSDxvFhdgoQd6v4G7QxEf7VHX4flFnzo1EjZIl7vZIKTqMj6i7ANaa+pVZ9P82twMCjrPD+@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw12cf2uSbj8fIBYgHtTZuSbh7bTOXKVmcTZmkVqMjxFoR+BI12
+	5RanrdOtsX1mMUsNJi1jj8JUkhxBRVUdQuf0HPhuSmJAihV/l+nvhf+0nTPX5UkpXENgUuR0Bso
+	fFModLtSFUelmE+v9ACd7BJ1DoJfs3Mp0EsrLGcYB/IcCJZ3SP4xzArLGUQDXz18XNrmn
+X-Gm-Gg: AfdE7cn9jImELG+s3RhPXGd4aexu7h8fRwI/SlotzUXDCzbyv/AlyuXg6fQw8lj0G0P
+	2VZMAS/H/TELBkFZR8PGc/YjDSgjDl4pYHZ25AGumMxqOgJwSS2hAa66XC6fFraYKza9CUubGAC
+	gGqYbMKzJjnaYBjGYJJl/whZ9I2tuf8d0YLbnjz/ee0JxBkQVZDyKiru8+EA8X4GlPIkVbAcvOc
+	rLEt0elBV+Ykhy0aUZetH8X5z0npYKFD2DiOaiYE2HKJsD6GoTDfX/G6ZChfCP+NO/Q7BmRNUIN
+	FaCgjOeSseRt7Bn+sd2sY9RMvvMgpe8D+GsQ7bGi6GAiaccei100SPqETYhVu2jOFLuNSYX8DOO
+	k8SdWMIOPQTb5wprv4pVS8An5CEyCidv0bhGU
+X-Received: by 2002:a05:6a21:6b16:b0:398:8870:b58f with SMTP id adf61e73a8af0-3c3ad5d463fmr15393347637.14.1784563379255;
+        Mon, 20 Jul 2026 09:02:59 -0700 (PDT)
+X-Received: by 2002:a05:6a21:6b16:b0:398:8870:b58f with SMTP id adf61e73a8af0-3c3ad5d463fmr15393291637.14.1784563378650;
+        Mon, 20 Jul 2026 09:02:58 -0700 (PDT)
+Received: from hu-mohs-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31429fe1014sm37616115eec.7.2026.07.20.09.02.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 20 Jul 2026 09:02:58 -0700 (PDT)
+From: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
+To: Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, linux-sound@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH v6 0/3] ASoC: qcom: qdsp6: Add MI2S clock control
+Date: Mon, 20 Jul 2026 21:32:23 +0530
+Message-Id: <20260720160226.1026440-1-mohammad.rafi.shaik@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260720-pdev-set-fwnode-instead-of-of-node-v1-0-2dee93f42c54@oss.qualcomm.com>
- <20260720-pdev-set-fwnode-instead-of-of-node-v1-7-2dee93f42c54@oss.qualcomm.com>
- <86b2aba7-b049-47e6-bc94-6cb499b30ce4@lunn.ch>
-Date: Mon, 20 Jul 2026 18:01:37 +0200
-X-Gmail-Original-Message-ID: <CAMRc=Mduv_KiB42d4AZddTrFSHmKogd2wh6vBDXomW6ssdfq9A@mail.gmail.com>
-X-Gm-Features: AUfX_mzoRVqC1tUK_OfVS-B_bFewvPArrOEoPGLWKm-p7iGJrfuSSI_-EnPQPN4
-Message-ID: <CAMRc=Mduv_KiB42d4AZddTrFSHmKogd2wh6vBDXomW6ssdfq9A@mail.gmail.com>
-Subject: Re: [PATCH 7/8] net: mv643xx: use platform_device_set_fwnode()
-To: Andrew Lunn <andrew@lunn.ch>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Danilo Krummrich <dakr@kernel.org>, Madhavan Srinivasan <maddy@linux.ibm.com>, 
-	Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
-	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, Andi Shyti <andi.shyti@kernel.org>, 
-	"Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, 
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Doug Berger <opendmb@gmail.com>, 
-	Florian Fainelli <florian.fainelli@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
-	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Ulf Hansson <ulfh@kernel.org>, 
-	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
-	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, Lee Jones <lee@kernel.org>, 
-	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>, Srinivas Kandagatla <srini@kernel.org>, brgl@kernel.org, 
-	driver-core@lists.linux.dev, linuxppc-dev@lists.ozlabs.org, 
-	linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, 
-	iommu@lists.linux.dev, netdev@vger.kernel.org, linux-pm@vger.kernel.org, 
-	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
-	mfd@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
-	linux-sound@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-ORIG-GUID: xBNNu9kY1rFUofqSmclOTd4CaQKpSgsP
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDE3OCBTYWx0ZWRfXwch/6NAlJoz4
+ 6eEl4a4VLo41NLGANA4GK8As4Re2IEf+akcmlQ2ESLxVcz1sNpuuRIJ5kRujjr0PIdZiQmovvui
+ c2u/yC5Qs5MYVgjRnTQg+WLhdRKK6F6FMKKhxzyNFuCuADCmVWpZ+FP8Bg8+7VS8ZnaNWLJlBqw
+ f+fN9sRQhq3BU0OjBp7FQ65un+M/FC+YwY/MqlIzuaUl4XhA1czs3v8WYum7q9Y7Z5AcuEq+tPj
+ Y++Q8BLPA8gzBEYdXhI3QgwpEjbWGWk6LwJl5z2Kk5xbFVnhhIkNDcByivhaz02gCOpgOT+X3Q1
+ hnLWbD2ZAMOHfQ/F0B9YlqdpSNZ44ScyFS1hfbaYt2pCpCwWLOKc0AoknUggrgLqRvkeBgAvfNs
+ JPNmF/N0INsE65XgUOxuHSPzYDFMIjLN1PUL4+dr1YQ/MhwT7xCWtO9WIAGhhPHMMYrsZZmk4HX
+ 7k9MQJ8oBuQgrWjb6eQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDE3OCBTYWx0ZWRfX/K9Uj5FfyUKA
+ vBDl9ctg+kVYW3khzK/NpM1sKKL5oO3VjKt83RqzYafI/pEyWxgaS9/ZYXhoSvp3e70Aa340lR7
+ 5VDANmIA1cXOyRG3z5QG7o+PEu+9fok=
+X-Proofpoint-GUID: xBNNu9kY1rFUofqSmclOTd4CaQKpSgsP
+X-Authority-Analysis: v=2.4 cv=bv58wkai c=1 sm=1 tr=0 ts=6a5e46b4 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=BifR_v5mCn8YSut0XsEA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-20_03,2026-07-20_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 bulkscore=0 priorityscore=1501 spamscore=0 malwarescore=0
+ phishscore=0 lowpriorityscore=0 clxscore=1015 suspectscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200178
 
-On Mon, 20 Jul 2026 16:43:40 +0200, Andrew Lunn <andrew@lunn.ch> said:
-> On Mon, Jul 20, 2026 at 11:24:54AM +0200, Bartosz Golaszewski wrote:
->> Prefer the higher-level platform_device_set_fwnode() over the
->> OF-specific platform_device_set_of_node() for dynamically allocated
->> platform devices.
->>
->> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->> ---
->>  drivers/net/ethernet/marvell/mv643xx_eth.c | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/drivers/net/ethernet/marvell/mv643xx_eth.c b/drivers/net/ethernet/marvell/mv643xx_eth.c
->> index 9caa1e47c174c9d7a161b7f2e2ee12a829b813d4..2f2d6cce8d852b9ec3ab42678a04a7915d1f00cc 100644
->> --- a/drivers/net/ethernet/marvell/mv643xx_eth.c
->> +++ b/drivers/net/ethernet/marvell/mv643xx_eth.c
->> @@ -2780,7 +2780,7 @@ static int mv643xx_eth_shared_of_add_port(struct platform_device *pdev,
->>  		goto put_err;
->>  	}
->>  	ppdev->dev.coherent_dma_mask = DMA_BIT_MASK(32);
->> -	platform_device_set_of_node(ppdev, pnp);
->> +	platform_device_set_fwnode(ppdev, of_fwnode_handle(pnp));
->
-> This is definitely an OF only driver. There are no other calls to
-> fwnode functions in this driver, so this is the wrong thing to do.
->
-> Sorry, NACK.
->
+Add support for MI2S clock control within q6apm-lpass DAIs, including
+handling of MCLK, BCLK, and ECLK via the DAI .set_sysclk callback.
+Each MI2S port now retrieves its clock handles from the device tree,
+allowing per-port clock configuration and proper enable/disable during
+startup and shutdown.
 
-I'm not going to die on this hill but drivers are OF-only until they're not.
-For example, Qualcomm is now working on a hybrid ACPI-OF approach for
-laptops[1] and we may end up needing to start converting drivers to fwnode
-after all.
+On platforms such as Monaco and Lemans, third-party codecs are
+hardware-wired to the SoC and do not always have an in-tree codec
+driver to manage their clocks. For these designs, clock line
+enablement must be driven from the platform side, and this
+series provides the necessary support for that.
 
-There's no real benefit to sticking to OF-specific APIs unless you need to
-iterate over all properties of a node or use some other functionality not
-available in fwnode. The overhead is minimal and it's never a hot path.
+On QAIF-based platforms such as Shikra and Hawi, responsibility
+for voting I2S MCLK and bit-clock has moved from the DSP to the
+kernel. This series introduces the required device tree binding
+support to represent and vote for these clocks from the kernel.
 
-Thanks,
-Bartosz
+Enhances the sc8280xp machine driver to set the boards spacific
+configurations.
 
-[1] https://lore.kernel.org/all/20260623145225.143218-1-johannes.goede@oss.qualcomm.com/
+---
+Changes in v6:
+- Addressed review comments, reported by Krzysztof.
+- Resolved all sashiko comments.
+- Link to v5: https://lore.kernel.org/all/20260714145250.2473461-1-mohammad.rafi.shaik@oss.qualcomm.com/
+
+Changes in v5:
+- Addressed review comments, reported by Krzysztof.
+- Resolved all sashiko comments.
+- Link to v4: https://lore.kernel.org/all/20260711125740.3083236-1-mohammad.rafi.shaik@oss.qualcomm.com/
+
+Changes in v4:
+- Addressed review comments from Mark Brown.
+- Resolved all sashiko comments.
+- Link to v3: https://lore.kernel.org/all/20260706132009.1496321-1-mohammad.rafi.shaik@oss.qualcomm.com/
+
+Changes in v3:
+- Addressed all review comments from Mark Brown.
+- Fixed OF node reference handling, clock configuration, and sample-rate
+  handling issues as suggested by Mark Brown.
+- Added proper error checking for DAI configuration APIs as suggested by Mark Brown.
+- Added SENARY DAI support alongside MI2S DAIs as suggested by Val Packett.
+- Link to v2: https://lore.kernel.org/all/20260608023011.942228-1-mohammad.rafi.shaik@oss.qualcomm.com/
+
+Changes in v2:
+- Added a detailed commit description to clearly explain the need for this change.
+- Improved the machine driver based on Neil’s feedback.
+- Link to v1: https://lore.kernel.org/all/20260309111300.2484262-1-mohammad.rafi.shaik@oss.qualcomm.com/
+---
+Mohammad Rafi Shaik (3):
+  ASoC: dt-bindings: qcom,q6apm-lpass-dais: Document DAI subnode
+  ASoC: qcom: q6apm-lpass-dais: Add MI2S clock control
+  ASoC: qcom: sc8280xp: enhance machine driver for board-specific config
+
+ .../bindings/sound/qcom,q6apm-lpass-dais.yaml |  53 ++++
+ sound/soc/qcom/qdsp6/q6apm-lpass-dais.c       | 194 +++++++++++++-
+ sound/soc/qcom/qdsp6/q6prm.h                  |   4 +
+ sound/soc/qcom/sc8280xp.c                     | 251 ++++++++++++++++--
+ 4 files changed, 480 insertions(+), 22 deletions(-)
+
+
+base-commit: 0718283ab28bc3907e10b61a6b4be6fefa1cbb2f
+-- 
+2.34.1
+
