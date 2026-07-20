@@ -1,66 +1,87 @@
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com [209.85.218.54])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C52E3DDB1F
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:16:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EADDF314A9E
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:19:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784542594; cv=none; b=N/zzzKwmI65KdutabP1HiqvUJTZnsD8WsV09+qkbuK7nC+Xd1ffsSnHECOmIHCcXEn04emx3xRaNjRZ+NzN2w82CSl2ZxEo55n4CQg6m2p562m6cU9PPdYgbdRE3PEDuBndGSvCOjK9rJrYt1Gc7RJUZrvho8WP2nB7G5sz8jko=
+	t=1784542757; cv=none; b=O4u8ogvbrzrze2WW+ixpl1KtoaL58nkAv1urkp/xcxmMZBq/1a36QK/h8fTTST9MQHgn1FIWBDq87jT46j7+xAFOQq17prXPbc3+0kkzx+AEDz5f3EFHU6k5JHj7ueZOnxus6njkcPPvJ+9QPz99aiUy8mZd4WPKDdcOzeVjjgE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784542594; c=relaxed/simple;
-	bh=/ApkUlArnWCPavhZoSSb9YSm2/p8YDwN7R9PnhvXSDQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=uH9++50V+EG39MQHxh+Vscu/LZribpzRzzTlbBTttpTUBBnsuVGgGkCAo+rLABawUeC9tcXTXH3AcQpasYLC397c3w8SaCOxULXZFyQ1dkPJAeNnJqxU0zyJ8XCJqW+r4cynkzlTVzRkcI4EhQYtOgB/gxE+YEmjv3xotiG2Y5Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=LGWUDIou; arc=none smtp.client-ip=209.85.218.54
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1784542757; c=relaxed/simple;
+	bh=yapMXRgqm8On8wZD3Y13ylERRbelSnvEypyi9xq1P1o=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=hyrOS9b3LR8aNXnPxOG3PHbry8vwdVY0ahk2kMXjzVoOlev7t+Euv8ruOA7bMkhwmXIbchIiaRO57XgbctChA64vsdK6ful8lbP1flKa2aeN9TdGAEWBYiOpv5R0a2XJcskwWN4UYXPt1tRq/3o42ZOshTxjOYLx9YLha20xuwg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=owE2yGJg; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YoAwbrDh; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="LGWUDIou"
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-c160420289bso1392860466b.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 03:16:29 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="owE2yGJg";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YoAwbrDh"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66K9w1vv2189181
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:19:14 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	O+rneuRae7ccfS7HwBJRtw/KkE2FTct/JS+yPwRVhak=; b=owE2yGJgCDL0e0En
+	11/827nlFwSyoMVkyXId2i4zHXzT0Rf5rJUYShV2M4/LGzssxtqJLRGjiLnPGK/z
+	G1A0ZzgeAmoCycgIbzVQIwdgYKDGDgQWkb7MTCE3Gt6oCr4FXdOeSEi5rVUyYyEp
+	eSGutiGYPBnllu0kcb9cQTAzwivea/VR8k8eBzixtDc/zFOQXo0wFFWXzyovrofl
+	fQ3DK7Ei6yWqwTyM/2LVcqTTEED5aX/uhmvd/QcR7rzQTlEOTecwecST/pei+wdD
+	5DHDsJ/G65aGOUPiQhIN8gPaAIYSTXuu9wD3zbjGVobquIjorBqKl7Z7Qx+21lsf
+	SzOvUQ==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fgd04vq6c-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:19:14 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-8423f1fe39eso12592281b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 03:19:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1784542586; x=1785147386; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=IOx6MaG7GbwwmP9sPom9tgQuj6r337XSLuTL/XR7Shk=;
-        b=LGWUDIouuLfyTy5R0aOLN+w5LAjcuHFHbXyCIWgjSHSKA79WI6x1fs4LejyWkyuYRq
-         2V8TTqxWERxZW1ZKtBs/zMcFgqPuwjJr3+1b3OTxM1MC5J99DcnU05Jbd8dwOc9YjBpT
-         Fx59NrbqjUHtEY3yQdHmF9d6bohxKp9O+i21GHMO7zsvIY4gP9GtDysQzkFrxpxNkJ1M
-         9c5MslEfMlUl7ackokm1nTeN58LaXg1DPzUV7kQ16Rb81wHdbRDEcCVGkW/hjFFE0nWx
-         M0dfWDz0ChpDv+VxFxc8SGoQT/6/fXE9QjLc5RYiTPHpWsp3DXTkQuqoNzjOuJgc2KCK
-         djfQ==
+        d=oss.qualcomm.com; s=google; t=1784542754; x=1785147554; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :content-language:references:cc:to:subject:from:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=O+rneuRae7ccfS7HwBJRtw/KkE2FTct/JS+yPwRVhak=;
+        b=YoAwbrDhOoBwNu/6rRjnIGiFTdbsvGFqxI7KKzTPMPqvxeWy5JJztrBNcXHzjoTfs9
+         0DvhGNyXsBHWV8HLWc1hu2X4rtDjtN8wD1eNB1lXYBiOTSK/E16W2VrNLN3dm9BUcJdr
+         VyK47TFmakIMPCWWS6IZUDD1xRYtVVkU9NOAjLIL/njJVsRh2cj6al/mXaluKBFnG2TX
+         Ys/SdzkSkpzhVOfce16MmxJ6HjJgJrhqv7nSiMQ9m3RmwPAgxTiK6fbyLx+d9dxhRihv
+         J0+3E+fanrpTuGJEw4SjaLsldCFj1uk+w/8vFhFx/QyUuOBCbOC7g/fX16tbdsKEYa5a
+         waIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784542586; x=1785147386;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=IOx6MaG7GbwwmP9sPom9tgQuj6r337XSLuTL/XR7Shk=;
-        b=Yc3IJwGkYkKDTdbuG5DUMkWruHvgzM4EcJgp658RgTiZW9Msubw5NVfUIcw8D5e2pZ
-         28pQuOOhSxgQZQevvLDJIr7zA6HErpOjeXxSkKhH4ihoKW98PfJPAiz8s87KFQXWxK71
-         JsQkWAzNCBT7giy44SdXkDXiMBE+p7LISnJQ658C0Y4pxlKFeNl4pg4tsEzzdbELnXhj
-         9t3VSEhKG0CZxybeRz7f6qiFS/4/Um270+YVZOPGrlcWvO++v3Ir+3J346wcz9lI3k08
-         8uh/BcFDhLk2CK4FSASoP3V+MxoELsiqfwomEKAwyQ4RQ2EZAMcKjcGqhK0jRmr0Anp4
-         UImw==
-X-Forwarded-Encrypted: i=1; AHgh+RpLFEPPa+1Kui4yogJ/USNuSjpi7insfVSGM3L2TBbEhOGaJVrM+OSWlDk9+rrEwKDPj6JkWC/mXm4nCDZn@vger.kernel.org
-X-Gm-Message-State: AOJu0YwaFhBZ1NFVCmZMZlB+6XhAEpuaOYHFlVtTNvFSNcpV5r/HIfsI
-	gSm+nJGvV8w2VTTxCtmrQOSSnoZZb0l8a9abiu6A+dcSSNpuc9Lcmf7i2EHNvVQT1cs=
-X-Gm-Gg: AfdE7clPVPjjCSRHf3C2gCxJl5YC9GmVbtnbzqSwf+8qEh2NuXRGx+JYYaJT7e2AMr/
-	HF/eQAF1kv4VBLR/+DsIxMsusajpGmamGFMifjCcJnoGs2HKulx52JuCFt6MOJ7WEcQQtn6Lbgu
-	vRj2gJfa5GjQSaHFtkKoEf4k9hVg2pwfRj+3hy5mXmgWCBjmSdaRAuz+yMYixZR1e5UaWcAbsni
-	ppowxDDzbmA8f8/QjJAqYFb+29adiV+L6MiwwrgZknhUIZo6xmaA+A+AIR+/TUaTXimhdokiAv3
-	1n3LKADgkOpPsAW3WglUDZvqQwqnxIkXd7M1PFQVnCU4g9QpVurdymIgL3ovA//iQFmCW0WDtgT
-	+EpBd+ocTaQysbUHGPMnQIojCEW4c6mQSmsB2gCDk9XKRUwZ/e69zPW2WE+9EC8xSfnk/2QM5Zx
-	+HUOBwR0zTt+twqIr9sDqfJaZm
-X-Received: by 2002:a17:907:3c85:b0:c15:fc59:cdf3 with SMTP id a640c23a62f3a-c16b46abda6mr559095266b.12.1784542586343;
-        Mon, 20 Jul 2026 03:16:26 -0700 (PDT)
-Received: from [192.168.0.101] ([109.77.26.223])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c185c59624dsm426506666b.62.2026.07.20.03.16.25
+        d=1e100.net; s=20251104; t=1784542754; x=1785147554;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :content-language:references:cc:to:subject:from:user-agent
+         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=O+rneuRae7ccfS7HwBJRtw/KkE2FTct/JS+yPwRVhak=;
+        b=Rpg3eri21TZHRkSO98gDwL3Sc4EVIjsNxcHe2LK1uaNMCImk94QrEyTzvEbDSrIbTQ
+         VRGBTCj+nhmcinFRjZNu5bMdhbG6KJUZ9UR7553OT8Bx2m5BTmddU8ER2U3H2t3o4cJv
+         z0Maoxai1fZ5U9pIB9bTi0VS6wHO1kMyMnMptJIkeZYnp2/A9mAj5I5tH6qc9kxE4XVg
+         eK+2l2AEfmpaDn+pxk42K+N/LtCV+27qlML3rxmlOzV4u6pnVZTl29I3I/Zx35dldhb/
+         3f1cA/7DjD2ed0rTuRUDSvUfdIpS2cYr4HbmWVj3oVm98GWpy0JEaz9kbgd5MTu6p49F
+         BuKg==
+X-Forwarded-Encrypted: i=1; AHgh+Rr4lJljhDKzyBE3X69d3ehB0dNXCC23ElhbMwRyNiNh1bDDnLedm/43ILVKQopfofZP6JVkvS57r8ySo0Ck@vger.kernel.org
+X-Gm-Message-State: AOJu0YwXcfNAZWDAZuhMaJ3gTk76ruqtaldFTEgZksEmBKcClR/ljQqr
+	SxQfywLFviwQ64TpBJBH4vP4JJqu1m3kQ4Th+CmNRbduwtJtdnAc+adaacCKwadqguHqypZfj8y
+	aDlXKSYkYcsJau3YV52kOm04lSt64ZbY40Cd447RXP5ptsY4j/uF5oWd3ULUA2MDhmnDI
+X-Gm-Gg: AfdE7cm7F57CnNXsOKeQLcZFyAxemWPLLboHLCpbaHqXlyQWh4AvExxDSmRuFtbl9Sb
+	uS5bSEsyivfJF8I/32TN0VeMIX08/81ZI+GO3CMZe4Nj6H+zL4hqnMl/F0dw21M+0Iw9+E9ipMs
+	xtQ6z+pm1IYfb1UK584h9jWkHyqD2ErJRhLjvLsmEx8tgbwkbofMnr3extt+sg6E3G16x1bibgF
+	2+9ZkPFii7kY+bk13n7cQ86P4IQheZrcQZSZHy5jjM/ZSSItLF8kd+SjqCav8tzIDxy52QOSeeb
+	WolSxWxo0nBASg0+4i/ezBer6ZIEsDVOFAd6pkhMLksL8ucpx0RmPTolJXFbHMtUeAbT1s6w44P
+	tUHPZmxR0a7jMYqZz9HN/CWJGj+U=
+X-Received: by 2002:a05:6a00:9093:b0:848:70b4:ebbe with SMTP id d2e1a72fcca58-84c294d4beamr14636010b3a.41.1784542753612;
+        Mon, 20 Jul 2026 03:19:13 -0700 (PDT)
+X-Received: by 2002:a05:6a00:9093:b0:848:70b4:ebbe with SMTP id d2e1a72fcca58-84c294d4beamr14635983b3a.41.1784542753160;
+        Mon, 20 Jul 2026 03:19:13 -0700 (PDT)
+Received: from [10.92.203.75] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84c2adfdfe9sm5346784b3a.27.2026.07.20.03.19.09
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 20 Jul 2026 03:16:25 -0700 (PDT)
-Message-ID: <948e5f75-aec2-412e-bc99-d1da01a10a0a@linaro.org>
-Date: Mon, 20 Jul 2026 11:16:24 +0100
+        Mon, 20 Jul 2026 03:19:12 -0700 (PDT)
+Message-ID: <d1931ed8-57d3-4728-9ea6-0651067c2942@oss.qualcomm.com>
+Date: Mon, 20 Jul 2026 15:48:51 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -68,131 +89,182 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] media: qcom: camss: Report hardware version via media
- controller
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260717-camss-version-v1-0-7ed71fea95e8@oss.qualcomm.com>
- <20260717-camss-version-v1-4-7ed71fea95e8@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20260717-camss-version-v1-4-7ed71fea95e8@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Harshal Dev <harshal.dev@oss.qualcomm.com>
+Subject: Re: [PATCH 1/6] tee: qcomtee: Track the object invocation context
+To: Sumit Garg <sumit.garg@kernel.org>
+Cc: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+        Basant Kumar <basantk@qti.qualcomm.com>,
+        Apurupa Pattapu <apurupa@qti.qualcomm.com>,
+        Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
+        op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, Konrad Dybcio <konradybcio@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>, jenswi@kernel.org
+References: <20260707-qcom_uefisecapp_migrate_qcomtee-v1-0-f659cbd5d04c@oss.qualcomm.com>
+ <20260707-qcom_uefisecapp_migrate_qcomtee-v1-1-f659cbd5d04c@oss.qualcomm.com>
+ <b7c8b25b-374f-40a4-9c6d-bb20ee0cb5c9@oss.qualcomm.com>
+ <fb1d4954-7c0f-4609-be40-b032876169b8@oss.qualcomm.com>
+ <f917eb0f-9c9d-4f30-9c4f-ac3aeddac967@oss.qualcomm.com>
+ <534f6507-dd46-432b-80cd-87c17e3e0a71@oss.qualcomm.com>
+ <alnnK1jVntH-llsA@sumit-xelite>
+Content-Language: en-US
+Organization: Qualcomm
+In-Reply-To: <alnnK1jVntH-llsA@sumit-xelite>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=POs/P/qC c=1 sm=1 tr=0 ts=6a5df622 cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=NEAV23lmAAAA:8 a=P-IC7800AAAA:8 a=EUspDBNiAAAA:8 a=VZT3vSEkKENZW7lRfPUA:9
+ a=QEXdDO2ut3YA:10 a=2VI0MkxyNR6bbpdq8BZq:22 a=d3PnA9EDa4IxuAV0gXij:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDExNSBTYWx0ZWRfXxy7je751vfW1
+ cFEs0L99l4VOcoLXow6TGaa0ZysBUfZrs7nirfrh+mGHsgLob7mQ0DPolTjdEO4LACgd0S5Cahl
+ b9jvTImae9OGT1eh2Rwr2bFH1bQKtRfNupPiEpg5pbBqPu+gEvbiRnwHVCgGror95I2tQVFjkEf
+ chSV+jYYdyNt33rivwcjfzmD4LSACCelcm3B9CPmCs/X/WVi4W947LJaawnrAmJRj6ys9UwaPbK
+ lOMD+/zkoAEmfm91W9haoKYUJ5oGicCueuwvL9O4YCOvPSyjglIfg2tHb8eo2lHoAJxx/CtBTFc
+ lVpzm0XmZqkR51wyGejMtTfFgW0n/Pxc0yiLLwrzGXusIYdcijtrEiEXebVO4XYOrFYqEKX3iQF
+ 8JwhCYCxw/fNw7z6cCcDbVDBtmYeNpT9inEpJAdld+IQBR0R3oAq6aFJaJSTEsqeX7pa3mMJ4GK
+ hL+xx6HDzLbewlFhGKA==
+X-Proofpoint-ORIG-GUID: 2KRU3vBL3S8msmI27j3kPZnjUAroxF4L
+X-Proofpoint-GUID: 2KRU3vBL3S8msmI27j3kPZnjUAroxF4L
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDExNSBTYWx0ZWRfX8BI8uKM5UGeB
+ kvhJqYFIq5A2Xc4WP/qu92RvWzvVP1nspmrlPfBBhqvI7OQTrTpkZNZZcBKfhKZaXBIeuTs7Wun
+ L2acl3h8DZYVO4KgCfoQZ7pLySGEElA=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-20_02,2026-07-17_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 spamscore=0 adultscore=0 clxscore=1015 suspectscore=0
+ priorityscore=1501 malwarescore=0 impostorscore=0 phishscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200115
 
-On 17/07/2026 15:20, Loic Poulain wrote:
-> Populate media_dev.hw_revision with the top-level CAMSS hardware version
-> so that user space can query the exact hardware variant through the media
-> controller (e.g. via media-ctl or MEDIA_IOC_DEVICE_INFO). This can help
-> identify the platform variant and adapt behaviour accordingly, for example
-> allowing libcamera to apply quirks or enable features that cannot be
-> discovered through standard V4L2 or media-controller APIs.
+Hi Sumit,
+
+On 17-07-2026 01:56 pm, Sumit Garg wrote:
+> On Thu, Jul 16, 2026 at 12:28:25PM +0530, Harshal Dev wrote:
+>> Hi Amir,
+>>
+>> On 7/15/2026 5:17 AM, Amirreza Zarrabi wrote:
+>>> Hi Harshal,
+>>>
+>>> On 7/10/2026 4:37 PM, Harshal Dev wrote:
+>>>> Hi Amir,
+>>>>
+>>>> On 7/8/2026 11:31 AM, Amirreza Zarrabi wrote:
+>>>>> Hi Harshal,
+>>>>>
+>>>>> On 7/7/2026 4:11 PM, Harshal Dev wrote:
+>>>>>> QCOMTEE needs to distinguish between object invocations arriving from
+>>>>>> kernel clients and user-space clients in order to correctly marshal
+>>>>>> UBUF parameters and decide whether certain operations should be permitted.
+>>>>>>
+>>>>>> Add a kernel_ctx flag to struct qcomtee_object_invoke_context to track
+>>>>>> the context of object invocation. Objects invoked from the kernel-space
+>>>>>> are expected to have the MSB of their 64-bit object-id set to indicate a
+>>>>>> kernel context, whereas objects invoked from user-space should not set it.
+>>>>>> To ensure this, we restrict the object-id space of user-space invoked
+>>>>>> objects to 32-bits. This is in-line with QTEE expectation of 32-bit object
+>>>>>> ids.
+>>>>>>
+>>>>>> Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+>>>>>> Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
+>>>>>> ---
+>>>>>>  drivers/tee/qcomtee/call.c           | 24 ++++++++++++++++++++++--
+>>>>>>  drivers/tee/qcomtee/qcomtee.h        |  6 ++++++
+>>>>>>  drivers/tee/qcomtee/qcomtee_object.h |  8 ++++++--
+>>>>>>  drivers/tee/tee_core.c               |  4 ++++
+>>>>>>  4 files changed, 38 insertions(+), 4 deletions(-)
+>>>>>>
+>>>>>> diff --git a/drivers/tee/qcomtee/call.c b/drivers/tee/qcomtee/call.c
+>>>>>> index 0efc5646242a..a74a54d67b06 100644
+>>>>>> --- a/drivers/tee/qcomtee/call.c
+>>>>>> +++ b/drivers/tee/qcomtee/call.c
+>>>>>> @@ -397,11 +397,31 @@ static int qcomtee_object_invoke(struct tee_context *ctx,
+>>>>>>  {
+>>>>>>  	struct qcomtee_context_data *ctxdata = ctx->data;
+>>>>>>  	struct qcomtee_object *object;
+>>>>>> +	bool kernel_ctx = false;
+>>>>>>  	int i, ret, result;
+>>>>>>  
+>>>>>>  	if (qcomtee_params_check(params, arg->num_params))
+>>>>>>  		return -EINVAL;
+>>>>>>  
+>>>>>> +	/* Obtain the invocation context information from the MSB of the object
+>>>>>> +	 * `id` field.
+>>>>>> +	 */
+>>>>>> +	kernel_ctx = QCOMTEE_GET_CLIENT_CTX(arg->id);
+>>>>>> +	/* User-space identifies a NULL object via a 32-bit TEE_OBJREF_NULL id, whereas
+>>>>>> +	 * the kernel uses as 64-bit object-id. Hence, we check for a NULL object by
+>>>>>> +	 * sign-extending the object-id to 64 bits. If user-space is indeed invoking a
+>>>>>> +	 * NULL object we must extend the object-id to 64-bits from here on so that
+>>>>>> +	 * QCOMTEE can recognize it.
+>>>>>> +	 */
+>>>>>> +	if (!kernel_ctx && ((s64)(s32)arg->id) == TEE_OBJREF_NULL)
+>>>>>> +		arg->id = TEE_OBJREF_NULL;
+>>>>>
+>>>>> Does it need to be MSB -- why bit 63? the object ID supported by QTEE is 32-bit anyway.
+>>>>> Let's mask the upper 32-bit and do something like kernel_ctx = !!upper_32_bits(id).
+>>>>> What do you think?
+>>>>
+>>>> I agree. Instead of checking for kernel-ctx by right shifting, I can use this approach.
+>>>> QTEE objects invoked from user-space (including NULL object) will always have their
+>>>> object-id constrained to lower 32 bits anyway as per PR: https://github.com/quic/quic-teec/pull/27
+>>>>
+>>>> And for kernel-space invoked QTEE objects, upper 32-bits would be set for NULL object,
+>>>> and 63rd bit expected to be set as well.
+>>>>
+>>>
+>>> Re-thinking this, I'm a bit concerned about overloading id while keeping it as a u64,
+>>> and then filtering its upper 32 bits in tee_ioctl_object_invoke(). It feels unintuitive,
+>>> as it naturally raises the question: if only the lower 32 bits are meaningful,
+>>> why is id a `u64` in the first place?
+>>>
+>>> What if we make the caller origin explicit instead, for example:
+>>>
+>>> enum tee_object_invoke_origin {
+>>> 	TEE_OBJECT_INVOKE_USERSPACE,
+>>> 	TEE_OBJECT_INVOKE_KERNEL,
+>>> };
+>>>
+>>> and then pass it through the backend op:
+>>>
+>>> int (*object_invoke_func)(struct tee_context *ctx,
+>>> 			  struct tee_ioctl_object_invoke_arg *arg,
+>>> 			  struct tee_param *param,
+>>> 			  enum tee_object_invoke_origin origin);
+>>>
+>>> It seems more straightforward and avoids encoding caller-origin metadata into id.
+>>> If you are OK, let's do this.
+>>>
+>>
+>> Honestly, this approach makes everything a lot more easier, since we don't need complex
+>> bit manipulation in back-end to filter the upper 32 bits and handle the case of
+>> TEE_OBJREF_NULL. I can also then drop the PR: https://github.com/quic/quic-teec/pull/27
+>>
+>> I am fine with updating this callback and calling it with TEE_OBJECT_INVOKE_USERSPACE from
+>> https://elixir.bootlin.com/linux/v7.1/source/drivers/tee/tee_core.c#L704
+>> and TEE_OBJECT_INVOKE_KERNEL from the newly introduced tee_client_object_invoke_func().
+>>
+>> But is there any special reason for choosing an enum over a boolean value here? Are we planning
+>> to extend the enum later to introduce any other context information?
 > 
-> The version register is exposed by some platforms through the top-level
-> "top" reg region (offset 0). When present, map it and read the version
-> once at probe. This is a no-op on platforms not mapping the region (yet).
+> I think enum is just better to provide enough info for the flag.
+>
+
+Ack.
+
+>>
+>> I am fine with this approach. I hope the OP-TEE maintainers @Sumit are fine as well with the
+>> new parameter addition in the callback.
 > 
-> Reported media info on Agatti/CM2290 (Spectra 520):
-> Media Driver Info:
->          Driver name      : qcom-camss
->          Model            : Qualcomm Camera Subsystem
->          Bus info         : platform:5c11000.camss
->          Hardware revision: 0x00050200 (328192)
+> That's fine with me if it simplifies the object handling for you folks.
+
+Ack, thank you for your review, I will spin a v2 based on this feedback.
+
+Regards,
+Harshal
+
 > 
-> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-> ---
->   drivers/media/platform/qcom/camss/camss.c | 34 +++++++++++++++++++++++++++++++
->   drivers/media/platform/qcom/camss/camss.h |  1 +
->   2 files changed, 35 insertions(+)
-> 
-> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-> index 1e97b0b7ec463f1fa2615704d09ce465a8964176..2caa253fc4ad48f7f04580417d15553a710cbc6f 100644
-> --- a/drivers/media/platform/qcom/camss/camss.c
-> +++ b/drivers/media/platform/qcom/camss/camss.c
-> @@ -33,6 +33,9 @@
->   #define CAMSS_CLOCK_MARGIN_NUMERATOR 105
->   #define CAMSS_CLOCK_MARGIN_DENOMINATOR 100
->   
-> +/* Top-level CAMSS version register */
-> +#define CAMSS_HW_VERSION		0x0
-> +
->   static const struct parent_dev_ops vfe_parent_dev_ops;
->   
->   static const struct camss_subdev_resources csiphy_res_8x16[] = {
-> @@ -4677,6 +4680,25 @@ void camss_pm_domain_off(struct camss *camss, int id)
->   	}
->   }
->   
-> +static void camss_read_version(struct camss *camss)
-> +{
-> +	u32 hw_version;
-> +
-> +	if (!camss->top_base || !camss->res->pm_clks[0])
-> +		return;
-> +
-> +	if (pm_runtime_resume_and_get(camss->dev))
-> +		return;
-
-If this fails, you're in real trouble.
-
-Surely this wants to be a return -EBADSTUFF;
-
-> +
-> +	hw_version = readl_relaxed(camss->top_base + CAMSS_HW_VERSION);
-> +
-> +	pm_runtime_put_sync(camss->dev);
-> +
-> +	dev_dbg(camss->dev, "CAMSS HW Version = 0x%08x\n", hw_version);
-> +
-> +	camss->media_dev.hw_revision = hw_version;
-> +}
-> +
->   static int vfe_parent_dev_ops_get(struct camss *camss, int id)
->   {
->   	int ret = -EINVAL;
-> @@ -4866,6 +4888,16 @@ static int camss_init_subdevices(struct camss *camss)
->   		camss->csid_wrapper_base = base;
->   	}
->   
-> +	/* Optional top register for hardware version info */
-> +	if (platform_get_resource_byname(pdev, IORESOURCE_MEM, "top")) {
-> +		void __iomem *base;
-> +
-> +		base = devm_platform_ioremap_resource_byname(pdev, "top");
-> +		if (IS_ERR(base))
-> +			return PTR_ERR(base);
-> +		camss->top_base = base;
-> +	}
-> +
->   	for (i = 0; i < camss->res->csid_num; i++) {
->   		ret = msm_csid_subdev_init(camss, &camss->csid[i],
->   					   &res->csid_res[i], i);
-> @@ -5454,6 +5486,8 @@ static int camss_probe(struct platform_device *pdev)
->   	if (ret)
->   		goto err_v4l2_device_unregister;
->   
-> +	camss_read_version(camss);
-> +
-
-Make it an int a bug out if it fails.
-
->   	ret = camss_parse_ports(camss);
->   	if (ret < 0)
->   		goto err_v4l2_device_unregister;
-> diff --git a/drivers/media/platform/qcom/camss/camss.h b/drivers/media/platform/qcom/camss/camss.h
-> index fe5fe25d5f18d8a3ce35b48077a975f1453c341f..cce79e56f58c8bdc0097f4a1702df22c4248f2fa 100644
-> --- a/drivers/media/platform/qcom/camss/camss.h
-> +++ b/drivers/media/platform/qcom/camss/camss.h
-> @@ -133,6 +133,7 @@ struct camss {
->   	struct ispif_device *ispif;
->   	struct vfe_device *vfe;
->   	void __iomem *csid_wrapper_base;
-> +	void __iomem *top_base;
->   	atomic_t ref_count;
->   	int genpd_num;
->   	struct device *genpd;
-> 
+> -Sumit
 
