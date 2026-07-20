@@ -1,86 +1,66 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F40833DDDC9
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:07:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE3F93DCDAB
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:10:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784542041; cv=none; b=RqQ4idIx9CTedMF/f27oaq/WHvh/SMuaBuw1qNdBUvZQOmWMJNi9xBbSoqH+fquaF/Lk2sajAfoDgKa8GItEbpBl/+gliHre4/hWKA5K80DdJVnS9if+NnzZ+Zx0+KWCozbDcXRIFdj8Dsa4fkKvGiy+Fs3cekvg+g+6Xxjg7Xo=
+	t=1784542269; cv=none; b=Z2pu/SwhTQsJ7C8RgHb8zyBLFc0n+W0dqK5H6L/kI8dAacZuPoiXDFCqQwWU+5LKkXGesPv6gcgUtRUYajVQrRKOwI83gCzMkQLyKVFQ3sU7HfCe6mIPRs6BufZoMCS84KWiflTLJMDKUUckkd28qKoOKhecPh2PSXUK3/Vn6lU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784542041; c=relaxed/simple;
-	bh=tzQ9eHfyq3kzitdu3/JRiyY3psgb2hIO0GfXWpOqYiE=;
+	s=arc-20240116; t=1784542269; c=relaxed/simple;
+	bh=3VGzNIVavy4riBNoVaQGq83t63k4CBx5YMYFOuF7l5E=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=aXTs7jawXGzVIJq/JMklJv4VXEOluRXW9Z63Ko3zWQiL75j9yAxQAo9FaQ32PZAD0+eoOkgRWkMif+er7W2h3NZOZwm/KnAfbOQ52Owj9JRG20C6ILRxvbUk+YyysZRi1dR2EPLebhoHMvFd4bY3YwTjunsLxMOqH3b7KbL5ttY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kMO0Bdj/; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=B9ee149S; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=V/gfO/RAy/QR8vbPOcT1RE6dFRL/+B8nr56Mr0rX7A4084JXwrfIk2wmukLGZYVxzFFvLjnnn8rbvpHaHDzrlrqLa+WcO2mVswddwZNMKliS69UyNdYF+bQaSjWyVvj/u6sUNPpaQL3c4wLsVy+TeLNU82hsd96AdO77O80TXpM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=Prv0kC9j; arc=none smtp.client-ip=209.85.218.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kMO0Bdj/";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="B9ee149S"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66K9vmgf2140110
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:07:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	j3Y+UGlZuJ7U2i6U7ZQmiNteHAgHWI9jGYqp7rYzg6s=; b=kMO0Bdj/k49N74AZ
-	PbXInzxTO6y2DZHyjRk1s6tOWGeUMb6jMOVwKTJbfM0+3CP821y+7ZP5qppJHdNw
-	0DC3W1NOCkUveisjyKQPslCZ1QDF1CrEMQSGy+NIqPmbQSMwjudgiTELc4bpG3wk
-	Jf4ucmMu01j3Y1nQLFw5ZoLIfoW2nTqcR10hM+ZR1YrTpKbwRCYaeSddseN/l0OP
-	+nUFCCmI5xRCahDY+2QGqEY1B3AX852QdffZicONw5tB65RSh8N96G5UfFOA2NWR
-	RWinP77MKyYs8jG3qNAHLnZJeBMdGRzDkhen6rOQxVc6FDZSCfySYxI2cDQCwJaj
-	WmRGrA==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhf0c0sj0-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:07:10 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-51bfa45b280so22810301cf.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 03:07:10 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="Prv0kC9j"
+Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-c15e03c2763so843151866b.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 03:10:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784542030; x=1785146830; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=j3Y+UGlZuJ7U2i6U7ZQmiNteHAgHWI9jGYqp7rYzg6s=;
-        b=B9ee149SHO2CC+GViSSOgzYp+qxPnr5rpcRK3ETzcyWN9r+/d+sR6Xc94p71sycWT7
-         5/5CBdXgU3T12gOzZnkK7FIUXbhGvvT3i8Iow9BeimYReV38nrstBxBEp9+MNEQ8zobn
-         LbHV3hqXmhZuLoRbsj9CFsIKIzAMvrbBhdrKucbjy0i0GfRoXZmO7qKIPyLRGqylePBO
-         XjQYdQkMxOMo9gZssaslmenqevaBOby3cE4ZdKv+fdy42sfcxlM51wwGW21IBBebieS0
-         V8S5Fn3KU8M6Xjh2m8SLGQWZ2iLYqZCnTEJ19csBBw2dNPQDhAUl16/usAnQ4HMZvsJf
-         RW2g==
+        d=linaro.org; s=google; t=1784542252; x=1785147052; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=tKvQpFa1elvV0qe/8C8Y/Fz5QGnzRdhnFNUsbcgsZbw=;
+        b=Prv0kC9jS6EpSBzK5FA1R46Ng1uKoRXe1xT8oHaD8vXv8V7mL9xcljj6f0Z9uaKNEZ
+         ofGJe+9q9giZsJvSUQVZUur1lcFnpKi+mvGgpeyecUYu9pHN8N/JXQ5evkmyH2yIAfVv
+         PJOo/K+qllyby4rRMFUjxjJgRa0zlEqRvb8P1RAF+fp92ksXhmvPFosubgS5P0o+elpL
+         czCrBTK6yilk58BH/eoliKDsYXcLLeOw8wdf0ITzVZ5/bUa9tbOcjWrbvXLoLk1pqu6T
+         zMTFhaggR42zNhTasL6MpiCv1yN3Vdy2HhdtZjalG4tUcNF6f3LRjSCt95jM3eOvsq88
+         QR4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784542030; x=1785146830;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1784542252; x=1785147052;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=j3Y+UGlZuJ7U2i6U7ZQmiNteHAgHWI9jGYqp7rYzg6s=;
-        b=GLt+Dw26sGGh7X3MngYzBpP4sP5HUuN8s53Er8SyDKkgHO53oyrr4jBTZNynqzWnOD
-         zzXFMQ0RvL8Ge7LGwz/71+u79KMGiB6UnD3LtTHs3M5Kf29VnjrXmNESmdw6gyZNw9Hl
-         EQKeLQ8WI70I0S8AruEvnK382q7Geg6qsZVhBCf18s61u/Vj3fkj2vCKqk3xD2Oz/OzR
-         sLjykkP6/pBPN7vdcPdG4GTGtbXACPWut3ATuUx88jptDfA3GLcKCXth9+ADtZxeqp1l
-         7Ju6Ay8oKB77S+YGQf37YypNe5TSpVBI4HdXnWPYddD/QROjiVtthrwfXuK0+Fx0R9uo
-         yEQg==
-X-Gm-Message-State: AOJu0YwUbjCnVy301BMv5Hbfqwbljr6pY4whZ/umoA5Np+HL2tWD9sEV
-	ArAhZPJGyCC+mKw81Dh4RrdG7exbiK6o25Uf769KS+iOvEPWAiF/Za+AMCaCBoCTu/I/YW5Gisc
-	GoqYBARu0mqDdeNBPgtItyETcYXN5w4mIKr9Dcq6h7A9bW0YUnW5g7/99woaNJ1e+Y9KJ
-X-Gm-Gg: AfdE7cmBgbXhXNd+3HKk0MLAwK5ZAOOOGh9sKBonq4WIGukB56de359JkGrDvQoAQDj
-	IH36G0nXVB8qNj3nrLnG4PEoUnccZPtwZI1WV0bIiuFcGsiM2CZd6MjiIFPyqqgOyJqiEj9cuIV
-	LKwMCw/UhfG4LdL+N7ty7chUMK2zmbF0ZmKYB7hYzlpPfodmqzdHlZFWZIApda0JrJfl8dL4Lpt
-	VoloXoa2b6zRqRJDMXJs5eRfSVQV7Ok2vz4/iMk2gfTszMxD1Br03ozXhwKRwdnexbrQMB84DA5
-	nV8X+/R0yMr2zZFzwpVVsx4QRyNr+9b76t6zuqHkCHS89Qu6PCGEX+85E73shRNhmx6P7t+4Oku
-	i7ACZkA8Cyf+9tvJm4UL/5rVX
-X-Received: by 2002:a05:622a:2515:b0:51b:ff1a:3d80 with SMTP id d75a77b69052e-5213e67f307mr108566291cf.7.1784542030119;
-        Mon, 20 Jul 2026 03:07:10 -0700 (PDT)
-X-Received: by 2002:a05:622a:2515:b0:51b:ff1a:3d80 with SMTP id d75a77b69052e-5213e67f307mr108566091cf.7.1784542029722;
-        Mon, 20 Jul 2026 03:07:09 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1740bf3ad3sm440846966b.55.2026.07.20.03.07.06
+        bh=tKvQpFa1elvV0qe/8C8Y/Fz5QGnzRdhnFNUsbcgsZbw=;
+        b=VYZwrpx20gQqiBla3fXQ33FvGaB39CkvwFgS3vgaxtTIdz0bzVmbSMYTOlLvqUD18Q
+         tQ8X8JKkondnbOD1QmidDs3BUXsQGaJdEnyj6MLYyzJu10GsSx0znAWIcTgNlvQpNUK6
+         f4cZNAqQnVG2RCrRHF1piRCGqXgxDrn9E/Fz8DG0LqTni230+4jihJPB9IUr5BPMyNsO
+         NDELVFXRSnCA513aEB3YjunrBBdXo3JycR9huGk4waPBtJd+l1oLmK1snca8+7v6AHvZ
+         BUQTMIkmxBSOlmRiFAF97+VuMYCV78ltd2pskvK1n2FxKpJONDcsvXCQJeir1n0KwCll
+         6iCQ==
+X-Forwarded-Encrypted: i=1; AHgh+RpZ0dQYcmowvXh5d6ahvNJOTwGfPMIfXupuyGCm3URha41/Ot1mypm1zZh7lRrIf/k2DJrPpoTCYzlMyIRd@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz7yGobdTCqcN6sXynsgZ23pkOX4qTJ+sZOI5kBlQZK1vfRhHI/
+	a6ZK2kkBMHabUmuSe97blWbaGjNONyx+wbeifzt7qhXYEginV4fvz0VHL+Z9QoCEHpQ=
+X-Gm-Gg: AfdE7cn5IaPwjKJjZ55HuJ8YQR5xyCz9M3NVxG2a+1B9n4c677hCv/aAMI7G5be71my
+	4etPE/Y3MGKvKF7/CpJ+QDEa95kysa7gZC9MHwAlipWn5MWu8K+3hci29mgGVO1oLjdfYJvW6cN
+	eqAyzlhP0Dy9D4c2gaNKX60Cf2+U0QVBJimyjO64kt5g/noGauoC9w5UorgkJ4LhbNjVuoh5s3J
+	krycwkWXSwwsGj2TiAY+zgfVaSl0/R+X8yJf3aJ0dbarcj43F3nmmOXO9EeqNI9uJNEi/pHoL7v
+	FZyLqrPOjhs190myHqNj1kUJgGLiyBN8lZOLKKgONb0T25P2n4AQrwYWYpiDKQPnEpHPs3GHcbE
+	LKtj/JN0RSlMTrb+dm0RKWz6mfXBhQOYW3YAhj3R1SrRXtZcz2MUNbrsnfFc+VweaeH0yGILY5W
+	dIvBHeOztyvW0uez5Ia4HJx9SB
+X-Received: by 2002:a17:906:f584:b0:c15:ee17:47a with SMTP id a640c23a62f3a-c16922d7b1fmr921088666b.15.1784542252253;
+        Mon, 20 Jul 2026 03:10:52 -0700 (PDT)
+Received: from [192.168.0.101] ([109.77.26.223])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1705afeb98sm441332466b.22.2026.07.20.03.10.51
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 20 Jul 2026 03:07:08 -0700 (PDT)
-Message-ID: <c1bf749c-46d7-446b-8a32-12da14d474eb@oss.qualcomm.com>
-Date: Mon, 20 Jul 2026 12:07:06 +0200
+        Mon, 20 Jul 2026 03:10:51 -0700 (PDT)
+Message-ID: <edac77f9-ad83-4576-b233-e3a7e602791b@linaro.org>
+Date: Mon, 20 Jul 2026 11:10:50 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,103 +68,91 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: dts: qcom: sc8280xp: Flatten usb controller nodes
-To: Xilin Wu <sophon@radxa.com>, Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
-        Qiang Yu <qiang.yu@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260507-sc8280xp-flatten-dwc3-v1-1-b18be56bebba@radxa.com>
- <2cb32deb-4266-416a-8db7-1b3b46b52162@oss.qualcomm.com>
- <843419F943CDE487+c183d00a-3967-4ba7-b6fe-fc50749701b9@radxa.com>
- <b461c125-947b-4e06-b502-abb354e0cba6@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <b461c125-947b-4e06-b502-abb354e0cba6@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH 1/4] media: qcom: camss: Add PM clock support and
+ integrate with runtime PM
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260717-camss-version-v1-0-7ed71fea95e8@oss.qualcomm.com>
+ <20260717-camss-version-v1-1-7ed71fea95e8@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20260717-camss-version-v1-1-7ed71fea95e8@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=HeYkiCE8 c=1 sm=1 tr=0 ts=6a5df34e cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=0Miry4rRAAAA:8 a=NEAV23lmAAAA:8 a=ksxQWNrZAAAA:8 a=EUspDBNiAAAA:8
- a=Pi0YOo2IrXSleUiyJT8A:9 a=QEXdDO2ut3YA:10 a=uxP6HrT_eTzRwkO_Te1X:22
- a=UT1Yo3WijKgCWNxi40OF:22 a=l7WU34MJF0Z5EO9KEJC3:22
-X-Proofpoint-GUID: 7bWcdXqtuWF59x_KGCe7Lw1Ke8jqRed7
-X-Proofpoint-ORIG-GUID: 7bWcdXqtuWF59x_KGCe7Lw1Ke8jqRed7
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDExMyBTYWx0ZWRfX9Xecjl8yTklm
- u5k371SbgaXwwEtsvbVMIGZh9qiVX0mPFKxpXZwiuWcvupLN+QqWyl3NDddEGiWcuv5TgaNheeG
- Afk1npC5hPJDX8+N2eImaA3MWIlvtZ4=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDExMyBTYWx0ZWRfX/WFFbfqaUJ4Q
- fT6NS0IZNuN4YfvF1hteH9FXKHI+R7BpWMT36reg3MvYoncSnjzZj7YqXeiq+NcaQgtS+L6bXeB
- JJWc2fYatNHYiOk6CVk0eJVy/T705PNZi/nZ2fnOk3rg/BGHF9MfE9dsNEX13TXt6QT/tN+fUJm
- 7F1+liUoOX004889VGQyDFw/Q1ZsBd578qbOUSxdRJ7mU1AOlg4cTkVoIL1anHaHDvpxtvFVaCF
- +3O30zcdlQuD8Uh4gyja8AfkHYVkcwFGbKTUoV40s+5WaaDQRZ6HA7GP3VQs1l36wDjQXItPlkJ
- rxLV6m85COc+Y4Tn7OxANxjgRD41azOR2CjYs1Gyc4OLPgnkLKuPAotzjOcKCm6Ju+0V8jvi0Hm
- hfFCM6wq98I+qF6SW5eOhP8YUsNWtKlDqJR/Dn+9Zv55u1TzTvpDmWBSLVeElzcheSDJrZiyj5Y
- 4VUHFSnFDpgG2t6qw3w==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-20_02,2026-07-17_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 impostorscore=0 malwarescore=0 suspectscore=0
- phishscore=0 clxscore=1015 adultscore=0 bulkscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200113
 
-On 7/1/26 6:12 PM, Konrad Dybcio wrote:
-> On 7/1/26 6:04 PM, Xilin Wu wrote:
->> On 7/1/2026 11:10 PM, Konrad Dybcio wrote:
->>> On 5/7/26 4:29 PM, Xilin Wu wrote:
->>>> Flatten usb controller nodes and update to using latest bindings
->>>> and flattened driver approach.
->>>>
->>>> Signed-off-by: Xilin Wu <sophon@radxa.com>
->>>> ---
->>>
->>> I tested this on a CRD and an x13s, both work fine across suspend.
->>>
->>> Turned out in my local experiments I made a typo in the name of the
->>> interrupt that was carried over to the big node..
->>>
->>> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
->>> Tested-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com> # X13s, CRD8280
->>>
->>> Konrad
->>>
->>
->> Unfortunately as I mentioned on IRC [1], this actually causes random NoC timeout on reboot, which seems to be related to pcie.
->>
->> [1] https://oftc.catirclogs.org/linux-msm/2026-06-11#35405057;
+On 17/07/2026 15:20, Loic Poulain wrote:
+> Add optional PM clock support to the CAMSS driver using the PM clock
+> framework. This allows CAMSS clocks to be registered once and
+> automatically managed during runtime suspend and resume.
 > 
-> Ah, you mentioned this:
+> This is especially useful for global CAMSS clocks that are shared across
+> multiple CAMSS subblocks.
 > 
-> https://gist.github.com/strongtz/50bbd71a9f41d0d1aa9849b8cf1dce21
+> This avoids the need for each subblock to reference and manage the
+> shared clocks individually. A typical example is the set of clocks in
+> the top_group, which may be used by CSID, PHY, CCI, and other CAMSS
+> blocks.
 > 
-> This is an attempt to read CONFIG_SPACE+0x0.. I don't really know..
+> Introduce a small PM clock descriptor table in the CAMSS resources
+> structure to describe clocks and their optional rates. Initialize
+> these clocks at probe time and delegate clock ownership to the PM
+> core.
+> 
+> Hook PM clock handling into the runtime PM callbacks to ensure clocks
+> are properly suspended and resumed alongside power domains and ICC
+> paths.
+> 
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> ---
+>   drivers/media/platform/qcom/camss/camss.c | 40 ++++++++++++++++++++++++++++++-
+>   drivers/media/platform/qcom/camss/camss.h |  1 +
+>   2 files changed, 40 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
+> index 2123f6388e3d7eafe669efd6b033e22d8eb5cf79..6a2bf3373e8755805c8cd0f8fe5037b788d68fa2 100644
+> --- a/drivers/media/platform/qcom/camss/camss.c
+> +++ b/drivers/media/platform/qcom/camss/camss.c
+> @@ -18,6 +18,7 @@
+>   #include <linux/of_graph.h>
+>   #include <linux/pm_runtime.h>
+>   #include <linux/pm_domain.h>
+> +#include <linux/pm_clock.h>
+>   #include <linux/slab.h>
+>   #include <linux/videodev2.h>
+>   
+> @@ -5346,6 +5347,35 @@ static void camss_genpd_cleanup(struct camss *camss)
+>   	dev_pm_domain_detach(camss->genpd, true);
+>   }
+>   
+> +/*
+> + * camss_init_pm_clks - register shared CAMSS clocks with the PM clock framework
+> + *
+> + * Clocks listed in res->pm_clks are shared across all CAMSS sub-devices (e.g.
+> + * top_ahb, axi). They are managed automatically by the PM framework.
+> + */
+> +static int camss_init_pm_clks(struct camss *camss)
+> +{
+> +	struct device *dev = camss->dev;
+> +	unsigned int i;
+> +	int ret;
+> +
+> +	if (!camss->res->pm_clks[0])
+> +		return 0;
+> +
+> +	ret = devm_pm_clk_create(dev);
+> +	if (ret)
+> +		return ret;
+> +
+> +	for (i = 0; i < CAMSS_RES_MAX && camss->res->pm_clks[i]; i++) {
+> +		ret = pm_clk_add(dev, camss->res->pm_clks[i]);
+> +		if (ret)
+> +			dev_warn(dev, "failed to add pm_clk %s: %d\n",
+> +				 camss->res->pm_clks[i], ret);
 
-Could you try adding something like this
+return ret;
 
-diff --git a/drivers/pci/access.c b/drivers/pci/access.c
-index b123da16b63b..5e08cb239e78 100644
---- a/drivers/pci/access.c
-+++ b/drivers/pci/access.c
-@@ -43,6 +43,7 @@ int noinline pci_bus_read_config_##size \
-        if (PCI_##size##_BAD)                                           \
-                return PCIBIOS_BAD_REGISTER_NUMBER;                     \
-                                                                        \
-+       dev_err(&bus->dev, "Reading configspace+0x%x as %s\n", pos, #size); \
-        pci_lock_config(flags);                                         \
-        res = bus->ops->read(bus, devfn, pos, len, &data);              \
-        if (res)                                                        
-
-(perhaps with a WARN_ON(1) to get a stack trace and only print for the
-crashing reg)?
-
-FWIW I can't repro on a CRD8280
-
-Konrad
+---
+bod
