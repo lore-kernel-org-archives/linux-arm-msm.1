@@ -1,30 +1,30 @@
 Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.2])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57899435EED;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A40CD3C5DBB;
 	Mon, 20 Jul 2026 15:08:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.2
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784560118; cv=none; b=XPa3e61He6XCJuF4c1oHqY1qlhsqTo91L0apZ9vsZ7ATWmZdMyd8xuaOVrMW74z+inTVyLgtXuye3Bm6PUn0fG/hlbIjaHQTfPag1NH+6M2LsKT4ORbyf2+hg35lQqX2eNZGyntd3/0vlY//lc4QU86q1CgNDC/7f56GE1p7PTk=
+	t=1784560119; cv=none; b=T7VhXIWHEJdi6XhonTRGa24i4C5ZixKMgekc+YIbneug1Mi6g1vSU3DTNSpvyUkqh1C2neLZHrkYEfgHXdzdb18mVIQEejEp5kDVeusrsy8IP28XjcJwJ+7U26FOHjD9b0VMn3EfeCdcgGdZNj+LPhTdsyVyQGIDlGJ3Jw1YkoY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784560118; c=relaxed/simple;
-	bh=aTSU8cGptt1iIE491RxaEDXSLRqZ0TwtMEh+pilwLoU=;
+	s=arc-20240116; t=1784560119; c=relaxed/simple;
+	bh=7kuZgxbRxcfBpcO4AlzJeBjtFJr6PEda/pW7p8B9V/U=;
 	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=iFhw137RZmmiAuKCsNOtw702x+vnzk62jSyRl7WWwDE3NTp8GP+Uso+mlvNCh1ad446WyworxvQBgJ7t4y21pkyIAcAZztfnhquvvUS86cbpEKmk7n14vZnP/rXByQZTw1vFbnSfrp+jSGXkT3L5xPBL+c1Nh3ZdnICAYmlOuwA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=IFTUZrp4; arc=none smtp.client-ip=220.197.31.2
+	 MIME-Version; b=YQKKe+YQSBu5jEq55M+AvUtCMgzetbeydkkouiJprr+ENdLtdMxo2V+ZN5J8mC1lNDBxHeqgIt7eEpix0tMMjNsEHV2pToXKaxXbmZqJDYwazXWZwwoqLWnpYedcGl/imfRYZNgRvAAV+ox7QKtLgRu7NR2vI9vGWh+cneWlT9o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=GF+PwHNR; arc=none smtp.client-ip=220.197.31.2
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="IFTUZrp4"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="GF+PwHNR"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=S4
-	lPlR1q4qSCvgYn9gZFu5HucqogfFBKik1eEg5ZKUU=; b=IFTUZrp4E9PZKqQGHU
-	jILUxrpWJD9kNSDQNDCct1EO5IHqaTfV1PLv3Buw3HPhXxbG8l0vFXtWfO0phug+
-	Fq9aLtAp97ZUlgohkgbK5M0BgY539ri6XL2Z1cplFxkoxGS8YhCY/7jb0A/yJPOj
-	Z1OpM9bzQG2mLsXIWZWsrEUvA=
+	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=rb
+	JVHVOturhJVseaFdgCutzkTWzNq56ytxEmv63ILZM=; b=GF+PwHNR5pTt4PDsWs
+	T0s0PiiqjMWesPjJyyiowX5dFZfrnnirwrFYBQhSP0lrzpNSqY6cgjdv2QOJuIqq
+	tIl5UUx1O9sm7a+L/BKoT/KuyihjJDqUqhlhhH1t+I8P1+BJiEsvrNc6nopIbVDj
+	DvRKjT+EbgW3o8RLRY00CQ7rE=
 Received: from zhb.. (unknown [])
-	by gzga-smtp-mtada-g0-2 (Coremail) with SMTP id _____wDX+mO9OV5q8LEOKg--.8910S9;
-	Mon, 20 Jul 2026 23:07:49 +0800 (CST)
+	by gzga-smtp-mtada-g1-1 (Coremail) with SMTP id _____wD3b1rIOV5qyHOjKQ--.35310S7;
+	Mon, 20 Jul 2026 23:08:00 +0800 (CST)
 From: Hans Zhang <18255117159@163.com>
 To: bhelgaas@google.com,
 	lpieralisi@kernel.org,
@@ -43,9 +43,9 @@ Cc: imx@lists.linux.dev,
 	linux-pci@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Hans Zhang <18255117159@163.com>
-Subject: [PATCH v3 07/16] PCI: dwc: eswin: Use cached PCIe capability offset
-Date: Mon, 20 Jul 2026 23:06:10 +0800
-Message-Id: <20260720150619.24733-8-18255117159@163.com>
+Subject: [PATCH v3 13/16] PCI: dwc: spacemit-k1: Use cached PCIe capability offset
+Date: Mon, 20 Jul 2026 23:06:16 +0800
+Message-Id: <20260720150619.24733-14-18255117159@163.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20260720150619.24733-1-18255117159@163.com>
 References: <20260720150619.24733-1-18255117159@163.com>
@@ -56,44 +56,44 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:_____wDX+mO9OV5q8LEOKg--.8910S9
-X-Coremail-Antispam: 1Uf129KBjvdXoWrKF4UZFW8XF4kWw18tr1DZFb_yoWkuFXE9a
-	4DKr9rAr47GF90k3Zavw4fAF9Fya4xXr1293WFyF9xZFyIgr1jgrnFqF98AFWxCFn5XFyr
-	Jr4qvFyxAryUJjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-	9fnUUvcSsGvfC2KfnxnUUI43ZEXa7sRNF4EPUUUUU==
-X-CM-SenderInfo: rpryjkyvrrlimvzbiqqrwthudrp/xtbC6wWxVWpeOcVuzQAA3h
+X-CM-TRANSID:_____wD3b1rIOV5qyHOjKQ--.35310S7
+X-Coremail-Antispam: 1Uf129KBjvdXoWrKr1fWF1UGr15JF4rXr1kZrb_yoWkCrgE9F
+	y3Jan7JrW5Cr90k3Zayw1aqr9Yy3y7X3W09a1ftF98Z3Z2qw1YgryDZFWkAa1UGrs7Xryf
+	Gw1qvF1rC3yUKjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUvcSsGvfC2KfnxnUUI43ZEXa7sRNVbytUUUUU==
+X-CM-SenderInfo: rpryjkyvrrlimvzbiqqrwthudrp/xtbCxBC0WGpeOdAGWwAA34
 
-This function is called after dw_pcie_host_init() has already cached the
-offset (dw_pcie_link_up() is called after .init and after caching).
-Therefore, we can directly use pci->pcie_cap.
+Because .init runs before core caching, we call dw_pcie_get_pcie_cap()
+inside k1_pcie_disable_aspm_l1() to get the capability base, then add
+PCI_EXP_LNKCAP. Hardware is already enabled at this point.
 
 Signed-off-by: Hans Zhang <18255117159@163.com>
 ---
-In pcie-eswin, the call chain is:
+In pcie-spacemit-k1, the call chain is:
 
-  static const struct dw_pcie_ops dw_pcie_ops = {
-    .link_up = eswin_pcie_link_up,
+  static const struct dw_pcie_host_ops k1_pcie_host_ops = {
+    .init = k1_pcie_init,
   };
-  eswin_pcie_link_up()
-    -> dw_pcie_find_capability()
+  k1_pcie_init()
+    -> k1_pcie_disable_aspm_l1()
+      -> dw_pcie_find_capability()
 ---
- drivers/pci/controller/dwc/pcie-eswin.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ drivers/pci/controller/dwc/pcie-spacemit-k1.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/pci/controller/dwc/pcie-eswin.c b/drivers/pci/controller/dwc/pcie-eswin.c
-index ce8d64f8a395..6a37fd5a8384 100644
---- a/drivers/pci/controller/dwc/pcie-eswin.c
-+++ b/drivers/pci/controller/dwc/pcie-eswin.c
-@@ -84,8 +84,7 @@ static int eswin_pcie_start_link(struct dw_pcie *pci)
+diff --git a/drivers/pci/controller/dwc/pcie-spacemit-k1.c b/drivers/pci/controller/dwc/pcie-spacemit-k1.c
+index 04241df8fd59..3e741324f44a 100644
+--- a/drivers/pci/controller/dwc/pcie-spacemit-k1.c
++++ b/drivers/pci/controller/dwc/pcie-spacemit-k1.c
+@@ -116,7 +116,7 @@ static void k1_pcie_disable_aspm_l1(struct k1_pcie *k1)
+ 	u8 offset;
+ 	u32 val;
  
- static bool eswin_pcie_link_up(struct dw_pcie *pci)
- {
--	u16 offset = dw_pcie_find_capability(pci, PCI_CAP_ID_EXP);
--	u16 val = dw_pcie_readw_dbi(pci, offset + PCI_EXP_LNKSTA);
-+	u16 val = dw_pcie_readw_dbi(pci, pci->pcie_cap + PCI_EXP_LNKSTA);
+-	offset = dw_pcie_find_capability(pci, PCI_CAP_ID_EXP);
++	offset = dw_pcie_get_pcie_cap(pci);
+ 	offset += PCI_EXP_LNKCAP;
  
- 	return val & PCI_EXP_LNKSTA_DLLLA;
- }
+ 	dw_pcie_dbi_ro_wr_en(pci);
 -- 
 2.34.1
 
