@@ -1,83 +1,184 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AAA3D28BAB9
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 08:57:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5D383D0938
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 08:58:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784537861; cv=none; b=IEeiJaiDqI/2dsS4Bw2DGjMjcyfxxG/kXGO752B44tVGd3F+i8523j54kMLTo3r28fl+PVMMEqyXBEx/dm856kZNHL7fByVcqA1fRlBxhfvZalt8GENoePjtHBcI20444Mp1P5hHQrm4u24orjQHnDtHe1RegHofZBRYSQs4Tyc=
+	t=1784537885; cv=none; b=EXSfIoTCLQoNGHHqEEQM2WvNofq01bUQtipgLkqjJWky6lZAaTBpXNTp351vyul9Eq4lp47Ili2hJVE4AxpzGShPCAU+7wT4/4k6+3EYD7r1yo1NXNODMQXXkZifHD82T3W9Q3QeKy74EZCqlHfGQcW5Y+rg4GuLrjhIfudVMyM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784537861; c=relaxed/simple;
-	bh=nQQBke5ZlmzFRj43/CzQQOBfPHV+GhuwHWj4S9VuQl0=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=IDoWXgdBoABfpaeAPckDQY7sSUsHArZQ5y6nxEF6XrsbdL75BU8jg8pvEgv3DnKU5UaMNw1NKMVt5CPwp++SuNfFZdn5sPMh1MVbF7JABtKyV4HwTnCtSWz45D4m5APl6kKRo4acCmgDWXniBEv/HoBPf7YoG272+U6/VYg/Ac0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Xl3oQphe; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784537885; c=relaxed/simple;
+	bh=aeZqJclBZT49HtoK2VISY20DwuQlkaku5yzVolxoX5c=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=WppMvds7dpnthbdMy55fb/kdnUDfdseS9Rlqj++s4lbdnT0VGASOzlSP1R2TA37qcsDLGV7ZuI9O5E5yI0Gp0dnkmyokA9nYcaLywshZifjpUw+fWpXeGOGtn9x3X2Q9OlRbYDw83OzjhTuvQgtLewbJezYw8ApkJSY8xUQZWgU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=iXAfhakj; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=guMFUAss; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Xl3oQphe"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 91E6D1F00ACF
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 08:57:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784537860;
-	bh=nQQBke5ZlmzFRj43/CzQQOBfPHV+GhuwHWj4S9VuQl0=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=Xl3oQpheFYaGYQk57RreIH4xfnrhNHPM53w2UjKmlODtt2/XcrW28Ee7bWLNl2aTB
-	 wvP0IjsephxMQoCOh0Ctf+OiItMVr3RKO394KxHoqsjwzZ3BJbtdgDZoRiOTN5O+Hc
-	 5nCg8pcHjg07CmiyG5oaUhtbpY7mZhpbYgPNfV6YEWzJ5YMbYCVWmLeHaBTa9W99GS
-	 Sp8tRuyyXwMoB0pJQTxv4nmIZixYGDEPcXOPyzBBWS40wzADHRvs7uL3CaD5P1UgyO
-	 YiQmvzDOqKvjxVAjA9uYh2Wo3nGjqloOEImmzYUCdOaHWainvHyVIDMM5npS5O4tDu
-	 5W7NQ1QFInasA==
-Received: by mail-lj1-f170.google.com with SMTP id 38308e7fff4ca-39c7ac9b8c3so61052321fa.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 01:57:40 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RrrfBQZKuljoKInqgREcSViazKQhCLEcAJ9pbGdrUw1uHxQxWwrAvoVJ5dup2vrU+SHhpiDX/SH5NJ/Rj4o@vger.kernel.org
-X-Gm-Message-State: AOJu0YzvA/PvnJ5wapcc4b22tmtzwrA3Uuke/FeEBkgOf7P0qmRnWqWX
-	oEy/v85dD3bsQXzkR19F4blBJQdMy4oowX71ueWjXq++5u/f/eDQQ6rga7oS9dEST4LUp/qhcnL
-	2K0USmYOXfqgWnsEQDWA47BuAdfYWrlBCdIjVFnL/Tg==
-X-Received: by 2002:a05:651c:2212:b0:393:8ba5:3d01 with SMTP id
- 38308e7fff4ca-39eb281e893mr26252961fa.22.1784537859272; Mon, 20 Jul 2026
- 01:57:39 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 20 Jul 2026 10:57:37 +0200
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 20 Jul 2026 10:57:37 +0200
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260720-monza-wireless-v5-8-69ec6743543c@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="iXAfhakj";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="guMFUAss"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66K6RYv61506325
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 08:58:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	iKIOBHJU29oE8C/U0GXmXXAsptoRPoNA2oZDBKCXCaQ=; b=iXAfhakjVtPMRftU
+	wakDIXTqrt8qk4x5GBUqC1kqhd4va/+9D4/JIOncL36NyfaWHcv1M5cKHYyRytdY
+	nRe13lcMtJJ3j/+GUlYdiKwmMgz59sFel1tZT/jcj8mpFFrvruSuLhr2MJ0zjGnr
+	jQP5XrtZ2WbNkYXvoCkxecuMXJEAlemOzwFGYWr6w/5c9C/Xf0O7lUidY+oMZrb2
+	6+29OzPGikwLFy1swFa4HZg7asLaRiNnU7X3JLz9p8mBP9H+uTQ/wEZkWo/4+Yu7
+	cYGC780rcdcN4f8YFCXRxsYMUQ8kJ7CRjg3SgNZMfU6lDA3p2K7yFKjlV83QuQrX
+	YdoY6A==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fg2bvw9wg-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 08:58:03 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51c21be5bb4so30404391cf.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 01:58:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784537883; x=1785142683; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=iKIOBHJU29oE8C/U0GXmXXAsptoRPoNA2oZDBKCXCaQ=;
+        b=guMFUAssh42c4MjHjZY1yZMp3amo4AUDoD3U8vw0LTucj57foM8h9KBUmM094+g0eY
+         IhMMzNDwlaashkDtNxrxY6tsF2/IbECqzz2Re3aLj7Gx7WE6l1IDQyp9tqSHVnEcWLnF
+         VO/24X6kR0Zu9Z4oYFhf73JTBpaCSIE1i2YxquwhhB6Z/GhYtHkX4TDIWqisNkaqva1w
+         Xzn4O3HsDIm3f+mFZbTDOjijPV6PvbPDx+9CKyNgkeB3Kc6wY3cxczE4KvZgCJEfo3hf
+         S4vnpIDvGvnAOQrGHM95wFGWaEK/UH4JkSuWPOLoL6LqVgaqHFiVNjK+0bD9S1+Ny79l
+         SYtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784537883; x=1785142683;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=iKIOBHJU29oE8C/U0GXmXXAsptoRPoNA2oZDBKCXCaQ=;
+        b=I2XNGD0AqN6xr1Ja2KyLMc5Lnv5+RLYm0AZ+XOKhHwidAywiWI2wvoIpgP4b4NRjHM
+         ThRo70bOgK5uysw6hEixzMjsjyGte8eRxiCDpDPfQE2jdBaaVjyLXw37QFlL2XdFrfNe
+         z7+Ec+enPrSbM1Fd0DwF/fJCxuZZ4AEtqjfyG+tletJ5HjNRTn6vsR/fcwnVx4EgDiMR
+         UuQ6hQD+2yfuHYFPUDRiwAyaxu9o80rBIYhr15gyt7avUFBJzp4KCVPMAHFT3m4QBrF7
+         1S3Q9QVTCCLwvUT0dmk+/TomzfF5TF4J1DS5Cu1Zuw/ntcNdADLiimxveLQa2L6vRVgn
+         0zqg==
+X-Forwarded-Encrypted: i=1; AHgh+RrtyXzvgS+CoikAnMA6f1j9SUtExCdxUDYGWT0M+8AR9s6CHVixt8z3DWTtblWZ7P8h7eiDGZuHgwN9HFmJ@vger.kernel.org
+X-Gm-Message-State: AOJu0YyZOVTArUGPx7v5k8m2FDffAbRxiei7NHoXitC7bZptwUeJnTjm
+	w1mKYIi6U6jqwrksT8+Z3r0wV6D1XcUz3tRdPidQNMQzNtBbJoFoB1FfImrhTrvD7WFKIfyz4Ut
+	ET6HpsJWeoa4sToN2Y5x2ZncVvmuBBa9n8PGpJNdYO9XGpa/ek6+7Hhcjvr84AdCMgS5/
+X-Gm-Gg: AfdE7ckEuvE7IYlZZwWiIVpcxY1u1zEgzjFzzIIrML2LAqMQLtWGS8IjCJxiEFa2C6w
+	9pbghFmrs+qJEWu7ipPmPLcRJRJB9crcN96Akd8L/p4BXGSJEb56Zkhj2NdMqJcaSMXPwUds8sF
+	DyAUDDBfatuvkY0UVzWBWPLPcjTOXJxozmGVdHmdSq6piwwQFI689qH/AFDmZfsO1w1G95TLZCl
+	PZLXjGMuzmBbjxWDoSmUS7Hw9O+UajAOm70v7QajABrvcPvoElJHN8se0SBLFDx+xS0mr+Gp55o
+	qWsQVOrtsaNO2TQDHmlPQnQC06ntdCaY2PMqNQvEQ3TX3htyNlkSyrj0eGfLSTYjUd4ZGxEP+oW
+	MaHlnM0JWNen384o3p8o59NXH
+X-Received: by 2002:ac8:6145:0:20b0:51a:88bd:95a0 with SMTP id d75a77b69052e-5213c109e32mr75662281cf.1.1784537882775;
+        Mon, 20 Jul 2026 01:58:02 -0700 (PDT)
+X-Received: by 2002:ac8:6145:0:20b0:51a:88bd:95a0 with SMTP id d75a77b69052e-5213c109e32mr75662201cf.1.1784537882331;
+        Mon, 20 Jul 2026 01:58:02 -0700 (PDT)
+Received: from [192.168.120.193] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-69e7000c3e2sm4335540a12.30.2026.07.20.01.58.00
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 20 Jul 2026 01:58:01 -0700 (PDT)
+Message-ID: <581659e3-9168-42b2-b715-943808d9ae2f@oss.qualcomm.com>
+Date: Mon, 20 Jul 2026 10:57:59 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260720-monza-wireless-v5-0-69ec6743543c@oss.qualcomm.com> <20260720-monza-wireless-v5-8-69ec6743543c@oss.qualcomm.com>
-Date: Mon, 20 Jul 2026 10:57:37 +0200
-X-Gmail-Original-Message-ID: <CAMRc=Mf4s+ZyVVmf30vJTJZxyGUCLc9AnXALGYP6i-JVEiXdSw@mail.gmail.com>
-X-Gm-Features: AUfX_myuM7qq3uMxNHkqOgQv6po-w8-z77tzEKymhBeuw6gqAeDSHqCNKCSl7-Y
-Message-ID: <CAMRc=Mf4s+ZyVVmf30vJTJZxyGUCLc9AnXALGYP6i-JVEiXdSw@mail.gmail.com>
-Subject: Re: [PATCH v5 08/11] Bluetooth: hci_qca: Support QCA2066 on M.2
- connector via pwrseq
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Manivannan Sadhasivam <mani@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
-	Marcel Holtmann <marcel@holtmann.org>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	linux-pci@vger.kernel.org, linux-pm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-bluetooth@vger.kernel.org, devicetree@vger.kernel.org, 
-	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/5] arm64: dts: qcom: Add Kalambo SoC
+To: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
+        Pankaj Patil <pankaj.patil@oss.qualcomm.com>
+Cc: Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260718-b4-kalambo-crd-v1-0-a1069b5a2757@oss.qualcomm.com>
+ <20260718-b4-kalambo-crd-v1-2-a1069b5a2757@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260718-b4-kalambo-crd-v1-2-a1069b5a2757@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: my0gC_uVQ6u5vYyfUko0qRpKHMZqUfzp
+X-Authority-Analysis: v=2.4 cv=EcH4hvmC c=1 sm=1 tr=0 ts=6a5de31b cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=DNsd2YO3vS8c1Z7_MjAA:9 a=QEXdDO2ut3YA:10
+ a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDA5OSBTYWx0ZWRfX6KPx3LmI+vtm
+ dsZv6qUUMdZbYviFRPVGGASB+y0siuiSe+yzW7pbIaOltjmcwfvnNoSbFgiHOMVtM2/Zg1RING/
+ 0Egwza8pdL6/rnpXlR+952Ed0FsiWNXgiYFv2Gnwj/WBB9oHC/RDvCUrs+o1Cnjq4mPGgy0zLiQ
+ T6IoV0LMaN8nE7JX6LXWv5acMD8Sex1x7hIQ4vd9/dQ1+HqE2uAuXThOUzkejhb5oVMjIuyA7TG
+ Dz33Nh21kCLuS5/oJkB8JaIUNwtsgzIN4/q1zrHGz4lkwCe9jVFAgknUhmIXR84cqf88/9MOZnR
+ 7BUO15zGAglbQ0HmGMxrR75HsAqvnKQMbNht9RuVc9YoZZX84aAOOMpO6+wBd2H3q2gE6tRmSYT
+ EKhRSn9KITinSJkwvOL38Pk6iASZvtuXlNFa+br1Hq6WgHaLKI4NBDbbdb3HauTOouWY/KseluY
+ POF/jkw5Vc/9Qcj6dfA==
+X-Proofpoint-ORIG-GUID: my0gC_uVQ6u5vYyfUko0qRpKHMZqUfzp
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDA5OSBTYWx0ZWRfXzz2zGRJfX3iG
+ d1D1KpTdFCtkK9NveDDyz71NegQaGvL7Mp4iIZuNYmY3C1s7qlctxRtifr8/bv10ZPaaTdhl8qQ
+ 5yl86VT/Wm2HXh5peYQslBv3zOmcFmM=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-20_01,2026-07-17_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 suspectscore=0 bulkscore=0 clxscore=1015 impostorscore=0
+ phishscore=0 adultscore=0 malwarescore=0 priorityscore=1501 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200099
 
-On Mon, 20 Jul 2026 10:04:10 +0200, Loic Poulain
-<loic.poulain@oss.qualcomm.com> said:
-> For QCA2066 (and other QCA chips) on M.2 connectors, the UART enable is
-> controlled by the W_DISABLE2# signal managed by the pcie-m2 power sequencer
-> rather than a dedicated BT enable GPIO.
->
-> When the serdev controller has an OF graph (indicating it is connected to
-> an M.2 connector), acquire the 'uart' pwrseq target from the connector's
-> power sequencer and use it to control BT power instead of the bt-enable
-> GPIO. This is factored out into qca_serdev_get_m2_pwrseq().
->
-> Reviewed-by: Manivannan Sadhasivam <mani@kernel.org>
-> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+On 7/18/26 2:06 PM, Gopikrishna Garmidi wrote:
+> Introduce support for the Qualcomm Kalambo SoC. It is derived from Mahua
+> with CPU cluster 0 removed, leaving it with just cluster 1. As a result,
+> the PDP mailbox and SCP low-priority register windows are updated to
+> match the reduced CPU complex. Everything else should work as-is.
+> 
+> Add a label to the Glymur cluster0 cpu-map node to allow its removal on
+> derived SoCs.
+> 
+> Signed-off-by: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
 > ---
+>  arch/arm64/boot/dts/qcom/glymur.dtsi  |  2 +-
+>  arch/arm64/boot/dts/qcom/kalambo.dtsi | 29 +++++++++++++++++++++++++++++
+>  2 files changed, 30 insertions(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
+> index 55d91c696a3a..f2feef362be5 100644
+> --- a/arch/arm64/boot/dts/qcom/glymur.dtsi
+> +++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
+> @@ -275,7 +275,7 @@ cpu17: cpu@20500 {
+>  		};
+>  
+>  		cpu-map {
+> -			cluster0 {
+> +			cpu_map_cluster0: cluster0 {
 
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+I doubt the code that parses this will be happy about not
+being able to start from 'cluster0'
+
+
+
+[...]
+
+> +&pdp0_mbox {
+> +	reg = <0 0x17610000 0 0x8000>, <0 0x1a980000 0 0x8000>;
+> +};
+
+Are you sure about this change?
+
+> +&cpu_scp_lpri1 {
+> +	reg = <0x180 0x60>;
+> +};
+
+This is specific to old firmware, at least it was on Glymur, I believe..
+
+Konrad
