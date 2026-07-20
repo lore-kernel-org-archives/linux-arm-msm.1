@@ -1,78 +1,351 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtpout-03.galae.net (smtpout-03.galae.net [185.246.85.4])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D17DF3C062F;
-	Mon, 20 Jul 2026 07:40:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4E6D3BFADE
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 07:50:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.246.85.4
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784533237; cv=none; b=rrCFKmHS18uPJN1XI+ibT24VKaW+5VCNKD6Evz7c3iZ5HBAKxVP9nIzTPM7u2F0G1OvN60n/3DzEL3ROqw/jdg+2vBW45Tbk0mZtzhGMNE8kICOEcsYnHDmRtFgyIufYGACgxfavAjHiZ5BsmDuwgLremp08R4IwJ9yjUWqD0aQ=
+	t=1784533863; cv=none; b=qmShiT54BM7DPXXDy99zhjiLaVnmJ6QLjBf/1N9yPBXonJ3/4xUCXtuWa3Rt5iBQlNYKkJ4uTE3VsaB/d4E6EoP3cRwQC0qyktD5R6m5Lmc8DiFl7GNwl3ItdESyHXeIE3vkpCF28Sro9sURFP+yneh2NRJ8b0GV7kUXBfRfGmY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784533237; c=relaxed/simple;
-	bh=XXv594fIuUQM4N4wFMBfCOnjc9yu3vYBSjxO8f6Si74=;
-	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
-	 In-Reply-To:To:Cc; b=ieEYs5MyDnKdoJUwz05jKdiggND7IC0CnJ/YRr1F+YgpS3MTNWGh0BWPB5o3txA/ZF1OkvRHA9Vk3skVzlkc/EeNys+ic71YR6RK0XPBqNUaLmlo9KIO9N8YYS6vzDkXBL9rLA+CHDI4h1tb92jMNfICIh7AXH7zmIVKuiIrgUA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BFK7fOwv; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784533863; c=relaxed/simple;
+	bh=xVYlAgPJNY4eCdERqRyECIi/44X/S/9sIXhowNjbPPU=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=syuh+woFFC7cvbNwzgdAl4wvWOVVk/0rpTCKMGmF73W8GfHvf2s2yuNhab+ADSJqa/1QKIgoM8raeEHkmNZtNPnAM1lo9m5CUJAnGO1XY5wHcgWRZmMIjG9gHXzjB0E/wlmhHHsp28aUNROdXoBXkbgRmL5tHhVA0rkp85T6IKU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com; spf=pass smtp.mailfrom=bootlin.com; dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b=SD9h6Asn; arc=none smtp.client-ip=185.246.85.4
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bootlin.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BFK7fOwv"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D4D971F000E9;
-	Mon, 20 Jul 2026 07:40:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784533234;
-	bh=vTIADCR7j2MklTbBN5FLnH/r6v+/v6/4VwEQbeqoWfs=;
-	h=Subject:From:Date:References:In-Reply-To:To:Cc;
-	b=BFK7fOwvKcUdaInaSVsBA5yCOYorESxyQNPAykCm+webmAP/jvy6wXbgwZclPrxNV
-	 yFGrrSmNgtCMdZwasQHJINeH9pwPP9lhUI69/eNoWoZcM9coJGJu/3RJMgLBvPVKES
-	 00xwEYOpfFTLUJDOCH9Rzt8065wQD9pzbHedKAsIp1gHXp6RIBQfFk0Kc84gxmO/Lr
-	 IatqqmPRvOa7HEopiSknm9z1eYbi0NRmA84KZMbmMpEFpqt4xHhwJhZLM5y7TkimrS
-	 Td18VBFwx7dLlYea1a8RAt83/ppRlrejy7hwyEFsBGRGNjjGpNZ1kbmIes2x10+uos
-	 MmNoxmNHqeHyg==
-Received: from [10.30.226.235] (localhost [IPv6:::1])
-	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 93ADD3811A43;
-	Mon, 20 Jul 2026 07:40:06 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+	dkim=pass (2048-bit key) header.d=bootlin.com header.i=@bootlin.com header.b="SD9h6Asn"
+Received: from smtpout-01.galae.net (smtpout-01.galae.net [212.83.139.233])
+	by smtpout-03.galae.net (Postfix) with ESMTPS id 045F04E40E7D;
+	Mon, 20 Jul 2026 07:50:58 +0000 (UTC)
+Received: from mail.galae.net (mail.galae.net [212.83.136.155])
+	by smtpout-01.galae.net (Postfix) with ESMTPS id CB91460360;
+	Mon, 20 Jul 2026 07:50:57 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id EF47E11BD1242;
+	Mon, 20 Jul 2026 09:50:53 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=dkim;
+	t=1784533856; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+	 in-reply-to:references; bh=ydvv0GJEFh8kqpKPQ9tLSbZDdHAlONu2QYbeL0hro3c=;
+	b=SD9h6AsnI3dv3EtNGQ8+98dzTFvdrMTsJgGUKjd+0gz66ahYx6WOP5GOpb21amTo6fi9jH
+	CtZ8W0J8QNdT5z6mn/876KhcSf6rRhbHrs0zqe54IwzBJ3NFjVTsn4hBmqgCTXpzYqIEc0
+	m107NOxsQ52/3Jp2Yl+kUbk8QueVoAdLB/1WpszTqZjAqA+q2gWHdsyIuQ4i52OfsdKJ+R
+	jhzyzszXJfIzMM+J8IddoNSdxXS54XQhFOPJUGEgv5tJoBYlBQJqE+DzTq/TexDg1fMoAx
+	KrdhVlRrZKwfeu7oSusjIY8jTOmQVc+t+IWJ87yDPhM+QXv+u8eoK8VzBxBfww==
+From: Romain Gantois <romain.gantois@bootlin.com>
+To: Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Uwe =?UTF-8?B?S2xlaW5lLUvDtm5pZyAoVGhlIENhcGFibGUgSHViKQ==?=
+ <u.kleine-koenig@baylibre.com>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+ Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+ John Stultz <jstultz@google.com>, Eric Piel <eric.piel@tremplin-utc.net>,
+ Danilo Krummrich <dakr@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+ Takashi Sakamoto <o-takashi@sakamocchi.jp>, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org
+Subject: Re: [PATCH v2 11/12] misc: Unify style of of_device_id arrays
+Date: Mon, 20 Jul 2026 09:50:48 +0200
+Message-ID: <Nl9yKsP2RmuG2RLCMfrvew@bootlin.com>
+In-Reply-To:
+ <fbf51b8f413c516977e2c8a81896221795df77e4.1784299069.git.u.kleine-koenig@baylibre.com>
+References:
+ <cover.1784299069.git.u.kleine-koenig@baylibre.com>
+ <fbf51b8f413c516977e2c8a81896221795df77e4.1784299069.git.u.kleine-koenig@baylibre.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH net-next] net: phy: at803x: Use a helper to check for phy
- reset existence
-From: patchwork-bot+netdevbpf@kernel.org
-Message-Id: 
- <178453320539.3394436.16798178808296677838.git-patchwork-notify@kernel.org>
-Date: Mon, 20 Jul 2026 07:40:05 +0000
-References: <20260715101355.88536-1-maxime.chevallier@bootlin.com>
-In-Reply-To: <20260715101355.88536-1-maxime.chevallier@bootlin.com>
-To: Maxime Chevallier <maxime.chevallier@bootlin.com>
-Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com,
- kuba@kernel.org, pabeni@redhat.com, linux@armlinux.org.uk,
- hkallweit1@gmail.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- thomas.petazzoni@bootlin.com, linux-arm-msm@vger.kernel.org
+Content-Type: multipart/signed; boundary="nextPartDe8xp2AFRBWqMINRDKbRPw";
+ micalg="pgp-sha512"; protocol="application/pgp-signature"
+X-Last-TLS-Session-Version: TLSv1.3
 
-Hello:
+--nextPartDe8xp2AFRBWqMINRDKbRPw
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"; protected-headers="v1"
+From: Romain Gantois <romain.gantois@bootlin.com>
+Subject: Re: [PATCH v2 11/12] misc: Unify style of of_device_id arrays
+Date: Mon, 20 Jul 2026 09:50:48 +0200
+Message-ID: <Nl9yKsP2RmuG2RLCMfrvew@bootlin.com>
+MIME-Version: 1.0
 
-This patch was applied to netdev/net-next.git (main)
-by Paolo Abeni <pabeni@redhat.com>:
+Hi Uwe,
 
-On Wed, 15 Jul 2026 12:13:54 +0200 you wrote:
-> The at803x family of devices are subjected to an errata that requires
-> hard-reseting the PHY upon link change.
-> 
-> That can only work if there's a physical reset line wired to the PHY,
-> which the driver checks by looking if there's a reset GPIO configured
-> for the MDIO device.
-> 
-> [...]
+On Friday, 17 July 2026 16:50:57 CEST Uwe Kleine-K=C3=B6nig (The Capable Hu=
+b) wrote:
+> Update the various of_device_id arrays to conform to the most used and
+>=20
+> generally recommended coding style. That is:
+>  - No comma after the list terminator;
+>  - A comma after an initializer if (and only if) the closing } is not
+> =20
+>    directly following;
+> =20
+>  - No explicit zeros in the list terminator;
+>  - A space after an opening { and before a closing }, a single space in
+> =20
+>    the list terminator;
+>=20
+> Adapt the few offenders accordingly.
+>=20
+> Signed-off-by: Uwe Kleine-K=C3=B6nig (The Capable Hub)
+> <u.kleine-koenig@baylibre.com> ---
+>=20
+>  drivers/misc/ds1682.c                  | 4 ++--
+>  drivers/misc/fastrpc.c                 | 6 +++---
+>  drivers/misc/hisi_hikey_usb.c          | 2 +-
+>  drivers/misc/lis3lv02d/lis3lv02d_i2c.c | 2 +-
+>  drivers/misc/lis3lv02d/lis3lv02d_spi.c | 2 +-
+>  drivers/misc/open-dice.c               | 2 +-
+>  drivers/misc/pvpanic/pvpanic-mmio.c    | 4 ++--
+>  drivers/misc/qcom-coincell.c           | 4 ++--
+>  drivers/misc/sram.c                    | 2 +-
+>  drivers/misc/ti_fpc202.c               | 2 +-
+>  drivers/misc/vcpu_stall_detector.c     | 4 ++--
+>  11 files changed, 17 insertions(+), 17 deletions(-)
+>=20
+> diff --git a/drivers/misc/ds1682.c b/drivers/misc/ds1682.c
+> index f073a5067fc8..4500d7d0ea77 100644
+> --- a/drivers/misc/ds1682.c
+> +++ b/drivers/misc/ds1682.c
+> @@ -277,8 +277,8 @@ static const struct i2c_device_id ds1682_id[] =3D {
+>=20
+>  MODULE_DEVICE_TABLE(i2c, ds1682_id);
+> =20
+>  static const struct of_device_id ds1682_of_match[] =3D {
+>=20
+> -	{ .compatible =3D "dallas,ds1682", },
+> -	{}
+> +	{ .compatible =3D "dallas,ds1682" },
+> +	{ }
+>=20
+>  };
+>  MODULE_DEVICE_TABLE(of, ds1682_of_match);
+>=20
+> diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
+> index d86e79134c68..f7b6aba8b71d 100644
+> --- a/drivers/misc/fastrpc.c
+> +++ b/drivers/misc/fastrpc.c
+> @@ -2299,8 +2299,8 @@ static void fastrpc_cb_remove(struct platform_device
+> *pdev) }
+>=20
+>  static const struct of_device_id fastrpc_match_table[] =3D {
+>=20
+> -	{ .compatible =3D "qcom,fastrpc-compute-cb", },
+> -	{}
+> +	{ .compatible =3D "qcom,fastrpc-compute-cb" },
+> +	{ }
+>=20
+>  };
+> =20
+>  static struct platform_driver fastrpc_cb_driver =3D {
+>=20
+> @@ -2579,7 +2579,7 @@ static int fastrpc_rpmsg_callback(struct rpmsg_devi=
+ce
+> *rpdev, void *data, static const struct of_device_id
+> fastrpc_rpmsg_of_match[] =3D {
+>=20
+>  	{ .compatible =3D "qcom,kaanapali-fastrpc", .data =3D &kaanapali_soc_da=
+ta },
+>  	{ .compatible =3D "qcom,fastrpc", .data =3D &default_soc_data },
+>=20
+> -	{ },
+> +	{ }
+>=20
+>  };
+>  MODULE_DEVICE_TABLE(of, fastrpc_rpmsg_of_match);
+>=20
+> diff --git a/drivers/misc/hisi_hikey_usb.c b/drivers/misc/hisi_hikey_usb.c
+> index 79f06001259b..e68bc6e384d5 100644
+> --- a/drivers/misc/hisi_hikey_usb.c
+> +++ b/drivers/misc/hisi_hikey_usb.c
+> @@ -254,7 +254,7 @@ static void hisi_hikey_usb_remove(struct platform_dev=
+ice
+> *pdev)
+>=20
+>  static const struct of_device_id id_table_hisi_hikey_usb[] =3D {
+> =20
+>  	{ .compatible =3D "hisilicon,usbhub" },
+>=20
+> -	{}
+> +	{ }
+>=20
+>  };
+>  MODULE_DEVICE_TABLE(of, id_table_hisi_hikey_usb);
+>=20
+> diff --git a/drivers/misc/lis3lv02d/lis3lv02d_i2c.c
+> b/drivers/misc/lis3lv02d/lis3lv02d_i2c.c index 36032fc125f3..7c3ca6d604d1
+> 100644
+> --- a/drivers/misc/lis3lv02d/lis3lv02d_i2c.c
+> +++ b/drivers/misc/lis3lv02d/lis3lv02d_i2c.c
+> @@ -95,7 +95,7 @@ static union axis_conversion lis3lv02d_axis_map =3D
+>=20
+>  #ifdef CONFIG_OF
+>  static const struct of_device_id lis3lv02d_i2c_dt_ids[] =3D {
+> =20
+>  	{ .compatible =3D "st,lis3lv02d" },
+>=20
+> -	{}
+> +	{ }
+>=20
+>  };
+>  MODULE_DEVICE_TABLE(of, lis3lv02d_i2c_dt_ids);
+>  #endif
+>=20
+> diff --git a/drivers/misc/lis3lv02d/lis3lv02d_spi.c
+> b/drivers/misc/lis3lv02d/lis3lv02d_spi.c index 203a108b8883..5bf95176a00e
+> 100644
+> --- a/drivers/misc/lis3lv02d/lis3lv02d_spi.c
+> +++ b/drivers/misc/lis3lv02d/lis3lv02d_spi.c
+> @@ -60,7 +60,7 @@ static union axis_conversion lis3lv02d_axis_normal =3D
+>=20
+>  #ifdef CONFIG_OF
+>  static const struct of_device_id lis302dl_spi_dt_ids[] =3D {
+> =20
+>  	{ .compatible =3D "st,lis302dl-spi" },
+>=20
+> -	{}
+> +	{ }
+>=20
+>  };
+>  MODULE_DEVICE_TABLE(of, lis302dl_spi_dt_ids);
+>  #endif
+>=20
+> diff --git a/drivers/misc/open-dice.c b/drivers/misc/open-dice.c
+> index 45060fb4ea27..77ab0c1e83d3 100644
+> --- a/drivers/misc/open-dice.c
+> +++ b/drivers/misc/open-dice.c
+> @@ -177,7 +177,7 @@ static void open_dice_remove(struct platform_device
+> *pdev)
+>=20
+>  static const struct of_device_id open_dice_of_match[] =3D {
+> =20
+>  	{ .compatible =3D "google,open-dice" },
+>=20
+> -	{},
+> +	{ }
+>=20
+>  };
+> =20
+>  static struct platform_driver open_dice_driver =3D {
+>=20
+> diff --git a/drivers/misc/pvpanic/pvpanic-mmio.c
+> b/drivers/misc/pvpanic/pvpanic-mmio.c index 43a094bfdaec..724dfddf69e4
+> 100644
+> --- a/drivers/misc/pvpanic/pvpanic-mmio.c
+> +++ b/drivers/misc/pvpanic/pvpanic-mmio.c
+> @@ -51,8 +51,8 @@ static int pvpanic_mmio_probe(struct platform_device
+> *pdev) }
+>=20
+>  static const struct of_device_id pvpanic_mmio_match[] =3D {
+>=20
+> -	{ .compatible =3D "qemu,pvpanic-mmio", },
+> -	{}
+> +	{ .compatible =3D "qemu,pvpanic-mmio" },
+> +	{ }
+>=20
+>  };
+>  MODULE_DEVICE_TABLE(of, pvpanic_mmio_match);
+>=20
+> diff --git a/drivers/misc/qcom-coincell.c b/drivers/misc/qcom-coincell.c
+> index 3c57f7429147..b58bd34fc471 100644
+> --- a/drivers/misc/qcom-coincell.c
+> +++ b/drivers/misc/qcom-coincell.c
+> @@ -124,8 +124,8 @@ static int qcom_coincell_probe(struct platform_device
+> *pdev) }
+>=20
+>  static const struct of_device_id qcom_coincell_match_table[] =3D {
+>=20
+> -	{ .compatible =3D "qcom,pm8941-coincell", },
+> -	{}
+> +	{ .compatible =3D "qcom,pm8941-coincell" },
+> +	{ }
+>=20
+>  };
+> =20
+>  MODULE_DEVICE_TABLE(of, qcom_coincell_match_table);
+>=20
+> diff --git a/drivers/misc/sram.c b/drivers/misc/sram.c
+> index 1919d24c8236..c8990e83a65a 100644
+> --- a/drivers/misc/sram.c
+> +++ b/drivers/misc/sram.c
+> @@ -370,7 +370,7 @@ static const struct of_device_id sram_dt_ids[] =3D {
+>=20
+>  	{ .compatible =3D "nvidia,tegra186-sysram", .data =3D &tegra_sysram_con=
+fig },
+>  	{ .compatible =3D "nvidia,tegra194-sysram", .data =3D &tegra_sysram_con=
+fig },
+>  	{ .compatible =3D "nvidia,tegra234-sysram", .data =3D &tegra_sysram_con=
+fig },
+>=20
+> -	{}
+> +	{ }
+>=20
+>  };
+> =20
+>  static int sram_probe(struct platform_device *pdev)
+>=20
+> diff --git a/drivers/misc/ti_fpc202.c b/drivers/misc/ti_fpc202.c
+> index 2aac83ec4a39..9e2d24f89457 100644
+> --- a/drivers/misc/ti_fpc202.c
+> +++ b/drivers/misc/ti_fpc202.c
+> @@ -718,7 +718,7 @@ static void fpc202_remove(struct i2c_client *client)
+>=20
+>  static const struct of_device_id fpc202_of_match[] =3D {
+> =20
+>  	{ .compatible =3D "ti,fpc202" },
+>=20
+> -	{}
+> +	{ }
+>=20
+>  };
+>  MODULE_DEVICE_TABLE(of, fpc202_of_match);
+>=20
+> diff --git a/drivers/misc/vcpu_stall_detector.c
+> b/drivers/misc/vcpu_stall_detector.c index 26166357b255..1306b2c1ef99
+> 100644
+> --- a/drivers/misc/vcpu_stall_detector.c
+> +++ b/drivers/misc/vcpu_stall_detector.c
+> @@ -224,8 +224,8 @@ static void vcpu_stall_detect_remove(struct
+> platform_device *pdev) }
+>=20
+>  static const struct of_device_id vcpu_stall_detect_of_match[] =3D {
+>=20
+> -	{ .compatible =3D "qemu,vcpu-stall-detector", },
+> -	{}
+> +	{ .compatible =3D "qemu,vcpu-stall-detector" },
+> +	{ }
+>=20
+>  };
+> =20
+>  MODULE_DEVICE_TABLE(of, vcpu_stall_detect_of_match);
 
-Here is the summary with links:
-  - [net-next] net: phy: at803x: Use a helper to check for phy reset existence
-    https://git.kernel.org/netdev/net-next/c/285fd588859f
+Reviewed-by: Romain Gantois <romain.gantois@bootlin.com>
 
-You are awesome, thank you!
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
+--nextPartDe8xp2AFRBWqMINRDKbRPw
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part.
+Content-Transfer-Encoding: 7Bit
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEIcCsAScRrtr7W0x0KCYAIARzeA4FAmpd01gACgkQKCYAIARz
+eA7sXRAAmNpC3oo5PQNgDztLrDx76qRbhKQuVjiPS2kwHQN9pstvtAOZ+CzM3ixi
+58dEMGMGRieZ7iFO1mSDHxXlrSR82mB/vN0VzSGsTFtPufb0n6mbNYCdg6EMGCcH
+Z6W6VMIlXjgvQ+ifEwqYsZiYZMYfvGuv63nyiWfKLtOou7kwalXxGjlRW85fCV0b
+tQ6fCdtTtSBhdWTIrxQ38PWRZwxACnL1CqbyWbGvvCTEYVDBov8NDlNas1m2z0lN
+R8sPoj4W2EfTsNoEeN2KT6o2c9QUxK9BhTIBAtP3FH5/YyA5wgg3j4+2IgBLIxGY
+Skj6daWpVNCtE7BS1iQY9kZS+uDPxBjAV98Skhil0Dim2Q4xd9ulqZa6yGXbb0Sx
+yfbDsMoL4wDe5lEN5h32DVIvNevGAwMvaCwiDuLFGYTy8DTdWf9pHFsavznJBt6q
+liIJKxst6X1ToedGMIBQu2QGai6DdPqDKEMwUx03npALDDPJv59ZxJE+0/Sa2K0X
+vZjLLmfQgYXsMOyQ2NVeACbUQ/nW4+mCSefDdP+Ihy0AJ7iWDcuBULyE3IthaX5G
+2rYtyhdYSzCu+XSxxUac+5c+dXjBADp3PZzMvKxUAHq88k84VCYzPZzwtrVP5l8I
+U0fmRfro8X86bSKY3zOJHACrwzcEUo0ptk3h1yrLhFBFtN9e3/0=
+=jqEB
+-----END PGP SIGNATURE-----
+
+--nextPartDe8xp2AFRBWqMINRDKbRPw--
+
 
 
