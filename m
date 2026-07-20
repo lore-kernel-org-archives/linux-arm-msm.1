@@ -1,88 +1,88 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5348C3EDAD1
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:55:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 796423EFFAC
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:55:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784544920; cv=none; b=S9a8Jnu7/2BdU0uIaVCaqtzeOCs8ysClbA0mVRcUCcqb4Hs+SPtpAlDtxiS66FjXtqfna2dytZMTFBNpA5zhoLC+Xc+GA0V0GGqaryG1YCois54A3ttaQMnpHKIRPTCnYu/sqPuhGBkxnItqd9T2ymo02k82qv+xA0cwAbLnvLY=
+	t=1784544924; cv=none; b=aLmA3bg/+7aGNTS7hA8K582j8yFZfnuiGgbJNkrr8vNAwelyFyxUk1badd88a8raYUh051uAoG0P2B+WadfOs60awS5eRBfjWrng+Q+6RFz4mxen6hXfS7aKqXUcZN5dvG1UgTTWJnDMsABpW+phuXdD6HpkWhE9JX9yGKqxrVw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784544920; c=relaxed/simple;
-	bh=VLVtBrficZ53U+t7h3TLEukTjKWLwiagVpjB+rG9eno=;
+	s=arc-20240116; t=1784544924; c=relaxed/simple;
+	bh=Vrq29aRX/6IcoQWJku5ttZIZMz378bhwF8V95noopMU=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=lawVLaE2xSDvApEamhtEP2YtLPJgyesyCMZ6WJNvb/QYrWbEEFmDlFfLFkTuI0t8kvk7tzI8AJ1WJfbuzl/CafPh24dmHrBeRa1iwgjrvkqVgbGUqDfN1Hxu6ec9rPDxRsjtl3TTb7M0Q2u1/rEEIY3vIki20B0+lyYcR+qon+M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cedHPh+y; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=BDiXCRrw; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=YKU7qDSoPSU3yno84DiHRjMVMNhPBPcnK4SlR9MbkT6faQm+MObmeTVhJarh3JuYlhwEGifdN1g8iJeHz5jIRjuuFdOQJ+LFMb/SfOL4pEOlYwVGu7IobKkB3Z4Y24X5a0Meuah4O9doYQpN5Dtr4UH+vZQx+iEHnY+8i3y4/ps=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=X68uwwey; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VtpiXZk1; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cedHPh+y";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="BDiXCRrw"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66K9vqED2046103
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:55:18 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="X68uwwey";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VtpiXZk1"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66K9wVm12296483
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:55:22 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Q/QrLkJaxirI/poj4XlPdykCvQeAh1xu+XE/9olTUyc=; b=cedHPh+yngEzVAaT
-	hVyNzIB/8JR3Lxz1r8ROr2I7XNNLKD3n/lE6ClUkWmnulyvsA4p8NTsceICCltLP
-	WLXM4g3PTVn+AUsJ6FtzrEUB+fPPKGvYZDm5OnRK9oLhP8Gaautqf1qKlOXlra9p
-	7PnMlBWSOijzxGhbOMJVG+FP/Jd5xTbrb6DTE7yEKJfyZ8V4wm/YGEVwiF4Wz8eA
-	Wy2MeyLg8xu//+0cTUZLHqWfjFDCYTgnSzMqWS0GiTLtdX1DMXdhqwyyDIc+U/Q2
-	dlazH0WQcDo/oJz4ZYNetjgVO6rA3Xsha1QWzxAglpifqibt9uuQ3pPYWZFkficA
-	E8ewWg==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhggg8m4a-1
+	z2v8+OC56PeMGr4eGEr6Q4zuebXtUQl24KS2e3bDzx8=; b=X68uwweyVhUoU5Tz
+	HKul6dXGpC2PxnJ2Pvy8pHn3AWVn4qNX4NtSgLKmGxAVLXstZ637dO6uNSivQ1de
+	zHbnfRfawxplrMkakKWcSN0kinqVkWhA8QSZgOZ9qmSZ8n1q5FFPDwuBgVH/NwXs
+	upeju26QI+9sf+x0BuuCvSBNxIk/oTw9iFaL9jikuVzh0kLd5yUon6ras2r4d7QD
+	+rnPXVoDA68j4qU7lMN9N5Hf6VUXJVOE25S2IZF+k7xX60acStY8aK4AFBu2/GWA
+	5/z/UB+rdPM7WsVAsjDDh/rlgnRSFyIyL3JjruLTxZ6djLE9/XeyypJvRnBT3Jll
+	AlchtQ==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhhgyr64f-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:55:17 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-388b404eaa4so13151869a91.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 03:55:17 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:55:22 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38e5a616d07so2097017a91.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 03:55:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784544917; x=1785149717; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784544921; x=1785149721; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Q/QrLkJaxirI/poj4XlPdykCvQeAh1xu+XE/9olTUyc=;
-        b=BDiXCRrw8pVuDou0uQxly7dTUBktDSjYIRmYZlVFG9xOIihqb24IT6oh3m9sBJ56gt
-         PTd543RW5j/NOykdzHt6glNihkQwU7qQZejE7TC9BcuOV+8kUGFKlJAyeGMrZqHh7kE7
-         Kf2iPDyMfHQMa5Lme0s+AfwNjxcVuCYqjgcNm9NeeOoVB9+4bQ0o/a8wfQHGmo3Jmo7Q
-         LiJJD9qWI5Z27kqLtpmzdQYh+OskX1om1cVt5MFROm8ApKyrpKYYyp7npCEk6NqKZXm1
-         HXUPghN79jRPPdWtj8EYAf8+zfT0edGjcVVIaCGIgCIqvXNHeViJudTxcewIzr/nz+Tn
-         eJxg==
+        bh=z2v8+OC56PeMGr4eGEr6Q4zuebXtUQl24KS2e3bDzx8=;
+        b=VtpiXZk1Ji6Igtn7vXJ8GJnIXlA7AG8g8N4z9A93ayKBKcbkp69UGLScAtR6yneVIV
+         iVvjUB6L5HAaW2aWEnYHzgg/EMU87JYTImPQR3s7jQRzK54959bylxSlTCrL/0wnnVu8
+         5Hj+RVEty2bQAMQaevrRw/vdxAtldBnXW6AmSCmhbyi+l53080t0VRwInB0wzNcJYzV+
+         ofiElE6RLT45UWPk7p+Ea+L7FCu5Dn013GWOibl/ZU9yZlokvN1AgcQqWOLo1TC0p/2+
+         tjLPjFLhDHnDFZSTqFLWQhDdJOQIKtWUD7R4RcRd66Q0GdSGFt/e5h/9VwhnU7DoN5DJ
+         bzIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784544917; x=1785149717;
+        d=1e100.net; s=20251104; t=1784544921; x=1785149721;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Q/QrLkJaxirI/poj4XlPdykCvQeAh1xu+XE/9olTUyc=;
-        b=oTzT+md86yWGBraFyD1lu4zFQgqGrtX/UvTeTEDi+p2iHVDVgagSonknkI1GLM9k58
-         44P2OoQBWA5o/QAW43oyNTcNonsOIBi+VJa+yZ7runS57CEAlCbUy9wPUDn1u05DB0/p
-         XdEEqwZZdMQF2f1Fo2XejTKJj/N5r+nYz25akjZy6oogUR2jdRWAySkduC0EaBLNi6KT
-         rhiilBno3J5n7qZ7qm35F4b2RIp4tPl2H0/jhW4kx6PGv8Q+z0ZLhPMDbsAE3fNqZGJL
-         JUHzOvopa77mz+VepzuQoVmDKWpTHz05HvI3QKhUu4YjZLjvRVWobheV6+1pQIR2xd20
-         vxSg==
-X-Gm-Message-State: AOJu0YywOLubzsQh3PSpt5SjGMACMYQSyvzXHTXhIy9ygLHxEXQv3Mj8
-	LJYXv0ius6rGN4vfgoJAZyyqH8GULiOJeEKIwvIta6xlWBRefwBSM479/WPN3g69CGMHuMZiYMn
-	ILIbUczoUPwEVJLkNs+uBxbO54rgAHftBI3oFiPjkycHLPc9YOtilf1Hb+3XeLuex26FuYed2BP
-	s=
-X-Gm-Gg: AR+sD119STlRqnzkjKchoeVD2iqfRPD0oWGxC9qJff3S12EnZS+CvhYnRuEJA6+jm47
-	nG3POtVc02HCZQG2Wn7aRYlrqULUq+EVsPz9SjiJpwsmTx3lSPQDIZ4wbFv71VwUOHaLLuN6PYS
-	v8pv6hR2DymmCLcJU5h2Cat0M2gPeZJ7TpRRHTCGhL4iAoHCjJJgaDakEqnqYnCpv5PsdCf91yU
-	4ZiZ+NRXuyoVafoRyc6jPrJXQbpAVn9M1mjDel+PMzFBBBv52sqXIJ9vwo9vOZwKqzmhh0KzAEG
-	9hJiX4hXTH/Bo0jWI32BBS/CpYyPM7JRZ5snwG3k71BGXHs2mT1sSNCsl9uiGvHz5oLtlK5LFDj
-	Tyul4oU2VCwWtvhReyfedmg6wt+sk3Q==
-X-Received: by 2002:a17:90b:51:b0:384:8a11:33eb with SMTP id 98e67ed59e1d1-38e4b53460cmr14747229a91.24.1784544916739;
-        Mon, 20 Jul 2026 03:55:16 -0700 (PDT)
-X-Received: by 2002:a17:90b:51:b0:384:8a11:33eb with SMTP id 98e67ed59e1d1-38e4b53460cmr14747192a91.24.1784544916207;
-        Mon, 20 Jul 2026 03:55:16 -0700 (PDT)
+        bh=z2v8+OC56PeMGr4eGEr6Q4zuebXtUQl24KS2e3bDzx8=;
+        b=QJ1JqRQMmfk4iJXcg5jVZNTWqoR0Nj+3qjOY5SoPJodvxbVoKmKr5EfVigwsBnd5ni
+         APvrFuHkagMR3W5zEbaYZeeN/x7GEvpwpO/rWyeX6pOhB4hK2+aHH4PssJf+CNx+iH+D
+         zfXpoveubvaG/RIsDNB4vsDlAbpok6Zo25cyg/SFIBxAkDaqfw7YIyPE2YBCYWWtxNfn
+         alC8QzuPsnnwHZ0nJ32RrCvaHMxiY/QZHp9i/9FIGFKVNNHcNpXAoCYwxM+gj6eAKcbo
+         YLJnrSLiAEyPoQGYCnjVl0uxbsItErqInOyTdWHjvNk4koz8JgAzIJpRQfmwO0PoYfxv
+         MK3Q==
+X-Gm-Message-State: AOJu0YwCCzO9JBAzSfTBdhKO7Cr09DIQcjLDjzfsZaWPXU3karkRgjX3
+	0cD92M5aFeA+R9yIlUaFJx5SQAMjIPqABbTMJtKh/ikhdQW8jk03kitP17E9aVZiEWoN14aIZyk
+	n9fzBGssQatDuQhCGb3bOnSZZktpmnCLlIum1/+Ca/iUjmViwpKWCXf1zsMfqan1ftJGYHCVEQI
+	Y=
+X-Gm-Gg: AR+sD12UZSN+nrRgPPB17Alz/odH5KQXiTmKJ7xYplUWVNtPc6gTVVa1GvbN2NuDaf1
+	dsla6LJ7L/eU6PXUFp0ixbhOsU4oXOzG4b+j9AZ79aD3+12iLwxk335Myt93vYLPufj6aidRdEv
+	W1vWqiy4cC3npDcd2ni+j5wxhxJFPwWiovKDLxfECuHau0RN8+jsWAtDNSAqvN2TOqw6xjsZWLV
+	60tXkVEHB03uXTfm3+ed6wlGxhIX8aiKs3IA1Ybf22DzmsdQa4wwFXjT3qxLC5vOlxXajBCcZnX
+	1i0Bqd6mi+WevRluZH8at4XtcdVpYmS2BYHc4W9wmL+bOi8k9tBJ3kCYMs4D+Z1iJpxBUBXCl5o
+	6wDxZ4Ns1kwRkqL4U4oJeR3JhV/FU4A==
+X-Received: by 2002:a17:90b:590f:b0:387:e0db:bc2c with SMTP id 98e67ed59e1d1-38e4b5442c9mr14336797a91.34.1784544921139;
+        Mon, 20 Jul 2026 03:55:21 -0700 (PDT)
+X-Received: by 2002:a17:90b:590f:b0:387:e0db:bc2c with SMTP id 98e67ed59e1d1-38e4b5442c9mr14336766a91.34.1784544920677;
+        Mon, 20 Jul 2026 03:55:20 -0700 (PDT)
 Received: from hu-kotarake-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38e4b20df7esm5661431a91.13.2026.07.20.03.55.12
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38e4b20df7esm5661431a91.13.2026.07.20.03.55.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Jul 2026 03:55:15 -0700 (PDT)
+        Mon, 20 Jul 2026 03:55:20 -0700 (PDT)
 From: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
-Date: Mon, 20 Jul 2026 16:25:04 +0530
-Subject: [PATCH v2 1/3] regulator: qcom_smd-regulator: fix PM2250 supply
- parent mappings
+Date: Mon, 20 Jul 2026 16:25:05 +0530
+Subject: [PATCH v2 2/3] arm64: dts: qcom: qrb2210: fix PM4125 regulator
+ supply parent mappings
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260720-pm2250-fix-supply-parent-v2-1-60ca47031b50@oss.qualcomm.com>
+Message-Id: <20260720-pm2250-fix-supply-parent-v2-2-60ca47031b50@oss.qualcomm.com>
 References: <20260720-pm2250-fix-supply-parent-v2-0-60ca47031b50@oss.qualcomm.com>
 In-Reply-To: <20260720-pm2250-fix-supply-parent-v2-0-60ca47031b50@oss.qualcomm.com>
 To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
@@ -105,131 +105,106 @@ Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
         jishnu.prakash@oss.qualcomm.com,
         Rakesh Kota <rakesh.kota@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784544905; l=5456;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784544905; l=2902;
  i=rakesh.kota@oss.qualcomm.com; s=20250919; h=from:subject:message-id;
- bh=VLVtBrficZ53U+t7h3TLEukTjKWLwiagVpjB+rG9eno=;
- b=bZKuq1aE+//SsP/3zA7yOa45uMSh5l6+D9CAjbaIN3/vjoORjJOEsE2HtncGUfMZzdNWIDk2L
- YDx/vtw18QbBjtA1ewLBltbMO4zQTQcbNfPYj6mFvai1GzNOQlfulQs
+ bh=Vrq29aRX/6IcoQWJku5ttZIZMz378bhwF8V95noopMU=;
+ b=7Zo+04ainSdgP3R5hcZDwh9FnyY9UHDzg9/gxAV1dhssnwAFYFpl3h97C1UejBVOogrF5HiKX
+ 3GIqX+yOzfVCbQHn+NJ8K4AZEwjLKH+pxApUxc4pSArSELMZucrr1pC
 X-Developer-Key: i=rakesh.kota@oss.qualcomm.com; a=ed25519;
  pk=dFhv9yPC8egZglsSLDMls08cOvZKZkG6QQn1a/ofwNU=
-X-Proofpoint-ORIG-GUID: LSkTcK7Zm05qfNtTlH3JZ5tdUcJ5EaTY
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDEyMSBTYWx0ZWRfX99HdxZXesQZV
- GTouxe4luoA14zOHVO4ZafxPcfzRDa3pj6WeWmXaPCmpuXySmQGsQw7/PWphM62/Bw/uWTQyqI/
- VEqrjQEmefJ3fkbSAUVr9BUTomYkRLcEhYSY1LmpNNNCpuJsQbhGjHhEb9hQ2nMLBepzTUdofBy
- Tfq53CkAb2zH7CaAlHpq4BSwoUcGjTQdp0/1RRH1lwaFMXBqTvQyl46wKioAjxrSDPTfj2yQvPr
- U7MpvScio9tPomhPgqd3TODSoG/JbbxP+ZDosJaXKP21H/QOHh1DC+99MZES+/eQzHyiWDs8RH7
- 4SbTz8QIb+rioQT5wn0a2n9nfc28s1uxPYyUbQnfCI4Bo06RqWIob0sd1IE1aamjtVKnEsweXI9
- w6p538GFi49Gm8AEUjVzdm6iM6xrz26v2Lft9Ydm0wfIZsScbeTzu8kjavMRo8uhmV6dGlu/mPk
- HrB+pyJSwfglSrqcm2A==
-X-Authority-Analysis: v=2.4 cv=RPmD2Yi+ c=1 sm=1 tr=0 ts=6a5dfe95 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDEyMSBTYWx0ZWRfXzCDJQ2Dp3Tu/
+ hFEyf1JwIeR2uRG4FU+a4/aaiLHz6phwWLcv2UgX53vhCLcmrFKIKZjNHCUmGVQo+lpNUMkuj75
+ jmnNrwKotL9TW4CDwUg65GvGHISKT4w=
+X-Authority-Analysis: v=2.4 cv=LK9WhpW9 c=1 sm=1 tr=0 ts=6a5dfe9a cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=2ye8FTLVYv3UXimjSTIA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-GUID: LSkTcK7Zm05qfNtTlH3JZ5tdUcJ5EaTY
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDEyMSBTYWx0ZWRfXwladLKYmh9cH
- dlg+N2+s9seZ+g1G2aGI9fXMGWoanCh1bdZK9OWsy0RDpeV/Y2KG1+u61Op88sMsZMfWoFx+vra
- 5wu9R7xvcfIvnAty/0u961mjsDsGPog=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=srU4aMJgQ0IWwv6as9EA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-ORIG-GUID: 9drt8qlrHo8y-6sRxH58pQdQ34BLYWPf
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDEyMSBTYWx0ZWRfX0NNOsN15YI9z
+ FT8+hJrZJPtFXPeNxAJau5Sj++uoyFvKJ4o5KKsQCktFN3d6P9tSkPPcmlJqSbEfBeNQAN+o4GN
+ OaAYc3AUK2Riu8HiphJK8cerNHLOEOmrrsatMs1LJDUKKU+JIMH92zWvnwingjyHRC9/st5eyra
+ kvC6sc1+yMK8AbRBk/T2h2dOPjseK79nUa1AjkTlDxnTu1T5PHbFzV205abik6DKp0nwXMsRMhS
+ dRD3ZJqLjBMJJx0/jUilGtRT/ctrglCBhx5l+U/LLW/6yJC+JBphqU3ZiTEChln6Co6XCZhqvJg
+ UqabuXglxIn/WfE3y7tFAo3jcKyEduQ1D9JsSJ/2nY7p5N2nHL1wN5wIHy0BMgbKhKWp8tUoBgh
+ QlogiPn3TAXDM1F3KBBbthjXN+fodYWJD8FPWI/C7AKqVM6iAAWV785svar2VwxotkhuC08iJ6J
+ vVX5+pDksGycKgbZpYA==
+X-Proofpoint-GUID: 9drt8qlrHo8y-6sRxH58pQdQ34BLYWPf
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-20_02,2026-07-17_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 impostorscore=0 clxscore=1015 priorityscore=1501
- lowpriorityscore=0 spamscore=0 bulkscore=0 malwarescore=0 adultscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607200121
+ priorityscore=1501 bulkscore=0 phishscore=0 clxscore=1015 malwarescore=0
+ suspectscore=0 impostorscore=0 lowpriorityscore=0 spamscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200121
 
-The rpm_pm2250_regulators table hardcodes supply parent name strings
-in the regulator descriptor, causing the Linux regulator framework to
-look up and vote on parent supplies from APPS. This is both unnecessary
-and incorrect for RPM-managed regulators.
+The qrb2210-arduino-imola and qrb2210-rb1 DTS files used coarsely
+grouped supply parent names that do not reflect the actual physical
+pin connections on the PM4125 PMIC. Since supply rail connections
+to PMIC pins are fixed in hardware, these grouped names were
+inaccurate descriptions of the hardware topology.
 
-On RPM-based platforms, the parent-child supply relationships are
-managed entirely by the RPM firmware. The RPM ensures that parent
-rails are maintained at the correct voltage with appropriate headroom,
-based on all active child rail votes across all subsystems. No explicit
-parent supply vote from APPS is required.
-
-Furthermore, the supply rail connections to PMIC pins are fixed in
-hardware. The previously hardcoded supply name strings were inaccurate
-and did not reflect the actual physical pin connections on PM2250-based
-platforms. The correct supply relationships are to be described in the
-Device Tree, not hardcoded in the driver.
-
-To avoid unnecessary APPS-side parent supply access while still
-allowing correct hardware topology to be described in DT, set the
-supply name field to NULL in the regulator descriptor.
+Replace them with the correct per-group supply properties matching
+the actual PM4125 pin connections, and align with the companion
+driver change that sets supply names to NULL in the qcom_smd-regulator
+descriptor so that the correct supply topology is captured in DT.
 
 Signed-off-by: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
 ---
- drivers/regulator/qcom_smd-regulator.c | 52 +++++++++++++++++-----------------
- 1 file changed, 26 insertions(+), 26 deletions(-)
+ arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts | 13 ++++++++++---
+ arch/arm64/boot/dts/qcom/qrb2210-rb1.dts           | 13 ++++++++++---
+ 2 files changed, 20 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/regulator/qcom_smd-regulator.c b/drivers/regulator/qcom_smd-regulator.c
-index 23ed594b574e..aed01f18af4a 100644
---- a/drivers/regulator/qcom_smd-regulator.c
-+++ b/drivers/regulator/qcom_smd-regulator.c
-@@ -800,32 +800,32 @@ static const struct rpm_regulator_data rpm_mp5496_regulators[] = {
- };
+diff --git a/arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts b/arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts
+index c472e13fceca..90e6eb284a66 100644
+--- a/arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts
++++ b/arch/arm64/boot/dts/qcom/qrb2210-arduino-imola.dts
+@@ -262,9 +262,16 @@ regulators {
+ 		compatible = "qcom,rpm-pm2250-regulators";
+ 		vdd_s3-supply = <&vph_pwr>;
+ 		vdd_s4-supply = <&vph_pwr>;
+-		vdd_l1_l2_l3_l5_l6_l7_l8_l9_l10_l11_l12-supply = <&pm4125_s3>;
+-		vdd_l4_l17_l18_l19_l20_l21_l22-supply = <&vph_pwr>;
+-		vdd_l13_l14_l15_l16-supply = <&pm4125_s4>;
++		vdd_l1-supply =  <&pm4125_s3>;
++		vdd_l2_l3-supply =  <&pm4125_s3>;
++		vdd_l5_l6_l7_l11_l12-supply =  <&pm4125_s3>;
++		vdd_l8_l9-supply =  <&pm4125_s3>;
++		vdd_l10-supply =  <&pm4125_s3>;
++		vdd_l13_l14-supply =  <&pm4125_s4>;
++		vdd_l15_l16-supply =  <&pm4125_s4>;
++		vdd_l17_l22-supply = <&vph_pwr>;
++		vdd_l18_l19-supply = <&vph_pwr>;
++		vdd_l4_l20_l21-supply = <&vph_pwr>;
  
- static const struct rpm_regulator_data rpm_pm2250_regulators[] = {
--	{ "s1", QCOM_SMD_RPM_SMPA, 1, &pm2250_lvftsmps, "vdd_s1" },
--	{ "s2", QCOM_SMD_RPM_SMPA, 2, &pm2250_lvftsmps, "vdd_s2" },
--	{ "s3", QCOM_SMD_RPM_SMPA, 3, &pm2250_lvftsmps, "vdd_s3" },
--	{ "s4", QCOM_SMD_RPM_SMPA, 4, &pm2250_ftsmps, "vdd_s4" },
--	{ "l1", QCOM_SMD_RPM_LDOA, 1, &pm660_nldo660, "vdd_l1_l2_l3_l5_l6_l7_l8_l9_l10_l11_l12" },
--	{ "l2", QCOM_SMD_RPM_LDOA, 2, &pm660_nldo660, "vdd_l1_l2_l3_l5_l6_l7_l8_l9_l10_l11_l12" },
--	{ "l3", QCOM_SMD_RPM_LDOA, 3, &pm660_nldo660, "vdd_l1_l2_l3_l5_l6_l7_l8_l9_l10_l11_l12" },
--	{ "l4", QCOM_SMD_RPM_LDOA, 4, &pm660_pldo660, "vdd_l4_l17_l18_l19_l20_l21_l22" },
--	{ "l5", QCOM_SMD_RPM_LDOA, 5, &pm660_nldo660, "vdd_l1_l2_l3_l5_l6_l7_l8_l9_l10_l11_l12" },
--	{ "l6", QCOM_SMD_RPM_LDOA, 6, &pm660_nldo660, "vdd_l1_l2_l3_l5_l6_l7_l8_l9_l10_l11_l12" },
--	{ "l7", QCOM_SMD_RPM_LDOA, 7, &pm660_nldo660, "vdd_l1_l2_l3_l5_l6_l7_l8_l9_l10_l11_l12" },
--	{ "l8", QCOM_SMD_RPM_LDOA, 8, &pm660_nldo660, "vdd_l1_l2_l3_l5_l6_l7_l8_l9_l10_l11_l12" },
--	{ "l9", QCOM_SMD_RPM_LDOA, 9, &pm660_nldo660, "vdd_l1_l2_l3_l5_l6_l7_l8_l9_l10_l11_l12" },
--	{ "l10", QCOM_SMD_RPM_LDOA, 10, &pm660_nldo660, "vdd_l1_l2_l3_l5_l6_l7_l8_l9_l10_l11_l12" },
--	{ "l11", QCOM_SMD_RPM_LDOA, 11, &pm660_nldo660, "vdd_l1_l2_l3_l5_l6_l7_l8_l9_l10_l11_l12" },
--	{ "l12", QCOM_SMD_RPM_LDOA, 12, &pm660_nldo660, "vdd_l1_l2_l3_l5_l6_l7_l8_l9_l10_l11_l12" },
--	{ "l13", QCOM_SMD_RPM_LDOA, 13, &pm660_ht_lvpldo, "vdd_l13_l14_l15_l16" },
--	{ "l14", QCOM_SMD_RPM_LDOA, 14, &pm660_ht_lvpldo, "vdd_l13_l14_l15_l16" },
--	{ "l15", QCOM_SMD_RPM_LDOA, 15, &pm660_ht_lvpldo, "vdd_l13_l14_l15_l16" },
--	{ "l16", QCOM_SMD_RPM_LDOA, 16, &pm660_ht_lvpldo, "vdd_l13_l14_l15_l16" },
--	{ "l17", QCOM_SMD_RPM_LDOA, 17, &pm660_pldo660, "vdd_l4_l17_l18_l19_l20_l21_l22" },
--	{ "l18", QCOM_SMD_RPM_LDOA, 18, &pm660_pldo660, "vdd_l4_l17_l18_l19_l20_l21_l22" },
--	{ "l19", QCOM_SMD_RPM_LDOA, 19, &pm660_pldo660, "vdd_l4_l17_l18_l19_l20_l21_l22" },
--	{ "l20", QCOM_SMD_RPM_LDOA, 20, &pm660_pldo660, "vdd_l4_l17_l18_l19_l20_l21_l22" },
--	{ "l21", QCOM_SMD_RPM_LDOA, 21, &pm660_pldo660, "vdd_l4_l17_l18_l19_l20_l21_l22" },
--	{ "l22", QCOM_SMD_RPM_LDOA, 22, &pm660_pldo660, "vdd_l4_l17_l18_l19_l20_l21_l22" },
-+	{ "s1", QCOM_SMD_RPM_SMPA, 1, &pm2250_lvftsmps, NULL },
-+	{ "s2", QCOM_SMD_RPM_SMPA, 2, &pm2250_lvftsmps, NULL },
-+	{ "s3", QCOM_SMD_RPM_SMPA, 3, &pm2250_lvftsmps, NULL },
-+	{ "s4", QCOM_SMD_RPM_SMPA, 4, &pm2250_ftsmps, NULL },
-+	{ "l1", QCOM_SMD_RPM_LDOA, 1, &pm660_nldo660, NULL },
-+	{ "l2", QCOM_SMD_RPM_LDOA, 2, &pm660_nldo660, NULL },
-+	{ "l3", QCOM_SMD_RPM_LDOA, 3, &pm660_nldo660, NULL },
-+	{ "l4", QCOM_SMD_RPM_LDOA, 4, &pm660_pldo660, NULL },
-+	{ "l5", QCOM_SMD_RPM_LDOA, 5, &pm660_nldo660, NULL },
-+	{ "l6", QCOM_SMD_RPM_LDOA, 6, &pm660_nldo660, NULL },
-+	{ "l7", QCOM_SMD_RPM_LDOA, 7, &pm660_nldo660, NULL },
-+	{ "l8", QCOM_SMD_RPM_LDOA, 8, &pm660_nldo660, NULL },
-+	{ "l9", QCOM_SMD_RPM_LDOA, 9, &pm660_nldo660, NULL },
-+	{ "l10", QCOM_SMD_RPM_LDOA, 10, &pm660_nldo660, NULL },
-+	{ "l11", QCOM_SMD_RPM_LDOA, 11, &pm660_nldo660, NULL },
-+	{ "l12", QCOM_SMD_RPM_LDOA, 12, &pm660_nldo660, NULL },
-+	{ "l13", QCOM_SMD_RPM_LDOA, 13, &pm660_ht_lvpldo, NULL },
-+	{ "l14", QCOM_SMD_RPM_LDOA, 14, &pm660_ht_lvpldo, NULL },
-+	{ "l15", QCOM_SMD_RPM_LDOA, 15, &pm660_ht_lvpldo, NULL },
-+	{ "l16", QCOM_SMD_RPM_LDOA, 16, &pm660_ht_lvpldo, NULL },
-+	{ "l17", QCOM_SMD_RPM_LDOA, 17, &pm660_pldo660, NULL },
-+	{ "l18", QCOM_SMD_RPM_LDOA, 18, &pm660_pldo660, NULL },
-+	{ "l19", QCOM_SMD_RPM_LDOA, 19, &pm660_pldo660, NULL },
-+	{ "l20", QCOM_SMD_RPM_LDOA, 20, &pm660_pldo660, NULL },
-+	{ "l21", QCOM_SMD_RPM_LDOA, 21, &pm660_pldo660, NULL },
-+	{ "l22", QCOM_SMD_RPM_LDOA, 22, &pm660_pldo660, NULL },
- 	{}
- };
+ 		pm4125_s3: s3 {
+ 			/* 0.4V-1.6625V -> 1.3V (Power tree requirements) */
+diff --git a/arch/arm64/boot/dts/qcom/qrb2210-rb1.dts b/arch/arm64/boot/dts/qcom/qrb2210-rb1.dts
+index bf6fb12ad990..3432022274d8 100644
+--- a/arch/arm64/boot/dts/qcom/qrb2210-rb1.dts
++++ b/arch/arm64/boot/dts/qcom/qrb2210-rb1.dts
+@@ -465,9 +465,16 @@ regulators {
+ 		compatible = "qcom,rpm-pm2250-regulators";
+ 		vdd_s3-supply = <&vph_pwr>;
+ 		vdd_s4-supply = <&vph_pwr>;
+-		vdd_l1_l2_l3_l5_l6_l7_l8_l9_l10_l11_l12-supply = <&pm4125_s3>;
+-		vdd_l4_l17_l18_l19_l20_l21_l22-supply = <&vph_pwr>;
+-		vdd_l13_l14_l15_l16-supply = <&pm4125_s4>;
++		vdd_l1-supply =  <&pm4125_s3>;
++		vdd_l2_l3-supply =  <&pm4125_s3>;
++		vdd_l5_l6_l7_l11_l12-supply =  <&pm4125_s3>;
++		vdd_l8_l9-supply =  <&pm4125_s3>;
++		vdd_l10-supply =  <&pm4125_s3>;
++		vdd_l13_l14-supply =  <&pm4125_s4>;
++		vdd_l15_l16-supply =  <&pm4125_s4>;
++		vdd_l17_l22-supply = <&vph_pwr>;
++		vdd_l18_l19-supply = <&vph_pwr>;
++		vdd_l4_l20_l21-supply = <&vph_pwr>;
  
+ 		/*
+ 		 * S1 - VDD_APC
 
 -- 
 2.34.1
