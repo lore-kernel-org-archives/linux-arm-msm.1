@@ -1,233 +1,188 @@
-Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7A6B3ED3CF
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 11:41:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.97.179.56
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 944C83ED3CF
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 11:41:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784547685; cv=none; b=gGH9X/4Xn5PFW9kmH4LlyrcxbyUmTdBiHVIR2XBsWIoT35QfL8N6SOB1+9bRydFSkHTL/lKM6hLQTvCOdo4Bnd9Ke22C1E8MCnsI++aWsbjBlv6JfRTzAN7R9DoPxaR8VJJHDVdTLAEU44zt6+8vSNd7/8QZa4GDFPQ+DgslAIc=
+	t=1784547695; cv=none; b=cgA6FNb6SXfzKFMJ7QqeevfDOjXhnf24bJ93k+Ur0jVzF7spGTJQxj8VFch9a73m8+tFYenn60SaiNvz5HflBQJfZDLKXBD9Sz/++nqRIu3ukmWMkmWRjoG4OLsiKMYbBVwq8Oo5vNjqryMT0RgkcH6oIGKLcuG1mY0SPgHeoVY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784547685; c=relaxed/simple;
-	bh=Lmf0CEuaJ+os2hI3OvLkJHTKEvqg4V1uEwA3el0E/tY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=tCJem3Tda0S9Pc6WLb/Og4VDaRsfUQdiFGKJsY+wIezMf31sEY3wK6CdFtaAGf/e7AAvyzQllM2rfpCkENLGWcFCsnSzx8RX6GPZdugHvEvdBpnmFWR5zOQnnMmJzeb/bCD6W7VA+zf7bK7dppPVjR6EkuzkS+DzFp1ZU4ZfHeY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com; spf=pass smtp.mailfrom=igalia.com; dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b=le2Q1rpx; arc=none smtp.client-ip=213.97.179.56
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=igalia.com
+	s=arc-20240116; t=1784547695; c=relaxed/simple;
+	bh=y/JvSyMfS8L7pvQPfF1HhGAMSKax9xThh+ckULgHJIs=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=uOQ+G2ZjMXpEOVQkJWjb7uUJT575fiBWdbJ2aD8bu7uP7q0ps+ZhEMcd8pjrLblkIbJSo0H/JkDNNiOYk3FrRI2vEnrBIuxBSdYuHAat4c5bjr7z0zXD9PZ0AWZIlNPrqqB+COFXIc3PtJTEnu9uLfqxgyYRjNkHYdX061grZ5E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fqy/+PLC; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=i3ZzxVJU; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b="le2Q1rpx"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Content-Transfer-Encoding:Content-Type:From:Cc:To:Subject:
-	MIME-Version:Date:Message-ID:From:Reply-To;
-	bh=rn3Y3zgMY2rgzd2WztSEgoxVCDU9RsYZyCv6ebpmYOk=; b=le2Q1rpxZBcZKpFurI3wIWYtnV
-	rzLhcbDoQb6n8NQA1Au03VyOPFUYOGXb7eAAh2vPssyH+oo7AeF2iekKhDXQ9NG67yfWfxotclZd7
-	R0G0PEw4vFW+Wnt362E5FxNE2qSh83KPCvjyEAN3blt+3OrJSpQXhZgV2bQoy4FzBfgECJGM/01rF
-	YDfbK4x5hvptpZQyfmjcm9i1E5y9c9ad7THGSTwRnZ9C/K2dMido8RKJG0NGhEwAmQPSZCucPB4t4
-	2fZMjoRpR6UsSG7LeCkwVF0KEZPe3VhAzEmRmsqjDlHUGFWR9vXwLD4bvHfVyf+FFPHGuO8x/xAKG
-	lcTAevTw==;
-Received: from 100.red-79-144-92.dynamicip.rima-tde.net ([79.144.92.100] helo=[192.168.1.202])
-	by fanzine2.igalia.com with esmtpsa 
-	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_128_GCM:128) (Exim)
-	id 1wlmMb-00137N-7n; Mon, 20 Jul 2026 13:40:49 +0200
-Message-ID: <1a4b98e8-18d5-4a53-bbe6-01a7d888b14f@igalia.com>
-Date: Mon, 20 Jul 2026 13:40:47 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fqy/+PLC";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="i3ZzxVJU"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66KAw2kc2377635
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 11:41:30 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=zfqwD3OQO+OV4T/Qmssm03
+	QpfKhp6DK+NHYzB3nuAdE=; b=fqy/+PLCAleK8pfag1RTyxNNo1suB4w0QMATCe
+	TwlyEfvFVVMTfVh5bv11g7BJHPNMd7jDzaTqINCvtWW5PTN7iRG8u208d8z7fYBo
+	0v/HOJtAlfPfV9uHD8aNb5STgddWtgNpgsu9aLwKRQoATRXiWza/bA1XEc15HpJS
+	P5O5EhmkZF8WpMl8L/OGy3iETlr+OOcPrv55uT1wLOiKsenHkmNY0SecaoaDN4ce
+	3XJ+A/6aPhr6sGgGE16OMvVIlR1pY4xqx/+0rLqtBm6nSXGggBVO04qvbE/zwhYT
+	lTKRB0aXejS47XKRKJzeTG1powkCAT7Mko7P3Mxx9XguosMQ==
+Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhgre8pe4-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 11:41:30 +0000 (GMT)
+Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-8482b95574dso12932537b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 04:41:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784547689; x=1785152489; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=zfqwD3OQO+OV4T/Qmssm03QpfKhp6DK+NHYzB3nuAdE=;
+        b=i3ZzxVJUQj6Es6delEC12fX292UeLpzV5thwPoK6bgFAIyPJkLaJR9EY+nt+ISga2R
+         fWMU19Pl46LaQlP89p6WGO9KfVITdU4KbH3UcOePZ/WjGyopMiccmmqBSaAi049O6ZV4
+         g7DtbpuWB+IFrSvmANLdWp9/REg3fGRylewRIIb3KcFsh4VlB8EPqo9ZNW+uzdEQNNhT
+         WRaFp70TeUNq9wiJpoaG42oWhdYke3N3CNpoD4AUqm0/HO7kfkxP3MZ8x5mApShsdN+t
+         /ULyuDaWbjAeejQJOyyfLY/KTWoKYlpWZzgKerP4uRp9/Az5mvNlmTfSVFHEoJ2jLgBn
+         onKw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784547689; x=1785152489;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=zfqwD3OQO+OV4T/Qmssm03QpfKhp6DK+NHYzB3nuAdE=;
+        b=sVfwmy9jpXSWUOPL7dRbNlMjezJ1ympvSeskUjysKzdngFET6b+GK0QNithK3pRZgc
+         Rh6t2jfKGYcxBO4J04q8AgAW56ZhQo/kQiYJqQBKvSHlO2pZOQOQQ/VU1z/pwSiMk7Md
+         ddUzt/FuRe20hotnGQ1czNDtZSvwBNa9HxHBhpciPgVhU0e6/jkUeXXjAU6UA5C31HuT
+         RXNe/BxW76s/DbTvQUsnjN/Hysc+GBnhywyaNd4FkLsjPudxMvmLg3Bp6tyDWw9tZQq/
+         J43ZDPSsjNKbcEQ/PmQTAe7JE2W4yf94xSvhrdqmQuadIMtvt7XTXHSvknl0JFMl7Dm6
+         4pFw==
+X-Forwarded-Encrypted: i=1; AHgh+RoKUfUo1QOkGuyIpjEHKW7q+wYtTVD/uR4yJ7BnVf5oIJgzJoDed4sRNtV8h6RWs/qMagjAPvUSxTdegK7q@vger.kernel.org
+X-Gm-Message-State: AOJu0YzQ28ESHdVWxOwwXyLOfMgO6C5NhbDMgEKjRXMnkjiniM39CSl+
+	eRrUzrdfWKQZfvleUUlfJFczJrO5eDfSnj7kv5sv5yDhRWJyZUtzuIEIfoKxfYyXd5IeKa99vcv
+	WDDDYc6Dr0CBdacpR+2rX+ZBgNgwkdDDSmdwjYD7kejfV7M6RdFCx8J7UT2bOKh3Idw+nZgGUgd
+	Fo
+X-Gm-Gg: AfdE7ck5EHM588lpxWjfYDmYdObHXt6XqSE0sESA/IQmaikCIMzDTxe6rk/h6CIoMOp
+	pCKKEG+qrPvKGFyDLfoIlnLei+XTHbitHQTy3FSIefZUtTrWD/02uzIgPSB8XyiuHYjXFBwdJ9T
+	ZepI4X2WGjRpJbXFO1Gid0f2k9axSjBzbX17XIhkyIZAy5nMPhx/STw7bnMvhLThy3hMpSV+mlU
+	PGoH778Nv4ZF5JsgI5HSC3z/toql9id/VI6R+apJEnOU3cdVbSUvgMgwFKz78j76Js8zCxfEhUe
+	eCUYOgv9Sn1KVzL22mNZ4wpGtVEqZGsG50QPMJjGiTpU4+cKM44ODioQ6a6T4O68m2/fIb9oWoq
+	yUrN6fQqlLTXuh7GT3fH9vdISpSwfB0zleDU=
+X-Received: by 2002:a05:6a00:1d98:b0:848:57f3:8f99 with SMTP id d2e1a72fcca58-84c2953e769mr13863156b3a.56.1784547689104;
+        Mon, 20 Jul 2026 04:41:29 -0700 (PDT)
+X-Received: by 2002:a05:6a00:1d98:b0:848:57f3:8f99 with SMTP id d2e1a72fcca58-84c2953e769mr13863118b3a.56.1784547688558;
+        Mon, 20 Jul 2026 04:41:28 -0700 (PDT)
+Received: from hu-arandive-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84c2adfdfe9sm5450701b3a.27.2026.07.20.04.41.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 20 Jul 2026 04:41:28 -0700 (PDT)
+From: Aniket Randive <aniket.randive@oss.qualcomm.com>
+Subject: [PATCH v6 0/2] i2c: Add dynamic transfer timeout based on message
+ length and frequency
+Date: Mon, 20 Jul 2026 17:11:18 +0530
+Message-Id: <20260720-master-v6-0-671261b05c61@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/7] drm/atomic: reject colorop update from inactive
- color pipeline
-To: John Harrison <John.Harrison@Igalia.com>, airlied@gmail.com,
- alexander.deucher@amd.com, alex.hung@amd.com, aurabindo.pillai@amd.com,
- christian.koenig@amd.com, contact@emersion.fr, daniels@collabora.com,
- harry.wentland@amd.com, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, simona@ffwll.ch, siqueira@igalia.com,
- sunpeng.li@amd.com, tzimmermann@suse.de
-Cc: Uma Shankar <uma.shankar@intel.com>,
- Chaitanya Kumar Borah <chaitanya.kumar.borah@intel.com>,
- Xaver Hugl <xaver.hugl@kde.org>,
- Pekka Paalanen <pekka.paalanen@collabora.com>,
- Louis Chauvet <louis.chauvet@bootlin.com>,
- Matthew Schwartz <matthew.schwartz@linux.dev>,
- amd-gfx@lists.freedesktop.org, kernel-dev@igalia.com,
- Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
- <lumag@kernel.org>, Sean Paul <sean@poorly.run>,
- Marijn Suijten <marijn.suijten@somainline.org>,
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
- intel-xe@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org
-References: <20260609121230.1358786-1-mwen@igalia.com>
- <20260609121230.1358786-3-mwen@igalia.com>
- <2a1ea63b-646e-4064-bb60-982b6b027c75@Igalia.com>
-Content-Language: en-US
-From: Melissa Wen <mwen@igalia.com>
-In-Reply-To: <2a1ea63b-646e-4064-bb60-982b6b027c75@Igalia.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAF4JXmoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyzHQUlJIzE
+ vPSU3UzU4B8JSMDIzMDc0Mz3dzE4pLUIt0085REU/Nkc1Mjy0QloOKCotS0zAqwQdGxEH5xaVJ
+ WanIJSLdSbS0AEbRr7WoAAAA=
+X-Change-ID: 20260716-master-f7da57c7529a
+To: Andi Shyti <andi.shyti@kernel.org>,
+        Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
+Cc: linux-i2c@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        Aniket Randive <aniket.randive@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784547685; l=2334;
+ i=aniket.randive@oss.qualcomm.com; s=20260325; h=from:subject:message-id;
+ bh=y/JvSyMfS8L7pvQPfF1HhGAMSKax9xThh+ckULgHJIs=;
+ b=/799jFacbkGkI516x+646eXmAnUPkd9DiK61RXaF4ScfwRZzTVIZZ7T5nMBIyTPe1bJyr/Ztf
+ CzroIF+MTayDsFCYXsGbJsLYDMKKNOXUo5luKDlOii8XIYJj930UfEd
+X-Developer-Key: i=aniket.randive@oss.qualcomm.com; a=ed25519;
+ pk=4o37X1ZqGbCO/T2SR8kq/HnWvq0yb1RUlFuNukovbQk=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDEyOSBTYWx0ZWRfX0+/vwL3P1avs
+ ACo8ZfchHNMTm8XGVvEzpbbXtmFDxHmJ1o+HHlKpmqbyZb3Ev+IoJcT1MDuST2Y6h7zBUel99DD
+ eaei6SYpPp5S1PDKtIdxuXSGBAVz8fs=
+X-Proofpoint-GUID: JqR1TW-z4YBTi0YdDnb4mUAZL0zZWpSC
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDEyOSBTYWx0ZWRfXyXZ+1FTtuNUH
+ l0VMVU4xB4b1luJLoc6to8MgBTupCErHowyv7DhiHdam1LtFvDxqk5cni4tz8D6RN12yEFA91/F
+ S8x4pg86eg9T5BsUX3lqpg3rK23eCAGTwO1YvPVC8J09RYA4E9Zca+lXm9OYtcuehbcqk10EHig
+ cTEtRximRBr0M0H01PnzOxzHNvxItnIT5hynwA8tZEl4zBZlTJzcYZJdYZY37smqVz4Wqwf9PQ4
+ xgJC6E5fFYj1jHKPP5jsh/kN0PsStx5Vq3VtATj2BPgkSWLVvO3+YpIXbKolE6ZcVnaWVSuPmgx
+ yRKo8bGgoLm/AmWM/dqGHElKFUJO9x9UK0bPOkK6wobZsqiKuKaUTFJ2Hoh3PhtPfjFoS7vtiD8
+ EDr9Gi8G7CiwoqcgDzIJ9miSAkrNtimb5TRcUGF3STego92UNQhDDQN+9FMeRBqajzPiCDOHmUs
+ +4jZM6F+iksxBM/eYCQ==
+X-Proofpoint-ORIG-GUID: JqR1TW-z4YBTi0YdDnb4mUAZL0zZWpSC
+X-Authority-Analysis: v=2.4 cv=foLsol4f c=1 sm=1 tr=0 ts=6a5e096a cx=c_pps
+ a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=dEJld19eDyxHv94P0sMA:9 a=QEXdDO2ut3YA:10
+ a=zc0IvFSfCIW2DFIPzwfm:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-20_02,2026-07-20_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 suspectscore=0 priorityscore=1501 spamscore=0 clxscore=1015
+ lowpriorityscore=0 bulkscore=0 malwarescore=0 adultscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200129
 
+The I2C core and most controller drivers use a static 1-second timeout
+for all transfers regardless of message length or bus frequency.  This
+causes unnecessarily long delays on error paths for short transfers, and
+may be tight for very long transfers at low bus frequencies.
 
+This series introduces a generic helper in i2c-core that computes a
+transfer-specific timeout and stores it in the standard adap->timeout
+field, making the dynamic value visible to the core retry loop in
+__i2c_transfer() as well as to the driver's own wait sites.
 
-On 26/06/2026 00:38, John Harrison wrote:
-> On 6/9/26 13:51, Melissa Wen wrote:
->> Only allow updates on colorops that are part of an active pipeline, i.e.
->> check if a colorop belongs to the color pipeline of a plane in its
->> current, new or old state. If not, reject the state change of this
->> inactive colorop. Performing this check later in drm_atomic_check_only()
->> to remove the ordering dependency that would exist if done at the time
->> of colorop property setting. Userspace is allowed to change colorops of
->> an active color pipeline, or when activating or deactivating its
->> pipeline in the same commit. However, changes in inactive color pipeline
->> is not allowed.
-> The last two sentences here seem to be a duplicate of the first two 
-> sentences. Maybe drop them as redundant?
+The helper accepts a safety coefficient and a minimum floor as parameters
+so each driver retains control over its own timing policy without those
+values becoming public API.
 
-Sure, I think I can explain it better.
-I was trying to say that we are changing this behavior on the kernel 
-side to align with userspace expectations.
+The second patch converts the Qualcomm GENI I2C controller to use this
+helper.  The 10x safety margin over the theoretical wire time and the
+300ms minimum floor (to budget for clock stretching) remain private to
+the qcom-geni driver.
 
->
->>
->> Suggested-by: Chaitanya Kumar Borah <chaitanya.kumar.borah@intel.com>
->> Signed-off-by: Melissa Wen <mwen@igalia.com>
->> ---
->>   drivers/gpu/drm/drm_atomic.c | 60 ++++++++++++++++++++++++++++++++++++
->>   1 file changed, 60 insertions(+)
->>
->> diff --git a/drivers/gpu/drm/drm_atomic.c b/drivers/gpu/drm/drm_atomic.c
->> index 464562861408..960b52624deb 100644
->> --- a/drivers/gpu/drm/drm_atomic.c
->> +++ b/drivers/gpu/drm/drm_atomic.c
->> @@ -943,6 +943,55 @@ drm_atomic_add_pipeline_colorops(struct 
->> drm_atomic_commit *state,
->>       return 0;
->>   }
->>   +/**
->> + * drm_atomic_colorop_check - check new colorop state
->> + * @new_colorop_state: new colorop state to check
->> + *
->> + * Ensure that the colorop in @new_colorop_state belongs to an 
->> active color
->> + * pipeline, i.e. it's in the chain of colorops set to the 
->> color_pipeline
->> + * property of current, old or new plane state.
->> + *
->> + * Returns: 0 on success, -EINVAL otherwise.
->> + */
->> +static int drm_atomic_colorop_check(const struct drm_colorop_state 
->> *new_colorop_state)
->> +{
->> +    struct drm_atomic_commit *state = new_colorop_state->state;
->> +    struct drm_plane *plane = new_colorop_state->colorop->plane;
->> +    struct drm_plane_state *new_plane_state, *old_plane_state;
->> +    struct drm_colorop *colorop;
->> +
->> +    new_plane_state = drm_atomic_get_new_plane_state(state, plane);
->> +    old_plane_state = drm_atomic_get_old_plane_state(state, plane);
->> +
->> +    /* No changes in the plane state. Check current-committed plane 
->> state */
->> +    if (!new_plane_state) {
->> +        for (colorop = plane->state->color_pipeline; colorop; 
->> colorop = colorop->next)
-> Doesn't the first patch add a macro for wrapping this for loop?
+Changes in v6:
+- Split into two patches: core helper + driver consumer
+- Moved timeout calculation to i2c-core as i2c_update_timeout(), which
+  writes directly into adap->timeout so all consumers of that field
+  (including the __i2c_transfer() retry loop) benefit automatically
+- Driver supplies safety coefficient and minimum floor as parameters,
+  keeping I2C_TIMEOUT_SAFETY_COEFFICIENT and I2C_TIMEOUT_MIN_USEC
+  internal to i2c-qcom-geni.c
+- Compute timeout once per batch in geni_i2c_xfer() using max message
+  length, all internal wait sites read adap->timeout directly
 
-Yes, thanks for pointing out. I'll replace all occurrences.
+Link: https://lore.kernel.org/r/20260715101805.3615166-1-aniket.randive@oss.qualcomm.com
 
->
->> +            if (colorop == new_colorop_state->colorop)
->> +                return 0;
->> +        return -EINVAL;
->> +    }
->> +
->> +    if (WARN_ON(!old_plane_state))
->> +        return -EINVAL;
->> +
->> +    /* Check if the colorop is active in the new plane state */
->> +    for (colorop = new_plane_state->color_pipeline; colorop; colorop 
->> = colorop->next)
->> +        if (colorop == new_colorop_state->colorop)
->> +            return 0;
->> +
->> +    /* Same color pipeline as new; no point walking old. Colorop 
->> isn't active */
->> +    if (new_plane_state->color_pipeline == 
->> old_plane_state->color_pipeline)
->> +        return -EINVAL;
->> +
->> +    /* Check if the colorop was active in the old plane state */
->> +    for (colorop = old_plane_state->color_pipeline; colorop; colorop 
->> = colorop->next)
->> +        if (colorop == new_colorop_state->colorop)
->> +            return 0;
-> Doesn't this situation count as changing the properties of an inactive 
-> colorop? And should therefore be rejected? The colorop was previously 
-> in use but once the commit goes through, it will not be. So any 
-> changes to its state will not actually affect the new post-commit 
-> universe. Or am I missing something?
+Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
+---
+Aniket Randive (2):
+      i2c: core: Add i2c_update_timeout() helper for dynamic transfer timeouts
+      i2c: qcom-geni: Add dynamic transfer timeout based on transfer length and frequency
 
-We still need it because the userspace is still allowed to change 
-colorops of a pipeline A that will be disable in the same commit. I 
-mean, they can change colorop settings of an active pipeline A and set 
-COLOR_PIPELINE to Bypass in the same commit, and this change have to 
-persist for the time this pipeline A will be reactivated, even if in 
-practice those colorop changes will not be programmed in the hw because 
-of deactivation. I'll add this comment to explain this contract better:
+ drivers/i2c/busses/i2c-qcom-geni.c | 37 +++++++++++++++++++++++++++++--------
+ drivers/i2c/i2c-core-base.c        | 24 ++++++++++++++++++++++++
+ include/linux/i2c.h                |  3 +++
+ 3 files changed, 56 insertions(+), 8 deletions(-)
+---
+base-commit: b8809969e1d7a591e0f49dd464a5d04b3cf02ab1
+change-id: 20260716-master-f7da57c7529a
 
-+ * Userspace is allowed to finalize colorop's settings in the same 
-commit that
-+ * deactivates its pipeline, and the changes should persist for when that
-+ * pipeline is reactivated later. So that, changes to colorop in the 
-old plane
-+ * state's pipeline is accepted even though it won't drive hardware 
-updates.
-
-WDYT?
-
-Melissa
-
->
-> John.
->
->> +
->> +    /* Colorop is not part of an active color pipeline. */
->> +    return -EINVAL;
->> +}
->> +
->>   static void drm_atomic_colorop_print_state(struct drm_printer *p,
->>                          const struct drm_colorop_state *state)
->>   {
->> @@ -1792,6 +1841,8 @@ int drm_atomic_check_only(struct 
->> drm_atomic_commit *state)
->>       struct drm_plane *plane;
->>       struct drm_plane_state *old_plane_state;
->>       struct drm_plane_state *new_plane_state;
->> +    struct drm_colorop *colorop;
->> +    struct drm_colorop_state *new_colorop_state;
->>       struct drm_crtc *crtc;
->>       struct drm_crtc_state *old_crtc_state;
->>       struct drm_crtc_state *new_crtc_state;
->> @@ -1808,6 +1859,15 @@ int drm_atomic_check_only(struct 
->> drm_atomic_commit *state)
->>               requested_crtc |= drm_crtc_mask(crtc);
->>       }
->>   +    for_each_new_colorop_in_state(state, colorop, 
->> new_colorop_state, i) {
->> +        ret = drm_atomic_colorop_check(new_colorop_state);
->> +        if (ret) {
->> +            drm_dbg_atomic(dev, "[COLOROP:%d:%d] isn't in an active 
->> color pipeline.\n",
->> +                       colorop->base.id, colorop->type);
->> +            return ret;
->> +        }
->> +    }
->> +
->>       for_each_oldnew_plane_in_state(state, plane, old_plane_state, 
->> new_plane_state, i) {
->>           ret = drm_atomic_plane_check(old_plane_state, 
->> new_plane_state);
->>           if (ret) {
->
+Best regards,
+--  
+Aniket Randive <aniket.randive@oss.qualcomm.com>
 
