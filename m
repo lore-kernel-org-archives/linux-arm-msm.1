@@ -1,88 +1,38 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BDDC3E16B0
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:51:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7CC1F3EA969;
+	Mon, 20 Jul 2026 10:53:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784544695; cv=none; b=hSrbC3omcxENtydu+oLgahSpzAdiSebQmY6dezdxaQUpfkIwg2sx9AJNzKkE7qWnay3eKueuAEAQwKhB9zKUyr6n15VgsqsUyd3FNexaq2cZ+L8qCdRRHBuRIu1qAbRPdTDjyxhTc5gxOv8HN+coRTapBVL3SHJZHuAEW1zWPfs=
+	t=1784544791; cv=none; b=YOHny8nnoj6+3uNTobWpxowLrJGECS1vjx4SzlSmu9c0QXIhixa6osa4zcr5WRpgvVN+wg8YS0pA0KV1zznhu8v4jvUQtFCxQZR4GptYo9wa8whZPdJxTpKBaPn5k+/XL9NA7N7RpcOoUkW7J1yhUEEG/k/DJnVGmtNjhHvnYsc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784544695; c=relaxed/simple;
-	bh=T4K516ZU2BbXYLkaeNtDalyURbfi0jD5ZPRSpldiMYc=;
+	s=arc-20240116; t=1784544791; c=relaxed/simple;
+	bh=hNwVQUiB4TxCZg9+bWXc5ja2eHvapQTgcxJaw6bkG/g=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=ps1oas5Y/NT9SF6BO/ietBXWNA/h1o1q3bCGSTe6olKS3tdY9E12WeHwv9U9UC5MKd67hxVcPw7mo8HQCX5apuh1SWm03LT9ppVRa0APpHWjAOxw7r45S11epcKVe7wDwsKwAnTHysQaho2VBX51vJ9xGcUl3VIr+LXEidaui3Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MvR617UC; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=AutF8uUZ; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:To:Cc; b=WbEV706yKS5XznD41Rq9lGNa4BKW8iBq4hLwZjDsieC4FBZDxm0BZmhUgyQ7d2eczdTm86VnPHcuNAuGHNVhF7O3WleIyqsBJqMi4feRepxe/gO83dA0Wv7IAzqm42Xdi1BmLq2Oky523U1DnlFe1Atd8J44Wo1oOVSkO704qd0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Yq6mtBnJ; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MvR617UC";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="AutF8uUZ"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66K9vXoh2403787
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:51:16 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	umdfl87xzpwmY/Tf6wpDlpAb1X9+CARwlvGQHoZRHqY=; b=MvR617UCdnxcFWDf
-	Cj40LmPrutPtkj1WoCXd8d7eLj+Kx8otuaigPPCCAhaod2NbZxe8mHq2P0xsmlPg
-	pQJNkpMDmgt18TGnfnnaljB80soQx6mZXOcskze7zC3or686nZLV/5zqcTwD8gXU
-	5FxXMpCUiwSJ15wVP1twDhFe2MQX8z4bqeOj9tYxljYB8jO8GGN2VY+C0FijpFaA
-	yt2/mHf/opx6CQPyv4Q32luL9x79Rm/lelv2XbuN/RGU9JXrcnVuENAUwOWNxvuZ
-	pQh4QvcnWV9cgrJhBpr1pSQAMQqo0OeHmGr2iMQKp/Bw7CHMlDJBfvNnGyooc7vW
-	rekW/w==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhfdcgtqt-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 10:51:16 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-c9151bf6ce7so10966238a12.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 03:51:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784544676; x=1785149476; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=umdfl87xzpwmY/Tf6wpDlpAb1X9+CARwlvGQHoZRHqY=;
-        b=AutF8uUZGiKjnMimwRWRRxG0h1+ZtnlZ3k3NkbgblD9W5xLbd9FMjuimqsBd7qO0yy
-         gZGOr8IeOoSWTBA6gTRCgJObifHWgwX/60KkbiTMRHxpXwAENndfczNbhNc7X2GPtsEs
-         SvEt/RkcKhXtitqUdJ9VVKrYAN2t8IawyFtCR3Kbwti2G3aRdT8PGAWrZdGzVDrtjZxz
-         ZHWoveftMAiPPUHC9FMOMRjnRsKvfjbfbTEKbZAeWzH0VdCYZm6TQRCGYQ2LpEiGY1yn
-         OXxo7fdP4BVxm5tm5+7KDCK/qyVe13bAcSyGsCUtFUhNRSZhe5H1/0Au0qsqWek5I10l
-         hfxA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784544676; x=1785149476;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=umdfl87xzpwmY/Tf6wpDlpAb1X9+CARwlvGQHoZRHqY=;
-        b=JGFKdYkVMsHUyPRxPDPR45S47eApAwR4mdxEwONu/xDgiKbjkSWK4qAx6aIF5Ed1HI
-         1L6M4WtSmb/E4ZgDSZXEyJAA1veHO5eE9XA9e9jgI+txxUbBlHKZ9ryWuB8gj7Cvz0vu
-         kKm1ugmuRQmdti8YAm6GFl5Y/BDuXK5bisoOM1sSlwALh64gMk0l9qye+gPVBb+kDpwr
-         /DRlCE0GYh48jdY5//L9OpS9g6mv5vJBBovJ2ASD9BojDr6Xx+zq3j3raD3Qys8eVfGO
-         V1HUMjctRb6OOLWCrhsRjAu2Mkz1qTkpbxU/Hr0kJbr6nOP5jE8W5Hmn6fUkgi0tGcZv
-         r7xg==
-X-Gm-Message-State: AOJu0YwYHXekkdiwdVOol6eGyfQ5q6d+B3nBkGmXbM0sZ4UoCcc3GXaH
-	pHu0Boh/22mntrww2jPwOQn1IBW/PlBJwC5dDArvSMy3jiw/TFP7eMZPxLPw33ZKG4buoP5eo03
-	hBqdSl/hq5lwerIVrf2nms6loCYkxejBMOlPfOC60PO6alPVKCHlvWAJO/mhAAcmjkJrQfNf1QS
-	/P
-X-Gm-Gg: AfdE7ckGHOggsCXgvkIlO3+r8WfYAKX7l1+Q7UjUVDZfKuxAFMU8ynPxLuc0+Tmxo7z
-	8BDxqnWklPpsM5vV62gl031wDJWnhXME6LoENhrREFZW8aZ+S6mhFvfLRcnxxvI1x944aCXcN18
-	pStURwak5Y3ZieYAM1N37I7jZORWHsgSVepYUv6bxdqxRP+cRpM/pe5jvJ0+PYAoSTNv5IfbsT9
-	ftN+OrEdb/WsBzgQK14O/UfjVDvZUgT/Ro1hZwpy0fcvSNdhk3EzVy8e2u5mWlk72TqJJF/KEWh
-	0ET0KUFRVA8AVSvhXi0LXahJh3x31gnjeI3PxVC7pfk2jMN1lKu6trZ0byJD7Udin93Qlnli+c8
-	RL3h9QATTswbur3Y=
-X-Received: by 2002:a05:6a20:6a0a:b0:3c3:8041:89f5 with SMTP id adf61e73a8af0-3c3ad9e597fmr16343058637.66.1784544676123;
-        Mon, 20 Jul 2026 03:51:16 -0700 (PDT)
-X-Received: by 2002:a05:6a20:6a0a:b0:3c3:8041:89f5 with SMTP id adf61e73a8af0-3c3ad9e597fmr16343026637.66.1784544675697;
-        Mon, 20 Jul 2026 03:51:15 -0700 (PDT)
-Received: from [10.213.101.118] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cb5159b11a5sm4343368a12.0.2026.07.20.03.51.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Jul 2026 03:51:15 -0700 (PDT)
-From: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
-Date: Mon, 20 Jul 2026 16:19:26 +0530
-Subject: [PATCH v7 10/10] arm64: dts: qcom: shikra: Add
- gpio-reserved-ranges to tlmm
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Yq6mtBnJ"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 5F605C2BCFA;
+	Mon, 20 Jul 2026 10:53:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1784544790;
+	bh=hNwVQUiB4TxCZg9+bWXc5ja2eHvapQTgcxJaw6bkG/g=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=Yq6mtBnJ+9phfOQAH0jUKP4CKbW5rsBp3W91snRAKBZ48EXG/DpZtmH7b5YVYYi27
+	 ljxwNqr7BGbilvJG4DKwqT9Mq5Sr202XcpSckuX46wn0UyuOkePie95zHZatC4IpxJ
+	 uUb5JCkiJyuOjMF9RMqWh7pB8/m5ouiKq4Mv2PF8R5YXWvQWMIwqKAyRWVcJt8QlgK
+	 kwVFu21I4lf6Xub6fFVAQBWSJfMhGWXUJkANpQnm8glDp3gShTPpcqA7W4DNilUfLY
+	 yNCvaJ8eOf/lMRm6Gp3ToMNYrbrU6bkA8eucXA6ftXzqW9vjET1zKsOv0SsDiwtq8+
+	 m982DNe7rYQaQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 3FF87C44520;
+	Mon, 20 Jul 2026 10:53:10 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Mon, 20 Jul 2026 12:53:07 +0200
+Subject: [PATCH v6 1/2] arm64: dts: qcom: sdm845-google: Add dual front
+ IMX355 cameras
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,103 +41,324 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260720-shikra-dt-m1-v7-10-7dc99100c6dd@oss.qualcomm.com>
-References: <20260720-shikra-dt-m1-v7-0-7dc99100c6dd@oss.qualcomm.com>
-In-Reply-To: <20260720-shikra-dt-m1-v7-0-7dc99100c6dd@oss.qualcomm.com>
-To: Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Georgi Djakov <djakov@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-pm@vger.kernel.org, Komal Bajaj <komal.bajaj@oss.qualcomm.com>,
-        Anurag Pateriya <apateriy@qti.qualcomm.com>
+Message-Id: <20260720-pixel3-camera-v6-1-afe419bef476@ixit.cz>
+References: <20260720-pixel3-camera-v6-0-afe419bef476@ixit.cz>
+In-Reply-To: <20260720-pixel3-camera-v6-0-afe419bef476@ixit.cz>
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Petr Hodina <petr.hodina@protonmail.com>, 
+ Richard Acayan <mailingradian@gmail.com>, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ phone-devel@vger.kernel.org, David Heidelberg <david@ixit.cz>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784544606; l=1696;
- i=komal.bajaj@oss.qualcomm.com; s=20250710; h=from:subject:message-id;
- bh=T4K516ZU2BbXYLkaeNtDalyURbfi0jD5ZPRSpldiMYc=;
- b=qsGKU+/59rSfQDVYTC8vMrA8F6oeuxnIYG1D9ZNYAQ/NnYb2z/kQwxUr45sqypbGIR/266aqX
- XdHK0xCmDfzCt2kvqfwhs/KAjyE9DJ1dLz73106ZnPq03ujp7L3yPx4
-X-Developer-Key: i=komal.bajaj@oss.qualcomm.com; a=ed25519;
- pk=wKh8mgDh+ePUZ4IIvpBhQOqf16/KvuQHvSvHK20LXNU=
-X-Proofpoint-ORIG-GUID: Gr_Ru_6pAWBcp3RjdntAsHkJF8aoocPM
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDEyMCBTYWx0ZWRfX1unTagrg8oEx
- /7/Y8JEjO0WtvEPjgQ6VmOO7WQcHTiWxF8weKMeV9HBSAVGCZyg7raiZsdalHUB6dIInV7MFnHM
- JOXxOKqhLQmgi08nDFw07ynZ6m9A64JDQZ5Ar3siG/GoAMWR5XoU0AuPRQ5zIyHxG74LCLXUeDP
- 8jll9vLcErHcWKjY8nzLBx/wMeRpOghWTStKiUfJ/u5toQHvMFjhM1fIJ8d6dCzdQm+rVIRla8S
- 2bMsMjJA4YgbgXMUFZMs+dzwcih8Oc+T2xaGSpuzcKVBTtUwpz124ezVD3fuVS9DI55vMqAI3Uo
- 0U6LjWiGCCeODvIewHNi53BsXE192aGuLDJuxdmDlY+zU+9vuamIhPNYQKQDsF/p0/niSAnVsGt
- 771XvYNbKmu2W1moBm8Tr/wz1P4+VAXvTOngZXrl3bwxei+u2TxnfHVNo5DZp2WAHNQgVO41ire
- v0ToVsaSpiXqcpuc+wg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDEyMCBTYWx0ZWRfX1xfrM2HP+BRE
- HpUrTxHHnImafRaPmdGaG1Oa0VQ/E4AwZn2wwojvdWe9O9tRyRYX0NTWx2lOHh3JybRmBRIhqSe
- 44q7RTvWm/cZ21YmKBTbj0oV5iRyAck=
-X-Proofpoint-GUID: Gr_Ru_6pAWBcp3RjdntAsHkJF8aoocPM
-X-Authority-Analysis: v=2.4 cv=bv58wkai c=1 sm=1 tr=0 ts=6a5dfda4 cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=kzPlCIsnF9mgv2CmAuUA:9 a=QEXdDO2ut3YA:10
- a=bFCP_H2QrGi7Okbo017w:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-20_02,2026-07-17_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 bulkscore=0 priorityscore=1501 spamscore=0 malwarescore=0
- phishscore=0 lowpriorityscore=0 clxscore=1015 suspectscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200120
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7003; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=hzWUGR5NhX43CvM85RMopYnoPfom41Awfwk4CCKP0w4=;
+ b=kA0DAAgBYAI/xNNJIHIByyZiAGpd/hSgzKMrx0msv0b+zwH8Afo9AALU7P9qzZTRJWlAHdQxW
+ YkCMwQAAQgAHRYhBNd6Cc/u3Cu9U6cEdGACP8TTSSByBQJqXf4UAAoJEGACP8TTSSByOE8QAJE5
+ LdhB/zEdCk55VxvSObg6hHMVELMQqJeGuoLmvUXR7J7iy9QIrfi2pmQ97qe3JRqdf2jRgWPzqbV
+ cddjayudsrz49l3OzRDun/dSMEfMfF0r3LrjqG/uiffZo1SJQfR75GP92ynu0aRKiAxfzztZ6+/
+ RnwiHxgLj2zL5L+Ey36bxxAbucA4T4AV/F8MN2HC85cFeRf7VKtfHURf9mOECGD8nfq0EdqE74r
+ 7VJRir5v3YxOs0p2ZZdjyI5pmIAo/lFYqkXnYbiTbaM8E0FMgJqI38Fc26tImOUEmQhO503ypCn
+ WwSmD3svPv3llqjB/kBFoeiR26QT4vW7bxlwkDgqkOC+i3wycNhLvmCFFaNLbz9A/TKv0ISbhK4
+ qozV7x4pFaQadqfQCXAyIe0+DLZJd3LYqOZgT5jyffSzeyMei7Xel3GddynA//Tq5Qq1MzldRtg
+ IHr0sYwM+yx8YNYrEJbSqLoJkWOiB6Q1HDtZCn58TeLXhVRSQ88yHwH82uBq+xtYngXYBvkP5yx
+ COfymAJvpDze/sKIXWWtjbZkauLMwh4nqWec4yxYUfxtTshup75/OZ4UaDuNAjyZOo9nYaZHKGu
+ EzLcYdc4pTxYCcexSbfxYTbwn/spvc8AIZaf/0edQ89vgaJvO6KIy6DoDAzqkNAPIGAFDuUdGlT
+ fijOd
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-Add gpio-reserved-ranges property to the TLMM node for both Shikra
-SoM variants (CQM and IQS). These reserved GPIOs are inaccessible
-from the non-secure world and dedicated to fixed functions.
+From: David Heidelberg <david@ixit.cz>
 
-Signed-off-by: Anurag Pateriya <apateriy@qti.qualcomm.com>
-Signed-off-by: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
+The Pixel 3 features two front-facing Sony IMX355 sensors with
+different focal lengths (standard and wide-angle).
+
+Sensors are connected via CSIPHY port 1 and 2 and controlled over CCI
+I2C1, using MCLK2 as the clock source.
+
+This enables support for the dual front camera configuration.
+
+Signed-off-by: David Heidelberg <david@ixit.cz>
 ---
- arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi | 6 ++++++
- arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi | 6 ++++++
- 2 files changed, 12 insertions(+)
+ arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi | 171 ++++++++++++++++++++-
+ 1 file changed, 170 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi b/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi
-index 2fff5fe9f6d2..8ac42ff625a0 100644
---- a/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi
-+++ b/arch/arm64/boot/dts/qcom/shikra-cqm-som.dtsi
-@@ -196,6 +196,12 @@ pm4125_l22: l22 {
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
+index 9368fd6b87515..267dcd6eddaee 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
+@@ -1,16 +1,17 @@
+ // SPDX-License-Identifier: GPL-2.0-only
+ 
+ /dts-v1/;
+ 
+ #include <dt-bindings/arm/qcom,ids.h>
+ #include <dt-bindings/dma/qcom-gpi.h>
+ #include <dt-bindings/input/linux-event-codes.h>
+ #include <dt-bindings/interrupt-controller/irq.h>
++#include <dt-bindings/media/video-interfaces.h>
+ #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
+ 
+ #include "sdm845.dtsi"
+ #include "pm8998.dtsi"
+ #include "pmi8998.dtsi"
+ 
+ /delete-node/ &mpss_region;
+ /delete-node/ &venus_mem;
+@@ -127,16 +128,48 @@ vreg_s4a_1p8: regulator-vreg-s4a-1p8 {
+ 		regulator-min-microvolt = <1800000>;
+ 		regulator-max-microvolt = <1800000>;
+ 		regulator-always-on;
+ 		regulator-boot-on;
+ 
+ 		vin-supply = <&vph_pwr>;
+ 	};
+ 
++	camera_front_avdd: regulator-front-cam-avdd {
++		compatible = "regulator-fixed";
++		regulator-name = "front_cam_avdd";
++
++		regulator-min-microvolt = <2800000>;
++		regulator-max-microvolt = <2800000>;
++
++		gpios = <&tlmm 8 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&cam_front_avdd_default>;
++		pinctrl-names = "default";
++
++		vin-supply = <&vreg_bob>;
++	};
++
++	camera_front_aux_avdd: regulator-front-cam-aux-avdd {
++		compatible = "regulator-fixed";
++		regulator-name = "front_cam_aux_avdd";
++
++		regulator-min-microvolt = <2800000>;
++		regulator-max-microvolt = <2800000>;
++
++		gpios = <&tlmm 14 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&cam_front_aux_avdd_default>;
++		pinctrl-names = "default";
++
++		vin-supply = <&vreg_bob>;
++	};
++
+ 	wcn3990-pmu {
+ 		compatible = "qcom,wcn3990-pmu";
+ 
+ 		vddio-supply = <&vreg_s4a_1p8>;
+ 		vddxo-supply = <&vreg_l7a_1p8>;
+ 		vddrf-supply = <&vreg_l17a_1p3>;
+ 		vddch0-supply = <&vreg_l25a_3p3>;
+ 
+@@ -314,16 +347,21 @@ vreg_l28a_3p0: ldo28 {
+ 			regulator-initial-mode = <RPMH_REGULATOR_MODE_LPM>;
+ 			regulator-boot-on;
+ 			/*
+ 			 * We can't properly bring the panel back if it gets turned off
+ 			 * so keep it's regulators always on for now.
+ 			 */
+ 			regulator-always-on;
+ 		};
++
++		vreg_lvs1_1p8: lvs1 {
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1800000>;
++		};
+ 	};
+ 
+ 	regulators-1 {
+ 		compatible = "qcom,pmi8998-rpmh-regulators";
+ 		qcom,pmic-id = "b";
+ 
+ 		vdd-bob-supply = <&vph_pwr>;
+ 
+@@ -346,24 +384,127 @@ regulators-2 {
+ 
+ 		vreg_s3c_0p6: smps3 {
+ 			regulator-min-microvolt = <600000>;
+ 			regulator-max-microvolt = <600000>;
+ 		};
+ 	};
  };
  
- &tlmm {
-+	gpio-reserved-ranges = <6 4>, /* Fingerprint SPI */
-+			       <14 4>, /* eSE SPI */
-+			       <30 2>, /* NFC SPI */
-+			       <138 1>, /* NFC Secure IO */
-+			       <155 11>; /* eMMC Boot */
++&camss {
++	vdda-phy-supply = <&vreg_l1a_0p875>;
++	vdda-pll-supply = <&vreg_l26a_1p2>;
 +
- 	sw_ctrl_default: sw-ctrl-default-state {
- 		pins = "gpio88";
- 		function = "gpio";
-diff --git a/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi b/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
-index 657a14ca9606..4ff97945274d 100644
---- a/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
-+++ b/arch/arm64/boot/dts/qcom/shikra-iqs-som.dtsi
-@@ -218,6 +218,12 @@ pm8150_l18: l18 {
++	/*
++	 * MCLK2 (GPIO15) is shared between both front camera sensors.
++	 * The clock is generated by CAMCC, therefore the pin is
++	 * configured here rather than in individual sensor nodes.
++	 */
++	pinctrl-0 = <&cam_mclk2_default>;
++	pinctrl-1 = <&cam_mclk2_sleep>;
++	pinctrl-names = "default", "sleep";
++
++	status = "okay";
++
++	ports {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		port@1 {
++			reg = <1>;
++
++			camss_endpoint1: endpoint {
++				bus-type = <MEDIA_BUS_TYPE_CSI2_DPHY>;
++				data-lanes = <0 1 2 3>;
++				remote-endpoint = <&cam_aux_front_endpoint>;
++			};
++		};
++
++		port@2 {
++			reg = <2>;
++
++			camss_endpoint2: endpoint {
++				bus-type = <MEDIA_BUS_TYPE_CSI2_DPHY>;
++				data-lanes = <0 1 2 3>;
++				remote-endpoint = <&cam_front_endpoint>;
++			};
++		};
++	};
++};
++
++&cci0_sleep {
++	/* bus has external pull-up */
++	/delete-property/ bias-pull-down;
++	bias-disable;
++};
++
+ &cci {
+ 	status = "okay";
  };
  
- &tlmm {
-+	 gpio-reserved-ranges = <6 4>, /* Fingerprint SPI */
-+			       <14 4>, /* eSE SPI */
-+			       <30 2>, /* NFC SPI */
-+			       <138 1>, /* NFC Secure IO */
-+			       <155 11>; /* eMMC Boot */
+ &cci_i2c1 {
+ 	/* actuator @0c */
+ 
+-	/* front camera, imx355 @1a */
++	front_cam: camera@10 {
++		compatible = "sony,imx355";
++		reg = <0x10>;
 +
- 	sw_ctrl_default: sw-ctrl-default-state {
- 		pins = "gpio88";
++		clocks = <&clock_camcc CAM_CC_MCLK2_CLK>;
++		assigned-clocks = <&clock_camcc CAM_CC_MCLK2_CLK>;
++		assigned-clock-rates = <24000000>;
++
++		reset-gpios = <&tlmm 21 GPIO_ACTIVE_LOW>;
++
++		avdd-supply = <&camera_front_avdd>;
++		dvdd-supply = <&vreg_s3a_1p35>;
++		dovdd-supply = <&vreg_lvs1_1p8>;
++
++		pinctrl-0 = <&cam_front_reset_default>;
++		pinctrl-names = "default";
++
++		rotation = <270>;
++		orientation = <0>;
++
++		port {
++			cam_front_endpoint: endpoint {
++				data-lanes = <1 2 3 4>;
++				link-frequencies = /bits/ 64 <360000000>;
++				remote-endpoint = <&camss_endpoint2>;
++			};
++		};
++	};
++
++	front_aux_cam: camera@1a {
++		compatible = "sony,imx355";
++		reg = <0x1a>;
++
++		clocks = <&clock_camcc CAM_CC_MCLK2_CLK>;
++		assigned-clocks = <&clock_camcc CAM_CC_MCLK2_CLK>;
++		assigned-clock-rates = <24000000>;
++
++		reset-gpios = <&tlmm 9 GPIO_ACTIVE_LOW>;
++
++		avdd-supply = <&camera_front_aux_avdd>;
++		dvdd-supply = <&vreg_s3a_1p35>;
++		dovdd-supply = <&vreg_lvs1_1p8>;
++
++		pinctrl-0 = <&cam_front_aux_reset_default>;
++		pinctrl-names = "default";
++
++		rotation = <270>;
++		orientation = <0>;
++
++		port {
++			cam_aux_front_endpoint: endpoint {
++				data-lanes = <1 2 3 4>;
++				link-frequencies = /bits/ 64 <360000000>;
++				remote-endpoint = <&camss_endpoint1>;
++			};
++		};
++	};
+ 
+ 	/* eeprom @50, at24 driver says 8K */
+ };
+ 
+ &cdsp_pas {
+ 	firmware-name = "qcom/sdm845/Google/blueline/cdsp.mbn";
+ 
+ 	status = "okay";
+@@ -485,16 +626,44 @@ nfc_int_default: nfc-int-default-state {
+ 
+ 	nfc_enable_default: nfc-enable-default-state {
+ 		pins = "gpio25", "gpio79";
  		function = "gpio";
+ 		drive-strength = <2>;
+ 		bias-pull-down;
+ 	};
+ 
++	cam_front_avdd_default: cam-avdd-default-state {
++		pins = "gpio8";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
++	cam_front_aux_reset_default: cam-front-aux-reset-default-state {
++		pins = "gpio9";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
++	cam_front_aux_avdd_default: cam-avdd-aux-default-state {
++		pins = "gpio14";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
++	cam_front_reset_default: cam-front-reset-default-state {
++		pins = "gpio21";
++		function = "gpio";
++		drive-strength = <2>;
++		bias-disable;
++	};
++
+ 	touchscreen_reset: ts-reset-state {
+ 		pins = "gpio99";
+ 		function = "gpio";
+ 		drive-strength = <8>;
+ 		bias-pull-up;
+ 	};
+ 
+ 	touchscreen_pins: ts-pins-gpio-state {
 
 -- 
-2.34.1
+2.53.0
+
 
