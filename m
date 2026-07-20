@@ -1,150 +1,324 @@
-Received: from mail-yw1-f177.google.com (mail-yw1-f177.google.com [209.85.128.177])
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8FF74369A
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 00:17:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.128.177
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784506626; cv=pass; b=p/2hvwx8Tlh+0ebNEdlM+fsrLdFApGoWK0wRKskODZcYC4TD3b6Yfu337FS8nkf61EtzYsegvfmNobDw4KK6y43aBEQFVl2t2Uf+bFTGjSD8sDBcwUbn/4mchyPuaw6fjG5X/QlGCG7hgf/AVa7dZOMHW90lsoFe8KR5U7D5cLU=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784506626; c=relaxed/simple;
-	bh=O9cP6nGCNqeHN2Xq8wqQS3LjGvGODOTi/nxM+kFvsiY=;
-	h=MIME-Version:From:Date:Message-ID:Subject:To:Cc:Content-Type; b=Wpqt2dEQS4ccE/7c5dP75GbZLq+y7PFH9Vs8Y7M/3SHwbzBl2j2I3as8JjlmLYUo6iGLS6GyYCoA5xiJNDK5+POqVBBAfWI4LVG3lUbZKcFqcEe3/ETw/055iopSt1Ne9RwluxNTzyAnxqM3bSMn6gFzcTGs0fVokX8en2lDKak=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Pr5a9s6a; arc=pass smtp.client-ip=209.85.128.177
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A15C020B80B
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 01:11:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784509906; cv=none; b=UnoUwHcVs8DnLRN8ztZrx1lT9Hm+qQW+kJoXM6ruDRPa+cFLjKz3+jj+WI/K6FRaVI25Z8sHaLM3ES5NgnxOLkSRLB37SSwXxylwaF/FQLqqZ0KNtMjNTlE3D+8Tuq7ROhTWtSHpwz9SlN3qqnSKyAWAHte1kHwD0OH3dMLFza0=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784509906; c=relaxed/simple;
+	bh=AC1MUPJeho28pBdVYrHItIRHxia1fJXAF7Xy5HQMoms=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=i0Ihf81IT/efwTIQMjel/p0q1SR2+N10P+6xuF2UDcY+yaT0oKJ6Cufp/ubxehCGL/W/w/88HcRSY5NQy79WBQU7S5+E7UiITcstcvxrjrS1DDLjUU1YY59CAX11zqcNnTFKlrtQMaVD7M3JisBHjuKDoP4nI65ISupbZkSqSDw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=F13eEpkx; arc=none smtp.client-ip=209.85.128.44
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Pr5a9s6a"
-Received: by mail-yw1-f177.google.com with SMTP id 00721157ae682-8111c0c7561so119729487b3.3
-        for <linux-arm-msm@vger.kernel.org>; Sun, 19 Jul 2026 17:17:04 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784506624; cv=none;
-        d=google.com; s=arc-20260327;
-        b=CJxrxYOaa5p8U5Vb+Luy/7Ei/eCXGDiDlvuD+lP3ru05K+PB3PYRoiVFsAhIH+ir0/
-         VeBwVrteVKa0D9f5nGMfk0tcBRLeNrUm0bRl7QFv3O5WYxQLFeJ67WJU55NeabGnQK3z
-         UKJtsLkT1MfjU5xnlbvytUmj40YrOyOZNYULE5iAhprRtd3Oucstim7n8RTep5Qk8PVI
-         6IfL0r3db6Vgon3f5AhMv6rhPKlP8bFh0YBT/87P3kGuYyLNsN7dbceVZR+GKIBO6jdC
-         ilBbJGdKje4QRbAW9mWoDJ5wKtEOd0hrvsSYKJgwFo/R35ie+HiieSuhKZ2osx9mr+3E
-         9nbw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :mime-version:dkim-signature;
-        bh=S20JVaLKnRGihstk26kL2qltfogiNg0YzdjITHbQXu0=;
-        fh=mPDLmM4ihM68sLFVpj1l2/mpperV/Iw1wk2tSXB+Hq0=;
-        b=duyZ1+vyS72smvRIibiJd4oSWqv+UJBkCR3408t4FTmNiOi47ZRUu3KNSmo+0cw/pg
-         Q14HwsJry7sWnO5JKsRlehlPbg3vxU5VmUw7qSn945WXAkADVARE+RflxCNqwvXB2Lwt
-         e3vuWfioLSrTzX85AhAjH/TPcSZ1iO4xRINz90ixzqSWx+eEUKbdrUbhHAJ3AAUK7Nog
-         WgmE7SdVIMVy6nto9vIPFsM1inl6QQ4LwyOqHG02LgdYSjki2hSWea/fuoIRU1x4pp+y
-         EjQdUzaymHVATipIborWsJxW6tKiaWyIQ6U/ECxixddKKYEhhgqdLTAm2Wk8MWPmpnaP
-         5e+Q==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="F13eEpkx"
+Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-490cf322ed0so65870005e9.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 19 Jul 2026 18:11:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784506624; x=1785111424; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=S20JVaLKnRGihstk26kL2qltfogiNg0YzdjITHbQXu0=;
-        b=Pr5a9s6ajjbsTsGEp1roOGYMM2xJ/4JbKUa4XMPKBK2tnBRzv/K3WvmWbEEIag1aoS
-         JsdwlZfc5GyI0Gk9TroTIhm9Fg5K6mj6LlYH3F1WrTtkc7yw9XlxbYuEqn7h9l1Vt3XH
-         lRVYQEzXF/atecafyK1sgb6LocTA1DsymaWuDr6UlRrsgcxkkrre7MN4OuzNImvCJpjo
-         l4hnmQenQREbP8uU0VMDG25c93Hqwvd5tRFgSTv5AszbhjHBohVyJb9o4/8L1Zkpb6f5
-         8MzFSjLhplMbUXA2yfdrlxxELhTF36W/ktX37n0doohE9DTXD0xf+Jo/tvQkvvQsp3qa
-         asKg==
+        d=linaro.org; s=google; t=1784509903; x=1785114703; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=4XnV+FykkybVqG+qJ/ggN1ABFG87UERnEoUc/FfnJBw=;
+        b=F13eEpkxYvuXwbmV1VqqluPdWEOeFSfos1NyfhrSVeoDJE+jsy6QUWEow7vtij1s+9
+         gJaAQ+1HZZTuwJDem/z5YcxBa6Mlq4US1wpUDcFgdCK3MXxIFG3LPLIArogqqA7AgSUd
+         AXucykzBhyEki8bQpJAGW6kbuAe8wI4VT4Es20c+aPKYRH4QnLWtbWz2z/VdVMhUOOKE
+         pZm7cMn/mqGEYbu3tr4dr4TYIfZj5pHfFGcKfwUYlXFEtJH7H9hGUYd7HWgQGtwsAhrl
+         2kVHLfKirc78fcbaGZ46i0zJelhre+lS6WNH0BoA2aWNwh9aKkiW3lbmcqWgonAcntmC
+         f5fw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784506624; x=1785111424;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=S20JVaLKnRGihstk26kL2qltfogiNg0YzdjITHbQXu0=;
-        b=olXmFkEmdBD8QmZhFbzER4I0QeQT43pCG4i+NsJQ4eF2TImVaREYzpvmh5UC3tfxVq
-         Lp5niupEDBXq/cIyjfkuj0P+LwWnCZtW7xTxeLWjsSWX/ZlI7wnn0U64R2uGBbbaYMjl
-         Ne5e7E1LIwB2cp8z/8oSgcMuUgYrhTebWKyfSOGq9A+NHPmAWOmBERb0AQeEm7+Cppj7
-         869WxB7n+z0Z1mi8JbTL3vq0ejrhlTqxtlPy+K654a635t2NZfQWyuqSFd6ejBFC7sj5
-         dFVHaiw7VixSALJjXFd7SjdMVFk8JL/fgsTC+0KagpBVEs7Sflsm4fMjgZveWSE9DdqN
-         4ldQ==
-X-Gm-Message-State: AOJu0YzLEWlpsv35mQ+1JVZIoBn4qaeOaQh2AfvQmuAcl97DaQKnfPu2
-	L559fERCELf98yRZSiM5dZdpNRl5DasW4yqtFY5Esimk0m3alVRHHfxFqJpzOX4TK1ATkTfmfOY
-	7E1zgmCTF0EXh6mhuE1M2J7NOHePTMrg=
-X-Gm-Gg: AfdE7cl0pVIu+O8ZsRGzh39zJEipNQ88KAMkjbdJndk3CQEc3WcfC5c4A9HPCdlB54a
-	RoxaXnRQ/iKPpVX4f7Rfrj5yHeKPM6pJzvK7yyKDO0I7xKBb2w+Qo7ud3iMp7sLdHEFE6RVHGN3
-	LoEqKlVSHWO+fE3nP+UPFet0/geGsRkBAHExsk2JRe+b+84XbpVbDxKFBboJLouiK8Ti13G/RcX
-	wOg1/B85gSh9Wv8sU/ngNe1yIM9MCysfudedRyW7KkpBzYR2hKB6PRJFLIJuh6VP6P918XE+Isx
-	qeR9IBCOixxFtWJQ6/553IOnzXZbZA==
-X-Received: by 2002:a05:690c:b9e:b0:81e:d000:b364 with SMTP id
- 00721157ae682-81ef288783emr38868497b3.72.1784506623642; Sun, 19 Jul 2026
- 17:17:03 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1784509903; x=1785114703;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=4XnV+FykkybVqG+qJ/ggN1ABFG87UERnEoUc/FfnJBw=;
+        b=cUCLkpdLoL5BE3nLXxMGG9IPyd2POMDnPt2ak7CaYFvShJBFL21ZIBSP8c+3+hZUwJ
+         YGFp8ILTfypSkC4G/0t8nN6T6F/Zxz+sCqegNbEco4YcIYaspEZHUipY9p/UGWuGPmYY
+         wVKW1xK8Z6ygMucz1KKV+t2aOGSfwidt0n1AO8cqM9xYC13A/LMNyCSRFBC5+95myo96
+         7VKcr8SHOcB+sxywfeGelW/r4wk5baL11OdUzhoKUdY9wrIBJtE4SRrvBt7AFIGnl5KX
+         MV0IgjDi7mb6WjXK1p0aSNsnygfhx6TKd26VtT/smLrzQ6XV71sbrDQGX2kzMy6YpCsQ
+         qkhw==
+X-Forwarded-Encrypted: i=1; AHgh+Robfu6hpe3UV45TRSRwokskIpsepjtlQKB3o7N/5VUeR3Sp2SEb96bQSejHXaQaEX0BmGzu10R8YNxqYUKF@vger.kernel.org
+X-Gm-Message-State: AOJu0YxD2q25yY2GaHHbf0NWUEJbjw56pEIq4lMmgcetz0jZT7gK42ka
+	4Tyc63jytAdrqqQi+XNtpQ7dMau8FdLs+DFVplrg4Tkp5jEtHqp7UYz2Og6noQLkXns=
+X-Gm-Gg: AfdE7ckEwc/0NoTcGQxBPw1du4YkdohdvFEG9rmETmTUtakq7vFHFEoUBt38A87FodF
+	CU3av8xnQA+Oxfu8tRuOhs2RWji4gBZMBZ6TpwBlmI4m/poJAXCkVEoOXXZuepCNR6cKESpChTs
+	RiSZnDgggpBzdveD5wx2kbkSIWllcMCTvzQGhY3lUeK/8ds1w+98KwVKoRcVwUOdzDKmMe90d8A
+	DUsISdrMaiAsMGbrPHG/6gc/9Xkbr2YDjJ/GQzL9dq7QFlgTRXvaznjgz9nYnUkr5Sk/DCCm3Oq
+	4YtX4FKQ6+Yc5t94979R4p8zSJUuAlhBB1YmETAEc/bBYb6Otni89XmQtBrozhnpNaw/5Z2Y9vB
+	QaYXCNm5m/voMVuqO3THwUQxuttOuz7uffOkoT6DhY1rMY3wePNg/FZxaJmERJWXCKLBxYbVXEs
+	iE721qXmHKM6U8
+X-Received: by 2002:a05:600c:c490:b0:495:4730:15b2 with SMTP id 5b1f17b1804b1-4954a40d1c9mr125802115e9.31.1784509902427;
+        Sun, 19 Jul 2026 18:11:42 -0700 (PDT)
+Received: from [192.168.0.35] ([109.76.79.119])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4954d384146sm180847285e9.14.2026.07.19.18.11.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 19 Jul 2026 18:11:41 -0700 (PDT)
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Date: Mon, 20 Jul 2026 02:11:34 +0100
+Subject: [PATCH v13 1/2] dt-bindings: phy: qcom: Add CSI2 C-PHY/DPHY schema
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-From: =?UTF-8?B?TGFqb3Now6F6aSBMw6FzemzDsyBHZXJnZWx5?= <lajoshazilg@gmail.com>
-Date: Mon, 20 Jul 2026 02:16:52 +0200
-X-Gm-Features: AUfX_mznxPsRpnpalvP1z-mBxFg7xLZ6MbxIhdS_1lAqtpMcu-Hb4Vp3hyS88LU
-Message-ID: <CAAD3nBebR3GPbufLyc95QVwueLBUWmGpxQhqtSt3EBEswjpdVw@mail.gmail.com>
-Subject: SDM632 SLIMbus: ADSP framer never gets frame-sync under q6v5-pas
- (works under downstream pil-tz, identical firmware) - what physical
- precondition is PAS missing?
-To: Srinivas Kandagatla <srini@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Luca Weiss <luca.weiss@fairphone.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260720-x1e-csi2-phy-v13-1-160c31958863@linaro.org>
+References: <20260720-x1e-csi2-phy-v13-0-160c31958863@linaro.org>
+In-Reply-To: <20260720-x1e-csi2-phy-v13-0-160c31958863@linaro.org>
+To: Vinod Koul <vkoul@kernel.org>, 
+ Kishon Vijay Abraham I <kishon@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Bryan O'Donoghue <bod@kernel.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
+ linux-media@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6235;
+ i=bryan.odonoghue@linaro.org; h=from:subject:message-id;
+ bh=AC1MUPJeho28pBdVYrHItIRHxia1fJXAF7Xy5HQMoms=;
+ b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBqXXXKvBp3dUE1KtESZ7+ZHlIp/cv9XUuMb2l0g
+ 16nZ0I4ltuJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCal11ygAKCRAicTuzoY3I
+ Oo9LEACTzkusJ7PUs4YxRQWdEU58xvKYuA3I6VtctNKxxL4llpjHHfU+PoReyDg0vAgy2vxWbsZ
+ VIc3KMgb+z72wXoxiW/uMO/qTkSMzIFOP239wLExgXPvrkSQWosIdhiGvPY/67sqRTphlDADLIM
+ +aaA3oPOSkBKxoEpTh6AANvqmUejhM/t68xVDqsoWFRygiyGTjVTU3jdXBNdcNqkfcIfnE9013z
+ dm29kgfJT8ZQtuPKMQZIBCAgl1sfQkoRV4OX3dDzsdkpD4WMPSICC7kLaCD90yRskCbGqB6s0LS
+ u/qR1d1ostvTx/p3a+jVA7JfBDFMP/TZxlK7kGQndT/IcCRMqgacMAadhXrGuZcSBHDwuBAx+u1
+ a+e6TM7MdJcttBdtDbLs7XiVGcKe/DuPPgGwQkN+8CUGfSdTWjLfpiz1zsyqjGQe5X/rzc81uPo
+ loADr6tFPA1pNbWkLGJOfSgm27cRbMSbt3dIFPFMl5sc5RF1rC+uaicBUCRQN6N1+OrGzj2Jjxa
+ hKtCBQgoc2RLDZTVHVz7WX44N90qwRS7Ox2AVBahZ1zXvb7Mctns6ook+KNkJcu3bdOhbeFNxNV
+ YvOeCi3u/yiy3z2oE7A6XOMfETKaIPCcJ8IyU9/XfEwXYMdRL4NKYuFyVI1Tv9wIeEtPWhcvB+L
+ rItQkwSaj3yZaQA==
+X-Developer-Key: i=bryan.odonoghue@linaro.org; a=openpgp;
+ fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
-Hi Srinivas, all,
+Add a base schema for the MIPI CSI2 PHYs on Qualcomm SoCs. This PHY
+supports both DPHY and CPHY operation. A special mode of DPHY operation -
+called variously split-mode or combo-mode also allows for two sensors to be
+connected to one PHY.
 
-On the Fairphone 3 (SDM632/msm8953, WCD9326 codec) mainline SLIMbus audio
-is silent: the NGD reports "capability exchange timed-out STATUS=3D0x40c
-CFG=3D0x0 INT_STAT=3D0x0" and the codec never gets a logical address. Same
-hardware works on the downstream 4.9 stack (A/B slots, same phone). With Cl=
-aude
-code I've localized it to one register-level difference and I'm stuck
-on the last step.
+The submitted binding here describes the DPHY modes of operation only. CPHY
+is left to future work.
 
-The only variable is the ADSP boot method: downstream subsys-pil-tz vs
-mainline qcom_q6v5_pas. adsp.mbn and its devcfg are byte-identical; the
-AP-side QMI sequence is byte-identical and ACKed in both cases; current
-mainline HEAD (including the merged qcom-ngd-ctrl fix series) reproduces
-it, cold-boot retested.
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+---
+ .../bindings/phy/qcom,x1e80100-csi2-phy.yaml       | 195 +++++++++++++++++++++
+ 1 file changed, 195 insertions(+)
 
-Reading the SLIMbus block (0x0c140000) and LPASS-CC (0x0c000000) via
-/dev/mem on both slots:
+diff --git a/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+new file mode 100644
+index 0000000000000..880fe602945cb
+--- /dev/null
++++ b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+@@ -0,0 +1,195 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/phy/qcom,x1e80100-csi2-phy.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Qualcomm X1E80100 SoC CSI2 PHY
++
++maintainers:
++  - Bryan O'Donoghue <bod@kernel.org>
++
++description:
++  Qualcomm MIPI CSI2 C-PHY/D-PHY combination PHY. Connects MIPI CSI2 sensors
++  to Qualcomm's Camera CSI Decoder. The PHY supports both C-PHY and D-PHY
++  modes.
++
++properties:
++  compatible:
++    const: qcom,x1e80100-csi2-phy
++
++  reg:
++    maxItems: 1
++
++  "#phy-cells":
++    const: 1
++    description:
++      The single cell specifies the PHY operating mode.
++
++  clocks:
++    maxItems: 3
++
++  clock-names:
++    items:
++      - const: core
++      - const: timer
++      - const: ahb
++
++  interrupts:
++    maxItems: 1
++
++  operating-points-v2: true
++
++  opp-table:
++    type: object
++
++  power-domains:
++    items:
++      - description: Titan Top GDSC - Titan ISP Block, Global Distributed Switch Controller.
++      - description: MMCX voltage rail
++      - description: MXC or MXA voltage rail
++
++  power-domain-names:
++    items:
++      - const: top
++      - const: mmcx
++      - const: mx
++
++  vdda-0p9-supply:
++    description: Phandle to a 0.9V regulator supply to a PHY.
++
++  vdda-1p2-supply:
++    description: Phandle to 1.2V regulator supply to a PHY.
++
++  ports:
++    $ref: /schemas/graph.yaml#/properties/ports
++
++    properties:
++      port@0:
++        $ref: /schemas/graph.yaml#/$defs/port-base
++        description:
++          Sensor input. Always present. A single sensor is described by a
++          single endpoint with one to four data lanes. DPHY split mode,
++          where two independent sensors share the same PHY, is described
++          by two endpoints; endpoint@0 with exactly two data-lanes and
++          endpoint@1 with exactly one data-lane.
++        unevaluatedProperties: false
++
++        patternProperties:
++          "^endpoint(@[0-9a-f]+)?$":
++            $ref: /schemas/media/video-interfaces.yaml#
++            unevaluatedProperties: false
++            properties:
++              data-lanes:
++                minItems: 1
++                maxItems: 4
++
++            required:
++              - data-lanes
++              - remote-endpoint
++
++        allOf:
++          - if:
++              required:
++                - endpoint@1
++            then:
++              properties:
++                endpoint@0:
++                  properties:
++                    data-lanes:
++                      minItems: 2
++                      maxItems: 2
++                endpoint@1:
++                  properties:
++                    data-lanes:
++                      maxItems: 1
++              required:
++                - endpoint@0
++
++      port@1:
++        $ref: /schemas/graph.yaml#/properties/port
++        description: Output to the CAMSS CSID controller.
++
++    required:
++      - port@0
++      - port@1
++
++required:
++  - compatible
++  - reg
++  - "#phy-cells"
++  - clocks
++  - clock-names
++  - interrupts
++  - operating-points-v2
++  - power-domains
++  - power-domain-names
++  - vdda-0p9-supply
++  - vdda-1p2-supply
++  - ports
++
++additionalProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/interrupt-controller/arm-gic.h>
++    #include <dt-bindings/clock/qcom,x1e80100-camcc.h>
++    #include <dt-bindings/clock/qcom,x1e80100-gcc.h>
++    #include <dt-bindings/power/qcom,rpmhpd.h>
++
++    phy@ace4000 {
++        compatible = "qcom,x1e80100-csi2-phy";
++        reg = <0x0ace4000 0x2000>;
++        #phy-cells = <1>;
++
++        clocks = <&camcc CAM_CC_CSIPHY0_CLK>,
++                 <&camcc CAM_CC_CSI0PHYTIMER_CLK>,
++                 <&camcc CAM_CC_CORE_AHB_CLK>;
++        clock-names = "core",
++                      "timer",
++                      "ahb";
++
++        interrupts = <GIC_SPI 477 IRQ_TYPE_EDGE_RISING>;
++
++        operating-points-v2 = <&csiphy_opp_table>;
++
++        power-domains = <&camcc CAM_CC_TITAN_TOP_GDSC>,
++                        <&rpmhpd RPMHPD_MMCX>,
++                        <&rpmhpd RPMHPD_MX>;
++        power-domain-names = "top",
++                             "mmcx",
++                             "mx";
++
++        vdda-0p9-supply = <&vreg_l2c_0p9>;
++        vdda-1p2-supply = <&vreg_l1c_1p2>;
++
++        ports {
++            #address-cells = <1>;
++            #size-cells = <0>;
++
++            port@0 {
++                reg = <0>;
++                csiphy0_in: endpoint {
++                    data-lanes = <0 1 2 3>;
++                    remote-endpoint = <&sensor_out>;
++                };
++            };
++
++            port@1 {
++                reg = <1>;
++                csiphy0_out: endpoint {
++                    remote-endpoint = <&csid_in>;
++                };
++            };
++        };
++
++        csiphy_opp_table: opp-table {
++            compatible = "operating-points-v2";
++
++            opp-300000000 {
++                opp-hz = /bits/ 64 <300000000>;
++                required-opps = <&rpmhpd_opp_low_svs_d1>,
++                                <&rpmhpd_opp_low_svs_d1>;
++            };
++        };
++    };
 
-  reg (0x0c140000 +off)      downstream/PIL   mainline/PAS
-  FRM_CFG   +0x400            0x000D0C83       0x000D0C83   identical
-  INTF_CFG  +0x600            0x00000001       0x00000001   identical
-  FRM_STAT  +0x404            0x060D1901       0x00000000
-  INTF_STAT +0x604            0x00003E04       0x00000000
+-- 
+2.54.0
 
-LPASS-CC is byte-identical over the whole aperture (SLIMbus root RCGR
-CFG=3D0x509, branch CLK_OFF=3D0 on both -- the 24.576 MHz root clock runs o=
-n
-the dead side too). So the framer is configured and clocked identically;
-only the status registers read 0 under PAS: INTF_STAT bits FS/SFS/MS
-(frame/super-frame/master sync) never set -- the interface never acquires
-sync on the physical bus. The stock firmware's own bring-up confirms it
-waits on hardware: it polls the FS bit, times out ("Hardware failed to
-enumerate ... (FS:0)(SFS:0)(MS:0)"), and its subsequent HW reset succeeds,
-so ADSP register access is fine. The firmware maps no separate PHY/analog
-block. On msm8953 I find no AP-side lever either: no lpasscc, nothing
-SLIMbus in gcc, no LPASS GDSC (unlike msm8996, which frames the same codec
-family under PAS).
-
-Two questions:
-
-(1) What physical precondition (rail / reset-deassert / pad / LPASS-interna=
-l
-enable) must hold for the SLIMbus interface to acquire frame-sync on
-SDM632, and where does the pil-tz path establish it that q6v5_pas does not?
-
-(2) Is that step AP-reachable from mainline (SCM call, reset, regulator
-vote, clock, DT), or only TZ/PIL-internal -- i.e. is this fixable with a
-kernel patch at all, or does it need a vendor-side change?
-
-Full write-up, two-sided register dumps, binary diffs and the annotated
-firmware disassembly: https://github.com/msm8953-mainline/linux/issues/255
-
-Thanks for any pointer,
-L=C3=A1szl=C3=B3
