@@ -1,93 +1,124 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEA16428464
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 13:48:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96658353EDF;
+	Mon, 20 Jul 2026 13:54:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784555333; cv=none; b=n6eAkIzxCWcuQLMGJ+zkt+siHCeBmAwpqMfon8S6bFV8gxZ2qTzItitvulMrJ6bDc8JKJ9RY9dNNUPwhBhRopm7Kwzbgm2yphm5XFCKBR3Ux67EyYY/NmNa6kbnGuxxP19qfpZE4pEL8/BQD7967LNAh1mPRYJISUGtkOVP0olg=
+	t=1784555690; cv=none; b=F1oJ3VR33ZJDAVMK8f28zN0u48UQw6ZK885XAXI20JZSg43OHqKuPr0usNq/FIK/JWdsgh/Z7Rni4h8JPCImaK+Y0Pg/6bz5/etfu9jAlUCORAZsLDAqw5kCJNZpBnbt0uI7jWGZIpmclK4rA3D46UuQvEJdH3dE04TqF3/hmXU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784555333; c=relaxed/simple;
-	bh=VXTL0nWUs6ARY7/mBgCqD9/Pk4RANoGqiEM640qRpmI=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=dlWMmUcLvuZGbiDR7akQ4/hRXlYOva3DGrmQwiWbu601j9mJqtBCiak16AujmKIj/G8cMtQkqoTqeKB/EUKdIyW6jUDNxPc2qfXcwddYB8qtMatspxTt0OgOxLhJ0pzDIns5VaT6iBqtGQz6P5U/614rOK/i19Or0oTLKedmZwE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I7Uuk7al; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784555690; c=relaxed/simple;
+	bh=DfUO5w0eGZAxJGLC6driOdswr6zt8DtITXW6kI57na8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=oyzffEAX8K27OP+yUexMiDumXIepQxA7LADO4jTXemAvcN09qvhwCJLnAp/xnkVf0ay1NJBV91hJamlLqLtNkNi40SLRhzQGGMAvbGIy/Rl+/pSSe+ja08Ly8ZGY4PlWh8lk4s2Wmd4/61rf5P8xjYsCc3M5AUP0iK4Z6SQrfTA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kz/Yb2rq; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I7Uuk7al"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CED371F00A3F
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 13:48:49 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kz/Yb2rq"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 82CD11F000E9;
+	Mon, 20 Jul 2026 13:54:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784555329;
-	bh=L8C49SuWPc7UrHJM/7J+so26KwjGuUOI0PDx4EtC0qI=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=I7Uuk7al+n5XzzlG/XnQBVnxY7TZgxpnqsXwWLApjhiG+g/vX4f98U+9S4j0CuOXN
-	 3f85WqSEv7syaPxiHzQNQt7OXy6syNK2q7cc8W0pj/Y7HK/HdExnrG+gYCzoqwoslx
-	 FF7lHTtj0dMj/7AaOrUc/qaand8UNGH6rnk7uON6qph/amzVe0/rfHH4YXUZuMaNPW
-	 hrQvGv5q/f9cdOg/MJfA3xaJHSU1Uc6oN9dpTDjHlNFKwrKTHHWeBTuhCAyPp/AFfS
-	 PVzDT0ntC4ezmV4fp7k7KfN/X1o3xm+Z9hkDTMPiTclh8toIYxO6KVl/MzhQaV/SZE
-	 WiVTMz5Vr8aEA==
-Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-5b159850b16so6334118e87.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 06:48:49 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RoJbTMzCKQGXRzSAhtg89rNK+Ag94P6kDfeVWcUYPVKTVlzEazcy6B3ZJzPuQev01v/20kYjAGh/cQwH7Cv@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy9BYu+87hloeQKB94Ud3qyrvdER2ERQryv94KxBf5EJdc+rMlq
-	PkWwO3w3O6MyIEWJ8PpnCyQ8+RVIG0INswSnubp2BCqXTEjKsB/LN1kJ4oJnQCvTZQvvrqeVHvS
-	DBlYQR2pOxog75FcaDNp2nzRpkxhXu6TFDdASt0DigA==
-X-Received: by 2002:a05:6512:282:b0:5ae:b24c:7723 with SMTP id
- 2adb3069b0e04-5b28f875b5bmr2211818e87.17.1784555328484; Mon, 20 Jul 2026
- 06:48:48 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 20 Jul 2026 06:48:46 -0700
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 20 Jul 2026 06:48:46 -0700
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <0CB2D8D715AB9933+20260713072543.3348755-1-raoxu@uniontech.com>
+	s=k20260515; t=1784555689;
+	bh=2e4JlFLyKN9wo6YUvrmYI0rCFdNq/NCuMYtES0ROEic=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=kz/Yb2rqyPWn5uvHMQHfk0c9r2AtKUvSwr/aK7PkTmOoVZp+1mhu2zv6gIATRgGxN
+	 yYPfmvatlxFO4rMOvq3wy7Qfy7r8LcoNlXlQGESQtK9Xu3yNz7n6TCOBSDmmMC2BJe
+	 oxUzSo2fmG584wbrAAxIwCkR67FhM3FvpPg5BeBIWcbVLZw/Je9PMSup3j/ofeqJUo
+	 Y9W0TY2brdPYziG5lPttU2gwmXHpP2uu6cbNXaYKp50HtnRPxs4dMfX7CWNvLnM3b/
+	 2UMAPK4lcctCEscGYG2FJOmUdeiE6z1hjz19JzIhE+kJrfmq0tJCvIZZXsPmaB7JrI
+	 thfycVv0ZrKBg==
+Message-ID: <44ee60ff-c7f8-4ca7-ad65-7b610ad13d24@kernel.org>
+Date: Mon, 20 Jul 2026 15:54:41 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <0CB2D8D715AB9933+20260713072543.3348755-1-raoxu@uniontech.com>
-Date: Mon, 20 Jul 2026 06:48:46 -0700
-X-Gmail-Original-Message-ID: <CAMRc=McFRb8iZaDLY=DfLfDDA9WFJeNG94CaQeF3RJDgyqe8bg@mail.gmail.com>
-X-Gm-Features: AUfX_mw4AS4rGrPFiCIt4A6Wg2v_GfsNMetY7jsTwq9BAgndocjnJSk4IIzAsLs
-Message-ID: <CAMRc=McFRb8iZaDLY=DfLfDDA9WFJeNG94CaQeF3RJDgyqe8bg@mail.gmail.com>
-Subject: Re: [PATCH] Bluetooth: btqcomsmd: destroy RPMsg endpoints before
- freeing hci_dev
-To: raoxu <raoxu@uniontech.com>
-Cc: marcel@holtmann.org, luiz.dentz@gmail.com, linux-arm-msm@vger.kernel.org, 
-	linux-bluetooth@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	stable@vger.kernel.org, brgl@kernel.org
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/4] ASoC: qcom and pinctrl: add LPASS LPR voting and
+ Hawi LPASS LPI TLMM
+To: Bartosz Golaszewski <brgl@kernel.org>,
+ Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+ linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-sound@vger.kernel.org, Bjorn Andersson <andersson@kernel.org>,
+ Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+ Mark Brown <broonie@kernel.org>, Srinivas Kandagatla <srini@kernel.org>,
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+References: <20260720130511.493295-1-prasad.kumpatla@oss.qualcomm.com>
+ <CAMRc=MfvfVvJ4anwY5WZUr5K8fSGkcvejah72fUDLc7ZC59jNw@mail.gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <CAMRc=MfvfVvJ4anwY5WZUr5K8fSGkcvejah72fUDLc7ZC59jNw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, 13 Jul 2026 09:25:43 +0200, raoxu <raoxu@uniontech.com> said:
-> From: Xu Rao <raoxu@uniontech.com>
->
-> The command and ACL RPMsg endpoints store struct btqcomsmd as their
-> callback private data.  The receive callbacks dereference btq->hdev
-> without taking an hci_dev reference.
->
-> The current teardown order frees the hci_dev before destroying the RPMsg
-> endpoints in both the hci_register_dev() error path and the driver remove
-> path.  If WCNSS delivers data in that window, the endpoint callback can
-> run with an already freed hci_dev and pass it to the Bluetooth core.
->
-> For qcom_smd endpoints, rpmsg_destroy_ept() closes the channel and clears
-> the callback under the channel recv_lock.  The receive path holds the same
-> lock while invoking the callback, so destroying the endpoints first both
-> prevents new callbacks and serializes with any callback already running.
->
-> Destroy the command and ACL endpoints before hci_free_dev().  Keep
-> hci_unregister_dev() first during remove so the HCI core stops issuing
-> operations before the transport endpoints are shut down.  In the full
-> registration-error cleanup path, return directly after freeing the hci_dev
-> to avoid falling through to the partial-construction labels and destroying
-> the endpoints twice.
->
-> Fixes: 5052de8deff5 ("soc: qcom: smd: Transition client drivers from smd to rpmsg")
-> Fixes: 9a39a927be01 ("Bluetooth: btqcomsmd: Fix a resource leak in error handling paths in the probe function")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Xu Rao <raoxu@uniontech.com>
-> ---
+On 20/07/2026 15:42, Bartosz Golaszewski wrote:
+> On Mon, 20 Jul 2026 15:05:07 +0200, Prasad Kumpatla
+> <prasad.kumpatla@oss.qualcomm.com> said:
+>> This series adds support for LPASS low-power resource (LPR) voting
+>> through PRM and introduces LPASS LPI TLMM pinctrl support for newer
+>> platforms such as Hawi.
+>>
+>> On such platforms, LPASS requires LPR resource voting via PRM to keep
+>> the subsystem active. This is handled by adding a new clock ID and
+>> support for PARAM_ID_RSC_CPU_LPR in q6prm.
+>>
+>> Additionally, a new LPASS LPI TLMM block is introduced, requiring a
+>> dedicated DT binding and pinctrl driver.
+> 
+> What is the merging strategy? Is an Ack from Mark required and the series
+> should go together through the pinctrl tree?
 
-Acked-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Why would an ack be needed? Cover letter is very explicit on that
+through complete silence that there is no dependency (except that it is
+not true) so why would you take ASoC bits?
+
+Best regards,
+Krzysztof
