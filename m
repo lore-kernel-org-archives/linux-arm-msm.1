@@ -1,104 +1,90 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1133642D765;
-	Mon, 20 Jul 2026 14:39:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B34C042DFE6;
+	Mon, 20 Jul 2026 14:39:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784558351; cv=none; b=cvZnJfnW/osnD8ZJS7VdvlyAr+1K9NJfYTuPWE66v6KRUENwdFMstYAKADB5ZoM6pD8Jur8rcopFDvWTrbphTsTq/za8GBz1MxbxGie/O+wmKp94ZY2De3v0LwuN3V5i6eMXSdQczIbkzdWFzuPGnjzcIUMRNEMtLzHoV+xemC0=
+	t=1784558354; cv=none; b=fZfp+IgMEhUogiwpnOvrfwSgDk4B5NwRcOLw6GzOcxP2wX7tJ5aHmHRmeh3BbxEl+hFZCXZCixITEAuFNAs3/Ckr8f23FH8hbx/j4bHfCCACwoTQ78GAX6lBdKe8e/gPgANnGvPn+R+5xhQaeUqgNBpde0U1i6bGO3KiMhTRmHo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784558351; c=relaxed/simple;
-	bh=ad1NcOz4yhOWbSOvXE7RxXxJ+Ecyd2xei1gAOHh3yaI=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=ls5CvW6M0w6GfcA2nbPvlh/CGGKkilI7Gpdm1qgUV/0ll+vEdZLl3IO/cYT3dY45X0lh3hV+DRY4NkG5idTfQ075LM7mZckP83Jf9YYHwwTQzWCxoqiv85xu1okQ7JYYD6FDn+rw0eyqDd9rgeNlvgH6hYpqR/dgGiKolU3bDRc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fYx6/COq; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784558354; c=relaxed/simple;
+	bh=ddFtt++l0cIrQRJwpibRCXO1NHpBQQmpdZB/oy/A9IA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=We97/hX6ZF7x4MRICxm5BAQWpBYoqnsOebncBBGmAt04SAzst6UVeVhuq0twYUxaQWRq15CxmLH5vJMMN2Vcz/QqwJtwO4RNPsuScR0B6uYfQsEStLx5VD9MdW2+ZlUDSdhyy857Jvp6HPOBIqtQJG+WP3SetvMkghvwpCSYzPw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=jlS/QNzG; arc=none smtp.client-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fYx6/COq"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFDB51F00A3F;
-	Mon, 20 Jul 2026 14:39:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784558349;
-	bh=RH7b8/M9Iqr+mKMhIhiEz3pCA5rvqi9VOrHVDedd8xE=;
-	h=From:Date:Subject:To:Cc;
-	b=fYx6/COq2lOvftHRjYvd07ix/R9JqmAPZ9+s+9sSYoiMCf3PmE8ZaXf4LJ9Fp/l+L
-	 03V5VMYq62K5MN6dcZTjjRXhZ9FbQz78OxorGBvHWOmYWqLKveva7s29m6/K0B77JV
-	 YWC2RHlBkaUtUvQEpK0IaShzWURVhbGpYsWENb+Uzv9vFSnFjPjJRGqZKF7KaJVypC
-	 v0FNkSKQWIfoBAHhxzCnuQB6foxHl0s/VYAH3owfVVB/EcfUfOcoRYCM3CBrGxGbCo
-	 7jJe9FR0AZ+jU97yY34RiTlkKmGZow+ddIVhbangH7/sdmZUrEnEXlk56ALVe49HSC
-	 D9lEGXtM265ZA==
-From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Mon, 20 Jul 2026 16:39:02 +0200
-Subject: [PATCH] soc: qcom: pmic_glink: Avoid losing early rpmsg probe
+	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="jlS/QNzG"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+	bh=RMjWEzu38tseHoFo/YUCFGtCdWHHOcvPUTf8wfVO9l4=; b=jlS/QNzG8jL6ztl+koDV7jIKGy
+	hJ8MoU4EgaQgOE1qzjLmdtFbbmi/0fgZfb4iTHwPI1fG+fHHula2om3ezgCqqfeAdRQe4ZBDMr05+
+	gPG4MNS98XzezJlKLfyz2QX0gg43IJlG3DiKv4snsRh78RHhZP5X+0/L4MTdSThyYxYo=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+	(envelope-from <andrew@lunn.ch>)
+	id 1wlp8g-00DH7Y-1A; Mon, 20 Jul 2026 16:38:38 +0200
+Date: Mon, 20 Jul 2026 16:38:38 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+	Andi Shyti <andi.shyti@kernel.org>,
+	"Joerg Roedel (AMD)" <joro@8bytes.org>,
+	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	Doug Berger <opendmb@gmail.com>,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Ulf Hansson <ulfh@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>, Lee Jones <lee@kernel.org>,
+	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
+	Srinivas Kandagatla <srini@kernel.org>, brgl@kernel.org,
+	driver-core@lists.linux.dev, linuxppc-dev@lists.ozlabs.org,
+	linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org,
+	iommu@lists.linux.dev, netdev@vger.kernel.org,
+	linux-pm@vger.kernel.org, imx@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org, mfd@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org
+Subject: Re: [PATCH 4/8] net: bcmgenet: use platform_device_set_fwnode()
+Message-ID: <ae9da5dd-3528-4270-ada0-d17ed14478e0@lunn.ch>
+References: <20260720-pdev-set-fwnode-instead-of-of-node-v1-0-2dee93f42c54@oss.qualcomm.com>
+ <20260720-pdev-set-fwnode-instead-of-of-node-v1-4-2dee93f42c54@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260720-topic-pmic_glink_defer-v1-1-94c0f233f2f7@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMWw6CMBBG4a2QebbJWLkYt2IMkeEHBrU0LRoTw
- t4p+vg9nLNQRFBEumQLBXw06uQSjoeMZLi7HkbbZLJsS64sm3nyKsa/VOr+qe5Rt+gQzCkvmfP
- iDJGKUuwDOv3+xtfb3/HdjJB5v9G6bkdHk0B6AAAA
-X-Change-ID: 20260720-topic-pmic_glink_defer-34600458ecc7
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- usb4-upstream@oss.qualcomm.com, 
- Raghavendra Thoorpu <rthoorpu@qti.qualcomm.com>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784558347; l=1639;
- i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=PrkzywiLlb10skr/qnHh7RGrIb1c96GS4eTsxwtCcMs=;
- b=6wC6LepjKVewiup2onQpxs7EVrxFBEZ1pa2uGgB0d17E8TNbrPyj2W0ohIA/xPZhf8BhJTqHw
- 82G7A+kt6WuAhzXxgAQqts1HY1RUuRhr6OB6tVCIOdyPwIc5YLhKK3k
-X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
- pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260720-pdev-set-fwnode-instead-of-of-node-v1-4-2dee93f42c54@oss.qualcomm.com>
 
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+On Mon, Jul 20, 2026 at 11:24:51AM +0200, Bartosz Golaszewski wrote:
+> Prefer the higher-level platform_device_set_fwnode() over the
+> OF-specific platform_device_set_of_node() for dynamically allocated
+> platform devices.
 
-The PMIC GLINK rpmsg device can appear before the platform device has
-finished probing. In that case pmic_glink_rpmsg_probe() sees
-__pmic_glink as NULL and returns -ENODEV, which is treated as a fatal
-probe failure for the rpmsg endpoint.
+Why?
 
-If this race is hit, pg->ept is never installed and PMIC GLINK clients
-never receive the service-up notification. This may leave the system
-with no Type-C functionality and without battery/power supply
-management.
+This driver is OF only. It does not support ACPI, and probably never
+will. In general, networking and ACPI don't go together, ACPI is not
+sufficiently advanced.
 
-Return -EPROBE_DEFER when the rpmsg endpoint arrives before the platform
-device is ready.
+What is you use case here?
 
-Fixes: 58ef4ece1e41 ("soc: qcom: pmic_glink: Introduce base PMIC GLINK driver")
-Assisted-by: Codex:GPT-5.5
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
----
- drivers/soc/qcom/pmic_glink.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/soc/qcom/pmic_glink.c b/drivers/soc/qcom/pmic_glink.c
-index 3042261578aa..84fd0c82c0c4 100644
---- a/drivers/soc/qcom/pmic_glink.c
-+++ b/drivers/soc/qcom/pmic_glink.c
-@@ -250,7 +250,8 @@ static int pmic_glink_rpmsg_probe(struct rpmsg_device *rpdev)
- 	guard(mutex)(&__pmic_glink_lock);
- 	pg = __pmic_glink;
- 	if (!pg)
--		return dev_err_probe(&rpdev->dev, -ENODEV, "no pmic_glink device to attach to\n");
-+		return dev_err_probe(&rpdev->dev, -EPROBE_DEFER,
-+				     "no pmic_glink device to attach to\n");
- 
- 	dev_set_drvdata(&rpdev->dev, pg);
- 	pg->pdr_available = rpdev->id.driver_data;
-
----
-base-commit: 0718283ab28bc3907e10b61a6b4be6fefa1cbb2f
-change-id: 20260720-topic-pmic_glink_defer-34600458ecc7
-
-Best regards,
---  
-Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-
+	Andrew
