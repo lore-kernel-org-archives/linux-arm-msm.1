@@ -1,86 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6858738D6B5
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 19:03:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38CEC392C34
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 19:03:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784574223; cv=none; b=DzkI3ViWUP7VEb6QsBbrM6MVXSl+TNYgwA75/nlbX9qq0/960RW0lIrrLxSf4VCocx956DyG45t9XCp39o2D7H3MOp3oVPSwFRpSKi7jukGevq/35mYXQLOCKE0QpTVjJNvCZzJ3npkvG6YnS2a51MwH/9Fy5Eof71mHmT1g9B8=
+	t=1784574224; cv=none; b=RD+FOtcF8qD8l1MRHEFP7DUI+t+no/nutsX0QnG92LPLzQU3yXS2F0w7ehyeebHcx+iblRIfW+xSR+wwXglKLK6VxTHw+3KlbqaRsOi/tj3IukqJ2VfmZqkDMp2Sy0AmbiOkMbbQZ7F3AO7KIkDH3aDL8amPsjcDgVQLmsjdH3E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784574223; c=relaxed/simple;
-	bh=imxuGMzvwoNW6yNDOJKPCD+UHZpzgStrg6didKXVX9g=;
+	s=arc-20240116; t=1784574224; c=relaxed/simple;
+	bh=JR4Ua1kfTiV8QNLHWvAaewWDC4h+Q/DLdnHAzgTqOfo=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=I9ZXBLiyXx0CXpkcn0F05dCm3UtYHimk1mlmx6PCQpCBmQPhbVPe48BMms0x3WvfvOTpRvgMXlVKetEcrTtI7hzzUtnpNQmkbKSS/VNsSiwJv5qWdKO1B8tM9/eshGFwh/Tytvg6JjCnSCf9jHZxCwWj4Sx+f5DwnsrB+1Sn5gY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=exA2JKMo; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=MizgAtJF; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=OWT5ew9uujMF11WckPM+lNQIQkv4PEmxVVOUv3x1UYTPt9T1OLNUukvLqxvK7IxhtO8ozPiGPgO+cw+2q/W/RcYNSp1dCj2FbgdYZiIIrDdmPQF6P1xtxiphgosaROpXMjrqYOBoo9EZIqqS2RvlypuX+2zIk7zM9qwOfLWCfGE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Ee9dd5UK; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NkLVMGm+; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="exA2JKMo";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MizgAtJF"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66KH6YhK3043935
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 19:03:41 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ee9dd5UK";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NkLVMGm+"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66KHBrPi3442630
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 19:03:42 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	T8pwpTHVxKFUW9eWFUcZ6JIUKqN03SZt/B2SWptMgIs=; b=exA2JKMooIWR639R
-	7mDKZ7AKQ16XkmPe0Iv5e+fo7UQCpjZ9AJ1VeoEP5AdJiw6i32E/N5bO4RFDv8eZ
-	xuTQs/3BGqZJQ2BrtHG3pnMR/dazNOB4JO9iDE84818RO1ijxLglLTd6cWkcECva
-	VhOe9mZ3rXiYP+wabP0Pmi+bWdlzzZylonRJzZUpXtypmbgDeLRtzBnljm1lHcBP
-	Dc0uctNWder+0Uz21V2QBzud0u1NnwaELl7eOKhyDfM2mMZ+bfxd1bnDbYNPeD5c
-	3u2pzdIWH8PB85SsoaFWRlKI+HrpZidjhls7cZh2puG8kT1mUo+VGbir1MZ/4buw
-	9tEE4g==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhgs02kdw-1
+	iqC1UMQqgc8CPLMgHXDTgheCDiJEX3V1C83nXvjGTf4=; b=Ee9dd5UKiMh0diim
+	DZLA45h9K5kuPbDDEtf+J51ane58QBP3HWL0/oz+n87oeSB/JCGVkTRM//6ZjVfS
+	WiXIDGH6TO2ga0mV/jP9af2beUDMcy55YtHwlk2ZEEg/t6pIldW7Ll8hLtiLOchh
+	CtkhvVmcg9Scd5nPo8QYyona0q1Qv7nlB5ylFz9n86PuAPeno+5MqVo9H4fAmwIm
+	ggO/GNKlawhoj7VbkHs5vAm3DJUoQqCsN59naH8MTSO+GuTUGrP0isi9DmlOdMlS
+	ZmqvMOuHd10wa76g52bq+5vqLOAmOtt6+mik6c3OS/lVVJ+x8P8Ip7/azmDafAa5
+	x/nxTg==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhqv5rfbf-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 19:03:40 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c1d7886cdso96039101cf.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 12:03:40 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 19:03:42 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51bfe3fa93bso215911181cf.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 12:03:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784574220; x=1785179020; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784574221; x=1785179021; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=T8pwpTHVxKFUW9eWFUcZ6JIUKqN03SZt/B2SWptMgIs=;
-        b=MizgAtJFXf/A3nc/U4LEaKkc6HbuqhB/qpqbRlTOR/LyOU7cUh13STha+1VW6MDvHf
-         NeMZQ0VwkrtYvNrfFM5ce+IGW0yJw2lQ6TB5yOvBTDvfs6Y9EEF/SUahL51Odv24TBxP
-         utLeQmjfCPSHAkuGrzHx/zq55+Y8aWIOmV34PJu+UWgHdFMJiNsKr+3XELdifjYW7luY
-         c2QtHzxqB7Kp0CApopwqZS28/eKraPXhjnervgnxcogdWDG9CvtCCQllVUTaSOQ7X0E0
-         b2nHVlBqTet/Thw+5aNXSMVqqMcgInw94kRHzyPO+eMlVB1ET7ZBr2NqDZ7twIGaOADi
-         teng==
+        bh=iqC1UMQqgc8CPLMgHXDTgheCDiJEX3V1C83nXvjGTf4=;
+        b=NkLVMGm+MeFA1WZCO2+eOMGhO/SKUpKZ+hkTYMEcOT/lmYGDUo+vGuLEev5KEd6SXt
+         l5p6EjHs+AVJ73YNYRhSE1M/WgSkxUAQNN974Z8X7P3dFTNmj5Yla+2j2gDGp8P7FiYq
+         pilfMmr97t5fQBTBTCkACSc32l/357dusY59ZClBTcxR0biA0etkaZGd4oitB8AU2zcb
+         ZdvGprNBTrstuU1K+mmNPNgKpNNsmMu/kB8aZj13GFMq3a0t0Q+3BBYbka/41vrtb29F
+         8x7QShnOmtCyHMTEIDhIN/9U+8y/12uAz84r3/uAb/vK8HlqPGPJj1g+4MQusdY3xjri
+         CtIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784574220; x=1785179020;
+        d=1e100.net; s=20251104; t=1784574221; x=1785179021;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=T8pwpTHVxKFUW9eWFUcZ6JIUKqN03SZt/B2SWptMgIs=;
-        b=Cv/L8NIbHqgZW6J6EXXwh00QniFwod0uAnf5v1ZANOf6f7Zb6QHFwmz5Q32vx0fMrr
-         CCEaQYtBzRt2oGr552uRK2cmN93Abuf4xR9JIy6PPwTh5IueezjalWL9VL80iA205vCL
-         0MnXJpv/cmbQou5M3cjvNJDD6KSIGeBGl6Va2GL+wcPChopi/PccUidHL7UDgbg4ttCA
-         BbzUHhfeI8rBesSYrL4xjDepT+l7zX9DOuh5stfJr02+1PsAU342sD6OHuNDNaAcVbiQ
-         8tge827gNaLoRHE9Rb2/Y7s/nN3Db1upigRIfHyqitpx0iHvvp5Jduti1AVIj7PduEWS
-         T4AA==
-X-Gm-Message-State: AOJu0YyDuLEOUNKDQe1p1lpk1baolHbDYGLd64fZ38yXkrWfH1T3MhsH
-	ikB5c1Gedofx0VI6ZGOEZ65m8x4gZwPgTOnZmAHIOtfdwiWHNV3LD9acceLdPbGtYj6sDHQZF/H
-	SrNn9nvIWytMBN8ASSD9i54XQ1YmXBSyYM6EsRqE2/QgojHclX2O0r6U0JRIQ43n/BqUw
-X-Gm-Gg: AfdE7cmOyJsRLu7kemXJ0N6QeT2fCWfbLWD/mHfiWLrypu4x/oCLatTzeA+L18pMAiE
-	WI/BptZIlLUYI8Q1SGdJdPoJE/2bfiYqpz01g1CJPbk4F5yiNWMgHV1nsKFoBdzHk+YEoWXVb+4
-	+xolEoDl80BKI5JK6lRiScxCKX3MWBJpFH+Ta25lLlmq3sUKgqh+VpAYuXQ2ebQ+hfpWwQDRnHO
-	U4fy/Z9WU9U2yYo6aJmb/6iCnFupJR8mrGoO6l502Gk0VURGd97ehG8U/XSDKIScczj4bJeybZ0
-	ZpOyoD5w2F6RrGCyb9T8mO2EiLk2GFbSclP7vXR5QBEm/us5fyyT5IInO0ZMayhndkVgMI9bSd3
-	CUj19lZlEHRU2+XVYVL1hoVhz
-X-Received: by 2002:a05:622a:4d:b0:51c:7b12:5fce with SMTP id d75a77b69052e-5213cec8679mr147242531cf.74.1784574219236;
-        Mon, 20 Jul 2026 12:03:39 -0700 (PDT)
-X-Received: by 2002:a05:622a:4d:b0:51c:7b12:5fce with SMTP id d75a77b69052e-5213cec8679mr147241851cf.74.1784574218309;
-        Mon, 20 Jul 2026 12:03:38 -0700 (PDT)
+        bh=iqC1UMQqgc8CPLMgHXDTgheCDiJEX3V1C83nXvjGTf4=;
+        b=iV3u0MxjxEnmQUVKqITiC3/6NyEdRYXqWXVspIGXPsIl++2+d5ek+OSZ1FRG36WqfW
+         yllgsIsyRiJEY0KiRLmMAKtbwPAWtNQok1cgof19fZhUnQz3DR74luIpc5kNNU0uJgMt
+         gwuRixKODhqRjZi3DqX0mA8Qm9Boeq2tRRvBHSe6NTqqAzHcXmgp3ylXgxJ3gN9mRKgC
+         StNoVLS2iNdGkl9cldn8MTH8FSu22nDgg7v8KCBjmLj7k3UAqPPw9IFlIBjz04JXt5CZ
+         2NKvg9Onx0qBHdxFek86AXKYE9wlG99x/8rSafxoa/W0EWduKKOZkSifyUQZ68LXGRiO
+         +2Nw==
+X-Gm-Message-State: AOJu0Yyiq5anlP59XRyAdEeSzRfwIsmIYEztM2OEczFCgmquGU4LfBih
+	K783x/PShva4NZwU/Bc2jpdsAdQvgkI4jBzvn5r/eX+5zG9wOMNx+EXCmIsbpJd2zCso6briJmh
+	UnqKA27h3tSREQnqs/eYjdNqtcXaa9AgkXToiDF0OJdipOACONZX7tnKNFrjT2LgKJOrG
+X-Gm-Gg: AfdE7cmSsAkT0T2XPbbL9zF6UqLDIRlOXJVwB3S7l4Dy8UBa0EViFqkiA39LScNLVjy
+	yUj52L5BHO7hG79gnxwYyZWBmB5IxwpluHqLdYy0h6HjwJvNZBHlCQn2kJlY7eFepp/F74kgWFo
+	kiC9v5JM4tsW0IWq6sTtOSR1ASzHAUOszxNWI1+2OvcCoF1jz8dZ206WM4mCdVvrxvWYRFTMc3j
+	N+hjdnVfGc1EbejMjlKqAkNPrnYHTPO1BpZRkcEXGdqZ3jbSHIXZnS938NmpQ00Q99xrTwMzLIN
+	22q7A105kJkVE3WOGArqAj6pSZAxieH9w1JC5275k6t3t9TaE3bKg24q6MmTNsgJTtJqj4QWHUX
+	1RkgwFja5omk9LwxMtFODZTUF
+X-Received: by 2002:a05:622a:1e93:b0:51c:c7:80a9 with SMTP id d75a77b69052e-5213e67fccbmr148137471cf.72.1784574221162;
+        Mon, 20 Jul 2026 12:03:41 -0700 (PDT)
+X-Received: by 2002:a05:622a:1e93:b0:51c:c7:80a9 with SMTP id d75a77b69052e-5213e67fccbmr148135381cf.72.1784574220301;
+        Mon, 20 Jul 2026 12:03:40 -0700 (PDT)
 Received: from [127.0.1.1] ([178.197.223.174])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4954aa1a231sm181509845e9.1.2026.07.20.12.03.36
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4954aa1a231sm181509845e9.1.2026.07.20.12.03.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Jul 2026 12:03:37 -0700 (PDT)
+        Mon, 20 Jul 2026 12:03:39 -0700 (PDT)
 From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Date: Mon, 20 Jul 2026 21:03:27 +0200
-Subject: [PATCH v3 1/3] interconnect: qcom: Make important drivers default
+Date: Mon, 20 Jul 2026 21:03:28 +0200
+Subject: [PATCH v3 2/3] interconnect: qcom: Add missing depends to Hawi,
+ Maili, Nord and Shikra
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260720-interconnect-qcom-clean-arm64-v3-1-942e8ee7ebda@oss.qualcomm.com>
+Message-Id: <20260720-interconnect-qcom-clean-arm64-v3-2-942e8ee7ebda@oss.qualcomm.com>
 References: <20260720-interconnect-qcom-clean-arm64-v3-0-942e8ee7ebda@oss.qualcomm.com>
 In-Reply-To: <20260720-interconnect-qcom-clean-arm64-v3-0-942e8ee7ebda@oss.qualcomm.com>
 To: Georgi Djakov <djakov@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
@@ -98,419 +99,98 @@ Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
         Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=13634;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1801;
  i=krzysztof.kozlowski@oss.qualcomm.com; h=from:subject:message-id;
- bh=imxuGMzvwoNW6yNDOJKPCD+UHZpzgStrg6didKXVX9g=;
- b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBqXnEDx9cJo0HuorJP3fzoEM6yQtjw9/OGnH/Zx
- NlhzSYtOHqJAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCal5xAwAKCRDBN2bmhouD
- 1wpVD/4g0dR4ma3BYT4o9yYE+36pL7e0pX7Mja1UpudkMX1VgojjPDLU/NPg/J+KUnm7R7njjgH
- 9xyjih1In2uapozXAg9d6B27XQLMGYItsEs1/SBVBu0EO3H7jcJjcdyw0GOp8cTolAhjN0tb3S/
- ApyRn5MVbm6xWIlhCQKH1B4nEC42NSwn4LO18dlCtKE+akaF108A5iMwSK/e3d9opCxewLnDqZh
- SMahqHWw1SPvtjhnPkeL/iv0GenGUaVXRh5bG2wgWm9HqRtylIlbMI9WIDB9zMgp99+c9LQ/h9r
- N3YyoPo62yDquD8lz2AdDorWPUxPo3F3C4pg8BuggwUaXbm37o+uDKOCzOOkp+xGBOXtCQCO8pt
- 2/GKcU+pwIerb32IbA2pWvOYedul9+cOkxP8ZSQeFW4At1fbs2qz+6UJfdsS8Naeu6Ea9bKV1+E
- TgxjIMqAZyStBZrx/9pY08HvhobMl54db5XUSXUgBXJAaw0IrTjKZX5EzWP2pwtMLeTdQ6pTjnt
- rqr72313UmY4CDWhihOUiAKrX15vECSDmVCfj6vZynBF28TXF+O3VjQwOQWjg6GFlYUqsTeItip
- kfgP3H5pW7yNVrmqKBxYlkcvw40DXiteLV+Obn5wsYNeY2TMQgp2GbPuoegdyahDb7k/5gZPdLb
- GFC/VucKB57ovow==
+ bh=JR4Ua1kfTiV8QNLHWvAaewWDC4h+Q/DLdnHAzgTqOfo=;
+ b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBqXnEEgrUOpRMy9halmAy6cWzO5c61ytP877DCz
+ dFFWF6H9S+JAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCal5xBAAKCRDBN2bmhouD
+ 16vbD/oDIiFjy/YVbi5bMN/w9FKQXVNTxdv7WkDt0g6ecjSOdiVJB1Q/u/hb80Y/+st/ZN94tht
+ yu/YpdtDOG4+mp98S2EEgwW2RoXI89aPbQ15TywWiM391daJ8s+eFzdpU8VlOuhTOGkSLld5wtR
+ uoDYCtD3ltFMZQdd6QjqkOMDCUslEm85Ld7mdRgyazzw8HF6SXDNFtm1qtYoJaFTEm/ZzWowk+a
+ xP2cFso6cQDU7meApg2OG6DHbVgkIRblJiSsbbZX6ISBZgUOZmC8/PxWtjoSRsrnx9hBUMt3SSK
+ hkM7+rCitFrS1MPL0FWOZXsZELw6yR0O3+UpeXP/tBYjtSjwhAlkfxYmbmxp3oazpo/iyq0gQAz
+ tdfdeTaV8IwoMNenpNfUdxZb4Bo1mY5ew+fFwcWRgSQjbRRUYjJGaA4FWNryXJVuKJN6nOYRGfu
+ 1Z9Abj+BGE1+IhWj0D6NfJMRIaQV8aEKhDLjNy8xYcthJQqOH42mvUvOESsY8gM3MD7VVJvUsjO
+ V6NeJfyEvcwzLL3nLUEhtgOSBPWnOnIrNj1K6pe8TS5O4A7kCk4zS3xea11QlIl9lfnxVC+1yP2
+ YlAkK28cDTmhBamhny00xbykKyZ+kzGIces+YyZ1oA1TwcQUotmMYNiaUbpQEzj8qQcWGuCnIVs
+ hnr/c755Q/Y8oWQ==
 X-Developer-Key: i=krzysztof.kozlowski@oss.qualcomm.com; a=openpgp;
  fpr=9BD07E0E0C51F8D59677B7541B93437D3B41629B
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDIwOCBTYWx0ZWRfX+CMew/SJPZpv
- PNZypgo4e7iv2ZiHm1j0cerVlCcO4lnac2xyQm4Eu/bvlldSl5MIUbTYn43PrRMWEQLrkPhTl7x
- aGXnX6NL/wF+3288373iww9eOFKaYMk=
-X-Proofpoint-ORIG-GUID: QLk5adpl8U1iOozxOmFmFxjKcebhsFuI
-X-Authority-Analysis: v=2.4 cv=DMS/JSNb c=1 sm=1 tr=0 ts=6a5e710c cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=N6niishs+lR9UBL1FN3Qrw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDIwOCBTYWx0ZWRfX+6owmqpB8KLS
+ dh4lr591p+lqSiy4awjhIL7AJgVtnAff5Ve2IWfHcVTgd/KeBIpFKu+6EUQ6JKG+R1LxROOZ+RW
+ ipc5vq2FKIdLDu2FKeEE76jjZxP8DOuVvzAAq44WMG33cb/OvwBkHVt7EKFi4wYcWecKz6Y3skq
+ st6iKqnb/7b4Vev6vndjHepuOkVp8YiBHA8YwzURodR9DIYBCJW7XP9rxCNOs8DDcyufBUOESBK
+ PPDm/40mf47ZQJWHbqHMZC5an+qy4zyvRToTrbwez1ROwattTAUWbwa2ASM+g1GXaQDezYxtZcd
+ mqcVap3Y5YeCO3fDunfXgegnG25lwOQu2+EwFThmy83950ZfFomOHxU01NVtqPLU58jVMAtgLks
+ ks2MCEv9GAvThtlwqALTgCnFlC3sE27B+ZCGrlqkw4zL38sw85NjWcFIvvdpO91cXPXo377A68s
+ cOQVc3YED1BTJEk84Aw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIwMDIwOCBTYWx0ZWRfXyZyYJJg4yKlC
+ r9qTz7jYONJVD81UPe4jsdt65a69ZIkgjFDu2XkJwLZEuHjBwM6HMStyfbm/ehMDW4wwBTPrWUN
+ ep5UreFoCpsIEEatqHYN2A21dVmczfw=
+X-Authority-Analysis: v=2.4 cv=WNpPmHsR c=1 sm=1 tr=0 ts=6a5e710e cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=N6niishs+lR9UBL1FN3Qrw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=SgRPkAPvXIXIjLLMwDcA:9 a=4VlVeAog_cEay8Ou:21
- a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-GUID: QLk5adpl8U1iOozxOmFmFxjKcebhsFuI
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIwMDIwOCBTYWx0ZWRfX6Rle+sOj5bqo
- RvNPyR8l48HvF3N7dPi4T1hKoQkeMuK+6hO4rMhASHPtpDMAb1KekzQj16InBpVMKnm/LxnrXe1
- 87CRxL0Un5rra/axH0Qp6KV6Q486x6Gc5IF79+GaYVtn9nvc4Ko/KS1PEoB0QWaZ0hsYxFt8U+m
- tPh27z6NQZiCP0ZPKQ/VGsxKFk37VFHpLBvVuJmGhq1b4SsnMzgfKmgW+Z33h/DJdVRif2FQSF+
- GiothmafcX3dJ+qXLwJc8Ur5Ux1U0gzVHnXMBzwYOXUfza6s758/QZF1MaU7S38/J9hYIdjuBTH
- /oxj1F6Kqwwb2KgP6VyC+ozE4ID5hPqY2fUQ8npaQnOaJ8lFJ7m90mdafEeQrw2Dw1OiYK4WEz1
- z1TQGB+y662GiropdtlxsM+THXU6NnSmFyKXyp+ZxtOCvwYn/jY8TIkXn5tS/VGjjOhApdDi/bz
- 0aaHQMgGmk8RlySV8dQ==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=H0ku5XqlSbOf5Hpt4WgA:9 a=QEXdDO2ut3YA:10
+ a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-GUID: PLSaLthqu71vERR3_BLVk20NL1Ky8ELU
+X-Proofpoint-ORIG-GUID: PLSaLthqu71vERR3_BLVk20NL1Ky8ELU
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-20_04,2026-07-20_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 impostorscore=0 priorityscore=1501 spamscore=0 bulkscore=0
- lowpriorityscore=0 clxscore=1015 phishscore=0 malwarescore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607200208
+ adultscore=0 clxscore=1015 suspectscore=0 spamscore=0 malwarescore=0
+ priorityscore=1501 impostorscore=0 phishscore=0 bulkscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607200208
 
-The interconnect drivers for Qualcomm SoC Network-on-Chip are covering a
-basic or fundamental SoC feature: bandwidth management between internal
-SoC blocks.  SoC can boot without these, but power management or
-performance will be affected.  These drivers do not represent any sort
-of buses visible to the board designers/configurators, thus they should
-be always enabled, regardless how SoC is used in the final board.
-
-Kernel configuration should not ask users choice of drivers when that
-choice is obvious and known to the developers that answer should be
-'yes' or 'module'.
-
-Switch all almost Qualcomm interconnect drivers to a default 'yes' for
-ARCH_QCOM.  This has impact:
-
-1. arm64 defconfig:
-   a. Enable as built-in INTERCONNECT_QCOM_HAWI, INTERCONNECT_QCOM_NORD,
-      INTERCONNECT_QCOM_SDM660, INTERCONNECT_QCOM_SDM670,
-      INTERCONNECT_QCOM_SM7150 and INTERCONNECT_QCOM_SAR2130P, which
-      were not selected before but should be, because these platforms
-      need them anyway for proper functioning.
-
-   b. Switch to built-in from a module INTERCONNECT_QCOM_QCS404 and
-      INTERCONNECT_QCOM_MSM8916, which as modules would not make the
-      platform bootable in most cases, and INTERCONNECT_QCOM_OSM_L3,
-      which when module might slow down boot considerably by having
-      caches running at slow speed.
-
-2. arm qcom_defconfig: Switch to built-in from a module
-   INTERCONNECT_QCOM_RPMH, INTERCONNECT_QCOM_SMD_RPM,
-   INTERCONNECT_QCOM_BCM_VOTER, INTERCONNECT_QCOM_MSM8974,
-   INTERCONNECT_QCOM_SDX55, which as modules would not make the
-   platform bootable in most cases.
-
-3. arm multi_v7 defconfig: Enable drivers necessary to boot
-   ARM 32-bit platforms, which are already enabled on qcom_defconfig:
-
-   a. Enable as built-in INTERCONNECT_QCOM_MSM8974.
-   b. Enable as modules (other dependencies prevent from built-in)
-      INTERCONNECT_QCOM_RPMH, INTERCONNECT_QCOM_BCM_VOTER and
-      INTERCONNECT_QCOM_SDX55.
-
-4. COMPILE_TEST builds: Enable by default all drivers for arm or arm64
-   builds, whenever ARCH_QCOM is selected.  This has impact on build
-   time and feels logical, because if one selects ARCH_QCOM then
-   probably by default wants to build test it entirely.  Kernels with
-   COMPILE_TEST are not supposed to be used for booting.
+Hawi, Maili, Nord and Shikra were added in parallel or after
+commit 5b696f065843 ("interconnect: qcom: Restrict drivers per
+ARM/ARM64"), thus they missed the update restricting them per
+architecture (with the same rationale).
 
 Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 ---
- drivers/interconnect/qcom/Kconfig | 39 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 39 insertions(+)
+ drivers/interconnect/qcom/Kconfig | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/drivers/interconnect/qcom/Kconfig b/drivers/interconnect/qcom/Kconfig
-index e4806bd7929c..dd8774d84321 100644
+index dd8774d84321..6bc2038de28a 100644
 --- a/drivers/interconnect/qcom/Kconfig
 +++ b/drivers/interconnect/qcom/Kconfig
-@@ -2,6 +2,7 @@
- config INTERCONNECT_QCOM
- 	tristate "Qualcomm Network-on-Chip interconnect drivers"
- 	depends on ARCH_QCOM
-+	default ARCH_QCOM
- 	help
- 	  Support for Qualcomm's Network-on-Chip interconnect hardware.
- 
-@@ -14,6 +15,7 @@ config INTERCONNECT_QCOM_ELIZA
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on Eliza-based
- 	  platforms.
-@@ -24,6 +26,7 @@ config INTERCONNECT_QCOM_GLYMUR
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on glymur-based
- 	  platforms.
-@@ -33,6 +36,7 @@ config INTERCONNECT_QCOM_HAWI
+@@ -34,6 +34,7 @@ config INTERCONNECT_QCOM_GLYMUR
+ config INTERCONNECT_QCOM_HAWI
+ 	tristate "Qualcomm HAWI interconnect driver"
  	depends on INTERCONNECT_QCOM_RPMH_POSSIBLE
++	depends on ARM64 || COMPILE_TEST
  	select INTERCONNECT_QCOM_RPMH
  	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on hawi-based
- 	  platforms.
-@@ -43,6 +47,7 @@ config INTERCONNECT_QCOM_KAANAPALI
- 	depends on ARM64 || COMPILE_TEST
+ 	default ARCH_QCOM
+@@ -55,6 +56,7 @@ config INTERCONNECT_QCOM_KAANAPALI
+ config INTERCONNECT_QCOM_MAILI
+ 	tristate "Qualcomm MAILI interconnect driver"
+ 	depends on INTERCONNECT_QCOM_RPMH_POSSIBLE
++	depends on ARM64 || COMPILE_TEST
  	select INTERCONNECT_QCOM_RPMH
  	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on kaanapali-based
- 	  platforms.
-@@ -72,6 +77,7 @@ config INTERCONNECT_QCOM_MSM8916
+ 	default ARCH_QCOM
+@@ -146,6 +148,7 @@ config INTERCONNECT_QCOM_MSM8996
+ config INTERCONNECT_QCOM_NORD
+ 	tristate "Qualcomm Nord interconnect driver"
+ 	depends on INTERCONNECT_QCOM_RPMH_POSSIBLE
++	depends on ARM64 || COMPILE_TEST
+ 	select INTERCONNECT_QCOM_RPMH
+ 	select INTERCONNECT_QCOM_BCM_VOTER
+ 	default ARCH_QCOM
+@@ -370,6 +373,7 @@ config INTERCONNECT_QCOM_SHIKRA
+ 	tristate "Qualcomm SHIKRA interconnect driver"
  	depends on INTERCONNECT_QCOM
  	depends on QCOM_SMD_RPM
++	depends on ARM64 || COMPILE_TEST
+ 	default ARCH_QCOM
  	select INTERCONNECT_QCOM_SMD_RPM
-+	default ARCH_QCOM if ARM64
  	help
- 	  This is a driver for the Qualcomm Network-on-Chip on msm8916-based
- 	  platforms.
-@@ -100,6 +106,7 @@ config INTERCONNECT_QCOM_MSM8953
- 	depends on QCOM_SMD_RPM
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_SMD_RPM
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on msm8953-based
- 	  platforms.
-@@ -110,6 +117,7 @@ config INTERCONNECT_QCOM_MSM8974
- 	depends on QCOM_SMD_RPM
- 	depends on ARM || COMPILE_TEST
- 	select INTERCONNECT_QCOM_SMD_RPM
-+	default ARCH_QCOM
- 	help
- 	 This is a driver for the Qualcomm Network-on-Chip on msm8974-based
- 	 platforms.
-@@ -130,6 +138,7 @@ config INTERCONNECT_QCOM_MSM8996
- 	depends on QCOM_SMD_RPM
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_SMD_RPM
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on msm8996-based
- 	  platforms.
-@@ -139,6 +148,7 @@ config INTERCONNECT_QCOM_NORD
- 	depends on INTERCONNECT_QCOM_RPMH_POSSIBLE
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on Nord-based
- 	  platforms. The topology consists of several NoCs controlled by
-@@ -149,6 +159,7 @@ config INTERCONNECT_QCOM_OSM_L3
- 	tristate "Qualcomm OSM L3 interconnect driver"
- 	depends on INTERCONNECT_QCOM || COMPILE_TEST
- 	depends on ARM64 || COMPILE_TEST
-+	default ARCH_QCOM
- 	help
- 	  Say y here to support the Operating State Manager (OSM) interconnect
- 	  driver which controls the scaling of L3 caches on Qualcomm SoCs.
-@@ -159,6 +170,7 @@ config INTERCONNECT_QCOM_QCM2290
- 	depends on QCOM_SMD_RPM
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_SMD_RPM
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on qcm2290-based
- 	  platforms.
-@@ -169,6 +181,7 @@ config INTERCONNECT_QCOM_QCS404
- 	depends on QCOM_SMD_RPM
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_SMD_RPM
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on qcs404-based
- 	  platforms.
-@@ -179,6 +192,7 @@ config INTERCONNECT_QCOM_QCS615
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on qcs615-based
- 	  platforms.
-@@ -189,6 +203,7 @@ config INTERCONNECT_QCOM_QCS8300
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Technologies, Inc. Network-on-Chip
- 	  on QCS8300-based platforms. The interconnect provider collects and
-@@ -201,6 +216,7 @@ config INTERCONNECT_QCOM_QDU1000
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on QDU1000-based
- 	  and QRU1000-based platforms.
-@@ -225,6 +241,7 @@ config INTERCONNECT_QCOM_SA8775P
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on sa8775p-based
- 	  platforms.
-@@ -235,6 +252,7 @@ config INTERCONNECT_QCOM_SAR2130P
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on SAR2130P-based
- 	  platforms.
-@@ -245,6 +263,7 @@ config INTERCONNECT_QCOM_SC7180
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on sc7180-based
- 	  platforms.
-@@ -255,6 +274,7 @@ config INTERCONNECT_QCOM_SC7280
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on sc7280-based
- 	  platforms.
-@@ -265,6 +285,7 @@ config INTERCONNECT_QCOM_SC8180X
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on sc8180x-based
- 	  platforms.
-@@ -275,6 +296,7 @@ config INTERCONNECT_QCOM_SC8280XP
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on SC8280XP-based
- 	  platforms.
-@@ -285,6 +307,7 @@ config INTERCONNECT_QCOM_SDM660
- 	depends on ARM64 || COMPILE_TEST
- 	depends on QCOM_SMD_RPM
- 	select INTERCONNECT_QCOM_SMD_RPM
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on sdm660-based
- 	  platforms.
-@@ -295,6 +318,7 @@ config INTERCONNECT_QCOM_SDM670
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on sdm670-based
- 	  platforms.
-@@ -305,6 +329,7 @@ config INTERCONNECT_QCOM_SDM845
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on sdm845-based
- 	  platforms.
-@@ -315,6 +340,7 @@ config INTERCONNECT_QCOM_SDX55
- 	depends on ARM || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on sdx55-based
- 	  platforms.
-@@ -335,6 +361,7 @@ config INTERCONNECT_QCOM_SDX75
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on sdx75-based
- 	  platforms.
-@@ -355,6 +382,7 @@ config INTERCONNECT_QCOM_SM6115
- 	depends on QCOM_SMD_RPM
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_SMD_RPM
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on sm6115-based
- 	  platforms.
-@@ -365,6 +393,7 @@ config INTERCONNECT_QCOM_SM6350
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on sm6350-based
- 	  platforms.
-@@ -375,6 +404,7 @@ config INTERCONNECT_QCOM_SM7150
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on sm7150-based
- 	  platforms.
-@@ -385,6 +415,7 @@ config INTERCONNECT_QCOM_MILOS
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on Milos-based
- 	  platforms.
-@@ -395,6 +426,7 @@ config INTERCONNECT_QCOM_SM8150
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on sm8150-based
- 	  platforms.
-@@ -405,6 +437,7 @@ config INTERCONNECT_QCOM_SM8250
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on sm8250-based
- 	  platforms.
-@@ -415,6 +448,7 @@ config INTERCONNECT_QCOM_SM8350
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on SM8350-based
- 	  platforms.
-@@ -425,6 +459,7 @@ config INTERCONNECT_QCOM_SM8450
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on SM8450-based
- 	  platforms.
-@@ -435,6 +470,7 @@ config INTERCONNECT_QCOM_SM8550
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on SM8550-based
- 	  platforms.
-@@ -445,6 +481,7 @@ config INTERCONNECT_QCOM_SM8650
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on SM8650-based
- 	  platforms.
-@@ -455,6 +492,7 @@ config INTERCONNECT_QCOM_SM8750
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on SM8750-based
- 	  platforms.
-@@ -465,6 +503,7 @@ config INTERCONNECT_QCOM_X1E80100
- 	depends on ARM64 || COMPILE_TEST
- 	select INTERCONNECT_QCOM_RPMH
- 	select INTERCONNECT_QCOM_BCM_VOTER
-+	default ARCH_QCOM
- 	help
- 	  This is a driver for the Qualcomm Network-on-Chip on X1E80100-based
- 	  platforms.
 
 -- 
 2.53.0
