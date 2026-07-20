@@ -1,107 +1,85 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CA19423A72
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 13:39:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF2304189DD
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 13:42:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784554789; cv=none; b=HQWZakdNK5XE3y0fGX3+zpCa6pWYhumxRhfmMTHoOB6FkW4Vzdnh3kk2wgJ05SbhdJZ8bKQcRKN6mNWvqbiu/JH0g5xpV0bW6sMuXKf9jV/RuuZcaidtpXm3EBfKpOKoGbjEl1LczBF3S2oOma2OPxa9FFiOaWJN0wPanwG/R20=
+	t=1784554934; cv=none; b=DGG3/A894Dra2aEnRvZX1PRPJuSizxykPaii5ZMwdHHUM0kFsxpRE/E3JkhTKt7CZzWwxbZ+3bcOH/DYSgwESPiiJs0RYjxoXVfrczV8doA+GwL3bQF+ckKN2lpZcjxziuUIWA0w6HjrY+j9DdqhtXOTgNAcizT5R5OJG42JmbM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784554789; c=relaxed/simple;
-	bh=hEfQm+fNIIIRf5G5yrPlpKCXyKnl5+VCOUdK6KCQ6M0=;
+	s=arc-20240116; t=1784554934; c=relaxed/simple;
+	bh=AufKo+x9e+YTdFLLkWDq/9s35hno6ztNd/WNA1wwc3M=;
 	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=AoKpPvq5pKkSvVQ71nJiszFX9NMMLBSqNlBGTB6lzaofNk7WKRMRbaBrYseuw7HmyOCnXU12OQjNrShVqXzuyiiuM0nOvxwM7p52PvsuFqi0uQ23y83qNSBIiWBxo8kx5x1htWPA/lNkgLB7WOv75NEPj0nbG+GUaS3kYPmZpFA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RI3vLrea; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=Sea+nyXBfF4PY8Bl6P0kFU/LUP/fUtWfsYlWqWsDChw7PhvzEDYUgKUSzEpb+hvzZxYeHGNqQOTgcFil9yiO1U0xSeMSK4MuDahnKRwe0LgnxQ6HbXaL8t9zxhBCr/R6LhJIwph4PDw4g22pkE/KDt7oV1MrDgIBLai8mXP/iDY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=krAYSCer; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RI3vLrea"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 06F181F00A3A
-	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 13:39:47 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="krAYSCer"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 11D441F0155A
+	for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 13:42:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784554787;
-	bh=hEfQm+fNIIIRf5G5yrPlpKCXyKnl5+VCOUdK6KCQ6M0=;
+	s=k20260515; t=1784554930;
+	bh=AufKo+x9e+YTdFLLkWDq/9s35hno6ztNd/WNA1wwc3M=;
 	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=RI3vLreahJGAhgtlatHkOscyo71Y2LCTFvhRAwMLIIk1XNm/x5FMR9Dwsagw98QSb
-	 7sV4l7YWuKlvsv/ADHoTvX6VbzeQy6aOsrGF+2mCSEnlw2dUHVuMB9qL8wvcU1c3qU
-	 vemxw9+dHy1Jym9R4FaAjcU/STnSceY7lDpjKtSxt9mcg6mx/zw4CRIYYc0FFL3xqh
-	 l5YU/gZw5z8l4D8NW5lYQ5SNul06GkJW2Ykuk2hWd2bX9EC5fPpbbmmswww7MRg5or
-	 7zprAf5p7duqoarODjDXjTJAmWjBbPaeUCPXfSYZJaOk1PPoTQOBOmXIw1ZvBXcv5V
-	 wtzDBgTWkgpbw==
-Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-39c923b8c2aso97129961fa.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 06:39:46 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RrQ/Aqznb1rSoXX8FwQXP31a4jJN03StKGBOUnEFz9j/Wyqt32STBURw+sWQC2DGYZ0xhZQ/MoHeRQMfViN@vger.kernel.org
-X-Gm-Message-State: AOJu0YyVYy0mAs+o48E/Rt2lz1TCoAqeP7MeG+ruRnkJAjBFWhhH9FmL
-	FsjfD7mpFtDxD8AskROieC2R4rskA4d65flcujZC368LrZ3j0KxvSmum67GtOYdsSlVT6PSCa3s
-	qNio8atpKr8dsAJEQupozFQY0+9ZhiWMI0CZ7Txtyxw==
-X-Received: by 2002:a2e:be29:0:b0:39c:a06f:12ba with SMTP id
- 38308e7fff4ca-39eb294c61dmr29234131fa.40.1784554785347; Mon, 20 Jul 2026
- 06:39:45 -0700 (PDT)
+	b=krAYSCerPbAECToptJptyTSvTQt7Kqimf8k+M4PHZeg6rRF79l5bokUGb5Bm5N0A8
+	 G+9sSA6KjlEz4F7A1BXsYQJ/RXnqf1kUsNeAqhCZnbfS7cCJHACJdeoBBip6HMlvED
+	 uHGd3QwRKS/e61Ck1rt4R3Dag+/GXhyeBFARYWJ2yEXuANbNUSB5gkjF+KWLvkfFNB
+	 cGRJ403bqJjvtVE+j7FG3oCkLdqEcATk47NMOQZc/myax3lbpFx7BEvMduC8b8UK21
+	 rHNp7EiK/d0IjT5BABx0nbBaJ4Afs8PjeCpHanZWmtx0oXz7QyrSS/pVpLwfzYPDl+
+	 UtaSQw5TblhNw==
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-5aec201b582so10085512e87.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 06:42:09 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RoE8Fg5P3Bp2qvJ1WsR7iPyIxRMR7ngJ7siWDWVzd8vEZsWO35RTlM8gce9ArG54SFaFWaWJK7i7iZ9YH0Y@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzvf9jf4jUAsuwEVPHbsX8mcQkKHbgQLjhTl0spKUxXtpRj2DaJ
+	RMW4qeOQoqwZvBLI99d+Uqo0wpSz3Ayv4efrv9XPHiaL68RxTZ9lHbBeXFkbOJe4zjb+OPqcZGe
+	t/FYGXBTiJKjdmHkqM9hd1PUc5rzlZ3kJtFdiuRG0dA==
+X-Received: by 2002:a05:6512:696:b0:5b2:9f9c:4634 with SMTP id
+ 2adb3069b0e04-5b29f9c46c3mr777376e87.45.1784554928648; Mon, 20 Jul 2026
+ 06:42:08 -0700 (PDT)
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 20 Jul 2026 15:39:44 +0200
+ HTTPREST; Mon, 20 Jul 2026 06:42:07 -0700
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 20 Jul 2026 15:39:44 +0200
+ HTTPREST; Mon, 20 Jul 2026 06:42:07 -0700
 From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <e4f9b266-8d9e-48fe-99c0-58b61e02c9bd@arm.com>
+In-Reply-To: <20260720130511.493295-1-prasad.kumpatla@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260720-pdev-set-fwnode-instead-of-of-node-v1-0-2dee93f42c54@oss.qualcomm.com>
- <20260720-pdev-set-fwnode-instead-of-of-node-v1-3-2dee93f42c54@oss.qualcomm.com>
- <e4f9b266-8d9e-48fe-99c0-58b61e02c9bd@arm.com>
-Date: Mon, 20 Jul 2026 15:39:44 +0200
-X-Gmail-Original-Message-ID: <CAMRc=MefqCMgVv-o5hWoRwS2iXPQNs5nH2qHiz55+ew162LfSA@mail.gmail.com>
-X-Gm-Features: AUfX_mzO2mZAcAjFU14cJl1wZGPQmD5GzWNsNbZLHTzrF2PNrvf-Va6RwZ7OmuY
-Message-ID: <CAMRc=MefqCMgVv-o5hWoRwS2iXPQNs5nH2qHiz55+ew162LfSA@mail.gmail.com>
-Subject: Re: [PATCH 3/8] iommu/fsl: use platform_device_set_fwnode()
-To: Robin Murphy <robin.murphy@arm.com>
-Cc: brgl@kernel.org, driver-core@lists.linux.dev, 
-	linuxppc-dev@lists.ozlabs.org, linux-kernel@vger.kernel.org, 
-	linux-i2c@vger.kernel.org, iommu@lists.linux.dev, netdev@vger.kernel.org, 
-	linux-pm@vger.kernel.org, imx@lists.linux.dev, 
-	linux-arm-kernel@lists.infradead.org, mfd@lists.linux.dev, 
-	linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Danilo Krummrich <dakr@kernel.org>, Madhavan Srinivasan <maddy@linux.ibm.com>, 
-	Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
-	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, Andi Shyti <andi.shyti@kernel.org>, 
-	"Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>, 
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Doug Berger <opendmb@gmail.com>, 
-	Florian Fainelli <florian.fainelli@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
-	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Ulf Hansson <ulfh@kernel.org>, 
-	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
-	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, Lee Jones <lee@kernel.org>, 
-	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>, Srinivas Kandagatla <srini@kernel.org>
+References: <20260720130511.493295-1-prasad.kumpatla@oss.qualcomm.com>
+Date: Mon, 20 Jul 2026 06:42:07 -0700
+X-Gmail-Original-Message-ID: <CAMRc=MfvfVvJ4anwY5WZUr5K8fSGkcvejah72fUDLc7ZC59jNw@mail.gmail.com>
+X-Gm-Features: AUfX_mzkKRJxqWtXztybEccZih4vaheradj3-Hfi7e4EOBdahV046NLAZZdxguU
+Message-ID: <CAMRc=MfvfVvJ4anwY5WZUr5K8fSGkcvejah72fUDLc7ZC59jNw@mail.gmail.com>
+Subject: Re: [PATCH v4 0/4] ASoC: qcom and pinctrl: add LPASS LPR voting and
+ Hawi LPASS LPI TLMM
+To: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, 
+	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
+	linux-gpio@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org, 
+	Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	Srinivas Kandagatla <srini@kernel.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, 20 Jul 2026 14:58:27 +0200, Robin Murphy <robin.murphy@arm.com> said:
-> On 20/07/2026 10:24 am, Bartosz Golaszewski wrote:
->> Prefer the higher-level platform_device_set_fwnode() over the
->> OF-specific platform_device_set_of_node() for dynamically allocated
->> platform devices.
+On Mon, 20 Jul 2026 15:05:07 +0200, Prasad Kumpatla
+<prasad.kumpatla@oss.qualcomm.com> said:
+> This series adds support for LPASS low-power resource (LPR) voting
+> through PRM and introduces LPASS LPI TLMM pinctrl support for newer
+> platforms such as Hawi.
 >
-> This is very much non-portable code specific to OF-only platforms, but
-> if the intention is to remove platform_device_set_of_node() again
-> already, then FWIW,
+> On such platforms, LPASS requires LPR resource voting via PRM to keep
+> the subsystem active. This is handled by adding a new clock ID and
+> support for PARAM_ID_RSC_CPU_LPR in q6prm.
 >
+> Additionally, a new LPASS LPI TLMM block is introduced, requiring a
+> dedicated DT binding and pinctrl driver.
 
-Providing platform_device_set_of_node() and using it was done to make the
-transision to expanding reference counting to all firmware nodes possible.
-I don't think we'll remove it just yet as it doesn't make sense to convert
-the code under drivers/of/ to using the fwnode variant.
-
-> Acked-by: Robin Murphy <robin.murphy@arm.com>
->
-> (Although I'm slightly puzzled by the cover letter - AFAICS in -next,
-> platform_device_set_of_node() is itself very much a user of
-> platform_device_set_fwnode(), however in terms of symbol exports,
-> perhaps the former could now just be a static inline wrapper?)
->
-
-Sure that can be done independently later.
+What is the merging strategy? Is an Ack from Mark required and the series
+should go together through the pinctrl tree?
 
 Bart
