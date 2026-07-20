@@ -1,136 +1,116 @@
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 680FF3BBFA3;
-	Mon, 20 Jul 2026 18:29:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BCC738F227;
+	Mon, 20 Jul 2026 18:55:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784572154; cv=none; b=ICFez2zcg/5XExLuRs0Uz7320ULKSlFxHaLXAL7smDHTCta/twI84c18zmooLkb947/5MCOeOGEJrHs+kCFXVReG/T03ZNYa69tCWHVaA1LvL/AYoyJTPTKM4Yk+yS86Mtt5lsGsuX1/ugzRdb7RkgKtMGtBvR1S1oR2AisGrrQ=
+	t=1784573754; cv=none; b=ZPQFMXLBaC1WDEzxSaUbsOCs/r67m6MhgSSAoGA8d6pEvN9nPm4aOsZ58mX7+yLU7woZNy+HasEEJxzNZj0LQySZVIXjiV9axUrC6umo/uXie8J3xAoxIDruk5e82Ot0XaltyfxNVw28N0aslOrPriZHrnpi66KGMGwaaPF465o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784572154; c=relaxed/simple;
-	bh=tfVWCL5gWoa3QiT5HZTS6PeE9CWbDfu6g4fGN5mDciM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=IXY+/Sw+K3XP6ICabAiAnICEoU68sMmsppgZYGp+SCpJBjaxpdVMIQAEUDGRiZ2hgyrb+UxfdD36ZoBnjkBM+8XT7b0xdY3WFDuyW3pOHITxnxaD6fXf7xCz51nLyHrW7EsoF24oFCp+QA6fqL5RANDPAi0wJzM0R26W7uIgiVc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=aXfSe1ax; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+	s=arc-20240116; t=1784573754; c=relaxed/simple;
+	bh=n+vf+uGdfFK3xwCRtQ3rJZO0kviQpKYLDmIF21spK+Y=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=eV9oDnCzY1Jem/JIblgECqcIqt7ytsCL7S+WSz9WVvEQ6zxJrX4rgFrisC6p0XbPW1AyyULsujL28N+pyYP2MTlcF/P3hNd+ckakGmuh8K0m5MNGmZttL/ZyFVdwkHe6MWD7UZ82QNpAe5xfXVLA5Zl4QxboctYZw5UGymPm/is=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EMkIz7ya; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="aXfSe1ax"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=yLMgkHL29YuNPW+/3QaUsRDGEETcaDq11JerkMxi71U=; b=aXfSe1axWn1ivOd2Cu9BO1RFeq
-	hWgF1UgIJeW3prZhNqGQBXWrgbuTuwyexLgmgUNYx2N/ldKGruFnJsUHlN1z27mAm6jFGqs2hs9gA
-	ahOJFCbMr0Yi7Jx28dCpVd/erX67Wj6OVBy/j8nQ7Y54VjyLQTQQ9WeRLH9Gg27QXLhQ=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1wlsjH-00DJ6A-QN; Mon, 20 Jul 2026 20:28:39 +0200
-Date: Mon, 20 Jul 2026 20:28:39 +0200
-From: Andrew Lunn <andrew@lunn.ch>
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
-	Andi Shyti <andi.shyti@kernel.org>,
-	"Joerg Roedel (AMD)" <joro@8bytes.org>,
-	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-	Doug Berger <opendmb@gmail.com>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Ulf Hansson <ulfh@kernel.org>, Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>, Lee Jones <lee@kernel.org>,
-	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>,
-	Srinivas Kandagatla <srini@kernel.org>, driver-core@lists.linux.dev,
-	linuxppc-dev@lists.ozlabs.org, linux-kernel@vger.kernel.org,
-	linux-i2c@vger.kernel.org, iommu@lists.linux.dev,
-	netdev@vger.kernel.org, linux-pm@vger.kernel.org,
-	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org,
-	mfd@lists.linux.dev, linux-arm-msm@vger.kernel.org,
-	linux-sound@vger.kernel.org
-Subject: Re: [PATCH 7/8] net: mv643xx: use platform_device_set_fwnode()
-Message-ID: <3e14e41f-ecd5-432b-9f52-690a05b38a8a@lunn.ch>
-References: <20260720-pdev-set-fwnode-instead-of-of-node-v1-0-2dee93f42c54@oss.qualcomm.com>
- <20260720-pdev-set-fwnode-instead-of-of-node-v1-7-2dee93f42c54@oss.qualcomm.com>
- <86b2aba7-b049-47e6-bc94-6cb499b30ce4@lunn.ch>
- <CAMRc=Mduv_KiB42d4AZddTrFSHmKogd2wh6vBDXomW6ssdfq9A@mail.gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EMkIz7ya"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8570C1F000E9;
+	Mon, 20 Jul 2026 18:55:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784573753;
+	bh=IyqdRB8kwy15swIpu2zJ10mWz5m4cEqMe0aubUhgmc8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=EMkIz7yaaOs8nrqeQfnPPF9SeVKH0VFZO8m0LwbuWYiUT+VPzeGfHLS6N+4uH9kSt
+	 2iPohvZvCTlStDesouIY9ZwFPUV6wSij/2uky7dlCL6S268dfA4h6eKp18IvzJyI07
+	 3Qit+QOKaPgcC6eiUoUghWu2rhsql2HqYJHhSRmr+/WmtC2OMDykNe+om4ZszQRECX
+	 hRCAOngLP9scj2wUlKIQAGN1Hw5et7wNOr0Y7hV+tsvZTckXtn7/+M83RQPcnqg2Ta
+	 weK+VTxR5MCrYeVRHA1hN0BUsLHqfkDn4imZE3WgSQ+5c6Wk2rsgcyHSrTXIX3GNQO
+	 REE056fkz5D5A==
+Message-ID: <db9c20b2-9a5a-4782-8f47-d42c18c59079@kernel.org>
+Date: Mon, 20 Jul 2026 20:55:48 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAMRc=Mduv_KiB42d4AZddTrFSHmKogd2wh6vBDXomW6ssdfq9A@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] interconnect: qcom: Enable Shikra interconnect driver by
+ default for ARCH_QCOM
+To: Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com>,
+ Georgi Djakov <djakov@kernel.org>,
+ Odelu Kukatla <odelu.kukatla@oss.qualcomm.com>,
+ Komal Bajaj <komal.bajaj@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260526-shikra_icc_kconfig-v1-1-c589db2d023c@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260526-shikra_icc_kconfig-v1-1-c589db2d023c@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jul 20, 2026 at 06:01:37PM +0200, Bartosz Golaszewski wrote:
-> On Mon, 20 Jul 2026 16:43:40 +0200, Andrew Lunn <andrew@lunn.ch> said:
-> > On Mon, Jul 20, 2026 at 11:24:54AM +0200, Bartosz Golaszewski wrote:
-> >> Prefer the higher-level platform_device_set_fwnode() over the
-> >> OF-specific platform_device_set_of_node() for dynamically allocated
-> >> platform devices.
-> >>
-> >> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-> >> ---
-> >>  drivers/net/ethernet/marvell/mv643xx_eth.c | 2 +-
-> >>  1 file changed, 1 insertion(+), 1 deletion(-)
-> >>
-> >> diff --git a/drivers/net/ethernet/marvell/mv643xx_eth.c b/drivers/net/ethernet/marvell/mv643xx_eth.c
-> >> index 9caa1e47c174c9d7a161b7f2e2ee12a829b813d4..2f2d6cce8d852b9ec3ab42678a04a7915d1f00cc 100644
-> >> --- a/drivers/net/ethernet/marvell/mv643xx_eth.c
-> >> +++ b/drivers/net/ethernet/marvell/mv643xx_eth.c
-> >> @@ -2780,7 +2780,7 @@ static int mv643xx_eth_shared_of_add_port(struct platform_device *pdev,
-> >>  		goto put_err;
-> >>  	}
-> >>  	ppdev->dev.coherent_dma_mask = DMA_BIT_MASK(32);
-> >> -	platform_device_set_of_node(ppdev, pnp);
-> >> +	platform_device_set_fwnode(ppdev, of_fwnode_handle(pnp));
-> >
-> > This is definitely an OF only driver. There are no other calls to
-> > fwnode functions in this driver, so this is the wrong thing to do.
-> >
-> > Sorry, NACK.
-> >
+On 26/05/2026 19:21, Raviteja Laggyshetty wrote:
+> Interconnect drivers provide fundamental NoC bandwidth management
+> required for correct system behavior. Although systems can boot without
+> them, power and performance are impacted.
+> These drivers need to enabled irresepective of the board variant, design
+> or configuration.
 > 
-> I'm not going to die on this hill but drivers are OF-only until they're not.
-> For example, Qualcomm is now working on a hybrid ACPI-OF approach for
-> laptops[1] and we may end up needing to start converting drivers to fwnode
-> after all.
+> Enable the Shikra interconnect driver by default on ARCH_QCOM by setting
+>  "default ARCH_QCOM".
 > 
-> There's no real benefit to sticking to OF-specific APIs unless you need to
-> iterate over all properties of a node or use some other functionality not
-> available in fwnode. The overhead is minimal and it's never a hot path.
+> Signed-off-by: Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com>
+> ---
+>  drivers/interconnect/qcom/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
 
-There is a lot of benefit to sticking to OF specific APIs, because
-within the kernel OF is well maintained, has active maintainers, there
-are tools to validate bindings, etc. ACPI is a Wild West, each driver
-is a snow flake, there is no review, no binding documentation, no
-validation tools etc.
+Please do not send conflicting works. You saw me doing this and you saw
+that my patch was not yet applied and there will be v3.
 
-I hope you allow plenty of time to convert any networking drivers,
-where Linux is driving the hardware, to ACPI. Your first stop will be
-the UEFI forum making a proposal for MDIO busses, because that
-currently is not part of ACPI. You will then need to spend time
-understanding the DT bindings, and figuring out which properties are
-deprecated so need to stay OF only, and which can be converted to dual
-OF/ACPI. I've seen too many naive attempts which blindly convert
-everything, copying all the past errors in the DT binding into the
-brand new ACPI binding. That will get NACKed.
+Best regards,
+Krzysztof
 
-OF != ACPI
-
-	Andrew
