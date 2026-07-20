@@ -1,46 +1,46 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B42432938D;
-	Mon, 20 Jul 2026 11:18:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F37A33B6D0;
+	Mon, 20 Jul 2026 11:23:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784546336; cv=none; b=WS3vqgX5fGUA6Cc1YXFpx/lIzSSOx+zwFgTIDmjalRjf7BjKE74eZF7sXig5mh+MnS3eGE5ewd2p7ZqpYipOH2ognxzCAIkCKauqbpeheIMUw5QnliFkeRebtedEAFdWZkIsrw6/JULvDk25+VhwQ3Ce799byJ6v3Jk2UiQeMjE=
+	t=1784546596; cv=none; b=seVOk02xkIcNeeOq991rgBUxPGlIRbfpl1munYH4+7wfNPIjk5OtFCrdCoI6W1KBgCExN3+p2reXdKsw11CikkhiFwIXJ+BmRqj4z4gYuBaQOfW3hEBzWgLCAgMzbWRI02HUQANlnTqm+Oc+VpUsYxuT4oonS+mZhAh62illIu4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784546336; c=relaxed/simple;
-	bh=omgW2WCvrvNpEtlBb7FPgRtXWMLH0K/ZqZUoNyBOrVE=;
+	s=arc-20240116; t=1784546596; c=relaxed/simple;
+	bh=oYH1UWv4eBuTf8gp/Chf9rss8aJNv0or7XfrIoUTeYk=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=mnu+biJNVIS1D7Te2bPRLnva4m2reVor1mfsNaAzrvxH5xhHeTh0EZ+QhH7gvrYckOFOVSJ0B8A8f5KjUslG8q+UJaMw9pZyqvpAglpQ/TjzvTKo/Jp0dtbX4BuNgSTdCwOUobvprvqSx7pFgQrsZCQwtNgdkftNdV3/xUeCukY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MA/rrSUA; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=KmLjVDJHqn8+/1hY1csJTxrdQxSf1Zo0x3ieYtRBAaWUZgnbBAxsW8DA6I+k9VSe27bbW8iGeuZfso7jT1f6sVXrRjBqO7oZxIUqVGqpQU+YlT3nQHGmndZYo4l4+w+feD/icptPXE0pXRNHgF0vUc5aJGR8lisG45svrVWjyu4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Iz8W+HLA; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MA/rrSUA"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4B7AB1F00A3A;
-	Mon, 20 Jul 2026 11:18:54 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Iz8W+HLA"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CAA991F000E9;
+	Mon, 20 Jul 2026 11:23:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784546335;
-	bh=90brq7N9vx8ptaQkJpj+PtsxJmmOQz7QVrLbmyRHcuw=;
+	s=k20260515; t=1784546595;
+	bh=d3xVK9YMrUjVB7REq1T+TRl9bzVEeUEnV0J6SaPCm8U=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=MA/rrSUAWwAcrQ34lRzEZITPZ3Fj34E37mtOEtKsHcL6tq7m/GWhp4KhVVAaDv/zz
-	 xk8+Oj/r8wiUms/3smMZCE+e+Dx462s42IA5q05D6GKGtfLwmhuCJl9bATItSEeIXC
-	 git3ErfsEvQXeQFSTol8m8nrNdSQvlfIbOGzxhRldM4cgvMHK5bvRjn9Knrsena38W
-	 gRzM70TckBngDn/pMP6MGn5twxnZF3T7KTOe4tktrPce3AejwOEWELNIBZgCzOhHgp
-	 WkLYEspzL7duqmZmq0UUhNg1vDn+l71CDxZDNMcXkEcj3bC+fVCzK/orJz/J3q4f0j
-	 FZdSRaZZ8bAoQ==
-Date: Mon, 20 Jul 2026 16:48:51 +0530
+	b=Iz8W+HLAWCJ4bghTZP1THbxM0UQQIHKCUmYXoLG5G7ynOYVIJxEutNCnsm1FmQE53
+	 ky0gwJQzBzRx/c+BZkAv1kZRCfN+HnETIt9oneWLozvcfoIUJc9WnfxQbMrThMkCCH
+	 lUQ00c2c8aobetivIjWBuoLdb+U9q7+ZRedCFF1FY3+WhdCvdDHR7WYTX6mykula6S
+	 Q1aQduXZqYoBTDoPAwndsTCl0DwZCiccVzZLoG8i/qHgS+yFaTsFekyDfrrYMNrMdT
+	 52xMpuTLeV54CnrppZwVhQMHmIPdPMCRQ9fh6ApCbo70W7a+1KuYpaux7vNNmOWb78
+	 6i+YIvpXVdJbg==
+Date: Mon, 20 Jul 2026 16:53:12 +0530
 From: Vinod Koul <vkoul@kernel.org>
-To: Manivannan Sadhasivam <mani@kernel.org>
-Cc: Ronak Raheja <ronak.raheja@oss.qualcomm.com>, krzk+dt@kernel.org,
-	conor+dt@kernel.org, robh@kernel.org, neil.armstrong@linaro.org,
-	gregkh@linuxfoundation.org, dmitry.baryshkov@oss.qualcomm.com,
-	konrad.dybcio@oss.qualcomm.com, abel.vesa@oss.qualcomm.com,
-	wesley.cheng@oss.qualcomm.com, krzysztof.kozlowski@oss.qualcomm.com,
+To: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+	Rob Herring <robh@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+	Wesley Cheng <quic_wcheng@quicinc.com>,
+	Xiangxu Yin <xiangxu.yin@oss.qualcomm.com>,
 	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-	devicetree@vger.kernel.org, linux-usb@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 0/4] phy: qcom: Introduce USB support for Hawi
-Message-ID: <al4EG1FMrI0z1D7z@vaman>
-References: <20260508213234.4643-1-ronak.raheja@oss.qualcomm.com>
- <chf57j2dkhhjzigpguldadfld5utepa4sxwbo7fjxk5nq37bhp@yci5agzh46ly>
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v6 2/4] dt-bindings: phy: qcs615-qmp-usb3dp: Add support
+ for Shikra SoC
+Message-ID: <al4FICuDRLYdPE_8@vaman>
+References: <20260712-usb-shikra-phy-v6-v6-0-1b3e51bf1541@oss.qualcomm.com>
+ <20260712-usb-shikra-phy-v6-v6-2-1b3e51bf1541@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -49,19 +49,113 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <chf57j2dkhhjzigpguldadfld5utepa4sxwbo7fjxk5nq37bhp@yci5agzh46ly>
+In-Reply-To: <20260712-usb-shikra-phy-v6-v6-2-1b3e51bf1541@oss.qualcomm.com>
 
-On 13-07-26, 13:12, Manivannan Sadhasivam wrote:
-> On Fri, May 08, 2026 at 02:32:30PM -0700, Ronak Raheja wrote:
-> > This series adds USB PHY support for the Hawi SoC. It documents the
-> > QMP USB3-DP combo PHY and M31 eUSB2 PHY bindings, adds the Hawi
-> > compatible to the DWC3 USB binding, and adds the PHY initialization
-> > sequences to the qmp-combo driver.
-> > 
+On 12-07-26, 20:58, Krishna Kurapati wrote:
+
+Krzysztof okay with this..?
+
+> Declare the USB-C QMP PHY present on the Qualcomm Shikra SoC. Shikra uses
+> 3 resets to be programmed before initialising the phy. As per the hardware
+> documentation, the third reset is PHY_PRIM_SP0_BCR, hence naming it "phy".
 > 
-> Vinod, does this series look good to you?
-
-It doesnt apply for me, can you folks rebase and resend
+> Also, add remote endpoints and orientation switch support for getting
+> Type-C orientation information.
+> 
+> Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+> ---
+>  .../bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml   | 49 +++++++++++++++++++++-
+>  1 file changed, 48 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml
+> index efb465c71c1b..98397006fa62 100644
+> --- a/Documentation/devicetree/bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml
+> +++ b/Documentation/devicetree/bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml
+> @@ -18,6 +18,7 @@ properties:
+>    compatible:
+>      enum:
+>        - qcom,qcs615-qmp-usb3-dp-phy
+> +      - qcom,shikra-qmp-usb3-dp-phy
+>  
+>    reg:
+>      maxItems: 1
+> @@ -33,12 +34,15 @@ properties:
+>        - const: pipe
+>  
+>    resets:
+> -    maxItems: 2
+> +    minItems: 2
+> +    maxItems: 3
+>  
+>    reset-names:
+> +    minItems: 2
+>      items:
+>        - const: phy_phy
+>        - const: dp_phy
+> +      - const: phy
+>  
+>    vdda-phy-supply: true
+>  
+> @@ -63,6 +67,22 @@ properties:
+>            - description: offset of the PHY mode register
+>      description: Clamp and PHY mode register present in the TCSR
+>  
+> +  orientation-switch:
+> +    description:
+> +      Flag the PHY as possible handler of USB Type-C orientation switching
+> +    type: boolean
+> +
+> +  ports:
+> +    $ref: /schemas/graph.yaml#/properties/ports
+> +    properties:
+> +      port@0:
+> +        $ref: /schemas/graph.yaml#/properties/port
+> +        description: Output endpoint of the PHY
+> +
+> +      port@1:
+> +        $ref: /schemas/graph.yaml#/properties/port
+> +        description: Incoming endpoint from the USB controller
+> +
+>  required:
+>    - compatible
+>    - reg
+> @@ -78,6 +98,33 @@ required:
+>  
+>  additionalProperties: false
+>  
+> +allOf:
+> +  - if:
+> +      properties:
+> +        compatible:
+> +          contains:
+> +            enum:
+> +              - qcom,shikra-qmp-usb3-dp-phy
+> +    then:
+> +      properties:
+> +        resets:
+> +          minItems: 3
+> +        reset-names:
+> +          minItems: 3
+> +
+> +  - if:
+> +      properties:
+> +        compatible:
+> +          contains:
+> +            enum:
+> +              - qcom,qcs615-qmp-usb3-dp-phy
+> +    then:
+> +      properties:
+> +        resets:
+> +          maxItems: 2
+> +        reset-names:
+> +          maxItems: 2
+> +
+>  examples:
+>    - |
+>      #include <dt-bindings/clock/qcom,qcs615-gcc.h>
+> 
+> -- 
+> 2.34.1
 
 -- 
 ~Vinod
