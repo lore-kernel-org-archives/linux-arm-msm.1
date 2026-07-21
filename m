@@ -1,30 +1,30 @@
-Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.5])
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.2])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32408374E59;
-	Tue, 21 Jul 2026 14:46:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.5
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 244A32D5436;
+	Tue, 21 Jul 2026 14:55:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=117.135.210.2
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784645199; cv=none; b=pXhsQU5E7tHmIRkaaAkk32Mx89Hx0z3JzRShr0SoLv+5mx1LuQGexM8StvWzCRny7rN0eS5p9u+DkI8JSBHukhVmPMcH9h8u5Nuy64gYaXmO8reIi2832mQeO9QzKodWc8/IOxlWkx5G9KKNXXRjZMZUu824/sDAr3Hptp7Ty9o=
+	t=1784645736; cv=none; b=WS0D/ffKD229Ap1u0/NtM54UPpvC0A9MqQHixNhUucrwB9iub/AdH26bXnEclpBIqDymTxCRbLFe40TL3AnmqhUHz4C7qg9mHkiswA36pblxpu0rqvCt5Cu3jyfnJaB4KE+uyZ7ZKNPVmarcll9Xi/RdsuM42Drho4Pz5gMABt4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784645199; c=relaxed/simple;
-	bh=R/msV6BSjTUr8FOnHmf2lMf/fKf/LCyhZe+Sj3t5/Qs=;
+	s=arc-20240116; t=1784645736; c=relaxed/simple;
+	bh=crclgJAO8541tKOA+BSPYtKCsNdaRKOVMB+1bvYEIX8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=AiAvqyRpelryG1bUlTBT+Bw5WyB7QzFD2NI/QNBOYKjkWLE3sIPMBbASA4wzUH1z2Fsh5pEn172+YLtitxCAy1Dg7cyYa5yk5x6uhLDuGfZtsSkyiQAsfWYDLG5x7OGXmha7nF2neNC8KsAr8o3xSyARcgxC6MgqCV0KmT7ezoU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=Peh1fwyy; arc=none smtp.client-ip=117.135.210.5
+	 MIME-Version; b=EnxEpicsFJ7mTZIeJzW8gqA7Hr/fZiWxViT256C6sQMJtVdB5o0h13qVl5pCvBdRtBPrXvjiFcpmBOSDFkbstr2x4V91jyB86dzlurJPZEmLwpRq9iWmV50AgsU5agjBUWUhw6EaeH/tdxMNekzFerSqvWVw8qcw6Bvwz8rOy7k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com; spf=pass smtp.mailfrom=163.com; dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b=AUSgAhpx; arc=none smtp.client-ip=117.135.210.2
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="Peh1fwyy"
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.b="AUSgAhpx"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=hO
-	frVq4YKjLhfWHiBKoXhTt4FALdDMC3RF5HDMqsW/I=; b=Peh1fwyy/bG20EZmmk
-	9ymp2kiJ8kHvuA6L1HAvc87X0d5apil2+ZzgMmNnY82TbH4rG9DgtJd4ujLW4jbb
-	H4+sF0OvhBqgPWkTdbYxTRd6XzrmEOf4ThLM76rgVcXhUxXBz8jDobEvYvN3XITE
-	dAIdWK/QnyYlwPWy1LkRcHFWE=
+	s=s110527; h=From:To:Subject:Date:Message-ID:MIME-Version; bh=LF
+	M0tFLY87HCv4HlgKmhJWdTJQq/Rdu92HA8adok6mk=; b=AUSgAhpxmd+66pU7rZ
+	Zbko8wcNMQCOGXFVf02oYeZmR84EwF4YbzMGgPWo7lNNMWKglQ4L+rW/msGsUU5P
+	32GfJ3SaAsKYxUvGxmCoM4oG0MoRT9J9q7OmuhN8A2TskHy8sUvgRv94fsEspbQr
+	GgPC533OQNJsScIw7vtkzWNho=
 Received: from hie (unknown [])
-	by gzsmtp2 (Coremail) with SMTP id PSgvCgCHxvQphl9qmiW7Hg--.30663S2;
-	Tue, 21 Jul 2026 22:46:02 +0800 (CST)
+	by gzsmtp2 (Coremail) with SMTP id PSgvCgC3kvk_iF9quvy7Hg--.31354S2;
+	Tue, 21 Jul 2026 22:54:56 +0800 (CST)
 From: code_0002@163.com
 To: konrad.dybcio@oss.qualcomm.com,
 	andersson@kernel.org
@@ -34,12 +34,12 @@ Cc: linux-arm-msm@vger.kernel.org,
 	code_0002@163.com,
 	map220v <map220v300@gmail.com>,
 	code002-2 <hiez832670@gmail.com>
-Subject: [PATCH v3] arm64: dts: qcom: sm8550: add Xiaomi Pad 6S Pro (sheng)
-Date: Tue, 21 Jul 2026 22:45:57 +0800
-Message-ID: <20260721144557.1455-1-code_0002@163.com>
+Subject: [PATCH v4] arm64: dts: qcom: sm8550: add Xiaomi Pad 6S Pro (sheng)
+Date: Tue, 21 Jul 2026 22:54:52 +0800
+Message-ID: <20260721145452.1996-1-code_0002@163.com>
 X-Mailer: git-send-email 2.54.0.windows.1
-In-Reply-To: <20260721133204.902-1-code_0002@163.com>
-References: <20260721133204.902-1-code_0002@163.com>
+In-Reply-To: <v3的message-id>
+References: <v3的message-id>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -47,12 +47,12 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:PSgvCgCHxvQphl9qmiW7Hg--.30663S2
-X-Coremail-Antispam: 1Uf129KBjvAXoWDXryUKFW8CFy8Wr1rAr4ruFg_yoWrWw15Jo
+X-CM-TRANSID:PSgvCgC3kvk_iF9quvy7Hg--.31354S2
+X-Coremail-Antispam: 1Uf129KBjvAXoWDXryUKFW8CFy8Wr1rAr4ruFg_yoWrAr13Ao
 	Z2vrWFvFZ5ua4rGr1kXrWDC3Z7WrW8Xa9IkFs0gF1rWF4rAa4akan0k3W7WF12qr45Kryk
 	X34Fva45C347Ca95n29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
-	AaLaJ3UbIYCTnIWIevJa73UjIFyTuYvjxUjfHjUUUUU
-X-CM-SenderInfo: 5frgvsaqqqjqqrwthudrp/xtbC8AoeuGpfhiqLbgAA3g
+	AaLaJ3UbIYCTnIWIevJa73UjIFyTuYvjxUjOz3UUUUU
+X-CM-SenderInfo: 5frgvsaqqqjqqrwthudrp/xtbCzQCkP2pfiEC8zAAA3b
 
 From: map220v <map220v300@gmail.com>
 
@@ -61,6 +61,11 @@ Add device tree for Xiaomi Pad 6S Pro (sheng) based on SM8550.
 Signed-off-by: code002-2 <hiez832670@gmail.com>
 
 ---
+
+v4: address Sashiko AI review comments
+- Add GPIO_OPEN_DRAIN to shared cs35l43 reset-gpios to avoid -EBUSY
+- Set Bluetooth local-bd-address to [ 00 00 00 00 00 00 ]
+
 v3: address review comments from Konrad Dybcio
 - SM8550P has no modem; confirmed on device (dmesg shows no mpss)
 - Rename fingerprint_fpc -> fingerprint-reader, use interrupts-extended
@@ -92,7 +97,7 @@ index 6f33c4e2f..d8e485521 100644
  sm8650-hdk-display-card-dtbs	:= sm8650-hdk.dtb sm8650-hdk-display-card.dtbo
 diff --git a/arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts b/arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts
 new file mode 100644
-index 000000000..4ca113842
+index 000000000..a5aa49a01
 --- /dev/null
 +++ b/arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts
 @@ -0,0 +1,1763 @@
@@ -1136,7 +1141,7 @@ index 000000000..4ca113842
 +		reg = <0x40>;
 +		interrupt-parent = <&tlmm>;
 +		interrupts = <98 IRQ_TYPE_LEVEL_LOW>;
-+		reset-gpios = <&tlmm 90 GPIO_ACTIVE_HIGH>;
++		reset-gpios = <&tlmm 90 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
 +		#sound-dai-cells = <0>;
 +		sound-name-prefix = "TRL";
 +		cirrus,dsp-part-name = "trl-cs35l43";
@@ -1157,7 +1162,7 @@ index 000000000..4ca113842
 +		reg = <0x41>;
 +		interrupt-parent = <&tlmm>;
 +		interrupts = <99 IRQ_TYPE_LEVEL_LOW>;
-+		reset-gpios = <&tlmm 90 GPIO_ACTIVE_HIGH>;
++		reset-gpios = <&tlmm 90 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
 +		#sound-dai-cells = <0>;
 +		sound-name-prefix = "TLH";
 +		cirrus,dsp-part-name = "tlh-cs35l43";
@@ -1178,7 +1183,7 @@ index 000000000..4ca113842
 +		reg = <0x42>;
 +		interrupt-parent = <&tlmm>;
 +		interrupts = <119 IRQ_TYPE_LEVEL_LOW>;
-+		reset-gpios = <&tlmm 90 GPIO_ACTIVE_HIGH>;
++		reset-gpios = <&tlmm 90 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
 +		#sound-dai-cells = <0>;
 +		sound-name-prefix = "TLL";
 +		cirrus,dsp-part-name = "tll-cs35l43";
@@ -1204,7 +1209,7 @@ index 000000000..4ca113842
 +		reg = <0x40>;
 +		interrupt-parent = <&tlmm>;
 +		interrupts = <8 IRQ_TYPE_LEVEL_LOW>;
-+		reset-gpios = <&tlmm 90 GPIO_ACTIVE_HIGH>;
++		reset-gpios = <&tlmm 90 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
 +		#sound-dai-cells = <0>;
 +		sound-name-prefix = "BLH";
 +		cirrus,dsp-part-name = "blh-cs35l43";
@@ -1225,7 +1230,7 @@ index 000000000..4ca113842
 +		reg = <0x41>;
 +		interrupt-parent = <&tlmm>;
 +		interrupts = <17 IRQ_TYPE_LEVEL_LOW>;
-+		reset-gpios = <&tlmm 90 GPIO_ACTIVE_HIGH>;
++		reset-gpios = <&tlmm 90 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
 +		#sound-dai-cells = <0>;
 +		sound-name-prefix = "BLL";
 +		cirrus,dsp-part-name = "bll-cs35l43";
@@ -1246,7 +1251,7 @@ index 000000000..4ca113842
 +		reg = <0x42>;
 +		interrupt-parent = <&tlmm>;
 +		interrupts = <85 IRQ_TYPE_LEVEL_LOW>;
-+		reset-gpios = <&tlmm 90 GPIO_ACTIVE_HIGH>;
++		reset-gpios = <&tlmm 90 (GPIO_ACTIVE_HIGH | GPIO_OPEN_DRAIN)>;
 +		#sound-dai-cells = <0>;
 +		sound-name-prefix = "BRL";
 +		cirrus,dsp-part-name = "brl-cs35l43";
@@ -1796,7 +1801,7 @@ index 000000000..4ca113842
 +	bluetooth {
 +		compatible = "qcom,wcn7850-bt";
 +
-+		local-bd-address = [ 24 00 00 00 5a ad ];
++		local-bd-address = [ 00 00 00 00 00 00 ];
 +
 +		vddrfacmn-supply = <&vreg_pmu_rfa_cmn>;
 +		vddaon-supply = <&vreg_pmu_aon_0p59>;
