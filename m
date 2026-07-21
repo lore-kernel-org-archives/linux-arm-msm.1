@@ -1,65 +1,87 @@
-Received: from mail-lf1-f41.google.com (mail-lf1-f41.google.com [209.85.167.41])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C2763403E4
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 11:06:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 771F3332EBA
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 11:12:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784631963; cv=none; b=gbl3cxYjhWizdIDUbfoW13upcBiqO1VF0/RGVZILkMZNzxEOrro/KXOB6sHd9Q7WyVIGbK6DGp2zTEe8l20gVmZ1QpRFdRwOMKWsEvnxkqFolUoFXgiMSw8d7C9vB+ahG++izEkxX172U05OmW1W2qcGhONgkW6xnEyIcH1+ltE=
+	t=1784632324; cv=none; b=BQEB0AjHb8U+Sftnleb3XEPBx7MmtDqZaA5iVzMwfGDdECyO2pBMPFR1spFDesotvKggZJ01e/ecLHY3W3IodzrlELw+Bs/VerxXa4zHZps1kuWIeV1YkJ7PHOgbU7iJFAbh3f1k2N6YqAFuLnbe2Snoz+itOa3OSQDWsMsLkUU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784631963; c=relaxed/simple;
-	bh=xjYkyUsu349AxyVLrKdfzTXC3nR9Rea/HEVXbtA+EWI=;
+	s=arc-20240116; t=1784632324; c=relaxed/simple;
+	bh=Yatm9ZxnOj/ym6CjLLtiZlAqlYcNBFpdb3IRAxm4+Mc=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=u6yKXlVv/w8HK4bNXI5jz3gCWa7tQCgRxs7qXeRcVuN8c6nxrB1hdTk9jTfZQ44Jo/GvyMqYECW+Y5ID+OAYlKr+L4HuRdgYgSYPMH5f2JE1Z4Ug4R4/R3J9HyFlflJf0Zj5AKBLYfdApfVpcmDHfvtf+jVBiEHS/2z/VPf3p3Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=N5KL0Fl2; arc=none smtp.client-ip=209.85.167.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	 In-Reply-To:Content-Type; b=i2vMsPsl9Y45Wge5lSEFEx3ZyigNkAlIqj/OZajl6lHoUrSqTOTSngo5eqoxvuO/1KEfk5Ty7iU1B61hkYiplnvvX8EOaJjVj494f4s9xs7fnlr0QFnYNVO3DGiS24vhGC8HabtI5zK7lZ0Iyj71JjWzN/Hd0/AfZBCxMy0CbdE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=JnhOE2cj; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=MgTo4g5z; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="N5KL0Fl2"
-Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-5aeb72b0af1so1265075e87.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 04:06:01 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="JnhOE2cj";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MgTo4g5z"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LARu4D1252094
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 11:12:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	qlTRXKprfy8H5Qp0s1PDGixTI63RzoUst5XmEPyz0Fk=; b=JnhOE2cjuVkrNNV9
+	bT7H5zhtfoPr2dwS8x4fOLarH6mUm7Ve5wTexfIoayC0J696pD4ex6Be7TeobJWl
+	0dw8T2CUaCMx06yS2lcY2gwevJB0ly3ORehZFUyZPKTtskjtvEGDxYgEzZrrcoSO
+	itEvpzR4Xw/71OANgCJWN45TKiKH+LaYTX2A2jc0i+7cXUclWeuGMBX3jT5ZYYrb
+	d7Gl29raXd/sLzs0v8ICMpXFwi4P5GX7osoVuMfpjQm8RVqblqLHEo7TyvRAr6bl
+	4gVnFjTzEizADurp8JPNjp6rI+NIBLm5oA33dxMWd6OtlnZgGzZ99U5QiUBvNoa0
+	ebnJxQ==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhqvcc3qv-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 11:12:02 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-84857446424so20944311b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 04:12:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1784631959; x=1785236759; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=daaEWwYjuzuJkBkBAdQ53LZVOTQeD5CURewSiZvT43s=;
-        b=N5KL0Fl2MPKVA4eKXryoSByvxyTumAiv2cJzIFNDTUhOONXm7WPxzq43iNq1D3oroR
-         tHPxDHo+BPgYPG//wY0nqVH6fMV5YC1Vv7NWnZIwjcPnp8OD7QcosvqST6qDxUmeUDgk
-         jJAD3DFmnXaVPb7WAl6P4Yd4VXV7sd3C3v+2HjEcBS7fsox7Mp1dkME0fN0zGlu2xKWy
-         CC/JSIbBW6Q5oC1pmtJsVpsSdbDkPOuBrTlqj/RrnF2Ror+oe3j3iQ1tJdcdqERpukUk
-         k9jcahBzgJd2iylikmcs/3rQwUmAsS2JXNh550k+olrqdJpOiORVs+GDk+nz8vlESqzt
-         P4Pg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784631959; x=1785236759;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1784632321; x=1785237121; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=daaEWwYjuzuJkBkBAdQ53LZVOTQeD5CURewSiZvT43s=;
-        b=TD/8z9d9r9ZWsrvIDiH2J2SW2WTB1WxDnKk3LEs8zJt7h5rDMJZHj2KlFO5rajLAIx
-         U5KQcvbJkOuxjbyLcrwxFYFCIl/Ax/QCo+jlej436tKWIQ+vWCa84NzjJmgNnY87inMh
-         BOeLNGckhZj7TPhypHoDssvsG0j2JSxydvZ1iaGGBV061dNEQIKYAQsHyl9k3LxruX/r
-         osqcQvFcR/Rn5DxbfdpdJdeSF4dsmabTM03jh3cv98MEIEovqEPFAkvunjDSfh2DXwm1
-         PyRN8/UlEs0IQiBfihPXfVDKcjCICw2jvc636kViqrigLD0Q3ytP5sMpQlAKo5r97k/C
-         oojQ==
-X-Gm-Message-State: AOJu0Ywc05hGUTIttb2k+qwmZ0PTL5gFiKncHlo8x36a9cznBLUnJ+C1
-	GFSoXIOTjb3ruCmAvTYfRVFYvtrVwTDv3O5ezeL8cTpBj+iR+cA5YqKSm8HrJuB5XwM=
-X-Gm-Gg: AR+sD11VEK7slDxO4khA0BpPThZEHPypCy5a+unyslbrpXaZYk5HworSpMPRtZczB6J
-	TaF3Y3vpl5JidKoDxRImZIu8Ma67r3YKabiAY8GlbTn3XYNOJSBWuS2rWALaQ7aFNtM1pJ2rMeR
-	Y8VPmICSn/KvV8J9AjeBP+frFKDiJ38SCggkTM5nui4dVHFQ6tHcbaYtnuFGXolYO+liFaRWFYw
-	h/LBD26eYhpqMuC58yBZXq2+ujbInfZZYJFy3Cvheoo0pj5DKkx9uS2t+eoGlrZcYTAu93VLnaf
-	aB3T4pA054t3E4mcoF6sjozqXgVOHZm454CfDNRBytlPkq4GC7haVcKyNi7zENSm0pd+SV8H4O4
-	zonASJMlPyBIB1ddFsUb8Xbt0CYPBzeeDSSbDbj/9k3UKPq3Kx4OVi65HRsmd2lm+T3ShdN7rOo
-	VC8CljJXE4mMB5gFClfARp3xClCPweVzYEFv/tj6PHwurHtKftdnqLe28W
-X-Received: by 2002:a05:6512:a81:b0:5b0:ceb3:1179 with SMTP id 2adb3069b0e04-5b2a4a98fb7mr360657e87.8.1784631959199;
-        Tue, 21 Jul 2026 04:05:59 -0700 (PDT)
-Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b291d981c4sm2879201e87.20.2026.07.21.04.05.58
+        bh=qlTRXKprfy8H5Qp0s1PDGixTI63RzoUst5XmEPyz0Fk=;
+        b=MgTo4g5zdPtim0RcGxTCD6NJwwVmZi+wDyTHGL8856nLY9voznJZGhSYuU+G0/ZX3L
+         kTknJ+W7EFT9UrPo36sCn4KMra/nuTB2o9psFP5qr/baGvHkofKy0kpprm6xb/oGpDjC
+         3oTno5WPlV8Tk2vV7L+0vvlgi41vE7Dx4umXVbJLTESt/QM7MBXzQMpwB3iZ9LXfFz8H
+         1QaSCd0uESTaZOq5jgg+N1nIZumUTN0usbRIjBMBCM6eZYfXU7bYMrVnn7XlhKRkk0yf
+         14s0ppTwbsuKW4V9mEsSIEmoSMwxsInegYwXi0RvVMW4U7eLZAW8Ekv63X5MLn0a7YJO
+         FUUA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784632321; x=1785237121;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=qlTRXKprfy8H5Qp0s1PDGixTI63RzoUst5XmEPyz0Fk=;
+        b=XckQMN1UpWYrmVBWgzM9f/uw7xi7kjpQ66SJYJBgMxrkNlkIqRiNcotnOYwecLPeQq
+         9X0oeMRoXILplNGC34RfUVs5NzsSmufoeMflJ6Ki+buwbGr98nmMow8euDmRt6lBOqXK
+         yqZn+0UqaV0oPTUW2moWic/EFMRVPBkyNdkUyMAE7qAOBnykZM/j1XMr+V3SW5yxbAR9
+         L6slG80sbmNGFYG+NMUBjJSZObmK67vRIalrCsLZZIsKqipVOQKgAYyUEMi/TGJedJDo
+         FQukNgK2tL/CZZXZU/gu1vvwUkdnh5Q9b9x4QDQaCscLFc42oX+UMBXnxYGzeHXw8cmK
+         b1Rw==
+X-Forwarded-Encrypted: i=1; AHgh+RppWmtzXMVORRv8LYpQtKuIhaMpez+oRijg5+jbwPfKyS/hVTT/WgCITokTjrJzWrMQMwNCUSW97OcLU+5V@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx5REnomC1jqw3GRbm94iXLaJc42ufQxrrK/wrYRGQzzXVQO6LW
+	g+vIS3bwYDv7ju17F4apc/Yqq2jDeHBZYSfV1qQ9StW1RqrHz7QvjvvxJiuQaMa2dc9fFmVXDOX
+	Eci2oRn8u3E9rWhDgtfQNQLsGr4JyzUGXVSmozDZiYuSecsiitMFLjYLq2d8sfPkw5Tmg
+X-Gm-Gg: AfdE7cl/5ORl86iJG6+vFWOAMNoE0ckBsSWNsQjPgJNDN1xOqlsEEukJF8I+HOkX4bk
+	rM5RF8uP+PzVLcON0kWYg/SVTNIU9MwiH+yF5XhWkZzYgIXFExXDXQlM0iwFY8+Loa/7oVJctzt
+	wNyQQO3FH/NQORRJJezF65rcBrN9UUCbinPlXalmVFC/cR2XNR3ZEeNWdpU82YKwgbhhGZfqChe
+	X83XBj0C8ij4hC5wpwOdRyRcj0qDbxxPnW16wexx3xe9zmQRv5EHnqAga1i3qQUhJ1epd8l5ZqE
+	QQl3OFHf9Ci8iHylvD+sccSud3KRVr3vUkH50DFJ71sLpcXKIsDEBP75drHCJUBaLQSm5vnIWTS
+	J4UE860rBjUfOheZt4rIylrn9E4oLtrZ9qfnGDiA2ITET
+X-Received: by 2002:a05:6a20:310a:b0:3bf:6c08:fb88 with SMTP id adf61e73a8af0-3c3ad9bb494mr12815173637.56.1784632321209;
+        Tue, 21 Jul 2026 04:12:01 -0700 (PDT)
+X-Received: by 2002:a05:6a20:310a:b0:3bf:6c08:fb88 with SMTP id adf61e73a8af0-3c3ad9bb494mr12815141637.56.1784632320698;
+        Tue, 21 Jul 2026 04:12:00 -0700 (PDT)
+Received: from [10.81.89.22] (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3142a1de21asm47287844eec.23.2026.07.21.04.11.59
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 21 Jul 2026 04:05:58 -0700 (PDT)
-Message-ID: <e8bc8ade-d699-497e-8c4a-fbdc03fcc549@linaro.org>
-Date: Tue, 21 Jul 2026 14:05:58 +0300
+        Tue, 21 Jul 2026 04:12:00 -0700 (PDT)
+Message-ID: <94b10cea-7541-43e7-bdca-ab79e5729d55@oss.qualcomm.com>
+Date: Tue, 21 Jul 2026 04:11:59 -0700
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -67,102 +89,96 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v13 1/2] dt-bindings: phy: qcom: Add CSI2 C-PHY/DPHY
- schema
-To: Bryan O'Donoghue <bod@kernel.org>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Vinod Koul
- <vkoul@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
- linux-media@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org,
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-References: <20260720-x1e-csi2-phy-v13-0-160c31958863@linaro.org>
- <20260720-x1e-csi2-phy-v13-1-160c31958863@linaro.org>
- <LyWJAb2qKsAFTMHNJUce9VqoqbkFKUQanb6z8ziA63RYZ1P9jj1XpA83uGPvz9m4QnWvEjJFK8dGD_8EtioHVQ==@protonmail.internalid>
- <0da6d314-bfa9-493a-bcc6-8c3b75751d0c@linaro.org>
- <88ae6662-cb85-4e3a-bbb5-1b536348df34@kernel.org>
- <_t1jiMTX3iIXhUkTDz0Cbh_uZhdUK_Y8vlIwxt1VNRbuKuRnpVCWabal-b4AuFrVaKrDnQSFOWtDn6-VCbS3DA==@protonmail.internalid>
- <345ca98e-09f6-4965-87bb-e64dac096498@linaro.org>
- <c236cf94-a775-4158-88db-9a337c7fa862@kernel.org>
-From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-In-Reply-To: <c236cf94-a775-4158-88db-9a337c7fa862@kernel.org>
+Subject: Re: [PATCH] dmaengine: qcom: gpi: Fix SE ID and SE Protocol fields
+ widths in SCRATCH_0
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
+        bjorn.andersson@oss.qualcomm.com
+Cc: praveen.talari@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+        dmaengine@vger.kernel.org, linux-kernel@vger.kernel.org,
+        mukesh.savaliya@oss.qualcomm.com
+References: <20260720-fix_se_id_and_se_protocol_fields-v1-1-e41dbb107d97@oss.qualcomm.com>
+ <34b0bb3b-d756-4cd6-806d-75b1124f4397@oss.qualcomm.com>
+Content-Language: en-US
+From: Chandana Kishori Chiluveru <chandana.chiluveru@oss.qualcomm.com>
+In-Reply-To: <34b0bb3b-d756-4cd6-806d-75b1124f4397@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDExOCBTYWx0ZWRfX6vHDSNUadc88
+ 63oErdr7jAdesypcvLt9lFt1Djt65ECuXflPhHz0gem3ccbM+ZkrbqbaNRZsezsHpOjTQJTnw7A
+ hziotsYFUAq4OEW/saUh0eJ7tduv0co=
+X-Proofpoint-GUID: fTC4q9l4o-JSEm49jVJ2sfdNwgn01a05
+X-Authority-Analysis: v=2.4 cv=OMYXGyaB c=1 sm=1 tr=0 ts=6a5f5402 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=-nvh27Yv-2H1FMEgutIA:9 a=QEXdDO2ut3YA:10
+ a=OpyuDcXvxspvyRM73sMx:22
+X-Proofpoint-ORIG-GUID: fTC4q9l4o-JSEm49jVJ2sfdNwgn01a05
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDExOCBTYWx0ZWRfXyPhla7TKcMWm
+ /BXkOE9RN9tyc+00i7NFGX4D7SRwlZevjJb2WRC575CyAgJgssXDrYLXcO9R+uIMsBJlrDXs4en
+ r606TyXAGaa7EH4ehQ94pIeg6rEYi8L/hg07zAjcV+w+hkLqvuABW6zrnKd34rg7EYs4IU3ytHZ
+ +0IbqeRTuVTLg1w4/pxMprdlUj+OnmH7Wz75tPnTEVzhlKLVja0gpD7o6CmXBzKvii/yv+pn6TI
+ 0wUR5ARQac1S64NFVfJGhp5HDXCa8fy284E5w7KL+PVxcDqPZKxSrKUiebVJakkeH1yBN9ye43m
+ ryL8QDnKDZnBNnVVS/2cldtyWtEIb9M4iVSzGlQoCgaTRYMQNtpVMHUFEio0Ux7+ZzAQg2Crm1c
+ ZwG/pfwj2GmsvFtnJIjPZJuuxVzYJZCTNlB3rHqNDY1LAaGLcfvgNwW+6Ngvn6kB+Mx+HDZoaTj
+ vB9FB/IMgs9+kkZGnuA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-21_01,2026-07-20_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 adultscore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
+ bulkscore=0 malwarescore=0 clxscore=1015 impostorscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210118
 
-On 7/21/26 13:47, Bryan O'Donoghue wrote:
-> On 21/07/2026 10:56, Vladimir Zapolskiy wrote:
->> On 7/21/26 12:39, Bryan O'Donoghue wrote:
->>> On 21/07/2026 09:17, Vladimir Zapolskiy wrote:
->>>>> +  "#phy-cells":
->>>>> +    const: 1
->>>>> +    description:
->>>>> +      The single cell specifies the PHY operating mode.
->>>> This has been reported before, #phy-cells shall be 0, the operation
->>>> mode is selected by bus-type of endpoints as it is described in
->>>> video-interfaces.yaml
->>>>
->>>> Two competing values are redundant and it opens a door to a wrong
->>>> hardware description, the technical discussion has not been started yet.
->>> So as I said before, I'm following Rob Herring's input on this and
->>> Krzysztof has given RB for this binding. At this stage, I don't see
->>> scope to change it.
->>>
->>> Adding endpoints was already a compromise to address your feedback,
->>> which I hoped would bring you on board with the design.
->> That's my comment dated March 27, 2026, and it says moving phy type
->> from phy cell to the endpoint property excludes the need to set any
->> phy cells:
+HI Konrad
+
+On 7/20/26 08:47, Konrad Dybcio wrote:
+> On 7/20/26 5:27 PM, Chandana Kishori Chiluveru wrote:
+>> GPII_n_CH_k_SCRATCH_0_SEID is currently defined as GENMASK(2, 0), only
+>> 3 bits wide. Serial engine indices >= 8 get silently truncated by
+>> FIELD_PREP()/u32_encode_bits() when written into the scratch register,
+>> causing the GPI channel to bind to the wrong serial engine. The
+>> channel allocate command still succeeds (it doesn't require the
+>> target SE to respond), but the subsequent channel start command times
+>> out waiting for hardware to complete the handoff to the (incorrectly
+>> bound) SE, and gpi_send_cmd() returns -EIO leading to GSI usecase failures
+>> for SE8 and SE9 serial engines.
 >>
->> https://lore.kernel.org/linux-arm-msm/e37ce438-12c7-462d-
->> b2bc-1351be62b806@linaro.org/
+>> Older documentation, such as the SDM845 hardware programming guide,
+>> describes the SE ID field as bits [2:0]. More recent QUP hardware
+>> documentation defines the field as bits [3:0]. Use the wider definition
+>> to match current hardware documentation while remaining compatible with
+>> existing platforms and enabling serial engine IDs greater than 7.
 >>
->> The technical comment is left unresponded so far since then.
+>> Also update the SE Protocol field definition to match the documented
+>> register layout and keep both fields correctly packed.
 >>
->> Since there is no expected phy cells to get on consumer's side, and
->> since there is another link between CSIPHY and CSID described in
->> video-interfaces.yaml, any kind of dependency of this IP on phy can
->> be just removed, which serves the purpose of hardware description
->> simplification.
-> 
-> Rob's v1 feedback was consumer-decides-mode via the cell; Krzysztof has
-> R-b'd the binding with cells=1.
+>> Fixes: 5d0c3533a19f ("dmaengine: qcom: Add GPI dma driver")
+>> Signed-off-by: Chandana Kishori Chiluveru <chandana.chiluveru@oss.qualcomm.com>
+>> ---
+>>   drivers/dma/qcom/gpi.c | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
+>> index a5055a6273af..8f09eaf4e714 100644
+>> --- a/drivers/dma/qcom/gpi.c
+>> +++ b/drivers/dma/qcom/gpi.c
+>> @@ -207,8 +207,8 @@ enum CNTXT_OFFS {
+>>   
+>>   /* Scratch registers */
+>>   #define GPII_n_CH_k_SCRATCH_0_OFFS(n, k)	(0x20060 + (0x4000 * (n)) + (0x80 * (k)))
+>> -#define GPII_n_CH_k_SCRATCH_0_SEID		GENMASK(2, 0)
+>> -#define GPII_n_CH_k_SCRATCH_0_PROTO		GENMASK(7, 4)
+>> +#define GPII_n_CH_k_SCRATCH_0_SEID		GENMASK(3, 0)
+>> +#define GPII_n_CH_k_SCRATCH_0_PROTO		GENMASK(6, 4)
+> There exist protocols, such as QSPI with id=9, so this surely can't
 
-Unfortunately this is not a technical discussion to move forward
-a better hardware description.
+Its my bad, The PROTO field should be [8:4]. I will correct this in the 
+next patch
 
-> I'm happy to lock down this binding as-is on that basis.
-> 
-> Are you arguing about phy-cells or are you actually arguing the entire
-> instantiation of Qualcomm MIPI CSI2 as a standalone generic driver in
-> drivers/phy ? Its not the same debate at all.
-
-So far I don't review the driver, only CSIPHY IP hardware description.
-
-In the current version of the hardware description one may find that
-the exploited 'video-intefaces' interface completely covers the 'phys'
-interface between CSIPHY and CSID, quite probably both are not needed
-at the same time, and the simpler 'phys' can be removed without any
-losses. But if it is kept, then its cell value is anyway redundant.
-
-> As the CAMSS maintainer, I'm fully against adding more inline monolithic
-> CSIPHY init sequences. That could be represented as a separate
-> linux-media driver but, then that implies that _all_ upstream CSIPHY
-> drivers in drivers/phy are wrong, and I just don't accept that.
-
-Other two drivers are different and should be excluded as good
-references, both of them links exactly one sensor to exactly one
-CSI-2 decoder, it's not the case here. Also one of these two drivers
-has no upstream users.
-
-> The bindings have DT maintainer RB, and the driver has Qcom engineer
-> tested-by, review-by.
-> 
-> Vinod, Kishon - Again, I'd request this merges as-is.
-> 
-
--- 
-Best wishes,
-Vladimir
+> be right (unless there's another bitfield for that?)
+>
+> Konrad
+>
