@@ -1,223 +1,171 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44A364582C8
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 23:31:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49ACC443E3B;
+	Tue, 21 Jul 2026 23:34:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784676664; cv=none; b=u++Ud+xlHspphXFDkibpeHC6zebiFVYJSDji7dDvdzP54KBfkl9zDEKyRYzBX3DjNFkCbLp877Fl9h4esdzHcCF3ihCBbrulYQhrR5zErIJKPsJws/w48Z7MNhj8c1AdYDfrepiXzk4y1S6c7EGObZcsojuuKcwkKjbCLd1u7ZE=
+	t=1784676883; cv=none; b=f3i1M4k/NcNjUChVmlzHV6TB2DQSTNNg+jaijcerL5EniEDOfU6r/cJi2mEAryF7XdrI7W/rxsrPxJ/MLGHkUwgEr9hNsc4mkDSnaEuVWcz8ZolisFRoRI/AGJCEYpEQ6QlR597VgZFCk7bM4X0dN8/y27bandW2j+VS4Cf2Zh8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784676664; c=relaxed/simple;
-	bh=B9H2lMYnSFdOZSBAxuKp1S7NqtvN6jE081MhP4yLjVU=;
+	s=arc-20240116; t=1784676883; c=relaxed/simple;
+	bh=Nc4WY14ZOG9b3cMEtUSTkLaMCAnOejtKaABYyofBm5A=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=mp/y+EaJC4GRmSmjGe2fJmBuf9gpLCH9ewd5O4g6IBtO74s0FB6Ep0X0t2b8E7XCNU7PzOFfSuO+ssss/y+Ln5J/N/ktSwzvhmOffxa4QuoDDAUqT46iQspz6HHN/dCyGMMKNMqcDebcKasWDCcXYPl2yu4QdOnrXl3NFIpyLpU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dY/Q5I5k; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kuJTzZgy; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=s/kVC1JVA3DzYfTUAmC/bRwK4ZtUlRYI7YXoJRXMuJOX2Ikzi8TcoEdRyiU68DQYOoppxXojFKZmlKWwfUzGO0iOqR71u8B9sC/KZpli0wWzvYlEYBnv+v+iy+455lHzu3ReBoCagJDsJIebtuwKW1/WrlaFwzj6L+dXN5N1+y0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JxveD9ff; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dY/Q5I5k";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kuJTzZgy"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LMZJlu3137086
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 23:30:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=DWJBxzgFBd9Yr1usno2p1uJY
-	kPMUKY4gzoTzlbUJzlw=; b=dY/Q5I5kjQq4Fg1t4umMJ7EqMBRD8cCp5BODerZK
-	SKzrNFldDdjWCDI4xNOlj8muwX3B/3lImUU7zoQt7ahI3F+4o56NSqQgVtZZTgKd
-	MK1ExpLgawgeo5b52W46Ryyuhkv/A6HoL06cDZ+9WFunxD61KUm+PiXufoTo8a9M
-	sZhliiN8tJne6RFeKamsb+92bDxg5oBGDDLZzMNO9j0NuZfJByJBLguHsWYz/16G
-	gNafJCrY3IuqhCvy5eREz0VWvPbcK9OBBVywKTZ4Ts755bJhaEdsOIHtEIvGfxAm
-	7pJSUBOJGCii8yCi2ajyuu88PUgZsYZWxAsWCpw8EJ1qxw==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjd6d19sk-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 23:30:59 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-5174a23afcbso106742461cf.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 16:30:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784676659; x=1785281459; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=DWJBxzgFBd9Yr1usno2p1uJYkPMUKY4gzoTzlbUJzlw=;
-        b=kuJTzZgy94ub+hbfDWRDp8olNCxyGCxKYLvgEnjJyqnx8Wuv45pU/RBhIPNR15f05R
-         4gAP51+y4Anf76UwASb6U+ygx/UN9lTXFHfmg1cG1b+1DBrILhuvF0CYJNb1GZB8Kksw
-         0HNVz9Me/cEUGFwwTMMhIObbXBRVTWBeYXWUE+mmaNCs+kVlpgSwYi7OWtwMN8WO555i
-         ZSP3bM0laTPi8WuysFsEqRGpFCct+/1vZ2pE6QdVnZAC0xrsCx+ub8n8IBPRHNznWj5H
-         +qPIfFWVkNW4Su9VNRSoR92ZSgb3hdyiuWXWR2GePQKEmRft2AoAdCrGqKmXIbKpB6UA
-         h2Tg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784676659; x=1785281459;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=DWJBxzgFBd9Yr1usno2p1uJYkPMUKY4gzoTzlbUJzlw=;
-        b=iVS9zPlSc/rxszvlQ4FB1U1SofiFgYQL0nHfKOJNsAOW3EdeK9C3RBPtH7j5TXw/zy
-         OWQE0lt7QRRcqpL51XCgOgqaM0V4UgCVDI5cqLCOKrxyTtxQ2U+LzhlIoPGLymmqEbOt
-         kuWF97Kktfz6C22CysmpiHjGEK+5sGrR6YHWILwlwv0eTLORGHfyel0At0jElCnLRxka
-         xFjJHRZzDqkhcYe7N56ozz9ChhTpFx09ytPWnmtKJJhfkg/pLNFh2l3Y2xcUPw2B+ZP8
-         njC8XPxibPWDfMhoK/E0oxXlJ4YDWHwRK+4Ejrbw5CV12vGN/hsxNH6PuKxn82iYedyt
-         NmZA==
-X-Forwarded-Encrypted: i=1; AHgh+RoKscSldJ0hGqfrUYjvA+ASpglbcNb3otd+FoM90r9+X4Ffm4UQxSrAOJDCBWLN9+UpQrlOXSTL7Ygpseb4@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywc0PzznMQVC1UuaKl3mj8C8CqJwafkl+XKrBASTsz7Qp/yaBUJ
-	CaULnq4kuIUgjTpKBPxa5cGXQjgrofPuXH4wzSYYMVZwj346p2ztdIrS5/tf3T+jPPJqwN+1Tlz
-	TcxqE67Tne08SaxTsTbMEWZy3Ptqv7ViB5JBpdTDHuaX+XZNddqYFu8hkH9KA8K7OuQS8dOqIvn
-	l9
-X-Gm-Gg: AR+sD11emKvD11kpXcgsT3Nc6uMBsgxQprR+H+MJbYa+oIn1ORkesa9tp/VWl6CfbBx
-	Dtf/mIWc1tKv0+yVcbTbLb34IkjQdRoDJvn1HmPPFT4GXm4YvEMU7nw7YpI0ID0xdqQiY/cUSm5
-	BFNIcu43lOJvlZpW8cAUPLyuL1CdW9eQXQwHaXnhEePfTH+U8uQDvoKeKAcyB/zm7YaEsXRk7ZW
-	4UkYdB81YeGm7XDTu1wAKqzvjs2ddatIOkAl/z6G7Jestw5xgecJmK5liTi/24OlTnf26Iaj9bi
-	BUruRW6Lx5t0tzvSI1grY6lt6eSV+AG32kiZZ3g/Ek4DamwM1qkl1ND36ks9y0cJ1LVdhFZH3If
-	gDGZ+mI9X3DSeh8k+g3IwB9Qr5EoW7TNUiW1BOJpFmQ0yljMkq2j9e6ooN40KciB58PfaQ3BnJw
-	YaRcunNBnE66+cwQ==
-X-Received: by 2002:a05:622a:aa82:20b0:527:69ae:474a with SMTP id d75a77b69052e-52769ae48b0mr23632401cf.81.1784676658927;
-        Tue, 21 Jul 2026 16:30:58 -0700 (PDT)
-X-Received: by 2002:a05:622a:aa82:20b0:527:69ae:474a with SMTP id d75a77b69052e-52769ae48b0mr23632071cf.81.1784676658429;
-        Tue, 21 Jul 2026 16:30:58 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2a9d316cesm167103e87.53.2026.07.21.16.30.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Jul 2026 16:30:57 -0700 (PDT)
-Date: Wed, 22 Jul 2026 02:30:55 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
-        Val Packett <val@packett.cool>,
-        Marek Szyprowski <m.szyprowski@samsung.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org
-Subject: Re: [PATCH] Revert "clk: qcom: dispcc-sm8250: Enable parents for
- pixel clocks"
-Message-ID: <pb554dy6e5ek3ftasgskytydumajnb6tomncbny2me355aaq3h@pazya2moabb5>
-References: <20260701001147.416518-1-vladimir.zapolskiy@linaro.org>
- <bjgad2qs6pt2cn5pr353qaelxa3gtpaqfoxjnrwfhwbty4g75f@ngu4ddk5jeyf>
- <31d1ac01-ccd2-4abc-9828-be120f095de4@linaro.org>
- <wd5rytfnsj5vppnimpemocstsaaqhmt4xmie4qnppdh45vsnml@2xne3khyalnc>
- <6875d673-4c33-40ed-bec2-d158651194f3@linaro.org>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JxveD9ff"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C173B1F000E9;
+	Tue, 21 Jul 2026 23:34:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784676881;
+	bh=cv958Pfgp7GUM/xVymrAwRNqVH7beklVxrmbR/6/w9I=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=JxveD9ffXTtbXb5I0bpaEeHuMDG/QnEyEuexLu/O2UvTTyhDYrpGnyQgBauldXR3j
+	 gj0SJH1MbDTpU/+pUxCwEBMpz1iNLlsAPXrDyeKFISU8X1kuYYK02QR3ibjuUrHvwt
+	 d6G9B71nlgcR+PtrqmE41sZKLGYlOCaKbRIdEVy1dTngToRLRqJi7e1zmXRrnpHnTH
+	 lgJV8ztUMmBY42gGr5b/zPLvzPaYfXbSNXPw1BTZHU3k0MUt65MRa2T56jvvFRn44Z
+	 oXhthrS7UJj303+JbZCS3skzcQw0J2v2mBpq41DkR7d+W8EVV9TBh4xK6P8mqQ2cCv
+	 kkeHZLAX/cNAQ==
+Received: by venus (Postfix, from userid 1000)
+	id 339D2180765; Wed, 22 Jul 2026 01:34:40 +0200 (CEST)
+Date: Wed, 22 Jul 2026 01:34:39 +0200
+From: Sebastian Reichel <sre@kernel.org>
+To: "Dr. David Alan Gilbert" <dave@treblig.org>
+Cc: jens.glathe@oldschoolsolutions.biz, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Heikki Krogerus <heikki.krogerus@linux.intel.com>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	linux-usb@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH 0/5] usb: typec: ps883x: fixes for older Thunderbolt 4 /
+ USB4 docks
+Message-ID: <al_0LjwmfW-cECnY@venus>
+References: <20260718-ps883x-disable-usb4-v1-0-cec86d0b909e@oldschoolsolutions.biz>
+ <al6-IyyWYRnEW4VC@venus>
+ <al-dJjzorP-I4Yff@gallifrey>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="pugdf46x7r7xbl4p"
 Content-Disposition: inline
-In-Reply-To: <6875d673-4c33-40ed-bec2-d158651194f3@linaro.org>
-X-Proofpoint-GUID: h76OHrTK9cj2UQL_bHxNfBPtUVZjaWvP
-X-Proofpoint-ORIG-GUID: h76OHrTK9cj2UQL_bHxNfBPtUVZjaWvP
-X-Authority-Analysis: v=2.4 cv=XaG5Co55 c=1 sm=1 tr=0 ts=6a600133 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=VwQbUJbxAAAA:8
- a=hD80L64hAAAA:8 a=KKAkSRfTAAAA:8 a=VnhmXOk1u3MlwGWApt8A:9 a=CjuIK1q_8ugA:10
- a=a_PwQJl-kcHnX1M80qC6:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDI0MiBTYWx0ZWRfX9ITQk4aEPsfL
- VEnOCplco5FMN0AP/eSx0QeSk4BAgpxYwCkbZ2GvFvygvpCvqKZE41KbJUOt315WGA3piDQlGJz
- lvyeeDdfgCMowtiuj7VylSlO89srSqt7yrfBQe3oLknbITM9xK2SI4n1pQ+CTN/FOMv+jY+gAGz
- Ym+QMhXTqoVU8pYfLVs3aIvd8HY+YsgbVpETmxKs4xKD+W00VW0XHr65z1taaGltQYf8WCYwqBp
- dKSK5MmY0JU+54JE3rTufawMeGLP42/phYIsE9szeppbS4+rKC/NqtxOPnNyflaRtdKHjAzdAIC
- zPp96loRIOtkLiPn0VpwyyczsccYF5rqQod7SS2MoXJaNG7nK9HUvrnfIoSPpg2ZgYqNHstp6GC
- KAHM+L8iUbCTYrhT6p4SCOBgMoFElQyWpDvsrFL0qgGz4WdBXGb+j3JcrqBkFS2RI8i1ajIfTGG
- Kb4VCkZcRn2BTvm2gWw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDI0MiBTYWx0ZWRfXyRDHpdFmNXXC
- zLKOEDBQMr3E682o18IIEa6Ne4GfhyEKQIXJBfl7UlJBNrjU8jC16H8lOYSOAwIYtB/iTTlI9Ie
- yGr+naIZ0Qe5eeTh8wezVf2oiYz1rsA=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-21_04,2026-07-21_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 priorityscore=1501 spamscore=0 lowpriorityscore=0 suspectscore=0
- bulkscore=0 impostorscore=0 clxscore=1015 malwarescore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210242
+In-Reply-To: <al-dJjzorP-I4Yff@gallifrey>
 
-On Tue, Jul 21, 2026 at 01:39:23AM +0300, Vladimir Zapolskiy wrote:
-> On 7/20/26 23:54, Dmitry Baryshkov wrote:
-> > On Mon, Jul 20, 2026 at 09:21:03PM +0300, Vladimir Zapolskiy wrote:
-> > > On 7/20/26 18:00, Dmitry Baryshkov wrote:
-> > > > On Wed, Jul 01, 2026 at 03:11:47AM +0300, Vladimir Zapolskiy wrote:
-> > > > > This reverts commit acf7a91d0b0e9e3ef374944021de62062125b7e4.
-> > > > > 
-> > > > > The commit causes quite severe problems in runtime due to the introduced
-> > > > > cyclic clock dependency:
-> > > > > 
-> > > > > * dsi@ae9400 platform device and its probe depends on dispcc clocks,
-> > > > > * the reverted commit links dispcc clocks enablement to mdss_dsiX_phy clocks,
-> > > > > * at this stage DSI PHY PLL cannot be locked to complete driver initialization,
-> > > > >     the parent clocks for DISPCC provided mdss_pclkX clocks can not be enabled.
-> > > > > 
-> > > > > On RB5 board with no connected display panel on boot I get this error report:
-> > > > > 
-> > > > >     DSI PLL(0) lock failed, status=0x00000000
-> > > > >     PLL(0) lock failed
-> > > > 
-> > > > Why can't it be locked at this stage? Is it underpowered? Or is the code
-> > > > trying to lock it on some random, unsupported value?
-> > > 
-> > > Since there is no display panel attached, I believe DSI PLL clocks should
-> > > not be enabled at all, however the reverted commit requires it to happen.
-> > 
-> > If there is no display panel, you can keep DSI hosts and DSI PHYs
-> > disabled. If they are enabled, they can be configured to some
-> > intermediate values (even if for the sake of turning off the GDSC).
-> > 
-> > > 
-> > > I don't have a panel for RB5 to test, if the PLL clocks can be locked or
-> > > not, when there is an attached panel.
-> > > 
-> > > In general I believe the problem is plainly related to the established
-> > > cyclic dependency as it's stated above, and in any case the reverted
-> > > commit is a clear regression for RB5 board with no panel.
-> > 
-> > RB5 ships with the lt9611uxc bridge.
-> > 
-> > There is no cyclic dependency, AFAIR. It's DSI PHY PLL <- dispcc <- MDSS
-> > pclk clocks.
-> 
-> What does '<-' above mean?
-> 
-> From sm8250.dtsi (using labels only):
-> 
-> * dispcc is supplied by mdss_dsi[01]_phy,
-> * mdss_dsi[01]_phy are supplied by dispcc,
-> * mdss_dsi[01]_phy are children of mdss,
-> * mdss is supplied by dispcc.
-> 
-> After the applied commit, which I advocate to revert for now, the ball
-> of clocks is no longer left untangled and linear.
 
-The devices have always had a circular dependency. The commit in
-question adds nothing to that.
+--pugdf46x7r7xbl4p
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH 0/5] usb: typec: ps883x: fixes for older Thunderbolt 4 /
+ USB4 docks
+MIME-Version: 1.0
 
-> 
-> If there is a clear regression caused by some commit, it would make
-> sense to revert it first, then reapply it after an alternative fix
-> is ready.
+Hi,
 
-Unless the commit is correct and just uncovers an issue elsewhere.
+On Tue, Jul 21, 2026 at 04:24:06PM +0000, Dr. David Alan Gilbert wrote:
+> * Sebastian Reichel (sre@kernel.org) wrote:
+> > On Sat, Jul 18, 2026 at 07:06:28PM +0200, Jens Glathe via B4 Relay wrot=
+e:
+> > > On Qualcomm X1E80100 platforms (e.g. Lenovo ThinkPad T14s Gen 6)
+> > > using the Parade PS883x retimer, connecting USB4-capable docks such
+> > > as the Lenovo 40B0 via a regular Type-C cable (which forces the dock
+> > > into Type-C fallback mode) often results in working USB but no
+> > > DisplayPort output.
+> > >=20
+> > > This series addresses the issue with two main changes:
+> > >=20
+> > > - Add a new optional DT property "parade,disable-usb4". When present,
+> > >   the PS883x driver rejects USB4 mode (-EOPNOTSUPP). This forces the
+> > >   Type-C stack to fall back to USB3 + DP Alt Mode, which works
+> > >   reliably with the 40B0.
+> > >=20
+> > > - Refactor DP altmode handling to also support the legacy
+> > >   TYPEC_DP_STATE_F request (deprecated since DP Alt Mode 1.0b) sent by
+> > >   the 40B0 and other docks (e.g. SSK SC220).
+> > >=20
+> > > - Add a short delay after writing configuration registers, which
+> > >   improves hotplug reliability.
+> > >=20
+> > > This is a temporary workaround until full USB4 DP tunneling support is
+> > > available in the X1E USB4 controller and qmp-combo PHY stack.
+> > >=20
+> > > Note: The DT patch adds the new property to all currently upstream
+> > > boards using the PS883x retimer (15 files). Happy to split it on v2
+> > > if requested.
+> >=20
+> > I don't think a kernel driver limitation is a good reason for the DT
+> > property. I suggest to add something like this in the ps883x driver
+> > instead:
+> >=20
+> > /*
+> >  * Hamoa does not yet support USB4, disable it for now to gracefully
+> >  * fall back to USB3 + DP AltMode. This should be removed once USB4
+> >  * support landed for X1E.
+> >  */
+> > if (of_machine_is_compatible("qcom,x1e80100"))
+> >     disable_usb4 =3D true;
+>=20
+> It seems a bit of a weird abstraction break to put a machine type
+> check down in a device that's not specific to qcom.
 
-> > > > >     dsi0_phy_pll_out_dsiclk already disabled
-> > > > >     WARNING: drivers/clk/clk.c:1188 at clk_core_disable+0xa4/0xac, CPU#4: kworker/u32:1/61
-> > > > >     ...
-> > > > >     dsi0_phy_pll_out_dsiclk already unprepared
-> > > > >     WARNING: drivers/clk/clk.c:1047 at clk_core_unprepare+0xe4/0x104, CPU#4: kworker/u32:1/61
-> > > > >     ...
-> > > > >     Tainted: [W]=WARN
-> > > > > 
-> > > > > The problem has been already reported and discussed before [1], the original
-> > > > > commit was done for "preventing potential stability issues" reason, and this
-> > > > > time fixing a potential issue introduced the actual one unfortunately.
-> > > > > 
-> > > > > [1] https://lore.kernel.org/linux-arm-msm/2f5b98a4-80a6-4611-9615-ab0202a8c455@samsung.com/
-> > > > > 
-> > > > > Signed-off-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-> > > > > ---
-> > > > >    drivers/clk/qcom/dispcc-sm8250.c | 4 ++--
-> > > > >    1 file changed, 2 insertions(+), 2 deletions(-)
+It's obviously a hack, but this quirk would be simple and fully
+contained within the kernel and thus does not create a new ABI (in
+opposite to the DT property). Once the kernel supports USB4 on Hamoa
+it could simply be dropped and people have working USB4 with their
+existing DT.
 
--- 
-With best wishes
-Dmitry
+> I'd bet it's not just qcom's suffering from this as well.
+
+Qcom boards are the only users of ps883x (the driver is exclusively
+probed via DT at the moment). So right now one could also simply
+remove any USB4 support from ps883x, but that would work against the
+people working on _adding_ proper USB4 support.
+
+IIUIC the problem is, that the Qcom board supports USB4, negotiates
+this via the PD protocol and then soft-fails because the software
+support is not yet ready. Most other ARM platforms do not have any
+USB4/Thunderbolt hardware support to begin with and wouldn't
+negotiate it, so they do not run into this in the first place.
+
+AFAIK only Qcom and Apple M series support it. A quick search
+suggsts Apple used an Intel retimer in the past and a custom one
+nowadays. From the looks of it the x86 world cannot use this driver
+either and probably handles retimers transparently in ACPI, so it's
+effectively Qcom specific until other vendors start adding USB4
+support. The only thing announced potentially running into this
+would be the Nvidia RTX Spark, which first needs to be released,
+then find a bunch of people motivated to implement upstream support.
+Nothing with USB4 capabilities has been announced from Mediatek or
+Rockchip. So I wouldn't hold my breath for another user and still
+suggested adding the machine check instead of simply disabling USB4
+for everyone ;)
+
+Greetings,
+
+-- Sebastian
+
+--pugdf46x7r7xbl4p
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEE72YNB0Y/i3JqeVQT2O7X88g7+poFAmpgAggACgkQ2O7X88g7
++prddRAAhL4NyRbROef+dbWH0+QaDvk9eCLvX99NubMXCloYyIVGfR41nxlMt49+
+7a70KAC+BGtNhJNOX2oGuwyQWuSMvicojed9x/Wwn8aCkjWylz8gVhC4ffnfQTD0
+OZo/q1d/IDZ95f7F+zfKTveevqaDLzhq3om/8gM7Z15NB14LV1fFz7N9SVK+9DkV
+ZLvQMjf1dwOaCg0/7hdBNk8M1jAVkcDfR+gkh0kcsya0F/5MnwxhLv/gM/3hGYNJ
+Dwfjk9EZslE3MZVIsdsUtyWutwhrdUj6V3OOCGKvEE9TjEyDu/zVDEUTRVWIK8v4
+MsRT0+SsBSM0YPlU/FT8D56CJ2LOFUoqWnw29UJewMxnflQ54Bxe3cAnZ2bGxFD0
+/XDJUCASrkmzR8YQvJhgTQUCBFv0Wfou2dWjMHql2kWr4Xc7ABOhHxV1tHkuJhFx
+kj/dZsVu3vJj3JFomyHn27G3qjNcJsAjHPhkfrgVtxqDHFW3/GlkXOO/2wQQMCmQ
+T7G/jR8+sjcBFXlhf3Ncx61UasAIsASOICyDqIi43wYXfO8mQsr/6vsMaWCM3AYW
++hy0y5SoxdwCJ5XMTNVml5a6IflJyrL6oBnpBMB+5wR3dDuY0c7D4bgCtkDlexdD
+3DsaLUgcOj4tx8ljd1T9/xS6yq3Syj8CMZ0H2OZorgxql8++9Mk=
+=PakO
+-----END PGP SIGNATURE-----
+
+--pugdf46x7r7xbl4p--
