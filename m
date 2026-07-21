@@ -1,203 +1,77 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9879944330D
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 22:18:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E0EC45A2AB;
+	Tue, 21 Jul 2026 22:20:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784672331; cv=none; b=lt8yJEe2AsIU28nBd5d0Rw2fkBSzloiagUaCdb9urbf98e65fA4DnZDprSrZirkm927G2hwfYSE/IyTN88mnI9lTyHtiFVlEcI+3DlwRUokJ09WWveuLXZp2NqGvYWd85vXqcKkrbU/u6ZRAYoS5h1VP90JUhhvW4shmQGYxB/8=
+	t=1784672448; cv=none; b=AU/hKwrDzd89fZvO3TTBDKb7ZrjCK0jHKigBdsG857uSl6GNYFaKHFzmh8EOTWAhGM+Pzyy7lha3V1kShk4Omu2csgajAEHLJolIqvcdCVrQcbqhUp2Cw7znceAWC5ZIj8a56kohUw3puo0+vlzpIh9tUK2zL69QQxr7YFMukU8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784672331; c=relaxed/simple;
-	bh=a66Ua33UPzP88o6/qeMlZpu7qW7Az5CZeskQyGfEIo8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=iMvAqLRqlO+NPSWIL1OeCreY6x4nTguZswczpzprsNuIbVnt3mRBXYuoPz5Kf9aUws31eybi6KzceaI6FU5d5Fs5GvzgjKAGMP6A2JdmNohixfmPxXqNc28Ys1WSNXT2uxiayaK6RVYP9Rr4fzMnmTdxTZvm0eR1uECPUlqJA04=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ek8B+Z2d; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=C+xJfluS; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784672448; c=relaxed/simple;
+	bh=QIQh1LdMMndMhz+L/LERUwLYT3a3pIfoXWq1+5CF3d0=;
+	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
+	 In-Reply-To:To:Cc; b=WC0qCHBpdq4npztDRXX1ZJAuqs5l+dzlnI7uqWyUdy6uVL0/NYagwuGmYeJOSve8cBPHqnQjDnuBl7CNcXAjFEOZprreZtN6Mwzub7W1IfGwfy3AtkM446koq+jX12oQ01IyGLqEkxshC0/NWrUZbi0WgmFtQCRawHHT03Svays=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IUw0X5F1; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ek8B+Z2d";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="C+xJfluS"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LKlKNM2580203
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 22:18:49 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=jr82XK6WaU0lS5Kk3xnadPlA
-	C9vcqifqJtyyh8a2t9k=; b=ek8B+Z2dqAmHmh82a7FB2aPcHk4te2WqfM2GgLhz
-	P5BtGYuBC0Lb4UtvNtAp9cs8otQP0J9ekIDL/YNS7rENAJF9UZkkWvWeqLHLlKcH
-	UCgrXqEFh/v5M8uiV28OghEt/zvYuNBz+UWJgsQAQF9boH9nMxkj7D0Xu9seTKPY
-	pyUgtyyhtoVKRjnTA/m93ON4hN5iQI5yloF6at2SQ2jpmTwrSxtbZj+9oj4lyp6v
-	kszDJ7/NARJL3WmeS3rkPDP2+0ZY/9HooXopfYPYQ3LQIkwpPECR/vCyKkizwcwA
-	oLKj4NpQl+aJHRRaKp2oLV5qpRi5QL9Gl0uaFXLr/17Eaw==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjd5e137p-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 22:18:48 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51c1c7f135bso176044831cf.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 15:18:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784672328; x=1785277128; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=jr82XK6WaU0lS5Kk3xnadPlAC9vcqifqJtyyh8a2t9k=;
-        b=C+xJfluSuDnHUFa5sxSLBAUlyhMbJskhLygBwR3N4ZvQI0qe4T5DWC4ofihxeV0mID
-         su1GO5zgB4f5QdoWfx7hm4+l/7pjfTnioX0sQ4UpzvClnWBW8bvjwUc2kjO8x0XW+9qp
-         +ZG8EtxboK3J9B/IoZTpDPVi8d5EcHQN4PW160NITeyv6BCP6XhVlN+wHr7QGy0Du2md
-         4QVdI21MSCM/ZlyGBLR83CoYADXlnaBLn+SfKevojsV3+wtvaTW7peZxG9P7jDQ31jSD
-         J0FtLk3glAsJ0E6vusGYSy1BvvChsNcrXhtQuHY6BOal0Z93Z/mm+18uH1YycdJCRpBT
-         tImg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784672328; x=1785277128;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=jr82XK6WaU0lS5Kk3xnadPlAC9vcqifqJtyyh8a2t9k=;
-        b=ISnxy4w5u63jRGClMnTwR7gSmqM0fG2JfhjKdil9UsyukI+p96bkTnhTYBWqRKBgLj
-         hg/xtC7NDCKz8v75slLL6Rjz3wlqsU4dOgcw8zDTUlxwvEH1oHt/wyqJRYtrO/nh8bie
-         oewphAfl3+bbjPhG5dW7MH0R+QvGFtFE102Zs7oDQvcB2cjn7pDV1cOnm3WqwOGLcVQq
-         DCZ7ZQ6CxIt3QlXQ+b4nZ0YtGDwYGhw8TnWOnhEEKUqCO2TgjsJOx9MpY/ND9AdnuT4I
-         2ba8G7jnjB6wnkqegdtUG03/ukp3qjv1nsh8izba7TB2c8RnAIehk+GtQFwkT+9SnIGL
-         0BGA==
-X-Forwarded-Encrypted: i=1; AHgh+RqHij9v9gdoMzD/RooPxYZR/j6ZR2XEX35OjHqlfuNxAsOk6DCOxKdDur92jSX7wbNw93zh3XgVK42JfTKG@vger.kernel.org
-X-Gm-Message-State: AOJu0YzbQTcAPzhXUPZLv4Rp0t6ZFGhldLtBWZfWr84in5l9CRWbhX/0
-	kOltUwsIs/I/joDeCTT9Z//tzHvdpE86IqN5ytrIxnE27cONxL/3NpxCVxBf515QpVn0qrQvwl1
-	bh34X8b69/T59VzXRUtWdKtZ4uDLlQw+YHc8zC/zNpE/4Pk+NdJ13zLF2+dcwazDExqOQ
-X-Gm-Gg: AfdE7cl1rW1zxN8ATg1PCqhSPX/4Tv6HBwS9ShbRJ6g2RzYHkZjc3CpHCD/4nkRzu4G
-	W+LMwm+jRTrJY6jOwwFFFOl9uXRYCMphZn4zdia08tzoIFtN3qvFSGTd/FWg0MIYVGRTypCOwaL
-	XJXdZ2jpd3PL44l5LchD9TF/PKIF8W9VaHhKxFJ8S8hkNLRIwTm9hzLQwgw2q2l2VsgYsXLegFP
-	m4WM7Ys5+bFp970qjr23eZlY0kKAZIT+C28N5l8KuL5wppmNbOERPW5f+8B1+BjBSaT9y8UMEXs
-	nZreyIOiagsvz1SlPTi9WV41jMbpA7zXd4dpO/ampFOJ73viCGufmJsF2+bqTiRZCpj8Oc2b1p5
-	1n4N89NNUUmy3OMOv0CkNcYWo2gjukQmiVnl+o2/FTPOAvBonT89Q+H0hOSyrI2TPIkesnOzHeH
-	L83cfHlkj0H3LGYQ==
-X-Received: by 2002:a05:622a:1b21:b0:516:ed02:c85d with SMTP id d75a77b69052e-5213d2b6a70mr188934351cf.3.1784672327692;
-        Tue, 21 Jul 2026 15:18:47 -0700 (PDT)
-X-Received: by 2002:a05:622a:1b21:b0:516:ed02:c85d with SMTP id d75a77b69052e-5213d2b6a70mr188933981cf.3.1784672327156;
-        Tue, 21 Jul 2026 15:18:47 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-39ef6d7e2c1sm1208661fa.36.2026.07.21.15.18.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Jul 2026 15:18:44 -0700 (PDT)
-Date: Wed, 22 Jul 2026 01:18:42 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Stephan Gerhold <stephan.gerhold@linaro.org>,
-        Sneh Mankad <sneh.mankad@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
-        Shawn Guo <shawn.guo@linaro.org>, Marc Zyngier <maz@kernel.org>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 2/7] irqchip/irq-qcom-mpm: Register MPM under CPU cluster
- power domain
-Message-ID: <2hismhl3epuijc6a3mhvf3sxasqrhrpuzbqsswfastafpjgpev@a6hdawm6oani>
-References: <20260713-b4-shikra_lpm_addition-v1-0-3d858df2cbbf@oss.qualcomm.com>
- <20260713-b4-shikra_lpm_addition-v1-2-3d858df2cbbf@oss.qualcomm.com>
- <7c8178ec-8bab-4427-8faa-5b28cb76a5ad@oss.qualcomm.com>
- <aldiLuYib1jCK784@linaro.org>
- <401ee2b2-1d82-40b0-95aa-005840a5078f@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IUw0X5F1"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE9E81F00A3A;
+	Tue, 21 Jul 2026 22:20:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784672447;
+	bh=d406LyygWXzblmhEB6WYT/uTq484gzGIOF02k4unhqI=;
+	h=Subject:From:Date:References:In-Reply-To:To:Cc;
+	b=IUw0X5F1XlHvov5TFySN8S69WLT74DrO4pNYBUXvZQPKw2FUMJik0ktfMoa/AgFhX
+	 Aq3PJ7igVktzEAK4apEW+qiuVnMGWlLnO4IL87kO1DdymWOJ9kX8/fwW6n4PNmeykq
+	 MiOb6h/MSrDcMAepqtcew0o3WuB2X8PcMCEMSSF0Oyu1V0QF1PgspSqESejaNl8UTo
+	 qG2UR7kgJ/bonmNbs4++RYZD2k49GoiCf/YcTkR7F2hSPz5V3O97DDc7rxeU7kYmfs
+	 siI2y7aab6znkBprnPFGLgKZklFtVMZmrHs2q+rcZEOLDvyknCjfRfpkGFeubcatlC
+	 ehQNIX3ViDAxQ==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 93AFD380820D;
+	Tue, 21 Jul 2026 22:20:17 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <401ee2b2-1d82-40b0-95aa-005840a5078f@oss.qualcomm.com>
-X-Proofpoint-GUID: 3AvDqKdvXxAu8-RC4LKGcxY4tyO29h4d
-X-Authority-Analysis: v=2.4 cv=CbE4Irrl c=1 sm=1 tr=0 ts=6a5ff048 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EoqG_mjnOjSkFSP1HQMA:9
- a=CjuIK1q_8ugA:10 a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-ORIG-GUID: 3AvDqKdvXxAu8-RC4LKGcxY4tyO29h4d
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDIzMCBTYWx0ZWRfX6u3x8pljqXNG
- 34o0pQtHDMq7cwU8qcg7F8uP/VYZ0ADXHtkU+Pk/SwQ4ORPwQYZZD7ytbuPkYJsOzdzbMxBfeTf
- T+hNrSGYJ1YUHyMD0zeALTL86afQBWQDIioJratGCMfy6TXTljeNk7x0EZXaLwOz+pL13+IMZPU
- Sebsxjt4QWkhGl3V/BHw6zOdF6j23fX8rEs2nEkUpmKbGeBuCWxqNCPTWOVed464gqEGsosLehV
- OkaW9OZbtdVoQnCvggnguvAu46SL640msFJ++l8J5JIWHVYJKqElW93j5g/BYzhupZJsRhF6kkT
- rLWMbXHWoxJziWjQa31GMTZ81GiWhvLwNYNZ/nP43GN/S8+tcwF++qsq4O23CQ6RBbuEAGKhw+z
- 7L9/AnGLcWGt9Lc20V+NoWX19CMi2iH/YIswxgmLrkfIYx6XsgkHDoH23wqICji+M6GYw1QDfdZ
- g615AK2BKf5mJ1SvIvw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDIzMCBTYWx0ZWRfXxk1Cs7NKBaLz
- B7EurOFwPtb1qQVQQbhqMdDeeHw11aJiomWWiv3pXc33+2wbS9c/2/gMErvprtiKlqCPxj1vjEG
- 06fh3X30CygkkYXVAB7M2HWqJYNdL8I=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-21_04,2026-07-21_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0 suspectscore=0 clxscore=1015 spamscore=0
- malwarescore=0 bulkscore=0 impostorscore=0 lowpriorityscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607210230
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH] net: qrtr: ns: Raise node count limit to 512
+From: patchwork-bot+netdevbpf@kernel.org
+Message-Id: 
+ <178467241614.1119846.11186866513095831620.git-patchwork-notify@kernel.org>
+Date: Tue, 21 Jul 2026 22:20:16 +0000
+References: <20260713145901.212396-1-youssef.abdulrahman@oss.qualcomm.com>
+In-Reply-To: <20260713145901.212396-1-youssef.abdulrahman@oss.qualcomm.com>
+To: Youssef Samir <youssef.abdulrahman@oss.qualcomm.com>
+Cc: mani@kernel.org, davem@davemloft.net, edumazet@google.com,
+ kuba@kernel.org, pabeni@redhat.com, horms@kernel.org,
+ jeff.hugo@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+ netdev@vger.kernel.org, stable@vger.kernel.org
 
-On Wed, Jul 15, 2026 at 12:45:48PM +0200, Konrad Dybcio wrote:
-> On 7/15/26 12:34 PM, Stephan Gerhold wrote:
-> > On Wed, Jul 15, 2026 at 11:46:58AM +0200, Konrad Dybcio wrote:
-> >> On 7/13/26 12:25 PM, Sneh Mankad wrote:
-> >>> MPM irqchip needs to notify RPM (Resource Power Manager) processor to read
-> >>> the latest wake up capable interrupts when the CPU cluster is entering the
-> >>> deepest idle state. This is done by sending IPC interrupt to RPM and is
-> >>> implemented as .power_off() callback by registering MPM as parent power
-> >>> domain to CPU cluster.
-> >>
-> >> [...]
-> >>
-> >>> If MPM has not registered with CPU cluster power domain, utilize the CPU PM
-> >>> notifications to manage RPM communication when the last CPU goes to power
-> >>> collapse.
-> >>
-> >> I have mixed feelings about this case. The RPMH RSC driver keeps that as a
-> >> fallback for platforms which don't have PSCI OSI mode specifically.
-> >>
-> >> On the other hand, there are platforms (early arm64 - pre-msm8996 and almost
-> >> all of the arm32 platforms) that don't define any CPU power domains, so
-> >> perhaps it's necessary after all..
-> >>
-> > 
-> > I don't think this fallback is relevant for the non-PSCI QC platforms,
-> > for the following reasons:
-> > 
-> >  - They don't define the MPM.
-> >  - They don't support cluster idle upstream, so they don't need to
-> >    define the MPM. They can't reach the idle state where it would become
-> >    relevant.
-> >  - The setup for cluster idle without PSCI is essentially equivalent to
-> >    OSI, except that the SPM/SAW driver needs to program the idle state
-> >    to enter. There is one SPM/SAW for every idle domain (e.g. on
-> >    MSM8939: 2x4 CPU, 2x Cluster, 1x System). You can just model the
-> >    SPM/SAW instances as power domains to get the same setup as PSCI OSI
-> >    (I had a draft for this at some point). So if someone ever implements
-> >    this, we should be able to use the same approach as for PSCI OSI.
+Hello:
 
-For the regerence, MPM existed since MSM8960. I think it was never
-_that_ important to implement support for it in the upstream.
+This patch was applied to netdev/net.git (main)
+by Jakub Kicinski <kuba@kernel.org>:
 
-> Yeah I said 'necessary' because of the arm32 platforms. This would probably
-> be the preferable way forward.
+On Mon, 13 Jul 2026 16:59:01 +0200 you wrote:
+> The current node limit of 64 breaks the functionality for a number of AI200
+> deployments that have up to 384 nodes. Raise the limit to 512.
 > 
-> > I'm not aware of non-OSI PSCI platforms with MPM either, so I'm not sure
-> > when this fallback would be used.
+> Fixes: 27d5e84e810b ("net: qrtr: ns: Limit the total number of nodes")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Youssef Samir <youssef.abdulrahman@oss.qualcomm.com>
 > 
-> I think it's generally only SC7180 and there's definitely no MPM there.
+> [...]
 
-Yes, it looks like there were no other non-OSI platforms. It was either
-normal OSI PSCI or the old SPM idle.
+Here is the summary with links:
+  - net: qrtr: ns: Raise node count limit to 512
+    https://git.kernel.org/netdev/net/c/ff194cffd586
 
-> 
-> > We probably do need some fallback for the old sm6375/agatii DTBs though.
-> 
-> The sleep logic doesn't really matter without the platforms hitting a
-> specific power state anyway, so I'm not sure we actually have to (i.e.
-> the regressed path can't be exercised today anyway)
-> 
-> Konrad
-
+You are awesome, thank you!
 -- 
-With best wishes
-Dmitry
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
