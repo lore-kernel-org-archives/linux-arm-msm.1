@@ -1,33 +1,88 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8812346D561;
-	Tue, 21 Jul 2026 15:47:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D219846AA80
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 15:47:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784648823; cv=none; b=YqhBTyXgnyccOtPI/sMnyUDOIXw3vYVOHa2KQoZ9VAAhS4JyRQysh2ZrhZA07DvCYbtfGJ+zDxC/EffSeWYf+RrKtjI5NRsjd2MrncuGs3AiXJQoChmG+XlmrmW2x3VB/nmpWj7ZQ96UjzlNv1DXNLWrS09L87EYWiHZVMNiuGk=
+	t=1784648834; cv=none; b=JGp79d1CloyG2fDsoVffay6tMz5HPQchbMiYrVyN6ibYW2vvA3/wc16YGGSgnjGi0UqOCSojdiXtUm1NrqIZYZQ1NuwzEu/ayyMUbOzUDmWNFUy8TB7hoH6ftloZabOxPsrGZtl7619YciKLCMY3XNuh3mEcV4Uj7DzhE1NpUw8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784648823; c=relaxed/simple;
-	bh=s7wilbjUubJkEgBoShqLu6uKMWWtv6AFUbfsmLhsqs4=;
+	s=arc-20240116; t=1784648834; c=relaxed/simple;
+	bh=zwKkMtOFMzBA8FAGAj3ttNusCK6HnkT1gFHAuYcxEFA=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=M66mbHFCgbFIbYv8ZujViysloPpyXzrsLs4fXEtRUBYImzRPm3GMFHQqNhkzKIo+0cO7LarFlN82rFBzYVogj2ga6NTfCZ4xT5LdKW4H6BnnqnwSI2GGIDk1ek7hQR8fIj7ISLcgj41i8hR5zEBWwFH/cKMESk7C/QqkXu3dUUw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lyPKbPT4; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=bzqiBK+4XjyA/gdLCbbANkyTZ9jYf9zMDyhTPO1DlEb1zen2jCjeDrMhTdu43mT/ag4fn8S6wsGiuRbN6CXrenJFlN5X7lti1xRZhK3BnGM542NtDadiBGF/v2+NVslOVyo5tNuHwS23ZFq92MNcc78DwbXspXgDqdycJ3QwT2E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ck9KwbSO; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Cs1yYsrR; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lyPKbPT4"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6123E1F00A3A;
-	Tue, 21 Jul 2026 15:46:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784648822;
-	bh=dOdkwEF0Jr//yAZhXQ9kOxYbUp3VHLV82EiaKduxk6o=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=lyPKbPT489X8goL6QtGrryGh9hp3uvqibBgae6XcdlotZZAcaEeZ01RfKugcm0v/A
-	 uAEHstc4r7FS3kR2LzkZTWaRPVC0ZGebeynSQyKVR6Lu1XyvO6SeGu2OFCKe1xIX9F
-	 kLCDLBpNm3iZJsoL0z5K4zRgaeA/Xwijz0qu805QpcMcEWdUxC9e1DcqT/rHF3EjOK
-	 XDNG61DfSEGrvyBlyRfG4EpjZPIGE2jwJdtzjX5+Z+wogQ1PxxzaeNbwG9PKkLYZzT
-	 aYWAqhLISp4ZR34a4FeEedB++T41Hf8cVA7l/Zg8sqJrswTUZCnxuTo3jNZ+w+Nfza
-	 G7vZfNVuE88bA==
-Message-ID: <77d6127f-9f15-43d3-802f-c265c3062f11@kernel.org>
-Date: Tue, 21 Jul 2026 17:46:56 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ck9KwbSO";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Cs1yYsrR"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LDftBh1707159
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 15:47:11 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	zly2uUbQOEsCV5pKtS30p7KKitdIviS1UpDECLW9Y54=; b=ck9KwbSO3X6Zr+3e
+	IaEUDQqoLy30CyCKFZVXlMJ7QnxKu1wzLQn4a7hiVKtRkJK4Pdn8te8ZpibRsIsK
+	PraJeWxurQPEz+hnjlHuBggmvQu176y7xO1/FtEGCiqo3D2bS7VegeJpWNOf3fR6
+	S66FQDA9G6DHlsUiVeEnCPOJq6vO/jAbi5ak2wFSQSfqZ2PW7+s89ki1aLaBDE1A
+	Y2aC1J4YvV6KqZwmVW8EKFrsF2igVyfZzBKWGuQ0P4Fw10slzlTaoikPafGeVP4F
+	hIC4l06+1XLynEpH5Dx4IasWJ09dkMHDz5RtPsHpTfIxfO6itEk7ppwemWRmiXq3
+	wqhmRA==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj9ae8tht-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 15:47:11 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cbb6433e9d4so1515751a12.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 08:47:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784648831; x=1785253631; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=zly2uUbQOEsCV5pKtS30p7KKitdIviS1UpDECLW9Y54=;
+        b=Cs1yYsrR2eBNCY0xICrLaTpkuFr3QNA2qacn4m2LUDcIFeRSjPPmBAAcmyWI2t8YI3
+         jjJFasDzDLtg/unPsu6zXjI4iHCqVdmSUEcksxdwrlyZr4ymsY530BB8vQf8GTgIVqiv
+         Lj4Zq59S64U1PDBDV+48kJkDlVVfOwXPJolzVde8lQyRskLDw0P2KsLYCM2CDOS9qTsc
+         Jtoz8E2KHLGfycCM6nzQfRnLF3ruh0qM9lFbb5U2EkyjxeBQ3k0hc7wg7oFKsmyiSbLu
+         w9JMq3NDgKo0gVT8eN4QqgiSxmknDt5s/Yr9tBtsjHeFuXwAKX8TBE5JhXfr9LKGnw70
+         Mr7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784648831; x=1785253631;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=zly2uUbQOEsCV5pKtS30p7KKitdIviS1UpDECLW9Y54=;
+        b=tLJW+VBSk3okf0QC78KuKfdo1vpNP8oedYe7wrxzXqzcztmAY5uj68SgNAeGgOo8e0
+         2+fkpqB9951ikq416kOMHWHT9g0aSg681kdg8OSkoF/WC85GMMSz4V0GyN28UZUHZ7CL
+         6lqMiPoUwNUXMshkIfvJhwa+CNnLoTsFokcZkb7gM/hSGX+LR3QXdz7QyLcorSI+NCb6
+         vGL9zYHAqrbe5C2DkLbAvexDoe4TVu6SSUi6LIjGjaQy3uVNZcRzaDEDpDyUeVmIqILn
+         SSRxOWnbAbIRapJbiJuXXxqOYI/73syDPdzUjC4cBWP0hTUBvyC4xUwXmx1ukDrbHF4U
+         EUYg==
+X-Forwarded-Encrypted: i=1; AHgh+RprkysfDKtYvpqMoyMusFSGWlRGcji8f+mHXYR81P3kiKYqra2ONNnUnmYzwShgPNGoMpCryK9FlUn1w7HW@vger.kernel.org
+X-Gm-Message-State: AOJu0YwqUy4G5X8qRf83uKXt7iEQCgv6L/DT6/MVIBJlWXQewiJ7hWKU
+	yLgX9mep9TKsoKMLAN3DvWttynMxyQQVPfvCrvmhTbbV8eq22S4m0GnVBuhnCBPusAwF+VUO1Ky
+	hwUThf+PpqxH6gym+HpofQzgJY1oHSohoGz+C5wrXyekzbjNOnQNlKpUqeaidXN22nu4LajsvjQ
+	DB
+X-Gm-Gg: AfdE7ckmmf7IorQ2S5GbCuI9TPrH9kdzDSHONn4rjFT09uMP7bRK9bSL/n74i3qxdu0
+	wceihiIp8wyuZlyluOD1ZLldFL2wtwnPQf/9fUWiEgQfAmXAw/PJ59ssP9FLNbORV1hLHlfO7eB
+	lNCFJ6oJZ4pzfVMUueje+8ZC1cCy1ezld2oro2IXTD9WLtw1j4G54IhN5ooteSGOSy+okHD1eT3
+	l2wPmeUqZPai4fAwCwlXVQL8gF3LlWdG3KPT1WUjHrUkAAaVBbTtswUo/MIyEe9tgH1iyZD3kTW
+	XcL1tYLDPMzU8UwjY34pOtIfHGvAvdFc6vSw76tGCq3GwOccBBAdtBiuHBXPdoGhwxlRLpI6X/I
+	8cdmDhLwD2clXHbcBRZSAoLEtxTw4lQPs
+X-Received: by 2002:a05:6a21:3b89:b0:3c3:64cc:311a with SMTP id adf61e73a8af0-3c3ad64b57emr21118470637.22.1784648830803;
+        Tue, 21 Jul 2026 08:47:10 -0700 (PDT)
+X-Received: by 2002:a05:6a21:3b89:b0:3c3:64cc:311a with SMTP id adf61e73a8af0-3c3ad64b57emr21118441637.22.1784648830364;
+        Tue, 21 Jul 2026 08:47:10 -0700 (PDT)
+Received: from [10.206.103.83] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13ce2de31a7sm42081607c88.15.2026.07.21.08.47.07
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 21 Jul 2026 08:47:10 -0700 (PDT)
+Message-ID: <dfef8579-075c-448d-b011-39211433cf76@oss.qualcomm.com>
+Date: Tue, 21 Jul 2026 21:17:04 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,183 +90,65 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6] arm64: dts: qcom: sm8550: add Xiaomi Pad 6S Pro
- (sheng)
-To: Tianyuan Jiang <code_0002@163.com>, konrad.dybcio@oss.qualcomm.com,
- andersson@kernel.org
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, Tianyuan Jiang <hiez832670@gmail.com>
-References: <20260721142147.1618-1-code_0002@163.com>
- <20260721153444.423-1-code_0002@163.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
+Subject: Re: [PATCH v2 2/3] media: iris: add hierarchical coding support for
+ ar50lt encoder
+To: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Gourav Kumar <gouravk@qti.qualcomm.com>
+References: <20260721-shikra_ltr_support-v2-0-702842f1f3c2@oss.qualcomm.com>
+ <20260721-shikra_ltr_support-v2-2-702842f1f3c2@oss.qualcomm.com>
 Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20260721153444.423-1-code_0002@163.com>
-Content-Type: text/plain; charset=UTF-8
+From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+In-Reply-To: <20260721-shikra_ltr_support-v2-2-702842f1f3c2@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: cwe9AGGt2ualJGWGaFRZmOt1LtWuNfem
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDE2NyBTYWx0ZWRfX9QdUv3YR/jS2
+ 1rtzeLSSL3UpsPDdeNAv92U/GNAMluRn3wQyH7+I45ZXX4SATISMzyj/WbBI8X+PSAKecexxXmv
+ JrSKS60TyeM4iGub1/Rbft28DTxVswo=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDE2NyBTYWx0ZWRfX0cMTjXWsDedW
+ ZEGrpC84/g3kAe7pOKbVU2CDV4IbXHp+fhHR6U8oRxH3rrYNLoZK9Z1OR3g4wA2EfB0I4bsdh/D
+ Ul3lGT1niHed2Xyo1meqBTcd1NQfbTA7r6FhB3VMuL0mAdtihzacniSZzqsKkthOC4puEGUALuF
+ 3cbQDBkYYXZXKxjM/QMhC7quY3Gg1yBoLISTdYw92JstHZsDomzdHtzR5WVancahzagWKRQt2K7
+ xzpU/C430S6xcauq6NqAf7UCci22E1miMJU2u3W9MHQa8ldEoUAUaCEVmPRJqBRBbbTSBj7tCPl
+ 3/+8eimDHlXw9io35ulfpJDGTq+SZnI80fg2PXBaWjLnIGNHBdgV2aP2PG8meHfjjcaL9ZzruiN
+ 51koTTMXk9W1911rRjVFKYBuf5sN6l1aYCl1CtMZkzCr5gpJhs+fzLcfU+hd3CB9/KLpPToK/tM
+ oq2HNootj7hy2Xf1u+Q==
+X-Proofpoint-GUID: cwe9AGGt2ualJGWGaFRZmOt1LtWuNfem
+X-Authority-Analysis: v=2.4 cv=Cr6PtH4D c=1 sm=1 tr=0 ts=6a5f947f cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=cBRrNc7nTFFbbESh8PsA:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-21_03,2026-07-20_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 malwarescore=0 adultscore=0 impostorscore=0
+ lowpriorityscore=0 spamscore=0 phishscore=0 clxscore=1015 suspectscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607210167
 
-On 21/07/2026 17:34, Tianyuan Jiang wrote:
-> From: Tianyuan Jiang <hiez832670@gmail.com>
+
+
+On 7/21/2026 7:06 AM, Vishnu Reddy wrote:
+> From: Gourav Kumar<gouravk@qti.qualcomm.com>
 > 
-> Add device tree for Xiaomi Pad 6S Pro (sheng) based on SM8550.
+> Add LAYER_ENABLE, LAYER_TYPE_H264/HEVC, LAYER_COUNT_H264/HEVC and
+> per-layer bitrate fw_caps entries to inst_fw_cap_gen2_ar50lt_enc,
+> enabling V4L2_CID_MPEG_VIDEO_H264_HIERARCHICAL_CODING and related
+> hierarchical/layered encoding controls for ar50lt platforms.
 > 
-> Signed-off-by: Tianyuan Jiang <code_0002@163.com>
-> 
+> Signed-off-by: Gourav Kumar<gouravk@qti.qualcomm.com>
+> Signed-off-by: Vishnu Reddy<busanna.reddy@oss.qualcomm.com>
 > ---
-> v6: address Sashiko AI review on v4
+>   drivers/media/platform/qcom/iris/iris_hfi_gen2.c | 182 +++++++++++++++++++++++
+>   1 file changed, 182 insertions(+)
 
-What is happening here? v2 was sent 1 hour ago and immediately this?
-
-AGAIN, read submitting patches.
-
-> - Fix cs35l43 reset-gpios polarity: use GPIO_ACTIVE_LOW
-> - Add "kinetic,ktz8866" fallback compatible for backlight
-> - Add map220v Signed-off-by (DCO chain fix)
-> - Add assigned-clocks alongside assigned-clock-parents in mdss_dsi1
-> 
-> v5: address additional Sashiko AI review on v3/v4
-> - Add assigned-clocks alongside assigned-clock-parents in mdss_dsi1
-> - Actually remove output-high from i2s1_default pinctrl (missed in v3)
-> 
-> v4: address Sashiko AI review comments
-> - Add GPIO_OPEN_DRAIN to shared cs35l43 reset-gpios to avoid -EBUSY
-> - Set Bluetooth local-bd-address to [ 00 00 00 00 00 00 ]
-> 
-> v3: address review comments from Konrad Dybcio
-> - SM8550P has no modem; confirmed on device (dmesg shows no mpss)
-> - Rename fingerprint_fpc -> fingerprint-reader, use interrupts-extended
-> - pmic-glink compatibles: one per line
-> - Sort DAI link subnodes alphabetically (codec before cpu)
-> - Reorder root-level nodes by name
-> - Place pinctrl-n properties before pinctrl-names
-> - Remove msm-id, board-id, Xiaomi-specific comments
-> - Remove output-low/output-high from TLMM pinctrl
-> - Remove udmabuf bootargs (confirmed not in use on device)
-> - Add "xiaomi-" prefix to firmware paths
-> ---
->  arch/arm64/boot/dts/qcom/Makefile             |    1 +
->  .../boot/dts/qcom/sm8550-xiaomi-sheng.dts     | 1761 +++++++++++++++++
->  2 files changed, 1762 insertions(+)
->  create mode 100644 arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-> index 6f33c4e2f..d8e485521 100644
-> --- a/arch/arm64/boot/dts/qcom/Makefile
-> +++ b/arch/arm64/boot/dts/qcom/Makefile
-> @@ -386,6 +386,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-mtp.dtb
->  dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-qrd.dtb
->  dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-samsung-q5q.dtb
->  dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-sony-xperia-yodo-pdx234.dtb
-> +dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-xiaomi-sheng.dtb
->  dtb-$(CONFIG_ARCH_QCOM)	+= sm8650-ayaneo-pocket-s2.dtb
->  
->  sm8650-hdk-display-card-dtbs	:= sm8650-hdk.dtb sm8650-hdk-display-card.dtbo
-> diff --git a/arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts b/arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts
-> new file mode 100644
-> index 000000000..fa24b1c1b
-> --- /dev/null
-> +++ b/arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts
-> @@ -0,0 +1,1761 @@
-> +// SPDX-License-Identifier: BSD-3-Clause
-> +/*
-> + * Copyright (c) 2024, map220v <map220v300@gmail.com>
-> + */
-> +
-> +/dts-v1/;
-> +
-> +#include <dt-bindings/arm/qcom,ids.h>
-> +#include <dt-bindings/gpio/gpio.h>
-> +#include <dt-bindings/interrupt-controller/irq.h>
-> +#include <dt-bindings/leds/common.h>
-> +#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
-> +#include "sm8550.dtsi"
-> +#include "pm8010.dtsi"
-> +#include "pm8550.dtsi"
-> +#include "pm8550b.dtsi"
-> +#define PMK8550VE_SID 5
-> +#include "pm8550ve.dtsi"
-> +#include "pm8550vs.dtsi"
-> +#include "pmk8550.dtsi"
-> +
-> +/delete-node/ &rmtfs_mem;
-> +/delete-node/ &adspslpi_mem;
-> +/delete-node/ &xbl_dt_log_merged_mem;
-> +/delete-node/ &hwfence_shbuf;
-> +
-> +/* Free unused regions */
-> +/delete-node/ &hyp_tags_reserved_mem;
-> +/delete-node/ &cdsp_secure_heap_mem;
-> +/delete-node/ &trust_ui_vm_mem;
-> +/delete-node/ &trust_ui_vm_dump;
-> +/delete-node/ &trust_ui_vm_qrtr;
-> +/delete-node/ &trust_ui_vm_vblk0_ring;
-> +/delete-node/ &trust_ui_vm_vblk1_ring;
-> +/delete-node/ &trust_ui_vm_swiotlb;
-> +/delete-node/ &oem_vm_vblk0_ring;
-> +/delete-node/ &oem_vm_swiotlb;
-> +/delete-node/ &oem_vm_mem;
-> +/delete-node/ &hyp_ext_tags_mem;
-> +/delete-node/ &hyp_ext_reserved_mem;
-> +
-> +/delete-node/ &qup_i2c8_data_clk;
-> +
-> +/delete-node/ &qup_i2c9_data_clk;
-> +
-> +/delete-node/ &mpss_dsm_mem;
-> +/delete-node/ &mpss_mem;
-> +/delete-node/ &q6_mpss_dtb_mem;
-> +/delete-node/ &remoteproc_mpss;
-> +
-> +/ {
-> +	model = "Xiaomi Pad 6S Pro 12.4";
-> +	compatible = "xiaomi,sheng", "qcom,sm8550";
-
-So you keep ignoring the problem and keep ignoring review. Not
-responding, not fixing anything.
-
-NAK
-
-Best regards,
-Krzysztof
+Reviewed-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
