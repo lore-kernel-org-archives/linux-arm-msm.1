@@ -1,89 +1,88 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19FC534107F
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 13:05:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CCB50342514
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 13:05:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784639159; cv=none; b=NOLpmTmTlkBVhlT8w2nxgXA4vxLOm56WxC5ivTQky68V7NbJniYHEkVsFDsW0agCZfMe9rz478kX/Mjj4FsJLGjCzysdbIo4sk+oQdWVT//rkbkNbDmmdfIBnDvQ27lKrR7Hhq+v+n50XZq/dgPkEwA3I5rk/tbOc2WDrkLtkQg=
+	t=1784639161; cv=none; b=CJaMqp/BE9Wk5BNGGjtaqQrmn1rZ/8MhbyGhiSOVbxQpnCQzVEMYJPOmUeyxHUakhKsmd1dbio5vVzqJ39pf4HHJP3LYZoSXE+/CoWVx9YgQQXFFl+UzWssnjZ5ZkEHbznRsVAUskmEGvfTZYOODOosJyOoiWbgEj7mQ5erTm9g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784639159; c=relaxed/simple;
-	bh=1uCSE9pS0uK8c8rmwdqjcZn44CXrmRxmSQbFF1quomQ=;
+	s=arc-20240116; t=1784639161; c=relaxed/simple;
+	bh=mvZuz4R68MDpMBJuL25COqTuukLaTsnYTOOzX6VHfJU=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=b0+Zsu7ghKXp6/WVuFeJje3y/TSHxIHLXG1GB8i3lfxgXzWnM31TbwS0gnq9CUQL1yy4h3wWpMQSB0qQMVLF6ZVmhxK+7iPnys3iNUTRTVUUXAbksZbNLCEA5pXnuzg3iGVGyU+DQ5fCVZgLcMnaUAX1HtuUyg64aj0MHG5qW84=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GyFacerb; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XEUOi928; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=KvG/7IPL+DTKD0RyC8xM7SVyGm9FnWfdOyJvMKovlyTBy9WcwAx1g2q21Da8YpKIUDgx4/CjHZTrooiLK15Dbgodcyw37SCJBU0I8gdbtBWPt2mCA6Vv73QMwRijpyavS74L9zoJCzx3RnCDnr0gRLZhfWabKGPxUseUhmOrEAU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZTjFUZZA; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=g4J9wgdo; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GyFacerb";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XEUOi928"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LAR5Df1349379
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 13:05:57 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZTjFUZZA";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="g4J9wgdo"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LAR8XQ1134534
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 13:05:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	w1VnrF5mL82CPISYHMNOBYhwf3W9zInAag1/ZxJRFrs=; b=GyFacerbsu+7NaWF
-	PA6zCWDW9/Z2oximPkP3NhvZeOLrSkdd5rwtoa+SmYmnzqSSIcprdvf61lpGvqUC
-	s8J4xAjWdLXRtom04ClRv7zoN4OPMBYFBuZl8Rcq283F4XaLfzd45q7N/rJYxQrG
-	SgeJnSkUt0R+US+ooe1GADTDM8ugUMcZzlEfGcSSZsPLaxinmzB7snBNF3rSjx71
-	F/wvZCbH7wESDGTyVqKmTgyT09/4xHY114+v7kpSI+l2qZ2EXciB0hrvQw7kS4et
-	UmAgEK/Ia0uDG+rVgt84gP+g6yqUp1rzsTwvv1oSsnOCokrALq8ehWwAQbyCMAuf
-	xqVdiA==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj6pa8sx4-1
+	+31G3iNyhTEkeua3PfRYEfavCmIUVylJgJKWF0Z+7JU=; b=ZTjFUZZA0SBpYMNR
+	HFOBjb8j4jgjl38hdsS+/YUwxVvgoYksr3E4Q1QHd5TUuhIeEEaCt8u/HI28bJzp
+	kDVKZfbRmzkQdGSdX6+xKtibdVgenuNfWGW720Ewsfkgv86KH6STmPVPe5Zr7RR8
+	lno5SWG6Nb8wGZoHFWrVjGIAmyKDkgIM3R8ozYifxgW/JeNHo2kTPRnHeXoHNDsj
+	NtKXc9hPiLgJEHs61RFXeF9bBvDMNQxz6CR5jpp7etYUUM7FmtkerN+q5h6S/G58
+	b06fbuoKFmjqpAUQVIKoZ3g12CXi9YzewDw2/H4wPojZJLdME6a/ZfaVpQIJgvEs
+	Xqxf7Q==
+Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com [209.85.222.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj0as2v27-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 13:05:56 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c0199faafso171925531cf.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 06:05:56 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 13:05:58 +0000 (GMT)
+Received: by mail-ua1-f71.google.com with SMTP id a1e0cc1a2514c-963d24c3886so6926707241.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 06:05:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784639156; x=1785243956; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784639158; x=1785243958; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=w1VnrF5mL82CPISYHMNOBYhwf3W9zInAag1/ZxJRFrs=;
-        b=XEUOi9282MwGwcspi9PVM0lTiYYTSQsnmr5L1Fh+uZwJE+pM0i0X0kMSBmpwJQS1gc
-         OTi1RVmqpifN8rjs/SdW5lht3cBeDLDACpGdVGlSWdgIQ1MMCTfxVV3JywjbYogwKfjb
-         kGfdnKJFbUUU9PDKunzxAI6WTKyBSEmHu1xLNNXAgK4OK9cpzzCqQpntn+d1DziJIrTP
-         +P4TUv69hgPUMO6vYDyYKVfhEyn6JAtXYWPAMM0d8YW3a9gYJawFo7WryUgQDV+ghxnA
-         PVdVt5RbhS2jR+CnIN3AOi4mewm5cmLvMtEIzRs+4MwLe6zZh6NvCwRXxAcAITNwEy1h
-         DCDA==
+        bh=+31G3iNyhTEkeua3PfRYEfavCmIUVylJgJKWF0Z+7JU=;
+        b=g4J9wgdoekp1lsNWz3Jvw3gIt360O/yBEAR3AXiiIy7ujDbFRsLpgsgSGMHSFcdMUd
+         sm/haJUa0kGyFJzdExvfO4Ygm06jec0DPVhDL0CHl4bPRTfELzRVkQfCSLMKKDM6Q7mj
+         DKQmnuFsjwEuVJR8ev7LoGjXUa9/FEC9OJt5xvHv+fRQke8IodVFIMzb6I1rDn4hmi2u
+         3z0CAwoQuch6sfMKHAXYk/0gWhNrB0NF0xFHJvK2ftVqaVg/4c3p8Wsv5O2BvWb8wBoH
+         55e+HcNFVnm6XQW/MgtBUVmc3XiUAElS/wuwbOfZiI6C/pTXscQHR2xpCMkDVFsL5IdQ
+         pncg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784639156; x=1785243956;
+        d=1e100.net; s=20251104; t=1784639158; x=1785243958;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=w1VnrF5mL82CPISYHMNOBYhwf3W9zInAag1/ZxJRFrs=;
-        b=R6ltGcjXKf4ZT0QG5sjCP7IafKp3mnb90UzXIW6/Vuxv3TcrYhMgub5t4rJJPpYUn5
-         bMiVH4lWKfdO27DVEbj8tzTOzgLH8UktSjuGhZa5iogKaefQIpkGDLgGuM5Q6ZSpbbY1
-         3gCGB+7VB3sa1E1GnVJzCppKLtWC9uqeQXCvpGOh4gqMXNGy4ST7rEhoFe9OWXEe9K/k
-         wP1MhmBmNw+Qf7zGZOG/RdMKkrAiCqYsqB8ioWqovyefiJNR0aL6QLEtBOG4vjV3oR5E
-         gzrv9v5GSIoLaAOdkEZYcatfNvOy4fBMx2bWUWcnkGfNsOSvqUgMsyUT3sN32Zr59RQM
-         InGg==
-X-Gm-Message-State: AOJu0Yz4UASXqDZEyZ7E+F+I8wQ57Q/06E2V9+qrBIgZlo8rCQqzNtPT
-	JfJimqSl6a1J9qSiTMf47Tz1r8u8QxsiPoDVqDPJr6QvGIJHnymujyt6A70MtsJHz7QfXIpRH5+
-	8l0EfhdwkD6qfjwoEFJLMM0IRRRvQtxGkNLaGwSubtUro3DscDv4Qm6tk4e6KhApuFpSbGsHccI
-	zm
-X-Gm-Gg: AfdE7cl29d56RrPpfjLwuaEBhzyKpC/KFWDmXGvqo2POCWThwrWON/NqMVH73O8xA4B
-	eWhzkIS6WQPa9DV8Y7LCZ1Z0LmcuQskmvdEL618aT9BTjg0sYDj/mkg0npZWiw9snw01Wk8Gz3R
-	gwVnMkr90mQXKXYhKc1+msy9VSENdafVpk0l5EIqaSSwusETSpDFBHBIk1aCxfkoQ7/gnu+liiN
-	fBaWSMelTpzNq4OO4U23w1TJtFmZlKzwbsRz0HsyWvCiB0FvYjnfOqlDjGct9kkSqTSi52Y3Aer
-	toRmxuXT57q/pX6INh8lSxxfRMaxhFKg3vliiJIjUjtb0+wbpqcqqJUVBKtzzZvEoDOWs+zqpV1
-	cm6QF8beZs4PcUMR2a8+Zt7gHBt4qsIp7M95k87OvGnG/Y20PFqxQG08K5jrRoWsActK56erTw0
-	KOXE6QpcLM4TmAu8hikw9v58/iHCqHnJrpcaYQCKVJ2rmMYZda5QY=
-X-Received: by 2002:a05:622a:110c:b0:51c:167d:b346 with SMTP id d75a77b69052e-5213c5f3a9emr164339761cf.23.1784639155497;
+        bh=+31G3iNyhTEkeua3PfRYEfavCmIUVylJgJKWF0Z+7JU=;
+        b=qhhZ0YiNBv3Hg08A6idOJWleyo8pybZcqqTRyH66ntaY6GLBBQGRgGl2DtyAAdrt3u
+         cFVBHhy62Fdicd8KEzlOchrKmDDZwag4mdZyG6d7qUNu7zEqWFIl2csrF/cTOpMw9mIm
+         mBXVfGi11Z4cEPpUzJ2FGmzKVMrX1YIkujIs4nk6mhkO4Z8gM0p+QJ4gHSIta6dfZfdU
+         4O9RTR2OfMjyROgIM5cQKDPMVd8GcwS+fuOx4RbmWQkiEZaUOf7wRtCVC2+N7XMM7ddN
+         HAcPiBF2pr5S3EVKwEM/+dhfDOETManP8Newlu6nPSUJpdXd33uLtVMVn3Zos5WOVh1I
+         pb/Q==
+X-Gm-Message-State: AOJu0YxNvVwunSeGPCOws9cWREW+FWaciFIlMrbCcKWzyfXslD6nxpyX
+	E3vXni2wDHx2/JmhTugtr/RRsQB1f0qBNgwDXNEPKVQIgVTK6FXvJ9X+Ln7PlrYhmdPwiE7kAUJ
+	uPIVEkhl8TH8OsNwXba0M/g+Gnv/1SnklrBHK315oqmTUUBjZrQJJ/tFLLvyMMizIo4Xa
+X-Gm-Gg: AR+sD11eFq5HDjeaUP5Tb/dOdrlVwm3p2qqokqc6E+NNlGCxmEGV7qthWVNy4BGjuRv
+	q4yGdi2XG32ip4vcp7t3/t2H6/0K0OJTKxcZymCmB95cSnYOURTkftKXqPjJMDKZI01be5v12xp
+	ARgM2lmfoXUJEYmq7LBEoccnNrE2rSEo47cvjh5QljyArVdJvMEFGtJX6JrImJTRj5S9pDXu9Ou
+	Vw1Tcq1cnISPy07ri5tAHYOA6vgrASUlW83ky1j9xLbfrcxY41gbAZCqmgpzpgfvIi0D+27vwN+
+	zgbYOpxdSg03WYkWdtvE5AUkCfjXfrxeOqXb2PIrBOHt4lAZ/voSog/1zFps3L1w+1Ll90H6q1m
+	GP3XJ+c3WMfDVGncP/u5hZfMuFDhLr5saghTLeG7EwyMMVDmfNm30/8MXAsBTnJvDfL2mqdd1rn
+	W6cyH+nyWaAsvUNNpqo4K04MfGRinRtyNosM926w8GB43bqNOtaog=
+X-Received: by 2002:a05:6102:1612:b0:6e7:5c89:3fc0 with SMTP id ada2fe7eead31-7475374957emr6867624137.25.1784639157980;
+        Tue, 21 Jul 2026 06:05:57 -0700 (PDT)
+X-Received: by 2002:a05:6102:1612:b0:6e7:5c89:3fc0 with SMTP id ada2fe7eead31-7475374957emr6867500137.25.1784639155104;
         Tue, 21 Jul 2026 06:05:55 -0700 (PDT)
-X-Received: by 2002:a05:622a:110c:b0:51c:167d:b346 with SMTP id d75a77b69052e-5213c5f3a9emr164337661cf.23.1784639153460;
-        Tue, 21 Jul 2026 06:05:53 -0700 (PDT)
 Received: from QCOM-eG0v1AUPpu.na.qualcomm.com ([2a01:e0a:830:450:751c:d61c:c91:60dd])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c17009ae04bsm591898066b.8.2026.07.21.06.05.52
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c17009ae04bsm591898066b.8.2026.07.21.06.05.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Jul 2026 06:05:52 -0700 (PDT)
+        Tue, 21 Jul 2026 06:05:54 -0700 (PDT)
 From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Tue, 21 Jul 2026 15:05:47 +0200
-Subject: [PATCH v5 3/5] phy: qcom: qmp-usb-legacy: Fix possible NULL-deref
- on early runtime suspend
+Date: Tue, 21 Jul 2026 15:05:48 +0200
+Subject: [PATCH v5 4/5] phy: qcom: qmp-usb-legacy: Prevent unnecessary PM
+ runtime suspend at boot
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -92,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260721-qcom-usb-phy-fix-null-v5-3-a181e2adbd2d@oss.qualcomm.com>
+Message-Id: <20260721-qcom-usb-phy-fix-null-v5-4-a181e2adbd2d@oss.qualcomm.com>
 References: <20260721-qcom-usb-phy-fix-null-v5-0-a181e2adbd2d@oss.qualcomm.com>
 In-Reply-To: <20260721-qcom-usb-phy-fix-null-v5-0-a181e2adbd2d@oss.qualcomm.com>
 To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
@@ -103,114 +102,103 @@ Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
         Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
         Loic Poulain <loic.poulain@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Proofpoint-GUID: rPE8Akl4_iA9Yy_0I-jVlY2bUQmj7laj
-X-Proofpoint-ORIG-GUID: rPE8Akl4_iA9Yy_0I-jVlY2bUQmj7laj
-X-Authority-Analysis: v=2.4 cv=eYYNubEH c=1 sm=1 tr=0 ts=6a5f6eb4 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDEzOCBTYWx0ZWRfXxLdz2BszO/a9
+ nXZZxXjq39s/6HuctUJ7Ql5LYg/EnBIR/KLaE25ovaS1NsfTNSvi7yfoI7wMLjI0wD4+bDgkXzu
+ g6WQs0XBOstjQj3yW2lnqN23sZ7+dU7yl+nZOcSw9npra7weztfwl8WSlMG/n+r4oHcU2DqR6D/
+ p2iHbvHzWR9ejv6PE46Y3iP0sgeuU4AjDMZmn7u7IOgycHT2E5SZ5rqXd/XOrRwdy4Z9/Z2oSOo
+ xna22TyXzn+R0i/qcKIbGe/XJflYVHvfK8VsAB7+8DhPTVB6CLKBUdZD0AVwsPmfTifTfa+HReL
+ K+uAgpcqQ3iLYTHmMuf0m710Elsi1rJNIVUd5LEaEM6DDtumyUmoF8oPrm6FH00m6lhFeOxW1zk
+ 2qx9N/XdeEUeZ6O7GWm+IKl9HWAvEMdvlqSJzrHrWANr8xFHLb7M9L0RcSmmEEqRWzw8473D0Gp
+ ZJPuSK/yzdhsqzejfiw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDEzOCBTYWx0ZWRfXzGVa4ToIlEgl
+ +oC5XN0v3U+rypax2CuAXCT34Z2RHuEgfPdG/+UTGs3FU+xL1okjwX2CQBYskSPfpqRaVz+qWnr
+ LMXSS1JZA0hWzqK1o9vp+nH+f0WylxI=
+X-Authority-Analysis: v=2.4 cv=DoFmPm/+ c=1 sm=1 tr=0 ts=6a5f6eb6 cx=c_pps
+ a=KB4UBwrhAZV1kjiGHFQexw==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
- a=QCvEx_dtP_Vb2dzgXhUA:9 a=QEXdDO2ut3YA:10 a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDEzOCBTYWx0ZWRfXyfLszqgpu3BZ
- w/rapfJT4qlwwksNTahcaptCu5mWtgipFEU6KurjZlOTuL0h4MooZlVGNyqf3YZqgPOALShfK1J
- O0dg5SVzxjKQYpWp2Lk5Se1Bm7tA23pQTxNL6iN8KXhGq204JNskt/mviZowU46grCApzWZOg+H
- ky9qG8f9BtlDn5zoYcXm1UaRktNVB2LlIhUcQUuSLPxASn1rsZyEcej/85JVLuv2nxqoXcEB+QD
- ZJWn8UwpfxKPmmxBYvsKYSftlKgUyOHQ6wRWBJd5iTdIZPX7B6eXdz6CvpgRcMyzOTMXGPnBXaw
- hxEvqECMahs9oMHFDC/44ZGuE19JfHPkMRKjC765ULrK79R6NfEn94kE3qZlg+eAqxK269MNFyj
- JpbWVgmkhnX/9U01BWpNb8Q4G3PyfvWJqncLlMjw5a30JpFgi+z8QljsC/jWuMRBkZKkbCvmoSr
- uakQ/tsT2IvffUa+aFg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDEzOCBTYWx0ZWRfX/+LSEbP05Aso
- RCDuByWV2o2uXSqrWNo4Cd/xVK+dhGRWGZxFJKNOJBaMPWiZdi92+WuH1oJ6zP6yEY6qbZvBLTy
- JFwOEjqbJ2N4bewAcV1nL0wim85zxRA=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=EUspDBNiAAAA:8
+ a=PcYcMbZi39MCwOMHHM8A:9 a=QEXdDO2ut3YA:10 a=o1xkdb1NAhiiM49bd1HK:22
+X-Proofpoint-GUID: j0tKbQmhJN-jy10D9N9Lcvmxi7iomNMt
+X-Proofpoint-ORIG-GUID: j0tKbQmhJN-jy10D9N9Lcvmxi7iomNMt
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-21_01,2026-07-20_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 lowpriorityscore=0 malwarescore=0 priorityscore=1501
- spamscore=0 bulkscore=0 impostorscore=0 phishscore=0 adultscore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607210138
+ adultscore=0 malwarescore=0 lowpriorityscore=0 clxscore=1015 phishscore=0
+ suspectscore=0 impostorscore=0 bulkscore=0 priorityscore=1501 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210138
 
-There is a small window where the runtime suspend callback may run
-after pm_runtime_enable() and before pm_runtime_forbid(). In this
-case, a crash occurs because runtime suspend/resume dereferences
-qmp->phy pointer, which is not yet initialized:
-        `if (!qmp->phy->init_count) {`
+Runtime PM has to be enabled before creating the PHY, since phy_create()
+only enables runtime PM on the PHY device if it is already enabled on
+this parent device. This opens a small window where the device can be
+runtime suspended after pm_runtime_enable() and before the later
+pm_runtime_forbid(), causing an unnecessary suspend/resume cycle while
+the PHY is not yet registered.
 
-This can also happen if user re-enables runtime-pm via the sysfs
-attribute before qmp phy is initialized.
+Take a runtime PM usage reference with pm_runtime_get_noresume() before
+enabling runtime PM and release it once the PHY has been created to
+prevent the device from being runtime suspended during that window.
 
-Similarly to other qcom phy drivers, introduce a qmp->phy_initialized
-variable that can be used to avoid relying on the possibly uninitialized
-phy pointer.
-
-Fixes: e464a3180a43 ("phy: qcom-qmp-usb: split off the legacy USB+dp_com support")
 Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
 Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 ---
- drivers/phy/qualcomm/phy-qcom-qmp-usb-legacy.c | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
+ drivers/phy/qualcomm/phy-qcom-qmp-usb-legacy.c | 16 +++++++++++++---
+ 1 file changed, 13 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-usb-legacy.c b/drivers/phy/qualcomm/phy-qcom-qmp-usb-legacy.c
-index 8bf951b0490cfd811635df8940de1b789e21b46c..fc490589c8e4888770807a60170905a1c7610421 100644
+index fc490589c8e4888770807a60170905a1c7610421..eb1826fb26f0868f7758245b0cbe1a0590fea9a3 100644
 --- a/drivers/phy/qualcomm/phy-qcom-qmp-usb-legacy.c
 +++ b/drivers/phy/qualcomm/phy-qcom-qmp-usb-legacy.c
-@@ -542,6 +542,8 @@ struct qmp_usb {
- 
- 	enum phy_mode mode;
- 
-+	bool phy_initialized;
-+
- 	struct phy *phy;
- 
- 	struct clk_fixed_rate pipe_clk_fixed;
-@@ -895,6 +897,7 @@ static int qmp_usb_legacy_power_off(struct phy *phy)
- 
- static int qmp_usb_legacy_enable(struct phy *phy)
- {
-+	struct qmp_usb *qmp = phy_get_drvdata(phy);
- 	int ret;
- 
- 	ret = qmp_usb_legacy_init(phy);
-@@ -904,14 +907,19 @@ static int qmp_usb_legacy_enable(struct phy *phy)
- 	ret = qmp_usb_legacy_power_on(phy);
+@@ -1285,10 +1285,16 @@ static int qmp_usb_legacy_probe(struct platform_device *pdev)
  	if (ret)
- 		qmp_usb_legacy_exit(phy);
-+	else
-+		qmp->phy_initialized = true;
+ 		goto err_node_put;
  
++	/*
++	 * Enable runtime PM before creating the PHY, phy_create() only enables
++	 * it on the PHY device if already enabled on the parent. Hold a usage
++	 * reference so callbacks cannot run before qmp->phy is assigned.
++	 */
++	pm_runtime_get_noresume(dev);
+ 	pm_runtime_set_active(dev);
+ 	ret = devm_pm_runtime_enable(dev);
+ 	if (ret)
+-		goto err_node_put;
++		goto err_pm_put;
+ 	/*
+ 	 * Prevent runtime pm from being ON by default. Users can enable
+ 	 * it using power/control in sysfs.
+@@ -1297,23 +1303,27 @@ static int qmp_usb_legacy_probe(struct platform_device *pdev)
+ 
+ 	ret = phy_pipe_clk_register(qmp, np);
+ 	if (ret)
+-		goto err_node_put;
++		goto err_pm_put;
+ 
+ 	qmp->phy = devm_phy_create(dev, np, &qmp_usb_legacy_phy_ops);
+ 	if (IS_ERR(qmp->phy)) {
+ 		ret = PTR_ERR(qmp->phy);
+ 		dev_err(dev, "failed to create PHY: %d\n", ret);
+-		goto err_node_put;
++		goto err_pm_put;
+ 	}
+ 
+ 	phy_set_drvdata(qmp->phy, qmp);
+ 
++	pm_runtime_put(dev);
++
+ 	of_node_put(np);
+ 
+ 	phy_provider = devm_of_phy_provider_register(dev, of_phy_simple_xlate);
+ 
+ 	return PTR_ERR_OR_ZERO(phy_provider);
+ 
++err_pm_put:
++	pm_runtime_put_noidle(dev);
+ err_node_put:
+ 	of_node_put(np);
  	return ret;
- }
- 
- static int qmp_usb_legacy_disable(struct phy *phy)
- {
-+	struct qmp_usb *qmp = phy_get_drvdata(phy);
- 	int ret;
- 
-+	qmp->phy_initialized = false;
-+
- 	ret = qmp_usb_legacy_power_off(phy);
- 	if (ret)
- 		return ret;
-@@ -988,7 +996,7 @@ static int __maybe_unused qmp_usb_legacy_runtime_suspend(struct device *dev)
- 
- 	dev_vdbg(dev, "Suspending QMP phy, mode:%d\n", qmp->mode);
- 
--	if (!qmp->phy->init_count) {
-+	if (!qmp->phy_initialized) {
- 		dev_vdbg(dev, "PHY not initialized, bailing out\n");
- 		return 0;
- 	}
-@@ -1009,7 +1017,7 @@ static int __maybe_unused qmp_usb_legacy_runtime_resume(struct device *dev)
- 
- 	dev_vdbg(dev, "Resuming QMP phy, mode:%d\n", qmp->mode);
- 
--	if (!qmp->phy->init_count) {
-+	if (!qmp->phy_initialized) {
- 		dev_vdbg(dev, "PHY not initialized, bailing out\n");
- 		return 0;
- 	}
 
 -- 
 2.34.1
