@@ -1,63 +1,63 @@
 Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CE0948164A
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 10:27:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AEE64480DD6
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 10:27:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.176
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784629655; cv=none; b=etRvDJATeZH76qHTbuq4q0PTPDeLMTp55QM6GzbqW/BdIE7Q4hHBILjHWokN5s/MmJJdRR/HgbVD7R5WdmigYIHBUIkn5lLzeJfpuJLRNRXAUTMYkLyelSaxLOf/e6VF51hct/OHTpruZE700FHz0MTpUalgt4RCXeG5p+oQX28=
+	t=1784629661; cv=none; b=KHdBwNGec+n+qqKggZuzo7NI+TZVO4HdFHClHHBZRpxtevqUc1oaL5qFJ5Z5hYQD+qe3mNj0TFyMatU5lWxsD92rFyJdE1qgPz3L6v0prbbzbMjNnxR4auM5b8dgq7MGJ8nAg/cEuZ34rZUXVGTVnfkaxAMI3qqehZgU66LQ0yM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784629655; c=relaxed/simple;
-	bh=jMQz84Fwcrm8C1aXqMkUxF4g3vcEnzFavgi0MTk887k=;
+	s=arc-20240116; t=1784629661; c=relaxed/simple;
+	bh=PpZ4kh5MjGhEnrnoDkU1ccKIH7udPBUPKAQWqZafq5c=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=LiGPeg/Qj9z41JGP5NUjHH7BxG6DkAfG+E5EElv0F2/gXKwJEUXJmrm3N1XL5Cihlpoi/bkI293nuPGmHGk+7hk7Q/yENDDrVGPLFcIxVwUe6aTGTT7aRPUQKnWhU4IY7S4NOSZpi1qRVeyr4r2S+qIz5QMEEfZavk061t22CW0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=EXoYgCuC; arc=none smtp.client-ip=209.85.214.176
+	 MIME-Version; b=X2OOQSNSi5gS/yooIFsR3raqhu2PwCktn4IKFYorr/GMZ9+TNvAgPLm1JXqwjVm+ImMKBrLI4LYe2kRdfD68rutnz8VKJ5r9Q6wLnbGKZ+5bZj0xYc0AcCrNnCWej/nsX9t0AdCxxLiZ330TsLEDMxfME1xWgH4lsSBjKettHK0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=h3K7RTee; arc=none smtp.client-ip=209.85.214.176
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="EXoYgCuC"
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2cf50c6f235so31499985ad.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 03:27:32 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="h3K7RTee"
+Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2cedda2ce6fso67695595ad.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 03:27:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784629652; x=1785234452; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1784629660; x=1785234460; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=73JLQAmWuZSnNO0q42K5V2Btd42o1yjgi7/OGpCGXNY=;
-        b=EXoYgCuCE4pAGpUCLuKEtxx9QuflEIKeYNeM8MXJPCKKReqCiz6LUXAlFCuQFvdm+2
-         oWEsJn5V3k1GhU0IHb34HotZ+HydmNTuasfn1XNy/jrgw4i1Tf9C2kjvFoWip9Gz9zML
-         utdmQJEdLgTwsSxVhPXDEtmUnteUKE5c1HQ9a+E8E9XbVNhCR5F+jVZlR6J92JiZ0qyU
-         fjvkkj+ptyfub+Lcgd9RRFMHVIgK3qGCYRNyVHI3wHcyWYoFYYgCOiUYso55gcK42wJq
-         SUExDMFjKd8RukG4GuIT6pcZPBs7Qbc7kxu8GIoX114B/JUPfEvkna1d9QO86d+CDN2m
-         sAwQ==
+        bh=Q0zTLvIrZQkcOcFOJ5UF+kPqAbo28ZpFPiBP3Cw88G8=;
+        b=h3K7RTeehQiSuN933tealbOs0sy5JloiIuQ0mFI0jK6PRxoaJdXNsppyBZgdyZzUJv
+         28VJzj8Rii3/dEuOGIvb0iwsVz0FnhTp7aYvBODHLwWhiWILY82jaCBCphd/YP9XG8np
+         GbrdMZV0Jz8s07Wv2MgWzjF6rP72Ippt/K3jwGAeTBEc5tlv213LTKwQ3bEbYF7UNfCw
+         kOciRJhzVARlzoCVEsm0oO9yKFTtdFc7P++rEVYdb9pYVwU8WMCANtldMzoUo8znRmvL
+         IbfEwMzq0VXAk3Zpg59lz0+MALJyMyM/LdbnDVe6VE2/C7E82kb1abQGM9eD8AsVbpmv
+         BqCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784629652; x=1785234452;
+        d=1e100.net; s=20251104; t=1784629660; x=1785234460;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=73JLQAmWuZSnNO0q42K5V2Btd42o1yjgi7/OGpCGXNY=;
-        b=YCbSo+c95suZFnUKeY93OP8blOhJBOoKEDAg5dfxuUVUcmi5DvlWuKHbUaXmy3tdUr
-         RRVQ8zcC+3BhYFYKSj84PVx5lQaxmeN3z/jJKcschTlTOOIxTqp+rgdYsKEj77N6WB1n
-         wAbRrYPC+aqifo9uUJPEkpbw24rND9YZJZFadWoI/PRwNGlMX4hF7fmek4PQFIiuTJx1
-         n/JHGhR4sy935AtRvS67TYy/xmsrJ1jZR+4WRA4P9CW5ZAoPVgjtnTQgYH/ofGJfwnCW
-         XMyLTJI3SwV54BL4SbA9lJnRP2+v5HYDrpLBHpNF/A5ISJF5Pf76V7pwGlMSy+98B0A8
-         9RaA==
-X-Forwarded-Encrypted: i=1; AHgh+Rp2KCUwAFwy2esYW0bMtXikMUBml59s0pqPyqshXcY221pas4hMAq/JX2ED70OZA9CIZwXp0RYGrw2qtY4G@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzm0ihcarpZxMS1g5aB9TjGH9XnCR3Lgzw00VUl7tqgsrwplMQw
-	ZkGTbQxbr3u5mUfjxXf1J9vFfFNUFAiNu/GMMjap3gEc78qotMwVNGE+
-X-Gm-Gg: AR+sD121taxFfhWoEWZUoRqXqOYfPMkurYdgKVpCeJ7A6KKpj4r3Db8yRO2lN1oDARz
-	VkBx5N3G6h9uwfER57kq+Gw9+SDIDOt/KQR6h9x8rzS5B9Atqj5jGTmEWlhHE9TeXzwUc3fc2Oo
-	hkmbcjOi00obgDd43CTtJV80cqUKBhhDT3tjZzf8r/qm7OGVT0wNaIsK10XikWhmX/FQMjSmEVz
-	Nc8aQXv1e4vJfHpzxtGpEzYFEUi1rylmGvLpu+8Y46jgUqrg0CErF9JnhB+qnpN69TODc81ADD5
-	RDeMUgQgvo0EXPcxQ3LNyykzthHBZ2lgw13pjs/4aPz4KXodrPBaLa6QfOnIuEMHkM9sPS5VcY8
-	q4RMqa/VluKtytbgo+/5xyAGRn4cGogNBlp6ZS0B3CFG4zdJh4Ok4ExU2R6HzHDJA75e9YBs179
-	5JIouQ4fQ0EOoWpATxsOvQKcge7m85YU4hJ8pK
-X-Received: by 2002:a17:903:2ec5:b0:2ca:7131:cace with SMTP id d9443c01a7336-2cf3496094emr219480565ad.31.1784629652158;
-        Tue, 21 Jul 2026 03:27:32 -0700 (PDT)
+        bh=Q0zTLvIrZQkcOcFOJ5UF+kPqAbo28ZpFPiBP3Cw88G8=;
+        b=ifDsICxaZZ6k5/oNbui8ewoVTxRskvY3rVYogGvApu2xeLPcBOAA68rzX/OcSM2o2f
+         nG6JiIdzshpDRDRxZCcPNVMxR06zSkkqM/VmzofkzevIPZeNGEtQIDulPzMUSdRnzKmL
+         pRd9SsYRIO1Plv6Kin7NfLYuGsOnaLvf9uInwdDjDWip7mFUnkQkgfYdGAyGyTjMO4Cz
+         eZKaOWmP+0tp/qMK8/uWwhSjDsAx00rX2apMYaJ/TkEQrLmnWY6Y12y4hDmU4NGOI2xT
+         c1ziPisIXLjwrz3ralzi6H7gycArrNBmNIYAafpZzShWAhOOTUyzM6vZuFUBX24yC09H
+         ZpIA==
+X-Forwarded-Encrypted: i=1; AHgh+RqNkWKtSTUNpY0bDTwmb/rRsinpOmWniYrMNavevBmAZztnJEQ0aMn/yI8idPaexIE20UpE4FiJL/AA5fbd@vger.kernel.org
+X-Gm-Message-State: AOJu0YwXycIecDNLrxtrE3ee31etU3Ezklg8JqCofaN/9dhgclDxzNgh
+	8aLy5daRvH6vZUI1lc7k7YDvey0wM1yrUciA1E8UCfsQ0aTWAOdwLmdb
+X-Gm-Gg: AR+sD12G2oiu73+ufZaDGPkSmFX8Mg6war0xt3Wl8/uZikTSsE0dGsjoNCyXbUwHBFN
+	NaK3DLXKMPpiw7olEE+v1AmoHVsKdeLDQcUcrcZS37cgOWvfIN/ZgH4MAXe06cXP7T+RMLTtWwr
+	gWeqscnxuhdo6wfkS7PdOpvcGEpxHdeI9Bi7whBSfGfS/9j/v7LOGVqiIzcssbPhI8V7SrzeL0Q
+	wUkW+JpRc87QBMQUxjDUYd7nFRolV9FhICUsShjX6dS68s1WMK7m250xhOBNo80hnbBN9XIU5Rh
+	hGjeXT91bWzpx0gGhNrCyHgRtMAYDD1mH5P2C08019UbQ+RhHx5FZwSMwMWr4DKX0QV53qIPw2G
+	7ZXaVACqHfFZ7RK+PsDsTGNEE0yeEdeGuqVdPEkflxqvCqPiWsLGHrhqokdaTvzkdjVKVIzWwpX
+	avsKDKmXVBj3Z1+b0GpY2U25lSXjcQ65ANS8oF
+X-Received: by 2002:a17:902:e5c8:b0:2c9:e261:95ce with SMTP id d9443c01a7336-2cf3494967emr195445995ad.30.1784629660063;
+        Tue, 21 Jul 2026 03:27:40 -0700 (PDT)
 Received: from phuc-desktop.. ([183.91.15.56])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf3448dac2sm73581365ad.3.2026.07.21.03.27.25
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf3448dac2sm73581365ad.3.2026.07.21.03.27.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Jul 2026 03:27:31 -0700 (PDT)
+        Tue, 21 Jul 2026 03:27:39 -0700 (PDT)
 From: phucduc.bui@gmail.com
 To: Mark Brown <broonie@kernel.org>,
 	Takashi Iwai <tiwai@suse.com>,
@@ -92,9 +92,9 @@ Cc: Support Opensource <support.opensource@diasemi.com>,
 	linux-arm-msm@vger.kernel.org,
 	linux-arm-kernel@lists.infradead.org,
 	bui duc phuc <phucduc.bui@gmail.com>
-Subject: [PATCH v4 09/29] ASoC: codecs: idt821034: Use guard() for mutex locks
-Date: Tue, 21 Jul 2026 17:25:40 +0700
-Message-ID: <20260721102600.523199-10-phucduc.bui@gmail.com>
+Subject: [PATCH v4 10/29] ASoC: codecs: lpass-macro: Use guard() for mutex locks
+Date: Tue, 21 Jul 2026 17:25:41 +0700
+Message-ID: <20260721102600.523199-11-phucduc.bui@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260721102600.523199-1-phucduc.bui@gmail.com>
 References: <20260721102600.523199-1-phucduc.bui@gmail.com>
@@ -113,392 +113,46 @@ Merely code refactoring, and no behavior change.
 
 Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
 ---
+ sound/soc/codecs/lpass-macro-common.c | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
 
-Changes in v2: 
- - Remove temporary variables and return directly 
-   from the functions.
-
- sound/soc/codecs/idt821034.c | 144 ++++++++++++++---------------------
- 1 file changed, 57 insertions(+), 87 deletions(-)
-
-diff --git a/sound/soc/codecs/idt821034.c b/sound/soc/codecs/idt821034.c
-index 084090ccef77..387f17b5f7b3 100644
---- a/sound/soc/codecs/idt821034.c
-+++ b/sound/soc/codecs/idt821034.c
-@@ -7,6 +7,7 @@
- // Author: Herve Codina <herve.codina@bootlin.com>
+diff --git a/sound/soc/codecs/lpass-macro-common.c b/sound/soc/codecs/lpass-macro-common.c
+index 6e3b8d0897dd..7e59616ed7bc 100644
+--- a/sound/soc/codecs/lpass-macro-common.c
++++ b/sound/soc/codecs/lpass-macro-common.c
+@@ -1,6 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0-only
+ // Copyright (c) 2022, The Linux Foundation. All rights reserved.
  
- #include <linux/bitrev.h>
 +#include <linux/cleanup.h>
- #include <linux/gpio/driver.h>
+ #include <linux/export.h>
  #include <linux/module.h>
- #include <linux/slab.h>
-@@ -413,12 +414,12 @@ static int idt821034_kctrl_gain_get(struct snd_kcontrol *kcontrol,
+ #include <linux/init.h>
+@@ -71,21 +72,16 @@ EXPORT_SYMBOL_GPL(lpass_macro_pds_exit);
  
- 	ch = IDT821034_ID_GET_CHAN(mc->reg);
- 
--	mutex_lock(&idt821034->mutex);
--	if (IDT821034_ID_IS_OUT(mc->reg))
--		val = idt821034->amps.ch[ch].amp_out.gain;
--	else
--		val = idt821034->amps.ch[ch].amp_in.gain;
--	mutex_unlock(&idt821034->mutex);
-+	scoped_guard(mutex, &idt821034->mutex) {
-+		if (IDT821034_ID_IS_OUT(mc->reg))
-+			val = idt821034->amps.ch[ch].amp_out.gain;
-+		else
-+			val = idt821034->amps.ch[ch].amp_in.gain;
-+	}
- 
- 	ucontrol->value.integer.value[0] = val & mask;
- 	if (invert)
-@@ -456,7 +457,7 @@ static int idt821034_kctrl_gain_put(struct snd_kcontrol *kcontrol,
- 
- 	ch = IDT821034_ID_GET_CHAN(mc->reg);
- 
--	mutex_lock(&idt821034->mutex);
-+	guard(mutex)(&idt821034->mutex);
- 
- 	if (IDT821034_ID_IS_OUT(mc->reg)) {
- 		amp = &idt821034->amps.ch[ch].amp_out;
-@@ -466,22 +467,18 @@ static int idt821034_kctrl_gain_put(struct snd_kcontrol *kcontrol,
- 		gain_type = IDT821034_GAIN_TX;
- 	}
- 
--	if (amp->gain == val) {
--		ret = 0;
--		goto end;
--	}
-+	if (amp->gain == val)
-+		return 0;
- 
- 	if (!amp->is_muted) {
- 		ret = idt821034_set_gain_channel(idt821034, ch, gain_type, val);
- 		if (ret)
--			goto end;
-+			return ret;
- 	}
- 
- 	amp->gain = val;
--	ret = 1; /* The value changed */
--end:
--	mutex_unlock(&idt821034->mutex);
--	return ret;
-+
-+	return 1;
- }
- 
- static int idt821034_kctrl_mute_get(struct snd_kcontrol *kcontrol,
-@@ -495,11 +492,11 @@ static int idt821034_kctrl_mute_get(struct snd_kcontrol *kcontrol,
- 
- 	ch = IDT821034_ID_GET_CHAN(id);
- 
--	mutex_lock(&idt821034->mutex);
--	is_muted = IDT821034_ID_IS_OUT(id) ?
--			idt821034->amps.ch[ch].amp_out.is_muted :
--			idt821034->amps.ch[ch].amp_in.is_muted;
--	mutex_unlock(&idt821034->mutex);
-+	scoped_guard(mutex, &idt821034->mutex) {
-+		is_muted = IDT821034_ID_IS_OUT(id) ?
-+				idt821034->amps.ch[ch].amp_out.is_muted :
-+				idt821034->amps.ch[ch].amp_in.is_muted;
-+	}
- 
- 	ucontrol->value.integer.value[0] = !is_muted;
- 
-@@ -521,7 +518,7 @@ static int idt821034_kctrl_mute_put(struct snd_kcontrol *kcontrol,
- 	ch = IDT821034_ID_GET_CHAN(id);
- 	is_mute = !ucontrol->value.integer.value[0];
- 
--	mutex_lock(&idt821034->mutex);
-+	guard(mutex)(&idt821034->mutex);
- 
- 	if (IDT821034_ID_IS_OUT(id)) {
- 		amp = &idt821034->amps.ch[ch].amp_out;
-@@ -531,21 +528,17 @@ static int idt821034_kctrl_mute_put(struct snd_kcontrol *kcontrol,
- 		gain_type = IDT821034_GAIN_TX;
- 	}
- 
--	if (amp->is_muted == is_mute) {
--		ret = 0;
--		goto end;
--	}
-+	if (amp->is_muted == is_mute)
-+		return 0;
- 
- 	ret = idt821034_set_gain_channel(idt821034, ch, gain_type,
- 					 is_mute ? 0 : amp->gain);
- 	if (ret)
--		goto end;
-+		return ret;
- 
- 	amp->is_muted = is_mute;
--	ret = 1; /* The value changed */
--end:
--	mutex_unlock(&idt821034->mutex);
--	return ret;
-+
-+	return 1;
- }
- 
- static const DECLARE_TLV_DB_LINEAR(idt821034_gain_in, -300, 1300);
-@@ -623,24 +616,20 @@ static int idt821034_power_event(struct snd_soc_dapm_widget *w,
- 	struct idt821034 *idt821034 = snd_soc_component_get_drvdata(component);
- 	unsigned int id = w->shift;
- 	u8 power, mask;
--	int ret;
- 	u8 ch;
- 
- 	ch = IDT821034_ID_GET_CHAN(id);
- 	mask = IDT821034_ID_IS_OUT(id) ? IDT821034_CONF_PWRUP_RX : IDT821034_CONF_PWRUP_TX;
- 
--	mutex_lock(&idt821034->mutex);
-+	guard(mutex)(&idt821034->mutex);
- 
- 	power = idt821034_get_channel_power(idt821034, ch);
- 	if (SND_SOC_DAPM_EVENT_ON(event))
- 		power |= mask;
- 	else
- 		power &= ~mask;
--	ret = idt821034_set_channel_power(idt821034, ch, power);
--
--	mutex_unlock(&idt821034->mutex);
- 
--	return ret;
-+	return idt821034_set_channel_power(idt821034, ch, power);
- }
- 
- static const struct snd_soc_dapm_widget idt821034_dapm_widgets[] = {
-@@ -717,9 +706,9 @@ static int idt821034_dai_set_tdm_slot(struct snd_soc_dai *dai,
- 	ch = 0;
- 	while (mask && ch < IDT821034_NB_CHANNEL) {
- 		if (mask & 0x1) {
--			mutex_lock(&idt821034->mutex);
--			ret = idt821034_set_channel_ts(idt821034, ch, IDT821034_CH_RX, slot);
--			mutex_unlock(&idt821034->mutex);
-+			scoped_guard(mutex, &idt821034->mutex)
-+				ret = idt821034_set_channel_ts(idt821034, ch,
-+							       IDT821034_CH_RX, slot);
- 			if (ret) {
- 				dev_err(dai->dev, "ch%u set tx tdm slot failed (%d)\n",
- 					ch, ret);
-@@ -742,9 +731,9 @@ static int idt821034_dai_set_tdm_slot(struct snd_soc_dai *dai,
- 	ch = 0;
- 	while (mask && ch < IDT821034_NB_CHANNEL) {
- 		if (mask & 0x1) {
--			mutex_lock(&idt821034->mutex);
--			ret = idt821034_set_channel_ts(idt821034, ch, IDT821034_CH_TX, slot);
--			mutex_unlock(&idt821034->mutex);
-+			scoped_guard(mutex, &idt821034->mutex)
-+				ret = idt821034_set_channel_ts(idt821034, ch,
-+							       IDT821034_CH_TX, slot);
- 			if (ret) {
- 				dev_err(dai->dev, "ch%u set rx tdm slot failed (%d)\n",
- 					ch, ret);
-@@ -769,9 +758,8 @@ static int idt821034_dai_set_fmt(struct snd_soc_dai *dai, unsigned int fmt)
+ void lpass_macro_set_codec_version(enum lpass_codec_version version)
  {
- 	struct idt821034 *idt821034 = snd_soc_component_get_drvdata(dai->component);
- 	u8 conf;
--	int ret;
- 
--	mutex_lock(&idt821034->mutex);
-+	guard(mutex)(&idt821034->mutex);
- 
- 	conf = idt821034_get_codec_conf(idt821034);
- 
-@@ -785,13 +773,10 @@ static int idt821034_dai_set_fmt(struct snd_soc_dai *dai, unsigned int fmt)
- 	default:
- 		dev_err(dai->dev, "Unsupported DAI format 0x%x\n",
- 			fmt & SND_SOC_DAIFMT_FORMAT_MASK);
--		ret = -EINVAL;
--		goto end;
-+		return -EINVAL;
- 	}
--	ret = idt821034_set_codec_conf(idt821034, conf);
--end:
--	mutex_unlock(&idt821034->mutex);
--	return ret;
-+
-+	return idt821034_set_codec_conf(idt821034, conf);
+-	mutex_lock(&lpass_codec_mutex);
++	guard(mutex)(&lpass_codec_mutex);
+ 	lpass_codec_version = version;
+-	mutex_unlock(&lpass_codec_mutex);
  }
+ EXPORT_SYMBOL_GPL(lpass_macro_set_codec_version);
  
- static int idt821034_dai_hw_params(struct snd_pcm_substream *substream,
-@@ -800,9 +785,8 @@ static int idt821034_dai_hw_params(struct snd_pcm_substream *substream,
+ enum lpass_codec_version lpass_macro_get_codec_version(void)
  {
- 	struct idt821034 *idt821034 = snd_soc_component_get_drvdata(dai->component);
- 	u8 conf;
--	int ret;
+-	enum lpass_codec_version ver;
++	guard(mutex)(&lpass_codec_mutex);
  
--	mutex_lock(&idt821034->mutex);
-+	guard(mutex)(&idt821034->mutex);
- 
- 	conf = idt821034_get_codec_conf(idt821034);
- 
-@@ -816,13 +800,10 @@ static int idt821034_dai_hw_params(struct snd_pcm_substream *substream,
- 	default:
- 		dev_err(dai->dev, "Unsupported PCM format 0x%x\n",
- 			params_format(params));
--		ret = -EINVAL;
--		goto end;
-+		return -EINVAL;
- 	}
--	ret = idt821034_set_codec_conf(idt821034, conf);
--end:
--	mutex_unlock(&idt821034->mutex);
--	return ret;
-+
-+	return idt821034_set_codec_conf(idt821034, conf);
- }
- 
- static const unsigned int idt821034_sample_bits[] = {8};
-@@ -897,11 +878,11 @@ static int idt821034_reset_audio(struct idt821034 *idt821034)
- 	int ret;
- 	u8 i;
- 
--	mutex_lock(&idt821034->mutex);
-+	guard(mutex)(&idt821034->mutex);
- 
- 	ret = idt821034_set_codec_conf(idt821034, 0);
- 	if (ret)
--		goto end;
-+		return ret;
- 
- 	for (i = 0; i < IDT821034_NB_CHANNEL; i++) {
- 		idt821034->amps.ch[i].amp_out.gain = IDT821034_GAIN_OUT_INIT_RAW;
-@@ -909,24 +890,21 @@ static int idt821034_reset_audio(struct idt821034 *idt821034)
- 		ret = idt821034_set_gain_channel(idt821034, i, IDT821034_GAIN_RX,
- 						 idt821034->amps.ch[i].amp_out.gain);
- 		if (ret)
--			goto end;
-+			return ret;
- 
- 		idt821034->amps.ch[i].amp_in.gain = IDT821034_GAIN_IN_INIT_RAW;
- 		idt821034->amps.ch[i].amp_in.is_muted = false;
- 		ret = idt821034_set_gain_channel(idt821034, i, IDT821034_GAIN_TX,
- 						 idt821034->amps.ch[i].amp_in.gain);
- 		if (ret)
--			goto end;
-+			return ret;
- 
- 		ret = idt821034_set_channel_power(idt821034, i, 0);
- 		if (ret)
--			goto end;
-+			return ret;
- 	}
- 
--	ret = 0;
--end:
--	mutex_unlock(&idt821034->mutex);
--	return ret;
-+	return 0;
- }
- 
- static int idt821034_component_probe(struct snd_soc_component *component)
-@@ -965,7 +943,7 @@ static int idt821034_chip_gpio_set(struct gpio_chip *c, unsigned int offset,
- 	u8 slic_raw;
- 	int ret;
- 
--	mutex_lock(&idt821034->mutex);
-+	guard(mutex)(&idt821034->mutex);
- 
- 	slic_raw = idt821034_get_written_slic_raw(idt821034, ch);
- 	if (val)
-@@ -974,8 +952,6 @@ static int idt821034_chip_gpio_set(struct gpio_chip *c, unsigned int offset,
- 		slic_raw &= ~mask;
- 	ret = idt821034_write_slic_raw(idt821034, ch, slic_raw);
- 
--	mutex_unlock(&idt821034->mutex);
+-	mutex_lock(&lpass_codec_mutex);
+-	ver = lpass_codec_version;
+-	mutex_unlock(&lpass_codec_mutex);
 -
- 	if (ret)
- 		dev_err(&idt821034->spi->dev, "set gpio %d (%u, 0x%x) failed (%d)\n",
- 			offset, ch, mask, ret);
-@@ -991,9 +967,8 @@ static int idt821034_chip_gpio_get(struct gpio_chip *c, unsigned int offset)
- 	u8 slic_raw;
- 	int ret;
- 
--	mutex_lock(&idt821034->mutex);
--	ret = idt821034_read_slic_raw(idt821034, ch, &slic_raw);
--	mutex_unlock(&idt821034->mutex);
-+	scoped_guard(mutex, &idt821034->mutex)
-+		ret = idt821034_read_slic_raw(idt821034, ch, &slic_raw);
- 	if (ret) {
- 		dev_err(&idt821034->spi->dev, "get gpio %d (%u, 0x%x) failed (%d)\n",
- 			offset, ch, mask, ret);
-@@ -1015,9 +990,8 @@ static int idt821034_chip_get_direction(struct gpio_chip *c, unsigned int offset
- 	struct idt821034 *idt821034 = gpiochip_get_data(c);
- 	u8 slic_dir;
- 
--	mutex_lock(&idt821034->mutex);
-+	guard(mutex)(&idt821034->mutex);
- 	slic_dir = idt821034_get_slic_conf(idt821034, ch);
--	mutex_unlock(&idt821034->mutex);
- 
- 	return slic_dir & mask ? GPIO_LINE_DIRECTION_IN : GPIO_LINE_DIRECTION_OUT;
+-	return ver;
++	return lpass_codec_version;
  }
-@@ -1034,7 +1008,7 @@ static int idt821034_chip_direction_input(struct gpio_chip *c, unsigned int offs
- 	if (mask & ~(IDT821034_SLIC_IO1_IN | IDT821034_SLIC_IO0_IN))
- 		return -EPERM;
+ EXPORT_SYMBOL_GPL(lpass_macro_get_codec_version);
  
--	mutex_lock(&idt821034->mutex);
-+	guard(mutex)(&idt821034->mutex);
- 
- 	slic_conf = idt821034_get_slic_conf(idt821034, ch) | mask;
- 
-@@ -1044,7 +1018,6 @@ static int idt821034_chip_direction_input(struct gpio_chip *c, unsigned int offs
- 			offset, ch, mask, ret);
- 	}
- 
--	mutex_unlock(&idt821034->mutex);
- 	return ret;
- }
- 
-@@ -1060,7 +1033,7 @@ static int idt821034_chip_direction_output(struct gpio_chip *c, unsigned int off
- 	if (ret)
- 		return ret;
- 
--	mutex_lock(&idt821034->mutex);
-+	guard(mutex)(&idt821034->mutex);
- 
- 	slic_conf = idt821034_get_slic_conf(idt821034, ch) & ~mask;
- 
-@@ -1070,7 +1043,6 @@ static int idt821034_chip_direction_output(struct gpio_chip *c, unsigned int off
- 			offset, ch, mask, ret);
- 	}
- 
--	mutex_unlock(&idt821034->mutex);
- 	return ret;
- }
- 
-@@ -1079,24 +1051,22 @@ static int idt821034_reset_gpio(struct idt821034 *idt821034)
- 	int ret;
- 	u8 i;
- 
--	mutex_lock(&idt821034->mutex);
-+	guard(mutex)(&idt821034->mutex);
- 
- 	/* IO0 and IO1 as input for all channels and output IO set to 0 */
- 	for (i = 0; i < IDT821034_NB_CHANNEL; i++) {
- 		ret = idt821034_set_slic_conf(idt821034, i,
- 					      IDT821034_SLIC_IO1_IN | IDT821034_SLIC_IO0_IN);
- 		if (ret)
--			goto end;
-+			return ret;
- 
- 		ret = idt821034_write_slic_raw(idt821034, i, 0);
- 		if (ret)
--			goto end;
-+			return ret;
- 
- 	}
--	ret = 0;
--end:
--	mutex_unlock(&idt821034->mutex);
--	return ret;
-+
-+	return 0;
- }
- 
- static int idt821034_gpio_init(struct idt821034 *idt821034)
 -- 
 2.43.0
 
