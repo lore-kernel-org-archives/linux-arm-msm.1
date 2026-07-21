@@ -1,87 +1,88 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F01D39B4A2
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 18:12:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F3167415F15
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 18:12:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784657567; cv=none; b=imuP31lAr/mELT96dktAqkxXzXZsu7WoUbNtpiW0TOHRmHl5CybfHr8aae6EfOEDE914oB0DtG5iyXl6QNHdGbJytKLXb2nYck+/UsgAOS8EWIGP8aAnx5iLtelRo8eDPl+flb52Zj7O8zUdQhsjx4RW0eo/2RM+UmYQSLooK60=
+	t=1784657571; cv=none; b=jqyX8gB6pXNLoIl3gpvp9oaiYvjIqvvaHVb/x2DUYf/aVesMAMcQe3uoWGvOG5yqM32rQWXYcbWTD/8G39jnZPMuWwrsiGkX0OebQiIWiHlhNhfTZpkPuopdh0TgFAANuKxlAQHzi5fwY/U8FUIyqXFzHslv2n870g9tBD1Iouk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784657567; c=relaxed/simple;
-	bh=E8V/x1G6mWLKxmhw+H2N0U4tbZHI27YliCj8HcFUUwk=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=CmrE3PyJhESwu7NFB7pBh+COHHh1mq18lI7kL/O/BXaVYjzUhI8TnWEWoyL80N1l6wWs8LXm4ZGupyZfgHXxlBBAEB9KIHZF91xHdijaXK8WSL/SrpELe4mglOoz05bo59LcouR1jbm5tctVqVtRpydkIMhLvj+jhEdujuWeWMg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kHgL6v8B; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YjMSsZtJ; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1784657571; c=relaxed/simple;
+	bh=MfM6R9y1EIPiqF6A/ySJpuCb/kr0iyIxe++9V4DMWwk=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=VKW4lWQzZNLKCgTRx0G9IycnrU9KU5WJO220ZemTVPCzzd3pr8o/vSu888s6SL/qLAMlrFYo21DHr3MbdLP/XcvqhsnQXNFmBahvFKvlU9WOtsQnT6Kx6v4sZZqeoVVsKVzbkGTKw2aS2lmUEZNDZxXs/nF7YnLzqXzN4qU6pGY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=AS9Dckqs; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jQlPgCkf; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kHgL6v8B";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YjMSsZtJ"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LH2b1a3439915
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 18:12:45 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="AS9Dckqs";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jQlPgCkf"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LHRVxI2446296
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 18:12:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=it5ObXphukeKeuw0f0OcIK
-	DADQBa8BIXKiD+JocV0wI=; b=kHgL6v8B/Lz49X32GHoMH0MLFxrhQt4GHydOp0
-	BZipTzbHbqtV4k7xJmpieGBHGjkAK+DxT9C8PP5fT2HOY/nKMJdPfYiNEgi+dHvF
-	Rizla3hG9fGbonzTRFEm+S7N9zRg+NNMjlbU5vcBYbtjSaitbK+wRtR0Qhnfd7nE
-	/r0LhdnDrcyo2KRxXc+/s0ugDc/aSfjrL0vs4eC0abINDTj9O2cc3Ypp0O0v70Ml
-	Gq9bdq6hapN2lJcs1B1/BHiAYXJyjm9gD8I3wz798I7rK9+adnKnMAxWMhbbc4Du
-	tGwtiKi84iphAYk2lVVqCavWHdXqV5Eftpo4sobuHwULT6iQ==
-Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj6nstch3-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	V8OkojE2VDzFyq67u/mSLTD3XAPgG+tQihom1/t63uw=; b=AS9DckqskwVQglnv
+	1WSduSCqSpqOmLOgTRKQ7thhc5VvhM/JXQnyBcAE7AkjK9y1kryzm5kd3dtvGRzu
+	vPUQm7LoDCG+zjuWbZiignApDTC3GwWZA1tYfLxZ8rZthlzWPtsy8E9Ro329DsAp
+	Med8lQDN+oyoC7/taw95pbABfdzFu4maHQCFDC1vmbDzEKZFsEeTXNHby9mswfrR
+	xAsBxBzTRbvT4S8xlHNv7/z5Qv9NvGfTd9cW5pw6Kk6kN9e4tQnczRUAJ8rEfAha
+	3fnBV/f0n+C37PqIp014FDysFsJZJ594rRB5W2/6DAxLe1+K9lsITxJKbo92TrXb
+	ySednw==
+Received: from mail-ua1-f71.google.com (mail-ua1-f71.google.com [209.85.222.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjd6d0780-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 18:12:44 +0000 (GMT)
-Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-73a8aba30a4so5542974137.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 11:12:44 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 18:12:47 +0000 (GMT)
+Received: by mail-ua1-f71.google.com with SMTP id a1e0cc1a2514c-97706bf2dc4so433967241.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 11:12:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784657564; x=1785262364; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=it5ObXphukeKeuw0f0OcIKDADQBa8BIXKiD+JocV0wI=;
-        b=YjMSsZtJ5e84BzjatNQFS+L5uZcKbHPqGL5z6EHLRQd1tM7gEZa2Euit6JxpBnLkGd
-         atKg01JTUqfsDEbnsAOjm906D7MclMbwEflgyhw4QrXK+rnqJG7PeX4zM2UZGRrCIpUA
-         ZUJrXsfcM1e7C0hTymhApEEHJqp8e8D5kdNiLSai4OAYvno5nBM1J9Cmi3BtjFqCwnfp
-         Jcpv9qA6r/W5etmPIQPZa7T1yDLXXKTt+mYdaAoMUwrxIKtCVwNoHL5V6lLeRURHrtuS
-         AVagbDtQHbv2W4Dieuc60684dCf9xriDhzX6CZDZtUKC7TEdEVUg6hlJwXz4M4LI4FEN
-         ecog==
+        d=oss.qualcomm.com; s=google; t=1784657567; x=1785262367; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=V8OkojE2VDzFyq67u/mSLTD3XAPgG+tQihom1/t63uw=;
+        b=jQlPgCkfEMr5WhqG9fBXQ/3eFm++KWg697wVy79KxYBpl2DjAuSqsl3OFsL6wOAn3u
+         EVdIZXMHf21fYkM7VR4tx5mYGsKMjnQeyPpvfyHxlqnn6/5FScjdGgtIqsr40ZRpO/9y
+         MAv23XAJKrAeLUAZ/m5c/3GtQQlrlWlawRK74/Wfqi8/r574w7xoNp0ocISlaPO1pLRd
+         HhR3KIl/QxCwvIAWtDftUZa7flWmOzEmQexgb00vJQy4jaUsLHpgE1UBWGFiiAUqjQzm
+         ZcQSYVuQ5QfPLgVdlyulZHClg9W+tVtsd63LFHgrpcv2U7lWsqH3ShdfngGTQ3gxM5Vd
+         mevQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784657564; x=1785262364;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=it5ObXphukeKeuw0f0OcIKDADQBa8BIXKiD+JocV0wI=;
-        b=aa9V5ndUiwGAIFTkrMUcBIBwm/hC3ZxygURIVrYzmUTIEgm4WzAhNpklhl5rCQ4REN
-         7LZMhg+wHNf0FZ4hhcFEPaqsAJ8ljDiKUbXRmEv27uKeqOBgHK7tY9viO4m/iInYD8mO
-         yzN0bwtud0ca0QaoP7jZH/2y/AeYXo7sykZ2Seyo6hmxHWgpl8ASATgTr8Zzpy4sWlU1
-         iMeZ/Ast/G/Jew2xm4beOGqMbzEa28Tihj/Bkvub6EzGF1J5tkanQIjx/XT7tWDoM4DA
-         IC4mNy+vpmg8U+Zff/+53+P/d3202m7oSic7kGOPliOKST1MQdltQlPOckYF3KSF2kR7
-         E2cw==
-X-Forwarded-Encrypted: i=1; AHgh+RpG/2dTyuZ2mpdGDrHSsZryfAOzsKtYcr/Z9ryKzBlPwNqZDF0j/u0aOcDAA9AoQyzgItPbOMc49aMBCw+i@vger.kernel.org
-X-Gm-Message-State: AOJu0YzpEhr/t426AjQeDeZiBCLQwbg6/8iGUKUYH1xfRkhmo3tRrELS
-	pdi/YGPZbTN2UnbsSkpuF3IfU45mihnj/QUC0gN8pvtfl0XV4v6Fav8Rczsl4a+GYWYycAmYfjO
-	fjdrh+hqIBk9d2z+1Z8v1HpCuqITRivAhHOrnYaWD4sM0C+h9L8vi9pSJ/MMCvUuDFBki
-X-Gm-Gg: AR+sD13zFia+ZLJrlWMoFYXhtGxK+Uglgcs+XUunjlMYqt+W3K3xtIuUxTomxQXgLre
-	h3bUT/RZdPUdtGqMgp14rXt9SgifCooqDKAWuC0Xxd+9rHacQA6+gaEpxGRP2Y7FSuuEcUvR2tl
-	krdBWZGjxWbnU6SbnY4EseTyWUxwF1DCxt4OMwEZlsxbYeQhtcMAUmddgy4CMBqzH1tfIY5rtnG
-	AEBlMzr6b3DMhRYpx2r/MZnyPc58fWTmTxqq9vu0EAjwzwLOczcaSOrGG0Ga2kxVBlWplJLxmiW
-	2/3NrwFeuApas2VFeEF54SeF63p3BHZEJpq8t71JyqwaVO8zhotBecgN7259b5/c09fo3RI+4p7
-	miuP3qABMtvxdYWIBC+zaY9QSybhrUeYs2DIBEt5c+bukgKtmaPJgy263OXlcOA9+0XQkH23mJD
-	IrWBeDcEkS1R5MYA==
-X-Received: by 2002:a05:6102:2825:b0:737:4ebb:b474 with SMTP id ada2fe7eead31-74ad172a9abmr242586137.11.1784657563812;
-        Tue, 21 Jul 2026 11:12:43 -0700 (PDT)
-X-Received: by 2002:a05:6102:2825:b0:737:4ebb:b474 with SMTP id ada2fe7eead31-74ad172a9abmr242568137.11.1784657563253;
-        Tue, 21 Jul 2026 11:12:43 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1784657567; x=1785262367;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=V8OkojE2VDzFyq67u/mSLTD3XAPgG+tQihom1/t63uw=;
+        b=rsqQumnz3xVX21u58L4AuuoJGBC+Ahl3IAZUgtVwvyVIP2xrvTgs6t2ulbohuxYq4F
+         LAIzIUem1NzZUaeCNzVpwgtPpLPZLOVvlKvxfL48ahMNpAV9R6IdbHpXaNUkoaBIVC/m
+         Rk4xZD0BLN0m6avik91W1yD4c9xzIHYBFbzb46ePvhkL/i25680o6PIzCOuJ1FMJoWg4
+         077I9oKvt3kpI8mt8PFYHKZ/zWF2WC47A6lMjRvMqg20k6HLW+hYD+IlVBUdqSEoVXs2
+         RSItLE2bVjx3OCPTK1jlPtVf2aDvO1PrzL8Cqx58zEZwDiSTqkkpB2SYCb2Ia2h2jhuf
+         cKQw==
+X-Forwarded-Encrypted: i=1; AHgh+RrK11tFv+fBWKSYKUx2s2R5gciiimfvC4Xx7EXkzY927KBm14aMfvyMpgQkjtCfQsYHCTaD4cG/5Ip8xy+H@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyn/hrz8kCDC2wsvEzFbvKNeWrUgYVECOE69BpOp6pTyIpKpByG
+	x4hd+/aHPmWk1CC+/vDTVMmeHQbcmIwggGarmeKG9JN9OdMtIp8m5KmxDsfuiIQ2rFXW//qf0gk
+	ByNw+n+etMI/jugJwF2V173Qltm09ccaJmsCAOu2VoofeHB/QX8XaTuZeUdhiAD5zQQ7T
+X-Gm-Gg: AR+sD116dVnm330F1pFXRKDULDOr9LnTIaSEvX4zgj3gJ3toYjBvuqdn9SYlu+YlPv8
+	RLXUB9cmbbK/qsN8rhRHWNW1haPdsYgTLRmJcrVz2Y63EB/DBUr0gowKTlNSIbQxLzTiH7JR5kL
+	AIQK2eJRE8zVBKDOVOOABvMIxGl5k4kX89t47PTMFqpGIxi+mwD/gQPdVLwlRF9HNC+i5kd1Tfz
+	u/jOKwx79MXDmNGmVdlKlHefyq43ARPA43Q0YuuDEeUG0VBJZqiU5V4aETdAVQD7MclxL5Y859i
+	+BPaVYoZOrxarqMop7mO4hZTs3ZiCLxFISChutJnzmzH3mwdOVwqvKnSV21hwEtBdp9D6dZuuEh
+	tUk1ptiaLMflscmD6HGSHLXbhOZqwRUBVSBZOp77VVJTI5z2vifnFD/F35N4SmNG3l/sFfyMMqr
+	KZkCV1rFz8KQRN/Q==
+X-Received: by 2002:a05:6102:5a88:b0:739:97bf:9189 with SMTP id ada2fe7eead31-747536ede8amr5645162137.19.1784657566896;
+        Tue, 21 Jul 2026 11:12:46 -0700 (PDT)
+X-Received: by 2002:a05:6102:5a88:b0:739:97bf:9189 with SMTP id ada2fe7eead31-747536ede8amr5645130137.19.1784657566175;
+        Tue, 21 Jul 2026 11:12:46 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-39ef6c41c9bsm596921fa.19.2026.07.21.11.12.41
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-39ef6c41c9bsm596921fa.19.2026.07.21.11.12.43
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Jul 2026 11:12:42 -0700 (PDT)
+        Tue, 21 Jul 2026 11:12:43 -0700 (PDT)
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: [PATCH 0/2] ASoC: qcom: remove the ipq806x Storm audio machine
- driver and binding
-Date: Tue, 21 Jul 2026 21:12:40 +0300
-Message-Id: <20260721-drop-sound-storm-v1-0-23ae4a689ffe@oss.qualcomm.com>
+Date: Tue, 21 Jul 2026 21:12:41 +0300
+Subject: [PATCH 1/2] ASoC: qcom: remove ipq806x Storm machine driver
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,10 +91,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAJi2X2oC/yXMwQqDMAyA4VeRnBdoA1PZq4wdZhtnBFtJVAbiu
- 1u343f4/x2MVdjgUe2gvIlJTgX+VkEY3unDKLEYyFHtGvIYNc9oeU0Rbck6YUNUx953ob07KNm
- s3Mv3t3y+/ra1Gzks1weO4wQc9v/BdAAAAA==
-X-Change-ID: 20260721-drop-sound-storm-7226df1bc850
+Message-Id: <20260721-drop-sound-storm-v1-1-23ae4a689ffe@oss.qualcomm.com>
+References: <20260721-drop-sound-storm-v1-0-23ae4a689ffe@oss.qualcomm.com>
+In-Reply-To: <20260721-drop-sound-storm-v1-0-23ae4a689ffe@oss.qualcomm.com>
 To: Srinivas Kandagatla <srini@kernel.org>,
         Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
         Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
@@ -104,71 +104,249 @@ Cc: linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org,
         linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         Christian Marangi <ansuelsmth@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1165;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6198;
  i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=E8V/x1G6mWLKxmhw+H2N0U4tbZHI27YliCj8HcFUUwk=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqX7aZLl3LkSjmfDqTlXAqjPA4Da0FLPsJYVcbd
- Xf9nhsi/hSJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCal+2mQAKCRCLPIo+Aiko
- 1RfDB/4xuCceM0X2tbgufpxts0hkuihwIZJR1fzJ7D1ftlVhUeOJ3SRF7QLDprSax9n/SgN7s2g
- hLT3RRWaalry0RfxwYMU5FKJCNGPE2XxM2JwkW+BTOCu7YAr2lKQ2/5rlVOvGFEnMOafllzty37
- 4LU3WjWda3QrvZJs+yR4AzKngED99ZhwmQSTkXaXi/r2uRiQtB6gwJdflcoabJKDDFRYTAWcW5h
- ro7phYSBhEUgbeYTjLNOhwhDbbJJ+GlyS6EZ5aMKyEy9W9XqFeGB2OS9AKx5JIJKqnyfEImU4EY
- 4evWQUuAVRqKg3yDOuM7Ff/IaYQE19TWk6fg2kSGhp66iJOe
+ bh=MfM6R9y1EIPiqF6A/ySJpuCb/kr0iyIxe++9V4DMWwk=;
+ b=kA0DAAoBizyKPgIpKNUByyZiAGpftpmhNY2N+aJ+1uuE7V3N+SPgMEt6Zd1Y0Zy36kTjNNt4b
+ 4kBMwQAAQoAHRYhBExwhJVcsmNW8LiVf4s8ij4CKSjVBQJqX7aZAAoJEIs8ij4CKSjV78IH/05x
+ 0FcSSGg/e7pKmqGxKPG17riWXusaGv6lSrYy0sTDDqsa1ZT4DZ5jYW7BEvp62Bk031fBRumpfkQ
+ XmRtzPer8H329JDkYp3zYNm9mVdIIgcy6wwVaGuNEscJKe9IM0EI4ib8FaUCL85Ho03TlmLQ35y
+ gM60XP8Ljht/+anbISJd4kS7nXKqpuif2t55r8qHIPBFiNaxRCSkayNCltdEJAfeeV/cukAdPs6
+ f1xoO2dPgfKav0KOBeytvKGoJC9Tr/3X6ui2JHi83j7Vt1bdCYkHW2WLG1J4A4zqMQuRfzustxs
+ 6H7nfkgskArtJsfU5n/Jun5M+3KJDoaOSKbxOes=
 X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
  fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Proofpoint-GUID: RUmGDpWy-CV1IyVVqAj4x0gr_Pa9ON2s
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDE5MSBTYWx0ZWRfX52SBNUm2v3Qr
- UFUXd5eD0oi0UH4wClfKUxf0W68FVqSN3h4ZFkWN6XMRJrc7IWmIuhMYIFsGaoFSwmjD4E9pnGr
- RwgsfhWSrZPREAzrSPDeWmwS8S+AjWQ=
-X-Authority-Analysis: v=2.4 cv=ZJjnX37b c=1 sm=1 tr=0 ts=6a5fb69c cx=c_pps
- a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-GUID: QE62KmPAWwndn_5WATlBxBRvavNlbE5V
+X-Proofpoint-ORIG-GUID: QE62KmPAWwndn_5WATlBxBRvavNlbE5V
+X-Authority-Analysis: v=2.4 cv=XaG5Co55 c=1 sm=1 tr=0 ts=6a5fb69f cx=c_pps
+ a=KB4UBwrhAZV1kjiGHFQexw==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
- a=rruK_xjPGYUd9-Um4F4A:9 a=QEXdDO2ut3YA:10 a=gYDTvv6II1OnSo0itH1n:22
-X-Proofpoint-ORIG-GUID: RUmGDpWy-CV1IyVVqAj4x0gr_Pa9ON2s
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDE5MSBTYWx0ZWRfX+sKA/NCUCDO5
- Mx34uP8IAVK2+13h0vqlACqktJ8TreQQu+3FVfsZPMrQOwTB7XNc6AyJFG/fjc0+nT2scZwHS8e
- v981LRRbXj0UdU+Y8G52jNGciLlZyYfL0i0BLG3+aZLbCNFszyV1HFDQ+yH0Dna71cVfiHlPZT/
- j+X5bu3qn76243IRzNlwsNpkRm9R20KwuN82Dg9J3R0usnMWX82Ro51931k2xu2fRJ4i/ZaHuHn
- Q+9kRDEmTzV8NbXWsNdcp13Njhrm4IF7CiZUhOuvUPVZAcSF5eDhS/u0Jw3x1HVunikyZiixAmZ
- WtDkULSQiySulX5pO76GeyiZ1RKr7XPqBHDgF+1bdfJSyPbhfzZRw7l5OaRo854K0kDUT6uyeVN
- wRsLvTZwevCCFpUQIHoqyDya0oiz0/hRfb9hgMrdw/YmtCgRppEk0wv8iLOoigyrahACXL7QSwn
- qssfJtFf7sG7tTfcuMg==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
+ a=2Pz9WbiNhJHYEZtGnJ8A:9 a=QEXdDO2ut3YA:10 a=o1xkdb1NAhiiM49bd1HK:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDE5MSBTYWx0ZWRfXyJFV9iSihS6V
+ KQSfLZSPqftsbdErWj60ee0VJYd/mS/VExwMsyZDHNxYFTOjruougp05SMmNfphlEy2AV4LwyPY
+ d5Qzynmm2oSc7NScT07MFRNo5Wlb4aFTchPCuqDqGicuT7JeagjiVNTzHIZ1lGujMQ9T7MlntUr
+ RGQqFCpZiLEl3cRM3CnQ5w6h/kBtUL+g8I+O/eIrAaLyX/1m6EjGNEn3nWThiWtxpsEEmaPT/jf
+ cTA+jgrsKCQYO7sKbJhh2aLUve0mSUu+GRMkqGti1Bs/XTcMlzIthZC7U4o5i5+CGOoYJv0G6Tn
+ 0Yuzf7UCo2ift7qxDjZ2wpx1MTb+no5LUARikjjAj0s81zxoh9EsOYsvLnZIP7h0dDaKyDc979B
+ QC7W1Ikw3aN6uqdknG3dl0qPqZzTDcgyt3WQmsJvQmg1kSv5eCEt7dBMdMh8p2l4BEmNjXjQBo6
+ 8naLxFu8YxoM8LFs1GQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDE5MSBTYWx0ZWRfX0UZkuMcUQ2Zb
+ dw6Px6KUAuqYHVVxLVecgD3eUzmGb5XwQpxqz0gNTETWawD/5S19aRSfjyW1ksZWjE+wADuXe2m
+ euuPOaIIzKK/JZYDwh6jGpnheYcnDs8=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-21_03,2026-07-21_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 priorityscore=1501 suspectscore=0 impostorscore=0
- malwarescore=0 spamscore=0 lowpriorityscore=0 adultscore=0 bulkscore=0
+ adultscore=0 priorityscore=1501 spamscore=0 lowpriorityscore=0 suspectscore=0
+ bulkscore=0 impostorscore=0 clxscore=1015 malwarescore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210191
 
-The Storm machine driver targets Google's IPQ806x-based Storm reference
-board, wiring a MAX98357A DAC to the LPASS I2S bus. The board has never
-had an upstream device tree, has no active users and has seen no
-functional changes in years. Keeping the driver and its binding around
-only adds maintenance burden for code that nobody exercises.
+The Storm board machine driver targets Google's IPQ806x-based Storm
+reference board (a MAX98357A DAC wired to the LPASS I2S bus). This board
+has no upstream device tree, no active users and has seen no functional
+changes in years, so the driver is dead weight.
 
-Drop the machine driver along with its Kconfig and Makefile entries, and
-remove the now-orphaned google,storm-audio device tree binding.
+Remove the driver together with its Kconfig entry and Makefile rule.
 
+Assisted-by: Claude:claude-opus-4-8
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 ---
-Dmitry Baryshkov (2):
-      ASoC: qcom: remove ipq806x Storm machine driver
-      dt-bindings: sound: remove google,storm-audio binding
+ sound/soc/qcom/Kconfig  |   9 ---
+ sound/soc/qcom/Makefile |   2 -
+ sound/soc/qcom/storm.c  | 142 ------------------------------------------------
+ 3 files changed, 153 deletions(-)
 
- Documentation/devicetree/bindings/sound/storm.txt |  23 ----
- sound/soc/qcom/Kconfig                            |   9 --
- sound/soc/qcom/Makefile                           |   2 -
- sound/soc/qcom/storm.c                            | 142 ----------------------
- 4 files changed, 176 deletions(-)
----
-base-commit: b9810cd75b9fb56a3425d391cba3f608502bd474
-change-id: 20260721-drop-sound-storm-7226df1bc850
+diff --git a/sound/soc/qcom/Kconfig b/sound/soc/qcom/Kconfig
+index e6e24f3b9922..68e3146bf230 100644
+--- a/sound/soc/qcom/Kconfig
++++ b/sound/soc/qcom/Kconfig
+@@ -47,15 +47,6 @@ config SND_SOC_LPASS_SC7280
+ 	select SND_SOC_LPASS_HDMI
+ 	select SND_SOC_LPASS_CDC_DMA
+ 
+-config SND_SOC_STORM
+-	tristate "ASoC I2S support for Storm boards"
+-	depends on GPIOLIB
+-	select SND_SOC_LPASS_IPQ806X
+-	select SND_SOC_MAX98357A
+-	help
+-	  Say Y or M if you want add support for SoC audio on the
+-	  Qualcomm Technologies IPQ806X-based Storm board.
+-
+ config SND_SOC_APQ8016_SBC
+ 	tristate "SoC Audio support for APQ8016 SBC platforms"
+ 	select SND_SOC_LPASS_APQ8016
+diff --git a/sound/soc/qcom/Makefile b/sound/soc/qcom/Makefile
+index 985ce2ae286b..bcbb44d17303 100644
+--- a/sound/soc/qcom/Makefile
++++ b/sound/soc/qcom/Makefile
+@@ -19,7 +19,6 @@ obj-$(CONFIG_SND_SOC_LPASS_SC7180) += snd-soc-lpass-sc7180.o
+ obj-$(CONFIG_SND_SOC_LPASS_SC7280) += snd-soc-lpass-sc7280.o
+ 
+ # Machine
+-snd-soc-storm-y := storm.o
+ snd-soc-apq8016-sbc-y := apq8016_sbc.o
+ snd-soc-apq8096-y := apq8096.o
+ snd-soc-sc7180-y := sc7180.o
+@@ -32,7 +31,6 @@ snd-soc-qcom-sdw-y := sdw.o
+ snd-soc-x1e80100-y := x1e80100.o
+ snd-soc-qcom-offload-utils-objs := usb_offload_utils.o
+ 
+-obj-$(CONFIG_SND_SOC_STORM) += snd-soc-storm.o
+ obj-$(CONFIG_SND_SOC_APQ8016_SBC) += snd-soc-apq8016-sbc.o
+ obj-$(CONFIG_SND_SOC_MSM8996) += snd-soc-apq8096.o
+ obj-$(CONFIG_SND_SOC_SC7180) += snd-soc-sc7180.o
+diff --git a/sound/soc/qcom/storm.c b/sound/soc/qcom/storm.c
+deleted file mode 100644
+index 1e0eda8c24c4..000000000000
+--- a/sound/soc/qcom/storm.c
++++ /dev/null
+@@ -1,142 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0-only
+-/*
+- * Copyright (c) 2010-2011,2013-2015 The Linux Foundation. All rights reserved.
+- *
+- * storm.c -- ALSA SoC machine driver for QTi ipq806x-based Storm board
+- */
+-
+-#include <linux/device.h>
+-#include <linux/module.h>
+-#include <linux/of.h>
+-#include <linux/platform_device.h>
+-#include <sound/pcm.h>
+-#include <sound/pcm_params.h>
+-#include <sound/soc.h>
+-
+-#define STORM_SYSCLK_MULT			4
+-
+-static int storm_ops_hw_params(struct snd_pcm_substream *substream,
+-		struct snd_pcm_hw_params *params)
+-{
+-	struct snd_soc_pcm_runtime *soc_runtime = snd_soc_substream_to_rtd(substream);
+-	struct snd_soc_card *card = soc_runtime->card;
+-	snd_pcm_format_t format = params_format(params);
+-	unsigned int rate = params_rate(params);
+-	unsigned int sysclk_freq;
+-	int bitwidth, ret;
+-
+-	bitwidth = snd_pcm_format_width(format);
+-	if (bitwidth < 0) {
+-		dev_err(card->dev, "invalid bit width given: %d\n", bitwidth);
+-		return bitwidth;
+-	}
+-
+-	/*
+-	 * as the CPU DAI is the I2S bus master and no system clock is needed by
+-	 * the MAX98357a DAC, simply set the system clock to be a constant
+-	 * multiple of the bit clock for the clock divider
+-	 */
+-	sysclk_freq = rate * bitwidth * 2 * STORM_SYSCLK_MULT;
+-
+-	ret = snd_soc_dai_set_sysclk(snd_soc_rtd_to_cpu(soc_runtime, 0), 0, sysclk_freq, 0);
+-	if (ret) {
+-		dev_err(card->dev, "error setting sysclk to %u: %d\n",
+-			sysclk_freq, ret);
+-		return ret;
+-	}
+-
+-	return 0;
+-}
+-
+-static const struct snd_soc_ops storm_soc_ops = {
+-	.hw_params	= storm_ops_hw_params,
+-};
+-
+-SND_SOC_DAILINK_DEFS(hifi,
+-	DAILINK_COMP_ARRAY(COMP_EMPTY()),
+-	DAILINK_COMP_ARRAY(COMP_CODEC(NULL, "HiFi")),
+-	DAILINK_COMP_ARRAY(COMP_EMPTY()));
+-
+-static struct snd_soc_dai_link storm_dai_link = {
+-	.name		= "Primary",
+-	.stream_name	= "Primary",
+-	.ops		= &storm_soc_ops,
+-	SND_SOC_DAILINK_REG(hifi),
+-};
+-
+-static int storm_parse_of(struct snd_soc_card *card)
+-{
+-	struct snd_soc_dai_link *dai_link = card->dai_link;
+-	struct device_node *np = card->dev->of_node;
+-
+-	dai_link->cpus->of_node = of_parse_phandle(np, "cpu", 0);
+-	if (!dai_link->cpus->of_node) {
+-		dev_err(card->dev, "error getting cpu phandle\n");
+-		return -EINVAL;
+-	}
+-	dai_link->platforms->of_node = dai_link->cpus->of_node;
+-
+-	dai_link->codecs->of_node = of_parse_phandle(np, "codec", 0);
+-	if (!dai_link->codecs->of_node) {
+-		dev_err(card->dev, "error getting codec phandle\n");
+-		return -EINVAL;
+-	}
+-
+-	return 0;
+-}
+-
+-static int storm_platform_probe(struct platform_device *pdev)
+-{
+-	struct snd_soc_card *card;
+-	int ret;
+-
+-	card = devm_kzalloc(&pdev->dev, sizeof(*card), GFP_KERNEL);
+-	if (!card)
+-		return -ENOMEM;
+-
+-	card->dev = &pdev->dev;
+-	card->owner = THIS_MODULE;
+-
+-	ret = snd_soc_of_parse_card_name(card, "qcom,model");
+-	if (ret) {
+-		dev_err(&pdev->dev, "error parsing card name: %d\n", ret);
+-		return ret;
+-	}
+-
+-	card->dai_link	= &storm_dai_link;
+-	card->num_links	= 1;
+-
+-	ret = storm_parse_of(card);
+-	if (ret) {
+-		dev_err(&pdev->dev, "error resolving dai links: %d\n", ret);
+-		return ret;
+-	}
+-
+-	ret = devm_snd_soc_register_card(&pdev->dev, card);
+-	if (ret)
+-		dev_err(&pdev->dev, "error registering soundcard: %d\n", ret);
+-
+-	return ret;
+-
+-}
+-
+-#ifdef CONFIG_OF
+-static const struct of_device_id storm_device_id[]  = {
+-	{ .compatible = "google,storm-audio" },
+-	{},
+-};
+-MODULE_DEVICE_TABLE(of, storm_device_id);
+-#endif
+-
+-static struct platform_driver storm_platform_driver = {
+-	.driver = {
+-		.name = "storm-audio",
+-		.of_match_table =
+-			of_match_ptr(storm_device_id),
+-	},
+-	.probe = storm_platform_probe,
+-};
+-module_platform_driver(storm_platform_driver);
+-
+-MODULE_DESCRIPTION("QTi IPQ806x-based Storm Machine Driver");
+-MODULE_LICENSE("GPL");
 
-Best regards,
---  
-With best wishes
-Dmitry
+-- 
+2.47.3
 
