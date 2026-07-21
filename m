@@ -1,87 +1,33 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18F5C46C4C7
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 15:42:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8812346D561;
+	Tue, 21 Jul 2026 15:47:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784648522; cv=none; b=BKecenD5bcZSuV1liN3laDC5b0afvMivRtUn/FJE1YWo1ynOG1fhPjjQ+2mfnkxTfMCdRkt6fGIADjVQ31NPdm5ozL/uNAE3IZ0HCxNh//Eazm0cqchFOmGc79k5mPboyWiti1yLmMtROs2pK8JbpghPPm8WaWTgx6JN73tE2j0=
+	t=1784648823; cv=none; b=YqhBTyXgnyccOtPI/sMnyUDOIXw3vYVOHa2KQoZ9VAAhS4JyRQysh2ZrhZA07DvCYbtfGJ+zDxC/EffSeWYf+RrKtjI5NRsjd2MrncuGs3AiXJQoChmG+XlmrmW2x3VB/nmpWj7ZQ96UjzlNv1DXNLWrS09L87EYWiHZVMNiuGk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784648522; c=relaxed/simple;
-	bh=nhEeOqEKgSq3GmWXx905R5Hy2j68p3z7csWzxLz4KmI=;
+	s=arc-20240116; t=1784648823; c=relaxed/simple;
+	bh=s7wilbjUubJkEgBoShqLu6uKMWWtv6AFUbfsmLhsqs4=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=jIJzQVdL/4T7w6+E2oVtJUn7xpn4OHR0lTlrJo05NffribLIFn5plghELIP8zQYrjqsKfggNOQ4t922Ko38awJxMNJ/wZ0rGxlVITxbIkTTHfZZRdJODE//INftWppEVG4SMayqtRR/3jM3dAYqI40DyJkpOPXA9GThkenhe83c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OU26wvqG; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=g7KYWk0f; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=M66mbHFCgbFIbYv8ZujViysloPpyXzrsLs4fXEtRUBYImzRPm3GMFHQqNhkzKIo+0cO7LarFlN82rFBzYVogj2ga6NTfCZ4xT5LdKW4H6BnnqnwSI2GGIDk1ek7hQR8fIj7ISLcgj41i8hR5zEBWwFH/cKMESk7C/QqkXu3dUUw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lyPKbPT4; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OU26wvqG";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="g7KYWk0f"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LDftbK1591050
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 15:42:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	tG+/y07EnAc+VJ+hv6KDaBBFa6O1drJ9FLrxO9bjP74=; b=OU26wvqGLRa/9VYW
-	8tHHATNFsob2PR3L/qIGkbdD2gAYyWj8p5Y0SUmcQccFQBatTTntbwqLh3iylkM3
-	TW1xGjc9AI1GKGV5KC+yIWs2Csh/PB1Xtq0EA0NUXsg8bKvTI/aOAvM+Qo5/Qqhw
-	1ThC/T8wtuXovnppcqPXczQV2EDZAsoZmxN6Qbed5Gv+YuB7XaTTTMF+BV55hwu6
-	mVYIjrhi8tn71xpc9XXTAZxdIcZqDlq4UQVH/2D+XnVjlOesGVhKPUEVGleMQwn0
-	pecvWIMUCJDkkAN+YleSFl6GSpnhm8npTZ/mxP2jJAVJb4rvsCc4yBv2Ga9ZW+Ii
-	nJTOdQ==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj0as3k3m-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 15:42:00 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cc640dfde3so93834245ad.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 08:42:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784648520; x=1785253320; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=tG+/y07EnAc+VJ+hv6KDaBBFa6O1drJ9FLrxO9bjP74=;
-        b=g7KYWk0f7KQQdC+MBCM7bQtBh58YOYma5TauqF7LxGsCY/WNm2EkK2JxI2Jx6GNp17
-         1ZYDhSSx6VB0l3ptvzWq66c7sz9eYtKkzxgIajINbOVY9B1umvqe+xK7/F/LCwbCtfBx
-         YZYss8a1oZpxJInj7WvYa4AxBZlpcx8Mkt3EiFVqbbM9vY+vTzjfngATYi7g2gWNwj1O
-         qM4vAf5kgD8OP61ayIPuv+kE6uIc9qMDNT/RxWZ8OFuMLTo10c34CoVR4JhHNK0RU8Ae
-         Nzbxhsv0AVT79f/xHI+pWjDcUHpOqOwGyVj9f9R6K94Q4ctYrJND048tNv+4RSNtL+6/
-         E4zw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784648520; x=1785253320;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=tG+/y07EnAc+VJ+hv6KDaBBFa6O1drJ9FLrxO9bjP74=;
-        b=WFMfakU7wVylF+bx/a3UlU3kYX+6nQiIdKZoIr1DwSwJ+dC3uW8NUIdWyRQuoccOrp
-         4eAHmcKMFIOYgysxUiYusOumx8eQpr6LSAO+esu09qmw6POuowzujF6xCPVWnx4WlQiD
-         8xIazcl4gf2uaNuwyYBiUAIO/d1StuR3S87WIPK/ciZuaqCfZlwRRCNT8Ogi660fS0iT
-         ScezmfDtCylApFaac4kSwFFwiAHjcJZwjjLS8XVqqi4ZqDX5VnHbS6xBLQW/PRi2xG0w
-         OZd/mxfhjssXWpBASiEjGnZOMT81SQ61vyh2SjESY8cd3fi3+NKcsligEeYMl33NKd2p
-         fOiQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqC/S4F/5G7zriC1dqgGD2iFHcM1ajWDcseW4s3bZXM4+N9HUyz0XcVhJyCPQGjVv0uyhAbhF4DjUCLEVWR@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxd+hmepQ3K3iUsZXBE4x/GpKOnzCbeRGlJ229/bRGhXw2GHdpY
-	IKgkU3p8QjO5XtQYNPpU5ZbSLAmlzIUi5BgTYtSoDAJWozFqqDtIebM02o1w0IWkW+M8lS0dzZN
-	Kb1I2o+qoG4mo7fPdZqiR5AY7gtZt6+VZ1pEAMz7bqc0u4/DDI8feJxkNquXzq8TWsYKt
-X-Gm-Gg: AfdE7cnfqw6ojVS91M8ML7491PwlcRZ/UFtBeehSSSkW62xZT9pXGwM0ZT1G2D0cUjq
-	xcDJ4rbGFYbDy3QEqZDD4e16K3O/N7VkT9fbNpjQo95e2DM2/bkgnNHXXEe/4KdkbH+noQUsIHm
-	PSa3z+DIKehqsRcJfEqu/8AKrspoAp4m8gKBnm0T5nSqVN8CdSvI29V3b/oYXeL8+GSeMPA591C
-	6/gLjRAVRrjqObXob3teuwnbKNwcwjYT0n9NYQlw3lWgKHq9FUk40+UWlmI+TBc5+4/BzLxfUML
-	GPf2LDLbMa6gasSJyc2o1qSnfLsbgR5pf9OgB22bMeH/QJbOxdyXiFVmp0hRhGvE44sV8/ALWBG
-	BvE7qpHCnfRy9LwcQ8rEYzwG6rWjnUTiU
-X-Received: by 2002:a05:6a20:2446:b0:3c0:9c1a:8953 with SMTP id adf61e73a8af0-3c3ada78e07mr20134624637.75.1784648519726;
-        Tue, 21 Jul 2026 08:41:59 -0700 (PDT)
-X-Received: by 2002:a05:6a20:2446:b0:3c0:9c1a:8953 with SMTP id adf61e73a8af0-3c3ada78e07mr20134582637.75.1784648519102;
-        Tue, 21 Jul 2026 08:41:59 -0700 (PDT)
-Received: from [10.206.103.83] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3147e1c9289sm117159eec.29.2026.07.21.08.41.55
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 21 Jul 2026 08:41:58 -0700 (PDT)
-Message-ID: <17b99e4a-2fc8-472f-8d3a-897ec4d0e2e0@oss.qualcomm.com>
-Date: Tue, 21 Jul 2026 21:11:53 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lyPKbPT4"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6123E1F00A3A;
+	Tue, 21 Jul 2026 15:46:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784648822;
+	bh=dOdkwEF0Jr//yAZhXQ9kOxYbUp3VHLV82EiaKduxk6o=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=lyPKbPT489X8goL6QtGrryGh9hp3uvqibBgae6XcdlotZZAcaEeZ01RfKugcm0v/A
+	 uAEHstc4r7FS3kR2LzkZTWaRPVC0ZGebeynSQyKVR6Lu1XyvO6SeGu2OFCKe1xIX9F
+	 kLCDLBpNm3iZJsoL0z5K4zRgaeA/Xwijz0qu805QpcMcEWdUxC9e1DcqT/rHF3EjOK
+	 XDNG61DfSEGrvyBlyRfG4EpjZPIGE2jwJdtzjX5+Z+wogQ1PxxzaeNbwG9PKkLYZzT
+	 aYWAqhLISp4ZR34a4FeEedB++T41Hf8cVA7l/Zg8sqJrswTUZCnxuTo3jNZ+w+Nfza
+	 G7vZfNVuE88bA==
+Message-ID: <77d6127f-9f15-43d3-802f-c265c3062f11@kernel.org>
+Date: Tue, 21 Jul 2026 17:46:56 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,65 +35,183 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] media: iris: add Long-Term Reference control
- support for ar50lt encoder
-To: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Gourav Kumar <gouravk@qti.qualcomm.com>
-References: <20260721-shikra_ltr_support-v2-0-702842f1f3c2@oss.qualcomm.com>
- <20260721-shikra_ltr_support-v2-1-702842f1f3c2@oss.qualcomm.com>
+Subject: Re: [PATCH v6] arm64: dts: qcom: sm8550: add Xiaomi Pad 6S Pro
+ (sheng)
+To: Tianyuan Jiang <code_0002@163.com>, konrad.dybcio@oss.qualcomm.com,
+ andersson@kernel.org
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Tianyuan Jiang <hiez832670@gmail.com>
+References: <20260721142147.1618-1-code_0002@163.com>
+ <20260721153444.423-1-code_0002@163.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
-From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-In-Reply-To: <20260721-shikra_ltr_support-v2-1-702842f1f3c2@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260721153444.423-1-code_0002@163.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDE2NiBTYWx0ZWRfX4DiL/407Qq8g
- h7SgsmgHqKMgikAvYY6f7wWJujI9unVV6ODMYSu3M8K54neFcUMALJVx8ds6OH/HFLoqzSv6CG2
- TDIq/2D8E2prDN7AQNM6TehqgJWMCOKT55WvkFG8WrGa2VZnYLNxlPS8OfrPtFb4OV7JCBVSc8+
- Leo+ATN4G3fdc/jx4GeH/JGRnUVMTUrFmv1xskCi0dC+YAL3SLWQ2KTTesBNdDAPnGApKhwO0mM
- Wp1aXy00pMqZ2gHEsoSOzsPeJwhVZbJdGq3qgBalWBNWMq5fVK20p81ejpdefuiHx9r+43xRa0X
- W2Z4crWtDKczggrunwjPFhS8zI9sf946+uR4u6q6RTt5SgkponBsPMy+qDFd8wmQ/knQwhyOLZu
- a/Oa9OF9P5eEJEX79cfkLQuri0a0JcHYeqEzGH25y9QujwjjNgSE1O3fjDt6Jbbn4J25NRp7NoX
- uddT8zLzllIU0zHMCgw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDE2NiBTYWx0ZWRfXw3vkKV0N/vis
- nityPX4U5mj/nwtIs2l3MOuIGjEJCu7EpNbTXiiWx/VOd4i3BsU6Ge2z/ZP75cCWPKV7/UnI2cU
- iT4vLpfowxL/y2UfFDEsNZbwsAV++qw=
-X-Authority-Analysis: v=2.4 cv=DoFmPm/+ c=1 sm=1 tr=0 ts=6a5f9348 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=gm-eHnAy443RRWUYm5cA:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-GUID: QE3gZY733a12XM6MG4PBydvmEQ__MfcD
-X-Proofpoint-ORIG-GUID: QE3gZY733a12XM6MG4PBydvmEQ__MfcD
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-21_03,2026-07-20_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 malwarescore=0 lowpriorityscore=0 clxscore=1015 phishscore=0
- suspectscore=0 impostorscore=0 bulkscore=0 priorityscore=1501 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210166
 
-
-On 7/21/2026 7:06 AM, Vishnu Reddy wrote:
-> From: Gourav Kumar<gouravk@qti.qualcomm.com>
+On 21/07/2026 17:34, Tianyuan Jiang wrote:
+> From: Tianyuan Jiang <hiez832670@gmail.com>
 > 
-> Add Long-Term Reference(LTR) frame support for ar50lt gen2 encoder by
-> enabling the following V4L2 controls:
-> V4L2_CID_MPEG_VIDEO_LTR_COUNT
-> V4L2_CID_MPEG_VIDEO_USE_LTR_FRAMES
-> V4L2_CID_MPEG_VIDEO_FRAME_LTR_INDEX
-> The ar50lt gen2 firmware supports the corresponding LTR HFI properties.
+> Add device tree for Xiaomi Pad 6S Pro (sheng) based on SM8550.
 > 
-> Signed-off-by: Gourav Kumar<gouravk@qti.qualcomm.com>
-> Signed-off-by: Vishnu Reddy<busanna.reddy@oss.qualcomm.com>
+> Signed-off-by: Tianyuan Jiang <code_0002@163.com>
+> 
 > ---
->   drivers/media/platform/qcom/iris/iris_hfi_gen2.c | 30 ++++++++++++++++++++++++
->   1 file changed, 30 insertions(+)
+> v6: address Sashiko AI review on v4
 
-Reviewed-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+What is happening here? v2 was sent 1 hour ago and immediately this?
+
+AGAIN, read submitting patches.
+
+> - Fix cs35l43 reset-gpios polarity: use GPIO_ACTIVE_LOW
+> - Add "kinetic,ktz8866" fallback compatible for backlight
+> - Add map220v Signed-off-by (DCO chain fix)
+> - Add assigned-clocks alongside assigned-clock-parents in mdss_dsi1
+> 
+> v5: address additional Sashiko AI review on v3/v4
+> - Add assigned-clocks alongside assigned-clock-parents in mdss_dsi1
+> - Actually remove output-high from i2s1_default pinctrl (missed in v3)
+> 
+> v4: address Sashiko AI review comments
+> - Add GPIO_OPEN_DRAIN to shared cs35l43 reset-gpios to avoid -EBUSY
+> - Set Bluetooth local-bd-address to [ 00 00 00 00 00 00 ]
+> 
+> v3: address review comments from Konrad Dybcio
+> - SM8550P has no modem; confirmed on device (dmesg shows no mpss)
+> - Rename fingerprint_fpc -> fingerprint-reader, use interrupts-extended
+> - pmic-glink compatibles: one per line
+> - Sort DAI link subnodes alphabetically (codec before cpu)
+> - Reorder root-level nodes by name
+> - Place pinctrl-n properties before pinctrl-names
+> - Remove msm-id, board-id, Xiaomi-specific comments
+> - Remove output-low/output-high from TLMM pinctrl
+> - Remove udmabuf bootargs (confirmed not in use on device)
+> - Add "xiaomi-" prefix to firmware paths
+> ---
+>  arch/arm64/boot/dts/qcom/Makefile             |    1 +
+>  .../boot/dts/qcom/sm8550-xiaomi-sheng.dts     | 1761 +++++++++++++++++
+>  2 files changed, 1762 insertions(+)
+>  create mode 100644 arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+> index 6f33c4e2f..d8e485521 100644
+> --- a/arch/arm64/boot/dts/qcom/Makefile
+> +++ b/arch/arm64/boot/dts/qcom/Makefile
+> @@ -386,6 +386,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-mtp.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-qrd.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-samsung-q5q.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-sony-xperia-yodo-pdx234.dtb
+> +dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-xiaomi-sheng.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)	+= sm8650-ayaneo-pocket-s2.dtb
+>  
+>  sm8650-hdk-display-card-dtbs	:= sm8650-hdk.dtb sm8650-hdk-display-card.dtbo
+> diff --git a/arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts b/arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts
+> new file mode 100644
+> index 000000000..fa24b1c1b
+> --- /dev/null
+> +++ b/arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts
+> @@ -0,0 +1,1761 @@
+> +// SPDX-License-Identifier: BSD-3-Clause
+> +/*
+> + * Copyright (c) 2024, map220v <map220v300@gmail.com>
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include <dt-bindings/arm/qcom,ids.h>
+> +#include <dt-bindings/gpio/gpio.h>
+> +#include <dt-bindings/interrupt-controller/irq.h>
+> +#include <dt-bindings/leds/common.h>
+> +#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
+> +#include "sm8550.dtsi"
+> +#include "pm8010.dtsi"
+> +#include "pm8550.dtsi"
+> +#include "pm8550b.dtsi"
+> +#define PMK8550VE_SID 5
+> +#include "pm8550ve.dtsi"
+> +#include "pm8550vs.dtsi"
+> +#include "pmk8550.dtsi"
+> +
+> +/delete-node/ &rmtfs_mem;
+> +/delete-node/ &adspslpi_mem;
+> +/delete-node/ &xbl_dt_log_merged_mem;
+> +/delete-node/ &hwfence_shbuf;
+> +
+> +/* Free unused regions */
+> +/delete-node/ &hyp_tags_reserved_mem;
+> +/delete-node/ &cdsp_secure_heap_mem;
+> +/delete-node/ &trust_ui_vm_mem;
+> +/delete-node/ &trust_ui_vm_dump;
+> +/delete-node/ &trust_ui_vm_qrtr;
+> +/delete-node/ &trust_ui_vm_vblk0_ring;
+> +/delete-node/ &trust_ui_vm_vblk1_ring;
+> +/delete-node/ &trust_ui_vm_swiotlb;
+> +/delete-node/ &oem_vm_vblk0_ring;
+> +/delete-node/ &oem_vm_swiotlb;
+> +/delete-node/ &oem_vm_mem;
+> +/delete-node/ &hyp_ext_tags_mem;
+> +/delete-node/ &hyp_ext_reserved_mem;
+> +
+> +/delete-node/ &qup_i2c8_data_clk;
+> +
+> +/delete-node/ &qup_i2c9_data_clk;
+> +
+> +/delete-node/ &mpss_dsm_mem;
+> +/delete-node/ &mpss_mem;
+> +/delete-node/ &q6_mpss_dtb_mem;
+> +/delete-node/ &remoteproc_mpss;
+> +
+> +/ {
+> +	model = "Xiaomi Pad 6S Pro 12.4";
+> +	compatible = "xiaomi,sheng", "qcom,sm8550";
+
+So you keep ignoring the problem and keep ignoring review. Not
+responding, not fixing anything.
+
+NAK
+
+Best regards,
+Krzysztof
