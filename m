@@ -1,63 +1,63 @@
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+Received: from mail-pl1-f181.google.com (mail-pl1-f181.google.com [209.85.214.181])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2AE5848034A
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 10:27:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D799B480949
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 10:27:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.181
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784629631; cv=none; b=HgsWultkaqbL7NcXzfCa3OsG3SUAhAu0OkAFAkLEJHCuTPoaS2pqMaIvR3uvxQeEeDAHV+a10zJ2YVIGzPPIt04UfTSmE65trVPFeZrKZriAbfhWf/2NxaB9+onTC4uA8DLZYPH9UnPXpXhTN/efJD1Btld+H+ROD6+wYuJoqIw=
+	t=1784629638; cv=none; b=u9IP3rA1UebfEDu0tECqVL09GE1NPRNKSg31kYZI5lVzYrwxeFq10KM43iyiEuGbuOfIoPSz2O3HudZ095C68NHXJQ7tzr4bpCmbNgh1KwKbZSghv/cJc5gS2+ZD0vvBSRygx8dUhbM8fInVj5snvk5kpL/SKCsz67Dm0oq41Vg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784629631; c=relaxed/simple;
-	bh=OOr9f8nEuRuifnXBOKpjEKREXStsjY+xFhxihGnYiNY=;
+	s=arc-20240116; t=1784629638; c=relaxed/simple;
+	bh=rqOl5FtEn1x/OgjbEoHPTL+PY+QF4fqa/Y6KQB6PCdo=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=Jk0xvOBnMB/+xrnKzOJZJnGxF9BUQVBVXgjV9o1YxR8VJk1OOSZTH7c9I9AFUHP6iV+MuAP83sWoj2VnEXxVQMNqemh4pgTie8FcMhwOQAaZ3v+VTnVoisP6q8hx/xADUWcDlLkPC12JCMeKfKIF+NCZ7Da6quzp3JLn2KIQPV0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=C04gOX6B; arc=none smtp.client-ip=209.85.214.171
+	 MIME-Version; b=IRQ/zkHO2CFc4mbr/vSiihtbzIBhaUhCZlVutIiNgtJEmLUKK77Jl50CIkx2thx73HLw4rwJ6ZX/BJwXLeWQrEHOW6eiI6IdtEb8ycXbmi/Mp50Su+lc6Mgz4pX6gNDQ2a1sOEntogfpBTSb/F4Wva6SHKchvEnAQcZXgdHrrjE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=jQYWFNdm; arc=none smtp.client-ip=209.85.214.181
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="C04gOX6B"
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2cc891373e0so139035105ad.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 03:27:08 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jQYWFNdm"
+Received: by mail-pl1-f181.google.com with SMTP id d9443c01a7336-2cacf197759so127064035ad.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 03:27:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784629628; x=1785234428; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1784629636; x=1785234436; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gjBdDL8q0TXPbaumSZVEGnGR8oe3cQ900YMwBCNq4N4=;
-        b=C04gOX6BWqYc8G9DaV7NaNWn4VQiJChKmp8ZdiH36NYE2Gl8KkhuclRZTTeVyvfDx4
-         fd2rTy7Cis2J9+qCuvPM4pAoOBr/hVmzAUdSl1pWgortTiM/oEKfB/V14DaSxbMF6Sm7
-         gBRDnIxt4E8uCBMiVfyH+IfstgsjfKoZDC/zr3DYi5NEMxZsfcYWWTfMS2v6CRQNqbRl
-         Qhipiseeo0u/wgvzKZVl7kyQNr65WU5qkYreHFb06m77dxbDcw7ahUyQoqg2y1ZtXedm
-         DJxdIOgkz3T/V1Z2ubiqzfloyPquvv0n7efgoeOWGlP6pkeoR1cgPbWo291xT2znzHwu
-         nvOA==
+        bh=FxGvcZ0w0B0OvE6uvIZ2A3qQKrxY4MT5FL8LI9fV4I0=;
+        b=jQYWFNdm50/RoE1E5Y8/hXhKu1xnpCFO0XassqyDk5mFnpaOHRR46XUYw6Dm2iKbH0
+         Z3PebpuawgCD1Q9gd42lCbbINSooHtGIgFvDtXY//2KWUPNkNW+ITRnui5mQBGD+YD8C
+         o4PzNUvrwzzdxJrEUzYLqzkWoclbOS7QgPdyBmokfeLHR/KvBzhouMYJTnLK4/3/u0+Q
+         ejykUi1XdieLfN6ITJTgGADNuYG65j34UkDuwLcKg/OqaXbTAXNMZe+vokGVyJCAGDKm
+         /sr8ABbgGeQoIsfYrSZsKCHFdiJQwz0ehE+CpEmAVY/7h5/O/QYQqpVGF8cVS9GFKU+n
+         ij+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784629628; x=1785234428;
+        d=1e100.net; s=20251104; t=1784629636; x=1785234436;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=gjBdDL8q0TXPbaumSZVEGnGR8oe3cQ900YMwBCNq4N4=;
-        b=jML5KRNRTKkWrfa6/fjO6rlWufupIZJrL6dnpccN9gk5AwOHyzCXHtqgrbgeTqEHHS
-         T4rkuROG1CpA3gJlKZEvU7SQjJE2WwQI8nkDAb0KZvlEwjahNqTI9Z8XMHTkCRzYGFAx
-         jeQyi9BLMkoJtH5UtrcfrNXxh+mpPaTorfF/7iZCAzqW6TXVbquwlYcTyo158H8Al++d
-         W7Wj4HPhguorNk2qzig/AuSZHYWIFQkV3NMbOfPnYYqvP6x20jcJ4BKiRJeIdABbQGbU
-         uMnqPO/+9xa7crn1dlJ41/Cr99/MgVkTW0QdxKz3NNuh9UfTm/Qj/v2pAU/L/S7azHx8
-         y4vA==
-X-Forwarded-Encrypted: i=1; AHgh+RraSZIHBh0abX8QSgK4RXgJYMUUBCGm/vkhwBkUjwEj8WaMm/+vTbR14fnBdAFGaf4YiAFiFhPRlCqq6tt5@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw8NGuk7obImzLVnLBYaKc5LcQ2RhMnB+NbSTraskmI+Jxwyq8a
-	lBp4bJ0ur2geWjKzW9VP3d1kmA8Wlx2v2qf/rkod9gc9uDFbme3KapwD
-X-Gm-Gg: AR+sD12x/V3rMn5aCLbNj/q98zE82W7KOohrMNlzrGB1ZoOjiqVO7rVmKJewNK0uZCn
-	DuqXvRNY7R0XoT+K3aa2FHXZEDOIQCcsTWsSHSefOgN4ssu3GY7REWocxsSH4oBcTSbb2ugrdVs
-	XlKdLGyxEbtC4z0dMQ603vog775chSjHHprxF7dgPRnPXommaDh6UCCiJ3PE7JX7GiM02SnUKDJ
-	0l0dYgVIKiAOKM5+isFJAMeaKgzXdnqgoblAaSs7VLlI61aV7oHDBOc0nK5qJ9TgZdVng4EEapt
-	UiG2U0RfC0O05QbYoXtFCUMWhKAS5gAs36S8LTwhSFo4hBgb8Sr7BQwo33uHrTTfGG0wM+pqtQB
-	o/vNs6QXRhMwtbzm6+SH6n58n0du5TOJTBYIHzGjTHuWvlFHwt0Z6zJLvq1e8wp2eawxK2JZfk3
-	+47yg9zqqJqRzVTseBFO7rZpt+8IxE5MMYLG+E
-X-Received: by 2002:a17:902:c950:b0:2cf:7e56:22c4 with SMTP id d9443c01a7336-2cf7e56274emr38581895ad.30.1784629628416;
-        Tue, 21 Jul 2026 03:27:08 -0700 (PDT)
+        bh=FxGvcZ0w0B0OvE6uvIZ2A3qQKrxY4MT5FL8LI9fV4I0=;
+        b=UeIWpLC8Nz3MW/PIgWB357D8XeUMS8d64IA5r5TJQyA8f1UHlIOaI3C+zVv/cn+CtS
+         nRQqSChkYB17V+M7iNERCun31zOtk7nqpKfREVtyPSYtnYn7EglejHmJNlSmYM7e/oZb
+         +2PQtpqBIvyLWDKUMVoMfUXo6QciCHjmcltfGCFjFiofyGQqG+e+cEbyxIFjkkXNsnzI
+         Kypu9XbPU0Bo6rEBaI3zs7aVxJLZIrjvwS9k1Aqx5m4QDtFFDoktf+EglOPCko13q7sK
+         jpc74gT+gOgrM0UKicu3PPiPEKt1nSj2zc2X3AK5m1PMa7tRwY0mca6FZMIbLeXekYIW
+         WvEQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrqfsFsenTVionkPNfNC8MEdLFK8DilnsP07iZULmJeiuGcAhmQS0e79KtYSrJF5ZwzH5Sny/iOyXL/miyg@vger.kernel.org
+X-Gm-Message-State: AOJu0YzBtwgFaI8eOAyCk7/ijyTf2yZ7IHG04HeszoMlWwCySoYELP6B
+	30GG1g+6tsIPZIpgsFlQGriOrrKCBpwa8mG/SRhY77E78UnZqmFciL8V
+X-Gm-Gg: AR+sD12dhSiuOXYgGCbA++pMnnUXSR5B/t/ruDMEkmZ+gGIPKCCxmR/+cjLX4srp/kD
+	9Jc2I7O6REbGEoGinUARCT6UXXyVJWUJzKi3NQTTQ+b08G2DmCxfEJgUU25gk7yToM0sp0dmI7n
+	zsUnzS2L2OsTOZHaa8os/D19LQ21hjdRkOZn8QOy+OaT4Le6r9htRVmRC+04x5OBlW2b1+klho0
+	GL/vp4xt1JTkuh3p+k1UQra1L3aN+3fVkanOowxFTdEYOJTu4EUi7oUFhNirNQtNstul4xTwlv1
+	TclWso02RQ0RHlEbo2ioje8ewhuF728VEE3kP+9FaBe2YyiOjVjOuFKRv1HodIpYM9iq69okDTf
+	FM9qxb5Pk8dDWTha+DpvdJRL58ntI3pyg6xkCosmoa9S96NyO7ktDMViRJNB6aS4+UxJKtnOvq6
+	1WGjEwGx6AuJeSucdYFZYaJESBH7o9ti5zUq7oXzuZGILJaPQ=
+X-Received: by 2002:a17:903:181:b0:2c9:97a9:2098 with SMTP id d9443c01a7336-2cf349fa514mr192693585ad.44.1784629636326;
+        Tue, 21 Jul 2026 03:27:16 -0700 (PDT)
 Received: from phuc-desktop.. ([183.91.15.56])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf3448dac2sm73581365ad.3.2026.07.21.03.27.01
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf3448dac2sm73581365ad.3.2026.07.21.03.27.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Jul 2026 03:27:08 -0700 (PDT)
+        Tue, 21 Jul 2026 03:27:16 -0700 (PDT)
 From: phucduc.bui@gmail.com
 To: Mark Brown <broonie@kernel.org>,
 	Takashi Iwai <tiwai@suse.com>,
@@ -92,9 +92,9 @@ Cc: Support Opensource <support.opensource@diasemi.com>,
 	linux-arm-msm@vger.kernel.org,
 	linux-arm-kernel@lists.infradead.org,
 	bui duc phuc <phucduc.bui@gmail.com>
-Subject: [PATCH v4 06/29] ASoC: codecs: fs210x: Use guard() for mutex locks
-Date: Tue, 21 Jul 2026 17:25:37 +0700
-Message-ID: <20260721102600.523199-7-phucduc.bui@gmail.com>
+Subject: [PATCH v4 07/29] ASoC: codecs: hdac_hdmi: Use guard() for mutex locks
+Date: Tue, 21 Jul 2026 17:25:38 +0700
+Message-ID: <20260721102600.523199-8-phucduc.bui@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260721102600.523199-1-phucduc.bui@gmail.com>
 References: <20260721102600.523199-1-phucduc.bui@gmail.com>
@@ -113,239 +113,203 @@ Merely code refactoring, and no behavior change.
 
 Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
 ---
- sound/soc/codecs/fs210x.c | 89 ++++++++++++++-------------------------
- 1 file changed, 31 insertions(+), 58 deletions(-)
+ sound/soc/codecs/hdac_hdmi.c | 117 +++++++++++++++++------------------
+ 1 file changed, 57 insertions(+), 60 deletions(-)
 
-diff --git a/sound/soc/codecs/fs210x.c b/sound/soc/codecs/fs210x.c
-index d794ff918b6f..510cbeea5b62 100644
---- a/sound/soc/codecs/fs210x.c
-+++ b/sound/soc/codecs/fs210x.c
-@@ -4,6 +4,7 @@
- //
- // Copyright (C) 2016-2025 Shanghai FourSemi Semiconductor Co.,Ltd.
+diff --git a/sound/soc/codecs/hdac_hdmi.c b/sound/soc/codecs/hdac_hdmi.c
+index 38073a70fa61..d9e6fa6d3e99 100644
+--- a/sound/soc/codecs/hdac_hdmi.c
++++ b/sound/soc/codecs/hdac_hdmi.c
+@@ -10,6 +10,7 @@
+  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  */
  
 +#include <linux/cleanup.h>
- #include <linux/clk.h>
+ #include <linux/init.h>
  #include <linux/delay.h>
- #include <linux/i2c.h>
-@@ -771,9 +772,8 @@ static int fs210x_dai_hw_params(struct snd_pcm_substream *substream,
- 	if (fs210x->devid == FS2105S_DEVICE_ID && fs210x->srate == 16000)
- 		return -EOPNOTSUPP;
+ #include <linux/module.h>
+@@ -537,10 +538,11 @@ static struct hdac_hdmi_port *hdac_hdmi_get_port_from_cvt(
+ 				continue;
  
--	mutex_lock(&fs210x->lock);
--	ret = fs210x_set_hw_params(fs210x);
--	mutex_unlock(&fs210x->lock);
-+	scoped_guard(mutex, &fs210x->lock)
-+		ret = fs210x_set_hw_params(fs210x);
- 	if (ret)
- 		dev_err(fs210x->dev, "Failed to set hw params: %d\n", ret);
+ 			list_for_each_entry(port, &pcm->port_list, head) {
+-				mutex_lock(&pcm->lock);
+-				ret = hdac_hdmi_query_port_connlist(hdev,
+-							port->pin, port);
+-				mutex_unlock(&pcm->lock);
++				scoped_guard(mutex, &pcm->lock) {
++					ret = hdac_hdmi_query_port_connlist(hdev,
++									    port->pin,
++									    port);
++				}
+ 				if (ret < 0)
+ 					continue;
  
-@@ -790,15 +790,11 @@ static int fs210x_dai_mute(struct snd_soc_dai *dai, int mute, int stream)
+@@ -640,11 +642,11 @@ static void hdac_hdmi_pcm_close(struct snd_pcm_substream *substream,
+ 	pcm = hdac_hdmi_get_pcm_from_cvt(hdmi, dai_map->cvt);
  
- 	fs210x = snd_soc_component_get_drvdata(dai->component);
- 
--	mutex_lock(&fs210x->lock);
--
--	if (!fs210x->is_inited || fs210x->is_suspended) {
--		mutex_unlock(&fs210x->lock);
--		return 0;
-+	scoped_guard(mutex, &fs210x->lock) {
-+		if (!fs210x->is_inited || fs210x->is_suspended)
-+			return 0;
+ 	if (pcm) {
+-		mutex_lock(&pcm->lock);
+-		pcm->chmap_set = false;
+-		memset(pcm->chmap, 0, sizeof(pcm->chmap));
+-		pcm->channels = 0;
+-		mutex_unlock(&pcm->lock);
++		scoped_guard(mutex, &pcm->lock) {
++			pcm->chmap_set = false;
++			memset(pcm->chmap, 0, sizeof(pcm->chmap));
++			pcm->channels = 0;
++		}
  	}
  
--	mutex_unlock(&fs210x->lock);
--
- 	if (mute) {
- 		cancel_delayed_work_sync(&fs210x->fault_check_work);
- 		cancel_delayed_work_sync(&fs210x->start_work);
-@@ -817,15 +813,11 @@ static int fs210x_dai_trigger(struct snd_pcm_substream *substream,
- 
- 	fs210x = snd_soc_component_get_drvdata(dai->component);
- 
--	mutex_lock(&fs210x->lock);
--
--	if (!fs210x->is_inited || fs210x->is_suspended || fs210x->is_playing) {
--		mutex_unlock(&fs210x->lock);
--		return 0;
-+	scoped_guard(mutex, &fs210x->lock) {
-+		if (!fs210x->is_inited || fs210x->is_suspended || fs210x->is_playing)
-+			return 0;
- 	}
- 
--	mutex_unlock(&fs210x->lock);
--
- 	switch (cmd) {
- 	case SNDRV_PCM_TRIGGER_START:
- 	case SNDRV_PCM_TRIGGER_RESUME:
-@@ -853,13 +845,11 @@ static void fs210x_start_work(struct work_struct *work)
- 
- 	fs210x = container_of(work, struct fs210x_priv, start_work.work);
- 
--	mutex_lock(&fs210x->lock);
-+	guard(mutex)(&fs210x->lock);
- 
- 	ret = fs210x_dev_play(fs210x);
- 	if (ret)
- 		dev_err(fs210x->dev, "Failed to start playing: %d\n", ret);
--
--	mutex_unlock(&fs210x->lock);
- }
- 
- static void fs210x_fault_check_work(struct work_struct *work)
-@@ -870,15 +860,13 @@ static void fs210x_fault_check_work(struct work_struct *work)
- 
- 	fs210x = container_of(work, struct fs210x_priv, fault_check_work.work);
- 
--	mutex_lock(&fs210x->lock);
-+	scoped_guard(mutex, &fs210x->lock) {
-+		if (!fs210x->is_inited || fs210x->is_suspended || !fs210x->is_playing)
-+			return;
- 
--	if (!fs210x->is_inited || fs210x->is_suspended || !fs210x->is_playing) {
--		mutex_unlock(&fs210x->lock);
--		return;
-+		ret = fs210x_reg_read(fs210x, FS210X_05H_ANASTAT, &status);
- 	}
- 
--	ret = fs210x_reg_read(fs210x, FS210X_05H_ANASTAT, &status);
--	mutex_unlock(&fs210x->lock);
- 	if (ret)
- 		return;
- 
-@@ -991,7 +979,7 @@ static int fs210x_effect_scene_get(struct snd_kcontrol *kcontrol,
- 	if (fs210x->scene_id < 1)
+ 	if (dai_map->port)
+@@ -922,7 +924,7 @@ static int hdac_hdmi_set_pin_port_mux(struct snd_kcontrol *kcontrol,
+ 	if (port == NULL)
  		return -EINVAL;
  
--	mutex_lock(&fs210x->lock);
-+	guard(mutex)(&fs210x->lock);
- 	/*
- 	 * FS210x has scene(s) as below:
- 	 * init scene: id = 0
-@@ -1000,7 +988,6 @@ static int fs210x_effect_scene_get(struct snd_kcontrol *kcontrol,
- 	 */
- 	index = fs210x->scene_id - 1;
- 	ucontrol->value.integer.value[0] = index;
--	mutex_unlock(&fs210x->lock);
- 
- 	return 0;
- }
-@@ -1019,7 +1006,7 @@ static int fs210x_effect_scene_put(struct snd_kcontrol *kcontrol,
- 		return -EINVAL;
+-	mutex_lock(&hdmi->pin_mutex);
++	guard(mutex)(&hdmi->pin_mutex);
+ 	list_for_each_entry(pcm, &hdmi->pcm_list, head) {
+ 		if (list_empty(&pcm->port_list))
+ 			continue;
+@@ -945,12 +947,10 @@ static int hdac_hdmi_set_pin_port_mux(struct snd_kcontrol *kcontrol,
+ 			list_add_tail(&port->head, &pcm->port_list);
+ 			if (port->eld.monitor_present && port->eld.eld_valid) {
+ 				hdac_hdmi_jack_report_sync(pcm, port, true);
+-				mutex_unlock(&hdmi->pin_mutex);
+ 				return ret;
+ 			}
+ 		}
  	}
+-	mutex_unlock(&hdmi->pin_mutex);
  
--	mutex_lock(&fs210x->lock);
-+	guard(mutex)(&fs210x->lock);
- 
- 	/*
- 	 * FS210x has scene(s) as below:
-@@ -1029,17 +1016,14 @@ static int fs210x_effect_scene_put(struct snd_kcontrol *kcontrol,
- 	 */
- 	scene_id = ucontrol->value.integer.value[0] + 1;
- 	scene_count = fs210x->amp_lib.scene_count - 1; /* Skip init scene */
--	if (scene_id < 1 || scene_id > scene_count) {
--		mutex_unlock(&fs210x->lock);
-+	if (scene_id < 1 || scene_id > scene_count)
- 		return -ERANGE;
--	}
- 
- 	if (scene_id != fs210x->scene_id)
- 		is_changed = true;
- 
- 	if (fs210x->is_suspended) {
- 		fs210x->scene_id = scene_id;
--		mutex_unlock(&fs210x->lock);
- 		return is_changed;
- 	}
- 
-@@ -1047,8 +1031,6 @@ static int fs210x_effect_scene_put(struct snd_kcontrol *kcontrol,
- 	if (ret)
- 		dev_err(fs210x->dev, "Failed to set scene: %d\n", ret);
- 
--	mutex_unlock(&fs210x->lock);
--
- 	if (!ret && is_changed)
- 		return 1;
- 
-@@ -1062,12 +1044,10 @@ static int fs210x_playback_event(struct snd_soc_dapm_widget *w,
- 	struct fs210x_priv *fs210x = snd_soc_component_get_drvdata(cmpnt);
- 	int ret = 0;
- 
--	mutex_lock(&fs210x->lock);
-+	guard(mutex)(&fs210x->lock);
- 
--	if (fs210x->is_suspended) {
--		mutex_unlock(&fs210x->lock);
-+	if (fs210x->is_suspended)
- 		return 0;
--	}
- 
- 	switch (event) {
- 	case SND_SOC_DAPM_PRE_PMU:
-@@ -1088,8 +1068,6 @@ static int fs210x_playback_event(struct snd_soc_dapm_widget *w,
- 		break;
- 	}
- 
--	mutex_unlock(&fs210x->lock);
--
  	return ret;
  }
+@@ -1274,67 +1274,65 @@ static void hdac_hdmi_present_sense(struct hdac_hdmi_pin *pin,
+ 	 * In case of non MST pin, get_eld info API expectes port
+ 	 * to be -1.
+ 	 */
+-	mutex_lock(&hdmi->pin_mutex);
+-	port->eld.monitor_present = false;
++	scoped_guard(mutex, &hdmi->pin_mutex) {
++		port->eld.monitor_present = false;
  
-@@ -1220,11 +1198,9 @@ static int fs210x_probe(struct snd_soc_component *cmpnt)
- 	if (ret)
- 		return ret;
+-	if (pin->mst_capable)
+-		port_id = port->id;
++		if (pin->mst_capable)
++			port_id = port->id;
  
--	mutex_lock(&fs210x->lock);
--	ret = fs210x_init_chip(fs210x);
--	mutex_unlock(&fs210x->lock);
-+	guard(mutex)(&fs210x->lock);
+-	size = snd_hdac_acomp_get_eld(hdev, pin->nid, port_id,
+-				&port->eld.monitor_present,
+-				port->eld.eld_buffer,
+-				ELD_MAX_SIZE);
++		size = snd_hdac_acomp_get_eld(hdev, pin->nid, port_id,
++					      &port->eld.monitor_present,
++					      port->eld.eld_buffer,
++					      ELD_MAX_SIZE);
  
--	return ret;
-+	return fs210x_init_chip(fs210x);
- }
- 
- static void fs210x_remove(struct snd_soc_component *cmpnt)
-@@ -1251,15 +1227,15 @@ static int fs210x_suspend(struct snd_soc_component *cmpnt)
- 
- 	regcache_cache_only(fs210x->regmap, true);
- 
--	mutex_lock(&fs210x->lock);
--	fs210x->cur_scene = NULL;
--	fs210x->is_inited = false;
--	fs210x->is_playing = false;
--	fs210x->is_suspended = true;
-+	scoped_guard(mutex, &fs210x->lock) {
-+		fs210x->cur_scene = NULL;
-+		fs210x->is_inited = false;
-+		fs210x->is_playing = false;
-+		fs210x->is_suspended = true;
- 
--	gpiod_set_value_cansleep(fs210x->gpio_sdz, 1); /* Active */
--	fsleep(30000); /* >= 30ms */
--	mutex_unlock(&fs210x->lock);
-+		gpiod_set_value_cansleep(fs210x->gpio_sdz, 1); /* Active */
-+		fsleep(30000); /* >= 30ms */
-+	}
- 
- 	cancel_delayed_work_sync(&fs210x->start_work);
- 	cancel_delayed_work_sync(&fs210x->fault_check_work);
-@@ -1288,14 +1264,11 @@ static int fs210x_resume(struct snd_soc_component *cmpnt)
- 		return ret;
- 	}
- 
--	mutex_lock(&fs210x->lock);
-+	guard(mutex)(&fs210x->lock);
- 
- 	fs210x->is_suspended = false;
--	ret = fs210x_init_chip(fs210x);
- 
--	mutex_unlock(&fs210x->lock);
+-	if (size > 0) {
+-		size = min(size, ELD_MAX_SIZE);
+-		if (hdac_hdmi_parse_eld(hdev, port) < 0)
+-			size = -EINVAL;
+-	}
 -
--	return ret;
-+	return fs210x_init_chip(fs210x);
+-	eld_valid = port->eld.eld_valid;
++		if (size > 0) {
++			size = min(size, ELD_MAX_SIZE);
++			if (hdac_hdmi_parse_eld(hdev, port) < 0)
++				size = -EINVAL;
++		}
+ 
+-	if (size > 0) {
+-		port->eld.eld_valid = true;
+-		port->eld.eld_size = size;
+-	} else {
+-		port->eld.eld_valid = false;
+-		port->eld.eld_size = 0;
+-	}
++		eld_valid = port->eld.eld_valid;
+ 
+-	eld_changed = (eld_valid != port->eld.eld_valid);
++		if (size > 0) {
++			port->eld.eld_valid = true;
++			port->eld.eld_size = size;
++		} else {
++			port->eld.eld_valid = false;
++			port->eld.eld_size = 0;
++		}
+ 
+-	pcm = hdac_hdmi_get_pcm(hdev, port);
++		eld_changed = (eld_valid != port->eld.eld_valid);
+ 
+-	if (!port->eld.monitor_present || !port->eld.eld_valid) {
++		pcm = hdac_hdmi_get_pcm(hdev, port);
+ 
+-		dev_dbg(&hdev->dev, "%s: disconnect for pin:port %d:%d\n",
+-			__func__, pin->nid, port->id);
++		if (!port->eld.monitor_present || !port->eld.eld_valid) {
+ 
+-		/*
+-		 * PCMs are not registered during device probe, so don't
+-		 * report jack here. It will be done in usermode mux
+-		 * control select.
+-		 */
+-		if (pcm) {
+-			hdac_hdmi_jack_report(pcm, port, false);
+-			schedule_work(&port->dapm_work);
+-		}
++			dev_dbg(&hdev->dev, "%s: disconnect for pin:port %d:%d\n",
++				__func__, pin->nid, port->id);
+ 
+-		mutex_unlock(&hdmi->pin_mutex);
+-		return;
+-	}
++			/*
++			 * PCMs are not registered during device probe, so don't
++			 * report jack here. It will be done in usermode mux
++			 * control select.
++			 */
++			if (pcm) {
++				hdac_hdmi_jack_report(pcm, port, false);
++				schedule_work(&port->dapm_work);
++			}
+ 
+-	if (port->eld.monitor_present && port->eld.eld_valid) {
+-		if (pcm) {
+-			hdac_hdmi_jack_report(pcm, port, true);
+-			schedule_work(&port->dapm_work);
++			return;
+ 		}
+ 
+-		print_hex_dump_debug("ELD: ", DUMP_PREFIX_OFFSET, 16, 1,
+-			  port->eld.eld_buffer, port->eld.eld_size, false);
++		if (port->eld.monitor_present && port->eld.eld_valid) {
++			if (pcm) {
++				hdac_hdmi_jack_report(pcm, port, true);
++				schedule_work(&port->dapm_work);
++			}
+ 
++			print_hex_dump_debug("ELD: ", DUMP_PREFIX_OFFSET, 16, 1,
++					     port->eld.eld_buffer, port->eld.eld_size, false);
++		}
+ 	}
+-	mutex_unlock(&hdmi->pin_mutex);
+ 
+ 	if (eld_changed && pcm)
+ 		snd_ctl_notify(hdmi->card,
+@@ -1795,13 +1793,12 @@ static void hdac_hdmi_set_chmap(struct hdac_device *hdev, int pcm_idx,
+ 	if (list_empty(&pcm->port_list))
+ 		return;
+ 
+-	mutex_lock(&pcm->lock);
++	guard(mutex)(&pcm->lock);
+ 	pcm->chmap_set = true;
+ 	memcpy(pcm->chmap, chmap, ARRAY_SIZE(pcm->chmap));
+ 	list_for_each_entry(port, &pcm->port_list, head)
+ 		if (prepared)
+ 			hdac_hdmi_setup_audio_infoframe(hdev, pcm, port);
+-	mutex_unlock(&pcm->lock);
  }
- #else
- #define fs210x_suspend NULL
+ 
+ static bool is_hdac_hdmi_pcm_attached(struct hdac_device *hdev, int pcm_idx)
 -- 
 2.43.0
 
