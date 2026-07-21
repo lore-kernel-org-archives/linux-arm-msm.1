@@ -1,86 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EAE0364057
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 04:09:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D1CF1D5CFB
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 04:24:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784606949; cv=none; b=C1Vl6VtnqQ+XsFiYFefKUGc7+GIvCHXvEvPln9ltxEMC8rJmWZvw0zJNm9z9BTQTOdpOt/7ksM5SGYvm5GV7fa52UVeTqXLC48Kl0cj6Am7eaD6fm5i+CjzhycbQ+ji8MTz3DN6KoMyqNlbPx8JlFtpicgZ0TLSmzDMvdVV+rO8=
+	t=1784607864; cv=none; b=bM0vGadk8Wkn6hs5wBWYdmC2OJsRh0bShJ26SVoOeLjSdJhNUsMtkRgK+qJsg4iw1kITnDkBEYxz0t0iT303BtZlJFwm29PVcEdU5Ik8uxUFTJwzv+q0HNAZnwFBROq5F7f+E6xuDdfAd3jUStGg8JZlWuTBgTzPBMnbKPQeJXI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784606949; c=relaxed/simple;
-	bh=Iu2rakKSBk9TcyKuoweKhmK3jzEGPUywuXTOSMYoNg8=;
+	s=arc-20240116; t=1784607864; c=relaxed/simple;
+	bh=EpyQ6y4Z+XCilzchS+OWjLtr0nkGIpUDEJuyhxPxTFo=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fPoY7aSncu4gWZdy1vkDYq7VcW5ZJyJRy0rlo8NAzJRbRgJjnDShgsRoeovZmeuaUju0qGlFwp55RKtHVfXGnTWezNqIqCjq33gJdYoAMcNRYSOIIpApRpwIUCzkVhs570wly5tTMFq1EC2DKG5bAaE0rk8VjwJhTRlPbmppkms=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=au3LWNFk; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=aRgahDRi; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=NqS3n3maq5l3Bv3yQaXxvjMJTCADYgJjed2eCO/Q5iBgqFuKZd+ZB4jPrl1xW3011/+0uYrvWpRvybpvKYRqZdlcaj6UIgUE4ZcE8+2eQ+hZa1dyFfcDHSGXpMt1ovHRYEdEJ34WirPidxN2jIs+UnnMaGx++6+cWYBIUPSXB/U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZSBQ9YDc; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=amTCQiwq; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="au3LWNFk";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="aRgahDRi"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66L2TFN6092397
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 04:09:06 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZSBQ9YDc";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="amTCQiwq"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66KNCRvP933219
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 04:24:22 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Tlmab9/uNugRhK0WR5f4khFpLoOXKyTz+DbhMgHdtQQ=; b=au3LWNFkcjfl6eSO
-	H0QvP/enCbzTUBhcqLlT56SQi1ZuEQ4Z/ii/GwcX0EgEgTA4EYsDyQVoOnkvbt5c
-	zQIm0bR5ozS6DBlumUdI6P/gpbp95EeEJ9C1s10Xk6kmnlwZwHRQcNGHjV8gWTIV
-	D93UZ4EHWI1UcNoGSyN3AE4/GnphRd0H138UmqE4XLHlm5bsuz3XMoMyjdhpQUVU
-	88a5gywHBBinQAQuexhkf2BTFmrWf48ZWM9QW6oAj1fh94Z4+ya+EsSs/ALiDcEF
-	S8SQCYK1xReAp9IQOO+kMasBAA6WIzoS0EZ8Q4tEj6HvJyWy58BP/s6fBECJchNe
-	c+gQRQ==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj01a8ayc-1
+	eqqdMOtWVd9xfvkuaRwNW1E678ghvBfZd8MCCpQ39F8=; b=ZSBQ9YDchNLYArbX
+	3Zc6Wn8yR6NgWc8GKPdJgDcJekFQP1LEl+gcIMBtXFKsG8WQPXNvm83051ZhC2My
+	zAPnFzEuYXWWMxv1MyVs9sSQbrAKtQoUAQJlg1gr+BEsO4XxA/ZjSCc8UHGmaQsW
+	lx002D9CLFqU9S8SH2zbedeVS7xe6E/AwleT+3yJ/5Ie6MtuHLTE4tM7ZU3eIFDC
+	8QoocP17u79bFuPw1/lqevsJ19DqngnOWZ8UN7fwUS1Tze1KGFCc56kL0M544kC7
+	ierS2yYwKso6u+K1AgKU7+VM9OP7YoP6eJKy1Y/dAToTcNZxrXM8oJLNQDph9bZJ
+	ruUjnw==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhqv5t80d-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 04:09:06 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-388b404eaa4so14163698a91.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 21:09:06 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 04:24:22 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2ccbb61893fso228180755ad.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 20 Jul 2026 21:24:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784606946; x=1785211746; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784607862; x=1785212662; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from:references
          :cc:to:content-language:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Tlmab9/uNugRhK0WR5f4khFpLoOXKyTz+DbhMgHdtQQ=;
-        b=aRgahDRikTZL+WTXOUHonAHsWyD/+ClimB3ru5XiL1ia81O06dEq/alVAnrYNraQ5j
-         nCbU6MD/M4xNx+GOQzk7egGwxVvLc5o2Mtto6gASNwRI9A48EqewD0txjar1thBsagMX
-         OHS5eXqx5uQgfP4TYFVi8ZkQd77fRWi5Xta6fSSfkcrevjSfhHGExXgMomqwfqdglyoq
-         a2ySvrL4f2MKAWaUBWIH2Z5JOqJKrj+srXmxlLYgdasuAqekEvsUaiXF/W0Ac/1AALqm
-         tzxOrP1Rog0asQtV1o8iTU/kFzlanXXZmQaYkWP8hBp4X5dUvqUAIS69MR6AX92QaI0j
-         VNuQ==
+        bh=eqqdMOtWVd9xfvkuaRwNW1E678ghvBfZd8MCCpQ39F8=;
+        b=amTCQiwqZQVIg+HPgpM0a/yYPXbwPMMWS7j3ykMTv8uVoI0aQBM7ekRUtG7tK45jCD
+         btAhWNKRQBo5qoXMQt0xBP56j5eLLvgjSkDdurDR1lcI0XhQQoK3NRNtSt6RnVl6u0yu
+         p0TupGlOWXDzShIUQNkPLmyjG0uqZAW/UzzMNV+jBYiEoqJyfCAATd2hCa0TWxUQaBob
+         JpKCXUcMZB3Hjtus+R/YB/Kn2gDEPX9yNLjCbxUaryvw0buJJ/isbuf81DAlS48ncb0D
+         0zZQrSy1M3A4oiZ4oTewUHiQ4F6WLlStch8I8A7hmtoKPVvAWqmzqsHzN05y0PWWwjRL
+         JcEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784606946; x=1785211746;
+        d=1e100.net; s=20251104; t=1784607862; x=1785212662;
         h=content-transfer-encoding:content-type:in-reply-to:from:references
          :cc:to:content-language:subject:user-agent:mime-version:date
          :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Tlmab9/uNugRhK0WR5f4khFpLoOXKyTz+DbhMgHdtQQ=;
-        b=W/icouITIKBtaXiNaorBzZm6PPydMUyCnsTPY/3yvLZV/YMyaH0jSp0ElzgrwKKil8
-         uX3SYIJkThwmIvk4Ptqv9+Fjj/iik25ZZ7Bg4b21gxap81hMKWM8KWy9VSKhPQC0y8g3
-         tBYgVY72oIYpK3XT/hjDYBvRsmNNaKhv1KnPdkGto83OpZqjcx248Jqi7AumEiR7caZZ
-         FOEaSmmIWfdFonQCswbNI/9eWZLERNozWXjosGX0K0Q86LjWHvB4KlZYzuVlGRabsiSr
-         kPqeZMVHgswSjx9LXEw7rEUCOpejUg5kGUm9KWabFRGPohNOgz/BOrudrs0ofJL8CexC
-         JQYg==
-X-Forwarded-Encrypted: i=1; AHgh+Rox5bBTLBn/EkVWJo3fvxtoK73fHasEEjdPz+ZSlDtPTdXSwuL4h1XdUpvNQXX/mAnC8afxgNVYSS8zYTdc@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywcmg6FvstI+wPt6IYsRryWxdkgT/wavCP5az4B+oo56WfEwtxR
-	f4UstllFKKRYttFe9GHeygspU+dKc0nSzOtZcIUaVtXuiY1FEyE20VG7sNsiH90YboMBiTeMWVw
-	SAXLa+OujN4zUqqnOFkc51DrNpoy1g6aMyRXkiu7U8S/DosJ/itfcFlYhV7/UPtHxXE/z
-X-Gm-Gg: AR+sD13AqcCa+BPHewjAFeGHg+l8+7hNHs16YugxLZqZx76+bCcQfxzRccmH8euj7eA
-	YQm0psP1l3qkQ4GkcV6N8g/3aehQt9xEH9rWT/gNTqg1F3CSbhERSV9q4539klx1C6bVcDmxhj3
-	DyUEO7GrwzoZt4OjGDCKZoPGvX9/5Ucu+0RavjDYF9Jw0mYv5LHDD6y/mjPBskNZDA1RIpB6D1w
-	V1QyoGCNNhDreY/6TkXraH5hQpanxPT7TkoeO5S/roK2ULRn1AN9agvMW+J2BHc3c2iJ34j1FsK
-	yl6EIXlMkZvigVfz61JWb/8SSeGFfKkwXO/rKqMGw3fXgiM3de16ywCZ641SVsOM+KHSpk2cOeI
-	p57VoYHXcALw5lR1zUdbLL3fq4t419Wtw
-X-Received: by 2002:a17:90b:1b43:b0:38d:eb10:6f01 with SMTP id 98e67ed59e1d1-38e4b422875mr17195672a91.4.1784606945570;
-        Mon, 20 Jul 2026 21:09:05 -0700 (PDT)
-X-Received: by 2002:a17:90b:1b43:b0:38d:eb10:6f01 with SMTP id 98e67ed59e1d1-38e4b422875mr17195640a91.4.1784606945028;
-        Mon, 20 Jul 2026 21:09:05 -0700 (PDT)
+        bh=eqqdMOtWVd9xfvkuaRwNW1E678ghvBfZd8MCCpQ39F8=;
+        b=Z2rOaFffw2N8AHp+K0pqbDTEhZDBeOHBHBnGRkl5+U+S5dkz3QRuuAEruHlc1pE6rG
+         t7ZSXGlfRNlFHI1VulL/4IqJh/fEIzLWMJSdyeMJEQEH9IQxYr0U3Uev9eOzYOGBZjfz
+         lHHkxcG3V10Lu1f8FgUPyx6/V9Yq4FvB/KOBMuk3cb0OjyYOiO8m9xVT3xk1xKtyKzqx
+         Kf3Z+oFCGCYp8QagQkXqjkogZ4AwyMVahUtShfUaKkXIllkEQNmsF6R2SUlBhofvf5jc
+         olR1Ksh599W9demPZ0uZuEvmTqxMhfaWb6Fql+G0dJ82ImVr5gLN29OF+mWux2CLU/WR
+         r3vg==
+X-Forwarded-Encrypted: i=1; AHgh+RruARtaMcJcGQte8DeTk4ShB3TWcH9VVcRqG/q+uYTY7lm1bZGhwyxmCmKYAblw2/qfoDww2S++8895vsx0@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx1LPuWOEqYUpkxj4wRyDtiqYp4+j40SIKQmfmD53zk1yR7GDdL
+	36uf5NHSNjMhbtdWqklTo36twkhxfQtIGRYY5DOfEkcbfe9YY5yTgyW2BtAcRQur+uMX1BH9inJ
+	fPD0ThvAD4gI9XziL4fN2fl+B2CtcvQaz8ihJG59LVrVgS/1s20ok9py0J1zvNE2PDvpFkGDCo5
+	KW
+X-Gm-Gg: AfdE7cnqvZrlLlKC0seHLZnN33SmtrALIFOxf72a9/pxbtXS1+mjZ9ph9jeaagidFs1
+	8fkraJxbT2Zycy+uTKowvyKNzOkG4cYn8hFYZaQGY+PwBIA6/FXmhO45DVUdgFCkPKdV0XTBNo8
+	mUXdSTFI0UkgJC3c93TBvEswBsY1DgyB7A2RpaqOsGpcYc0CLTZcVuEgyeEgt2Mv8YcyPAv1pfY
+	JSuG6b2CjlkrRRuQnG6IPU59LUqVtIfcRDXC9HhGYXpuroSJnBnKuETfnwXIlqt/nxEz2EtK/LU
+	Ttd2lZMmrZSkmVk8ZMUxGpQhpSEzFtnKz8tyDk92kigr2V7gf6b0KiNlmBXBD4vKxjqvhtiQ26w
+	GIWOLJv6Tryf3Nizg4o7c5LzLXHB20EI0
+X-Received: by 2002:a05:6a21:62c4:b0:3bf:735d:7fb8 with SMTP id adf61e73a8af0-3c3ad640c51mr16441347637.27.1784607861690;
+        Mon, 20 Jul 2026 21:24:21 -0700 (PDT)
+X-Received: by 2002:a05:6a21:62c4:b0:3bf:735d:7fb8 with SMTP id adf61e73a8af0-3c3ad640c51mr16441324637.27.1784607861223;
+        Mon, 20 Jul 2026 21:24:21 -0700 (PDT)
 Received: from [10.206.105.200] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13ce2cbb6e8sm33617461c88.9.2026.07.20.21.08.58
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3142a1bbaf6sm38100411eec.17.2026.07.20.21.24.17
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 20 Jul 2026 21:09:03 -0700 (PDT)
-Message-ID: <02c537c5-8516-c353-2ea9-d0408c4972cc@oss.qualcomm.com>
-Date: Tue, 21 Jul 2026 09:38:56 +0530
+        Mon, 20 Jul 2026 21:24:20 -0700 (PDT)
+Message-ID: <651ceaac-bdd7-4dbd-ee45-6d4e56f78b39@oss.qualcomm.com>
+Date: Tue, 21 Jul 2026 09:54:15 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.8.0
-Subject: Re: [PATCH v2 2/2] media: iris: add support for multi_slice in iris
+Subject: Re: [PATCH v2 1/2] media: iris: force stage 1 work mode for CBR RC on
  encoder
 Content-Language: en-US
 To: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>,
@@ -101,333 +102,69 @@ To: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>,
 Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-kernel@vger.kernel.org
 References: <20260717-iris_multi_slice-v2-0-9550b1feb39b@oss.qualcomm.com>
- <20260717-iris_multi_slice-v2-2-9550b1feb39b@oss.qualcomm.com>
+ <20260717-iris_multi_slice-v2-1-9550b1feb39b@oss.qualcomm.com>
 From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-In-Reply-To: <20260717-iris_multi_slice-v2-2-9550b1feb39b@oss.qualcomm.com>
+In-Reply-To: <20260717-iris_multi_slice-v2-1-9550b1feb39b@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=BL6DalQG c=1 sm=1 tr=0 ts=6a5ef0e2 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-GUID: zL-p8wnVxEfina0HVMkoDNNYSfT1x03q
+X-Proofpoint-ORIG-GUID: zL-p8wnVxEfina0HVMkoDNNYSfT1x03q
+X-Authority-Analysis: v=2.4 cv=e+U2j6p/ c=1 sm=1 tr=0 ts=6a5ef476 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=v1_a9Vtw6dW_r32y8jwA:9 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDAzOSBTYWx0ZWRfX/ztximYT3kIb
- Eu0NIZ5kgTqrvuW/HcdAlv/KdZ8DgKUho7AUaVgeACGvwpou5S4KTN2xr4mD1oWCPPZkBbspC6Y
- wRSWCRIOhOnxeAn8lMfdbp1n7BTtTj+U+k/Cal+NfdiICeSP9Ln3DZixNFxJag+qHblfxR0w+EJ
- FR5SuRjFOG0qHIPmPLe2qMkTp2wFJ1w8+3leR1z3KfgVWfAFb6yps9NpVhpUYjog5AzMGq3VTvd
- ZDHoWmi/kGIGBBV1dPeclgB2nFfKxo+yKB99BC7yfXXZ1FamigSj5xZb30QpxMNUDLkJyPsnY1v
- Ompu4F3chBdESeQlv87fTaPAf2D4rzgHG02MTzF7cL30FcWkXwD7FsCrAk6Wpa6V74h0Db6qmuf
- 8iOiZP++B6ublDxW/hONimKqqt55er62chASPOLJj+DVLpq44SYkT4HVnIWYw7ckG3pDzwrTBvS
- NCblDuUu4eyq2Mu4gaw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDAzOSBTYWx0ZWRfX7hZZ70BsT7zw
- 2mguKWbkT9LAi4novQlwtbevvuOAgXQwmHMzmlclD0jbUH2nvp+l3jUeL5jGEOnqkPbuGsi/4vk
- 8CP2sp2ZruBSn4ShSaF6S3cz15vxBps=
-X-Proofpoint-ORIG-GUID: eVRYSX0io9mIIctDY21a8OWlvUxD5NVx
-X-Proofpoint-GUID: eVRYSX0io9mIIctDY21a8OWlvUxD5NVx
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=hhjTFUP8Xi2ExFBNaNkA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDA0MiBTYWx0ZWRfX1B74XOZH9/vt
+ zV5W8SCO5sPjjVmsxZVCBEWC7hKvfcq1L13aU0nLi/BQXN5fxnWn5V7fvzskN+q3EwXMb/dgLXK
+ TzwTcWKlsuiYFuuxgBq9gVrE9tx3Z4E=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDA0MiBTYWx0ZWRfX7rUkKDmv0e0E
+ yltQAyQfZ88bk/SnIT2Gm51wwveAF0k5LHb+QtZAc+5+9pRUID4I7COH00DC+NFogi6O8Vu7GNI
+ ViQ9HbyGrlg5+nmQ9zEbES/EYbKw2lBdEMvFtLEc8UmJyHsXU7EqnQhcWJQR9i7UBtqDjo5U3OJ
+ EyJwzo2vY7Gi+wk20MpXjC9pfm982v4x665wJjMViLBs5GVQu6F/LA8i/0eaj9aGL9G1jKQPvJR
+ CB1GNRGHSIu34BbXyUJjiLZiBDbS8ruI3C5Xbeg2WXV4OvpWSCHem5hVcvMk7XWazkBldfLDQwo
+ IGx8NOxwB8RyV1+7QdO6HNYRd86CgfTyfVkhEsku6moaBbVTvMPgJZLH7FFikxM5ihEnd/fhJy8
+ nFuyb03sxaru447oc4xT9OZNEx2pV40acVhmTqJeQdn1vFMHHXAgav7JBeGfSJSbFqp5gmeHNbM
+ 3fIAvkU3n6UDtu+IE7g==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-20_06,2026-07-20_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 clxscore=1015 malwarescore=0 suspectscore=0 adultscore=0
- priorityscore=1501 bulkscore=0 lowpriorityscore=0 phishscore=0 spamscore=0
+ spamscore=0 suspectscore=0 bulkscore=0 priorityscore=1501 adultscore=0
+ lowpriorityscore=0 impostorscore=0 phishscore=0 clxscore=1015 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210039
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210042
 
 
 On 7/17/2026 12:21 PM, Sachin Kumar Garg wrote:
-> Add multi-slice encoding support with MAX_MB and MAX_BYTES modes.
+> iris_set_stage() currently always picks STAGE_2 for encoder sessions.
+> CBR rate control requires stage 1 operation, so force STAGE_1 when
+> BITRATE_MODE is set to CBR.
 >
-> Clients can enable slice mode using V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MODE
-> control and configure slice size via V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_MB
-> or V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_BYTES controls.
+> The BITRATE_MODE fw_cap value is used instead of inst->hfi_rc_type
+> since STAGE precedes BITRATE_MODE in enum platform_inst_fw_cap_type,
+> so iris_set_properties() would still see the previous hfi_rc_type
+> when iris_set_stage() runs during initial config
 >
 > Signed-off-by: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
 > ---
->  drivers/media/platform/qcom/iris/iris_ctrls.c      | 81 ++++++++++++++++++++++
->  drivers/media/platform/qcom/iris/iris_ctrls.h      |  1 +
->  drivers/media/platform/qcom/iris/iris_hfi_gen2.c   | 33 ++++++++-
->  .../platform/qcom/iris/iris_hfi_gen2_defines.h     |  2 +
->  .../platform/qcom/iris/iris_platform_common.h      | 12 ++++
->  .../platform/qcom/iris/iris_platform_qcs8300.h     |  9 +++
->  .../platform/qcom/iris/iris_platform_sm8550.h      |  9 +++
->  .../media/platform/qcom/iris/iris_platform_vpu2.c  |  9 +++
->  8 files changed, 155 insertions(+), 1 deletion(-)
+>  drivers/media/platform/qcom/iris/iris_ctrls.c | 3 +++
+>  1 file changed, 3 insertions(+)
 >
 > diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.c b/drivers/media/platform/qcom/iris/iris_ctrls.c
-> index 6c4eed62d7e3..3f8b869ab87d 100644
+> index 10e33b8a73f6..6c4eed62d7e3 100644
 > --- a/drivers/media/platform/qcom/iris/iris_ctrls.c
 > +++ b/drivers/media/platform/qcom/iris/iris_ctrls.c
-> @@ -154,6 +154,12 @@ static enum platform_inst_fw_cap_type iris_get_cap_id(u32 id)
->  		return LAYER4_BITRATE_HEVC;
->  	case V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L5_BR:
->  		return LAYER5_BITRATE_HEVC;
-> +	case V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MODE:
-> +		return SLICE_MODE;
-> +	case V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_BYTES:
-> +		return SLICE_MAX_BYTES;
-> +	case V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_MB:
-> +		return SLICE_MAX_MB;
->  	default:
->  		return INST_FW_CAP_MAX;
+> @@ -519,6 +519,9 @@ int iris_set_stage(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id
+>  	if (inst->domain == DECODER) {
+>  		if (iris_res_is_less_than(width, height, 1280, 720))
+>  			work_mode = STAGE_1;
+> +	} else if (inst->domain == ENCODER) {
+> +		if (inst->fw_caps[BITRATE_MODE].value == V4L2_MPEG_VIDEO_BITRATE_MODE_CBR)
+> +			work_mode = STAGE_1;
 >  	}
-> @@ -297,6 +303,12 @@ static u32 iris_get_v4l2_id(enum platform_inst_fw_cap_type cap_id)
->  		return V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L4_BR;
->  	case LAYER5_BITRATE_HEVC:
->  		return V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L5_BR;
-> +	case SLICE_MODE:
-> +		return V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MODE;
-> +	case SLICE_MAX_BYTES:
-> +		return V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_BYTES;
-> +	case SLICE_MAX_MB:
-> +		return V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_MB;
->  	default:
->  		return 0;
->  	}
-> @@ -1480,6 +1492,75 @@ int iris_set_layer_bitrate(struct iris_inst *inst, enum platform_inst_fw_cap_typ
->  					     &bitrate, sizeof(u32));
->  }
 >  
-> +int iris_set_slice_count(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id)
-> +{
-> +	const struct iris_hfi_session_ops *hfi_ops = inst->hfi_session_ops;
-> +	struct platform_inst_caps *caps = inst->core->iris_platform_data->inst_caps;
-> +	u32 slice_mode = inst->fw_caps[SLICE_MODE].value;
-> +	u32 bitrate = inst->fw_caps[BITRATE].value;
-> +	u32 rc_type = inst->fw_caps[BITRATE_MODE].value;
-> +	u32 fps = inst->frame_rate;
-> +	u32 output_width = inst->fmt_dst->fmt.pix_mp.width;
-> +	u32 output_height = inst->fmt_dst->fmt.pix_mp.height;
-> +	u32 mbpf = NUM_MBS_PER_FRAME(output_height, output_width);
-> +	u32 max_width, max_height, min_width, min_height;
-> +	u32 max_avg_slicesize, hfi_value, hfi_id;
-> +
-> +	if (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_SINGLE) {
-> +		dev_dbg(inst->core->dev, "slice mode is: %u, ignore setting to fw\n", slice_mode);
-> +		return 0;
-> +	}
-> +	if (!fps) {
+>  	return hfi_ops->session_set_property(inst, hfi_id,
 
-This condition will never be true as fps (inst->frame_rate) cannot become zero
-anywhere in the driver.
+Reviewed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
 
-> +		dev_err(inst->core->dev, "Invalid frame rate %d\n", fps);
-> +		return -EINVAL;
-> +	}
-> +	if (fps > caps->max_slice_frame_rate ||
-> +	    (rc_type != HFI_RC_OFF && rc_type != HFI_RC_CBR_CFR &&
-> +	    rc_type != HFI_RC_CBR_VFR && rc_type != HFI_RC_VBR_CFR)) {
-> +		dev_err(inst->core->dev, "slice unsupported, fps: %u, rc_type: %#x\n",
-> +			fps, rc_type);
-> +		return -EINVAL;
-> +	}
-> +
-> +	max_width = (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_MB) ?
-> +			caps->max_mb_slice_width : caps->max_bytes_slice_width;
-> +	max_height = (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_MB) ?
-> +			caps->max_mb_slice_height : caps->max_bytes_slice_height;
-> +	min_width = (inst->codec == V4L2_PIX_FMT_HEVC) ?
-> +			caps->min_hevc_slice_width : caps->min_avc_slice_width;
-> +	min_height = caps->min_slice_height;
-> +
-> +	if (output_width < min_width || output_height < min_height ||
-> +	    output_width > max_width || output_height > max_height) {
-> +		dev_err(inst->core->dev, "slice unsupported, codec: %#x wxh: [%dx%d]\n",
-> +			inst->codec, output_width, output_height);
-> +		return -EINVAL;
-> +	}
-> +
-> +	if (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_MB) {
-> +		hfi_value = inst->fw_caps[SLICE_MAX_MB].value;
-> +		hfi_value = max(hfi_value, mbpf / caps->max_slices_per_frame);
-> +		if (inst->codec == V4L2_PIX_FMT_HEVC)
-> +			hfi_value = (hfi_value + 3) / 4;
-> +		hfi_id = inst->fw_caps[SLICE_MAX_MB].hfi_id;
-> +	} else if (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_BYTES) {
-> +		hfi_value = inst->fw_caps[SLICE_MAX_BYTES].value;
-> +		if (rc_type != HFI_RC_OFF) {
-> +			max_avg_slicesize = ((bitrate / fps) / 8) / caps->max_slices_per_frame;
-> +			hfi_value = max(hfi_value, max_avg_slicesize);
-> +		}
-> +		hfi_id = inst->fw_caps[SLICE_MAX_BYTES].hfi_id;
-> +	} else {
-> +		return -EINVAL;
-> +	}
-> +
-> +	return hfi_ops->session_set_property(inst, hfi_id,
-> +					     HFI_HOST_FLAGS_NONE,
-> +					     iris_get_port_info(inst, cap_id),
-> +					     HFI_PAYLOAD_U32,
-> +					     &hfi_value, sizeof(u32));
-> +}
-> +
->  int iris_set_properties(struct iris_inst *inst, u32 plane)
->  {
->  	const struct iris_hfi_session_ops *hfi_ops = inst->hfi_session_ops;
-> diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.h b/drivers/media/platform/qcom/iris/iris_ctrls.h
-> index 3c462ec9190b..5a73c7c49d36 100644
-> --- a/drivers/media/platform/qcom/iris/iris_ctrls.h
-> +++ b/drivers/media/platform/qcom/iris/iris_ctrls.h
-> @@ -47,6 +47,7 @@ int iris_set_layer_type(struct iris_inst *inst, enum platform_inst_fw_cap_type c
->  int iris_set_layer_count_gen1(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
->  int iris_set_layer_count_gen2(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
->  int iris_set_layer_bitrate(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
-> +int iris_set_slice_count(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
->  int iris_set_properties(struct iris_inst *inst, u32 plane);
->  
->  #endif
-> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
-> index acc0ed8adda1..fcbebced05c3 100644
-> --- a/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
-> +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
-> @@ -12,6 +12,8 @@
->  
->  #define VIDEO_ARCH_LX 1
->  #define BITRATE_MAX				245000000
-> +#define MAX_SLICE_MB_SIZE         \
-> +	(((4096 + 15) >> 4) * ((2160 + 15) >> 4))
->  
->  static const struct platform_inst_fw_cap inst_fw_cap_sm8550_dec[] = {
->  	{
-> @@ -937,7 +939,36 @@ static const struct platform_inst_fw_cap inst_fw_cap_sm8550_enc[] = {
->  		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
->  			CAP_FLAG_DYNAMIC_ALLOWED,
->  		.set = iris_set_layer_bitrate,
-> -	}
-> +	},
-> +	{
-> +		.cap_id = SLICE_MODE,
-> +		.min = V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_SINGLE,
-> +		.max = V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_BYTES,
-> +		.step_or_mask = BIT(V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_SINGLE) |
-> +					BIT(V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_MB) |
-> +					BIT(V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_BYTES),
-> +		.value = V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_SINGLE,
-> +		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_MENU,
-> +		.set = iris_set_slice_count,
-> +	},
-> +	{
-> +		.cap_id = SLICE_MAX_BYTES,
-> +		.min = 512,
-> +		.max = BITRATE_MAX >> 3,
-> +		.step_or_mask = 1,
-> +		.value = 512,
-> +		.hfi_id = HFI_PROP_MULTI_SLICE_BYTES_COUNT,
-> +		.flags = CAP_FLAG_OUTPUT_PORT,
-> +	},
-> +	{
-> +		.cap_id = SLICE_MAX_MB,
-> +		.min = 1,
-> +		.max = MAX_SLICE_MB_SIZE,
-> +		.step_or_mask = 1,
-> +		.value = 1,
-> +		.hfi_id = HFI_PROP_MULTI_SLICE_MB_COUNT,
-> +		.flags = CAP_FLAG_OUTPUT_PORT,
-> +	},
->  };
->  
->  static const u32 sm8550_vdec_input_config_params_default[] = {
-> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h b/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
-> index 776b21cd11b2..226894b99dcc 100644
-> --- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
-> +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
-> @@ -71,6 +71,8 @@ enum hfi_rate_control {
->  #define HFI_PROP_MIN_QP_PACKED			0x0300012f
->  #define HFI_PROP_MAX_QP_PACKED			0x03000130
->  #define HFI_PROP_IR_RANDOM_PERIOD		0x03000131
-> +#define HFI_PROP_MULTI_SLICE_MB_COUNT		0x03000132
-> +#define HFI_PROP_MULTI_SLICE_BYTES_COUNT	0x03000133
->  #define HFI_PROP_LTR_COUNT			0x03000134
->  #define HFI_PROP_LTR_MARK			0x03000135
->  #define HFI_PROP_LTR_USE			0x03000136
-> diff --git a/drivers/media/platform/qcom/iris/iris_platform_common.h b/drivers/media/platform/qcom/iris/iris_platform_common.h
-> index c9256f2323dc..659d15166365 100644
-> --- a/drivers/media/platform/qcom/iris/iris_platform_common.h
-> +++ b/drivers/media/platform/qcom/iris/iris_platform_common.h
-> @@ -100,6 +100,15 @@ struct platform_inst_caps {
->  	u32 mb_cycles_fw_vpp;
->  	u32 max_frame_rate;
->  	u32 max_operating_rate;
-> +	u32 max_slices_per_frame;
-> +	u32 max_slice_frame_rate;
-> +	u32 max_mb_slice_width;
-> +	u32 max_mb_slice_height;
-> +	u32 max_bytes_slice_width;
-> +	u32 max_bytes_slice_height;
-> +	u32 min_hevc_slice_width;
-> +	u32 min_avc_slice_width;
-> +	u32 min_slice_height;
->  };
->  
->  enum platform_inst_fw_cap_type {
-> @@ -183,6 +192,9 @@ enum platform_inst_fw_cap_type {
->  	LAYER3_BITRATE_HEVC,
->  	LAYER4_BITRATE_HEVC,
->  	LAYER5_BITRATE_HEVC,
-> +	SLICE_MODE,
-> +	SLICE_MAX_BYTES,
-> +	SLICE_MAX_MB,
->  	INST_FW_CAP_MAX,
->  };
->  
-> diff --git a/drivers/media/platform/qcom/iris/iris_platform_qcs8300.h b/drivers/media/platform/qcom/iris/iris_platform_qcs8300.h
-> index 3cfecae80d1e..764acf71c72b 100644
-> --- a/drivers/media/platform/qcom/iris/iris_platform_qcs8300.h
-> +++ b/drivers/media/platform/qcom/iris/iris_platform_qcs8300.h
-> @@ -17,6 +17,15 @@ static struct platform_inst_caps platform_inst_cap_qcs8300 = {
->  	.mb_cycles_fw_vpp = 44156,
->  	.max_frame_rate = MAXIMUM_FPS,
->  	.max_operating_rate = MAXIMUM_FPS,
-> +	.max_slices_per_frame = 128,
-> +	.max_slice_frame_rate = 60,
-> +	.max_mb_slice_width = 4096,
-> +	.max_mb_slice_height = 2160,
-> +	.max_bytes_slice_width = 1920,
-> +	.max_bytes_slice_height = 1088,
-> +	.min_hevc_slice_width = 384,
-> +	.min_avc_slice_width = 192,
-> +	.min_slice_height = 128,
->  };
->  
->  #endif
-> diff --git a/drivers/media/platform/qcom/iris/iris_platform_sm8550.h b/drivers/media/platform/qcom/iris/iris_platform_sm8550.h
-> index 3c9dae995bb2..ef87976c2360 100644
-> --- a/drivers/media/platform/qcom/iris/iris_platform_sm8550.h
-> +++ b/drivers/media/platform/qcom/iris/iris_platform_sm8550.h
-> @@ -25,6 +25,15 @@ static struct platform_inst_caps platform_inst_cap_sm8550 = {
->  	.mb_cycles_fw_vpp = 66234,
->  	.max_frame_rate = MAXIMUM_FPS,
->  	.max_operating_rate = MAXIMUM_FPS,
-> +	.max_slices_per_frame = 128,
-> +	.max_slice_frame_rate = 60,
-> +	.max_mb_slice_width = 4096,
-> +	.max_mb_slice_height = 2160,
-> +	.max_bytes_slice_width = 1920,
-> +	.max_bytes_slice_height = 1088,
-> +	.min_hevc_slice_width = 384,
-> +	.min_avc_slice_width = 192,
-> +	.min_slice_height = 128,
->  };
->  
->  #endif
-> diff --git a/drivers/media/platform/qcom/iris/iris_platform_vpu2.c b/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
-> index 6e06a32822bb..39720e7af889 100644
-> --- a/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
-> +++ b/drivers/media/platform/qcom/iris/iris_platform_vpu2.c
-> @@ -44,6 +44,15 @@ static struct platform_inst_caps platform_inst_cap_vpu2 = {
->  	.mb_cycles_vpp = 200,
->  	.max_frame_rate = MAXIMUM_FPS,
->  	.max_operating_rate = MAXIMUM_FPS,
-> +	.max_slices_per_frame = 128,
-> +	.max_slice_frame_rate = 60,
-> +	.max_mb_slice_width = 4096,
-> +	.max_mb_slice_height = 2160,
-> +	.max_bytes_slice_width = 1920,
-> +	.max_bytes_slice_height = 1088,
-> +	.min_hevc_slice_width = 384,
-> +	.min_avc_slice_width = 192,
-> +	.min_slice_height = 128,
->  };
->  
->  static const struct icc_info iris_icc_info_vpu2[] = {
->
