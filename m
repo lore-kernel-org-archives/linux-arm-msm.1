@@ -1,87 +1,87 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D52CB435A9F
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 09:28:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56940443A8C
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 09:28:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784626100; cv=none; b=dsLZcaZqHr8r0yzrZ0TStvS1vYniiLcKSEJkvfrIP717sb6MmRBOfkH9sGV57ueVSMy5PShi4CRQJ/gBhqK8lTQaRvkil7722spDcgtri4ugC6m9yP2YBRaMXOlQs5pwp1Wty4GHRcJ/i+oV4SVjkv7kcHBCQhLWnqhvoStYpfQ=
+	t=1784626140; cv=none; b=DQpsk22zd7Y9jHzY6AQd5HLCLpVwKnzval4byE1/OsiSAkKVbqAl31mevWeuRdozlM8brlHOgXuL9ad+UFut+xBfNKpSsEcwwWgumgpAR0TdXPrpuBwj7aVr0JGsXlbYQBqWcgupDYhAIe3Sg8mblGS5B24tK6+RDGpgl9aqc1A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784626100; c=relaxed/simple;
-	bh=U06TBo/mKu+eYZDBmVcAl/yURIbM3o/0W20aN+oBebI=;
+	s=arc-20240116; t=1784626140; c=relaxed/simple;
+	bh=iJG8Toux2U5TsrzwottVDiL8Y/t97me5211y2C4N37I=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=TdmCDQ748G9ffudlsSfQiUH/QeqOOslf3ONuJZ4K2sVBfF50N88Gzkr4zdjyVl6Y8bbx5ntJhBIEcXVt2vksKKJXAzzDa6KkQq0nR/slaLVlyA9IY0uOTdXWq76o6nffp0pbewce9m0nS8KQl3EDHBdQqsITDp+f72LUPqqlJV8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VSa3/VkS; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KI0TWzfn; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=LXyL8ls2P+w8YbFV6EtM+x2ys2PQkaAKJZ/gM6Po9uVu7XYfn1VykoIE7WzIwUXsijJOiJ2yZOClmypUN+eI/1Fdb7IXfhfQwwj9qNOSFH1eCzOJYJG+tYwaj9D1DOrmj6uJ6cmvF9tNHadI0eID1yAF2gyxEcVDE+uZ8f2c8i8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IPPhBua4; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IJV9CNuM; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VSa3/VkS";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KI0TWzfn"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66L8jKUU568564
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 09:28:18 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IPPhBua4";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IJV9CNuM"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66L6NcNg4107055
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 09:28:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	e4ValDJqxvm9G1fPP8csg7waG171yv9cetqT9BwGI1g=; b=VSa3/VkSvMC4Nxbu
-	itTziw8biLB87CwbGyzLOXix44bpWK7zDks49475SWWeHK7Jegn3AQXP//AT4wEq
-	khSuMJ/tqIjUFhsP415aWbRDCf+6/dqyaVIRfLWM40eapUfA7YsSG9aCZKWriq2l
-	G88ipSXrUOG+jlTUR1EtAGTtLw4Hp/vH34X+0ZypIAARr3VUMrd/nOPpZ/PVASe8
-	Q25jX1e2OIb3O+kvBfQKtW9iVHLobYxod1id8O1XCSVZ31kv4hLueZTjLL4phO8j
-	j0e9FOsa78oXzz/sYyumucfO+hDtJZw7m1QPZQuyWugXAHx9vns1ZJ5lJj2i3NNd
-	XAp+1A==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj1bvsgsf-1
+	pc6KxO6xh4zaSrcFhKD91Fl76TRNxmoAYzgik4d1dlo=; b=IPPhBua4b5Qx0rSA
+	XP4Q8DYw9P7x9yqJWFihYyMjnkBuuy2TxJYB18LJa4q1McjJQhMlAXE5Wuhvp1iS
+	zbZv7VQOGds/RGgmYo1cQHuBauWNXdsqwNFqgS+rqJOsmdkaI3B0DEt3mFqX8jh+
+	7WsqzOA7Dw7T3os6E4mkFViI+TPchskNE59TuDLv+wDkO6Xt8pfKekWkOca7vsyN
+	HQ+8/cX7Yjs1DJ+RXgGgjmlN2/5/ctItw1/el80FGt6ARuex17LpeQkjflu4Tud5
+	gGDDI0hbuK/Td2bn9fM7AmpQsHYwjeVXKjRcbps86kFi2r5uiZ27WhRRHjTYZqOv
+	29wLuA==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fhvqnaga4-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 09:28:17 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2cf27789c79so62496005ad.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 02:28:17 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 09:28:58 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38e22137fb3so9642213a91.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 02:28:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784626097; x=1785230897; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784626138; x=1785230938; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=e4ValDJqxvm9G1fPP8csg7waG171yv9cetqT9BwGI1g=;
-        b=KI0TWzfnk7bmk1lxXO9w+Pc2stPr5b/KVmk8zk7dMu/P+qhHGVSFfJtsPLS1rTXWEK
-         nirB/JJtWUP+OpnWoz6grYTFA+w8l9fIgR2nitOWJLCb3FHKZRA0bPrsq/wfg9ffeXqv
-         N8OxABKAvS0KjEk4zUCDcD167gzLIAKzjqWXQitmH4gRtFFcwZWl9a6pSrERkheHtpxt
-         gEOsdEpEZzIYdbrDN6yj4tY/A1ZrBfyMWvARsZQXAC7o+IiazNEDPsxzrrZ3/FVC4M9l
-         c9iB45Tv6iwN0Zx6WmNjXi8NOK63WILuPIGCu7FnATGlzYoympnawjgavNiIGHgIDsAS
-         oXxA==
+        bh=pc6KxO6xh4zaSrcFhKD91Fl76TRNxmoAYzgik4d1dlo=;
+        b=IJV9CNuMuNYEgLdN5TkZPpV+nUzirtZygngYK45PbztAN3AHFSFR7Lpvw7DrUXUNXi
+         0FITJlXQbGEfqmIc36/uBwl9PRpgjss80ocqLLkmaSQ//30y43Ilb+6ZsUBLZx0bXHrB
+         p6+Qquyat8dyoNyr6gun+bZElJSc5MwnkkG7Gy++yP4I7tFUgQXlJoCTBfNltx3idcOo
+         tyZHlK7zZ6YrluHz8Blm5sbIL5XDZ9pnd9UGLhU/VH+Af/nBv+F8jwYz9dffLjdaP6bQ
+         uJxJvJs0E7mAHxuu14pTBEkXRShVeuQnppG+HtAXLU0LrL0OASAND7raBcvZvfHC3NrO
+         TPbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784626097; x=1785230897;
+        d=1e100.net; s=20251104; t=1784626138; x=1785230938;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=e4ValDJqxvm9G1fPP8csg7waG171yv9cetqT9BwGI1g=;
-        b=lRiKPFd2T1UAWsTq57S5e5eXCiKOWNELX6sivbGDTqw02YoKMREt6+Ud7AY1Nz2BQB
-         iQDRm2wUCiZjZ3lfXQ5OMBUyWggB6yzIsPKS99TkDTd1UGMGEOzdK/X9GXyPVmsDo+Zi
-         dDkHBsYdHtcwpwj47sgblVFD9HR8uJRQ8oPRlC4m18xn+tg1MXGxPkbWppqe+yspNRDw
-         ikIYAUXSCduBq19GjiaaCJ//mfbHDOBznKd8EfcyFYAGzRs3GrqBY5p8FHB25pRAcYCp
-         gp/xAtRMzcNH+go88Cnc2OnKYCF3A4PsxuoYWy5DqJDSy9re58Edk2AA9YY+aWwCpayO
-         aMcg==
-X-Forwarded-Encrypted: i=1; AHgh+Rp8QDFxYAsh/stXjzRxpZHJz3/kDJMLc3qPUChDZMLqQOEKl77Caj8PK6Q+FoaWZ25aMmPHBLicw+G0jNfq@vger.kernel.org
-X-Gm-Message-State: AOJu0YyXDzQ0esvBUVSI6Ta4QQm1sO9GQwZjtMV4jLZxeS68UvDf4grH
-	T0P+HpfIytqovV99xRA2zUcqYs5eNvAIV7XmaZ7aPsKKGF3CVzLI/S0l3TOK9d1kt8F8VIPwGnW
-	fycztCSVy4ZMzhzDNrFSrgLkSSgIbrjp69p2SnaTdasr56MHt5Onx5lfgVrDnrUlDm3IG
-X-Gm-Gg: AR+sD12yIwxMo3Eb2++KQP+1kDor46BWdQFgP+ez+1LO5EJ7R+H1rvUUtP+ns1jyzfD
-	lgJF2LI2n8fA6mZnKaAN57KieJLrU7qkGBsumrnuW2P9TxaJAbfVON46UtVjp8n+OIvOKbxUojb
-	5p2EtV/ARDX+SGMxemGDCMHZch2DtBPmmgtegmRs1gkMrOf3/fdbYudpL/m78gj7NlyCuUrPviW
-	EuuFlkkm1SJpkgQ5dFCSlXHn/Hz1eMjN1BokCBPaAc46N3YbwdvUSPwHnCFyHBkNP1vJwtr479x
-	T2zdMP8VbkVtxVd84JEVajjiiWXYSXs4BEaBszaDtd18LMU2KOLPHCPJse5D3vF6poq0bseNQSQ
-	ZxLigY1jW6bgQoKTWXfEhfZMGdOBAi1QmcahXdVU=
-X-Received: by 2002:a17:903:2441:b0:2c9:97a8:aff4 with SMTP id d9443c01a7336-2cf34a30f51mr197917375ad.45.1784626096687;
-        Tue, 21 Jul 2026 02:28:16 -0700 (PDT)
-X-Received: by 2002:a17:903:2441:b0:2c9:97a8:aff4 with SMTP id d9443c01a7336-2cf34a30f51mr197917115ad.45.1784626096243;
-        Tue, 21 Jul 2026 02:28:16 -0700 (PDT)
-Received: from [10.218.21.154] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf344b1348sm72292195ad.18.2026.07.21.02.28.09
+        bh=pc6KxO6xh4zaSrcFhKD91Fl76TRNxmoAYzgik4d1dlo=;
+        b=hn6jEdh8x0NgkPE9HnmEmvc8OQH9qVp399xlr6B4zZTl2pY7LbDt/OgLFx/SenWaeP
+         zTa7Annr7P6dRWHvKFe9WZZOEP+EYTra8BCCTQpswuvidjxRNNqhFOQz5Yzsn5YAcReV
+         PvowPHyP+jo+SqyDpCg+iaq8Gjzob2D5N2dz7GzGk2V1MC2K/Dfu1t1b3iEBE1+oLqej
+         Tts0+FyxqK+/1ia5paJqFw7yJxLqRWPPp+E3BybuVxqMvqVJ00xv//zz2CM/scOq8+rg
+         VRr57Vz6MdjflrPwaPvAkHjF8P8GfbCPZPI0rS/JraHc2CE1NKUC3OPDxXyE2duAxdgD
+         0W+g==
+X-Forwarded-Encrypted: i=1; AHgh+RpHHke57qYr6k6BrlP2wZjO1oa/P4yUosdb9tPGV9A27B4RoAenC6671ViGY9FtM7Yr7qzi4ICqtcZAzAJu@vger.kernel.org
+X-Gm-Message-State: AOJu0YwiZVr+ytaNDEI6uLb57z36A0W8VloIhe26Q+UOxGAuMq9zIb3z
+	tSZg/AFNKgOv8N/ZWnsD6JfZ9qdBPeSyyfhdxqpxFb0qv5CUGekASOgWLknOoLW7hHx/QpThdei
+	7O25eprtSRfNSvPUVHpTb/JhhaG93U8wd6tR8V+Nb/GuT5Y2kPY56gGKQFHtjbkrqqUoh
+X-Gm-Gg: AR+sD10rjGNTRvBSSN2CCmwhoB6gn9qI9BUPBKCgLTgye7Qpdv7jwEiM5WxAnvpdL4P
+	HqaWTsbnd2+mMxNkZXmGRDUsD6ipAPmtPNJ9TcAb+OigX94r0c6AWC19RxHQ9pXp2+T+vii4z+g
+	2nR4ZZMOJahMvaUjsC7R767Tg46/IxO2UkD0Pvw+VQDBKv+Ma8BxTugoBKZYbFltMqVKW6gstwX
+	CFaBLnkAR+YFxjTQXQD1ZLtqHg/N3c1TPxk9QBOPiLwaKizLbqFW/gKAS6+Byebn00we0WWru8i
+	2qmDE9SEnTUoYqCE87faGYBAu9nowU82i4+3h6ru0IJEAQU/PSNz9av4y+bX+s2oIjcuPPb3jdL
+	Vg3Cn3pc5oH+rZJ6d8rPkThdH0QeT
+X-Received: by 2002:a17:90b:580c:b0:38e:2524:724f with SMTP id 98e67ed59e1d1-38e4b410109mr18418052a91.12.1784626137869;
+        Tue, 21 Jul 2026 02:28:57 -0700 (PDT)
+X-Received: by 2002:a17:90b:580c:b0:38e:2524:724f with SMTP id 98e67ed59e1d1-38e4b410109mr18418025a91.12.1784626137393;
+        Tue, 21 Jul 2026 02:28:57 -0700 (PDT)
+Received: from [10.218.15.172] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13d093bd8f6sm3740252c88.4.2026.07.21.02.28.51
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 21 Jul 2026 02:28:15 -0700 (PDT)
-Message-ID: <28cde774-bca2-4bb1-8629-f61f1f92c469@oss.qualcomm.com>
-Date: Tue, 21 Jul 2026 14:58:07 +0530
+        Tue, 21 Jul 2026 02:28:56 -0700 (PDT)
+Message-ID: <05081037-9ed8-4e0d-8480-cfa45e950727@oss.qualcomm.com>
+Date: Tue, 21 Jul 2026 14:58:49 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,206 +89,112 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/3] ASoC: dt-bindings: qcom,q6apm-lpass-dais: Document
- DAI subnode
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>, linux-sound@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-References: <20260720160226.1026440-1-mohammad.rafi.shaik@oss.qualcomm.com>
- <20260720160226.1026440-2-mohammad.rafi.shaik@oss.qualcomm.com>
- <20260721-fiery-sheep-of-piety-4fd04b@quoll>
- <67179d90-6201-462c-9004-9b4cfd114250@oss.qualcomm.com>
- <2d4513e2-7e14-49bc-8b70-6c07c9f99d6b@kernel.org>
- <e2e50e30-6da2-45d9-b472-dae7d41d100d@oss.qualcomm.com>
- <571d0b42-c566-4426-ad55-514c280b9b1b@kernel.org>
+Subject: Re: [PATCH v2] arm64: Disallow disabling boot CPU based on config
+To: Sudeep Holla <sudeep.holla@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+Cc: Thomas Gleixner <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Pavel Machek <pavel@kernel.org>, Len Brown <lenb@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        Will Deacon <will@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org
+References: <20260703-disable_boot_cpu_offline-v2-1-782d16ff58c3@oss.qualcomm.com>
+ <20260703-competent-adaptable-coot-f8daaf@sudeepholla>
+ <4b7fe7e6-2531-4d26-9085-43f40a2ce2e0@oss.qualcomm.com>
+ <20260706-practical-inchworm-of-experience-d4e0ed@sudeepholla>
 Content-Language: en-US
-From: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-In-Reply-To: <571d0b42-c566-4426-ad55-514c280b9b1b@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Sneh Mankad <sneh.mankad@oss.qualcomm.com>
+In-Reply-To: <20260706-practical-inchworm-of-experience-d4e0ed@sudeepholla>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: ooNMH0OtC_I1Z6DAoqFtKjrikywQv2cJ
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDA5OSBTYWx0ZWRfX5Qf6NgNZOhYl
- F/ITIJvZ0TkXgf93s3Z/Zz5FSrOxxVflRT/wUxA2VxqETYmukHCnEyvyS7rIZjqa6kpur/7V30V
- 0iW2Owjg+5k0VITwD0A5+gf6iRUPPeY=
-X-Proofpoint-GUID: ooNMH0OtC_I1Z6DAoqFtKjrikywQv2cJ
-X-Authority-Analysis: v=2.4 cv=Sb7HsPRu c=1 sm=1 tr=0 ts=6a5f3bb1 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDA5OSBTYWx0ZWRfX2IsbjBRqR804
+ vqsRmm4vQQ7vUTAS+csFbU8u5msECnlYmxBkB77omzOia7GirddT+1fvEoB1MtrzJJkOQuRrfy8
+ DM8IJAum480oIdsjhfzDpETF+lCRCFS/adpLUjXCFIEZJytmk3b/+gQFS/lyifAAyI4T5/e2+MU
+ DvZxZuupkMtebHYtmollJyM2CzyvmcCtby+e0PWJzWYg4B+mbB+kiMsj6xQA7vkspqO3GLNjtiC
+ uqWh6ONIw+QsaEGNg05D87J4vWxP/qFTpUZ/SuQAIPqvDqvul9DJaM+Lgzp+/++IaepbUb+V5w+
+ HkywxmPKTFkufl1ttMZ6SPNpLIwB8/QAIuGveef97ifiGD8vJKHsakd7hgpGA+9pKUatPIlYDDI
+ ZNIPsq1lpwxb3ZDHXM01QhFI+WZhntViI7691SF0VW0iJg1/4Wy0yf3g1A8CKyz1jcxSdSkilRV
+ K7wZHbNMLFoFi6ah15g==
+X-Proofpoint-ORIG-GUID: HC_DUn620YOsxSkkYnx4NCgxokUrF6kg
+X-Proofpoint-GUID: HC_DUn620YOsxSkkYnx4NCgxokUrF6kg
+X-Authority-Analysis: v=2.4 cv=M5F97Sws c=1 sm=1 tr=0 ts=6a5f3bda cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Wdb1h0LgAAAA:8 a=bwXcMLKI7JprXPFKUcQA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=GvdueXVYPmCkWapjIL-Q:22
- a=j5gyrzqu0rbr1vhfHjzO:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDA5OSBTYWx0ZWRfX5m9NR/3RiRxi
- 17vrWY1PBt44dKlZXY4aKZj4aYGwgz88YZ+xUCi09rPrlS8o+8Tipik5q9eUpUyRX7r0TPxxzYS
- is0pPbN0FlPaOP1vqSlSkUqNiztjhxfRe7Ta9CO30XcMJgMvm5EVbvZOv9itYmqyziuE3h3BiRu
- 0bRDAOypPhkZQ9+O0y4D1J8lvrcq63wHQlXj28lmBPTAq0vnzi2rlXrCEYXH8xNA4fn8iCnRhfl
- P7JfgbRNbAcqNli3sz6lqs7+gmu/ce+LfbD0IMaWsV5ye9RfVFW+PkGZngfHGEepaFB5kAMosm/
- MOiAgiY5giJ4ccB7wHoxV59M590RGGgglRja4sr0ZaPdH1YViNfDQ9ZwiH2Wk9maYPRDPKHTA3l
- u5Q+AuFFwrdUgnPq0zbb5FbIfayfc2nW4CraMM4BkT+Mm4apPO7WVqXxRCmDLxhhwtusBN5hewF
- JfJE1i4PJ4rm7rG9IQw==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=dWC8hVThGWP9nuoixJoA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDA5OSBTYWx0ZWRfX0MWGDfKj4z7R
+ QLdpE8jfadXmqTWd/M5OnyD+v0KWh9J5S6KucDnBHlLOo/raYGGxYIWxl5vUgIzKtH9Kwxv/HIF
+ vVnvVKOaNfxip8jN3oqYl5ToHnb140g=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-20_06,2026-07-20_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 malwarescore=0 spamscore=0 suspectscore=0 clxscore=1015
- lowpriorityscore=0 impostorscore=0 adultscore=0 phishscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ malwarescore=0 suspectscore=0 clxscore=1015 lowpriorityscore=0
+ priorityscore=1501 spamscore=0 bulkscore=0 impostorscore=0 phishscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
  definitions=main-2607210099
 
 
 
-On 7/21/2026 2:16 PM, Krzysztof Kozlowski wrote:
-> On 21/07/2026 10:42, Mohammad Rafi Shaik wrote:
+On 06-Jul-26 2:46 PM, Sudeep Holla wrote:
+> On Sat, Jul 04, 2026 at 08:43:39AM +0200, Daniel Lezcano wrote:
 >>
+>> Hi Sudeep,
 >>
->> On 7/21/2026 1:50 PM, Krzysztof Kozlowski wrote:
->>> On 21/07/2026 10:14, Mohammad Rafi Shaik wrote:
->>>>
->>>>
->>>> On 7/21/2026 12:18 PM, Krzysztof Kozlowski wrote:
->>>>> On Mon, Jul 20, 2026 at 09:32:24PM +0530, Mohammad Rafi Shaik wrote:
->>>>>> +# Digital Audio Interfaces
->>>>>> +patternProperties:
->>>>>> +  '^dai@[0-9a-f]+$':
->>>>>> +    type: object
->>>>>> +    description:
->>>>>> +      Q6DSP Digital Audio Interfaces.
->>>>>> +
->>>>>> +    properties:
->>>>>> +      reg:
->>>>>> +        maxItems: 1
->>>>>> +        description:
->>>>>> +          Digital Audio Interface ID
->>>>>> +
->>>>>> +      clocks:
->>>>>> +        minItems: 1
->>>>>> +        items:
->>>>>> +          - description: MI2S bit clock
->>>>>> +          - description: MI2S external bit clock
->>>>>> +          - description: MI2S master clock
->>>>>> +
->>>>>> +      clock-names:
->>>>>> +        minItems: 1
->>>>>> +        items:
->>>>>> +          - enum: [bclk, eclk, mclk]
->>>>>> +          - const: mclk
->>>>>
->>>>> This does not match your clocks.
->>>>>
->>>>
->>>> will fix this.
->>>>
->>>> clocks descriptions are misleading because they imply an
->>>> ordered bclk + eclk configuration. I'll drop those descriptions.
->>>>
->>>> will keep only
->>>>
->>>> clocks:
->>>>       minItems: 1
->>>>       maxItems: 2
->>>>
->>>>> I gave you exact syntax to use, then in previous version you used
->>>>> something else. So I reminded. Again you used something else.
->>>>>
->>>>> If you decide not to use it, sure, your right but YOU CANNOT come with
->>>>> clearly invalid code as a substitute.
->>>>>
->>>>> NAK
->>>>
->>>> Suggested change:
->>>> https://lore.kernel.org/all/2b4448d0-81f8-410f-b849-0d957a2d2a17@kernel.org/#t
->>>> minItems: 1
->>>> items:
->>>>     - enum: [ bclk, eclk ]
->>>>     - const: eclk
->>>>     - const: mclk
->>>>
->>>> I tested the suggested schema, but it results in DT binding check failures.
->>>>
->>>> DT binding check errors with the suggested change
->>>> 1. Only mclk enabled
->>>> bedais: dai@10:clock-names:0: 'mclk' is not one of ['bclk', 'eclk']
->>>>
->>>> 2. bclk and mclk enabled
->>>> bedais:dai@10:clock-names:1: 'eclk' was expected
->>>>
->>>>
->>>> With the current version of this patch, I do not see any DT binding
->>>> check issues. I tested all supported clock combinations, and
->>>> dt_binding_check passes successfully in each case.
+>> Le 03/07/2026 à 17:51, Sudeep Holla a écrit :
+>>> (It is always good to cc all PSCI maintainer for any ARM64 CPU
+>>> hotpug/suspend related changes)
 >>>
->>> Your clocks told story that you have up to three clocks, so indeed if
->>> you do not have three clocks then my syntax is not accurate.
+>>> On Fri, Jul 03, 2026 at 04:50:02PM +0530, Sneh Mankad wrote:
+>>>> The Qualcomm SoCs like LeMans, Monaco support suspend to ram which leads
+>>>> the SoC to ACPI S3 similar state where SoC is turned off and DDR is
+>>>> retained. The hardware design on these SoCs forces a constraint to suspend
+>>>> and resume the system on boot CPU / CPU0.
+>>>>
+>>> And you fail to explain why they have that constraint.
 >>>
->>> Before we go further, where is upstream DTS using this?
->>
->> Currently, the Shikra DTS changes already present on the mailing list
->> include this patch as a dependency:
->> https://lore.kernel.org/all/20260616201315.2565115-7-mohammad.rafi.shaik@oss.qualcomm.com/
->>
->> +&q6apmbedai {
->> +	#address-cells = <1>;
->> +	#size-cells = <0>;
->> +	dai@40 {
->> +		reg = <SECONDARY_TDM_RX_0>;
->> +		clocks = <&q6prmcc LPASS_CLK_ID_AUD_INTF2_IBIT
->> +				 LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
->> +		clock-names = "bclk";
->> +	};
->> +};
->>
->>
->> RubikPi3 DTS patch series uses both mclk and bclk:
->> https://lore.kernel.org/all/20260715-rubikpi-next-20260605-v2-6-67601d7a8581@thundersoft.com/
+> 
+> I still need the above to understand the issue/constraint better.
+
+Above mentioned SoCs have boot CPU fixed to CPU0 in HW, whenever SoC boots up/cold boots it starts with CPU0.
+
+These SoCs support suspend to ram which leads to ACPI S3 similar state (where SoC is turned off and DDR is retained)
+PSCI SYSTEM_SUSPEND typically will be executed on boot core itself unless it is already offlined and non boot CPUs gets
+offlined using PSCI CPU_OFF.
+
+As HW constraint always makes the SoC to boot with boot CPU, consider a scenario, where 
+
+Boot CPU is already disabled / offline => suspend to ram is triggered => SoC enters ACPI S3 similar state (only DDR is retained and rest of the SoC is off)
+<So far good>
+
+External wake up arrives (say power key press) => SoC starts booting with CPU0 => CPU0 becomes first one to "land" in kernel now. 
+
+Kernel may later bring up other non-boot CPUs via PSCI CPU_ON calls.t 
+However Kernel had already marked CPU0 as disabled/ offline but same ended up in kernel without PSCI CPU_ON call.
+
+To prevent this inconsistent state, before starting suspend to ram, need to make sure CPU0 is always online from kernel/
+disable offlining of the boot CPU.
+
+Although the HW constraint needs boot CPU to be online only when suspend to ram is triggered, current patch disallows disabling it for simplicity.
+
+> 
+>>> Is it because some secure context is not allowed to migrate ?
+>>>
+>>> We already have a mechanism for that in place and this hack is not at all
+>>> required.
+>> Do you mean a mechanism for the secure context or for preventing CPU0 ?
 >>
 > 
-> Thanks, I did not see "eclk" used.
+> I meant constraint based on secure context.
 > 
 
-Yes, you're right. We have not used eclk in any upstream DTS so far 
-since no such board using this.
+This is not because secure context not allowed to migrate but above mentioned HW constraints.
 
-include/dt-bindings/sound/qcom,q6dsp-lpass-ports.h#L156
-#define LPASS_CLK_ID_PRI_MI2S_IBIT	1  (bclk)
-#define LPASS_CLK_ID_PRI_MI2S_EBIT	2  (eclk)
-
-My mistake—I understand it now. Both represent bit clocks; one is an 
-internal bit clock (IBIT) and the other is an external bit clock (EBIT).
-
-Since they are functionally the same clock type, we can use a single 
-clock name (bclk) for both cases. At this point, only mclk and bclk are 
-required, so there is no need to introduce a separate eclk clock name.
-
-Sorry for the confusion earlier, i understood wrongly.
-
-so can we keep like below syntex.
-
-      clocks:
-         minItems: 1
-         maxItems: 2
-
-       clock-names:
-         minItems: 1
-         items:
-           - enum: [bclk, mclk]
-           - const: mclk
-
-This allows:
-bclk
-mclk
-bclk, mclk
-
-Thanks & regards,
-Rafi.
-
-> Best regards,
-> Krzysztof
+Thanks,
+Sneh
 
