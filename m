@@ -1,148 +1,69 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 760E1437846
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 07:58:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 246B343784E
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 07:58:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784620681; cv=none; b=cT94s92v8YUbMS8odtVTudEYeWhb+JWCC8UIg3IeUIPErC3hgRgmTKJp/nfQtq8O0jo121uyYT/89sNJhZfXHjh8Y9DcFcgu0inMT1hGv0XZM8FTsYKIyU+aeGiJdaqI4yReTFj//Lim5kAT5Wi8RGT2uVHvWQ2sedpyUdhOh3A=
+	t=1784620705; cv=none; b=O+ixKSt39i4uthxxNHyot+rajhLAJRr/VPbwwE+SqNPHvaTHDPCgghcZyA1R/t0EDNsU79I2mjjfk7Lg0LJRkZP8SL4hUouxVLBRLOS613HhRoR4ayknzgK1nsbcfIZfQvMRwtTL3rqtffVMEweN/U0ltODJ/m6gXntLHNIz3HA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784620681; c=relaxed/simple;
-	bh=Qu6V/jFa3L0ra7v1UlZyzgbe/1V/e5d4AsjK/MKCp8c=;
+	s=arc-20240116; t=1784620705; c=relaxed/simple;
+	bh=o7SzHZtWOVx3MD6EXbKzqdNM37BrOtw87B76MVUk8Yo=;
 	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=hUlFwQ4WdKbOK6BeU4SWAb3rajFgVrCBZOHNnmtG9QZ47/i5UmpCSvoRaAxT1fYv/zrp/yZnyBEA5LRsUroyELOD0xgAcTrTrSov4HsPC5hj9pLrE6UUWL3W1HKstDmFwt1uZIjN83bVAuzQPxZZt5W8YtQWvs9PTMimviub7J4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YVmvwJVT; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=lRqe102Ou0tzBeTXYw6LEJE4KXwmkVPBLscYrass2YUegVMswoCkOyOEno/NY0+FTOgH63lBS4pqurfl5hpzzu6bzVTFpIvTmonvAN02UxKOaCDlyrQg2oY+2v+FGutSU43OETvpKf3ZiAnWRf+ypOxCsGpyt6yycLN2iwrVf3M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SIiGB10C; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YVmvwJVT"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C11731F0155E
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 07:57:59 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SIiGB10C"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE0741F00A3D
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 07:58:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784620679;
-	bh=y8ZQiTN586DKOzGjE0xQTVjSc0oG6CWcbCqpe2Jy2M4=;
+	s=k20260515; t=1784620703;
+	bh=o7SzHZtWOVx3MD6EXbKzqdNM37BrOtw87B76MVUk8Yo=;
 	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=YVmvwJVT9Qyay4HbMhb49B9CjDlZz7ft+lQj9lbS0gACumnC1Iv2/dsdm1MV9mu4c
-	 zAFU0hI7Xau7B4/YM37CP9pXGedF5Cl9Ux1RfADSqooiQWl5++I9UPNLx9bYcxW1m8
-	 dWwOXXbyLjJgKyY5IIabDL3n7y2Qbv9FbuP/aoVu6GwF4dZ4uDwHKNeaHY0jS2eqLz
-	 RXoTf9r6Ejv9blA7uC5ei4TYzAeV966wu8kwI6AZd0WBupxsdSKzxFL2wT4iB1WSxL
-	 qBk3K/JlKeou8FmssItan6rHnzpwi6jaVlRe/TmBqMy6lmtyvBR91Q78CeI2qT2hly
-	 ZQt1jND0CNHjw==
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5aec201b582so11102329e87.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 00:57:59 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rq0QmEphpJDPswsMPqtL61GzkwoSwh5o9cTuQF+ZO7zWXbHGp6NKgUjaW9PoskpR/q09Z6zrUHigAwblA+v@vger.kernel.org
-X-Gm-Message-State: AOJu0YxROyRVTXxp6TFVO8/x1OQS0tHeLW1IKHxHMof6uTdMHlMRVxZn
-	GVgKzGE+L27CUDSwGg7RYEzG9up/qEd1D7eIJy/fXFnXPuksoEO+XHn6vIcfMisC7KsXkibztbk
-	oWd4Wjeusfvx6TZCLUSLcU45mWGEVEXDevRGEmxlORw==
-X-Received: by 2002:ac2:554c:0:b0:5ae:bcf8:e7d0 with SMTP id
- 2adb3069b0e04-5b28f9bd551mr2209166e87.55.1784620678478; Tue, 21 Jul 2026
- 00:57:58 -0700 (PDT)
+	b=SIiGB10CB4FQc5eLHQKkzapu5YgYIXQIsxdNqGbhKOuZK46ActjPIoZ1p4c1lNhCt
+	 U1ss8kPpJ24OG+ynoRDVF1OUfZkzaSuOwlxpBREKCNjaf8NFFvAVLua/3TPUY45hRQ
+	 1HTSNIrGk38pWdsSxxhRUrwxr7tw1cj9p6sSZkxrwzpqaVwFTLv3AlWSEUtoB/zO+y
+	 aXWvOTc6TbSNFgPYMbxPZyg6/udYrHTWMSdLd8px3l94PWPM9Zgz07zsb8jh+csNyl
+	 1/s5ysmCEbCfUhl57putcZavsxxQIuGCc5y4uFg6BkG545mNNhaC6P4AmLl3qhT6LY
+	 Xn+qmFWLz3a6g==
+Received: by mail-lf1-f52.google.com with SMTP id 2adb3069b0e04-5aec201b582so11102885e87.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 00:58:23 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RraLmI1ygcMvUDbVzn5v86S0ntLKvg3mcWJ5EzAvoLvj70Iat2uIxp5wFS/AdgEpXAInP5cb2cfgW+XWfpO@vger.kernel.org
+X-Gm-Message-State: AOJu0YyJ5xbA9T4SfiOMQHOj+Ln71RJnz8T55mR2BYPNcV+LGRSJqmT+
+	kjI7I9IfxSDImh5mmZYcy2m42ZlzwcgiAYZfFcMkU7yex+3F6oYIWQRwraAXt16+AIXnircW7fy
+	0KKkP3LKTNVP/ByeERYWcOYXttPCQToG1luRbSYxaCg==
+X-Received: by 2002:a05:6512:61b1:b0:5b2:a21a:10e7 with SMTP id
+ 2adb3069b0e04-5b2a21a12d5mr968914e87.25.1784620702646; Tue, 21 Jul 2026
+ 00:58:22 -0700 (PDT)
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 21 Jul 2026 00:57:57 -0700
+ HTTPREST; Tue, 21 Jul 2026 00:58:20 -0700
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 21 Jul 2026 00:57:56 -0700
+ HTTPREST; Tue, 21 Jul 2026 00:58:20 -0700
 From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <3e14e41f-ecd5-432b-9f52-690a05b38a8a@lunn.ch>
+In-Reply-To: <20260720232716.118402-3-thorsten.blum@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260720-pdev-set-fwnode-instead-of-of-node-v1-0-2dee93f42c54@oss.qualcomm.com>
- <20260720-pdev-set-fwnode-instead-of-of-node-v1-7-2dee93f42c54@oss.qualcomm.com>
- <86b2aba7-b049-47e6-bc94-6cb499b30ce4@lunn.ch> <CAMRc=Mduv_KiB42d4AZddTrFSHmKogd2wh6vBDXomW6ssdfq9A@mail.gmail.com>
- <3e14e41f-ecd5-432b-9f52-690a05b38a8a@lunn.ch>
-Date: Tue, 21 Jul 2026 00:57:56 -0700
-X-Gmail-Original-Message-ID: <CAMRc=Md_zUwYW5KL+p=BRixSaf3Rrc5jnBA3x8Ze+fK+fAOctQ@mail.gmail.com>
-X-Gm-Features: AUfX_mxrzWF5f1w8uOBbvKVmYCYI9DGFBZVEBrX2uI1sc7agH6iCfKo0CQST8Mw
-Message-ID: <CAMRc=Md_zUwYW5KL+p=BRixSaf3Rrc5jnBA3x8Ze+fK+fAOctQ@mail.gmail.com>
-Subject: Re: [PATCH 7/8] net: mv643xx: use platform_device_set_fwnode()
-To: Andrew Lunn <andrew@lunn.ch>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Danilo Krummrich <dakr@kernel.org>, Madhavan Srinivasan <maddy@linux.ibm.com>, 
-	Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
-	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, Andi Shyti <andi.shyti@kernel.org>, 
-	"Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, 
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, Doug Berger <opendmb@gmail.com>, 
-	Florian Fainelli <florian.fainelli@broadcom.com>, 
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
-	"David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, 
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Ulf Hansson <ulfh@kernel.org>, 
-	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
-	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, Lee Jones <lee@kernel.org>, 
-	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>, Srinivas Kandagatla <srini@kernel.org>, 
-	driver-core@lists.linux.dev, linuxppc-dev@lists.ozlabs.org, 
-	linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org, 
-	iommu@lists.linux.dev, netdev@vger.kernel.org, linux-pm@vger.kernel.org, 
-	imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
-	mfd@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
-	linux-sound@vger.kernel.org, Bartosz Golaszewski <brgl@kernel.org>
+References: <20260720232716.118402-3-thorsten.blum@linux.dev>
+Date: Tue, 21 Jul 2026 00:58:20 -0700
+X-Gmail-Original-Message-ID: <CAMRc=MebextZeQxYuEs-MSPUkYT4pSumVLcdxnGk8yO1XSW+nQ@mail.gmail.com>
+X-Gm-Features: AUfX_mxMs76i9Sf9Nh22ahtsh2b9O-7DLBfPk3nQAiIgoMIJmMKPK8X5oTaEOCA
+Message-ID: <CAMRc=MebextZeQxYuEs-MSPUkYT4pSumVLcdxnGk8yO1XSW+nQ@mail.gmail.com>
+Subject: Re: [PATCH] crypto: qce - drop redundant variable in qce_skcipher_done
+To: Thorsten Blum <thorsten.blum@linux.dev>
+Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Bartosz Golaszewski <brgl@kernel.org>, 
+	Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, 20 Jul 2026 20:28:39 +0200, Andrew Lunn <andrew@lunn.ch> said:
-> On Mon, Jul 20, 2026 at 06:01:37PM +0200, Bartosz Golaszewski wrote:
->> On Mon, 20 Jul 2026 16:43:40 +0200, Andrew Lunn <andrew@lunn.ch> said:
->> > On Mon, Jul 20, 2026 at 11:24:54AM +0200, Bartosz Golaszewski wrote:
->> >> Prefer the higher-level platform_device_set_fwnode() over the
->> >> OF-specific platform_device_set_of_node() for dynamically allocated
->> >> platform devices.
->> >>
->> >> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->> >> ---
->> >>  drivers/net/ethernet/marvell/mv643xx_eth.c | 2 +-
->> >>  1 file changed, 1 insertion(+), 1 deletion(-)
->> >>
->> >> diff --git a/drivers/net/ethernet/marvell/mv643xx_eth.c b/drivers/net/ethernet/marvell/mv643xx_eth.c
->> >> index 9caa1e47c174c9d7a161b7f2e2ee12a829b813d4..2f2d6cce8d852b9ec3ab42678a04a7915d1f00cc 100644
->> >> --- a/drivers/net/ethernet/marvell/mv643xx_eth.c
->> >> +++ b/drivers/net/ethernet/marvell/mv643xx_eth.c
->> >> @@ -2780,7 +2780,7 @@ static int mv643xx_eth_shared_of_add_port(struct platform_device *pdev,
->> >>  		goto put_err;
->> >>  	}
->> >>  	ppdev->dev.coherent_dma_mask = DMA_BIT_MASK(32);
->> >> -	platform_device_set_of_node(ppdev, pnp);
->> >> +	platform_device_set_fwnode(ppdev, of_fwnode_handle(pnp));
->> >
->> > This is definitely an OF only driver. There are no other calls to
->> > fwnode functions in this driver, so this is the wrong thing to do.
->> >
->> > Sorry, NACK.
->> >
->>
->> I'm not going to die on this hill but drivers are OF-only until they're not.
->> For example, Qualcomm is now working on a hybrid ACPI-OF approach for
->> laptops[1] and we may end up needing to start converting drivers to fwnode
->> after all.
->>
->> There's no real benefit to sticking to OF-specific APIs unless you need to
->> iterate over all properties of a node or use some other functionality not
->> available in fwnode. The overhead is minimal and it's never a hot path.
+On Tue, 21 Jul 2026 01:27:17 +0200, Thorsten Blum
+<thorsten.blum@linux.dev> said:
+> Remove the local ret variable and return the result directly.
 >
-> There is a lot of benefit to sticking to OF specific APIs, because
-> within the kernel OF is well maintained, has active maintainers, there
-> are tools to validate bindings, etc. ACPI is a Wild West, each driver
-> is a snow flake, there is no review, no binding documentation, no
-> validation tools etc.
->
-> I hope you allow plenty of time to convert any networking drivers,
-> where Linux is driving the hardware, to ACPI. Your first stop will be
-> the UEFI forum making a proposal for MDIO busses, because that
-> currently is not part of ACPI. You will then need to spend time
-> understanding the DT bindings, and figuring out which properties are
-> deprecated so need to stay OF only, and which can be converted to dual
-> OF/ACPI. I've seen too many naive attempts which blindly convert
-> everything, copying all the past errors in the DT binding into the
-> brand new ACPI binding. That will get NACKed.
->
-> OF != ACPI
->
+> Signed-off-by: Thorsten Blum <thorsten.blum@linux.dev>
+> ---
 
-I've never said that and ACPI is actually irrelevant to this discussion. Fwnode
-is the abstraction layer and OF happens to implement it. Unless you need
-fine-grained control (only exposed by the lower-level abstraction) or
-performance - neither of which is the case here - you should use the top-level
-API. As I said: there's no good reason to stick to OF-specific interfaces for
-drivers that don't really require it - and even then, we should strive to fill
-the gaps in the fwnode API instead.
-
-Bart
+Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
