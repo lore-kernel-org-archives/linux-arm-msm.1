@@ -1,87 +1,67 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DFC53451DA
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 11:26:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4E5137B030
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 11:30:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784633196; cv=none; b=iwsMsQQkyhA2mbfQzBox87XEoiUHZf/Ytau0zynX9HaR0GIy9QuT2x1lqzz1eoDZNhZwj96vBGDaM47GEP1aYGFEWnC6Ij2+L7/N2LNl+YG5b20KHwguVgGvYFqHoy8cb0zV5EzYXloW12qs7Z/AIv8aYvsOo/y6uTVyIhn/x0M=
+	t=1784633406; cv=none; b=HsPhr36TQEjwdZilRFZ32RaRemm5HkOXsb6LcNpTJDqgDa8ptg6Ip9qC4Oe21j/Na33+RfNEr29ns5PSnm1pNQo/IBJuJEAemrLF7LI9yUjOB95fzWUAG/tZnlg+fE3/3W/MHrUirTj5UUcVjgaF4dXO/5ROZ0lD40CjLDeQxtk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784633196; c=relaxed/simple;
-	bh=InVu/xdm3HcombIpLOvuma9l79Xu7IXTNVw7xvdTTGs=;
+	s=arc-20240116; t=1784633406; c=relaxed/simple;
+	bh=ai6jPq8Wtn1ummFuqvNnpq2EI6Wg3aANfgCXYu780eY=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=eTSTJ2fe6bhnHq9JoSaMqHv5xkSLsgRB2xnZyRfFQ2ELDU4IiKu+8uaErL49jflaaG8oMCDRCED1XHXtaXpaTc+2WlkpNrFV4Ks6MJyzn/rsSxd2ZbjD+NtDFTEuS7OtRdpSwnVoPTeVGX7L4cLWx3+IHWYYROunIP2DP/icnIE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WFzr5U39; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=agzPm8Yo; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=NJXIaN9rNxgjOYNaA/yKfrRMOaAOLGE1g5r/YBpU5LuiYIPLTA2D4V2Qv9twLQBD58whFlJuAKJZ+I3CEaqiN8dUtdII+6j5sAIaNz0k6HagHUHqMQJhqiGh+qRHVe0QGXsujQJwGe1yY2FjF2ktOAtacNrJuQaNo2YpQnApuQg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=rvUZdufz; arc=none smtp.client-ip=209.85.167.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WFzr5U39";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="agzPm8Yo"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LARMkk945788
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 11:26:30 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	z4EA1vIFZn2u8R1DO2ekCfXZ58M6JuYvASbE4xUk5ds=; b=WFzr5U39Mitdb9HW
-	NuKz6SmfJ52fZW0gxc2vn7S6k+QkkR+ZyG7Ya2OYOWs0cZZOsr3rL6NW7n5+3mpB
-	kIUJlyDSybYAEnpkZsUTT5itRHKTqjT4BbwyQmrS07bWjO2+sz9tC4Z/V+49M+zM
-	KctcKE71ETKwAleXHRr7ovLTDwbiL6YJOoXZw1/iZ20qwm6wpbJ4BZNiGXU2AvIU
-	mRbPJehkqq9jbK7mqHuFuLEbKCU2tLobZpsfuFkvbLmVcJFNT+9bbFoKKg03Hgd6
-	w7TeWCwSidBx9U/GEcVl+Um8jYOYdIlNpi9vdQTK2LlyjWMkylvehsdA+XdVO1JV
-	0UZyQg==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj1es1ytk-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 11:26:29 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-92e57e56ce9so184838485a.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 04:26:29 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="rvUZdufz"
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-5aebf96bc89so1542299e87.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 04:30:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784633189; x=1785237989; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=z4EA1vIFZn2u8R1DO2ekCfXZ58M6JuYvASbE4xUk5ds=;
-        b=agzPm8Yob3VofzKYGftpYR0lEFnv2qE4L3NEEHrebD2k5AC/Kvvma8G12y/awR7VD7
-         QkqFXhDaFTBndiFuf+kQE9CCUsfbp1dpYBcHaf3Iqbx5M8HoZm/UwZVW20SR7ssNC3X8
-         APXPFMLQIVxx+djppjsHkkLr1Pxj4PFtPhSTMYHnch2fVbJwaYlnt5GhNgKdYsQO5ofD
-         tjhOtqCJEGHgfTj4uiTYTiauZOje0ZoWonda8LYNnQujAGzZSh3Z+wr4b+wEft6JtSpB
-         piRy4WkJoLA2zb0+UzsNKpKl1VwHsxUE7CSaldQjxO4VRZhjZF7ymU2E/FgylsfnYK6B
-         unDw==
+        d=linaro.org; s=google; t=1784633403; x=1785238203; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=hJp9wJTddQB51y4t9E/fwU9/+8UJoIvDaCNcWbFBtuY=;
+        b=rvUZdufzCnuIgu2LMg6/u+UjJEBnKy8jo+JLIDwBkpq2iVyYp2lTqW5pK23pIC3TUw
+         tzZ41ues4oy71bdW+urIcdLSY5dIAnAC1bs9Q6VPGy6qb6eOcdMCtsV05loOSe8VwYNq
+         xOgpx14f2M/rvoIiaiLb46KqratKjAalUAHJFCmB5Y+kshJc3wZfuxmv0j9/heD4DlfJ
+         uOXmOCaZaSJmZN0N0UD2RFId06gWdE/enk0L/HYrdqzZO14udzrn2S+qsYA1YUzfU7jK
+         FZmYPUcPApBSwdYYTlZ0Izey8a1F7bTukBlqq7O1nq8yaYz+4FcNc4w3s2oMumi7d3+6
+         VXfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784633189; x=1785237989;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=z4EA1vIFZn2u8R1DO2ekCfXZ58M6JuYvASbE4xUk5ds=;
-        b=akPHtXQ7PHHhJzLvBCTs2kA0xggJHXOgSQvCD56F6Ig8WwLWnR8C3lysZsDO7eQ5iP
-         LXNyDTx9DLGwifwZSsdet5aePbGCKZzhWVUDVYMvX9sV0wi866eufYxXE+1hesmfytl9
-         4NT3nVs9bIzNMq1sd73NtvTS0xP5poed36r76BYs0xIjUMxFrh+Duw6iTkYSjOyrtXAv
-         sKHmmsx51R5q6OGZNtmvD/5UjJyUbnuAeteGEWiLgpQPeHN+cE2MNX0IiiQlkjkDuHgF
-         dw+h0HW2P6ePiTUL7706/kTkEwiqKLw90xpJQbu6ndUG799E53eshdqlg0XMso9NGKuw
-         /Zjw==
-X-Forwarded-Encrypted: i=1; AHgh+RqSuj4aU+3fr/d1VOtl6j7DfbsXl0O815j9LkoYYtJ8iefY+basvNKME3FmtHn5PinDOnAQTh9fbWZZlPWt@vger.kernel.org
-X-Gm-Message-State: AOJu0YwIYMd/Ru2hTPjxval8rYgElT1200SZVNvP5Xy40kmVXjDfRLiE
-	xhGw+i1O8VZTQT8uYSJOvOSeeVRzbrI0AQlglyXYu116eFJqJx+JNZTdLlXJYwEQKNEi3iym2Bm
-	X2lSRcQaPkr4G+zLNWJrojWVhBv2+h8kbFHlimyjvh9Mn65JskYMpoDSlx9VHpc1Lrm2b
-X-Gm-Gg: AfdE7cl3fOXw7EADPXD2moYf48DzxcvMET9aXnbQ2T9QtWZ6kEsGe8nguSVwgFzwDkX
-	o7Z/sEC6cDkYDi21txbIuTmA+aGkMY3pTQdc7DLnbXXMgeNkscXzPavmZxvGa6W8mnV9lKLvhbu
-	plTlpBrBjXk+NQyAfy+6bnIVsWa6UzeJ95xiri5fRJt1rmqFjXX68PWC9aoRsxt49Mp34vgEcYn
-	Dj0nhOwqRgyX81HajdTGVj98d9tVOShF0+d6n1mJPMWYYBseRWlua0dPPY5MRAL483MeG6uK930
-	s9JRL1sR0FQFjSBIXofBWApvzLGUnGNlArkAX74SE47vFNEtYqWn081wykG3kdjO+rmVxq5dgy/
-	6iOw3CqeOl/lqQ+dvdA86wyw7
-X-Received: by 2002:a05:622a:5d3:b0:51b:f40b:2fa2 with SMTP id d75a77b69052e-52672beaa74mr21320381cf.1.1784633189120;
-        Tue, 21 Jul 2026 04:26:29 -0700 (PDT)
-X-Received: by 2002:a05:622a:5d3:b0:51b:f40b:2fa2 with SMTP id d75a77b69052e-52672beaa74mr21320201cf.1.1784633188754;
-        Tue, 21 Jul 2026 04:26:28 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1712a5f837sm589872566b.32.2026.07.21.04.26.26
+        d=1e100.net; s=20251104; t=1784633403; x=1785238203;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=hJp9wJTddQB51y4t9E/fwU9/+8UJoIvDaCNcWbFBtuY=;
+        b=BYVSQh1Q1BT5DivXJ59MNONfcvWUih43709IuRhBqbwfNczGlDmHSq+JhHGig2M4g+
+         UEGZYyEG+3skfPeaSALEVcKiLJxnsFBI+VPcm+EaI7gnjFN9Zk1RYHtoQobqwmeHBelT
+         r606SC/khgrUSevvXWbiT+UJJuQN4Bm3QTTAGyQH/+UKBcSgG+XYcaRjy++jXF14/K6O
+         AS55PFc4CDeYv0LgrkAUtUltBYYEOxWRZuyVWH2/LZUQL+Zc9ds8HNZuUkEr9F7INM7W
+         6/dDhqsrCNCx1tr8sh/2TuvWNUMCrmwg+sHm61TYwonTo9CDNJL1hagqDvjXC+K6N5DQ
+         3AvA==
+X-Forwarded-Encrypted: i=1; AHgh+RqiOj59/e43l7hVnvpYApMOoOJbDPQvAFHt3ZKvz3Pq9LVG+sqJeNCamWUWD5clEcs+ectg6ZuuteXP7uvk@vger.kernel.org
+X-Gm-Message-State: AOJu0YzoWtP0ZnxsaNSmoivjdHGIfW2OOhsj8Fw19ECrKMBlckyQz35o
+	tURV91iJReegYDD3fzjS9/771+QvnTm5ZWVya6GY0FoSKvOiDZM+6Q+HyRgWz6jWeATWvU0hxCh
+	x14vmm23XGw==
+X-Gm-Gg: AR+sD10d2eMgMVvWZTe4RHkZwdJehoCpnMYFYws2Bj5ZZNotEu2BHrEoO1T4YvfWDzM
+	FFfW9itz93KVxRugaOukf9acoPzXAFT4LMQbjmTJ/XlGR9bWU226DsfQytuccpBgGmoxcaB7p5c
+	Q9ZzKJSkNHs8xHxVBTWTQuQi36k+EiY2bPOfj1WjwOweZJCQo5vshmsLTrYsSTuZBObfFHERptT
+	2fn4t66RllwqInUjuSLmXkCuf+sXz1FGPy9X5Y6h1WbT1tJaFm2Q+fCFMPvnw96tnoFTJcNXce0
+	E+apXh5qTykBMtj0diwP6QZKs0x1kaH/7WU2n3nqvv9Yi4X1Px19NLiCJwEh3OzBp90+x+ZXiPE
+	WAH3ZI5N/UHjfVG0wWXEm7xBMw5LchhasSYtKPu1SpB4r5gY2r8hsDm3R0F4cQvX+kyLb11+ZAj
+	M4UUs+U5waPxq6Wndnes8IJgC+GjIxAE5zX0yRfBoJ3d6jI9XrNOX/gYfC55SlBg9Est4=
+X-Received: by 2002:a05:6512:39c1:b0:5b0:2ba4:542d with SMTP id 2adb3069b0e04-5b2a4a79881mr367879e87.3.1784633402587;
+        Tue, 21 Jul 2026 04:30:02 -0700 (PDT)
+Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b291d0fdd6sm2868216e87.0.2026.07.21.04.30.01
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 21 Jul 2026 04:26:27 -0700 (PDT)
-Message-ID: <7ca03680-165c-4ce3-bce1-77c0262ce7a5@oss.qualcomm.com>
-Date: Tue, 21 Jul 2026 13:26:25 +0200
+        Tue, 21 Jul 2026 04:30:02 -0700 (PDT)
+Message-ID: <ce8538e1-3755-461c-b699-87d570436122@linaro.org>
+Date: Tue, 21 Jul 2026 14:30:01 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,72 +69,168 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] dmaengine: qcom: gpi: Fix SE ID and SE Protocol fields
- widths in SCRATCH_0
-To: Chandana Kishori Chiluveru <chandana.chiluveru@oss.qualcomm.com>,
-        Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
-        bjorn.andersson@oss.qualcomm.com
-Cc: praveen.talari@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
-        dmaengine@vger.kernel.org, linux-kernel@vger.kernel.org,
-        mukesh.savaliya@oss.qualcomm.com
-References: <20260721-fix_se_id_and_se_protocol_fields-v2-1-ee1d63d6c549@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260721-fix_se_id_and_se_protocol_fields-v2-1-ee1d63d6c549@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH v13 2/2] phy: qcom-mipi-csi2: Add a CSI2 MIPI DPHY driver
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Vinod Koul <vkoul@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Bryan O'Donoghue <bod@kernel.org>, linux-arm-msm@vger.kernel.org,
+ linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260720-x1e-csi2-phy-v13-0-160c31958863@linaro.org>
+ <20260720-x1e-csi2-phy-v13-2-160c31958863@linaro.org>
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+In-Reply-To: <20260720-x1e-csi2-phy-v13-2-160c31958863@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=SPZykuvH c=1 sm=1 tr=0 ts=6a5f5766 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=k8JVevEbTmNoh4gevwMA:9 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-GUID: amZlTkFrXsowVyM27CAvQLkDcwfShBfM
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDEyMCBTYWx0ZWRfX6/LmDh4AIgwF
- 6r/9hXbc/lQUwcpeTseI5kWWh8QvJ084lZW3+Z1k5YZfqvwOLSPJ1kdqi/vZloYfRQDNm5l37A2
- WfTJ6GFI7CDc8GydxO3oDYwZRJnXTRsTfGo6PzeUaqy//BYY4Z31+ooBoBtX0As7urtiDGn9+tS
- UbWBlcRq6qexEazVhvinQoeIaYb5jWcjoLsIzRgT1R7qsxXGKcFXLgC5JntMSt0GGg9L1SQJNtH
- 3UeZORsGbv8BbJ2Rew6droG1vRaQDpBy1aW9Jb9CrxIpJbX6h9OuFp2x+cLoGXZuhVRVsu56DGR
- GJvXdTsEs8IQTk0fvplvdAFJHaPYK9i3rb46d+CiyBzkhlOfhiQgKv5a16l7lnIDoQVLIJRlm0o
- +ZJmwlL8z3Em3xzAYYvQBp0PhwDN1aN5ZzOadY+g4MU5DOyaQbM3LOI77RE3BbvkXaZlFSflHrR
- 2TWAJzLQyO69aU6zUTA==
-X-Proofpoint-ORIG-GUID: amZlTkFrXsowVyM27CAvQLkDcwfShBfM
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDEyMCBTYWx0ZWRfXz1dTzAbLQF0h
- rf6sksuLpPM9ylgiIIXfxi4e40+lJXs7KJOy3zw33W6dR9knieefwo5OFW6N/mRpGM5UR0UkBPb
- 0Nd0/OYT1DlFRbJZH1O8b8ndj8MwlTU=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-21_01,2026-07-20_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 priorityscore=1501 bulkscore=0 phishscore=0 lowpriorityscore=0
- spamscore=0 clxscore=1015 suspectscore=0 malwarescore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210120
 
-On 7/21/26 1:15 PM, Chandana Kishori Chiluveru wrote:
-> GPII_n_CH_k_SCRATCH_0_SEID is currently defined as GENMASK(2, 0), only
-> 3 bits wide. Serial engine indices >= 8 get silently truncated by
-> FIELD_PREP()/u32_encode_bits() when written into the scratch register,
-> causing the GPI channel to bind to the wrong serial engine. The
-> channel allocate command still succeeds (it doesn't require the
-> target SE to respond), but the subsequent channel start command times
-> out waiting for hardware to complete the handoff to the (incorrectly
-> bound) SE, and gpi_send_cmd() returns -EIO leading to GSI usecase failures
-> for SE8 and SE9 serial engines.
+On 7/20/26 04:11, Bryan O'Donoghue wrote:
+> Add a new MIPI CSI2 driver in DPHY mode initially. The entire set of
+> existing CAMSS CSI PHY init sequences are imported in order to save time
+> and effort in later patches.
 > 
-> Older documentation, such as the SDM845 hardware programming guide,
-> describes the SE ID field as bits [2:0]. More recent QUP hardware
-> documentation defines the field as bits [3:0]. Use the wider definition
-> to match current hardware documentation while remaining compatible with
-> existing platforms and enabling serial engine IDs greater than 7.
+> The following devices are supported in this drop:
+> "qcom,x1e80100-csi2-phy"
 > 
-> Also update the SE Protocol field definition to match the documented
-> register layout and keep both fields correctly packed.
+> In-line with other PHY drivers the process node is included in the name.
+> Data-lane and clock lane positioning and polarity selection via newly
+> amended struct phy_configure_opts_mipi_dphy{} is supported.
 > 
-> Fixes: 5d0c3533a19f ("dmaengine: qcom: Add GPI dma driver")
-> Signed-off-by: Chandana Kishori Chiluveru <chandana.chiluveru@oss.qualcomm.com>
+> The Qualcomm 3PH class of PHYs can do both DPHY and CPHY mode. For now only
+> DPHY is supported.
+> 
+> In porting some of the logic over from camss-csiphy*.c to here its also
+> possible to rationalise some of the code.
+> 
+> In particular use of regulator_bulk and clk_bulk as well as dropping the
+> seemingly useless and unused interrupt handler.
+> 
+> The PHY sequences and a lot of the logic that goes with them are well
+> proven in CAMSS and mature so the main thing to watch out for here is how
+> to get the right sequencing of regulators, clocks and register-writes.
+> 
+> The register init sequence table is imported verbatim from the existing
+> CAMSS csiphy driver. A follow-up series will rework the table to extract
+> the repetitive per-lane pattern into a loop.
+> 
+> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 > ---
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+<snip>
 
-Konrad
+> diff --git a/drivers/phy/qualcomm/phy-qcom-mipi-csi2.h b/drivers/phy/qualcomm/phy-qcom-mipi-csi2.h
+> new file mode 100644
+> index 0000000000000..7e55ae0073704
+> --- /dev/null
+> +++ b/drivers/phy/qualcomm/phy-qcom-mipi-csi2.h
+> @@ -0,0 +1,97 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/*
+> + *
+> + * Qualcomm MIPI CSI2 CPHY/DPHY driver
+> + *
+> + * Copyright (C) 2025 Linaro Ltd.
+> + */
+> +#ifndef __PHY_QCOM_MIPI_CSI2_H__
+> +#define __PHY_QCOM_MIPI_CSI2_H__
+> +
+> +#include <linux/phy/phy.h>
+> +
+> +#define CSI2_MAX_DATA_LANES	4
+> +#define CSI2_DEFAULT_CLK_LANE	7
+
+There is no 7 lanes on CSIPHY, this value is bogus, also it was reported
+previously.
+
+The 'data-lanes' handling is broken in this version of the driver, since
+it does not follow the description from included video-interfaces.yaml.
+
+> +
+> +struct mipi_csi2phy_lane {
+> +	u8 pos;
+> +	u8 pol;
+> +};
+> +
+> +struct mipi_csi2phy_lanes_cfg {
+> +	struct mipi_csi2phy_lane data[CSI2_MAX_DATA_LANES];
+> +	struct mipi_csi2phy_lane clk;
+> +};
+> +
+> +struct mipi_csi2phy_stream_cfg {
+> +	s64 link_freq;
+> +	u8 num_data_lanes;
+> +	struct mipi_csi2phy_lanes_cfg lane_cfg;
+> +};
+> +
+> +struct mipi_csi2phy_device;
+> +
+> +struct mipi_csi2phy_hw_ops {
+> +	void (*hw_version_read)(struct mipi_csi2phy_device *csi2phy_dev);
+> +	void (*reset)(struct mipi_csi2phy_device *csi2phy_dev);
+> +	int (*lanes_enable)(struct mipi_csi2phy_device *csi2phy_dev,
+> +			    struct mipi_csi2phy_stream_cfg *cfg);
+> +	void (*lanes_disable)(struct mipi_csi2phy_device *csi2phy_dev,
+> +			      struct mipi_csi2phy_stream_cfg *cfg);
+> +};
+> +
+> +struct mipi_csi2phy_lane_regs {
+> +	const s32 reg_addr;
+> +	const s32 reg_data;
+> +	const u32 delay_us;
+> +	const u32 param_type;
+> +};
+> +
+> +struct mipi_csi2phy_device_regs {
+> +	const struct mipi_csi2phy_lane_regs *init_seq;
+> +	const int lane_array_size;
+> +	const u32 common_regs_offset;
+> +};
+> +
+> +struct mipi_csi2_genpd {
+> +	const char *name;
+> +	bool scaled;
+> +};
+> +
+> +struct mipi_csi2phy_soc_cfg {
+> +	const struct mipi_csi2phy_hw_ops *ops;
+> +	const struct mipi_csi2phy_device_regs reg_info;
+> +
+> +	const char ** const supply_names;
+> +	const unsigned int num_supplies;
+> +
+> +	const char ** const clk_names;
+> +	const unsigned int num_clk;
+> +
+> +	const struct mipi_csi2_genpd *genpds;
+> +	const unsigned int num_genpds;
+> +};
+> +
+> +struct mipi_csi2phy_device {
+> +	struct device *dev;
+> +	u8 phy_mode;
+> +
+> +	struct phy *phy;
+> +	void __iomem *base;
+> +
+> +	struct clk_bulk_data *clks;
+> +	struct clk *timer_clk;
+> +	u32 timer_clk_rate;
+> +
+> +	struct regulator_bulk_data *supplies;
+> +	struct dev_pm_domain_list *pd_list;
+> +
+> +	const struct mipi_csi2phy_soc_cfg *soc_cfg;
+> +	struct mipi_csi2phy_stream_cfg stream_cfg;
+> +
+> +	u32 hw_version;
+> +};
+> +
+> +extern const struct mipi_csi2phy_soc_cfg mipi_csi2_dphy_4nm_x1e;
+> +
+> +#endif /* __PHY_QCOM_MIPI_CSI2_H__ */
+> 
+
+-- 
+Best wishes,
+Vladimir
