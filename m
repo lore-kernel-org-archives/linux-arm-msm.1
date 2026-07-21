@@ -1,86 +1,88 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5D4033F8BE
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 13:05:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DD0C33F597
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 13:05:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784639154; cv=none; b=pRzuZwViXSOvDn1f5t8dxOOLmCdQHS6WBJ54GFBsYfuowQXSuq/ORnreJAw6kw5S3IB+qfIw/yzPTYt/DocDq9AUtgZUPmkBsFgwZG9jgYJUhisUySz+aHHbatqs3p+H5Bgr3HkKLD4nV7PgOSPq32ikxGrIatcHgOWA0zD/LY4=
+	t=1784639154; cv=none; b=Bhy99oX4W6kKyawPGqK3PGYZIn8lC50z3t/1MyWxfjpV9fO4X56NeHmkWvTLf4uwWCLdlRo97ZBZv4GaK30gFib8rNPvhCcdR/iaNMQTpRNuBSe7DU1OpFaMjgnTRiUSUANVYUtihkYNJVfiB3AsTi2a2qRbST2HjpyVgGl/zvg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1784639154; c=relaxed/simple;
-	bh=n5doDwhLaejisu+itSIDlWO3yMZElEHyBgMi3Ap0Aho=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=GgXzNXfpV/qjklv6O/u8aV5vNBFHfOa83ub1b3/q3z2AHbeFOYGD2u0xDd5lP21pMJGf7LrPrNoaZ+wIgr7LVC6HKaez8qJstJIGu7cHd4MlZnTrL9lm8I9cpxSrRgIUrDw6m0b9jq4LlhheckDbjPhoYfwOEuZl9vrLzqFGDD0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cHGpSNvG; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iv1bw+as; arc=none smtp.client-ip=205.220.168.131
+	bh=0fg/0n8jqlk1rTqLof5aMrLhYmwz4Lkt27r4G+FR9W8=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=pr/2ACbtaWd427vFXixKt7tB9a4qUc29xxTy8Sb8V9NCJMiaOmnNFZ3V4ZNrGUnKGxsj9fER8OZE8pq+TnxFz7oEMiBpZLgkz/akLqcLR7dk6Spf95J86s5nqk9pfic8OZ1cPBGbYbZtI+pVMp0ZrWUlPGdXjtqAFKgGM2NlApQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PCmwzvjZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RsmfE7rx; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cHGpSNvG";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iv1bw+as"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LAR2rM2502820
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 13:05:51 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PCmwzvjZ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RsmfE7rx"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LD5i1K1853473
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 13:05:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=+wR0wRMni/+0ARfdzMaqeG
-	qZmKzox5EW4BI4JkyGp08=; b=cHGpSNvGvkgGCX9PKa1XkTgx4NeOeK0t9e9NPQ
-	9moMyGtv5iea+jwQu4CIvKXcAoOqTU3MHJdVmlWTZrBAa9Amw6xYGLcufqyV5lRz
-	fnuED3TSnSi3/TT52SqFiqoKRxJXAf7uJ3fMu/7rb0aB7NB7R19IxOaVPNrIB0sw
-	Uhk7Z6fAmCw+ac6+XTffVqiXUu+V1IWTgETTCnPDAisZ4PniaoiqpRaAp6FAdA05
-	GVovARlhgKgKbFdr4iqUXVqhJeunuUdhPzN+eV8ZYs2xEc77/jM3e57/+X2F+YMr
-	Jlz7FqdcGXPYJCkA6F2QshfibqtegdAntypifepDyJIsCBtw==
-Received: from mail-vs1-f72.google.com (mail-vs1-f72.google.com [209.85.217.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj6nsrvar-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	0C9IgCI2fyKGPwADUG81tMOL7Xd+RLAneLurfpmZbVM=; b=PCmwzvjZJsGmSwHV
+	GJjJJjGLkb4McjKi/J5CJfZeEjpDCBucAKtPx5c0yL87LUVSXFz2wggQNV6c6pw5
+	xYVrWJPengSkHx0T29xVbWbyXDvMNB/kypXUrb1AFQb71ptRfXMuc5ow0DEF53MA
+	bKvK9J1BOqjAuVZa96oNvQPCa9nokb1xretPhtDQxeupRqEGlbks1mcDsUApfU8f
+	BC+CmXtH/1k8Hqj30RBN7QIbKU8AJMqlaVgbVNHbxfGpF210U9aSGKcaMYmpCe08
+	RiDCSD1lGqnDYFfEU7uOsXHFpKAi1gZ1JjUPe7Y2TeEoaDuaGgTToIQo6ADwwQOM
+	4lUXiA==
+Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj9bs801g-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 13:05:51 +0000 (GMT)
-Received: by mail-vs1-f72.google.com with SMTP id ada2fe7eead31-737f1f1e1bbso3442730137.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 06:05:50 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 13:05:52 +0000 (GMT)
+Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-744c204396cso8602842137.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 06:05:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784639150; x=1785243950; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=+wR0wRMni/+0ARfdzMaqeGqZmKzox5EW4BI4JkyGp08=;
-        b=iv1bw+asXUgWSeIcrpHij63oj9Z4i+IxQSSn2vTprS4zvrBSVFE5bDWZ53tUVkaUl5
-         ARaPee9itmOsYwK4HxohnP5ECGTNT7f/2Zv7yE3Il0IN3UBVFJ8miqO4+TITOAeeiPgr
-         IZ6eLrAlMJA8bp9wWgeaxrTtRRlz5tYLtfZkkrviHJ81WOc6NgzTQUA/EeGfjQqHQOzE
-         lZ+LKQHMKwK7g9yvzmpK6RP41nVxWyE1+Hd/f7uTQFBl8c9SZ2dGDyg2YfIA+FZUpo4t
-         Lsdpbcq4eo17BYsckRG8u+DEs8KIN4pw5WabHhZhTrxN3xrP2bhRyDqQn7e7t6Ycl/5H
-         3UZg==
+        d=oss.qualcomm.com; s=google; t=1784639151; x=1785243951; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=0C9IgCI2fyKGPwADUG81tMOL7Xd+RLAneLurfpmZbVM=;
+        b=RsmfE7rxkijFljplvI8vIh0WY8fLdNKveIgMwTPOswzaxsB1Ek99jTCr6VJX8UD78D
+         6fuFYCIwwHMGvAqtD0QtPZtFf0HekBrD+M3bt32l9T+0nqX3z3256YtZOZGn0eWjwHN1
+         S94VVTN3t+Kc4V6qCcJDN/Rzy+UtimvRJzLMSnkTKkzY+qqJsDg+/WTFWbcNhslrjY/w
+         uDHrrq2mzVEJ32IDWEr6PNONtdF5vkMtUox6CUjPXwxOzTMiB5Kee5UZS/x8UzYdauWf
+         P+YxyYqprGnRnauAGG/XYsvWJdaxG9y/VKnB9jnySKNXi1fLFFqZ1Ut1juDizUR9AcaX
+         +nIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784639150; x=1785243950;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=+wR0wRMni/+0ARfdzMaqeGqZmKzox5EW4BI4JkyGp08=;
-        b=khwK2lltbzn+Z9KQyr7dzu9DsLKF++oq/GsD+AHw/U/bAz2MFpnnlpryi2fZt1Hg/s
-         gO0kqHm6RScX101Pf+LhOgJpTK9ZMtgsm33xDzMICcryxQsq7CTNDsoUoiLJYcBPxzGn
-         sgXdhkOYriGe47Z4MqzvjEIdRqdcp7Ur+y1LeVIRz+UKpRPcrZycVzX2KE6y8LKTiQi9
-         /LE4ANsridCcODFUNjWdLpiiqPG7p8o9noWR0mN5IdwCyU1cmWNcUuTy5vSxO8kc62HW
-         S1LmYt2HqpbbK7xeCFqbV6hln7N6fTxXrBTsJT0d0ZKIPtTkdZdiaelDlEBU7TkjdvuW
-         9zPg==
-X-Gm-Message-State: AOJu0YwTTPob6LfM0mzbtqQ6ggQlkhYjjL2zdDGiWwaPokY7LZiGuNak
-	jAKbEYIsrU5MKp7NrvK5AmLBhey12UKNpOcgrR2gE/dQnc7j/omPVVTBKcJuLvmmpfQvRUNYwyt
-	PSITVCTZ+FeDgLL49/6pqO9aAmQFA9yZjEak2l/CwqVd5WvCNP4mxd0pDgpY2ZWAJEm2q
-X-Gm-Gg: AR+sD10hQBB1H14aoCQSySIaqTI45+QGwTSkLb1M7K8uOJy5fQeVDaETeUFKwLdjP5H
-	4RCwLUifVHypqFou+LB8dLnml6SIs3sT94JiE2egpVem5qx78KIrRIV6dSexT9Avj2WPZTr9mdf
-	5k1YKTuNd3bsn8U59o6fajUHj9bKp2HQ9k20LLl3jP15OueNkoD8N58J9bWQgTgk/PzTh2gXmon
-	GHZAkkubshHQ4CFdpKt18Hruq0h/F9IC9J1+IsFRJiIiaEHkbsrnx2gagk6PI7ATuZdWBw+DHaS
-	Xp2MAxNC0cJLyqHPxRGnORz1sIx/dPUlu+eLm6Bn0MhZokyL0L9Wf/dgZUSrSulpOJWUM3+CT5S
-	HUvSAX9Uya/AsVgXk31cW17sCLvhTaowmBVCEipJZ57/KEOryxu+La8yJ4QKcGxAjXhc3FdKmpL
-	xiOCZpEBlwvG3IjdJSSDA+1nO+vPAzz0SMbp82qa8WJSiRwIgac0w=
-X-Received: by 2002:a05:6102:918:b0:726:cd42:d023 with SMTP id ada2fe7eead31-747534ce270mr4963617137.11.1784639149949;
-        Tue, 21 Jul 2026 06:05:49 -0700 (PDT)
-X-Received: by 2002:a05:6102:918:b0:726:cd42:d023 with SMTP id ada2fe7eead31-747534ce270mr4963555137.11.1784639149039;
-        Tue, 21 Jul 2026 06:05:49 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1784639151; x=1785243951;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=0C9IgCI2fyKGPwADUG81tMOL7Xd+RLAneLurfpmZbVM=;
+        b=VD36Iavrywz80LCTqCFH8STg34x3MtW8FV/0Lmwhb0CkSnrsVT1sP82w4MWfnkUzs2
+         +e6sX8NG7L48EnvAc0YLgU1gPFPj7IXySXd5dE1P17lWLkR0rDk/8iw7i7OVsWNqBjtO
+         k/IQwGf/PmEYZlhXG5RJD3I0zbxKfSwTCEAsyYDxz7u/ftLrviHJ4tt207hD5E3tCrib
+         bKwovM9K1ULN6mXZWyjyTRxMGYQVCuhWNMpMm6/hlh4SHKUzxyYzXu317PPA8c2P4O70
+         Ceal1NDAE2mv06c0pyXRf6Ct+bmPmnI/Y+fIghEoQZZDfr1fxHK84Kpo4GTsmr2+DgPW
+         MiDA==
+X-Gm-Message-State: AOJu0Yzk3QW4We9gb8yiU1LGub+izZ6vxyc/+jX7P1hEqFv1fctiB0Z+
+	kqZB1pg3eLAM9vJKZAkSvo6zulyZK7YqbaCaIrWXrDGuczkXGXh2PKzuE3wMHFkaHS9mE5eTYFZ
+	hSgxTcokeb4q8XS9svcKNRKsH2bw377VdKCTFUOpQQA1TYeJf/Lj3ws2rBu9zvOrl5p4J
+X-Gm-Gg: AR+sD10MfNhMY//NoUslNtjkQ+8j/Cm6Os5djvnIhOXPgNEGNMAnxLnbhGrNYzxzV57
+	2CHLrHydS216puv2yU+d6sHoK3dEZzatTJsJyNpPUlyLqeEpd6KN4nOXTNrENeG7r0fGAiIiuZA
+	Lbn0JS66raa9t3i8r+N0NU0iidtSqKtshz0kvwYrvgVRZ9vKcCMC+0aPINjPUC2jR0hbZ/NDc8O
+	qxRcSC91YrLtD7gDrGYde4RsqaTiWYraZX9zfGeAAqUzEbv6AP3RGKxV45vB3KXFNuM2DSKORE2
+	75jOrnN3G+UPTiRHl1d4sGr27umx5WkiV6oUYqZfdxFWlFCRxtxC1H3af2wj59NLmJ6EhConKSl
+	ueADfcb/BxhEFdUaFugYgjnSB2wPC1yf+7Z5sJwhUqvSQAF9qWdRYHyI8XBUxdPZqjIMclmnY4l
+	oM9bxnYcjdXC+eYEfsBw/XLHscoEf0y0WApGHiAZDwr0zntuqgf94=
+X-Received: by 2002:a05:6102:3f13:b0:745:6b08:c338 with SMTP id ada2fe7eead31-747534ca994mr7023287137.10.1784639151146;
+        Tue, 21 Jul 2026 06:05:51 -0700 (PDT)
+X-Received: by 2002:a05:6102:3f13:b0:745:6b08:c338 with SMTP id ada2fe7eead31-747534ca994mr7023246137.10.1784639150566;
+        Tue, 21 Jul 2026 06:05:50 -0700 (PDT)
 Received: from QCOM-eG0v1AUPpu.na.qualcomm.com ([2a01:e0a:830:450:751c:d61c:c91:60dd])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c17009ae04bsm591898066b.8.2026.07.21.06.05.47
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c17009ae04bsm591898066b.8.2026.07.21.06.05.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Jul 2026 06:05:48 -0700 (PDT)
+        Tue, 21 Jul 2026 06:05:49 -0700 (PDT)
 From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Subject: [PATCH v5 0/5] phy: qcom: Fix possible NULL-deref and runtime PM
- race conditions
-Date: Tue, 21 Jul 2026 15:05:44 +0200
-Message-Id: <20260721-qcom-usb-phy-fix-null-v5-0-a181e2adbd2d@oss.qualcomm.com>
+Date: Tue, 21 Jul 2026 15:05:45 +0200
+Subject: [PATCH v5 1/5] phy: qcom: qmp-combo: Prevent unnecessary PM
+ runtime suspend at boot
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,12 +90,10 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-B4-Tracking: v=1; b=H4sIAKhuX2oC/4WOQQ6CMBBFr0K6dpqhFFBX3sOwqNBKk0qhBSIh3
- N2BjQsXbn7yMvlv/sqiDlZHdk1WFvRso/UdQX5KWN2q7qnBNsRMoCiwFAhD7V8wxQf07QLGvqG
- bnANj8FKavGhSLRl1+6DpdnjvFbEJ1BrboNXXJjBPKSXyUp6zMoUUnLc17/3klO1uPkY+TMrRw
- xen2L2tjaMPyzF3lrv937JZAoJshEKDRZNn6tdbbdv2ASmgSWgJAQAA
-X-Change-ID: 20260720-qcom-usb-phy-fix-null-ff097f56d1e4
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260721-qcom-usb-phy-fix-null-v5-1-a181e2adbd2d@oss.qualcomm.com>
+References: <20260721-qcom-usb-phy-fix-null-v5-0-a181e2adbd2d@oss.qualcomm.com>
+In-Reply-To: <20260721-qcom-usb-phy-fix-null-v5-0-a181e2adbd2d@oss.qualcomm.com>
 To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
         Dmitry Baryshkov <lumag@kernel.org>,
         Wesley Cheng <quic_wcheng@quicinc.com>
@@ -104,144 +104,116 @@ Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
         Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
         Loic Poulain <loic.poulain@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Proofpoint-GUID: ELmUackmBgg8VeDRyx5QH-3rnIPvLo3d
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDEzOCBTYWx0ZWRfXwbR9jN7qjsr3
- c2+5FyZlqZi8UxlSGS6mH3m6O4SIAK8felHB9pWNcbNVpabIccE4UlI5WzlNHywY1/3uWvrhy3o
- UBEqa2hukyQCGPYYZ/LCfb/PUzdaJBA=
-X-Authority-Analysis: v=2.4 cv=ZJjnX37b c=1 sm=1 tr=0 ts=6a5f6eaf cx=c_pps
- a=DUEm7b3gzWu7BqY5nP7+9g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-ORIG-GUID: t0F5ENKIcDrq35cJtf7SXk3atFEZzQEb
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDEzOCBTYWx0ZWRfX63JBAyV/KdyA
+ eFk09dj9ivKUqvobBdXhewu9YgjaFK2J1JtGOSGRpslKWB0/3rnxYF4a4To/nO5crkNC2t8WjxV
+ IsLmnEPtJxO+8yQaxPx/kJq/l17TLbOC3bFYo3/NH+Alf+4dQHLrvSdSKxGaHvWdw5lljApyNWP
+ tO9CVOR+vg1GRI1eXSW1z6oRxoCVbjZtm228FIIx3Wl9pPwRisoTPomp9nbfICXn7lzuneCBayl
+ ab7pqId/fnoLJ6C+u7Niwgzx9YiGrqIgYjqW8+NmldBxRvBRdmmGUwukeSDCoxyabAWV4epkAv6
+ 0/jEH7x7vrv5xjV5oG5KKmLHrR2ikYEjlzCFjsD/cWTNkps1BRMYTVZmNQqvRk67nVaUd1fIslw
+ Tak/LvhYO87uf97sy6HyRbKIw+efI+Vzh7hl658eO7FAFrUh8XFgKcr6fCnumEe5tfpgo3WLhKf
+ XD4poK2z/rcElAZrqOg==
+X-Proofpoint-GUID: t0F5ENKIcDrq35cJtf7SXk3atFEZzQEb
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDEzOCBTYWx0ZWRfX6rPteNiUmKNZ
+ VO1reXZMZZZSxI8gbzNZmTREOuhf5TfEA/Fdu3lQ2EDnbXM+lE5ZSEzMmxrZXT7fv3M5BZLGw5z
+ 7iodIls3/6455TXSAexJNs72Jm6RA+s=
+X-Authority-Analysis: v=2.4 cv=QK1YgALL c=1 sm=1 tr=0 ts=6a5f6eb0 cx=c_pps
+ a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=COk6AnOGAAAA:8 a=JfrnYn6hAAAA:8
- a=9gNpWytEGD6O0ATn_e0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=-aSRE8QhW-JAV6biHavz:22 a=cvBusfyB2V15izCimMoJ:22 a=TjNXssC_j7lpFel5tvFf:22
- a=1CNFftbPRP8L7MoqJWF3:22
-X-Proofpoint-ORIG-GUID: ELmUackmBgg8VeDRyx5QH-3rnIPvLo3d
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDEzOCBTYWx0ZWRfX/n7h0XbCOtjb
- +1i/JIeXm6gdXyyiey2DSB3VNNdyH53OieHDN+JUtAffNv9UMPMQsEgLNKzN0ELEppabRZRbU0b
- lvEWKYkJAfp7YlXDawaEkTAIzkwBQepxPrcanbuKcAsXz6B3L3UT2zN5p35xLokPsDtC8/llQSC
- BRszv5ydcie8snpHcniTU6PaanN89fcmUiovbNbp+3kXZusbMB85AV39HuBv3vW6kFAi4KwhA6r
- QGYsTX/BapeRIjOgzPTUa2Z6/8A9bP3qwIt8laZ5lC7vQWfjcXvG8UO+/D0ixiVFRB7X9C5O8To
- Z0If7KPnfaFhxZA2ZFJa9sYB0p8QsCcapKmPEBSHTY7ChRaWk7+bFHeXVmQWYQNmzHJGJOUmx/J
- PDXpNzoSSKmLDj1nLYRodQbjX9o+nH8VsfZUIS+loolhNB7Un3inkA7z2B+QKU/RZYRN1y5nGNf
- 3EOVPU+GR47Fic06Jdg==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8
+ a=PcYcMbZi39MCwOMHHM8A:9 a=QEXdDO2ut3YA:10 a=gYDTvv6II1OnSo0itH1n:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-21_01,2026-07-20_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 phishscore=0 priorityscore=1501 suspectscore=0 impostorscore=0
- malwarescore=0 spamscore=0 lowpriorityscore=0 adultscore=0 bulkscore=0
+ priorityscore=1501 spamscore=0 phishscore=0 impostorscore=0 bulkscore=0
+ suspectscore=0 clxscore=1015 adultscore=0 lowpriorityscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210138
 
-Address potential NULL pointer dereferences and race conditions related
-to runtime PM in several Qualcomm PHY drivers. In all cases, enabling
-runtime PM before the PHY instance is fully initialized can lead to
-crashes during early runtime suspend callbacks.
+Runtime PM has to be enabled before creating the PHYs, since phy_create()
+only enables runtime PM on the PHY devices if it is already enabled on
+this parent device. This opens a small window where the device can be
+runtime suspended after pm_runtime_enable() and before the later
+pm_runtime_forbid(), causing an unnecessary suspend/resume cycle while
+the PHYs are not yet registered.
 
-- Attach driver data before enabling runtime PM.
-- Introduce initialization flags where needed to avoid dereferencing
-uninitialized pointers.
-- Reorder pm_runtime_enable() and pm_runtime_forbid() calls to prevent
-unnecessary suspend/resume cycles during driver probe.
-- Use devres-managed PM runtime helpers for proper cleanup.
+Take a runtime PM usage reference with pm_runtime_get_noresume() before
+enabling runtime PM and release it once the PHYs have been created to
+prevent the device from being runtime suspended during that window.
 
-Why it happens?
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+---
+ drivers/phy/qualcomm/phy-qcom-qmp-combo.c | 19 ++++++++++++++-----
+ 1 file changed, 14 insertions(+), 5 deletions(-)
 
-The PHY is a supplier of the USB device. A USB device cannot be probed
-until all its suppliers are ready. As long as the PHY is not ready, the
-device core keeps retrying the probe, which fails with -EPROBE_DEFER.
-
-At some point the PHY probe finally runs, but the device core may still be
-attempting to probe the USB device concurrently.
+diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+index cdcfad2e86b1d37650c4d7b0433319837ee9c9d4..affc8e040bb968a5b9d0b6f6fc2694c471368729 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
++++ b/drivers/phy/qualcomm/phy-qcom-qmp-combo.c
+@@ -4934,10 +4934,16 @@ static int qmp_combo_probe(struct platform_device *pdev)
+ 	if (ret)
+ 		goto err_node_put;
  
-Inside __driver_probe_device(), we have:
-
-    ret = really_probe(dev, drv);
-    pm_request_idle(dev);
-
-    if (dev->parent)
-        pm_runtime_put(dev->parent);
-
-    pm_runtime_put_suppliers(dev);
-    return ret;
-
-This means that whenever a USB probe attempt completes, whether with an
-error or not, its suppliers are released via pm_runtime_put_suppliers().
-Releasing suppliers may in turn trigger a runtime suspend.
++	/*
++	 * Enable runtime PM before creating the PHYs, phy_create() only enables
++	 * it on the PHY devices if already enabled on the parent. Hold a usage
++	 * reference so callbacks cannot run until the PHY is ready.
++	 */
++	pm_runtime_get_noresume(dev);
+ 	pm_runtime_set_active(dev);
+ 	ret = devm_pm_runtime_enable(dev);
+ 	if (ret)
+-		goto err_node_put;
++		goto err_pm_put;
+ 	/*
+ 	 * Prevent runtime pm from being ON by default. Users can enable
+ 	 * it using power/control in sysfs.
+@@ -4946,14 +4952,13 @@ static int qmp_combo_probe(struct platform_device *pdev)
  
-In our case, since the PHY is a supplier of the USB device, the USB core
-keeps 'looping' in __driver_probe_device() returning -EPROBE_DEFER until
-the PHY becomes ready. As a result, pm_runtime_put_suppliers() may run
-concurrently with the PHY's probe function. If this happens after
-runtime PM has been enabled for the PHY, but before the driver has
-forbidden suspend or taken a PM reference, the PHY may end up being
-runtime-suspended 'unexpectedly'
+ 	ret = qmp_combo_register_clocks(qmp, usb_np, dp_np);
+ 	if (ret)
+-		goto err_node_put;
+-
++		goto err_pm_put;
+ 
+ 	qmp->usb_phy = devm_phy_create(dev, usb_np, &qmp_combo_usb_phy_ops);
+ 	if (IS_ERR(qmp->usb_phy)) {
+ 		ret = PTR_ERR(qmp->usb_phy);
+ 		dev_err(dev, "failed to create USB PHY: %d\n", ret);
+-		goto err_node_put;
++		goto err_pm_put;
+ 	}
+ 
+ 	phy_set_drvdata(qmp->usb_phy, qmp);
+@@ -4962,11 +4967,13 @@ static int qmp_combo_probe(struct platform_device *pdev)
+ 	if (IS_ERR(qmp->dp_phy)) {
+ 		ret = PTR_ERR(qmp->dp_phy);
+ 		dev_err(dev, "failed to create DP PHY: %d\n", ret);
+-		goto err_node_put;
++		goto err_pm_put;
+ 	}
+ 
+ 	phy_set_drvdata(qmp->dp_phy, qmp);
+ 
++	pm_runtime_put(dev);
++
+ 	if (usb_np == dev->of_node)
+ 		phy_provider = devm_of_phy_provider_register(dev, qmp_combo_phy_xlate);
+ 	else
+@@ -4977,6 +4984,8 @@ static int qmp_combo_probe(struct platform_device *pdev)
+ 
+ 	return PTR_ERR_OR_ZERO(phy_provider);
+ 
++err_pm_put:
++	pm_runtime_put_noidle(dev);
+ err_node_put:
+ 	of_node_put(usb_np);
+ 	of_node_put(dp_np);
 
----
-Changes in v5:
-- Re-introduce phy: qcom: qmp-usb-legacy: Fix possible NULL-deref (sashiko)
-- Link to v4: https://lore.kernel.org/r/20260720-qcom-usb-phy-fix-null-v4-0-4d2a0f06d53a@oss.qualcomm.com
-
-Changes in V4:
-- Instead of moving pm/forbid, increment the pm usage counter before
-  enabling runtime pm and decrement it after the PHY has been created. (Johan)
-- Drop now unnecessary dev_set_drvdata() move in snps-femto-v2
-- Drop 4/5 (qmp-usb-legacy: Prevent unnecessary PM runtime suspend at boot)
-  which is not required anymore. 
-- Rebase
-- Link to v3: https://lore.kernel.org/all/20260205160240.748371-1-loic.poulain@oss.qualcomm.com/
-
-Changes in v3:
-Rebase on next and remove 2/6 (obsolete)
-
-Changes in v2:
-Split patches 2/4 and 3/4 so that the null‑pointer dereference fix and
-the runtime‑PM enable/forbid reordering are logically separated.
-
-Loic Poulain (4):
-  phy: qcom: qmp-combo: Prevent unnecessary PM runtime suspend at boot
-  phy: qcom: qmp-usbc: Prevent unnecessary PM runtime suspend at boot
-  phy: qcom: qmp-usb-legacy: Fix possible NULL-deref on early runtime
-    suspend
-  phy: qcom: snps-femto-v2: Fix possible NULL-deref on early runtime
-    suspend
-
- drivers/phy/qualcomm/phy-qcom-qmp-combo.c     | 10 ++++-----
- .../phy/qualcomm/phy-qcom-qmp-usb-legacy.c    | 21 ++++++++++++-------
- drivers/phy/qualcomm/phy-qcom-qmp-usbc.c      | 10 ++++-----
- drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c | 15 ++++++-------
- 4 files changed, 32 insertions(+), 24 deletions(-)
-
---
-2.34.1
-
-To: Vinod Koul <vkoul@kernel.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-To: Dmitry Baryshkov <lumag@kernel.org>
-To: Wesley Cheng <quic_wcheng@quicinc.com>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: linux-phy@lists.infradead.org
-Cc: linux-kernel@vger.kernel.org
-
----
-Loic Poulain (5):
-      phy: qcom: qmp-combo: Prevent unnecessary PM runtime suspend at boot
-      phy: qcom: qmp-usbc: Prevent unnecessary PM runtime suspend at boot
-      phy: qcom: qmp-usb-legacy: Fix possible NULL-deref on early runtime suspend
-      phy: qcom: qmp-usb-legacy: Prevent unnecessary PM runtime suspend at boot
-      phy: qcom: snps-femto-v2: Fix possible NULL-deref on early runtime suspend
-
- drivers/phy/qualcomm/phy-qcom-qmp-combo.c      | 19 ++++++++++++-----
- drivers/phy/qualcomm/phy-qcom-qmp-usb-legacy.c | 28 +++++++++++++++++++++-----
- drivers/phy/qualcomm/phy-qcom-qmp-usbc.c       | 18 +++++++++++++----
- drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c  | 17 +++++++++++++---
- 4 files changed, 65 insertions(+), 17 deletions(-)
----
-base-commit: 910b828b22b7b91054b3bd4be676a017444b0e00
-change-id: 20260720-qcom-usb-phy-fix-null-ff097f56d1e4
-
-Best regards,
 -- 
-Loic Poulain <loic.poulain@oss.qualcomm.com>
+2.34.1
 
