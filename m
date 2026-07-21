@@ -1,33 +1,88 @@
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 811D134F279;
-	Tue, 21 Jul 2026 16:51:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04744385D91
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 16:55:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784652722; cv=none; b=jp7xgthIjVuS1h6kQlaQs7nFEGxCg+Y/xmNO386llzSFbvwjkP07ssuc7ouDfODBdx4dknBeSEMeHDFfr7IP9vpGeiCHbPnqjvynzXKDwFfU0aFoQrSX7UfEkkBHRTHITSub6ZkMfJEtSQBL3MITmRSULioE/gk85UI7VEqZ7jA=
+	t=1784652905; cv=none; b=in64aleADJspCor17QDbZNLhXuuzHPlyge+hy4BJsNeblhvBUn6wlaLZ/PvnBp1NrOm8TgUnVNiMibdMY7GODNvwO7gVTRiU5TgKwB23kFUbqH6QZPoZMdh1YUmlHIHi1n6TLu1uJQZvPx4oae3hQr+SPMj2sLmbepVsVdNzADc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784652722; c=relaxed/simple;
-	bh=2gr/BESiJ3kodzJBF5f2mgZcxG03bcuZ59hnvhuJXQs=;
+	s=arc-20240116; t=1784652905; c=relaxed/simple;
+	bh=tUOGkrU38mJEYQ6zuey7GmqIR1DTnR211ZbxiXdMIpk=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=nL+j0oUSxSlBuVLhYc20NjYMKE+yf8+I9xOmB6dsBi+UjgdKTL4IGLGv5bED52aBI/k/2rWDh4njolbGSwt3JHbtlUy1vZ+O+IfbGZHh9FKIniRzlLtAVM09yZlf3mvQ6OanuDde5VE66s3NWw2yyorg1wRfYjKMugqxxre44ZQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=bN4o1aFM; arc=none smtp.client-ip=217.140.110.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
+	 In-Reply-To:Content-Type; b=KZ38fjjSJ/IJx8tdwnSPQ62CsPkABV6bUpC80hCipKPvyJDHkiP/c34v/jPgLdumKG8/yon/+XK/RmusYT+eB+LYqHydNH0ZFxHyxmKuijhqH/68A7pCC64KBQl9s3rSZmOBjE+sQrtJC+zmXSXsc4KRzobOXlL0Y0Ni+QYhB3c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=UjCIE/t/; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Jifx4CeU; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="bN4o1aFM"
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 899C41595;
-	Tue, 21 Jul 2026 09:51:54 -0700 (PDT)
-Received: from [10.2.212.23] (e121345-lin.cambridge.arm.com [10.2.212.23])
-	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E207D3F86F;
-	Tue, 21 Jul 2026 09:51:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1784652718; bh=2gr/BESiJ3kodzJBF5f2mgZcxG03bcuZ59hnvhuJXQs=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=bN4o1aFMcwa3S9SAqoIL1boAMeE3gZP9TOluuP4zN0UfLC+3w28cwjvIdoqQ7Rp42
-	 i1PzPalj7/iIyhwYgeBbvJYm1gimbM4tmwbRkjhgwt+2rDlRpImzZYVloqhn9lYEJC
-	 xpWBUjvQazoymwpYYFMaczeTJrYTZtACw5e4Jhs0=
-Message-ID: <135476af-6f4b-49d5-9727-af77465a79b9@arm.com>
-Date: Tue, 21 Jul 2026 17:51:53 +0100
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="UjCIE/t/";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Jifx4CeU"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LDg35p1592023
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 16:55:03 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	l1o8yex40q2dVFxxH/gSrgSpN6Ch4JjKqRjhqPQXctg=; b=UjCIE/t/65fmEIq0
+	kq92YjXNqmxGYGE81D2sfm+knDmJT/TNZRdGfegorbV6og/Io4zCHGkrO00UtGqQ
+	t9wotnCGH+wXIzfdOzGVy6D2b9GDO1yT/USMFtBiwAjS0A79zcP60xeA1xs7SvXT
+	6OPFESLQ+Jbu9E1tgZEHuEO0+NhPLf9b5ZNtt12Y3C0hj19IOM1gjQy9xjs3Ujx4
+	9iArhVY5zAXHwEeyqnYgCY1iD8GYU274RAnrI79hI81eSmNiopFcCKpLVY45PRf5
+	Dn54CcHUJ+vl5M9qF6rCNXRFDaMDjB9uDj51enUvukdKRwFlTGQKLgnr9QUAYcB+
+	XBUPiQ==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj0as3yjc-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 16:55:03 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cb4cdf95b5aso9266692a12.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 09:55:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784652902; x=1785257702; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=l1o8yex40q2dVFxxH/gSrgSpN6Ch4JjKqRjhqPQXctg=;
+        b=Jifx4CeUlstoBuGCBbiEktS+hgG71KzAN73QPYp7+E+r8AW65LDQ5S8SYw/YnArBd2
+         cAtDQMN7VhvptHZ+7txg51YjY8pHZn7BpEjgoPuZENocPoCKMq5r8Hbk6SmAArmnvwen
+         nrLHPZ82ewbEqSh8oZZnbN8lB7HSO8StSI53vD8OjJIcfcp5przvbfCTy368I8tgWft6
+         UdYLot36ZyPJzml5Ni3Ka4D5vI6RrMa0wcYlPr9TaGvfLvN/hBW5Mx1MuB7XFl8vNWKD
+         /nM+SrClM65Lv+QocMRr4rYODgSo2EvNuceqyrkEp8Q8Nzv4/4WZIFDfeSdSAI/UaW2I
+         c8Iw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784652902; x=1785257702;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=l1o8yex40q2dVFxxH/gSrgSpN6Ch4JjKqRjhqPQXctg=;
+        b=V7oEM2KXZqVNYZQ4pcW6dzvcmIvWBwTDpRGL2NF9Qx1RtqPWXPbLoxpq8KSF0mzlDX
+         uc9EiBTmjMzxBrfoTz92KS5YdZqKSUUpx/l1fobC9JOVWa3FGsGlcWUh+0RSl1pXG6Qu
+         e7iQuLWjDNujG/TfISAZvg1rZGmEukWv3jnBPFZlhnS5kbrJI2qRw6iKyFHugNGEdXoz
+         JhLFlbYhn+xiG1fCHbGv44E3KkVLGFPGoaP50RPEdfLZiym8LZYFIBxNWjcFJHOBfXND
+         avDVz5Fdqkedoj9Yjgi9zX/jn5GprE7vZdr2bgsNzeD5WtCD2iQ5tehuxPS5et9N5mxL
+         wznA==
+X-Forwarded-Encrypted: i=1; AHgh+RrToH22vfZYzz+2vbtn4SZ/K5maWAIp2hvisym8wmkJKWwn3IpMYPn0wsWypStzf/tzW0Bv6oJgQmiMPJ+c@vger.kernel.org
+X-Gm-Message-State: AOJu0YyJqYWyVWdPaNgP/Yo5dxxxh8+QOwY2vwDrmxvGm7pXEIi69PXY
+	OwsgPS09KUfYoyrBLSTP2NVIkZEh/p3PKgbieB49OJXz1XcSH/uQW20nPi0Tvd4G0g6L8GmvjN7
+	1pNl758+YpQ1f745ghngp+9bSgNrVT9TEncml2Jit48G0dzrRuR1RnonoO+WN+r9MuiZg7cnUP2
+	pX
+X-Gm-Gg: AfdE7ckEd+qs1c5atyIyXbmuvLBsc1GAh+AMRtDnRE2sQdkqclDPM8iyH9g0yBskgA8
+	HUNUDnjFDvis2iNy9Ic0ZYXDrNQgUzAgozClnx8k3D/eB7ZiPjU8PqJEjcZgEqkHLJHOhrwCYT+
+	rPSwPhummBR8LTK74CDynb/M0PVj/XuztpzcBi4HZ9YyvG3jQEA9EyeZAsXr/VcRwKtvQ/pZ0rb
+	R4sHMk0RQVxLUtVM++rXwWaP6UVBKFxh/a34XP26LtiAq2zi66EIGRU4ToVDNMhEVRPmawTwfNe
+	aO3Vw+ZhERzgUh0GPVMgX5Ut433H0gY9DggqZD8nqaCHAR/YtmjKbfzo0MBCWBWRv03RqFvdvLy
+	Hneu4mYbjYTwu7xrZe//BKsFHd4uVRO5fhHvKS8jz7AI7q782HtD7MZmcnXGI/EX/bQmk9tI7
+X-Received: by 2002:a05:6300:2704:10b0:3c4:1708:9cd8 with SMTP id adf61e73a8af0-3c417089d37mr2522200637.76.1784652902522;
+        Tue, 21 Jul 2026 09:55:02 -0700 (PDT)
+X-Received: by 2002:a05:6300:2704:10b0:3c4:1708:9cd8 with SMTP id adf61e73a8af0-3c417089d37mr2522176637.76.1784652902041;
+        Tue, 21 Jul 2026 09:55:02 -0700 (PDT)
+Received: from ?IPV6:2401:4900:1cb4:d969:b5b5:8f5b:ef15:61de? ([2401:4900:1cb4:d969:b5b5:8f5b:ef15:61de])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3147dc61637sm657080eec.8.2026.07.21.09.54.57
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 21 Jul 2026 09:55:01 -0700 (PDT)
+Message-ID: <8885f841-798e-4c8b-af10-88551f39f2a2@oss.qualcomm.com>
+Date: Tue, 21 Jul 2026 22:24:55 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,432 +90,78 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] iommu/io-pgtable-arm: Add support for contiguous hint
- bit
-To: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>,
- "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev,
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- Prakash Gupta <prakash.gupta@oss.qualcomm.com>
-References: <20260721-iommu_contig_hint-v2-1-90c731a41163@oss.qualcomm.com>
-From: Robin Murphy <robin.murphy@arm.com>
-Content-Language: en-GB
-In-Reply-To: <20260721-iommu_contig_hint-v2-1-90c731a41163@oss.qualcomm.com>
+Subject: Re: [PATCH v2] dmaengine: qcom: gpi: Fix SE ID and SE Protocol fields
+ widths in SCRATCH_0
+To: Chandana Kishori Chiluveru <chandana.chiluveru@oss.qualcomm.com>,
+        konrad.dybcio@oss.qualcomm.com, Vinod Koul <vkoul@kernel.org>,
+        Frank Li <Frank.Li@kernel.org>, bjorn.andersson@oss.qualcomm.com
+Cc: praveen.talari@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+        dmaengine@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260721-fix_se_id_and_se_protocol_fields-v2-1-ee1d63d6c549@oss.qualcomm.com>
+Content-Language: en-US
+From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
+In-Reply-To: <20260721-fix_se_id_and_se_protocol_fields-v2-1-ee1d63d6c549@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDE3OCBTYWx0ZWRfX2J2yha7UuG2I
+ 4wla4kreCniurDA/EsLNiwGy7LjCSguylsp5JR4679ra8cSuNOETP5l+nZ5VdOr9KHL+xSgLhCq
+ jcblOhg2Gr3SiLik13/ygMDnhz8XRaAlzK5CvRmdROBSgH6Ue3tZmFg+xjOAEzVJ3Ia/e35yhNj
+ YA3BWmMLU7yyU6xiJ730tI64qx51lt4A2OPpW+StsmNX+izMM+D6zNK6/du3TY076fzqtFiDGPr
+ se5wmrycoaVQR0mqdY6z2jXz/NvAfV4o/Wcj5Gi2L/g4tBroIg5H84z5TW4ZWgWvIwpl7MaHMWf
+ 6tIKWiqtBkiZ3fMaIk42VqKAt+uLnXrMuEmKBXCTdYsLbhR8iF6tVI2Jk9/9cmCt67mAPE5Flwk
+ wGOCVM+JEpvqTYd/gNTVMGcBTtD5s3YRK4LEjEnB+0ONYB2z6TtB9Au7Eid2d+bwD1/O7kBz3J/
+ YfQf6i4k28CrJo9vo0A==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDE3OCBTYWx0ZWRfX7ZJm/romnxTZ
+ zQe0IuzMkdhZ7tfzzdoba3HDwyI958nA+Lf+17RRB/uDlTH+dQO8LxA/yqIeeaWQxGPbsvxYISA
+ 7FNJvOz8V9ldZ3Xi4P89gTETfxTVtyc=
+X-Authority-Analysis: v=2.4 cv=DoFmPm/+ c=1 sm=1 tr=0 ts=6a5fa467 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=bC-a23v3AAAA:8
+ a=EUspDBNiAAAA:8 a=k8JVevEbTmNoh4gevwMA:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-GUID: zKp8Dm7UocHcJ9KF55NSxEO_TGdHFp0b
+X-Proofpoint-ORIG-GUID: zKp8Dm7UocHcJ9KF55NSxEO_TGdHFp0b
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-21_03,2026-07-20_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 malwarescore=0 lowpriorityscore=0 clxscore=1015 phishscore=0
+ suspectscore=0 impostorscore=0 bulkscore=0 priorityscore=1501 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210178
 
-On 21/07/2026 4:28 am, Vijayanand Jitta wrote:
-> From: Prakash Gupta <prakash.gupta@oss.qualcomm.com>
+
+
+On 7/21/2026 4:45 PM, Chandana Kishori Chiluveru wrote:
+> GPII_n_CH_k_SCRATCH_0_SEID is currently defined as GENMASK(2, 0), only
+> 3 bits wide. Serial engine indices >= 8 get silently truncated by
+> FIELD_PREP()/u32_encode_bits() when written into the scratch register,
+> causing the GPI channel to bind to the wrong serial engine. The
+> channel allocate command still succeeds (it doesn't require the
+> target SE to respond), but the subsequent channel start command times
+> out waiting for hardware to complete the handoff to the (incorrectly
+> bound) SE, and gpi_send_cmd() returns -EIO leading to GSI usecase failures
+> for SE8 and SE9 serial engines.
 > 
-> Add support for the contiguous hint (CONT) bit in ARM LPAE page tables.
-> When a set of consecutive PTEs map a naturally-aligned contiguous block
-> of memory, the CONT bit can be set on all entries in the group to allow
-> the hardware to combine them into a single TLB entry, improving TLB
-> utilization.
+> Older documentation, such as the SDM845 hardware programming guide,
+> describes the SE ID field as bits [2:0]. More recent QUP hardware
+> documentation defines the field as bits [3:0]. Use the wider definition
+> to match current hardware documentation while remaining compatible with
+> existing platforms and enabling serial engine IDs greater than 7.
 > 
-> The contiguous hint sizes per granule are:
+> Also update the SE Protocol field definition to match the documented
+> register layout and keep both fields correctly packed.
 > 
->    Page Size | CONT PTE |  Block  | CONT Block | L1 Block | CONT L1
->    ----------+----------+---------+------------+----------+---------
->        4K    |   64K    |   2M    |    32M     |    1G    |   16G
->       16K    |    2M    |  32M    |     1G     |          |
->       64K    |    2M    | 512M    |    16G     |          |
-> 
-> Contiguous hint sizes are advertised in pgsize_bitmap so that IOMMU API
-> users can align allocations to these sizes and benefit from the TLB
-> optimization automatically.
-> 
-> Partial unmaps of a contiguous group are rejected, ensuring the full
-> group is always invalidated as a unit. The
-> IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT quirk allows SMMU drivers to disable
-> contiguous hint support at runtime for hardware with
-> implementation-specific errata.
-> 
-> Co-developed-by: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
-> Signed-off-by: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
-> Signed-off-by: Prakash Gupta <prakash.gupta@oss.qualcomm.com>
+> Fixes: 5d0c3533a19f ("dmaengine: qcom: Add GPI dma driver")
+> Signed-off-by: Chandana Kishori Chiluveru <chandana.chiluveru@oss.qualcomm.com>
 > ---
 > Changes in v2:
-> - Extend contiguous hint support to level-1 (1G) blocks for the 4K granule,
->    adding a CONT L1 (16G) grouping alongside the existing CONT PTE/CONT Block
->    sizes.
-> - Replace the compile-time CONFIG_IOMMU_IO_PGTABLE_CONTIG_HINT Kconfig option
->    with a runtime quirk, IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT, so SMMU drivers
->    can opt out per page table instance instead of at build time.
-> - Simplify __arm_lpae_map() to program the CONT-sized block directly via
->    arm_lpae_init_pte() instead of recursing into the next level with an
->    adjusted pgcount.
-> - Reject unmaps that are not aligned to the contiguous group size with
->    WARN_ON_ONCE(), instead of clearing the CONT bit on a partial group before
->    invalidation.
-> - Link to v1: https://patch.msgid.link/20260618-iommu_contig_hint-v1-1-4502a59e6388@oss.qualcomm.com
-> 
-> To: Will Deacon <will@kernel.org>
-> To: Robin Murphy <robin.murphy@arm.com>
-> To: "Joerg Roedel (AMD)" <joro@8bytes.org>
-> Cc: linux-arm-msm@vger.kernel.org
-> Cc: linux-arm-kernel@lists.infradead.org
-> Cc: iommu@lists.linux.dev
-> Cc: linux-kernel@vger.kernel.org
+> - Updated the protocol field value properly
+> - Link to v1: https://patch.msgid.link/20260720-fix_se_id_and_se_protocol_fields-v1-1-e41dbb107d97@oss.qualcomm.com
 > ---
->   drivers/iommu/io-pgtable-arm.c | 167 +++++++++++++++++++++++++++++++++++++++--
->   include/linux/io-pgtable.h     |   3 +
->   2 files changed, 162 insertions(+), 8 deletions(-)
-> 
-> diff --git a/drivers/iommu/io-pgtable-arm.c b/drivers/iommu/io-pgtable-arm.c
-> index 476c0e25631af..241efa37f8631 100644
-> --- a/drivers/iommu/io-pgtable-arm.c
-> +++ b/drivers/iommu/io-pgtable-arm.c
-> @@ -86,6 +86,21 @@
->   /* Software bit for solving coherency races */
->   #define ARM_LPAE_PTE_SW_SYNC		(((arm_lpae_iopte)1) << 55)
->   
-> +/* PTE Contiguous Bit */
-> +#define ARM_LPAE_PTE_CONT		(((arm_lpae_iopte)1) << 52)
-> +
-> +/*
-> + * CONTIG HINT SUPPORT TABLE
-> + *
-> + *------------------------------------------------------------------
-> + *| Page Size | CONT PTE |  Block  | CONT Block | L1 Block | CONT L1 |
-> + *------------------------------------------------------------------
-> + *|     4K    |   64K    |   2M    |    32M     |    1G    |   16G   |
-> + *|    16K    |    2M    |  32M    |     1G     |          |         |
-> + *|    64K    |    2M    | 512M    |    16G     |          |         |
-> + *------------------------------------------------------------------
-> + */
-> +
->   /* Stage-1 PTE */
->   #define ARM_LPAE_PTE_AP_UNPRIV		(((arm_lpae_iopte)1) << 6)
->   #define ARM_LPAE_PTE_AP_RDONLY_BIT	7
-> @@ -453,6 +468,112 @@ static arm_lpae_iopte arm_lpae_install_table(arm_lpae_iopte *table,
->   	return old;
->   }
->   
-> +static inline bool arm_lpae_cont_hint_enabled(struct io_pgtable_cfg *cfg)
-> +{
-> +	return !(cfg->quirks & IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT);
-> +}
-> +
-> +static inline int arm_lpae_cont_ptes(unsigned long size)
-> +{
-> +	if (size == SZ_4K)
-> +		return 16;
-> +	if (size == SZ_16K)
-> +		return 128;
-> +	if (size == SZ_64K)
-> +		return 32;
-> +	return 1;
-> +}
-> +
-> +static inline unsigned long arm_lpae_cont_pte_size(unsigned long size)
-> +{
-> +	return arm_lpae_cont_ptes(size) * size;
-> +}
-> +
-> +static inline int arm_lpae_cont_blks(unsigned long size)
-> +{
-> +	if (size == SZ_2M)
-> +		return 16;
-> +	if (size == SZ_32M)
-> +		return 32;
-> +	if (size == SZ_512M)
-> +		return 32;
-> +	if (size == SZ_1G)
-> +		return 16;
-> +	return 1;
-> +}
-> +
-> +static inline unsigned long arm_lpae_cont_blk_size(unsigned long size)
-> +{
-> +	return arm_lpae_cont_blks(size) * size;
-> +}
-> +
-> +static unsigned long arm_lpae_get_cont_sizes(struct io_pgtable_cfg *cfg)
-> +{
-> +	unsigned long pg_size, blk_size, cont_sizes;
-> +	int pg_shift, bits_per_level;
-> +
-> +	if (!cfg->pgsize_bitmap || !arm_lpae_cont_hint_enabled(cfg))
-> +		return 0;
-> +
-> +	pg_shift = __ffs(cfg->pgsize_bitmap);
-> +	bits_per_level = pg_shift - ilog2(sizeof(arm_lpae_iopte));
-> +	pg_size = (1UL << pg_shift);
-> +	blk_size = (pg_size << bits_per_level);
-> +
-> +	cont_sizes = arm_lpae_cont_pte_size(pg_size) |
-> +		     arm_lpae_cont_blk_size(blk_size);
-> +
-> +	/*
-> +	 * Only add the level-1 contiguous block size if level-1 block mappings
-> +	 * are supported for this granule. For 16K and 64K granules, level-1
-> +	 * block mappings do not exist, so blk_size << bits_per_level would not
-> +	 * be in pgsize_bitmap after arm_lpae_restrict_pgsizes() has filtered it.
-> +	 * For 4K granule, 1G blocks are supported, giving a 16G contiguous group.
-> +	 */
-> +	if (cfg->pgsize_bitmap & (blk_size << bits_per_level))
-> +		cont_sizes |= arm_lpae_cont_blk_size(blk_size << bits_per_level);
-> +
-> +	return cont_sizes;
-> +}
-> +
-> +static u32 arm_lpae_find_num_cont(struct arm_lpae_io_pgtable *data, int lvl)
-> +{
-> +	if (lvl == ARM_LPAE_MAX_LEVELS - 1)
-> +		return arm_lpae_cont_ptes(ARM_LPAE_BLOCK_SIZE(lvl, data));
-> +	else if (lvl >= ARM_LPAE_MAX_LEVELS - 3)
-> +		return arm_lpae_cont_blks(ARM_LPAE_BLOCK_SIZE(lvl, data));
-> +	else
-> +		return 1;
-> +}
+>   drivers/dma/qcom/gpi.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
 
-This still seems horribly overcomplicated - the leaf sizes never 
-overlap, and we already have the per-level size to hand in both map and 
-unmap, so I wouldn't imagine needing anything more than e.g.:
-
-static int arm_lpae_num_cont(size_t size)
-{
-	switch (size) {
-	case SZ_4K:
-	case SZ_2M:
-	case SZ_1G:
-		return 16;
-	case SZ_64K:
-	case SZ_32M:
-	case SZ_512M:
-		return 32;
-	case SZ_16K:
-		return 128;
-	default:
-		return 1;
-	}
-}
-
-> +
-> +static u32 arm_lpae_check_num_cont(struct arm_lpae_io_pgtable *data, size_t size, int lvl)
-> +{
-> +	int num_cont;
-> +
-> +	num_cont = arm_lpae_find_num_cont(data, lvl);
-> +	if (size == num_cont * ARM_LPAE_BLOCK_SIZE(lvl, data))
-> +		return num_cont;
-> +	else
-> +		return 1;
-> +}
-> +
-> +static bool arm_lpae_pte_is_contiguous_range(struct arm_lpae_io_pgtable *data,
-> +					     unsigned long size,
-> +					     int lvl, u32 *num_cont)
-> +{
-> +	unsigned long block_size;
-> +
-> +	if (!arm_lpae_cont_hint_enabled(&data->iop.cfg)) {
-> +		*num_cont = 1;
-> +		return false;
-> +	}
-> +
-> +	*num_cont = arm_lpae_find_num_cont(data, lvl);
-> +	block_size = ARM_LPAE_BLOCK_SIZE(lvl, data);
-> +
-> +	return size == (*num_cont * block_size);
-
-This can't be right if it's not also accounting for the relative alignment.
-
-> +}
-> +
->   static int __arm_lpae_map(struct arm_lpae_io_pgtable *data, unsigned long iova,
->   			  phys_addr_t paddr, size_t size, size_t pgcount,
->   			  arm_lpae_iopte prot, int lvl, arm_lpae_iopte *ptep,
-> @@ -463,6 +584,7 @@ static int __arm_lpae_map(struct arm_lpae_io_pgtable *data, unsigned long iova,
->   	size_t tblsz = ARM_LPAE_GRANULE(data);
->   	struct io_pgtable_cfg *cfg = &data->iop.cfg;
->   	int ret = 0, num_entries, max_entries, map_idx_start;
-> +	u32 num_cont = 1;
->   
->   	/* Find our entry at the current level */
->   	map_idx_start = ARM_LPAE_LVL_IDX(iova, lvl, data);
-> @@ -479,6 +601,22 @@ static int __arm_lpae_map(struct arm_lpae_io_pgtable *data, unsigned long iova,
->   		return ret;
->   	}
->   
-> +	if (arm_lpae_pte_is_contiguous_range(data, size, lvl, &num_cont)) {
-> +		size_t ct_size = ARM_LPAE_BLOCK_SIZE(lvl, data);
-> +
-> +		max_entries = arm_lpae_max_entries(map_idx_start, data);
-> +		num_entries = min_t(int, num_cont * pgcount, max_entries);
-> +
-> +		/* Set cont bit */
-> +		prot |= ARM_LPAE_PTE_CONT;
-> +
-> +		ret = arm_lpae_init_pte(data, iova, paddr, prot, lvl,
-> +					num_entries, ptep);
-
-This definitely looks wrong - the io-pgtable design already deals with 
-arbitrary ranges of contiguous PTEs (modulo table boundaries); the only 
-change I'd expect to see at this level is a) something like this:
-
-@@ -462,13 +462,18 @@ static int __arm_lpae_map(struct 
-arm_lpae_io_pgtable *data, unsigned long iova,
-  	size_t block_size = ARM_LPAE_BLOCK_SIZE(lvl, data);
-  	size_t tblsz = ARM_LPAE_GRANULE(data);
-  	struct io_pgtable_cfg *cfg = &data->iop.cfg;
--	int ret = 0, num_entries, max_entries, map_idx_start;
-+	int ret = 0, num_entries, max_entries, map_idx_start, num_cont;
-
-  	/* Find our entry at the current level */
-  	map_idx_start = ARM_LPAE_LVL_IDX(iova, lvl, data);
-  	ptep += map_idx_start;
-
-  	/* If we can install a leaf entry at this level, then do so */
-+	num_cont == arm_lpae_num_cont(block_size);
-+	if (size == block_size * num_cont) {
-+		pgcount *= num_cont;
-+		size /= num_cont; //so maybe it wants to be cont_shift?
-+	}
-  	if (size == block_size) {
-  		max_entries = arm_lpae_max_entries(map_idx_start, data);
-  		num_entries = min_t(int, pgcount, max_entries);
-
-(similarly in the unmap path), and b) a bit of extra logic somewhere 
-between __arm_lpae_map() and arm_lpae_init_pte() to add the explicit 
-CONT bit to prot where PTEs within the given range do cover an aligned 
-multiple of the appropriate number (which may not be the full input 
-range). Duplicating the PTE-setting itself is a big red flag.
-
-> +		if (!ret)
-> +			*mapped += num_entries * ct_size;
-> +		return ret;
-> +	}
-> +
->   	/* We can't allocate tables at the final level */
->   	if (WARN_ON(lvl >= ARM_LPAE_MAX_LEVELS - 1))
->   		return -EINVAL;
-> @@ -660,7 +798,7 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pgtable *data,
->   {
->   	arm_lpae_iopte pte;
->   	struct io_pgtable *iop = &data->iop;
-> -	int i = 0, num_entries, max_entries, unmap_idx_start;
-> +	int i = 0, num_cont = 1, num_entries, max_entries, unmap_idx_start;
->   
->   	/* Something went horribly wrong and we ran out of page table */
->   	if (WARN_ON(lvl == ARM_LPAE_MAX_LEVELS))
-> @@ -675,9 +813,19 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pgtable *data,
->   	}
->   
->   	/* If the size matches this level, we're in the right place */
-> -	if (size == ARM_LPAE_BLOCK_SIZE(lvl, data)) {
-> +	if (size == ARM_LPAE_BLOCK_SIZE(lvl, data) ||
-> +	    (size == arm_lpae_find_num_cont(data, lvl) *
-> +		     ARM_LPAE_BLOCK_SIZE(lvl, data))) {
-> +		size_t pte_size;
-> +
->   		max_entries = arm_lpae_max_entries(unmap_idx_start, data);
-> -		num_entries = min_t(int, pgcount, max_entries);
-> +		num_cont = arm_lpae_check_num_cont(data, size, lvl);
-> +		num_entries = min_t(int, num_cont * pgcount, max_entries);
-> +		pte_size = size / num_cont;
-> +
-> +		if (num_cont > 1 &&
-> +		    WARN_ON_ONCE(!IS_ALIGNED(iova, size)))
-> +			return 0;
-
-So if someone does iommu_map(iova=0x1000,size=0x10000), then 
-legitimately tries to unmap it again, they get yelled at? That's rather 
-unfair...
-
-Since iommu_unmap() also permits unmapping a range formed by multiple 
-adjacent iommu_map() calls, we can't infer much from the given page size 
-either - the only thing we could reasonably try to warn about here is 
-when we look at the PTEs we're clearing, if we see CONT set at the start 
-(or end) of a range when that is not at a suitably-aligned offset.
-     >   		/* Find and handle non-leaf entries */
->   		for (i = 0; i < num_entries; i++) {
-> @@ -691,7 +839,7 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pgtable *data,
->   				__arm_lpae_clear_pte(&ptep[i], &iop->cfg, 1);
->   
->   				/* Also flush any partial walks */
-> -				io_pgtable_tlb_flush_walk(iop, iova + i * size, size,
-> +				io_pgtable_tlb_flush_walk(iop, iova + i * pte_size, pte_size,
->   							  ARM_LPAE_GRANULE(data));
->   				__arm_lpae_free_pgtable(data, lvl + 1, iopte_deref(pte, data));
->   			}
-> @@ -702,9 +850,9 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pgtable *data,
->   
->   		if (gather && !iommu_iotlb_gather_queued(gather))
->   			for (int j = 0; j < i; j++)
-> -				io_pgtable_tlb_add_page(iop, gather, iova + j * size, size);
-> +				io_pgtable_tlb_add_page(iop, gather, iova + j * pte_size, pte_size);
->   
-> -		return i * size;
-> +		return i * pte_size;
->   	} else if (iopte_leaf(pte, lvl, iop->fmt)) {
->   		WARN_ONCE(true, "Unmap of a partial large IOPTE is not allowed");
->   		return 0;
-> @@ -943,6 +1091,7 @@ static void arm_lpae_restrict_pgsizes(struct io_pgtable_cfg *cfg)
->   	}
->   
->   	cfg->pgsize_bitmap &= page_sizes;
-> +	cfg->pgsize_bitmap |= arm_lpae_get_cont_sizes(cfg);
->   	cfg->ias = min(cfg->ias, max_addr_bits);
->   	cfg->oas = min(cfg->oas, max_addr_bits);
->   }
-> @@ -1001,7 +1150,8 @@ arm_64_lpae_alloc_pgtable_s1(struct io_pgtable_cfg *cfg, void *cookie)
->   			    IO_PGTABLE_QUIRK_ARM_TTBR1 |
->   			    IO_PGTABLE_QUIRK_ARM_OUTER_WBWA |
->   			    IO_PGTABLE_QUIRK_ARM_HD |
-> -			    IO_PGTABLE_QUIRK_NO_WARN))
-> +			    IO_PGTABLE_QUIRK_NO_WARN |
-> +			    IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT))
->   		return NULL;
->   
->   	data = arm_lpae_alloc_pgtable(cfg);
-> @@ -1103,7 +1253,8 @@ arm_64_lpae_alloc_pgtable_s2(struct io_pgtable_cfg *cfg, void *cookie)
->   	typeof(&cfg->arm_lpae_s2_cfg.vtcr) vtcr = &cfg->arm_lpae_s2_cfg.vtcr;
->   
->   	if (cfg->quirks & ~(IO_PGTABLE_QUIRK_ARM_S2FWB |
-> -			    IO_PGTABLE_QUIRK_NO_WARN))
-> +			    IO_PGTABLE_QUIRK_NO_WARN |
-> +			    IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT))
->   		return NULL;
->   
->   	data = arm_lpae_alloc_pgtable(cfg);
-> diff --git a/include/linux/io-pgtable.h b/include/linux/io-pgtable.h
-> index e19872e37e067..7b2097aaffb09 100644
-> --- a/include/linux/io-pgtable.h
-> +++ b/include/linux/io-pgtable.h
-> @@ -86,6 +86,8 @@ struct io_pgtable_cfg {
->   	 *
->   	 * IO_PGTABLE_QUIRK_ARM_HD: Enables dirty tracking in stage 1 pagetable.
->   	 * IO_PGTABLE_QUIRK_ARM_S2FWB: Use the FWB format for the MemAttrs bits
-> +	 * IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT: Disable use of the contiguous
-> +	 *	hint for hardware affected by implementation-specific errata.
->   	 *
->   	 * IO_PGTABLE_QUIRK_NO_WARN: Do not WARN_ON() on conflicting
->   	 *	mappings, but silently return -EEXISTS.  Normally an attempt
-> @@ -103,6 +105,7 @@ struct io_pgtable_cfg {
->   	#define IO_PGTABLE_QUIRK_ARM_HD			BIT(7)
->   	#define IO_PGTABLE_QUIRK_ARM_S2FWB		BIT(8)
->   	#define IO_PGTABLE_QUIRK_NO_WARN		BIT(9)
-> +	#define IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT	BIT(10)
-
-This should perhaps be an opt-in rather than an opt-out, but either way 
-it should not result in ARM_MALI_LPAE being given extra page sizes that 
-that format does not have.
-
-Thanks,
-Robin.
-
->   	unsigned long			quirks;
->   	unsigned long			pgsize_bitmap;
->   	unsigned int			ias;
-> 
-> ---
-> base-commit: 4fa3f5fabb30bf00d7475d5a33459ea83d639bf9
-> change-id: 20260618-iommu_contig_hint-71ae491fbb52
-> 
-> Best regards,
-> --
-> Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
-> 
+Reviewed-by: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
 
