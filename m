@@ -1,86 +1,33 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A54134DA533
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 15:20:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC23D4DB54B;
+	Tue, 21 Jul 2026 15:22:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784647230; cv=none; b=Vji2ywNjBAGrkH7Z066v8s1PEAsHGMtZjRtJ3uUGSATGBQ7mfLGULEUouffsScjMPlYmkuq1toU4RgVFKz3JbManj5YzM/GW3UJITU1dOoRK6SrpNQ5VV5U7sYIfwxt6/iecCKryPm1ZcLuDX37bDfF3f9TxuiCdb7nDAq9H2fQ=
+	t=1784647335; cv=none; b=QtEt5j40gxpfRGxtqkJJytS5gt2wRbYIdM3z0/Yj6tqDaPYYRQ0KkyV6upHXJXeCs4nX8MqD7VeERgMDzF7mikHKq/GJ5nQxY4rVyJ5yC8VwcfrzF2pbk3kAnPDzU7JQoog3KiOejePQy6ULqDUil9oMrpo+B7wOrv3q2ba1xOY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784647230; c=relaxed/simple;
-	bh=486eVCkya9TWrogIHfCjEeC54OcY3YQKNUDGprYOjMg=;
+	s=arc-20240116; t=1784647335; c=relaxed/simple;
+	bh=3yd5wfzQJYA73zzDRI/tkKqSuzeMSFrzs8ehDN3AQIE=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=oiBnpvuxCTA8holeau6F2lqbwcsrHIm2Iu9eiZCG8tbN3s01PMDWczrhh1ILkgfOMOkgIBHmrBVv5fBVBvMKjePOCYxqB02AuRZ7N9ODKI/X+TkLHnk+g9HtxS84Cfw7yk5ieB5WRT/jNkoy6NHcVFJ/LPNBv4PnTiVLxZ56sZg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ceBLTJ1K; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=EIjNvwLG; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=lWxFaRcqwPvfubiscd3iIqrl+ccSXW7NW2YU3inTIL6/jjrDoTq7/n/e2/4Jpoo6FtZrxP6qpVe/eJ5JcvTYCwrXonkBunBumqQbarYEOV3r/lyBIYO+Xi7G/WNDrdvvRptiQnt1BvLK7T55rjZYA16D7SMDTdViJOt7K2510E8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JrMrcNba; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ceBLTJ1K";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="EIjNvwLG"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66LDg7QV1687579
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 15:20:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	/OjcXqA5sfqMXr7N8m76tGZNflaC5D0xHgA4fme6+cs=; b=ceBLTJ1KTFdfdFCa
-	cxobjgJr4SX1wnsQp58USMvuKXkOj9feIR7AFTHB/qZpe5UQ3BxQhYsBlP9QVcji
-	SMTHnweFhyeq21EkmW8Th8ybRTJKsyAo84z1wHJPjVyN+vMjpCPx2ZyHtF9VMjbo
-	/znXMW1T88XElerBLvtrqVtldX2FlXMBTIf8OJHlss7ultf55YAciSaeTfnSowI4
-	bPrzMIoMgM/XchvZpQyi00Pilp5KEuHdn4nFUj/X8z7PtW8HPZSUMIroBTVld0Mo
-	7WXVi00Ix8mvNTI50XEFvfpxOmisxGXho9VcMHNzyrIpMU0KxP2zWjQ0apheBdI2
-	sWQygw==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj9c40mcx-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 15:20:27 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-51c15c77619so23795251cf.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 08:20:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784647227; x=1785252027; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=/OjcXqA5sfqMXr7N8m76tGZNflaC5D0xHgA4fme6+cs=;
-        b=EIjNvwLGqXsUjth2O9y4xDN0DbpIwJBTVb6Jfnc7IQ0yO/010d6T5I7RFq1rqNkSys
-         RJYgytMC2VQRxT1NwMs1F7G+HfmyGc3VRK9rRo0oh/wNxBE9W2zX9kDKxmAl/NyxSUvS
-         NRzNtkVSyf8RPDr5yVVkyvekPVh8DvdE2oos3RokSkVbaoix/HBoN6irx1jaroei5f4g
-         o/mvZGGAasBTK0la2CD/3jlmpBEZ0yw0iS5VcqcuMXtRKjvxuSlQq1wziI4Na2VzFia+
-         Tm5s62oniDD9/udAKN/QVUiX//BzR99AsO39szOEsbitiJo+KpuDzCeg+TnbSC85SECE
-         gXzA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784647227; x=1785252027;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=/OjcXqA5sfqMXr7N8m76tGZNflaC5D0xHgA4fme6+cs=;
-        b=cLb2VCwIZb/cnNgLFL4kZRfi9ZrpNdpOB1JUls9jiKze4OZgKdN2FaoRkVtybu0iiN
-         dmmgafXufU1fcVEDBrBpUb/aqqbmh/4tTvmJX419FBT3bYnTmCgf5IkviWEcrBfPgb25
-         XkKoRYyJY8GFYExpRRSQn80mzFhqn4Ueh+izc1JEdRAM/UkW9CTYHuFySsQ0s8gaoYrJ
-         0zdLNxbzryApNcJCOibEd1kukgFjYp03MsvuyaI/Ak2FUtLg0JKG3yF5ffv3c1PC8n88
-         nMO+Neg93BUY4qERC8aJ5OCbtDWmAuuhFOQIXa59dsA5Co3pb+xjDrEd1s+IB4b9WIIX
-         u1yQ==
-X-Gm-Message-State: AOJu0YycNYHhUkzHMErYapW00ELsw02Rvf0mQ8d+tm7zkZkaE3T8uB4r
-	DadLE7iAlg+rDlAhhzPM6PRkjmZaG94FCTX9lUL7F9HWz9wLDXdVT+jNU8gECPHT+eyBhe3+3dR
-	nCFhNikcvQwTWG5vplCf7irNAw4WLL00pglleCTls21uJ5qLEgf1lE3SOy0i4f7gVkq2M
-X-Gm-Gg: AfdE7ckSfoyG7EF01nsK0R/EsmsK4UQ52CuSAdnhb9906JE4yG3geS2f7gHSVk9LU4A
-	wPyhHRFNhQn7yg52tGdEEMgi8NbZXAw8TlIA/qOcVEIqORVZGe8Dr0xcVfgRiHpxorDo2lOLgjS
-	lC7mA9KHFTwFUpbZdzdKWa+pdknafzT5zirOvUhtu2OBqJm6/d8hlqOHKKR8DPgZIUpQAcbRM4z
-	/I2MH/mIf8uRtMOYvySz91qJgN89ApYi6YM9ByUH2Znco2BiJ43/qN3vdkOcswnzcRH5HBXFUtP
-	+07BhSEPAkQ3QnwWVzI7cuVmpI6ZIrbnFz3vlF4fSPr045yF9C23XJKURYLK5YcdCMF/P981h0L
-	a/0S3TCbetSHCKl3sMh5GNsn7
-X-Received: by 2002:ac8:5f47:0:b0:51b:e991:92bd with SMTP id d75a77b69052e-52674e0c561mr29261021cf.7.1784647226928;
-        Tue, 21 Jul 2026 08:20:26 -0700 (PDT)
-X-Received: by 2002:ac8:5f47:0:b0:51b:e991:92bd with SMTP id d75a77b69052e-52674e0c561mr29260731cf.7.1784647226547;
-        Tue, 21 Jul 2026 08:20:26 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c17009ae04bsm605787466b.8.2026.07.21.08.20.24
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 21 Jul 2026 08:20:25 -0700 (PDT)
-Message-ID: <925e848c-7265-4beb-8d51-de542d682a0d@oss.qualcomm.com>
-Date: Tue, 21 Jul 2026 17:20:22 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JrMrcNba"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 17C831F00A3A;
+	Tue, 21 Jul 2026 15:22:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784647333;
+	bh=nJaHaVr5BzHYmizk1MTJgPasJCK/9PeAKRnc6vBntIM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=JrMrcNbaHRzHmU8sIs1PTd+NrJ93S/7WCSKEmLc9WD5Sd5rkFklMIfk30aGC0VSbb
+	 5GUal3m8WVSsf7792xao8P4aIJCm36N2hXpVGyYwE/mthPCrjELPHTJCJITNG4L7tg
+	 n/FAaB4Mg3GN977PrNbWgFkW26gTiFg9bmocvCJgD2sVx9IdaRCjECOJyLM3fgkn0D
+	 qs0+udhIwcXYP6JDxgjI/rbcd9qY7NSUz67pvTU6+yvXsDQfliAvzmZrlOXKNnFQ0n
+	 V7aPfqF5a+pI2lIU6GNpzhYy2dYSsQQABWtutH/iWfJG5lulW0pAVBgj9KeQTvNUqA
+	 S58DQB7qeCk1g==
+Message-ID: <d92b7e28-4847-4976-968c-75b938740f0e@kernel.org>
+Date: Tue, 21 Jul 2026 17:22:07 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,55 +35,179 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/3] ARM/arm64: defconfig: Drop redundant Qualcomm
- interconnect entries
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-        Georgi Djakov <djakov@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
-References: <20260720-interconnect-qcom-clean-arm64-v3-0-942e8ee7ebda@oss.qualcomm.com>
- <20260720-interconnect-qcom-clean-arm64-v3-3-942e8ee7ebda@oss.qualcomm.com>
+Subject: Re: [PATCH v2] arm64: dts: qcom: sm8550: add Xiaomi Pad 6S Pro
+ (sheng)
+To: code_0002@163.com, andersson@kernel.org
+Cc: konradybcio@kernel.org, robh@kernel.org, krzk+dt@kernel.org,
+ conor+dt@kernel.org, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ map220v <map220v300@gmail.com>, code002-2 <hiez832670@gmail.com>
+References: <20260721142147.1618-1-code_0002@163.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260720-interconnect-qcom-clean-arm64-v3-3-942e8ee7ebda@oss.qualcomm.com>
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260721142147.1618-1-code_0002@163.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=I4JVgtgg c=1 sm=1 tr=0 ts=6a5f8e3b cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=Q_J6LHpempm3BuxY28QA:9 a=QEXdDO2ut3YA:10
- a=uxP6HrT_eTzRwkO_Te1X:22
-X-Proofpoint-ORIG-GUID: dnM-ublwFXBNZ8Chn7fI9vL8GiueVc7k
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIxMDE2MiBTYWx0ZWRfXxTZmvNI1XVfJ
- JN7c94Q2OXpZJM4xhuk98NSjb3ylLKagGskGUJ8FueVXGBacz99yeQDX1iU3obd2+NeBC69q69T
- 1brPu5+rJ+/eZBJUMn9iqwVIZLGpEoZnhy3O0ijf0Mn5GPdorePw5+E92VPagskRAfP6gidH/1O
- Kq+1fheU5uIBMOrBT6o6v0f62t/uKErvbXWFx7l2dGyi8xdVdA1uAuMSMhsfyjDj2sW5onD0d+k
- LrkkTsUItmCMZYtHcToryXMgnBSXcJ0nIoWoVc6S6igbOEOtM8Gg2pBEtv1L82QMQ8al2YqtKGw
- vEs2XiJjFHFzi1GUncYqGZTk78wU+CT+kePVsom32gJyTFMizeF+twtF3xWL7ZiYQMgaGzym3GU
- lqNwUuSe0IdsIljcAbJMqiXoMb5ncadqfGxwpJla0Vrsbh70G5/GGynWuVYqEBk6EGcVKX9KVid
- hKyJSzkT5iJRK9LkUXw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIxMDE2MiBTYWx0ZWRfX0uU7+X1I9LCw
- EceG0JOm7iE+65REt8Dp3wAAlE0K97ABNxszwELhKq8hqTgZbfO7B0YUtcKI0J39fswH0VHJ4zW
- dSjJghOaC6fPD6fShzcawJqt8aPKMWk=
-X-Proofpoint-GUID: dnM-ublwFXBNZ8Chn7fI9vL8GiueVc7k
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-21_03,2026-07-20_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 spamscore=0 lowpriorityscore=0 malwarescore=0 adultscore=0
- priorityscore=1501 phishscore=0 bulkscore=0 suspectscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607210162
 
-On 7/20/26 9:03 PM, Krzysztof Kozlowski wrote:
-> Drop all drivers from defconfig which have defaults in Kconfig.
+On 21/07/2026 16:21, code_0002@163.com wrote:
+> From: map220v <map220v300@gmail.com>
 > 
-> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> Add device tree for Xiaomi Pad 6S Pro (sheng) based on SM8550.
+> 
+> Signed-off-by: code002-2 <hiez832670@gmail.com>
+
+We do not allow anonynomus contributions.
+
+Please read carefully submitting patches document.
+
 > ---
+>  arch/arm64/boot/dts/qcom/Makefile             |    1 +
+>  .../boot/dts/qcom/sm8550-xiaomi-sheng.dts     | 1788 +++++++++++++++++
+>  2 files changed, 1789 insertions(+)
+>  create mode 100644 arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+> index 6f33c4e2f..d8e485521 100644
+> --- a/arch/arm64/boot/dts/qcom/Makefile
+> +++ b/arch/arm64/boot/dts/qcom/Makefile
+> @@ -386,6 +386,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-mtp.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-qrd.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-samsung-q5q.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-sony-xperia-yodo-pdx234.dtb
+> +dtb-$(CONFIG_ARCH_QCOM)	+= sm8550-xiaomi-sheng.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)	+= sm8650-ayaneo-pocket-s2.dtb
+>  
+>  sm8650-hdk-display-card-dtbs	:= sm8650-hdk.dtb sm8650-hdk-display-card.dtbo
+> diff --git a/arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts b/arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts
+> new file mode 100644
+> index 000000000..170a67b37
+> --- /dev/null
+> +++ b/arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts
+> @@ -0,0 +1,1788 @@
+> +// SPDX-License-Identifier: BSD-3-Clause
+> +/*
+> + * Copyright (c) 2024, map220v <map220v300@gmail.com>
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include <dt-bindings/arm/qcom,ids.h>
+> +#include <dt-bindings/gpio/gpio.h>
+> +#include <dt-bindings/interrupt-controller/irq.h>
+> +#include <dt-bindings/leds/common.h>
+> +#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
+> +#include "sm8550.dtsi"
+> +#include "pm8010.dtsi"
+> +#include "pm8550.dtsi"
+> +#include "pm8550b.dtsi"
+> +#define PMK8550VE_SID 5
+> +#include "pm8550ve.dtsi"
+> +#include "pm8550vs.dtsi"
+> +#include "pmk8550.dtsi"
+> +
+> +/delete-node/ &rmtfs_mem;
+> +/delete-node/ &adspslpi_mem;
+> +/delete-node/ &xbl_dt_log_merged_mem;
+> +/delete-node/ &hwfence_shbuf;
+> +
+> +/*
+> + * Free unused regions, these regions don't exist in downstream
+> + * dts, and they aren't removed from DDR Memory Map by UEFI.
+> + */
+> +/delete-node/ &hyp_tags_reserved_mem;
+> +/delete-node/ &cdsp_secure_heap_mem;
+> +/delete-node/ &trust_ui_vm_mem;
+> +/delete-node/ &trust_ui_vm_dump;
+> +/delete-node/ &trust_ui_vm_qrtr;
+> +/delete-node/ &trust_ui_vm_vblk0_ring;
+> +/delete-node/ &trust_ui_vm_vblk1_ring;
+> +/delete-node/ &trust_ui_vm_swiotlb;
+> +/delete-node/ &oem_vm_vblk0_ring;
+> +/delete-node/ &oem_vm_swiotlb;
+> +/delete-node/ &oem_vm_mem;
+> +/delete-node/ &hyp_ext_tags_mem;
+> +/delete-node/ &hyp_ext_reserved_mem;
+> +
+> +/* Xiaomi uses alternative gpio's for i2c8 */
+> +/delete-node/ &qup_i2c8_data_clk;
+> +
+> +/* Xiaomi change for Nanosic WN803x */
+> +/delete-node/ &qup_i2c9_data_clk;
+> +
+> +/* SM8550P doesn't have Modem DSP */
+> +/delete-node/ &mpss_dsm_mem;
+> +/delete-node/ &mpss_mem;
+> +/delete-node/ &q6_mpss_dtb_mem;
+> +/delete-node/ &remoteproc_mpss;
+> +
+> +/ {
+> +	model = "Xiaomi Pad 6S Pro 12.4";
+> +	compatible = "xiaomi,sheng", "qcom,sm8550";
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Please run scripts/checkpatch.pl on the patches and fix reported
+warnings. After that, run also 'scripts/checkpatch.pl --strict' on the
+patches and (probably) fix more warnings. Some warnings can be ignored,
+especially from --strict run, but the code here looks like it needs a
+fix. Feel free to get in touch if the warning is not clear.
 
-Konrad
+It does not look like you tested the DTS against bindings. Please run
+`make dtbs_check W=1` (see
+Documentation/devicetree/bindings/writing-schema.rst or
+https://www.linaro.org/blog/tips-and-tricks-for-validating-devicetree-sources-with-the-devicetree-schema/
+for instructions).
+Maybe you need to update your dtschema and yamllint. Don't rely on
+distro packages for dtschema and be sure you are using the latest
+released dtschema.
+
+> +	chassis-type = "tablet";
+> +	qcom,msm-id = <536 0x20000>; /* SM8550P v2.0 */
+
+NAK, not allowed.
+
+And if you tested this, toolset would tell you that.
+
+Best regards,
+Krzysztof
