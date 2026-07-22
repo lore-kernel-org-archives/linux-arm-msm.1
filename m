@@ -1,148 +1,106 @@
-Received: from TYPPR03CU001.outbound.protection.outlook.com (mail-japaneastazon11012053.outbound.protection.outlook.com [52.101.126.53])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD45144AB6A;
-	Wed, 22 Jul 2026 06:57:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.126.53
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784703446; cv=fail; b=tiBZQXcC5ChLCBJLMqKMm4Mwrmbosvxt0CKCTDsEpwZFbZhLMLpnb6ixxK4KEclWsRtI0XUYzB7Ya1RGBsrtLz2GRN1ZNje4SKYIU+XoUweB7hxTxvKGH63oU03XtAO+7iuu7SslkoYSHKvtX/zH2K90WUSTGJBuFN1Tdq7L1QA=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784703446; c=relaxed/simple;
-	bh=UOmD88/3z54w+EA3ia4nmQwzma/GafbeeRgMA/DjMm4=;
-	h=From:To:Cc:Subject:Date:Message-Id:Content-Type:MIME-Version; b=XuluNG116M7uVPMEqW4mSWzpTINP4jx7M6GRz0QDgQVuSf73Gap6z8QS7YI464GeefZAiKj6ibZHKNQScuoog0B/6/zsfxqCcZOEafNyliFQtJ5uzHhzusuam9tqFtfv84TXUuFhdOgtgOid4Q+VWTRJYfS/R3fBAixD3qBHj/E=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vivo.com; spf=pass smtp.mailfrom=vivo.com; dkim=pass (2048-bit key) header.d=vivo.com header.i=@vivo.com header.b=UOkU8yuB; arc=fail smtp.client-ip=52.101.126.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vivo.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=vivo.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A6F5933B6F9;
+	Wed, 22 Jul 2026 06:57:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784703474; cv=none; b=ubBncnBLW4tuQVn4vnpJWonTHwVJ4h4xGDXXcfWoOjdB5jx8MBOCzW448+xZcp5Ks4xYoOkqGIiw20Cs3si+pCPqaX+KhtMQqoeDuUppwiYN1+28jdMZi7OmybBREzDnVIHxvQImugrv3mqIwmsBW52gJ9Yh4QvSGMf28IS6N4U=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784703474; c=relaxed/simple;
+	bh=kuEmGi3KRFD9PpKtcyooZ/uj6vWmMH5n8dVU38F4sR4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=flMiiRq2vn5aEICNa23qBhYOe/yQF3yUuvYyIcdw4YjY68UcLQUCXkeOg9UNPhByOCesanqkyds+SON03EJI7Fd7wyYTOYN9dsFt2lP7cSCw84oCzAYnsw5lTmx4dN8yFEFdfwffNjqjgSpIkQR1DfhOBnGzt22HP8LIt4oUMsQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lOEHauXR; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=vivo.com header.i=@vivo.com header.b="UOkU8yuB"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LG8fC6uboCkDojSxdhVkwxSAf6PwqmaD29kRfYx0FtdYUG9/ZXgavwGuNlTmZ5AguwjrrRRZmKo6kqZPaARo/KifsHCbZTo8Dzx7Oyj9c02yAHYzSmz0C63+dbxagFo/zhJcT+BJc5vfhvZ8W6HUz3GbVHgq9JpNhDJeKohVdCoPlCTvFJ8gEPLoV3bkPBvCwtuqXiharDXa4xHakkMS+hC223IqiX4uB2ET4q4y0YN1drut2VdMBJWRIQkCV9FAmaiB15yECHq+hLtZHqjLB3FcQStGvLjvJWsrAY26jIM55KGwSLS2Qj5Xyvpxya8A6f6ZDe85ONtbxfHJgrInmg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NPJYAulmgxtDwd04OtbMV0I9ljJr4lfhPbBaJqyPiKI=;
- b=LbcAR7LGr8rpwq+YjQFg2JHBVliKCYDQ9mVrJtoEGEts3Ta9GrUpPj1VAhUETPcGGq1QCht1Q8WLvI4abLejVGAQzN5Mg+HY98bU7bKqwO0WaKxB7oQSIXxPrWI8qnc3dvBYuddPmJeDo7E4+o3+aQuTeHP9xDX4L2Cb0HOpP+HpZajulXLPG7ePmMpmsjRFy4JdQJStHvYUIkRKPjb2kk21H4T9pNIZ/L/e892pk3Uvn4VaNrMN6Ce8I+4DsZeXEnHa0YXEGXrXqWjpBe1UwiGPZ+XMGAcikaTq4FjJLs8DdjvFtbe++ZHvu1tfYVF+/elgYuWZCoNFdk8RZ3YAFQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NPJYAulmgxtDwd04OtbMV0I9ljJr4lfhPbBaJqyPiKI=;
- b=UOkU8yuBlC0mH4isjlC45FmpnR6Hye2BIFZzK5F3aN0VhIlpAk1d7Jbh9fw98KuIHkv6m1AoXqhvHkDUqVJgRcp8CFJeexKXV8sJ2wrYkhUrngpxFLlBJsOu0NnbZDZLm7GEqdMJXlG+gJW37h0pBsS52BMv8Y3FHIiaiQvjdgLmenAA1OErxw074NAVpIKSqRr7Pv9RgMC3veySkKKWd7XVogk6FtbGnoDY+ZMyqH7oc+pjV4vkpw4F71Mzi8TYLPlGmNjNCa2QWFBJTUjrnATX+OvZ5tAIltk/TwIVw7JGl4PD5g+nSMyqnx/M+LXElnw0/x9GsUsnf0dugGvKCA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB5832.apcprd06.prod.outlook.com (2603:1096:101:c8::12)
- by SEYPR06MB5014.apcprd06.prod.outlook.com (2603:1096:101:3f::5) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Wed, 22 Jul
- 2026 06:57:19 +0000
-Received: from SEZPR06MB5832.apcprd06.prod.outlook.com
- ([fe80::f98:5e32:4ccb:d07b]) by SEZPR06MB5832.apcprd06.prod.outlook.com
- ([fe80::f98:5e32:4ccb:d07b%6]) with mapi id 15.21.0245.009; Wed, 22 Jul 2026
- 06:57:19 +0000
-From: Pan Chuang <panchuang@vivo.com>
-To: Lee Jones <lee@kernel.org>,
-	Daniel Thompson <danielt@kernel.org>,
-	Jingoo Han <jingoohan1@gmail.com>,
-	Helge Deller <deller@gmx.de>,
-	linux-arm-msm@vger.kernel.org (open list:ARM/QUALCOMM MAILING LIST),
-	dri-devel@lists.freedesktop.org (open list:BACKLIGHT CLASS/SUBSYSTEM),
-	linux-fbdev@vger.kernel.org (open list:FRAMEBUFFER LAYER),
-	linux-kernel@vger.kernel.org (open list)
-Cc: Pan Chuang <panchuang@vivo.com>
-Subject: [PATCH] backlight: qcom-wled: Remove redundant dev_err()
-Date: Wed, 22 Jul 2026 14:57:08 +0800
-Message-Id: <20260722065709.346072-1-panchuang@vivo.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TY4P301CA0101.JPNP301.PROD.OUTLOOK.COM
- (2603:1096:405:37b::8) To SEZPR06MB5832.apcprd06.prod.outlook.com
- (2603:1096:101:c8::12)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lOEHauXR"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 61AF61F00A3A;
+	Wed, 22 Jul 2026 06:57:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784703473;
+	bh=06XF7zpSnsetbA0eus7tkijIniC80Q0nSuvoNAK5KGQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=lOEHauXRUNHaWZHe8+W3+FJCQ/xB4iOyemVEL8HToPwnAa7M5biAhvlq4PWtClWk7
+	 o3J4tvqZuh4vzLuzgaVqfPHWWnQhBrx5U9zUz9BIHnFkQtR/j8Fn8vR8d7fhRPYzvm
+	 7v6hssZh4LN2sy4zI9MREoxLuz4dOUGMaPKL9rcvJO85Ho9/McuJjpqZRgUqaS+yup
+	 v59ryEcp6dTPxVM6W3zvlJAaEc8lqVCUq/7NxbwBvPdYZWNk51AkDngA8l/gRjN4XK
+	 YHmYjEQeNNykgDaGt/PdVPZVjRUjwkqm9ziLpyem82V0NfWOY1D5D+EqgVwI/n65YO
+	 f5fFy5i5gL2Hw==
+Date: Wed, 22 Jul 2026 08:57:49 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+Cc: Robert Foss <rfoss@kernel.org>, Todor Tomov <todor.too@gmail.com>, 
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+	Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bryan O'Donoghue <bod@kernel.org>, Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+	Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-phy@lists.infradead.org, 
+	jeyaprakash.soundrapandian@oss.qualcomm.com, Vijay Kumar Tumati <quic_vtumati@quicinc.com>
+Subject: Re: [PATCH v6 1/7] dt-bindings: phy: qcom,x1e80100-csi2-phy: Add
+ SM8750 CSI2 PHY
+Message-ID: <20260722-literate-nondescript-seagull-cbdfaa@quoll>
+References: <20260721-add-support-for-camss-on-sm8750-v6-0-a5f841061d18@oss.qualcomm.com>
+ <20260721-add-support-for-camss-on-sm8750-v6-1-a5f841061d18@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5832:EE_|SEYPR06MB5014:EE_
-X-MS-Office365-Filtering-Correlation-Id: b250ac26-c653-45b4-9a60-08dee7be78a8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|52116014|23010399003|366016|1800799024|38350700014|18002099003|56012099006|6133799003|11063799006|10067099003;
-X-Microsoft-Antispam-Message-Info:
-	+pU9oL4VR6/jkOsa/Bc/PMVpBARUcsXK+6Kh1Z9DBivPDl1VzT08jeXH+XtTxzudxUrD3uwnmpD8PA5GNZelrSgV+I+muyh7l8hkjx62qnt/NKv4suolIV9BzYXzWITsKnIi37ehaFEvG75HGUTgvf7Ry6NFrBn2ZMeR385hPQbV1IhyzLaYxRdXw0T+lJW2+3J+6p6zMxG4HxLqyZ8AzAnmvhUi7Prf8PJGRE1G/ZuXoopRAQJlZvEi83+clssYNuRdQuOrx9d3w1vxaAbVJ+6eSXrTowXHFMUQwaFlkFkQvia179Xqr4/DAFb/JHyCbW5BCTLSzSYp6s2ZWuIQUQJgKE9lguS9BLrYuo8D3qtYeEC2avKrAT9DkVBj1rHTXXrdd5ZISAjJxSF8Pj+Rqu/BiVI38zZ7EBAiDT+zCqQTo8zxGYwPzcaMgOZFV4Gf8UiyAxAsPHbYQuB7+rHLtpdvlQVSyN7As8UTiU7bBHho8pTpgXRRZSjCnNGUplTC4zygXP6wc8TlKAA8ZX2NE8AWTPUeGF1iHGkV+H4EwbO9YF7bmM+mQUSENoJm7VbFlW9YNP45WEhhzN124hOzn8SKC5qKzkQg+SBILQFlaEJPsWXmulPoIvMkhTasIDItCn5OFnaWyt3X/wpEhEzp4pHIl9IoWjUXpserQGmm2gYtx8z8xS27Xa38OTJDfgmlYcVi6WLrAwKB5BpQ9IdqiKKjzDhq+w5Bx51Fi+fMzAk=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB5832.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(52116014)(23010399003)(366016)(1800799024)(38350700014)(18002099003)(56012099006)(6133799003)(11063799006)(10067099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?A1kqtMYfl/nSLYdcYIwaIJf2uW6PdtlOZCBm3q4sTzbzbfHXY24jzEGv+17i?=
- =?us-ascii?Q?9DtjhMzsaZ609ePrjbB3iKP07tvqPcMW8/34EELKj4N8hJiFY0Try9HxnGuT?=
- =?us-ascii?Q?3cytOwNiUcUUQjJVY76HH2F2GISDmgVrZZLswh0CQ/9NE1iR4zNMSOdTAzLj?=
- =?us-ascii?Q?DVLg8s3y/b3cjvIomrCsvbNhnCSSy6olxFBba2QcmRkWj7wwDClWQU3otufv?=
- =?us-ascii?Q?5hc1TRfYl9AYNESFJlpD3flriskP379lPCVDurmhLDPDj7HR22W1V+1lzBU/?=
- =?us-ascii?Q?GKfXorZJrMAVxbS0DoGVhAuQqMrcHVEt+vlW2J8YMSNtonivJsYOvjRPAEQ7?=
- =?us-ascii?Q?fGoN1eNSHwHdIkMivQPR10Vnf1JkN6MfWspMNC7ASqOKrPdK9wiwgRE0y1OY?=
- =?us-ascii?Q?n5N1wjtJc9wI5/4st9s9Qq9idhyLQx/4Gb6DT1ZPkA9tZLD9ivJfPAraa7kf?=
- =?us-ascii?Q?l79rX0+3MP6xTdgzvin4LxeW0Eh3RKmpXI48+JOMeSIuBm8JXyrebRHb5FpJ?=
- =?us-ascii?Q?AQDqMnvkCIvk8hJSrrNRxJKbNjpaLy9P9tvqwcJf9CYIHDLjZoda3SmCY9kg?=
- =?us-ascii?Q?IXVzGEu+wm7Bh3aIq4covln4KT6frTJxKuFbJsHuYu/SCtU9hHD6V35kzO1s?=
- =?us-ascii?Q?aNEMNOKERQrV/HPAxdiHQEYO864ZaoRmdiSgRrCJBBtQUOoCpH63A3khV5Xc?=
- =?us-ascii?Q?AFvOeYUu3XyAHBYSu7BOLEnKedfD5LXqsFCAEZrQMFhT+B+vrQueZnBBbzx6?=
- =?us-ascii?Q?r95N3mCvN+Q1lvfIEUNLfujyXxrsTNs9SSMI/dIDoBEzAfAdQjEJ7MAjSGw3?=
- =?us-ascii?Q?3RJKERjUjynxE3WTeuDL7lSvRhoYTsQ1FTrTN/q7PFsfUInu2l+IB7LD0eHt?=
- =?us-ascii?Q?igmGoSxl/kBDpgW17p4SaYCpabcjIoJMBzgX3h3wmHgfg+JK3ISwwctEU7Xj?=
- =?us-ascii?Q?f59h8Cgj6ZUy59haekUKCbDofL9WaAe8zBwlVbKWJFTC6ahkahF+40P1lHrF?=
- =?us-ascii?Q?BmplZVsEyM+HJtK926NC8A4AnvetGAzSEM81XQXZTo6wGg+nMsM165WZKOA/?=
- =?us-ascii?Q?Qbft1uHb3dLmdSQuKdbGgf3zFALhn2VpcIfajv3/75W+gRBLZo37Wz4QhFfB?=
- =?us-ascii?Q?iErVem2u8AeVXwHKi0SijyKHJyOr9G8keq6SkoyWAo4DWDJY+E2FWPrDnHfT?=
- =?us-ascii?Q?w+EvwmpmVHwQpvgrkSJCpIJNG0Dd6RPZnYVsbdTk2ZTgO3fBAZcnYLDuSCnH?=
- =?us-ascii?Q?YX2TFvow3juF6CZS8cg/23afFz8yNaO/fcGPmKsHnthJqyNUKZQVI66JuqjC?=
- =?us-ascii?Q?Q6sg8bvncsb2Y+2PjygxpQkYy6x7FljMr7ixGPDDd9eEKCQbdWzs7LJrc798?=
- =?us-ascii?Q?q2yNkWaYgzoqY5/4SQ3q6xzhMXZOaEUetm4IRJLHFE668Kwz4CPp0dut6EfU?=
- =?us-ascii?Q?Oidt5SQfgMNlRlPAYJHwFY/aLY/9tmZGuwot6PblsDIprwCV2xgiAMnWiPgH?=
- =?us-ascii?Q?2na8G9hiTS0e9NXptnH3mcPku8wVpR5fZFxu3GvN27vSvWsgYFDeRjuoL+PJ?=
- =?us-ascii?Q?8EMH5Oiz/es3X8ddGF4ppFnCqMNimT4PrFYhpGwMbhOCK1VialTmI2V12NXp?=
- =?us-ascii?Q?+D9MB8WvT1GvPrXyNOnS3UN43nrMq4/MFz3UucySe75qaspXlDXYzzDndM5T?=
- =?us-ascii?Q?3d4Os0zUvb2C7/cxsZvCUDHpbtkiJGj4cSL6XnTuzNcXxU5LDDvGlOEn9rdo?=
- =?us-ascii?Q?FLoliGe25A=3D=3D?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b250ac26-c653-45b4-9a60-08dee7be78a8
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5832.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Jul 2026 06:57:19.0091
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ALs3fESBj/oCnDmgi3qJp36EIwHN00CpCNOqWu73dgyi4Y79lwUIwZXFWTIsgQdj0G8Hne6Gs1k0oquNhyi7Ow==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SEYPR06MB5014
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260721-add-support-for-camss-on-sm8750-v6-1-a5f841061d18@oss.qualcomm.com>
 
-Since commit 55b48e23f5c4 ("genirq/devres: Add error handling in
-devm_request_*_irq()"), devm_request_threaded_irq() automatically logs
-detailed error messages on failure. Remove the now-redundant
-driver-specific dev_err() calls.
+On Tue, Jul 21, 2026 at 05:46:00AM -0700, Hangxiang Ma wrote:
+> The SM8750 camera subsystem exposes six CSI2 D-PHY blocks that follow the
+> same programming model as Kaanapali. Describe the SM8750 CSI2 PHY using a
 
-Signed-off-by: Pan Chuang <panchuang@vivo.com>
----
- drivers/video/backlight/qcom-wled.c | 2 --
- 1 file changed, 2 deletions(-)
+No, SM8750 does not have the same programming model as Kaanapali. When
+SM8750 was created, there was no Kaanapali, so how it could have the
+same interface?
 
-diff --git a/drivers/video/backlight/qcom-wled.c b/drivers/video/backlight/qcom-wled.c
-index 8054e4787725..650dd95f06ef 100644
---- a/drivers/video/backlight/qcom-wled.c
-+++ b/drivers/video/backlight/qcom-wled.c
-@@ -1639,8 +1639,6 @@ static int wled_configure_ovp_irq(struct wled *wled,
- 				       wled_ovp_irq_handler, IRQF_ONESHOT,
- 				       "wled_ovp_irq", wled);
- 	if (rc < 0) {
--		dev_err(wled->dev, "Unable to request ovp_irq (err:%d)\n",
--			rc);
- 		wled->ovp_irq = 0;
- 		return 0;
- 	}
--- 
-2.34.1
+> "qcom,sm8750-csi2-phy" compatible with the "qcom,kaanapali-csi2-phy"
+> fallback, so the CAMSS binding can instantiate the CSIPHY nodes as
+> separate phy devices.
+
+Redundant sentence.
+
+> 
+> Signed-off-by: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
+> ---
+>  .../devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml        | 10 +++++++---
+>  1 file changed, 7 insertions(+), 3 deletions(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+> index 7943049834f9..95375efb2597 100644
+> --- a/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+> +++ b/Documentation/devicetree/bindings/phy/qcom,x1e80100-csi2-phy.yaml
+
+I just commented on very similar patch. This is confusing, there is no
+such file and I do not get why you keep adding some long chain of
+patches touching the same lines. Squash patches.
+
+This is untestable.
+
+> @@ -16,9 +16,13 @@ description:
+>  
+>  properties:
+>    compatible:
+> -    enum:
+> -      - qcom,kaanapali-csi2-phy
+> -      - qcom,x1e80100-csi2-phy
+> +    oneOf:
+> +      - enum:
+> +          - qcom,kaanapali-csi2-phy
+> +          - qcom,x1e80100-csi2-phy
+> +      - items:
+> +          - const: qcom,sm8750-csi2-phy
+> +          - const: qcom,kaanapali-csi2-phy
+
+SM8750 came one year before Kaanapali, so how such compatibility is possible?
+
+Best regards,
+Krzysztof
 
