@@ -1,71 +1,122 @@
-Received: from mail-106121.protonmail.ch (mail-106121.protonmail.ch [79.135.106.121])
+Received: from mout.kundenserver.de (mout.kundenserver.de [217.72.192.73])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8856D411F8C
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 17:22:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=79.135.106.121
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F66735AC12;
+	Wed, 22 Jul 2026 17:36:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.72.192.73
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784740954; cv=none; b=HS589VH2gr5V+2aLJgORtF/kGB5dtFYM6WP/P651ALa/TmdwV8uc0AruUJABkcNtVRJr9eTozUneqNCk5Pyl8w5uBwciGYEmVkFspEDTIgce/GMSK8VxNZhKdFJyFwttu7yHpgXxRM9fepKQVr0x0zstQjadq6owSSBiTD5VDG4=
+	t=1784741790; cv=none; b=IYJzrktDcfML5EZjjIwTnglv6wG/voh1sdbSak5PKmFkCH5iIGB0InAplP6VbTOtp3sfuC0zE2ukoUZKMv5JpbOEXrbZsgAzohopO4FhflfLYIbiFB3wfS182KaqokZGBzwjLQ+FcfC5U+uOlgZmwsfVoooSMNo1/vl0ffHU7cA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784740954; c=relaxed/simple;
-	bh=otgE4BlDNttJLSTdSkPcjBDLB10Ko4Z57qMN5bI2t8E=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=NNWpR+a9R56AMHqmaN49fAA0llFc5EvcoK4YhLdWimm398LJ9wbF4ch5U9VtciCiat/awbKzzSRBG3nQlFnKEcS6tnr4DSB/aZnHKqhSQmqsNuXeteHhW3Xp04YhvvK0hMQCe53/u35U3HC9nncUblRZ4/zGSrHY9goOvDV1T5g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=AeBW49hS; arc=none smtp.client-ip=79.135.106.121
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proton.me
+	s=arc-20240116; t=1784741790; c=relaxed/simple;
+	bh=DlW56uPwyY80Pq1Lt1pXe98HDdxPkxnkuilg8NA/LQ0=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=RfJmgXvefkQm33jECKQteqi0FspHreX/vfa6D6MWutuKgvNJArm8neR/URfX9HOFZsbdlGZrlsktl06FoAZSJy1mUWRbJFK48p+OzEtYgn5gbFTYsB6QfWmiZHCf+QJiZg0H6ThYwYDlDArVbTp6tVq/Gzk0khkhVfCFvQEbCuo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oldschoolsolutions.biz; spf=pass smtp.mailfrom=oldschoolsolutions.biz; dkim=pass (2048-bit key) header.d=oldschoolsolutions.biz header.i=jens.glathe@oldschoolsolutions.biz header.b=3B996Jaq; arc=none smtp.client-ip=217.72.192.73
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oldschoolsolutions.biz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oldschoolsolutions.biz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="AeBW49hS"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1784740946; x=1785000146;
-	bh=otgE4BlDNttJLSTdSkPcjBDLB10Ko4Z57qMN5bI2t8E=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=AeBW49hSY5qGGQqGex6CdqUBshJCM96AbFDjgqv7QjSEAQq+DQ2guXEhJCnY7TYhL
-	 N2tzv7VOxsl9lctvo5I9CthgbBmZDPnfNW+aoATPO6dR08hRrIK9Omcw11kif3KbQo
-	 7aTpNqu/ohps0Sord60LyhJjnLaA+XGBUqspIh1B+62NTFWunDaI248n2mYtW3/w+8
-	 gdL5q3XqkXgU+x82Pn0eVT3hMfm2zs/zwHVTqaKoGAKvppkzx3qyKJK70Jy/3CxSle
-	 1GhgPlRtTxe+SHcGPslqZWg+fjPvFHTh9zyUaHwLW4IagRml/+vsEKP6JVnlfRVU/U
-	 0syE9VepyRD+A==
-Date: Wed, 22 Jul 2026 17:22:21 +0000
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, Dmitry Baryshkov <lumag@kernel.org>, Bjorn Andersson <andersson@kernel.org>
-From: Esteban Urrutia <esteuwu@proton.me>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org
-Subject: Re: [PATCH v2 1/2] phy: qcom: qmp-combo: Correct pre-emphasis table for QMP v4 DP PHYs
-Message-ID: <56b9c83e-e90b-4b95-acff-d0a232069fe0@proton.me>
-In-Reply-To: <20260711-sm8450-qol-qmp-v2-1-d14353bd6ff4@proton.me>
-References: <20260711-sm8450-qol-qmp-v2-0-d14353bd6ff4@proton.me> <20260711-sm8450-qol-qmp-v2-1-d14353bd6ff4@proton.me>
-Feedback-ID: 147889766:user:proton
-X-Pm-Message-ID: 23e43a487f912dc5619a457c760ffd98f8aeb263
+	dkim=pass (2048-bit key) header.d=oldschoolsolutions.biz header.i=jens.glathe@oldschoolsolutions.biz header.b="3B996Jaq"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=oldschoolsolutions.biz; s=s1-ionos; t=1784741781; x=1785346581;
+	i=jens.glathe@oldschoolsolutions.biz;
+	bh=iaCjgNfgkyjQUd1JMMz+MNNOJna+zo9bblFWecNE/nM=;
+	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:From:Subject:To:
+	 Cc:References:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 cc:content-transfer-encoding:content-type:date:from:message-id:
+	 mime-version:reply-to:subject:to;
+	b=3B996JaqZ2tuxXWKQxxBmpMBWI7kf8LQQfztVJ1QGKxacptKlnRx35lxbZRVS5qR
+	 wc5ytiKR7kbIRi/wFBcZHFIta83escDoKhPeUVWwqqagrN/tsmC2M/LipllEM7Hj5
+	 CONAKCgAyGfFF3sMLthdVuhhQYFOUYK8EbP/b4m0WCKtf0o9J6wzgEHKQ0Tvl6fRv
+	 LsVnairs5iYYAeQlQ5VtaYseuvEertkO4V5DQ7phG4EpvYC1L227sZohK5uXPwDrZ
+	 cbD77McdkuxuCYtl7RdkwW7O1Aq9epxGoLiZJqpRitXplB8nwBgjX2E1BZ1Dh13MN
+	 zC8umorN26nLorSB7A==
+X-UI-Sender-Class: 55c96926-9e95-11ee-ae09-1f7a4046a0f6
+Received: from client.hidden.invalid by mrelayeu.kundenserver.de (mreue106
+ [212.227.15.183]) with ESMTPSA (Nemesis) id 1Mc0Er-1xPlIw1Lwt-00dibE; Wed, 22
+ Jul 2026 19:36:21 +0200
+Message-ID: <f3fa0bb8-7ebf-482c-a98e-5a544305ee00@oldschoolsolutions.biz>
+Date: Wed, 22 Jul 2026 19:36:19 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird Beta
+From: Jens Glathe <jens.glathe@oldschoolsolutions.biz>
+Subject: Re: [PATCH 4/5] usb: typec: mux: ps883x: add a delay after writing
+ config regs
+To: Heikki Krogerus <heikki.krogerus@linux.intel.com>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, linux-usb@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, stable@vger.kernel.org,
+ "Dr. David Alan Gilbert" <dave@treblig.org>
+References: <20260718-ps883x-disable-usb4-v1-0-cec86d0b909e@oldschoolsolutions.biz>
+ <20260718-ps883x-disable-usb4-v1-4-cec86d0b909e@oldschoolsolutions.biz>
+ <al9PnLOTW-1OoR6G@kuha>
+Content-Language: en-US
+In-Reply-To: <al9PnLOTW-1OoR6G@kuha>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Provags-ID: V03:K1:89CBpbikyVWecaVSTBdA74uPvvbpsGpEa86gtVYmabZViHCSM9+
+ zDP32ZFTiRD9xeH3wHiyNTbEGGSGN85Uhclj/fbn2pHopZwdADL0W6+2RKXjPKjczqgQihS
+ 13JkZdegcqtZh5a68urDtPBCD+7dzB4/LlJqDNfvqSwzw4XwIOSsi7Ho2U7dKMCmFehhZ57
+ HHbXVi5/L6Z7EaYzMva4A==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:NNT9gKsEBWk=;7ymG6eZ1YgCIG7K1fCrFlSvXCY+
+ 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
+ =
 
-On 7/11/26 11:13 PM, Esteban Urrutia via B4 Relay wrote:
-> Comparing sm8350 and sm8450 tables, this seems to be a typo.
->=20
-> Fixes: ef14aff107bd ("phy: qcom: com-qmp-combo: add SM8350 & SM8450 suppo=
-rt")
-> Signed-off-by: Esteban Urrutia <esteuwu@proton.me>
-+Dmitry, is there any update on this?
-A confirmation on the tables was requested by Konrad almost a month ago
-in v1 [1].
-I asked for an update two weeks after, to which Konrad also requested an
-update in v1 [2].
-Please confirm the correct tables for SM8350/SM8450 so that this commit
-can be handled accordingly.
+Hi,
 
-Regards,
-Esteban
+On 7/21/26 12:53, Heikki Krogerus wrote:
+> Hi,
+>
+> On Sat, Jul 18, 2026 at 07:06:32PM +0200, Jens Glathe via B4 Relay wrote:
+>> From: Jens Glathe<jens.glathe@oldschoolsolutions.biz>
+>>
+>> The config regs seem to need a few ms to propagate the changes through the
+>> system (like, PLLs). This improves the hotplug dp altmode success rate
+>> on the Lenovo 40B0 dock to 100%.
+[...]
+> +	usleep_range(20000, 30000);
+> /* <explanation why is the delay is necessary> */
+> fsleep(20000);
 
-[1] https://lore.kernel.org/all/4635a665-f605-4647-810d-c9d83a271a86@oss.qu=
-alcomm.com/
-[2] https://lore.kernel.org/all/7cfbc3dc-c1c7-4e4d-afe4-67a25084f607@oss.qu=
-alcomm.com/
+Thanks for the suggestion. It will be in v2.
+
+with best regards
+
+Jens
 
