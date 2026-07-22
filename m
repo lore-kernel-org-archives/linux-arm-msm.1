@@ -1,101 +1,88 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DBD741D10A;
-	Wed, 22 Jul 2026 16:20:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE49C17C203;
+	Wed, 22 Jul 2026 16:21:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784737243; cv=none; b=Its2Z1rRimNuq9oQdwvwsY5aJUjylY4QjlNr9fgOg7W+KBiUdcq+UB+8ErsGg9A7rHFdW1Eb05P4d4z+FTM+uGkNcLFYDf2KI4hYDnZEu+JUwB0T6y8tGouOs1ZAfzyy24gDdrVnk4Gj7eSeSbDgM+lXvqK6rb906Hcmn/5sm1U=
+	t=1784737311; cv=none; b=PmAw7g90cfYsMo33keeO0NtZHtz8nvQK83TjvBf3KkfC9k6Fcr2CEtWKnK36tGIYThC0cnNaWFHXVvUaxt+Beg2S9hB503sVGmhI3TK3Qm92el7cne8BO3LeBpgjgahpV5jq6gGBQjJ1irRV7/1P1VgNYSLTbHORfTnX8GvE6ls=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784737243; c=relaxed/simple;
-	bh=ko1nD3riK0WkNrw9/nLRc62E2PQBCo3M4PL8aYTl7/0=;
+	s=arc-20240116; t=1784737311; c=relaxed/simple;
+	bh=omm2nkvYVT2e7Kvy4LbP2okWMNimmvmsrgFo6mxCWqc=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=EzQjef/Xvxu7HUtE6YD4yJ3edJn0NW67ZtSHuMr7IUIhBFBDVvKUoA97jf/pxxi5kJSBlB9HRXpUxSZSAB8Z8z+qgoxwt/FnNGMTtsMY4SNFdRb5qM93ojTbHWQkMgZROYqAz5vnr2iHfKsa5MSzUvJxiosp+8fEa1/WVMh30O8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XFRfUPAB; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=NwyMxGPQoDDQB8IAk/ZVBJrVkNOuaH2Gsr96fT10RgIkw9urDKBGPVX/gLBV9g3HCSq18xKQzlQRuqxlzttom21lRnk7jwc6dcBgKD09wS+1Gfnrl2/b1T/J6JtR0vXpOKbjwBzRF9vIXHWG1hvBI7GMVuh6zjNKdC/fIqiKjSg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=K1Yl/ye9; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XFRfUPAB"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 830351F000E9;
-	Wed, 22 Jul 2026 16:20:41 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="K1Yl/ye9"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 88F581F000E9;
+	Wed, 22 Jul 2026 16:21:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784737242;
-	bh=1Exwl0AsGwf6M6S13oTNWhmNyTBsKTiqZ5UEvnNJspo=;
+	s=k20260515; t=1784737310;
+	bh=X4nlqSDTQfKgXnssLdmt4BpD3msEFfZZnZiCI8vkwJk=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=XFRfUPABWpzjJ7fOkBcKIqJ4BWV+1eBvjFuNRgixzas8vrIhpRievAN+vHwpRM9tG
-	 RfgbtQd3Bu08Vv4/ka0sxj+j+psYSiVNox2dCK5uXC0oJ9L0nM1Wugrpi2YutCqSSJ
-	 doFwvVXvqg4TrXdU67FEBE4Srxo8uJxwCynncGWgDm3/dcCbqqKcMm/EYDiZGB3yK+
-	 C9PNJNsepyuoWb1EeN+6hxnUwxSL9HVeLYQ5rxr1STHBu8xDsWO1te4hVGdz9rQZyU
-	 BTKfcGrAOtxZYe3xH5y6ZHcdKjWy3P3bkSvEIke5NKhzbRYmnBHnHRRXrJklq7l99l
-	 yuquli/u/mWbw==
-Date: Wed, 22 Jul 2026 16:20:40 +0000
-From: Eric Biggers <ebiggers@kernel.org>
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: Demi Marie Obenour <demiobenour@gmail.com>,
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	Russell King <linux@armlinux.org.uk>,
-	"David S. Miller" <davem@davemloft.net>,
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-	linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: Re: [PATCH v2] drivers/crypto: Mark QCE as BROKEN
-Message-ID: <20260722162040.GC2794619@google.com>
-References: <20260712-qce-broken-v2-1-b2dfff47f7f5@gmail.com>
- <alnlaCXmoLRAlr96@gondor.apana.org.au>
- <20260721082501.6128-1-bartosz.golaszewski@oss.qualcomm.com>
- <c826b73d-6307-4237-a065-b7a8487350ce@gmail.com>
- <CAMRc=Me55rUmjjR+ZzdWd2ss9JJMZzJch0zKd4GqONBjCzFMYQ@mail.gmail.com>
+	b=K1Yl/ye9GP5zGKTMMfFEQjKOVnbf06k9O6M9LFLkIXuL3qh8TZ4CE1JuxW+NQxlt7
+	 j6DdGu1sHJhsqKlIh/tvLdfemqB+/FJU+2jHRsbhCfmd2/RxFGIBRi7FQ21FqrJlLZ
+	 TWrVkMVfbhn5cv6lGEuM4mp0802PWhXMSIKzx6NU393U8iT7usXc41YoxRmbQNqRAK
+	 ZWau1UuybNFE2JOfF6ithDRuCR1LdESOauAZDApQWntLyTj6Hto12+L6kuGbX34yaM
+	 3ibRtv/kBrl9v1RCfklHGv5Ljsq+8D27BKJkzmOoW/LSloBTphcwdM8rrVADvm4V21
+	 giYYr9J77kX5Q==
+Date: Wed, 22 Jul 2026 18:21:31 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Alex Elder <elder@riscstar.com>
+Cc: andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@google.com, 
+	kuba@kernel.org, pabeni@redhat.com, maxime.chevallier@bootlin.com, 
+	rmk+kernel@armlinux.org.uk, andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org, 
+	krzk+dt@kernel.org, conor+dt@kernel.org, linusw@kernel.org, brgl@kernel.org, 
+	arnd@arndb.de, gregkh@linuxfoundation.org, daniel@riscstar.com, 
+	mohd.anwar@oss.qualcomm.com, a0987203069@gmail.com, alexandre.torgue@foss.st.com, 
+	ast@kernel.org, boon.khai.ng@altera.com, chenchuangyu@xiaomi.com, 
+	chenhuacai@kernel.org, daniel@iogearbox.net, hawk@kernel.org, hkallweit1@gmail.com, 
+	inochiama@gmail.com, john.fastabend@gmail.com, julianbraha@gmail.com, 
+	livelycarpet87@gmail.com, mcoquelin.stm32@gmail.com, me@ziyao.cc, 
+	prabhakar.mahadev-lad.rj@bp.renesas.com, richardcochran@gmail.com, rohan.g.thomas@altera.com, 
+	sdf@fomichev.me, siyanteng@cqsoftware.com.cn, weishangjuan@eswincomputing.com, 
+	wens@kernel.org, netdev@vger.kernel.org, bpf@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-stm32@st-md-mailman.stormreply.com, linux-arm-kernel@lists.infradead.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH net-next v2 12/14] gpio: tc956x: add TC956x/QPS615 support
+Message-ID: <p5sfrfa5prxsuznqdjnuusgkj4vyl3aom7gorpdxb2iroxjpgp@7wyx4rceybac>
+References: <20260605010022.968612-1-elder@riscstar.com>
+ <20260605010022.968612-13-elder@riscstar.com>
+ <dhnylud7o5dhaaq6kvbes4vkml3ppa5ev542j2lyxdijibknzg@pfcy22wz6jav>
+ <df217d83-272a-4d4c-8aba-a87e4b8869fc@riscstar.com>
+ <z6fllvxd5r7bln6t6o5cacf2k35c47mnavvkmda6l4gnjaanin@52o34je2alxw>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <CAMRc=Me55rUmjjR+ZzdWd2ss9JJMZzJch0zKd4GqONBjCzFMYQ@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <z6fllvxd5r7bln6t6o5cacf2k35c47mnavvkmda6l4gnjaanin@52o34je2alxw>
 
-On Wed, Jul 22, 2026 at 01:33:51AM -0700, Bartosz Golaszewski wrote:
-> > Also, what can the current driver do that cannot be done better using
-> > software crypto?  I understand that you have future plans to add more
-> > features to the driver, but those are not relevant to this discussion.
-> >
+On Tue, Jul 21, 2026 at 04:43:21PM +0200, Manivannan Sadhasivam wrote:
+
+[...]
+
+> > - Does the TC9563 chip have only *one* function on its embedded
+> >   endpoint, supporting just one Ethernet?
+> >     - If so, this driver will have to be modified to support
+> >       the second embedded function and Ethernet controller.
+> > 
 > 
-> We can offload crypto operations to the QCE saving CPU cycles but more
-> importantly, the QCE provides HW based isolation which some vendors care
-> about.
+> The driver assumes only one endpoint, but the binding lists 2. So the driver is
+> not complying with its own binding now :/
+> 
+> So technically, the driver supports 2 integrated endpoints.
+> 
 
-Do you have any concrete proof of anyone using this with a specific
-Linux kernel feature and actually getting a benefit from it?
+I was wrong here. Driver supports only one endpoint and that's due to TC9563's
+hw limitation. I confused two functions defined in the binding with endpoints.
 
-Just for some additional context, I've been on the Android team for many
-years and have worked with lots of companies shipping Android devices
-with Qualcomm SoCs.  I also upstreamed the support for the
-Qualcomm Inline Crypto Engine (ICE)
-(https://lore.kernel.org/all/20200710072013.177481-6-ebiggers@kernel.org/
-https://lore.kernel.org/linux-mmc/20210126001456.382989-9-ebiggers@kernel.org/),
-which is what people actually use and isn't the same as QCE.
+- Mani
 
-The only times the Linux QCE driver has ever come up is when someone
-used it accidentally and it destroyed their performance (due to the
-20-60x slower performance than the CPU) or caused a filesystem hang.
-
-These issues get reported to me -- sometimes even from Qualcomm
-themselves!  It's kind of annoying.
-
-(Fortunately it's also quite rare, since the vast majority of people
-just ignore QCE and don't make the mistake of using it in Linux.)
-
-As far as I can tell, what actually works and what people actually use
-in Linux on Qualcomm SoCs is:
-
-- The Qualcomm Inline Crypto Engine (ICE) for storage encryption
-
-- The ARMv8 Crypto Extensions everywhere else, e.g. dm-verity
-
-> These are future plans, yes. But right now we do have active users of this
-> IP
-
-Just because it may be used by the Arm secure world doesn't mean it is
-useful in Linux.
-
-- Eric
+-- 
+மணிவண்ணன் சதாசிவம்
