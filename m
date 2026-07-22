@@ -1,207 +1,259 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2E14353A8A
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 13:44:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 99B1425A321
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 13:45:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784727865; cv=none; b=GrGvM+NYdAtxSxchDMCAb3JZmLi4TklR+4zl2bq9gZUVAGh+PRXDtDbAnB4Ei/qbJtDM9r3q+ELQO8oW4oPL8TUKCYX+5KiQ8onFzk1gsaaBHFObdGEJO5slsHhyL2DbTUJLCvmzwsoz1IIjPZup0fcmgEFT26kdn/U+hxiSxLs=
+	t=1784727922; cv=none; b=VPWGn+bf1QwMZjpSFoF4OQLV1tbXH10aCG0Wt/NOuUe7m72rq/Co+sOghcteAVuep2d73iETiw4k+t3bo53qOsm78Mmr6ieuJGhrqZIbmpMHMaVLlmMaT4BTu3UFqAT2O+i3JVsmXMCCQitoNzyk67Kt2g3TdILQZiapTB/NAbs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784727865; c=relaxed/simple;
-	bh=JFtJ6zkpzpjWERBTY3MFeh2brvW3XChrGsQfXeCZzW8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=dxNNxPgZ1o7mrGj9HCuNUYq/xcKuclW4Di/q9JTLarM3fgo3dh1J6zV7tl8vPU3JvxN+DK+63KeSw1HWfqHx1wXnj2vxojErQGEdmhRspPEfxhVDHfuabbpa3mIkHRO2Ar+uopkjKFXoRCJD9s6xIZLPp4jZF3JBhS7/ecTX0q4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Pismn3qJ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=abRZ1Oys; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1784727922; c=relaxed/simple;
+	bh=zJIKNlxVbXHe0t+aQ2XnfQrcPSlisOsTXZwFurkQKSc=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=L3IdPQawE3Zk58FGIMKIlti0w9H+22j2WRkmsLtBsBUAumugrEWoeZyzzfndj5pIHPiQDXvufYbFBLGs2626HRn0Q0ZX0iCC+C8V4wDQyKQmjECKeaFCrPPLmE3a27l3AbG0W8ADg0s20EM6fpPJjw6/KE5CRiZ8usQUt/+7lIo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=JA88l3BX; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IAvf6fhI; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Pismn3qJ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="abRZ1Oys"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66MDWRAk891389
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 13:44:19 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="JA88l3BX";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IAvf6fhI"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66MDWRuQ765286
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 13:45:19 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=GIYdoPwmlp7SGGM3Zke7zv5s
-	UTlikc1HJ43uNZXOXg0=; b=Pismn3qJPSfTO0BiitkZhgBvnpO3ySI2znI+O3ZV
-	Ov3IyKoKlZumsAOUsdIKT4xFm0Eg15T5GjXaI6xf+22/7z4HgV+ojKmiHTvWqsrP
-	zrwxvHY/3stUpZ/uVvgsMPufeuYKJTesqIfcpLZ7B/3eJiS4Xoqn/YKK93R7MeHc
-	33coLoq+RliTOVxCrdMi3Y4MKZAHBvAH1xAh+FbniqUBWqpLD7XJl0RfNeKi9QdD
-	E/RkPm3qgoWpVZtwgKzmCPiD3M+vIo/ziiG2fe+gv7x6A+BupKHFdEppwEsBgqQ1
-	uzB3nlbwfO9VoixGtzXCDoRnB4r3TLMyvtKtqy7KO6C1rg==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjxm103j2-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=vJcKEmjH+SaATY1H200JHP
+	BYsDX1MZgPjB74rtKM1G4=; b=JA88l3BXe+04QCEXlsWCIWMLjDw/6iwqUGG0MJ
+	Ms/GJ3+bsuEtBQuX544j4fre8YTc7DKbBNAFaAAtYBnqPmgg04cFXnAYuA5wpFN2
+	pVp97PhwGzoe1Kj64I5Ql2mTTaBVNKoG7nWPzdC1OOgIvDnUo0b7EnyS8SIFXFvA
+	YLjJfIuYbuQBU0eZOoaCobVxdauq1ukwLu0a91QBId2Dbf5K85/yJhGfRw9nvBuD
+	ErhdzVKKVJTYRmtjaNyqPo5j9Uok4d/vhrEmscnLdFF1irVIpywjoMCKWdeLvAcS
+	UY3v/6esC7LjnJXkXXS8W8frpuJ0ktOJh0L8FBnvijwFFJ+Q==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjtn2s656-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 13:44:19 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-526da7e3c9dso30742111cf.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 06:44:19 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 13:45:19 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c26012cd0so219396341cf.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 06:45:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784727858; x=1785332658; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=GIYdoPwmlp7SGGM3Zke7zv5sUTlikc1HJ43uNZXOXg0=;
-        b=abRZ1OysdcDVGVaXTfcn0wdnac6bh1u1gDhoIyd5t+ZAB/4tJXoeURExh5O0fRSupO
-         SpdICiV7TIFqFCuKHWshSoMOS7bDiSZYdt60k0qTe3eQJB1RTAsae24LHBJwXjOK1Spt
-         sFqGTxh92GjmmHQw16bB4BL7hTvBAaGmBinHIFUU74Www2uRaQOCVcf/ZgwFesV+WRBq
-         oFvNXyyUlXn1mFXAAjxD/usZGG4fsmkPnlwOybJn5FVbRgLhMa3nIOu9pgLmLzb3xOiy
-         QMW9uNEbOSIibsO/bGH43sf84XZKTX1GPL3gcjhKeQhngiSjphxIMDKpoheHgtJ5lBwE
-         X2GA==
+        d=oss.qualcomm.com; s=google; t=1784727919; x=1785332719; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=vJcKEmjH+SaATY1H200JHPBYsDX1MZgPjB74rtKM1G4=;
+        b=IAvf6fhIJTD2wk3X1jfW1i67YgVulZCQFcAxYQdeqfY+FnwPe2Q6282KSJWNS6U3Lm
+         B/9rlb8POe5mPU2G13Io7VWQ8GgRLyXmSzs97gUtbA99VGJutrTBDK4CJzsCm/BXQn3N
+         OkGXLB7opRXDFbhIaS9sU82R0AeIYGlfggVnKnCI4beDcSzcq1Z+Bu4dnVzpLPDH2Jsm
+         ut5O5Yxff+kMRI25WXO17Clt8fjHIrmh+Od+CyVcp2DrpmiklzvDEAeeUghtA42BsDwU
+         qIMf8hK6eId1lo8p8NXNduG8wUltp6EnLVZpMW466FlZ9LG1lN86Zl6rSKxcZb913Zyd
+         +5Dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784727858; x=1785332658;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=GIYdoPwmlp7SGGM3Zke7zv5sUTlikc1HJ43uNZXOXg0=;
-        b=jdGxqxlRlRF4RKCuPOAqymNCvWckpAUxpH4DgBJXD6wCwv4+ipbK1Y5Vkt5GXztHaJ
-         c+oFTRz5zPccxsNQLBMeQyL3d8x6+Bm1YuqmMEhFmju5w6xuRXZAElVb+gOhu0+WAYRY
-         dt+8Mr9Uprqnav+3UuyjrFjernRlUS+VGgwtPO9FiqvLyumZ98Uzz0TQ2EAU5Ao8tlmU
-         YrtHlmhJ2xHDrn7BqCcDCL5pADhA99KxY2rVgBdZOTmO/J3QEe9K5FA53kVlju3Smml2
-         OLwlnrVkaYWJ/D4/B75kgfNYLklXdRpjMBnspgjpVX5LLa2La3EFl8xJFD/dc3nss7bx
-         n5Pg==
-X-Forwarded-Encrypted: i=1; AHgh+RrEIagePE1Xrxxa53LWkt625SzevM52V/DhuELxChERYdwd64yFPqy2z3dYeJhoxZpBoRlap3D+9Mj6M8QG@vger.kernel.org
-X-Gm-Message-State: AOJu0YzIm9JFI6MBMA+Gh89tUxXlNIkt6gw6JwWoyX+tkJx36tMSTG+p
-	z8VevGlxnzphqXPkT90utnpzMmQsQOMn64y9vpuSsT3EK+tu5yyuE1xZRAEVMhHMtP2OGlgh08x
-	sbn1SgwWKi9mNeUDG5tPWPGRbjdxTeBKcyQBr5opiVWvkRpGMq7yiJrMaiBXIlxeWq72+
-X-Gm-Gg: AR+sD13DUf1Jb43+Ne+tKnU2OwWGXomo+tvc3c0UcA4vqhyfovBhbRNAZnh8ZYsnGeW
-	5Tke5wgq3k1OhH+PS6M8Vm8OirxX/94LwdaS8wVh+D87r4R+uq9NwfEUJBrc524LYlH4ezw/ZGo
-	0l7hGm4+iy3tIUK5T89i/py4Z9CHDnWN7keRUvECIkhZMqhUTFZTZU2CIwNbSMlUySD0fQPZmZc
-	HEJkye8uBdEZ+5k/IOa53EbAeykvj6anJ/UfArcbzDa3K9avGe29qe8t+w5kPpMDO7hY1TMZsKb
-	n1y3RO4RnzR/JxvHMfYfxsxns9k5iPU3ew0iWpwQbktozehWDGe9Hp2riZyU3oOrlzxrYU62lJw
-	EvxUroifBzUL0/kj4b3SftQ2EbDAno68lzh9c5AhrIFyAbxusBa73QEnEdKvXDiyk4nL/PIy2na
-	StCQdHitGBYMhd9w==
-X-Received: by 2002:ac8:7d0c:0:b0:51c:94f:8ce with SMTP id d75a77b69052e-5213c201a70mr211249511cf.34.1784727858392;
-        Wed, 22 Jul 2026 06:44:18 -0700 (PDT)
-X-Received: by 2002:ac8:7d0c:0:b0:51c:94f:8ce with SMTP id d75a77b69052e-5213c201a70mr211249091cf.34.1784727857758;
-        Wed, 22 Jul 2026 06:44:17 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2a9f4a728sm482968e87.75.2026.07.22.06.44.16
+        d=1e100.net; s=20251104; t=1784727919; x=1785332719;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=vJcKEmjH+SaATY1H200JHPBYsDX1MZgPjB74rtKM1G4=;
+        b=SQFp3+Z2wugvRQk+qe45vdsH4rVFfdpxNy+KhXcH4xk3gMhkECM8sYXz06RuX9o1SS
+         3fi+J6yoKySwscueF3k3EBXRglxR1LpGKG4DJtb4x+sUyWvuv8JAVQa95npu9j86emjH
+         kBFaBvwPLt3J0ZZRMfOSKjjoDAUwYuW/vij7esFprlnBVmY394tP2Eg3A3MTqKYP5bAY
+         o/KMpQEy/fMx2wxp14t6lZwkD2lx1W1+Sf/gIEcDE20hdBqh5nOBN2Ml1coKXrbyNmzx
+         0DmF7rz0CP0eR6186fRaEivqPMFkiaiXJpmptTgKUt3JfpLcHO/Vss6P8qC6lzes6+9G
+         2Sfw==
+X-Gm-Message-State: AOJu0YxNL4nIAgW8b2e7HxWFoQy8ER+p0fTHAEMu37AEoO6u3Uo3p7jx
+	YlnqnK7O7RkbIkakWgZOoQ3TMny9cQ6fFvrZI0VVFVYBNYfZAHrY9z2HXAJuAPBdM+8n0rF0Z3k
+	d1sy+uGGhmbttsCEDhoov0dh2YqT0ev9oGC2WGJ82hPoy6SulEvz0nRa6HpOdIQbzByfz
+X-Gm-Gg: AR+sD11cQobSqyVoXQGPn6YDyZ3MS8CU8I4dk16lGUW3x1Ehjgsf15Q9REwge92oOQp
+	RmEASB/UC53A5CIz1IIp0Laj/w9RAI27YH9v2nxm8vvNmtOEW56hWRv4tHoN1qUuaW6cHf+RbC3
+	ep7zF88sbqGH0RH0cYdC9IAamTSQqP1wWr9UXT+Bg+Y+5YUBkDK+srKh28crZOrak7lVvUYBkot
+	c6hN9B1JVgGRk1YeOX7DPtO+gFG5leKmukfEJKubAj8bXTM2hheIExZG9WMpYBcNFJvenRTNb4G
+	hwc8L2y+YgP4QcS/Dzvo9sPvg/I87XohEGIDBGjg0DAC4LzrQ6ZPzT5qpI4IBNE1Ueq9PxmLD5H
+	mG7+Gm6dupBqJA8YRESl+2S7jraQh7vF00Xpw+xMRxDYoPY5a5K55+EcD0TKULwp05MMxjj/CVb
+	KRK7PCh4hOSnkMFrru/ORk6FITU8CEdotDo73HoQ7Dpilfe+k70A==
+X-Received: by 2002:ac8:5705:0:b0:51c:7b12:5fff with SMTP id d75a77b69052e-5213e7795aemr207544631cf.75.1784727918400;
+        Wed, 22 Jul 2026 06:45:18 -0700 (PDT)
+X-Received: by 2002:ac8:5705:0:b0:51c:7b12:5fff with SMTP id d75a77b69052e-5213e7795aemr207543581cf.75.1784727917554;
+        Wed, 22 Jul 2026 06:45:17 -0700 (PDT)
+Received: from QCOM-eG0v1AUPpu.na.qualcomm.com ([2a01:e0a:830:450:48e:a2cc:6c4:c92a])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1c32ac8c3esm111874366b.23.2026.07.22.06.45.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Jul 2026 06:44:16 -0700 (PDT)
-Date: Wed, 22 Jul 2026 16:44:14 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Vishnu Saini <vishnu.saini@oss.qualcomm.com>,
-        dri-devel@lists.freedesktop.org
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        venkata.valluru@oss.qualcomm.com,
-        Jessica Zhang <jesszhan0024@gmail.com>
-Subject: Re: [PATCH 1/3] arm64: dts: qcom: lemans-evk: Add LVDS display
- overlay
-Message-ID: <b2pbwtqd5mf5d3sbbadx3e5o3ohys4mmjv5dxc3grycuuqjvgg@rh5veftljlrt>
-References: <20260719-lvds-support-v1-0-1f1aca3213ba@oss.qualcomm.com>
- <20260719-lvds-support-v1-1-1f1aca3213ba@oss.qualcomm.com>
+        Wed, 22 Jul 2026 06:45:16 -0700 (PDT)
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Subject: [PATCH v6 0/7] phy: qcom: Fix possible NULL-deref and runtime PM
+ race conditions
+Date: Wed, 22 Jul 2026 15:45:13 +0200
+Message-Id: <20260722-qcom-usb-phy-fix-null-v6-0-534f7e61b9a6@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260719-lvds-support-v1-1-1f1aca3213ba@oss.qualcomm.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDEzNCBTYWx0ZWRfX5UbFipwqU2yd
- Ql2dK2EDfvyJlKXzYuESPoaRyC5LMBqx4QF4me0kQQNL7lIvrT5PUUU8Sg+UgzCtGjsc5kNUnDt
- 40mb8mr7r8wXPV3uvoUi+YRab1VN9Os=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDEzNCBTYWx0ZWRfXzrV13n7Pus/H
- ccl0q63SEx/adf8hcVMs2vmWCy3u+OyHSIJlXvS8JNtyB8UcAuTRGqCTpAD8yJCeHVSulIkICYm
- sT3PiqM+J770tdcXQ51WGDeQi1KlKaFUNvE8kc52HomnbsbGtUKtqFcY9WuljnHM+GSm3PRjtf3
- c1mYTSBT/hH+x0t7MYS85yAfCzB5EUIb2EcatOUzzdaorEUAoub6A38O+iFkfJzF1XZ3d9DGssf
- f0IsUTWQ+cfubeMWki3F9hvbJHmozQ4mh0+/vuWps8mMyycnwx2nAGyipXYtpsvZ2Vy6Lw3eeR1
- hqni60IldX6mp7U/ZMidQv35c5fahFSWh3bjyTEbWn5PfGR8wykVYx1diIOgqK4Cp8gw8r4LstI
- w8Kf3ipcayyjVPSF/YYuLY/ru06D8/AXRVoYsAOJqa83OGCkv+EYZyssjXTiJfEX5INH/PYbMms
- mo7vkLIrp0k36pQ8myw==
-X-Authority-Analysis: v=2.4 cv=Rsv16imK c=1 sm=1 tr=0 ts=6a60c933 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAGnJYGoC/4XOwQrCMAwG4FeRns1Ia7upJ99DPNS1dYW6bq0bi
+ uzdzbwoqHgJ/IR8+e8s2+RtZtvFnSU7+uxjS6FcLljd6PZkwRvKTKAosRIIfR3PMOQjdM0NnL9
+ CO4QAzuGmcqo03EpGt12ytHu6+wNll+jq0iSrX5pAxWlKLCq5XlUcOITo66KLQ9C+3cWci37Qg
+ R6eCxqz2/h8ien2rDvKWf/XbJSAII3Q6LA0aqU/3bngqN4x/gtThGm+5lZoczTCfMGmaXoAx0F
+ QV1YBAAA=
+X-Change-ID: 20260720-qcom-usb-phy-fix-null-ff097f56d1e4
+To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Wesley Cheng <quic_wcheng@quicinc.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
+        linux-kernel@vger.kernel.org,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDEzNCBTYWx0ZWRfXwjmPJdITRlS2
+ aVywRd16uMyLz84mxPUHbfwULvxzMsGklrr0BcU220Qh+101lBQ0kQ14pYsoqrb6+JrZQutKfFQ
+ 0HYTBtFKaOqFcK3DQl1JqR7IKR+lQBX1MSl9Y67oGOUYWOzdCShB9qpr4AH+0srVQmd32y51apg
+ vDUduKIoHuGN9dvx4X2J+27MyfDU+kxKQRqS821lgBkhMvYt0urIuzmpZdGU12GzVpn9Q0/LfJM
+ iKocr2eqfnr9MOiKTooFAiOm5LUlo0RFGOpa5sn+TKuNJiRiE6kohFrYpYWn/vpVS50gKqek0Wl
+ oY5DEPs9vaxhCay5oU8GKxLLiHW24RcCH0rBWZQpxKrK+XNe5kEsjn0UA4hOE27KxVSWH9LbD2+
+ agTonoO2JnFs8LgAJjHdEmzhnbPlpvA72vOt++2oq91XgYYXPP03/td0816jhB25Rw1PsmALpjj
+ tpJSPyVeGmYY3tU/3rQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDEzNCBTYWx0ZWRfX+VCGWKMUrgaM
+ 8d6wLd+RU8+UuzRgmWfy57UmJzS2vD0FVoOzFi/+EzuFkx8ugxCP4zUrfLZyIa8UpJ4TjFAyaTb
+ EbfIh9efDgMDZAALVoLHXQJy3ItbH4g=
+X-Proofpoint-GUID: Rjt3oxtRp0x_cf2zcaeJPwQIr4wgk-S1
+X-Proofpoint-ORIG-GUID: Rjt3oxtRp0x_cf2zcaeJPwQIr4wgk-S1
+X-Authority-Analysis: v=2.4 cv=T+28ifKQ c=1 sm=1 tr=0 ts=6a60c96f cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
- a=hb4hLJ562k5UIXpG1yUA:9 a=CjuIK1q_8ugA:10 a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-GUID: SiWY6Zu1Th_3l5k3L64yHl_hebsmLoVO
-X-Proofpoint-ORIG-GUID: SiWY6Zu1Th_3l5k3L64yHl_hebsmLoVO
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=COk6AnOGAAAA:8 a=JfrnYn6hAAAA:8
+ a=JEbQ7g8ZO4jZ3kYS0isA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=a_PwQJl-kcHnX1M80qC6:22 a=cvBusfyB2V15izCimMoJ:22 a=TjNXssC_j7lpFel5tvFf:22
+ a=1CNFftbPRP8L7MoqJWF3:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-22_04,2026-07-22_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 phishscore=0 spamscore=0 impostorscore=0
- malwarescore=0 adultscore=0 lowpriorityscore=0 suspectscore=0 clxscore=1015
+ suspectscore=0 phishscore=0 impostorscore=0 malwarescore=0 spamscore=0
+ clxscore=1015 bulkscore=0 lowpriorityscore=0 adultscore=0 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220134
 
-On Sun, Jul 19, 2026 at 11:35:06PM +0530, Vishnu Saini wrote:
-> The Lemans EVK IFP mezzanine supports LVDS display output using the
-> Lontium LT9211C DSI-to-LVDS bridge. The bridge is connected to the
-> DSI0 output and drives a dual-channel 1920x1080 LVDS panel in
-> VESA-24 mapping.
-> 
-> Add a DTBO overlay, lemans-evk-lvds-boe,dv215fhm-r01.dtso, that wires
-> up the LT9211C bridge on I2C1 (address 0x2d) with reset on GPIO37,
-> a panel-lvds node describing the 476x268mm 1080p panel timing, and
-> an LCD display bias regulator supplied through the GPIO expander.
-> DSI power is provided by vreg_s4a.
-> 
-> The overlay is built as a composite DTB combining the base
-> lemans-evk.dtb, the IFP mezzanine overlay, and this LVDS overlay.
-> 
-> Signed-off-by: Vishnu Saini <vishnu.saini@oss.qualcomm.com>
-> ---
->  arch/arm64/boot/dts/qcom/Makefile                  |   4 +
->  .../dts/qcom/lemans-evk-lvds-boe,dv215fhm-r01.dtso | 127 +++++++++++++++++++++
->  2 files changed, 131 insertions(+)
-> 
-> +	model = "Qualcomm Technologies, Inc. Lemans-evk Mezzanine Lvds";
+Address potential NULL pointer dereferences and race conditions related
+to runtime PM in several Qualcomm PHY drivers. In all cases, enabling
+runtime PM before the PHY instance is fully initialized can lead to
+crashes during early runtime suspend callbacks.
 
-EVK, LVDS.
+- Attach driver data before enabling runtime PM.
+- Introduce initialization flags where needed to avoid dereferencing
+uninitialized pointers.
+- Reorder pm_runtime_enable() and pm_runtime_forbid() calls to prevent
+unnecessary suspend/resume cycles during driver probe.
+- Use devres-managed PM runtime helpers for proper cleanup.
 
-> +
-> +	panel_lvds: panel-lvds {
-> +		compatible = "boe,dv215fhm-r01", "panel-lvds";
+Why it happens?
 
-Thinking about it, does your panel have EDID? Is it readable from the
-device via the I2C bus?
+The PHY is a supplier of the USB device. A USB device cannot be probed
+until all its suppliers are ready. As long as the PHY is not ready, the
+device core keeps retrying the probe, which fails with -EPROBE_DEFER.
 
-My major concern is that if the user changes the LVDS panel, they'd need
-a new DTBO.
+At some point the PHY probe finally runs, but the device core may still be
+attempting to probe the USB device concurrently.
+ 
+Inside __driver_probe_device(), we have:
 
-Would it make sense to implement EDID-based handling (like it's done in
-panel-edp)?
+    ret = really_probe(dev, drv);
+    pm_request_idle(dev);
 
-> +		data-mapping = "vesa-24";
-> +		width-mm = <476>;
-> +		height-mm = <268>;
-> +		power-supply = <&lcd_disp_bias>;
-> +		status = "okay";
-> +
-> +		panel-timing {
-> +			clock-frequency = <148500000>;
-> +			hactive = <1920>;
-> +			vactive = <1080>;
-> +			hfront-porch = <88>;
-> +			hback-porch = <148>;
-> +			hsync-len = <44>;
-> +			vfront-porch = <4>;
-> +			vback-porch = <36>;
-> +			vsync-len = <5>;
-> +			de-active = <1>;
-> +		};
+    if (dev->parent)
+        pm_runtime_put(dev->parent);
 
-[..]
+    pm_runtime_put_suppliers(dev);
+    return ret;
 
-> +
-> +&i2c1 {
-> +	#address-cells = <1>;
-> +	#size-cells = <0>;
-> +	pinctrl-names = "default";
-> +	pinctrl-0 = <&qup_i2c1_default>;
-> +	status = "okay";
+This means that whenever a USB probe attempt completes, whether with an
+error or not, its suppliers are released via pm_runtime_put_suppliers().
+Releasing suppliers may in turn trigger a runtime suspend.
+ 
+In our case, since the PHY is a supplier of the USB device, the USB core
+keeps 'looping' in __driver_probe_device() returning -EPROBE_DEFER until
+the PHY becomes ready. As a result, pm_runtime_put_suppliers() may run
+concurrently with the PHY's probe function. If this happens after
+runtime PM has been enabled for the PHY, but before the driver has
+forbidden suspend or taken a PM reference, the PHY may end up being
+runtime-suspended 'unexpectedly'
 
-Empty lines before the status property (here and later).
+---
+Changes in v6:
+ - Move pm_runtime_put() after devm_of_phy_provider_register() and use
+   pm_runtime_put_noidle() on the registration error path, to avoid an
+   async idle/suspend racing with devm's pm_runtime_disable() on failure
+   (Dmitry/sashiko). Applies to all phys.
+- Add similar patches for qmp-usb (sashiko)
+- Link to v5: https://lore.kernel.org/r/20260721-qcom-usb-phy-fix-null-v5-0-a181e2adbd2d@oss.qualcomm.com
 
-> +
+Changes in v5:
+- Re-introduce phy: qcom: qmp-usb-legacy: Fix possible NULL-deref (sashiko)
+- Link to v4: https://lore.kernel.org/r/20260720-qcom-usb-phy-fix-null-v4-0-4d2a0f06d53a@oss.qualcomm.com
 
+Changes in V4:
+- Instead of moving pm/forbid, increment the pm usage counter before
+  enabling runtime pm and decrement it after the PHY has been created. (Johan)
+- Drop now unnecessary dev_set_drvdata() move in snps-femto-v2
+- Drop 4/5 (qmp-usb-legacy: Prevent unnecessary PM runtime suspend at boot)
+  which is not required anymore. 
+- Rebase
+- Link to v3: https://lore.kernel.org/all/20260205160240.748371-1-loic.poulain@oss.qualcomm.com/
+
+Changes in v3:
+Rebase on next and remove 2/6 (obsolete)
+
+Changes in v2:
+Split patches 2/4 and 3/4 so that the null‑pointer dereference fix and
+the runtime‑PM enable/forbid reordering are logically separated.
+
+Loic Poulain (4):
+  phy: qcom: qmp-combo: Prevent unnecessary PM runtime suspend at boot
+  phy: qcom: qmp-usbc: Prevent unnecessary PM runtime suspend at boot
+  phy: qcom: qmp-usb-legacy: Fix possible NULL-deref on early runtime
+    suspend
+  phy: qcom: snps-femto-v2: Fix possible NULL-deref on early runtime
+    suspend
+
+ drivers/phy/qualcomm/phy-qcom-qmp-combo.c     | 10 ++++-----
+ .../phy/qualcomm/phy-qcom-qmp-usb-legacy.c    | 21 ++++++++++++-------
+ drivers/phy/qualcomm/phy-qcom-qmp-usbc.c      | 10 ++++-----
+ drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c | 15 ++++++-------
+ 4 files changed, 32 insertions(+), 24 deletions(-)
+
+--
+2.34.1
+
+To: Vinod Koul <vkoul@kernel.org>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+To: Dmitry Baryshkov <lumag@kernel.org>
+To: Wesley Cheng <quic_wcheng@quicinc.com>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: linux-phy@lists.infradead.org
+Cc: linux-kernel@vger.kernel.org
+
+---
+Loic Poulain (7):
+      phy: qcom: qmp-combo: Prevent unnecessary PM runtime suspend at boot
+      phy: qcom: qmp-usbc: Prevent unnecessary PM runtime suspend at boot
+      phy: qcom: qmp-usb-legacy: Fix possible NULL-deref on early runtime suspend
+      phy: qcom: qmp-usb-legacy: Prevent unnecessary PM runtime suspend at boot
+      phy: qcom: snps-femto-v2: Fix possible NULL-deref on early runtime suspend
+      phy: qcom: qmp-usb: Fix possible NULL-deref on early runtime suspend
+      phy: qcom: qmp-usb: Prevent unnecessary PM runtime suspend at boot
+
+ drivers/phy/qualcomm/phy-qcom-qmp-combo.c      | 26 ++++++++++++++-----
+ drivers/phy/qualcomm/phy-qcom-qmp-usb-legacy.c | 36 +++++++++++++++++++++-----
+ drivers/phy/qualcomm/phy-qcom-qmp-usb.c        | 36 +++++++++++++++++++++-----
+ drivers/phy/qualcomm/phy-qcom-qmp-usbc.c       | 26 ++++++++++++++-----
+ drivers/phy/qualcomm/phy-qcom-snps-femto-v2.c  | 26 ++++++++++++++-----
+ 5 files changed, 118 insertions(+), 32 deletions(-)
+---
+base-commit: d10df0b23caf4399aeb47b57b3029a04b2853d25
+change-id: 20260720-qcom-usb-phy-fix-null-ff097f56d1e4
+
+Best regards,
 -- 
-With best wishes
-Dmitry
+Loic Poulain <loic.poulain@oss.qualcomm.com>
+
