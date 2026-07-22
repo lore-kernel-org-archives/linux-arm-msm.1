@@ -1,69 +1,68 @@
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 186984399D7
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 20:29:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E4613ADB89
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 20:34:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784752185; cv=none; b=ttgaCbdcwvpMvPvcC9QdL82xzsXFiOJPw6vLFBDbYGJCBsO2n0siTisSjMxw+iywQ817H9h8csMNwda57yVpBPPpNsaF+T9sgqMU2CW5qwFBJbaIU4qfeUs/yHdoKF29cF1yf8mdzc2w59dvzOrVqRppkg62AjQ8zO1uQDNn+Cc=
+	t=1784752491; cv=none; b=iCo0h/DHJLBXzYjjniP9/PIz8TAITmg9vceQ+kcRpK809LcR9W5CONiR0fVoHIvKiR6k++9XHn+/PoLqljpELrnoeNbj550KIuRdUkrmTO1Y17LeBUFyrkK1rQICx4B8FBPtLiNWUnFVo5jTaXkYuB808pyBjFnvQfpKntzpBKA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784752185; c=relaxed/simple;
-	bh=GJPIpuAYOH/Cd72F8JXZljndf72BGP41ynlicTsSZpc=;
+	s=arc-20240116; t=1784752491; c=relaxed/simple;
+	bh=rkDL+w+g5I+rya7FyIvoZ7BhxGu8YhgLO7IIpbs+tpg=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ElQH1CAJ2GRlC74HfYSPwUn3KUFpCAy343LmFuJyB01DBub4WfnxPMXGE0+WJpGwXdSq1f4TPoRnWu0PX55e7RmY2r5o7DrfM/PRUuN8c2NYSzEDp1nTkQUjrWKDnAa9pT27ufJpMrJTAOv2ziho9ku045hivT6jJ5BGLj3ggLA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=YVj6vpfs; arc=none smtp.client-ip=209.85.221.54
+	 In-Reply-To:Content-Type; b=DZ/Pa8koIlBzc7WCVZzuXsoffVcrTLCagwq3OWO++INUKyNgzn2WZwvehziiVvcp1Q7c2ZgnzMo1rYXU8d8os0PZwp1O4F62ldwcRQNFopX9RkoRqWBm3WM3QmgMsW1of4QCLhhkZym7ognaoZUQSqW32kfRdEZU3DbkezvCjJE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=OVtP+5MW; arc=none smtp.client-ip=209.85.128.50
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="YVj6vpfs"
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-47f752b3423so3089753f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 13:29:43 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OVtP+5MW"
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4956242332dso31298325e9.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 13:34:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784752182; x=1785356982; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1784752489; x=1785357289; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=GJPIpuAYOH/Cd72F8JXZljndf72BGP41ynlicTsSZpc=;
-        b=YVj6vpfsHVUTgex0kjgtjlXW+2qU9sKjauhrevC1m0jze73Y5brKVbVr8fTOexZzbz
-         QNhWoT2lYPwAB1dcbOII0Vzi/3iBlotuc6xwIbg//Z52C/N61y/dNykPk9jrKfEt6Wke
-         hCeeU8e9i4J0TacJJEZ+CB5hvwsvMl/twQ3QGt90sSVFWCyOmbZTW+FtZSwr8W/fBK4q
-         A5Lh4tIwwKrOCWSw44K8wTff60NxMn34L9XOQp4AovB7qvCPvUbZHQmeHMA5bNM0sJ0N
-         MN9Y8RUhjOQWapUNgN0StlAsekorRZFfvcm+7NgcfGj6BZSF+Pe96bdHLuD+hnETc4GS
-         IXfQ==
+        bh=rkDL+w+g5I+rya7FyIvoZ7BhxGu8YhgLO7IIpbs+tpg=;
+        b=OVtP+5MWkLZabIbQWWcmxe2AfQ6iZtPW3TcV6XKqEm3C08ggSR2vaH/AkwBM+aH0uQ
+         E/8lTOKkL/8oJtYM1IofaKxaSpEU3idmh77EnOSA9cZ/9GBxB6qnOufPGRPVynGOcM2V
+         v2+owMAA6lh7QW7YQvZZ5+zdmHLgXWVR9RLXaCd6MFEUGuRc2o7wU3E8ogOmCdmx7nS8
+         PRsuBWnJhg/LkiN6GBBWa29RyAvGTeWKwCzO7qCZGuxyJbXcP1x1XBuZkQ1NGboEVus3
+         iFrzDFcO2nOIO+WUSkkDakbr3+XT10d7USBu03iReHdWcb6Y9sLzuPoJCJ4dKaeYo3+y
+         tvZA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784752182; x=1785356982;
+        d=1e100.net; s=20251104; t=1784752489; x=1785357289;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=GJPIpuAYOH/Cd72F8JXZljndf72BGP41ynlicTsSZpc=;
-        b=EBa6/7mKuiqubjx1+sxazrk8JoR0rvVHi3kqa4jomkTUg39lKHiuA+XReYBBm2ouIW
-         a/PQUnnNp4OoaIUNBp/AzBw7IleoqLRPLl+Attj0LcMxyK3bVdUo7mjemIFZclrayhIN
-         TXy3CWiheeUX8e022MDM9k6zABl0jjZWb42vvasL+UUIWunBLqVuRlls6ONYK3Qzrsd5
-         Xbr2XmFpwNxbz3hv0htcKWPHQ0vZgm0gu0ixZceZAeex3njrmiAmu86xBo7xucLfJrT7
-         aeBFW9FTyYJgONuwssdvffUfap1GJl+zt+I+jfwi+IhmfrTot+tUqlVXBmqsEFEFxSjr
-         19Ug==
-X-Forwarded-Encrypted: i=1; AHgh+Rp//5HBcU/n7QK6IB4DWwQhJYSfvv/dRTxbIyBHV9xrD3pOq3IsYNoRU/OH/QyrHvV9b7L4LroOmLg2JdMT@vger.kernel.org
-X-Gm-Message-State: AOJu0YySiXIoL3/+cLXAnRVbQKieDIx1Sy2i84Rnd8CRkwFfgC4RnYqB
-	StTzHSZK2zievJOS8lA/YFFdGFCxDIsQ5jCHSQPbkgMpXMrvh5MSS51q
-X-Gm-Gg: AR+sD121tZhADwlXICZAka9XiEORZYYSEEIOZ6kwjx4UJviBpxt+WreJDd0cuAD++ai
-	e2VNlYxlgRWFWUXM/rMTVLOmoOHs55OezDvrNYZ6cxu7kltCBR6pydb9ZhlhQ27KS6nSdKZ7aUb
-	jHj7zY1e5AfSltYfzwn7+HLIklNeqNpHTSKnnqKwTFvUWsbt9KIvPnp7g+K2e74UQ2uLap8AJxN
-	w4EcKtPLe4pNsaAUNNs9ADE6w3Ws5JnLwVzK5snTJFsO3d5axVmmqdbmM74upwfhrr/AesCHtnB
-	SckYg+HZhvdRGESfH+/R8BZguCZ5GvviNJrdqqfUFslPNSv++Y3kP74yZeG4DjwU4eOvPmO6/eV
-	ft0RgIdtll7tZ+73ZQiuX/ZPT6cnKg7ZV2b80BbNrLZwj1i3fcrpt04kY+bACdz9iuNpE7oa4s9
-	oPMmQ05z5OP/zo2e4hDABvJ8hfm4KidKwuLj3P/WlkTzvUNuEUEo1Ozhv2/GbKC27Z+v9Nis3i6
-	zyGgLki
-X-Received: by 2002:a05:6000:18a2:b0:475:f0c2:5afe with SMTP id ffacd0b85a97d-47f8dca4f76mr389618f8f.52.1784752182154;
-        Wed, 22 Jul 2026 13:29:42 -0700 (PDT)
+        bh=rkDL+w+g5I+rya7FyIvoZ7BhxGu8YhgLO7IIpbs+tpg=;
+        b=aPNkclHaoXx5Q3dSMhubjEQ4WigmpMzaR/yti8kvP7tDQ9lyeKHdqmUjnZq1ol1vZA
+         M7BwY+WiOJxpjSaPKsQjCjbdI8ggRuCBBysh8Jr7n38y1jm1gJf1flQ1THtHDKEp6JZ8
+         jnDBN9LrgMn2iRx+uLw/zGM1wpMwWthRN+Sq5zlzCfmjmtx30QmRStx20NCBwq3yqr3r
+         be1PcOEDWX8pb7qw0NWv6iueBbzd41Fais+sItkrr2MtWusqrN/hV3vzRpPfSR4AiYjC
+         uHO6nvXkrO7gEPvE45a1U+FaPeUkatUTWTJ6VJZ9UYM0ag5DJBUfW/7xaNQr7pBoP7Aa
+         bLaA==
+X-Forwarded-Encrypted: i=1; AHgh+Rrmqz8Z+J87hVNFcBVpv4as5X8G5BiCPHojKslvj8HA3tJ619pyEyCrdYNkes6NUlSUqpH2fVXdsjlMdgzI@vger.kernel.org
+X-Gm-Message-State: AOJu0YzgXhk+zQW+FMeOd/WJ8+49Kr1tOlbDHOJUsYdnYbCxaxIl1I/S
+	aXTLtcHvyz0Ph44D2HCiJqSaaPAZSmhhDoWIkvB0OzkyXo4PGIm9Mew1
+X-Gm-Gg: AR+sD10k7ly+MQZHfGDhDYjx2ixtdr0OkcNwiT9K9SR17yq3VRUz141MV8AZbel0X6M
+	QxcRv1AW2NGkL90kld7b8CJ5QH9F4X6RYLUZVzmAQrVqcIRWZMe/zT53V+M+fTPKdEyTfNPuv1K
+	w4xliE4D6vc3mq/zD7kH8mROlYG4PYWyfca5NcOjK94ZMPiFcm3AwYeSA5IAJFOcaNptUjUb8w+
+	+fh/iTyWryf6qEGnxdQuac/MYtjTXABRbeiPq2U3L+JMZh1x9u/PWQWfjiXWMTZGxhSNdLqkPz1
+	O1sD0M43ptweVTTtNf3l/oZa2FAGLgfVslRoTy7zCbt1W1lILH6DoQ3jhMYflB+ZvOefVoYUDHq
+	Eh3nbEhAMKeR8IQZEZcZunAubbbjBv4KBHjJGrzU5Fcy3T3ZE6hlml9Oz3b/aUklXlVLfh+G8oH
+	HA72/q9W9HaKd63+dNvK2WDAHZkpgTLn+VqIzVeKzZJiSK6RQsSQssXoPJsbldS8on97UfTw==
+X-Received: by 2002:a05:600c:19cc:b0:493:a438:7f98 with SMTP id 5b1f17b1804b1-49573cffa42mr2236195e9.18.1784752488856;
+        Wed, 22 Jul 2026 13:34:48 -0700 (PDT)
 Received: from [10.128.10.232] (195-23-151-163.net.novis.pt. [195.23.151.163])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f85b9a6d7sm9453665f8f.2.2026.07.22.13.29.41
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4956a967289sm93558325e9.11.2026.07.22.13.34.47
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 22 Jul 2026 13:29:41 -0700 (PDT)
+        Wed, 22 Jul 2026 13:34:48 -0700 (PDT)
 Sender: Julian Braha <julian.braha@gmail.com>
-Message-ID: <194de1d4-6303-41bb-925c-dae08d382bd4@gmail.com>
-Date: Wed, 22 Jul 2026 21:29:40 +0100
+Message-ID: <3b56fedf-95c7-432e-868d-f6f8a0368ce3@gmail.com>
+Date: Wed, 22 Jul 2026 21:34:47 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -72,25 +71,24 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] soc: qcom: fix unmet dependency for QCOM_PDR_MSG
-To: Arnd Bergmann <arnd@arndb.de>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, linux-sound@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: srini@kernel.org, andersson@kernel.org, konradybcio@kernel.org,
+ linux-sound@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, arnd@arndb.de
 References: <20260719022242.139472-1-julianbraha@gmail.com>
  <qhrevlgsup5xtnxhhmon5cjic5utdhc2mdviczylqesw6yjjzv@s3kk2dr5vk7o>
- <de25fc15-f438-4f8c-8c34-67b10dddab12@app.fastmail.com>
 Content-Language: en-US
 From: Julian Braha <julianbraha@gmail.com>
-In-Reply-To: <de25fc15-f438-4f8c-8c34-67b10dddab12@app.fastmail.com>
+In-Reply-To: <qhrevlgsup5xtnxhhmon5cjic5utdhc2mdviczylqesw6yjjzv@s3kk2dr5vk7o>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 7/22/26 14:54, Arnd Bergmann wrote:
-> The '(ARCH_QCOM || COMPILE_TEST)' is probably not even helpful
-> here because QCOM_SOC also depends on that.
+Hi Dmitry,
 
-Nice catch, thanks Arnd. Will send a v2.
+On 7/22/26 14:47, Dmitry Baryshkov wrote:
+> I don't see this commit in linux-next
+
+You can see it here:
+https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/?id=f2866e6a27f7cc26111ce195ddf00d4050bb27e5
 
 - Julian Braha
