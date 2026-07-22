@@ -1,260 +1,194 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 006D93FFFAF
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 09:34:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EC5E3932D3
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 09:41:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784712898; cv=none; b=AlW5LPoEP1z6cv9JMG1r2E5vpGnq4cImPaFy4BeOj/KoixSDlAHRNICZtJXgJ1K+DjKCj41YgXCHuzdvLFXdO6l3EtsUyqXuwq62r5JBQra36OmfHCG3IFxNcOPmvCB5fX35V35XUNGtO17r0XQ7qdOh4+NWdPmrmCDvWcHVRKw=
+	t=1784713270; cv=none; b=LqwC9UQMZ1u/xmmI3SyeoPX5l8zszl2AzSiG3E+Mpo7nyPzY+ftXUlbHkiMakdXb7F9jR6YkeQVhmdoV1yYHPWwi1Gi96ZJuW/90n8xbnZq6Pmdx1z7kELeYW8A23qLMwB//WjAWVj1z7tEA2h2DKoVQkPdkXw4PMMlEQJ9RJNM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784712898; c=relaxed/simple;
-	bh=jpHtfx4p4it1loPSHgYfz9mzDUkXWoO0M6SnL2+H9us=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=VZw0b9IYDeN92XtJQbryIykbW0QM+/u6w97JD/HEAo5rw/KTRN9JwUke+k6v1KLb8EP6SUIKen0JOQ5t6SCCwtXBxYBEO28OuTGRMuAnboCuYlSi9fGvKfsKQ7PJLGHJpwOKJZLoiYa6lA2IG4+PXVbhKZd2QmP6ZOALoDDHb5o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Cu6Mc/sT; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784713270; c=relaxed/simple;
+	bh=iT9YuFFXjgaBojfRJcbqgLtmmC8ZuRafDSnz64fUB74=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=SYnRr3vRMsQYaKpKFlHEoNA89lwtnXE8DKkI5b2+oocdzeHi1cqyrSnb7/SaJKDyxvrkEl+ahxIBfKzHTxxVR7jD0UkWFVt3CiHLqjuXu4Sl+wT9hr2kUrKyXUlnQqOPnRMqhLVLJdJf9SBT22jOE4zFD8nGFNrswDeqq5uj2RM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IHkqKVzw; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UPyIbPJ5; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Cu6Mc/sT"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C85C51F01561
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 09:34:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784712895;
-	bh=i4WgNrEKdg3Ic3C4pPexVwOX2zafZ8GZg4cnbInNRII=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=Cu6Mc/sTiHEugnS/UEUP5o1+6fDnZqVfmlxJQqiFffjcMGqHzy+gRrrDqF5vE3wCX
-	 jDfzbDes4z1Vi0jlCuNfJ5S0dC1KAONP/jSJeLDrvazOVYPa6UM0wAtDAiUagN89ri
-	 p5U0TDZ7Cv15Kmj7t/aHdNiEeIr1/mcbOu3MIIh86c33Si5/Y2kubgA2tVudJ5aqKj
-	 AK35MmbSuTb5RsAz0tT7fx81y8C9OPKS8raXuKAu3KHhXvJsrcDyWG3/yBGeIA7GaU
-	 g9NvPL48PxcMkPwS4T/GY9Y/6CBaVDVG4gLgEVlX8KRHc8oRagh/LLFfZflsA8+ivm
-	 ev8j87IUsQxaQ==
-Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-39db07589caso76270381fa.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 02:34:55 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rov5qnEKvhC/k57LuCBw/4FHXUHlfmV91wFmXRzNVodb7UOo0BLPpWppBmrroWVaQdhyE+SEPA5PYqMhyRv@vger.kernel.org
-X-Gm-Message-State: AOJu0YxbyDZHQ2TxBIxDwGlnwb/IvLuq8FQPjy10kepKASG6UZYb78+7
-	IrPj9Sv3/Za78MLSKip0iuYS6K2gMDoeu+VdMju66GWWjOVKePwniS+KjKsycjsnB+p2yd/KRkK
-	M5eGRlUzmX5MtAnEqk2qRPIhfdzGF35HWz7qE3oNYbQ==
-X-Received: by 2002:a05:6512:6f:b0:5ae:b0c0:16bc with SMTP id
- 2adb3069b0e04-5b28f890184mr3237380e87.27.1784712894372; Wed, 22 Jul 2026
- 02:34:54 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 22 Jul 2026 02:34:52 -0700
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 22 Jul 2026 02:34:52 -0700
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <amCGXUUd4VmuQRGD@linaro.org>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IHkqKVzw";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UPyIbPJ5"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66M8x5HW383754
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 09:41:08 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=+TMfjx9N2KUMI8HVE7bQBC
+	ezBkzM+oKRVtPJo93ryj0=; b=IHkqKVzwrCryF813z5quh/1DexJ+GNz3Wi5NF6
+	lWcTC315/t92nXCRBTaAVEsPEJJMtJkU34taClcVEJ3TDTJkN/DgwTSgqe188THq
+	KsnHnnhI1LNa5DYLqv2zZp1Th9HrftveZpXq/PgguGBGeyQJ4i4/NQbgSR6WDimH
+	K2sdafiMKl3hK5X/enwEJY2ozOT9VpdDkYqzzQLIaotupZJw/ljee7IFKK+XxZVF
+	ev0dt8yLRf/06MfvmEa1PTVLb4keUo/Ewxn8cZ8dLI+VVY4euzhpj+1nN4jxLils
+	1Z5dUZobpFdbcFSkfJmpDAHwyh/HtHw3rroLkhg5PEzlTJ7w==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjs928mnd-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 09:41:08 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-5174a23afcbso111537731cf.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 02:41:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784713267; x=1785318067; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=+TMfjx9N2KUMI8HVE7bQBCezBkzM+oKRVtPJo93ryj0=;
+        b=UPyIbPJ5QlDefTb5XRLvuc6HI9IwCB9uuz632RQSiio7P4Gy6phu21ll6yqIRvMjZZ
+         NAA/FXpGV5d6e6eVAhiXvJV3L3F1nuzWUS6qt+Njc1WpDC9iX+1GVRTdttQaMFgYnHHk
+         FS9hQ0edGmc6of39kx954IQpwqWmhrxVvRXsKZ3Fi0ygq0RPPWXPbJe+iPneGQtKcjVX
+         D66WNS6CbQia6dbTM/2if8ph3KJkdVZmUItez4v9DtVqhtaRkDueCm+JRFgisD9qgoAS
+         AZvaGD8l3RiyxzjVEufeo0FgqL5P0Q8wBrD6248AT5C1IoHD9+1fzixzsCnMjPIgSZAa
+         PTIQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784713267; x=1785318067;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=+TMfjx9N2KUMI8HVE7bQBCezBkzM+oKRVtPJo93ryj0=;
+        b=Ofpn747z9w+ajoRWkaOkKWIw98SlsfgJjPRJ5hjKzhyNk7f+o3LEkIKyHVlEfZ0TPd
+         ClS/q89yfrKrq4pOZrgoXmcpltwKmhhlk37nnPgquOGvvsETF1uEpi0f6FOuklaUCJz2
+         dNT4Qq3mJCREr2TTrN+9UThZuKyWJ+R22NiHZbIKpU1AOgCxcfcnkmMTPl5x6MfJRvDE
+         sOlUGO8igjpKt4OXRGL+VPTjnWz0v/gfUGOvu4JII1yzql0sb09K9DvnrXpeV5RhpNKi
+         l4Gr+jJfasowDs2QBqMt2EVS8c9R8pN/7oHBkYA9cGGZ+HnaoKtfRVkvTMec6LHaGUM7
+         bLJw==
+X-Gm-Message-State: AOJu0Yy47xclkdbbXbUQk64I08cINwEjXNh1430ZYYQpAsS37xqoV6rK
+	aq5oiZOFjpZrRb9dAgOzjO6CMkwPZ1TYm4pmdUmLBfIM/sOfMqRPkd6bW4WJtjy/KdG12D0Vlpi
+	2dsrSO8w4WSY9CYAqY5OKWhbG2kF6sXu3IHfAc8kQh4rJUEosxskkwxPIWDZzTj9QGd/HIs81f4
+	aU
+X-Gm-Gg: AR+sD1279+Ywm8DJM8uYcpvAcniKd05XIKkdBLCO+dHKKKjlFW7mLg7R7GhXWqkN1CN
+	3jqSvXfRitMx7cerKpdBy9cL3s/UPFM8CJ/2bm+IvYBX+sY1/ezGrZiQnXQpZDEFgeEwZdyE9ka
+	SIkMnX429IIaqb5Ey2OSO6G4oDU+JrZiUxM4mlSTTuaBNSlrtfrTscZ5a6PCrXqFeh76C7OMK03
+	+oWIMpfAMJs0JSftM6Obtemo33kLGJhmAe+e6Jawl1p8ctJUt2Zoi20zghKmxGhRx7jNjDa8brc
+	UjizqTbpT4S+zP0KBAoPRmBA7rbv5Ekmt9/q6ism2D9fBFK32pUwA0Dpnz1M6EZG0r4FV8nK64u
+	dSUl7pRJN
+X-Received: by 2002:a05:622a:2616:b0:51c:10aa:9ba with SMTP id d75a77b69052e-5213e48b0d0mr199588761cf.46.1784713267077;
+        Wed, 22 Jul 2026 02:41:07 -0700 (PDT)
+X-Received: by 2002:a05:622a:2616:b0:51c:10aa:9ba with SMTP id d75a77b69052e-5213e48b0d0mr199588441cf.46.1784713266353;
+        Wed, 22 Jul 2026 02:41:06 -0700 (PDT)
+Received: from hackbox.lan ([86.121.163.114])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f85c6287csm4816398f8f.25.2026.07.22.02.41.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Jul 2026 02:41:05 -0700 (PDT)
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+Subject: [PATCH v2 0/2] dt-bindings: remoteproc: qcom,milos-pas: Fix ADSP
+ bindings
+Date: Wed, 22 Jul 2026 12:40:51 +0300
+Message-Id: <20260722-dts-qcom-eliza-fix-adsp-binding-v2-0-e1e98ae15533@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260721-qcom-qce-cmd-descr-v23-0-1be02deffda9@oss.qualcomm.com>
- <20260721-qcom-qce-cmd-descr-v23-6-1be02deffda9@oss.qualcomm.com>
- <20260721134853.2B2401F000E9@smtp.kernel.org> <amCGXUUd4VmuQRGD@linaro.org>
-Date: Wed, 22 Jul 2026 02:34:52 -0700
-X-Gmail-Original-Message-ID: <CAMRc=MfBNB0pvv1kPPcswE4Y2m7PXBO49bwJg=v0+aY=JmJKWw@mail.gmail.com>
-X-Gm-Features: AUfX_mwVr6pWOzeRIi6v2GZNWX7GGrq8Md8rkImjzrBVx4v9bKKGCd1iVRWIwX0
-Message-ID: <CAMRc=MfBNB0pvv1kPPcswE4Y2m7PXBO49bwJg=v0+aY=JmJKWw@mail.gmail.com>
-Subject: Re: [PATCH v23 06/14] dmaengine: qcom: bam_dma: add support for BAM locking
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Thara Gopinath <thara.gopinath@gmail.com>, Herbert Xu <herbert@gondor.apana.org.au>, 
-	"David S. Miller" <davem@davemloft.net>, Udit Tiwari <quic_utiwari@quicinc.com>, 
-	Md Sadre Alam <mdalam@qti.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Manivannan Sadhasivam <mani@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>, 
-	Peter Ujfalusi <peter.ujfalusi@gmail.com>, Michal Simek <michal.simek@amd.com>, 
-	Frank Li <Frank.Li@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Vignesh Raghavendra <vigneshr@ti.com>, dmaengine@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-crypto@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	brgl@kernel.org, sashiko-reviews@lists.linux.dev, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACOQYGoC/42OTQqDMBCFryJZdySJ0EBXvUdxkT91iiaaUWkr3
+ r3RXqCbgQ++995sjHxCT+xWbCz5FQljyCAvBbOdDq0HdJmZ5PLKlRTgZoLJxgF8jx8NDb5AOxr
+ BYHAYWjBKCamzbSRnuWVMPjvnwqP+MS3m6e181B5GhzTH9D5fWMXh/b+2CuBQaW54pRvprbpHo
+ nJadJ9DQ5kPq/d9/wJYu6Rv5wAAAA==
+X-Change-ID: 20260721-dts-qcom-eliza-fix-adsp-binding-b7712a026b20
+To: Bjorn Andersson <andersson@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Luca Weiss <luca.weiss@fairphone.com>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-Mailer: b4 0.15-dev-bc6c4
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1523;
+ i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
+ bh=iT9YuFFXjgaBojfRJcbqgLtmmC8ZuRafDSnz64fUB74=;
+ b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBqYJAptOAuhCY4+JV213h4O5A0u94/AYytZh+WB
+ PHETQiTW4CJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCamCQKQAKCRAbX0TJAJUV
+ Vs//D/9EaPYbyhtgif2Xi7VYM2eVwslnWgzk6EMTjPWXKvCR0Ru1U8jn/HUANry4e9YFcBEcapB
+ dynAmEzY+rdeVfdS1mzei0If43dxcAg8khYu9IIga1H1irYIJV5aRmq53fNPDEUEoLxc8p14XE3
+ uM7v73PB+C58iFH6MRaz9Afv8VGky+LsMZAXHL1TwEGESx/SA4JEWNWRssc/jkyrhG/Ccyu1u/U
+ F+GIaBUb6eF4d8qkEuxeD2bN4kyntW3orvAoDN6IOUtzPZ2bxrUg9XsBdVaYVgF0V8b2bdmDTA8
+ bRRR36dMGDV9IwSFta2LrYvdyWaNkjgvLmyHQXVvr1DmJbPWVfTYkSGus8dHqngGABoPYBz/N2N
+ v/6wn2wLigvsdvXqh22utTFyXIdXwclQbBuoBsByD5lnU26GDerVkohdMpcVS3PrM4BS+Eilbk5
+ QYBvl43B8R6tQ3Op2SqmeGABJZtXIWXL1OETHKZhq9xauwIR8ff9KEnrRqKZd/gfcj9NckSjwBe
+ NAl427ryIa7b281Fr5Wc9dL7AOmCWhOwLcDh33yXOF+2hySVN3+a7nm1azXHx20qcsHlmHHlHfM
+ 1hzWB+vK1pzq1BcsNKqCE7d4Mv1pOMlQ76J6zuRgQAqnJX2wS3pFfLKB1KNkHNz7XlWAbGyHKq/
+ jgSofwDYrSoa7lg==
+X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
+ fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDA5MCBTYWx0ZWRfX2isAdoqAY9yT
+ CmLXc7d2qHALT43AQfC3j5ywR/BNKl78I7QPK42o5uvUrcsJk2SIdVxbY4Q6raZ4fu8cVQ1Alcr
+ gALA3R+9wYTWpQG1Ji9R3IuzD9F4h4c=
+X-Proofpoint-ORIG-GUID: P6995FzjYJFZjG3vPvPr2SJ3xoXRUeu-
+X-Proofpoint-GUID: P6995FzjYJFZjG3vPvPr2SJ3xoXRUeu-
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDA5MCBTYWx0ZWRfX2TLuIXD3U0jg
+ OO6inY6Ml09jv1gURorCXLzxjnZaY1b4aXHh+nFc45rtxEgLorXnjTm5P5SaH9CFSCOL/ovrSoh
+ P38J2SzjFTnn+KjUK8HekjGXrmLsgmZPkV1neQnQ3lRYZm56Hs2faVZuC+Xt+pgNGH/4S302hur
+ PW3N5TWNEpblvkrzW2Nl0+1FJpqN9yNjZSKPtYUfcyyd2a3H+23OpVV1ulV/g+DTZVGI0xks4Q8
+ 68odMs7mvbGUb7p6XxY87X7vQepr/u7lgE2dD4T22j0lLNI0JP7y/erHGwDuO2m4nBhQGBvorpK
+ h9Fsr/ltIVVY9s2XHD4k+pSXxUfe2+3DXH77j5ALZfMDfcNnB66WTDCPWVc8AJZ7e3fRYpMVJYx
+ Ynb0JGphQ/cqgcXJdl0ALXiSM3kN8gACUDJOZi4JDeXme0zrJszR59mF31DAD6MgqT3Gr2NwVgv
+ uSkn4h/aXdYYdINpu+w==
+X-Authority-Analysis: v=2.4 cv=QahWeMbv c=1 sm=1 tr=0 ts=6a609034 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=6dw9+iwJWV8PcCi9M4lOBg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=VwQbUJbxAAAA:8 a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=mTG7cVE9mWrA2Tac5S4A:9
+ a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-22_03,2026-07-21_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 priorityscore=1501 malwarescore=0 bulkscore=0
+ lowpriorityscore=0 phishscore=0 spamscore=0 clxscore=1015 adultscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607220090
 
-On Wed, 22 Jul 2026 10:59:09 +0200, Stephan Gerhold
-<stephan.gerhold@linaro.org> said:
-> On Tue, Jul 21, 2026 at 01:48:52PM +0000, sashiko-bot@kernel.org wrote:
->> Thank you for your contribution! Sashiko AI review found 5 potential issue(s) to consider:
->> - [High] State leak causing hardware misconfiguration on channel reuse due to uncleared `lock_scratchpad_addr` and hardcoded direction.
->> - [High] Channel state corruption when `bam_slave_config` fails validation.
->> - [High] Infinite BH workqueue loop and unratelimited log flood on memory allocation failure.
->> - [High] DMA API violation: `lock_ce` buffer shares a cacheline with frequently CPU-modified struct members.
->> - [Low] Unused assignment of `hdesc` in IRQ handler.
->> --
->>
->> --- Patch [6]: [PATCH v23 06/14] dmaengine: qcom: bam_dma: add support for BAM locking ---
->> commit 8b44c5e4935cbb61832adb3262df00b3b606a283
->> Author: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->>
->> dmaengine: qcom: bam_dma: add support for BAM locking
->>
->> This commit adds support for BAM pipe locking by prepending and appending
->> dummy command descriptors with LOCK/UNLOCK bits when starting DMA on a TX
->> channel. It uses a peripheral-local scratchpad address communicated via slave
->> config for the dummy writes.
->>
->> > diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
->> > index f3e713a5259c2..411c60c4433e2 100644
->> > --- a/drivers/dma/qcom/bam_dma.c
->> > +++ b/drivers/dma/qcom/bam_dma.c
->> [ ... ]
->> > @@ -72,6 +76,11 @@ struct bam_async_desc {
->> >
->> >  	struct bam_desc_hw *curr_desc;
->> >
->> > +	/* BAM locking infrastructure */
->> > +	bool is_lock_desc;
->> > +	struct scatterlist lock_sg;
->> > +	struct bam_cmd_element lock_ce;
->> > +
->> >  	/* list node for the desc in the bam_chan list of descriptors */
->> >  	struct list_head desc_node;
->>
->> [Severity: High]
->> Does placing lock_ce immediately adjacent to desc_node risk a DMA API
->> violation? lock_ce is mapped for DMA via dma_map_sg(), but desc_node is
->> actively modified by the CPU via list_add_tail() during bam_start_dma()
->> while the mapping is active. On non-coherent architectures, could this
->> cause cacheline tearing or stale data writebacks if they share the same
->> cacheline?
->>
->
-> I think this complaint was there in some revisions before. Could be
-> mostly a false positive given that the lock_ce is just DMA_MEM_TO_DEV
-> (i.e. read-only for the BAM)...
->
+It has been pointed out [1] that, since the ADSP found on Eliza is
+compatible with the ones from SM8750 class, they should be documented
+in the SM8550 schema.
 
-Yes, I ignored it because it's not a problem for us in this case.
+So move the compatible from Milos schema to the SM8550 one and then add
+the fallback compatible to the node in the Eliza SoC DTSI.
 
->> [ ... ]
->> > @@ -676,13 +691,26 @@ static void bam_free_chan(struct dma_chan *chan)
->> >  static int bam_slave_config(struct dma_chan *chan,
->> >  			    struct dma_slave_config *cfg)
->> >  {
->> > +	struct bam_config *peripheral_cfg = cfg->peripheral_config;
->> >  	struct bam_chan *bchan = to_bam_chan(chan);
->> > +	const struct bam_device_data *bdata = bchan->bdev->dev_data;
->> >
->> >  	guard(spinlock_irqsave)(&bchan->vc.lock);
->> >
->> >  	memcpy(&bchan->slave, cfg, sizeof(*cfg));
->> >  	bchan->reconfigure = 1;
->> >
->>
->> [Severity: High]
->> Is it safe to overwrite bchan->slave and set bchan->reconfigure = 1 before
->> validating the configuration direction below? If cfg->direction !=
->> DMA_MEM_TO_DEV, this returns -EINVAL to the caller, but the channel
->> retains the rejected parameters and will apply them on the next transfer
->> because bchan->reconfigure remains set.
->>
->
-> Yeah, better to swap the order.
->
+This will also now be in line with the SM8550 driver match data which is
+tied to the Eliza ADSP compatible in the driver.
 
-Sigh... ok.
+[1] https://lore.kernel.org/all/20260721-benevolent-wonderful-kakapo-ca8c2c@quoll/
 
->> > +	/*
->> > +	 * This is required to setup the pipe locking and must be done even
->> > +	 * before the first call to bam_start_dma().
->> > +	 */
->> > +	if (bdata->pipe_lock_supported && peripheral_cfg) {
->> > +		if (cfg->direction != DMA_MEM_TO_DEV)
->> > +			return -EINVAL;
->> > +
->> > +		bchan->lock_scratchpad_addr = peripheral_cfg->lock_scratchpad_addr;
->> > +	}
->>
->> [Severity: High]
->> If bam_slave_config() is called without peripheral_cfg, should
->> bchan->lock_scratchpad_addr be reset to 0 to avoid leaking state from a
->> prior configuration? If the previous lock_scratchpad_addr is retained,
->> bam_start_dma() might erroneously inject dummy lock descriptors on new
->> transfers.
->>
->
-> Probably unlikely to happen, but yeah.
->
-> I would also check if (cfg->peripheral_size == sizeof(peripheral_cfg)),
-> just to be safe.
->
+Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+---
+Changes in v2:
+- Rebased on next-20260721.
+- Dropped the hunk for power-domains if clause, as Krzysztof suggested.
+- Picked Krzysztof's and Dmitry's R-b tags for the devicetree patch.
+- Link to v1: https://patch.msgid.link/20260721-dts-qcom-eliza-fix-adsp-binding-v1-0-3a0b03af2ec7@oss.qualcomm.com
 
-Ok.
+---
+Abel Vesa (2):
+      dt-bindings: remoteproc: qcom,milos-pas: Move Eliza ADSP to SM8550 schema
+      arm64: dts: qcom: eliza: Add fallback compatible for ADSP remoteproc
 
->> [ ... ]
->> > @@ -919,13 +959,19 @@ static u32 process_channel_irqs(struct bam_device *bdev)
->> >  			 * push back to front of desc_issued so that
->> >  			 * it gets restarted by the work queue.
->> >  			 */
->> > +
->> > +			list_del(&async_desc->desc_node);
->> >  			if (!async_desc->num_desc) {
->> > -				vchan_cookie_complete(&async_desc->vd);
->> > +				hdesc = async_desc->desc;
->> > +
->>
->> [Severity: Low]
->> Is the assignment to hdesc used anywhere? It appears to be assigned here but
->> is never read.
->>
->
-> Yeah, I think I pointed this out before.
->
+ Documentation/devicetree/bindings/remoteproc/qcom,milos-pas.yaml  | 3 ---
+ Documentation/devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml | 2 ++
+ arch/arm64/boot/dts/qcom/eliza.dtsi                               | 2 +-
+ 3 files changed, 3 insertions(+), 4 deletions(-)
+---
+base-commit: 290aaf24a551d5a0dce037e3fab30820f9113a10
+change-id: 20260721-dts-qcom-eliza-fix-adsp-binding-b7712a026b20
 
-Dang it, I removed one but seem to have missed this.
+Best regards,
+--  
+Abel Vesa <abel.vesa@oss.qualcomm.com>
 
->> [ ... ]
->> > @@ -1064,6 +1197,7 @@ static void bam_start_dma(struct bam_chan *bchan)
->> >
->> >  	lockdep_assert_held(&bchan->vc.lock);
->> >
->> > +	vd = vchan_next_desc(&bchan->vc);
->> >  	if (!vd)
->> >  		return;
->> >
->> > @@ -1072,6 +1206,24 @@ static void bam_start_dma(struct bam_chan *bchan)
->> >  		return;
->> >
->> >  	while (vd && !IS_BUSY(bchan)) {
->> > +		/*
->> > +		 * Open a LOCK/UNLOCK bracket around each fresh sequence.
->> > +		 * Sentinels inserted by bam_setup_pipe_lock() are skipped: they
->> > +		 * already have bam_locked set and must not trigger a second pair.
->> > +		 */
->> > +		if (!bchan->bam_locked) {
->> > +			ret = bam_setup_pipe_lock(bchan);
->> > +			if (ret) {
->> > +				dev_err_ratelimited(bdev->dev,
->> > +					"failed to setup the pipe lock, deferring transfer: %d\n",
->> > +					ret);
->> > +				queue_work(system_bh_highpri_wq, &bdev->work);
->> > +				break;
->> > +			}
->>
->> [Severity: High]
->> Does requeuing to a high-priority BH workqueue upon ENOMEM cause CPU
->> starvation? Because system_bh_highpri_wq executes in softirq context,
->> requeuing immediately without sleeping prevents the memory reclaim needed
->> to resolve the GFP_NOWAIT failure, leading to an infinite spin loop.
->>
->
-> It looks like my suggestion to queue_work() again in the error path of
-> bam_start_dma() wasn't great if we end up causing an infinite spin loop.
-> We do need to retry somehow or report an error though, I don't think
-> aborting and leaving the desccriptors completely unhandled is an option
-> either... :(
->
-> One option would be to try to avoid the allocation and write the lock
-> descriptors directly into the FIFO, but this will probably get really
-> messy as well, since you would need to carefully modify the FIFO
-> management in several functions ...
->
-> I don't have a good spontaenous idea how to solve this right now. :/
->
-
-Pre-allocate the lock descriptors (if needed) in bam_prep_slave_sg()? As in:
-call bam_make_lock_desc() in bam_prep_slave_sg(), store the descriptors and
-make bam_setup_pipe_lock() return void as it will no longer be possible for it
-to fail? It would just grab the preallocated descriptors.
-
-Bart
