@@ -1,81 +1,258 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3028D40F741;
-	Wed, 22 Jul 2026 23:03:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A5EC94582D7
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 23:42:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784761385; cv=none; b=R3Wh7RSD4CudQGCFud92IppS867PonhdZgzOln38Bqac4ov5xDRGvz7PVA6ELKT3VHqgAIfh1mSjhiQYNyF5SbChw7I+lA1jwjHA/4kEOg0NY+V9jrRyin4BOWoNIJXiwNDWESaZ6u7N1ChxF+YaHSk/2iyovn5aXyix/pBu60g=
+	t=1784763752; cv=none; b=LDLeWHfesQejuzj/7/URbEey1TPEsI2jLfqT8Tg4xaihA0p12KkRccZxWpthvhLiI9vf+sdr9rB6gztZ+OTRCkKjmGnxPAWTnLSgq3+sK6gO8bibk5/bygVJnHmoVg8Zb+v3vXDszsWluXHwUhti19J4DQCtYuHPa8wqrFwVvUk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784761385; c=relaxed/simple;
-	bh=I0lD8Krnxju0VuDaZYHw7a4wOTrD+u4wuHb+FslOiE8=;
-	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
-	 In-Reply-To:Content-Type; b=hjZ+yOwjHK7ulN9YOt5GvHf5qiohDIt5q2SeuRMIbRH1EXULo0PVl+0PAOSu6DEUUGazMs3UMFTD9S8+z6EOEeiGWIyltOqZLk5l2mg3OeoeYIhCBb2Umq2pQ7zklNx1DlKcPwdUqKK5LKggox7S8apS5OWSqx1ZqezLxSYO6FM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HLeIms7A; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784763752; c=relaxed/simple;
+	bh=tPvnlDdMdba2ZwpSe8Kq7c4l3nlqeqxGNngURpHZjWk=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=B4ARM0CRFj7TpiGrJ6Xvyk5DA+CbNWo5ouHt1BIK+oZFLGL+TqzJd1qpze6YHNqCtWEkVcWACya3/DG9gWCTRn9lt/YT8zpY/RBl3cjmhUNgLi+AGtYX/kNjpCpyMRDxe2ppk2u80yuj0BSJB1Xk+HuLOA5bg9goJrZ4To8ewJU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=AYwAFqNM; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=f4A58bvj; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HLeIms7A"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 415C31F000E9;
-	Wed, 22 Jul 2026 23:03:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784761383;
-	bh=0Tl+qoI9PancAMVme/+cX9/qhyBd/yDCaAgKynsuWHw=;
-	h=Date:From:Subject:To:Cc:References:In-Reply-To;
-	b=HLeIms7AM2Tr+pmXbQpdPxnW2mNJQ1WWbDe+/ZNcdfvgSvCaJQT18c+UiBUXGeSMu
-	 m+GskAqSDMNr40Wk2dfA3VnxG0t3h3vjWFhLZsOVwmbmy81cjZhwkiVhkfpw+TlND1
-	 TaHNYqFCcRtYkqIol6JKG7hVhEOvIC6ygTq1pccjpL4tqfRci8CK2YWrerpLm8jRwE
-	 xjEwMQcNIe1KRVRBrFVkYKQWfM8J41ePaDvbuAJQT0MFoy+CctNusQmDADk5tFN7Cv
-	 pT/TRjtKXlxE2O4tOPZQjl8ChKmFBZ+0jwjBOPPB6OTNRznqeydVw2A+2aMuh+6/qL
-	 5b9kWHBNmm3gg==
-Message-ID: <2545fdff-7bfc-4897-9185-34c45ee01bdc@kernel.org>
-Date: Thu, 23 Jul 2026 00:02:59 +0100
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="AYwAFqNM";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="f4A58bvj"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66MMoD4U2043028
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 23:42:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=/nHfyshFw50BKNXfTXZOCtPnmEnp0tvhe1+
+	YfoEBm18=; b=AYwAFqNMcWJOYs3nXjKPgPZLEQwkF+Cny3Gjun2i7ASYLfVonf+
+	8AxgTQ590RCKWg1BbGyVRy05QTBrF+1unEqlG3dp+fRY9APD8xDjgyXGTW3q/53k
+	WglSdngGuqofPAFuV5BVNSVebChR6h08t43oNQOtpC/d/HHxahvSlMPFwbbZ+9Vt
+	zGjXIwaNvhebFTaeedgHswlv9aHB67oRLZYppf/Qw9l8VDS8TfIMCitMCIJsIP5y
+	70T/yobmWtSz/eRO8iaYAL2BVu3Csl/3Lch4QcteqdCstm6kDWkT+omzi28j9rHS
+	iTh3aCI6hz6BHF9/O7CBrCczYKYMdIKxvig==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjtn2ukjy-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 23:42:29 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51bfe3fa93bso295241cf.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 16:42:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784763748; x=1785368548; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=/nHfyshFw50BKNXfTXZOCtPnmEnp0tvhe1+YfoEBm18=;
+        b=f4A58bvj7MLiUVc6S+TuH1WwNrQNiIAOCm8yz/BiEBneFJvPiXcbWrmfkJwthXryPg
+         R9tY++vJU0/fenUNyjPoHAXcaDaPkAsthEBIv+e8YbXiuTx/CjLw1/HbVT889ulxKCxf
+         6kAOELFyWEAUopfDsE3d5091nLC+D5AKPx3+n7msxxh6H1Gsp1jNT/yNinvM34pZsN7S
+         UTBR+JfVAQoGaNNT7zGJo9fyPXZlS1ivFRAZIJAdzOs3hU1J6OX7AcaH5kNGs76fp/Mf
+         4pbJrajwXhM2/WvtzQ6plivvN14L4SSmrJE5IXZ/7eCOASOvnC8NX9SqAgkW1CoTdcKM
+         +JdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784763748; x=1785368548;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=/nHfyshFw50BKNXfTXZOCtPnmEnp0tvhe1+YfoEBm18=;
+        b=TMDuaUQlaWDUIhs8kaqMc94mm278DxlS8xDXD57PZIH8iFeI4Qry+Z88PSrgHB6IdN
+         HY9wyusaDwn3+ABv2XmK3hi3UsCxRIJlTOTZTSzoMcDk+YSwJn1765GWLPNJ+T30vdNY
+         3wn/ldk5cP8NVrLUryNiwabz7UD32L4CD9T49s1lOS3W2uIC1NwJBWLRei04IpZRbNuP
+         OHH6DWH0K7w9V0SC0c1zzz0+nHabyizjvV9R/mF7+0nRX6EZwrndDy+BHK60Ij+2ZiYh
+         x5gRd770FIbv2yWt4BFn5C+sS/jtgNdq627AJ0v/nN9njaEoLZvkqIY7rmXr2a7OAz6g
+         YImg==
+X-Forwarded-Encrypted: i=1; AHgh+RqNW4F3SB4wInd8Ev3IZ+MlCSip9qPPbrcFQIiYaHLGyzs6XNEjK29RVKPT2MfVOvAsBB4GAxmNvnlhdrpQ@vger.kernel.org
+X-Gm-Message-State: AOJu0YyeaPkEhI0qWLSzrY2PI60zyk3huMgU+4MbiHlG+seekXq4qOym
+	EX5ja478BtjN9GE8j53IJCAwl7qb/jTHUCqWzQ4OJk8Jjz07aSLufTgY0MAkexBy3TEU85mtp5d
+	Q99Od907yZkGEtwYkd+D3mRbBw4Yuf58FsOhFkukIf0Ismw6o5xG/gWmj2pdoIlHe/aUb
+X-Gm-Gg: AR+sD11S0oyXepQ6tIhSInUgBCy4OCftzUynGSMaPcxsLfyQHH2zVNgYSgtmbiJIB79
+	81MZmCW7qwhF8BTETBrm5Xn467aaTfW2rzkNG1h1a4NO+aUsHTMsHZL0RHAS7Z5EQM+PidgbuA+
+	JO1Iy7UwMCN0hEOZqYakC8jnvdea3d0/QTgwkfTo6wk01kkr3txQJH8W2pPQwVAuHruxHleSuja
+	UE1X6dwOkd4ocj0C+rhgsXyei6DTsPDeh5EiVbrJvv5qYecjZC0qzS6oUMwB4L7WX3/8MMvD3eG
+	00SFCcdCq1R69gT/MIctcJRwh+6BvmUVEzosaANbOIUjaceyhKvdIEIAfVBIMEsXuQ3fEUFELZg
+	Y7U7BgxxNQphScg==
+X-Received: by 2002:a05:622a:30a:b0:51f:20e1:137f with SMTP id d75a77b69052e-5283de15b48mr7249181cf.19.1784763748340;
+        Wed, 22 Jul 2026 16:42:28 -0700 (PDT)
+X-Received: by 2002:a05:622a:30a:b0:51f:20e1:137f with SMTP id d75a77b69052e-5283de15b48mr7248901cf.19.1784763747824;
+        Wed, 22 Jul 2026 16:42:27 -0700 (PDT)
+Received: from debian ([5.133.47.210])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4956a4aae16sm101796345e9.0.2026.07.22.16.42.26
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Jul 2026 16:42:27 -0700 (PDT)
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+To: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+        Charles Keepax <ckeepax@opensource.cirrus.com>,
+        Maciej Strozek <mstrozek@opensource.cirrus.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Srinivas Kandagatla <srini@kernel.org>
+Cc: Bard Liao <yung-chuan.liao@linux.intel.com>,
+        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+        Richard Fitzgerald <rf@opensource.cirrus.com>,
+        Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, patches@opensource.cirrus.com,
+        linux-kernel@vger.kernel.org,
+        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Subject: [RFC PATCH 0/8] ASoC: SDCA: enable on DT platforms and add Qualcomm WCD9378 (Tambora) codec
+Date: Thu, 23 Jul 2026 00:42:10 +0100
+Message-ID: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Srinivas Kandagatla <srini@kernel.org>
-Subject: Re: [RFC PATCH] ASoC: qcom: q6apm-lpass-dais: start the graph at
- prepare
-To: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
- Srinivas Kandagatla <srini@kernel.org>, Mark Brown <broonie@kernel.org>,
- Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>,
- Takashi Iwai <tiwai@suse.com>, Val Packett <val@packett.cool>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Jianfeng Liu <liujianfeng1994@gmail.com>, linux-sound@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260705033830.305907-1-jorijnvdgraaf@catcrafts.net>
- <dee62f9f-1df3-4f57-a072-12b0b4b8a1a3@sirena.org.uk>
- <20260708215539.150590-1-jorijnvdgraaf@catcrafts.net>
- <137a9c85-67ab-434b-880b-d9d4efa5bccf@kernel.org>
- <20260710143214.142017-1-jorijnvdgraaf@catcrafts.net>
- <b099f316-0e30-40f6-8e6d-5717d96fce5c@oss.qualcomm.com>
- <20260715211919.49462-1-jorijnvdgraaf@catcrafts.net>
-Content-Language: en-US
-In-Reply-To: <20260715211919.49462-1-jorijnvdgraaf@catcrafts.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDIzMyBTYWx0ZWRfX/NKhoxZ4aL+w
+ xCoBusP/CEXhaQSTZX3+AiFGPPiwXJoLmSKB7/IbnGenxv3VNzK/M0XMif0ztoxO8eSbaQBs4b1
+ e41BldU++7nuizJV26pspA7h4b2gnRBI64mTwwfAPjoZ/GyAFGceMVNDgRBh2CMn20U9SVgn3pd
+ PfjUPTmvMf8V0ndBGIU/Anvx/76ILQmxZqwjISyNjKtPz8CdJ3s64JAWKo29XmcQFKwbiwEIeQA
+ 8KKhdZY1foqZtDg+P0Palypd9b/W6ioOElGhyZ7We535fCwdRi1UHTbtm1U/4K+zLom0WwasR24
+ npWd8D45HlSjCuLJ9xUOdCCZcNQgeNCW+RHtfEvOV8f3wQB3r7yDMG2/A97D+Ota9IXhx7mBKRq
+ YZyM30c+LmhJgTqjPvBgno3GSvRdA1lG4HL8MQBxEgQ+1gC+yF3qG5dIJ7tNJ8RVAjZB5hKX9Ih
+ Ww2FZfImqprTxoYNiyw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDIzMyBTYWx0ZWRfX1BIfEidGMXmz
+ EskhndL28u2lxB11xn2bLs8vZ9dub2eYJhnRhVl60eaS0qQYyGrpK7pv6P0ibotpq/H4s3UYYVK
+ 185vT0Fasp/XY7vO/AwMsy457Uy4L4U=
+X-Proofpoint-GUID: QdtgDXCW8dYostlf_qSTogVtx5VAh9EF
+X-Proofpoint-ORIG-GUID: QdtgDXCW8dYostlf_qSTogVtx5VAh9EF
+X-Authority-Analysis: v=2.4 cv=T+28ifKQ c=1 sm=1 tr=0 ts=6a615565 cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=OGjWj8McAAAA:8
+ a=07d9gI8wAAAA:8 a=-1sRFuYLJzeE8_jXQdgA:9 a=dawVfQjAaf238kedN5IG:22
+ a=UYjydHh6ynBBc6_pBLvz:22 a=e2CUPOnPG4QKp8I52DXD:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-22_05,2026-07-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 impostorscore=0 malwarescore=0 spamscore=0
+ clxscore=1015 bulkscore=0 lowpriorityscore=0 adultscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220233
 
+Hi all,
 
+At Linux Plumbers 2025 in the Devicetree MC I raised the "SDCA and the
+classic ACPI-DT problem" [1]: MIPI SDCA is built around ACPI/DisCo
+firmware descriptors, and the in-tree ASoC SDCA framework
+(sound/soc/sdca/) enumerates functions, entities, controls and PDEs by
+walking those tables. On ARM64 DT platforms there is no DisCo, so the
+framework is unreachable and sdca codecs will not be able to use the
+generic sdca drivers and duplicating.
 
-On 7/15/26 10:19 PM, Jorijn van der Graaf wrote:
-> 
->> This week, I will try to pull some wires out and check that on my
->> hardware too.
-> That comparison should tell us which side to look at. If your board
-> does drive the bit clock from the vote alone, I am happy to dig on
-sorry for the delay,
-I see same results as yours on my VENTUNO Q board too.
+The direction from that discussion was to let DT platforms reuse the
+same class/function auxiliary driver plumbing and have codec drivers
+supply the small amount of static function/entity metadata that DisCo
+would otherwise carry, plus hooks for device-specific bring-up.  This
+series is a first cut at that, with the Qualcomm WCD9378 ("Tambora")
+SDCA codec on the Glymur CRD as the first consumer. Static table that in
+part of this codec is generated from acpi tables.
 
-As per DSP team it should work, let me dig bit more and see if I can
-find what it takes to enable it.
+About WCD9378: the same silicon ships in two very different platform
+modes.  In "mobile mode" (Qualcomm phone/tablet SoCs) is enumerated as
+as tx and rx device, each of which has dedicated control and data lines.
+mobile mode is addressed by Jorijn's posting [2].
+In "compute mode" (Qualcomm compute platforms such as Glymur / X2 Elite)
+the same part is enumerated as a single standard MIPI SDCA class device
+on SoundWire and is driven purely through the SDCA framework, which
+is what this series covers.  Both modes share the same MIPI class ID
+and, in DT, the same compatible; qcom,compute-mode selects which
+driver path is taken.
 
---srini
+Framework enablement (patches 1-6):
 
-> the milos side; any pointer on what to check next would be welcome.
+ * 1: hw_params fix for OT DAI upstream Input Terminals (found while
+   bringing up Tambora capture).
+ * 2: allow sound/soc/sdca/ to build without ACPI.
+ * 3: turn sdca_class into an exported library and introduce
+   struct sdca_class_hw_ops with hw_init + get_function_data, so a
+   codec driver registers its own sdw_driver, supplies static function
+   descriptors when there is no DisCo node, and owns regulators/reset
+   at probe time.  The built-in class_sdw_driver stays for
+   pure-generic parts (hw_ops = NULL).
+ * 4: pde_pre_pmu / pde_post_pmu hooks in hw_ops so vendor drivers
+   can stage/commit register writes around PDE PS0 transitions.
+ * 5: of_xlate_dai_name that resolves sound-dai cells by entity index
+   rather than positional DAI order.
+ * 6: register SDCA_FUNCTION_TYPE_SIMPLE_JACK in the class function
+   driver.
 
+First consumer (patches 7-8):
+
+ * 7: WCD9378 SoundWire slave binding.  Compatible is shared with
+   Jorijn's mobile WCD9378 posting [2]; qcom,compute-mode selects the
+   SDCA/compute-mode probe path and gates the compute-only properties.
+ * 8: Tambora codec driver - registers its own sdw_driver, calls into
+   the class library, supplies SimpleJack + HID functions via
+   get_function_data, owns supplies/reset/mic-bias in hw_init, uses
+   pde_*_pmu for the FU + IT_USAGE writes the PDE sequencer needs.
+
+RFC because patches 1-6 touch the SDCA framework, is what I
+would most like feedback on.  Tested on Qualcomm Glymur CRD:
+headphone playback, capture work end-to-end via the Tambora
+codec over the mulit master SoundWire bus.
+Platform bits (LPASS clock controller, SoundWire aggregate
+controller, machine-driver DT, defconfig, ...) are held back for a
+separate posting once this shape is agreed.
+
+Next steps
+==========
+
+The most obvious follow-up is figuring out how the mobile-mode and
+compute-mode WCD9378 drivers coexist under one compatible.  Jorijn's
+mobile driver [2] and this compute-mode driver target the same silicon
+and register the same MIPI class ID on the SoundWire bus, and today
+they discriminate purely on the qcom,compute-mode DT property.  We
+need to agree on a cleaner arbitration. Probably a shared
+sdw_driver stub in wcd9378-common that reads the mode and dispatches
+to the mobile or compute code path - so that both drivers can live in
+tree without racing to bind the same slave.  I would like to line this
+uip with Jorijn as a follow-up to this series. Cleanup some of the
+static volume setting to a proper volume control.
+
+Links
+=====
+
+[1] LPC 2025, Devicetree MC:
+    "DeviceTrees - MIPI SoundWire Device Class for Audio (SDCA) and
+     classic ACPI-DT problem"
+    https://lpc.events/event/19/contributions/2024/
+
+[2] Jorijn Rikhof, mobile-mode WCD9378 posting:
+    https://lwn.net/Articles/1081648/
+
+Thanks,
+Srini
+
+Srinivas Kandagatla (8):
+  ASoC: SDCA: hw_params: program upstream Input Terminals for OT DAI
+  ASoC: SDCA: allow building without ACPI
+  ASoC: SDCA: expose class helpers with hw_ops for non-DisCo platforms
+  ASoC: SDCA: add PDE pre/post-pmu hooks to hw_ops
+  ASoC: SDCA: class_function: xlate sound-dai cell by entity index
+  ASoC: SDCA: register SDCA_FUNCTION_TYPE_SIMPLE_JACK in class function
+    driver
+  dt-bindings: sound: qcom: add Tambora WCD9378 SDCA codec
+  ASoC: codecs: add Qualcomm Tambora (WCD9378) SDCA codec
+
+ .../bindings/sound/qcom,wcd9378-sdw.yaml      |  201 +++
+ include/sound/sdca.h                          |    2 +-
+ sound/soc/codecs/Kconfig                      |   12 +
+ sound/soc/codecs/Makefile                     |    2 +
+ sound/soc/codecs/wcd9378-sdca.c               | 1202 +++++++++++++++++
+ sound/soc/sdca/Kconfig                        |    6 +-
+ sound/soc/sdca/sdca_asoc.c                    |   84 +-
+ sound/soc/sdca/sdca_class.c                   |   83 +-
+ sound/soc/sdca/sdca_class.h                   |   41 +
+ sound/soc/sdca/sdca_class_function.c          |   80 +-
+ sound/soc/sdca/sdca_device.c                  |    4 +
+ sound/soc/sdca/sdca_function_device.c         |    2 +-
+ sound/soc/sdca/sdca_functions.c               |    4 +
+ 13 files changed, 1710 insertions(+), 13 deletions(-)
+ create mode 100644 Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml
+ create mode 100644 sound/soc/codecs/wcd9378-sdca.c
+
+-- 
+2.53.0
 
