@@ -1,396 +1,581 @@
-Received: from mail-yx1-f49.google.com (mail-yx1-f49.google.com [74.125.224.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E117480DF8
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 15:46:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A66D947D952
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 15:48:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784735191; cv=none; b=LGmo8/YVL3amyHKE8zbWPTBuNTzz77HJaaLLsF5ijZaRg7YdG8fCkLA1wEQ6mzdHsRay9XSCM4fuS9t+SutcXasdezf0XM3Buz9H9CHM1r+BaTozO2q7rxAqT6lk8GG7XB7XGTMX7Bol2x4JZS7VaQTrcUk3xD1+68NKaEvHqAc=
+	t=1784735312; cv=none; b=eGWdO4PYKu4qKriHhoEkBPF2icXjjeGzcuCoUBP4Dg8UVVLzdtZuvwtvmVH0yG0m5af1inCQ7w7O+uwrCgydjFbsPkds5nhwa7CBj1s9shR2XtjVYOXnN5OPxeyNd9hp3qo/p3qGi2Sa0vUBDjsznZeaA2atMrtmfJxFRFVD5+U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784735191; c=relaxed/simple;
-	bh=AInC2gpUbzb8I65oNlygwh2NK7VqWSrYwlf/18VlcKs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=kEhVK/ADtGTaJ9R5c+9/D+o+a33yfZtQqSo0xry8HkElqGVT64/54YoywGsqLMXRgRgBSU9HAfoWwC2iWaVW+bTCub4o+i2fAxgUzq0O1qZryKGw8asZIlHJuTYjVdH5K+N4SXmxDIuz5wVfG6MswjH89aGq9eZvcMFeJy/xOtI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=pWr/gaNb; arc=none smtp.client-ip=74.125.224.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1784735312; c=relaxed/simple;
+	bh=0exfImMzFB8xLtqhanl5FX5L9yBBoVg+R0XzivzJYFs=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=TEQm49yvUjWh+aAIiEkFfCJG/PV3f5LmvqK5DyY2hyND6DYhiMe/AGPPfJfM2EUQkKIspYWMv+UF554KjjAN863gHstIVngd4nFJTg1mUkZX+TmgC6i8QDHpsDOH5am643qgwzqGg9Dze7uEfvdZ0XsLvXMJld6+GknM2aAQlEI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FOotN6H3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=d9LORrLA; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="pWr/gaNb"
-Received: by mail-yx1-f49.google.com with SMTP id 956f58d0204a3-66899fe9077so649396d50.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 08:46:26 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FOotN6H3";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="d9LORrLA"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66MFXlNa2317557
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 15:48:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=VYQz3Qvzt+1zDwFBRlg1ZO
+	/uOaKnt6XS46gkAEEIQck=; b=FOotN6H3t06X6dYJq0pENz41q/E/5HIRC3tuX6
+	7ELC84oFAIk2TtVaJTJJNo7ZaAmK3n4xL/GFPou5sQAYsHPFkI1tdu2we0TVYbO0
+	Q8f7u7kbmToKzXs7fbjYhVAFApMTFQe+N3RB8CgMfVqnRjW/76xiSkINYNWR+dXN
+	3IeeAOB8p7WTGF/drqV7yuCS//bey86U1l/BoU9LRWYzhHeop+MqRgSeb3o1tbf4
+	ZIJfXrBi3LKLa88ypZc+vQ6AF4o+2sg3QS1Lch+EpTa1e+hKSJBbPCtskGJPT8ll
+	iw4SK1Ewge9pasiT6h15ifAYiQd+j4QDQxyinZW/VMno0eyw==
+Received: from mail-oi1-f199.google.com (mail-oi1-f199.google.com [209.85.167.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjr83ae0r-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 15:48:28 +0000 (GMT)
+Received: by mail-oi1-f199.google.com with SMTP id 5614622812f47-48e2ce64834so14177457b6e.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 08:48:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784735184; x=1785339984; darn=vger.kernel.org;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=h+DcHVzO50mtkCMyVvHEUPPqgiYR6razHjnBQNDI87Y=;
-        b=pWr/gaNbgngJpaC7Y8aaHbDPvenC2oLjJpUH56dab3lkL2grNJ0yptjDuPHTpu+265
-         bpYqgBQGLYuidkFWNPSK+yykHIF0PvZzhqlZPqfdhHif+wprzAtn3x+9KNipBkxWQVBf
-         lK2EOXmsT50o7jbZ+PZiok9GHUmCq4emGTFQ4x/4SvzFKKreSNMYTyD6G2uy5KAXlFM4
-         OFS2iZfqirtE5nI4hw5esI44WJCRT4O1j3IuT3HyH4Ox44V5GVBBiFCWe7COLKiUe5iK
-         Vm6Cg6CARi6CG9Sapwz0V9sE8fTazcGYWy4aIGIWxDsukMYim4/DCTZT47iN/xgWaCU7
-         h5Og==
+        d=oss.qualcomm.com; s=google; t=1784735307; x=1785340107; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=VYQz3Qvzt+1zDwFBRlg1ZO/uOaKnt6XS46gkAEEIQck=;
+        b=d9LORrLALdxo6f2WvzpUZZryDz9RyMG5QA1nGJCysK5j2mis2wdKckGMtlb9WI6sb3
+         PegdOE7Sy1CogTDue58jo3aPz6ghkXLkI3lFsb17wOdmvLGREcc5pa8hlOoCEWcaN0eG
+         UHn8FoMJmiChcNpVM8XvxxUDk/yocgXWkE/KVhopeBtKwPyVrTHisgFsP5puxlrGffOT
+         7H4kG0ctjgCmvXYYbLh5ssNQVuxvODGRAxr2vVsohbuGyTjdN3N9aP7sczwi6Sh2qVM5
+         sGq4MCEXDVCkGFEQediEpFKMgfyiQrvEsIiTyPkXhr/pFedOONHJmWhEWXurCgkl35k8
+         LH7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784735184; x=1785339984;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=h+DcHVzO50mtkCMyVvHEUPPqgiYR6razHjnBQNDI87Y=;
-        b=X3M6SFeXCEZGE2Y4gp8QqSViEjRUnlvE+UXnlj+8wemJTUBSXSTw0sxMBbSWpezSNW
-         CVxIJ4TpffODlCT99Fj2uQixsY+z/RmVqfcZhlMRHRWmCVSxpGhz3pvTK9yLH5tIXLwm
-         mGGI801Ca6S+itI4Z0oP6vejqC/46C8FBuRCtcgZ9cSkc3jMivKlW+B8CMo6yzd6N06B
-         prdEcp5b0svSNllYJtkhvSIkyMY+nZAX/WbqBtTXuShQnO1JYPPcb4TTD7kZcmx2cE8H
-         uzk5AiB2UyJKTyFaLcrNcEeslxyz+Omdi2PH6AXAjQhDwwJJJsH0P7LHojLFtH2MRvJC
-         jlZw==
-X-Forwarded-Encrypted: i=1; AHgh+RpR21fzaJ2I5Sj41HiMO5cYLSWo4nLy3HakCSguiLhP9aYDtY4sH3UAKFDjYSCzD3cHqPzn6mjIaGoVtaL5@vger.kernel.org
-X-Gm-Message-State: AOJu0YxS0h/sHzP4ScRm+uC+jSvilwKPiXCA2/1Ke8fz+3btewXwwSa3
-	tNvccZ4Sq9VmFCC6ZfNbsEkq/K6jJrsQWfWGm4SA6V/2//HBvIPSmm4c
-X-Gm-Gg: AR+sD10URJ0rJ0qnvMiZZ2jAfpovPiLmyJ59xYSmj9+XoYF6Jn1CtiKWbZAeoIaSzJ9
-	CHAXOsQjdxO4z47zzAn0YD/agXo9Gb+0sG+D29hD2KlmQiikfjeMB/YDX+Z2yU1Oyej/kJBd8b7
-	ADwEXpOX/Kb09sbnxgHQDglsH+2E1Ix0Zcavxwq7ohGVCttUVxV2+3meDCswNfy3dXX9NRDeBQf
-	V7EMRmMTYMtigtBBbsHIH+FwKuMalXZQEr74tBGxmX0vJMm3TYL+amBObjKSE6OXZlFZrYZDOL4
-	83z9oImxvy12JKbdnZOj3ci+/GXyRdlqejRlsAb2KfRFKbNTs3kBF6eDL2VwPSEL2GY1NJ+beWP
-	f+PYGI5njJUtAlrArH2Bcxtt9cSR6RWx0Uu+n6aYlf07gxklZ8VU8x8zdMriMWIvqX3e+pFKJgj
-	swI8MV
-X-Received: by 2002:a53:a7cd:0:b0:664:c81c:d1 with SMTP id 956f58d0204a3-6683bbef5d0mr5048088d50.45.1784735184185;
-        Wed, 22 Jul 2026 08:46:24 -0700 (PDT)
-Received: from [10.138.10.6] ([185.98.168.14])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-66890775512sm1566688d50.19.2026.07.22.08.46.22
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 22 Jul 2026 08:46:23 -0700 (PDT)
-Message-ID: <8e9101ce-e9ec-4111-a1a6-7a9a07788818@gmail.com>
-Date: Wed, 22 Jul 2026 11:46:16 -0400
+        d=1e100.net; s=20251104; t=1784735307; x=1785340107;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=VYQz3Qvzt+1zDwFBRlg1ZO/uOaKnt6XS46gkAEEIQck=;
+        b=a5AgApTyf+c7SAZXZ26qzCNgbl09DG3B62wzm3bt2bHOP3Hju6stpp7PEw7o1NlcWT
+         hMWFVWFE/5N+O8jw0WURMojGqNeKQsYmeKDbsY23NkIbjQ/eHp7IQgZ6i5Q8jmvffQK7
+         7iKZFpZKc67xNtWl7W6nps7GSEsBgXw4TZj+jARuAj1TKUdB5SbCOJ7w2670jJ0tLkR1
+         0uI8zQqfvSU3rnkKgyyp27JPMEsN4G+qlHZIEU9RXS3lFH4RezcLRoXARm9iIwMX1eRz
+         KEHBsphtGUBDrTHn1716iyuSSvhhp1u8Wu+Up64Woz5Gxzc6j8btPUD+no24MYAmUmkK
+         pvNQ==
+X-Gm-Message-State: AOJu0Yy4mh5SuiPN7YPPA1irqs/ZX3ujfAtTml9y0Fc0vOj1k41m7FDD
+	9bHfLWW6QqBzh3jKjtTMlBE7CJSMZqULPeB3qUQbnY+10Y6V6jBUjS9H5O2zQq3XQf93Rvys+DW
+	Qyqyxybol6HeltCEfqZSL8m59xNQ76N/5HBUSBXzOn2yhufrdpVggXOezRHwpvMcSdS6g
+X-Gm-Gg: AR+sD13K+3yN6QNwXRKPwLOcHOX3aIVyDpIHJNLRFDd7GtsBaFyV1YyeL2WdLo94wvl
+	lbD7cz1lmNbKQCNTeT9zFFUMIrxz+gnkQZBrzevMPKZyk1648LVxJyRABbGpiDuHGQjaARQE4j7
+	TFncCRyu7iHU8jfQOdvaWAibZFgB01kodreAd6YfeUzKd5mA/7O1CY2diLHemg1WJH58zInU1xC
+	lNVeTWD5x8jsapP1KejaWn0JZvGI7UaFcL5cq42LPwBYMD0wstqa0E15gzpDKWG0a2KRgaBJ6xa
+	pPO6nxpOdXHSAJML0dJetZW/B17Ysi4G/JkkTnloZ7YXU6/LBcpPSmgafek2kEO4PeniCc335L4
+	hZldK/GxNPhMAedRyn9fGJ/a06i4IMlsdmuU=
+X-Received: by 2002:a05:6808:1250:b0:495:dbe8:647f with SMTP id 5614622812f47-4a4d054cf5bmr11714127b6e.28.1784735307351;
+        Wed, 22 Jul 2026 08:48:27 -0700 (PDT)
+X-Received: by 2002:a05:6808:1250:b0:495:dbe8:647f with SMTP id 5614622812f47-4a4d054cf5bmr11714100b6e.28.1784735306779;
+        Wed, 22 Jul 2026 08:48:26 -0700 (PDT)
+Received: from hu-vjitta-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5614622812f47-4ab0eeb073dsm1310040b6e.16.2026.07.22.08.48.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Jul 2026 08:48:25 -0700 (PDT)
+From: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
+Date: Wed, 22 Jul 2026 21:17:59 +0530
+Subject: [PATCH v3] iommu/io-pgtable-arm: Add support for contiguous hint
+ bit
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] drivers/crypto: Mark QCE as BROKEN
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- Russell King <linux@armlinux.org.uk>, "David S. Miller"
- <davem@davemloft.net>, Eric Biggers <ebiggers@kernel.org>,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- stable@vger.kernel.org
-References: <20260712-qce-broken-v2-1-b2dfff47f7f5@gmail.com>
- <alnlaCXmoLRAlr96@gondor.apana.org.au>
- <20260721082501.6128-1-bartosz.golaszewski@oss.qualcomm.com>
- <c826b73d-6307-4237-a065-b7a8487350ce@gmail.com>
- <CAMRc=Me55rUmjjR+ZzdWd2ss9JJMZzJch0zKd4GqONBjCzFMYQ@mail.gmail.com>
-Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
-Autocrypt: addr=demiobenour@gmail.com; keydata=
- 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
- +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <CAMRc=Me55rUmjjR+ZzdWd2ss9JJMZzJch0zKd4GqONBjCzFMYQ@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------TQU0bcIC0Lu6CqgUekKUIeTq"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260722-iommu_contig_hint-v3-1-10923a683441@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAC7mYGoC/33NQQ6CMBAF0KuQri3ptFDAlfcwhpRaYIxQpdBoC
+ He34MINcTPJT/68PxNnBjSOHKOZDMajQ9uHIA4R0a3qG0PxGjLhjEsmIadou24qte1HbMoW+5F
+ moExSQF1VKSfh7zGYGl+beb58s5uqm9HjCq2NFt1oh/c26mHt/fM9UKBJyrhKCyNFnp+sc/FzU
+ ncdunE4ZJ3x/AdlHPYgHqCC6UyASgCk2IGWZfkAkm9cRRQBAAA=
+X-Change-ID: 20260618-iommu_contig_hint-71ae491fbb52
+To: Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
+        Prakash Gupta <prakash.gupta@oss.qualcomm.com>,
+        Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784735301; l=17562;
+ i=vijayanand.jitta@oss.qualcomm.com; s=20260301; h=from:subject:message-id;
+ bh=lV53PboZ56PZHOrzDXeNdug8VmKRz25CoTaEScE9sow=;
+ b=+eISZuoh1ZI6kaV9GeAzJFpgyuqXCUm6TTiCbj+1rxnHXPTNcdVIaPApHFMRPKq+t8PNJyCb3
+ dfGgzP3Ad1eASM8gIZH09povKFm7dSfjySiooGUpfIF/E/kLL3zv4Dt
+X-Developer-Key: i=vijayanand.jitta@oss.qualcomm.com; a=ed25519;
+ pk=Lpi7Cs3wHe8KZtqvyci7FTOLzsKpEHKGCaPNZw+1zRI=
+X-Proofpoint-ORIG-GUID: IR7-UeLSkfWOQKaqKeJq99mtTfp884g7
+X-Authority-Analysis: v=2.4 cv=VfrH+lp9 c=1 sm=1 tr=0 ts=6a60e64c cx=c_pps
+ a=yymyAM/LQ7lj/HqAiIiKTw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=7CQSdrXTAAAA:8 a=VwQbUJbxAAAA:8
+ a=tA7aZXjiAAAA:8 a=JfrnYn6hAAAA:8 a=-rbkCTbV0DKvbx83akgA:9 a=QEXdDO2ut3YA:10
+ a=efpaJB4zofY2dbm2aIRb:22 a=FO4_E8m0qiDe52t0p3_H:22 a=a-qgeE7W1pNrGK8U0ZQC:22
+ a=kIIFJ0VLUOy1gFZzwZHL:22 a=1CNFftbPRP8L7MoqJWF3:22
+X-Proofpoint-GUID: IR7-UeLSkfWOQKaqKeJq99mtTfp884g7
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDE1NSBTYWx0ZWRfXwP6X+BBDi2Qb
+ AGgMhXuMeGm09NKPNiXeE0huV7mnEmeVZVbc0/vr/0x+7LFLW/0i4LW8GZlboRAGFsvZVNSItYd
+ AcEbZz0ymWH4c/7JC0SoReEdb827ivmnWMDIX8NPVphQ1K71xPsG01XNGjSU15rXwZiMV0qTvWu
+ tBMZFhHA8rWGtQmh87fo+PvPkg4sYs7HdUWVIB2cklmQMlfqWsxgUpYj2Pv7Dvn77aAlM0vkrMt
+ NNt80VFmoolQMMVuztQasx5PW3gVvtZVQBmFnj9uax0PaX1FkpHfZ/mUzSaO4NmZrQJJo9i9j7g
+ KROU4ByCMaTjmQrRF0Kezmr5dyoT5x4Eule6biiWSMOuGlPu1IwG0q4U+OX0R8DBZy/5n5tW4x9
+ R3U+YdtKuqfqWRra0DM8ePLXaW+uQ0lKBJcVLSHuJaufobmmsIW/p9rv4PvwO83ID4yzr9Tr3ZR
+ G4O5GlhY4yEyHP3lu5Q==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDE1NSBTYWx0ZWRfX27WNj9trt4ex
+ QATyXtVROFwqElV7/te2sgf50ZhDs1I6Mbbru9zkrNb+aveVTZJ+4i/osFleGx9ud5RbNYVtkpI
+ VC9ul/2u42MlCoyjlQDBc0HhUeqnpqo=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-22_04,2026-07-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0 clxscore=1015
+ priorityscore=1501 spamscore=0 bulkscore=0 impostorscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220155
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------TQU0bcIC0Lu6CqgUekKUIeTq
-Content-Type: multipart/mixed; boundary="------------uwrMxsbcaUPR63gc8Mct0hz9";
- protected-headers="v1"; hp="clear"
-Message-ID: <8e9101ce-e9ec-4111-a1a6-7a9a07788818@gmail.com>
-Date: Wed, 22 Jul 2026 11:46:16 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] drivers/crypto: Mark QCE as BROKEN
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- Russell King <linux@armlinux.org.uk>, "David S. Miller"
- <davem@davemloft.net>, Eric Biggers <ebiggers@kernel.org>,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- stable@vger.kernel.org
-References: <20260712-qce-broken-v2-1-b2dfff47f7f5@gmail.com>
- <alnlaCXmoLRAlr96@gondor.apana.org.au>
- <20260721082501.6128-1-bartosz.golaszewski@oss.qualcomm.com>
- <c826b73d-6307-4237-a065-b7a8487350ce@gmail.com>
- <CAMRc=Me55rUmjjR+ZzdWd2ss9JJMZzJch0zKd4GqONBjCzFMYQ@mail.gmail.com>
-Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
-Autocrypt: addr=demiobenour@gmail.com; keydata=
- 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
- +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <CAMRc=Me55rUmjjR+ZzdWd2ss9JJMZzJch0zKd4GqONBjCzFMYQ@mail.gmail.com>
+From: Prakash Gupta <prakash.gupta@oss.qualcomm.com>
 
---------------uwrMxsbcaUPR63gc8Mct0hz9
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Add support for the contiguous hint (CONT) bit in ARM LPAE page tables.
+When a set of consecutive PTEs map a naturally-aligned contiguous block
+of memory, the CONT bit can be set on all entries in the group to allow
+the hardware to combine them into a single TLB entry, improving TLB
+utilization.
 
-On 7/22/26 04:33, Bartosz Golaszewski wrote:
-> On Tue, 21 Jul 2026 20:29:39 +0200, Demi Marie Obenour
-> <demiobenour@gmail.com> said:
->> On 7/21/26 04:24, Bartosz Golaszewski wrote:
->>> On Fri, Jul 17, 2026 at 06:18:48PM +1000, Herbert Xu wrote:
->>>> On Sun, Jul 12, 2026 at 05:31:31PM -0400, Demi Marie Obenour via B4 =
-Relay wrote:
->>>>> From: Demi Marie Obenour <demiobenour@gmail.com>
->>>>>
->>>>> This driver is harmful:
->>>>>
->>>>> - It is much slower than the CPU [1] [2].
->>>>> - It Has a history of bugs [2] [3].
->>>>> - It does not have exclusive access to the hardware [4], causing ra=
-ces
->>>>>   with the secure world.
->>>>> - It register its implementations with too low a cra_priority for t=
-hem
->>>>>   to be actually used [5].
->>>>>
->>>>> Therefore, disable it to ensure that nobody builds it into kernels =
-they
->>>>> intend to ship.
->>>>>
->>>>> In the future, the driver will be used for processing restricted me=
-dia
->>>>> content.  However, the kernel does not currently support this.  Sin=
-ce
->>>>> the driver will have future uses, allow building it if COMPILE_TEST=
- is
->>>>> enabled.
->>>>>
->>>>> [1]: https://lore.kernel.org/r/20250704070322.20692-1-ebiggers@kern=
-el.org/
->>>>> [2]: https://lore.kernel.org/r/20250615031807.GA81869@sol/
->>>>> [3]: https://lore.kernel.org/r/20260706-qce-fix-self-tests-v5-0-86f=
-461ff1829@oss.qualcomm.com/
->>>>> [4]: https://lore.kernel.org/r/20260629-qcom-qce-cmd-descr-v20-0-56=
-f67da84c05@oss.qualcomm.com/
->>>>> [5]: https://lore.kernel.org/r/20260524204537.GB110177@quark/
->>>>>
->>>>> Fixes: ec8f5d8f6f76 ("crypto: qce - Qualcomm crypto engine driver")=
+The contiguous hint sizes per granule are:
 
->>>>> Signed-off-by: Demi Marie Obenour <demiobenour@gmail.com>
->>>>> ---
->>>>> Changes in v2:
->>>>> - Add Fixes: ec8f5d8f6f76 ("crypto: qce - Qualcomm crypto engine dr=
-iver")
->>>>> - Add Cc: stable@vger.kernel.org
->>>>> - Link to v1: https://lore.kernel.org/r/20260712-qce-broken-v1-1-85=
-e2bff17871@gmail.com
->>>>> ---
->>>>>  arch/arm/configs/multi_v7_defconfig | 1 -
->>>>>  arch/arm64/configs/defconfig        | 1 -
->>>>>  drivers/crypto/Kconfig              | 6 +++++-
->>>>>  3 files changed, 5 insertions(+), 3 deletions(-)
->>>>
->>>> Patch applied.  Thanks.
->>>
->>> Hi Herbert,
->>>
->>> I'd like to ask you to back this patch out. Admittedly I should have =
-NAKed this
->>> under the v1 thread but I thought the discussion we had under the Shi=
-kra series
->>> and the subsequent patch making myself the maintainer of this driver =
-(note: Demi
->>> did not Cc me on this nor the Qcom mailing list at linux-arm-msm) as =
-well as the
->>> pending series[1] fixing the QCE issues was enough to imply we should=
- not mark
->>> it as broken. Please consider applying [1] if the fixes in v6 are cor=
-rect.
->>>
->>> Bartosz
->>>
->>> [1] https://lore.kernel.org/all/20260717-qce-fix-self-tests-v6-0-4557=
-75fe5f6c@oss.qualcomm.com/
->>
->> Is the BAM locking patchset also needed?  My understanding is that
->> without it, the QCE driver can still produce wrong results due to race=
-s
->> with the TrustZone firmware.  Until it is merged and the self-tests
->> are fixed, the driver definitely needs to be marked BROKEN.
->>
->=20
-> No, we currently don't ship TZ firmware that could cause such interacti=
-ons.
-> The only driver that currently suffers from such races is the NAND driv=
-er
-> which races with the modem firmware and it too will use the BAM locking=
+  Page Size | CONT PTE |  Block  | CONT Block | L1 Block | CONT L1
+  ----------+----------+---------+------------+----------+---------
+      4K    |   64K    |   2M    |    32M     |    1G    |   16G
+     16K    |    2M    |  32M    |     1G     |          |
+     64K    |    2M    | 512M    |    16G     |          |
 
-> feature once it's upstream. However we do plan to support DRM using thi=
-s IP
-> and this is when it'll need to account for possible races. IOW: BAM loc=
-king
-> is not strictly required to fix the QCE.
+Contiguous hint sizes are advertised in pgsize_bitmap so that IOMMU API
+users can align allocations to these sizes and benefit from the TLB
+optimization automatically.
 
-Thanks for the correction.
+Partial unmaps of a contiguous group are rejected, ensuring the full
+group is always invalidated as a unit. The
+IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT quirk allows SMMU drivers to disable
+contiguous hint support at runtime for hardware with
+implementation-specific errata.
 
-Will updated firmware alone cause races, or does the kernel need to
-opt-in to firmware features that can cause them?  I want to make sure
-that a firmware update will not cause the driver to start racing with
-the secure world.
+Suggested-by: Robin Murphy <robin.murphy@arm.com>
+Co-developed-by: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
+Signed-off-by: Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
+Signed-off-by: Prakash Gupta <prakash.gupta@oss.qualcomm.com>
+---
+Changes in v3:
+- Collapse arm_lpae_cont_ptes()/arm_lpae_cont_blks()/
+  arm_lpae_cont_pte_size()/arm_lpae_cont_blk_size()/
+  arm_lpae_find_num_cont() into a single arm_lpae_num_cont(size_t size)
+  helper, since leaf/block/L1-block sizes never overlap across granules.
+- Fix arm_lpae_pte_is_contiguous_range() never checking that iova/paddr
+  are aligned to the contiguous group size, by removing it entirely -
+  __arm_lpae_map()'s new arm_lpae_install_leaf() helper scans for
+  aligned sub-chunks and independently verifies paddr alignment for
+  each one before applying the CONT hint.
+- Fold the CONT case into __arm_lpae_map()'s existing size == block_size
+  leaf path instead of duplicating arm_lpae_init_pte() in a separate
+  branch. A request whose size exactly matches a whole CONT group is
+  normalized down to block_size/scaled pgcount so it reaches that path;
+  arm_lpae_install_leaf() then walks the resulting range in chunks,
+  tagging only the sub-chunks that are both index-aligned and
+  paddr-aligned to the group size, since a single map_pages() call at
+  the plain block_size can still contain such an aligned group midway
+  through a larger, otherwise ungrouped range.
+- Replace the unmap-side WARN_ON_ONCE(!IS_ALIGNED(iova, size)) with a
+  check on the actual ARM_LPAE_PTE_CONT bit of the PTEs being cleared.
+  The previous check incorrectly warned on any unmap whose size
+  happened to numerically match a CONT group size, even when the
+  underlying PTEs were never CONT-tagged (e.g. because the original
+  iommu_map() wasn't group-aligned), and even though iommu_unmap() can
+  legitimately assemble such a size from multiple independent prior
+  iommu_map() calls.
+- Close a leak where ARM_MALI_LPAE would gain CONT-sized entries in its
+  pgsize_bitmap despite the format having no CONT bit, by having
+  arm_mali_lpae_alloc_pgtable() set IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT
+  internally rather than special-casing the format in the shared
+  arm_lpae_restrict_pgsizes()/arm_lpae_get_cont_sizes() path.
+- Gate each contiguous-hint size in arm_lpae_get_cont_sizes() on whether
+  a single group actually fits within the configured IAS/OAS, so e.g. a
+  16G level-1 CONT group is never advertised for an IAS too small to
+  address it.
+- Link to v2: https://patch.msgid.link/20260721-iommu_contig_hint-v2-1-90c731a41163@oss.qualcomm.com
 
-(Nit: DRM usually stands for "Direct Rendering Manager" in Linux.)
+Changes in v2:
+- Extend contiguous hint support to level-1 (1G) blocks for the 4K granule,
+  adding a CONT L1 (16G) grouping alongside the existing CONT PTE/CONT Block
+  sizes.
+- Replace the compile-time CONFIG_IOMMU_IO_PGTABLE_CONTIG_HINT Kconfig option
+  with a runtime quirk, IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT, so SMMU drivers
+  can opt out per page table instance instead of at build time.
+- Simplify __arm_lpae_map() to program the CONT-sized block directly via
+  arm_lpae_init_pte() instead of recursing into the next level with an
+  adjusted pgcount.
+- Reject unmaps that are not aligned to the contiguous group size with
+  WARN_ON_ONCE(), instead of clearing the CONT bit on a partial group before
+  invalidation.
+- Link to v1: https://patch.msgid.link/20260618-iommu_contig_hint-v1-1-4502a59e6388@oss.qualcomm.com
 
->> Also, what can the current driver do that cannot be done better using
->> software crypto?  I understand that you have future plans to add more
->> features to the driver, but those are not relevant to this discussion.=
+To: Will Deacon <will@kernel.org>
+To: Robin Murphy <robin.murphy@arm.com>
+To: "Joerg Roedel (AMD)" <joro@8bytes.org>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: iommu@lists.linux.dev
+Cc: linux-kernel@vger.kernel.org
+---
+ drivers/iommu/io-pgtable-arm.c | 231 +++++++++++++++++++++++++++++++++++++++--
+ include/linux/io-pgtable.h     |   3 +
+ 2 files changed, 226 insertions(+), 8 deletions(-)
 
->>
->=20
-> We can offload crypto operations to the QCE saving CPU cycles but more
-> importantly, the QCE provides HW based isolation which some vendors car=
-e
-> about.
+diff --git a/drivers/iommu/io-pgtable-arm.c b/drivers/iommu/io-pgtable-arm.c
+index 476c0e25631af..ec6eacff07ac8 100644
+--- a/drivers/iommu/io-pgtable-arm.c
++++ b/drivers/iommu/io-pgtable-arm.c
+@@ -86,6 +86,21 @@
+ /* Software bit for solving coherency races */
+ #define ARM_LPAE_PTE_SW_SYNC		(((arm_lpae_iopte)1) << 55)
+ 
++/* PTE Contiguous Bit */
++#define ARM_LPAE_PTE_CONT		(((arm_lpae_iopte)1) << 52)
++
++/*
++ * CONTIG HINT SUPPORT TABLE
++ *
++ *------------------------------------------------------------------
++ *| Page Size | CONT PTE |  Block  | CONT Block | L1 Block | CONT L1 |
++ *------------------------------------------------------------------
++ *|     4K    |   64K    |   2M    |    32M     |    1G    |   16G   |
++ *|    16K    |    2M    |  32M    |     1G     |          |         |
++ *|    64K    |    2M    | 512M    |    16G     |          |         |
++ *------------------------------------------------------------------
++ */
++
+ /* Stage-1 PTE */
+ #define ARM_LPAE_PTE_AP_UNPRIV		(((arm_lpae_iopte)1) << 6)
+ #define ARM_LPAE_PTE_AP_RDONLY_BIT	7
+@@ -453,6 +468,137 @@ static arm_lpae_iopte arm_lpae_install_table(arm_lpae_iopte *table,
+ 	return old;
+ }
+ 
++static int arm_lpae_num_cont(size_t size)
++{
++	switch (size) {
++	case SZ_4K:
++	case SZ_2M:
++	case SZ_1G:
++		return 16;
++	case SZ_64K:
++	case SZ_32M:
++	case SZ_512M:
++		return 32;
++	case SZ_16K:
++		return 128;
++	default:
++		return 1;
++	}
++}
++
++/*
++ * A contiguous-hint group of the given size can only be usable if a single
++ * group's span fits within both the configured input (ias) and output (oas)
++ * address space - otherwise no aligned iova/paddr pair for a full group can
++ * ever exist, and advertising the size in pgsize_bitmap would let callers
++ * pick a mapping that unconditionally fails.
++ */
++static bool arm_lpae_cont_size_fits(struct io_pgtable_cfg *cfg, unsigned long size)
++{
++	int size_bits = ilog2(size);
++
++	return size_bits <= cfg->ias && size_bits <= cfg->oas;
++}
++
++static unsigned long arm_lpae_get_cont_sizes(struct io_pgtable_cfg *cfg)
++{
++	unsigned long pg_size, blk_size, l1_blk_size, cont_sizes = 0;
++	unsigned long cont_leaf_size, cont_blk_size, cont_l1_blk_size;
++	int pg_shift, bits_per_level;
++
++	if (!cfg->pgsize_bitmap || (cfg->quirks & IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT))
++		return 0;
++
++	pg_shift = __ffs(cfg->pgsize_bitmap);
++	bits_per_level = pg_shift - ilog2(sizeof(arm_lpae_iopte));
++	pg_size = 1UL << pg_shift;
++	blk_size = pg_size << bits_per_level;
++	l1_blk_size = blk_size << bits_per_level;
++
++	cont_leaf_size = arm_lpae_num_cont(pg_size) * pg_size;
++	if ((cfg->pgsize_bitmap & pg_size) &&
++	    arm_lpae_cont_size_fits(cfg, cont_leaf_size))
++		cont_sizes |= cont_leaf_size;
++
++	if (cfg->pgsize_bitmap & blk_size) {
++		cont_blk_size = arm_lpae_num_cont(blk_size) * blk_size;
++		if (arm_lpae_cont_size_fits(cfg, cont_blk_size))
++			cont_sizes |= cont_blk_size;
++	}
++
++	/*
++	 * Only add the level-1 contiguous block size if level-1 block mappings
++	 * are supported for this granule. For 16K and 64K granules, level-1
++	 * block mappings do not exist, so l1_blk_size would not be in
++	 * pgsize_bitmap after arm_lpae_restrict_pgsizes() has filtered it.
++	 * For 4K granule, 1G blocks are supported, giving a 16G contiguous group.
++	 */
++	if (cfg->pgsize_bitmap & l1_blk_size) {
++		cont_l1_blk_size = arm_lpae_num_cont(l1_blk_size) * l1_blk_size;
++		if (arm_lpae_cont_size_fits(cfg, cont_l1_blk_size))
++			cont_sizes |= cont_l1_blk_size;
++	}
++
++	return cont_sizes;
++}
++
++/*
++ * Install num_entries leaf entries starting at ptep (index map_idx_start
++ * within the current table), scanning for aligned groups of arm_lpae_num_cont()
++ * consecutive entries that also have a naturally-aligned physical address and
++ * tagging only those with the contiguous hint. A group may be a strict
++ * sub-range of [map_idx_start, map_idx_start + num_entries) - e.g. when this
++ * call's index range isn't itself aligned to the group size, or when its
++ * paddr isn't - in which case the mismatched entries are installed without
++ * the hint instead.
++ */
++static int arm_lpae_install_leaf(struct arm_lpae_io_pgtable *data,
++				 unsigned long iova, phys_addr_t paddr,
++				 arm_lpae_iopte prot, int lvl,
++				 int map_idx_start, int num_entries, int num_cont,
++				 arm_lpae_iopte *ptep, size_t *mapped)
++{
++	size_t block_size = ARM_LPAE_BLOCK_SIZE(lvl, data);
++	size_t cont_size = num_cont * block_size;
++	int done = 0;
++
++	while (done < num_entries) {
++		int idx = map_idx_start + done;
++		int remaining = num_entries - done;
++		int off = idx % num_cont;
++		arm_lpae_iopte pte = prot;
++		int chunk, ret;
++
++		if (off == 0 && remaining >= num_cont &&
++		    IS_ALIGNED(paddr, cont_size)) {
++			/* Fully aligned group: tag with the CONT hint */
++			chunk = num_cont;
++			pte |= ARM_LPAE_PTE_CONT;
++		} else if (off == 0) {
++			/*
++			 * Aligned start, but too short or paddr doesn't
++			 * line up - install the rest of this window plain.
++			 */
++			chunk = min_t(int, num_cont, remaining);
++		} else {
++			/* Misaligned prefix: advance to the next boundary */
++			chunk = min_t(int, num_cont - off, remaining);
++		}
++
++		ret = arm_lpae_init_pte(data, iova, paddr, pte, lvl, chunk, ptep);
++		if (ret)
++			return ret;
++
++		*mapped += chunk * block_size;
++		ptep += chunk;
++		iova += chunk * block_size;
++		paddr += chunk * block_size;
++		done += chunk;
++	}
++
++	return 0;
++}
++
+ static int __arm_lpae_map(struct arm_lpae_io_pgtable *data, unsigned long iova,
+ 			  phys_addr_t paddr, size_t size, size_t pgcount,
+ 			  arm_lpae_iopte prot, int lvl, arm_lpae_iopte *ptep,
+@@ -462,21 +608,44 @@ static int __arm_lpae_map(struct arm_lpae_io_pgtable *data, unsigned long iova,
+ 	size_t block_size = ARM_LPAE_BLOCK_SIZE(lvl, data);
+ 	size_t tblsz = ARM_LPAE_GRANULE(data);
+ 	struct io_pgtable_cfg *cfg = &data->iop.cfg;
+-	int ret = 0, num_entries, max_entries, map_idx_start;
++	bool cont_hint_enabled = !(cfg->quirks & IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT);
++	int num_entries, max_entries, map_idx_start;
++	int num_cont = cont_hint_enabled ? arm_lpae_num_cont(block_size) : 1;
++	bool use_cont = cont_hint_enabled && num_cont > 1;
+ 
+ 	/* Find our entry at the current level */
+ 	map_idx_start = ARM_LPAE_LVL_IDX(iova, lvl, data);
+ 	ptep += map_idx_start;
+ 
++	/*
++	 * Normalize an exact whole-CONT-group request down to the
++	 * equivalent block_size/pgcount so it funnels through the same
++	 * leaf path below - arm_lpae_install_leaf() independently decides,
++	 * per sub-chunk, whether the CONT hint actually applies.
++	 */
++	if (use_cont && size == block_size * num_cont) {
++		pgcount *= num_cont;
++		size = block_size;
++	}
++
+ 	/* If we can install a leaf entry at this level, then do so */
+ 	if (size == block_size) {
++		int ret;
++
+ 		max_entries = arm_lpae_max_entries(map_idx_start, data);
+ 		num_entries = min_t(int, pgcount, max_entries);
+-		ret = arm_lpae_init_pte(data, iova, paddr, prot, lvl, num_entries, ptep);
+-		if (!ret)
+-			*mapped += num_entries * size;
+ 
+-		return ret;
++		if (!use_cont) {
++			ret = arm_lpae_init_pte(data, iova, paddr, prot, lvl,
++						num_entries, ptep);
++			if (!ret)
++				*mapped += num_entries * size;
++			return ret;
++		}
++
++		return arm_lpae_install_leaf(data, iova, paddr, prot, lvl,
++					     map_idx_start, num_entries,
++					     num_cont, ptep, mapped);
+ 	}
+ 
+ 	/* We can't allocate tables at the final level */
+@@ -660,6 +829,8 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pgtable *data,
+ {
+ 	arm_lpae_iopte pte;
+ 	struct io_pgtable *iop = &data->iop;
++	size_t block_size = ARM_LPAE_BLOCK_SIZE(lvl, data);
++	int num_cont = arm_lpae_num_cont(block_size);
+ 	int i = 0, num_entries, max_entries, unmap_idx_start;
+ 
+ 	/* Something went horribly wrong and we ran out of page table */
+@@ -674,8 +845,20 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pgtable *data,
+ 		return 0;
+ 	}
+ 
++	/*
++	 * Normalize an exact whole-CONT-group request down to the
++	 * equivalent block_size/pgcount, mirroring __arm_lpae_map().
++	 */
++	if (!(data->iop.cfg.quirks & IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT) &&
++	    num_cont > 1 && size == block_size * num_cont) {
++		pgcount *= num_cont;
++		size = block_size;
++	}
++
+ 	/* If the size matches this level, we're in the right place */
+-	if (size == ARM_LPAE_BLOCK_SIZE(lvl, data)) {
++	if (size == block_size) {
++		size_t cont_size = num_cont * block_size;
++
+ 		max_entries = arm_lpae_max_entries(unmap_idx_start, data);
+ 		num_entries = min_t(int, pgcount, max_entries);
+ 
+@@ -687,6 +870,33 @@ static size_t __arm_lpae_unmap(struct arm_lpae_io_pgtable *data,
+ 				break;
+ 			}
+ 
++			/*
++			 * Splitting a real CONT group by unmapping a subset
++			 * of it is not allowed - the group must always be
++			 * invalidated as a unit. Detect this from the PTE's
++			 * own CONT bit, not from the caller's size, since a
++			 * legitimate unmap can span multiple prior iommu_map()
++			 * calls and its size alone says nothing about how the
++			 * underlying PTEs were grouped. Only the first and last
++			 * entries of the unmapped range can possibly straddle a
++			 * group boundary - every interior entry, if CONT-tagged,
++			 * belongs to a group that is necessarily fully covered
++			 * by this unmap, since contiguity means groups can't
++			 * overlap without also covering everything between them.
++			 */
++			if (pte & ARM_LPAE_PTE_CONT) {
++				bool ok = true;
++
++				if (i == 0)
++					ok = ok && IS_ALIGNED(iova, cont_size);
++				if (i == num_entries - 1)
++					ok = ok && IS_ALIGNED(iova + (i + 1) * block_size,
++							      cont_size);
++
++				if (WARN_ON_ONCE(!ok))
++					return 0;
++			}
++
+ 			if (!iopte_leaf(pte, lvl, iop->fmt)) {
+ 				__arm_lpae_clear_pte(&ptep[i], &iop->cfg, 1);
+ 
+@@ -943,6 +1153,7 @@ static void arm_lpae_restrict_pgsizes(struct io_pgtable_cfg *cfg)
+ 	}
+ 
+ 	cfg->pgsize_bitmap &= page_sizes;
++	cfg->pgsize_bitmap |= arm_lpae_get_cont_sizes(cfg);
+ 	cfg->ias = min(cfg->ias, max_addr_bits);
+ 	cfg->oas = min(cfg->oas, max_addr_bits);
+ }
+@@ -1001,7 +1212,8 @@ arm_64_lpae_alloc_pgtable_s1(struct io_pgtable_cfg *cfg, void *cookie)
+ 			    IO_PGTABLE_QUIRK_ARM_TTBR1 |
+ 			    IO_PGTABLE_QUIRK_ARM_OUTER_WBWA |
+ 			    IO_PGTABLE_QUIRK_ARM_HD |
+-			    IO_PGTABLE_QUIRK_NO_WARN))
++			    IO_PGTABLE_QUIRK_NO_WARN |
++			    IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT))
+ 		return NULL;
+ 
+ 	data = arm_lpae_alloc_pgtable(cfg);
+@@ -1103,7 +1315,8 @@ arm_64_lpae_alloc_pgtable_s2(struct io_pgtable_cfg *cfg, void *cookie)
+ 	typeof(&cfg->arm_lpae_s2_cfg.vtcr) vtcr = &cfg->arm_lpae_s2_cfg.vtcr;
+ 
+ 	if (cfg->quirks & ~(IO_PGTABLE_QUIRK_ARM_S2FWB |
+-			    IO_PGTABLE_QUIRK_NO_WARN))
++			    IO_PGTABLE_QUIRK_NO_WARN |
++			    IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT))
+ 		return NULL;
+ 
+ 	data = arm_lpae_alloc_pgtable(cfg);
+@@ -1224,6 +1437,8 @@ arm_mali_lpae_alloc_pgtable(struct io_pgtable_cfg *cfg, void *cookie)
+ 		return NULL;
+ 
+ 	cfg->pgsize_bitmap &= (SZ_4K | SZ_2M | SZ_1G);
++	/* Mali LPAE has no CONT bit - never advertise CONT page sizes */
++	cfg->quirks |= IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT;
+ 
+ 	data = arm_lpae_alloc_pgtable(cfg);
+ 	if (!data)
+diff --git a/include/linux/io-pgtable.h b/include/linux/io-pgtable.h
+index e19872e37e067..7b2097aaffb09 100644
+--- a/include/linux/io-pgtable.h
++++ b/include/linux/io-pgtable.h
+@@ -86,6 +86,8 @@ struct io_pgtable_cfg {
+ 	 *
+ 	 * IO_PGTABLE_QUIRK_ARM_HD: Enables dirty tracking in stage 1 pagetable.
+ 	 * IO_PGTABLE_QUIRK_ARM_S2FWB: Use the FWB format for the MemAttrs bits
++	 * IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT: Disable use of the contiguous
++	 *	hint for hardware affected by implementation-specific errata.
+ 	 *
+ 	 * IO_PGTABLE_QUIRK_NO_WARN: Do not WARN_ON() on conflicting
+ 	 *	mappings, but silently return -EEXISTS.  Normally an attempt
+@@ -103,6 +105,7 @@ struct io_pgtable_cfg {
+ 	#define IO_PGTABLE_QUIRK_ARM_HD			BIT(7)
+ 	#define IO_PGTABLE_QUIRK_ARM_S2FWB		BIT(8)
+ 	#define IO_PGTABLE_QUIRK_NO_WARN		BIT(9)
++	#define IO_PGTABLE_QUIRK_ARM_NO_CONT_HINT	BIT(10)
+ 	unsigned long			quirks;
+ 	unsigned long			pgsize_bitmap;
+ 	unsigned int			ias;
 
-Would you mind explaining what you mean by "HW based isolation"?
-While some crypto engines support keys that Linux doesn't have access
-to, Linux only supports this on IBM mainframes.  Linux does support
-using hardware-wrapped keys for inline storage encryption, but those
-do not use this driver.
->> Finally, I very much appreciate the work you have done.  I don't
->> expect that the QCE driver will stay BROKEN forever.  This patch is
->> purely a reflection of the current state of the driver, the speed of
->> CPU-accelerated crypto, and the small message sizes used by the kernel=
-=2E
->>
->=20
-> That may have been true when you sent the v1 but with a set of proposed=
- fixes
-> it'll no longer be the case.
+---
+base-commit: 4fa3f5fabb30bf00d7475d5a33459ea83d639bf9
+change-id: 20260618-iommu_contig_hint-71ae491fbb52
 
-I trust (and have always trusted) that you can fix the driver.
-I apologize for not CCing you on the patch submission.
+Best regards,
+--  
+Vijayanand Jitta <vijayanand.jitta@oss.qualcomm.com>
 
->> That said, is drivers/crypto really the right place for a restricted
->> content driver?  A driver that uses dmabufs might be a better
->> alternative, and would be easier to integrate with the Direct Renderin=
-g
->> Manager (DRM) and Video for Linux 2 (V4L2) subsystems.
->> --
->=20
-> These are future plans, yes. But right now we do have active users of t=
-his
-> IP and now also a maintainer - yours truly - who stepped up and is acti=
-vely
-> working on this module. With the fixes applied, the driver will again p=
-ass
-> crypto self-tests and should not be BROKEN.
-
-With your patch, does the driver also pass stress tests, such as
-multiple threads using it in parallel with varying algorithms and
-message sizes?
-
-If so, then I agree that the driver should no longer depend on
-BROKEN, but I still question whether it is useful in its current form.
-That's not specific to QCE, though.  I would say the same about many
-other drivers.
---=20
-Sincerely,
-Demi Marie Obenour (she/her/hers)
-
---------------uwrMxsbcaUPR63gc8Mct0hz9--
-
---------------TQU0bcIC0Lu6CqgUekKUIeTq
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEopQtqVJW1aeuo9/sszaHOrMp8lMFAmpg5ckACgkQszaHOrMp
-8lO+Fg//U+kk24Rg8dMnY3eAHTPzBun+SQCvZSwgGg0OvhxkDdrNmbnNkyqEAOW/
-zyX4cLq3yO/GdoSMtQRGJ+FmsF44sZeML+hrR5412/3qwg4JFMXICOJ2jGc6DZ4p
-bkDHr5mteg3gT6WQN8qPKn9LCrtkNP05XKzsH1o2MCXJEjlmVbsUL8uJzqDXGtUL
-AMOsdMWvJyKj513aL2oLMlb/LVrIFOGPmfj2gi5MX2/NAf5uFZaCGqUVeCo7ld/6
-ARmabreDLIoCZUt7hWf1ucNPL/0ORAr3af74tEGg5YV07x9iBCDmSQO5aeFWuWcZ
-62mTdJQ0Fukbp/Tjoj15pTsEISWAnBVBTQ4oLiZSpJoxXQquf6e/33x5pi9YRKzp
-E9C58PDV9fR7S0nCjP4kqLTUgthFrooxaBmctiJjyn99kKeVvWaTwGNokjMzbGec
-ifq3rbML4ywEVzA3vsDU42PZqJY36PpdxATJ/t5pDb4g72+x7HbMKfMw1hMjDBOb
-jfsmxyXARS1RSvLsy23pdlqzPtIU24J/mv/YzTKoLZXtP/oTYGKvkQa9jqlw9FM1
-4VjxeN1h8hu1Pap8SnVFnRBMKBLIg3K7APwM1sKbsxqueYU75LEIV7sVfsBMi1px
-iJtuXU8ATVhm4jfIEzHqrQTp+9nPAkdcJ5miWn13ddT5ECQaTxk=
-=NKLC
------END PGP SIGNATURE-----
-
---------------TQU0bcIC0Lu6CqgUekKUIeTq--
