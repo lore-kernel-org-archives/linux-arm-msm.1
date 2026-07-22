@@ -1,168 +1,125 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 423D743E07B
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 08:33:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EA8543B3EA
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 08:37:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784709239; cv=none; b=nUej6JioZ25aJPhpBjuicVy83AyldVzUpPxfJBgXQC8CL5a9nzhIvAG70bDs5rY9MkaYa8InE8chUE3WBZy3Y5KjOUiDAPtmVMomUBeiV1pcb3AdjhiH7H5y/zBNYdGHPWu15eYjfdS7D5fgccIvk9Hf23G2cpC2fl0KtVRtJ6E=
+	t=1784709445; cv=none; b=NmotUlUvx0OzIRGu/b9IqsyYNMkrB8hJ1yP05C/qBardnxQK3oPHTn7cQM403q+1q/u3XKFdC+ngOaK/VKkTUipy0NbpPvqq7BPAY0GMR7SL1D3PQmNx4BLPAD/OopFbNYg3x5yvqcCvtHMrKFW4NW3XkqBSKV3g2g/HX/4aKCE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784709239; c=relaxed/simple;
-	bh=aXdU+V5rldF0JQS37txWsMh+gLQswGj4yazTp6LwgdM=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=lQsSqbDQLuqF21Ozo7IhC+b/NnKqz3UBErNgt5nD0BrJEtaUmFy/5/5++eozqtE9YIEHuq2K+KnUAo232GUWbCNSMaE/oZnOIVNJ6LKSskjBR8qLjrRedJgIaRUxFrdvFt3quWmBVwsGePRt0S1qdIWa5XgqSAO5ZAYYCoJmN7w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cgzEjcrm; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784709445; c=relaxed/simple;
+	bh=Dvs8iKiA1s86fHZzIox6PNu9HBXw7jF2cFihY18EQnA=;
+	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
+	 References:Date:Message-Id; b=GAXa6uqFPe4eJgHfexGMUhPjJfV4y83PALYl4doA+lXDEtUJ581xIGg4SKJfZzEXuKbRh9GtAqqqLR9WDRcgt1MBBs3ADiD+N4s6KnRWbr9/8DT4zzs9t9k52UZBu8Cm1wb0iAj9fQZSwk0SQzRXt+WglpgjnLeAlSnkimDCbRU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=S2DIfQDh; arc=none smtp.client-ip=209.85.128.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cgzEjcrm"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 601361F00ACF
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 08:33:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784709234;
-	bh=yOiMdhLhv0SVgfXHE2R9QZzVJ1NasACYuBsrPinmcjQ=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=cgzEjcrmH5PlLCpCElB1OBH6pZDb9tcKKSjkHE96/QtQnGgzkATjdho95Yq4JnPdP
-	 4bseFJVqO6K/UqwJsvayCPfsj31vo72qmJADaYpyPsUaeoJUk9Y3VvB3zBQ9MFfVnl
-	 Pgo+9tW3d2+aZ5W8ByPS3K29Zgbs9gUBnPODvG3nF2Lce2jWb3QM9qJQ2x07OUOUbT
-	 ydCXQY5bkLo6n9jGWTTJKuhI3LOVbhcqvFEH5fuNYjWMURiweOrbFt/O0vJokKT+4f
-	 2FKeQDbQVm6xRgf3UebCQkv6nB+JS+ZzMHSmhYGtWV6s3SzG+ashfYsw6Vf9Q/2X6H
-	 aY92W1h16xTHg==
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5b01910b499so4960392e87.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 01:33:54 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RqgN5Mx9OyBL6tkvV4tN/o0LFN7WPQpKXJzkWrVN2EcZj865hqCyiM+zghe8qnaQCgBt0QR8BXA8XUJBNTW@vger.kernel.org
-X-Gm-Message-State: AOJu0YyIzmMwjuaPX7uFt6+kxW2njCgXrrRV5r2kdDsyhkX6aY+DkqPn
-	0L3KEBpwvP8MMZB/SjRCqbxTzGycoTIO4oVEOhVxEWjzhjZDxo9PtKMrXELd8rtwUuFU8Aymnu9
-	YcYrZQOAaI0NxUF/63CyNsESpHLOeS6LIooTHsswXdw==
-X-Received: by 2002:a05:6512:a90:b0:5ae:a4a4:b6ca with SMTP id
- 2adb3069b0e04-5b2a9b8bf28mr697065e87.14.1784709233027; Wed, 22 Jul 2026
- 01:33:53 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 22 Jul 2026 01:33:51 -0700
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 22 Jul 2026 01:33:51 -0700
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <c826b73d-6307-4237-a065-b7a8487350ce@gmail.com>
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="S2DIfQDh"
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-490cf322ed0so89023915e9.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 01:37:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1784709442; x=1785314242; darn=vger.kernel.org;
+        h=message-id:date:references:in-reply-to:cc:to:from:subject
+         :content-transfer-encoding:content-type:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=0KxUqkKLp0O43MKOzWjySTokmH8Zpb0ihL6Myhjw/iM=;
+        b=S2DIfQDhIEPeBl8uYyE+232gxcAA1jgKYRXdy43DH71vRMvGD3/jpRdnYFwh1VeUz6
+         dpNFipAMJY0jFlR4k7ZPtviG+yaNAikMMPENLFvP95cpwQalNbh4DYFtv2jGE0042JD1
+         eargdZDyaVJtb7+cgfZXZxGEeSzqYb2p+DSsXN0rWFgqChOqMDroLFfN1uJo+4EIDRmF
+         h5vdNnDPANPLgK81tZPUmE/4nEQdObjixV1d6KshcWXmKvwYLoPYd3e2xXasopGq50cK
+         PMmtp8/zm2KsfknCX6D1F2TP/5Muy0F00PLwe5X8ZFJlvhmylfbQUn4mhFwxSrE9VSU6
+         FnZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784709442; x=1785314242;
+        h=message-id:date:references:in-reply-to:cc:to:from:subject
+         :content-transfer-encoding:content-type:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=0KxUqkKLp0O43MKOzWjySTokmH8Zpb0ihL6Myhjw/iM=;
+        b=tWefjUamb8buIkxmBbK05NwS8o/Ig+dUe0QaKfLBsCvQy/M8wHuapAdTIfSTl0UMim
+         eBgWAcVCZ3R+APZvEvvV9pWFmkueD+cqSPXt2/9qW5aPXYrbZcPolXUMmRGkhHH5TtJ0
+         5Fgc39/whOO3qY1uvaev5IdVT1IYAYJfM/2iLt6SQfFZ7iKCq647fgiXIpjzmPWyWNUq
+         noqW//rJZvkJQlHhCM4Xx2oilCDrp9wdL26Vuwm729gtxb6rd2dh0yhGTDW9Z8AICm5j
+         IMAjVjCKgDdxr5U9y2a19Q5JjC3avnfd0EsgclAFBzU4La7OW0elApRxUTzTBiJGeVIJ
+         1NvA==
+X-Forwarded-Encrypted: i=1; AHgh+Rq9Duvwj4bwfcRfPmDYX334jnnKYHi/PVyKGVC27ad05QJgQgHRIHbkNw1JR7RjR6aIRYMerfJSb21fIGWe@vger.kernel.org
+X-Gm-Message-State: AOJu0YySb4bjvEZIAXdWufw/xUZC8c6HSEiz+f+9QBVHrkNxTU5ge4NQ
+	7UduiBUVVs1PsAK1b3qIQdP2px6L+Rnhz9TGG/d+l+0QzMPnawaXYjwTh0mzwT6Hadc=
+X-Gm-Gg: AR+sD12LNWl6srz9HCdvzV9nu6G+A37R53AvB12+Oq/LreZQNOYn9saqPqWySJiDejl
+	mb2kqTj1k50ydVvcmSKGDlZJfAF9OqJl2ccjQWoBsWTY+PqUsciLkhG2IxPELxXYHa4HGDAfLN/
+	4xdkDlBb/CTW1+Exb3PCk0ciPd67HDNZsKHViP2dVAeqUMDQbRkbqjH/nyrvAyDBldwhArSXMOe
+	mRpvhhg0kEoFem5nJi5FTT08iLBDbC2NGsFI8AmsmFg7hhPFub1Wnwyf1qLcQPTFtQR1/SL1bld
+	jsvJuHcwjxjFSi4wdlJ3/h6xwoPEpTnwl+7CaZfbap2inRfkPXcqvCAtxMcLOlunozBEn5D42Mj
+	X0GBCfstIcjgFhQE1EabR7fQVvgwli839ePRY77kEqu9PSKyJ/kL0Yd7M8z/wVs0MS5z5xLJQqF
+	t4QlsfAFewS+ANjfuSzuLa
+X-Received: by 2002:a05:600c:46c7:b0:495:5205:86c with SMTP id 5b1f17b1804b1-495520509cemr186921755e9.22.1784709442333;
+        Wed, 22 Jul 2026 01:37:22 -0700 (PDT)
+Received: from [192.168.5.218] ([88.127.185.231])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4956a63fa41sm57819035e9.14.2026.07.22.01.37.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Jul 2026 01:37:21 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260712-qce-broken-v2-1-b2dfff47f7f5@gmail.com>
- <alnlaCXmoLRAlr96@gondor.apana.org.au> <20260721082501.6128-1-bartosz.golaszewski@oss.qualcomm.com>
- <c826b73d-6307-4237-a065-b7a8487350ce@gmail.com>
-Date: Wed, 22 Jul 2026 01:33:51 -0700
-X-Gmail-Original-Message-ID: <CAMRc=Me55rUmjjR+ZzdWd2ss9JJMZzJch0zKd4GqONBjCzFMYQ@mail.gmail.com>
-X-Gm-Features: AUfX_myVMTKcbCAssDxc43I4GIfVcXmrNN22ieXBDI4_jU6w43vodvQh9W2ZppY
-Message-ID: <CAMRc=Me55rUmjjR+ZzdWd2ss9JJMZzJch0zKd4GqONBjCzFMYQ@mail.gmail.com>
-Subject: Re: [PATCH v2] drivers/crypto: Mark QCE as BROKEN
-To: Demi Marie Obenour <demiobenour@gmail.com>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
-	Herbert Xu <herbert@gondor.apana.org.au>, Russell King <linux@armlinux.org.uk>, 
-	"David S. Miller" <davem@davemloft.net>, Eric Biggers <ebiggers@kernel.org>, 
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, 
-	linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	stable@vger.kernel.org, brgl@kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v2 1/6] clk: qcom: gcc-nord: mark PCIe link clocks as
+ critical
+From: Alexandre Mergnat <amergnat@baylibre.com>
+To: Taniya Das <taniya.das@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+ Michael Turquette <mturquette@baylibre.com>, 
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>, 
+ Shawn Guo <shengchao.guo@oss.qualcomm.com>, 
+ Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Ajit Pandey <ajit.pandey@oss.qualcomm.com>, 
+ Imran Shaik <imran.shaik@oss.qualcomm.com>, 
+ Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>, 
+ linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260721-nords_mm_v1-v2-1-17e5a445a512@oss.qualcomm.com>
+References: <20260721-nords_mm_v1-v2-0-17e5a445a512@oss.qualcomm.com>
+ <20260721-nords_mm_v1-v2-1-17e5a445a512@oss.qualcomm.com>
+Date: Wed, 22 Jul 2026 10:37:12 +0200
+Message-Id: <178470943208.3016846.11776209051004302989.b4-review@b4>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=500; i=amergnat@baylibre.com;
+ h=from:subject:message-id; bh=Dvs8iKiA1s86fHZzIox6PNu9HBXw7jF2cFihY18EQnA=;
+ b=owEBbQKS/ZANAwAKAStGSZ1+MdRFAcsmYgBqYIE+pkm1WguCA5Ju86A2jqA20XEbXTXE/5pJG
+ P4xBNgAB3OJAjMEAAEKAB0WIQQjG17X8+qqcA5g/osrRkmdfjHURQUCamCBPgAKCRArRkmdfjHU
+ Rd5RD/43BPSVA1i8qc8Iln6ZtlH+4tyXuICKw4p0yEEeJtwlaCT+gbl+veVEHxOZ3Fl36iDlvO9
+ qeuy7uez3Y+N+hYZRsC+SVUxBT/emU2XybASJNIyp1KtBp65152knhRdc9RelkdKp+2Q7bRE5ag
+ SjCWyA5ALMeunJXB10dHaH5UMKA8UEPsXQr2UVqMP0o6pjo/K4IsqsCxwKSvJkqVS8oEKk4vfxO
+ mpLvC9Ye+S2BHP0k+GVP04fun9Tp9LYAgHvasc6kXWU95PsAhH7xjyyqegGzxDxFQ4AroeQXCX+
+ y+rGwWJ5AS7ZxaOgDEJoaxiinz9cuU5q0uM9OeGoFM3dx5jfMZS/ddgGIvGBQvYyTiLws3yY1tJ
+ IAHezfYpqRSXr5Zb3lLyH5JM6RRwwwsGwv+GimVWrXoI6cabCzAcMJBB44gBVlBKRDdmeE6J6Tb
+ WHAmT5FoLGftfYNaACC0qzFZNCRAQik5mMeJhOqWW+nwfwZWibeffwnTjc+ajdegSq1G07BPWhE
+ CFcffToM5bqjAYuR1rDDuzwOxzmNDkWLluZYEp+hCfSW7YqMQgNydcx+8Em/VsFGzuMvP3/TOvL
+ y16pvkHJUXSqJjLFtwvnUHhTlqPX7+s0h5landjQ83quiMRU5kofyjn10Bsranw8l3cqpYHpq/V
+ 14PfqzVAYrzj93A==
+X-Developer-Key: i=amergnat@baylibre.com; a=openpgp;
+ fpr=231B5ED7F3EAAA700E60FE8B2B46499D7E31D445
 
-On Tue, 21 Jul 2026 20:29:39 +0200, Demi Marie Obenour
-<demiobenour@gmail.com> said:
-> On 7/21/26 04:24, Bartosz Golaszewski wrote:
->> On Fri, Jul 17, 2026 at 06:18:48PM +1000, Herbert Xu wrote:
->>> On Sun, Jul 12, 2026 at 05:31:31PM -0400, Demi Marie Obenour via B4 Relay wrote:
->>>> From: Demi Marie Obenour <demiobenour@gmail.com>
->>>>
->>>> This driver is harmful:
->>>>
->>>> - It is much slower than the CPU [1] [2].
->>>> - It Has a history of bugs [2] [3].
->>>> - It does not have exclusive access to the hardware [4], causing races
->>>>   with the secure world.
->>>> - It register its implementations with too low a cra_priority for them
->>>>   to be actually used [5].
->>>>
->>>> Therefore, disable it to ensure that nobody builds it into kernels they
->>>> intend to ship.
->>>>
->>>> In the future, the driver will be used for processing restricted media
->>>> content.  However, the kernel does not currently support this.  Since
->>>> the driver will have future uses, allow building it if COMPILE_TEST is
->>>> enabled.
->>>>
->>>> [1]: https://lore.kernel.org/r/20250704070322.20692-1-ebiggers@kernel.org/
->>>> [2]: https://lore.kernel.org/r/20250615031807.GA81869@sol/
->>>> [3]: https://lore.kernel.org/r/20260706-qce-fix-self-tests-v5-0-86f461ff1829@oss.qualcomm.com/
->>>> [4]: https://lore.kernel.org/r/20260629-qcom-qce-cmd-descr-v20-0-56f67da84c05@oss.qualcomm.com/
->>>> [5]: https://lore.kernel.org/r/20260524204537.GB110177@quark/
->>>>
->>>> Fixes: ec8f5d8f6f76 ("crypto: qce - Qualcomm crypto engine driver")
->>>> Signed-off-by: Demi Marie Obenour <demiobenour@gmail.com>
->>>> ---
->>>> Changes in v2:
->>>> - Add Fixes: ec8f5d8f6f76 ("crypto: qce - Qualcomm crypto engine driver")
->>>> - Add Cc: stable@vger.kernel.org
->>>> - Link to v1: https://lore.kernel.org/r/20260712-qce-broken-v1-1-85e2bff17871@gmail.com
->>>> ---
->>>>  arch/arm/configs/multi_v7_defconfig | 1 -
->>>>  arch/arm64/configs/defconfig        | 1 -
->>>>  drivers/crypto/Kconfig              | 6 +++++-
->>>>  3 files changed, 5 insertions(+), 3 deletions(-)
->>>
->>> Patch applied.  Thanks.
->>
->> Hi Herbert,
->>
->> I'd like to ask you to back this patch out. Admittedly I should have NAKed this
->> under the v1 thread but I thought the discussion we had under the Shikra series
->> and the subsequent patch making myself the maintainer of this driver (note: Demi
->> did not Cc me on this nor the Qcom mailing list at linux-arm-msm) as well as the
->> pending series[1] fixing the QCE issues was enough to imply we should not mark
->> it as broken. Please consider applying [1] if the fixes in v6 are correct.
->>
->> Bartosz
->>
->> [1] https://lore.kernel.org/all/20260717-qce-fix-self-tests-v6-0-455775fe5f6c@oss.qualcomm.com/
->
-> Is the BAM locking patchset also needed?  My understanding is that
-> without it, the QCE driver can still produce wrong results due to races
-> with the TrustZone firmware.  Until it is merged and the self-tests
-> are fixed, the driver definitely needs to be marked BROKEN.
->
+On Tue, 21 Jul 2026 12:37:16 +0530, Taniya Das <taniya.das@oss.qualcomm.com> wrote:
+> The PCIe link AHB and XO clocks must remain enabled for proper
+> operation. Representing them as clk_branch instances allows them
+> to be gated, which is undesirable.
+> 
+> Remove their clk_branch definitions and register their CBCRs as
+> critical clocks instead so they remain enabled.
+> 
+> [...]
 
-No, we currently don't ship TZ firmware that could cause such interactions.
-The only driver that currently suffers from such races is the NAND driver
-which races with the modem firmware and it too will use the BAM locking
-feature once it's upstream. However we do plan to support DRM using this IP
-and this is when it'll need to account for possible races. IOW: BAM locking
-is not strictly required to fix the QCE.
+Reviewed-by: Alexandre Mergnat <amergnat@baylibre.com>
 
-> Also, what can the current driver do that cannot be done better using
-> software crypto?  I understand that you have future plans to add more
-> features to the driver, but those are not relevant to this discussion.
->
-
-We can offload crypto operations to the QCE saving CPU cycles but more
-importantly, the QCE provides HW based isolation which some vendors care
-about.
-
-> Finally, I very much appreciate the work you have done.  I don't
-> expect that the QCE driver will stay BROKEN forever.  This patch is
-> purely a reflection of the current state of the driver, the speed of
-> CPU-accelerated crypto, and the small message sizes used by the kernel.
->
-
-That may have been true when you sent the v1 but with a set of proposed fixes
-it'll no longer be the case.
-
-> That said, is drivers/crypto really the right place for a restricted
-> content driver?  A driver that uses dmabufs might be a better
-> alternative, and would be easier to integrate with the Direct Rendering
-> Manager (DRM) and Video for Linux 2 (V4L2) subsystems.
-> --
-
-These are future plans, yes. But right now we do have active users of this
-IP and now also a maintainer - yours truly - who stepped up and is actively
-working on this module. With the fixes applied, the driver will again pass
-crypto self-tests and should not be BROKEN.
-
-Thanks,
-Bartosz
+-- 
+Alexandre Mergnat <amergnat@baylibre.com>
