@@ -1,115 +1,109 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-m155104.qiye.163.com (mail-m155104.qiye.163.com [101.71.155.104])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09E7E472F9F;
-	Wed, 22 Jul 2026 08:07:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDF4E367B9F;
+	Wed, 22 Jul 2026 08:14:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.104
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784707634; cv=none; b=qgjPLYjnjLzHhYrpkzcW+aOxbM3UI+hChMhGz28McbC4qtAYgMorijgc61g2T059NikKgTsuHA5f8HV6lR5F0knTL0Wtia6CBAn574Nadui3ic8D1tOON2BMBaaQVFQHLnrOhxrZaT/OZ0jh373tfxNSY/Npaz5hx1DcNtOl7NI=
+	t=1784708091; cv=none; b=UmjlWPyG4ofHeJfPz1TIJfGe5/LG1kQCKNGUt75fi+8qeHhAwGiLnQqFwfkTmEObxbe0bYixELHXTMOMVKXaJPooeecYjY0Jf4ZYj1m/JXQquWnzorkO4s7R3G1iLGnRP6nUicx9ZDC4CMqcBiZgONlJbAQvEc4S2x8OtZIrA/E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784707634; c=relaxed/simple;
-	bh=3dSwLaQV58zRkNo4XDy+NFGdbS49lL1I6uhn9NSZ+1Q=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=jfyDYK82vMDtMvHOdpFoGL8WQkX6iviTQy2egQOTvSj5YjniTGg576R1byj8rHY6UT18ZH9wh96Guc+HrREGeCGZpKnMxH+/v77A81cG2h+5CacleEd104Dcx6P+fmWVw/j8B77CN4u+9ZSGiu3GL6LP4ly5wwA//H7mv/lx5B0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iZ/N92SX; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784708091; c=relaxed/simple;
+	bh=H2jYEbDE6zMb0RGciZdnuLVAPpnxh4KM3390+TUx0sE=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=VKcGVGCUgk8spEi8HXxZvovMWDA3SszxAefkM43iG72oO/tOjZ8L/Nfa0KYtVTVx1vh8NSwaAvnUB6rjsVXVkf0Xjv98NjRiTCT7Fj3ULUl9wro3IGiyz1yKqxgRkoXQ/JfAkwVHTbwCWxosuErMFb/A1L5YrXk9Mug5OessLes=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com; spf=pass smtp.mailfrom=thundersoft.com; dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b=UUimcXcZ; arc=none smtp.client-ip=101.71.155.104
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thundersoft.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iZ/N92SX"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBA651F000E9;
-	Wed, 22 Jul 2026 08:07:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784707632;
-	bh=8ToEWISGvsIaiBIdGVsjmzA9SUSq8mwRd0/+H5ZmMXc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=iZ/N92SXRBHymr+zkBy+J2yND/5dkaxJgOz8IX0YfagTdxxG9ojjNP2yVitHzuFLU
-	 xtLA8ZFsCyRJ6W8c42Dt8YU1h1ZpcVeNo5vK9kEsBBxYDGh1/72booGx73s3DY1m1s
-	 TjtaA1KYhZ1aYGzCx5/A+u8ra1Fsdnxvza2heKqhNl96ZpjehX/cokL8EdDTUvXgsz
-	 mzkDG0u8oOuLGTdNNL/tyhjcb2psjM41J+fPYgiGBGIKw3/YcpZPlhafYZd/2M9Xy7
-	 1NPN0DxFVJfyvZomrT0Kft+3nj89x5hZgV1tGbHRw8u/siosXKBRUXKSxRtxQH2uo9
-	 FM3QVR6zX/t6w==
-Message-ID: <f5b9bf18-1bb9-48fd-8168-b5b82cac08db@kernel.org>
-Date: Wed, 22 Jul 2026 09:07:06 +0100
+	dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b="UUimcXcZ"
+Received: from tsdl-HP-EliteDesk-880-G6-Tower-PC.. (unknown [36.129.139.90])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 471eb5888;
+	Wed, 22 Jul 2026 14:58:56 +0800 (GMT+08:00)
+From: Hongyang Zhao <hongyang.zhao@thundersoft.com>
+To: konrad.dybcio@oss.qualcomm.com
+Cc: andersson@kernel.org,
+	broonie@kernel.org,
+	conor+dt@kernel.org,
+	devicetree@vger.kernel.org,
+	dmitry.baryshkov@oss.qualcomm.com,
+	drake@endlessm.com,
+	hongyang.zhao@thundersoft.com,
+	katsuhiro@katsuster.net,
+	konradybcio@kernel.org,
+	krzk+dt@kernel.org,
+	lgirdwood@gmail.com,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-sound@vger.kernel.org,
+	matteomartelli3@gmail.com,
+	mohammad.rafi.shaik@oss.qualcomm.com,
+	neil.armstrong@linaro.org,
+	perex@perex.cz,
+	robh@kernel.org,
+	rosh@debian.org,
+	srini@kernel.org,
+	tiwai@suse.com,
+	zhoubinbin@loongson.cn
+Subject: Re: [PATCH v2 6/6] arm64: dts: qcom: qcs6490-rubikpi3: Add audio support
+Date: Wed, 22 Jul 2026 14:58:39 +0800
+Message-ID: <20260722065841.2424602-1-hongyang.zhao@thundersoft.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <c293d9c7-bdb7-4303-80c8-404228c434d7@oss.qualcomm.com>
+References: <c293d9c7-bdb7-4303-80c8-404228c434d7@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v15 4/8] phy: qcom-mipi-csi2: Parametrise the common
- status register offset
-To: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>,
- Robert Foss <rfoss@kernel.org>, Todor Tomov <todor.too@gmail.com>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- jeyaprakash.soundrapandian@oss.qualcomm.com,
- Vijay Kumar Tumati <vijay.tumati@oss.qualcomm.com>
-References: <20260720-kaanapali-camss-v15-0-c0b1c1167c5d@oss.qualcomm.com>
- <20260720-kaanapali-camss-v15-4-c0b1c1167c5d@oss.qualcomm.com>
- <ZjDt97YCI6QX2gXf-F4lYaIj4po25RZtKf27ElBUOzGcXoPUf6mR9uSVb16GcrHYpJdCJg5Ee0IX6oJvQx1gFg==@protonmail.internalid>
- <2512aab8-fbde-4b95-8619-6c32d60ab500@oss.qualcomm.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- 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
-In-Reply-To: <2512aab8-fbde-4b95-8619-6c32d60ab500@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-HM-Tid: 0a9f889ecb2109d5kunmcfaa0ab945fac3
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVlDTBhCVktNSx1CSEJNGENITVYVFA
+	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlITVVKSUJVSkhCVUJLWVdZFhoPEhUdFFlBWU9LSFVCQk
+	lOS1VKS0tVSkJLQlkG
+DKIM-Signature: a=rsa-sha256;
+	b=UUimcXcZWMPJFdsTTyztDrXVh+0OGkluTZ8/C6r8Q5PSKq++b38V0To/DTj324yrXObI+/umpE2tiLdtf02EOgY6KnAl9cHg7mNRzyAdE0sg+KN/YHaxEPapQsgIoB4/qDw/OjJYDPzLoVEEZ0ryBLsm54X5GIUVg0j562vPsAk=; c=relaxed/relaxed; s=default; d=thundersoft.com; v=1;
+	bh=sJG7TkJXw80gNmIP7/g1NThayM9xyWHMAaqAHg5lEmo=;
+	h=date:mime-version:subject:message-id:from;
 
-On 22/07/2026 03:24, Hangxiang Ma wrote:
-> Hi Bryan, could you try to add this change into your PHY driver? This
-> macro format has existed in old arch. We once have such discussion on v5
-> thread.
-> 
-> https://lore.kernel.org/all/bc6abd24- 
-> d56a-4fc0-89e9-8986e8d8b3b7@oss.qualcomm.com/
+On 7/18/26 11:41 AM, Hongyang Zhao wrote:
+>> On 7/15/26 4:02 PM, Hongyang Zhao wrote:
+>>>> RubikPi 3 uses the AudioReach firmware path for its external audio
+>>>> interfaces. The primary MI2S interface connects to an ES8316 codec for
+>>>> headset playback and capture, while the quaternary MI2S interface feeds
+>>>> the LT9611 HDMI bridge.
+>>>
+>>> [...]
+>>>
+>>>> +	vreg_es8316_3v3: regulator-es8316-3v3 {
+>>>> +		compatible = "regulator-fixed";
+>>>> +
+>>>> +		regulator-name = "vreg_es8316_3v3";
+>>>> +		regulator-min-microvolt = <3300000>;
+>>>> +		regulator-max-microvolt = <3300000>;
+>>>> +
+>>>> +		gpio = <&tlmm 117 GPIO_ACTIVE_HIGH>;
+>>>> +		enable-active-high;
+>>>> +
+>>>> +		pinctrl-0 = <&es8316_power_on>;
+>>>> +		pinctrl-names = "default";
+>>>> +
+>>>> +		regulator-always-on;
+>>>> +		regulator-boot-on;
+>>>
+>>> Does it need to be always-on? Is it really on at boot time?
+>>
+>> I think the regulator-always-on constraint is currently required.
+>> GPIO117 controls the power switch for the ES8316, but the existing
+>> ES8316 binding and driver do not model regulator supplies.
+>
+> Please fix that first.
 
-I'd be obliged if you could generate a patch I can include and mark you 
-as Co-Developed-by !?
+Understood. I’ll send a new patch series and first try to address the
+ES8316 regulator supply support issue.
 
----
-bod
+Thanks,
+Hongyang
