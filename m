@@ -1,68 +1,66 @@
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E4613ADB89
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 20:34:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E8BA2ECE86
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 21:20:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784752491; cv=none; b=iCo0h/DHJLBXzYjjniP9/PIz8TAITmg9vceQ+kcRpK809LcR9W5CONiR0fVoHIvKiR6k++9XHn+/PoLqljpELrnoeNbj550KIuRdUkrmTO1Y17LeBUFyrkK1rQICx4B8FBPtLiNWUnFVo5jTaXkYuB808pyBjFnvQfpKntzpBKA=
+	t=1784755204; cv=none; b=Dg52ASLm4DkheJetmommjuy9Z94RgWB+50ESmLyZS/qluKBo9BEw7G7dnDPhC/lSLRNLzm14zcTyxe9XGTxQT51e9vqixjNdwvwJdvpma9R0xE4j1Ugw2KIP/QNT3tMPIOWH3GPbWkjDF0JgsybwqP9eIHnlCzA42wsB0rDIr2U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784752491; c=relaxed/simple;
-	bh=rkDL+w+g5I+rya7FyIvoZ7BhxGu8YhgLO7IIpbs+tpg=;
+	s=arc-20240116; t=1784755204; c=relaxed/simple;
+	bh=ZMqplz+CWfwkhFScdALPCw3tjHBTwhMBIDW0MQg7n4c=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=DZ/Pa8koIlBzc7WCVZzuXsoffVcrTLCagwq3OWO++INUKyNgzn2WZwvehziiVvcp1Q7c2ZgnzMo1rYXU8d8os0PZwp1O4F62ldwcRQNFopX9RkoRqWBm3WM3QmgMsW1of4QCLhhkZym7ognaoZUQSqW32kfRdEZU3DbkezvCjJE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=OVtP+5MW; arc=none smtp.client-ip=209.85.128.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	 In-Reply-To:Content-Type; b=Jc7+EJH0E0GL43dxh5j1KtXEfmxYhCeCwykGgdHnCTabwNE8+5xr9uoQ0NWCEs69kZDfSTcteYi/diL3Q8vi+QFwBUPn9ZIDmReIvHl9uVFlZ1lPgUjDqfyNditre28EcqOJ4blBoEnN8TuOlofOen3a177A7HkiboLF7fqfDDY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=qOhcKkSM; arc=none smtp.client-ip=209.85.128.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OVtP+5MW"
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4956242332dso31298325e9.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 13:34:50 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="qOhcKkSM"
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-49546c690ffso44150555e9.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 14:20:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784752489; x=1785357289; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=rkDL+w+g5I+rya7FyIvoZ7BhxGu8YhgLO7IIpbs+tpg=;
-        b=OVtP+5MWkLZabIbQWWcmxe2AfQ6iZtPW3TcV6XKqEm3C08ggSR2vaH/AkwBM+aH0uQ
-         E/8lTOKkL/8oJtYM1IofaKxaSpEU3idmh77EnOSA9cZ/9GBxB6qnOufPGRPVynGOcM2V
-         v2+owMAA6lh7QW7YQvZZ5+zdmHLgXWVR9RLXaCd6MFEUGuRc2o7wU3E8ogOmCdmx7nS8
-         PRsuBWnJhg/LkiN6GBBWa29RyAvGTeWKwCzO7qCZGuxyJbXcP1x1XBuZkQ1NGboEVus3
-         iFrzDFcO2nOIO+WUSkkDakbr3+XT10d7USBu03iReHdWcb6Y9sLzuPoJCJ4dKaeYo3+y
-         tvZA==
+        d=linaro.org; s=google; t=1784755202; x=1785360002; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=LB19uSaB2dUKGpvvlp7HGJ0LJbGfFX8aMA0zsxDLx+E=;
+        b=qOhcKkSMmIEcAgkrcu6DnI0bpKvWnNujveKhoBCSF7BdXOZzqNaC9rpGzfrX3ro/71
+         he1BehaaHwAxgC2JKTQHAsqZuZzH+aQ8vh8NCzFag5o2Szx62hV1mdiEzywxx4sBFMpQ
+         97WRVquiQc7s9wccqx8mPLt0w775DeTrlp+WiRN5FG9palDcagcYekFMll+hHiX75G/I
+         dt8vRQ0Wj+BlZopre6WYmwGt3xny5nshfoUelrWPVeApE/9jVit3xosL6hLGTLk8GXfd
+         VGUmQi2ya90XGxxtOKSgoGqFegGNezkJEpXFY6OIE1Fu1XC9Ys6CVonxwe57+qSGwqfZ
+         tJyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784752489; x=1785357289;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=rkDL+w+g5I+rya7FyIvoZ7BhxGu8YhgLO7IIpbs+tpg=;
-        b=aPNkclHaoXx5Q3dSMhubjEQ4WigmpMzaR/yti8kvP7tDQ9lyeKHdqmUjnZq1ol1vZA
-         M7BwY+WiOJxpjSaPKsQjCjbdI8ggRuCBBysh8Jr7n38y1jm1gJf1flQ1THtHDKEp6JZ8
-         jnDBN9LrgMn2iRx+uLw/zGM1wpMwWthRN+Sq5zlzCfmjmtx30QmRStx20NCBwq3yqr3r
-         be1PcOEDWX8pb7qw0NWv6iueBbzd41Fais+sItkrr2MtWusqrN/hV3vzRpPfSR4AiYjC
-         uHO6nvXkrO7gEPvE45a1U+FaPeUkatUTWTJ6VJZ9UYM0ag5DJBUfW/7xaNQr7pBoP7Aa
-         bLaA==
-X-Forwarded-Encrypted: i=1; AHgh+Rrmqz8Z+J87hVNFcBVpv4as5X8G5BiCPHojKslvj8HA3tJ619pyEyCrdYNkes6NUlSUqpH2fVXdsjlMdgzI@vger.kernel.org
-X-Gm-Message-State: AOJu0YzgXhk+zQW+FMeOd/WJ8+49Kr1tOlbDHOJUsYdnYbCxaxIl1I/S
-	aXTLtcHvyz0Ph44D2HCiJqSaaPAZSmhhDoWIkvB0OzkyXo4PGIm9Mew1
-X-Gm-Gg: AR+sD10k7ly+MQZHfGDhDYjx2ixtdr0OkcNwiT9K9SR17yq3VRUz141MV8AZbel0X6M
-	QxcRv1AW2NGkL90kld7b8CJ5QH9F4X6RYLUZVzmAQrVqcIRWZMe/zT53V+M+fTPKdEyTfNPuv1K
-	w4xliE4D6vc3mq/zD7kH8mROlYG4PYWyfca5NcOjK94ZMPiFcm3AwYeSA5IAJFOcaNptUjUb8w+
-	+fh/iTyWryf6qEGnxdQuac/MYtjTXABRbeiPq2U3L+JMZh1x9u/PWQWfjiXWMTZGxhSNdLqkPz1
-	O1sD0M43ptweVTTtNf3l/oZa2FAGLgfVslRoTy7zCbt1W1lILH6DoQ3jhMYflB+ZvOefVoYUDHq
-	Eh3nbEhAMKeR8IQZEZcZunAubbbjBv4KBHjJGrzU5Fcy3T3ZE6hlml9Oz3b/aUklXlVLfh+G8oH
-	HA72/q9W9HaKd63+dNvK2WDAHZkpgTLn+VqIzVeKzZJiSK6RQsSQssXoPJsbldS8on97UfTw==
-X-Received: by 2002:a05:600c:19cc:b0:493:a438:7f98 with SMTP id 5b1f17b1804b1-49573cffa42mr2236195e9.18.1784752488856;
-        Wed, 22 Jul 2026 13:34:48 -0700 (PDT)
-Received: from [10.128.10.232] (195-23-151-163.net.novis.pt. [195.23.151.163])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4956a967289sm93558325e9.11.2026.07.22.13.34.47
+        d=1e100.net; s=20251104; t=1784755202; x=1785360002;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=LB19uSaB2dUKGpvvlp7HGJ0LJbGfFX8aMA0zsxDLx+E=;
+        b=tF28Y680ivNoTLfpqrlv7wF5eJ9Ntig5aPzroCGjzmj31s6b5YNZHo4U6O7KCVXupb
+         HDfPAYk9tnClFo655Ha/Cj/VsJ77zoU28R2o0d3zs0UEq6G9ftYPZiUVNoubJAhidAhI
+         l+cOo0952XY6Op66MhfEqBXu8pZULWOoQcr2iWkowzoyCMBXF/7FwvX63HkbZn6UHJnX
+         rzCzH8OjqvQjzvybiE5YLdYLOuQMSDv9jOV7FCJgbLme+byxdbAGDALnamjJKtoVyU2Q
+         g2vAk1TpRz5mAdc6boTCQmZLneBiwpOZa+xw5V/Xi9iflwGbPx/ngq9e2/j63wbBFjvj
+         fjFQ==
+X-Forwarded-Encrypted: i=1; AHgh+RoAw3gbh0i0y4TjcflWi9gU9k1aCGHXpAiIVHA3iKVjw/OImBHHi+SRLGgkahbRqIw6TZ39oyHDBy0Ks88R@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxhjp0ZUIhvogHyxW/WlZFeufCazxCXSbVVYo8vIpKysn/+3apw
+	pzMcF+JXhhBTmuzlf8HAW4hVN9EcP4zffBH67HPjSRfnBJ6jxEVEoh4TjiMsO2oUzpk=
+X-Gm-Gg: AR+sD10rwC/Q+dv5vND9izV/R7YR8Br8jp4KSTvbwUrHp4KVgW/2f0sOElh4h5cWwgL
+	moc3NQZJb4efm26JUX2empwz66ExFAV+U6d1eWs48tI+JHLab/amW0Y25Dl+r8ufgU7MpnOSJem
+	8avbuv2Mok0sXrnJ30HGh6KOD3x4tRlE7yQfMRXWDmO5GqKwHO7TpvU3maFzwARC6MzOJsnfWT7
+	A0qkUSgCQjnOPEs/ehZf2PIKo9Wk/eNPTlrEUvce+s+c2O9mOAShsYD8V39xICUM66C5dY9nFmT
+	8XTC0WQJfd61iqSCEmEAWs5ELc7szkes75KnLBSqU/79MJF1at1RVlCFJizlQUSF3tkDGyhvtZX
+	Bk4bIs955LNWY1nzIC8zFjF3tsBSiyDcV9e1YUkkTBbES+tH5pjsQm3ihoUsmDnsIQJ6rXCLgd5
+	SYEvYBJge8nAcMrw==
+X-Received: by 2002:a05:600c:c098:b0:495:3a52:cd7e with SMTP id 5b1f17b1804b1-49573cf7758mr3304065e9.25.1784755201577;
+        Wed, 22 Jul 2026 14:20:01 -0700 (PDT)
+Received: from [192.168.0.101] ([109.77.14.136])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f85b9a5a2sm10026935f8f.7.2026.07.22.14.20.00
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 22 Jul 2026 13:34:48 -0700 (PDT)
-Sender: Julian Braha <julian.braha@gmail.com>
-Message-ID: <3b56fedf-95c7-432e-868d-f6f8a0368ce3@gmail.com>
-Date: Wed, 22 Jul 2026 21:34:47 +0100
+        Wed, 22 Jul 2026 14:20:01 -0700 (PDT)
+Message-ID: <4a8c0848-7f16-4752-93b9-e5e30c8ca0b8@linaro.org>
+Date: Wed, 22 Jul 2026 22:19:58 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -70,25 +68,36 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] soc: qcom: fix unmet dependency for QCOM_PDR_MSG
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: srini@kernel.org, andersson@kernel.org, konradybcio@kernel.org,
- linux-sound@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, arnd@arndb.de
-References: <20260719022242.139472-1-julianbraha@gmail.com>
- <qhrevlgsup5xtnxhhmon5cjic5utdhc2mdviczylqesw6yjjzv@s3kk2dr5vk7o>
-Content-Language: en-US
-From: Julian Braha <julianbraha@gmail.com>
-In-Reply-To: <qhrevlgsup5xtnxhhmon5cjic5utdhc2mdviczylqesw6yjjzv@s3kk2dr5vk7o>
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH 1/3] media: qcom: camss: Add "gcc_axi_hf" to 8775p VFE
+ lite clock lists
+To: Hans de Goede <johannes.goede@oss.qualcomm.com>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>, linux-media@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org
+References: <20260722163658.409872-1-johannes.goede@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20260722163658.409872-1-johannes.goede@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi Dmitry,
+On 22/07/2026 17:36, Hans de Goede wrote:
+> The "gcc_axi_hf" clock is correctly listed in the clock list of the
+> 8775p 2 main VFE-s, but it is missing from all the VFE-lite clock lists,
+> causing these to not work on platforms where the firmware allows turning
+> off "gcc_axi_hf".
+> 
+> Add the missing "gcc_axi_hf" to fix the VFE-lite blocks not working on
+> these platforms.
+> 
+> Suggested-by: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
+> Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+Needs a Fixes: tag.
 
-On 7/22/26 14:47, Dmitry Baryshkov wrote:
-> I don't see this commit in linux-next
+Then add.
 
-You can see it here:
-https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/?id=f2866e6a27f7cc26111ce195ddf00d4050bb27e5
+Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 
-- Julian Braha
+---
+bod
