@@ -1,226 +1,200 @@
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EBA8356772
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 14:21:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C13EF2AD2E
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 14:23:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784730061; cv=none; b=lINfuNzsY38r1S5Inpr+IwiJHxACBvNbyddwtY4GXue7c8joivqqBBjPbDb0U46zM4zvi5CAe9w5cbyc+OPaFlws2v1QEE+8fLgsJIJCEIVnzF9iWRTK+b+sivlti0WwpK+rUNSpyFwT/2qfdEK4DaMoCEe/5bTS4//AGC6syUo=
+	t=1784730235; cv=none; b=UijC37QX/cWEg1/EipLcu3LOSN2t+gMF9xwiTvGfhyvy1DFiNx0sm2RMhIFpQ0JSRGfOYPMxlzMqn40JBypfb7zWFqSstAAmKumQLM+wGo0veQXvrMpZo54tNhAbMPLRHtTeO3hTLjh/7HTPX4mZEVnnliSiOs+33yLlNGuhXjs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784730061; c=relaxed/simple;
-	bh=+fF7dWQHSuRuzFljxnSNaUBElzuZYXaOYUHtcv1srZ8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=dS3T8wc91jZ4lM2a2THZ/C+XDc2PpNP242FBfNzICJzgqrGi8+gazqxhdE2GGb7jizloitXHG704Qf37Bkp0xC2vRU2YmUqVSXLyGR+F2w0ktpARjiz/j3bgp9Ge2tQbUXGxXxLXsHpanv49j78Joa/0N51hF57viCaaUwUOzDo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=MqUVjYnN; arc=none smtp.client-ip=209.85.128.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1784730235; c=relaxed/simple;
+	bh=q/ENcvdzUpHV08hhHvAtNr0/U4wmYWcJOTf4EpwRHK8=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=fcpbI1G3Tph6qUaEydNyWqKmtZm2ciajLK0/ag5sy+3AHvbJPxt97sMOb3sCc/pf1AlyiiFSTSs6T2qE7sCcETOMh/bACDgtpGUEPd8yo1FiQjUnWQHx3vsU3mzvGf0lZwJAwDaChy4Vh6f88pknopnYrZHpC/MUiWjNKHDhJJk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MEbQO2pc; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=AOmmBwO9; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="MqUVjYnN"
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-495590dde14so36663935e9.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 07:20:59 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MEbQO2pc";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="AOmmBwO9"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66MDWb8r1027241
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 14:23:52 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=mVft64wS6z9WDtKxRsil1uc4zsVEveZZNCz
+	QLUd+KqQ=; b=MEbQO2pcjJh/XFqK7yR1Dbz0UL9WGK3aumiS/DJZn1+nXOM6ClH
+	o0Hhfr7/I5qhDeZMnSTvku/yX51h2+AnYUU5GzPmh5PGl+PSp+NEpbP4fHdlnXzD
+	d/MdIx4qOYMFqtcmzqZbpAeZB1jynz7mM2n9eC7rCA8D9DVdRokkPfv7+mqJTehN
+	mfwwA5rFam8scivamPKdW+7O+Q+mGbXGKAwTU8eHShUdaWu6EJXCXrDtCJm2PxBz
+	v+nEXH2AQzsfFHrnZIa9PrhSiNYBIJlKsNAecK0p2QPoIH1y7CR5etGzcPWquuDM
+	wamns31mSSMFtbQcNaBbdu+KXjgnonovAiQ==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjt799f5k-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 14:23:52 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-ca860baea9fso22198335a12.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 07:23:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1784730058; x=1785334858; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=v1zNXC882j0BCwBxeji6HC1ZHjIGfjhbbSn9tIs8/0s=;
-        b=MqUVjYnNHgjYx/DzQuwmlu1GBC1dk56cCPbhvAGDJSqvAwb6CbAWq1KolHgW+LAL8i
-         PMXAaZ4dZN88XF8kHZEZDpnB9+7eXXjIJcoeTKbE0ZGGDm/uDNuB0bWr99sBlhM/070t
-         euGFjp5OTLZ0dBKXkcVSNSilvxkwh6+Jiv4F5X1RjS/9EGDs3kzmGAinMoEXeQMyc+bU
-         D6e1Y5IMvZUhYIdNZ9QnZwEQDmp3uNXIAegzoDc+ym3pBnJKQ77hGGaOZhtDbMeRsfuE
-         M7FDL22IjjP8k2PCtwbtJEcUMgW/fSgEfxTMUo/pE6z4Q7LNbc5vLgYXSZ8vEho1P3/W
-         x3Cg==
+        d=oss.qualcomm.com; s=google; t=1784730231; x=1785335031; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=mVft64wS6z9WDtKxRsil1uc4zsVEveZZNCzQLUd+KqQ=;
+        b=AOmmBwO9U1khtHUiZ6FudlN7YnOo3miY7amtnthKSiFsUgHQOyGE8JX1IPzux2H9aO
+         k51RE4iJaiyQdWeNVYHgGuNjDNgtKAiXDW5xz3WfI1ITuxwMTQRXjYgXjnX4iOQrZgab
+         WmiFfyohWxwnCBtP/hI5LslW9XFNSm8ZIv8E8tyPQ2lmdNeUCecBuy8TO+JxRWLl2MvZ
+         iX5yB7ZAg5MCsJK3dF99m2Rk78J0rq2X2bgCcp0fAZwlrrm4AjzSkcVbdJOdIvmLCZIY
+         AGGN6sFMAJFu0i3XKF2RUZgKbPwMh9Z7dXcAU3+SOGKjVzzqORNcLRKAQN6u3omOS6CT
+         qZ0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784730058; x=1785334858;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=v1zNXC882j0BCwBxeji6HC1ZHjIGfjhbbSn9tIs8/0s=;
-        b=PxSyrKbE6B59Bae66XAh7ChmdM6oSezpEhNcgdnI42fRrbteZqkV4cei/Khn/CCQ6S
-         YuMNGn6beAfCxDMGqC1qz7aCKOGBScHzUTiZS8nUlAd4bdTnHEI0E7L2Jky+MtZ/uW6P
-         rlbbbJFjA7Y1+2Y0fknCy6cy7F+d8UT8X7gCeMSCkpF+KFOUIIqwYtqJTm8DaBDeCZ/A
-         fQ/kR26SgRNu3wGlIZvdBD+1Zf1IArU7ZMUDLWJzJ/oZg1hjALZ/ibbmECztWXySV+iR
-         ycNdWkjVrMVlJaIgGQuJLekVy9DhKYgRnYJ8TekL2ERGaHGtE77wMdBpOMpHi7JpiXhd
-         SJrg==
-X-Forwarded-Encrypted: i=1; AHgh+RqAz2TH2zEF2yjT85rT3aFwQUVPub7ZkEMrpusQ91Tg9GEW/oO6Nne39x7gsiGz2xxKk5RT8XYofDLwFiMz@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywr7VmFmEZrk4C7Vg8ztTdMGUqCZ9TvghixigV/WUOVDyuyxRI5
-	/78rvRsocMU0H0kuZb0JP7JXGDxtnbkZj9DpED8iL/kWHBeXsWq4DR+G0jqprgJgJII=
-X-Gm-Gg: AR+sD13I7zx3q5sRBT0SYLFNpus1AsL+h3MrORJqrIGzHlRV1omCeDu/lOlyjt0GZFf
-	+BHJiH8cI5co4FDTiMI61rXQ8isF8kAzKELj+5a6CIvvu3qCwiRhFKkIuP8cNSh4f840ND2veH9
-	BrqMWISkEcgJ8kOUC3p1DWGfEOszRUI0ZYpytANeaAmNti9+QefZ5n8bj15mkWBmlMD3SzHG2Jc
-	WvECdjgICXzqVm/I4BH5fuRkJaPQwVTKUoZ3g4NzAC4tPVTkht2UkVLTLLYkR+dsrQKn9BxNG3e
-	AXRRQizPZ4H/VhrFwQsoJkV5c5k5y8chQGIB5Y31BmFxYu0sZK/g3ZEKBu4BDutaks24dJlwv5L
-	aFa0eeByhTzCNwEypezH1pSTvLc2g8rAGgklsmz/JUgzwsOYsCbAencbc3o5zTPN+3/jRwWox6W
-	gpSqIV3/yVwp7fg+VBSQHPECA=
-X-Received: by 2002:a05:600c:3b01:b0:495:4fd4:144b with SMTP id 5b1f17b1804b1-4954fd419e8mr224754385e9.21.1784730058312;
-        Wed, 22 Jul 2026 07:20:58 -0700 (PDT)
-Received: from linaro.org ([2a02:2454:ff24:7210:7ae3:a857:e482:495])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4956d475e24sm40717585e9.0.2026.07.22.07.20.57
+        d=1e100.net; s=20251104; t=1784730231; x=1785335031;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=mVft64wS6z9WDtKxRsil1uc4zsVEveZZNCzQLUd+KqQ=;
+        b=j8pdYBdh8zjAK7FnTK/lVpSserzqd09b8gguFuMsPVJm2p+eJBS1kcxVVT/z4ZoLBR
+         S9BemQFpnT2R4PLfG+KEaaWhZ9iytZ91OSh5R8Z9PLRb2xXBHGIOR2wkFKVq93xxk5o1
+         3V2uqbudXWm7padLzTO5t6UWCweuUwEeTpla5xpZcsl3XdZOq0FxjtmzIbeKIJozQATA
+         ahX2x2xCQ2+s28h5ZqQFcsYNjTgMvA9Vuk9aL/7+pdoOMOHWXQ7KhAaivdD31hExEbl2
+         RAmwbq9FwFEA4AhCnYR6YL1wqBbyX5nl5YKUaZtfBwK55aPXNfL+OuJfsBYI75/RZWBW
+         9Ktw==
+X-Forwarded-Encrypted: i=1; AHgh+Ro0v4e6/8k49VGUd4oltCHDDoSwPlLFjh7NCTcD2vbOx+TAGb2UUEY9ruszOpxzCwveueigHlh5kDSryFK3@vger.kernel.org
+X-Gm-Message-State: AOJu0YztL05UiESS/kKCGm5m9DnvijJ+RegE7khhsLS4FO6hAatalVSf
+	QzAjYfwUvyiAuyBpHNETkI1HljtOBRkQmh9BS6PrHD8UDmBxyYFL/tDRXa+ZZVNbZR7TruJo8DD
+	0Ds5HZbBV+eHo5cH3ichfZE9O3zGSgKirpVjnoLVWDJmsKaiknkZJqNqA6Y4hbDM9xpX4
+X-Gm-Gg: AR+sD13j3nxz9rUmwoz7bgcRoDdZWkX3gaaBrMT2FffsE62sGskD6Wk8T4YTE8K2+08
+	R7W0wVmEBJY0xi7a0BPa3zxFiZw4MjW3vZNVq3GzL9XplXiI84R/o+y7dsJ884NtQSleYKRcLo/
+	dTl5vqgv9mspF2sgIJgf1xb45G1qfRHwx2YATDtSReNReuoeEyquyYkW+QnaBdQ9e295rvf3PN9
+	hteaDZGxCBkmWpKFqCbDUvF0ieL4BBLJf4NgV9h6GCZbd33kM+xKKycSA4lNxm61IumgJI+WMya
+	BjlhRigORfLRqb4iUIbzL+eCWXzwWBiByoU84GzbD8FWrCq7RjbA4rAhZpLqotYzbf7ii+VHBQY
+	ZVQ2miI18igiTBQPJDCVfCFLFukw=
+X-Received: by 2002:a05:6a21:3983:b0:3bf:6c08:2848 with SMTP id adf61e73a8af0-3c3ad974118mr25380536637.55.1784730231365;
+        Wed, 22 Jul 2026 07:23:51 -0700 (PDT)
+X-Received: by 2002:a05:6a21:3983:b0:3bf:6c08:2848 with SMTP id adf61e73a8af0-3c3ad974118mr25380495637.55.1784730230915;
+        Wed, 22 Jul 2026 07:23:50 -0700 (PDT)
+Received: from hu-mchunara-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3147dc7d8fbsm11231211eec.10.2026.07.22.07.23.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Jul 2026 07:20:57 -0700 (PDT)
-Date: Wed, 22 Jul 2026 16:20:52 +0200
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Thara Gopinath <thara.gopinath@gmail.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	"David S. Miller" <davem@davemloft.net>,
-	Udit Tiwari <quic_utiwari@quicinc.com>,
-	Md Sadre Alam <mdalam@qti.qualcomm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-	Peter Ujfalusi <peter.ujfalusi@gmail.com>,
-	Michal Simek <michal.simek@amd.com>, Frank Li <Frank.Li@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Vignesh Raghavendra <vigneshr@ti.com>, dmaengine@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	sashiko-reviews@lists.linux.dev,
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Subject: Re: [PATCH v23 06/14] dmaengine: qcom: bam_dma: add support for BAM
- locking
-Message-ID: <amDRxPkdvbA-iVer@linaro.org>
-References: <20260721-qcom-qce-cmd-descr-v23-0-1be02deffda9@oss.qualcomm.com>
- <20260721-qcom-qce-cmd-descr-v23-6-1be02deffda9@oss.qualcomm.com>
- <20260721134853.2B2401F000E9@smtp.kernel.org>
- <amCGXUUd4VmuQRGD@linaro.org>
- <CAMRc=MfBNB0pvv1kPPcswE4Y2m7PXBO49bwJg=v0+aY=JmJKWw@mail.gmail.com>
- <amC7_M-HjVZ3sQuT@linaro.org>
- <CAMRc=MdnSyPmbK0skMx686=wSe52nnuWgCNJ0uSoKs_=HyAq-Q@mail.gmail.com>
+        Wed, 22 Jul 2026 07:23:50 -0700 (PDT)
+From: Monish Chunara <monish.chunara@oss.qualcomm.com>
+X-Google-Original-From: Monish Chunara <mchunara@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Nitin Rawat <nitin.rawat@oss.qualcomm.com>,
+        Pradeep Pragallapati <pradeep.pragallapati@oss.qualcomm.com>,
+        Komal Bajaj <komal.bajaj@oss.qualcomm.com>,
+        Sachin Rathore <sachin.rathore@oss.qualcomm.com>,
+        Monish Chunara <monish.chunara@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH V4 0/4] arm64: dts: qcom: Add SD card support for Glymur
+Date: Wed, 22 Jul 2026 19:53:38 +0530
+Message-Id: <20260722142342.990384-1-mchunara@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAMRc=MdnSyPmbK0skMx686=wSe52nnuWgCNJ0uSoKs_=HyAq-Q@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=Sr6gLvO0 c=1 sm=1 tr=0 ts=6a60d278 cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=RkBJ44vHt5mxqPYn9l4A:9 a=_Vgx9l1VpLgwpw_dHYaR:22
+X-Proofpoint-ORIG-GUID: mB7x4kPhm5lB5nBocWrkzlY4D1KUVIYC
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDE0MSBTYWx0ZWRfXzIzw2SKEks5G
+ BhGo/oRZEEtrQLOwcwT6h2qCTAoQtULzrZC0P+EBcnDbjpTnKSBjwwpWTAkS7Sb/1OvvrWORGDg
+ DbFfcf2uWELBOIzBlcDXruw3VYq8DM9NV0Qi6560INMS39PdyOGMYkzDElPcs9V2s0MaqFkvfzu
+ 6B3oPOhOXXp78S85utd2ZYZ6c6l3elWCPkEXF85IPn3KbuP5vlNlSUlNyGPV30fIDKt8QflLj7Q
+ 19gKwF7yu8NZ2G1aZ6TTMLCUfwL8sQmaAmsgyW143Nab636LlaB5QJFe5d5aQ7oYGujKK7kEcyz
+ PPt0ogzTyRs9F8MafuNYgZ5sBFcYwYmVrZQDaWsvSlHSHnu9EBDsQKeHKxdro0QLTTxrBM17Y4h
+ e4ZRKskL/o1CrQouFIA9xVwiNM/Nv0wMf9HOSpu9/UvxwuKy/VzmMRiWoiGcGkmP7E2++5o81dO
+ f2nEzn3A7W0Lq1VBaDg==
+X-Proofpoint-GUID: mB7x4kPhm5lB5nBocWrkzlY4D1KUVIYC
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDE0MSBTYWx0ZWRfXwRdxeC1qk/I0
+ /IL2kdC4wP3IxL5P9zeRtPBFuheaCiyV6yLlooP6TneAXm0PDiwYS61ZiPX0+KjmKlq4Ur8bOhF
+ hfHr6MbWdGznajPg77VptNnfC1wx5xA=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-22_04,2026-07-22_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 suspectscore=0 spamscore=0 lowpriorityscore=0 bulkscore=0
+ adultscore=0 clxscore=1015 impostorscore=0 phishscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220141
 
-On Wed, Jul 22, 2026 at 07:11:10AM -0700, Bartosz Golaszewski wrote:
-> On Wed, 22 Jul 2026 14:47:56 +0200, Stephan Gerhold
-> <stephan.gerhold@linaro.org> said:
-> > On Wed, Jul 22, 2026 at 02:34:52AM -0700, Bartosz Golaszewski wrote:
-> >> On Wed, 22 Jul 2026 10:59:09 +0200, Stephan Gerhold
-> >> <stephan.gerhold@linaro.org> said:
-> >> > On Tue, Jul 21, 2026 at 01:48:52PM +0000, sashiko-bot@kernel.org wrote:
-> >> >> Thank you for your contribution! Sashiko AI review found 5 potential issue(s) to consider:
-> >> >> - [High] State leak causing hardware misconfiguration on channel reuse due to uncleared `lock_scratchpad_addr` and hardcoded direction.
-> >> >> - [High] Channel state corruption when `bam_slave_config` fails validation.
-> >> >> - [High] Infinite BH workqueue loop and unratelimited log flood on memory allocation failure.
-> >> >> - [High] DMA API violation: `lock_ce` buffer shares a cacheline with frequently CPU-modified struct members.
-> >> >> - [Low] Unused assignment of `hdesc` in IRQ handler.
-> >> >> --
-> >> >>
-> >> >> --- Patch [6]: [PATCH v23 06/14] dmaengine: qcom: bam_dma: add support for BAM locking ---
-> >> >> commit 8b44c5e4935cbb61832adb3262df00b3b606a283
-> >> >> Author: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-> >> >>
-> >> >> dmaengine: qcom: bam_dma: add support for BAM locking
-> >> >>
-> >> >> This commit adds support for BAM pipe locking by prepending and appending
-> >> >> dummy command descriptors with LOCK/UNLOCK bits when starting DMA on a TX
-> >> >> channel. It uses a peripheral-local scratchpad address communicated via slave
-> >> >> config for the dummy writes.
-> >> >>
-> >> >> > diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
-> >> >> > index f3e713a5259c2..411c60c4433e2 100644
-> >> >> > --- a/drivers/dma/qcom/bam_dma.c
-> >> >> > +++ b/drivers/dma/qcom/bam_dma.c
-> >> [...]
-> >> >> [ ... ]
-> >> >> > @@ -1064,6 +1197,7 @@ static void bam_start_dma(struct bam_chan *bchan)
-> >> >> >
-> >> >> >  	lockdep_assert_held(&bchan->vc.lock);
-> >> >> >
-> >> >> > +	vd = vchan_next_desc(&bchan->vc);
-> >> >> >  	if (!vd)
-> >> >> >  		return;
-> >> >> >
-> >> >> > @@ -1072,6 +1206,24 @@ static void bam_start_dma(struct bam_chan *bchan)
-> >> >> >  		return;
-> >> >> >
-> >> >> >  	while (vd && !IS_BUSY(bchan)) {
-> >> >> > +		/*
-> >> >> > +		 * Open a LOCK/UNLOCK bracket around each fresh sequence.
-> >> >> > +		 * Sentinels inserted by bam_setup_pipe_lock() are skipped: they
-> >> >> > +		 * already have bam_locked set and must not trigger a second pair.
-> >> >> > +		 */
-> >> >> > +		if (!bchan->bam_locked) {
-> >> >> > +			ret = bam_setup_pipe_lock(bchan);
-> >> >> > +			if (ret) {
-> >> >> > +				dev_err_ratelimited(bdev->dev,
-> >> >> > +					"failed to setup the pipe lock, deferring transfer: %d\n",
-> >> >> > +					ret);
-> >> >> > +				queue_work(system_bh_highpri_wq, &bdev->work);
-> >> >> > +				break;
-> >> >> > +			}
-> >> >>
-> >> >> [Severity: High]
-> >> >> Does requeuing to a high-priority BH workqueue upon ENOMEM cause CPU
-> >> >> starvation? Because system_bh_highpri_wq executes in softirq context,
-> >> >> requeuing immediately without sleeping prevents the memory reclaim needed
-> >> >> to resolve the GFP_NOWAIT failure, leading to an infinite spin loop.
-> >> >>
-> >> >
-> >> > It looks like my suggestion to queue_work() again in the error path of
-> >> > bam_start_dma() wasn't great if we end up causing an infinite spin loop.
-> >> > We do need to retry somehow or report an error though, I don't think
-> >> > aborting and leaving the desccriptors completely unhandled is an option
-> >> > either... :(
-> >> >
-> >> > One option would be to try to avoid the allocation and write the lock
-> >> > descriptors directly into the FIFO, but this will probably get really
-> >> > messy as well, since you would need to carefully modify the FIFO
-> >> > management in several functions ...
-> >> >
-> >> > I don't have a good spontaenous idea how to solve this right now. :/
-> >> >
-> >>
-> >> Pre-allocate the lock descriptors (if needed) in bam_prep_slave_sg()? As in:
-> >> call bam_make_lock_desc() in bam_prep_slave_sg(), store the descriptors and
-> >> make bam_setup_pipe_lock() return void as it will no longer be possible for it
-> >> to fail? It would just grab the preallocated descriptors.
-> >>
-> >
-> > I considered suggesting this, but how do you know which descriptor needs
-> > it in bam_prep_slave_sg()? It's just the allocation, afaict it doesn't
-> > tell you anything about the order in which they will be submitted. :/
-> >
-> > We could always allocate the extra lock descriptors and waste the extra
-> > memory for the descriptors that won't need it. That should work, but is
-> > also not great ...
-> >
-> 
-> Oh, I was thinking about having pointers to lock/unlock descriptors in struct
-> bam_chan and to just grab them in bam_setup_pipe_lock() when needed and then
-> next time we enter bam_slave_prep_sg(), we see we consumed them so let's
-> re-allocate them. And of course: don't do it at all if pipe locking is not
-> supported.
-> 
+From: Monish Chunara <monish.chunara@oss.qualcomm.com>
 
-Sadly, I think(?) from the API perspective it is valid to
-dmaengine_prep_slave_*() a couple of buffers and them issue them
-separately, e.g.:
+Respected Maintainers,
 
-	desc1= dmaengine_prep_slave_*();
-	desc2 = dmaengine_prep_slave_*();
+This is v4 of the series to add SD card support for Glymur.
 
-	dmaengine_submit(desc1);
-	dma_async_issue_pending(chan);
+This series adds SD card support for the Qualcomm Glymur SoC and the
+Glymur CRD (Customer Reference Design) platform. The changes include
+updating voltage regulators to meet SD card requirements, documenting
+the new compatible string in device tree bindings, and enabling the SDHC
+controller at both the SoC and board levels.
 
-	// do a bunch of other random stuff
-	// bam_setup_pipe_lock() consumes lock descriptors
+Changes in v4:
+- Propagate Reviewed-by tags (Konrad, Dmitry)
+- Update the commit message for dt-bindings change (Krzysztof)
+- Move the common nodes for SD card enablement to glymur-crd.dtsi to be 
+  leveraged by Mahua CRD platform. No functional changes made.
+- Link to v3: https://lore.kernel.org/all/20260706141346.4180348-1-mchunara@oss.qualcomm.com
 
-	dmaengine_submit(desc2);
-	dma_async_issue_pending(chan);
+Changes in v3:
+- Collect Reviewed-by tags (Konrad, Dmitry)
+- Update the commit message for dt-bindings change to reflect the
+  purpose for the update (Krzysztof)
+- Link to v2: https://lore.kernel.org/all/20260702094056.3755467-1-mchunara@oss.qualcomm.com
 
-In this situation, we wouldn't have any lock descriptors allocated
-anymore?
+Changes in v2:
+- Rectified the iommu sid mask notation to hexadecimal format
+- Updated the power-domain corner for 202 MHz frequency as per the clocks plan
+- Added the BCR reset capability for hardware reset as required during the init
+  sequence
+- Reorganized the DT nodes as per the DT coding standards
+- Link to v1: https://lore.kernel.org/all/20260610111508.3941207-1-mchunara@oss.qualcomm.com
 
-Thanks,
-Stephan
+Summary of changes:
+
+Patch 1: Updates the voltage ranges for vreg_l2b_e0 and vreg_l9b_e0 on
+the Glymur CRD. Specifically, it reduces the minimum voltage for the
+VDDIO supply (l2b) to 1.8V to support high-speed SD card modes and
+increases the VDD supply (l9b) for stability.
+
+Patch 2: Documents the Glymur-specific SDHCI compatible string
+(qcom,glymur-sdhci) in the sdhci-msm bindings, using qcom,sdhci-msm-v5
+as the fallback.
+
+Patch 3: Adds the SDHCI (sdhc_2) node and required pinctrl
+configurations to the base Glymur SoC device tree.
+
+Patch 4: Enables the SD card slot on the Glymur CRD by configuring the
+regulators and GPIO-based card detection.
+
+Testing: Verified on Glymur CRD hardware.
+
+Signed-off-by: Monish Chunara <monish.chunara@oss.qualcomm.com>
+
+Kamal Wadhwa (1):
+  arm64: dts: qcom: glymur-crd: Update VREG l2b_e0 and l9b_e0 voltage
+    for SD-card
+
+Monish Chunara (3):
+  dt-bindings: mmc: sdhci-msm: Document the Glymur compatible
+  arm64: dts: qcom: Add SD Card support for Glymur SoC
+  arm64: dts: qcom: Enable SD card for Glymur CRD
+
+ .../bindings/mmc/qcom,sdhci-msm.yaml          |  1 +
+ arch/arm64/boot/dts/qcom/glymur-crd.dtsi      | 33 ++++++-
+ arch/arm64/boot/dts/qcom/glymur.dtsi          | 91 +++++++++++++++++++
+ 3 files changed, 120 insertions(+), 5 deletions(-)
+
+-- 
+2.34.1
+
