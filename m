@@ -1,87 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2686E40F726
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 10:57:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68F17366816
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 10:59:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784717856; cv=none; b=kwlYEkxizgbygtP9pwr8iHgO3ONY6FE84egn79tMtLJweOglUF55cxib2G+eEqSeo08gdGBtxRJJHXKMF0OPyqViu2ZfCl7hs2I9U5u1DTImI21tDZMysO3bn1dx1jfxsFT83i9aTMo/sjYgAy0+rsUAgdWlqPKCLWCAfa7eObU=
+	t=1784717981; cv=none; b=bHSElaQjes28iNZQL6jR0VkTo/ApMGiJgv7IZ34MCdaH28ZKbQwjD5poUcoB4vyMZkACNv+FbQnUk4DSNISAUysvJuQZk4M3SAs+b+v5od1RRdMzu1nEdv5BsTT6r3yuVzj57Kk9CiCeihmfx/J+1pRh3+t4IsRQm4omvEG2yuw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784717856; c=relaxed/simple;
-	bh=QiqrnBFrCvZUnptW7XlcwHn5QfWSr5rCEk5a5HPz7Ec=;
+	s=arc-20240116; t=1784717981; c=relaxed/simple;
+	bh=TlGOa7Q4JnZWRpem8FybOSI0XTsAWwND+/pRfgVDTHY=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=g3bL9aWo0tyl1D+aBO8YkqbsyYEwJjNABMqYJDT6g+kbi9XLZxLNJBosvVZHCB4ev2kVeEhIoChT3i0PtQiCXAz0Q+VAzv4lX8QKm0fYU6ywpMY8sFX3ugxf4GLcKts++puqj0q/e8Sh+fChDQMAtoyg2x6R4x2+V64OITrXR9I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=KX3Ketxz; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SB3vjJPt; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=hgsnU3mTMzGYVgIT7uM2BbxtA/ZeVVrdLPVMaPbCD3gC8rrxbSiBWPIXE5BXcEVwxNmpe2wo+rbp6AnDTsHVLpXu8g3IHPzj0MDqhhAKeCQ5bwDRtu2Ij3GIBk3i46H3YH1wgb1ShVqVIp5JSk6tIL1KFZtrBt6ZEnEuTpVPGAE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lSsq1pLE; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Zc/aRq8U; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="KX3Ketxz";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SB3vjJPt"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66M8xI9i4018317
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 10:57:34 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lSsq1pLE";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Zc/aRq8U"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66M8xdEV123835
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 10:59:40 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	MdElDgr0A6I5Ago58sw99HOz++aFFA5p06ZnufGOKLM=; b=KX3KetxzRk+DsMfN
-	UdxPmJCcJ7hU6OMV02fGz/W6tKLUSUg2e9K5KFAYOI7ExrC4WPErjMaA+cXCyxd7
-	qRjKk4Uvbx9g667+LyVI6X8IThHbXZ8nvyqD00ziA1BDWkhqVxqSBi5rlJ5pN1VN
-	kHg3iUGOS+3I4H1iioV8YiysCAlaHGK4sBuMvDQ+TMpZfMsgEmGkOEiHH5PklQ0m
-	908j3MfMbShHrLqVg+LjlhudUlFd8BdZodjZ0tgP+PkghtC3Y6Fq58xcWiPupxiJ
-	kBK0qIbXFN5bQaRtp0mKaqPyOn4K1oFTaxo4GHXcr6uFwSaAkASeRuh94zgazNaM
-	ICyJPg==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjd6fup8s-1
+	6NLD5QZZ8/I4Gf7f08HT3hDB1lW6nFAOR1yB7m8BKXE=; b=lSsq1pLEodEksU4Z
+	w1qorF4Kr9l0Fb5xhfsH5Jtmmoh4ftLrU2OvnmPqGGd+4CwSHJh0K7Wkfm2TZ6B1
+	E+AIK82r/PW7Q5FWizV6Yxhq4CP1bCFFpDNiGPDuf1sbB768zdvgroaHqQQrKCmM
+	xg4WUOVoq4f+wkN8TqVaIQ9vAkzuELjAcQQTeXWsxOriJrpht9F1nZW+QR/fa0qa
+	Oy8HRurwbLnRHG6hkKvzBh6Qw5Kz1KhvnzBYBBMaBF4bUwYVyMkHkSZcDG03SAjS
+	7eh2P0x/zNU923fjjnGkuxpw1Pmz91OVJ0clwR/Gg39tjV5c6mRtXqjnKnZjhx/K
+	fmLNjQ==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjnu4sr49-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 10:57:34 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38dc085b0a7so19265279a91.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 03:57:33 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 10:59:39 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-8f1e4e0eac1so227155676d6.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 03:59:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784717853; x=1785322653; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784717979; x=1785322779; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=MdElDgr0A6I5Ago58sw99HOz++aFFA5p06ZnufGOKLM=;
-        b=SB3vjJPtTIzsMlvSm1KGVwyHbM2qX3S/QU7NwuKVVz4lIvVvpZ5iVToWq+8oAKaczX
-         zh/JshHEqSdHUSBzPWrTDTIgVfELPmSOAnxq1csob3gPTyD6Ve02vxz0UjPYXQEMZQk8
-         gai8dxqmFELAZjti9MPY9chM/QzjchYdkpN82YIcaAVfN9FQs9W/X21zsZ15vy5fFTWB
-         sGfqqkcFNZArZbhWzZYTFSaZuDMiV5AjSjf2wiBAojBZS/n2Vyt4Z0evIsT0byHQd1S2
-         9BCRPbUyG6n74cL07tl4AW1pv44tAwcW4SY5I3qNNmEiNkVWJN+AexQOxFae6tp5OrIh
-         Szkg==
+        bh=6NLD5QZZ8/I4Gf7f08HT3hDB1lW6nFAOR1yB7m8BKXE=;
+        b=Zc/aRq8USaSad+uGK4xk2qEiaicyld4kWbqZrX1qC7CA/IXZznjEixE5a8SzSSFHy3
+         vAzGxV79IHRmdSStzmqGclqgfiBvokzJTKiGJR6YH04N+c0uavo/axXwJM4/4jg8WZQT
+         IlH2E+zzIKp17oHT1BG/pCd8TeCvp9RUQqqihUOMzVXVm2Q0+17Fdtev61KYgWeB6hn2
+         DHG2kKAtbUERkQJjI6Dn7otV8W4gxXK3Trs2707AB8APWpkXERmrWNojco93j6jmRzFu
+         bF+dDwUP3oZ3oNmxVLAzX/xQO03qszpGXDNqB9dVXL/14jgsofLVQ+byFvv61++9dg8/
+         22fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784717853; x=1785322653;
+        d=1e100.net; s=20251104; t=1784717979; x=1785322779;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=MdElDgr0A6I5Ago58sw99HOz++aFFA5p06ZnufGOKLM=;
-        b=RtXkpEc7HXJMes5712i85d6sDZu3KDRxF+1qJKy6UWSji5LII+q4RRDHXcbBoH4UQA
-         wBwxtycGFEjhw+29puhuhOTw+XTzUk8wvKTAQkT/+KA2S5c7saXO/9JIxaZaXcKBYwMm
-         GI8OHyfvmc0h3ntYOObYjAfj450foXbyrukYbPq/4NhhQGToPbqArPJKhk2hmL4cuq9m
-         b5e//FNFGTunRMf1SrL0B95AZNJ5St9CphKfpXSk/otI6pDbsXuVmbpkj06PM6bq9NtV
-         /6pmkHAFJX3K7gTWlFIUvZFpsHmTDXptsTjgXfbRprIrfPgRQ3oBhDwcUm0bMQ00lUln
-         IOKA==
-X-Forwarded-Encrypted: i=1; AHgh+RqKu+ozc2a3SKQa92QqSDGfNf+sxo2Zb+T22P654hsNoFriZmyYxvV2ewZbZJAb5iNJn3ywMUcUcSk13wge@vger.kernel.org
-X-Gm-Message-State: AOJu0YyiyMIcmzJFw9bSBoSOmBdGOtEt0Nfc+QbfF0n9UhCxaVd04IJ/
-	nh/53938CX5xrd3PFU2TzQ7r+4gjL/a93NMMM4GQfjVGSRhsz+fHua8Yr31q9RbioCn73Q0QAO7
-	HtKgx0cdGZh4wbNUlr7rgbquEGbAx82cdb95xAguUJjpTw/pvyUkEmejYrwNCFzC0+LtK
-X-Gm-Gg: AR+sD12p2pqsVKYgzJ7sLM+mRlk4/cEIBgDX97rCkfohRCBOL9oE6fGl59RJuC4qJg4
-	t0P8nlUv5el74093i2Bda/qVGFjj389BJyKM3gt8T6FPn1gh8rdrOdsfkuKpRHKk8m4do9Zqa8z
-	gtnZD6dB1/yuQ56iwY2OD8mZmbWEgIdvN9MeJePmMNh3P0fuUxLK5xA5fvGS9fGbySAs9VnIEGw
-	zBts++3nrrDRjW/kdOpScPyB/kUXLuC0eoq81mMWRTfMER8nZrm6Abmh/b4tGnjcLFiWeVF0h+R
-	ktADCBmALZnNHQvor0NZInUPQyscJimHv6ShJdx1KXx4ipbddtzLww8MbBoo9/IQb3qbZ15rJpu
-	yJTbZgh8mTm+T4IuA1NQc7mxGRk4KoYq/
-X-Received: by 2002:a05:6300:95:b0:3ba:cd5b:3dc8 with SMTP id adf61e73a8af0-3c3ad7a31eemr23581350637.31.1784717853294;
-        Wed, 22 Jul 2026 03:57:33 -0700 (PDT)
-X-Received: by 2002:a05:6300:95:b0:3ba:cd5b:3dc8 with SMTP id adf61e73a8af0-3c3ad7a31eemr23581317637.31.1784717852784;
-        Wed, 22 Jul 2026 03:57:32 -0700 (PDT)
-Received: from [10.206.103.83] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3147dc1a689sm9074959eec.4.2026.07.22.03.57.27
+        bh=6NLD5QZZ8/I4Gf7f08HT3hDB1lW6nFAOR1yB7m8BKXE=;
+        b=ZLGLd9wwQtt5P363X2wg+rhcFO0E8NJoqblr5SGePa22nxEIBOr+lcO/x42MbKX58y
+         MWI9vc3m9aw0USmMFxMkSbtBOYAn0Zk1+iTGqClqpb9wmub8pQt/4KbWjagkjp0HGpli
+         GBv9f7094ydhBl013RsTmcQ0PhcArGnpNcnvS7hPyvWj8Y1hDMQbQRQJjAb0qfZRYzsm
+         l4UerqzZzkqc2EQd/HBXtvGsneVMNEVuCftZ69v0m+zDCKKKtR9H6v6Ldj6SEwZrUvxh
+         CsRfN3+8uNW4WOMXFssd+tj8Dndk4u3FVCpMMGvCl2FOM7QkOjniN9eSgZaOToNMaUbN
+         w+hQ==
+X-Forwarded-Encrypted: i=1; AHgh+Ro6nSxYYPp+BzLBB3RXwgDoFVgYs9LRNuisbPAh8APbNdpNEE2Soxtwn1p7xDvAii/Q6cGWUFd9O+h22jFj@vger.kernel.org
+X-Gm-Message-State: AOJu0YxfkXxtO7tHGXBJM+tkMFfKx+sQQJADlhiU2oTC244bgvDT4Jge
+	lkiMfKKO2dEbRhsKwCtkwpi6QdforowM5dLOVMoFr/eRJCk+KSC6VcUHQ+Tk9YqBwgA631Rzwaj
+	nmwiD47M1lBKPPF551NoUfmdUZ4HS3R6WpUGnLmtsZ+y4yDQ/NudcywIorzx4hTa0kQSL
+X-Gm-Gg: AR+sD13mCDWcYcxQEJc/RGixyLmP3bVoYbWSJrGvJ24kh5lRXWOFTor6bO6E21nnFQS
+	r7dl1mKSsr/dKNqzjOr1RIZJDKL0QXc+Sr3te8yA7N1l78a6Q3xWk9r24sywba8G4Qb7Pvq9j4u
+	iiBUdZ+OeAzuiHeQ+Nh23qQPRJszGOADAvN5WK5IzTL6zdz93dDygX0zOeAWsj4JNx0LRHSecYT
+	kESG7VSUKPEJ3JZXJ3gqtDDnrq+XcFOfIWik74llCJQ25xl3TveFcDRslRXEBQFXEiPvjM50Lgl
+	jK5ec8FXrpVcxgVh35Gw2GMgQJL55acj0vLr5ERO9zQRmUvmKVVL9eP5r/mSOFMVYgj0W8ECMJZ
+	ppBP76Fd5JKhAgkZg4DlV5GHDvXXjMrEQ5FX4LupESUWPWcUMy/dSVyj94Hb/hFODwA==
+X-Received: by 2002:a05:6214:5d0b:b0:8f3:469e:5051 with SMTP id 6a1803df08f44-90778358215mr238108436d6.18.1784717978528;
+        Wed, 22 Jul 2026 03:59:38 -0700 (PDT)
+X-Received: by 2002:a05:6214:5d0b:b0:8f3:469e:5051 with SMTP id 6a1803df08f44-90778358215mr238108116d6.18.1784717978006;
+        Wed, 22 Jul 2026 03:59:38 -0700 (PDT)
+Received: from [10.111.173.228] (Global_NAT1_IAD_FW.qualcomm.com. [129.46.232.65])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-907ba9e18d4sm18438546d6.23.2026.07.22.03.59.35
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 22 Jul 2026 03:57:32 -0700 (PDT)
-Message-ID: <c8fd7746-7568-453e-ba00-3d5e6a9dc74e@oss.qualcomm.com>
-Date: Wed, 22 Jul 2026 16:27:24 +0530
+        Wed, 22 Jul 2026 03:59:37 -0700 (PDT)
+Message-ID: <fa4eda4f-a492-467d-86c7-98b9a6d35344@oss.qualcomm.com>
+Date: Wed, 22 Jul 2026 18:59:34 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,187 +89,151 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/3] dt-bindings: media: qcom,qcm2290-venus: document
- shikra Iris compatible
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab
- <mchehab@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
-        Stanimir Varbanov <stanimir.k.varbanov@gmail.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-media@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-References: <20260721-shikra_vpu-v4-0-6dc5a8999b73@oss.qualcomm.com>
- <20260721-shikra_vpu-v4-1-6dc5a8999b73@oss.qualcomm.com>
- <20260722-rainbow-sapphire-leech-e3debe@quoll>
+Subject: Re: [PATCH v8 10/15] drm/msm/dp: allow dp_ctrl stream APIs to use any
+ panel passed to it
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        sashiko-reviews@lists.linux.dev, freedreno@lists.freedesktop.org,
+        linux-arm-msm@vger.kernel.org
+Cc: dri-devel@lists.freedesktop.org
+References: <20260720-dp_mstclean-v8-0-bea261bf4e7d@oss.qualcomm.com>
+ <20260720-dp_mstclean-v8-10-bea261bf4e7d@oss.qualcomm.com>
+ <20260720062405.E079D1F000E9@smtp.kernel.org>
+ <3k7xz57peytyda7cvzfpao3j6xuhn4gyf7f43wnspdpgnrel4r@vipemh3nkoi7>
 Content-Language: en-US
-From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-In-Reply-To: <20260722-rainbow-sapphire-leech-e3debe@quoll>
+From: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
+In-Reply-To: <3k7xz57peytyda7cvzfpao3j6xuhn4gyf7f43wnspdpgnrel4r@vipemh3nkoi7>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: rt-D26fSzy15daHBY3O9HC5XG-TWw7Sg
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDEwNiBTYWx0ZWRfX5a9t7zJaIPbo
- LzCfL1jWSIB07O6hdQqkHPvWeS6yK1IFk7j1CgcmptXLAR7vL1ZdRm0wCfrXVhwAyypIXK1LnEb
- pThH+b1KJmI7eVYpm6h0LAyPIRDZe/i9JvszTkZYaNk8Ae0up/La1O5BKe6mQbWREzFuFs7YLZR
- oSpRlTMT3mWE66I0mAxaRWyy5l5VwyINAL8Ed95fgHPBk3UNPA4rRTFVjwjn/GM1w1Buo5X9ByF
- fpaMkyXYnqXBT/T4VOpxx/cHywE249PD2RlvV4CbafmefSUT/bEgSx1tW1MdDH0NSGb199b6Xja
- T/AVx8Vk/KM2oBJsCCbvB9t6Ddonyg/WkFBCFg7wm5pxaug+8dju/m+CkYBQxOiFSGAFQK6rNOa
- xisXuBbxhmGgK+kk+cOu9WmRYK4QvF9J26QsgRTUciuN2hXfR1O+OxYdPYpylNY7UiCAKEbR5J2
- 5KOZhoeGdIyihbh17kA==
-X-Authority-Analysis: v=2.4 cv=e/o2j6p/ c=1 sm=1 tr=0 ts=6a60a21e cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-GUID: DYS3v0iM7jaDYUVj-YDAe16u7N_fm5Zx
+X-Authority-Analysis: v=2.4 cv=KLhqylFo c=1 sm=1 tr=0 ts=6a60a29b cx=c_pps
+ a=UgVkIMxJMSkC9lv97toC5g==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=Bf9jZRNvZzbIE5bmIgIA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-ORIG-GUID: rt-D26fSzy15daHBY3O9HC5XG-TWw7Sg
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDEwNiBTYWx0ZWRfXwa3ojPOhptD1
- Prh8eYMQabd7DyABbLDCyIisybpJAjf6j7ySNmhJmd13htxNAiYaSF+kEWoobAxrHjrFQ7xhM40
- LRmKoIxfsDuJgaEoaOiusCzM3sy1sbU=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=c92rfblmAAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=COk6AnOGAAAA:8
+ a=fjmCN9aIutHrqzZMW0YA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=1HOtulTD9v-eNWfpl4qZ:22 a=GvGzcOZaWPEFPQC_NcjD:22 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDEwNiBTYWx0ZWRfXxtZg88fhuAUa
+ xGUpWLdksrj4nbOdzv12S6F/XoU/cZPD1NpjH3aI1Bn59DYWhYK8HMdlvHnN+qp9Q/lOE0jBGe7
+ srPuGDtjeBahOs7yZrimcNrBh1mGTCFCtXWKVrbVM/Brgc6b6kgCeiIbebwV8HMglpBGmJ11PiO
+ S9nzwocIYnBJWvncRT7mvzPyhR9WCn2Sjtr4ubaJLc2nkZJpxo9K4USoJXSVHNdq/NT3baDZWka
+ UCAAUqE9zrMTqcJJPOFaEzbBX2WSkk5Iz/qdezMjrYXX8OReoyzb9RE2XPCm+fnoRf738KljuQC
+ RwS6JANGwrJa+0QTg2ycn14fHpXLJeTZTXyVNDbnD49U0M8EXti8bBJXVUKdpVT63in+fHrOKGY
+ yzNzOSBOoX4CxFLkDZJ5JP6TiTsR1t9SCKyoBmYJWImJI5cyQSIVaJ+m+qhwki3FDtVtYrjo/Zm
+ vaAGSCBv7LYxOsVrXVA==
+X-Proofpoint-ORIG-GUID: DYS3v0iM7jaDYUVj-YDAe16u7N_fm5Zx
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDEwNiBTYWx0ZWRfX4bjzkRyPpwdp
+ 9QIoMnc9nR8AKttFMZJuG4H3y/WfdFQbyDQgT+aea/reiVQYKMGo1koVVD8HtTWjAaSYpQ2SCXj
+ YxEVXsyvhn3WfNbgaNdnGlZ4PXZBQz4=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-22_03,2026-07-21_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 spamscore=0 bulkscore=0 priorityscore=1501
- impostorscore=0 lowpriorityscore=0 phishscore=0 clxscore=1015 adultscore=0
+ bulkscore=0 spamscore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0
+ priorityscore=1501 malwarescore=0 phishscore=0 adultscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220106
 
 
-On 7/22/2026 12:45 PM, Krzysztof Kozlowski wrote:
-> On Tue, Jul 21, 2026 at 11:02:25PM +0530, Vikash Garodia wrote:
->> Document the iris video accelerator used on shikra platforms by adding
->> the qcom,shikra-iris compatible.
+
+On 7/22/2026 2:54 AM, Dmitry Baryshkov wrote:
+> On Mon, Jul 20, 2026 at 06:24:05AM +0000, sashiko-bot@kernel.org wrote:
+>> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
+>> - [High] Secondary stream panels fail to have their `hw_revision` initialized, silently breaking controller-specific hardware workarounds in MST setups.
+>> - [High] Stream-specific panels are incorrectly passed to mainlink APIs, corrupting shared link state and misconfiguring the link based on leaf monitor capabilities instead of the MST hub.
+>> --
+>>
+>> --- Patch [10]: [PATCH v8 10/15] drm/msm/dp: allow dp_ctrl stream APIs to use any panel passed to it ---
+>> commit 07d3f4b80ae5875a958a8aceb22c9ffab07db108
+>> Author: Abhinav Kumar <quic_abhinavk@quicinc.com>
+>>
+>> drm/msm/dp: allow dp_ctrl stream APIs to use any panel passed to it
+>>
+>> With MST, multiple sinks share a single DP controller, so a cached
+>> panel in msm_dp_ctrl_private can no longer represent the per-stream
+>> sink. Drop the cache and pass panel explicitly to all stream-related
+>> dp_ctrl APIs.
+>>
+>>> diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp_ctrl.c
+>>> index ae79cbec26d19..207643fa73063 100644
+>>> --- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
+>>> +++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
+>>> @@ -219,7 +219,7 @@ void msm_dp_ctrl_reset(struct msm_dp_ctrl *msm_dp_ctrl)
+>>>   
+>>>   	if (!ctrl->hw_revision) {
+>>>   		ctrl->hw_revision = msm_dp_read_ahb(ctrl, REG_DP_HW_VERSION);
+>>> -		ctrl->panel->hw_revision = ctrl->hw_revision;
+>>> +		panel->hw_revision = ctrl->hw_revision;
+>>>   	}
+>>>   }
+>>
+>> [Severity: High]
+>> Does this leave the hw_revision uninitialized for secondary stream panels in an
+>> MST setup?
+>>
+>> Since ctrl->hw_revision is populated during the host initialization for the
+>> primary panel, any subsequent stream panels passed to this function will bypass
+>> the assignment. Could this silently break hardware workarounds that depend on
+>> panel->hw_revision being set correctly?
 > 
-> iris here, venus in the compatible. Please decide which one.
-
-Ack. Should fix the commit here to mention it as qcom,shikra-venus.
-
+> It does. This should be fixed.
+> 
+Got it. I'll move the panel->hw_revision assignment outside the conditional.
+>>
+>> [ ... ]
+>>
+>>> @@ -414,10 +414,11 @@ static void msm_dp_ctrl_config_ctrl_streams(struct msm_dp_ctrl_private *ctrl,
+>>>   	msm_dp_write_link(ctrl, REG_DP_CONFIGURATION_CTRL, config);
+>>>   }
+>>>   
+>>> -static void msm_dp_ctrl_config_ctrl_link(struct msm_dp_ctrl_private *ctrl)
+>>> +static void msm_dp_ctrl_config_ctrl_link(struct msm_dp_ctrl_private *ctrl,
+>>> +					 struct msm_dp_panel *panel)
+>>>   {
+>>>   	u32 config = 0;
+>>> -	const u8 *dpcd = ctrl->panel->dpcd;
+>>> +	const u8 *dpcd = panel->dpcd;
+>>>   
+>>>   	/* Default-> LSCLK DIV: 1/4 LCLK  */
+>>>   	config |= (2 << DP_CONFIGURATION_CTRL_LSCLK_DIV_SHIFT);
+>>
+>> [Severity: High]
+>> Can the direct write to REG_DP_CONFIGURATION_CTRL at the end of this function
+>> erase stream-specific configurations established by previously enabled streams?
+>>
+>> Since msm_dp_ctrl_config_ctrl_link() is called on every stream enable from
+>> msm_dp_ctrl_on_stream(), it seems this might overwrite the shared register and
+>> corrupt the state of active streams.
+> 
+> Hmm?
 > 
 >>
->> Although QCM2290 and shikra share the same video hardware and overall
->> integration, their SMMU programming differs. QCM2290 exposes separate
->> stream IDs for the video hardware and the Xtensa path, requiring two
->> explicit IOMMU entries, whereas shikra uses a masked SMR to collapse
->> equivalent stream IDs into a single mapping. Due to QCM2290’s SID layout
->> and Xtensa isolation requirements, such SMR masking is not applicable on
->> QCM2290 platforms.
-> 
-> This paragraph suggests devices are not compatible. Will Shikra Iris
-> work fine when driver matches with qcom,qcm2290-venus?
-> 
-
-Validated shikra with qcom,shikra-venus as fallback compatible to 
-qcom,qcm2290-venus.
-
->> Since shikra uses the same video hardware as QCM2290 and shares the same
->> programming model and capabilities, it is added as a fallback compatible
->> to qcom,qcm2290-venus, with conditional handling to allow either one or
->> two IOMMU entries.
->> Common schema is updated to accommodate the iova restriction of 600MB.
->> VPU restricts usage of 600MB for specific streams, which could otherwise
->> lead to device crash.
+>> [ ... ]
 >>
->> Reviewed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
->> Signed-off-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
->> ---
->>   .../bindings/media/qcom,qcm2290-venus.yaml         | 26 ++++++++++++++++------
->>   .../bindings/media/qcom,venus-common.yaml          |  5 ++++-
->>   2 files changed, 23 insertions(+), 8 deletions(-)
+>>> @@ -1810,11 +1821,12 @@ static void msm_dp_ctrl_link_clk_disable(struct msm_dp_ctrl *msm_dp_ctrl)
+>>>   		   str_on_off(ctrl->core_clks_on));
+>>>   }
+>>>   
+>>> -static int msm_dp_ctrl_enable_mainlink_clocks(struct msm_dp_ctrl_private *ctrl)
+>>> +static int msm_dp_ctrl_enable_mainlink_clocks(struct msm_dp_ctrl_private *ctrl,
+>>> +					      struct msm_dp_panel *panel)
+>>>   {
+>>>   	int ret = 0;
+>>>   	struct phy *phy = ctrl->phy;
+>>> -	const u8 *dpcd = ctrl->panel->dpcd;
+>>> +	const u8 *dpcd = panel->dpcd;
+>>>   
+>>>   	ctrl->phy_opts.dp.lanes = ctrl->link->link_params.num_lanes;
+>>>   	ctrl->phy_opts.dp.link_rate = ctrl->link->link_params.rate / 100;
 >>
->> diff --git a/Documentation/devicetree/bindings/media/qcom,qcm2290-venus.yaml b/Documentation/devicetree/bindings/media/qcom,qcm2290-venus.yaml
->> index 5977e7d0a71b4fb5681f1c2094439c251366f01f..b27899ebf164229ceff1ca5cda50ee30d875e953 100644
->> --- a/Documentation/devicetree/bindings/media/qcom,qcm2290-venus.yaml
->> +++ b/Documentation/devicetree/bindings/media/qcom,qcm2290-venus.yaml
->> @@ -13,14 +13,13 @@ description:
->>     The Venus AR50_LITE IP is a video encode and decode accelerator present
->>     on Qualcomm platforms.
->>   
->> -allOf:
->> -  - $ref: qcom,venus-common.yaml#
->> -
->>   properties:
->>     compatible:
->>       oneOf:
->>         - items:
->> -          - const: qcom,sm6115-venus
->> +          - enum:
->> +              - qcom,shikra-venus
->> +              - qcom,sm6115-venus
->>             - const: qcom,qcm2290-venus
->>         - const: qcom,qcm2290-venus
->>   
->> @@ -45,9 +44,6 @@ properties:
->>         - const: vcodec0_core
->>         - const: vcodec0_bus
->>   
->> -  iommus:
->> -    maxItems: 2
->> -
->>     interconnects:
->>       maxItems: 2
->>   
->> @@ -65,6 +61,22 @@ required:
->>     - power-domain-names
->>     - iommus
->>   
->> +allOf:
->> +  - $ref: qcom,venus-common.yaml#
->> +  - if:
->> +      properties:
->> +        compatible:
->> +          contains:
->> +            const: qcom,shikra-venus
->> +    then:
->> +      properties:
->> +        iommus:
->> +          maxItems: 1
->> +    else:
->> +      properties:
->> +        iommus:
->> +          maxItems: 2
->> +
->>   unevaluatedProperties: false
->>   
->>   examples:
->> diff --git a/Documentation/devicetree/bindings/media/qcom,venus-common.yaml b/Documentation/devicetree/bindings/media/qcom,venus-common.yaml
->> index 59a3fde846d2196ab1e4588eb396012ba6860712..0be2f9119e78233928d23af86836ac294aa769ee 100644
->> --- a/Documentation/devicetree/bindings/media/qcom,venus-common.yaml
->> +++ b/Documentation/devicetree/bindings/media/qcom,venus-common.yaml
->> @@ -37,7 +37,10 @@ properties:
->>       maxItems: 20
->>   
->>     memory-region:
->> -    maxItems: 1
->> +    minItems: 1
->> +    items:
->> +      - description: Firmware-loaded codec carveout
->> +      - description: IOMMU IOVA reservation region
-> 
-> This adds second region to several other devices using
-> qcom,venus-common.yaml, thus should be its own commit with its own
-> rationale why all devices take the IOMMU IOVA region now.
-> 
-
-Sure, i can split the common yaml as a separate preceding commit with 
-justification on need of separate IOVA region.
-
-Regards,
-Vikash
-
->>   
->>     power-domains:
->>       minItems: 1
+>> [Severity: High]
+>> Is it correct to use the stream-specific (leaf) DPCD to configure shared
+>> mainlink properties here and in msm_dp_ctrl_link_train()?
+>>
+>> This appears to misconfigure the link based on leaf monitor capabilities instead
+>> of the MST hub. If a leaf monitor doesn't support features like enhanced
+>> framing or downspread, but the hub does, could this break the link to the hub?
 >>
 >> -- 
->> 2.34.1
->>
+>> Sashiko AI review · https://sashiko.dev/#/patchset/20260720-dp_mstclean-v8-0-bea261bf4e7d@oss.qualcomm.com?part=10
+> 
 
