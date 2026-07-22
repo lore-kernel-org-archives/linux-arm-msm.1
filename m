@@ -1,229 +1,202 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 422CD288C2C
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 12:46:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64B0E149C6F
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 12:48:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784724375; cv=none; b=aIfLf7Y/gCjH0tArig1jGywJhOzxoCPZO+13r7ke+lFCf0tNKd3YzoEAO43z9B6O13eh+8XbqDGrq0pimHfJqwvNnK9DnnJ3wDsb1m7NvwCcNnzoewDHm9dIFlLzFUqHThaQspuk8bQxd+bWPMj2oR7gjcYQ8S9nDULEl+7sCRw=
+	t=1784724493; cv=none; b=upeEhPVk364I+GJC1IItCGRYCUgNOMeZWxfkWXTGPU9MtQXF/DR6Rg+NgcB+rfy9sdRrh5WjsPZHzGMOSXaUKVmdwcsEkvqC1plIlGXKp2xitoml09HQkaJaYhSBMOG0Fs+U7hxbZAmymIcgBEHQCvNdyZblvSZMi/Z57vuvSSU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784724375; c=relaxed/simple;
-	bh=PrYnUKEtLFlDsv1T+hvbI06+m8BqexCeAChjzu8vfmQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=OhteAv8gewpXsTJ/o4iRDzpLh4v/h4KowYO0UcAMC+LylRoKHKrlMyW17nz8gUROSVRHAIJ28SdzA8vwoj7GUvcet2m3fX8khDZ14VueGEMDZJHH2YKPrCORcVpZ0LX1iFDb9P4Nga38pF+2oZbjZGkLcm0FVEDtuJrOxKta7Ic=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=XmYS1Ns3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jtIKJbty; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784724493; c=relaxed/simple;
+	bh=LSan+qsl/PdUzA+3tf/f+0lljAi+xqioinYXzBQFQpM=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=LY1v6s6WL63bAQzcFH9OgLtwU65IrLJ8jyLERypPDOX3JBoviYSi1UtXWEUhue+Eedlm462AcgknTCo8BEhKPCpFIM4uuyD81gUfPacKuIjMguoDkdhuE9JyGwIV1C43APEm2AFO9YRAJWSw3RRGEy/T5SMNOZ6wo1NX5boefrs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=QTDcGTKP; arc=none smtp.client-ip=209.85.128.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="XmYS1Ns3";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jtIKJbty"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66M8x4QD1400157
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 12:46:12 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=6iKodIy6jVMMRtmZ9FUUEo
-	Z37/RimmTHizcgNq2v7r4=; b=XmYS1Ns3FeRbvINHwRmhLBe4s0aswvYC2/Q2WP
-	Wdx2PAFl6Bpz9i2uotrCSY99KX35xyL2xOfT1ldMcWIrHBef3zlwwXWzflj4Mbp/
-	C13dpD19wIzrqEm5nMT9WkHlBMtVfQ4L47nZBUyq1D6NTB4VQ5CFvHTfeQ+k/viJ
-	A5f1P3LdXO9rmDxg0TdmeRLX/wB4HRU0/+aRfU1NeSJvxu09hC8s9KpW/UYgXxQR
-	mN4QIcGFjFzR5uHj+WHlmJPnGQhYO7RaRoydpEM8il9vKYK/CPEcUD+jtTf+yaQh
-	9Rz5R8VAoGGLcXI6LYSXYoaazuEkJvRB78lHBV92bwvp56Ew==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjr839kq0-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 12:46:12 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-52827090cc5so10582731cf.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 05:46:11 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="QTDcGTKP"
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4953e04ef16so65823105e9.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 05:48:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784724371; x=1785329171; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=6iKodIy6jVMMRtmZ9FUUEoZ37/RimmTHizcgNq2v7r4=;
-        b=jtIKJbtywCHXwVxu3Nhwz6C2ZRbgIsDz7wcjAKFZiFeZoOl/HEGoSPDDEZ6mjMx8KP
-         g4X/LXSiXOcpJ/F0nsAnwMWf7Zw/+t6RsPjrmoZsY2b4Gh4GpJFlq+DJbsDyQC73ljCu
-         NU/AOUAyMbh3oYNicHtKl180s1b51xKlaqhsWacJrpJbbd+TCo3yjflaeIVQeI4G9EJq
-         QbFLnm57RcK+Fx0x/9PnDRFlETIPX9H+bZaordEJka/y3bQG2GuLonjZK/yfBBd+3zoz
-         tTxqiUd9p5DOR3Zi8braM2IdpDgvTxuvChlcyowAncI/K3I8/1s4NRYyH6TlQX3PL6JH
-         sguQ==
+        d=linaro.org; s=google; t=1784724490; x=1785329290; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=3vll96HvxjohoJS+PNU+ieDa/RF4H+N4kRxOCCao22w=;
+        b=QTDcGTKPsYGAlYqslFtyfqpQMz8CFViRPzgVwUFv1krUZ4zz0Pen5q33Xp7SHZp4yI
+         cND4LWrHo2fylcNol1+GAj1fBz02X6aGJRiIiwLT3K7EGRQMbWwWtvgjm9jNEj8tChlk
+         c1CrMx8PT2QM2BB90OL2owbQne8LE7OpC74PT7Iju+h5aCpaHAjykyterGAqRoJ6rYNz
+         a7UzrVvUQ1htleJtablQs6t6fm4yzdejCQiAmwh5M/1MdVgEETMMbsXyvNHHG86GZ7Hj
+         pkhMzvlcL6yXsIvtBiTCsYNugCTx3+xEcu0ttUzakA3mI5hIJNy5AglGOsrtj6BYEOKT
+         UfZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784724371; x=1785329171;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=6iKodIy6jVMMRtmZ9FUUEoZ37/RimmTHizcgNq2v7r4=;
-        b=UIt19L0Hb9tvILkp2bvbU4Ao78YrLZLJB4EDeOJFQ1NBeGUouzsV0QRtiqAMll58yx
-         idQc1VgYSBUEpvq2RO5eZ5TOSR3GvfhOiijEC87mhF4OEHJbPTzXb0qrwlDABRtAp+Lo
-         OHP2SMbHEHR5vCrV998B/m1Qw/IMhPTegG0S9QQ7v3mSC+/PFXc9V/P8sbA6UwFzThvZ
-         nXfle8/qseqd+5cBqDnryESH4Xr52f/dwJj7mBlH2RwyzXYgKgSQ8vYE/OWakQCqp95E
-         VgOz8x6aLnhl44LH2GrSHV10bxFYaVsx1KRaiov0DJbE0qfxnf6fdJ89C3zYpwhgeIye
-         E5Sg==
-X-Forwarded-Encrypted: i=1; AHgh+Rqga7nEFh+4NQT1un2sNZFLIN3qXwtm72lIFOYrUoWwT/VlT7qZJAn8PmZ+9FIvAlEpessiOn7OjpWTqmC+@vger.kernel.org
-X-Gm-Message-State: AOJu0YyzsrynqQAGxpEBZvD3mziyl95ZM57IYHIh8/VkWLMQ3a8RDC11
-	RcnW03Vzd2GIkZIWzWiZRAIzo7jyyWJ5orB69++7guk94AophgWIvWWQn7LTRn4drRz7TbnPnLn
-	AnigAg13C34NWkpxnEAPzBx1qUN4hHrBx35U0ZPmW+DMZ5ywB6UP16LI+EgEfs3NLyG3rJv8bj+
-	PG
-X-Gm-Gg: AR+sD124xiNLr3N/6jXO0Jz4cQYJYPeyJ5ftUScDM2WXh5/tZc3nPLFS0086BlKpPog
-	S7HFKxhOwMdfCK4Fz55PoRl+tKpyAjxzPgL6tV83GEGZ7KKGA6vY6ioglFNNwgHK8CxtIhSC36z
-	et2PY9AOfAb52DmV+eHE7Q1h+1+DjhmGJ3eB/iw4QpnL14IColjE9gt7LhYnBz8SOVQDhkXX7lw
-	v0mokNrYR+eTgPvCTHYXGRbH1DR87KiLWv7lp5d+bSFBj/6Wd+MwJ9GDgyBOaBOXUTuVJFWus9W
-	4QfG/gWcAMElWaDkm2zZjTsqr+OXSgJvD+QA16TSYqtn0ca2ExnIuagYHoEIlzDCFD1YLr36+6P
-	vMDfgCTNYWo+iAuD4YwLzpl492CXeLyO1bdfthpfTrFRl1SkXv1z+2DDFWAW3UWrc3mbnIqQQZk
-	hkUmEgTY5IQUNW6g==
-X-Received: by 2002:ac8:5e4b:0:b0:51b:fdc0:ddee with SMTP id d75a77b69052e-527a8a4c63amr39549971cf.30.1784724370971;
-        Wed, 22 Jul 2026 05:46:10 -0700 (PDT)
-X-Received: by 2002:ac8:5e4b:0:b0:51b:fdc0:ddee with SMTP id d75a77b69052e-527a8a4c63amr39549611cf.30.1784724370455;
-        Wed, 22 Jul 2026 05:46:10 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2a9d316cesm467241e87.53.2026.07.22.05.46.08
+        d=1e100.net; s=20251104; t=1784724490; x=1785329290;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3vll96HvxjohoJS+PNU+ieDa/RF4H+N4kRxOCCao22w=;
+        b=OI+MgLDqJkUQVpSAhRDfGkGSnVIEDI4L5i0uDPSXCzEwJJJ4mwedlP/JvNZpsitI1F
+         I36jL1dTI/zMQSw3M43MdZf//IpB2ju9ui1l7i8nCOfOH5nMc55g3m9vroQyjsmKlg7F
+         6653h0ovEdAYb+/ODsSH6g5DJIV0Y6F64+vNEk512nCbapALLAk+WpJ3cEBbghK71g/P
+         5KHAVMxNn8MAPrabi1/ft5ENcZgtxi3huZLjB0s3Bp+IM1G8AJ8WXmLVGrkSDI5B4s58
+         3yR8BLaOaPu4z+RygXARnYwrC6NscdILQM24o1o7oY4YBsuFBmmopoO+1UZNt1MUNrFp
+         whGA==
+X-Forwarded-Encrypted: i=1; AHgh+RqpoTcvSoixhzOMjXILajiHLElgnkkptLtruU9gysjg2dqDgH2RgwRpZel3wk1gcWVZg0C7UDZUChA22AFV@vger.kernel.org
+X-Gm-Message-State: AOJu0YxDpoUqtqNeTTBZ/dEbWm5y+AoXBh2spihia3rTzTm3DpNdSUlJ
+	1x7vjOIFfbWaKXF4j9g/FOSDfIBE0jM0H648Y4y+gqTvpvCEk/xvTIDRzjwEpnnVlMw=
+X-Gm-Gg: AR+sD12wFJBG3NOdb+1Z5u1oBZxqYlKDa+ZOCmWRKqEd/URNlCvqzWMwNmIjFmVAYpR
+	SY+FQPxGcTPTxsVw0LfWKR+1QpEh9dSoLCQZ7hxjWj7SVLwOv95z60lMqsKnB4kl7jDM7p8eNqm
+	NoxiSEof4SZnstJARk/doI5MhIU+mU74aL0YIX6O09tzRmo9s7ZGx8xck4+NCVsbvf9I0RBAtNG
+	8PJCq1thVyVBXYm7X7Wjzp5H2YdTeURGTPM1KTwyHG5Z+tNjuSZr/ohe4ymp2muVHnygtYxBHhY
+	ucHhxUobWKOHuTXB7h+HHyX//0hv1/Id77k/LJzWng2LzDwQkwYops97YjeZUqIopJF6x8Es2rr
+	OSBw0CvWYMXhVnwDuWMDyPSOkl5custz4vMLP2LJP6fOJ2Xy5R0G5RJVpdEvnXqeGEZTPorSr7/
+	/Pg+H7L6M1VRZv
+X-Received: by 2002:a05:600c:474e:b0:493:915b:dc4a with SMTP id 5b1f17b1804b1-4954a3d005amr297618495e9.8.1784724489524;
+        Wed, 22 Jul 2026 05:48:09 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff24:7210:7ae3:a857:e482:495])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-495653bffefsm131520645e9.9.2026.07.22.05.48.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Jul 2026 05:46:09 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Date: Wed, 22 Jul 2026 15:46:08 +0300
-Subject: [PATCH] clk: qcom: gcc-qcm2290: don't park QUP RCGs upon
- registration
+        Wed, 22 Jul 2026 05:48:08 -0700 (PDT)
+Date: Wed, 22 Jul 2026 14:47:56 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Bartosz Golaszewski <brgl@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+	Thara Gopinath <thara.gopinath@gmail.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	"David S. Miller" <davem@davemloft.net>,
+	Udit Tiwari <quic_utiwari@quicinc.com>,
+	Md Sadre Alam <mdalam@qti.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+	Peter Ujfalusi <peter.ujfalusi@gmail.com>,
+	Michal Simek <michal.simek@amd.com>, Frank Li <Frank.Li@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Vignesh Raghavendra <vigneshr@ti.com>, dmaengine@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	sashiko-reviews@lists.linux.dev,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Subject: Re: [PATCH v23 06/14] dmaengine: qcom: bam_dma: add support for BAM
+ locking
+Message-ID: <amC7_M-HjVZ3sQuT@linaro.org>
+References: <20260721-qcom-qce-cmd-descr-v23-0-1be02deffda9@oss.qualcomm.com>
+ <20260721-qcom-qce-cmd-descr-v23-6-1be02deffda9@oss.qualcomm.com>
+ <20260721134853.2B2401F000E9@smtp.kernel.org>
+ <amCGXUUd4VmuQRGD@linaro.org>
+ <CAMRc=MfBNB0pvv1kPPcswE4Y2m7PXBO49bwJg=v0+aY=JmJKWw@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260722-agatti-no-park-v1-1-31ae3a4774e5@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAI+7YGoC/yXMQQqDMBBA0avIrB1IhrZCryIuJma0YyFKEqUg3
- t1ol2/x/w5JokqCd7VDlE2TzqHA1hX0Hw6joPpiIEMv0xAhj5yzYphx4fjFh/H0ZGsH7yyUaIk
- y6O8ett3faXWT9Pm6wHGcVzbz/nIAAAA=
-X-Change-ID: 20260722-agatti-no-park-40d25a11fdb1
-To: Bjorn Andersson <andersson@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
-        Douglas Anderson <dianders@chromium.org>
-Cc: Stephen Boyd <swboyd@chromium.org>, linux-arm-msm@vger.kernel.org,
-        linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3282;
- i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=PrYnUKEtLFlDsv1T+hvbI06+m8BqexCeAChjzu8vfmQ=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqYLuQdKA5MYraAekvWoRAwPfwAcUQBPTuWGmYs
- Iw0NFRfBd2JATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCamC7kAAKCRCLPIo+Aiko
- 1XL7CACW3Sy5sXhMLYiM7aFiRE3q2lgbRjJzZl7OC+TVBOEmt7deepahE0G8v/6PGrYRa+FGnCm
- jzPIbC36q2GD9/5ZqQA/o+65kAO3QAVsBA11kGgQ2ukcFHrnr3P6oPKF2CjrX4+k3qnZlQhNnf4
- lR7c8X+F2y2wZ1xBatjgkEg0QaBiQfq4H3EOIWbWTY8l3TebPaDGtlwnIvyAxc19d4OponxEZ4h
- uAsqWGeKVXIF4l4RTcOpB7Sw8FqptUjQ5lySC842yKUjMRt1faEr1JeXXQiL+028lNgdtJIrpxn
- +1KUkjhO2uoxPClF4/e5XgaVf7fRVqlvNguWzZiH4rTDPXfS
-X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
- fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Proofpoint-ORIG-GUID: R3cGboudXL5fNK6V-j3vKds9Aq6AdhSi
-X-Authority-Analysis: v=2.4 cv=VfrH+lp9 c=1 sm=1 tr=0 ts=6a60bb94 cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
- a=6w3LJLvutN4hriyJED8A:9 a=QEXdDO2ut3YA:10 a=uxP6HrT_eTzRwkO_Te1X:22
-X-Proofpoint-GUID: R3cGboudXL5fNK6V-j3vKds9Aq6AdhSi
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDEyNCBTYWx0ZWRfX31ftMkUEPlNc
- afgVjRzlWoy5J5AAQ55MgZfVvBKPW5BZOT81ovYFsFFLK7LebC8S+q9dtywvPtg9/9Roc+GlD4J
- id1CBHGujzrBP/4COhbOdgmXb4ER82bOr8y/MRfYNrlJcr5WW/s5/l9ZO2im0yHsTweUtk/y5Am
- C1JxgZvT3++iAbDXre3sDAp/0dYFsjMNE9cqqzsQgetwf0FIUvyGH+sefahQbtv8S3sLG6gdC2A
- Bb+FgyAs8arPmRvCC5o1AzuuYo31emGo1XRlhcMLmP3Lk7NpsCsTpikraCZtFavGbxGUYSm7Sa7
- me4ONazrNv8Ko80y56AnaRgiHgOF2vbA8Ht1piNaini8j3vEQVXytTtS/PPDi+wXfXF58z+EMz2
- XqdJfpVgipJi6d/7Tq4/PkUOjGud+wh0KG7w1anF/TB6QdgUgssFqlIaQ9h9XQNsQniNH2tCfOB
- 7jpNa5WJEGjUwnpclqg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDEyNCBTYWx0ZWRfX3uJMqOtoDgNN
- b/YOXG5ajVCSdbiP8O7azdaNoX5PmN9kNWa/ZF7vz4dhScw37tmcyPBrgk/+3Ldra7/jJXI/1PW
- fmOZRmrtDnHILKBnsEz+yowvGbe6ZXA=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-22_03,2026-07-21_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0 clxscore=1015
- priorityscore=1501 spamscore=0 bulkscore=0 impostorscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220124
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAMRc=MfBNB0pvv1kPPcswE4Y2m7PXBO49bwJg=v0+aY=JmJKWw@mail.gmail.com>
 
-The gcc_qupv3_wrap0_s[0-5]_clk_src RCGs feed the QUP serial engines
-(UART/I2C/SPI). Since shared RCGs are parked to XO at registration time,
-binding the gcc-qcm2290 driver reprograms these clocks away from the
-rate configured by the bootloader. For the UART used as the boot console
-this drops early console output until the serial driver later
-reconfigures the clock.
+On Wed, Jul 22, 2026 at 02:34:52AM -0700, Bartosz Golaszewski wrote:
+> On Wed, 22 Jul 2026 10:59:09 +0200, Stephan Gerhold
+> <stephan.gerhold@linaro.org> said:
+> > On Tue, Jul 21, 2026 at 01:48:52PM +0000, sashiko-bot@kernel.org wrote:
+> >> Thank you for your contribution! Sashiko AI review found 5 potential issue(s) to consider:
+> >> - [High] State leak causing hardware misconfiguration on channel reuse due to uncleared `lock_scratchpad_addr` and hardcoded direction.
+> >> - [High] Channel state corruption when `bam_slave_config` fails validation.
+> >> - [High] Infinite BH workqueue loop and unratelimited log flood on memory allocation failure.
+> >> - [High] DMA API violation: `lock_ce` buffer shares a cacheline with frequently CPU-modified struct members.
+> >> - [Low] Unused assignment of `hdesc` in IRQ handler.
+> >> --
+> >>
+> >> --- Patch [6]: [PATCH v23 06/14] dmaengine: qcom: bam_dma: add support for BAM locking ---
+> >> commit 8b44c5e4935cbb61832adb3262df00b3b606a283
+> >> Author: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> >>
+> >> dmaengine: qcom: bam_dma: add support for BAM locking
+> >>
+> >> This commit adds support for BAM pipe locking by prepending and appending
+> >> dummy command descriptors with LOCK/UNLOCK bits when starting DMA on a TX
+> >> channel. It uses a peripheral-local scratchpad address communicated via slave
+> >> config for the dummy writes.
+> >>
+> >> > diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
+> >> > index f3e713a5259c2..411c60c4433e2 100644
+> >> > --- a/drivers/dma/qcom/bam_dma.c
+> >> > +++ b/drivers/dma/qcom/bam_dma.c
+> [...]
+> >> [ ... ]
+> >> > @@ -1064,6 +1197,7 @@ static void bam_start_dma(struct bam_chan *bchan)
+> >> >
+> >> >  	lockdep_assert_held(&bchan->vc.lock);
+> >> >
+> >> > +	vd = vchan_next_desc(&bchan->vc);
+> >> >  	if (!vd)
+> >> >  		return;
+> >> >
+> >> > @@ -1072,6 +1206,24 @@ static void bam_start_dma(struct bam_chan *bchan)
+> >> >  		return;
+> >> >
+> >> >  	while (vd && !IS_BUSY(bchan)) {
+> >> > +		/*
+> >> > +		 * Open a LOCK/UNLOCK bracket around each fresh sequence.
+> >> > +		 * Sentinels inserted by bam_setup_pipe_lock() are skipped: they
+> >> > +		 * already have bam_locked set and must not trigger a second pair.
+> >> > +		 */
+> >> > +		if (!bchan->bam_locked) {
+> >> > +			ret = bam_setup_pipe_lock(bchan);
+> >> > +			if (ret) {
+> >> > +				dev_err_ratelimited(bdev->dev,
+> >> > +					"failed to setup the pipe lock, deferring transfer: %d\n",
+> >> > +					ret);
+> >> > +				queue_work(system_bh_highpri_wq, &bdev->work);
+> >> > +				break;
+> >> > +			}
+> >>
+> >> [Severity: High]
+> >> Does requeuing to a high-priority BH workqueue upon ENOMEM cause CPU
+> >> starvation? Because system_bh_highpri_wq executes in softirq context,
+> >> requeuing immediately without sleeping prevents the memory reclaim needed
+> >> to resolve the GFP_NOWAIT failure, leading to an infinite spin loop.
+> >>
+> >
+> > It looks like my suggestion to queue_work() again in the error path of
+> > bam_start_dma() wasn't great if we end up causing an infinite spin loop.
+> > We do need to retry somehow or report an error though, I don't think
+> > aborting and leaving the desccriptors completely unhandled is an option
+> > either... :(
+> >
+> > One option would be to try to avoid the allocation and write the lock
+> > descriptors directly into the FIFO, but this will probably get really
+> > messy as well, since you would need to carefully modify the FIFO
+> > management in several functions ...
+> >
+> > I don't have a good spontaenous idea how to solve this right now. :/
+> >
+> 
+> Pre-allocate the lock descriptors (if needed) in bam_prep_slave_sg()? As in:
+> call bam_make_lock_desc() in bam_prep_slave_sg(), store the descriptors and
+> make bam_setup_pipe_lock() return void as it will no longer be possible for it
+> to fail? It would just grab the preallocated descriptors.
+> 
 
-Switch the QUP wrap0 clock sources over to
-clk_rcg2_shared_no_init_park_ops so their frequency is left unchanged at
-registration time, keeping the bootloader-configured console working
-across the gcc driver probe.
+I considered suggesting this, but how do you know which descriptor needs
+it in bam_prep_slave_sg()? It's just the allocation, afaict it doesn't
+tell you anything about the order in which they will be submitted. :/
 
-Fixes: 01a0a6cc8cfd ("clk: qcom: Park shared RCGs upon registration")
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
----
- drivers/clk/qcom/gcc-qcm2290.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+We could always allocate the extra lock descriptors and waste the extra
+memory for the descriptors that won't need it. That should work, but is
+also not great ...
 
-diff --git a/drivers/clk/qcom/gcc-qcm2290.c b/drivers/clk/qcom/gcc-qcm2290.c
-index 6684cab63ae1..02ca37f58477 100644
---- a/drivers/clk/qcom/gcc-qcm2290.c
-+++ b/drivers/clk/qcom/gcc-qcm2290.c
-@@ -1082,7 +1082,7 @@ static struct clk_init_data gcc_qupv3_wrap0_s0_clk_src_init = {
- 	.name = "gcc_qupv3_wrap0_s0_clk_src",
- 	.parent_data = gcc_parents_1,
- 	.num_parents = ARRAY_SIZE(gcc_parents_1),
--	.ops = &clk_rcg2_shared_ops,
-+	.ops = &clk_rcg2_shared_no_init_park_ops,
- };
- 
- static struct clk_rcg2 gcc_qupv3_wrap0_s0_clk_src = {
-@@ -1098,7 +1098,7 @@ static struct clk_init_data gcc_qupv3_wrap0_s1_clk_src_init = {
- 	.name = "gcc_qupv3_wrap0_s1_clk_src",
- 	.parent_data = gcc_parents_1,
- 	.num_parents = ARRAY_SIZE(gcc_parents_1),
--	.ops = &clk_rcg2_shared_ops,
-+	.ops = &clk_rcg2_shared_no_init_park_ops,
- };
- 
- static struct clk_rcg2 gcc_qupv3_wrap0_s1_clk_src = {
-@@ -1114,7 +1114,7 @@ static struct clk_init_data gcc_qupv3_wrap0_s2_clk_src_init = {
- 	.name = "gcc_qupv3_wrap0_s2_clk_src",
- 	.parent_data = gcc_parents_1,
- 	.num_parents = ARRAY_SIZE(gcc_parents_1),
--	.ops = &clk_rcg2_shared_ops,
-+	.ops = &clk_rcg2_shared_no_init_park_ops,
- };
- 
- static struct clk_rcg2 gcc_qupv3_wrap0_s2_clk_src = {
-@@ -1130,7 +1130,7 @@ static struct clk_init_data gcc_qupv3_wrap0_s3_clk_src_init = {
- 	.name = "gcc_qupv3_wrap0_s3_clk_src",
- 	.parent_data = gcc_parents_1,
- 	.num_parents = ARRAY_SIZE(gcc_parents_1),
--	.ops = &clk_rcg2_shared_ops,
-+	.ops = &clk_rcg2_shared_no_init_park_ops,
- };
- 
- static struct clk_rcg2 gcc_qupv3_wrap0_s3_clk_src = {
-@@ -1146,7 +1146,7 @@ static struct clk_init_data gcc_qupv3_wrap0_s4_clk_src_init = {
- 	.name = "gcc_qupv3_wrap0_s4_clk_src",
- 	.parent_data = gcc_parents_1,
- 	.num_parents = ARRAY_SIZE(gcc_parents_1),
--	.ops = &clk_rcg2_shared_ops,
-+	.ops = &clk_rcg2_shared_no_init_park_ops,
- };
- 
- static struct clk_rcg2 gcc_qupv3_wrap0_s4_clk_src = {
-@@ -1162,7 +1162,7 @@ static struct clk_init_data gcc_qupv3_wrap0_s5_clk_src_init = {
- 	.name = "gcc_qupv3_wrap0_s5_clk_src",
- 	.parent_data = gcc_parents_1,
- 	.num_parents = ARRAY_SIZE(gcc_parents_1),
--	.ops = &clk_rcg2_shared_ops,
-+	.ops = &clk_rcg2_shared_no_init_park_ops,
- };
- 
- static struct clk_rcg2 gcc_qupv3_wrap0_s5_clk_src = {
+I was hammering at the code a bit earlier to try the "write the lock
+descriptors directly into the FIFO" approach. It has some advantages,
+but also makes the FIFO management quite a bit trickier, hard to get it
+right without full concentration. :')
 
----
-base-commit: b9810cd75b9fb56a3425d391cba3f608502bd474
-change-id: 20260722-agatti-no-park-40d25a11fdb1
+I _think_ it could potentially work, but if you have a simpler idea I'm
+also happy to throw away the mess I started. :-)
 
-Best regards,
---  
-With best wishes
-Dmitry
-
+Thanks,
+Stephan
