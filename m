@@ -1,362 +1,166 @@
-Received: from mail-m15574.qiye.163.com (mail-m15574.qiye.163.com [101.71.155.74])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABC9846E004;
-	Wed, 22 Jul 2026 16:48:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.74
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AFD743CE40;
+	Wed, 22 Jul 2026 17:11:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784738928; cv=none; b=FHoJ2BO8xDsj/FeJn5jzb/0WXf/2hLXDLfft1SyqNLpeXyItVF5WAZVotbiw50dtOOGrloejy5spHOZRdOC1A6vo6IgCVbN04D3rW24YNog85AvXMZhtaMF86y7sAsWMuS6jm/f0N6moyxlE5StU5OwwdYf2J/7nz0lYqSwwLJY=
+	t=1784740275; cv=none; b=VbvDSY0fMQpSUTv5Dgub3kiolPw8DaRmT0qcN7GhUsiOU191OLppMONSDC3953ffXkD2APu+OBgZfzFbGjX6dDmVppXv1vw8THkB4rbByEfxwEuw+K21lNnBtLeF380v7G2bxn+WbH6XjyD5MTgGyYELYGPbaHGc9ErIQaKfj+0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784738928; c=relaxed/simple;
-	bh=w8vi2Qu6Lg0xl9BcJ4k/gM3jWdZL5xhUg9zN5K+724I=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=SBkDL6x5SxK78/dmMvmLHUteOdfHIBuZoj+NdZtv2no8mhwDlXLK/dX8FUmA0tssWO309I31kjGIbuO/v4Ccg/gMmZePiqvBoc5X4tjiSoOeYAoJJKKQQRLRb6+3K2gwOAAkxQbuBjy1zNA+XMjpcVkocPtXLc6b84udAUvylQE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com; spf=pass smtp.mailfrom=thundersoft.com; dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b=GsJZMn1Q; arc=none smtp.client-ip=101.71.155.74
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thundersoft.com
+	s=arc-20240116; t=1784740275; c=relaxed/simple;
+	bh=7Y45uPglg7iPqVphYTzQdr9XvOjm5WsJCXkvZ34cbCQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=BOnOa8GFBhdrc8yWLDAtx7Kj4e5NJd7UdmTnEOdGnyKg05U8fHfEovt5otjbP+hwvt68TmAJogMMfiHLPLweSvvE01J1xu11wQlN1R7wtqK65UazxkmOrpUx9ZZ07ObtavtbfWOaDyskWhZtDnPPygUR/sQefqvz9cqtx2wZ3gk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CK7sXvlW; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b="GsJZMn1Q"
-Received: from [127.0.1.1] (unknown [36.129.139.90])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 472ee9f2c;
-	Thu, 23 Jul 2026 00:13:04 +0800 (GMT+08:00)
-From: Hongyang Zhao <hongyang.zhao@thundersoft.com>
-Date: Thu, 23 Jul 2026 00:12:40 +0800
-Subject: [PATCH v2 2/2] arm64: dts: qcom: qcs6490-rubikpi3: Add IMX219
- camera overlays
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CK7sXvlW"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5EC551F00A3D;
+	Wed, 22 Jul 2026 17:11:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784740271;
+	bh=5IBnNKjFpX4h0Bw883YP13wsIeX4UwbQCYYcGQL98/c=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=CK7sXvlW6Hxdlu4AfJEbAArnsSEg0XC99sMwPdapxkzWS6lfQHVEjLbKVchA28HiQ
+	 ev2d1c0zafdn/Pce8r5I/eIUlZRKRArl/sRA9dFmDMk2UkDhNaxggska+6+yPUbIql
+	 Tl8/r36qTileL2G1SVsvkMuomWakSZkIQ6royDGKfHpQ4308acSMZdPcSHAdmXwS35
+	 L1gstCY5lDivDwSRSB8UvGhF4Or/NAXg/4Hceh65ba6Ho35zY6tvRBdMa5kF9iJNCF
+	 kYNaEnThvDyxQ083o89Pg4doOLatISY8KslxYSzSlkFHWEO4QymY2C0Jiiw+XeXV5S
+	 b+RGFAZaLDo5Q==
+Date: Wed, 22 Jul 2026 12:11:08 -0500
+From: Rob Herring <robh@kernel.org>
+To: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+Cc: Sebastian Reichel <sre@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
+	Lorenzo Pieralisi <lpieralisi@kernel.org>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Christian Loehle <christian.loehle@arm.com>,
+	Ulf Hansson <ulfh@kernel.org>, Lee Jones <lee@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Souvik Chakravarty <Souvik.Chakravarty@arm.com>,
+	Andy Yan <andy.yan@rock-chips.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	John Stultz <john.stultz@linaro.org>,
+	Moritz Fischer <moritz.fischer@ettus.com>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Sudeep Holla <sudeep.holla@kernel.org>, linux-pm@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+	Andre Draszik <andre.draszik@linaro.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
+	mfd@lists.linux.dev, Srinivas Kandagatla <srini@kernel.org>
+Subject: Re: [PATCH v23 06/13] dt-bindings: arm: Document reboot mode magic
+Message-ID: <20260722171108.GA1097879-robh@kernel.org>
+References: <20260714-arm-psci-system_reset2-vendor-reboots-v23-0-e7453c548c21@oss.qualcomm.com>
+ <20260714-arm-psci-system_reset2-vendor-reboots-v23-6-e7453c548c21@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-rubikpi-next-20260615-v2-2-47c5add80114@thundersoft.com>
-References: <20260723-rubikpi-next-20260615-v2-0-47c5add80114@thundersoft.com>
-In-Reply-To: <20260723-rubikpi-next-20260615-v2-0-47c5add80114@thundersoft.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
- Sascha Hauer <s.hauer@pengutronix.de>, 
- Pengutronix Kernel Team <kernel@pengutronix.de>, 
- Fabio Estevam <festevam@gmail.com>
-Cc: Roger Shimizu <rosh@debian.org>, linux-arm-msm@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
- Hongyang Zhao <hongyang.zhao@thundersoft.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784736781; l=7630;
- i=hongyang.zhao@thundersoft.com; s=20260127; h=from:subject:message-id;
- bh=w8vi2Qu6Lg0xl9BcJ4k/gM3jWdZL5xhUg9zN5K+724I=;
- b=aA7fHvrjJqDmZOEtCl+XGBz0VDT3sBBHviSc9zQWx5oo1P23VlV7XRDzTkpXuU34vZAzAw8Qm
- En6UY1WVnm3DnVF4UP/eofqACociTQs8/927XlKNa+RuOjNE9FCtu2i
-X-Developer-Key: i=hongyang.zhao@thundersoft.com; a=ed25519;
- pk=D9yL5W9Zj0lPBDAq9gzY++1849VlXuTWAkROzZ88J/4=
-X-HM-Tid: 0a9f8a9a1f5909d5kunm8c572dff4a6e6f
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVlDThhNVhpCS0tDTE1NQk9OQlYVFA
-	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlITVVKSUJVSkhCVUJLWVdZFhoPEhUdFFlBWU9LSFVKS0
-	lPT09IVUpLS1VKQktLWQY+
-DKIM-Signature: a=rsa-sha256;
-	b=GsJZMn1QIczUiS9Z0aMfLZpMAImK5xfZw8w30iaKn0ituKXE7iHE0k2L0CEd5VytSVMkGBGzDMenaXrgbG/gxc0W3TbqoAk/2KCCgd9+7ZxeJikQD+TrPjPpPntyEq2Y+RGVqJrpE0A1hxzccpsXiGlYx6ZNX/Y6pxt9tmlfD3Q=; c=relaxed/relaxed; s=default; d=thundersoft.com; v=1;
-	bh=vWKg1OcG8yy6zm9ENl1TpleNXXVl9wMChbj1z8MRdUI=;
-	h=date:mime-version:subject:message-id:from;
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260714-arm-psci-system_reset2-vendor-reboots-v23-6-e7453c548c21@oss.qualcomm.com>
 
-RUBIK Pi 3 ships without camera sensors, and its two connectors support
-multiple modules. Keep module-specific nodes out of the base board DTS
-and add per-connector overlays for Raspberry Pi Camera Module V2 IMX219
-sensors.
+On Tue, Jul 14, 2026 at 10:46:34PM +0530, Shivendra Pratap wrote:
+> Add bindings to describe vendor-specific reboot modes. Values here
+> correspond to valid parameters to vendor-specific reset types in PSCI
+> SYSTEM_RESET2 call.
+> 
+> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+> ---
+>  Documentation/devicetree/bindings/arm/psci.yaml | 54 +++++++++++++++++++++++++
+>  1 file changed, 54 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/arm/psci.yaml b/Documentation/devicetree/bindings/arm/psci.yaml
+> index 6e2e0c551841..11b90e8affb3 100644
+> --- a/Documentation/devicetree/bindings/arm/psci.yaml
+> +++ b/Documentation/devicetree/bindings/arm/psci.yaml
+> @@ -98,6 +98,37 @@ properties:
+>        [1] Kernel documentation - ARM idle states bindings
+>          Documentation/devicetree/bindings/cpu/idle-states.yaml
+>  
+> +  reboot-mode:
+> +    type: object
+> +    $ref: /schemas/power/reset/reboot-mode.yaml#
+> +    additionalProperties: false
+> +    properties:
+> +      # "mode-normal" is just SYSTEM_RESET
+> +      mode-normal: false
+> +    patternProperties:
+> +      "^mode-.*$":
 
-CAM1 uses CCI1 and CSIPHY1, while CAM2 uses CCI0 and CSIPHY4. Each
-overlay describes the 24 MHz sensor input clock and the three sensor
-rails derived from the switched 3.3 V connector supply.
+Since your example violates naming rules:
 
-Describe each connector CAMERA_GPIO signal as a privacy indicator LED
-and associate it with the corresponding sensor. This lets the V4L2 core
-control the LED while the sensor is streaming.
+"^mode-[a-z0-9]+$"
 
-Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
----
- arch/arm64/boot/dts/qcom/Makefile                  |  15 +++
- .../qcs6490-thundercomm-rubikpi3-cam1-imx219.dtso  | 117 +++++++++++++++++++++
- .../qcs6490-thundercomm-rubikpi3-cam2-imx219.dtso  | 117 +++++++++++++++++++++
- 3 files changed, 249 insertions(+)
+> +        minItems: 1
+> +        maxItems: 3
+> +        items:
+> +          - description: arg1 (vendor-specific SYSTEM_RESET2 reset_type)
+> +            minimum: 0x80000000
+> +          - description: arg2 (cookie_lo in 2-cell form, cookie_hi in 3-cell form)
+> +          - description: arg3 (cookie_lo in 3-cell form)
+> +        description: |
+> +          Describes a PSCI SYSTEM_RESET2 vendor-specific reset type. The string
+> +          after "mode-" maps a reboot mode to a vendor-specific reset.
+> +          A vendor-specific reset takes two arguments, a 32-bit reset_type and a
+> +          64-bit cookie. The arguments are encoded as up to three 32-bit cells.
+> +          Each mode property is encoded as mode-xxx = <arg1[, arg2[, arg3]]>,
+> +          where:
+> +          - arg1 is reset_type and must be >= 0x80000000.
+> +          - In 2-cell form, arg2 is lower 32 bits of cookie.
+> +          - In 3-cell form, arg2 is high 32 bits of cookie
+> +            and arg3 is low 32 bits of cookie.
+> +
+> +          All values should be provided as per the PSCI SYSTEM_RESET2
+> +          specification.
+> +
+>  patternProperties:
+>    "^power-domain-":
+>      $ref: /schemas/power/power-domain.yaml#
+> @@ -137,6 +168,15 @@ allOf:
+>        required:
+>          - cpu_off
+>          - cpu_on
+> +  - if:
+> +      not:
+> +        properties:
+> +          compatible:
+> +            contains:
+> +              const: arm,psci-1.0
+> +    then:
+> +      properties:
+> +        reboot-mode: false
+>  
+>  additionalProperties: false
+>  
+> @@ -260,4 +300,18 @@ examples:
+>          domain-idle-states = <&cluster_ret>, <&cluster_pwrdn>;
+>        };
+>      };
+> +
+> +  - |+
+> +
+> +    // Case 5: SYSTEM_RESET2 vendor resets
+> +    psci {
+> +      compatible = "arm,psci-1.0";
+> +      method = "smc";
+> +
+> +      reboot-mode {
+> +        mode-edl = <0x80000000 0x00000001>;
+> +        mode-bootloader = <0x80010001 0x00000002>;
+> +        mode-needscookie_64 = <0x80000000 0x00000001 0x00000002>;
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index e05414290d8e..89c1d12ed299 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -185,6 +185,21 @@ dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-rb3gen2-industrial-mezzanine.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-rb3gen2-vision-mezzanine.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-thundercomm-minipc-g1iot.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-thundercomm-rubikpi3.dtb
-+
-+qcs6490-thundercomm-rubikpi3-cam1-imx219-dtbs := \
-+	qcs6490-thundercomm-rubikpi3.dtb \
-+	qcs6490-thundercomm-rubikpi3-cam1-imx219.dtbo
-+qcs6490-thundercomm-rubikpi3-cam2-imx219-dtbs := \
-+	qcs6490-thundercomm-rubikpi3.dtb \
-+	qcs6490-thundercomm-rubikpi3-cam2-imx219.dtbo
-+qcs6490-thundercomm-rubikpi3-dual-imx219-dtbs := \
-+	qcs6490-thundercomm-rubikpi3.dtb \
-+	qcs6490-thundercomm-rubikpi3-cam1-imx219.dtbo \
-+	qcs6490-thundercomm-rubikpi3-cam2-imx219.dtbo
-+
-+dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-thundercomm-rubikpi3-cam1-imx219.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-thundercomm-rubikpi3-cam2-imx219.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-thundercomm-rubikpi3-dual-imx219.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-vicharak-axon-mini.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs8300-ride.dtb
- 
-diff --git a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3-cam1-imx219.dtso b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3-cam1-imx219.dtso
-new file mode 100644
-index 000000000000..620b4b3463b4
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3-cam1-imx219.dtso
-@@ -0,0 +1,117 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) 2026, Thundercomm All rights reserved.
-+ */
-+
-+/dts-v1/;
-+/plugin/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/leds/common.h>
-+
-+&{/} {
-+	cam1_imx219_clk: clock-camera1-24m {
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		clock-frequency = <24000000>;
-+	};
-+
-+	leds-camera1 {
-+		compatible = "gpio-leds";
-+
-+		pinctrl-0 = <&cam1_privacy_led_state>;
-+		pinctrl-names = "default";
-+
-+		cam1_privacy_led: led-camera1 {
-+			function = LED_FUNCTION_INDICATOR;
-+			function-enumerator = <1>;
-+			gpios = <&tlmm 18 GPIO_ACTIVE_HIGH>;
-+			default-state = "off";
-+		};
-+	};
-+
-+	/* The module enables its three sensor rails together through PWR_EN. */
-+	vreg_cam1_pwr: regulator-camera1-pwr {
-+		compatible = "regulator-fixed";
-+
-+		regulator-name = "vreg_camera1_pwr";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+
-+		gpio = <&tlmm 57 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+
-+		pinctrl-0 = <&cam1_pwr_en>;
-+		pinctrl-names = "default";
-+
-+		vin-supply = <&vreg_vcc3v3_output>;
-+	};
-+};
-+
-+&camss {
-+	vdda-phy-supply = <&vreg_l10c_0p88>;
-+	vdda-pll-supply = <&vreg_l6b_1p2>;
-+
-+	status = "okay";
-+
-+	ports {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		port@1 {
-+			reg = <1>;
-+
-+			csiphy1_ep: endpoint {
-+				data-lanes = <0 1>;
-+				remote-endpoint = <&cam1_imx219_ep>;
-+			};
-+		};
-+	};
-+};
-+
-+&cci1 {
-+	status = "okay";
-+};
-+
-+&cci1_i2c0 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	camera@10 {
-+		compatible = "sony,imx219";
-+		reg = <0x10>;
-+
-+		clocks = <&cam1_imx219_clk>;
-+
-+		VANA-supply = <&vreg_cam1_pwr>;
-+		VDIG-supply = <&vreg_cam1_pwr>;
-+		VDDL-supply = <&vreg_cam1_pwr>;
-+
-+		leds = <&cam1_privacy_led>;
-+		led-names = "privacy";
-+
-+		port {
-+			cam1_imx219_ep: endpoint {
-+				data-lanes = <1 2>;
-+				link-frequencies = /bits/ 64 <456000000>;
-+				remote-endpoint = <&csiphy1_ep>;
-+			};
-+		};
-+	};
-+};
-+
-+&tlmm {
-+	cam1_privacy_led_state: cam1-privacy-led-state {
-+		pins = "gpio18";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+
-+	cam1_pwr_en: cam1-pwr-en-state {
-+		pins = "gpio57";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+};
-diff --git a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3-cam2-imx219.dtso b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3-cam2-imx219.dtso
-new file mode 100644
-index 000000000000..80479fffcdcb
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3-cam2-imx219.dtso
-@@ -0,0 +1,117 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) 2026, Thundercomm All rights reserved.
-+ */
-+
-+/dts-v1/;
-+/plugin/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/leds/common.h>
-+
-+&{/} {
-+	cam2_imx219_clk: clock-camera2-24m {
-+		compatible = "fixed-clock";
-+		#clock-cells = <0>;
-+		clock-frequency = <24000000>;
-+	};
-+
-+	leds-camera2 {
-+		compatible = "gpio-leds";
-+
-+		pinctrl-0 = <&cam2_privacy_led_state>;
-+		pinctrl-names = "default";
-+
-+		cam2_privacy_led: led-camera2 {
-+			function = LED_FUNCTION_INDICATOR;
-+			function-enumerator = <2>;
-+			gpios = <&tlmm 19 GPIO_ACTIVE_HIGH>;
-+			default-state = "off";
-+		};
-+	};
-+
-+	/* The module enables its three sensor rails together through PWR_EN. */
-+	vreg_cam2_pwr: regulator-camera2-pwr {
-+		compatible = "regulator-fixed";
-+
-+		regulator-name = "vreg_camera2_pwr";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+
-+		gpio = <&tlmm 58 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+
-+		pinctrl-0 = <&cam2_pwr_en>;
-+		pinctrl-names = "default";
-+
-+		vin-supply = <&vreg_vcc3v3_output>;
-+	};
-+};
-+
-+&camss {
-+	vdda-phy-supply = <&vreg_l10c_0p88>;
-+	vdda-pll-supply = <&vreg_l6b_1p2>;
-+
-+	status = "okay";
-+
-+	ports {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		port@4 {
-+			reg = <4>;
-+
-+			csiphy4_ep: endpoint {
-+				data-lanes = <0 1>;
-+				remote-endpoint = <&cam2_imx219_ep>;
-+			};
-+		};
-+	};
-+};
-+
-+&cci0 {
-+	status = "okay";
-+};
-+
-+&cci0_i2c0 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	camera@10 {
-+		compatible = "sony,imx219";
-+		reg = <0x10>;
-+
-+		clocks = <&cam2_imx219_clk>;
-+
-+		VANA-supply = <&vreg_cam2_pwr>;
-+		VDIG-supply = <&vreg_cam2_pwr>;
-+		VDDL-supply = <&vreg_cam2_pwr>;
-+
-+		leds = <&cam2_privacy_led>;
-+		led-names = "privacy";
-+
-+		port {
-+			cam2_imx219_ep: endpoint {
-+				data-lanes = <1 2>;
-+				link-frequencies = /bits/ 64 <456000000>;
-+				remote-endpoint = <&csiphy4_ep>;
-+			};
-+		};
-+	};
-+};
-+
-+&tlmm {
-+	cam2_privacy_led_state: cam2-privacy-led-state {
-+		pins = "gpio19";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+
-+	cam2_pwr_en: cam2-pwr-en-state {
-+		pins = "gpio58";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-disable;
-+	};
-+};
+Don't use '_' in property names. This is a W=2 warning.
 
--- 
-2.43.0
-
+Rob
