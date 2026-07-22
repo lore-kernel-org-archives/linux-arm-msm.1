@@ -1,82 +1,82 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C517F45D5CD
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 23:42:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EB3E46A5E7
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 23:42:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784763755; cv=none; b=USZNT1QobdSQU2uaYEIFpc+Tmrnzv7sIXJJjORJGRMu4fpB6z4OCFJOJN33J80Ncw8WVKiRpNzU5zCaKWy2Qe5aKvKfWTVSWfQ0achj4yeq1Mr117iiUmdyHyGwxv9BZL1VI3AIt8WmQk71UgBPV3wWF66Ok9/ucnkgwld19iRM=
+	t=1784763759; cv=none; b=b2Hlu9P/7cRBGykKMblbcYZQeQF0bG6723j/BrlOHuRZ8uwKY/mD1MFpasc8yF8/q4tbses1odjspIU9Ams92coSHnmowmKi3+k+Rl6+k7r4GCypBR/VUKnw6OCUWO1tLgUpTMccYj2qeag/C17CPvgegaqj+oGkSLFylaW1VrM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784763755; c=relaxed/simple;
-	bh=Y8OrT1b9+P25wm+nsipK+cGCcuo3jbfSsyp5e8veefA=;
+	s=arc-20240116; t=1784763759; c=relaxed/simple;
+	bh=I3HeKdoaqr6J677nN/TvvOWVijKfTEhqVjX9TUsnPn0=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=TQERTns3DWGUS4/c2fcczoLFjs6/SAhiOcCOprlsqVoEGLlBAZWxDH23Yi28v6DVpI1BrgXpZzZdrnlgra0p9Af48YSX6HeDl/HtzKO6VNjy6gDxfEHEmDEYqGnuZ+/olkOtDxz2NubLMbDevivicCqwQQXFLyMPy2ln7U6U7CU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ay6c1PIS; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=EKQqw1PO; arc=none smtp.client-ip=205.220.180.131
+	 MIME-Version; b=TRIO2VN/PkKuo0T1WBs+8lKv9UWxOzKaOYvzfd0IroJWEGmAOaY870sOGm3hopooSN7BWyCZI8CKEKMyyyhOXKCV6aIDO3QBmtiEdRykWjVUBOewSsZUaeNYPWlXjLmxA938VH6nZBFWeL+G8q1GXcPagLYBkvI/jLz/uoe+DV4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FujzAj60; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QPDMkVIo; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ay6c1PIS";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="EKQqw1PO"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66MMnsPm2042627
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 23:42:32 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FujzAj60";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QPDMkVIo"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66MMnwaL2176037
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 23:42:36 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=6twen9BOQ6k
-	ut18DPLsELurHQAzGfflSUGzYdphjhes=; b=ay6c1PISlnGyne/qPpS05V6Y6hY
-	Fx3UPU9o+5fRbTYwTX9P0w+z8ME4g6RpjqxreaN+7uwG6Gi185g9mUp06ckx49x7
-	D8ZDZ1lChAjfIiVVnz/8QN7MKLBAy4zoGaZzQ/vKDxWM0YzcKqPwbMN3wu52Y8Co
-	ZBs0OSgcJeJsYRUF8MLjAnU8eUEai15odpZbDOD3VvHpuGw5JdEifOhd8jIfEaLn
-	KlhBYFRePGxZbJyGtTQRW2pq5jdsclewAo6wdbFkwOKPLwLKdOBQsipAFmuwa6UC
-	+mCVmVPSklKi5ZkFjsA1+pa/Rh0LDPx9rArl6bNlqVU4lLnvAIWehMMRG0A==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjtn2ukk8-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=1ecc3MSmL7x
+	fj8NmfMmWmihlUbejMMv9R5FqL2QClAQ=; b=FujzAj60e2jkOlS+8OB5sOg8TcU
+	qlYOzqB+wAK63ukMyu2p4ROybvLMGaPbkufkK/vTu+WbhK2O398il05kBVvqAmnt
+	KmrI99ME9NbJx1Y5h0gKN0xCwFE1MqORwTikHX/NF/i5w99gJPmPu91sfhbVhUeU
+	dQw4kqBkp98MTxIqIcd4nLepq5f66ROD5KR5qh7k6lxpHWlapd9JfVoZxBid0h96
+	5YUzKN44DR4pAIesqkHQkoPfrZhM8RyxGHqJW/GUsgmHNqnPnG8t+EQJaQh4SB0/
+	WzTkdUGMdAq9Y+tJk3uyNsHer7D2pEi0Ag9XXqCIkJG+Bz8fbHY0psXXtow==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjxm12f0k-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 23:42:32 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51c26012cd0so574761cf.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 16:42:32 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 23:42:36 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c083f1818so411681cf.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 16:42:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784763752; x=1785368552; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784763756; x=1785368556; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=6twen9BOQ6kut18DPLsELurHQAzGfflSUGzYdphjhes=;
-        b=EKQqw1POuO6qxztlT83qeZsl51bOlUfQd5asUneDP2Rz7sTB4NsipEzsOQxpUTYA2K
-         7Hv7GAKo4M4MluHDIVVJGbW18IwCIrr7lQR8iruJAN6La7SOo7QY/YVNzC8vu/zxgEc0
-         egStAKsWafSAGGv/ElhSzwAuDeNgMBf7+a+xGOZUSBFpXCCX3tWvvcZvByVPPiQ4qHWO
-         FNAsTyleVEhAELHjkymq5bOuIH+GcfomavBYfX1fmIe0NVZHre40B4LjOv35WafxSpjL
-         eKzWTB555V9jYJzRf6nSKOj43GPDaSZlEuYYY3cmRhtkiknhZZj/BH092mkxgq6RUtct
-         9gBg==
+        bh=1ecc3MSmL7xfj8NmfMmWmihlUbejMMv9R5FqL2QClAQ=;
+        b=QPDMkVIoRM5gQ8DWDNgAAAKmVmZUdzppAXRx14HUS8FpPPNRF2lMXOmYB7/oOi5AJ5
+         9nuwlWRZoc6dOolfbOLlAV9nSUru7FasEMH9vLzBBDpBT8Hd96aVVN9709+R2UX2d6V3
+         puSdvPv7YqHl0xyGQM6QhDChx/+/IskknNHNkOnHDsBiaPTCub6u0Xhhqrmp/gk8FqsV
+         JrFmZw2npbU0VVkGEW7DtKdip1fWGCobP9K2W0sIj7tO/3lMXtcb9EcW68/oruhF5NPs
+         C+GYAZtOAtqGGabOQRIc7Z3TiHKJBOQo/l1GC7W/frx7/mDlyOfb1QJAt3xpDyly2/h5
+         r3RA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784763752; x=1785368552;
+        d=1e100.net; s=20251104; t=1784763756; x=1785368556;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6twen9BOQ6kut18DPLsELurHQAzGfflSUGzYdphjhes=;
-        b=s287jIYSbqiCFbkh5D5jAygqKI8+NwROtUGQGjCvWqSkZbMPahxVBt3fZjtOR5qFLV
-         v9O9V3B7wdL+mfP74By2EQTljoXRCB39BYkKGTCi9bfdHwyK3ibjIS4gi4+7yx5ZBdoV
-         1M2FDz4+tsgzaKEElNlo6wbxsE1qyyMOZ/XyXehcpO3Lv7VMkhVnJ3ZCG4ly1eE90S79
-         J6BU1P6ktgwv8hcz1Q1tyb6mvzjiu1I+8haNNqCjFelw4blV2ghTnq5JiJmyg6SjI0qo
-         B1Kwxg96J7iy0Z10/Lfv4KmlUBVZmgfkobZRbWZRvI7Zl4EZb1o79wG3luRUqjQGBMYu
-         tFBQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqMWUSHK3nkpAiYvnA2/zXejd+8E/r+i6GA8IL8xtQAGP6/7jmGAcog4MSDiCl3nGGIyhnXl6dAl6xWctQy@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxez1aXJjtGMfPpJRBip1tkoaCsfzVNtV+0lwWiCdMxkCPD/aC/
-	5NPMzZe2TW/eaF9R2OOvfyTHJebWiCiqsZTI6K5KqRa142H6jk7s1wwg+Iq8N82tciLg1lZZSyt
-	2ysHhxsOUeLRx1jqIkTzQRvDOXrv75MwI26cMl3dDFVoTEFkxU5K+uw8uF+mD1iOU6Rr2
-X-Gm-Gg: AR+sD13AGzzRyRmmyz+kJdzytNyCTRBUIcrrRfyBj9xC5ruX1qlGcdWELitQ0MK6RSu
-	keoWTPGe9bEa6VM5MJwLUHgZj3F0/iDxKVwLtyMzSWDHznTlRo83LO2hp39dAETYx+DRUNYXHkX
-	1Uh4OXwMfDgzNXlicr/44ruFPK848oyr7eQqO6hniRmrmVzm/BgHH1ScZLreZfhjzA6Mj935uRi
-	YEaCBeLXcSMStyzRb28R7uOIo5oi/lLnORyEKw5FmhMBYyYN0NG0+rdwSnSOsq0XGFfBHyvzfeH
-	ClbgPmPtBgj0l1Z7F1OmhqJqbe0pIBjkH6Bwa+YPeFMlTZr+SNMQBEiJjXTWqpgsi0tCMTsgM8u
-	s/WpWUM+vxlcMJQ==
-X-Received: by 2002:ac8:598a:0:b0:51c:1117:c7c with SMTP id d75a77b69052e-5283de0e53cmr6820101cf.25.1784763752020;
-        Wed, 22 Jul 2026 16:42:32 -0700 (PDT)
-X-Received: by 2002:ac8:598a:0:b0:51c:1117:c7c with SMTP id d75a77b69052e-5283de0e53cmr6819781cf.25.1784763751566;
-        Wed, 22 Jul 2026 16:42:31 -0700 (PDT)
+        bh=1ecc3MSmL7xfj8NmfMmWmihlUbejMMv9R5FqL2QClAQ=;
+        b=DwHrQRydT3F2QFzY3MXbeCAXwTUtXgkc2AgY9tDdNekdXpR0ZwLO2uoCCRxpEmtVyX
+         sa1pTiSp5uBemel6FwEXKiOBZD7+Xu0+N36QIv06L+bpZ/3SSoON6VGaTIXpfGeObfJc
+         v5YPrC4ucJzrUzHt2Yz40zckhrbYnGkotu49iLDVknWHPFDKmbt1NRsx2uUvFdVplNTJ
+         19BcXePYBOud7N+qX+Z4wusD1pDgZ5PJ5iVx4p42EsC5JhvzP+9MiL+g5q4R/eyEkLGr
+         EMyacoDaV+mwBm429fZ7gFFwjExfWW9bY/Rq2aeZ3HgWwhM44x8/WWDf3w1X9HhHOgpx
+         nBeQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rp3rWZNzZx9Tco/Ln8ZY6yDmKzTJ9NoaT6nnBearj7ZevEDooGbVxni89WzDcJ8zL+dFEX7uLY/kBgNK2tN@vger.kernel.org
+X-Gm-Message-State: AOJu0YwRS2Z3rJUww2GjIHpVJ+Skgsxcah0LXksLezoM4KAMizZqSFW8
+	tTbGij0YSKn6vZbzzmw+HZUJdMi9FbDekJmWdQFhRjWwXtEWITrQ5Dytqei6YfpYyaHQ6Az5dr0
+	4peCzepGeDpqY23a6B6FeX932vgKK+gY7hxkW57/oxJzuuHbcBw2shWYMPkVOL0RS8faI
+X-Gm-Gg: AR+sD10+JaRkqXjVf5oJ1q9qx1sIUC2XRFbRBsp2DC4cHRJGwWdPEgTCZ3TxtZ2Co7t
+	2pBxUJtCUAAOoMZS77AOe5VypNvZ3+9eZTc//apxsDQ8F3rNcUKhcflnV4mz94qLjCJ5058+yiO
+	+SrYSG9Ai454+7e4ugov8hx/jDriKAI7U1s9w79Xv6jSzibXaotCxc1S/uh8k0yQn19VyZ1kxwI
+	MHZcoeo76XUd49f2TUzXC9hghOa4MJE543cBf4sdJNPZHUm1K1O3PJFJe7BUeV5735Th8JSDa38
+	AQWWycSPDqg6Ry54q/KFcjMKuHuPgK/H7nr7DcrSM825VrgeCA06cRDg14Z9O8wBQxtcGlWIKgR
+	3atMTphnYfOAErQ==
+X-Received: by 2002:ac8:5d49:0:b0:51c:7b12:5ff6 with SMTP id d75a77b69052e-5283dff0b9dmr6908831cf.82.1784763755792;
+        Wed, 22 Jul 2026 16:42:35 -0700 (PDT)
+X-Received: by 2002:ac8:5d49:0:b0:51c:7b12:5ff6 with SMTP id d75a77b69052e-5283dff0b9dmr6908501cf.82.1784763755268;
+        Wed, 22 Jul 2026 16:42:35 -0700 (PDT)
 Received: from debian ([5.133.47.210])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4956a4aae16sm101796345e9.0.2026.07.22.16.42.29
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4956a4aae16sm101796345e9.0.2026.07.22.16.42.33
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Jul 2026 16:42:30 -0700 (PDT)
+        Wed, 22 Jul 2026 16:42:33 -0700 (PDT)
 From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 To: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
         Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
@@ -94,9 +94,9 @@ Cc: Bard Liao <yung-chuan.liao@linux.intel.com>,
         devicetree@vger.kernel.org, patches@opensource.cirrus.com,
         linux-kernel@vger.kernel.org,
         Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Subject: [RFC PATCH 2/8] ASoC: SDCA: allow building without ACPI
-Date: Thu, 23 Jul 2026 00:42:12 +0100
-Message-ID: <20260722234221.884765-3-srinivas.kandagatla@oss.qualcomm.com>
+Subject: [RFC PATCH 4/8] ASoC: SDCA: add PDE pre/post-pmu hooks to hw_ops
+Date: Thu, 23 Jul 2026 00:42:14 +0100
+Message-ID: <20260722234221.884765-5-srinivas.kandagatla@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com>
 References: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com>
@@ -107,126 +107,155 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDIzMyBTYWx0ZWRfX3QxkVDeaCBiD
- Pv1Az2EDdA0RGtZXLiSD6hFxjzR4YShNnhlSxebrB5OadXqloHrKb7yasY95MRD/kc4YN7H2dUJ
- yMImFkgztt6+11emLc1grjEdEbE01283epoJ/dV1ORsSWfG2M/9ZKsVAsMYLMdex7S1ifBXbrYl
- lK/zgA9rVkvmq/SiFK72h75Y5bEvqcWDz9aHbRkddd3OdKoClPJen8VofI3UPxrGLfS8z01dLq4
- yoOLXjrIfav16gxkZYzeGnEbMugcU4PLLmyrOhAqd90z7ajgyW6UARoAvv8dLtbCSJ72j5b+yuh
- 5aWDM7r+1hYgoRItD3rmm3qTvQ6kHRoEM9Su7c8tTq1zZFLLKiQE/U+p4gvSaiRo+5T4vH8URKO
- azR+Tw1qYMweQWAQER3hjsSW+mNxhOZQ1qikX723E+uKRqANE7M+0mG7esFkqUaIx4A40VzS83S
- +4lv8eoECplSWB61wPw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDIzMyBTYWx0ZWRfX8zGgPfKsGeaE
- FoUooILkwg7Uer+AORTsmH4i/TAm/bCN5xp9gONjeACiZtqUZNZqbHaZhE5KmzkPTFZS8MciOyK
- QjI3UANZaA7rPCthgWjMcZBELqMmshc=
-X-Proofpoint-GUID: U7Q66NNkkvwoWs1U8hPfZ7k2y68ht6Ny
-X-Proofpoint-ORIG-GUID: U7Q66NNkkvwoWs1U8hPfZ7k2y68ht6Ny
-X-Authority-Analysis: v=2.4 cv=T+28ifKQ c=1 sm=1 tr=0 ts=6a615568 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDIzMyBTYWx0ZWRfX7rXu1Xdxu8BJ
+ ap2kvpe0U8zEGAN9uQyUYHvjIHjfwF0emLsKREBfY6sKl7haeSHVbVK8Vg9NjTgo+SJcLNUkeca
+ +eSB7Lay5WQ+VBNYDcpU9WnxQY1DJpM=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDIzMyBTYWx0ZWRfX9c6I32NYkSn8
+ pPU57kd6dxUo27sG+aWgpQ1M2CHVvekHszrXjlN5Omc8060b1jlQlVetYX3Ul3apSU7IPcCW9Cs
+ mKKhZH6c2Mnk+tKc1TIcUHz2xpXAXSOm+MnUj2WDgwXKbSteH+ERBVxPshmOIS2hjrOO1wrqdWC
+ NYiIkSaWjfC0qQkrBms/Ro7tG+djJfRjViV09cYhyW0yIjia98B8jkGV/fIg2UOz7D+FYxSRvjH
+ lNBVq7FTzIOO07DweOtKTuoOEnc8FiCaUJIEaHHvOZ3SZgxOF4GG+267x5f/nBMLJAUaamwUeh0
+ Vo9ftGtHS58eO2DSkJ9BOivWYnd3lssJCd91B8I00tp2dXri5V9OoUGfQkfMlxWlhqvEygJK8+1
+ hUDgxVSwekm97wpd9/sXhRlh0La4GkeOEA1kxTFt7p/5KOnQ20H65sbauPFD+gPPTqc1ecTJzzv
+ BQJyPB801GjMDg/4h7Q==
+X-Authority-Analysis: v=2.4 cv=Rsv16imK c=1 sm=1 tr=0 ts=6a61556c cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
  a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
- a=w-sIlrOF0iEp6es9nnkA:9 a=kacYvNCVWA4VmyqE58fU:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
+ a=L7SaaVQrovU1Y9o8N14A:9 a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-GUID: 55ud4zRfn23LQKUR3rWG7_-PLuhjHET5
+X-Proofpoint-ORIG-GUID: 55ud4zRfn23LQKUR3rWG7_-PLuhjHET5
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-22_05,2026-07-22_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 impostorscore=0 malwarescore=0 spamscore=0
- clxscore=1015 bulkscore=0 lowpriorityscore=0 adultscore=0 priorityscore=1501
+ priorityscore=1501 bulkscore=0 phishscore=0 spamscore=0 impostorscore=0
+ malwarescore=0 adultscore=0 lowpriorityscore=0 suspectscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220233
 
-The SDCA class driver is useful on non-ACPI platforms where the
-topology is supplied statically via sdca_class_hw_ops.get_function_data.
+Add pde_pre_pmu and pde_post_pmu callbacks to struct sdca_class_hw_ops
+so codec drivers can hook into DAPM PDE power-domain transitions.
 
-Drop 'depends on ACPI' from SND_SOC_SDCA and guard the
-ACPI-parsing implementations in sdca_device.c and sdca_functions.c
-with IS_ENABLED(CONFIG_ACPI), providing empty stubs when ACPI is off.
+pde_pre_pmu is called before REQUESTED_PS=PS0 is written, allowing
+the driver to stage state (e.g. IT_USAGE, MIC_BIAS) that must be valid
+before the PDE sequencer runs.
+
+pde_post_pmu is called after REQUESTED_PS=PS0 and before ACTUAL_PS
+polling begins, allowing the driver to commit pending writes (e.g.
+FU mute/volume via SCP_COMMIT) that the sequencer needs to see.
+
+Both callbacks receive function_id and entity_id so the driver can act
+selectively per power domain.
 
 Assisted-by: Claude:claude-opus-4-7
 Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 ---
- include/sound/sdca.h            | 2 +-
- sound/soc/sdca/Kconfig          | 6 ++++--
- sound/soc/sdca/sdca_device.c    | 4 ++++
- sound/soc/sdca/sdca_functions.c | 4 ++++
- 4 files changed, 13 insertions(+), 3 deletions(-)
+ sound/soc/sdca/sdca_asoc.c  | 33 ++++++++++++++++++++++++++++++++-
+ sound/soc/sdca/sdca_class.h | 11 +++++++++++
+ 2 files changed, 43 insertions(+), 1 deletion(-)
 
-diff --git a/include/sound/sdca.h b/include/sound/sdca.h
-index 2bdf4e333e04..c449b10ef893 100644
---- a/include/sound/sdca.h
-+++ b/include/sound/sdca.h
-@@ -60,7 +60,7 @@ enum sdca_quirk {
- 	SDCA_QUIRKS_SKIP_FUNC_TYPE_PATCHING,
+diff --git a/sound/soc/sdca/sdca_asoc.c b/sound/soc/sdca/sdca_asoc.c
+index ac688cd62970..795498b9a314 100644
+--- a/sound/soc/sdca/sdca_asoc.c
++++ b/sound/soc/sdca/sdca_asoc.c
+@@ -32,6 +32,7 @@
+ #include <sound/soc-dai.h>
+ #include <sound/soc-dapm.h>
+ #include <sound/tlv.h>
++#include "sdca_class.h"
+ 
+ static bool exported_control(struct sdca_entity *entity, struct sdca_control *control)
+ {
+@@ -432,6 +433,8 @@ static int entity_pde_event(struct snd_soc_dapm_widget *widget,
+ {
+ 	struct snd_soc_component *component = snd_soc_dapm_to_component(widget->dapm);
+ 	struct sdca_entity *entity = widget->priv;
++	struct sdca_class_drv *core;
++	unsigned int fn;
+ 	int from, to;
+ 	int ret;
+ 
+@@ -439,6 +442,19 @@ static int entity_pde_event(struct snd_soc_dapm_widget *widget,
+ 		return -EIO;
+ 
+ 	switch (event) {
++	case SND_SOC_DAPM_PRE_PMU:
++		core = dev_get_drvdata(component->dev->parent);
++		if (core && core->hw_ops && core->hw_ops->pde_pre_pmu) {
++			fn = SDW_SDCA_CTL_FUNC(widget->reg);
++			ret = core->hw_ops->pde_pre_pmu(core->sdw,
++							component->regmap, fn,
++							SDW_SDCA_CTL_ENT(widget->reg));
++			if (ret)
++				dev_warn(component->dev,
++					 "%s: pde_pre_pmu failed: %d\n",
++					 entity->label, ret);
++		}
++		return 0;
+ 	case SND_SOC_DAPM_POST_PMD:
+ 		from = widget->on_val;
+ 		to = widget->off_val;
+@@ -451,6 +467,20 @@ static int entity_pde_event(struct snd_soc_dapm_widget *widget,
+ 		return 0;
+ 	}
+ 
++	if (event == SND_SOC_DAPM_POST_PMU) {
++		core = dev_get_drvdata(component->dev->parent);
++		if (core && core->hw_ops && core->hw_ops->pde_post_pmu) {
++			fn = SDW_SDCA_CTL_FUNC(widget->reg);
++			ret = core->hw_ops->pde_post_pmu(core->sdw,
++							 component->regmap, fn,
++							 SDW_SDCA_CTL_ENT(widget->reg));
++			if (ret)
++				dev_warn(component->dev,
++					 "%s: pde_post_pmu failed: %d\n",
++					 entity->label, ret);
++		}
++	}
++
+ 	ret = sdca_asoc_pde_poll_actual_ps(component->dev, component->regmap,
+ 					   SDW_SDCA_CTL_FUNC(widget->reg),
+ 					   SDW_SDCA_CTL_ENT(widget->reg),
+@@ -502,7 +532,8 @@ static int entity_parse_pde(struct device *dev,
+ 	(*widget)->mask = GENMASK(control->nbits - 1, 0);
+ 	(*widget)->on_val = SDCA_PDE_PS0;
+ 	(*widget)->off_val = SDCA_PDE_PS3;
+-	(*widget)->event_flags = SND_SOC_DAPM_POST_PMU | SND_SOC_DAPM_POST_PMD;
++	(*widget)->event_flags = SND_SOC_DAPM_PRE_PMU | SND_SOC_DAPM_POST_PMU |
++				 SND_SOC_DAPM_POST_PMD;
+ 	(*widget)->event = entity_pde_event;
+ 	(*widget)->priv = entity;
+ 	(*widget)++;
+diff --git a/sound/soc/sdca/sdca_class.h b/sound/soc/sdca/sdca_class.h
+index 74db9d4ce4a2..1278159ea61b 100644
+--- a/sound/soc/sdca/sdca_class.h
++++ b/sound/soc/sdca/sdca_class.h
+@@ -29,6 +29,13 @@ struct sdca_function_data;
+  *             an array of struct sdca_function_data and stores the number
+  *             of entries in @num (must be > 0 and <= SDCA_MAX_FUNCTION_COUNT).
+  *             May be NULL.
++ * @pde_pre_pmu: called before DAPM writes REQUESTED_PS=PS0; use to
++ *             prepare device state that must be valid before the PDE
++ *             sequencer runs (e.g. IT_USAGE); may be NULL
++ * @pde_post_pmu: called after DAPM writes REQUESTED_PS=PS0 and before
++ *             ACTUAL_PS polling begins; use to commit pending register
++ *             writes (e.g. FUNCTION_ACTION) on devices that require an
++ *             explicit commit trigger for PDE power-up; may be NULL
+  *
+  * Codec-specific SoundWire drivers pass a pointer to this struct to
+  * sdca_class_probe() from their sdw_driver.probe.  Codec-specific
+@@ -39,6 +46,10 @@ struct sdca_function_data;
+ struct sdca_class_hw_ops {
+ 	int  (*hw_init)(struct sdw_slave *slave);
+ 	struct sdca_function_data *(*get_function_data)(unsigned int *num);
++	int  (*pde_pre_pmu)(struct sdw_slave *slave, struct regmap *regmap,
++			    unsigned int function_id, unsigned int entity_id);
++	int  (*pde_post_pmu)(struct sdw_slave *slave, struct regmap *regmap,
++			     unsigned int function_id, unsigned int entity_id);
  };
  
--#if IS_ENABLED(CONFIG_ACPI) && IS_ENABLED(CONFIG_SND_SOC_SDCA)
-+#if IS_ENABLED(CONFIG_SND_SOC_SDCA)
- 
- void sdca_lookup_functions(struct sdw_slave *slave);
- void sdca_lookup_swft(struct sdw_slave *slave);
-diff --git a/sound/soc/sdca/Kconfig b/sound/soc/sdca/Kconfig
-index 4c0dcb9ff3b9..dc4cba1e3e0e 100644
---- a/sound/soc/sdca/Kconfig
-+++ b/sound/soc/sdca/Kconfig
-@@ -3,11 +3,13 @@ menu "SoundWire (SDCA)"
- 
- config SND_SOC_SDCA
- 	tristate "SDCA core support"
--	depends on ACPI
- 	select AUXILIARY_BUS
- 	help
- 	  This option enables support for the MIPI SoundWire Device
--	  Class for Audio (SDCA).
-+	  Class for Audio (SDCA).  The ACPI/DisCo topology parser is
-+	  only built when CONFIG_ACPI is enabled; on non-ACPI platforms
-+	  (e.g. ARM/DT) codec drivers supply the SDCA function data
-+	  via sdca_class_hw_ops.get_function_data.
- 
- config SND_SOC_SDCA_HID
- 	bool "SDCA HID support"
-diff --git a/sound/soc/sdca/sdca_device.c b/sound/soc/sdca/sdca_device.c
-index 405e80b979de..59d6c7466d91 100644
---- a/sound/soc/sdca/sdca_device.c
-+++ b/sound/soc/sdca/sdca_device.c
-@@ -28,6 +28,7 @@ void sdca_lookup_interface_revision(struct sdw_slave *slave)
- }
- EXPORT_SYMBOL_NS(sdca_lookup_interface_revision, "SND_SOC_SDCA");
- 
-+#if IS_ENABLED(CONFIG_ACPI)
- static void devm_acpi_table_put(void *ptr)
- {
- 	acpi_put_table((struct acpi_table_header *)ptr);
-@@ -45,6 +46,9 @@ void sdca_lookup_swft(struct sdw_slave *slave)
- 		devm_add_action_or_reset(&slave->dev, devm_acpi_table_put,
- 					 &slave->sdca_data.swft);
- }
-+#else
-+void sdca_lookup_swft(struct sdw_slave *slave) { }
-+#endif
- EXPORT_SYMBOL_NS(sdca_lookup_swft, "SND_SOC_SDCA");
- 
- static bool sdca_device_quirk_rt712_vb(struct sdw_slave *slave)
-diff --git a/sound/soc/sdca/sdca_functions.c b/sound/soc/sdca/sdca_functions.c
-index 77940bd6b33c..8814adc05f04 100644
---- a/sound/soc/sdca/sdca_functions.c
-+++ b/sound/soc/sdca/sdca_functions.c
-@@ -25,6 +25,7 @@
-  */
- #define SDCA_PROPERTY_LENGTH 64
- 
-+#if IS_ENABLED(CONFIG_ACPI)
- static int patch_sdca_function_type(u32 interface_revision, u32 *function_type)
- {
- 	/*
-@@ -198,6 +199,9 @@ void sdca_lookup_functions(struct sdw_slave *slave)
- 
- 	acpi_dev_for_each_child(adev, find_sdca_function, &slave->sdca_data);
- }
-+#else
-+void sdca_lookup_functions(struct sdw_slave *slave) { }
-+#endif
- EXPORT_SYMBOL_NS(sdca_lookup_functions, "SND_SOC_SDCA");
- 
- struct raw_init_write {
+ struct sdca_class_drv {
 -- 
 2.53.0
 
