@@ -1,151 +1,165 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AF812D876F;
-	Wed, 22 Jul 2026 05:54:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEBD12D0605;
+	Wed, 22 Jul 2026 05:58:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784699697; cv=none; b=Au9b2xJkGOmUY+HFkAbVn0ggKnY/EFENm3K+wULL2VcXLPbuyQwoKymcI8+Po+EMCLfVNq6HIRrPfyPh4CStVJ8pF9WWWhOVEfI34aLaU1oE5WY1bLuMLfTjgMhpMcNUbx7ZGOm8anD2pN5tyYEexpVsMlvu/2ahbs0iHV30kh4=
+	t=1784699924; cv=none; b=tnOT+AdrgvhSTe1yxLRqFFcLNoJBqMj/AAiWwVkzx1gLJ4eQO1kvsxzDlBxqtHtjezU8ZH2bVOspFV91r0vu0hQ6kVW8fcKuHqQnqzgRFA3EGxODTwYyPqlECV+3rRDoOy/CPCO72RThyWMG1ikJ7tbeWrDEb/0xU0BQWF9WvGE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784699697; c=relaxed/simple;
-	bh=8ISXVHhswyDJiLXbd9bq0w0gVpCRGbYE2cLAKgLPSUs=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Hpge0HU67F/DuE2WbGiv/zZmTBGFW7yGsMh50xJd2PWyt7LoOAycQwvZTtlppWIkb+25txL9hpbhbRYL3Ck0iv7s4geKYzsJYNaFsUjU1/Yg7dvET4hQ6ZY0doK14QjT/D7uxXSmx+6MKiafA62hECkVoaIxVvvGahtxMymKYuI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IXobRvag; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1784699924; c=relaxed/simple;
+	bh=0u0FhLDzl/Ofwfay/25ek4tyFIxmtmmR3ZzB4gEOehA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=QmPizRz39eSPMSWfgqmNRJvxFxKAkNd3KH+q3M83R5u8vZZvfnikhPS+kbpVaCuFxGwJ7cPk+vwN9ifa3i/0FE1vl/O5DWvIHGSofnyQcaAupbK97XJBTCFvnunmmtEbZ6D/5+dQ31koDlf1M2OibUy5ThL/mBKsIZf+PRlqjEk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VTT2w9zq; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IXobRvag"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 0B729C2BCF7;
-	Wed, 22 Jul 2026 05:54:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1784699697;
-	bh=8ISXVHhswyDJiLXbd9bq0w0gVpCRGbYE2cLAKgLPSUs=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=IXobRvagSWXHg8OgG9asw/rKXt/J2+uIP9N++yjhwLuoQVQjbykDSYZd4bMtjI72L
-	 nwUuR/7sG1eLYzCg2aPxlYUzimIy5tXA8+Uoj8z/7ejrp37N/G2fFLCgaZXboodK0q
-	 h58TG5FkXQW8dKEb4GkG6BJ5raUZgQEWY5XavbogcrUOg+eldinlnSrBe3EjIKOv7y
-	 vcGWy9Xoml/XtDcubW8Iuvm1s+5auvg8tMSx29AcE3XXG2+IVyTb+Ge+tJOVOpVXnZ
-	 YC5yToZwqi0Fmr3eWcnbN3ctnHfDOjbUyPiOF+0p3mN/+X1a4s+Rfc6QPmY4iYCDVi
-	 CrVVcVToa5DGQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E4960C44512;
-	Wed, 22 Jul 2026 05:54:56 +0000 (UTC)
-From: Manivannan Sadhasivam via B4 Relay <devnull+manivannan.sadhasivam.oss.qualcomm.com@kernel.org>
-Date: Wed, 22 Jul 2026 07:54:45 +0200
-Subject: [PATCH v3 2/3] bus: mhi: ep: Flush async transfers before
- notifying disconnect in mhi_ep_abort_transfer()
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VTT2w9zq"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD4131F000E9;
+	Wed, 22 Jul 2026 05:58:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784699922;
+	bh=5T+9Zo3cTjyaTauys3fPWTruOr/6JMUDiMzHi2ct70E=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=VTT2w9zqPup8HDv24ijAZ5UufMCABEfuAhGZrUHsWDmO4Kqp/6A7Jom1Dxb0C1gGu
+	 OnN06DmlP7R/ZnIZe766maHtdIxV2VM9DVByVVKgEMi/l61ruoAPdNr/1MltqcEObD
+	 xsWHrKlM1j5h2fHEsMuYWwSqpuzuEOCQtT/uCdOfRTjIRM6jWGZp9+k5FFgIHito51
+	 TQINBjQ2oZnB9RW6ifBTpCcSqIzPxQSsq4XlZTGfydGnFngIEI6qBz9Y1VuqusskFn
+	 0Rw/IpAxnoSH6mgQ8EQto5CdCGVHo44b059AD6WjzdgYJN7dcLGSVcdoYxtGrkolht
+	 CsX86tCrodUKg==
+Date: Wed, 22 Jul 2026 07:58:34 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Frank Li <Frank.li@oss.nxp.com>
+Cc: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, 
+	Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>, 
+	Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>, 
+	Bjorn Helgaas <bhelgaas@google.com>, dmaengine@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org
+Subject: Re: [PATCH v2 1/3] dmaengine: dw-edma: Implement
+ device_synchronize() callback
+Message-ID: <a7rswvi476dml2vuvqycnzsq7orc5jxzxl3n4wixclly4cvqrl@x26rz7ytdrr3>
+References: <20260714-mhi-ep-flush-v2-0-b6a9db011e85@oss.qualcomm.com>
+ <20260714-mhi-ep-flush-v2-1-b6a9db011e85@oss.qualcomm.com>
+ <amAXdwI_pYA4p_0P@lizhi-Precision-Tower-5810>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260722-mhi-ep-flush-v3-2-d855e715264e@oss.qualcomm.com>
-References: <20260722-mhi-ep-flush-v3-0-d855e715264e@oss.qualcomm.com>
-In-Reply-To: <20260722-mhi-ep-flush-v3-0-d855e715264e@oss.qualcomm.com>
-To: Manivannan Sadhasivam <mani@kernel.org>, Frank Li <Frank.Li@kernel.org>, 
- =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
- Kishon Vijay Abraham I <kishon@kernel.org>, 
- Bjorn Helgaas <bhelgaas@google.com>
-Cc: linux-kernel@vger.kernel.org, mhi@lists.linux.dev, 
- linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org, 
- Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2946;
- i=manivannan.sadhasivam@oss.qualcomm.com; h=from:subject:message-id;
- bh=yYP+ssCeYGN8h3YxfGvLUNdFi6kTstff2HKocV8IchA=;
- b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBqYFsuWs6hV/EA0gNZPq6G7FLIVAjdbHcNC87kr
- 1+V7QAfQg6JATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCamBbLgAKCRBVnxHm/pHO
- 9ep4B/9Z9JoR7B95Sl+cR/qb1BirNG2gugm/gIFZDehEC2drABtPwmU0hgh+/i/fl5mTF4Babmn
- 00ljcznoLYLuKnRx+q0RBg4W7wxavypisjsdWVsZMm3OTRl37wDPrMset2twIWKXu2+tA7AUj/a
- zz0B7eJxVFgQt80Mc4p+4YN8I6b2rIqJG/p960ehVIGKPErfa77VqJfG+gFHn5qH1E4+imDcmuc
- VmG+Cn8RN5X9qsOJ0NNXAr3U6J4sYTzfSpqEG7YM3x8x87iPD/veYqRSgXLO7uRV1/5dA8JKkbt
- G9dUFWbs29pAoHd+uvHNCwd5V1BLADIcblyOrFTyJejD2Ew2
-X-Developer-Key: i=manivannan.sadhasivam@oss.qualcomm.com; a=openpgp;
- fpr=C668AEC3C3188E4C611465E7488550E901166008
-X-Endpoint-Received: by B4 Relay for
- manivannan.sadhasivam@oss.qualcomm.com/default with auth_id=461
-X-Original-From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-Reply-To: manivannan.sadhasivam@oss.qualcomm.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <amAXdwI_pYA4p_0P@lizhi-Precision-Tower-5810>
 
-From: Manivannan Sadhasivam <mani@kernel.org>
+On Tue, Jul 21, 2026 at 09:05:59PM -0400, Frank Li wrote:
+> On Tue, Jul 14, 2026 at 02:08:32PM +0200, Manivannan Sadhasivam wrote:
+> > device_synchronize() callback is required by the client drivers to ensure
+> > all the DMA operations are completed so that they can free the memory
+> > associated with the complete callbacks.
+> >
+> > So implement this callback by first making sure that all the in-flight DMA
+> > operations are completed and then call vchan_synchronize() to drain the
+> > DMA tasklet.
+> >
+> > Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+> > ---
+> 
+> Similar implement already in linux-next, recent many fixes and update about
+> dw edma already merged in dma tree.
+> 
 
-mhi_ep_abort_transfer() notifies the client drivers about the channel
-disconnect using -ENOTCONN and only then flushes the ring workqueue to
-drain the in-flight transfers. But the async DMA transfers issued by the
-ring workers can still complete after the notification. And the completion
-handlers trigger the client xfer_cb() as long as it is set.
+Ah, I didn't notice this patch. I've dropped this patch from my series.
 
-So a transfer completing during the flush can deliver a success callback to
-the client even after it has been notified about the disconnect. This can
-lead to UAF (Use-After-Free) issues as the client can free its per-transfer
-resources in response to the -ENOTCONN notification and the trailing
-success callback would then reference the freed resources.
+This patch also suffers from the same RMW issue that Sashiko pointed out. So
+I'll send a separate fix for that.
 
-So to fix this issue, disable all the channels first to prevent new
-transfers and then drain both the ring workqueue and the in-flight async
-transfers before notifying the disconnect. The completion and queue paths
-bail out once the channel state is not MHI_CH_STATE_RUNNING, so disabling
-the channels upfront makes sure that no new transfer sneaks in during the
-drain and all the pending completions are delivered while xfer_cb() is
-still valid.
+- Mani
 
-Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
----
- drivers/bus/mhi/ep/main.c | 23 +++++++++++++++++------
- 1 file changed, 17 insertions(+), 6 deletions(-)
-
-diff --git a/drivers/bus/mhi/ep/main.c b/drivers/bus/mhi/ep/main.c
-index b94c571f01d8..51735f87017f 100644
---- a/drivers/bus/mhi/ep/main.c
-+++ b/drivers/bus/mhi/ep/main.c
-@@ -1025,26 +1025,37 @@ static void mhi_ep_abort_transfer(struct mhi_ep_cntrl *mhi_cntrl)
- 	struct mhi_ep_chan *mhi_chan;
- 	int i;
- 
--	/* Stop all the channels */
-+	/* Disable all the channels to prevent new transfers */
-+	for (i = 0; i < mhi_cntrl->max_chan; i++) {
-+		mhi_chan = &mhi_cntrl->mhi_chan[i];
-+		if (!mhi_chan->ring.started)
-+			continue;
-+
-+		mutex_lock(&mhi_chan->lock);
-+		mhi_chan->state = MHI_CH_STATE_DISABLED;
-+		mutex_unlock(&mhi_chan->lock);
-+	}
-+
-+	/* Drain ring workers and in-flight transfers before notifying disconnect */
-+	flush_workqueue(mhi_cntrl->wq);
-+	if (mhi_cntrl->flush_async)
-+		mhi_cntrl->flush_async(mhi_cntrl);
-+
-+	/* Send channel disconnect status to client drivers */
- 	for (i = 0; i < mhi_cntrl->max_chan; i++) {
- 		mhi_chan = &mhi_cntrl->mhi_chan[i];
- 		if (!mhi_chan->ring.started)
- 			continue;
- 
- 		mutex_lock(&mhi_chan->lock);
--		/* Send channel disconnect status to client drivers */
- 		if (mhi_chan->xfer_cb) {
- 			result.transaction_status = -ENOTCONN;
- 			result.bytes_xferd = 0;
- 			mhi_chan->xfer_cb(mhi_chan->mhi_dev, &result);
- 		}
--
--		mhi_chan->state = MHI_CH_STATE_DISABLED;
- 		mutex_unlock(&mhi_chan->lock);
- 	}
- 
--	flush_workqueue(mhi_cntrl->wq);
--
- 	/* Destroy devices associated with all channels */
- 	device_for_each_child(&mhi_cntrl->mhi_dev->dev, NULL, mhi_ep_destroy_device);
- 
+> commit 99109a51efd28c9a661fbfb9469b023c517b31d1
+> Author: Koichiro Den <den@valinux.co.jp>
+> Date:   Sat Jul 18 03:06:32 2026 +0900
+> 
+>     dmaengine: dw-edma: Terminate all descriptors without callbacks
+> 
+>     The DMA Engine client documentation says in the "Terminate APIs" section
+>     of Documentation/driver-api/dmaengine/client.rst:
+> 
+>     "No callback functions will be called for any incomplete transfers."
+> 
+>     dw-edma instead calls vchan_cookie_complete() when a deferred STOP reaches
+>     the interrupt handler. This schedules a callback for the active descriptor
+>     and leaves other issued or submitted descriptors queued. A late callback
+>     after dmaengine_terminate_sync() can dereference client state that has
+>     already been freed, while leftover descriptors may later restart into
+>     reused buffers or leak.
+> 
+>     Move all issued and submitted descriptors to the terminated list whenever
+>     termination completes. For a pending STOP, do this from both the DONE and
+>     ABORT paths. Complete their cookies in order without scheduling callbacks.
+> 
+>     A STOP can remain pending until the running transfer raises an
+>     interrupt. Make device_synchronize() wait for such a pending STOP to
+>     complete before releasing terminated descriptors. Reuse it from
+>     free_chan_resources(), then release the remaining virt-dma resources.
+>     Sleep instead of busy-polling while waiting, and warn if the existing
+>     timeout expires.
+> 
+>     Fixes: e63d79d1ffcd ("dmaengine: Add Synopsys eDMA IP core driver")
+>     Reviewed-by: Frank Li <Frank.Li@nxp.com>
+>     Signed-off-by: Koichiro Den <den@valinux.co.jp>
+>     Link: https://patch.msgid.link/20260717180639.2643243-3-den@valinux.co.jp
+>     Signed-off-by: Vinod Koul <vkoul@kernel.org>
+> 
+> Frank
+> 
+> >  drivers/dma/dw-edma/dw-edma-core.c | 16 ++++++++++++++++
+> >  1 file changed, 16 insertions(+)
+> >
+> > diff --git a/drivers/dma/dw-edma/dw-edma-core.c b/drivers/dma/dw-edma/dw-edma-core.c
+> > index c2feb3adc79f..df0d1a946ed0 100644
+> > --- a/drivers/dma/dw-edma/dw-edma-core.c
+> > +++ b/drivers/dma/dw-edma/dw-edma-core.c
+> > @@ -12,6 +12,7 @@
+> >  #include <linux/dmaengine.h>
+> >  #include <linux/err.h>
+> >  #include <linux/interrupt.h>
+> > +#include <linux/iopoll.h>
+> >  #include <linux/irq.h>
+> >  #include <linux/dma/edma.h>
+> >  #include <linux/dma-mapping.h>
+> > @@ -331,6 +332,20 @@ static int dw_edma_device_terminate_all(struct dma_chan *dchan)
+> >  	return err;
+> >  }
+> >
+> > +static void dw_edma_device_synchronize(struct dma_chan *dchan)
+> > +{
+> > +	struct dw_edma_chan *chan = dchan2dw_edma_chan(dchan);
+> > +
+> > +	/*
+> > +	 * Make sure all the in-flight DMA operations are completed before
+> > +	 * draining the tasklet using vchan_synchronize().
+> > +	 */
+> > +	read_poll_timeout(READ_ONCE, chan->status, chan->status != EDMA_ST_BUSY,
+> > +			  10, 0, false, chan->status);
+> > +
+> > +	vchan_synchronize(&chan->vc);
+> > +}
+> > +
+> >  static void dw_edma_device_issue_pending(struct dma_chan *dchan)
+> >  {
+> >  	struct dw_edma_chan *chan = dchan2dw_edma_chan(dchan);
+> > @@ -968,6 +983,7 @@ static int dw_edma_channel_setup(struct dw_edma *dw, u32 wr_alloc, u32 rd_alloc)
+> >  	dma->device_pause = dw_edma_device_pause;
+> >  	dma->device_resume = dw_edma_device_resume;
+> >  	dma->device_terminate_all = dw_edma_device_terminate_all;
+> > +	dma->device_synchronize = dw_edma_device_synchronize;
+> >  	dma->device_issue_pending = dw_edma_device_issue_pending;
+> >  	dma->device_tx_status = dw_edma_device_tx_status;
+> >  	dma->device_prep_slave_sg = dw_edma_device_prep_slave_sg;
+> >
+> > --
+> > 2.43.0
+> >
 
 -- 
-2.43.0
-
-
+மணிவண்ணன் சதாசிவம்
