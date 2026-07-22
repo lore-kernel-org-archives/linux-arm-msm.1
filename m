@@ -1,87 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DADC833ADA7
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 05:59:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D79C2DF12F
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 05:59:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784699952; cv=none; b=CqgQHYpKBv1p+kCkqzou/t4MgU14J8yHizRIrt0MsAu1T0s8CshR0NyE0JQ8WcEq6KTWJd4tp0cDJc/ktiHHnKhd4Hw46zWl0a5jVMSJeXeqCbsWdiWWL7lylUeWEHJvs737axMFpK5iX9hq6HqpGdKrWUT6WbBcG+WCVhyIj+Q=
+	t=1784699953; cv=none; b=haNpoERZsrGClomOxKYSIHDYAbBWA2t99SzyhDcoKDsnGPdI7hdLJAewao95ItU76WnYwYcQL70bMcFQ3IbW6uRq3gI1u8vfzS0J2UV/1joYoi6+X+MoBnQkbHKtajyluOVXV5ZEm081udnxswIG2Fu4h6sjOPIevdZLuGbfwtI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784699952; c=relaxed/simple;
-	bh=pTlwddmTycyPkW9d/VBQWH4fm4KmS5IzwKf5KplpJzc=;
+	s=arc-20240116; t=1784699953; c=relaxed/simple;
+	bh=mWA8/QzJVw/Z7Z45NGEAV1BRxr53CZ6L3rVVpjHn2gw=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=ruQgfZy/aHjceID2ji1m0nfOCnVm9nW3IZl6lpSLE7DscczuNoIl5nX8zqXLdy2+ftTxAZ+XnW4jgYSmjrvK+xoHHn7+kHv8ybV+3pRoXGn+s45/SgEyKYzSx0AzLxAmO/Qi3eOj4kCjH7ObE5ybJ2RKqHuX5Q61LOLZYDnWivk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=P90alrcA; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=E7R5SVcf; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=i923w0Zt2QTBPwbBXPDimnNw/LqpEum+tijH4tXBYyX+XFP7V7cQCUdYwXa4nbASjvUW//RTCCJp2Y4P8SNDPz4LDGQGGr5rkipio52HObxrBk1pCOHh01WWYaYwGKoW9306/1YfFXrHhVZd1sp6/WMihX/bPwsp2zaiPCL1dHA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Rsk86zoh; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SleYJRfz; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="P90alrcA";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="E7R5SVcf"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66M54YFa3474861
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 05:59:07 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Rsk86zoh";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SleYJRfz"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66M53fNb4027269
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 05:59:09 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	C6+9CAb5oIeEq/75hDaTBkW/kIiBHy6/MLkP9kjZUqI=; b=P90alrcAK7/3ZqNT
-	FwdczJv05vCbr0WLdlTmJBgiBfsnu1hriGzLMipqUnVqRsYklXJw0426G3M/E+Le
-	eRbI0Fdt5EBNmpPZf3gvQIC181rYwho16bBM4bUfOnoVFm/aTCQ99KkrVo2Om6qc
-	2vnzeMLpK8N091cDF8K/J0vnhWUev/k/zRpkKEfgFbZnAwlD+S/jgDjpAFqEI6KM
-	HUp5Dd7zE05Qc2N6p6twyrXeiTkmq9Bj2SJ7icA1bX7gxZHTy6jLa8RMM2vzGJrD
-	4y4U0RGNRfcWllIvtClLNtCQ6s/bJcvN2hprIpe0+z9BNHtF8cFVYXfdth5HzAWm
-	2X2dPA==
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjd6ftfhb-1
+	kjEckMXmIg3lTxAMQEusLsfGlV6CVK9DEapraoZ5Zsk=; b=Rsk86zohmWmpCx4O
+	C0c74hsIHQFJnqCTgRvf/oxOlx77q4SuZn3Y7sBF+GQ3xtk4jq0l0mIoATe5J+Dk
+	RlieT+efHiuTgAAV1gDvBQCT1i0Ng+YTGumOVPJvxaMTGaoE5t+0BqqNxiBWaJ2v
+	q6AOhYDCxW14voHiPM8itu53K5bU9W4XULkbu7qM7TLIuJ+jd//S5ZtThTQmktX6
+	KXeFc5sjSVaNlQq10AnPshOP4U0C7ZgzY4bkPhVmXysW76IxmmbrLWgEs3FCmtSv
+	RqmnIT62dUKrWQAMkMO0pB64tm/+I/3Rv9s0JTnVtWXRAXAVV7nmTNpP4jpwx0Mh
+	GK6Z4w==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fj9bsbr2f-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 05:59:07 +0000 (GMT)
-Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-84a251c2e3eso6514680b3a.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 22:59:06 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 05:59:09 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-8482b95574dso15717936b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 21 Jul 2026 22:59:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784699946; x=1785304746; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784699949; x=1785304749; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=C6+9CAb5oIeEq/75hDaTBkW/kIiBHy6/MLkP9kjZUqI=;
-        b=E7R5SVcf2Y6AWAN2QJZUIRpfc6ZJ4j0SiMU2THzVkhGpc3axW1T3z5M+XICSpV152i
-         LFedbmPfPZSwJ0Vd01gao7KHpQ+Q7i2EzrWzmuYfPDiC3T3UJHasFZieHhT7JBzLrPnp
-         h/56u1N/79pFJ+fhNBo8g53ddEnJqkY2EQYKyUkijdo1uPKP8nTb7nDtL1vrVDEJmRma
-         /AesqWT39P4iuJYOoNZydSowkaZzHbA0Lwqjyp6k3fI2Vy8sz4Jwyqv3Jvqqdw5Yg1hA
-         P6vndtJ5zaIC20rzOLyKXf9DbCQHTWh4EhxYSUFdd91Vhh+4vPbrUk52Gf2gkfGEI50E
-         2AZA==
+        bh=kjEckMXmIg3lTxAMQEusLsfGlV6CVK9DEapraoZ5Zsk=;
+        b=SleYJRfzlsbzpZ6RCGuNtwHKlGeW6OCpetD86RzSMyYzmZKob4zH+XTMfxNJBhE83Q
+         3yi/ZBr9slXZHUrzd81uMg3LbaXyQ3HfozQpDrdDC+mE4RQaH+QeeC8d763ZFe11/M0t
+         mTGa1BiQWu0DSpj/ze65zhPpCKSZXXpTxbd5xkr54kPxDFGSzzjqnG7ejuEKxRz/AChi
+         aUJQPUNdp9fNMWpchho0aSuOnpehSmkOIk7hq+PhmPP4qdkGFuB+3HAOTQk4pcKB7cMC
+         XHSWm65HQTfOWpV8CK5ECNe+9KoKktOAo8bl9waZsXovOu4yvhycSNE4btqRawm0PdDB
+         Ad+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784699946; x=1785304746;
+        d=1e100.net; s=20251104; t=1784699949; x=1785304749;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=C6+9CAb5oIeEq/75hDaTBkW/kIiBHy6/MLkP9kjZUqI=;
-        b=Hn0Dwj2l9wS8ZsQQn5jtRTEDsmq+ZKMwAzKcc+lih1M1ezx6VOmbpLya2R6MfwY1oM
-         TiE6TyRpbbvVNpm/4FeeO8YDGJ2/bMp5wuqQiOLnYbezpQd4FR97iChKTl5/nerFFXq0
-         gz2tjyqOWPCqgC4bPfOcUHYMLOu34bVPfXieIZHbNUhNC0hCF8mZBctOS+PB5t60Dr/R
-         0jVE9Q8MoUU+IPh382TCKkj2Aqv7vHMQTNYYpX9ezCGqzmgFhyHPGUaq4A2zpcWCnKHG
-         PvOM/RfqW7TJtTU+zIIOg9WSMbbS8qqPxLwqKpQBt66yc9zHoq1VYJIghluvZO/jRTpf
-         /MVQ==
-X-Gm-Message-State: AOJu0YypN9LxVKa7B9a4PxzrF0wri/wyq2AjN8r+dhUmKjknFLapO60p
-	4G74wX6kXyB1X/AGMbkZvzHmW099aGpKfiQoPbF0JMu1UugrnB8lnZ+DwNP9kBSxA+/CN7P07mm
-	Ro9PNgc9ZBrkAI8ZeqGim9ViTjmEp6YfRrLdPEIsjDnYt9Vag/FnIfj3gY2AWQZsiDGV5
-X-Gm-Gg: AR+sD11g8vw05ev7q92rfzLzz770rePtLwMzO2Mp12MWMjlNNaObO2bFQXOTKzxyxGT
-	qUvRX/FUQKQ356FT+o7A2MunaTUWNWLZiGdmwdGxsSVjAnSwhugoduFLZVszxmIDR80Jf4pepRQ
-	j0CdcIsTq8Gw6wpiQKWLfgC1PicZxwd7dtPGNhKlnd/WZpRIS1XUfTF1VlulY0xAkiM+fRccZqD
-	IUkVRDljnT/sEgLjajQ+ISzgnszGXvqUVSeolPBtZgHdXRoWqOE0cyGKjOia6+caltcT+CPBdKM
-	Er1Oqbf68yFwDlTh1012kwORSv+Ixk1HsNmJkvSea11BwQWG/yF0/JrzpZev8mG0C+1ABCpS6Xo
-	nDtp31NX391M5I8Hz+cs603j4kToWXWB8c8Bjl99Cip46FPY=
-X-Received: by 2002:a05:6a00:1f04:b0:845:dcc8:9da with SMTP id d2e1a72fcca58-84e16292032mr2435447b3a.22.1784699946088;
-        Tue, 21 Jul 2026 22:59:06 -0700 (PDT)
-X-Received: by 2002:a05:6a00:1f04:b0:845:dcc8:9da with SMTP id d2e1a72fcca58-84e16292032mr2435411b3a.22.1784699945563;
-        Tue, 21 Jul 2026 22:59:05 -0700 (PDT)
+        bh=kjEckMXmIg3lTxAMQEusLsfGlV6CVK9DEapraoZ5Zsk=;
+        b=pJpTaiGk8Foct7ShdYrH4Mdt7cDRyJJGk/7k5e4thchzFPB3wwxNWwHIf6ls4ab10m
+         ES+n4uCSqaS3XFUgOVwDo+3wY667Ih0l3u7gRfUCpjbzD5wicyKmYq0+3bcMmcNoLOlU
+         tCBbeu843k0+4Wu6psc2sqhZ14n8CIWeg4ZFn/rRrJVYJTje4Eey6aLFD24S5bwMS/CU
+         MKiOTFANMQnK47F2rM/I7s1MRPOQT+kMo/gxKRZU99ptu6NvJhnKtAwK2LoBIRa3DWEo
+         seKYZo12hI3qJJFvJfma3ziEhP+1UbgNUVJQDCYrmU2/xbTI3p0PdYowqwdKZhut0Onz
+         dVWQ==
+X-Gm-Message-State: AOJu0Yy1y6IeauN4ZWxoq9H295ukpzfhSOKMdp0+TbKsz1EXDiXHRcYH
+	EjCt1se3SZVErtDbhkq0xe474POdsg9lO1eJ8Sq9mBV5ixqKVSN7SH3xO60kUteRA7VulGTNSHY
+	putxM9Hg2DUdF5xj8yHyXaTMETwUE1bGrtOwmqV0iZ0Dt+r471EyFI402yn172WKlemXG
+X-Gm-Gg: AR+sD11qdewV/1in7KM1CTPfaugGNyc7KImNx0cnubrpr+5zxZSYOr+ywPEoHuXTHgf
+	GOHkvFoMdVG6Vlvz/vCeKlcMOgJQCPTLl/2lp+nEmlruJTmWUt+Bl0TvOjCanatYrJ8J0X1QFWF
+	4B73JtStoGge28RGtltwws2eUK0msAbCj5k/j25+ujEdh0xiyqRMN1u4D+7E4XLbDd2G87JVphF
+	mSshIR9gGBTL4CXLa7pBQ61ydF10JHv16VymbXv0rTSt84+q66UjjCFULtqSuL3TgL85U30WzeA
+	sErWwrILH3GrluvSuLJvlMEObqzjK9A6z4jLmvX7dIvi+aHl7GkngE/sindz7EM4fJJyNLgwLLW
+	ZC1ktYRB6vGriKzdoW0BZp43CVrTCrKVgIAgu1NHNw7O044k=
+X-Received: by 2002:a05:6a00:414d:b0:842:6a3b:60d1 with SMTP id d2e1a72fcca58-84c29444de7mr22076429b3a.31.1784699948983;
+        Tue, 21 Jul 2026 22:59:08 -0700 (PDT)
+X-Received: by 2002:a05:6a00:414d:b0:842:6a3b:60d1 with SMTP id d2e1a72fcca58-84c29444de7mr22076411b3a.31.1784699948552;
+        Tue, 21 Jul 2026 22:59:08 -0700 (PDT)
 Received: from hu-qianyu-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cbb8f0ee1e6sm554013a12.12.2026.07.21.22.59.03
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cbb8f0ee1e6sm554013a12.12.2026.07.21.22.59.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 21 Jul 2026 22:59:04 -0700 (PDT)
+        Tue, 21 Jul 2026 22:59:08 -0700 (PDT)
 From: Qiang Yu <qiang.yu@oss.qualcomm.com>
-Date: Tue, 21 Jul 2026 22:58:59 -0700
-Subject: [PATCH v10 4/7] clk: qcom: tcsrcc-glymur: Add regulator supplies
- and migrate to clk_ref helper
+Date: Tue, 21 Jul 2026 22:59:01 -0700
+Subject: [PATCH v10 6/7] arm64: dts: qcom: glymur: Add QREF regulator
+ supplies to TCSR
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260721-tcsr_qre_0721-v10-4-d2fa68c63b78@oss.qualcomm.com>
+Message-Id: <20260721-tcsr_qre_0721-v10-6-d2fa68c63b78@oss.qualcomm.com>
 References: <20260721-tcsr_qre_0721-v10-0-d2fa68c63b78@oss.qualcomm.com>
 In-Reply-To: <20260721-tcsr_qre_0721-v10-0-d2fa68c63b78@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
@@ -107,461 +107,79 @@ Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
         linux-hardening@vger.kernel.org, Qiang Yu <qiang.yu@oss.qualcomm.com>,
         Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784699937; l=13220;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784699937; l=1658;
  i=qiang.yu@oss.qualcomm.com; s=20250513; h=from:subject:message-id;
- bh=pTlwddmTycyPkW9d/VBQWH4fm4KmS5IzwKf5KplpJzc=;
- b=MeWQzBuCx9IKN+yKyOO4deANL7VVbBWooOLyBCEFcJP3sS13RyJfga/CSixtjyLLSWYSjxWpJ
- A1/1dvWro29CB0yRfL7/XLlXGDAxJ9VbkFm/OixkMJzsmcHqAjk7oh6
+ bh=mWA8/QzJVw/Z7Z45NGEAV1BRxr53CZ6L3rVVpjHn2gw=;
+ b=Kzy6BE7dRky8sbCMSKKKiIfUCmD4bhzi5gUM8+Iqx9sZLbFR6w1mY0kjFPg6ecfOYSiCE0CQo
+ UIlyRRZ2VaEByFxboaqH4QiEkXdJyEdztElpUewBTvD3/VooYuaOrfT
 X-Developer-Key: i=qiang.yu@oss.qualcomm.com; a=ed25519;
  pk=Rr94t+fykoieF1ngg/bXxEfr5KoQxeXPtYxM8fBQTAI=
-X-Proofpoint-GUID: z00rgoPVi6wxMheamqYGkc9W30mujD4c
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDA1MyBTYWx0ZWRfX4IKDn0f/nMlg
- eFFrNGkPc5iDAKMaTCT3rnQMU/8XhEojotVtlgIVcnU6n4aRod3G1uQDq+K3yqmgcYLSm0e61du
- k9W2c/VQqpPHU/a65hoXZLERjkkvZSKYQabNBuyL+/cT6+wq0rrRNSSUY6h6wTMqVsKNIxbaCBA
- TYgjAOVpoesu6OkkWCd89+VshZFC7LUW9vZ6QGwA2xcHxVmP+vYWcrvLiORBGqZB/asviNr1h3S
- LYwWGINY+7sxsMIse0vy6LeP18nKngocB+hT26Plp9KKv2m4w042LvNNWNlcmJ4QaRrT+xoig/n
- sR3t/x/5AE1I4yqSJVzg0WF35Bl3bN6yjCSXKzku7iBBPwWx0TxzbSi3l3uLo62do+rRyh0gONA
- rnpfFMHq8/caO0lCg4r6xCsSDe4UMMfBzcK1KKfG78DsAZK45XM9HZgqSiFop6OjqETbjTeNDmL
- lRiTr5H6zTc//0LobcA==
-X-Authority-Analysis: v=2.4 cv=e/o2j6p/ c=1 sm=1 tr=0 ts=6a605c2b cx=c_pps
- a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+X-Proofpoint-ORIG-GUID: ozhxwtAnYBRWRc_LKKLGE7KTLQCv50SN
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDA1MyBTYWx0ZWRfX/bcLIn9bERs9
+ vdr5aklN/Wk4cWNeChGgE1+Y3MZBYvMWpdUt6UnPUdDFsg4SmRh9Nn++FV5/o35cyjoGrIVDKfH
+ FhMWEHACcdEOf77/m1DcU7Zv0u9ergyfYj+qPxog3PPJSIoKMAgX/QRD31yVBlok7NQkrtuIcAH
+ hd+1nvXnVmxvm1Cxfz2GNHaaIs/Gqp96hoZvvAkJjLyd6swBQnSArAPpwXPIRp1XxufZrG/k25a
+ jZzv0Qf70ilyfyaAx/VQN+2ndZyS3uIE0twzkvq8ti0MilDUQnMEyk5h0rZ2fl6oQJJTF7MfbeM
+ GWcw4TLi5xmYTebcmYrGYllgMvqoQvHMzkb66ANlyFTbsN2CslQz2vDaEP9/BDSwMid32+Ohsml
+ 4UQAcKUK1kp69LBHO6k8CDB9xMQQVIyAoj0OjjOOgPRrqQxaQqRTdGL32yFqtiS3JGUaX7mUZ3Y
+ 8SO2FssKWRB575W9rFQ==
+X-Proofpoint-GUID: ozhxwtAnYBRWRc_LKKLGE7KTLQCv50SN
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDA1MyBTYWx0ZWRfX/ddtN5tZbe5M
+ RulI7U9vazBriU69/54ZWc4g7mQ5gKDGOHJT2IDWTyYdPtMm6Q3fzH+CSSl1dGEaTjdZeijnJGW
+ DQFvaD9oIG1W2YohcC91WqmdEju2RRU=
+X-Authority-Analysis: v=2.4 cv=QK1YgALL c=1 sm=1 tr=0 ts=6a605c2d cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=QwI6o0JXcUMaZQCC76IA:9 a=QEXdDO2ut3YA:10
- a=IoOABgeZipijB_acs4fv:22
-X-Proofpoint-ORIG-GUID: z00rgoPVi6wxMheamqYGkc9W30mujD4c
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDA1MyBTYWx0ZWRfX3Y/XHZi/lYwP
- ZfHqJsxnOkf+mQKcsbFLdsFZF15YuU9S7CE9K69N43loiHpQ2ArWJJl1vOaptcTZU1UE7KyyNZo
- VFwAJrKXVK61P6lhBzGNMeTbIhZZq60=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=n5gI8yOKKvUJs91qd4MA:9 a=QEXdDO2ut3YA:10
+ a=OpyuDcXvxspvyRM73sMx:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-22_02,2026-07-21_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 spamscore=0 bulkscore=0 priorityscore=1501
- impostorscore=0 lowpriorityscore=0 phishscore=0 clxscore=1015 adultscore=0
+ priorityscore=1501 spamscore=0 phishscore=0 impostorscore=0 bulkscore=0
+ suspectscore=0 clxscore=1015 adultscore=0 lowpriorityscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220053
 
-Replace local clk_branch-based clkref definitions with descriptor-based
-registration via qcom_clk_ref_probe().
+The TCSR clkref_en clocks gate the QREF block which provides reference
+clocks to the PCIe PHYs. Wire up the LDO supplies required by the QREF
+and refgen blocks on the CRD board.
 
-This keeps the glymur driver focused on clock metadata and reuses common
-runtime logic for regulator handling, enable/disable sequencing, and OF
-provider wiring.
-
-Co-developed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Signed-off-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
 ---
- drivers/clk/qcom/tcsrcc-glymur.c | 361 +++++++++++++--------------------------
- 1 file changed, 116 insertions(+), 245 deletions(-)
+ arch/arm64/boot/dts/qcom/glymur-crd.dts | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
 
-diff --git a/drivers/clk/qcom/tcsrcc-glymur.c b/drivers/clk/qcom/tcsrcc-glymur.c
-index b44fccb795c6..e0b545258ba4 100644
---- a/drivers/clk/qcom/tcsrcc-glymur.c
-+++ b/drivers/clk/qcom/tcsrcc-glymur.c
-@@ -4,276 +4,145 @@
-  */
- 
- #include <linux/clk-provider.h>
-+#include <linux/clk/qcom.h>
- #include <linux/module.h>
-+#include <linux/of.h>
- #include <linux/platform_device.h>
- #include <linux/regmap.h>
- 
- #include <dt-bindings/clock/qcom,glymur-tcsr.h>
- 
--#include "clk-alpha-pll.h"
--#include "clk-branch.h"
--#include "clk-pll.h"
--#include "clk-rcg.h"
--#include "clk-regmap.h"
--#include "clk-regmap-divider.h"
--#include "clk-regmap-mux.h"
--#include "common.h"
--#include "gdsc.h"
--#include "reset.h"
--
--enum {
--	DT_BI_TCXO_PAD,
-+static const char * const glymur_tcsr_tx0_rx5_regulators[] = {
-+	"vdda-refgen3-0p9",
-+	"vdda-refgen3-1p2",
-+	"vdda-qrefrx5-0p9",
-+	"vdda-qreftx0-0p9",
-+	"vdda-qreftx0-1p2",
+diff --git a/arch/arm64/boot/dts/qcom/glymur-crd.dts b/arch/arm64/boot/dts/qcom/glymur-crd.dts
+index 6125617de82a..44766a73b0d1 100644
+--- a/arch/arm64/boot/dts/qcom/glymur-crd.dts
++++ b/arch/arm64/boot/dts/qcom/glymur-crd.dts
+@@ -28,3 +28,23 @@ &mdss_dp1 {
+ &mdss_dp1_out {
+ 	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
  };
- 
--static struct clk_branch tcsr_edp_clkref_en = {
--	.halt_reg = 0x60,
--	.halt_check = BRANCH_HALT_DELAY,
--	.clkr = {
--		.enable_reg = 0x60,
--		.enable_mask = BIT(0),
--		.hw.init = &(const struct clk_init_data) {
--			.name = "tcsr_edp_clkref_en",
--			.parent_data = &(const struct clk_parent_data){
--				.index = DT_BI_TCXO_PAD,
--			},
--			.num_parents = 1,
--			.ops = &clk_branch2_ops,
--		},
--	},
-+static const char * const glymur_tcsr_tx1_rpt0_rx0_regulators[] = {
-+	"vdda-refgen4-0p9",
-+	"vdda-refgen4-1p2",
-+	"vdda-qreftx1-0p9",
-+	"vdda-qrefrpt0-0p9",
-+	"vdda-qrefrx0-0p9",
- };
- 
--static struct clk_branch tcsr_pcie_1_clkref_en = {
--	.halt_reg = 0x48,
--	.halt_check = BRANCH_HALT_DELAY,
--	.clkr = {
--		.enable_reg = 0x48,
--		.enable_mask = BIT(0),
--		.hw.init = &(const struct clk_init_data) {
--			.name = "tcsr_pcie_1_clkref_en",
--			.parent_data = &(const struct clk_parent_data){
--				.index = DT_BI_TCXO_PAD,
--			},
--			.num_parents = 1,
--			.ops = &clk_branch2_ops,
--		},
--	},
-+static const char * const glymur_tcsr_tx1_rpt01_rx1_regulators[] = {
-+	"vdda-refgen4-0p9",
-+	"vdda-refgen4-1p2",
-+	"vdda-qreftx1-0p9",
-+	"vdda-qrefrpt0-0p9",
-+	"vdda-qrefrpt1-0p9",
-+	"vdda-qrefrx1-0p9",
- };
- 
--static struct clk_branch tcsr_pcie_2_clkref_en = {
--	.halt_reg = 0x4c,
--	.halt_check = BRANCH_HALT_DELAY,
--	.clkr = {
--		.enable_reg = 0x4c,
--		.enable_mask = BIT(0),
--		.hw.init = &(const struct clk_init_data) {
--			.name = "tcsr_pcie_2_clkref_en",
--			.parent_data = &(const struct clk_parent_data){
--				.index = DT_BI_TCXO_PAD,
--			},
--			.num_parents = 1,
--			.ops = &clk_branch2_ops,
--		},
--	},
-+static const char * const glymur_tcsr_tx1_rpt012_rx2_regulators[] = {
-+	"vdda-refgen4-0p9",
-+	"vdda-refgen4-1p2",
-+	"vdda-qreftx1-0p9",
-+	"vdda-qrefrpt0-0p9",
-+	"vdda-qrefrpt1-0p9",
-+	"vdda-qrefrpt2-0p9",
-+	"vdda-qrefrx2-0p9",
- };
- 
--static struct clk_branch tcsr_pcie_3_clkref_en = {
--	.halt_reg = 0x54,
--	.halt_check = BRANCH_HALT_DELAY,
--	.clkr = {
--		.enable_reg = 0x54,
--		.enable_mask = BIT(0),
--		.hw.init = &(const struct clk_init_data) {
--			.name = "tcsr_pcie_3_clkref_en",
--			.parent_data = &(const struct clk_parent_data){
--				.index = DT_BI_TCXO_PAD,
--			},
--			.num_parents = 1,
--			.ops = &clk_branch2_ops,
--		},
--	},
-+static const char * const glymur_tcsr_tx1_rpt34_rx4_regulators[] = {
-+	"vdda-refgen4-0p9",
-+	"vdda-refgen4-1p2",
-+	"vdda-qreftx1-0p9",
-+	"vdda-qrefrpt3-0p9",
-+	"vdda-qrefrpt4-0p9",
-+	"vdda-qrefrx4-0p9",
- };
- 
--static struct clk_branch tcsr_pcie_4_clkref_en = {
--	.halt_reg = 0x58,
--	.halt_check = BRANCH_HALT_DELAY,
--	.clkr = {
--		.enable_reg = 0x58,
--		.enable_mask = BIT(0),
--		.hw.init = &(const struct clk_init_data) {
--			.name = "tcsr_pcie_4_clkref_en",
--			.parent_data = &(const struct clk_parent_data){
--				.index = DT_BI_TCXO_PAD,
--			},
--			.num_parents = 1,
--			.ops = &clk_branch2_ops,
--		},
--	},
-+static const struct regmap_config tcsr_cc_glymur_regmap_config = {
-+	.reg_bits = 32,
-+	.reg_stride = 4,
-+	.val_bits = 32,
-+	.max_register = 0x94,
-+	.fast_io = true,
- };
- 
--static struct clk_branch tcsr_usb2_1_clkref_en = {
--	.halt_reg = 0x6c,
--	.halt_check = BRANCH_HALT_DELAY,
--	.clkr = {
--		.enable_reg = 0x6c,
--		.enable_mask = BIT(0),
--		.hw.init = &(const struct clk_init_data) {
--			.name = "tcsr_usb2_1_clkref_en",
--			.parent_data = &(const struct clk_parent_data){
--				.index = DT_BI_TCXO_PAD,
--			},
--			.num_parents = 1,
--			.ops = &clk_branch2_ops,
--		},
-+static const struct qcom_clk_ref_desc * const tcsr_cc_glymur_clk_descs[] = {
-+	[TCSR_EDP_CLKREF_EN] = &(const struct qcom_clk_ref_desc) {
-+		.name = "tcsr_edp_clkref_en",
-+		.offset = 0x60,
-+		.regulator_names = glymur_tcsr_tx1_rpt0_rx0_regulators,
-+		.num_regulators = ARRAY_SIZE(glymur_tcsr_tx1_rpt0_rx0_regulators),
- 	},
--};
--
--static struct clk_branch tcsr_usb2_2_clkref_en = {
--	.halt_reg = 0x70,
--	.halt_check = BRANCH_HALT_DELAY,
--	.clkr = {
--		.enable_reg = 0x70,
--		.enable_mask = BIT(0),
--		.hw.init = &(const struct clk_init_data) {
--			.name = "tcsr_usb2_2_clkref_en",
--			.parent_data = &(const struct clk_parent_data){
--				.index = DT_BI_TCXO_PAD,
--			},
--			.num_parents = 1,
--			.ops = &clk_branch2_ops,
--		},
-+	[TCSR_PCIE_1_CLKREF_EN] = &(const struct qcom_clk_ref_desc) {
-+		.name = "tcsr_pcie_1_clkref_en",
-+		.offset = 0x48,
-+		.regulator_names = glymur_tcsr_tx0_rx5_regulators,
-+		.num_regulators = ARRAY_SIZE(glymur_tcsr_tx0_rx5_regulators),
- 	},
--};
--
--static struct clk_branch tcsr_usb2_3_clkref_en = {
--	.halt_reg = 0x74,
--	.halt_check = BRANCH_HALT_DELAY,
--	.clkr = {
--		.enable_reg = 0x74,
--		.enable_mask = BIT(0),
--		.hw.init = &(const struct clk_init_data) {
--			.name = "tcsr_usb2_3_clkref_en",
--			.parent_data = &(const struct clk_parent_data){
--				.index = DT_BI_TCXO_PAD,
--			},
--			.num_parents = 1,
--			.ops = &clk_branch2_ops,
--		},
-+	[TCSR_PCIE_2_CLKREF_EN] = &(const struct qcom_clk_ref_desc) {
-+		.name = "tcsr_pcie_2_clkref_en",
-+		.offset = 0x4c,
-+		.regulator_names = glymur_tcsr_tx1_rpt012_rx2_regulators,
-+		.num_regulators = ARRAY_SIZE(glymur_tcsr_tx1_rpt012_rx2_regulators),
- 	},
--};
--
--static struct clk_branch tcsr_usb2_4_clkref_en = {
--	.halt_reg = 0x88,
--	.halt_check = BRANCH_HALT_DELAY,
--	.clkr = {
--		.enable_reg = 0x88,
--		.enable_mask = BIT(0),
--		.hw.init = &(const struct clk_init_data) {
--			.name = "tcsr_usb2_4_clkref_en",
--			.parent_data = &(const struct clk_parent_data){
--				.index = DT_BI_TCXO_PAD,
--			},
--			.num_parents = 1,
--			.ops = &clk_branch2_ops,
--		},
-+	[TCSR_PCIE_3_CLKREF_EN] = &(const struct qcom_clk_ref_desc) {
-+		.name = "tcsr_pcie_3_clkref_en",
-+		.offset = 0x54,
-+		.regulator_names = glymur_tcsr_tx1_rpt01_rx1_regulators,
-+		.num_regulators = ARRAY_SIZE(glymur_tcsr_tx1_rpt01_rx1_regulators),
- 	},
--};
--
--static struct clk_branch tcsr_usb3_0_clkref_en = {
--	.halt_reg = 0x64,
--	.halt_check = BRANCH_HALT_DELAY,
--	.clkr = {
--		.enable_reg = 0x64,
--		.enable_mask = BIT(0),
--		.hw.init = &(const struct clk_init_data) {
--			.name = "tcsr_usb3_0_clkref_en",
--			.parent_data = &(const struct clk_parent_data){
--				.index = DT_BI_TCXO_PAD,
--			},
--			.num_parents = 1,
--			.ops = &clk_branch2_ops,
--		},
-+	[TCSR_PCIE_4_CLKREF_EN] = &(const struct qcom_clk_ref_desc) {
-+		.name = "tcsr_pcie_4_clkref_en",
-+		.offset = 0x58,
-+		.regulator_names = glymur_tcsr_tx1_rpt012_rx2_regulators,
-+		.num_regulators = ARRAY_SIZE(glymur_tcsr_tx1_rpt012_rx2_regulators),
- 	},
--};
--
--static struct clk_branch tcsr_usb3_1_clkref_en = {
--	.halt_reg = 0x68,
--	.halt_check = BRANCH_HALT_DELAY,
--	.clkr = {
--		.enable_reg = 0x68,
--		.enable_mask = BIT(0),
--		.hw.init = &(const struct clk_init_data) {
--			.name = "tcsr_usb3_1_clkref_en",
--			.parent_data = &(const struct clk_parent_data){
--				.index = DT_BI_TCXO_PAD,
--			},
--			.num_parents = 1,
--			.ops = &clk_branch2_ops,
--		},
-+	[TCSR_USB2_1_CLKREF_EN] = &(const struct qcom_clk_ref_desc) {
-+		.name = "tcsr_usb2_1_clkref_en",
-+		.offset = 0x6c,
-+		.regulator_names = glymur_tcsr_tx1_rpt34_rx4_regulators,
-+		.num_regulators = ARRAY_SIZE(glymur_tcsr_tx1_rpt34_rx4_regulators),
- 	},
--};
--
--static struct clk_branch tcsr_usb4_1_clkref_en = {
--	.halt_reg = 0x44,
--	.halt_check = BRANCH_HALT_DELAY,
--	.clkr = {
--		.enable_reg = 0x44,
--		.enable_mask = BIT(0),
--		.hw.init = &(const struct clk_init_data) {
--			.name = "tcsr_usb4_1_clkref_en",
--			.parent_data = &(const struct clk_parent_data){
--				.index = DT_BI_TCXO_PAD,
--			},
--			.num_parents = 1,
--			.ops = &clk_branch2_ops,
--		},
-+	[TCSR_USB2_2_CLKREF_EN] = &(const struct qcom_clk_ref_desc) {
-+		.name = "tcsr_usb2_2_clkref_en",
-+		.offset = 0x70,
-+		.regulator_names = glymur_tcsr_tx1_rpt01_rx1_regulators,
-+		.num_regulators = ARRAY_SIZE(glymur_tcsr_tx1_rpt01_rx1_regulators),
- 	},
--};
--
--static struct clk_branch tcsr_usb4_2_clkref_en = {
--	.halt_reg = 0x5c,
--	.halt_check = BRANCH_HALT_DELAY,
--	.clkr = {
--		.enable_reg = 0x5c,
--		.enable_mask = BIT(0),
--		.hw.init = &(const struct clk_init_data) {
--			.name = "tcsr_usb4_2_clkref_en",
--			.parent_data = &(const struct clk_parent_data){
--				.index = DT_BI_TCXO_PAD,
--			},
--			.num_parents = 1,
--			.ops = &clk_branch2_ops,
--		},
-+	[TCSR_USB2_3_CLKREF_EN] = &(const struct qcom_clk_ref_desc) {
-+		.name = "tcsr_usb2_3_clkref_en",
-+		.offset = 0x74,
-+		.regulator_names = glymur_tcsr_tx1_rpt34_rx4_regulators,
-+		.num_regulators = ARRAY_SIZE(glymur_tcsr_tx1_rpt34_rx4_regulators),
-+	},
-+	[TCSR_USB2_4_CLKREF_EN] = &(const struct qcom_clk_ref_desc) {
-+		.name = "tcsr_usb2_4_clkref_en",
-+		.offset = 0x88,
-+		.regulator_names = glymur_tcsr_tx1_rpt34_rx4_regulators,
-+		.num_regulators = ARRAY_SIZE(glymur_tcsr_tx1_rpt34_rx4_regulators),
-+	},
-+	[TCSR_USB3_0_CLKREF_EN] = &(const struct qcom_clk_ref_desc) {
-+		.name = "tcsr_usb3_0_clkref_en",
-+		.offset = 0x64,
-+		.regulator_names = glymur_tcsr_tx1_rpt34_rx4_regulators,
-+		.num_regulators = ARRAY_SIZE(glymur_tcsr_tx1_rpt34_rx4_regulators),
-+	},
-+	[TCSR_USB3_1_CLKREF_EN] = &(const struct qcom_clk_ref_desc) {
-+		.name = "tcsr_usb3_1_clkref_en",
-+		.offset = 0x68,
-+		.regulator_names = glymur_tcsr_tx1_rpt34_rx4_regulators,
-+		.num_regulators = ARRAY_SIZE(glymur_tcsr_tx1_rpt34_rx4_regulators),
-+	},
-+	[TCSR_USB4_1_CLKREF_EN] = &(const struct qcom_clk_ref_desc) {
-+		.name = "tcsr_usb4_1_clkref_en",
-+		.offset = 0x44,
-+		.regulator_names = glymur_tcsr_tx0_rx5_regulators,
-+		.num_regulators = ARRAY_SIZE(glymur_tcsr_tx0_rx5_regulators),
-+	},
-+	[TCSR_USB4_2_CLKREF_EN] = &(const struct qcom_clk_ref_desc) {
-+		.name = "tcsr_usb4_2_clkref_en",
-+		.offset = 0x5c,
-+		.regulator_names = glymur_tcsr_tx1_rpt01_rx1_regulators,
-+		.num_regulators = ARRAY_SIZE(glymur_tcsr_tx1_rpt01_rx1_regulators),
- 	},
--};
--
--static struct clk_regmap *tcsr_cc_glymur_clocks[] = {
--	[TCSR_EDP_CLKREF_EN] = &tcsr_edp_clkref_en.clkr,
--	[TCSR_PCIE_1_CLKREF_EN] = &tcsr_pcie_1_clkref_en.clkr,
--	[TCSR_PCIE_2_CLKREF_EN] = &tcsr_pcie_2_clkref_en.clkr,
--	[TCSR_PCIE_3_CLKREF_EN] = &tcsr_pcie_3_clkref_en.clkr,
--	[TCSR_PCIE_4_CLKREF_EN] = &tcsr_pcie_4_clkref_en.clkr,
--	[TCSR_USB2_1_CLKREF_EN] = &tcsr_usb2_1_clkref_en.clkr,
--	[TCSR_USB2_2_CLKREF_EN] = &tcsr_usb2_2_clkref_en.clkr,
--	[TCSR_USB2_3_CLKREF_EN] = &tcsr_usb2_3_clkref_en.clkr,
--	[TCSR_USB2_4_CLKREF_EN] = &tcsr_usb2_4_clkref_en.clkr,
--	[TCSR_USB3_0_CLKREF_EN] = &tcsr_usb3_0_clkref_en.clkr,
--	[TCSR_USB3_1_CLKREF_EN] = &tcsr_usb3_1_clkref_en.clkr,
--	[TCSR_USB4_1_CLKREF_EN] = &tcsr_usb4_1_clkref_en.clkr,
--	[TCSR_USB4_2_CLKREF_EN] = &tcsr_usb4_2_clkref_en.clkr,
--};
--
--static const struct regmap_config tcsr_cc_glymur_regmap_config = {
--	.reg_bits = 32,
--	.reg_stride = 4,
--	.val_bits = 32,
--	.max_register = 0x94,
--	.fast_io = true,
--};
--
--static const struct qcom_cc_desc tcsr_cc_glymur_desc = {
--	.config = &tcsr_cc_glymur_regmap_config,
--	.clks = tcsr_cc_glymur_clocks,
--	.num_clks = ARRAY_SIZE(tcsr_cc_glymur_clocks),
- };
- 
- static const struct of_device_id tcsr_cc_glymur_match_table[] = {
-@@ -284,7 +153,9 @@ MODULE_DEVICE_TABLE(of, tcsr_cc_glymur_match_table);
- 
- static int tcsr_cc_glymur_probe(struct platform_device *pdev)
- {
--	return qcom_cc_probe(pdev, &tcsr_cc_glymur_desc);
-+	return qcom_clk_ref_probe(pdev, &tcsr_cc_glymur_regmap_config,
-+				  tcsr_cc_glymur_clk_descs,
-+				  ARRAY_SIZE(tcsr_cc_glymur_clk_descs));
- }
- 
- static struct platform_driver tcsr_cc_glymur_driver = {
++
++&tcsr {
++	vdda-qrefrpt0-0p9-supply = <&vreg_l2f_e1_0p83>;
++	vdda-qrefrpt1-0p9-supply = <&vreg_l2f_e1_0p83>;
++	vdda-qrefrpt2-0p9-supply = <&vreg_l2f_e1_0p83>;
++	vdda-qrefrpt3-0p9-supply = <&vreg_l2h_e0_0p72>;
++	vdda-qrefrpt4-0p9-supply = <&vreg_l2h_e0_0p72>;
++	vdda-qrefrx0-0p9-supply = <&vreg_l2f_e1_0p83>;
++	vdda-qrefrx1-0p9-supply = <&vreg_l2f_e1_0p83>;
++	vdda-qrefrx2-0p9-supply = <&vreg_l2f_e1_0p83>;
++	vdda-qrefrx4-0p9-supply = <&vreg_l2h_e0_0p72>;
++	vdda-qrefrx5-0p9-supply = <&vreg_l3f_e0_0p72>;
++	vdda-qreftx0-0p9-supply = <&vreg_l3f_e0_0p72>;
++	vdda-qreftx0-1p2-supply = <&vreg_l4h_e0_1p2>;
++	vdda-qreftx1-0p9-supply = <&vreg_l1f_e1_0p82>;
++	vdda-refgen3-0p9-supply = <&vreg_l2f_e0_0p82>;
++	vdda-refgen3-1p2-supply = <&vreg_l4h_e0_1p2>;
++	vdda-refgen4-0p9-supply = <&vreg_l1f_e1_0p82>;
++	vdda-refgen4-1p2-supply = <&vreg_l4f_e1_1p08>;
++};
 
 -- 
 2.34.1
