@@ -1,173 +1,208 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10B0333A9FF;
-	Wed, 22 Jul 2026 12:23:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A5A7356A12
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 12:24:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784722992; cv=none; b=muHHPE4mcQE/x+3m8mU2ybsC4o6VeMGmOOmUibt1rynN+nh+buz+PfXIffYLx0a4zWrg8sNf8vm4wREEwXqBmOtI9kg6IWX4dzb2d5G9dkCsz4Z3316FVqTQ+fD58ddxycH10P5SCg/BLH8d1sEBsWi/33A6KqjtkeYwmK9FKL4=
+	t=1784723058; cv=none; b=a/2csdNR0Jagynn1ji8ENcq4cWF4qvm1PhWPduFLWawzdV/urY8tdD6nZ/aGZvKa9469EiFAk/HrLMP8a215neJg1qCAd8dEUzgEVFagRS3uqt5Td92qSsQmHFDpTrYtDLInjx4xg2kSNTBGffxbYG8sug2PSdGdFr5iYofSw9I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784722992; c=relaxed/simple;
-	bh=/isOhpp5WmvCwxYkq1/y1tPUMoJBD2pPItulA2x6lTg=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=MQit5XbEBDroR8v2zwJDHXG1LifRLzBuIBhupDxFBFnPt211Q70HbZlqkYqYHcbUnDIsFCxKo2lOlpNeslBW5euddMiLVDZ3zsGRc0ZUx512Cq/4076Q9E6XbcVoPBK6o6C3odRuA9Gc7deEMeP60nfU/w6p3sedW5/SS2+H8EU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=U8Y9HrY7; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784723058; c=relaxed/simple;
+	bh=pgXseHL4P/N9X8ED+Sbc539UZ8xz5ai3F8u24033syI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=e3etNCo4t3JuBqi/ZmhzhR8WLF3YQYoRyN0+q23xo5sTHbT0WREyc91ihwWZVywVeeLgASrKR5k1n/W0ag3sYmFWMT/DIPjEmSPqSHOjYu3N0iYYpggof7sHNI3wSXG3R5ytH2tXkJYMPDSc1FL0eokrJc6GExCaG5whUiaK8o8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=CVEY9OI6; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DSFbEH49; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="U8Y9HrY7"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B357B1F000E9;
-	Wed, 22 Jul 2026 12:22:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784722983;
-	bh=EMbZsERoJKBM6voGPp6fXnvJFBr+APUW50AqH0s+A4k=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=U8Y9HrY71uz3pEV5Nuq2yk8ortlGJVX0l72Ii0UtB9p7jNTxNFB6/sW4NXNIZe43h
-	 9H+DPi0u4qhgwEL9Dx+B0Av4+tsSvsC7hE5p74o07zC2u32r92SnIRv4BZ86aX0XTG
-	 j6Ib0DqU7asFsSnt5rtfHxCt4T6uAsgcaLLQnTYRkn+ouBy48xcPQgjdzaRGD+4d9c
-	 YgS3WYi/LrzQFmV4XFWqNN1Z2+Hp0ZpAtinEkhr+d95fMqTo0nTY1MohHweqv2ArPn
-	 NsIZGbAmCQhSzp8g+dbsnEWxsFesV3PRn96tagH7X8aj7+MyRWk1pd8tCv17Ycoj39
-	 5KiwnaX8TDlFA==
-Date: Wed, 22 Jul 2026 14:22:53 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Kishore Batta <kishore.batta@oss.qualcomm.com>
-Cc: Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Jeff Hugo <jeff.hugo@oss.qualcomm.com>, 
-	Carl Vanderlip <carl.vanderlip@oss.qualcomm.com>, Oded Gabbay <ogabbay@kernel.org>, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	mhi@lists.linux.dev
-Subject: Re: [PATCH v6 7/7] bus: mhi: Expose DDR training data via controller
- sysfs
-Message-ID: <rwjiriaurj2ajowddjjerrr5wsu4ios6lpm6adglvlzsrxf4x3@tw2wbobghgca>
-References: <20260701-sahara_protocol_new_v2-v6-0-3a78362c4741@oss.qualcomm.com>
- <20260701-sahara_protocol_new_v2-v6-7-3a78362c4741@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="CVEY9OI6";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DSFbEH49"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66M8xH1Y4018293
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 12:24:11 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	1RbH7wZTH7xnFksDCiSXKzskPFK0RJ+i+meU0vJp3WY=; b=CVEY9OI6MDW2LR9N
+	qJckEixGB8BL9SIhmTPK7aY0E6n6ZqA94hTdogvQ8b82+QZDRuRLFs9O8lLIHzCC
+	AAHU+FMvea6OXPU/0VOVUtLxmMhLtTirWGT/Qj+z6re04N4dm8Wqfs8/y0i30ao8
+	uDnni7GOxND1UcojmiJC4rtQbnt6I4/pUIBFplGBG8tgpqRYWpoOoQBZINbUcrp4
+	so0u8O3yzBO2XlQPC3KYu+c7pH6cGXEkNutkqTnVrqra2+7X53WYU99bKNM2tcNA
+	WQlxVsWlCyr1/eV9Bq0r8vm/IqV69artCdj7/5jtLM4xQqiKoARnVbUHf++0wdWf
+	a1Vy5A==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjd6fv0qw-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 12:24:11 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2ccd1958e8fso127397045ad.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 05:24:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784723051; x=1785327851; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1RbH7wZTH7xnFksDCiSXKzskPFK0RJ+i+meU0vJp3WY=;
+        b=DSFbEH49IvGQ3gBB+XpLgXrb0kTHu1RGMqtDl7M1Xt6OWUir2dYQZZUawSH5TNj3gI
+         RpZ6wCz/bF51E59o4ecbsDjW0yD8fiRwidL1RdWbIWrPB8Wf6TSFFVigGzb6sZH4Uqfz
+         HuE5D71QTNAzgYLjDR1lQ40FUGpTx9M2uViYLOAAEd08wtNuQRF50pODHJQKEzDPlbPM
+         MN8hX5WFKC6mNTYbf+51lrZD2Y+Rr20bz4yONSPx0BwwyQODJGZRbRpVfiT1XBf5L1Ro
+         k/oBgMPe94LibWxeES3RuhgvsJHNtU9osyQTCVLazYaSd4zsB4GchzMMd/ar9smKv2JU
+         G6hQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784723051; x=1785327851;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=1RbH7wZTH7xnFksDCiSXKzskPFK0RJ+i+meU0vJp3WY=;
+        b=e6Qnid6tlmvh3XzF83skiE8SGifsEWRny65FRt7gTaQruEN+qypc/XDMGkWGD4YjsJ
+         X+poa/vYuh6SEA6we7NuMK32Ryhi9vKRT8hDLuEAbcvyC2dHFznuqPssNQRCRs5SEsyh
+         wBOOENF/U+RloFLdhmDIXtn9mTQMDlpe1OtfKkmvH2ifw27/O50ypg57TTZ2tw+S4tbv
+         btzpO2Hh4Jjb/HHvQxDNwEwG4CFM+yAmTqNxsJy3TErG/2Nlrv3U28tNYTUwNJcYSRBi
+         5+QQDSKQkY+ORlgBEKntn/v16i5jBQpZryvXEihVxyGxX/vzr/2Y5ZZF13lSY75/fmu5
+         KBIQ==
+X-Forwarded-Encrypted: i=1; AHgh+RpIjCLcYFLI1WXjfewU7ceXBw+piKaOwxKskhf3/MRzczv+sYW/Hhdh0V1zB00SH7a1mqZuWza8DERtv31I@vger.kernel.org
+X-Gm-Message-State: AOJu0YxQRkODiWoMK5y0pF+YZGpnSodcjHeY6gvm6cwU0e9oz8kTP7JX
+	kO9M5spwSy4AIXKy04wSo/wDYmjf07KDgZlohkGPPlhi2uBy8XL5muxopt1qdHskFJF6CmJm7SK
+	Xy72te5Rj06917qIItcsM8lgA3nMpjAo28jcwb29UbYVTHH1FMn1YPlT6uG+o74mUq28T0YjGik
+	L2
+X-Gm-Gg: AR+sD13kqHPZVV7lMA96ygrzYbB5++v0s58f6wPVLrTcJqyOWV2wJPAyzYyrKcU6f2L
+	toAzSNYd/q00Q0RZXUiRhJFkA2Ixf01aGFxkUO5dkq1BQzuad6rF+3p0Jod69vZ38eq/5a1sss+
+	edsEpS6dnPm4bo0EKB3x5uA6RArg1zNCcSs72XjaP/aql9gJSBbW2Z1yzaYAMJ0TGG+Jyqq/8ll
+	460WvrJVy0OxjQe17fo7b0GiEmW9750yUDG8Zsf2Oa93yaaI4PSk6EXxvpA1MeC4VAnGHmK3rHk
+	zXIlKvlwvASdw1kdgN2RaXDF8HTlU6o/5Cl3m1r7Am3rFRGN5Wu5QpVpGUCu2BLEbdX22RvNURg
+	6yOmlVCmoEGJK+RKMsENOtgyRCrF026c0
+X-Received: by 2002:a17:902:d48a:b0:2ca:b8fd:f31 with SMTP id d9443c01a7336-2cf34889935mr252841035ad.15.1784723050758;
+        Wed, 22 Jul 2026 05:24:10 -0700 (PDT)
+X-Received: by 2002:a17:902:d48a:b0:2ca:b8fd:f31 with SMTP id d9443c01a7336-2cf34889935mr252840675ad.15.1784723050307;
+        Wed, 22 Jul 2026 05:24:10 -0700 (PDT)
+Received: from [10.206.101.140] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3147e1b6a45sm8794496eec.28.2026.07.22.05.24.05
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 22 Jul 2026 05:24:08 -0700 (PDT)
+Message-ID: <3c48c1fc-94a2-7180-0922-aff5a1a5ddb4@oss.qualcomm.com>
+Date: Wed, 22 Jul 2026 17:54:03 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260701-sahara_protocol_new_v2-v6-7-3a78362c4741@oss.qualcomm.com>
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH v2 0/3] media: iris: add LTR and hierarchical coding
+ support for ar50lt
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Gourav Kumar <gouravk@qti.qualcomm.com>
+References: <20260721-shikra_ltr_support-v2-0-702842f1f3c2@oss.qualcomm.com>
+ <moj26vrjujn6ci74yrthdjyfdabg4tn67n7hczkeqvjhknm4ai@ilxz3c4jvcfe>
+Content-Language: en-US
+From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+In-Reply-To: <moj26vrjujn6ci74yrthdjyfdabg4tn67n7hczkeqvjhknm4ai@ilxz3c4jvcfe>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: epjhJWbUI4xYd6eGB3hvH5z-2Qz8qKZB
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIyMDEyMCBTYWx0ZWRfXwH5u0G+O3UPd
+ 83j9h81d7NZCr6kNw+FCnC2gV8tkFziuxXoSPdm6glnK7r+TMcPuqVdK0oBHB8e6kDG/RIbuuZw
+ cN/gUhhL7/6F4ry59ZFtVZFFZiQnHk/cX28dPLDKkitPqksdHyoInAQ0KB+ANCqcF8X5GEq5vYO
+ omncrwcrQpAMv9mLnh84CyyZYxr6xrwlRJQ6E5RSP/nQPsKjWblAhIP2eU+CHOjLohBDeLClEUd
+ tiX29gzB9kzJogFd0hMe3oe91eF5BxlknI0YaCrn1srN6UVvLNshfKaV2VkmZ8ybuga1YpA0liT
+ KKK1ljZY8A/mbUsoxkXpznBdGidNnKDYNvwKCcl5prXt9FsMVqKyaToZElhJCuBd4UJm5GtxK38
+ TWRajVOwbG9HQrBgrxJ9EjgNWF6f0kQcOudcwj9EtNi6nRcWIoq/H7ZfRMfN9fiQZy+ul99rTYm
+ IViMF41kd2taMwLuTcw==
+X-Authority-Analysis: v=2.4 cv=e/o2j6p/ c=1 sm=1 tr=0 ts=6a60b66b cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=VgYAnUeYBmn4XOIh2sEA:9
+ a=QEXdDO2ut3YA:10 a=uG9DUKGECoFWVXl0Dc02:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-ORIG-GUID: epjhJWbUI4xYd6eGB3hvH5z-2Qz8qKZB
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIyMDEyMCBTYWx0ZWRfX7KZu58bqA8Cq
+ OtmRNveCj3MlUsJRmwDdI/Oh295svCxOKQg2g5TO4umrK7O+pjHE5ASSdzLMi8pgwe6VXAyrDdT
+ 6diMlzx14Vf6yN47GjtApXpZgfu9SuE=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-22_03,2026-07-21_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 suspectscore=0 spamscore=0 bulkscore=0 priorityscore=1501
+ impostorscore=0 lowpriorityscore=0 phishscore=0 clxscore=1015 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607220120
 
-On Wed, Jul 01, 2026 at 04:07:41PM +0530, Kishore Batta wrote:
-> DDR training data captured during Sahara command mode needs to be
-> accessible to userspace so it can be persisted and reused on subsequent
-> boots. Currently, the training data is stored internally in the driver
-> but has no external visibility once the Sahara channel is torn down.
-> 
-> Expose the captured DDR training data via a read-only binary sysfs
-> attribute on the MHI controller device:
-> 
-> /sys/bus/mhi/devices/<mhi_cntrl>/ddr_training_data
-> 
-> The sysfs read callback serves data directly from controller scoped storage
-> and protects access with the controller training data lock. The attribute
-> lifetime is tied to the controller device via devres, allowing the data to
-> remain readable after Sahara channel teardown and ensuring automatic
-> cleanup when controller device is removed.
-> 
-> Userspace flow:
-> 1. For each controller device, userspace reads the ddr_training_data sysfs
->    attribute.
-> 2. If the read returns non-zero data, userspace persists it using a
->    serial specific filename (for example, mdmddr_0x<serial_no>.mbn).
-> 3. On subsequent boots, the Sahara driver attempts to load this serial
->    specific DDR training image before falling back to the default
->    training image, restoring DDR calibration data and avoiding retraining.
-> 
-> Add ABI documentation for the DDR training data sysfs attribute exposed by
-> Sahara MHI driver.
-> 
-> Signed-off-by: Kishore Batta <kishore.batta@oss.qualcomm.com>
-> ---
->  .../ABI/testing/sysfs-bus-mhi-ddr_training_data    | 19 +++++++
->  drivers/bus/mhi/host/clients/sahara/sahara.c       | 62 ++++++++++++++++++++++
->  2 files changed, 81 insertions(+)
-> 
-> diff --git a/Documentation/ABI/testing/sysfs-bus-mhi-ddr_training_data b/Documentation/ABI/testing/sysfs-bus-mhi-ddr_training_data
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..810b487b5a5fdba133d81255f9879844e3938a10
-> --- /dev/null
-> +++ b/Documentation/ABI/testing/sysfs-bus-mhi-ddr_training_data
-> @@ -0,0 +1,19 @@
-> +What:                   /sys/bus/mhi/devices/<mhi-cntrl>/ddr_training_data
-> +
-> +Date:                   March 2026
-> +
-> +Contact:                Kishore Batta <kishore.batta@oss.qualcomm.com>
-> +
-> +Description:            Contains the DDR training data for the Qualcomm device
-> +                        connected. MHI driver populates different controller
-> +                        nodes for each device. The DDR training data is exposed
-> +                        to userspace to read and save the training data file to
-> +                        the filesystem. In the subsequent boot up of the device,
-> +                        the training data is restored from host to device
-> +                        optimizing the boot up time of the device.
-> +
-> +Usage:                  Example for reading DDR training data:
-> +                        cat /sys/bus/mhi/devices/mhi0/ddr_training_data
-> +
-> +Permissions:            The file permissions are set to 0444 allowing read
-> +                        access.
-> diff --git a/drivers/bus/mhi/host/clients/sahara/sahara.c b/drivers/bus/mhi/host/clients/sahara/sahara.c
-> index 07bc743aa061dd2fa85638067d494562152474e3..72ac751c302a98448b5756c9feb438647bd0ce4b 100644
-> --- a/drivers/bus/mhi/host/clients/sahara/sahara.c
-> +++ b/drivers/bus/mhi/host/clients/sahara/sahara.c
-> @@ -273,6 +273,66 @@ static struct sahara_cntrl_training_data *sahara_cntrl_training_get(struct devic
->  	return ct;
->  }
->  
-> +static ssize_t ddr_training_data_read(struct file *filp, struct kobject *kobj,
-> +				      const struct bin_attribute *attr, char *buf,
-> +				      loff_t offset, size_t count)
-> +{
-> +	struct device *dev = kobj_to_dev(kobj);
-> +	struct sahara_cntrl_training_data *ct;
-> +	size_t available;
-> +
-> +	ct = sahara_cntrl_training_get(dev);
-> +	if (!ct)
-> +		return -ENODEV;
-> +
-> +	mutex_lock(&ct->lock);
-> +
-> +	/* No data yet or offset past end */
-> +	if (!ct->data || offset >= ct->size) {
-> +		mutex_unlock(&ct->lock);
-> +		return 0;
-> +	}
-> +
-> +	available = ct->size - offset;
-> +	count = min(count, available);
-> +	memcpy(buf, (u8 *)ct->data + offset, count);
-> +
-> +	mutex_unlock(&ct->lock);
-> +
-> +	return count;
-> +}
-> +static BIN_ATTR_RO(ddr_training_data, 0);
-> +
-> +static void sahara_sysfs_devres_release(struct device *dev, void *res)
-> +{
-> +	device_remove_bin_file(dev, &bin_attr_ddr_training_data);
-> +}
-> +
-> +static void sahara_sysfs_create(struct mhi_device *mhi_dev)
-> +{
-> +	struct device *dev = &mhi_dev->mhi_cntrl->mhi_dev->dev;
-> +	void *cookie;
-> +	int ret;
-> +
-> +	if (devres_find(dev, sahara_sysfs_devres_release, NULL, NULL))
-> +		return;
-> +
 
-I think I asked this question before, but didn't follow up. This attribute
-should be tied to the SAHARA channel, not the controller. There is no reason for
-it to be available when the channel is gone.
+On 7/22/2026 2:45 AM, Dmitry Baryshkov wrote:
+> On Tue, Jul 21, 2026 at 07:06:22AM +0530, Vishnu Reddy wrote:
+>> This series adds support for Long-Term Reference (LTR), hierarchical
+>> coding and request key frame controls for the AR50LT encoder by enabling
+>> the required firmware capabilities in the iris driver.
+>>
+>> Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+>> ---
+>> Changes in v2:
+>> - Added request key frame support
+>> - Link to v1: https://patch.msgid.link/20260710-shikra_ltr_support-v1-0-458b587268ea@oss.qualcomm.com
+> This should be coming as a review feedback rather than a separate
+> series. I'll incorporate those changes into the AR50LT series (together
+> with the similar changes to Gen1 firmware).
 
-- Mani
+That works for me as well.
 
--- 
-மணிவண்ணன் சதாசிவம்
+Regards,
+Vishnu Reddy.
+
+>> To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+>> To: Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
+>> To: Abhinav Kumar <abhinav.kumar@linux.dev>
+>> To: Bryan O'Donoghue <bod@kernel.org>
+>> To: Mauro Carvalho Chehab <mchehab@kernel.org>
+>> Cc: linux-media@vger.kernel.org
+>> Cc: linux-arm-msm@vger.kernel.org
+>> Cc: linux-kernel@vger.kernel.org
+>>
+>> ---
+>> Gourav Kumar (2):
+>>       media: iris: add Long-Term Reference control support for ar50lt encoder
+>>       media: iris: add hierarchical coding support for ar50lt encoder
+>>
+>> Vishnu Reddy (1):
+>>       media: qcom: iris: add request key frame support for ar50lt encoder
+>>
+>>  drivers/media/platform/qcom/iris/iris_hfi_gen2.c | 222 +++++++++++++++++++++++
+>>  1 file changed, 222 insertions(+)
+>> ---
+>> base-commit: 34cf6dafc47441dfb6b356a095b89c3585a93714
+>> change-id: 20260710-shikra_ltr_support-27bd9a496950
+>> prerequisite-message-id: <20260709-iris-ar50lt-v7-0-76af9dd4d1f6@oss.qualcomm.com>
+>> prerequisite-patch-id: 8b5a1be5778fb4c7feb069452ecb60e8b8dfc3f8
+>> prerequisite-patch-id: e669517302297a7b315c9aa4f4189e4928091e0c
+>> prerequisite-patch-id: 922bc325dbd9a499a3a209d2f8dbbce6a4166e60
+>> prerequisite-patch-id: a5a49cda4e21d835558fa84f2f6bd25b8f7e72b4
+>> prerequisite-patch-id: e62e8285bcbddade64c026379f23a8c5ae70fe52
+>> prerequisite-patch-id: cac29b25348e2e791638a0286283109f2546f9a7
+>> prerequisite-patch-id: 4dfaff2f9644d7a168b1b35fe947660b8f464af6
+>> prerequisite-patch-id: a26fa49eefecf2b5ba6cf964be9327eb5ba5929a
+>> prerequisite-patch-id: d97c79463fe1487fa7bc9eebd4cfb4610713f44a
+>> prerequisite-patch-id: 76eafea8230160a3b5e6503c68a5c9c3c2d1497e
+>> prerequisite-patch-id: ea9cd9a8e6561321cd9cf338a76da1382ff47e13
+>> prerequisite-patch-id: 26e9083b709cc8f2f1184edf6b39fb89f365a9f1
+>> prerequisite-patch-id: ce4576bd3d20880939a97a1cda9bb8678808ea65
+>> prerequisite-patch-id: 8c94bec467b385c373bd98eb9ee5a5805fc4e6a6
+>> prerequisite-patch-id: 6e258cd475b77927d6476704cbf91bf48a63aa0d
+>> prerequisite-patch-id: 54c8855d0721ba8667d095e6ad6556c2021f89e9
+>> prerequisite-patch-id: f5479d2ca6b850c0c750944a8e0b05a7df2cc5a8
+>> prerequisite-patch-id: 96dfec1c2df69f748c1a4bd741628e946cb7bec1
+>> prerequisite-message-id: <a2c02dce-b097-4f52-80d4-d63006ebd8c5@kernel.org>
+>> prerequisite-patch-id: aae7aad665adb93ab0106c28420e34587ee82aba
+>> prerequisite-patch-id: a2b7908b27a6308f9919c986f8bde5b902e5d6da
+>>
+>> Best regards,
+>> --  
+>> Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+>>
