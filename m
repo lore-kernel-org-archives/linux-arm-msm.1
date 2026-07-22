@@ -1,60 +1,125 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C070481679;
-	Wed, 22 Jul 2026 09:58:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98F4F4C041D
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 10:01:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784714310; cv=none; b=K8yP/8SdQk1boagOLF9myWwIT4z4fFp5PYxB6M7klYPf9JOWCUQhbFf/U6u3siYibuODGy+AgD05WlE9yIcyU95IDkbcdMNJ90icQ4saItiUH0ruhw1rB+1NysAJIJ1blbO2YD3LkYBxfSWkNKCKj9rlrO3Asa/4WvwpTtl/4vE=
+	t=1784714502; cv=none; b=Y3Exdf4q3Qy/MuU/4QHCi/nX24kamMjp7eN0Q7x+HBb4YBgDRvmvBvqEpvDW+cNvywJGyFA4At/2zjMRVtZNqnSA1cIqDRi33N7fweuB2UmognF8rZtJpSXdJfwfusiDgHdINW6C7PWxH66ZD4eB8FIq6bsiKirqknGRUFQDS5k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784714310; c=relaxed/simple;
-	bh=atjPk3Ny3mP0G/5KMG932skgjRejrp8lVur/8nuJKkQ=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=cjNhCTgs0wWtdbNzEDam7j+4o4oHDFvt4HKhxNl74yCnhRrB7g2r3vjmjroeeEJdxW3PTyn4a/TxTDfHzaUxkslr+9ZoaJfPxnCKaojKuFirs3GEU7SQGKEPQ5m7ylCnSdi9ZIB4tejz2y3GLqjJJfVWyRxc1HDtGrTWXILPsyU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 60F9A1F00A3A;
-	Wed, 22 Jul 2026 09:58:25 +0000 (UTC)
-From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-To: Manivannan Sadhasivam <mani@kernel.org>, Yuho Choi <dbgh9129@gmail.com>
-Cc: =?utf-8?q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>, 
- Adam Xue <zxue@semtech.com>, 
- Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, 
- Kees Cook <kees@kernel.org>, mhi@lists.linux.dev, 
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-In-Reply-To: <20260707185100.424891-1-dbgh9129@gmail.com>
-References: <20260707185100.424891-1-dbgh9129@gmail.com>
-Subject: Re: [PATCH v1] bus: mhi: host: Fix controller cleanup on EDL sysfs
- failure
-Message-Id: <178471430574.139980.6107699223693982045.b4-ty@b4>
-Date: Wed, 22 Jul 2026 11:58:25 +0200
+	s=arc-20240116; t=1784714502; c=relaxed/simple;
+	bh=o0+tRGXRE9c/ofvDyjxsf0aS5Jk19HS0ChCpoqh6TR4=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=kyCes17+De8UMe44PSpwuVdGNlHda1j8YlJX/SJEBisF5XvjRPzksapR5WeDqX+T/ENp992aY+VhqlrvJNjCufpD3cOr98GIpiLDJDl51l7AO0xpVX2pZtfGeUTyBL9Xqto+0oqfT14is+OkkrLXVLuvHTn8nWqg+4vxl/gQ/y0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fmvu7cye; arc=none smtp.client-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fmvu7cye"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 16EF31F0155C
+	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 10:01:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784714495;
+	bh=7egaasjyS8ZJi5/A+1wWirXvHFkWLfG+x6Fwihwtfek=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=fmvu7cyex6PSZOKU92j1PBbDR9fWWe15jgJUpmG2UHufwrvwv+d/U+oGd4XWvgW/C
+	 pbYo6eEbBoCaEAi0TC4VtOfc8Z1vzIHsHGbgJJtV+jUAi1ul3P65JlpNBWzwi4nLGs
+	 WgreYoE0pE2QtPyJB/d12TMtcCgm+WqlGY+JvbcAkJC4KUNGFOHkUBKveMCVPkkTPH
+	 lD5jLZcegvZT3ZPlM/SC6IYJWKBohzS57msKpnNRuT2/ou+V7jp0vUrqZPKzU0Hrh4
+	 Hh5tFYIb7LG9teIbSvAsT/oLu4+C4YnkqrSGHoaMUJXZ/CoVfqbFyv8nj7uWxfN45I
+	 5SOlhYBrSIQHg==
+Received: by mail-lf1-f41.google.com with SMTP id 2adb3069b0e04-5b29599b81cso4291192e87.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 03:01:34 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+Rr8aTQDw7BMoOc1+4tfFslIGYXOQWu90Evt2uHVBquyyZCA1D9zPgkRXsCDCgZzbsUUMsMEMK8ZUGRdYPjS@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzz/FuULj6O3PWUeDBqrdhJVKllrO7SVxNzO5GZQoyNQQwoNh4s
+	SQ7T4aL9KMjxsZFt33y3hUY9QSTa//RewCHErzWZxKh76OdkB1lqx1t498Ut0HiQwKvIwAYXbGM
+	g3in4AierNviiBhpDkXtEZC92PbXdlfLkg3rPCesLbQ==
+X-Received: by 2002:a05:6512:4384:b0:5ae:cee7:52bf with SMTP id
+ 2adb3069b0e04-5b28f8615d2mr3888545e87.9.1784714493736; Wed, 22 Jul 2026
+ 03:01:33 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 22 Jul 2026 03:01:32 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 22 Jul 2026 03:01:32 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <c7f5d4cf-07ee-4716-bb8d-83bcd0b2f8d0@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Mailer: b4 0.15.2
+References: <20260714-arm-psci-system_reset2-vendor-reboots-v23-0-e7453c548c21@oss.qualcomm.com>
+ <20260714-arm-psci-system_reset2-vendor-reboots-v23-8-e7453c548c21@oss.qualcomm.com>
+ <CAMRc=McxoC6711rmXmPb9t21bBsTeBMJ3ieZ1XhyTqMLaMS-4Q@mail.gmail.com> <c7f5d4cf-07ee-4716-bb8d-83bcd0b2f8d0@oss.qualcomm.com>
+Date: Wed, 22 Jul 2026 03:01:32 -0700
+X-Gmail-Original-Message-ID: <CAMRc=Mdo=vEOUD0=U0dWu3ry7_ZqLaFz4Mwk_qv2viYQYNAq=g@mail.gmail.com>
+X-Gm-Features: AUfX_mz_52H5aVX8o5s_GYgqmkBXwWl26GDtvaXPn6ge5d65lgGY7if6PzG_jAY
+Message-ID: <CAMRc=Mdo=vEOUD0=U0dWu3ry7_ZqLaFz4Mwk_qv2viYQYNAq=g@mail.gmail.com>
+Subject: Re: [PATCH v23 08/13] mfd: core: Add firmware-node support to MFD cells
+To: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+Cc: linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	devicetree@vger.kernel.org, Florian Fainelli <florian.fainelli@broadcom.com>, 
+	Krzysztof Kozlowski <krzk@kernel.org>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, Andre Draszik <andre.draszik@linaro.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>, mfd@lists.linux.dev, 
+	Srinivas Kandagatla <srini@kernel.org>, 
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, Sebastian Reichel <sre@kernel.org>, 
+	Mark Rutland <mark.rutland@arm.com>, Lorenzo Pieralisi <lpieralisi@kernel.org>, 
+	"Rafael J. Wysocki" <rafael@kernel.org>, Daniel Lezcano <daniel.lezcano@kernel.org>, 
+	Christian Loehle <christian.loehle@arm.com>, Ulf Hansson <ulfh@kernel.org>, Lee Jones <lee@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Arnd Bergmann <arnd@arndb.de>, Souvik Chakravarty <Souvik.Chakravarty@arm.com>, 
+	Andy Yan <andy.yan@rock-chips.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
+	John Stultz <john.stultz@linaro.org>, Moritz Fischer <moritz.fischer@ettus.com>, 
+	Sudeep Holla <sudeep.holla@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 
+On Tue, 21 Jul 2026 14:48:46 +0200, Shivendra Pratap
+<shivendra.pratap@oss.qualcomm.com> said:
+>>
+>>> +		struct device_node *named_np;
+>>> +
+>>> +		fwnode = device_get_named_child_node(parent, cell->named_fwnode);
+>>> +		if (!fwnode) {
+>>> +			ret = -ENODEV;
+>>> +			goto fail_alias;
+>>> +		}
+>>> +
+>>> +		named_np = to_of_node(fwnode);
+>>> +		if (named_np) {
+>>> +			ret = mfd_claim_of_node_to_dev(pdev, named_np);
+>>> +			fwnode_handle_put(fwnode);
+>>> +			if (ret == -EAGAIN)
+>>> +				ret = -EBUSY;
+>>> +			if (ret)
+>>> +				goto fail_alias;
+>>> +		} else {
+>>> +			ret = mfd_claim_named_fwnode(pdev, fwnode);
+>>> +			if (ret) {
+>>> +				fwnode_handle_put(fwnode);
+>>> +				if (ret == -EAGAIN)
+>>> +					ret = -EBUSY;
+>>> +				goto fail_alias;
+>>> +			}
+>>> +			device_set_node(&pdev->dev, fwnode);
+>>> +			fwnode_handle_put(fwnode);
+>>> +		}
+>>
+>> What is the reason to have this split into OF and fwnode functions? I don't
+>> really see why you would need to do it twice, isn't fwnode sufficient for the
+>> OF node case too?
+>
+> We do a duplicate check here before adding the named_fwnode and split it
+> for two reasons:
+> 1. of_node list pre-exists. We add a new list of fwnode. of_node based
+> duplicate check go wrong, if its checked with the fwnode list.
+> 2. of_node need to go to its respective list as fwnode list, release
+> path, is different for us.
+>
 
-On Tue, 07 Jul 2026 14:51:00 -0400, Yuho Choi wrote:
-> mhi_register_controller() adds the controller device before creating the
-> optional trigger_edl sysfs file. If sysfs_create_file() fails, the error
-> path only drops the device reference and leaves the device registered.
-> 
-> Add a post-device_add() error path that calls device_del() before
-> put_device(), matching the normal unregister path.
-> 
-> [...]
+I see. This could use a unification to fwnodes as well but that's out of scope
+for this series.
 
-Applied, thanks!
-
-[1/1] bus: mhi: host: Fix controller cleanup on EDL sysfs failure
-      commit: df0da14720337107da54ceacd310a21855d24225
-
-Best regards,
--- 
-மணிவண்ணன் சதாசிவம்
-
-
+Bart
