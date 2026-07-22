@@ -1,188 +1,168 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23A5E356767
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 14:11:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12804306764;
+	Wed, 22 Jul 2026 14:18:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784729474; cv=none; b=KG6IRDUWmqCjC6dMUJD1MRaBE+pa8+5wEpCo2YHN6c82QJMMXm58dLohlpxoXtl0VGa3YPt0GK1NKMMHqMP4MGJOvxP/5TSWjz/a/tubY+LKFRdf9CutUcu7KkRYscXxcVbDkDLypmJfFn54k8+4BvmXAoZUlReTjgISld8EfCg=
+	t=1784729885; cv=none; b=NFyq8sDsdxVDm0FtWe05iQLXYHxd5P9LMdPLw+j9zow0JKPUdg516kN7tOzIO+T6+nxIIvKYPDCmICrS1w4HZ6n9VzqhrRwio21ETMtVYnU/CYRNUJdVeobgHA2KrjVjNMlFwMytZBLvQfVjp3mVXznUJRaZ7KFF1CyqdAve6wM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784729474; c=relaxed/simple;
-	bh=muJt8+9v/EPu2HwARc18Gs7zWyvOS4hpDXKpljBuouI=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=uQHEJZs/TPlA9wf0omFJDPInQnC8y8BFs2G7Kwg+ric6rVQT7Zosgex1GsToGq70ymzoQOLklelntfatf0dYkFBuBM4JSRQ7tE74mWWVrLJIv3I5O36LjJl1LNHS0QNIPJKBifQvfalsQwcv3SFAXxcFpboqv/SxTTUCsOlxwYo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PNHbQd3w; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784729885; c=relaxed/simple;
+	bh=np4yayh2BMzDrIbeGsDIccHY4xwm2Ph+deSS9Lu+mrc=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=el71np27iqmyVtSo01el7is+WblCD4XWe8cGnUIbZGeEKpIeI2gsZODQj2/JEkVGPJLStjtrVgZOxHl10OUuatO68BdYKBlmlUzvzhRJcPpPzsJt6nd4GzuJ/rjqfuOXAzfRX7/1m0/qfMu40102hsHooqZZBqOgMZBqkz7eSmQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=a4vdnNdZ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PNHbQd3w"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D45EC1F00ACF
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 14:11:12 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="a4vdnNdZ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 998571F000E9;
+	Wed, 22 Jul 2026 14:17:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784729472;
-	bh=1UFXFpEyhH0o78ophoiUhGPEsgEAqoMWoguEg8fSnYs=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=PNHbQd3wCysQOilyzyf57uvvUvTXdIe3dqHVrTK9ZwQaDmN5Ugr0j6eM+wx5FGTJY
-	 KUgNVDxxILlkUBmxXocTaXGlfGZaaUSWrWashzKR5xlA/DY/fkfKvU/B4VFOJt2ngB
-	 WNUIqP9hZYoNTaRiWgD0KE3fkAoeaVEoUe9XEo6AW0TWccT4zjfQVucok9TWIpo8uK
-	 y/Pxb06+SnbMIJWcGddvCvwvbuCTLuBwVm5+qFFOzWSPnCSW4q62YFzDXj4+Ah9oIt
-	 E7DrYgu6tIix84DdAG++2YZpl0yP+ILS2ooDJcNXGl3vDl4DX44NZyUZitemdxGD7i
-	 64XLOM5g2GcoQ==
-Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-39c9a3acd40so90224771fa.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 07:11:12 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rqg+GgWcUMNhDR1ipcmYiZGGJTqGG0W/MuOJj6vmyBFquNXUsVUxhwYF2ptd6H7jlEa2y/ciRDYY1WUcpTN@vger.kernel.org
-X-Gm-Message-State: AOJu0YwWvFCSFkQ5Ifas+Jo5hgxJ1j7zlBOK6Jyy8Plmg9gVxDZAz61M
-	vvwIWsUo2oZYam5PxG2qfu65KS0C9EF6yhLNESdAWN2W3MS5BF+I0CLMtTgXXmr8+DXDHddMU6R
-	F4HpR4YVfI9thO2puIW3GdRwo7BkKd7wgFve0s1wpPw==
-X-Received: by 2002:a05:651c:1989:b0:39d:560a:fd9 with SMTP id
- 38308e7fff4ca-39eb27bfd05mr51615621fa.18.1784729471362; Wed, 22 Jul 2026
- 07:11:11 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 22 Jul 2026 07:11:10 -0700
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 22 Jul 2026 07:11:10 -0700
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <amC7_M-HjVZ3sQuT@linaro.org>
+	s=k20260515; t=1784729883;
+	bh=nr20QdluTC6Xb2QJCx/L2OqHD3wYjRZzxUHD+ltN0io=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=a4vdnNdZSy07RDuS+C9gat8xlWANgEMGre2Gt8w50+S/RARkD/NxqriSXn9wrozPj
+	 E5W9CBr1d7eepeguATkGjOrPXaqKaMp0+xcdJH6JVLGWRdkxSRqsBQirTItAu9VNRf
+	 xKAJOUg/URAYNGPYd8y4vGKj+ONw/nWOpgBtlfPsR8ltFxfx8IoinmWT2jtQMA7WpP
+	 nozoGRCEMkB8851Fg9u/prJ/JOJKbaLEpz8L+8Zr68k62Ilb0p88pE+y3ZC8cSKbhK
+	 kBpgQZfX/d3Rxy5rU6yBQqCx1AN3uW+o51yyGmm2In6YviRmTxHVmf6qDl7Zlbt9Ib
+	 DwnPnhWrhgAMw==
+Message-ID: <ac18f5bc-62a9-41b0-8980-a4c465a4229a@kernel.org>
+Date: Wed, 22 Jul 2026 16:17:43 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260721-qcom-qce-cmd-descr-v23-0-1be02deffda9@oss.qualcomm.com>
- <20260721-qcom-qce-cmd-descr-v23-6-1be02deffda9@oss.qualcomm.com>
- <20260721134853.2B2401F000E9@smtp.kernel.org> <amCGXUUd4VmuQRGD@linaro.org>
- <CAMRc=MfBNB0pvv1kPPcswE4Y2m7PXBO49bwJg=v0+aY=JmJKWw@mail.gmail.com> <amC7_M-HjVZ3sQuT@linaro.org>
-Date: Wed, 22 Jul 2026 07:11:10 -0700
-X-Gmail-Original-Message-ID: <CAMRc=MdnSyPmbK0skMx686=wSe52nnuWgCNJ0uSoKs_=HyAq-Q@mail.gmail.com>
-X-Gm-Features: AUfX_mzDtm5YjAae_ksl_tQdx3fXsW-UWLgM9ZMbUilUXBQ6QQqNPU4983jvSLM
-Message-ID: <CAMRc=MdnSyPmbK0skMx686=wSe52nnuWgCNJ0uSoKs_=HyAq-Q@mail.gmail.com>
-Subject: Re: [PATCH v23 06/14] dmaengine: qcom: bam_dma: add support for BAM locking
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Thara Gopinath <thara.gopinath@gmail.com>, Herbert Xu <herbert@gondor.apana.org.au>, 
-	"David S. Miller" <davem@davemloft.net>, Udit Tiwari <quic_utiwari@quicinc.com>, 
-	Md Sadre Alam <mdalam@qti.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Manivannan Sadhasivam <mani@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>, 
-	Peter Ujfalusi <peter.ujfalusi@gmail.com>, Michal Simek <michal.simek@amd.com>, 
-	Frank Li <Frank.Li@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Vignesh Raghavendra <vigneshr@ti.com>, dmaengine@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-crypto@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	sashiko-reviews@lists.linux.dev, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
-	Bartosz Golaszewski <brgl@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 03/13] mm: convert __get_unmapped_area() to use
+ vma_flags_t
+Content-Language: en-US
+To: Lorenzo Stoakes <ljs@kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ David Hildenbrand <david@kernel.org>, "Liam R. Howlett"
+ <liam@infradead.org>, Mike Rapoport <rppt@kernel.org>,
+ Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ Benjamin LaHaise <bcrl@kvack.org>, Alexander Viro <viro@zeniv.linux.org.uk>,
+ Christian Brauner <brauner@kernel.org>, Jan Kara <jack@suse.cz>,
+ Hugh Dickins <hughd@google.com>, Baolin Wang
+ <baolin.wang@linux.alibaba.com>, Jann Horn <jannh@google.com>,
+ Pedro Falcato <pfalcato@suse.de>, Muchun Song <muchun.song@linux.dev>,
+ Oscar Salvador <osalvador@suse.de>, Zi Yan <ziy@nvidia.com>,
+ Nico Pache <npache@redhat.com>, Ryan Roberts <ryan.roberts@arm.com>,
+ Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>,
+ Lance Yang <lance.yang@linux.dev>, Usama Arif <usama.arif@linux.dev>,
+ Madhavan Srinivasan <maddy@linux.ibm.com>,
+ Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>,
+ "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Lucas Stach <l.stach@pengutronix.de>,
+ Russell King <linux+etnaviv@armlinux.org.uk>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Inki Dae <inki.dae@samsung.com>, Seung-Woo Kim <sw0312.kim@samsung.com>,
+ Kyungmin Park <kyungmin.park@samsung.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>,
+ Peter Griffin <peter.griffin@linaro.org>,
+ Alim Akhtar <alim.akhtar@samsung.com>,
+ Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
+ <tursulin@ursulin.net>, Rob Clark <robin.clark@oss.qualcomm.com>,
+ Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar
+ <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
+ Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>,
+ Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>,
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+ Sandy Huang <hjc@rock-chips.com>, =?UTF-8?Q?Heiko_St=C3=BCbner?=
+ <heiko@sntech.de>, Andy Yan <andy.yan@rock-chips.com>,
+ Thierry Reding <thierry.reding@kernel.org>,
+ Mikko Perttunen <mperttunen@nvidia.com>,
+ Jonathan Hunter <jonathanh@nvidia.com>, Gerd Hoffmann <kraxel@redhat.com>,
+ Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu
+ <olvaffe@gmail.com>, Zack Rusin <zack.rusin@broadcom.com>,
+ Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>,
+ Matthew Brost <matthew.brost@intel.com>,
+ =?UTF-8?Q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ Helge Deller <deller@gmx.de>, Kees Cook <kees@kernel.org>,
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+ Boris Brezillon <boris.brezillon@collabora.com>,
+ Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+ linux-mips@vger.kernel.org, linux-aio@kvack.org,
+ linux-fsdevel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+ dri-devel@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+ linux-samsung-soc@vger.kernel.org, intel-gfx@lists.freedesktop.org,
+ linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org,
+ nouveau@lists.freedesktop.org, linux-rockchip@lists.infradead.org,
+ linux-tegra@vger.kernel.org, virtualization@lists.linux.dev,
+ intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org,
+ linux-fbdev@vger.kernel.org, linux-sound@vger.kernel.org
+References: <20260711-b4-vma-flags-mm-v2-0-0fa2357d5431@kernel.org>
+ <20260711-b4-vma-flags-mm-v2-3-0fa2357d5431@kernel.org>
+From: "Vlastimil Babka (SUSE)" <vbabka@kernel.org>
+Autocrypt: addr=vbabka@kernel.org; keydata=
+ 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
+In-Reply-To: <20260711-b4-vma-flags-mm-v2-3-0fa2357d5431@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, 22 Jul 2026 14:47:56 +0200, Stephan Gerhold
-<stephan.gerhold@linaro.org> said:
-> On Wed, Jul 22, 2026 at 02:34:52AM -0700, Bartosz Golaszewski wrote:
->> On Wed, 22 Jul 2026 10:59:09 +0200, Stephan Gerhold
->> <stephan.gerhold@linaro.org> said:
->> > On Tue, Jul 21, 2026 at 01:48:52PM +0000, sashiko-bot@kernel.org wrote:
->> >> Thank you for your contribution! Sashiko AI review found 5 potential issue(s) to consider:
->> >> - [High] State leak causing hardware misconfiguration on channel reuse due to uncleared `lock_scratchpad_addr` and hardcoded direction.
->> >> - [High] Channel state corruption when `bam_slave_config` fails validation.
->> >> - [High] Infinite BH workqueue loop and unratelimited log flood on memory allocation failure.
->> >> - [High] DMA API violation: `lock_ce` buffer shares a cacheline with frequently CPU-modified struct members.
->> >> - [Low] Unused assignment of `hdesc` in IRQ handler.
->> >> --
->> >>
->> >> --- Patch [6]: [PATCH v23 06/14] dmaengine: qcom: bam_dma: add support for BAM locking ---
->> >> commit 8b44c5e4935cbb61832adb3262df00b3b606a283
->> >> Author: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->> >>
->> >> dmaengine: qcom: bam_dma: add support for BAM locking
->> >>
->> >> This commit adds support for BAM pipe locking by prepending and appending
->> >> dummy command descriptors with LOCK/UNLOCK bits when starting DMA on a TX
->> >> channel. It uses a peripheral-local scratchpad address communicated via slave
->> >> config for the dummy writes.
->> >>
->> >> > diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
->> >> > index f3e713a5259c2..411c60c4433e2 100644
->> >> > --- a/drivers/dma/qcom/bam_dma.c
->> >> > +++ b/drivers/dma/qcom/bam_dma.c
->> [...]
->> >> [ ... ]
->> >> > @@ -1064,6 +1197,7 @@ static void bam_start_dma(struct bam_chan *bchan)
->> >> >
->> >> >  	lockdep_assert_held(&bchan->vc.lock);
->> >> >
->> >> > +	vd = vchan_next_desc(&bchan->vc);
->> >> >  	if (!vd)
->> >> >  		return;
->> >> >
->> >> > @@ -1072,6 +1206,24 @@ static void bam_start_dma(struct bam_chan *bchan)
->> >> >  		return;
->> >> >
->> >> >  	while (vd && !IS_BUSY(bchan)) {
->> >> > +		/*
->> >> > +		 * Open a LOCK/UNLOCK bracket around each fresh sequence.
->> >> > +		 * Sentinels inserted by bam_setup_pipe_lock() are skipped: they
->> >> > +		 * already have bam_locked set and must not trigger a second pair.
->> >> > +		 */
->> >> > +		if (!bchan->bam_locked) {
->> >> > +			ret = bam_setup_pipe_lock(bchan);
->> >> > +			if (ret) {
->> >> > +				dev_err_ratelimited(bdev->dev,
->> >> > +					"failed to setup the pipe lock, deferring transfer: %d\n",
->> >> > +					ret);
->> >> > +				queue_work(system_bh_highpri_wq, &bdev->work);
->> >> > +				break;
->> >> > +			}
->> >>
->> >> [Severity: High]
->> >> Does requeuing to a high-priority BH workqueue upon ENOMEM cause CPU
->> >> starvation? Because system_bh_highpri_wq executes in softirq context,
->> >> requeuing immediately without sleeping prevents the memory reclaim needed
->> >> to resolve the GFP_NOWAIT failure, leading to an infinite spin loop.
->> >>
->> >
->> > It looks like my suggestion to queue_work() again in the error path of
->> > bam_start_dma() wasn't great if we end up causing an infinite spin loop.
->> > We do need to retry somehow or report an error though, I don't think
->> > aborting and leaving the desccriptors completely unhandled is an option
->> > either... :(
->> >
->> > One option would be to try to avoid the allocation and write the lock
->> > descriptors directly into the FIFO, but this will probably get really
->> > messy as well, since you would need to carefully modify the FIFO
->> > management in several functions ...
->> >
->> > I don't have a good spontaenous idea how to solve this right now. :/
->> >
->>
->> Pre-allocate the lock descriptors (if needed) in bam_prep_slave_sg()? As in:
->> call bam_make_lock_desc() in bam_prep_slave_sg(), store the descriptors and
->> make bam_setup_pipe_lock() return void as it will no longer be possible for it
->> to fail? It would just grab the preallocated descriptors.
->>
->
-> I considered suggesting this, but how do you know which descriptor needs
-> it in bam_prep_slave_sg()? It's just the allocation, afaict it doesn't
-> tell you anything about the order in which they will be submitted. :/
->
-> We could always allocate the extra lock descriptors and waste the extra
-> memory for the descriptors that won't need it. That should work, but is
-> also not great ...
->
+On 7/11/26 20:45, Lorenzo Stoakes wrote:
+> Update __get_unmapped_area() to be parameterised by vma_flags_t rather than
+> vm_flags_t as part of the effort to move VMA flags from a system word to a
+> bitmap.
+> 
+> We cascade the changes up to arch_get_unmapped_area_topdown() and
+> arch_get_unmapped_area(), where, for now, we use vma_flags_to_legacy() in
+> order to propagate the VMA flags.
+> 
+> No functional change intended.
+> 
+> Reviewed-by: Lance Yang <lance.yang@linux.dev>
+> Reviewed-by: Zi Yan <ziy@nvidia.com>
+> Signed-off-by: Lorenzo Stoakes <ljs@kernel.org>
 
-Oh, I was thinking about having pointers to lock/unlock descriptors in struct
-bam_chan and to just grab them in bam_setup_pipe_lock() when needed and then
-next time we enter bam_slave_prep_sg(), we see we consumed them so let's
-re-allocate them. And of course: don't do it at all if pipe locking is not
-supported.
+Reviewed-by: Vlastimil Babka (SUSE) <vbabka@kernel.org>
 
-Bartosz
-
-> I was hammering at the code a bit earlier to try the "write the lock
-> descriptors directly into the FIFO" approach. It has some advantages,
-> but also makes the FIFO management quite a bit trickier, hard to get it
-> right without full concentration. :')
->
-> I _think_ it could potentially work, but if you have a simpler idea I'm
-> also happy to throw away the mess I started. :-)
->
-> Thanks,
-> Stephan
->
