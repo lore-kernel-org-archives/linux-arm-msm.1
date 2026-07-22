@@ -1,77 +1,92 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10CFC3F328B;
-	Wed, 22 Jul 2026 16:38:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA85A471CF1;
+	Wed, 22 Jul 2026 16:46:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784738316; cv=none; b=UQexf5xjiZmafkj99rRkQGVzRcrOw3pdxFzIhoGI9yeeEK9sj5KWU86ogK5xDZmI5SwPUmWhenGwO33MM4oEMfcAJu2ks5iICCQ6csfgthOUKGaScqXSXJAq8nSUSqaCAJJV/HFlduVDXlRNrRraVUqAVcuduPWY9ZU1LQF+4/Y=
+	t=1784738810; cv=none; b=JePdN8AppgcCBg67zSiFv8T72cirt5unJWP+YWsJzjlY7sFI9HPWMmwFKaRM6vokcpqZWv9KvV9aTvRkTZ9tzpW9cMjDZV/GkVg/eLLA4cE/ZbFz0LiCpz4+Ql5OhxZxc0QwXt51QvkuhlHu9M0oz0Euo+uMjZFBYGWln5XbJoA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784738316; c=relaxed/simple;
-	bh=pSCkN6yxVxWDJi8KXbKr8frNrLSVmEZjVt+jtEDa414=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=NTmPjuQviVhI6uHR33SSXR0hxjrkABtB/hdeYfJ5l4NQL2jAzOrJqQBIq1ziIhDDT1CHyIo4fhyjMlmR/pPsit/x8+zkt3JaHvDC8QNDdTJthBvkXk5n658kfAU4DAULrcp8lXhJkaFg6CljWQeGIl1Pg1jyMgNoEpzoP2Hw+m4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nnWnltqY; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784738810; c=relaxed/simple;
+	bh=dGVOW0fNFy2k+utYdf7+ICoA7n39dvJq6Nxizw1P13U=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=WYWAtUEf4HIGR3IrvTiB6xqiEiXPBOfgbguSTrx1peJhbRZl5FhJzSnP9FszIK5K0cWjlW6v/kpb5AyRCqVVnfdgUcoPZahgJC7nyWKCdAkwJBeBmafJRZVQmc5LN79Boe6aJjo0sxsUvAh0DxYgkQ2t2/x5Qc/SDFEcplo2g04=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=L1UxmbHK; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nnWnltqY"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AF2B21F00A3A;
-	Wed, 22 Jul 2026 16:38:31 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="L1UxmbHK"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBE4D1F00A3D;
+	Wed, 22 Jul 2026 16:46:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784738314;
-	bh=8bZsdyf3RJFwjJ1geQjuOy4xo6q2BaGy0n+TBXIZcmk=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=nnWnltqY0BUeak2nZPn5syYVAs+FnN5kh/2s/Gxstnva7F/oTFfn7V9L2h9j3MqvK
-	 7UmlxyYEt84GTBYQu1GVLcoI3ZCFDPySmKR8/RfpJ2sZMQZ8B2cOk/VJplMERbvMuY
-	 DyZeRCqWhd7Po0qIVrfLvQg1rnhQG8LfZF7PBM8RVlyaGs/QA2mxdPtjvmFBEmPgE9
-	 IWQgJKU5GWa4Mv3KKF2aDzA7Zg1XbNYBoTBo1gpxwx2tSfbMX/4HrqGLD6U0kP8Tlp
-	 Mabzyx7W1YoUL6bvlezQVPD+VC++EEl2Hu4UFgXUjZYvD0cc1ZELT8sVxIl5i8vREZ
-	 NoqVAdiI7Baog==
-From: Vinod Koul <vkoul@kernel.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-In-Reply-To: <20260710-ipq9650_pcie_phy-v3-0-ef6018818d33@oss.qualcomm.com>
-References: <20260710-ipq9650_pcie_phy-v3-0-ef6018818d33@oss.qualcomm.com>
-Subject: Re: [PATCH v3 0/2] Add support for the QMP PCIe PHYs in Qualcomm
- IPQ9650
-Message-Id: <178473831135.304548.1416914034370187826.b4-ty@kernel.org>
-Date: Wed, 22 Jul 2026 22:08:31 +0530
+	s=k20260515; t=1784738801;
+	bh=sBn9fi4YkrZadcUimuxkLNchnROOlWrK7qc+5kQRAdY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=L1UxmbHKiDabvgbiYbOFWcVOXV91s1ZBpsQGkopFA+ntxoYD5EZrAn1tUdLKYsz/b
+	 AYVXXJLjPqQIl7yLjfWRAuU8MZbNVGk05dKsAeA9JnEC3hrtxf45LqfNaK7Jw8Jphs
+	 OolnTWVB0IpGA8FNe0dpjZrwHbv0pJ5ZbzwPHd4TxLl+kLuAQC9/HsVqhEN0HDZ47Z
+	 uKlWdl2EXDIbIaFphn0LdoYcy3eli15maTgwc28g2CtROTrZZP+DV8dIH52K4Vi7s5
+	 XOsKgVQ+weHKA6T1fs9B8BPuOHiEPs6IcZ79wxN24rb+KSlYM9rQL3GMfK296tVEC7
+	 +dG1fhQ2Wzl/Q==
+Date: Wed, 22 Jul 2026 17:46:37 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>, Vinod Koul <vkoul@kernel.org>,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5 3/4] regulator: qcom-rpmh: readback
+ voltage/bypass/mode/status set during bootup
+Message-ID: <da299944-0093-4d1a-b092-f7857b101199@sirena.org.uk>
+References: <20260720-b4-read-rpmh-v5-v5-0-cb93fb95f565@oss.qualcomm.com>
+ <20260720-b4-read-rpmh-v5-v5-3-cb93fb95f565@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="XEL1f9ee3x3d0UZD"
+Content-Disposition: inline
+In-Reply-To: <20260720-b4-read-rpmh-v5-v5-3-cb93fb95f565@oss.qualcomm.com>
+X-Cookie: Life is like an analogy.
 
 
-On Fri, 10 Jul 2026 23:16:39 +0530, Kathiravan Thirumoorthy wrote:
-> Qualcomm's IPQ9650 SoC has 3 Gen3 dual lane and 2 Gen3 single lane
-> controllers with the QMP PHYs. Unlike the PHYs in the other IPQ SoC,
-> refgen supply is needed to bringup the PHYs. Both single and dual lane
-> shares the same HW init sequence. So reuse the tables.
-> 
-> Document the compatible along with refgen supply and add the phy driver
-> support for it.
-> 
-> [...]
+--XEL1f9ee3x3d0UZD
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Applied, thanks!
+On Mon, Jul 20, 2026 at 09:06:40PM +0530, Kamal Wadhwa wrote:
 
-[1/2] dt-bindings: phy: qcom,ipq8074-qmp-pcie: document IPQ9650 QMP PCIe PHYs
-      commit: 7218d17e7613d5949cfc6215101493418fa501c0
-[2/2] phy: qcom: qmp-pcie: Add IPQ9650 PCIe PHY support
-      commit: ee6aa0f01d4e8eddf1c7fda49d65c7ef12444e78
+> Currently, during regulator registration, regulator framework sends an
+> unnecessary `min-microvolts` request for the rpmh-regulator device. This
+> happens because in current design, we do not have a way to readback the
+> voltage settings that was set during the bootloader stage.
 
-Best regards,
--- 
-~Vinod
+> +static int rpmh_regulator_vrm_get_status(struct regulator_dev *rdev)
+> +{
+> +	struct rpmh_vreg *vreg = rdev_get_drvdata(rdev);
+> +
+> +	return vreg->status;
+> +}
 
+A get_status() operation should be reading the actual hardware status
+right now, not driver state - this should be reading whatever the value
+is right now.  If the hardware doesn't support this then just don't
+provide the operation.
 
+--XEL1f9ee3x3d0UZD
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmpg8+wACgkQJNaLcl1U
+h9Cvmwf+NUcblreFdLy1nC6HvyvUWYWg6C4vXuyZKuPx+5Oi+0kkzQB6CXkqm0Cc
+Y5QcEWb3m17g7JP8uYlXTYfWCtsyBDUUQZD86phxwXahhpDZska5lUqYKYX/PQt0
+yVdMrKCNca1zq4Y6t5lTEg+HYG68aYyhpofST5fv6NayjbXmiXEWjQAXg1R16tEh
+yCVvZA7lcKDrhx7aAbKuxRlu/igKqFf91e0x+xYcmTRXKOGoo3R3+Pct9IJRtNUm
+B5ZbgjDYNSma83qOw3mRSDb1d5TM09WvaOq1M0/hgyCa7wRFL/3WD19Z8Fhepg5b
+m4Sc0JI7/OxWxHMqDJGtYRS77PQzKQ==
+=xDhH
+-----END PGP SIGNATURE-----
+
+--XEL1f9ee3x3d0UZD--
