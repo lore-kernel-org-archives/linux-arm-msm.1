@@ -1,95 +1,101 @@
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49621429814
-	for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 21:21:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B891349CEF;
+	Wed, 22 Jul 2026 21:39:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784755275; cv=none; b=HKwN4wy+4HGTa+YaYI2MhqWsLpbRXWY2aV+H+GsXvYvq/6bhpvKEAgcvFQrlCnyJrNqhncTGgOuuiesL2VGg7xGOueaJRLuAc8iw0cuz+DguWbF6Qi3vnGHRW656WhOOh4PiOKrtEKA4oVjJup3VdF4DvfX5TahdqCkKV0Ch82E=
+	t=1784756390; cv=none; b=Sl6+6Z4QqFM7jjhvpPMK3AtidqyzWFKiRZAdFOjZpdCgm2icMMMccSqdtOATU+v19XCm1fV/OEmmki+WW4rZX5SJq+pn40X/DnoHKk6nMP4uO6eFc2Kol11QgrDysJKdgkamSEB111UyFdwsnYiYTwhes78aNd1smm34z2aFg4g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784755275; c=relaxed/simple;
-	bh=jLxIR8/arA6y0SLDu2xu18umhCJg7Mr/B8usW6wre68=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=f1ehFMDzu/mU7+UzsRnRbtuTnr0EkVXhZodjx6/zpeyBS5bAVRpWJJVeHvdg2xid8cBTEguLm5kHb3+hjnoFk58GF72f7Tlcx0IR/e6Ld9kmhD5IZyTB/8aH2c/GkgGlkLSEuQYY3q40dNiAfo7zPyQpsjjv29BWaPUanBp+eAk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=b3D66bvR; arc=none smtp.client-ip=209.85.128.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1784756390; c=relaxed/simple;
+	bh=pfUFbwjvxQY/xar3KlbUb40pmp50l1EbKkHtEXF56yI=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=tVTfZy0vuagiYfNJxR5ZFyIAtdGwh4MB8QdjhCf1hQIxoyvEa6sBU10m+4TlNg8Rs44AaJEyGyXG/G4ICHz56JnDvROKMqJeblgGw3Mipz5AFFlNc52aj40sKIv0kCDHjM8J083IQof/ncsDQUIR3fB/urHDNsHsuiU8JGodSU4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=brRzAZBd; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="b3D66bvR"
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-49548e01d02so28004525e9.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 14:21:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1784755272; x=1785360072; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=MetGCHJH2H32CloHxU9sTuHEKcU3rsEz5bg6J0iX7DM=;
-        b=b3D66bvRbpugWEw+Z3NCZK2Y+lvmGucK9Qf4M6i+5xxV27SUEh5JYiVmrYMn4SVTyk
-         0I+k2Bqq04VUTBJHrsZSADNkLLqZUatZ2v0jq/nXuo/uWen5S97inxZg+TmUylW9yhhl
-         XeqCl61i0s4uGwBT7byNY2zw3IGb4jRwz1gB2aKmfK951z2cdd13llA0QDwiPyu++NWP
-         89kjtUA/jKKtYmIjPAgoTas1IDkqNygCy5cTa0EoxD/raH3q5RofsP8gF44UvF4aPQTz
-         CrOXUO9noSQ1REI709AkU+Qlm2WK/VHw2TFvCp6C6G6aNSDU8Zoss2+CmNkJ26mlhnzf
-         oIKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784755272; x=1785360072;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=MetGCHJH2H32CloHxU9sTuHEKcU3rsEz5bg6J0iX7DM=;
-        b=G0ZUB6ceuglMcynCMhwtMUlhKgyuentrUG32qi0oqFiCRRYE/kKhbi/ucaacP/VgCX
-         yEn5lgeFV7Qwn90qQ9aSOIFlvwDqUCgIPf+GXSRfab2Av9QHrIMOdlDLEsmwA87NfGxc
-         N5jVCrOQi3N55gFKPYRN8eM0MrKoM1721fQwctxpoEiZaHY3F8XReHSHqTLVwJvFntT1
-         kJKGbw/VhozBdaDpoLefgdFQ+CWxY4e+u1Yv9QZb+On6POZ2JrYz0zXp+HverHUDr5qm
-         9Iy6shPCMwxapuCx++HRE2YGXWwhR/IOeAibzLh8+z1hxxR2hiJs83UY7Y33feKdtCuq
-         iMPQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrlydquWXpx5I+1RQwPXG8+pljYLlPLZMSVdtB+SN+Y5OClAQCv7sITPbNN+8vCFdTJJ6ZTNhgUAuw8t96y@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxb/2Cf7P8Wg9HH9dgQX21mfj9aP1JSiG/954gxo0arxl8WlLs0
-	zi0gFoHqBjq3IATLIy93pHER8D+Hj5CvFzjApcN0Al39Y8wSL2IArpCJW5kEIBavHEA=
-X-Gm-Gg: AR+sD10JM2XIzCw1dLHdfPWh9as5X5QhtlGEPiUSliT9pCwBPoGK8e46dwollfcanFJ
-	lTuJjVx31quGyCBwbJkQkwhzkTufxmIKeqXMefs6RFic7hTKNlFaYUzZqMF3BjfJNakQTobtYJh
-	xOAhpBEwFoCx9lQ0rTkLaNNNaYNlbqklohOcS7oD33F0AZO19YKGlqjOsNEsPgNwfLrjyG/ovL9
-	Rnwzw+eBd5tMqCE1U1jsXfC8UFin5kl642hqaaI3kZiOLAcvmM/MzLAC8SJvbblpFiNbi5XZ9vz
-	xkAwD1wFro4IFd1pvEuELzjkTOwpesKwiQXzc6BckUd69tSJQ8vXi0x1VeIpPE8hjCnAUfrY9HB
-	FhYosvNE0QdZ/z+RmUdXYdDBWNETCkCqvsHS6koXQ3q3JZym4c5Ru+jEemvk+Zu5HHTmb+icQj4
-	5tsJw0BkU+/Lf5cA==
-X-Received: by 2002:a05:600c:4f12:b0:495:503f:cf9a with SMTP id 5b1f17b1804b1-49573ccd035mr4678525e9.9.1784755272538;
-        Wed, 22 Jul 2026 14:21:12 -0700 (PDT)
-Received: from [192.168.0.101] ([109.77.14.136])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4956ab22e74sm82772835e9.1.2026.07.22.14.21.11
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 22 Jul 2026 14:21:12 -0700 (PDT)
-Message-ID: <bb60d2d1-dafb-407a-a784-2ec219cee0d9@linaro.org>
-Date: Wed, 22 Jul 2026 22:21:10 +0100
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="brRzAZBd"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 971A31F000E9;
+	Wed, 22 Jul 2026 21:39:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784756388;
+	bh=J/4AwJDlUc6G4FSUtMAB2vODvWwQjx1d0P5R5iMgpjI=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=brRzAZBda7UZHIg4veJxZLCYpAqd3lCO2ZMyHBAzG56VDW8Zr41kajFzsuVf16Qen
+	 jfveSt7reJYPqIKL3ap9i1AnIyHiFlS2Tm2AphtXD9AmgXbcX/tXagmG+t+IpMhD1A
+	 cwtRgmM7wLAMuu+ewZgaPPBKxQQowjI+KwaYQcE/ftJy2R4yI3g/+/pTG5vCEffyze
+	 hBzeg+QNlgQ8LQurTVNRWREViUly0jR3ypJbAUy9STmVgZ1bPpdG76mL2ABYqgxY5u
+	 +mgrWmQyS2Er3Bx/3LapCmBRVzBgGijicDWB1Yop4ngvwCcd3OHRjq2U63RXJIEvIh
+	 9R8xWkFBQzGFw==
+From: Will Deacon <will@kernel.org>
+To: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Sean Paul <sean@poorly.run>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Maxime Ripard <mripard@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Robin Murphy <robin.murphy@arm.com>,
+	"Joerg Roedel (AMD)" <joro@8bytes.org>,
+	Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Cc: catalin.marinas@arm.com,
+	kernel-team@android.com,
+	Will Deacon <will@kernel.org>,
+	Puranam V G Tejaswi <puranam.tejaswi@oss.qualcomm.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	iommu@lists.linux.dev,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+Subject: Re: [PATCH v2 0/9] drm/msm: Support for Eliza GPU
+Date: Wed, 22 Jul 2026 22:39:19 +0100
+Message-ID: <178472234101.2849821.2122520947416470747.b4-ty@kernel.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260718-eliza-gpu-v2-0-64379dbebd7a@oss.qualcomm.com>
+References: <20260718-eliza-gpu-v2-0-64379dbebd7a@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] media: qcom: camss: Drop csiphy_res_8300 phy resource
- table
-To: Hans de Goede <johannes.goede@oss.qualcomm.com>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>, linux-media@vger.kernel.org,
- linux-arm-msm@vger.kernel.org
-References: <20260722163658.409872-1-johannes.goede@oss.qualcomm.com>
- <20260722163658.409872-3-johannes.goede@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20260722163658.409872-3-johannes.goede@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-On 22/07/2026 17:36, Hans de Goede wrote:
-> The qcs8300 phys are identical to the sa8775p's phys drop the duplicate
-> info and use csiphy_res_8775p[] for the qcs8300_resources.
+On Sat, 18 Jul 2026 02:11:25 +0530, Akhil P Oommen wrote:
+> Adreno 722 found in Eliza chipset belongs to the A7x Gen1 family. It is
+> derived from A730 and shares the same IP-level configurations: HWCG
+> registers, protected registers, GBIF CX registers and gmu_cgc_mode.
+> Major differences include smaller cache/core counts, 1MB GMEM, no
+> Concurrent Binning & LPAC support. Some of the peripheral blocks like
+> RSCC are from A740 that resulted in updates to RSC layout.
 > 
-> The only difference is that the qcs8300 has 3 phys vs 4 phys for
-> the sa8775p, so explicitly set csiphy_num to 3 rather then using
-> ARRAY_SIZE().
-> 
-> Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
-Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+> [...]
+
+Applied bindings update to iommu (arm/smmu/bindings), thanks!
+
+[4/9] dt-bindings: arm-smmu: Document GPU SMMU for Eliza SoC
+      https://git.kernel.org/iommu/c/925f98235a72
+
+Cheers,
+-- 
+Will
+
+https://fixes.arm64.dev
+https://next.arm64.dev
+https://will.arm64.dev
