@@ -1,67 +1,68 @@
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C5533BB675
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 18:18:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 666473B4EB3
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 18:18:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.49
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784830711; cv=none; b=Og9L4314gA1vSR3e5dO/X+LJNiYPy7PI8NeJlj6WJC/dgwEJzfy4+wYgIEYtjmW52GM7jSbbP9MzcU7EQvrtET95w5jmI+cz8h5BJY+RqUeq56DLrXQu3RFx/Eb7wYMHtcZ506LmQrgRyKJ1vyJiX8LMKR7Aeo5flqVfVFRkjZs=
+	t=1784830710; cv=none; b=V6GP4ynqdkGOXeMGWfjD/bXQnmU+J8ZuUZENesjinRtc5oJTnKnO9hD+8rqaELF2qXktor/9XlpmjR4uJ7JyGLHNnnxXL77cSltcloAC2oznolvSpBsN8I6c1/kIQpdjrHzcS0CneGskajKyk8Mqj4Jz8msanOsqSYzVMHXLgyw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784830711; c=relaxed/simple;
-	bh=5TC4QUkmHNSuCZ2vUe0sGphN0X9xqPnoYeY3/7I13LI=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=o6u8z7YXmYw0U1fjj3vFxj/jSj/cCcuoV41rLkYC4q4nkBnrv9CRGH2n36dMPm4rV5WaLcGKAbiSDRSGGIT9t9+r2c9zcy93orN+tqK5bstonzoO/pgqzPksZ4wdkGOMiCi75aBF4y0lWUboO0V6DcxfrCeilRgPw1tnlx6YuQM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com; spf=pass smtp.mailfrom=imd-tec.com; dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b=G2X9ssKG; arc=none smtp.client-ip=209.85.128.47
+	s=arc-20240116; t=1784830710; c=relaxed/simple;
+	bh=2iwV7kyuakkEDfG5RsSQJj+N3P8k/pN6D4hpRK7eClU=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=O7lNK6k+DkhgzQasc+FnHscMKhz5ZbXP6aaNn0juR8dPWW5t+/931r2UsbcEt+jzPSZHgLKMZ5a3awOTIrC596wk2q5ljV3IhoH1CF8E3m0MNIKOIz41egCPFSjFtuZrE464v/dQIA3PaNelg+LpQE7U9JOIFBNN1x33Wk+uswY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com; spf=pass smtp.mailfrom=imd-tec.com; dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b=aQ/Z54a1; arc=none smtp.client-ip=209.85.128.49
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=imd-tec.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b="G2X9ssKG"
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-49548aebcd8so7677895e9.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 11:18:21 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b="aQ/Z54a1"
+Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4954aff6088so8448265e9.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 11:18:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=imd-tec.com; s=google; t=1784830697; x=1785435497; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=e+qM9JtyqJg+akUv31zNMEze1Szte9cVGCmVCVGIRSk=;
-        b=G2X9ssKGby/OWH7sc+2HxFFHpQK22MUeonOQu0dUuiJb1BwjrC3hC9vVFqLqAIIphO
-         Hxo5bQFbl9xzr7rXNZb4IT/UwQ+2WmFI9gXTmJ7OSsxwVNos6EVosRCkeKhbH46NGPyk
-         yGQv8Axbt2Ebp29kwP7p2CWy/uLUtum8hChp4oEiark8QL86kvOCK9n4NGy9F/BKJFP6
-         C/tMDSOuF6UCMfjerIp5xwnYhaHc/NoiCiDr0sfLDeOzNzOLkvQIw68QZ8PDJ2mFBgOW
-         q9obWGy7J651kAM1h7ozF4zNWLUm6amoL1VE1TIAJrYzRM7zDmnFbZLL2Qx+554fFQW+
-         B/Zg==
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=sLtaD2vGvX5YufCFNfLuN9dGFNzANa0Z0dsAvP+eVoU=;
+        b=aQ/Z54a1MLiHD0eBnAzQ6k2nwPUpNRWaEXS6FCGxi1AskjIN5E3QeQgb+xgD6GeMOm
+         CipWfmuOXgibdcqeR03dprvtQ2KYqeSpJb1K3btpw/lL6/AtWq1JP8w2Gi2DMN318ZRK
+         XgPxjDC1KZleXpeXBMD76I0B34XC9f0elc4mcQBxNhxAHJdVcR+htr7gBVOAJxDDaDo6
+         6YnpSNq3eiAqQ3Vc7iOnbwcwyWzsauEjEGM61YX1uM2gO6wHuH9meW78MD+DlHnTSzJk
+         7b2n17I+mhWlZx05ODCDNrIGgDsXk1UHP7eDwMswS+UdpyQOVJGfc3CfwljprJ6CuPtj
+         vQvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20251104; t=1784830697; x=1785435497;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=e+qM9JtyqJg+akUv31zNMEze1Szte9cVGCmVCVGIRSk=;
-        b=hBxShZMMukcCkXzgDuw7RjbuMjMZvBWdiIGP7tTwMLH9Aj29G2YyslHTWWaZqT2/0x
-         K5231ZY2z0Wqt/vFSOUhHS7kwyVCKs8QEwvQgSnCISiyyFA2t1pUY4AqP7XFijRqT7ej
-         bk8ZjIr9p1I+2aCzsIS86xde56sMSV8JtOg/AwIxv63V/MtknJm/a8Pl35RnAm1wIHpR
-         kP4I/993X1Z/C5w/ecZc5/Ta8s5qN5dB84j7OMRcV6x6g7DOK9ltq12hgaVuwe1DdisO
-         8LaJw4aVqlt05DbgCcRTlekzJuL5szrkEHgxYKbMdOVPglvuk/D0zJHX/QjNkbZPXqpW
-         HqQw==
-X-Forwarded-Encrypted: i=1; AHgh+Rr1dVYDFTBWZTCsqtED6vbwVshoVTk8ZLYciZRgWIabmGIeSwCIYX+13b7WsufLxyGeqUeZkJmFLoVldbhi@vger.kernel.org
-X-Gm-Message-State: AOJu0YwW6vK37FwKv+CwocYyCYieBViiOZWdO6k1mOFrHmorUSYQjG+e
-	uekwxFhXwYCLXKBq3N2SKFrGz4i1gYAXhQEFCy2dY8Sbgave1pI9Dz5KLF7coZ0WYJg=
-X-Gm-Gg: AR+sD13J1UqGKxoS6hoDpv7npNAYieU5xHs15mOSmv+Mgl75e0yjfzmCuANayT/hPyh
-	hISraGr8+yZVCLcWCXEeCCfzIbxTf2K8vihxCffAGLWUnEW5878Ou/DPpA+6upId7RQTG/76ZE9
-	fqZyIYqB4hItBWEvi0jUZz3HoSA2qyUr3L4uDzEi550LGhzhKOiUZ+XPvCo3g/G66nCwwaDJIm9
-	zbw5Kya0tVw8CwwUaQyO/4NOD9eEKD20UTgQvu9iLGvo0PFYOsGA7N799tiJnNLc4hOW7duO3no
-	jDfRghawIfN7aSukh7sAEHpOubceEAHWhPPQWaVCgUWMjzwnnnZf1vhtCT079FX4aDLEZ1tJJkH
-	8PJy8IYasDGOMKapFclCJtA1APNcUnmvr1ir+d2XhpvCfzvE9E1HlN6Bt2njH5V/iuHLax5ABTE
-	IAcH0HeqP5a+0QqczoK9txgYepXyLAlaPLRgZmUjwcechMxG/w/FCtaeYcZQ8R/l11yhpRW05ku
-	DMaMiWxne9hSksOh2j4qfAU2OcM99JM3U+d5wTA1rTtL/Dgs1KE1g==
-X-Received: by 2002:a05:600c:1d21:b0:495:4856:2659 with SMTP id 5b1f17b1804b1-49573cca1b0mr46464305e9.9.1784830696700;
-        Thu, 23 Jul 2026 11:18:16 -0700 (PDT)
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=sLtaD2vGvX5YufCFNfLuN9dGFNzANa0Z0dsAvP+eVoU=;
+        b=HFcuk+S+w7Ko6shjNQGEYexyueQFhjHRHq4d5tnDAmsZd3tcA8QZgueUk/ukuVl7Cn
+         P+I1OlnnkJqqIdPEyNqJlqkUVVs9RiXveS9Wt9WIVzSeGI0ljGLl5FgN3QgyQtUlkHau
+         d8ov8rpLfoIJyHMmhkJyMMo66Ey/glv8OOfnlfwiulqZ+vejofFFtSiejgIAsMamX2fd
+         bWINd9E++O97TxTbkY/iabfMhpM3QyBOc2A0aLv2hbZBzpk979tutPS3YzhL4vPo9uhZ
+         5sPwjvi8Rwouzn0EF1FFplILb8I6bXl4DJg1JhBi0RTZwFL+mJPmrIwd14TxXQ9hPjI/
+         ezog==
+X-Forwarded-Encrypted: i=1; AHgh+RrUamjirDdE33C5QRjzozAZLXMuC1h8CyztraDPfmZfC+Oa5632wBe8uT+FwgK8PL++VCDq4mVGItmBv2T8@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzv0+0HGl06ddkkMtVBHgtqVnBywjKBRVXTMxAbM2DW8X2Tw1QG
+	I8ocIJJe6PZplDFGXpIX4pCzsOR4MqmWJ5diauW26IDNRSl3zYE77RclzxMvRtTkzCs=
+X-Gm-Gg: AR+sD10bNvrqGwFWWDrLq+vS0VCRAzZFexIFlFHe1mhR0n94tvKS41NoPpPjR+myEGA
+	fvVnoONn58CnJM0rR8uB5Nnpjii2tftQ6n2KVmRxLboeyQBU+AdyrOP345x76YwrkFEWISOWoF8
+	PgiZ8A37foyZ7NshOS00Irl+AXgTez/LkbP46qCl8vjcm1qVmXqKdZjGtvWMQlCar+YxLkPCOY8
+	tn3zJYN/O3okaUqEPYOd6lDbRRfZgPuaMzNcju+n1srv/aYav5HWlrp5m56cHGtXamLoDjXhGFW
+	iHMUGT23JAtorft1OzopXHvsH/sNjAR8S6X2S9wDsyhscYW+Z+XUcvz2vvk0nOJPeMn+663wQhe
+	rQw9Pk9lAkzfy+CPn++/ThP2GUBAfxVlse2a226+LAuJCvZ1Q1VXFrHdZTKiUMD3ZBJgTHqs6X1
+	Cc4o5tfKSFTpjDv++8CJ0syV38ZsoL0Q3KA72BOF5a98Gep6sA/7BI/7hqFzJBJpqWFOzJVFw1o
+	j5hF5c1jEW2hujIshQ3w40t3GpUqqLX0+gScCr1bZz3NJJPbeVxcQ==
+X-Received: by 2002:a05:600c:4f81:b0:495:4cba:e288 with SMTP id 5b1f17b1804b1-49573c99584mr49269755e9.15.1784830697356;
+        Thu, 23 Jul 2026 11:18:17 -0700 (PDT)
 Received: from [127.0.1.1] (host86-157-235-39.range86-157.btcentralplus.com. [86.157.235.39])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4957af914a9sm10799055e9.15.2026.07.23.11.18.15
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4957af914a9sm10799055e9.15.2026.07.23.11.18.16
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 11:18:15 -0700 (PDT)
+        Thu, 23 Jul 2026 11:18:17 -0700 (PDT)
 From: William Bright <william.bright@imd-tec.com>
-Subject: [PATCH v5 0/4] arm64: dts: qcom: Add IMDT QCS8550 SBC
-Date: Thu, 23 Jul 2026 19:18:06 +0100
-Message-Id: <20260723-imdt-qcs8550-sbc-rfc-v5-0-2fb988854623@imd-tec.com>
+Date: Thu, 23 Jul 2026 19:18:07 +0100
+Subject: [PATCH v5 1/4] dt-bindings: vendor-prefixes: Add IMDT
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -70,12 +71,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAN5aYmoC/4XPO27DMAwG4KsEmsNCEvUwMuUeQQeLpBsNiRvJM
- FoEvnvlLGnRGh1/gvxI3lWVkqWqw+6uisy55vHagt/vFJ3765tA5paV1TZohxryhSe4Ue2811A
- TQRkInERKQ6KeuVNt9L3IkD8e7Om15XOu01g+H1tms1b/AWcDGhzbFEL00vd4bG0wCb3QeFErO
- dsn47XfYGxjkoshsmZ21vxm8DsTNxhcr4mMjBhtwj+ucU8mmK2nXGPQdxINt7ZEP5llWb4AvQk
- uoY8BAAA=
-X-Change-ID: 20260430-imdt-qcs8550-sbc-rfc-4e7cbfbcadd8
+Message-Id: <20260723-imdt-qcs8550-sbc-rfc-v5-1-2fb988854623@imd-tec.com>
+References: <20260723-imdt-qcs8550-sbc-rfc-v5-0-2fb988854623@imd-tec.com>
+In-Reply-To: <20260723-imdt-qcs8550-sbc-rfc-v5-0-2fb988854623@imd-tec.com>
 To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
  Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
  Konrad Dybcio <konradybcio@kernel.org>
@@ -83,120 +81,28 @@ Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-arm-msm@vger.kernel.org, William Bright <william.bright@imd-tec.com>
 X-Mailer: b4 0.15.2
 
-This patch series adds DT support for the IMD Technologies Ltd (IMDT)
-QCS8550 SBC and corresponding SoM. The SBC DTS supports the following
-hardware on the SBC:
-- USB3 (No DP alt-mode support)
-- SD card (SDHC2)
-- Regulators
-- M.2 Key-E (PCIE0) 
-The SoM DTSI supports the following hardware:
-- PM8550 PMICs (similar to the SM8550-HDK)
-- QCS8550 and UFS
+Add IMDT (IMD Technologies Ltd) to the vendor prefixes list.
 
-The IMDT QCS8550 SBC hardware is capable of the following but support is
-not included in this patch series:
-- USB3 flip detection
-- Gigabit Ethernet
-- 8 MIPI CSI2 cameras are supported using 8 IAS connectors
-- MIPI DSI Displays via a DSI/I2C connector
-- Microphone input
-- Speaker output
-- Fan control
-- M.2 Key-E UART and SDIO (requires DNF resistors to be fitted)
-- RS232
-- M.2 Key-B (also on PCIE1, selected by toggling the on-board PCIe
-  switch away from the LAN7430 upstream port)
-- Wi-Fi and Bluetooth via SDHC4/UART14 using an NXP-IW416 (SDHC4 patch
-  [1] is awaiting review)
-
-The DTS files were written using the SM8550-HDK as an initial starting
-point with patches ported from downstream [2].
-
-Claude Opus 4.7 was used for formatting and reviewing the device trees
-against other QCS/SM8550 boards.
-
-Patch 1 adds the IMDT vendor prefix
-Patch 2 adds DT bindings for the SoM and SBC
-Patch 3 adds the SoM DTSI
-Patch 4 adds the SBC DTS
-
-[1] https://lore.kernel.org/all/20260427-sm8550-sdhc4-support-v2-1-a4241f43ecd5@imd-tec.com
-[2] https://github.com/imd-tec/meta-imdt-qcom/tree/kirkstone/patches/msm-kernel-devicetree/files
-
+Acked-by: Rob Herring (Arm) <robh@kernel.org>
 Signed-off-by: William Bright <william.bright@imd-tec.com>
 ---
-Changes in v5:
-- Switched to using the M2 Key-E connector binding instead of pinctrl.
-- USB role switching now supported using the on-board TUSB321.
-- GPU ZapShader enabled after u-boot patches resolved it not being
-  able to load.
-- Dropped PCIe1 since the PCIe analogue switch cannot be modelled in a
-  DT.
-- Applied style improvements from Konrad.
-- Link to v4: https://lore.kernel.org/r/20260610-imdt-qcs8550-sbc-rfc-v4-0-358e71d606bc@imd-tec.com
+ Documentation/devicetree/bindings/vendor-prefixes.yaml | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Changes in v4:
-- No code changes.
-- Collected Rob's Acked-by tags on patches 1 and 2.
-- Resubmitting due to inactivity on v3.
-- Link to v3: https://patch.msgid.link/20260507-imdt-qcs8550-sbc-rfc-v3-0-47d3d3372b33@imd-tec.com
+diff --git a/Documentation/devicetree/bindings/vendor-prefixes.yaml b/Documentation/devicetree/bindings/vendor-prefixes.yaml
+index 7b0d79ebf9bd..5c74da791c13 100644
+--- a/Documentation/devicetree/bindings/vendor-prefixes.yaml
++++ b/Documentation/devicetree/bindings/vendor-prefixes.yaml
+@@ -791,6 +791,8 @@ patternProperties:
+     description: ILI Technology Corporation (ILITEK)
+   "^imagis,.*":
+     description: Imagis Technologies Co., Ltd.
++  "^imdt,.*":
++    description: IMD Technologies Ltd.
+   "^img,.*":
+     description: Imagination Technologies Ltd.
+   "^imi,.*":
 
-Changes in v3:
-- Dropped backlight node since it's unused. 
-- Dropped regulators which are dead (no usage or not gpio controllable
-  whilst also not strictly required by a DT node). 
-- Dropped SBC modem remoteproc entry since the modem is fused off on the
-  qcs8550.
-- Reformatted commit bodies and DTS comments.
-- Replaced open-drain properties with bias-disable due to open-drain not
-  being supported by the tlmm.
-- Dropped tlmm entries which are unused.
-- Dropped disabling of LPASS codecs as it was unnecessary.
-- Dropped bluetooth usage on uart14 and removed references to uart14
-  since it became unused.
-- Patch 2 renamed to "dt-bindings: arm: qcom: Add IMDT QCS8550 SBC/SoM"
-- Patch 2 commit body shortened as it had information already found
-  within the patch 3 body.
-- Link to v2: https://patch.msgid.link/20260505-imdt-qcs8550-sbc-rfc-v2-0-b4767d0dd421@imd-tec.com
-
-Changes in v2:
-- Patch 1 relocated to be above qcs8550-aim300-aiot instead of below
-- Split the SoM and SBC DT changes into two patches, with patch
-  3 adding the SoM DTSI and patch 4 adding the SBC DTS.
-- Dropped the SDHC4 node in patch 4 to focus on the core
-  SoM and SBC device trees. 
-  This allows the primary hardware support to progress through 
-  review while waiting for feedback for [1].
-- Link to v1: https://patch.msgid.link/20260430-imdt-qcs8550-sbc-rfc-v1-0-4d2b6675eaa3@imd-tec.com
-
-To: Rob Herring <robh@kernel.org>
-To: Krzysztof Kozlowski <krzk+dt@kernel.org>
-To: Conor Dooley <conor+dt@kernel.org>
-To: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>
-Cc: devicetree@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Cc: linux-arm-msm@vger.kernel.org
-
----
-William Bright (4):
-      dt-bindings: vendor-prefixes: Add IMDT
-      dt-bindings: arm: qcom: Document IMDT QCS8550 SBC/SoM
-      arm64: dts: qcom: Add IMDT QCS8550 SoM
-      arm64: dts: qcom: Add IMDT QCS8550 SBC
-
- Documentation/devicetree/bindings/arm/qcom.yaml    |   7 +
- .../devicetree/bindings/vendor-prefixes.yaml       |   2 +
- arch/arm64/boot/dts/qcom/Makefile                  |   1 +
- arch/arm64/boot/dts/qcom/qcs8550-imdt-sbc.dts      | 401 +++++++++++++++++++++
- arch/arm64/boot/dts/qcom/qcs8550-imdt-som.dtsi     | 315 ++++++++++++++++
- 5 files changed, 726 insertions(+)
----
-base-commit: d36de2e50966f3dd9ef3482f1faf649b3d697714
-change-id: 20260430-imdt-qcs8550-sbc-rfc-4e7cbfbcadd8
-
-Best regards,
---  
-William Bright <william.bright@imd-tec.com>
+-- 
+2.43.0
 
