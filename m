@@ -1,88 +1,88 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F181847A889
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 15:46:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 590CA4F797E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 15:46:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784821578; cv=none; b=mG1+gF/VaoQ1pCWJ/X7z4O/uw+Yv2DXxrniVSnUVSxAwvRmPLVfCKC3nbicXtKa2yQntuoW6ByQzboJJzAgF66DYOSp166v46v2WNfFknqG4sTRv2rN3/sbqRc5ZCAkqZvV1NWh90GVqD/JakEFiGW6681AYwBZ1ZCufdBy6lHU=
+	t=1784821586; cv=none; b=O+Uli0UCn3ri6DqmiTwk2kTmp1rHsbTYIlW6oAxiX4akHlyW8tKBHGD0FQWVwna08SmoL0/kL4g5NKvNNDPPoQcp98lf9YEefz6Z3BO/n0FkC0a5YcUrsMmMqhm8vx0GTOyM+egI7Fk/907FunouzWvX7ksQqf71mt+7zw5lA00=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784821578; c=relaxed/simple;
-	bh=3usl21QCEfGlb15Z/9fJV1UfOjLgGDOlhTwfEYuJuKg=;
+	s=arc-20240116; t=1784821586; c=relaxed/simple;
+	bh=G0779222wpHFVE3E6DMAcktV/N1UmeK8d2TO0+SERXM=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=aJx1n1imvcNo4f6rtEWDn4UWfwx83OM5gtq2nPdVAxkLr2g/YioTOUcSEC0fhayb6pPN3/tWWtMye14Q11fxp0oHFuo+tTctqVU0yt0zZfRj9tPoumAmozo74K2NqMvYM3WZa0EWISBBNk9dnNKtOkXX5SZ3tX2ebM0O6YnFubU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WaTfCP0m; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bPAQ5gcV; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=JB118fTN2va68OnsdltAxhk5rJS6zAcUD5aWeGMGCAnDV3JBjrOVOVS3Ohf/5pKuMnF3Dwh+fSy/Q1WpZwG2rKnj9iN5qKuFyDhKhqTNVVVohuoT4/tTVL+Qn8jdEVwO3DAdGgXrVz3yr9DJwsV9KVVPhxMCh2elIvBe8vn0F9Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TehXgNY2; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=JDxRT16I; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WaTfCP0m";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bPAQ5gcV"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NCvUxC4078292
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 15:46:13 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TehXgNY2";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="JDxRT16I"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NCw4v23605758
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 15:46:18 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	XPkP9ov5gTe+4QVoOYuE3l/K6+RH8/0uUYtuaI2zhTs=; b=WaTfCP0md1kDMiHb
-	pGCB+1D2vZOLaLf7GOfqLiEBaJqjD7HG3HyqUdYIh2i7M/l+wFYcLe4SRBgrvRKu
-	89VOb/MKvaRkSrFRreuQmNGjQ29IOw94pEQNZG9OsZbPtImJBfQwLRn+1wG8VoBl
-	K2nC+UqzvzlxOSIFANquPKPYeMxoaxrWZ7GL6yi5B1GyO9ZI5lxGeHxJIWdAM75k
-	b9QZPiZBwnvZN/36xEgKjsmr99mfxsrTFFX+/31T8LL8fUbwtS4D8yaTMIL7KB7C
-	R6+CBKDYMzN06brRCihmlSJGKwwZkelSLVJEoxnDf2/TSkebUlOXPbZ/8eCI1783
-	IPTrjQ==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkg521p8m-1
+	GvaQimzu4p1UCQA6S0UYa6/yf8KCGpkef8kkj0yv/KY=; b=TehXgNY2b3ALEJ2+
+	YUS7TOOTPrRrjn19+IWpiiIxxcVWvAzxhicgkSkAUQlpOlnsDVFod+LqdlRA1PEo
+	183LJJBImwHRjTCyVo/JgpsDMHSBDAxXbILTJc5aDHHou+84U8Tm98KpJmOaezq/
+	V9Y0/EH19iV6gAPgno67MYvCNhRwbFLC2UMTvH7l93eeSCYho1X3wHULbJj2Nxeo
+	s0MDtHE4J17ARYsZNxfKzcNyKCfTe66o2ykQQC8qJxu5aQgtuQDudPx+/eM/0Wnf
+	sVDZ1ZiyOFVmS+s4tXcCEAoS2orpJcs70dJ4nYEkrKc8saPTFnLbKhjouisZXdXK
+	ShFOmg==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkeuqa367-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 15:46:13 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2ce7dfd33ffso12730625ad.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 08:46:12 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 15:46:18 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2cccfa32670so11201365ad.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 08:46:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784821572; x=1785426372; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784821578; x=1785426378; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=XPkP9ov5gTe+4QVoOYuE3l/K6+RH8/0uUYtuaI2zhTs=;
-        b=bPAQ5gcVzZODHX3n54+SnWRjDPQ0xQGEsPw/gkpfCRtD4b6mVm/LyTOrQusI6ahW0s
-         K/NPXlbhQQZyIEbiVem6VPQEqv7dp/Zm92WmVspFXljt7lSOE6VlfQm0nhaQSamRSoKn
-         MGr2udkAA3QyJJwKMKcuTCu4Y7ZUe8f960vbG2R9a0c2ypWmYKHfIBdcnWMUqZSSM9wd
-         IHW1Sg0SteDhdmrOFFkfm55wbwLmaAXz80+nW3/xw0xw0PxHD+bK11xtmXlNFaoVDoIB
-         knROwF4bli3bWVBAl9Tiq/1yTBW8YZ5zY7YIulnF6J4XvkXoSvEpxO7arozPj4TPZlRu
-         6OaA==
+        bh=GvaQimzu4p1UCQA6S0UYa6/yf8KCGpkef8kkj0yv/KY=;
+        b=JDxRT16IT054WSs+vlSVatiL/je/ymaM+NIpqCw1nM6eae9pEtveTEDtBzSXPZt+yr
+         ayN3Qi+oc/1K/63hFfYHaagoSrdQJYKiw4CUVli3uPW0Lpt8NJ0705tv8Yg9Xgoo0L/p
+         7AXTxpV1bRCM1FLXhzFdAYEcD6mDM7JFm17ae+bLNk4/AS75G9OTuBE0u9Wp/Oqj145g
+         umeE8Mh7rADqTFrmof0sytdvbjRaGKyqlFaEm45ZF2W10fmRY/eOLJSVdQnHAbNnRoJF
+         lrhom3QB3BVJTdPIOI0na6jPzTisopWjp72xl+W1Acu9I/j7Hx5vD4ZVePZ2mlJltH59
+         0lyw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784821572; x=1785426372;
+        d=1e100.net; s=20251104; t=1784821578; x=1785426378;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=XPkP9ov5gTe+4QVoOYuE3l/K6+RH8/0uUYtuaI2zhTs=;
-        b=TbGbao7es8gcko5sJJLm3YltS3QbrONMSpATbf+jpWdvAfNlugSCc5cIO2+KcLacz6
-         w2Wu5hRqH83H0oA1r4CYpm4x/VoMMMQOTnWc7/5hPnPGfwdTfBK3S4O6I5UldMDJJD6F
-         39+4O3PpEkW8IFrxnhSiSHptNi/MPsDWB6xCTTiV1lWMYjeuDOlfPdbIE12mB8Y9FCjH
-         ZxSGho6xJ8Q6Nacux9TM5wygwuqirvvuwpAYlgh+Wgn+5J7nYQpyy45hbmOrqf2HrNhO
-         RE0EUxiN4j+EoZP5gRLPsRz4iu9C3jhcWkNmi3khEgbwyhSdyIf3/xafiYiN3pvi2+Ty
-         rccA==
-X-Forwarded-Encrypted: i=1; AHgh+RolqL8Mm5q4XOeo+GWA/g1jkUMbQs/YxZXRSLeTQ8nXsFuviY1iLnnevU+LAJYaTcfWb1cZlzMC/YlpqNo4@vger.kernel.org
-X-Gm-Message-State: AOJu0YyETu2wbYwPkTubOePFab85hNKVVR1byBRKnxmZsylD0P6aRGOc
-	jC1A8kDu1t8c78Sl8n3W5FSoxNE+4GyZTFrwGchVSf8vsTXX92hls/0Ui8c5aAmQWUEXcg6ky0E
-	yZEFbZq6Kea1BZu+sdwdlJg+TpU4YvO0rVKn7fmtR/UG7bzLp5yHs4igMesRoeZGcUomF
-X-Gm-Gg: AR+sD120HX81SMDgDuBbtkAW+ksxGlaolZoO4d055yUjY4fuq4aAEy9ka8CzY1V4yas
-	+huDWRvcaGkqfeNYqpW+Np3VtF8hZHn/5iZL26disSWvQFoJvo0AcJUWLrKsiWLiUC1NbODYt9u
-	QRcK9pUIZd6o6LJb2LUYRq3sjx1D+qGDtY6w8l+gTdHP06Vj8L+8z/kRhQMpTsrA8cSj4At4cXT
-	7/Zy9wreMeGam+UYH/l7ETQ649rIbMMIF2SQayTN+H9fcP++8BHbnzG+MyY64ppqKS+EOiEKgOS
-	m2HwkO7uiP6ZMVfNp9YnDby3Oi7bU4Wn0lfetIafdpktyA0pmETfJSqls5jQw75ENcjHi4u+pj2
-	T2FT1hRaX/Kdv9OHLb8B746kAxh6sEU8=
-X-Received: by 2002:a17:902:7c03:b0:2cf:4339:aaa with SMTP id d9443c01a7336-2cfa7435a2bmr33100515ad.12.1784821572127;
-        Thu, 23 Jul 2026 08:46:12 -0700 (PDT)
-X-Received: by 2002:a17:902:7c03:b0:2cf:4339:aaa with SMTP id d9443c01a7336-2cfa7435a2bmr33100095ad.12.1784821571557;
-        Thu, 23 Jul 2026 08:46:11 -0700 (PDT)
+        bh=GvaQimzu4p1UCQA6S0UYa6/yf8KCGpkef8kkj0yv/KY=;
+        b=r+OnDKUxPtpV+na0TDtCC9Hn9jr3ppRK+WkAzlLWoiQLVTw64EiddM3IBRAy325lfs
+         YdS89wFdQ2EAbu6qgj51SEUf6qZUwGIovmL+aKcY1kemSaD8eHAP9RfVcRXXJfVFKeC6
+         JaRuDoVBqmt9Usktw1CQ4fty2MhzHh0UuIYJIX/RgkGJi0tpw9i4R8EP9QAHaSFAFFyl
+         CI+G9Ey8J6j2UsXAX7+32dJHnZoUp4hKMAubMmZ9gNvKPDEqNKZ9taNhADM4ggA5ArAy
+         NwniUYyI+0Orlbgeidd+rY+1CEsSnA1Mcz/8n582suKPuRc0vfNpHO/hy4b7tjJwHjF6
+         obHA==
+X-Forwarded-Encrypted: i=1; AHgh+RrFrbIqjQwiTEItWjyCx5qz6Ic988XM0otB9VvJxGl4gO+mhcW5L/4dEeVL2mm8aIjmKquuu1i6tRU+77g+@vger.kernel.org
+X-Gm-Message-State: AOJu0YzooIZB9+DaUXh1cBcrD5V1B0CL9qCKx5qCUHbIpEhJWPeh17Vo
+	QOrTcxX+aouQ3XwuqXIuiakuoSDLoBjYxHep+q2lyvXCf4EoK1//D/Widt99jpVi7Q1mK5LhTZ2
+	jg4Rk/qQW5YCttJ0TzQgKMQdagGNP0rf4qKUP5gUlvvUkav/Z61QoIaFlmqhWUwzk/o/P
+X-Gm-Gg: AR+sD116n2bAaUwNKM6VHfD8LXRv2hd5AoOBAUQz5Y4JhkGw5u6bF+rF3SRV0xiAee8
+	n3WDd5171BOhOdC71dVZAtB3wYZnNK3vRJYqf9tgutAVz8WBc1jfSmyUBF6CBpQx0CwpS7uxRpZ
+	90LVNrQdr3cvkTOxzCM3MXh6oP2yW8CKBc/nBwyigv5UdP1OmkfDw3fZpRSK8LHZs6ig+7h3WcP
+	JKqLX1qvGqqUFnwol8MwG4GuTMu+d3d6k6wOeYxSVZSpOso2+T2JHlj2VD0Z6IYV8Xgc44oeaGa
+	MWlPnpmIxnQwMlzQH5zMNE2hfIZYsCatrrY8nZ3hKzzBxBCLJg/9/hnNrl6vmzcanShst1+Q0oa
+	5aVDmTRrariTUcphJ3rW7OfMdAUbPaa0=
+X-Received: by 2002:a17:902:d582:b0:2ca:c68:c554 with SMTP id d9443c01a7336-2cfa6d87214mr39727995ad.38.1784821577562;
+        Thu, 23 Jul 2026 08:46:17 -0700 (PDT)
+X-Received: by 2002:a17:902:d582:b0:2ca:c68:c554 with SMTP id d9443c01a7336-2cfa6d87214mr39727425ad.38.1784821576968;
+        Thu, 23 Jul 2026 08:46:16 -0700 (PDT)
 Received: from hu-imrashai-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf8efd7157sm36242625ad.18.2026.07.23.08.46.05
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf8efd7157sm36242625ad.18.2026.07.23.08.46.11
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 08:46:11 -0700 (PDT)
+        Thu, 23 Jul 2026 08:46:16 -0700 (PDT)
 From: Imran Shaik <imran.shaik@oss.qualcomm.com>
-Date: Thu, 23 Jul 2026 21:15:50 +0530
-Subject: [PATCH v3 1/4] clk: qcom: common: Register reset controller only
- when resets are present
+Date: Thu, 23 Jul 2026 21:15:51 +0530
+Subject: [PATCH v3 2/4] dt-bindings: clock: qcom: Add Qualcomm Shikra
+ AudioCoreCC and AudioCoreCSR
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-shikra-audiocorecc-v3-1-90b878ae0d4e@oss.qualcomm.com>
+Message-Id: <20260723-shikra-audiocorecc-v3-2-90b878ae0d4e@oss.qualcomm.com>
 References: <20260723-shikra-audiocorecc-v3-0-90b878ae0d4e@oss.qualcomm.com>
 In-Reply-To: <20260723-shikra-audiocorecc-v3-0-90b878ae0d4e@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
@@ -106,85 +106,211 @@ Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
         Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
         linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
         linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        Imran Shaik <imran.shaik@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+        Imran Shaik <imran.shaik@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Authority-Analysis: v=2.4 cv=DtZmPm/+ c=1 sm=1 tr=0 ts=6a623745 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDE1NSBTYWx0ZWRfXxkyEJBa7hJdp
+ BylsyMSKsMDZqWWh6x0iO23nJIrXwgjnJkCFuf2Y4RMwG5G+dlCSCCgNwJD/+AjekaNxV6jOaZO
+ JSUHyW/Rq8CY90twK45SzCSY2W1E3pI=
+X-Proofpoint-ORIG-GUID: qBiOfq8iN1WedZs14ofdZi3kAW3nIUe6
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDE1NSBTYWx0ZWRfX8DGUYPi/Js5g
+ gMfOeMZwIrEDv61WA1vsETqA1bbv5Oijq7pfEjncms0ORu78DnFu1r6xytS54E7STJiwXjuUREV
+ Svka0dLGydltVYxRpAwEvTrvnbXX1f5rT+b9fErPKvQN3cVEpnJhsbZZcksmU3vawuhh2Qc0Z+t
+ fVywjosg/uxdwJCFBkya2B+/AKgRDIIysj3fOFWYQGSAYQrZk8gBzLw7eTA3BDbesASV+BWLaH9
+ wx0G2Lzx2M1+3AWtBtlpaO70VI/t25ve9SMLkrg0n3fowU1l9mM85u2JacN86eqIaiNK3bC8NWu
+ SvFTq55DhOc07UEM0VuaI+EuthrpjCWMIJOkTrSDqxcfVah7E7Fes7kXAqLLYj7XyINoUYd/Zo7
+ O0EewZnRtfHmx2fp6lcQtSs4MzGu+Uw6abL2KyhArRyerxK9IPu0Hn0uH3AkSWZnbvZjnTgk2y4
+ pjSS3EjKtspQXiqsHQg==
+X-Authority-Analysis: v=2.4 cv=cPDQdFeN c=1 sm=1 tr=0 ts=6a62374a cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=butnsgrUGOw-u3YEFNkA:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDE1NSBTYWx0ZWRfX9irvGzO5z+8m
- v8dIsfLOFEeSvGpkvsaZXG1mdKrM5ipT+M1UawxIpfXs307l0XVfBxHUGg8Wry5Qg/i+TENJsQT
- 2P+HKLNaMHTxQAteGDAgjQj2JDlpEYg=
-X-Proofpoint-GUID: WYy8Xby6HDn7xtdFxDirHhcLJi1AWeLg
-X-Proofpoint-ORIG-GUID: WYy8Xby6HDn7xtdFxDirHhcLJi1AWeLg
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDE1NSBTYWx0ZWRfXyKPNHf9oIhe7
- WF35/yegdD7rshcyUsF3LG/3QH3LM0kXvunX/ioaZ6MzL22cOJn33P02cutbhHjwRyNvdBbtnM7
- GtaBoOlHS3KfadVSlD9zu7Mf/Kx4K1Scgq7AYxkTRkwh3UpCTR/OYBr3McurdwmkEJ6za4zxuJk
- M9NgMjGU3EjBfJ/4lr9DAVgPDBXJ0bJ9nugCFnsxFqGltnM62sjBb+sHMKdXI8FNpeoE8GvB68H
- seIDtDSOozNu4/+IAVYTYvPbqcaZk/E9apBOydgddG5D5BezEDFXTataAimCWnSK9B5VB5GhGnE
- Ho4LE3F+xXs9ebgiuaRCnIJpdl1naoF5g4Jt77q2hRHLermZWVaFE2Zwqo5ExKy4RlcuZJmM1OU
- ICI5FghJid8y1SN5RlqlQF0vBR9Gjvpe1ILIzXOpRiR8Hyl9HEBpMbUz0eJkc5+M3S6ln0p8Zll
- Zks342jBH0x/0m4ZmXA==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=Z3K_AQPDDkgJnXkyaHcA:9 a=QEXdDO2ut3YA:10
+ a=GvdueXVYPmCkWapjIL-Q:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-GUID: qBiOfq8iN1WedZs14ofdZi3kAW3nIUe6
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-23_04,2026-07-22_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 impostorscore=0 clxscore=1015 bulkscore=0
- adultscore=0 suspectscore=0 malwarescore=0 phishscore=0 priorityscore=1501
+ spamscore=0 impostorscore=0 lowpriorityscore=0 adultscore=0 phishscore=0
+ clxscore=1015 suspectscore=0 priorityscore=1501 bulkscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230155
 
-Some clock controller descriptors do not define resets. Avoid registering
-a reset controller in such cases by checking desc->num_resets.
+Add device tree bindings for the Audio Core Clock Controller (AudioCoreCC)
+that provides clocks and Audio Core CSR that provides resets on Qualcomm
+Shikra SoC.
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 Signed-off-by: Imran Shaik <imran.shaik@oss.qualcomm.com>
 ---
- drivers/clk/qcom/common.c | 24 +++++++++++++-----------
- 1 file changed, 13 insertions(+), 11 deletions(-)
+ .../bindings/clock/qcom,shikra-audiocorecc.yaml    | 55 ++++++++++++++++++++++
+ .../bindings/reset/qcom,shikra-audiocore-csr.yaml  | 42 +++++++++++++++++
+ .../dt-bindings/clock/qcom,shikra-audiocorecc.h    | 49 +++++++++++++++++++
+ 3 files changed, 146 insertions(+)
 
-diff --git a/drivers/clk/qcom/common.c b/drivers/clk/qcom/common.c
-index 2c09abaf1d2a15b7fbbbfeb67c03075381185a00..d6ff83045da8f308dcb9c5836af48090323248de 100644
---- a/drivers/clk/qcom/common.c
-+++ b/drivers/clk/qcom/common.c
-@@ -359,17 +359,19 @@ int qcom_cc_really_probe(struct device *dev,
- 		qcom_cc_clk_regs_configure(dev, desc->driver_data, regmap);
- 	}
- 
--	reset = &cc->reset;
--	reset->rcdev.of_node = dev->of_node;
--	reset->rcdev.ops = &qcom_reset_ops;
--	reset->rcdev.owner = dev->driver->owner;
--	reset->rcdev.nr_resets = desc->num_resets;
--	reset->regmap = regmap;
--	reset->reset_map = desc->resets;
--
--	ret = devm_reset_controller_register(dev, &reset->rcdev);
--	if (ret)
--		goto put_rpm;
-+	if (desc->num_resets) {
-+		reset = &cc->reset;
-+		reset->rcdev.of_node = dev->of_node;
-+		reset->rcdev.ops = &qcom_reset_ops;
-+		reset->rcdev.owner = dev->driver->owner;
-+		reset->rcdev.nr_resets = desc->num_resets;
-+		reset->regmap = regmap;
-+		reset->reset_map = desc->resets;
+diff --git a/Documentation/devicetree/bindings/clock/qcom,shikra-audiocorecc.yaml b/Documentation/devicetree/bindings/clock/qcom,shikra-audiocorecc.yaml
+new file mode 100644
+index 0000000000000000000000000000000000000000..d59f7e47a0d7d9ee9def49be9954038e43785e91
+--- /dev/null
++++ b/Documentation/devicetree/bindings/clock/qcom,shikra-audiocorecc.yaml
+@@ -0,0 +1,55 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/clock/qcom,shikra-audiocorecc.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
 +
-+		ret = devm_reset_controller_register(dev, &reset->rcdev);
-+		if (ret)
-+			goto put_rpm;
-+	}
- 
- 	if (desc->gdscs && desc->num_gdscs) {
- 		scd = devm_kzalloc(dev, sizeof(*scd), GFP_KERNEL);
++title: Audio Core Clock Controller for Qualcomm Shikra SoC
++
++maintainers:
++  - Imran Shaik <imran.shaik@oss.qualcomm.com>
++
++description: |
++  Audio core clock control module provides the clocks on Qualcomm Shikra
++  SoC platform.
++
++  See also:
++  - include/dt-bindings/clock/qcom,shikra-audiocorecc.h
++
++properties:
++  compatible:
++    const: qcom,shikra-audiocorecc
++
++  clocks:
++    items:
++      - description: Board XO source
++      - description: Board sleep clock
++      - description: Audio ref clock source
++
++  reg:
++    maxItems: 1
++
++  '#clock-cells':
++    const: 1
++
++required:
++  - compatible
++  - reg
++  - clocks
++  - '#clock-cells'
++
++additionalProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/clock/qcom,rpmcc.h>
++    #include <dt-bindings/clock/qcom,shikra-gcc.h>
++    clock-controller@a0a0000 {
++      compatible = "qcom,shikra-audiocorecc";
++      reg = <0x0a0a0000 0x10000>;
++      clocks = <&rpmcc RPM_SMD_XO_CLK_SRC>,
++               <&sleep_clk>,
++               <&aud_ref_clk_src>;
++      #clock-cells = <1>;
++    };
++...
+diff --git a/Documentation/devicetree/bindings/reset/qcom,shikra-audiocore-csr.yaml b/Documentation/devicetree/bindings/reset/qcom,shikra-audiocore-csr.yaml
+new file mode 100644
+index 0000000000000000000000000000000000000000..bfad1d20e7cd1281c4c182d5f9f887d8c4c86125
+--- /dev/null
++++ b/Documentation/devicetree/bindings/reset/qcom,shikra-audiocore-csr.yaml
+@@ -0,0 +1,42 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/reset/qcom,shikra-audiocore-csr.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Audio Core CSR for Qualcomm Shikra SoC
++
++maintainers:
++  - Imran Shaik <imran.shaik@oss.qualcomm.com>
++
++description: |
++  Audio Core CSR module provides the resets on Qualcomm Shikra SoC platform.
++
++  See also:
++  - include/dt-bindings/clock/qcom,shikra-audiocorecc.h
++
++properties:
++  compatible:
++    const: qcom,shikra-audiocore-csr
++
++  reg:
++    maxItems: 1
++
++  '#reset-cells':
++    const: 1
++
++required:
++  - compatible
++  - reg
++  - '#reset-cells'
++
++additionalProperties: false
++
++examples:
++  - |
++    reset-controller@a0b4000 {
++      compatible = "qcom,shikra-audiocore-csr";
++      reg = <0x0a0b4000 0x1000>;
++      #reset-cells = <1>;
++    };
++...
+diff --git a/include/dt-bindings/clock/qcom,shikra-audiocorecc.h b/include/dt-bindings/clock/qcom,shikra-audiocorecc.h
+new file mode 100644
+index 0000000000000000000000000000000000000000..0e64a42523f1ec4213ce8cbbbe6f8262d414f0eb
+--- /dev/null
++++ b/include/dt-bindings/clock/qcom,shikra-audiocorecc.h
+@@ -0,0 +1,49 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#ifndef _DT_BINDINGS_CLK_QCOM_AUDIO_CORE_CC_SHIKRA_H
++#define _DT_BINDINGS_CLK_QCOM_AUDIO_CORE_CC_SHIKRA_H
++
++/* AUDIO_CORE_CC clocks */
++#define AUDIO_CORE_CC_DIG_PLL_OUT_AUX				0
++#define AUDIO_CORE_CC_DIG_PLL_OUT_AUX2				1
++#define AUDIO_CORE_CC_DIG_PLL					2
++#define AUDIO_CORE_CC_AIF_IF0_CLK_SRC				3
++#define AUDIO_CORE_CC_AIF_IF0_EBIT_CLK				4
++#define AUDIO_CORE_CC_AIF_IF0_IBIT_CLK				5
++#define AUDIO_CORE_CC_AIF_IF1_CLK_SRC				6
++#define AUDIO_CORE_CC_AIF_IF1_EBIT_CLK				7
++#define AUDIO_CORE_CC_AIF_IF1_IBIT_CLK				8
++#define AUDIO_CORE_CC_AIF_IF2_CLK_SRC				9
++#define AUDIO_CORE_CC_AIF_IF2_EBIT_CLK				10
++#define AUDIO_CORE_CC_AIF_IF2_IBIT_CLK				11
++#define AUDIO_CORE_CC_AIF_IF3_CLK_SRC				12
++#define AUDIO_CORE_CC_AIF_IF3_EBIT_CLK				13
++#define AUDIO_CORE_CC_AIF_IF3_IBIT_CLK				14
++#define AUDIO_CORE_CC_AUD_DMA_CLK				15
++#define AUDIO_CORE_CC_AUD_DMA_CLK_SRC				16
++#define AUDIO_CORE_CC_AUD_DMA_MEM_CLK				17
++#define AUDIO_CORE_CC_BUS_CLK					18
++#define AUDIO_CORE_CC_BUS_CLK_SRC				19
++#define AUDIO_CORE_CC_CDIV_TX_MCLK_DIV_CLK_SRC			20
++#define AUDIO_CORE_CC_EXT_MCLKA_CLK_SRC				21
++#define AUDIO_CORE_CC_EXT_MCLKA_OUT_CLK				22
++#define AUDIO_CORE_CC_EXT_MCLKB_CLK_SRC				23
++#define AUDIO_CORE_CC_EXT_MCLKB_OUT_CLK				24
++#define AUDIO_CORE_CC_IM_SLEEP_CLK				25
++#define AUDIO_CORE_CC_LPAIF_PCMOE_CLK				26
++#define AUDIO_CORE_CC_LPAIF_PCMOE_CLK_SRC			27
++#define AUDIO_CORE_CC_RX_MCLK_2X_CLK				28
++#define AUDIO_CORE_CC_RX_MCLK_CLK				29
++#define AUDIO_CORE_CC_SAMPLING_CLK				30
++#define AUDIO_CORE_CC_TX_MCLK_2X_CLK				31
++#define AUDIO_CORE_CC_TX_MCLK_CLK				32
++#define AUDIO_CORE_CC_TX_MCLK_RCG_CLK_SRC			33
++
++/* AUDIO_CORE_CSR resets */
++#define AUDIO_CORE_CSR_RX_SWR_CGCR	0
++#define AUDIO_CORE_CSR_TX_SWR_CGCR	1
++
++#endif
 
 -- 
 2.34.1
