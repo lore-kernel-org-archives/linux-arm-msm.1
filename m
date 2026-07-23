@@ -1,66 +1,66 @@
-Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
+Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 187D547043B
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 11:30:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.54
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88487471D18
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 11:30:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784806238; cv=none; b=U1a3oCh3BMiFgrIcR/PraytDpYa85O1QJsJ7N55ezgyp9b8zHZVUwLosYzEoG7pHsdgq4oleZSDo2Mr2mNSHt2pY1q6j/O/7ATgxZj9BJmjIR3x+OnFBiqHblqwFV2v7YFBtYV2XTOqqxxXc0OeVfZrcP0MQQkB3GmKndwbTukY=
+	t=1784806262; cv=none; b=m4nrGkM2WdFjB115LDxh6tUCBj+/miC6CCeOrwvk1eQSApuBLvUJrDoN07G1VGZwlRNWDisehiOQFw4FgTm/m8rbfvxduIxMjJylVFTN3oUNgfiJOGP+f8OhbLmk4unYJl1DDkHzCiSPVxP5kTaCOzeVUZiYBW1TFLi7g0iIKVU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784806238; c=relaxed/simple;
-	bh=Eb4s4/iQHSUXZ9HuzdIz7QSVMesCI0MvaBjzTEDaKaQ=;
+	s=arc-20240116; t=1784806262; c=relaxed/simple;
+	bh=4f55Wmue7rWVrMQRu5qQEvu454CL76w82D8Y6+yNhCM=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=UmNvt4CNrILo6z7wA1Vum8G28PCTyERTFQSBgvK/5/rXcMLVc6JR3d/08zPPborGemW8y6uXXVaKN3R6sGokvNLhmQLG0TWvRyMAHyEqAg8Po/h9TqVr7zhUsvk+Iq2SC2wp52YOHnVZL0kdxBTjUj8kDEM7jB24r8/nLxHHr6U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=IAvG5St3; arc=none smtp.client-ip=209.85.167.54
+	 In-Reply-To:Content-Type; b=QlHYg13HfxMVkJlUZ7bjlSmrKsJJZLrFX89gJSZydskjGvdjGmno9eQ1hidNHswCdQA0A2aMCp4CAfwhY5H16QzSFXMcHGUaRVoajWYqsnsbSrqaPcgFxM8sBcDjxad/WycRYykuUwek5zDdyKYymqsA9d2SlfvvA9Mwj4uS/5g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=KoxLwpOT; arc=none smtp.client-ip=209.85.167.53
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="IAvG5St3"
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5b0190a62beso99078e87.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 04:30:36 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="KoxLwpOT"
+Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-5aebe49b227so216968e87.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 04:30:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1784806235; x=1785411035; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1784806256; x=1785411056; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from:references
          :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=87QtCEbDS1yneeD8KD17fyRLqP9fiy/6kt3pJMDAIBA=;
-        b=IAvG5St3jeYXItKhzczUcDNpVd9GzRRBoVtxAKKOEx0vfwRjOvNjR+Ss9GqNFSG1Ey
-         aqyEEbCeE7tCrZR+kVjScHLdYt4hkhWIMX1IigjKq/lQvlRkL6XbJESSl/0hUk+3bzO8
-         5Bb7gNljRmBIvsNPEkOeAuxcsKiTSL1SLbsjxAo6XGeWAexSQq5Yy8SEmeE1I3e4Cmsr
-         94nKNsdWD3aTgnS0l+KwPaZgap437zfMxjCtKCFXKh0lQau/Q2xLmbF8I0iaO6wKR5IE
-         l8QWWfrlhhBASjL4bTGJCGmyM61Fjn8PwS0PlIepBKOJich4MZZnedviD9sQNsybe/lZ
-         9kkw==
+        bh=Vv6vUno4qgjTH+OYVVQNA1sqBXT8T8DDiSHLEOwcpLY=;
+        b=KoxLwpOTR7M6n4IXU2LzutfxjZ9i3iqCb8PNkiGwMB6YySaG0azcP81WFRQrvXQdij
+         L85G0eorO+wD3QJPrRSU4moDsu0liyddHNUz+8gPOhU6s88Q7aci7L5eXvaOxzwu5xue
+         7sNroJOL4ZZ92vBd6Yv21E7oBqFf2hN8bd4pOm/jRbYHCoMuCwOGcF7jepLebzhZwBZ6
+         xyhv9kfcyKL5jqkPdZs5dAHBe5flldCMAXtWsoQKdp99EvUdxtRj/vBFbxkVTAmZsKA7
+         khd0NILSFpJWdrlzDAQpDfCUK3HTaGjX4K8SZkG2FEjSjMIu2bE/fE1VSjJu0XL95TSM
+         X1aQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784806235; x=1785411035;
+        d=1e100.net; s=20251104; t=1784806256; x=1785411056;
         h=content-transfer-encoding:content-type:in-reply-to:from:references
          :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=87QtCEbDS1yneeD8KD17fyRLqP9fiy/6kt3pJMDAIBA=;
-        b=PvQR/4hgn00c9aUCAiDK5XGatpm5czVCf/xgFuXqT2yWs08iy2QjOz8qOAeUC0xiLu
-         6kv7oxR8A1CV4gIa6hTqENuuT7FldaR1qhK+U7z8sV0Xu1IDiEg58gduI/NVZwW0ZtfY
-         ju4hic8uHSzeKKfVL/p5APfPbM+u3Cwd5ilwsZtvHEY21L6mIvUDWVBEocggRN2j/Iyx
-         KCYoV184aV24yabnqd2AV09qVPf1wpONyO3W61HZsdrUTnph/EruEe5MHXUo82D63Ge4
-         C2BfsBBCL8PCyBvSi2LOu3ggiYBj27MsMZ8L3aQtfrre932N5TjT63Aezk7az2WHUQUP
-         tyzA==
-X-Forwarded-Encrypted: i=1; AHgh+Rpq36QkFX5bG/xKD8WQy9VLj+el/Ud+vACh0V7MX56EONFnqiAGPr6HZDFZDhiSQ+HL6p5kLmMpHKKjvHj3@vger.kernel.org
-X-Gm-Message-State: AOJu0YylEn0xYmj1ZspIiSeE8OtrhzIotXkE8IWjCB5rZ4TmfaSJKxWq
-	pOpnYjJ4+OXdkYeqE6WRRV1RCgaQMKGKo+5b47wzbV0ftxICSVe13qw9gc1UJAgk4dY=
-X-Gm-Gg: AR+sD10w/C1fwsaT33P0GpgGxo2flcaqwEEg1ooh0GFkTABscK3Xh8o3IBb/zSe9rmF
-	7A0fd6nBxmDICk9BgnIuHiK3faw7QwLxULEIk9ZE6P67LaucR+20nhSe4hSOMipAHQfpP1pirWJ
-	hsQl6WFCtm7twVSqYdR0+sA9KOyZdLp+Qh164+6iYT6FkIdzwia6UgiqA/vUkqhaAS1NtFMXV8Z
-	pnwqKwJSGPBttGp+8AgjAyEGzUCa+wuL8Vseh9U2apk88CGcmUvjZibUWuSx9A4YPq+uhE4izvk
-	ZAE0/MEXbArLr84OCE2N0ZfiWh4DbUNEQ47l4+PwEiCdswvFbYZAXt6fOPC+7nMbm+67JXWTU36
-	lHQ38KjL1sZi3/HCRqnQQTSEZIDepuAUk5npFhnN8JueGIrQKQqMwqeyZP41m2aEeMChOe5NRCI
-	Ei6FyFgOwoW4koATIPif9QpouLTkYOeSc+we833Zhyw0bbfgkH9e8RWl5bxO8ntzM9IbU=
-X-Received: by 2002:a05:6512:3e01:b0:5b1:5e89:30f6 with SMTP id 2adb3069b0e04-5b2b2f6efb3mr290535e87.3.1784806234965;
-        Thu, 23 Jul 2026 04:30:34 -0700 (PDT)
+        bh=Vv6vUno4qgjTH+OYVVQNA1sqBXT8T8DDiSHLEOwcpLY=;
+        b=XyrVt6kHEpjDvn708FF8UeZ4DbGYZw7VZmcZBWiPpzaD6dGoIrASh4bkjukn+ddpmO
+         VQ6f5zstk16wFp3JNItNz1E2bdxE7MiHukkfdohU/UejRVQYj/1PxYfgkWk7eKtdfdQy
+         s2eGxeh0s5x8KfhU7DF+ZQ8wUb0c5Vb3E/ljvFh0eZtX3XC6q1VyDUauZJvA/m+VIOZ8
+         YO57GhoNl8r8TTDehT/M6b/KxzQlEUn2FZgh4rJ2VnDvL8D/qqt9Zxi2OaxELBOGdF6O
+         MsQz7rJlvsUAn/VCDpWT7o0kLpTJBY0WCAtkYBF/O2sf7n8m19rpBZ72Rj3mn+tq2k52
+         avPw==
+X-Forwarded-Encrypted: i=1; AHgh+Rq4D5AfKUWm6T6FxE/5gYRqd4lEcXpQ2O3Mv7jpooVunpfFy+fPpsRS56p6+9tOd3QmK3lxIWeBL3IDVHjg@vger.kernel.org
+X-Gm-Message-State: AOJu0YxdK9lF9KtA4BAGqZCOHsxD/ClbOv6evKIBLws3CW50gA5gWRlQ
+	qrJa/qJ8W0guF3V7JSmr6PFRiK5q2dJRG/rH8lo2SblMkJVg9GvPCemFuZ7ul86/aJw=
+X-Gm-Gg: AR+sD13XJI0ik5HVlQwRMyZVtzdQ4Ax6QJkz601f6BOKW11yYYKwx+9bjDKU7dms3/d
+	eO/Dzw6rGdFeemt+SBxcAhWxC9Xo0JftdOIE1PxLRloD167iT1r+qH0bZxBjZVCX2b9XG2soK68
+	EC2SuAxNZFtEs8aPIOCZ3qSEJhPcl2fIvsV81wuOxr6EURsXU8FnplMIWVjxSNWap5eA4xwD6Db
+	ZAjF0LRZ4xF0IaqqyYjABHFk4RcGK3aQOc8R28WSbBz0i5mbk/NUyShomTSRyF4bxmTLiltKRBw
+	6PxoNwIKlPUIMy1exe030JLDw/ttxIEYT9Wl5VeK2wM+qUvYGxhxWqMhsYqFk/NCwC1MHSQlJ7V
+	KMMrRkMzF8sZIYWEMMMY2Uiao00XCYltXBxeZKN7qyXpAp1cbKYBiGrkI8h7DxRsnktwxeNymgk
+	/f9ACk0UWDQulsuoVDxeGNbbKT3cBUwvyfgv7ZjqwJ1f3LhUtNAcy4HZAk
+X-Received: by 2002:a05:651c:1993:b0:39c:67c4:4eb0 with SMTP id 38308e7fff4ca-39f15170d72mr136651fa.8.1784806256225;
+        Thu, 23 Jul 2026 04:30:56 -0700 (PDT)
 Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2a9b0c511sm985237e87.0.2026.07.23.04.30.33
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-39ef68885a0sm9745521fa.3.2026.07.23.04.30.55
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 23 Jul 2026 04:30:33 -0700 (PDT)
-Message-ID: <58bb39e6-d87d-4c47-9d43-aa878199c31e@linaro.org>
-Date: Thu, 23 Jul 2026 14:30:33 +0300
+        Thu, 23 Jul 2026 04:30:55 -0700 (PDT)
+Message-ID: <d4dec9ad-0cd6-4666-bdb5-11daa00226c4@linaro.org>
+Date: Thu, 23 Jul 2026 14:30:54 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -68,32 +68,27 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] media: qcom: camss: Add "gcc_axi_hf" to 8775p VFE
- lite clock lists
+Subject: Re: [PATCH v2 2/3] media: qcom: camss: Drop icc_res_qcs8300 resource
+ table
 To: Hans de Goede <johannes.goede@oss.qualcomm.com>,
  Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
  Loic Poulain <loic.poulain@oss.qualcomm.com>
 Cc: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>, linux-media@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
+ linux-arm-msm@vger.kernel.org
 References: <20260723110952.55597-1-johannes.goede@oss.qualcomm.com>
+ <20260723110952.55597-2-johannes.goede@oss.qualcomm.com>
 From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-In-Reply-To: <20260723110952.55597-1-johannes.goede@oss.qualcomm.com>
+In-Reply-To: <20260723110952.55597-2-johannes.goede@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 On 7/23/26 14:09, Hans de Goede wrote:
-> The "gcc_axi_hf" clock is correctly listed in the clock list of the
-> 8775p 2 main VFE-s, but it is missing from all the VFE-lite clock lists,
-> causing these to not work on platforms where the firmware allows turning
-> off "gcc_axi_hf".
+> The icc_res_qcs8300 icc resource table is identical to the icc_res_sa8775p
+> icc resource table and qcs8300_resources already uses the sa8775p resources
+> for most things.
 > 
-> Add the missing "gcc_axi_hf" to fix the VFE-lite blocks not working on
-> these platforms.
-> 
-> Fixes: 924f45e58b1fe ("media: qcom: camss: Add missing clocks for VFE lite on sa8775p")
-> Cc: stable@vger.kernel.org
-> Suggested-by: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
 > Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+> Reviewed-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 > Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
 
 Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
