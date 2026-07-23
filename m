@@ -1,87 +1,75 @@
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 481374F798B
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 18:46:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FE364F7998
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 18:46:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784832400; cv=none; b=ZCD9sj/5+BVUeHriRBSgekkSZ+UG2TV0A9xwqu82LqNYKU4mWOW3OXT2NFS1nC2I+/ZsiSIPE6bAC1dCLKZ2mPx+EJwmkizdvKqeTPpXOxX2C2ff81z9ptJLG5BGWyxpc87iSdSevrzCsy/vfwk8SOZtF5XoSBPHmkJ1jUule4o=
+	t=1784832417; cv=none; b=oNNvcr3Yk4FbxeHjXegEMkrNPEk+SAahAuco9dEuClhiPUR6AHisctJnJj5l/7lJ7faN97WZv4W8hRhQs4Q4c+DGDkIj3o9uZj8y8lRoo/wHLoz72TvWbDIq1yvwFfae///B7xbZj213rLtbCy9PYy/+QPFe7ND3KLL0K7/tlYg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784832400; c=relaxed/simple;
-	bh=DQFKVraIj3hS/K9rhtkP6NnYFqE9X4Ceep45IBu9BFk=;
+	s=arc-20240116; t=1784832417; c=relaxed/simple;
+	bh=JlumXXFYa4YT2z0t/Rv8VpE7rH6ygFShwNbbT7uFZdU=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=fYp9xvKdcmWI2uiBVhIXsUYn0Y3jINIXP29N8yWrfE4M/ucptOBUrYJZ18bUBTUWW3sUFZUpMUuPaoRn/qpOfQ3Fvu+wgbJmrADtP42FpwQ/AD8ABnRpAX5Uu1ryqCHyaB6J5X3x1eLieXeLHOA5mpuzz8Eg7GIdvKbz9bCQh1M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=S4d/hxw0; arc=none smtp.client-ip=209.85.216.52
+	 MIME-Version; b=X1yI2jrplD7k8UE50YiHsPypj+PwG+xman/tOEVdG8KYmgtO8TzKeyzBx7Qn6ss9EQdOmGf/mt6y0GObYwotOc77w6hvMRz7iU4FknB3XVMLSN/ihVDZxrw43ASfrYVjgz5xcWZXnd4ODSnF/QMD+R65jJodgSlaQS3f0iJMsdE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=fHyUgATG; arc=none smtp.client-ip=209.85.214.180
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="S4d/hxw0"
-Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-38dcbade417so1041468a91.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 11:46:34 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="fHyUgATG"
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2cc97653887so12467955ad.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 11:46:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784832391; x=1785437191; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1784832409; x=1785437209; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8aDNX5oWZPCLlEUZqO7qQYiyJOs0NAqqQhS2frdoUAY=;
-        b=S4d/hxw05hTzm0cZgrTJhDMi/tEYkkLv8thfW5xvM8+ellLJtka8xcwyR+RfpFIR0B
-         F2LEXTmR4wcfgwL+5lshVIAoswu25IJERzRiEbcXwYJErCV2wnh5Ch4pe+yF/p/uMQ87
-         Lb/MxCyE5bjBIrQ3J59Bv8SLkLj3QCR95dArQXg/HWHSeD9zMb9CiysXsQPuwOaJpll8
-         HIPh9jp+8/KkPx78J2bGPwUrlwfWk6WYLJqHghyzcXUiUS/Ztz+V+IisvgUwoV83IoqV
-         b2mCVsm6MmwWxBIg3khUb+MmEu666Q1fyy5O+qJktvPDTZYWd3FEbd5gYeEexCo0lMb7
-         73Sw==
+        bh=inEAHAT4FZx62nofTUdSreIh00cPh6gTjTfAeZvFyf4=;
+        b=fHyUgATGzbfJZ2vlpUBJVp3yHBjyEQS5sswCIU+IiRFhFsId1U5H605OqFcKZ5vrdu
+         n4Cm1lK5dxN/St6pRWMW9qoaFjT0vkRxROtV2ajqGZGDaVBjTRokb5lSb9El9sbOfMaf
+         ckjXvJV0YrCmTO/Kg2SAk6vEsWEJEoQBAjRCQ9EDZmanz1WtOypXp6Ln894rMLA9zX9c
+         lRg8M+rtEEyvB7FfT0+qxhdVCsWOhjV+GU+DtQqK2c1AqK60aiSansBLnNSceQUDhFsq
+         nVf3cTWkjwvXExj1CDdEuPlibtyPDDypRehic92vK9OkV7n1Qz26JA+DSv/QERXOhquX
+         Sy9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784832391; x=1785437191;
+        d=1e100.net; s=20251104; t=1784832409; x=1785437209;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8aDNX5oWZPCLlEUZqO7qQYiyJOs0NAqqQhS2frdoUAY=;
-        b=LmBTovGHhq+P9psjerBOJRlcCkZfcQDsSuyYBFHSPqG4mmrhbDVdBOKQYp+93PLquk
-         KQiqthuPtDlr4SI6+HrqsMsnDiaQcwa9RKqa7Qvj9GlfuTNOwr1JOIA4e21/Em1ZP/sV
-         81rdztcsap7x+qmj7YjL3BeGIFb9VnZYymNpjmKqnGM8LZzgfCbHwL5YLYe69+mfkyts
-         Q/maBZsd9ID0+GFaODib772AXfsTR21G6uyHtENznoUNWyfa4+JlGhQUjzIIDaP3qUCl
-         K1TLGV6YPbPzFBnAhY0+RNXzxSyY205rOkyAsc8c6lCLVj+iU07/Rtw8BlGMu31EggAY
-         ZUrA==
-X-Forwarded-Encrypted: i=1; AHgh+RqSTX1GfNhLSEKLCKCTkyRyxJ6HA5LzpIVUDrNzlnZ9W2A5h95Crq42sFS4dP7NKok+3sUVl6rb1NXBf41d@vger.kernel.org
-X-Gm-Message-State: AOJu0YwOLUj0hekccnsU6X2D4pVri3ug6iy+Ffq+aClV8hgC8EIbKVUK
-	Q4m+ywrxqZP3Blj51vcmS08Irn3vDVovznpg0Qgp727aDpljv7FbVW3B
-X-Gm-Gg: AR+sD12P5RIqKM/xjqgbnRwMIywapoPqnY3nKWVevnzmbUanpJJHxl8Q/0r0DnA68E9
-	hZe+eVwjxLKPZqAjj2Xukk/53eRL9hgAmHeaY8kBcRUTueJAuiFxNP04DQcup8cnWIxASJCQupk
-	YFTpE2tzPt/Rvv+OvsH+XoWQdsmi8+wABnjWlUONLa1Pr/4GVRMMDa3KPaEp9Ihe7eAERz0vCNm
-	xM51dIqXxlt+Rvn8jvvlxjHgW19vj6193dwiWdBRYdDf0l21d5UVC8PdljK0UeS7fqzJa8glqyG
-	1i/uTHfaxlJjSNfCVBu04tQDnm6AGb9ewIJUIY6AXRelJXvEUF9YPtczWNwvNEAFdiaKlojLxOu
-	2Kr46lwGtCyUnEdTwiSex55zHjz4dZ+W4dkzTjE4NjhR38SUmpjjSuJPIVoHDXo4W3A4EwqPX
-X-Received: by 2002:a17:90b:52cd:b0:387:e0cb:7ee with SMTP id 98e67ed59e1d1-38ec6661b73mr4668847a91.34.1784832391486;
-        Thu, 23 Jul 2026 11:46:31 -0700 (PDT)
+        bh=inEAHAT4FZx62nofTUdSreIh00cPh6gTjTfAeZvFyf4=;
+        b=ssnVQyxQLCn65YfwkVP2QvyOuRU8JYdas1cOhAcQ5FhWnfwj0q80nEr6ePEJvlW2BA
+         LZ9vQQ+TXpw7FB7P7LVM1fUCNCEWlAle26RLxzUfJKGGRXGpfUYfeDQKww1DIhUrRZs7
+         MyHK+VPpOjT/BsEEYZ8AKmTaVgxbwE8DkuRv2R8U5HkOusO5UaO0uXOHtSrZQnJ3e18U
+         Z8vJ18Fwd8120S+EP6YaHFIK79zkUKOcWD6TU4Hw+qTL3vnKg6C/RlXfd35MJpjEFgC6
+         XvQhg9fWj7STRPTSW+anKxipUoNiwjWIbVtYVQ/TFdqhQoIQVA5C4Q2B3WN0ZcDLRAIe
+         WGjA==
+X-Forwarded-Encrypted: i=1; AHgh+RrCQ9bm5vDpOwSJHquAQ3d8eHTLQN90v65pz2fBGTA7qzsF6KaU9kZ7G6Tlji7ISged0jdvRSviEy/wj49/@vger.kernel.org
+X-Gm-Message-State: AOJu0YwzLzb4qY7TidwQEW4mp4W2gaZwuY1PNiD2LJO9zZni5C6grElB
+	ak/D9411UuD97PQIzVQbZ+GhvJW9rOwpkU1NTkuli5OXElzMd/qPs7wP
+X-Gm-Gg: AR+sD12HLbD+FnWjE+qlBDP1ykAHbfEB+ogE9w51/GWTLVoOWl5l1kYCFetoxXgLlI0
+	Z+lLni805gVJIOsq5QxxLMJhLxKL4ZAScpLe5Q9M+4WkORwyLyPHoWXr885LBMIi0pPJUUn/y+3
+	ZozUgs0nDMiVGvmHKpEpTw1bsMFV9RUTWCabrg0POm/dgGGjRpgot1+vgHXZXNmHbH+/trdYMLM
+	jLaacIN6o6s5n+Cc6hX4OoBuRM7DvRJXLZEHI5Yo3zkBrCKcYX3bpuOqWQm7VUBm343v/q6FUjH
+	me2cZVz65Yj1GiMKEv/oAqBKhkouo1c2RCQK0djAqUvT2QRLbyM8/HnTzKKzwAl5Elxuwk3pmSA
+	O75h3rYGvR7jZJjyUXsWgJmq+2osMnlzSOPd6plFTn7ll9sSaLMD1L2CaGJp8rarWQrL5f1Lr
+X-Received: by 2002:a17:90b:5603:b0:38e:7eb:d07b with SMTP id 98e67ed59e1d1-38ec6622023mr4815354a91.34.1784832408660;
+        Thu, 23 Jul 2026 11:46:48 -0700 (PDT)
 Received: from ubuntu.. ([110.9.142.4])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f03af8a45sm308155a91.10.2026.07.23.11.46.27
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f03af8a45sm308155a91.10.2026.07.23.11.46.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 11:46:31 -0700 (PDT)
+        Thu, 23 Jul 2026 11:46:48 -0700 (PDT)
 From: Sang-Heon Jeon <ekffu200098@gmail.com>
 To: Julia.Lawall@inria.fr,
-	Sakari Ailus <sakari.ailus@linux.intel.com>,
-	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Eugen Hristev <ehristev@kernel.org>,
-	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-	"Bryan O'Donoghue" <bod@kernel.org>,
-	=?UTF-8?q?Niklas=20S=C3=B6derlund?= <niklas.soderlund@ragnatech.se>,
-	Geert Uytterhoeven <geert+renesas@glider.be>,
-	Magnus Damm <magnus.damm@gmail.com>,
-	Sylwester Nawrocki <sylvester.nawrocki@gmail.com>,
-	Michael Krufky <mkrufky@linuxtv.org>,
-	Hans Verkuil <hverkuil@kernel.org>
+	Sinan Kaya <okaya@kernel.org>,
+	Vinod Koul <vkoul@kernel.org>
 Cc: cocci@inria.fr,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	dmaengine@vger.kernel.org,
+	Frank Li <Frank.Li@kernel.org>,
+	linux-arm-kernel@lists.infradead.org,
 	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-media@vger.kernel.org,
-	linux-renesas-soc@vger.kernel.org,
-	linux-samsung-soc@vger.kernel.org
-Subject: [PATCH 12/36] media: remove conditional return with no effect
-Date: Fri, 24 Jul 2026 03:45:14 +0900
-Message-ID: <20260723184538.3888637-13-ekffu200098@gmail.com>
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 19/36] dmaengine: qcom_hidma: remove conditional return with no effect
+Date: Fri, 24 Jul 2026 03:45:21 +0900
+Message-ID: <20260723184538.3888637-20-ekffu200098@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260723184538.3888637-1-ekffu200098@gmail.com>
 References: <20260723184538.3888637-1-ekffu200098@gmail.com>
@@ -101,189 +89,26 @@ scripts/coccinelle/misc/cond_return_no_effect.cocci.
 
 Signed-off-by: Sang-Heon Jeon <ekffu200098@gmail.com>
 ---
- drivers/media/i2c/mt9p031.c                          |  6 +-----
- .../media/platform/microchip/microchip-sama7g5-isc.c |  7 +------
- drivers/media/platform/qcom/iris/iris_resources.c    |  6 +-----
- drivers/media/platform/qcom/venus/pm_helpers.c       |  7 +------
- drivers/media/platform/renesas/rcar-csi2.c           |  6 +-----
- .../media/platform/samsung/s3c-camif/camif-core.c    |  7 +------
- drivers/media/usb/dvb-usb-v2/mxl111sf.c              | 12 ++----------
- drivers/media/usb/gspca/jl2005bcd.c                  |  7 +------
- 8 files changed, 9 insertions(+), 49 deletions(-)
+ drivers/dma/qcom/hidma_ll.c | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/drivers/media/i2c/mt9p031.c b/drivers/media/i2c/mt9p031.c
-index d21510caf45a..2b09e8315c8e 100644
---- a/drivers/media/i2c/mt9p031.c
-+++ b/drivers/media/i2c/mt9p031.c
-@@ -452,11 +452,7 @@ static int mt9p031_set_params(struct mt9p031 *mt9p031)
- 	ret = mt9p031_write(client, MT9P031_HORIZONTAL_BLANK, hblank - 1);
- 	if (ret < 0)
- 		return ret;
--	ret = mt9p031_write(client, MT9P031_VERTICAL_BLANK, vblank - 1);
--	if (ret < 0)
--		return ret;
+diff --git a/drivers/dma/qcom/hidma_ll.c b/drivers/dma/qcom/hidma_ll.c
+index 53244e0e34a3..f081aa787f0c 100644
+--- a/drivers/dma/qcom/hidma_ll.c
++++ b/drivers/dma/qcom/hidma_ll.c
+@@ -677,11 +677,7 @@ int hidma_ll_setup(struct hidma_lldev *lldev)
+ 	/* configure interrupts */
+ 	hidma_ll_setup_irq(lldev, lldev->msi_support);
+ 
+-	rc = hidma_ll_enable(lldev);
+-	if (rc)
+-		return rc;
 -
--	return ret;
-+	return mt9p031_write(client, MT9P031_VERTICAL_BLANK, vblank - 1);
+-	return rc;
++	return hidma_ll_enable(lldev);
  }
  
- static int mt9p031_s_stream(struct v4l2_subdev *subdev, int enable)
-diff --git a/drivers/media/platform/microchip/microchip-sama7g5-isc.c b/drivers/media/platform/microchip/microchip-sama7g5-isc.c
-index b0302dfc3278..7383341ec51d 100644
---- a/drivers/media/platform/microchip/microchip-sama7g5-isc.c
-+++ b/drivers/media/platform/microchip/microchip-sama7g5-isc.c
-@@ -598,13 +598,8 @@ static int __maybe_unused xisc_runtime_suspend(struct device *dev)
- static int __maybe_unused xisc_runtime_resume(struct device *dev)
- {
- 	struct isc_device *isc = dev_get_drvdata(dev);
--	int ret;
--
--	ret = clk_prepare_enable(isc->hclock);
--	if (ret)
--		return ret;
- 
--	return ret;
-+	return clk_prepare_enable(isc->hclock);
- }
- 
- static const struct dev_pm_ops microchip_xisc_dev_pm_ops = {
-diff --git a/drivers/media/platform/qcom/iris/iris_resources.c b/drivers/media/platform/qcom/iris/iris_resources.c
-index 773f6548370a..872bd09656b1 100644
---- a/drivers/media/platform/qcom/iris/iris_resources.c
-+++ b/drivers/media/platform/qcom/iris/iris_resources.c
-@@ -78,11 +78,7 @@ int iris_enable_power_domains(struct iris_core *core, struct device *pd_dev)
- 	if (ret)
- 		return ret;
- 
--	ret = pm_runtime_get_sync(pd_dev);
--	if (ret < 0)
--		return ret;
--
--	return ret;
-+	return pm_runtime_get_sync(pd_dev);
- }
- 
- int iris_disable_power_domains(struct iris_core *core, struct device *pd_dev)
-diff --git a/drivers/media/platform/qcom/venus/pm_helpers.c b/drivers/media/platform/qcom/venus/pm_helpers.c
-index be1cbd5cfe84..e88e66be4f6d 100644
---- a/drivers/media/platform/qcom/venus/pm_helpers.c
-+++ b/drivers/media/platform/qcom/venus/pm_helpers.c
-@@ -781,7 +781,6 @@ static int decide_core(struct venus_inst *inst)
- 	unsigned long max_freq = ULONG_MAX;
- 	struct device *dev = core->dev;
- 	struct dev_pm_opp *opp;
--	int ret = 0;
- 
- 	if (legacy_binding) {
- 		if (inst->session_type == VIDC_SESSION_TYPE_DEC)
-@@ -829,11 +828,7 @@ static int decide_core(struct venus_inst *inst)
- 	}
- 
- done:
--	ret = hfi_session_set_property(inst, ptype, &cu);
--	if (ret)
--		return ret;
--
--	return ret;
-+	return hfi_session_set_property(inst, ptype, &cu);
- }
- 
- static int acquire_core(struct venus_inst *inst)
-diff --git a/drivers/media/platform/renesas/rcar-csi2.c b/drivers/media/platform/renesas/rcar-csi2.c
-index 7305cc4a04cb..6635f5782175 100644
---- a/drivers/media/platform/renesas/rcar-csi2.c
-+++ b/drivers/media/platform/renesas/rcar-csi2.c
-@@ -2273,11 +2273,7 @@ static int rcsi2_init_phtw_v3u(struct rcar_csi2 *priv,
- 			return ret;
- 	}
- 
--	ret = rcsi2_phtw_write_array(priv, step4, ARRAY_SIZE(step4));
--	if (ret)
--		return ret;
--
--	return ret;
-+	return rcsi2_phtw_write_array(priv, step4, ARRAY_SIZE(step4));
- }
- 
- /* -----------------------------------------------------------------------------
-diff --git a/drivers/media/platform/samsung/s3c-camif/camif-core.c b/drivers/media/platform/samsung/s3c-camif/camif-core.c
-index 14eedd1ceb27..bb06847f3a63 100644
---- a/drivers/media/platform/samsung/s3c-camif/camif-core.c
-+++ b/drivers/media/platform/samsung/s3c-camif/camif-core.c
-@@ -301,7 +301,6 @@ static int camif_media_dev_init(struct camif_dev *camif)
- 	struct media_device *md = &camif->media_dev;
- 	struct v4l2_device *v4l2_dev = &camif->v4l2_dev;
- 	unsigned int ip_rev = camif->variant->ip_revision;
--	int ret;
- 
- 	memset(md, 0, sizeof(*md));
- 	snprintf(md->model, sizeof(md->model), "Samsung S3C%s CAMIF",
-@@ -316,11 +315,7 @@ static int camif_media_dev_init(struct camif_dev *camif)
- 
- 	media_device_init(md);
- 
--	ret = v4l2_device_register(camif->dev, v4l2_dev);
--	if (ret < 0)
--		return ret;
--
--	return ret;
-+	return v4l2_device_register(camif->dev, v4l2_dev);
- }
- 
- static void camif_clk_put(struct camif_dev *camif)
-diff --git a/drivers/media/usb/dvb-usb-v2/mxl111sf.c b/drivers/media/usb/dvb-usb-v2/mxl111sf.c
-index 870ac3c8b085..6404eb74db32 100644
---- a/drivers/media/usb/dvb-usb-v2/mxl111sf.c
-+++ b/drivers/media/usb/dvb-usb-v2/mxl111sf.c
-@@ -987,11 +987,7 @@ static int mxl111sf_frontend_attach_atsc_mh(struct dvb_usb_adapter *adap)
- 	if (ret < 0)
- 		return ret;
- 
--	ret = mxl111sf_lg2160_frontend_attach(adap, 2);
--	if (ret < 0)
--		return ret;
--
--	return ret;
-+	return mxl111sf_lg2160_frontend_attach(adap, 2);
- }
- 
- static int mxl111sf_frontend_attach_mercury(struct dvb_usb_adapter *adap)
-@@ -1007,11 +1003,7 @@ static int mxl111sf_frontend_attach_mercury(struct dvb_usb_adapter *adap)
- 	if (ret < 0)
- 		return ret;
- 
--	ret = mxl111sf_lg2161_ep6_frontend_attach(adap, 2);
--	if (ret < 0)
--		return ret;
--
--	return ret;
-+	return mxl111sf_lg2161_ep6_frontend_attach(adap, 2);
- }
- 
- static int mxl111sf_frontend_attach_mercury_mh(struct dvb_usb_adapter *adap)
-diff --git a/drivers/media/usb/gspca/jl2005bcd.c b/drivers/media/usb/gspca/jl2005bcd.c
-index a408fcc3a060..4988fbf5005e 100644
---- a/drivers/media/usb/gspca/jl2005bcd.c
-+++ b/drivers/media/usb/gspca/jl2005bcd.c
-@@ -148,17 +148,12 @@ static int jl2005c_start_new_frame(struct gspca_dev *gspca_dev)
- static int jl2005c_write_reg(struct gspca_dev *gspca_dev, unsigned char reg,
- 						    unsigned char value)
- {
--	int retval;
- 	u8 instruction[2];
- 
- 	instruction[0] = reg;
- 	instruction[1] = value;
- 
--	retval = jl2005c_write2(gspca_dev, instruction);
--	if (retval < 0)
--			return retval;
--
--	return retval;
-+	return jl2005c_write2(gspca_dev, instruction);
- }
- 
- static int jl2005c_get_firmware_id(struct gspca_dev *gspca_dev)
+ void hidma_ll_setup_irq(struct hidma_lldev *lldev, bool msi)
 -- 
 2.43.0
 
