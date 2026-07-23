@@ -1,221 +1,202 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA1E338C42B
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 19:16:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C02AB3BC68E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 19:18:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784834188; cv=none; b=nVzPN5ecnpTy1EUWWpvE7LlwgQWCJALpctqvS5m4I/N8twZAQjNefBeWMoR37DNsOgFchlbW0ZesXuagBv74YhHtWFvXNUYKEdRqfEosMVv7iw7E3GImq48Zj8zWQqRgUzOT6ZnpAX460ev9g/E+ANqSi1RKTwFjbrXOeYo/fm0=
+	t=1784834337; cv=none; b=p8DY1VGzHQSDynLaTHK6Y2PR6d+78Pl38B4tycVF+3dGgn8Vmv/8V7rXwB83RwNdSYX90sZefIeZDnUbuMfLJj4pE4aglMnWgPRkItRtHMUvN6ELHTD2q3iCWZAoB9x3kS2O0Ln76j20Ya14UgiBD3VfcoiWyribjZwiwFXX1xY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784834188; c=relaxed/simple;
-	bh=asxDQ6fQtq0+zoBrpTtg4hSVuljD7ouxIXdiKSHzxcQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=cd5WUdYRAtxTwDUob9BXU9mntgehWcqcRVFlkmJvjFDxUxSzKvxh8vFB9sBueMY7w1E9IDLhcncHiD4mHS+t8EvO2YH9h5MbD4Y/Rs7VomFCVHLKphOJbmGIbHWI1m5Bqz+98iT6VpskK/a19WZDZGU3xTbAoMP0m4RbZXabb8g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=j8YM4+5/; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VMt+lrpx; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1784834337; c=relaxed/simple;
+	bh=62MH3ErigjlRTtTQVAj5oD0cUicYxTuv6jKO7iogfzU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=o8LVSBQLseHXLbei6skQUlPdXN52dyDeLFEVSNPLLXcVgbUBlMXF3apDSr6Bo8CvR809FC8NCMaUwKTNdCYJWKb2vS6oxdHyPe0efk6lZC2/PQRe8Wn0t0KJmxG34LNz2XfFxyCWikRq5DUgtRTkJoYvzN4VePJyiJfgw1XNPx0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Rg+n2qdR; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YsiX0/aq; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="j8YM4+5/";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VMt+lrpx"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NIm0eT840073
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 19:16:20 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Rg+n2qdR";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YsiX0/aq"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NIm2P8828057
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 19:18:54 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	+YmIG/iZNAmovLkMBYqbYn5P4DPYWwSvMf5WH1pV7/Y=; b=j8YM4+5/mxhtJZA/
-	Fw7grVa5EXsQG9wnVw9HnY/SkxNvYuRc+KqREeqWrcAbdrgMwtgUlreKPlhKffSe
-	QOdGt9Po7AW6PQhp2dL96ei7Wfqo4PvYz1j6CncO9SHhGeGCIM3m7tf8/KxI3BpU
-	GvVrcq/FHHJPplYmVe9EvbkhfttV4pURzXDt0sSGGq4hbhEPKL0Pd+b3SSektTCI
-	m+6T4DRiG7MV5i16v5NqXKGtPLT3+llMwFHZyCSHctzuPITLA6aCnzrDhKOc8W11
-	JLn/W0OJcSzxD3Ex7XSd3M51TGMEGaXcJG55m404MdQ5QiDFkhTQEanX+ZorN+/p
-	eubtxw==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkqa18fjk-1
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=zb/ry0UeGYL5zv8gKcX/rJF/
+	g4FlRmPl6+5B6sl8am4=; b=Rg+n2qdRlrji+8eKrEkcLKblsiF29tBmbvoFuEY0
+	O8YbrvjNqa68nZzJSSOMWGeeV+5kWr4HLHAOmGRo5sFatVB14xtH65IIz96PsP8V
+	rnyrAFFTuyZ7WUSmmLZ85eBgpZHm9c7hgsjwiE2sNOZxUg8XhBb2IOOzZgE5y8Ej
+	Gk6NpDlS4UB75CTcCROpfDbolcEl8zjMDt5hCCX2yFG2dlbmRen1ibjB6aF3XCM3
+	LcoCvMS7n+cKv8NlG3xTKQp4aGpY/kidtF+j3Zd5Ju8/tKZYDeL/Mbhdcuhjqwwu
+	l4YyyxztXeR9AMFuPvcCev0uEknQniEqRoOcz/eutt28LA==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkqamrf48-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 19:16:20 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-c856470fe9fso897745a12.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 12:16:20 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 19:18:54 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-522de3c645dso27015401cf.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 12:18:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784834179; x=1785438979; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=+YmIG/iZNAmovLkMBYqbYn5P4DPYWwSvMf5WH1pV7/Y=;
-        b=VMt+lrpxv1soFVh/cvDopZzSBOIw9Nrn4NfQVPNlT1wuQlyM9rgsvd/DZQfi/y1tEa
-         6YqxHEqN7qGV8KlAqgWGOBc2moinph0krJnxtfA1TH1KlpxyU/+m+RXia2gKLd2JYGAN
-         du5MmuqsF8PDei0ZIOz8Uz0eu7BMnuoRN6zHc/Ue0qvBsDxfBXfNMQov7VeuZQGq1sUs
-         fp8MO1xAoecVXOgFjeX9diBWr5GJHDdJGOnQMRpPYgvv/VGua4CqqoHS1Hxhmj2c02Gu
-         zoZBXfoq7Word9GaojBoHiVPxAMsHRSNA8mSQUnyOc4Gvs45edz76UI3L+icXcdBIunI
-         YH0g==
+        d=oss.qualcomm.com; s=google; t=1784834334; x=1785439134; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=zb/ry0UeGYL5zv8gKcX/rJF/g4FlRmPl6+5B6sl8am4=;
+        b=YsiX0/aqGlVzAJROBoSepu82BOssR11ETWAqpkoiC8YR3+TGNn7kY3eTf51DRJ0O2N
+         Rb4P5L7kw/euvJJXm8Fnjn/ImMafnjEA2zL/GO1ipI9czOtztSwYbzYoYWLye27u5lYJ
+         stQv6H4azhSQQwkUakrSnSoZvan5rOkaJLXR0B8Ia7/AA+Wr3ym22pBN6CC3zD5fwAiK
+         XVikpQ7FtrACyaGPiTuO+tXTk7ENGIoXNvpes9ZPCr7wPzR1CsMTaqU+MPz1pQv6n1wD
+         UulvVgZaUlm5G8Nj06i0uC30gH68zannwSPDVosBCIv7LXPuiiODthO+3NRZo1r5B3gH
+         ZxQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784834179; x=1785438979;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=+YmIG/iZNAmovLkMBYqbYn5P4DPYWwSvMf5WH1pV7/Y=;
-        b=SYI+6zZf/C1PvDD+G+ZR2MEQntKkvdI0pu+u1HncfA6Au2hDF7laVXHGlnVN4/SKG8
-         PdsJFDZPLhHeOL+BQM56Bw7OZXm5xpXBb4tJ4qzlckwyjauRH5rIWvCMo4R3hI3a7J+r
-         s9hCBLQbNtG7bqdaMOVcWG8r4ANrEcrU4U7KjslmKSXSflbNU+6isr/5F92nBhoW1nzY
-         s5bazVFKpqSmOZhw/G29MNEoHZaref2LMUm2n+CuoDOBfTDbds5Tcvp3hODjzMNnA53j
-         IEjWevGPO0Ok0HfdAYABRoDI49yVvM5PR1F6duvf0tS7SJ+eGq5q9Un0p5Rv4r5ebxA2
-         MD5g==
-X-Forwarded-Encrypted: i=1; AHgh+Rr126nL1AvAOK8qRRrA5y1WuMYCFJOKVv5H7xh+XGWWx0Lb5DCa6/TqngkEz84Zr90GLFvm4BwpqQTjHQgn@vger.kernel.org
-X-Gm-Message-State: AOJu0YwbGvN/ky4m0a9WYOBBmBMJ4b1maKK+kdq/x/l/oPZbmJdFKWA8
-	UvYisv8ibHibvs6AkNK4BghKsbJvaC5A+K9I0jpNHdgJAhn2GBquCIQPszdhvwgZvKqpXlytR5C
-	DLErpmhb6OexlZolxc+owqTDcluVA/Bl3y5dQgXZQZpqhWKDHOfNqPNvJ0qVR2whLOC7J
-X-Gm-Gg: AR+sD11jFPMbkWT5VckqwnuQLCaw4oy/iy4Ysj7pej+9cJZJUGMURkMgWg4wCHYTZUv
-	hTqp6Pcq2mnSeIByvN/b9YIY/BDyWo3fN0gHE3Mtu7+gLJT4/9JkLvsiknM5M2MiyX7iphkr/oY
-	aHF7Q1d36LLDuh54fjWo9d0HB3FNUycgcMce9qZkq6ZzI1bJEmWAWaWu/v35FZFyoypqT/29w9Q
-	V26vquf/Zub3x6Hc33wRW3Y75UBwl+XN7HLB1l22Xc763xYRFSA42zLjML71EYXhXYAuLH3MgR4
-	FT8LKLvmyXuxaulsstYWsASd8Hr/o+6YFlqea/B/HV2A0v41CGCBdlQVKkl0kbkELhxZ9LpRVE0
-	nGb1O3O0uC2sYeYXFiA9fhXtVucLVywBY
-X-Received: by 2002:a05:6a21:103:b0:3c1:d78:6457 with SMTP id adf61e73a8af0-3c44b02ea57mr4433556637.32.1784834178842;
-        Thu, 23 Jul 2026 12:16:18 -0700 (PDT)
-X-Received: by 2002:a05:6a21:103:b0:3c1:d78:6457 with SMTP id adf61e73a8af0-3c44b02ea57mr4433501637.32.1784834178262;
-        Thu, 23 Jul 2026 12:16:18 -0700 (PDT)
-Received: from [192.168.2.3] ([49.204.16.42])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3147e070538sm22149978eec.20.2026.07.23.12.16.13
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 23 Jul 2026 12:16:17 -0700 (PDT)
-Message-ID: <c1db2ca4-ad1c-440f-bff8-eb7660af8021@oss.qualcomm.com>
-Date: Fri, 24 Jul 2026 00:46:11 +0530
+        d=1e100.net; s=20251104; t=1784834334; x=1785439134;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=zb/ry0UeGYL5zv8gKcX/rJF/g4FlRmPl6+5B6sl8am4=;
+        b=fYH3HwLgYagbELAokc+yUtAMlAYlcfOriBrue9TAQF0yIPdTu2hWURm2XfQIpe8UgU
+         hI3jAjmVwXoPTRKoWlJSGtAJHR4HTzcfS6uaRTEXxLS2LlaVDr08J9peq5ClogbZaH9c
+         uDpZedqsASdCBZ8jIk3ze7KhuD9M78QhARlqsgrnsKOHvXOiF++sd337sCLgCUKx0BSY
+         pVPouLuXhkRTh53sMLrHEirDYG/mPh2o6AuB+8qXLr9dImEEvNZ4J0kwVKDnuj5lea04
+         n/X/o6ubN5drXAdD5IDS5q7Tcrk3AdXYlZDKVWwZ9/kf4AbKlV7lLBeEBVvnAWN/4YV/
+         T1uQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrRYSLGMCjDnb+he6IfcQr/W3GJwGpS24HODCbfiFiqU1rlcuom/RFEHG8KLYMiUGezkGClGUT+xh4A9z+x@vger.kernel.org
+X-Gm-Message-State: AOJu0YwEVjPStCX9noo/9Lq34JRhwWRIB6mEuCUc2Ny9mM1q70Z6OoLi
+	se4VMWGmQEQls2IS81UZdBVKgdLamjTxwtcLSIHwgpLwKBVCjDM+A/Vk1hghyVRgHMgttfT8pNj
+	uogfGpbqUwyKQ3+arRIb6140BGNTGqyZuWqsnyv1+Ntnpu6CMOngRFlQwv9W7yPbJx/Br
+X-Gm-Gg: AR+sD108XulnJdD1UylduvhgbTp/OAcqI+GdLiJCrUTdKmnUrGpF2y1SooPFXk5XJ43
+	3Mzy/31oq5uk7DQi5v1tb87aZt+Cyk23uu2KrpKmxiuqlgJ91TyN0+h69yuooIUeAoeiRte3NWK
+	FQlwu2fXaJxz2PpxotQis4vLOQmHiMFtyW2K1ukxQx2CARwNEMPDvvWz44eV18kNoY+Xvc40J6n
+	03q/U59trWfIsj6/uSHnP4Ypax9gG6rzKusEfENHx9zf2Qvgnhtand6xgBeXtUaO+nAh5V3Tx7V
+	sJ8MS4yKsKttEm+DslYg5hn1Dv8v9WAzpKyhZZudvroC759Jv+qKGlPmlI7ZPgQ+KzmVvkqDbgt
+	pP/CIGlog9CoGGbdVfKf1T9BDP+353mp6IjKkgp6TE3h+n061zmC6vl4ldiv0MT5bDIQj1sFE8i
+	P3qffV2jZuOefI3Q==
+X-Received: by 2002:ac8:5c83:0:b0:517:9f43:4732 with SMTP id d75a77b69052e-5283ddd1608mr44395701cf.11.1784834333710;
+        Thu, 23 Jul 2026 12:18:53 -0700 (PDT)
+X-Received: by 2002:ac8:5c83:0:b0:517:9f43:4732 with SMTP id d75a77b69052e-5283ddd1608mr44394791cf.11.1784834332367;
+        Thu, 23 Jul 2026 12:18:52 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2a9e44b97sm1155545e87.61.2026.07.23.12.18.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 23 Jul 2026 12:18:51 -0700 (PDT)
+Date: Thu, 23 Jul 2026 22:18:47 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, linux-kernel@vger.kernel.org,
+        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org
+Subject: Re: [PATCH 1/2] ASoC: qcom: remove ipq806x Storm machine driver
+Message-ID: <5o4nyr5iycpgopeo5dllygtndbp24g5ejqvh43d3mxwnxufork@zds6b6aqvcqf>
+References: <20260721-drop-sound-storm-v1-0-23ae4a689ffe@oss.qualcomm.com>
+ <20260721-drop-sound-storm-v1-1-23ae4a689ffe@oss.qualcomm.com>
+ <85f2799d-fadf-478d-9f3f-fb8ff91ba84d@oss.qualcomm.com>
+ <6a609d87.87c5160c.1accad.0f33@mx.google.com>
+ <CAO9ioeUw4QgW47xmC58dGc1_j2UPFjDM+dDRF-bggpBPFA32YQ@mail.gmail.com>
+ <6a625f94.4d70c427.b2b96.9b5b@mx.google.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/10] hwmon: Add Qualcomm PMIC BCL driver
-To: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
-Cc: linux-hwmon@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        mfd@lists.linux.dev, Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-References: <20260722-qcom-bcl-hwmon-v2-0-febe2805e17b@oss.qualcomm.com>
- <20260722-qcom-bcl-hwmon-v2-2-febe2805e17b@oss.qualcomm.com>
- <373bd00e-bfcd-4f6c-b64e-a707af01417c@roeck-us.net>
- <cdc0fb5c-d277-40b4-8b00-c73eb881c062@oss.qualcomm.com>
- <4f2d9c51-1059-489c-a469-562ec52015da@roeck-us.net>
- <24a0ac2f-792e-4296-949c-047d9ce1c1f3@oss.qualcomm.com>
- <3635cd34-4c11-40fe-a9ff-48b752fb5150@roeck-us.net>
-Content-Language: en-US
-From: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
-In-Reply-To: <3635cd34-4c11-40fe-a9ff-48b752fb5150@roeck-us.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: Xq4FCRiaJ2UfyK-AIR23RBfiT-iWwrHF
-X-Authority-Analysis: v=2.4 cv=L4wtheT8 c=1 sm=1 tr=0 ts=6a626884 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=BvtW7Q8lqb1UdYndl6lHrw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=VwQbUJbxAAAA:8 a=_jlGtV7tAAAA:8 a=l_Mds-CbMwRO_PrwST4A:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=3WC7DwWrALyhR5TkjVHa:22 a=nlm17XC03S6CtCLSeiRr:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDE4NyBTYWx0ZWRfX2AriPBO/Kbnl
- fPKfzuIdKB/I7fIa4+MK1nR9nyH0QfsQhk+DErR2+N13nUHzGCtrpr83fOc4SGebhEEj+DPWcUU
- Xl3UVT3kOl9mL5afTLd0gMv01mnFMP/x+vpYlww+iXLS1M6Bu9gPyRoaieprvTiIQp3NuUNtZaX
- ZT1RU32UkNnoygch7Tcxaz3br+vnY8YYp7Z5YPC8pPvEG2qdNYNaPpPRj88/YRt4m/FBoGBcTWo
- ukLyCUTujxN8Y6rmZXLR8qVDHE9fZdb6LYXmsdFeLohU/PxlxCHB3u8pXx2cXJP7qJw7K8Tz1Zs
- l+Poan3tFv67/5FCQFoI7TtB3/pFnOf8DcCq9DW1Vb9Hz4RznddcQGGT34v5HBVYzkl16e7XTPf
- ewVXcE2HaKOoZaYP4DFN+l3KORBiMoKdJAsiYDkc8rgu6jdeHPTmr8zZTEKDgEdptbYwgMY2aKF
- E4E9Fues94ay/wzjbtw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDE4NyBTYWx0ZWRfXzsyF25eAOUMh
- gXtfdBgUFizpXDGX4xL0Lo6vvmz3R43stHO52ud1yQ9F8KLQWf6QyJcarFFRfuwJwkq1w2+zIfu
- 3vW3+HxNsHuT4FVpZdQldDJmK+U7Kq0=
-X-Proofpoint-GUID: Xq4FCRiaJ2UfyK-AIR23RBfiT-iWwrHF
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <6a625f94.4d70c427.b2b96.9b5b@mx.google.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDE4OCBTYWx0ZWRfXxlBMlrBRF7EB
+ SdQXR5TYlDHfQpZZ139APd0CltyR4Qv0NhAm62W4cHG6tR4DskkydxOppVdBVQK3atXqc1+p2SO
+ DiPcJqFJVSp+daYTVyI8GVqQWoJY7ryP9LOjMnIQ/C6NzFBOrRJCY7yDZY0zEYvEmr+ld3q+ErX
+ YPpfO5AIPwtdp+o79H35jYeqrbBZsyA+M/rgCTtdtES/+Q3DWQBrpOlbJbm6vd4K9RKjhf53PVt
+ roEViU6OeT1+8h1EDYjt+uS9tuRJM5iFQvvacIVCt9lQW8nTlv89zpKHXi/akH94itWx2+ORiJ5
+ EGXP7U6zujoMKVHqA9ar0VEXf/+MbbomgNPXw/54jNxzetipBto04WJC9Q3COXAY3MkU2+LWD85
+ aA8p8B9W6y8ebbacVkMAQMLjqjg634S8feE9aijpI+aokmvoretUXHLq4Q0dNvHKvLmLRshZoVt
+ Ixqd26dlJCLDpbcUS3w==
+X-Proofpoint-GUID: 7we7X0NSm8Lr-byK2bst2iOmo_oxf6ZA
+X-Authority-Analysis: v=2.4 cv=DfAnbPtW c=1 sm=1 tr=0 ts=6a62691e cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=pGLkceISAAAA:8
+ a=EUspDBNiAAAA:8 a=pgCZHW_WQO5PacoC4eoA:9 a=CjuIK1q_8ugA:10
+ a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDE4OCBTYWx0ZWRfX4r35s2/1y25n
+ PqEBR835umlvyjVAVFO49BwId8gUwamEYtaYG6d5Qt92Bovy0KO8wZIKRWg9RxPfnFnPzb4fl4p
+ oaI/tEl3zBSeN44sWfbfZsahbKiRx7A=
+X-Proofpoint-ORIG-GUID: 7we7X0NSm8Lr-byK2bst2iOmo_oxf6ZA
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-23_06,2026-07-22_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 bulkscore=0 suspectscore=0 adultscore=0 clxscore=1015
- lowpriorityscore=0 malwarescore=0 impostorscore=0 phishscore=0
- priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ lowpriorityscore=0 clxscore=1015 suspectscore=0 spamscore=0
+ priorityscore=1501 impostorscore=0 bulkscore=0 adultscore=0 malwarescore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607230187
+ definitions=main-2607230188
 
-Hi Guenter,
-
-On 7/23/2026 12:29 AM, Guenter Roeck wrote:
-> On 7/22/26 11:19, Manaf Meethalavalappu Pallikunhi wrote:
->> Hi Guenter,
->>
->> On 7/22/2026 11:16 PM, Guenter Roeck wrote:
->>> On 7/22/26 10:38, Manaf Meethalavalappu Pallikunhi wrote:
->>> ...
->>>>>
->>>>> I am curious: Why not use static initialization and use the is_visible
->>>>> function to determine if an attribute is visible or not ?
->>>>
->>>> ACK. There is already a comment in v1 suggesting the use of dynamic 
->>>> allocation based on the available attributes rather than static 
->>>> initialization. The intent is to avoid having to perform enable flag 
->>>> checks in multiple places.
->>>> . >
->>>
->>> You lost me, sorry. There is only a single is_visible function,
->>> and its intent is exactly to handle situations where some sensors
->>> are not always available.
->>>
->>> What would be those "multiple places" ?
->>
->> Understood, thanks for the clarification. I'll revert to static 
->> attribute initialization in the next revision and use is_visible() to 
->> control attribute visibility where needed.
->>
->>>
->>>>>  From the earlier exchange I had the impression that there is a large
->>>>> number of current and voltage channels, but it looks like there is 
->>>>> only
->>>>> one each. That doesn't really warrant or need all this dynamic code
->>>>
->>>> Yes, this hardware only supports one or two channels (voltage and 
->>>> current). What we discussed earlier was that each channel can have 
->>>> up to three threshold alarms (warning, critical, and emergency). 
->>>> However, the hwmon framework currently supports only two limit 
->>>> alarms for these sensor types. I have not added support for the 
->>>> third alarm threshold in this series to keep the initial driver 
->>>> support aligned with the existing hwmon capabilities. Once the basic 
->>>> driver support is accepted, I can queue a follow-up series to add 
->>>> support for the third limit alarm.
->>>>
->>>
->>> What does that have to do with attribute visibility ?
->>
->> I was only clarifying that the channel count has always been small 
->> (maximum of two channels) and has not changed since v1. The earlier 
->> discussion was primarily around the limit alarm attributes. That said, 
->> you're right that this is unrelated to attribute visibility.
->>
+On Thu, Jul 23, 2026 at 08:38:09PM +0200, Christian Marangi wrote:
+> On Wed, Jul 22, 2026 at 01:48:30PM +0300, Dmitry Baryshkov wrote:
+> > On Wed, 22 Jul 2026 at 13:38, Christian Marangi <ansuelsmth@gmail.com> wrote:
+> > >
+> > > On Wed, Jul 22, 2026 at 10:00:34AM +0200, Konrad Dybcio wrote:
+> > > > On 7/21/26 8:12 PM, Dmitry Baryshkov wrote:
+> > > > > The Storm board machine driver targets Google's IPQ806x-based Storm
+> > > > > reference board (a MAX98357A DAC wired to the LPASS I2S bus). This board
+> > > > > has no upstream device tree, no active users and has seen no functional
+> > > > > changes in years, so the driver is dead weight.
+> > > > >
+> > > > > Remove the driver together with its Kconfig entry and Makefile rule.
+> > > > >
+> > > > > Assisted-by: Claude:claude-opus-4-8
+> > > >
+> > > > Using AI to `git rm` is definitely tokenmaxxing!
+> > > >
+> > > > > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> > > > > ---
+> > > >
+> > > > Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> > > >
+> > >
+> > > Honestly I'm pretty angry about the latest changes on ipq806x. First the
+> > > dtsi just because there weren't device (it's ok and understandable) now we
+> > > are starting to remove driver...
+> > >
+> > > There are godzillion situation where there is a driver but absolutely no
+> > > dtsi. Lets remove the dwmac driver, usb phy, pcie and everything else at
+> > > this point and treat this soc like it's a 80-90 code...
+> > >
+> > > I will post dtsi with actual device for the SoC but really I'm not
+> > > following all this hurry in cleaning code for device that still gets used
+> > > and actually some company even produced new one (even if it's EOL)
+> > 
+> > We have no way to check that the device is being used other than the
+> > DTSI present in the kernel, being updated from time to time with
+> > non-trivial changes.
+> > 
+> > For the patchset in question, do you (or the community) actually use
+> > OnHub? If so, please consider upstreaming DT files (and also updating
+> > schema FWIW).
+> > If not, the files will eventually go away. Just having unused drivers
+> > _adds_ a burden. I stumbled upon the driver while reviewing a patch
+> > changing the driver (for the sake of changing the ASoC API).
+> > 
+> > And FWIW the series doesn't touch the IPQ806x LPASS driver (which has
+> > a DT counterpart).
+> > 
 > 
-> Feel free to use (and test)
-> https://lore.kernel.org/linux-hwmon/20260722185749.2313572-1- 
-> linux@roeck-us.net/T/#u
+> Yes on OpenWrt we support 3 OnHub google devices from Asus and Tplink and
+> they also use the storm driver for the strange attached speaker.
 
-Thanks for working on this. I'll use that change as the base, rebase my 
-series on top of it, and add support for the third alarm level.
-By the way, for the voltage channel, the hardware monitors undervoltage 
-conditions and provides three threshold levels. At the moment, I am mapping:
+Ack. Then pretty please, could the OpenWrt community please contribute
+those to the mainline. It is a quest and a process, but it helps us to
+understand actual hardware users.  Not to mention that getting platforms
+support upstream would lower the burden of rebasing on the new upstream
+kernels (assuming that you are using close-to-upstream kernel) and it
+would also save from similar cleanup attempts.
 
-LVL0 → min
-LVL1 → lcrit
-
-For LVL2, would it be possible to introduce a corresponding low-voltage 
-emergency threshold, such as lemergency (or another more appropriate 
-name), to represent the third alarm level for voltage sensors ?
-
-Thanks,
-Manaf
-
-> 
-> Guenter
-> 
-
+-- 
+With best wishes
+Dmitry
