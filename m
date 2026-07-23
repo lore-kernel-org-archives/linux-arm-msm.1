@@ -1,47 +1,36 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B6B944E673;
-	Thu, 23 Jul 2026 18:32:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AAAAD47D45B;
+	Thu, 23 Jul 2026 18:34:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784831554; cv=none; b=VysPwKHCVjtpHpsHf1ZszY0INMb8NHmPNW1ICiuG05eiRiRFvhTFGmEyVM8m6OkwE50f5Kz5aqEH0mtLNrOXTBwWzFpetG2eWCMMbFmcjj2vPF+rcZxQ2dO4rlGDOj3crk7sXsVrZ7hf64DV7oZW2xczCOs3Vfh87rgBBep4oic=
+	t=1784831684; cv=none; b=cT/0lwLjOzkUb4s7RsGWYOh4GcN8DBSODan+eT98DnZFmATJaxZlM2KVIwJ0RCsDI1BRKH6J4QBy8j/RO5axo6VtwVdniH6KlY9/YseekpsyE65e2kBmmE9QuqWB0hOSHxu4pC7JvmXHMHfJvl8p/cbbyl8+LjqVkVgIBrwQ2yE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784831554; c=relaxed/simple;
-	bh=06hWyjEzCk1moV0Y5VMIjuvMYIeAL7GH+0ttjksGnVk=;
+	s=arc-20240116; t=1784831684; c=relaxed/simple;
+	bh=u/kNO7lqSpiD/7rkaWPsgbQzJdaALeDH8Hehr94V1wo=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Fu4Y/WYIcSeEdQ9kcnxLcIT/nxKHKmwiAbO5giznHqvBr2DYhU9b7rpbC/BpsAPcIypekMKIsTHAPCSBEmrxSwDXBlk2oclK0/9aGHze9eK9ziNkJto73JnG6abHjvLyu3ptrCdXJgv0/YerI0TVAkNq4D8UWIyD/YGSSVcihgc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IxgpEOa8; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IxgpEOa8"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 245611F000E9;
-	Thu, 23 Jul 2026 18:32:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784831543;
-	bh=yLaoQoa9OBDnx2oF3ltfmn0EN/7WNuoHG/RPPv5+mXA=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=IxgpEOa8tiRHgneFL9phuoyVoYWwumd/77iy/XArcpOa+98th0zgYI+Nm0AmtKOD1
-	 xROExYyinO6oUv0KanAoCx1NnxCL/hNfGJ9hmc4t47QKxjyu9Ove+7G4/uWtljRj29
-	 XFY1/tl2Pv+PHE22OrMyh46hsDfe2yGKZK8o3mj4/hDnfnOUlUJ0XnrOrzsU0VlIQT
-	 gWHcbPeEIxiwMmJxBY5UKciM2u3q1N7ZNQLNEItL35QTC2fYsfz9H517hw0uQqihnQ
-	 0TG6NXh032QlDe3BQPghljeMOMYckl5ZDJTIBvh1yqnL9pRjyuBfRx21rvJ/Qijei/
-	 8saF69AAUrNAQ==
-Date: Thu, 23 Jul 2026 13:32:19 -0500
-From: Bjorn Andersson <andersson@kernel.org>
-To: "Maulik Shah (mkshah)" <maulik.shah@oss.qualcomm.com>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>, 
-	Thomas Gleixner <tglx@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	devicetree@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v3 2/3] arm64: dts: qcom: purwa: Drop the Hamoa
- workaround for PDC
-Message-ID: <amJcXDcI0QYqtOnK@baldur>
-References: <20260715-purwa-pdc-v3-0-be08934dc916@oss.qualcomm.com>
- <20260715-purwa-pdc-v3-2-be08934dc916@oss.qualcomm.com>
- <20260716-starling-of-heavenly-symmetry-09a73a@quoll>
- <almDHnEcruBl-I3l@baldur>
- <64bf3979-51cc-42ed-b66b-c7af04536481@oss.qualcomm.com>
+	 Content-Type:Content-Disposition:In-Reply-To; b=OWWgInRDzrjA+ByHST+OY8vuIKjRf6TeVjwk171WkaPUq1QS9lcvQ38cN4ptRO2bo605+qhu2KUcVEvkSe7wwUSybXiU0oPITfNi5BPdtmGzEXl3Fv2+A8MASkDECwReRxQ7lQ31ROA4g6vCooxES2Q6x6/Q52cP7kYxS8nnCH4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 63D291F00A3A;
+	Thu, 23 Jul 2026 18:34:40 +0000 (UTC)
+Date: Thu, 23 Jul 2026 11:34:38 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: Thara Gopinath <thara.gopinath@gmail.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	"David S. Miller" <davem@davemloft.net>,
+	Stanimir Varbanov <svarbanov@mm-sol.com>,
+	Eneas U de Queiroz <cotequeiroz@gmail.com>,
+	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+	linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org, brgl@kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH v6 7/8] crypto: qce - Use a fallback for CCM with a
+ partial final block
+Message-ID: <20260723183438.GB93534@quark>
+References: <20260717-qce-fix-self-tests-v6-0-455775fe5f6c@oss.qualcomm.com>
+ <20260717-qce-fix-self-tests-v6-7-455775fe5f6c@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -50,126 +39,69 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <64bf3979-51cc-42ed-b66b-c7af04536481@oss.qualcomm.com>
+In-Reply-To: <20260717-qce-fix-self-tests-v6-7-455775fe5f6c@oss.qualcomm.com>
 
-On Fri, Jul 17, 2026 at 09:11:28AM +0530, Maulik Shah (mkshah) wrote:
+On Fri, Jul 17, 2026 at 05:53:36PM +0200, Bartosz Golaszewski wrote:
+> CCM builds on AES-CTR for encryption, and the crypto engine stalls on a
+> partial final block just as it does for plain ctr(aes): a payload whose
+> length is not a multiple of the AES block size leaves the operation
+> incomplete and fails with a hardware operation error. This was caught by
+> the ccm(aes) crypto self-tests.
 > 
+> Force the software fallback for CCM requests whose message length is not
+> block aligned, reusing the driver's existing need_fallback mechanism.
 > 
-> On 7/17/2026 7:38 AM, Bjorn Andersson wrote:
-> > On Thu, Jul 16, 2026 at 09:59:44AM +0200, Krzysztof Kozlowski wrote:
-> >> On Wed, Jul 15, 2026 at 06:52:01PM +0530, Maulik Shah wrote:
-> >>> X1P42100 (Purwa) shares the X1E80100 (Hamoa) PDC device, but the hardware
-> >>> register bug addressed in commit e9a48ea4d90b ("irqchip/qcom-pdc:
-> >>> Workaround hardware register bug on X1E80100") is already fixed in
-> >>> X1P42100 silicon.
-> >>>
-> >>> X1E80100 compatible forces the software workaround. Use the X1P42100
-> >>> specific compatible string for the PDC node to remove the workaround.
-> >>>
-> >>> Fixes: f08edb529916 ("arm64: dts: qcom: Add X1P42100 SoC and CRD")
-> >>> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> >>> Signed-off-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
-> >>> ---
-> >>>  arch/arm64/boot/dts/qcom/purwa.dtsi | 5 +++++
-> >>>  1 file changed, 5 insertions(+)
-> >>
-> >> Why does the DT change appear in the middle of the patchset? Please read
-> >> submitting patches documents - both of them - and maintainer-soc
-> >> profile.
-> >>
-> > 
-> > I thought I had figured it out, but I'm not sure anymore.
-> > 
-> > The claim from the cover letter is that patch 1 and 2 are completely
-> > independent, but patch 3 depends on Bartosz's thank you letter [2] that
-> > arrived a week before this series was sent out.
-> > 
-> > We're not merging the three changes through the same tree and there's no
-> > expressed dependency between patch 2 and 3 (only implicitly by the order
-> > in the series). But as Konrad points out, in-between patch 2 and 3 we
-> > would not enable the secondary GPIO in the PDC driver, so Purwa would
-> > have broken GPIOs for a while (not ok). I think merging them in the
-> > opposite order would be what we want (i.e. 1, 3, then 2)
+> Cc: stable@vger.kernel.org
+> Fixes: 9363efb4181c ("crypto: qce - Add support for AEAD algorithms")
+> Tested-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> ---
+>  drivers/crypto/qce/aead.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 > 
-> purwa-iot-evk.dts where firmware sets pass through mode, so current order of the patch seems to be ok.
-> (patch 3 as such is no impact for iot evk)
+> diff --git a/drivers/crypto/qce/aead.c b/drivers/crypto/qce/aead.c
+> index 336614a11377e0be246817da584296124f4de5d8..4fa018204cb628c112f64c45ff6c7407df73b945 100644
+> --- a/drivers/crypto/qce/aead.c
+> +++ b/drivers/crypto/qce/aead.c
+> @@ -514,6 +514,14 @@ static int qce_aead_crypt(struct aead_request *req, int encrypt)
+>  			ctx->need_fallback = true;
+>  	}
+>  
+> +	/*
+> +	 * CCM uses AES-CTR internally and the CE stalls on a partial final
+> +	 * block, so a payload that is not a multiple of the block size has to
+> +	 * be handled by the fallback.
+> +	 */
+> +	if (IS_CCM(rctx->flags) && !IS_ALIGNED(rctx->cryptlen, AES_BLOCK_SIZE))
+> +		ctx->need_fallback = true;
+> +
+>  	/* If fallback is needed, schedule and exit */
+>  	if (ctx->need_fallback) {
 
-But to reiterate the critical point, this is going to be merged by two
-different maintainers into two different trees, taking two different
-paths to mainline etc.
+Here, the driver is storing per-request state ('need_fallback') in the
+transformation context, which is a shared structure.  This can cause the
+driver to produce incorrect results if used for multiple concurrent
+requests with the same algorithm.
 
-So, to preserve this order, it either need to be extremely clear that
-this order is required and from that maintainers can figure out if it's
-possible to jump through hoops to maintain it.
+On the topic of CCM, there's also a memory leak and buffer overread in
+qce_aead_ccm_prepare_buf_assoclen().  It allocates a buffer of length
+ALIGN(assoclen,16)+6, then treats it as a buffer of length
+ALIGN(assoclen+6,16).  That can be greater than the allocated length,
+for example if assoclen = 15.  Then it never frees the buffer.
 
-> 
-> x1p42100-crd.dts where firmware sets secondary mode, applying in 1, 2, and then 3 may leave crd boards
-> in broken GPIOs for a while after [2],  so yes order 1, 3, and then 2 makes more sense.
-> 
-> patch 1/2 - fixes the purwa to operate on correct registers.
-> patch 3 - Allow crd boards to re-set the mode to pass through
-> 
+The allocation is also being done using GFP_ATOMIC, which is
+failure-prone.  Users need crypto operations to be reliable.
 
-If 1, 3, and then 2 is a valid order then send the patches in that
-order, if 2 must come last, then we need to ensure that the dependencies
-are making it to mainline first - which you can do by resubmitting the
-two parts separately.
+This driver's CCM implementation also fails to validate that the message
+length is allowed for the specified nonce length.
 
-> > 
-> > 
-> > But this series implies that Purwa has been broken from the start - that
-> > the PDC driver has always operated on the wrong registers.
-> 
-> yes, purwa always operated on the wrong registers.
-> 
+The error handling in qce_aead_async_req_handle() is also incorrect: it
+calls dma_unmap_sg() on req->src instead of the actual mapped
+scatterlist rctx->src_sg, which differ when assoclen > 0.  It also uses
+< 0 to check for failures from dma_map_sg(), when it actually returns an
+unsigned int and returns 0 on failure.
 
-But by accident it we never touched those registers. So, is purwa
-completely broken now that you have gotten the pinctrl wired up?
+Note that the ARMv8 CE implementation of AES-CCM is much faster and does
+not have these issues.
 
-> > 
-> > Perhaps the impact of this was limited as there's not that many direct
-> > &pdc references in the DT, but the patch that Bartosz's thank-you email
-> > was sent for got merged as 77fbc756d9cb ("Revert "pinctrl: qcom:
-> > x1e80100: Bypass PDC wakeup parent for now""), and that would make a lot
-> > more use of the PDC.
-> > 
-> > So while nothing in this series states it, it sounds like Purwa might be
-> > completely broken right now and this series aims to fix it?
-> > 
-> > 
-> > It's not clear to me why the driver change doesn't have a Fixes tag, it
-> > seems like the patch that introduced x1e_quirk was broken and should be
-> > marked as Fixes.
-> 
-> x1e_quirk in the driver via commit e9a48ea4d90b ("irqchip/qcom-pdc:
-> Workaround hardware register bug on X1E80100") says only about x1e/
-> hamoa specific bug, it seemed it never wanted to enable the quirk for
-> x1p / purwa. the quirk rather got anyway enabled for purwa due to both
-> hamoa/purwa sharing the same compatible.
-> 
-
-This patch series is the first piece of information telling me that
-Purwa did not inherit this hardware bug.
-
-> Patch 1/2 of the series aims to fix this (and patch-2 carries the
-> fixes: tag).
-
-So patch 2 should be backported to LTS kernels, but 1 and 3 shouldn't?
-
-Regards,
-Bjorn
-
-> 
-> Thanks,
-> Maulik
-> 
-> > 
-> > [2] https://lore.kernel.org/linux-arm-msm/CAMRc=MeU0QuRozMscv02M59+a66S05Jm18CyvNE-qSYrY=S7hQ@mail.gmail.com/
-> > 
-> > Regards,
-> > Bjorn
-> > 
-> >> Best regards,
-> >> Krzysztof
-> >>
-> 
+- Eric
