@@ -1,68 +1,67 @@
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A45F13C09F3
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 18:18:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C5533BB675
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 18:18:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784830710; cv=none; b=qizpTEe4otypSXV4QqRqFS7p2jq06gSXGQNkX4zCw8SAP+yuIPBe1fpNA86+F1U7jDRN3hQDKqFaE+4Wqn7OXYarHhw5R4polK+17423gRSqG6HR0aWNs7DaAkliLDoM9Oe8/57MWBPwfK0UMwMoU2aRkp+0YUej2bZ1CGu5Ysk=
+	t=1784830711; cv=none; b=Og9L4314gA1vSR3e5dO/X+LJNiYPy7PI8NeJlj6WJC/dgwEJzfy4+wYgIEYtjmW52GM7jSbbP9MzcU7EQvrtET95w5jmI+cz8h5BJY+RqUeq56DLrXQu3RFx/Eb7wYMHtcZ506LmQrgRyKJ1vyJiX8LMKR7Aeo5flqVfVFRkjZs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784830710; c=relaxed/simple;
-	bh=tIw9zr3DgrUmtNErS5jNsuDMDrjSRZ4e3BOEK+Q8q24=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=IDmAjJl38Snco+YpsnYJqPx1lr80/yr1nDjXcXFJnNiFGWmTHvfEUUAgTN5/1JfdC9/IhgRnGJLZtn1/0WM3Ke60kM/yhuIKTBnqwHuW+fj71S9SegdKc2I9i4LPovlIP7yVq0btQLfMYuWjBvdU/Ki15xQg0bUVb63h7c8T3lI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com; spf=pass smtp.mailfrom=imd-tec.com; dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b=MmcxsCE4; arc=none smtp.client-ip=209.85.128.45
+	s=arc-20240116; t=1784830711; c=relaxed/simple;
+	bh=5TC4QUkmHNSuCZ2vUe0sGphN0X9xqPnoYeY3/7I13LI=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=o6u8z7YXmYw0U1fjj3vFxj/jSj/cCcuoV41rLkYC4q4nkBnrv9CRGH2n36dMPm4rV5WaLcGKAbiSDRSGGIT9t9+r2c9zcy93orN+tqK5bstonzoO/pgqzPksZ4wdkGOMiCi75aBF4y0lWUboO0V6DcxfrCeilRgPw1tnlx6YuQM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com; spf=pass smtp.mailfrom=imd-tec.com; dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b=G2X9ssKG; arc=none smtp.client-ip=209.85.128.47
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=imd-tec.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b="MmcxsCE4"
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4954df200ddso6010205e9.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 11:18:22 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b="G2X9ssKG"
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-49548aebcd8so7677895e9.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 11:18:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=imd-tec.com; s=google; t=1784830699; x=1785435499; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=dP8n1OaciOijCFOKjM4GmgL9zKf81HjLuCyQPvzXFjA=;
-        b=MmcxsCE4cZZt4cXvznxWjpgBWpo5QwCnJvhSqBYBTGxqJy0tniRjvAgo6KGIspC0ek
-         z2gSPKpXo0vydjVpoHNJ+Yv/XWnhQuynWmEl3nH8DASyHUyP+WWpHF1IhApNyCxhmiWf
-         qv/G1iaT/gPe3Qv+Am7mTRBTdcuM/gjanhoIKGadkfmkCgNG3ORPuTSXQe2zr5fYPOmz
-         39Cnci7y2rfV7dtprAekgK55KvOFqGnGm98AcbgzkAM8Qoka9FipmzTGQ8O9qJfVeCyw
-         lo06+Tf+0TVTzPIRNhvVASwGixOewYkE6yl8NFEoFVifhvjf6d0xFIR4RotBOF7hiawO
-         6COQ==
+        d=imd-tec.com; s=google; t=1784830697; x=1785435497; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=e+qM9JtyqJg+akUv31zNMEze1Szte9cVGCmVCVGIRSk=;
+        b=G2X9ssKGby/OWH7sc+2HxFFHpQK22MUeonOQu0dUuiJb1BwjrC3hC9vVFqLqAIIphO
+         Hxo5bQFbl9xzr7rXNZb4IT/UwQ+2WmFI9gXTmJ7OSsxwVNos6EVosRCkeKhbH46NGPyk
+         yGQv8Axbt2Ebp29kwP7p2CWy/uLUtum8hChp4oEiark8QL86kvOCK9n4NGy9F/BKJFP6
+         C/tMDSOuF6UCMfjerIp5xwnYhaHc/NoiCiDr0sfLDeOzNzOLkvQIw68QZ8PDJ2mFBgOW
+         q9obWGy7J651kAM1h7ozF4zNWLUm6amoL1VE1TIAJrYzRM7zDmnFbZLL2Qx+554fFQW+
+         B/Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784830699; x=1785435499;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=dP8n1OaciOijCFOKjM4GmgL9zKf81HjLuCyQPvzXFjA=;
-        b=XKvQVS7ytLXCOMdJ+GbH4HnOdnZcId8u5x414GNkfWgPYyX9Xymn3zfpuDgdO1v12e
-         +VuqauLqWmcvq6TpRoiWFMdzoyyIt4M5bg9DK85GLYLnJQkVun+2q6M7ceDQOLRoz2Pq
-         3m58rGoKrQ03fMmNQhzmcVE5Qd3Ei6ICW2m26L9yS+JZkt6yBywpVPKsJ0PEg/O7UCnX
-         YrE8Csx9Ih72VKPNZdY9TSJmlmQHjACgaGbMWl4F8Yr44pxxxtdgLzLg7h5fKtK3kBbf
-         e3nxEQii/TJ4E1qrN6A9DEAHHHqaX79Sle93axn5I+Fj/E7WM0WUN95P1M8vvB5UrL7O
-         hsjg==
-X-Forwarded-Encrypted: i=1; AHgh+RoGPYjnul7FMvpKT3D/6yMfBZpFdifgd1Dq6YtaUSuuBvOUSYByiRXDSu92lIEtKI3hDm3M5hPPKOucj5/w@vger.kernel.org
-X-Gm-Message-State: AOJu0YwWH8iEyNesonD0GRaSb/ArewWZv2eB8pkB/nVKHgfdructHB8Q
-	tOL5YX/ehAbO/hF1LpLoQAm42fvM7uqln0d3THq/zcJiRM4U6Z2skIxORNkTIv05Pv0=
-X-Gm-Gg: AR+sD11VvBUuW64i+HocP/gC+m4wz51zUdJPpPZ50yHPiw86HTbMV6tOufYtLqc76Vp
-	sk896lC4T7rdUB1r9d5+xU3aP/iUeCq+gUmoFKur9KLSuG4/X3IzYdD8W/V67JAhnXmF0c7EGyo
-	Qt6eABAFOAYwFLyqdrgTDnG2+5mbPDh7bQeH8jOIBFuxVWk7CDCeoWdbjmx3aEk6MM1SzZF0cho
-	r6v6GcfT0T5CuIjrKGOBiWnfherZ5E9vZmJTClCxnvCuorSpblhmfOjL5EULXXIs+yga7aNmHfF
-	GyLuk+FS8hZFsLYSRn9gEv2tOvFkB36Uh5H2sFHqwYbsF9jv5FpVi3QqZZZ26JjqOfb5gzsLHUA
-	jNMoUqykRyFpIyWGB9rYGRwcdfjb89SK13I+EBXjFFBPKx8MLClNLmU39TdItE+dGWwa9Auu4JX
-	iSrvWZwyaiDakBQQGwHqBSI3HX5RvM7zH7iWDWheEK78WEZey5ePmhscwZAktkDzJsT4x9GJ+GG
-	9IMuJ/SsFqYAXYm7plG77ySxW2qiets3QtF97Z8xKEoPwq/sW6n1A==
-X-Received: by 2002:a7b:c044:0:b0:495:6134:6d61 with SMTP id 5b1f17b1804b1-49573cff7bdmr34879055e9.19.1784830698859;
-        Thu, 23 Jul 2026 11:18:18 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1784830697; x=1785435497;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=e+qM9JtyqJg+akUv31zNMEze1Szte9cVGCmVCVGIRSk=;
+        b=hBxShZMMukcCkXzgDuw7RjbuMjMZvBWdiIGP7tTwMLH9Aj29G2YyslHTWWaZqT2/0x
+         K5231ZY2z0Wqt/vFSOUhHS7kwyVCKs8QEwvQgSnCISiyyFA2t1pUY4AqP7XFijRqT7ej
+         bk8ZjIr9p1I+2aCzsIS86xde56sMSV8JtOg/AwIxv63V/MtknJm/a8Pl35RnAm1wIHpR
+         kP4I/993X1Z/C5w/ecZc5/Ta8s5qN5dB84j7OMRcV6x6g7DOK9ltq12hgaVuwe1DdisO
+         8LaJw4aVqlt05DbgCcRTlekzJuL5szrkEHgxYKbMdOVPglvuk/D0zJHX/QjNkbZPXqpW
+         HqQw==
+X-Forwarded-Encrypted: i=1; AHgh+Rr1dVYDFTBWZTCsqtED6vbwVshoVTk8ZLYciZRgWIabmGIeSwCIYX+13b7WsufLxyGeqUeZkJmFLoVldbhi@vger.kernel.org
+X-Gm-Message-State: AOJu0YwW6vK37FwKv+CwocYyCYieBViiOZWdO6k1mOFrHmorUSYQjG+e
+	uekwxFhXwYCLXKBq3N2SKFrGz4i1gYAXhQEFCy2dY8Sbgave1pI9Dz5KLF7coZ0WYJg=
+X-Gm-Gg: AR+sD13J1UqGKxoS6hoDpv7npNAYieU5xHs15mOSmv+Mgl75e0yjfzmCuANayT/hPyh
+	hISraGr8+yZVCLcWCXEeCCfzIbxTf2K8vihxCffAGLWUnEW5878Ou/DPpA+6upId7RQTG/76ZE9
+	fqZyIYqB4hItBWEvi0jUZz3HoSA2qyUr3L4uDzEi550LGhzhKOiUZ+XPvCo3g/G66nCwwaDJIm9
+	zbw5Kya0tVw8CwwUaQyO/4NOD9eEKD20UTgQvu9iLGvo0PFYOsGA7N799tiJnNLc4hOW7duO3no
+	jDfRghawIfN7aSukh7sAEHpOubceEAHWhPPQWaVCgUWMjzwnnnZf1vhtCT079FX4aDLEZ1tJJkH
+	8PJy8IYasDGOMKapFclCJtA1APNcUnmvr1ir+d2XhpvCfzvE9E1HlN6Bt2njH5V/iuHLax5ABTE
+	IAcH0HeqP5a+0QqczoK9txgYepXyLAlaPLRgZmUjwcechMxG/w/FCtaeYcZQ8R/l11yhpRW05ku
+	DMaMiWxne9hSksOh2j4qfAU2OcM99JM3U+d5wTA1rTtL/Dgs1KE1g==
+X-Received: by 2002:a05:600c:1d21:b0:495:4856:2659 with SMTP id 5b1f17b1804b1-49573cca1b0mr46464305e9.9.1784830696700;
+        Thu, 23 Jul 2026 11:18:16 -0700 (PDT)
 Received: from [127.0.1.1] (host86-157-235-39.range86-157.btcentralplus.com. [86.157.235.39])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4957af914a9sm10799055e9.15.2026.07.23.11.18.18
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4957af914a9sm10799055e9.15.2026.07.23.11.18.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 11:18:18 -0700 (PDT)
+        Thu, 23 Jul 2026 11:18:15 -0700 (PDT)
 From: William Bright <william.bright@imd-tec.com>
-Date: Thu, 23 Jul 2026 19:18:09 +0100
-Subject: [PATCH v5 3/4] arm64: dts: qcom: Add IMDT QCS8550 SoM
+Subject: [PATCH v5 0/4] arm64: dts: qcom: Add IMDT QCS8550 SBC
+Date: Thu, 23 Jul 2026 19:18:06 +0100
+Message-Id: <20260723-imdt-qcs8550-sbc-rfc-v5-0-2fb988854623@imd-tec.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -71,9 +70,12 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-imdt-qcs8550-sbc-rfc-v5-3-2fb988854623@imd-tec.com>
-References: <20260723-imdt-qcs8550-sbc-rfc-v5-0-2fb988854623@imd-tec.com>
-In-Reply-To: <20260723-imdt-qcs8550-sbc-rfc-v5-0-2fb988854623@imd-tec.com>
+X-B4-Tracking: v=1; b=H4sIAN5aYmoC/4XPO27DMAwG4KsEmsNCEvUwMuUeQQeLpBsNiRvJM
+ FoEvnvlLGnRGh1/gvxI3lWVkqWqw+6uisy55vHagt/vFJ3765tA5paV1TZohxryhSe4Ue2811A
+ TQRkInERKQ6KeuVNt9L3IkD8e7Om15XOu01g+H1tms1b/AWcDGhzbFEL00vd4bG0wCb3QeFErO
+ dsn47XfYGxjkoshsmZ21vxm8DsTNxhcr4mMjBhtwj+ucU8mmK2nXGPQdxINt7ZEP5llWb4AvQk
+ uoY8BAAA=
+X-Change-ID: 20260430-imdt-qcs8550-sbc-rfc-4e7cbfbcadd8
 To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
  Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
  Konrad Dybcio <konradybcio@kernel.org>
@@ -81,343 +83,120 @@ Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-arm-msm@vger.kernel.org, William Bright <william.bright@imd-tec.com>
 X-Mailer: b4 0.15.2
 
-The IMDT QCS8550 SoM is a System-on-Module from IMD Technologies Ltd
-built around the Qualcomm QCS8550 SoC. It is intended to be soldered
-onto a carrier board that supplies VPH_PWR and exposes the off-module
-peripherals.
+This patch series adds DT support for the IMD Technologies Ltd (IMDT)
+QCS8550 SBC and corresponding SoM. The SBC DTS supports the following
+hardware on the SBC:
+- USB3 (No DP alt-mode support)
+- SD card (SDHC2)
+- Regulators
+- M.2 Key-E (PCIE0) 
+The SoM DTSI supports the following hardware:
+- PM8550 PMICs (similar to the SM8550-HDK)
+- QCS8550 and UFS
 
-Add qcs8550-imdt-som.dtsi describing the SoM's PMICs (PM8550, PM8550VE,
-PM8550VS, PMK8550) and the apps_rsc PMIC outputs. Compared to other
-SM8550/QCS8550 boards, this SoM excludes the PM8550B charger PMIC.
+The IMDT QCS8550 SBC hardware is capable of the following but support is
+not included in this patch series:
+- USB3 flip detection
+- Gigabit Ethernet
+- 8 MIPI CSI2 cameras are supported using 8 IAS connectors
+- MIPI DSI Displays via a DSI/I2C connector
+- Microphone input
+- Speaker output
+- Fan control
+- M.2 Key-E UART and SDIO (requires DNF resistors to be fitted)
+- RS232
+- M.2 Key-B (also on PCIE1, selected by toggling the on-board PCIe
+  switch away from the LAN7430 upstream port)
+- Wi-Fi and Bluetooth via SDHC4/UART14 using an NXP-IW416 (SDHC4 patch
+  [1] is awaiting review)
 
-Assisted-by: Claude:claude-opus-4.7
+The DTS files were written using the SM8550-HDK as an initial starting
+point with patches ported from downstream [2].
+
+Claude Opus 4.7 was used for formatting and reviewing the device trees
+against other QCS/SM8550 boards.
+
+Patch 1 adds the IMDT vendor prefix
+Patch 2 adds DT bindings for the SoM and SBC
+Patch 3 adds the SoM DTSI
+Patch 4 adds the SBC DTS
+
+[1] https://lore.kernel.org/all/20260427-sm8550-sdhc4-support-v2-1-a4241f43ecd5@imd-tec.com
+[2] https://github.com/imd-tec/meta-imdt-qcom/tree/kirkstone/patches/msm-kernel-devicetree/files
+
 Signed-off-by: William Bright <william.bright@imd-tec.com>
 ---
- arch/arm64/boot/dts/qcom/qcs8550-imdt-som.dtsi | 315 +++++++++++++++++++++++++
- 1 file changed, 315 insertions(+)
+Changes in v5:
+- Switched to using the M2 Key-E connector binding instead of pinctrl.
+- USB role switching now supported using the on-board TUSB321.
+- GPU ZapShader enabled after u-boot patches resolved it not being
+  able to load.
+- Dropped PCIe1 since the PCIe analogue switch cannot be modelled in a
+  DT.
+- Applied style improvements from Konrad.
+- Link to v4: https://lore.kernel.org/r/20260610-imdt-qcs8550-sbc-rfc-v4-0-358e71d606bc@imd-tec.com
 
-diff --git a/arch/arm64/boot/dts/qcom/qcs8550-imdt-som.dtsi b/arch/arm64/boot/dts/qcom/qcs8550-imdt-som.dtsi
-new file mode 100644
-index 000000000000..3202632eef04
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/qcs8550-imdt-som.dtsi
-@@ -0,0 +1,315 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) 2026 IMD Technologies Ltd
-+ */
-+
-+#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
-+#include "qcs8550.dtsi"
-+#include "pm8550.dtsi"
-+#define PMK8550VE_SID 5
-+#include "pm8550ve.dtsi"
-+#include "pm8550vs.dtsi"
-+#include "pmk8550.dtsi"
-+
-+&apps_rsc {
-+	pm8550_rpmh_regulators: regulators-0 {
-+		compatible = "qcom,pm8550-rpmh-regulators";
-+		qcom,pmic-id = "b";
-+
-+		vdd-l1-l4-l10-supply = <&vreg_s6g_1p86>;
-+		vdd-l2-l13-l14-supply = <&vreg_bob1>;
-+		vdd-l3-supply = <&vreg_s4g_1p25>;
-+		vdd-l5-l16-supply = <&vreg_bob1>;
-+		vdd-l6-l7-supply = <&vreg_bob1>;
-+		vdd-l8-l9-supply = <&vreg_bob1>;
-+		vdd-l11-supply = <&vreg_s4g_1p25>;
-+		vdd-l12-supply = <&vreg_s6g_1p86>;
-+		vdd-l15-supply = <&vreg_s6g_1p86>;
-+		vdd-l17-supply = <&vreg_bob2>;
-+
-+		/*
-+		 * PMIC outputs whose testpoints lack capacitors are
-+		 * omitted to prevent accidental use:
-+		 *	L1B_1P8, L4B_1P8, L6B_1P8, L7B_1P8, L8B_1P8,
-+		 *	L13B_3P0, L14B_3P2.
-+		 * Other outputs are unused.
-+		 */
-+		vreg_bob1: bob1 {
-+			regulator-name = "vreg_bob1";
-+			regulator-min-microvolt = <3296000>;
-+			regulator-max-microvolt = <3960000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_bob2: bob2 {
-+			regulator-name = "vreg_bob2";
-+			regulator-min-microvolt = <2720000>;
-+			regulator-max-microvolt = <3960000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l5b_3p1: ldo5 {
-+			regulator-name = "vreg_l5b_3p1";
-+			regulator-min-microvolt = <3104000>;
-+			regulator-max-microvolt = <3104000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l15b_1p8: ldo15 {
-+			regulator-name = "vreg_l15b_1p8";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l17b_2p5: ldo17 {
-+			regulator-name = "vreg_l17b_2p5";
-+			regulator-min-microvolt = <2504000>;
-+			regulator-max-microvolt = <2504000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+	};
-+
-+	pm8550vs_c_rpmh_regulators: regulators-1 {
-+		compatible = "qcom,pm8550vs-rpmh-regulators";
-+		qcom,pmic-id = "c";
-+
-+		vdd-l1-supply = <&vreg_s4g_1p25>;
-+		vdd-l2-supply = <&vreg_s4e_0p95>;
-+		vdd-l3-supply = <&vreg_s4e_0p95>;
-+
-+		vreg_l3c_0p9: ldo3 {
-+			regulator-name = "vreg_l3c_0p9";
-+			regulator-min-microvolt = <880000>;
-+			regulator-max-microvolt = <912000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+	};
-+
-+	pm8550vs_d_rpmh_regulators: regulators-2 {
-+		compatible = "qcom,pm8550vs-rpmh-regulators";
-+		qcom,pmic-id = "d";
-+
-+		vdd-l1-supply = <&vreg_s4e_0p95>;
-+		vdd-l2-supply = <&vreg_s4e_0p95>;
-+		vdd-l3-supply = <&vreg_s4e_0p95>;
-+
-+		vreg_l1d_0p88: ldo1 {
-+			regulator-name = "vreg_l1d_0p88";
-+			regulator-min-microvolt = <880000>;
-+			regulator-max-microvolt = <920000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		/* ldo2 supplies SM8550 VDD_LPI_MX */
-+	};
-+
-+	pm8550vs_e_rpmh_regulators: regulators-3 {
-+		compatible = "qcom,pm8550vs-rpmh-regulators";
-+		qcom,pmic-id = "e";
-+
-+		vdd-l1-supply = <&vreg_s4e_0p95>;
-+		vdd-l2-supply = <&vreg_s4e_0p95>;
-+		vdd-l3-supply = <&vreg_s4g_1p25>;
-+
-+		vreg_s4e_0p95: smps4 {
-+			regulator-name = "vreg_s4e_0p95";
-+			regulator-min-microvolt = <904000>;
-+			regulator-max-microvolt = <984000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s5e_1p08: smps5 {
-+			regulator-name = "vreg_s5e_1p08";
-+			regulator-min-microvolt = <1080000>;
-+			regulator-max-microvolt = <1120000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l1e_0p88: ldo1 {
-+			regulator-name = "vreg_l1e_0p88";
-+			regulator-min-microvolt = <880000>;
-+			regulator-max-microvolt = <880000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l2e_0p9: ldo2 {
-+			regulator-name = "vreg_l2e_0p9";
-+			regulator-min-microvolt = <904000>;
-+			regulator-max-microvolt = <970000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l3e_1p2: ldo3 {
-+			regulator-name = "vreg_l3e_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+	};
-+
-+	pm8550ve_rpmh_regulators: regulators-4 {
-+		compatible = "qcom,pm8550ve-rpmh-regulators";
-+		qcom,pmic-id = "f";
-+
-+		vdd-l1-supply = <&vreg_s4e_0p95>;
-+		vdd-l2-supply = <&vreg_s4e_0p95>;
-+		vdd-l3-supply = <&vreg_s4e_0p95>;
-+
-+		vreg_s4f_0p5: smps4 {
-+			regulator-name = "vreg_s4f_0p5";
-+			regulator-min-microvolt = <500000>;
-+			regulator-max-microvolt = <700000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l1f_0p9: ldo1 {
-+			regulator-name = "vreg_l1f_0p9";
-+			regulator-min-microvolt = <912000>;
-+			regulator-max-microvolt = <912000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l2f_0p88: ldo2 {
-+			regulator-name = "vreg_l2f_0p88";
-+			regulator-min-microvolt = <880000>;
-+			regulator-max-microvolt = <912000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l3f_0p88: ldo3 {
-+			regulator-name = "vreg_l3f_0p88";
-+			regulator-min-microvolt = <880000>;
-+			regulator-max-microvolt = <912000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+	};
-+
-+	pm8550vs_g_rpmh_regulators: regulators-5 {
-+		compatible = "qcom,pm8550vs-rpmh-regulators";
-+		qcom,pmic-id = "g";
-+
-+		vdd-l1-supply = <&vreg_s4g_1p25>;
-+		vdd-l2-supply = <&vreg_s4g_1p25>;
-+		vdd-l3-supply = <&vreg_s4g_1p25>;
-+
-+		vreg_s1g_1p25: smps1 {
-+			regulator-name = "vreg_s1g_1p25";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1300000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s2g_0p85: smps2 {
-+			regulator-name = "vreg_s2g_0p85";
-+			regulator-min-microvolt = <800000>;
-+			regulator-max-microvolt = <1000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s3g_0p8: smps3 {
-+			regulator-name = "vreg_s3g_0p8";
-+			regulator-min-microvolt = <300000>;
-+			regulator-max-microvolt = <1004000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s4g_1p25: smps4 {
-+			regulator-name = "vreg_s4g_1p25";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1352000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s5g_0p85: smps5 {
-+			regulator-name = "vreg_s5g_0p85";
-+			regulator-min-microvolt = <500000>;
-+			regulator-max-microvolt = <1004000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s6g_1p86: smps6 {
-+			regulator-name = "vreg_s6g_1p86";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <2000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l1g_1p2: ldo1 {
-+			regulator-name = "vreg_l1g_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l3g_1p2: ldo3 {
-+			regulator-name = "vreg_l3g_1p2";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+	};
-+};
-+
-+&pm8550vs_c {
-+	status = "okay";
-+};
-+
-+&pm8550vs_d {
-+	status = "okay";
-+};
-+
-+&pm8550vs_e {
-+	status = "okay";
-+};
-+
-+&pm8550vs_g {
-+	status = "okay";
-+};
-+
-+&sleep_clk {
-+	clock-frequency = <32764>;
-+};
-+
-+&xo_board {
-+	clock-frequency = <76800000>;
-+};
+Changes in v4:
+- No code changes.
+- Collected Rob's Acked-by tags on patches 1 and 2.
+- Resubmitting due to inactivity on v3.
+- Link to v3: https://patch.msgid.link/20260507-imdt-qcs8550-sbc-rfc-v3-0-47d3d3372b33@imd-tec.com
 
--- 
-2.43.0
+Changes in v3:
+- Dropped backlight node since it's unused. 
+- Dropped regulators which are dead (no usage or not gpio controllable
+  whilst also not strictly required by a DT node). 
+- Dropped SBC modem remoteproc entry since the modem is fused off on the
+  qcs8550.
+- Reformatted commit bodies and DTS comments.
+- Replaced open-drain properties with bias-disable due to open-drain not
+  being supported by the tlmm.
+- Dropped tlmm entries which are unused.
+- Dropped disabling of LPASS codecs as it was unnecessary.
+- Dropped bluetooth usage on uart14 and removed references to uart14
+  since it became unused.
+- Patch 2 renamed to "dt-bindings: arm: qcom: Add IMDT QCS8550 SBC/SoM"
+- Patch 2 commit body shortened as it had information already found
+  within the patch 3 body.
+- Link to v2: https://patch.msgid.link/20260505-imdt-qcs8550-sbc-rfc-v2-0-b4767d0dd421@imd-tec.com
+
+Changes in v2:
+- Patch 1 relocated to be above qcs8550-aim300-aiot instead of below
+- Split the SoM and SBC DT changes into two patches, with patch
+  3 adding the SoM DTSI and patch 4 adding the SBC DTS.
+- Dropped the SDHC4 node in patch 4 to focus on the core
+  SoM and SBC device trees. 
+  This allows the primary hardware support to progress through 
+  review while waiting for feedback for [1].
+- Link to v1: https://patch.msgid.link/20260430-imdt-qcs8550-sbc-rfc-v1-0-4d2b6675eaa3@imd-tec.com
+
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org
+
+---
+William Bright (4):
+      dt-bindings: vendor-prefixes: Add IMDT
+      dt-bindings: arm: qcom: Document IMDT QCS8550 SBC/SoM
+      arm64: dts: qcom: Add IMDT QCS8550 SoM
+      arm64: dts: qcom: Add IMDT QCS8550 SBC
+
+ Documentation/devicetree/bindings/arm/qcom.yaml    |   7 +
+ .../devicetree/bindings/vendor-prefixes.yaml       |   2 +
+ arch/arm64/boot/dts/qcom/Makefile                  |   1 +
+ arch/arm64/boot/dts/qcom/qcs8550-imdt-sbc.dts      | 401 +++++++++++++++++++++
+ arch/arm64/boot/dts/qcom/qcs8550-imdt-som.dtsi     | 315 ++++++++++++++++
+ 5 files changed, 726 insertions(+)
+---
+base-commit: d36de2e50966f3dd9ef3482f1faf649b3d697714
+change-id: 20260430-imdt-qcs8550-sbc-rfc-4e7cbfbcadd8
+
+Best regards,
+--  
+William Bright <william.bright@imd-tec.com>
 
