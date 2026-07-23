@@ -1,530 +1,175 @@
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CCAA3B1034
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 18:18:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7B6B944E673;
+	Thu, 23 Jul 2026 18:32:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784830715; cv=none; b=VI2n6PQNAPyXfq5P3u/lbqgNcD5bLywB9d6x77cdk0oxivwWw5MYurywUm0gF138hkaDtcm0RQ5XpaPVpvAlOuaqIaHIiZ8cl2U65gNjeo65vfNuFEesRuTpnh6ecRNITw2Sq9vov2qmTQhevrmf2JcKCTK6M3j3clHrFMvdAog=
+	t=1784831554; cv=none; b=VysPwKHCVjtpHpsHf1ZszY0INMb8NHmPNW1ICiuG05eiRiRFvhTFGmEyVM8m6OkwE50f5Kz5aqEH0mtLNrOXTBwWzFpetG2eWCMMbFmcjj2vPF+rcZxQ2dO4rlGDOj3crk7sXsVrZ7hf64DV7oZW2xczCOs3Vfh87rgBBep4oic=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784830715; c=relaxed/simple;
-	bh=AtEUCX9Eo6PEhQ/FG6aS5rbLdI0KIdCuMLA3tvS3sGs=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=NUICZtTcD35stwBmqIvumDhYQVGzYdlKAJLM205PM46xMHFS3Zne9VykOcwTdG6C0KZPhbzdUgXbnv88nhAvHF21ZMHe9uFL/2/rrFG0ed00zMT2vdHE3RtCD50UEGzRRlMvVTXyAr0NxwmMQPHobnvRYQGahdLH1FH+Uq7YEl4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com; spf=pass smtp.mailfrom=imd-tec.com; dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b=F/odXc1E; arc=none smtp.client-ip=209.85.128.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=imd-tec.com
+	s=arc-20240116; t=1784831554; c=relaxed/simple;
+	bh=06hWyjEzCk1moV0Y5VMIjuvMYIeAL7GH+0ttjksGnVk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Fu4Y/WYIcSeEdQ9kcnxLcIT/nxKHKmwiAbO5giznHqvBr2DYhU9b7rpbC/BpsAPcIypekMKIsTHAPCSBEmrxSwDXBlk2oclK0/9aGHze9eK9ziNkJto73JnG6abHjvLyu3ptrCdXJgv0/YerI0TVAkNq4D8UWIyD/YGSSVcihgc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IxgpEOa8; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b="F/odXc1E"
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4956869750eso7213595e9.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 11:18:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=imd-tec.com; s=google; t=1784830699; x=1785435499; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=DR7mORtn/NXxqNSVl67bPX3M3yvTYmJkc+gzBMw4vjU=;
-        b=F/odXc1ECqTxlHFFYTrnAB2hrAsal9CqhknEFqpkUAh0BTo/ngnFKtRxFdJspdG6kj
-         jR0p1itqV6xuKRU91DkXFOY/2/7/7eIWUeP1BpRbaopbYIs7VIafB0/7SofgsMjFaguY
-         gn4YtNQqZDAkBk4EAmHkVrVyrHkg7gUby8Q2BSZT31kVKZJebNN07Qk0MvUff1JBp+N4
-         pdRBONMWedzwitdGhS8PlV0p1cmMHE+6aJAWATCYhmXyW4TSbC7dr+tVgwsH8hzla6JC
-         56+r/3hEAtztqStsNI+y3b4vsOcnF9IIvQ/O/9sNpP6Qa18zBZ7fuHnHr1j69qewpRXZ
-         NGlw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784830699; x=1785435499;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=DR7mORtn/NXxqNSVl67bPX3M3yvTYmJkc+gzBMw4vjU=;
-        b=jVyREjyNfuWLQmoY1MlAw10P1WQj07mGO/7IR6AApSXw5Vy+Ndc01GQyI/hG+qruZ8
-         ZvvkSs010vYvGj452nQvPes4ipE8m6KHYYr3klGM018NdRtAui7N2QSXXPoHRXHFLBNJ
-         PHgc6OnODoUQ8p7/Sd2CPc0SMY/GkxmY+zK/nnxUWc3QHEwrVD5NnLHkY8aVK847yiZ+
-         wDHy1SPYWRtQkrwbBaWri58F86w0AXyRBASYAX2U3x6FI1iMso8a1JaOIWRP3OctVaZN
-         etV947kVO7InpE0N+mFbn6y8p2C+aKY317OcUCfjMi/1EzM5kyn6D7sUOayJKsV8PhCw
-         niNw==
-X-Forwarded-Encrypted: i=1; AHgh+RpnguFfN5K5HqgygOMpsBcgLW35R36370scJXnKol2A4b0Qft/N5Rsw/DW4a6hUMCC4sp3TUUNniV9lVEAG@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyus93L0kQ6wuXNCChVMFQWDEKt7tso3u8yYl6Y2ikqyTCVtItG
-	oFbGSfRBhrV27fFARKaMRlNGIdKUZwE33HOlKMTPk4dkb5Cn+c+Q9MCdP1wAZz+bSPs=
-X-Gm-Gg: AR+sD10Xbao81u8showpPFO5YMzuSvgmhxI7n79U1+XsB27RcfLF/TcKupV7x7wFaK8
-	yCgt9aeyRqhezMQOpQpJthGvTnikrgo4SggWnHqcrKZ/IiuJ3VfLV+3k4b9ZQy+UHVsan6yPI87
-	02aR0gnCLnucE/vD6UD8etl02cAmjU94HWo8dyv+91dd1VhzfnqyTfZ/w1BIddROE9UYEefbolM
-	bJZuRYyxJJvMmYAqzK1wi9VennsD4XK0WthX9TTrLuk5F4GymYq65mt8rWd005llnrvYGWb+SXF
-	TXIHbm3R6tSGm6wu1oxlr5pPpbfKKG0+3fjDoUtGaYo/Gg/FUMfJQG2iZB8COoZgQie8nxvde5D
-	5+pgXMk3oeYCrOXAHw+D619OrSBH5Mojm9Rzp+e96vaebotsxYm4FCY27ilskXLJoOPw5WKnYSm
-	mbUDw8oQYaZwPMZxvo6Q2R/awpcqoYdWiLskt6PdLMtwRygnkQSc00OHZDe7QaTK5hX6f2uCCal
-	lafu49FFBhLW906gQSu2lHw92aLYvJwJBZEsrpxYGmIwr8Ihm3pZw==
-X-Received: by 2002:a05:600c:4ed3:b0:495:7040:c7e9 with SMTP id 5b1f17b1804b1-49573cc2f21mr45292675e9.6.1784830699622;
-        Thu, 23 Jul 2026 11:18:19 -0700 (PDT)
-Received: from [127.0.1.1] (host86-157-235-39.range86-157.btcentralplus.com. [86.157.235.39])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4957af914a9sm10799055e9.15.2026.07.23.11.18.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 11:18:19 -0700 (PDT)
-From: William Bright <william.bright@imd-tec.com>
-Date: Thu, 23 Jul 2026 19:18:10 +0100
-Subject: [PATCH v5 4/4] arm64: dts: qcom: Add IMDT QCS8550 SBC
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IxgpEOa8"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 245611F000E9;
+	Thu, 23 Jul 2026 18:32:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784831543;
+	bh=yLaoQoa9OBDnx2oF3ltfmn0EN/7WNuoHG/RPPv5+mXA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=IxgpEOa8tiRHgneFL9phuoyVoYWwumd/77iy/XArcpOa+98th0zgYI+Nm0AmtKOD1
+	 xROExYyinO6oUv0KanAoCx1NnxCL/hNfGJ9hmc4t47QKxjyu9Ove+7G4/uWtljRj29
+	 XFY1/tl2Pv+PHE22OrMyh46hsDfe2yGKZK8o3mj4/hDnfnOUlUJ0XnrOrzsU0VlIQT
+	 gWHcbPeEIxiwMmJxBY5UKciM2u3q1N7ZNQLNEItL35QTC2fYsfz9H517hw0uQqihnQ
+	 0TG6NXh032QlDe3BQPghljeMOMYckl5ZDJTIBvh1yqnL9pRjyuBfRx21rvJ/Qijei/
+	 8saF69AAUrNAQ==
+Date: Thu, 23 Jul 2026 13:32:19 -0500
+From: Bjorn Andersson <andersson@kernel.org>
+To: "Maulik Shah (mkshah)" <maulik.shah@oss.qualcomm.com>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, 
+	Thomas Gleixner <tglx@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	devicetree@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v3 2/3] arm64: dts: qcom: purwa: Drop the Hamoa
+ workaround for PDC
+Message-ID: <amJcXDcI0QYqtOnK@baldur>
+References: <20260715-purwa-pdc-v3-0-be08934dc916@oss.qualcomm.com>
+ <20260715-purwa-pdc-v3-2-be08934dc916@oss.qualcomm.com>
+ <20260716-starling-of-heavenly-symmetry-09a73a@quoll>
+ <almDHnEcruBl-I3l@baldur>
+ <64bf3979-51cc-42ed-b66b-c7af04536481@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-imdt-qcs8550-sbc-rfc-v5-4-2fb988854623@imd-tec.com>
-References: <20260723-imdt-qcs8550-sbc-rfc-v5-0-2fb988854623@imd-tec.com>
-In-Reply-To: <20260723-imdt-qcs8550-sbc-rfc-v5-0-2fb988854623@imd-tec.com>
-To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, William Bright <william.bright@imd-tec.com>
-X-Mailer: b4 0.15.2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <64bf3979-51cc-42ed-b66b-c7af04536481@oss.qualcomm.com>
 
-The IMDT QCS8550 SBC is a two-board design from IMD Technologies Ltd
-built around the Qualcomm QCS8550 SoC. An IMDT QCS8550 SoM is soldered
-onto the IMDT QCS8550 carrier board that supplies VPH_PWR and exposes
-the off-module peripherals.
+On Fri, Jul 17, 2026 at 09:11:28AM +0530, Maulik Shah (mkshah) wrote:
+> 
+> 
+> On 7/17/2026 7:38 AM, Bjorn Andersson wrote:
+> > On Thu, Jul 16, 2026 at 09:59:44AM +0200, Krzysztof Kozlowski wrote:
+> >> On Wed, Jul 15, 2026 at 06:52:01PM +0530, Maulik Shah wrote:
+> >>> X1P42100 (Purwa) shares the X1E80100 (Hamoa) PDC device, but the hardware
+> >>> register bug addressed in commit e9a48ea4d90b ("irqchip/qcom-pdc:
+> >>> Workaround hardware register bug on X1E80100") is already fixed in
+> >>> X1P42100 silicon.
+> >>>
+> >>> X1E80100 compatible forces the software workaround. Use the X1P42100
+> >>> specific compatible string for the PDC node to remove the workaround.
+> >>>
+> >>> Fixes: f08edb529916 ("arm64: dts: qcom: Add X1P42100 SoC and CRD")
+> >>> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> >>> Signed-off-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
+> >>> ---
+> >>>  arch/arm64/boot/dts/qcom/purwa.dtsi | 5 +++++
+> >>>  1 file changed, 5 insertions(+)
+> >>
+> >> Why does the DT change appear in the middle of the patchset? Please read
+> >> submitting patches documents - both of them - and maintainer-soc
+> >> profile.
+> >>
+> > 
+> > I thought I had figured it out, but I'm not sure anymore.
+> > 
+> > The claim from the cover letter is that patch 1 and 2 are completely
+> > independent, but patch 3 depends on Bartosz's thank you letter [2] that
+> > arrived a week before this series was sent out.
+> > 
+> > We're not merging the three changes through the same tree and there's no
+> > expressed dependency between patch 2 and 3 (only implicitly by the order
+> > in the series). But as Konrad points out, in-between patch 2 and 3 we
+> > would not enable the secondary GPIO in the PDC driver, so Purwa would
+> > have broken GPIOs for a while (not ok). I think merging them in the
+> > opposite order would be what we want (i.e. 1, 3, then 2)
+> 
+> purwa-iot-evk.dts where firmware sets pass through mode, so current order of the patch seems to be ok.
+> (patch 3 as such is no impact for iot evk)
 
-With this DTS, the board can boot to shell with a UFS rootfs with
-debugging through uart7. USB is also are fully functional.
+But to reiterate the critical point, this is going to be merged by two
+different maintainers into two different trees, taking two different
+paths to mainline etc.
 
-Features enabled are:
-- On-board regulators
-- uSD
-- UART
-- UFS
-- PCIe0 (M.2 Key-E)
-- USB
-- ADSP, CDSP
+So, to preserve this order, it either need to be extremely clear that
+this order is required and from that maintainers can figure out if it's
+possible to jump through hoops to maintain it.
 
-Assisted-by: Claude:claude-opus-4.7
-Signed-off-by: William Bright <william.bright@imd-tec.com>
----
- arch/arm64/boot/dts/qcom/Makefile             |   1 +
- arch/arm64/boot/dts/qcom/qcs8550-imdt-sbc.dts | 401 ++++++++++++++++++++++++++
- 2 files changed, 402 insertions(+)
+> 
+> x1p42100-crd.dts where firmware sets secondary mode, applying in 1, 2, and then 3 may leave crd boards
+> in broken GPIOs for a while after [2],  so yes order 1, 3, and then 2 makes more sense.
+> 
+> patch 1/2 - fixes the purwa to operate on correct registers.
+> patch 3 - Allow crd boards to re-set the mode to pass through
+> 
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index e05414290d8e..d1980d3ba352 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -192,6 +192,7 @@ qcs8300-ride-el2-dtbs := qcs8300-ride.dtb monaco-el2.dtbo
- 
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs8300-ride-el2.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs8550-aim300-aiot.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= qcs8550-imdt-sbc.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs8550-rb5gen2.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs9100-ride.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs9100-ride-r3.dtb
-diff --git a/arch/arm64/boot/dts/qcom/qcs8550-imdt-sbc.dts b/arch/arm64/boot/dts/qcom/qcs8550-imdt-sbc.dts
-new file mode 100644
-index 000000000000..fa8794868cf8
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/qcs8550-imdt-sbc.dts
-@@ -0,0 +1,401 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) 2026 IMD Technologies Ltd
-+ */
-+
-+/dts-v1/;
-+
-+#include "qcs8550-imdt-som.dtsi"
-+
-+/ {
-+	model = "IMDT QCS8550 SBC";
-+	compatible = "imdt,qcs8550-sbc", "imdt,qcs8550-som",
-+		     "qcom,qcs8550", "qcom,sm8550";
-+	chassis-type = "embedded";
-+
-+	aliases {
-+		serial0 = &uart7;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	connector {
-+		compatible = "pcie-m2-e-connector";
-+		vpcie3v3-supply = <&m2e_3p3>;
-+		vpcie1v8-supply = <&per_pwr>;
-+		w-disable1-gpios = <&tlmm 80 GPIO_ACTIVE_LOW>;
-+
-+		pinctrl-0 = <&m2e_wlan_disable>;
-+		pinctrl-names = "default";
-+
-+		/* SDIO datapath is disabled because the SDIO lines are
-+		 * routed through unpopulated resistors.
-+		 * UART datapath is also disabled as the UART lines are
-+		 * routed through an analogue mux which currently cannot
-+		 * be described by a device tree.
-+		 */
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				reg = <0>;
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				m2e_pcie_ep: endpoint@0 {
-+					reg = <0>;
-+					remote-endpoint = <&pcie0_port0_ep>;
-+				};
-+			};
-+		};
-+	};
-+
-+	m2e_3p3: regulator-m2e-3p3 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "m2e_3p3";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+
-+		pinctrl-0 = <&m2_pd_en_default>;
-+		pinctrl-names = "default";
-+
-+		gpio = <&tlmm 144 GPIO_ACTIVE_LOW>;
-+	};
-+
-+	/* Enables 5V_PER, 3V3_PER and 1V8_PER rails. 5V_PER and 3V3_PER
-+	 * aren't used within the DTS but are used for on board logic
-+	 * level conversion and as rails for pull-ups. 1V8_PER is used
-+	 * for M2 Key E.
-+	 */
-+	per_pwr: regulator-per-pwr {
-+		compatible = "regulator-fixed";
-+		regulator-name = "per_pwr";
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+
-+		pinctrl-0 = <&pwr_per_en_default>;
-+		pinctrl-names = "default";
-+
-+		gpio = <&tlmm 142 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+
-+		regulator-always-on;
-+		regulator-boot-on;
-+	};
-+
-+	sdhci_2_vqmmc: regulator-sdhci-2-vqmmc {
-+		compatible = "regulator-gpio";
-+
-+		regulator-name = "sdhci_2_vqmmc";
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <3300000>;
-+		regulator-type = "voltage";
-+
-+		pinctrl-0 = <&sd_vset_default>;
-+		pinctrl-names = "default";
-+
-+		gpios = <&tlmm 4 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+
-+		gpios-states = <0>;
-+		states = <3300000 0>,
-+			 <1800000 1>;
-+
-+		startup-delay-us = <10000>;
-+	};
-+
-+	vph_pwr: regulator-vph-pwr {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vph_pwr";
-+		regulator-min-microvolt = <3700000>;
-+		regulator-max-microvolt = <3700000>;
-+		regulator-always-on;
-+		regulator-boot-on;
-+	};
-+
-+	usb_id: usb-id {
-+		compatible = "linux,extcon-usb-gpio";
-+		id-gpios = <&tlmm 53 GPIO_ACTIVE_HIGH>;
-+		pinctrl-0 = <&usb_id_default>;
-+		pinctrl-names = "default";
-+	};
-+};
-+
-+&gpi_dma1 {
-+	status = "okay";
-+};
-+
-+&gpu {
-+	status = "okay";
-+};
-+
-+&gpu_zap_shader {
-+	firmware-name = "qcom/sm8550/a740_zap.mbn";
-+};
-+
-+&i2c_hub_2 {
-+	clock-frequency = <400000>;
-+
-+	status = "okay";
-+
-+	ptn3222: redriver@43 {
-+		compatible = "nxp,ptn3222";
-+		reg = <0x43>;
-+		#phy-cells = <0>;
-+
-+		vdd1v8-supply = <&vreg_l15b_1p8>;
-+		vdd3v3-supply = <&vreg_l5b_3p1>;
-+
-+		pinctrl-0 = <&eusb2_repeater_reset_default>;
-+		pinctrl-names = "default";
-+
-+		reset-gpios = <&pm8550vs_d_gpios 4 GPIO_ACTIVE_LOW>;
-+	};
-+};
-+
-+&i2c_master_hub_0 {
-+	status = "okay";
-+};
-+
-+&ipa {
-+	qcom,gsi-loader = "self";
-+	memory-region = <&ipa_fw_mem>;
-+	firmware-name = "qcom/sm8550/ipa_fws.mbn";
-+
-+	status = "okay";
-+};
-+
-+&iris {
-+	status = "okay";
-+};
-+
-+&pcie0 {
-+	wake-gpios = <&tlmm 96 GPIO_ACTIVE_HIGH>;
-+	perst-gpios = <&tlmm 94 GPIO_ACTIVE_LOW>;
-+
-+	pinctrl-0 = <&pcie0_default_state>;
-+	pinctrl-names = "default";
-+
-+	status = "okay";
-+};
-+
-+&pcie0_phy {
-+	vdda-phy-supply = <&vreg_l1e_0p88>;
-+	vdda-pll-supply = <&vreg_l3e_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&pcie0_port0 {
-+	/* Required for pwrctrl driver bind */
-+	compatible = "pciclass,0604";
-+
-+	port {
-+		pcie0_port0_ep: endpoint {
-+			remote-endpoint = <&m2e_pcie_ep>;
-+		};
-+	};
-+};
-+
-+&pm8550_gpios {
-+	sd_card_detect_default: sd-card-detect-default-state {
-+		pins = "gpio12";
-+		function = "normal";
-+		input-enable;
-+		output-disable;
-+		bias-disable;
-+		power-source = <1>; /* 1.8 V */
-+	};
-+};
-+
-+&pm8550_rpmh_regulators {
-+	vdd-bob1-supply = <&vph_pwr>;
-+	vdd-bob2-supply = <&vph_pwr>;
-+};
-+
-+&pm8550ve_rpmh_regulators {
-+	vdd-s4-supply = <&vph_pwr>;
-+};
-+
-+&pm8550vs_d_gpios {
-+	eusb2_repeater_reset_default: eusb2-repeater-reset-default-state {
-+		pins = "gpio4";
-+		function = "normal";
-+
-+		input-enable;
-+		output-enable;
-+		bias-disable;
-+
-+		drive-push-pull;
-+		power-source = <1>; /* 1.8V */
-+		qcom,drive-strength = <3>;
-+	};
-+};
-+
-+&pm8550vs_e_rpmh_regulators {
-+	vdd-s4-supply = <&vph_pwr>;
-+	vdd-s5-supply = <&vph_pwr>;
-+};
-+
-+&pm8550vs_g_rpmh_regulators {
-+	vdd-s1-supply = <&vph_pwr>;
-+	vdd-s2-supply = <&vph_pwr>;
-+	vdd-s3-supply = <&vph_pwr>;
-+	vdd-s4-supply = <&vph_pwr>;
-+	vdd-s5-supply = <&vph_pwr>;
-+	vdd-s6-supply = <&vph_pwr>;
-+};
-+
-+&pon_pwrkey {
-+	status = "okay";
-+};
-+
-+&pon_resin {
-+	linux,code = <KEY_VOLUMEDOWN>;
-+
-+	status = "okay";
-+};
-+
-+&qupv3_id_0 {
-+	status = "okay";
-+};
-+
-+&qupv3_id_1 {
-+	status = "okay";
-+};
-+
-+&remoteproc_adsp {
-+	firmware-name = "qcom/sm8550/adsp.mbn",
-+			"qcom/sm8550/adsp_dtb.mbn";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_cdsp {
-+	firmware-name = "qcom/sm8550/cdsp.mbn",
-+			"qcom/sm8550/cdsp_dtb.mbn";
-+
-+	status = "okay";
-+};
-+
-+&sdc2_default {
-+	clk-pins {
-+		drive-strength = <16>;
-+	};
-+
-+	cmd-pins {
-+		/delete-property/ bias-pull-up;
-+		bias-disable;
-+		drive-strength = <16>;
-+	};
-+
-+	data-pins {
-+		/delete-property/ bias-pull-up;
-+		bias-disable;
-+		drive-strength = <16>;
-+	};
-+};
-+
-+&sdhc_2 {
-+	cd-gpios = <&pm8550_gpios 12 GPIO_ACTIVE_LOW>;
-+
-+	pinctrl-0 = <&sdc2_default>, <&sd_card_detect_default>;
-+	pinctrl-1 = <&sdc2_default>, <&sd_card_detect_default>;
-+	pinctrl-names = "default", "sleep";
-+
-+	vqmmc-supply = <&sdhci_2_vqmmc>;
-+
-+	bus-width = <4>;
-+	no-sdio;
-+	no-mmc;
-+
-+	status = "okay";
-+};
-+
-+&tlmm {
-+	/* Reserved I/Os for NFC */
-+	gpio-reserved-ranges = <32 8>;
-+
-+	m2_pd_en_default: m2-pd-en-default-state {
-+		pins = "gpio144";
-+		function = "gpio";
-+		drive-strength = <16>;
-+		drive-open-drain;
-+	};
-+
-+	m2e_wlan_disable: m2e-wlan-disable-default-state {
-+		pins = "gpio80";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	pwr_per_en_default: pwr-per-en-default-state {
-+		pins = "gpio142";
-+		function = "gpio";
-+		drive-strength = <16>;
-+		bias-disable;
-+	};
-+
-+	sd_vset_default: sd-vset-default-state {
-+		pins = "gpio4";
-+		function = "gpio";
-+		drive-strength = <16>;
-+		bias-disable;
-+	};
-+
-+	usb_id_default: usb-id-default-state {
-+		pins = "gpio53";
-+		function = "gpio";
-+		bias-pull-up;
-+	};
-+};
-+
-+&uart7 {
-+	status = "okay";
-+};
-+
-+&ufs_mem_hc {
-+	reset-gpios = <&tlmm 210 GPIO_ACTIVE_LOW>;
-+
-+	vcc-supply = <&vreg_l17b_2p5>;
-+	vcc-max-microamp = <1300000>;
-+	vccq-supply = <&vreg_l1g_1p2>;
-+	vccq-max-microamp = <1200000>;
-+	vdd-hba-supply = <&vreg_l3g_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&ufs_mem_phy {
-+	vdda-phy-supply = <&vreg_l1d_0p88>;
-+	vdda-pll-supply = <&vreg_l3e_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&usb_1 {
-+	dr_mode = "otg";
-+	extcon = <&usb_id>;
-+
-+	status = "okay";
-+};
-+
-+&usb_1_hsphy {
-+	vdd-supply = <&vreg_l1e_0p88>;
-+	vdda12-supply = <&vreg_l3e_1p2>;
-+
-+	phys = <&ptn3222>;
-+
-+	status = "okay";
-+};
-+
-+&usb_dp_qmpphy {
-+	vdda-phy-supply = <&vreg_l3e_1p2>;
-+	vdda-pll-supply = <&vreg_l3f_0p88>;
-+
-+	status = "okay";
-+};
+If 1, 3, and then 2 is a valid order then send the patches in that
+order, if 2 must come last, then we need to ensure that the dependencies
+are making it to mainline first - which you can do by resubmitting the
+two parts separately.
 
--- 
-2.43.0
+> > 
+> > 
+> > But this series implies that Purwa has been broken from the start - that
+> > the PDC driver has always operated on the wrong registers.
+> 
+> yes, purwa always operated on the wrong registers.
+> 
 
+But by accident it we never touched those registers. So, is purwa
+completely broken now that you have gotten the pinctrl wired up?
+
+> > 
+> > Perhaps the impact of this was limited as there's not that many direct
+> > &pdc references in the DT, but the patch that Bartosz's thank-you email
+> > was sent for got merged as 77fbc756d9cb ("Revert "pinctrl: qcom:
+> > x1e80100: Bypass PDC wakeup parent for now""), and that would make a lot
+> > more use of the PDC.
+> > 
+> > So while nothing in this series states it, it sounds like Purwa might be
+> > completely broken right now and this series aims to fix it?
+> > 
+> > 
+> > It's not clear to me why the driver change doesn't have a Fixes tag, it
+> > seems like the patch that introduced x1e_quirk was broken and should be
+> > marked as Fixes.
+> 
+> x1e_quirk in the driver via commit e9a48ea4d90b ("irqchip/qcom-pdc:
+> Workaround hardware register bug on X1E80100") says only about x1e/
+> hamoa specific bug, it seemed it never wanted to enable the quirk for
+> x1p / purwa. the quirk rather got anyway enabled for purwa due to both
+> hamoa/purwa sharing the same compatible.
+> 
+
+This patch series is the first piece of information telling me that
+Purwa did not inherit this hardware bug.
+
+> Patch 1/2 of the series aims to fix this (and patch-2 carries the
+> fixes: tag).
+
+So patch 2 should be backported to LTS kernels, but 1 and 3 shouldn't?
+
+Regards,
+Bjorn
+
+> 
+> Thanks,
+> Maulik
+> 
+> > 
+> > [2] https://lore.kernel.org/linux-arm-msm/CAMRc=MeU0QuRozMscv02M59+a66S05Jm18CyvNE-qSYrY=S7hQ@mail.gmail.com/
+> > 
+> > Regards,
+> > Bjorn
+> > 
+> >> Best regards,
+> >> Krzysztof
+> >>
+> 
