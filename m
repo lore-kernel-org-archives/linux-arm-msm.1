@@ -1,46 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52C78361DB8;
-	Thu, 23 Jul 2026 08:11:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8BA3B3F23A4;
+	Thu, 23 Jul 2026 08:15:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784794300; cv=none; b=fAp/WZJhBzq2JhwKO7+HNNnjHsYYuYo6Nkkwk7LOPni62kKO1IugKG76tVa5ZnLgTHeX1thrqDbKGSMrdpI1QymIK4Qu8a8P7TzQlqNo0ZMKSv/TAUjn6UbXBMn3rOC0rm89FOxh4V28kEqtyQZB98pOMcdNU6rbwFt+xIRSsiI=
+	t=1784794519; cv=none; b=FTs/IL/MZ6ZMGSuN91ziclXbqQGlNbRTi8V4iQdbimKn/RvtlghVYrYgHmr2uoEtYMJbJEJZbTtSg4HcRkSV9GT0SQIZaU1YBLLyBSoAOMca6Z9LiFrrWkjv98NpXPtzkQB+VeiD8DdvJBDBEZSKAfK43wqLjGibQkzAhuuR+PI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784794300; c=relaxed/simple;
-	bh=tbsAfD1LeRKHS0g5kwtvwbaz/gKGtbOq5mgBCqt8awg=;
+	s=arc-20240116; t=1784794519; c=relaxed/simple;
+	bh=iohF7JqZvzwPQDaoRv/8sIZHTAjK7IjbrRtu9LPSGzE=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=uiet1mAjUSvYsLDahRGcZQQSPVInW+SzOoeS5uueyNiXrKGj5+W6QeaLByu7V/XMA3Z/ndUBarovnsdEjXjVTtTyZE/7iWid5kKcAghYOKcM9XWEn5yx533Doxv5YhmEQiPSjBNjXXCrXLzeAdK4nS5f9703Nm1F9j6mzxKBFY0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GL3PXPxd; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GL3PXPxd"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19B281F00A3A;
-	Thu, 23 Jul 2026 08:11:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784794299;
-	bh=4ZEvR3EwzSZOEHcX1Aaaa5DIzQKxyHgbGZwUMRDqrzc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=GL3PXPxdNpxF8Vv+isQo1m4KfV2ux5FtHWJR7Lx6YAQU1ySePwfpgYtiAJH/gfcdC
-	 /H4BFUCdtqRZqAFofTSDRcDeF/BZg+iJLXAsSQzlug5vfcmwsAzNT7RyYa3kFvsLsH
-	 Krb0xfKFDldff2Hy9WkjYc+9RjKmPdAuWjA2ZKGqWfaKDICJvBC7MwQRlNJZyLvEwH
-	 unbPKldqmglNPEem2JOIN7Gu4EsmLt77RYffctNyTFdnTm83EcAhpLBg+Ke7VWlqnJ
-	 L+5X50YldnC4oKJClSc1SlSykxsma4Qc8fAQEH+K3SFI2maRLqRSQ/u5MFBrWRqOtI
-	 e1Ut8frEXZ4wQ==
-Date: Thu, 23 Jul 2026 10:11:33 +0200
+	 Content-Type:Content-Disposition:In-Reply-To; b=W7rlXawU61WYtJXKukhYbE+WW9YPKYPLzwuhG87EFbDkQYY1mltCsRtCvQoW6XbrrvHiLWbTA1FKeJRDzJe2UNKeTFsvbaT2sEqT/Z9Hk2fim5rnXoygozxqXYSsNb8bwsvhX0TFb0zeXRU6UDv/05qkCgy3zRkwKGo+GGZCK8o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D5C781F000E9;
+	Thu, 23 Jul 2026 08:15:17 +0000 (UTC)
+Date: Thu, 23 Jul 2026 10:15:02 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
-Cc: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>, 
-	Stephen Boyd <sboyd@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>, 
-	linux-hwmon@vger.kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
-	Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-Subject: Re: [PATCH v2 01/10] dt-bindings: hwmon: Describe Qualcomm BCL
- hardware
-Message-ID: <20260723-radiant-scorpion-of-hurricane-cbed57@quoll>
-References: <20260722-qcom-bcl-hwmon-v2-0-febe2805e17b@oss.qualcomm.com>
- <20260722-qcom-bcl-hwmon-v2-1-febe2805e17b@oss.qualcomm.com>
+To: Wenjia Zhang <wenjia.zhang@oss.qualcomm.com>
+Cc: Herbert Xu <herbert@gondor.apana.org.au>, 
+	"David S. Miller" <davem@davemloft.net>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, kernel@quicinc.com
+Subject: Re: [PATCH v2 1/2] dt-bindings: crypto: qcom,inline-crypto-engine:
+ Add x1e80100 support
+Message-ID: <20260723-impossible-invaluable-sturgeon-3b2ce1@quoll>
+References: <20260722-devtool-v2-0-d7e609ef7388@oss.qualcomm.com>
+ <20260722-devtool-v2-1-d7e609ef7388@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -49,35 +36,20 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260722-qcom-bcl-hwmon-v2-1-febe2805e17b@oss.qualcomm.com>
+In-Reply-To: <20260722-devtool-v2-1-d7e609ef7388@oss.qualcomm.com>
 
-On Wed, Jul 22, 2026 at 12:00:06AM +0530, Manaf Meethalavalappu Pallikunhi wrote:
-> +properties:
-> +  compatible:
-> +    enum:
-> +      - qcom,pm7250b-bcl
-> +      - qcom,pm8350c-bcl
-> +      - qcom,pm8550-bcl
-> +      - qcom,pmh0101-bcl
-> +      - qcom,pmih0108-bcl
-> +      - qcom,smb2360-bcl
-> +      - qcom,smb2370-bcl
-> +
-> +  reg:
-> +    maxItems: 1
-> +
-> +  interrupts:
-> +    maxItems: 2
-> +
-> +  interrupt-names:
-> +    items:
-> +      - const: max-min
-> +      - const: critical
-> +
+On Wed, Jul 22, 2026 at 05:26:28PM +0800, Wenjia Zhang wrote:
+> Document the compatible string for inline crypto engine found
+> on the Qualcomm X1E80100 SoC, used by the Hamoa IoT EVK board.
+> 
+> Signed-off-by: Wenjia Zhang <wenjia.zhang@oss.qualcomm.com>
+> ---
+>  Documentation/devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml | 1 +
+>  1 file changed, 1 insertion(+)
+>
 
-Binding looks in general ok, but feels incomplete. If this is battery
-limiting hardware, does it actually need any battery data through
-monitored-battery property?
+This is incomplete, although maybe you based this on Kuldeep's work but
+nothing explains that here nor in the cover letter.
 
 Best regards,
 Krzysztof
