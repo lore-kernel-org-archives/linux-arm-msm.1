@@ -1,63 +1,63 @@
-Received: from mail-yw1-f182.google.com (mail-yw1-f182.google.com [209.85.128.182])
+Received: from mail-yx1-f52.google.com (mail-yx1-f52.google.com [74.125.224.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE82B191F94
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 01:46:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34B44314B8F
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 01:46:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784771194; cv=none; b=RZBI8wbD8H5NpyLQ6Ntx34pTE/weYdwNAYXegHen+nwg8wjQXW+KRZaw3bN5qFqKdGoGws/yIE6Kyy5d89HAa+uIvnpkgiG5F2EO24kveFT1lbjdv8qzOkarzLJuemKvcG8DysmqbpMAtQ5+0Uw3LPkUbU14J+YAQreefR5Kuto=
+	t=1784771196; cv=none; b=Ec1z6lDB+doy1vcJq2oj+3DOgk95pI7e6ECNzSijAStHlUHT/ZhDeyrsJs/btlnRfEhcnDnvbV2utBeRECRNeH63eA1bTNTFE5/4e1Jtw2PZ2AeoDFOTInSvoq6ULaINgbqhLk3lXu/E2K2MY01aKNGf1pzcNqfupptreCZNCjM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784771194; c=relaxed/simple;
-	bh=JiTUnp6GkB6B+bmJP65I25onDMOLDPZ/wDqK0J06aA4=;
+	s=arc-20240116; t=1784771196; c=relaxed/simple;
+	bh=wgB4PIrpr1YYgW5ec9JpjdnWXn1cEPDlUN91lmzw3xs=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=hIz/B5jpiyWzAGYpbziMDLtZ+57H5eyDFt4gZ5xOUyBmiEcrD9o/YXyktRTaB9FCwrXntZmU1urHdyvqtgShMr5ubvN84AlLZuj+FERnm15Vbdh5P4Wa7fgevpKmv5ezgvazp/A56QVaBzofqCcKLv2WM1Y5RjiZnglq8hp9GBA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=TRo32JZl; arc=none smtp.client-ip=209.85.128.182
+	 MIME-Version; b=dAgT8QSh6a8eBbidr+fYaXNaa4YaQNb66nmGCUk06VmhNLUFAml9pdSTp1xdrByDOiiBr//xloOdxUfM08eaD7bv0pd+gTOoL7KGre7w4zC/X1+YBJ0r0qvu6sZdamezVf5jgagHwAIMoucRFaJi/f9LvECHlvTx0IcSdS1JyEc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=oa/D86CB; arc=none smtp.client-ip=74.125.224.52
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="TRo32JZl"
-Received: by mail-yw1-f182.google.com with SMTP id 00721157ae682-7dbcb505578so1291007b3.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 18:46:32 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="oa/D86CB"
+Received: by mail-yx1-f52.google.com with SMTP id 956f58d0204a3-6688dfaed31so81766d50.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 18:46:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784771192; x=1785375992; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1784771194; x=1785375994; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=kyx8fnMYpU13qyrRjwi9Ec2VpF+qFTk63QV3HyVJPgE=;
-        b=TRo32JZlPBZV1yp0FU4HkdjtSusiiGpweMfVWdRgc48yHxyLJwt8W5iBg96Bed5dUw
-         Nwjg10q2FlvNBauBZRt6X4HUARFDpVWvENJ5fNIc7GdDGfFA4ZeXORNLfMPoTBLXNKjV
-         RzUYitrzUXnHGrdBJI6FCWB0MM8W4ELynBKw32ppwoeQXzZVbSaY6NxmNjfqwaeT7+Tr
-         O9G9AEHVZcfD/NQf17boourJEMUw2P19PaMzQt2VH3y0nFOaJXy6nH6JxTvRzVbbtf6z
-         EMeMoV0f9+9rOzYH16SSdO9kXJY8kV0Q2BNSk4YnrGbGEnxD+KaGbQ/xut0UE8gwn7kG
-         Mefw==
+        bh=+JKcIPJqaMAyH6OdXJ30k6mM2iyhDEyD4OzquhdMaNo=;
+        b=oa/D86CB9+pJpks4qRYo1YV/GyId2jzZfPJbOTRC1teikO5Okr4L6pyDaEQd2G87Nz
+         u0Bfy43RbI6mdJcx3jIy6RoTo5Od5+MDSHWrWuyaQP/14FyBF3Jqun2lmVITJrxq8HaE
+         j9yqNlejFXlf40qb97/ju5sVLaizIC0aww/rWX85XfVaFAsShCMT+/fHgoNsqlBpxAek
+         iE7EwbEr+evE8uNXF3eZD1txjb/lDKnd0mo093WT9H55D8jX2ZFkmW5SQ5KgPziuBboL
+         Mv10kkEHyw28Y5RBLsw9kBvHE/LgfnPrUDV19H+qXooV9k8FkQtdz6pubd3iqRF3xx3W
+         P3Ew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784771192; x=1785375992;
+        d=1e100.net; s=20251104; t=1784771194; x=1785375994;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=kyx8fnMYpU13qyrRjwi9Ec2VpF+qFTk63QV3HyVJPgE=;
-        b=XiRp2EZWjloWPeRTfl3DUTNm7dP+/xe3rcrpJu/8pDsug+S5+3ZE31+DFbyLDw5498
-         1Mmp6T5Ijw8Uv2GfiQM6CjTSOS4zSEqJ+vkOfcCEONkqrdp3Ag/mVxB3yeJLq2u29tdj
-         bn98iH3epBVyTBUvjip8l5Z5cCp6P9L2iH0Boi5gZkzfAHF64cV7M9tFnFdU+FJSjIZI
-         hnc0cYuS7f0DWiHB6nzZzdGQbzodngSEZOp6/hwk4Unb4qrQTjWniKgFFe89odWDX1EI
-         AdrQB87rMnlXHtFDsHy+SsLQ+dV5MNaJ9wP4qFwHhQFfqbRPOgawnn5CKm+UyPhhc2bY
-         0pSQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrHPT3H0B2DEqI760oWn2tYyI8Mp1kTnAtoc7tSn2UWqTxN4DDtMzPVAthppmLb9iJzPLqICSLmDul1RUBb@vger.kernel.org
-X-Gm-Message-State: AOJu0YzAffgwmYUkA5D9lZqEZ/XHCgwodjVGQRhFaZ0CH3spRm2HA0oL
-	+xRQAVdbn6I79a47GbL7sgxaLTX8WXkopLxJVNA9o5ivBSiKGcpeUIxQ
-X-Gm-Gg: AR+sD11Gwn1UNtc+CQ6gLre5bXAEFU06Zi3iGT9WqOALnpTDM5nlLgDDIgCbORaDRb0
-	BveN29XzIFYAJN/QNZrh/dSoXxMlSzQIL/gBQp1e4NSuH0R8Uw6E3WS1icsoMpzhikmO83BBxX+
-	abiBRam/tKhoZJwEdprg5nilkC/imzuj7lBYUuqZkRlUMrjbyldJnXRXDIKFRXMRD9iVppUHsnp
-	Cc/4N+PWVHoYUYmasN8PnDuuqI5JEwmV30iLiSb7pAQjvqFuxJDbK7uQDpp2fqty3hOwfT7XY1j
-	WS30SKq87M+Cw0QEiEe9hUg3+RMLIRyu9Ywn3bXshoutyxYhMEdl5y4Le6auph4cqcNPjpjg60h
-	IMVmndNUWwfRy0MDfYH7Fr8p5t8hHPA/yRPsqEBdY7Y3LgxaW84G9WHQ8t99Ed0qB9gtRxTmLTW
-	s5R7sleX9kBkJ7MFAO7O73qvLD546f
-X-Received: by 2002:a05:690c:ed0:b0:812:996f:176f with SMTP id 00721157ae682-81f4c140ba3mr3175837b3.11.1784771191941;
-        Wed, 22 Jul 2026 18:46:31 -0700 (PDT)
+        bh=+JKcIPJqaMAyH6OdXJ30k6mM2iyhDEyD4OzquhdMaNo=;
+        b=N3TSgdKFTyCPa00yNq0u8SvRBPAkyiz/7+r+5W3u0ylGi9Qi1Ihl+8BKb+amjdWOvG
+         qYvQQQ4QBgeY5ZWbfWZz2O1Lhf2Rk/2p5SMVOzBcXYgvpG9PmPVZifFc4hMWOD7Vmhn3
+         PlS+RAaoFm0gBxZDbWWf2Jf9QOdjtb3KqPNyeOO79B6vsXiKluryJ7nGRE7irzKovyEK
+         kDwG/benn8D5ATCh2Etb0fWrQVdChrhvgUqr7aRVl/enF8b10EUEteAn6OI//leBuq43
+         3szNDdJGwRwx9ghyj2L2JoNOPC08m7u+qdkknm8x5ODYxveBp7l2pEaSkqX2mzkNph1k
+         SbuA==
+X-Forwarded-Encrypted: i=1; AHgh+RqEpkOiVSRMzQYKfJFWogCtEgeQ+WcIh8y6FUKrCdKQC5jOHAjLH082rOEA9gwKvOUjIP9boAjAB7m66q77@vger.kernel.org
+X-Gm-Message-State: AOJu0YxivxTxCmQy4kjmEExnKUPibeLH8cFfo9J1TTMLATSYZIaRcsE+
+	EjAk6I6rrwTf/KI8sYMQCw6sybGfdNEUdVyfJZ4X3iV4tl0RzVBAcSBp
+X-Gm-Gg: AR+sD11br4binb90p5MKX/pv+yy9r9aMo5Pb1baqc1ijb4QT2eRRFWbPYbMkehOJ1al
+	HGm4Nd7CQEAXUsPhnMDz7w8SjNI0QTSZxY8x1Q39rhNzwYs19O4kqpY/Nb+AqJzOSFejh11ejBV
+	E0ufvlFWae4cnYm1bQEuWH3pc5IM24tyqmizDb6aW0srat8um4YHxUSi9KeiVst3U+48ueexJuc
+	1zwZZ67m/VDVtYaypMQrX2d13ogtb5rePvuwBpr/Nae2dfYmyoCzZ8E1kaHP7TuEfosbEw+eYC/
+	idmT2pqAfNWt/t+K9ryhYtjAoJywChE7mrQvZqoEVkbqm/Rz6mvEptchD1+t3BgJGT16ri8wL7g
+	7iWJX5UfxZ/XF+23/FkzlSMXQD6rb4KmexGMzi6LXD1bCrizh4rYcWyCUP97IA3bugmSykieFNL
+	xGTdHyzoDhdGDF7ydRq/EEn9kXBsoW
+X-Received: by 2002:a05:690c:c4e7:b0:81e:8f17:a943 with SMTP id 00721157ae682-81f4c1c1dc5mr3385497b3.29.1784771194053;
+        Wed, 22 Jul 2026 18:46:34 -0700 (PDT)
 Received: from karli.attlocal.net ([2600:1700:7270:4eb0::19])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-81f33bf2e50sm22038487b3.10.2026.07.22.18.46.30
+        by smtp.gmail.com with ESMTPSA id 00721157ae682-81f33bf2e50sm22038487b3.10.2026.07.22.18.46.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Jul 2026 18:46:31 -0700 (PDT)
+        Wed, 22 Jul 2026 18:46:33 -0700 (PDT)
 From: Aneesh Pradhan <aneeshpradhan2004@gmail.com>
 X-Google-Original-From: Aneesh Pradhan <aneeshpradhan@acm.org>
 To: Bjorn Andersson <andersson@kernel.org>,
@@ -71,9 +71,9 @@ Cc: Rob Herring <robh@kernel.org>,
 	Catherine Frederick <serenity@floorchan.org>,
 	linux-clk@vger.kernel.org,
 	Aneesh Pradhan <aneeshpradhan@acm.org>
-Subject: [PATCH v2 1/3] dt-bindings: arm: qcom: add MSM8920 and Motorola Moto E4 (perry)
-Date: Wed, 22 Jul 2026 18:46:25 -0700
-Message-ID: <20260723014627.63310-2-aneeshpradhan@acm.org>
+Subject: [PATCH v2 2/3] arm64: dts: qcom: add initial MSM8920 device tree
+Date: Wed, 22 Jul 2026 18:46:26 -0700
+Message-ID: <20260723014627.63310-3-aneeshpradhan@acm.org>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260723014627.63310-1-aneeshpradhan@acm.org>
 References: <20260723012431.48499-1-aneeshpradhan@acm.org>
@@ -88,46 +88,39 @@ Content-Transfer-Encoding: 8bit
 
 From: "Catherine Frederick (coolguy)" <serenity@floorchan.org>
 
-Document the Motorola Moto E4 (perry) board compatible for MSM8917 and
-MSM8920, and add qcom,msm8920 to the SoC compatible list.
+MSM8920 is MSM8917 with a different RPM clock compatible (IPA clocks
+present in rpmcc-msm8920). Start with the minimal SoC dtsi: include
+msm8917.dtsi and override &rpmcc. IPA and other 8920-only peripherals
+are deferred until their drivers/bindings are upstream.
+
+Depends on the qcom,rpmcc-msm8920 binding/driver series.
 
 Signed-off-by: Catherine Frederick (coolguy) <serenity@floorchan.org>
-[aneesh: split bindings into their own patch; add msm8920 SoC enum]
+[aneesh: strip IPA node for initial upstream; rpmcc override only]
 Signed-off-by: Aneesh Pradhan <aneeshpradhan@acm.org>
 ---
- Documentation/devicetree/bindings/arm/qcom.yaml | 7 +++++++
- 1 file changed, 7 insertions(+)
+ arch/arm64/boot/dts/qcom/msm8920.dtsi | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/qcom/msm8920.dtsi
 
-diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
-index f8c37096df46..5556f81c0af5 100644
---- a/Documentation/devicetree/bindings/arm/qcom.yaml
-+++ b/Documentation/devicetree/bindings/arm/qcom.yaml
-@@ -261,11 +261,17 @@ properties:
- 
-       - items:
-           - enum:
-+              - motorola,perry
-               - xiaomi,riva
-               - xiaomi,rolex
-               - xiaomi,tiare
-           - const: qcom,msm8917
- 
-+      - items:
-+          - enum:
-+              - motorola,perry
-+          - const: qcom,msm8920
+diff --git a/arch/arm64/boot/dts/qcom/msm8920.dtsi b/arch/arm64/boot/dts/qcom/msm8920.dtsi
+new file mode 100644
+index 000000000000..f2747e5133f5
+--- /dev/null
++++ b/arch/arm64/boot/dts/qcom/msm8920.dtsi
+@@ -0,0 +1,12 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Copyright (c) 2023, Dang Huynh <danct12@riseup.net>
++ * Copyright (c) 2026, Aneesh Pradhan <aneeshpradhan@acm.org>
++ */
 +
-       - items:
-           - enum:
-               - wingtech,wt82918hd
-@@ -1323,6 +1329,7 @@ allOf:
-               - qcom,apq8094
-               - qcom,apq8096
-               - qcom,msm8917
-+              - qcom,msm8920
-               - qcom,msm8937
-               - qcom,msm8939
-               - qcom,msm8953
++#include "msm8917.dtsi"
++
++/* MSM8920 uses the MSM8917 RPM clock set plus IPA clocks (see rpmcc-msm8920). */
++&rpmcc {
++	compatible = "qcom,rpmcc-msm8920", "qcom,rpmcc";
++};
 -- 
 2.53.0
 
