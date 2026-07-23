@@ -1,607 +1,214 @@
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C75E314B8F
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 01:46:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB76C8634C
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 01:46:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784771199; cv=none; b=DjL1ieUzJSG48cn6QEYKQ/3O+xWyGdC8/piSkDtgGDR9BObtJIJaRXT9J6xPa1+QdGTKPsJLsIgPOS8X+iRMMuxsd5pa1xasK6j642dvLXQzCsmrvUHwIlT4En1lmz4qkXOSgoEgak7XjCSzbCwWJHWXiupX8wKmQVs6ynevFZ8=
+	t=1784771218; cv=none; b=nnAp1VfA7g25e8DX+wLIrhJ4uPvl24fV9of2e+SlM9u5qf64UlFDfE57MEqHtdNnySssICJdXuUfceeE8Z2tE6X4Cl9y0YeLCEecvNDKAmU8OEbusev687o8efBQU4cDy1wlKvaGBFvyqB6S+zt2g8I8Bb0vA4Mu+0YN9EjgAf0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784771199; c=relaxed/simple;
-	bh=OFMSCpJyj9hVDi9h35ukEwqYzEbqQJF/Wu38RyqJHBs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=HItIcGi6tQUTnUw5RLJPBKH9Qv1RCAs23gT/7y2v+Ywp8fc7xbJoimZ0lVwBvEg9NHR2otvdb2gF0AxQfssEdxhgdEK5dEJ2tCIZm4R36Grb56/LfU291mZ1oIi6mqNPYgNW5x/D31+khluqztHycAjjKnjglkWvEEZLvuRy69w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=okjTP1d8; arc=none smtp.client-ip=209.85.128.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1784771218; c=relaxed/simple;
+	bh=bGlwfuxl7Ko0KTHUMFRKzd7hgfPMUkhhLFboxtPnpwY=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=VePtabB2lXMuFAZB1DoZetgJk7kDoqn4oWCoZ4ViKxgMMG8jkJ14IVMRKW6eS9u5ijpvbONIbl1tlup/+AIqcbbKbFIdkAlktAqyrLDqctUukF+v/vGp3rjgE7RtGbmGWtoNfUNd/AuA6vj9rIINFCfldlYVNHC2CWnOKU2CzY4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hsHj/hdN; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QZ20psqD; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="okjTP1d8"
-Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-81ee6b2da98so1062517b3.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 18:46:37 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hsHj/hdN";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QZ20psqD"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66N0WgU62140408
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 01:46:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=PAtArUaUjCVwjhnUvEpSOR
+	EWwbFp3QpDYdJcjV8SPts=; b=hsHj/hdNFqoliwwuKr2uE7YRIWsym5fb8HDzHt
+	PgJ5BT6E7ecdfBn5CwDE0BulSxwB5OFqztmKzT9wnzRsej1kn2NLRnOox8rw+X8g
+	tglTR2Y9PdiCzW+XGa9oMpJOQHk1WedpslDwrIoa001bPZAu3ew/1WEcbQiDZ7Dz
+	xS0wznE5TWRgQi2D1TmeEbO2S+AG2PCQcAbynF+MyxWfWij4/drEyHU2vo4o0Sy5
+	F6DuqmjuzUKZUlFCCWoBGtqkA8YE0VCV/77Zgo709GSCxum48Yk6borHLM2s0OD1
+	DdFVmcoXsP2AtqFCjzEu8eZbKWgO2um6PikLN9bkQElKchyw==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fju22bspg-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 01:46:55 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2ce8a76df2dso2725805ad.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 18:46:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784771196; x=1785375996; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=y4U8WHPBAEUwHV0l13y0REmo/n+jYVuk3FwdOcSHE4U=;
-        b=okjTP1d8HgeW4T7+gF113Ctpyzj2v+3u7S9WMos3fLtPL5qraf6YTo1LCzCphFdpEj
-         aT/CmkMy83UZT2GzGxcOWCbQ4hjISo53P633ayzX1A5DgMn70ZL59SDSf0GMMCzMZHEQ
-         XKZKavrhm4NIkgXnFu1ZlfAHpaX0w/PHMo8URCuPmr0qKiSCA1jef9jr1CvyWyZHTpBf
-         qyGqGGRJD57ON4fXjTy94Q5avMhl/ABZkOydzNtK7RN+Tp6JB0dzceyRErHD7f1Qg6hn
-         SUh0KvQuo+/MvS/4EbKrBywvwnvPMYE5+/A/V+ZkGyZX8ZBYFcTwPItOXz3WjH+cJ2G3
-         4P0g==
+        d=oss.qualcomm.com; s=google; t=1784771215; x=1785376015; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=PAtArUaUjCVwjhnUvEpSOREWwbFp3QpDYdJcjV8SPts=;
+        b=QZ20psqDYMlzH0y+7u38cCOp+GELtviVgQK+d+y0wrXtRTn/4BIfggif8KK/Z4LXDI
+         ulA60JlwvjQqBG8TnP0GEiDG8kOI9+nnyPO2ym9eipPw1ni3mMtf52ala7CFABIjHEJF
+         2z8F0cIeuKLWk6wbjxno6UgkADKqal7w/SjFnGllq+wya+l6YDYpzVs73AlGRil1f8aT
+         YBdh3qGY2DhM+rOFPfhdoYPJPeqSA2JXggIEv0mJqyvZkrNpxb8q40brsYMC55KaRtdK
+         PWp+40rpkzIOKR4l5xYs/Zj0x/DBuuABqSvLxuLtSIiHksa1/jln3+dP0Rd/u3T2Hh0G
+         pYog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784771196; x=1785375996;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=y4U8WHPBAEUwHV0l13y0REmo/n+jYVuk3FwdOcSHE4U=;
-        b=g3VnX+TOGv70lBec760kEc17ipoTIoAH8v+SS7qShOR5nijrtjn5GjvtWorWNwEDa8
-         +tIoRK0TcNH3dQS09QrMKiU9TMVtCEvZtVQk4cOLROwWOfCmgDK2a+rkMwGjSP/Uopoa
-         9RJp7h5ShD+6jDoshvt0ZOwxpvWiLEmdyCQLcrSz3GMdOPdIQs+OfWyMNgfc3hE6/+Vm
-         A7k+3/O4TRvi/JChxGYRNHplqY5fUU6HB0KfY50jlLEONhWY465hJZ5hP8dUacuagtWW
-         motQGRRGpAZJnJqN1Kizx0OZi1i6pIpV00GEl16q5i6FLflFa6vYqN+713huGSH5kKZx
-         YIRQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrU/8lcu4mCR4XwatNzhqQx097uobYH7XybNdhbB0bmNnlnPMaecY7opPYkieXyBJzuM9+XOp1aJ3U8bfOj@vger.kernel.org
-X-Gm-Message-State: AOJu0YyIbTG2U+9tQkb1EQWiFgOtXTxmXfjajNgQ2R1iceTkbMOy40/z
-	cGSYEK7Klybpm3/isIhMIF54kVQAE5nLWM4ykf72OKV2NNs06Vju9UQg
-X-Gm-Gg: AR+sD12W/LGHomxMRmesGIMDA1mhMBvU9utvD0G8BlBDlLQAZrxsmM+x0J8MxBYMl/b
-	qo0LJUGiviVnRYIYkjWeg/kENYZ8f1+3LjQPokZaaKCv7XCGVmcmTJtsVaWM4BDF5vO6dgHLh6r
-	MR+L3LcvEPchkQ4gVjYJZBcYgTqnxzn4fJoHzOdi3v47ZslFfzaiRJJbQNEt4MdoN0mmoniiuhV
-	c413KQWHKZ/FbtmO9GAjiMm9YlCERDjJ0/GSc9dHTNT4h+ouoQqxUq2ntjOKCl1Zgn8D80PMsuu
-	YlSZxsA+/OSZHHARSxIlptvFw0/g83fWBs1hGYrILgV9r8+0yfj6A/8KTBs0q3Vnu2v4E7wMxWF
-	Faiq457FlyLMRr7U4pcL8xJps+m8vS536B3NQJwPE3/qt3Kckj1CI84MeKBpG5s1KwI79w+Nh5D
-	HkSOfqAq1YCLwn+ZIO9zrkxYy0PvEV
-X-Received: by 2002:a05:690c:6a11:b0:81e:a425:fe88 with SMTP id 00721157ae682-81f4c3a6360mr3187257b3.33.1784771196068;
-        Wed, 22 Jul 2026 18:46:36 -0700 (PDT)
-Received: from karli.attlocal.net ([2600:1700:7270:4eb0::19])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-81f33bf2e50sm22038487b3.10.2026.07.22.18.46.34
+        d=1e100.net; s=20251104; t=1784771215; x=1785376015;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=PAtArUaUjCVwjhnUvEpSOREWwbFp3QpDYdJcjV8SPts=;
+        b=iQ7wWhozo9rFwbg6+BxzRX6a0XOSS9F4u5+bFno4VSHGTnoi5LFX7539gJhSp1q3vh
+         kzxiu1mwTAAz32jcF4h+4nog8d9Mz5F7hJWwWfSX3O+AK+ro/inv/C3noD2wu8KNN/oC
+         c1UcZW6ukGvbXr12ZTO7IweKGO4ajaYafmFJZ41CYH2knhbI5/4k/fEAoSHmKKO3J52N
+         MitAtZpC7F+0nOZFNE+E71NLeEJ2UMLMuNITfrHpc1vxLjLQ80GPU7mA4ybacHGTvg1v
+         3CLbmoSUBC0aNpQmetXE7EGpBQ8qK96X8pFIs+eM2CdNR3Wh0kSX9bBUVCS/96Bw8Np3
+         DxOA==
+X-Forwarded-Encrypted: i=1; AHgh+RpTc0VNB/67o6d0cbNOtZwbPD+8O3zwNOw8guExxU3H5TwD/xb4/CkkJRZgpvUU/Iz7Yjf1mX0cVmm+EF81@vger.kernel.org
+X-Gm-Message-State: AOJu0YygA3DgPEPHMmz4dYuPGawEhSDslT3lcDLh2grC3VegTRf2g0JQ
+	mj/LKSTEr++l0UBMTE5xo9oOJvorL+Or1sdWJHOlyI9OUTR2aWOH/dHjs94lzF2fEYDvmq3zj8S
+	d7khaEm4tnxJk7x7YtVXJNwwnqxG6D091hrdF472CnLeHvi+1LXEEf4jRSK9ISM4fqLbI
+X-Gm-Gg: AR+sD11rLjsrwtsuEZCGgai/3T0BFe0N6FuDcTOwwb83SG2J7+mgt2Q4NT8MiJnF3IT
+	E4OHdJi95iG+MhQ5p1utBvI+1J9+gg6B1HMZ7Grxo+g3ZfLAE0DBU0Jc2HKMRvBOT9A9bA2uh/w
+	a2dR2QjJbKMKBngKIWKnlL0nNM8msM0DzpJDCJuVxcDHLD4FgC87cc9nqxYq7e9xTCwcpJ/9LaE
+	1jE7VFMKqYQJR5UStpUVNiWGpyPK9ybjTdeXPAPyt6aPUPyrmKOM9iMCdM84TLH58nUcQbWCV1s
+	XHXmZnAdfyJ1eLZZB+MSg7RWMgZ5HpsIvjEooy14Ov/wyzhAFZXUwGhR6rdKTurnlUmSChI0e2t
+	kKK/2W191j4miRmdaorifXD+2eW8t4NV281EYDTzAEXf5Tvqfs9vXShhGBWGYzBo=
+X-Received: by 2002:a17:903:384f:b0:2cf:9c35:82d9 with SMTP id d9443c01a7336-2cfa6b7cf03mr13371475ad.10.1784771215025;
+        Wed, 22 Jul 2026 18:46:55 -0700 (PDT)
+X-Received: by 2002:a17:903:384f:b0:2cf:9c35:82d9 with SMTP id d9443c01a7336-2cfa6b7cf03mr13371095ad.10.1784771214591;
+        Wed, 22 Jul 2026 18:46:54 -0700 (PDT)
+Received: from jiegan-gv.ap.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf8efa39e9sm23389995ad.10.2026.07.22.18.46.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Jul 2026 18:46:35 -0700 (PDT)
-From: Aneesh Pradhan <aneeshpradhan2004@gmail.com>
-X-Google-Original-From: Aneesh Pradhan <aneeshpradhan@acm.org>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Catherine Frederick <serenity@floorchan.org>,
-	linux-clk@vger.kernel.org,
-	Aneesh Pradhan <aneeshpradhan@acm.org>
-Subject: [PATCH v2 3/3] arm64: dts: qcom: add initial Motorola Moto E4 (perry) support
-Date: Wed, 22 Jul 2026 18:46:27 -0700
-Message-ID: <20260723014627.63310-4-aneeshpradhan@acm.org>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260723014627.63310-1-aneeshpradhan@acm.org>
-References: <20260723012431.48499-1-aneeshpradhan@acm.org>
- <20260723014627.63310-1-aneeshpradhan@acm.org>
+        Wed, 22 Jul 2026 18:46:54 -0700 (PDT)
+From: Jie Gan <jie.gan@oss.qualcomm.com>
+Subject: [PATCH 0/2] Add CoreSight nodes for Qualcomm Shikra SoC
+Date: Thu, 23 Jul 2026 09:46:29 +0800
+Message-Id: <20260723-add-coresight-nodes-for-shikra-v1-0-992615f9ea15@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAHZyYWoC/x3NwQqDMAyA4VeRnA3UqpvsVWSHalIbhHYkYwzEd
+ 7d4/C7/f4CxChu8mgOUf2JSckXXNrCmkDdGoWrwzj/c03sMRLgWZZMtfTEXYsNYFC3JrgHHuEx
+ hWEbXUwc18lGO8r8H8/s8L/4DGhhwAAAA
+To: Suzuki K Poulose <suzuki.poulose@arm.com>, Mike Leach <mike.leach@arm.com>,
+        James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>,
+        Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
+        Mao Jinlong <jinlong.mao@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Paul Walmsley <pjw@kernel.org>,
+        Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>,
+        Alexandre Ghiti <alex@ghiti.fr>
+Cc: coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org,
+        Jie Gan <jie.gan@oss.qualcomm.com>
+X-Mailer: b4 0.14.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784771207; l=2649;
+ i=jie.gan@oss.qualcomm.com; s=20250909; h=from:subject:message-id;
+ bh=bGlwfuxl7Ko0KTHUMFRKzd7hgfPMUkhhLFboxtPnpwY=;
+ b=lNXsfr6unas8t0WGnGVH6FFRT2E2JrcFsxQ1zu/r4zI8lMZL1jtYqEJZtZ8Cic8zE9L822GMR
+ thmFZsMNnodDNh2eN+6j1gPSQbHLC79KlUPQuzhK3MHc9uXMXVY2pvc
+X-Developer-Key: i=jie.gan@oss.qualcomm.com; a=ed25519;
+ pk=3LxxUZRPCNkvPDlWOvXfJNqNO4SfGdy3eghMb8puHuk=
+X-Authority-Analysis: v=2.4 cv=X4Bi7mTe c=1 sm=1 tr=0 ts=6a61728f cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=7CQSdrXTAAAA:8 a=KKAkSRfTAAAA:8
+ a=_O3DOGVWAAAA:8 a=JfrnYn6hAAAA:8 a=gXtLJ4WPg2CJrXxS_-4A:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22 a=a-qgeE7W1pNrGK8U0ZQC:22 a=cvBusfyB2V15izCimMoJ:22
+ a=2TKV-7w1aU1AVAwN0oqT:22 a=1CNFftbPRP8L7MoqJWF3:22
+X-Proofpoint-GUID: HsIKOo4rlmQdcjBZvkRF-ePJYqbMtWj3
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDAxNSBTYWx0ZWRfX8TJwUd4O7d4r
+ V5E3MLy9VRbwOqjWyAkLIatomnM2zHOgsBbm0UVm8MCZYtcY0rTsJbY8/egsqB1+KIfbEutpW4+
+ 5/GesCJ6J7vJEsA/lJhAVJBv8ctm6Mk=
+X-Proofpoint-ORIG-GUID: HsIKOo4rlmQdcjBZvkRF-ePJYqbMtWj3
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDAxNSBTYWx0ZWRfX1sZFr+lh8vDv
+ b0Q55WzeifJ0Miq0Umie1ltHI4dwBdj3hmISEMHk7DjZFHESZWjaM1mPNcuH56FXERNG1vHeMNk
+ T8st6UseHDIbRbgJ/LoCOMxPyVbDjxloXptuLU5kM7RAJgPy+Gal/s7GErNy9bLRPSZuD6ZcY6P
+ OOFS1KeKxHsYs3gGtFH+eaR78lI3o2aqU1N4L+KBlZ49vq63na0yZvRtFJzu84jVJSHXec/Qiwe
+ ik5bPLMbJLV4Dl055I4P3qKBrKyc7srqtWk9d+1JNWYmKvmxgiFhBZeIn99B9DYpBA41D8GQ3bg
+ m0gSOjtpHP4kVBgEbkPN8xFt4By7ctbfrCr7cG1N0PkW5KOsewDTTMV1y4np90/mfTYpNE1WTUy
+ vpqlT/Fr2KXKjJtFDFtcWhZ0f5ApdoKadytoMRzaqMasdmmNLz5tH+IlM1LfKuX1iBkh+/HHS6+
+ fMkK25Y143pNx1i5u5w==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-23_01,2026-07-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 lowpriorityscore=0 suspectscore=0 phishscore=0 malwarescore=0
+ clxscore=1015 priorityscore=1501 spamscore=0 adultscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230015
 
-From: "Catherine Frederick (coolguy)" <serenity@floorchan.org>
+This series adds the CoreSight debug and trace subsystem for the
+Qualcomm Shikra SoC.
 
-Add MSM8917 and MSM8920 board files for the Motorola Moto E4 (perry)
-sharing a common dtsi, shaped against in-tree msm8917-xiaomi-wingtech /
-msm8937-xiaomi-land so every referenced label exists on mainline.
+The first patch adds a fallback compatible for the Shikra CTCU (CoreSight
+Trace Control Unit). The CTCU on Shikra shares the same configuration as
+the one on SA8775p, so "qcom,shikra-ctcu" falls back to the existing
+"qcom,sa8775p-ctcu" compatible.
 
-Initial subset: regulators, eMMC/SD, USB OTG (gpio extcon), gpio-keys,
-Synaptics RMI4 touchscreen, BMA253 via i2c-gpio, WCNSS Wi-Fi
-(qcom,wcn3660b), and PMI8950 WLED.
+The second patch adds the DT nodes describing the CoreSight topology on
+Shikra, including the funnels, replicators, TMC sinks (ETR/ETF), STM,
+per-core ETMs, CTIs, and the TPDM/TPDA trace collection blocks, along
+with the CTCU and the dummy source/sink endpoints that model external
+trace sources and the EUD sink.
 
-Deferred (missing mainline SoC/PMIC nodes or drivers): DSI panel/MDSS,
-IPA, QDSP6/WCD audio, PMI8950 FG/smbcharger, modem/ADSP/Venus remoteprocs.
-
-Validated on XT1765 under postmarketOS with a fuller fork DT carry; this
-is the trimmed upstream-first subset.
-
-Signed-off-by: Catherine Frederick (coolguy) <serenity@floorchan.org>
-[aneesh: rewrite against mainline msm8917/pm8937/pmi8950; drop fork-only
- nodes; keep Makefile DTB entries alphabetically sorted]
-Signed-off-by: Aneesh Pradhan <aneeshpradhan@acm.org>
 ---
- arch/arm64/boot/dts/qcom/Makefile             |   2 +
- .../qcom/msm8917-motorola-perry-common.dtsi   | 412 ++++++++++++++++++
- .../boot/dts/qcom/msm8917-motorola-perry.dts  |  20 +
- .../boot/dts/qcom/msm8920-motorola-perry.dts  |  20 +
- 4 files changed, 454 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/msm8917-motorola-perry-common.dtsi
- create mode 100644 arch/arm64/boot/dts/qcom/msm8917-motorola-perry.dts
- create mode 100644 arch/arm64/boot/dts/qcom/msm8920-motorola-perry.dts
+Changes in V4:
+- fix the wrong subject for the dt-binding patch
+- Link to v3: https://lore.kernel.org/all/20260722-add-coresight-nodes-for-shikra-v3-0-1400a3454e9f@oss.qualcomm.com/
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index e05414290d8e..5bf8cdc12ff9 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -106,9 +106,11 @@ dtb-$(CONFIG_ARCH_QCOM)	+= msm8916-wingtech-wt86518.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= msm8916-wingtech-wt86528.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= msm8916-wingtech-wt88047.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= msm8916-yiming-uz801v3.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= msm8917-motorola-perry.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= msm8917-xiaomi-riva.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= msm8917-xiaomi-rolex.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= msm8917-xiaomi-tiare.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= msm8920-motorola-perry.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= msm8929-wingtech-wt82918hd.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= msm8937-xiaomi-land.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= msm8939-asus-z00t.dtb
-diff --git a/arch/arm64/boot/dts/qcom/msm8917-motorola-perry-common.dtsi b/arch/arm64/boot/dts/qcom/msm8917-motorola-perry-common.dtsi
-new file mode 100644
-index 000000000000..1870958976fb
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/msm8917-motorola-perry-common.dtsi
-@@ -0,0 +1,412 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) 2025, Catherine Frederick <serenity@floorchan.org>
-+ * Copyright (c) 2026, Aneesh Pradhan <aneeshpradhan@acm.org>
-+ */
-+
-+#include <dt-bindings/arm/qcom,ids.h>
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/input/input.h>
-+#include "pm8937.dtsi"
-+#include "pmi8950.dtsi"
-+
-+/delete-node/ &qseecom_mem;
-+
-+/ {
-+	aliases {
-+		mmc0 = &sdhc_1;
-+		mmc1 = &sdhc_2;
-+	};
-+
-+	battery: battery {
-+		compatible = "simple-battery";
-+
-+		charge-full-design-microamp-hours = <4000000>;
-+		constant-charge-current-max-microamp = <1000000>;
-+		voltage-min-design-microvolt = <3400000>;
-+		voltage-max-design-microvolt = <4400000>;
-+	};
-+
-+	chosen {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		/* Early console deferred with MDSS; panel driver not upstream yet. */
-+		stdout-path = "framebuffer0";
-+
-+		framebuffer0: framebuffer@90001000 {
-+			compatible = "simple-framebuffer";
-+			reg = <0x0 0x90001000 0x0 (720 * 1280 * 3)>;
-+			width = <720>;
-+			height = <1280>;
-+			stride = <(720 * 3)>;
-+			format = "r8g8b8";
-+
-+			clocks = <&gcc GCC_MDSS_AHB_CLK>,
-+				 <&gcc GCC_MDSS_AXI_CLK>,
-+				 <&gcc GCC_MDSS_VSYNC_CLK>,
-+				 <&gcc GCC_MDSS_MDP_CLK>,
-+				 <&gcc GCC_MDSS_BYTE0_CLK>,
-+				 <&gcc GCC_MDSS_PCLK0_CLK>,
-+				 <&gcc GCC_MDSS_ESC0_CLK>;
-+			power-domains = <&gcc MDSS_GDSC>;
-+			status = "disabled";
-+		};
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+
-+		pinctrl-0 = <&gpio_keys_default>;
-+		pinctrl-names = "default";
-+
-+		key-volup {
-+			label = "Volume Up";
-+			linux,code = <KEY_VOLUMEUP>;
-+			gpios = <&tlmm 91 GPIO_ACTIVE_LOW>;
-+			debounce-interval = <15>;
-+		};
-+	};
-+
-+	/*
-+	 * Bitbang on TLMM because BLSP is TZ-protected; sensors are normally
-+	 * proxied via ADSP firmware.
-+	 */
-+	i2c-sensors {
-+		compatible = "i2c-gpio";
-+		sda-gpios = <&tlmm 14 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>;
-+		scl-gpios = <&tlmm 15 (GPIO_ACTIVE_HIGH|GPIO_OPEN_DRAIN)>;
-+		i2c-gpio,delay-us = <2>; /* ~100 kHz */
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		imu@18 {
-+			compatible = "bosch,bma253";
-+			reg = <0x18>;
-+
-+			interrupts-extended = <&tlmm 41 IRQ_TYPE_EDGE_RISING>;
-+
-+			vdd-supply = <&pm8937_l10>;
-+			vddio-supply = <&pm8937_l6>;
-+
-+			mount-matrix = "-1", "0", "0",
-+					"0", "-1", "0",
-+					"0", "0", "-1";
-+		};
-+	};
-+
-+	reserved-memory {
-+		qseecom_mem: qseecom@84300000 {
-+			reg = <0x0 0x84300000 0x0 0x2000000>;
-+			no-map;
-+		};
-+
-+		framebuffer_mem: memory@90001000 {
-+			reg = <0x0 0x90001000 0x0 (720 * 1280 * 3)>;
-+			no-map;
-+		};
-+	};
-+
-+	vph_pwr: vph-pwr-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vph_pwr";
-+		regulator-min-microvolt = <3700000>;
-+		regulator-max-microvolt = <3700000>;
-+		regulator-always-on;
-+		regulator-boot-on;
-+	};
-+
-+	usb_id: usb-id {
-+		compatible = "linux,extcon-usb-gpio";
-+		id-gpios = <&tlmm 97 GPIO_ACTIVE_HIGH>;
-+		pinctrl-0 = <&usb_id_default>;
-+		pinctrl-names = "default";
-+	};
-+
-+	vdda_touch_vreg: vdda-touch-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdda_touch";
-+		gpio = <&tlmm 59 0>;
-+		startup-delay-us = <300>;
-+		enable-active-high;
-+	};
-+};
-+
-+&blsp1_i2c3 {
-+	status = "okay";
-+
-+	touchscreen@20 {
-+		compatible = "syna,rmi4-i2c";
-+		reg = <0x20>;
-+		interrupt-parent = <&tlmm>;
-+		interrupts = <65 IRQ_TYPE_EDGE_FALLING>;
-+		pinctrl-0 = <&ts_default>;
-+		pinctrl-names = "default";
-+
-+		reset-gpios = <&tlmm 64 GPIO_ACTIVE_LOW>;
-+
-+		vdd-supply = <&vdda_touch_vreg>;
-+		vio-supply = <&pm8937_l6>;
-+	};
-+};
-+
-+&gpu {
-+	status = "okay";
-+};
-+
-+/* Panel / MDSS DSI deferred until the panel driver is upstream. */
-+&mdss {
-+	status = "disabled";
-+};
-+
-+&pm8937_resin {
-+	linux,code = <KEY_VOLUMEDOWN>;
-+
-+	status = "okay";
-+};
-+
-+&pm8937_spmi_regulators {
-+	/* PM8937 S5 = VDD_APC (same pattern as in-tree msm8917 nora/wingtech family). */
-+	pm8937_s5: s5 {
-+		regulator-min-microvolt = <1050000>;
-+		regulator-max-microvolt = <1350000>;
-+		regulator-always-on;
-+		regulator-boot-on;
-+	};
-+};
-+
-+&pmi8950_wled {
-+	qcom,current-limit-microamp = <25000>;
-+	qcom,num-strings = <2>;
-+	qcom,ovp-millivolt = <29500>;
-+	qcom,switching-freq = <800>;
-+	qcom,cabc;
-+	qcom,external-pfet;
-+
-+	status = "okay";
-+};
-+
-+&rpm_requests {
-+	regulators-0 {
-+		compatible = "qcom,rpm-pm8937-regulators";
-+
-+		vdd_s1-supply = <&vph_pwr>;
-+		vdd_s2-supply = <&vph_pwr>;
-+		vdd_s3-supply = <&vph_pwr>;
-+		vdd_s4-supply = <&vph_pwr>;
-+
-+		vdd_l1_l19-supply = <&pm8937_s3>;
-+		vdd_l2_l23-supply = <&pm8937_s3>;
-+		vdd_l3-supply = <&pm8937_s3>;
-+		vdd_l4_l5_l6_l7_l16-supply = <&pm8937_s4>;
-+		vdd_l8_l11_l12_l17_l22-supply = <&vph_pwr>;
-+		vdd_l9_l10_l13_l14_l15_l18-supply = <&vph_pwr>;
-+
-+		pm8937_s1: s1 {
-+			regulator-min-microvolt = <1000000>;
-+			regulator-max-microvolt = <1225000>;
-+		};
-+
-+		pm8937_s3: s3 {
-+			regulator-min-microvolt = <1300000>;
-+			regulator-max-microvolt = <1300000>;
-+		};
-+
-+		pm8937_s4: s4 {
-+			regulator-min-microvolt = <2050000>;
-+			regulator-max-microvolt = <2050000>;
-+		};
-+
-+		pm8937_l2: l2 {
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+		};
-+
-+		pm8937_l5: l5 {
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+		};
-+
-+		pm8937_l6: l6 {
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-always-on;
-+			regulator-boot-on;
-+		};
-+
-+		pm8937_l7: l7 {
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+		};
-+
-+		pm8937_l8: l8 {
-+			regulator-min-microvolt = <2850000>;
-+			regulator-max-microvolt = <2900000>;
-+		};
-+
-+		pm8937_l9: l9 {
-+			regulator-min-microvolt = <3000000>;
-+			regulator-max-microvolt = <3300000>;
-+		};
-+
-+		pm8937_l10: l10 {
-+			regulator-min-microvolt = <2800000>;
-+			regulator-max-microvolt = <3000000>;
-+			regulator-always-on;
-+			regulator-boot-on;
-+		};
-+
-+		pm8937_l11: l11 {
-+			regulator-min-microvolt = <2950000>;
-+			regulator-max-microvolt = <2950000>;
-+			regulator-allow-set-load;
-+			regulator-system-load = <200000>;
-+		};
-+
-+		pm8937_l12: l12 {
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <2950000>;
-+		};
-+
-+		pm8937_l13: l13 {
-+			regulator-min-microvolt = <3075000>;
-+			regulator-max-microvolt = <3075000>;
-+		};
-+
-+		pm8937_l14: l14 {
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <3300000>;
-+		};
-+
-+		pm8937_l15: l15 {
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <3300000>;
-+		};
-+
-+		pm8937_l16: l16 {
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+		};
-+
-+		pm8937_l17: l17 {
-+			regulator-min-microvolt = <2800000>;
-+			regulator-max-microvolt = <2900000>;
-+			regulator-always-on;
-+		};
-+
-+		pm8937_l18: l18 {
-+			regulator-min-microvolt = <2700000>;
-+			regulator-max-microvolt = <2700000>;
-+		};
-+
-+		pm8937_l19: l19 {
-+			regulator-min-microvolt = <1225000>;
-+			regulator-max-microvolt = <1350000>;
-+		};
-+
-+		pm8937_l22: l22 {
-+			regulator-min-microvolt = <2800000>;
-+			regulator-max-microvolt = <2800000>;
-+		};
-+
-+		pm8937_l23: l23 {
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+		};
-+	};
-+};
-+
-+&sdhc_1 {
-+	vmmc-supply = <&pm8937_l8>;
-+	vqmmc-supply = <&pm8937_l5>;
-+
-+	status = "okay";
-+};
-+
-+&sdhc_2 {
-+	cd-gpios = <&tlmm 67 GPIO_ACTIVE_HIGH>;
-+	vmmc-supply = <&pm8937_l11>;
-+	vqmmc-supply = <&pm8937_l12>;
-+	pinctrl-0 = <&sdc2_default &sdc2_cd_default>;
-+	pinctrl-1 = <&sdc2_sleep &sdc2_cd_default>;
-+	pinctrl-names = "default", "sleep";
-+
-+	status = "okay";
-+};
-+
-+&sleep_clk {
-+	clock-frequency = <32768>;
-+};
-+
-+&tlmm {
-+	gpio-reserved-ranges = <20 4>;
-+
-+	gpio_keys_default: gpio-keys-default-state {
-+		pins = "gpio91";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-up;
-+	};
-+
-+	sdc2_cd_default: sdc2-cd-default-state {
-+		pins = "gpio67";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	usb_id_default: usb-id-default-state {
-+		pins = "gpio97";
-+		function = "gpio";
-+		drive-strength = <8>;
-+		bias-pull-up;
-+	};
-+
-+	ts_default: ts-default-state {
-+		pins = "gpio64";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-pull-up;
-+	};
-+};
-+
-+&usb {
-+	extcon = <&usb_id>, <&usb_id>;
-+	dr_mode = "otg";
-+	status = "okay";
-+};
-+
-+&usb_hs_phy {
-+	extcon = <&usb_id>;
-+	vdd-supply = <&pm8937_l2>;
-+	vdda1p8-supply = <&pm8937_l7>;
-+	vdda3p3-supply = <&pm8937_l13>;
-+	status = "okay";
-+};
-+
-+&wcnss {
-+	vddpx-supply = <&pm8937_l5>;
-+
-+	status = "okay";
-+};
-+
-+&wcnss_ctrl {
-+	firmware-name = "qcom/msm8917/motorola/perry/WCNSS_qcom_wlan_nv.bin";
-+};
-+
-+&wcnss_iris {
-+	compatible = "qcom,wcn3660b";
-+	vddxo-supply = <&pm8937_l7>;
-+	vddrfa-supply = <&pm8937_l19>;
-+	vddpa-supply = <&pm8937_l9>;
-+	vdddig-supply = <&pm8937_l5>;
-+};
-+
-+&wcnss_mem {
-+	status = "okay";
-+};
-+
-+&xo_board {
-+	clock-frequency = <19200000>;
-+};
-diff --git a/arch/arm64/boot/dts/qcom/msm8917-motorola-perry.dts b/arch/arm64/boot/dts/qcom/msm8917-motorola-perry.dts
-new file mode 100644
-index 000000000000..190602908a3e
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/msm8917-motorola-perry.dts
-@@ -0,0 +1,20 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) 2025 Val Packett
-+ * Copyright (c) 2026, Aneesh Pradhan <aneeshpradhan@acm.org>
-+ */
-+
-+/dts-v1/;
-+
-+#include "msm8917.dtsi"
-+#include "msm8917-motorola-perry-common.dtsi"
-+
-+/ {
-+	model = "Motorola Moto E4 (perry)";
-+	compatible = "motorola,perry", "qcom,msm8917";
-+	qcom,msm-id = <QCOM_ID_MSM8917 0>;
-+	qcom,board-id = <0x48 0x8100>,
-+			<0x48 0x80b0>,
-+			<0x48 0x80a0>;
-+	chassis-type = "handset";
-+};
-diff --git a/arch/arm64/boot/dts/qcom/msm8920-motorola-perry.dts b/arch/arm64/boot/dts/qcom/msm8920-motorola-perry.dts
-new file mode 100644
-index 000000000000..4b78cf76149a
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/msm8920-motorola-perry.dts
-@@ -0,0 +1,20 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (c) 2025 Val Packett
-+ * Copyright (c) 2026, Aneesh Pradhan <aneeshpradhan@acm.org>
-+ */
-+
-+/dts-v1/;
-+
-+#include "msm8920.dtsi"
-+#include "msm8917-motorola-perry-common.dtsi"
-+
-+/ {
-+	model = "Motorola Moto E4 (perry)";
-+	compatible = "motorola,perry", "qcom,msm8920";
-+	qcom,msm-id = <QCOM_ID_MSM8920 0>;
-+	qcom,board-id = <0x48 0x8100>,
-+			<0x48 0x80b0>,
-+			<0x48 0x80a0>;
-+	chassis-type = "handset";
-+};
+Changes in v3:
+- add correct subsystem prefix in dt-binding subject.
+- Link to v2: https://lore.kernel.org/r/20260715-add-coresight-nodes-for-shikra-v2-0-ebd485e39a51@oss.qualcomm.com
+
+Changes in v2:
+- remove MMIO for the ETM devices.
+- Link to v1: https://lore.kernel.org/r/20260714-add-coresight-nodes-for-shikra-v1-0-b1cf85962455@oss.qualcomm.com
+
+To: Suzuki K Poulose <suzuki.poulose@arm.com>
+To: Mike Leach <mike.leach@arm.com>
+To: James Clark <james.clark@linaro.org>
+To: Leo Yan <leo.yan@arm.com>
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+To: Tingwei Zhang <tingwei.zhang@oss.qualcomm.com>
+To: Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>
+To: Mao Jinlong <jinlong.mao@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+To: Paul Walmsley <pjw@kernel.org>
+To: Palmer Dabbelt <palmer@dabbelt.com>
+To: Albert Ou <aou@eecs.berkeley.edu>
+To: Alexandre Ghiti <alex@ghiti.fr>
+Cc: coresight@lists.linaro.org
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: linux-arm-msm@vger.kernel.org
+Cc: devicetree@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-riscv@lists.infradead.org
+Signed-off-by: Jie Gan <jie.gan@oss.qualcomm.com>
+
+---
+Jie Gan (2):
+      dt-bindings: arm: qcom,coresight-ctcu: Add Shikra
+      arm64: dts: qcom: shikra: Add coresight nodes
+
+ .../bindings/arm/qcom,coresight-ctcu.yaml          |    1 +
+ arch/arm64/boot/dts/qcom/shikra.dtsi               | 1295 ++++++++++++++++++++
+ 2 files changed, 1296 insertions(+)
+---
+base-commit: 290aaf24a551d5a0dce037e3fab30820f9113a10
+change-id: 20260722-add-coresight-nodes-for-shikra-5fb8a4b503d1
+
+Best regards,
 -- 
-2.53.0
+Jie Gan <jie.gan@oss.qualcomm.com>
 
