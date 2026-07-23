@@ -1,81 +1,111 @@
-Received: from mail-24430.protonmail.ch (mail-24430.protonmail.ch [109.224.244.30])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDA7E3D7D69
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 21:54:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.30
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CC702E7BB6;
+	Thu, 23 Jul 2026 22:16:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784843651; cv=none; b=RDlFYVnf6xRIuMijLSaLdehu0OGT7zOflSmZFrE6fIuPMWzt9wlTy5YYcmFGY03On9yfpwPI9keSn4x2Zo9eH896FbdfSYIo72FIFc3FvsPv4oSDCcI3MvsvO7fcdpwq56QNkHE62QDloQ9ayvY5FRYZmzhG1Xp4Z33CJ4SBTdM=
+	t=1784845002; cv=none; b=DOku0HtItEpTFvsc+anVx1xCsx1XnQTiuPyEZlutBeib94e+w/sqMBaBL/x0o7kTBPA1/nby7Z6EzDmzM7EkThM4/g7XQDgvkfMEtS2lh4V1eF0aduxupFSqGPE1a/SV6IPvRfscoxV9adzx/oZf8Nx23gtI8cXaKwX2mmWitjQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784843651; c=relaxed/simple;
-	bh=+JWyagTRhRBqhLWVN4liLy4mFdyb13CfKOIn7cO2kUI=;
-	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=YbvZjkw8Nr56csC+T3ASn2kri5//ceU+ohSxvGyx0IE+rM1a5ZyjiaHxQEEYSCLfnUP4b9Itin+mKNAHqJFLpS8EUPXUcsDTbYrhhAGmMrkbERADAgqUZ08R7+icSoZb3MXqTwoZUqjYn1exiwcLTq3SqTUkvevW8Q4HLlJ5/lA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com; spf=pass smtp.mailfrom=protonmail.com; dkim=pass (2048-bit key) header.d=protonmail.com header.i=@protonmail.com header.b=CJATjGqm; arc=none smtp.client-ip=109.224.244.30
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=protonmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=protonmail.com
+	s=arc-20240116; t=1784845002; c=relaxed/simple;
+	bh=0aD7Hgf8Oi6XEZzMZmtMG2x3TFGZ7rtNDTVh0XSpsAw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=MJANSN/q1no+mX+Syx5jUm/gBuFafdP9VOPAJy0JYoC1YHTePyRXBKVOF2IxsKo8dqltNhzJBRsa+u+HRPbeiMKTUhuSGcM7VWjQtNo24gyQ8Xf/3e0Zpr94JIIxHYzMHWQ+fzPA6ac8BXkiY6ikVJojFyA2mMT4eC5JZocCXao=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nxYMV9NF; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=protonmail.com header.i=@protonmail.com header.b="CJATjGqm"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
-	s=protonmail3; t=1784843641; x=1785102841;
-	bh=+JWyagTRhRBqhLWVN4liLy4mFdyb13CfKOIn7cO2kUI=;
-	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=CJATjGqm1fH9XwaodUqiTYhfluiU/SE/xaFlu1BCiqk/1ImB16qU9alrWtpFiB1cK
-	 ZV9LgGfr/geDtgOhTzZFFLMtPkgDgfDlDNMOO2MpT+qdkoelbsia+AF0K4jmonMOdD
-	 YuBus+Mv8Sw63gv3oIMfBjiOj2on4NNmShXfKnQw0j9dwFvX4gWqNftXOztr2mV/6U
-	 gKqMpCKuH1d3gN98jJ1AflTHSJMBIt/Zen+C5Rw4UTy6spnG6I6BXfEOVGvh83BNdj
-	 ToZfyUsiAHGZMd5kQbiX41wUMKD7R3TSkKes2aqJjQF7/fgzRs4IQYSIYpKySBPw4E
-	 RwGM5KXOJHd2w==
-Date: Thu, 23 Jul 2026 21:53:57 +0000
-To: "aneeshpradhan2004@gmail.com" <aneeshpradhan2004@gmail.com>
-From: Aiden Isik <aidenisik@protonmail.com>
-Cc: "andersson@kernel.org" <andersson@kernel.org>, "aneeshpradhan@acm.org" <aneeshpradhan@acm.org>, "bmasney@redhat.com" <bmasney@redhat.com>, "conor+dt@kernel.org" <conor+dt@kernel.org>, "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>, "krzk+dt@kernel.org" <krzk+dt@kernel.org>, "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>, "linux-clk@vger.kernel.org" <linux-clk@vger.kernel.org>, "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, "mturquette@baylibre.com" <mturquette@baylibre.com>, "robh@kernel.org" <robh@kernel.org>, "sboyd@kernel.org" <sboyd@kernel.org>, "serenity@floorchan.org" <serenity@floorchan.org>, "20260723012415.48288-1-aneeshpradhan@acm.org" <20260723012415.48288-1-aneeshpradhan@acm.org>
-Subject: Re: [PATCH v2 0/3] arm64: dts: qcom: initial MSM8920 and Motorola Moto E4 (perry)
-Message-ID: <gQh7CCQKYqMRqPhGEJiGaEHPClClU-x4DxsXkHZ42OS02s6gHd23p_m6n8bDmBRYS3ITCbC0G_62BH6016wSsp-JqW6GiztGAsIMtra6wp4=@protonmail.com>
-Feedback-ID: 46524699:user:proton
-X-Pm-Message-ID: 94f678ccf360fbe8c7d0fd7324b3a26103946ee7
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nxYMV9NF"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EECC61F000E9;
+	Thu, 23 Jul 2026 22:16:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784845000;
+	bh=MOiPGZUgNHqvzzITjL3Ov1rdCr/yoWyW5vpVpAFdmZM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=nxYMV9NFe+sneBayqubQ4MgQVt1lk+Nv5R51W0QZCZQgHmRE6vVexo2wt6IhEMN+z
+	 Gyt+BcrmhfL/mvu7CqoJlb0iCDIE4FANQxm1mLa0TeMatW3M/yf2wMYPFIaf/IpgcB
+	 EVtQqZmp8vwAyjT+Qn0MYsFrtoDpx3MCPtt2qyoOybt/EAGho3X2CvbbPHDafAfIX/
+	 mPwGw8ZfLjIKidPrxY1nCLe+jdCg9oujG2qhRNvvUD5U7J1959ioQXybAK5YpB/Zew
+	 AktmRmDLCXofsa0uvDYlvLD0czXftWthvC0Oz55425nnozTtfbt3c72E3xxmfBiTa0
+	 HfAdVDXzpKhpQ==
+Date: Thu, 23 Jul 2026 17:16:37 -0500
+From: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>, 
+	Mathieu Poirier <mathieu.poirier@linaro.org>, Shengjiu Wang <shengjiu.wang@nxp.com>, 
+	Fernando Guzman Lugo <fernando.lugo@ti.com>, Ohad Ben-Cohen <ohad@wizery.com>, linux-arm-msm@vger.kernel.org, 
+	linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 3/3] remoteproc: Force shutdown during device removal
+Message-ID: <amKMdP-CTbyuXHun@baldur>
+References: <20260723-rproc-rmmod-not-crashing-v1-0-546dfd5de0e6@oss.qualcomm.com>
+ <20260723-rproc-rmmod-not-crashing-v1-3-546dfd5de0e6@oss.qualcomm.com>
+ <413bcb02-4823-4c2f-8e0e-c9a40664caf9@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <413bcb02-4823-4c2f-8e0e-c9a40664caf9@oss.qualcomm.com>
 
-Hi, I'm forwarding this email on behalf of Catherine, as she is
-unable to send emails to the list due to email spam filters.
+On Thu, Jul 23, 2026 at 12:54:58PM +0200, Konrad Dybcio wrote:
+> On 7/23/26 5:52 AM, Bjorn Andersson wrote:
+> > rproc_del() is subjected to the reference counted shutdown path, as such
+> > a remoteproc with more than one reference will be left running as its
+> > resources are released underneath it.
+> > 
+> > Refactor the shutdown path such that the reference count value is
+> > ignored when called from rproc_del().
+> > 
+> > Assisted-by: OpenCode:GPT-5.5
+> > Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+> > ---
+> 
+> [...]
+> 
+> > +static int __rproc_shutdown(struct rproc *rproc, bool force)
+> >  {
+> >  	struct device *dev = &rproc->dev;
+> >  	bool crashed;
+> > @@ -2029,9 +2008,10 @@ int rproc_shutdown(struct rproc *rproc)
+> >  	}
+> >  	crashed = rproc->state == RPROC_CRASHED;
+> >  
+> > -	/* if the remote proc is still needed, bail out */
+> > -	if (!atomic_dec_and_test(&rproc->power))
+> > +	if (!atomic_dec_and_test(&rproc->power) && !force) {
+> > +		/* The remote processor is still needed by another user. */
+> >  		goto out;
+> > +	}
+> 
+> GPT makes some unclear suggestions, effectively saying that rproc_shutdown(),
+> unlike other paths, seems not to first check whether the rproc is deleting
+> if the shutdown isn't forced. I think it's a valid concern.
+> 
 
--------------------------------------------------------------------
+I believe you're saying that there's nothing preventing a call to
+rproc_shutdown() from racing with rproc_del()?
 
-Hi,
+As far as I can tell, it's possible that while rproc_del() has set
+`deleting` but hasn't yet called __rproc_shutdown() another reference
+holder calls rproc_shutdown().
 
-I just wanted to let you know, this is a drive-by-vibe rendition
-of my patch series from earlier this year. You aren't talking to a
-person, but claude code instead:
-https://github.com/aneesh-pradhan/xylitol/commit/4bdb6eaac4724ae0071095a925=
-795c5e5b8b9985
-I can confirm both the MSM8917 and MSM8920 variants exist in the
-wild, as I own both. As for what you want to do with all this
-information, that's up to you. This also contains hacked up
-versions of my in progress DT for perry available on the msm89x7-mainline g=
-it. A lot of the errors in this PR are results of Claude
-mindlessly copy-pasting my in-progress work (bad whitespace,
-incorrect copyright assignments). I was planning on picking up this
-series when I had time again.
+In the event that state is RUNNING or CRASHED that caller will stop the
+remoteproc under mutual exclusion and leave it in OFFLINE, then let
+the rproc_del() context proceed to find that the rproc is not RUNNING or
+CRASHED and will as such return an error which is ignored.
 
-Thanks,
-=E2=80=A8Catherine
+If the contexts arrives to the mutual exclusion zone in opposite order,
+the secondary caller will find the rproc in OFFLINE and fail the
+rproc_shutdown() call.
 
--------------------------------------------------------------------
+So, I'm not able to see why we'd need to also guard against `deleting`.
 
-I (Aiden, not Catherine) would also like to point out that the
-model seems to have been deliberately instructed to omit
-co-authored-by tags:
-https://github.com/aneesh-pradhan/xylitol/blob/5eda9e8987c10d9654f2aace9622=
-ff11b11322d7/AGENTS.md
+
+That said, and as I stated in the cover-letter, there's more dragons
+hidden in these code paths.
 
 Regards,
-- Aiden Isik
+Bjorn
 
-
+> Konrad
