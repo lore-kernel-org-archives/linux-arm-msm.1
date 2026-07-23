@@ -1,64 +1,64 @@
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+Received: from mail-wm1-f53.google.com (mail-wm1-f53.google.com [209.85.128.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 702C3433E82
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 13:33:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 122FD4D98FF
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 13:33:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784813633; cv=none; b=rKYw4OTY7XrVmT7mDTutBc04OLV/rG/7R3uaq1NvDmcsNCf7BicpD0uumYKtSmpBBcyzvAKRERa8EZmiE7A9yqrSJn7VW7HDMBFXbJozQEXi0nOCk/bOdr96SsBO1xlgX7/x0I3ni8Fm7UOxVcykrsDftR/u2MZ60bQ/MPOjSE8=
+	t=1784813635; cv=none; b=ax32vT9kU9TBqSBeIBvFsUBLg1K4tfqw4o8MqBijfaIWiJyeYHnUzHO12UJ+KZwDLCPumtsUhS3d4v+05bedBwjiKXXos3oPrXM73xG1CIUV44A6wH8TVSQbrfPvTWa0ijXAKo2nJ2xnUPWyd7TxoDhZzikIcgGIP2d5Bk3aUYk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784813633; c=relaxed/simple;
-	bh=g/jvPaYojbRUskGx0vHdkl7waFp++QV7Coa6pHsErts=;
+	s=arc-20240116; t=1784813635; c=relaxed/simple;
+	bh=oGX4ehONu4h9p4mayzZ8S0o9gq57flmzP3e3mv/H6ms=;
 	h=MIME-Version:Content-Type:Subject:From:To:Cc:In-Reply-To:
-	 References:Date:Message-Id; b=ZlwSWW7hNXVMxznoRS8IGTlazm8JA7vqAMqOVBh/Ls4oPgByS4Jd+lp8lTQqmtEVMzXy4iW8XgHZl0CxUpINB/28h2RtaBvEl0lHwB+Yr1W0+OYsAuJvLcarwNFHhXuSrl0Vs1X5Xcbg6hJMK8zOTn14AwaH1qd5+WMPGUPe+sg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=i59Nkt7c; arc=none smtp.client-ip=209.85.128.49
+	 References:Date:Message-Id; b=Askw+KTmf/L9xleoQgpnXYXzsq8yfOZoOWAm+GQ0hmTUMZYfmW509WekVwz4OGHMXz0uasR9mAcsYoMcg9+t3vkinNmKbBIuSke3koiSxM3Bq1H/ErzgOpPPaUPmCwBS+tePjx5B845w1zNX/peC34DsjQe/hxfemdv/3XRNuEI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=Pf0+Y+tJ; arc=none smtp.client-ip=209.85.128.53
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="i59Nkt7c"
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-49548aebcd8so5257725e9.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 06:33:50 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="Pf0+Y+tJ"
+Received: by mail-wm1-f53.google.com with SMTP id 5b1f17b1804b1-49550ec592cso3404645e9.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 06:33:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1784813628; x=1785418428; darn=vger.kernel.org;
+        d=baylibre.com; s=google; t=1784813630; x=1785418430; darn=vger.kernel.org;
         h=message-id:date:references:in-reply-to:cc:to:from:subject
          :content-transfer-encoding:content-type:mime-version:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=xL/tIFxlX8lvL6fJLGCS7MiSw3QU7lBKDSAhIeo/tVw=;
-        b=i59Nkt7c7JzzmaHuhVJxfput0OcwHF4PX5Lfzu2npojqSOH8Afn7pbSzxOBMhc3Mge
-         JmJHPj+uLt4XboqbXqbQi1bKzIxmPrQyqaorSm2JHmBl5tfsvOhmHCxHpgXmenBJ/dQr
-         xA6/AkMaf0kv7OC6OR8jXrOgyEBhtfwnYXY8EFTzLzqu8W1c6Kpsjr8WVPmz/ieUGHwT
-         g/96xCDdiL0kJHJZKyC3dqA5PT9HgCIt32MigB9JPJxohHlRoL47MIqC5RjsVo7CptA2
-         bGal6n6F3GC/T0lGcwQseOzdrwLIiNfFArkDiWDAHS9BYOTOJTN4bC77okruejFaS/6I
-         kAsQ==
+        bh=zhcIOjXiRBNb4q+2wtE6whcUaVIgup7Mvj7rqBenmhk=;
+        b=Pf0+Y+tJc9OqX6lAOIsDrvuahw0XstR8RRNq+hcO8WwfdsXnOwsIKIywbQsVLeShJU
+         q1SuCbFxcgPh8Y0XAHJSyyvPMc/vjnWRQpuLd+Ab7TH9OvBMiLajaItMe46D2P2bns1z
+         KqJdojoi4U/hyVr8WSX3zmOq1R1PdMZ/oRfgbOvQ/ersxxDXqCv4EU24bC4IAbU4Utkt
+         j1/0k0OOhQTVLEKudQ2laF81VhZf5ctCH1KAuIaAB5FCN068g+MvPb6wZUJwtTkfpVV9
+         o7ZMqB1bPEOgqoyk0i9wEBvmpZrS+Cv3ldO8PZSWRPC/syZ5oM7m7atXkuEWnjCeJYy6
+         iUnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784813628; x=1785418428;
+        d=1e100.net; s=20251104; t=1784813630; x=1785418430;
         h=message-id:date:references:in-reply-to:cc:to:from:subject
          :content-transfer-encoding:content-type:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=xL/tIFxlX8lvL6fJLGCS7MiSw3QU7lBKDSAhIeo/tVw=;
-        b=kyyLtXRWOzwli0ACo4es2Jp37a/Xs+zGChbxef0qQhxVeTNLLDl8Wx1gmlied/68YJ
-         TY+DnCm6TVLPdhVaZzay5xB30paP9HJq6jt0axv0/3Bd1SbZflMDOBLMihOaXSJAjdA8
-         oT8kkFOlZUlMDy3e8KLH9TgJ+HvyMpbUE/y2lZ/KafWVNAGqtlvWgbB/6JF6QGt63HFl
-         ZRnhh2vrUq9B9c0hHnkz9FZRk07i5In1d5QDdR6q/SUTTO9/827zbN3n7VbgGHlvhSap
-         kdw9MIL24S214rw1nfqCqa0X1a6AHrg87P+ySdXJaiJbJB/fUpVvz+qd64rbcrRIohAH
-         zuVQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrD3UHOnsepzyrbAW9nOQ+nW1T3F6DPcL8h0icH7KwVO3z8k3nRYzrh0wI5Dnyhrm4EFko+8CTqmldvhlA0@vger.kernel.org
-X-Gm-Message-State: AOJu0YwJjTyzH0Ot4VxH1JvrpGWzixLBFSzWNrft2Q0VO2qdPufTpRpm
-	L0Cx/RLbn0QSt1enjxWUU/jXvuGXvpQRgaUq7znzdVDeYC4QBA/lV/81sW6JTwSee0k=
-X-Gm-Gg: AR+sD13/lTPpad5xqRk23GwMcyVmwu/6yLkff/I0u925awqUg6Ej9/ZAvOmhiJMbf83
-	lSBCC4GV7BWAJjB7/ab3QS/HJDWK1Y8RHsthWS/+xxquKm3+NPl6WeR/NMLybBYfKxTcdQsnj2F
-	H4dU6EDxh36BvBE1qXvLUmNMeCk5AkiRCnqDDPbL2bsW3YQUP3i+dGyUebukLk62rLNIZ8MBggx
-	c2Wb9FKOKyFznV2OmH4wWP72IPQcINVSX3VCMhRLmdNluKrzI72Xe7mRiiJnKfq+AyU0vgdtk4I
-	hK3guwW8sssdLviVarjhghCnS4pZmyW2w6WtpQRPEYuArHR3Z9a9t1bQV9c4BNsgfLLfyofCBQF
-	qBVzReQCf36XDbjPTvGDh7/InqY+1JkrLJfAU4HTJ/SBcq79TGM7IPYJjS0aru5gSNMP4Xhi/C2
-	+OMZp294mjnBXcGzuaAFpoJFSiYPjLlp28SF++6uajtg==
-X-Received: by 2002:a05:600c:19d2:b0:495:4815:2c54 with SMTP id 5b1f17b1804b1-49573d22bd0mr36815985e9.34.1784813628420;
-        Thu, 23 Jul 2026 06:33:48 -0700 (PDT)
+        bh=zhcIOjXiRBNb4q+2wtE6whcUaVIgup7Mvj7rqBenmhk=;
+        b=bwAsk6zYcFcCufNxysKZSSnG0tde1uEMEwcI53bLAGyOUqOv55iuC9rBtXfV99/Jxe
+         CkHdxlWMGhPt1fqRM3Q2X9A9QZ5achq1vIurTU1Khb+86NJogOoVnFZIyC3p+hpDL0Aa
+         0BaGmC5eaoEmnkG/eUnFC4xJbk/mSQfp+gaS+TtcxO/2xdmS/+FrA9utKISENlXkRWsE
+         b/upXqdfehl7gC/Ogbqm7lzXG28uBnbN2i84EqZCvGhVE/s47l32LWrBBnuof9u8mYtl
+         NRNPp0grdq/r2i3idD56VQUZBO7m7S0AMIjAzv40hMbllYNtsXCZuBuH8VXJdLnLohw/
+         HgSg==
+X-Forwarded-Encrypted: i=1; AHgh+RqbRGtp+XrW8pYAXnwPEeyjBfzzFAXwH36b9KApj2A4WLztQYmjQA6Eh8Kxj2PijyZwr+em7UjvmyPrOa7x@vger.kernel.org
+X-Gm-Message-State: AOJu0YzaEvVYx4t0el387pVyTXEYGjjnKTPwulm9dZM4zADaEAEzO1FR
+	ntrPqHsZJgUPkCScsft4LoGwhLlIkLscgDNnIiv19yjMhM0d8ahtig/Q1udFQGec0i0=
+X-Gm-Gg: AR+sD13rDP9QguYfxrFJEo+HvSxpI/MigOSEPb0mF4Kqp2c22U6aqZuFBBGXwctv5k7
+	y1VPeAbiF96bE0JMCe8tdRqVcxWnn4CKtnVn1j1wnPfe+b04IauHL6lkAe3HNFf+wxMRes8L9d2
+	YURGDVyvkVsvF6nc59Rto4536JvAqJXL11xF1SCsDBN2+q8euXokdxCtd5b0WscLkeuB41nhfmz
+	KFV268w7E3kI4Nx7MKB+coW9BUvEm1wtTAt9oRpNlMD+Zsze/aIDTK1gYKsG4yHrt4UmxPjSGnR
+	cKyo5DLExJqrtlX2FAgWD9WNKq15FWmjnZMA8JkPvWhr3Unaf09nlE/FYZr5kB8RPtEUxFuq+HO
+	xunDWFUOgoBOokPJK2CO3U7E/TC7JIGVi6knPgv3/e4e9wxDTXd51PkbcutdZc4z/++eBNuEdW5
+	ajj4DE+sUTE+oD1xOHdW6WKHXgk5f1rt7qF4u5Uc8ysw==
+X-Received: by 2002:a05:600c:4fc2:b0:495:6193:c6c0 with SMTP id 5b1f17b1804b1-495745b238amr32083395e9.18.1784813629981;
+        Thu, 23 Jul 2026 06:33:49 -0700 (PDT)
 Received: from [192.168.5.218] (88-127-185-231.subs.proxad.net. [88.127.185.231])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4956a63fb10sm153054095e9.13.2026.07.23.06.33.46
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4956a63fb10sm153054095e9.13.2026.07.23.06.33.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 06:33:47 -0700 (PDT)
+        Thu, 23 Jul 2026 06:33:49 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -67,8 +67,8 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v2 5/6] dt-bindings: clock: qcom: Document Nord GPU
- clock controllers
+Subject: Re: [PATCH v2 6/6] clk: qcom: gpucc: Add Nord graphics clock
+ controller support
 From: Alexandre Mergnat <amergnat@baylibre.com>
 To: Taniya Das <taniya.das@oss.qualcomm.com>
 Cc: Bjorn Andersson <andersson@kernel.org>, 
@@ -85,36 +85,36 @@ Cc: Bjorn Andersson <andersson@kernel.org>,
  Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>, 
  linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
  linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
-In-Reply-To: <20260721-nords_mm_v1-v2-5-17e5a445a512@oss.qualcomm.com>
+In-Reply-To: <20260721-nords_mm_v1-v2-6-17e5a445a512@oss.qualcomm.com>
 References: <20260721-nords_mm_v1-v2-0-17e5a445a512@oss.qualcomm.com>
- <20260721-nords_mm_v1-v2-5-17e5a445a512@oss.qualcomm.com>
+ <20260721-nords_mm_v1-v2-6-17e5a445a512@oss.qualcomm.com>
 Date: Thu, 23 Jul 2026 15:33:37 +0200
-Message-Id: <178481361789.189434.4101591416999923801.b4-review@b4>
+Message-Id: <178481361790.189434.2110171943699195036.b4-review@b4>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=455; i=amergnat@baylibre.com;
- h=from:subject:message-id; bh=g/jvPaYojbRUskGx0vHdkl7waFp++QV7Coa6pHsErts=;
- b=owEBbQKS/ZANAwAKAStGSZ1+MdRFAcsmYgBqYhg2vlKwkDIRyBiuIi9Ojmj4U2q89rW4E82jw
- Qzq9Zr7s9iJAjMEAAEKAB0WIQQjG17X8+qqcA5g/osrRkmdfjHURQUCamIYNgAKCRArRkmdfjHU
- RQn7EACwyhwTcLtrl9zLYAmI2t2vA+k041G8lcmqzvtQo3tQxriwB1NMa7Bb82/AwAdryjHXJBI
- WjmfdzLZdebxQu7a1j4omTW3tAsnAXrJDOT9neWWE28vFNu9DTbh4PxGlfuApiXHnrA7aJwa3/l
- vrPude41N/nGFQlKXatqMh2Tl5xGC3FfYCVT04G/+oJN2q989Nw7/+Daua0lLzviu9alwuLtUJS
- 3gEL1TVcQcCPbFm0B6oJbZrMeCBpsXQympJuypVR79Zq4lJ6XuzD0YlftBxEI8bQVqlN0jK6C9Z
- mIt9qH7j9fP3vzmXoeU4lrXGeC6430N00K9HHxZYOnROGsnuNsU6Ekn1/aqWz+gHbRplPH3O9qJ
- xtNLmWDtbPL82EckZMzHkO4Zt4EI/sIR0D1Et8eEfj4kpovkLzAxRu3IBnyrBQq5swIGD4k3EBO
- gnyB3dmoUnyhuWG7gbgJfmBf3xilMaS3mPZEHhqYbNoVnEr30dncLheZJmo8D4s5lMhjn6gg0b3
- +Pe4V6IEPI+3qaU64dQZMvyqPWy+1v44pVURUg5lAqESqU5N+2WJy0yh/FGOrDO5jCxrSmQJugK
- 80xPUCGqeIKkN8hd4C8iVYZ7d2uX7Vg0N0vs6kOgPYrP/Wr7vndnayFOgspkJPg+wY07QUXGBzV
- T43TDC4jdP35LvA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=478; i=amergnat@baylibre.com;
+ h=from:subject:message-id; bh=oGX4ehONu4h9p4mayzZ8S0o9gq57flmzP3e3mv/H6ms=;
+ b=owEBbQKS/ZANAwAKAStGSZ1+MdRFAcsmYgBqYhg2CIQBFhEQIyf8jJ75wkDDPX/l7A//yMHP0
+ PzwbiMKgKeJAjMEAAEKAB0WIQQjG17X8+qqcA5g/osrRkmdfjHURQUCamIYNgAKCRArRkmdfjHU
+ RfuaD/47mpL8HyM/LyV+/mFI6j74khbSZvEG+m1fyJDeW9aPIyDwq5VBj781Y1GVWvibuYH93+n
+ 90mfEEdg+sm2En4tqBcf26ns+IqALkmjVhtax203rbEEBJG1N7aQ4i38sk2EbYNX3UBfDKN0Xkd
+ 8Aj2yyw6gYEFNP3QoLMEHnEz+6Xu6ON7QSCZXU43nnI+P1Rhqb5pDtDg7HR2+j94Cs6Ej8JfICC
+ O8iSb+fltXJIwgpRBAUBu1ca+q7W78vvX9koqJfF+nIMgEXQxHFrb1NXBNspCaDwWC5jIm2u5rW
+ vXUjCIxJUOIypmaMPcvfsxSFR/bhz/EqbegG7ZZPfu+91o0GJMqxyXvDRp7NawCN3HT9JUXifLt
+ Zusypqm3NCCeF86Dvyvve99r6lmdMKhIpIcL6Ovo4cCpZoEUsE0tHPCp1JudSghCRQuwn4Uesw3
+ ttQAeofYbnqFmG5ajjcC2YiSrfuFuz5Stjth6EaRnQ6GCuHz1zu7vr68DEGYs/CrkTo7uc/QSwv
+ tYbowxGlUe/3J6ZgUk8Uncq93noCxzMBYqP2DweFY4h/R4cmCqWimeXkExXsYCZc+nacNWHOA0O
+ kulSAAdbOZVY5IX93oSn62PWKF7JzUTArCcs1n/t7QUCD4TFr/9SCVESZOGfpK0BRAhPU6hZVzZ
+ +Il7cmpGZwuYX9g==
 X-Developer-Key: i=amergnat@baylibre.com; a=openpgp;
  fpr=231B5ED7F3EAAA700E60FE8B2B46499D7E31D445
 
-On Tue, 21 Jul 2026 12:37:20 +0530, Taniya Das <taniya.das@oss.qualcomm.com> wrote:
-> Add Device Tree binding documentation for the GPU clock controllers
-> on the Qualcomm Nord platform.
+On Tue, 21 Jul 2026 12:37:21 +0530, Taniya Das <taniya.das@oss.qualcomm.com> wrote:
+> Add support for the GPU clock controllers (GPUCC) on the Qualcomm
+> Nord platform.
 > 
-> The platform includes two GPU clock controller instances, GPUCC and
-> GPUCC2. Document the compatible strings for both controllers.
-> 
+> The platform includes two GPU clock controller instances,GPUCC
+> and GPU2CC. Register support for both controllers, which provide
+> clocks required for the graphics subsystem.
 > 
 > [...]
 
