@@ -1,44 +1,47 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C8F4340A7D;
-	Thu, 23 Jul 2026 22:29:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B35E355055;
+	Thu, 23 Jul 2026 23:01:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784845747; cv=none; b=af+F8v4zGAnjdjOkq86+Y9UcGZTuiFBaxvmVKch4P51a8kOLv5s6fK9KT/Gk8q1G6OiQcMXbP055VjWJI8/y3UFI793hXUjPJrzDVzlyaWgyWBUCrugOqI16g7ylYzNkv0Cm6n8GPAK0YT70PIE3rKelEi/kXXOW9+t9768D0sE=
+	t=1784847668; cv=none; b=RHQWacMeg6tWsTJzklDQqPXBCs3zmPJwVdcVH25uA5CbQTzSQ287zxYmEY6hkDjFzLxcysAMXTJO/ixUuSCJMjn4CeX1KI5mhwnwwj8IjxeyiL8KEttlW35zHIAV24nHAQcJbgUAyTHcWYIoIKbUsKSmN573IThvxvzWRUWXdrY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784845747; c=relaxed/simple;
-	bh=qu5CxMIWIJVaJK+7CNsQYxhAlBR7RKgtK3OVp2ALemc=;
+	s=arc-20240116; t=1784847668; c=relaxed/simple;
+	bh=pTBTQyaLkUOAE3l+7NJYUSNO7wYiiCx9l9nKAaXGdQI=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=PsQi3J2hi6LurQDCY9PlsUWpJSo0jAndkevoX/AESE2Tvsg71zvBihQWlLyOmBbmxI06iD8J5TtRwaRqJ/jl0zRYC+SABNLs+Rw5yCTreypwTrJYGftEcEUsDitAeG0lcRoU84D8WYofQsYN0PN6JDiNZC9Yqm2aM67+2fHFOpU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bQht/QPy; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=NtlZWm1SSwx3yvFNulUxvEsuZpI4/tjFt8iKSDVCrCg0Xpirokqh7yzIpwE7ck3L1FFTLSjLqJg5ybYzfU+UwpWAzelLucZ8eSbYD2y+R4kyDWvAi9V4I0dRGb+nK7Fiky2B0y3Td1nx2BVVSR8YSghc+YtVtdzqaP+qTk/+x0w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JTbN0KTG; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bQht/QPy"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4FC3D1F000E9;
-	Thu, 23 Jul 2026 22:29:05 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JTbN0KTG"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 49F5A1F000E9;
+	Thu, 23 Jul 2026 23:01:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784845746;
-	bh=6mKt/jRCWhMk1ySH969VHmthfM8d3CXYUfheeUxwT1k=;
+	s=k20260515; t=1784847666;
+	bh=NzzVubqqY2CM6by26+6Bo4GAF/+87NIwQZ28x6KoXsI=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=bQht/QPyUzS6Gtwprfc2GgZtoNaS0W7YzItW9SX3ylx116aNgg7W3knhxwU8VHzVA
-	 ie65PF9K/PJ/I5Xtq7EaC0vGl7PeA4roaaaAWndUL7TRqOZOuzzNOXo/jAbM6kedML
-	 mA9apxRKnmT4HvdRCULNfY5/rnQEjH90zj1fxmkaL2rOlFLyUwYbqk9crL8zLosCbo
-	 Np4c3J5JM6hYlbG4E7k7tVxRy7PBSN4i1/MUF/NevcgkTkEWhIFpvG7VROkNXmfONQ
-	 k86FMQr2p15ueFlz/dwjGL+4SKvQ+m1WefhJlut2TvWOQpRZZJvepgAUJd6rUSE8sR
-	 uEi2aFnejH0jQ==
-Date: Thu, 23 Jul 2026 17:29:02 -0500
-From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>, 
-	Mathieu Poirier <mathieu.poirier@linaro.org>, Shengjiu Wang <shengjiu.wang@nxp.com>, 
-	Fernando Guzman Lugo <fernando.lugo@ti.com>, Ohad Ben-Cohen <ohad@wizery.com>, linux-arm-msm@vger.kernel.org, 
-	linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 2/3] remoteproc: Prevent crash handling to race with
- rproc_del()
-Message-ID: <amKTZInKqMX48PWE@baldur>
-References: <20260723-rproc-rmmod-not-crashing-v1-0-546dfd5de0e6@oss.qualcomm.com>
- <20260723-rproc-rmmod-not-crashing-v1-2-546dfd5de0e6@oss.qualcomm.com>
- <fffb231d-32a4-482d-91d1-b6932d16de59@oss.qualcomm.com>
+	b=JTbN0KTGYXxJ4e82Vz8O+84c2PfluCw7CUHoJhRhpcDPwZOOK+IQwFb6i20jeRSAi
+	 0g6qh/MmdNAHcU/hkFYsIF1RWunBMJ1ogy9kJrHjgim9x6wX/A9But+D29nLKsj/zi
+	 YnKRsBa2mwmmP3jpjaC3zyUtB6QfkW3hz7IzLGO+bB5/ArU3S6v0CrUPbbRZtxhngO
+	 5urLkRgmGMD9tOvIYHXK8esynz7GvhQNAwzZH7h2vK5GUDqALP5Mhsmx6Y1wGIR7TU
+	 xYl9q0XCifxTbr06TSFaJCAd/zWLPFwHpnBR/0fcQFoFurpRBWFHkTMVBiHdJgv5C+
+	 Rc5FihvLKIyhw==
+Date: Thu, 23 Jul 2026 23:01:04 +0000
+From: Eric Biggers <ebiggers@kernel.org>
+To: Neeraj Soni <neeraj.soni@oss.qualcomm.com>
+Cc: Jie Gan <jie.gan@oss.qualcomm.com>, ulf.hansson@linaro.org,
+	adrian.hunter@intel.com, quic_dmukhopa@quicinc.com,
+	quic_rampraka@quicinc.com, quic_nitirawa@quicinc.com,
+	quic_sachgupt@quicinc.com, quic_bhaskarv@quicinc.com,
+	quic_gaurkash@quicinc.com, quic_sartgarg@quicinc.com,
+	linux-mmc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH RESEND v4] mmc: Avoid reprogram all keys to Inline Crypto
+ Engine for MMC runtime suspend resume
+Message-ID: <20260723230104.GA662946@google.com>
+References: <20260529092612.1749752-1-neeraj.soni@oss.qualcomm.com>
+ <e9cdf8dc-40ea-49f2-a655-b99ed0707a8c@oss.qualcomm.com>
+ <66caaafd-cea4-b624-57a1-f2cd04d109b9@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -47,54 +50,32 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <fffb231d-32a4-482d-91d1-b6932d16de59@oss.qualcomm.com>
+In-Reply-To: <66caaafd-cea4-b624-57a1-f2cd04d109b9@oss.qualcomm.com>
 
-On Thu, Jul 23, 2026 at 12:09:52PM +0200, Konrad Dybcio wrote:
-> On 7/23/26 5:52 AM, Bjorn Andersson wrote:
-> > There's no synchronization between rproc_crash_handler_work() and
-> > rproc_del(), as such it's possible for a driver to be removed while
-> > crash-handler work is scheduled, or even executing - resulting in
-> > use-after-free issues.
-> 
-> [...]
-> 
-> > +	spin_lock_irqsave(&rproc->crash_handler_lock, flags);
-> > +	if (READ_ONCE(rproc->deleting)) {
-> > +		spin_unlock_irqrestore(&rproc->crash_handler_lock, flags);
-> > +		return;
-> > +	}
-> > +
-> >  	/* Prevent suspend while the remoteproc is being recovered */
-> >  	pm_stay_awake(rproc->dev.parent);
-> > +	queue_work(rproc_recovery_wq, &rproc->crash_handler);
-> > +	spin_unlock_irqrestore(&rproc->crash_handler_lock, flags);
-> >  
-> >  	dev_err(&rproc->dev, "crash detected in %s: type %s\n",
-> >  		rproc->name, rproc_crash_to_string(type));
-> 
-> GPT reported that the rproc may be gone/deleting at the time of
-> this print since it's outside the lock, so it's not a given that
-> rproc->dev and rproc->name are valid (although the window is pretty
-> slim..)
-> 
+On Fri, May 29, 2026 at 04:05:52PM +0530, Neeraj Soni wrote:
+> Yes for cold boot this is true and Crypto reprogram is not needed. This patch addreses the use cases like
+> runtime suspend resume, deep sleep / Quick boot (DS/QB) and suspend to disk (aka hibernation) use cases
+> where the runtime context is preserved either in dynamic memory (DS/QB) or in secondry memory (hibernation).
+> This is tested internally on SAR1250P chipset for hibernation and DS/QB.
 
-rproc->dev will be a valid object as long as the caller is holding a
-reference to the rproc device (explicitly through rproc_get_by_phandle()
-or implicitly through the device hierarchy), so there's no problem
-there.
+But sdhci_msm_gcc_reset() is called only from the driver probe function
+(sdhci_msm_probe()), before MMC_CAP2_CRYPTO is set.  So Jie's comment is
+correct: the new key reprogramming path is dead code.  And as per the
+following comment, key reprogramming is still needed in some cases
+(https://lore.kernel.org/linux-mmc/42797330-868a-bfcd-e0bb-b5f0dd3eeb16@oss.qualcomm.com/).
+So doesn't this patch break the sdhci-msm driver?
 
-rproc->name has two different life cycles:
+I'm also skeptical of the following change, which seems unrelated to the
+rest of the patch:
 
-1) rproc_alloc(name) with name living on the heap or stack, will result
-in `name` being owned by the rproc->dev life cycle and hence there's no
-problem - as long as adequate references are held.
+> -#ifdef CONFIG_MMC_CRYPTO
+>  #define MMC_CAP2_CRYPTO		(1 << 27)	/* Host supports inline encryption */
+> -#else
+> -#define MMC_CAP2_CRYPTO		0
+> -#endif
 
-2) rproc_alloc(name) with name being a constant, here the rproc context
-will hold a reference to the name in constant memory, and rmmod might
-in this window have unmapped that constant.
+Because of that, mtk-sd sets MMC_CAP2_CRYPTO even when
+CONFIG_MMC_CRYPTO=n.  That makes CQHCI_CRYPTO_GENERAL_ENABLE be used
+even when CONFIG_MMC_CRYPTO=n.
 
-So, the case when `name` is referencing a constant is a possible
-problem, but unrelated to this patch.
-
-Regards,
-Bjorn
+- Eric
