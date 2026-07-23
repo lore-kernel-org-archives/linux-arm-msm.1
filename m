@@ -1,88 +1,89 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 546E94F797E
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 17:09:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B1804EA38E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 17:09:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784826597; cv=none; b=pCFbwZlQYAWsBln9B/nlByWPjHuvZ6ULXOhoOwBC1/M/d30lHbTbm9W3ElI9+OWSMzX84xRTPAaItD5guARGRxK2Dt836yEJ5lO8tLQSf03oAjKJmPRJGPncVKoq/XzZNJpjSVjcPqjrkyk8fstdYLpJQgkPBpiWHglIwNEfzCE=
+	t=1784826603; cv=none; b=f3Y9DGkOHCeJbQ93x6hfFmdZcHLoD8BDLGrzqggPuHwsrWk/n9MdUS5FmzHo0YiPWsu7OTh9by2uTxJRO3e35stmyVoReVJXnn5cAiBfGP8KoDEzS7FU9WFEAV15WHfAOKrD+ybTjoxRYHe8XOHp2PrkXObV9jwXrqAs05uzAp4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784826597; c=relaxed/simple;
-	bh=wCpLSEqzl6yoBDde9p+VABZfQUJK0dP0DnJmF5kRzKI=;
+	s=arc-20240116; t=1784826603; c=relaxed/simple;
+	bh=1Q+aPsoEc8W4PfEahFbzsFEdkzT9tiwxUCi1Nvr+Dts=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=YPzICFCrwUkZkr0NlXLHAmXhPVFG3CoskINlvgifdzrzUhzLO6tMRZaBJ5We69K++kdLEFWlJ/JFt0woGkXw0nkYbBXHpxcGYQQ8iTau92u1ZGkkuHD78OJjh/gzfnaVVbsBPuNHjYEFkiFFG7pMX9ELn7fOFmWOwhQCEaqi4Js=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kn1hPOoe; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TwSNWX46; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=OMnTZsBT6bko+cQwrJEsojnVC6BSJM6jg1Jx9t6jJVRoFYixoVxdyT7AGD2iDuIHuglhCGNqYBdLpYWIhDlgf0swE5m2WwCmBnsqq646Q1/83D6GvCFQfkpxFktiGJ4FSix+vOi9cS22XwT6ao6+mPhDad16ereF9iu6EQ2Cg/8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=M3Cyl69c; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iNqBJ5Cy; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kn1hPOoe";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TwSNWX46"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NCvVim3819818
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 17:09:44 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="M3Cyl69c";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iNqBJ5Cy"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NCvYCP3951483
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 17:09:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	EisVJTTfRpbffhmQLHO5RqC6wDH0dg02BTw4k+UhwPA=; b=kn1hPOoe0KcUbjHa
-	+wIOfkQ+gSJv2FonGs3nvAeM9E0OnBoX38UvSiqErEhF3Pi6rZathVDxUyNXgZbU
-	XoabpBtiQI3+nn9a6RcrZ4BcZGpgkRMZ1MqwdHtRaEid+oemJ7/j/mr+zFLdYQER
-	ZwV8FPJSPFVMt4CSyzOSXmX0KXjK2dj8gbd+1PtEEAnGrmc/NNrWWb3WQ/RjPmUv
-	ACIm2bBW7iw9KcdgutioXB0rpuFfDkNvhcKW4zt4XMuZSYsNRFlzC00RFgEE2/jR
-	zYp2pxcHk6BdJUqsYSSHpkkJcoOaQAykrQQB7pjzBjd6A2nRRPwyZRXNbO4tTNf+
-	eaQajg==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkafw3hc6-1
+	1SQ6fBG0Ah0G+Ee6NE98a2a6c+tVDqglySr17bUd1/A=; b=M3Cyl69cXgWU+3dl
+	7bZAy7BvT8ATtm3EmclgD+SEr2bQw8cSOVLhtaJhn7ZSSkX73hw1dOnFW1crM8v6
+	HSzMrM0ZOVdDwOA1cewEqzMubBtGJ5VRXHFeQ4XWK9udOO+vobgj1+UwA0d8zRX8
+	1XpLlV4R0vPns/pv2z0LPcGynJHMdUfXSvbkET7ky71A0qo517tubAsyBzPKsx9P
+	Sb0EnIocFF2dkj/BeCWNvyqWaTm+zMzBtff/RLNuFwF0f1KY5mU30UwfLLKcHR0g
+	mdoIqiKel7XyGsl0UJ49GBj+W8wcvMICOwvW3jHmjT4DP3DrrRZlv9zsUUsMUZeE
+	3rRtLA==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkjnu9f1b-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 17:09:44 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-51a8db414c7so16820941cf.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 10:09:44 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 17:09:46 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c19493ac2so22568771cf.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 10:09:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784826583; x=1785431383; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784826586; x=1785431386; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=EisVJTTfRpbffhmQLHO5RqC6wDH0dg02BTw4k+UhwPA=;
-        b=TwSNWX461TrbHkYVV2sw8hCtA/xCxqQ+ZrjAZSWWAvfTEUAMhgxhwN4am0ED2fluVE
-         CUTruDFftS/Ll6LLUpz6htrhrkjwgzNl5QkXfhh3vobt/zetqgCmxaXE8U8HClxCkq52
-         a9DhG42XC8JhXx/gbMXKlYrWHSP0k0UpArAk8cnveBd8eHdRombQppt1aPKi+qaESKPu
-         sHY9hm1Rwjmo7oqADT8oBYySSPYvWM8JTsMtY6BG/pNayFV/oBLCQrx+HBE2+CZBzd0C
-         mCOcKz3qM1Am8BqvgU0lAMso167+bCrGW9CIGnPOnRamIVbg7PnBn9KyBj4jWpVtH2c7
-         cMfw==
+        bh=1SQ6fBG0Ah0G+Ee6NE98a2a6c+tVDqglySr17bUd1/A=;
+        b=iNqBJ5CywxaTX5mY4NanqqB7TIT/0OY2hCsYoCOkkuToprTMoBrl8a3lZ5lo3cIEwx
+         TBx3HWG8MKQEC7BoFBj1ltW8NPPCAg0eJq4gH89+WwORGID4fOiQXZybXvgJDjPHfFxd
+         s7+MCo0G0hdUZ6DwP3WPUzAN3wU2oe/6uEESv/US3lIjS4B2ieb7r3Jk8BHMxRfwcsnM
+         Nvb2STTtJo7TWiMSEvaxAbh81S3gF8mB2d9rTPx2Ac4TEVXyYlNX7yyxz0mOQATXHq71
+         RGgWP3ItNhgawwkOUX6UGmYu9dEjwsXlckq59EMJ7GdXryVSpLaP8298pMSTG3I+nlPA
+         MGCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784826583; x=1785431383;
+        d=1e100.net; s=20251104; t=1784826586; x=1785431386;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=EisVJTTfRpbffhmQLHO5RqC6wDH0dg02BTw4k+UhwPA=;
-        b=Oe0BfKSsDownrlDVwuOv64bxMFjGsw1bs23a1MOid4qiFzNFvMABdWX2W4Z39eFi5L
-         E7tSAb8U9vWpVihKPn4qml18oB1zs7DpTd+0x9CqrX7HX6NlzI0obxERsiWyH5vfiSpx
-         CRnfHCKPTL7+uWEvKMNO61kYWcubyUxdmdHe74jiu7ja0kFPzzU/sKlvHLnx+Qe3b8F4
-         33nn7PucG2isGtUXYwEYz8JU0LslEmmjg4pj4ifcnCvakPH68PppHZJLT2SsY2mbQJsC
-         KpY+T+V58ZGu88sHTyk+bDKCmau83pQJhJcIZfNG6ZMwKRIE9OwZkhLqwb4wfdRNLgcR
-         jmXQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqRp0oVZ8JB9AzVX1boh1/txEedhmuta42cp8VTRerk4EgOHbHTq06ZEDXFobJ6apxD4C+/I9M5ZrPro9f1@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw8OPAeU0CV64X0N/veqzis7FfcY6ObkAXcPQiTtn5x0R2/GYzf
-	29M+R15QthErdtncp76RQdMiRxq5bU2QWD4wiSKxdTereuQuK7TnvSvqKx7ovuAQ4PtamO1G5KX
-	FGLo8DgFXgpD3Pp3lxxuUxdtd+72nDLH4GX1R6HDz1dOFIOhkP40RUM6p/R8VbHoMF3x4
-X-Gm-Gg: AR+sD13hi9+rIuHXqOd3VhWAbJUIR0/4O5uuwu1UgMLr17tOB5nz+s7t4qIwpKhRoGe
-	9iJtcgIE7O3m/L5Y7fNTbH+5aYmm1nF/SErHy0bXqfryWZbiIX+yNUYaRxR+mNYwBARH1tmN/4n
-	rvAcZpRRr6SgTzF8aHeR/cfsbclYTrObcJvwQgVWVLS/jp3JOjH6sO47Qi6ZRRoNReQRaTFcV9C
-	tIN7OG2jjRAT2N2jPhQznucL1MjmMkk+JrvH0nlsIokosREdbjJUrdL0+T2ESUrbzBlgb4zvrIl
-	tvmXKQeA47uLD8je5SGOMRD6N7IwC6bkQqEllqR3tvF3I1iqAY39ecBngSZyjGWOp1zmyZ02fSY
-	JKUXdLHF/cJBfN48bSbzJ9l/wXEpJ
-X-Received: by 2002:a05:622a:5c17:b0:51b:7af7:77de with SMTP id d75a77b69052e-5283dda3ebfmr39082961cf.14.1784826583011;
-        Thu, 23 Jul 2026 10:09:43 -0700 (PDT)
-X-Received: by 2002:a05:622a:5c17:b0:51b:7af7:77de with SMTP id d75a77b69052e-5283dda3ebfmr39082491cf.14.1784826582431;
-        Thu, 23 Jul 2026 10:09:42 -0700 (PDT)
+        bh=1SQ6fBG0Ah0G+Ee6NE98a2a6c+tVDqglySr17bUd1/A=;
+        b=HrEL14nchqUctVxy5eD4MiTmsvnL3030kP60kjXwPZdpIQ/s5hJYofb7eJ/3jK4uEw
+         axG9D3oELg9+DMpx0PbxwyqBclu8rM3ZRvxeMGqdztxU9qxX+ZZnYJIM0mtgMU/00Vei
+         8xtPJu+CWgt8uINFyUI8Z9bHZaaz2MMC06Fqm3kV8YDdkLdHCcxuH9pgPNw5Ywrq8i0L
+         90xrEB+cB0cnx4XN/zTjYyhYWeQ4fKIqT4bVCXhSiRR9CcOg/c0vq/NtuBx3WFKzM13J
+         EWwnh5rkaw3obmAP0+O3tMICSZQ1NY2DNzZVMoHnEa6texNOOmEw530NGaGaEQzSvGT9
+         VTeQ==
+X-Forwarded-Encrypted: i=1; AHgh+RoNsxhAe47vXgWNgyfduDE4Bpe8lPQmmpMVXg/C9AqC0xxrwLILQJ/aMTs57xhTH3BwziOPb+QPLmC6VWnA@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy/sVu+I/vA5oWAQkRdWz/HQhnr7YRr7oHtem7F36ikmFOo1ilV
+	/68XLHbA0887pp41XY+xyKTdPlITPMqB/H6rdVdsQ18Hfyfrkh4CHoQC0gYxIRb0eD0HUbc3Q/I
+	iLYAf0As1ya0F4fJtsWQ3dDxEOPqAZnvWnB464xN2OoTKjO7ljz7OcWDLuOUbVMzPWm0mGcr/OV
+	c3
+X-Gm-Gg: AR+sD10+oauhjvSnXrdad/iwk+2ANcDVFz+fo8MKWeBRcIqC3dpHGg10zVksV4mXiSQ
+	edDcSPBoA6QmRqTf/FS+HHdPIdBVhfh9MSMtqQZxCouYkMROggwawANfwcdWxf/bINHCvpRAewv
+	MLFyXd7ShwXHNXIAqts0mfWqCPEW6fGkZAeuo+KEb74vBmTAzj+yPGyXsG4FlNbPaIPMQE5reTF
+	+uAqniSYarYU4YV+ud7j51zNjTlgNke/D9S3bnUZv1WcjCKtWY0gKd1P5tqGC1kQDzmTlbQaRcj
+	al4vhyZ4aGsxJYmz5RhQ9MAqK91QMsO6RsOp655I2kLrS4NzBEGrUxAWHCiosKUGogIc2tvn+ST
+	7rv/4BEoCJhosxlE38A68pi7a38+8
+X-Received: by 2002:ac8:580d:0:b0:51a:f94e:ce51 with SMTP id d75a77b69052e-5283ded5b72mr32348501cf.50.1784826585665;
+        Thu, 23 Jul 2026 10:09:45 -0700 (PDT)
+X-Received: by 2002:ac8:580d:0:b0:51a:f94e:ce51 with SMTP id d75a77b69052e-5283ded5b72mr32348161cf.50.1784826584952;
+        Thu, 23 Jul 2026 10:09:44 -0700 (PDT)
 Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:cd9c:212:1357:7832])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f85b9a64dsm18472999f8f.1.2026.07.23.10.09.40
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f85b9a64dsm18472999f8f.1.2026.07.23.10.09.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 10:09:41 -0700 (PDT)
+        Thu, 23 Jul 2026 10:09:43 -0700 (PDT)
 From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Date: Thu, 23 Jul 2026 19:09:09 +0200
-Subject: [PATCH v24 03/14] dmaengine: qcom: bam_dma: convert tasklet to a
- BH workqueue
+Date: Thu, 23 Jul 2026 19:09:10 +0200
+Subject: [PATCH v24 04/14] dmaengine: qcom: bam_dma: Extend the driver's
+ device match data
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +92,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-qcom-qce-cmd-descr-v24-3-4f87bb4d9938@oss.qualcomm.com>
+Message-Id: <20260723-qcom-qce-cmd-descr-v24-4-4f87bb4d9938@oss.qualcomm.com>
 References: <20260723-qcom-qce-cmd-descr-v24-0-4f87bb4d9938@oss.qualcomm.com>
 In-Reply-To: <20260723-qcom-qce-cmd-descr-v24-0-4f87bb4d9938@oss.qualcomm.com>
 To: Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
@@ -114,187 +115,170 @@ Cc: dmaengine@vger.kernel.org, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-crypto@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
         brgl@kernel.org, Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4421;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4322;
  i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
- bh=wCpLSEqzl6yoBDde9p+VABZfQUJK0dP0DnJmF5kRzKI=;
- b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBqYkrBvXqR9TZC1tbg8D3QSJWkpFx+AucHs4s7N
- H/zFMiPLRqJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCamJKwQAKCRAFnS7L/zaE
- w+cxD/9Vc4yJMbV+XbQUTP6CYYzcaJyhYB+RJkFnIEGSb3RFNPchjtx3OR4fq44eQ68G7WP2/CT
- Yo1PXNdApTIEiJ6wuRcSYmqUHzNGgUg+KiRbdfdkag89Wma1+/pvLtYJ3GMM2nURtrFR5h0MsE0
- p8BZLw93ejhP+gL8rSjEqjmdH1ayehxewGh9QKAneLyk6225eFvO+qu7Dmdj4FLWjxyXN7q7WCp
- nLNxnFhf/t+JH+yInWkzzxIAySxRB0g61mWbkFIxCmlU6HYnek8lOGfh7dIdQnAWaFWTny7QFKr
- yjSzS2Wh6dxxXN4IvXYo55kV+yUpMdERa5z0+zw2Jm7OfZFXrnISL5evJepkVxTEg18/9G8mN2f
- sCrGEXbkmkZo8wrhwtCVBCTRn2MIFDLG7EkqvHZpop2+OidVsTKv3KFxwAVztLJ6T3x7N+obVMc
- uY+bhBU685gyJGijKrwpDxrbao7AU5h3tqJ/T+qjQ3oHEOsW+qb7O5E+txRz9RTYwl1MgMdIRbd
- qF06NvEq9aKoPhge7B/gfmVK4CjoDYMb9w39TJOS+OGVKgHHIw6toyew0X+nGeSM17qoR7GPDrn
- cLlWTfWqwWtcx+h0mjG0WXm4FUVWPYy0UagXxeCaFTdyzXLAPwlxa5WCi6uPU91be5aD0sQy15p
- 8BxnhIrzqhRUSaw==
+ bh=HGeQqzQf8+DrUa/4bzOvLohFWS/bDVC1MPHUwVaBFAE=;
+ b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBqYkrCvDnscYF5kUf6Mp/2eDen/yDbwikQKtft1
+ KTtqtdDMMiJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCamJKwgAKCRAFnS7L/zaE
+ w6OuD/4zPA74drmfeqhUyo1KEaxXhhhdfBx0+mCETQAaXZVxinzUTtMU+cYKtozIiJYUIMZKNyB
+ 1ZsCFc/FE+fv1NUvXZ9a4yxkzuvG0Ec//565pchVrOHrPbjOs0yiM3JpMYVVumzriF2lREehVEj
+ Ia7f91E5ODhFX6Yccp2hApR/40AM27icIGK9J+2fbozO4SyXtiVPv9aV5sUtVYLfm5tEjvz4Ghc
+ yxvd5wJnqscNrNy02SUj4U1doUnv798meLMxu+uHqa/ai9BB70qToYFzK8dlMiLdn8GgDD5KlPA
+ 8HCHp1pmWtZZjXrVTtYxOvJzUNyeH7aDieBtPxWhUzbwX518OFObCqa2lLcdQSbWDVPUbhsNZUI
+ 1M9SBkpgVDrCeKWEcMU8baGVJhZq4wTjR11ZveOQZSueF8lwVvJkTqDjlURRM8gxdqaraZFHhQ0
+ IA8QA+VGg0Pge0nSFjOaOCrjGwnP4r/ueMLWWXj2oB4Qh4xRtCtDJJhcceohh0Ntz8QerbEIKfw
+ 0ebYD7qKfqPMJMrvf2Vy9b6xfTY7ScWG/523eJsfdpDYYQB5tMVMFTBBc/CbIA54zGmq760eEoQ
+ lywH38YJ2y34AkORmBVzyQQup/qNHWjGED4lBcETXH3GG9ycdgNS8E1y6j0bB34yCPvGQ5DuuMU
+ sgMmdCddSoiSchQ==
 X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
  fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
-X-Authority-Analysis: v=2.4 cv=XNkAjwhE c=1 sm=1 tr=0 ts=6a624ad8 cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-ORIG-GUID: EJPCzFSlgQjBxR4XCWUxHDitL0nL1-YE
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDE2NyBTYWx0ZWRfXy5qYOTB6AGqo
+ 5wmEvceCwiPn4llKQ55Fj3slSoq+WJqc+OKVcozh44ung5UjM0WZIR9HYvu1/jJn7KEsNAx4YUi
+ lmw5CyZTgEeNyoTyb2A+8s+1lZ694hIh7TFOVCWEg1GLh7YFLAoxgJ46kqqMz+FaPXu5iplOm9X
+ zTQ+DFPlt4UokgivsqB/n/5AInD+hc1zirUtk3iObPFL/tt5qFXLp7vtTWQ+vqHmfZnszxgDRB5
+ p7/quEOnK0sCMsgv+pdLVWRFhCZLpEfEKFMzvIkwKtsXAITXegdPWAN/XhGDC67C+q0fQUfyjaN
+ t3gD0EikJlwOfMkTNGRbICPYzqP/ybanyogPiXXTjYPYoSRMGRgpoOkVgUo6GvVAFxhhHqLi9UN
+ j9FniZynES4k0nQowZx+vXsld3FyMayqj4d1SY9WDA2QhmI8yoYRw2iLNGTuYB/jBDrsgn+qiQD
+ jyuElyH7ODJS0AhDLOw==
+X-Authority-Analysis: v=2.4 cv=Een4hvmC c=1 sm=1 tr=0 ts=6a624ada cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=u-biHsxzOdRIXVMzAPsA:9 a=QEXdDO2ut3YA:10
- a=uxP6HrT_eTzRwkO_Te1X:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: KbLwuzXxTSMTiMxh8HK7ckHFHNF6_-lt
-X-Proofpoint-GUID: KbLwuzXxTSMTiMxh8HK7ckHFHNF6_-lt
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDE2NyBTYWx0ZWRfX8xydBXTssRAF
- IpS4wl6yhDinyyL2t/Yqs6wdeXfcBU7en/E5r58YxLAuVHk8IuW02zLbEckrRm5ygoi6aM3Uyqu
- aZH+26tSaSBASvf2iMiT20oTL2I12Nw=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDE2NyBTYWx0ZWRfX9YRzH2DG5+P9
- 6AsCy7s1kdXyGjwyxnrkH/WNpv2apPWedWyoMsNEBOIIyHIXXFMjwul1odYVe4o2P+XJMyh/Lsg
- I68+k109KEAa34M3hDOpJd7ULxgDnOTD6K/z6I/EfP2a3OotbKD1ZdSpnK7WdsUc2I5tKrlWO4z
- 81+uxLWqfajLvLRAANMOa1PYz6Jt8mMMnGZBaIMMq8LZk8Auby89tZITFPISwWZudW0WGsxMff/
- xYtzYB+Vk+HtbpC9etEAnTLbMznY+iQtwFXiHTFEBUu7lvhg10Hpml8Q96Pa6SbUWasDVLujzmA
- xOpmBNHk78rEFwtJ0hrWlvcntNnFlao/RtTW/tlcUjEDQglDRKKAtVluP3F5ghkBxXfP4ImeuMh
- mvoiiTZHcswSZua9EpxwtLOzeA5uylFMjP8Au7xDSfaBCFx/XPBIQORHlwnkeOQsIHbiqvgYNEv
- 6TpPIo8wd8CzFpTob6w==
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=KKAkSRfTAAAA:8
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=ioP1PY9e4_dTeLeN8ycA:9 a=QEXdDO2ut3YA:10
+ a=dawVfQjAaf238kedN5IG:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDE2NyBTYWx0ZWRfXw/yBSFfQ5Yvw
+ w23Z8u611NOynoMzcRzm6VWRdGnr/VsAckQSD0C3c0KzUeayavttWri1o55R90TbF/CNFYHXvVL
+ mEsS06IydyYf9ZFe13KgTrFxtGuqqr8=
+X-Proofpoint-GUID: EJPCzFSlgQjBxR4XCWUxHDitL0nL1-YE
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-23_04,2026-07-22_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0 suspectscore=0 bulkscore=0 clxscore=1015
- lowpriorityscore=0 phishscore=0 priorityscore=1501 malwarescore=0 spamscore=0
+ lowpriorityscore=0 bulkscore=0 spamscore=0 priorityscore=1501 suspectscore=0
+ malwarescore=0 impostorscore=0 clxscore=1015 adultscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230167
 
-BH workqueues are a modern mechanism, aiming to replace legacy tasklets.
-Let's convert the BAM DMA driver to using the high-priority variant of
-the BH workqueue.
+From: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 
-[Vinod: suggested using the BG workqueue instead of the regular one
-running in process context]
+In preparation for supporting the pipe locking feature flag, extend the
+amount of information we can carry in device match data: create a
+separate structure and make the register information one of its fields.
+This way, in subsequent patches, it will be just a matter of adding a
+new field to the device data.
 
-Suggested-by: Vinod Koul <vkoul@kernel.org>
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Reviewed-by: Bjorn Andersson <andersson@kernel.org>
+Reviewed-by: Dmitry Baryshkov <lumag@kernel.org>
 Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@linaro.org>
 Reviewed-by: Manivannan Sadhasivam <mani@kernel.org>
 Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 ---
- drivers/dma/qcom/bam_dma.c | 32 ++++++++++++++++----------------
- 1 file changed, 16 insertions(+), 16 deletions(-)
+ drivers/dma/qcom/bam_dma.c | 34 +++++++++++++++++++++++++++-------
+ 1 file changed, 27 insertions(+), 7 deletions(-)
 
 diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
-index fc155e0d1870cbb7e099a2c4280f9f8fbdf6cf15..ea3df28e777f99c0532761b6aee6807ab23ab4ca 100644
+index ea3df28e777f99c0532761b6aee6807ab23ab4ca..8ce0fe085c5fea6cc614edd692b5cfd264b94d5a 100644
 --- a/drivers/dma/qcom/bam_dma.c
 +++ b/drivers/dma/qcom/bam_dma.c
-@@ -42,6 +42,7 @@
- #include <linux/pm_runtime.h>
- #include <linux/scatterlist.h>
- #include <linux/slab.h>
-+#include <linux/workqueue.h>
- 
- #include "../dmaengine.h"
- #include "../virt-dma.h"
-@@ -426,8 +427,8 @@ struct bam_device {
- 	struct clk *bamclk;
- 	int irq;
- 
--	/* dma start transaction tasklet */
--	struct tasklet_struct task;
-+	/* dma start transaction workqueue */
-+	struct work_struct work;
+@@ -113,6 +113,10 @@ struct reg_offset_data {
+ 	unsigned int pipe_mult, evnt_mult, ee_mult;
  };
  
- /**
-@@ -892,7 +893,7 @@ static u32 process_channel_irqs(struct bam_device *bdev)
- 			/*
- 			 * if complete, process cookie. Otherwise
- 			 * push back to front of desc_issued so that
--			 * it gets restarted by the tasklet
-+			 * it gets restarted by the work queue.
- 			 */
- 			if (!async_desc->num_desc) {
- 				vchan_cookie_complete(&async_desc->vd);
-@@ -922,9 +923,9 @@ static irqreturn_t bam_dma_irq(int irq, void *data)
++struct bam_device_data {
++	const struct reg_offset_data *reg_info;
++};
++
+ static const struct reg_offset_data bam_v1_3_reg_info[] = {
+ 	[BAM_CTRL]		= { 0x0F80, 0x00, 0x00, 0x00 },
+ 	[BAM_REVISION]		= { 0x0F84, 0x00, 0x00, 0x00 },
+@@ -142,6 +146,10 @@ static const struct reg_offset_data bam_v1_3_reg_info[] = {
+ 	[BAM_P_FIFO_SIZES]	= { 0x1020, 0x00, 0x40, 0x00 },
+ };
  
- 	srcs |= process_channel_irqs(bdev);
++static const struct bam_device_data bam_v1_3_data = {
++	.reg_info = bam_v1_3_reg_info,
++};
++
+ static const struct reg_offset_data bam_v1_4_reg_info[] = {
+ 	[BAM_CTRL]		= { 0x0000, 0x00, 0x00, 0x00 },
+ 	[BAM_REVISION]		= { 0x0004, 0x00, 0x00, 0x00 },
+@@ -171,6 +179,10 @@ static const struct reg_offset_data bam_v1_4_reg_info[] = {
+ 	[BAM_P_FIFO_SIZES]	= { 0x1820, 0x00, 0x1000, 0x00 },
+ };
  
--	/* kick off tasklet to start next dma transfer */
-+	/* kick off the work queue to start next dma transfer */
- 	if (srcs & P_IRQ)
--		tasklet_schedule(&bdev->task);
-+		queue_work(system_bh_highpri_wq, &bdev->work);
++static const struct bam_device_data bam_v1_4_data = {
++	.reg_info = bam_v1_4_reg_info,
++};
++
+ static const struct reg_offset_data bam_v1_7_reg_info[] = {
+ 	[BAM_CTRL]		= { 0x00000, 0x00, 0x00, 0x00 },
+ 	[BAM_REVISION]		= { 0x01000, 0x00, 0x00, 0x00 },
+@@ -200,6 +212,10 @@ static const struct reg_offset_data bam_v1_7_reg_info[] = {
+ 	[BAM_P_FIFO_SIZES]	= { 0x13820, 0x00, 0x1000, 0x00 },
+ };
  
- 	ret = pm_runtime_get_sync(bdev->dev);
- 	if (ret < 0)
-@@ -1120,14 +1121,14 @@ static void bam_start_dma(struct bam_chan *bchan)
- }
++static const struct bam_device_data bam_v1_7_data = {
++	.reg_info = bam_v1_7_reg_info,
++};
++
+ static const struct reg_offset_data bam_v2_0_reg_info[] = {
+ 	[BAM_CTRL]		= { 0x0000, 0x00, 0x00, 0x00 },
+ 	[BAM_REVISION]		= { 0x1000, 0x00, 0x00, 0x00 },
+@@ -229,6 +245,10 @@ static const struct reg_offset_data bam_v2_0_reg_info[] = {
+ 	[BAM_P_FIFO_SIZES]	= { 0xC820, 0x00, 0x1000, 0x00 },
+ };
  
- /**
-- * dma_tasklet - DMA IRQ tasklet
-- * @t: tasklet argument (bam controller structure)
-+ * bam_dma_work() - DMA interrupt work queue callback
-+ * @work: work queue struct embedded in the BAM controller device struct
-  *
-  * Sets up next DMA operation and then processes all completed transactions
-  */
--static void dma_tasklet(struct tasklet_struct *t)
-+static void bam_dma_work(struct work_struct *work)
++static const struct bam_device_data bam_v2_0_data = {
++	.reg_info = bam_v2_0_reg_info,
++};
++
+ /* BAM CTRL */
+ #define BAM_SW_RST			BIT(0)
+ #define BAM_EN				BIT(1)
+@@ -422,7 +442,7 @@ struct bam_device {
+ 	bool powered_remotely;
+ 	u32 active_channels;
+ 
+-	const struct reg_offset_data *layout;
++	const struct bam_device_data *dev_data;
+ 
+ 	struct clk *bamclk;
+ 	int irq;
+@@ -440,7 +460,7 @@ struct bam_device {
+ static inline void __iomem *bam_addr(struct bam_device *bdev, u32 pipe,
+ 		enum bam_reg reg)
  {
--	struct bam_device *bdev = from_tasklet(bdev, t, task);
-+	struct bam_device *bdev = from_work(bdev, work, work);
- 	struct bam_chan *bchan;
- 	unsigned int i;
+-	const struct reg_offset_data r = bdev->layout[reg];
++	const struct reg_offset_data r = bdev->dev_data->reg_info[reg];
  
-@@ -1140,14 +1141,13 @@ static void dma_tasklet(struct tasklet_struct *t)
- 		if (!list_empty(&bchan->vc.desc_issued) && !IS_BUSY(bchan))
- 			bam_start_dma(bchan);
- 	}
--
+ 	return bdev->regs + r.base_offset +
+ 		r.pipe_mult * pipe +
+@@ -1234,10 +1254,10 @@ static void bam_channel_init(struct bam_device *bdev, struct bam_chan *bchan,
  }
  
- /**
-  * bam_issue_pending - starts pending transactions
-  * @chan: dma channel
-  *
-- * Calls tasklet directly which in turn starts any pending transactions
-+ * Calls work queue directly which in turn starts any pending transactions
-  */
- static void bam_issue_pending(struct dma_chan *chan)
- {
-@@ -1316,14 +1316,14 @@ static int bam_dma_probe(struct platform_device *pdev)
- 	if (ret)
- 		goto err_disable_clk;
+ static const struct of_device_id bam_of_match[] = {
+-	{ .compatible = "qcom,bam-v1.3.0", .data = &bam_v1_3_reg_info },
+-	{ .compatible = "qcom,bam-v1.4.0", .data = &bam_v1_4_reg_info },
+-	{ .compatible = "qcom,bam-v1.7.0", .data = &bam_v1_7_reg_info },
+-	{ .compatible = "qcom,bam-v2.0.0", .data = &bam_v2_0_reg_info },
++	{ .compatible = "qcom,bam-v1.3.0", .data = &bam_v1_3_data },
++	{ .compatible = "qcom,bam-v1.4.0", .data = &bam_v1_4_data },
++	{ .compatible = "qcom,bam-v1.7.0", .data = &bam_v1_7_data },
++	{ .compatible = "qcom,bam-v2.0.0", .data = &bam_v2_0_data },
+ 	{}
+ };
  
--	tasklet_setup(&bdev->task, dma_tasklet);
-+	INIT_WORK(&bdev->work, bam_dma_work);
- 
- 	bdev->channels = devm_kcalloc(bdev->dev, bdev->num_channels,
- 				sizeof(*bdev->channels), GFP_KERNEL);
- 
- 	if (!bdev->channels) {
- 		ret = -ENOMEM;
--		goto err_tasklet_kill;
-+		goto err_workqueue_cancel;
+@@ -1261,7 +1281,7 @@ static int bam_dma_probe(struct platform_device *pdev)
+ 		return -ENODEV;
  	}
  
- 	/* allocate and initialize channels */
-@@ -1389,8 +1389,8 @@ static int bam_dma_probe(struct platform_device *pdev)
- err_bam_channel_exit:
- 	for (i = 0; i < bdev->num_channels; i++)
- 		tasklet_kill(&bdev->channels[i].vc.task);
--err_tasklet_kill:
--	tasklet_kill(&bdev->task);
-+err_workqueue_cancel:
-+	cancel_work_sync(&bdev->work);
- err_disable_clk:
- 	clk_disable_unprepare(bdev->bamclk);
+-	bdev->layout = match->data;
++	bdev->dev_data = match->data;
  
-@@ -1424,7 +1424,7 @@ static void bam_dma_remove(struct platform_device *pdev)
- 			    bdev->channels[i].fifo_phys);
- 	}
- 
--	tasklet_kill(&bdev->task);
-+	cancel_work_sync(&bdev->work);
- 
- 	clk_disable_unprepare(bdev->bamclk);
- }
+ 	bdev->regs = devm_platform_ioremap_resource(pdev, 0);
+ 	if (IS_ERR(bdev->regs))
 
 -- 
 2.47.3
