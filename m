@@ -1,123 +1,99 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD305470E8F
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 10:03:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E8B843BDAF
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 10:04:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784801013; cv=none; b=nMB7Bb1MeQaBnQ6gkpMjPr0k9t75LKr5tzlSgWAIE4ty+tjdzqcVlo80Anwp1M9XxtzNvOOZHe58jX+AIjnpyISPbS94ndZWx7jY1Kb+m5pzT8oYoebwzQxp0FPbXpQgexmlmOdXaiUUri0oU4SEoF6odQWswhSCXrvcDQWJqug=
+	t=1784801054; cv=none; b=XalmpVKHHe/Xl19Yf3KtnFkD4KNTcsIttWPD0cy3j+9WI+CuEGxOMpmb0NNUvvQsdvaN7nIxCAqkiF5WfXi/5wQCUZR7F3w81kuayRKSiVlkm4ehIR0U6uOdI8m2EN94UtuSvTl1l9qhDA882erW/hI+I95uX+VIC1HD9EkF/OA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784801013; c=relaxed/simple;
-	bh=V8afFD2W1M6xvgYB6p4r45dfdu5hamisHl2AIG19+MY=;
+	s=arc-20240116; t=1784801054; c=relaxed/simple;
+	bh=2dhM80U1cYegL8kQzdGZRETcOdITYFIBHOvcR3V3XQ4=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=eEIlJj7byTJ89KLJynCtTFpUg8zqPG39O8ShX6qdCyviqD0fl7O8gPZPaivf33Z4Icr7BriRhZRb7b5ddPbC+H/Unhz9T3iPoZyufPr/+SfMZ0v0KJo/upbQjAmM6D0ES4F4j4K0nSK6uH+kglueLwg3kdL4ywGaBv1IyT3gdNI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bN1SGZWZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XNfqOar1; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=YGRatINfapNDGQllbAS5w/60eOnvTHyd54xUyRh5LobMAVMR9H6L0wv6rSZ8WlVc/p13jVPiZShVmqqcKE2YMejuphvyxVOYKmj+i5S1kZAj94WekeAUyHjdYDV+40FagzbbP2SRnfqMsy9/2d/NLnhwuNSmX2BmCEgk90W0+iE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=u2EjgwQv; arc=none smtp.client-ip=209.85.128.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bN1SGZWZ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XNfqOar1"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66N8qoGH3668371
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 10:03:30 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=8Ug7bLBpHjX45qP49mU8fjcs
-	QGVMwERqU7kYczg+3I4=; b=bN1SGZWZtHqfxPzfnWJn8XsbpIVSBzFjK/U8LRb1
-	IBLC+uduGtW+znDgG6mAZy/iXiUTW7RyKAmbdKOdgPNNPFl7ZGbfjNfftbqmKseF
-	zTYOyDchPPxnsV5V2CZWz5N/VfrSa68+NYJ4Prml3/OfM4qfiC5GBjyx+GpuzFx+
-	GTtge9eQtUzSG8PWv/2uI2K39lKFK0W3grrP4wo/75vt8NqDkKjlZ2qcYrJec6aH
-	oYGm0nr4wLwnO1XbFdzOB6vpJkrzUPqkX+DuVUHPJKIczk3ZqYyIk3/TPXgZju7N
-	jd8H/RVkGQsve6P0SxdCYUZ5HTijG2I98T+2ZhJRwbkdoA==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fk5cc2nad-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 10:03:30 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38e7131849bso621232a91.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 03:03:30 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="u2EjgwQv"
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-4953e04ef16so5030595e9.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 03:04:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784801010; x=1785405810; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1784801049; x=1785405849; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=8Ug7bLBpHjX45qP49mU8fjcsQGVMwERqU7kYczg+3I4=;
-        b=XNfqOar1xJCriIJLV/0fxG2avQR8p1DICDK/Q2qtd8cML/+9r9VJVKLiur/KkRGEMw
-         oZA9721XJCz7DRHTnxRJR3W0L+RfiIcwxcmfT5SlXFcDzTghkvn+d3AsltVsKz/vcmJw
-         GnBWzln5Jx566uLakHCma7PCN136dZAr7vPQjB6iPHKI/X4ymZSJ5qTCnTbVlH+YCbVS
-         IcdMOOuW/nBBbJrTVCPFzi7/9Tu5I/BXfI/FnBFf2yuw+KIM3KsLwBlRzmmxMopZnqOG
-         Gt+LpOKX4eVHAfOt3l4T85iU0VMJvO/og+PIsbhVye6swQLY77uzPlvJ0QxytKsMkQQV
-         6M1g==
+        bh=X576UWvhah+076nL20oR1HfA0CMQ64GrY/hawzbdJ8w=;
+        b=u2EjgwQvGHQIe7uPkfUq2N0xVNacC/i2ehUkLi9EgSESkKIdWQMmVfGq6PYBCxMoUy
+         ENex1awyqHziiW30zZR2+KQkEJr6HZZbZmB+dAzy/p5QXpuvjMFdeMYkw6SIdCuE05WL
+         SkOYn4FzHz7yo1jF0MA1Dli0jz1AVvu+FTiWQpbeJemSHlfQmleFBbBLWnt8w3YzHIBP
+         SMevFRLP2Xno5Na0nhxialHyvm5SOXoEWm414kqz2UG3nBIMqCM1gFzBJ3UdTHcKnpg7
+         /k10kAKSvih7B/d8a79qKuz9Ayuxx50D/7heXl5bMW2GsecrCQhbM/rhWed5Z/BA0RDf
+         JOXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784801010; x=1785405810;
+        d=1e100.net; s=20251104; t=1784801049; x=1785405849;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=8Ug7bLBpHjX45qP49mU8fjcsQGVMwERqU7kYczg+3I4=;
-        b=bmwMzoD022U3kapbjaJsU0un0faUNzcFd48FIjpwtm8s6IjbmZF3SQSy2oQBKTacT8
-         ISCQ1TawGWU5E8VHXPL+6FijtsrGYAOAJK552R05MFc8669f00e89lqIg5CQ07yBXzaP
-         hXgMm+JdHtpIMXiQUJFBJYY0xF7rpG3bncTBTds7//dV/VnhJSXTp2Jx60hLVPjYK3mH
-         cwK0kk5035tX/vXcicMc0o+q5PfZlZavo4EwV2UJAteAbWxa3Df58Tc6MdzMMNxZJFEL
-         JMM+hjRlWsDiTNbL/VBeYbFtiw2wEJX2QLg0s6Z088ky3PCvDaEy3cp9F/8zm0glkqzP
-         zIrQ==
-X-Forwarded-Encrypted: i=1; AHgh+RphU17J8OzrW2obSs1QIXGkmvrQD4/Np79eOx24whxIwF45YCrZqBT0GF0rZAVXbog5Tu4PFMie0N43bq74@vger.kernel.org
-X-Gm-Message-State: AOJu0YwSYmuU9LB/lqgYjEVgbjVPXC6ccdcWtvl6wZKHcm9NYAgK2lzD
-	5wW2PwbXR64sE/8xwQSfrVD7j5lq0YHnX0v3zgnJhc8PfPRCVLigNubFlz0mTxBIqtyO0WGdzeQ
-	6HP/f/Ym9TUVYt2wTlA5NyexxMk/wzYI17tJ3tq6Y68g9WFsoG4o0qXZHxWJu4Vu7vWJz
-X-Gm-Gg: AR+sD12oYEeq/01XD0/CLa1ip9JDnDq0PZNUrgk4t1oG2cIuQAhb9CQfRiJDtjwk10I
-	0WESsfodMRJFt6puFKXQICRmpjj+NcPQsIhkmdhDtEZqoZif0zrkNOv0VzyfCS2DindGEPYf7MG
-	CuqDiQUTZ3Fq6zM2LWcULQ6tWAaBb83PHY3D6nuHf0TFXt9qkVbri9BgevEDxYe7IWsak6p7r3f
-	8g07MMYjbnyS6zTyXGAovMv64ryCuFLywzvqY2m+KZJg0ZKn6CMC6IfMp0evnOdpw80dPljgYII
-	RsZgHixk9Qi9ySIiw+PA/MoR5WoRjgmkPoJog+en/IDJM0b25Ej7A+nFJLNJ96D+bQ8FRo/jZVi
-	mmYJofOWtkKtwV4TanDvj4NImXeYijxFmEA==
-X-Received: by 2002:a17:90b:1d52:b0:38e:75f3:ad4d with SMTP id 98e67ed59e1d1-38ec69575acmr2477447a91.7.1784801009222;
-        Thu, 23 Jul 2026 03:03:29 -0700 (PDT)
-X-Received: by 2002:a17:90b:1d52:b0:38e:75f3:ad4d with SMTP id 98e67ed59e1d1-38ec69575acmr2477359a91.7.1784801008638;
-        Thu, 23 Jul 2026 03:03:28 -0700 (PDT)
-Received: from hu-pkondeti-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13d130f42bbsm15811644c88.14.2026.07.23.03.03.18
+        bh=X576UWvhah+076nL20oR1HfA0CMQ64GrY/hawzbdJ8w=;
+        b=cBc9JN0gjoL/jrzMl6eycUX1biyGcYMV0+K+bdbr8tMjkwtXAolYPiT2XVv39Co9Vk
+         fcSFHTlyQ8ZXv0MXIcKO76Gxn/1hBEe7t/KNl3lJ5RqMxoGFcPV5rlbjcycE59YIsxE6
+         6P8TBAfGVMZwn3HbtyCM7yIYQeEk/hjMUBGFvRXegDVFExIDrots7ytXH4TyYxBMoV+i
+         zxzLQYLOIk1Yg/pKe8uz0xupj3JoVJ8ZyBjmlZWEgmd2x9JllPe6j0Fs2E7T+dRyix6D
+         C6M5G2ODjM4NB4LeEx7YiJk0tFj8dvQ+JxztDZiXiZcOAfXQni+qBHmJ9HIAhUHaSt1P
+         zQUw==
+X-Forwarded-Encrypted: i=1; AHgh+RrOIJ3uKG/da7Y/v9U1Ct0qseZs2LCksUj8ZyqYIL4fwIniWWon+LjGT0CVbtl0opt0qhux8+dqd34G3VtP@vger.kernel.org
+X-Gm-Message-State: AOJu0YyY+7VN8IEk+e7JAaijDGlhixNTwvDxHloND5cmqqcacb8mr6V+
+	FRewDyKbZxK9k+y76CNNbdzj3aq5hisIhWsEVsVpCcDCqSUBbhWuDt1O1X6ANuA2jiw=
+X-Gm-Gg: AR+sD13Wnah7nq6Q6IiQLXkOn50rIMWtZVZ4blM78JDPuV2r74FEEOI2oeg9AwSFotU
+	m2fqdr6QGyfaeZzyjN3NKvKJ7J2jBaT1I94upl8FkPhRK6+za99aZP6eO7y7//Tst2JE+iC8Wbf
+	K+O7k7uCLM9vtw4vZvJZ69ljfyceV1Yr3Ye0VsCODD5zeJ5cklRJG6LCEtyU0RvlwzHx1BH5iwe
+	BL0jSho1oaj09FII2VbrkFJgSry0En3RkRmqxlot19Xlxyb2dnmZ+qT0KCMkkWD5g1ttVFP+97a
+	ZnvLysViWZY65V8tLLssJ0gmqEJ3dPQ9A751lsmtxrPBcBexNZEY0N1WLEqPuiST7VmZncMU0dg
+	fX3sLRvPjxgxBS7+Z6VDb9q32OSLwydWS6po6VPAD9XS4DvXVCmfDIuOqvpQWbAeXjUMDb8pM/1
+	q1vl5rEfwG88WO55QPh7BMJ9Wh
+X-Received: by 2002:a05:600c:46ca:b0:493:e97c:216e with SMTP id 5b1f17b1804b1-49573d26d00mr23083765e9.39.1784801049098;
+        Thu, 23 Jul 2026 03:04:09 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff24:7210:d666:8fbf:10dc:76d2])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-495653c9d99sm212564285e9.12.2026.07.23.03.04.07
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 03:03:28 -0700 (PDT)
-Date: Thu, 23 Jul 2026 15:33:15 +0530
-From: Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>
-To: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-Cc: Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>,
-        Sebastian Reichel <sre@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Christian Loehle <christian.loehle@arm.com>,
-        Ulf Hansson <ulfh@kernel.org>, Lee Jones <lee@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-        Souvik Chakravarty <Souvik.Chakravarty@arm.com>,
-        Andy Yan <andy.yan@rock-chips.com>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        John Stultz <john.stultz@linaro.org>,
-        Moritz Fischer <moritz.fischer@ettus.com>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Sudeep Holla <sudeep.holla@kernel.org>, linux-pm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
-        Florian Fainelli <florian.fainelli@broadcom.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-        Andre Draszik <andre.draszik@linaro.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
-        mfd@lists.linux.dev, Srinivas Kandagatla <srini@kernel.org>
-Subject: Re: [PATCH v23 02/13] power: reset: reboot-mode: Support up to 3
- magic values per mode
-Message-ID: <3430f083-37c8-482d-8110-dd161ebcc269@quicinc.com>
-References: <20260714-arm-psci-system_reset2-vendor-reboots-v23-0-e7453c548c21@oss.qualcomm.com>
- <20260714-arm-psci-system_reset2-vendor-reboots-v23-2-e7453c548c21@oss.qualcomm.com>
- <38115586-9913-4d6e-9447-e82aee811dd1@quicinc.com>
- <fac2633e-db28-494c-9b31-358ed6d0ce14@oss.qualcomm.com>
+        Thu, 23 Jul 2026 03:04:08 -0700 (PDT)
+Date: Thu, 23 Jul 2026 12:04:04 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Bartosz Golaszewski <brgl@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+	Thara Gopinath <thara.gopinath@gmail.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	"David S. Miller" <davem@davemloft.net>,
+	Udit Tiwari <quic_utiwari@quicinc.com>,
+	Md Sadre Alam <mdalam@qti.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+	Peter Ujfalusi <peter.ujfalusi@gmail.com>,
+	Michal Simek <michal.simek@amd.com>, Frank Li <Frank.Li@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Vignesh Raghavendra <vigneshr@ti.com>, dmaengine@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	sashiko-reviews@lists.linux.dev,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Subject: Re: [PATCH v23 06/14] dmaengine: qcom: bam_dma: add support for BAM
+ locking
+Message-ID: <amHnFL7IC80Id2V7@linaro.org>
+References: <20260721-qcom-qce-cmd-descr-v23-0-1be02deffda9@oss.qualcomm.com>
+ <20260721-qcom-qce-cmd-descr-v23-6-1be02deffda9@oss.qualcomm.com>
+ <20260721134853.2B2401F000E9@smtp.kernel.org>
+ <amCGXUUd4VmuQRGD@linaro.org>
+ <CAMRc=MfBNB0pvv1kPPcswE4Y2m7PXBO49bwJg=v0+aY=JmJKWw@mail.gmail.com>
+ <amC7_M-HjVZ3sQuT@linaro.org>
+ <CAMRc=MdnSyPmbK0skMx686=wSe52nnuWgCNJ0uSoKs_=HyAq-Q@mail.gmail.com>
+ <amDRxPkdvbA-iVer@linaro.org>
+ <CAMRc=Me523xQbfJvML9taJ-fR128SJurJS4eX9N9E9WtHF5W5Q@mail.gmail.com>
+ <amDuqoRBg5qGafi2@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -126,91 +102,254 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <fac2633e-db28-494c-9b31-358ed6d0ce14@oss.qualcomm.com>
-X-Proofpoint-ORIG-GUID: cqyK6m2SfDhaWtt5fbJ5eAAsbzrFN0Ll
-X-Proofpoint-GUID: cqyK6m2SfDhaWtt5fbJ5eAAsbzrFN0Ll
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDA5OCBTYWx0ZWRfX0KmKQXKyLY8y
- 4mrigHqs/GO/jGO7XwvhwDjy5zeCFUqJV1U0dwpA6kqB/XmVx3llKPnbrgVVoI2qMakbnWyN02H
- ItQfNZBWCMXZAjMEV6op7M41qK5P/z8=
-X-Authority-Analysis: v=2.4 cv=L/ItheT8 c=1 sm=1 tr=0 ts=6a61e6f2 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=SS_D-kt5JMbThxPhXzQA:9 a=CjuIK1q_8ugA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDA5OCBTYWx0ZWRfXx7Y0xoyuN6eN
- kbjKiTk609c+KcxU7CHdTUvUR3rkySoecQsxCEUrEACFcBJl8aelQz4A3/24Ky2ZDTYlTnv+uAw
- T1cLGiotFpo6rxPBpCb4mdpI3Rb5fxa7De/erEF7vYZKvIrLJ1nssTiGbkWK4yG8TJiaxnT4FB3
- JVvlv7JMyharLM2K+deBaDZkln+6TChvZDVtdfcZYjzMkQZJ4S24mVeWwZdFnsmTtFW47/zXNd4
- LeMEmFt0u/57h035P76QPFpy8TaqUZ2kv+Vi1VL4S883KJuAvMzfWsQ++5ohwF+n2elM2YYlhEP
- 3yqiWPEKyZUWjX8y0UGPGxSleoFhGLHRC/0JcdPlovDFEtwr67HvcScfBEmyD95/5kkvP2K0Q3D
- tiAlBVU8WW+0A5gzyuPikk3vTKLWP6IPoIrprqeRn0BCD64RuA4pWlSo+EQR6xmkoP7FtOl7Eet
- fVdkyozjRcLNqV3TzxA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-23_03,2026-07-22_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 lowpriorityscore=0 adultscore=0 suspectscore=0
- priorityscore=1501 impostorscore=0 spamscore=0 bulkscore=0 malwarescore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607230098
+In-Reply-To: <amDuqoRBg5qGafi2@linaro.org>
 
-On Wed, Jul 22, 2026 at 07:03:22PM +0530, Shivendra Pratap wrote:
+On Wed, Jul 22, 2026 at 06:24:10PM +0200, Stephan Gerhold wrote:
+> On Wed, Jul 22, 2026 at 08:37:19AM -0700, Bartosz Golaszewski wrote:
+> > On Wed, 22 Jul 2026 16:20:52 +0200, Stephan Gerhold
+> > <stephan.gerhold@linaro.org> said:
+> > > On Wed, Jul 22, 2026 at 07:11:10AM -0700, Bartosz Golaszewski wrote:
+> > >> On Wed, 22 Jul 2026 14:47:56 +0200, Stephan Gerhold
+> > >> <stephan.gerhold@linaro.org> said:
+> > >> > On Wed, Jul 22, 2026 at 02:34:52AM -0700, Bartosz Golaszewski wrote:
+> > >> >> On Wed, 22 Jul 2026 10:59:09 +0200, Stephan Gerhold
+> > >> >> <stephan.gerhold@linaro.org> said:
+> > >> >> > On Tue, Jul 21, 2026 at 01:48:52PM +0000, sashiko-bot@kernel.org wrote:
+> > >> >> >> Thank you for your contribution! Sashiko AI review found 5 potential issue(s) to consider:
+> > >> >> >> - [High] State leak causing hardware misconfiguration on channel reuse due to uncleared `lock_scratchpad_addr` and hardcoded direction.
+> > >> >> >> - [High] Channel state corruption when `bam_slave_config` fails validation.
+> > >> >> >> - [High] Infinite BH workqueue loop and unratelimited log flood on memory allocation failure.
+> > >> >> >> - [High] DMA API violation: `lock_ce` buffer shares a cacheline with frequently CPU-modified struct members.
+> > >> >> >> - [Low] Unused assignment of `hdesc` in IRQ handler.
+> > >> >> >> --
+> > >> >> >>
+> > >> >> >> --- Patch [6]: [PATCH v23 06/14] dmaengine: qcom: bam_dma: add support for BAM locking ---
+> > >> >> >> commit 8b44c5e4935cbb61832adb3262df00b3b606a283
+> > >> >> >> Author: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> > >> >> >>
+> > >> >> >> dmaengine: qcom: bam_dma: add support for BAM locking
+> > >> >> >>
+> > >> >> >> This commit adds support for BAM pipe locking by prepending and appending
+> > >> >> >> dummy command descriptors with LOCK/UNLOCK bits when starting DMA on a TX
+> > >> >> >> channel. It uses a peripheral-local scratchpad address communicated via slave
+> > >> >> >> config for the dummy writes.
+> > >> >> >>
+> > >> >> >> > diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
+> > >> >> >> > index f3e713a5259c2..411c60c4433e2 100644
+> > >> >> >> > --- a/drivers/dma/qcom/bam_dma.c
+> > >> >> >> > +++ b/drivers/dma/qcom/bam_dma.c
+> > >> >> [...]
+> > >> >> >> [ ... ]
+> > >> >> >> > @@ -1064,6 +1197,7 @@ static void bam_start_dma(struct bam_chan *bchan)
+> > >> >> >> >
+> > >> >> >> >  	lockdep_assert_held(&bchan->vc.lock);
+> > >> >> >> >
+> > >> >> >> > +	vd = vchan_next_desc(&bchan->vc);
+> > >> >> >> >  	if (!vd)
+> > >> >> >> >  		return;
+> > >> >> >> >
+> > >> >> >> > @@ -1072,6 +1206,24 @@ static void bam_start_dma(struct bam_chan *bchan)
+> > >> >> >> >  		return;
+> > >> >> >> >
+> > >> >> >> >  	while (vd && !IS_BUSY(bchan)) {
+> > >> >> >> > +		/*
+> > >> >> >> > +		 * Open a LOCK/UNLOCK bracket around each fresh sequence.
+> > >> >> >> > +		 * Sentinels inserted by bam_setup_pipe_lock() are skipped: they
+> > >> >> >> > +		 * already have bam_locked set and must not trigger a second pair.
+> > >> >> >> > +		 */
+> > >> >> >> > +		if (!bchan->bam_locked) {
+> > >> >> >> > +			ret = bam_setup_pipe_lock(bchan);
+> > >> >> >> > +			if (ret) {
+> > >> >> >> > +				dev_err_ratelimited(bdev->dev,
+> > >> >> >> > +					"failed to setup the pipe lock, deferring transfer: %d\n",
+> > >> >> >> > +					ret);
+> > >> >> >> > +				queue_work(system_bh_highpri_wq, &bdev->work);
+> > >> >> >> > +				break;
+> > >> >> >> > +			}
+> > >> >> >>
+> > >> >> >> [Severity: High]
+> > >> >> >> Does requeuing to a high-priority BH workqueue upon ENOMEM cause CPU
+> > >> >> >> starvation? Because system_bh_highpri_wq executes in softirq context,
+> > >> >> >> requeuing immediately without sleeping prevents the memory reclaim needed
+> > >> >> >> to resolve the GFP_NOWAIT failure, leading to an infinite spin loop.
+> > >> >> >>
+> > >> >> >
+> > >> >> > It looks like my suggestion to queue_work() again in the error path of
+> > >> >> > bam_start_dma() wasn't great if we end up causing an infinite spin loop.
+> > >> >> > We do need to retry somehow or report an error though, I don't think
+> > >> >> > aborting and leaving the desccriptors completely unhandled is an option
+> > >> >> > either... :(
+> > >> >> >
+> > >> >> > One option would be to try to avoid the allocation and write the lock
+> > >> >> > descriptors directly into the FIFO, but this will probably get really
+> > >> >> > messy as well, since you would need to carefully modify the FIFO
+> > >> >> > management in several functions ...
+> > >> >> >
+> [...]
 > 
+> FWIW, I couldn't stop myself trying to finish my "write lock descriptors
+> directly into FIFO" idea, once I started I was curious how it would turn
+> out. I think it's actually quite elegant, the loop in bam_start_dma() is
+> wrapped with LOCK and UNLOCK, later process_channel_irqs() looks at the
+> FIFO again and just skips over these descriptors. lock_ce is allocated
+> once at channel creation time, no other allocations are needed. (Could
+> probably move lock_ce allocation to slave_config() so it's allocated
+> only when locking is configured for a channel).
 > 
-> On 22-07-2026 15:20, Pavan Kondeti wrote:
-> > On Tue, Jul 14, 2026 at 10:46:30PM +0530, Shivendra Pratap wrote:
-> > > ARM PSCI vendor-specific resets, require a 32-bit reset_type and a 64-bit
-> > > cookie as arguments. This cannot be implemented via the reboot-mode
-> > > framework, which supports a single 32-bit argument as magic value.
-> > > 
-> > > Extend the reboot-mode framework to support up to three 32-bit arguments
-> > > as magic, per reboot-mode.
-> > > 
-> > > Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-> > > ---
-> > >   drivers/power/reset/nvmem-reboot-mode.c  | 10 ++++----
-> > >   drivers/power/reset/qcom-pon.c           |  8 ++++---
-> > >   drivers/power/reset/reboot-mode.c        | 41 +++++++++++++++++++++-----------
-> > >   drivers/power/reset/syscon-reboot-mode.c |  8 ++++---
-> > >   include/linux/reboot-mode.h              |  4 +++-
-> > >   5 files changed, 46 insertions(+), 25 deletions(-)
-> > > 
-> > > diff --git a/drivers/power/reset/nvmem-reboot-mode.c b/drivers/power/reset/nvmem-reboot-mode.c
-> > > index d260715fccf6..ac69b5f39fb4 100644
-> > > --- a/drivers/power/reset/nvmem-reboot-mode.c
-> > > +++ b/drivers/power/reset/nvmem-reboot-mode.c
-> > > @@ -17,14 +17,16 @@ struct nvmem_reboot_mode {
-> > >   	struct nvmem_cell *cell;
-> > >   };
-> > > -static int nvmem_reboot_mode_write(struct reboot_mode_driver *reboot,
-> > > -				    unsigned int magic)
-> > > +static int nvmem_reboot_mode_write(struct reboot_mode_driver *reboot, u32 *magic, int count)
-> > >   {
-> > >   	struct nvmem_reboot_mode *nvmem_rbm;
-> > >   	size_t buf_len;
-> > >   	void *buf;
-> > >   	int ret;
-> > > +	if (count != 1)
-> > > +		return -EINVAL;
-> > > +
-> > 
-> > The count can be different per mode. Because `struct mode_info` has
-> > `count` member. This single `count` check across all modes may not be
-> > useful.
-> > 
-> > Either drivers need to use count passed to them or drivers needs to
-> > receive `struct mode_info` in the callabck.
+> See diff below. It doesn't crash badly in a quick test, but didn't check
+> in detail if the locking is actually working correctly. :')
 > 
-> will add a once more write function in reboot-mode to handle the multi-count
-> support. If a driver implements it, the multi-count write function will be
-> called. And no change in existing drivers.
-> Does that address this concern?
+> I'm okay with whatever is "free of known races" and works with the use
+> cases we have, so use/adapt whatever you like best.
 > 
-sounds good. it is just that `count` is not fixed for a given driver but
-it is fixed per mode which needs to be handled or provison must be be
-there to handle it.
+> If you want to use this, feel free to add
+> Co-developed-by: Stephan Gerhold <stephan.gerhold@linaro.org>
+> Signed-off-by: Stephan Gerhold <stephan.gerhold@linaro.org>
+> 
+> Good luck! :D
+> 
+> Thanks,
+> Stephan
+> 
+> ---
+>  drivers/dma/qcom/bam_dma.c       | 94 ++++++++++++++++++++++++++++++--
+>  include/linux/dma/qcom_bam_dma.h | 15 +++++
+>  2 files changed, 104 insertions(+), 5 deletions(-)
+> 
+> diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
+> index f3e713a5259c..864531dca2a6 100644
+> --- a/drivers/dma/qcom/bam_dma.c
+> +++ b/drivers/dma/qcom/bam_dma.c
+> [...]
+> @@ -607,6 +620,17 @@ static int bam_alloc_chan(struct dma_chan *chan)
+>  		return -ENOMEM;
+>  	}
+>  
+> +	if (bdev->dev_data->pipe_lock_supported) {
+> +		bchan->lock_ce = dma_alloc_wc(bdev->dev, sizeof(*bchan->lock_ce),
+> +					      &bchan->lock_ce_phys, GFP_KERNEL);
+> +		if (!bchan->lock_ce) {
+> +			dev_err(bdev->dev, "Failed to allocate lock CE\n");
+> +			dma_free_wc(bdev->dev, BAM_DESC_FIFO_SIZE, bchan->fifo_virt, bchan->fifo_phys);
+> +			bchan->fifo_virt = NULL;
+> +			return -ENOMEM;
+> +		}
+> +	}
+
+Nitpicking on my own diff: This is kind of meh, since this will
+typically allocate a full page just for the 16 bytes lock command
+element for all channels on BAMs that support locking (which is most BAM
+instances nowadays). Barely anything will use locking though (likely
+just QCE and NAND, if available). With 32+ channels in the BAM on some
+SoCs with 16K page size or more that's a lot of wasted space.
+
+Probably best to go back to what you had in your patch and use
+dma_map_single() / dma_sync_single_for_device(), see below (on top of
+what I sent already).
 
 Thanks,
-Pavan
+Stephan
+
+---
+ drivers/dma/qcom/bam_dma.c | 53 +++++++++++++++++++++++---------------
+ 1 file changed, 32 insertions(+), 21 deletions(-)
+
+diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
+index 864531dca2a6..93ce99125879 100644
+--- a/drivers/dma/qcom/bam_dma.c
++++ b/drivers/dma/qcom/bam_dma.c
+@@ -433,7 +433,7 @@ struct bam_chan {
+ 	struct list_head node;
+ 
+ 	/* BAM locking infrastructure */
+-	struct bam_cmd_element *lock_ce;
++	struct bam_cmd_element lock_ce;
+ 	dma_addr_t lock_ce_phys;
+ 	bool locking_enabled;
+ 	bool bam_locked;
+@@ -620,17 +620,6 @@ static int bam_alloc_chan(struct dma_chan *chan)
+ 		return -ENOMEM;
+ 	}
+ 
+-	if (bdev->dev_data->pipe_lock_supported) {
+-		bchan->lock_ce = dma_alloc_wc(bdev->dev, sizeof(*bchan->lock_ce),
+-					      &bchan->lock_ce_phys, GFP_KERNEL);
+-		if (!bchan->lock_ce) {
+-			dev_err(bdev->dev, "Failed to allocate lock CE\n");
+-			dma_free_wc(bdev->dev, BAM_DESC_FIFO_SIZE, bchan->fifo_virt, bchan->fifo_phys);
+-			bchan->fifo_virt = NULL;
+-			return -ENOMEM;
+-		}
+-	}
+-
+ 	if (bdev->active_channels++ == 0 && bdev->powered_remotely)
+ 		bam_reset(bdev);
+ 
+@@ -665,13 +654,15 @@ static void bam_free_chan(struct dma_chan *chan)
+ 	scoped_guard(spinlock_irqsave, &bchan->vc.lock)
+ 		bam_reset_channel(bchan);
+ 
++	if (bchan->lock_ce_phys) {
++		dma_unmap_single(bdev->dev, bchan->lock_ce_phys,
++				 sizeof(bchan->lock_ce), DMA_TO_DEVICE);
++		bchan->lock_ce_phys = 0;
++	}
++
+ 	dma_free_wc(bdev->dev, BAM_DESC_FIFO_SIZE, bchan->fifo_virt,
+ 		    bchan->fifo_phys);
+ 	bchan->fifo_virt = NULL;
+-	if (bchan->lock_ce) {
+-		dma_free_wc(bdev->dev, sizeof(*bchan->lock_ce), bchan->lock_ce, bchan->lock_ce_phys);
+-		bchan->lock_ce = NULL;
+-	}
+ 
+ 	/* mask irq for pipe/channel */
+ 	val = readl_relaxed(bam_addr(bdev, 0, BAM_IRQ_SRCS_MSK_EE));
+@@ -693,6 +684,24 @@ static void bam_free_chan(struct dma_chan *chan)
+ 	pm_runtime_put_autosuspend(bdev->dev);
+ }
+ 
++static bool bam_map_lock_ce(struct bam_chan *bchan)
++{
++	if (bchan->lock_ce_phys) {
++		dma_sync_single_for_device(bchan->bdev->dev, bchan->lock_ce_phys,
++					   sizeof(bchan->lock_ce), DMA_TO_DEVICE);
++		return true;
++	}
++
++	bchan->lock_ce_phys = dma_map_single(bchan->bdev->dev, &bchan->lock_ce,
++					     sizeof(bchan->lock_ce), DMA_TO_DEVICE);
++	if (dma_mapping_error(bchan->bdev->dev, bchan->lock_ce_phys)) {
++		bchan->lock_ce_phys = 0;
++		return false;
++	}
++
++	return true;
++}
++
+ /**
+  * bam_slave_config - set slave configuration for channel
+  * @chan: dma channel
+@@ -717,11 +726,13 @@ static int bam_slave_config(struct dma_chan *chan,
+ 		if (cfg->direction != DMA_MEM_TO_DEV)
+ 			return -EINVAL;
+ 
+-		if (bchan->lock_ce) {
+-			bam_prep_ce_le32(bchan->lock_ce, peripheral_cfg->lock_scratchpad_addr,
+-					 BAM_WRITE_COMMAND, 0);
+-			bchan->locking_enabled = true;
+-		}
++		bam_prep_ce_le32(&bchan->lock_ce, peripheral_cfg->lock_scratchpad_addr,
++				 BAM_WRITE_COMMAND, 0);
++
++		if (!bam_map_lock_ce(bchan))
++			return -ENOMEM;
++
++		bchan->locking_enabled = true;
+ 	} else {
+ 		/* Don't touch lock_ce here, it might still be used by issued descriptors */
+ 		bchan->locking_enabled = false;
+-- 
+2.54.0
+
+
