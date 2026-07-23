@@ -1,184 +1,191 @@
-Received: from SEYPR02CU001.outbound.protection.outlook.com (mail-koreacentralazon11013033.outbound.protection.outlook.com [40.107.44.33])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A26D5353A68;
-	Thu, 23 Jul 2026 02:43:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.44.33
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784774587; cv=fail; b=TOxH2nsHredIA9Z0qIuW+VRGfn4NLX/G1gc5ycpgwkQwRvVbFKTw+lubXyvdbfS+apxhIKy1UnduUDE25VB5r4apvsxAbE0crFywg+afuTvd6nfps957vmu+pyEH0MN2jafuP8Pb8755h8h2SYxXyC+BuIt4Fiq3rzXoeh2tPeE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784774587; c=relaxed/simple;
-	bh=HMKoDgV1raz914pCV/ywYKqG79R9IvHrcYlUTSbet90=;
-	h=From:To:Cc:Subject:Date:Message-Id:Content-Type:MIME-Version; b=FrKqyAAf9wNL/V9Mw3Uwz7jbi6YZ29tEzWibW3fInEWUSWogHltb35ehYr691cdFmhebLefyNPzNvaGR0pFRb8rQrJGeQ3NvuweQ4KsR7rhWN8fgP6y0oJInNQ97bz30Noi2IzgSTyl1mbXnnyjlLO/mKCpwnUBX7+cCyjLO7oQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vivo.com; spf=pass smtp.mailfrom=vivo.com; dkim=pass (2048-bit key) header.d=vivo.com header.i=@vivo.com header.b=avu8hd1S; arc=fail smtp.client-ip=40.107.44.33
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vivo.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=vivo.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DA2E30FC12
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 02:56:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784775363; cv=none; b=J6/idAut6BINEMY4nUcq9IJRHqQLU1T9eIy5zH/VLEeryugyeUnfkAKzim7wlFeXVvoa+hUGwIeXaeQl+y3ScMgtUNiCAxigIsvaMbMAsyuuCpb8HK5Mm4eD9fIQN1loOLgV/aVYqx84cIDaQPGQHShYOTnS+qdE9bitpJCUW1I=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784775363; c=relaxed/simple;
+	bh=fitKuoq3f0JyMs8K6A7V2u0qijzshEjj3lKDbMsxf5Y=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=UiSW162v6IpZLrmm/w8T2FfSWfZswqOkEkfX/Ap5hVzt9YWB7g0Cgifqx9+3avEHFwVKQIgoQqe7Ph0g/jtrWZegwEAPrKTjeXP/qJcge+FaN2B5MwPEVhwSAG7teRLQSWYk9FzGtt3PKwzUmfoGl7uKa/5OSlszth0S6Ow1e/g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FYZ0SzlZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=BZo9TsKN; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=vivo.com header.i=@vivo.com header.b="avu8hd1S"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XjeIW2ZW5iqalCZZVbJ6D+J0i6C3kbGknwpIMrCPQNcaUxMooaddVlaTfRYSuGO8V3iKj6CI/cV6x7dJOYKqk5Jn/UNRukrAyGHGvtVsj8qZ8h/yRDs8EhrbjIzXJCSHRWM4U3nHdFvXQSwqjYUdzXDhFT97LDbVoxAYdhM6BgUF24PGNquXqpCyDooAAu9Sy9Jo0fkgsUay9xESl82nYIl1ovB/fQAU5NKIXq9mNLtYa2Eq/bItZVRY8T3FYfO8pFlHZmos5qaM9NxxhTciqB1D5GihIXA6tYh4pypXGgAYeezjS9D4G7KWa+IDist3OK+7jnkTh62HkWuKqneQBA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4Qa1D7dHkY2TKbIbFzA2uS+qdTtD/gOVnZSF83idAMQ=;
- b=kW4i621HWs6dqg4Zvdz8JR7PlpwMfB5qHz3L6HHudPrtvgJiwuaIjB4TtLv5hrC1+p3PWQ/230oBRXZafJZ4o0G3iOBuFJZUsY113s0nNt/e5m6uC52enNTa8fVjVYS20OsxshNGejTzfQzpKCf8WuBg/9i5RmK2YBJ+EgoAc9ZpKcfmLqUFo8doF4XOaR63qfWrQckvbfjPwxI4fzBNeRrJJaE3FZMbP88iIBjJE4jh8RU5U3Pav72tBofYCGBoiXltQ+xRBPIL6KCbq5bvhJ7LGnc+jnVoPdgic9xercHZ86YQIr/zmvu500ukBd2xCfgbhWIArx5Qnf6IrcBz5A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=vivo.com; dmarc=pass action=none header.from=vivo.com;
- dkim=pass header.d=vivo.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vivo.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4Qa1D7dHkY2TKbIbFzA2uS+qdTtD/gOVnZSF83idAMQ=;
- b=avu8hd1S4PCslhEkHKNr5V8JZm1Zv3Tc0vQOhWepo99M9OccAuDspFtbwiGupKpyoGWOpSY18N2gZlVCaTi8lU+oV6xV6yHHN1JPH+Cr2CGzSQc5vyJTMJtl7GvVv9lyUTT6seGbVG7Q5STkUKPxdgmQsB6IPy+RIs7/XMTw/ydyWddhEuPjqgh3UmsUDPZfApOZvC/BVOJG6xvG5iADvBpR/pr5ljzM/zRm/Uo8M2IqlwOFjBJxbWAdTCDMBC6JZfM5lx8A0kLGr9EUSBslB/8mKd6VJ1yYJJW/a2Y4B1zTlbj7Qck90MXT7bzldOy6hAiBsUo+u2+GcRg+caM0OA==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=vivo.com;
-Received: from SEZPR06MB5832.apcprd06.prod.outlook.com (2603:1096:101:c8::12)
- by SI2PR06MB5339.apcprd06.prod.outlook.com (2603:1096:4:1eb::12) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Thu, 23 Jul
- 2026 02:43:00 +0000
-Received: from SEZPR06MB5832.apcprd06.prod.outlook.com
- ([fe80::f98:5e32:4ccb:d07b]) by SEZPR06MB5832.apcprd06.prod.outlook.com
- ([fe80::f98:5e32:4ccb:d07b%6]) with mapi id 15.21.0245.009; Thu, 23 Jul 2026
- 02:43:00 +0000
-From: Pan Chuang <panchuang@vivo.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	linux-arm-msm@vger.kernel.org (open list:ARM/QUALCOMM SUPPORT),
-	linux-kernel@vger.kernel.org (open list)
-Cc: Pan Chuang <panchuang@vivo.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: [PATCH] soc: qcom: Remove redundant dev_err()
-Date: Thu, 23 Jul 2026 10:42:47 +0800
-Message-Id: <20260723024248.17480-1-panchuang@vivo.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TPYP295CA0043.TWNP295.PROD.OUTLOOK.COM
- (2603:1096:7d0:7::11) To SEZPR06MB5832.apcprd06.prod.outlook.com
- (2603:1096:101:c8::12)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FYZ0SzlZ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="BZo9TsKN"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66N0X5LA2518803
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 02:56:01 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=mlMFXOUkVU+3nCPYf3vcrl
+	NLG9N3WolfCVeBQy9I9u8=; b=FYZ0SzlZZncaVx25lLZUHdcY95Y7c9BXzPqa3C
+	FpIiqIXZjBrHSR6WZmCprp1Gvjgc90qCu/jb9QY8+kmTWzSuicHgF5p9MDZcO08B
+	5wJM+9fXLl8Wq9sCEob70ugyptHZCAzAKxSr8Wcc7ucHbF2e4XBPTUqGIVZDUmDF
+	HKKRSFOlCD9d4ZLf9wxwGQUjgAy8h5pr+SQU+ZdqaOQZjaI2qglg4qRQghf6MYQU
+	J8fk2E7J0JahYexuOZkA5nu5Igq4AGfRgErRr/2CXpuvPnzCybSPS44LiqnxMrTR
+	8K7ya0Vy0nJpItl2sz4pEbdNtsxvpytpTpBDVBjlT7y1LajQ==
+Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fjt79c65b-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 02:56:01 +0000 (GMT)
+Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-8484ba00601so235445b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 19:56:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784775360; x=1785380160; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=mlMFXOUkVU+3nCPYf3vcrlNLG9N3WolfCVeBQy9I9u8=;
+        b=BZo9TsKNjWCWqTzYILp2jpUpKR0g39O5uWJ5tuxSxfHztkdzuHSF86UuZ9iY4QQJuE
+         ApoyXKB/wjTrMS03I8EhzeJ1vbLqw/CyHBZjOvfOxJZnx9/xALhSzzFsceLiJj4Baek4
+         VOTqknMckEgTNPrmtp5DHJ5XzPj/xyYMKiff76MrcRMXkOo+wViBasmuDWEt2K6IwaIj
+         q13E0NR4+YlASR/KAbqn/O5dVOw7BFul7CAxvFbV8rQdJzap4wovD9V74htztWPqNExD
+         W2Q6T+npA4uuLy0M3sMOdcyR2ZSGPWhkODd8hzjajChYixwGSe4YmvGM6Eux4AlaIzil
+         qjAg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784775360; x=1785380160;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=mlMFXOUkVU+3nCPYf3vcrlNLG9N3WolfCVeBQy9I9u8=;
+        b=JZkY0cNUiNm9a3kV19dz5iaGUS2Lc+HgWP+q9j4M1dqQbCWgvN8h0VHrzPVCUubhnV
+         FP86HuEr/zUf0frp3SL2sZXUgDkNCJv6s/mOI44YLg4d9+OB8pfTPbqMLBcq2R33s/ga
+         xLcTJX8+WjtsJZeqmtdJPi+kPovofKgB2CwG4hieBK1PMrJjUukP2A7OKa102H5y0jjn
+         GykMoCAdGthy4nUtkA+RzVhx+glVPKrC5V+blrSlkuiZc2xLtqTJy6Jyg6cZJe10UcHo
+         uz+VWjdNAhaFT2qBH8CnRSlCDzKAV3WP3UV9xasqRnptbHe7nfDxzcuFwmsu2rr1CUKF
+         33Kg==
+X-Forwarded-Encrypted: i=1; AHgh+Ro68Yd8iQ222OHb4bFPrnMZARSnQTdBVOuIHytDm6C9y5FHGp/zr+fGcL2p80LwhQVbtsf2RDH5L5LXMXGK@vger.kernel.org
+X-Gm-Message-State: AOJu0YwyYasSjMK0vFYmi9iTgnpfTabwHPLgNKuxROMJLz8BQq+z8/Bo
+	Apd613rhJjqbf9y+4fofo9Kxk4tnZyqF6RP5+mm2qqm2a1/9CiVtalzAY/hgmm01LyO0gGf8u3T
+	5jNDMwCwVC515xnMwBZjLhn/QRkpX+Wd74Zca50jSznqx1W3Q0UBCCiA0jACNWilHw0/OaMlRZ3
+	bN2bI=
+X-Gm-Gg: AR+sD11fwVXfF11owHIlskEhngTlp+MTfcSMSLEQgefjw0xc8EPVHnQfKrDmFyyhwJr
+	Yo8kt+EdQRdhc5SNhXrcTIO/l44uXjqY62s06AqwFtWEoRI01ChFV/gshtGTkMiJlB6Wqf3MLLZ
+	iNOnViiaF2t1MVyJMgqmxmEM6k85bnEQjKLG4w90VDYUztCIrRdbYe4T7BGcNwFIWH/lt37Xo9A
+	kYRYYek99gLngQZ9ubEqo2NJ1toVm/0ZqwieZCuOkFLz+UyJNrFZJyL0hEBzmuQNUeqPZWeyE6X
+	O3WIFr/LJn1Ac0//MZmANG4kbBnZhwgVUP6RLMmxavJq0rlYFLVGlaswR2Bqwn9uwBaegWPpJWL
+	hsSZb+tvh5mouB9+HGBMOZSOqQYIFGrgLubZBFm03AjQjAi7XY5ICMdyNR2c7F2bzp7Z5rSs3Ic
+	E=
+X-Received: by 2002:a05:6a00:428d:b0:847:9315:fb8b with SMTP id d2e1a72fcca58-84e2b7fd971mr1539634b3a.6.1784775360249;
+        Wed, 22 Jul 2026 19:56:00 -0700 (PDT)
+X-Received: by 2002:a05:6a00:428d:b0:847:9315:fb8b with SMTP id d2e1a72fcca58-84e2b7fd971mr1539610b3a.6.1784775359749;
+        Wed, 22 Jul 2026 19:55:59 -0700 (PDT)
+Received: from WANGAOW-LAB01.ap.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84e17262e33sm2233312b3a.14.2026.07.22.19.55.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 22 Jul 2026 19:55:59 -0700 (PDT)
+From: Wangao Wang <wangao.wang@oss.qualcomm.com>
+Subject: [PATCH v4 0/2] media: qcom: iris: add dynamic encoder properties
+Date: Thu, 23 Jul 2026 10:55:53 +0800
+Message-Id: <20260723-dynamic_encode-v4-0-5fd6bd549ead@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SEZPR06MB5832:EE_|SI2PR06MB5339:EE_
-X-MS-Office365-Filtering-Correlation-Id: acd6ed0b-333d-49e7-5c59-08dee8641bfa
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|376014|52116014|23010399003|1800799024|18002099003|10067099003|56012099006|11063799006|38350700014|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	3qRfzgi2pWUqgbq0QLK7mnYiio7cGoMgr3j2JQFd0KXa3yXMvGQDFcjGBtOwniIaTOQxHKwcLBSTw1p86WkZYU/NSteVRnsScdpEKSNc4yOv97yuMIJUwhM41+mra6stYGI3RX4t9j6CnPntLUsnsIvIFQX6JuUTirhsGZzDlfeK6XISsapLTioVw9swDwGxGAnxb6z65lOVquItu5KejP6hXbXE9gOViNgbtBLyZQHn1dhz2MToMEpnsP0QjiKgVcG9xwRhA3LUgRf2MGCyL2hhH51G+Ko0QBopb8iXcF3Xo2wDmjKsfVX6UmR6BctsnUUq3iyD8aLAHuuvCS3HypQtUKnnbjsriUGVLhceMh10dLYz2xWkWsLQ3JaapkNcAiNzDfoR76xze3bNthPuI5htutcZGjP57Qj663ir0JLApB6iOcdZZ+mjdlEu8IIN8iQoOOoPdoBp2oACAd3GTBmVCqnxckx8MzTVgxwuxoFoYmKhIxY+9jlRHV2AELO0IZ+QD1jb2H0UkopD9DH7hv/Ji1aaxaWoXDB0V163SpHGKZu9emKkePDxQS4oqzP/rWV8gMlpVUoJfnEBlG+n5oTX2l1u6bEzr4yVsTdWw7kEV0dIYtrZrNae6trozqrjmaYRXBG68fZ/dHTt2YfR1B1mH2TDJflkSv+/a1jv+YAIvebgNQTMqBxCzzXrSmViVnRKfC4fnkAD4glxPSv6Zw==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SEZPR06MB5832.apcprd06.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(52116014)(23010399003)(1800799024)(18002099003)(10067099003)(56012099006)(11063799006)(38350700014)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?ijRtAZnZ0a+WZ/fvWzBQFr2ISplPOC+Eresu3YPpTOK4EdtLkoCWDcK6EeoL?=
- =?us-ascii?Q?ZJFknYLRf8fstAGem590Umma5+MCzXeUsNt1AY6WYhRrapezDfPds3ZRXLmH?=
- =?us-ascii?Q?43z2DTNIpd48iQF5Qqlgso+gIzXgeNf/i58cerQEvF5kISU+N5uXtCFNvsly?=
- =?us-ascii?Q?gGtgBjOm8SGgzLn61j3G335CWxisY5QJhZj3b8XraiGJacDlTOq/jD+yauAf?=
- =?us-ascii?Q?dSqLEYE58qBZW9smq7IU+TvNW5Tk7SF+6EXQvclIETjiBkXWQh3SJptyMF8W?=
- =?us-ascii?Q?2hrfmJ+Kins5zV5rx4GCueOHsz3D2mAxbCMkiHOIMJOIdWUNdxDzV7Kk5j4r?=
- =?us-ascii?Q?TDdjc2MQ7jV8xq6c/0Ibn4kC2Vk+F0e2PlxJhRXN2r4dI7nvJ3TZR1RUaqRH?=
- =?us-ascii?Q?Hg0XKlJYMyPPcDVeI3ICMVrEk/hKt1bZDCv77ZR2WtO8CWGSygv9wYUKKb0S?=
- =?us-ascii?Q?MxzU78YCSjG5OEeisyYg+UB9/6hOTXNKcBlJj87/RM4Yj7EZw1o/ib/7aARE?=
- =?us-ascii?Q?nd9UIgU+XLIeUtaAqlI33vM+cqQY09SOm6WwuwoherwOMtuQYdnLolJeC7mm?=
- =?us-ascii?Q?ihRs1dgg39ty5diPwGwVMOsYzP2HdURJpdJ6lUpzQm1/h+pvIUcT+K//Th4w?=
- =?us-ascii?Q?4mQ9B1EcbacbrHhC2oQsiZ3RL3h1UuwMZhMynTMQDB+M4LeVC4F9Hi4uYyNb?=
- =?us-ascii?Q?ny7/JlqxycflNxti1AwGsH1T471FhTIETasld32jQVraYkOdnXiITXf4PHCk?=
- =?us-ascii?Q?QZ9l3xR7HnDjxAo/EMi4XSxTAn8wiJBSz4ur/zVoXr/EPVm/PB1sClAaLUq8?=
- =?us-ascii?Q?Aem/elVyKuSoUAXOFQkWBZBlvaiQ7XEK+68R+opHX3K7xMT/QzVInV+8oB1k?=
- =?us-ascii?Q?uZT8W3SxYF977Hw8jzfGen2dmp5AhPt3PFxUv8I68MdzqjCAwEGTvUqdYOcK?=
- =?us-ascii?Q?ojB3Qs6I3MatmkrZ3pxSWr2nIb/fytVd5PSTE4Pk8JvmtyPjnqjpxY0Djzs+?=
- =?us-ascii?Q?C2sdHz4h69pYy8DmMJFO8+nTMdNfLSfHyjTMsXb9FgUYZ9NA0f0jkwivyuyf?=
- =?us-ascii?Q?yegXT1NB0bdrgpwRDDtscyEOhStrDe+gghwsKg6Aem7pIKf/CzfvFnKwKCGK?=
- =?us-ascii?Q?vHZDDmtjAV+t/S4nHeufAN2djfOOJfJeD48He9XhZo0u2goMfLRqfa1J4xP4?=
- =?us-ascii?Q?eMHHY0vHetLSZwymBlRxzrUBzaTG0r9Hkj6mPQ5MgIbg8Xe4FjQDDlx20S1S?=
- =?us-ascii?Q?vOJB2qsjoTzTfiWwpbYDnKgOaLFd0H3ADQYxObrkGTcF7ViH0EY/tlKQIHT3?=
- =?us-ascii?Q?IyrZTZZoXktCmbevyMvZGjraOIvHkwM6NfALmP3AqQ6GFQkUY+w8pDI260qn?=
- =?us-ascii?Q?nsop+BFTtVcAzWBXyH9Z98kcqsLiNuKbo8p4gCTnm2oduhM+sQ1YDy6nj2M2?=
- =?us-ascii?Q?kOW+3tWHhGfOdRu5F7Ymj5ipXIdk/aJ4Sm/5uXfyY1Gd0ph0d23j7Exgff1q?=
- =?us-ascii?Q?Y6uQiIUKfxj3AJvKiu6VJBTHZQsKl4oPsIFtwcyl4bTvDQaaCGBRuLlmh2dx?=
- =?us-ascii?Q?+7XN9Y6w5sfvFX0DmD9KRdDgE/li/BhnUzIetlT+h/tchpBm0NXk2hM8P+oi?=
- =?us-ascii?Q?jQa8Pnr0myhZgnVrA0jNUvYaZGSKn9rV7/ImGY5pLMu4NkyiK6YaeI0SSzkG?=
- =?us-ascii?Q?ZbH8Cr6V2tpNZ72F+o80oWNeRSW+j1RiZ59tri8z2HYC43UWanr079F4Jdox?=
- =?us-ascii?Q?09kcGOBQiQ=3D=3D?=
-X-OriginatorOrg: vivo.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: acd6ed0b-333d-49e7-5c59-08dee8641bfa
-X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB5832.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2026 02:42:59.8588
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 923e42dc-48d5-4cbe-b582-1a797a6412ed
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dSxYZv2B4ZWqbNL4UjlX9RN9Enc1oO+/PgqI8zbJoFQ+7qd7sRgsmazZbEte6bpRpCfck1LCKkGAknHz3/hkuQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SI2PR06MB5339
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIALmCYWoC/3XOW2rDMBQE0K0YfVdBunrYylf3UUrR46oR1HZiO
+ aYheO+V7UJLnf4IRjDnzp1kHBJmcqzuZMAp5dR3JciniviT7d6RplAyAQaaSV7TcOtsm/wbdr4
+ PSEWtuNVCMwySlNJ5wJg+V/DldcsDXq7FHbdP4mxG6vu2TeOxclJx5aPkSgulsYkyokYWg+d1V
+ MYG60xdQySLdUp57IfbunXiK7bNAvZ31sQpo8Ch8YYrHhk+9zkfLlf7sVw+lGcZ+902D9veRKc
+ ND40Tdt9e9kzws6E4OwWKotHUITIBsoF/FPFLgb0iihLBQnDMerDxgTLP8xeEjW4AyQEAAA==
+X-Change-ID: 20260417-dynamic_encode-3751a6360ed4
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: quic_qiweil@quicinc.com, Renjiang Han <renjiang.han@oss.qualcomm.com>,
+        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Wangao Wang <wangao.wang@oss.qualcomm.com>,
+        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784775356; l=1937;
+ i=wangao.wang@oss.qualcomm.com; s=20251021; h=from:subject:message-id;
+ bh=fitKuoq3f0JyMs8K6A7V2u0qijzshEjj3lKDbMsxf5Y=;
+ b=4CvjtvJtgpaUpPcjvg4DIz3F9RZTcrf6Uhb7ZXYAqq5DJKlTt0yQfKHtEJJBnc9VM627sIY36
+ 0rlNd/j+VT0AasV6uIc/93nIBz5JVx3nOVbIcxs8Air2Rw5quzzM9Ts
+X-Developer-Key: i=wangao.wang@oss.qualcomm.com; a=ed25519;
+ pk=bUPgYblBUAsoPyGfssbNR7ZXUSGF8v1VF4FJzSO6/aA=
+X-Authority-Analysis: v=2.4 cv=Sr6gLvO0 c=1 sm=1 tr=0 ts=6a6182c1 cx=c_pps
+ a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=eqrrz9xRmxmWE_0OKXQA:9 a=QEXdDO2ut3YA:10
+ a=OpyuDcXvxspvyRM73sMx:22
+X-Proofpoint-ORIG-GUID: xphFbHkV8V0T_nHlFpimuoVXV0xDbMHr
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDAyNyBTYWx0ZWRfX+Veiy1DiIG3Y
+ RJw2QDhSavGPgBy/NLphFRO7nUaQ9XRPy1TpWjrkwzfXwUqr+Q5UOSpmvPXm0XGzGbtOm5VFCZk
+ 2D8DzEePDmu23GXnq1R0iJDnmBqk4UUdVhM5MfJexcmcrbLX32Jpm2Al4WxzlsIGyqB12C1Guai
+ lJqlU9pLYd7fE48+qjqzZXGbcd+BFZdUDxp4l4+gnBLuDafhxbu/gV6vyWjS/xlAiM7XIPo60AN
+ 9XrYAqyrEq9WdpSE28qSoJSjGHLT3mj5vgDzIQwexJcxRMso9fIQ0cZr9ry9NIgA3rnRjSNFdsf
+ Hzuf7wLRlGlb1oscviRQrzEzyUJuD7q1/vLcxSQrbnVxFoQAFvNBbVJeYUx2dL4Vzkr0TCuyALc
+ UISUCcstM1k2EJHFuXIsPQa2zwS+zZF8HNgQKN8lT6jGrMiqOCZ8VcLqUXZPztuY+YOqmh5GTlV
+ FEes2PU6pcifjD803tQ==
+X-Proofpoint-GUID: xphFbHkV8V0T_nHlFpimuoVXV0xDbMHr
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDAyNyBTYWx0ZWRfX8HXDq0ywQF8t
+ ctHYKyqeZdD1R0R7ZxcQRraZj6V9505EZGiA4BfpCXTVPUXtTbkVRBj/kuUz6roKwfww7LXi/zz
+ 2riskpO+fXVxPNtEkSGN5pEdPCOuJX8=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-23_01,2026-07-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 suspectscore=0 spamscore=0 lowpriorityscore=0 bulkscore=0
+ adultscore=0 clxscore=1015 impostorscore=0 phishscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230027
 
-Since commit 55b48e23f5c4 ("genirq/devres: Add error handling in
-devm_request_*_irq()"),
-devm_request_irq() and devm_request_threaded_irq() automatically log
-detailed error messages on failure. Remove the now-redundant
-driver-specific dev_err() calls.
+This patch series introduces several enhancements to the Qualcomm Iris
+encoder driver, improving support for V4L2 controls and enabling more
+video encoding features.
 
-Signed-off-by: Pan Chuang <panchuang@vivo.com>
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+- Fix missing hfi_id for gen1 encoder GOP_SIZE cap.
+- Add key frame request support for gen1 and gen2 encoders.
+
+All patches have been tested with iris_test_app on gen1:QCS6490,
+gen2:QCS9100, X1E80100.
+
+Signed-off-by: Wangao Wang <wangao.wang@oss.qualcomm.com>
 ---
- drivers/soc/qcom/qcom_aoss.c | 4 +---
- drivers/soc/qcom/smp2p.c     | 4 +---
- drivers/soc/qcom/smsm.c      | 4 +---
- 3 files changed, 3 insertions(+), 9 deletions(-)
+Changes in v4:
+- Add Fixes tag.(bod)
+- Link to v3: https://lore.kernel.org/r/20260624-dynamic_encode-v3-0-f2a2db0ac2af@oss.qualcomm.com
 
-diff --git a/drivers/soc/qcom/qcom_aoss.c b/drivers/soc/qcom/qcom_aoss.c
-index 259c41f0c34e..a6b673cd7678 100644
---- a/drivers/soc/qcom/qcom_aoss.c
-+++ b/drivers/soc/qcom/qcom_aoss.c
-@@ -602,10 +602,8 @@ static int qmp_probe(struct platform_device *pdev)
- 	irq = platform_get_irq(pdev, 0);
- 	ret = devm_request_irq(&pdev->dev, irq, qmp_intr, 0,
- 			       "aoss-qmp", qmp);
--	if (ret < 0) {
--		dev_err(&pdev->dev, "failed to request interrupt\n");
-+	if (ret < 0)
- 		goto err_free_mbox;
--	}
- 
- 	ret = qmp_open(qmp);
- 	if (ret < 0)
-diff --git a/drivers/soc/qcom/smp2p.c b/drivers/soc/qcom/smp2p.c
-index af0ceeaf6e07..6f07fef40ce8 100644
---- a/drivers/soc/qcom/smp2p.c
-+++ b/drivers/soc/qcom/smp2p.c
-@@ -720,10 +720,8 @@ static int qcom_smp2p_probe(struct platform_device *pdev)
- 					NULL, qcom_smp2p_intr,
- 					IRQF_ONESHOT,
- 					NULL, (void *)smp2p);
--	if (ret) {
--		dev_err(&pdev->dev, "failed to request interrupt\n");
-+	if (ret)
- 		goto unwind_interfaces;
--	}
- 
- 	/*
- 	 * Treat smp2p interrupt as wakeup source, but keep it disabled
-diff --git a/drivers/soc/qcom/smsm.c b/drivers/soc/qcom/smsm.c
-index 021e9d1f61dc..396025074e1e 100644
---- a/drivers/soc/qcom/smsm.c
-+++ b/drivers/soc/qcom/smsm.c
-@@ -451,10 +451,8 @@ static int smsm_inbound_entry(struct qcom_smsm *smsm,
- 					NULL, smsm_intr,
- 					IRQF_ONESHOT,
- 					"smsm", (void *)entry);
--	if (ret) {
--		dev_err(smsm->dev, "failed to request interrupt\n");
-+	if (ret)
- 		return ret;
--	}
- 
- 	entry->domain = irq_domain_create_linear(of_fwnode_handle(node), 32, &smsm_irq_ops, entry);
- 	if (!entry->domain) {
+Changes in v3:
+- Correct the max value for FORCE_KEY_FRAME cap.
+- Link to v2: https://lore.kernel.org/r/20260604-dynamic_encode-v2-0-6e97df032482@oss.qualcomm.com
+
+Changes in v2:
+- Rebased due to a conflict with commit 'media: qcom: iris: split HFI session ops from core ops' (35da0884068226ca3a53371dbf685db6e0d74658).
+- Link to v1: https://lore.kernel.org/r/20260429-dynamic_encode-v1-0-c9fb691d8b3a@oss.qualcomm.com
+
+---
+Wangao Wang (2):
+      media: qcom: iris: fix missing hfi_id in gen1 GOP_SIZE cap
+      media: qcom: iris: Add request key frame support for encoder
+
+ drivers/media/platform/qcom/iris/iris_ctrls.c      | 24 +++++++++++++++++++-
+ drivers/media/platform/qcom/iris/iris_ctrls.h      |  1 +
+ drivers/media/platform/qcom/iris/iris_hfi_gen1.c   | 26 ++++++++++++----------
+ .../platform/qcom/iris/iris_hfi_gen1_command.c     |  3 +++
+ .../platform/qcom/iris/iris_hfi_gen1_defines.h     |  1 +
+ drivers/media/platform/qcom/iris/iris_hfi_gen2.c   | 12 +++++++++-
+ .../platform/qcom/iris/iris_hfi_gen2_defines.h     |  7 ++++++
+ .../platform/qcom/iris/iris_platform_common.h      |  2 +-
+ 8 files changed, 61 insertions(+), 15 deletions(-)
+---
+base-commit: b4515cf4156356e8f4fe6e0fdc17f59adab9772f
+change-id: 20260417-dynamic_encode-3751a6360ed4
+
+Best regards,
 -- 
-2.34.1
+Wangao Wang <wangao.wang@oss.qualcomm.com>
 
