@@ -1,173 +1,181 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from MTA-11-3.privateemail.com (mta-11-3.privateemail.com [198.54.122.105])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB5D2385D73
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 19:39:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784835591; cv=pass; b=s6roUaYRsJwEOu5688HZZ9pqY7LI8qeMZIgl4AA6hLKiF0K2nxraMCMgIRjX9tiCB18pbtxOpUq+vVsuSSysqx8ryWee7+paSufc9JMFIl2qxQrqbewdPHzz11ZT7vtqlHxpSFLiw9wLYaQFLRoUHTCZkzP5O9gCvXkaYfrGz18=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784835591; c=relaxed/simple;
-	bh=OjmerZlh2Ae0w/xoRAIqaoUMyxV5HsJ41pwEyuiHBsg=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=UrxE2z2FD7T18C8xKhNNXbn/Ca8nvZI71MapEQqO6xgEfwjD9qOEkdlc4Tvgps9N9OnBnO3KEDjqgtE9zTdc5/iEWgiyY5d6zJ0/5aaO5+iseQJ+Ewz16SbUKONkdJirs4uivsrcq+ckr4vtomhX0ptiwDNyK0z8q0T9SIXr5mY=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DYT7e07F; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gaIE1ped; arc=pass smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DYT7e07F";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gaIE1ped"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NIlv8u1844125
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 19:39:41 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=k7gjuT0+aFniLuCctCVMtzeg
-	Qak+FZ7MzxxwdoW/+fw=; b=DYT7e07F7hb6HKcF6rLsSLvkEdUzswrmLe3B1U6+
-	5IkwzZGdx1bJrWgoPufsLDZE2P5l3TfGFm16G2CuMXDqf4Eq/ohaQzgnKQ9cJXEQ
-	11w79+EX5NBwG5bHHR73GQ/FpJQS4P2dxzhEj7qwq2NYHP2PfvNk1DbmXIXzNPIj
-	/ObytEmQmbI1U15aoonSVvYfk/IsyfFyo5QiTbFD3/zGcw85l5VTGFwCzyuzurbW
-	WqGdFJfR63jSfvpLemOgFccaGLKuF+BrhD9gfplpsL51ssng/5S6Rf55rDIAMUGp
-	8K9xTK+g1NWN7xj8P6/MwB9lZQ/iXdwqwBZzQan/OgU8kg==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkn9a18yw-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 19:39:41 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-cb7049fa552so854445a12.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 12:39:41 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784835581; cv=none;
-        d=google.com; s=arc-20260327;
-        b=hR9bEJxz1x25wQuNK1WCZ24xUilDfsx7wBFbPqSh5miIBuNCnnjH1xVzZ7oUSF6fNt
-         RNI+l73Y7LzsS02+7JEyZZkonIc9OkfjC5oCTo6l3gIbIaIxCVNmCodTj0ev+SgqNzXJ
-         2nUrNPa4rTu5Yp2hNuk6267fwZd/Bn23UTWRfUpZLmJ1Cox7cp2vXRHufGscbB0qm9EO
-         WPv/zI0tkRypQbOvc3po4wLBH/wm39N/nQia66FrvC9BOFyDkWGI9iWAWUvkXbzBC8EJ
-         RGu0659NJjCPHhX7qKRORzoqgIa7HZTrd3s2Tz7quLtsYMLptnJ6jZa7g1whvVI2Mh/i
-         tiLg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=k7gjuT0+aFniLuCctCVMtzegQak+FZ7MzxxwdoW/+fw=;
-        fh=BzmJIxO5JODq62XZybOseQ9hJJfE+DjSUmBCfd4SQK4=;
-        b=b6RWRj9DJug/6sgGLHiRonXdT2hLZcua4WVwNzdDe7PMRxmTrG0iYAUyHhGia/6+D/
-         ehvAj/kezKXHpd2eVpDNZnsT2wHCvqsroFMG+ou+ZhM20sFok8qfOEHARfek/1AbHaWM
-         q40cl0Jiw9OYdCp2wodqPVuzmMRlFJE3EMogZxRQYm9CWk58niN4F0Y/PZJSlOXSkNyX
-         F47U7st9ZGYLYwF3/lS4RhFqDovObETmK2wDYmCgT3FN1TJ6IblZBpghfwEGPRGXviVb
-         OPDlJmnu0RUfXnL86l+jE/qn5aOHCerkGEV1bqTYnvtIqb94IEh/US3l9tJw75hFYyeO
-         Ea5Q==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784835581; x=1785440381; darn=vger.kernel.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=k7gjuT0+aFniLuCctCVMtzegQak+FZ7MzxxwdoW/+fw=;
-        b=gaIE1pedS4aRUGz7B8icVfdQo8WnLNkeo21uw5b3UYqH2QWKcgyicblb0/1t9vl8g3
-         N/F2nIFUILxT/+EKjHJS6+7GoUtSTQG5LKawzpG6Ew8J9bftyLeO7qvqX1fJ43zjLbyp
-         Hmi6T4vF36X2ENltc6NMiFzTMlum2T/07tJUi8vUKa5A8GVNqD9+v4QVBtz+g2qSOaes
-         kaE4iuNfo2QkO7HvhBWMcmPxRmSFXNYjTYdUBEFUn5QXz6MW2WQn7yIyvu8Spb9kd5Wz
-         KnZWBHYIA4v+l6/8U5I7lTe4V5LmdDjeIwX7TdYx4YIrZ/DFXLDcgpxPpJO90li+4eyt
-         +2Ww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784835581; x=1785440381;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=k7gjuT0+aFniLuCctCVMtzegQak+FZ7MzxxwdoW/+fw=;
-        b=UsVLnZZ5uGtthT5Bd7mX1m9mKfU1hoE1PFhwuXOebgVoC6dwFczwfSTqhwJHBZ3p9k
-         nEIgOu6p3VAo16ILCCvBXvRXBu0dNlyaFVoTyQPwB696BRaYC/lPJoYZMmaYCgRJxZHA
-         AtgrBo5Oigb+4iHMitX6FZ05q9tryxpBJY8FPS3YVITuTQnOoyzpU8mSlKzA+6rahK42
-         vvHWIZA9C9IDNq1qygLTmOQ+ukejrZ9gq8ngQN46KFZOI1POAGhjT3uJYyeVvoHzy8sl
-         WopIBXSCIs7+O92L6e8jyWSj5Qv7dk29HJrJSEbOq2Q6YlRQdshyZ0Q0TZi46z7S3j/6
-         KoMQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrG2qWZxbKRT6HVxTdn5UxHm1dbSwKHuUwBJMaAK/evjTu0e8Rg608+FhAKzVaZbc4e2eL0zR9IBWmIm6sg@vger.kernel.org
-X-Gm-Message-State: AOJu0YxpaDB4K4oN7syCbeKMZEBlti2R3OBD89N3EVDSfH62BcZWUutA
-	gkZ8ir2lviDeAeX6uQ56v9pjUzhtmHNWt4rHt4kA7pDoLxMBaMG2IZlfHldFlGdrVdYjjLgyMwH
-	jGhunamWaYfnnus61/vCINkSCQVQAwTUQUsMTtiu1m8WzYWo+hLKZ5vroQWASiQN8jNLKclqczZ
-	9ny58ZzeGP/Mh/4Q5TqyJ/bxW54Q5yQbXBBZXDv859sMc=
-X-Gm-Gg: AR+sD10TG1UjsiVUlZR2CP8jcNcjxGJQUTPAbYvtOxNBELL9WpP+UDUn5qnLMPhx2Ra
-	99IAfxez574ozOgSRFUdCYh8FPA87mIVfhaXCmB/FV6VTQtoOW02N09PCDiVzwdVNSYPTc9VnPm
-	SH5jB2GJPV5bl+MAy+xolYfenMGH/TZbzZGdQI6l4dtfDNgwtU7SgenkQF
-X-Received: by 2002:a17:902:f642:b0:2c9:c517:d078 with SMTP id d9443c01a7336-2cfa6c7884bmr52774175ad.36.1784835580622;
-        Thu, 23 Jul 2026 12:39:40 -0700 (PDT)
-X-Received: by 2002:a17:902:f642:b0:2c9:c517:d078 with SMTP id
- d9443c01a7336-2cfa6c7884bmr52773955ad.36.1784835580214; Thu, 23 Jul 2026
- 12:39:40 -0700 (PDT)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B364385D9F;
+	Thu, 23 Jul 2026 19:41:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.54.122.105
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784835694; cv=none; b=X3YwPrr+qL054MXZ3AAMf04P/JGhd4PwWwXEcJdQ5DlMeVCgYb+XX9WE+TX9yht2K2lSSTgIuvuAkc1Vso/kbznzi0uS9SBt1nGVqEsn//A4M0NFHrm29oaiW20HpYN9ggp56sqUnWIhsw0lPlAPh7s4Ddc8mH9/Tl6JUERBwqU=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784835694; c=relaxed/simple;
+	bh=EHbV5b4pM+yqB8Fvu5UDqJ+ul5JiE8AwLN9LGhuIaHw=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=DJ6pFHBtcKMR4JkQl38Ncn9I/5sPyMa7TX9iq09D5TpljwDFAVAVg8AGGmMps1/t7kSdQQansFfN/Md3fvvivaYfpJ86hCbsUmJavW8nr/W6u8l/d2l4qNk53DkSd/zIgkXAh4qcpKiUZSrcihviHS/QvG/5LiGaDcB7BLvVZPc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net; spf=pass smtp.mailfrom=catcrafts.net; arc=none smtp.client-ip=198.54.122.105
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=catcrafts.net
+Received: from mail.privateemail.com (K8S-PROD-WORKER-14 [87.215.145.39])
+	by mta-11.privateemail.com (Postfix) with ESMTPA id 4h5hLd179Sz3hhTK;
+	Thu, 23 Jul 2026 15:40:56 -0400 (EDT)
+From: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
+To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Cc: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+	Mark Brown <broonie@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	Charles Keepax <ckeepax@opensource.cirrus.com>,
+	Maciej Strozek <mstrozek@opensource.cirrus.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Bard Liao <yung-chuan.liao@linux.intel.com>,
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+	Richard Fitzgerald <rf@opensource.cirrus.com>,
+	Luca Weiss <luca.weiss@fairphone.com>,
+	linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	patches@opensource.cirrus.com,
+	linux-kernel@vger.kernel.org
+Subject: Re: [RFC PATCH 0/8] ASoC: SDCA: enable on DT platforms and add Qualcomm WCD9378 (Tambora) codec
+Date: Thu, 23 Jul 2026 21:40:45 +0200
+Message-ID: <20260723194045.49021-1-jorijnvdgraaf@catcrafts.net>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com>
+References: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260721-drop-sound-storm-v1-0-23ae4a689ffe@oss.qualcomm.com>
- <20260721-drop-sound-storm-v1-1-23ae4a689ffe@oss.qualcomm.com>
- <85f2799d-fadf-478d-9f3f-fb8ff91ba84d@oss.qualcomm.com> <6a609d87.87c5160c.1accad.0f33@mx.google.com>
- <CAO9ioeUw4QgW47xmC58dGc1_j2UPFjDM+dDRF-bggpBPFA32YQ@mail.gmail.com>
- <6a625f94.4d70c427.b2b96.9b5b@mx.google.com> <5o4nyr5iycpgopeo5dllygtndbp24g5ejqvh43d3mxwnxufork@zds6b6aqvcqf>
- <a6f86d96-48bd-48e6-9306-159b17380ff8@sirena.org.uk>
-In-Reply-To: <a6f86d96-48bd-48e6-9306-159b17380ff8@sirena.org.uk>
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Date: Thu, 23 Jul 2026 22:39:28 +0300
-X-Gm-Features: AUfX_mxHE1J6imuCX4kEX4NevKVebUAQ8I-BHSXEMNlUFDgV1mwWb5gbYYJ9FqY
-Message-ID: <CAO9ioeX9LjGLwKGFj5W0Gwh8X8_+E1e81Wb36vAHHzg2ZDf32Q@mail.gmail.com>
-Subject: Re: [PATCH 1/2] ASoC: qcom: remove ipq806x Storm machine driver
-To: Mark Brown <broonie@kernel.org>
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-kernel@vger.kernel.org,
-        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDE5MSBTYWx0ZWRfX9fBVHTlhEpL4
- Z+BHzkS0Qp6lzhbovvSAqLa+AaXj3CD5bPA4hEWkRgcbWOO68WR1w3fX5tcdTPXY8IKcVRzWmH7
- ssinhCQm25nFqwasOOT+jYVeAHD5s1nuik8Y10VK9OwUk88BTBwGMQSOm1Z6u9hCX/GBC2Vxd1X
- 1q+KOuP4odUlxxZVqtEJ/JTbahSwMNgIfxs5lSYym6lBuYbs7v+3V66L5xMqn7MTtIu9ZjHE4vT
- uilAJNpHvjb1qZBUshJyyqQIFjdSI+ew/tBD6sHl2WEQnet8QF7diM5BjUvv2KXfw0fC7JG+aT6
- t/vWcKBOjGOVZNetluzBIoXYw8Hqj92+uqgY2V5j4qq4vtQjLi2wmZ7b2C23fXCBDXQBj9aLK5U
- ESnfgpe+FxmrxdMbResptA6G6NvuzBv589yFimtpTJOcqoP9gDZZxNNeRvAakaO5uTkGZ3ZkQfH
- +UUsVvBqNZYtCxAGDrQ==
-X-Proofpoint-ORIG-GUID: ENjhRi5ug4U-m3rKn0-oMPI7zYoH_Uy4
-X-Proofpoint-GUID: ENjhRi5ug4U-m3rKn0-oMPI7zYoH_Uy4
-X-Authority-Analysis: v=2.4 cv=WOdPmHsR c=1 sm=1 tr=0 ts=6a626dfd cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=eoimf2acIAo5FJnRuUoq:22 a=VwQbUJbxAAAA:8 a=7tSWEDlCfLhq9vGkEV8A:9
- a=QEXdDO2ut3YA:10 a=_Vgx9l1VpLgwpw_dHYaR:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDE5MSBTYWx0ZWRfX6Z2MYYqixqSA
- vqw5NQDqldTaWvJa4CsI/1g6ZOHYfbN+ZelSAzR9GL1rKkyrlE3R/4xvm0sCRO4bK+hhVL6aUcE
- AstEgjI8BFRVhmZzdT5mFYeEpyd6ZJ4=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-23_06,2026-07-22_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0 adultscore=0
- clxscore=1015 impostorscore=0 bulkscore=0 priorityscore=1501 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230191
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, 23 Jul 2026 at 22:24, Mark Brown <broonie@kernel.org> wrote:
->
-> On Thu, Jul 23, 2026 at 10:18:47PM +0300, Dmitry Baryshkov wrote:
-> > On Thu, Jul 23, 2026 at 08:38:09PM +0200, Christian Marangi wrote:
->
-> > > Yes on OpenWrt we support 3 OnHub google devices from Asus and Tplink and
-> > > they also use the storm driver for the strange attached speaker.
->
-> > Ack. Then pretty please, could the OpenWrt community please contribute
-> > those to the mainline. It is a quest and a process, but it helps us to
-> > understand actual hardware users.  Not to mention that getting platforms
-> > support upstream would lower the burden of rebasing on the new upstream
-> > kernels (assuming that you are using close-to-upstream kernel) and it
-> > would also save from similar cleanup attempts.
->
-> So should I drop this series for now then?
+Hi Srini,
 
-Yes, please. The driver is being used.
+On Thu, 23 Jul 2026 00:42:10 +0100, Srinivas Kandagatla wrote:
+> The most obvious follow-up is figuring out how the mobile-mode and
+> compute-mode WCD9378 drivers coexist under one compatible.  Jorijn's
+[...]
+> tree without racing to bind the same slave.  I would like to line this
+> uip with Jorijn as a follow-up to this series.
 
--- 
-With best wishes
-Dmitry
+Happy to line this up. To ground the discussion I ported the series
+onto my FP6 tree and have mobile-mode capture working end-to-end
+through the class framework, including PipeWire in Plasma — findings
+and a proposal below.
+
+1) Arbitration, near term
+
+Your probe already returns -ENODEV when qcom,compute-mode is absent;
+v2 of my mobile series will add the mirror check, so neither driver
+can bind the other's slaves regardless of probe order. If a single
+owner of the modalias is preferred instead, a small wcd9378-common
+stub dispatching on the property also works for me — your call.
+Either path can later sanity-check the fused mode the way the
+downstream driver does (EFUSE_REG_29 PLATFORM_BLOWN, else
+PLATFORM_CTL MODE) once register access is up.
+
+One mobile-specific data point for the split: in mobile mode the SDCA
+control space is only decoded on the TX slave. On the FP6, a paged
+read of DEV_MANU_ID/DEV_PART_ID (0x40100060/0x40100068) via the TX
+slave returns 0x0217/0x0110, while the same reads via the RX slave
+return zeros — with the RX slave's standard SCP DevID registers
+reading fine. That matches the downstream driver, which creates its
+only regmap on the TX device and drives the render dataports through
+the RX slave. So for mobile RX playback the function control and its
+dataports live on *different* slaves; a per-dataport slave mapping
+(or similar) would be needed in the class framework for that. Capture
+doesn't have this problem — the TX dataports sit on the control
+slave, so no cross-slave mapping is needed there.
+
+2) Bindings — one file
+
+Patch 7 adds the same new file as my series
+(Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml), so
+one of us should carry a merged version and the other drop it.
+Suggestion: the mobile side keeps my v1's tx/rx split shape, with
+the v2 changes already committed on my binding thread
+(qcom,{tx,rx}-port-mapping staying optional, matching
+qcom,wcd938x-sdw.yaml; qcom,{tx,rx}-channel-mapping dropped). The
+compute side keeps your qcom,compute-mode if/then, extended to also
+cover qcom,port-mapping and #sound-dai-cells. As posted, patch 7's mobile shape wouldn't
+validate my mobile DTS: it defines a combined qcom,port-mapping but
+the description references qcom,tx/rx-port-mapping, and
+#sound-dai-cells is required unconditionally while the mobile DAIs
+live on the top-level codec node. I'm happy to carry the merged file
+in my v2 so your v2 can drop patch 7 — or the reverse, whichever you
+prefer.
+
+3) Prototype findings on patches 1-6 (mobile capture, FP6)
+
+What I ran: your 8 patches on my 7.1.2-based tree, plus a new
+wcd9378-sdca-mobile codec registering its own sdw_driver for the TX
+slave, static sdca_function_data for the SmartMic0 function
+(IT11 -> OT10 on DP1, with PDE11 as the power domain), and hw_ops
+doing the vendor bring-up
+(micbias routing, bus-clock indication, a clock-stop hold; supplies
+stay on the mobile top-level codec node, so hw_init has nothing to
+do — that part of the design accommodates the mobile supply model
+as-is). Capture works: the card binds, PDE11 reaches PS0 through the
+DAPM supply widget, and a 1 kHz tone played from the speakers
+captures at ~46% of full scale through the SDCA path. The bus-clock
+indication in hw_ops is partly a stopgap: the core path discussed
+with Pierre-Louis on my driver thread needs the qcom controller to
+set prop.mclk_freq, and that patch is still on my list. The
+prototype branch (your series + the mobile codec on a 7.1.2 base) is
+at https://forgejo.catcrafts.net/Catcrafts/milos-linux, branch
+sdca-mobile, if useful.
+
+Findings:
+
+a) PDM dataports. class_function_sdw_add_peripheral() derives the
+   SoundWire stream/port config from the host-visible PCM params via
+   snd_sdw_params_to_config(), but the WCD9378 mic dataports carry
+   1-bit PDM on a single channel (the working mobile driver programs
+   sconfig.bps = 1 and port ch_mask = BIT(0)). Result with the
+   generic path: "bps not matching" from the qcom master and silence
+   on the capture while the PDE sits happily in PS0. I prototyped
+   optional per-dataport overrides in sdca_entity_iot
+   (sdw_bps/sdw_ch_mask) consumed in add_peripheral, which fixed it;
+   maybe DisCo has a proper home for this, but something is needed
+   for PDM parts.
+
+b) The IT33 micbias cache-vs-hardware workaround in your patch 8
+   (drop cache + rewrite from pde_pre_pmu) ported directly to the
+   mobile part's IT11; I carried it prophylactically and haven't yet
+   isolated whether mobile strictly needs it. If it does turn out to
+   be family behavior, it might argue for the class handling
+   has_default controls on PDE power-up generically.
+
+Userspace needed no changes beyond UCM: the class-driver card works
+with a ControlExists conditional in the same profile (the stock
+branch of the conditional is the unchanged stock sequence).
+
+On interrupts: sdca_irq_allocate() got a valid IRQ out of the box on
+my board via the bus irq domain; I haven't exercised actual SDCA
+interrupt delivery (capture doesn't need it), so I can't yet say
+whether the INTSTAT dispatch issue in your patch-8 comment reproduces
+here.
+
+Longer term: until the framework covers mobile end-to-end (the PDM
+transport and the cross-slave RX question), my posted mobile series
+stays the working mobile path — the v2 above is about the two
+drivers coexisting cleanly in the meantime. Mobile capture converging
+on the class framework looks realistic (my static tables came
+straight from the posted mobile driver); I'll keep using the FP6 as
+the mobile-mode test vehicle for the next revisions.
+
+One dependency note for your platform posting: SDCA register access
+on Qualcomm controllers needs the SCP address paging support now in
+soundwire next, commit 999f80904763 ("soundwire: qcom: add SCP
+address paging support").
+
+One small nit: link [2] in the cover credits "Jorijn Rikhof" — the
+surname is van der Graaf.
+
+Thanks,
+Jorijn
