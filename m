@@ -1,114 +1,125 @@
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FE364F7998
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 18:46:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5B3854908B5
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 19:00:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784832417; cv=none; b=oNNvcr3Yk4FbxeHjXegEMkrNPEk+SAahAuco9dEuClhiPUR6AHisctJnJj5l/7lJ7faN97WZv4W8hRhQs4Q4c+DGDkIj3o9uZj8y8lRoo/wHLoz72TvWbDIq1yvwFfae///B7xbZj213rLtbCy9PYy/+QPFe7ND3KLL0K7/tlYg=
+	t=1784833236; cv=none; b=NXZoT6fiMm3xQCKhHNcKbDBavd2adZ+iAyTBo2wOZ/4DhVS+1j1HclBj57vijmaRyq8IBZOmjD0mgMmk8oOeumoTQThdpK+j/65rraGDesCoZ9cxOzGpqnGw9wD0hPsuMQ3Jg19J7dkCTr6J+IVi1FmJ8e3fd0IR5NB5sgdNiQ8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784832417; c=relaxed/simple;
-	bh=JlumXXFYa4YT2z0t/Rv8VpE7rH6ygFShwNbbT7uFZdU=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=X1yI2jrplD7k8UE50YiHsPypj+PwG+xman/tOEVdG8KYmgtO8TzKeyzBx7Qn6ss9EQdOmGf/mt6y0GObYwotOc77w6hvMRz7iU4FknB3XVMLSN/ihVDZxrw43ASfrYVjgz5xcWZXnd4ODSnF/QMD+R65jJodgSlaQS3f0iJMsdE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=fHyUgATG; arc=none smtp.client-ip=209.85.214.180
+	s=arc-20240116; t=1784833236; c=relaxed/simple;
+	bh=bx+yq3b6NMB0dC2HA27s9YD6S5hAkMNki5KybhjC2XE=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=XjC8xUfRn6NOp6EYTK5IRPR85JnG74VJXXrlmPHf8qaHlhTUhzpDMYCyOl/+/RTfx1FvrXWuztEO2ym3jH1ztwN058pTFoMiIskTNmGWYww5TvbNZVDe7ec++yNKh1zI1yn60zFIZTYcxSZIgiWrJUrBcsOX5dBYHgQXu6kMBJ4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lkfFuwu4; arc=none smtp.client-ip=209.85.221.46
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="fHyUgATG"
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2cc97653887so12467955ad.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 11:46:52 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lkfFuwu4"
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-4798bea72f9so670961f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 12:00:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784832409; x=1785437209; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=inEAHAT4FZx62nofTUdSreIh00cPh6gTjTfAeZvFyf4=;
-        b=fHyUgATGzbfJZ2vlpUBJVp3yHBjyEQS5sswCIU+IiRFhFsId1U5H605OqFcKZ5vrdu
-         n4Cm1lK5dxN/St6pRWMW9qoaFjT0vkRxROtV2ajqGZGDaVBjTRokb5lSb9El9sbOfMaf
-         ckjXvJV0YrCmTO/Kg2SAk6vEsWEJEoQBAjRCQ9EDZmanz1WtOypXp6Ln894rMLA9zX9c
-         lRg8M+rtEEyvB7FfT0+qxhdVCsWOhjV+GU+DtQqK2c1AqK60aiSansBLnNSceQUDhFsq
-         nVf3cTWkjwvXExj1CDdEuPlibtyPDDypRehic92vK9OkV7n1Qz26JA+DSv/QERXOhquX
-         Sy9A==
+        d=gmail.com; s=20251104; t=1784833230; x=1785438030; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=HPfC1v/GC3kC9s7ibLpR2V6inqtkWGfr1/MYygbgWAs=;
+        b=lkfFuwu4E0L2SibyuZKjrcCS82KSoJowg7embwRnKvI/J93i7q60y5OYtZ4+KXpIFM
+         8dUsA5UzToWXbTV+GpAuf1oxT48CGl0z5Psh2kvyntaEHlSY79Jh2gitcvFNEl6eXp1l
+         fTAImrvbrYUI8J6+tgBobNRTr/2jRkyAMF92B5rQtS2ISpe7lKV32VShT+4F+0BV33bZ
+         xEi+v3iUy7kBpEmIaW9B5krsm+fhTbW6hVt8PSQVV/P2k9dBu/JVNL1uDIfwqXc9EgBu
+         95Xv8eNI/co8SugobcJBDZ6Uwd2lYkk5ox3y672GD89daBDNDriQPTtfN+dqqNPZR/j+
+         vf6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784832409; x=1785437209;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=inEAHAT4FZx62nofTUdSreIh00cPh6gTjTfAeZvFyf4=;
-        b=ssnVQyxQLCn65YfwkVP2QvyOuRU8JYdas1cOhAcQ5FhWnfwj0q80nEr6ePEJvlW2BA
-         LZ9vQQ+TXpw7FB7P7LVM1fUCNCEWlAle26RLxzUfJKGGRXGpfUYfeDQKww1DIhUrRZs7
-         MyHK+VPpOjT/BsEEYZ8AKmTaVgxbwE8DkuRv2R8U5HkOusO5UaO0uXOHtSrZQnJ3e18U
-         Z8vJ18Fwd8120S+EP6YaHFIK79zkUKOcWD6TU4Hw+qTL3vnKg6C/RlXfd35MJpjEFgC6
-         XvQhg9fWj7STRPTSW+anKxipUoNiwjWIbVtYVQ/TFdqhQoIQVA5C4Q2B3WN0ZcDLRAIe
-         WGjA==
-X-Forwarded-Encrypted: i=1; AHgh+RrCQ9bm5vDpOwSJHquAQ3d8eHTLQN90v65pz2fBGTA7qzsF6KaU9kZ7G6Tlji7ISged0jdvRSviEy/wj49/@vger.kernel.org
-X-Gm-Message-State: AOJu0YwzLzb4qY7TidwQEW4mp4W2gaZwuY1PNiD2LJO9zZni5C6grElB
-	ak/D9411UuD97PQIzVQbZ+GhvJW9rOwpkU1NTkuli5OXElzMd/qPs7wP
-X-Gm-Gg: AR+sD12HLbD+FnWjE+qlBDP1ykAHbfEB+ogE9w51/GWTLVoOWl5l1kYCFetoxXgLlI0
-	Z+lLni805gVJIOsq5QxxLMJhLxKL4ZAScpLe5Q9M+4WkORwyLyPHoWXr885LBMIi0pPJUUn/y+3
-	ZozUgs0nDMiVGvmHKpEpTw1bsMFV9RUTWCabrg0POm/dgGGjRpgot1+vgHXZXNmHbH+/trdYMLM
-	jLaacIN6o6s5n+Cc6hX4OoBuRM7DvRJXLZEHI5Yo3zkBrCKcYX3bpuOqWQm7VUBm343v/q6FUjH
-	me2cZVz65Yj1GiMKEv/oAqBKhkouo1c2RCQK0djAqUvT2QRLbyM8/HnTzKKzwAl5Elxuwk3pmSA
-	O75h3rYGvR7jZJjyUXsWgJmq+2osMnlzSOPd6plFTn7ll9sSaLMD1L2CaGJp8rarWQrL5f1Lr
-X-Received: by 2002:a17:90b:5603:b0:38e:7eb:d07b with SMTP id 98e67ed59e1d1-38ec6622023mr4815354a91.34.1784832408660;
-        Thu, 23 Jul 2026 11:46:48 -0700 (PDT)
-Received: from ubuntu.. ([110.9.142.4])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f03af8a45sm308155a91.10.2026.07.23.11.46.46
+        d=1e100.net; s=20251104; t=1784833230; x=1785438030;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=HPfC1v/GC3kC9s7ibLpR2V6inqtkWGfr1/MYygbgWAs=;
+        b=WxtmlFeorla8J9sm/2Ak9i5rv1OoyZOZrcOPFulCDI1U41GZodAdQDvl/6Qrk9s7Or
+         1rX4/xcAxM+xrf2o0gsjla2+rGlcaX9WV1fnAhN4+2HFrwzAqPpHlv+zOG+hE+qpE/6r
+         jkwLbgf8m6OsRwyG9CxqASOTB3Kl+SK5lZMnlaRAm3npVPVzgX4a1aHLosXuvoGVt/Aw
+         FdrAsVu1KWsB2kazWhkCCFdOqQmKgRXJrQQWm0tNecb0dDM9M4it90zLOh5UKLcx+fzE
+         syl9ykI+1OzMncnsTm7WwRmjhvIUB81akaaz5KI0OtPFjX2CtxN4yrlkLjzrR9icFIxC
+         7yWg==
+X-Gm-Message-State: AOJu0YwNVJAUAmMB8ILgWMDEpSAWuaUv7buqKH7NuzoA1nInBv4Od79E
+	96IKeIBNdWp07FfR4j/rR4VPKXiSwI1lm6vcE3d/HhjOTZuiZSDVPW8=
+X-Gm-Gg: AR+sD128ta3BdQaqJR/qvQ65NwvdrpdohdNEkH6D9SfL3Yzs1XdbbZuRsZBTR4QD0pj
+	7J/HrTWXsGNV134Wg+IKYEfhex6TSeyi/6zsQcw7mry4n/uK913gb6yEES6ZzXtK8s7rkpqcR16
+	Ecs2+k1uC36KNTGODuG9o8b7brx8xil/rJoRQj57GaB8ruGW3XKClwCDIvluzleXxIrV9Do4wTh
+	S8bVO7m7IVtyp9RCFVtk7pc/zZyJJtlrbIvX4OorYXpUK41lZ9L/JmkcJhnPlmCElA9DBLaTlhI
+	DQdHFeoypQ9PxunQ6xKbeYVphOqs604/rSVDp5YywkamDuCbcsBOrDWlfdX9sDpMaZZXzze9VQl
+	gCGE4t/FPm9rT03OFihnS/Nix6pJb9VDtPRhnDL1GrwnbHk8uqxJAqcm7+L92K+WDZZmAoY6xjL
+	iKADTWTEEG1ItAn0WMb5w=
+X-Received: by 2002:a5d:5d0f:0:b0:47f:85d6:9e7f with SMTP id ffacd0b85a97d-47f8da5c8f5mr5401418f8f.3.1784833229762;
+        Thu, 23 Jul 2026 12:00:29 -0700 (PDT)
+Received: from [192.168.1.67] ([2001:b07:2ec:601d:4b26:1672:75c7:805a])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f85bb5127sm17008552f8f.10.2026.07.23.12.00.28
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 11:46:48 -0700 (PDT)
-From: Sang-Heon Jeon <ekffu200098@gmail.com>
-To: Julia.Lawall@inria.fr,
-	Sinan Kaya <okaya@kernel.org>,
-	Vinod Koul <vkoul@kernel.org>
-Cc: cocci@inria.fr,
-	dmaengine@vger.kernel.org,
-	Frank Li <Frank.Li@kernel.org>,
-	linux-arm-kernel@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH 19/36] dmaengine: qcom_hidma: remove conditional return with no effect
-Date: Fri, 24 Jul 2026 03:45:21 +0900
-Message-ID: <20260723184538.3888637-20-ekffu200098@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260723184538.3888637-1-ekffu200098@gmail.com>
-References: <20260723184538.3888637-1-ekffu200098@gmail.com>
+        Thu, 23 Jul 2026 12:00:29 -0700 (PDT)
+From: Anna Maniscalco <anna.maniscalco2000@gmail.com>
+Date: Thu, 23 Jul 2026 20:59:25 +0200
+Subject: [PATCH] drm/msm: remove objects from evit list after pinning them
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260723-evict_list_fix-v1-1-1a1d80bf61cf@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDcyNjXaCa5JL4nMzikvi0zApdw5RES6MkIzMj88REJaCmgqJUoDDYwOh
+ YCL+4NCkrNbkEZIpSbS0AEztju3IAAAA=
+X-Change-ID: 20260723-evict_list_fix-1da92b2627aa
+To: Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ Anna Maniscalco <anna.maniscalco2000@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784833228; l=937;
+ i=anna.maniscalco2000@gmail.com; s=20240815; h=from:subject:message-id;
+ bh=bx+yq3b6NMB0dC2HA27s9YD6S5hAkMNki5KybhjC2XE=;
+ b=Sf0f2MSJU/GLwQvFR0Js5/lGuEXjpQ/cB+5Q5vAvT/u4tsJerowqKCiNzbY+v1LFc8hMeXWyH
+ eJl+GGpOgP2DhLd2P54gUt50xzWINULiQgLK8Rh3f8raD6Wgylvd55t
+X-Developer-Key: i=anna.maniscalco2000@gmail.com; a=ed25519;
+ pk=0zicFb38tVla+iHRo4kWpOMsmtUrpGBEa7LkFF81lyY=
 
-Both branches of the check return the same value, so the check has
-no effect. Remove it and return the value directly.
+Once objects are pinned they should not be kept in the evict list as
+that will cause drm_gpuvm_validate to keep ieterating a growing list of
+objects needlessly.
 
-This is the result of running the Coccinelle script from
-scripts/coccinelle/misc/cond_return_no_effect.cocci.
+Once an object is pinned remove it from the list.
 
-Signed-off-by: Sang-Heon Jeon <ekffu200098@gmail.com>
+Signed-off-by: Anna Maniscalco <anna.maniscalco2000@gmail.com>
 ---
- drivers/dma/qcom/hidma_ll.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ drivers/gpu/drm/msm/msm_gem_vma.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/dma/qcom/hidma_ll.c b/drivers/dma/qcom/hidma_ll.c
-index 53244e0e34a3..f081aa787f0c 100644
---- a/drivers/dma/qcom/hidma_ll.c
-+++ b/drivers/dma/qcom/hidma_ll.c
-@@ -677,11 +677,7 @@ int hidma_ll_setup(struct hidma_lldev *lldev)
- 	/* configure interrupts */
- 	hidma_ll_setup_irq(lldev, lldev->msi_support);
+diff --git a/drivers/gpu/drm/msm/msm_gem_vma.c b/drivers/gpu/drm/msm/msm_gem_vma.c
+index 1a952b171ed7..4422677f095c 100644
+--- a/drivers/gpu/drm/msm/msm_gem_vma.c
++++ b/drivers/gpu/drm/msm/msm_gem_vma.c
+@@ -458,6 +458,8 @@ msm_gem_vm_bo_validate(struct drm_gpuvm_bo *vm_bo, struct drm_exec *exec)
+ 			return ret;
+ 	}
  
--	rc = hidma_ll_enable(lldev);
--	if (rc)
--		return rc;
--
--	return rc;
-+	return hidma_ll_enable(lldev);
++	drm_gpuvm_bo_evict(vm_bo, false);
++
+ 	return 0;
  }
  
- void hidma_ll_setup_irq(struct hidma_lldev *lldev, bool msi)
--- 
-2.43.0
+
+---
+base-commit: 9a967125427e03c7ebc24d7ad26e9307e8403d4e
+change-id: 20260723-evict_list_fix-1da92b2627aa
+
+Best regards,
+--  
+Anna Maniscalco <anna.maniscalco2000@gmail.com>
 
