@@ -1,42 +1,46 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91B383CC33F;
-	Thu, 23 Jul 2026 07:56:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52C78361DB8;
+	Thu, 23 Jul 2026 08:11:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784793393; cv=none; b=oPTGMX2Pamk0WdLP1359k8/d9YzTa9ulFCB58s4IuPmc6qNTkBYLUg1Qj2oid0Dh6kKkIdoU9ee5rvAkj6AmeGWlpdb2XYnz3pNiPQapPlgBDqCceC7AZAy+SWvWIMyuGxjpyNjYaH14IT9eMO0I1fhMTYRbHqZyywu14jKLafU=
+	t=1784794300; cv=none; b=fAp/WZJhBzq2JhwKO7+HNNnjHsYYuYo6Nkkwk7LOPni62kKO1IugKG76tVa5ZnLgTHeX1thrqDbKGSMrdpI1QymIK4Qu8a8P7TzQlqNo0ZMKSv/TAUjn6UbXBMn3rOC0rm89FOxh4V28kEqtyQZB98pOMcdNU6rbwFt+xIRSsiI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784793393; c=relaxed/simple;
-	bh=oqDP8pUg3OGPxsnTaYKzPS/pXbJbOrSbvTvi2v5pbHY=;
+	s=arc-20240116; t=1784794300; c=relaxed/simple;
+	bh=tbsAfD1LeRKHS0g5kwtvwbaz/gKGtbOq5mgBCqt8awg=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=NU9SJktFyKY6PDC2Aoss3i/mEdN7sQwba2JjWJQFRopUXbtgC5rCsU/hyDv7P5zApvZMcN/l0pGQ+JDyxDCk+vGBXGdc2YxUWya9iXnb1JI3YyuQ/dkDksLAEyom5knjtVIx/SzZh0tbDt2NsfaHjIo7FHOYtBgw68yCTkmgELw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BbXo2/pw; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=uiet1mAjUSvYsLDahRGcZQQSPVInW+SzOoeS5uueyNiXrKGj5+W6QeaLByu7V/XMA3Z/ndUBarovnsdEjXjVTtTyZE/7iWid5kKcAghYOKcM9XWEn5yx533Doxv5YhmEQiPSjBNjXXCrXLzeAdK4nS5f9703Nm1F9j6mzxKBFY0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GL3PXPxd; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BbXo2/pw"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F27D1F00A3A;
-	Thu, 23 Jul 2026 07:56:30 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GL3PXPxd"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19B281F00A3A;
+	Thu, 23 Jul 2026 08:11:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784793392;
-	bh=kU/hB53yzACw3nVTUg0q9qx7GTT/U7sckUHUBUwWUEw=;
+	s=k20260515; t=1784794299;
+	bh=4ZEvR3EwzSZOEHcX1Aaaa5DIzQKxyHgbGZwUMRDqrzc=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=BbXo2/pwYqdP1doS04++5hYTyJclRcCO5ns00F1DJqtW4SOhIfAqLPyS18NPk57rA
-	 19CPI9W+tYHC5dhsGuny9wIp2R2lWlke6ZAONrV+oLp0FTq/pSfHDkYWU8wuVvU69n
-	 egdCvfBoVPPu1QHlW01Ejzh4+QFSy4uNTrUWIXHk8cBa6TSTuQWdhR5ZIUIajulXih
-	 eosT4xK13lUpoG3u/dkUTo3PE1+eEcIEVvj/TtQToB4LC4wOqsupfK7DbLrHvdWA7r
-	 mdFCAISYUqfqpqPgBBGVgHydJ/WDGGeIi7CkdUCC+Ldb5Jxw7LMpRm5ypbvg9TocIU
-	 Pesjb9mnnvpQg==
-Date: Thu, 23 Jul 2026 09:56:28 +0200
+	b=GL3PXPxdNpxF8Vv+isQo1m4KfV2ux5FtHWJR7Lx6YAQU1ySePwfpgYtiAJH/gfcdC
+	 /H4BFUCdtqRZqAFofTSDRcDeF/BZg+iJLXAsSQzlug5vfcmwsAzNT7RyYa3kFvsLsH
+	 Krb0xfKFDldff2Hy9WkjYc+9RjKmPdAuWjA2ZKGqWfaKDICJvBC7MwQRlNJZyLvEwH
+	 unbPKldqmglNPEem2JOIN7Gu4EsmLt77RYffctNyTFdnTm83EcAhpLBg+Ke7VWlqnJ
+	 L+5X50YldnC4oKJClSc1SlSykxsma4Qc8fAQEH+K3SFI2maRLqRSQ/u5MFBrWRqOtI
+	 e1Ut8frEXZ4wQ==
+Date: Thu, 23 Jul 2026 10:11:33 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Kaipeng Zeng <kaipeng94@gmail.com>
-Cc: devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	conor+dt@kernel.org, krzk+dt@kernel.org, robh@kernel.org, konradybcio@kernel.org, 
-	andersson@kernel.org
-Subject: Re: [PATCH v2 1/2] dt-bindings: arm: qcom: Add Acer Swift Go Pro AI
- (SFA14-11)
-Message-ID: <20260723-acrid-legendary-tuna-4affdc@quoll>
-References: <20260721082410.18275-1-kaipeng94@gmail.com>
- <20260721082410.18275-2-kaipeng94@gmail.com>
+To: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
+Cc: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>, 
+	Stephen Boyd <sboyd@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>, 
+	linux-hwmon@vger.kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
+	Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+Subject: Re: [PATCH v2 01/10] dt-bindings: hwmon: Describe Qualcomm BCL
+ hardware
+Message-ID: <20260723-radiant-scorpion-of-hurricane-cbed57@quoll>
+References: <20260722-qcom-bcl-hwmon-v2-0-febe2805e17b@oss.qualcomm.com>
+ <20260722-qcom-bcl-hwmon-v2-1-febe2805e17b@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -45,37 +49,35 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260721082410.18275-2-kaipeng94@gmail.com>
+In-Reply-To: <20260722-qcom-bcl-hwmon-v2-1-febe2805e17b@oss.qualcomm.com>
 
-On Tue, Jul 21, 2026 at 04:24:09PM +0800, Kaipeng Zeng wrote:
-> Add Acer Swift Go Pro AI (SFA14-11), a laptop based on the Snapdragon X
-> Elite (X1E78100) SoC.
-> 
-> Signed-off-by: Kaipeng Zeng <kaipeng94@gmail.com>
-> ---
->  Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
->  1 file changed, 1 insertion(+)
+On Wed, Jul 22, 2026 at 12:00:06AM +0530, Manaf Meethalavalappu Pallikunhi wrote:
+> +properties:
+> +  compatible:
+> +    enum:
+> +      - qcom,pm7250b-bcl
+> +      - qcom,pm8350c-bcl
+> +      - qcom,pm8550-bcl
+> +      - qcom,pmh0101-bcl
+> +      - qcom,pmih0108-bcl
+> +      - qcom,smb2360-bcl
+> +      - qcom,smb2370-bcl
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  interrupts:
+> +    maxItems: 2
+> +
+> +  interrupt-names:
+> +    items:
+> +      - const: max-min
+> +      - const: critical
+> +
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-
-<form letter>
-This is an automated instruction, just in case, because many review
-tags are being ignored. If you know the process, just skip it entirely
-(please do not feel offended by me posting it here - no bad intentions
-intended, no patronizing, I just want to avoid wasted efforts). If you
-do not know the process, here is a short explanation:
-
-Please add Acked-by/Reviewed-by/Tested-by tags when posting new
-versions of patchset, under or above your Signed-off-by tag, unless
-patch changed significantly (e.g. new properties added to the DT
-bindings). Tag is "received", when provided in a message replied to you
-on the mailing list. Tools like b4 can help here ('b4 trailers -u ...').
-However, there's no need to repost patches *only* to add the tags. The
-upstream maintainer will do that for tags received on the version they
-apply.
-
-https://elixir.bootlin.com/linux/v6.15/source/Documentation/process/submitting-patches.rst#L591
-</form letter>
+Binding looks in general ok, but feels incomplete. If this is battery
+limiting hardware, does it actually need any battery data through
+monitored-battery property?
 
 Best regards,
 Krzysztof
