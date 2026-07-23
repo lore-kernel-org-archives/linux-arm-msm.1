@@ -1,61 +1,63 @@
-Received: from mail-yx1-f41.google.com (mail-yx1-f41.google.com [74.125.224.41])
+Received: from mail-yx1-f43.google.com (mail-yx1-f43.google.com [74.125.224.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EF1B2D592C
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 01:24:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 218572DC32A
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 01:24:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.43
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784769862; cv=none; b=OYdE2IZGguUDVi9RDJf6X9+wSIVkHxsPmYChW8elUGggQ/qrdM5789vn3rl/jltHl+tCuvugacHnw4Az055o8E5GKnxQGcTIhUtAAFWQ7hcOeNL8yTFiDKTKYXmoJVz+XK2hdZCAYN+sgGby0rMwqxd82Vlx08CBQSoLHWUzkDo=
+	t=1784769864; cv=none; b=TL99Ol/4sonc5h/f5BARvIIy6c3J8AsA6zqiiH5iOZ1ntvHxNJ9smVkojm9Y627KS8jp0Hrk0S75zh238J02ytBktpiYMEAp0G+WFNOD5X1YHiTX06oRg8IONI1qWR67v1jyy+pydB0ACAP1A8YSLz1Yxz30PeuT7GZ/1Rh45OM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784769862; c=relaxed/simple;
-	bh=lMUvG8FMcDQny9fNqRp3TCG6/uNRxCa0yHENbOIbwBM=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=APe56Qn/GGDdnfp5bRXiNlV3K+vJQmRi4C1oxeAMpsNRjW62q21YPOhrN5/uUn6wxgO1VPLw1LQqLn0T92pDb065UvbouLiJWyJAazD7jodFsa4ixhe2sgU9DJy4Qg2rJwzhWR44Cn25BX4WKY7e00BwemOWupe/+NSoVc8dnmw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Kh+L3AoG; arc=none smtp.client-ip=74.125.224.41
+	s=arc-20240116; t=1784769864; c=relaxed/simple;
+	bh=LnhLqCtXLycdS/7QOpLkbEiXHoC7lU00ZBptzqR4BvY=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=chM9EVgKZRPjbUuFLPORI27mC9SE6O8vQUONdlD+WbwysPz/Jud1PMsdGZQv/s7ok7wW2cQZ3kGWiEVgcIqAl0oyyvTibkrLo1Ru8XMAX3JcgD7NmObmNc4LkdwoQT/DmIBqxpD1PCaGMR57TZGPWoQ0J3zOJQHK9r/ctoajlEI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=OwSZyqed; arc=none smtp.client-ip=74.125.224.43
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Kh+L3AoG"
-Received: by mail-yx1-f41.google.com with SMTP id 956f58d0204a3-664c6304683so56506d50.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 18:24:19 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OwSZyqed"
+Received: by mail-yx1-f43.google.com with SMTP id 956f58d0204a3-6689402c7bfso52564d50.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 18:24:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784769859; x=1785374659; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=p22cXgqkOK2Uxhc2g0dbrDiY3ACKRgSdYIBGvHqDRE0=;
-        b=Kh+L3AoG4Ukl/AMbbfjZWAeOjnlNvPUbtLm7ECBy6kDEsE2pC21MUlgtDk0IWfZf+c
-         oTOAdaFKIcH7RzGeWawTNwsdF4xkZtbLwnfSWyAhrFWRAbyB+UHuIXOtrBj03kUWD2/h
-         3MxSRN2PKoksLYaOYEj4C83qGOzl+2iE6RxlRFhTYy3+AS5ZIHA39jjq2sHmjEl/H5eO
-         LvnnH0+FAKvViOAj+fN9rBjMNPO3v7p8ldlV/k3MWHmiCU49SiAWgWLznymKI9A8D+R6
-         G7v5UOoLtTh47PBUakrnX62nPyVhvnsMqLI1kgTdOOQLHoorgBJfaNnTE4TSjlaSprwO
-         gsEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784769859; x=1785374659;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1784769862; x=1785374662; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=p22cXgqkOK2Uxhc2g0dbrDiY3ACKRgSdYIBGvHqDRE0=;
-        b=ecnop58GrQ58FTJ6EPYofmRIUIvFzujc7PJEj3UvxinEwPI6/ob1xIiTqKrfLDtjg6
-         KwMS+O8sXDAkyonGPw+WWelf7nS+zHzqfhXJrB5OZtq5p3aN8R/o+tDo0hXJ/+fcChmG
-         nRgcTGRIvRJIol67mQH8AAyOUTFGbu7oXW4h376ZeJpIeoYsDQmQxSfgRW+FZKKQexEa
-         SkXEUndrCBqLSlDPwHPGDkzcYNtlzB2vDBbat9msnybVDJBbzXQ/mwZYpmMPqrKRCWjO
-         wj1hiJew6070xOUfbop/+Q0O1JW+fptEoVnNjf1f9WGHCNkY896sO2o6E4qTHbe742UN
-         DwcQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rq0YeLKPaYGuJFh4nNFaETBM8T1LDfklgk4LevtvXlXn1DomI8ZefiKa7mmerojQ91jXId278gFpbXhtMhf@vger.kernel.org
-X-Gm-Message-State: AOJu0YzrDNy7adiT66bUyhZAdpp3wV54Sje6x8cc4dXX5dCy7Oq06l8n
-	8io8dJ0/H8AbSTeRJQmA1tWzjt1tRaJb/kk7hm/Q+Ozwaew3RG3hlMur
-X-Gm-Gg: AR+sD13cNk16cUVs8H+HSS2pK0LWR66EyR0Z1wygQxPmndLnvaWAE7jFKOm5Pdw4FjP
-	WNk6bnyQNnJ4mixIQz6Rw8KaxGk68OHokIx5QnwdxhgoLtx7zWoFDL/MyJ1Q4J7PvvSDLyLz/sf
-	WXYHZSN0j3Nz3tf7r2icgq/mU5TH5QNn8/+s4L+a9auPn3N/YO3f45MjSTGT796Kxz9/qUXIq3+
-	ToMhnX9tki1Xh6VYuzFXMEKwR1NX51UjjzMJDQJsui0qSvpTdYdtpMzLZxyEOLGZ+KoGg3/tAkZ
-	yM9W88u9Wdb0oOgXEqQgwaxy+bvqjgOfxqhz2UcI9dG7H2zIrviZbsnT8SSAF527yXXsBxPewHJ
-	mt8i7880mjYpI/LmO2UjxC/l7Rmieot22zSoLbEWVX8+nUUdVylMBVww9UhpYwAZFOehfbGMs3M
-	JZK0LgvtDYvhCZ+R3YaTLOaXsgzHT/AtY2Yp1AnyM=
-X-Received: by 2002:a53:b884:0:b0:668:2f2b:f246 with SMTP id 956f58d0204a3-668a5041eb4mr198296d50.100.1784769859021;
-        Wed, 22 Jul 2026 18:24:19 -0700 (PDT)
+        bh=2b7MZm7+ICouxJH7SNvKRjGaatdEuN4EiW++/CDI8dM=;
+        b=OwSZyqedpApg5deu1lXJmL3sIdM/KzKFEkddCLO+bk2Pb52cxEgemJjs260B3RaqF1
+         pd/i9aym27uoSIhKbKcwBeyb8/TO2I5okL3IIbMWeIAO95JtDvUGpHIF9+do3S/kLCTb
+         E2kPF8INYAEf5HplO6QWOHtcMeAL3vzEnAqX3ghorc9C9Pwto3+v7ZTCCQJfvmu8LWyU
+         hsHniJ0LRSMg3vvyCeleZgxq0X66pgqVTkR0n8JWlrfdiaxNQ4rRuT/vWE7yl0s4aZor
+         mfTY2HHuHBv2xOeoa59KOJZCwGksH7DuUySKEGJe/BEXmBr6wELB0KoPPRwYsPysNPv6
+         2xZQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784769862; x=1785374662;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=2b7MZm7+ICouxJH7SNvKRjGaatdEuN4EiW++/CDI8dM=;
+        b=E5/B0kmTSCd8YZEESc5QB0VuuWYB3qqU2HlwTF1OCmQ0mMbSXxSCJHTxA8E4PocqS7
+         MOqTqoyNZPuH76gCcmdwwOYa8dANwN4MoZYrNO+n3fhi/1CyKNpJ8Fxt9olT7hrM79CA
+         girjhD/8GwmoltMZ+8FolsaJf4dpF4o3V4POj/BaUDmVKjbBXkJPPm6MYN9tn6T3Pdp+
+         aEXPlXihWZkfKckC3OCHTR3EkVZfzmzhAGcHI2ENA9tY8IADPQ702f5WktY8i4bWspCk
+         h9X/cadsP5hMSLPe1gLwnXLq4bz4seFcSEn30x/+T0KG2+fziCqXpVupXKHjqUzm0CI/
+         3TGw==
+X-Forwarded-Encrypted: i=1; AHgh+RpvPbvqkyHSXRrKCBQs52hKzYjbrLzTypLl4ua/J1du8dnc/rGjDLMMzSDvD8syeTr3pPGhU8HQZTfZe5z2@vger.kernel.org
+X-Gm-Message-State: AOJu0YwWjPy+UFlhKoKPPyshbJGn21P7v0ZQsbqooT34IoLL4S3jPuoQ
+	ognwZyTIJGAS3TLJg17WxJzLaFIRwQwIqCTc4U6waZopOqeLM9OtMPw2
+X-Gm-Gg: AR+sD10v+mqLq/3FSpwZ6Xd+kwKmyawbPVFsbdcFV2enmbFisxZEmpHteFzZAcWk40t
+	dBoqcIjultmEOWnNiHG8AIXGUnJJuADOi8hijFiG8NQm543sjCVpFIHogeJM2cQ7VK2gVz7BxHg
+	hjXu4fQehV56Z5iE61wx/nZheN/k55Du7NyyNJ9y7OQ7N16HLpJZM9XgazeBcqjy8OI0NCIxVXv
+	robOE4d78qsYKKcdr8f0esQvIf1rC/aUco9LTgttDrLxnexVtZfV9h8dlCdyEKq2hjiMU6Uh+qR
+	2GOuLsYdaAiklgS9HAJBujjGfl0kBjfdvRObuetfTAapGcUC84Ya3J+9q8przJoXXX5iIJQPBVt
+	vNcJQ/p3ypp2/v+N6Sn3BTyTl8MGqlcEmnMfPWEXI4bkDtVwb6zS/lMHDmGYKP7MpWf9TxSAuvw
+	iNHfVWDLvahqoSVhAQjgAJsUzKD6xt
+X-Received: by 2002:a05:690e:4381:b0:668:4cbc:9c99 with SMTP id 956f58d0204a3-668a4fa2ae7mr177580d50.86.1784769861965;
+        Wed, 22 Jul 2026 18:24:21 -0700 (PDT)
 Received: from karli.attlocal.net ([2600:1700:7270:4eb0::19])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-6689056dfbasm2319684d50.9.2026.07.22.18.24.16
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-6689056dfbasm2319684d50.9.2026.07.22.18.24.19
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Jul 2026 18:24:17 -0700 (PDT)
+        Wed, 22 Jul 2026 18:24:20 -0700 (PDT)
 From: Aneesh Pradhan <aneeshpradhan2004@gmail.com>
 X-Google-Original-From: Aneesh Pradhan <aneeshpradhan@acm.org>
 To: Bjorn Andersson <andersson@kernel.org>,
@@ -71,10 +73,12 @@ Cc: Brian Masney <bmasney@redhat.com>,
 	linux-kernel@vger.kernel.org,
 	Catherine Frederick <serenity@floorchan.org>,
 	Aneesh Pradhan <aneeshpradhan@acm.org>
-Subject: [PATCH 0/2] clk: qcom: add MSM8920 RPM clock controller support
-Date: Wed, 22 Jul 2026 18:24:13 -0700
-Message-ID: <20260723012415.48288-1-aneeshpradhan@acm.org>
+Subject: [PATCH 1/2] dt-bindings: clock: qcom,rpmcc: add MSM8920
+Date: Wed, 22 Jul 2026 18:24:14 -0700
+Message-ID: <20260723012415.48288-2-aneeshpradhan@acm.org>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260723012415.48288-1-aneeshpradhan@acm.org>
+References: <20260723012415.48288-1-aneeshpradhan@acm.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -83,38 +87,39 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add MSM8920 support to the SMD RPM clock controller.
+From: "Catherine Frederick (coolguy)" <serenity@floorchan.org>
 
-MSM8920 is essentially MSM8917 with MSM8953's modem stack, which adds
-an IPA block. The new rpmcc table is MSM8917's clocks plus
-RPM_SMD_IPA_{,A_}CLK (same IPA IDs already used by MSM8940; no new
-dt-bindings/clock/qcom,rpmcc.h entries needed).
+Document the "qcom,rpmcc-msm8920" compatible for the RPM clock
+controller found on MSM8920.
 
-This series is split binding-then-driver so the shared clk-smd-rpm
-changes can land via linux-arm-msm independently of the MSM8920 /
-perry device trees (requested in msm89x7-mainline/linux#48 review).
+Signed-off-by: Catherine Frederick (coolguy) <serenity@floorchan.org>
+[aneesh: split the binding into its own patch per submitting-patches;
+rebased onto qcom/for-next oneOf compatible schema]
+Signed-off-by: Aneesh Pradhan <aneeshpradhan@acm.org>
+---
+ Documentation/devicetree/bindings/clock/qcom,rpmcc.yaml | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Based on qcom/for-next (d36de2e50966). Applies cleanly there; also
-applies to torvalds/master with a trivial yaml-schema context shift
-(flat items vs oneOf) if preferred.
-
-Hardware context: needed for initial MSM8920 + Motorola Moto E4 (perry)
-upstream DTS follow-up. Fork PR tracking: msm89x7-mainline/linux#48.
-
-Catherine Frederick authored the original fork series; this re-roll
-keeps her From:/SoB and adds an [aneesh:] note + SoB for the split /
-rebase onto the current for-next binding schema.
-
-Catherine Frederick (coolguy) (2):
-  dt-bindings: clock: qcom,rpmcc: add MSM8920
-  clk: qcom: smd-rpm: add MSM8920 support
-
- .../devicetree/bindings/clock/qcom,rpmcc.yaml |  2 ++
- drivers/clk/qcom/clk-smd-rpm.c                | 31 +++++++++++++++++++
- 2 files changed, 33 insertions(+)
-
-
-base-commit: d36de2e50966f3dd9ef3482f1faf649b3d697714
+diff --git a/Documentation/devicetree/bindings/clock/qcom,rpmcc.yaml b/Documentation/devicetree/bindings/clock/qcom,rpmcc.yaml
+index af9fc5b14a81..49c00e219ada 100644
+--- a/Documentation/devicetree/bindings/clock/qcom,rpmcc.yaml
++++ b/Documentation/devicetree/bindings/clock/qcom,rpmcc.yaml
+@@ -33,6 +33,7 @@ properties:
+               - qcom,rpmcc-msm8909
+               - qcom,rpmcc-msm8916
+               - qcom,rpmcc-msm8917
++              - qcom,rpmcc-msm8920
+               - qcom,rpmcc-msm8936
+               - qcom,rpmcc-msm8937
+               - qcom,rpmcc-msm8940
+@@ -118,6 +119,7 @@ allOf:
+               - qcom,rpmcc-msm8226
+               - qcom,rpmcc-msm8916
+               - qcom,rpmcc-msm8917
++              - qcom,rpmcc-msm8920
+               - qcom,rpmcc-msm8936
+               - qcom,rpmcc-msm8937
+               - qcom,rpmcc-msm8940
 -- 
 2.53.0
 
