@@ -1,315 +1,253 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-001ae601.pphosted.com (mx0b-001ae601.pphosted.com [67.231.152.168])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52E6540BCB6
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 09:52:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784800339; cv=none; b=NzVz6WBy9rKV4zG7cbrGHQd3GTFrK/SJHvZ0gxyySU41subWrRwSZiEOz/h0h8kvYEN4AUmhzLJC3B4tdIpoCv2RAr7M6E3K8V739q58mW+TFk4nDugUGLXHzW5gtte52QgZZzDLeU63YREpNRdtR0SPByrEWFCVvW5GI1s7q3Y=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784800339; c=relaxed/simple;
-	bh=tFjBQeSwNPpemccFfW4O6nejCPixfNCYpDKMS0D8dxU=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=pwqqGSsSVuYniuA9z8RZZHG70xjb1dQ6uyou4TicIfq1/y+CnREY1GHNMUytVGIchEPNvKc3U8uTUunaLLKQzPM6TJw8Hq1d5MXNzVQqA4mGUtBeZUkwqIhOYGZ+5/pKMfGOvAhPLDtDZdOlvxofTNZaSaODoS/ufi8mt7iQWjY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NH+bjiul; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=egUtK0f8; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0ED9F415F11;
+	Thu, 23 Jul 2026 09:52:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=67.231.152.168
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784800352; cv=fail; b=EvUAc4gS7YnxdnKN6Kfh0tWYX4HozsVU3VwwZEVD2kOM12k7nI8iSyvtgSPCQCV2mPTVl2iOkdGHqPqvBa9MSf7WfxbxzsaroQnsgNPhShjKYu7lOU0qG5bCRpI4rt9d2vMXYxe6P40e3cgDdT4HFlYl5k/gHPds0bn+uAULlX8=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784800352; c=relaxed/simple;
+	bh=7zf8Xmh3ELdFHpSx4d0l7lASuA02TgqrqNzBpXqBJzY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=oq3jFDD6eYBz5ks+Brbsy8eELsv9S4rfsZ4GMzRMqYkCkgx2GRMJl3UBebPhv+s7Q4D9PqTZexD4Dk4eprjwovt6zkuPyyku4DIOESyH7fXVYd+BChe/L6CrOuOM0zqPIJBiLUdcmIKQWFB0dN3UZQuIsQYU5pYfl6hS70BjanY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com; spf=pass smtp.mailfrom=opensource.cirrus.com; dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b=d1EiASqm; dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b=yCWwzXxq; arc=fail smtp.client-ip=67.231.152.168
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=opensource.cirrus.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NH+bjiul";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="egUtK0f8"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66N8qWED467146
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 09:52:17 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=Yi7hVAqdx5+cG+NkT2CBYz
-	PFi9Gmuq4cd1/cykcXE/U=; b=NH+bjiulBcwR3zHDKxyh5us7xEuY1NOrn4qoeb
-	ZKdaMm1tsuKKsbfFQtj3UbZZxU22uAK3M6jrVDRFXUBgFVNrDlBWiEdGDgH8JL58
-	mXi1qroFRlAp0Ho/jTir5X/V4JZlCpQMf4LZV3HQlAnxSw8VMYDIJqXFmPTZZCw2
-	OCv/GeJNqbvOmdSmUQULjnnZ9w1x57Bio79UDx0zq3LUq2nIGT22YRFjayjr5t4s
-	+k0+U5eQffcMubdUzvLxSi0NI3IvXUIJnScIHvK7NuHcFWgcyZ6mJZJMiUJysuES
-	R0vZ8nV1lka34gYhuSAupnZdqJUbvURmD1THfoCnZkJ2Lmcg==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fk28xuep4-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 09:52:16 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c1d7886cdso12692481cf.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 02:52:16 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b="d1EiASqm";
+	dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b="yCWwzXxq"
+Received: from pps.filterd (m0077474.ppops.net [127.0.0.1])
+	by mx0b-001ae601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66N0vcAJ4168065;
+	Thu, 23 Jul 2026 04:51:58 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	PODMain02222019; bh=EUo2EK3B5x/KFLdgPUHQDAVu4o43ciQds3+vzx7hzQs=; b=
+	d1EiASqmeaQ7UXJxz8bxPAMnjqfBq6smcaKAWWNNcg7uZ4xSkYm1Du21dDazthlD
+	Xil4KN9DB5xCIhFnlG2fRPMQLE53G3T7Gx3naK0An6jfmXls2/d+HlSg0k9G9z66
+	Igsraykdufe1VOY9l+cxFQDI3I5eYHUwFIsMnaM3lzi/I7fNhXOQLUooYNyktYkl
+	n68vCc8ltt63f2fHd5h7VAMK+fUMlkVkAZS2K078NTObDXqTyOzUWSkMvfU7z461
+	uWvC061LMe2nQGe87SClG3jbL4gV5rbO7ISwxzhxVdRL80ADKxPI0Fa7GL/qv0PG
+	r8es78xBdf4JTKVnhBbcIQ==
+Received: from bl2pr02cu003.outbound.protection.outlook.com (mail-eastusazon11021117.outbound.protection.outlook.com [52.101.52.117])
+	by mx0b-001ae601.pphosted.com (PPS) with ESMTPS id 4fg5wff52r-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Thu, 23 Jul 2026 04:51:58 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jJD0EHNFxYMOCvyWxH6f75L8Gc6xIhCKoSjxs31qzMUqhx8DT7oWoyCuf0fpgEyUGM/rIgt4rqPfbQcTdyprXvssgx04ihAfcUeRoAKMQrBzkIDWtymRPe8cwB/kQxOgIKaCImzj5V7KONKJUdwsyf2PwG5DfKSk+TtNCvz0JxNMgE8733pU/FPOGhoo3UuogfYE9Q3sOzZguqngcIGZWqMVY5gBj5oNCxAo68Kt3IkdWnV2oyuBlIyb7gzbHUiGlIm/IYbjZKx6oj53yZkjIP1l95sWn2DG8hSQKbDBKK81IJ4Yp40xWnDqXcVQVDjYzVEN1wnH7t4n/mIEWtNtFg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=EUo2EK3B5x/KFLdgPUHQDAVu4o43ciQds3+vzx7hzQs=;
+ b=LvyBVekemQihADCS37SEeBA9YkOEYZvCsgBAJZ/VXzEcXn3ZXqXG0WUHednvZGP+/Y/NykTk6JUX6VG9i45DaaqeSJsquMu3SI88D+b0Jnph/n7YtwzmQLYmCVlMEBfKn6MulcXiJu7ccJJlIMQ4vb9s5XjPlo0MIzUoOaEgsvMLH+rhZ5wGlhOIGfDcLldBQFcejCXMKurxAyF3LDBP6F4fjkLakflRQDhZ/yb70Kh6JJ0zHUm+A43HTVByG3j17FHXEa2w3/I2b8IzZtB2Uolo/YiP+bJ6ekRr+fyODJADPbTlac+y4pMCdBfnZ0mNy4NljZA8yV9E6Ew20RDb4A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 84.19.233.75) smtp.rcpttodomain=analog.com
+ smtp.mailfrom=opensource.cirrus.com; dmarc=fail (p=reject sp=reject pct=100)
+ action=oreject header.from=opensource.cirrus.com; dkim=none (message not
+ signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784800336; x=1785405136; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=Yi7hVAqdx5+cG+NkT2CBYzPFi9Gmuq4cd1/cykcXE/U=;
-        b=egUtK0f8OH9B9epSpENaGwRolKY7g0EUo9+eY69aICcP1rZw5tERkvOSPpOM+M3i1g
-         PBo4QX4Q4QERoYrBKuJHaI4IcvZb47LJ+aKkMXGXZwvY66ihsosuDw1BNWjPJyLL9B1Y
-         seuaUxtxqyrYLJNhv4zs7PX52kmWjKNde6OWBIeEvNWPkuHteneteWoXSNf7v8sl8J7D
-         jJELt62nGos/pyZPcJx22AEPj/K6Fh28fWRG/dIL/ra3sQai4pJFlnzMt1dEa/oroeKs
-         ChwhuGmawgsD/22Wab83T1zwvOdDEq+DERkFNotwq2ZsG0rg+mu9O4hsX9TLr8JCWGu/
-         J7sA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784800336; x=1785405136;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=Yi7hVAqdx5+cG+NkT2CBYzPFi9Gmuq4cd1/cykcXE/U=;
-        b=G51e6EqrBDdT3KZLcYvfaCdwvzrRhfGGLtderdjOxhmqc6l/H24vLBrGZAG0BNPiFP
-         sbI6vRTLVIA+BFzMO9AewNxZD33dwx0F3BrhQsmhvN+w+s8e3Rlr2y5hDDPrW9ullZl1
-         si1HCoGQ4vaw6XeKZFSIC6Diz32Fj0gcIUIXf6GqdEaw4APjO6hz5Z13sA3VyhIuwYlC
-         yt92vackBm3n/0ujRiQNbD8aSFUlDq+5qWxk2vj3ns135bbjfBYBLwQ9tVzUPUv9uUTy
-         xyfETWotLipEd/gvQhe8aYltwkdz5sbNV6ClSwd5nu9PcbNuQnSovjdsFd00MdWUd2bf
-         pHXw==
-X-Gm-Message-State: AOJu0YzKRgeQAcDvt8X8XYXfawCOAOcX3So72rUw8KZdPBuEwIFP6kYa
-	ykobTDN6TNbCkSXszxr1zAB3egzCVJrtIjb6kx5D/dHG9Dg1Pt1K5HOZb0J5uy08tG57mXTq1Wz
-	udaevV/3k34pka0X7JUcvbErNKa6vFHb7xZ4Uy1bRx6eqai/gvyNcaiVkLuHP8lNLhijl
-X-Gm-Gg: AR+sD1395h3ChJ1YJq4I8+BjAcaMAREHMS3y53K915LKJzwP6B+8PCmGwAd+X/sWtGW
-	16rfKMYPhS4pOpakbQeqn2UEy5zuh454hpNSxLcKiffdF9qDrvZfySWtAID2GtnberiTAjHLnXg
-	KuNlN4GarUhiztJaEJpkNexy30XVFgsbr3yiHj0I/DJsAMtSJULHivDZxtiT01M7u/fdTvTEG56
-	BXJttHQBgBdITBBhuuIrdzGZ4uk3fhuoIreX/EIhQNnwlRkWfseoD4bKuLictB670VLR146IcmW
-	AN8zJ25IOQR9MT+MJNZfuWLRQbcrWhHtun3mF2Ptz/HzlQcnvTg2xLnzfZSch9yiEfaz10snDZQ
-	aEi98UZolBUQ2ZfzZjPRxR+OGpuRTUMGAgPTnUdfmCI2moH9wKgEg44BcXnl/IHIOtJXqcEVm6/
-	cfzOaLTvyxx5FqVQ==
-X-Received: by 2002:ac8:5d91:0:b0:51c:7b12:5fcd with SMTP id d75a77b69052e-5283dfe4310mr21417061cf.73.1784800335876;
-        Thu, 23 Jul 2026 02:52:15 -0700 (PDT)
-X-Received: by 2002:ac8:5d91:0:b0:51c:7b12:5fcd with SMTP id d75a77b69052e-5283dfe4310mr21416851cf.73.1784800335303;
-        Thu, 23 Jul 2026 02:52:15 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2a9b9a7f6sm914182e87.18.2026.07.23.02.52.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 02:52:13 -0700 (PDT)
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Date: Thu, 23 Jul 2026 12:52:12 +0300
-Subject: [PATCH] drm/msm: don't tear down KMS twice when KMS init fails
+ d=cirrus4.onmicrosoft.com; s=selector2-cirrus4-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=EUo2EK3B5x/KFLdgPUHQDAVu4o43ciQds3+vzx7hzQs=;
+ b=yCWwzXxqKLqbqcs5oD9Km1Cn0Fps3Xf3Cumq6hssmaGDoAejN+lCh3uPIDu4Wb7JBSi7X6Nep0lyOuKJaDPF3z0baL6cSuvGyzvgjvTpdM5VdYBzeBujttK3kDyosvRVXihJi2Uv+P1fC3AqeYZ/sxzDkXdTN4+S3zy9aDRLfrU=
+Received: from DS7PR05CA0098.namprd05.prod.outlook.com (2603:10b6:8:56::8) by
+ BL4PR19MB8811.namprd19.prod.outlook.com (2603:10b6:208:590::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.11; Thu, 23 Jul
+ 2026 09:51:54 +0000
+Received: from SN1PEPF0002BA4F.namprd03.prod.outlook.com
+ (2603:10b6:8:56:cafe::76) by DS7PR05CA0098.outlook.office365.com
+ (2603:10b6:8:56::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.5 via Frontend Transport; Thu, 23
+ Jul 2026 09:51:54 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 84.19.233.75)
+ smtp.mailfrom=opensource.cirrus.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=oreject header.from=opensource.cirrus.com;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ opensource.cirrus.com discourages use of 84.19.233.75 as permitted sender)
+Received: from edirelay1.ad.cirrus.com (84.19.233.75) by
+ SN1PEPF0002BA4F.mail.protection.outlook.com (10.167.242.72) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.5
+ via Frontend Transport; Thu, 23 Jul 2026 09:51:53 +0000
+Received: from ediswmail9.ad.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
+	by edirelay1.ad.cirrus.com (Postfix) with ESMTPS id 9A10E406541;
+	Thu, 23 Jul 2026 09:51:52 +0000 (UTC)
+Received: from [198.90.208.11] (ediswws06.ad.cirrus.com [198.90.208.11])
+	by ediswmail9.ad.cirrus.com (Postfix) with ESMTPSA id 802AC82025A;
+	Thu, 23 Jul 2026 09:51:52 +0000 (UTC)
+Message-ID: <c3f876ad-e222-4cd4-ac29-e55040ccc863@opensource.cirrus.com>
+Date: Thu, 23 Jul 2026 10:51:52 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 18/26] ASoC: codecs: wm5102: Use guard() for mutex locks
+To: phucduc.bui@gmail.com, Mark Brown <broonie@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>, Lars-Peter Clausen <lars@metafoo.de>,
+        nuno.sa@analog.com, Shenghao Ding <shenghao-ding@ti.com>,
+        Kevin Lu <kevin-lu@ti.com>
+Cc: Baojun Xu <baojun.xu@ti.com>, Sen Wang <sen@ti.com>,
+        Steven Eckhoff <steven.eckhoff.opensource@gmail.com>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+        Charles Keepax <ckeepax@opensource.cirrus.com>,
+        Linus Walleij <linusw@kernel.org>, u.kleine-koenig@baylibre.com,
+        Thorsten Blum <thorsten.blum@linux.dev>, Kees Cook <kees@kernel.org>,
+        Chen Ni <nichen@iscas.ac.cn>, Bartosz Golaszewski <brgl@kernel.org>,
+        Shengjiu Wang <shengjiu.wang@nxp.com>,
+        Sebastian Krzyszkowiak <sebastian.krzyszkowiak@puri.sm>,
+        Pengpeng Hou <pengpeng@iscas.ac.cn>, patches@opensource.cirrus.com,
+        linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org
+References: <20260723045327.28260-1-phucduc.bui@gmail.com>
+ <20260723045327.28260-19-phucduc.bui@gmail.com>
+Content-Language: en-GB
+From: Richard Fitzgerald <rf@opensource.cirrus.com>
+In-Reply-To: <20260723045327.28260-19-phucduc.bui@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-msm-fix-crash-v1-1-78fb4721c2d9@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAEzkYWoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDcyNj3dziXN20zArd5KLE4gxdi2RDYyMjgxRLEzNTJaCegqJUoCTYvOh
- YCL+4NCkrNbkEZIhSbS0Abd07NXEAAAA=
-X-Change-ID: 20260723-msm-fix-crash-8c13220d9465
-To: Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5923;
- i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=tFjBQeSwNPpemccFfW4O6nejCPixfNCYpDKMS0D8dxU=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqYeRNmz9PZbpb99urpycMGW2Buxz0S/wLzzb3Z
- 07Ea8i6WxSJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCamHkTQAKCRCLPIo+Aiko
- 1fbzB/9Ll7BeCLzI1pD/AZGi9hqZK75TI9ni3LjjE62J2gAeZ23SkfEFspKyOav3dLPsV7pCKRO
- w2YEkDV3fI4GKKnJoKpU0NV95U8MWPXc9SaxcC2PEDHjxSS3b4bmwMYO82zHHqaRU7RpGO3hPm3
- kJTkewm0G1hwNHGpYUhag6OuPpBwfrQaoEVys0Na8R25t6cLDIZ3pDsAVnVz92C5/yt3ca3Zr6Q
- ZHviG1X8WEJrD8T6tSxFxHOxUAx7RJanis7VJX09bVN8b0jCGVjuM+ffC6Ii6g2n81F36wbmrk+
- o5AutjdLZIJwg3blsx5lOljBoTg1l8EtoHQtDPz97TDfAn2C
-X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
- fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Proofpoint-ORIG-GUID: gbxxEUCFSLFr5xzLM_ZfbZA1cNz08wg7
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDA5NyBTYWx0ZWRfX+KxA/G9loCSd
- z2B+T79k0MNw+M99Z0JkfLmIq910nXvC7aj9iVHjZO37ZtjaJDLUxB7GIR96V9+a+dWU+TdVkAC
- GC7UHhTYTPs+P+SSKKYzd4BYMSSWOvE=
-X-Proofpoint-GUID: gbxxEUCFSLFr5xzLM_ZfbZA1cNz08wg7
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDA5NyBTYWx0ZWRfX2LFv1Aev2DPD
- A0BRwPuXDodr9AWIWHcu3NlMO0jSCSixj3j6+QIoMff2inOCJ0IjKp2ereiaN4atSJmxF0I8S5w
- mnq/CKGiSuNkuacBLOWLqa1AK9eCLzpX1zzZ2XYxx4SkD7osisbUzF7lRsojVfYEjckOq6VKEsf
- H5O6ap+cN83T5bKzk1MCQ02ZdwSQaeuyE4pxVCoCtFABgburOBzvefDYIso1A/fvWqWtOj/ju5k
- TnA+/tmhwPcs6VcbqUy6KwzrjhoWxRzJhkWOhjTcthLspw50SA7Dsg4JdG64TjxdxBymez1DYj1
- XQihO75URREUfkpN5rMJovP4PPYIO/ZioxSB0J7qNBlYYEIV283fg+io57DuKi9vfqP9t4214hD
- mruc4YcHGvFCU+JrdPzHWJSMVsTwjcxub70NB9jDoG0bEmiACXzgkG/OA7yogtkmptx/O3NWOFO
- pBG4iMDN3klLIPUSIqA==
-X-Authority-Analysis: v=2.4 cv=WNxPmHsR c=1 sm=1 tr=0 ts=6a61e451 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
- a=hHd2ON2UwJ03A3v6ol4A:9 a=QEXdDO2ut3YA:10 a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-23_03,2026-07-22_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 bulkscore=0 priorityscore=1501 malwarescore=0 phishscore=0
- impostorscore=0 suspectscore=0 clxscore=1015 spamscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230097
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF0002BA4F:EE_|BL4PR19MB8811:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7fe4099d-4290-41a0-94a4-08dee8a006db
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|61400799027|23010399003|36860700016|82310400026|376014|7416014|56012099006|10067099003|22082099003|18002099003|16102099003|4143699003|11063799006;
+X-Microsoft-Antispam-Message-Info:
+	68ikyzCrjrFY6ZsTHHJMbsDD83z1o1iWBM8kzBzLxHRYAORhj+y2e0ggzvdfPgzUcXS9FSUrH3YMNIasc63eHF+q4zBT5LwJzg40YSnE9aWms5/mqaer6LTCp0qcmUHb0hSiZFBdUrYtTPWw4OFWg6Up1EIg0wI0lmN8gTlAFYVbatUGieuxHpl31BsXgaYnY3zipGaJXrsn9C52O3XNBNgPl5flFsBR1XbW9k+Y0EUCR5V3P3iVad/0EYlXvlR/mdKNFyWA7YykFyLiOHgQ8GMJDCfW0G7whpzLX8fY3BoKVHrljCdX0NwUeqPfVfhpRMbSclSD51aqARNGF2h9RQV1T5prwnV/rP8ZSFDVAAAr/fGH07/eL8Ii4hFXfd9UqCzHTQzAQUj6vSmKjxAdqDTywtUK9CQeYZUxOPuVYnJLZIujObg0DRRswtdG4q4i3K4/dWIKTHC+DCvEChzCcmiHbACWUJT3ajCvZdHedF7+eSYjCvOs59YfigHEmi0CfZnIWZuWfjgHBchpAMHJOvuy7ke3ylw3LEPh0OH2MFtWQSEyfOEm5sfGoeieiqdsqUyBR9QpsZpI2sc4DW1IvDs/tsBfu7QPjUny9wzMAmxvPUAGJDqX/m3m0LlOizstEk8jGdXusw/xb6cxI0Mi1SRlqQ7Ayzr93k1xxfKSJXd1JdOin8NOm2npKaD3V+8H7K4movYiggn/Vg66MgG/SQ==
+X-Forefront-Antispam-Report:
+	CIP:84.19.233.75;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:edirelay1.ad.cirrus.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(61400799027)(23010399003)(36860700016)(82310400026)(376014)(7416014)(56012099006)(10067099003)(22082099003)(18002099003)(16102099003)(4143699003)(11063799006);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	fVYQusXzM+TB9NwHuBpYlcOhjVEAyr7wNVK5QC8LoftKtCoA5sZMLm67Tcr1Q0YVpCtrujx0nyMaLOnOqUV1bP+Vi4nDYJFh4hPa75dJJEkl5lsXnI11b7ct5pwZKzMttjwfobJovgqOxNWE4bjgdehQZymtcyVFo2dbRjYqpvENh8JO9AiHz/oaM53UvslX5O5YnUNa3kKkdLFhO84jLenf2Putt7jF1npPVuyXJhNw3/vPJG5pvEM+v2Qd0FkPdUSGLAHachSLLY6E+whGKMK+pUvp55kBYZhhbvtdUxxump5iULjvUzw2A9evsYENnrkVE0KXUFcf/q6HsJhO9VEppxxsMFb69w9EPH0j3qtbrVB1QZuhPH0HCcWsIZ08ziU5YSw4qSIUUr6WKynnCQByn1Dg7T0k4ItDWbRMRRFxCdFI11D6XTfoDWatR8gT
+X-Exchange-RoutingPolicyChecked:
+	QCDdlg7fCGBcQmNpmVHzy6gg9QBgl3cw/B2rro8q1yCMdZrctcqI0iY2kA6v/Z6cLrSwQu2OgUQO0vuUYaH7sqdZMGWIM4UhehCGJaGu1sq+fWLTzEfSxso5BxvIumys8O6HmRvcdF5tNrRqEaH8555F2M0iXNS7kiNxL5TBOWVe50pLdtTsylpl2bww/CU4TSddZO51aonu0+eqHekINA7YDKG1Ab0ISdvMtL2VqeJkwwF16Y9CJAbldL8rDJnKar3iOCf491YX83oH0zxA7ijZNPH9f/7vX631qIkY4sFKPaJGaEdP/CNXcpdhzDooIJ57Q+nqG0HBpK21qebSjg==
+X-OriginatorOrg: opensource.cirrus.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2026 09:51:53.7942
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7fe4099d-4290-41a0-94a4-08dee8a006db
+X-MS-Exchange-CrossTenant-Id: bec09025-e5bc-40d1-a355-8e955c307de8
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bec09025-e5bc-40d1-a355-8e955c307de8;Ip=[84.19.233.75];Helo=[edirelay1.ad.cirrus.com]
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-SN1PEPF0002BA4F.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL4PR19MB8811
+X-Proofpoint-ORIG-GUID: u-Ynx2_Ojghp4XjWz4WpV6kJhgT_jVf4
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDA5NiBTYWx0ZWRfXykH3MxPYGlf7
+ rCPY7hbFxjL9VDNZsZSCG543kX5zwzeU3kBF6y+mF79oPTqLwlddaEKosgfD4Q2uQQl68iEMA2h
+ qq2K/s8iJGsiuYrORsYhLZLiFn7KtQo=
+X-Proofpoint-GUID: u-Ynx2_Ojghp4XjWz4WpV6kJhgT_jVf4
+X-Authority-Analysis: v=2.4 cv=BdjoFLt2 c=1 sm=1 tr=0 ts=6a61e43e cx=c_pps
+ a=nUtUY41U26iC5jD0qKn5yw==:117 a=h1hSm8JtM9GN1ddwPAif2w==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s63m1ICgrNkA:10 a=RWc_ulEos4gA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=iX4cTi3TZMoOKdANLEfx:22 a=KfkQE9S9VqCBgivYGm0O:22
+ a=pGLkceISAAAA:8 a=wggVRkVUAAAA:8 a=w1d2syhTAAAA:8 a=dseZgc7Wqv4YLdx5lZwA:9
+ a=QEXdDO2ut3YA:10 a=MZpHe7prQc2n3JaO1KVd:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDA5NiBTYWx0ZWRfX3ilaXJHHKLzA
+ skfg4OiDxNwKBcjOjnf2Lq4JlEQjATPaf7W3W/CWH+GPrQ5zn0nRfG99ZsvFGGsB28rsvbXc6EV
+ riovtXxF0DEfDgzQDSGnJcSMdHUhS6AgbsQkO1eK0hO1StjiiKXNt6BFxsu+4BsBLKKdpwKJzIf
+ VKAI4VN7IssC6hYMCapeX7zsr7BgDQDtDrXjERKRBLD4VcA/yYJSjVzmKz5LjgjwpLCPXniHno4
+ /PEFsn+X3w/6Ivtg84uGP/10zMc/aO2ld6p1goIzPPEhn6VvoW7JlFGMog+hly4rMk5pOk0JkWm
+ Peu+f1t5wdQYnXEUUNx/QdnjKtauPe84VsiZhVnsSq/BeP5WvsJ07ShgLPRCXTnLTXipucwCOA2
+ +xtzVrFhJFu2c5Zqt566u62ZTzxY5FuurX/JDVefxGBgCUSoKFDgQCHHFvuLPyLvl505YYBgKb2
+ C3NEYKPN6T86VJrb8SA==
+X-Proofpoint-Spam-Reason: safe
 
-When priv->kms_init() (mdp4_kms_init() / mdp5_kms_init()) fails partway
-through, both display drivers already tear their KMS state down via
-mdp4_destroy() / mdp5_kms_destroy() before returning the error. The
-common error path in msm_drm_init() then runs msm_drm_uninit() ->
-msm_drm_kms_uninit(), which tries to destroy the very same KMS a second
-time, which causes a use-after-free crash.
+On 23/07/2026 5:53 am, phucduc.bui@gmail.com wrote:
+> From: bui duc phuc <phucduc.bui@gmail.com>
+> 
+> Clean up the code using guard() for mutex locks.
+> Merely code refactoring, and no behavior change.
+> 
+> Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
+> ---
+>   sound/soc/codecs/wm5102.c | 23 +++++++++--------------
+>   1 file changed, 9 insertions(+), 14 deletions(-)
+> 
+> diff --git a/sound/soc/codecs/wm5102.c b/sound/soc/codecs/wm5102.c
+> index b4d4137c05b4..74b775b95bfd 100644
+> --- a/sound/soc/codecs/wm5102.c
+> +++ b/sound/soc/codecs/wm5102.c
+> @@ -7,6 +7,7 @@
+>    * Author: Mark Brown <broonie@opensource.wolfsonmicro.com>
+>    */
+>   
+> +#include <linux/cleanup.h>
+>   #include <linux/module.h>
+>   #include <linux/moduleparam.h>
+>   #include <linux/init.h>
+> @@ -667,10 +668,9 @@ static int wm5102_out_comp_coeff_get(struct snd_kcontrol *kcontrol,
+>   	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+>   	struct arizona *arizona = dev_get_drvdata(component->dev->parent);
+>   
+> -	mutex_lock(&arizona->dac_comp_lock);
+> +	guard(mutex)(&arizona->dac_comp_lock);
+>   	put_unaligned_be16(arizona->dac_comp_coeff,
+>   			   ucontrol->value.bytes.data);
+> -	mutex_unlock(&arizona->dac_comp_lock);
+>   
+>   	return 0;
+>   }
+> @@ -681,16 +681,14 @@ static int wm5102_out_comp_coeff_put(struct snd_kcontrol *kcontrol,
+>   	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+>   	struct arizona *arizona = dev_get_drvdata(component->dev->parent);
+>   	uint16_t dac_comp_coeff = get_unaligned_be16(ucontrol->value.bytes.data);
+> -	int ret = 0;
+>   
+> -	mutex_lock(&arizona->dac_comp_lock);
+> +	guard(mutex)(&arizona->dac_comp_lock);
+>   	if (arizona->dac_comp_coeff != dac_comp_coeff) {
+>   		arizona->dac_comp_coeff = dac_comp_coeff;
+> -		ret = 1;
+> +		return 1;
+>   	}
+> -	mutex_unlock(&arizona->dac_comp_lock);
+>   
+> -	return ret;
+> +	return 0;
+>   }
+>   
+>   static int wm5102_out_comp_switch_get(struct snd_kcontrol *kcontrol,
+> @@ -699,9 +697,8 @@ static int wm5102_out_comp_switch_get(struct snd_kcontrol *kcontrol,
+>   	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+>   	struct arizona *arizona = dev_get_drvdata(component->dev->parent);
+>   
+> -	mutex_lock(&arizona->dac_comp_lock);
+> +	guard(mutex)(&arizona->dac_comp_lock);
+>   	ucontrol->value.integer.value[0] = arizona->dac_comp_enabled;
+> -	mutex_unlock(&arizona->dac_comp_lock);
+>   
+>   	return 0;
+>   }
+> @@ -712,19 +709,17 @@ static int wm5102_out_comp_switch_put(struct snd_kcontrol *kcontrol,
+>   	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+>   	struct arizona *arizona = dev_get_drvdata(component->dev->parent);
+>   	struct soc_mixer_control *mc = (struct soc_mixer_control *)kcontrol->private_value;
+> -	int ret = 0;
+>   
+>   	if (ucontrol->value.integer.value[0] > mc->max)
+>   		return -EINVAL;
+>   
+> -	mutex_lock(&arizona->dac_comp_lock);
+> +	guard(mutex)(&arizona->dac_comp_lock);
+>   	if (arizona->dac_comp_enabled != ucontrol->value.integer.value[0]) {
+>   		arizona->dac_comp_enabled = ucontrol->value.integer.value[0];
+> -		ret = 1;
+> +		return 1;
+>   	}
+> -	mutex_unlock(&arizona->dac_comp_lock);
+>   
+> -	return ret;
+> +	return 0;
+>   }
+>   
+>   static const char * const wm5102_osr_text[] = {
 
-Bring MDP4/MDP5 in line with the DPU driver whose dpu_kms_init() doesn't
-perform error cleanup on the failure. Let the common path own the
-cleanup, instead of freeing the KMS from their error paths.
-
-The crash trace for the reference:
-
-  __lock_acquire from lock_acquire (kernel/locking/lockdep.c:5906 kernel/locking/lockdep.c:5863)
-  lock_acquire from touch_wq_lockdep_map (kernel/workqueue.c:4094 (discriminator 1))
-  touch_wq_lockdep_map from __flush_workqueue (kernel/workqueue.c:4136)
-  __flush_workqueue from msm_drm_kms_uninit (drivers/gpu/drm/msm/msm_kms.c:243 (discriminator 33))
-  msm_drm_kms_uninit from msm_drm_uninit (drivers/gpu/drm/msm/msm_drv.c:93)
-  msm_drm_uninit from msm_drm_init (drivers/gpu/drm/msm/msm_drv.c:184)
-  msm_drm_init from try_to_bring_up_aggregate_device (drivers/base/component.c:249 drivers/base/component.c:227)
-  try_to_bring_up_aggregate_device from __component_add (drivers/base/component.c:269 drivers/base/component.c:748)
-  __component_add from dsi_host_attach (drivers/gpu/drm/msm/dsi/dsi_host.c:1739)
-  dsi_host_attach from mipi_dsi_attach (drivers/gpu/drm/drm_mipi_dsi.c:383)
-  mipi_dsi_attach from sharp_nt_panel_probe (drivers/gpu/drm/panel/panel-sharp-ls043t1le01.c:247)
-
-Fixes: 506efcba3129 ("drm/msm: carve out KMS code from msm_drv.c")
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
----
- drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c | 22 ++++++++--------------
- drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c | 11 +++--------
- 2 files changed, 11 insertions(+), 22 deletions(-)
-
-diff --git a/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c b/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
-index 7726edb0d4ed..6ae49f94fea7 100644
---- a/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
-+++ b/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
-@@ -398,7 +398,7 @@ static int mdp4_kms_init(struct drm_device *dev)
- 	ret = mdp_kms_init(&mdp4_kms->base, &kms_funcs);
- 	if (ret) {
- 		DRM_DEV_ERROR(dev->dev, "failed to init kms\n");
--		goto fail;
-+		return ret;
- 	}
- 
- 	kms = priv->kms;
-@@ -409,7 +409,7 @@ static int mdp4_kms_init(struct drm_device *dev)
- 		ret = regulator_enable(mdp4_kms->vdd);
- 		if (ret) {
- 			DRM_DEV_ERROR(dev->dev, "failed to enable regulator vdd: %d\n", ret);
--			goto fail;
-+			return ret;
- 		}
- 	}
- 
-@@ -421,7 +421,7 @@ static int mdp4_kms_init(struct drm_device *dev)
- 		DRM_DEV_ERROR(dev->dev, "unexpected MDP version: v%d.%d\n",
- 			      major, minor);
- 		ret = -ENXIO;
--		goto fail;
-+		return ret;
- 	}
- 
- 	mdp4_kms->rev = minor;
-@@ -430,7 +430,7 @@ static int mdp4_kms_init(struct drm_device *dev)
- 		if (!mdp4_kms->lut_clk) {
- 			DRM_DEV_ERROR(dev->dev, "failed to get lut_clk\n");
- 			ret = -ENODEV;
--			goto fail;
-+			return ret;
- 		}
- 		clk_set_rate(mdp4_kms->lut_clk, max_clk);
- 	}
-@@ -452,7 +452,7 @@ static int mdp4_kms_init(struct drm_device *dev)
- 	vm = msm_kms_init_vm(mdp4_kms->dev, NULL);
- 	if (IS_ERR(vm)) {
- 		ret = PTR_ERR(vm);
--		goto fail;
-+		return ret;
- 	}
- 
- 	kms->vm = vm;
-@@ -460,7 +460,7 @@ static int mdp4_kms_init(struct drm_device *dev)
- 	ret = modeset_init(mdp4_kms);
- 	if (ret) {
- 		DRM_DEV_ERROR(dev->dev, "modeset_init failed: %d\n", ret);
--		goto fail;
-+		return ret;
- 	}
- 
- 	mdp4_kms->blank_cursor_bo = msm_gem_new(dev, SZ_16K, MSM_BO_WC | MSM_BO_SCANOUT);
-@@ -468,14 +468,14 @@ static int mdp4_kms_init(struct drm_device *dev)
- 		ret = PTR_ERR(mdp4_kms->blank_cursor_bo);
- 		DRM_DEV_ERROR(dev->dev, "could not allocate blank-cursor bo: %d\n", ret);
- 		mdp4_kms->blank_cursor_bo = NULL;
--		goto fail;
-+		return ret;
- 	}
- 
- 	ret = msm_gem_get_and_pin_iova(mdp4_kms->blank_cursor_bo, kms->vm,
- 			&mdp4_kms->blank_cursor_iova);
- 	if (ret) {
- 		DRM_DEV_ERROR(dev->dev, "could not pin blank-cursor bo: %d\n", ret);
--		goto fail;
-+		return ret;
- 	}
- 
- 	dev->mode_config.min_width = 0;
-@@ -484,12 +484,6 @@ static int mdp4_kms_init(struct drm_device *dev)
- 	dev->mode_config.max_height = 2048;
- 
- 	return 0;
--
--fail:
--	if (kms)
--		mdp4_destroy(kms);
--
--	return ret;
- }
- 
- static const struct dev_pm_ops mdp4_pm_ops = {
-diff --git a/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c b/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
-index 0a004ab9fc85..3934cd060b27 100644
---- a/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
-+++ b/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
-@@ -517,7 +517,7 @@ static int mdp5_kms_init(struct drm_device *dev)
- 	ret = mdp_kms_init(&mdp5_kms->base, &kms_funcs);
- 	if (ret) {
- 		DRM_DEV_ERROR(&pdev->dev, "failed to init kms\n");
--		goto fail;
-+		return ret;
- 	}
- 
- 	config = mdp5_cfg_get_config(mdp5_kms->cfg);
-@@ -540,7 +540,7 @@ static int mdp5_kms_init(struct drm_device *dev)
- 	vm = msm_kms_init_vm(mdp5_kms->dev, pdev->dev.parent);
- 	if (IS_ERR(vm)) {
- 		ret = PTR_ERR(vm);
--		goto fail;
-+		return ret;
- 	}
- 
- 	kms->vm = vm;
-@@ -550,7 +550,7 @@ static int mdp5_kms_init(struct drm_device *dev)
- 	ret = modeset_init(mdp5_kms);
- 	if (ret) {
- 		DRM_DEV_ERROR(&pdev->dev, "modeset_init failed: %d\n", ret);
--		goto fail;
-+		return ret;
- 	}
- 
- 	dev->mode_config.min_width = 0;
-@@ -562,11 +562,6 @@ static int mdp5_kms_init(struct drm_device *dev)
- 	dev->vblank_disable_immediate = true;
- 
- 	return 0;
--fail:
--	if (kms)
--		mdp5_kms_destroy(kms);
--
--	return ret;
- }
- 
- static void mdp5_destroy(struct mdp5_kms *mdp5_kms)
-
----
-base-commit: b9810cd75b9fb56a3425d391cba3f608502bd474
-change-id: 20260723-msm-fix-crash-8c13220d9465
-
-Best regards,
---  
-With best wishes
-Dmitry
-
+Reviewed-by: Richard Fitzgerald <rf@opensource.cirrus.com>
