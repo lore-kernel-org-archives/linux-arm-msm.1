@@ -1,447 +1,232 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 371A543D4F8
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 10:21:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784802104; cv=none; b=mN1xT7bnhaWmFAEzs98843SLbqR7Cq5/0dvTH1QE9mhVmPI6vrDW/2Wvhl244keE7zxGNIaKjIV/KPC61BH7O9zlJmmFQeCbjahg6NtZ2xvoAmbD5B6v1sWGZhkLLPyinBPcYokh1Bb2VlcIjnrPw4krkkZ4bYXFweCO97aNS7s=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784802104; c=relaxed/simple;
-	bh=Jrmp4oYllEsqyN2JsTQx+3qPkNleZgGlTzp8V8q5ivc=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=hs9yJPI9/kch8ternIiE7CyCZZ0Gph5cia/y8odUAh25oR/WdmQGaoKTHdzixmf23o965j/gd85rQnxlWW/7RMOcJiUTKfSAcykbU/mTmpWutjNfUDdyUX13gP6+8eu1uOO1/SRu5GXWZ/OKFfJ+NxQ9SvOJJguMPiTaqzjYPSI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=CuAzjlmf; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=L7F+2pP0; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BD4D637EFFC;
+	Thu, 23 Jul 2026 10:28:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=198.175.65.14
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784802518; cv=fail; b=IUcs1tqHqOp/HzdIm/L5YaAuiN6utq/WxTUc46ijvHKI8na+yircUi4JB6h8msmCmAZNFrVjJTk90klCJBFNfhUrSA7aIUt4BYVYwFKMy0l8D1ilnAsMqNQlk1eFrnEczN6AmtiaQ7D5Wg5lpNNKmYsZYqsVQTxEIARvdMLznNE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784802518; c=relaxed/simple;
+	bh=tH8LqjAjuErMgxxvqAYBdPcTJXC8AV+2SUKc0qK74u0=;
+	h=Message-ID:Date:Subject:To:CC:References:From:In-Reply-To:
+	 Content-Type:MIME-Version; b=W0+rhA6xghWxSvah6xMpK+mtafynWq7tNMKhOEmAmPh8awUU3RT+Kp1gMZq07Qx1fNUNmntoqTU7Q54lmxnWhZW6cIJZ9w0fuvF3H81cdYwEA4jQPTuurCfkoBgQcuVjib6rJMOKT9LsnunesuXCkO6SRYwCn+kLRZ6Zu9hqmUM=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=KgZ//t+p; arc=fail smtp.client-ip=198.175.65.14
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="CuAzjlmf";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="L7F+2pP0"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66N8qXqW3044796
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 10:21:41 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	8GLR1CneDZmYyQyMh23eDtFtUTycwoEAiCoN5g9oI4s=; b=CuAzjlmfAQiBmdgD
-	YWXZlBSwVaiRXWiNr8emYSr7oVeZXR1A2JDFO7LrVzQDHRpjWwZSKy2LMCIM7C96
-	VSnYaQIts1xZklS+37XGLkMHfDbf7AcsOy0gGdPszDN9+g0gjkRcAI143NzbjMXm
-	HaKDXasZrAV3uShbm1PNhg/ifLU1G5QLV0t5QNDIsi4CK48xQD4x8UPZEmBLo2HZ
-	+8MUQrGiZ6QNoqOcexqUuFxnvfwggFOvsyVk8wK+pkHGmUSiwa0oWMdjlKbhGVX8
-	+0Uzq9c0e/L+RmWBPZPJ2AZDGRO4ITkavxp2GLJfFBCo8iA9F7/AL48drgbbrZx0
-	VsENFA==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkeuq8kry-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 10:21:41 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-84857446424so1044287b3a.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 03:21:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784802101; x=1785406901; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=8GLR1CneDZmYyQyMh23eDtFtUTycwoEAiCoN5g9oI4s=;
-        b=L7F+2pP0RjuZtFVrPtLT5l/QL6MubsNtg/pn2Y5uzLL0GuTzB4Q48cylHIjBDt5lj0
-         G18KcSKD+PuOB2AwcSSuVWAxMnrG8miFCMl13jLxNjUC51HDBMQwwmeEdIPqD3jgyqjH
-         kHOukYs8XQTFCsOPqJ5SLqlFAnzZ9+WOniDlSh/Mc4E2ygzDVSheOD4MkaTpMZ+9UAz5
-         isDlaI5QbrHbBIfLeR6ckx4YZWGDIYRotpkgZIAyieF2zc30b/EysF+z/UJPpcT5Ny1J
-         VTolJBHoTMg+wT91M60xO3L5ktCbWVoWBGyGRIgqWqDGuxoc/Ii1bUbtsQoFBNi5jlPu
-         TsCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784802101; x=1785406901;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=8GLR1CneDZmYyQyMh23eDtFtUTycwoEAiCoN5g9oI4s=;
-        b=Sa3e+UP1yr1hk3ErqkYCz3w5Ttbp1fdjEFr7AxOO/4gBhDo7ImiaVb4i74ItKJaBsY
-         eS3OHbGGP298Mc6Ii048tMwWTAtpKH/cGnB79+WP4wms7et35qQ8I1JDY0/uj+Lmtr25
-         P66SgI2U65Z6zk0urB533PEuTCtjJhk2oZff2uIqJ8FjLif2uYfsmjc28jsRjieHmBmp
-         1e1LhOloWKCMWj02vyNABgMyUvvcRTpruMb5ho2YKzg9+x8AVroFSWB89hHtjWWaXkxm
-         KppHOeOK7czjHyHD5XrHwjsWk4LRwTg/5ODdd8nae7GHCaHdyy/ZoLo2hTUFQOO5gQoq
-         8R5g==
-X-Forwarded-Encrypted: i=1; AHgh+RqLO40jtrhVLKLQXHiVAl+J520zmy9eh60eKLRhOsb+FClbBoLBQrT/hvAV7Spcb7DGWQ7WlBuGU03Lcnxa@vger.kernel.org
-X-Gm-Message-State: AOJu0YxaYTFg1t3ZuB+JSw5PFp8XQ6dXZG2Zt1wuq6/j2JC7L9REEpkP
-	hsV3OTXDxmNySJ6BKflgdJNoYWLvDBUqOf9WuDX06M7H+6dGE4b3KlMD/tdF4dPVX/NMqIqR33E
-	NtUgG8g0uo0PRTDCx31LmJz/FxTzj9UqptTz5fTizvYLNMYwzPZ2ZEusvb8EaI80UA4s0
-X-Gm-Gg: AR+sD13fW773S4j4ltMbOoYlMGLGjSVGwn3aXQPTuiDBdzZ2pWBOwa+DMPkFhjuvu+F
-	P4oQKgBFk4VlGDXB1FrMv8bgArKR08rbbwjoBLp0LqEvMO05pBHJuvsnzHEpIQ0sdppCR1M0EKF
-	kQl2xFVBL46ji3JJ5eb863EC8boH9GxuPEx0qMx8RjTyDLPUXxZ+t5mq94x5lyV5jWjOd3EIBHf
-	6HIVG2JoQI7/Khx1oNQVwQ0a2ZQMaqW5fEiJA0Ny+nHKVxlRXqhPv5rsRc0SK7bz1+NuWpFzDL1
-	JAXsSRSWQEVSpIiZbXut0yUJHg+RYfRxtwQDlY89ipm7nJk+iL+wWqqdmwTaa/vvySXat9+3/qu
-	z87JJXLicCPBUjqR/lmqavfN6R6cEmKc=
-X-Received: by 2002:a05:6a00:439a:b0:848:2f2c:b2c8 with SMTP id d2e1a72fcca58-84e2b84ab87mr2853992b3a.24.1784802100653;
-        Thu, 23 Jul 2026 03:21:40 -0700 (PDT)
-X-Received: by 2002:a05:6a00:439a:b0:848:2f2c:b2c8 with SMTP id d2e1a72fcca58-84e2b84ab87mr2853950b3a.24.1784802100186;
-        Thu, 23 Jul 2026 03:21:40 -0700 (PDT)
-Received: from hu-sachinku-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84e17285662sm2781395b3a.20.2026.07.23.03.21.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 03:21:39 -0700 (PDT)
-From: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
-Date: Thu, 23 Jul 2026 15:51:15 +0530
-Subject: [PATCH v4 3/3] media: iris: add support for multi_slice in iris
- encoder
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="KgZ//t+p"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1784802516; x=1816338516;
+  h=message-id:date:subject:to:cc:references:from:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=tH8LqjAjuErMgxxvqAYBdPcTJXC8AV+2SUKc0qK74u0=;
+  b=KgZ//t+pHCcaUjv2H1ErtZ7czbxrr7Ky3VMKyPMiu1/2Fs2cfR07M1WJ
+   gnv8XZ/EGPD6YtTq7ayNNk93KmjfG2+agUUKVKTtmqwwYnCn/YApSV+o4
+   qSLAFJlPNzShBhM2Wotwxojf8Ws2GTTF3mgdBquvCg5k2MPOI1VQSHch4
+   nTTH8fZJs9El/ke2ia7Ycq+/vm7DAwqrLQytKOiYFnYt73H9o9mZ62ore
+   2YHw3qGBnBWtTxQhWZUsgBIHGVNw9pyCNFS7wCBy9kzNyXb2yoJtR0Xk4
+   dadk6A8gcW2poHztZGIioXfeS1Vl9ELROzfz0neR/kj0bmB4mTkmpfxP3
+   Q==;
+X-CSE-ConnectionGUID: CFQcpBJ5R16KUD5aFIGyBg==
+X-CSE-MsgGUID: dj308nywTJ+H4+2gZ1YdJA==
+X-IronPort-AV: E=McAfee;i="6800,10657,11854"; a="89349695"
+X-IronPort-AV: E=Sophos;i="6.25,180,1779174000"; 
+   d="scan'208";a="89349695"
+Received: from fmviesa003.fm.intel.com ([10.60.135.143])
+  by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Jul 2026 03:28:35 -0700
+X-CSE-ConnectionGUID: SJcT1EB3QWebRsVVJOTnIw==
+X-CSE-MsgGUID: /tJif6KGTJmztsv6vkhIJQ==
+X-ExtLoop1: 1
+Received: from fmsmsx901.amr.corp.intel.com ([10.18.126.90])
+  by fmviesa003.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Jul 2026 03:28:34 -0700
+Received: from FMSMSX903.amr.corp.intel.com (10.18.126.92) by
+ fmsmsx901.amr.corp.intel.com (10.18.126.90) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.43; Thu, 23 Jul 2026 03:28:34 -0700
+Received: from fmsedg902.ED.cps.intel.com (10.1.192.144) by
+ FMSMSX903.amr.corp.intel.com (10.18.126.92) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.43 via Frontend Transport; Thu, 23 Jul 2026 03:28:34 -0700
+Received: from PH8PR06CU001.outbound.protection.outlook.com (40.107.209.40) by
+ edgegateway.intel.com (192.55.55.82) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.43; Thu, 23 Jul 2026 03:28:33 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=asFrmZbYI+XhrJX8JMqSqv0ebQB7lkHcwuKCVcKVU9V557EJmDMwB0+gNdOwhBoYl0tSkjGoYhVhry/jeuoX5GzuVqa85itAdmkmSeBtN3Na7UiXV7YYAvR0jS82tiPIkCjohIBzxNy30J3+lf/qg2vmzdx2JE9NztWp6LJfbY+3R9lxqeys3l6CIwcGmOmh99zxNrVXE/LspLuasXhH2aXEkaahhf54lRrz0SHmvIrGtN3S7gAAG7ALHkiuY9ByWu6vb6KgBJLBtYsR492+Y8anYRTc+2D9BFcDvrHMTjhSJFLrbNhwwPXwf8TcJYL478HMzQBwJRxEuSszzin30w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=iPF1lJZTdwvRCLoT2JhD3+B6JxK6myHyXBoLI88skv8=;
+ b=f1RbFtnTAJoXpW9cfoMiMl/UA6xrt5EiNmgiHy50f1Dc0qQFm3LN542efik9+d1Cp7Rsaw74ysZNAg2hKZWDOSt+EyOKKw2TTSWzduYxqnkluEP5hPi6ahmm7ewd2GqNrmlBmU84GTtYsLvfxF4SDxdNIlqHsRRikXhzDCaLveDnzSqTHhbosHdTkpDwQJSZNcu2PixVQ+XVfxj1ZjYw9cbreTvIjwasZNGMLT5p+mKYBOqvzlULuX5JJyoSeDSy/4JKQ7pEezFE67FLa2IMjgnPBXRezmYOjCTtOZ6VzZreZf6bcE9ZvdL+EYHeKW7j/I4W59jZGA67C0GC/Fo+YQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Received: from SA1PR11MB6967.namprd11.prod.outlook.com (2603:10b6:806:2bb::15)
+ by IA1PR11MB7891.namprd11.prod.outlook.com (2603:10b6:208:3fa::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.10; Thu, 23 Jul
+ 2026 10:28:30 +0000
+Received: from SA1PR11MB6967.namprd11.prod.outlook.com
+ ([fe80::36a9:3aca:a63e:c8f4]) by SA1PR11MB6967.namprd11.prod.outlook.com
+ ([fe80::36a9:3aca:a63e:c8f4%3]) with mapi id 15.21.0245.009; Thu, 23 Jul 2026
+ 10:28:30 +0000
+Message-ID: <37e68669-7587-4781-8ffb-0cbfa8a13d12@intel.com>
+Date: Thu, 23 Jul 2026 12:28:22 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 6/6] ASOC: Unify code style for platform_device_id
+ arrays
+To: =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig_=28The_Capable_Hub=29?=
+	<u.kleine-koenig@baylibre.com>
+CC: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	Lars-Peter Clausen <lars@metafoo.de>, =?UTF-8?Q?Nuno_S=C3=A1?=
+	<nuno.sa@analog.com>, Srinivas Kandagatla <srini@kernel.org>, Shengjiu Wang
+	<shengjiu.wang@gmail.com>, Xiubo Li <Xiubo.Lee@gmail.com>, Fabio Estevam
+	<festevam@gmail.com>, Nicolin Chen <nicoleotsuka@gmail.com>, Frank Li
+	<Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, "Pengutronix
+ Kernel Team" <kernel@pengutronix.de>, Peter Ujfalusi
+	<peter.ujfalusi@linux.intel.com>, Bard Liao
+	<yung-chuan.liao@linux.intel.com>, Kai Vehmanen
+	<kai.vehmanen@linux.intel.com>, Pierre-Louis Bossart
+	<pierre-louis.bossart@linux.dev>, Sylwester Nawrocki
+	<s.nawrocki@samsung.com>, Charles Keepax <ckeepax@opensource.cirrus.com>,
+	Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+	=?UTF-8?Q?Amadeusz_S=C5=82awi=C5=84ski?=
+	<amadeuszx.slawinski@linux.intel.com>, <linux-sound@vger.kernel.org>,
+	<linux-kernel@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
+	<linuxppc-dev@lists.ozlabs.org>, <imx@lists.linux.dev>,
+	<linux-arm-kernel@lists.infradead.org>, Liam Girdwood <lgirdwood@gmail.com>,
+	Mark Brown <broonie@kernel.org>
+References: <cover.1784528081.git.u.kleine-koenig@baylibre.com>
+ <093867d47c079d2aaab06bccaae734c54c342a7d.1784528081.git.u.kleine-koenig@baylibre.com>
+ <0f625961-8e2d-4ed9-ab5a-fd95bcb4c87a@intel.com> <amGhHDDlwMdool_q@monoceros>
+Content-Language: en-US
+From: Cezary Rojewski <cezary.rojewski@intel.com>
+In-Reply-To: <amGhHDDlwMdool_q@monoceros>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: AM9P193CA0003.EURP193.PROD.OUTLOOK.COM
+ (2603:10a6:20b:21e::8) To SA1PR11MB6967.namprd11.prod.outlook.com
+ (2603:10b6:806:2bb::15)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-iris_multi_slice-v4-3-45f0a3fe7fce@oss.qualcomm.com>
-References: <20260723-iris_multi_slice-v4-0-45f0a3fe7fce@oss.qualcomm.com>
-In-Reply-To: <20260723-iris_multi_slice-v4-0-45f0a3fe7fce@oss.qualcomm.com>
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Vedang Nagar <quic_vnagar@quicinc.com>,
-        Stefan Schmidt <stefan.schmidt@linaro.org>,
-        Hans Verkuil <hverkuil@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784802081; l=12410;
- i=sachin.garg@oss.qualcomm.com; s=20260211; h=from:subject:message-id;
- bh=Jrmp4oYllEsqyN2JsTQx+3qPkNleZgGlTzp8V8q5ivc=;
- b=QMJOyYlRHhaImA5GEyjgh7J30faVqwsw1QylkAeNrQqbnuc7A/iMwiKI2ZGfLwziizNbBqirs
- La3wvISzwP3AKKmEsaAEzKuIF8t/+BdV1UZzL8oWJBfjw0ZD22m9k9d
-X-Developer-Key: i=sachin.garg@oss.qualcomm.com; a=ed25519;
- pk=KcRhp4CP9cR1V2tg6xSNRnB2STYaU0vVigdUF4Actu0=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDEwMSBTYWx0ZWRfX4kdC+yGE8YkK
- cx3I21XamowT71ykU92OVpx3xKEFLLY4pT8v17D9Ri9f3MXICJjAoZSc8FrWhJNFAz+9iCceeUg
- vgdip1ydueuzbrPudE6AoBE4WmloEjE=
-X-Proofpoint-ORIG-GUID: X3OrEtD73UqRhRE-ljf8A9LROp_jBPV0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDEwMSBTYWx0ZWRfXyBLbqNZxqoYq
- RHdsWOzowPg0LyUoAccep1Jun3+MqAyG1ve1n8jH8+0U26T7GxXAKGPO8sOwOfEWvIp8exeGCeK
- IAiRouKYJ2vjXL38ML30qg+X6YiX7nCWmgyugrX01dnhyCQNpi6mL//PHNH5Xyq0vCqYrLe4Zm9
- IE2rWwtndWgF5jxki2hcMFapKc0o2Hj4vGxDH9pBqAtCAYiMymPPVrjZrM+/XNXOrO5CLwFj1jx
- pDll7UBx8BgjAwQkImQDMJeyRh3rpZRbo0PkEuyVKcvurTC1wa7hl+lq61sj3/e5r0FfbeVIxlv
- FUHBaIJrS9x3LxcduwlobRHi86ioimhPtQg97GRAPj0QY1lvpWzbggh4A5C+KE4fryTPebRxY8J
- TkbyZ1zhBxHht32Hcxu8mgabj/8xpex6h8gxcoJsRi+J1YF73aSSIVrPtSH8KsSTc9JVRgte+Bg
- FIrWQYYOltRpkxaRONw==
-X-Authority-Analysis: v=2.4 cv=cPDQdFeN c=1 sm=1 tr=0 ts=6a61eb35 cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=ZIa84HXPZlRSj4Il7NUA:9 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-GUID: X3OrEtD73UqRhRE-ljf8A9LROp_jBPV0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-23_03,2026-07-22_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 impostorscore=0 lowpriorityscore=0 adultscore=0 phishscore=0
- clxscore=1015 suspectscore=0 priorityscore=1501 bulkscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230101
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA1PR11MB6967:EE_|IA1PR11MB7891:EE_
+X-MS-Office365-Filtering-Correlation-Id: cc0034ea-9fb5-461d-5298-08dee8a52389
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|23010399003|366016|1800799024|7416014|376014|5023799004|56012099006|4143699003|11063799006|10067099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info: /yr1Nen9UbMBJfEFeAOPt2SyxW1CUq42ueyeYSxdLWL4wKh1AZRAfhf7NEFwin6jbHP4NXwPEmvR+6k6OfRQ8XvdRJuO+XQqdcgd1TRRx7t4r8DU/FA2JnCD4g3S1C1f3OShwq2GwqCI3lOe2e1MgaO57UqUb2Ds8GUa1Bv8q/kuDEujM2ARsdpISVLdl5xWDfTqiMJ1FzOOJuz+IE2vWXDaBNUBQsTPlMA1/0+z+sksYznOFiQlq6h5g6aNCIbECqH8F9asJGdcYftoxVAFZAeafh2giUDcQL26hzvs6fbaHVbaWDOaWTrqtUGePu+9bjqYKrYtpy7GOnuemP25VdSyoVdbY7GaLlkzk1IABr/k/JcRbtRp9CpqHwsBThrIEW9JfvzEetZ6STDjWNLzOsENu8Tn4bzw7Wb5ad9ZrIN81lDmkI3X5RiZy4vBLjWCejVr40uAzZmrMmqvpTifsoP6Tz7mq/hCmgAXOXAf/g9zdlz/WW7GtYwuT21vDpEFmk86/T/B7STwX4P+hFNVxukD9jzPm2Sh+f/0ggDsh9eBFQGoTvrlNUdpAwjgchOxRdqbBAEzXExbEW3XzECjRn6pOJCjl+Sl8/P00nCEwCVJL2bnq0UgtqrrHlUdASMb7rT4SBBX8rXW0HrAExkYD1bfMXZS0K6Zejfmv/IsLVE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA1PR11MB6967.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(7416014)(376014)(5023799004)(56012099006)(4143699003)(11063799006)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bWFxOGpMd2t6Szh0cDl6ejkzMTBrRkdXdlYxWEl4aTAwZHJJSkY3UDQzZllj?=
+ =?utf-8?B?T3Y2ZXc2TzFoVm93RXAvSjYxSzNpWFJhMUpjUWtucjFjanZhcUNOZUl1Z0NQ?=
+ =?utf-8?B?Qm1ISWswR3FWUTNXL3pnY1FhaWhUd0lZTjdyN1hEbEhUYVRiNkpBR0tUWVhC?=
+ =?utf-8?B?SGUzNzNTZTJKZ1J2YUM4N2plY2JscDBaKzBtQXVDdXhFQmswdW9TVFc0emll?=
+ =?utf-8?B?WVVabXdJNjRlTmJlMWJycS9TNjJZTW9xT0dqbXNMS3ZoTlpGdjFxU2dqSmZO?=
+ =?utf-8?B?VG5sKzFQa1dtVzcrNUloS3FMWVh3M3FxbnpjS2dCNGExeGFYeHR2d0lQVXgx?=
+ =?utf-8?B?S3NzUWJsUEdndmFKaG82UXcvVmMwZEpqTWphVzZNRnArNnVhL1BRVWRIMU01?=
+ =?utf-8?B?T0N6dHRnMWp6TEYvVGxIejFJOVZianhOTk9SOHcvZnVFbFZKS1JRbjFqMEto?=
+ =?utf-8?B?ZGFuSzArWG1rbDB2WkUwOEgrWDNPZDJYc2lqWEFDcWZqV1pyUkt4eG4zNnF6?=
+ =?utf-8?B?THRCbklMZ3IrK21ndWxsc3hQNGxPLzYzWmgxbDRNYjNYZzhpOVhSRnkzVUYr?=
+ =?utf-8?B?WU8rc3pVa1U4RDNMcDFxUkFaNHQzOEV6aEc2eXNPTzBtb1ZMak94Y3M4OHF3?=
+ =?utf-8?B?TGdyU1YrZFVaanprUHZJQ25qM1lCVFozZ3NFbmRUL3JMeFVEaytaMHJja0Qx?=
+ =?utf-8?B?UmkyRVcyV0FsaWkyc0x0eGV2VGdGR2FEVjVmSGYwaG5YWjQ5cWRERjhLRDFU?=
+ =?utf-8?B?NzJWOXc1NFNSdnczZXAzT200R28wZm5KUTVTSHFNaXVqcjduNFljcTZSaS96?=
+ =?utf-8?B?MUloWlV0eGZLTVplZHpkYitqTXlJNEJ4Wk55QU4rQ0hYWFJSdDJkbk03MWVz?=
+ =?utf-8?B?SklqZmRjek1KZy9LM250YW9iZ3dLcU9kK3ZjRHNQRkdlRm0wa3dENHRXdTEr?=
+ =?utf-8?B?Q2VMSnduQURCZ2hGTGlQL3VPUjIrdXVvc3ZMNXVodUhFclpGUUNBajF2cE1E?=
+ =?utf-8?B?Vmdzbk01d0ZxL21qL20rY0lsaGNjZkhKeDh1Z2lPeDB6Z05sOEZ3UnBHUXo4?=
+ =?utf-8?B?WUpxWVdCZW4zV2hUTGNFdnJ5UzBCdm5ndVNjaHZ4MnBEZFRYQ3BRTjVhQ2xG?=
+ =?utf-8?B?RmFxeVRqbUNaU1F2cThLY3lPdEVVRHZpSjNVZlZ5UkdMYzNnMThBdHl3azRN?=
+ =?utf-8?B?em8xVTBSMFlDTS9tYUtROWdCdzVJNm9EZEVTR0RvMDZubjkzTm5YZ3ZsZXIx?=
+ =?utf-8?B?Z3JJRXoxcVVGVzZiaURibUJ2WjJMSitDRk4yUzYycG10Z2N5VDRGQnh2RE9K?=
+ =?utf-8?B?Q1RlMEZqcm01Wlk4UlNVUFNkVFM1WjlEeDIvTEx4ekZKTndLQ3VPcVFJUm91?=
+ =?utf-8?B?UDNHcDJjWkRobHJzNGkrTEVVdnhIY2ZtYXlCSHdCb2ozcXNQL1MrcDRJa0o0?=
+ =?utf-8?B?OVNudkx0THVtMForMm5XcUptV0NrWVYxYUZqc01hdUMzQ2VUK3J4RUZidXlN?=
+ =?utf-8?B?S2RFYVNzdHZpemtYWXl0ck1McVBBMUVhejhuU2FQc1dnUkZJUW9VQ2pVbVVC?=
+ =?utf-8?B?QnZMSzlXQWhLOU0rSVlzRGsxRk0zRWRhRUlDbzIvSUVmRWlMeHRpVTg5UWMz?=
+ =?utf-8?B?ZGlaWXZqcnNkK2Y3eGhrRFNWc2N6b1Q1Y1VINHJ3bk5odmJ3d2I4UXZlKzE1?=
+ =?utf-8?B?RlVWMjl3M3dqdi92VDFSc0RHN1hxV1NIT0Y0YXVLWlRvTk9kNDJNRFNzQ25X?=
+ =?utf-8?B?anF0bDMvZUFCVG1mUUUzajIyeHU5bFdTdkhVRnQ4dW4yMGprM0RZb0t3OWlQ?=
+ =?utf-8?B?OGx0azhsRXZDbDk5VEpwR01NNUx5UURKZEZPaHpHRzB4ZTlLdUdzWVJKZjZh?=
+ =?utf-8?B?cnRabkw4Q3BPWUZoZGxNK21TamxzMFpxZDBQNTZjakJYY2I2WGtxcVNQdHpK?=
+ =?utf-8?B?SHI4a2wra3dwQXNmdjlhZVIwMlRVdVUwWkxEQUVqaWE2eHR6MExxZ3lsbjkv?=
+ =?utf-8?B?VGkyemczd2VDTmtjelhVcjRNN3JlY1hqTGdqS2hPd0NIZXo0cVdQN1pXeHVD?=
+ =?utf-8?B?UmI5azhWTnM5dmVmTHF1Y0ZpSGFPbVYvZHlFMnMwL0U3S0wrcTQvckJiajFi?=
+ =?utf-8?B?NU9sU3k4R21yd1R4YVhPMFlHd3Mydi9udlJnaUpuVmJPKzdiSm1WRXIrK0xS?=
+ =?utf-8?B?cCs1aWkySVhNdkdRR01BVEUxUHg3cC9UR3lYWnMya29VNjh4OGcxelpxS21X?=
+ =?utf-8?B?ZGRnam5xN0g0QkJTODVtWnBqbVdYYmxaRU9HeENDVGZmR2V0TkNQVmVaSFNL?=
+ =?utf-8?B?OG0reWJZZTNhcmdqU2tlY3lEdXRPLzY3REtCcFFKdWRxRktVdDBCKzJQTEZR?=
+ =?utf-8?Q?HJj5hWapApuC+bi0=3D?=
+X-Exchange-RoutingPolicyChecked: gWbV9+diSEx7b7NZq+hnG3hFTT+svm1iA8IkvzxKC9E1jjDCDzwTKGtUbiOhWOuUkhvZ/COY9urwWP4/NvHrwlKaIQCde+N+PRv5YFkh6TXQZDRmodIWBpdwK3/9HLBeHGRBVbw9PWHdPZbHTwGrWnmThEKp6lG2Y79SSonDqiYW/p+xNnKrK3ZZ4a117LHa1ufv+tfAjef0YU/l9vY03+rZCxMhVxETUNWvwUpt7fW7Cd7b0VS+2eOHUml8Q4WFnjjJ8BPjFZd786t8OUq2Wjc0GuqeQLjmJJ1YBcuZRF5Vurps5KHL8BLPCdTAgfpmDRzGT8DEW4qyDUmhLFdESQ==
+X-MS-Exchange-CrossTenant-Network-Message-Id: cc0034ea-9fb5-461d-5298-08dee8a52389
+X-MS-Exchange-CrossTenant-AuthSource: SA1PR11MB6967.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jul 2026 10:28:29.9242
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: AUHjwnThIidYst1ycJC7VlguCZEYBKAn6FTEhbLGBBrEpLX/I2Hg3/q0L9Gb9izVBD51bpcp8cOwTb/b3gnEEkEY1vsqB8rsvZfwJEq2oeA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR11MB7891
+X-OriginatorOrg: intel.com
 
-Add multi-slice encoding support with MAX_MB and MAX_BYTES modes.
+On 7/23/2026 7:30 AM, Uwe Kleine-König (The Capable Hub) wrote:
+> Hello Cezary,
+> 
+> On Wed, Jul 22, 2026 at 07:55:26PM +0200, Cezary Rojewski wrote:
+>> On 7/20/2026 8:23 AM, Uwe Kleine-König (The Capable Hub) wrote:
+>>
+>>>    sound/soc/au1x/db1200.c                |  2 +-
+>>>    sound/soc/codecs/adau7118-hw.c         |  2 +-
+>>>    sound/soc/codecs/bt-sco.c              | 10 +++-------
+>>>    sound/soc/codecs/wcd934x.c             |  6 ++----
+>>>    sound/soc/fsl/imx-pcm-rpmsg.c          |  6 +++---
+>>>    sound/soc/intel/avs/boards/da7219.c    |  6 ++----
+>>>    sound/soc/intel/avs/boards/dmic.c      |  6 ++----
+>>>    sound/soc/intel/avs/boards/es8336.c    |  6 ++----
+>>>    sound/soc/intel/avs/boards/hdaudio.c   |  6 ++----
+>>>    sound/soc/intel/avs/boards/i2s_test.c  |  6 ++----
+>>>    sound/soc/intel/avs/boards/max98357a.c |  6 ++----
+>>>    sound/soc/intel/avs/boards/max98373.c  |  6 ++----
+>>>    sound/soc/intel/avs/boards/max98927.c  |  6 ++----
+>>>    sound/soc/intel/avs/boards/nau8825.c   |  6 ++----
+>>>    sound/soc/intel/avs/boards/pcm3168a.c  |  6 ++----
+>>>    sound/soc/intel/avs/boards/probe.c     |  2 +-
+>>>    sound/soc/intel/avs/boards/rt274.c     |  2 +-
+>>>    sound/soc/intel/avs/boards/rt286.c     |  2 +-
+>>>    sound/soc/intel/avs/boards/rt298.c     |  2 +-
+>>>    sound/soc/intel/avs/boards/rt5514.c    |  2 +-
+>>>    sound/soc/intel/avs/boards/rt5640.c    |  2 +-
+>>>    sound/soc/intel/avs/boards/rt5663.c    |  2 +-
+>>>    sound/soc/intel/avs/boards/rt5682.c    |  2 +-
+>>>    sound/soc/intel/avs/boards/ssm4567.c   |  2 +-
+>>>    sound/soc/samsung/i2s.c                |  2 +-
+>>
+>> This change is outstanding when compared to patches 1-4 which follow the
+>> per-driver approach.  I'd expect one driver per scope e.g.: Intel's avs
+>> split away from the rest.
+> 
+> Well, patches 1 and 2 primarily follow the one patch per type of change
+> approach that happen to only affect one driver each. In the v1 thread I
+> was asked to split out split out the amd/acp bits which resulted in
+> patches 3 and 4. (And just now I notice you also replied and asked to
+> split out intel/avs, too, which I missed. Sorry!)
+> 
+> Conceptually I think one commit per driver is the right approach[1] but
+> most maintainers/reviewers seem to favour one commit adapting one thing
+> for all drivers in a subsystem. And in my experience no matter how you
+> make it, you get a reply to change.
 
-Clients can enable slice mode using V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MODE
-control and configure slice size via V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_MB
-or V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_BYTES controls.
+Couldn't agree more with the last one.  Happens to us all :)
 
-Signed-off-by: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
----
- drivers/media/platform/qcom/iris/iris_ctrls.c      | 79 ++++++++++++++++++++++
- drivers/media/platform/qcom/iris/iris_ctrls.h      |  1 +
- drivers/media/platform/qcom/iris/iris_hfi_gen2.c   | 33 ++++++++-
- .../platform/qcom/iris/iris_hfi_gen2_defines.h     |  2 +
- .../platform/qcom/iris/iris_platform_common.h      | 16 +++++
- .../media/platform/qcom/iris/iris_platform_vpu3x.c | 17 +++++
- 6 files changed, 147 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.c b/drivers/media/platform/qcom/iris/iris_ctrls.c
-index d7cbf6c3614a..ed7ed4b89a5a 100644
---- a/drivers/media/platform/qcom/iris/iris_ctrls.c
-+++ b/drivers/media/platform/qcom/iris/iris_ctrls.c
-@@ -154,6 +154,12 @@ static enum platform_inst_fw_cap_type iris_get_cap_id(u32 id)
- 		return LAYER4_BITRATE_HEVC;
- 	case V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L5_BR:
- 		return LAYER5_BITRATE_HEVC;
-+	case V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MODE:
-+		return SLICE_MODE;
-+	case V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_BYTES:
-+		return SLICE_MAX_BYTES;
-+	case V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_MB:
-+		return SLICE_MAX_MB;
- 	default:
- 		return INST_FW_CAP_MAX;
- 	}
-@@ -297,6 +303,12 @@ static u32 iris_get_v4l2_id(enum platform_inst_fw_cap_type cap_id)
- 		return V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L4_BR;
- 	case LAYER5_BITRATE_HEVC:
- 		return V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L5_BR;
-+	case SLICE_MODE:
-+		return V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MODE;
-+	case SLICE_MAX_BYTES:
-+		return V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_BYTES;
-+	case SLICE_MAX_MB:
-+		return V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_MB;
- 	default:
- 		return 0;
- 	}
-@@ -1482,6 +1494,73 @@ int iris_set_layer_bitrate(struct iris_inst *inst, enum platform_inst_fw_cap_typ
- 					     &bitrate, sizeof(u32));
- }
- 
-+int iris_set_slice_count(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id)
-+{
-+	const struct iris_hfi_session_ops *hfi_ops = inst->hfi_session_ops;
-+	const struct platform_inst_slice_caps *slice_caps =
-+		inst->core->iris_platform_data->slice_caps;
-+	u32 slice_mode = inst->fw_caps[SLICE_MODE].value;
-+	u32 bitrate = inst->fw_caps[BITRATE].value;
-+	u32 rc_type = inst->hfi_rc_type;
-+	u32 fps = inst->frame_rate;
-+	u32 output_width = inst->fmt_dst->fmt.pix_mp.width;
-+	u32 output_height = inst->fmt_dst->fmt.pix_mp.height;
-+	u32 mbpf = NUM_MBS_PER_FRAME(output_height, output_width);
-+	u32 max_width, max_height, min_width, min_height;
-+	u32 max_avg_slicesize, hfi_value, hfi_id;
-+
-+	if (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_SINGLE) {
-+		dev_dbg(inst->core->dev, "slice mode is: %u, ignore setting to fw\n", slice_mode);
-+		return 0;
-+	}
-+	if (fps > slice_caps->max_slice_frame_rate ||
-+	    (rc_type != HFI_RC_OFF && rc_type != HFI_RC_CBR_CFR &&
-+	    rc_type != HFI_RC_CBR_VFR && rc_type != HFI_RC_VBR_CFR)) {
-+		dev_err(inst->core->dev, "slice unsupported, fps: %u, rc_type: %#x\n",
-+			fps, rc_type);
-+		return -EINVAL;
-+	}
-+
-+	max_width = (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_MB) ?
-+			slice_caps->max_mb_slice_width : slice_caps->max_bytes_slice_width;
-+	max_height = (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_MB) ?
-+			slice_caps->max_mb_slice_height : slice_caps->max_bytes_slice_height;
-+	min_width = (inst->codec == V4L2_PIX_FMT_HEVC) ?
-+			slice_caps->min_hevc_slice_width : slice_caps->min_avc_slice_width;
-+	min_height = slice_caps->min_slice_height;
-+
-+	if (output_width < min_width || output_height < min_height ||
-+	    output_width > max_width || output_height > max_height) {
-+		dev_err(inst->core->dev, "slice unsupported, codec: %#x wxh: [%dx%d]\n",
-+			inst->codec, output_width, output_height);
-+		return -EINVAL;
-+	}
-+
-+	if (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_MB) {
-+		hfi_value = inst->fw_caps[SLICE_MAX_MB].value;
-+		hfi_value = max(hfi_value, DIV_ROUND_UP(mbpf, slice_caps->max_slices_per_frame));
-+		if (inst->codec == V4L2_PIX_FMT_HEVC)
-+			hfi_value = (hfi_value + 3) / 4;
-+		hfi_id = inst->fw_caps[SLICE_MAX_MB].hfi_id;
-+	} else if (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_BYTES) {
-+		hfi_value = inst->fw_caps[SLICE_MAX_BYTES].value;
-+		if (rc_type != HFI_RC_OFF) {
-+			max_avg_slicesize = DIV_ROUND_UP((bitrate / fps) / 8,
-+							 slice_caps->max_slices_per_frame);
-+			hfi_value = max(hfi_value, max_avg_slicesize);
-+		}
-+		hfi_id = inst->fw_caps[SLICE_MAX_BYTES].hfi_id;
-+	} else {
-+		return -EINVAL;
-+	}
-+
-+	return hfi_ops->session_set_property(inst, hfi_id,
-+					     HFI_HOST_FLAGS_NONE,
-+					     iris_get_port_info(inst, cap_id),
-+					     HFI_PAYLOAD_U32,
-+					     &hfi_value, sizeof(u32));
-+}
-+
- int iris_set_properties(struct iris_inst *inst, u32 plane)
- {
- 	const struct iris_hfi_session_ops *hfi_ops = inst->hfi_session_ops;
-diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.h b/drivers/media/platform/qcom/iris/iris_ctrls.h
-index 3c462ec9190b..5a73c7c49d36 100644
---- a/drivers/media/platform/qcom/iris/iris_ctrls.h
-+++ b/drivers/media/platform/qcom/iris/iris_ctrls.h
-@@ -47,6 +47,7 @@ int iris_set_layer_type(struct iris_inst *inst, enum platform_inst_fw_cap_type c
- int iris_set_layer_count_gen1(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
- int iris_set_layer_count_gen2(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
- int iris_set_layer_bitrate(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
-+int iris_set_slice_count(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
- int iris_set_properties(struct iris_inst *inst, u32 plane);
- 
- #endif
-diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
-index acc0ed8adda1..fcbebced05c3 100644
---- a/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
-+++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
-@@ -12,6 +12,8 @@
- 
- #define VIDEO_ARCH_LX 1
- #define BITRATE_MAX				245000000
-+#define MAX_SLICE_MB_SIZE         \
-+	(((4096 + 15) >> 4) * ((2160 + 15) >> 4))
- 
- static const struct platform_inst_fw_cap inst_fw_cap_sm8550_dec[] = {
- 	{
-@@ -937,7 +939,36 @@ static const struct platform_inst_fw_cap inst_fw_cap_sm8550_enc[] = {
- 		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
- 			CAP_FLAG_DYNAMIC_ALLOWED,
- 		.set = iris_set_layer_bitrate,
--	}
-+	},
-+	{
-+		.cap_id = SLICE_MODE,
-+		.min = V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_SINGLE,
-+		.max = V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_BYTES,
-+		.step_or_mask = BIT(V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_SINGLE) |
-+					BIT(V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_MB) |
-+					BIT(V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_BYTES),
-+		.value = V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_SINGLE,
-+		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_MENU,
-+		.set = iris_set_slice_count,
-+	},
-+	{
-+		.cap_id = SLICE_MAX_BYTES,
-+		.min = 512,
-+		.max = BITRATE_MAX >> 3,
-+		.step_or_mask = 1,
-+		.value = 512,
-+		.hfi_id = HFI_PROP_MULTI_SLICE_BYTES_COUNT,
-+		.flags = CAP_FLAG_OUTPUT_PORT,
-+	},
-+	{
-+		.cap_id = SLICE_MAX_MB,
-+		.min = 1,
-+		.max = MAX_SLICE_MB_SIZE,
-+		.step_or_mask = 1,
-+		.value = 1,
-+		.hfi_id = HFI_PROP_MULTI_SLICE_MB_COUNT,
-+		.flags = CAP_FLAG_OUTPUT_PORT,
-+	},
- };
- 
- static const u32 sm8550_vdec_input_config_params_default[] = {
-diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h b/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
-index 776b21cd11b2..226894b99dcc 100644
---- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
-+++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
-@@ -71,6 +71,8 @@ enum hfi_rate_control {
- #define HFI_PROP_MIN_QP_PACKED			0x0300012f
- #define HFI_PROP_MAX_QP_PACKED			0x03000130
- #define HFI_PROP_IR_RANDOM_PERIOD		0x03000131
-+#define HFI_PROP_MULTI_SLICE_MB_COUNT		0x03000132
-+#define HFI_PROP_MULTI_SLICE_BYTES_COUNT	0x03000133
- #define HFI_PROP_LTR_COUNT			0x03000134
- #define HFI_PROP_LTR_MARK			0x03000135
- #define HFI_PROP_LTR_USE			0x03000136
-diff --git a/drivers/media/platform/qcom/iris/iris_platform_common.h b/drivers/media/platform/qcom/iris/iris_platform_common.h
-index c9256f2323dc..ad9f2b20cd90 100644
---- a/drivers/media/platform/qcom/iris/iris_platform_common.h
-+++ b/drivers/media/platform/qcom/iris/iris_platform_common.h
-@@ -88,6 +88,18 @@ struct tz_cp_config {
- 	u32 cp_nonpixel_size;
- };
- 
-+struct platform_inst_slice_caps {
-+	u32 max_slices_per_frame;
-+	u32 max_slice_frame_rate;
-+	u32 max_mb_slice_width;
-+	u32 max_mb_slice_height;
-+	u32 max_bytes_slice_width;
-+	u32 max_bytes_slice_height;
-+	u32 min_hevc_slice_width;
-+	u32 min_avc_slice_width;
-+	u32 min_slice_height;
-+};
-+
- struct platform_inst_caps {
- 	u32 min_frame_width;
- 	u32 max_frame_width;
-@@ -183,6 +195,9 @@ enum platform_inst_fw_cap_type {
- 	LAYER3_BITRATE_HEVC,
- 	LAYER4_BITRATE_HEVC,
- 	LAYER5_BITRATE_HEVC,
-+	SLICE_MODE,
-+	SLICE_MAX_BYTES,
-+	SLICE_MAX_MB,
- 	INST_FW_CAP_MAX,
- };
- 
-@@ -315,6 +330,7 @@ struct iris_platform_data {
- 	const u32 *inst_iris_fmts;
- 	u32 inst_iris_fmts_size;
- 	struct platform_inst_caps *inst_caps;
-+	const struct platform_inst_slice_caps *slice_caps;
- 	const struct tz_cp_config *tz_cp_config_data;
- 	u32 tz_cp_config_data_size;
- 	u32 num_vpp_pipe;
-diff --git a/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c b/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
-index 2c63adbc5579..6e44bed5ebff 100644
---- a/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
-+++ b/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
-@@ -12,6 +12,18 @@
- #include "iris_vpu_buffer.h"
- #include "iris_vpu_common.h"
- 
-+static const struct platform_inst_slice_caps default_slice_caps_vpu3x = {
-+	.max_slices_per_frame = 128,
-+	.max_slice_frame_rate = 60,
-+	.max_mb_slice_width = 4096,
-+	.max_mb_slice_height = 2160,
-+	.max_bytes_slice_width = 1920,
-+	.max_bytes_slice_height = 1088,
-+	.min_hevc_slice_width = 384,
-+	.min_avc_slice_width = 192,
-+	.min_slice_height = 128,
-+};
-+
- #include "iris_platform_qcs8300.h"
- #include "iris_platform_sm8550.h"
- #include "iris_platform_sm8650.h"
-@@ -110,6 +122,7 @@ const struct iris_platform_data qcs8300_data = {
- 	.inst_iris_fmts = iris_fmts_vpu3x_dec,
- 	.inst_iris_fmts_size = ARRAY_SIZE(iris_fmts_vpu3x_dec),
- 	.inst_caps = &platform_inst_cap_qcs8300,
-+	.slice_caps = &default_slice_caps_vpu3x,
- 	.tz_cp_config_data = tz_cp_config_vpu3,
- 	.tz_cp_config_data_size = ARRAY_SIZE(tz_cp_config_vpu3),
- 	.num_vpp_pipe = 2,
-@@ -139,6 +152,7 @@ const struct iris_platform_data sm8550_data = {
- 	.inst_iris_fmts = iris_fmts_vpu3x_dec,
- 	.inst_iris_fmts_size = ARRAY_SIZE(iris_fmts_vpu3x_dec),
- 	.inst_caps = &platform_inst_cap_sm8550,
-+	.slice_caps = &default_slice_caps_vpu3x,
- 	.tz_cp_config_data = tz_cp_config_vpu3,
- 	.tz_cp_config_data_size = ARRAY_SIZE(tz_cp_config_vpu3),
- 	.num_vpp_pipe = 4,
-@@ -176,6 +190,7 @@ const struct iris_platform_data sm8650_data = {
- 	.inst_iris_fmts = iris_fmts_vpu3x_dec,
- 	.inst_iris_fmts_size = ARRAY_SIZE(iris_fmts_vpu3x_dec),
- 	.inst_caps = &platform_inst_cap_sm8550,
-+	.slice_caps = &default_slice_caps_vpu3x,
- 	.tz_cp_config_data = tz_cp_config_vpu3,
- 	.tz_cp_config_data_size = ARRAY_SIZE(tz_cp_config_vpu3),
- 	.num_vpp_pipe = 4,
-@@ -205,6 +220,7 @@ const struct iris_platform_data sm8750_data = {
- 	.inst_iris_fmts = iris_fmts_vpu3x_dec,
- 	.inst_iris_fmts_size = ARRAY_SIZE(iris_fmts_vpu3x_dec),
- 	.inst_caps = &platform_inst_cap_sm8550,
-+	.slice_caps = &default_slice_caps_vpu3x,
- 	.tz_cp_config_data = tz_cp_config_vpu3,
- 	.tz_cp_config_data_size = ARRAY_SIZE(tz_cp_config_vpu3),
- 	.num_vpp_pipe = 4,
-@@ -240,6 +256,7 @@ const struct iris_platform_data x1p42100_data = {
- 	.inst_iris_fmts = iris_fmts_vpu3x_dec,
- 	.inst_iris_fmts_size = ARRAY_SIZE(iris_fmts_vpu3x_dec),
- 	.inst_caps = &platform_inst_cap_sm8550,
-+	.slice_caps = &default_slice_caps_vpu3x,
- 	.tz_cp_config_data = tz_cp_config_vpu3,
- 	.tz_cp_config_data_size = ARRAY_SIZE(tz_cp_config_vpu3),
- 	.num_vpp_pipe = 1,
-
--- 
-2.34.1
-
+> Will split out intel/avs for v3 and maybe hit the sweet spot then.
+Thank you.
