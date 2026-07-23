@@ -1,147 +1,103 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C17641C2F8;
-	Thu, 23 Jul 2026 11:10:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 187D547043B
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 11:30:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784805042; cv=none; b=s7a9kS1aqQG5k9s+8ROv+iUq3XBvAhraxN4jcxKDAlZZgw8MRQeFoxGmC7c0pLosJ4++psR97DTKQp48BB+0+Dh8d1a54DCRWVcOzC4OLYC5zQDmy4vML+7/0NqP+pFj9baAwHPHLBT+NmWGEuDZg50kI9uMX/Yt3SmGMH6xuaQ=
+	t=1784806238; cv=none; b=U1a3oCh3BMiFgrIcR/PraytDpYa85O1QJsJ7N55ezgyp9b8zHZVUwLosYzEoG7pHsdgq4oleZSDo2Mr2mNSHt2pY1q6j/O/7ATgxZj9BJmjIR3x+OnFBiqHblqwFV2v7YFBtYV2XTOqqxxXc0OeVfZrcP0MQQkB3GmKndwbTukY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784805042; c=relaxed/simple;
-	bh=w1D4NagMFdQ9vb6d1u9picWYWj88Rz8X3I3r4aqAjgw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=EOPOXlDSG9cH86gJsOsmrJD2/RKcc9FgRliRo3oYucr4oGAYRrSjCraXXdqXyhR8mptPcdfCN0y75ycwl5MQoUpqj7n1A3gzBagbResZF7vUT/wiFFYdg6HuvDM33uJSaxwpw+jrDmd8/qsP5kKEwUIGIb1eO6HzX8hwzPKEDmk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GpbBGUHC; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1784806238; c=relaxed/simple;
+	bh=Eb4s4/iQHSUXZ9HuzdIz7QSVMesCI0MvaBjzTEDaKaQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=UmNvt4CNrILo6z7wA1Vum8G28PCTyERTFQSBgvK/5/rXcMLVc6JR3d/08zPPborGemW8y6uXXVaKN3R6sGokvNLhmQLG0TWvRyMAHyEqAg8Po/h9TqVr7zhUsvk+Iq2SC2wp52YOHnVZL0kdxBTjUj8kDEM7jB24r8/nLxHHr6U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=IAvG5St3; arc=none smtp.client-ip=209.85.167.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GpbBGUHC"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id DFEC9C2BCB8;
-	Thu, 23 Jul 2026 11:10:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1784805042;
-	bh=w1D4NagMFdQ9vb6d1u9picWYWj88Rz8X3I3r4aqAjgw=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=GpbBGUHCK6IdIlWTZ1XKO7EtFtqYpX09WcWHGh5oqU8gKlugs4t5TtZgXuDb9fW47
-	 bWpOKhFHhlBfJIHeV/LNwGWfFv5OizDG/Ox6udKK7xeRL82Yj3GThwESe9imBW2Enm
-	 5skGvy1dmpKlbjqBdorrGAMcr9oKYVWPMsNl0W9wmAzVbt3KaBBkuyN8x1bAyWJvCl
-	 ScfvVvPmu2/+S+H/7kwIQwmdOdMYZKXOkWvkYVJgAmhJDN5ULFGbNCp6PXimvhRtdC
-	 vR3KtpMp1yxAUNRrZUsPO/SRXCQmQvzyAQomEOy1YRZNjMaV7GM8OnonP6DRrm2jA2
-	 YzT4Ncajw8ccg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id BC9B4C531CC;
-	Thu, 23 Jul 2026 11:10:41 +0000 (UTC)
-From: Sarath Ganapathiraju via B4 Relay <devnull+sarath.ganapathiraju.oss.qualcomm.com@kernel.org>
-Date: Thu, 23 Jul 2026 16:40:40 +0530
-Subject: [PATCH v3 1/2] dt-bindings: clock: qcom: Add LPASS VA CSR
- HeartBeat pulse clock
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="IAvG5St3"
+Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5b0190a62beso99078e87.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 04:30:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1784806235; x=1785411035; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=87QtCEbDS1yneeD8KD17fyRLqP9fiy/6kt3pJMDAIBA=;
+        b=IAvG5St3jeYXItKhzczUcDNpVd9GzRRBoVtxAKKOEx0vfwRjOvNjR+Ss9GqNFSG1Ey
+         aqyEEbCeE7tCrZR+kVjScHLdYt4hkhWIMX1IigjKq/lQvlRkL6XbJESSl/0hUk+3bzO8
+         5Bb7gNljRmBIvsNPEkOeAuxcsKiTSL1SLbsjxAo6XGeWAexSQq5Yy8SEmeE1I3e4Cmsr
+         94nKNsdWD3aTgnS0l+KwPaZgap437zfMxjCtKCFXKh0lQau/Q2xLmbF8I0iaO6wKR5IE
+         l8QWWfrlhhBASjL4bTGJCGmyM61Fjn8PwS0PlIepBKOJich4MZZnedviD9sQNsybe/lZ
+         9kkw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784806235; x=1785411035;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=87QtCEbDS1yneeD8KD17fyRLqP9fiy/6kt3pJMDAIBA=;
+        b=PvQR/4hgn00c9aUCAiDK5XGatpm5czVCf/xgFuXqT2yWs08iy2QjOz8qOAeUC0xiLu
+         6kv7oxR8A1CV4gIa6hTqENuuT7FldaR1qhK+U7z8sV0Xu1IDiEg58gduI/NVZwW0ZtfY
+         ju4hic8uHSzeKKfVL/p5APfPbM+u3Cwd5ilwsZtvHEY21L6mIvUDWVBEocggRN2j/Iyx
+         KCYoV184aV24yabnqd2AV09qVPf1wpONyO3W61HZsdrUTnph/EruEe5MHXUo82D63Ge4
+         C2BfsBBCL8PCyBvSi2LOu3ggiYBj27MsMZ8L3aQtfrre932N5TjT63Aezk7az2WHUQUP
+         tyzA==
+X-Forwarded-Encrypted: i=1; AHgh+Rpq36QkFX5bG/xKD8WQy9VLj+el/Ud+vACh0V7MX56EONFnqiAGPr6HZDFZDhiSQ+HL6p5kLmMpHKKjvHj3@vger.kernel.org
+X-Gm-Message-State: AOJu0YylEn0xYmj1ZspIiSeE8OtrhzIotXkE8IWjCB5rZ4TmfaSJKxWq
+	pOpnYjJ4+OXdkYeqE6WRRV1RCgaQMKGKo+5b47wzbV0ftxICSVe13qw9gc1UJAgk4dY=
+X-Gm-Gg: AR+sD10w/C1fwsaT33P0GpgGxo2flcaqwEEg1ooh0GFkTABscK3Xh8o3IBb/zSe9rmF
+	7A0fd6nBxmDICk9BgnIuHiK3faw7QwLxULEIk9ZE6P67LaucR+20nhSe4hSOMipAHQfpP1pirWJ
+	hsQl6WFCtm7twVSqYdR0+sA9KOyZdLp+Qh164+6iYT6FkIdzwia6UgiqA/vUkqhaAS1NtFMXV8Z
+	pnwqKwJSGPBttGp+8AgjAyEGzUCa+wuL8Vseh9U2apk88CGcmUvjZibUWuSx9A4YPq+uhE4izvk
+	ZAE0/MEXbArLr84OCE2N0ZfiWh4DbUNEQ47l4+PwEiCdswvFbYZAXt6fOPC+7nMbm+67JXWTU36
+	lHQ38KjL1sZi3/HCRqnQQTSEZIDepuAUk5npFhnN8JueGIrQKQqMwqeyZP41m2aEeMChOe5NRCI
+	Ei6FyFgOwoW4koATIPif9QpouLTkYOeSc+we833Zhyw0bbfgkH9e8RWl5bxO8ntzM9IbU=
+X-Received: by 2002:a05:6512:3e01:b0:5b1:5e89:30f6 with SMTP id 2adb3069b0e04-5b2b2f6efb3mr290535e87.3.1784806234965;
+        Thu, 23 Jul 2026 04:30:34 -0700 (PDT)
+Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2a9b0c511sm985237e87.0.2026.07.23.04.30.33
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 23 Jul 2026 04:30:33 -0700 (PDT)
+Message-ID: <58bb39e6-d87d-4c47-9d43-aa878199c31e@linaro.org>
+Date: Thu, 23 Jul 2026 14:30:33 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] media: qcom: camss: Add "gcc_axi_hf" to 8775p VFE
+ lite clock lists
+To: Hans de Goede <johannes.goede@oss.qualcomm.com>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>, linux-media@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
+References: <20260723110952.55597-1-johannes.goede@oss.qualcomm.com>
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+In-Reply-To: <20260723110952.55597-1-johannes.goede@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-master-v3-1-3d67b79b0515@oss.qualcomm.com>
-References: <20260723-master-v3-0-3d67b79b0515@oss.qualcomm.com>
-In-Reply-To: <20260723-master-v3-0-3d67b79b0515@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Michael Turquette <mturquette@baylibre.com>, 
- Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, 
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-sound@vger.kernel.org, prasad.kumpatla@oss.qualcomm.com, 
- konrad.dybcio@oss.qualcomm.com, 
- Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784805040; l=2086;
- i=sarath.ganapathiraju@oss.qualcomm.com; s=default;
- h=from:subject:message-id;
- bh=wXats/x19oW6Nca7WCy8RrKe08FRJ05fxSnavYsfrik=;
- b=Dl9qolaX7EA0a0NiPfFECyZX8VukxMAf2q6zvexRzLFYl7i7f6QW9GQxUMUp0d2BrKYnBrKTY
- Zf4LnNzRWarC7EQRaV0OvoO17hF5kWApTAWIL0zeZUyso3iCdUQdu/7
-X-Developer-Key: i=sarath.ganapathiraju@oss.qualcomm.com; a=ed25519;
- pk=4p2FWGXM+F2sir13Lu5stw5aKX5trUymK/ttESvgxQg=
-X-Endpoint-Received: by B4 Relay for
- sarath.ganapathiraju@oss.qualcomm.com/default with auth_id=870
-X-Original-From: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
-Reply-To: sarath.ganapathiraju@oss.qualcomm.com
 
-From: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
+On 7/23/26 14:09, Hans de Goede wrote:
+> The "gcc_axi_hf" clock is correctly listed in the clock list of the
+> 8775p 2 main VFE-s, but it is missing from all the VFE-lite clock lists,
+> causing these to not work on platforms where the firmware allows turning
+> off "gcc_axi_hf".
+> 
+> Add the missing "gcc_axi_hf" to fix the VFE-lite blocks not working on
+> these platforms.
+> 
+> Fixes: 924f45e58b1fe ("media: qcom: camss: Add missing clocks for VFE lite on sa8775p")
+> Cc: stable@vger.kernel.org
+> Suggested-by: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
+> Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+> Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
 
-Add a binding for the Qualcomm LPASS VA CSR rate generator node that
-exposes the lpass_heartbeat_pulse clock on hawi.
-
-The HeartBeat Pulse (also known as RateGen Pulse) synchronizes the
-start of the DMAs and Codec Interfaces for the audio usecase and can
-serve as a periodic wakeup source for the DSP.
-
-Signed-off-by: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
----
- .../bindings/clock/qcom,lpass-va-csr.yaml          | 49 ++++++++++++++++++++++
- 1 file changed, 49 insertions(+)
-
-diff --git a/Documentation/devicetree/bindings/clock/qcom,lpass-va-csr.yaml b/Documentation/devicetree/bindings/clock/qcom,lpass-va-csr.yaml
-new file mode 100644
-index 000000000000..b4bc33a86640
---- /dev/null
-+++ b/Documentation/devicetree/bindings/clock/qcom,lpass-va-csr.yaml
-@@ -0,0 +1,49 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/clock/qcom,lpass-va-csr.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Qualcomm LPASS VA CSR heartbeat pulse clock provider
-+
-+maintainers:
-+  - Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-+  - Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
-+
-+description:
-+  The LPASS (Low Power Audio Subsystem) VA CSR block contains a rate
-+  generator that produces a periodic HeartBeat Pulse, also known as
-+  the RateGen Pulse. This pulse synchronizes the start of DMAs and
-+  Codec Interfaces for audio usecases and can serve as a periodic
-+  wakeup source for the DSP.
-+
-+properties:
-+  compatible:
-+    enum:
-+      - qcom,hawi-lpass-va-csr
-+
-+  reg:
-+    maxItems: 1
-+
-+  "#clock-cells":
-+    const: 0
-+
-+required:
-+  - compatible
-+  - reg
-+  - "#clock-cells"
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    soc {
-+      #address-cells = <2>;
-+      #size-cells = <2>;
-+
-+      clock-controller@7ee0000 {
-+        compatible = "qcom,hawi-lpass-va-csr";
-+        reg = <0x0 0x07ee0000 0x0 0xe000>;
-+        #clock-cells = <0>;
-+      };
-+    };
+Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 
 -- 
-2.34.1
-
-
+Best wishes,
+Vladimir
