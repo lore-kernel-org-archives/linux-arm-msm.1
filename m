@@ -1,154 +1,112 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D777426D03
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 09:34:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A420B427FB3
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 09:37:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784799259; cv=none; b=Sv9VXtCNvrV0DIN4ABgJMtn5AROmzE871adcNvz3gSQmmDslphl9PM8quEcjU6Ubfqc221iccmF2ihzhmFpJVFYV1YDwI1Y7tEt9lSAblBnn4jLn65whQXvCxG4FSjLhprMl6GlQ5hleftlMn0M4aguwh2g9yECaqJ/9H/bEav0=
+	t=1784799438; cv=none; b=kMNNoX1h2Y6PKrLr3rKkqWwcgdkpqqvPoYJffaRnG5+GMRE69KqkcmeD6RQoAd70sYcqBhi+UYnMR2+x7FXrH3qnOTHdBy2dLqf+txch/w9TpMBzCMpVUpddxiwjI285uFDQ6vdb1F1UgEq+yNvG3AL29pC42eusPqrXSEH+n7Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784799259; c=relaxed/simple;
-	bh=3ERx3QEm5vOrtZp45kHOZ2Xl4tp4BshFW+OL+xcGQKI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=lB1rmm9Qb8lKsmdJKRppCemWdm5vKY1X+0xWxcwywd0B6PskRPCoaW3pHXFOJNhigp3iCLG+/JTnX9em1PgHeBaMH0U4L4p6Lq/ts92Pl/D6LAcBeEOEpaLnu2xIgghFi2/QTAk5eFYTj8pnMQ43vvnIAb0CnG7QOgdsy/48BWU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YtKbG1Dg; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SYcVguHZ; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784799438; c=relaxed/simple;
+	bh=UHHEYrKMvzuzSupr2/g84h0S2cJB1TfXy3IzxYoKXmw=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=UDqYNrVxxV5qUN5Mt2jCc4mkFs61uW1ujHQkUm8S8dftQDXEQygUonXX5vyHld3c+87rambI04PG11xRHKodnPDxtyzGNoyKDAKwmDg3T25LeSPBLBFGZTen8LCYb11Sd6VNKkuLtLNh0HuTJubwlG6OJ9j/JrhyQrRYVV/0aOE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OdfjBPdy; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YtKbG1Dg";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SYcVguHZ"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66N8qbLB3606139
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 09:34:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	SJk/WEf9xX/T6XBL4N4jb2++nwLoZNRVcvk1ujXHkFk=; b=YtKbG1Dgfxa7z2w/
-	7xpxdfoVQHDPHg7BwW/FoUJwDpYkEuegAhCV/pZXax6Bbk3OQF9mNH9oLSYxwPLs
-	oofKRX/+r9gn1Z/7B3Ss6XiFtjxzeeaxQQb+IQtNwLWb1+Ek1WdFzli3IyphAyMK
-	mAQGUBYmGKYmOrGNr8rjUi2hIWWu7/TZb0HaKLxKdrudpF3lDEIbTQfCZWj5O3zF
-	NgK+02k9T9bdn3lvTpUDE84HZjuQ4n/SbTtZ5MCZN8UlWgfioAKapkaE3u88fofp
-	eS0ScBnJ/qIjZIcuyXhdhzlpqZD8dvPkPmF4gtfGH+JI9kL3CTsQtuUxg/KOpxhc
-	98VkIQ==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fke7qgkju-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 09:34:14 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c069f73e4so1835131cf.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 02:34:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784799253; x=1785404053; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=SJk/WEf9xX/T6XBL4N4jb2++nwLoZNRVcvk1ujXHkFk=;
-        b=SYcVguHZhsyG1NcVnKgpc818ZhCh2m/S8xxwC02jL8cE7Zab9SrqZGXlQI81yWE89Z
-         KLd7EFhOpzgdsJLtHh+sSRNo7AKa1XVNOwPmJH7j1QJpqvkTMB1jgN4y0eTLHquolv3E
-         NLhj5E8HCMj2WL4aYPQ3Na+VEEn+qvBGLWb+hZP8mBREbTiLcsC+rvYivNu9Jg9RGMCQ
-         X0WaumagehgsoeoB+wHFrYXp6up3C/oNrg2mRNd2ZnaKwCb69Z0g2Fzy67swM288wcwA
-         p/WF6ETv2X3/n/NKLEPgPlH63wec7ufMraWDNIBH3uRGtaO658Q9IQ//4ah97FHuM2V7
-         rsyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784799253; x=1785404053;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=SJk/WEf9xX/T6XBL4N4jb2++nwLoZNRVcvk1ujXHkFk=;
-        b=s/DtLdbUJgTRr+HaiUQjTrWV5jL8qeuqubTuhzGyHhC+lNm4XRQ6r94LCM68sYNovx
-         aO/cUfUAnJNxq4E6AA2cUEUZ25RnMrYWcbJdtIT8HpUrrQFuwibzZUr7d5BU4cq4DZuC
-         XtKsZQCn1mff0B9xQq56u4fCSVkk3vZ2VqGJBa8LvbffepOmdp9clkIme3gLeqpW0g2r
-         NTAJyZixd6VzrF6rmFf4DKyyDJoRSIUg3YMq9gSqYIX1WbcQcYyCYk5DmQg3ZnvuG/n9
-         MOOLV99WieWE28NRnuoLD0Le2614vyB7mhK4Kg2yb22ClvTnlWFDXDDPFDiBWwW1cmOn
-         FaZA==
-X-Gm-Message-State: AOJu0Yw9r8OZLZp3rul+bEXz8ycEBnI+9QB43naNAuN7Oh57N8bA2+GP
-	HlUo5dRG1KQTQRZiZ8TDWtjdPj62Itieec73gDIj42CcTZ3AVv3Vd7RhyDbWN+G+uSlT6CuhmYw
-	+ohACyX2Q++yqHbP+/ThVjkAG9vx1Ux2AF3VoHAPWUhMeeQlQ9xdaGiOQAnFeQoXWHJ0i
-X-Gm-Gg: AR+sD1221QbBFL9nDJagjQrOHhq3mWQpd8YVoUOeNTwEafku2oVxW7N6aU//pOGIkqk
-	FssLNZqFE+O31PbThlp2GzjIIGuuqGLJqjCCneCuYhl94yJNGud3i9Lck+MeC4xYwksOC2lxKO5
-	NPuXN8kQgQu4SPjBey0N67Xap9sIUmpWW0PZQoA4r7DFXcCyTn94csmJQrDG2NtUFWgdRaoQSAM
-	ORfZF1Z8PIWiuqdj5Cx+9t8XUpWC1X1BeH0TIKaaUMkJW5wxwBMBkB5UIw4lCCp/6Hpu6g8gT1g
-	LXwfKesmxMK9WlVGo8QkuacWbwE3I2Zr3W3BOWxOb1xqAXwOCTAdJsZy7GxmWA4RGq+dO5Io2xP
-	c67wrJxdPi3PGVU6G13/wejFQ
-X-Received: by 2002:a05:622a:1455:b0:527:7076:7859 with SMTP id d75a77b69052e-5283ded8570mr17983721cf.6.1784799253543;
-        Thu, 23 Jul 2026 02:34:13 -0700 (PDT)
-X-Received: by 2002:a05:622a:1455:b0:527:7076:7859 with SMTP id d75a77b69052e-5283ded8570mr17983541cf.6.1784799253086;
-        Thu, 23 Jul 2026 02:34:13 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1c32ac8c3esm210300766b.23.2026.07.23.02.34.11
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 23 Jul 2026 02:34:12 -0700 (PDT)
-Message-ID: <20c703b7-306b-4026-842a-a62722d96ad3@oss.qualcomm.com>
-Date: Thu, 23 Jul 2026 11:34:10 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OdfjBPdy"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 316D31F000E9
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 09:37:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784799437;
+	bh=fTzES2E2d90tPH+9oRQlOp14dLhGN56YzmJZ+EdSxi8=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=OdfjBPdyl1s4FIB0VkTzvgLT2UsMwKs8leQjZzgPTjION393uPGXSaMUus/K4PqGk
+	 RSIZfZHZ41bwCGNY5++Rl8iSZ+F9K8R++Bj39Beawp9CqNijL3m2Qgj83g7xam8bgx
+	 sfDUFlXF7GBbZUWXSP5whdERBA9oBa3WZmxLWl4qYwjZR4pfwKkRWPQkcw4jBU6oRJ
+	 YF2ax0WLi0AHkBqDCJd2KFwURCQz+9wi1pWI0MuqqsMzHXhyMhzEhkpYo51w1REu6h
+	 rmu5lrz+5nzdRzyeGsaHC7YHAPN32a4jtdvHaJ4gA3+JPECRFlC6FJChTRNYMfxrJl
+	 SzYJriVeF1NFg==
+Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-5b0115b9e17so395930e87.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 02:37:17 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+Rp5Sen7hfih80nf7sKvzBZHr6VLqUPl0UZkXVvyNpd1r6bVojbUUdqpKqt28HL9ai5mgQ67YggK5cf5FpOg@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz7sIb+i8IW8M5ik50obui9UGpH9p9Gm9YVivaKlLkrHQk7kL1a
+	5tm8Jq4NHKcuPFZ8zwUMoPQTqKU7wkK/OReq5f9/Kvd/QZABjlePGN//gE+E6NAZiChS5vcijpu
+	t8WNtqFPywp5+qYSNWN4Xq2xcvcL3ExF9YFiT9Cvnwg==
+X-Received: by 2002:a05:6512:1503:20b0:5b2:9dcc:8e26 with SMTP id
+ 2adb3069b0e04-5b2b2f7c367mr296386e87.60.1784799433063; Thu, 23 Jul 2026
+ 02:37:13 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 23 Jul 2026 05:37:11 -0400
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 23 Jul 2026 05:37:11 -0400
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260722120217.3609506-1-prasad.kumpatla@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] remoteproc: Allow shutdown of crashed processors
-To: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Shengjiu Wang <shengjiu.wang@nxp.com>,
-        Fernando Guzman Lugo <fernando.lugo@ti.com>,
-        Ohad Ben-Cohen <ohad@wizery.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260723-rproc-rmmod-not-crashing-v1-0-546dfd5de0e6@oss.qualcomm.com>
- <20260723-rproc-rmmod-not-crashing-v1-1-546dfd5de0e6@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260723-rproc-rmmod-not-crashing-v1-1-546dfd5de0e6@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDA5NCBTYWx0ZWRfXzyQvh7waug3L
- lZk4eFhbywNXfngCoNaFG7LHZgrWIoB2nPPipOsTNj/kH2M9XJDWFAIeusPLeQW93pCOTBUQdte
- XEh6n5Qi7rSMvFQRfqIucR1t2gEZEtE=
-X-Authority-Analysis: v=2.4 cv=aYxRWxot c=1 sm=1 tr=0 ts=6a61e016 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=2pRFMVAohkf1fqEOkS8A:9 a=QEXdDO2ut3YA:10 a=zgiPjhLxNE0A:10
- a=dawVfQjAaf238kedN5IG:22
-X-Proofpoint-GUID: m0iQlgPkM6chbvZMw-6PsSF3bEUgBOg-
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDA5NCBTYWx0ZWRfX9I7OINwDaFPz
- EWw3ute349hSkYl0xBfXfoV50FjWAua2HlMIyJ3KTgbbOX+wgtm498sjtdDOUzq+UYTsQV67Mcg
- m2B/yjKfymi/KbyL6pfYhY9H4npAWkJWCsGoYLKkZOURZEDge63/JLpBW5eg7trnLzmnV5veRiY
- AuIQLWr+vZg8LAiCu9Rv898vcjlYF8FKAjq7OF1X4+17skQUP35KzvrL48kFYa/AW08Z6tNAqok
- mu79ZyrxhSCLNa9bXLDfvZkArTTTEmsEEAQjOfo5Zs5v2jN2omRv2dUMfs1YBr7PBPd+aPoJ7Eb
- GP8v75cOaB8Ry8WnlhUBT1MJbkJl6IrT369wIz28sSPqtCUaFkxdEMuyUWOSpEN4pjsPZBqe+Sr
- 9Q7HguXp3iS+YYSoQhZAhxvH/VJ9ay8I3wFSAybGOBaMzD+j7RSWjTW6+ZCz9hrejF5HVyDDDDa
- f3vJhhsU96OubaHfsjA==
-X-Proofpoint-ORIG-GUID: m0iQlgPkM6chbvZMw-6PsSF3bEUgBOg-
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-23_03,2026-07-22_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 impostorscore=0 malwarescore=0 spamscore=0
- lowpriorityscore=0 phishscore=0 bulkscore=0 clxscore=1015 adultscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607230094
+References: <20260722120217.3609506-1-prasad.kumpatla@oss.qualcomm.com>
+Date: Thu, 23 Jul 2026 05:37:11 -0400
+X-Gmail-Original-Message-ID: <CAMRc=MddF5CzMgkUeCWbMFw=J3ZvbxK3qm0-oqvnaHFK61SKNw@mail.gmail.com>
+X-Gm-Features: AUfX_mwNmj-4-Z-iXOivesxKtl8VG-OrWT9cvLrkpa9dzEwo-spPvV65NSiA9ho
+Message-ID: <CAMRc=MddF5CzMgkUeCWbMFw=J3ZvbxK3qm0-oqvnaHFK61SKNw@mail.gmail.com>
+Subject: Re: [PATCH v5 0/4] ASoC: qcom and pinctrl: add LPASS LPR voting and
+ Hawi LPASS LPI TLMM
+To: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, 
+	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
+	linux-gpio@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org, 
+	Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	Srinivas Kandagatla <srini@kernel.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+Content-Type: text/plain; charset="UTF-8"
 
-On 7/23/26 5:52 AM, Bjorn Andersson wrote:
-> rproc_shutdown() rejects a remoteproc in RPROC_CRASHED state, and
-> rproc_del() ignores that error. The result of these two decisions is
-> that a user cannot stop a remoteproc that with recovery disabled that
-> has entered a crash state, and removal of an associated remoteproc
-> driver will release resources without first stopping the remoteproc.
-> 
-> Allow rproc_shutdown() to stop crashed processors. Propagate the crash
-> state to subdevice teardown, to allow subdevices to dismantle things
-> appropriately.
-> 
-> Assisted-by: OpenCode:GPT-5.5
-> Fixes: 5e6a0e05270e ("remoteproc: core: Move state checking to remoteproc_core")
-> Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
-> ---
+On Wed, 22 Jul 2026 14:02:13 +0200, Prasad Kumpatla
+<prasad.kumpatla@oss.qualcomm.com> said:
+> This series adds support for LPASS low-power resource (LPR) voting
+> through PRM and introduces LPASS LPI TLMM pinctrl support for newer
+> platforms such as Hawi.
+>
+> On such platforms, LPASS requires LPR resource voting via PRM to keep
+> the subsystem active. This is handled by adding a new clock ID and
+> support for PARAM_ID_RSC_CPU_LPR in q6prm.
+>
+> Additionally, a new LPASS LPI TLMM block is introduced, requiring a
+> dedicated DT binding and pinctrl driver.
+>
+> Dependencies and merge strategy
+> ===============================
+>
+> The series introduces a new clock identifier, LPASS_HW_LPR_VOTE, in
+> qcom,q6dsp-lpass-ports.h. This clock ID is consumed both by the ASoC
+> LPASS LPR voting support and by the Hawi LPASS LPI DT binding.
+>
+> As a result, the DT binding header update introducing
+> LPASS_HW_LPR_VOTE is the only cross-subsystem dependency in this
+> series.
+>
+> The intended merge strategy is:
+>
+>   1. Merge the LPASS_HW_LPR_VOTE definition in
+>      qcom,q6dsp-lpass-ports.h.
+>
+>   2. Merge the ASoC LPASS LPR voting support via the ASoC tree.
+>
+>   3. Merge the Hawi LPASS LPI DT binding and pinctrl driver via the
+>      pinctrl tree.
+>
+> Apart from the shared DT binding header update, the ASoC and pinctrl
+> changes are independent and do not introduce additional build-time
+> dependencies between the two subsystems.
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+But that was my question all along. If I take only patches 3 and 4,
+`make dt_bindings_check` will not work in my tree. Krzysztof: do we not care
+about make dt_bindings_check in linux-next?
 
-Konrad
+Thanks,
+Bartosz
