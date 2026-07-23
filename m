@@ -1,145 +1,289 @@
-Received: from mail-wr1-f44.google.com (mail-wr1-f44.google.com [209.85.221.44])
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE5A530F957
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 18:38:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 481374F798B
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 18:46:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784831897; cv=none; b=OudsEYaa7D0si6Q+HtPtnaXOb27NR6d9SfA2yUhI3Nltigua0Xh98yoz9sXkeMel/9QNPWRqnbmox0SyLtchimAo7QVqNpWpiARDEQwWQGcAHroWyugEqsGG76iEFTxN3yzvd6z+xdgMByAw4vtz1a0dcRtH3SXm5i4ykuSkj2Q=
+	t=1784832400; cv=none; b=ZCD9sj/5+BVUeHriRBSgekkSZ+UG2TV0A9xwqu82LqNYKU4mWOW3OXT2NFS1nC2I+/ZsiSIPE6bAC1dCLKZ2mPx+EJwmkizdvKqeTPpXOxX2C2ff81z9ptJLG5BGWyxpc87iSdSevrzCsy/vfwk8SOZtF5XoSBPHmkJ1jUule4o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784831897; c=relaxed/simple;
-	bh=nzG4awxgYfrlyx9Luz617YX5oT+UjV3SFnHCznNjdDg=;
-	h=Message-ID:Date:From:To:Cc:Subject:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=uAbLaVywHicdvSOH02m7ZPHx8gmYDz8KeAnL0GYMMlYLUTBDK3Jab7C/DgKnNXTz4Latt7DuswQRx6CDGrTKQ+gHPzslRPRgmBTHgmVzK21MzLNz8AjynjjTCtXn/OGrfNM/4VRO6wZ4RcMVLcHCbnJAyc4TgMAFbilGC9QdpFg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=q3baiUl0; arc=none smtp.client-ip=209.85.221.44
+	s=arc-20240116; t=1784832400; c=relaxed/simple;
+	bh=DQFKVraIj3hS/K9rhtkP6NnYFqE9X4Ceep45IBu9BFk=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=fYp9xvKdcmWI2uiBVhIXsUYn0Y3jINIXP29N8yWrfE4M/ucptOBUrYJZ18bUBTUWW3sUFZUpMUuPaoRn/qpOfQ3Fvu+wgbJmrADtP42FpwQ/AD8ABnRpAX5Uu1ryqCHyaB6J5X3x1eLieXeLHOA5mpuzz8Eg7GIdvKbz9bCQh1M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=S4d/hxw0; arc=none smtp.client-ip=209.85.216.52
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="q3baiUl0"
-Received: by mail-wr1-f44.google.com with SMTP id ffacd0b85a97d-47f703a9e5dso413068f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 11:38:14 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="S4d/hxw0"
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-38dcbade417so1041468a91.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 11:46:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784831893; x=1785436693; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:subject:cc:to:from:date:message-id:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=mQh8Ebl2z6PI6INJ382vkExB/1zYbiEiM8I01ow3Vog=;
-        b=q3baiUl0KU0vhV7XIUY8UgLk6WUJkdFv62CRIgrnnEVsnxw9cBofQB9I/4L7jZRE/g
-         64JAzh+bfdUy57LDnKMo2Q/5ffLNbhnOEB/g8z73gBdReTWszvKrsFzqh5DCi6PbmZL0
-         FXgGiKdJn28ft/xgtwHqRMwXHC79RQnMwycm5OQvNQ5mZIXylFLw7JNT9QZPA9JLjWAz
-         jOcBcVn7T2+W6Ehyz6R0uknsyq5ciDrLE8HpyLk2tU5pN83f9iuOj4IbMOa/C4SK9emN
-         xS1BVx2LCLNz/q2JABcPOvctTUuJZfP74QY/F882LjFO+dB3jXApnyB/iYRhcMk8pXNP
-         m7NQ==
+        d=gmail.com; s=20251104; t=1784832391; x=1785437191; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=8aDNX5oWZPCLlEUZqO7qQYiyJOs0NAqqQhS2frdoUAY=;
+        b=S4d/hxw05hTzm0cZgrTJhDMi/tEYkkLv8thfW5xvM8+ellLJtka8xcwyR+RfpFIR0B
+         F2LEXTmR4wcfgwL+5lshVIAoswu25IJERzRiEbcXwYJErCV2wnh5Ch4pe+yF/p/uMQ87
+         Lb/MxCyE5bjBIrQ3J59Bv8SLkLj3QCR95dArQXg/HWHSeD9zMb9CiysXsQPuwOaJpll8
+         HIPh9jp+8/KkPx78J2bGPwUrlwfWk6WYLJqHghyzcXUiUS/Ztz+V+IisvgUwoV83IoqV
+         b2mCVsm6MmwWxBIg3khUb+MmEu666Q1fyy5O+qJktvPDTZYWd3FEbd5gYeEexCo0lMb7
+         73Sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784831893; x=1785436693;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:subject:cc:to:from:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=mQh8Ebl2z6PI6INJ382vkExB/1zYbiEiM8I01ow3Vog=;
-        b=OXjcVJ/m+fx6keSBoPS2UWBvTgoEmM8BmloGNjRMfGXV1HKRUNLnTc0vknvUYqbVu+
-         u1U3N+m04MXfQg3iAe45zhKtzNe3g1jAYvtR5LUN4VR3axVu+5Vyis2dOut1rBPkjHl7
-         icPLQJmMNZH5ZcLiKX9Hyhk5d7uMWIaY9JrjzXosBpsLF/a4LLSK608BsWJ6XYBL+Ytd
-         M/Nv/0JPgza0vsoHaiG+q+6vcYQXqhmEPhViO6OnxTeqYI2OOjXs+xAREO8oFPA5rj/H
-         jOp1sTkYpfN/1mFsE0v7gyAN8OGxyAKAR/lDwBQOB43xV8e+t0dF0K2p/k5thhPTPkF/
-         +Ncw==
-X-Forwarded-Encrypted: i=1; AHgh+Rpg0wFj+xOLrDT2+hDAOLQhI07WCnfFxY1L4Y2DNHen3T3e1lslPrZRH0jel2iBsW1aqqHDCWu3oH3KaMEV@vger.kernel.org
-X-Gm-Message-State: AOJu0YxsLTJhxGCuLCgDj+N8ggmq7WopCtsJZnTsIPI1xMJIyGcjw/rF
-	vi9RvbSbGyKkitfw/yFYRxGw+cqGJc8eDTghm5rGvzFyzxhzQdOJgjun
-X-Gm-Gg: AR+sD13fl5lmxr8EqowKly388sHBxaETdu2xRYCDpGmgcDiqcIdSF2VZYxg7sm/yA8W
-	WRjMW75tdFvXYc8ky4pb6kofSSqas62IDgQ51Ft5BjdwhrfZBsSLRJdJEsAuRUO/XCjOXcB8ZUs
-	5YHUsdHahwYYNIrpccFxTyRAfkYVqfSldfxLug4kaMEj3sMjgPxuqTMbV4DBJL/CwxfgB/dSdGq
-	4W4RXl/5Yw96NYKdQIWHCQSqI/SJjlNpz+7NIs8k03lyxtEJV2AVVu+urDJz7RbdV6Zm8ytH2qp
-	HpCbGz5nW00vR/SxnRzp6p18Ze4jg+m8+rcT+Gf8ZQJjM6VaFORe3QtLmk2cJg5K5ie5IFz+3RG
-	kBWwHkLcp19v2K7EQK1IhSTJ7wt9SQjTp0WvO+8PIChZMpfdPY5kSoFKuOsV0ltQHgPXuwA/r67
-	N3I7iIMEux6cbr0UbAIqBdmW1IltL9Ejeoi7yDcREM8USofEs=
-X-Received: by 2002:a05:6000:1846:b0:478:77c1:787c with SMTP id ffacd0b85a97d-47f8d76ead4mr5907181f8f.56.1784831892999;
-        Thu, 23 Jul 2026 11:38:12 -0700 (PDT)
-Received: from Ansuel-XPS. (host-87-3-249-180.retail.telecomitalia.it. [87.3.249.180])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f85c6f076sm18328564f8f.34.2026.07.23.11.38.11
+        d=1e100.net; s=20251104; t=1784832391; x=1785437191;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=8aDNX5oWZPCLlEUZqO7qQYiyJOs0NAqqQhS2frdoUAY=;
+        b=LmBTovGHhq+P9psjerBOJRlcCkZfcQDsSuyYBFHSPqG4mmrhbDVdBOKQYp+93PLquk
+         KQiqthuPtDlr4SI6+HrqsMsnDiaQcwa9RKqa7Qvj9GlfuTNOwr1JOIA4e21/Em1ZP/sV
+         81rdztcsap7x+qmj7YjL3BeGIFb9VnZYymNpjmKqnGM8LZzgfCbHwL5YLYe69+mfkyts
+         Q/maBZsd9ID0+GFaODib772AXfsTR21G6uyHtENznoUNWyfa4+JlGhQUjzIIDaP3qUCl
+         K1TLGV6YPbPzFBnAhY0+RNXzxSyY205rOkyAsc8c6lCLVj+iU07/Rtw8BlGMu31EggAY
+         ZUrA==
+X-Forwarded-Encrypted: i=1; AHgh+RqSTX1GfNhLSEKLCKCTkyRyxJ6HA5LzpIVUDrNzlnZ9W2A5h95Crq42sFS4dP7NKok+3sUVl6rb1NXBf41d@vger.kernel.org
+X-Gm-Message-State: AOJu0YwOLUj0hekccnsU6X2D4pVri3ug6iy+Ffq+aClV8hgC8EIbKVUK
+	Q4m+ywrxqZP3Blj51vcmS08Irn3vDVovznpg0Qgp727aDpljv7FbVW3B
+X-Gm-Gg: AR+sD12P5RIqKM/xjqgbnRwMIywapoPqnY3nKWVevnzmbUanpJJHxl8Q/0r0DnA68E9
+	hZe+eVwjxLKPZqAjj2Xukk/53eRL9hgAmHeaY8kBcRUTueJAuiFxNP04DQcup8cnWIxASJCQupk
+	YFTpE2tzPt/Rvv+OvsH+XoWQdsmi8+wABnjWlUONLa1Pr/4GVRMMDa3KPaEp9Ihe7eAERz0vCNm
+	xM51dIqXxlt+Rvn8jvvlxjHgW19vj6193dwiWdBRYdDf0l21d5UVC8PdljK0UeS7fqzJa8glqyG
+	1i/uTHfaxlJjSNfCVBu04tQDnm6AGb9ewIJUIY6AXRelJXvEUF9YPtczWNwvNEAFdiaKlojLxOu
+	2Kr46lwGtCyUnEdTwiSex55zHjz4dZ+W4dkzTjE4NjhR38SUmpjjSuJPIVoHDXo4W3A4EwqPX
+X-Received: by 2002:a17:90b:52cd:b0:387:e0cb:7ee with SMTP id 98e67ed59e1d1-38ec6661b73mr4668847a91.34.1784832391486;
+        Thu, 23 Jul 2026 11:46:31 -0700 (PDT)
+Received: from ubuntu.. ([110.9.142.4])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f03af8a45sm308155a91.10.2026.07.23.11.46.27
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 11:38:12 -0700 (PDT)
-Message-ID: <6a625f94.4d70c427.b2b96.9b5b@mx.google.com>
-X-Google-Original-Message-ID: <amJfkRUyQoa2VhK_@Ansuel-XPS.>
-Date: Thu, 23 Jul 2026 20:38:09 +0200
-From: Christian Marangi <ansuelsmth@gmail.com>
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, linux-kernel@vger.kernel.org,
-	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org
-Subject: Re: [PATCH 1/2] ASoC: qcom: remove ipq806x Storm machine driver
-References: <20260721-drop-sound-storm-v1-0-23ae4a689ffe@oss.qualcomm.com>
- <20260721-drop-sound-storm-v1-1-23ae4a689ffe@oss.qualcomm.com>
- <85f2799d-fadf-478d-9f3f-fb8ff91ba84d@oss.qualcomm.com>
- <6a609d87.87c5160c.1accad.0f33@mx.google.com>
- <CAO9ioeUw4QgW47xmC58dGc1_j2UPFjDM+dDRF-bggpBPFA32YQ@mail.gmail.com>
+        Thu, 23 Jul 2026 11:46:31 -0700 (PDT)
+From: Sang-Heon Jeon <ekffu200098@gmail.com>
+To: Julia.Lawall@inria.fr,
+	Sakari Ailus <sakari.ailus@linux.intel.com>,
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Eugen Hristev <ehristev@kernel.org>,
+	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	"Bryan O'Donoghue" <bod@kernel.org>,
+	=?UTF-8?q?Niklas=20S=C3=B6derlund?= <niklas.soderlund@ragnatech.se>,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	Magnus Damm <magnus.damm@gmail.com>,
+	Sylwester Nawrocki <sylvester.nawrocki@gmail.com>,
+	Michael Krufky <mkrufky@linuxtv.org>,
+	Hans Verkuil <hverkuil@kernel.org>
+Cc: cocci@inria.fr,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org,
+	linux-renesas-soc@vger.kernel.org,
+	linux-samsung-soc@vger.kernel.org
+Subject: [PATCH 12/36] media: remove conditional return with no effect
+Date: Fri, 24 Jul 2026 03:45:14 +0900
+Message-ID: <20260723184538.3888637-13-ekffu200098@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260723184538.3888637-1-ekffu200098@gmail.com>
+References: <20260723184538.3888637-1-ekffu200098@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAO9ioeUw4QgW47xmC58dGc1_j2UPFjDM+dDRF-bggpBPFA32YQ@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
 
-On Wed, Jul 22, 2026 at 01:48:30PM +0300, Dmitry Baryshkov wrote:
-> On Wed, 22 Jul 2026 at 13:38, Christian Marangi <ansuelsmth@gmail.com> wrote:
-> >
-> > On Wed, Jul 22, 2026 at 10:00:34AM +0200, Konrad Dybcio wrote:
-> > > On 7/21/26 8:12 PM, Dmitry Baryshkov wrote:
-> > > > The Storm board machine driver targets Google's IPQ806x-based Storm
-> > > > reference board (a MAX98357A DAC wired to the LPASS I2S bus). This board
-> > > > has no upstream device tree, no active users and has seen no functional
-> > > > changes in years, so the driver is dead weight.
-> > > >
-> > > > Remove the driver together with its Kconfig entry and Makefile rule.
-> > > >
-> > > > Assisted-by: Claude:claude-opus-4-8
-> > >
-> > > Using AI to `git rm` is definitely tokenmaxxing!
-> > >
-> > > > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> > > > ---
-> > >
-> > > Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> > >
-> >
-> > Honestly I'm pretty angry about the latest changes on ipq806x. First the
-> > dtsi just because there weren't device (it's ok and understandable) now we
-> > are starting to remove driver...
-> >
-> > There are godzillion situation where there is a driver but absolutely no
-> > dtsi. Lets remove the dwmac driver, usb phy, pcie and everything else at
-> > this point and treat this soc like it's a 80-90 code...
-> >
-> > I will post dtsi with actual device for the SoC but really I'm not
-> > following all this hurry in cleaning code for device that still gets used
-> > and actually some company even produced new one (even if it's EOL)
-> 
-> We have no way to check that the device is being used other than the
-> DTSI present in the kernel, being updated from time to time with
-> non-trivial changes.
-> 
-> For the patchset in question, do you (or the community) actually use
-> OnHub? If so, please consider upstreaming DT files (and also updating
-> schema FWIW).
-> If not, the files will eventually go away. Just having unused drivers
-> _adds_ a burden. I stumbled upon the driver while reviewing a patch
-> changing the driver (for the sake of changing the ASoC API).
-> 
-> And FWIW the series doesn't touch the IPQ806x LPASS driver (which has
-> a DT counterpart).
-> 
+Both branches of the check return the same value, so the check has
+no effect. Remove it and return the value directly.
 
-Yes on OpenWrt we support 3 OnHub google devices from Asus and Tplink and
-they also use the storm driver for the strange attached speaker.
+This is the result of running the Coccinelle script from
+scripts/coccinelle/misc/cond_return_no_effect.cocci.
 
+Signed-off-by: Sang-Heon Jeon <ekffu200098@gmail.com>
+---
+ drivers/media/i2c/mt9p031.c                          |  6 +-----
+ .../media/platform/microchip/microchip-sama7g5-isc.c |  7 +------
+ drivers/media/platform/qcom/iris/iris_resources.c    |  6 +-----
+ drivers/media/platform/qcom/venus/pm_helpers.c       |  7 +------
+ drivers/media/platform/renesas/rcar-csi2.c           |  6 +-----
+ .../media/platform/samsung/s3c-camif/camif-core.c    |  7 +------
+ drivers/media/usb/dvb-usb-v2/mxl111sf.c              | 12 ++----------
+ drivers/media/usb/gspca/jl2005bcd.c                  |  7 +------
+ 8 files changed, 9 insertions(+), 49 deletions(-)
+
+diff --git a/drivers/media/i2c/mt9p031.c b/drivers/media/i2c/mt9p031.c
+index d21510caf45a..2b09e8315c8e 100644
+--- a/drivers/media/i2c/mt9p031.c
++++ b/drivers/media/i2c/mt9p031.c
+@@ -452,11 +452,7 @@ static int mt9p031_set_params(struct mt9p031 *mt9p031)
+ 	ret = mt9p031_write(client, MT9P031_HORIZONTAL_BLANK, hblank - 1);
+ 	if (ret < 0)
+ 		return ret;
+-	ret = mt9p031_write(client, MT9P031_VERTICAL_BLANK, vblank - 1);
+-	if (ret < 0)
+-		return ret;
+-
+-	return ret;
++	return mt9p031_write(client, MT9P031_VERTICAL_BLANK, vblank - 1);
+ }
+ 
+ static int mt9p031_s_stream(struct v4l2_subdev *subdev, int enable)
+diff --git a/drivers/media/platform/microchip/microchip-sama7g5-isc.c b/drivers/media/platform/microchip/microchip-sama7g5-isc.c
+index b0302dfc3278..7383341ec51d 100644
+--- a/drivers/media/platform/microchip/microchip-sama7g5-isc.c
++++ b/drivers/media/platform/microchip/microchip-sama7g5-isc.c
+@@ -598,13 +598,8 @@ static int __maybe_unused xisc_runtime_suspend(struct device *dev)
+ static int __maybe_unused xisc_runtime_resume(struct device *dev)
+ {
+ 	struct isc_device *isc = dev_get_drvdata(dev);
+-	int ret;
+-
+-	ret = clk_prepare_enable(isc->hclock);
+-	if (ret)
+-		return ret;
+ 
+-	return ret;
++	return clk_prepare_enable(isc->hclock);
+ }
+ 
+ static const struct dev_pm_ops microchip_xisc_dev_pm_ops = {
+diff --git a/drivers/media/platform/qcom/iris/iris_resources.c b/drivers/media/platform/qcom/iris/iris_resources.c
+index 773f6548370a..872bd09656b1 100644
+--- a/drivers/media/platform/qcom/iris/iris_resources.c
++++ b/drivers/media/platform/qcom/iris/iris_resources.c
+@@ -78,11 +78,7 @@ int iris_enable_power_domains(struct iris_core *core, struct device *pd_dev)
+ 	if (ret)
+ 		return ret;
+ 
+-	ret = pm_runtime_get_sync(pd_dev);
+-	if (ret < 0)
+-		return ret;
+-
+-	return ret;
++	return pm_runtime_get_sync(pd_dev);
+ }
+ 
+ int iris_disable_power_domains(struct iris_core *core, struct device *pd_dev)
+diff --git a/drivers/media/platform/qcom/venus/pm_helpers.c b/drivers/media/platform/qcom/venus/pm_helpers.c
+index be1cbd5cfe84..e88e66be4f6d 100644
+--- a/drivers/media/platform/qcom/venus/pm_helpers.c
++++ b/drivers/media/platform/qcom/venus/pm_helpers.c
+@@ -781,7 +781,6 @@ static int decide_core(struct venus_inst *inst)
+ 	unsigned long max_freq = ULONG_MAX;
+ 	struct device *dev = core->dev;
+ 	struct dev_pm_opp *opp;
+-	int ret = 0;
+ 
+ 	if (legacy_binding) {
+ 		if (inst->session_type == VIDC_SESSION_TYPE_DEC)
+@@ -829,11 +828,7 @@ static int decide_core(struct venus_inst *inst)
+ 	}
+ 
+ done:
+-	ret = hfi_session_set_property(inst, ptype, &cu);
+-	if (ret)
+-		return ret;
+-
+-	return ret;
++	return hfi_session_set_property(inst, ptype, &cu);
+ }
+ 
+ static int acquire_core(struct venus_inst *inst)
+diff --git a/drivers/media/platform/renesas/rcar-csi2.c b/drivers/media/platform/renesas/rcar-csi2.c
+index 7305cc4a04cb..6635f5782175 100644
+--- a/drivers/media/platform/renesas/rcar-csi2.c
++++ b/drivers/media/platform/renesas/rcar-csi2.c
+@@ -2273,11 +2273,7 @@ static int rcsi2_init_phtw_v3u(struct rcar_csi2 *priv,
+ 			return ret;
+ 	}
+ 
+-	ret = rcsi2_phtw_write_array(priv, step4, ARRAY_SIZE(step4));
+-	if (ret)
+-		return ret;
+-
+-	return ret;
++	return rcsi2_phtw_write_array(priv, step4, ARRAY_SIZE(step4));
+ }
+ 
+ /* -----------------------------------------------------------------------------
+diff --git a/drivers/media/platform/samsung/s3c-camif/camif-core.c b/drivers/media/platform/samsung/s3c-camif/camif-core.c
+index 14eedd1ceb27..bb06847f3a63 100644
+--- a/drivers/media/platform/samsung/s3c-camif/camif-core.c
++++ b/drivers/media/platform/samsung/s3c-camif/camif-core.c
+@@ -301,7 +301,6 @@ static int camif_media_dev_init(struct camif_dev *camif)
+ 	struct media_device *md = &camif->media_dev;
+ 	struct v4l2_device *v4l2_dev = &camif->v4l2_dev;
+ 	unsigned int ip_rev = camif->variant->ip_revision;
+-	int ret;
+ 
+ 	memset(md, 0, sizeof(*md));
+ 	snprintf(md->model, sizeof(md->model), "Samsung S3C%s CAMIF",
+@@ -316,11 +315,7 @@ static int camif_media_dev_init(struct camif_dev *camif)
+ 
+ 	media_device_init(md);
+ 
+-	ret = v4l2_device_register(camif->dev, v4l2_dev);
+-	if (ret < 0)
+-		return ret;
+-
+-	return ret;
++	return v4l2_device_register(camif->dev, v4l2_dev);
+ }
+ 
+ static void camif_clk_put(struct camif_dev *camif)
+diff --git a/drivers/media/usb/dvb-usb-v2/mxl111sf.c b/drivers/media/usb/dvb-usb-v2/mxl111sf.c
+index 870ac3c8b085..6404eb74db32 100644
+--- a/drivers/media/usb/dvb-usb-v2/mxl111sf.c
++++ b/drivers/media/usb/dvb-usb-v2/mxl111sf.c
+@@ -987,11 +987,7 @@ static int mxl111sf_frontend_attach_atsc_mh(struct dvb_usb_adapter *adap)
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	ret = mxl111sf_lg2160_frontend_attach(adap, 2);
+-	if (ret < 0)
+-		return ret;
+-
+-	return ret;
++	return mxl111sf_lg2160_frontend_attach(adap, 2);
+ }
+ 
+ static int mxl111sf_frontend_attach_mercury(struct dvb_usb_adapter *adap)
+@@ -1007,11 +1003,7 @@ static int mxl111sf_frontend_attach_mercury(struct dvb_usb_adapter *adap)
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	ret = mxl111sf_lg2161_ep6_frontend_attach(adap, 2);
+-	if (ret < 0)
+-		return ret;
+-
+-	return ret;
++	return mxl111sf_lg2161_ep6_frontend_attach(adap, 2);
+ }
+ 
+ static int mxl111sf_frontend_attach_mercury_mh(struct dvb_usb_adapter *adap)
+diff --git a/drivers/media/usb/gspca/jl2005bcd.c b/drivers/media/usb/gspca/jl2005bcd.c
+index a408fcc3a060..4988fbf5005e 100644
+--- a/drivers/media/usb/gspca/jl2005bcd.c
++++ b/drivers/media/usb/gspca/jl2005bcd.c
+@@ -148,17 +148,12 @@ static int jl2005c_start_new_frame(struct gspca_dev *gspca_dev)
+ static int jl2005c_write_reg(struct gspca_dev *gspca_dev, unsigned char reg,
+ 						    unsigned char value)
+ {
+-	int retval;
+ 	u8 instruction[2];
+ 
+ 	instruction[0] = reg;
+ 	instruction[1] = value;
+ 
+-	retval = jl2005c_write2(gspca_dev, instruction);
+-	if (retval < 0)
+-			return retval;
+-
+-	return retval;
++	return jl2005c_write2(gspca_dev, instruction);
+ }
+ 
+ static int jl2005c_get_firmware_id(struct gspca_dev *gspca_dev)
 -- 
-	Ansuel
+2.43.0
+
