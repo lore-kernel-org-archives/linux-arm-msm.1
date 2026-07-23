@@ -1,246 +1,468 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF9E54766A8
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 17:10:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33E5B3537FD
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 17:18:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784826630; cv=none; b=P0NoF27UxUpzsfsvCw0Muz1GmAIyilCPiRVHh31bPblbWip3u52uAn3+0EO4o7vKJ1CuChtlc9XZNvSwHAhBBLghi4dgX7nR17FgWBb/ai9k3ELUKjogUbUK+bQqCuZ6uJ9tJBN62FmIvwns+lOrYSieW7bcs/RlLo+vFPK3gRo=
+	t=1784827086; cv=none; b=S5GePKMPf0yKMxb6PGkUeQW89ff8+7lpHh6ENNtvqfCSpchU/aExi4TJj4oqJeldW+TgsNzsZL8pxs/ajO+qV/YQMl09pu058udEd1C7+kJAQMjnnQ8CsjzysGiu2bXp6iXEALbw31gKxM3+yvTu44cmXc/ychKvI7Op5OHEbBs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784826630; c=relaxed/simple;
-	bh=KeA2nSTNl2mDaJCzIxdtrLUkRk83eDvjYrA1TIhvlbk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Oxe4ti2hMmtU6yFS9h6smrRkOFBN8qZjzJwkGExFuYSXmJoN+qgsQymC9C268s55vvwH+o0Dn43k1AX06aaw4tvRLklSwrtxlmMuiBkuxGzcFBvH+IfElmd5DfkBaOalfDV/xUdRWPKgd/+IVbpHxnonORRMnTTXGt7NmCgKxAc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WInOlkdy; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gLxBtEw2; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1784827086; c=relaxed/simple;
+	bh=0TSHSJxgodQ/VnLZXBVmwZ4Gyehegy26vFQlMpgKox4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=gOx7R9CjQWx/R2h5Y9Z8/WRbFI3cfRgOSL/iVuyDcAzBc3L1/3ff5Xp/n8CS+WpONEcVkdyHGSDziMMNLfM2PZT2ALM0Dujg2t3yorE9BRR8oQlVFVJRGkTIIUJIMcYITZohEO5LRMcktTz3+mH3Ko9ECBXuokrBf08GeqJxNiw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=X4nLuWdP; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=MXXAUbZh; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WInOlkdy";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gLxBtEw2"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NCvVlY154434
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 17:10:12 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="X4nLuWdP";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MXXAUbZh"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NG5JsA483173
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 17:18:03 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	tWAPezfKekMTeUaXy15klHPr2QCAL4plvMCAq141yTg=; b=WInOlkdyW0bqceuJ
-	XP5J+K4waTI2PIMPHCKf6xQGma6zeMfIoQA5N6dRnlpGJcjd6cO1e821jPzmKhrd
-	acDTzvEg6dbppefZiCOEl3MGEBS/9TWYEUnnneb/RtSHnoyHKOHZT2Ui2YbQL1qH
-	Uj6YP8j7BEutk5SNBJmg2YN2leGIEuJ164IA1nau/BEu+kfeq/kxJVmJYbTAuK37
-	F7O+ECK2HxFIfLeJP7qZSd4MyDsoqjDwZw9/8MdT1wxgV26CGW6IzJfwvJHrCs2N
-	htKmrc3dCg1MGt7R68FqyuCwwQv/f3cNbh+Sst4Yo7cpQwySmzmp4YwZNzVnol/e
-	kcK8Ew==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fk7b5464p-1
+	Wz/3I21jTHSBSfAdIbMCD5OVNemlIPKq5mTs9ULV/ZM=; b=X4nLuWdPn6HOmWP9
+	cDnnoz1K9sUUTC5EQf/yPv0JiaTNInhNwnMPGMgL+0lz7dfPVBAUyBlOIuO4e49o
+	MOgAgEOlwnPspPzvRcoPBClDJwdEW/GKaz+RUmgoNgk0EjlOVvxHI3QVYQzBsZ3f
+	+9CT5t/pw8Hq/pyY/0dZAaEgpQjDK1JCSheLcljg6ckI9/smmU2MXta23wZVjXnm
+	CyZt/ZjXgQn6/iGlG0la6enKaSc1NAUMFzr78i7+EUb75YBHR46MiQt1LfJxtAp4
+	x/tk971h6KpvNMZr2uCVLAizsoafocqAaXns5sHIxNnZz8Zd2Erjg17IRkTUGWTj
+	NCK8mw==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkp5vgbe2-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 17:10:12 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-5283fa0656dso13116611cf.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 10:10:12 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 17:18:02 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-ca124bf0189so497378a12.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 10:18:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784826611; x=1785431411; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=tWAPezfKekMTeUaXy15klHPr2QCAL4plvMCAq141yTg=;
-        b=gLxBtEw2qLd8Pq72f+g8JYUG4ci+wb3AIG/fzgP2geRWdrrKrZDIIIGUsG42z6jDQn
-         P2VyjNRKpyP1Rchj5pfPqkiCiApDYuag7VVrwQ0H3LohysU/zf+29QiJpJufoczS/0GS
-         dQENsyLJkGHkK518Ec1YrauhTUjg5w3vg5Hqe1WGQpPt6rBcnGkdWCiJk4RjBWXTetfz
-         0OEsFPfrFy3Mu5oE+Fr1R1qHxsElhQlYD/X8V25zS61OTubvz69Z9yctE2uf+jjbxdUt
-         KHecpXcX6nTY7aFEocqb3lgQkf1rgLoIgxveMLHbTzASvfrxt0ytgkXHrn7ZSSjWgYiG
-         uhBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784826611; x=1785431411;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1784827081; x=1785431881; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=tWAPezfKekMTeUaXy15klHPr2QCAL4plvMCAq141yTg=;
-        b=Mm3tpjdqBLThTn9MrZ+oqhMolZPKlG4Px275KD5Q4Lo182RTQ/Sb+0L/aSorPY1Jcr
-         07vumCUrmjAZHSTRM6QBYbCSaFIHLq3kCIA0rJaC3MxvN9IOpeRESBMzOWlxPmjRm0uO
-         TH+SRzFDM8ZS8VaH4ZdUVK8wE7WwZhPNNUKxVBBJQDMo4eiYQdxwJKK6eRjo5oaNJcA+
-         Dc7PW3MSNAOB4cX1rlNMs4V7tjrCM8+vIbUEHMEMUcB+5uccC/PXN+etXxAggx5u7y8z
-         Rxcb0ZVaV0M4Dc4b23jV2Nh5rythjylnnot7vUp2EgR9mgMN+O5yT6q7g+lue8nNfWmH
-         2Alg==
-X-Forwarded-Encrypted: i=1; AHgh+RpfXV4Mv1/0NbJrE7pyeG1IfjimjNGb2/oUzrsqy6q+6P3kpT2vF2yPYoJLxJ9djROZqij1EVpxZ9nTwAYk@vger.kernel.org
-X-Gm-Message-State: AOJu0YwlkKgVbKh9guZF2nlO7mkUXceS98+WgE5d7gUpZA3C++5W4AWA
-	a6uK2JUn+80msPIv+qbfSVODkjtgRZryl7UujXUsrNXqd4SysDgDN6uMFLi7ASWjxiUXmjHB1FM
-	RCfDZzDAkw4vBc/30JFWVcdtlz1ULgl5p1E9ImW84sY4B3qyWylsuaWTow/++eTMykFQI
-X-Gm-Gg: AR+sD12GeZc9zJ+aY5sOwmra4ogb858RHg2eLsqmbMNB1Vpy3TZyfPOmb08zAcFKqoY
-	/gEEOUkjnShSnWroL8+isOWj3DrhpPlDzD/Mz5dL3FWD2QLpnfPVhbx/gLr1ys4s2L8proYG2zg
-	85gOrlLlnuM3IWb/axJOkmb/omEf/seXvLiRgllVMWB0QYibnr8Or+iF17M5gNHoMBbCseYSybT
-	Eten9dspjrT2XYG0jghtGeqFEqy4FRWaaqLigkwyyJgSnQZAe8Ja/Ju5dUOVlEipa4jQxNFdKmf
-	eaTcvxiymQ0E7lLCfn37/RvMCPPp8bwbo17pHL00S/ougjaVx1a4u3l58aD59w4ws1qL/N96XKh
-	aEt8vsuoRFc5jCqr7DTdsTZxOw4Jc
-X-Received: by 2002:a05:622a:4d44:b0:528:1bad:a2a4 with SMTP id d75a77b69052e-5283ed28baemr34689781cf.15.1784826611468;
-        Thu, 23 Jul 2026 10:10:11 -0700 (PDT)
-X-Received: by 2002:a05:622a:4d44:b0:528:1bad:a2a4 with SMTP id d75a77b69052e-5283ed28baemr34689351cf.15.1784826610957;
-        Thu, 23 Jul 2026 10:10:10 -0700 (PDT)
-Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:cd9c:212:1357:7832])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f85b9a64dsm18472999f8f.1.2026.07.23.10.10.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 10:10:09 -0700 (PDT)
-From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Date: Thu, 23 Jul 2026 19:09:20 +0200
-Subject: [PATCH v24 14/14] crypto: qce - Communicate the base physical
- address to the dmaengine
+        bh=Wz/3I21jTHSBSfAdIbMCD5OVNemlIPKq5mTs9ULV/ZM=;
+        b=MXXAUbZhj3y/MycQJEPCvisalYEn5qHcSmzRuxZN9NjgqewKgPO9Fjp/iT7d0HQdRx
+         xtu5Mdvnk1FvN+uUsmtqywhSlTD60QgbByZBh/+REWFDLgFFJN7x9vHumZmrSX2d6LRN
+         1L1VAg2NGUJcG+Lk03K7jiFmJgbqaBFefCUUl4Kyhp+qLNmNdpzsHRH+6opS8pItFv8Y
+         cV4yUQHhUeJ5HkL3KtGEybSfGV9b19z4WPDvovCI5fyt2rtXU1oGTaKWZRtU4zjENp21
+         2GedBb7FoI9x+VxtknkbL5Q0rkIXetSZN5EFsIPr3YFS7ZFQIfwqJuf86Fl+FUD7Lm/c
+         e+Fw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784827081; x=1785431881;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Wz/3I21jTHSBSfAdIbMCD5OVNemlIPKq5mTs9ULV/ZM=;
+        b=cGPRiVAqmb/sHI7ArMzM6urOfgC39Xz3+JAAp0cGd1pScYCbzCEuOSkmRdRjOHH0oS
+         TQ3ctWZr1ocfFze5TQg8rlC3wh441R5Ksp/F52IncQ0F4zEPibfdxdhsuPPQH17rlIV6
+         A+rnlulIyWOdmkHsBtENkp57Etwq9QzifABLSwE5dYuV2Pu0PlJMKyL+M7lSiMR6n4Nc
+         za2GWYFoqSdQLWxq1UxOeT6znMKp2TPhaStAyxB3LQ5NP+sgbuImiAgXlKswvEopvGHk
+         h18qYoUEztuGzHofMOjGzFtDVqBdtF3DPG+502ExZM77umqRtfMxOvOWqNfD80lE3VQR
+         RDSw==
+X-Forwarded-Encrypted: i=1; AHgh+RpVDTf8nud4v/2pFWOt1GojRAqErX4f02fvbzDZHbjjhqPf1qJtebEZQRWUAJdCP66fHV04pKtwS39fobs2@vger.kernel.org
+X-Gm-Message-State: AOJu0YwSoppuo+fRFNWU/uc4KpBn1/94TWFtVxzHlTl8g9yMH9so9SqI
+	K4ZDKNFp/4qxynSNSpbyI5J45uEY19ljXQ6LRsgkJ4E3U5vyV+wF+GfzkqUXhJtQ6ij4lmSPJa8
+	MEYUJvIPWpDyBlR5Ew0v1TcTaBbXQFcs9zy+24Ojc7rnUpLF0BfDPbSgkpOfNKdtOV7tP
+X-Gm-Gg: AR+sD10UAVq50UwR4QrCEtvjK5FmPCuJ2y5qTnoqEXRHyVTo2gYAx2HeIIFHcus935F
+	bBNkSR02re5O12FPEoMKhv1N/dqk2ATXHfXNPLMhpAoaE7J6bMlQ4NQJVsteqyta76V4reQpzH4
+	2INAvAsP2Q5LIQVQNQ7qobU8dSSzkyw6e71frfm0vlpc1WOtcv8IkAFa5bLNM6jRAAhvMPNxTJ3
+	nfwbxBj5SZ1RPkblFxHEQKLro7r/pzx/697dTpeT6MDMrmxTWzdgpZGbxEvH/f2+q8shBdZf0sz
+	Xk1WZgyK9VinB14Wd2+h68qEXWRuWn2l0AkC2YKOu3Z5yMFkJPxZX2oNkIWHmc4DAiBEwPygA+d
+	7F4T4ef94k7ksXtNJbRnNBjlS7gw4wUvTM2Q=
+X-Received: by 2002:a05:6a20:4323:b0:3b3:a66e:3911 with SMTP id adf61e73a8af0-3c44caf0a4amr4040784637.19.1784827081113;
+        Thu, 23 Jul 2026 10:18:01 -0700 (PDT)
+X-Received: by 2002:a05:6a20:4323:b0:3b3:a66e:3911 with SMTP id adf61e73a8af0-3c44caf0a4amr4040747637.19.1784827080543;
+        Thu, 23 Jul 2026 10:18:00 -0700 (PDT)
+Received: from [192.168.0.173] ([49.205.251.199])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3147e1bc886sm21718275eec.26.2026.07.23.10.17.56
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 23 Jul 2026 10:18:00 -0700 (PDT)
+Message-ID: <d08c96ab-f220-40d6-9491-7ddfe6ed3857@oss.qualcomm.com>
+Date: Thu, 23 Jul 2026 22:47:53 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 3/3] media: iris: add support for multi_slice in iris
+ encoder
+To: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Vedang Nagar <quic_vnagar@quicinc.com>,
+        Stefan Schmidt <stefan.schmidt@linaro.org>,
+        Hans Verkuil <hverkuil@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260723-iris_multi_slice-v4-0-45f0a3fe7fce@oss.qualcomm.com>
+ <20260723-iris_multi_slice-v4-3-45f0a3fe7fce@oss.qualcomm.com>
+Content-Language: en-US
+From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+In-Reply-To: <20260723-iris_multi_slice-v4-3-45f0a3fe7fce@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-qcom-qce-cmd-descr-v24-14-4f87bb4d9938@oss.qualcomm.com>
-References: <20260723-qcom-qce-cmd-descr-v24-0-4f87bb4d9938@oss.qualcomm.com>
-In-Reply-To: <20260723-qcom-qce-cmd-descr-v24-0-4f87bb4d9938@oss.qualcomm.com>
-To: Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        Thara Gopinath <thara.gopinath@gmail.com>,
-        Herbert Xu <herbert@gondor.apana.org.au>,
-        "David S. Miller" <davem@davemloft.net>,
-        Udit Tiwari <quic_utiwari@quicinc.com>,
-        Md Sadre Alam <mdalam@qti.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Stephan Gerhold <stephan.gerhold@linaro.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-        Peter Ujfalusi <peter.ujfalusi@gmail.com>,
-        Michal Simek <michal.simek@amd.com>, Frank Li <Frank.Li@kernel.org>,
-        Andy Gross <agross@codeaurora.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Vignesh Raghavendra <vigneshr@ti.com>
-Cc: dmaengine@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-crypto@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        brgl@kernel.org, Bartosz Golaszewski <bartosz.golaszewski@linaro.org>,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2903;
- i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
- bh=KeA2nSTNl2mDaJCzIxdtrLUkRk83eDvjYrA1TIhvlbk=;
- b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBqYkrKe6UqD+TDnHwjbOTrmC7yHfh6DFtjTuZM2
- qORlKVkrc6JAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCamJKygAKCRAFnS7L/zaE
- w3soD/9tkyrjFGKxSib9ygzwLxNvhuL6MH/F4spX6VXKXz/JZ1DgRRetA1dhStrhWjwcWHyQbPs
- tG8dPKx+MV8/Wyrz+ELdMYHkGiTLa7zVFbJx4F9uRDQ+o2s6G0JBCYfEMUHfgjiZQ9wuwfRPK4B
- SYj4r2oSVTilPS8LT723DNYTJUi7mN6wQTq6aFt3TwubwU8hb2+jmvhVgZrpQ6Arc14ahAEKHyg
- 6CgjZ+Vj1yHCJcJsKEWZyLck0fW+kg76xuz4GmAKHBOQIfNffjjvWITGqXb2amPXayfWrCnQwE9
- wt1/H9sp9Nge/zdE6JgRe8m+cuxxFYDcSw9N+5Q8272vcTo9bP2SbuilMsVrYNwCvtP8AUt4F/1
- TMjlEPkDLCw8clfqx8SH9ZhfdKmZGHzT1r4WRpEoQrdoDV45W3qPLpJIhCUWCtqZo1tqF9Tnrnj
- YRIzwMCK/qUh4xJf1Z44Yc7zcsUppmBlUaVWM9O484FMXD9xeojk+JoTAlTHAJY0DcooY2O/CjE
- 6CWKFoDV6R0kK78xhygNqKVYlggk7c/YSlQLQbFZkhIu3ylWETzXMLdZ6APFaP4nqHzsx296H4l
- 2VT8T+Whq13rgpAZi5E+7w1zrkQbk8Sx1DoPxHtL4ctvR9a6gY+8inx4kiHahJPtO4IO5Xocdt3
- c8Vaimv34oc6Y3g==
-X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
- fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDE2NyBTYWx0ZWRfXxGCurSrmRHPN
- 4oqbUf7keDIa1dBxROStOP8DtImgxlZw2RCnFhTpYDFzmJJuaobBhocHCU681iNgiV1mskF2Ecr
- p2gOFQAGPssgn3TC6zeaZCzmu1RhVnbXuET/XcgwSvrunHeiZGvgK7fV6LsFRalMxV6/Gdyvk2r
- zxcTiF9hHvqKcCIqP4fY/vm47Qpko1ZGiZ+XJ7yVrmGDKZXksWssDYw+yBopHt7Xw14MmgRP+30
- 5I7+F3WRmUishKwOZvF5HIcSxHjkQ88k96RRE/ftiiGnvUWHgftooOedphvoLg+9ncW5R3cfd94
- smwkbq5LnRuh3Q4DRFTw6z3i2Dwz8VLSCwj2Q1Q7V63Uvjz6mxQTyqISNeCflAPXliPvBcOS4kb
- Mk2witqGP0Pg7kfZ/xLdICfxeeSiqJ5yOcgEbK0JpM1vK2nqZ1+z6YRWgKfSxOYzReryHhYnage
- UyXMfqg1h8XMr04SgYw==
-X-Proofpoint-GUID: 5dcFiulInU1UVg0xQ0WiQUgHUZ5Gohv6
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDE2NyBTYWx0ZWRfXzJlbjRCVTutf
- c6Imo2UPjTQSLkV3gU8COXRWm6ExcnUdfCIhojGT0vZZw2YnL9Xj2GaWL7zNeeKPfNeTQqXcHta
- HLL6LyrdiF+Yh5FTF7HD047amWPaK14=
-X-Authority-Analysis: v=2.4 cv=btx8wkai c=1 sm=1 tr=0 ts=6a624af4 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=6g4OycmRf1yXlxMorl0A:9 a=QEXdDO2ut3YA:10
- a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-ORIG-GUID: 5dcFiulInU1UVg0xQ0WiQUgHUZ5Gohv6
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDE2OSBTYWx0ZWRfX8SOrucVkk1My
+ QXd7D2jqlqfDnXcKqsTJhZDkVBguXmp1vksaOZ8vGcfmHWgkXGBltP/iqyuPa8BSJ754P/AzuCx
+ +D//wqmwSsnGykjLghIK6sxNBLHNR1c=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDE2OSBTYWx0ZWRfX2mE9zjpKj9ph
+ eDkw/dWAdTa9oByGP7vL6t1JjEwwS4+uDzZqFpZWLHVXIWbsJP1WyWJF3x82XOpDXlsD94+Tytv
+ 7xWGEqekDL2hbgrGfwUKfE3Tr4Zhiay1qv3rmEUlyWpSr1e8wfM32y18Uh8eoTqIktbR6p3fkGA
+ LWQe3Nbdtt9T51zHptARh761/NJNH/kjv6IEqzChNkF0iAD+Fl9ouSAiz7vdEQHQ2UCo1t26Xn5
+ 1nzdSjdYxzmyMiyQcSr/ofugPimwKlehfssYZF5PemBVhRqolC8CvG7XUlFIZGafp5IEsRaXbMM
+ cspfp/R4ldCVT1OdhvnNHTy/0DHjqL5cuSzM6UMbhnbSNhIeEOqhqNQJd9LdqFQJv9c3dc9/VhI
+ OKFh1EOCT4Banu/46KxScjpk3RSiwJ9dExk+QPbfs6zh6UScvqJKviNO7RtJX+qDTK+7G1XcRpr
+ vL0h4nypq+XA1pUJj5Q==
+X-Authority-Analysis: v=2.4 cv=Z9Dc2nRA c=1 sm=1 tr=0 ts=6a624cca cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=Am0+rXbGVt9FyytbsJdRwA==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=FkQo0lBtrm9XQ4xEfWYA:9 a=QEXdDO2ut3YA:10
+ a=_Vgx9l1VpLgwpw_dHYaR:22
+X-Proofpoint-GUID: uTDclaEb4dYq70L4sngOh5CtmOm1AXZG
+X-Proofpoint-ORIG-GUID: uTDclaEb4dYq70L4sngOh5CtmOm1AXZG
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-23_04,2026-07-22_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 malwarescore=0 adultscore=0 lowpriorityscore=0 impostorscore=0
- phishscore=0 priorityscore=1501 spamscore=0 bulkscore=0 suspectscore=0
+ malwarescore=0 spamscore=0 phishscore=0 impostorscore=0 lowpriorityscore=0
+ adultscore=0 priorityscore=1501 suspectscore=0 bulkscore=0 clxscore=1015
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230167
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230169
 
-In order to communicate to the BAM DMA engine which address should be
-used as a scratchpad for dummy writes related to BAM pipe locking,
-fill out the dedicated BAM peripheral config structure and pass it to
-the DMA driver using dmaengine_slave_config().
 
-Reviewed-by: Manivannan Sadhasivam <mani@kernel.org>
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
----
- drivers/crypto/qce/core.c |  6 ++++--
- drivers/crypto/qce/dma.c  | 14 ++++++++++++++
- 2 files changed, 18 insertions(+), 2 deletions(-)
+On 7/23/2026 3:51 PM, Sachin Kumar Garg wrote:
+> Add multi-slice encoding support with MAX_MB and MAX_BYTES modes.
+> 
+> Clients can enable slice mode using V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MODE
+> control and configure slice size via V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_MB
+> or V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_BYTES controls.
+> 
+> Signed-off-by: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
+> ---
+>   drivers/media/platform/qcom/iris/iris_ctrls.c      | 79 ++++++++++++++++++++++
+>   drivers/media/platform/qcom/iris/iris_ctrls.h      |  1 +
+>   drivers/media/platform/qcom/iris/iris_hfi_gen2.c   | 33 ++++++++-
+>   .../platform/qcom/iris/iris_hfi_gen2_defines.h     |  2 +
+>   .../platform/qcom/iris/iris_platform_common.h      | 16 +++++
+>   .../media/platform/qcom/iris/iris_platform_vpu3x.c | 17 +++++
+>   6 files changed, 147 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.c b/drivers/media/platform/qcom/iris/iris_ctrls.c
+> index d7cbf6c3614a..ed7ed4b89a5a 100644
+> --- a/drivers/media/platform/qcom/iris/iris_ctrls.c
+> +++ b/drivers/media/platform/qcom/iris/iris_ctrls.c
+> @@ -154,6 +154,12 @@ static enum platform_inst_fw_cap_type iris_get_cap_id(u32 id)
+>   		return LAYER4_BITRATE_HEVC;
+>   	case V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L5_BR:
+>   		return LAYER5_BITRATE_HEVC;
+> +	case V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MODE:
+> +		return SLICE_MODE;
+> +	case V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_BYTES:
+> +		return SLICE_MAX_BYTES;
+> +	case V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_MB:
+> +		return SLICE_MAX_MB;
+>   	default:
+>   		return INST_FW_CAP_MAX;
+>   	}
+> @@ -297,6 +303,12 @@ static u32 iris_get_v4l2_id(enum platform_inst_fw_cap_type cap_id)
+>   		return V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L4_BR;
+>   	case LAYER5_BITRATE_HEVC:
+>   		return V4L2_CID_MPEG_VIDEO_HEVC_HIER_CODING_L5_BR;
+> +	case SLICE_MODE:
+> +		return V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MODE;
+> +	case SLICE_MAX_BYTES:
+> +		return V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_BYTES;
+> +	case SLICE_MAX_MB:
+> +		return V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_MB;
+>   	default:
+>   		return 0;
+>   	}
+> @@ -1482,6 +1494,73 @@ int iris_set_layer_bitrate(struct iris_inst *inst, enum platform_inst_fw_cap_typ
+>   					     &bitrate, sizeof(u32));
+>   }
+>   
+> +int iris_set_slice_count(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id)
+> +{
+> +	const struct iris_hfi_session_ops *hfi_ops = inst->hfi_session_ops;
+> +	const struct platform_inst_slice_caps *slice_caps =
+> +		inst->core->iris_platform_data->slice_caps;
+> +	u32 slice_mode = inst->fw_caps[SLICE_MODE].value;
 
-diff --git a/drivers/crypto/qce/core.c b/drivers/crypto/qce/core.c
-index 4031b4516d6519fc5024bbbcc439500a7b3314b2..50fdc8d808d0fe1d9d430ec601ab2ccf2ddf6e91 100644
---- a/drivers/crypto/qce/core.c
-+++ b/drivers/crypto/qce/core.c
-@@ -246,6 +246,9 @@ static int qce_crypto_probe(struct platform_device *pdev)
- 	if (ret)
- 		return ret;
- 
-+	qce->base_phys = res->start;
-+	qce->dma_size = resource_size(res);
-+
- 	ret = devm_qce_dma_request(qce);
- 	if (ret)
- 		return ret;
-@@ -263,10 +266,9 @@ static int qce_crypto_probe(struct platform_device *pdev)
- 	qce->async_req_enqueue = qce_async_request_enqueue;
- 	qce->async_req_done = qce_async_request_done;
- 
--	qce->dma_size = resource_size(res);
- 	qce->base_dma = dma_map_resource(dev, res->start, qce->dma_size,
- 					 DMA_BIDIRECTIONAL, 0);
--	qce->base_phys = res->start;
-+
- 	ret = dma_mapping_error(dev, qce->base_dma);
- 	if (ret)
- 		return ret;
-diff --git a/drivers/crypto/qce/dma.c b/drivers/crypto/qce/dma.c
-index 88d253d9147cfc9ed275653f7fd248538378194a..ad951a8821a480ebfe4e025eb6a7417f97d7331e 100644
---- a/drivers/crypto/qce/dma.c
-+++ b/drivers/crypto/qce/dma.c
-@@ -11,6 +11,7 @@
- 
- #include "core.h"
- #include "dma.h"
-+#include "regs-v5.h"
- 
- #define QCE_IGNORE_BUF_SZ		(2 * QCE_BAM_BURST_SIZE)
- #define QCE_BAM_CMD_SGL_SIZE		128
-@@ -116,8 +117,17 @@ static void qce_dma_terminate(void *data)
- 
- int devm_qce_dma_request(struct qce_device *qce)
- {
-+	struct bam_config peripheral_cfg = {
-+		.lock_scratchpad_addr = (u32)qce->base_phys + REG_VERSION,
-+	};
-+	struct dma_slave_config cfg = {
-+		.direction = DMA_MEM_TO_DEV,
-+		.peripheral_config = &peripheral_cfg,
-+		.peripheral_size = sizeof(peripheral_cfg),
-+	};
- 	struct qce_dma_data *dma = &qce->dma;
- 	struct device *dev = qce->dev;
-+	int ret;
- 
- 	dma->result_buf = devm_kmalloc(dev, QCE_RESULT_BUF_SZ + QCE_IGNORE_BUF_SZ, GFP_KERNEL);
- 	if (!dma->result_buf)
-@@ -133,6 +143,10 @@ int devm_qce_dma_request(struct qce_device *qce)
- 		return dev_err_probe(dev, PTR_ERR(dma->rxchan),
- 				     "Failed to get RX DMA channel\n");
- 
-+	ret = dmaengine_slave_config(dma->rxchan, &cfg);
-+	if (ret)
-+		return dev_err_probe(dev, ret, "Failed to configure the RX DMA channel\n");
-+
- 	dma->bam_txn = devm_kzalloc(dev, sizeof(*dma->bam_txn), GFP_KERNEL);
- 	if (!dma->bam_txn)
- 		return -ENOMEM;
+..[cap_id].value;
 
--- 
-2.47.3
+> +	u32 bitrate = inst->fw_caps[BITRATE].value;
 
+if used only once, can be used directly instead of a new variable.
+
+> +	u32 rc_type = inst->hfi_rc_type;
+> +	u32 fps = inst->frame_rate;
+> +	u32 output_width = inst->fmt_dst->fmt.pix_mp.width;
+> +	u32 output_height = inst->fmt_dst->fmt.pix_mp.height;
+> +	u32 mbpf = NUM_MBS_PER_FRAME(output_height, output_width);
+> +	u32 max_width, max_height, min_width, min_height;
+> +	u32 max_avg_slicesize, hfi_value, hfi_id;
+
+follow reverse christmas tree
+
+> +
+> +	if (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_SINGLE) {
+> +		dev_dbg(inst->core->dev, "slice mode is: %u, ignore setting to fw\n", slice_mode);
+
+we know here that the logic returned due to single slice, print it 
+directly saying the same, there is no other possibility.
+
+> +		return 0;
+> +	}
+> +	if (fps > slice_caps->max_slice_frame_rate ||
+> +	    (rc_type != HFI_RC_OFF && rc_type != HFI_RC_CBR_CFR &&
+> +	    rc_type != HFI_RC_CBR_VFR && rc_type != HFI_RC_VBR_CFR)) {
+> +		dev_err(inst->core->dev, "slice unsupported, fps: %u, rc_type: %#x\n",
+> +			fps, rc_type);
+> +		return -EINVAL;
+> +	}
+> +
+> +	max_width = (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_MB) ?
+> +			slice_caps->max_mb_slice_width : slice_caps->max_bytes_slice_width;
+> +	max_height = (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_MB) ?
+> +			slice_caps->max_mb_slice_height : slice_caps->max_bytes_slice_height;
+> +	min_width = (inst->codec == V4L2_PIX_FMT_HEVC) ?
+> +			slice_caps->min_hevc_slice_width : slice_caps->min_avc_slice_width;
+> +	min_height = slice_caps->min_slice_height;
+> +
+> +	if (output_width < min_width || output_height < min_height ||
+> +	    output_width > max_width || output_height > max_height) {
+> +		dev_err(inst->core->dev, "slice unsupported, codec: %#x wxh: [%dx%d]\n",
+> +			inst->codec, output_width, output_height);
+> +		return -EINVAL;
+> +	}
+> +
+> +	if (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_MB) {
+> +		hfi_value = inst->fw_caps[SLICE_MAX_MB].value;
+> +		hfi_value = max(hfi_value, DIV_ROUND_UP(mbpf, slice_caps->max_slices_per_frame));
+> +		if (inst->codec == V4L2_PIX_FMT_HEVC)
+> +			hfi_value = (hfi_value + 3) / 4;
+> +		hfi_id = inst->fw_caps[SLICE_MAX_MB].hfi_id;
+> +	} else if (slice_mode == V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_BYTES) {
+> +		hfi_value = inst->fw_caps[SLICE_MAX_BYTES].value;
+> +		if (rc_type != HFI_RC_OFF) {
+> +			max_avg_slicesize = DIV_ROUND_UP((bitrate / fps) / 8,
+> +							 slice_caps->max_slices_per_frame);
+> +			hfi_value = max(hfi_value, max_avg_slicesize);
+> +		}
+
+for RC_OFF case, the value would be 512 and could lead to huge number of 
+slice per frame. Could you check if thats the desired case ?
+
+> +		hfi_id = inst->fw_caps[SLICE_MAX_BYTES].hfi_id;
+> +	} else {
+> +		return -EINVAL;
+> +	}
+> +
+> +	return hfi_ops->session_set_property(inst, hfi_id,
+> +					     HFI_HOST_FLAGS_NONE,
+> +					     iris_get_port_info(inst, cap_id),
+> +					     HFI_PAYLOAD_U32,
+> +					     &hfi_value, sizeof(u32));
+> +}
+> +
+>   int iris_set_properties(struct iris_inst *inst, u32 plane)
+>   {
+>   	const struct iris_hfi_session_ops *hfi_ops = inst->hfi_session_ops;
+> diff --git a/drivers/media/platform/qcom/iris/iris_ctrls.h b/drivers/media/platform/qcom/iris/iris_ctrls.h
+> index 3c462ec9190b..5a73c7c49d36 100644
+> --- a/drivers/media/platform/qcom/iris/iris_ctrls.h
+> +++ b/drivers/media/platform/qcom/iris/iris_ctrls.h
+> @@ -47,6 +47,7 @@ int iris_set_layer_type(struct iris_inst *inst, enum platform_inst_fw_cap_type c
+>   int iris_set_layer_count_gen1(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
+>   int iris_set_layer_count_gen2(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
+>   int iris_set_layer_bitrate(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
+> +int iris_set_slice_count(struct iris_inst *inst, enum platform_inst_fw_cap_type cap_id);
+>   int iris_set_properties(struct iris_inst *inst, u32 plane);
+>   
+>   #endif
+> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
+> index acc0ed8adda1..fcbebced05c3 100644
+> --- a/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
+> +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
+> @@ -12,6 +12,8 @@
+>   
+>   #define VIDEO_ARCH_LX 1
+>   #define BITRATE_MAX				245000000
+> +#define MAX_SLICE_MB_SIZE         \
+> +	(((4096 + 15) >> 4) * ((2160 + 15) >> 4))
+>   
+>   static const struct platform_inst_fw_cap inst_fw_cap_sm8550_dec[] = {
+>   	{
+> @@ -937,7 +939,36 @@ static const struct platform_inst_fw_cap inst_fw_cap_sm8550_enc[] = {
+>   		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_INPUT_PORT |
+>   			CAP_FLAG_DYNAMIC_ALLOWED,
+>   		.set = iris_set_layer_bitrate,
+> -	}
+> +	},
+> +	{
+> +		.cap_id = SLICE_MODE,
+> +		.min = V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_SINGLE,
+> +		.max = V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_BYTES,
+> +		.step_or_mask = BIT(V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_SINGLE) |
+> +					BIT(V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_MB) |
+> +					BIT(V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_BYTES),
+> +		.value = V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_SINGLE,
+> +		.flags = CAP_FLAG_OUTPUT_PORT | CAP_FLAG_MENU,
+> +		.set = iris_set_slice_count,
+> +	},
+> +	{
+> +		.cap_id = SLICE_MAX_BYTES,
+> +		.min = 512,
+> +		.max = BITRATE_MAX >> 3,
+> +		.step_or_mask = 1,
+> +		.value = 512,
+
+refer my above comment on rc_off aspect.
+
+> +		.hfi_id = HFI_PROP_MULTI_SLICE_BYTES_COUNT,
+> +		.flags = CAP_FLAG_OUTPUT_PORT,
+> +	},
+> +	{
+> +		.cap_id = SLICE_MAX_MB,
+> +		.min = 1,
+> +		.max = MAX_SLICE_MB_SIZE,
+> +		.step_or_mask = 1,
+> +		.value = 1,
+> +		.hfi_id = HFI_PROP_MULTI_SLICE_MB_COUNT,
+> +		.flags = CAP_FLAG_OUTPUT_PORT,
+> +	},
+>   };
+>   
+>   static const u32 sm8550_vdec_input_config_params_default[] = {
+> diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h b/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
+> index 776b21cd11b2..226894b99dcc 100644
+> --- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
+> +++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_defines.h
+> @@ -71,6 +71,8 @@ enum hfi_rate_control {
+>   #define HFI_PROP_MIN_QP_PACKED			0x0300012f
+>   #define HFI_PROP_MAX_QP_PACKED			0x03000130
+>   #define HFI_PROP_IR_RANDOM_PERIOD		0x03000131
+> +#define HFI_PROP_MULTI_SLICE_MB_COUNT		0x03000132
+> +#define HFI_PROP_MULTI_SLICE_BYTES_COUNT	0x03000133
+>   #define HFI_PROP_LTR_COUNT			0x03000134
+>   #define HFI_PROP_LTR_MARK			0x03000135
+>   #define HFI_PROP_LTR_USE			0x03000136
+> diff --git a/drivers/media/platform/qcom/iris/iris_platform_common.h b/drivers/media/platform/qcom/iris/iris_platform_common.h
+> index c9256f2323dc..ad9f2b20cd90 100644
+> --- a/drivers/media/platform/qcom/iris/iris_platform_common.h
+> +++ b/drivers/media/platform/qcom/iris/iris_platform_common.h
+> @@ -88,6 +88,18 @@ struct tz_cp_config {
+>   	u32 cp_nonpixel_size;
+>   };
+>   
+> +struct platform_inst_slice_caps {
+> +	u32 max_slices_per_frame;
+> +	u32 max_slice_frame_rate;
+> +	u32 max_mb_slice_width;
+> +	u32 max_mb_slice_height;
+> +	u32 max_bytes_slice_width;
+> +	u32 max_bytes_slice_height;
+> +	u32 min_hevc_slice_width;
+> +	u32 min_avc_slice_width;
+> +	u32 min_slice_height;
+> +};
+> +
+>   struct platform_inst_caps {
+>   	u32 min_frame_width;
+>   	u32 max_frame_width;
+> @@ -183,6 +195,9 @@ enum platform_inst_fw_cap_type {
+>   	LAYER3_BITRATE_HEVC,
+>   	LAYER4_BITRATE_HEVC,
+>   	LAYER5_BITRATE_HEVC,
+> +	SLICE_MODE,
+> +	SLICE_MAX_BYTES,
+> +	SLICE_MAX_MB,
+>   	INST_FW_CAP_MAX,
+>   };
+>   
+> @@ -315,6 +330,7 @@ struct iris_platform_data {
+>   	const u32 *inst_iris_fmts;
+>   	u32 inst_iris_fmts_size;
+>   	struct platform_inst_caps *inst_caps;
+> +	const struct platform_inst_slice_caps *slice_caps;
+>   	const struct tz_cp_config *tz_cp_config_data;
+>   	u32 tz_cp_config_data_size;
+>   	u32 num_vpp_pipe;
+> diff --git a/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c b/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
+> index 2c63adbc5579..6e44bed5ebff 100644
+> --- a/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
+> +++ b/drivers/media/platform/qcom/iris/iris_platform_vpu3x.c
+> @@ -12,6 +12,18 @@
+>   #include "iris_vpu_buffer.h"
+>   #include "iris_vpu_common.h"
+>   
+> +static const struct platform_inst_slice_caps default_slice_caps_vpu3x = {
+> +	.max_slices_per_frame = 128,
+> +	.max_slice_frame_rate = 60,
+> +	.max_mb_slice_width = 4096,
+> +	.max_mb_slice_height = 2160,
+> +	.max_bytes_slice_width = 1920,
+> +	.max_bytes_slice_height = 1088,
+> +	.min_hevc_slice_width = 384,
+> +	.min_avc_slice_width = 192,
+> +	.min_slice_height = 128,
+> +};
+> +
+>   #include "iris_platform_qcs8300.h"
+>   #include "iris_platform_sm8550.h"
+>   #include "iris_platform_sm8650.h"
+> @@ -110,6 +122,7 @@ const struct iris_platform_data qcs8300_data = {
+>   	.inst_iris_fmts = iris_fmts_vpu3x_dec,
+>   	.inst_iris_fmts_size = ARRAY_SIZE(iris_fmts_vpu3x_dec),
+>   	.inst_caps = &platform_inst_cap_qcs8300,
+> +	.slice_caps = &default_slice_caps_vpu3x,
+
+please keep it as slice_caps_.., drop the default keyword to keep it 
+consistent with others.
+
+>   	.tz_cp_config_data = tz_cp_config_vpu3,
+>   	.tz_cp_config_data_size = ARRAY_SIZE(tz_cp_config_vpu3),
+>   	.num_vpp_pipe = 2,
+> @@ -139,6 +152,7 @@ const struct iris_platform_data sm8550_data = {
+>   	.inst_iris_fmts = iris_fmts_vpu3x_dec,
+>   	.inst_iris_fmts_size = ARRAY_SIZE(iris_fmts_vpu3x_dec),
+>   	.inst_caps = &platform_inst_cap_sm8550,
+> +	.slice_caps = &default_slice_caps_vpu3x,
+>   	.tz_cp_config_data = tz_cp_config_vpu3,
+>   	.tz_cp_config_data_size = ARRAY_SIZE(tz_cp_config_vpu3),
+>   	.num_vpp_pipe = 4,
+> @@ -176,6 +190,7 @@ const struct iris_platform_data sm8650_data = {
+>   	.inst_iris_fmts = iris_fmts_vpu3x_dec,
+>   	.inst_iris_fmts_size = ARRAY_SIZE(iris_fmts_vpu3x_dec),
+>   	.inst_caps = &platform_inst_cap_sm8550,
+> +	.slice_caps = &default_slice_caps_vpu3x,
+>   	.tz_cp_config_data = tz_cp_config_vpu3,
+>   	.tz_cp_config_data_size = ARRAY_SIZE(tz_cp_config_vpu3),
+>   	.num_vpp_pipe = 4,
+> @@ -205,6 +220,7 @@ const struct iris_platform_data sm8750_data = {
+>   	.inst_iris_fmts = iris_fmts_vpu3x_dec,
+>   	.inst_iris_fmts_size = ARRAY_SIZE(iris_fmts_vpu3x_dec),
+>   	.inst_caps = &platform_inst_cap_sm8550,
+> +	.slice_caps = &default_slice_caps_vpu3x,
+>   	.tz_cp_config_data = tz_cp_config_vpu3,
+>   	.tz_cp_config_data_size = ARRAY_SIZE(tz_cp_config_vpu3),
+>   	.num_vpp_pipe = 4,
+> @@ -240,6 +256,7 @@ const struct iris_platform_data x1p42100_data = {
+>   	.inst_iris_fmts = iris_fmts_vpu3x_dec,
+>   	.inst_iris_fmts_size = ARRAY_SIZE(iris_fmts_vpu3x_dec),
+>   	.inst_caps = &platform_inst_cap_sm8550,
+> +	.slice_caps = &default_slice_caps_vpu3x,
+>   	.tz_cp_config_data = tz_cp_config_vpu3,
+>   	.tz_cp_config_data_size = ARRAY_SIZE(tz_cp_config_vpu3),
+>   	.num_vpp_pipe = 1,
+> 
+
+Regards,
+Vikash
