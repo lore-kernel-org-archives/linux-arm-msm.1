@@ -1,88 +1,88 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0931828033B
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 02:30:31 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5607F353A75
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 02:30:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784773834; cv=none; b=ZxzZZSjCUtUG+QrnY3FvPTSMNGl28U657TFVPiuRaAUUoKHfv7mG3s2SIh89s/RvbRSfXdtB1+rZujChv08i0jEAxitxJldEqYDbHSacz2eBolWOKx3T6Z/ZQOHtxJpo1jnwfwxHRr49U/x4xL1OEp7UtC+ariKrGTJaRlLZ6Vg=
+	t=1784773839; cv=none; b=of6ABMEJHcOXohL8LOAqsCIptw5T7994h/PSERkkGh4cv/qKFlqbbu3iD05AHcjyiYcGlg5YRNVhh9+Mz0LVok3HoHZWby55CvVp4XaUAx3L+/yL9B+Lzy7rowf84fpguIpybu3NdKQlCNTI+Ltdkrjh+xoAMzATkP07l7qQFOE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784773834; c=relaxed/simple;
-	bh=+WhStuQ5tWT2R9/i8ZwGe8d3oZmxPuE4Vr+OUYOmmso=;
+	s=arc-20240116; t=1784773839; c=relaxed/simple;
+	bh=rHamkIq3x8RQEzHnAlI5Dl7J16sNvC/b/+nQJv3tKAU=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=rZs1cXcW9fFXiJO2M8fOV0K378IeOYPuXLu82m7LAqTsVJlZcTMkybK3ALJ4/Km5cqG17WJ3DQjwlsubKSHukiWK0ZMxhbuAguFTe+fBcdqw69zGprfdrv0Y5Cdfj3BnhEQKg1nIJhkPISSQES0Lwoa0CfDaY9bRL03MEptMdYM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ms89n2rd; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bzVAZa2k; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=VEtlo5EjpK1srRHZX3zzFRF7GTp4z9KfaLxzof6Td7ZcMagiUrGXri/zYB5heHY6gdEz2VdEU/5JD3Ow5sLHwuXdGCOmWyck2Q0lp1mUQIh+aI74lwMYHO03vr7Q9ZTKTvZUJxIJWFgWDBk9YBQxUI3oTVmViuAcsUBOz4zONOI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=HFxWgSU7; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cY9Cb/t/; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ms89n2rd";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bzVAZa2k"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66N0XUch2521148
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 02:30:29 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="HFxWgSU7";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cY9Cb/t/"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66N0WhmV3534800
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 02:30:31 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Gg+QryruY/7NPTM87J9rF7S09woVaBLgs3RtEBjtwlw=; b=ms89n2rdNeuQNbgZ
-	IQfe8k5SEs3SZf9vZC3HiVcNUgG6SNm1p8Of6ly8+uCxzFSh9SQVWE89btH2gjTU
-	LmtcT+jwZVqfACaQaTYdi3aSpSg5wna9uW+5jMECojZWmYmVXpvzlKQYp52zX5kM
-	UrtkVmrvjbryUCocThlAAmUqgFpbTy9IbD2Qz6cwGQ3WPLQkg1I0/15CaT6uD8ZQ
-	aYFVJI5taA6PuWMDbnE5u/SNcVny72vMjA04q0E/0FWEdhbPhDZh2ssGTGgb8M1D
-	9C6JbSGlaI/ztiUq3DVt+piiTFl+B/Dm2zmNFOOdDporjltRBGeftq7YLjDRpaH1
-	MQpzUQ==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fk6c7gpuh-1
+	dKcDqxStzrkm8/qbkFNeg1xSHfDF42r3Ub5RsuXA3us=; b=HFxWgSU7m05ULT+j
+	5IWBp56lSmtYsnE83pOw5Vwt+x5p6bOi2CGn2y1MZuN3aUMmt5nc54y5y3dPSTeV
+	UrXdlAhxVo5GurK0kic4adurjVCEbZE8ZgM7uWxK9zHvTB3tO0FjHuPj6GvDMS8B
+	fXdtypXNaQpVaEERa39o6IGCzUkPugaXLEYXIBN6hEyIkgYS0wIL6OrX2vf9Nj6+
+	ljPgLiVGayqKGg2oBsxGqFs1m259sCAjxPnqfZCaSl3yWrCtJ+Xe9FJayKI1QdxN
+	iopfgvHkqHQsD/a+bPrQohD/94FuuzSOxXxIcU3b+xbxbyCglNWYdHdQJM5DvK1N
+	3CC1RA==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fk28xss6j-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 02:30:28 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cb711c88f2eso163103a12.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 19:30:28 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 02:30:31 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-c89704da8c7so323601a12.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 22 Jul 2026 19:30:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784773828; x=1785378628; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784773831; x=1785378631; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Gg+QryruY/7NPTM87J9rF7S09woVaBLgs3RtEBjtwlw=;
-        b=bzVAZa2k6eRscdWin+pSFeU5kmviXILU4gVQAm5JKd8xvNsBG3xxLpISjEZk1/73on
-         GnvUsMrSuXWz3xjMmKH3CR4oB3upyXVvp/UFy8paz2MGf42LFSixmMfDG3NkTJ4jtJD5
-         XJvUDmpR9ANw99V/+qM8D5z8GBmV91hlRTPspiUMaKZkkV3XedzaewoAbRNNmlg1jUBb
-         oEvvkdziGCHhFbYJRNHD1hbj+afVlUzRDQj7FgYXziOVvy6svJ3qIdNnkkJGTYyBqgHM
-         jNz128TpWFTiZtwDOi3toLRchMsc9Op7X5kaOm0W1sln5VT+6QrhgSYNZqOkpFDK24eT
-         zLmw==
+        bh=dKcDqxStzrkm8/qbkFNeg1xSHfDF42r3Ub5RsuXA3us=;
+        b=cY9Cb/t/IF/AmrAMII4QCeqJIOBLDm5ZraUrO39oYNR1q5XR0LkgIVoZnwJdrJitNB
+         aFa4gWB6VBkEcF47xIYD0U5c2n1feUT1uhSQHqxpf5lDHqsUrb45tAZA+H/DJOvGun9I
+         pqYvdMWadZxL5wSedTrunVkoi212vL5CxMNyroHAyIm0OjJDsZ+3rNAR0qveX7IcYXcH
+         7yVV2lWPGRooIxsWbACgxJgyp4O6aOtGObsAjc5dFIaWfnSCTbLAAPsuIQc9P3/aaL3C
+         urThE5vKDxkjs82GsJRpuqrsrjHfrUQ7sMmIH2JYnsxxV5ffmyJ4UWQJ8wzUOG5jEDZY
+         VyzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784773828; x=1785378628;
+        d=1e100.net; s=20251104; t=1784773831; x=1785378631;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Gg+QryruY/7NPTM87J9rF7S09woVaBLgs3RtEBjtwlw=;
-        b=amwutlMQui8XcuW+skkaliXo07sc08T0d+WcbCq5Gyn8p3ZgdozjrpM1/RVcEe+AQ8
-         slz/CmLjWwdz/QEO1QsKr0HtJRL8b3NW4ZWv28AxTvYBevB8HkVxyc5Vc3X3nAwB4MlS
-         ooRvHc9B3qn+/VIPvunV9FiedDDWnALIVFCvMgWU/Sh4Ddj6RJmYUDbB8L948Zn/wqgy
-         D95aUKDiw8XXj+gL0BFG8uCiErzL7uVYOt4BbH258eGkuPiz9oYUYru0TkYJHYtIXmHc
-         ry/YoQM5oSyjTdKlXWFDDSWxfvv71Yb9rNYqR0f6UtegsqSz4mSpe5ZlqiJVZiNHqOFH
-         MelQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rqvt1H8dSR8ZEMPR3WxTYulRo6CLqDj8jKPVyx9zhZbMLdJpyHhu3OIzXsrYE7OR6rp3C9rQ9V7+t87gBYR@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz9gKtKLACE+ckQ3dBumU2nkM7HpE/rJShsWuoiQu12+B/Gft2Z
-	/Kc7CZki9UASOL9yqbSlVqGUvaxwbXdOgdnzqqn6cYb2wJCqaVg12KmQdAErm5PWW66KZaN1ZuI
-	gUD1xNoEQq06F7NNNV2os4UEU7dr5VsyQjOzrhLT+6lxun6DxT24ct13ZFtGJcIL+cQu2
-X-Gm-Gg: AR+sD13floBApEzi/TVx4AxMiBH/b4c5X26Q7gd7uPxeJObJGQqwSPy679MtxZGxs4p
-	jqfWXioHXg/JZZ4LLnQHAZOMuJi9EaH5DYcbzwxjzttQ/a+XR817up+hZJ60j+OmIHtPGouJYlh
-	H0fp8r63QV49jQh5eDsULSznDj7sG272RL1d1Fwk/+89hCb08wmt228PG+oEPLtXwdE9fS8sKPQ
-	waGiEbzVmKXDc7sf60228WOTGTv6h9zQC8wGYRLN8xT2FIRe00spjnnIyM0atr1Rxei7ab2Ugmj
-	X8WHM9D7GlNG+b+qlNRgyxREw+8izbdMNCpisWs2f2ua2TPyQYZ/nfflMV6EnHAQ7rewzLoXL+X
-	quFXCzV8r0KrsTnsikrJjNq+GlFt9sKV+x8DMjiIW3c6OJjw=
-X-Received: by 2002:a05:6a20:d508:b0:3c0:9c19:65a3 with SMTP id adf61e73a8af0-3c44b2b6a31mr1190836637.75.1784773828143;
-        Wed, 22 Jul 2026 19:30:28 -0700 (PDT)
-X-Received: by 2002:a05:6a20:d508:b0:3c0:9c19:65a3 with SMTP id adf61e73a8af0-3c44b2b6a31mr1190787637.75.1784773827627;
-        Wed, 22 Jul 2026 19:30:27 -0700 (PDT)
+        bh=dKcDqxStzrkm8/qbkFNeg1xSHfDF42r3Ub5RsuXA3us=;
+        b=f7Y6gcfebkKTX6JZIa1lRuldzMkDhrKscwPa+Y4CAmB2aj5Ndb2dAOSFbqwFJYUZ0B
+         ZLzYQMYy1p9yqD/6jmWW9lFWgZibhoedQG4d6dwwUkZkyYVO00uqs4smPtFnmMN0sz3W
+         e7AilYMnKwNNus2PLPzJ39xPN1e3xZ5jA5KXD3jFrLCS1Wgkp9Xf5m2rh6XWj7nKolEv
+         5ppmIPqk6d7m9EYTl+yFZ6EJawt2ZP/S2BLLIXgf3WWwEYSBrrUZD1KZQKx/4XFDqRxs
+         REDMQDsq/Wz+ivFxFyvYqFFaZjNMYWaUIg+iKGfhsPMa0uH14F6c9aQX5OGPairatGB9
+         esvg==
+X-Forwarded-Encrypted: i=1; AHgh+Rp3tQjF9PNV445gsBDO+BonL0MHVrF38M/6jA66NrxrkAgvrZD5OQ/sDMbPhgUXFnYUvBf8Sz1hsDwZ9cly@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx0NflM1VuruBpKfDG2Sj4E3/5+U6vCwV5t4u4lUNgMQUEJLRAY
+	tsdO5RjqMrfoMcJH46kNbbjX4ntRmx9yx8q/yvPdh6nMlPvTVKHSjX6P3pzIzot701ut6ky2daj
+	wndZ2LZTTITZSah6YTnUltxKwquaoV/a51l2xge3TTwjMgfJxDIHvOA1tyVrR7FiWetat
+X-Gm-Gg: AR+sD11BIR6DielNzPOA0j13oyhiQP0AFjSWHfONNSshHOFdlLLfqu1pq8dp2qDktvI
+	OCVfL4BIqvWIu5ZBghPWRd4CxqzsY0zujaI+AblZeUrFG1TGcXEhn181UulB4vReFGf8CWM1PTY
+	+DpOC3RwSqcn6kw9XCjEr0QjohPCzg+I5dv8N4/R883siBuxXB/U9E89CGYf2bcyRsSQmnttHLb
+	3H1IavV3obTiPKFKQIE8GUSNvw7Df0xakbAiLy0JBiztEJiQQzfLMyA19/ZzbD9CXAS2AIL4CiP
+	G3XTzKyi4s3BEocQMbLFRuTWX1kA8dIkgTYLLCrF69Vs4RppZKQrXmjixYTN0fjnG420thsK6o+
+	Mtj0d9Kr+3UENDjMPQbvPcJjhoWNm8A0uY5/39U8SyM/QCdY=
+X-Received: by 2002:a05:6a20:db95:b0:3b4:8f18:33a with SMTP id adf61e73a8af0-3c44af75263mr1208248637.1.1784773830567;
+        Wed, 22 Jul 2026 19:30:30 -0700 (PDT)
+X-Received: by 2002:a05:6a20:db95:b0:3b4:8f18:33a with SMTP id adf61e73a8af0-3c44af75263mr1208205637.1.1784773830062;
+        Wed, 22 Jul 2026 19:30:30 -0700 (PDT)
 Received: from hu-qianyu-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3147d47960dsm13463980eec.0.2026.07.22.19.30.26
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3147d47960dsm13463980eec.0.2026.07.22.19.30.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 22 Jul 2026 19:30:27 -0700 (PDT)
+        Wed, 22 Jul 2026 19:30:29 -0700 (PDT)
 From: Qiang Yu <qiang.yu@oss.qualcomm.com>
-Date: Wed, 22 Jul 2026 19:30:18 -0700
-Subject: [PATCH v6 1/6] dt-bindings: phy: qcom: Add Glymur QMP PCIe
- multiple link-mode PHY
+Date: Wed, 22 Jul 2026 19:30:20 -0700
+Subject: [PATCH v6 3/6] arm64: dts: qcom: glymur: Wire PCIe3a/3b to shared
+ Gen5x8 PHY
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260722-glymur_linkmode_0722-v6-1-bba8156b8cbb@oss.qualcomm.com>
+Message-Id: <20260722-glymur_linkmode_0722-v6-3-bba8156b8cbb@oss.qualcomm.com>
 References: <20260722-glymur_linkmode_0722-v6-0-bba8156b8cbb@oss.qualcomm.com>
 In-Reply-To: <20260722-glymur_linkmode_0722-v6-0-bba8156b8cbb@oss.qualcomm.com>
 To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
@@ -106,247 +106,424 @@ Cc: Qiang Yu <qiang.yu@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
         linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
         linux-kernel@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784773825; l=6511;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784773825; l=11147;
  i=qiang.yu@oss.qualcomm.com; s=20250513; h=from:subject:message-id;
- bh=+WhStuQ5tWT2R9/i8ZwGe8d3oZmxPuE4Vr+OUYOmmso=;
- b=xdCWBVyDqEd/3RgWIZpx81J37CyJQ/95TdL3VAtwr44gWkQ/bHeozbhZXkgVcRuF3gFG5qGK2
- XiNxjd5jSErCl9PL/L4dDahIRj7tbhkmuzoYT/XXMaia8YQwqvX0DFP
+ bh=rHamkIq3x8RQEzHnAlI5Dl7J16sNvC/b/+nQJv3tKAU=;
+ b=CU+F7afQsHDtSvhxpdsSosi2IcRxx0fEYr+EqMMqNQRN3cd+52vibioUKng31eNHXeHcDgPzE
+ X9vmU4Dq2IfAC/QVEbDUUQj5QLm5Tjjioz984f5saGIClO0IGbibYVg
 X-Developer-Key: i=qiang.yu@oss.qualcomm.com; a=ed25519;
  pk=Rr94t+fykoieF1ngg/bXxEfr5KoQxeXPtYxM8fBQTAI=
-X-Proofpoint-GUID: TQ5zIExp-zd1YAS516jOpdUiz9WsfKzk
-X-Proofpoint-ORIG-GUID: TQ5zIExp-zd1YAS516jOpdUiz9WsfKzk
-X-Authority-Analysis: v=2.4 cv=baZbluPB c=1 sm=1 tr=0 ts=6a617cc4 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+X-Proofpoint-ORIG-GUID: Ahlc5PoSvrPOjsJ2XWsn1Ev6PZr7KN3K
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDAyMiBTYWx0ZWRfXw1RF63NR2mRJ
+ 19vwbJ46I+E8pZXvCW7pxBx/fKYQpU0JZRvwasW17/u4zl5nZTiOcazMqqHPvOR88lMqgzbs1D9
+ 5mlpOyuJcNhkWAdADBTrJgbx1A86ZO0=
+X-Proofpoint-GUID: Ahlc5PoSvrPOjsJ2XWsn1Ev6PZr7KN3K
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDAyMiBTYWx0ZWRfX3gnoTLPg6t2c
+ GIR2PJ8aVW0srl9YDtVNY6P6EidC/lNaGikS+KSqFbCWZcRUfUH8060OsaZDi628ZdY71HPWyUO
+ j1jFqeXAIm4WBmgM5bomGG9ULoGtQ5MCRhRPdfN8hqRVBUCuq1jMjbPAHja6BDjRyIrp8HGwB3g
+ 8JKNiFJ7MIwPwHEeUUt8QpOnqjx2nODmE5nsGkAHZ7EhJBCvNG1q/0FlUvcAYW1+TewvrwBphwp
+ NY2NunjU9qJXr6dbSda10opmBw0PgMGp3tEZqgXuHQ6YUfFyRJZWEfhJL6uZ97M53IkAYMIlW3I
+ Qbwm10vqzu5a2SCYd5vQDMr8LKbO+rqOHp4Q9PTXKnpadKTWaPFfSOI1LknOt5+ZUrji/kYOCPO
+ JlgJ5gUg+BPQ4Cwaa5CMOvRg6CkK4taGBy3B+rP6NfeCCOSq87Svlyaxf5zMaPQ1WagFRCLs13P
+ BN188EZNJIW+0Xrd+Kg==
+X-Authority-Analysis: v=2.4 cv=WNxPmHsR c=1 sm=1 tr=0 ts=6a617cc7 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=yAdxKSRqiqocnpK_7ewA:9 a=QEXdDO2ut3YA:10
- a=x9snwWr2DeNwDh03kgHS:22 a=sptkURWiP4Gy88Gu7hUp:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDAyMiBTYWx0ZWRfXzmLLhNRtWCNd
- BIkq/wcop7vTsFgIrpctDknOekJRH/q9rL5OVJ1S3AJM+vgYt5rlEU8o2dUIYFj86V9ir+0xraF
- vm24UwveAswrWXFQbvlb9dHuk7nhMZQ=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDAyMiBTYWx0ZWRfX0lrCDZh6hl/z
- QOQRgRa3w6tKljcnBWwqKa9kFFizRoR21fSMsD4NvS9Ef4O5ycYxtC9qPFThZrahnljDNm6jGpg
- UFGZ2BwzB22V3WhpvxeltUi6uRcvqvS08tM1UWhuF8+trFVXB2mdvJNIPMCxFRdRZLXfPvoOavQ
- ewbJwOtK7JcB9eDfkSrV8eIXKOiqej4C2T9T7ciJXPNqWOX8mX4VSGNcfto6uGhcgti6dtuWovv
- pD5pdZzEUy4BZY4z3GNO2l6RHHVZsgo1ZdvhYUDVs9wKY0X76RzRY8GeK+rmU8+hDrZ/f1hf4SZ
- qHPrYTUMvUrJt4BNaGWEOTTOcth7r8AL9AfzdphJg8UhSYBZWALJrwfHGmtUGDye25IFDqkUDhy
- K/uTh9UZ1aDmwrwTEZm8941Jo5gSpD3ioeguPG1+KKIilPJyNKPhKQjvitMi3FIPUr8/RmIXdyQ
- sBLH/tB8+wP76UQaTDg==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=_I3JXB-F7Njei_C_AcUA:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-23_01,2026-07-22_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 malwarescore=0 lowpriorityscore=0 phishscore=0 suspectscore=0
- adultscore=0 impostorscore=0 priorityscore=1501 bulkscore=0 spamscore=0
+ adultscore=0 bulkscore=0 priorityscore=1501 malwarescore=0 phishscore=0
+ impostorscore=0 suspectscore=0 clxscore=1015 spamscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230022
 
-Add qcom,glymur-qmp-pcie-multiphy.yaml as a standalone binding
-for the Glymur Gen5 PCIe PHY hardware block. This block supports two
-link modes, selected at runtime via a TCSR syscon register:
+Glymur's PCIe3a and PCIe3b controllers share a single Gen5x8 QMP PHY block
+that can be bifurcated into two independent x4 links, rather than each
+controller owning its own dedicated PHY.
 
-1. x8 - a single 8-lane PHY instance is exposed
-2. x4+x4 - two independent 4-lane PHY instances are exposed
-
-Keep this as a separate schema from qcom,sc8280xp-qmp-pcie-phy.yaml
-rather than folding it into the shared compatible list there, since the
-two PHY instances active in x8 mode require twice as many clocks,
-resets, and power-domains as any other entry in that file, and adding
-Glymur-specific properties like qcom,link-mode and reg-names there
-would only apply to this one compatible.
-
-Document the required clocks, resets, and power-domains for both PHY
-instances, and use #phy-cells = <1>, where the cell value is the PHY
-index within the active link mode.
+Add a pcie3_phy node describing the shared PHY block, add the missing
+PCIe3a controller node, and point both PCIe3a's and PCIe3b's port phys
+at &pcie3_phy (index 0 and 1 respectively) so each controller picks up
+its half of the bifurcated PHY. Update the GCC pipe clock parent array
+to reference the new PHY's clock outputs instead of the placeholders.
 
 Signed-off-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
 ---
- .../phy/qcom,glymur-qmp-gen5x8-pcie-phy.yaml       | 177 +++++++++++++++++++++
- 1 file changed, 177 insertions(+)
+ arch/arm64/boot/dts/qcom/glymur.dtsi | 336 ++++++++++++++++++++++++++++++++++-
+ 1 file changed, 334 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/phy/qcom,glymur-qmp-gen5x8-pcie-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,glymur-qmp-gen5x8-pcie-phy.yaml
-new file mode 100644
-index 000000000000..759f7f979dc6
---- /dev/null
-+++ b/Documentation/devicetree/bindings/phy/qcom,glymur-qmp-gen5x8-pcie-phy.yaml
-@@ -0,0 +1,177 @@
-+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/phy/qcom,glymur-qmp-gen5x8-pcie-phy.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
+diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
+index f32af66a3f1c..6355499ee5e5 100644
+--- a/arch/arm64/boot/dts/qcom/glymur.dtsi
++++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
+@@ -801,8 +801,8 @@ gcc: clock-controller@100000 {
+ 				 <0>,				/* USB 2 Phy PCIE PIPEGMUX */
+ 				 <0>,				/* USB 2 Phy PIPEGMUX */
+ 				 <0>,				/* USB 2 Phy SYS PCIE PIPEGMUX */
+-				 <0>,				/* PCIe 3a */
+-				 <0>,				/* PCIe 3b */
++				 <&pcie3_phy 0>,		/* PCIe 3a pipe */
++				 <&pcie3_phy 1>,		/* PCIe 3b pipe */
+ 				 <&pcie4_phy>,			/* PCIe 4 */
+ 				 <&pcie5_phy>,			/* PCIe 5 */
+ 				 <&pcie6_phy>,			/* PCIe 6 */
+@@ -2330,6 +2330,62 @@ &config_noc SLAVE_QUP_0 QCOM_ICC_TAG_ALWAYS>,
+ 			};
+ 		};
+ 
++		pcie3_phy: phy@f00000 {
++			compatible = "qcom,glymur-qmp-gen5x8-pcie-phy";
++			reg = <0x0 0x00f00000 0x0 0x10000>,
++			      <0x0 0x00f10000 0x0 0x10000>;
++			reg-names = "port_a",
++				    "port_b";
 +
-+title: Qualcomm QMP PCIe multiple link-mode PHY controller (PCIe, Glymur)
++			clocks = <&gcc GCC_PCIE_PHY_3A_AUX_CLK>,
++				 <&gcc GCC_PCIE_3A_CFG_AHB_CLK>,
++				 <&tcsr TCSR_PCIE_3_CLKREF_EN>,
++				 <&gcc GCC_PCIE_3A_PHY_RCHNG_CLK>,
++				 <&gcc GCC_PCIE_3A_PIPE_CLK>,
++				 <&gcc GCC_PCIE_PHY_3B_AUX_CLK>,
++				 <&gcc GCC_PCIE_3B_CFG_AHB_CLK>,
++				 <&gcc GCC_PCIE_3B_PHY_RCHNG_CLK>,
++				 <&gcc GCC_PCIE_3B_PIPE_CLK>,
++				 <&gcc GCC_PCIE_3B_PIPE_DIV2_CLK>;
++			clock-names = "aux",
++				      "cfg_ahb",
++				      "ref",
++				      "rchng",
++				      "pipe",
++				      "phy_b_aux",
++				      "cfg_ahb_b",
++				      "rchng_b",
++				      "pipe_b",
++				      "pipediv2_b";
 +
-+maintainers:
-+  - Qiang Yu <qiang.yu@oss.qualcomm.com>
-+  - Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
++			resets = <&gcc GCC_PCIE_3A_PHY_BCR>,
++				 <&gcc GCC_PCIE_3A_NOCSR_COM_PHY_BCR>,
++				 <&gcc GCC_PCIE_3B_PHY_BCR>,
++				 <&gcc GCC_PCIE_3B_NOCSR_COM_PHY_BCR>;
++			reset-names = "port_a",
++				      "port_a_nocsr",
++				      "port_b",
++				      "port_b_nocsr";
 +
-+description: |
-+  The Glymur SoC uses a single PCIe Gen5 PHY hardware block for the
-+  PCIe3a/PCIe3b controllers. This block supports two link modes, selected
-+  at runtime via a TCSR syscon register:
++			assigned-clocks = <&gcc GCC_PCIE_3A_PHY_RCHNG_CLK>,
++					  <&gcc GCC_PCIE_3B_PHY_RCHNG_CLK>;
++			assigned-clock-rates = <100000000>, <100000000>;
 +
-+  1. x8 - a single 8-lane PHY instance is exposed (PCIe3a only)
-+  2. x4+x4 - two independent 4-lane PHY instances are exposed (PCIe3a and
-+     PCIe3b)
++			power-domains = <&gcc GCC_PCIE_3A_PHY_GDSC>,
++					<&gcc GCC_PCIE_3B_PHY_GDSC>;
++			power-domain-names = "port_a", "port_b";
 +
-+  The node always describes both PHY instances ("port a" and "port b"),
-+  regardless of which link mode is active on the board.
++			qcom,link-mode = <&tcsr 0x5000>;
 +
-+properties:
-+  compatible:
-+    enum:
-+      - qcom,glymur-qmp-gen5x8-pcie-phy
++			#clock-cells = <1>;
++			clock-output-names = "pcie3a_pipe_clk",
++					     "pcie3b_pipe_clk";
 +
-+  reg:
-+    maxItems: 2
++			#phy-cells = <1>;
 +
-+  reg-names:
-+    items:
-+      - const: port_a
-+      - const: port_b
++			status = "disabled";
++		};
 +
-+  clocks:
-+    maxItems: 10
+ 		usb_hs_phy: phy@fa0000 {
+ 			compatible = "qcom,glymur-m31-eusb2-phy",
+ 				     "qcom,sm8750-m31-eusb2-phy";
+@@ -3711,6 +3767,8 @@ pcie3b_port0: pcie@0 {
+ 				reg = <0x0 0x0 0x0 0x0 0x0>;
+ 				bus-range = <0x01 0xff>;
+ 
++				phys = <&pcie3_phy 1>;
 +
-+  clock-names:
-+    items:
-+      - const: aux
-+      - const: cfg_ahb
-+      - const: ref
-+      - const: rchng
-+      - const: pipe
-+      - const: phy_b_aux
-+      - const: cfg_ahb_b
-+      - const: rchng_b
-+      - const: pipe_b
-+      - const: pipediv2_b
+ 				#address-cells = <3>;
+ 				#size-cells = <2>;
+ 				ranges;
+@@ -3722,6 +3780,280 @@ pcie3b_port0_ep: endpoint {
+ 			};
+ 		};
+ 
++		pcie3a: pci@1c10000 {
++			device_type = "pci";
++			compatible = "qcom,glymur-pcie", "qcom,pcie-x1e80100";
++			reg = <0x0 0x01c10000 0x0 0x3000>,
++			      <0x0 0x70000000 0x0 0xf20>,
++			      <0x0 0x70000f40 0x0 0xa8>,
++			      <0x0 0x70001000 0x0 0x4000>,
++			      <0x0 0x70100000 0x0 0x100000>,
++			      <0x0 0x01c13000 0x0 0x1000>;
++			reg-names = "parf",
++				    "dbi",
++				    "elbi",
++				    "atu",
++				    "config",
++				    "mhi";
++			#address-cells = <3>;
++			#size-cells = <2>;
++			ranges = <0x01000000 0x0 0x00000000 0x0 0x70200000 0x0 0x100000>,
++				 <0x02000000 0x0 0x70000000 0x0 0x70300000 0x0 0x3d00000>,
++				 <0x03000000 0x7 0x00000000 0x7 0x00000000 0x0 0x40000000>,
++				 <0x43000000 0x70 0x00000000 0x70 0x00000000 0x10 0x00000000>;
 +
-+  power-domains:
-+    maxItems: 2
++			bus-range = <0 0xff>;
 +
-+  power-domain-names:
-+    items:
-+      - const: port_a
-+      - const: port_b
++			dma-coherent;
 +
-+  resets:
-+    maxItems: 4
++			linux,pci-domain = <3>;
++			num-lanes = <8>;
 +
-+  reset-names:
-+    items:
-+      - const: port_a
-+      - const: port_a_nocsr
-+      - const: port_b
-+      - const: port_b_nocsr
++			operating-points-v2 = <&pcie3a_opp_table>;
 +
-+  vdda-phy-supply: true
++			msi-map = <0x0 &gic_its 0xb0000 0x10000>;
++			iommu-map = <0x0 &pcie_smmu 0x30000 0x10000>;
 +
-+  vdda-pll-supply: true
++			interrupts = <GIC_SPI 948 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 949 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 844 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 845 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 194 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 202 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 846 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 847 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 942 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "msi0",
++					  "msi1",
++					  "msi2",
++					  "msi3",
++					  "msi4",
++					  "msi5",
++					  "msi6",
++					  "msi7",
++					  "global";
 +
-+  vdda-refgen0p9-supply: true
++			#interrupt-cells = <1>;
++			interrupt-map-mask = <0 0 0 0x7>;
++			interrupt-map = <0 0 0 1 &intc 0 0 0 848 IRQ_TYPE_LEVEL_HIGH>,
++					<0 0 0 2 &intc 0 0 0 849 IRQ_TYPE_LEVEL_HIGH>,
++					<0 0 0 3 &intc 0 0 0 850 IRQ_TYPE_LEVEL_HIGH>,
++					<0 0 0 4 &intc 0 0 0 851 IRQ_TYPE_LEVEL_HIGH>;
 +
-+  vdda-refgen1p2-supply: true
++			clocks = <&gcc GCC_PCIE_3A_AUX_CLK>,
++				 <&gcc GCC_PCIE_3A_CFG_AHB_CLK>,
++				 <&gcc GCC_PCIE_3A_MSTR_AXI_CLK>,
++				 <&gcc GCC_PCIE_3A_SLV_AXI_CLK>,
++				 <&gcc GCC_PCIE_3A_SLV_Q2A_AXI_CLK>,
++				 <&gcc GCC_AGGRE_NOC_PCIE_3A_WEST_SF_AXI_CLK>;
++			clock-names = "aux",
++				      "cfg",
++				      "bus_master",
++				      "bus_slave",
++				      "slave_q2a",
++				      "noc_aggr";
 +
-+  qcom,link-mode:
-+    description:
-+      Reference to a register in the TCSR syscon that reports the link
-+      mode the PCIe PHY is currently configured for, either a single x8
-+      link or two independent x4 links. The link mode is programmed by
-+      firmware before Linux boots; this property is only used to read
-+      the active link mode, specified as a phandle to the syscon and
-+      the register offset.
-+    $ref: /schemas/types.yaml#/definitions/phandle-array
-+    items:
-+      - items:
-+          - description: phandle of TCSR syscon
-+          - description: offset of link mode register
++			assigned-clocks = <&gcc GCC_PCIE_3A_AUX_CLK>;
++			assigned-clock-rates = <19200000>;
 +
-+  "#clock-cells":
-+    const: 1
++			interconnects = <&pcie_west_anoc MASTER_PCIE_3A QCOM_ICC_TAG_ALWAYS
++					&mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
++					<&hsc_noc MASTER_APPSS_PROC QCOM_ICC_TAG_ALWAYS
++					&pcie_west_slv_noc SLAVE_PCIE_3A QCOM_ICC_TAG_ALWAYS>;
++			interconnect-names = "pcie-mem",
++					     "cpu-pcie";
 +
-+  clock-output-names:
-+    items:
-+      - description: Name of the PHY A pipe clock output.
-+      - description: Name of the PHY B pipe clock output.
++			resets = <&gcc GCC_PCIE_3A_BCR>,
++				 <&gcc GCC_PCIE_3A_LINK_DOWN_BCR>;
++			reset-names = "pci",
++				      "link_down";
 +
-+  "#phy-cells":
-+    const: 1
-+    description:
-+      The cell is the index of the sub-PHY within the active link
-+      mode, e.g. on Glymur, 0 for "port a" and 1 for "port b" in
-+      x4x4 mode, and only index 0 (the single wide PHY) is valid in
-+      x8 mode.
++			power-domains = <&gcc GCC_PCIE_3A_GDSC>;
 +
-+required:
-+  - compatible
-+  - reg
-+  - reg-names
-+  - clocks
-+  - clock-names
-+  - power-domains
-+  - power-domain-names
-+  - resets
-+  - reset-names
-+  - vdda-phy-supply
-+  - vdda-pll-supply
-+  - vdda-refgen0p9-supply
-+  - vdda-refgen1p2-supply
-+  - qcom,link-mode
-+  - "#clock-cells"
-+  - clock-output-names
-+  - "#phy-cells"
++			eq-presets-8gts = /bits/ 16 <0x5555 0x5555 0x5555 0x5555
++						     0x5555 0x5555 0x5555 0x5555>;
++			eq-presets-16gts = /bits/ 8 <0x55 0x55 0x55 0x55 0x55 0x55 0x55 0x55>;
++			eq-presets-32gts = /bits/ 8 <0x55 0x55 0x55 0x55 0x55 0x55 0x55 0x55>;
 +
-+additionalProperties: false
++			status = "disabled";
 +
-+examples:
-+  - |
-+    #include <dt-bindings/clock/qcom,glymur-gcc.h>
-+    #include <dt-bindings/clock/qcom,glymur-tcsr.h>
++			pcie3a_opp_table: opp-table {
++				compatible = "operating-points-v2";
 +
-+    phy@f00000 {
-+      compatible = "qcom,glymur-qmp-gen5x8-pcie-phy";
-+      reg = <0x00f00000 0x10000>, <0x00f10000 0x10000>;
-+      reg-names = "port_a", "port_b";
++				/* GEN 1 x1 */
++				opp-2500000-1 {
++					opp-hz = /bits/ 64 <2500000>;
++					required-opps = <&rpmhpd_opp_low_svs>;
++					opp-peak-kBps = <250000 1>;
++					opp-level = <1>;
++				};
 +
-+      clocks = <&gcc GCC_PCIE_PHY_3A_AUX_CLK>,
-+               <&gcc GCC_PCIE_3A_CFG_AHB_CLK>,
-+               <&tcsr TCSR_PCIE_3_CLKREF_EN>,
-+               <&gcc GCC_PCIE_3A_PHY_RCHNG_CLK>,
-+               <&gcc GCC_PCIE_3A_PIPE_CLK>,
-+               <&gcc GCC_PCIE_PHY_3B_AUX_CLK>,
-+               <&gcc GCC_PCIE_3B_CFG_AHB_CLK>,
-+               <&gcc GCC_PCIE_3B_PHY_RCHNG_CLK>,
-+               <&gcc GCC_PCIE_3B_PIPE_CLK>,
-+               <&gcc GCC_PCIE_3B_PIPE_DIV2_CLK>;
-+      clock-names = "aux", "cfg_ahb", "ref", "rchng", "pipe",
-+                    "phy_b_aux", "cfg_ahb_b", "rchng_b", "pipe_b",
-+                    "pipediv2_b";
++				/* GEN 1 x2 */
++				opp-5000000-1 {
++					opp-hz = /bits/ 64 <5000000>;
++					required-opps = <&rpmhpd_opp_low_svs>;
++					opp-peak-kBps = <500000 1>;
++					opp-level = <1>;
++				};
 +
-+      resets = <&gcc GCC_PCIE_3A_PHY_BCR>,
-+               <&gcc GCC_PCIE_3A_NOCSR_COM_PHY_BCR>,
-+               <&gcc GCC_PCIE_3B_PHY_BCR>,
-+               <&gcc GCC_PCIE_3B_NOCSR_COM_PHY_BCR>;
-+      reset-names = "port_a", "port_a_nocsr", "port_b", "port_b_nocsr";
++				/* GEN 1 x4 */
++				opp-10000000-1 {
++					opp-hz = /bits/ 64 <10000000>;
++					required-opps = <&rpmhpd_opp_low_svs>;
++					opp-peak-kBps = <1000000 1>;
++					opp-level = <1>;
++				};
 +
-+      power-domains = <&gcc GCC_PCIE_3A_PHY_GDSC>,
-+                      <&gcc GCC_PCIE_3B_PHY_GDSC>;
-+      power-domain-names = "port_a", "port_b";
++				/* GEN 1 x8 */
++				opp-20000000-1 {
++					opp-hz = /bits/ 64 <20000000>;
++					required-opps = <&rpmhpd_opp_low_svs>;
++					opp-peak-kBps = <2000000 1>;
++					opp-level = <1>;
++				};
 +
-+      vdda-phy-supply = <&vreg_l3c>;
-+      vdda-pll-supply = <&vreg_l2c>;
++				/* GEN 2 x1 */
++				opp-5000000-2 {
++					opp-hz = /bits/ 64 <5000000>;
++					required-opps = <&rpmhpd_opp_low_svs>;
++					opp-peak-kBps = <500000 1>;
++					opp-level = <2>;
++				};
 +
-+      vdda-refgen0p9-supply = <&vreg_l3c>;
-+      vdda-refgen1p2-supply = <&vreg_l2c>;
++				/* GEN 2 x2 */
++				opp-10000000-2 {
++					opp-hz = /bits/ 64 <10000000>;
++					required-opps = <&rpmhpd_opp_low_svs>;
++					opp-peak-kBps = <1000000 1>;
++					opp-level = <2>;
++				};
 +
-+      qcom,link-mode = <&tcsr 0x5000>;
++				/* GEN 2 x4 */
++				opp-20000000-2 {
++					opp-hz = /bits/ 64 <20000000>;
++					required-opps = <&rpmhpd_opp_low_svs>;
++					opp-peak-kBps = <2000000 1>;
++					opp-level = <2>;
++				};
 +
-+      #clock-cells = <1>;
-+      clock-output-names = "pcie3a_pipe_clk", "pcie3b_pipe_clk";
++				/* GEN 2 x8 */
++				opp-40000000-2 {
++					opp-hz = /bits/ 64 <40000000>;
++					required-opps = <&rpmhpd_opp_low_svs>;
++					opp-peak-kBps = <4000000 1>;
++					opp-level = <2>;
++				};
 +
-+      #phy-cells = <1>;
-+    };
++				/* GEN 3 x1 */
++				opp-8000000-3 {
++					opp-hz = /bits/ 64 <8000000>;
++					required-opps = <&rpmhpd_opp_low_svs>;
++					opp-peak-kBps = <984500 1>;
++					opp-level = <3>;
++				};
++
++				/* GEN 3 x2 */
++				opp-16000000-3 {
++					opp-hz = /bits/ 64 <16000000>;
++					required-opps = <&rpmhpd_opp_low_svs>;
++					opp-peak-kBps = <1969000 1>;
++					opp-level = <3>;
++				};
++
++				/* GEN 3 x4 */
++				opp-32000000-3 {
++					opp-hz = /bits/ 64 <32000000>;
++					required-opps = <&rpmhpd_opp_low_svs>;
++					opp-peak-kBps = <3938000 1>;
++					opp-level = <3>;
++				};
++
++				/* GEN 3 x8 */
++				opp-64000000-3 {
++					opp-hz = /bits/ 64 <64000000>;
++					required-opps = <&rpmhpd_opp_low_svs>;
++					opp-peak-kBps = <7876000 1>;
++					opp-level = <3>;
++				};
++
++				/* GEN 4 x1 */
++				opp-16000000-4 {
++					opp-hz = /bits/ 64 <16000000>;
++					required-opps = <&rpmhpd_opp_svs>;
++					opp-peak-kBps = <1969000 1>;
++					opp-level = <4>;
++				};
++
++				/* GEN 4 x2 */
++				opp-32000000-4 {
++					opp-hz = /bits/ 64 <32000000>;
++					required-opps = <&rpmhpd_opp_svs>;
++					opp-peak-kBps = <3938000 1>;
++					opp-level = <4>;
++				};
++
++				/* GEN 4 x4 */
++				opp-64000000-4 {
++					opp-hz = /bits/ 64 <64000000>;
++					required-opps = <&rpmhpd_opp_svs>;
++					opp-peak-kBps = <7876000 1>;
++					opp-level = <4>;
++				};
++
++				/* GEN 4 x8 */
++				opp-128000000-4 {
++					opp-hz = /bits/ 64 <128000000>;
++					required-opps = <&rpmhpd_opp_svs>;
++					opp-peak-kBps = <15753000 1>;
++					opp-level = <4>;
++				};
++
++				/* GEN 5 x1 */
++				opp-32000000-5 {
++					opp-hz = /bits/ 64 <32000000>;
++					required-opps = <&rpmhpd_opp_nom>;
++					opp-peak-kBps = <3938000 1>;
++					opp-level = <5>;
++				};
++
++				/* GEN 5 x2 */
++				opp-64000000-5 {
++					opp-hz = /bits/ 64 <64000000>;
++					required-opps = <&rpmhpd_opp_nom>;
++					opp-peak-kBps = <7876000 1>;
++					opp-level = <5>;
++				};
++
++				/* GEN 5 x4 */
++				opp-128000000-5 {
++					opp-hz = /bits/ 64 <128000000>;
++					required-opps = <&rpmhpd_opp_nom>;
++					opp-peak-kBps = <15753000 1>;
++					opp-level = <5>;
++				};
++
++				/* GEN 5 x8 */
++				opp-256000000-5 {
++					opp-hz = /bits/ 64 <256000000>;
++					required-opps = <&rpmhpd_opp_nom>;
++					opp-peak-kBps = <31506000 1>;
++					opp-level = <5>;
++				};
++			};
++
++			pcie3a_port0: pcie@0 {
++				device_type = "pci";
++				reg = <0x0 0x0 0x0 0x0 0x0>;
++				bus-range = <0x01 0xff>;
++
++				phys = <&pcie3_phy 0>;
++
++				#address-cells = <3>;
++				#size-cells = <2>;
++				ranges;
++			};
++		};
++
+ 		rng: rng@10c3000 {
+ 			compatible = "qcom,glymur-trng", "qcom,trng";
+ 			reg = <0x0 0x010c3000 0x0 0x1000>;
 
 -- 
 2.34.1
