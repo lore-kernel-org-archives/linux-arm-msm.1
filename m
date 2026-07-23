@@ -1,526 +1,232 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2EC34D9909
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 13:29:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6699541379E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 13:31:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784813390; cv=none; b=POpS4Skor8Mfa+5e6HCUsuskFrCv7hhrFoxAYiXstjv3ovc4mdbbCLpXAPhG4yUioSGgV5Ga8Y0DpXM6nqVJA6gqN2Ho39nAYWB4QHFNmbKndnqbnE0CimFMGYrbbar2uAN59UwvpfkbgyRh9f1ITInarIBPIi/KxleKRe7IFNQ=
+	t=1784813509; cv=none; b=U964pbccDylpOErA1vMfV7C4CT6AH6Ce1OwzKkw7QohfjKGe+88fTwUUw/Nb3CtDXzrSN49DEoV58kTfDAk2J6PIezPeUYE50SmNhF38SvrdWTA17CBe3e1eluTzHAJ5rdFBp+jEZnaz0bPmQtLNC2BiDdR0aFy0aaQKFImwe24=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784813390; c=relaxed/simple;
-	bh=DaWsVkJ3awyrZrnhrEFVQNR4yn47hfNiP48v2HHghoo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=hN8VkVI/6MtBqJn2GIu4lLRdUoMQhk4giphl4bb0laTA+z8L9d+f4MdkKdpNFfOOQITQ7d/IrNaLiYuYRMUde+yyWtaRIk0p+BZXep31yu9RdfwkLEf+7u1Ur9q7Lt5Gf6NV1K5lmeNuIUwqLfXdcVIGHSNBbPSK0Cm2m1lVx34=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PLonQaDP; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KD5wNLol; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1784813509; c=relaxed/simple;
+	bh=9Ol8B4QWV5NXBRf+nSnnc5gyMNdZdIH5zliFKFF7tIs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=mMvhlKp//LA/R+BAS1+SOBb5wwQXrLehxruAe5F1It4kvlbG9UGxlCq+DPxYiL0sUZogaO3r1zLWi7y4YRmF4gt4YsL/kMf7WVhRUZxWzWJkNvcVvc6b4fEKLo1cyLY18gKNWOf5tuKaq+4gwfKHe88BP1H9y+vve0YTSfe6tsU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=CkUoIIZB; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=FLgZgZA5; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PLonQaDP";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KD5wNLol"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NCvVZS3819836
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 13:29:47 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="CkUoIIZB";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FLgZgZA5"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NCw6fu3605837
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 13:31:45 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	3DKkULAqfE9sv2cn1EdH2BQHdzTkgHrOTIebJ0Fk7uU=; b=PLonQaDPZDbsnZro
-	0Yz7WifPpB2a5rx33qT8Cf29bClM+hCt8aILodORo+/hxyXfbgUyftMPWQgFkpNa
-	jLgX3Jrrq0kvL1IsFgrT9OXj9PFwQgizUUUG478GGFt2ubO22ZdpKizr9C2K8LkS
-	nzfdF6M9nRy9vDrM+0CHw09vqULKaRMw27kgKXJ3r1y8pHdYfcCC5gBARaBiseyM
-	qS+fcijSSLqDYjGqp493K3QyL1WcDCckLei2EvkSrn8zuI6K3jgVXW9/yErLLV4k
-	RtKo8J8q13o1jxqr4jDBDU3FrS8fNDsRbCdw4cthrCOx+D/eYR1+qDtaLjrpCnFU
-	t3nYYQ==
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkafw2dg3-1
+	tKQ0B+W9pZMhr76PdrHF4/xp6Zw+LCJpnEkdrdNCyFk=; b=CkUoIIZBgBJvbNtb
+	9q7x5RirhZImdElF4zMeucB1GtvkPl751AgbDCA4CXbBU81JlkTyfN8OvupqcuHV
+	KCm5mUsG7Sn+DXqt5d8lfUVcJ/IdtZowPp1fzHFnc+j3ab59xnlfZKceQwi4f0U+
+	AG0EtKBoSEbRf7SzFWWlOwYmCJOWgzf+J5FgLWwXROuxJHU4Mkskue1dhxKLSWj0
+	J1b1u0ZGPNwmLfzTqh055ibbWX4u+O4f8fGYMM+xcok4jb16YJQHqwYdiqDwePWn
+	9IRrkMij2odOAlBNGE4VWdFN/XHurqaBFu7/gSCBXmaQD7MKMjP4UzRQPBH3ml09
+	PwmojA==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkeuq9cfv-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 13:29:47 +0000 (GMT)
-Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-8484ba00601so845698b3a.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 06:29:46 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 13:31:45 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2cce14a21faso6805495ad.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 06:31:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784813386; x=1785418186; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=3DKkULAqfE9sv2cn1EdH2BQHdzTkgHrOTIebJ0Fk7uU=;
-        b=KD5wNLolOhNfd5B/Xy+XsxDIe2DkBv3hPv4YiCPuRmU41aP2S4xaVpmh30RHVh9dLY
-         smDY6suyaB4P3VGwwE4KFqzZO4iCF12SweI9jP1duj2Ej4rQvJDIjFPyvsAVWmGKG14H
-         xG7Ccsvc2LumNA/PIi4NyookmSY6LSsObsFwJor5oHmCnNgnlqdVzwgHoME3Br5deZh+
-         3bTm5XbbOzt2a3uTE22DhVMM34N5HShzj++4sFjtgU8Sui4DmtWbjONjKhk91cKIkQ0J
-         vQ8lK9CcowvENq9BXAr+VW9EwOdEVjeRiFJNH914XqZ5yd/Lz7Hh/TifSnQ/Gi4goPty
-         5PEQ==
+        d=oss.qualcomm.com; s=google; t=1784813505; x=1785418305; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=tKQ0B+W9pZMhr76PdrHF4/xp6Zw+LCJpnEkdrdNCyFk=;
+        b=FLgZgZA5n0DXr7JyrGxax9AKdDdT5XqjJn35GKqMOetI6BoesdUA8Kh8STdgxoUgmR
+         Pr5DQXYuOIs+M8NQiDjLtQReBCsQ4g78WN5XUlWMiZAo2CA+JLcSqWAx0VCNq3DCisf3
+         fI75nImwxtTv5ZtoQ9PthI+9RMIjKaMcfNL+6fQB9uywgNALksqrHClDp0O3cRKh6pUp
+         I3KLI8yqXAdS4fH0zGY/KEgboVcV5fFbU5iw87OhZtDL8RNKmX/K/Wrk0cXCj5K4FpoT
+         lBN7TbmZYXANihcxkhTV6AtDs8MQRWoN4MBJoo2kiLnGUcPXsP+GGD1RxeCFwrQj6fxT
+         6wUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784813386; x=1785418186;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=3DKkULAqfE9sv2cn1EdH2BQHdzTkgHrOTIebJ0Fk7uU=;
-        b=mRhfqTKTSeZmaZxpRfc1MH777jLVQ52cZYbAGCOby1c+s7fTFL6AQxkrGVDcDVq8aN
-         gIsenjQoyq+TeY6ae68Pf0DqGjtBX1soX04BoXgvUi930mk1la7PIvGUeKU41VpWejlH
-         pbQ9MM8KH+y1B6csnlyVVDDxCwiqSj5WXv9v9yJ1mUBOE+St5T54PN4zdJA6FH8CZS/j
-         GAeO0sUlp4G/VR1R8Jb2RbdgVSvEyCqNUKx1nS3v1OBUjSuZzXWvV/Z5jZ2OnH9ehZ+f
-         IQkKHBDv4le4Th+HqQO6aJU4NdslwrqBDpTN6D+7JjY/UOYlvguCeGWmumdwCAciS3IU
-         dG+w==
-X-Forwarded-Encrypted: i=1; AHgh+Rp4to1ZzC5BVHX2tzOu9cFvj+DAV7KyY6GXEPb8OfewKIPZ5glpvXxz/dvp8JvBTgA3Dech49wSrUO1z7WG@vger.kernel.org
-X-Gm-Message-State: AOJu0YwAuRojpfkzXUiMBJRHCoS86DQEhrR5+M2QP4qgrVGEX7liT8kh
-	lBYxnKqFGevu0hfGArx+nj6o+hxX8ms9VT7Zm/8yiaIOuI8fkGFU8Zs3rqnHhHjr412A/1aUtuv
-	8VuDp58Sj7/CCJgbv29J9qUA//7lTjbbmmXtYqZTQP+SuLXXpcVacT3RPBiajL/4GgK0w
-X-Gm-Gg: AR+sD11lYuG0ADCB9o+HAZANB1hnIMphnB2HL1VYx+qKwQ+4nBaLKXLnML9y4yDUJOI
-	Ra1kCL0t4cQmrzKKvO4Jgc0zb/LsYZybEb5Xu3B0yqYmR01aJ0lleGHE4NsjVLoTC5FMWyNpTR8
-	YPG6LHwkfvckSbNBgDKcSLma16gNIs2IqDp6VMnz3bG0fHe8gBOwq0B8G0dG8v0dMcttsK7nhq4
-	ax6+LRu5NyozOimXvXwy9Jq2XYjZLeyNZm3D8EDOHb+AP/rw2SuoldSYpCg7QspwuoA6nNuKs2X
-	4jBHFlatz/YGEGfVBCktBLpp/qwUaxkFnGWHG58G279AOWaqC2Ichwpb+G1gaHFVR63bSSaNczC
-	WYrVDaDthq/v/rju7ZMYet6RgR5iM/UDyukNxjHPAHUgGD7ma1q0=
-X-Received: by 2002:a05:6a00:951b:b0:848:2f74:d8da with SMTP id d2e1a72fcca58-84e2bc54262mr3396931b3a.75.1784813386219;
-        Thu, 23 Jul 2026 06:29:46 -0700 (PDT)
-X-Received: by 2002:a05:6a00:951b:b0:848:2f74:d8da with SMTP id d2e1a72fcca58-84e2bc54262mr3396893b3a.75.1784813385612;
-        Thu, 23 Jul 2026 06:29:45 -0700 (PDT)
-Received: from QCOM-IvKeorbwK5.na.qualcomm.com ([120.56.203.212])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84e17602046sm3048985b3a.59.2026.07.23.06.29.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 06:29:44 -0700 (PDT)
-Date: Thu, 23 Jul 2026 15:29:38 +0200
-From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-To: Qiang Yu <qiang.yu@oss.qualcomm.com>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Philipp Zabel <p.zabel@pengutronix.de>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v6 3/6] arm64: dts: qcom: glymur: Wire PCIe3a/3b to
- shared Gen5x8 PHY
-Message-ID: <brvx4kljlynbhr5xajubjy7prndcb6dii2ucrtxgmwkh6igjgs@yel4qrtfcu5w>
-References: <20260722-glymur_linkmode_0722-v6-0-bba8156b8cbb@oss.qualcomm.com>
- <20260722-glymur_linkmode_0722-v6-3-bba8156b8cbb@oss.qualcomm.com>
+        d=1e100.net; s=20251104; t=1784813505; x=1785418305;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=tKQ0B+W9pZMhr76PdrHF4/xp6Zw+LCJpnEkdrdNCyFk=;
+        b=etitXlTlGAjvCN1Ci3gefw/M3AsrFpHziZ2XMrwH8iqNfkA1AIa9asJKyQwlXjxlT9
+         dUd3DxTrOEbGX2U4/cGPivsGFapd7sVawLVhX8xoVmtN0Pcrd6RyHBeezv246Nfgcsxn
+         k/bpoPJ1921qE/BcqpUdE1TaNZorWhr0n9A1hiNzcEXb+Nk72KZu38kTwQUTjG5k9kqj
+         MjWP3kVzHWkKPDgFA05RF5istFDFvGwjkynKWIzAHtkaWNwFZ3SYLy3GgjNrVF5DtxeT
+         0XU0Qqqd1TuR6ITwl4HeYSphYVCx+G569vPrYBqUFwtBam+Tyio9C4aFWyYWQ5VclkME
+         fE2Q==
+X-Forwarded-Encrypted: i=1; AHgh+RpSAatnzEWEhXRW8/Ff+oRY0awedWlQam7whs3h+IPCP61qf+7MEbbG73v4xws2EBmCSDHewgUpRogV0kkE@vger.kernel.org
+X-Gm-Message-State: AOJu0YwdkQrQA5Hk2oUQElu+zGUhDOUNsOUowwkXezA6Ilshek0S+R6l
+	mkTQtVfuGDNH/oDIm8qlNaE9koSkiaC/9kTtYE5sOJHzMnfm2zK1RNb52ZIndf/nmui44E9SXBp
+	9pN+2TruqTW61tTNREeWOl8MxxyohR6NllWpHd0OK5hAy0fnz1mdAcjDID9rrAqmRlghZ
+X-Gm-Gg: AR+sD13Tt1Qn2OnBcdHyaz1rRxlubSXWz477kvN+aQzrgMPUp85qjv0aGQ0X/HwQNbl
+	1ivAYLWDU+W+T1J6toqsZaqSr5gMcKSfoj4DifrUBoFRFRqTJjn0T2J9ZW+k2ZtflJ99VNHfGmT
+	wAa9oh5wz6apKdOTVoJyuhGkGzR2faJ+V/hRS7J9KY8cKhA+AFKNuIj0GuyFIEUwG/Xe/SSDeZB
+	1YW8X9DlHOi11xvzjqA+TDbaOTdSaXYTj2sBwTLR18Xb8X/t4VaA5yxo0itH6rkHxSOuWsBtYg/
+	ACh+7mQZpnU173kcXpXYa8GWi6GW1HJK2ikmQwAiTcuuVIBc+FZcfxsFSragxKNqhTg0zupkdhs
+	rticfkQq8Ra0eGDfxZNcmb06HBlcJkcBDeMY=
+X-Received: by 2002:a17:902:fc84:b0:2cf:461a:3863 with SMTP id d9443c01a7336-2cfa95512a5mr29173625ad.22.1784813504620;
+        Thu, 23 Jul 2026 06:31:44 -0700 (PDT)
+X-Received: by 2002:a17:902:fc84:b0:2cf:461a:3863 with SMTP id d9443c01a7336-2cfa95512a5mr29172995ad.22.1784813504114;
+        Thu, 23 Jul 2026 06:31:44 -0700 (PDT)
+Received: from [10.219.57.229] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf8f2e7a83sm34671765ad.42.2026.07.23.06.31.34
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 23 Jul 2026 06:31:43 -0700 (PDT)
+Message-ID: <f04ebc41-549b-4eaa-aa7c-21489382f8be@oss.qualcomm.com>
+Date: Thu, 23 Jul 2026 19:01:33 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260722-glymur_linkmode_0722-v6-3-bba8156b8cbb@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=XNkAjwhE c=1 sm=1 tr=0 ts=6a62174b cx=c_pps
- a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=vzTbXj32ivxf3WCeigViBw==:17
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v23 07/13] power: reset: Add psci-reboot-mode driver
+To: Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>
+Cc: Sebastian Reichel <sre@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>,
+        Christian Loehle <christian.loehle@arm.com>,
+        Ulf Hansson <ulfh@kernel.org>, Lee Jones <lee@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
+        Souvik Chakravarty <Souvik.Chakravarty@arm.com>,
+        Andy Yan <andy.yan@rock-chips.com>,
+        Matthias Brugger
+ <matthias.bgg@gmail.com>,
+        John Stultz <john.stultz@linaro.org>,
+        Moritz Fischer <moritz.fischer@ettus.com>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Sudeep Holla
+ <sudeep.holla@kernel.org>, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
+        Florian Fainelli <florian.fainelli@broadcom.com>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+        Andre Draszik <andre.draszik@linaro.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
+        mfd@lists.linux.dev, Srinivas Kandagatla <srini@kernel.org>
+References: <20260714-arm-psci-system_reset2-vendor-reboots-v23-0-e7453c548c21@oss.qualcomm.com>
+ <20260714-arm-psci-system_reset2-vendor-reboots-v23-7-e7453c548c21@oss.qualcomm.com>
+ <7b1dad52-b9d3-44a7-aedb-62911778f3ad@quicinc.com>
+Content-Language: en-US
+From: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+In-Reply-To: <7b1dad52-b9d3-44a7-aedb-62911778f3ad@quicinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDEzMyBTYWx0ZWRfX2mEk2KzHNBbw
+ BRpNSpcxAV/klfdUjU7k67MpIChz31EVzMDDsDKvBIT3UdDrUENVnKUWKrdK66nUA3fxGu3uv2D
+ oUlqmBiHvYGPuc9xmt2YoOiKmsOZsSs=
+X-Proofpoint-ORIG-GUID: GY5MPyRlGw0g8hiDTyraZixxCCfjUOkl
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDEzMyBTYWx0ZWRfXyM0+rRaCYx/Z
+ NePLbUmeTEqJpqXP1g5IVQhldXMRbltfyRTmPQvOroqTdMdgouPVO5apLToxD5RDwQYpYGpy4gS
+ bQ5+3SmbyrNb94wMkrBHMwqV9C+dnTMK4wg0WMEqFKrCxx1TqPLNbBp4N0rkPj++xQS6we7ZhYZ
+ mhPcg314ZCXhjLCwjYANuelQhsq8wc0Fn+1OCm9XFQpIfX038Edix1o0W206uLcp9w5kbG3wieT
+ BfA0CesZuXtsBqeqsTakZ1XCSa3F8OPnLwKrFBilEuqKakBbSyV/LgJfv/Zh5JNL6elraT/IXWa
+ UTuytfxUpvQmmHiFXT6+c+bQ78tMTF2yeALpqENqNJp9xLoXkcVRoSwO0kcVxLcRZ55R8aOMxyd
+ OSa2chxPG2xShEtk/DtTCEwjvuVnn0fcl9gPBDbOzaauGF7ih4N240QY81DifM0TBi9hz4lg7rv
+ Z+QdwTUC18YcJ3PrKZg==
+X-Authority-Analysis: v=2.4 cv=cPDQdFeN c=1 sm=1 tr=0 ts=6a6217c1 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=lUaueBADnf__lXNn8_8A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=zc0IvFSfCIW2DFIPzwfm:22
-X-Proofpoint-ORIG-GUID: 6oi07RY1eZvLh0aEmhfONwDBCEmb1FUw
-X-Proofpoint-GUID: 6oi07RY1eZvLh0aEmhfONwDBCEmb1FUw
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDEzMiBTYWx0ZWRfX+TYxyA5yD+ku
- 7EsG1r4d1Bz6kywWMTuvUiS68E8fVbxHgHmx6hCY5xPSd7xqChr1GWBtIrgrHcS7cgEvKppxU+A
- AzmyWOMhMCrpttkS99OMvvJklSmU6AI=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDEzMiBTYWx0ZWRfX63Px0uERttnU
- dSQYzF6AHAgxyudH6UNJMjiKPoAwyqP7tRixVRSmpudJ4fWYuK04FKk8ZoZ47C2vJrVIT0p28DK
- ySQ7+YM1+/qcyUOiZ9vd2v7EOUhexXnln0q2ywtz5BHs+oOdgOQ3sX92zBR+xAvPcsz63LjXJkJ
- MqkY1mdOJu0c1axThDSM2BGOWhr04ypvOCBcK/8U/aT8B1Nt4OMZ948c/94ytx0vvY1W3cdaXlR
- gphp2i66zcX4fec+mDjMe+DhCa6bp9VN6LlZ+GY5DrHEPF5tALVbPuFD+Tyl8KqP+gEybYADoPi
- McmjNe7zjMnqN7gSJzy48VYUyLnniVEynbVHtrMueChnGSWdCdbGEp2TiS4cXCt5eMcAmxaLnRx
- avlbUctU7awlP/a7fmijYL6HBXn7It72Thh0R3q8+lhDuPaSt+SCDtaS2X51i/mUUt0bbtBL1o9
- jbxb/GuJunooKvGl/IQ==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=2z0wryL4N9vVr7V_-cUA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-GUID: GY5MPyRlGw0g8hiDTyraZixxCCfjUOkl
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-23_04,2026-07-22_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0 suspectscore=0 bulkscore=0 clxscore=1015
- lowpriorityscore=0 phishscore=0 priorityscore=1501 malwarescore=0 spamscore=0
+ spamscore=0 impostorscore=0 lowpriorityscore=0 adultscore=0 phishscore=0
+ clxscore=1015 suspectscore=0 priorityscore=1501 bulkscore=0 malwarescore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230132
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230133
 
-On Wed, Jul 22, 2026 at 07:30:20PM -0700, Qiang Yu wrote:
-> Glymur's PCIe3a and PCIe3b controllers share a single Gen5x8 QMP PHY block
-> that can be bifurcated into two independent x4 links, rather than each
-> controller owning its own dedicated PHY.
+
+
+On 22-07-2026 14:30, Pavan Kondeti wrote:
+> On Tue, Jul 14, 2026 at 10:46:35PM +0530, Shivendra Pratap wrote:
+>> PSCI supports different types of resets like SYSTEM_RESET, SYSTEM_RESET2
+>> ARCH WARM reset and SYSTEM_RESET2 vendor-specific resets. Currently
+>> there is no common driver that handles all supported psci resets at one
+>> place. Additionally, there is no common mechanism to issue the supported
+>> psci resets from userspace.
+>>
+>> Add a psci-reboot-mode driver, and define two types of PSCI resets,
+>> predefined-resets and vendor-specific resets. Predefined-resets are
+>> defined by psci driver and vendor-specific resets are defined by SoC
+>> vendors, under the psci:reboot-mode node of SoC device tree.
+>>
+>> Register the driver with the reboot-mode framework to interface these
+>> resets to userspace. When userspace initiates a supported command, pass
+>> the reset arguments to the PSCI driver to enable command-based reset.
+>>
+>> This change allows userspace to issue supported PSCI reset commands
+>> using the standard reboot system calls while enabling SoC vendors to
+>> define their specific resets for PSCI.
+>>
+>> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+>> ---
+>>   MAINTAINERS                            |  1 +
+>>   drivers/power/reset/Kconfig            | 10 +++++
+>>   drivers/power/reset/Makefile           |  1 +
+>>   drivers/power/reset/psci-reboot-mode.c | 78 ++++++++++++++++++++++++++++++++++
+>>   4 files changed, 90 insertions(+)
+>>
+>> diff --git a/MAINTAINERS b/MAINTAINERS
+>> index e1ed6abef62a..4910abafa170 100644
+>> --- a/MAINTAINERS
+>> +++ b/MAINTAINERS
+>> @@ -21576,6 +21576,7 @@ S:	Maintained
+>>   F:	Documentation/devicetree/bindings/arm/psci.yaml
+>>   F:	drivers/firmware/psci/
+>>   F:	drivers/mfd/psci-mfd.c
+>> +F:	drivers/power/reset/psci-reboot-mode.c
+>>   F:	include/linux/psci.h
+>>   F:	include/uapi/linux/psci.h
+>>   
+>> diff --git a/drivers/power/reset/Kconfig b/drivers/power/reset/Kconfig
+>> index 124afb99febe..93e4029d9506 100644
+>> --- a/drivers/power/reset/Kconfig
+>> +++ b/drivers/power/reset/Kconfig
+>> @@ -348,6 +348,16 @@ config NVMEM_REBOOT_MODE
+>>   	  then the bootloader can read it and take different
+>>   	  action according to the mode.
+>>   
+>> +config PSCI_REBOOT_MODE
+>> +	bool "PSCI reboot mode driver"
+>> +	depends on OF && (ARM_PSCI_FW || COMPILE_TEST)
+>> +	select REBOOT_MODE
+>> +	help
+>> +	  Say y here will enable PSCI reboot mode driver. This gets
+>> +	  the PSCI reboot mode arguments and passes them to psci
+>> +	  driver. psci driver uses these arguments for issuing
+>> +	  device reset into different boot states.
+>> +
 > 
-
-Both subject and description doesn't give an impression that this commit
-basically adds PCIe PHY and Controller nodes. It goes deeply on the details of
-the PHY wiring though...
-
-> Add a pcie3_phy node describing the shared PHY block, add the missing
-> PCIe3a controller node, and point both PCIe3a's and PCIe3b's port phys
-> at &pcie3_phy (index 0 and 1 respectively) so each controller picks up
-> its half of the bifurcated PHY. Update the GCC pipe clock parent array
-> to reference the new PHY's clock outputs instead of the placeholders.
+> Since we have added predefined-resets support, why are we forcing this
+> driver to depend on OF?
 > 
-> Signed-off-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
-> ---
->  arch/arm64/boot/dts/qcom/glymur.dtsi | 336 ++++++++++++++++++++++++++++++++++-
->  1 file changed, 334 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
-> index f32af66a3f1c..6355499ee5e5 100644
-> --- a/arch/arm64/boot/dts/qcom/glymur.dtsi
-> +++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
-> @@ -801,8 +801,8 @@ gcc: clock-controller@100000 {
->  				 <0>,				/* USB 2 Phy PCIE PIPEGMUX */
->  				 <0>,				/* USB 2 Phy PIPEGMUX */
->  				 <0>,				/* USB 2 Phy SYS PCIE PIPEGMUX */
-> -				 <0>,				/* PCIe 3a */
-> -				 <0>,				/* PCIe 3b */
-> +				 <&pcie3_phy 0>,		/* PCIe 3a pipe */
-> +				 <&pcie3_phy 1>,		/* PCIe 3b pipe */
->  				 <&pcie4_phy>,			/* PCIe 4 */
->  				 <&pcie5_phy>,			/* PCIe 5 */
->  				 <&pcie6_phy>,			/* PCIe 6 */
-> @@ -2330,6 +2330,62 @@ &config_noc SLAVE_QUP_0 QCOM_ICC_TAG_ALWAYS>,
->  			};
->  		};
->  
-> +		pcie3_phy: phy@f00000 {
-> +			compatible = "qcom,glymur-qmp-gen5x8-pcie-phy";
-> +			reg = <0x0 0x00f00000 0x0 0x10000>,
-> +			      <0x0 0x00f10000 0x0 0x10000>;
-> +			reg-names = "port_a",
-> +				    "port_b";
-> +
-> +			clocks = <&gcc GCC_PCIE_PHY_3A_AUX_CLK>,
-> +				 <&gcc GCC_PCIE_3A_CFG_AHB_CLK>,
-> +				 <&tcsr TCSR_PCIE_3_CLKREF_EN>,
-> +				 <&gcc GCC_PCIE_3A_PHY_RCHNG_CLK>,
-> +				 <&gcc GCC_PCIE_3A_PIPE_CLK>,
-> +				 <&gcc GCC_PCIE_PHY_3B_AUX_CLK>,
-> +				 <&gcc GCC_PCIE_3B_CFG_AHB_CLK>,
-> +				 <&gcc GCC_PCIE_3B_PHY_RCHNG_CLK>,
-> +				 <&gcc GCC_PCIE_3B_PIPE_CLK>,
-> +				 <&gcc GCC_PCIE_3B_PIPE_DIV2_CLK>;
-> +			clock-names = "aux",
-> +				      "cfg_ahb",
-> +				      "ref",
-> +				      "rchng",
-> +				      "pipe",
-> +				      "phy_b_aux",
-> +				      "cfg_ahb_b",
-> +				      "rchng_b",
-> +				      "pipe_b",
-> +				      "pipediv2_b";
-> +
-> +			resets = <&gcc GCC_PCIE_3A_PHY_BCR>,
-> +				 <&gcc GCC_PCIE_3A_NOCSR_COM_PHY_BCR>,
-> +				 <&gcc GCC_PCIE_3B_PHY_BCR>,
-> +				 <&gcc GCC_PCIE_3B_NOCSR_COM_PHY_BCR>;
-> +			reset-names = "port_a",
-> +				      "port_a_nocsr",
-> +				      "port_b",
-> +				      "port_b_nocsr";
-> +
-> +			assigned-clocks = <&gcc GCC_PCIE_3A_PHY_RCHNG_CLK>,
-> +					  <&gcc GCC_PCIE_3B_PHY_RCHNG_CLK>;
-> +			assigned-clock-rates = <100000000>, <100000000>;
-> +
-> +			power-domains = <&gcc GCC_PCIE_3A_PHY_GDSC>,
-> +					<&gcc GCC_PCIE_3B_PHY_GDSC>;
-> +			power-domain-names = "port_a", "port_b";
-> +
-> +			qcom,link-mode = <&tcsr 0x5000>;
-> +
-> +			#clock-cells = <1>;
-> +			clock-output-names = "pcie3a_pipe_clk",
-> +					     "pcie3b_pipe_clk";
-> +
-> +			#phy-cells = <1>;
-> +
-> +			status = "disabled";
-> +		};
-> +
->  		usb_hs_phy: phy@fa0000 {
->  			compatible = "qcom,glymur-m31-eusb2-phy",
->  				     "qcom,sm8750-m31-eusb2-phy";
-> @@ -3711,6 +3767,8 @@ pcie3b_port0: pcie@0 {
->  				reg = <0x0 0x0 0x0 0x0 0x0>;
->  				bus-range = <0x01 0xff>;
->  
-> +				phys = <&pcie3_phy 1>;
-> +
->  				#address-cells = <3>;
->  				#size-cells = <2>;
->  				ranges;
-> @@ -3722,6 +3780,280 @@ pcie3b_port0_ep: endpoint {
->  			};
->  		};
->  
-> +		pcie3a: pci@1c10000 {
+> For example, `reboot psci-system-reset2-arch-warm-reset` gives me
+> warm reset on non-DT systems, correct?
 
-pcie@
+sure. Will update it. thanks.
 
-> +			device_type = "pci";
-> +			compatible = "qcom,glymur-pcie", "qcom,pcie-x1e80100";
-> +			reg = <0x0 0x01c10000 0x0 0x3000>,
-> +			      <0x0 0x70000000 0x0 0xf20>,
-> +			      <0x0 0x70000f40 0x0 0xa8>,
-> +			      <0x0 0x70001000 0x0 0x4000>,
-> +			      <0x0 0x70100000 0x0 0x100000>,
-> +			      <0x0 0x01c13000 0x0 0x1000>;
-> +			reg-names = "parf",
-> +				    "dbi",
-> +				    "elbi",
-> +				    "atu",
-> +				    "config",
-> +				    "mhi";
-> +			#address-cells = <3>;
-> +			#size-cells = <2>;
-> +			ranges = <0x01000000 0x0 0x00000000 0x0 0x70200000 0x0 0x100000>,
-> +				 <0x02000000 0x0 0x70000000 0x0 0x70300000 0x0 0x3d00000>,
-> +				 <0x03000000 0x7 0x00000000 0x7 0x00000000 0x0 0x40000000>,
-> +				 <0x43000000 0x70 0x00000000 0x70 0x00000000 0x10 0x00000000>;
-> +
-> +			bus-range = <0 0xff>;
-
-0x00
-
-> +
-> +			dma-coherent;
-> +
-> +			linux,pci-domain = <3>;
-> +			num-lanes = <8>;
-
-Drop this property.
-
-> +
-> +			operating-points-v2 = <&pcie3a_opp_table>;
-> +
-> +			msi-map = <0x0 &gic_its 0xb0000 0x10000>;
-> +			iommu-map = <0x0 &pcie_smmu 0x30000 0x10000>;
-> +
-> +			interrupts = <GIC_SPI 948 IRQ_TYPE_LEVEL_HIGH>,
-> +				     <GIC_SPI 949 IRQ_TYPE_LEVEL_HIGH>,
-> +				     <GIC_SPI 844 IRQ_TYPE_LEVEL_HIGH>,
-> +				     <GIC_SPI 845 IRQ_TYPE_LEVEL_HIGH>,
-> +				     <GIC_SPI 194 IRQ_TYPE_LEVEL_HIGH>,
-> +				     <GIC_SPI 202 IRQ_TYPE_LEVEL_HIGH>,
-> +				     <GIC_SPI 846 IRQ_TYPE_LEVEL_HIGH>,
-> +				     <GIC_SPI 847 IRQ_TYPE_LEVEL_HIGH>,
-> +				     <GIC_SPI 942 IRQ_TYPE_LEVEL_HIGH>;
-> +			interrupt-names = "msi0",
-> +					  "msi1",
-> +					  "msi2",
-> +					  "msi3",
-> +					  "msi4",
-> +					  "msi5",
-> +					  "msi6",
-> +					  "msi7",
-> +					  "global";
-> +
-> +			#interrupt-cells = <1>;
-> +			interrupt-map-mask = <0 0 0 0x7>;
-> +			interrupt-map = <0 0 0 1 &intc 0 0 0 848 IRQ_TYPE_LEVEL_HIGH>,
-> +					<0 0 0 2 &intc 0 0 0 849 IRQ_TYPE_LEVEL_HIGH>,
-> +					<0 0 0 3 &intc 0 0 0 850 IRQ_TYPE_LEVEL_HIGH>,
-> +					<0 0 0 4 &intc 0 0 0 851 IRQ_TYPE_LEVEL_HIGH>;
-> +
-> +			clocks = <&gcc GCC_PCIE_3A_AUX_CLK>,
-> +				 <&gcc GCC_PCIE_3A_CFG_AHB_CLK>,
-> +				 <&gcc GCC_PCIE_3A_MSTR_AXI_CLK>,
-> +				 <&gcc GCC_PCIE_3A_SLV_AXI_CLK>,
-> +				 <&gcc GCC_PCIE_3A_SLV_Q2A_AXI_CLK>,
-> +				 <&gcc GCC_AGGRE_NOC_PCIE_3A_WEST_SF_AXI_CLK>;
-> +			clock-names = "aux",
-> +				      "cfg",
-> +				      "bus_master",
-> +				      "bus_slave",
-> +				      "slave_q2a",
-> +				      "noc_aggr";
-> +
-> +			assigned-clocks = <&gcc GCC_PCIE_3A_AUX_CLK>;
-> +			assigned-clock-rates = <19200000>;
-> +
-> +			interconnects = <&pcie_west_anoc MASTER_PCIE_3A QCOM_ICC_TAG_ALWAYS
-> +					&mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
-> +					<&hsc_noc MASTER_APPSS_PROC QCOM_ICC_TAG_ALWAYS
-> +					&pcie_west_slv_noc SLAVE_PCIE_3A QCOM_ICC_TAG_ALWAYS>;
-> +			interconnect-names = "pcie-mem",
-> +					     "cpu-pcie";
-> +
-> +			resets = <&gcc GCC_PCIE_3A_BCR>,
-> +				 <&gcc GCC_PCIE_3A_LINK_DOWN_BCR>;
-> +			reset-names = "pci",
-> +				      "link_down";
-> +
-> +			power-domains = <&gcc GCC_PCIE_3A_GDSC>;
-> +
-> +			eq-presets-8gts = /bits/ 16 <0x5555 0x5555 0x5555 0x5555
-> +						     0x5555 0x5555 0x5555 0x5555>;
-> +			eq-presets-16gts = /bits/ 8 <0x55 0x55 0x55 0x55 0x55 0x55 0x55 0x55>;
-> +			eq-presets-32gts = /bits/ 8 <0x55 0x55 0x55 0x55 0x55 0x55 0x55 0x55>;
-> +
-> +			status = "disabled";
-> +
-> +			pcie3a_opp_table: opp-table {
-> +				compatible = "operating-points-v2";
-> +
-> +				/* GEN 1 x1 */
-> +				opp-2500000-1 {
-> +					opp-hz = /bits/ 64 <2500000>;
-> +					required-opps = <&rpmhpd_opp_low_svs>;
-> +					opp-peak-kBps = <250000 1>;
-> +					opp-level = <1>;
-> +				};
-> +
-> +				/* GEN 1 x2 */
-> +				opp-5000000-1 {
-> +					opp-hz = /bits/ 64 <5000000>;
-> +					required-opps = <&rpmhpd_opp_low_svs>;
-> +					opp-peak-kBps = <500000 1>;
-> +					opp-level = <1>;
-> +				};
-> +
-> +				/* GEN 1 x4 */
-> +				opp-10000000-1 {
-> +					opp-hz = /bits/ 64 <10000000>;
-> +					required-opps = <&rpmhpd_opp_low_svs>;
-> +					opp-peak-kBps = <1000000 1>;
-> +					opp-level = <1>;
-> +				};
-> +
-> +				/* GEN 1 x8 */
-> +				opp-20000000-1 {
-> +					opp-hz = /bits/ 64 <20000000>;
-> +					required-opps = <&rpmhpd_opp_low_svs>;
-> +					opp-peak-kBps = <2000000 1>;
-> +					opp-level = <1>;
-> +				};
-> +
-> +				/* GEN 2 x1 */
-> +				opp-5000000-2 {
-> +					opp-hz = /bits/ 64 <5000000>;
-> +					required-opps = <&rpmhpd_opp_low_svs>;
-> +					opp-peak-kBps = <500000 1>;
-> +					opp-level = <2>;
-> +				};
-> +
-> +				/* GEN 2 x2 */
-> +				opp-10000000-2 {
-> +					opp-hz = /bits/ 64 <10000000>;
-> +					required-opps = <&rpmhpd_opp_low_svs>;
-> +					opp-peak-kBps = <1000000 1>;
-> +					opp-level = <2>;
-> +				};
-> +
-> +				/* GEN 2 x4 */
-> +				opp-20000000-2 {
-> +					opp-hz = /bits/ 64 <20000000>;
-> +					required-opps = <&rpmhpd_opp_low_svs>;
-> +					opp-peak-kBps = <2000000 1>;
-> +					opp-level = <2>;
-> +				};
-> +
-> +				/* GEN 2 x8 */
-> +				opp-40000000-2 {
-> +					opp-hz = /bits/ 64 <40000000>;
-> +					required-opps = <&rpmhpd_opp_low_svs>;
-> +					opp-peak-kBps = <4000000 1>;
-> +					opp-level = <2>;
-> +				};
-> +
-> +				/* GEN 3 x1 */
-> +				opp-8000000-3 {
-> +					opp-hz = /bits/ 64 <8000000>;
-> +					required-opps = <&rpmhpd_opp_low_svs>;
-> +					opp-peak-kBps = <984500 1>;
-> +					opp-level = <3>;
-> +				};
-> +
-> +				/* GEN 3 x2 */
-> +				opp-16000000-3 {
-> +					opp-hz = /bits/ 64 <16000000>;
-> +					required-opps = <&rpmhpd_opp_low_svs>;
-> +					opp-peak-kBps = <1969000 1>;
-> +					opp-level = <3>;
-> +				};
-> +
-> +				/* GEN 3 x4 */
-> +				opp-32000000-3 {
-> +					opp-hz = /bits/ 64 <32000000>;
-> +					required-opps = <&rpmhpd_opp_low_svs>;
-> +					opp-peak-kBps = <3938000 1>;
-> +					opp-level = <3>;
-> +				};
-> +
-> +				/* GEN 3 x8 */
-> +				opp-64000000-3 {
-> +					opp-hz = /bits/ 64 <64000000>;
-> +					required-opps = <&rpmhpd_opp_low_svs>;
-> +					opp-peak-kBps = <7876000 1>;
-> +					opp-level = <3>;
-> +				};
-> +
-> +				/* GEN 4 x1 */
-> +				opp-16000000-4 {
-> +					opp-hz = /bits/ 64 <16000000>;
-> +					required-opps = <&rpmhpd_opp_svs>;
-> +					opp-peak-kBps = <1969000 1>;
-> +					opp-level = <4>;
-> +				};
-> +
-> +				/* GEN 4 x2 */
-> +				opp-32000000-4 {
-> +					opp-hz = /bits/ 64 <32000000>;
-> +					required-opps = <&rpmhpd_opp_svs>;
-> +					opp-peak-kBps = <3938000 1>;
-> +					opp-level = <4>;
-> +				};
-> +
-> +				/* GEN 4 x4 */
-> +				opp-64000000-4 {
-> +					opp-hz = /bits/ 64 <64000000>;
-> +					required-opps = <&rpmhpd_opp_svs>;
-> +					opp-peak-kBps = <7876000 1>;
-> +					opp-level = <4>;
-> +				};
-> +
-> +				/* GEN 4 x8 */
-> +				opp-128000000-4 {
-> +					opp-hz = /bits/ 64 <128000000>;
-> +					required-opps = <&rpmhpd_opp_svs>;
-> +					opp-peak-kBps = <15753000 1>;
-> +					opp-level = <4>;
-> +				};
-> +
-> +				/* GEN 5 x1 */
-> +				opp-32000000-5 {
-> +					opp-hz = /bits/ 64 <32000000>;
-> +					required-opps = <&rpmhpd_opp_nom>;
-> +					opp-peak-kBps = <3938000 1>;
-> +					opp-level = <5>;
-> +				};
-> +
-> +				/* GEN 5 x2 */
-> +				opp-64000000-5 {
-> +					opp-hz = /bits/ 64 <64000000>;
-> +					required-opps = <&rpmhpd_opp_nom>;
-> +					opp-peak-kBps = <7876000 1>;
-> +					opp-level = <5>;
-> +				};
-> +
-> +				/* GEN 5 x4 */
-> +				opp-128000000-5 {
-> +					opp-hz = /bits/ 64 <128000000>;
-> +					required-opps = <&rpmhpd_opp_nom>;
-> +					opp-peak-kBps = <15753000 1>;
-> +					opp-level = <5>;
-> +				};
-> +
-> +				/* GEN 5 x8 */
-> +				opp-256000000-5 {
-> +					opp-hz = /bits/ 64 <256000000>;
-> +					required-opps = <&rpmhpd_opp_nom>;
-> +					opp-peak-kBps = <31506000 1>;
-> +					opp-level = <5>;
-> +				};
-> +			};
-> +
-> +			pcie3a_port0: pcie@0 {
-
-Add pciclass compatible.
-
-- Mani
-
--- 
-மணிவண்ணன் சதாசிவம்
+thanks,
+Shivendra
