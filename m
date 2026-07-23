@@ -1,68 +1,69 @@
-Received: from mail-wm1-f49.google.com (mail-wm1-f49.google.com [209.85.128.49])
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 666473B4EB3
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 18:18:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1FFC3BED66
+	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 18:18:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784830710; cv=none; b=V6GP4ynqdkGOXeMGWfjD/bXQnmU+J8ZuUZENesjinRtc5oJTnKnO9hD+8rqaELF2qXktor/9XlpmjR4uJ7JyGLHNnnxXL77cSltcloAC2oznolvSpBsN8I6c1/kIQpdjrHzcS0CneGskajKyk8Mqj4Jz8msanOsqSYzVMHXLgyw=
+	t=1784830711; cv=none; b=YSjFA3uZ2W/UWBiHVq1HShmSHvTvvpQkzC3LfD/lat3SsyNPZxmrgO97ub79/edHYoIuSVVRO6bd1wm21TpAYlhEYtpLAoFCjXwIlChxgEribv6lA1sXaCPxjed0NLfT3NxiBOeyQv3IVm1rOr+XhclTVu/lOqZkQbnjYrMWjik=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784830710; c=relaxed/simple;
-	bh=2iwV7kyuakkEDfG5RsSQJj+N3P8k/pN6D4hpRK7eClU=;
+	s=arc-20240116; t=1784830711; c=relaxed/simple;
+	bh=YNnjlmdOOeK9GU+75gVS9bzIZJJubhpoaDjK03p+XYA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=O7lNK6k+DkhgzQasc+FnHscMKhz5ZbXP6aaNn0juR8dPWW5t+/931r2UsbcEt+jzPSZHgLKMZ5a3awOTIrC596wk2q5ljV3IhoH1CF8E3m0MNIKOIz41egCPFSjFtuZrE464v/dQIA3PaNelg+LpQE7U9JOIFBNN1x33Wk+uswY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com; spf=pass smtp.mailfrom=imd-tec.com; dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b=aQ/Z54a1; arc=none smtp.client-ip=209.85.128.49
+	 In-Reply-To:To:Cc; b=lzSCCJsdjPh/f5S1vAN7cHzvOAJ8Zq6q13xAA25J34o0yNy4ddZmyfyP1xcuvlxc8FMgpB5R2zjvhPxePKes13gyOFDkhxG4ZT/3C8W4fQndGfRx4ZbbzuuadQNxMZFNcCt6MmnKy4jyV9unEHRZcmmUwih0ts8qcHLasyQc2OE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com; spf=pass smtp.mailfrom=imd-tec.com; dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b=cgjpFXUQ; arc=none smtp.client-ip=209.85.128.41
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=imd-tec.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=imd-tec.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b="aQ/Z54a1"
-Received: by mail-wm1-f49.google.com with SMTP id 5b1f17b1804b1-4954aff6088so8448265e9.3
+	dkim=pass (2048-bit key) header.d=imd-tec.com header.i=@imd-tec.com header.b="cgjpFXUQ"
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4954df200ddso6010025e9.0
         for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 11:18:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=imd-tec.com; s=google; t=1784830697; x=1785435497; darn=vger.kernel.org;
+        d=imd-tec.com; s=google; t=1784830698; x=1785435498; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=sLtaD2vGvX5YufCFNfLuN9dGFNzANa0Z0dsAvP+eVoU=;
-        b=aQ/Z54a1MLiHD0eBnAzQ6k2nwPUpNRWaEXS6FCGxi1AskjIN5E3QeQgb+xgD6GeMOm
-         CipWfmuOXgibdcqeR03dprvtQ2KYqeSpJb1K3btpw/lL6/AtWq1JP8w2Gi2DMN318ZRK
-         XgPxjDC1KZleXpeXBMD76I0B34XC9f0elc4mcQBxNhxAHJdVcR+htr7gBVOAJxDDaDo6
-         6YnpSNq3eiAqQ3Vc7iOnbwcwyWzsauEjEGM61YX1uM2gO6wHuH9meW78MD+DlHnTSzJk
-         7b2n17I+mhWlZx05ODCDNrIGgDsXk1UHP7eDwMswS+UdpyQOVJGfc3CfwljprJ6CuPtj
-         vQvQ==
+        bh=Fi3P82Ix1Tb8eWi6q5vyGVMfBwFnpb0LNapIFC8mek4=;
+        b=cgjpFXUQWrDixieFdO3OZIHJTQe9gRQLwIh942wQaju3dqhgOJ19o1kjKAeXB2LWTn
+         CF61aEZ4k2cpFVU5rJxU6BfxMPTlKWIg1vbKtY+Q0/4E/9RjDaNqZeKWEoqjGiD+1M2g
+         Rbdp6cFfHyFMN1lY7JmyRS+qAD+fSrTmMWLRcSOl/3Sz5d1BvNaHLzvT14T6mXhlbcv7
+         ddRubHcwPhI7gCEJv+Cff36wAuUiOVi4ZD+6ItlMRGSKVb+YXxRyV+IGSjUzqhr1IzjO
+         UPaJ7/afdwtxmiRHRRypygN91e9KSV9h9F2JAVtP4I3+jlqPRqhmNgai0FWvkx9M16D0
+         Z1cQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784830697; x=1785435497;
+        d=1e100.net; s=20251104; t=1784830698; x=1785435498;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=sLtaD2vGvX5YufCFNfLuN9dGFNzANa0Z0dsAvP+eVoU=;
-        b=HFcuk+S+w7Ko6shjNQGEYexyueQFhjHRHq4d5tnDAmsZd3tcA8QZgueUk/ukuVl7Cn
-         P+I1OlnnkJqqIdPEyNqJlqkUVVs9RiXveS9Wt9WIVzSeGI0ljGLl5FgN3QgyQtUlkHau
-         d8ov8rpLfoIJyHMmhkJyMMo66Ey/glv8OOfnlfwiulqZ+vejofFFtSiejgIAsMamX2fd
-         bWINd9E++O97TxTbkY/iabfMhpM3QyBOc2A0aLv2hbZBzpk979tutPS3YzhL4vPo9uhZ
-         5sPwjvi8Rwouzn0EF1FFplILb8I6bXl4DJg1JhBi0RTZwFL+mJPmrIwd14TxXQ9hPjI/
-         ezog==
-X-Forwarded-Encrypted: i=1; AHgh+RrUamjirDdE33C5QRjzozAZLXMuC1h8CyztraDPfmZfC+Oa5632wBe8uT+FwgK8PL++VCDq4mVGItmBv2T8@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzv0+0HGl06ddkkMtVBHgtqVnBywjKBRVXTMxAbM2DW8X2Tw1QG
-	I8ocIJJe6PZplDFGXpIX4pCzsOR4MqmWJ5diauW26IDNRSl3zYE77RclzxMvRtTkzCs=
-X-Gm-Gg: AR+sD10bNvrqGwFWWDrLq+vS0VCRAzZFexIFlFHe1mhR0n94tvKS41NoPpPjR+myEGA
-	fvVnoONn58CnJM0rR8uB5Nnpjii2tftQ6n2KVmRxLboeyQBU+AdyrOP345x76YwrkFEWISOWoF8
-	PgiZ8A37foyZ7NshOS00Irl+AXgTez/LkbP46qCl8vjcm1qVmXqKdZjGtvWMQlCar+YxLkPCOY8
-	tn3zJYN/O3okaUqEPYOd6lDbRRfZgPuaMzNcju+n1srv/aYav5HWlrp5m56cHGtXamLoDjXhGFW
-	iHMUGT23JAtorft1OzopXHvsH/sNjAR8S6X2S9wDsyhscYW+Z+XUcvz2vvk0nOJPeMn+663wQhe
-	rQw9Pk9lAkzfy+CPn++/ThP2GUBAfxVlse2a226+LAuJCvZ1Q1VXFrHdZTKiUMD3ZBJgTHqs6X1
-	Cc4o5tfKSFTpjDv++8CJ0syV38ZsoL0Q3KA72BOF5a98Gep6sA/7BI/7hqFzJBJpqWFOzJVFw1o
-	j5hF5c1jEW2hujIshQ3w40t3GpUqqLX0+gScCr1bZz3NJJPbeVxcQ==
-X-Received: by 2002:a05:600c:4f81:b0:495:4cba:e288 with SMTP id 5b1f17b1804b1-49573c99584mr49269755e9.15.1784830697356;
-        Thu, 23 Jul 2026 11:18:17 -0700 (PDT)
+        bh=Fi3P82Ix1Tb8eWi6q5vyGVMfBwFnpb0LNapIFC8mek4=;
+        b=a+vbQiA8uEU4YYftDCQDfJBlghipBi2+lPm2D7duQPFlvYARIN4iDppLeTNcAD5erh
+         K8lj0tRkj/+EG3zl+PC29lZWd6EkclgkYmGPUMjyupUrO7Qwf0Or5G+FwXvQUEAL1cpQ
+         o3wl4GY6n/xGlyTQhg0l5rUKAQ03WuKLRHFZuwAQdeJp2s+0zKJItwiPx6DjTmj8M3bu
+         WeHy7Kr+BqD38UyzVOzciKEkGX7dW4tFMzNIG0QoHQ52H4jDnCkdmeHOb1U/RMLjVRAS
+         1rnCre1oGKGB+XARdHNWfAL4Lu0s7Gw+/RYWt4OAw2fpeDi50IR14SjoHOLSWD7oiSGR
+         vZQw==
+X-Forwarded-Encrypted: i=1; AHgh+Rqd5iCHrPG2zursd/4fZ7cwr1/iMkz34F3vT+08BtK7ECm2zlu2i4ChTee1aCFx23FMeXjGAPmumb5BOXBy@vger.kernel.org
+X-Gm-Message-State: AOJu0YwxXMGQBJic4L7nDa3pqS+wBcYgaVO4Sgcw7M3625FCCWuxL7eW
+	yCzw32CJubqRHX/U+wUgSZILjGMRK8OpBy5K88021Tp78SWihZYjzr80FB8xeeoPi/o=
+X-Gm-Gg: AR+sD11OHLfPfSs3bo56GLcxNEKVUUSxEYLQ/Tow3rYGs6YrSJFxq/1w5K6C+yMqAvP
+	4IWI1slTvdQhZuFFnIugPYK/sFGT6hx2iBp+JmhuXaxz6pYFCG2OZ9xwcpJt2rtxrGLGhN9c38f
+	3U5ySbyjaaS4ruDPjEwDeq7xA//nQJxK9thUegiW4v/DVe6R1TTUr/DNhCbWixT8kRidCEgLGTK
+	CGsdXR3DVmbgy5wdgJ0ZlsrSUZM2F0xT4wMhXc/JpwXys3CSDEarbxLa2YCIuwYYBmzymJpq9kM
+	r/9c0l0HAYved0YBypG30vlMHuTtiy4TDS4cpR0FtoRwkOfTHNKfGq2GPH53KapL2nrtfp3+2WS
+	Sp6UbrwaSa/nfDMH53sUCSLQkGjfaX6lA0ESQFbGBAmvf1wf+o20d4azZulvMjacCHo+BlBGx12
+	yr9pQ4IGHkHl6PShVxhXps4ADiRKM3pIoU+unetzQsCQ/MIMIX8iwrOJtS7C9HBNW2pWo58vcQr
+	/kM/WMpquYgL2svaC9PRFv5cBOqqKBothNW8RwseOmEPPnwaPVpTcKeZklzXIl4
+X-Received: by 2002:a05:600c:1d29:b0:495:699:84ca with SMTP id 5b1f17b1804b1-49573d142bamr48720575e9.28.1784830698142;
+        Thu, 23 Jul 2026 11:18:18 -0700 (PDT)
 Received: from [127.0.1.1] (host86-157-235-39.range86-157.btcentralplus.com. [86.157.235.39])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4957af914a9sm10799055e9.15.2026.07.23.11.18.16
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4957af914a9sm10799055e9.15.2026.07.23.11.18.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Thu, 23 Jul 2026 11:18:17 -0700 (PDT)
 From: William Bright <william.bright@imd-tec.com>
-Date: Thu, 23 Jul 2026 19:18:07 +0100
-Subject: [PATCH v5 1/4] dt-bindings: vendor-prefixes: Add IMDT
+Date: Thu, 23 Jul 2026 19:18:08 +0100
+Subject: [PATCH v5 2/4] dt-bindings: arm: qcom: Document IMDT QCS8550
+ SBC/SoM
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -71,7 +72,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260723-imdt-qcs8550-sbc-rfc-v5-1-2fb988854623@imd-tec.com>
+Message-Id: <20260723-imdt-qcs8550-sbc-rfc-v5-2-2fb988854623@imd-tec.com>
 References: <20260723-imdt-qcs8550-sbc-rfc-v5-0-2fb988854623@imd-tec.com>
 In-Reply-To: <20260723-imdt-qcs8550-sbc-rfc-v5-0-2fb988854623@imd-tec.com>
 To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -81,27 +82,33 @@ Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-arm-msm@vger.kernel.org, William Bright <william.bright@imd-tec.com>
 X-Mailer: b4 0.15.2
 
-Add IMDT (IMD Technologies Ltd) to the vendor prefixes list.
+Document the IMDT QCS8550 SBC which consists of an IMDT QCS8550 SoM
+soldered onto an IMDT QCS8550 carrier board.
 
 Acked-by: Rob Herring (Arm) <robh@kernel.org>
 Signed-off-by: William Bright <william.bright@imd-tec.com>
 ---
- Documentation/devicetree/bindings/vendor-prefixes.yaml | 2 ++
- 1 file changed, 2 insertions(+)
+ Documentation/devicetree/bindings/arm/qcom.yaml | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/vendor-prefixes.yaml b/Documentation/devicetree/bindings/vendor-prefixes.yaml
-index 7b0d79ebf9bd..5c74da791c13 100644
---- a/Documentation/devicetree/bindings/vendor-prefixes.yaml
-+++ b/Documentation/devicetree/bindings/vendor-prefixes.yaml
-@@ -791,6 +791,8 @@ patternProperties:
-     description: ILI Technology Corporation (ILITEK)
-   "^imagis,.*":
-     description: Imagis Technologies Co., Ltd.
-+  "^imdt,.*":
-+    description: IMD Technologies Ltd.
-   "^img,.*":
-     description: Imagination Technologies Ltd.
-   "^imi,.*":
+diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
+index f8c37096df46..8d01cfbef8f6 100644
+--- a/Documentation/devicetree/bindings/arm/qcom.yaml
++++ b/Documentation/devicetree/bindings/arm/qcom.yaml
+@@ -1137,6 +1137,13 @@ properties:
+               - sony,pdx234
+           - const: qcom,sm8550
+ 
++      - items:
++          - enum:
++              - imdt,qcs8550-sbc
++          - const: imdt,qcs8550-som
++          - const: qcom,qcs8550
++          - const: qcom,sm8550
++
+       - items:
+           - enum:
+               - qcom,qcs8550-aim300-aiot
 
 -- 
 2.43.0
