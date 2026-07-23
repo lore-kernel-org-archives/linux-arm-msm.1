@@ -1,181 +1,230 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 866314DBD62
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 13:37:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0F2878C9C;
+	Thu, 23 Jul 2026 13:45:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784813838; cv=none; b=bCQyFLw0ydxLzBZdkGE7FIE8p9PkfGFaQMQJHokKKT6RNUc9jeUKWoeo80rMsdqzo7/I/XBcFePgN14NNR6NuRivrZ1DfzhORr34Zn97Ms7eVqX5iS5NdkmzmiFqltUZ+muyNvHV/WNZjDyZqbeG3De95mq9h7tpdJUqri1XM6w=
+	t=1784814324; cv=none; b=uGHvBHxIMRDSOVzErAP9mNk1J0U2/5IkruNhJItIBrtlHXDXuD7iTStWzr9ynnCXulpv2V6Mz12F7PS6inwTLl86rELsJ9VewCRdVYTKVRt0cyFDKjNm9eDgJUcVyuwcyHgqbPLOz3NqJg6EPiw8NJwIZupQnO5Okgxp/bgb1KI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784813838; c=relaxed/simple;
-	bh=cX5RyP25LLZ1Jg13iKUkAoxbJ9vy0x/xpbeWmaWKPPY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Y3w4AA2yEs8fGKGnkQEolLNXrdbFL2sbKvi8SSBDi8KK0dRPxTKIl8aeZB1fe3YxM2idKpWIEhKGMVPCNCcz2eQhga7baiFi+vRH3Mgv8KdCpAuV1O6XXyBByeqepNZDcf/aklpiRdhOpYa34nGz0UmbQw6WRWtljjNEdz82h8I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=SRGYiamr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NpGnHeBP; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="SRGYiamr";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NpGnHeBP"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NCvkpS4050191
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 13:37:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	gHslaQdrIxXhoR6CTG+3KawG4L5eFPme/pRlS9V9GnI=; b=SRGYiamrXt0hgCk+
-	WNnhRI8ZmDZgtZWVqW1gXz7GYyfDCE+Bwv0tbm94DH9CenByUSzUOayLRpZPEByi
-	ObtqjIBg+Fu3WMkfH9hGp/12ej9FnHHk6rLTwHpn/Qbk2afuBbsKCsb46Ufqs9GV
-	nNZgYZxcGHmZdOWD29oxeLnjVl2GV17+ivdpU1RqCKUdP6t1H9ZOZ2ZPl6QsvdOx
-	3j8kW/6hckJUjTegwZ90PGymHVM207khRlCOcFcNgQ3CBR6ePJpeeNtscXxIjT8r
-	bfPedFnEKprcj0f+eb/Z/HWS3P/7KK2RVvy+IPCsxDr4sHZoNWB6LjFWL7pFir/s
-	MTqFIw==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fk28vmc5h-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 13:37:10 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-92eb5f54b6dso9399385a.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 06:37:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784813829; x=1785418629; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=gHslaQdrIxXhoR6CTG+3KawG4L5eFPme/pRlS9V9GnI=;
-        b=NpGnHeBPPNW03WD4qql6N4qVk/tWQ+JJ3df3O53aSc5s2hYQK+3Hly5KcX/VAurBd5
-         i1OnJHNV7NQXLshEJBcs+ZTKeZ0IhEBZxrLzhW3jTkyzT2mdy1f6dCutLkOK98ZcqP0t
-         FanWWo1WSprCAyGc0srLdqw77Rsi9HBvymhHiK20YPJV2AG2VlWJRYOusq9/f+B5tQKZ
-         gSkVZJJkFJ1VtJt94ut8SvLW762m9mO7wY2s3wTExsWtceM4hNVznAIkaNxCTrKBDKZo
-         +oeJ9apHE8RnmnYsuRrInORFnhYNfARutenf340jcSTtqgTGvmLoY24mpAdI7+s2CY6t
-         WJCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784813829; x=1785418629;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=gHslaQdrIxXhoR6CTG+3KawG4L5eFPme/pRlS9V9GnI=;
-        b=CGmMABXKikuS2PlcLz7LjkohhM0qjBfcLgKGTxzM6p8qwTmNnfOrYhqaMdvYtpTllI
-         Yd9ieL0VFxq4Egz+TIrCGOqMoS0Dwgsj4kKDoMfStn+HOz++ufBgN6yAIG1v4spXYa8w
-         x5cwfiO1oL5eYrw6B24Xh+Xjfu1tmSvhOOGFNyg2AYG4eU501v0O8sjJOtzWKYlRT6ft
-         2SW66qPTBSqhUzXWBB5xWNhgZJdPdTmP+bS1I0vR0uFdUQu0p3Ai+mi2Tn6Qt8LjBa0+
-         vHHU+s3vdczs5lo5pgUm+/lkfXfKUYR3PPzVPJOJPIed5wnmsXAACpOSZlE9nf8gWVqB
-         RQjQ==
-X-Gm-Message-State: AOJu0Yy2RBaDqNbNBtI0tYivQu4eJRqOME10BysNNp0RrC1bg8GouAgs
-	u2Y2gvBApO7B2wjISMxX8RXYurwZzd85/ZJEkt7Rok+YFbB6a3ZHc6ZE0SEfA/1zN3irl+kaNIg
-	/CmTMNREqPYZo02dkgQ2TzO0M24LC/vFG1yGjEqyBYYr3/lVTS658oG4mIoNWq5n0k14G
-X-Gm-Gg: AR+sD12THTnCVhh333Yw9uDTdeSMHlgBV8WHcCjmknj+CMcL0sif53LIV2E9rPNSezh
-	0qN+TL5yisDzPC/AlEVRwZgIb74XJbJBULsacKmVToyLkymLHWP1zUKIt3rbjQzAW0nOaTn/GgM
-	6EOs6V3xQck6kT397ldtQc0nslQQd/PdGyHu2cAFxRCCfVVjZfT3b2wRmaIker1RN8a9bLpXlRx
-	L+lQ704ap/CyCrsg+MRKnHlWez+CLk4A6GMUBPIMRRiFtDb4/qqRScN8HjHZXJg3jR1c1xaIoTL
-	GOhSobuAjaIQSqljKgyXE+wXUTT+335aK7y9/L+D9Mh4d/g97TWGg65WfUaoX9F5eT8lYfCKXQC
-	BkoBJlnKUOxIio9HxDCoxGS0r
-X-Received: by 2002:ac8:5a4b:0:b0:51a:d45e:638d with SMTP id d75a77b69052e-5284750cb61mr5096701cf.8.1784813829655;
-        Thu, 23 Jul 2026 06:37:09 -0700 (PDT)
-X-Received: by 2002:ac8:5a4b:0:b0:51a:d45e:638d with SMTP id d75a77b69052e-5284750cb61mr5096461cf.8.1784813829187;
-        Thu, 23 Jul 2026 06:37:09 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1c32f19c4csm231706066b.63.2026.07.23.06.37.06
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 23 Jul 2026 06:37:08 -0700 (PDT)
-Message-ID: <fb8d3a44-0792-4420-aee6-e7559eb9ab70@oss.qualcomm.com>
-Date: Thu, 23 Jul 2026 15:37:05 +0200
+	s=arc-20240116; t=1784814324; c=relaxed/simple;
+	bh=jZax3IQ5T1OEn5br3cNYEko9rDQD904YZonZkdO9z00=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=FbPkLGXo6VSB2X6sr/mlgHyfsoyVP7Ikt+T1InwVShojyLnBvm8060Ccv5L44w9MPOm7quuqpNCrEgDGd6KXts5sUmBZKUJ/lqau9ktduZfi6uYpbb5HL6NHbdQK6oYWY6jq2vfzbvoqSob9QUQuJhuoZn59QfYum0ygr0ZoruI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD0FA1F000E9;
+	Thu, 23 Jul 2026 13:45:18 +0000 (UTC)
+Date: Thu, 23 Jul 2026 14:44:47 +0100
+From: Sudeep Holla <sudeep.holla@kernel.org>
+To: "Maulik Shah (mkshah)" <maulik.shah@oss.qualcomm.com>
+Cc: yuanfang zhang <yuanfang.zhang@oss.qualcomm.com>, ulfh@kernel.org,
+	Sudeep Holla <sudeep.holla@kernel.org>,
+	Suzuki K Poulose <suzuki.poulose@arm.com>,
+	Mike Leach <mike.leach@linaro.org>,
+	James Clark <james.clark@linaro.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Mathieu Poirier <mathieu.poirier@linaro.org>,
+	Leo Yan <leo.yan@linux.dev>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>, kernel@oss.qualcomm.com,
+	coresight@lists.linaro.org, linux-arm-kernel@lists.infradead.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, Jie Gan <jie.gan@oss.qualcomm.com>
+Subject: Re: [PATCH v2 00/12] coresight: Add CPU cluster
+ funnel/replicator/tmc support
+Message-ID: <20260723-light-aardwolf-of-swiftness-1c46ea@sudeepholla>
+References: <20251218-cpu_cluster_component_pm-v2-0-2335a6ae62a0@oss.qualcomm.com>
+ <20251218-careful-ruby-wildebeest-a8babd@sudeepholla>
+ <d0ce8306-84e0-4940-98aa-dbc356d87593@oss.qualcomm.com>
+ <20251219-hysterical-sparkling-meerkat-59c5eb@sudeepholla>
+ <11a01108-63da-4317-a547-5977a469a7dc@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] dmaengine: qcom: bam_dma: SCM-assign descriptor FIFOs
- to a remote VMID
-To: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>,
-        Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Andy Gross <agross@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        chris.lew@oss.qualcomm.com,
-        Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-References: <20260714-qcom-bam-dma-vmid-ext-v1-0-cef87c57b7dc@oss.qualcomm.com>
- <20260714-qcom-bam-dma-vmid-ext-v1-2-cef87c57b7dc@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260714-qcom-bam-dma-vmid-ext-v1-2-cef87c57b7dc@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDEzNCBTYWx0ZWRfXy9Sim1x5q62Z
- vs0gqYg0UDkEtpNx5x+EDtv9VKOPJIbwcnYoxH1GhXlQdmF4dY4ofKLNFx5HNJJGzhHCLekVHAD
- OOQvEJukPqDlwUIQ85cec9Dr0rG/S3U=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDEzNCBTYWx0ZWRfX7peBgyTERYP1
- Ov3WvlzXFl3TM0w7lx7mrBe91JEgeX21INgaAuk7TV+PG9l8FOEE0AzlxxknGq8qtLg5Q1Tl5Tr
- A5Zbb9myotOAVBEGtrstMrzMKdR3gYy6F65LgPNlJVnEM8qCXs6MsYW3LSEY3yFq0UYQHknZd+C
- 7DtIqqbR1GMFOvn9ro9k4/x4VJFUylFA/I6FAvjRdVK4tf0Te4ME9aCyqbI4YLiqwCBjr22ZObT
- pbhrduUdtx7g9/jo8surbAduX9NjfZZglX6DDT+hSEPGNWIM/t1PuBCy9veIQNKjzDTQGiOPGle
- uJyRv3ijUQE7wuBPHQNXtow/YerWKv0NZkA4NO1UTA6DuWp4SiE5Q+5mlpuAZH9O9KU+nG+/VrI
- EnTweBPoon7eUotsPjUJVh25luWwVuduwFAtxls4CWmkoj5JNLU0cc2y5IchRwhRdHu2CrPQ1TJ
- hEyuDly7S+NhPXk0SUg==
-X-Proofpoint-ORIG-GUID: jnqg53C99A7xHLkUnMjS4ceo-wXY6q2Y
-X-Proofpoint-GUID: jnqg53C99A7xHLkUnMjS4ceo-wXY6q2Y
-X-Authority-Analysis: v=2.4 cv=D4V37PRj c=1 sm=1 tr=0 ts=6a621906 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=jWf9ImQ_av2cyXA2soUA:9 a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-23_04,2026-07-22_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 malwarescore=0 adultscore=0 priorityscore=1501
- phishscore=0 spamscore=0 bulkscore=0 suspectscore=0 impostorscore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607230134
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <11a01108-63da-4317-a547-5977a469a7dc@oss.qualcomm.com>
 
-On 7/14/26 7:00 AM, Vishnu Santhosh wrote:
-> On Qualcomm SoCs where the BAM is powered by a remote processor that
-> enforces XPU access control (e.g. the mDSP on Shikra, VMID 43 / NAV),
-> the BAM reads the descriptor FIFO as an AXI master under the remote
-> execution environment. Without an SCM grant for the remote VMID, the
-> first descriptor enqueue faults with an XPU violation.
+On Mon, May 25, 2026 at 06:47:27PM +0530, Maulik Shah (mkshah) wrote:
+> 
+> 
+> On 12/19/2025 3:51 PM, Sudeep Holla wrote:
+> > On Fri, Dec 19, 2025 at 10:13:14AM +0800, yuanfang zhang wrote:
+> >>
+> >>
+> >> On 12/18/2025 7:33 PM, Sudeep Holla wrote:
+> >>> On Thu, Dec 18, 2025 at 12:09:40AM -0800, Yuanfang Zhang wrote:
+> >>>> This patch series adds support for CoreSight components local to CPU clusters,
+> >>>> including funnel, replicator, and TMC, which reside within CPU cluster power
+> >>>> domains. These components require special handling due to power domain
+> >>>> constraints.
+> >>>>
+> >>>
+> >>> Could you clarify why PSCI-based power domains associated with clusters in
+> >>> domain-idle-states cannot address these requirements, given that PSCI CPU-idle
+> >>> OSI mode was originally intended to support them? My understanding of this
+> >>> patch series is that OSI mode is unable to do so, which, if accurate, appears
+> >>> to be a flaw that should be corrected.
+> >>
+> >> It is due to the particular characteristics of the CPU cluster power
+> >> domain.Runtime PM for CPU devices works little different, it is mostly used
+> >> to manage hierarchicalCPU topology (PSCI OSI mode) to talk with genpd
+> >> framework to manage the last CPU handling in cluster.
+> > 
+> > That is indeed the intended design. Could you clarify which specific
+> > characteristics differentiate it here?
+> 
+> Sorry for coming very late on this.
+> 
+> This series is intended to handle coresight components which resides within CPU cluster.
+> For the cases where cluster is in deepest idle low power mode or all CPUs belonging to cluster
+> are hotplugged off, access to coresight components can not be done.
+>
 
-[...]
+Sure, but the question is why is the cluster entering deepest idle state if
+coresight is in use ?
 
-> +	ret = of_property_read_u32_array(dev->of_node, "qcom,vmid",
-> +					 bdev->vmids, n);
-> +	if (ret)
-> +		return ret;
-> +
-> +	for (i = 0; i < n; i++) {
-> +		if (bdev->vmids[i] == QCOM_SCM_VMID_HLOS) {
-> +			dev_err(dev, "qcom,vmid must not include HLOS (%u)\n",
-> +				QCOM_SCM_VMID_HLOS);
-> +			return -EINVAL;
-> +		}
-> +	}
+> The implementation tried to address in two parts,
+> 1. Using cluster power-domain to know which coresight component belongs to which cluster/CPUs
 
-Please switch to device_property_ instead
+OK
 
-[...]
+> 2. Schedule the task on intended cluster's CPU to make sure the CPU (and cluster) power is
+> ON while coresight component of the cluster is being accessed (using smp_call_function_single()).
+> 
 
-> +static int bam_assign_fifo(struct bam_device *bdev, struct bam_chan *bchan)
-> +{
-> +	struct qcom_scm_vmperm *dst __free(kfree) = NULL;
-> +	u64 src = BIT_ULL(QCOM_SCM_VMID_HLOS);
-> +	int i, ret;
-> +
-> +	if (!bdev->num_vmids)
-> +		return 0;
-> +
-> +	dst = kcalloc(bdev->num_vmids + 1, sizeof(*dst), GFP_KERNEL);
-> +	if (!dst)
-> +		return -ENOMEM;
+Why, just block any cluster entering deeper idle state when corresponding
+coresight component is in use. This should be taken care automatically.
 
-Please reshuffle this to follow
+> The use of power-domains in (1) will limit this to PSCI OS-Initiated mode,
 
-7c4c14ad3d8c ("tee: qcomtee: mem: Fix confusing cleanup.h syntax")
+Yes
 
-Konrad
+> to have this support on PSCI Platform-Coordinated mode too, probably instead of power-domains,
+> cpu-maps (which also defines the clusters) from device tree is a better choice which will give
+> the information on which CPU belongs to which cluster.
+> 
+
+No, let the platform deal with it. And the whole OSI mode was pushed giving
+such use-case as example and now you are telling you want to solve the problem
+for PC mode. I am confused. Just use OSI.
+
+> (2) ensured that scheduling happened on intended CPU and while the access is in progress, CPU (and
+> cluster) will not enter power down in between.
+> 
+
+No, just block entering that state in OS(for OSI) and in the platform(for PC)
+
+> > 
+> >> It doesn’t really send IPI to wakeup CPU device (It don’t have
+> >> .power_on/.power_off) callback implemented which gets invoked from
+> >> .runtime_resume callback. This behavior is aligned with the upstream Kernel.
+> >>
+> > 
+> > I am quite lost here. Why is it necessary to wake up the CPU? If I understand
+> > correctly, all of this complexity is meant to ensure that the cluster power
+> > domain is enabled before any of the funnel registers are accessed. Is that
+> > correct?
+> 
+> Yes, This is to ensure that CPU (and cluster) power is ON while coresight components
+> for same cluster are being accessed.
+> 
+
+Or just don't turn off cluster if coresight is enabled and in use.
+
+> > 
+> > If so, and if the cluster domains are already defined as the power domains for
+> > these funnel devices, then they should be requested to power on automatically
+> > before any register access occurs. Is that not the case?
+> 
+> Cluster power-domains will be only available for PSCI OS-initiated mode but also
+> will not help for cases where all CPUs in cluster are hotplugged off as hotplugs are
+> platform coordinated.
+> 
+
+See above, let platform deal with it. It is called PC for that reason.
+
+> After discussion with our HW team to automatically request power on for coresight
+> component GPR [1] can be used but they seems not working as intended on the existing
+> SoCs and will be available on next generation SoC.
+> 
+> [1] https://developer.arm.com/documentation/ddi0480/d/Functional-Overview/Granular-Power-Requestor
+> 
+
+You are looking at it from wrong side as you allowed cluster to power down
+when the coresight in the cluster power domain was still in use, right ?
+
+> > 
+> > What am I missing in this reasoning?
+> > 
+> > The only explanation I can see is that the firmware does not properly honor
+> > power-domain requests coming directly from the OS. I believe that may be the
+> > case, but I would be glad to be proven wrong.
+> > 
+> 
+> please see below comment for more details, This seems not a firmware issue.
+> 
+> >>>
+> >>>> Unlike system-level CoreSight devices, these components share the CPU cluster's
+> >>>> power domain. When the cluster enters low-power mode (LPM), their registers
+> >>>> become inaccessible. Notably, `pm_runtime_get` alone cannot bring the cluster
+> >>>> out of LPM, making standard register access unreliable.
+> >>>>
+> >>>
+> >>> Are these devices the only ones on the system that are uniquely bound to
+> >>> cluster-level power domains? If not, what additional devices share this
+> >>> dependency so that we can understand how they are managed in comparison?
+> >>>
+> >>
+> >> Yes, devices like ETM and TRBE also share this power domain and access constraint.
+> >> Their drivers naturally handle enablement/disablement on the specific CPU they
+> >> belong to (e.g., via hotplug callbacks or existing smp_call_function paths).
+> > 
+> > I understand many things are possible to implement, but the key question
+> > remains: why doesn’t the existing OSI mechanism - added specifically to cover
+> > cases like this solve the problem today?
+> > 
+> > Especially on platforms with OSI enabled, what concrete limitation forces us
+> > into this additional “wake-up” path instead of relying on OSI to manage the
+> > dependency/power sequencing?
+> 
+> + Ulf in loop.
+> 
+> Current platforms with OSI enabled, Linux PSCI do not implement the power_on/power_off
+> requests, as far as i know, runtime PM was never meant to implement this part and
+> pm_runtime_get_sync() (from drivers/cpuidle/cpuidle-psci.c) call is only used to convey
+> to cluster power domains about a child CPU/ sub domain being on after it has already
+> been landed in Linux.
+> 
+
+When a shared power domain has one of the consumer active, why is the power
+domain being turned off. OSI is supposed to handle that, I still don't
+understand what am I missing ?
+
+> The standalone invoke of pm_runtime_get_sync() from another CPU do not really turn on/get
+> the CPU (and cluster), as the CPUs either use CPUidle / CPU hotplug paths to enter/exit
+> low power mode.
+> 
+> To put it other way,
+> For a hot-plugged off CPU, invoking a pm_runtime_get_sync() won't get the CPU (and make
+> its cluster power domain) ON. In order to turn on the CPU, one has to still request
+> the online of the CPU, say via sysfs command echo 1 > /sys/devices/system/cpu/cpuX/online
+> which would invoke PSCI CPU_ON function and the power domain for CPU gets marked as ON
+> only after CPU already landed in Linux via psci_idle_cpuhp_up() invoking pm_runtime_get_sync().
+> 
+> I used specific hotplug example but same applies to idle powered down CPU (or Cluster) too.
+> 
+
+Deny hotplug or deeper idle state if the CPU/cluster shares power domain
+with other device or components(like coresight) when active. Or fake hotplug
+and keep it alive in the platform firmware.
+
+-- 
+Regards,
+Sudeep
