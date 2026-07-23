@@ -1,147 +1,312 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from flow-b8-smtp.messagingengine.com (flow-b8-smtp.messagingengine.com [202.12.124.143])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB68B37998C
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 20:09:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D84B4372B27;
+	Thu, 23 Jul 2026 20:26:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.12.124.143
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784837370; cv=none; b=LUb5qaypjxykhx20VBshd+6lbXa5lL49wYvaxoAGgd9WA+6HyL7FrqUsASmq7Y1pEf8Y2dNJ1JtAqzTkvmaX2c6Y5CpZBM2eIhtb8siJ2szHvMT5Bm88fO49sIz/AUlSvjFpXzHF5YR3oHA2aaf4RPn65WYFTc5YehtV98LPo5g=
+	t=1784838383; cv=none; b=mwfgMk5fudXgdjmec0ktKO1H7VxlzgfS+UnhYHBe/iLT8xe3YUdCzpfUer7Hez5pgAgZWL/BbvIPXXr7Z+4myJnchnVaPWWrJT4rgIAFEF3Oido5yOMHGql88K3HoxNfYaRhPKRMuePv75qV69pRF0vdK8d51LUbZihCqXvBBmc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784837370; c=relaxed/simple;
-	bh=H0AZCZgDyOvdK2zdRG3/lZrnk8hCVizgQMRAjseZ/DI=;
+	s=arc-20240116; t=1784838383; c=relaxed/simple;
+	bh=5iG8Fb/wE2D83EOlwWwa80p3yf8ydNzzDHEtgWXwQ+M=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=DVFCWliKPLKuhDDTi+l54E1pe+9gN1lCzSDgR3slJtqh5TgDfDd5NYq3pDhboncybGdo9LCRgiJfXHl+cGhhCrC4HDTuOyEWkfJwDMF5zCVqI3AI/lIw26PrK5km6Ecv+nz2aBlELVFJlnPUqOHoMLs4VVWoMEs51x1UGxU8dtY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=m33+PG7o; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=h5Pcqn28; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=qT/Zk6vfYI950RT6rVMn37N60Cvueinuq1dywE2zKP/p0BEdMZJrltfZnx3BT04eBCqC5nTs2x+is9lZoLOK2fs7dEGiFEYJefsYj7pjtbn1LUnD06LlejfKwj7BnVM3r3yyuPVU9V/nxbjbeFWk1gMyCOuHzBJJzUOJeK3IoN4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ragnatech.se; spf=pass smtp.mailfrom=ragnatech.se; dkim=pass (2048-bit key) header.d=ragnatech.se header.i=@ragnatech.se header.b=TXfg5ubM; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=eoV4KXT3; arc=none smtp.client-ip=202.12.124.143
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ragnatech.se
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ragnatech.se
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="m33+PG7o";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="h5Pcqn28"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66NIm1WC1844351
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 20:09:27 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=K7z/EglnG7R9Oaf1L7bayz/y
-	cLeY0+/gd0W+4yHQeZs=; b=m33+PG7o55a7zRNuMKwDgAcuxYK3P+nScaRFrF1s
-	QFji+hsd1T8PhSIVeix+lIVEe6/+ddKYgn8rbCA/Q1Av2Hz97/LKSofiQP7GZVKW
-	YvZRQIYBZbQUZlXDZ4YXI3A+omgC2d3YNl6MEdz9G2Uz6XRUyTo9+BUlPi42GETc
-	0IY+K28srN3fGn1DUXk9qNs306YmQgqCbRUsDzPvOH9EICkI4UkSMwUOIClks5O8
-	ZiX1u0wNd9sr0ibenzt5xglY02VGNhf/hmYgptbe7CD07CYq44UUGOFqmXs3QoFP
-	1BS8jmKwRz4EUUQEx8/pv+OPqwYUarCLS6q7wOOmHBY0wA==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkn9a1cfq-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 20:09:27 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c21c01cf3so17433651cf.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 13:09:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784837366; x=1785442166; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=K7z/EglnG7R9Oaf1L7bayz/ycLeY0+/gd0W+4yHQeZs=;
-        b=h5Pcqn28jlKaQKh7cwWqjx/SOqHOD4k1SxcE1Xa2HkPkSPxJAMiTroPMMGKDJbqGg1
-         huUM5dHfi2A+y4JtfFCR1oaV7fhKUWT7+zZv9cg/BDVncPh23CCnjhl1qfvlKUaoOgZ3
-         XxK+7zpBs31LV70JGNoxACyy1sLfKno3YxThM0XXiA5y8AYrpVBEtXWpgxHhc4dy7i6r
-         WsKzIiSi7Vg/IrNSqODrD0bhovkktSvYH+EPDgOZfcxLSxxvzITxkO4U+d2plozRlLji
-         f2JTuV+noUytv3m1qbDOJDXrx/ExthqpGf21wPig4DyDV3NjHeeQ5WrBvH+CI3iywo+s
-         bA1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784837366; x=1785442166;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=K7z/EglnG7R9Oaf1L7bayz/ycLeY0+/gd0W+4yHQeZs=;
-        b=NnQsZKMuSbNzhZmj9ux9hhGM7oDjw8tNMf7M5Tpo8qhJIWldCsgG1ACqOYvF3xOPhF
-         Mq8C1PFNZvTOJ5CUT00UE3Z96ID4DKGyyeCQBQ20ICoY4JspjrsotRSmTGh+OI9agOj8
-         5RSihi/4Z/GOojIIsCL58hD+v9n5JrPsC128GcI/aCJuakb/422kMiSSINEXVizeh3tq
-         BKnUQAoq7xPjSZx5p2fumHoDwek9fNVhL0r8iPkHMacfsVjOq5QBf1Es5VE8p1zClN0x
-         1bjIjKD6J8mMQYEZF5zlRf5Uqs2nbTBRo1rGfyT0RLx6+eCtrlMKUCn2gMSGQmlRebbV
-         kLkw==
-X-Forwarded-Encrypted: i=1; AHgh+Rpqok8Cqt9GQ7+A8xuyy7fLv2Z+OBo3/pcLX07gAcmTRXCJfAxIVPMhD429aFUDZcpPEhjpZxuAc6vGypdh@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz09MCkrUXhJfoB51KtTo8FU7grXxd6bf70VTJYT0j7Hm7BClwy
-	y9MU2qcGnQL3CLq71ZPvGk3DRDPKCjjG2zDN/ZQN2qVau2Bcgmf7Vg9eRY8HXYVpfDJzY9DO/pd
-	Rwvl0GortZ5MxrOX53tUh6lnpZAQKa3lMzgg7E8bC45EqSS3nvMVCrQUU1In6nMFRlNiS3XGoBd
-	cC
-X-Gm-Gg: AR+sD12KC2zlRJmDEU3LSEEqWisSAfhbRTcetV4sV61OZ4OQKjEZWDxrcG75AL3AlAg
-	+HoU1l4PM5ZCP49cSy1OqjQVuLD4S3X6bC+FaQO+FcdWJUeRd0WyrpOfYTFg9ioSQZMUqP/QnN1
-	K6SpzDYhlaX07JXDFpmALpa9figRig4yLzuVnElqzwRSwcELAEZtx0OibW6CYRpU2ckgsFMFJm9
-	OPs1X1XTEH5lO2lUnP3BhyUcx4WqiATXKxveqE+1mLJicUwkYvAWxiV9ZRzfY9tKZEkGrhp/crK
-	Ykz4Te6hJvfsOqDm5ALV10n1N7bXxdXrsEsZ1iDqjllqnq8KctJc0dSqt1Tla2ZkCCpBrx2YADy
-	8j+g+m9h3DbCpY3KYnRJaGYUQw1gUJ0qjPKelrPZ4YKISyio+NM1IeOtxijrkJ4MIn9FpyR0oUQ
-	DssN/w1KzMENwQug==
-X-Received: by 2002:a05:622a:1354:b0:50f:b732:2025 with SMTP id d75a77b69052e-5283df4d019mr42749841cf.53.1784837366462;
-        Thu, 23 Jul 2026 13:09:26 -0700 (PDT)
-X-Received: by 2002:a05:622a:1354:b0:50f:b732:2025 with SMTP id d75a77b69052e-5283df4d019mr42749451cf.53.1784837365986;
-        Thu, 23 Jul 2026 13:09:25 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-39ef6c41f59sm11872351fa.25.2026.07.23.13.09.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 23 Jul 2026 13:09:23 -0700 (PDT)
-Date: Thu, 23 Jul 2026 23:09:20 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 2/2] arm64: dts: qcom: glymur: Configure USB controllers
- are wakeup-capable
-Message-ID: <xf5yjjvxjiefpemfsehqo7snxf3lsvg23vw7pfse2gsmdsywvf@ccddobgn62po>
-References: <20260723-glymur-usb-fixes-v1-0-816357d5319c@oss.qualcomm.com>
- <20260723-glymur-usb-fixes-v1-2-816357d5319c@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=ragnatech.se header.i=@ragnatech.se header.b="TXfg5ubM";
+	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="eoV4KXT3"
+Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
+	by mailflow.stl.internal (Postfix) with ESMTP id 67ABA13005AB;
+	Thu, 23 Jul 2026 16:26:19 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+  by phl-compute-04.internal (MEProxy); Thu, 23 Jul 2026 16:26:19 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ragnatech.se; h=
+	cc:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm1; t=1784838379;
+	 x=1784845579; bh=W3JglPnWk9TBq4x0G1FeLIkVSrGWMGHIqS6ALjWfpa0=; b=
+	TXfg5ubMGpI7NH2+Kilra5KFHoKlpaz8cZfxh6VS0Y8aco6ACn5bHVXXNhuqfdNz
+	AHnuDiorIp9DgwlNO+v7fnyXJSh0ch6JmJRwJLqkU/D8t1IP5h99QfouIP4tukaP
+	BlRyW5EIlO5Fc1xoDsDwGE1DuTLfLfRGXr9hsDkbq6c0qdfbgZu0iewm5r/wbtIg
+	pccyjlUmfHVcp/JCc1IfzmJfclrUNq4zJxVHycV+85mfTCkb1c2xe78MuNoJZBE2
+	YFMiJZ+wKgNOq/FhrVkn4C5ayCoN+4A6akEA03CiW88iEIipAQ6LFbwbMwU3cPe3
+	enFj9VY8Px/AydESmr18PA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1784838379; x=
+	1784845579; bh=W3JglPnWk9TBq4x0G1FeLIkVSrGWMGHIqS6ALjWfpa0=; b=e
+	oV4KXT3Ym/YV5GkF2QRCa4+pOlI/zY8q4hcvjJ3LxL9gvXQU6dggg4Kx4JHeElJC
+	9IM6iw8nO/pEEwu2ZxZc40FBfz/CNw7/4q11pncrryEXvDEfI50yEbSOTjXWvB6c
+	P6riHQKso/WbIn20eXxFtKjaVHL19mCYnPU/hv9Zw6sa4UbpVCoZ7Z5ZzySoCYxC
+	rsD6zwlNXs2pymTpfxtlUvJOPfoEPTdVzhqLwqxI88o9iHMtbamqeT28J5rgypVy
+	xx/io/NKkJpvLEVPWaoqxyiz/DA16RAdOQNHHUPdj90X3sysR6zA1a4OM2vafVby
+	9vlzKc58AmpQ/K+BZW37Q==
+X-ME-Sender: <xms:6nhiaq0GCCJ3UjZ1Tl2tjNSSOnLYa4n_DvEcQxwQC9GuOs_D83Mzog>
+    <xme:6nhiaqScHvfaZ8a3YA8X-XOWjv0Qdvpj2dus8nerwH4i6u3xSe-ZOxZ6idILJxXim
+    y1KXEIpiY7SW9YeE_uONa8KUBeR7Q5D2gjX1lMoCNkek2ZgELFkeA>
+X-ME-Received: <xmr:6nhianaCq0-8aK30F5jYwZGN-zCrvAD2Sd6SGgBH9Eu3eu1y9EjCtytpO_M1R6a-kZg2BJEbUUYPYJms-lGCWOBvUA9tEM8>
+X-ME-Proxy-Cause: dmFkZTGtHfvCGLFNFtcVRq1cHrKjv7HYmoxFw1SEsPfggLpPF3+EigNttIIi46yncFHb8w
+    RNhYQ07T1sllTu+sciGyBlKNcqXi+ymeT8cw3/9uVWtj/55kw2wskM5if1ZNL/3AIR5RA7
+    JKSkKWovXVlh7x77H2TM7Fwa4ev5Ev2uAIZzQMb9G24Gxj0uSSfHKfofOICsmDLLuGJSqQ
+    arq+kkHAqnBsywojtxH84aBy8syhUvWsWbGXXq4laZV35SkdUVXHQX8BaFHGaJFjYDX/ty
+    4nfo9ODP4B4TvmLO5jB3ku72GvF+yhV8RnLjRs4UWFh7UVF90OGDAER6ybUj5upM1dXNGZ
+    F03sjgtZ4n7EW2/LRPbX33fsmxdTQZM4Vw5QGKeQRTtYxEOchEyqIxRBu4LbkRDn73kWsj
+    LxYHgAovK+XVj0yrC2GlG4PIwCuhaVZl4PNrkMgjuuHaVnpbrMOazhWf+XHy5e4/kzdEPK
+    ESIrNm8TOPUo7esJ9Bowy13hBURoivHoZBN+d4ZkKnSoXGR5vuSaTyzTxQ+Hzaay0E7Lfr
+    xq6M32C+odLuFXo74tayix0UXXCfsRftO/iWF6RnjQkHlRCv1V8SQ1MYK7N3gRXqdouc8l
+    jyXZqRQAN02lAaHt2bHhaQRmnjivyIfZ3NUs7hofb60faFpc5bKWXMeqNoIw
+X-ME-Proxy: <xmx:6nhiaoCXzbGIALywOyKdXlCmgNNav7K7UV8hqKi_9N-GTFvh7oRdGw>
+    <xmx:6nhiauBmaHuLQ1nKqA7wC38CXfEeYaFqFWIRA7sNALBbywVskdn7Lw>
+    <xmx:6nhiakG0cjRTw4Z4znK2C-2aTt_TaksxSzeagr3CTWcsXG4N-rNvpA>
+    <xmx:6nhiahnCr7pm_ynLAL8AGOG2tvn6-_tx8d1jY7ys3gGWLrP5zNJxoA>
+    <xmx:63hianEYvSz2qubeSY6ig3NYWooFgtsXupJs-9XDOyc4f82FAicO-1U8>
+Feedback-ID: i80c9496c:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
+ 23 Jul 2026 16:26:17 -0400 (EDT)
+Date: Thu, 23 Jul 2026 22:26:16 +0200
+From: Niklas =?utf-8?Q?S=C3=B6derlund?= <niklas.soderlund@ragnatech.se>
+To: Sang-Heon Jeon <ekffu200098@gmail.com>
+Cc: Julia.Lawall@inria.fr, Sakari Ailus <sakari.ailus@linux.intel.com>,
+	Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Eugen Hristev <ehristev@kernel.org>,
+	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	Magnus Damm <magnus.damm@gmail.com>,
+	Sylwester Nawrocki <sylvester.nawrocki@gmail.com>,
+	Michael Krufky <mkrufky@linuxtv.org>,
+	Hans Verkuil <hverkuil@kernel.org>, cocci@inria.fr,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
+	linux-samsung-soc@vger.kernel.org
+Subject: Re: [PATCH 12/36] media: remove conditional return with no effect
+Message-ID: <20260723202616.GE2273555@ragnatech.se>
+References: <20260723184538.3888637-1-ekffu200098@gmail.com>
+ <20260723184538.3888637-13-ekffu200098@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260723-glymur-usb-fixes-v1-2-816357d5319c@oss.qualcomm.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzIzMDE5NSBTYWx0ZWRfX67R6+SLwoX5P
- fEBnGyGBqeH7CxGpb4WMKMIy/J3RuUOWuSTFk5OPjhamg6UyN1ccXH/aOXe2z5V4KUq+xnCl4CM
- 9KG7KAp/krgsrXb6WTmIo1P00x+zXe+SixioFaEWNvdIBegB2gV4W8ahWMQMhbVZx6LtMU04dNK
- 8zs1T4YRzkiV95lkmPDk/Z639dCvHW4wRbjd5PPAoyD7YgI3eUUoH6MobSGcRjCF0Ew69o+BURG
- eXGbE1tO/QCK3D8u/AX8LFL3GUsmioJW/D1HB1RpAELnNNEAUgo6j9bbSiiiap/9T2iPVycjqUJ
- BpCSEG4tbeKkzNZJkX+qJg+8TmLY5wMQnJV7vKZ0MOEABBpLetgvxky9QsEHVTVT/XKKmnig/9e
- Iv5yhrIy/xqC4KJsFGhZSrCXaoT7R28DYUpnhb/aAxy88p016OZBYfpmPt3LRywB1bcpN5647uB
- bYtXYAd2KdnzX57KfNQ==
-X-Proofpoint-ORIG-GUID: 0aMD8bNZ9Rg0Kg88A2M_CL06eoCyrlLt
-X-Proofpoint-GUID: 0aMD8bNZ9Rg0Kg88A2M_CL06eoCyrlLt
-X-Authority-Analysis: v=2.4 cv=WOdPmHsR c=1 sm=1 tr=0 ts=6a6274f7 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
- a=i8nJ_-aNT86P3f_d1rcA:9 a=CjuIK1q_8ugA:10 a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzIzMDE5NSBTYWx0ZWRfX5+nEa2yS66rJ
- nd47zHzJPOLCabqYni+shrSlskKljzsbfPz34UoyLVq2l4LlUb957WSjqqQhSTeA1V3Ap32Uxxn
- B58kCOaN9sUaAaSbn++I7khVrYgtVxs=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-23_06,2026-07-22_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 suspectscore=0 lowpriorityscore=0 adultscore=0
- clxscore=1015 impostorscore=0 bulkscore=0 priorityscore=1501 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607230195
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260723184538.3888637-13-ekffu200098@gmail.com>
 
-On Thu, Jul 23, 2026 at 11:02:26PM +0530, Krishna Kurapati wrote:
-> All USB controller on Glymur are wakeup-capable device. Add wakeup-source
-> property for each of them indicating the same.
+Hi Sang-Heon,
+
+Thanks for your work.
+
+On 2026-07-24 03:45:14 +0900, Sang-Heon Jeon wrote:
+> Both branches of the check return the same value, so the check has
+> no effect. Remove it and return the value directly.
 > 
-> Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+> This is the result of running the Coccinelle script from
+> scripts/coccinelle/misc/cond_return_no_effect.cocci.
+> 
+> Signed-off-by: Sang-Heon Jeon <ekffu200098@gmail.com>
 > ---
->  arch/arm64/boot/dts/qcom/glymur.dtsi | 5 +++++
->  1 file changed, 5 insertions(+)
+>  drivers/media/i2c/mt9p031.c                          |  6 +-----
+>  .../media/platform/microchip/microchip-sama7g5-isc.c |  7 +------
+>  drivers/media/platform/qcom/iris/iris_resources.c    |  6 +-----
+>  drivers/media/platform/qcom/venus/pm_helpers.c       |  7 +------
+>  drivers/media/platform/renesas/rcar-csi2.c           |  6 +-----
+
+For rcar-csi2.c,
+
+Reviewed-by: Niklas Söderlund <niklas.soderlund+renesas@ragnatech.se>
+
+>  .../media/platform/samsung/s3c-camif/camif-core.c    |  7 +------
+>  drivers/media/usb/dvb-usb-v2/mxl111sf.c              | 12 ++----------
+>  drivers/media/usb/gspca/jl2005bcd.c                  |  7 +------
+>  8 files changed, 9 insertions(+), 49 deletions(-)
 > 
-
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-
+> diff --git a/drivers/media/i2c/mt9p031.c b/drivers/media/i2c/mt9p031.c
+> index d21510caf45a..2b09e8315c8e 100644
+> --- a/drivers/media/i2c/mt9p031.c
+> +++ b/drivers/media/i2c/mt9p031.c
+> @@ -452,11 +452,7 @@ static int mt9p031_set_params(struct mt9p031 *mt9p031)
+>  	ret = mt9p031_write(client, MT9P031_HORIZONTAL_BLANK, hblank - 1);
+>  	if (ret < 0)
+>  		return ret;
+> -	ret = mt9p031_write(client, MT9P031_VERTICAL_BLANK, vblank - 1);
+> -	if (ret < 0)
+> -		return ret;
+> -
+> -	return ret;
+> +	return mt9p031_write(client, MT9P031_VERTICAL_BLANK, vblank - 1);
+>  }
+>  
+>  static int mt9p031_s_stream(struct v4l2_subdev *subdev, int enable)
+> diff --git a/drivers/media/platform/microchip/microchip-sama7g5-isc.c b/drivers/media/platform/microchip/microchip-sama7g5-isc.c
+> index b0302dfc3278..7383341ec51d 100644
+> --- a/drivers/media/platform/microchip/microchip-sama7g5-isc.c
+> +++ b/drivers/media/platform/microchip/microchip-sama7g5-isc.c
+> @@ -598,13 +598,8 @@ static int __maybe_unused xisc_runtime_suspend(struct device *dev)
+>  static int __maybe_unused xisc_runtime_resume(struct device *dev)
+>  {
+>  	struct isc_device *isc = dev_get_drvdata(dev);
+> -	int ret;
+> -
+> -	ret = clk_prepare_enable(isc->hclock);
+> -	if (ret)
+> -		return ret;
+>  
+> -	return ret;
+> +	return clk_prepare_enable(isc->hclock);
+>  }
+>  
+>  static const struct dev_pm_ops microchip_xisc_dev_pm_ops = {
+> diff --git a/drivers/media/platform/qcom/iris/iris_resources.c b/drivers/media/platform/qcom/iris/iris_resources.c
+> index 773f6548370a..872bd09656b1 100644
+> --- a/drivers/media/platform/qcom/iris/iris_resources.c
+> +++ b/drivers/media/platform/qcom/iris/iris_resources.c
+> @@ -78,11 +78,7 @@ int iris_enable_power_domains(struct iris_core *core, struct device *pd_dev)
+>  	if (ret)
+>  		return ret;
+>  
+> -	ret = pm_runtime_get_sync(pd_dev);
+> -	if (ret < 0)
+> -		return ret;
+> -
+> -	return ret;
+> +	return pm_runtime_get_sync(pd_dev);
+>  }
+>  
+>  int iris_disable_power_domains(struct iris_core *core, struct device *pd_dev)
+> diff --git a/drivers/media/platform/qcom/venus/pm_helpers.c b/drivers/media/platform/qcom/venus/pm_helpers.c
+> index be1cbd5cfe84..e88e66be4f6d 100644
+> --- a/drivers/media/platform/qcom/venus/pm_helpers.c
+> +++ b/drivers/media/platform/qcom/venus/pm_helpers.c
+> @@ -781,7 +781,6 @@ static int decide_core(struct venus_inst *inst)
+>  	unsigned long max_freq = ULONG_MAX;
+>  	struct device *dev = core->dev;
+>  	struct dev_pm_opp *opp;
+> -	int ret = 0;
+>  
+>  	if (legacy_binding) {
+>  		if (inst->session_type == VIDC_SESSION_TYPE_DEC)
+> @@ -829,11 +828,7 @@ static int decide_core(struct venus_inst *inst)
+>  	}
+>  
+>  done:
+> -	ret = hfi_session_set_property(inst, ptype, &cu);
+> -	if (ret)
+> -		return ret;
+> -
+> -	return ret;
+> +	return hfi_session_set_property(inst, ptype, &cu);
+>  }
+>  
+>  static int acquire_core(struct venus_inst *inst)
+> diff --git a/drivers/media/platform/renesas/rcar-csi2.c b/drivers/media/platform/renesas/rcar-csi2.c
+> index 7305cc4a04cb..6635f5782175 100644
+> --- a/drivers/media/platform/renesas/rcar-csi2.c
+> +++ b/drivers/media/platform/renesas/rcar-csi2.c
+> @@ -2273,11 +2273,7 @@ static int rcsi2_init_phtw_v3u(struct rcar_csi2 *priv,
+>  			return ret;
+>  	}
+>  
+> -	ret = rcsi2_phtw_write_array(priv, step4, ARRAY_SIZE(step4));
+> -	if (ret)
+> -		return ret;
+> -
+> -	return ret;
+> +	return rcsi2_phtw_write_array(priv, step4, ARRAY_SIZE(step4));
+>  }
+>  
+>  /* -----------------------------------------------------------------------------
+> diff --git a/drivers/media/platform/samsung/s3c-camif/camif-core.c b/drivers/media/platform/samsung/s3c-camif/camif-core.c
+> index 14eedd1ceb27..bb06847f3a63 100644
+> --- a/drivers/media/platform/samsung/s3c-camif/camif-core.c
+> +++ b/drivers/media/platform/samsung/s3c-camif/camif-core.c
+> @@ -301,7 +301,6 @@ static int camif_media_dev_init(struct camif_dev *camif)
+>  	struct media_device *md = &camif->media_dev;
+>  	struct v4l2_device *v4l2_dev = &camif->v4l2_dev;
+>  	unsigned int ip_rev = camif->variant->ip_revision;
+> -	int ret;
+>  
+>  	memset(md, 0, sizeof(*md));
+>  	snprintf(md->model, sizeof(md->model), "Samsung S3C%s CAMIF",
+> @@ -316,11 +315,7 @@ static int camif_media_dev_init(struct camif_dev *camif)
+>  
+>  	media_device_init(md);
+>  
+> -	ret = v4l2_device_register(camif->dev, v4l2_dev);
+> -	if (ret < 0)
+> -		return ret;
+> -
+> -	return ret;
+> +	return v4l2_device_register(camif->dev, v4l2_dev);
+>  }
+>  
+>  static void camif_clk_put(struct camif_dev *camif)
+> diff --git a/drivers/media/usb/dvb-usb-v2/mxl111sf.c b/drivers/media/usb/dvb-usb-v2/mxl111sf.c
+> index 870ac3c8b085..6404eb74db32 100644
+> --- a/drivers/media/usb/dvb-usb-v2/mxl111sf.c
+> +++ b/drivers/media/usb/dvb-usb-v2/mxl111sf.c
+> @@ -987,11 +987,7 @@ static int mxl111sf_frontend_attach_atsc_mh(struct dvb_usb_adapter *adap)
+>  	if (ret < 0)
+>  		return ret;
+>  
+> -	ret = mxl111sf_lg2160_frontend_attach(adap, 2);
+> -	if (ret < 0)
+> -		return ret;
+> -
+> -	return ret;
+> +	return mxl111sf_lg2160_frontend_attach(adap, 2);
+>  }
+>  
+>  static int mxl111sf_frontend_attach_mercury(struct dvb_usb_adapter *adap)
+> @@ -1007,11 +1003,7 @@ static int mxl111sf_frontend_attach_mercury(struct dvb_usb_adapter *adap)
+>  	if (ret < 0)
+>  		return ret;
+>  
+> -	ret = mxl111sf_lg2161_ep6_frontend_attach(adap, 2);
+> -	if (ret < 0)
+> -		return ret;
+> -
+> -	return ret;
+> +	return mxl111sf_lg2161_ep6_frontend_attach(adap, 2);
+>  }
+>  
+>  static int mxl111sf_frontend_attach_mercury_mh(struct dvb_usb_adapter *adap)
+> diff --git a/drivers/media/usb/gspca/jl2005bcd.c b/drivers/media/usb/gspca/jl2005bcd.c
+> index a408fcc3a060..4988fbf5005e 100644
+> --- a/drivers/media/usb/gspca/jl2005bcd.c
+> +++ b/drivers/media/usb/gspca/jl2005bcd.c
+> @@ -148,17 +148,12 @@ static int jl2005c_start_new_frame(struct gspca_dev *gspca_dev)
+>  static int jl2005c_write_reg(struct gspca_dev *gspca_dev, unsigned char reg,
+>  						    unsigned char value)
+>  {
+> -	int retval;
+>  	u8 instruction[2];
+>  
+>  	instruction[0] = reg;
+>  	instruction[1] = value;
+>  
+> -	retval = jl2005c_write2(gspca_dev, instruction);
+> -	if (retval < 0)
+> -			return retval;
+> -
+> -	return retval;
+> +	return jl2005c_write2(gspca_dev, instruction);
+>  }
+>  
+>  static int jl2005c_get_firmware_id(struct gspca_dev *gspca_dev)
+> -- 
+> 2.43.0
+> 
 
 -- 
-With best wishes
-Dmitry
+Kind Regards,
+Niklas Söderlund
