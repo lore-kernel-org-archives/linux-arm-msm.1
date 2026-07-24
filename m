@@ -1,223 +1,217 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-001ae601.pphosted.com (mx0b-001ae601.pphosted.com [67.231.152.168])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 603633382C7
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 15:35:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C48BC366541;
+	Fri, 24 Jul 2026 15:41:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=67.231.152.168
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784907348; cv=pass; b=P5l/bM42Scvhm0vGsR+n7E7bRjyI1gNSxzyOm+kUj6HYd7HMbtqCDnzMkxYdjcyuP/OJDAizKgzaJRVrehOClJnFNqoeOQJEO73q1UGkaW91KhTDNrRcoId8nqsGMFe8YgDHU/42BOBrbZEPGdmRXL47wANKqRJmnGzOi9eozGU=
+	t=1784907687; cv=fail; b=RmnpMfDup+/BQdV6AdVb+onqNcncceV4VPV2vAN1fkZdJZxnwXhWADzoRNLATbU8wSo01N5bIfKC2ASLwMnS27Z7+X7IaRhL5+Dr6AEkmbQ3GwSmr1fXpsDuCWJiCLEEcoUt1Ueh77lAOMaqB4Gv6DbLrVyaw7u1M7KxWnicpCY=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784907348; c=relaxed/simple;
-	bh=0AxRvCjS4SeGauYtGrq3Gxj0CFvSuzE9MU+SB8VxZqM=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=VGqqxLSSLi73v9jg7Wnag0rDX0t6d45vGpgjOfX37/oMZHUebOZAe66kFDKVuIFlnrTCg+p1hfpgaV8LsLui+sF2tkJ0tzXO2Aqf0a2wyPHitwXzwZvjEQ5TI+CPfX472OBTR3dk+YdbnmTZg1Os8yWO1G0fiQgveJYKa3bC7Jc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=U0UZBLpm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SVitZbLB; arc=pass smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784907687; c=relaxed/simple;
+	bh=WWPDlQ6q8j7pjfW3yr4QfuzBPLnVRUywekwEZraNTIc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=kbyoGOnG2Hrp6IurGFLcTSMyG0haVPcmi3piswNEgnKE03+8+TcPw1q1iSw2j8rkT4D7eJZi+q+/rSQqoRNqs0q2s1nMzNAKe92MZelmnRQEpXs318dlb2Z0baD983Gohd2acLVBeqWJscS9otP3hk1yZH/5+QGvxbLYoYZKPF0=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com; spf=pass smtp.mailfrom=opensource.cirrus.com; dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b=E7lmmMAm; dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b=UPl4OGL0; arc=fail smtp.client-ip=67.231.152.168
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=opensource.cirrus.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="U0UZBLpm";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SVitZbLB"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66ODbA523344414
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 15:35:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	0AxRvCjS4SeGauYtGrq3Gxj0CFvSuzE9MU+SB8VxZqM=; b=U0UZBLpmLfPDvk4s
-	5VVXy1GRsf9VjasKo9AZa15zarTyGa1QjJqnsNNIcbBeIhq1YHNQb+NLdvyNnDBN
-	7R2Qp6iSbQ65AuK6J6JrFFQ1KCQdPr2+h/xLiVb0Y/MG478NDq04DnEdkLa8RE0C
-	q+9xAuEvlxgPwplct6yAF7BlP/BSC51W0qX4xC1wqPCC2kNiVj4k938GrWe9if+u
-	71b3BDT2ouTx0lPbmDcd2jAvWSKlChEuLO3YlNrfAItJPh+7d33op3mu57wYkF5k
-	m5xvoz86F6mTz6U79nCSLiaxF3eZb68e4/ZCxZPnHU/bjNLEQ39PFmoJr1mgXWyD
-	Gn0Tzg==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fm8cf0mvy-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 15:35:44 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-526da7e3c9dso8849921cf.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 08:35:44 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1784907344; cv=none;
-        d=google.com; s=arc-20260327;
-        b=Ud9rEXuaueWQm2U5qEDuMLqGE2QUFnT0jAGr2HqPlWIgsIoekdq4Oy5H3xSPBOX2Im
-         FKOe+9fzWFFnlciEdpxTkI/jVR4nC5w0uAy7eC2pw+gxtwifC28gjXP3s7jMzGw3a3Qi
-         xAKwu2QUKc1iq60i7SnL4ucMOBP1Sj5C8ZLAJAu/ZMbaA2FMMa2EGt3Rpu9IriStwzsB
-         EYZA9rIIM1hR0Mqo4iDcNlfkubEXI3YRsjXykHmUGuBcMYplreyvW3jQihYafuqEJdbn
-         6eSArAvVTAspiYJSTk7SBMrgRsaU3ma5JqauPiGd0rXIMr8uDgvJ5Ia5LCoSog8NIFAl
-         p0Iw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=0AxRvCjS4SeGauYtGrq3Gxj0CFvSuzE9MU+SB8VxZqM=;
-        fh=icObaPj7Kbin3RmBaZ6/0jPBU9FhAhh79lOQjdnXbPM=;
-        b=b7nU48BkU2gdvtTvTOwwG+rrzSMaXeg92W2Wg0DAEsJNrPw+QsX8fb+EB3aX8EUgqU
-         7yeX6ejKgnG4ThmMoBkph9Wkhwm5AkUT61EetrWi9W1HGrq24PRnw5NRfNoKSC6R+qE6
-         c5cg+1FGtWer9+3eF5akMCCOwe4eW0C6Z2g48Sz+ceWIiXKcy/RDaaywa74BZYTcUGy5
-         gikQDyNhoSJ8uyQDN+Vzh5DpSHhlvSzhO8iBSBafNHB+PbSQVIi3e9fKjU5S61dItwFX
-         V65zGSxxm9tir9LlnolYDETP4frjwf4SasoNr9rLIRnFCKTOLcZnybKorL08kC/qPoeY
-         WSmg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b="E7lmmMAm";
+	dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b="UPl4OGL0"
+Received: from pps.filterd (m0077474.ppops.net [127.0.0.1])
+	by mx0b-001ae601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66O5hhLF2897547;
+	Fri, 24 Jul 2026 10:40:59 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=PODMain02222019; bh=rZjelg5znSg1ePj5of
+	03lyI3s39tZODExcxVjMUW3WI=; b=E7lmmMAmP8a4TpxEw8g08Lp+AC3FHKix0P
+	kqk2fPwslouGBcgEA4WKhlBANpHBRZB25CeoM1/w7QuJtA4Ul1w7yVqjeqNXkyJf
+	2c9gyDLc29eB+qoWZUbsXA1om8kwI3f4N2tANrqwIBzR+8L5eCstA4suC9bgQiLv
+	4DUZ2yAkM7hSbJi6mqrkhsvwx6xrBM4p87j7OQ4AW8t4AUfY7Ci8V7PRbL7UIZks
+	CsGT8c+r1tDy4tCW1Y/OuxjlyugFbyUqgYwrrpKGJmKYBWFbBB3jj4kOP5Dxt6dJ
+	tR3svb4SEpmPx1HB2i6GBZICZZNHwMQVxRELQTSzNAPOglBCqUyg==
+Received: from bn8pr05cu002.outbound.protection.outlook.com (mail-eastus2azon11021142.outbound.protection.outlook.com [52.101.57.142])
+	by mx0b-001ae601.pphosted.com (PPS) with ESMTPS id 4fg5wfh2h6-1
+	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+	Fri, 24 Jul 2026 10:40:58 -0500 (CDT)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=rWUxQowjTdwFlw3G4Y4Mgxc/U5CiVE4BDJSTrJ/nHgLImob9gzNMahg6zCC59U25i3Vhl7a0WosBPLcdWFSQc1YHV9MfmDCmbsOlZFupaot/zOjgorxgTc3dq9I1YoLtMUI47NnXsZh6wMfGgrAlpkMqBmdzQ0p76DnaN1Qs6P86KY1XQNVfvsGaQB8ZGG/YF0c1Vh6COUj+MwFowLM63ZkRxR/jdUyMXNNChJOzXzKkqSdDu/V291GOo8LNTvLsNkSAJP+tSbANZiBCPiWD3Y6xLWsz0m4a5ep0mhOZwmWJQ9Wd33EU3G5+AmUQiKUYXUVxefsQuXezCMayI3OqlQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=rZjelg5znSg1ePj5of03lyI3s39tZODExcxVjMUW3WI=;
+ b=dfA8hovV89LXzWl2rbAehPKW2MWlvnp9Kuw+BAndBdroSWnEp3J6WluEO8GFRnYiisgGGAQ8ePC3RUSz7knDQ59CBPbZlo2RosU9tMUd3eaBvxlDyduOcnCB92kJrcdFaiGKPzz8BSTQh4aDIpjS+FDfcupNgsa0K47S01qKRSLEjUYmzf6dQNDjAyGTo96x8N2YuCQhQ0evnQbnFbEXA2kLAKxAXsE2/R1u1+YsLobtk5y+csAIFw9WM6V5kQOFwLJkaHjsrsr9yVCHebXbDCDiTzJeGw3tOP8/OQ5+DRRh0wQEyx3/N37HPw8opZNAXXLlKmiOSzmLgopChJ3LbA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 84.19.233.75) smtp.rcpttodomain=catcrafts.net
+ smtp.mailfrom=opensource.cirrus.com; dmarc=fail (p=reject sp=reject pct=100)
+ action=oreject header.from=opensource.cirrus.com; dkim=none (message not
+ signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784907344; x=1785512144; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=0AxRvCjS4SeGauYtGrq3Gxj0CFvSuzE9MU+SB8VxZqM=;
-        b=SVitZbLBEQeqhXDYttKqcffl1bS8srPij46robugKSWL9bw3tuZrUUnPKAYt5pApKd
-         tCBNmFfDUHtXQJAl73/hW25Eyn+edSA6L2iRFurPwLFpHJOpMd2oDiUtU1bfM8eyesCX
-         GuOQOamdO7slnkWhiK5z2X2slT4JH7LANGzFtPnonmH2oQCU0tBOkw2W9pmfXYjMJDR3
-         A4CSzAWZ2mfMacNxnuGzXYmaydr2aDKe2avf9dm+T6HvPdDZ95Wph9wfSJOiP0ZEAjvD
-         vpeyuD9ls10BdyB63miOd4BGoIyQbGSe6it3/AVvHhHoFFdTyL7FhzRYem1esx6oS/jN
-         vscQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784907344; x=1785512144;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=0AxRvCjS4SeGauYtGrq3Gxj0CFvSuzE9MU+SB8VxZqM=;
-        b=SCfEokwe2SJWyr5RtWs660tSzb4dg45s6z9wx24R94o6oLM0exj4CVxClJWn9CAgs+
-         UTOFNxZXE81Tw1AydQqOmeHM9SBZ0/hsokFBamXQS1T5mRLB0fvPOetCinwlxfPwpwnq
-         dvMwRGroLOne5AVRwaIzOyCgC+kTVeLIVfTY8Jt1ATZkssWcuInIpynFQBtLxQs4PBXe
-         3JCHUD6qMZ27BAc1dEm30s5M+7TjUURl1+moX+5I6gcfkvVpp0dPO7XZjAl+nO7fwU4J
-         vMKl98Yq99ETw99PMIpNimtaTXRbfv66oVyH7Hi7rgdTIw2kQSTnOTJWvGf5u14zTZNs
-         ia4w==
-X-Forwarded-Encrypted: i=1; AHgh+RomomyBLh1oR8Y3TfzxwNxiKj/VY4Llj1qgl2iTyU41QS1PX1buTHTdVPlN/6iZRZxuVbSWMCCMd9tvu5uG@vger.kernel.org
-X-Gm-Message-State: AOJu0YzLrJCNbfp3EWB4EDoqaB1coCr7i5r8KoVEaZux3Yo+snX5PGRS
-	BuCzB8OLSBSKvdj2+fb2pMqpjSHESJfM/kmjhqLPDzqnJG/tMYiGKvAjmca7Q3lPP92WZ7KIwCW
-	iXUltXpfNn9uXkifUs+9RwjjwrZp9k6I6Uf1Ri7eUFSbSVytnxWCwtc886aIvtxkNyhhD6gfun7
-	oR6zIZti5eAnWU9ndMdUvE3XdktplF95R93wTbtotBKPA=
-X-Gm-Gg: AR+sD11nEfj0L0WO/NnjsPvjRRHeXSxmRHew3KVWJ1VZRHwqADx2e6YymZFV3pwr/mN
-	JbEnS/CHtNn1UILjkbBFmChBPtanQeZJPUu0iK0BcDR59VIrzmqSyIaF4Uo6b2sEywguCqo1cgx
-	uxmpYSChqvvF1rKuq7XncEfkgUeBST4KB93qPXyoTaJw44tL/GWGrN7hh1kA==
-X-Received: by 2002:a05:622a:228a:b0:51c:1241:3b09 with SMTP id d75a77b69052e-5283de54e1fmr76891141cf.39.1784907343488;
-        Fri, 24 Jul 2026 08:35:43 -0700 (PDT)
-X-Received: by 2002:a05:622a:228a:b0:51c:1241:3b09 with SMTP id
- d75a77b69052e-5283de54e1fmr76890551cf.39.1784907342860; Fri, 24 Jul 2026
- 08:35:42 -0700 (PDT)
+ d=cirrus4.onmicrosoft.com; s=selector2-cirrus4-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=rZjelg5znSg1ePj5of03lyI3s39tZODExcxVjMUW3WI=;
+ b=UPl4OGL0TrQ7SQV/ca/fZT/zbk8CkncLQ6FKmqmbRDZ1O8/IwJYvQy2/w1YJUPyEE4kZ4O0+s8py4WFkCLe6GA4CDuJyCZO8c/kkXu3UjB+WcdQGamOZ+Ms5MA2BbhZ+8jMsXrkXROMqp78RrcPvDqpxFJkZ9Yeo0o8XfQAdPlg=
+Received: from DS1PR06CA0008.namprd06.prod.outlook.com (2603:10b6:8:458::6) by
+ DS7PR19MB5782.namprd19.prod.outlook.com (2603:10b6:8:77::15) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.245.11; Fri, 24 Jul 2026 15:40:52 +0000
+Received: from DS3PEPF000099E2.namprd04.prod.outlook.com
+ (2603:10b6:8:458:cafe::83) by DS1PR06CA0008.outlook.office365.com
+ (2603:10b6:8:458::6) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.245.12 via Frontend Transport; Fri,
+ 24 Jul 2026 15:40:52 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 84.19.233.75)
+ smtp.mailfrom=opensource.cirrus.com; dkim=none (message not signed)
+ header.d=none;dmarc=fail action=oreject header.from=opensource.cirrus.com;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ opensource.cirrus.com discourages use of 84.19.233.75 as permitted sender)
+Received: from edirelay1.ad.cirrus.com (84.19.233.75) by
+ DS3PEPF000099E2.mail.protection.outlook.com (10.167.17.201) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.5
+ via Frontend Transport; Fri, 24 Jul 2026 15:40:51 +0000
+Received: from ediswmail9.ad.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
+	by edirelay1.ad.cirrus.com (Postfix) with ESMTPS id 51CC7406541;
+	Fri, 24 Jul 2026 15:40:50 +0000 (UTC)
+Received: from opensource.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
+	by ediswmail9.ad.cirrus.com (Postfix) with ESMTPSA id 3761682024C;
+	Fri, 24 Jul 2026 15:40:50 +0000 (UTC)
+Date: Fri, 24 Jul 2026 16:40:49 +0100
+From: Charles Keepax <ckeepax@opensource.cirrus.com>
+To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+        Maciej Strozek <mstrozek@opensource.cirrus.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Bard Liao <yung-chuan.liao@linux.intel.com>,
+        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+        Richard Fitzgerald <rf@opensource.cirrus.com>,
+        Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, patches@opensource.cirrus.com,
+        linux-kernel@vger.kernel.org
+Subject: Re: [RFC PATCH 0/8] ASoC: SDCA: enable on DT platforms and add
+ Qualcomm WCD9378 (Tambora) codec
+Message-ID: <amOHgSiSfm2MgQqB@opensource.cirrus.com>
+References: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com>
+ <amHqO5pMFmKRNYTT@opensource.cirrus.com>
+ <87452472-0ca6-4ed5-a891-3a688598b5b3@oss.qualcomm.com>
+ <amNcM0AxYAe4bU95@opensource.cirrus.com>
+ <6d1870c1-7fff-4569-8de2-bb45b83cde25@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260703-block-as-nvmem-v8-0-98ae32bfc49a@oss.qualcomm.com> <3d954cdd-6dde-4be6-84c9-2f2f7d008f5b@kernel.org>
-In-Reply-To: <3d954cdd-6dde-4be6-84c9-2f2f7d008f5b@kernel.org>
-From: Ulf Hansson <ulf.hansson@oss.qualcomm.com>
-Date: Fri, 24 Jul 2026 17:35:31 +0200
-X-Gm-Features: AUfX_mwd1WNIZvdvXqoWeMIN9Hp4kEAy8VC-hn59NszviBxEKOIP4_juVgFnXVE
-Message-ID: <CAPx+jO8-9YSJtXNfnTrUX_JiCyddXHn=wHek9=c99+fNp22Zog@mail.gmail.com>
-Subject: Re: [PATCH v8 0/9] Support for block device NVMEM providers
-To: Srinivas Kandagatla <srini@kernel.org>
-Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Ulf Hansson <ulfh@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Jens Axboe <axboe@kernel.dk>,
-        Johannes Berg <johannes@sipsolutions.net>,
-        Jeff Johnson <jjohnson@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Marcel Holtmann <marcel@holtmann.org>,
-        Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
-        Balakrishna Godavarthi <quic_bgodavar@quicinc.com>,
-        Rocky Liao <quic_rjliao@quicinc.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>,
-        Andrew Lunn <andrew@lunn.ch>, Heiner Kallweit <hkallweit1@gmail.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Saravana Kannan <saravanak@kernel.org>,
-        Christian Marangi <ansuelsmth@gmail.com>, linux-mmc@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-block@vger.kernel.org,
-        linux-wireless@vger.kernel.org, ath10k@lists.infradead.org,
-        linux-bluetooth@vger.kernel.org, netdev@vger.kernel.org,
-        daniel@makrotopia.org,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-        Piotr Kwapulinski <piotr.kwapulinski@intel.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDEzOSBTYWx0ZWRfXwfJm2pI4QeXE
- AvrJLfEjI1PAv/ffkyN595A+MwkEBDvv6sngHRw46WtR4n0mnmV3QdKqmp5H6d85bGQedtacBYK
- x2PToumoHLjmJLht3ELDV08za6u5S2M=
-X-Proofpoint-GUID: 3M2lqzWdNaohNnz21IaZoHVBb9SkB8OW
-X-Proofpoint-ORIG-GUID: 3M2lqzWdNaohNnz21IaZoHVBb9SkB8OW
-X-Authority-Analysis: v=2.4 cv=er/vCIpX c=1 sm=1 tr=0 ts=6a638650 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=yOCtJkima9RkubShWh1s:22 a=VwQbUJbxAAAA:8 a=VT4XjZGOAAAA:8 a=EUspDBNiAAAA:8
- a=XoVDlNqzt-XzKL8N3f0A:9 a=QEXdDO2ut3YA:10 a=dawVfQjAaf238kedN5IG:22
- a=6CpsfURP9XNmmWg3j1mJ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDEzOSBTYWx0ZWRfXwch32qJXHsSp
- KoBJ7ZhP1U2KRxxjofX0xJxCvxRTW5NhIkHNql4wCkV1lpMYVSlSsH18RH80kgcQyy3IesBmNpF
- ZT/8lwT25+FVkLNiTC4dHvPiEXhaQA/qVKa+2AUgEs9hIYo8v7JTp1BFcdNIK+7b9JE+m+aBpzG
- 3Q4U5DP7dugncDBka52ipi9lLqzAjeDe7ZfrGiy36zlXwr2lnGkROod0FYeg4tRRBLzbp5+0gpx
- amAwijWeIspKNplcfJUtkUwjDErjmIVqf62MuesEjzAsK3Wn2tc+Z1lelcgtbR90P8xKwQjzl8T
- 3ENics7BINTtwhhMkJrAbPmQwY6yH3FF67RuAHAelmbyHrQBT+4mXceKNm7cEIH1Cop4jfBbVgo
- BYzALrjblF7JDiD4zrNf+mpHvr2sTwANz92GSMs2hGitOzELNUt9tECr2weD+6CRZP8+7UvrgnS
- 5/sjNFKQ1diS744huiw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-24_03,2026-07-24_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 priorityscore=1501 impostorscore=0 spamscore=0 clxscore=1015
- bulkscore=0 malwarescore=0 phishscore=0 lowpriorityscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607240139
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <6d1870c1-7fff-4569-8de2-bb45b83cde25@oss.qualcomm.com>
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099E2:EE_|DS7PR19MB5782:EE_
+X-MS-Office365-Filtering-Correlation-Id: 608b3435-18ea-4b18-6118-08dee999f148
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|61400799027|23010399003|7416014|376014|82310400026|3023799007|10067099003|11063799006|4143699003|56012099006|18002099003|22082099003|16102099003;
+X-Microsoft-Antispam-Message-Info:
+	ap2RLkORd1KzIdjJBxZbH4g6J8qj+22Xf++8cA1hLKw8ohNh495G1NdgL/53A4c1Y0WHE5SVTiW3NG5L82e2gQ+U63zw4fJX7iABXAhPeIaxhFCnAdsLIPYdwF0cRAzYzb1LiZwToS/KIGEZsIerRexjwVi2bIAHeqETO54nWq3gnCPjPS0LHX1zVIYrClAFAWIpQcVGFitBjfbcTaHnBJ4675XLGhp9EwmlwKEUzUVcPuqQCBGV7MkIc6FG3Xrxd23zsn6ngUT4Y7iV+m2KDDN67XdpiOK0S9wLevDsDjLjTIjkO1oYArdeEQZL0NH0G7jOZjSp6yDbqzSjCXA2nSdlictcnZumFErNfsSbFi1aonxlMjoUgi5yXmeYpSkAhtdeCggzWwHIIbvdFpGAlc22cqcJnmMaeREFGgnS2uY6BwUT9idOCNAh3qMO40uuSjaXGW7hGdYLoVlxdfLYNu1rTOsJZwcEUixOzIOczGsx5J6H/f7OsT8D2GXywVkYWecL/FNdsIz6AOKomcGAOVYtOgMSHRF1PdbDtIsV47VqSPrzhv6DaocEV8idSbQ9kE3FIkf4nYxYPtSoLrLfFNOkVX1875x60McqzVpeoyjkUJWhfe5mI35P9ofKZCVo2eYNBpJc4tvAsJ5zOUTUsVOxk7bbqIBqHTgfS9JI3qNiOlQot9tb4rfy27iXuFd9p7bqpxKhYbIhPX6YpOSOKg==
+X-Forefront-Antispam-Report:
+	CIP:84.19.233.75;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:edirelay1.ad.cirrus.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(61400799027)(23010399003)(7416014)(376014)(82310400026)(3023799007)(10067099003)(11063799006)(4143699003)(56012099006)(18002099003)(22082099003)(16102099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	LqrVsIYC7wEnFjYiCi9FneIio7B1WbWqaylwET4TYF5bZoy4bdp9RcooWlB3nCqPC5rQ2y8VmbVv+F//eRju6CargvKYZvTR2C1h/HMAKscDz5Pt6uQWDMjxjCRVRyFRVTh5Afi86pAY3cHhVm7c7WKckLB+wjcKLc1rirkDVwv6AXAnaUgrLRe9DsSSWVd8WvBi1p1VO/oArAiF48JiCJe3bG489DBgPSXqvZtdpBoA80ynNjG4nirprNNA8y0S0zn/fiP5KS8rXjWIrltdA0NSoK6/BdEriyO1QUqiGiGWaJgUTaOn2cCzLNit6CdzS0Ajnolc5wE7Z5mDpJ9UEq53iP71JVo09Q0CzpYGX/1+XeV9XfdWW512LRr8HV5yarFqzdGDHoGwqrfaF53p/a9MyBHdmaTjMDNB5twWEJJDi/jOqZ5Zm14fSIcCQFXg
+X-Exchange-RoutingPolicyChecked:
+	HRBQVyppxWgUL8o1R9+iv204X5iICVrk8bh9TtuWqBwxqXyVKGoMhsS4gWhLFsnxca3XyTSiDB63aFxRWXUxgq734ZXa7p/k+jV0+43EmPRyZd3kYzeVVy+9V6klPiP3bnmrc+WF9lSCR77MJRrkKIX9rNtu6quO0aYO9PKbXiUuZGgo1X7FsxfCbEQuNw8YEaOz19prPoYMaGmSi4wwpSBg5sjuRRwbdZO88qFvKUpaDvJgKERRwUNg0ccjTdhqqxyblnYpd/LeQr+wDoBF98tcb62ZjA4VgH7/j9i+jMmbG6jGVdkw0JurfqBygWmaBJoPlgNy59qorD0nDAtl/g==
+X-OriginatorOrg: opensource.cirrus.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2026 15:40:51.7886
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 608b3435-18ea-4b18-6118-08dee999f148
+X-MS-Exchange-CrossTenant-Id: bec09025-e5bc-40d1-a355-8e955c307de8
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bec09025-e5bc-40d1-a355-8e955c307de8;Ip=[84.19.233.75];Helo=[edirelay1.ad.cirrus.com]
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-DS3PEPF000099E2.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR19MB5782
+X-Proofpoint-ORIG-GUID: ZgPtF8CRrC01DDDi8OAEEZQ8Hr4_NzeI
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDE0MSBTYWx0ZWRfXykEXfolIBffq
+ lq82juaIRaKarkoD0VoHTqNTjZOOt8RnHXzjJV/cGrsoCv0r2rk/8r4+FnhMMRZB7xz53lr70Vl
+ zwTWa5K6lMLZPVNwIbzSnk4g6T9+YlQ=
+X-Proofpoint-GUID: ZgPtF8CRrC01DDDi8OAEEZQ8Hr4_NzeI
+X-Authority-Analysis: v=2.4 cv=BdjoFLt2 c=1 sm=1 tr=0 ts=6a63878a cx=c_pps
+ a=a1KkbayPxhvfYlTdgkZZag==:117 a=h1hSm8JtM9GN1ddwPAif2w==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s63m1ICgrNkA:10 a=RWc_ulEos4gA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=iX4cTi3TZMoOKdANLEfx:22 a=KfkQE9S9VqCBgivYGm0O:22
+ a=0gJhq8_m9W0SIoM8vSsA:9 a=CjuIK1q_8ugA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDE0MSBTYWx0ZWRfXy/e+meWhebpB
+ cO0mZuM0qP20mH72VUGX6CbHYpw41/XL765aiORcHMgP+/OETEUGLUlwa3JRVkOIwcyM8eKk8ut
+ hVsi0BuQTZi7SWNZPfvfbXWXIjmr9ytryeudyAVNxh5CM7248+qMbhgDXKdklVVhDBs4bqS6My1
+ OrLSfbU+SIB7KrxhHu2YyPMwHrdZZk0+SAbALQ3Uthp38opFL2tSJUyTUK7AUqKIy5rppjbINex
+ MG3hO2/M6SqxacLldoVR09ytUqqgPqkzqKXxKHQvOgyqgXYu6fbSeImGQi68tcSAlkUkXYPjS5S
+ yaez/1Fp4rgV+TmxqXE3E8Ki4Q/mq9eMnooEwXdISnYtGmPhcgGNwcQJur9AhGAlSslyEiPFW2l
+ +sZtSg44k47OPD9g0G/XY6sVUu7z3Al9OjGTIVxWl0c68mWwTIFrk5ZBDy5ekWy0+nI89b4EnHK
+ isxe7hq84lTTOJUYYRw==
+X-Proofpoint-Spam-Reason: safe
 
-On Wed, Jul 22, 2026 at 3:56=E2=80=AFPM Srinivas Kandagatla <srini@kernel.o=
-rg> wrote:
->
->
->
-> On 7/3/26 2:45 PM, Loic Poulain wrote:
-> > On embedded devices, it is common for factory provisioning to store
-> > device-specific information, such as Ethernet or WiFi MAC addresses,
-> > in a dedicated area of an eMMC partition. This avoids the need for
-> > and additional EEPROM/OTP and leverages the persistence of eMMC.
-> >
-> > One example is the Arduino UNO-Q, where the WiFi MAC address and the
-> > Bluetooth Device address are stored in the eMMC Boot1 partition.
-> >
-> > Until now, accessing this information required a custom bootloader
-> > to read the data and inject it into the Device Tree before handing
-> > control over to the kernel. This approach is fragile and leads to
-> > device-specific workarounds.
-> >
-> > Rather than adding a new NVMEM provider specifically to the eMMC
-> > subsystem, the new support operates at the block layer, allowing any
-> > block device to behave like other non-volatile memories such as EEPROM
-> > or OTP.
-> >
-> > This series builds on earlier work by Daniel Golle that enables block
-> > devices to act as NVMEM providers:
-> > https://lore.kernel.org/all/6061aa4201030b9bb2f8d03ef32a564fdb786ed1.17=
-09667858.git.daniel@makrotopia.org/
-> >
-> > It also introduces an NVMEM layout description for the Arduino UNO-Q,
-> > allowing device-specific data stored in the eMMC Boot1 partition to
-> > be accessed in a standard way.
-> >
-> > WiFi and Ethernet already support retrieving MAC addresses from NVMEM.
-> > Bluetooth requires similar support, which is also addressed.
-> >
-> > Note that this is currently limited to MMC-backed block devices, as
-> > only the MMC core associates a firmware node with the block device
-> > (add_disk_fwnode). This can be easily extended in the future to
-> > support additional block drivers.
-> >
-> > Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
->
-> What is the merge strategy here, Am happy to take it via nvmem tree if
-> all the non nvmem patches are acked or reviewed-by.
+On Fri, Jul 24, 2026 at 03:31:51PM +0100, Srinivas Kandagatla wrote:
+> On 7/24/26 1:36 PM, Charles Keepax wrote:
+> > On Thu, Jul 23, 2026 at 02:24:19PM +0100, Srinivas Kandagatla wrote:
+> >> Thanks Charles, for the feedback.
+> >> On 7/23/26 11:17 AM, Charles Keepax wrote:
+> >>> On Thu, Jul 23, 2026 at 12:42:10AM +0100, Srinivas Kandagatla wrote:
+> > Yeah agree be good to get the DT guys thoughts on this. It seems
+> > like a misstep to me to insist that the SDCA spec implements a
+> > completely different system of storing information for DT. SDCA
+> > is what SDCA is now, and supporting two different parsers seems
+> > like work no one needs when the one parser we have would work
+> > fine for both.
+> Am not sure I understood the two parser concern, what we are
+> representing in the table is something that sdca core already does after
+> parsing acpi tables. So we are reusing the same structures. Its like
+> result of already parsed acpi tables.
+> 
+> I did try
 
-I am planning to pick up patch1 (dt), but waiting until all the
-complete series is ready to go.
+Apologies for not being clear. It wasn't strictly a review
+comment on the code in the series. It was a wider point that at
+some point the world likely will want to put SDCA data in DT,
+when that happens there are basically two choices:
 
-[...]
+1) Use the "same" representation as ACPI, in this case we can
+share all the parsing code we have now. But some of the things
+might be a little unusual for DT.
 
-Kind regards
-Uffe
+2) Do something more idiomatic for DT, which would likely end
+up looking very different. But this would require a whole new
+parser and lengthy standardisation process.
+
+Mostly what I am interested in here is getting at what the end
+goal is. The impression I got was that really everyone from
+Plumbers was really more aligned to 2). I am not sure I agree
+that is the right choice, although willing to be convinced here.
+
+> > That said I don't totally object to the idea of an option to
+> > supply a static block of information as you are in the series. It
+> > could be useful for transitional and work around situations. But
+> > it doesn't seem like a good choice for SDCA on DT going forward,
+> > it is basically going back to the board files that DT was saving
+> > us from.
+> 
+> Either we have this at driver level or at dt level, both of them have
+> pros and cons.
+> 
+> If we decide to go with dt, this how the dt entries will look like, this
+> should give fair bit of idea to DT maintianers for discussion.
+
+Thank you so much for mocking this up, that is very helpful.
+
+Are there additional constraints from your side pushing you
+one way or another on this? Or are you happy to do either? I am
+thinking things like DT needing to be flashed onto systems that
+have now shipped or something.
+
+Thanks,
+Charles
