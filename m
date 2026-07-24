@@ -1,112 +1,85 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BC9241D621
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 14:32:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DA1F37F01A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 14:47:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784903580; cv=none; b=mOeCOCbJPtV2+do4XjSs6Vh2Kq0TVEu680CHHDrQOSh2PiICEGF4umwA/YA19k88VjtzAV+FRW8fAGrGJIKsJD9oCSsy52532z5PBoEPj/DP6wxQsRSDNZ8JrbG2lfkSgHkXUMR/i3v9BmGJyPlfDekWjfjhGUymrpWkkTVMa7M=
+	t=1784904472; cv=none; b=HWW+h7YJ6R5nVNmblloCXIFc2Uk7CPeKFliP1Bpfr5DRug9DtIIp1JuFQfsHTVaKZssE2uB9OaRgJq7NK+W1zzTlRCr1e4Bo3gVHOU3ioqzMZ0zX3vaMrYO3yd8FrHgtXrtREdOi99wqMiv440/GiE0WaWdtBSr4IDVfBxekOa0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784903580; c=relaxed/simple;
-	bh=TrVK3xAgf8NEmlUAEO3dFXpjqc9Ja3eQp2C0bE+fWBM=;
+	s=arc-20240116; t=1784904472; c=relaxed/simple;
+	bh=4N3ItXJXlLDuayGvYw0Er4J15YWZM3U77r1bMBZFL+E=;
 	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=P4U1aK0i2pdKNCktdq70Gn9S0ahEqdghUJje5pUTpJkb8ADrrQ19PEzCZROC+DFeV4u+514tpL37ODUPSjnLIHafpGJxvXo8tBI412l6MFfvrBEmK8Wi/DWkzkAFNvW8AmEjgHpgDPGT8BULqZOOCqShqLy9FrcAZEVaFo2ddvM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=g2m0WPbc; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=RZjEuDYsvlV75Gis67uZm4Z192auJip3SNTUhEoywrC/TNilqnmnQGC1iHE6cYycQWXKWExtUsTYznLlidXE0Hc/aKF4fhgIqjkbzjcgcGKyIeMBstJ6twOdejYICDMZDbcb9ycSr9o7iORdOHjBGXYYlNXaGYkF1KtGUU1jlYE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EgUjeDJt; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="g2m0WPbc"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE6E51F000E9
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 14:32:58 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EgUjeDJt"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DBA831F00A3A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 14:47:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784903579;
-	bh=9oMWWNXv4iXXLNSmmi6+UqEshM6pQiIPMyI5OuA2LB0=;
+	s=k20260515; t=1784904470;
+	bh=4N3ItXJXlLDuayGvYw0Er4J15YWZM3U77r1bMBZFL+E=;
 	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=g2m0WPbclCp3BtbdptdfYOR1n7TYu1Ds/46ukeoEWYERRu5qKihEEYpfxD/yA5Dr+
-	 k3wfwCNUJwnLp1XPWg5DFBazapmL1e6m59Zzb/DJYYXQTvGpRSQwm5jO+C9PNihdfN
-	 NP2feMimtW+oKpkmYpLiNwyekDxcIZb9/uSsyCw4tjYY0Kz82I8lYSja9jLk4iAhll
-	 qvU+4S5DxVzHuyABY03JMOO4g4L0ZXXtu+XfpBjErQvYc6kljjrBNlZxor8SgCgIfm
-	 ked9B17lDJAONTHIcg3fxuqELXErez6A/YvQbrIFBBfYiY2r5ONCIHrpSNm47fV6nN
-	 D7vgLOikdQWHQ==
-Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-383cb94f742so443900a91.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 07:32:58 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rps8tDkmpW3Lyyv6LFrJ6ke/tEdGpoKNUHXztXhmNJNGrfbz5a74C/G5P/RvjVyoIlqYWzANiCDJN73LyRn@vger.kernel.org
-X-Gm-Message-State: AOJu0YyChxceTpI9oW9kP7lIvme1DCXi/hcsI3VmTXKGQ5QchniHP+VT
-	KmmV7QZ8j+4X37nwcPdymrZqXFRwDPnMKwwo7W0swynon0H4K4w0ygiYYYaTCbIuvG7CMWpKUHu
-	PjClrs3cEay/sEWZf4KuwwSKr3W8dIG+1mGto8+fZaw==
-X-Received: by 2002:a17:90a:c2ce:b0:37c:607b:2cd9 with SMTP id
- 98e67ed59e1d1-38ec65d78a0mr7290586a91.0.1784903578684; Fri, 24 Jul 2026
- 07:32:58 -0700 (PDT)
+	b=EgUjeDJtYNL2nzAWfSpeNe/52YEjo8oJhCQUGBqIbjCpGdsymwMf2b1pnTrxfFOos
+	 pEklBNeNVd9zz/4kLVCbZf3wbTQOaoOb8Is1YfCK8cj1A7UXwyj1nHukN3cFzxq3Mf
+	 ggnNQJwVxwA0TwdCsT6iAdoyaOge8dRQJtlDlJOeamOUApdOA481+bWtVYsLgick5D
+	 n0bHHe6/lqbN0a/pS45L7M6otPBVnALHoFVGGya6Lz4HXx2s+e8XGRA6UillbdlYyL
+	 DDRdY7LJWS371V1TByd/3x8CHSmkIri1xKi61x54a4z4FxWp+Rv4ZPBI2+XwpkQPlD
+	 xl7lvWseazeAA==
+Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-5b2aa3be376so407739e87.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 07:47:50 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RoOm2kzE2B2r7wzk6C5xlX2yrkCAfZyTvinSssKo2YFrDDy9KRU633WTDxbTTkqlZu0H7AFxtVPaYLxmEiP@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx+yNjHKVc8VD/yedf+DrnZe1p6OP18MTLpca6o+Aek5p7ljlRe
+	rs3Wva6jDobeOoJL6/L/8MObmtXCbXj2q9mwfYENTumUe+Rr44ynVk4L5MgF1/l7VvUVPuRjyPE
+	y2rEtMAboAKw/DFK7V6rpVfQxMkzJ+XSIqFoeOj3BAg==
+X-Received: by 2002:a05:6512:3706:b0:5ae:af9c:c064 with SMTP id
+ 2adb3069b0e04-5b2b2f77e76mr1176358e87.60.1784904469670; Fri, 24 Jul 2026
+ 07:47:49 -0700 (PDT)
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 24 Jul 2026 07:32:55 -0700
+ HTTPREST; Fri, 24 Jul 2026 14:47:48 +0000
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 24 Jul 2026 07:32:55 -0700
+ HTTPREST; Fri, 24 Jul 2026 14:47:48 +0000
 From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260724141708.2212057-1-prasad.kumpatla@oss.qualcomm.com>
+In-Reply-To: <20260724141414.GB1876@sol>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260724141708.2212057-1-prasad.kumpatla@oss.qualcomm.com>
-Date: Fri, 24 Jul 2026 07:32:55 -0700
-X-Gmail-Original-Message-ID: <CAMRc=MfU=u7tH2r19H9Ex9uEDAb1V3Fanzi2EuqzB+iohPQkog@mail.gmail.com>
-X-Gm-Features: AUfX_mxKy-BFtPHI7CTj-67OZpQPRwllkZkLnNB35Dfo2nS4aqOj6RnMmZnC0Yc
-Message-ID: <CAMRc=MfU=u7tH2r19H9Ex9uEDAb1V3Fanzi2EuqzB+iohPQkog@mail.gmail.com>
-Subject: Re: [PATCH v6 0/5] Subject: [PATCH v6 0/7] ASoC: qcom and pinctrl:
- add LPASS LPR voting and Hawi LPASS LPI support
-To: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>, 
-	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
-	linux-gpio@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org, 
-	Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Srinivas Kandagatla <srini@kernel.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+References: <20260724050645.223799-1-ebiggers@kernel.org> <2026072410-drained-acts-3502@gregkh>
+ <CAMRc=MdJTFokXLEbJMQW3V4FAMQid50Vx3fDB+CaNGUrzX-Pwg@mail.gmail.com>
+ <2026072412-decrease-sandbag-70a1@gregkh> <CAMRc=MeFoG0UXYOAqYhCiKBTs12EjX2-Bz4wDnbeYXmQA3-OaQ@mail.gmail.com>
+ <20260724141414.GB1876@sol>
+Date: Fri, 24 Jul 2026 14:47:48 +0000
+X-Gmail-Original-Message-ID: <CAMRc=MfU1egvJwmgPEN-GXPbz8_JL2XnP-LV0T2+jG-drfXYwg@mail.gmail.com>
+X-Gm-Features: AUfX_mxiLdlLDPuAY8bGYAp0jB_4PqlJMNgcVDkjsy6Zb-mnOtnr1gmlaGXjefg
+Message-ID: <CAMRc=MfU1egvJwmgPEN-GXPbz8_JL2XnP-LV0T2+jG-drfXYwg@mail.gmail.com>
+Subject: Re: [PATCH] crypto: qce - Remove driver
+To: Eric Biggers <ebiggers@kernel.org>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, linux-crypto@vger.kernel.org, 
+	Herbert Xu <herbert@gondor.apana.org.au>, linux-arm-msm@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, 
+	Demi Marie Obenour <demiobenour@gmail.com>, Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Bartosz Golaszewski <brgl@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, 24 Jul 2026 16:17:03 +0200, Prasad Kumpatla
-<prasad.kumpatla@oss.qualcomm.com> said:
-> This series adds support for LPASS low-power resource (LPR) voting
-> through PRM and introduces LPASS LPI TLMM pinctrl support for newer
-> platforms such as Hawi.
+On Fri, 24 Jul 2026 16:14:14 +0200, Eric Biggers <ebiggers@kernel.org> said:
 >
-> On such platforms, LPASS requires LPR resource voting via PRM to keep
-> the subsystem active. This is handled by adding a new clock ID and
-> support for PARAM_ID_RSC_CPU_LPR in q6prm.
->
-> Additionally, a new LPASS LPI TLMM block is introduced, requiring a
-> dedicated DT binding and pinctrl driver.
->
-> Dependencies and merge strategy
-> ===============================
->
-> This series introduces LPASS_HW_LPR_VOTE in
-> include/dt-bindings/sound/qcom,q6dsp-lpass-ports.h.
->
-> The LPASS_HW_LPR_VOTE definition is required by:
->
->   - the ASoC q6prm LPASS LPR voting support, and
->   - the Hawi LPASS LPI DT binding.
->
-> The LPASS_HW_LPR_VOTE definition in qcom,q6dsp-lpass-ports.h is
-> used by both the ASoC LPASS LPR voting support and the Hawi
-> LPASS LPI DT binding. As such, the header update adding
-> LPASS_HW_LPR_VOTE should be merged ahead of the dependent
-> ASoC and pinctrl changes.
->
-> The intended merge strategy is:
->
->   1. Merge the dt-bindings patch adding LPASS_HW_LPR_VOTE to
->      qcom,q6dsp-lpass-ports.h.
->
->   2. After the header update is merged, the remaining ASoC and
->      pinctrl patches may be merged through their respective
->      subsystem trees.
+> And with the defaults QCE is *never* used.
 >
 
-Do you really want to wait an entire additional cycle for a one-liner to first
-get upstream? I mean: I don't mind it but it's a weird strategy.
+It's almost EOD here and I'm going to disconnect for the weekend but I just
+wanted to say before I leave: this has never been a reason for an aggresive
+removal of any driver. We remove drivers when we stop supporting entire
+platforms, not mostly unused drivers on actively *supported* platforms where
+they can still be used for experimentation and testing. I'm fine with dropping
+this from arm64 defconfig but with fixes, the BROKEN tag should be removed
+and I definitely object to removing it from the tree. How many people still
+use greybus? Should we drop it from the kernel too? And I'm saying it as
+a project ARA alumni. :)
 
-Bart
+Let's pick it up next week.
+
+Thanks,
+Bartosz
