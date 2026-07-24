@@ -1,563 +1,310 @@
-Received: from sender4-op-o11.zoho.com (sender4-op-o11.zoho.com [136.143.188.11])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C3014156C5;
-	Fri, 24 Jul 2026 12:10:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.11
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784895045; cv=pass; b=RkOnOAJbCvrYe6nFIu+WwB9zC+ndwrsE+EXDC+GUgzV5XNFzIjC+W82l5mt2btUOyY2jUNh/73FI9w0P5cKo2nAELD6qXZtCNulFLzuB2bu1nXISagLRM6nBMq/q+0VTxHzBNWtRwunQWUE8rIcP6GldGmI93Mxy0NfRh8uoI+c=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784895045; c=relaxed/simple;
-	bh=3PVL60uLcRI4yvDQx1IrwymmB1TFYT1vk37fGhTxmlE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=iug1u3ZYfgGb7v8t0GfuTxFmAzvZhesRAarLJ5C6AilpyWrzLX9dbjokQPvpba4A8eIou+hxiDPnSY82HTqqMTSepuyyWEbTRLzjVUpyM2AmILIvqk2Eu0U6phPI9M3vyFnNHOnI4GWcRiIlThuNJzedAAZa6azLcb7IadN0G6k=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=adrian.larumbe@collabora.com header.b=DM9IjqJU; arc=pass smtp.client-ip=136.143.188.11
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F12A5429CCB
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 12:17:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784895435; cv=none; b=R3nsMMwjsIK8CbJiuA9WUv2SzQ6wvGoQuE+cMvyBHLzIhNg5OewRlCQGkRDlRbeyvNRJ2d3a5HG2cUUSgresV4YjbI1dI/F68VWCvjiLu3rsZJgbwLlGrlOd1PGdS8j2tDo0Y3w8oqUIE1trIhn6FKRuWp5fUS3ZlqSW9n6oSWw=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784895435; c=relaxed/simple;
+	bh=WPwiJqExHTdjO20g/ADWAvcKz5CjWKZD4kv8WtBFk5s=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=kV9koiKRrcNkw59kE+Ffgn7QQK+CQkuT9iBc/iDDRMRZDuxf3Gh6y9Ju3bABf1NMWrwi+L7cPHwojnECFB0VITU3dcAxxV7XbiUEIvv8RMeO4Tg6HclyubUqQcOAn7Vfg4ookIbm4gLTKHlCUSxq2wn7y0IYJzVeJnqkvhUYsS4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ks/s2ZbZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gYTRnpXl; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=collabora.com header.i=adrian.larumbe@collabora.com header.b="DM9IjqJU"
-ARC-Seal: i=1; a=rsa-sha256; t=1784894957; cv=none; 
-	d=zohomail.com; s=zohoarc; 
-	b=XytxdjCGX9EVUPtKHF9e+bqP8A0cCXkZpjpzzRG0dGjvUYRYcAh6Y28Aq0zdwe+8AdS0x2LLhgchFvco13lZXmzHRS1P311dnA5e7UXs7dXA0MgXm1/tA6glovCBav/JXtd1SH6LVt1sIIOsu4z+/L++ZRAMXpwvZ6Y9a5hq7Og=
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
-	t=1784894957; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
-	bh=DeEZcBVEsWInovxiw4dTOa5TRdK+0FTpKBalsMipvug=; 
-	b=JnD439G1G5v2NpSXVTamKPt4m956jX/SiSkVFQJyR8L+/Tzfcz085c8FPQDIm1O9UU0rkWqmeYYp/9INnwOJJg9koEjGsYp+o3hKrvNRRHQQP9jIuiTFBONMiQ50KaKCTWw3+QtroSfWuKweTO9haNeRIBLOFveMfJT9agHj8Xs=
-ARC-Authentication-Results: i=1; mx.zohomail.com;
-	dkim=pass  header.i=collabora.com;
-	spf=pass  smtp.mailfrom=adrian.larumbe@collabora.com;
-	dmarc=pass header.from=<adrian.larumbe@collabora.com>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1784894957;
-	s=zohomail; d=collabora.com; i=adrian.larumbe@collabora.com;
-	h=From:From:Date:Date:Subject:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:Message-Id:To:To:Cc:Cc:Reply-To;
-	bh=DeEZcBVEsWInovxiw4dTOa5TRdK+0FTpKBalsMipvug=;
-	b=DM9IjqJUPkdiUu8sGP59ecg8r/tMoNO5Ucrjlfp4CnQV0i6E7tPp3MHZHIK06Xf+
-	EyXUTV8YPyUEvAZ8TTPMKZdAi/yeV5ewIIepEP577y2UoMRbsytnA4WAQYtOppnR8oO
-	8MACe4aWiJ5XesjgWMqpy/fAHasX7/jXdqs3/ukY=
-Received: by mx.zohomail.com with SMTPS id 1784894955910533.5313550215117;
-	Fri, 24 Jul 2026 05:09:15 -0700 (PDT)
-From: =?utf-8?q?Adri=C3=A1n_Larumbe?= <adrian.larumbe@collabora.com>
-Date: Fri, 24 Jul 2026 13:08:58 +0100
-Subject: [PATCH] drm/gem: Move pages_to_sg helper into drm_gem.c
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ks/s2ZbZ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gYTRnpXl"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66OADXa42875694
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 12:17:10 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	FSWXtcS83AIi2knBSqKxmPr/gYdQSfFpx+mSI6DOVs0=; b=ks/s2ZbZ0EeYySQN
+	f84U+i1uzY+Sd84l9DmuTV7x4qDh9cPo4f3p9VGvBPaY3K9Zr76zRtXlAaGiE8kd
+	LamjMpiup98NaM6l+bL9souA2ShvjGhVMbHZpnX33EZ6OC96q6XRSgunIbqUcQ5E
+	aTVA1v8W71GrEzAbiRPR7uGcv0SdEUddX0j8zsFLHVFhc8HeoKv6wikTx7/XASow
+	j3D4ZrHsmNgAGPm/D+TeOjYo4Wbt7xXKVx7Dre35E2ga2eM3c4aPQf4wX09vlV1u
+	rKWhMk+IMoulx353T0w4fvEm/6KCd8tMo3RM+lS5VLq/+bQ4Vt9K54bozzhNrRqP
+	P2t/Fg==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fm5byrn0w-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 12:17:10 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51ebdfceddcso6210561cf.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 05:17:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784895429; x=1785500229; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=FSWXtcS83AIi2knBSqKxmPr/gYdQSfFpx+mSI6DOVs0=;
+        b=gYTRnpXlSVyUH3nvB1fhPE8z63qOsnbNgjW5+xZu0JQCXyU8fXRFS6EAckIwFKsFbM
+         kSXyw2/cgvhrKgPmX2nJS6QmbWA87SSGkoC6WqH72oj3DQt6tmU+R6k998jbUnpl5B4C
+         uiGk7uWx8GjGh949ImPSN3BfnVKNQvYQfad6NUuAjhUfUrHavifsJb50mi9kxq5ORMIk
+         9nNUCUKDy/YBNLPnPGFNwpio3DgTnor3uG/5mTb2m9Sz7BwMHcZ+hYKR58bWNB7qriiw
+         L9qA8g8QFpVx4Gp4CUIqHuku0B1ZHwLh2TvCpm9G5ozUl05KeA+rKgH2qf8ifLjWP/Xl
+         O0tA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784895429; x=1785500229;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=FSWXtcS83AIi2knBSqKxmPr/gYdQSfFpx+mSI6DOVs0=;
+        b=S5cIZZX0lBdHk7gcI0a4w4fY+5yq+AMeMmvVum+6epAjMsL9vC0gCeSkeolgyNR9ZL
+         sNfs7SJhqzXYYeb33yLiAqjZBTXV4jt16WDosYq7AbK6FogAAUduRtuGq3BrSNw7eDWa
+         Yj5sWSyVNF6IUEOTq2nzsNxOT0w9g2lMBw+LjS8Q1T2ZbFLZ+9YW4YDS8m3aGLElGILf
+         XSATKNiypiGqt886yxhbGIiyL2MiWn6o+v+Ptis8PycYM1TeKNFi5yK2IrkT/UbA4jbC
+         WjT4fvXAJIsznxL2L+FwbE2jj745hVOEa5U6T6Krh8Iapvt2Csg7HLMwAoVL7cuk7zhm
+         MrbQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rphcm0gbkdYGmcjHQxjwcp/l/CJfEJ/0tg865+Yt+gY/6tKwcCzDhRb7UuVxmNbDyeyNamH3PhFb5OOi741@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw9xN9Ox8snY5bZ0gUiLU+EibCxYJeS8yKp8DckueIPfs9ibdO3
+	eWI9It7VTiTa6SunOYjYMiupFAe5iA4JF80IVcQJJ3V81fs+ExiHW1lnFxgLFVwWA0KERondMcM
+	QiXN6fqbgADbI/KGYPkIElukJahEWYzymm3207eWL+ygWvednqHZ+EYlh4ZMZcrAHPbXk
+X-Gm-Gg: AR+sD13YYzeWEOKjm454jcmhBr6+CtE3Blvha/xyxSOJwJqlN+Oc2Mg82Acg+tkJvRV
+	QRlsYvKF9AeIaV/669Z3hEOy/F6dc3GfDHd8d4h1T8Vun2grxIjfw+H8wZoKlPd92Iodc4j6/If
+	xt45Wl673J5G6D+ZLzwNesg9Sq2BevaEMcEhsjs45IyndfFOtNsAfLw5LIcOMwiTO6t/q3fxUO0
+	eLrmE79gTS9nd/i+CjWKhU2YWoOL6nqR9XGcn4mT4C+CbCAYzvJEJ5/ZjhXXI0LUTi0U0kgbYyO
+	aHxDm/in9qpdYbLxsZqGY0sBz5Y59/rsLLEfAVsxQGrxFGsp3AVFOUHTG+ZkET1NTMY5fntfNLd
+	z+B7qFAer+tEmE6Ngb9rlkblVOB8=
+X-Received: by 2002:ac8:5a4b:0:b0:527:69dd:5413 with SMTP id d75a77b69052e-5283dda9badmr68654561cf.5.1784895429197;
+        Fri, 24 Jul 2026 05:17:09 -0700 (PDT)
+X-Received: by 2002:ac8:5a4b:0:b0:527:69dd:5413 with SMTP id d75a77b69052e-5283dda9badmr68653941cf.5.1784895428673;
+        Fri, 24 Jul 2026 05:17:08 -0700 (PDT)
+Received: from [192.168.68.114] ([5.133.47.210])
+        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-47f85b9a60asm24387356f8f.3.2026.07.24.05.17.07
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 24 Jul 2026 05:17:07 -0700 (PDT)
+Message-ID: <06aef9a5-7e8e-4262-9b41-a9c43f588da9@oss.qualcomm.com>
+Date: Fri, 24 Jul 2026 13:17:06 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 0/8] ASoC: SDCA: enable on DT platforms and add
+ Qualcomm WCD9378 (Tambora) codec
+To: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
+Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+        Charles Keepax <ckeepax@opensource.cirrus.com>,
+        Maciej Strozek <mstrozek@opensource.cirrus.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Bard Liao <yung-chuan.liao@linux.intel.com>,
+        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+        Richard Fitzgerald <rf@opensource.cirrus.com>,
+        Luca Weiss <luca.weiss@fairphone.com>, linux-sound@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        patches@opensource.cirrus.com, linux-kernel@vger.kernel.org
+References: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com>
+ <20260723194045.49021-1-jorijnvdgraaf@catcrafts.net>
+Content-Language: en-US
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+In-Reply-To: <20260723194045.49021-1-jorijnvdgraaf@catcrafts.net>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Message-Id: <20260724-get_pages-v1-1-b10e5d65628e@collabora.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDcyMT3fTUkviCxPTUYt1Uo1RLw2RT49TERGMloPqCotS0zAqwWdGxEH5
- xaVJWanIJyACl2loAZ6PVx20AAAA=
-X-Change-ID: 20260724-get_pages-e2e91c53eaa3
-To: Alex Deucher <alexander.deucher@amd.com>, 
- =?utf-8?q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- Lucas Stach <l.stach@pengutronix.de>, 
- Russell King <linux+etnaviv@armlinux.org.uk>, 
- Christian Gmeiner <christian.gmeiner@gmail.com>, 
- Jianmin Lv <lvjianmin@loongson.cn>, Qianhai Wu <wuqianhai@loongson.cn>, 
- Huacai Chen <chenhuacai@kernel.org>, Mingcong Bai <jeffbai@aosc.io>, 
- Xi Ruoyao <xry111@xry111.site>, Icenowy Zheng <zhengxingda@iscas.ac.cn>, 
- Rob Clark <robin.clark@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, 
- Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- Lyude Paul <lyude@redhat.com>, Danilo Krummrich <dakr@kernel.org>, 
- Boris Brezillon <boris.brezillon@collabora.com>, 
- Steven Price <steven.price@arm.com>, Liviu Dudau <liviu.dudau@arm.com>, 
- Sandy Huang <hjc@rock-chips.com>, 
- =?utf-8?q?Heiko_St=C3=BCbner?= <heiko@sntech.de>, 
- Andy Yan <andy.yan@rock-chips.com>, 
- Thierry Reding <thierry.reding@kernel.org>, 
- Mikko Perttunen <mperttunen@nvidia.com>, 
- Jonathan Hunter <jonathanh@nvidia.com>, 
- Zack Rusin <zack.rusin@broadcom.com>, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
- Matthew Brost <matthew.brost@intel.com>, 
- =?utf-8?q?Thomas_Hellstr=C3=B6m?= <thomas.hellstrom@linux.intel.com>, 
- Rodrigo Vivi <rodrigo.vivi@intel.com>, 
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, 
- Sumit Semwal <sumit.semwal@linaro.org>
-Cc: amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org, etnaviv@lists.freedesktop.org, 
- linux-arm-msm@vger.kernel.org, freedreno@lists.freedesktop.org, 
- nouveau@lists.freedesktop.org, linux-rockchip@lists.infradead.org, 
- linux-arm-kernel@lists.infradead.org, linux-tegra@vger.kernel.org, 
- intel-xe@lists.freedesktop.org, xen-devel@lists.xenproject.org, 
- linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, 
- =?utf-8?q?Adri=C3=A1n_Larumbe?= <adrian.larumbe@collabora.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=17563;
- i=adrian.larumbe@collabora.com; h=from:subject:message-id;
- bh=3PVL60uLcRI4yvDQx1IrwymmB1TFYT1vk37fGhTxmlE=;
- b=owEB7QES/pANAwAKAQ4mfkzuU0M9AcsmYgBqY1XgrrsDazA78XCqv4Hkn/ujXzt2KDrdKQQnM
- HDXI/outcGJAbMEAAEKAB0WIQQyQDDowAUXXfk3B6QOJn5M7lNDPQUCamNV4AAKCRAOJn5M7lND
- PRlEC/4otGAiqlGdJW1PM79TRx/wgUCZsSgcgrihNvGOYUqY7R9iKNivSpxEvj7LI/vuWtkk1Sc
- zz5Fl15Hx81JDA5QrDvVIaw6+h2UxR/395AaKIu6dxEVD/nUAljE+CGzvKXvbg1ef5mcl5xwkEU
- NG8Zife//57e2Cxx3jlm8K05OHWpAxmvpgK/+TnbbjGN0S2sU0mKLKkOI/IjpKDtXbRawqmkP8f
- ig5FFku9ryqj7iISJIc0IHOFkwlK6amszLd0X/XZqc5HCl3rWVGWNYBC0brOGcyxZ6Cz+vBACkw
- Fxxqt5KEzITsrBK+ame24r5yCJ36qiVAuHoy1Yrw9GO3H4xt/8zM7lCwOdCUkFmyErXSPHmjSQr
- 4uEDJziN3dnZkl+tTIHkGxbVzjQZgTaLF8XDZFaFpMCUz+aIyb3LpPY7hirfcwSnFl7UoaiynXg
- nXS0x8DIJ3+QDNXhi7eYtwSDPtiuv6RTaJlr8oBkoACoTgxRbv8Q+ZCgyvm91ZdVCDtDk=
-X-Developer-Key: i=adrian.larumbe@collabora.com; a=openpgp;
- fpr=324030E8C005175DF93707A40E267E4CEE53433D
+X-Proofpoint-ORIG-GUID: rZ2MCAySjs-9xtD6QKTTgUG00IfSJIWH
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDExMSBTYWx0ZWRfXwGBaGG96c7JJ
+ yEdkBP3x+oefAYQzZn7XWizAMPYpyVs8kVNQKQYGUxKqpBpPnH7Qp1g3otJRGWmDDv4vr+cXTuR
+ XDl10bM6aX4mQVtsH9DmxqcKnwNDJsM=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDExMSBTYWx0ZWRfX8eGaDl3TZFky
+ 983T1YsOykV2unkhVMMDeuXR/H1nV0cQ5dYadjgPilycPrDiFBQp+xosA4QygC4ltNZJEybagSe
+ 9O5FiC2UJathPZHvd/iq25TigivdHAcL8Yb15yXe1PQLnw92h7KmjGbHyUKjdcOtuKGos8a9ecU
+ 02Ue3qyv45p+3r20drA1n78Ao52G1+ysURo3uba6ejKzEHx75enyNsts0nMgfvN+EFP0qWHhOPQ
+ m0HbxmWqX20RfE1TWpGiH1rl80rFN0k2jhA74RffHsjw7HzAJdKCsHjAEkYvBVowgQCMPS4CQRK
+ dhRpWOayFZX9Llouskcns23B+9BxBFowPf+KnvEAU0qy+QRgKhdDQ/qU7rYavz1QZV0m5hsFoNW
+ 9PJRr0WH+8k5BmqE3rGkeh63ex6goGou0dbxdVCYKZsXxYIX5R/AHC7dqWWyDClBmlFTUMxrfg3
+ /ro0PlbJAft99nyQjYQ==
+X-Proofpoint-GUID: rZ2MCAySjs-9xtD6QKTTgUG00IfSJIWH
+X-Authority-Analysis: v=2.4 cv=GMA41ONK c=1 sm=1 tr=0 ts=6a6357c6 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=GYSh3LzNAAAA:8 a=2FLSfOfDB4kTeDBI9AoA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=a_PwQJl-kcHnX1M80qC6:22 a=lWcdFasyL5yHfcDTNXXo:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-24_02,2026-07-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 impostorscore=0 phishscore=0 lowpriorityscore=0
+ priorityscore=1501 suspectscore=0 bulkscore=0 adultscore=0 malwarescore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607240111
 
-None of the semantics of the function tell of it being a PRIME-exclusive
-entry point. In fact, most drivers seem to be using it to translate a list
-of pages into an sg table that can be used for GPU mapping later on, rather
-than just for sharing an object's pages with another driver.
+On 7/23/26 8:40 PM, Jorijn van der Graaf wrote:
+> Hi Srini,
+> 
+> On Thu, 23 Jul 2026 00:42:10 +0100, Srinivas Kandagatla wrote:
+>> The most obvious follow-up is figuring out how the mobile-mode and
+>> compute-mode WCD9378 drivers coexist under one compatible.  Jorijn's
+> [...]
+>> tree without racing to bind the same slave.  I would like to line this
+>> uip with Jorijn as a follow-up to this series.
+> 
+> Happy to line this up. To ground the discussion I ported the series
+> onto my FP6 tree and have mobile-mode capture working end-to-end
+> through the class framework, including PipeWire in Plasma — findings
+> and a proposal below.
+Thanks Jorijn for trying out and confirming that capture works.
 
-Move it across files and rename accordingly.
+> 
+> 1) Arbitration, near term
+> 
+> Your probe already returns -ENODEV when qcom,compute-mode is absent;
+> v2 of my mobile series will add the mirror check, so neither driver
+> can bind the other's slaves regardless of probe order. If a single
+> owner of the modalias is preferred instead, a small wcd9378-common
+> stub dispatching on the property also works for me — your call.
+> Either path can later sanity-check the fused mode the way the
+> downstream driver does (EFUSE_REG_29 PLATFORM_BLOWN, else
+> PLATFORM_CTL MODE) once register access is up.
 
-Signed-off-by: Adrián Larumbe <adrian.larumbe@collabora.com>
----
-drm_prime_pages_to_sg() has no real dependency on PRIME/dma-buf interfaces.
-It is a generic helper that converts a page array into a scatter/gather
-table via dma_map_sg_attrs. Nothing in its implementation touches struct
-dma_buf or import/export logic.
----
- drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c |  6 ++---
- drivers/gpu/drm/drm_gem.c                   | 35 ++++++++++++++++++++++++++
- drivers/gpu/drm/drm_gem_shmem_helper.c      |  2 +-
- drivers/gpu/drm/drm_prime.c                 | 38 -----------------------------
- drivers/gpu/drm/etnaviv/etnaviv_gem.c       |  3 +--
- drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c |  3 ++-
- drivers/gpu/drm/loongson/lsdc_gem.c         |  3 +--
- drivers/gpu/drm/msm/msm_gem.c               |  2 +-
- drivers/gpu/drm/msm/msm_gem_prime.c         |  2 +-
- drivers/gpu/drm/nouveau/nouveau_prime.c     |  4 +--
- drivers/gpu/drm/panthor/panthor_gem.c       |  6 ++---
- drivers/gpu/drm/radeon/radeon_prime.c       |  5 ++--
- drivers/gpu/drm/rockchip/rockchip_drm_gem.c |  6 ++---
- drivers/gpu/drm/tegra/gem.c                 |  4 +--
- drivers/gpu/drm/vmwgfx/vmwgfx_gem.c         |  4 +--
- drivers/gpu/drm/xe/xe_dma_buf.c             |  6 ++---
- drivers/gpu/drm/xen/xen_drm_front_gem.c     |  2 +-
- include/drm/drm_gem.h                       |  5 +++-
- include/drm/drm_prime.h                     |  2 --
- 19 files changed, 68 insertions(+), 70 deletions(-)
+We need single entry point, if not we will endup with two modalias. Yes
+current RFC driver was only tested for compute.
+I agree we should have a common so that we can leverage some code from
+both modes.
 
-diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c
-index b33c300e26e2..c9a98aec7eb6 100644
---- a/drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c
-+++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_dma_buf.c
-@@ -203,9 +203,9 @@ static struct sg_table *amdgpu_dma_buf_map(struct dma_buf_attachment *attach,
- 
- 	switch (bo->tbo.resource->mem_type) {
- 	case TTM_PL_TT:
--		sgt = drm_prime_pages_to_sg(obj->dev,
--					    bo->tbo.ttm->pages,
--					    bo->tbo.ttm->num_pages);
-+		sgt = drm_pages_to_sg(obj->dev,
-+				      bo->tbo.ttm->pages,
-+				      bo->tbo.ttm->num_pages);
- 		if (IS_ERR(sgt))
- 			return sgt;
- 
-diff --git a/drivers/gpu/drm/drm_gem.c b/drivers/gpu/drm/drm_gem.c
-index 018df97d590d..22c8a3b5f667 100644
---- a/drivers/gpu/drm/drm_gem.c
-+++ b/drivers/gpu/drm/drm_gem.c
-@@ -780,6 +780,41 @@ void drm_gem_put_pages(struct drm_gem_object *obj, struct page **pages,
- }
- EXPORT_SYMBOL(drm_gem_put_pages);
- 
-+/**
-+ * drm_pages_to_sg - converts a page array into an sg list
-+ * @dev: DRM device
-+ * @pages: pointer to the array of page pointers to convert
-+ * @nr_pages: length of the page vector
-+ *
-+ * This helper creates an sg table object from a set of pages.
-+ * This is useful for implementing &drm_gem_object_funcs.get_sg_table.
-+ */
-+struct sg_table *drm_pages_to_sg(struct drm_device *dev,
-+				 struct page **pages, unsigned int nr_pages)
-+{
-+	struct sg_table *sg;
-+	size_t max_segment = 0;
-+	int err;
-+
-+	sg = kmalloc_obj(struct sg_table);
-+	if (!sg)
-+		return ERR_PTR(-ENOMEM);
-+
-+	if (dev)
-+		max_segment = dma_max_mapping_size(drm_dev_dma_dev(dev));
-+	if (max_segment == 0)
-+		max_segment = UINT_MAX;
-+	err = sg_alloc_table_from_pages_segment(sg, pages, nr_pages, 0,
-+						(unsigned long)nr_pages << PAGE_SHIFT,
-+						max_segment, GFP_KERNEL);
-+	if (err) {
-+		kfree(sg);
-+		sg = ERR_PTR(err);
-+	}
-+	return sg;
-+}
-+EXPORT_SYMBOL(drm_pages_to_sg);
-+
- static int objects_lookup(struct drm_file *filp, u32 *handle, int count,
- 			  struct drm_gem_object **objs)
- {
-diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
-index 22ec52e2ffb8..144d088a477f 100644
---- a/drivers/gpu/drm/drm_gem_shmem_helper.c
-+++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
-@@ -825,7 +825,7 @@ struct sg_table *drm_gem_shmem_get_sg_table(struct drm_gem_shmem_object *shmem)
- 
- 	drm_WARN_ON(obj->dev, drm_gem_is_imported(obj));
- 
--	return drm_prime_pages_to_sg(obj->dev, shmem->pages, obj->size >> PAGE_SHIFT);
-+	return drm_pages_to_sg(obj->dev, shmem->pages, obj->size >> PAGE_SHIFT);
- }
- EXPORT_SYMBOL_GPL(drm_gem_shmem_get_sg_table);
- 
-diff --git a/drivers/gpu/drm/drm_prime.c b/drivers/gpu/drm/drm_prime.c
-index 9b44c78cd77f..54539a8929c1 100644
---- a/drivers/gpu/drm/drm_prime.c
-+++ b/drivers/gpu/drm/drm_prime.c
-@@ -835,44 +835,6 @@ static const struct dma_buf_ops drm_gem_prime_dmabuf_ops =  {
- 	.vunmap = drm_gem_dmabuf_vunmap,
- };
- 
--/**
-- * drm_prime_pages_to_sg - converts a page array into an sg list
-- * @dev: DRM device
-- * @pages: pointer to the array of page pointers to convert
-- * @nr_pages: length of the page vector
-- *
-- * This helper creates an sg table object from a set of pages
-- * the driver is responsible for mapping the pages into the
-- * importers address space for use with dma_buf itself.
-- *
-- * This is useful for implementing &drm_gem_object_funcs.get_sg_table.
-- */
--struct sg_table *drm_prime_pages_to_sg(struct drm_device *dev,
--				       struct page **pages, unsigned int nr_pages)
--{
--	struct sg_table *sg;
--	size_t max_segment = 0;
--	int err;
--
--	sg = kmalloc_obj(struct sg_table);
--	if (!sg)
--		return ERR_PTR(-ENOMEM);
--
--	if (dev)
--		max_segment = dma_max_mapping_size(drm_dev_dma_dev(dev));
--	if (max_segment == 0)
--		max_segment = UINT_MAX;
--	err = sg_alloc_table_from_pages_segment(sg, pages, nr_pages, 0,
--						(unsigned long)nr_pages << PAGE_SHIFT,
--						max_segment, GFP_KERNEL);
--	if (err) {
--		kfree(sg);
--		sg = ERR_PTR(err);
--	}
--	return sg;
--}
--EXPORT_SYMBOL(drm_prime_pages_to_sg);
--
- /**
-  * drm_prime_get_contiguous_size - returns the contiguous size of the buffer
-  * @sgt: sg_table describing the buffer to check
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem.c b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-index b0436a1e103f..a8e8614f8210 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_gem.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2015-2018 Etnaviv Project
-  */
- 
--#include <drm/drm_prime.h>
- #include <drm/drm_print.h>
- #include <linux/dma-mapping.h>
- #include <linux/shmem_fs.h>
-@@ -104,7 +103,7 @@ struct page **etnaviv_gem_get_pages(struct etnaviv_gem_object *etnaviv_obj)
- 		unsigned int npages = etnaviv_obj->base.size >> PAGE_SHIFT;
- 		struct sg_table *sgt;
- 
--		sgt = drm_prime_pages_to_sg(dev, etnaviv_obj->pages, npages);
-+		sgt = drm_pages_to_sg(dev, etnaviv_obj->pages, npages);
- 		if (IS_ERR(sgt)) {
- 			dev_err(dev->dev, "failed to allocate sgt: %ld\n",
- 				PTR_ERR(sgt));
-diff --git a/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c b/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-index 6757ae6ec304..f44484325ddb 100644
---- a/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-+++ b/drivers/gpu/drm/etnaviv/etnaviv_gem_prime.c
-@@ -3,6 +3,7 @@
-  * Copyright (C) 2014-2018 Etnaviv Project
-  */
- 
-+#include <drm/drm_gem.h>
- #include <drm/drm_prime.h>
- #include <linux/dma-buf.h>
- #include <linux/module.h>
-@@ -22,7 +23,7 @@ struct sg_table *etnaviv_gem_prime_get_sg_table(struct drm_gem_object *obj)
- 	if (WARN_ON(!etnaviv_obj->pages))  /* should have already pinned! */
- 		return ERR_PTR(-EINVAL);
- 
--	return drm_prime_pages_to_sg(obj->dev, etnaviv_obj->pages, npages);
-+	return drm_pages_to_sg(obj->dev, etnaviv_obj->pages, npages);
- }
- 
- int etnaviv_gem_prime_vmap(struct drm_gem_object *obj, struct iosys_map *map)
-diff --git a/drivers/gpu/drm/loongson/lsdc_gem.c b/drivers/gpu/drm/loongson/lsdc_gem.c
-index 2fb03487c983..37160228244c 100644
---- a/drivers/gpu/drm/loongson/lsdc_gem.c
-+++ b/drivers/gpu/drm/loongson/lsdc_gem.c
-@@ -9,7 +9,6 @@
- #include <drm/drm_dumb_buffers.h>
- #include <drm/drm_file.h>
- #include <drm/drm_gem.h>
--#include <drm/drm_prime.h>
- #include <drm/drm_print.h>
- 
- #include "lsdc_drv.h"
-@@ -51,7 +50,7 @@ static struct sg_table *lsdc_gem_prime_get_sg_table(struct drm_gem_object *obj)
- 		return ERR_PTR(-ENOMEM);
- 	}
- 
--	return drm_prime_pages_to_sg(obj->dev, tt->pages, tt->num_pages);
-+	return drm_pages_to_sg(obj->dev, tt->pages, tt->num_pages);
- }
- 
- static void lsdc_gem_object_free(struct drm_gem_object *obj)
-diff --git a/drivers/gpu/drm/msm/msm_gem.c b/drivers/gpu/drm/msm/msm_gem.c
-index efd3d3c9a449..7e3418290c22 100644
---- a/drivers/gpu/drm/msm/msm_gem.c
-+++ b/drivers/gpu/drm/msm/msm_gem.c
-@@ -207,7 +207,7 @@ static struct page **get_pages(struct drm_gem_object *obj)
- 
- 		msm_obj->pages = p;
- 
--		msm_obj->sgt = drm_prime_pages_to_sg(obj->dev, p, npages);
-+		msm_obj->sgt = drm_pages_to_sg(obj->dev, p, npages);
- 		if (IS_ERR(msm_obj->sgt)) {
- 			void *ptr = ERR_CAST(msm_obj->sgt);
- 
-diff --git a/drivers/gpu/drm/msm/msm_gem_prime.c b/drivers/gpu/drm/msm/msm_gem_prime.c
-index 036d34c674d9..d25393a9e549 100644
---- a/drivers/gpu/drm/msm/msm_gem_prime.c
-+++ b/drivers/gpu/drm/msm/msm_gem_prime.c
-@@ -23,7 +23,7 @@ struct sg_table *msm_gem_prime_get_sg_table(struct drm_gem_object *obj)
- 	if (WARN_ON(!msm_obj->pages))  /* should have already pinned! */
- 		return ERR_PTR(-ENOMEM);
- 
--	return drm_prime_pages_to_sg(obj->dev, msm_obj->pages, npages);
-+	return drm_pages_to_sg(obj->dev, msm_obj->pages, npages);
- }
- 
- int msm_gem_prime_vmap(struct drm_gem_object *obj, struct iosys_map *map)
-diff --git a/drivers/gpu/drm/nouveau/nouveau_prime.c b/drivers/gpu/drm/nouveau/nouveau_prime.c
-index caab60fc62f6..b95f2f07df74 100644
---- a/drivers/gpu/drm/nouveau/nouveau_prime.c
-+++ b/drivers/gpu/drm/nouveau/nouveau_prime.c
-@@ -32,8 +32,8 @@ struct sg_table *nouveau_gem_prime_get_sg_table(struct drm_gem_object *obj)
- {
- 	struct nouveau_bo *nvbo = nouveau_gem_object(obj);
- 
--	return drm_prime_pages_to_sg(obj->dev, nvbo->bo.ttm->pages,
--				     nvbo->bo.ttm->num_pages);
-+	return drm_pages_to_sg(obj->dev, nvbo->bo.ttm->pages,
-+			       nvbo->bo.ttm->num_pages);
- }
- 
- struct drm_gem_object *nouveau_gem_prime_import_sg_table(struct drm_device *dev,
-diff --git a/drivers/gpu/drm/panthor/panthor_gem.c b/drivers/gpu/drm/panthor/panthor_gem.c
-index 9855df738194..ec530d254fa4 100644
---- a/drivers/gpu/drm/panthor/panthor_gem.c
-+++ b/drivers/gpu/drm/panthor/panthor_gem.c
-@@ -321,8 +321,8 @@ panthor_gem_dev_map_get_sgt_locked(struct panthor_gem_object *bo)
- 	if (ret)
- 		return ERR_PTR(ret);
- 
--	sgt = drm_prime_pages_to_sg(bo->base.dev, bo->backing.pages,
--				    bo->base.size >> PAGE_SHIFT);
-+	sgt = drm_pages_to_sg(bo->base.dev, bo->backing.pages,
-+			      bo->base.size >> PAGE_SHIFT);
- 	if (IS_ERR(sgt))
- 		return sgt;
- 
-@@ -702,7 +702,7 @@ static struct sg_table *panthor_gem_get_sg_table(struct drm_gem_object *obj)
- 	drm_WARN_ON_ONCE(obj->dev, !bo->backing.pages);
- 	drm_WARN_ON_ONCE(obj->dev, !refcount_read(&bo->backing.pin_count));
- 
--	return drm_prime_pages_to_sg(obj->dev, bo->backing.pages, obj->size >> PAGE_SHIFT);
-+	return drm_pages_to_sg(obj->dev, bo->backing.pages, obj->size >> PAGE_SHIFT);
- }
- 
- static int panthor_gem_vmap_locked(struct drm_gem_object *obj,
-diff --git a/drivers/gpu/drm/radeon/radeon_prime.c b/drivers/gpu/drm/radeon/radeon_prime.c
-index a77881f035e7..4cfc4282a59c 100644
---- a/drivers/gpu/drm/radeon/radeon_prime.c
-+++ b/drivers/gpu/drm/radeon/radeon_prime.c
-@@ -26,6 +26,7 @@
- 
- #include <linux/dma-buf.h>
- 
-+#include <drm/drm_gem.h>
- #include <drm/drm_prime.h>
- #include <drm/radeon_drm.h>
- 
-@@ -38,8 +39,8 @@ struct sg_table *radeon_gem_prime_get_sg_table(struct drm_gem_object *obj)
- {
- 	struct radeon_bo *bo = gem_to_radeon_bo(obj);
- 
--	return drm_prime_pages_to_sg(obj->dev, bo->tbo.ttm->pages,
--				     bo->tbo.ttm->num_pages);
-+	return drm_pages_to_sg(obj->dev, bo->tbo.ttm->pages,
-+			       bo->tbo.ttm->num_pages);
- }
- 
- struct drm_gem_object *radeon_gem_prime_import_sg_table(struct drm_device *dev,
-diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-index b188539dca0b..7897da0becf4 100644
---- a/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-+++ b/drivers/gpu/drm/rockchip/rockchip_drm_gem.c
-@@ -89,8 +89,8 @@ static int rockchip_gem_get_pages(struct rockchip_gem_object *rk_obj)
- 
- 	rk_obj->num_pages = rk_obj->base.size >> PAGE_SHIFT;
- 
--	rk_obj->sgt = drm_prime_pages_to_sg(rk_obj->base.dev,
--					    rk_obj->pages, rk_obj->num_pages);
-+	rk_obj->sgt = drm_pages_to_sg(rk_obj->base.dev,
-+				      rk_obj->pages, rk_obj->num_pages);
- 	if (IS_ERR(rk_obj->sgt)) {
- 		ret = PTR_ERR(rk_obj->sgt);
- 		goto err_put_pages;
-@@ -432,7 +432,7 @@ struct sg_table *rockchip_gem_prime_get_sg_table(struct drm_gem_object *obj)
- 	int ret;
- 
- 	if (rk_obj->pages)
--		return drm_prime_pages_to_sg(obj->dev, rk_obj->pages, rk_obj->num_pages);
-+		return drm_pages_to_sg(obj->dev, rk_obj->pages, rk_obj->num_pages);
- 
- 	sgt = kzalloc_obj(*sgt);
- 	if (!sgt)
-diff --git a/drivers/gpu/drm/tegra/gem.c b/drivers/gpu/drm/tegra/gem.c
-index 436394e04812..701af672b4e5 100644
---- a/drivers/gpu/drm/tegra/gem.c
-+++ b/drivers/gpu/drm/tegra/gem.c
-@@ -17,7 +17,7 @@
- 
- #include <drm/drm_drv.h>
- #include <drm/drm_dumb_buffers.h>
--#include <drm/drm_prime.h>
-+#include <drm/drm_gem.h>
- 
- #include "drm.h"
- #include "gem.h"
-@@ -352,7 +352,7 @@ static int tegra_bo_get_pages(struct drm_device *drm, struct tegra_bo *bo)
- 
- 	bo->num_pages = bo->gem.size >> PAGE_SHIFT;
- 
--	bo->sgt = drm_prime_pages_to_sg(bo->gem.dev, bo->pages, bo->num_pages);
-+	bo->sgt = drm_pages_to_sg(bo->gem.dev, bo->pages, bo->num_pages);
- 	if (IS_ERR(bo->sgt)) {
- 		err = PTR_ERR(bo->sgt);
- 		goto put_pages;
-diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_gem.c b/drivers/gpu/drm/vmwgfx/vmwgfx_gem.c
-index 39f8c46550c2..c9e7f2e3668c 100644
---- a/drivers/gpu/drm/vmwgfx/vmwgfx_gem.c
-+++ b/drivers/gpu/drm/vmwgfx/vmwgfx_gem.c
-@@ -28,7 +28,7 @@
- #include "vmwgfx_bo.h"
- #include "vmwgfx_drv.h"
- 
--#include "drm/drm_prime.h"
-+#include "drm/drm_gem.h"
- #include "drm/drm_gem_ttm_helper.h"
- 
- #include <linux/debugfs.h>
-@@ -76,7 +76,7 @@ static struct sg_table *vmw_gem_object_get_sg_table(struct drm_gem_object *obj)
- 	if (vmw_tt->vsgt.sgt)
- 		return vmw_tt->vsgt.sgt;
- 
--	return drm_prime_pages_to_sg(obj->dev, vmw_tt->dma_ttm.pages, vmw_tt->dma_ttm.num_pages);
-+	return drm_pages_to_sg(obj->dev, vmw_tt->dma_ttm.pages, vmw_tt->dma_ttm.num_pages);
- }
- 
- static int vmw_gem_vmap(struct drm_gem_object *obj, struct iosys_map *map)
-diff --git a/drivers/gpu/drm/xe/xe_dma_buf.c b/drivers/gpu/drm/xe/xe_dma_buf.c
-index 8a920e58245c..f0fe80706b79 100644
---- a/drivers/gpu/drm/xe/xe_dma_buf.c
-+++ b/drivers/gpu/drm/xe/xe_dma_buf.c
-@@ -118,9 +118,9 @@ static struct sg_table *xe_dma_buf_map(struct dma_buf_attachment *attach,
- 
- 	switch (bo->ttm.resource->mem_type) {
- 	case XE_PL_TT:
--		sgt = drm_prime_pages_to_sg(obj->dev,
--					    bo->ttm.ttm->pages,
--					    obj->size >> PAGE_SHIFT);
-+		sgt = drm_pages_to_sg(obj->dev,
-+				      bo->ttm.ttm->pages,
-+				      obj->size >> PAGE_SHIFT);
- 		if (IS_ERR(sgt))
- 			return sgt;
- 
-diff --git a/drivers/gpu/drm/xen/xen_drm_front_gem.c b/drivers/gpu/drm/xen/xen_drm_front_gem.c
-index eec4c1da3f9e..a4a7c7f2c91c 100644
---- a/drivers/gpu/drm/xen/xen_drm_front_gem.c
-+++ b/drivers/gpu/drm/xen/xen_drm_front_gem.c
-@@ -236,7 +236,7 @@ struct sg_table *xen_drm_front_gem_get_sg_table(struct drm_gem_object *gem_obj)
- 	if (!xen_obj->pages)
- 		return ERR_PTR(-ENOMEM);
- 
--	return drm_prime_pages_to_sg(gem_obj->dev,
-+	return drm_pages_to_sg(gem_obj->dev,
- 				     xen_obj->pages, xen_obj->num_pages);
- }
- 
-diff --git a/include/drm/drm_gem.h b/include/drm/drm_gem.h
-index 885244e375d3..7b9cc6335689 100644
---- a/include/drm/drm_gem.h
-+++ b/include/drm/drm_gem.h
-@@ -155,7 +155,7 @@ struct drm_gem_object_funcs {
- 	 * here cannot be used for sg tables pointing at driver private memory
- 	 * ranges.
- 	 *
--	 * See also drm_prime_pages_to_sg().
-+	 * See also drm_pages_to_sg().
- 	 */
- 	struct sg_table *(*get_sg_table)(struct drm_gem_object *obj);
- 
-@@ -589,6 +589,9 @@ struct page **drm_gem_get_pages(struct drm_gem_object *obj);
- void drm_gem_put_pages(struct drm_gem_object *obj, struct page **pages,
- 		bool dirty, bool accessed);
- 
-+struct sg_table *drm_pages_to_sg(struct drm_device *dev,
-+				 struct page **pages, unsigned int nr_pages);
-+
- void drm_gem_lock(struct drm_gem_object *obj);
- void drm_gem_unlock(struct drm_gem_object *obj);
- 
-diff --git a/include/drm/drm_prime.h b/include/drm/drm_prime.h
-index f50f862f0d8b..603e16a40ae7 100644
---- a/include/drm/drm_prime.h
-+++ b/include/drm/drm_prime.h
-@@ -92,8 +92,6 @@ void drm_gem_dmabuf_vunmap(struct dma_buf *dma_buf, struct iosys_map *map);
- int drm_gem_prime_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma);
- int drm_gem_dmabuf_mmap(struct dma_buf *dma_buf, struct vm_area_struct *vma);
- 
--struct sg_table *drm_prime_pages_to_sg(struct drm_device *dev,
--				       struct page **pages, unsigned int nr_pages);
- struct dma_buf *drm_gem_prime_export(struct drm_gem_object *obj,
- 				     int flags);
- 
+> 
+> One mobile-specific data point for the split: in mobile mode the SDCA
+> control space is only decoded on the TX slave. On the FP6, a paged
+> read of DEV_MANU_ID/DEV_PART_ID (0x40100060/0x40100068) via the TX
+> slave returns 0x0217/0x0110, while the same reads via the RX slave
+That is expected on WCD codecs. only TX has CSR registers space.
+RX can not read/write any of the codec register space.
+However the soundwire SCP address space is accessible and expected to
+set data ports for both tx and rx.
 
----
-base-commit: 48dd37d1fef33fbf42f1d6887c61e242fd21d00d
-change-id: 20260724-get_pages-e2e91c53eaa3
+> return zeros — with the RX slave's standard SCP DevID registers
+> reading fine. That matches the downstream driver, which creates its
+> only regmap on the TX device and drives the render dataports through
+> the RX slave. So for mobile RX playback the function control and its
+> dataports live on *different* slaves; a per-dataport slave mapping
+> (or similar) would be needed in the class framework for that. Capture
+> doesn't have this problem — the TX dataports sit on the control
+> slave, so no cross-slave mapping is needed there.
+> 
+> 2) Bindings — one file
+> 
+> Patch 7 adds the same new file as my series
+> (Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml), so
+> one of us should carry a merged version and the other drop it.
+> Suggestion: the mobile side keeps my v1's tx/rx split shape, with
+> the v2 changes already committed on my binding thread
+> (qcom,{tx,rx}-port-mapping staying optional, matching
+> qcom,wcd938x-sdw.yaml; qcom,{tx,rx}-channel-mapping dropped). The
+> compute side keeps your qcom,compute-mode if/then, extended to also
+> cover qcom,port-mapping and #sound-dai-cells. As posted, patch 7's mobile shape wouldn't
+> validate my mobile DTS: it defines a combined qcom,port-mapping but
+> the description references qcom,tx/rx-port-mapping, and
+> #sound-dai-cells is required unconditionally while the mobile DAIs
+> live on the top-level codec node. I'm happy to carry the merged file
+> in my v2 so your v2 can drop patch 7 — or the reverse, whichever you
+> prefer.
+Thanks that would be nice, Also am thinking that we should just have
+qcom,port-mapping for both modes and mark one of the device as
+qcom,control-device which is tx in mobile case. That way we have some
+level of clean bindings that overlap. But I will leave it up to you.
 
-Best regards,
---  
-Adrián Larumbe <adrian.larumbe@collabora.com>
+
+> 
+> 3) Prototype findings on patches 1-6 (mobile capture, FP6)
+> 
+> What I ran: your 8 patches on my 7.1.2-based tree, plus a new
+> wcd9378-sdca-mobile codec registering its own sdw_driver for the TX
+> slave, static sdca_function_data for the SmartMic0 function
+> (IT11 -> OT10 on DP1, with PDE11 as the power domain), and hw_ops
+> doing the vendor bring-up
+> (micbias routing, bus-clock indication, a clock-stop hold; supplies
+> stay on the mobile top-level codec node, so hw_init has nothing to
+> do — that part of the design accommodates the mobile supply model
+> as-is). Capture works: the card binds, PDE11 reaches PS0 through the
+> DAPM supply widget, and a 1 kHz tone played from the speakers
+> captures at ~46% of full scale through the SDCA path. The bus-clock
+> indication in hw_ops is partly a stopgap: the core path discussed
+> with Pierre-Louis on my driver thread needs the qcom controller to
+> set prop.mclk_freq, and that patch is still on my list. The
+> prototype branch (your series + the mobile codec on a 7.1.2 base) is
+> at https://forgejo.catcrafts.net/Catcrafts/milos-linux, branch
+> sdca-mobile, if useful.
+Yes, This is definitely an useful experiment, I was trying something
+similar with both tx and rx side on mobile mode, things got really
+complex because the sdw stream has to be handled by rx codec where as tx
+side will be handled by sdca side.. it was really messy.
+
+> 
+> Findings:
+> 
+> a) PDM dataports. class_function_sdw_add_peripheral() derives the
+>    SoundWire stream/port config from the host-visible PCM params via
+>    snd_sdw_params_to_config(), but the WCD9378 mic dataports carry
+>    1-bit PDM on a single channel (the working mobile driver programs
+>    sconfig.bps = 1 and port ch_mask = BIT(0)). Result with the
+>    generic path: "bps not matching" from the qcom master and silence
+>    on the capture while the PDE sits happily in PS0. I prototyped
+>    optional per-dataport overrides in sdca_entity_iot
+>    (sdw_bps/sdw_ch_mask) consumed in add_peripheral, which fixed it;
+>    maybe DisCo has a proper home for this, but something is needed
+>    for PDM parts.
+> 
+> b) The IT33 micbias cache-vs-hardware workaround in your patch 8
+>    (drop cache + rewrite from pde_pre_pmu) ported directly to the
+>    mobile part's IT11; I carried it prophylactically and haven't yet
+>    isolated whether mobile strictly needs it. If it does turn out to
+>    be family behavior, it might argue for the class handling
+>    has_default controls on PDE power-up generically.
+> 
+> Userspace needed no changes beyond UCM: the class-driver card works
+> with a ControlExists conditional in the same profile (the stock
+> branch of the conditional is the unchanged stock sequence).
+> 
+> On interrupts: sdca_irq_allocate() got a valid IRQ out of the box on
+> my board via the bus irq domain; I haven't exercised actual SDCA
+> interrupt delivery (capture doesn't need it), so I can't yet say
+> whether the INTSTAT dispatch issue in your patch-8 comment reproduces
+> here.
+> 
+> Longer term: until the framework covers mobile end-to-end (the PDM
+> transport and the cross-slave RX question), my posted mobile series
+> stays the working mobile path — the v2 above is about the two
+> drivers coexisting cleanly in the meantime. Mobile capture converging
+> on the class framework looks realistic (my static tables came
+> straight from the posted mobile driver); I'll keep using the FP6 as
+> the mobile-mode test vehicle for the next revisions.
+> 
+
+I think you should continue to do the mobile mode driver as it was done
+in v1 not think about sdca. Function setup on mobile mode are dynamic
+user can set sys_usage based on usecase so the sdca functions will
+change, this is not static anymore so its not really worth thinking of
+sdca for mobile atm, but we could try to see if we can get some leverage
+from sdca helpers.
+
+Sorry for the noise i hope it was a worth experiment on mobile mode.
+
+> One dependency note for your platform posting: SDCA register access
+> on Qualcomm controllers needs the SCP address paging support now in
+> soundwire next, commit 999f80904763 ("soundwire: qcom: add SCP
+> address paging support").
+> 
+> One small nit: link [2] in the cover credits "Jorijn Rikhof" — the
+> surname is van der Graaf.
+
+Am really Sorry not sure how I missed that.
+
+
+--srini
+> 
+> Thanks,
+> Jorijn
 
