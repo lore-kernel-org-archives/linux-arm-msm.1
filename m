@@ -1,461 +1,360 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26D7435DA78;
-	Fri, 24 Jul 2026 09:13:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B3A183C455F
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:13:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784884405; cv=none; b=u+bQHGldSzbTeNV+9voHn7zS4PfpCbXWO21OChwOeWhUdUGf/LDjeMhgRVDo7Xso++llVYTkI3qZnzdhavtguWZlqE0MFOVVAbdbUeBS2l/saCeBgasMSy9YZSSi1wJjuX4mUSvn0iq2qQu7nakPg1j4nA2ci/O65rCPurO0m70=
+	t=1784884435; cv=none; b=ghuo87sJ1Q1XMZ2ux4iJd1FodWPs8q95tyE+3QSvu9w4SnZ5Zg0cOU73omvpdVcRfBj2G+YBNa3qLPdy6YjOwkYXnZgC2wCaNeREB3XJ8qoEPS2j/9sK2V8QDmwwrC+FeTTPARXlaSNMvYRtZ479vYXzB66vItI52NRjvtNo300=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784884405; c=relaxed/simple;
-	bh=mJcDNw77NdyWtM53SGB/8AR4Gpz9ghClvL+bhScb5ks=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=BlwJY4GW4llPlNuG51UDo0Yd6RDkyG1k0ODVdarOtWYHHmB2Pz8sXPJSM/s0E+Wu+cju29hMzOfSH6qL+q6HjPq9y0Esj9UZVTExJ3Q5KHngj2kV1QDGhIoqDSNY4l0SWuE2/buMU3jvRmTjYasjrFL915ZJnD4N04Zg9B15Hqg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cYSga7au; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784884435; c=relaxed/simple;
+	bh=w67qQqAdyi+Ybj6XnYCPF6f6f2EUvbXPSmE7iRSVj0E=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=plJBO7CbvzXQJzHH5oGtTlRdNJyPwZcSg77fsY0m31PQQnlTUKayADZhCDp174N0ZOllHDEDGqq70HwmSvQP87pH4XvIZjz47VQFIvx15fJKQ652e9AOT+NC1mIXzfpKdlI9j4j9n9hbhgckXYAV9psJjK+Gp/XwkMQB4idU7w8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cRa09QiH; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Jz89CaYZ; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cYSga7au"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DCEB31F000E9;
-	Fri, 24 Jul 2026 09:13:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784884403;
-	bh=3QK6gyQhkWOBgkpuC3mjUiU480nGefF4k15Ca4dUWf4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=cYSga7aular65dSj2MUbwJJ4DycAlyRInzXxeQ/YqUwi6f9mVMI4jJEoyKpKAG8g4
-	 0cZRohe/QzecD4xIOQ1R1DiKtX340RgsKewYLH7FwuLKrq3boKRtx9chO2jsVYuU6E
-	 f97HftXxecuOmj2bAR76lSrNcwd2b+utD+jEGySfx2skBX25S0P3aDXYf1gCLbOySt
-	 bGEtHrhGhx9w39HvACO0OQi0UtrtiYC/jFgubYcydD19VSW2bU6Eqe/mVT6e13U2M3
-	 NZY90qtmu4+lqI8epsob3yD66vUt7ofGh3Vyr2Nj7idC7lKWglcln+yxP4gteNTY6c
-	 inSWay+JbEGNw==
-Date: Fri, 24 Jul 2026 10:13:17 +0100
-From: Sudeep Holla <sudeep.holla@kernel.org>
-To: Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>
-Cc: Cristian Marussi <cristian.marussi@arm.com>,
-	Sudeep Holla <sudeep.holla@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
-	MyungJoo Ham <myungjoo.ham@samsung.com>,
-	Kyungmin Park <kyungmin.park@samsung.com>,
-	Chanwoo Choi <cw00.choi@samsung.com>,
-	Dmitry Osipenko <digetx@gmail.com>,
-	Thierry Reding <thierry.reding@kernel.org>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>,
-	Pankaj Patil <pankaj.patil@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	arm-scmi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	devicetree@vger.kernel.org, linux-pm@vger.kernel.org,
-	linux-tegra@vger.kernel.org
-Subject: Re: [PATCH RFC 01/10] firmware: arm_scmi: Add SCMI QCOM Generic
- Extension Protocol documentation
-Message-ID: <20260724-crouching-starfish-of-apotheosis-d1cdf8@sudeepholla>
-References: <20260724-rfc_v8_scmi_memlat-v1-0-cb732bcff1f4@oss.qualcomm.com>
- <20260724-rfc_v8_scmi_memlat-v1-1-cb732bcff1f4@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cRa09QiH";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Jz89CaYZ"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66O4sswj1897940
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:13:52 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	9MgK1U5jSAS3Ah9+XNNPIqVUrC+U6xsLSHjHBFRHiBI=; b=cRa09QiHLf8wemDg
+	G5YZe+SBLqeLUoCqmqNuF7HDcbtoyrxhYuvBu7qK8AXutKsr4CjD2UTfG/ISKy3J
+	bAgYbsoC1zNhicR/kVK43UIruM5sCk0j4A8u7qt6n02u8vZZjdi5zMwHPBjxTldU
+	uw0tE5AcNYMpaLwRhF9OyoCaZZKWmizvTlYFqRfPkntzyyTMkg6sBWg//twcl8Cq
+	E2iJcsstAdYQwpG3Vz5bCpx+dx594Bip38RlRmKhXbz0elfYs6HKuoCfr3ZaTj5X
+	RqHUOlcyJ/kLQF31tW0I2b5YklQB1ZkrMh54N1cYeV9W8c4YZXetPTYQKeMVH/bF
+	y0tJ2Q==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fm1em8vqs-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:13:51 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38e1118e4abso325597a91.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 02:13:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784884431; x=1785489231; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :from:content-language:references:cc:to:subject:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=9MgK1U5jSAS3Ah9+XNNPIqVUrC+U6xsLSHjHBFRHiBI=;
+        b=Jz89CaYZ8X3T5SGU6tBZPUqP447oIgzLduJELVdR+lwJEmNWWLlQqwI5OfJfuhkCeT
+         PPKftGhpApfys5IuVgYKYxF+DPM+n58w0NdBGOwViZiTTZ7qLhhrgVwP9PIkmFKoBxhH
+         CW2qvnuZZugTbb2gjIJSozOc9y2oqQ2A8D/42aVW1cm1Uhw+3W5JrpYrr5ZLvez1s52O
+         E6UM+A1YRmvXY+tQE+kGKpHGgcHTu3/VAuWgwPgH2KZGlRgUagEqBX/yNdzJppblP85J
+         AE4fvXnkVTKLK2R29407TQZjz7spAvPtVGduds+tAbPJ8UzJowLyZoJuZkYU8wQ/zNmE
+         Djeg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784884431; x=1785489231;
+        h=content-transfer-encoding:content-type:in-reply-to:organization
+         :from:content-language:references:cc:to:subject:user-agent
+         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=9MgK1U5jSAS3Ah9+XNNPIqVUrC+U6xsLSHjHBFRHiBI=;
+        b=CShXFq7nlMj2f+6rnDm2C2ml641cJigvfXkFFlu3jsLqon3ZDUK+O9dX306CKUqPCZ
+         F3lFuDjfHrhTaaYcO9AjRYRw/HyVbfn7ibBFvahhd7DbNB6USEciGWQPSlmO394bcb//
+         R+xZMt9jpEpqwgu4qC1/mal3KeJKK+/wl9EiOyYdXaU5wPFafWNEKqXWmDLJ2H6eDITT
+         aHuHTGklj1QaBwYLZGOacNdjOH8xCjRU75+ib3GFtpGu0G2nZ07j2jLFMCwSzBzjWRSt
+         FHCWTkKJBt/1Pz/9eibh9tB5MfraaXpd9QE1WXXDSfW2V37yjuPom0M+pFR6Xu5t7jIa
+         4Z1g==
+X-Forwarded-Encrypted: i=1; AHgh+RrWFLxR1FLcl//ApEgA7DcRDxjzx7bpTk8/7itO5wNpu5Nj/+QP4wOeTvfn4MlKnLgvvSo4cuKsnwImSv4l@vger.kernel.org
+X-Gm-Message-State: AOJu0YyxxF4aQvsZZKmjrpUxUfT+q8EDF6lx1pMrojKS0kTmcACXMPjF
+	uMmsw4UtJyY4uDV49SYODoiaEUE0I8ckn4rJD7Y2HsksTdqqvpIyuvoDRhk/yTGURXodRgHws1C
+	PlvY/7WXNJx1HfM+GoNZ+jFC5tV02XKwHtJDo/yp6IvrreeptzQln4mI60J8+alje+AKT
+X-Gm-Gg: AR+sD1167AfzEtpI1F8XXIkFlH7N35jvd7z82HzgCqAhHAulS93NloaVNSTuyHsH1OH
+	paWqjv/zHcpL+DjYjaAqf86QJuRL9eBZAR6z4lj2MGztyFzrRZ9xo12f2nc/t/iwn3vAJl+5YMg
+	9d3tEPraa5ysvNzr8u5idwwxEVKHgIOfQ2NwL00NtNaHV6OZzfxvaOiFKG1Auod6s3IvM9Eb8U1
+	w6S9gTqnvV4I4LkTrjil9GDzJ1VikNtTesy3ye40TJNGfXHrt/eDxl1jHDtJFdNRgMdjB/5vqdD
+	u+KZ+9XM717ikhg2P/IYHROuGKHp0s6otZAoymhXGwe293Kcv/WE/ysTKZQcBqeSZPw1J3pqsBM
+	ITy9S3mXWPDsLANCZ533anewDxos=
+X-Received: by 2002:a17:90b:1643:b0:387:df8f:1408 with SMTP id 98e67ed59e1d1-38ec65ed975mr7199259a91.41.1784884430968;
+        Fri, 24 Jul 2026 02:13:50 -0700 (PDT)
+X-Received: by 2002:a17:90b:1643:b0:387:df8f:1408 with SMTP id 98e67ed59e1d1-38ec65ed975mr7199216a91.41.1784884430398;
+        Fri, 24 Jul 2026 02:13:50 -0700 (PDT)
+Received: from [10.92.203.75] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f08df8a94sm389306a91.2.2026.07.24.02.13.45
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 24 Jul 2026 02:13:49 -0700 (PDT)
+Message-ID: <db27820a-2b43-45e4-bc4a-0e9e81aacd93@oss.qualcomm.com>
+Date: Fri, 24 Jul 2026 14:43:42 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260724-rfc_v8_scmi_memlat-v1-1-cb732bcff1f4@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/6] Add TEE based client driver for UEFI Secure
+ Application
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Jens Wiklander <jens.wiklander@linaro.org>,
+        Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
+        Sumit Garg <sumit.garg@kernel.org>,
+        Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Basant Kumar <basantk@qti.qualcomm.com>,
+        Apurupa Pattapu <apurupa@qti.qualcomm.com>,
+        Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
+        op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org
+References: <20260722-qcom_uefisecapp_migrate_qcomtee-v2-0-b8a8fcbe4211@oss.qualcomm.com>
+ <nfijwr2ptpxqvdw625yedep7tmakwvkeavyeobrmig5hbkw77w@rcqyp7h4y327>
+Content-Language: en-US
+From: Harshal Dev <harshal.dev@oss.qualcomm.com>
+Organization: Qualcomm
+In-Reply-To: <nfijwr2ptpxqvdw625yedep7tmakwvkeavyeobrmig5hbkw77w@rcqyp7h4y327>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDA4MyBTYWx0ZWRfXzcCNJo3jKzjZ
+ NnVQJ9yb8NUCHa9AIZAHhI+PGwDKnwix3UueqIYrk6PVzgDRUPxcqSLBHwt9QfaVmOIkkEDh4oz
+ 8XAxauNQb9LDff+WSD1MAIsCGvkyv/Q=
+X-Authority-Analysis: v=2.4 cv=BIODalQG c=1 sm=1 tr=0 ts=6a632ccf cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=P-IC7800AAAA:8 a=NEAV23lmAAAA:8 a=EPKcpx9xAAAA:20 a=EUspDBNiAAAA:8
+ a=VwQbUJbxAAAA:8 a=EQysn5-VQ2r5Ey136RIA:9 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22 a=d3PnA9EDa4IxuAV0gXij:22 a=ZT_8zCgGubuJgGonBfBE:22
+X-Proofpoint-ORIG-GUID: 2dnDa7DxII9EqdCGFkEDgcXyW0rDB-lB
+X-Proofpoint-GUID: 2dnDa7DxII9EqdCGFkEDgcXyW0rDB-lB
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDA4MyBTYWx0ZWRfXyxncX1c0RtRI
+ p/g9EIoJ+BDqIw9ayCrKVM3ICHtx6OcyY//ZAoQKckQADzrRAb8y+hE8u9lKBYDSmjBVLhurOf6
+ jvC75Mo/ltnpVqLw7M0uXIKp7k6LnLbQN+eqCg4I8dTobBeUH+BxVPTh65m5mJruZcMrTEmOZEN
+ vhBwxmqehgT4EdzDDpsCM+CKxjS75cYHlUbXBv9p4rE4WvQTMZh+f/IrmZ+ZqUv2CG2RNIsSVEi
+ 7k30f3HzJAVaMHMzzltv6FYJDWSPLFec7H3v5a8pcn5iru76TU0T0BpXXNdQCgqFeaoRDU4wQK/
+ lO9aPEVnVdB/GZ5GztZDnF3RlNfVoDCw7bgKLuCniHct7wp+ISb6gnhkStJdmGajD6dCn+5TTYW
+ KKpDGEJH9sPV3b2C8s+7AUgB+iAKkTf2fm96dtLvhVLE2LcXNW6hHk5p1M2F+/vP5HAEvRAy9Tk
+ JvPHkzrCn3poFV4kIig==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-24_01,2026-07-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 adultscore=0 priorityscore=1501 malwarescore=0 bulkscore=0
+ impostorscore=0 phishscore=0 clxscore=1015 lowpriorityscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607240083
 
-On Fri, Jul 24, 2026 at 12:48:06PM +0530, Pragnesh Papaniya wrote:
-> Add System Control Management Interface (SCMI) Qualcomm Generic Extension
-> Protocol documentation. It consists of a small set of generic SET/GET/
-> START/STOP commands, which is used to turn on/off and configure Qualcomm
-> SoC specific algorithms that run on the SCP.
+Hi Dmitry,
+
+On 22-07-2026 01:56 pm, Dmitry Baryshkov wrote:
+> On Wed, Jul 22, 2026 at 12:29:11PM +0530, Harshal Dev wrote:
+>> On Qualcomm SoC based platforms, UEFI stores EFI variables within the
+>> Replay Protected Memory Block (RPMB) which is only accessible by the
+>> Qualcomm Trusted Execution Environment (QTEE).
 > 
-> It currently only supports MEMLAT (memory latency governor) algorithm.
-> The immutable pairing of the MEMLAT algorithm string with the supported
-> param_ids associated with it are documented here.
+> Is it so? I think RPMB is accessible to Linux...
+
+I should have been more descriptive here, RPMB is accessible by Linux but
+its frames can only be prepared by QTEE.
+
+The RPMB key which is one-time programmed into the storage controller to allow
+authentication of the RPMB frames is generated by and only available to a TEE.
+So on Qualcomm platforms (and many others platforms with a TEE) Linux can only
+route the RPMB frames generated by QTEE to the storage, it cannot create and
+write the RPMB frames itself (it doesn't have access to the key).
+
+While it is possible for Linux to generate/program/store this key, on Qualcomm
+platforms we do not want Linux to do so because we do not trust it. We trust
+QTEE.
+
+I will re-phrase this and make it a bit more clear everywhere.
+
 > 
-> Co-developed-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-> Signed-off-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-> Signed-off-by: Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>
-> ---
->  .../arm_scmi/vendors/qcom/qcom_generic.rst         | 954 +++++++++++++++++++++
->  1 file changed, 954 insertions(+)
+>> For Qualcomm platforms without emulated RPMB support, specifically
 > 
-> diff --git a/drivers/firmware/arm_scmi/vendors/qcom/qcom_generic.rst b/drivers/firmware/arm_scmi/vendors/qcom/qcom_generic.rst
-> new file mode 100644
-> index 000000000000..42e327d53841
-> --- /dev/null
-> +++ b/drivers/firmware/arm_scmi/vendors/qcom/qcom_generic.rst
-> @@ -0,0 +1,954 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. include:: <isonum.txt>
-> +
-> +==================================================================================
-> +System Control and Management Interface (SCMI) Qualcomm Generic Extension Protocol
-> +==================================================================================
-> +
-> +:Copyright: |copy| Qualcomm Technologies, Inc. and/or its subsidiaries.
-> +
-> +:Authors:
-> +   - Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-> +   - Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>
-> +
-> +System Control and Management Interface Qualcomm Generic Extension Vendor Protocol
-> +==================================================================================
-> +
-> +System Control Management Interface (SCMI) Qualcomm Generic Extension Protocol
-> +consists of a small set of generic SET/GET/START/STOP commands, which is used to
-> +turn on/off and configure Qualcomm SoC specific algorithms that run on the SCP.
-> +Each algorithm is identified through an algorithm string and has an immutable list
-> +of param_ids. All supported algorithms (currently just MEMLAT) have their own
-> +dedicated section and are listed after the generic commands.
-> +
+> What is emulated RPMB support? Why is it mentioned here? Which platforms
+> use emulated RPMB?
 
-This multiplexer 'N' random algorithn into one single custom SCMI protocol ID
-(0x80) seems to go against the general SCMI design principle and this seems
-like a deliberated attempt to circumvent the standard SCMI protocol template.
-Standard SCMI expects distinct features to occupy their own vendor protocol
-IDs and utilize standard protocol discovery.
+Emulated RPMB refers to RPMB on a storage which doesn't have its own firmware.
+Primarily, NAND/NOR storage. Unlike UFS/eMMC storage, NAND/NOR storage does not
+have a storage controller where we can program the RPMB key to be used by the
+firmware. So we must 'emulate' RPMB by moving the storage driver within QTEE
+and making the driver hold/use the key.
 
-I have asked details of algorithm to be listed here atleast few times now
-and has been constantly ignored. So don't complain if I start ignoring these
-patches.
+Qualcomm compute SoCs (Glymur, Hamoa) have RPMB available on SPI-*NOR* storage,
+and a driver for communicating with it is also available in QTEE. And so, these
+have 'emulated' RPMB.
 
-> +message_id: 0x1
-> +protocol_id: 0x80
-> +
-> ++------------------+-----------------------------------------------------------+
-> +|Return values                                                                 |
-> ++------------------+-----------------------------------------------------------+
-> +|Name              |Description                                                |
-> ++------------------+-----------------------------------------------------------+
-> +|int32 status      |See ARM SCMI Specification for status code definitions.    |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 attributes |Bits[31:16] Reserved, must be set to 0.                    |
-> +|                  |Bits[15:8] Number of agents in the system. Must match the  |
-> +|                  |value reported by the standard BASE protocol's             |
-> +|                  |PROTOCOL_ATTRIBUTES response.                              |
+I will add this detail in an updated cover letter.
+> 
+>> platforms where RPMB is not located within SPI-NOR storage and instead
+>> located on UFS/EMMC storage, non-volatile EFI variables can only be set via
+>> a callback request from the UEFI Secure Application to the RPMB service
+>> running in user-space (within the QTEE supplicant [1]).
+> 
+> Can it be moved to the kernel?
 
+We have a plan to move the RPMB service to the kernel similar to OPTEE:
+https://elixir.bootlin.com/linux/v7.2-rc3/source/drivers/tee/optee/rpc.c#L449
 
-Please drop the above, duplication is always recipe for problems.
+It is a work in progress. Once this happens, we don't need QTEE supplicant available
+on the Linux distribution.
 
-> +|                  |Bits[7:0] Number of algorithmic strings supported by the   |
-> +|                  |system. Only "MEMLAT" is currently supported hence it      |
-> +|                  |returns 1.                                                 |
-> ++------------------+-----------------------------------------------------------+
+> 
+>>
+>> Unlike the QCOM-TEE driver, the QSEECOM driver (used by the current
+>> QSEECOM based uefisecapp) does not support callback requests.
+> 
+> How did it work then? I think Windows has been perfectly using QSEECOM
+> rather than QTEE.
 
-OK, so this is the only algorithm.
+It works because Windows on Arm on Qualcomm has SPI-NOR storage. A driver for which
+is available within QTEE, and so QTEE does not need to make a callback request
+to Linux to request RPMB frame routing. However, in case of UFS/eMMC storage the
+driver only exists in the Linux kernel and so QTEE must make a callback request.
 
-> +
-> +PROTOCOL_MESSAGE_ATTRIBUTES
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +message_id: 0x2
-> +protocol_id: 0x80
-> +
-> ++------------------+-----------------------------------------------------------+
-> +|Return values                                                                 |
-> ++------------------+-----------------------------------------------------------+
-> +|Name              |Description                                                |
-> ++------------------+-----------------------------------------------------------+
-> +|int32 status      |See ARM SCMI Specification for status code definitions.    |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 attributes |For all message IDs the parameter has a value of 0.        |
-> ++------------------+-----------------------------------------------------------+
-> +
-> +QCOM_SCMI_SET_PARAM
-> +~~~~~~~~~~~~~~~~~~~
-> +
-> +message_id: 0x10
-> +protocol_id: 0x80
-> +
-> ++------------------+-----------------------------------------------------------+
-> +|Parameters                                                                    |
-> ++------------------+-----------------------------------------------------------+
-> +|Name              |Description                                                |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 ext_id     |Reserved, must be zero.                                    |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 algo_low   |Lower 32-bit value of the algorithm string.                |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 algo_high  |Upper 32-bit value of the algorithm string.                |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 param_id   |Serves as the token message id for the algorithm string    |
-> +|                  |and is used to set various parameters supported by it.     |
+And so, if you try to use the QSEECOM driver to write EFI-variables to RPMB
+on a device with UFS/eMMC storage, it won't work.
 
+> 
+>> And on
+>> certain Qualcomm platforms such as the RB3Gen2, attempts to access the
+>> QSEECOM interface fail due to lack of support within Qualcomm TEE.
+> 
+> So, I assume, on RB3 Gen2 the QSEECOM doesn't report uefisecapp as
+> supported. Does it?
 
-This is too open and can soon become ambiguous. More description on what
-exactly this token message id is a must. This is not like normal kernel
-function to keep it this ambiguous, it is a firmware interface which is
-comparable to the user ABI.
+It doesn't, this API returns -2 if I add RB3 Gen2 in the allow-list for QSEECOM:
+https://elixir.bootlin.com/linux/v7.2-rc3/source/drivers/firmware/qcom/qcom_qseecom.c#L46
 
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 buf[]      |Serves as the payload for the specified param_id and       |
-> +|                  |algorithm string pair. The payload size depends on the     |
-> +|                  |(algorithm string, param_id) pair; see the per-algorithm   |
-> +|                  |sections below.                                            |
+> 
+>> On these platforms, a TEE based uefisecapp client driver is required to:
+>> 1. Access cached & volatile EFI variables stored in uefisecapp's memory.
+>> 2. Ensure persistence of non-volatile EFI variables via writes through
+>> the RPMB service hosted in the QTEE supplicant.
+>>
+>> This series introduces such a uefisecapp TEE client driver for the
+>> aforementioned Qualcomm platforms which installs efi-var operations _if_
+>> the QCOMTEE driver registers support for an object-IPC based uefisecapp
+>> service on the TEE bus during its probe. Only new QTEE firmware versions
+>> available at [2] provide this support.
+> 
+> What about existing WoA devices?
 
+New Windows on Arm devices like Hamoa/Glymur work perfectly fine with existing
+QSEECOM based uefisecapp. But they will also work with this new QCOMTEE based
+uefisecapp once they upgrade their firmware.
 
-Ditto.
+I need to double-check but this firmware release for Glymur on Qualcomm Linux
+is probably carrying the support for QCOMTEE based uefisecapp access:
+https://github.com/qualcomm-linux/meta-qcom/commit/728251fcbe5113980805ea6c571e33235062ee71
+If not, the next release will definitely have it since I have merged support for
+this in QTEE and talked to the boot firmware release team about this.
 
-> ++------------------+-----------------------------------------------------------+
-> +|Return values                                                                 |
-> ++------------------+-----------------------------------------------------------+
-> +|Name              |Description                                                |
-> ++------------------+-----------------------------------------------------------+
-> +|int32 status      |SUCCESS: if the param_id and buf[] is parsed successfully  |
-> +|                  |by the chosen algorithm string.                            |
-> +|                  |NOT_SUPPORTED: if the algorithm string does not have any   |
-> +|                  |matches.                                                   |
-> +|                  |INVALID_PARAMETERS: if the param_id and the buf[] passed   |
-> +|                  |is rejected by the algorithm string.                       |
-> ++------------------+-----------------------------------------------------------+
-> +
-> +QCOM_SCMI_GET_PARAM
-> +~~~~~~~~~~~~~~~~~~~
-> +
-> +message_id: 0x11
-> +protocol_id: 0x80
-> +
-> ++------------------+-----------------------------------------------------------+
-> +|Parameters                                                                    |
-> ++------------------+-----------------------------------------------------------+
-> +|Name              |Description                                                |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 ext_id     |Reserved, must be zero.                                    |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 algo_low   |Lower 32-bit value of the algorithm string.                |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 algo_high  |Upper 32-bit value of the algorithm string.                |
+The next planned firmware upgrade for Hamoa will also provide this support for
+Qualcomm Linux. And similarly, for all other targets being supported upstream.
 
+> 
+>>
+>> Thus, QCOMTEE now maintains a static list of always-available object-IPC
+>> based secure services exposed by QTEE. These services are implemented either
+>> within the QTEE kernel or within a pre-loaded Trusted Application (TA)
+>> usually loaded by the bootloader. The uefisecapp TA is an example of a
+>> preloaded TA loaded by UEFI. A static list is required since QTEE does not
+>> yet expose any way to dynamically query and enumerate the services exposed by
+>> it.
+> 
+> Can it be fixed instead of having static lists? In the end, we can't
+> guarantee that users update the firmware.
+>
 
-At this point I start to think what is the point of exchanging the whole 8
-byte string back and forth instead of simple ID.
+Unfortunately, no existing QTEE release out there currently has this support.
+But support for this is currently being added by QTEE team last I checked with them.
+Once it is available, and a new QTEE firmware release is out there, we will add
+support for dynamically querying QTEE services in the QCOMTEE driver. 
+>>
+>> To facilitate object-IPC interactions from the kernel-space, this
+>> series also introduces a tee_client_object_invoke_func() to allow
+>> invocation of TEE objects similar to the existing tee_client_invoke_func()
+>> API exported by the TEE subsystem which allows invocation of TEE functions.
+>> Some suporting changes are also introduced to track and handle operations
+>> for TEE contexts opened from the kernel-space in the back-end QCOM-TEE
+>> driver.
+>>
+>> Finally and as previously mentioned, access to the object-IPC based uefisecapp
+>> service is restricted on older QTEE firmware versions. A new QTEE firmware
+>> release must be picked up from QArtifactory [2] for all upstream supported
+>> Qualcomm SoCs to enable access to uefisecapp service via the TEE client
+>> driver.
+> 
+> What about fused devices?
 
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 param_id   |Serves as the token message id for the algorithm string.   |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 buf[]      |Serves as the payload and store of value for the specified |
-> +|                  |param_id and algorithm string pair. The payload size       |
-> +|                  |depends on the (algorithm string, param_id) pair; see the  |
-> +|                  |per-algorithm sections below. The response payload is      |
-> +|                  |returned in the same buffer, overwriting the request       |
-> +|                  |contents on success.                                       |
+The procedure for updating the firmware on fused devices is slightly different.
+The firmware images need to be signed by the OEM using the security profile
+of the chipset before flashing/upgrading them. Security profiles are now public:
+https://github.com/qualcomm/security-profiles
 
-
-Ditto as above(too ambiguous, gives no clue on what that is)
-
-> ++------------------+-----------------------------------------------------------+
-> +|Return values                                                                 |
-> ++------------------+-----------------------------------------------------------+
-> +|Name              |Description                                                |
-> ++------------------+-----------------------------------------------------------+
-> +|int32 status      |SUCCESS: if the param_id and buf[] is parsed successfully  |
-> +|                  |by the chosen algorithm string and the result is copied    |
-> +|                  |into buf[].                                                |
-> +|                  |NOT_SUPPORTED: if the algorithm string does not have any   |
-> +|                  |matches.                                                   |
-> +|                  |INVALID_PARAMETERS: if the param_id and the buf[] passed   |
-> +|                  |is rejected by the algorithm string.                       |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 buf[]      |Holds the payload of the result of the query, returned in  |
-> +|                  |the same buffer used to send the request. Size depends on  |
-> +|                  |the (algorithm string, param_id) pair.                     |
-> ++------------------+-----------------------------------------------------------+
-> +
-> +QCOM_SCMI_START_ACTIVITY
-> +~~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +message_id: 0x12
-> +protocol_id: 0x80
-> +
-> +The activity to be started is defined by the algorithm string; see the
-> +per-algorithm sections (e.g. MEMLAT_START_TIMER) for valid param_ids.
-> +
-> ++------------------+-----------------------------------------------------------+
-> +|Parameters                                                                    |
-> ++------------------+-----------------------------------------------------------+
-> +|Name              |Description                                                |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 ext_id     |Reserved, must be zero.                                    |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 algo_low   |Lower 32-bit value of the algorithm string.                |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 algo_high  |Upper 32-bit value of the algorithm string.                |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 param_id   |Serves as the token message id for the algorithm string    |
-> +|                  |and is generally used to start the activity performed by   |
-> +|                  |the algorithm string.                                      |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 buf[]      |Serves as the payload for the specified param_id and       |
-> +|                  |algorithm string pair. The payload size depends on the     |
-> +|                  |(algorithm string, param_id) pair; see the per-algorithm   |
-> +|                  |sections below.                                            |
-
-
-Ditto
-
-> ++------------------+-----------------------------------------------------------+
-> +|Return values                                                                 |
-> ++------------------+-----------------------------------------------------------+
-> +|Name              |Description                                                |
-> ++------------------+-----------------------------------------------------------+
-> +|int32 status      |SUCCESS: if the activity performed by the algorithm string |
-> +|                  |starts successfully, or if it was already running.         |
-> +|                  |NOT_SUPPORTED: if the algorithm string does not have any   |
-> +|                  |matches.                                                   |
-> ++------------------+-----------------------------------------------------------+
-> +
-> +QCOM_SCMI_STOP_ACTIVITY
-> +~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +message_id: 0x13
-> +protocol_id: 0x80
-> +
-> +The activity to be stopped is defined by the algorithm string; see the
-> +per-algorithm sections (e.g. MEMLAT_STOP_TIMER) for valid param_ids.
-> +
-> ++------------------+-----------------------------------------------------------+
-> +|Parameters                                                                    |
-> ++------------------+-----------------------------------------------------------+
-> +|Name              |Description                                                |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 ext_id     |Reserved, must be zero.                                    |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 algo_low   |Lower 32-bit value of the algorithm string.                |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 algo_high  |Upper 32-bit value of the algorithm string.                |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 param_id   |Serves as the token message id for the algorithm string    |
-> +|                  |and is generally used to stop the activity performed by    |
-> +|                  |the algorithm string.                                      |
-> ++------------------+-----------------------------------------------------------+
-> +|uint32 buf[]      |Serves as the payload for the specified param_id and       |
-> +|                  |algorithm string pair. The payload size depends on the     |
-> +|                  |(algorithm string, param_id) pair; see the per-algorithm   |
-> +|                  |sections below.                                            |
-
-
-Ditto
-
-> ++------------------+-----------------------------------------------------------+
-> +|Return values                                                                 |
-> ++------------------+-----------------------------------------------------------+
-> +|Name              |Description                                                |
-> ++------------------+-----------------------------------------------------------+
-> +|int32 status      |SUCCESS: if the activity performed by the algorithm string |
-> +|                  |stops successfully, or if it was not running.              |
-> +|                  |NOT_SUPPORTED: if the algorithm string does not have any   |
-> +|                  |matches.                                                   |
-> ++------------------+-----------------------------------------------------------+
-> +
-> +MEMLAT: Memory Latency algorithm
-> +________________________________
-> +
-> +The MEMLAT algorithm (0x4d454d4c4154, ASCII "MEMLAT") scales the DDR, LLCC and
-> +DDR_QOS buses in response to memory-latency-bound workloads. It runs on the CPUCP:
-> +every sampling window it reads the per-CPU AMU counters, derives its statistics
-> +(instructions-per-miss, back-end stall, write-back ratio), maps that to a target
-> +level and votes for it directly on the DDR/LLCC/DDR_QOS interconnect. The kernel
-> +never issues a frequency request in that loop. The 6-byte value is treated as a
-> +64-bit algorithm string and split into two uint32 fields on the wire: algo_low
-> +carries its lower 32 bits and algo_high its upper 32 bits.
-> +
-> +With a distinct need to have the memory buses scaling done in SCP in response to
-> +memory-latency-bound workloads, none of the existing SCMI solutions could be used
-> +as-is. MPAM does not apply either: it is not enabled on all of the affected parts
-> +(e.g. Hamoa). The role split between SCP and client driver is described next.
-> +
-> +MEMLAT client driver pseudo-code:
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +.. code-block:: text
-> +
-> +  probe():
-> +    SET_COMMON_EV_MAP                          # AMU events (all groups)
-> +    for each memory group (DDR / LLCC / DDR_QOS):
-> +      SET_MEM_GROUP                            # bind group to interconnect
-> +      SET_GRP_EV_MAP                           # per-group AMU events
-> +      for each monitor in the group:
-> +        SET_MONITOR                            # topology, cpumask, name
-> +        IPM_CEIL / BE_STALL_FLOOR              # per-monitor tuneables
-> +        MON_FREQ_MAP                           # cpufreq -> memfreq map
-> +        SET_MIN_FREQ / SET_MAX_FREQ            # clamps
-> +    SAMPLE_MS                                  # sampling period
-> +    SET_EFFECTIVE_FREQ_METHOD                  # cpu-freq derivation method
-> +    START_TIMER                                # CPUCP now scales autonomously
-> +
-> +  devfreq poll (twice per CPUCP sample period):
-> +    GET_CUR_FREQ                               # read voted freq, per monitor
-> +
-> +  remove():
-> +    STOP_TIMER
-> +
-> +SCP pseudo-code:
-> +~~~~~~~~~~~~~~~~
-> +
-> +.. code-block:: text
-> +
-> +  every sample_ms:
-> +    for each CPU:
-> +      sample AMU counters (instructions, cycles, cache-misses, stalls)
-> +      derive per-CPU IPM, back-end-stall % and write-back ratio
-> +
-> +    for each configured memory group (DDR / LLCC / DDR_QOS):
-> +      for each monitor in the group:
-> +        best_freq = 0
-> +        for each CPU in the monitor's cpumask:
-> +          if CPU is memory-bound (IPM/stall/write-back vs. the
-> +             monitor's configured thresholds):
-> +            freq = CPU's cpufreq, optionally scaled toward the ceiling
-> +            best_freq = max(best_freq, freq)
-> +        monitor.target_freq = monitor's cpufreq->memfreq map(best_freq)
-> +
-> +      group_vote = max(target_freq of every monitor in the group)
-> +      if group_vote changed since the last sample:
-> +        vote group_vote onto the group's interconnect path
-> +
-> +  GET_CUR_FREQ returns a monitor's last target_freq
-> +  START_TIMER / STOP_TIMER: resume / suspend the loop above
-> +
-> +MEMLAT: Supported memory buses
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +The hw_type field carried in most payloads identifies the memory group:
-> +
-> ++----------+--------------------------------------------------------------+
-> +|hw_type   |Group                                                         |
-> ++----------+--------------------------------------------------------------+
-> +|0         |DDR                                                           |
-> ++----------+--------------------------------------------------------------+
-> +|1         |LLCC                                                          |
-> ++----------+--------------------------------------------------------------+
-> +|2         |DDR_QOS_COMPUTE                                               |
-> ++----------+--------------------------------------------------------------+
-> +|3         |DDR_QOS_MOBILE                                                |
-> ++----------+--------------------------------------------------------------+
-> +
-> +All multi-byte fields below are little-endian. mon_idx selects a monitor
-> +within the group (0-based, less than the firmware-supported maximum). All
-> +SET commands return the SCMI status word; on success it carries SUCCESS, on
-> +lookup failure INVALID_PARAMETERS, and on an unknown param_id NOT_SUPPORTED.
-> +
-> +Frequency units are not uniform across commands (kHz, MHz or a raw 0/1
-> +DDR_QOS level, depending on the param_id); each command documents its own
-> +units below.
-> +
-> +MEMLAT_SET_MEM_GROUP
-> +~~~~~~~~~~~~~~~~~~~~
-> +
-> +param_id: 0x10 (16)
-
-
-Ah so, these are param id for the above commands I mentioned as too
-ambiguous ? If so, at this point I think it is better to make custom
-vendor protocol ID 0x80 for MEMLAT and make all these part of it.
-I think my comment of multiplexing is a bad idea seem to be confirmed here.
-I will skip the rest as it makes no sense to review it any further.
-
--- 
 Regards,
-Sudeep
+Harshal
+
+> 
+>>
+>> This patch series has been validated on Kodiak RB3Gen2 platform with UFS
+>> storage by attempting to read/write EFI variables via the efivar tool [3]
+>> after mounting the efivarfs filesystem. See [4] for an example.
+>>
+>> Merge Strategy:
+>>
+>> This patch series could either be taken from the OP-TEE tree or the
+>> QCOM soc tree. I would prefer it to be picked by the OP-TEE tree since
+>> all except the uefisecapp TEE client driver patch in this series make
+>> changes relevant to the TEE subsystem. It would be great if the QCOM soc
+>> tree maintainers can Ack the uefisecapp driver patch.
+>>
+>> [1] https://github.com/qualcomm/minkipc
+>> [2] https://shorturl.at/zQU07
+>> [3] https://github.com/rhboot/efivar
+>> [4] https://docs.qualcomm.com/doc/80-70020-27/topic/manage_uefi_environment_variables_using_efivar_tool.html
+>>
+>> Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
+>> ---
+>> Changes in v2:
+>> - Drop using MSB of the object_id to distingush kernel and user object invoke contexts.
+>> - Introduce enum tee_object_invoke_origin to check the context of object invocation.
+>> - Link to v1: https://lore.kernel.org/r/20260707-qcom_uefisecapp_migrate_qcomtee-v1-0-f659cbd5d04c@oss.qualcomm.com
+>>
+>> ---
+>> Amirreza Zarrabi (2):
+>>       tee: Add kernel client object invoke helper
+>>       tee: qcomtee: Allow object invokes from kernel clients
+>>
+>> Harshal Dev (4):
+>>       tee: qcomtee: Track the object invocation context
+>>       tee: Export uuidv5 generation for TEE backends
+>>       tee: qcomtee: Add support for registering QTEE services on TEE bus
+>>       firmware: qcom: Add support for TEE based EFI-var client driver
+>>
+>>  MAINTAINERS                                 |   7 +
+>>  drivers/firmware/qcom/Kconfig               |  24 ++
+>>  drivers/firmware/qcom/Makefile              |   1 +
+>>  drivers/firmware/qcom/qcom_tee_uefisecapp.c | 525 ++++++++++++++++++++++++++++
+>>  drivers/firmware/qcom/qcom_tee_uefisecapp.h | 120 +++++++
+> 
+> I don't see any changes to the QSEECOM drivers. Is it allowed to use
+> QSEECOM and QTEE access to uefisecapp at the same time?
+> 
+>>  drivers/tee/qcomtee/call.c                  | 205 ++++++++++-
+>>  drivers/tee/qcomtee/core.c                  |   9 +-
+>>  drivers/tee/qcomtee/qcomtee.h               |  12 +
+>>  drivers/tee/qcomtee/qcomtee_msg.h           |   1 +
+>>  drivers/tee/qcomtee/qcomtee_object.h        |  16 +-
+>>  drivers/tee/tee_core.c                      |  24 +-
+>>  include/linux/tee_core.h                    |  23 +-
+>>  include/linux/tee_drv.h                     |  18 +-
+>>  13 files changed, 952 insertions(+), 33 deletions(-)
+>> ---
+>> base-commit: f3e6330d7fe42b204af05a2dbc68b379e0ad179e
+>> change-id: 20260408-qcom_uefisecapp_migrate_qcomtee-13869d45e014
+>>
+>> Best regards,
+>> -- 
+>> Harshal Dev <harshal.dev@oss.qualcomm.com>
+>>
+> 
+
