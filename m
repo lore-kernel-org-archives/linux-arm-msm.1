@@ -1,85 +1,135 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE92D3515F9
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 22:00:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 17D77474250;
+	Fri, 24 Jul 2026 22:45:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784930429; cv=none; b=sEuv7eSLu4njMw0w1hBKn6LTnzWfNx4ktQ5dKjLvLHfmn6T5mhjgiF0R1eY1iFVXJQMYlFIJuvUPcb3712WlXuNU+nz0ZJ6/wjZ5PD8RbWTR4rTfGuJpZcztGcK8JYqm7Vvs8P1a8xkFSFy9TCr/677Sjl15jqoHJ12hGi72hwY=
+	t=1784933166; cv=none; b=aDWiun7La8ORsztu+fP9L5kzqggsaUqV2Je0NTnZUPaX6h8AoG8MTOBNgOTGF4XpkvE9hcfnMh5RhUywn3bLEHmJD30meQQQS9EI+WzSzaVj/WPglobfJnAT4hG50g/+3KtrI9+kKdAyWqibwYh5fVyOeWe24CTKXysLo+f5Me8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784930429; c=relaxed/simple;
-	bh=ciurbXVG7tI+GxVWU3OIFmJA2VqTVB1aguW3w0pZ6WE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=DMMxMNrKgAPTIy7/XnZc+uAzDQLWdrNxf2SYS6rpQhzlCaNA6fstrxmAylVvj5HFEWv5foW/dEZHtYIIVY8VnXyoYKakDeYB4Q29UPfWIGsH5OhnNMIfRSIthQzc/LtgHJP0HxUyxnCRptsfSd4whkwO7olupzqgVIkEfm2oU3Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=n/IuILDu; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784933166; c=relaxed/simple;
+	bh=e4Q33RAXNj4uJS5ISuZOeLCNZsLtSpbzoOGnqL3oT+A=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=ZjzU32uJFAqnHdZs6rxpxCnAOc3PsyvvqkRTK9cC3i5I4B4B3VntR4c2PZKDZ+MgtGNfLmCoki81i6KGOp+ZjUj2ijeR23BnJAFRZpmyuC1yVxx6IF+fTzArbkyP+9QcHvc30UGHSjP2tVneaJyJ56+itNiYja8GdMM6C30NcXY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ezEc5WAt; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="n/IuILDu"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DA321F00A3D
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 22:00:27 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ezEc5WAt"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE7801F000E9;
+	Fri, 24 Jul 2026 22:45:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784930427;
-	bh=ciurbXVG7tI+GxVWU3OIFmJA2VqTVB1aguW3w0pZ6WE=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=n/IuILDu+lvOuOI1AbxNCaPIbF2MNNdbsE4T1jaE65xUfYs9zdEVa5FU+2/dztBt6
-	 Y7LmD+L5eAVvAYNRLg3mb8RMgAes8mLlOoSP4jzjPLF1kQ+qHcO3h4YwxdbiR/S25J
-	 3NCXTEZUUo76k2F7YjCS4dTwUaqa3eb9P5QlbRD09btxJtzDJ7Sn71Ks0mLK/lx6E4
-	 b7VFA1I3S9xnBbT1BGn+E6N3YhyBrpYQ/Kf5oQtG2X49nWjibx9wB8VZUyQvCY2eXE
-	 /2+akqwHRI61C5wmSFMUqOZQNQC4Nt+W3eGsPGfgc9cxpo6lvyK9zPRYSkZUqbT9JW
-	 wLQ3r9bzTQ93Q==
-Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-5b0f19bea2fso970653e87.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 15:00:27 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RrDnwnwTIgbJqJiGqOgoT4Ou0jOFARmJ79A2iTUWyHV5jSde/MseoJyPC6WhltcHX9qntfnGCXqi/9fm2Z5@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx3YflZD6tqL3Mxc/hQcFIX+Y/KybE01+/YACVI7nD9268fKkvl
-	8Yev3JzeHvtNptCae/tcuctZLXkQr4vIw3U/0eTlOLit/eBYubPyCLAyXVYlniwMTHq5p+s7Vut
-	ylHbKCMpibinrQQC/nslek4asYC6ZiC0=
-X-Received: by 2002:a05:6512:144f:20b0:5b0:1685:e369 with SMTP id
- 2adb3069b0e04-5b2b2f69b51mr1418525e87.42.1784930426435; Fri, 24 Jul 2026
- 15:00:26 -0700 (PDT)
+	s=k20260515; t=1784933155;
+	bh=+Js/I4/QcWnb0zbX3gJ/7hcd5ufvSHyxR3nJSzCYliA=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=ezEc5WAtQmjF1QNZEepG+PeGNUSM1i0ETfgxrcmRp2dFbxVSIBg5Ug2rt2jfXSA/J
+	 /BJ8Q7Q8fJGb/Fy06yCqKiRQD6fukqeCaNl+KEz+xTWvMe74o/PDAZ1cOPXC2klD1l
+	 CdT2J1YMHvMXMZovWR/n65Im1ZcZLRVhAL52YiF55A8NElc5hGew7qh1bcT/QdhDYC
+	 8JConp1P0raofTTt2KatNTEbDBNoUctVg2yhjzeIDngIzInOwIGh7DAleTGovW1TFH
+	 VWi+Ae3CHAb/7wh4nSQnZkyyC4s2uq4Zv0pO0d6folIFc8CXTpntfDy+CznQO/i3SV
+	 k/19l+KNqw3Jg==
+From: Jakub Kicinski <kuba@kernel.org>
+To: bartosz.golaszewski@oss.qualcomm.com
+Cc: Jakub Kicinski <kuba@kernel.org>,
+	andersson@kernel.org,
+	konradybcio@kernel.org,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	andrew+netdev@lunn.ch,
+	davem@davemloft.net,
+	edumazet@google.com,
+	pabeni@redhat.com,
+	mcoquelin.stm32@gmail.com,
+	alexandre.torgue@foss.st.com,
+	vkoul@kernel.org,
+	peppe.cavallaro@st.com,
+	wens@kernel.org,
+	jernej.skrabec@gmail.com,
+	neil.armstrong@linaro.org,
+	khilman@baylibre.com,
+	jbrunet@baylibre.com,
+	shawnguo@kernel.org,
+	festevam@gmail.com,
+	jan.petrous@oss.nxp.com,
+	s32@nxp.com,
+	mohd.anwar@oss.qualcomm.com,
+	romain.gantois@bootlin.com,
+	geert+renesas@glider.be,
+	magnus.damm@gmail.com,
+	mripard@kernel.org,
+	christophe.roullier@foss.st.com,
+	brgl@kernel.org,
+	radu@rendec.net,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	netdev@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-arm-kernel@lists.infradead.org,
+	dfustini@tenstorrent.com,
+	linux-sunxi@lists.linux.dev,
+	linux-amlogic@lists.infradead.org,
+	linux-mips@vger.kernel.org,
+	imx@lists.linux.dev,
+	linux-renesas-soc@vger.kernel.org,
+	linux-rockchip@lists.infradead.org,
+	sophgo@lists.linux.dev,
+	linux-riscv@lists.infradead.org,
+	bartosz.golaszewski@linaro.org
+Subject: Re: [PATCH net-next v13 02/10] dt-bindings: phy: document the serdes PHY on sa8255p
+Date: Fri, 24 Jul 2026 15:45:48 -0700
+Message-ID: <20260724224548.1648931-1-kuba@kernel.org>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260713-qcom-sa8255p-emac-v13-2-119f8699ef8e@oss.qualcomm.com>
+References: <20260713-qcom-sa8255p-emac-v13-2-119f8699ef8e@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260424-pinctrl_irqchip_states-v1-1-85286f078916@oss.qualcomm.com>
-In-Reply-To: <20260424-pinctrl_irqchip_states-v1-1-85286f078916@oss.qualcomm.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Sat, 25 Jul 2026 00:00:14 +0200
-X-Gmail-Original-Message-ID: <CAD++jLnQ1ZmRDZMA0DfAhuVSi2zhqKSrn-xRCNdrAcV4eT1jUg@mail.gmail.com>
-X-Gm-Features: AUfX_mwCQaGPJnUAmt5Lw4bgTuDl8LcZ2_9ygrXHQMoldDRAoXRQYXi-6OKOdj8
-Message-ID: <CAD++jLnQ1ZmRDZMA0DfAhuVSi2zhqKSrn-xRCNdrAcV4eT1jUg@mail.gmail.com>
-Subject: Re: [PATCH] pinctrl: qcom: Add irq_get/set_irqchip_state() for msm
- gpio irqchip
-To: Sneh Mankad <sneh.mankad@oss.qualcomm.com>, Bartosz Golaszewski <brgl@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org, 
-	linux-gpio@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Maulik Shah <maulik.shah@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-On Fri, Apr 24, 2026 at 8:31=E2=80=AFAM Sneh Mankad
-<sneh.mankad@oss.qualcomm.com> wrote:
+This is an AI-generated review of your patch. The human sending this
+email has considered the AI review valid, or at least plausible.
+---
+dt-bindings: phy: document the serdes PHY on sa8255p
 
-> From: Maulik Shah <maulik.shah@oss.qualcomm.com>
->
-> MPM irqchip monitors the interrupts during SoC sleep state and after wake=
-up
-> replays the edge interrupt by making it pending at respective irqchip by
-> invoking irq_set_irqchip_state() API. The msm gpio irqchip however do not
-> implement this function making it impossible to replay the gpio interrupt
-> on any MPM irqchip based SoC.
->
-> Add the missing irq_get/set_irqchip_state() APIs. Implement only
-> IRQCHIP_STATE_PENDING case which MPM irqchip uses.
->
-> Signed-off-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
-> Signed-off-by: Sneh Mankad <sneh.mankad@oss.qualcomm.com>
+This patch adds a YAML binding describing the SGMII/SerDes PHY present on
+Qualcomm sa8255p platforms, where the same hardware as on sa8775p rev3 is
+managed by firmware over SCMI.
 
-This needs to be queued by Bartosz now that he's maintaining
-Qcom pinctrl.
+> diff --git a/Documentation/devicetree/bindings/phy/qcom,sa8255p-dwmac-sgmii-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,sa8255p-dwmac-sgmii-phy.yaml
+> new file mode 100644
+> index 000000000000..9e846e381555
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/phy/qcom,sa8255p-dwmac-sgmii-phy.yaml
+> @@ -0,0 +1,50 @@
 
-FWIW
-Acked-by: Linus Walleij <linusw@kernel.org>
+[ ... ]
 
-Yours,
-Linus Walleij
+> +  power-domains:
+> +    maxItems: 1
+> +
+> +  power-domain-names:
+> +    maxItems: 1
+
+[Low]
+This isn't a bug, but would it be worth tightening the power-domain-names
+schema to constrain the actual string value, along the lines of:
+
+  power-domain-names:
+    items:
+      - const: serdes
+
+As written, only the number of entries is constrained and any arbitrary
+string would pass validation, whereas the example uses "serdes":
+
+    power-domains = <&scmi7_dvfs 0>;
+    power-domain-names = "serdes";
+
+Would matching the example with a const also help keep naming consistent
+across DTs using this binding?
+
+[ ... ]
+-- 
+pw-bot: cr
