@@ -1,129 +1,86 @@
-Received: from mx0a-0002e601.pphosted.com (mx0a-0002e601.pphosted.com [148.163.150.75])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE86B4457C5;
-	Fri, 24 Jul 2026 16:39:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=148.163.150.75
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784911172; cv=fail; b=p6P/IwlDM5ifpj/JkTJL5TUjP/kvt9aK1ub/bSGPMXHRFlWhoesNlg5jGv6bTuXhEyUSNU75BdTGsdAzXpa3Q1Aa16FaUUgwmhvbs0GtV3P18Pc3GI1ZJnCMuzGHaw4z/akHfGBAG/qpwKLSGTWMZNOhNpujrPuTBf9drw9RCJA=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784911172; c=relaxed/simple;
-	bh=8TYKhbNAoZ51XCm0vOZdYbfwPuSUJDBMx15xo84mIs8=;
-	h=From:To:CC:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=qK+4W4mQmy7L+64GXOjBhwTeSfqJ9ECUAYfJ4ZnYsKzrIRrolgvd+HXZmu6BvvgGP9ulnVT1/gKtjveagSIfybW/1MDoEdxYvmkFUtZVBiTMadsbMVMkkKVVPdTCS9DlIBcm1VPFeO26ggbktSNHGAggYLpw6T7E9p7acPbUeEo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com; spf=pass smtp.mailfrom=ti.com; dkim=pass (2048-bit key) header.d=ti.com header.i=@ti.com header.b=Eh5WLgtX; dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b=kWaJBiHX; arc=fail smtp.client-ip=148.163.150.75
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ti.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 60B5E448BAE
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 17:15:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784913353; cv=none; b=YIj6dSX9+920ZCl4QNYJIM9KdgTZR+JUvoa8n4FCXPx3+vHp/l7Ov/s/U3aoZ4wbnFE9oqKYrkZ04yfuwWx+UtlpBWE+tjzYWqBtFgSEZLDzmDwxeZ+D0odFCW3vPgr0xM6H2lqGKp/GbVXEmYLJgZi6sDRGnnYrn9NE6/7pkxc=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784913353; c=relaxed/simple;
+	bh=cqy555QSWc5h3PtpXrxjXRNReCwntJOnKsOaYjQ+aG4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=Ni10LnZ0HLS8qeMDIoipHiboDlGBy4+bg+WfnkXxzZG8YcnInUTyLSOC2Bxhb6BvVaC3KqxAbALDH4gu5VimfnvU3Glyb2V4qlXQEl/6UYNKM9dJMPnmabbWqTqWpMK/PRoCyeJmnsBYCxKhrkYAVZ4QzH0QiocLUd1TRWgg61E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dQzVet27; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YBTbD/aN; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ti.com header.i=@ti.com header.b="Eh5WLgtX";
-	dkim=pass (1024-bit key) header.d=ti.com header.i=@ti.com header.b="kWaJBiHX"
-Received: from pps.filterd (m0384305.ppops.net [127.0.0.1])
-	by m0384305.ppops.net (8.18.1.11/8.18.1.11) with ESMTP id 66ODdth83234199;
-	Fri, 24 Jul 2026 11:38:52 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	proofpoint-05-2026; bh=tO+l0boHt/uy2bye3LGM78GjpCC91Ksm16Gp2zUd7
-	j4=; b=Eh5WLgtXYEwEZv4FW/SrPtO8T2QGly9tzw+vsxKS4uzeaMyyRsjhXW0DF
-	F8CZJnCrSr+OV8pZH29ec6k6BqwV8RyO4cmIImJvqJFMFmtGmaJvac/E2ZkTv/tZ
-	tzRDt+tSzA3Ni0VhBBqbDccyg41S0JShJyMkZUs81X1m+U4b2/1nkckNihtcyxrz
-	xL72jZ0LqPj9EEG8p1o50VfMgCkDDSJBQZMdPUdnrEl3OXjgidZuNPar64Rcx5pF
-	Sl4h1dooGxUnPKaNzF9nQJFCjV7J/yAkGfXX1yXI6jMVuDS89TDh4fZ8e+oUhTjU
-	Dy+bWV6g5+kn8nq2ulfM4+zBdaORQ==
-Received: from sn4pr0501cu005.outbound.protection.outlook.com (mail-southcentralusazon11011016.outbound.protection.outlook.com [40.93.194.16])
-	by m0384305.ppops.net (PPS) with ESMTPS id 4fm8k7h5ww-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Fri, 24 Jul 2026 11:38:52 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=pPq/OWwEyyFz8TVFOSQvUGCVirixhFg6VGQGbHueGJXhlx0jXLBjBcT9H3LJb21o47WqMO5nTtOUPuNA7VmtLrGAwRXGZs6IUCpIDpPhSpSl5LRr7ou4VlxBJaPiV00sQzxDvcD94P9aapr8w46qVHq2WNZFt8E4FloavU/jLC4DBeldQucyOVP2tsBLWhRvZyUWU5Gzsjtj1PMiZ4Elzha/+4PMnFEpf/fbLxYxgJFpcGynvAT1deN/n9VYrFZXUi6ntXzmYxT71hvSTla6hMzdAP8Iy7dA7OKYxbZdZXXZvRhpnEsTHFHbMMn4kljid32h9LVzXkWyr4yX2yiTaA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tO+l0boHt/uy2bye3LGM78GjpCC91Ksm16Gp2zUd7j4=;
- b=BZ5Lwl5kg3rIjM0vbrShqPH0/3XWnjWiwUZRYpKA+Yq+apExXFYBO0hsquKi53dZSLb8exXTWagAIrD3YTbeK48voHssAWyDrxYb2X54+8s4q/rtldTJGx9gAgkZ6gt+Yqj/oO7PBtYvafbwtlBSSHHT3u1Wm9610ye8Dh5xZXypbAyHc3YOD4igMHI5Fci5qbIQ97eguOVArXuyjUAYP1QEmMUa6tGrY+a4VJ8FHwfT5Awk7TdFinfdyFE89zqR0lZuOi/5Zgp6uZf7O7kGzkMgJiuk1Cre/vYWni33h+AlZabpavHFOfkYhXn5II0mEH1twWyXCdZ/MBeOuV/SNA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 198.47.23.194) smtp.rcpttodomain=vivo.com smtp.mailfrom=ti.com; dmarc=pass
- (p=quarantine sp=none pct=100) action=none header.from=ti.com; dkim=none
- (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tO+l0boHt/uy2bye3LGM78GjpCC91Ksm16Gp2zUd7j4=;
- b=kWaJBiHXqOcuUPe5+GkbT6EFu2UlOszRGkz1wTe0dbLnH10a2yJhOoHhiQRp+sJqIFw12hXG56/iGAvK5PPFI5evqDYO7tYR4tzc/p12kANttD7LSkSTY89pJT2VOmD2Y97bSlLT/e6hz1ksoGtfXmHIhhwYuythJugrtCLe9qI=
-Received: from BLAPR03CA0180.namprd03.prod.outlook.com (2603:10b6:208:32f::10)
- by CO1PR10MB4625.namprd10.prod.outlook.com (2603:10b6:303:6d::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.12; Fri, 24 Jul
- 2026 16:38:41 +0000
-Received: from BL02EPF0002992E.namprd02.prod.outlook.com
- (2603:10b6:208:32f:cafe::54) by BLAPR03CA0180.outlook.office365.com
- (2603:10b6:208:32f::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.245.11 via Frontend Transport; Fri,
- 24 Jul 2026 16:38:41 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 198.47.23.194)
- smtp.mailfrom=ti.com; dkim=none (message not signed) header.d=none;dmarc=pass
- action=none header.from=ti.com;
-Received-SPF: Pass (protection.outlook.com: domain of ti.com designates
- 198.47.23.194 as permitted sender) receiver=protection.outlook.com;
- client-ip=198.47.23.194; helo=lewvzet200.ext.ti.com; pr=C
-Received: from lewvzet200.ext.ti.com (198.47.23.194) by
- BL02EPF0002992E.mail.protection.outlook.com (10.167.249.59) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.270.5 via Frontend Transport; Fri, 24 Jul 2026 16:38:39 +0000
-Received: from DLEE208.ent.ti.com (157.170.170.97) by lewvzet200.ext.ti.com
- (10.4.14.103) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 24 Jul
- 2026 11:38:37 -0500
-Received: from DLEE206.ent.ti.com (157.170.170.90) by DLEE208.ent.ti.com
- (157.170.170.97) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37; Fri, 24 Jul
- 2026 11:38:37 -0500
-Received: from lelvem-mr05.itg.ti.com (10.180.75.9) by DLEE206.ent.ti.com
- (157.170.170.90) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.37 via Frontend
- Transport; Fri, 24 Jul 2026 11:38:37 -0500
-Received: from localhost (uda0133052.dhcp.ti.com [128.247.81.232] (may be forged))
-	by lelvem-mr05.itg.ti.com (8.18.1/8.18.1) with ESMTP id 66OGcbiI4192341;
-	Fri, 24 Jul 2026 11:38:37 -0500
-From: Nishanth Menon <nm@ti.com>
-To: Roy Pledge <Roy.Pledge@nxp.com>,
-        "Christophe Leroy (CS GROUP)"
-	<chleroy@kernel.org>,
-        Linus Walleij <linusw@kernel.org>, Imre Kaloz
-	<kaloz@openwrt.org>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-        "Bjorn
- Andersson" <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Thierry Reding <thierry.reding@kernel.org>,
-        Jonathan Hunter
-	<jonathanh@nvidia.com>,
-        Santosh Shilimkar <ssantosh@kernel.org>,
-        Michal Simek
-	<michal.simek@amd.com>,
-        Shashank Balaji <shashank.mahadasyam@sony.com>,
-        "Gary
- Guo" <gary@garyguo.net>, Sumit Gupta <sumitg@nvidia.com>,
-        Rahul Bukte
-	<rahul.bukte@sony.com>,
-        =?UTF-8?q?Bruno=20Sobreira=20Fran=C3=A7a?=
-	<brunofrancadevsec@gmail.com>,
-        Prasanna Kumar T S M
-	<ptsm@linux.microsoft.com>,
-        Marco Crivellari <marco.crivellari@suse.com>,
-        "Jay Buddhabhatti" <jay.buddhabhatti@amd.com>,
-        <linux-kernel@vger.kernel.org>, <linuxppc-dev@lists.ozlabs.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-mediatek@lists.infradead.org>, <linux-arm-msm@vger.kernel.org>,
-        <linux-tegra@vger.kernel.org>, Pan Chuang
-	<panchuang@vivo.com>
-CC: Nishanth Menon <nm@ti.com>
-Subject: Re: (subset) [PATCH 0/7] soc: Remove redundant error messages on IRQ request failure
-Date: Fri, 24 Jul 2026 11:38:35 -0500
-Message-ID: <178491109420.3162889.2128805019731933130.b4-ty@b4>
-X-Mailer: git-send-email 2.47.0
-In-Reply-To: <20260720095920.542801-1-panchuang@vivo.com>
-References: <20260720095920.542801-1-panchuang@vivo.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dQzVet27";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YBTbD/aN"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66OGqWNA3779954
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 17:15:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=hcBNhE02O2Iu2ALNDoF6GS
+	g9Hlyx/IdIZQTn66e6kfw=; b=dQzVet273seqI+wHmIX4EQd9kQPFV8N4kxBcHU
+	Xl+CFAWYytANwUyeAE0wqUUuqDAbHJYbHwFYDY6ALAvCK+W9yRicDfBPX+aj5cei
+	lwIaaphEfDL6xm84kHIDhzft6LxRWUgms9QuPwiAekduaWB3RkssajG1JlU5c2OF
+	86dSzcA5vguKFYQl4kdas6oj/aDYtYHm/Ndh93Nhp51sK3h4aWFPj9uxQiLBKIPW
+	oDx4S8POEAQnEEeH2v7J/Jaqve5bkMGR08LZ/WXQ/BiwVXtnDBoUztsFt07eYFQH
+	ASQeLspe2EKHjOs/OerA2bACjMqMeUeOhYzXfDfYQWmO/ssg==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fm5bysqth-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 17:15:50 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cc640dfde3so8915555ad.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 10:15:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784913349; x=1785518149; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=hcBNhE02O2Iu2ALNDoF6GSg9Hlyx/IdIZQTn66e6kfw=;
+        b=YBTbD/aNthHqKWhRkeCxgVUC2xhbEkpBMOxRNzG4ed0DHe/99QeQaKVXs5Y+853esn
+         hz66EqIjUZHZw/hNLt8WDwAq/RSskSFc70zbkPnNrxpQe/U0xjcJWUe2z9uyUo+P9uUo
+         ZrIbVwXvt7Tq8LRe4v2irHRYOb7Ktl9ErxgGeRndO76RA5Q5RyH6OgeawtbKPoe6SMBG
+         1l1tRbFzPcCYdyJAPsGBgUCOY8lZdbsj5AA98arYtpjjyIKOhNbYac3j1DstzvkpZWxE
+         +wDvFCXg+2C0DgjONGXxKd/x7G8/81HY3fZq2iEti+/qJmU2QezTv0jR0OkqwF9W9yTZ
+         2F5g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784913349; x=1785518149;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=hcBNhE02O2Iu2ALNDoF6GSg9Hlyx/IdIZQTn66e6kfw=;
+        b=oqUsNVCAx4AB+QSE1v/aIx2ukY9K/8vLa5gWiu7wM0dI754Yq/+261Vzagmjcret1/
+         1wtEg8lt8fMh7hvTMzcBn/JZJqBwOVMMqOmNaQVouCnH8OQ5gbTbZqgNIayTZStdkGvp
+         L5erXC+qmt6rfgxkI44pj/4VfeFPV4ZnO+NkRayKyEltJ+l20w5KB22ty1Qtgt78hhAT
+         1cYwn9YtEP3HsmTW4DLXEfs51U6vStQkYzo/5QYo/N5pXk29zIWPOhPhMD3y/UKemab+
+         DZHYo7V0hJLWJxexJRZpx3qPdY+1Z8GShEziMY4FL99Gx+C59VOSI8ESwgycIIghIAFj
+         Fa2Q==
+X-Forwarded-Encrypted: i=1; AHgh+Rp5e9FMLwdM+9N7jAfVSGF31dUyLU2fdTyGVn1k+AW6Nq6ItgRNWm8n3K2WDlgS0P/QAppmNFNQXP/glwiw@vger.kernel.org
+X-Gm-Message-State: AOJu0YwavP1J43t1Bf/xPJOa3Nr/th7clLo6cMlAQjPKkVPmTiVIWniV
+	DgN2dHgNjchNKqor06SussE5rtrtpv8PoqlaY/+9PBTgPA8oY9gRFC1r7UgH5htmDEdxZxpvZOC
+	w9Jzp/qooljJG8fE67umQiExp+1JlwgBUL8zpIg4ggJDc9sYbgpJRfAxJf+M8eA00ZDlz
+X-Gm-Gg: AR+sD11WmEdRtvwSOyatJ3MA0lL/UuwE3qsyabktiCYfHNTTGKTWj1kKGrubYWLAtjV
+	ivxebsABoy9ihV7LiOoldXR7scNPoltLvpUMA1PFhx9Paphv1ij443sGKn6JS7IJhAZozYOFV7D
+	8RcqvUW8A8L8WkHwg92RqKdrLicvDNdu3kB4BbFJqc4nEnhdn+8VfQTzFQDNpzOL8r4uUT6AU1k
+	O1BayVMDhjYpnJA8oVES+Rud+T9HjEGuCmZ/WGdDpnPWa8dypgeN//slrL14WB6alPDf4oduOE/
+	qFa6gUdBOpvp8RK3VQNE4lH32dswlNNgHCYAEVR+5jwOfQ4kWmfFQuTm7kPeiPq3ZbNlQAloqZV
+	6RIQmg3neq5afiR9uN/o2NNd3rFhazU4=
+X-Received: by 2002:a17:90b:2b44:b0:38e:4011:465f with SMTP id 98e67ed59e1d1-38ec660bb25mr7845327a91.23.1784913349041;
+        Fri, 24 Jul 2026 10:15:49 -0700 (PDT)
+X-Received: by 2002:a17:90b:2b44:b0:38e:4011:465f with SMTP id 98e67ed59e1d1-38ec660bb25mr7845291a91.23.1784913348499;
+        Fri, 24 Jul 2026 10:15:48 -0700 (PDT)
+Received: from hu-imrashai-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13d2eb01aa0sm8400892c88.3.2026.07.24.10.15.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 24 Jul 2026 10:15:47 -0700 (PDT)
+From: Imran Shaik <imran.shaik@oss.qualcomm.com>
+Subject: [PATCH v4 0/3] clk: qcom: Add Audio Core clock controller support
+ on Qualcomm Shikra SoC
+Date: Fri, 24 Jul 2026 22:45:31 +0530
+Message-Id: <20260724-shikra-audiocorecc-v4-0-0a89bb13d817@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -131,105 +88,122 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0002992E:EE_|CO1PR10MB4625:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0f30d8d6-f2d6-47e5-f63b-08dee9a20451
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|7416014|36860700016|23010399003|1800799024|921020|13003099007|6133799003|22082099003|18002099003|56012099006|10067099003;
-X-Microsoft-Antispam-Message-Info:
-	TDwszLl3y7tWzNBqfgRpGATOcHpiEXqsTa69ksX7vUZTQ2af/+qNIrQcKb8P2tacQsbfswbHZ5LAJIIJ5eO22KGlfF9niWxlOViWAJD0awmXcgfDOIb1usQ0naUcyt1IncW/rfPxZd4psHp/d5XIVwFJ3/DUbZ/tTO0pUJJosw4LQ1rral3iOBKEl5tFt4CSrcO5jetQkGOvlp/dDSJgEmwvFDDB8uJoxT4n/Zn60ga1L0AD/HAU+oJCarHLilEN4TvQJ3STb4bcA0qBiOEfjqUTprMPMD3SM0IZyur87hL/GQ28UoYYZWr2uTYVtcbqm7JHD/wEZhQ98jKSpXhzWgG4tWmseo5y0b5hujwEDWlgsF3WwqsRBE4bbtM8bzuGM5B8Xp/GMsrxYgob7Pz3orjrdvJaAXO6KXepckDJ5HrH+3aeaz6AFY/dqAEuuSe5vjESbZAHulkIBTMLoNNtXKx9i01zacriM2hTT/eqZtcu6QimIq2sZLGVMBOk01CiZvBS2Ksj0q+2EJiLawfpA7bZT47pLYWPanAzEHW0xm9QobB4zsZp+q+XXLUBqEldl/AZJpHzrm4pNUhgyBZFgQf7DE9EQSGQCnliwttlb8pMUCxYxEL6mfV8/A9SgspF+Cidpwd1VIh66VmAechIDMbIYgeEvmgILbm+2sKj7doXb1jiUYQ7AeTCGYM40/n7xSlqNMGb9GbfQZGhs0iFIA==
-X-Forefront-Antispam-Report:
-	CIP:198.47.23.194;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:lewvzet200.ext.ti.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(7416014)(36860700016)(23010399003)(1800799024)(921020)(13003099007)(6133799003)(22082099003)(18002099003)(56012099006)(10067099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	nM248eSHrxXj+tluVJ+j3XxPrXntEZJH06Zue2e21ClLss2Wxz9mHXaNlyICR2SFxMtswtKasXOMuityb6PZdJeBK8kqonTzYbSfNVt0/OEyG7n5B2JrNOVep8w5J9ueSsPYHSyHkUS1804JNE3reX69mW/VNF1nU+VqXGuCkMkWFp1b5oZZrb0vaHcVhQW7CQZ068hFY6Q3vc0VSh2XilTbfrc/OaYihQ2ij4q8OE/ACRKupRo5oP0KXYGIBpU2VpE2e9pKeCJsym9yE6R6VVUl4U+5cqhYaAeFkpFHi5DeVCBIB8dKcnuojnuNf77nM3t25QJQvdtH6OyGYwaB9Vy05QuW8ZuiwieKBKqlPkFU29IPSQkYHjYnbIR+M6s/JSrCjMiNYbsNEH9koejsgj9xRi9+qQBfXqJWzXrFhlp2LtT3xvaxs6gtTKyCsc9/
-X-Exchange-RoutingPolicyChecked:
-	JwCakoNjZ7STVquPuScKOJ/bz2rn+cnQRhUCxtqtrjno5BszilL4KCptshHDy7/z7zogeSWKKsbCR4qdli1YujNkQ86MciwfCk2xMtvYXo7AQJqglND/GtYvOaxTJY5BvhFLD1K7ltRXzvB+KKmlcUTaat6jbrXWtW+hCR3J01tvzDfW+KVfWP5Iy/q/stl2Omkdd6DHdon9SCKeS1hazhH683QVoVhWa22GdW/KKgalLhtzd96strRqxIkDdeEMygX6aczxznmXolqXw4SROvXeNHvDkCPZX2reYzBMPHGp161Ix/FP5y2sa/2slF6r4lnPypS9OS/CTuPkUYqF3w==
-X-OriginatorOrg: ti.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2026 16:38:39.8451
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0f30d8d6-f2d6-47e5-f63b-08dee9a20451
-X-MS-Exchange-CrossTenant-Id: e5b49634-450b-4709-8abb-1e2b19b982b7
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e5b49634-450b-4709-8abb-1e2b19b982b7;Ip=[198.47.23.194];Helo=[lewvzet200.ext.ti.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BL02EPF0002992E.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR10MB4625
-X-Proofpoint-GUID: wDuUOP0t_DSjIRNpHtBk-5r78zqdJKGm
-X-Authority-Analysis: v=2.4 cv=bJYm5v+Z c=1 sm=1 tr=0 ts=6a63951c cx=c_pps
- a=hqw49duEbq/Dm1LMQehLaw==:117 a=WotqVVQAdb04rnGuttW3Kw==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
- a=s63m1ICgrNkA:10 a=V5UXEbMT0ywA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=Z8NIEmU8O1QQgoT56wFK:22 a=taLDd7a_hP9WKsMzeGRc:22 a=VwQbUJbxAAAA:8
- a=sozttTNsAAAA:8 a=o1kACPpZKAZCWsj7fAYA:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-ORIG-GUID: wDuUOP0t_DSjIRNpHtBk-5r78zqdJKGm
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDE0OCBTYWx0ZWRfX9zhXGnGEQ632
- bNGH5elVG3gE4L/9koXYECqkR1jUQQRxjiRJZFEX4J36WF4q2rdOSH2FeqFAv5jf9MNcBuXV2uE
- PXFj39AS0UeMpvh/s9i8a+vBDryohod/iV2LONMLdkfKCtE1VQErjVhKiDytbqrdGYfi35vatt7
- mnKCZh5BzgyS6AxntHdDbn8jick5CLtZ6C/QUyFlbPemhWC4EpNfqLHvpKPp6fwrdBifr2UcD42
- jofjd3VWzdnus0IQghsA0x4qJsZi4h2Gk2SG44XNu23wMGnGYeqY2DULZuioWphMhkjZDvbMfKD
- Tg/FAV8toU/axwo/c1bmY5YNqqKScntH1y06ASyDykV9D9YCXN0gcCVV3IZxLSoSuyqH6AwMYbh
- FFB2DEMvDFoaFt+DzLueCegcsSxUhuOnU+LPox7D2g4RTk3YdAzRkzp8YgqNGuAmZVBp7uCJm/J
- 9yFgavqPFL04ib5dOeg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDE0OCBTYWx0ZWRfX9B3kT8gEVCvq
- GKWRNaSsvbUkRjHg/7RUI9f7p8p3AHwTvsruEy+3C8OhT1ShWkQVgzTOESt9rTmRq1bl/wka0Di
- 5xvic694ALacOsFMqGneEZCZ9OPbsMk=
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIALOdY2oC/33NQQ6CMBAF0KuYrq0Zp0CrK+9hXJR2kEal0gLRE
+ O5u1YUu0M0k/yfz/sgiBUeRbRcjCzS46HyTQrZcMFPr5kjc2ZQZAhZQQM5j7U5Bc91b540PZAx
+ XOVVUgRSZzFh6vAaq3O2F7g/vHKjtk919ytrFzof7a3hYP9u/G8OaA5dERZlXaDeodj7GVdvrs
+ /GXyyod9lQH/EgS1KyESSoFglWIxlr4IYkvCcWsJJK0gVJJpQlsRjPSNE0PjT1m6GQBAAA=
+X-Change-ID: 20260605-shikra-audiocorecc-85efef073474
+To: Bjorn Andersson <andersson@kernel.org>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
+        Philipp Zabel <p.zabel@pengutronix.de>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+        Taniya Das <taniya.das@oss.qualcomm.com>,
+        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+        Imran Shaik <imran.shaik@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Proofpoint-ORIG-GUID: PPqftrP7MWffc49d8AOoPvO48F5aj05a
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDE1NSBTYWx0ZWRfXxTLCFexqMiQ1
+ xzDpoRsRrR+KQJUZi6e+POpDGUq0wC9amq8N1yDUSbhYZujxwNXtrZXOSXBllgWNti9mUUjWpYS
+ wzMERZgstutA4S/myNvY768QRLEeJTc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDE1NSBTYWx0ZWRfXygxKquBdunjr
+ f7j9ZQc82vusSszlomE3cRzvsXP4hNhn6Y3Z2QiPvJ8Hely6zz2B7ARZ3AJEusfP9gKQUaBQ4v8
+ C+wii5KV3cAYBmgcg1TEkjhunosk+HmCse2O/IC4OZBRUZD+SXTDk2I6Kpsl4pwCpm3o5+8V5hU
+ VP5RY3kHpDznRVOeNbm7zs4cNdBVaRYy85BE/e9TRlTV5YN0PbcLSLWg46co3yVAMiyeJv1FttP
+ 86grylR8sUOfz1RonAJtpcaW+h2S/IrE3QJlnCKyk6Q47YS+YiMAMnq7kx74B/m5nCxm7p44pVi
+ CSkdup03GohoMmA3ZH5ocaW1fQLfrliM8/G1BwmHgaf2eJUHakBcGrANiCkGQz2SlsLsjAqoO35
+ M2BZ4ePpktmtNXuSGwOb8fdzNtI4HgWNSAUKAqRGe4MRikYwoMX1T+NFDZLern9ekccNr0H0szl
+ M5/hGZfeFlkqEgJfS+A==
+X-Proofpoint-GUID: PPqftrP7MWffc49d8AOoPvO48F5aj05a
+X-Authority-Analysis: v=2.4 cv=GMA41ONK c=1 sm=1 tr=0 ts=6a639dc6 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=ks5C-W4QXeNcJ-T8xpMA:9 a=QEXdDO2ut3YA:10
+ a=1OuFwYUASf3TG4hYMiVC:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-24_03,2026-07-24_02,2025-10-01_01
+ definitions=2026-07-24_04,2026-07-24_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 impostorscore=0 clxscore=1011 bulkscore=0
- priorityscore=1501 adultscore=0 suspectscore=0 phishscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607240148
+ clxscore=1015 impostorscore=0 phishscore=0 lowpriorityscore=0
+ priorityscore=1501 suspectscore=0 bulkscore=0 adultscore=0 malwarescore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607240155
 
-Hi Pan Chuang,
+This series adds support for the Audio Core Clock Controller (AUDIOCORECC)
+and Audio Core CSR resets on Qualcomm Shikra SoC. The Audio Core Clocks and
+Resets support differs across Shikra variants based on Audio subsystem
+enablement as follows:
 
-On Mon, 20 Jul 2026 17:59:06 +0800, Pan Chuang wrote:
-> Commit 55b48e23f5c4 ("genirq/devres: Add error handling in
-> devm_request_*_irq()") added automatic error logging to
-> devm_request_threaded_irq() and devm_request_any_context_irq()
-> via the new devm_request_result() helper, which prints device
-> name, IRQ number, handler functions, and error code on failure.
-> 
-> Since devm_request_irq() is a static inline wrapper around
-> devm_request_threaded_irq(), it also benefits from this
-> automatic logging.
-> 
-> [...]
+- CQM variant: The QAIF driver runs on HLOS, hence both clocks and resets
+are required to be supported on HLOS.
+- CQS variant: The QAIF driver runs on the Modem, and required clocks are
+handled on Modem, so from HLOS only resets are needed.
+- IQS variant: no soundwire codes, hence no clocks/resets are needed.
 
-I have applied the following to branch ti-drivers-soc-next on [1].
-Thank you!
+Signed-off-by: Imran Shaik <imran.shaik@oss.qualcomm.com>
+---
+Changes in v4:
+- Dropped "clk: qcom: common: Register reset controller only when resets are present" patch
+  - Sashiko AI review pointed a valid GDSC-only corner case issue with this
+    change, will address it in a separate patch.
+  - This patch is not needed for this series, after splitting AudioCoreCC
+    clocks and resets into different devices.
+- Added NULL check for device_get_match_data() in driver [Sashiko AI review]
+- Removed unnecessary <linux/mod_devicetable.h> include in driver [Uwe]
+- Collected the R-By tags received on v2.
+- Link to v3: https://lore.kernel.org/r/20260723-shikra-audiocorecc-v3-0-90b878ae0d4e@oss.qualcomm.com
 
-[6/7] soc: ti: wkup_m3_ipc: Remove redundant dev_err()
-      commit: dce7afe3efe485a99200a59dc78738539cbd133f
+Changes in v3:
+- Rebased on next-20260722, as the dependent RPMCC/GCC and Shikra base
+  DTS changes were merged. 
+- Separated the audiocorecc and audiocore_csr bindings into separate schema
+  docs [Rob]
+- Moved the AudioCoreCSR schema to bindings/reset/, since it now only
+  describes a reset controller.
+- Updated audiocorecc DTS node to use status reserved [Konrad]
+- Kept audiocore_csr node globally enabled by default in DTS [Konrad]
+- Collected all the R-By received on v1. 
+- Link to v2: https://lore.kernel.org/r/20260708-shikra-audiocorecc-v2-0-b320d822cdd0@oss.qualcomm.com
 
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent up the chain during
-the next merge window (or sooner if it is a relevant bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
+Changes in v2:
+- Separated AudioCoreCC and AudioCoreCSR nodes as both resides in two
+  different register spaces. [Konrad]
+- Updated bindings and driver patches to handle the separate node
+  compatibles.
+- Updated resets in driver patch to handle HW_CTL bit.
+- Link to v1: https://lore.kernel.org/r/20260605-shikra-audiocorecc-v1-0-7ee6b5f2d928@oss.qualcomm.com
 
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
+---
+Imran Shaik (3):
+      dt-bindings: clock: qcom: Add Qualcomm Shikra AudioCoreCC and AudioCoreCSR
+      clk: qcom: Add Audio Core clock controller support on Qualcomm Shikra SoC
+      arm64: dts: qcom: shikra: Add support for AudioCoreCC and AudioCoreCSR nodes
 
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
+ .../bindings/clock/qcom,shikra-audiocorecc.yaml    |  55 ++
+ .../bindings/reset/qcom,shikra-audiocore-csr.yaml  |  42 ++
+ arch/arm64/boot/dts/qcom/shikra-cqm-evk.dts        |   4 +
+ arch/arm64/boot/dts/qcom/shikra.dtsi               |  17 +
+ drivers/clk/qcom/Kconfig                           |  10 +
+ drivers/clk/qcom/Makefile                          |   1 +
+ drivers/clk/qcom/audiocorecc-shikra.c              | 810 +++++++++++++++++++++
+ .../dt-bindings/clock/qcom,shikra-audiocorecc.h    |  49 ++
+ 8 files changed, 988 insertions(+)
+---
+base-commit: b4515cf4156356e8f4fe6e0fdc17f59adab9772f
+change-id: 20260605-shikra-audiocorecc-85efef073474
 
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/ti/linux.git
+Best regards,
 -- 
-Regards,
-Nishanth Menon
-Key (0xDDB5849D1736249D) / Fingerprint: F8A2 8693 54EB 8232 17A3  1A34 DDB5 849D 1736 249D
-https://ti.com/opensource
+Imran Shaik <imran.shaik@oss.qualcomm.com>
 
