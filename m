@@ -1,182 +1,286 @@
-Received: from mx0b-001ae601.pphosted.com (mx0b-001ae601.pphosted.com [67.231.152.168])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98CDF4156CC;
-	Fri, 24 Jul 2026 13:15:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=67.231.152.168
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784898919; cv=fail; b=tJcr1ZGJAuq8bA00j1Pdf83cnQeyf0ywY4XivxloARAVeVO7rbQNp2shKD/7a0FoEHIdo4u+Gp4/KVRD9lFyPI18dAakm0AOoQfhL4rJjJwBQpS/Aa521KrblsHTgVnXR+ayE+MzVeL7ZfH94TqwYSoYVx+VfauuKA2pFGGmxnk=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784898919; c=relaxed/simple;
-	bh=6MGJwoYZPfp/SUJueV1+9kySdIR3aRyIM0aXUHhWcjk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=s3+GFsvjqlnOUBen3BJI9gUOrYhtw+TTcTvw25KOUZMyiPosjsVlL7ia67I/dGoED5GLl01p55U8Ynotwyh3BOBNLoa3ao80UHLVI4b0pvS3hqd96wh4PhFEb3sTw/vr4MS03Rjltj4LOqWGNuiI3xVjTmwvugyasTS6/7GblrA=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com; spf=pass smtp.mailfrom=opensource.cirrus.com; dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b=qD/onX8b; dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b=r+HqvDZ0; arc=fail smtp.client-ip=67.231.152.168
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=opensource.cirrus.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A6FA2EBBB9
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 13:16:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784899003; cv=none; b=IjTNAVocRGKDyBqblkSZPePH4LR7LQ0zfUwiqXOPPMYeQ99anG+czTCCQT43YPLOTMUHxHyZbigSUau0QOZRVqsSg5kapy0mRLeVDnBga93WUQWFn8v+GxwWzJjAUsa+cvM7sVi9OJPkN6Lo5X3i5tMrK8FH0UMsxkyrRzscB7w=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784899003; c=relaxed/simple;
+	bh=/yj8bLKbPpZes7L89vCr9HdB3oJ01AECc11k9j6p5p0=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Bpf+oDYAySEQmhGj6Db1rzlPhk9OwUAmVDLvNOkWhfpIddq0V1kL51bQbaRyaN7CXN9yJlMlT2pM419KGJyfQEwo9dVQtEokHAbE4VyCZmJNKKjiQiE+kNI2ExEB/UG1tGw9tEW6pStjUJ6cnKTwwuWUb3JDHu+BqCobJEaX29Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=BSTTNFEb; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cB6JZBHt; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b="qD/onX8b";
-	dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b="r+HqvDZ0"
-Received: from pps.filterd (m0077474.ppops.net [127.0.0.1])
-	by mx0b-001ae601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66O5hhD72897547;
-	Fri, 24 Jul 2026 08:14:57 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
-	:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=PODMain02222019; bh=HDGQMzydHDzoYI/z21
-	uvyd/RurBtCZzOovyfiYeDnGI=; b=qD/onX8blQ6X/w4bfVPCH6neGhG4aQzCsJ
-	Kp4SDWIbB149eyUaE3FLYHQ7ygPcx8ZVk8pCACRpOTvj+Bt6jrl9hz2Ci/saWg/S
-	oyUxQqeuwAUWWTkLyNJbCogaRVa1McpnTIqkEQzSxEtiZlOgWDHV3u4N13/m4XTs
-	dZxPjF3KKLcPqACngPGAiIHpNm1S3cVjNTlduCh3dMs4lexLVaQcZOIKp2il6N8H
-	AcJxUqLgNfPJ1DYgI6boFc/3bHXjuzGf4EkZQ5P/Qj35R07ZpNMY8QX+pSZfGGad
-	cdUh+1rIK/v5GjLutudeuMnJudpgWSRZcJihqJN6RFrFJ0qzprUw==
-Received: from ph8pr06cu001.outbound.protection.outlook.com (mail-westus3azon11022112.outbound.protection.outlook.com [40.107.209.112])
-	by mx0b-001ae601.pphosted.com (PPS) with ESMTPS id 4fg5wfgvjd-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Fri, 24 Jul 2026 08:14:57 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zVeW77JzeHLWIbzUW57ThCsxXN320gBcwzai9ZVgS4m94YpA+aMR4MdLUZhtuowM+QUPvU5ZlwmciF/BCAOXCMzoL10wY06ugnJkhRuP9HGT26wcN3aReBgnsyHtSgOfVFhYEuno3vAzKgk3RgBZDpqv45IGgrtdZARn9BzbdJz0cY4jpUf/iWS1JcehhRnrmNU9XTQF8md4UenPP3ROK40oMO/oGBCmcQwS8IqzJD/FTPf4poZmlZ9ih57BKYOOyOUq/PhcWhGA7NEf6aG/96Cc9CMn9hTFo1cXIwUnVVxmR5s3U2f5lLHk5tVZyAI+NLa1WEkqsuGT3pHMLA/LXA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HDGQMzydHDzoYI/z21uvyd/RurBtCZzOovyfiYeDnGI=;
- b=RIdT5sYuIcsrqsTLRWpg5TPOd9n2IfSHDZ4bNGFXMbzVP501UDi6orGuvm00vWHvK8FxQIUG8zT2lZV25zHgtFlT5gRMK1+OQ0fFw62/wlaT3ZY49DDW/pYplU6KkYx1t+U87Sg4SWhqgGM44rizY7Ce10no+zGi6Swp4BiQKjW+1pGEWlhniYho9LR953yoA8mCTilKXvSM9KWYeVMwQSuxB2DN/EoxaZOTxOMCr4lMlIcddbFZs6yXmGP5A0FGLZ3pX74xLA9bIko8QexZE4IaOAYcdoSOga0dUo4WWkdWCL1dc9bjHcJMvIh6C+fDkkwVCbn4aTUkkU3FaKpJ+Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 84.19.233.75) smtp.rcpttodomain=catcrafts.net
- smtp.mailfrom=opensource.cirrus.com; dmarc=fail (p=reject sp=reject pct=100)
- action=oreject header.from=opensource.cirrus.com; dkim=none (message not
- signed); arc=none (0)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="BSTTNFEb";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cB6JZBHt"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66OClh9Q3198523
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 13:16:41 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=OWsy9ZZFAQt5AZSfvQGZt2
+	cTwChZXHQpVHpQFqYJSoM=; b=BSTTNFEbpL+BALtW+FcMTYxpQv6ctNhDL3ehAa
+	IVvWPTQQpVctoi7CGTYVWaVvMpQzSnJsqBukY0z4rY9pi83dBgkVXuDUH9NDnYBa
+	9KJLVKF97XdBMj5XQ9RR3g4hPoN+uw6sd6IeB9fhEcJrfxRSXdJZhsUIE2NcOLp0
+	94Jg8ShKLqzftivGVmWWYbE8f9k6zCHiawhimBrLnPSe4sXxd23Nccn2cjWRP7ds
+	I7O827xRJru0jybWLSa0Q2jLcfyOaWuak0qAbvtngb7kgKWThvRT4gehPLkP9Zxg
+	dYdOl+ut6+2pYgrAPolLSrsIN3E0taoSs8e+Clb7lkM8lbOQ==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fktahu3q6-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 13:16:40 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cc640dfde3so6370845ad.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 06:16:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cirrus4.onmicrosoft.com; s=selector2-cirrus4-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HDGQMzydHDzoYI/z21uvyd/RurBtCZzOovyfiYeDnGI=;
- b=r+HqvDZ0oCRQNtbYi/NTKfiBFt9mrM5U3RM6b78hIAGikqKLoK+2PcSUebjF/hif/dC6mx9eB5sDPChOhBqkW03fRa6ZhYHUEU+KEWdD2Ckw7EcKr9l9WDzb9GQnbD9wzyNVIFLvLv70AdMqgSTH9mMpwnSW/8QFtLfGkM7awHA=
-Received: from SA1P222CA0074.NAMP222.PROD.OUTLOOK.COM (2603:10b6:806:2c1::20)
- by SA1PR19MB997342.namprd19.prod.outlook.com (2603:10b6:806:4c4::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.11; Fri, 24 Jul
- 2026 13:14:54 +0000
-Received: from SN1PEPF000397B4.namprd05.prod.outlook.com
- (2603:10b6:806:2c1:cafe::ab) by SA1P222CA0074.outlook.office365.com
- (2603:10b6:806:2c1::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.245.12 via Frontend Transport; Fri,
- 24 Jul 2026 13:14:54 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 84.19.233.75)
- smtp.mailfrom=opensource.cirrus.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=oreject header.from=opensource.cirrus.com;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- opensource.cirrus.com discourages use of 84.19.233.75 as permitted sender)
-Received: from edirelay1.ad.cirrus.com (84.19.233.75) by
- SN1PEPF000397B4.mail.protection.outlook.com (10.167.248.58) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.5
- via Frontend Transport; Fri, 24 Jul 2026 13:14:53 +0000
-Received: from ediswmail9.ad.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
-	by edirelay1.ad.cirrus.com (Postfix) with ESMTPS id E4288406541;
-	Fri, 24 Jul 2026 13:14:51 +0000 (UTC)
-Received: from opensource.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
-	by ediswmail9.ad.cirrus.com (Postfix) with ESMTPSA id C9A2882024C;
-	Fri, 24 Jul 2026 13:14:51 +0000 (UTC)
-Date: Fri, 24 Jul 2026 14:14:50 +0100
-From: Charles Keepax <ckeepax@opensource.cirrus.com>
-To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-        Maciej Strozek <mstrozek@opensource.cirrus.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Bard Liao <yung-chuan.liao@linux.intel.com>,
-        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-        Richard Fitzgerald <rf@opensource.cirrus.com>,
-        Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
-        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, patches@opensource.cirrus.com,
-        linux-kernel@vger.kernel.org
-Subject: Re: [RFC PATCH 1/8] ASoC: SDCA: hw_params: program upstream Input
- Terminals for OT DAI
-Message-ID: <amNlSu3mcwKOmqvf@opensource.cirrus.com>
-References: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com>
- <20260722234221.884765-2-srinivas.kandagatla@oss.qualcomm.com>
+        d=oss.qualcomm.com; s=google; t=1784899000; x=1785503800; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=OWsy9ZZFAQt5AZSfvQGZt2cTwChZXHQpVHpQFqYJSoM=;
+        b=cB6JZBHt5Ba3mg06Nxhc1bHguhJ58jpykWxX5FrK6iVyc7Tv+/9LwP3sPWIHoThv9E
+         GhUjvzaV/kRd2nqezw7gPfyVgRVRWH1xcHGExK6/XNdBjzEyemcN1zQu5eqWoH2Qe4SD
+         PGqH0Siou1Y/FWmW0oWGOUyDNCWVnHmTazx1wSycYsj6XiniB6MUxZ78OHe832e1I3/u
+         4EbpWRwbHhgM7P9CER01Hor++eM/5fgQ0Ut811ZXHAE8wxo3P4VAN3KdXXljqz065QO7
+         rH/0bjM81sJnLOVxndW19SaV/Y64jCrw2HTaDn9tcvTQ21vQ/2mUoAaycBUmOuC7DLJB
+         4e1w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784899000; x=1785503800;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=OWsy9ZZFAQt5AZSfvQGZt2cTwChZXHQpVHpQFqYJSoM=;
+        b=C/7Hzqkhj3ACK98Q2kFBdGD5/f5JM6Cnfz1YOJmw6I6fc7/sam6k+DhjuHqDh2mzEI
+         1FRipmWD7p5tqdTQFRRKqgS3qmg1Jv1DLb7UzGV3bE3MMrbXBPdD2WRk5hnUA81yrf/M
+         mft8bVjha7yTLoVoTeJqQ3849aIay8xG05gXx5u5wVKoJojcvuhi/kxqMIgVUFlIomm9
+         nLdDNlTiS9AGZLUfJsHXpEYL9X5AoVR90vjuC8X/rnC1gLQFZSzNEZoAvbFP4hyq62Gq
+         Fq2GeTvCHLy2PihqUPQKN+UHiFyvb6o8ySg57DFePCOn//YjyEFHe1J39sFowyiRxMwZ
+         weRQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rp5oHF4H83psTVx4CPQkYKo025yUNlembDbEKnO2xOIDLfPv2ZuJtqFYK8rq4C7iNImfa9LLkMu/Ov8C7TS@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy/C6IpuzwQFlytC9jPvEAsgoNLbNaxA7DWvovHUMZgYyyT6yGj
+	OJ8EXirsK1PlPI3j1md18RYyTjw09nDsBmDDbX5Szgy7jDdp47OGjyc1JkEVxoh0kkxAHFxaqnD
+	gq4IKVHjsFc/bAIegV5vaJ1zpBcVe7U1SUOxr7l/arSo6IbIZWHyF9mm2bXSI+sDSkVThDOHQkz
+	TO
+X-Gm-Gg: AR+sD12qMpHL3DhisP2hyaT78UaRP51B6Kdr8cu8BdKjy7PRDz8BqMcz7c90kHxeOJf
+	Ns6+NW+kOz8zn7ucayFCp26nGcS35fKrjXscZ7TAJLzgxLhXZaJvLnOoQYCNnKaq2X21rpUBH09
+	9HzCE8VvOJ8cmYpF1cplZQL3t2VljKvmqJBfkHzNjSO+BqMpIkRSABrGymx6FRBVswCZOVW3RqZ
+	9A3Roan3Nj04Xn8RfHgt6YBUjLrMokDfWjfo36yYblkmuat0ANZu1zK91+krUnhzpDk6IjfhFwK
+	uvZVBnNBs1gfc2/8xvKwLD/n/UNKbc7sTR/pU0dmyuiUcYHJXSEvuQFBhVBA+djzBJKG4FgjDhv
+	uoakwrPOw8opSyNZWZgLdZVeO1VTYIOj6m2Ud
+X-Received: by 2002:a17:902:d486:b0:2c9:e846:a57e with SMTP id d9443c01a7336-2cfa67039d2mr80763195ad.0.1784898999802;
+        Fri, 24 Jul 2026 06:16:39 -0700 (PDT)
+X-Received: by 2002:a17:902:d486:b0:2c9:e846:a57e with SMTP id d9443c01a7336-2cfa67039d2mr80762705ad.0.1784898999215;
+        Fri, 24 Jul 2026 06:16:39 -0700 (PDT)
+Received: from hu-spratap-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf8efd76cfsm52162965ad.20.2026.07.24.06.16.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 24 Jul 2026 06:16:26 -0700 (PDT)
+From: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+Date: Fri, 24 Jul 2026 18:46:04 +0530
+Subject: [PATCH v24] power: reset: reboot-mode: Remove devres based
+ allocations
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260722234221.884765-2-srinivas.kandagatla@oss.qualcomm.com>
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF000397B4:EE_|SA1PR19MB997342:EE_
-X-MS-Office365-Filtering-Correlation-Id: fdc3bc8d-3700-4d8d-a9da-08dee9858cf0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|36860700016|7416014|376014|61400799027|82310400026|56012099006|11063799006|4143699003|10067099003|16102099003|22082099003|3023799007|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	D9zy7Q7iN+J/prT5wTX5aKOjpTgcOuDX6G1hUs3vRu06YbVn64ez5NdKj87hCqDQ84Dpgo3AbtZnZbPcMJjDF8H54fK83rtf51kk1/KnbE25pB/7RpAqEASFJld8LnzxR8sv5hMR0d8DrtksXe3bhM9r0aXS+VIHQgTy43nSl0HqWNGRXpuaXL7wcJWZ2eFzbkTVj2n3gY0ckmXKqbU5WOrQqyJ4PdNJC2L26pjlFpMRtMGvkHuLIMhJdBCDZCJnMRDRE5YOdBl7F25TxIc2w+rjh/7o0RN6VgOpChCBzSTgVNoK5jrsYtgrKjgDdvK2vYzjpuxNgaEMfYwfFyxD1PJV3N4j2k8Svc5UlmxPdeqTi5EI5YhpR0b/8oFfNydbhjQi5ZmBfIl6NBc4JvAR+68W0ic9lHcKH2Jq1dF2FRcMEHWUaiPndgXytc6CuDTJUMdZtHYwRk9O0X3phfa0uNBFhlkvyb5HwIRNu5pePs0aR4hAZyjLDxypxGczkqCvI/RgVWQUAhUBypR5W5ar+AwIW+81qEApRnjg68GqW3uDNhL/qbTKh34LaC+FYru4gBzXi18+g5uMDZCfCvTtXKL7yn2i37bpR6pUZh2Wu71ZTbuICEi3mSIn5ZqOcGOMABJx6t31N6tZ7PU4Y9e+la1kck0v1HAqJigRbnQusM1Usqesh/U4EkpnpU0zaf4+4mHeebjhUhwcluRzCMJb+w==
-X-Forefront-Antispam-Report:
-	CIP:84.19.233.75;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:edirelay1.ad.cirrus.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(36860700016)(7416014)(376014)(61400799027)(82310400026)(56012099006)(11063799006)(4143699003)(10067099003)(16102099003)(22082099003)(3023799007)(18002099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	uhK+Y3wZ2/ivZKmjkM3cvjdUfLdQp/SMKgMRPo9LqHQOfI6jrOdQzS7HwYGy7Yq/tcmEKNOXVC/gVqZgb0Gz/nGxtjjOAxCk1DLIY9gYilCSUQMpkSdU1v39W4jJDkOxMgrIcFm8l2edw9uwRyK3YZ/IHbLguKOVrZHTfO6O/sTIwDD7yBS7llgDXg3CMX0ZYx8w3J0MRmhXfhWPuT1kqSdV11AiDWrxW9kewIAJ+zV2SzneKONpvqBzXFhoZ3pA7xL2W8fJAEmo7B5GvM60otvJ2W4FnL9T07CwAMerXDxNxTCAnxMtuPcHGiYfwg4muDzXv/eftgh3ACLRpFdeD43kzM1cVhvKNxRdyWSjnYJzps1Ku5/6kRT20cLz2yw2E/aFFNVB7OiTU5Q1YLBfgeEq/MqyQow801Drabw+pYnGP4Z7DedZkMYa74sDLlAw
-X-Exchange-RoutingPolicyChecked:
-	qvdgWOQnm0k34GYSn8kBhoYE1E8hETK+PIO3C3BGSuSaFuIx4MIgsm6e+GhOGL+gjkR5wzXbWLvmM6VtgQAHccGBtlHT2rvdST9Nm5f1q4ml3ZAoINTHby4MQpFXDlR8zoBPSkdFex4Fv8+BJA00yXgoXxOKjJQefpbzgSDDQnnpWqCDgeab7otukbG0NpZ7O+fnYJtnGIQyO1CVd0IvV97dAIRQLDEQWu6KjpKSI8fe0MqNZrBRWWoXdSYhxNhwASYiqcM4ChhXtCxBMM7XVnoF0ePAzUM4q71tu8/ZaBNZNxV5zN9AjYS+mG05L5NCEBFhRoAc6J13awMLA3Y2nQ==
-X-OriginatorOrg: opensource.cirrus.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Jul 2026 13:14:53.4998
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: fdc3bc8d-3700-4d8d-a9da-08dee9858cf0
-X-MS-Exchange-CrossTenant-Id: bec09025-e5bc-40d1-a355-8e955c307de8
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bec09025-e5bc-40d1-a355-8e955c307de8;Ip=[84.19.233.75];Helo=[edirelay1.ad.cirrus.com]
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-SN1PEPF000397B4.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR19MB997342
-X-Proofpoint-ORIG-GUID: 929vbj2YZRQjdZKy3Vt5I16QzGxjgHhb
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDEyMCBTYWx0ZWRfXwzzo9F6b2eUy
- cBzYw7Hu+NuuwUlTt3yBUSEuNkxeynbO29wOyFgC6Ftj7prxs37PqDX+W9PbrrnZhfTkZbWdWn/
- uWG6aOUbZW2t28QR1K0OSMBRfN4n94Y=
-X-Proofpoint-GUID: 929vbj2YZRQjdZKy3Vt5I16QzGxjgHhb
-X-Authority-Analysis: v=2.4 cv=BdjoFLt2 c=1 sm=1 tr=0 ts=6a636551 cx=c_pps
- a=JRWdLbceQoGhO7osvHke3A==:117 a=h1hSm8JtM9GN1ddwPAif2w==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s63m1ICgrNkA:10 a=RWc_ulEos4gA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=iX4cTi3TZMoOKdANLEfx:22 a=KfkQE9S9VqCBgivYGm0O:22
- a=cswVol7K_y8G6oM_2sQA:9 a=CjuIK1q_8ugA:10
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDEyMCBTYWx0ZWRfX04yUKx+X3l5P
- Wes3ung4LXarXqPhOOI3KM6R/xhs5X1rEDmondJ+mO+G/0OY+xesZ1Qq0pdT4kN2WRcukjbd+6N
- 61NxRIp3Y78ZNoy+odfJqAbQtDOuxhwvffAIqP4H+8ZwvmrMs7DKX/uPVJUtqlBKg1Ne0dcR5/U
- 8N1PUA0McdmYCpan8PKafzjNDck/Iszt5PaH55Q7XpsVTudSC51+ms8Lmfa+zx8jidINoiCPNwV
- NYpfAfDgbqrhaXgb1CGR5himwKPW3v805joRR1g6Ov/MByTeS201bnEfv4aitGvK1it7o8NwQ1b
- jbN25FVi33F7Mz7SsEEYwVIMwgHQM9Q6KDF0EoqfpLHYH0z+iMFxnvZfH/G0/ngVizz21Xb0rp7
- jab9LCVJi8tF1lGUVnQYEyGS1v5tFwWcdR9XSVEI5nM7mnHadqTJkenVpF9jL1t5KYMC6iNKs95
- CtW5Etme7I5SeeS5GCg==
-X-Proofpoint-Spam-Reason: safe
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260724-arm-psci-system_reset2-vendor-reboots-v24-1-ed5125785ef6@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAJNlY2oC/53U22rcMBAG4FcJvo6DNCN5Rr3qe5RSdBglhuw6t
+ bZLQ9h3r7yUeKEVKLkxSKBvxuIfvQ1F1lnK8OXubVjlPJd5OdYFmPu7IT7546OMc6obAyiwipQ
+ b/XoYX0qcx/JaTnL4sUqRE4xnOaZlHVcJy3Iqo5kiK2WMzzEP1XpZJc+/r4W+fa/rp7mclvX1W
+ ves1bb9t4RWnSXqsVGNQmSQGDGZ+HUp5eHnL/8cl8PhoX62yp9SAyQMzBCE7b/q9gNnrW+bpm5
+ eVz5lFAigGSO2eLjhQXfzUHmm4CNKNADS4vGW7+8eKz8FToCoLTtu8WbnWdtu3lQeKYHL1vnof
+ Iu3O+8AunlbeYqCXjETZ93ip3deqw90P23JcewleQ8ozbunndfdE1WPVd5MotiG6E2MLZ53HgC
+ 7ed7uHrJ3QpPkdjDdLc/dvNuGNQRnJ2VRNZMD72/BpFCZXh62qY2ZEpoaTyRo8XrnTX/u4Tq1M
+ TskIivUuhyAnbe6v/ttaoG9DUkUGW7yuPP0AR6vD6WxGK3hCP/L/eVy+QMG7W0oDQYAAA==
+X-Change-ID: 20250709-arm-psci-system_reset2-vendor-reboots-46c80044afcf
+To: Sebastian Reichel <sre@kernel.org>,
+        Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Pavan Kumar Kondeti <pavan.kondeti@oss.qualcomm.com>
+Cc: Sebastian Reichel <sebastian.reichel@collabora.com>,
+        linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, kernel test robot <lkp@intel.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784898981; l=4865;
+ i=shivendra.pratap@oss.qualcomm.com; s=20250710; h=from:subject:message-id;
+ bh=/yj8bLKbPpZes7L89vCr9HdB3oJ01AECc11k9j6p5p0=;
+ b=VnGDA9/ouU3zsWzUnHx8R9UnQZfrozq3UVFd8Augs2YnFve7vaqEFSUrNzcENqOJlukQFyaWf
+ snNykxhlqN+AtTSdVx2XH6p4y2UONSed6mGrAk/XORxrYaADupHuLby
+X-Developer-Key: i=shivendra.pratap@oss.qualcomm.com; a=ed25519;
+ pk=CpsuL7yZ8NReDPhGgq6Xn/SRoa59mAvzWOW0QZoo4gw=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDEyMCBTYWx0ZWRfX6Jdln99ocJYJ
+ koxN0HhUnzcTmWv7Ui14LREbJqj7ljSp4chSy95/vy8dIq4KRPALNu5ZCMiDJBHij/8I0+2S9l9
+ umIXxeHql+lG7OCApsxe7z6NHVAUX+g=
+X-Authority-Analysis: v=2.4 cv=TvrWQjXh c=1 sm=1 tr=0 ts=6a6365b8 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=VwQbUJbxAAAA:8 a=QyXUC8HyAAAA:8 a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8
+ a=QX4gbG5DAAAA:8 a=igCNvyY4kf761yXvtm8A:9 a=QEXdDO2ut3YA:10
+ a=1OuFwYUASf3TG4hYMiVC:22 a=FO4_E8m0qiDe52t0p3_H:22 a=AbAUZ8qAyYyZVLSsDulk:22
+X-Proofpoint-GUID: dTApuzZ0q75cs3aaNWQA4g8d1B8_2JYv
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDEyMCBTYWx0ZWRfX1k2QAcMSg5DG
+ Afdw5z0gL5hNlwX4p0eXk1sy5CMyQclnx8YLCYLpRoY7W1GZGtlSK6MqoUZvb+NfDvbHbVMiBh8
+ bsB0xoFkGzn2y9yHMGtHurTP9QETGIbVXANf1kJ+QUNbBsDpMZ+fXuDwaKJ54gCBf+E7xIwoc2p
+ F4bx3vlUgTMo/oYsnIJfksVgnia/3Y0BHPdhjWO/1DO6LBP20gCTmws+c74Iw0FmVPmhxVLb1bf
+ HKZnoTm42DOKJPP/3YhfWOHIyIB1D1nQw5v5bsy+Sh0qjUzBUdu5Zsde5viYYwsrEdk/nofz0ej
+ AH/vufb4cTdJxGV0OxwFclISkyvtV/FiwTcAPJBo7tzw2NAORDFua0Xk9QlFOUHobG6XGblSu4I
+ ny98H9Ewj2NZAEU5tWuTkd9JcZmQWQ+z57kWjE8cKo8Sck+Ve3KRkowEG3LPsaU/DxY/Lu2Xc13
+ SdsBmWNKGdQhS6C7oLA==
+X-Proofpoint-ORIG-GUID: dTApuzZ0q75cs3aaNWQA4g8d1B8_2JYv
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-24_03,2026-07-24_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 phishscore=0 adultscore=0 suspectscore=0 lowpriorityscore=0
+ bulkscore=0 impostorscore=0 clxscore=1015 priorityscore=1501 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607240120
 
-On Thu, Jul 23, 2026 at 12:42:11AM +0100, Srinivas Kandagatla wrote:
-> For a capture stream the DAI is the Output Terminal so
-> sdca_asoc_hw_params() only programs the OT itself: cluster, clock
-> and Usage.  The upstream Input Terminals that actually source the
-> audio never get their Usage, ClusterIndex or clock programmed, so
-> the power domain comes up but no samples are produced.
-> 
-> Walk the source graph from the OT and program every Input Terminal
-> reachable through it.
+Devres APIs are intended for use in drivers, where the managed lifetime
+of resources is tied directly to the driver attach/detach cycle.
 
-What was the thinking with respect to the units in the middle?
-It's not clear to me things are quite as simple as we can copy the
-cluster from the output terminal to the input terminal. Various
-entities in the middle could change the cluster, such as CRUs,
-MPFUs, UDMPUs. Also possibly SUs to consider too, since they
-may change which ITs are actually connected at that point in time,
-although potentially an argument to be made that programming the
-unconnected ones would have no ill effects I guess.
+To ensure correct lifetime handling, avoid using devres-based
+allocations in the reboot-mode and explicitly handle allocation and
+cleanup of resources.
 
-Any thoughts as well on the propogation of the clock and usage.
-Its a little less clear to me from the spec that they are even
-intended to propogate in this fashion, although it does seem
-fairly logical to me.
+Fixes: cfaf0a90789a ("power: reset: reboot-mode: Expose sysfs for registered reboot_modes")
+Reported-by: kernel test robot <lkp@intel.com>
+Closes: https://lore.kernel.org/oe-kbuild-all/202607191025.h6bQp891-lkp@intel.com/
+Reviewed-by: Sebastian Reichel <sebastian.reichel@collabora.com>
+Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+---
+This patch is split from the original series, "Implement PSCI reboot
+mode driver for PSCI resets", and sent separately as it fixes a recent
+issue introduced by "power: reset: reboot-mode: Expose sysfs for
+registered reboot_modes" and is independently applicable to the
+reboot-mode framework.
+---
+Changes in v24:
+- Split from the original series and add a Fixes tag.
+- Use kzalloc_obj. (By Pavan)
+- Do not change dev_err to pr_err. (By Pavan)
+- Convert dev_err to dev_dbg for missing magic-number log as it is not
+  an error scenario.  
+- Fix a pre-existing space issue.
+- Link to v23: https://patch.msgid.link/20260714-arm-psci-system_reset2-vendor-reboots-v23-0-e7453c548c21@oss.qualcomm.com
 
-Thanks,
-Charles
+To: Sebastian Reichel <sre@kernel.org>
+To: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+To: Pavan Kumar Kondeti <pavan.kondeti@oss.qualcomm.com>
+Cc: Sebastian Reichel <sebastian.reichel@collabora.com>
+Cc: linux-pm@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org
+---
+ drivers/power/reset/reboot-mode.c | 30 +++++++++++++++++++-----------
+ 1 file changed, 19 insertions(+), 11 deletions(-)
+
+diff --git a/drivers/power/reset/reboot-mode.c b/drivers/power/reset/reboot-mode.c
+index d20e44db0532..af00c00eceee 100644
+--- a/drivers/power/reset/reboot-mode.c
++++ b/drivers/power/reset/reboot-mode.c
+@@ -10,6 +10,7 @@
+ #include <linux/list.h>
+ #include <linux/module.h>
+ #include <linux/of.h>
++#include <linux/property.h>
+ #include <linux/reboot.h>
+ #include <linux/reboot-mode.h>
+ #include <linux/slab.h>
+@@ -168,10 +169,11 @@ static int reboot_mode_create_device(struct reboot_mode_driver *reboot)
+  */
+ int reboot_mode_register(struct reboot_mode_driver *reboot)
+ {
+-	struct mode_info *info;
++	struct mode_info *info = NULL;
+ 	struct property *prop;
+ 	struct device_node *np = reboot->dev->of_node;
+ 	size_t len = strlen(PREFIX);
++	u32 magic;
+ 	int ret;
+ 
+ 	INIT_LIST_HEAD(&reboot->head);
+@@ -180,22 +182,22 @@ int reboot_mode_register(struct reboot_mode_driver *reboot)
+ 		if (strncmp(prop->name, PREFIX, len))
+ 			continue;
+ 
+-		info = devm_kzalloc(reboot->dev, sizeof(*info), GFP_KERNEL);
++		if (device_property_read_u32(reboot->dev, prop->name, &magic)) {
++			dev_dbg(reboot->dev, "reboot mode %s without magic number\n",
++				prop->name);
++			continue;
++		}
++
++		info = kzalloc_obj(*info, GFP_KERNEL);
+ 		if (!info) {
+ 			ret = -ENOMEM;
+ 			goto error;
+ 		}
+ 
+-		if (of_property_read_u32(np, prop->name, &info->magic)) {
+-			dev_err(reboot->dev, "reboot mode %s without magic number\n",
+-				info->mode);
+-			devm_kfree(reboot->dev, info);
+-			continue;
+-		}
+-
++		info->magic = magic;
+ 		info->mode = kstrdup_const(prop->name + len, GFP_KERNEL);
+ 		if (!info->mode) {
+-			ret =  -ENOMEM;
++			ret = -ENOMEM;
+ 			goto error;
+ 		} else if (info->mode[0] == '\0') {
+ 			kfree_const(info->mode);
+@@ -206,6 +208,7 @@ int reboot_mode_register(struct reboot_mode_driver *reboot)
+ 		}
+ 
+ 		list_add_tail(&info->list, &reboot->head);
++		info = NULL;
+ 	}
+ 
+ 	reboot->reboot_notifier.notifier_call = reboot_mode_notify;
+@@ -218,6 +221,7 @@ int reboot_mode_register(struct reboot_mode_driver *reboot)
+ 	return 0;
+ 
+ error:
++	kfree(info);
+ 	reboot_mode_unregister(reboot);
+ 	return ret;
+ }
+@@ -261,12 +265,16 @@ static inline void reboot_mode_unregister_device(struct reboot_mode_driver *rebo
+ int reboot_mode_unregister(struct reboot_mode_driver *reboot)
+ {
+ 	struct mode_info *info;
++	struct mode_info *next;
+ 
+ 	unregister_reboot_notifier(&reboot->reboot_notifier);
+ 	reboot_mode_unregister_device(reboot);
+ 
+-	list_for_each_entry(info, &reboot->head, list)
++	list_for_each_entry_safe(info, next, &reboot->head, list) {
++		list_del(&info->list);
+ 		kfree_const(info->mode);
++		kfree(info);
++	}
+ 
+ 	return 0;
+ }
+
+---
+base-commit: 9eebf259d5352b87080d67758f483583d9e763d7
+change-id: 20250709-arm-psci-system_reset2-vendor-reboots-46c80044afcf
+
+Best regards,
+--  
+Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+
