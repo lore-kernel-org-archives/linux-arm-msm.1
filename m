@@ -1,79 +1,81 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27C821DDC35
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:49:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD474314D1A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:49:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784886589; cv=none; b=fWTU3fM1kJQq5uy5+9BhdePCOI1HeKoZO45Z4U3evxewkMjYo0K712EArE1e9Uruy76OBB0PE4eDTRoi4F2KnB4b0RXHZwJUOCQoR48o8sFmVy8Mfnlps0VJKzqk2MJ6cHDB7f+OgYIbxgyhBxfNd8HudQg81Oub6nxyjogXpqI=
+	t=1784886594; cv=none; b=cK+a5GJNWs7NqJfb5euolbSE4eSiPwAoMqyhIfNBTU7v+Mvb/t4UDvugm4CPa6gxrSVXuyeOhKYKFZ2TT2Cd+GIc6Bk/88k9SfUMQoZ0KUpg575LrRvnA0GOQLS83GYOU5i2zwmMzi4vboExitHGrL7eEXJiCLtfDQMLZnItHxE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784886589; c=relaxed/simple;
-	bh=POaelFIDn6xj5RIoIscrFg/uh3pUAy65qy2po2hcof8=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=KDBY9RDimz2hxzkgoQgvJWadttyue8l0JeH7kK0imsq1sGa39WWbiuHuhCwlX4y3s3zIDSkQr9nZwu/XYhtsuBqeZmd9BIwKPqegV8OYBKTh9f6sTCKWHx3vBgcyrWPIh/czBhpAZKfeU9n5yEIH+CoH78EKvTDH0sQDZr6SgKo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PEEzJ/aB; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cMu/FGUV; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1784886594; c=relaxed/simple;
+	bh=9IiThhlgGdRoYecOf0KfCkM2THGZsvFJP9Gc9AfcUJI=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=ud4jmqObN9oj1WHll/7miVCGIujAN4W0KjtnDicIFHHqKdQtIy6ESHvWOmTizUcRqtI9NkPMOUYkTl56HhWpPNEjaMK7T8CU/x/tuABJ8VpS3FVoxUrjR4cMi/gQVGVUAeb99I/1m7TfPGHFRLBk6kMS5TilsBrZZI7pufRaouk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=RB8xumex; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=PQOQc2dn; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PEEzJ/aB";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cMu/FGUV"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66O9T46W3786096
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:49:47 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="RB8xumex";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PQOQc2dn"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66O4lDll2275974
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:49:51 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=PdbeThIiYwNz1S8OkDWHvQdXI4IzkKXtrJu
-	9/wgaXVI=; b=PEEzJ/aB8/Q+EGzcxN4Dc30b8PszvIVBad8PkoRMXfLDEoZZapG
-	XZuWXPB5gdoSMnnPdf7biXRb3epPyjqW8rPgjclAaw1W5MniiLTfAl7gl/J9//76
-	C1pAeBBkbsgni6sE2y/v9Cw5uv2ErIe2xsZTJKxl8A+301w4D6Mu7gFqfdkRENCQ
-	UBy8y51MNoUGcJyYFjdKoOkyguNxqUgldlebKoNBzM+Cmkmgc3/1jjIuifb0haWT
-	ZEB6CdiN0Bf9GeuJA3evYKFIlOBYomW9++YTmh+51NN3C/8BBw05IX5Tk0AuTSuc
-	A/k4A6sYV/PYxRxl/7RYj4QzG6TZx3U9ytA==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fm5f682gr-1
+	cc:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=Gk+h7L/tgiz
+	KZ6Qx/taVDubKl52Owvm0JVk34OyToC4=; b=RB8xumexS2vx8xzfgqCJcjI5mlf
+	haAIYvF9Btp8PafJfOgm5bshC6kQJi3pN4sTxPFOGEwRG2zPzg0+/6qnXUeeKMAm
+	ZAXW23oSXfu/q0zam+SyDdGePAb62bzLi+thyWc7U43+0CTBYDRATn2lShel5+iz
+	jn9ITr6eX5hLva43isz6x1yqkG9Pi+0HH9i8AkEfIM9I3k0Es31v3WrLT3BR4xZT
+	enVeKy7A09JEaIZFE39b7tHmwNXqyQcrtto1G3VRRE8V9AnNHKEmLsJTS2oU2BFU
+	d21xLgruWiQecadox8X0ZepRwM0kP8R5NdO4k1pByuYi0VC/dZp9tV02TZw==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkqa0b5m7-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:49:47 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-ca6bd8a190cso420345a12.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 02:49:47 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:49:51 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cb74d5db64eso309995a12.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 02:49:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784886587; x=1785491387; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PdbeThIiYwNz1S8OkDWHvQdXI4IzkKXtrJu9/wgaXVI=;
-        b=cMu/FGUV2tE5NAmOZCFzNgmSDUfUmMuIehZqME/b7EGk3V2b+59a/TbPSqEwGSjUXe
-         ICQ3+zB+Oj0SSC+q/TrXJ56UDOJDt7XApMFMAvFMjfoQNeq0cQABC4Wy7DrEWB/et4sU
-         ihTEwr+DzC+WYrmKVbKGbPPvoijlAryfpjk9vz6gXmpu+/OS765A+CYUTThARg41C+UX
-         LyI36N2LcNBI3VHiooClh8eHVUMKWhl1r4wPNMRbrhHnZ8806KMLXz9+53SQvQ1aSm9E
-         Give0CalqX2s3qdX+elfbakQgBT/qNqvvL7Vw5BHENAhy/+xefYySCbXTImzIDsN6Kr5
-         tUBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784886587; x=1785491387;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=oss.qualcomm.com; s=google; t=1784886591; x=1785491391; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=PdbeThIiYwNz1S8OkDWHvQdXI4IzkKXtrJu9/wgaXVI=;
-        b=cD+Yd6ClDb2V6rE1QNbDn2sFbDTwCo+5ro9Yzu9S2huoKhmxCqgjratxJoAI0aYkzB
-         T0whKmSimMj3XVIPGLSbFRpOWNSXifDSWA6P3TJX0FLBCjG7jpB8mYJhHAAR6Qn3wNAs
-         VmCrx8cjmOlbEVOmu1P8CgCavicbWfa5SNm+4SAJX8jMyCNpZclG02fscuoGTdPTyvwI
-         oKUhsZHpKlFFmejLQA3dnoHNJu198DPChI9J+zZ0KN9eUspkMggAy3Dtryej6kzVN1Ux
-         bNCahi0qFSfmA3gcwrPG45xrjJI6kRx4PxTlbRHkq9Bs1/OhGvrr89kaadGIC09KiqrZ
-         0MDw==
-X-Gm-Message-State: AOJu0YzGdBoiX66QuZuP53/R+Al0/4zcl0toTAJPCZ/uk+p8tSRVUWFt
-	h5xU1wSm3v8Aj4Fn7dfKlWOABo39+94DpQACSmaTYO3YM/JMuB3VQ+iCV1SbD2yzyfaRs1MaZ+B
-	ZPsuCII9DkaOkfVKWeqDRQaRVkJZrwka42s3e+yHdOSOj5taILFN7UHDJ0P5InYkJMUsy
-X-Gm-Gg: AR+sD114IgCU02FwfErH6b/zQif5Ntjt6uR7Cp5su5HIdJp5CWWAOUZh4x6l3VW9S7T
-	sPTs8+JWYGey2Akd7C28JQJeUd+ATpQJVZdW3faUb1NoHpFdkD8RDakb2V2gGp+aPXdwFv9o8H0
-	l7mcijgch8MKAmzbdOJ/1OHKrWSrt+yNupVods5retWe+Nog58l9l0qCpW/eSsqz2ZfsAqhUGJE
-	3dbUq5/8ey3Owh9580gs/JIslCxDzrH5cXmNAeNVa0JL4qu1rqd8uot2UYFv1heQy5h1KWSLghy
-	HstqJKiOLMoPeUGnG7Vg4ItLyICFJotUI/A8mu/Cpia6ZaQv1kPKvkXNgcdKahLcCCRv4k4dxPt
-	a/tbuwMxe4EID0jFJxjgwJBKVtEw=
-X-Received: by 2002:a05:6a20:6a1c:b0:3c3:aabb:dba3 with SMTP id adf61e73a8af0-3c44b2c1e80mr7115862637.76.1784886586581;
-        Fri, 24 Jul 2026 02:49:46 -0700 (PDT)
-X-Received: by 2002:a05:6a20:6a1c:b0:3c3:aabb:dba3 with SMTP id adf61e73a8af0-3c44b2c1e80mr7115839637.76.1784886586073;
-        Fri, 24 Jul 2026 02:49:46 -0700 (PDT)
+        bh=Gk+h7L/tgizKZ6Qx/taVDubKl52Owvm0JVk34OyToC4=;
+        b=PQOQc2dnNaTSh0K1Ux7+TCdsm8XQYRr5ccv26dNZKZh9GyMzf4b8dLopsuWHVc5hbA
+         EZ6Gd27PMqsJHjjvSM94gjQuNNJ25DyOwx6vnArcpVC8TSp5AiW8g20uiJx8ZgBxZLlr
+         AIOGVbbFmARzDx+Btcf/UKHg/KVNYIkN2ps4d9XnJwV1wrIWUWNQWXLAcYIkqwnb+TH5
+         ipN8/CuW5cRUru91BqVJ4IMxeACsmL872NUYc9kOqza7uU23PQLctJq4SBxxRcOSypId
+         b8zWO1QA2YP7iVpS6rjWG8LfaLu84KLBdXEGf5Xek8UOyKw/ycoLqiDCXBoNzsA99Ph+
+         HfdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784886591; x=1785491391;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Gk+h7L/tgizKZ6Qx/taVDubKl52Owvm0JVk34OyToC4=;
+        b=kVWg/cSap9Fu9ciLojRQWBrXjFImUPJrmVYi9n27Mi/PHiTYvFNqock4IgVqJMYG5M
+         t1eHj0TOoVpe+ehV84lNOgm0B86kDA+4tQgpWbtHGZjNI1E/QsMXm3zlOI9VcD7TOxLX
+         GmzTOnypT/oirsY1smUkALHQ0ZdMhLq1ASrc0E4Lx2vmz05jmmo8T0wRu2GbJMAVTxhr
+         k8JUEA0yiAZNSMHkc+myROXt761fUIPw5eCO+qD73nUmExXL/fdvDNPxpLKekIHM7/hk
+         cd0TbYmUIqhs2rwrhHoLdIzd/2hZNKwx+i1XA3qsV5XcsH6lqk0WzwwOqovz+6omPsMn
+         JFWQ==
+X-Gm-Message-State: AOJu0Yz8VAdNHQ7KN+0YmGiLv306zbcVWMDLdsMKWXwMskN0ETZu7AcU
+	v/BIwSwgMNGQuFB/mnp+Z/G5yv6V1EpLfklLbH2P3odUJ9I3Z6CqrgpPgHe+R+DJZu2mZtFT8oI
+	8/A4FsPmszlH7ClOplogD8+q+natmKTE0MrbNRTNei1pEU6tpq21KI8C4l2NfY9vZ0Sa/
+X-Gm-Gg: AR+sD12XDBxdfQViVZbhVvZcN85DoMNezQKlzCgc79CToxwVH/OnmYbrDMwVTnqUo9W
+	aPvGY1Y+AzdP1PEPbftmNKVMiWyWeR4JzWEW5zHc/ahScZGLW/2R8o4DwGObGdrcClz0cFwWjrO
+	WolcbTgofWXM5Jt4tAeXDfrNaU/sWFqE+D0Lf2MHUmxdRx5pwoanBRXNd2yCyIGzWfujpeoMEMF
+	X/tKae9aHywRJLErHOfaMlZzFCwI3zAqv1RxEWntEvQ1tBHwfZS/HJSV11BxDHtOEJtZqaMupr/
+	G3nNPcHCKSbS6TkMamRH2T+mHkoAdp4H2n7+C3tRfHJwa87Xp8QpBe8afcCszgWSD3zeB0mz5s7
+	PAAzd4CjwwEOlEWfePzCItcYWgHE=
+X-Received: by 2002:a05:6a21:6b0f:b0:3c3:875d:c538 with SMTP id adf61e73a8af0-3c44afb1a94mr8180690637.8.1784886590814;
+        Fri, 24 Jul 2026 02:49:50 -0700 (PDT)
+X-Received: by 2002:a05:6a21:6b0f:b0:3c3:875d:c538 with SMTP id adf61e73a8af0-3c44afb1a94mr8180672637.8.1784886590327;
+        Fri, 24 Jul 2026 02:49:50 -0700 (PDT)
 Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cbb8f1a8a7csm3961013a12.24.2026.07.24.02.49.42
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cbb8f1a8a7csm3961013a12.24.2026.07.24.02.49.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jul 2026 02:49:45 -0700 (PDT)
+        Fri, 24 Jul 2026 02:49:50 -0700 (PDT)
 From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
         Konrad Dybcio <konradybcio@kernel.org>,
@@ -83,11 +85,15 @@ To: Bjorn Andersson <andersson@kernel.org>,
         Elliot Berman <quic_eberman@quicinc.com>,
         Andrew Halaney <ahalaney@redhat.com>
 Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Subject: [PATCH v4 0/3] Misc. SCM driver fixes
-Date: Fri, 24 Jul 2026 15:19:36 +0530
-Message-ID: <20260724094939.613844-1-mukesh.ojha@oss.qualcomm.com>
+        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: [PATCH v4 1/3] firmware: qcom: scm: Fix NULL dereference in IRQ handler before __scm is published
+Date: Fri, 24 Jul 2026 15:19:37 +0530
+Message-ID: <20260724094939.613844-2-mukesh.ojha@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260724094939.613844-1-mukesh.ojha@oss.qualcomm.com>
+References: <20260724094939.613844-1-mukesh.ojha@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -95,67 +101,151 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDA4OSBTYWx0ZWRfX2rzoi+OfoYA3
- IHLmj89FHJTB9nOwHjNUPMJdRzTXcnrj9ODdUO9QKB545EjYMHAnIjbo7FCBpnysEmgQpSsp38d
- JqKCJhgSB1P0CZ2HJ+i5gMkowpsXg6M=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDA4OSBTYWx0ZWRfXybcM0OH+AETP
- WkKS6WnMSNITE/3ZinRpZyssm7dIiEqDMk3fCx6ddUXcVGV5KuVhWDx4lthWh4kZPrPN7n3+x/6
- 4VymLIgp0niilE9TCKI5r+3mI/L9K2IQM93TbS/gl8tQ9ECezYyY37Z8yXLJPN6tCl3h/Trynx2
- 9M8/zgbi+67ILHWg6W1e1+p6oZTjpMYNtliW5//2Vesaqai0/NuSWAnb9sEqvcv9qALNN1nvFVZ
- /Et1R5SuBeuw4XgxtRzMZXRYb+Dv9WvudlVPEaGphdSQIi8JedH8y3qztFj/VnhrDh+2kvGO8C5
- X/Ohr+8b1RwcojeQWdo3nS0A2qaPMdzRy2Sn87HiO14og5aycCa17ZzFI7jjok3FanO3eb34y28
- Y63+bTy1VyTQkuaXBxbPSJm8BoUMV5zGEOn0EEnHdOw1iikij7HF6ATPntzfh46TIpcsEAmC4Dj
- Vy5kEjGth/fvh5Mo5Ww==
-X-Proofpoint-GUID: blqs2fBr9hpxOUEbp52JsFdh8DIVivFV
-X-Authority-Analysis: v=2.4 cv=BNeDalQG c=1 sm=1 tr=0 ts=6a63353b cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-ORIG-GUID: Jw7AKmCd1wa7gWlxYqzzN0L102FrOooN
+X-Proofpoint-GUID: Jw7AKmCd1wa7gWlxYqzzN0L102FrOooN
+X-Authority-Analysis: v=2.4 cv=e/k2j6p/ c=1 sm=1 tr=0 ts=6a63353f cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=qi0AG0XSDalV9LXtG3YA:9 a=_Vgx9l1VpLgwpw_dHYaR:22
-X-Proofpoint-ORIG-GUID: blqs2fBr9hpxOUEbp52JsFdh8DIVivFV
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=oeUS87UVm4c7YcJ927QA:9 a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDA4OSBTYWx0ZWRfX+9EZ9lgekkOY
+ 8DhlHKCvMs6be1e9fuQb8xSFa9XmIKwnWeVImRiOD99XpYf+NeS0baa18XaHh8crmuB9OBtm2OZ
+ SjORcnDL88+/LXo5MRM0rBK+8hjrkn5bqti8VDTuCecUGXivXu09NtIhpZqh5Sys5liZ0qiSU00
+ W0vvkVSYWE2cJl+8l4SY4ZSpo7uFOUCon/TTZo9ATavIJComEI41In3COogcI5n+zcdAQNSO7FL
+ bIHdkq40cSmd/mzRL+OSibL0G1VEJtYdEGxo9Zz83JXhSWl+iooFXNrrguDXsKbjRxZin1p4OrN
+ O+E8GU5rGIHt1+k5+WmwPPmrYDgrBZou7FlzsnZN7FGpPM1qQmOLGpAoQH1hC2O/XC79p/vEQ9u
+ +ccBe+/Jv64dU3mE0OkbwLyVOKhlgMnoIBs9xLiRkP4HwV4vH/USSt1xhRePRnxjYRLgyoUqCVb
+ mnmWOOOti4FOYcU7/EA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDA4OSBTYWx0ZWRfX3lMuTLxn9Tgv
+ ejBRoI/mTkK8vwRnx9Viy6+MT2YUBgWT3IUoNiFF7jFpiJZkaIfqZ4sFdOeisoYgGAMDFSiI9QN
+ AcBdGmxrshaJohBW+ZcxIoSSqPcf+Pk=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-24_01,2026-07-22_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 bulkscore=0 impostorscore=0 priorityscore=1501
- adultscore=0 phishscore=0 lowpriorityscore=0 malwarescore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607240089
+ suspectscore=0 priorityscore=1501 lowpriorityscore=0 impostorscore=0
+ malwarescore=0 clxscore=1015 spamscore=0 phishscore=0 bulkscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607240089
 
-Some of the existing issue reported by Sasiko mentioned here
+In qcom_scm_probe(), devm_request_threaded_irq() is called before
+smp_store_release(&__scm, scm). Two paths can dereference __scm before
+it is published, both causing a NULL pointer dereference.
 
-https://lore.kernel.org/all/20260624192213.C82691F000E9@smtp.kernel.org/
+The IRQ handler receives scm via its data argument but passes only wq_ctx
+to qcom_scm_waitq_wakeup() and qcom_scm_get_completion(), which then
+dereference __scm directly. Thread scm through both functions so the IRQ
+handler path never touches __scm.
 
-https://lore.kernel.org/all/20260624192418.92B761F000E9@smtp.kernel.org/
+Non-atomic SMC calls made during probe (e.g. from qcom_tzmem_init via
+qcom_scm_shm_bridge_enable) can return WAITQ_SLEEP, causing
+qcom_scm_wait_for_wq_completion() to run before __scm is published and
+dereference it. Add platform_set_drvdata(pdev, scm) early in probe and
+change qcom_scm_wait_for_wq_completion() to take the device pointer and
+use dev_get_drvdata() to reach scm, removing any dependency on __scm.
 
-and the series is about addressing them.
-
-
-Changes in v4:
- - Rebased it on next-20260723
-
-Changes in v3: https://lore.kernel.org/lkml/20260629141750.996853-1-mukesh.ojha@oss.qualcomm.com/
- - Added R-b tag.
- - Address review comment on ret = dev_err_probe(..);
- - will follow up devm_of_reserved_mem_device_init_by_idx()
-    as a separate series.
-
-Changes in v2: https://lore.kernel.org/lkml/20260625093644.3918184-1-mukesh.ojha@oss.qualcomm.com/
- - Separated the fixes(2/3, 3/3) as per review.
- - Added 1/3 as new patch.
-
-Mukesh Ojha (3):
-  firmware: qcom: scm: Fix NULL dereference in IRQ handler before __scm
-    is published
-  firmware: qcom: scm: Fix reserved memory cleanup on probe failure
-  firmware: qcom: scm: Fix tzmem state on probe retry
-
+Fixes: 6bf325992236 ("firmware: qcom: scm: Add wait-queue handling logic")
+Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+---
  drivers/firmware/qcom/qcom_scm-smc.c |  2 +-
- drivers/firmware/qcom/qcom_scm.c     | 42 ++++++++++++++++------------
+ drivers/firmware/qcom/qcom_scm.c     | 22 ++++++++++------------
  drivers/firmware/qcom/qcom_scm.h     |  2 +-
- drivers/firmware/qcom/qcom_tzmem.c   | 13 ++++++---
- 4 files changed, 35 insertions(+), 24 deletions(-)
+ 3 files changed, 12 insertions(+), 14 deletions(-)
 
+diff --git a/drivers/firmware/qcom/qcom_scm-smc.c b/drivers/firmware/qcom/qcom_scm-smc.c
+index 01999c22659c..127365ab11fc 100644
+--- a/drivers/firmware/qcom/qcom_scm-smc.c
++++ b/drivers/firmware/qcom/qcom_scm-smc.c
+@@ -111,7 +111,7 @@ static int __scm_smc_do_quirk_handle_waitq(struct device *dev, struct arm_smccc_
+ 			smc_call_ctx = res->a2;
+ 
+ 			trace_scm_waitq_sleep(wq_ctx, smc_call_ctx);
+-			ret = qcom_scm_wait_for_wq_completion(wq_ctx);
++			ret = qcom_scm_wait_for_wq_completion(dev, wq_ctx);
+ 			if (ret)
+ 				return ret;
+ 
+diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
+index f35f2ee39130..3b271948d326 100644
+--- a/drivers/firmware/qcom/qcom_scm.c
++++ b/drivers/firmware/qcom/qcom_scm.c
+@@ -2644,23 +2644,20 @@ static int qcom_scm_get_waitq_irq(struct qcom_scm *scm)
+ 	return irq_create_fwspec_mapping(&fwspec);
+ }
+ 
+-static struct completion *qcom_scm_get_completion(u32 wq_ctx)
++static struct completion *qcom_scm_get_completion(struct qcom_scm *scm, u32 wq_ctx)
+ {
+-	struct completion *wq;
+-
+-	if (WARN_ON_ONCE(wq_ctx >= __scm->wq_cnt))
++	if (WARN_ON_ONCE(wq_ctx >= scm->wq_cnt))
+ 		return ERR_PTR(-EINVAL);
+ 
+-	wq = &__scm->waitq_comps[wq_ctx];
+-
+-	return wq;
++	return &scm->waitq_comps[wq_ctx];
+ }
+ 
+-int qcom_scm_wait_for_wq_completion(u32 wq_ctx)
++int qcom_scm_wait_for_wq_completion(struct device *dev, u32 wq_ctx)
+ {
++	struct qcom_scm *scm = dev_get_drvdata(dev);
+ 	struct completion *wq;
+ 
+-	wq = qcom_scm_get_completion(wq_ctx);
++	wq = qcom_scm_get_completion(scm, wq_ctx);
+ 	if (IS_ERR(wq))
+ 		return PTR_ERR(wq);
+ 
+@@ -2669,11 +2666,11 @@ int qcom_scm_wait_for_wq_completion(u32 wq_ctx)
+ 	return 0;
+ }
+ 
+-static int qcom_scm_waitq_wakeup(unsigned int wq_ctx)
++static int qcom_scm_waitq_wakeup(struct qcom_scm *scm, unsigned int wq_ctx)
+ {
+ 	struct completion *wq;
+ 
+-	wq = qcom_scm_get_completion(wq_ctx);
++	wq = qcom_scm_get_completion(scm, wq_ctx);
+ 	if (IS_ERR(wq))
+ 		return PTR_ERR(wq);
+ 
+@@ -2700,7 +2697,7 @@ static irqreturn_t qcom_scm_irq_handler(int irq, void *data)
+ 			goto out;
+ 		}
+ 
+-		ret = qcom_scm_waitq_wakeup(wq_ctx);
++		ret = qcom_scm_waitq_wakeup(scm, wq_ctx);
+ 		if (ret)
+ 			goto out;
+ 	} while (more_pending);
+@@ -2804,6 +2801,7 @@ static int qcom_scm_probe(struct platform_device *pdev)
+ 		return -ENOMEM;
+ 
+ 	scm->dev = &pdev->dev;
++	platform_set_drvdata(pdev, scm);
+ 	ret = qcom_scm_find_dload_address(&pdev->dev, &scm->dload_mode_addr);
+ 	if (ret < 0)
+ 		return dev_err_probe(&pdev->dev, ret,
+diff --git a/drivers/firmware/qcom/qcom_scm.h b/drivers/firmware/qcom/qcom_scm.h
+index caab80a73e17..cf90a565fdfb 100644
+--- a/drivers/firmware/qcom/qcom_scm.h
++++ b/drivers/firmware/qcom/qcom_scm.h
+@@ -66,7 +66,7 @@ struct qcom_scm_res {
+ 	u64 result[MAX_QCOM_SCM_RETS];
+ };
+ 
+-int qcom_scm_wait_for_wq_completion(u32 wq_ctx);
++int qcom_scm_wait_for_wq_completion(struct device *dev, u32 wq_ctx);
+ int scm_get_wq_ctx(u32 *wq_ctx, u32 *flags, u32 *more_pending);
+ 
+ #define SCM_SMC_FNID(s, c)	((((s) & 0xFF) << 8) | ((c) & 0xFF))
 -- 
 2.53.0
 
