@@ -1,217 +1,120 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from bombadil.infradead.org (bombadil.infradead.org [198.137.202.133])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 717D0213E89
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 04:46:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A87E3264C2;
+	Fri, 24 Jul 2026 04:57:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.137.202.133
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784868402; cv=none; b=EA4+ubaUxC852fbv5YrkjXBVkSDZIhYqPwNk/Pxmh+ZkO+S3AipqC9qEq+LypA/YpdogMEwpdrNiy29yycf4ZAV3uRA/U7t4J7C3njZXHgKND56vEj/SiGVc/6pXx990cxKiCmwmdgwaiGasiLw+jOx4nsXslcnyPZZwRpQJ8ic=
+	t=1784869083; cv=none; b=rIUgdE4hctFmKeANe6LF+sQ7mfiqD4vYKNEyTrO8iUX6NW5s2l+N8Sjq2YK3sobyG6FB5buuYFSFcPCkN+UFjiOA7gUeR5JBnSASPmtTLTtHYBfw9L5/vMvstkarKpqewjVB0GUXf+Y5qfy87PYocKJlBk//4jAUBUvmfz6kFBw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784868402; c=relaxed/simple;
-	bh=rVkZOr71z6ecc/lXHb+MqO277rJQGUcX9YfkfACG+Qo=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=DBBO+KOSJx2nOSC6sminkMBH+ENdvk6x95ZgGk6I8k4JKN1t9ZygfyrHqM5TDSLVi4FQ9wwEGVd+WaPsdTwLNF7eHvZyjJKrpwi67hOYx/rvcJlBqrSnfIuwKhL7znxtFij5cKxyslHQcw8o3lvkuiDZhzr09o4LrqspwR1VMpQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DxMolseq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=L2hXNzhi; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1784869083; c=relaxed/simple;
+	bh=muNGbVSE63ZwLx6JTwUqy7Oq+2WVsxviAG63JXRC72A=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=T7JZDOMZCMUn/07GDAp4Gf+rx8XYrFq+zZXLXu+eG7PjACNkI6luzqeA4pmTjmZnILpG+AXXBt2W4H3WeOZoumrANhhbF9yF01LEZdw5V6qwQFF/EtMqokhpQYbvx+KuFpci6bUpXRto2GRm/uP0xHDRsT5k4g25g2th590ndqI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org; dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b=dCJEMHRn; arc=none smtp.client-ip=198.137.202.133
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=infradead.org
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=bombadil.srs.infradead.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DxMolseq";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="L2hXNzhi"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66O42WDN1893256
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 04:46:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	rVkZOr71z6ecc/lXHb+MqO277rJQGUcX9YfkfACG+Qo=; b=DxMolseqtUPvVIbi
-	KY5fI/kXhLQj682NjL/Lz4gI2YuiXYHmk6BL8j2dB2sQtbdSW7StjzRZMziYFV8c
-	I49ECSDAVVydKKV/QlHRknQ+FkuzVKY6ExMIv7HLuGl+ax9tVb0bOsBBCjCQFuCF
-	O47ukkrmB6nx1vDoOfxNP+OxdRvQ35HNBZEUrIxJqf/tjZ0vYGhD2cimTqByEir0
-	bFXvN6Pzs3flLwqsUO3sRDtSwm5RVRzCPdCyeZlFlbsb8Y1XXfR0GfGd//AiIaiz
-	01crQ5OVNldZIZLXeK8aj4RJvBZ+tdSZKPA55SJoTLqcCflFR7Y9d6NGDRUA9Eku
-	d1LfrA==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fm0p503wd-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 04:46:40 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cb6cf425e86so62262a12.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 23 Jul 2026 21:46:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784868399; x=1785473199; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=rVkZOr71z6ecc/lXHb+MqO277rJQGUcX9YfkfACG+Qo=;
-        b=L2hXNzhi3p8mQzrumToGlPqhuCYlcCAlKy4qjFyEdnDfwwelguK5hkQIjpdFrcmS6c
-         A5sfx+oc6ZGqrp9pRyCKkX6d4mPOFdJfP2LH/QtFiYrHynR6ut1sh3XP81uF9BG5mabe
-         jhshM7Tg2DS6R3g+7xeTaoaTGErTPTYGAZG72ER3Gszwcvb+WcRGuzlhrJ/MvFq4cmB6
-         +ElrqCFJjccs7NG48foZrI3uqOotoFjIEsLb/5CduFQHSACu/7tlAF36wyV5Dp/G2/0N
-         59aAQV8fr8g3L//qsfT/64ejALFrVCPedPrGgc3OQXtU/zeL5tuTGfPP3c/tb1om612C
-         Qj+A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784868399; x=1785473199;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=rVkZOr71z6ecc/lXHb+MqO277rJQGUcX9YfkfACG+Qo=;
-        b=chG673ps2z04lokbMWPYyVTztlbv71529akE8muu74T0DX8YerA/dYucsk7t7xme7e
-         QS7BY3e+E29RmqMekijloE0jrwJplK7D46ncue0k9AIJoKhFg+rfBE8KGTzogVJQsD4D
-         6CJ8fVL7lqcNEpRXH7aymsGEn+tYeYi5U4/7AtbXuf6fDVR6pCW+NhCiy5MI2aO/OVsM
-         GQkGVWA4I8AT4H7v3NB0Qk0/1eDRFmLs/B+8H5fy6pc+0Cb8Cq2LranbqbEU1NFK6FYF
-         H8UPs2HOIsjwQBap4rjSNDtnPQT+Pm9uO4Nw8QI5+LmUvm1W8kXPP/qQWCOYNEngGwMn
-         086g==
-X-Forwarded-Encrypted: i=1; AHgh+RqI81O8rWZNi8eQuzAfFKrLHJ8MZfOMICiBuSDFCFhiv+pF455gXcDp+Q29I7PyHeUUgNgm/iycNJ2UHCm1@vger.kernel.org
-X-Gm-Message-State: AOJu0YzuX6KLqyzj4q4JQaiF5JCyNTYQ2MJX9lzz+pSRn8HMvPMrh9S4
-	/0IxkQCs/5iBLJg2IPWg6p2Prn8r6u9IZizQq327cmBixKvevewZvcpq4sD1Z4APYaL6Izp2Og6
-	gdhXk2m/rDmJx8VgPLSrKwl7LQ2cgJz8/rgbDj0wJ7yVvm33etnP9d7O9toKSWVYLXxZh
-X-Gm-Gg: AR+sD13pnbA/7mSBl/akuUPiXpGuqXzhom1yicjqwBiXDyVfNgJWIFN3GI6SY+fQDRH
-	YyZLt/eR9uKQskKCKONY7xAZXk3lDGv1pcMbHbDpx/UhvDonTBTmUhccPOr2UWalSVhG9O+gWQq
-	DnDAnqGIW+RMJx7AlBZCj5/9NiIOihWyioKINV20OBD1GsbVoTNzH4Ff44/5PXfNBAh7pBw9LyC
-	0DF8kO7TblGqQKf2Gmd9NKcV3F9n2w9zw7FWgT8E3Wfy0SziHfSdHOJlbLNprD1Y9pnJV+3jx4D
-	4AscpkelWbImsgiEq3/KbAP71+1lyt0yot83qrDqN5nhNNSqhskjhppO89oea2yAR2znrswUEfH
-	4P/Rvf3d5af57TsewNfJJiRxItnDsQoax0g==
-X-Received: by 2002:a05:6300:2204:b0:3bf:a38b:e8ca with SMTP id adf61e73a8af0-3c44b211035mr6789562637.59.1784868399159;
-        Thu, 23 Jul 2026 21:46:39 -0700 (PDT)
-X-Received: by 2002:a05:6300:2204:b0:3bf:a38b:e8ca with SMTP id adf61e73a8af0-3c44b211035mr6789544637.59.1784868398747;
-        Thu, 23 Jul 2026 21:46:38 -0700 (PDT)
-Received: from [10.218.31.237] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3147df09ac0sm22951882eec.16.2026.07.23.21.46.32
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 23 Jul 2026 21:46:38 -0700 (PDT)
-Message-ID: <c8417ff3-db92-446a-acf8-8c73c83b85de@oss.qualcomm.com>
-Date: Fri, 24 Jul 2026 10:16:31 +0530
+	dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="dCJEMHRn"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+	:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=0pO6hUB0iIxD4TyXUYlqc7LrnsyhEtYUcjdZrQrosCo=; b=dCJEMHRn3xYqVAfuYYkzbIPIp3
+	Inq2NxvS38Srj9Jj4S6ZY+acCFPe1cObOEJRiTmc+Ezv/JVCiqJtb50wgxpJaBky5Nu/S0t47ipvB
+	GO715i4MWZCMen5TGlZJM+oZYzf5tt+pLPElmDgc+RediL8nEVrUwocrewR2SlAwypnL/5SzFO3c7
+	hbasNQagNIq0oEqoKbmWsN8LzbUg4tQAcYUct//pUr5JQCGXI0GhKjzCVct4bqY6ZFn/o2fpDIOyn
+	WM1czYp32/cejCQe5997e7Om4NX3n1Iz1mj01qp/3S6PZafVrfY6vZWI0M0Di/xGIL4vifq4/n0q2
+	RPRVg4gQ==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.99.1 #2 (Red Hat Linux))
+	id 1wn7yp-0000000FTwy-42lv;
+	Fri, 24 Jul 2026 04:57:51 +0000
+Date: Thu, 23 Jul 2026 21:57:51 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Ulf Hansson <ulfh@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Jens Axboe <axboe@kernel.dk>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	Jeff Johnson <jjohnson@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Marcel Holtmann <marcel@holtmann.org>,
+	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+	Balakrishna Godavarthi <quic_bgodavar@quicinc.com>,
+	Rocky Liao <quic_rjliao@quicinc.com>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Simon Horman <horms@kernel.org>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Andrew Lunn <andrew@lunn.ch>,
+	Heiner Kallweit <hkallweit1@gmail.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Saravana Kannan <saravanak@kernel.org>,
+	Christian Marangi <ansuelsmth@gmail.com>, linux-mmc@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-block@vger.kernel.org,
+	linux-wireless@vger.kernel.org, ath10k@lists.infradead.org,
+	linux-bluetooth@vger.kernel.org, netdev@vger.kernel.org,
+	daniel@makrotopia.org,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Subject: Re: [PATCH v8 5/9] block: implement NVMEM provider
+Message-ID: <amLwz6WuHYUwKKJo@infradead.org>
+References: <20260703-block-as-nvmem-v8-0-98ae32bfc49a@oss.qualcomm.com>
+ <20260703-block-as-nvmem-v8-5-98ae32bfc49a@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] net: wwan: qcom_bam_dmux: Alloc RX buffers as a
- single coherent block
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: Stephan Gerhold <stephan@gerhold.net>,
-        Andrew Lunn
- <andrew+netdev@lunn.ch>,
-        "David S. Miller" <davem@davemloft.net>,
-        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Sergey Ryazanov <ryazanov.s.a@gmail.com>,
-        Johannes Berg <johannes@sipsolutions.net>,
-        linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        chris.lew@oss.qualcomm.com,
-        Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-References: <20260714-qcom-bam-dmux-vmid-ext-v1-0-3f29da7cca76@oss.qualcomm.com>
- <20260714-qcom-bam-dmux-vmid-ext-v1-2-3f29da7cca76@oss.qualcomm.com>
- <alXm0rp3NK62G3-3@linaro.org>
-Content-Language: en-US
-From: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
-In-Reply-To: <alXm0rp3NK62G3-3@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=Pq6jqQM3 c=1 sm=1 tr=0 ts=6a62ee30 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=2eDN7aXksB4whfXZn5AA:9 a=QEXdDO2ut3YA:10
- a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-GUID: 5ouj8XX085-SR7w8Q7iV4LNcfUQGs6Zr
-X-Proofpoint-ORIG-GUID: 5ouj8XX085-SR7w8Q7iV4LNcfUQGs6Zr
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDA0MCBTYWx0ZWRfXxjDWF9xtCqUm
- BbeVTslDh1Srh1jkxrmksB38x903pVi7gmWoWCkIJx19wiZZFk9FZYZKxMjkUr3CY7NdLEbsHi0
- sLca9xuUNbyrSQfPUAln64EhE1Tn9QI=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDA0MCBTYWx0ZWRfX0RbJalQnZBa7
- NSd3qY6sast/BxYntEyqiwTxYSggCnibIIB/kuvy5yiSN26xpwnAl4TGHWfWKPlvSqfigEMfilp
- /G3LrDXY5zx9Iwb21mvEIhMhxZHzEd2jnkubhkBlDKzA3LIjqo50NbGdeG4EPL1GFwhWh7r3h5L
- 8WtcsI05Cj6GfhrtnBrLNn7XHG5eOjLd5ejDX5j8CGQOAQLaUFC1+cinreWk2mXwtKrt9j9GBPp
- yJvVkTmcoG6DRvh/Qc8dZazEExJMXpU0hgt5MXh3rFRhrrx0wyu6iPhP9ZEh5i8Xyl1UBPmDVBw
- 40tXHbEzzMcrjLBWLVeKaBkoFVePoyHRfYnSf10QrJVJnzM9RvBBT3B9CB/Jtq52lzOyCi4DCMJ
- vfxLPcptBkrrP9maYPUmsFTW85+JxzPRxZALlX0T9AA233+sPpvg0k0MdwgHboZspotpuKDgsMN
- rYKZDk4SmFMXPTFhNUQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-23_07,2026-07-22_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 malwarescore=0 spamscore=0 lowpriorityscore=0 adultscore=0
- bulkscore=0 clxscore=1015 impostorscore=0 suspectscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607240040
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260703-block-as-nvmem-v8-5-98ae32bfc49a@oss.qualcomm.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 
+On Fri, Jul 03, 2026 at 03:45:18PM +0200, Loic Poulain wrote:
+> +	  Allow block devices (or partitions) to act as NVMEM providers,
 
-On 14-07-2026 01:05 pm, Stephan Gerhold wrote:
-> On Tue, Jul 14, 2026 at 11:02:32AM +0530, Vishnu Santhosh wrote:
->> On Qualcomm SoCs where the modem (e.g. the mDSP on Shikra, VMID 43 /
->> NAV) is the AXI master for BAM-DMUX RX transfers and the XPU enforces
->> per-region access control, each individually DMA-mapped RX buffer
->> requires its own XPU resource group (RG). With ~16 RGs available, the
->> 32 per-buffer dma_map_single() calls exhaust the table and the first
->> inbound transfer faults with an XPU violation.
->>
->> BAM-DMUX is a singleton (exactly one instance per SoC), so the
->> destination VMID does not need to be a DT property; it is looked up
->> from the compatible string's match data instead. Add struct
->> bam_dmux_data with a single vmid field, and a shikra_data instance
->> hardcoding QCOM_SCM_VMID_NAV for qcom,shikra-bam-dmux.
->>
->> When match data is present, allocate all BAM_DMUX_NUM_SKB RX buffers as
->> a single contiguous dma_alloc_coherent() block and SCM-assign that
->> block to HLOS plus the VMID once at probe. This reduces RG consumption
->> from 32 to 1. The block is never reclaimed across a modem power cycle
->> (bam_dmux_power_off() does not touch it), so the probe-time assignment
->> covers every subsequent restart without re-assigning or reclaiming. It
->> is reclaimed to HLOS only once, at remove or on a probe error, and if
->> that reclaim fails it is leaked rather than returned to the page
->> allocator.
->>
->> Each rx_skbs[] slot is pre-assigned its virtual and DMA address from
->> the block, so no per-buffer mapping is needed at power-on. Because the
->> coherent block is not page-backed, received payload is copied into a
->> regular netdev skb before handoff to the network stack; this is an
->> unavoidable extra copy on the XPU-enforced RX path.
->>
->> Platforms without match data are unaffected: rx_virt stays NULL, no
->> coherent memory is allocated, and the per-buffer dma_map_single() path
->> is unchanged.
->>
->> Co-developed-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
->> Signed-off-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
->> Signed-off-by: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
-> So how do you handle TX buffers? Right now, they are just passed on from
-> the net subsystem. There can be up to 32 TX buffers in progress as well.
->
-> Overall, I have mixed feelings about this patch. It looks reasonably
-> simple, but fundamentally I don't understand why we need to go back to
-> the old days of implementing protection using a highly limited MPU (in
-> your case: the xPU).
->
-> Why does the setup of BAM-DMUX differ e.g. from the setup for the crypto
-> engine? Crypto is also using bam-dma, but it avoids this inflexibility
-> by making use of the &apps_smmu. Is BAM-DMUX not covered by the SMMU? Or
-> did you just decide to bypass the SMMU in this case? (If so: Why?)
+Based on the code below I don't think you actually support partitions.
 
-I checked with secure systems team on this. Crypto BAM is
-behind apps_smmu, so protection is enforced through the SMMU's Stage-2
-page tables.
+> +static int blk_nvmem_reg_read(void *priv, unsigned int from, void *val, size_t bytes)
 
-A2 BAM (used by BAM-DMUX) is present in secure domain and does not
-support Stage-2 translation on this SoC, and there is no IOMMU domain
-that can be attached to it. The only protection mechanism available is
-the xPU.
+Overly long line.
 
+> +{
+> +	dev_t devt = (dev_t)(uintptr_t)priv;
+> +	size_t bytes_left = bytes;
+> +	loff_t pos = from;
+> +	int ret = 0;
+> +
+> +	struct file *bdev_file __free(fput) =
+> +		bdev_file_open_by_dev(devt, BLK_OPEN_READ, NULL, NULL);
 
-Thanks,
-Vishnu
+Please try to avoid all that magic autfree stuff that makes the code
+impossible to read about.
 
->
-> If you had BAM-DMUX mapped using the SMMU you would get all of this for
-> free. No changes would be needed in the BAM-DMUX driver ...
->
-> Thanks,
-> Stephan
+> +	if (IS_ERR(bdev_file))
+> +		return PTR_ERR(bdev_file);
+> +
+> +	while (bytes_left) {
+
+.. and just use __kernel_read instead of badly reimplementing it.
+
+> +	config.name = dev_name(dev);
+> +	config.owner = THIS_MODULE;
+> +	config.priv = (void *)(uintptr_t)dev->devt;
+
+Why is this storing the dev_t and not the block device itself?
+
+> +
+> +		blk_nvmem_add(disk->part0);
+
+Hmm, and you're always doing it for the whole device.  So the intefaces
+really should be based on a gendisk, not a block_device.
+
+Also once you register the whole devices as nvmem provider, we really
+should keep it from being used a block device, shouldn't we?
