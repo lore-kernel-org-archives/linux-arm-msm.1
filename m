@@ -1,68 +1,85 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80FC43C378D;
-	Fri, 24 Jul 2026 21:52:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE92D3515F9
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 22:00:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784929943; cv=none; b=aDckaFOYY62K2XboPC4bzGjo22N2viKbLbPQgenu6Wotz+QC8kzm35/d9IOE2lwV7TlyclghYHPV7NrKZRl3mBkFaFkpHECsDIg2UWC4+KaAmHjMoYHP7MrHPLMpxiLHts4r1ZtiJSoBomFOSo/zN+G6Rh5ZWZIWQteXlR9WYGw=
+	t=1784930429; cv=none; b=sEuv7eSLu4njMw0w1hBKn6LTnzWfNx4ktQ5dKjLvLHfmn6T5mhjgiF0R1eY1iFVXJQMYlFIJuvUPcb3712WlXuNU+nz0ZJ6/wjZ5PD8RbWTR4rTfGuJpZcztGcK8JYqm7Vvs8P1a8xkFSFy9TCr/677Sjl15jqoHJ12hGi72hwY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784929943; c=relaxed/simple;
-	bh=OBU710osUZltRsxO5ihB35hPZFAbv+CdJU5iVW/nNys=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=A0eqi4YCyI+dPmcIlKf5GhlPopVp7FKQpkTksf0mL6nWRe4g0pnpjIZ3+FilHDgYfpDe1kpukURzjxm8ZkQUDyCckgghVr19Nzs2Ajx7M7zuarRJUlQH1BoQvoQGPVvzF1GlLCIMTjtaLHCw0soY3LFXSuCu2wKUYQl0bLQpma4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jj0CYan8; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784930429; c=relaxed/simple;
+	bh=ciurbXVG7tI+GxVWU3OIFmJA2VqTVB1aguW3w0pZ6WE=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=DMMxMNrKgAPTIy7/XnZc+uAzDQLWdrNxf2SYS6rpQhzlCaNA6fstrxmAylVvj5HFEWv5foW/dEZHtYIIVY8VnXyoYKakDeYB4Q29UPfWIGsH5OhnNMIfRSIthQzc/LtgHJP0HxUyxnCRptsfSd4whkwO7olupzqgVIkEfm2oU3Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=n/IuILDu; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jj0CYan8"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8D6421F000E9;
-	Fri, 24 Jul 2026 21:52:20 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="n/IuILDu"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DA321F00A3D
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 22:00:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784929941;
-	bh=uISh/u7ALVGrl6kfKRrfnLU5U/Mqe8+7Lnx6fMI7IPw=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=jj0CYan8BoR/CRXNJBaDlV4sIkyhISMfbjo8FnzwLapz02QWBAsjIJIxwJCgsGlKD
-	 /eJMM7HUYvJWZ16s5kor/IurXOuBOvj952jLGQIXgKgBUAuNybu4VfU8IB/CtzUEZF
-	 PIah1KyXS4rA31qxe5AfBfKQokWYkjyPCFhvFnJunye0KXqhPio26vb3wfdLUh5XjR
-	 M22yL3B65ih5aXFen6gYQycBO9d2AGY76J6NieyDwZNSF1H7wh8XtfX5TqZJ1OuBsS
-	 U5bzWNAPSzUUgPdf37OkHk3/8dTTzfgg+PmGo7DxG4Ub8TricUPfMSHZvWOTYic5i6
-	 DJ3n34qIttOeg==
-From: Srinivas Kandagatla <srini@kernel.org>
-To: Amol Maheshwari <amahesh@qti.qualcomm.com>, 
- Arnd Bergmann <arnd@arndb.de>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Eddie Lin <eddie.lin@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- linux-kernel@vger.kernel.org, stable@vger.kernel.org
-In-Reply-To: <20260701-fastrpc-cctx-cleanup-v3-1-3a73c2e4ce1a@oss.qualcomm.com>
-References: <20260701-fastrpc-cctx-cleanup-v3-1-3a73c2e4ce1a@oss.qualcomm.com>
-Subject: Re: [PATCH v3] misc: fastrpc: fix memory leak in
- fastrpc_channel_ctx_free
-Message-Id: <178492994036.533095.17096221699937376014.b4-ty@kernel.org>
-Date: Fri, 24 Jul 2026 22:52:20 +0100
+	s=k20260515; t=1784930427;
+	bh=ciurbXVG7tI+GxVWU3OIFmJA2VqTVB1aguW3w0pZ6WE=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=n/IuILDu+lvOuOI1AbxNCaPIbF2MNNdbsE4T1jaE65xUfYs9zdEVa5FU+2/dztBt6
+	 Y7LmD+L5eAVvAYNRLg3mb8RMgAes8mLlOoSP4jzjPLF1kQ+qHcO3h4YwxdbiR/S25J
+	 3NCXTEZUUo76k2F7YjCS4dTwUaqa3eb9P5QlbRD09btxJtzDJ7Sn71Ks0mLK/lx6E4
+	 b7VFA1I3S9xnBbT1BGn+E6N3YhyBrpYQ/Kf5oQtG2X49nWjibx9wB8VZUyQvCY2eXE
+	 /2+akqwHRI61C5wmSFMUqOZQNQC4Nt+W3eGsPGfgc9cxpo6lvyK9zPRYSkZUqbT9JW
+	 wLQ3r9bzTQ93Q==
+Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-5b0f19bea2fso970653e87.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 15:00:27 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RrDnwnwTIgbJqJiGqOgoT4Ou0jOFARmJ79A2iTUWyHV5jSde/MseoJyPC6WhltcHX9qntfnGCXqi/9fm2Z5@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx3YflZD6tqL3Mxc/hQcFIX+Y/KybE01+/YACVI7nD9268fKkvl
+	8Yev3JzeHvtNptCae/tcuctZLXkQr4vIw3U/0eTlOLit/eBYubPyCLAyXVYlniwMTHq5p+s7Vut
+	ylHbKCMpibinrQQC/nslek4asYC6ZiC0=
+X-Received: by 2002:a05:6512:144f:20b0:5b0:1685:e369 with SMTP id
+ 2adb3069b0e04-5b2b2f69b51mr1418525e87.42.1784930426435; Fri, 24 Jul 2026
+ 15:00:26 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3
+References: <20260424-pinctrl_irqchip_states-v1-1-85286f078916@oss.qualcomm.com>
+In-Reply-To: <20260424-pinctrl_irqchip_states-v1-1-85286f078916@oss.qualcomm.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Sat, 25 Jul 2026 00:00:14 +0200
+X-Gmail-Original-Message-ID: <CAD++jLnQ1ZmRDZMA0DfAhuVSi2zhqKSrn-xRCNdrAcV4eT1jUg@mail.gmail.com>
+X-Gm-Features: AUfX_mwCQaGPJnUAmt5Lw4bgTuDl8LcZ2_9ygrXHQMoldDRAoXRQYXi-6OKOdj8
+Message-ID: <CAD++jLnQ1ZmRDZMA0DfAhuVSi2zhqKSrn-xRCNdrAcV4eT1jUg@mail.gmail.com>
+Subject: Re: [PATCH] pinctrl: qcom: Add irq_get/set_irqchip_state() for msm
+ gpio irqchip
+To: Sneh Mankad <sneh.mankad@oss.qualcomm.com>, Bartosz Golaszewski <brgl@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org, 
+	linux-gpio@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Maulik Shah <maulik.shah@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
+On Fri, Apr 24, 2026 at 8:31=E2=80=AFAM Sneh Mankad
+<sneh.mankad@oss.qualcomm.com> wrote:
 
-On Wed, 01 Jul 2026 19:21:59 -0700, Eddie Lin wrote:
-> The 'ctx_idr' is initialized but never destroyed when
-> the channel context is freed, leading to a memory leak.
-> Add idr_destroy() to properly clean up the IDR resources.
-> 
-> 
+> From: Maulik Shah <maulik.shah@oss.qualcomm.com>
+>
+> MPM irqchip monitors the interrupts during SoC sleep state and after wake=
+up
+> replays the edge interrupt by making it pending at respective irqchip by
+> invoking irq_set_irqchip_state() API. The msm gpio irqchip however do not
+> implement this function making it impossible to replay the gpio interrupt
+> on any MPM irqchip based SoC.
+>
+> Add the missing irq_get/set_irqchip_state() APIs. Implement only
+> IRQCHIP_STATE_PENDING case which MPM irqchip uses.
+>
+> Signed-off-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
+> Signed-off-by: Sneh Mankad <sneh.mankad@oss.qualcomm.com>
 
-Applied, thanks!
+This needs to be queued by Bartosz now that he's maintaining
+Qcom pinctrl.
 
-[1/1] misc: fastrpc: fix memory leak in fastrpc_channel_ctx_free
-      commit: 7de6fc30fcf26d9096558ce41d58448fb5286f51
+FWIW
+Acked-by: Linus Walleij <linusw@kernel.org>
 
-Best regards,
--- 
-Srinivas Kandagatla <srini@kernel.org>
-
+Yours,
+Linus Walleij
