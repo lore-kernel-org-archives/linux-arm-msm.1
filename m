@@ -1,122 +1,321 @@
-Received: from mx1.white.stw.pengutronix.de (mx1.white.stw.pengutronix.de [185.203.200.13])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BC16B3C10AE;
-	Fri, 24 Jul 2026 10:49:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.200.13
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7CB3C427F93
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 10:53:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784890157; cv=none; b=hu+Ki5yDUNN1158P90Ur5W2Y6u5c5UAKTWQaxXh+mpZUgAIBtGIfEU7W30GFbMah+ppQ+wzvIi8MJjMlImWCrDF+I0UYBW6mrPsENLirqBMhbpxiz/W8KYQTXlSzCYUXKVa//CtTVfTO2Te6vHOGiJ1TArUvpQEUHaOTW2e+NMM=
+	t=1784890431; cv=none; b=t9NdPKU59+xm+04OVIqj37K+BNBMScwxnHozeUTmf3tCtIJDoWA0xVZGPjhL1l6FFQtp7wWoxz7UB9FLCM02yTtYMbiPW0TFPoHI0zAPcsEsemXnaSGoBzI0f4Sw5Q/swZBAuuFtYToKIxGvVVwGfdw8gyEcogqsXP8fzybU8sc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784890157; c=relaxed/simple;
-	bh=okXQBzs/oPe7SiFq0kQlbRNc2jeyn5LJ68OTdABhEuk=;
-	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=phBj0ZzoMgJeJ1ZRt1Rz+4U2lhXx0ATeSEDQSsXutennrt9aiItflfRzFGdSBMkR1WIISvAuzrKsLlMe3Vp40SJkKm4C41S4Le4eqFf9qShxCAdQ0jCV1F3Lp1PTUPkyzAJpCe/9Gv/WN+jLELXfHSJCtuEl6YGiq3si23cS0Kw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.200.13
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de (drehscheibe.grey.stw.pengutronix.de [IPv6:2a0a:edc0:0:c01:1d::a2])
-	(Authenticated sender: relay-from-drehscheibe.grey.stw.pengutronix.de)
-	by mx1.white.stw.pengutronix.de (Postfix) with ESMTPSA id 31870202074;
-	Fri, 24 Jul 2026 12:49:11 +0200 (CEST)
-Received: from lupine.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::4e] helo=lupine)
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <p.zabel@pengutronix.de>)
-	id 1wnDSp-00132y-0M;
-	Fri, 24 Jul 2026 12:49:11 +0200
-Received: from pza by lupine with local (Exim 4.98.2)
-	(envelope-from <p.zabel@pengutronix.de>)
-	id 1wnDSo-000000006wz-4C49;
-	Fri, 24 Jul 2026 12:49:11 +0200
-Message-ID: <1eca6815953b50fe3f276b64d74be2795b8382aa.camel@pengutronix.de>
-Subject: Re: [PATCH v3 1/4] clk: qcom: common: Register reset controller
- only when resets are present
-From: Philipp Zabel <p.zabel@pengutronix.de>
-To: Imran Shaik <imran.shaik@oss.qualcomm.com>, Bjorn Andersson	
- <andersson@kernel.org>, Michael Turquette <mturquette@baylibre.com>,
- Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>, Rob
- Herring <robh@kernel.org>,  Krzysztof Kozlowski	 <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Konrad Dybcio	 <konradybcio@kernel.org>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>, Taniya Das	
- <taniya.das@oss.qualcomm.com>, Jagadeesh Kona
- <jagadeesh.kona@oss.qualcomm.com>, 	linux-arm-msm@vger.kernel.org,
- linux-clk@vger.kernel.org, 	linux-kernel@vger.kernel.org,
- devicetree@vger.kernel.org, Konrad Dybcio	
- <konrad.dybcio@oss.qualcomm.com>, Dmitry Baryshkov	
- <dmitry.baryshkov@oss.qualcomm.com>, Vladimir Zapolskiy	
- <vladimir.zapolskiy@linaro.org>
-Date: Fri, 24 Jul 2026 12:49:10 +0200
-In-Reply-To: <20260723-shikra-audiocorecc-v3-1-90b878ae0d4e@oss.qualcomm.com>
-References: <20260723-shikra-audiocorecc-v3-0-90b878ae0d4e@oss.qualcomm.com>
-	 <20260723-shikra-audiocorecc-v3-1-90b878ae0d4e@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2-0+deb13u1 
+	s=arc-20240116; t=1784890431; c=relaxed/simple;
+	bh=2Id8Lf7l9nSqlQQ3kJj2nmTWJEwu65vgbgq0B4au8sw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=scTmvzrAhqg32juJMv14YqCWsxElPFhlY7Xyk0UAT48+zeVBQCDtsUBwRN8S76eKOdCtk+0miysuNUpamYoWkMe6r353tQdBOp7vKcihWb5qc65Y1j1U7GvH8cQXlvnchm5LIoFn/UNLylOrYSJsHipZT1F4wuho05T0MC4Sss4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=Q2XKA4pc; arc=none smtp.client-ip=209.85.221.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="Q2XKA4pc"
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-47df43bfb07so94745f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 03:53:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1784890428; x=1785495228; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=9qGNYqgu45iCzPUDN1sRc/iOGDzLiyCE7X0FhGMvUzY=;
+        b=Q2XKA4pcoFE0/oewMrGycoNNC4PVtJI3YgBQm7O2y+RxaGCYV9Gvkr6ppuUF/C2jTw
+         xJqbhcW5qbSXSEe32kG/Ijo+SNvAsJro3R+zEdv7Ob8FPhDfjA+5BUv4pDglvxxoUOTm
+         A+a6kLKBGYP1PE/wgmBjBmQ3KTQinKigH4wUQjTLaCKouzV8/Ccxy0DLWkFgFCXQlPvv
+         z/roC2b/3ndSZ4qbcmIRZ9w/Vp07rho4xjJ2Bj33s5DMGD2dBQtJmF3EYU9Sctn3oMYT
+         KUehfiKlwEv3nsh9Zx3wshRRZy9HT85pmN00ySfZMlQ4WxvjJIVNSHNPiVt1c/eKsRU0
+         bWtw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784890428; x=1785495228;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=9qGNYqgu45iCzPUDN1sRc/iOGDzLiyCE7X0FhGMvUzY=;
+        b=n+u+sUv6K/m8Fb1XKRtp14wW8GBDVT7zv8B1K601x1vWMdyo+3HcDGhjDgOrAEh5ut
+         xxmkD8OAaJUjYOUoxm/PXnX1wzcRfuCSAitgBL12SVFGcQ9z4BF7Al2yCR+7JC/w+PIs
+         ErYTatgU/57YbY5zAqlUizoL2OAbiAZX7quCKu0pkAPnH5GZvE04+6t4/j3+tSwnEzVf
+         tWQyndbVn8wvgxkxyUjGOV+ermjbqVKZjZ2X2Ps3aVBxXGN6IGdZ5p8uqNnMBwD7zWZW
+         1HYkUPoxhEVjWdFocrexAovi8T6/adrWd6HFFdsvGID/0b0HcNQ7AQxCMvH1PfV7nvAv
+         KDeA==
+X-Forwarded-Encrypted: i=1; AHgh+Rrep0ZZmaTiIVj+iH8RAJbOEefqEcApmq5OanZGYJSBJaKqEEWUCtSDzUfS1Hkg9SW0bqlX78sWEbXalpp7@vger.kernel.org
+X-Gm-Message-State: AOJu0YxK6EmSo9E5HRsX9qBoEJPilA4WsEFEorAzo0VU3LHz+WgAEVLq
+	rQOR8b6PfF7ftUKmB/USaEaFfFf+WqmshToTPcix6uskXGzhRJOagGg7Xm0Mitm2Ee0=
+X-Gm-Gg: AR+sD12ze6x4MZwSx/Ym7axRbCdqsAxQsKmyLTP5GK3e09KkW1eEsZVh+EBS6wjYuDM
+	Vr1udDFhB7BDnuI6hi0FPWqNkmdYRKn4dt9ANVVxEnveIESsGvIY0OwA7vq/GVIQ0tNv9Juzdnp
+	M3aV2eWkIzeC7k8ScB+hDzrSmr8uC4P13dCC0+L1gycDSC4nPOzGikPzbjh4lhd9Tn5UjiBo7ji
+	wQM73u+edSRaAOP5UW59iebwYGkXV5D7qacPjq3nvTrPzlMhYhjfqoYZFdZrvdCENJNyYHt0EYT
+	k0lujzUXVxOT4DdVQpJO1lL6QMGrPcl3S0UfXN3Ta/Ow15Djj1Afee3ml3K+Yh4rKq6pw4+F1Wp
+	WpF3eIdmPacgWcH/lj9bemKNdgBMdlM5oqbs8BQL6JB6kw05IIZl73l13fv/ZDXgx8Cg/1cV2kE
+	Lu+7iMO2++4hDIUQ==
+X-Received: by 2002:a05:6000:2489:b0:460:3233:beed with SMTP id ffacd0b85a97d-47f8d75ec77mr9286973f8f.41.1784890427609;
+        Fri, 24 Jul 2026 03:53:47 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff24:7210:d8e1:da6c:62ef:6ff9])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f85bb5127sm22309568f8f.10.2026.07.24.03.53.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 24 Jul 2026 03:53:47 -0700 (PDT)
+Date: Fri, 24 Jul 2026 12:53:36 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+	Thara Gopinath <thara.gopinath@gmail.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	"David S. Miller" <davem@davemloft.net>,
+	Udit Tiwari <quic_utiwari@quicinc.com>,
+	Md Sadre Alam <mdalam@qti.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+	Peter Ujfalusi <peter.ujfalusi@gmail.com>,
+	Michal Simek <michal.simek@amd.com>, Frank Li <Frank.Li@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Vignesh Raghavendra <vigneshr@ti.com>, dmaengine@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, brgl@kernel.org,
+	sashiko-reviews@lists.linux.dev
+Subject: Re: [PATCH v24 06/14] dmaengine: qcom: bam_dma: add support for BAM
+ locking
+Message-ID: <amNEMK4k54l655ku@linaro.org>
+References: <20260723-qcom-qce-cmd-descr-v24-0-4f87bb4d9938@oss.qualcomm.com>
+ <20260723-qcom-qce-cmd-descr-v24-6-4f87bb4d9938@oss.qualcomm.com>
+ <20260723172814.661591F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260723172814.661591F000E9@smtp.kernel.org>
 
-On Do, 2026-07-23 at 21:15 +0530, Imran Shaik wrote:
-> Some clock controller descriptors do not define resets. Avoid registering
-> a reset controller in such cases by checking desc->num_resets.
->=20
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-> Signed-off-by: Imran Shaik <imran.shaik@oss.qualcomm.com>
-> ---
->  drivers/clk/qcom/common.c | 24 +++++++++++++-----------
->  1 file changed, 13 insertions(+), 11 deletions(-)
->=20
-> diff --git a/drivers/clk/qcom/common.c b/drivers/clk/qcom/common.c
-> index 2c09abaf1d2a15b7fbbbfeb67c03075381185a00..d6ff83045da8f308dcb9c5836=
-af48090323248de 100644
-> --- a/drivers/clk/qcom/common.c
-> +++ b/drivers/clk/qcom/common.c
-> @@ -359,17 +359,19 @@ int qcom_cc_really_probe(struct device *dev,
->  		qcom_cc_clk_regs_configure(dev, desc->driver_data, regmap);
->  	}
-> =20
-> -	reset =3D &cc->reset;
-> -	reset->rcdev.of_node =3D dev->of_node;
-> -	reset->rcdev.ops =3D &qcom_reset_ops;
-> -	reset->rcdev.owner =3D dev->driver->owner;
-> -	reset->rcdev.nr_resets =3D desc->num_resets;
-> -	reset->regmap =3D regmap;
-> -	reset->reset_map =3D desc->resets;
-> -
-> -	ret =3D devm_reset_controller_register(dev, &reset->rcdev);
-> -	if (ret)
-> -		goto put_rpm;
-> +	if (desc->num_resets) {
-> +		reset =3D &cc->reset;
-> +		reset->rcdev.of_node =3D dev->of_node;
-> +		reset->rcdev.ops =3D &qcom_reset_ops;
-> +		reset->rcdev.owner =3D dev->driver->owner;
-> +		reset->rcdev.nr_resets =3D desc->num_resets;
-> +		reset->regmap =3D regmap;
-> +		reset->reset_map =3D desc->resets;
-> +
-> +		ret =3D devm_reset_controller_register(dev, &reset->rcdev);
-> +		if (ret)
-> +			goto put_rpm;
-> +	}
-> =20
->  	if (desc->gdscs && desc->num_gdscs) {
->  		scd =3D devm_kzalloc(dev, sizeof(*scd), GFP_KERNEL);
+On Thu, Jul 23, 2026 at 05:28:13PM +0000, sashiko-bot@kernel.org wrote:
+> Thank you for your contribution! Sashiko AI review found 5 potential issue(s) to consider:
+> 
+> New issues:
+> - [High] Calling `queue_work()` inside `bam_start_dma()` when there is exactly 1 slot available creates an infinite busy-loop in softirq context (softlockup).
+> - [High] The transaction completion callback fires before the hardware pipe is actually unlocked, violating the mutual exclusion requirement.
+> - [High] The driver clears the software lock state prematurely, allowing concurrent configuration changes to corrupt in-flight hardware execution.
+> - [Medium] The 'reserved' field of the lock command element is left uninitialized before being synced to the device.
+> 
+> Pre-existing issues:
+> - [Critical] Mismatch between FIFO wrapping modulo and CIRC_SPACE size leads to silent descriptor overwrites and data corruption.
+> --
+> 
+> --- Patch [6]: [PATCH v24 06/14] dmaengine: qcom: bam_dma: add support for BAM locking ---
+> commit bf87fb2cf384d859e1e0efff5d0a48f0cb3ccea2
+> Author: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> 
+> dmaengine: qcom: bam_dma: add support for BAM locking
+> 
+> Add support for BAM pipe locking. To that end: when starting DMA on a TX
+> channel (DMA_MEM_TO_DEV) - prepend the existing queue of issued
+> descriptors with an additional "dummy" command descriptor with the LOCK
+> bit set. Once the transaction is done (no more issued descriptors),
+> issue one more dummy descriptor with the UNLOCK bit.
+> 
+> > diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
+> > --- a/drivers/dma/qcom/bam_dma.c
+> > +++ b/drivers/dma/qcom/bam_dma.c
+> 
+> [ ... ]
+> 
+> > @@ -676,10 +697,51 @@ static void bam_free_chan(struct dma_chan *chan)
+> >  static int bam_slave_config(struct dma_chan *chan,
+> >  			    struct dma_slave_config *cfg)
+> >  {
+> > +	struct bam_config *peripheral_cfg = cfg->peripheral_config;
+> >  	struct bam_chan *bchan = to_bam_chan(chan);
+> > +	const struct bam_device_data *bdata = bchan->bdev->dev_data;
+> > +
+> > +	if (peripheral_cfg && cfg->peripheral_size != sizeof(*peripheral_cfg))
+> > +		return -EINVAL;
+> >  
+> >  	guard(spinlock_irqsave)(&bchan->vc.lock);
+> >  
+> > +	/*
+> > +	 * This is required to setup the pipe locking and must be done even
+> > +	 * before the first call to bam_start_dma().
+> > +	 */
+> > +	if (bdata->pipe_lock_supported && peripheral_cfg) {
+> > +		if (cfg->direction != DMA_MEM_TO_DEV)
+> > +			return -EINVAL;
+> > +
+> > +		if (bchan->bam_locked)
+> > +			return -EBUSY;
+> > +
+> > +		if (!bchan->lock_ce) {
+> > +			bchan->lock_ce = kmalloc_obj(*bchan->lock_ce, GFP_ATOMIC);
+> 
+> [Severity: Medium]
+> Will this leave the reserved field of the command element uninitialized?
+> 
+> Looking at how this is initialized in include/linux/dma/qcom_bam_dma.h:
+> 
+> static inline void
+> bam_prep_ce_le32(struct bam_cmd_element *bam_ce, u32 addr,
+>                  enum bam_command_type cmd, __le32 data)
+> {
+>         bam_ce->cmd_and_addr =
+>                 cpu_to_le32((addr & 0xffffff) | ((cmd & 0xff) << 24));
+>         bam_ce->data = data;
+>         bam_ce->mask = cpu_to_le32(0xffffffff);
+> }
+> 
+> The reserved field is not set here, and kmalloc_obj() does not zero the
+> memory. Could this map and sync uninitialized kernel heap memory to the DMA
+> hardware?
+> 
 
-Is it possible to have num_resets =3D=3D 0 but num_gdscs > 0?
-If so, the now uninitialized reset variable will be dereferenced and
-passed into gdsc_register() a few lines below:
+kzalloc_obj()? This is your bug. :-)
 
-		ret =3D gdsc_register(scd, &reset->rcdev, regmap);
+> [ ... ]
+> 
+> > @@ -1064,22 +1145,34 @@ static void bam_start_dma(struct bam_chan *bchan)
+> >  
+> >  	lockdep_assert_held(&bchan->vc.lock);
+> >  
+> > -	if (!vd)
+> > +	vd = vchan_next_desc(&bchan->vc);
+> > +	if (IS_BUSY(bchan) || (!vd && !bchan->bam_locked))
+> >  		return;
+> >  
+> >  	ret = pm_runtime_get_sync(bdev->dev);
+> >  	if (ret < 0)
+> >  		return;
+> >  
+> > +	if (!bchan->initialized)
+> > +		bam_chan_init_hw(bchan, container_of(vd, struct bam_async_desc, vd)->dir);
+> > +
+> > +	if (bchan->locking_enabled && !bchan->bam_locked) {
+> > +		/* Defer locking until we also have space for a data descriptor */
+> > +		avail = CIRC_SPACE(bchan->tail, bchan->head, MAX_DESCRIPTORS + 1);
+> 
+> [Severity: Critical]
+> This is a pre-existing issue, but does CIRC_SPACE() calculate the correct
+> available space when bchan->tail wraps at 4095?
+> 
+> MAX_DESCRIPTORS is 4095. Down below in bam_start_dma(), the pointers wrap
+> via:
+> 
+>     bchan->tail += async_desc->xfer_len;
+>     bchan->tail %= MAX_DESCRIPTORS;
+> 
+> Since bchan->tail wraps to 0 after 4094, it never reaches 4095. However,
+> CIRC_SPACE() is called with MAX_DESCRIPTORS + 1 (4096). Because
+> CIRC_SPACE() assumes the pointers wrap at the provided power-of-2 size, when
+> the buffer is full (tail == head), won't it incorrectly evaluate the space as
+> 4095 and cause a massive buffer overrun?
+> 
 
-The whole gdsc reset handling looks very spooky, with
-gdsc_(de)assert_reset() calling directly into the rcdev->ops with no
-regard for reset control state.
+Ooof, this seems correct to me but we can/should fix this separately
+probably...
 
-regards
-Philipp
+> > +		if (avail < 2) {
+> > +			queue_work(system_bh_highpri_wq, &bdev->work);
+> > +			goto out;
+> > +		}
+> 
+> [Severity: High]
+> Can this early return cause an infinite busy-loop softlockup?
+> 
+> If exactly one slot is available (avail == 1), queue_work() is called and
+> we return. The worker executes bam_dma_work():
+> 
+>     if ((!list_empty(&bchan->vc.desc_issued) || bchan->bam_locked) &&
+>         !IS_BUSY(bchan))
+>         bam_start_dma(bchan);
+> 
+> Since IS_BUSY() only tests for avail == 0, the check passes and
+> bam_start_dma() is immediately called again. It sees avail < 2 again,
+> queues the work again, and returns. Could this loop indefinitely in softirq
+> context until a hardware interrupt eventually fires?
+> 
+
+Yes, the queue_work() doesn't make sense here. We need to wait for the
+BAM to finish processing some descriptors. Once it has notified us about
+that, the IRQ handler will queue_work() it anyway, so you can just drop
+this.
+
+Technically, the avail < 2 check isn't even needed. We could start
+writing the LOCK descriptor and then wait for the BAM to make further
+room for the data descriptors. I just thought it's a bit weird to queue
+LOCK without also adding some data descriptors at the same time.
+
+> [ ... ]
+> 
+> > @@ -1135,11 +1228,24 @@ static void bam_start_dma(struct bam_chan *bchan)
+> >  		if (((avail <= async_desc->xfer_len) || !vd ||
+> >  		     dmaengine_desc_callback_valid(&cb)) &&
+> >  		    !(async_desc->flags & DESC_FLAG_EOT))
+> >  			desc[async_desc->xfer_len - 1].flags |=
+> >  				cpu_to_le16(DESC_FLAG_INT);
+> 
+> [Severity: High]
+> Does this cause the transaction completion callback to fire before the
+> hardware pipe is actually unlocked?
+> 
+> DESC_FLAG_INT is set on the data descriptor here, regardless of whether an
+> UNLOCK descriptor will immediately follow. When the data descriptor completes,
+> an interrupt is generated and process_channel_irqs() completes the cookie:
+> 
+>     if (!async_desc->num_desc)
+>         vchan_cookie_complete(&async_desc->vd);
+> 
+> Could this notify client drivers of transaction completion while the UNLOCK
+> descriptor is still pending in the hardware FIFO, allowing clients to modify
+> state or power down the device prematurely?
+> 
+
+Yes, but the client driver should be only concerned about the completion
+of its own data operations, the lock handling is transparent and
+internal to the BAM driver IMO. "Works as intended."
+
+> [ ... ]
+> 
+> > +	/*
+> > +	 * Close the bracket once there is no more client work queued. The
+> > +	 * UNLOCK is flagged for an interrupt so process_channel_irqs() is
+> > +	 * guaranteed to observe its completion and retire it from the FIFO
+> > +	 * promptly, instead of leaving bchan->head to lag until a later
+> > +	 * bracket's skip-loop catches up with it.
+> > +	 */
+> > +	if (bchan->bam_locked && !vd && !IS_BUSY(bchan)) {
+> > +		bam_fifo_write_lock(bchan, DESC_FLAG_UNLOCK | DESC_FLAG_INT);
+> > +		bchan->bam_locked = false;
+> > +	}
+> 
+> [Severity: High]
+> Is the software lock state cleared too early here?
+> 
+> We synchronously set bchan->bam_locked to false immediately after placing the
+> UNLOCK descriptor into the software FIFO, before the hardware has actually
+> completed the transaction. 
+> 
+> If a client then calls bam_slave_config(), the -EBUSY check for
+> bchan->bam_locked will pass, and the driver might overwrite bchan->lock_ce
+> or configuration registers while the hardware is still busy processing
+> in-flight descriptors. Does this violate the mutual exclusion requirement?
+
+It's true, but I think this can be ignored. That's why I didn't even
+have the -EBUSY check in my diff. bam_start_dma() already re-configures
+the channel in the middle of a transaction (if bchan->reconfigure is
+set), so that one will already make changes to in-progress descriptors
+anyway. It's a bit problematic though that we don't provide a way for
+clients to wait until the unlocking has been completed, so they don't
+have any chance to avoid affecting ongoing unlock operations from their
+side.
+
+Or you just disallow changing the lock_scratchpad_addr once it has been
+set. Whatever. I don't think anyone will ever use multiple different
+addresses there.
+
+Thanks,
+Stephan
