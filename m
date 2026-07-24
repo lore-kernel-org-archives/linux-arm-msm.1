@@ -1,89 +1,89 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 030C63A7F61
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 07:18:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5B8A3A6EE5
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 07:18:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784877539; cv=none; b=H/woI+nXRqW0uOKncNrIRfSE3IvFPLk2t63OBlHrbiqG8tNBzpF8Gj55P59H0p0yJeEZ2W9C+5H6wBW/4i1NvS8DkhyWG1WjRyNETlDLuR53VByZriWaplsg9a05PIzt1uGqeou2/FxVu9vb2nNniVKrLKKVbLAL1bvnLT6jKio=
+	t=1784877540; cv=none; b=aZ12QLsA9We7HLSO3NnwixwAgCsU7KRrxK24wu+benqTqVf/bkiVZJy0ysVvt6QvYsj5RTh6umXCqNrWVJVBUUXmF5SfbQiPQgyhR70SJUNp5b+TeJ+QTgzxEHKcJ+G/CDyZ2upIGpRhi0oD23RzTXcUUZcXpX6sG42SInSbxUs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784877539; c=relaxed/simple;
-	bh=NVwa6oaza24/Csd5TLISWX6+QzD3TmEvlvRTB2GzPf0=;
+	s=arc-20240116; t=1784877540; c=relaxed/simple;
+	bh=8kOkUq8/QNbkFlOXibGos7tK4ImImcoivey6N7UaC1A=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=GuWAnX6zSrJu4B73kZtHcofuHTFTPeP/E7wrFA+6GJnH4UvhVjRD/UqyAJT41cDExboPytQ4x+hDfHbkshNI3wHsy4hD/7ZtIeaz89smWD66N36e5Kk850ZmeTVwqcZR5gfEAEbPYEf7tC+pobdxb5RM0cDgdH37CWYhdpjnCIc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TGNiMloe; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Dj47CsRx; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=HJ6toAGuH/zR+nImKbRsRJDNyW/HJzic14VS+fLrN94CWU1wKFWDuMZviLUGsOjCkM6WI8CUvwQkY+8UIbytyxPJinDbbCEvtQWmxVghq01Sm5XNkbYIHTGpcSQtFlp7/AYtuOb+8nZwjg8JKKJakT+VkF73RosRFNbmR4UBF5w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=h+Inf2Zj; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=D3aSA+Jl; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TGNiMloe";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Dj47CsRx"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66O4lUHK1510162
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 07:18:56 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="h+Inf2Zj";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="D3aSA+Jl"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66O4lXb52125263
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 07:18:57 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	1ro51vT5z7mZG5tqK1ttGlUsx59tQ9Z/vFqR01rpaFQ=; b=TGNiMloetntlRhfE
-	UhN4tdQIetnqBJ92YXQ63/NTcN8zsC4CoZlDuEwLlUcJnmag7MyHylf54ouUwUsl
-	gllGlDA38wqLIKOsYEDj3e5LikG14/L7zqkvUkbo4lM8c07RQEFzsHqOrfprGAjx
-	QfrxRKafTr9KiAdpqqB4SQ/JesFJv5KhmZrZs9tUq1TundY+gv86jAqdiryK88nf
-	8aa2e5MkiKVABJDkyL/2n+Sb5LcqFSo23xLcQbpxq1SxO10RfETAESEUlTTYaEvr
-	FS8siNCGigTEn/NMr7fwegLJEAT3k6pSv6j1nTiGwjGaqcQlqT3aibHpsfP5+jwU
-	y/CaEQ==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkusrsg94-1
+	6KcTwhi8obGfuKLj8dNnCltx59+O49u6DXb3AWbAy+A=; b=h+Inf2ZjQWvrPiCE
+	chmr1Np/f/lNLp1yYpWVdXgR4z/nUUVP5nnCdeUQSbDL3mktBPdXXj1jT8WeIiBN
+	0jtg8btiWVXuEDbR+ezRdxqkg1FukelNmq7P0Gk13LRcG6+yxu8vyU5A0k6AX3a+
+	k3JTuTSD+WJDKKCm+vbvBy0pUY2S6z9Ml3jHttP+xlWZIlq/91mB7Qa6wRApDgYs
+	95xOFBCHTPL4+8A/q5ZP3PumYh4nncV2oUaG+9FOdIOP20tITKC2yTZ3sCcKiYvc
+	ZwR0NlqjFTquiaQtV61tAG1S6zHeL9JlsRvi4ua9uKhs1Rs3+/xaF08340ZpEByX
+	yLNWoA==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fkqamtj8e-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 07:18:56 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cfa55c9430so1858605ad.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 00:18:55 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 07:18:57 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3823dcc1647so141443a91.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 00:18:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784877535; x=1785482335; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1784877537; x=1785482337; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=1ro51vT5z7mZG5tqK1ttGlUsx59tQ9Z/vFqR01rpaFQ=;
-        b=Dj47CsRx3/7Nid8olXWuZCgVMZDBWv+w5aVQNygI/av9lgbr0fwAe086Gamu6qUVSs
-         PzVILoDYKxmXpq6kXKE0yTioXAz01ZXZmzATEeP3AKtMsutiKJNeQxW42FjkAQdzswQR
-         Ij8Yb2J1Niv+Jk2zIccLiddBYK2b9psuhkXNry6bvWOUyQieO5iFCc9cb040UtlZyvJ2
-         tI0e6Y7xH9ja6lgubdj3s+4YgtuV18XFj0UayZh5VZ5KpwsMz5xw9ByGFTiX+zLD2FBJ
-         FGg08ErsjiT5QPe8dORzQFWQnW8QnSepIX1JatQQyPBL8SZJ/NaPPRw4ET8bssfWWWy6
-         rWxw==
+        bh=6KcTwhi8obGfuKLj8dNnCltx59+O49u6DXb3AWbAy+A=;
+        b=D3aSA+Jljr5/3GTN9QbEq48Fj+aIXlueddHI8vaFngvQewUWGBjSzZaKf2o5lqvREX
+         5dhQvy3Hl2/sxdBWNi8CQHMtUozJ5BduAZNhOfOSoYrOuT8NkH0in6hvRnE3spKUjYU+
+         HCJRZUdYkaKP9A11+0lUe5gqphgc+5MCyqJXm0yYrXO/7SEDBUNfQT9xpP/1tg2oms8N
+         k56cA1L8098D6k9Vqfb/FzOt/a31hxfmAMAsr3TNPhGbSQ4Flbr39kPieHYMKFgqRlmp
+         BujMRKdVmllgIh2991j8ob+DIAvW0ooUYCIH6XHRBE6KsEU/3DCZcho7OISjmuDQSJFG
+         gz8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784877535; x=1785482335;
+        d=1e100.net; s=20251104; t=1784877537; x=1785482337;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=1ro51vT5z7mZG5tqK1ttGlUsx59tQ9Z/vFqR01rpaFQ=;
-        b=S2R8ePvdC3mw90TR8GTggqEnc9nPN5esH0E17nWr//PiRsVCR3565aWO1qQ3kXGgFp
-         xEeFaAi/yQTnD1wo3aday45WGlwypD+DKj1PFs4+RNwtnbmUAxjlo4FCvKXdXNKSw8Vj
-         gQzEEKaYQGzUcsFi1laSTM+cC250Fwe4swzGKjvgW7MQMjDjLUSopG4zRVhTh82Qh6fP
-         i2TjbaO1+4SvZI5Zd9LkFbqRJ5yl/KnyXX/ZUDr1UGGCusWHKAqqoN5ZcWRrXJmHx1Qs
-         Vk9VukXWsDrR15jj2fmhav/HIbKOshGfIV6iI04X5G/mWtAYKxJ/zX7DzzalHWakW8Nf
-         BriA==
-X-Forwarded-Encrypted: i=1; AHgh+RoGPdttp1toNoMNWoBDCIFyneotDSpe+lQ+yBycIFRzj10Mhs4iLgnsTCEdYNwCJv3IS+UIONVHdlFKXMEq@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx9rqfCJKkdtJ7+anmePFRMy8RZEMc7CeCDBZ4qVVFrlKg6mGF2
-	yJXnrH3rajGHoolRGT6Iso+WRCW5vi5LjORodvYOEu23F16Frn7BSZe/KY+au0ODEp5jqTGH9P4
-	mLEmjagYs3JwSAbY7eZKiUE4DMBs+tCuxOwByXy5D3tWfe1FSA4J1IJb3mXxuZPBr+OeQ
-X-Gm-Gg: AR+sD11X77AMRaRzN9ylh6cenx7KxAgXgidOJF7MXB5bzNKIu98QoLddKRC+nj1oiJp
-	HjifEzCzkDAonPO38+74DWityKuTV406fd0Ai0N8QNg6TPfqt3gzWZaT2T8iH83yA//+OcPfqf2
-	CYcrLT8o7r0P+hfiOWM8Dl+/ENnuyEqX/lp+kvs/l1HaRKvxJjcIC4WLQJsvZFrA3/lUxFvOYdR
-	nKrN8rLHByFQVGuKE9FvC5HzNpSTGVgmj3KBcK3StU7i3GePd5Q4oz+TYdaow+eGfWWCw/H7I62
-	cRVxg73gEBl2b5LDQ5kwWRN5N/zcwxFfhtn3WAzn+fU3AB5rC/mxRQyaAPp32SBjWOe7dsZ9nxu
-	cjzLnDShHfp5LhgVpVJHd4fvyCwkwJwksLPM8va04dkrRGPfbt2501JC8jwFbqvW93fRcNKp+Db
-	Jb8qUVj3gpj2+rgnzCvmw7Rv+DmNI=
-X-Received: by 2002:a17:903:1b2c:b0:2cc:df15:91f5 with SMTP id d9443c01a7336-2cfa6f877d9mr74402085ad.44.1784877534251;
-        Fri, 24 Jul 2026 00:18:54 -0700 (PDT)
-X-Received: by 2002:a17:903:1b2c:b0:2cc:df15:91f5 with SMTP id d9443c01a7336-2cfa6f877d9mr74400175ad.44.1784877528991;
-        Fri, 24 Jul 2026 00:18:48 -0700 (PDT)
+        bh=6KcTwhi8obGfuKLj8dNnCltx59+O49u6DXb3AWbAy+A=;
+        b=BbstqMCIYeivdQi6VyI3phLgyvUN0XZztAdKGXwkCGlSII34UZUj5D8wR1tLi9R/1+
+         5Sg8y0YI7YcxYW4FP1SqYaoFS4XTuWU/rXAZiYhmnNp8LAaUvttVcKXKubPHwY2A/w8E
+         I4Q5CM9yLyyz/pgX5rzWMUrivO/5R4ikAELyjTA8Tg9QFtPb6IxMyV5AtgC+C5uYLuQp
+         jYnbAEc+J98Byx3wPe0In/AgMJJtOlTIYn/NLAWCKQjHJIFMNO73KBFjM9C//+i0Uehn
+         tCgqWV5isw5do6fLA71FMgDyfO8KNS7CwgS5OSOCO1lhJwENgN7CJ5fNkwSAxj8LyQYP
+         r/cw==
+X-Forwarded-Encrypted: i=1; AHgh+RpdUBnWd1jUNGvIM0CJnITkDtrwK6JgzRR1gZx3LrSK7fGeBztjoSjqrVZ4KDZ6l69TTUswZMkwDaStX7H1@vger.kernel.org
+X-Gm-Message-State: AOJu0YwEo4V4j3EKE4NixLlR3dMCsNWTSP43PSnbjH8el/Y0mFICa96y
+	KgjqzZuv84UHhwf3imVJ9bW3An+Rscq5ELqjVuLek+4+fM9B8yyYVpI3h2vx0TDcSxx8kBG9CuV
+	Xpyquw+InMG1Ui3izLaeP1zd3x9nItoqqDOBgljmGlMO3JGzpJHe1og56xr/xyyPYLqQb
+X-Gm-Gg: AR+sD11ttR9wDs8ew2ribbpMu8oxfAetUyuor+P2J61rZ3bZRMIeGhx62jSB7pmDy8X
+	hoaDK2f0R3I4/6kdpfKEsCPwvzwiLw1nmUhgEIB9IcTczUzkVX6SgE6+LDV0xA7rKDirIb+mPU5
+	52EsawiKZMx2i07R6FlAMtDZmO3N5/c8F6DSQ1Q2j84TImvkvT9973/YHoFovJUiCv+bGzSJPof
+	J1SEP/A8zT8pFgrEgrSxdquHyA2bcryRjmen32ia76hPkjw9aqJjDkbigCYlWmXuNuOXTSwx2s4
+	buVqJDPuzg3cQMI1Nd6X7ZRt/0XfhkFgoy3oVG5jUnYndRM37poRedlAP0w2d8VZ/Gh1gkR9HXt
+	R5ffpqGvEWSZ4Aqma9avfUYrpWQIysDWMdAovaVUI/7+8HfeE0u7djCQ4f4dnWR936WGxykulku
+	Evc8tzpz5x74MCKYdvavzYshFS4uE=
+X-Received: by 2002:a17:90b:4b08:b0:37f:db06:229c with SMTP id 98e67ed59e1d1-38ec65fc538mr6150162a91.22.1784877536609;
+        Fri, 24 Jul 2026 00:18:56 -0700 (PDT)
+X-Received: by 2002:a17:90b:4b08:b0:37f:db06:229c with SMTP id 98e67ed59e1d1-38ec65fc538mr6150131a91.22.1784877536051;
+        Fri, 24 Jul 2026 00:18:56 -0700 (PDT)
 Received: from hu-ppapaniy-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf8efe3afbsm45993805ad.33.2026.07.24.00.18.42
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cf8efe3afbsm45993805ad.33.2026.07.24.00.18.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jul 2026 00:18:48 -0700 (PDT)
+        Fri, 24 Jul 2026 00:18:55 -0700 (PDT)
 From: Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>
-Date: Fri, 24 Jul 2026 12:48:06 +0530
-Subject: [PATCH RFC 01/10] firmware: arm_scmi: Add SCMI QCOM Generic
- Extension Protocol documentation
+Date: Fri, 24 Jul 2026 12:48:07 +0530
+Subject: [PATCH RFC 02/10] dt-bindings: firmware: arm,scmi: Add Qualcomm
+ Generic Extension Protocol
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -92,7 +92,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260724-rfc_v8_scmi_memlat-v1-1-cb732bcff1f4@oss.qualcomm.com>
+Message-Id: <20260724-rfc_v8_scmi_memlat-v1-2-cb732bcff1f4@oss.qualcomm.com>
 References: <20260724-rfc_v8_scmi_memlat-v1-0-cb732bcff1f4@oss.qualcomm.com>
 In-Reply-To: <20260724-rfc_v8_scmi_memlat-v1-0-cb732bcff1f4@oss.qualcomm.com>
 To: Sudeep Holla <sudeep.holla@kernel.org>,
@@ -117,1017 +117,98 @@ Cc: Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>,
         devicetree@vger.kernel.org, linux-pm@vger.kernel.org,
         linux-tegra@vger.kernel.org
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1784877514; l=58108;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1784877514; l=2320;
  i=pragnesh.papaniya@oss.qualcomm.com; s=20260120; h=from:subject:message-id;
- bh=NVwa6oaza24/Csd5TLISWX6+QzD3TmEvlvRTB2GzPf0=;
- b=1vcG58oBTHxKWyCUb/QHgPOpMkgL3KjhIwtMHGGndu9s6uMtvJ9Qe8KDa6zTXcpqruAcM03Hz
- FPbRJXA/IhZBllzWljEh6MUolyQMYGpAKKsOG3PA9CMLVV5JuUhSs6X
+ bh=8kOkUq8/QNbkFlOXibGos7tK4ImImcoivey6N7UaC1A=;
+ b=kcWWRSTmgHpghdRGCm+tzYMnocOcNLzdIw5A4hcEd3F4SOsgeVTWlBHbs9nPYviDl1lcqVDJl
+ XTULEl0Z8EYANL6bYs9r63RpnC+qwCYRqzora1Gjcn8/0ESEKueC6PU
 X-Developer-Key: i=pragnesh.papaniya@oss.qualcomm.com; a=ed25519;
  pk=09P9nFmZLXJ9+4Jx10ZK5rIW0Fmk79A/DLErm6aVA0c=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDA2NSBTYWx0ZWRfX4qMQwSrMHGMF
- 80TNy9iZabExBeepMy9hFYdnd88dYtUr02WjGz3+w2xKP2SEqcZ9hSFs0U/47H2/pofKXSOuX1Q
- OGo/l5NJ4fR2j/NpTnuLOSe5NjBWQto=
-X-Proofpoint-ORIG-GUID: mtsADomGD70FXbenOV8eZ2fsyxCBMf9s
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDA2NSBTYWx0ZWRfX3AdgfXW6Tawq
- U9XfM6vs/Zmo7RNZ46MlgBTggSzlNySBX3WXEUjXbhyP71Ne4AiLNmAtkKCW8A0lpucySNPMR90
- 1GP6XKuyJE8Q6/uGGVotz53lv6tpBc3Xr3olVBRvo0w3x9P37OMaNiKybBMsZv+E7wjyx/1VfQC
- gI6x/5wp6s5Uozo5H4yaWxobnf4My1fJrPXNZoCKEtqk7ZHCaExQdh5RbqcR+NUx9MvneRhRsDB
- BGXncdm3izoT0xCleWm0A0RnxBF1AgW3OyQWq0CjXC5pLXKDxnPBZLfmFeKkFRW3wvfEGiokvFV
- VY6nmce6EynEYPVsFbVUQBIdgoMkCzL+GtP4kVSrCaUApi3Ixl9SoFWvPty/UzDqG0AJq6tBffR
- 0G3lBc4rbrAiTkQmRiWy/7d4BsMguukuSJQqCM/gFlLcMEOc8ogaKutdzQdVKrWd4yb63P6nnmv
- bOjy1cF/hW+sJnyFdCw==
-X-Authority-Analysis: v=2.4 cv=PtejqQM3 c=1 sm=1 tr=0 ts=6a6311e0 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDA2NSBTYWx0ZWRfX1tbXc79sGPDp
+ UrbCBSbNv1RBvA0dv9MdGN8I2WdK1W1xFWil6rM1L0eHhYMIZy/aRrL/4Lz5PYTqpeUnSAvcOJc
+ kOy3YeYazkv+KuSGAiM8yZykYnBtbv0cXh/BLdIWiPv5cZ6MthvPeh5DK7mxLxNC4OjM/9+fePL
+ pPxDx/CSVl+IEwmyQchxmNTHkWDdjEk3TucRuP/sBW7jRL3E5HkmvCWjfWnAFpKYCU2I/HvJ3T2
+ IzxzQZUwNlMTKomx3Wo2OsOGgwPD0ObrqTiuTDr4YjT8xJauCryDxA52XSjXeT1705MhMIAgJ51
+ qs9+OpDVOTqy6MsvBdmhnuIL4NR/72EGyBpnnr/j9vIbJiAahO7xzqS9MNtfJoaFC7I3Vt1/xkY
+ 469c3mafcsxO1VGkn6qCYXYlVobnS/NGQBYj7984oyIO/BNCZ+m3kG1y3LGG4E+8G2Pl04+erHI
+ 6A1yVYw694S+0J9p69Q==
+X-Proofpoint-GUID: Rvlw1u6AyYeFc0scMiP75labPfMkszwF
+X-Authority-Analysis: v=2.4 cv=DfAnbPtW c=1 sm=1 tr=0 ts=6a6311e1 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=xn6pn0MgdEpbbIXp4LUA:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-GUID: mtsADomGD70FXbenOV8eZ2fsyxCBMf9s
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=dmqMg6edKZ0wKbcdjZwA:9 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDA2NSBTYWx0ZWRfX0z5e3StcAInP
+ oDUx+qS6s3R3Xs5yxfx3gh/9PCyggANP4U4PWOb7RTvG1Rv0VProCkd8P6YBKL4g5ZDPW6UfvLh
+ jUUeo4jlVqwLbc1esQpk2eGIMcVGntY=
+X-Proofpoint-ORIG-GUID: Rvlw1u6AyYeFc0scMiP75labPfMkszwF
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-24_01,2026-07-22_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 clxscore=1015 suspectscore=0 malwarescore=0 phishscore=0
- lowpriorityscore=0 adultscore=0 priorityscore=1501 spamscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607240065
+ lowpriorityscore=0 clxscore=1015 suspectscore=0 spamscore=0
+ priorityscore=1501 impostorscore=0 bulkscore=0 adultscore=0 malwarescore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607240065
 
-Add System Control Management Interface (SCMI) Qualcomm Generic Extension
-Protocol documentation. It consists of a small set of generic SET/GET/
-START/STOP commands, which is used to turn on/off and configure Qualcomm
-SoC specific algorithms that run on the SCP.
-
-It currently only supports MEMLAT (memory latency governor) algorithm.
-The immutable pairing of the MEMLAT algorithm string with the supported
-param_ids associated with it are documented here.
+Add the binding schema for the SCMI Qualcomm Generic Extension Protocol
+which helps support Bus DVFS on Glymur/Mahua/Hamoa/Purwa/Kaanapali SoCs.
 
 Co-developed-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
 Signed-off-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
 Signed-off-by: Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>
 ---
- .../arm_scmi/vendors/qcom/qcom_generic.rst         | 954 +++++++++++++++++++++
- 1 file changed, 954 insertions(+)
+ .../devicetree/bindings/firmware/arm,scmi.yaml     |  1 +
+ .../bindings/firmware/qcom,generic-scmi.yaml       | 27 ++++++++++++++++++++++
+ 2 files changed, 28 insertions(+)
 
-diff --git a/drivers/firmware/arm_scmi/vendors/qcom/qcom_generic.rst b/drivers/firmware/arm_scmi/vendors/qcom/qcom_generic.rst
+diff --git a/Documentation/devicetree/bindings/firmware/arm,scmi.yaml b/Documentation/devicetree/bindings/firmware/arm,scmi.yaml
+index 6fc44105f1c3..85f06a6a7452 100644
+--- a/Documentation/devicetree/bindings/firmware/arm,scmi.yaml
++++ b/Documentation/devicetree/bindings/firmware/arm,scmi.yaml
+@@ -24,6 +24,7 @@ description: |
+ 
+ anyOf:
+   - $ref: /schemas/firmware/nxp,imx95-scmi.yaml
++  - $ref: /schemas/firmware/qcom,generic-scmi.yaml
+ 
+ properties:
+   $nodename:
+diff --git a/Documentation/devicetree/bindings/firmware/qcom,generic-scmi.yaml b/Documentation/devicetree/bindings/firmware/qcom,generic-scmi.yaml
 new file mode 100644
-index 000000000000..42e327d53841
+index 000000000000..a50e5e8fdccc
 --- /dev/null
-+++ b/drivers/firmware/arm_scmi/vendors/qcom/qcom_generic.rst
-@@ -0,0 +1,954 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: <isonum.txt>
-+
-+==================================================================================
-+System Control and Management Interface (SCMI) Qualcomm Generic Extension Protocol
-+==================================================================================
-+
-+:Copyright: |copy| Qualcomm Technologies, Inc. and/or its subsidiaries.
-+
-+:Authors:
-+   - Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-+   - Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>
-+
-+System Control and Management Interface Qualcomm Generic Extension Vendor Protocol
-+==================================================================================
-+
-+System Control Management Interface (SCMI) Qualcomm Generic Extension Protocol
-+consists of a small set of generic SET/GET/START/STOP commands, which is used to
-+turn on/off and configure Qualcomm SoC specific algorithms that run on the SCP.
-+Each algorithm is identified through an algorithm string and has an immutable list
-+of param_ids. All supported algorithms (currently just MEMLAT) have their own
-+dedicated section and are listed after the generic commands.
-+
-+Commands:
-+_________
-+
-+PROTOCOL_VERSION
-+~~~~~~~~~~~~~~~~
-+
-+message_id: 0x0
-+protocol_id: 0x80
-+
-++---------------+--------------------------------------------------------------+
-+|Return values                                                                 |
-++---------------+--------------------------------------------------------------+
-+|Name           |Description                                                   |
-++---------------+--------------------------------------------------------------+
-+|int32 status   |See ARM SCMI Specification for status code definitions.       |
-++---------------+--------------------------------------------------------------+
-+|uint32 version |For this revision of the specification, this value must be    |
-+|               |0x10000.                                                      |
-++---------------+--------------------------------------------------------------+
-+
-+PROTOCOL_ATTRIBUTES
-+~~~~~~~~~~~~~~~~~~~
-+
-+message_id: 0x1
-+protocol_id: 0x80
-+
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |See ARM SCMI Specification for status code definitions.    |
-++------------------+-----------------------------------------------------------+
-+|uint32 attributes |Bits[31:16] Reserved, must be set to 0.                    |
-+|                  |Bits[15:8] Number of agents in the system. Must match the  |
-+|                  |value reported by the standard BASE protocol's             |
-+|                  |PROTOCOL_ATTRIBUTES response.                              |
-+|                  |Bits[7:0] Number of algorithmic strings supported by the   |
-+|                  |system. Only "MEMLAT" is currently supported hence it      |
-+|                  |returns 1.                                                 |
-++------------------+-----------------------------------------------------------+
-+
-+PROTOCOL_MESSAGE_ATTRIBUTES
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+message_id: 0x2
-+protocol_id: 0x80
-+
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |See ARM SCMI Specification for status code definitions.    |
-++------------------+-----------------------------------------------------------+
-+|uint32 attributes |For all message IDs the parameter has a value of 0.        |
-++------------------+-----------------------------------------------------------+
-+
-+QCOM_SCMI_SET_PARAM
-+~~~~~~~~~~~~~~~~~~~
-+
-+message_id: 0x10
-+protocol_id: 0x80
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 ext_id     |Reserved, must be zero.                                    |
-++------------------+-----------------------------------------------------------+
-+|uint32 algo_low   |Lower 32-bit value of the algorithm string.                |
-++------------------+-----------------------------------------------------------+
-+|uint32 algo_high  |Upper 32-bit value of the algorithm string.                |
-++------------------+-----------------------------------------------------------+
-+|uint32 param_id   |Serves as the token message id for the algorithm string    |
-+|                  |and is used to set various parameters supported by it.     |
-++------------------+-----------------------------------------------------------+
-+|uint32 buf[]      |Serves as the payload for the specified param_id and       |
-+|                  |algorithm string pair. The payload size depends on the     |
-+|                  |(algorithm string, param_id) pair; see the per-algorithm   |
-+|                  |sections below.                                            |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS: if the param_id and buf[] is parsed successfully  |
-+|                  |by the chosen algorithm string.                            |
-+|                  |NOT_SUPPORTED: if the algorithm string does not have any   |
-+|                  |matches.                                                   |
-+|                  |INVALID_PARAMETERS: if the param_id and the buf[] passed   |
-+|                  |is rejected by the algorithm string.                       |
-++------------------+-----------------------------------------------------------+
-+
-+QCOM_SCMI_GET_PARAM
-+~~~~~~~~~~~~~~~~~~~
-+
-+message_id: 0x11
-+protocol_id: 0x80
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 ext_id     |Reserved, must be zero.                                    |
-++------------------+-----------------------------------------------------------+
-+|uint32 algo_low   |Lower 32-bit value of the algorithm string.                |
-++------------------+-----------------------------------------------------------+
-+|uint32 algo_high  |Upper 32-bit value of the algorithm string.                |
-++------------------+-----------------------------------------------------------+
-+|uint32 param_id   |Serves as the token message id for the algorithm string.   |
-++------------------+-----------------------------------------------------------+
-+|uint32 buf[]      |Serves as the payload and store of value for the specified |
-+|                  |param_id and algorithm string pair. The payload size       |
-+|                  |depends on the (algorithm string, param_id) pair; see the  |
-+|                  |per-algorithm sections below. The response payload is      |
-+|                  |returned in the same buffer, overwriting the request       |
-+|                  |contents on success.                                       |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS: if the param_id and buf[] is parsed successfully  |
-+|                  |by the chosen algorithm string and the result is copied    |
-+|                  |into buf[].                                                |
-+|                  |NOT_SUPPORTED: if the algorithm string does not have any   |
-+|                  |matches.                                                   |
-+|                  |INVALID_PARAMETERS: if the param_id and the buf[] passed   |
-+|                  |is rejected by the algorithm string.                       |
-++------------------+-----------------------------------------------------------+
-+|uint32 buf[]      |Holds the payload of the result of the query, returned in  |
-+|                  |the same buffer used to send the request. Size depends on  |
-+|                  |the (algorithm string, param_id) pair.                     |
-++------------------+-----------------------------------------------------------+
-+
-+QCOM_SCMI_START_ACTIVITY
-+~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+message_id: 0x12
-+protocol_id: 0x80
-+
-+The activity to be started is defined by the algorithm string; see the
-+per-algorithm sections (e.g. MEMLAT_START_TIMER) for valid param_ids.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 ext_id     |Reserved, must be zero.                                    |
-++------------------+-----------------------------------------------------------+
-+|uint32 algo_low   |Lower 32-bit value of the algorithm string.                |
-++------------------+-----------------------------------------------------------+
-+|uint32 algo_high  |Upper 32-bit value of the algorithm string.                |
-++------------------+-----------------------------------------------------------+
-+|uint32 param_id   |Serves as the token message id for the algorithm string    |
-+|                  |and is generally used to start the activity performed by   |
-+|                  |the algorithm string.                                      |
-++------------------+-----------------------------------------------------------+
-+|uint32 buf[]      |Serves as the payload for the specified param_id and       |
-+|                  |algorithm string pair. The payload size depends on the     |
-+|                  |(algorithm string, param_id) pair; see the per-algorithm   |
-+|                  |sections below.                                            |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS: if the activity performed by the algorithm string |
-+|                  |starts successfully, or if it was already running.         |
-+|                  |NOT_SUPPORTED: if the algorithm string does not have any   |
-+|                  |matches.                                                   |
-++------------------+-----------------------------------------------------------+
-+
-+QCOM_SCMI_STOP_ACTIVITY
-+~~~~~~~~~~~~~~~~~~~~~~~
-+
-+message_id: 0x13
-+protocol_id: 0x80
-+
-+The activity to be stopped is defined by the algorithm string; see the
-+per-algorithm sections (e.g. MEMLAT_STOP_TIMER) for valid param_ids.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 ext_id     |Reserved, must be zero.                                    |
-++------------------+-----------------------------------------------------------+
-+|uint32 algo_low   |Lower 32-bit value of the algorithm string.                |
-++------------------+-----------------------------------------------------------+
-+|uint32 algo_high  |Upper 32-bit value of the algorithm string.                |
-++------------------+-----------------------------------------------------------+
-+|uint32 param_id   |Serves as the token message id for the algorithm string    |
-+|                  |and is generally used to stop the activity performed by    |
-+|                  |the algorithm string.                                      |
-++------------------+-----------------------------------------------------------+
-+|uint32 buf[]      |Serves as the payload for the specified param_id and       |
-+|                  |algorithm string pair. The payload size depends on the     |
-+|                  |(algorithm string, param_id) pair; see the per-algorithm   |
-+|                  |sections below.                                            |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS: if the activity performed by the algorithm string |
-+|                  |stops successfully, or if it was not running.              |
-+|                  |NOT_SUPPORTED: if the algorithm string does not have any   |
-+|                  |matches.                                                   |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT: Memory Latency algorithm
-+________________________________
-+
-+The MEMLAT algorithm (0x4d454d4c4154, ASCII "MEMLAT") scales the DDR, LLCC and
-+DDR_QOS buses in response to memory-latency-bound workloads. It runs on the CPUCP:
-+every sampling window it reads the per-CPU AMU counters, derives its statistics
-+(instructions-per-miss, back-end stall, write-back ratio), maps that to a target
-+level and votes for it directly on the DDR/LLCC/DDR_QOS interconnect. The kernel
-+never issues a frequency request in that loop. The 6-byte value is treated as a
-+64-bit algorithm string and split into two uint32 fields on the wire: algo_low
-+carries its lower 32 bits and algo_high its upper 32 bits.
-+
-+With a distinct need to have the memory buses scaling done in SCP in response to
-+memory-latency-bound workloads, none of the existing SCMI solutions could be used
-+as-is. MPAM does not apply either: it is not enabled on all of the affected parts
-+(e.g. Hamoa). The role split between SCP and client driver is described next.
-+
-+MEMLAT client driver pseudo-code:
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+.. code-block:: text
-+
-+  probe():
-+    SET_COMMON_EV_MAP                          # AMU events (all groups)
-+    for each memory group (DDR / LLCC / DDR_QOS):
-+      SET_MEM_GROUP                            # bind group to interconnect
-+      SET_GRP_EV_MAP                           # per-group AMU events
-+      for each monitor in the group:
-+        SET_MONITOR                            # topology, cpumask, name
-+        IPM_CEIL / BE_STALL_FLOOR              # per-monitor tuneables
-+        MON_FREQ_MAP                           # cpufreq -> memfreq map
-+        SET_MIN_FREQ / SET_MAX_FREQ            # clamps
-+    SAMPLE_MS                                  # sampling period
-+    SET_EFFECTIVE_FREQ_METHOD                  # cpu-freq derivation method
-+    START_TIMER                                # CPUCP now scales autonomously
-+
-+  devfreq poll (twice per CPUCP sample period):
-+    GET_CUR_FREQ                               # read voted freq, per monitor
-+
-+  remove():
-+    STOP_TIMER
-+
-+SCP pseudo-code:
-+~~~~~~~~~~~~~~~~
-+
-+.. code-block:: text
-+
-+  every sample_ms:
-+    for each CPU:
-+      sample AMU counters (instructions, cycles, cache-misses, stalls)
-+      derive per-CPU IPM, back-end-stall % and write-back ratio
-+
-+    for each configured memory group (DDR / LLCC / DDR_QOS):
-+      for each monitor in the group:
-+        best_freq = 0
-+        for each CPU in the monitor's cpumask:
-+          if CPU is memory-bound (IPM/stall/write-back vs. the
-+             monitor's configured thresholds):
-+            freq = CPU's cpufreq, optionally scaled toward the ceiling
-+            best_freq = max(best_freq, freq)
-+        monitor.target_freq = monitor's cpufreq->memfreq map(best_freq)
-+
-+      group_vote = max(target_freq of every monitor in the group)
-+      if group_vote changed since the last sample:
-+        vote group_vote onto the group's interconnect path
-+
-+  GET_CUR_FREQ returns a monitor's last target_freq
-+  START_TIMER / STOP_TIMER: resume / suspend the loop above
-+
-+MEMLAT: Supported memory buses
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+The hw_type field carried in most payloads identifies the memory group:
-+
-++----------+--------------------------------------------------------------+
-+|hw_type   |Group                                                         |
-++----------+--------------------------------------------------------------+
-+|0         |DDR                                                           |
-++----------+--------------------------------------------------------------+
-+|1         |LLCC                                                          |
-++----------+--------------------------------------------------------------+
-+|2         |DDR_QOS_COMPUTE                                               |
-++----------+--------------------------------------------------------------+
-+|3         |DDR_QOS_MOBILE                                                |
-++----------+--------------------------------------------------------------+
-+
-+All multi-byte fields below are little-endian. mon_idx selects a monitor
-+within the group (0-based, less than the firmware-supported maximum). All
-+SET commands return the SCMI status word; on success it carries SUCCESS, on
-+lookup failure INVALID_PARAMETERS, and on an unknown param_id NOT_SUPPORTED.
-+
-+Frequency units are not uniform across commands (kHz, MHz or a raw 0/1
-+DDR_QOS level, depending on the param_id); each command documents its own
-+units below.
-+
-+MEMLAT_SET_MEM_GROUP
-+~~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x10 (16)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Allocates a new memory group on the firmware side and binds it to the
-+underlying interconnect path (DDR / LLCC / DDR_QOS).
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 cpumask    |Bitmask of HW CPU IDs that contribute counters to this     |
-+|                  |group (limited to 32 CPUs).                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier (0 = DDR, 1 = LLCC,                |
-+|                  |2 = DDR_QOS_COMPUTE, 3 = DDR_QOS_MOBILE).                  |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_type   |Reserved for SET_MEM_GROUP (set to 0; populated only on    |
-+|                  |SET_MONITOR).                                              |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Reserved for SET_MEM_GROUP (set to 0).                     |
-++------------------+-----------------------------------------------------------+
-+|char mon_name[20] |Reserved for SET_MEM_GROUP (zero-filled).                  |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS: group allocated.                                  |
-+|                  |BUSY: no free memory group slot (the firmware-supported    |
-+|                  |maximum number of groups is already configured).           |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_SET_MONITOR
-+~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x11 (17)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Adds a monitor (a CPU subset that votes within an already-configured
-+group).
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 cpumask    |Bitmask of HW CPU IDs assigned to this monitor (must be a  |
-+|                  |subset of the group's cpumask; limited to 32 CPUs).        |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier the monitor belongs to.            |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_type   |0 = IPM-based latency monitor, 1 = compute (passive        |
-+|                  |governor tracking cpufreq map irrespective of IPM) monitor |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Index of the monitor within the group.                     |
-++------------------+-----------------------------------------------------------+
-+|char mon_name[20] |Human-readable monitor name (NUL-terminated, used in       |
-+|                  |firmware log lines).                                       |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS: monitor created.                                  |
-+|                  |NOT_FOUND: hw_type does not match any configured group, or |
-+|                  |the firmware-supported maximum number of monitors already  |
-+|                  |exist for the group.                                       |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_SET_COMMON_EV_MAP
-+~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x12 (18)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Configures the common counter IDs (instructions, cycles, stall, etc.)
-+that the firmware reads on every sample for every CPU.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 num_evs    |Number of valid entries in cid[].                          |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Set to 0xFF (sentinel for the common-events case).         |
-++------------------+-----------------------------------------------------------+
-+|uint8 cid[]       |Array of CPUCP counter IDs indexed by INST/CYC/CONST_CYC/  |
-+|                  |FE_STALL/BE_STALL. 0xFF marks an unused slot.              |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if num_evs exceeds the        |
-+|                  |firmware-supported maximum.                                |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_SET_GRP_EV_MAP
-+~~~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x13 (19)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Configures the per-group event IDs (cache miss / writeback / access)
-+used by the IPM and write-back computations for the selected hw_type.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 num_evs    |Number of valid entries in cid[].                          |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint8 cid[]       |Array of CPUCP counter IDs indexed by MISS/WB/ACC. 0xFF    |
-+|                  |marks an unused slot.                                      |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if hw_type is unknown or      |
-+|                  |num_evs exceeds the firmware-supported maximum.            |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_ADAPTIVE_LOW_FREQ
-+~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x14 (20)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Sets the adaptive low-frequency floor for a group. When the algorithm's
-+voted frequency falls below this floor the firmware clamps it up to the
-+adaptive floor instead.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Ignored (group-scoped parameter).                          |
-++------------------+-----------------------------------------------------------+
-+|uint32 val        |Adaptive low frequency in kHz (converted to MHz by the     |
-+|                  |firmware).                                                 |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if hw_type does not match a   |
-+|                  |configured group.                                          |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_ADAPTIVE_HIGH_FREQ
-+~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x15 (21)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Sets the adaptive high-frequency floor for a group. Units and behaviour
-+mirror MEMLAT_ADAPTIVE_LOW_FREQ.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Ignored (group-scoped parameter).                          |
-++------------------+-----------------------------------------------------------+
-+|uint32 val        |Adaptive high frequency in kHz (converted to MHz by the    |
-+|                  |firmware).                                                 |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if hw_type does not match a   |
-+|                  |configured group.                                          |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_GET_ADAPTIVE_CUR_FREQ
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x16 (22)
-+command:  QCOM_SCMI_GET_PARAM
-+
-+Reads the group's current adaptive frequency.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if hw_type does not match a   |
-+|                  |configured group.                                          |
-++------------------+-----------------------------------------------------------+
-+|uint32 cur_freq   |Current adaptive frequency in kHz.                         |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_IPM_CEIL
-+~~~~~~~~~~~~~~~
-+
-+param_id: 0x17 (23)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Sets the IPM (Instructions-Per-Miss) ceiling for a monitor. CPUs whose
-+IPM falls at or below this ceiling are considered memory-bound and
-+contribute their cpufreq into the monitor's voting pool.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Monitor index within the group.                            |
-++------------------+-----------------------------------------------------------+
-+|uint32 val        |IPM ceiling (instructions per cache miss).                 |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if (hw_type, mon_idx) does    |
-+|                  |not match a registered monitor.                            |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_FE_STALL_FLOOR
-+~~~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x18 (24)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Sets the front-end stall floor (in percent) for a monitor. Analogous to
-+MEMLAT_BE_STALL_FLOOR but for front-end stalls.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Monitor index within the group.                            |
-++------------------+-----------------------------------------------------------+
-+|uint32 val        |Front-end stall floor in percent (0..100).                 |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if (hw_type, mon_idx) does    |
-+|                  |not match a registered monitor.                            |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_BE_STALL_FLOOR
-+~~~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x19 (25)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Sets the back-end stall floor (in percent) for a monitor. CPUs whose
-+back-end stall percentage is at or above this floor are eligible to have
-+their cpufreq scaled up by the freq-scale knobs below.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Monitor index within the group.                            |
-++------------------+-----------------------------------------------------------+
-+|uint32 val        |Back-end stall floor in percent (0..100).                  |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if (hw_type, mon_idx) does    |
-+|                  |not match a registered monitor.                            |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_WB_PCT
-+~~~~~~~~~~~~~
-+
-+param_id: 0x1A (26)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Sets the write-back ratio threshold (in percent) for a monitor. A CPU's
-+write-back ratio must be at or above this value for the monitor to treat
-+it as memory-bound.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Monitor index within the group.                            |
-++------------------+-----------------------------------------------------------+
-+|uint32 val        |Write-back ratio threshold in percent.                     |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if (hw_type, mon_idx) does    |
-+|                  |not match a registered monitor.                            |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_IPM_FILTER
-+~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x1B (27)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Sets the IPM filter for a monitor. A CPU's IPM must be at or below this
-+value (in addition to the write-back check) for the monitor to select it.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Monitor index within the group.                            |
-++------------------+-----------------------------------------------------------+
-+|uint32 val        |IPM filter (instructions per cache miss).                  |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if (hw_type, mon_idx) does    |
-+|                  |not match a registered monitor.                            |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_FREQ_SCALE_PCT
-+~~~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x1C (28)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Sets the frequency-scale percentage for a monitor. When non-zero, a
-+memory-bound CPU's effective frequency is boosted proportionally to how
-+far its IPM is below the ceiling, bounded by the scale floor/ceiling
-+below.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Monitor index within the group.                            |
-++------------------+-----------------------------------------------------------+
-+|uint32 val        |Frequency-scale factor in percent.                         |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if (hw_type, mon_idx) does    |
-+|                  |not match a registered monitor.                            |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_FREQ_SCALE_CEIL_MHZ
-+~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x1D (29)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Sets the upper cpufreq bound (in MHz) for the freq-scale boost above.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Monitor index within the group.                            |
-++------------------+-----------------------------------------------------------+
-+|uint32 val        |Frequency-scale ceiling in MHz.                            |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if (hw_type, mon_idx) does    |
-+|                  |not match a registered monitor.                            |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_FREQ_SCALE_FLOOR_MHZ
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x1E (30)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Sets the lower cpufreq bound (in MHz) for the freq-scale boost above.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Monitor index within the group.                            |
-++------------------+-----------------------------------------------------------+
-+|uint32 val        |Frequency-scale floor in MHz.                              |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if (hw_type, mon_idx) does    |
-+|                  |not match a registered monitor.                            |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_SAMPLE_MS
-+~~~~~~~~~~~~~~~~
-+
-+param_id: 0x1F (31)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Sets the sampling period (in milliseconds) used by the firmware update
-+loop.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|int32 sample_ms   |Sampling period in milliseconds.                           |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS.                                                   |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_MON_FREQ_MAP
-+~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x20 (32)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Programs the cpufreq to memfreq voting table for a single monitor.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Monitor index within the group.                            |
-++------------------+-----------------------------------------------------------+
-+|uint32 nr_rows    |Number of valid rows in tbl[] (must not exceed the         |
-+|                  |firmware-supported maximum).                               |
-++------------------+-----------------------------------------------------------+
-+|struct {          |Per-row mapping. cpu_freq_mhz is the cpufreq trigger in    |
-+|u16 cpu_freq_mhz; |MHz; mem_freq_mhz is the resulting memfreq vote (MHz for   |
-+|u16 mem_freq_mhz; |DDR/LLCC, a level index 0/1 for DDR_QOS).                  |
-+|} tbl[]           |                                                           |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if (hw_type, mon_idx) is      |
-+|                  |unknown / OUT_OF_RANGE if nr_rows exceeds the              |
-+|                  |firmware-supported maximum.                                |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_SET_MIN_FREQ
-+~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x21 (33)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Clamps a monitor's vote to a minimum value. Units are kHz for DDR/LLCC and
-+raw level index for DDR_QOS.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Monitor index within the group.                            |
-++------------------+-----------------------------------------------------------+
-+|uint32 val        |Minimum frequency: kHz for DDR/LLCC, level for DDR_QOS.    |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if (hw_type, mon_idx) does    |
-+|                  |not match a registered monitor.                            |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_SET_MAX_FREQ
-+~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x22 (34)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Clamps a monitor's vote to a maximum value. Units identical to
-+MEMLAT_SET_MIN_FREQ.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Monitor index within the group.                            |
-++------------------+-----------------------------------------------------------+
-+|uint32 val        |Maximum frequency: kHz for DDR/LLCC, level for DDR_QOS.    |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if (hw_type, mon_idx) does    |
-+|                  |not match a registered monitor.                            |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_GET_CUR_FREQ
-+~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x23 (35)
-+command:  QCOM_SCMI_GET_PARAM
-+
-+Reads the current target frequency that the firmware is voting for the
-+selected (hw_type, mon_idx) tuple. The response payload is returned in
-+the same buffer used to send the request, overwriting it on success.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|uint32 hw_type    |Memory group identifier.                                   |
-++------------------+-----------------------------------------------------------+
-+|uint32 mon_idx    |Monitor index within the group.                            |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if (hw_type, mon_idx) does    |
-+|                  |not match a registered monitor.                            |
-++------------------+-----------------------------------------------------------+
-+|uint32 cur_freq   |Current target frequency in kHz for DDR/LLCC; raw level    |
-+|                  |(0/1) for DDR_QOS.                                         |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_START_TIMER
-+~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x24 (36)
-+command:  QCOM_SCMI_START_ACTIVITY
-+
-+Starts the firmware sampling and voting loop at the configured
-+sample_ms interval. Has no payload beyond the QCOM_SCMI_START_ACTIVITY
-+header.
-+
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS: timer started (or was already running).           |
-+|                  |GENERIC_ERROR: events not yet initialized                  |
-+|                  |(MEMLAT_SET_GRP_EV_MAP not called for any group).          |
-+|                  |NOT_SUPPORTED: invalid param_id under START_ACTIVITY.      |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_STOP_TIMER
-+~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x25 (37)
-+command:  QCOM_SCMI_STOP_ACTIVITY
-+
-+Suspends the firmware sampling and voting loop. Has no payload beyond
-+the QCOM_SCMI_STOP_ACTIVITY header. The configured monitors and freq
-+maps are retained, so a subsequent MEMLAT_START_TIMER resumes voting
-+without re-programming.
-+
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS: timer stopped (or was already stopped).           |
-+|                  |NOT_SUPPORTED: invalid param_id under STOP_ACTIVITY.       |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_GET_TIMESTAMP
-+~~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x26 (38)
-+command:  QCOM_SCMI_GET_PARAM
-+
-+Reads the firmware timestamp (nanoseconds).
-+
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS.                                                   |
-++------------------+-----------------------------------------------------------+
-+|uint64 tstamp     |Firmware timestamp in nanoseconds.                         |
-++------------------+-----------------------------------------------------------+
-+
-+MEMLAT_SET_EFFECTIVE_FREQ_METHOD
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+param_id: 0x27 (39)
-+command:  QCOM_SCMI_SET_PARAM
-+
-+Selects the algorithm used to derive the per-CPU effective frequency
-+from the cycle counters.
-+
-++------------------+-----------------------------------------------------------+
-+|Parameters                                                                    |
-++------------------+-----------------------------------------------------------+
-+|Name              |Description                                                |
-++------------------+-----------------------------------------------------------+
-+|int32 method      |0: const-cycles method (CPU cycles / const-cycles, scaled  |
-+|                  |by the cluster's max frequency).                           |
-+|                  |1: legacy method (CPU cycles / sampling-window time).      |
-++------------------+-----------------------------------------------------------+
-+|Return values                                                                 |
-++------------------+-----------------------------------------------------------+
-+|int32 status      |SUCCESS / INVALID_PARAMETERS if method is not 0 or 1.      |
-++------------------+-----------------------------------------------------------+
++++ b/Documentation/devicetree/bindings/firmware/qcom,generic-scmi.yaml
+@@ -0,0 +1,27 @@
++# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/firmware/qcom,generic-scmi.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: System Control and Management Interface (SCMI) Qualcomm Generic Extension Protocol
++
++maintainers:
++  - Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>
++  - Sibi Sankar <sibi.sankar@oss.qualcomm.com>
++
++properties:
++  protocol@80:
++    description:
++      SCMI Qualcomm Generic Extension Protocol exposes Qualcomm SoC specific
++      algorithms such as Memory Latency (MEMLAT) bound DDR/LLCC/DDR-QOS bus DVFS.
++      The algorithm runs on the SCP, it can be turned on/off and be configured
++      through a pairing of algorithm strings with an immutable list param_ids.
++    $ref: '/schemas/firmware/arm,scmi.yaml#/$defs/protocol-node'
++    unevaluatedProperties: false
++
++    properties:
++      reg:
++        const: 0x80
++
++additionalProperties: true
 
 -- 
 2.34.1
