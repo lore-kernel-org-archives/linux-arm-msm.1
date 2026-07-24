@@ -1,361 +1,140 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from h7.fbrelay.privateemail.com (h7.fbrelay.privateemail.com [162.0.218.230])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE728351C10
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:56:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48B1C367B6D;
+	Fri, 24 Jul 2026 19:18:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=162.0.218.230
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784919372; cv=none; b=Yy/nnvUeunks0mSeqpdOEu4mzLd+SDcAX1lI08+e00lyWtGX0RoX+0e1hbyhsaXLWKhxr8T2rP0tRBmSikvY+Qt3x0JHjqssRD3e+NJXUAinevqcEa9ozyvus7Fz/gBN4YA0bF23w8Umw2FdISvW75VbYfNA4lVsDC9GNfa9HuA=
+	t=1784920709; cv=none; b=ZXuJCdi40e5bjqxO7VGZpRUAMx4MK8AeZDIf2vB4VIMAa3PYh99cMg7URHVWEHSPdSfRe1e5jk3OW8k2W0Z5zyIA2KJcIMzUtuJwS1E2d7tOrknRdu2bqcQDcfiJzl/kD+fEX8Zx6F6LOUqD+fei/gRrjjdqFDAVXd1/4/SorzE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784919372; c=relaxed/simple;
-	bh=c9V0sfqfFxdMg9bjVLruyv8TQk5h66sNRxq7jaYnBb8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=QLkmX+zeU5TsjyUC0h+tbTQNYOxDCrNz3hBe1IogPFIQqPYl5dL6gFVycfSW5AKsEIvYJ67n7pJEqPUI9/USrGDXmdI1eqkqBmXanctyDBTNk+bkVFEolXaGEIVCnI0tcCA1A1c/iB4zJ9MrV1PY1J6H0N3+W36LW+JFmV0CH10=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NyISXkki; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=B4lG925L; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NyISXkki";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="B4lG925L"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66OGr7di3628815
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:56:08 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=uhVhlXkCOsR0F6ccRTyc8u
-	L2BKxnxpaMtXK7jOWCioU=; b=NyISXkkiFYUpI3Vc+ZGSDJ4IU/UK47CbiGZcHk
-	/UxoBESD8ZvMyqE3wvMjQ3R5z5/KebJG9PaeDfdk4e4KC5/nbFWRVpM6ybvdGoO8
-	arpHUm4OG3FHHn5IWVZoV3eWMgainaRnHSCkybytzJBF6xXqWel5A6rd6XITTqaG
-	2D/gBReYEJBahh4N+qsvyB+rSCDeVajHNu5lkFdkMc9wtxtAiSugUAHIhHCPSekU
-	o8Er4f8iD3zsS8ria4NgFmB+Az5BBzbRHYX4aTWbSW/fmv+XjDL2qtZPTn+SkYeW
-	MQLlGXPUwbfxjxqm/67vkG6VmdXYVfISHaMomPH2Mmhw4XjQ==
-Received: from mail-oa1-f69.google.com (mail-oa1-f69.google.com [209.85.160.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fm5yahw7f-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:56:08 +0000 (GMT)
-Received: by mail-oa1-f69.google.com with SMTP id 586e51a60fabf-448bb8bcf38so558391fac.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 11:56:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784919368; x=1785524168; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=uhVhlXkCOsR0F6ccRTyc8uL2BKxnxpaMtXK7jOWCioU=;
-        b=B4lG925LbGjP1ZuqQMrH0BTJ6Kihlj2R0+0MffRvxd6hD90HWdm8Eroy8Pi8T9iDvN
-         +AZ3rB39PkNcH6yEXF165GkAKka5syIET9r7WeQWCI4hqh8Z4fcafKh7GVPS+mWArb5s
-         FJ7FA/TWqUMau101rl57ijvf2MwRBgGMFqoI3DGDacW/gIt2Yt/6cBPe0Rr7wdNKJRCv
-         rhLKwrZWPHhPqJPSNzMdHySoi74PwS+3ZmdtH+8ZvB5FLY7Nfqwp0HOevrGI4lUPcpRN
-         EYbMXkkMoXkWD2NlJsQb//BHSMollx7AbnvdnMhwMuZayjQzyFicAGxe8SUMoEyvHTxE
-         A0Qg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784919368; x=1785524168;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=uhVhlXkCOsR0F6ccRTyc8uL2BKxnxpaMtXK7jOWCioU=;
-        b=RUdyL/zDQSsmrswWsYLmxtYWm6f4XTNrVT7FWJVvRWxpgMe3QlBFqtfPLhGjmThkF3
-         u32CbxJqxPm77i6xaDtBsGBNLvq66JK3RA9xMNYXGxueSVKxRmvDB3bfYGYHKcIjWrTP
-         UOxgQHn4LhILLoT1AVdTxf7UFoAKQp4d9O7OHIimNLH+zX/R7G49kv3ePxrO4fIUaCfS
-         vSqgDm18lN+AEr1w5jTmGPtk3V70zLFBZekuFC8NM/JBI9mL1bLyp7E3yw7bMqSW3wtc
-         oxWdbSxqa4KhRkdieVX/61XS/sq7CbOcbU9jjmWcgMbeYVMLX0kEZfkMrRIE7C+UKYAw
-         mb8w==
-X-Gm-Message-State: AOJu0YwnvdHWG+KMB/NBiMhqHIeejz5PrAmXyCCyj1t4Is1Or3RREWMf
-	DiNAtOa88uIcM17j/sR5PP8Ze8oF5NED7yikQKHpIldznaYDHXHGS6ZsiNEItmFxKVxIBs/YU1T
-	c6FZYh0Y9EMzkLP4RnfxQPiJ+6OfFg8P0ci+zZx8cyV41YaTnTxxyqs9s1DK03ATJ5GMl
-X-Gm-Gg: AR+sD11Zl/bIb+Ju7/n6ff+dGgorEowvD2ZIG4zg4/KffJj8JfoGm+Itszb1W0RAQgp
-	+cWIv4jAK7Jhf+d3Pgwhnza+hxe2gKqKjmI3Uug4ekN+r1pvZimfUpZixPF65SwfGvZe6qFZWi8
-	ITP+I9qnKcbBBayAqGukZvXoU6N+ezhASscUZ1aS3NxfdUv6z6xPJ7c8s5yJBzWLX3qgV2M75vx
-	YJgytnMWhit/JHvgPRnx2SYTRXllCYHPvn3ut6P/BCN0CDy+Ni/iyTk1sq/IiW5PwO4cnoBqqJ1
-	hzwASZiaaKeEMYo7DjJILyhBQpL4djXXe/J4L9Xx41onx+Nfp4T0jOai07gfEcROqBlyNtCTJNX
-	aFKVXCali/+2u8Vna+yk=
-X-Received: by 2002:a05:6820:208a:b0:6a1:4040:97c1 with SMTP id 006d021491bc7-6aad4161879mr5027168eaf.56.1784919367670;
-        Fri, 24 Jul 2026 11:56:07 -0700 (PDT)
-X-Received: by 2002:a05:6820:208a:b0:6a1:4040:97c1 with SMTP id 006d021491bc7-6aad4161879mr5027143eaf.56.1784919367204;
-        Fri, 24 Jul 2026 11:56:07 -0700 (PDT)
-Received: from [172.17.0.2] ([104.57.184.186])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-6aaf8e99ff5sm559583eaf.0.2026.07.24.11.56.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jul 2026 11:56:06 -0700 (PDT)
-From: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
-Date: Fri, 24 Jul 2026 18:56:00 +0000
-Subject: [PATCH] checkpatch: Validate committer sign-off
+	s=arc-20240116; t=1784920709; c=relaxed/simple;
+	bh=ixWNwLfVz61mzrBIXIEsXmzlE2Ha3tHFrKL8fyNJVQs=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=fN7s/XNqADd01a2YUy1m20ryWfT2boVkFF4BQ0mp9Kutz03DKFWOjG1JHXfFXAWihdULQhfftWy7jhaqlUcmudxVG9+TX7re6HjJT2LLTUtA/1Z3KfEKit99Rq1RlC06PqyoQGT9C/YgtA4bOT+HHTxl0z8t19boV82FXpidWY8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net; spf=pass smtp.mailfrom=catcrafts.net; arc=none smtp.client-ip=162.0.218.230
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=catcrafts.net
+Received: from MTA-08-4.privateemail.com (mta-08.privateemail.com [198.54.118.215])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
+	(No client certificate requested)
+	by h7.fbrelay.privateemail.com (Postfix) with ESMTPSA id 4h6Hk30Zb4z2xHQ;
+	Fri, 24 Jul 2026 15:14:51 -0400 (EDT)
+Received: from mail.privateemail.com (K8S-PROD-WORKER-14 [87.215.145.39])
+	by mta-08.privateemail.com (Postfix) with ESMTPA id 4h6HjQ5F22z3hhTR;
+	Fri, 24 Jul 2026 15:14:18 -0400 (EDT)
+From: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
+To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Cc: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+	Mark Brown <broonie@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	Charles Keepax <ckeepax@opensource.cirrus.com>,
+	Maciej Strozek <mstrozek@opensource.cirrus.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Bard Liao <yung-chuan.liao@linux.intel.com>,
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+	Richard Fitzgerald <rf@opensource.cirrus.com>,
+	Luca Weiss <luca.weiss@fairphone.com>,
+	linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	patches@opensource.cirrus.com,
+	linux-kernel@vger.kernel.org
+Subject: Re: [RFC PATCH 0/8] ASoC: SDCA: enable on DT platforms and add Qualcomm WCD9378 (Tambora) codec
+Date: Fri, 24 Jul 2026 21:14:06 +0200
+Message-ID: <20260724191406.7855-1-jorijnvdgraaf@catcrafts.net>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <06aef9a5-7e8e-4262-9b41-a9c43f588da9@oss.qualcomm.com>
+References: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com> <20260723194045.49021-1-jorijnvdgraaf@catcrafts.net> <06aef9a5-7e8e-4262-9b41-a9c43f588da9@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260724-checkpatch-committer-sob-v1-1-68550513106b@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAD+1Y2oC/yXMQQrCMBBA0auUWTuQJiWCVxEXzWRqRmlTMlGE0
- rsb6/It/t9AuQgrXLoNCr9FJS8N/akDSuNyZ5TYDNZYb87WISWm5zpWSkh5nqVWLqg5YG8mCtE
- 7HwcHLV8LT/I51tfb3/oKD6b6+8G+fwHD3giofAAAAA==
-X-Change-ID: 20260723-checkpatch-committer-sob-10fcbd636d43
-To: Dwaipayan Ray <dwaipayanray1@gmail.com>,
-        Lukas Bulwahn <lukas.bulwahn@gmail.com>, Joe Perches <joe@perches.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Andy Whitcroft <apw@canonical.com>
-Cc: linux-arm-msm@vger.kernel.org, workflows@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7213;
- i=bjorn.andersson@oss.qualcomm.com; h=from:subject:message-id;
- bh=c9V0sfqfFxdMg9bjVLruyv8TQk5h66sNRxq7jaYnBb8=;
- b=owEBfAKD/ZANAwAKAQsfOT8Nma3FAcsmYgBqY7VFceFBjfIxK8PPdsO40gVQtS5n8/i/s19Or
- dGpgShB69WJAkIEAAEKACwWIQQF3gPMXzXqTwlm1SULHzk/DZmtxQUCamO1RQ4cYmpvcm5Aa3J5
- by5zZQAKCRALHzk/DZmtxVcmEACEmQv4L9lQ0G4F7wheIs5mP7TeG3QjQZ9JrnVuBz47sIxPAiB
- OaFnjIz/ET16IZ6KDlV7CFixi1QZmVI4aRtl3pl8pTPc5k3DSECh9IGi7qTpaJpNj07/k9tZmCP
- ofOtIcg/N5k4RUEV7tZYcEr9PeKSO3KfRZstCadYJ5YeBxcRBJMCa1Sfazd1wExGK2THmQb9ksS
- nT7i5C33WXWoHpYdL1k1oRvCpzg+MJLntmNoh78lFgOyJHQD26Ji3jBUAwylFSok9vvC81ozpqV
- ZlwD4/IJloKkExirgOJGzfUNeaefjOI6kc5xb2F03UbU/cB6mDsfaDj3SXckUj84yUojuzOyWCP
- qtefbSLEEhJEFe6OYgLdxE2b5G+IWBDDLd/yBUlydnkuNp00lq7X3tbySaL5DESLdz690tekv8U
- ksqXqbZVhqw6yNpDVQcHi2hJTqzgmTydksWBUl9vJOyg94C+lZnHkR4tRqxucEYIF4SroGscUIE
- YP08UGnZi7lZ5hTLH2QdQi5xBZ2TTnzI7BWjud/w2E4itRO7Q/mUqlw6UaGIvfhlTdRiUy5sQS+
- 6G0sAOKC1tySnhU2Whah78Rd3wHnQ18ZuBE5HUirAU/dji8S0UrG34ybz8g6LYt8Np4lI5VMyXw
- 18i58OcSubA++ZK3EV+MKin7BUUbIPZm48w==
-X-Developer-Key: i=bjorn.andersson@oss.qualcomm.com; a=openpgp;
- fpr=05DE03CC5F35EA4F0966D5250B1F393F0D99ADC5
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDE3MCBTYWx0ZWRfX66n9Bpc8kRV0
- DEYkM1pMrMQMQG9uDS7+LYOEH1QuFtGNnTvNoh0XZ2ppQu5fFHuNXExYBtBJEds24GyNFjepObk
- /2C/IO9D5PuGUrELLkZqkKQ2Byt2NYE=
-X-Authority-Analysis: v=2.4 cv=Rtz16imK c=1 sm=1 tr=0 ts=6a63b548 cx=c_pps
- a=zPxD6eHSjdtQ/OcAcrOFGw==:117 a=DaeiM5VmU20ml6RIjrOvYw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=CCtDUpZfQFSzZZKND2oA:9 a=QEXdDO2ut3YA:10
- a=y8BKWJGFn5sdPF1Y92-H:22
-X-Proofpoint-GUID: oAE9WEHaThTQk9jgPwD2kGsIutbEYI0T
-X-Proofpoint-ORIG-GUID: oAE9WEHaThTQk9jgPwD2kGsIutbEYI0T
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDE3MCBTYWx0ZWRfX/pxMvvNlYvuy
- DvSIC0fqSxXf8JpbB4WQGL72oHDBoWZyiLzObKbbMeSA4o/g5tbziUMnXwMFN0VArJxJ3yzMnPb
- Y/f8M1VIgmzXuFYlLK/iDgDbk1WdXn5FlhPZiVR48VWmMCpFn8lMxCo+p57nYme6TYpZJwRIu+X
- 7FziMxc9SguhoyiBd8pIVIVexR9RBSLSl73O4HYdEekEazJi6uMR1CSGovglFA2Cx6yFvqKJ665
- B1hX9sWsaGQ5tTfp8s/+EWKZE5X47U3zRSpwZ/WCFGWyy5xG7KvQZWZ1PD3LtB1BLtA50nIgan0
- 9ftW04b33bcehqtW2SF4qoPnoI8ZHSR2NRlZcYsMXOEjWkYG8TVP0AyKWOaNc2O/oyQtc00Yoz5
- 2wqemLVHG3a/4HrGzVJzMy0NoQQJjUKT0z4oyb5HWlLHc8pg1FR3fq+dP/2fYWErAv+SYhim88F
- cYbINRlgYrczUz+J/2w==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-24_04,2026-07-24_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 priorityscore=1501 suspectscore=0
- lowpriorityscore=0 bulkscore=0 spamscore=0 malwarescore=0 clxscore=1015
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607240170
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-checkpatch validates the Signed-off-by trailers against the patch's
-author, but misses the opportunity to also validate the committer when
-run with --git. Maintainers therefor need third-party scripts for the
-final Signed-off-by check.
+Hi Srini,
 
-git format-patch provides the author and patch content, but not the
-committer. Extend the existing git log extraction to record the
-committer identity.
+On Fri, 24 Jul 2026 13:17:06 +0100, Srinivas Kandagatla wrote:
+> > Your probe already returns -ENODEV when qcom,compute-mode is absent;
+> > v2 of my mobile series will add the mirror check, so neither driver
+> > can bind the other's slaves regardless of probe order. If a single
+> > owner of the modalias is preferred instead, a small wcd9378-common
+> > stub dispatching on the property also works for me — your call.
+> [...]
+> We need single entry point, if not we will endup with two modalias. Yes
+> current RFC driver was only tested for compute.
+> I agree we should have a common so that we can leverage some code from
+> both modes.
 
-Extract the author sign-off comparison logic into a shared helper, and
-use it to apply the same heuristics to the final Signed-off-by trailer
-and committer.
+Single entry point it is — that replaces the mirror check I had queued
+above. My v2 will add the common stub instead: one sdw_driver owning
+the 0x0217/0x0110 ID table, probe dispatching on the DT mode
+properties (qcom,compute-mode -> compute, otherwise the mobile TX/RX
+paths), with the compute branch returning -ENODEV until your driver
+lands. Happy to shape the factoring to whatever slots into your v2
+best, and shared code can accumulate in the common module as it shows
+up.
 
-Emit COMMITTER_SIGN_OFF_MISMATCH when the final trailer does not match
-the committer.
+> That is expected on WCD codecs. only TX has CSR registers space.
+> RX can not read/write any of the codec register space.
+> However the soundwire SCP address space is accessible and expected to
+> set data ports for both tx and rx.
 
-Assisted-by: OpenCode:GPT-5.5
-Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
----
- Documentation/dev-tools/checkpatch.rst |   5 ++
- scripts/checkpatch.pl                  | 112 ++++++++++++++++++++++-----------
- 2 files changed, 82 insertions(+), 35 deletions(-)
+Thanks, good to have that confirmed.
 
-diff --git a/Documentation/dev-tools/checkpatch.rst b/Documentation/dev-tools/checkpatch.rst
-index 6139a08c34cd..7726c3863bcc 100644
---- a/Documentation/dev-tools/checkpatch.rst
-+++ b/Documentation/dev-tools/checkpatch.rst
-@@ -562,6 +562,11 @@ Commit message
-       - The email subaddresses do not match.
-       - The email comments do not match.
- 
-+  **COMMITTER_SIGN_OFF_MISMATCH**
-+    When checking a Git commit, the final Signed-off-by: line does not match
-+    the commit's committer.  The person committing a patch should add their
-+    own Signed-off-by: line last.
-+
-   **MISSING_SIGN_OFF**
-     The patch is missing a Signed-off-by line.  A signed-off-by
-     line should be added according to Developer's certificate of
-diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
-index 7a846a3ea127..0e1bff241597 100755
---- a/scripts/checkpatch.pl
-+++ b/scripts/checkpatch.pl
-@@ -37,6 +37,7 @@ my $showfile = 0;
- my $file = 0;
- my $git = 0;
- my %git_commits = ();
-+my %git_committers = ();
- my $check = 0;
- my $check_orig = 0;
- my $summary = 1;
-@@ -1317,14 +1318,16 @@ if ($git) {
- 		} else {
- 			$git_range = "-1 $commit_expr";
- 		}
--		my $lines = `${git_command} log --no-color --no-merges --pretty=format:'%H %s' $git_range`;
-+		my $lines = `${git_command} log --no-color --no-merges --pretty=format:'%cn <%ce> %H %s' $git_range`;
- 		foreach my $line (split(/\n/, $lines)) {
--			$line =~ /^([0-9a-fA-F]{40,40}) (.*)$/;
--			next if (!defined($1) || !defined($2));
--			my $sha1 = $1;
--			my $subject = $2;
-+			$line =~ /^(.* <[^>]+>) ([0-9a-fA-F]{40,40}) (.*)$/;
-+			next if (!defined($1) || !defined($2) || !defined($3));
-+			my $committer = $1;
-+			my $sha1 = $2;
-+			my $subject = $3;
- 			unshift(@commits, $sha1);
- 			$git_commits{$sha1} = $subject;
-+			$git_committers{$sha1} = $committer;
- 		}
- 	}
- 	die "$P: no git commits after extraction!\n" if (@commits == 0);
-@@ -1530,6 +1533,43 @@ sub same_email_addresses {
- 	       $comment1 eq $comment2;
- }
- 
-+sub signoff_match_status {
-+	my ($signoff, $identity) = @_;
-+	my $authorsignoff = 0;
-+
-+	if (same_email_addresses($signoff, $identity)) {
-+		$authorsignoff = 1;
-+	} else {
-+		my ($signoff_name, $signoff_comment, $signoff_address, $comment1) = parse_email($signoff);
-+		my ($identity_name, $identity_comment, $identity_address, $comment2) = parse_email($identity);
-+
-+		if (lc $signoff_address eq lc $identity_address &&
-+		    $signoff_name eq $identity_name) {
-+			$authorsignoff = 2;
-+		} elsif (lc $signoff_address eq lc $identity_address) {
-+			$authorsignoff = 3;
-+		} elsif ($signoff_name eq $identity_name) {
-+			$authorsignoff = 4;
-+
-+			my $address1 = $signoff_address;
-+			my $address2 = $identity_address;
-+
-+			if ($address1 =~ /(\S+)\+\S+(\@.*)/) {
-+				$address1 = "$1$2";
-+			}
-+			if ($address2 =~ /(\S+)\+\S+(\@.*)/) {
-+				$address2 = "$1$2";
-+			}
-+
-+			if ($address1 eq $address2) {
-+				$authorsignoff = 5;
-+			}
-+		}
-+	}
-+
-+	return $authorsignoff;
-+}
-+
- sub which {
- 	my ($bin) = @_;
- 
-@@ -2690,6 +2730,9 @@ sub process {
- 	my $author = '';
- 	my $authorsignoff = 0;
- 	my $author_sob = '';
-+	my $last_signoff = '';
-+	my $committer = $git_committers{$filename} // '';
-+	my $committersignoff = 0;
- 	my $is_patch = 0;
- 	my $is_binding_patch = -1;
- 	my $in_header_lines = $file ? 0 : 1;
-@@ -3018,40 +3061,16 @@ sub process {
- # Check the patch for a signoff:
- 		if ($line =~ /^\s*signed-off-by:\s*(.*)/i) {
- 			$signoff++;
-+			$last_signoff = $1;
- 			$in_commit_log = 0;
- 			if ($author ne ''  && $authorsignoff != 1) {
--				if (same_email_addresses($1, $author)) {
--					$authorsignoff = 1;
--				} else {
--					my $ctx = $1;
--					my ($email_name, $email_comment, $email_address, $comment1) = parse_email($ctx);
--					my ($author_name, $author_comment, $author_address, $comment2) = parse_email($author);
--
--					if (lc $email_address eq lc $author_address && $email_name eq $author_name) {
--						$author_sob = $ctx;
--						$authorsignoff = 2;
--					} elsif (lc $email_address eq lc $author_address) {
--						$author_sob = $ctx;
--						$authorsignoff = 3;
--					} elsif ($email_name eq $author_name) {
--						$author_sob = $ctx;
--						$authorsignoff = 4;
--
--						my $address1 = $email_address;
--						my $address2 = $author_address;
--
--						if ($address1 =~ /(\S+)\+\S+(\@.*)/) {
--							$address1 = "$1$2";
--						}
--						if ($address2 =~ /(\S+)\+\S+(\@.*)/) {
--							$address2 = "$1$2";
--						}
--						if ($address1 eq $address2) {
--							$authorsignoff = 5;
--						}
--					}
-+				my $signoff_status = signoff_match_status($1, $author);
-+				if ($signoff_status != 0) {
-+					$authorsignoff = $signoff_status;
-+					$author_sob = $1 if ($signoff_status != 1);
- 				}
- 			}
-+			$committersignoff = signoff_match_status($1, $committer) if ($committer ne '');
- 		}
- 
- # Check for invalid patch separator
-@@ -7901,6 +7920,29 @@ sub process {
- 			}
- 		}
- 	}
-+	if ($is_patch && $has_commit_log && $chk_signoff &&
-+	    $committer ne '' &&
-+	    $last_signoff ne '' &&
-+	    $committersignoff != 1) {
-+		my $sob_msg = "'Committer: $committer' != 'Signed-off-by: $last_signoff'";
-+
-+		if ($committersignoff == 2) {
-+			CHK("COMMITTER_SIGN_OFF_MISMATCH",
-+			    "Committer:/Signed-off-by: email comments mismatch: $sob_msg\n");
-+		} elsif ($committersignoff == 3) {
-+			WARN("COMMITTER_SIGN_OFF_MISMATCH",
-+			     "Committer:/Signed-off-by: email name mismatch: $sob_msg\n");
-+		} elsif ($committersignoff == 4) {
-+			WARN("COMMITTER_SIGN_OFF_MISMATCH",
-+			     "Committer:/Signed-off-by: email address mismatch: $sob_msg\n");
-+		} elsif ($committersignoff == 5) {
-+			WARN("COMMITTER_SIGN_OFF_MISMATCH",
-+			     "Committer:/Signed-off-by: email subaddress mismatch: $sob_msg\n");
-+		} else {
-+			WARN("COMMITTER_SIGN_OFF_MISMATCH",
-+			     "Last Signed-off-by: '$last_signoff' != commit committer '$committer'\n");
-+		}
-+	}
- 
- 	print report_dump();
- 	if ($summary && !($clean == 1 && $quiet == 1)) {
+> Thanks that would be nice, Also am thinking that we should just have
+> qcom,port-mapping for both modes and mark one of the device as
+> qcom,control-device which is tx in mobile case. That way we have some
+> level of clean bindings that overlap. But I will leave it up to you.
 
----
-base-commit: 290aaf24a551d5a0dce037e3fab30820f9113a10
-change-id: 20260723-checkpatch-committer-sob-10fcbd636d43
+Let's use your shape. The merged file then has a single
+qcom,port-mapping (still optional, as the wcd938x mappings are) on both
+slave nodes, and qcom,control-device marking the TX slave in the
+mobile presentation — the explicit flag takes over the TX/RX
+discrimination that the split property names provided in my v1, and it
+doubles as dispatch information for the common stub. Compute-only
+requirements (#sound-dai-cells on the slave nodes, and whatever else
+your v2 needs there) go behind if: qcom,compute-mode. I'll
+carry the merged file in my v2 so your v2 can drop patch 7.
 
-Best regards,
---  
-Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+> Yes, This is definitely an useful experiment, I was trying something
+> similar with both tx and rx side on mobile mode, things got really
+> complex because the sdw stream has to be handled by rx codec where as tx
+> side will be handled by sdca side.. it was really messy.
+> [...]
+> I think you should continue to do the mobile mode driver as it was done
+> in v1 not think about sdca. Function setup on mobile mode are dynamic
+> user can set sys_usage based on usecase so the sdca functions will
+> change, this is not static anymore so its not really worth thinking of
+> sdca for mobile atm, but we could try to see if we can get some leverage
+> from sdca helpers.
+>
+> Sorry for the noise i hope it was a worth experiment on mobile mode.
 
+No noise at all — it answered the RX-slave question and produced the
+coexistence data above, so it paid for itself. Agreed on the
+direction: mobile v2 stays the v1 approach, no SDCA; where a class
+helper fits the mobile driver internals I'll borrow rather than
+reinvent. I'll leave the sdca-mobile branch up, frozen at the RFC
+state, for reference.
+
+> Am really Sorry not sure how I missed that.
+
+No worries.
+
+So, concretely: my v2 carries the common entry point, the merged
+binding as above, and the driver review items already queued from the
+v1 thread; on your side patch 7 goes away and the compute probe hooks
+into the stub. I'm spinning v2 next, so the merged binding will be
+on the list for your v2 to reference.
+
+Thanks,
+Jorijn
