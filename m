@@ -1,310 +1,329 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F12A5429CCB
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 12:17:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E9EF37204A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 12:19:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784895435; cv=none; b=R3nsMMwjsIK8CbJiuA9WUv2SzQ6wvGoQuE+cMvyBHLzIhNg5OewRlCQGkRDlRbeyvNRJ2d3a5HG2cUUSgresV4YjbI1dI/F68VWCvjiLu3rsZJgbwLlGrlOd1PGdS8j2tDo0Y3w8oqUIE1trIhn6FKRuWp5fUS3ZlqSW9n6oSWw=
+	t=1784895567; cv=none; b=bDBHavmNicVU0LKFqVIokDWBdAn8AMwiy7csiBe8/jBd/eDLzoLHWsZIJxwMuA/qAwtZyEM06fBWW8TRSS2gO71XXBKKW2/nZaukNUwmzIYlMFqmAiN9lUz3cuq12bdH8XIh84swXK8BHC8llNC7MzMSvA5qq4DCN6yFwMFJhZU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784895435; c=relaxed/simple;
-	bh=WPwiJqExHTdjO20g/ADWAvcKz5CjWKZD4kv8WtBFk5s=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=kV9koiKRrcNkw59kE+Ffgn7QQK+CQkuT9iBc/iDDRMRZDuxf3Gh6y9Ju3bABf1NMWrwi+L7cPHwojnECFB0VITU3dcAxxV7XbiUEIvv8RMeO4Tg6HclyubUqQcOAn7Vfg4ookIbm4gLTKHlCUSxq2wn7y0IYJzVeJnqkvhUYsS4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ks/s2ZbZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gYTRnpXl; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1784895567; c=relaxed/simple;
+	bh=hdOPs4e+5gEq2NTHhTotVnUSWG0HZXdm18O6hz1wWQQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=DS8Wlmk4glBUcFDJrZ81+FARkz1wKDr4I5sEaYwBzJUFl1a8rg0+nSM0MdhcNd+5jOB77hFGcqhfU/ADCmbFPGzZesIxYl+/K4srexr7oONptzJ8MDvFxxuNxSP4YU5yEfDQMNncKB6c0m5Me8RnrwIpqnGaEy7g1Qgc0UHI59c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=BQpqW4t3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=F1z2VO1R; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ks/s2ZbZ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gYTRnpXl"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66OADXa42875694
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 12:17:10 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="BQpqW4t3";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="F1z2VO1R"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66OADrvI2742614
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 12:19:24 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	FSWXtcS83AIi2knBSqKxmPr/gYdQSfFpx+mSI6DOVs0=; b=ks/s2ZbZ0EeYySQN
-	f84U+i1uzY+Sd84l9DmuTV7x4qDh9cPo4f3p9VGvBPaY3K9Zr76zRtXlAaGiE8kd
-	LamjMpiup98NaM6l+bL9souA2ShvjGhVMbHZpnX33EZ6OC96q6XRSgunIbqUcQ5E
-	aTVA1v8W71GrEzAbiRPR7uGcv0SdEUddX0j8zsFLHVFhc8HeoKv6wikTx7/XASow
-	j3D4ZrHsmNgAGPm/D+TeOjYo4Wbt7xXKVx7Dre35E2ga2eM3c4aPQf4wX09vlV1u
-	rKWhMk+IMoulx353T0w4fvEm/6KCd8tMo3RM+lS5VLq/+bQ4Vt9K54bozzhNrRqP
-	P2t/Fg==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fm5byrn0w-1
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=B7KdEphz0j0cMMYZkSRPqY7M
+	aSr6YFxDvjx2kGx481A=; b=BQpqW4t3MZKyXVmNVh3f9UNpfhOk3BHnv4rkYaSt
+	LLLx3QkU3+k8tmRV8c6+q3zphB1Ol91xhq6BnBujJLkxzEbWQRkiZEI7f4+NJdS4
+	2u0hPSrhIXFapAJhYqc123gCk6eLa3Z/SufOX4IBEijzgr5KEaChuzJJOd2dSXjx
+	CxQ5rlPwJ9FOn6Pwvtxt1/PcPi30f42D/ieaTwOJafg5ZemJh0Kjn4CN5bSPRzYl
+	pWyHn9tE8tGJ4ony9R42mkaG/3kZyBVXk/dnoYXY24ndBuPrtuD47YDrIlsmxIQ8
+	YvvydMmKd7QZiGfrwybgTATZApU7015XTkmmcMe9Nh2ImA==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fm0p51q9m-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 12:17:10 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51ebdfceddcso6210561cf.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 05:17:09 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 12:19:24 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2cc6dd43737so7564935ad.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 05:19:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784895429; x=1785500229; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=FSWXtcS83AIi2knBSqKxmPr/gYdQSfFpx+mSI6DOVs0=;
-        b=gYTRnpXlSVyUH3nvB1fhPE8z63qOsnbNgjW5+xZu0JQCXyU8fXRFS6EAckIwFKsFbM
-         kSXyw2/cgvhrKgPmX2nJS6QmbWA87SSGkoC6WqH72oj3DQt6tmU+R6k998jbUnpl5B4C
-         uiGk7uWx8GjGh949ImPSN3BfnVKNQvYQfad6NUuAjhUfUrHavifsJb50mi9kxq5ORMIk
-         9nNUCUKDy/YBNLPnPGFNwpio3DgTnor3uG/5mTb2m9Sz7BwMHcZ+hYKR58bWNB7qriiw
-         L9qA8g8QFpVx4Gp4CUIqHuku0B1ZHwLh2TvCpm9G5ozUl05KeA+rKgH2qf8ifLjWP/Xl
-         O0tA==
+        d=oss.qualcomm.com; s=google; t=1784895563; x=1785500363; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=B7KdEphz0j0cMMYZkSRPqY7MaSr6YFxDvjx2kGx481A=;
+        b=F1z2VO1RJn4tmMEvE3qBzYgmayL98VfQRn3aEYKEp1ZDxjNpGThwfENcqahd7J2A0q
+         jOQYhUkOxToCz/hWPeo9oD36u4LrY3Xp+KVfsKb47eTDUtPLZLsgzaG5jQL/nbWERseI
+         IYjFsNjSQAQ3perk2DAO0EzbuoHTxY0k1Vl4xIeLxweCu7EEm+LjYbfXZKx96ySZ8TwE
+         ThZNiMrNxXYnz5uJ2sn5CHm++TPAlZ49nADStX77048dLBhc452KPEm+NVT32iZUaJav
+         ZOSgj2DJZZoXLXRokSAh+kNdg8/Ibj8hvma7/EiHlaKETRIsWVhKGgrEzN/t8OiWTEKP
+         aiEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784895429; x=1785500229;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=FSWXtcS83AIi2knBSqKxmPr/gYdQSfFpx+mSI6DOVs0=;
-        b=S5cIZZX0lBdHk7gcI0a4w4fY+5yq+AMeMmvVum+6epAjMsL9vC0gCeSkeolgyNR9ZL
-         sNfs7SJhqzXYYeb33yLiAqjZBTXV4jt16WDosYq7AbK6FogAAUduRtuGq3BrSNw7eDWa
-         Yj5sWSyVNF6IUEOTq2nzsNxOT0w9g2lMBw+LjS8Q1T2ZbFLZ+9YW4YDS8m3aGLElGILf
-         XSATKNiypiGqt886yxhbGIiyL2MiWn6o+v+Ptis8PycYM1TeKNFi5yK2IrkT/UbA4jbC
-         WjT4fvXAJIsznxL2L+FwbE2jj745hVOEa5U6T6Krh8Iapvt2Csg7HLMwAoVL7cuk7zhm
-         MrbQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rphcm0gbkdYGmcjHQxjwcp/l/CJfEJ/0tg865+Yt+gY/6tKwcCzDhRb7UuVxmNbDyeyNamH3PhFb5OOi741@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw9xN9Ox8snY5bZ0gUiLU+EibCxYJeS8yKp8DckueIPfs9ibdO3
-	eWI9It7VTiTa6SunOYjYMiupFAe5iA4JF80IVcQJJ3V81fs+ExiHW1lnFxgLFVwWA0KERondMcM
-	QiXN6fqbgADbI/KGYPkIElukJahEWYzymm3207eWL+ygWvednqHZ+EYlh4ZMZcrAHPbXk
-X-Gm-Gg: AR+sD13YYzeWEOKjm454jcmhBr6+CtE3Blvha/xyxSOJwJqlN+Oc2Mg82Acg+tkJvRV
-	QRlsYvKF9AeIaV/669Z3hEOy/F6dc3GfDHd8d4h1T8Vun2grxIjfw+H8wZoKlPd92Iodc4j6/If
-	xt45Wl673J5G6D+ZLzwNesg9Sq2BevaEMcEhsjs45IyndfFOtNsAfLw5LIcOMwiTO6t/q3fxUO0
-	eLrmE79gTS9nd/i+CjWKhU2YWoOL6nqR9XGcn4mT4C+CbCAYzvJEJ5/ZjhXXI0LUTi0U0kgbYyO
-	aHxDm/in9qpdYbLxsZqGY0sBz5Y59/rsLLEfAVsxQGrxFGsp3AVFOUHTG+ZkET1NTMY5fntfNLd
-	z+B7qFAer+tEmE6Ngb9rlkblVOB8=
-X-Received: by 2002:ac8:5a4b:0:b0:527:69dd:5413 with SMTP id d75a77b69052e-5283dda9badmr68654561cf.5.1784895429197;
-        Fri, 24 Jul 2026 05:17:09 -0700 (PDT)
-X-Received: by 2002:ac8:5a4b:0:b0:527:69dd:5413 with SMTP id d75a77b69052e-5283dda9badmr68653941cf.5.1784895428673;
-        Fri, 24 Jul 2026 05:17:08 -0700 (PDT)
-Received: from [192.168.68.114] ([5.133.47.210])
-        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-47f85b9a60asm24387356f8f.3.2026.07.24.05.17.07
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 24 Jul 2026 05:17:07 -0700 (PDT)
-Message-ID: <06aef9a5-7e8e-4262-9b41-a9c43f588da9@oss.qualcomm.com>
-Date: Fri, 24 Jul 2026 13:17:06 +0100
+        d=1e100.net; s=20251104; t=1784895563; x=1785500363;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=B7KdEphz0j0cMMYZkSRPqY7MaSr6YFxDvjx2kGx481A=;
+        b=VG88jHaz/WQLeu3en+duegeFVH172lCB5pjcU3JZAb46Iwdnox+TP86oo7pgtnySoi
+         8uAbGiyoOp60ZZtFXtI6d3lJal5B3Jpoe0ua8660+Bq0mazabPOja5Hp1mXZMzUR2iVl
+         LeBvybI5o5vXF2PjII3zBauSz4O5YuHpiuTSOEOLQl1LzqoEWUAdugq4FCXWwKdbZT3h
+         BapU+8brs7z3kN9C0PbRpl5vocEFXjWXMh44E+W5ts66TZ+ksaJQN06WF8r3Pci9Z2r2
+         m15tpLWI2eWDzbgFDQ18v/79CNUctcxltVTkmaf3ljkUJxtCYjm/xFopYi+rgu4OxGZZ
+         Q7bQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrGSWrfuKzH1QNh9/tOMyR2Da5EgdvT+mepaG7cVZZmexUpSTFnLfnhYGygERiHcDYimXL1n9VYXNzqLPnh@vger.kernel.org
+X-Gm-Message-State: AOJu0YyfCoWTUmc7L6u3R8qIOknyES+urhvx8M7Q07oYbbvLX1HlYIYQ
+	kMCCpbiypT9Y3UY3KKwA9IEkYIXsUbuoijDWF4EV/IzQ1W8xuiw24cubGuoVq9KYKVPFr9WlcR3
+	igSrxVTANFRECl35WSrn8iQiJnlu8jPnXjDkFrCcz7rISroMe1D6ibLhfS4xvFowjw4Cq
+X-Gm-Gg: AR+sD11TvsCp5to0gx2koDMYrGSp++oQ4OZgkWPMhq6T8QwlK41soI4bp0Su6JRmKHq
+	fz9AeE3g/B+W4JMvw657XdicaLt0F3KrF9L9cAAacizlj+udZS8ijVHqu6PfIjWoyOHxTNtCpdK
+	n7HIQAO43IONH29Yax51FMT8cQWuxfjzQneWWpj4GYu0jeh5rkkycTZiKPP/knOrohJxegUDkp4
+	8WsN6rmFhetmeV4H5TlMOaXhfE/63Y81GVpdery0zX04utyznY+DS87+l27nwvq+CyPqTewm11v
+	sxd8DbpPt8WmrIRkalh6HJb69jV9UIqX7gTYrngVl25KGF54w8cb8HH2s3jdY/UG1vxfcSzAdpR
+	tgb0l9JyJDTlS6hVozNK60FOY2hx6y4eJrVTQ8XhOX5Y=
+X-Received: by 2002:a17:90b:586c:b0:38e:7446:d2b8 with SMTP id 98e67ed59e1d1-38ec6890685mr7895015a91.41.1784895563180;
+        Fri, 24 Jul 2026 05:19:23 -0700 (PDT)
+X-Received: by 2002:a17:90b:586c:b0:38e:7446:d2b8 with SMTP id 98e67ed59e1d1-38ec6890685mr7894978a91.41.1784895562731;
+        Fri, 24 Jul 2026 05:19:22 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13d13014d27sm26626295c88.4.2026.07.24.05.19.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 24 Jul 2026 05:19:22 -0700 (PDT)
+Date: Fri, 24 Jul 2026 20:19:16 +0800
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>
+Cc: Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 2/3] dt-bindings: remoteproc: qcom,nord-pas: Document
+ Nord PAS
+Message-ID: <amNYRMIkmf2hfYXV@QCOM-aGQu4IUr3Y>
+References: <20260724103848.233804-1-shengchao.guo@oss.qualcomm.com>
+ <20260724103848.233804-3-shengchao.guo@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 0/8] ASoC: SDCA: enable on DT platforms and add
- Qualcomm WCD9378 (Tambora) codec
-To: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
-Cc: Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-        Charles Keepax <ckeepax@opensource.cirrus.com>,
-        Maciej Strozek <mstrozek@opensource.cirrus.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Bard Liao <yung-chuan.liao@linux.intel.com>,
-        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-        Richard Fitzgerald <rf@opensource.cirrus.com>,
-        Luca Weiss <luca.weiss@fairphone.com>, linux-sound@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        patches@opensource.cirrus.com, linux-kernel@vger.kernel.org
-References: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com>
- <20260723194045.49021-1-jorijnvdgraaf@catcrafts.net>
-Content-Language: en-US
-From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-In-Reply-To: <20260723194045.49021-1-jorijnvdgraaf@catcrafts.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: rZ2MCAySjs-9xtD6QKTTgUG00IfSJIWH
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDExMSBTYWx0ZWRfXwGBaGG96c7JJ
- yEdkBP3x+oefAYQzZn7XWizAMPYpyVs8kVNQKQYGUxKqpBpPnH7Qp1g3otJRGWmDDv4vr+cXTuR
- XDl10bM6aX4mQVtsH9DmxqcKnwNDJsM=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDExMSBTYWx0ZWRfX8eGaDl3TZFky
- 983T1YsOykV2unkhVMMDeuXR/H1nV0cQ5dYadjgPilycPrDiFBQp+xosA4QygC4ltNZJEybagSe
- 9O5FiC2UJathPZHvd/iq25TigivdHAcL8Yb15yXe1PQLnw92h7KmjGbHyUKjdcOtuKGos8a9ecU
- 02Ue3qyv45p+3r20drA1n78Ao52G1+ysURo3uba6ejKzEHx75enyNsts0nMgfvN+EFP0qWHhOPQ
- m0HbxmWqX20RfE1TWpGiH1rl80rFN0k2jhA74RffHsjw7HzAJdKCsHjAEkYvBVowgQCMPS4CQRK
- dhRpWOayFZX9Llouskcns23B+9BxBFowPf+KnvEAU0qy+QRgKhdDQ/qU7rYavz1QZV0m5hsFoNW
- 9PJRr0WH+8k5BmqE3rGkeh63ex6goGou0dbxdVCYKZsXxYIX5R/AHC7dqWWyDClBmlFTUMxrfg3
- /ro0PlbJAft99nyQjYQ==
-X-Proofpoint-GUID: rZ2MCAySjs-9xtD6QKTTgUG00IfSJIWH
-X-Authority-Analysis: v=2.4 cv=GMA41ONK c=1 sm=1 tr=0 ts=6a6357c6 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=GYSh3LzNAAAA:8 a=2FLSfOfDB4kTeDBI9AoA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=a_PwQJl-kcHnX1M80qC6:22 a=lWcdFasyL5yHfcDTNXXo:22
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260724103848.233804-3-shengchao.guo@oss.qualcomm.com>
+X-Authority-Analysis: v=2.4 cv=Pq6jqQM3 c=1 sm=1 tr=0 ts=6a63584c cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=PhCFR9l94pDFD3z7aeYA:9 a=CjuIK1q_8ugA:10
+ a=uG9DUKGECoFWVXl0Dc02:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-GUID: WkDlf2am6wVXotXk43952OXGplPX2lGS
+X-Proofpoint-ORIG-GUID: WkDlf2am6wVXotXk43952OXGplPX2lGS
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDExMSBTYWx0ZWRfX7eTKpRhmw+FC
+ SjAMF9GqJ4+0dsX0FteWTc0P9P+z79V1o1xI1fmbe4gocbRPpmpQa1OmW9Lzx48qHSrzQlyD4nx
+ z2EFkbwaqm5f0KzZ39fpdAqt2diFRrY=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDExMSBTYWx0ZWRfX9wXoqscCoaEh
+ 0s60eEsMYcnGWsrHCtzMpLC6jNGfTz8bkwvbO3ZfcWbS3rMXfz/taG+ILJAA/qHrw5mkZr/721/
+ ZX2HU3hFiFE9lPECYTCkgd4Wq8f1JQo5Scu7inwHSO+6i5+kPrwLxskfIVCnHHPvhNY1ZMpcFze
+ pmK+2t1e3HtJXroqor7DMcnjKXV9IgM4iUUAd5Smy8w95CkundO95IdG5Um9GPafHP8SB1XkQz5
+ /UP4Bu6+zD1BU7SOs2tcAbdDZoMxqJS9l1hZnphkGo8ecASt+K+S+uPvvu9BL+QwZvJLYWdz+1A
+ qV4PQ2LEjLvUaRVI6Q/tC9Yckq/0X7KT7+EI/2/1Kbs4e6Ty6dWR+srZ8wmJpqK55vaFaCJRZc0
+ QMu78qIA056X/G9ESOaqmtXhp5ucbmtm+2ybY3kMiXMmzSYLCNMrkr2sdNhOkd0Phvsf7h3Aqnt
+ UKZBbjylVE7aGerCPpA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-24_02,2026-07-22_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 phishscore=0 lowpriorityscore=0
- priorityscore=1501 suspectscore=0 bulkscore=0 adultscore=0 malwarescore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607240111
+ priorityscore=1501 malwarescore=0 spamscore=0 lowpriorityscore=0 adultscore=0
+ bulkscore=0 clxscore=1015 impostorscore=0 suspectscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607240111
 
-On 7/23/26 8:40 PM, Jorijn van der Graaf wrote:
-> Hi Srini,
+On Fri, Jul 24, 2026 at 06:38:47PM +0800, Shawn Guo wrote:
+> Add a dedicated binding for the Qualcomm Nord SoC PAS devices: ADSP
+> and CDSPs. Nord ADSP uses CX and MX power domains while the CDSPs
+> add an NSP domain on top of that.
 > 
-> On Thu, 23 Jul 2026 00:42:10 +0100, Srinivas Kandagatla wrote:
->> The most obvious follow-up is figuring out how the mobile-mode and
->> compute-mode WCD9378 drivers coexist under one compatible.  Jorijn's
-> [...]
->> tree without racing to bind the same slave.  I would like to line this
->> uip with Jorijn as a follow-up to this series.
+> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+> ---
+>  .../bindings/remoteproc/qcom,nord-pas.yaml    | 167 ++++++++++++++++++
+>  1 file changed, 167 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/remoteproc/qcom,nord-pas.yaml
 > 
-> Happy to line this up. To ground the discussion I ported the series
-> onto my FP6 tree and have mobile-mode capture working end-to-end
-> through the class framework, including PipeWire in Plasma — findings
-> and a proposal below.
-Thanks Jorijn for trying out and confirming that capture works.
+> diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,nord-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,nord-pas.yaml
+> new file mode 100644
+> index 000000000000..c1d60ca6c63c
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/remoteproc/qcom,nord-pas.yaml
+> @@ -0,0 +1,167 @@
+> +# SPDX-License-Identifier: GPL-2.0 OR BSD-2-Clause
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/remoteproc/qcom,nord-pas.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Qualcomm Nord SoC Peripheral Authentication Service
+> +
+> +maintainers:
+> +  - Shawn Guo <shengchao.guo@oss.qualcomm.com>
+> +
+> +description:
+> +  Qualcomm Nord SoC Peripheral Authentication Service loads and boots firmware
+> +  on the Qualcomm DSP Hexagon cores.
+> +
+> +properties:
+> +  compatible:
+> +    enum:
+> +      - qcom,nord-adsp-pas
+> +      - qcom,nord-cdsp0-pas
+> +      - qcom,nord-cdsp1-pas
+> +      - qcom,nord-cdsp2-pas
+> +      - qcom,nord-cdsp3-pas
+> +
+> +  power-domains:
+> +    minItems: 2
+> +    items:
+> +      - description: CX power domain
+> +      - description: MX power domain
+> +      - description: NSP power domain
+> +
+> +  power-domain-names:
+> +    minItems: 2
+> +    items:
+> +      - const: cx
+> +      - const: mx
+> +      - const: nsp
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  clocks:
+> +    items:
+> +      - description: XO clock
+> +
+> +  clock-names:
+> +    items:
+> +      - const: xo
+> +
+> +  qcom,qmp:
+> +    $ref: /schemas/types.yaml#/definitions/phandle
+> +    description: Reference to the AOSS side-channel message RAM.
+> +
+> +  smd-edge: false
+> +
+> +  firmware-name:
+> +    items:
+> +      - description: Firmware name of the Hexagon core
+> +      - description: Firmware name of the Hexagon Devicetree
+> +
+> +  memory-region:
+> +    items:
+> +      - description: Memory region for main Firmware authentication
+> +      - description: Memory region for Devicetree Firmware authentication
+> +
+> +  interrupts:
+> +    items:
+> +      - description: Watchdog interrupt
+> +      - description: Fatal interrupt
+> +      - description: Ready interrupt
+> +      - description: Handover interrupt
+> +      - description: Stop acknowledge interrupt
+> +      - description: Shutdown acknowledge interrupt
+> +
+> +  interrupt-names:
+> +    items:
+> +      - const: wdog
+> +      - const: fatal
+> +      - const: ready
+> +      - const: handover
+> +      - const: stop-ack
+> +      - const: shutdown-ack
+> +
+> +  qcom,smem-states:
+> +    maxItems: 1
+> +    description: States used by the AP to signal the Hexagon core
+> +
+> +  qcom,smem-state-names:
+> +    maxItems: 1
+> +    description: The names of the state bits used for SMP2P output
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - memory-region
+> +
+> +allOf:
+> +  - $ref: /schemas/remoteproc/qcom,pas-common.yaml#
+> +  - if:
+> +      properties:
+> +        compatible:
+> +          enum:
+> +            - qcom,nord-adsp-pas
+> +    then:
+> +      properties:
+> +        power-domains:
+> +          maxItems: 2
+> +        power-domain-names:
+> +          maxItems: 2
 
-> 
-> 1) Arbitration, near term
-> 
-> Your probe already returns -ENODEV when qcom,compute-mode is absent;
-> v2 of my mobile series will add the mirror check, so neither driver
-> can bind the other's slaves regardless of probe order. If a single
-> owner of the modalias is preferred instead, a small wcd9378-common
-> stub dispatching on the property also works for me — your call.
-> Either path can later sanity-check the fused mode the way the
-> downstream driver does (EFUSE_REG_29 PLATFORM_BLOWN, else
-> PLATFORM_CTL MODE) once register access is up.
+Sashiko had a valid comment on this.  Since the global power-domains
+property defines minItems: 2, this will allow CDSP variants to incorrectly
+pass schema validation if they omit the NSP power domain.
 
-We need single entry point, if not we will endup with two modalias. Yes
-current RFC driver was only tested for compute.
-I agree we should have a common so that we can leverage some code from
-both modes.
+I will fix it.
 
-> 
-> One mobile-specific data point for the split: in mobile mode the SDCA
-> control space is only decoded on the TX slave. On the FP6, a paged
-> read of DEV_MANU_ID/DEV_PART_ID (0x40100060/0x40100068) via the TX
-> slave returns 0x0217/0x0110, while the same reads via the RX slave
-That is expected on WCD codecs. only TX has CSR registers space.
-RX can not read/write any of the codec register space.
-However the soundwire SCP address space is accessible and expected to
-set data ports for both tx and rx.
+Shawn
 
-> return zeros — with the RX slave's standard SCP DevID registers
-> reading fine. That matches the downstream driver, which creates its
-> only regmap on the TX device and drives the render dataports through
-> the RX slave. So for mobile RX playback the function control and its
-> dataports live on *different* slaves; a per-dataport slave mapping
-> (or similar) would be needed in the class framework for that. Capture
-> doesn't have this problem — the TX dataports sit on the control
-> slave, so no cross-slave mapping is needed there.
+> +
+> +unevaluatedProperties: false
+> +
+> +examples:
+> +  - |
+> +    #include <dt-bindings/clock/qcom,rpmh.h>
+> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
+> +    #include <dt-bindings/interrupt-controller/irq.h>
+> +    #include <dt-bindings/mailbox/qcom-ipcc.h>
+> +    #include <dt-bindings/power/qcom,rpmhpd.h>
+> +    #define IPCC_MPROC_ADSP0
+> +
+> +    remoteproc@4c00000 {
+> +        compatible = "qcom,nord-adsp-pas";
+> +        reg = <0x04c00000 0x10000>;
+> +
+> +        clocks = <&rpmhcc RPMH_CXO_CLK>;
+> +        clock-names = "xo";
+> +
+> +        interrupts-extended = <&intc GIC_SPI 159 IRQ_TYPE_EDGE_RISING>,
+> +                              <&smp2p_adsp_in 0 IRQ_TYPE_EDGE_RISING>,
+> +                              <&smp2p_adsp_in 1 IRQ_TYPE_EDGE_RISING>,
+> +                              <&smp2p_adsp_in 2 IRQ_TYPE_EDGE_RISING>,
+> +                              <&smp2p_adsp_in 3 IRQ_TYPE_EDGE_RISING>,
+> +                              <&smp2p_adsp_in 7 IRQ_TYPE_EDGE_RISING>;
+> +        interrupt-names = "wdog",
+> +                          "fatal",
+> +                          "ready",
+> +                          "handover",
+> +                          "stop-ack",
+> +                          "shutdown-ack";
+> +
+> +        memory-region = <&hpass_dsp0_mem>, <&hpass_dsp0_dtb_mem>;
+> +
+> +        firmware-name = "qcom/nord/adsp.mbn",
+> +                        "qcom/nord/adsp_dtb.mbn";
+> +
+> +        power-domains = <&rpmhpd RPMHPD_CX>,
+> +                        <&rpmhpd RPMHPD_MX>;
+> +        power-domain-names = "cx",
+> +                             "mx";
+> +
+> +        qcom,qmp = <&aoss_qmp>;
+> +        qcom,smem-states = <&smp2p_adsp_out 0>;
+> +        qcom,smem-state-names = "stop";
+> +
+> +        glink-edge {
+> +            interrupts-extended = <&ipcc IPCC_MPROC_ADSP0
+> +                                         IPCC_MPROC_SIGNAL_GLINK_QMP
+> +                                         IRQ_TYPE_EDGE_RISING>;
+> +            mboxes = <&ipcc IPCC_MPROC_ADSP0 IPCC_MPROC_SIGNAL_GLINK_QMP>;
+> +
+> +            label = "adsp";
+> +            qcom,remote-pid = <2>;
+> +
+> +            /* ... */
+> +        };
+> +    };
+> -- 
+> 2.43.0
 > 
-> 2) Bindings — one file
-> 
-> Patch 7 adds the same new file as my series
-> (Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml), so
-> one of us should carry a merged version and the other drop it.
-> Suggestion: the mobile side keeps my v1's tx/rx split shape, with
-> the v2 changes already committed on my binding thread
-> (qcom,{tx,rx}-port-mapping staying optional, matching
-> qcom,wcd938x-sdw.yaml; qcom,{tx,rx}-channel-mapping dropped). The
-> compute side keeps your qcom,compute-mode if/then, extended to also
-> cover qcom,port-mapping and #sound-dai-cells. As posted, patch 7's mobile shape wouldn't
-> validate my mobile DTS: it defines a combined qcom,port-mapping but
-> the description references qcom,tx/rx-port-mapping, and
-> #sound-dai-cells is required unconditionally while the mobile DAIs
-> live on the top-level codec node. I'm happy to carry the merged file
-> in my v2 so your v2 can drop patch 7 — or the reverse, whichever you
-> prefer.
-Thanks that would be nice, Also am thinking that we should just have
-qcom,port-mapping for both modes and mark one of the device as
-qcom,control-device which is tx in mobile case. That way we have some
-level of clean bindings that overlap. But I will leave it up to you.
-
-
-> 
-> 3) Prototype findings on patches 1-6 (mobile capture, FP6)
-> 
-> What I ran: your 8 patches on my 7.1.2-based tree, plus a new
-> wcd9378-sdca-mobile codec registering its own sdw_driver for the TX
-> slave, static sdca_function_data for the SmartMic0 function
-> (IT11 -> OT10 on DP1, with PDE11 as the power domain), and hw_ops
-> doing the vendor bring-up
-> (micbias routing, bus-clock indication, a clock-stop hold; supplies
-> stay on the mobile top-level codec node, so hw_init has nothing to
-> do — that part of the design accommodates the mobile supply model
-> as-is). Capture works: the card binds, PDE11 reaches PS0 through the
-> DAPM supply widget, and a 1 kHz tone played from the speakers
-> captures at ~46% of full scale through the SDCA path. The bus-clock
-> indication in hw_ops is partly a stopgap: the core path discussed
-> with Pierre-Louis on my driver thread needs the qcom controller to
-> set prop.mclk_freq, and that patch is still on my list. The
-> prototype branch (your series + the mobile codec on a 7.1.2 base) is
-> at https://forgejo.catcrafts.net/Catcrafts/milos-linux, branch
-> sdca-mobile, if useful.
-Yes, This is definitely an useful experiment, I was trying something
-similar with both tx and rx side on mobile mode, things got really
-complex because the sdw stream has to be handled by rx codec where as tx
-side will be handled by sdca side.. it was really messy.
-
-> 
-> Findings:
-> 
-> a) PDM dataports. class_function_sdw_add_peripheral() derives the
->    SoundWire stream/port config from the host-visible PCM params via
->    snd_sdw_params_to_config(), but the WCD9378 mic dataports carry
->    1-bit PDM on a single channel (the working mobile driver programs
->    sconfig.bps = 1 and port ch_mask = BIT(0)). Result with the
->    generic path: "bps not matching" from the qcom master and silence
->    on the capture while the PDE sits happily in PS0. I prototyped
->    optional per-dataport overrides in sdca_entity_iot
->    (sdw_bps/sdw_ch_mask) consumed in add_peripheral, which fixed it;
->    maybe DisCo has a proper home for this, but something is needed
->    for PDM parts.
-> 
-> b) The IT33 micbias cache-vs-hardware workaround in your patch 8
->    (drop cache + rewrite from pde_pre_pmu) ported directly to the
->    mobile part's IT11; I carried it prophylactically and haven't yet
->    isolated whether mobile strictly needs it. If it does turn out to
->    be family behavior, it might argue for the class handling
->    has_default controls on PDE power-up generically.
-> 
-> Userspace needed no changes beyond UCM: the class-driver card works
-> with a ControlExists conditional in the same profile (the stock
-> branch of the conditional is the unchanged stock sequence).
-> 
-> On interrupts: sdca_irq_allocate() got a valid IRQ out of the box on
-> my board via the bus irq domain; I haven't exercised actual SDCA
-> interrupt delivery (capture doesn't need it), so I can't yet say
-> whether the INTSTAT dispatch issue in your patch-8 comment reproduces
-> here.
-> 
-> Longer term: until the framework covers mobile end-to-end (the PDM
-> transport and the cross-slave RX question), my posted mobile series
-> stays the working mobile path — the v2 above is about the two
-> drivers coexisting cleanly in the meantime. Mobile capture converging
-> on the class framework looks realistic (my static tables came
-> straight from the posted mobile driver); I'll keep using the FP6 as
-> the mobile-mode test vehicle for the next revisions.
-> 
-
-I think you should continue to do the mobile mode driver as it was done
-in v1 not think about sdca. Function setup on mobile mode are dynamic
-user can set sys_usage based on usecase so the sdca functions will
-change, this is not static anymore so its not really worth thinking of
-sdca for mobile atm, but we could try to see if we can get some leverage
-from sdca helpers.
-
-Sorry for the noise i hope it was a worth experiment on mobile mode.
-
-> One dependency note for your platform posting: SDCA register access
-> on Qualcomm controllers needs the SCP address paging support now in
-> soundwire next, commit 999f80904763 ("soundwire: qcom: add SCP
-> address paging support").
-> 
-> One small nit: link [2] in the cover credits "Jorijn Rikhof" — the
-> surname is van der Graaf.
-
-Am really Sorry not sure how I missed that.
-
-
---srini
-> 
-> Thanks,
-> Jorijn
-
