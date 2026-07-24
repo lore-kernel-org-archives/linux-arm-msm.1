@@ -1,67 +1,67 @@
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7789F3EDE4D
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:04:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 53B5C3EE1C0
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:04:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784883866; cv=none; b=obqFtqUy7unuNPXUxk/bbaIHWxd769nCgbjEir+GJYZVoH+1wntFcochWMAfhwZxUGuq+fipBlbIEkxyRJwIkcM99nLOEMdRWwU9/Vh8NTLQrbrXjG7BRXm1ZRBZxvIYJeKG/hGmxSpnBMTtkyikQTzRqBWF9I7iqn5VfiHAyLo=
+	t=1784883866; cv=none; b=MV8SmqgqBm4LUPIDYYwk+cWECGdDDuCvRW5/v9MwY/gZkm9yOIiJfIWr07dI+2WTfZ+Bk5ZaO4ir73YR0bYpk+2LcXrcTR6X7zN6D4srNZiEICXjUgVzK83Rv1Yw9G6AI6gVVZRNs3K0YhjLb0nbq913XxpAMMIoCqiNMVyuTOE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1784883866; c=relaxed/simple;
-	bh=8ScTk5smx7gkl/cV62c2yigppOTQ+FIzCJYYFT90JYU=;
+	bh=avXrZ+5B5tjwtUKvf/CVoHvEaPEqaWPpS7ZwUFxswLY=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=ElLr5oGtkUf2lhGw/2qufOlD60ydveRgNOfljRMaFrejOJHBNSwVYznLzSMTn2fYF2c+c+XqpMhNe8dQGJd/nYwD4XEYMz/cQUPQBV0Hxgmrt/XHDDmAYoC2RNQv2ltt8KPtNrAIDWrqquoIi4ZLA1rSftMreuky72fPAClS5fk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=WH8NcqLI; arc=none smtp.client-ip=209.85.128.41
+	 In-Reply-To:To:Cc; b=h7bbEL6EnEu82Ka1701ibk2ci/WLNlJQfPdvbdepTx6EZEhjROjeaFLogjBVlHJRDPXDp34nqXeSFtNLE7Yf9Z/V+WcrS+GxHzO9AYNAFw4cdI4rHbxZRJcICwK+jP9s+mbHN5498ZnDWxZJBJU7YLNYMhWtlmKq7AL+kL7xydM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=PdbonZ0+; arc=none smtp.client-ip=209.85.128.54
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="WH8NcqLI"
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4957eefd361so1763185e9.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 02:04:23 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="PdbonZ0+"
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-49571fea44eso1295725e9.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 02:04:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1784883862; x=1785488662; darn=vger.kernel.org;
+        d=baylibre.com; s=google; t=1784883864; x=1785488664; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=yHnSuBWNbpbTyZdc+kGUK7XSKGZJQ8XAkxJmAT7v10M=;
-        b=WH8NcqLIRX0RsbveUCivRVIEFN7YtqOZK2q6i8PLYFbVj7vOs0Z+2BZRMq9WSx3ky3
-         2Sp0XtCVuOhKBSxVwthN3KBpBw3t8YWZ/ycNspoIxTKZxY5fpXrqIvkcj5LXN7vY7YYk
-         Skhb+2nWAKUCXVeVIl/7oJf8FVETnDKPi36BPp0P+B9g2+WkxMTBWJrvpPrixyHVxW4+
-         7n3L++FX5/Ns7zRIY0s/ajRYoLqk+IrBwDrDac7l9KD4NTF1pDZzajXW0WlY5UyEIDHH
-         3QvqgUqRsRk3mrcB2P210DPr8xkWEUjL0v57e/25a5uTp/Ro+x9XwJ1rE66mlKrWhib8
-         edmw==
+        bh=HQnvaHgupyGQPniAuZ9m3sJLh0U25N0HAPnxpHfI//A=;
+        b=PdbonZ0+K8CvkHkhmfNPZRo2SIl1mZ2JZqCEwKmWZEW1/AXWUDKVls26FrII52X6D5
+         Ye3CgwEzYbI4RlWOxvtjcZupLhHMz7mLbLAcXPx6bC9BcRRovILbcVRMxc9Z9IyzwTc1
+         ymrwyR52g/fL5XL9Z7lg5C0wql1nlpdbubbUXmmHkmracWnCIvI7SwhBu9dKtnyBnu5q
+         hipsLOiNpW1VVivIG0wg9Pidqvf6IHfADcVLu0J+4EMcoSQSBp+yC3rrJ4ool9yeJPDl
+         VGAUZBYslSd5mRwZe9DSj82zHpltY8tKnvudE844gcdU3OOjwvsqJ1p64eTBayuJhHcl
+         9mPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784883862; x=1785488662;
+        d=1e100.net; s=20251104; t=1784883864; x=1785488664;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=yHnSuBWNbpbTyZdc+kGUK7XSKGZJQ8XAkxJmAT7v10M=;
-        b=sOF5tpNCwetvha/kHnNJDmibGYtqWycMCrBODDFrZ+Tz+7z5vvzYeps09NC49P4AGL
-         cDGAlgn+IPcsAIqMQfyaoxm3I0uik9ydmusAtRJX/Q1LGqLk11N4Z7oE9TZ8RpsN3rvy
-         YH6ZmMVcUxBxgNAdknyWD63cPmkb7SjUOfheZwjeNrvZjpoMeXzfzbViFgVHqDSV/qSr
-         OaUVTxM3SrPJWygTxCdF/JhgiEEGLH0VciQyYq1ZvSIqxyiH/0mg0YdLhsWZSD22otiv
-         nzh2fJ8Nh/GmY5GpGPu3AKYsG8CIxyHkGRojSp+oroobaQfTpjyCWxlR6UcZElZ5Enp4
-         tUEw==
-X-Forwarded-Encrypted: i=1; AHgh+RqyowMWSiS4Ge9J9WtK4NQ3lIUxw9y8mB8FzgRf8oc2YuaqFjHaZzZZ7B71fQY+qpXfE6epOYKM7A1oWea/@vger.kernel.org
-X-Gm-Message-State: AOJu0YyRPaL4IkXATrOkIDmygiGuRLceBkwW8pT/9QmHhi87De0BY7Du
-	52DqVcevOEzNrRpjwrmVVLl8Pvf9DzScN0l2V1+zePMxRKGoutB36z0QbRf6q9jzX/8=
-X-Gm-Gg: AR+sD13EgcnrYY2ZpDUP9VLC6sKiR4Gikc3vHtysT5kGIdCp2r5aVBZlf9EA3nJgoDZ
-	lZCrkUn3AoeUYOhp2XiKt+Up4OAK8r5A3GZRbapPvseRc91/1nD0BmIE/vBV3j1MKTtjbjbd7dd
-	737s6PUUfYKRDc/FO12gQkk+QSFzoqM0b8AWPF7J8eB8v95TCvKeFxnowZVQX6EJ7yy/QvA7YvW
-	9Dn8caCDZY5CvIXEfPGaIZ0bNOXw3v2COMm+Xgjzf56wRS3YMUUBWQ6OTsFSCPV7fwO6eYGx/Ev
-	zvUkhBhwCGED8WsYK9oTwWnE6OS3dXLnH6kzHtkNp4DnkIy9M6We2FC8Kka3jom7HqQk74FqTSZ
-	GNG5re44x+R0WAf3gyIqcqmg2O0E9CDyN3/KFAW74XX/AmhGoXNYbzbD4cExLHivdH3tpVbqtyB
-	2y
-X-Received: by 2002:a05:600c:5942:b0:495:6397:14b1 with SMTP id 5b1f17b1804b1-49573cf0ec2mr50589315e9.34.1784883861704;
-        Fri, 24 Jul 2026 02:04:21 -0700 (PDT)
+        bh=HQnvaHgupyGQPniAuZ9m3sJLh0U25N0HAPnxpHfI//A=;
+        b=tBDOFCt7FnVbe+2v0ovMtyPGyCgphMVFIJ+L8Qmq17nNLt4N4Javok0mPbKCQZo1xh
+         Q1G3vdQNJxWDSdVKdtB2e34u1b1NkrO9DPf6K9mfAhUTJm62qtjykMFxmFyw+QlZyYth
+         5aUo5+FRuydaLSU8SKeiNj3ORLRDAcmKu3Fz+lVrMg4iL4BWAgm31IWuGLUxy4I4i603
+         NaJupmH70KHsVO7HHrEjLt48snjz4eExDubLSiDKsd3kKlWDLVC5lIpfLDeX5GwzaFc5
+         ALIGLUHGGSAh5cwVlxhncw/Y6mhlo669EJk2guVu7sVUQqtKvrsV57hPwYiJAbRhFWNU
+         c6mQ==
+X-Forwarded-Encrypted: i=1; AHgh+RpUNEmFesWzfr16qAdXQuRW/ppI6lAZdIlXYcWNmFKoXpusR9CDkv1j8DWElVWj8mYcNEf1xXJu5eNn+rnD@vger.kernel.org
+X-Gm-Message-State: AOJu0YzSP09MQ+nhLl0yfIk+Oj8ykwlWGEaGvY+0w7KptkfVPWEuyvWH
+	vQI98ECGZ4q8G4tHYMGB3Q1uUoBYXoMkdzZ+vZEDgdPIEevbDJJzv39UlCXUdbBTOR0=
+X-Gm-Gg: AR+sD13bUciqLhm6Q0SAAhQk/LdAfcnV/GpujlMEUGUGJHacYTqWc35Ea7+sg8S2svd
+	efOXNlersnFGD/cJ5bVL3lv2kbLNAFa2KD+lUMvxJ+OWqjxfHFV9KwITVsEFq8XbRf0wDJ4G4VX
+	tsBwPItKmQn9bDkB8WrGPc5A1YLQXkAIJK4j1RcERYG1SOvltZA7bYMFF8egR/MlA5ED5JypKEJ
+	dnlxviLVXATJPj62aDcCL3b4dFqcHTWy2gUHLip814cTZvPcneYYaenf/1i5smEPkN0FprjsNLy
+	jIhi20N1VMMGDigeO21gRuPExVI5xIh6ZAcZnERP79IHwKRNwRFS+7gyHndfip00bvfnew/vr1D
+	bBDz2MFOxn5AxnCP+OExuClJ7H0qEvz360Md+5mtqxv9q8Au4ysocBlbRZeobfm3Ma8ova4Ls+J
+	WJXdGU3WVo+EA=
+X-Received: by 2002:a05:600c:1f92:b0:495:4c62:9d43 with SMTP id 5b1f17b1804b1-49573d1ff7bmr72020495e9.34.1784883863694;
+        Fri, 24 Jul 2026 02:04:23 -0700 (PDT)
 Received: from localhost ([2a01:e0a:3c5:5fb1:e584:93af:f3aa:2c19])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4957afb4e48sm56146715e9.13.2026.07.24.02.04.20
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4957af6b049sm62081735e9.6.2026.07.24.02.04.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jul 2026 02:04:20 -0700 (PDT)
+        Fri, 24 Jul 2026 02:04:23 -0700 (PDT)
 From: Jerome Brunet <jbrunet@baylibre.com>
-Date: Fri, 24 Jul 2026 11:03:56 +0200
-Subject: [PATCH v2 5/7] clk: st: clean-up simple provider misuse of the
+Date: Fri, 24 Jul 2026 11:03:57 +0200
+Subject: [PATCH v2 6/7] clk: tegra: clean-up simple provider misuse of the
  consumer API
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -71,7 +71,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260724-clk-provider-simple-clean-v2-5-56f306156d25@baylibre.com>
+Message-Id: <20260724-clk-provider-simple-clean-v2-6-56f306156d25@baylibre.com>
 References: <20260724-clk-provider-simple-clean-v2-0-56f306156d25@baylibre.com>
 In-Reply-To: <20260724-clk-provider-simple-clean-v2-0-56f306156d25@baylibre.com>
 To: Andrew Lunn <andrew@lunn.ch>, 
@@ -90,20 +90,20 @@ Cc: linux-arm-kernel@lists.infradead.org, linux-clk@vger.kernel.org,
  linux-tegra@vger.kernel.org, linux-omap@vger.kernel.org, 
  Jerome Brunet <jbrunet@baylibre.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3497; i=jbrunet@baylibre.com;
- h=from:subject:message-id; bh=8ScTk5smx7gkl/cV62c2yigppOTQ+FIzCJYYFT90JYU=;
- b=owEBbQKS/ZANAwAKAeb8Dxw38tqFAcsmYgBqYyqBKY9/Vk8kDgE398fs0o059XkEvxbFDk0sc
- 0pKxCS2UE2JAjMEAAEKAB0WIQT04VmuGPP1bV8btxvm/A8cN/LahQUCamMqgQAKCRDm/A8cN/La
- he3VD/4xcO2E6eu/4/OSXYGa7ndR/i5CWeM9fueSz9wfG+wRyrWEUUaO+rnqwnI1gajCZyEFGc3
- lrU2E+AlDn2a4Y8V6x7kWA2qkMV0jWm6v9aIN7PNqscHa1ps2NMnYCwIdJTDFbwp177j2mDf5x+
- nHdtLUMoFs0y42p3Tv+wg7SQ723imZaR/f/oUgQlLk3uO7l94PQDgI7w74VeIyYMxz5yhVnID74
- 6kxXBzfkfuEI+QfGLXK538H/gYeDNRkr36r78UPmD+6ESFLDTiYFsd1s3oLXcYL+qIGMVaXHQqp
- 2lSyciBUSIavwAvhDlkWoW6CNCrzRgiW5OjFedzsQS7zYynC+DgjCgskuhjTRjg0IyYS6tZ2+s+
- AJDXpBIEMOiXimegNz//Pq8hXRia9Y4WoEWBq7LD4qvTGiMKee5+xaQyeVstIObFsBIzxQBuJ+k
- me9loWvo79YxRs3X2Rgs9e91OiIE9TTtwMWgdTCYPQgx21ZuiYdxVeZETunwKFIE7XEOX6QNEu7
- 2U5n/3SUr1+jp0T3YdDlW0rYPvpgkLSSf4FXWI0Rn5oiuaNejA9bmWtwqpixcWAJephSit/g6i6
- I1EfAGP3kaJ/LglQYCO0b0cJt9qrL2XRipEYQdiGKUZcmtYrko1tUcwe1o0EPmtphuD+4WMyP7r
- 86NGuAW7RKxaWLw==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1061; i=jbrunet@baylibre.com;
+ h=from:subject:message-id; bh=avXrZ+5B5tjwtUKvf/CVoHvEaPEqaWPpS7ZwUFxswLY=;
+ b=owEBbQKS/ZANAwAKAeb8Dxw38tqFAcsmYgBqYyqC3CQlE9ZZIVg5FO31DSHE8VYccHPXetZHC
+ CBbG7T1HaCJAjMEAAEKAB0WIQT04VmuGPP1bV8btxvm/A8cN/LahQUCamMqggAKCRDm/A8cN/La
+ hdLjEACXqz7q4lL8DurbW6pS/HNGz1tLg+/2ZSOd2a7o3s1z2YOBOJHX5vpJFLW/nIYJQw5So1e
+ bjWoWmm6BY5JCwtK8uqJ2bemWRXcpKLvIlUZY0FVmgQESFPtFI6OdwKwVPkWbdp0eS6LCSh/q6G
+ JuMStoA3PBKgBu53Ve6ciKUHdiiBoMmgvHq0BSCaqIGndaJkgfdg4XuoiI/jJm6AzgtMB/1nUqs
+ jbtnez8Ei4l7beEGIPt0nkoY3Nkfb+0yB+/jwtJ6N0qPr6whsRWIHOAdwMqA8Iq1+REmschxKZG
+ rXPy0b12PE93ipjZMtunqFaT6XGz/iBiZRfZ1C5sGRIKSwh58YEZyIJDtz4lXRKejKn9ziciY/R
+ JzXZTezQ7P2U3Wzw8rE957D+tus8PvY0lrAY8jzO6MQ6Xm9T7WbR6OP7GtkdQMOKn0NLEShvhbe
+ oVzeAVhbWJXuikQDeKeq6wN+DATSFxT/BCw9z1g0PPQ4DuJoYiOXw0DbuoIL/1ar9IvnWpzAWzv
+ +YYi227ullORrzbQ225A5CHiau0GS0MokdcCulaJSeznIQwGVMkbJy6v0tlxRii8q2Qtb9CCoQI
+ rqGyS2+E25eCLne9dNnKOrjnKPB1NUFEawcRFsnJ1o1K+N0G+eiJ5YPh5DcnSVvF1h1Kl0VzA/E
+ k1+4dgdZ/1iNGHQ==
 X-Developer-Key: i=jbrunet@baylibre.com; a=openpgp;
  fpr=F29F26CF27BAE1A9719AE6BDC3C92AAF3E60AED9
 
@@ -116,97 +116,21 @@ consumer interface and corresponding clk_hw interface exist.
 Reviewed-by: Brian Masney <bmasney@redhat.com>
 Signed-off-by: Jerome Brunet <jbrunet@baylibre.com>
 ---
- drivers/clk/st/clkgen-pll.c | 20 ++++++++++----------
- 1 file changed, 10 insertions(+), 10 deletions(-)
+ drivers/clk/tegra/clk-tegra210.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/clk/st/clkgen-pll.c b/drivers/clk/st/clkgen-pll.c
-index 9eb2cb83fa69..17551c6a879a 100644
---- a/drivers/clk/st/clkgen-pll.c
-+++ b/drivers/clk/st/clkgen-pll.c
-@@ -260,7 +260,7 @@ static int __clkgen_pll_enable(struct clk_hw *hw)
- 		if (pll->data->switch2pll_en)
- 			CLKGEN_WRITE(pll, switch2pll, 0);
+diff --git a/drivers/clk/tegra/clk-tegra210.c b/drivers/clk/tegra/clk-tegra210.c
+index 0c86cff719e3..df1d7b471745 100644
+--- a/drivers/clk/tegra/clk-tegra210.c
++++ b/drivers/clk/tegra/clk-tegra210.c
+@@ -1460,7 +1460,7 @@ static int tegra210_pllx_dyn_ramp(struct tegra_clk_pll *pllx,
+ 	udelay(1);
  
--		pr_debug("%s:%s enabled\n", __clk_get_name(hw->clk), __func__);
-+		pr_debug("%s:%s enabled\n", clk_hw_get_name(hw), __func__);
- 	}
- 
- 	return ret;
-@@ -295,7 +295,7 @@ static void __clkgen_pll_disable(struct clk_hw *hw)
- 
- 	CLKGEN_WRITE(pll, pdn_ctrl, 1);
- 
--	pr_debug("%s:%s disabled\n", __clk_get_name(hw->clk), __func__);
-+	pr_debug("%s:%s disabled\n", clk_hw_get_name(hw), __func__);
- }
- 
- static void clkgen_pll_disable(struct clk_hw *hw)
-@@ -405,14 +405,14 @@ static int stm_pll3200c32_determine_rate(struct clk_hw *hw,
- 					&req->rate);
- 	else {
- 		pr_debug("%s: %s rate %ld Invalid\n", __func__,
--			 __clk_get_name(hw->clk), req->rate);
-+			 clk_hw_get_name(hw), req->rate);
- 		req->rate = 0;
- 
- 		return 0;
- 	}
- 
- 	pr_debug("%s: %s new rate %ld [ndiv=%u] [idf=%u]\n",
--		 __func__, __clk_get_name(hw->clk),
-+		 __func__, clk_hw_get_name(hw),
- 		 req->rate, (unsigned int)params.ndiv,
- 		 (unsigned int)params.idf);
- 
-@@ -434,7 +434,7 @@ static int set_rate_stm_pll3200c32(struct clk_hw *hw, unsigned long rate,
- 		clk_pll3200c32_get_rate(parent_rate, &params, &hwrate);
- 
- 	pr_debug("%s: %s new rate %ld [ndiv=0x%x] [idf=0x%x]\n",
--		 __func__, __clk_get_name(hw->clk),
-+		 __func__, clk_hw_get_name(hw),
- 		 hwrate, (unsigned int)params.ndiv,
- 		 (unsigned int)params.idf);
- 
-@@ -547,7 +547,7 @@ static unsigned long recalc_stm_pll4600c28(struct clk_hw *hw,
- 
- 	clk_pll4600c28_get_rate(parent_rate, &params, &rate);
- 
--	pr_debug("%s:%s rate %lu\n", __clk_get_name(hw->clk), __func__, rate);
-+	pr_debug("%s:%s rate %lu\n", clk_hw_get_name(hw), __func__, rate);
- 
- 	return rate;
- }
-@@ -562,14 +562,14 @@ static int stm_pll4600c28_determine_rate(struct clk_hw *hw,
- 					&req->rate);
- 	} else {
- 		pr_debug("%s: %s rate %ld Invalid\n", __func__,
--			 __clk_get_name(hw->clk), req->rate);
-+			 clk_hw_get_name(hw), req->rate);
- 		req->rate = 0;
- 
- 		return 0;
- 	}
- 
- 	pr_debug("%s: %s new rate %ld [ndiv=%u] [idf=%u]\n",
--		 __func__, __clk_get_name(hw->clk),
-+		 __func__, clk_hw_get_name(hw),
- 		 req->rate, (unsigned int)params.ndiv,
- 		 (unsigned int)params.idf);
- 
-@@ -591,12 +591,12 @@ static int set_rate_stm_pll4600c28(struct clk_hw *hw, unsigned long rate,
- 		clk_pll4600c28_get_rate(parent_rate, &params, &hwrate);
- 	} else {
- 		pr_debug("%s: %s rate %ld Invalid\n", __func__,
--			 __clk_get_name(hw->clk), rate);
-+			 clk_hw_get_name(hw), rate);
- 		return -EINVAL;
- 	}
- 
- 	pr_debug("%s: %s new rate %ld [ndiv=0x%x] [idf=0x%x]\n",
--		 __func__, __clk_get_name(hw->clk),
-+		 __func__, clk_hw_get_name(hw),
- 		 hwrate, (unsigned int)params.ndiv,
- 		 (unsigned int)params.idf);
+ 	pr_debug("%s: dynamic ramp to m = %u n = %u p = %u, Fout = %lu kHz\n",
+-		 __clk_get_name(pllx->hw.clk), cfg->m, cfg->n, cfg->p,
++		 clk_hw_get_name(&pllx->hw), cfg->m, cfg->n, cfg->p,
+ 		 cfg->input_rate / cfg->m * cfg->n /
+ 		 pllx->params->pdiv_tohw[cfg->p].pdiv / 1000);
  
 
 -- 
