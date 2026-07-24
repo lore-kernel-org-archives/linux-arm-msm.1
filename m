@@ -1,114 +1,176 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1174A3B8BD8
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:29:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4BA741D621
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:34:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784885386; cv=none; b=fRRJULZius+e3vDGhbcQ+iSInvLqHm/aQqwavlBrZRO4eTym9Wm2glo7hSWA+2TOsItqNWLVEdqmUbba4kmees/IU3hsRAIEXl2eG4bGBJutD/z2hh4YPNqHiDy2a4UIgMC4SZxgotpnsQhbmMcRwDXP0ZSbisk6R/v/U4XJDJI=
+	t=1784885661; cv=none; b=o9syd0/cCILA/ePrQBa+HNUXJdGNBaKFqv2Wvdih8ib/PVYGsTGjzf2mJFtGiBlXGBMr7OD5ya0ygE/Sx/mVW/MmqpQj1aFaAddHenu3lkyElqY7Y4xulTtXYPfGXzpCLf8eTSS5lbGBnVGyW+uZb2YXvppqh5GqjaT9NgWAhXk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784885386; c=relaxed/simple;
-	bh=3D237D5nRqioEUEB3IKGM2oHncuhk0bMN6FQxAbS1TQ=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=SrOL0x9shQmb+VqSsiRwRKW4VcmsysatVENRV3KBecmqRND3Q2tdF3VNqFYhVIelsLi+rVhwE6bf2Bwee8zOyPt/KoKR25BiMQORe9rkgCCRR9LiOZT7qNAfjZBh0F96tnY5JiquM1XTQUZkarEhvUyivTA2f/hdsYNjrhloQCk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=foILZPri; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784885661; c=relaxed/simple;
+	bh=eEHYVO+8SMp72Aikf1BTPb+z+tN7m8Nqaiq2j1hpizo=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=edWrpltg7xMjBzFmSTl/5M3p1TbapqOlkJxGT5fYvHW7sOL6foRcDl74pX9r/F1DnRcMyRSqsfWmV26Zl3f2+6OgDdJE7zh0p0uE5HsYwyRUE+6JlpPkcN7sNWo52HngttIARCEc0sqy9VOiTIpXo+Pl37HPlT8HuM1IqY9W1sk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=D+6JRBKx; arc=none smtp.client-ip=209.85.221.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="foILZPri"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD1E91F00A3A
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:29:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784885384;
-	bh=XlNU1Or4l5o+0AThB881QO3Q6R/MIqKOg4LBnIwykJY=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=foILZPri5l4otgeJKEYXmq/gKGllx0r6qMcy7EaribQT8w8x4q8sPkPnKsDCzIMXV
-	 K8NdFIQWR9fHwCgN9qz+NTadQ+KIL6vQViOGlGT4nNJOSVCt21oCFO2lEbv8HuoVq8
-	 ck1l9Cp37i/Ec2XwUD0IazGGzM65xyyvNJf1EpOIrXzlL0iuXas8+/de+t+Wfmjigm
-	 dJCjc6y3qxZ0GbXSWmV/yZaPMY5LSdWEIuKDQObqsa6kegbnKkOnMWh3TmfIhFwtub
-	 yrJcVgBEf8WriD1anJ87cmihu7pKQl6hs59mM5UAbYLMImeQVXsxc0MV4uSmMB4GvW
-	 j20MD9yIut/QA==
-Received: by mail-lf1-f49.google.com with SMTP id 2adb3069b0e04-5b01146b205so128788e87.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 02:29:44 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rp/EwKRBinZbnV/ktk9z6q0qdkBx9YaRQwat4oMd0Hy1bdtvJOG0Rund04PqyZiswWtQ1hWa07onEwEIPJa@vger.kernel.org
-X-Gm-Message-State: AOJu0Yybbl/WY+GgVH3QLGLM2LdU8n0FQxxaVvvjt1wx27JLxfvAXSLL
-	W1qRobnyQULTnbnrjtmxGJe9QmiY1TRWLZyx879BYPM5eXgvuF9QvuauDfLC6m/t1vJW1GZIljS
-	JDaGOcYZG26IvDJW53xxjNNfyMIkaEYRGWkdwVwsJcw==
-X-Received: by 2002:a05:6512:669c:20b0:5ae:b357:1d1a with SMTP id
- 2adb3069b0e04-5b2b2e52e6amr870628e87.8.1784885383436; Fri, 24 Jul 2026
- 02:29:43 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="D+6JRBKx"
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-47f59f25ec4so110442f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 02:34:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1784885655; x=1785490455; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=0PTAnwhwEwXcpdKDmAEPJHxsWs8qeXebzHRT3KbsMYg=;
+        b=D+6JRBKxCsEoSSvp8OXgOzyGpSALU1msmVoKaBfZyORIU0xM9qTcm6HeNFSbpkDs6k
+         kr+UDZhf3NUQC1l4pf6RWWh59y5tG5JaJ4zmdOggzErcZ/vVHtqx102Cfif3IyPjgznb
+         hzIhspF5MEuT5aZ9bkYKW91MmjlJORk7iislGf5ww50GXpvmVnue5AT88E1MiAT/Gr6b
+         Cuk8ri0uGZI3nbppZxvljdvbqY2aLAZh5S/Djsexh0aq3a2F5Odr6PQPPqKThdJ4j9BZ
+         UWDh603sQLihLeDrEAEgt5i6WFmcUZeeAabfuog3NiiZaELBjnrEDpiqUN0zNF+6PmU8
+         Gmlw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784885655; x=1785490455;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=0PTAnwhwEwXcpdKDmAEPJHxsWs8qeXebzHRT3KbsMYg=;
+        b=hZx1WBPoADy0kzG181zz8CkJzh1QQVj8C8Js98P3dKgSqmdbytWUqJCGDFAJ/ciP3i
+         242CN7D6F6Xf9agy5JzDOPdicTZP5Hq1HxTUFwW/aj9KzED3j8TAIVbR+izCWouQKq2j
+         oInUb9qGpwLKxvt0j9iAye3UG2lJFC8Lm9CTffC32gyheTd3NN47nQFQboBD70om1OF9
+         yc5htRaZ61/9kCF6TauYBkMvmD2a1sKEGF9DOrqBh2fVgOURz4JeLmYHNPUmxy6/ATbh
+         utXW0sqGXb5ypzdHiSg6PRVeSJR4Kef3HexIywoLGxzeXQH+hXcJ54frGT191qklhC8k
+         /HFQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rrom3HYdjR/8OTdBLuFkpOK+qcbl5zSnkC7+N9Yl5UWER2jXn905FHTAbHYQ68IH21AxOYP/o9+nSq1B/r0@vger.kernel.org
+X-Gm-Message-State: AOJu0YzvFziYbIdhEJh66wP0hKPyrfXguQWJlCVUbr7kKr6t7xn2UFkn
+	ScKy78KhgLTEqQJl72mfAvKuRsrQUQILRF+ASrt1bQ8SuJ7pzF44tftT3j+eKhp6enU=
+X-Gm-Gg: AR+sD13MtIRZeyC/RfdkV9/mXg6dJKcA6WEq4xpqRy652e6ATR7stTC/CDRP202CvAx
+	qXWvz8bSr1Ovso45ZSD7R1GDItXm/DipV8u7zFv+NCXS2Rh10fcjE2YlJZ+/0aIEIvjq1f54Zt/
+	CpEIq8xyjWQ3/N+x3X9/BNgoN9xAP9AGUuMwktJcZYZf0owU+lKrxT45Y2taR5vkCrUM7Sxrn23
+	PKsGoZf8Lx5JnkRK/OjftIVW5fHsrpiPQiKmMe0AYC6rtP7KYw5srTBue1eB7TS/6O+5R9T7v6G
+	QqEYnLF+6ocM1YUZJ7Vb1zvB6TZS5b2lr99et0YpKH0UIQZPXbcKdH+9/OJnMlk39H88tAXSWco
+	NMXwmaPlPnIzupoPgXNU3WWxRdfc67G4TSH2ibhCIONybpTD0t4qCm6hJ/WS8RQiju/Do/r99tz
+	A8aW5bW1P1J8Kisw==
+X-Received: by 2002:a05:6000:2906:b0:479:e2ea:3d51 with SMTP id ffacd0b85a97d-47f8da6c47amr7551647f8f.17.1784885655415;
+        Fri, 24 Jul 2026 02:34:15 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff24:7210:d8e1:da6c:62ef:6ff9])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f85c63678sm21110105f8f.29.2026.07.24.02.34.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 24 Jul 2026 02:34:14 -0700 (PDT)
+Date: Fri, 24 Jul 2026 11:34:10 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
+Cc: Stephan Gerhold <stephan@gerhold.net>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Sergey Ryazanov <ryazanov.s.a@gmail.com>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	chris.lew@oss.qualcomm.com,
+	Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+Subject: Re: [PATCH 2/2] net: wwan: qcom_bam_dmux: Alloc RX buffers as a
+ single coherent block
+Message-ID: <amMxkrW3mu48HIOr@linaro.org>
+References: <20260714-qcom-bam-dmux-vmid-ext-v1-0-3f29da7cca76@oss.qualcomm.com>
+ <20260714-qcom-bam-dmux-vmid-ext-v1-2-3f29da7cca76@oss.qualcomm.com>
+ <alXm0rp3NK62G3-3@linaro.org>
+ <c8417ff3-db92-446a-acf8-8c73c83b85de@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260724050645.223799-1-ebiggers@kernel.org> <2026072410-drained-acts-3502@gregkh>
- <CAMRc=MdJTFokXLEbJMQW3V4FAMQid50Vx3fDB+CaNGUrzX-Pwg@mail.gmail.com> <2026072412-decrease-sandbag-70a1@gregkh>
-In-Reply-To: <2026072412-decrease-sandbag-70a1@gregkh>
-From: Bartosz Golaszewski <brgl@kernel.org>
-Date: Fri, 24 Jul 2026 11:29:30 +0200
-X-Gmail-Original-Message-ID: <CAMRc=MeFoG0UXYOAqYhCiKBTs12EjX2-Bz4wDnbeYXmQA3-OaQ@mail.gmail.com>
-X-Gm-Features: AUfX_mwy71y0qLd88ygHtoEMp3d2oiZ2geN4DNt_v5rVUEAjVAH0o7dlfP4dPGc
-Message-ID: <CAMRc=MeFoG0UXYOAqYhCiKBTs12EjX2-Bz4wDnbeYXmQA3-OaQ@mail.gmail.com>
-Subject: Re: [PATCH] crypto: qce - Remove driver
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: linux-crypto@vger.kernel.org, Herbert Xu <herbert@gondor.apana.org.au>, 
-	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-kernel@vger.kernel.org, Demi Marie Obenour <demiobenour@gmail.com>, 
-	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>, 
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Eric Biggers <ebiggers@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <c8417ff3-db92-446a-acf8-8c73c83b85de@oss.qualcomm.com>
 
-On Fri, Jul 24, 2026 at 10:42=E2=80=AFAM Greg Kroah-Hartman
-<gregkh@linuxfoundation.org> wrote:
->
-> On Fri, Jul 24, 2026 at 12:36:24AM -0700, Bartosz Golaszewski wrote:
-> > I'm against removing this driver but I have a kernel driver policy ques=
-tion
-> > before I start arguing the case: If I say that I do use this driver and=
- that
-> > I volunteer to maintain it and had already started sending out fixes, c=
-an
-> > Eric still force its removal? Because in this case I can name a whole l=
-ot of
-> > drivers that I deem useless that we still keep around.
->
-> But you aren't using it if it is marked as BROKEN.  If that's not the
-> case, and it is not broken, well why is it marked that way?
->
+On Fri, Jul 24, 2026 at 10:16:31AM +0530, Vishnu Santhosh wrote:
+> 
+> On 14-07-2026 01:05 pm, Stephan Gerhold wrote:
+> > On Tue, Jul 14, 2026 at 11:02:32AM +0530, Vishnu Santhosh wrote:
+> > > On Qualcomm SoCs where the modem (e.g. the mDSP on Shikra, VMID 43 /
+> > > NAV) is the AXI master for BAM-DMUX RX transfers and the XPU enforces
+> > > per-region access control, each individually DMA-mapped RX buffer
+> > > requires its own XPU resource group (RG). With ~16 RGs available, the
+> > > 32 per-buffer dma_map_single() calls exhaust the table and the first
+> > > inbound transfer faults with an XPU violation.
+> > > 
+> > > BAM-DMUX is a singleton (exactly one instance per SoC), so the
+> > > destination VMID does not need to be a DT property; it is looked up
+> > > from the compatible string's match data instead. Add struct
+> > > bam_dmux_data with a single vmid field, and a shikra_data instance
+> > > hardcoding QCOM_SCM_VMID_NAV for qcom,shikra-bam-dmux.
+> > > 
+> > > When match data is present, allocate all BAM_DMUX_NUM_SKB RX buffers as
+> > > a single contiguous dma_alloc_coherent() block and SCM-assign that
+> > > block to HLOS plus the VMID once at probe. This reduces RG consumption
+> > > from 32 to 1. The block is never reclaimed across a modem power cycle
+> > > (bam_dmux_power_off() does not touch it), so the probe-time assignment
+> > > covers every subsequent restart without re-assigning or reclaiming. It
+> > > is reclaimed to HLOS only once, at remove or on a probe error, and if
+> > > that reclaim fails it is leaked rather than returned to the page
+> > > allocator.
+> > > 
+> > > Each rx_skbs[] slot is pre-assigned its virtual and DMA address from
+> > > the block, so no per-buffer mapping is needed at power-on. Because the
+> > > coherent block is not page-backed, received payload is copied into a
+> > > regular netdev skb before handoff to the network stack; this is an
+> > > unavoidable extra copy on the XPU-enforced RX path.
+> > > 
+> > > Platforms without match data are unaffected: rx_virt stays NULL, no
+> > > coherent memory is allocated, and the per-buffer dma_map_single() path
+> > > is unchanged.
+> > > 
+> > > Co-developed-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+> > > Signed-off-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+> > > Signed-off-by: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
+> > So how do you handle TX buffers? Right now, they are just passed on from
+> > the net subsystem. There can be up to 32 TX buffers in progress as well.
+> > 
+> > Overall, I have mixed feelings about this patch. It looks reasonably
+> > simple, but fundamentally I don't understand why we need to go back to
+> > the old days of implementing protection using a highly limited MPU (in
+> > your case: the xPU).
+> > 
+> > Why does the setup of BAM-DMUX differ e.g. from the setup for the crypto
+> > engine? Crypto is also using bam-dma, but it avoids this inflexibility
+> > by making use of the &apps_smmu. Is BAM-DMUX not covered by the SMMU? Or
+> > did you just decide to bypass the SMMU in this case? (If so: Why?)
+> 
+> I checked with secure systems team on this. Crypto BAM is
+> behind apps_smmu, so protection is enforced through the SMMU's Stage-2
+> page tables.
+> 
+> A2 BAM (used by BAM-DMUX) is present in secure domain and does not
+> support Stage-2 translation on this SoC, and there is no IOMMU domain
+> that can be attached to it. The only protection mechanism available is
+> the xPU.
+> 
 
-It was marked as BROKEN only a couple of days ago (it hasn't been
-released as BROKEN in any upstream tag yet) despite my NAK, making
-myself the maintainer for this driver and having sent the first set of
-fixes addressing crypto self-tests failures. There's a bit more
-context here. :)
+Thanks for investigating this!
 
-> > The alg priority of this driver has been decreased below that of ARM CE=
- and
-> > since CRYPTO_ALG_KERN_DRIVER_ONLY it can no longer be used accidentally=
- by
-> > user-space either.
->
-> If it can't be used, then again, who is using it?  We can't have ONLY
-> out of tree users for code that is in the kernel.  We HAVE to have
-> in-kernel users for it to stick around.
->
+So is this a hardware limitation or something you could change with a
+firmware update? Could you move the A2 BAM out of the secure domain and
+protect it via the IOMMU instead of the xPU mechanism? The other modern
+platforms with IPA do not have this limitation, they can use the IOMMU
+for this.
 
-It can't be used *accidentally*. It can still be used by in-kernel
-users if you bump its priority via netlink.
+We can try to support the xPU protection mechanism in the BAM-DMUX
+driver, but it's pretty bad from a performance and memory usage point of
+view if you need to copy buffers around multiple times. So if you have
+some way to change this in the firmware (and there is still time to do
+so before production boards ship), I would strongly recommend to
+investigate that.
 
-> > Even if in practice the driver is used for testing purposes - does this=
- warrant
-> > its removal?
->
-> testing purposes of what exactly if there is no in-kernel code that
-> calls this thing?
->
-
-Of several of the crypto accelerator IP's functionalities. But that's
-just an example. We do use it - I was just asking if if we use a
-kernel module to test HW functionality of an IP - is this enough of a
-reason to keep its driver, not taking into account things like FIPS
-140/3 certifications, etc.
-
-Bartosz
+Thanks,
+Stephan
