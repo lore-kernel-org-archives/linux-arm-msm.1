@@ -1,223 +1,361 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 506C444CAE6
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:29:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE728351C10
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:56:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784917777; cv=none; b=CLndCkdi/KvGBveFHuDbWJzItkdCOF6trET8IDSOR+VK+LCNWhM1BtKQd/ZzubZPFFSI62sFGb1JqZWFdPb4qjEgmHk68CMlWfH1nI2j3Z2GWP/JAb/McUG5vqPisfNeAbDGotezox3VJbtK0wL2DztLrKayQw3D/MFmBju5Rjg=
+	t=1784919372; cv=none; b=Yy/nnvUeunks0mSeqpdOEu4mzLd+SDcAX1lI08+e00lyWtGX0RoX+0e1hbyhsaXLWKhxr8T2rP0tRBmSikvY+Qt3x0JHjqssRD3e+NJXUAinevqcEa9ozyvus7Fz/gBN4YA0bF23w8Umw2FdISvW75VbYfNA4lVsDC9GNfa9HuA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784917777; c=relaxed/simple;
-	bh=GkHfHDQxq6kcXRftPPAVs8KKYHLSKlMYMaUrhFTu88g=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=r7201qbMAuFd7+kYtTaaHf2dnVA7EgPKFdaB7WtsxnvksjU1yT/R7MozgOw1TEcw+JfQvYD815BJjf3Whdc+mz/Q9ZTeDUvKOKfyFVnVHN18ZJPU01Fyrv9cVvh26hpsjr4Yx6Ot5c5xRS5wLWiMv8jPjvwhQy8x2Zn7GBp3+WE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PiG+F52h; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=PVcG+fM8; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1784919372; c=relaxed/simple;
+	bh=c9V0sfqfFxdMg9bjVLruyv8TQk5h66sNRxq7jaYnBb8=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=QLkmX+zeU5TsjyUC0h+tbTQNYOxDCrNz3hBe1IogPFIQqPYl5dL6gFVycfSW5AKsEIvYJ67n7pJEqPUI9/USrGDXmdI1eqkqBmXanctyDBTNk+bkVFEolXaGEIVCnI0tcCA1A1c/iB4zJ9MrV1PY1J6H0N3+W36LW+JFmV0CH10=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NyISXkki; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=B4lG925L; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PiG+F52h";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PVcG+fM8"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66OGqmxO595431
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:29:34 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NyISXkki";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="B4lG925L"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66OGr7di3628815
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:56:08 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	lFaAYGbV+xSMPR84AyNeauaa+2DTFZJgYrd5KO4zgn8=; b=PiG+F52hk+NVIPPl
-	1vlXjFxesj5mQgq0z1X0A/p/Mgi8E3d+vuwRN9kWT4ozhfvCy4mjQCVz1sirXRgj
-	gm0BVwpVZeHtSDGOxoSK7T2xYPtZdL/ZradLs0surDzeOfttmEfVN4AfXG7d+nvJ
-	8HdzWmNqtTn/aQZcgOGMsJx/YaaHP3u3Xt/jzbXYxkFtFs4WYSWbsuRJvWuM/gF6
-	jPDDA/60dFSioLk+tUdefQ/fztwxgQX/MaFvB7nA4YoPOdJjCZWLDteny6ZzxfHP
-	4EO+kLnh0SUvp2s4uumZj82ekQoFObZZA/KehabLNgGfJBNBModJe/TQmFKuk8gW
-	vxijvQ==
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fm8ck96ny-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=uhVhlXkCOsR0F6ccRTyc8u
+	L2BKxnxpaMtXK7jOWCioU=; b=NyISXkkiFYUpI3Vc+ZGSDJ4IU/UK47CbiGZcHk
+	/UxoBESD8ZvMyqE3wvMjQ3R5z5/KebJG9PaeDfdk4e4KC5/nbFWRVpM6ybvdGoO8
+	arpHUm4OG3FHHn5IWVZoV3eWMgainaRnHSCkybytzJBF6xXqWel5A6rd6XITTqaG
+	2D/gBReYEJBahh4N+qsvyB+rSCDeVajHNu5lkFdkMc9wtxtAiSugUAHIhHCPSekU
+	o8Er4f8iD3zsS8ria4NgFmB+Az5BBzbRHYX4aTWbSW/fmv+XjDL2qtZPTn+SkYeW
+	MQLlGXPUwbfxjxqm/67vkG6VmdXYVfISHaMomPH2Mmhw4XjQ==
+Received: from mail-oa1-f69.google.com (mail-oa1-f69.google.com [209.85.160.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fm5yahw7f-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:29:33 +0000 (GMT)
-Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-84e375d9736so850114b3a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 11:29:33 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:56:08 +0000 (GMT)
+Received: by mail-oa1-f69.google.com with SMTP id 586e51a60fabf-448bb8bcf38so558391fac.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 11:56:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784917773; x=1785522573; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=lFaAYGbV+xSMPR84AyNeauaa+2DTFZJgYrd5KO4zgn8=;
-        b=PVcG+fM8/NunPIpfi7NPNEgDB450ippw1vFWwNNWxj+p1k1dzXQmVbDZ8W/X56kYJW
-         Meyy2XiPTfUTT71IzLc5iEtkn7CAWttdRcygJ7ymGLU5PbGANthYDi3VDv+rElYv/6lS
-         Mmd/9JeiiabrqNBt4Pg+MmPC29Zs27v+JEuV5su8vn02ysmgKtZJvhhINynRucDILvnX
-         gxwfSd9p2xz6iUsTWcGN/6u2mcIQhu2tQqZEDNIIzQ2Xyk5iW4K2s+meBj0kT+wvpuew
-         cKj/Z3DfVbBR4gtNx6Sh5nXdrTsISWn8Jgz2EqAA85aeUFFu7BYSkEC4cKKOYR/HsyYK
-         wQnQ==
+        d=oss.qualcomm.com; s=google; t=1784919368; x=1785524168; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=uhVhlXkCOsR0F6ccRTyc8uL2BKxnxpaMtXK7jOWCioU=;
+        b=B4lG925LbGjP1ZuqQMrH0BTJ6Kihlj2R0+0MffRvxd6hD90HWdm8Eroy8Pi8T9iDvN
+         +AZ3rB39PkNcH6yEXF165GkAKka5syIET9r7WeQWCI4hqh8Z4fcafKh7GVPS+mWArb5s
+         FJ7FA/TWqUMau101rl57ijvf2MwRBgGMFqoI3DGDacW/gIt2Yt/6cBPe0Rr7wdNKJRCv
+         rhLKwrZWPHhPqJPSNzMdHySoi74PwS+3ZmdtH+8ZvB5FLY7Nfqwp0HOevrGI4lUPcpRN
+         EYbMXkkMoXkWD2NlJsQb//BHSMollx7AbnvdnMhwMuZayjQzyFicAGxe8SUMoEyvHTxE
+         A0Qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784917773; x=1785522573;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=lFaAYGbV+xSMPR84AyNeauaa+2DTFZJgYrd5KO4zgn8=;
-        b=hHuUfjgUn2xpopD4DN0kQfqYseh2gAXdX7zG3PFT6BW006tG2MBbf++CEh1R1sX/Fl
-         sCRWh0Yq55mYuWbn5fySj5h8RGDRm5hapWfKHx00E23GzCJ7h9EIcIFPg/kfW7wkNlue
-         Enr8fbI1y/IWLnbCjSVUZF6CFhXMVNMbvhdFtJNeFXIyeRtD/9bakodHOxTd3sm6X7Fr
-         2zWtJxusVmvXa/rKbWIY/R30ZeMrAyUfyRrHPWV4Q68mpGRASrF2KHkHcvuCrFWyWvC/
-         uE3kIwwNx7MKMnO9JJlKfe9tWEVniAzyYxFmfI9aOJetm9uJ5sjXN+Lff4WXa2eKr/HZ
-         LRxA==
-X-Gm-Message-State: AOJu0Yyje8GY6wSpfTVERXek7zEYkDehyG7lbCUP2kfXJjwY8xa4U6Yr
-	0UMbAVLH0ejnL6E6/cGAUNW4md7EX1A3Cs2gF/puCoHJgtSyfCNTDnTghjcPPs/XnUMUbOpjTOr
-	rvzal9Ddw+UllF8yiPuPpjeUKtIs+3GtKOERu7fhjUA9Aehf6U9o6sX/guTjkeVehpOiU
-X-Gm-Gg: AR+sD13gkavOcEYfKyb1a2390INGHyr6EoWTuKMYY3/Ncp1ISn7+q87S9ydjZp0QseK
-	MiXPae+tFich2HJkmEfZYGT0gUEYr2BT4BbTDZbcLNaYH5uQaCBOd2huk9hciuLIJFKKezs6VSt
-	zxjFfEuf+PQnDvNoZucvDkZ50bhDnvHqNA14TdGrg1/6JAgvlzDv/ohDo3OYTC18DNPS6AmsNNQ
-	XRuDbLk5t1mqCXLVLUpMc1qZvS9LkT7uII3hiKIqHnUA+GiX3N649OgMOyoFXloMxhzMSe6LnY/
-	t0xVlS4EyPxtS2V6JN3sZsnDfqaqOpXA9DnxAM/UwbO7JRZ7dZ6Pv+JYL2DnVRSBehMZn503Hme
-	NS6H52u24s0R0SRJzAWaSxBdbz4c=
-X-Received: by 2002:a05:6a20:a11b:b0:3bc:5284:4859 with SMTP id adf61e73a8af0-3c44afb4d8amr9788764637.13.1784917773190;
-        Fri, 24 Jul 2026 11:29:33 -0700 (PDT)
-X-Received: by 2002:a05:6a20:a11b:b0:3bc:5284:4859 with SMTP id adf61e73a8af0-3c44afb4d8amr9788723637.13.1784917772646;
-        Fri, 24 Jul 2026 11:29:32 -0700 (PDT)
-Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-314bc5c53f3sm1341510eec.30.2026.07.24.11.29.29
+        d=1e100.net; s=20251104; t=1784919368; x=1785524168;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=uhVhlXkCOsR0F6ccRTyc8uL2BKxnxpaMtXK7jOWCioU=;
+        b=RUdyL/zDQSsmrswWsYLmxtYWm6f4XTNrVT7FWJVvRWxpgMe3QlBFqtfPLhGjmThkF3
+         u32CbxJqxPm77i6xaDtBsGBNLvq66JK3RA9xMNYXGxueSVKxRmvDB3bfYGYHKcIjWrTP
+         UOxgQHn4LhILLoT1AVdTxf7UFoAKQp4d9O7OHIimNLH+zX/R7G49kv3ePxrO4fIUaCfS
+         vSqgDm18lN+AEr1w5jTmGPtk3V70zLFBZekuFC8NM/JBI9mL1bLyp7E3yw7bMqSW3wtc
+         oxWdbSxqa4KhRkdieVX/61XS/sq7CbOcbU9jjmWcgMbeYVMLX0kEZfkMrRIE7C+UKYAw
+         mb8w==
+X-Gm-Message-State: AOJu0YwnvdHWG+KMB/NBiMhqHIeejz5PrAmXyCCyj1t4Is1Or3RREWMf
+	DiNAtOa88uIcM17j/sR5PP8Ze8oF5NED7yikQKHpIldznaYDHXHGS6ZsiNEItmFxKVxIBs/YU1T
+	c6FZYh0Y9EMzkLP4RnfxQPiJ+6OfFg8P0ci+zZx8cyV41YaTnTxxyqs9s1DK03ATJ5GMl
+X-Gm-Gg: AR+sD11Zl/bIb+Ju7/n6ff+dGgorEowvD2ZIG4zg4/KffJj8JfoGm+Itszb1W0RAQgp
+	+cWIv4jAK7Jhf+d3Pgwhnza+hxe2gKqKjmI3Uug4ekN+r1pvZimfUpZixPF65SwfGvZe6qFZWi8
+	ITP+I9qnKcbBBayAqGukZvXoU6N+ezhASscUZ1aS3NxfdUv6z6xPJ7c8s5yJBzWLX3qgV2M75vx
+	YJgytnMWhit/JHvgPRnx2SYTRXllCYHPvn3ut6P/BCN0CDy+Ni/iyTk1sq/IiW5PwO4cnoBqqJ1
+	hzwASZiaaKeEMYo7DjJILyhBQpL4djXXe/J4L9Xx41onx+Nfp4T0jOai07gfEcROqBlyNtCTJNX
+	aFKVXCali/+2u8Vna+yk=
+X-Received: by 2002:a05:6820:208a:b0:6a1:4040:97c1 with SMTP id 006d021491bc7-6aad4161879mr5027168eaf.56.1784919367670;
+        Fri, 24 Jul 2026 11:56:07 -0700 (PDT)
+X-Received: by 2002:a05:6820:208a:b0:6a1:4040:97c1 with SMTP id 006d021491bc7-6aad4161879mr5027143eaf.56.1784919367204;
+        Fri, 24 Jul 2026 11:56:07 -0700 (PDT)
+Received: from [172.17.0.2] ([104.57.184.186])
+        by smtp.gmail.com with ESMTPSA id 006d021491bc7-6aaf8e99ff5sm559583eaf.0.2026.07.24.11.56.05
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jul 2026 11:29:32 -0700 (PDT)
-From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Sumit Garg <sumit.garg@oss.qualcomm.com>,
-        Neil Armstrong <neil.armstrong@linaro.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org,
-        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Subject: [PATCH v5 6/6] firmware: qcom: scm: introduce keep_mdt_buf flag in PAS context
-Date: Fri, 24 Jul 2026 23:58:58 +0530
-Message-ID: <20260724182858.1868271-7-mukesh.ojha@oss.qualcomm.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260724182858.1868271-1-mukesh.ojha@oss.qualcomm.com>
-References: <20260724182858.1868271-1-mukesh.ojha@oss.qualcomm.com>
+        Fri, 24 Jul 2026 11:56:06 -0700 (PDT)
+From: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+Date: Fri, 24 Jul 2026 18:56:00 +0000
+Subject: [PATCH] checkpatch: Validate committer sign-off
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDE2NiBTYWx0ZWRfX+7449X2IMJwh
- Mymjedx2LPm2zzVMTq0DD9Y5TlWy2LVrBjmeG4gYkaXBuYNfZSMGmEfKDHzXq1FAy49rj1HJ3/c
- 3kCgU/uuzY71XXfwD6p9rqrbL6tER0CyHaKXu9Jle8lWS4ZxjxETGXnEHd1iMaBDoshnzeNM9HZ
- D2/2z8V+QvGOCvb8KnyW7mqTlB5ouCV7ZRO8gOkMnDJnf3Qb6ND4rwOvsu2PTXOVItT/RjL5ykF
- 3mG3glBRilTjHC/kLNw44vBOUYDDM8dI2frBN0trUASu6HulkpkDhedq4Q73HVpw27CQG6x2ldW
- rTszXBQnb5nemoj4KzdvZGLKBfLxAOQEjgqTBsuDjZvuG3qm87SKKD0PzUxv0/1NTF4M+JGbCAz
- DtHPE8Qtq+TwxC7f/XXXHq0u0tIhG3PEOxnEUhAq/WzYA8E6Gf8sWKuzro2+qcC+UVMabx0caMw
- aV8hL3Zgj1EFGQUZ98g==
-X-Proofpoint-GUID: ZlfxZ7qIRGUalXtesHeFaZ6a2_Ifo2Aj
-X-Proofpoint-ORIG-GUID: ZlfxZ7qIRGUalXtesHeFaZ6a2_Ifo2Aj
-X-Authority-Analysis: v=2.4 cv=F79nsKhN c=1 sm=1 tr=0 ts=6a63af0e cx=c_pps
- a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260724-checkpatch-committer-sob-v1-1-68550513106b@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAD+1Y2oC/yXMQQrCMBBA0auUWTuQJiWCVxEXzWRqRmlTMlGE0
+ rsb6/It/t9AuQgrXLoNCr9FJS8N/akDSuNyZ5TYDNZYb87WISWm5zpWSkh5nqVWLqg5YG8mCtE
+ 7HwcHLV8LT/I51tfb3/oKD6b6+8G+fwHD3giofAAAAA==
+X-Change-ID: 20260723-checkpatch-committer-sob-10fcbd636d43
+To: Dwaipayan Ray <dwaipayanray1@gmail.com>,
+        Lukas Bulwahn <lukas.bulwahn@gmail.com>, Joe Perches <joe@perches.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Andy Whitcroft <apw@canonical.com>
+Cc: linux-arm-msm@vger.kernel.org, workflows@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7213;
+ i=bjorn.andersson@oss.qualcomm.com; h=from:subject:message-id;
+ bh=c9V0sfqfFxdMg9bjVLruyv8TQk5h66sNRxq7jaYnBb8=;
+ b=owEBfAKD/ZANAwAKAQsfOT8Nma3FAcsmYgBqY7VFceFBjfIxK8PPdsO40gVQtS5n8/i/s19Or
+ dGpgShB69WJAkIEAAEKACwWIQQF3gPMXzXqTwlm1SULHzk/DZmtxQUCamO1RQ4cYmpvcm5Aa3J5
+ by5zZQAKCRALHzk/DZmtxVcmEACEmQv4L9lQ0G4F7wheIs5mP7TeG3QjQZ9JrnVuBz47sIxPAiB
+ OaFnjIz/ET16IZ6KDlV7CFixi1QZmVI4aRtl3pl8pTPc5k3DSECh9IGi7qTpaJpNj07/k9tZmCP
+ ofOtIcg/N5k4RUEV7tZYcEr9PeKSO3KfRZstCadYJ5YeBxcRBJMCa1Sfazd1wExGK2THmQb9ksS
+ nT7i5C33WXWoHpYdL1k1oRvCpzg+MJLntmNoh78lFgOyJHQD26Ji3jBUAwylFSok9vvC81ozpqV
+ ZlwD4/IJloKkExirgOJGzfUNeaefjOI6kc5xb2F03UbU/cB6mDsfaDj3SXckUj84yUojuzOyWCP
+ qtefbSLEEhJEFe6OYgLdxE2b5G+IWBDDLd/yBUlydnkuNp00lq7X3tbySaL5DESLdz690tekv8U
+ ksqXqbZVhqw6yNpDVQcHi2hJTqzgmTydksWBUl9vJOyg94C+lZnHkR4tRqxucEYIF4SroGscUIE
+ YP08UGnZi7lZ5hTLH2QdQi5xBZ2TTnzI7BWjud/w2E4itRO7Q/mUqlw6UaGIvfhlTdRiUy5sQS+
+ 6G0sAOKC1tySnhU2Whah78Rd3wHnQ18ZuBE5HUirAU/dji8S0UrG34ybz8g6LYt8Np4lI5VMyXw
+ 18i58OcSubA++ZK3EV+MKin7BUUbIPZm48w==
+X-Developer-Key: i=bjorn.andersson@oss.qualcomm.com; a=openpgp;
+ fpr=05DE03CC5F35EA4F0966D5250B1F393F0D99ADC5
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDE3MCBTYWx0ZWRfX66n9Bpc8kRV0
+ DEYkM1pMrMQMQG9uDS7+LYOEH1QuFtGNnTvNoh0XZ2ppQu5fFHuNXExYBtBJEds24GyNFjepObk
+ /2C/IO9D5PuGUrELLkZqkKQ2Byt2NYE=
+X-Authority-Analysis: v=2.4 cv=Rtz16imK c=1 sm=1 tr=0 ts=6a63b548 cx=c_pps
+ a=zPxD6eHSjdtQ/OcAcrOFGw==:117 a=DaeiM5VmU20ml6RIjrOvYw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=g7xFvzIaMl2GvowGQBkA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=zc0IvFSfCIW2DFIPzwfm:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDE2NiBTYWx0ZWRfX8YTiKye6IDBH
- sSpo4Ny+B53OrVg/lAOaMzPL4RJDmmWZ4WAw+Q2yShNByXSVeJmMNvGLXzKXUpCz6gFkz+//qe/
- Zkns3oGAH1XPfWOyzldO2+9bc34RasU=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=CCtDUpZfQFSzZZKND2oA:9 a=QEXdDO2ut3YA:10
+ a=y8BKWJGFn5sdPF1Y92-H:22
+X-Proofpoint-GUID: oAE9WEHaThTQk9jgPwD2kGsIutbEYI0T
+X-Proofpoint-ORIG-GUID: oAE9WEHaThTQk9jgPwD2kGsIutbEYI0T
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDE3MCBTYWx0ZWRfX/pxMvvNlYvuy
+ DvSIC0fqSxXf8JpbB4WQGL72oHDBoWZyiLzObKbbMeSA4o/g5tbziUMnXwMFN0VArJxJ3yzMnPb
+ Y/f8M1VIgmzXuFYlLK/iDgDbk1WdXn5FlhPZiVR48VWmMCpFn8lMxCo+p57nYme6TYpZJwRIu+X
+ 7FziMxc9SguhoyiBd8pIVIVexR9RBSLSl73O4HYdEekEazJi6uMR1CSGovglFA2Cx6yFvqKJ665
+ B1hX9sWsaGQ5tTfp8s/+EWKZE5X47U3zRSpwZ/WCFGWyy5xG7KvQZWZ1PD3LtB1BLtA50nIgan0
+ 9ftW04b33bcehqtW2SF4qoPnoI8ZHSR2NRlZcYsMXOEjWkYG8TVP0AyKWOaNc2O/oyQtc00Yoz5
+ 2wqemLVHG3a/4HrGzVJzMy0NoQQJjUKT0z4oyb5HWlLHc8pg1FR3fq+dP/2fYWErAv+SYhim88F
+ cYbINRlgYrczUz+J/2w==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-24_04,2026-07-24_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 adultscore=0 clxscore=1015 lowpriorityscore=0
- phishscore=0 suspectscore=0 spamscore=0 impostorscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607240166
+ impostorscore=0 phishscore=0 priorityscore=1501 suspectscore=0
+ lowpriorityscore=0 bulkscore=0 spamscore=0 malwarescore=0 clxscore=1015
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607240170
 
-The PAS image initialization path always retains the metadata buffer
-when a valid qcom_scm_pas_context is provided, even if the caller does
-not require it. This implicit behavior leads to unclear buffer ownership
-and forces new users of qcom_mdt_pas_load() to manually release
-metadata, which is error‑ prone and incorrect.
+checkpatch validates the Signed-off-by trailers against the patch's
+author, but misses the opportunity to also validate the committer when
+run with --git. Maintainers therefor need third-party scripts for the
+final Signed-off-by check.
 
-Add a keep_mdt_buf flag to struct qcom_scm_pas_context to make metadata
-retention explicit.  Metadata buffers are now freed by default and are
-only preserved when this flag is set. qcom_q6v5_pas enables this during
-probe for contexts that require retained metadata for subsequent PAS
-operations, while existing callers continue to work unchanged.
+git format-patch provides the author and patch content, but not the
+committer. Extend the existing git log extraction to record the
+committer identity.
 
-Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Extract the author sign-off comparison logic into a shared helper, and
+use it to apply the same heuristics to the final Signed-off-by trailer
+and committer.
+
+Emit COMMITTER_SIGN_OFF_MISMATCH when the final trailer does not match
+the committer.
+
+Assisted-by: OpenCode:GPT-5.5
+Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
 ---
- drivers/firmware/qcom/qcom_scm.c       | 18 +++++++++++++++---
- drivers/remoteproc/qcom_q6v5_pas.c     |  3 +++
- include/linux/firmware/qcom/qcom_pas.h |  1 +
- 3 files changed, 19 insertions(+), 3 deletions(-)
+ Documentation/dev-tools/checkpatch.rst |   5 ++
+ scripts/checkpatch.pl                  | 112 ++++++++++++++++++++++-----------
+ 2 files changed, 82 insertions(+), 35 deletions(-)
 
-diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
-index 16ae42e6c434..54ffec97cc26 100644
---- a/drivers/firmware/qcom/qcom_scm.c
-+++ b/drivers/firmware/qcom/qcom_scm.c
-@@ -625,7 +625,7 @@ static int qcom_scm_pas_prep_and_init_image(struct device *dev,
- 	mdata_phys = qcom_tzmem_to_phys(mdata_buf);
+diff --git a/Documentation/dev-tools/checkpatch.rst b/Documentation/dev-tools/checkpatch.rst
+index 6139a08c34cd..7726c3863bcc 100644
+--- a/Documentation/dev-tools/checkpatch.rst
++++ b/Documentation/dev-tools/checkpatch.rst
+@@ -562,6 +562,11 @@ Commit message
+       - The email subaddresses do not match.
+       - The email comments do not match.
  
- 	ret = __qcom_scm_pas_init_image(dev, ctx->pas_id, mdata_phys, &res);
--	if (ret < 0)
-+	if (ret < 0 || !ctx->keep_mdt_buf)
- 		qcom_tzmem_free(mdata_buf);
- 	else
- 		ctx->ptr = mdata_buf;
-@@ -664,9 +664,21 @@ static int qcom_scm_pas_init_image(struct device *dev, u32 pas_id,
- 	memcpy(mdata_buf, metadata, size);
- 
- 	ret = __qcom_scm_pas_init_image(dev, pas_id, mdata_phys, &res);
--	if (ret < 0 || !ctx) {
++  **COMMITTER_SIGN_OFF_MISMATCH**
++    When checking a Git commit, the final Signed-off-by: line does not match
++    the commit's committer.  The person committing a patch should add their
++    own Signed-off-by: line last.
 +
-+	/*
-+	 * Some clients still pass the PAS context as NULL. Until all clients
-+	 * switch to qcom_mdt_pas_load() and provide a valid PAS context, check
-+	 * for NULL before dereferencing it.
-+	 *
-+	 * When a valid context is provided, keep_mdt_buf controls whether the
-+	 * metadata buffer is retained after PAS_INIT. PAS remoteproc subsystems
-+	 * set this flag so metadata persists until auth_and_reset() completes,
-+	 * as TrustZone keeps the buffers locked until then. Other callers leave
-+	 * it unset and metadata is freed immediately after the PAS_INIT call.
-+	 */
-+	if (ret < 0 || !ctx || !ctx->keep_mdt_buf) {
- 		dma_free_coherent(dev, size, mdata_buf, mdata_phys);
--	} else if (ctx) {
-+	} else {
- 		ctx->ptr = mdata_buf;
- 		ctx->phys = mdata_phys;
- 		ctx->size = size;
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index 0391e30f42ba..38e6f6019825 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -722,6 +722,7 @@ static int qcom_pas_alloc_memory_region(struct qcom_pas *pas)
- 	if (IS_ERR(pas->pas_ctx))
- 		return PTR_ERR(pas->pas_ctx);
- 
-+	pas->pas_ctx->keep_mdt_buf = true;
- 	if (!pas->dtb_pas_id)
- 		return 0;
- 
-@@ -740,6 +741,8 @@ static int qcom_pas_alloc_memory_region(struct qcom_pas *pas)
- 	if (IS_ERR(pas->dtb_pas_ctx))
- 		return PTR_ERR(pas->dtb_pas_ctx);
- 
-+	pas->dtb_pas_ctx->keep_mdt_buf = true;
-+
- 	return 0;
+   **MISSING_SIGN_OFF**
+     The patch is missing a Signed-off-by line.  A signed-off-by
+     line should be added according to Developer's certificate of
+diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+index 7a846a3ea127..0e1bff241597 100755
+--- a/scripts/checkpatch.pl
++++ b/scripts/checkpatch.pl
+@@ -37,6 +37,7 @@ my $showfile = 0;
+ my $file = 0;
+ my $git = 0;
+ my %git_commits = ();
++my %git_committers = ();
+ my $check = 0;
+ my $check_orig = 0;
+ my $summary = 1;
+@@ -1317,14 +1318,16 @@ if ($git) {
+ 		} else {
+ 			$git_range = "-1 $commit_expr";
+ 		}
+-		my $lines = `${git_command} log --no-color --no-merges --pretty=format:'%H %s' $git_range`;
++		my $lines = `${git_command} log --no-color --no-merges --pretty=format:'%cn <%ce> %H %s' $git_range`;
+ 		foreach my $line (split(/\n/, $lines)) {
+-			$line =~ /^([0-9a-fA-F]{40,40}) (.*)$/;
+-			next if (!defined($1) || !defined($2));
+-			my $sha1 = $1;
+-			my $subject = $2;
++			$line =~ /^(.* <[^>]+>) ([0-9a-fA-F]{40,40}) (.*)$/;
++			next if (!defined($1) || !defined($2) || !defined($3));
++			my $committer = $1;
++			my $sha1 = $2;
++			my $subject = $3;
+ 			unshift(@commits, $sha1);
+ 			$git_commits{$sha1} = $subject;
++			$git_committers{$sha1} = $committer;
+ 		}
+ 	}
+ 	die "$P: no git commits after extraction!\n" if (@commits == 0);
+@@ -1530,6 +1533,43 @@ sub same_email_addresses {
+ 	       $comment1 eq $comment2;
  }
  
-diff --git a/include/linux/firmware/qcom/qcom_pas.h b/include/linux/firmware/qcom/qcom_pas.h
-index fb2ec3be6a16..1d132e89536e 100644
---- a/include/linux/firmware/qcom/qcom_pas.h
-+++ b/include/linux/firmware/qcom/qcom_pas.h
-@@ -22,6 +22,7 @@ struct qcom_pas_context {
- 	dma_addr_t phys;
- 	ssize_t size;
- 	bool use_tzmem;
-+	bool keep_mdt_buf;
- };
++sub signoff_match_status {
++	my ($signoff, $identity) = @_;
++	my $authorsignoff = 0;
++
++	if (same_email_addresses($signoff, $identity)) {
++		$authorsignoff = 1;
++	} else {
++		my ($signoff_name, $signoff_comment, $signoff_address, $comment1) = parse_email($signoff);
++		my ($identity_name, $identity_comment, $identity_address, $comment2) = parse_email($identity);
++
++		if (lc $signoff_address eq lc $identity_address &&
++		    $signoff_name eq $identity_name) {
++			$authorsignoff = 2;
++		} elsif (lc $signoff_address eq lc $identity_address) {
++			$authorsignoff = 3;
++		} elsif ($signoff_name eq $identity_name) {
++			$authorsignoff = 4;
++
++			my $address1 = $signoff_address;
++			my $address2 = $identity_address;
++
++			if ($address1 =~ /(\S+)\+\S+(\@.*)/) {
++				$address1 = "$1$2";
++			}
++			if ($address2 =~ /(\S+)\+\S+(\@.*)/) {
++				$address2 = "$1$2";
++			}
++
++			if ($address1 eq $address2) {
++				$authorsignoff = 5;
++			}
++		}
++	}
++
++	return $authorsignoff;
++}
++
+ sub which {
+ 	my ($bin) = @_;
  
- static inline void __iomem *qcom_pas_ctx_map(struct qcom_pas_context *ctx)
--- 
-2.53.0
+@@ -2690,6 +2730,9 @@ sub process {
+ 	my $author = '';
+ 	my $authorsignoff = 0;
+ 	my $author_sob = '';
++	my $last_signoff = '';
++	my $committer = $git_committers{$filename} // '';
++	my $committersignoff = 0;
+ 	my $is_patch = 0;
+ 	my $is_binding_patch = -1;
+ 	my $in_header_lines = $file ? 0 : 1;
+@@ -3018,40 +3061,16 @@ sub process {
+ # Check the patch for a signoff:
+ 		if ($line =~ /^\s*signed-off-by:\s*(.*)/i) {
+ 			$signoff++;
++			$last_signoff = $1;
+ 			$in_commit_log = 0;
+ 			if ($author ne ''  && $authorsignoff != 1) {
+-				if (same_email_addresses($1, $author)) {
+-					$authorsignoff = 1;
+-				} else {
+-					my $ctx = $1;
+-					my ($email_name, $email_comment, $email_address, $comment1) = parse_email($ctx);
+-					my ($author_name, $author_comment, $author_address, $comment2) = parse_email($author);
+-
+-					if (lc $email_address eq lc $author_address && $email_name eq $author_name) {
+-						$author_sob = $ctx;
+-						$authorsignoff = 2;
+-					} elsif (lc $email_address eq lc $author_address) {
+-						$author_sob = $ctx;
+-						$authorsignoff = 3;
+-					} elsif ($email_name eq $author_name) {
+-						$author_sob = $ctx;
+-						$authorsignoff = 4;
+-
+-						my $address1 = $email_address;
+-						my $address2 = $author_address;
+-
+-						if ($address1 =~ /(\S+)\+\S+(\@.*)/) {
+-							$address1 = "$1$2";
+-						}
+-						if ($address2 =~ /(\S+)\+\S+(\@.*)/) {
+-							$address2 = "$1$2";
+-						}
+-						if ($address1 eq $address2) {
+-							$authorsignoff = 5;
+-						}
+-					}
++				my $signoff_status = signoff_match_status($1, $author);
++				if ($signoff_status != 0) {
++					$authorsignoff = $signoff_status;
++					$author_sob = $1 if ($signoff_status != 1);
+ 				}
+ 			}
++			$committersignoff = signoff_match_status($1, $committer) if ($committer ne '');
+ 		}
+ 
+ # Check for invalid patch separator
+@@ -7901,6 +7920,29 @@ sub process {
+ 			}
+ 		}
+ 	}
++	if ($is_patch && $has_commit_log && $chk_signoff &&
++	    $committer ne '' &&
++	    $last_signoff ne '' &&
++	    $committersignoff != 1) {
++		my $sob_msg = "'Committer: $committer' != 'Signed-off-by: $last_signoff'";
++
++		if ($committersignoff == 2) {
++			CHK("COMMITTER_SIGN_OFF_MISMATCH",
++			    "Committer:/Signed-off-by: email comments mismatch: $sob_msg\n");
++		} elsif ($committersignoff == 3) {
++			WARN("COMMITTER_SIGN_OFF_MISMATCH",
++			     "Committer:/Signed-off-by: email name mismatch: $sob_msg\n");
++		} elsif ($committersignoff == 4) {
++			WARN("COMMITTER_SIGN_OFF_MISMATCH",
++			     "Committer:/Signed-off-by: email address mismatch: $sob_msg\n");
++		} elsif ($committersignoff == 5) {
++			WARN("COMMITTER_SIGN_OFF_MISMATCH",
++			     "Committer:/Signed-off-by: email subaddress mismatch: $sob_msg\n");
++		} else {
++			WARN("COMMITTER_SIGN_OFF_MISMATCH",
++			     "Last Signed-off-by: '$last_signoff' != commit committer '$committer'\n");
++		}
++	}
+ 
+ 	print report_dump();
+ 	if ($summary && !($clean == 1 && $quiet == 1)) {
+
+---
+base-commit: 290aaf24a551d5a0dce037e3fab30820f9113a10
+change-id: 20260723-checkpatch-committer-sob-10fcbd636d43
+
+Best regards,
+--  
+Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
 
