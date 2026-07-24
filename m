@@ -1,48 +1,87 @@
-Received: from 013.lax.mailroute.net (013.lax.mailroute.net [199.89.1.16])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 152D530C629;
-	Fri, 24 Jul 2026 14:19:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=199.89.1.16
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4EC0543A7FC
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 14:22:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784902788; cv=none; b=lYfl/cj76W6kv3Gl1CY+rSjLTGC53E8qiuYexaTd/wFd8cMvtciDfusi0oyF2luhz/RXXYVPCv4ItHEpx9NXW2gHEdYm66vI9zpSNQJNXN6T0ZlvS+JzoPFuKgeoTl32FvepUjdUDaZQu6zClRPVWU5ZdwAJb3V8PgJ78ddMZPM=
+	t=1784902948; cv=none; b=OsRgrk8ooEi6CxGv+PCc+N6MQVqVt+K7S8+5ILYG2iHrxKHQcpVVgb3OHN1rDpzFNijXNVAs7CaHhJH8a8i4j4vl197KNGtOsZsa6AAaBngpeD/tMUaJGF0Gwq0IYHDAw8LfMYgVpOW+qytpw2apAHk0QvcHsLMK/che7ggEgik=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784902788; c=relaxed/simple;
-	bh=oDE76LGcD44mptApTkiR+wHZmqDZpUxirwCkPpM6/0E=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=UmVywJowq72h3iD0hk194VLuInNO0hGbJJJkXlk/xo0R3JJR0FYzdFi5nFokIIdwpfEFc/s4RdX5A9UpwKi835o7aoerhc4YHtgoliFMppjYqxm3SN+3/5ACXy9irHYE9KBFDcFJC7MBbqhSZugyo3DNKiUx3JDftTvYSIFlpCo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org; spf=pass smtp.mailfrom=acm.org; dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b=GgSuLgsz; arc=none smtp.client-ip=199.89.1.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=acm.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=acm.org
+	s=arc-20240116; t=1784902948; c=relaxed/simple;
+	bh=SiicBPU5QXPJBP/Y6OP3MPdQKCvcgt1j9GtdPh9+O0o=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=dAJhi5+79WCT6T037PXJUHFDom5M3ZdUoJ6lmcUES1l2HhG73/I4lDgYn+IFC+lKanC9WiRRn662DpgJP0l2/04aIbfUmM/zkQywandnC0OcpSzKL14sMcJV07uuVkawcf9VCjAabMibbOYuEMmO2qxjz0XkaoPGJOq46/DitHk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=T7N08H6D; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kjVNhVFF; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=acm.org header.i=@acm.org header.b="GgSuLgsz"
-Received: from localhost (localhost [127.0.0.1])
-	by 013.lax.mailroute.net (Postfix) with ESMTP id 4h699Z3hpFzlfq9t;
-	Fri, 24 Jul 2026 14:19:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=acm.org; h=
-	content-transfer-encoding:content-type:content-type:in-reply-to
-	:from:from:content-language:references:subject:subject
-	:user-agent:mime-version:date:date:message-id:received:received;
-	 s=mr01; t=1784902782; x=1787494783; bh=oDE76LGcD44mptApTkiR+wHZ
-	mqDZpUxirwCkPpM6/0E=; b=GgSuLgsz0wFaOU2Zmd/4CQSzTH2MKS5y+mwQ14UX
-	op8882Ya6XojlwSzt9RUgLnqCsK1cPWAqonbRPppS9C4fdOx0bxbRV/rQ2UwUzjs
-	aAxP3lI+6qNSWP6Ho1UdCmQ0I0AHq/dxvmk2n7jAtFc6wyjJVEIEGK6Y7VuHBbir
-	hB2OVdWc9k7VA8pEDn1B+EiWPGFzOIgxP2BHArYpkcS5hTPRsuHhV9r3w/8V2pPr
-	+467+bHvUuEAe8+TM2PAq0TBIbY/PTTt9skN1MsFspddwqzNNRFq+vpKqwH5w7tc
-	MF3/UqfX5u2SzrH9NR1xmPgwk9GVwkl34koFNbePMjag3w==
-X-Virus-Scanned: by MailRoute
-Received: from 013.lax.mailroute.net ([127.0.0.1])
- by localhost (013.lax [127.0.0.1]) (mroute_mailscanner, port 10029) with LMTP
- id a_4a_GbfdtpO; Fri, 24 Jul 2026 14:19:42 +0000 (UTC)
-Received: from [192.168.50.14] (c-73-231-117-72.hsd1.ca.comcast.net [73.231.117.72])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	(Authenticated sender: bvanassche@acm.org)
-	by 013.lax.mailroute.net (Postfix) with ESMTPSA id 4h699Q3s7xzlfq9R;
-	Fri, 24 Jul 2026 14:19:38 +0000 (UTC)
-Message-ID: <a1d56354-a556-4e47-875e-e6a079fd4938@acm.org>
-Date: Fri, 24 Jul 2026 07:19:34 -0700
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="T7N08H6D";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kjVNhVFF"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66OEHRl13467860
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 14:22:25 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	Qq+5HQhCZYPHRe9K+GkskIP8n/de4bd59tspZT/HD5g=; b=T7N08H6Dveazr3H0
+	TRI92VgrnYOorbW5cYO5aBygzqSlRCkUuITQzXnnE2sGzivu2l8ha7g//eq6CAQe
+	Ff7It4qOjCcvMWqsH82vDcw5GI0V/S0dgf7FhkhJJoQwO2ZLqx+mMAOyDbXvOCYr
+	dtEgUxpMG2XnOpEkYAj7bZYpwdokqzWLYAXI/uSwzhqg9CAB+pSsmyyC+AStgvit
+	G80+mzg9FVHNeRW04bWu3QxUZiOeKwVaLQMPQvpWrJUwW4MrNmvsNMzpEzXrZGUv
+	BDD2l8jhWDTz52e94SClDIMl6wORnEj1+Sm60mXa+jx6jkVsmSiFs+N/k/kBVYaM
+	KxyK/g==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fm9pd00wp-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 14:22:25 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51a8b0a08d2so6212411cf.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 07:22:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784902944; x=1785507744; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Qq+5HQhCZYPHRe9K+GkskIP8n/de4bd59tspZT/HD5g=;
+        b=kjVNhVFFzZrl+7I7Qgu+JSorN4TgR+37SPA3FoXoCvVfOkx8MKRYtaojNS+dcBUVqw
+         /O4DVF+3OjSye1ZGx3yyy+rz1S9djTvN8pigYHbITnwNgy0UyrHo38i7mVNFzpfrup1h
+         Scha5PNWnf51HulaJr+1ePITj/YrWEWBgBaqkKnSQScxd7F6GMqh55RhxbAwf56lN3xT
+         ghcK6S+e9U5rdSctIxZb7N9a4hX8ct3LiZ/6Id0UMsPpxVMvpA5i4wSxlKYMOE2kUMrd
+         6CxXCeEaJ1LRaxFGohnYCO08OFEUE1LoeQ4sYTad8AhY2omFqP1+PKYpDw1VsnGVnzRW
+         lCDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784902944; x=1785507744;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Qq+5HQhCZYPHRe9K+GkskIP8n/de4bd59tspZT/HD5g=;
+        b=BKJRvIkAzZqulVdT83Ps3jId3u+Us59gJUmOXxmrqdut9Zbn4MB8pyACGTsqU1Ibqe
+         4zlSa7N86FArWKqNPDhrb5AukEHWc6kg5dPDT2kZQmKB1zhJ/8bWI6RhY0nvADqa3S2Z
+         gdB2iPjzE6epj/86KJL55A3TO8imaDOtLV529J3PlVoc14vYLyp/ewfyjBrCweCz8O/2
+         3oVXNIwfSaUZgR8kRI4CMtrseNEgJ/SjJIXC0QeMHEadtDRxEUc22sh2zgFmQT+15opB
+         m6MNa8M/r+qOR2nsclkxe62LJyG+Ljd+sskTQ9UyCJ2nXMHvOr2ML5Bwo/0FN5KW0Sqm
+         7/+A==
+X-Forwarded-Encrypted: i=1; AHgh+RoBsvmQTlo7j5SeozFQwiI1jQ0V13X7UKvmwdHBtsW0Y4enihQ7oy5cBk1lPjC8rzYLEQ1QId4amaMoS1q8@vger.kernel.org
+X-Gm-Message-State: AOJu0YzqwKozY3JkWBe/EuU4YqOgsFtCXZb+SA736D0BmRWnzqWzAukW
+	3qwB1Gou47wvUZawVrlc9RK5re6xJrX7enX+1WE73qfvq/mAuGC26ntvv6q220DQRCy74eRKRma
+	+5yrzcT3+ZaKg3JXf4V7u6DKPVnvrIKBvG01hwqOLNgLP7dBPszCgUSaFDfmCX+r6EnOx
+X-Gm-Gg: AR+sD11HZUeYd37BPu1a3v5/VVkOMkYoXP4KKR7mmCOvcW/ZATO+ORwWNbgs8Mvi8rN
+	CP6DeYSrWw42vYdqv65N3YwX0fKwFLn6N60Yb+UUx5rzpWJE5SY4kQShTjGDiz+EbKAMq98Hkn6
+	0ONzMGpR9UtmpHzFLlQWs7gkBUMjbcg2Uw0DAPaQxbOVvMLKNMkc2nPn2o2rTMz52CkVszWmJeY
+	Lkh1xcyekEI5O2ESQW0oTqgvJoL4ocZwYjXK23fz3bTREXMoVE34m13z30be9UmDYPKw8pK3wng
+	uFjoEg1C3LlAlDzONBhlq8hC7QLYaNl8w2b1pt73+8Txh8PxljOh5IxdP6KOksf+ajSkDaQnaNM
+	IcrjQnN5jWXkETmSN9f2G+EMF+6fQf547flGMM6SLcx0qTEs6p5ZCKy03X+vGXZlqy/eHcG5/mE
+	aZD1HinZ945aY3afDJjgEy7ATqA1iKkgX8YMbyRxPHOOM1O/7KsGmVHOXL/iABgRR8np8=
+X-Received: by 2002:ac8:5a02:0:b0:51c:1590:8e28 with SMTP id d75a77b69052e-5283de1c72cmr75388831cf.25.1784902944451;
+        Fri, 24 Jul 2026 07:22:24 -0700 (PDT)
+X-Received: by 2002:ac8:5a02:0:b0:51c:1590:8e28 with SMTP id d75a77b69052e-5283de1c72cmr75388381cf.25.1784902943917;
+        Fri, 24 Jul 2026 07:22:23 -0700 (PDT)
+Received: from ?IPV6:2001:1c00:2a07:3a01:8e96:3679:b9c:de47? (2001-1c00-2a07-3a01-8e96-3679-0b9c-de47.cable.dynamic.v6.ziggo.nl. [2001:1c00:2a07:3a01:8e96:3679:b9c:de47])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1c32eb7066sm351985766b.42.2026.07.24.07.22.22
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 24 Jul 2026 07:22:23 -0700 (PDT)
+Message-ID: <b690426c-94fa-43b8-a805-7413e45f2849@oss.qualcomm.com>
+Date: Fri, 24 Jul 2026 16:22:21 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -50,28 +89,76 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Revert "scsi: ufs: core: Remove unnecessary block I/O
- quiesce for clock scaling"
-To: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
- alim.akhtar@samsung.com, avri.altman@sandisk.com,
- James.Bottomley@HansenPartnership.com, martin.petersen@oracle.com
-Cc: peter.wang@mediatek.com, linux-scsi@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- Shawn Guo <shengchao.guo@oss.qualcomm.com>
-References: <20260723124733.341789-1-manivannan.sadhasivam@oss.qualcomm.com>
-Content-Language: en-US
-From: Bart Van Assche <bvanassche@acm.org>
-In-Reply-To: <20260723124733.341789-1-manivannan.sadhasivam@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Hans de Goede <johannes.goede@oss.qualcomm.com>
+Subject: Re: [PATCH] arm64: dts: monaco: Fix CSI I2C controllers default bus
+ frequency
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>
+Cc: Conor Dooley <conor+dt@kernel.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>, devicetree@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org
+References: <20260723114844.63093-1-johannes.goede@oss.qualcomm.com>
+ <111bfc31-7f02-4875-ab58-e92bf1ccc44d@oss.qualcomm.com>
+Content-Language: en-US, nl
+In-Reply-To: <111bfc31-7f02-4875-ab58-e92bf1ccc44d@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: ow2mU_YKpmd1V_DHUFRempmpKCPTmeNk
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDEzMCBTYWx0ZWRfX4xClbrMDOl2f
+ rjCvNDZAVou2tDhMRiVoF7enuFw4y7vq0UeqaInVO/wA67S1Y++K3YG/Z8ZdybaATdKsqt+t2fs
+ s33XuqTBFcHyi/kprJwV1jC9a4FBMhBf2YN+4S/fe33QGZMbNBWD9PL44aBCu0mT2u012l2+ev6
+ SGYfzPzyncq0YXQnOfoyFSIerUoTY0DK9KcxrdpWHs5OyGPOJEbAuoYsj8cksDQOaY3ytudzrhl
+ 8LGhcA0ogJPBuljhmZunQZr5AhR68OnvkuPvTxM1qiOFYqk/EjseZqczYW38lEgZMbyERhBXmeD
+ kwt9YG3/Ke92gJdsYnIOona7tiZychZNJK+1HcDQW44Yk1IQ5/+mvJCynDHiW6BuOdDbXngxet0
+ TI4SyTZ7KfqqSRKXdHPiDpanwB983bFHyVndoLaQWEjEOG3Ihur8KSvGjxXLT0P5zT+Sb/U0wNO
+ enfxFfP6qGABWTjMqSA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDEzMCBTYWx0ZWRfX26QjzCtPWJXL
+ do+eWivZKsui8ciZfJllzaLFJ0nLjRWCfiJXrVQ1uJCmOGkCzZ1k/t8PY71htHzDQzd+daIats3
+ fuZAtRnHjir5E4U5CTwnjhhlK3PkE08=
+X-Authority-Analysis: v=2.4 cv=DLW/JSNb c=1 sm=1 tr=0 ts=6a637521 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
+ a=qOlS_0BcxAoBgsU_PeEA:9 a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
+X-Proofpoint-ORIG-GUID: ow2mU_YKpmd1V_DHUFRempmpKCPTmeNk
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-24_03,2026-07-24_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 adultscore=0 phishscore=0 clxscore=1015 suspectscore=0
+ priorityscore=1501 bulkscore=0 spamscore=0 malwarescore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607240130
 
-On 7/23/26 5:47 AM, Manivannan Sadhasivam wrote:
-> Reported-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> Closes: https://lore.kernel.org/linux-scsi/al8YkXydXJQZrl_Y@QCOM-aGQu4IUr3Y
-> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-Has it been considered to add a Fixes: tag to guarantee that this patch
-gets backported to stable kernels?
+Hi,
 
-Thanks,
+On 24-Jul-26 1:42 PM, Konrad Dybcio wrote:
+> On 7/23/26 1:48 PM, Hans de Goede wrote:
+>> 1 MHz is quite fast for an I2C bus and not necessarly reliable, change this
+>> to 400 KHz which is a more reasonable default.
+>>
+>> Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+> 
+> 
+> I guess this is a question of what's more common among client
+> devices. I assume you have some that aren't happy with 1 MHz?
 
-Bart.
+Looking at ACPI tables for many x86 devices 400 KHz is the standard,
+with some devices going down to 100 KHz. 1 MHz is pretty much
+unheard off.
+
+Note the official I2C spec is limited to 100 KHz anything faster then
+that is an extension.
+
+My specific reason for submitting this patch is imx219 sensors on
+Mona sometimes failing to initialize at 1MHz which is kinda to
+be expected when going for 10x the I2C specification max value.
+
+Regards,
+
+Hans
+
+
