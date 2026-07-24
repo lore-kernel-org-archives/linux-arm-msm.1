@@ -1,123 +1,187 @@
-Received: from us-smtp-delivery-124.mimecast.com (us-smtp-delivery-124.mimecast.com [170.10.129.124])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yw1-f178.google.com (mail-yw1-f178.google.com [209.85.128.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68AC5423780
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 16:01:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=170.10.129.124
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784908872; cv=none; b=bIh+b3sMJrVIq2SAo4Oiqgqlf5rYHaDvkKoVKzWCEt7o+yzUxT4KirCVUGAsVjWPQf7jJWp7+zGFBRU3RElyESQV4jcCl3h0KCuz9YpWCri2fF+dg45yn1OOedACZ7wUmHFvqFK5WCkckOoQj4xf3shWmDEGR9KJCpWKgWDi/KA=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784908872; c=relaxed/simple;
-	bh=Fn1LSFnvcQPwl+OpOHERR5ed7+JefDQcZI+Vfb0q8B0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=EoWyejp7UbMgUwT5yWeszMxjNfFQtEefqEBnmvVdozTA5bQKoQPhOuw7cfZjSN5n5Te9yYko+9C098K1rymF7fFN/B4TNvnbBSkQUjS6ZA+NFJ+SrDuhghFgLieFl1ygBE43aOCLBHhM0TeyothLEiCIlrH3U/iBwhgFjn2q6pw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com; spf=pass smtp.mailfrom=redhat.com; dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b=V2Frpefr; dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b=mm2rOugS; arc=none smtp.client-ip=170.10.129.124
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=redhat.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=redhat.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DC7C371071
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 16:06:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.128.178
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784909196; cv=pass; b=uvE7HvD/anNUEEHsWyOcj5Uzwtmc7lwTacYpwFNXwC5v2C41AKqKZHcYUJ9m0ln9/9OKfi1YdIpRLPnvgAxUH9iMzoOi9QKUpdSIOeWeS4lSdAiZduigI7X08fMTXN7h5zoWC4+bVct0h0h2iDTRJDtP3u2VDkG4GtEmn7WFo7Q=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784909196; c=relaxed/simple;
+	bh=1dBkWVsU5nHQtb3BqWAkQFOoST3tB7IFEaIZgopWRGA=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=ijHCTrFaQPw43A5eleYkvRU87d38gX5aStimzSGcOKtYmTcrF1Of+Inaj1JIUpICx7ZeCN2GsymiYMKGEgxIgbKPtPwtHDeVwI4QQgCsLDUQTaBuKofJ7BHma10ZhUD0+BvANnwcm4BDT4y611HFoTJ1M20PpORAlCwlpAqgdPU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=OO2uouth; arc=pass smtp.client-ip=209.85.128.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com header.b="V2Frpefr";
-	dkim=pass (2048-bit key) header.d=redhat.com header.i=@redhat.com header.b="mm2rOugS"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1784908870;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=+bkEHSp7uhvmCp1vkWRoofsHVhKJ4GQ+rCHfCWSCHbk=;
-	b=V2Frpefrn+laJxjo6xBnC18ic/k5lWGyDo5ps6ABJ/QP73yoEuUnzhT6Yue2OAkKiU/7qg
-	xJNDYSEaRFg35/wYHhd3nep14QCuaf+9Gbih2Pr94vkGiYtlfJTrTVwrQZrR0H3+oVxpGz
-	TdJwnoNDEXCKU16Iyvgic0N4OM9zTG0=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-573-X8aByvuvMbyzJB3qzKWb_Q-1; Fri, 24 Jul 2026 12:01:09 -0400
-X-MC-Unique: X8aByvuvMbyzJB3qzKWb_Q-1
-X-Mimecast-MFC-AGG-ID: X8aByvuvMbyzJB3qzKWb_Q_1784908869
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-92ef13b61bcso101130685a.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:01:09 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OO2uouth"
+Received: by mail-yw1-f178.google.com with SMTP id 00721157ae682-81eff3ddba4so5916237b3.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 09:06:34 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784909193; cv=none;
+        d=google.com; s=arc-20260327;
+        b=nOLIdnBcwxdvVac9ulyjhe4n5B4FY4WKjSoRM2DA6JY6J5EOTJKQRuhj4J5lkEx6VI
+         9iBoLWgYODLgNmgQlsPS7PiPJSjTsl9pGchEWt9CpyQWoKOapRkAfpLrx5mRAVLVRq9J
+         NmogeyCcUlyPpgBIHAJa/06XnBQjkvk+FF6uY70X/uyugAijf6g6/TlXHIb+SyXao+x+
+         Utu42u4vvX1vfbKLasTsh57KlnqjDRRiOxkvHA2bM2VmaVUoEwbagXAVOMvSaQhANFSN
+         ckB9RdEsjJvH9sGtzHcbPDbsb7cRRanVzxuHS7y6p1ND8tRSpf880SKy5YR+2xudGZuO
+         obPA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=Ew5N2TuKUsw5wpMVRlPG3PrZBjIkKWPJShY0hQYMAWU=;
+        fh=lx5dCOExhd26EEa0/FFuZcJjRS5eypLQpGrEyP8V7jg=;
+        b=BMiM/5MG6Mxzy4aFxBqmmgFJ5lJOkqbiEuc+6XRs5fjOq1D1WWWTDNatY4F+fqbGzc
+         XbhEsxXV+d5D5+yORT1NQWSPlhnyYnYz0hrPelDpxf1XxX5MY2XjgvFNeLcODdjcLFiK
+         othaG4nY2j5pFsqpCHGWP04/ghEe1QVMw6xNGdR+FcuoTdPE4HWxmB+bj9rsU+okf5yg
+         RPjDZp0v/JHxUwbjZEOs7rR8pTxJyO9tYL3ldp/gwzKx40B6NDlDSRbKrh0Na+zZdgnL
+         IaHXkm7CIEeU+G6GajZ69nxchrttlI9TjFMJnPY8WXN/bY0XY7FSvm9znUcsZgEb5pr2
+         +TZA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=redhat.com; s=google; t=1784908869; x=1785513669; darn=vger.kernel.org;
-        h=user-agent:in-reply-to:content-disposition:content-type
-         :mime-version:references:message-id:subject:cc:to:from:date:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=+bkEHSp7uhvmCp1vkWRoofsHVhKJ4GQ+rCHfCWSCHbk=;
-        b=mm2rOugSk7KAS7M42+iocUJr91NAnfLJe5nqGr4OVjqF4xh7AOUnPBp2TQja2A3/PY
-         GuQMfpvNVHiYKpLd1HMNMyMH2rM2iKt55mZhC+wVoela2+BC0GRyCEPA1jsrt+B3a+9F
-         OsC2wz298ZsfsoO4L2EbMqY+BBfRVOgTT0v0Vp85pS4XlD0P2PUEeMDRipTzOjUmYXPk
-         YQMqETesjjkUJYVdtK3FWNJFLkUaoD+dGTxsvvDIgd7CTnEaczdEVGzcxmVQmdxYcpSJ
-         GOAU60b4jaWmfDj0ne7TSszdgkFTAGQiDSTU2YkhnPNILC/TqJqncSrPpIKsE7ZzifCY
-         zTZg==
+        d=gmail.com; s=20251104; t=1784909193; x=1785513993; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Ew5N2TuKUsw5wpMVRlPG3PrZBjIkKWPJShY0hQYMAWU=;
+        b=OO2uouthDhLEjPKAJHic3XFqLdb9Kqi8PIanuTGzfZkZf/PbZXulPzmIz2wVXi6k/x
+         srbjUlq2Gc2vylaHKLx/3Xwu02C5BakXDra9HjdmKaT2OvxQAzUvhNDRGqwh9QzPbVDe
+         kVVSkUtnH3O+faTHFqskIkgqECZhe1/75Pb/cGM5wQu2USv3XsjwPsBcXs8pqM9kpWDh
+         AQtE21RS4pnQA/G8hB/IuSYluvy9PqUQbSQdITKYb+lyW9jwsbTkwhIPzEd19Z+9m5bp
+         zlWDgszp/jcPFZd4so/20xEecE5/I2lpEsJ6qm0UqX8mNd5YoM50xxT+kTtQAt/FAp2I
+         4ChA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784908869; x=1785513669;
-        h=user-agent:in-reply-to:content-disposition:content-type
-         :mime-version:references:message-id:subject:cc:to:from:date:x-gm-gg
+        d=1e100.net; s=20251104; t=1784909193; x=1785513993;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=+bkEHSp7uhvmCp1vkWRoofsHVhKJ4GQ+rCHfCWSCHbk=;
-        b=m9jk+B2aaibYUL1wQFBiv4DnCBWsvdlSzjYoP6XyRJV7kQ2GbGNRjbol/zCODGjBIK
-         Fl8whgVWChjVBWOqQ/pAA5yoQ+m4cEEby9yoe3wvA17VfYwJ2llfoUDjFQNLRVoyFxdL
-         ukdG2KMVZ7eQ8uVAG6O5khOOyTx6OJa3BeQ6sZW2fWUHGCoWJG8mxcQmwE/rcde4r/BJ
-         jp2FouPvzkGcRxFAfE+IoUtVaQ+Rv20exO46c7tqy+fsUNA2geybyEhnrhx9fdtg3GVx
-         uxOWrOSyylIgJKer/MeIZnnh/lJOvP7dt6s0ZqecRTBv3gEcq2RNB8AqUz+AzxUReldI
-         eiEA==
-X-Forwarded-Encrypted: i=1; AHgh+RpGCu9GzlzQx+EvJVA+Ad/HoiU/ahr0TGmEt0ow+8Kgl68lcFtguk9qpHl4fJ+6R8T5mZHf1soRZOSbI6ux@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy04RxLfKF+5oA5jwNElpxJltXYsUSqngnPcPI10jWhYo72uf92
-	LNPFpipIiVc/8XyfycVRVSy9om7NNZZJzkGI/EPxiFYjLBYCk34GdBxfA0QZnkS7ehOGD/l6W+L
-	rTcMAwwyPGJsNs1JP5325y2Jgg3GsoCodxUTZNSfB0lhmNie9Ll9LkJJ9VAKVJtFdQ2A=
-X-Gm-Gg: AR+sD12LJeMDRaCYYkIxBvRv097hHr0WGZ42GvuBtfIMvJR1QrESp064IA1BAQHLToZ
-	k6M/m6pHzJWaIsY5IXe5fO4+EctlxVM+v5yuS4Jy3PJ0azQYoptwEudYUogLrU+G8xxPfHKz/CB
-	Ipxhaeq2SwtdLQ81Turfx1bKd33Y3ix+hmPqt9Qje5KUFwlVGHrkJg0jPx1gz+NA/gnlQ5ffg48
-	jdb6WjI+yO8KqGXuGU+VjoRygccMVPZsFxi3daWYzKLY+ms/SJ/10LN4EH/+6nwhU6UXdG2P6HJ
-	/lsE1x2+ke8S0ehAFfUbyaqPjciCEN/p2EW528KY71D/FzR/wV0Bv7REyRciVPIgKTppPVgs1bf
-	zqNxtNNTUDhKGP9C/c2Xz0lPlH4iq9nHjjhc=
-X-Received: by 2002:a05:620a:4706:b0:92e:7c0e:5912 with SMTP id af79cd13be357-93103aee644mr937769885a.56.1784908866938;
-        Fri, 24 Jul 2026 09:01:06 -0700 (PDT)
-X-Received: by 2002:a05:620a:4706:b0:92e:7c0e:5912 with SMTP id af79cd13be357-93103aee644mr937759585a.56.1784908866130;
-        Fri, 24 Jul 2026 09:01:06 -0700 (PDT)
-Received: from redhat.com (c-73-183-53-213.hsd1.pa.comcast.net. [73.183.53.213])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-930f6a0371asm684521085a.27.2026.07.24.09.01.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jul 2026 09:01:04 -0700 (PDT)
-Date: Fri, 24 Jul 2026 12:01:02 -0400
-From: Brian Masney <bmasney@redhat.com>
-To: Luo Jie <jie.luo@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-	quic_kkumarcs@quicinc.com, quic_linchen@quicinc.com,
-	quic_leiwei@quicinc.com, quic_suruchia@quicinc.com
-Subject: Re: [PATCH 08/12] clk: composite: Export
- devm_clk_hw_register_composite_pdata
-Message-ID: <amOMPmn1fBE1gGoe@redhat.com>
-References: <20260724-qcom_ipq5210_cmnpll-v1-0-a8b8679d215f@oss.qualcomm.com>
- <20260724-qcom_ipq5210_cmnpll-v1-8-a8b8679d215f@oss.qualcomm.com>
+        bh=Ew5N2TuKUsw5wpMVRlPG3PrZBjIkKWPJShY0hQYMAWU=;
+        b=s9ORYlS8DK41WwxMGJWzuPvv/w2Zq7m80eu/PUqY9V+jRABDCnWaqb3a5MiaFNcy5m
+         dhNp5pM8UhA9oec2AS6Xndm1rEWWSGq7wKPQn97osBOYc7nG6Hnm9mbqHHPZu03TzSyA
+         bOfK3JU28+ulRQqjEOSku2F+ysgJT1PSG00YDMOfBB40j1EbTr0VGCALq154TPk+68wT
+         8fEMGES9GeDIs1xVa0VUvVpIXRxz76xyfE2/JHzNGfHyXz3CBMz/GPI/AQBgDKAYxEMq
+         s4qfLf+P2//xGbWBoDLsa+MhLZgGVnSSYzQHLXcVp//PmHoztyD+deLfoJ2AlnBEvI9G
+         77OQ==
+X-Forwarded-Encrypted: i=1; AHgh+RoRpplHPhb9FqfkTm3BJ1nSJhkayq1pb2VTlrReDYB4hfhnxFP5IO2p81tY8fzOXBguJYVZu78Wj7EE55L4@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzqwile2HcohLFF++F4ZyvjR494JmUXV6KFBsos19jqpI7Cyc3I
+	ykcgc3+Q6GH9XoEZwoj+XR1iJis79nztnRqsXlogujO4W+obR49wfdMzDdSar1fSPyZ6APZJXAt
+	U36vNhnCuoqzvNRQNSy/lL5x7EFjq7Ns=
+X-Gm-Gg: AR+sD11fwzYVd3/SWE88w32lfFnE+o+LIBVpRVA1DREAi6gvllVj7sQclu+0odVKk2s
+	31mU2zzKnipWY7WoFyN8UhXUD592TnKiWXgW/pInDqa6HKcQXXA966TLeQs0dhAmd+TmUPBCAXA
+	vNFSgsxUzN1j9UrAcR0S8+W9Lr4uLoowhW+Qttbj1lw3Ta8BJWoICULUTdmonMnZ9oYrMvtfOOE
+	Zzbs4c8OSADPT4cYb9ImNkierwC0JgRrQsnRJfEumv5rbgroolA+GKETw==
+X-Received: by 2002:a05:690c:7403:b0:81e:8985:4046 with SMTP id
+ 00721157ae682-81f4c34faaemr23190557b3.53.1784909193265; Fri, 24 Jul 2026
+ 09:06:33 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260724-qcom_ipq5210_cmnpll-v1-8-a8b8679d215f@oss.qualcomm.com>
-User-Agent: Mutt/2.4.0 (2026-06-19)
+References: <20260721082410.18275-1-kaipeng94@gmail.com> <20260721082410.18275-3-kaipeng94@gmail.com>
+ <aee1e26d-d3f7-4903-a34f-02fcda6a6beb@oss.qualcomm.com>
+In-Reply-To: <aee1e26d-d3f7-4903-a34f-02fcda6a6beb@oss.qualcomm.com>
+From: Kaipeng Zeng <kaipeng94@gmail.com>
+Date: Sat, 25 Jul 2026 00:06:21 +0800
+X-Gm-Features: AUfX_mzozQx6sr91XfGqke3GYXZuO5xcMO6Cbzc3XJrpc52p229Z8CNFI3YTA0s
+Message-ID: <CAHk8ZduR9PxqM1-biv_6jAZ7cej-+JJpFHkjbSB3-Ba=-csKkg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/2] arm64: dts: qcom: Add support for Acer Swift Go
+ Pro AI (SFA14-11)
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	conor+dt@kernel.org, krzk+dt@kernel.org, robh@kernel.org, 
+	konradybcio@kernel.org, andersson@kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 24, 2026 at 08:00:30AM -0700, Luo Jie wrote:
-> devm_clk_hw_register_composite_pdata() is defined but not exported,
-> preventing its use from loadable modules. Add EXPORT_SYMBOL_GPL() so
-> that out-of-tree and built-as-module clock drivers can call it.
-> 
-> Signed-off-by: Luo Jie <jie.luo@oss.qualcomm.com>
+On Tue, Jul 21, 2026 at 6:22=E2=80=AFPM Konrad Dybcio
+<konrad.dybcio@oss.qualcomm.com> wrote:
+>
+> On 7/21/26 10:24 AM, Kaipeng Zeng wrote:
+> > Introduce device tree for the Acer Swift Go Pro AI (SFA14-11).
+> > It is a laptop based on the Qualcomm Snapdragon X Elite (X1E78100) SoC.
+> > This device tree implementation references nodes from the x1-crd.dtsi.
+> >
+> > Supported features:
+> >
+> >  - Internal display & Brightness control
+> >  - Keyboard & Touchpad
+> >  - USB Type-C, Type-A
+> >  - Wi-Fi & Bluetooth
+> >  - ADSP & CDSP
+> >  - Adreno X1-85 GPU
+> >  - HDMI & USB Type-C display
+> >  - Webcam
+> >
+> > Signed-off-by: Kaipeng Zeng <kaipeng94@gmail.com>
+> > ---
+>
+> [...]
+>
+> > +             wcd-playback-dai-link {
+> > +                     link-name =3D "WCD Playback";
+> > +
+> > +                     cpu {
+> > +                             sound-dai =3D <&q6apmbedai RX_CODEC_DMA_R=
+X_0>;
+> > +                     };
+> > +
+> > +                     codec {
+> > +                             sound-dai =3D <&wcd938x 0>, <&swr1 0>, <&=
+lpass_rxmacro 0>;
+> > +                     };
+>
+> 'co'dev < 'cp'u (other nodes have it correct), please also re-sort
+> the -link {} nodes alphabetically
+>
+> [...]
+>
+> > +&iris {
+> > +     firmware-name =3D "qcom/x1e80100/ACER/SFA14-11/qcvss8380.mbn";
+> > +     status =3D "okay";
+>
+> Let's also keep a \n before 'status', file-wide
+>
+> [...]
+>
+>
+> > +&mdss_dp1 {
+> > +     ports {
+> > +             /delete-node/ port@1;
+> > +     };
+>
+> Hm?
+>
+> [...]
+>
+> > +     wcd_default: wcd-reset-n-active-state {
+> > +             pins =3D "gpio191";
+> > +             function =3D "gpio";
+> > +             drive-strength =3D <16>;
+> > +             bias-disable;
+> > +             output-low;
+>
+> You don't need to specify output-foo on TLMM pins, the GPIO consumer
+> will assert it as necessary
 
-Reviewed-by: Brian Masney <bmasney@redhat.com>
+I noticed this before.
+spkr_01_sd_n_active and spkr_23_sd_n_active (in lpass_tlmm) are also set to
+output-low.
 
-FYI there's a separate series for the UltraRISC DP1000 SoC to export
-this same symbol. It depends on which series Stephen merges first gets
-in.
+I tested that Gnome cannot detect either the speakers or the headphone usin=
+g
+the current DTS.
+If I remove the "output-low" from wcd_default, Gnome can detect headphone
+plug-in (not the speakers) and speakers will randomly output an audio pop n=
+oise,
+specifically when playback starts and stops.
+I kept the "output-low" of them for safety.
 
-https://lore.kernel.org/linux-clk/20260720-ultrarisc-clock-v4-1-fe639d63bbac@ultrarisc.com/
+Is it still proper to remove this "output-low"?
+Should I also remove the "output-low" from spkr_*?
 
+>
+> Konrad
