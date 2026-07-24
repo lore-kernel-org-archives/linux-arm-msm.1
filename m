@@ -1,51 +1,43 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22F2C1F4180;
-	Fri, 24 Jul 2026 09:36:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68E50175A7D;
+	Fri, 24 Jul 2026 09:46:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784885808; cv=none; b=A1pvYmZ/SKdx+kJCy+cse5r2KfyERRz7CEUtpmReLs3MYbcuSIbYFPPPCMlseUIr45klFR+4ZRMzTbRGtznFLwUCfGE2LizqowmQhVgk+RxkbFfG8gqK0in5AzLHkBziin50Fj8KZ7QJHGoNntHnz481T2BsBNtdcQLj4zIOlVk=
+	t=1784886410; cv=none; b=gvG3dcEp8iFBfXcFD0UCISWwFjb4v7QgpIE+iARMt29CeW96/SjRExbtvU9EcbYvSzQiJIrdbZR7BimK+g4y5aTOZSjIupNEcOfDhl+0sTax+dK5C/+BV5bwUhzEkJMxhdTGSQEN2s5X9wsgKN6sYZ/bFCYvtbi9geDU6KuOMS0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784885808; c=relaxed/simple;
-	bh=GFvWJJhjhu1p4tF2+Q019cpWkfYk8y7RGfwCH26uWaI=;
+	s=arc-20240116; t=1784886410; c=relaxed/simple;
+	bh=xqoSf/rLpqZcYXHNTcx2E2Ye2ZX7Ngqq4Aokhv8stwY=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=soZ8Ft4aY4OqXJmI7DuB9dtT1nQyW/lV9fyqyX0RKk+tMZLUr0soN55hanNv7BRBg5PuxHOc4FXNwfjEgZ/jb7kd4BCgW9OH3oxVqJcrfGHz4zBRDnGjo7kpdwHSvSyFMYef/fJ+jCenR3ZTALxxUdca5WLFfQS7g3nOtZAGhOE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UG5SoNhI; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=UF6pTOCVSAg9ylsedEtXvCPLsf8448z/GDwUA/znaMd3/Gg0lAV8DufA3t2+ZAGCPnAvXItGvTi6/gA8aVDgTkVWsQsnns2n2oISiXaOyMeYXvVi01ImMYjZEWNWcqn00gZTlp8jkBwG9U/Vyb40OP8sxnxJCfWyh+C+SaFeE0Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PcVLkLnv; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UG5SoNhI"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C63BF1F000E9;
-	Fri, 24 Jul 2026 09:36:45 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PcVLkLnv"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E0D441F000E9;
+	Fri, 24 Jul 2026 09:46:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784885807;
-	bh=iDc15U1kStf17/3+/VOLnuomPMxAGfj6hbdZDDiDRWI=;
+	s=k20260515; t=1784886409;
+	bh=n62E9IT/cKjOufWuXfuAMAyh0rhkAvAWEF5k0pSnHzk=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=UG5SoNhIcY02zB/cbJO3mbU8GDIHDmzZYMHQjV+m4ticc1ATRv5+6/qwiLgxUFUzF
-	 EeaBcmKIRwRvNn2R7DF62jkB0Ex44gTJzfVEBSNFv9Lq5mDBrUdx7SIcYC/P2b6wVM
-	 wyG+jr7YXQ6p2XVUPZZ0+XsuwwReewconY95shJrMldqy//hnAzn2ycYf1EBHxGLwC
-	 n8u1M8B3pat9HDB59DyKKCasi7klTw7ra9E7KbxAxfT6/vNx4Pd/Ig9QsUrJ0J+xo2
-	 amvxqTHgc6rfomtDxrD+DXsCowopoke5h3xlYuKixRRByCHWI85f8Szz3v/wMkzyJq
-	 pgVcu98D4s/PQ==
-Date: Fri, 24 Jul 2026 11:36:42 +0200
+	b=PcVLkLnvZQMPKZh1bWEhhJRn40ZSXzeTaC3oJs8J5DE0Q3XucXPWl6LcGhznTEC5o
+	 /DI1Fy14ENiYtIZtyhs6KSGG2APGnk41Laf2We3dIIBmTmKrfnPFDtihsSb/9F04K5
+	 YVbYay3iCoGkO/jVqENRfNi1duRSNvKW8x68zClzUkmdXcK+hmvVDOexlh2GICVMvP
+	 GgtJZgHJ7VLuOSSptpGvRXliwyIe0FqT7MlUhLZmeHiMmAUnvcyXOqMbpF58HaErXx
+	 TEKW42mGwbt1ukzelbjfuOB0fJGDQ7bAXSWMtHs1ValYey4e549VpgRgEo70RmUqXZ
+	 89oKl6IsX6sBA==
+Date: Fri, 24 Jul 2026 11:46:45 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, 
-	Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
-	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
-	Marijn Suijten <marijn.suijten@somainline.org>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Krishna Manikandan <quic_mkrishn@quicinc.com>, 
-	Abel Vesa <abelvesa@kernel.org>, Yuanjie Yang <yuanjie.yang@oss.qualcomm.com>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/3] dt-bindings: display: msm: Allow two MDSS power
- domains
-Message-ID: <20260724-cocky-uppish-pelican-3796ee@quoll>
-References: <20260720-msm_gdsc2-v1-0-4687866d6cb0@oss.qualcomm.com>
- <20260720-msm_gdsc2-v1-1-4687866d6cb0@oss.qualcomm.com>
+To: Konrad Dybcio <konradybcio@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH 1/3] dt-bindings: arm: qcom: Add Asus Zenbook A16
+ (UX3607OA)
+Message-ID: <20260724-zealous-porcelain-bulldog-39f0dc@quoll>
+References: <20260721-topic-a16_submission-v1-0-8ea213130d05@oss.qualcomm.com>
+ <20260721-topic-a16_submission-v1-1-8ea213130d05@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -54,37 +46,28 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260720-msm_gdsc2-v1-1-4687866d6cb0@oss.qualcomm.com>
+In-Reply-To: <20260721-topic-a16_submission-v1-1-8ea213130d05@oss.qualcomm.com>
 
-On Mon, Jul 20, 2026 at 04:43:53PM +0800, Yongxing Mou wrote:
-> Kaanapali (SM8750) and Glymur use two display power domains.
-> CORE_GDSC powers the main display hardware while INT2_GDSC
-> powers a subset of SSPP blocks.
+On Tue, Jul 21, 2026 at 07:11:26PM +0200, Konrad Dybcio wrote:
+> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 > 
-> Allow the MDSS bindings to describe both power domains and
-> their corresponding power-domain-names values.
+> UX3607OA is a variant of the Asus Zenbook A16 built on the Qualcomm
+> Glymur platform. It comes with an 18-core X2 Elite Extreme SoC, 48GiB
+> of RAM, NVMe storage, a 2880 x 1800 OLED screen, and the other typical
+> Glymur platform capabilities.
 > 
-> Signed-off-by: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
+> The hardware wiring is very different versus the 14" SKU.
+> 
+> Add a compatible for this machine.
+> 
+> [1] https://www.asus.com/us/laptops/for-home/zenbook/asus-zenbook-a16-ux3607/techspec/
+> 
+> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 > ---
->  .../devicetree/bindings/display/msm/mdss-common.yaml        |  3 ++-
->  .../devicetree/bindings/display/msm/qcom,glymur-mdss.yaml   | 13 ++++++++++++-
->  .../bindings/display/msm/qcom,kaanapali-mdss.yaml           | 13 ++++++++++++-
->  3 files changed, 26 insertions(+), 3 deletions(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/display/msm/mdss-common.yaml b/Documentation/devicetree/bindings/display/msm/mdss-common.yaml
-> index c6305a6e0334..c0b650ffd9ef 100644
-> --- a/Documentation/devicetree/bindings/display/msm/mdss-common.yaml
-> +++ b/Documentation/devicetree/bindings/display/msm/mdss-common.yaml
-> @@ -31,7 +31,8 @@ properties:
->      const: mdss
->  
->    power-domains:
-> -    maxItems: 1
-> +    minItems: 1
-> +    maxItems: 2
+>  Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
+>  1 file changed, 1 insertion(+)
 
-So all deviecs now get 2 domains and this is completely ignored in the
-commit msg.
+Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
 Best regards,
 Krzysztof
