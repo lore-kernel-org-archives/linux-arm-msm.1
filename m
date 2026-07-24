@@ -1,363 +1,181 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57174387569;
-	Fri, 24 Jul 2026 11:20:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DB4F3A5E7A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 11:30:35 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784892035; cv=none; b=p7XtoWfUohIg8+b1Yzm9XMjD/xKS+nsVBmauIYmf+8PUsfWMQGIsZwTGVjip2zzAkn4jubQjDcwxPDkES72pYdcKrTjs/iSY42Bfv0HjTYCwBk82r/HhDhchIQGxL4gRQ8FiJ3A24ynXVHzYdKZDNY6Xmju7nDRsNLfAwRPImg0=
+	t=1784892637; cv=none; b=HMQfhDw7bj8Oq9TZbz13UCDZTSmuZ3ub4eduwE8HHsiVW8j+Nk0qyaeUKgJv4OIo9lPobq3JeSp6EMNn9oBPMWqW7v79pLz55qrVk9+1KsK39GiLgie7dfZFkCWYYIzpePEx933W9lNpQeDURDIR6as+xigCybWlHOrXtTfRsBs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784892035; c=relaxed/simple;
-	bh=mSQbgzv7az3GwjiLKLanTtq5D1zV20QGqJWybHlLc/8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=PmN4RyN9zytYx1tonKe7G/n+LJ/YyXG4z3K3lWsTfiIw+Aa5oEafTWtlxgSD5QQmQ/EUfhbktdEN16ExUOseejlwytsn+4YADKfA4SufxmnW5OsSa1HuwByIt5u3rEUrR05Ye3sH0ChWNY6bdAuBllTbfCmtuTkjY16WgzsLNtE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IUPsUUZY; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1784892637; c=relaxed/simple;
+	bh=v9CE0NZgeV5DlI/DjX5s89yBEYtQGbY9EDY4vDxz7xw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=bXH/A8FDXBPdcJ4FcpSnKRHBSuJBBNy5DT+ke4EWrxN90yx7vstNMXlYi4RVj1To4Ueo6cZLJqpuu6pCTW10q+MQ4Cak5LXBQryYWUcqs1wfA3VK0/ITOMJzbANzowiyNrEO11/CyoaL4nsbZPoXKWqfmqDEWM1HvTCj/Z5zSbE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=AzYsxphn; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QJNl4c+b; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IUPsUUZY"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E03B71F000E9;
-	Fri, 24 Jul 2026 11:20:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784892025;
-	bh=jD9jX3+Wk2O1/peDNwAQtv6BxC4dDJGxHjIwOz7Rdx0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=IUPsUUZYtkF/b023RLp/rHDSgFjCxU83YfGO/x4srwBpb2uraVfiMh7tMYARy9KEQ
-	 FOkhpEpgOKA4F+Ao2+UTkiUmCJcOKIRv6kQ+zHzH3UXAoFcuymLyXBGuP/uDmCfijM
-	 VBOjq+OJRA7yGdr5INA4VoI4ay9upZ3IrXhnLLiqkJJJwEZ9JcQ6C36TqD4Rn2cl8X
-	 jD2RScODGan780x54c5ARPh2IRoadGZjut1FyH7hNl1TZfmGmPqRIqOULZPI7nPDcP
-	 OFkGol49lwLO3JBQ98Inxc6gFm/39ejBW4IG5GPCrv/MbKFeYn9tEQuWnpmvmFHYwe
-	 luzV2vCV3JHSQ==
-Message-ID: <c0218d64-3b31-4d21-b8c9-e03a4b5a7f91@kernel.org>
-Date: Fri, 24 Jul 2026 12:20:22 +0100
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="AzYsxphn";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QJNl4c+b"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66OADdt32720909
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 11:30:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=ifhK8jF0fZ9P81kr75lgN2ov
+	xxuOE8Gi3gW8iorSRjM=; b=AzYsxphnwEvoFrjj2ct2dVpTyT4wuylQpTaRYmk9
+	YwYg6Y2GF7tVOo39jVowCMUiobRWJ/NOoqfl0r5uCU9w7hRysnfmN30Vi+hGIjNE
+	Qp14rhVgwsUu2v6jVlo6bJ4Htd9c/L1VdD4Nkao5Ep75EfH9nrso9KUtrNqSkn7T
+	fRenBAkO8Ql3W397zwOCke9LdDKe/WfcKi/ZvvsEu+AMzLoZlZbhe8OfTyruRc6U
+	eOI8qlgT8zUfjmLnQajcrftnlz98Np+ysoCxK59j7r5EDmcLbQWIvAwsc45xGifn
+	DMq6efJCE4u2nWodMALhfjOLi2mft+PW2cvNL0PjgLKQKQ==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fm5yagamh-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 11:30:34 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-51c0e702df8so5212881cf.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 04:30:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1784892634; x=1785497434; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=ifhK8jF0fZ9P81kr75lgN2ovxxuOE8Gi3gW8iorSRjM=;
+        b=QJNl4c+biHvGXI+8z4ugszdg+GquPl8ljyucdpQtdSzkKaaTno5KJD0RT5ZZTMbSJN
+         4ssjIuNWfjRMW+XsGiAwVqf9BnvmS0RJ2xRb/xjxlzoq7R6WfTazKK1tj2vYKIj45rTc
+         EySN+NdGYkvAoTx/+dxcxPD0Hr9F2lENjFtu+rVJ81zZNI9l6P5+xCpqkKFWFIhiHVKp
+         h4G/RbYbBYIe8CQ8PgxpTRLFype5xUeG8HTmMcF/JkdNGKpo+lWmJqAHGa6Y2eKHgvip
+         5UnF//yElHtKo/tWi7SxVcE8lI1wBs8D7EFiew6vLhIxZmlNyuuru9BkO/CxRzWsytLw
+         VQWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784892634; x=1785497434;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ifhK8jF0fZ9P81kr75lgN2ovxxuOE8Gi3gW8iorSRjM=;
+        b=kZGXD2LLVwihPR3o7AZYPszsyfvZkZlTKtS5u5HuWonq54s2xmnWY6h3yHsg1eJpXm
+         3WrXMP8/qP1JjQrWG1ODxroCS5y9wLBWEcwoYHhizpnq+617IZq7B9NGxB193ZLZvWx1
+         svI3GqixGcUAN+p+oeZXtTS1+Gxcm6edo2XZ4LmD7L9pdX7bjYlyHqo27NFRFM65Ku9I
+         73O4PfJzMgOncvhq3qlV25lushCsDvzWrGFW4k3Hg+RYwuLMkInYVbY1UGorSRdbQ0YV
+         xCghBDAKdm5Vr9k1Zgy03Az2UgltigMrR5SJ67Eep/yQdUNoL6MK/dP8S9Rv/+pQQ0Oz
+         vaQA==
+X-Forwarded-Encrypted: i=1; AHgh+RqJPtKNQ4W/zjy+t4SYvQdIh1SZQ88JYl9BEP/3Zr483CoT41q+h03gSdGbqDtAx596C2xs9jAncsllnIUT@vger.kernel.org
+X-Gm-Message-State: AOJu0YwxlFD4f+a9pNTYDR+pa9hmeYsS2snpdfGHnoKFX+P/kO0/iKKJ
+	dkPwyJF3kl+02xSSeI2a24hy9rvIt4YNA0htxK+W5c30bYHxF+eYdIGcNCQLLvGNPpKV14s2Rek
+	H4RSTudPX1Va6mt7uB1iqljeC10M3d/+SKjBQpRfrVDZSYCgKzyaVr7KgNzjX/SJSoPrb
+X-Gm-Gg: AR+sD10VNZiTS9wqsHMjesP2UjJ1zR14fgxamX7CTLRTQD/+kh6DqM5RZ1zdbMM/CGE
+	dj8JBgw97nzSaqW49vXu1qZ5zd+RRZ+CSziFd39D9vZtSynYywj1KybvCSQca5WMiw0u20nqtU/
+	c8Z6QMa8MNb+SWVJY5pHF2gtq7Ccq3O7sHTQZTls8BnTmeo70FWnu5dVkS9xmvDuCZXPE4qAcHY
+	O2567oaRm0wbcdLNW8x23xiJxZx8eIP49L/kKsT2heweXDh/2ftk/0frmFgTJWnRqIFlX1+Ishj
+	xpxDa4/KEN9VYswSmesPFnuCHFH6WWwVPYwIRkBR8dYfejF4JmyeuIBDLQKXpXv8+YJfXNe/dzW
+	oZWYHAHVeahDay4LEChyBQ+2HrEUr/GfHbUbrFQvFYTgcYEAqekEIgb7QEB/Qfn+npqMVxeN+RC
+	rNmTkFADgwiHzONA==
+X-Received: by 2002:a05:622a:1350:b0:51c:83ee:e42e with SMTP id d75a77b69052e-5283dffc205mr65523011cf.77.1784892633964;
+        Fri, 24 Jul 2026 04:30:33 -0700 (PDT)
+X-Received: by 2002:a05:622a:1350:b0:51c:83ee:e42e with SMTP id d75a77b69052e-5283dffc205mr65522211cf.77.1784892633423;
+        Fri, 24 Jul 2026 04:30:33 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2a9b8c9f8sm1459645e87.14.2026.07.24.04.30.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 24 Jul 2026 04:30:31 -0700 (PDT)
+Date: Fri, 24 Jul 2026 14:30:29 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+Cc: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Robin Murphy <robin.murphy@arm.com>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Stanimir Varbanov <stanimir.k.varbanov@gmail.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, linux-kernel@vger.kernel.org,
+        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        iommu@lists.linux.dev, devicetree@vger.kernel.org,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: [PATCH v9 01/14] dt-bindings: media: qcom,glymur-iris: Add
+ glymur video codec
+Message-ID: <frmpjyrk3epa26oebskil52sony6k672a5mkcamviiz3vdjlj5@eenvztuikja5>
+References: <20260715-glymur-v9-0-8cf2cbe12a07@oss.qualcomm.com>
+ <20260715-glymur-v9-1-8cf2cbe12a07@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] misc: fastrpc: fix context leak and hang on
- signal-interrupted invoke
-To: Anandu Krishnan E <anandu.e@oss.qualcomm.com>,
- Srinivas Kandagatla <srini@kernel.org>,
- Amol Maheshwari <amahesh@qti.qualcomm.com>, Arnd Bergmann <arnd@arndb.de>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, stable@kernel.org,
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-References: <20260701-master-v2-1-566bf8b7bd16@oss.qualcomm.com>
-Content-Language: en-US
-From: Srinivas Kandagatla <srini@kernel.org>
-In-Reply-To: <20260701-master-v2-1-566bf8b7bd16@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260715-glymur-v9-1-8cf2cbe12a07@oss.qualcomm.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDEwNCBTYWx0ZWRfX6FoF5lvIxU/W
+ 4Qkeuw2HyNXhfLO+M3gR22AtD7yWifRj5XfKQ+1dsCrrB0zwg9Y4sN2SW7kpZC9UDDueXIwMDfJ
+ uIpuhxTBtjckgG4PMixUMwSmytrDsew=
+X-Authority-Analysis: v=2.4 cv=Rtz16imK c=1 sm=1 tr=0 ts=6a634cda cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
+ a=l6FLTy858EcHa7FfVjsA:9 a=CjuIK1q_8ugA:10 a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-GUID: 8KM69z7PwUnUr4bTy6R72SW1T-5yo19e
+X-Proofpoint-ORIG-GUID: 8KM69z7PwUnUr4bTy6R72SW1T-5yo19e
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDEwNCBTYWx0ZWRfX2nASce1MQL9f
+ 9GjWSf9ZxJv93X3/CJ0HJxkgV5cgjXUfHFzJQTMGKIOWq3esG8rV5T/BWHu/Ix+pYqVDfhQzmdz
+ dqnFHqT0fJoFwyGEmUtGSg9MtexEShJ5avlPLhquc9FqY2YZKcvobNn/iNjmVK0NRpf9agqJb25
+ 19mvD/LZE19QggUnNFT9mKMZOi8fvhDBpU5d/7bmJuF5KJN3Da8Z/rxhb2znzA0T/cSd/pcRVzE
+ Ij0aYRTtbp71oO7e1jnPRnAMlbDvWB30MRCyQpDpldecjQUtvFInNe1vhMFm/O/K/4YSszojv72
+ 50kUUBcA21UVQvieMvsmG24l710bRiGDUxxRxacZLPez8M2X3LID7YYm9odXPsJNAMUvbDEsqgH
+ WvW1YaCCXQO12DQEFMjn76gRWokAgpHIhS2Jv9/Su3uVZLrm20MzA7Yd8EwUel5GhYOXtrbaW3x
+ WPfpaosNrT1NI+cnlrA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-24_02,2026-07-22_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 phishscore=0 priorityscore=1501 suspectscore=0
+ lowpriorityscore=0 bulkscore=0 spamscore=0 malwarescore=0 clxscore=1015
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607240104
 
-
-
-On 7/1/26 9:11 AM, Anandu Krishnan E wrote:
-> fastrpc invokes work by sending an RPC message to the DSP and blocking
-> in wait_for_completion_interruptible() until the DSP responds. If a
-> signal arrives during this wait, the syscall returns -ERESTARTSYS and
-> the invoke context which holds the in-flight DMA buffers and
-> completion state is left stranded in fl->pending.
+On Wed, Jul 15, 2026 at 07:39:55PM +0530, Vishnu Reddy wrote:
+> Add device tree binding for the Qualcomm Glymur Iris video codec. Glymur
+> is a new generation of video IP that introduces a dual-core architecture.
+> The second core brings its own power domain, clocks, and reset lines,
+> requiring additional power domains and clocks in the power sequence.
+> The current maxItems constraints for clocks and power-domains in the
+> common venus schema were sized for platforms available at the time of
+> authoring. The glymur platform introduces a dual core architecture
+> that requires more clocks and power domains, exceeding these limits.
+> Raise maxItems for clocks, clock-names, power-domains and
+> power-domain-names to accommodate the glymur platform.
+> The glymur platform-specific schema have fixed constraints for these
+> properties, so the common schema only acts as an upper bound.
 > 
-> On the next syscall attempt (either auto-restarted by the kernel via
-> SA_RESTART or manually retried by user-space after EINTR), a fresh
-> context is allocated and the RPC message is re-sent to the DSP. This
-> has two consequences:
-> 
->   - The original context leaks in fl->pending until the file is closed.
->   - The DSP receives a duplicate invocation. If the DSP was mid-way
->     through processing the first request and had issued a reverse RPC
->     call back to the host, the retry sends a new forward request
->     instead of the expected reverse-RPC response. The DSP thread
->     waiting for that response is never woken, causing a hang.
-> 
-> Fix this by saving the interrupted context to a new fl->interrupted
-> list on -ERESTARTSYS. When the same thread retries the invoke with a
-> matching sc, restore the context and jump directly to the wait,
-> skipping context allocation and message re-send.
-> 
-> Three additional bugs are also fixed:
-> 
-> 1. fastrpc_context_save_interrupted() did not drop the extra kref that
->    fastrpc_invoke_send() took, so the worker's put only reached 1 and
->    the context was never freed.  Drop the reference in save_interrupted()
->    so the worker's put reaches 0 and triggers context_free.
-> 
-> 2. The bail path skipped context cleanup on -ETIMEDOUT, leaking the
->    context.  Remove the -ETIMEDOUT exception so timed-out contexts are
->    freed like any other error path.
-> 
-> 3. fastrpc_context_free() did not remove the context from fl->interrupted
->    before freeing it.  A context freed via a racing channel removal left
->    a dangling node in the list.  Add list_del_init() guarded by fl->lock
->    before releasing resources.
-> 
-> Also drain fl->interrupted on process exit, complete any sleeping
-> contexts with -EPIPE and schedule put_wq to drop the worker ref when
-> the rpmsg channel is removed, and add dev_warn() on TIMEOUT and
-> ERESTARTSYS to aid post-mortem debugging.
-> 
-> Remove the obsolete invoke_interrupted_mmaps mechanism from
-> fastrpc_channel_ctx; context resources are now kept alive through the
-> context refcount rather than by migrating mmaps to a channel-level list.
-> 
-> Fixes: 387f625585d1 ("misc: fastrpc: handle interrupted contexts")
-> Cc: stable@kernel.org
-> Co-developed-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-> Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-> Signed-off-by: Anandu Krishnan E <anandu.e@oss.qualcomm.com>
+> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
 > ---
+>  .../bindings/media/qcom,glymur-iris.yaml           | 255 +++++++++++++++++++++
+>  .../bindings/media/qcom,venus-common.yaml          |   8 +-
+>  2 files changed, 259 insertions(+), 4 deletions(-)
+> 
+> +
+> +  firmware:
 
-Does not apply to linux-next.
+video-firmware. Please follow the prior art that existed for venus.
 
-Can you rebase and resend.
+> +    type: object
+> +    description:
+> +      Context bank for the VPU firmware processing domain.
+> +    properties:
+> +      iommus:
+> +        maxItems: 1
+> +    required:
+> +      - iommus
+> +    additionalProperties: false
+> +
 
---srini
-
-> This patch fixes a context leak and DSP hang that occur when a
-> fastrpc invoke syscall is interrupted by a signal, along with three
-> follow-on bugs found during review.
-> 
-> Changes in v2:
-> - Fix kref imbalance: fastrpc_context_save_interrupted() now drops the
->   extra reference taken by fastrpc_invoke_send(), so the worker's put
->   correctly reaches 0 and triggers context_free.
-> - Fix -ETIMEDOUT context leak: remove the ETIMEDOUT exception from the
->   bail path so timed-out kernel invocations go through the same
->   list_del_init + context_put cleanup as all other error paths.
-> - Fix dangling node: fastrpc_context_free() now calls list_del_init()
->   under fl->lock before releasing resources, preventing a dangling node
->   in fl->interrupted if a racing channel removal fires put_wq.
-> - fastrpc_notify_users() now calls schedule_work(&ctx->put_work) for
->   interrupted contexts to drop the worker ref on channel removal.
-> - Add dev_warn() on TIMEOUT and ERESTARTSYS for post-mortem debugging.
-> - Use list_del_init() instead of list_del() in the bail path.
-> 
-> Link to v1: https://lore.kernel.org/all/20260525124222.3082420-1-anandu.e@oss.qualcomm.com/
-> ---
->  drivers/misc/fastrpc.c | 101 +++++++++++++++++++++++++++++++++++++++----------
->  1 file changed, 82 insertions(+), 19 deletions(-)
-> 
-> diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
-> index f3a49384586d..c0859a501617 100644
-> --- a/drivers/misc/fastrpc.c
-> +++ b/drivers/misc/fastrpc.c
-> @@ -280,7 +280,6 @@ struct fastrpc_channel_ctx {
->  	struct fastrpc_device *secure_fdevice;
->  	struct fastrpc_device *fdevice;
->  	struct fastrpc_buf *remote_heap;
-> -	struct list_head invoke_interrupted_mmaps;
->  	bool secure;
->  	bool unsigned_support;
->  	u64 dma_mask;
-> @@ -297,6 +296,7 @@ struct fastrpc_user {
->  	struct list_head user;
->  	struct list_head maps;
->  	struct list_head pending;
-> +	struct list_head interrupted;
->  	struct list_head mmaps;
->  
->  	struct fastrpc_channel_ctx *cctx;
-> @@ -522,6 +522,11 @@ static void fastrpc_user_free(struct kref *ref)
->  		fastrpc_context_put(ctx);
->  	}
->  
-> +	list_for_each_entry_safe(ctx, n, &fl->interrupted, node) {
-> +		list_del(&ctx->node);
-> +		fastrpc_context_put(ctx);
-> +	}
-> +
->  	list_for_each_entry_safe(map, m, &fl->maps, node)
->  		fastrpc_map_put(map);
->  
-> @@ -557,6 +562,12 @@ static void fastrpc_context_free(struct kref *ref)
->  	cctx = ctx->cctx;
->  	fl = ctx->fl;
->  
-> +	/* Remove from fl->interrupted if present; no-op for normal paths. */
-> +	spin_lock(&fl->lock);
-> +	if (!list_empty(&ctx->node))
-> +		list_del_init(&ctx->node);
-> +	spin_unlock(&fl->lock);
-> +
->  	for (i = 0; i < ctx->nbufs; i++)
->  		fastrpc_map_put(ctx->maps[i]);
->  
-> @@ -594,6 +605,42 @@ static void fastrpc_context_put_wq(struct work_struct *work)
->  	fastrpc_context_put(ctx);
->  }
->  
-> +static void fastrpc_context_save_interrupted(struct fastrpc_invoke_ctx *ctx)
-> +{
-> +	spin_lock(&ctx->fl->lock);
-> +	list_del(&ctx->node);
-> +	list_add_tail(&ctx->node, &ctx->fl->interrupted);
-> +	spin_unlock(&ctx->fl->lock);
-> +	/*
-> +	 * invoke_send bumped the kref to 2; the bail path skips the put
-> +	 * for ERESTARTSYS.  Drop it here so the worker's put reaches 0
-> +	 * and triggers context_free.
-> +	 */
-> +	fastrpc_context_put(ctx);
-> +}
-> +
-> +static struct fastrpc_invoke_ctx *fastrpc_context_restore_interrupted(
-> +			struct fastrpc_user *fl, u32 sc)
-> +{
-> +	struct fastrpc_invoke_ctx *ctx = NULL, *ictx, *n;
-> +
-> +	spin_lock(&fl->lock);
-> +	list_for_each_entry_safe(ictx, n, &fl->interrupted, node) {
-> +		if (ictx->pid != current->pid)
-> +			continue;
-> +		if (ictx->sc != sc || ictx->fl != fl) {
-> +			spin_unlock(&fl->lock);
-> +			return ERR_PTR(-EINVAL);
-> +		}
-> +		ctx = ictx;
-> +		list_del(&ctx->node);
-> +		list_add_tail(&ctx->node, &fl->pending);
-> +		break;
-> +	}
-> +	spin_unlock(&fl->lock);
-> +	return ctx;
-> +}
-> +
->  #define CMP(aa, bb) ((aa) == (bb) ? 0 : (aa) < (bb) ? -1 : 1)
->  static int olaps_cmp(const void *a, const void *b)
->  {
-> @@ -1243,8 +1290,6 @@ static int fastrpc_internal_invoke(struct fastrpc_user *fl,  u32 kernel,
->  				   struct fastrpc_invoke_args *args)
->  {
->  	struct fastrpc_invoke_ctx *ctx = NULL;
-> -	struct fastrpc_buf *buf, *b;
-> -
->  	int err = 0;
->  
->  	if (!fl->sctx)
-> @@ -1258,6 +1303,14 @@ static int fastrpc_internal_invoke(struct fastrpc_user *fl,  u32 kernel,
->  		return -EPERM;
->  	}
->  
-> +	if (!kernel) {
-> +		ctx = fastrpc_context_restore_interrupted(fl, sc);
-> +		if (IS_ERR(ctx))
-> +			return PTR_ERR(ctx);
-> +		if (ctx)
-> +			goto wait;
-> +	}
-> +
->  	ctx = fastrpc_context_alloc(fl, kernel, sc, args);
->  	if (IS_ERR(ctx))
->  		return PTR_ERR(ctx);
-> @@ -1273,11 +1326,20 @@ static int fastrpc_internal_invoke(struct fastrpc_user *fl,  u32 kernel,
->  	if (err)
->  		goto bail;
->  
-> +wait:
->  	if (kernel) {
-> -		if (!wait_for_completion_timeout(&ctx->work, 10 * HZ))
-> +		if (!wait_for_completion_timeout(&ctx->work, 10 * HZ)) {
->  			err = -ETIMEDOUT;
-> +			dev_warn(fl->sctx->dev,
-> +				"fastrpc_invoke: TIMEOUT ctxid=0x%llx handle=0x%x nscalars=%d\n",
-> +				ctx->ctxid, handle, ctx->nscalars);
-> +		}
->  	} else {
->  		err = wait_for_completion_interruptible(&ctx->work);
-> +		if (err == -ERESTARTSYS)
-> +			dev_warn(fl->sctx->dev,
-> +				"fastrpc_invoke: INTERRUPTED ctxid=0x%llx handle=0x%x nscalars=%d\n",
-> +				ctx->ctxid, handle, ctx->nscalars);
->  	}
->  
->  	if (err)
-> @@ -1296,21 +1358,15 @@ static int fastrpc_internal_invoke(struct fastrpc_user *fl,  u32 kernel,
->  		goto bail;
->  
->  bail:
-> -	if (err != -ERESTARTSYS && err != -ETIMEDOUT) {
-> -		/* We are done with this compute context */
-> +	if (ctx && err == -ERESTARTSYS) {
-> +		fastrpc_context_save_interrupted(ctx);
-> +	} else if (ctx) {
->  		spin_lock(&fl->lock);
-> -		list_del(&ctx->node);
-> +		list_del_init(&ctx->node);
->  		spin_unlock(&fl->lock);
->  		fastrpc_context_put(ctx);
->  	}
->  
-> -	if (err == -ERESTARTSYS) {
-> -		list_for_each_entry_safe(buf, b, &fl->mmaps, node) {
-> -			list_del(&buf->node);
-> -			list_add_tail(&buf->node, &fl->cctx->invoke_interrupted_mmaps);
-> -		}
-> -	}
-> -
->  	if (err)
->  		dev_dbg(fl->sctx->dev, "Error: Invoke Failed %d\n", err);
->  
-> @@ -1662,6 +1718,7 @@ static int fastrpc_device_open(struct inode *inode, struct file *filp)
->  	spin_lock_init(&fl->lock);
->  	mutex_init(&fl->mutex);
->  	INIT_LIST_HEAD(&fl->pending);
-> +	INIT_LIST_HEAD(&fl->interrupted);
->  	INIT_LIST_HEAD(&fl->maps);
->  	INIT_LIST_HEAD(&fl->mmaps);
->  	INIT_LIST_HEAD(&fl->user);
-> @@ -2460,7 +2517,6 @@ static int fastrpc_rpmsg_probe(struct rpmsg_device *rpdev)
->  	rdev->dma_mask = &data->dma_mask;
->  	dma_set_mask_and_coherent(rdev, DMA_BIT_MASK(32));
->  	INIT_LIST_HEAD(&data->users);
-> -	INIT_LIST_HEAD(&data->invoke_interrupted_mmaps);
->  	spin_lock_init(&data->lock);
->  	idr_init(&data->ctx_idr);
->  	data->domain_id = domain_id;
-> @@ -2493,13 +2549,23 @@ static void fastrpc_notify_users(struct fastrpc_user *user)
->  		ctx->retval = -EPIPE;
->  		complete(&ctx->work);
->  	}
-> +	/*
-> +	 * Interrupted contexts hold two refs: one for the invoker and one
-> +	 * for the async worker from fastrpc_invoke_send.  Complete them so
-> +	 * any blocked retry wakes, and schedule put_wq to drop the worker
-> +	 * ref -- the invoker ref is released by fastrpc_user_free().
-> +	 */
-> +	list_for_each_entry(ctx, &user->interrupted, node) {
-> +		ctx->retval = -EPIPE;
-> +		complete(&ctx->work);
-> +		schedule_work(&ctx->put_work);
-> +	}
->  	spin_unlock(&user->lock);
->  }
->  
->  static void fastrpc_rpmsg_remove(struct rpmsg_device *rpdev)
->  {
->  	struct fastrpc_channel_ctx *cctx = dev_get_drvdata(&rpdev->dev);
-> -	struct fastrpc_buf *buf, *b;
->  	struct fastrpc_user *user;
->  	unsigned long flags;
->  
-> @@ -2516,9 +2582,6 @@ static void fastrpc_rpmsg_remove(struct rpmsg_device *rpdev)
->  	if (cctx->secure_fdevice)
->  		misc_deregister(&cctx->secure_fdevice->miscdev);
->  
-> -	list_for_each_entry_safe(buf, b, &cctx->invoke_interrupted_mmaps, node)
-> -		list_del(&buf->node);
-> -
->  	if (cctx->remote_heap)
->  		fastrpc_buf_free(cctx->remote_heap);
->  
-> 
-> ---
-> base-commit: dc59e4fea9d83f03bad6bddf3fa2e52491777482
-> change-id: 20260701-master-2ba6246f29d1
-> 
-> Best regards,
-> --  
-> Anandu Krishnan E <anandu.e@oss.qualcomm.com>
-> 
-
+-- 
+With best wishes
+Dmitry
