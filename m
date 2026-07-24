@@ -1,140 +1,148 @@
-Received: from h7.fbrelay.privateemail.com (h7.fbrelay.privateemail.com [162.0.218.230])
+Received: from sender4-op-o11.zoho.com (sender4-op-o11.zoho.com [136.143.188.11])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48B1C367B6D;
-	Fri, 24 Jul 2026 19:18:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=162.0.218.230
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784920709; cv=none; b=ZXuJCdi40e5bjqxO7VGZpRUAMx4MK8AeZDIf2vB4VIMAa3PYh99cMg7URHVWEHSPdSfRe1e5jk3OW8k2W0Z5zyIA2KJcIMzUtuJwS1E2d7tOrknRdu2bqcQDcfiJzl/kD+fEX8Zx6F6LOUqD+fei/gRrjjdqFDAVXd1/4/SorzE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784920709; c=relaxed/simple;
-	bh=ixWNwLfVz61mzrBIXIEsXmzlE2Ha3tHFrKL8fyNJVQs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=fN7s/XNqADd01a2YUy1m20ryWfT2boVkFF4BQ0mp9Kutz03DKFWOjG1JHXfFXAWihdULQhfftWy7jhaqlUcmudxVG9+TX7re6HjJT2LLTUtA/1Z3KfEKit99Rq1RlC06PqyoQGT9C/YgtA4bOT+HHTxl0z8t19boV82FXpidWY8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net; spf=pass smtp.mailfrom=catcrafts.net; arc=none smtp.client-ip=162.0.218.230
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=catcrafts.net
-Received: from MTA-08-4.privateemail.com (mta-08.privateemail.com [198.54.118.215])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits))
-	(No client certificate requested)
-	by h7.fbrelay.privateemail.com (Postfix) with ESMTPSA id 4h6Hk30Zb4z2xHQ;
-	Fri, 24 Jul 2026 15:14:51 -0400 (EDT)
-Received: from mail.privateemail.com (K8S-PROD-WORKER-14 [87.215.145.39])
-	by mta-08.privateemail.com (Postfix) with ESMTPA id 4h6HjQ5F22z3hhTR;
-	Fri, 24 Jul 2026 15:14:18 -0400 (EDT)
-From: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
-To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Cc: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
-	Mark Brown <broonie@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Charles Keepax <ckeepax@opensource.cirrus.com>,
-	Maciej Strozek <mstrozek@opensource.cirrus.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Bard Liao <yung-chuan.liao@linux.intel.com>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	Richard Fitzgerald <rf@opensource.cirrus.com>,
-	Luca Weiss <luca.weiss@fairphone.com>,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	patches@opensource.cirrus.com,
-	linux-kernel@vger.kernel.org
-Subject: Re: [RFC PATCH 0/8] ASoC: SDCA: enable on DT platforms and add Qualcomm WCD9378 (Tambora) codec
-Date: Fri, 24 Jul 2026 21:14:06 +0200
-Message-ID: <20260724191406.7855-1-jorijnvdgraaf@catcrafts.net>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <06aef9a5-7e8e-4262-9b41-a9c43f588da9@oss.qualcomm.com>
-References: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com> <20260723194045.49021-1-jorijnvdgraaf@catcrafts.net> <06aef9a5-7e8e-4262-9b41-a9c43f588da9@oss.qualcomm.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3061138D687;
+	Fri, 24 Jul 2026 21:51:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=136.143.188.11
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784929910; cv=pass; b=cOPrbOJqdt+KFLLaVmPw2C5aWuWct/GvHK2TJ6sQ/nzO3Xt57pBnsjrg4HU5V8XkKgBI/u5tzy3h9R6gdQqifK5gZb6cpQbWpSYCjC7QKpTA7VAW9nyIBXb/d/gMswJfpSFObFBYRB3zzXZQBMqtAMN1Mmm69jp6vr3vcOXQqPc=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784929910; c=relaxed/simple;
+	bh=ua2qwYr6S4tpVPJjIjGVRtMMBQ8njszvyH/aingQNhU=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=LbX9LNqTO3YWUCi2M/Vb+Cymqj0v/4vCVEXcGwxPnYIVfv/wt9+xaf18e3c8sVG2qQo5RVN8GgKUlK5CPPETlqf9YOLc2Jil9QedKX4aQM3Ulw2OjytBQ55a5Q2hravOkEqlLNvsLkYPan18JfpXB8PpIvjR6ZXZ++1T1cJBdKY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com; spf=pass smtp.mailfrom=collabora.com; dkim=pass (1024-bit key) header.d=collabora.com header.i=sebastian.reichel@collabora.com header.b=atvDK0mQ; arc=pass smtp.client-ip=136.143.188.11
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (1024-bit key) header.d=collabora.com header.i=sebastian.reichel@collabora.com header.b="atvDK0mQ"
+ARC-Seal: i=1; a=rsa-sha256; t=1784929893; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=oDXJGvsrkabItjiH+v4NuUbnqaJXs9R5UMnFLoeALWPjgS3E9uwieCTPysdaXlqtQx7Y0glSQUdvXkPfVvwkEzwSRINfHfr0Q1JTW1Gok8jUaiRMueLjhndyiVQEcdMN1phJAxTCQh34jm06Q7hH3JUtXoJTqWw0NUTOdpQaSuI=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1784929893; h=Content-Type:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=rxObKoBYz9bdL1QDIAY38u1ujROlN6uVzdz2O8QptDc=; 
+	b=RB0co4FTwKqnrPA6pjLLZ713gW0Q0PTePi1zV+IyVeuuPquzonPTmhgnAhfuWaJPv04lBdj46SpdD9TGnXpn6cJGlDjgUZQSya+A1FsKRJWvrHzlfBdA6Fd+y5A5rgUwFKSsFa0Jp9kAN5jt+1/1gHDoZeDsN4gBtS8i2dIHzQQ=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=sebastian.reichel@collabora.com;
+	dmarc=pass header.from=<sebastian.reichel@collabora.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1784929893;
+	s=zohomail; d=collabora.com; i=sebastian.reichel@collabora.com;
+	h=Date:Date:From:From:To:To:Cc:Cc:Subject:Subject:Message-ID:MIME-Version:Content-Type:In-Reply-To:Message-Id:Reply-To;
+	bh=rxObKoBYz9bdL1QDIAY38u1ujROlN6uVzdz2O8QptDc=;
+	b=atvDK0mQ8rOk1q1Cl/hJbTPH1cdUWpWueM1L/ETUu7NRbP6HMTeR03A+Esw30YlC
+	ANd/Z77xm6JykrrewsP96vFrCHkqSaW4mDpHqCtppyS2/nXIUvHMMI3ORKglr0bcjn/
+	bD5iqewvFeSMvisjM9YKei0KR1agwMO2dn9+3vQ0=
+Received: by mx.zohomail.com with SMTPS id 178492989200395.17774346570991;
+	Fri, 24 Jul 2026 14:51:32 -0700 (PDT)
+Received: by venus (Postfix, from userid 1000)
+	id EE334181F16; Fri, 24 Jul 2026 23:51:27 +0200 (CEST)
+Date: Fri, 24 Jul 2026 23:51:27 +0200
+From: Sebastian Reichel <sebastian.reichel@collabora.com>
+To: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	linux-phy@lists.infradead.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org
+Subject: Re: [PATCH v5 3/5] phy: snps-eusb2: Set phy type to EUSB2
+Message-ID: <amPdeL2GWkNhPoal@venus>
+References: <20260723-eusb2-int-handling-v5-v5-0-f32ea6c1a318@oss.qualcomm.com>
+ <20260723-eusb2-int-handling-v5-v5-3-f32ea6c1a318@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="m55f6i4q6qo7c2yd"
+Content-Disposition: inline
+In-Reply-To: <20260723-eusb2-int-handling-v5-v5-3-f32ea6c1a318@oss.qualcomm.com>
+X-Zoho-Virus-Status: 1
+X-Zoho-AV-Stamp: zmail-av-0.2.10.1.5.2/284.919.37
+X-ZohoMailClient: External
 
-Hi Srini,
 
-On Fri, 24 Jul 2026 13:17:06 +0100, Srinivas Kandagatla wrote:
-> > Your probe already returns -ENODEV when qcom,compute-mode is absent;
-> > v2 of my mobile series will add the mirror check, so neither driver
-> > can bind the other's slaves regardless of probe order. If a single
-> > owner of the modalias is preferred instead, a small wcd9378-common
-> > stub dispatching on the property also works for me — your call.
-> [...]
-> We need single entry point, if not we will endup with two modalias. Yes
-> current RFC driver was only tested for compute.
-> I agree we should have a common so that we can leverage some code from
-> both modes.
+--m55f6i4q6qo7c2yd
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v5 3/5] phy: snps-eusb2: Set phy type to EUSB2
+MIME-Version: 1.0
 
-Single entry point it is — that replaces the mirror check I had queued
-above. My v2 will add the common stub instead: one sdw_driver owning
-the 0x0217/0x0110 ID table, probe dispatching on the DT mode
-properties (qcom,compute-mode -> compute, otherwise the mobile TX/RX
-paths), with the compute branch returning -ENODEV until your driver
-lands. Happy to shape the factoring to whatever slots into your v2
-best, and shared code can accumulate in the common module as it shows
-up.
+Hi,
 
-> That is expected on WCD codecs. only TX has CSR registers space.
-> RX can not read/write any of the codec register space.
-> However the soundwire SCP address space is accessible and expected to
-> set data ports for both tx and rx.
+On Thu, Jul 23, 2026 at 04:09:06PM +0530, Krishna Kurapati wrote:
+> USB controllers like DWC3 are agnostic of the kind of phy (USB2/eUSB2)
+> connected to it. Set the phy type to EUSB2 to let the controller know
+> the phy type when queried during its probe.
+>=20
+> Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+> ---
+>  drivers/phy/phy-snps-eusb2.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+>=20
+> diff --git a/drivers/phy/phy-snps-eusb2.c b/drivers/phy/phy-snps-eusb2.c
+> index f90bf7e95463..e139b17bcda5 100644
+> --- a/drivers/phy/phy-snps-eusb2.c
+> +++ b/drivers/phy/phy-snps-eusb2.c
+> @@ -13,6 +13,8 @@
+>  #include <linux/regulator/consumer.h>
+>  #include <linux/reset.h>
+> =20
+> +#include <dt-bindings/phy/phy.h>
+> +
+>  #define EXYNOS_USB_PHY_HS_PHY_CTRL_RST	(0x0)
+>  #define USB_PHY_RST_MASK		GENMASK(1, 0)
+>  #define UTMI_PORT_RST_MASK		GENMASK(5, 4)
+> @@ -597,6 +599,8 @@ static int snps_eusb2_hsphy_probe(struct platform_dev=
+ice *pdev)
+>  		return PTR_ERR(generic_phy);
+>  	}
+> =20
+> +	phy_set_type(generic_phy, PHY_TYPE_EUSB2);
 
-Thanks, good to have that confirmed.
+Isn't there a potential race condition if it's handled in this way?
 
-> Thanks that would be nice, Also am thinking that we should just have
-> qcom,port-mapping for both modes and mark one of the device as
-> qcom,control-device which is tx in mobile case. That way we have some
-> level of clean bindings that overlap. But I will leave it up to you.
+1. phy-snps-eusb2 probe: PHY is registered
+2. dwc3 probes
+3. phy-snps-eusb2 probe: PHY type is set
 
-Let's use your shape. The merged file then has a single
-qcom,port-mapping (still optional, as the wcd938x mappings are) on both
-slave nodes, and qcom,control-device marking the TX slave in the
-mobile presentation — the explicit flag takes over the TX/RX
-discrimination that the split property names provided in my v1, and it
-doubles as dispatch information for the common stub. Compute-only
-requirements (#sound-dai-cells on the slave nodes, and whatever else
-your v2 needs there) go behind if: qcom,compute-mode. I'll
-carry the merged file in my v2 so your v2 can drop patch 7.
+Greetings,
 
-> Yes, This is definitely an useful experiment, I was trying something
-> similar with both tx and rx side on mobile mode, things got really
-> complex because the sdw stream has to be handled by rx codec where as tx
-> side will be handled by sdca side.. it was really messy.
-> [...]
-> I think you should continue to do the mobile mode driver as it was done
-> in v1 not think about sdca. Function setup on mobile mode are dynamic
-> user can set sys_usage based on usecase so the sdca functions will
-> change, this is not static anymore so its not really worth thinking of
-> sdca for mobile atm, but we could try to see if we can get some leverage
-> from sdca helpers.
->
-> Sorry for the noise i hope it was a worth experiment on mobile mode.
+-- Sebastian
 
-No noise at all — it answered the RX-slave question and produced the
-coexistence data above, so it paid for itself. Agreed on the
-direction: mobile v2 stays the v1 approach, no SDCA; where a class
-helper fits the mobile driver internals I'll borrow rather than
-reinvent. I'll leave the sdca-mobile branch up, frozen at the RFC
-state, for reference.
+> +
+>  	dev_set_drvdata(dev, phy);
+>  	phy_set_drvdata(generic_phy, phy);
+> =20
+>=20
+> --=20
+> 2.34.1
+>=20
+>=20
 
-> Am really Sorry not sure how I missed that.
+--m55f6i4q6qo7c2yd
+Content-Type: application/pgp-signature; name="signature.asc"
 
-No worries.
+-----BEGIN PGP SIGNATURE-----
 
-So, concretely: my v2 carries the common entry point, the merged
-binding as above, and the driver review items already queued from the
-v1 thread; on your side patch 7 goes away and the compute probe hooks
-into the stub. I'm spinning v2 next, so the merged binding will be
-on the list for your v2 to reference.
+iQIzBAABCgAdFiEE72YNB0Y/i3JqeVQT2O7X88g7+poFAmpj3lsACgkQ2O7X88g7
++ppUyQ/9Em5Or2yxSmbUYLORK19KD1Ah9p71VebqMaZ/N4eIcJpgJ+U7LU//WbV0
+K/UeAVFd7AFU0w/aPAQBgz/WgUW406YPriExgZsr8CWHDQyWlmVrr0LVeCHy+x+Q
+UzeBQaZsXISMhjKClU0lVhcQHUoedsdj7CFydDsyuRoz/xZvc0TcJ79UMvrDqVAl
+jlksFfBQQ8pDU0N81xv0F5ESB5GUID27RAAT3UnCub9WwKqoTvxcrpkwqsIw4EgQ
+ttU/wwf7lM+9mzoYYXupTG8g2OuhpJSFdJTf0EHFh1una9EZ/5fy76xzESsSlQ6j
+Q+V91T74J94m3His2Tm9SHXzv2JFj7GG8Ayk6uvYzBlZJ8VBvEZajNyR0zmYHq6v
+TgNBh89YATTx/0QHiZPQC3bBiWNvsQDNkkQU/Rjk97UM2n09M3CH/Ymkcdgmb+f1
+H9/8wYK4RLJPFnOodSPqQFsXqBvYXAIgembbFCupDvPz76EycTHDIiscGiXQhVfw
+EdM2GOlvc77BrGSfCpjbULsLd1pqBHRwxQym15cTY8FUM4/d9ZqdS3+fDtY5URPv
+eayatF4MyBo8+jhol6prDNPvKuSxuPZnMZaskylhUMYvEElxTnHBBlnkWGyRFsYO
+T4pbgRFEclb/xZA/YYLdZ/7rtwsfqrAKjh2je+eKfh+eb3rpfxM=
+=Pqf2
+-----END PGP SIGNATURE-----
 
-Thanks,
-Jorijn
+--m55f6i4q6qo7c2yd--
