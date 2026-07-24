@@ -1,483 +1,184 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 249E844E647
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:25:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0CC84447806
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:29:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784917526; cv=none; b=YjRfkIMKohdyJ9UBzdzwveH4x/QNgHoypHdeqsqiS2++VXL08pvJwH8DE7IIGjCeyVkFt1Mjn1dDma4EOANovMVFEStFfAat9Dixb0fxuZIjKUla6mCY4uUj6Cmc4xvw4NdTAmgB7ndN6bTBVkJwrIACIxHXbYQsqaJzxrkft5M=
+	t=1784917751; cv=none; b=UbYvrNvnu7JXiZvusiAeI6NpfK8g2ZSFZBs7eBZhU/5OJfmvoEdXcp+jUSSNdaEvf/XQ5fHmrt8Hix8rBRT5EItN1e64YhAeLtujD+9ELuJAVnuJMCxSKTLySS8SW0KWV9bSAeAVYAW/6ROCqvmIuQ+MmQ4MwGLs7qHcTP2uBbc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784917526; c=relaxed/simple;
-	bh=e6ZGeB4iU4cHZ/bJJvHpXZM4Ynn8k79NdZJa3IR7dNk=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=eCoJRk4v2uWmH/3M5J4IQWASjxwrGVa+SQxleJjKszLG+peRTcBhIEaZh76I1OtKQrbGoJ9SMu1JNTWbJ5MyvOUAxhUxo0R1OeS1B9+9WgqGbc24jpPfBO9mjF8cQStli7/zf9mq/r57WchEm7B38Fkzu0HN6EvO11xflWFGuyI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kbo4sb/C; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=O4obcm4n; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1784917751; c=relaxed/simple;
+	bh=WPgCvH2gb2oeEDvDDFVu1OrHqQ+OtMynV0OcFiMm/m0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=K1qriHFx4diL3TYpd/7KNco9w11fIXVnbRAEJKVVNYO40UyvACRWvR8ZrAiCjIKW1xBSnkHS3A0swzte0SCBxsXPst/xqVrHIMLD5zKUPx/DskSt58wrixa3QEdnDQqyq7wrI5oryjlxCa/qQqEA01U4FSKeJp8FaX1pHACR0HU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QASREFS5; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OXJlFHIs; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kbo4sb/C";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="O4obcm4n"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66OGqSb03755215
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:25:23 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QASREFS5";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OXJlFHIs"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66OGqgO33936772
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:29:09 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=MryDxrVPdee
-	PlgqYirkPEnw1CIQSHHAkyIbBI8/yqKQ=; b=kbo4sb/CMt8jlnxyxMidY/iNYEl
-	S7cf8BTcEhxgfjlu3RxRsWqPHTQCKbAYJpudlu5Nya7ThwSyOSZIGddAxShP5OJD
-	rY0FknJaEYelb0pR9prw7phT7yVStpiC+2iaXcPEJ97CEh0qtuhkZiiEnawCbU0P
-	3byLF+BgfDrgd1gtwmoA5LBDU3163nw352ZnABrYUsO72arf0mrT6hmPNZRoqLI4
-	em+ivKqs51MiiVI7lzJhJQ3dCUtRu55ikaI02i7vhtHkOiDyW5kRi/MNYc972Hm5
-	s4/DWdNklTV/UJ1NCGQwLBsAUHbRFJAtVLh5IVYsFXFfRAm0XHlQsEetwtA==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fmb9nrfs7-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=tyuLKAsbbSnD/aUHou1wop
+	Zpn/sYBaQhfJipC2SaYHE=; b=QASREFS5/g41b629az1uNOONwN1obxJDdWlOzr
+	tuwaP9vAxTkViw3L4vTUbbIZ7j8jJSquTfJWtv4KV95o23OBWAmH8iRdTQTOSKrr
+	HHeSN2FIj8Ie1YLJ8182fuF1nLIJ/yaFwrA7G+5fbX0VZJ+MkHLjsRH7UFdLx/cR
+	H2s/rnJVAkmxcaUdLWpfbZM4dM3cjNS9OcwmoOYOTmpLgqSK41A0q78pvYop/r74
+	n2qy6rz7wgqAWpnFBbiXqOhslbIBDiv8zCeGQxwHV9Jh/2t+Ph1svv1KTgFtkgPk
+	7yauNH56QzFuG+ZfQ/t+dWEZ/z7UNR8f1MvZE02i9y2ywYAg==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fmb6p8h3h-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:25:22 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-ca7c1e22995so1113591a12.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 11:25:22 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 18:29:09 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-cb733fc5024so993503a12.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 11:29:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1784917522; x=1785522322; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=MryDxrVPdeePlgqYirkPEnw1CIQSHHAkyIbBI8/yqKQ=;
-        b=O4obcm4nldcDfXXQj28jmR7dmTcpLx5R+qYqIR6c5Ku0MDQcZs7m+sRqR9PB98ym/y
-         tRVetuYSq4yuMoLauNRf39bRPJEdgaeOf7LrKg4rhMK+19C2BZG6R1hIOSod4VBp1Xnf
-         DynfaUJcJsriBZMTly3ghmzV1twlmFwE1YjMHlC9Ds6wIDYqM+ayCD1psBj4Q9C2i9Bm
-         tg0pVRu/Anabu1n6XrVuyPv7s1aS4keGd6S0Otx+HZaivV9KtIHHb5DpHmbijfGk+U+R
-         4fg4zHY8/C/FDH5+dg3Lumx5ry+mi3nWfHpYhkAnKHNuH0tOo9KSnd/4dLETmVPv/Fm/
-         gaHQ==
+        d=oss.qualcomm.com; s=google; t=1784917748; x=1785522548; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=tyuLKAsbbSnD/aUHou1wopZpn/sYBaQhfJipC2SaYHE=;
+        b=OXJlFHIsm9Vbhsp3TK/Ks/quZZhWc89e+WrMS1M4rAy/3Wk8h9ytVL6tOMQnAX7R5g
+         N2LIjr6qOBQugTEAnCdenuLoQ35F57O3Upw+emyF1dZyWUkCgT/L+n4jdBwyymdcONjK
+         TLnJd/oFLud+2bnseBBR8hSCPz54wGVmgoPYjOJOIKD57H0iyL1U0IRzzEEL9MjxDsW6
+         1EqXzJjmws1YFalYEiE7ZUoK2s03216mF+I2bCIqMX1PWZ2MqYzbv7zPY6WEUchQnH6Z
+         7SqVM1weTuoIUpLKf/EU8IzU+f2wQbb3+clBuroJcRfp4geVIXJfudOncQd0Oa3c3TU7
+         DtnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784917522; x=1785522322;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=MryDxrVPdeePlgqYirkPEnw1CIQSHHAkyIbBI8/yqKQ=;
-        b=jlot1dnA6cCbmjICo1qI7hrUAiYmiMh98V0nkrfBMXxGVAWKz3kITMZVwjTQufndFO
-         Q4/b0mjNZ44+pDk3/AFstmVntih63OzGiQY+e0T7nu89SrGnKD7klA86X/nR4eQ6/8ea
-         aUgdW4/blTFvQic3xao2xRxvjmRO6HrF6mPvRwHbfKUqDxZiBp+rjxQ89LvUzugsJaKx
-         W78KJMynqb+F/1uhlKTzfqFP6I8/kCk41MoLIWZUukQtzKtBd31vF5jz+Ga1MsqvITwJ
-         hv0WUawegwgDWxK0Xn2OMiD4H5AOHN2Mj12Gz5NR4wI9v5x6peIc+zesC9C/kRAWki0X
-         TAVQ==
-X-Forwarded-Encrypted: i=1; AHgh+RogF10ujimxQdINnfGmGNbz1tlYAnWQOsb7uruy/xQfBZIYputpwuLWfR6h9mQ9lZJixirrGoJ/Af9eGZZQ@vger.kernel.org
-X-Gm-Message-State: AOJu0YzcfItdv4YCfpAWkrpOZvhdk1TpkagTiDpoCXGSAW65N30fI/ns
-	JxTFD4gnA+QWEQMnwJA7Yfjf0JscYFBOiluGkHQ4kVzMRWP25R8E4nB6nrBUIT9U1c4u2exK5og
-	y23qWci1lLKCDGc7ZgeDrof71ZW9POitHpbdJNjhGIlXfNp5YlScmUXCC3+C2kwGOhIh0
-X-Gm-Gg: AR+sD12eXLagDeH0O7uqjbqN1ucFC/eyfH2S9l97EO9+HIVHFuOIL1MkMB8Sg9H2lli
-	9SK8QPst/d3MtNJnRt4RWcVIgWDPx6rAMetCvjnUMJvTiUj+UWvSihro1z4ee7GAaDxcHUaHzPg
-	xr+bLdJUeRC8ftoDLxD3WqukW0xIybJhn6i+tbVfdgYqhqtqR4RLrj1FQ2FVfMfKoI5qVZLjO94
-	IWeAVCTLRbGwrcoGOgAMd9wUY1vLT0NVV9JkNfL1lYitdrJqWXXR3Os8M17mjg8AqzXXgNRizVH
-	gBMNMSM4jakInk/ub1pYE7uLQaE4sOUri5vWzksxx7QzNYGuaGl3X93VwtT16erMkCB2MDkuKDf
-	rQ5IyFXpFsCdZGRRxRcg1xFwXyDHSwJ1cBvgr
-X-Received: by 2002:a05:6a21:689:b0:3c3:94a8:7c18 with SMTP id adf61e73a8af0-3c44b18d9e4mr8649635637.37.1784917521904;
-        Fri, 24 Jul 2026 11:25:21 -0700 (PDT)
-X-Received: by 2002:a05:6a21:689:b0:3c3:94a8:7c18 with SMTP id adf61e73a8af0-3c44b18d9e4mr8649594637.37.1784917521340;
-        Fri, 24 Jul 2026 11:25:21 -0700 (PDT)
-Received: from hu-mohs-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-314bc5a67f3sm1669324eec.29.2026.07.24.11.25.16
+        d=1e100.net; s=20251104; t=1784917748; x=1785522548;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=tyuLKAsbbSnD/aUHou1wopZpn/sYBaQhfJipC2SaYHE=;
+        b=Wm3ksktulxcSMapho/SXkDtGdEl9Fbs7//Cizy7Ni3Qs/B3C83wdk6q2ijfD3XbVgy
+         jUAzzIwGhazmdnxnuTxN7slsBIyVMKUqd6W6FSg/rPuVcmAKjXHLG/yXiF2UAL4mCWBL
+         mQIVG/24UqkbAB12e+TocbAJBlM4o2gcFGi2vJbkCP6CZL52saACUOB3X8pR73mbNxgi
+         /IHVsOu1tXt6qrANub/TVJcBcSS2hjcQXaJyjM/R76iY/U4eykWgbNHhPTH3t+tRHo8t
+         PQiflyVdfrweX6HQThvKufmGSa638qIPIgVklZlzw1HXmL4y1BlWFkvyxTa2u9HHwsWs
+         L/CA==
+X-Gm-Message-State: AOJu0YwXDlIzzKsEX7Va6X6lYHIrtEEqlykN1ii9LjXGJY8tN04S4OAo
+	uv2XdAU1BhXoPCl315N4pvMknN0ep/k8ZRBPZALQUlUIOqfdIlY4+4ixPB0Sa59BPio6FO58pOf
+	f2kpWqm0XdWWjoo/BqeocU+Dn9ZpvAooLaySf+iuA/LnMfzc/+NdHRKBMAGnYNUchSxLl
+X-Gm-Gg: AR+sD11JTdiwgkjw2ywtPwJy/xVqQXcY2oTKikW+a0+dFIiFT/qHrVxCbFfE8A6G/m1
+	H1qQsP6TmjoAchhYnwSnUZec0CDBsznV+7NfK+Ajyz0hjNZ2W2e17gw3qGskxxEsRtTlZtNjPmw
+	vNoOjcY/xVxTwV1zkUHa09r+n1TfiQkh30WOWa66qkACva3F/NYM90udfKemksMLd0X/PdOIyLd
+	2q6zJvdhWc4jPBplTcW2bCbZ0a2g4i14Fhk1aRR2L/+jnOAanUOPoBumV03Tv2unEuYYia5JPtA
+	WwhEFFfxpoJ5g1i3sFRIPoS3LDUB/4lBI1jCaeAGiHTJ9n6ya+GeLXLvCybUi/8Qxw+E8kpejwd
+	ab56+3mpXatj9h+5oeQVc96EbsL0=
+X-Received: by 2002:a05:6a21:44c8:b0:3c1:fbf:1e2e with SMTP id adf61e73a8af0-3c44afa2d9cmr8978801637.10.1784917748433;
+        Fri, 24 Jul 2026 11:29:08 -0700 (PDT)
+X-Received: by 2002:a05:6a21:44c8:b0:3c1:fbf:1e2e with SMTP id adf61e73a8af0-3c44afa2d9cmr8978776637.10.1784917747796;
+        Fri, 24 Jul 2026 11:29:07 -0700 (PDT)
+Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-314bc5c53f3sm1341510eec.30.2026.07.24.11.29.04
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jul 2026 11:25:20 -0700 (PDT)
-From: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
-To: Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-sound@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
+        Fri, 24 Jul 2026 11:29:07 -0700 (PDT)
+From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Sumit Garg <sumit.garg@oss.qualcomm.com>,
         Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [PATCH v7 3/3] ASoC: qcom: sc8280xp: enhance machine driver for board-specific config
-Date: Fri, 24 Jul 2026 23:54:46 +0530
-Message-Id: <20260724182446.1484894-4-mohammad.rafi.shaik@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260724182446.1484894-1-mohammad.rafi.shaik@oss.qualcomm.com>
-References: <20260724182446.1484894-1-mohammad.rafi.shaik@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-remoteproc@vger.kernel.org,
+        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Subject: [PATCH v5 0/6] remoteproc: qcom: pas: Misc fixes
+Date: Fri, 24 Jul 2026 23:58:52 +0530
+Message-ID: <20260724182858.1868271-1-mukesh.ojha@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=XeS5Co55 c=1 sm=1 tr=0 ts=6a63ae12 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=KKAkSRfTAAAA:8
- a=EUspDBNiAAAA:8 a=T-rPskIIbrx-efRHNJwA:9 a=3WC7DwWrALyhR5TkjVHa:22
- a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: NIiKDR8SAwmkM7kPt-edB8z04yUWOci4
-X-Proofpoint-ORIG-GUID: NIiKDR8SAwmkM7kPt-edB8z04yUWOci4
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDE2NSBTYWx0ZWRfXxydF0aIfof7G
- Fj2wR+DAjpo4TJfMM+3eeq731CSDz4TvCShOJIPAuWVnMNSExnyEOGU9MudmqWDIeQ/cMsBMb7l
- Jgjvv0pLi8Wdr1IFu2O/8UoPf6haA9c=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDE2NSBTYWx0ZWRfX00zR+2lA1G3u
- m3vUYFV+31ah3O7qnM1iQ0hV6IUAVGpRJUwBgxID2Wh4L2p1f05o4Wja//dUuEYbxDwpOEFxkSs
- 84BGKbCodlfkWoSe3zCkNeQOwxoqJkPZb/Q+Xo3f3H6Y492wYd4rpRlVUd5PBmGjRmZX9Xce3ym
- YctemuWXpmxg2OLoSkJCNScLD5/ykED0zKzOOfQXIOGiSZDGkbDewHMlMqqw4m5aLSaCvP0FFoV
- vyNRC15SGaxM2DkY7jBzJjUadZZtRtPcLgAob6F8++tUWTx4Zxvek7R3WBcuoJgI0/1EuhfPalG
- k36z1Qrf1Kt29JWReng5aX4/32inLVAISuWkabe862eIa6rupaFtwfG3RpjUrLLOVmkLhMLR+dG
- WV/NGpe36uGrs2nyC/mPdHGjgmpvibDP5fHOAgp2PS5LGPQ7HiX8fCbxpVUT9MHp5dmfky0TpEl
- d1yUh240PAh1J+zz2OA==
+X-Authority-Analysis: v=2.4 cv=AureGu9P c=1 sm=1 tr=0 ts=6a63aef5 cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=H_pUXcL6yfwzq-Dby1gA:9 a=QEXdDO2ut3YA:10
+ a=_Vgx9l1VpLgwpw_dHYaR:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI0MDE2NiBTYWx0ZWRfX8w/3UyKlrLDw
+ E9QEAusk2Ry1DdSX+YRO3p0luKIlfj+aIvq+GEWolx4fEw5uO1wVPt6uXpYd7vw9fh0pf0cAZ3A
+ OGNgC/shPAWpEclGs5sq5y6aogtCgnU=
+X-Proofpoint-GUID: DEP3dJz_SezBRZCApHS84BHfkoEdmnNU
+X-Proofpoint-ORIG-GUID: DEP3dJz_SezBRZCApHS84BHfkoEdmnNU
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI0MDE2NiBTYWx0ZWRfXw8BxRYdeJjMT
+ e8cc/hWWEs4yHUeqNwlr8DSZ7whhygdMg3EDX/Ip7iMwXmtu4ys9VwHBEblB4FrrAh2BNVBt8lQ
+ uqG/no1jEu2io1KIMMLFngqi9ctVylxeBzRMLb52UMo5WR69XVdOtYShcftT1FcR3kTSuj9OHyV
+ FUhEZ1DLmriWXM8jWXq4MNhj2D584IausR7/BWUbwYeZnqKwSRfSGOrbt7m2QlKzA0cLQmBGvnF
+ BT1+ahOcSlX1zUEgi99mud1hoQ9ffJTxQGkangH8HdM34nOChn91PV/JhMvohy3qQSakAmx9A8a
+ pFv6e9W0aUglxNXnEKk5MKv4Z1J/rLsvuV/fsnkfJ/GWD8DFEW+DL7El9QBB9NtYbWFpveNIhHd
+ Bz1QQ7upj7M+KO2C4Aah0gtVqn1IJ4rEoiN8ezNk2mjchxaj1Gkn882plRoHZHn0GzwYX/W4dNI
+ q2+ZV9FpDb0Sno2Yr/Q==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-24_04,2026-07-24_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 bulkscore=0 suspectscore=0 adultscore=0 malwarescore=0
- clxscore=1015 priorityscore=1501 impostorscore=0 lowpriorityscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607240165
+ lowpriorityscore=0 clxscore=1015 priorityscore=1501 malwarescore=0
+ spamscore=0 bulkscore=0 adultscore=0 impostorscore=0 suspectscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607240166
 
-The sc8280xp machine driver is currently written with a largely
-SoC-centric view and assumes a uniform audio topology across all boards.
-In practice, multiple products based on the same SoC use different board
-designs and external audio components, which require board-specific
-configuration to function correctly.
+This series is a collection of misc fixes for the Qualcomm PAS remoteproc
+driver and its supporting SCM/MDT loader infrastructure.
 
-Several Qualcomm platforms integrate third-party audio codecs
-or use different external audio paths. These designs often require
-additional configuration such as explicit MI2S MCLK/BCLK settings for
-audio to work.
+- Fix sparse __iomem warnings in qcom_adsp, qcom_pas and qcom_wcnss by
+  annotating mem_region fields with __iomem and using __force at call sites.
+- Guard the DTB metadata release in qcom_pas_load() with a dtb_pas_id check,
+  consistent with all other release sites in the driver.
+- Move PAS context allocation from probe into qcom_pas_alloc_memory_region()
+  so the DTB context is only created for subsystems that actually use it.
+- Map/unmap the subsystem memory region on demand around firmware load and
+  coredump, avoiding potential XPU violations on EL2 platforms where the
+  region may be handed off to the remote side.
+- Drop the now-unused dtb_mem_region field from struct qcom_pas.
+- Add a keep_mdt_buf flag to struct qcom_scm_pas_context to make metadata
+  buffer retention explicit rather than implicit.
 
-This change enhances the sc8280xp machine driver to support board-specific
-configuration such as allowing each board variant to provide its own DAPM
-widgets and routes, reflecting the actual audio components and connectors
-present and enabling MI2S MCLK programming for boards that use external
-codecs requiring a stable master clock.
+Depends on:
+https://lore.kernel.org/lkml/20260702115835.167602-1-sumit.garg@kernel.org/
+https://lore.kernel.org/lkml/20260724094939.613844-1-mukesh.ojha@oss.qualcomm.com/
 
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org>
-Signed-off-by: Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>
----
- sound/soc/qcom/sc8280xp.c | 251 +++++++++++++++++++++++++++++++++++---
- 1 file changed, 231 insertions(+), 20 deletions(-)
+Changes in v5:
+   link to v4(https://lore.kernel.org/lkml/20260430191253.4052025-1-mukesh.ojha@oss.qualcomm.com/)
+ - Rebased it latest changes on Generic PAS changes.
+ - Changed a bit related to map API so that it can be used by both
+   by mdt_loader and pas.( 4/6 )
 
-diff --git a/sound/soc/qcom/sc8280xp.c b/sound/soc/qcom/sc8280xp.c
-index 98b15a527e37..2ecba74d736e 100644
---- a/sound/soc/qcom/sc8280xp.c
-+++ b/sound/soc/qcom/sc8280xp.c
-@@ -12,17 +12,78 @@
- #include <sound/jack.h>
- #include <linux/input-event-codes.h>
- #include "qdsp6/q6afe.h"
-+#include "qdsp6/q6apm.h"
-+#include "qdsp6/q6prm.h"
- #include "common.h"
- #include "sdw.h"
- 
-+#define I2S_MCLKFS 256
-+
-+#define I2S_MCLK_RATE(rate) \
-+	((rate) * (I2S_MCLKFS))
-+#define I2S_BIT_RATE(rate, channels, format) \
-+	((rate) * (channels) * (format))
-+
-+static struct snd_soc_dapm_widget sc8280xp_dapm_widgets[] = {
-+	SND_SOC_DAPM_HP("Headphone Jack", NULL),
-+	SND_SOC_DAPM_MIC("Mic Jack", NULL),
-+	SND_SOC_DAPM_SPK("DP0 Jack", NULL),
-+	SND_SOC_DAPM_SPK("DP1 Jack", NULL),
-+	SND_SOC_DAPM_SPK("DP2 Jack", NULL),
-+	SND_SOC_DAPM_SPK("DP3 Jack", NULL),
-+	SND_SOC_DAPM_SPK("DP4 Jack", NULL),
-+	SND_SOC_DAPM_SPK("DP5 Jack", NULL),
-+	SND_SOC_DAPM_SPK("DP6 Jack", NULL),
-+	SND_SOC_DAPM_SPK("DP7 Jack", NULL),
-+};
-+
-+struct snd_soc_common {
-+	const char *driver_name;
-+	const struct snd_soc_dapm_widget *dapm_widgets;
-+	int num_dapm_widgets;
-+	const struct snd_soc_dapm_route *dapm_routes;
-+	int num_dapm_routes;
-+	const struct snd_kcontrol_new *controls;
-+	int num_controls;
-+	unsigned int codec_dai_fmt;
-+	bool codec_sysclk_set;
-+	bool mi2s_mclk_enable;
-+	bool mi2s_bclk_enable;
-+	bool wcd_jack;
-+};
-+
- struct sc8280xp_snd_data {
- 	bool stream_prepared[AFE_PORT_MAX];
- 	struct snd_soc_card *card;
- 	struct snd_soc_jack jack;
- 	struct snd_soc_jack dp_jack[8];
-+	const struct snd_soc_common *snd_soc_common_priv;
- 	bool jack_setup;
- };
- 
-+static inline int sc8280xp_get_mclk_freq(struct snd_pcm_hw_params *params)
-+{
-+	int rate = params_rate(params);
-+
-+	switch (rate) {
-+	case 11025:
-+	case 44100:
-+	case 88200:
-+		return I2S_MCLK_RATE(44100);
-+	default:
-+		break;
-+	}
-+
-+	return I2S_MCLK_RATE(rate);
-+}
-+
-+static inline int sc8280xp_get_bclk_freq(struct snd_pcm_hw_params *params)
-+{
-+	return I2S_BIT_RATE(params_rate(params),
-+			    params_channels(params),
-+			    snd_pcm_format_width(params_format(params)));
-+}
-+
- static int sc8280xp_snd_init(struct snd_soc_pcm_runtime *rtd)
- {
- 	struct sc8280xp_snd_data *data = snd_soc_card_get_drvdata(rtd->card);
-@@ -32,10 +93,6 @@ static int sc8280xp_snd_init(struct snd_soc_pcm_runtime *rtd)
- 	int dp_pcm_id = 0;
- 
- 	switch (cpu_dai->id) {
--	case PRIMARY_MI2S_RX...QUATERNARY_MI2S_TX:
--	case QUINARY_MI2S_RX...QUINARY_MI2S_TX:
--		snd_soc_dai_set_fmt(cpu_dai, SND_SOC_DAIFMT_BP_FP);
--		break;
- 	case WSA_CODEC_DMA_RX_0:
- 	case WSA_CODEC_DMA_RX_1:
- 		/*
-@@ -64,7 +121,10 @@ static int sc8280xp_snd_init(struct snd_soc_pcm_runtime *rtd)
- 	if (dp_jack)
- 		return qcom_snd_dp_jack_setup(rtd, dp_jack, dp_pcm_id);
- 
--	return qcom_snd_wcd_jack_setup(rtd, &data->jack, &data->jack_setup);
-+	if (data->snd_soc_common_priv->wcd_jack)
-+		return qcom_snd_wcd_jack_setup(rtd, &data->jack, &data->jack_setup);
-+
-+	return 0;
- }
- 
- static int sc8280xp_be_hw_params_fixup(struct snd_soc_pcm_runtime *rtd,
-@@ -96,6 +156,63 @@ static int sc8280xp_be_hw_params_fixup(struct snd_soc_pcm_runtime *rtd,
- 	return 0;
- }
- 
-+static int sc8280xp_snd_hw_params(struct snd_pcm_substream *substream,
-+				  struct snd_pcm_hw_params *params)
-+{
-+	struct snd_soc_pcm_runtime *rtd = snd_soc_substream_to_rtd(substream);
-+	struct snd_soc_dai *codec_dai = snd_soc_rtd_to_codec(rtd, 0);
-+	struct snd_soc_dai *cpu_dai = snd_soc_rtd_to_cpu(rtd, 0);
-+	struct sc8280xp_snd_data *data = snd_soc_card_get_drvdata(rtd->card);
-+	int mclk_freq = sc8280xp_get_mclk_freq(params);
-+	int bclk_freq = sc8280xp_get_bclk_freq(params);
-+	int ret;
-+
-+	switch (cpu_dai->id) {
-+	case PRIMARY_MI2S_RX ... QUATERNARY_MI2S_TX:
-+	case QUINARY_MI2S_RX ... QUINARY_MI2S_TX:
-+	case SENARY_MI2S_RX ... SENARY_MI2S_TX:
-+		ret = snd_soc_dai_set_fmt(cpu_dai, SND_SOC_DAIFMT_BP_FP);
-+		if (ret && ret != -ENOTSUPP)
-+			return ret;
-+
-+		if (data->snd_soc_common_priv->codec_dai_fmt) {
-+			ret = snd_soc_dai_set_fmt(codec_dai,
-+						  data->snd_soc_common_priv->codec_dai_fmt);
-+			if (ret && ret != -ENOTSUPP)
-+				return ret;
-+		}
-+
-+		if (data->snd_soc_common_priv->mi2s_mclk_enable) {
-+			ret = snd_soc_dai_set_sysclk(cpu_dai,
-+						     LPAIF_MI2S_MCLK, mclk_freq,
-+						     SND_SOC_CLOCK_OUT);
-+			if (ret)
-+				return ret;
-+		}
-+
-+		if (data->snd_soc_common_priv->mi2s_bclk_enable) {
-+			ret = snd_soc_dai_set_sysclk(cpu_dai,
-+						     LPAIF_MI2S_BCLK, bclk_freq,
-+						     SND_SOC_CLOCK_OUT);
-+			if (ret)
-+				return ret;
-+		}
-+
-+		if (data->snd_soc_common_priv->codec_sysclk_set) {
-+			ret = snd_soc_dai_set_sysclk(codec_dai,
-+						     0, mclk_freq,
-+						     SND_SOC_CLOCK_IN);
-+			if (ret)
-+				return ret;
-+		}
-+		break;
-+	default:
-+		break;
-+	}
-+
-+	return 0;
-+}
-+
- static int sc8280xp_snd_prepare(struct snd_pcm_substream *substream)
- {
- 	struct snd_soc_pcm_runtime *rtd = snd_soc_substream_to_rtd(substream);
-@@ -117,6 +234,7 @@ static int sc8280xp_snd_hw_free(struct snd_pcm_substream *substream)
- static const struct snd_soc_ops sc8280xp_be_ops = {
- 	.startup = qcom_snd_sdw_startup,
- 	.shutdown = qcom_snd_sdw_shutdown,
-+	.hw_params = sc8280xp_snd_hw_params,
- 	.hw_free = sc8280xp_snd_hw_free,
- 	.prepare = sc8280xp_snd_prepare,
- };
-@@ -145,38 +263,131 @@ static int sc8280xp_platform_probe(struct platform_device *pdev)
- 	card = devm_kzalloc(dev, sizeof(*card), GFP_KERNEL);
- 	if (!card)
- 		return -ENOMEM;
--	card->owner = THIS_MODULE;
-+
- 	/* Allocate the private data */
- 	data = devm_kzalloc(dev, sizeof(*data), GFP_KERNEL);
- 	if (!data)
- 		return -ENOMEM;
- 
-+	data->snd_soc_common_priv = of_device_get_match_data(dev);
-+	if (!data->snd_soc_common_priv)
-+		return -ENODEV;
-+
-+	card->owner = THIS_MODULE;
- 	card->dev = dev;
- 	dev_set_drvdata(dev, card);
- 	snd_soc_card_set_drvdata(card, data);
-+	card->dapm_widgets = data->snd_soc_common_priv->dapm_widgets;
-+	card->num_dapm_widgets = data->snd_soc_common_priv->num_dapm_widgets;
-+	card->dapm_routes = data->snd_soc_common_priv->dapm_routes;
-+	card->num_dapm_routes = data->snd_soc_common_priv->num_dapm_routes;
-+	card->controls = data->snd_soc_common_priv->controls;
-+	card->num_controls = data->snd_soc_common_priv->num_controls;
-+
- 	ret = qcom_snd_parse_of(card);
- 	if (ret)
- 		return ret;
- 
--	card->driver_name = of_device_get_match_data(dev);
-+	card->driver_name = data->snd_soc_common_priv->driver_name;
- 	sc8280xp_add_be_ops(card);
- 	return devm_snd_soc_register_card(dev, card);
- }
- 
-+static const struct snd_soc_common eliza_priv_data = {
-+	.driver_name = "eliza",
-+	.dapm_widgets = sc8280xp_dapm_widgets,
-+	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+	.wcd_jack = true,
-+};
-+
-+static const struct snd_soc_common kaanapali_priv_data = {
-+	.driver_name = "kaanapali",
-+	.dapm_widgets = sc8280xp_dapm_widgets,
-+	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+	.wcd_jack = true,
-+};
-+
-+static const struct snd_soc_common qcs9100_priv_data = {
-+	.driver_name = "sa8775p",
-+	.dapm_widgets = sc8280xp_dapm_widgets,
-+	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+};
-+
-+static const struct snd_soc_common qcs615_priv_data = {
-+	.driver_name = "qcs615",
-+	.dapm_widgets = sc8280xp_dapm_widgets,
-+	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+};
-+
-+static const struct snd_soc_common qcm6490_priv_data = {
-+	.driver_name = "qcm6490",
-+	.dapm_widgets = sc8280xp_dapm_widgets,
-+	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+	.wcd_jack = true,
-+};
-+
-+static const struct snd_soc_common qcs6490_priv_data = {
-+	.driver_name = "qcs6490",
-+	.dapm_widgets = sc8280xp_dapm_widgets,
-+	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+	.wcd_jack = true,
-+};
-+
-+static const struct snd_soc_common qcs8275_priv_data = {
-+	.driver_name = "qcs8300",
-+	.dapm_widgets = sc8280xp_dapm_widgets,
-+	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+};
-+
-+static const struct snd_soc_common sc8280xp_priv_data = {
-+	.driver_name = "sc8280xp",
-+	.dapm_widgets = sc8280xp_dapm_widgets,
-+	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+	.wcd_jack = true,
-+};
-+
-+static const struct snd_soc_common sm8450_priv_data = {
-+	.driver_name = "sm8450",
-+	.dapm_widgets = sc8280xp_dapm_widgets,
-+	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+	.wcd_jack = true,
-+};
-+
-+static const struct snd_soc_common sm8550_priv_data = {
-+	.driver_name = "sm8550",
-+	.dapm_widgets = sc8280xp_dapm_widgets,
-+	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+	.wcd_jack = true,
-+};
-+
-+static const struct snd_soc_common sm8650_priv_data = {
-+	.driver_name = "sm8650",
-+	.dapm_widgets = sc8280xp_dapm_widgets,
-+	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+	.wcd_jack = true,
-+};
-+
-+static const struct snd_soc_common sm8750_priv_data = {
-+	.driver_name = "sm8750",
-+	.dapm_widgets = sc8280xp_dapm_widgets,
-+	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+	.wcd_jack = true,
-+};
-+
- static const struct of_device_id snd_sc8280xp_dt_match[] = {
--	{.compatible = "qcom,eliza-sndcard", "eliza"},
--	{.compatible = "qcom,kaanapali-sndcard", "kaanapali"},
--	{.compatible = "qcom,qcm6490-idp-sndcard", "qcm6490"},
--	{.compatible = "qcom,qcs615-sndcard", "qcs615"},
--	{.compatible = "qcom,qcs6490-rb3gen2-sndcard", "qcs6490"},
--	{.compatible = "qcom,qcs8275-sndcard", "qcs8300"},
--	{.compatible = "qcom,qcs9075-sndcard", "sa8775p"},
--	{.compatible = "qcom,qcs9100-sndcard", "sa8775p"},
--	{.compatible = "qcom,sc8280xp-sndcard", "sc8280xp"},
--	{.compatible = "qcom,sm8450-sndcard", "sm8450"},
--	{.compatible = "qcom,sm8550-sndcard", "sm8550"},
--	{.compatible = "qcom,sm8650-sndcard", "sm8650"},
--	{.compatible = "qcom,sm8750-sndcard", "sm8750"},
-+	{ .compatible = "qcom,eliza-sndcard", .data = &eliza_priv_data },
-+	{ .compatible = "qcom,kaanapali-sndcard", .data = &kaanapali_priv_data },
-+	{ .compatible = "qcom,qcm6490-idp-sndcard", .data = &qcm6490_priv_data },
-+	{ .compatible = "qcom,qcs615-sndcard", .data = &qcs615_priv_data },
-+	{ .compatible = "qcom,qcs6490-rb3gen2-sndcard", .data = &qcs6490_priv_data },
-+	{ .compatible = "qcom,qcs8275-sndcard", .data = &qcs8275_priv_data },
-+	{ .compatible = "qcom,qcs9075-sndcard", .data = &qcs9100_priv_data },
-+	{ .compatible = "qcom,qcs9100-sndcard", .data = &qcs9100_priv_data },
-+	{ .compatible = "qcom,sc8280xp-sndcard", .data = &sc8280xp_priv_data },
-+	{ .compatible = "qcom,sm8450-sndcard", .data = &sm8450_priv_data },
-+	{ .compatible = "qcom,sm8550-sndcard", .data = &sm8550_priv_data },
-+	{ .compatible = "qcom,sm8650-sndcard", .data = &sm8650_priv_data },
-+	{ .compatible = "qcom,sm8750-sndcard", .data = &sm8750_priv_data },
- 	{}
- };
- 
+Changes in v4:
+ https://lore.kernel.org/lkml/20260331183957.2015440-1-mukesh.ojha@oss.qualcomm.com/
+ https://lore.kernel.org/lkml/20260331191210.2019758-2-mukesh.ojha@oss.qualcomm.com/
+
+ - Last series mistakenly divided two series cause laptop shutdown.
+ - Some minor refactor common code rest is same a rebased on latest
+   kernel.
+ - Added new 6/6 to the series.
+
+Mukesh Ojha (6):
+  remoteproc: qcom: annotate mem_region fields with __iomem
+  remoteproc: qcom: pas: Guard dtb metadata release with dtb_pas_id
+    check
+  remoteproc: qcom: pas: Fix the PAS context creation placement
+  remoteproc: qcom: pas: Map/unmap subsystem region before
+    auth_and_reset
+  remoteproc: qcom: pas: Drop unused dtb_mem_region field
+  firmware: qcom: scm: introduce keep_mdt_buf flag in PAS context
+
+ drivers/firmware/qcom/qcom_scm.c       | 18 +++++-
+ drivers/remoteproc/qcom_q6v5_adsp.c    |  6 +-
+ drivers/remoteproc/qcom_q6v5_pas.c     | 87 ++++++++++++++------------
+ drivers/remoteproc/qcom_wcnss.c        |  6 +-
+ drivers/soc/qcom/mdt_loader.c          | 15 +++--
+ include/linux/firmware/qcom/qcom_pas.h | 13 ++++
+ include/linux/soc/qcom/mdt_loader.h    |  4 +-
+ 7 files changed, 94 insertions(+), 55 deletions(-)
+
 -- 
-2.34.1
+2.53.0
 
