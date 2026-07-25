@@ -1,134 +1,116 @@
-Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+Received: from mail-lf1-f54.google.com (mail-lf1-f54.google.com [209.85.167.54])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B47682931C4
-	for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 04:23:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 951CF2D0C72
+	for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 05:41:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.54
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784953389; cv=none; b=rZAWopL0ZgrL4ciu+HsKFUDrUNak0+ksiTsiVTVXsG0q9PJNL6VNTfwzDJ4IGPuC1eIi5hST+GXKPcwzIoUcf4N9Ou9UCkjqlynV3/LAEAJESaREXy4JkIQb9OexOZIc37YVEmj8qJx7SwVKV9igkGqcwjQRy0L0S9Xh/wLCEho=
+	t=1784958096; cv=none; b=PTU1+KEZQLRahqg1vGtIs0j2BkQHGXAl4xN6QXhosiEq5XdEgDBJ13IPg7ZhIHdXTES41yzT9lbgJZS/EP9NQh5p/NuQzO71ro9/6eSq6SKu2SkfEH96ISC+aMQCTuwtm98+4fqWQyUgM1hJD2U1+5NM5s1/gFxso+FMJp4XyCY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784953389; c=relaxed/simple;
-	bh=OVXDHfQ/4VBABQ98lCGxl1R9LPtBxkFgDjMSiEn8Gr4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=VEZIpV2dHlZtb+fewwP5Nvh+efW1HBqE49FJMZnMUYADUxKNpoK+Ulus/G+Ezc4JncTBG0nm30WeQwZMPQHjfxa7I9OJJqtfsrmZBi57FT69PmSLbwZC3f2tXhRvz5seBnMdPLB5mFie5E7J4LvTre2FYiyBtWGf0aJ2oiWiEhI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=om4jGK3e; arc=none smtp.client-ip=209.85.216.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1784958096; c=relaxed/simple;
+	bh=/RjlJI1tcU+fQgj2sW2Iofa6fH5Ee2zC3WdA1A2qVFM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=qCLHv+HAw4cGHosO8oLBopTBYiuW8kNltvpM0ijx9e+x1lM7P3KNZwF4OWab5P0jMWaw8LZC76CIb85G9xTvOvUhjNDEEX4xfiHD6hBYHpIiSncVVMgThyqhatB3tRAPYcRFkwD1JkBSi/Nu3gEkfoH2oxc0tcSdZetxFAboGjc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=FAUufZML; arc=none smtp.client-ip=209.85.167.54
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="om4jGK3e"
-Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-38eca09faa2so156122a91.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 21:23:07 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="FAUufZML"
+Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5aebf96bc89so173127e87.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 22:41:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1784953387; x=1785558187; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=OpCxABskcZ+2n1Dm/bQqYdz86Nf+UnLePo8ZywgOT8Q=;
-        b=om4jGK3eh2xMdub7q0+m5pWvyDVqjld4gmUIRdwxxshflAhHZYxfo84mH6k0CdeYkf
-         S3LsOYHPu4gtriBmU9Dxeyk/ZKPxu/2MpJoiTl23uQ76MSy2i6XAMzd/K5Q53L6eMu6m
-         U1kvhOmhrVkYYqUV4cQSJlrMmFh12kgpr2s5VofpvxMtVyQUbUPEIGcECxI81Ke2uSms
-         r4MTBbISwdKaVrXr0Q+qhkV2kLZKg306ld07MJXFaBX2/kfy0VfQTtZDzwHWCoginjoS
-         DfgNDAazy8O2y7PVZkrT3+4ipI4tCaI+XTu3xD8LBJjBeEdvWJrMOtKprF9zS5sE/Jcy
-         3r/A==
+        d=linaro.org; s=google; t=1784958092; x=1785562892; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=090uL/0+UckPvFSEk0Snf0xihVIwbpOzrvl2u/5Apcc=;
+        b=FAUufZMLTDLvln9pl0TWcIQDgO5RxxfYh2ot6Su3DyAx3u8o4aYSleqjSe0RIAXHtv
+         otJi8Y30uMMn3i+VXeKknf/4+dRIcN+kLCp9Ez6zb7qWwnduFfR7CyD1rruZq3qfuzrD
+         aAdlx3bMnac0UcfEJqZoRajub9iidHzOoBPNOYNDPw5zGK9Fn/6VDbzy73EbYoIAYYXx
+         ORRc1/1gKzAltIlC8xTdCs2aMEJlh6pvzQL5yAt/se4+VE88YuhEW8V8SkPQbIHrAQtc
+         FV4pwaFLgwFh2PRke0/8o8iGga8w00O5B9rOGDqWMlMg5fbGNSV+KUSeoZKABy/bXyYs
+         7TRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784953387; x=1785558187;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
+        d=1e100.net; s=20251104; t=1784958092; x=1785562892;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=OpCxABskcZ+2n1Dm/bQqYdz86Nf+UnLePo8ZywgOT8Q=;
-        b=JzVYzkpMHvsqMfTJzxQEa4fi7AkkHiDpA0gUz8J9FGQg52KwoiLN0sfLyv3gGZhfPL
-         lglXm6aFM7j1JXe/Ka5w+KQzAjLitp6IcU69EY2BER03U3QmsJoLIc+Snp7sKup+0YP8
-         dC+j437CfOKm/DEH+hnE+n4pt/9dJfVFmrBMC73B9ADcLFX+V6uzsMSRqmsBgJJp7VH6
-         xc7lytRcojFz1aI/Jrp+BKlwRUA39RtPDJe7zYxmGYNaKccXPocFTc7uOVRBv9Gs/82I
-         edFFkoNpK0c6yNJziX+3VmVSuuvGcxY9Rmd9GBbwfPbMGr5cpZmJvM5ixsJLXr1JzpWv
-         Yxog==
-X-Forwarded-Encrypted: i=1; AHgh+RqFTkhfyrBHKxv50oNaZHddf38jq0ODLnLGePpn21Ls0E0TFlh7FgizCoWBtBUpQq/B8jRQctegbv5hEscA@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw1N7n6FhbteyKe+5KL1Vbufr/V4VgkGzDVg1OCX8EpT8WsEmCF
-	NJr3HctqBRdUSZssNjhBncXFGl06z1FsLF3ozV+hUI5Ri2cjswqMCjBM
-X-Gm-Gg: AR+sD13UzhPEy5Md1/gir/oXi3l0hOS6DaBqM6Sn21xLwgBsi88ajUFCAxTmG/3pg9g
-	KAoyMyKCcYH65MkFtYpiTeP/W467a6duR7FkfJeNY+razYdWIie0So6HIbDiVIWQuCTV6+HAknJ
-	rKMv++lJ/MswhqYCdC1cxndhiU8ixqa7sgm1HZ7BngzCb1nZvKHES0W8LWE/INlmaanMkZNPGzk
-	kkIE62gp+mbx3yu4Bxc0NlzEdUvaaVnygR2tZfDqyzj2un6hTfCq89wAn1ogOA8YI0V+UXshGGK
-	xMsDxiET0wTLeLm4zWw73niC+DTmYcT6QSw/4W2fuXI4FMO/zNy2ZNP5Q4pY5TUr7DjyGtnlRUY
-	ZrpqP45V/i12fclMvJqakId9PDoOrliEJnXKMRji+1yPVkNC6yXuYhxJyAGW/qM9/y6ZnLNpc2o
-	w1PH9Q+3pRKQRRi4Zuz2UzbJ3VbFofJui1
-X-Received: by 2002:a17:90b:4c81:b0:383:5a16:bd67 with SMTP id 98e67ed59e1d1-38f29625678mr1016105a91.4.1784953386975;
-        Fri, 24 Jul 2026 21:23:06 -0700 (PDT)
-Received: from FAIZEL-KB ([2001:569:5b64:e100:ac26:5a81:1f39:799e])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f2951eca6sm370859a91.15.2026.07.24.21.23.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Jul 2026 21:23:06 -0700 (PDT)
-Date: Fri, 24 Jul 2026 21:23:04 -0700
-From: Faizel K B <faizel.kb@gmail.com>
-To: Ricardo Ribalda <ribalda@chromium.org>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, 
-	Vikash Garodia <vikash.garodia@oss.qualcomm.com>, Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, 
-	Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Kieran Bingham <kieran.bingham@ideasonboard.com>, 
-	Bin Du <bin.du@amd.com>, Nirujogi Pratap <pratap.nirujogi@amd.com>, 
-	Sultan Alsawaf <sultan@kerneltoast.com>, Svetoslav Stoilov <Svetoslav.Stoilov@amd.com>, 
-	Sakari Ailus <sakari.ailus@linux.intel.com>, Abylay Ospan <aospan@amazon.com>, linux-media@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH 4/9] media: vimc: Ensure that pixel_rate fits in 32 bits
-Message-ID: <qrcq3ntszxswpk2wbeb7uq4gq3mncegwtoncyplkhdhrslzghs@dhkvpb6n5jsf>
-References: <20260629-cocci-7-2-v1-0-5884c80ee3b6@chromium.org>
- <20260629-cocci-7-2-v1-4-5884c80ee3b6@chromium.org>
+        bh=090uL/0+UckPvFSEk0Snf0xihVIwbpOzrvl2u/5Apcc=;
+        b=IYlSEKN3vmWWsRSf3YLtLEL8il81KHhLG2psiRt01addVnu2KYyBvnJNmKkVDZWFOq
+         k24MKSJUGnh/RMuTSrS3QaCPg/hUWP/6bb9RnmMYUcFyLNwdb7UUEBemgfbTpaLVYt/n
+         F0a+H8+bZut630ZIfY0W5oL+aHVxk5iXhMjrStGrjtkKWpz2Cih9z+zPNBQfsjwFJNay
+         4LY4NzWSj3b6LbUQCqkLqLbtrFHOM45AZN9l2cQs/y5fkY2f9353aDq/+IAi4DkOZz4F
+         cPw/EUieqSA5b/qxdVNOAaOWnRm717WcQJ/PQS7EkFB2I9ibX9iHSDgz7j+ptXoC+mSt
+         vsxw==
+X-Forwarded-Encrypted: i=1; AHgh+RrMLN8KlB6cSSsGWcHyXIh0Mckr/6QGx6UJrVSnqWPBopwufDs4WlvKwUU0guVGwTcu4TiJx1lZw7G/sHnQ@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzl+AqRprtOj7WI4zr0qnrwxhqS83fJoBcqfL6e8GGRB6B3aw+5
+	SsbfFSvUtiJHP/jSzwzcSSYnaUu8k53+FotA6zlj7hguDIFlEdhb8yDN5QRjKtLuUUA=
+X-Gm-Gg: AR+sD12MQFQPWWznwqe+V8ObNCaxlEkwz/XIUfDddxQ22JWzp8f+XqvGcMUuG0eK7us
+	d87T5C0MTZaKIK9ZTTMyy1/RnXnTc93ViXJikOoDkGWU7CgKSjNGqJ3PogTQP1MQz/2QUV2ZWk5
+	+gmjnUHSNTVsGlGtk4BxY45txr5TwrRXcIeC5Cy7ZHbmsL5SyRn3H/n96dpr8UA/TiciQgV38bE
+	4ajD/f/0wAjBXKmqofg1OBPJOEQGN3f3YPdWpEhEEST4EnctmZ3KGNeiPOvrX/yhS7WOxT/hN8g
+	Qs5ZyWCKO6QQshaLM0ahqgHUIrlz4vzfsrIRxCWpJ3LBVVuykaYpT77R/W2YU0mbAoI4zu/ruzJ
+	j2RhxcQ8HCNyJvCewP8pKhn2doxu05j+oZqaWeUs0Kez2t5MAgv2g2qftyZOa/9M7y6ovVLEAoV
+	Pg+HXtffAruPrstvri0tFpI6jNTic06OnPDtaVOQ/ivAtjPL5TfYYer6Rr
+X-Received: by 2002:a05:6512:1591:b0:5b1:5b9e:8de7 with SMTP id 2adb3069b0e04-5b2c1afdec6mr98432e87.2.1784958092471;
+        Fri, 24 Jul 2026 22:41:32 -0700 (PDT)
+Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2be1d8b21sm253424e87.44.2026.07.24.22.41.31
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 24 Jul 2026 22:41:31 -0700 (PDT)
+Message-ID: <261a03cd-62f6-4ab8-956e-f5ae8969a978@linaro.org>
+Date: Sat, 25 Jul 2026 08:41:30 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <20260629-cocci-7-2-v1-4-5884c80ee3b6@chromium.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] Revert "i2c: qcom-cci: Remove unused struct member
+ cci_clk_rate"
+To: Andi Shyti <andi.shyti@kernel.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Robert Foss <rfoss@kernel.org>,
+ Wolfram Sang <wsa+renesas@sang-engineering.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Luca Weiss <luca@lucaweiss.eu>, linux-i2c@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260721-cci-clk-fix-v1-0-5eae78700da8@oss.qualcomm.com>
+ <20260721-cci-clk-fix-v1-1-5eae78700da8@oss.qualcomm.com>
+ <amPtXU_RkseFbpKm@zenone.zhora.eu>
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+In-Reply-To: <amPtXU_RkseFbpKm@zenone.zhora.eu>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jun 29, 2026 at 11:30:45AM +0000, Ricardo Ribalda wrote:
->pixel_rate is set to VIMC_PIXEL_RATE_FIXED, which the code expects to
->fit in 32 bits. Make that constraint into a WARN_ON, so if we ever break
->that constraint a kernel warning will be triggered.
->
->It also fixes the following cocci warning:
->./test-drivers/vimc/vimc-sensor.c:107:1-7: WARNING: do_div() does a 64-by-32 division, please consider using div64_u64 instead.
->
->Signed-off-by: Ricardo Ribalda <ribalda@chromium.org>
->---
-> drivers/media/test-drivers/vimc/vimc-sensor.c | 6 +++++-
-> 1 file changed, 5 insertions(+), 1 deletion(-)
->
->diff --git a/drivers/media/test-drivers/vimc/vimc-sensor.c b/drivers/media/test-drivers/vimc/vimc-sensor.c
->index d125a79fec8c..83dcc9d61ee0 100644
->--- a/drivers/media/test-drivers/vimc/vimc-sensor.c
->+++ b/drivers/media/test-drivers/vimc/vimc-sensor.c
->@@ -103,8 +103,12 @@ static void vimc_sensor_update_frame_timing(struct v4l2_subdev *sd,
-> 	u64 total_pixels = (u64)hts * vts;
-> 	u64 frame_interval_ns;
->
->+	/* Sanity check, pixel rate is fixed and fits in 32 bits. */
->+	if (WARN_ON(pixel_rate >= 0x100000000))
->+		return;
->+
-> 	frame_interval_ns = total_pixels * NSEC_PER_SEC;
->-	do_div(frame_interval_ns, pixel_rate);
->+	do_div(frame_interval_ns, (u32)pixel_rate);
+On 7/25/26 01:57, Andi Shyti wrote:
+> Hi Loic,
+> 
+> On Tue, Jul 21, 2026 at 04:58:19PM +0200, Loic Poulain wrote:
+>> This reverts commit b641af684fc28a07bee9c808eb6c433f9d9bcec6.
+>>
+>> The cci_clk_rate field is needed to enforce the correct CCI clock rate
+>> at probe time. The hw_params timing values are in clock ticks and were
+>> calibrated for a specific frequency per hardware variant, so running at
+>> the wrong rate would violate I2C timing specifications.
+>>
+>> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> 
+> Does this revert need a Fixes tag? I haven't seen very often
+> reverts with Fixes tag, but it makes sense if they need to be
+> backported.
 
-There was an error in the data type of pixel_rate. Actually it is u32 instead
-of u64. There are two changes suggested by Geert in reply to the original
-report. v4l2_ctrl.val is s32, not u64 and using mul_u32_u32() for total_pixels
-calculation. We can avoid the sanity check also. Would you be able to consider
-these two changes which avoid the warning?
+This revert commit does not need a Fixes tag, since there is no bug
+fixed by the revert commit, I believe. But perhaps a series of commits
+may need Fixes tags each, if the series is to be backported.
 
--       u64 pixel_rate = vsensor->pixel_rate->val;
-+       u32 pixel_rate = vsensor->pixel_rate->val;
-         u32 hts = width + vsensor->hblank->val;
-         u32 vts = height + vsensor->vblank->val;
--       u64 total_pixels = (u64)hts * vts;
-+       u64 total_pixels = mul_u32_u32(hts, vts);
-         u64 frame_interval_ns;
+> I'm going to take patch 1 and 2 already while we discuss patch 3
+> separately, but please let me know first if you agree adding the
+> Fixes tag.
+> 
 
-Link for the suggested changes
-https://lore.kernel.org/lkml/CAMuHMdVx80Eh8w5-OioH-Uyahea0ZRQHUVg9MBfQ4uEjaxM5Lg@mail.gmail.com/
-
-
-
+-- 
+Best wishes,
+Vladimir
