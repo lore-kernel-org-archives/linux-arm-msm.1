@@ -1,81 +1,82 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A9A2A39A81B
-	for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 09:20:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DBEC3385B6
+	for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 09:23:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784971254; cv=none; b=ChcbgNdr7p8He7oywfSa7A6cC+RYg8MtN1Vok3lzTkf5kjFaCRWCKOZRzJO9KTWvFq8U2jGoowitZd51VbP8d7DBiQjP5FQiq6hNiUEoYOgOVcxEFRB8MZncbw3dmpyrnpmB853wwXtsW3ZREFVZfVvGbpkztc41LaYLWA30ZLI=
+	t=1784971428; cv=none; b=KAkNwZtqxPdqS23fQWnUiWAjAGUw/NpC+Fcz7jj1cuFH0EEGVANwLdAK1XL8dgQp5EB3rUqvoRkUtbLK4MWWBDol2tMdA7/eWkfyPGGHOSvLHw1bsttyEhgjMjXqWUufNaGHZoAl2KOxbYfCEshn15zl/+rkBy64fQ/cFT7IpUc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784971254; c=relaxed/simple;
-	bh=czFeVM0srpJXC06T5IagXGllAMP0yg3xodfjsMJsWuI=;
+	s=arc-20240116; t=1784971428; c=relaxed/simple;
+	bh=t7MThxYmbb3VjZjbffFGWRZiUad0vGZbepYSj99HxYc=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=MrQnVKcQ3Zi/H2B3E1nENzapPKvwBblRIZbH6L1qlXB4eCgSj5gVo8HJUq+MrBIrEYiDhhQp4vUmmFazz/BQUdAQLJhmv/EnWnCCQ5asqRNyAFoix/8SgTKhnjir283FTGbC5kFJBXnpKKyckaCgtdG5JYOLGQrZvSpd5mwpYZE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=D7l14/gk; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=u949Uv3/vBkoqilgbtEyx3Xk/eFHuwqY+PD/n1dGKWlrODXI+fnj+BUHGoSZnHEwCLQ2Tevydk23i2d2Q1zPi4Y6Qj781KXoZqQImXJhGOr6+crHtFUiYhnQ5g8gECpKiID4acapJlirasAYIrJlDOYkIeJpTsgbqR/Q3Uvtd44=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OBB7TUky; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="D7l14/gk"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 653761F00A3E
-	for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 09:20:53 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OBB7TUky"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E2F11F00A3F
+	for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 09:23:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784971253;
-	bh=czFeVM0srpJXC06T5IagXGllAMP0yg3xodfjsMJsWuI=;
+	s=k20260515; t=1784971427;
+	bh=t7MThxYmbb3VjZjbffFGWRZiUad0vGZbepYSj99HxYc=;
 	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=D7l14/gkJuBe6XC8OfB4qnEEokrVYpojHRkeLihSOuRWpUJzZZuqyIPdJOwUrIFJQ
-	 PWOxznPCASs/Tb9W3VehuxhBP8aVSs/J3G87zZTBiJz5jRtNL3z97Zx2FShA0zQbQl
-	 GkkpHNyJkLwELaNVs23uFhiZOsBIXgn3kWaw9aDchS0wfaTv+k8XNOXTMNgrlY9+P1
-	 hAmtn+OuRODHUyb/O8X1yoWiEuidm1ym0vn/15eGlRvmrh5ZmtvW1CYuzSNqtMGiA9
-	 nYwvJ68Ntwy9lFsmn85Vo1IpLzB9EbtXFS4JYH/O7L6f3FiWURpEXuTUDJk2ZT9E3u
-	 qpR6TDpYLTeMw==
-Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-5b015532f7bso1195132e87.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 02:20:53 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RqzdVZgjzaiW8l50p3YZ3uxIb5ii9GOC4gny4S81ToDXs6ALUKe9j9gPQIqubF2mzOfKJASpmX56k+B5Bca@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyn28xjzhtilh5p/fahBRuppICVyvBxx8Zlt+zE3ZEuF2HGSVdb
-	CNX7+Gp2meOSEbedJSDAXEH+vLtv41B9qa1LX1bewzI5Yh48ufv4KGiraK4ndKTl4tnBPdt2m3Q
-	/l0BrBXMH2VaLeiJidWnZzpEA+mgmBL4=
-X-Received: by 2002:a05:6512:3408:b0:5ae:be47:f006 with SMTP id
- 2adb3069b0e04-5b2c1b5caefmr259778e87.43.1784971252074; Sat, 25 Jul 2026
- 02:20:52 -0700 (PDT)
+	b=OBB7TUkyxV6M8zHbAtd0g+2BpFBj6UyGt9V1b48RgtcBxfaQhdVkt1siIm7j1ZV0j
+	 BH9ClGTcTIHpwY8e0BIefu9c8Sxsqs7GfQhAIFBhEkJLH6KK9D5t+GThvabVzX5gx9
+	 VPn0yOEKRu+fCaIcZRLmUovhUR0iriqplRcCgj202IRE3hgB28TusOVS4UXG2UafBo
+	 wUYw9GLL1tptWiTdV/33ReWgv7zI495qqEuijaopOTGFW2WVl/wLsKi9o/5jTVrJZX
+	 JJISt6bjVDfPRWADMU54whT9aLnHvTkaFmwRC3h5v7c1W5NVG5VOZRnvgk338tSFxC
+	 bbVxRIPxSljXw==
+Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-39eb257e9fbso8965511fa.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 02:23:47 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RrG/cV7euwyp4K+zmMZ/X1DH5pxnrPT3kYMJPn3q/rJ4b34H4N/aoc11uKM0N+uW67ow9LlZ1THPAIy8+jH@vger.kernel.org
+X-Gm-Message-State: AOJu0YwLjReGpkxydQsyVYlBj56N2Yr41MZg10C1B+yU6eKmAwIsmcuA
+	JgFxZS1GLo4ZyvvzFpLHP7LJLNNFT8waAJ5dJn+MAFdLCRQEqhO+6gM0i1MRKKkYo3ZqsvLKkL2
+	nnGjrnIwrr3vsGImhhX+lxtjXKSjiVqg=
+X-Received: by 2002:a05:6512:1295:b0:5b1:59ec:245f with SMTP id
+ 2adb3069b0e04-5b2c1afb585mr286093e87.8.1784971425959; Sat, 25 Jul 2026
+ 02:23:45 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260719134548.8830-1-linux@ulli-kroll.de>
-In-Reply-To: <20260719134548.8830-1-linux@ulli-kroll.de>
+References: <20260718002146.698973-1-ts.solidarity@gmail.com>
+In-Reply-To: <20260718002146.698973-1-ts.solidarity@gmail.com>
 From: Linus Walleij <linusw@kernel.org>
-Date: Sat, 25 Jul 2026 11:20:40 +0200
-X-Gmail-Original-Message-ID: <CAD++jL=tCKeELwvXQVTg0L4DLmGL7HiAJ3J-OaCDx2b8P6B+Ow@mail.gmail.com>
-X-Gm-Features: AUfX_mwilw7yDox8SW8QhTXKiAqAqdg4N6cIf95uaJ25Sfj1T5Hau1WH7GGea5M
-Message-ID: <CAD++jL=tCKeELwvXQVTg0L4DLmGL7HiAJ3J-OaCDx2b8P6B+Ow@mail.gmail.com>
-Subject: Re: [PATCH 0/2] pinctrl: qcom: ipq806x: mark gpio and pcie-reset as GPIO
-To: Hans Ulli Kroll <linux@ulli-kroll.de>, Bartosz Golaszewski <brgl@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org, 
+Date: Sat, 25 Jul 2026 11:23:33 +0200
+X-Gmail-Original-Message-ID: <CAD++jLns-5nxWjwa9LiDVbvNngQE+OYF05nD+wd7J1H3rfv9yg@mail.gmail.com>
+X-Gm-Features: AUfX_mzEZphqkBqhPp56J4Kw53AoG30iiWRKp6XfygP-QF_fd1T9aE0wFbObjJE
+Message-ID: <CAD++jLns-5nxWjwa9LiDVbvNngQE+OYF05nD+wd7J1H3rfv9yg@mail.gmail.com>
+Subject: Re: [PATCH] pinctrl: qcom: ipq9650: fix audio_sec_mclk_in1/out1 group pins
+To: Taceddin Sancak <ts.solidarity@gmail.com>, Bartosz Golaszewski <brgl@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
 	linux-gpio@vger.kernel.org, linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jul 19, 2026 at 3:48=E2=80=AFPM Hans Ulli Kroll <linux@ulli-kroll.d=
-e> wrote:
+On Sat, Jul 18, 2026 at 2:22=E2=80=AFAM Taceddin Sancak <ts.solidarity@gmai=
+l.com> wrote:
 
-> The qcom pinctrl core supports marking functions that represent GPIO mode
-> via PINCTRL_GPIO_PINFUNCTION(), so that strict pinmuxing does not reject
-> GPIO requests for pins that are muxed to the GPIO function.
+> The audio_sec_mclk_in1 and audio_sec_mclk_out1 groups both list
+> "gpio37", but in the pingroup table those functions are muxed on
+> gpio39, while gpio37 provides the audio_sec_mclk_in0/out0 variants.
+> This makes both functions unusable: selecting them on gpio39 is
+> rejected by the pinmux core because the group is not listed for the
+> function, and selecting them on gpio37 trips the WARN_ON() in
+> msm_pinmux_set_mux() and fails with -EINVAL because that group
+> cannot mux them.
 >
-> ipq806x still describes its gpio function with QCA_PIN_FUNCTION(gpio),
-> so it is not treated as a GPIO pin function. As a result, GPIO consumers
-> can still conflict with pinctrl states that select the "gpio" function.
+> Point both groups at gpio39, matching the pingroup table. This also
+> mirrors the primary audio MCLK pair, where the mclk0 and mclk1
+> variants live on separate pins (gpio53 and gpio51 respectively).
 >
-> This allows ipq806x to keep the GPIO-related and PCIe-related pin configu=
-ration
-> in DTS without tripping over strict pinmux ownership checks.
->
-> Fixes: cc85cb96e2e4 ("pinctrl: qcom: make the pinmuxing strict")
-> Signed-off-by: Hans Ulli Kroll <linux@ulli-kroll.de>
+> Fixes: 3c8e7ba0e399 ("pinctrl: qcom: Introduce IPQ9650 TLMM driver")
+> Assisted-by: Claude:claude-fable-5
+> Signed-off-by: Taceddin Sancak <ts.solidarity@gmail.com>
 
-This need to be relayed to Bartosz as qualcomm pinctrl maintainer!
-
-FWIW:
+This patch -> Bartosz
 Acked-by: Linus Walleij <linusw@kernel.org>
 
 Yours,
