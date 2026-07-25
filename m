@@ -1,66 +1,66 @@
-Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
+Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40BFC2DCF74
-	for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 06:42:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.48
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AFA252E739E
+	for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 08:36:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784961737; cv=none; b=V9gHZTHnauthAbA9FmJCg8fHlYCXZFBeIKB9wu2rmME3B04s25Uqp8NMy/Q+arhaIWRnDsgJ9xmyJ8YDeiZ5sKWukdopFf9xgRfrpimT4HlpVuRqhu+AIrmKCZcb6/gfOz6qWFLf9Yhq5qc7ICNAbE5DmnUG+B7xtdouOpgzR6Q=
+	t=1784968618; cv=none; b=bnN415tXu4pbS4ep5gCTvmTtUleXcYtUa2AlhcoAEkQdj6kJWp0TmFqAmcKIXABT+Js8q/rbwWe7zi9EEJv3hWOs3XYmMD+kuubQ57J0ZyE4q9CVnSFlftpFdJTt8gDUHepfRXLhLJFZxiLZplLxtAcuFhiCn/JPT9/OzuXrSmw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784961737; c=relaxed/simple;
-	bh=zoKbMi978nDgj2HDslbMe1w2uEVfSZWEuUvbMtbMgfk=;
+	s=arc-20240116; t=1784968618; c=relaxed/simple;
+	bh=0OFXzeMQ9EYhP3eXqAO9VV9ArjutGPKah0evCu9E7Ag=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=eJJmf9T1s2snSsxZXe8Tz1hSkrVJc4Dx7e1+ekmtWax5S4MO3popAQK8OlVxZx+CJ3+XwCP4NZ42dUi9P1zxKWo2cga8hJmH2J5GpY8Si1homuJri+ELpwGrGzDNJvHod0Q9j9FwNlhbXmwkZPb4SrL6/mLnmrGNsvLZ1FIZSjw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=wer8gqfe; arc=none smtp.client-ip=209.85.167.48
+	 In-Reply-To:Content-Type; b=QNv4FBuvrKqX0XY2d7KxTciAtsXZUxchjLH8HQ9oYI3OtqVvRkh5dv37+IwCwRSA1hoWwYfZW7VhCD0m50OHRPuW6H0JTDphK8Qxwn8CjGhFdMtw+nl6orV8oBupgfUrcayYMXpHfmN1bETz2NCalT9BFK6Cm8mdF3nOPXWSu+0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=bRb81t0g; arc=none smtp.client-ip=209.85.167.44
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="wer8gqfe"
-Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-5aebe49b227so267528e87.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 24 Jul 2026 23:42:15 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="bRb81t0g"
+Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5b2a1fd0ab0so96057e87.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 01:36:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1784961734; x=1785566534; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1784968614; x=1785573414; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from:references
          :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=3rcLlOj89gK3OxZv2MR+AlxF2Au5na5W1MCm2dKXaFM=;
-        b=wer8gqfeqtJpHsTiQCQd8MJFHAlF+kQRpAa7vylCBDbyBFFwlSmIo2m0kWyrJ4OIcG
-         envWaXZ9cR56DLUwmVRqcuc6Yen7Q5U4hxjeSAxRMcgyNmzeIHGYFuMQIECGDZfluCSZ
-         tHOkmgOVA6pgJ416X1imJOCQIsR28O8O3P32v4fMZeZJckDjWfmRXjN55QejjLtvIS+D
-         au/qGVZzd+VJgMf9++PdOh4i2sdat+EEzpI37POhrPkiMl3yv9MJ0NblpQEmL5DKSuyB
-         afZd760FjPy4LubYRyKLyxVQ/lTDoyhfcA77Rm3VyIrLuoxw2AdAIlpA7JUT/nDzWr8l
-         27yw==
+        bh=YE9HQKDmtvVCl0AgZyo95qIV0Glat3h/Ev3Q50mZfxk=;
+        b=bRb81t0gplgx+wXktxJDEJ2Ox4MB2kkgU77ju6qBVpGS+aKfCqtDD1vpSffNMDmjBo
+         wP0cVGFOtVSXcwUOdb+aVMDX1IdWJhZZmy5ZfEqGq01XVATvwc5O22uotUfXxj86cs69
+         8C6ePv0nE66n9j6AQlSrjOKiLkkexX3Y473n9RP5utoEEZMjmbd7U7/fr5626Qsmlhqh
+         I+lzvJpfJdR9VaudNE4BAWyrweHm3L7TqDJoRKuYZF/A2RGzEkT/5sgHEf9I1nYgAZ9u
+         iWzVuv3gcnWL23Mez66KAq04cDkzRpegvW8m37YxWi8Lj2OitWzC7xgMBn9LFiETHGNu
+         i/Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784961734; x=1785566534;
+        d=1e100.net; s=20251104; t=1784968614; x=1785573414;
         h=content-transfer-encoding:content-type:in-reply-to:from:references
          :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=3rcLlOj89gK3OxZv2MR+AlxF2Au5na5W1MCm2dKXaFM=;
-        b=b0wpSGvEnRocznvkLc6A4fKI7y2Prib3OMl5HDoYqIDX34YLxvOQFpGn7c4U8wwvcZ
-         yWvd4pHfXeh8xIrkQGBNjNhZforvwyUjU/QCeQ/FxhtbXbOAOf2WHKCx/QdXcfzW7IaZ
-         FMVk0h707kFzj5YQMhOZrL55lDYjQtKoHtGxSWitjA3yDGOCbyhNQXABaFKiyk4tIaP5
-         cbdh0KThfQtg92+YEpBMz6+zYCRONKGxXQ3ovou0+DC924qRKuYMp/J8srmFtfkyUyjr
-         dFENvM5WKZ3m0lUyAZhHCBuPKSJnk+i0d0qY+2KWp/b/OU4Vr84KGjar06EOu23YG82B
-         ea3Q==
-X-Forwarded-Encrypted: i=1; AHgh+Rp1amqaC9yUJOqPqcGkqnvBd+SbB8VMcpl/dBCNom9rlvHus+B6iaKa2gj8CZTrNnFPxxi7n2AO9TkZuoJI@vger.kernel.org
-X-Gm-Message-State: AOJu0YyhnOw/VbuwIswB5DaZ0JSy3AL5Jr/zkZLT2wPc1DY0CTmcHHUs
-	n+/dv/wOYsrYhtGzb/pVCznlfgogMN8c+ExZkpqDOmXczzrBsBHZSGkNL59G8Ji82v8=
-X-Gm-Gg: AR+sD10Md8CnHNm0r5K8k4K6RbdFPzS8eJCEjYUDH+HUT2QENbDD2k9xoLfkSCbd9Y8
-	kOhQO6dYTd8+nUKyh9HHLKepivqwC+8cF4mywM5KwDL92qVhxcioSTPWywbQZY1kqHhU7r+WhUc
-	SCCRbGP9FwwmO0E2++tXDjL+TcnxTddWM4gOuNHFADtfWiNnz/RCrVuxcK7hSIP2drdZJQ4sW2L
-	s16/xZAlBUNwASORIeFMbozfdl2r1nkeCMJ3O1J8QP89hAXpiho3ZQk6dsnmWPRAeHqPveuqF6J
-	xSA6TR+Vs2qpQAeFteW0qq+SM+1diD20i7Y4YHoH89zma3jLehmhD5xU8qXTOs2a0nhYWJrI8I4
-	zfOMBmo7gZd7UjUj/AJbQMnN4eYFp6uWNLMj6RvqSdyI4MNBv4hSsu0jnvEq3PnWlmUoESyfwgb
-	NIYJCWrlxAeW5/J9W41MCsot6r5SvUYfUEZtC4HmyhdTjYyrYVuBdnu53S
-X-Received: by 2002:a05:6512:2520:b0:5b0:6aea:cdb5 with SMTP id 2adb3069b0e04-5b2c1af7abemr136512e87.1.1784961734099;
-        Fri, 24 Jul 2026 23:42:14 -0700 (PDT)
+        bh=YE9HQKDmtvVCl0AgZyo95qIV0Glat3h/Ev3Q50mZfxk=;
+        b=SYX5YMLI5MZ40Ja0Y8jYW29X2iFma4p0Ml3LhV+RP14hytefQdYXVXYpHlzOOF7rfc
+         GS0pJTuXB0WkvvaI/atfEkO8Cz/BAloeI0TJW+9VLRE3opywnia1s20ISQOIKjBhw9Ik
+         k7Q2k6kiUgIml9Op8z9OBJnHATztpZz1hHOX0CiiXZUt8L/6mPk/o4jy/YDdfTIaqILn
+         1EZlhOcyBmfERxkpqTidxF7Hn2TtYqKGUy6cdY1MCqXtGldky8fDXpP7PVUCP3dR6QzR
+         98afBiezCy/KDmENbGc1lyHNnHWozYbHq5Te8mMUiip1pLbEYFqEwWiBb+hStK/+Ke3F
+         /bPg==
+X-Forwarded-Encrypted: i=1; AHgh+Ro856GfXXsVFTZ65ufAOxktia+ibu+PRhYmPpLcE4tWqzoXgV4A3BYjCr6jUwZMMOsCTH/2b3IPyw28UqBd@vger.kernel.org
+X-Gm-Message-State: AOJu0YwKEgBrh7FcHZbBBs8NvRqdZs1dRguqh0Z5l6gDn3426b38CPrX
+	y3FxRpFLNAsjlCfkKCikYQ1OSPv/Sotva9KCclev9iXwp8Q++d8EVk/cP9klrj2OZgw=
+X-Gm-Gg: AR+sD10UaF4djYJ7SBY+Aictnu64LWPaK/os+WswtCF9oIwgwXCb2H/KTni734DwTvS
+	3QDp0VD9GJ1TZ/LyQc1YlzzcqP1fLWxHnlQZ/y1hji4kLwKHqYWYsufWnMlLiCuZlv2c2nlTAPS
+	a9/qCLs5517naTtbUSrDTjIP4Jyjf+9Bv8wnrdHS3Rp2cMCaYdpZDBRFaYZ7jpVNSygugtt1tzz
+	MIFl7teT0lfR5DZu9i6wXycmiL9Y4Vsha3CLhLwISwl3SD+KDiP52BLzmIuhYZzfiAN23svL8Iy
+	sTQ+U4X0dLiLF06M/1BY4AAg3amUtc+0ozslA9ZrJ8jijPuagZvr/yKblGxsHGFDEH+5MNKlApA
+	m2erTblRFboJsQKGx/EuXGVelUFSdHJ+05l1QfT01xgZA+aLrCWN6G9hpAvxub1/N+LZKiJWo7M
+	bDQ2ESGxQfZnYSJeSGPywP/03I90pbMLLFIFeGg4GBhpkTa41QSJHCrHDA
+X-Received: by 2002:a05:6512:3a84:b0:5b2:b008:f90f with SMTP id 2adb3069b0e04-5b2c1b65accmr154957e87.6.1784968613674;
+        Sat, 25 Jul 2026 01:36:53 -0700 (PDT)
 Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2be1d863bsm291890e87.53.2026.07.24.23.42.11
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2be1d8c57sm315085e87.43.2026.07.25.01.36.52
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 24 Jul 2026 23:42:12 -0700 (PDT)
-Message-ID: <b0bfb2a9-6918-49b7-a28e-c0c822c6f957@linaro.org>
-Date: Sat, 25 Jul 2026 09:42:11 +0300
+        Sat, 25 Jul 2026 01:36:52 -0700 (PDT)
+Message-ID: <8d20f3ab-696e-40a4-a05a-688779299071@linaro.org>
+Date: Sat, 25 Jul 2026 11:36:52 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -83,6 +83,8 @@ In-Reply-To: <20260721-cci-clk-fix-v1-2-5eae78700da8@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
+Hi Loic, Luca,
+
 On 7/21/26 17:58, Loic Poulain wrote:
 > The msm8953 CCI data was added after cci_clk_rate was removed from the
 > driver, so it never got a clock rate entry. The DT assigns 19.2 MHz to
@@ -90,12 +92,6 @@ On 7/21/26 17:58, Loic Poulain wrote:
 > were also calibrated for 19.2 MHz.
 > 
 > Fixes: d202341d9b0c ("i2c: qcom-cci: Add msm8953 compatible")
-
-By the way this commit also does not fix anything, moreover its backport
-won't solve any bugs, but may break the build, if 1/3 is not applied.
-
-I'd ask to consider to remove the Fixes tag here.
-
 > Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 > ---
 >   drivers/i2c/busses/i2c-qcom-cci.c | 1 +
@@ -114,6 +110,25 @@ I'd ask to consider to remove the Fixes tag here.
 >   		.thigh = 78,
 >   		.tlow = 114,
 > 
+
+this simple change is wrong, but commit d202341d9b0c ("i2c: qcom-cci: Add
+msm8953 compatible") causes it, but please note that the commit d202341d9b0c
+has no explicit issues per se (if proper frequencies are set in dt), but
+this particular commit 2/3 breaks the whole picture.
+
+Let's see, MSM8953 I2C_MODE_STANDARD/I2C_MODE_FAST settings repeat the ones
+for v1/v1.5 and 19.2MHz supply clock frequency, but I2C_MODE_FAST_PLUS
+speed setting very close to v2 parameters and assumes 37.MHz supply clock
+frequency.
+
+So, at least one clock rate setting for all modes is invalid in this case.
+Automatically it means the reverted commit 1/3 in the series does not
+directly lead to the wanted and well-managed data, and the logic in 3/3
+becomes invalid.
+
+I would suggest to grasp the statement above carefully, design a bit
+better solution, meanwhile postpone applying any commits from the
+series, especially if a breaking change holds a Fixes tag.
 
 -- 
 Best wishes,
