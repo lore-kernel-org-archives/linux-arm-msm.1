@@ -1,108 +1,64 @@
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from relay.hostedemail.com (smtprelay0016.hostedemail.com [216.40.44.16])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D842374E76
-	for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 22:17:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C7AC226ED33;
+	Sat, 25 Jul 2026 22:47:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=216.40.44.16
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785017852; cv=none; b=LuFpQZ36MeFqvrfN2MDjO5HCg8E2yi3HPTpzXzDRpz0P3pyNpPT2mFDP0OZ6SFPn7QWeMuOrxqcKpfQDmTdDNBX3WJeN4+Y4YADtw0V8Lj1ocJ+R47OLtdC6EmDOkqZAq3onOio5NZaOxwOqh3hyIMnuYgZnJpRH+k5Cb7vLSZE=
+	t=1785019667; cv=none; b=q8lcB/a/NllRWWxM6/A+G0Iy2ZUY9vFJVbZc3KZcAmSB8h2+Cg529O+TuHNksF1mz5XGtwLOhYTYxCVdvbPlQKzxOqagWhCGxCGX5xaFOY2JrLKmo1afxwGflvL25yAxT3hsVAseZD5EVg8XarEGPZ4ZAmCGiT8UKlC5OSluQe4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785017852; c=relaxed/simple;
-	bh=A746bdNcUJkfA/tJvXGw7GsSsywrS1dVwUX2pIcB8Ms=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=NfPkTVBMIhFDr9vu338nlxcJoSk5WEJYiK86tSZ7aKBBrvIk84nLTW8bh3CqUHServQIYABKDK6/OpR/bTg2Ovh8QQwXLk8gAia3aUbNmZrdPLfQf88CdW2+NWfkMTU0n+rx38A6igdumnG2AkdCHj0B1gZYSYLZobEETCZx9OQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=S0tKFkWk; arc=none smtp.client-ip=209.85.128.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="S0tKFkWk"
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-49557167508so15402525e9.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 15:17:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1785017848; x=1785622648; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=SkfPWhGxyd5bYr7NDTgv1M/DacfMUW8wNSZdGPCFOtM=;
-        b=S0tKFkWkcUdgGyd3j7agqK6qU0PjsxvD8cB3W5wS5siTfjtO98Mq6LzHB69SslTfOM
-         oO8q0YXWhGhJnr1OHOQT1JtcOHi9Br0dLli07EzrExgknHqDOkGzbEpUoCzzLTQcfxaE
-         +lkSSBuZaF0TyOlUXw/Z0TgBoFbc4T9YVMKRTE8LyMNCVnmD6/KXHnSQNsAy4aiIHDWu
-         z8XlmHkWOvXm7s4CMf2Wpqx9JWxX1DQG4G/DfZD6ye39fkB2Mnv6Gvz6XzT8Kp1mD4gg
-         lYt3uO4BuDItyZ6p+lhhipj3Hgb7JbmMnHS2BQFhdf+8AbRePKvhP8554vKeScHmfqVn
-         d0hw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785017848; x=1785622648;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=SkfPWhGxyd5bYr7NDTgv1M/DacfMUW8wNSZdGPCFOtM=;
-        b=SOTQ1PhBCXdXWN3cDscotm9i2OSOrf/221a8moT6W6jkEgNZmERdhW4dbGMbw293wT
-         uE8VAvFZ7MIrLkgCJm0Ig/DOix3xnj79/52KL1y5mQflk1EHEuibSWJlPB+o367UeOf5
-         3m0tSb7jMawJ9gosFUGzAZCjtVjHNeWnHgk4uzRLty4lBQI2sC9qKrIawUr5cwqXrKVE
-         W2BfG9OEFU6gDvgFrc9yZLokYXJNQQN8LBpN34MBfIIyuFwTRLr9RmBFXT6WXbx+5rVi
-         iCfqvaorupNvDdnWZx/FDp8Js6VyfRcthiPZeLvf/hA7DacEtVQTXSwlBweoXyWDV/XN
-         BjDw==
-X-Gm-Message-State: AOJu0Yzxwa9olJwlyqW3ng9ReON7ep6jcmR+Or6wfbgjHvAf75K8SSe+
-	M5ZHqkLUijRJkgdalt6M97G8CtYHihtWlDW6y5Z+RhEPgu2wnjAJSI2QHx0vThpnqeg=
-X-Gm-Gg: AR+sD10G12Wp122zUSHMfPgDfzfOR2rAxbgb5GIKDlRdaP+THB6SLqXerW23BZp+gyU
-	1vyjGnnw1KuDXsT65kZe7R4Yp/cZKpM+Tc3iP8cjes5mcCYjr04V/rvHxTmvmaK5ei43JwrlQbV
-	Do2VkUIWQfJyUhUoHXMsULFyDT0VwdFZOUaXnCrXC0DWo+Fjn0rTI5ZfWLnZ8jC6Eew61epayD6
-	OUGORElMoJMX+puvGJJcLHeeGTZI4KXnQEve1pk2wvPZa6A8x9Zlhkrj5eGSz9mUfEvurnLCoGJ
-	g4KrgGmpEGSs6Vy616hXz5+ivdz/6FXyBEa08OR0zIb/vK2FXFbDy2QAeuVUya5FfM/FVzlA34K
-	bW9/We22FYyh3E7Cltub0dtAR5CPQCKAC8zyP/Hj1jJEAldR6jw+Dvo6flExW9REPCDGHSojR9m
-	7W/kORd4pRnvI1DnE=
-X-Received: by 2002:a05:600c:8b08:b0:495:5045:39e6 with SMTP id 5b1f17b1804b1-496b56da86dmr39749995e9.17.1785017848221;
-        Sat, 25 Jul 2026 15:17:28 -0700 (PDT)
-Received: from [192.168.0.101] ([78.152.215.228])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4957bfd1a60sm133988905e9.2.2026.07.25.15.17.27
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 25 Jul 2026 15:17:27 -0700 (PDT)
-Message-ID: <08bb8736-3a10-4038-b4ae-b188fb655601@linaro.org>
-Date: Sat, 25 Jul 2026 23:17:26 +0100
+	s=arc-20240116; t=1785019667; c=relaxed/simple;
+	bh=BwatChdjHNp+AOHw4ACx78Y+kzFBlShXeQmAAqFJkW8=;
+	h=Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=qLJtuFm8c0EstT0yckl2yD+3mrYd+0ScjMwCoNJtqCcWTMscFfNMb4/UJKgAaar6CmMS1fCRuE+Yz7LgJygnbIjIHcwxdH5i+Mcty82SH6a9JsRUbs6imAxjHBPIKeCmboKqqSzqtw4kXggLHYFPyDFTjIQ4GnrJ1fJUI3iNvug=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com; spf=pass smtp.mailfrom=perches.com; arc=none smtp.client-ip=216.40.44.16
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=perches.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=perches.com
+Received: from omf03.hostedemail.com (lb01a-stub [10.200.18.249])
+	by unirelay10.hostedemail.com (Postfix) with ESMTP id 6CB4EC03A2;
+	Sat, 25 Jul 2026 22:47:38 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: joe@perches.com) by omf03.hostedemail.com (Postfix) with ESMTPA id 5F2E76000D;
+	Sat, 25 Jul 2026 22:47:35 +0000 (UTC)
+Message-ID: <933506f1f210d3498d515d55266951e1914cbc9b.camel@perches.com>
+Subject: Re: [PATCH] checkpatch: Validate committer sign-off
+From: Joe Perches <joe@perches.com>
+To: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>, Dwaipayan Ray	
+ <dwaipayanray1@gmail.com>, Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+ Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
+ Andy Whitcroft	 <apw@canonical.com>
+Cc: linux-arm-msm@vger.kernel.org, workflows@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Date: Sat, 25 Jul 2026 15:47:34 -0700
+In-Reply-To: <20260724-checkpatch-committer-sob-v1-1-68550513106b@oss.qualcomm.com>
+References: 
+	<20260724-checkpatch-committer-sob-v1-1-68550513106b@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.58.3 (3.58.3-1.fc43) 
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12 6/6] media: qcom: camss: Drop legacy PHY descriptions
- from x1e
-To: Krzysztof Kozlowski <krzk@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
- <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
- Todor Tomov <todor.too@gmail.com>, Mauro Carvalho Chehab
- <mchehab@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Bryan O'Donoghue <bod@kernel.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org
-References: <20260708-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v12-0-f8588da41f16@linaro.org>
- <20260708-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v12-6-f8588da41f16@linaro.org>
- <c52fc21e-ea58-43a8-a5f6-937ea108fc2a@kernel.org>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <c52fc21e-ea58-43a8-a5f6-937ea108fc2a@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-Rspamd-Server: rspamout05
+X-Rspamd-Queue-Id: 5F2E76000D
+X-Stat-Signature: 74xs7hbw4q9pju5f4kfnim7mczscoupd
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Session-ID: U2FsdGVkX1+CLrt9/a3RHanLX9EjYXrSMZpzIud05pI=
+X-HE-Tag: 1785019655-618187
+X-HE-Meta: U2FsdGVkX1/26EYsA07Yz1AuaG0YbArJzECS23jhG+UvssyLFOXQV12nmv1JwrnrkeRG0lMlQ9invFUdGupMZlGhiMlZVbMp6iIsWFE7nu5rmBatkPs6PuMLH2704zagDjgZmBbMuqi0KlGBZkO1UdcBXadnIhONxf3NPoAeQrQGV0nBbBnAzcw6hMQ2v6i2AfUEmsTTGOsbHmvqiWRdj6vnkt/5fb3K0AVnYtXTcauKJoxpC5Idfv2WWoCC7lXQZLdRNzP+egtqb2AnwlsV1JeI71Nvb+BQhkZJ1BHa3sEQcCs6H2UarrkSydvIivci
 
-On 25/07/2026 15:46, Krzysztof Kozlowski wrote:
-> On 08/07/2026 02:07, Bryan O'Donoghue wrote:
->> x1e is the first CAMSS SoC to use the new PHY interface. Drop the redundant
->> legacy CSIPHY descriptions.
-> This looks like breaking existing ABI / users.
-> 
-> Best regards,
-> Krzysztof
+On Fri, 2026-07-24 at 18:56 +0000, Bjorn Andersson wrote:
+> ```
+> checkpatch validates the Signed-off-by trailers against the patch's
+> author, but misses the opportunity to also validate the committer when
+> run with --git. Maintainers therefor need third-party scripts for the
+> final Signed-off-by check.
 
-Yeah - I need to detect if the CSIPHY nodes is available at runtime 
-instead, true.
+I don't actually see that need as an issue for checkpatch.
 
----
-bod
+checkpatch is for patches, not things that are already committed.
+
+If something like this is added, it should _only_ be used when
+--git is on the command line.
