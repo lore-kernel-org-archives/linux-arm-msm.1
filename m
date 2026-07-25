@@ -1,77 +1,117 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f170.google.com (mail-pg1-f170.google.com [209.85.215.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CE8F35674E
-	for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 09:42:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784972553; cv=none; b=FyP8MrJbQRr4rgyOkx4VCmfNaMBB6bh4LnD+NTncPh0yMzZQEnFSS9wCj3gvqdGAuRiVE40aryvDuiw+eQTGVRRk9UCQPPqA51zQSK9wZTs2SQlRhT53zHCA/Sc0fWFqkSlnpos0eO2ZRQ1Mnc4Rq3xv686ZQKNZKK1i1SIKdUs=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784972553; c=relaxed/simple;
-	bh=KDnuoI8ID3GkoKDHWgK7+SAUrktiVMJnjoWBDP5c+8U=;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 067F223BCF7
+	for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 12:47:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.215.170
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1784983624; cv=pass; b=P5SXcwlzMNDiWq7SnzdhzaXxkgSxXF9pleaAxHWSlbDMKy/xPvDcgmdO/Xg4+wjCpKuffTnDGacjaJp8LyPac7bcBUHMhjJyyCR3Zcq/v3y6tVLYAIu0O6Crfg/LbTlMpmQtr9EQ1EsmQjHsTEOfREQzjYXzF4hDxhi8E0ifE2I=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1784983624; c=relaxed/simple;
+	bh=OvrNT+93qZFUenq04qZyqRBg/XnwRXOAV++TlHjqWj8=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Ies4zWPeHrmmwDp0izt51GYpO+IfhxF5fPxbikyLHD02vS6oNiMPmSu3epBEpq+7clu6cByNkQCkdMnXf9kaKDXhC1DwOxOWsIt+73fUhe319/ENHfMl5MxA3W9R6wRXzKg96h6ghYH1RO7A2QQRiCqB/bZ7Tgm9DT+WnnUcIp8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=RIHC6/E5; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=sDE3UqnREo9mC/YeUI9PrxpTerExWzdKGMWr9y+Gk/UesgGfW0BNKEaxAYBPcjHzZgkZatSIWDlAmzwG/AReDK9XacfRSmg7r9YonCnFTUCzMlzbMUKCFvhsLkwATFhhsf7Y7SAqtMx8GJEtmYYU59i/mo+wXQI1xVHrW9XltiY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=quora.org; spf=pass smtp.mailfrom=quora.org; dkim=pass (1024-bit key) header.d=quora.org header.i=@quora.org header.b=VDSZ/t6G; arc=pass smtp.client-ip=209.85.215.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=quora.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quora.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="RIHC6/E5"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0EAE41F00A3F
-	for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 09:42:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1784972552;
-	bh=KDnuoI8ID3GkoKDHWgK7+SAUrktiVMJnjoWBDP5c+8U=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=RIHC6/E5VI8CE3pPWRcllowwWAb6ZXBbWpjZeYxAp5ZCHoAXDGEnErp8wG9Ngbc4/
-	 5Zp9xS3DsMQFjuEhz+cC25hwuIihCmz2LmQQl3i/NX/849lmFGfuYLM8eLRv+vimGu
-	 wNU+z5WtS8+S0QupLO9guN1nW8LFG1im+kG+hKfdyrZpuq4lN+ytDKpGITcVr+SeEg
-	 gqVhqq3VdnxXcyaadKlxkua670+/5UlRTivpnoDGK42L16+LBcE8OLxG13gENQZNzo
-	 B69+RVaV3Gto24D7R//TznzAunDC+NbyHxLmI3EsX0izPHBDQuMzT/ltehKVbWaVHa
-	 W20ChWyFkA++g==
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5b15c6fb864so1051033e87.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 02:42:31 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RrKNS5t6j52drqMNQHc8liX9y78oN/tQXTsSOD4JkUS/YcFaZ23iO9j0hH2D4f/h1Om30jKceDHnyE5HEOY@vger.kernel.org
-X-Gm-Message-State: AOJu0YziZADqjGPygj0+aNJVW/gEjXeB3fPugmcbDLJUeSEuv7DFF4Q/
-	thKGym5Af0XY7XLQngDz4ZII9zkBYtujgVbWXdYZVliRBizSrtKqJ5kUHIHehzgSFU5ts4BdEVP
-	zrqrd/YVuOtgKhJ1y9s9xobqqdg+pvUg=
-X-Received: by 2002:a05:6512:1108:b0:5b1:5a90:25b4 with SMTP id
- 2adb3069b0e04-5b2c1b02d72mr317970e87.19.1784972550844; Sat, 25 Jul 2026
- 02:42:30 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=quora.org header.i=@quora.org header.b="VDSZ/t6G"
+Received: by mail-pg1-f170.google.com with SMTP id 41be03b00d2f7-c9cf07d2df6so905890a12.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 05:47:02 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1784983622; cv=none;
+        d=google.com; s=arc-20260327;
+        b=N0bTD/Edt5Y6Gb2dL+XnORT+duV1k7WgTMM/fen+27cDyv40awSR+VyEHIDGnV2LjI
+         HXSJEaXJCU/RzVi3facOJ7vBvo+NUyn9+doQJ1YJhpnaSPIuu6xKBBJ5NKwPzlUX/2SG
+         4/08k+WNFC4H//KhNCUi9AcKfY9OPOjf4+VCiLwVeRGNRqeokd5PwHz3ONC7ZSNO8JWw
+         4Ou/2G7Qp8JOT17BOdg2p2KL8Ji2l81KrysWTaQ8TMs+DwTjlpPDazj8GIyAtPUsOJ8d
+         kV4/TN2gyq7A44cyVcY9GsFloCLJjowlUjIFXzQTdHKvOIaaanGS8Icq2R+97zGTDQHl
+         88Iw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=SABMkpCvnpZQFfCqjkujdH0sHrHtEaNsZiUpRammpMY=;
+        fh=WAOylv2E5N5yFZRjJel7RUB/Ls8xYszWZS3zRKeWx+M=;
+        b=pKHq+p2ZrMAxXPCWXiZGl3ylcCCPkmAYrWIqRk7fzrDKsOe5m4Bjw/CQBZjZnk7lqL
+         xv5sAJUOufN1cn/OyYqToE5eyeiovZuliRbEuwv8XpH3Bvi1rWislPVd8Q3q/ZPOz/QC
+         330V7737TWQY7/29LkhUjxrnnqZr1cH0QnVu1Q0SZUoN/SuBl4v07AGZC0sD5Av71xwu
+         oWkgtcExjoyJEvUFZW9g9cx3Cb77XpJB5ouZEVVDu7vJJ2iFhn/ONM+x2pwExDfFkM51
+         uIrDG6wTAvb7BsyioTylOFKTD0tEa6IO6VuXMfzUpsYFuScyuG/u/bU1uTOJGPT3tzbU
+         OWMw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=quora.org; s=google; t=1784983622; x=1785588422; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=SABMkpCvnpZQFfCqjkujdH0sHrHtEaNsZiUpRammpMY=;
+        b=VDSZ/t6GfsDy310tFkkEXjR/iFq9qAkdkm81dNdcrTPYS/NwS7jGhBzDmc2oNjFKYf
+         Op0k+/wMSeABxhExD5CvZntxJ/pDTEAKghPjrO9BYzCktmj9WF5Ae0rgIFuGvbK6BbSa
+         FnkGQ+acFaoUX0owBowE3Pn7jgYDwsRMReq1Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1784983622; x=1785588422;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=SABMkpCvnpZQFfCqjkujdH0sHrHtEaNsZiUpRammpMY=;
+        b=Tgc1PH9fUI7shFU0V5Wti8zIt0e8cTQstj60TLMKkTdht6wDa7jS6NYwjYTfB1VyIB
+         j/L5JuVhfjk//Rh/cyoYHaBd9QmmDDSlxphgp8X+tIfgwMaXndUNgIzurA/fk5oDih91
+         RLlF6aHDpszlgAsouTJPfzPdC/nP2QDOVVS3GhdDPyAdS5lSjWU3C8La1IE5QEcg/qu0
+         rDgPWGwZHsyO9Qlqqs92FsW+eQ52QWokt4Tts/V/+NG9v2MuIsWUTAALjZbx/qPAhWdk
+         p5V3cxAQEdR0uilFKsUCqy2df2D6+Dd3sUeU21E2IX24aMl/OZfxj072T8AMMzYq+Q5V
+         8KoQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrrUK2fRUWhlfbWKGUpVIfBoIOI+MJkLWxqqlDXGgVUMjpu8xfBYxPVLsPHVyirXdTTaSCtS7dJIp8II8QY@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx2vFuxn2evWxKe4FmqxHGo455RELs/uAAR3aDSTX6SuhuibFID
+	C4dG9sUazFsPED676pfCuGbt1N/Rb0Sa8oAMI2uX2txrUg3tgjgc4y2/9XF1OUjjM1tqbGqm2CW
+	KExElmXGVdMtF8iXPJYph/9jluKhK6OP9HuACeRn5mbo6j4n+P1dYbWJhLQ==
+X-Gm-Gg: AR+sD12sknZ/0sWGl6FeqPyWbDjb82y826Xv29rrOJRbG97/dPcW5peK5pkc5RMcwis
+	4NWdauT3uxqNZIWsN5ePTG6dmEwDvhhTarFoBFUkyvgxhSkMIgGAM3ysT7jwjsLCRqumsnp68AJ
+	kt8D+h+aNdpwektj2nOutxJbuYcxCh2sb7fdMUSx+3I2ZeFoa8XxrCZh4/NmGcqFQhk7dyw0Xbx
+	MRWxPGyp4PmmdQcxTQYYKZjoDprZgD4Lnzt1hRjkymFlZyLrGXv0RFpQA9oB67cHHl3AIe91qr1
+	s4yyFGVthtMC0Ii7bAGjH6eLVW5SChlPLh6kjFwMwqksOrRyaJk7jfKzufRR10WOsr/7fK4odsN
+	Juf8Bnw0idnmchmuo2rVmHb+6SzejnHI3/8dhvIxRiG9yEIbz8e+dF3qf4Lsea9XobtQLmqLsnx
+	9kQdB4xTBrMTNtUF1VQxsK8zabHHtIror6a7cmHDykBmdtd0eDXZQydKZv6fs=
+X-Received: by 2002:a05:6a21:918c:b0:3c3:8ce8:1fd with SMTP id
+ adf61e73a8af0-3c67e0821cbmr2043147637.73.1784983622294; Sat, 25 Jul 2026
+ 05:47:02 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260719134548.8830-1-linux@ulli-kroll.de> <20260719134548.8830-3-linux@ulli-kroll.de>
-In-Reply-To: <20260719134548.8830-3-linux@ulli-kroll.de>
-From: Linus Walleij <linusw@kernel.org>
-Date: Sat, 25 Jul 2026 11:42:17 +0200
-X-Gmail-Original-Message-ID: <CAD++jLm4WiEaDmEGu0E7v1qmJFrmGMW9D-HqqvSeisn7f_3JLg@mail.gmail.com>
-X-Gm-Features: AUfX_mzrL-M4gM01Jv3A1DSFmOG63KYYzpitQfc0Jrs-CYLAzUSXTDbaLTcIEj4
-Message-ID: <CAD++jLm4WiEaDmEGu0E7v1qmJFrmGMW9D-HqqvSeisn7f_3JLg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] pinctrl: qcom: ipq806x: mark pci reset as a GPIO pin function
-To: Hans Ulli Kroll <linux@ulli-kroll.de>
-Cc: Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org, 
-	linux-gpio@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260708-x1e-camss-csi2-phy-dtsi-v4-0-572348ad1b2a@linaro.org>
+In-Reply-To: <20260708-x1e-camss-csi2-phy-dtsi-v4-0-572348ad1b2a@linaro.org>
+From: Daniel J Blueman <daniel@quora.org>
+Date: Sat, 25 Jul 2026 20:46:50 +0800
+X-Gm-Features: AUfX_myLwI7kMfc-XbFzlYvC_Qj91PEJsD-glXmxVIjHTMm2QKWFeYyYEBStVBk
+Message-ID: <CAMVG2st=wGNYF0AbqRqadVqJL6x_F8G2u6BJd6VOweQ0nNebKg@mail.gmail.com>
+Subject: Re: [PATCH v4 00/11] arm64: dts: qcom: Add x1e/Hamoa camera DTSI
+To: "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, 
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Abel Vesa <abel.vesa@oss.qualcomm.com>, 
+	Christopher Obbard <christopher.obbard@linaro.org>, 
+	Aleksandrs Vinarskis <alex.vinarskis@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Sun, Jul 19, 2026 at 3:48=E2=80=AFPM Hans Ulli Kroll <linux@ulli-kroll.d=
-e> wrote:
+On Wed, 8 Jul 2026 at 08:44, Bryan O'Donoghue
+<bryan.odonoghue@linaro.org> wrote:
+> Changes in v4:
+> - Implements agreed port/endpoint bindings in CSIPHY series
+> - Depends-on: https://lore.kernel.org/r/20260708-x1e-csi2-phy-v9-0-0210b90c04cf@linaro.org
+> - Depends-on: https://lore.kernel.org/r/20260708-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v12-0-f8588da41f16@linaro.org
+> - Link to v3: https://lore.kernel.org/r/20260326-x1e-camss-csi2-phy-dtsi-v3-0-1d5a9306116a@linaro.org
 
-> The qcom pinctrl core supports marking functions that represent GPIO mode
-> via PINCTRL_GPIO_PINFUNCTION(), so that strict pinmuxing does not reject
-> GPIO requests for pins that are muxed to the GPIO function.
->
-> Mark PCIe reset as GPIO pin function
->
-> This allows ipq806x to keep the PCIe-reset related configuration in DTS
-> without tripping over strict pinmux ownership checks.
->
-> Fixes: cc85cb96e2e4 ("pinctrl: qcom: make the pinmuxing strict")
-> Signed-off-by: Hans Ulli Kroll <linux@ulli-kroll.de>
+Superb work Bryan! This works for me on 7.2.0-rc4 with 'qcam'. I
+support integrating this dependency into 7.2-rc to reduce complexity
+later.
 
-This patch -> Bartosz
-Acked-by: Linus Walleij <linusw@kernel.org>
+Tested-by: Daniel J Blueman <daniel@quora.org> # Lenovo Slim 7x X1E80100
 
-Yours,
-Linus Walleij
+Dan
+-- 
+Daniel J Blueman
