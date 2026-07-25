@@ -1,66 +1,33 @@
-Received: from mail-lf1-f44.google.com (mail-lf1-f44.google.com [209.85.167.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 315CE19D065
-	for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 14:19:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DE932749DC;
+	Sat, 25 Jul 2026 14:46:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1784989182; cv=none; b=FRR6AhPU1lC9nGw/6kroj9XC08R74MSG9rRRDTwzq5yHHpVOWUlwJQyDPZG+nvZhs6S8rcXTOfAGJLGkJr6Un731906/s/anMfGwuBpcE5bZlfBkBhz9IgDfjgkl/eXwhODUKNGVihTCmRXXh5+ucdkWAImPMj1hmEMUZCmwONU=
+	t=1784990817; cv=none; b=OOSyZAjSqA+Vrx5WOuHftoDf5aWj1k5MJFggPrA49fvfcpCWhRV5FH4jjZlrnk0DmxXN9I3j2W1cgt1b70vA2C2GzWxFsYDBEGywWHF5LsAv1MPtqwsgJYKwmhBb3+hFwSnXmJct9uKdAa0Sh2G/Fi6b2OZ0NB1Leq/snWhSDVg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1784989182; c=relaxed/simple;
-	bh=cc2QAS7AmJQYin06oY3u5By9NlAK3ZC+dJCh52nbJew=;
+	s=arc-20240116; t=1784990817; c=relaxed/simple;
+	bh=2fQ2Anxt6NY5jKhAVVhjdNRLWISmPuBKqimJzqGEA2U=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=GeVwpJGm9JcSSZ60/mHMuRAYIbq5bcyZcwnt0Z1ouWTsmp+kIJKJg4VEAkuB1OIJksN0Df3O06VRBDvktYaH/Y4IjFo55lvtSnxLV6rTcWohCd+lJy2996iI6sGkLSiZHyesuBi5uJ9VBcGPEzFfWjqOFds1GyE6rhXv92wdTp4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=J6kg0kRk; arc=none smtp.client-ip=209.85.167.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	 In-Reply-To:Content-Type; b=tXyyAHlFd0HUIdYQWh7HuUFB/8WC/T8Sex5wEQSMMAwQcJXnYvM2MWPRI77g8R+QZNGzz+KV62rfxDqIUalCta13u5wxCAkComllqv8JG0NMZMeDjYjGnTn1YK5AB3AFEoO7jJXKNuxronN15SYcfDzWMiZwNJRa8Qz1t78KYjA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=E/Yj3TTX; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="J6kg0kRk"
-Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5aebe49b227so329343e87.2
-        for <linux-arm-msm@vger.kernel.org>; Sat, 25 Jul 2026 07:19:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1784989179; x=1785593979; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=qakNqoswZBGD97uQf4jL75REPWcF8Z3ba+lxKiFGD+o=;
-        b=J6kg0kRkqCAfKR2XsyG1orrnebZ0epfomLWj3K7iytlWCU1fWFWdCbtULd/qKFdPQh
-         /qP0iRYPyFO1TGs+rA2E6d1bOEdWHY9mEER36zoq2Sl3IM3ZKhJzibsiW6+WEbms1TCW
-         yRNUEOVjYD0KheNLovR+Ilmglv0KMctacpzGBwgf6pjJXcYIK/oKqDbvOaHhVm9z10FQ
-         9c3dzSxVlr2ELk1JBXheVFqK+Pi18OneLUtPRdEoOybitAV3v5HGXJ9+3xFCHqM9qBkE
-         /fJ4t+J2a9CU8oDwsglHUsdGAB7tzqqMXS3BIa6LiVEzxPZwocJdj9zmZReFK1q4MR76
-         ZALQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1784989179; x=1785593979;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=qakNqoswZBGD97uQf4jL75REPWcF8Z3ba+lxKiFGD+o=;
-        b=lcLfpLdyQnQYtCYyShihjQds6XiR6854qschNdyV1vuqw7nnJHCj6G0M2O5X9UhRiE
-         DKWLX4Vuuj85q7kUcMBJzE+mYKMiAF+vSWVEvCyYYUAVWRlAafI9UAxYK/4+apj+VKZO
-         FjYzk/+cKxPQb9Y1EcgsL4mvjTntsYlwNQhvGOGUL6I0kBMOqbe9PIRrdJgBFdiODoHP
-         xTO7w8llGnsiLEvU78t/egWdiDykrUwq0+SorFa2eWZh1ILJ7Ow4Wtf6MEp6org/2Z2O
-         ljYSE7ioqhv4NawfRTEwRoVH4DjMHLvS0rlRdS9jlCvTx8zCgT5HF6i94qZ0vIa7UED2
-         kmWw==
-X-Forwarded-Encrypted: i=1; AHgh+RqgDzFONDBq7OUjbgJFbgv4TAinSsIGmKuaVO78PLmjhSinGGEsc+6RG5Ps7u5lCwvaPVPRvoN7fXMS4bPr@vger.kernel.org
-X-Gm-Message-State: AOJu0YyrwkvaFax+mFL4quHEP7FZwnYIislO1g/2Fx+EJRpWovDwNowa
-	7vpkdPK9KhS20gXsOp4YqqEQd4P1o4TbxABHRa8PCMsOobsmyyUJxr2Kzwmk4eDUqNA=
-X-Gm-Gg: AR+sD13zjCv7grrtk6aUxqkzA6Dde3h8mfE45SZ72ElgLQXH3ZB6o4y0qcKG05qwizv
-	Zwgw903E5fvnmBcH+zxePi2ZuGgkjA2vBsAsubat/CvB2qb42d/PjrtP+sVkeXx2emA8Xth6dPz
-	UrmDVy6/7Gf2ZyyIepnwNMPM4couWZoJveoSfTpb5pBmRVy763QmyjU4BNawaamo/9LesZX94D0
-	oC51s1SzWZf27B9olO5VJbVc/TAMD0Iu3GwGsWJAusE3dWV4pJnfTHUfJDQOIzaTdC8iBWDklrj
-	Yso49VNg2nWxhCeO0UYAyUJJ0THerdEbL0erHSenUEcpdfSZsC3Va2OhPjahv2Cc+ia6GmyMWKD
-	IgufJxqQN/fVVk059uNQE+AaHAfjTRIFr+fITz1MVD7KA77Vw13LCTO+urMJCX8xjz+FEYrCR+V
-	DtFYKuCiLsCUkHnqJFA33J5eeuvZwF8Zo0rp6K5YIKszHQ4N/SyAC6yNLs
-X-Received: by 2002:a2e:b8c2:0:b0:39c:74ef:1a87 with SMTP id 38308e7fff4ca-39f28776116mr2153271fa.2.1784989179110;
-        Sat, 25 Jul 2026 07:19:39 -0700 (PDT)
-Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-39f222364d9sm4354551fa.27.2026.07.25.07.19.37
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 25 Jul 2026 07:19:38 -0700 (PDT)
-Message-ID: <1f64e023-e5f4-4620-a01f-1cd98faa4ca1@linaro.org>
-Date: Sat, 25 Jul 2026 17:19:37 +0300
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="E/Yj3TTX"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B45F31F000E9;
+	Sat, 25 Jul 2026 14:46:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1784990816;
+	bh=2fQ2Anxt6NY5jKhAVVhjdNRLWISmPuBKqimJzqGEA2U=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=E/Yj3TTXz2zdmtpk9unD+m7svuSQJLdkukHWVXbMgQbw1iCXumRugDZgqRbhMud1u
+	 WLEaJtp7LqCcVvX0KIiMCveamt89dlRihmtWS+0GcGnxWbbGi+RhE1fGkeZx+4OWnX
+	 LEcK5ZrErJjApcL8U6eB7muHXCNIuJtvpHZmKjHMrC8ktGm4h4R98WjvNCQRPJvnWI
+	 6zdtwUXF7Stz07Gfj5abuz3CveRDtHberzY4YZQXbKwHs3ksiAona6pYjr+soVGGNh
+	 xUbtVreNjKPCdGi7MenPYNyK+qteBYZZCoIk+JftHy+Bn2mXo5PF5JEcQAazsXW2Tn
+	 XKFlRgMywPcFw==
+Message-ID: <c52fc21e-ea58-43a8-a5f6-937ea108fc2a@kernel.org>
+Date: Sat, 25 Jul 2026 16:46:46 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -68,112 +35,78 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] i2c: qcom-cci: Add missing cci_clk_rate for msm8953
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
- Wolfram Sang <wsa+renesas@sang-engineering.com>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Luca Weiss <luca@lucaweiss.eu>, linux-i2c@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260721-cci-clk-fix-v1-0-5eae78700da8@oss.qualcomm.com>
- <20260721-cci-clk-fix-v1-2-5eae78700da8@oss.qualcomm.com>
- <8d20f3ab-696e-40a4-a05a-688779299071@linaro.org>
- <CAFEp6-3OKp0XhpNmp-yYwf4r16A=CD5eA-Ts1kk+mFjdCA38RQ@mail.gmail.com>
-From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-In-Reply-To: <CAFEp6-3OKp0XhpNmp-yYwf4r16A=CD5eA-Ts1kk+mFjdCA38RQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v12 6/6] media: qcom: camss: Drop legacy PHY descriptions
+ from x1e
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
+ <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
+ Todor Tomov <todor.too@gmail.com>, Mauro Carvalho Chehab
+ <mchehab@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Bryan O'Donoghue <bod@kernel.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-media@vger.kernel.org
+References: <20260708-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v12-0-f8588da41f16@linaro.org>
+ <20260708-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v12-6-f8588da41f16@linaro.org>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260708-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v12-6-f8588da41f16@linaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi Loic,
+On 08/07/2026 02:07, Bryan O'Donoghue wrote:
+> x1e is the first CAMSS SoC to use the new PHY interface. Drop the redundant
+> legacy CSIPHY descriptions.
 
-On 7/25/26 16:06, Loic Poulain wrote:
-> Hi Vladimir,
-> 
-> On Sat, Jul 25, 2026 at 10:36 AM Vladimir Zapolskiy
-> <vladimir.zapolskiy@linaro.org> wrote:
->>
->> Hi Loic, Luca,
->>
->> On 7/21/26 17:58, Loic Poulain wrote:
->>> The msm8953 CCI data was added after cci_clk_rate was removed from the
->>> driver, so it never got a clock rate entry. The DT assigns 19.2 MHz to
->>> GCC_CAMSS_CCI_CLK and the hw_params values match those of v1/v1.5 which
->>> were also calibrated for 19.2 MHz.
->>>
->>> Fixes: d202341d9b0c ("i2c: qcom-cci: Add msm8953 compatible")
->>> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
->>> ---
->>>    drivers/i2c/busses/i2c-qcom-cci.c | 1 +
->>>    1 file changed, 1 insertion(+)
->>>
->>> diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c-qcom-cci.c
->>> index 19e4719f13b29b2cf60e113565b1b63f19d0e669..5f74edde8558382e63e2c3d0fbe19489f325e8ce 100644
->>> --- a/drivers/i2c/busses/i2c-qcom-cci.c
->>> +++ b/drivers/i2c/busses/i2c-qcom-cci.c
->>> @@ -783,6 +783,7 @@ static const struct cci_data cci_msm8953_data = {
->>>                .max_write_len = 11,
->>>                .max_read_len = 12,
->>>        },
->>> +     .cci_clk_rate = 19200000,
->>>        .params[I2C_MODE_STANDARD] = {
->>>                .thigh = 78,
->>>                .tlow = 114,
->>>
->>
->> this simple change is wrong, but commit d202341d9b0c ("i2c: qcom-cci: Add
->> msm8953 compatible") causes it, but please note that the commit d202341d9b0c
->> has no explicit issues per se (if proper frequencies are set in dt), but
->> this particular commit 2/3 breaks the whole picture.
->>
->> Let's see, MSM8953 I2C_MODE_STANDARD/I2C_MODE_FAST settings repeat the ones
->> for v1/v1.5 and 19.2MHz supply clock frequency, but I2C_MODE_FAST_PLUS
->> speed setting very close to v2 parameters and assumes 37.MHz supply clock
->> frequency.
-> 
-> Good catch, there's a real inconsistency in the table, and it's also
-> why configuring the clock rate in DT independently of the timing table
-> is fragile (and not even enforced by the bindings).
-> 
->> So, at least one clock rate setting for all modes is invalid in this case.
->> Automatically it means the reverted commit 1/3 in the series does not
->> directly lead to the wanted and well-managed data, and the logic in 3/3
->> becomes invalid.
-> 
-> Agreed on the analysis. To be precise though, this doesn't make things
-> worse than they already are upstream, msm8953.dtsi assigns 19.2 MHz,
-> and the Standard/Fast rows are identical to v1/v1.5 (calibrated for
-> 19.2 MHz), so those two modes are fine today. Only Fast+ is broken
-> (without a DT change).
-> 
->> I would suggest to grasp the statement above carefully, design a bit
->> better solution, meanwhile postpone applying any commits from the
->> series, especially if a breaking change holds a Fixes tag.
-> 
-> So if you agree? my short-term plan is submitting a V2 with a
-> switching of msm8953 to the CCI v2 params table, so running the CCI
-> clock at 37.5 MHz, which is what SDM630/MSM8996 already do (same HW
-> version). Moreover 37.5 MHz is supported by the msm8953 CCI RCG, so
-> this is a viable single rate that makes all three modes
-> self-consistent.
+This looks like breaking existing ABI / users.
 
-please consider to add .cci_clk_rate property into 'struct hw_params',
-since that is its proper and valid place, the rest of the logic can be
-build similarly to this series, for instance. Basically that's why
-1/3 revert change is not the right step towards a wanted data placement.
-
-Next good (IMO) optimization/improvement might be to describe hardware
-programming modes in their own list, and in v1/v1_5/v2/msm8953 cci_data
-simply pick the wanted IP programming data up by an index parametrized
-by mode speed/clock frequency/hardware revision.
-
-> Longer term, clock scaling (probably OPP-based) could be an elegant
-> improvement, but it's a bigger change, also CCI block's masters share
-> one clock yet can run in different modes, the per-mode timing/rate
-> can't be chosen independently per master.
-> 
-
-That's right.
-
--- 
-Best wishes,
-Vladimir
+Best regards,
+Krzysztof
