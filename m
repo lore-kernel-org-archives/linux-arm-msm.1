@@ -1,189 +1,154 @@
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from MTA-15-3.privateemail.com (mta-15-3.privateemail.com [198.54.122.111])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A25E92BEC52
-	for <linux-arm-msm@vger.kernel.org>; Sun, 26 Jul 2026 22:20:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2044F3E317C;
+	Sun, 26 Jul 2026 22:24:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.54.122.111
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785104456; cv=none; b=JAOeZpDbbrkiPDDwq++Gzu945U8fp8GSFGqCJ71qPr4Bj9TY+CR0TxHvSJ3K/SdUu8qWeI5ApJWh9Qm+hmvkVgoCtx49pL9iJMMU7Kc3kVJ5sda7ItVeV+rjvrNMEwpG/qShNUywJZ2HfYAJ1JybdF+izRynNRcJ4kI8NSZLNm0=
+	t=1785104674; cv=none; b=aA63T/W6mp1o/aNORIN83UInzoxtWrFs/e6roYPbUfWTlOV/KAw57L6urhOxIniJNySXvXKH5KCp2lDIJws/mjPD8B5wpzMcL3pqQ5L+LbcU9ZFZinHziW/DGbUxeCuRDrC6B082sMpW6QVbByiW65ICv4hEpbFsgAlAhqw53lc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785104456; c=relaxed/simple;
-	bh=R8j6eBV+UdD1g7eXVCfMDbakYZoNCDVSJKVtPfAu39c=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=K9LlDuAd3gc+29HeZ743o1avl9yw+jMyTInp264F2ehlLhzxQ1OTU/KQzGb1t/qNPaBYPdoxANZJRdoXQkqxTLWqYTkiqlpmObHaGOvrccsXFu/MLN05SK74OPjBP/KC5FNEaC9xx6fjBwXJHCGhNP3PL1HXEjCXdiqXFj4B9iI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=nFVezLuC; arc=none smtp.client-ip=209.85.218.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="nFVezLuC"
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-c169ae1cb26so524720266b.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 26 Jul 2026 15:20:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1785104453; x=1785709253; darn=vger.kernel.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Havq3+W8NHvvrT9IGeQuks/YcxvMGuQejowI96vAV+8=;
-        b=nFVezLuCIKj6Q4Vbp/zgnE8ytUkWteW3RINKX5ynDpd0s6h50GqsJiMhtly3ni82YH
-         mi4j1fJjFQAK7DgZmX5uOkX1AACJ6LbBJW5pYdZ+yFGZYPbTWzVlDNM9tg4ZQTOMOBdr
-         e95vEOKy5ho5vCUqbYTIU9WPh5kx1ta4GNYME=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785104453; x=1785709253;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=Havq3+W8NHvvrT9IGeQuks/YcxvMGuQejowI96vAV+8=;
-        b=PfdrMndSffHQIiAj/YZULtYXFGpGjW0CPxfB78a+1m1ls63cgnKS9TJZPN17XYFcCg
-         /3LXxzWNVndxsNNqzJ1vy3lL2+EiDtWFzYCfh2jjiZ4IibV1l/VS2o1WEV1VTw4Qb8f8
-         U5tts+qKfEptCOiAfeSJSUqDlec36vQFKS1f61C6spyMdFnfXMEBpNAVJIUuA2qOjgco
-         S+goaoz4dxrX0rtvnpzLRqKeY+J/iT0fQNI8xyiztPPHQd4QfXtApAYApfLjtEuQSJHq
-         vqYPVMcgZMWqfE1N8yZkVxSaB2zL9NSlev9b1wxnF2sVzkhcOoLmY0Of+JUB8f4ztu6P
-         VUgw==
-X-Forwarded-Encrypted: i=1; AHgh+RrBlmiuVXLzUuA1FyV5i8wgnigga+e78M+oC65juT2vrThSEsR0Xeea6dJL9xjKqwGCWcD3Kwly9a0ZSGsi@vger.kernel.org
-X-Gm-Message-State: AOJu0YxOv51Bs1UiImGsRqt0Cqf283FUGWmEapRHqrUMjFVEJWxCq+7i
-	EkMeR512anqpyrek7Q0VHRhTtjvVRee98LTvUF9Mk0Ibr3965pK7Bl90ORZFwZNGVusRzA9UY/c
-	eUmtyaw==
-X-Gm-Gg: AR+sD11ou0ABXjRTTUQDCHMOFNDXVVwebSU/bLmV2XRFiPGYAdVu3Taf84UTNedKwB6
-	zqP1mcq6Bx7m3EiZmEJitMAz5dK5RH+LDTtCTvT4+U9GFF+yaN/BV5y0+M6EaaDMMT9JGyfN61H
-	llEi44ubHnYDzgJg1jCTJ50sOUGnL2cJ3ymAckcVQ4vMcMcEDITivY2soE9grG9L/M5DY99IcoX
-	f/Pksw7DrMT4nG7P9UWBi9840/UC9fgEyKU0Nbf2mmpZdhKB9rRxq6MmZL0yZvhaqDDiYL6ab8r
-	vmgcsK3VkpARM5IjMauKMhK1RZqKomtAGfXP6j+mxrDwPAexrNiQrQVqOFxcGogBRriwHzpVS8R
-	W5PuK3K0P2I+I4eEoz1Gbu4/kXR+KPIvcOUUQBTk9QilYvAFHBrYqHxSkKVlBYQcPJnAiPSiHjQ
-	eVzflakR8AsVqij3ECQeoSiJkPmbwjYRfm89hjmoc=
-X-Received: by 2002:a17:907:846:b0:c12:cb91:58aa with SMTP id a640c23a62f3a-c1f1fddb140mr287426966b.24.1785104452650;
-        Sun, 26 Jul 2026 15:20:52 -0700 (PDT)
-Received: from mail-ej1-f54.google.com (mail-ej1-f54.google.com. [209.85.218.54])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1c32a78260sm557572566b.6.2026.07.26.15.20.51
-        for <linux-arm-msm@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 26 Jul 2026 15:20:52 -0700 (PDT)
-Received: by mail-ej1-f54.google.com with SMTP id a640c23a62f3a-c1600d040e4so292352866b.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 26 Jul 2026 15:20:51 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RptvS7DhMcBwz4PVpwmVhKMO0spI0IlJzrx5rvlnDBKbhRevS7hlvfyb8jhmJE7rOHBTjOrS+wvdJtoOLGB@vger.kernel.org
-X-Received: by 2002:a17:907:6d02:b0:c12:6280:33c9 with SMTP id
- a640c23a62f3a-c1f1fe12aadmr259561466b.28.1785104147414; Sun, 26 Jul 2026
- 15:15:47 -0700 (PDT)
+	s=arc-20240116; t=1785104674; c=relaxed/simple;
+	bh=/iQPJn3NQLLdPAX5ZuZSkiPiN+/IQGbQg5FhX6r96GU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=PEO9XRDQ7HdxIcT0x96tpfaSoGGjEFxaGjYOY7ZNqiJSU0yMCk3dIFv8ri0hsjJVS2uvkZML+lANOWQcrEIphdLccWfHq7Y4y6GC3xETWmdUKv8LNk0FziG+clQpFVahS0cLxOsTvX145KFnrpmiWWmfEK4Fy/Ni8yxibyFqWcc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net; spf=pass smtp.mailfrom=catcrafts.net; arc=none smtp.client-ip=198.54.122.111
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=catcrafts.net
+Received: from mail.privateemail.com (K8S-PROD-WORKER-10 [87.215.145.39])
+	by mta-15.privateemail.com (Postfix) with ESMTPA id 4h7bqb4dDRz3hhTF;
+	Sun, 26 Jul 2026 18:24:11 -0400 (EDT)
+From: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
+To: David Heidelberg <david@ixit.cz>,
+	Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+	Andrew Lunn <andrew+netdev@lunn.ch>,
+	"David S. Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Rob Herring <robh@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Luca Weiss <luca.weiss@fairphone.com>,
+	oe-linux-nfc@lists.linux.dev,
+	netdev@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v3 0/5] nfc: s3fwrn5: support the S3NRN4V variant
+Date: Mon, 27 Jul 2026 00:24:00 +0200
+Message-ID: <20260726222405.153008-1-jorijnvdgraaf@catcrafts.net>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260629-cocci-7-2-v1-0-5884c80ee3b6@chromium.org>
- <20260629-cocci-7-2-v1-4-5884c80ee3b6@chromium.org> <qrcq3ntszxswpk2wbeb7uq4gq3mncegwtoncyplkhdhrslzghs@dhkvpb6n5jsf>
-In-Reply-To: <qrcq3ntszxswpk2wbeb7uq4gq3mncegwtoncyplkhdhrslzghs@dhkvpb6n5jsf>
-From: Ricardo Ribalda <ribalda@chromium.org>
-Date: Mon, 27 Jul 2026 00:15:35 +0200
-X-Gmail-Original-Message-ID: <CANiDSCs9s03DUjKwcPgDtZt2QJ4i0FGwab4zpEP+wCawagSC2Q@mail.gmail.com>
-X-Gm-Features: AUfX_myD67rv6_r1pKzI_bPb2NSRPK4fvnxMW17kw_fG6idlmXoKI8O_nXVfpxA
-Message-ID: <CANiDSCs9s03DUjKwcPgDtZt2QJ4i0FGwab4zpEP+wCawagSC2Q@mail.gmail.com>
-Subject: Re: [PATCH 4/9] media: vimc: Ensure that pixel_rate fits in 32 bits
-To: Faizel K B <faizel.kb@gmail.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, Vikash Garodia <vikash.garodia@oss.qualcomm.com>, 
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
-	"Bryan O'Donoghue" <bod@kernel.org>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Kieran Bingham <kieran.bingham@ideasonboard.com>, Bin Du <bin.du@amd.com>, 
-	Nirujogi Pratap <pratap.nirujogi@amd.com>, Sultan Alsawaf <sultan@kerneltoast.com>, 
-	Svetoslav Stoilov <Svetoslav.Stoilov@amd.com>, Sakari Ailus <sakari.ailus@linux.intel.com>, 
-	Abylay Ospan <aospan@amazon.com>, linux-media@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-Hi Faizel
+This adds support for the Samsung S3NRN4V, a later part in the Samsung
+NCI NFC controller line the s3fwrn5 driver covers, found e.g. on the
+Fairphone 6 (SM7635).
 
-I was not on cc on
-https://lore.kernel.org/lkml/CAMuHMdVx80Eh8w5-OioH-Uyahea0ZRQHUVg9MBfQ4uEjaxM5Lg@mail.gmail.com/
-so I was unaware of that proposal
+The S3NRN4V differs from the already-supported parts in three ways: it
+ships with working firmware behind a bootloader protocol the driver
+does not implement (so firmware download is skipped), it loads its RF
+calibration data through a different proprietary command (DUAL_OPTION),
+and it gates its reference clock through a CLK_REQ line that the driver
+must service for the chip to be able to generate the 13.56 MHz poll
+carrier.
 
-I agree, something like this looks cleaner and removes the sanity check.
+Patches 1-2 are preparatory cleanups from the v2 review; patch 3 adds
+the compatible and the clk-req-gpios property to the binding; patch 4
+implements the variant in the driver; patch 5 adds the Fairphone 6
+board nodes (it depends on patch 3 and can equally go through the qcom
+tree once the binding has landed).
 
-My patch has already landed in media-committers/next so you need to
-send a patch on top of it.
+Tested on a Fairphone 6 running a milos-mainline kernel: reader mode
+polls and reads ISO 14443-4 tags reliably, from a fresh boot and across
+driver reloads, with the calibration files present at their new path
+(load success verified in the log) and also absent (the chip falls back
+to its flash defaults and still reads).
 
-Regards!
+Luca, the two questions from the v2 thread (revision/SKU variance of
+the calibration tables, linux-firmware submission) are still open;
+nothing in this series depends on the answers now that the variant
+property is deferred.
 
+The series is based on the nfc tree's for-next.
 
+Changes in v3:
+ - Call the DUAL_OPTION payload what it is -- RF calibration data --
+   in the driver commit message, comments and log strings (David).
+ - Load the calibration files from a chip-scoped directory,
+   samsung/s3nrn4v/{hwreg,swreg}.bin, instead of flat
+   sec_s3nrn4v_*.bin names (David). The samsung,calibration-variant
+   property discussed in the v2 thread is deferred until a device
+   actually needs a second set of tables; it can be added compatibly
+   on top.
+ - Request the calibration files with firmware_request_nowarn(): they
+   are optional by design and the driver logs its own warning, the way
+   ath10k requests its calibration files.
+ - Reword "S3FWRN5-family" in the binding and driver commit messages
+   to "a later part in the Samsung (NCI) NFC controller line" (David).
+   The binding change is commit-message-only, its content is unchanged
+   from v2, so Conor's Acked-by is retained.
+ - New patch 1: drop of_match_ptr() so the OF table is referenced in
+   every configuration (its __maybe_unused half is already in the nfc
+   tree as commit 9739e07fdb29 ("nfc: Drop __maybe_unused from
+   of_device_id tables")).
+ - New patch 2: spell out the "s3fwrn5_i2c" driver-name string
+   (Suggested by David).
+ - New patch 5: the Fairphone 6 board nodes, including the
+   pvdd-supply the binding marks required for the S3NRN4V.
+ - Rebase onto the nfc tree's for-next; the new of_device_id entries
+   follow the style of commit 179851e63fde ("nfc: Unify style of
+   of_device_id arrays").
 
+Changes in v2:
+ - Drop the -i2c bus suffix from the new compatible: it is now plain
+   samsung,s3nrn4v (Requested by: Conor Dooley).
+ - Close a race in the probe-time CLK_REQ seeding by reading the GPIO
+   level under clk_lock, so a stale level can never overwrite a fresher
+   state applied by the irq thread (found by the Sashiko AI review of
+   v1).
+ - Binding completeness: document the PVDD supply (required for the
+   S3NRN4V), add an S3NRN4V example exercising the new properties, make
+   clk-req-gpios depend on clocks, and describe the CLK_REQ pin in
+   hardware terms.
+ - Rework the binding commit message: justify the GPIO modelling in
+   hardware terms and explain why no fallback compatible applies.
+ - Add an s3nrn4v i2c_device_id entry carrying the variant so both
+   match paths agree, and describe the of_match_ptr() removal in the
+   driver commit message.
+ - Reject malformed calibration blobs (word alignment, single-byte
+   section index bound) up front instead of failing at STOP_UPDATE.
+ - Handle gpiod_get_value_cansleep() failure in the CLK_REQ sync
+   instead of treating an error as "clock off".
 
- diff --git a/drivers/media/test-drivers/vimc/vimc-sensor.c
-b/drivers/media/test-drivers/vimc/vimc-sensor.c
-index 83dcc9d61ee0..7cb544fdfddb 100644
---- a/drivers/media/test-drivers/vimc/vimc-sensor.c
-+++ b/drivers/media/test-drivers/vimc/vimc-sensor.c
-@@ -97,18 +97,14 @@ static void vimc_sensor_update_frame_timing(struct
-v4l2_subdev *sd,
- {
-        struct vimc_sensor_device *vsensor =
-                container_of(sd, struct vimc_sensor_device, sd);
--       u64 pixel_rate = vsensor->pixel_rate->val;
-+       u32 pixel_rate = vsensor->pixel_rate->val;
-        u32 hts = width + vsensor->hblank->val;
-        u32 vts = height + vsensor->vblank->val;
-        u64 total_pixels = (u64)hts * vts;
-        u64 frame_interval_ns;
+v2: https://lore.kernel.org/20260705190621.128257-1-jorijnvdgraaf@catcrafts.net
+v1: https://lore.kernel.org/20260703202601.78563-1-jorijnvdgraaf@catcrafts.net
 
--       /* Sanity check, pixel rate is fixed and fits in 32 bits. */
--       if (WARN_ON(pixel_rate >= 0x100000000))
--               return;
--
-        frame_interval_ns = total_pixels * NSEC_PER_SEC;
--       do_div(frame_interval_ns, (u32)pixel_rate);
-+       do_div(frame_interval_ns, pixel_rate);
-        vsensor->hw.fps_jiffies = nsecs_to_jiffies(frame_interval_ns);
-        if (vsensor->hw.fps_jiffies == 0)
-                vsensor->hw.fps_jiffies = 1;
+Jorijn van der Graaf (5):
+  nfc: s3fwrn5: drop of_match_ptr() from the I2C driver
+  nfc: s3fwrn5: use the "s3fwrn5_i2c" string literal directly
+  dt-bindings: net: nfc: samsung,s3fwrn5: add S3NRN4V and clk-req-gpios
+  nfc: s3fwrn5: support the S3NRN4V variant
+  arm64: dts: qcom: milos-fairphone-fp6: Add NFC
 
-On Sat, 25 Jul 2026 at 06:23, Faizel K B <faizel.kb@gmail.com> wrote:
->
-> On Mon, Jun 29, 2026 at 11:30:45AM +0000, Ricardo Ribalda wrote:
-> >pixel_rate is set to VIMC_PIXEL_RATE_FIXED, which the code expects to
-> >fit in 32 bits. Make that constraint into a WARN_ON, so if we ever break
-> >that constraint a kernel warning will be triggered.
-> >
-> >It also fixes the following cocci warning:
-> >./test-drivers/vimc/vimc-sensor.c:107:1-7: WARNING: do_div() does a 64-by-32 division, please consider using div64_u64 instead.
-> >
-> >Signed-off-by: Ricardo Ribalda <ribalda@chromium.org>
-> >---
-> > drivers/media/test-drivers/vimc/vimc-sensor.c | 6 +++++-
-> > 1 file changed, 5 insertions(+), 1 deletion(-)
-> >
-> >diff --git a/drivers/media/test-drivers/vimc/vimc-sensor.c b/drivers/media/test-drivers/vimc/vimc-sensor.c
-> >index d125a79fec8c..83dcc9d61ee0 100644
-> >--- a/drivers/media/test-drivers/vimc/vimc-sensor.c
-> >+++ b/drivers/media/test-drivers/vimc/vimc-sensor.c
-> >@@ -103,8 +103,12 @@ static void vimc_sensor_update_frame_timing(struct v4l2_subdev *sd,
-> >       u64 total_pixels = (u64)hts * vts;
-> >       u64 frame_interval_ns;
-> >
-> >+      /* Sanity check, pixel rate is fixed and fits in 32 bits. */
-> >+      if (WARN_ON(pixel_rate >= 0x100000000))
-> >+              return;
-> >+
-> >       frame_interval_ns = total_pixels * NSEC_PER_SEC;
-> >-      do_div(frame_interval_ns, pixel_rate);
-> >+      do_div(frame_interval_ns, (u32)pixel_rate);
->
-> There was an error in the data type of pixel_rate. Actually it is u32 instead
-> of u64. There are two changes suggested by Geert in reply to the original
-> report. v4l2_ctrl.val is s32, not u64 and using mul_u32_u32() for total_pixels
-> calculation. We can avoid the sanity check also. Would you be able to consider
-> these two changes which avoid the warning?
->
-> -       u64 pixel_rate = vsensor->pixel_rate->val;
-> +       u32 pixel_rate = vsensor->pixel_rate->val;
->          u32 hts = width + vsensor->hblank->val;
->          u32 vts = height + vsensor->vblank->val;
-> -       u64 total_pixels = (u64)hts * vts;
-> +       u64 total_pixels = mul_u32_u32(hts, vts);
->          u64 frame_interval_ns;
->
-> Link for the suggested changes
-> https://lore.kernel.org/lkml/CAMuHMdVx80Eh8w5-OioH-Uyahea0ZRQHUVg9MBfQ4uEjaxM5Lg@mail.gmail.com/
->
->
->
+ .../bindings/net/nfc/samsung,s3fwrn5.yaml     |  65 +++++++-
+ .../boot/dts/qcom/milos-fairphone-fp6.dts     |  49 +++++-
+ drivers/nfc/s3fwrn5/core.c                    |  41 ++++-
+ drivers/nfc/s3fwrn5/i2c.c                     | 142 ++++++++++++++++--
+ drivers/nfc/s3fwrn5/nci.c                     | 121 ++++++++++++++-
+ drivers/nfc/s3fwrn5/nci.h                     |  32 +++-
+ drivers/nfc/s3fwrn5/s3fwrn5.h                 |  15 ++-
+ drivers/nfc/s3fwrn5/uart.c                    |   2 +-
+ 8 files changed, 446 insertions(+), 21 deletions(-)
 
 
+base-commit: f0054d864e6e734add71e29961f5ae15211ad24d
 -- 
-Ricardo Ribalda
+2.55.0
+
