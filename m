@@ -1,37 +1,38 @@
 Received: from luna.linkmauve.fr (82-65-109-163.subs.proxad.net [82.65.109.163])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66D641FBC8C;
-	Sun, 26 Jul 2026 12:56:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6CB0D28851F;
+	Sun, 26 Jul 2026 13:17:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.65.109.163
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785070584; cv=none; b=FywZIhta/NXkyrkO4oiZ0Gjwn1n17g+wn4tGL1/mUJODnCHCoxxTmhXb4XybxjQHpRNbM694izMhd00eJaVWeuHT0Vd0Kx08WNpwDZmnGwQ9D0k7kc57qEGFhVgitwbod2SK5dSBzt3Vi+xw1pnosu+w0m+q4iSP87sp29gY7SU=
+	t=1785071859; cv=none; b=hn34BUgiBMjHtPxQhy0mThvuaL6z27Cl3jA+FRrP09IEvAPue236oUpebE3wT3TNFZL18+FWKk72g4pDqLy2jkQYCM6aDx1PYCUXbcJ+riQE8NRrhEEzanSyS12X0kibQUc0I1/zQ0oiqLS8V/r0nnfbEVds9/I3CwmgP+r5de4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785070584; c=relaxed/simple;
-	bh=qOWSLoFTRbEIxSauVxZ4vA0xfF8LEiuIbFTNM/LfThE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=bWbCmr46At+rxtABSkcKDcnYOr7xT/G19DTNsrkyPG0E2Nb/bc3wA1KxyHzG7b4oe3F0LqZJLwNXaruvAZVHCd8BWFK7vP5PDKJqb94d3/v+bwJiGbQymXn0Pu+UwqaY6tULg4NwXgsmsGUGBUNcILYcPDf6kj9x/9eljFZuvIE=
+	s=arc-20240116; t=1785071859; c=relaxed/simple;
+	bh=8jtHXts22NMPFAisUu0L5owsq6SoZk1pOpwgPhZuu7s=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=IXhw5SeENmCCP5RWfofM8813E9h9DXpdEDkWpvw1HSmE5go4TJtqc9H7tEnzsATd8CHDyVSuy+rjqQLOf35h3NNhY4bVZOpXQdJfiu++YEK9qd6rfJVomI05aSe1uJbXBgu0SVEzmoH78S3uUJ+CcodEs+uhgX2wN9g2vGwYDoo=
 ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linkmauve.fr; spf=pass smtp.mailfrom=linkmauve.fr; arc=none smtp.client-ip=82.65.109.163
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linkmauve.fr
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linkmauve.fr
 Received: by luna.linkmauve.fr (Postfix, from userid 1000)
-	id 046A5F40DDF; Sun, 26 Jul 2026 14:56:17 +0200 (CEST)
-Date: Sun, 26 Jul 2026 14:56:16 +0200
+	id 19C41F40DDF; Sun, 26 Jul 2026 15:17:30 +0200 (CEST)
 From: Link Mauve <linkmauve@linkmauve.fr>
-To: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Srinivas Kandagatla <srini@kernel.org>
 Cc: Link Mauve <linkmauve@linkmauve.fr>,
-	Srinivas Kandagatla <srini@kernel.org>,
+	Andy Shevchenko <andriy.shevchenko@intel.com>,
 	Neil Armstrong <neil.armstrong@linaro.org>,
 	Kevin Hilman <khilman@baylibre.com>,
 	Jerome Brunet <jbrunet@baylibre.com>,
 	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-	Sven Peter <sven@kernel.org>, Janne Grunau <j@jannau.net>,
-	Neal Gompa <neal@gompa.dev>, Frank Li <Frank.Li@nxp.com>,
+	Sven Peter <sven@kernel.org>,
+	Janne Grunau <j@jannau.net>,
+	Neal Gompa <neal@gompa.dev>,
+	Frank Li <Frank.Li@nxp.com>,
 	Sascha Hauer <s.hauer@pengutronix.de>,
 	Pengutronix Kernel Team <kernel@pengutronix.de>,
 	Fabio Estevam <festevam@gmail.com>,
 	Vladimir Zapolskiy <vz@mleia.com>,
-	=?iso-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>,
+	=?UTF-8?q?Andr=C3=A9=20Draszik?= <andre.draszik@linaro.org>,
 	Orson Zhai <orsonzhai@gmail.com>,
 	Baolin Wang <baolin.wang@linux.alibaba.com>,
 	Chunyan Zhang <zhang.lyra@gmail.com>,
@@ -39,108 +40,103 @@ Cc: Link Mauve <linkmauve@linkmauve.fr>,
 	Alexandre Torgue <alexandre.torgue@foss.st.com>,
 	Kalyani Akula <kalyani.akula@amd.com>,
 	Michal Simek <michal.simek@amd.com>,
-	Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
+	Miguel Ojeda <ojeda@kernel.org>,
+	Boqun Feng <boqun@kernel.org>,
 	Gary Guo <gary@garyguo.net>,
-	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+	=?UTF-8?q?Bj=C3=B6rn=20Roy=20Baron?= <bjorn3_gh@protonmail.com>,
 	Benno Lossin <lossin@kernel.org>,
 	Andreas Hindborg <a.hindborg@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+	Alice Ryhl <aliceryhl@google.com>,
+	Trevor Gross <tmgross@umich.edu>,
 	Danilo Krummrich <dakr@kernel.org>,
 	Daniel Almeida <daniel.almeida@collabora.com>,
 	Tamir Duberstein <tamird@kernel.org>,
 	Alexandre Courbot <acourbot@nvidia.com>,
-	Onur =?iso-8859-1?Q?=D6zkan?= <work@onurozkan.dev>,
+	=?UTF-8?q?Onur=20=C3=96zkan?= <work@onurozkan.dev>,
 	Johan Hovold <johan@kernel.org>,
 	Ronald Claveau <linux-kernel-dev@aliel.fr>,
 	Daniel Lezcano <daniel.lezcano@kernel.org>,
 	linux-arm-kernel@lists.infradead.org,
-	linux-amlogic@lists.infradead.org, linux-kernel@vger.kernel.org,
-	asahi@lists.linux.dev, imx@lists.linux.dev,
+	linux-amlogic@lists.infradead.org,
+	linux-kernel@vger.kernel.org,
+	asahi@lists.linux.dev,
+	imx@lists.linux.dev,
 	linux-arm-msm@vger.kernel.org,
 	linux-stm32@st-md-mailman.stormreply.com,
 	rust-for-linux@vger.kernel.org
-Subject: Re: [PATCH v3 3/4] nvmem: apple-spmi: improve calling safety with
- wrapper functions
-Message-ID: <amYD8I6a1c01fnvs@luna>
-References: <20260716142415.28718-1-linkmauve@linkmauve.fr>
- <20260716142415.28718-4-linkmauve@linkmauve.fr>
- <alkd0WWr3KX7MS5O@ashevche-desk.local>
+Subject: [PATCH v4 1/3] firmware: meson: pass a const buffer to meson_sm_call_write()
+Date: Sun, 26 Jul 2026 15:17:19 +0200
+Message-ID: <20260726131724.15299-2-linkmauve@linkmauve.fr>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260726131724.15299-1-linkmauve@linkmauve.fr>
+References: <20260726131724.15299-1-linkmauve@linkmauve.fr>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <alkd0WWr3KX7MS5O@ashevche-desk.local>
-Jabber-ID: linkmauve@linkmauve.fr
 
-Ah, someone independently sent the same patch as this one in
-7089170e1df160f5f8fb395bc5aa2e2697b4e896, so I’ll drop it from v4.
+This was found while introducing the new nvmem-provider reg_write_const
+callback in meson_sm_call_write()’s only user, in meson-efuse.
 
-Sorry it took that long!
+Signed-off-by: Link Mauve <linkmauve@linkmauve.fr>
+---
+ drivers/firmware/meson/meson_sm.c       | 2 +-
+ drivers/nvmem/meson-efuse.c             | 4 ++--
+ include/linux/firmware/meson/meson_sm.h | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-On Thu, Jul 16, 2026 at 09:07:13PM +0300, Andy Shevchenko wrote:
-> On Thu, Jul 16, 2026 at 04:24:10PM +0200, Link Mauve wrote:
-> > This driver used to cast the regmap_bulk_*() functions to void *,
-> > bypassing any compiler safety around incompatible function pointers.
-> > 
-> > With two small wrappers, which just convert the void * priv parameter
-> > into the wanted struct regmap *, we can remove the void * cast
-> > altogether.
-> 
-> Reported-by: ?
-> 
-> > Signed-off-by: Link Mauve <linkmauve@linkmauve.fr>
-> 
-> ...
-> 
-> > +static int apple_spmi_nvmem_read(void *priv, unsigned int offset,
-> > +				 void *val, size_t bytes)
-> > +{
-> 
-> > +	struct regmap *regmap = priv;
-> 
-> No need :-)
-> 
-> > +	return regmap_bulk_read(regmap, offset, val, bytes);
-> > +}
-> 
-> static int apple_spmi_nvmem_read(void *map, unsigned int offset,
-> 				 void *val, size_t bytes)
-> {
-> 	return regmap_bulk_read(map, offset, val, bytes);
-> }
-> 
-> ...
-> 
-> > +static int apple_spmi_nvmem_write(void *priv, unsigned int offset,
-> > +				  const void *val, size_t bytes)
-> > +{
-> > +	struct regmap *regmap = priv;
-> > +	return regmap_bulk_write(regmap, offset, val, bytes);
-> > +}
-> 
-> In the similar way as above.
-> 
-> ...
-> 
-> > -		.reg_read = (void *)regmap_bulk_read,
-> > -		.reg_write_const = (void *)regmap_bulk_write,
-> > +		.reg_read = apple_spmi_nvmem_read,
-> > +		.reg_write_const = apple_spmi_nvmem_write,
-> 
-> I think the proper ordering is to address this first (before your main change)
-> and update later with const argument. Yes, it will be a bit more changes, but
-> it will be cleaner.
-> 
-> -- 
-> With Best Regards,
-> Andy Shevchenko
-> 
-> 
-
+diff --git a/drivers/firmware/meson/meson_sm.c b/drivers/firmware/meson/meson_sm.c
+index ab9751a59b55..5d4da2e3c3a9 100644
+--- a/drivers/firmware/meson/meson_sm.c
++++ b/drivers/firmware/meson/meson_sm.c
+@@ -196,7 +196,7 @@ EXPORT_SYMBOL(meson_sm_call_read);
+  *
+  * Return:	size of sent data on success, a negative value on error
+  */
+-int meson_sm_call_write(struct meson_sm_firmware *fw, void *buffer,
++int meson_sm_call_write(struct meson_sm_firmware *fw, const void *buffer,
+ 			unsigned int size, unsigned int cmd_index, u32 arg0,
+ 			u32 arg1, u32 arg2, u32 arg3, u32 arg4)
+ {
+diff --git a/drivers/nvmem/meson-efuse.c b/drivers/nvmem/meson-efuse.c
+index d7f9ac99a212..f71854f89950 100644
+--- a/drivers/nvmem/meson-efuse.c
++++ b/drivers/nvmem/meson-efuse.c
+@@ -20,7 +20,7 @@ static int meson_efuse_read(void *context, unsigned int offset,
+ 	struct meson_sm_firmware *fw = context;
+ 	int ret;
+ 
+-	ret = meson_sm_call_read(fw, (u8 *)val, bytes, SM_EFUSE_READ, offset,
++	ret = meson_sm_call_read(fw, val, bytes, SM_EFUSE_READ, offset,
+ 				 bytes, 0, 0, 0);
+ 
+ 	return ret < 0 ? ret : 0;
+@@ -32,7 +32,7 @@ static int meson_efuse_write(void *context, unsigned int offset,
+ 	struct meson_sm_firmware *fw = context;
+ 	int ret;
+ 
+-	ret = meson_sm_call_write(fw, (u8 *)val, bytes, SM_EFUSE_WRITE, offset,
++	ret = meson_sm_call_write(fw, val, bytes, SM_EFUSE_WRITE, offset,
+ 				  bytes, 0, 0, 0);
+ 
+ 	return ret < 0 ? ret : 0;
+diff --git a/include/linux/firmware/meson/meson_sm.h b/include/linux/firmware/meson/meson_sm.h
+index 3ebc2bd9a976..92cc61f3a1c0 100644
+--- a/include/linux/firmware/meson/meson_sm.h
++++ b/include/linux/firmware/meson/meson_sm.h
+@@ -21,7 +21,7 @@ struct meson_sm_firmware;
+ 
+ int meson_sm_call(struct meson_sm_firmware *fw, unsigned int cmd_index,
+ 		  s32 *ret, u32 arg0, u32 arg1, u32 arg2, u32 arg3, u32 arg4);
+-int meson_sm_call_write(struct meson_sm_firmware *fw, void *buffer,
++int meson_sm_call_write(struct meson_sm_firmware *fw, const void *buffer,
+ 			unsigned int b_size, unsigned int cmd_index, u32 arg0,
+ 			u32 arg1, u32 arg2, u32 arg3, u32 arg4);
+ int meson_sm_call_read(struct meson_sm_firmware *fw, void *buffer,
 -- 
-Link Mauve
+2.55.0
+
