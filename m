@@ -1,173 +1,338 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 884EC3F4103
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 15:47:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A6BA37F74C;
+	Mon, 27 Jul 2026 15:51:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785167281; cv=none; b=oUuviaCUY9tRlq7vynG6W6VbzZgRbAZ51NDLSJJlmakFZ1EO00ZOEzEwKElm0BAw5N4XNh+cfpNVOn/qxLeXZ3HrOgTudGnzYDhUz1HNEgL1JCKiY6JhEnpnS0ZnwThhQlQxfiqY/EdDUVE2sWkHV3SwQBWLYZzZ57f6wXcN6hU=
+	t=1785167462; cv=none; b=CrOI8gjVGq9Ryj/50mIJlevJhCQIo7/VyJQaKempfVdJSTKDWieV+rKgl+js9hNa30rWFI1ltaPuEuZvJoeYKC7kJf8vreQGx1Fxra15S5I5XRnJv/O8rZTqSMIt/2Jn167J2r4DB7k38JiSqvk8RdVv7VkzNC2HMS52oHI04Jw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785167281; c=relaxed/simple;
-	bh=eTYd8XwPxxSKwBuex4X58kDcIqp8iWeFNrSeq0/GvEk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=e5JqVLtjnWmVwPlC5gP5rXFbQYio/x9fHaPtKR9KhlGyETiGh/YWNcSXEtnnYf3VoKHYkNJZ5aCK/BPWGmrVdskATrnIFGMiPfGh9Ny/EuLp/0CxCOk9cIlbGNHz7mCjdT1OgMSqLY1P/auXlu12arViz3JYiR82w2/QxMCNTVo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=D4BRkzLz; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KKNOheQ9; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785167462; c=relaxed/simple;
+	bh=GUQFkp3yg7rHEw1gOx3edU3HLrUv02S4mm8be/6BKFo=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=sJTYtf3mK537DNThmKq538QPoIMKOWt72v6JMS/maUiECyjvjVBkERlXKvhtLL4znTt6nDqNDe/PVB7VcSPsWCXNAr0nrlduRUKpTDNHILwEPhWLEZ/W5NCNIJ/NRMmZP3mCC0c1OYRzd0P5wWdVefo1PQZZwzAzqCkIZ6s78+0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=guVeLXwi; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="D4BRkzLz";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KKNOheQ9"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66RDlhsu4061124
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 15:47:58 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	mW4g07X1dPH7YwtsE5Onn57eNE0T0Z3+nYnkujzokns=; b=D4BRkzLzPIFNLrEf
-	FS9EZuXTYUTrqXHp1PsuJfrSrNOwdUIhre/06FLcLIS1OOTyggbPqvLLdM+rtjsf
-	wXcmQZfnhvn/FgtNVm9EAMMg9k6VkpuBXHWeDfs5ch985Ja8dgrdpvUE4SrK3NBp
-	lRkFcDHKRUq6bMx6vDVHpksuMpFc8ByZ1EB85SPRNqvftb18Y0h0QNgih9JW6lW7
-	cEemjuNm3FgAmiK/m0negEAHrmjy5j+N/kr7S8oflRyl6xsHj+tWHfk+T56bBbWf
-	maWth8Q/HTkwXyZxTRycGWEUR6QgPt9AiQeq7Lq5tXVvkZFSnr7BzhG4XNTgSZei
-	if60vg==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fp4mq1hjj-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 15:47:58 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2cc5faecf01so61977335ad.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 08:47:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785167277; x=1785772077; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=mW4g07X1dPH7YwtsE5Onn57eNE0T0Z3+nYnkujzokns=;
-        b=KKNOheQ968pzV/fzL7eAiMriyLNI0vZql4UoH4KyhlguLfiRDJHFq3R0PoNxbecSzo
-         TeGzzgeOkEM5Aw1818SaTVo/qlaMInB3+TK24fikK2Ee48SwRCJbt8JarAiHTMSdmjJy
-         bLtJmPBb+OIFh775qV/M+bH0BDviWWPLCdNLeaIgmdleY0txwEKwnhTwaUNx3pBwDvOY
-         RrL7+BQjnWyV7XtcyVeHYgLLQniOg4BD89E7d/5QGpN7zjmqcxfMjZJHinBlaKy2mvic
-         R3jj2pWmtHsNImW0eK0hj+FiEzq/UBjWyEpWhJ3oal4jxImdhh7P2XL3dpIcnqGaoC74
-         KmjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785167277; x=1785772077;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=mW4g07X1dPH7YwtsE5Onn57eNE0T0Z3+nYnkujzokns=;
-        b=GDLxrEUeD8Eemz8TBDaRajsE0tZz8ZIpFaq8TcXJmREJSeGNGTaTM0wbxmI/Leisub
-         n8StaziYa/7kZX972hofoAs8ZSYYFShJcVfiLHDwBTP33M1KQ3w2fihU7gekwfU8rtqY
-         8MJsDTmhAVe447b/77zxk993/HgjQ/oCZUpBPNuHVwNB/W01TP+2rbI0Bubv/4RjUerT
-         joSZBtKWjL9wfd+ORAgcxWVrIXB/bKK717iBpJC4vAIvy3cG8+Yi3Px57AZM1HWaE7cW
-         RlbtpHnD3mxxQJaTyDng1a0NE6nXy/5R4DefZ3mm/XPsRMtV6HxNWyCTZ/EsY2IaAkNZ
-         0lEg==
-X-Gm-Message-State: AOJu0YyMEGpiXr7KRzbxjmlJi6V9GaMh+wb6YeOc+iWOpkxHX4IrXwbr
-	tUmBZlKsyu0gUG3/JRdg2i6bsJKqYk9W1T81xFR9TIBWHL+KgDQbQUqoEkv7sNL3yb15l3HJUVH
-	Dsw9clwMx78Sex90oE3emIjn3Z1OfsuPHvIcdvtt6X6HIIG0dBALLR9WNaoqhoZ7+lBq4
-X-Gm-Gg: AR+sD10Ic5+LyLpTazFJMNw3VEfPmYYkNR3S+1wUEjDjyj7Vb+AOeJdanYPxuX68G1V
-	Ho031IVNDCfMx2QELg3RWsW7TE3JH0IuR/GNFqsyHmbO9o2Q+48kTd6DKSvvVccqBU1WAFnYmac
-	LW4hN0ScPcAW9hYc6T25nBVxCxXqAST9ekWZ3AmWY3P57hLke93EmwH3Ph0g1pInC4lP2lXJguV
-	pFNL86SOlDVcnPGq6DT5VA+wMI9+GcisQdkSNESfIB+5iB4LsPXyAQ5efwkkh5YbzHqnId2zEGC
-	Z19SfzywkTzjIsidyPkugZDeVjM1omUa1C8fQsq3qkMk+S2XxMByJLAupKUGwMc1Dzqh+Mo8nBS
-	Rb3UWIyiBcaAPbQfQlIXjmrY0IIbVr+3WSyxwgeoxolIK+zyTbMb/e1FTHv9pBU1ZArjiuYilpU
-	u38oyfG4CRgNddQWjqxTVexKD7P2BInPrhDkw=
-X-Received: by 2002:a17:902:ce0b:b0:2c7:f2c6:89e0 with SMTP id d9443c01a7336-2d008937d84mr11416765ad.4.1785167276952;
-        Mon, 27 Jul 2026 08:47:56 -0700 (PDT)
-X-Received: by 2002:a17:902:ce0b:b0:2c7:f2c6:89e0 with SMTP id d9443c01a7336-2d008937d84mr11416555ad.4.1785167276565;
-        Mon, 27 Jul 2026 08:47:56 -0700 (PDT)
-Received: from hu-kathirav-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-314bc4164ddsm32845204eec.9.2026.07.27.08.47.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Jul 2026 08:47:56 -0700 (PDT)
-From: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
-Date: Mon, 27 Jul 2026 21:17:37 +0530
-Subject: [PATCH v11 3/3] arm64: dts: qcom: ipq5424: add support to get
- watchdog bootstatus from IMEM
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="guVeLXwi"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC1CD1F000E9;
+	Mon, 27 Jul 2026 15:50:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785167460;
+	bh=a29v1I9AmtPmUzhtxOfU8juL9pMl/gW53UJw7j6i6Ec=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=guVeLXwiRRIWjU5sfFTtxrq6ZfihoLYMhpq6ttv26lfDXI+FR+1oBfAvwm7XACi6+
+	 DL595w1QC6+ft03CjZB9VbAOBTCWldxzMcUsYHk72qmQp2tesce2L7LatEhsG5TivV
+	 QHmO/4NEpa5u+PCvwSwrkr9oWb5Xmp9AgtghdxkRz/1X7E2qwtI95OlI4XXmgUbUWl
+	 X923tl53lZRzLIoNyszjrpH5DeLWci0FUwoXm48mB3g6WbU144U+oZ/r5Oa2NPusfi
+	 H4BVealwAZ/i6xgJ9b0V0QyEKBIuTukZnt3KCp//s5WakSKmL4rkS4dsug7qf7g3Ju
+	 IXfGH181mRiuA==
+Message-ID: <02792987-7ad8-4a6b-81ad-559c63174bb0@kernel.org>
+Date: Mon, 27 Jul 2026 17:50:49 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] dt-bindings: ptp: Document the TSCSS on Qualcomm
+ Lemans and Monaco SoCs
+To: Imran Shaik <imran.shaik@oss.qualcomm.com>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Richard Cochran <richardcochran@gmail.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
+ <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+ Taniya Das <taniya.das@oss.qualcomm.com>,
+ Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, netdev@vger.kernel.org
+References: <20260727-tscss-v1-0-beed14e72510@oss.qualcomm.com>
+ <20260727-tscss-v1-1-beed14e72510@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260727-tscss-v1-1-beed14e72510@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260727-wdt_reset_reason-v11-3-eeedb22beefe@oss.qualcomm.com>
-References: <20260727-wdt_reset_reason-v11-0-eeedb22beefe@oss.qualcomm.com>
-In-Reply-To: <20260727-wdt_reset_reason-v11-0-eeedb22beefe@oss.qualcomm.com>
-To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI3MDE0OCBTYWx0ZWRfX8buSwjJV2++d
- mqV1BLwQwJNe1LLEFJbxwZf2+Wj0eXZ+U/z7A7MSNtbFzQlLdsc3gN919kfkF1360XsiAH6QLTi
- mhNfY+gTyDxDjdf94teOXnrcRF9r9Kw=
-X-Proofpoint-ORIG-GUID: 7IQmNcK2hYOLHSu_775YAyML1bxDhgzU
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI3MDE0OCBTYWx0ZWRfXxQ9lFnY+k29x
- 6Mfn3e0YeotFh/hhVdMX3wK64xaO1TXM+fBQEyv0eLARwRTnut3PW/h6o6VxDpYj3lp3mypNH67
- V6ooUGbY9HNb3WZOj0Qmm10ZyMTHFmKjQYUd+jgtyGsdyXUxohceJfTswh+Mv/Mpjm2lyHeknJD
- EaL6wCmaU6gLjhtLVPUAAFC3znOLSHnRKYO+F3Lz2AKYBPLZ7ePHDtdHJ/ymNZ0Fv/24s4bV5qm
- U6JSfkvi/H5xD6gtWKIMMuqWWUOpeV1rAuRgosHKSGXYPeNrYUbNd1iZWnvC6WA9FOn6mqpNHql
- +lEyNoyrB78HG/AH9l3oxnCUpfRzRnmmajbZv7pzSScOt4BtzLcvemuXp9d0+MYKBPWTG3/H9h2
- MpZ1EQhUtnIuR6lKaFgs7M218yv8CTkdTugKDO2tY4E4fIV/LH2PPcOE/By7Ou4QPqvTWkmAMLI
- SikY1ss1MW0j81hWAfA==
-X-Proofpoint-GUID: 7IQmNcK2hYOLHSu_775YAyML1bxDhgzU
-X-Authority-Analysis: v=2.4 cv=TemmcxQh c=1 sm=1 tr=0 ts=6a677dae cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=WbeaI0-OC7IQdSlKmUMA:9 a=QEXdDO2ut3YA:10
- a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-27_04,2026-07-24_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 clxscore=1015 impostorscore=0 adultscore=0 suspectscore=0
- lowpriorityscore=0 malwarescore=0 phishscore=0 spamscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607270148
 
-Add the "sram" property to the watchdog device node to enable
-retrieval of the system restart reason from IMEM, populated by XBL.
-Parse this information in the watchdog driver and update the bootstatus
-sysFS if the restart was triggered by a watchdog timeout.
+On 27/07/2026 16:10, Imran Shaik wrote:
+> Add Devicetree bindings for the Timestamp Counter Subsystem (TSCSS) found
+> on Qualcomm Lemans and Monaco SoCs.
+> 
+> TSCSS is a time synchronization subsystem composed of two main blocks:
+> Timestamp Counter (TSC) and Event Timestamp Unit (ETU). The TSC block
+> provides a continuously running counter used for timekeeping, while the
+> ETU captures timestamps for external hardware event triggers.
+> 
+> Co-developed-by: Taniya Das <taniya.das@oss.qualcomm.com>
+> Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
+> Signed-off-by: Imran Shaik <imran.shaik@oss.qualcomm.com>
+> ---
+>  .../devicetree/bindings/ptp/qcom,lemans-tscss.yaml | 198 +++++++++++++++++++++
+>  1 file changed, 198 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/ptp/qcom,lemans-tscss.yaml b/Documentation/devicetree/bindings/ptp/qcom,lemans-tscss.yaml
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..4cbe4b00ff7dcacbd8cc111e2b4b61ebce7104aa
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/ptp/qcom,lemans-tscss.yaml
+> @@ -0,0 +1,198 @@
+> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/ptp/qcom,lemans-tscss.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Timestamp Counter Subsystem (TSCSS) on Qualcomm Lemans and Monaco SoCs
+> +
+> +maintainers:
+> +  - Imran Shaik <imran.shaik@oss.qualcomm.com>
+> +  - Taniya Das <taniya.das@oss.qualcomm.com>
+> +
+> +description: |
+> +  Qualcomm TSCSS is a time synchronization subsystem composed of two main
+> +  blocks - the Time Stamp Counter (TSC) and the Event Timestamp Unit (ETU).
+> +
+> +  The TSC block is a timestamp generator that maintains a running counter used
+> +  for system timekeeping, and is functional with just the AHB and counter
+> +  clocks.
+> +  The ETU block is optional and captures TSC timestamps for external
+> +  hardware events, each ETU slice binding a slice identifier to an external
+> +  event selector. Support for the ETU block requires the additional ETU
+> +  clock along with the summary interrupt and slice subnodes.
+> +
+> +properties:
+> +  compatible:
+> +    oneOf:
+> +      - const: qcom,lemans-tscss
 
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/ipq5424.dtsi | 5 +++++
- 1 file changed, 5 insertions(+)
+There is no such SoC upstream.
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq5424.dtsi b/arch/arm64/boot/dts/qcom/ipq5424.dtsi
-index ed61db0749f8..23f851e9241f 100644
---- a/arch/arm64/boot/dts/qcom/ipq5424.dtsi
-+++ b/arch/arm64/boot/dts/qcom/ipq5424.dtsi
-@@ -624,6 +624,7 @@ watchdog@f410000 {
- 			reg = <0 0x0f410000 0 0x1000>;
- 			interrupts = <GIC_SPI 0 IRQ_TYPE_EDGE_RISING>;
- 			clocks = <&sleep_clk>;
-+			sram = <&restart_reason>;
- 		};
- 
- 		qusb_phy_1: phy@71000 {
-@@ -739,6 +740,10 @@ sram@8600000 {
- 
- 			#address-cells = <1>;
- 			#size-cells = <1>;
-+
-+			restart_reason: restartreason-sram@7b0 {
-+				reg = <0x7b0 0x4>;
-+			};
- 		};
- 
- 		usb3: usb3@8af8800 {
 
--- 
-2.34.1
+> +      - items:
+> +          - const: qcom,monaco-tscss
 
+Neither this one.
+
+
+> +          - const: qcom,lemans-tscss
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  reg-names:
+> +    items:
+> +      - const: tsc
+
+Drop names, not really useful.
+
+> +
+
+> +  clocks:
+> +    minItems: 2
+> +    items:
+> +      - description: TSC AHB configuration clock.
+> +      - description: TSC global counter clock.
+> +      - description: TSC ETU clock.
+> +
+> +  clock-names:
+> +    minItems: 2
+
+Why is this flexible?
+
+> +    items:
+> +      - const: ahb
+> +      - const: cntr
+> +      - const: etu
+> +
+> +  interrupts:
+> +    description: Summary interrupt raised based on external event for any of the ETU slices.
+
+Please follow Linux coding style.
+
+> +    maxItems: 1
+> +
+> +  interrupt-names:
+> +    items:
+> +      - const: etu_summary
+> +
+> +  assigned-clocks: true
+> +  assigned-clock-rates: true
+
+Drop. From where did you take it?
+
+> +
+> +  "#address-cells":
+> +    const: 2
+> +
+> +  "#size-cells":
+> +    const: 2
+> +
+> +  ranges: true
+> +
+> +patternProperties:
+> +  "^etu-slice@[0-9a-f]+$":
+> +    type: object
+> +    description: ETU slice configuration
+> +    properties:
+> +      reg:
+> +        maxItems: 1
+> +
+> +      pinctrl-0: true
+> +
+> +      pinctrl-names:
+> +        items:
+> +          - const: default
+
+Heh? Which code do you copy?
+
+> +
+> +      qcom,etu-event-sel:
+> +        description: Event selection value for this slice.
+> +        $ref: /schemas/types.yaml#/definitions/uint32
+> +
+> +      qcom,etu-slice:
+> +        description: ETU slice identifier.
+
+You do not get identifiers. Please read writing bindings.
+
+> +        $ref: /schemas/types.yaml#/definitions/uint32
+> +
+> +    required:
+> +      - reg
+> +      - qcom,etu-event-sel
+> +      - qcom,etu-slice
+> +      - pinctrl-0
+> +      - pinctrl-names
+> +    unevaluatedProperties: false
+
+Please read writing bindings.
+
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - reg-names
+> +  - clocks
+> +  - clock-names
+> +
+> +allOf:
+> +  - if:
+> +      properties:
+> +        clock-names:
+> +          contains:
+> +            const: etu
+
+etu is third clock, what is the point of it?
+
+> +    then:
+> +      properties:
+> +        clocks:
+> +          minItems: 3
+> +        clock-names:
+> +          minItems: 3
+> +      required:
+> +        - interrupts
+> +        - interrupt-names
+> +        - "#address-cells"
+> +        - "#size-cells"
+> +        - ranges
+> +
+> +unevaluatedProperties: false
+
+Please read writing bindings.
+> +
+> +examples:
+> +  - |
+> +    #include <dt-bindings/clock/qcom,sa8775p-gcc.h>
+> +
+> +    soc {
+> +      #address-cells = <2>;
+> +      #size-cells = <2>;
+> +
+> +      tscss@1c80000 {
+> +        compatible = "qcom,lemans-tscss";
+> +        reg = <0x0 0x01c80000 0x0 0x2000>;
+> +        reg-names = "tsc";
+> +
+> +        clocks = <&gcc GCC_TSCSS_AHB_CLK>,
+> +                 <&gcc GCC_TSCSS_GLOBAL_CNTR_CLK>;
+> +        clock-names = "ahb", "cntr";
+> +
+> +        assigned-clocks = <&gcc GCC_TSCSS_GLOBAL_CNTR_CLK>;
+> +        assigned-clock-rates = <15625000>;
+> +      };
+> +    };
+> +
+> +  - |
+> +    #include <dt-bindings/clock/qcom,sa8775p-gcc.h>
+> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
+> +
+> +    soc {
+> +      #address-cells = <2>;
+> +      #size-cells = <2>;
+> +
+> +      tscss@1c80000 {
+
+This is the same node as previous.
+
+I don't understand this DTS.
+
+
+Node names should be generic. See also an explanation and list of
+examples (not exhaustive) in DT specification:
+https://devicetree-specification.readthedocs.io/en/latest/chapter2-devicetree-basics.html#generic-names-recommendation
+If you cannot find a name matching your device, please check in kernel
+sources for similar cases or you can grow the spec (via pull request to
+DT spec repo).
+
+
+Best regards,
+Krzysztof
