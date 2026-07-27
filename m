@@ -1,416 +1,84 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3475742AF93
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 17:20:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37B2B424D65;
+	Mon, 27 Jul 2026 17:29:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785172848; cv=none; b=f/P43bIXjIfxR2ZSStZMiArf2GIh8BLxToCkuEkYUjMu4V2DeZOCUUqLeEm1slryvOqFIzN8QYY4uG3mHi6MecvOkQqWa9ym5Mb+3D5fUsNfiz3IFYMgblGI3Bk9KmeMafdsP1yhyn1TJybl3vt4S3B9iJ3XgPRJBb++FNwau9w=
+	t=1785173358; cv=none; b=A2yaDiXOeqgKk47+d8FT9bwwKTavjnDR6LdWEEaIFHBaTJImoN829rUC6wOHuAe6OxlhTb9vrD5J5aiG0iOZGjrl/4zbvNSm5i5fv1XESKoGYfN2SUHM80An+mlyn3kp/WfUDmd4hfVk6bBqVLIqJsX6jZd1zNvf+5cVJYy2YHc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785172848; c=relaxed/simple;
-	bh=ERejy0I5AeQZRWbox0dVXN7f0oBW27TLOA/0J/FlQPQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Jgl9Jplbm/fCiKY4aYnm5TtU3NDAUuhuyiimv8mKUrosON9U7JYE0DVgGLYpJ+1juH0JuuCTGeqPQf5KnO/g0kqj15g2WUimRdx2riQTX3O5b9IPuC1ATl7fuR27A3Ml5oE0VjIEOwyJx1DBn3s4h69Xa2m+IcYSvDO/q8eroGU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lOchluCH; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bLc6p3sS; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785173358; c=relaxed/simple;
+	bh=l+chZZyn6P7kGBMNFbMCOegDIFUTqz6MY50Cx6g2xWo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=r3kYkDpmB9RTh8VoDEjOOS51p5fTomld5pD+KF3yYTinZ2H4F9MXSoKBQ7FGUOOq1Edpz+qKQIwS9bUZUYakt3r7TmGJhNEk9NysJXfAivz4acHrSEFKkHwwTlOrFMDPe5YcfnSQxYIdkpnOWkzFY45timtxq9sGPPJ0601JOuY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Jj8RVaoo; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lOchluCH";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bLc6p3sS"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66RDloti4061373
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 17:20:35 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	jRwbVuu9qXupmkfeu+8n2bHObbP70mrxjDBE9CsoIuQ=; b=lOchluCHNExhhjGi
-	uipS8k1bwvflgUZlArP9Jrc0v9sQ1U6GwJSXGrJRw6satnXPtGf31AFtliEdpzV7
-	qm6+tqPBuU7BOxF+Si06wRKKFQ7gBOja0if1/Ckxoa3JdETZb1Df8EIFVw7EntEM
-	mo33E6BhcsU95jY5elzI2nQVFwUaOWsZTxOzhEbX+JiAYhGZm/+NPyP7AQhjKqPU
-	vgE5xt13J9vOy2YfdrHu0hdT+WVzBs6hxqZmxi06DuAfEfg6wvTD62IKCeDyBKqg
-	EtwYu3FSIGJYJcVq+j3Q0swVybq8UY7t5dpU0yJlSaly5OEKiY5Sfqa6QX81Kgra
-	0EhRnw==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fp4mq200q-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 17:20:35 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cb4bd11ddf8so3430443a12.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 10:20:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785172834; x=1785777634; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=jRwbVuu9qXupmkfeu+8n2bHObbP70mrxjDBE9CsoIuQ=;
-        b=bLc6p3sSQWAm/X732oXmHBlXTj+5h+Ipt551/JkeWgJsB5K8X43cxk+6Q06eixPHcA
-         tAsVW/6AnAXPxE47aJFfGcVkJDd+/QwyiuVvAfrq7Ja0qysPqtZb8Kz2uhA2Rudv1JRf
-         4vtlyH7CKet8cazDSD0Laao0yyavZ4hFz8tMym4NoGs/rdEk1zbaDpoJa+x8K3sdb5FF
-         qDFkgeRf3kEiz+UONnRSUdODZNXE5YNZxGENb4VEkfrkhyM4AH3jVvh7ZkC9+XRQ1FuP
-         JUp0CWt2yLucVzbd+ymDGeZ8Y6i99iNvjRD32xNNCrkKNURENOvy5i0UcdS4rYyuUOKI
-         R3XQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785172834; x=1785777634;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=jRwbVuu9qXupmkfeu+8n2bHObbP70mrxjDBE9CsoIuQ=;
-        b=cRBRiT19tTpYe1HJfPHRaOsRcH230KBbG/UZPy/7kKHCRkZQQIivfx6jxrrTcV61f5
-         RzrIRpGstfjM+2qXxeKYAJEAGPnzuItseEAe3XaSEKrQZx6vlKwu4idFLAmhtTPd4eZE
-         5jgy+bFbPEOkK3mIuhIsgRRujy05u20YuyoNWMchErmHRg7wnuwP3wA4XaXOeId3TWIx
-         fps230rJLrW7rgGV2RQ3WDSc7Kz3LI6XCNniWnjDxqtDywUUqxHoKpnuJgAJ/PsrtUju
-         LlWODmOFGUdacNzCVmGvJVpu1RX5/gi4PLR0bV8o2Xlpax3bMYUy8dslKJh1dK+5JHRx
-         +VdA==
-X-Gm-Message-State: AOJu0YzqddICSNtQX1zfdyVmRfkWxCq8+vHbELbMQnD1HQXxKaN4jSIW
-	Mg1nT81rC0F/C85tw3GDjSrxF2uMo8cCSzWD2J2Z9/vmjmwXxcqNPtY4S96exRx6VcSMG99sulE
-	swdRwgU43+wYkPqkdEZI1MWy5hgLh1zCnFlMXHWVOnbrckfkoSDM+NPB9QeKEY6ECPTg4
-X-Gm-Gg: AR+sD13QZaAVoJp4ddKatA/K7YHC1ByC8Db9Of7GVsW06ZPLnRnub4paR/EZMIwjcfE
-	Ky00g3hQSjQg3bMPbKkABmSP5q2J0YwOscGujsG5FiNPaw+0sPB0rblaGQ5UXAzG6SJDj7UOx/M
-	g34KRz99x3180kOC522DAzoS15dvEeT+ytaIehmpM6HObg/vwwuchzeReV2JXBKbby1N3WeUQZZ
-	mCSa3KDL0BFdiJS5YVcUAs3T6RGpMfDcbBwGNAsd/rVZL59NOReBQXG8Q66d1SKIKkt6519zhhM
-	2KrtWre1K+mZlRvs8HfakCCJwmpI/3oOtssd9M6dlGox2IxwioKpCDTAhF7YhNLM5X1TB2S+4gH
-	J1PK3YKsM3bEs8rLrOZs=
-X-Received: by 2002:a05:6a21:681:b0:3b4:75c0:3ec0 with SMTP id adf61e73a8af0-3c67daaaf88mr8664627637.30.1785172833979;
-        Mon, 27 Jul 2026 10:20:33 -0700 (PDT)
-X-Received: by 2002:a05:6a21:681:b0:3b4:75c0:3ec0 with SMTP id adf61e73a8af0-3c67daaaf88mr8664596637.30.1785172833509;
-        Mon, 27 Jul 2026 10:20:33 -0700 (PDT)
-Received: from [10.213.109.130] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-314bc44cb92sm55892988eec.13.2026.07.27.10.20.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Jul 2026 10:20:33 -0700 (PDT)
-From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Date: Mon, 27 Jul 2026 22:49:14 +0530
-Subject: [PATCH v3 4/4] arm64: dts: qcom: hamoa-pmics: Add ADC support
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Jj8RVaoo"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3514F1F000E9;
+	Mon, 27 Jul 2026 17:29:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785173349;
+	bh=t5Q4ijmgMjKnU+9LIjcY0dZtKwKFuHlQnsscP9xRfKo=;
+	h=From:To:Cc:Subject:Date;
+	b=Jj8RVaooChr64g6dSC6spIp5P/w9009J+kLlPTUTt8AtNaXpWz/CCLu3Lwp1UULai
+	 f7Ruc1q8heBlpKCrK4a3LQzitV8Tj469QsFlQGajlIrS4gls5nSviO5OgUxcZY82tB
+	 +m3uAxXdH/WhxVrwGf04QOppUUqCtJPzMBCpT2Dm7RhaLLkTcYoAjZdiQ55/203vsJ
+	 temTJM05Ee3DWb0SmyQNw/aMidiFDv3316nAh5EPtmQILuP/EWSfsIYtJmKcl6/Xty
+	 m+zRPI5yo7mAqiaPONgzbg2FHzFsQfOTJCBvxkwWqni1F1SxopVZmK79CSj9TH8I/i
+	 52XTL9mZv/LrQ==
+From: Bjorn Andersson <andersson@kernel.org>
+To: Stephen Boyd <sboyd@kernel.org>,
+	linux-clk@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: [GIT PULL] Qualcomm clock fixes for v7.2
+Date: Mon, 27 Jul 2026 12:29:07 -0500
+Message-ID: <20260727172907.21229-1-andersson@kernel.org>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260727-adc5_gen3_dt-v3-4-bc00223648f3@oss.qualcomm.com>
-References: <20260727-adc5_gen3_dt-v3-0-bc00223648f3@oss.qualcomm.com>
-In-Reply-To: <20260727-adc5_gen3_dt-v3-0-bc00223648f3@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Ayyagari Ushasreevalli <aushasre@qti.qualcomm.com>,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785172810; l=7854;
- i=jishnu.prakash@oss.qualcomm.com; s=20251014; h=from:subject:message-id;
- bh=c0PHHcguxxcjxMobZ3HTDjKWbgs9vr1RzrQYF572YSw=;
- b=DKjpS/BQNZW3dSLj1OMTz0nkdJFAidiiA5VERWbVLhxkwNgo1EqwYQy2zDxR8IKxbCcWZ3lSA
- FoOiprFlEfpCFBcWvgb/wXVglPuzwoXT6KM9sUaHBaKmzsAWtTqGIsX
-X-Developer-Key: i=jishnu.prakash@oss.qualcomm.com; a=ed25519;
- pk=g89pXdLVwRjdTeQ+uX1QzvBO346E3hQAc1N7fcTXgmk=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI3MDE2MCBTYWx0ZWRfX38GCqqgkyBl4
- MUWL3jEnsHStnirQWlla49qp4vxbzpc4Ce2lhT6oP5/iEBicPm97Qr9ahSXQqvRFRwA6wv24oxd
- of4so5oSiXTkn5HoAZPG3h8QvsUXYqA=
-X-Proofpoint-ORIG-GUID: 7W0W_gSxe88qtjC9ymNFivt6v12VtRbJ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI3MDE2MCBTYWx0ZWRfX5FKJpRieg6G1
- d55osrRAO2GH0vqLSr3oHLwO4C+bQW8sd5pxcelPpm+PzGtONJIhZ6imXx1jSYR83xABwvYyxFu
- p3tULl9Z1w3o6DSo0gQfN2KSScWSqWC9pVpnZFXyVWc0HqcJaShRKfezFgF6THuZNR0ql70pRBK
- TH+TEfEqK3cv0qyMUXlN/MxbgHfzBCsFhgKlH5pqJuzUuA8OBhFqq64uOvRzjmlC1PUYZkRIQag
- KQwgsb+o7e6ThaINp41uhGRXpBVznsG5Nta+goGcbsZgq1wVZ4XU1mlNEUFb7nt3NdHW5UaDE7u
- +dvlTftsFpkRlkATmHYvpsxr8NL9wvovdh9adNgIaTE/Bibo00+BSYd1M2LOzN3vKpLqlkhZwOS
- qjrcp8bDsb/rsCGARNYgM8IWx8kXsggGkYD+1OVO2CDjv6InHiewSqOdauEaEwf6H6P3NlxquF+
- JA9ZQDCa4HKHhO9m1vw==
-X-Proofpoint-GUID: 7W0W_gSxe88qtjC9ymNFivt6v12VtRbJ
-X-Authority-Analysis: v=2.4 cv=TemmcxQh c=1 sm=1 tr=0 ts=6a679363 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=p8kwS5nKoigvnQ5N0NIA:9 a=QEXdDO2ut3YA:10
- a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-27_04,2026-07-24_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 clxscore=1015 impostorscore=0 adultscore=0 suspectscore=0
- lowpriorityscore=0 malwarescore=0 phishscore=0 spamscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607270160
+Content-Transfer-Encoding: 8bit
 
-From: Ayyagari Ushasreevalli <aushasre@qti.qualcomm.com>
 
-Add ADC node and define channels for:
-- Die temperature for PMK8550, PM8550VE* and PMC8380* PMICs.
-- PM8550: Die temperature, VPH power, and system thermistors.
+The following changes since commit dc59e4fea9d83f03bad6bddf3fa2e52491777482:
 
-Add io-channels and io-channel-names properties to the
-temp_alarm nodes so that they can get temperature reading
-from the ADC die_temp channels.
+  Linux 7.2-rc1 (2026-06-28 12:01:31 -0700)
 
-Remove die_temp channel of PMC8380_6 for Purwa devices as
-Purwa does not have this PMIC.
+are available in the Git repository at:
 
-Signed-off-by: Ayyagari Ushasreevalli <aushasre@qti.qualcomm.com>
-Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/hamoa-pmics.dtsi   | 158 ++++++++++++++++++++++++++++
- arch/arm64/boot/dts/qcom/purwa-iot-som.dtsi |   1 +
- 2 files changed, 159 insertions(+)
+  https://git.kernel.org/pub/scm/linux/kernel/git/qcom/linux.git tags/qcom-clk-fixes-for-7.2
 
-diff --git a/arch/arm64/boot/dts/qcom/hamoa-pmics.dtsi b/arch/arm64/boot/dts/qcom/hamoa-pmics.dtsi
-index 6a31a0adf8be..17d754d57e18 100644
---- a/arch/arm64/boot/dts/qcom/hamoa-pmics.dtsi
-+++ b/arch/arm64/boot/dts/qcom/hamoa-pmics.dtsi
-@@ -6,7 +6,9 @@
- #include <dt-bindings/input/input.h>
- #include <dt-bindings/input/linux-event-codes.h>
- #include <dt-bindings/interrupt-controller/irq.h>
-+#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
- #include <dt-bindings/spmi/spmi.h>
-+#include "qcom-adc5-gen3.h"
- 
- / {
- 	thermal-zones {
-@@ -277,6 +279,134 @@ pmk8550_pwm: pwm {
- 
- 			status = "disabled";
- 		};
-+
-+		pmk8550_vadc: adc@9000 {
-+			compatible = "qcom,spmi-adc5-gen3";
-+			reg = <0x9000>, <0x9100>;
-+			interrupts-extended = <&spmi_bus0 0x0 0x90 0x1 IRQ_TYPE_EDGE_RISING>,
-+					      <&spmi_bus0 0x0 0x91 0x1 IRQ_TYPE_EDGE_RISING>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			#io-channel-cells = <1>;
-+			pinctrl-0 = <&sys_therm_0_gpio3>, <&sys_therm_1_gpio4>;
-+			pinctrl-names = "default";
-+
-+			channel@3 {
-+				reg = <ADC5_GEN3_DIE_TEMP(0)>;
-+				label = "pmk8550_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@103 {
-+				reg = <ADC5_GEN3_DIE_TEMP(1)>;
-+				label = "pm8550_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@144 {
-+				reg = <ADC5_GEN3_AMUX1_THM_100K_PU(1)>;
-+				label = "pm8550_therm_2";
-+				qcom,ratiometric;
-+				qcom,hw-settle-time = <200>;
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@145 {
-+				reg = <ADC5_GEN3_AMUX2_THM_100K_PU(1)>;
-+				label = "pm8550_therm_3";
-+				qcom,ratiometric;
-+				qcom,hw-settle-time = <200>;
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@146 {
-+				reg = <ADC5_GEN3_AMUX3_THM_100K_PU(1)>;
-+				label = "pm8550_therm_4";
-+				qcom,ratiometric;
-+				qcom,hw-settle-time = <200>;
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@147 {
-+				reg = <ADC5_GEN3_AMUX4_THM_100K_PU(1)>;
-+				label = "pm8550_therm_5";
-+				qcom,ratiometric;
-+				qcom,hw-settle-time = <200>;
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@148 {
-+				reg = <ADC5_GEN3_AMUX5_THM_100K_PU(1)>;
-+				label = "pm8550_therm_6";
-+				qcom,ratiometric;
-+				qcom,hw-settle-time = <200>;
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@14a {
-+				reg = <ADC5_GEN3_AMUX1_GPIO_100K_PU(1)>;
-+				label = "pm8550_gpio_01";
-+				qcom,ratiometric;
-+				qcom,hw-settle-time = <200>;
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@14b {
-+				reg = <ADC5_GEN3_AMUX2_GPIO_100K_PU(1)>;
-+				label = "pm8550_gpio_02";
-+				qcom,ratiometric;
-+				qcom,hw-settle-time = <200>;
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@18e {
-+				reg = <ADC5_GEN3_VPH_PWR(1)>;
-+				label = "pm8550_vph_pwr";
-+				qcom,pre-scaling = <1 3>;
-+			};
-+
-+			channel@203 {
-+				reg = <ADC5_GEN3_DIE_TEMP(2)>;
-+				label = "pm8550ve_2_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@303 {
-+				reg = <ADC5_GEN3_DIE_TEMP(3)>;
-+				label = "pmc8380_3_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@403 {
-+				reg = <ADC5_GEN3_DIE_TEMP(4)>;
-+				label = "pmc8380_4_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@503 {
-+				reg = <ADC5_GEN3_DIE_TEMP(5)>;
-+				label = "pmc8380_5_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			pmc8380_6_die_temp: channel@603 {
-+				reg = <ADC5_GEN3_DIE_TEMP(6)>;
-+				label = "pmc8380_6_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@803 {
-+				reg = <ADC5_GEN3_DIE_TEMP(8)>;
-+				label = "pm8550ve_8_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@903 {
-+				reg = <ADC5_GEN3_DIE_TEMP(9)>;
-+				label = "pm8550ve_9_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+		};
- 	};
- 
- 	/* PMC8380C */
-@@ -291,6 +421,8 @@ pm8550_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x1 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(1)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pm8550_gpios: gpio@8800 {
-@@ -301,6 +433,18 @@ pm8550_gpios: gpio@8800 {
- 			#gpio-cells = <2>;
- 			interrupt-controller;
- 			#interrupt-cells = <2>;
-+
-+			sys_therm_0_gpio3: sys-therm-0-gpio3-state {
-+				pins = "gpio3";
-+				function = PMIC_GPIO_FUNC_NORMAL;
-+				bias-high-impedance;
-+			};
-+
-+			sys_therm_1_gpio4: sys-therm-1-gpio4-state {
-+				pins = "gpio4";
-+				function = PMIC_GPIO_FUNC_NORMAL;
-+				bias-high-impedance;
-+			};
- 		};
- 
- 		pm8550_flash: led-controller@ee00 {
-@@ -329,6 +473,8 @@ pm8550ve_2_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x2 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(2)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pm8550ve_2_gpios: gpio@8800 {
-@@ -354,6 +500,8 @@ pmc8380_3_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x3 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(3)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pmc8380_3_gpios: gpio@8800 {
-@@ -378,6 +526,8 @@ pmc8380_4_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x4 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(4)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pmc8380_4_gpios: gpio@8800 {
-@@ -402,6 +552,8 @@ pmc8380_5_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x5 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(5)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pmc8380_5_gpios: gpio@8800 {
-@@ -426,6 +578,8 @@ pmc8380_6_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x6 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(6)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pmc8380_6_gpios: gpio@8800 {
-@@ -451,6 +605,8 @@ pm8550ve_8_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x8 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(8)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pm8550ve_8_gpios: gpio@8800 {
-@@ -476,6 +632,8 @@ pm8550ve_9_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x9 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(9)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pm8550ve_9_gpios: gpio@8800 {
-diff --git a/arch/arm64/boot/dts/qcom/purwa-iot-som.dtsi b/arch/arm64/boot/dts/qcom/purwa-iot-som.dtsi
-index 394e65518ac5..661dca4fbee3 100644
---- a/arch/arm64/boot/dts/qcom/purwa-iot-som.dtsi
-+++ b/arch/arm64/boot/dts/qcom/purwa-iot-som.dtsi
-@@ -10,6 +10,7 @@
- 
- /delete-node/ &pmc8380_6;
- /delete-node/ &pmc8380_6_thermal;
-+/delete-node/ &pmc8380_6_die_temp;
- 
- / {
- 	reserved-memory {
+for you to fetch changes up to 1aa4e2ed7caafbbbedff89fb226a982413469baf:
 
--- 
-2.43.0
+  dt-bindings: clock: Replace bouncing emails (2026-07-11 10:24:07 -0500)
 
+----------------------------------------------------------------
+Qualcomm clock fixes for v7.2
+
+Fix the Eliza display clock controller to avoid RCG stall. Revert the
+rework of the "PHY mux" clock, as this broke PCIe on several different
+targets.
+
+Drop (and correct one) bouncing maintainer email addresses in DeviceTree
+bindings.
+
+----------------------------------------------------------------
+Konrad Dybcio (1):
+      Revert "clk: qcom: regmap-phy-mux: Rework the implementation"
+
+Krzysztof Kozlowski (2):
+      clk: qcom: dispcc-eliza: Fix disp_cc_mdss_mdp_clk_src RCG stall on Eliza EVK
+      dt-bindings: clock: Replace bouncing emails
+
+ .../bindings/clock/qcom,gcc-msm8953.yaml           |  2 -
+ .../bindings/clock/qcom,ipq9574-gcc.yaml           |  1 -
+ .../bindings/clock/qcom,ipq9574-nsscc.yaml         |  1 -
+ .../bindings/clock/samsung,exynosautov9-clock.yaml |  2 +-
+ drivers/clk/qcom/clk-regmap-phy-mux.c              | 52 +++++++---------------
+ drivers/clk/qcom/dispcc-eliza.c                    |  2 +-
+ 6 files changed, 19 insertions(+), 41 deletions(-)
