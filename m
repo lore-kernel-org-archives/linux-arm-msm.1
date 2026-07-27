@@ -1,179 +1,445 @@
-Received: from mx0b-001ae601.pphosted.com (mx0b-001ae601.pphosted.com [67.231.152.168])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89AD83F0765;
-	Mon, 27 Jul 2026 09:54:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=67.231.152.168
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785146078; cv=fail; b=Gj5Z1oiLspdJ6O32mvr3kLMv1FNHxr6aJUjrlVWsTDke6GcjoVKB5hjqYpMpSMKBtIVG5vo9E/DjNYm4B+pfpNl7TvQJxyy76lVKqP61mxOeV8IDJbB8X1y5X/AYtjMh3zwJyEUyCh7XXT11cyJXz5AO/4nBFycOiDce5itRYKc=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785146078; c=relaxed/simple;
-	bh=LJ/+7cry8cLJElDaCpugPBe47PMNeCexvRWnxSMKM6s=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qXkZFC2C82HqnwIvnAkl3AcPE1t1Sgccj44Ddo5/tXXp0FE8YLeoKPxH79gO/HNPGQaTVnYD7pBUIkFJFf04gPrzi/cRiK0V6s6ZAENvzmiX4Zmlv0Qksfrpw8LaJphP9QPtMYn6HD23xDI6rpeglgOSYJ0yLifln7ijcaTrTh4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com; spf=pass smtp.mailfrom=opensource.cirrus.com; dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b=XtzA/yhE; dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b=xaOjm1dM; arc=fail smtp.client-ip=67.231.152.168
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opensource.cirrus.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=opensource.cirrus.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7B233F7A87
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 09:57:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785146278; cv=none; b=sLnkSYnApSxnS0hZUDkvYB1XjYDx24iygY2ZmwH3MsXN9rqeWz+OoatNYDNt3LLpNql/NK+hva1120Ikf+pZE02dRBp6EG1O/GsNJeHWdWQRFVK5pg5Qb11X3N0xwaXqaYjI4GH7UNckRfO/00a8yAP/qwTTlMtoYPJZxS9qg5E=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785146278; c=relaxed/simple;
+	bh=G7OuZnFzXRxi+fDAYiRyDUKp+x0C6VA6eN1JvMlufl4=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Z/GV7Izmi/mVx+/cddoJ4RZyURCyVEyRP+tOssMmhbrZYZcZenCxwiA0y0BbC/2fkGkBlddH9a2A4+D/c0FN0OdB/TYvctq0W23//UGHD6OcfDXINRVq2ynM8iObMnlx0ZlRj7ZTiDbcjVaDwCU6dPXvTRJYY8OSzObGS4hM1mY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=I5+4aNDG; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SLQPlQ+3; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=cirrus.com header.i=@cirrus.com header.b="XtzA/yhE";
-	dkim=pass (1024-bit key) header.d=cirrus4.onmicrosoft.com header.i=@cirrus4.onmicrosoft.com header.b="xaOjm1dM"
-Received: from pps.filterd (m0077474.ppops.net [127.0.0.1])
-	by mx0b-001ae601.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66R4w1HR1663499;
-	Mon, 27 Jul 2026 04:53:53 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cirrus.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	PODMain02222019; bh=SC9l8r7z0jhnEkV8gXs+oK/jUVUmULLLjG7rmIaEdWY=; b=
-	XtzA/yhEEFLY0lvE8s5H7GnJrSP+AbeZ14SEkQsKJNw6jDqghWE2xWSfF/n0TNKD
-	6a5QslPNHLXjbPtP/ioXdoGeZVo0dnMGyODC4U/8RAp6ghufZhXvVEkhYK0m5esr
-	2zbGdR5yn7lu5nuYYWo+N9IhKyIifQCYiSQi3MBR6p5mlN/g6irs7+5pzUzJiC2D
-	WLY9fEY8n05+2+LUWkJMswhTW9FxkJjCh1hn/37iI7QKFwVJDPYuJW0bKBI26VX+
-	njg278dyrvUPb7Z/utZEZJTJ2u+eDEQX5qkb+y757IvikjrGsauo3e/xem2hJry6
-	YAMAe5nnKt3YkXPwYCuKmg==
-Received: from co1pr03cu002.outbound.protection.outlook.com (mail-westus2azon11020141.outbound.protection.outlook.com [52.101.46.141])
-	by mx0b-001ae601.pphosted.com (PPS) with ESMTPS id 4fmsjg1wfn-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Mon, 27 Jul 2026 04:53:53 -0500 (CDT)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=m62xUlPCQ3XdErjgRJPdXh9R+BLVME8sJuVTd8eC1qXkFCOtpyYhOiABAZtNStrmmd/03ulfAL3Skj1y+DukJq7I+RHzYjRRJsSeKxOUFI0SdlZoAxK8dlcfJ8JExLEGwkglM48ciECHOtAnqGhVNkNX5WP7ar42FiBTj4GGRfESH6BjHtEB8Kw5SUQfyiN5eTAoQUNeTHs9gnhg4TRsQ4sJROE0HV3/E+nM5qyR3gkzMDIdq6hVv5EKZB8nKJcEDHigXtFXG3p/5mrWf1anMCY1+2zmqEiY3mwSsm6urXBtUie5uB1LaJ2sDB/DVdO/EBNldo1sk5z5y+ajU7uwrg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SC9l8r7z0jhnEkV8gXs+oK/jUVUmULLLjG7rmIaEdWY=;
- b=A6T9noGGitbYgc31rlx2ETiZIQo0XTiKh9AnDvlsY+qfbz2i+g3m/hLS2X5DJut5ekcNr4dm9jdC3sxjji3VfwALxM1yrRQVxuro7e2cN7dTbeq5S8AgdwJpw1RfAFlyGjYMqDqdLmRMaaAQSq1tAGJxhWMpg88N6SP9K/DJCrd+bSC9mcEepUW0/m6agWAW4J4WbH6MNLr8N4n8WnlLAeKjgsYIB7xOpTWIsCInAzd4jpvlNEWLpgEPUG2HJ6LsiMZK6nSCSWpkZn7xCPeAT4iYesNHtJOBGW2dKa0vYjSI2gb1e8pNETrRRcoX8q/nH/FnhbPfKoSACdi3YigNLg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 84.19.233.75) smtp.rcpttodomain=analog.com
- smtp.mailfrom=opensource.cirrus.com; dmarc=fail (p=reject sp=reject pct=100)
- action=oreject header.from=opensource.cirrus.com; dkim=none (message not
- signed); arc=none (0)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="I5+4aNDG";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SLQPlQ+3"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66R9WvJv278826
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 09:57:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=cTfkRuh1qMz6daNEBghoLo
+	xTzu0WE8KxCU7LeuEabmM=; b=I5+4aNDG3QRbCXqL80MbnJjywj9Jrnz1zXpdSc
+	hyfxnrWHR1+9c2Rxgw5uEjAd9NRO05v9bEC9r7Z17VXOZVMtMYF/UTH4ojUomfV5
+	bJ4qnItwyxJRV4esxyRIcgT8FCB9cMVQ9jLmDES0h5esalX8Bn78TiQpWfcTaUV9
+	4qFU80/l3uB9t13YBGGhjD/O58PEHe5JC0rCL1TXfkaVMijFd23eC5ZIl9QvrWsj
+	pML/9uZya91IPI/TP9WVZNe+jakXNHXpJq02aV0iuGzUv4/84qVW5BvT/K0xY/Mw
+	q8Wt2mqJxKrryqWC73ZeaKckmIIqi8GgjdeUs1pCnTkIy4NA==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fny9whd5u-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 09:57:55 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c0408254aso56177611cf.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 02:57:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=cirrus4.onmicrosoft.com; s=selector2-cirrus4-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SC9l8r7z0jhnEkV8gXs+oK/jUVUmULLLjG7rmIaEdWY=;
- b=xaOjm1dMYDSdHaLIR5/HOB2t1FRV5lGzI7QFRwFURjuOwANkJmLEb/ts71XzbXz3/m69+T23bjH516Pel66jtA426+jcObuarNKANnwDLI6wOeHstCxdYZyQK5mfJYiJbhUetwpfetxv+8N0rAoStF3gQmOQKoXt1ihtfjI2VTs=
-Received: from BY3PR10CA0011.namprd10.prod.outlook.com (2603:10b6:a03:255::16)
- by SA3PR19MB8168.namprd19.prod.outlook.com (2603:10b6:806:37f::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.245.13; Mon, 27 Jul
- 2026 09:53:48 +0000
-Received: from CO1PEPF000075EF.namprd03.prod.outlook.com
- (2603:10b6:a03:255:cafe::63) by BY3PR10CA0011.outlook.office365.com
- (2603:10b6:a03:255::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.245.13 via Frontend Transport; Mon,
- 27 Jul 2026 09:53:48 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 84.19.233.75)
- smtp.mailfrom=opensource.cirrus.com; dkim=none (message not signed)
- header.d=none;dmarc=fail action=oreject header.from=opensource.cirrus.com;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- opensource.cirrus.com discourages use of 84.19.233.75 as permitted sender)
-Received: from edirelay1.ad.cirrus.com (84.19.233.75) by
- CO1PEPF000075EF.mail.protection.outlook.com (10.167.249.38) with Microsoft
- SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.270.5
- via Frontend Transport; Mon, 27 Jul 2026 09:53:47 +0000
-Received: from ediswmail9.ad.cirrus.com (ediswmail9.ad.cirrus.com [198.61.86.93])
-	by edirelay1.ad.cirrus.com (Postfix) with ESMTPS id 28BD2406542;
-	Mon, 27 Jul 2026 09:53:46 +0000 (UTC)
-Received: from [198.90.208.11] (ediswws06.ad.cirrus.com [198.90.208.11])
-	by ediswmail9.ad.cirrus.com (Postfix) with ESMTPSA id 0B00082025A;
-	Mon, 27 Jul 2026 09:53:46 +0000 (UTC)
-Message-ID: <7c4c11a1-758a-41de-8449-45b5f311faa6@opensource.cirrus.com>
-Date: Mon, 27 Jul 2026 10:53:45 +0100
+        d=oss.qualcomm.com; s=google; t=1785146274; x=1785751074; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=cTfkRuh1qMz6daNEBghoLoxTzu0WE8KxCU7LeuEabmM=;
+        b=SLQPlQ+3zwpQS5a6eIrLxfC2pJ7AFOd7yiYJRjKzz9GLvIBaqjLdrKej136AyD39Ag
+         cRn+drgHpl0J60pBKGYIZMvaD/VcDKcg35GymRl3aNmiA1lKF+OfJ3iO391vd5sqZUV8
+         mrY5YUCXww1okohwukGpS1z74wcXtVAnbdRZMJjE8jm/Ulo5+JIueU1DO9gH4MbDiP3F
+         wWWQiUbWQh+o/oh59iexLGY615+SPWPMDaUdSm3RwzOZv/ByfkXQJZqYYAR9rN0mh4IQ
+         EyEL2Ow9QpvuKDhimXaLx5Tjk3t9JcaR+WPaa3y7mDtoTXO8FoxSMSiwMfcniUlo4Xwo
+         G+pw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785146274; x=1785751074;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=cTfkRuh1qMz6daNEBghoLoxTzu0WE8KxCU7LeuEabmM=;
+        b=LQy4CYHfv2IemM1pP9YiX14jAePsHrikGv4DyfWBxyADbmBU6G13iaA0vBObSOT/HP
+         ls95OMLBRYm1+/82Lsi7sDMOE41Wova9QVuPkgP1XDVW+z8nLQliKspyUCmlePYJJma5
+         kKVbW+8k7fkxx3lrBF5IVvuZA6hkaGJJ/xu6pDqZnTMkGswJqs4rs/frtOFttseFmXex
+         njROMs9bXZJFoaZTPnseGeLS67suDG6ct5FHKwhaeTZJOu415IGR2fs46iIfNoOLsFAO
+         seNomsj7cd+eAQq8HRmxxVrbgevMcAs7cI4HxOUzRNQXOZcXFSHGP9OSU35wVXLXJ9St
+         G50A==
+X-Forwarded-Encrypted: i=1; AHgh+Rp+d8IkCJz0mSxdk9Uc2mt3FKv1vzWKnovkd7Sbtfct8pvGki82yXKMRRaOPH6/BjcDlQ9/TjAmF3Iv8Rke@vger.kernel.org
+X-Gm-Message-State: AOJu0YyzHsX0d/lrjeFVTxtPRkENmaNA3DLZqaFieYC4LSrpL8fCn+wj
+	I/4WrOc9P6weeffAWcZOxg13mKUX3A4y9m2yLv8Ys+i+zl4li9ho3E2PXCnmpm+OsNikquwesEv
+	q5dHb0g02/C5uFyOzchewlipBgQP/YCl72Bs0ejAClyOshcroevg7yZVfaan5KgvKmIu0
+X-Gm-Gg: AR+sD13WVbtTb9cZ4dRZWsLc1A6dT/Utlk/mgq2Z8Ev62cXgA5ctI997nAmSrIpu07k
+	WUj659vEFvQYAQN5V5SAOcwkux2Ry+dJzx6tjHTFjttWAjKHMyOe+XqOGeF73zrFKiOP3MxI0Qj
+	zaJs26zgcSp+zyolJ9ahJTq14HOiaZrexejpNs4XzkjAKmYvOoF/MqanEOtnpawzXDxR8MxDFbH
+	xe9o/1sT6Gn3PA/po26sIeAeU1JRvkWa4znQX88UrUWKHlICXFCipNCLm92IuH7QU6jwo5EEm/2
+	ukANH6tRwU8y0ji9w9xPggYl1diDjkSD0uq4s1E5+j/YJlqcxriix33tgZU0Q2nMO6LqKHvdBwQ
+	qy/jJh8+IZl+Sidz2vJdjwO9TgC3H
+X-Received: by 2002:ac8:6f11:0:b0:528:ce0:e9f8 with SMTP id d75a77b69052e-5295d270a04mr106677751cf.3.1785146273877;
+        Mon, 27 Jul 2026 02:57:53 -0700 (PDT)
+X-Received: by 2002:ac8:6f11:0:b0:528:ce0:e9f8 with SMTP id d75a77b69052e-5295d270a04mr106677341cf.3.1785146273405;
+        Mon, 27 Jul 2026 02:57:53 -0700 (PDT)
+Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:1449:2d40:6dd2:20d])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1c32f19c4csm611477266b.63.2026.07.27.02.57.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 27 Jul 2026 02:57:52 -0700 (PDT)
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Date: Mon, 27 Jul 2026 11:57:38 +0200
+Subject: [PATCH RFC] power: sequencing: rename pwrseq_power_on/off() to
+ pwrseq_vote_on/off()
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 25/26] ASoC: codecs: wm_adsp: Use guard() for mutex
- locks
-To: phucduc.bui@gmail.com, Mark Brown <broonie@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>, Lars-Peter Clausen <lars@metafoo.de>,
-        nuno.sa@analog.com, Shenghao Ding <shenghao-ding@ti.com>,
-        Kevin Lu <kevin-lu@ti.com>
-Cc: Baojun Xu <baojun.xu@ti.com>, Sen Wang <sen@ti.com>,
-        Steven Eckhoff <steven.eckhoff.opensource@gmail.com>,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
-        Charles Keepax <ckeepax@opensource.cirrus.com>,
-        Linus Walleij <linusw@kernel.org>, u.kleine-koenig@baylibre.com,
-        Thorsten Blum <thorsten.blum@linux.dev>, Kees Cook <kees@kernel.org>,
-        Chen Ni <nichen@iscas.ac.cn>, Bartosz Golaszewski <brgl@kernel.org>,
-        Shengjiu Wang <shengjiu.wang@nxp.com>,
-        Sebastian Krzyszkowiak <sebastian.krzyszkowiak@puri.sm>,
-        Pengpeng Hou <pengpeng@iscas.ac.cn>, patches@opensource.cirrus.com,
-        linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org
-References: <20260727094046.23001-1-phucduc.bui@gmail.com>
- <20260727094046.23001-26-phucduc.bui@gmail.com>
-Content-Language: en-GB
-From: Richard Fitzgerald <rf@opensource.cirrus.com>
-In-Reply-To: <20260727094046.23001-26-phucduc.bui@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000075EF:EE_|SA3PR19MB8168:EE_
-X-MS-Office365-Filtering-Correlation-Id: cfa7195d-480c-4bb4-892d-08deebc4f44c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|61400799027|36860700016|23010399003|7416014|376014|82310400026|11063799006|10067099003|56012099006|4143699003|18002099003|22082099003|16102099003;
-X-Microsoft-Antispam-Message-Info:
-	DOGM8m6SokeCkza+0ON+ffpNiZ3jkgs82ctRiki9jp0ugVIynhiyx4CsFOSmI2gINgECUVbVkWHlwWfz+dwA23YuPm7BvKcHAxjCoOREDfBPFoLOefbMah57WaFcBBUon06gsXJF6SxGhZyHGYIL1jANI3hcACtlCOLY6O1Gi/AwFdT/yWglQ6K+po9kjhDtT/gqDDATp6EVH0zEXxpIFqpiDsWM+LaIT9gAbPgNklqHTNmgIoZqfi99g+gNGtDCbp/wGVg4Dl6WFAJ9Y34CyPtAVU2pEVFn8XlsAina98eAlXtw5GxgLeMpuFEEKHxY50I1QazxZK8Uz9/SRWhqUMGiOjrwFqkun0Gkegozo1Dmy9PdPPA874s3D8uilE5rQUmkhcu+rHoZUX/cEBVNurLu5zwzpa9vYurYIlYTLlIuF8tQ17R2a7YZpsmOvf8ecEvsz/YzzBf7fPMVc2EoqK/C9r7yyebqOQAMIVN+J7ajAZfUidycJTGML0UGD4rrINLQ5HJk7duzNpN+HeF+0Jasz2rgnwGYQEi1HOnjV86w5bGQ04xg1VwtSGGvCPFB97FhBLJqmeOW/ORSIGXVBjqE+eIypl5GYMhzVi46lE2xOvrQ/E460vM9s9uJ5WG1DtT0CL4n2uHfEk2R0N2KiRE8Z2XVB55SIIosHbfbSNWHoeCDQNZSZgzwk64YVa3M9SfPUheNWa8oVN3i+82pXg==
-X-Forefront-Antispam-Report:
-	CIP:84.19.233.75;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:edirelay1.ad.cirrus.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(61400799027)(36860700016)(23010399003)(7416014)(376014)(82310400026)(11063799006)(10067099003)(56012099006)(4143699003)(18002099003)(22082099003)(16102099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	8e1Hax5z7hzmeJYCAT0WvqJKScvn/jrrMw9Io7+WO5L91iW76feq4/olfsNQR+P4W/XT2h9ipelpikJAxowypUrO66DrTUTmGSm0Q9Bu/Zufg5modofb1lSld0P892x7Mas2ON5kaA+87a6J23oLaBVDpq2rBFsxAGVxHNICjPKN2X9hsWpdrUAfIDl62WaI3FERa7+2hdXUppx3r6/G1fgXLOXhoMOMw1763RS/ESjoNAASbp8fwTAuT13EBebFrAejCBM7eVcX/R89jDHM0Cnon8lzs2oJ2cfIQX61xhSsrRqkuVRWuktrQ/dd3XrDJjAdCkZpmVRBgZsJyUodCpls4udYuAycVMbrDm/8oo2/8kzTaAhUhP3DLqdqDuzTDIk1LyBKiBgPLuKE9jodDnav8XISVVmyqpShjGG9n3hwyrlJeGS7f7kFn83A3pyl
-X-Exchange-RoutingPolicyChecked:
-	iISV9HMumF+xMKD4EjFd0TJavGL5wAWmPOaQkEZEoXjjH7YojuncTMETrnQCPqH9kaW5M0CBScNLrhdJ3pt8S8byd92TmAKHfgdu6YVZdAzJZ0ONO0It76pgmcDbzcQ104i6GefT8+ZmwwMoPgy4RFrXFYXtxJDPMXZPSCfjZ2LNEQLXj4Y1SFSaYhqU9zMJUVcgqZ80rI7gGZlRFG0G28PCiLKHnXmGQvLMZmWEDtUkqlLPKi5PFgKIihog9mSyhoPplJ36EhSLwuwE07jhXcIEytAzng8QHtxR6DG+g8RtBM5uJVX0Fs9aNMcrMf39RLazCbwTgeJkg4mDVDte4Q==
-X-OriginatorOrg: opensource.cirrus.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Jul 2026 09:53:47.4685
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: cfa7195d-480c-4bb4-892d-08deebc4f44c
-X-MS-Exchange-CrossTenant-Id: bec09025-e5bc-40d1-a355-8e955c307de8
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bec09025-e5bc-40d1-a355-8e955c307de8;Ip=[84.19.233.75];Helo=[edirelay1.ad.cirrus.com]
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TreatMessagesAsInternal-CO1PEPF000075EF.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR19MB8168
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI3MDA5NiBTYWx0ZWRfXw/NmXl8rQkbg
- JZF5yGNxfuCbdkY0zRkd5e9DCYXJoIHocUZnx0ku/0aA4lEzQgn+qhSSH/CoAVaeHQtPA1lF0UJ
- RRanSHdjQ1UvbmYypppe1LX5ynaGk9w=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI3MDA5NiBTYWx0ZWRfXx7ipssRzdNw1
- hrfPlQsQXVLKbB5sM0RU4c9KKUl9wGeCDLeJJP1kEzqyNZzmFuHDU00ntWkLDvZgCl9cGdxf2Wj
- NUa0YQxyBjHjvIrQcbVL58gBcXNtN91QQP00Jr+XG/Qb5Se5O27H6qqVz5o6r9XVb+Tp8XSOJ56
- isEUVg9tCcoDYiPysXXvgKR36yuhNWqYBXZF4MCSvtgo2tHq+WSm7iQ0i8fMU0xWSBT0KVZYB4W
- NktgHsdDj8h2rVsnaJxS9kpYOFQ113colieUkr/zqxvgY+3S7/hJYiDwl+hCTaT2adMotDfDs7b
- pxDFY9MFYqD8dzm6NuP2pQQaG90oOs+pEWlJhCLf1fGuI93uZtIbuq3NBVY+LgaGmdscZLvE/OV
- SMFGej5V811GZDVN0CSAPn1WyUcsUT1UJmnVpaB4Pz4xAMrRl9NbarRVs2/if06Y56GazH9MXsg
- Teo01M9EkiXTb7rTflg==
-X-Proofpoint-GUID: a7EImWGsm4267mYbxJcgSeF9x9EisG8O
-X-Proofpoint-ORIG-GUID: a7EImWGsm4267mYbxJcgSeF9x9EisG8O
-X-Authority-Analysis: v=2.4 cv=XLwAjwhE c=1 sm=1 tr=0 ts=6a672ab1 cx=c_pps
- a=VxO0TNiV1+gBiOWqST4D9Q==:117 a=h1hSm8JtM9GN1ddwPAif2w==:17
- a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s63m1ICgrNkA:10 a=RWc_ulEos4gA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=iX4cTi3TZMoOKdANLEfx:22 a=KfkQE9S9VqCBgivYGm0O:22
- a=pGLkceISAAAA:8 a=w1d2syhTAAAA:8 a=2LXkwXwYv1G787AwtbYA:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-Spam-Reason: safe
+Message-Id: <20260727-pwrseq-vote-rename-v1-1-a2029aeeac65@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAJErZ2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDcyNz3YLyouLUQt2y/JJU3aLUvMTcVN0k8+QUI0MDYyMzMwsloMaCotS
+ 0zAqwodFKQW7OSrG1tQCp4jesaQAAAA==
+X-Change-ID: 20260727-pwrseq-vote-rename-b7cd21032668
+To: Bartosz Golaszewski <brgl@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Marcel Holtmann <marcel@holtmann.org>,
+        Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+        Alessio Belle <alessio.belle@imgtec.com>,
+        Luigi Santivetti <luigi.santivetti@imgtec.com>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Jeff Johnson <jjohnson@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Bjorn Helgaas <bhelgaas@google.com>, Chen-Yu Tsai <wens@kernel.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: linux-pm@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-bluetooth@vger.kernel.org, imagination@lists.freedesktop.org,
+        dri-devel@lists.freedesktop.org, linux-wireless@vger.kernel.org,
+        ath10k@lists.infradead.org, linux-pci@vger.kernel.org,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=11233;
+ i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
+ bh=G7OuZnFzXRxi+fDAYiRyDUKp+x0C6VA6eN1JvMlufl4=;
+ b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBqZyua6+kj7mv/zzmBMIis+gdWuocontWnq+eD+
+ vv740HUnhyJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCamcrmgAKCRAFnS7L/zaE
+ w9XLD/9fSN/wxCKeUPmwVIqjM6yzfNVAPIBYsenBC17Ef51V+D542ya4dKvWfOck0ahoGK8h1ES
+ fCsIdb6yUiLOXdXE1N7WtKH/bmHWrKnmXrgpH3j8J9YwApddS/jwfnAr7KSwTchMurvib/KFXyi
+ P970euD779qbQdjTUm//egbj70HYVr12XoKea/M6suEWXE2hbdsed+qgibBXGSuCYkSMRKBcGHp
+ xri0RBKzDEDXkyIU2Yax1X+KsDClbCCOP+uvsrUsFDmvL+iG5VDV81txFmfJyU9Ywb7yXJMabgn
+ 9InJCDQjwFOf8N9p3g/gMRm+9KQxRAE4rgDYNjQck4b3ktI0dDbumeOi+y57YdDp/F+0KgErSoi
+ /SEq/slk2oqnBZmzIZcFUAFRHG1tb1SU2aMFLnGl21eN+DQSDhnVGR/wh/i29p24hgZ7Ph+d3El
+ Ty31M0gixh7rEQEZd7g15mOvTdvKan0cojXEvOjGCORFuVzEgu8Y0dJ/okF0nUifFkROr+oPoi7
+ kGMN7iRtpUrzssjjW8+cD31Nj2fGuaa4o4Mu4t3h6qMp964o+6MOtZd5QKRmEUj6ymhsaD9v57E
+ 9VHzB97Yy25qtF/aV4dnpAJM9GU4gy/ZARWp189Jad+AaYMrA746ewg1ONLdSFrLwQFyL6r49+h
+ s2Mplu1/U1vA/Lg==
+X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
+ fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI3MDA5NyBTYWx0ZWRfX1sE8vuRR4YNb
+ Fe/LrZxA7+Dvf6eBQOmv3kjtsWaHKtUxfGQOIs24EKckaajy6xkiaW+bZg0LxeH4nQigslWnOnK
+ 96kSlxIjFubIw46aCX7ir4alZzSPiT9j3+i/3KYhJd+/angbiQpMa7heFgH6hGjvUjxCVZQyd1O
+ fm9pPhquNBOuwVBXU8VPPSQ6pYMHThCnWIcBsa6KKeJKDct1B/8CgfJLqMOfK1dHDYHSPz3118J
+ wehtEK97mhBC+5cF5Elzwx/80A0sI68X0dnvihCL0ombMj7D7mLzWK28J2EygnrgYpfoKFoTZvr
+ LBv7STKmp8KKoFb2b+XI3TnJtnFCSvvBPjdJifqk9IZA6yY4Qf2ZphSvJaJg3Neyj75mKmMD2LI
+ eNd9fTgTz/YtqYYnJccXzTBXbNySZt2hz/e0golt9dIk131h2uNrCY5n51BRaWmjQktPGwtUgn4
+ K3+siiJoL78gB3rheYg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI3MDA5NyBTYWx0ZWRfXwvbQmpegz41W
+ im2DVY4ZBCvWp6F/LmuM4MySi7tg5SlGl1rz6PE72xcL3E4hTY7UpM4kOiXkw5O9jEGjIddLz27
+ Xeya6vlwc72kwDawll38ZT/VM6QuQfg=
+X-Proofpoint-ORIG-GUID: fcHiefn0VwaNuHtnjqTyuZqgP5E1Z0c_
+X-Authority-Analysis: v=2.4 cv=E4b9Y6dl c=1 sm=1 tr=0 ts=6a672ba3 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=VwQbUJbxAAAA:8
+ a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=BH6fHGR_65QtqvMn8p4A:9 a=QEXdDO2ut3YA:10
+ a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-GUID: fcHiefn0VwaNuHtnjqTyuZqgP5E1Z0c_
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-27_02,2026-07-24_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 clxscore=1015 priorityscore=1501 impostorscore=0 bulkscore=0
+ lowpriorityscore=0 adultscore=0 suspectscore=0 malwarescore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607270097
 
-On 27/07/2026 10:40 am, phucduc.bui@gmail.com wrote:
-> From: bui duc phuc <phucduc.bui@gmail.com>
-> 
-> Clean up the code using guard() for mutex locks.
-> Merely code refactoring, and no behavior change.
-> 
-> Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
-> ---
-> 
-> Changes in v2:
->   - Add the missing `guard(mutex)` that was inadvertently omitted.
-> 
->   sound/soc/codecs/wm_adsp.c | 77 ++++++++++++--------------------------
->   1 file changed, 23 insertions(+), 54 deletions(-)
+The way power sequencing works means that a call to pwrseq_power_on()
+does not necessarily result in the pwrseq target being powered-on at
+that time: it may have already been powered on before. Similarly: a call
+to pwrseq_power_off() does not have to result in an actual powering off
+of resources: there may still be other users that requested a power-on
+before.
 
-Reviewed-by: Richard Fitzgerald <rf@opensource.cirrus.com>
+We will also introduce the concept of "non-controllable" pwrseq targets
+soon which further increases the disconnect between the naming
+convention and the actual semantics.
+
+What consumers of pwrseq descriptors actually do is: they *vote* for a
+powering on of a given target or retract that vote. These operations
+could be called get/put in line with runtime PM but this could become
+confusing since we already provide pwrseq_get/put() for a different
+purpose.
+
+Change the name of the two functions to pwrseq_vote_on/off() which
+better reflects their purpose and semantics. No functional change
+intended.
+
+If at any point users need to know *when* the exact power event happens,
+we can provide that information in the form of a notifier.
+
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+---
+I've floated the idea to rename the two pwrseq functions from "power
+on/off" to "vote on/off". Here's a concrete proposal.
+
+I'm sending it as an RFC but if there's agreement, I can queue it as is.
+
+I'm doing it in a single commit that should go through the pwrseq tree
+with Acks from subsystem maintainers.
+
+[1] https://lore.kernel.org/all/CAMRc=Mefxn81d0VUwmQgwFtffkL1=Er_1VQZCbC1Sa-Qph4t1w@mail.gmail.com/
+---
+ Documentation/driver-api/pwrseq.rst      |  4 ++--
+ drivers/bluetooth/hci_qca.c              |  4 ++--
+ drivers/gpu/drm/imagination/pvr_power.c  |  4 ++--
+ drivers/net/wireless/ath/ath10k/snoc.c   |  6 +++---
+ drivers/pci/pwrctrl/generic.c            |  4 ++--
+ drivers/pci/pwrctrl/pci-pwrctrl-pwrseq.c |  4 ++--
+ drivers/power/sequencing/core.c          | 16 ++++++++--------
+ include/linux/pwrseq/consumer.h          |  8 ++++----
+ 8 files changed, 25 insertions(+), 25 deletions(-)
+
+diff --git a/Documentation/driver-api/pwrseq.rst b/Documentation/driver-api/pwrseq.rst
+index ad18b2326b689a41471216f3889480b11768ca82..faba5a8e3337e878c6dac0cc91d23b3577cab6fd 100644
+--- a/Documentation/driver-api/pwrseq.rst
++++ b/Documentation/driver-api/pwrseq.rst
+@@ -50,9 +50,9 @@ Consumer interface
+ The consumer API is aimed to be as simple as possible. The driver interested in
+ getting a descriptor from the power sequencer should call pwrseq_get() and
+ specify the name of the target it wants to reach in the sequence after calling
+-pwrseq_power_up(). The descriptor can be released by calling pwrseq_put() and
++pwrseq_vote_on(). The descriptor can be released by calling pwrseq_put() and
+ the consumer can request the powering down of its target with
+-pwrseq_power_off(). Note that there is no guarantee that pwrseq_power_off()
++pwrseq_vote_off(). Note that there is no guarantee that pwrseq_vote_off()
+ will have any effect as there may be multiple users of the underlying resources
+ who may keep them active.
+ 
+diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
+index e6d107f67759f54eee2647d92bb8bfd4e68c9358..5aaabc9fb1b66eb6b24da25f77158690a2f03c84 100644
+--- a/drivers/bluetooth/hci_qca.c
++++ b/drivers/bluetooth/hci_qca.c
+@@ -2259,7 +2259,7 @@ static void qca_power_off(struct hci_uart *hu)
+ 	}
+ 
+ 	if (power && power->pwrseq) {
+-		pwrseq_power_off(power->pwrseq);
++		pwrseq_vote_off(power->pwrseq);
+ 		set_bit(QCA_BT_OFF, &qca->flags);
+ 		return;
+         }
+@@ -2319,7 +2319,7 @@ static int qca_regulator_enable(struct qca_serdev *qcadev)
+ 	int ret;
+ 
+ 	if (power->pwrseq)
+-		return pwrseq_power_on(power->pwrseq);
++		return pwrseq_vote_on(power->pwrseq);
+ 
+ 	/* Already enabled */
+ 	if (power->vregs_on)
+diff --git a/drivers/gpu/drm/imagination/pvr_power.c b/drivers/gpu/drm/imagination/pvr_power.c
+index a71d5b35601e7b996428312028a4c0542a5b1350..c6dfa2685ee64086c53281d06563e6169109c00f 100644
+--- a/drivers/gpu/drm/imagination/pvr_power.c
++++ b/drivers/gpu/drm/imagination/pvr_power.c
+@@ -352,12 +352,12 @@ static int pvr_power_init_pwrseq(struct pvr_device *pvr_dev)
+ 
+ static int pvr_power_on_sequence_pwrseq(struct pvr_device *pvr_dev)
+ {
+-	return pwrseq_power_on(pvr_dev->pwrseq);
++	return pwrseq_vote_on(pvr_dev->pwrseq);
+ }
+ 
+ static int pvr_power_off_sequence_pwrseq(struct pvr_device *pvr_dev)
+ {
+-	return pwrseq_power_off(pvr_dev->pwrseq);
++	return pwrseq_vote_off(pvr_dev->pwrseq);
+ }
+ 
+ const struct pvr_power_sequence_ops pvr_power_sequence_ops_pwrseq = {
+diff --git a/drivers/net/wireless/ath/ath10k/snoc.c b/drivers/net/wireless/ath/ath10k/snoc.c
+index 3106502275781d32d17a45a661362206144df6b3..f87e56576e29124902dccd1a21600fd3407b2922 100644
+--- a/drivers/net/wireless/ath/ath10k/snoc.c
++++ b/drivers/net/wireless/ath/ath10k/snoc.c
+@@ -1025,7 +1025,7 @@ static int ath10k_hw_power_on(struct ath10k *ar)
+ 
+ 	ath10k_dbg(ar, ATH10K_DBG_SNOC, "soc power on\n");
+ 
+-	ret = pwrseq_power_on(ar_snoc->pwrseq);
++	ret = pwrseq_vote_on(ar_snoc->pwrseq);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -1042,7 +1042,7 @@ static int ath10k_hw_power_on(struct ath10k *ar)
+ vreg_off:
+ 	regulator_bulk_disable(ar_snoc->num_vregs, ar_snoc->vregs);
+ pwrseq_off:
+-	pwrseq_power_off(ar_snoc->pwrseq);
++	pwrseq_vote_off(ar_snoc->pwrseq);
+ 
+ 	return ret;
+ }
+@@ -1060,7 +1060,7 @@ static int ath10k_hw_power_off(struct ath10k *ar)
+ 	ret_vreg = regulator_bulk_disable(ar_snoc->num_vregs, ar_snoc->vregs);
+ 
+ 	if (ar_snoc->pwrseq)
+-		ret_seq = pwrseq_power_off(ar_snoc->pwrseq);
++		ret_seq = pwrseq_vote_off(ar_snoc->pwrseq);
+ 
+ 	return ret_vreg ? : ret_seq;
+ }
+diff --git a/drivers/pci/pwrctrl/generic.c b/drivers/pci/pwrctrl/generic.c
+index a7e599d841e6289db161b19a93ba5a61d9e0ab1c..8872f6501352d7273a9b4f20589c2f74d6accc65 100644
+--- a/drivers/pci/pwrctrl/generic.c
++++ b/drivers/pci/pwrctrl/generic.c
+@@ -29,7 +29,7 @@ static int slot_pwrctrl_power_on(struct pci_pwrctrl *pwrctrl)
+ 	int ret;
+ 
+ 	if (slot->pwrseq) {
+-		pwrseq_power_on(slot->pwrseq);
++		pwrseq_vote_on(slot->pwrseq);
+ 		return 0;
+ 	}
+ 
+@@ -48,7 +48,7 @@ static int slot_pwrctrl_power_off(struct pci_pwrctrl *pwrctrl)
+ 						struct slot_pwrctrl, pwrctrl);
+ 
+ 	if (slot->pwrseq) {
+-		pwrseq_power_off(slot->pwrseq);
++		pwrseq_vote_off(slot->pwrseq);
+ 		return 0;
+ 	}
+ 
+diff --git a/drivers/pci/pwrctrl/pci-pwrctrl-pwrseq.c b/drivers/pci/pwrctrl/pci-pwrctrl-pwrseq.c
+index a308bf4b5fc01d23b75db4cd396201c3ba3fe695..86822f0f645eb757455f575000f81122bce82e60 100644
+--- a/drivers/pci/pwrctrl/pci-pwrctrl-pwrseq.c
++++ b/drivers/pci/pwrctrl/pci-pwrctrl-pwrseq.c
+@@ -56,7 +56,7 @@ static int pwrseq_pwrctrl_power_on(struct pci_pwrctrl *pwrctrl)
+ 	struct pwrseq_pwrctrl *pwrseq = container_of(pwrctrl,
+ 					   struct pwrseq_pwrctrl, pwrctrl);
+ 
+-	return pwrseq_power_on(pwrseq->pwrseq);
++	return pwrseq_vote_on(pwrseq->pwrseq);
+ }
+ 
+ static int pwrseq_pwrctrl_power_off(struct pci_pwrctrl *pwrctrl)
+@@ -64,7 +64,7 @@ static int pwrseq_pwrctrl_power_off(struct pci_pwrctrl *pwrctrl)
+ 	struct pwrseq_pwrctrl *pwrseq = container_of(pwrctrl,
+ 					   struct pwrseq_pwrctrl, pwrctrl);
+ 
+-	return pwrseq_power_off(pwrseq->pwrseq);
++	return pwrseq_vote_off(pwrseq->pwrseq);
+ }
+ 
+ static int pwrseq_pwrctrl_probe(struct platform_device *pdev)
+diff --git a/drivers/power/sequencing/core.c b/drivers/power/sequencing/core.c
+index 02f42da915985339d3de507fc36dd158b0035a99..c630b14f6f2c478f05e4b2893b386aab0cddaaf5 100644
+--- a/drivers/power/sequencing/core.c
++++ b/drivers/power/sequencing/core.c
+@@ -708,7 +708,7 @@ void pwrseq_put(struct pwrseq_desc *desc)
+ 	pwrseq = desc->pwrseq;
+ 
+ 	if (desc->powered_on)
+-		pwrseq_power_off(desc);
++		pwrseq_vote_off(desc);
+ 
+ 	kfree(desc);
+ 	module_put(pwrseq->owner);
+@@ -874,7 +874,7 @@ static int pwrseq_unit_disable(struct pwrseq_device *pwrseq,
+ }
+ 
+ /**
+- * pwrseq_power_on() - Issue a power-on request on behalf of the consumer
++ * pwrseq_vote_on() - Issue a power-on request on behalf of the consumer
+  *                     device.
+  * @desc: Descriptor referencing the power sequencer.
+  *
+@@ -887,7 +887,7 @@ static int pwrseq_unit_disable(struct pwrseq_device *pwrseq,
+  * Returns:
+  * 0 on success, negative error number on failure.
+  */
+-int pwrseq_power_on(struct pwrseq_desc *desc)
++int pwrseq_vote_on(struct pwrseq_desc *desc)
+ {
+ 	struct pwrseq_device *pwrseq;
+ 	struct pwrseq_target *target;
+@@ -925,14 +925,14 @@ int pwrseq_power_on(struct pwrseq_desc *desc)
+ 
+ 	return ret;
+ }
+-EXPORT_SYMBOL_GPL(pwrseq_power_on);
++EXPORT_SYMBOL_GPL(pwrseq_vote_on);
+ 
+ /**
+- * pwrseq_power_off() - Issue a power-off request on behalf of the consumer
++ * pwrseq_vote_off() - Issue a power-off request on behalf of the consumer
+  *                      device.
+  * @desc: Descriptor referencing the power sequencer.
+  *
+- * This undoes the effects of pwrseq_power_on(). It issues a power-off request
++ * This undoes the effects of pwrseq_vote_on(). It issues a power-off request
+  * on behalf of the consumer and when the last remaining user does so, the
+  * power-down sequence will be started. If one is in progress, the function
+  * will block until it's complete and then return.
+@@ -940,7 +940,7 @@ EXPORT_SYMBOL_GPL(pwrseq_power_on);
+  * Returns:
+  * 0 on success, negative error number on failure.
+  */
+-int pwrseq_power_off(struct pwrseq_desc *desc)
++int pwrseq_vote_off(struct pwrseq_desc *desc)
+ {
+ 	struct pwrseq_device *pwrseq;
+ 	struct pwrseq_unit *unit;
+@@ -966,7 +966,7 @@ int pwrseq_power_off(struct pwrseq_desc *desc)
+ 
+ 	return ret;
+ }
+-EXPORT_SYMBOL_GPL(pwrseq_power_off);
++EXPORT_SYMBOL_GPL(pwrseq_vote_off);
+ 
+ /**
+  * pwrseq_to_device() - Get the pwrseq device pointer from a descriptor.
+diff --git a/include/linux/pwrseq/consumer.h b/include/linux/pwrseq/consumer.h
+index 3c907c9e1885dc2958043a9a733fbe20bdf95f6e..e4d2cb321354f0cb7e1d1d72e6b5a96b94129da3 100644
+--- a/include/linux/pwrseq/consumer.h
++++ b/include/linux/pwrseq/consumer.h
+@@ -20,8 +20,8 @@ void pwrseq_put(struct pwrseq_desc *desc);
+ struct pwrseq_desc * __must_check
+ devm_pwrseq_get(struct device *dev, const char *target);
+ 
+-int pwrseq_power_on(struct pwrseq_desc *desc);
+-int pwrseq_power_off(struct pwrseq_desc *desc);
++int pwrseq_vote_on(struct pwrseq_desc *desc);
++int pwrseq_vote_off(struct pwrseq_desc *desc);
+ 
+ struct device *pwrseq_to_device(struct pwrseq_desc *desc);
+ 
+@@ -43,12 +43,12 @@ devm_pwrseq_get(struct device *dev, const char *target)
+ 	return ERR_PTR(-ENOSYS);
+ }
+ 
+-static inline int pwrseq_power_on(struct pwrseq_desc *desc)
++static inline int pwrseq_vote_on(struct pwrseq_desc *desc)
+ {
+ 	return -ENOSYS;
+ }
+ 
+-static inline int pwrseq_power_off(struct pwrseq_desc *desc)
++static inline int pwrseq_vote_off(struct pwrseq_desc *desc)
+ {
+ 	return -ENOSYS;
+ }
+
+---
+base-commit: c5e32e86ca02b003f86e095d379b38148999293d
+change-id: 20260727-pwrseq-vote-rename-b7cd21032668
+
+Best regards,
+-- 
+Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 
