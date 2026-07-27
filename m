@@ -1,85 +1,34 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7B233F7A87
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 09:57:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 21C2A3F23C9;
+	Mon, 27 Jul 2026 09:59:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785146278; cv=none; b=sLnkSYnApSxnS0hZUDkvYB1XjYDx24iygY2ZmwH3MsXN9rqeWz+OoatNYDNt3LLpNql/NK+hva1120Ikf+pZE02dRBp6EG1O/GsNJeHWdWQRFVK5pg5Qb11X3N0xwaXqaYjI4GH7UNckRfO/00a8yAP/qwTTlMtoYPJZxS9qg5E=
+	t=1785146386; cv=none; b=bHqDMDHbolIaI7u9rOr29Djbtt3qePR9eN5bARrof4/QsFWr4YH9dk0ObVOwX+ERKRimDmelfGzLqhQlAOAvq6QSbgzZVub6pzDsg+nIoBN0GaFAQG/taOxNeX08xdQPAvL4jd6UyXUrWZHiSKPewjkqTE/P946ab+sY3avNFtY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785146278; c=relaxed/simple;
-	bh=G7OuZnFzXRxi+fDAYiRyDUKp+x0C6VA6eN1JvMlufl4=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Z/GV7Izmi/mVx+/cddoJ4RZyURCyVEyRP+tOssMmhbrZYZcZenCxwiA0y0BbC/2fkGkBlddH9a2A4+D/c0FN0OdB/TYvctq0W23//UGHD6OcfDXINRVq2ynM8iObMnlx0ZlRj7ZTiDbcjVaDwCU6dPXvTRJYY8OSzObGS4hM1mY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=I5+4aNDG; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SLQPlQ+3; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785146386; c=relaxed/simple;
+	bh=bfyacnrkO+Us/h0qrnmz0o/JfoZswPjdZs21jlnlp+Y=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=a1i1Rxcy76+QawOC++KcxFCYPu9CPmVcA7VxcDUNWJ4zYpW9uqjaWd6Rv8ENdiKIWIH8sprZOl6E32yF4FaIaJQr1R+F0H+eNCri0hhgc9RWDnLnM3mwjkYCZaeQttyERqBdF2OAK5PUTdAZQyPtx0/EI0yjSGNMMG9lw5IOEak=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lcNW6ROT; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="I5+4aNDG";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SLQPlQ+3"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66R9WvJv278826
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 09:57:55 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=cTfkRuh1qMz6daNEBghoLo
-	xTzu0WE8KxCU7LeuEabmM=; b=I5+4aNDG3QRbCXqL80MbnJjywj9Jrnz1zXpdSc
-	hyfxnrWHR1+9c2Rxgw5uEjAd9NRO05v9bEC9r7Z17VXOZVMtMYF/UTH4ojUomfV5
-	bJ4qnItwyxJRV4esxyRIcgT8FCB9cMVQ9jLmDES0h5esalX8Bn78TiQpWfcTaUV9
-	4qFU80/l3uB9t13YBGGhjD/O58PEHe5JC0rCL1TXfkaVMijFd23eC5ZIl9QvrWsj
-	pML/9uZya91IPI/TP9WVZNe+jakXNHXpJq02aV0iuGzUv4/84qVW5BvT/K0xY/Mw
-	q8Wt2mqJxKrryqWC73ZeaKckmIIqi8GgjdeUs1pCnTkIy4NA==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fny9whd5u-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 09:57:55 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c0408254aso56177611cf.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 02:57:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785146274; x=1785751074; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=cTfkRuh1qMz6daNEBghoLoxTzu0WE8KxCU7LeuEabmM=;
-        b=SLQPlQ+3zwpQS5a6eIrLxfC2pJ7AFOd7yiYJRjKzz9GLvIBaqjLdrKej136AyD39Ag
-         cRn+drgHpl0J60pBKGYIZMvaD/VcDKcg35GymRl3aNmiA1lKF+OfJ3iO391vd5sqZUV8
-         mrY5YUCXww1okohwukGpS1z74wcXtVAnbdRZMJjE8jm/Ulo5+JIueU1DO9gH4MbDiP3F
-         wWWQiUbWQh+o/oh59iexLGY615+SPWPMDaUdSm3RwzOZv/ByfkXQJZqYYAR9rN0mh4IQ
-         EyEL2Ow9QpvuKDhimXaLx5Tjk3t9JcaR+WPaa3y7mDtoTXO8FoxSMSiwMfcniUlo4Xwo
-         G+pw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785146274; x=1785751074;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=cTfkRuh1qMz6daNEBghoLoxTzu0WE8KxCU7LeuEabmM=;
-        b=LQy4CYHfv2IemM1pP9YiX14jAePsHrikGv4DyfWBxyADbmBU6G13iaA0vBObSOT/HP
-         ls95OMLBRYm1+/82Lsi7sDMOE41Wova9QVuPkgP1XDVW+z8nLQliKspyUCmlePYJJma5
-         kKVbW+8k7fkxx3lrBF5IVvuZA6hkaGJJ/xu6pDqZnTMkGswJqs4rs/frtOFttseFmXex
-         njROMs9bXZJFoaZTPnseGeLS67suDG6ct5FHKwhaeTZJOu415IGR2fs46iIfNoOLsFAO
-         seNomsj7cd+eAQq8HRmxxVrbgevMcAs7cI4HxOUzRNQXOZcXFSHGP9OSU35wVXLXJ9St
-         G50A==
-X-Forwarded-Encrypted: i=1; AHgh+Rp+d8IkCJz0mSxdk9Uc2mt3FKv1vzWKnovkd7Sbtfct8pvGki82yXKMRRaOPH6/BjcDlQ9/TjAmF3Iv8Rke@vger.kernel.org
-X-Gm-Message-State: AOJu0YyzHsX0d/lrjeFVTxtPRkENmaNA3DLZqaFieYC4LSrpL8fCn+wj
-	I/4WrOc9P6weeffAWcZOxg13mKUX3A4y9m2yLv8Ys+i+zl4li9ho3E2PXCnmpm+OsNikquwesEv
-	q5dHb0g02/C5uFyOzchewlipBgQP/YCl72Bs0ejAClyOshcroevg7yZVfaan5KgvKmIu0
-X-Gm-Gg: AR+sD13WVbtTb9cZ4dRZWsLc1A6dT/Utlk/mgq2Z8Ev62cXgA5ctI997nAmSrIpu07k
-	WUj659vEFvQYAQN5V5SAOcwkux2Ry+dJzx6tjHTFjttWAjKHMyOe+XqOGeF73zrFKiOP3MxI0Qj
-	zaJs26zgcSp+zyolJ9ahJTq14HOiaZrexejpNs4XzkjAKmYvOoF/MqanEOtnpawzXDxR8MxDFbH
-	xe9o/1sT6Gn3PA/po26sIeAeU1JRvkWa4znQX88UrUWKHlICXFCipNCLm92IuH7QU6jwo5EEm/2
-	ukANH6tRwU8y0ji9w9xPggYl1diDjkSD0uq4s1E5+j/YJlqcxriix33tgZU0Q2nMO6LqKHvdBwQ
-	qy/jJh8+IZl+Sidz2vJdjwO9TgC3H
-X-Received: by 2002:ac8:6f11:0:b0:528:ce0:e9f8 with SMTP id d75a77b69052e-5295d270a04mr106677751cf.3.1785146273877;
-        Mon, 27 Jul 2026 02:57:53 -0700 (PDT)
-X-Received: by 2002:ac8:6f11:0:b0:528:ce0:e9f8 with SMTP id d75a77b69052e-5295d270a04mr106677341cf.3.1785146273405;
-        Mon, 27 Jul 2026 02:57:53 -0700 (PDT)
-Received: from brgl-qcom.local ([2a01:cb1d:dc:7e00:1449:2d40:6dd2:20d])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1c32f19c4csm611477266b.63.2026.07.27.02.57.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Jul 2026 02:57:52 -0700 (PDT)
-From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Date: Mon, 27 Jul 2026 11:57:38 +0200
-Subject: [PATCH RFC] power: sequencing: rename pwrseq_power_on/off() to
- pwrseq_vote_on/off()
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lcNW6ROT"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83ACC1F000E9;
+	Mon, 27 Jul 2026 09:59:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785146384;
+	bh=exTJjX1MTtXFRxLb8sndeHN2JbCf3AH5l7nquElVlL8=;
+	h=From:Subject:Date:To:Cc;
+	b=lcNW6ROTK+ND9VfZpHkWL370jZ20wMWa3DG7NFUyvmM7rDLaHFcaAelprqbzyH2Zq
+	 /wxYaMLPrCeBGEnrj4w0VTE5C+o9GDE0kG/qBfN49z+Fpf5+9sC7EtQgo+T71W2Pju
+	 TUYVA7QqbXaZMOUYy5La4pX/ZC2RVklYdFKc4HJi8+J4oPv0kBWFFyA7QovkSsAE2B
+	 twxWbI3jY1F7mllX9Z8Wj6PfKHB4YX3o7o2uAZEdj83S1p1dWQlpv2WgdYH+HB8T5y
+	 r4kpTAOQph6UZG4o0/jIJvjCAC04DZj1YzOujSkf6Em2xhCFpgmm4YkUhs//9X4aJS
+	 2M/VPpHk0y9SA==
+From: Konrad Dybcio <konradybcio@kernel.org>
+Subject: [PATCH v5 0/3] Retrieve information about DDR from SMEM
+Date: Mon, 27 Jul 2026 11:59:26 +0200
+Message-Id: <20260727-topic-smem_dramc-v5-0-66188b3e338d@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,358 +37,154 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260727-pwrseq-vote-rename-v1-1-a2029aeeac65@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAJErZ2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDcyNz3YLyouLUQt2y/JJU3aLUvMTcVN0k8+QUI0MDYyMzMwsloMaCotS
- 0zAqwodFKQW7OSrG1tQCp4jesaQAAAA==
-X-Change-ID: 20260727-pwrseq-vote-rename-b7cd21032668
-To: Bartosz Golaszewski <brgl@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Marcel Holtmann <marcel@holtmann.org>,
-        Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
-        Alessio Belle <alessio.belle@imgtec.com>,
-        Luigi Santivetti <luigi.santivetti@imgtec.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Jeff Johnson <jjohnson@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Bjorn Helgaas <bhelgaas@google.com>, Chen-Yu Tsai <wens@kernel.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: linux-pm@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-bluetooth@vger.kernel.org, imagination@lists.freedesktop.org,
-        dri-devel@lists.freedesktop.org, linux-wireless@vger.kernel.org,
-        ath10k@lists.infradead.org, linux-pci@vger.kernel.org,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=11233;
- i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
- bh=G7OuZnFzXRxi+fDAYiRyDUKp+x0C6VA6eN1JvMlufl4=;
- b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBqZyua6+kj7mv/zzmBMIis+gdWuocontWnq+eD+
- vv740HUnhyJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCamcrmgAKCRAFnS7L/zaE
- w9XLD/9fSN/wxCKeUPmwVIqjM6yzfNVAPIBYsenBC17Ef51V+D542ya4dKvWfOck0ahoGK8h1ES
- fCsIdb6yUiLOXdXE1N7WtKH/bmHWrKnmXrgpH3j8J9YwApddS/jwfnAr7KSwTchMurvib/KFXyi
- P970euD779qbQdjTUm//egbj70HYVr12XoKea/M6suEWXE2hbdsed+qgibBXGSuCYkSMRKBcGHp
- xri0RBKzDEDXkyIU2Yax1X+KsDClbCCOP+uvsrUsFDmvL+iG5VDV81txFmfJyU9Ywb7yXJMabgn
- 9InJCDQjwFOf8N9p3g/gMRm+9KQxRAE4rgDYNjQck4b3ktI0dDbumeOi+y57YdDp/F+0KgErSoi
- /SEq/slk2oqnBZmzIZcFUAFRHG1tb1SU2aMFLnGl21eN+DQSDhnVGR/wh/i29p24hgZ7Ph+d3El
- Ty31M0gixh7rEQEZd7g15mOvTdvKan0cojXEvOjGCORFuVzEgu8Y0dJ/okF0nUifFkROr+oPoi7
- kGMN7iRtpUrzssjjW8+cD31Nj2fGuaa4o4Mu4t3h6qMp964o+6MOtZd5QKRmEUj6ymhsaD9v57E
- 9VHzB97Yy25qtF/aV4dnpAJM9GU4gy/ZARWp189Jad+AaYMrA746ewg1ONLdSFrLwQFyL6r49+h
- s2Mplu1/U1vA/Lg==
-X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
- fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI3MDA5NyBTYWx0ZWRfX1sE8vuRR4YNb
- Fe/LrZxA7+Dvf6eBQOmv3kjtsWaHKtUxfGQOIs24EKckaajy6xkiaW+bZg0LxeH4nQigslWnOnK
- 96kSlxIjFubIw46aCX7ir4alZzSPiT9j3+i/3KYhJd+/angbiQpMa7heFgH6hGjvUjxCVZQyd1O
- fm9pPhquNBOuwVBXU8VPPSQ6pYMHThCnWIcBsa6KKeJKDct1B/8CgfJLqMOfK1dHDYHSPz3118J
- wehtEK97mhBC+5cF5Elzwx/80A0sI68X0dnvihCL0ombMj7D7mLzWK28J2EygnrgYpfoKFoTZvr
- LBv7STKmp8KKoFb2b+XI3TnJtnFCSvvBPjdJifqk9IZA6yY4Qf2ZphSvJaJg3Neyj75mKmMD2LI
- eNd9fTgTz/YtqYYnJccXzTBXbNySZt2hz/e0golt9dIk131h2uNrCY5n51BRaWmjQktPGwtUgn4
- K3+siiJoL78gB3rheYg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI3MDA5NyBTYWx0ZWRfXwvbQmpegz41W
- im2DVY4ZBCvWp6F/LmuM4MySi7tg5SlGl1rz6PE72xcL3E4hTY7UpM4kOiXkw5O9jEGjIddLz27
- Xeya6vlwc72kwDawll38ZT/VM6QuQfg=
-X-Proofpoint-ORIG-GUID: fcHiefn0VwaNuHtnjqTyuZqgP5E1Z0c_
-X-Authority-Analysis: v=2.4 cv=E4b9Y6dl c=1 sm=1 tr=0 ts=6a672ba3 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=VwQbUJbxAAAA:8
- a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=BH6fHGR_65QtqvMn8p4A:9 a=QEXdDO2ut3YA:10
- a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-GUID: fcHiefn0VwaNuHtnjqTyuZqgP5E1Z0c_
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-27_02,2026-07-24_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 clxscore=1015 priorityscore=1501 impostorscore=0 bulkscore=0
- lowpriorityscore=0 adultscore=0 suspectscore=0 malwarescore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607270097
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33P3WoCMRAF4FeRXDcyk5389arvUaTEJFsDjbGJL
+ hXZdzcK0l6svRk4A+cb5sJarCk29rq6sBqn1FLZ9yBfVszv3P4z8hR6ZgKEBALLj+WQPG855o9
+ QXfZckdJotPNGSdZrhxrH9HMn3zc971I7lnq+X5jwtv0Hm5ADtxQkSB+ktMNbaW39fXJfvuS87
+ oPdzEn8cRAWHNGdEF1AKRRppCfO8HAUIJgFZ+iO2ioKozQOUD9x6NfRAhcc6o4mM1orhDZu6a9
+ 5nq9C3nnAjwEAAA==
+X-Change-ID: 20250409-topic-smem_dramc-6467187ac865
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Kees Cook <kees@kernel.org>, 
+ "Gustavo A. R. Silva" <gustavoars@kernel.org>, 
+ Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
+ Akhil P Oommen <akhilpo@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Alim Akhtar <alim.akhtar@samsung.com>, 
+ Avri Altman <avri.altman@sandisk.com>, Bart Van Assche <bvanassche@acm.org>, 
+ "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, 
+ "Martin K. Petersen" <martin.petersen@oracle.com>, 
+ Matthias Brugger <matthias.bgg@gmail.com>, 
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+ Suzuki K Poulose <suzuki.poulose@arm.com>, Mike Leach <mike.leach@arm.com>, 
+ James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>, 
+ Mao Jinlong <jinlong.mao@oss.qualcomm.com>, 
+ Jie Gan <jie.gan@oss.qualcomm.com>, Paul Walmsley <pjw@kernel.org>, 
+ Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
+ Alexandre Ghiti <alex@ghiti.fr>
+Cc: linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-hardening@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ freedreno@lists.freedesktop.org, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, linux-scsi@vger.kernel.org, 
+ linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, 
+ coresight@lists.linaro.org, devicetree@vger.kernel.org, 
+ linux-riscv@lists.infradead.org
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785146373; l=4321;
+ i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
+ bh=bfyacnrkO+Us/h0qrnmz0o/JfoZswPjdZs21jlnlp+Y=;
+ b=k0ce6jaZZ8+A1zymxLM1fkILonljjaOOQpJjx9iMqEa84quikNZcCUTZnSqY7YUc35G18R9Ul
+ rUGS99vmJ1kCFSedj9A21OsZDVxS3Wk1t3CmaUkFdxEIA3/qn0w7QU6
+X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
+ pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
 
-The way power sequencing works means that a call to pwrseq_power_on()
-does not necessarily result in the pwrseq target being powered-on at
-that time: it may have already been powered on before. Similarly: a call
-to pwrseq_power_off() does not have to result in an actual powering off
-of resources: there may still be other users that requested a power-on
-before.
+SMEM allows the OS to retrieve information about the DDR memory.
+Among that information, is a semi-magic value called 'HBB', or Highest
+Bank address Bit, which multimedia drivers (for hardware like Adreno
+and MDSS) must retrieve in order to program the IP blocks correctly.
 
-We will also introduce the concept of "non-controllable" pwrseq targets
-soon which further increases the disconnect between the naming
-convention and the actual semantics.
+This series introduces an API to retrieve that value, uses it in the
+aforementioned programming sequences and exposes available DDR
+frequencies in debugfs (to e.g. pass to aoss_qmp debugfs). More
+information can be exposed in the future, as needed.
 
-What consumers of pwrseq descriptors actually do is: they *vote* for a
-powering on of a given target or retract that vote. These operations
-could be called get/put in line with runtime PM but this could become
-confusing since we already provide pwrseq_get/put() for a different
-purpose.
-
-Change the name of the two functions to pwrseq_vote_on/off() which
-better reflects their purpose and semantics. No functional change
-intended.
-
-If at any point users need to know *when* the exact power event happens,
-we can provide that information in the form of a notifier.
-
-Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 ---
-I've floated the idea to rename the two pwrseq functions from "power
-on/off" to "vote on/off". Here's a concrete proposal.
+Changes in v5:
+- Parse DRAM data before publishing __smem
+- Add trivial patch 1 converting 'unsigned' to 'unsigned int' to make
+  checkpatch happy
+- Link to v4: https://patch.msgid.link/20260721-topic-smem_dramc-v4-0-748f992278a3@oss.qualcomm.com
 
-I'm sending it as an RFC but if there's agreement, I can queue it as is.
+Changes in v4:
+- Rebase on top of Dmitry's cleanups to ubwc_config
+- Mark and consume the shared data as little-endian
+- Fix compiler optimizing out what it thinks is impossible (odd
+  v3_14freq case)
+- Rework qcom_ubwc_config_get_data() per discussion to not alter
+  hardcoded data
+- Remove some unnecessary comments and assignments
+- Return -ENODATA instead of -EINVAL for out-of-sensible-range HBB
+- Cosmetic/line wrapping fixups
+- Drop applied drm/msm patch
+- Link to v3: https://lore.kernel.org/r/20260108-topic-smem_dramc-v3-0-6b64df58a017@oss.qualcomm.com
 
-I'm doing it in a single commit that should go through the pwrseq tree
-with Acks from subsystem maintainers.
+Changes in v3:
+- Support v6 and v7 DDRInfo (v7 is used on e.g. Hamoa)
+- Handle rare cases of DDRInfo v5 with additional trailing data
+- Rebase/adjust to SSoT UBWC
+- Expose hbb value in debugfs
+- cosmetic changes
+- Link to v2: https://lore.kernel.org/r/20250410-topic-smem_dramc-v2-0-dead15264714@oss.qualcomm.com
 
-[1] https://lore.kernel.org/all/CAMRc=Mefxn81d0VUwmQgwFtffkL1=Er_1VQZCbC1Sa-Qph4t1w@mail.gmail.com/
+Changes in v2:
+- Avoid checking for < 0 on unsigned types
+- Overwrite Adreno UBWC data to keep the data shared with userspace
+  coherent with what's programmed into the hardware
+- Call get_hbb() in msm_mdss_enable() instead of all UBWC setup
+  branches separately
+- Pick up Bjorn's rb on patch 1
+- Link to v1: https://lore.kernel.org/r/20250409-topic-smem_dramc-v1-0-94d505cd5593@oss.qualcomm.com
+
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+To: Kees Cook <kees@kernel.org>
+To: "Gustavo A. R. Silva" <gustavoars@kernel.org>
+To: Alim Akhtar <alim.akhtar@samsung.com>
+To: Avri Altman <avri.altman@sandisk.com>
+To: Bart Van Assche <bvanassche@acm.org>
+To: "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>
+To: "Martin K. Petersen" <martin.petersen@oracle.com>
+To: Matthias Brugger <matthias.bgg@gmail.com>
+To: AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>
+To: Suzuki K Poulose <suzuki.poulose@arm.com>
+To: Mike Leach <mike.leach@arm.com>
+To: James Clark <james.clark@linaro.org>
+To: Leo Yan <leo.yan@arm.com>
+To: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>
+To: Conor Dooley <conor+dt@kernel.org>
+To: Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>
+To: Mao Jinlong <jinlong.mao@oss.qualcomm.com>
+To: Jie Gan <jie.gan@oss.qualcomm.com>
+To: Paul Walmsley <pjw@kernel.org>
+To: Palmer Dabbelt <palmer@dabbelt.com>
+To: Albert Ou <aou@eecs.berkeley.edu>
+To: Alexandre Ghiti <alex@ghiti.fr>
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org
+Cc: linux-hardening@vger.kernel.org
+Cc: linux-scsi@vger.kernel.org
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: linux-mediatek@lists.infradead.org
+Cc: coresight@lists.linaro.org
+Cc: devicetree@vger.kernel.org
+Cc: linux-riscv@lists.infradead.org
+
 ---
- Documentation/driver-api/pwrseq.rst      |  4 ++--
- drivers/bluetooth/hci_qca.c              |  4 ++--
- drivers/gpu/drm/imagination/pvr_power.c  |  4 ++--
- drivers/net/wireless/ath/ath10k/snoc.c   |  6 +++---
- drivers/pci/pwrctrl/generic.c            |  4 ++--
- drivers/pci/pwrctrl/pci-pwrctrl-pwrseq.c |  4 ++--
- drivers/power/sequencing/core.c          | 16 ++++++++--------
- include/linux/pwrseq/consumer.h          |  8 ++++----
- 8 files changed, 25 insertions(+), 25 deletions(-)
+Konrad Dybcio (3):
+      soc: qcom: smem: Use 'unsigned int' instead of 'unsigned'
+      soc: qcom: smem: Expose DDR data from SMEM
+      soc: qcom: ubwc: Get HBB from SMEM
 
-diff --git a/Documentation/driver-api/pwrseq.rst b/Documentation/driver-api/pwrseq.rst
-index ad18b2326b689a41471216f3889480b11768ca82..faba5a8e3337e878c6dac0cc91d23b3577cab6fd 100644
---- a/Documentation/driver-api/pwrseq.rst
-+++ b/Documentation/driver-api/pwrseq.rst
-@@ -50,9 +50,9 @@ Consumer interface
- The consumer API is aimed to be as simple as possible. The driver interested in
- getting a descriptor from the power sequencer should call pwrseq_get() and
- specify the name of the target it wants to reach in the sequence after calling
--pwrseq_power_up(). The descriptor can be released by calling pwrseq_put() and
-+pwrseq_vote_on(). The descriptor can be released by calling pwrseq_put() and
- the consumer can request the powering down of its target with
--pwrseq_power_off(). Note that there is no guarantee that pwrseq_power_off()
-+pwrseq_vote_off(). Note that there is no guarantee that pwrseq_vote_off()
- will have any effect as there may be multiple users of the underlying resources
- who may keep them active.
- 
-diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
-index e6d107f67759f54eee2647d92bb8bfd4e68c9358..5aaabc9fb1b66eb6b24da25f77158690a2f03c84 100644
---- a/drivers/bluetooth/hci_qca.c
-+++ b/drivers/bluetooth/hci_qca.c
-@@ -2259,7 +2259,7 @@ static void qca_power_off(struct hci_uart *hu)
- 	}
- 
- 	if (power && power->pwrseq) {
--		pwrseq_power_off(power->pwrseq);
-+		pwrseq_vote_off(power->pwrseq);
- 		set_bit(QCA_BT_OFF, &qca->flags);
- 		return;
-         }
-@@ -2319,7 +2319,7 @@ static int qca_regulator_enable(struct qca_serdev *qcadev)
- 	int ret;
- 
- 	if (power->pwrseq)
--		return pwrseq_power_on(power->pwrseq);
-+		return pwrseq_vote_on(power->pwrseq);
- 
- 	/* Already enabled */
- 	if (power->vregs_on)
-diff --git a/drivers/gpu/drm/imagination/pvr_power.c b/drivers/gpu/drm/imagination/pvr_power.c
-index a71d5b35601e7b996428312028a4c0542a5b1350..c6dfa2685ee64086c53281d06563e6169109c00f 100644
---- a/drivers/gpu/drm/imagination/pvr_power.c
-+++ b/drivers/gpu/drm/imagination/pvr_power.c
-@@ -352,12 +352,12 @@ static int pvr_power_init_pwrseq(struct pvr_device *pvr_dev)
- 
- static int pvr_power_on_sequence_pwrseq(struct pvr_device *pvr_dev)
- {
--	return pwrseq_power_on(pvr_dev->pwrseq);
-+	return pwrseq_vote_on(pvr_dev->pwrseq);
- }
- 
- static int pvr_power_off_sequence_pwrseq(struct pvr_device *pvr_dev)
- {
--	return pwrseq_power_off(pvr_dev->pwrseq);
-+	return pwrseq_vote_off(pvr_dev->pwrseq);
- }
- 
- const struct pvr_power_sequence_ops pvr_power_sequence_ops_pwrseq = {
-diff --git a/drivers/net/wireless/ath/ath10k/snoc.c b/drivers/net/wireless/ath/ath10k/snoc.c
-index 3106502275781d32d17a45a661362206144df6b3..f87e56576e29124902dccd1a21600fd3407b2922 100644
---- a/drivers/net/wireless/ath/ath10k/snoc.c
-+++ b/drivers/net/wireless/ath/ath10k/snoc.c
-@@ -1025,7 +1025,7 @@ static int ath10k_hw_power_on(struct ath10k *ar)
- 
- 	ath10k_dbg(ar, ATH10K_DBG_SNOC, "soc power on\n");
- 
--	ret = pwrseq_power_on(ar_snoc->pwrseq);
-+	ret = pwrseq_vote_on(ar_snoc->pwrseq);
- 	if (ret)
- 		return ret;
- 
-@@ -1042,7 +1042,7 @@ static int ath10k_hw_power_on(struct ath10k *ar)
- vreg_off:
- 	regulator_bulk_disable(ar_snoc->num_vregs, ar_snoc->vregs);
- pwrseq_off:
--	pwrseq_power_off(ar_snoc->pwrseq);
-+	pwrseq_vote_off(ar_snoc->pwrseq);
- 
- 	return ret;
- }
-@@ -1060,7 +1060,7 @@ static int ath10k_hw_power_off(struct ath10k *ar)
- 	ret_vreg = regulator_bulk_disable(ar_snoc->num_vregs, ar_snoc->vregs);
- 
- 	if (ar_snoc->pwrseq)
--		ret_seq = pwrseq_power_off(ar_snoc->pwrseq);
-+		ret_seq = pwrseq_vote_off(ar_snoc->pwrseq);
- 
- 	return ret_vreg ? : ret_seq;
- }
-diff --git a/drivers/pci/pwrctrl/generic.c b/drivers/pci/pwrctrl/generic.c
-index a7e599d841e6289db161b19a93ba5a61d9e0ab1c..8872f6501352d7273a9b4f20589c2f74d6accc65 100644
---- a/drivers/pci/pwrctrl/generic.c
-+++ b/drivers/pci/pwrctrl/generic.c
-@@ -29,7 +29,7 @@ static int slot_pwrctrl_power_on(struct pci_pwrctrl *pwrctrl)
- 	int ret;
- 
- 	if (slot->pwrseq) {
--		pwrseq_power_on(slot->pwrseq);
-+		pwrseq_vote_on(slot->pwrseq);
- 		return 0;
- 	}
- 
-@@ -48,7 +48,7 @@ static int slot_pwrctrl_power_off(struct pci_pwrctrl *pwrctrl)
- 						struct slot_pwrctrl, pwrctrl);
- 
- 	if (slot->pwrseq) {
--		pwrseq_power_off(slot->pwrseq);
-+		pwrseq_vote_off(slot->pwrseq);
- 		return 0;
- 	}
- 
-diff --git a/drivers/pci/pwrctrl/pci-pwrctrl-pwrseq.c b/drivers/pci/pwrctrl/pci-pwrctrl-pwrseq.c
-index a308bf4b5fc01d23b75db4cd396201c3ba3fe695..86822f0f645eb757455f575000f81122bce82e60 100644
---- a/drivers/pci/pwrctrl/pci-pwrctrl-pwrseq.c
-+++ b/drivers/pci/pwrctrl/pci-pwrctrl-pwrseq.c
-@@ -56,7 +56,7 @@ static int pwrseq_pwrctrl_power_on(struct pci_pwrctrl *pwrctrl)
- 	struct pwrseq_pwrctrl *pwrseq = container_of(pwrctrl,
- 					   struct pwrseq_pwrctrl, pwrctrl);
- 
--	return pwrseq_power_on(pwrseq->pwrseq);
-+	return pwrseq_vote_on(pwrseq->pwrseq);
- }
- 
- static int pwrseq_pwrctrl_power_off(struct pci_pwrctrl *pwrctrl)
-@@ -64,7 +64,7 @@ static int pwrseq_pwrctrl_power_off(struct pci_pwrctrl *pwrctrl)
- 	struct pwrseq_pwrctrl *pwrseq = container_of(pwrctrl,
- 					   struct pwrseq_pwrctrl, pwrctrl);
- 
--	return pwrseq_power_off(pwrseq->pwrseq);
-+	return pwrseq_vote_off(pwrseq->pwrseq);
- }
- 
- static int pwrseq_pwrctrl_probe(struct platform_device *pdev)
-diff --git a/drivers/power/sequencing/core.c b/drivers/power/sequencing/core.c
-index 02f42da915985339d3de507fc36dd158b0035a99..c630b14f6f2c478f05e4b2893b386aab0cddaaf5 100644
---- a/drivers/power/sequencing/core.c
-+++ b/drivers/power/sequencing/core.c
-@@ -708,7 +708,7 @@ void pwrseq_put(struct pwrseq_desc *desc)
- 	pwrseq = desc->pwrseq;
- 
- 	if (desc->powered_on)
--		pwrseq_power_off(desc);
-+		pwrseq_vote_off(desc);
- 
- 	kfree(desc);
- 	module_put(pwrseq->owner);
-@@ -874,7 +874,7 @@ static int pwrseq_unit_disable(struct pwrseq_device *pwrseq,
- }
- 
- /**
-- * pwrseq_power_on() - Issue a power-on request on behalf of the consumer
-+ * pwrseq_vote_on() - Issue a power-on request on behalf of the consumer
-  *                     device.
-  * @desc: Descriptor referencing the power sequencer.
-  *
-@@ -887,7 +887,7 @@ static int pwrseq_unit_disable(struct pwrseq_device *pwrseq,
-  * Returns:
-  * 0 on success, negative error number on failure.
-  */
--int pwrseq_power_on(struct pwrseq_desc *desc)
-+int pwrseq_vote_on(struct pwrseq_desc *desc)
- {
- 	struct pwrseq_device *pwrseq;
- 	struct pwrseq_target *target;
-@@ -925,14 +925,14 @@ int pwrseq_power_on(struct pwrseq_desc *desc)
- 
- 	return ret;
- }
--EXPORT_SYMBOL_GPL(pwrseq_power_on);
-+EXPORT_SYMBOL_GPL(pwrseq_vote_on);
- 
- /**
-- * pwrseq_power_off() - Issue a power-off request on behalf of the consumer
-+ * pwrseq_vote_off() - Issue a power-off request on behalf of the consumer
-  *                      device.
-  * @desc: Descriptor referencing the power sequencer.
-  *
-- * This undoes the effects of pwrseq_power_on(). It issues a power-off request
-+ * This undoes the effects of pwrseq_vote_on(). It issues a power-off request
-  * on behalf of the consumer and when the last remaining user does so, the
-  * power-down sequence will be started. If one is in progress, the function
-  * will block until it's complete and then return.
-@@ -940,7 +940,7 @@ EXPORT_SYMBOL_GPL(pwrseq_power_on);
-  * Returns:
-  * 0 on success, negative error number on failure.
-  */
--int pwrseq_power_off(struct pwrseq_desc *desc)
-+int pwrseq_vote_off(struct pwrseq_desc *desc)
- {
- 	struct pwrseq_device *pwrseq;
- 	struct pwrseq_unit *unit;
-@@ -966,7 +966,7 @@ int pwrseq_power_off(struct pwrseq_desc *desc)
- 
- 	return ret;
- }
--EXPORT_SYMBOL_GPL(pwrseq_power_off);
-+EXPORT_SYMBOL_GPL(pwrseq_vote_off);
- 
- /**
-  * pwrseq_to_device() - Get the pwrseq device pointer from a descriptor.
-diff --git a/include/linux/pwrseq/consumer.h b/include/linux/pwrseq/consumer.h
-index 3c907c9e1885dc2958043a9a733fbe20bdf95f6e..e4d2cb321354f0cb7e1d1d72e6b5a96b94129da3 100644
---- a/include/linux/pwrseq/consumer.h
-+++ b/include/linux/pwrseq/consumer.h
-@@ -20,8 +20,8 @@ void pwrseq_put(struct pwrseq_desc *desc);
- struct pwrseq_desc * __must_check
- devm_pwrseq_get(struct device *dev, const char *target);
- 
--int pwrseq_power_on(struct pwrseq_desc *desc);
--int pwrseq_power_off(struct pwrseq_desc *desc);
-+int pwrseq_vote_on(struct pwrseq_desc *desc);
-+int pwrseq_vote_off(struct pwrseq_desc *desc);
- 
- struct device *pwrseq_to_device(struct pwrseq_desc *desc);
- 
-@@ -43,12 +43,12 @@ devm_pwrseq_get(struct device *dev, const char *target)
- 	return ERR_PTR(-ENOSYS);
- }
- 
--static inline int pwrseq_power_on(struct pwrseq_desc *desc)
-+static inline int pwrseq_vote_on(struct pwrseq_desc *desc)
- {
- 	return -ENOSYS;
- }
- 
--static inline int pwrseq_power_off(struct pwrseq_desc *desc)
-+static inline int pwrseq_vote_off(struct pwrseq_desc *desc)
- {
- 	return -ENOSYS;
- }
-
+ drivers/soc/qcom/Makefile      |   3 +-
+ drivers/soc/qcom/smem.c        |  80 +++++---
+ drivers/soc/qcom/smem.h        |  12 ++
+ drivers/soc/qcom/smem_dramc.c  | 430 +++++++++++++++++++++++++++++++++++++++++
+ drivers/soc/qcom/ubwc_config.c |  40 +++-
+ include/linux/soc/qcom/smem.h  |   2 +
+ 6 files changed, 533 insertions(+), 34 deletions(-)
 ---
 base-commit: c5e32e86ca02b003f86e095d379b38148999293d
-change-id: 20260727-pwrseq-vote-rename-b7cd21032668
+change-id: 20250409-topic-smem_dramc-6467187ac865
 
 Best regards,
--- 
-Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+--  
+Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
