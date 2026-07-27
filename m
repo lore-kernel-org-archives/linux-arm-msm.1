@@ -1,169 +1,251 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1047932ED54;
-	Mon, 27 Jul 2026 10:00:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 735943F660B
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 10:07:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785146421; cv=none; b=aJxKnpgHA4pV9C9GY/izMiunU5Of5BdVDYMXkg4h3u6IGB7QsriGFzT4ImLVjmt3ovTKVUpw8fmGyI9I7ZA5DkpEzp0z7ZWbV9rp6CP0149+C59sk7cIQd5KuC7E9RrDUC5slE+mQuG8h2xeG0RGhIW3OfoQgf7zr/1ZM1V2kQs=
+	t=1785146851; cv=none; b=k30bTyuph6bquEO8tRkK+3TEc/ZLbgPxDp+q4UK1kjJ6unEcYKF2si+PhpFICzdsdAJUuyO33n8rSIlJ1hZzN7iFJHZicBOjO2kjzFVTqz430Z8rPosAJaZl0jwTmGpBslQXeCLAvjRrKE8ljck+6aC4J6Kwv9R6btOksp0jU9A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785146421; c=relaxed/simple;
-	bh=N4BclUrBZuf3nhwGAo9oU+63lvzO6n8jgltahRZuo+s=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=fHCekHjqCbXQuO1k07sDb9bc4JEutGbw68sLMtr3ahHMO+KuoPwklKMRi+3ESnTx1a8TA1AJw1+p8wvtiOizrwm9g4WmhBGDJZLHt63eIxpLgYIn+j6sqHZgk6unZ1KvvsGgo7TjWg3eao8euIZvTjbxgISoz5mfiMGpB+BHzmU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=hyZlBvQQ; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785146851; c=relaxed/simple;
+	bh=E15XfPG0XLJ/CQ6hsaGL76B/E+9/n45ilK578TAed5E=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=oZKALTNDrcV027oMkzssc3TNXi7tjouJj9v3okDX2DRaVIoCWwoXtnwJZWJ/z8qkPwYe/c/PUNiSIQ/gEpC1fWa2CHAw22dbTXyhrbMaLFkLVBcT/nzWUrJfP8KuBX/UTk8PbfKM0abLjhFOSFl6EnE8MSHl+eM8kRN8pNDHPH8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=phq/sV4b; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Y0vcZT7E; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="hyZlBvQQ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F04F51F00A3A;
-	Mon, 27 Jul 2026 10:00:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785146419;
-	bh=bZ6CrNt1h3fSjGPvsb+y6S3SjB/kGZ3lPPdIV0Hb5tc=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=hyZlBvQQxrFTEEcBnkYjGrMHV2oEKCcqj17nzQ3w9rEytyTd/4Uuh/7U94dFZ8NOv
-	 mMETzoGTLbT33h7oKR4aOouoRqssgyT/j5gWMsGooHrkqtReHXjdZihJ4zY+ZxEadU
-	 QY+hGzc1eCgAfLe+6pl+ZTtkpCLvBUj5R1NAkWNB1LOufLDBcAHoQYbb/eY7sHl4nw
-	 68bLl5zeM1RqOZOpTB9PnFFapW9X9HU+NO9TMLLSpb5ivt8Q/hg3tML4h8UzG+W0DG
-	 8itu+NKH4d/dDyNxq4M8U2DJHhV9q5b+66wFmXimLYDWJlFpmeGUbOU7FebPbo1oWN
-	 pl2ArAlVh89rw==
-From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Mon, 27 Jul 2026 11:59:29 +0200
-Subject: [PATCH v5 3/3] soc: qcom: ubwc: Get HBB from SMEM
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="phq/sV4b";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Y0vcZT7E"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66R9WsvG3083581
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 10:07:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	S1N2mWIMe9XAYKGa9HXnaqIztknAlWljoYw1v6FDc68=; b=phq/sV4blnifXumr
+	8eBPUZfxbQqSY8HaTuCiy+ruRUfE5p306L0K/W7JZe/+3TBS+jTpDDDGOtHgHQ83
+	y7qk/FqNvdhNrWUV2Vm2OmEJYYhYa3CWP/Akp3hKLD2cqzww75wg3OWrjA+6r4dN
+	n70NxaqUCLTxLUV14KwjOrBAHTinl7P6v+n9UiJRDJVhe9QvmmnUhJZgReh52mfV
+	K2nh3N9UyZawn5al6zx0oOWMpCroUV2jw4suvjVofsxtcG5ls1pPORzm9ZnX814O
+	w8Pl3d82HHchd/i9dUoWi2DGuiRKqv9/uAywnDJAljGtJVicl1A66olwVpBxdUO1
+	ekupzg==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fp2asgvpp-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 10:07:28 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-8fddc6aabd5so4382206d6.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 03:07:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785146848; x=1785751648; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=S1N2mWIMe9XAYKGa9HXnaqIztknAlWljoYw1v6FDc68=;
+        b=Y0vcZT7EC8lwdWwK6SES/IPvVGNTL/IKD8Ee+8xRr03HBeDmnocfvl/M0LCsdM/Tcm
+         W3Ad65xjDAME4LWdezO09u/exX+hHgb25Lxpu4XNbNoaTDj7xsf/a9eAuehgOEQkoxwM
+         Y6C2lY33X02GUG8PDtW3+cQTFT4gTt2U8BTfjvTlU6WIOGE/Jq3ywmbpYVVA8ZA1M+e5
+         e0tXq7wwxyh4Vi04DokJWIYIkvosMaEgPmOBpIf8PjdioeBo1G767Aj6cxbLRkUvZSQa
+         KTnG3p8JGUNBJa2/JKXEhivj9AnejeuvPUmrXdBA0Gd5AYHb84lW9WdCgjlJibuF0P7M
+         v6iw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785146848; x=1785751648;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=S1N2mWIMe9XAYKGa9HXnaqIztknAlWljoYw1v6FDc68=;
+        b=YAscF8hER5w79a7wmuDN6NT4qkxpvedzkNC2hcSqf8c3/I/NWLylEGf6hBE92FnYjG
+         ifTi6K1nMQ/Ef5ZAmzDtjNO4nyACf7FgnCchajCGiY8F879WvzwYa9k4JVYrRlEuhy/B
+         SNVkbbm1MhOmHzJNRf2nT8OMvDejvs7FyPmlj2YVzLnLyX9vxaMGKLluqy3/JycsnbwX
+         gtqKGDkxqwZkNpf3QgxhnTDMReQXYqg3joZ4LVuRUVn6gphG7ngIuSrRVevYwZOrLdST
+         q8gYLzOCVO5LC5lllJcX2bKNn/FufFFCAFjDxb5cJxyrt3nYNHOc2C1pqRBWvmBoWb/y
+         64NA==
+X-Forwarded-Encrypted: i=1; AHgh+Rq8juYhzwK0paWmfYLAS4NyNsOs71HL0qeFX+yoWOFlMbfdYXp7C311S2yT1Ak9wj7bGepuab4YehO+ogtx@vger.kernel.org
+X-Gm-Message-State: AOJu0Yztqon9ZkdExupk0IhLN/THNTyNX3iFyIJ0fFseHWqQbQbeNq/d
+	xj5TpHWhWR0s+nxAyvTHIQ5RG4D4F7A/6qt3t4FIjv6r2auV2/98JgVppv6gpozcwSwTC9EM6QJ
+	qmqadeOB6qCX/rdpzMl76E5jaQi5kXGmIHVVgu/TqEXYhOdqYqm1T4UzUHwa0bfTD5i2h
+X-Gm-Gg: AR+sD12t3YQckyuNOhidBAdZWj2Z3rxZyX6ReoRTigz0e7ylSHffAhQM6xPpqUuf378
+	bYhnJAd86MwdHDJsr06NYhixfrEDUQD8aeFKjRbj1o0j9g/8ViaBQF7wqfrSgRcGgQQqxoDiwNp
+	cR571ZT5/2qEh1zDWn4Vl9wviMMDTz+fZSQP2emx0Z1w/teWHD5BrrdfZCSdLdz+0PIXVJJM++F
+	KcrUfe3nNfUHVRJDpvODavxy8u44UkdJddMoDTq3LyYsWXNd9k/lB5p1V/dUVvklVn+eZZ/h8P+
+	MZW+wO4E0zM58Alf+Rt1cepaQGQWhB4CwCn2z5idhZzJ0srbTM6SeZ2Nkx/ooShvLBdIyn9WtP3
+	6WLEi1xlgvJ2xO9lsSeGWZhCM
+X-Received: by 2002:a05:620a:2728:b0:930:aff2:b1e8 with SMTP id af79cd13be357-932df77da40mr625325885a.8.1785146847632;
+        Mon, 27 Jul 2026 03:07:27 -0700 (PDT)
+X-Received: by 2002:a05:620a:2728:b0:930:aff2:b1e8 with SMTP id af79cd13be357-932df77da40mr625322285a.8.1785146847138;
+        Mon, 27 Jul 2026 03:07:27 -0700 (PDT)
+Received: from [192.168.120.193] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-69fb5746e08sm2376666a12.23.2026.07.27.03.07.23
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 27 Jul 2026 03:07:26 -0700 (PDT)
+Message-ID: <7ab0655a-52ac-4b15-9223-753c146a9469@oss.qualcomm.com>
+Date: Mon, 27 Jul 2026 12:07:22 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260727-topic-smem_dramc-v5-3-66188b3e338d@oss.qualcomm.com>
-References: <20260727-topic-smem_dramc-v5-0-66188b3e338d@oss.qualcomm.com>
-In-Reply-To: <20260727-topic-smem_dramc-v5-0-66188b3e338d@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Kees Cook <kees@kernel.org>, 
- "Gustavo A. R. Silva" <gustavoars@kernel.org>, 
- Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, 
- Akhil P Oommen <akhilpo@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, 
- Jessica Zhang <jesszhan0024@gmail.com>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Alim Akhtar <alim.akhtar@samsung.com>, 
- Avri Altman <avri.altman@sandisk.com>, Bart Van Assche <bvanassche@acm.org>, 
- "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>, 
- "Martin K. Petersen" <martin.petersen@oracle.com>, 
- Matthias Brugger <matthias.bgg@gmail.com>, 
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
- Suzuki K Poulose <suzuki.poulose@arm.com>, Mike Leach <mike.leach@arm.com>, 
- James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>, 
- Mao Jinlong <jinlong.mao@oss.qualcomm.com>, 
- Jie Gan <jie.gan@oss.qualcomm.com>, Paul Walmsley <pjw@kernel.org>, 
- Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>, 
- Alexandre Ghiti <alex@ghiti.fr>
-Cc: linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-hardening@vger.kernel.org, dri-devel@lists.freedesktop.org, 
- freedreno@lists.freedesktop.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, linux-scsi@vger.kernel.org, 
- linux-arm-kernel@lists.infradead.org, linux-mediatek@lists.infradead.org, 
- coresight@lists.linaro.org, devicetree@vger.kernel.org, 
- linux-riscv@lists.infradead.org
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785146373; l=2414;
- i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=3LNXtkpagxbE+R6g/oNsy+x+7/74GUn/00p/SQ/cYlM=;
- b=yYCXvrrf7qggR4qk6JjiS9Z2+iFrl+PooPtV0kAczRrNWh/Q57LN8vjkIassppHjv6qeScn0S
- WfN0WoTwFTuAEmJmP7Szvpl9QNL+0n/rjYpzMvDuovur7WRGHLePIHO
-X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
- pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
-
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 5/5] arm64: dts: qcom: milos-fairphone-fp6: Add NFC
+To: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+        David Heidelberg <david@ixit.cz>,
+        Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Andrew Lunn <andrew+netdev@lunn.ch>,
+        "David S. Miller"
+ <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Luca Weiss
+ <luca.weiss@fairphone.com>, oe-linux-nfc@lists.linux.dev,
+        netdev@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260726222405.153008-1-jorijnvdgraaf@catcrafts.net>
+ <20260726222405.153008-6-jorijnvdgraaf@catcrafts.net>
+Content-Language: en-US
 From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260726222405.153008-6-jorijnvdgraaf@catcrafts.net>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI3MDA5OCBTYWx0ZWRfX9dKyYnGb39eo
+ pmj/bMwCCZdDmczLP6arY5IOXon2HgvFE0h07GUNaVJMEDxBP1p+i/eXlJjXKEoftDtkzbylJ1O
+ AaBDA+NXPR3miwiEDBXuivHSUUzky2/e8okCUybizP9Xa1gOFmgbJ4l3AngDFqRlmnJPzpnnZxb
+ s7Wp/sdQZwKDuO/3/Q0FCPUNabi311hBSK20RpN0K1XBtLzhiv5zk4x3otrbksvLQTvhAMhKdO9
+ 2LR2FDHAwgG6rpTI/s0ddzxsfhhCJVYo8LiH91eoyPPAhdIbtfR7bEOBPB23WAB1gv4mF10Yidm
+ aThYoiGTZbmBAFLGYvzTisnggfn33JEmEGTQxFK6MC4+oGz5mvYDwcVDc+2zKPFdUculEHOfo88
+ 0eI2K4Kv9nPGeB3rXBb523BvQ9WaaIo6joPkjRiby0AHynARYmyPL6PdB3fQPAiScTvknP3eL27
+ Wi1VLSG9U33T8FyDYBA==
+X-Authority-Analysis: v=2.4 cv=UPbt2ify c=1 sm=1 tr=0 ts=6a672de0 cx=c_pps
+ a=UgVkIMxJMSkC9lv97toC5g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=GYSh3LzNAAAA:8 a=yBwHqnpkDyRxZW_GFQcA:9 a=QEXdDO2ut3YA:10
+ a=1HOtulTD9v-eNWfpl4qZ:22 a=lWcdFasyL5yHfcDTNXXo:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI3MDA5OCBTYWx0ZWRfX/prz1F/3UKDn
+ 9IyhkgQyK0xAcmvzZvt0ja3VSASR8uVCSLuWHm9cSQlCbrNXHrJAoDhANU0c5zdhtdB7bU9cDHm
+ xOJHecNn+i1SyBtgqEUanNy4HowzYy8=
+X-Proofpoint-ORIG-GUID: pnoH4zOJlRpsPwpABFgJ_ErH6Se-pzBD
+X-Proofpoint-GUID: pnoH4zOJlRpsPwpABFgJ_ErH6Se-pzBD
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-27_02,2026-07-24_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 bulkscore=0 clxscore=1015 spamscore=0
+ adultscore=0 lowpriorityscore=0 impostorscore=0 malwarescore=0
+ priorityscore=1501 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607270098
 
-To make sure the correct settings for a given DRAM configuration get
-applied, attempt to retrieve that data from SMEM (which happens to be
-what the BSP kernel does, albeit with through convoluted means of the
-bootloader altering the DT with this data).
+On 7/27/26 12:24 AM, Jorijn van der Graaf wrote:
+> Add the Samsung S3NRN4V NCI NFC controller on i2c1. Its XI clock is
+> provided by the RF_CLK2 PMIC buffer and gated through the controller's
+> CLK_REQ line on tlmm GPIO6. PVDD is fed from PM7550 LDO20, the rail the
+> downstream driver switches for this chip.
+> 
+> The enable line is routed to the chip's power-down input, which is
+> asserted high to turn the chip off (the downstream driver treats VEN as
+> active-low on this design) -- hence GPIO_ACTIVE_HIGH, unlike the
+> exynos5433-tm2 wiring of the same driver. The pin is pulled up so the
+> chip stays off while the line is not driven.
+> 
+> Assisted-by: Claude:claude-opus-4-8
+> Assisted-by: Claude:claude-fable-5
+> Signed-off-by: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
+> ---
+>  .../boot/dts/qcom/milos-fairphone-fp6.dts     | 49 ++++++++++++++++++-
+>  1 file changed, 47 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts b/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts
+> index ebdca0e2d2f3..a1b86e4092fe 100644
+> --- a/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts
+> +++ b/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts
+> @@ -601,9 +601,29 @@ &gcc {
+>  };
+>  
+>  &i2c1 {
+> -	/* Samsung NFC @ 0x27 */
+> -
+>  	status = "okay";
+> +
+> +	/*
+> +	 * Samsung S3NRN4V NFC controller. XI is driven by the RF_CLK2 PMIC
+> +	 * buffer; the chip has no oscillator of its own and gates the clock
+> +	 * via its CLK_REQ line, so the clock must be voted on in response
+> +	 * to it.
+> +	 */
 
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
----
- drivers/soc/qcom/ubwc_config.c | 40 +++++++++++++++++++++++++++++++++++++++-
- 1 file changed, 39 insertions(+), 1 deletion(-)
+This seems like something that's more fitting of the commit message
+and/or dt-bindings (either description: or in a YAML comment)
+> +	nfc@27 {
+> +		compatible = "samsung,s3nrn4v";
+> +		reg = <0x27>;
+> +
+> +		clk-req-gpios = <&tlmm 6 GPIO_ACTIVE_HIGH>;
+> +		clocks = <&rpmhcc RPMH_RF_CLK2>;
+> +		en-gpios = <&tlmm 56 GPIO_ACTIVE_HIGH>;
+> +		interrupt-parent = <&tlmm>;
+> +		interrupts = <31 IRQ_TYPE_EDGE_RISING>;
 
-diff --git a/drivers/soc/qcom/ubwc_config.c b/drivers/soc/qcom/ubwc_config.c
-index 0209a02c390f..23901a4c51f7 100644
---- a/drivers/soc/qcom/ubwc_config.c
-+++ b/drivers/soc/qcom/ubwc_config.c
-@@ -11,6 +11,7 @@
- #include <linux/platform_device.h>
- 
- #include <linux/soc/qcom/ubwc.h>
-+#include <linux/soc/qcom/smem.h>
- 
- static const struct qcom_ubwc_cfg_data no_ubwc_data = {
- 	/* no UBWC, no HBB */
-@@ -168,9 +169,25 @@ static const struct of_device_id qcom_ubwc_configs[] __maybe_unused = {
- 	{ }
- };
- 
-+static struct qcom_ubwc_cfg_data *cfg;
-+static DEFINE_MUTEX(cfg_mutex);
-+/**
-+ * qcom_ubwc_config_get_data() - Retrieve UBWC data for the platform.
-+ *
-+ * Return: Pointer to valid struct qcom_ubwc_cfg_data on success, negative
-+ * errno on failure. Note that this may return EPROBE_DEFER.
-+ */
- const struct qcom_ubwc_cfg_data *qcom_ubwc_config_get_data(void)
- {
- 	const struct qcom_ubwc_cfg_data *data;
-+	int hbb;
-+
-+	guard(mutex)(&cfg_mutex);
-+	if (cfg)
-+		return cfg;
-+
-+	if (!qcom_smem_is_available())
-+		return ERR_PTR(-EPROBE_DEFER);
- 
- 	data = of_machine_get_match_data(qcom_ubwc_configs);
- 	if (!data) {
-@@ -178,9 +195,30 @@ const struct qcom_ubwc_cfg_data *qcom_ubwc_config_get_data(void)
- 		return ERR_PTR(-EINVAL);
- 	}
- 
--	return data;
-+	hbb = qcom_smem_dram_get_hbb();
-+	if (hbb == -ENODATA) {
-+		/* Lack of HBB data is OK - it was only introduced later */
-+		return data;
-+	} else if (hbb < 0) {
-+		pr_err("Couldn't get HBB data from SMEM: %d\n", hbb);
-+		return ERR_PTR(hbb);
-+	}
-+
-+	cfg = kmemdup(data, sizeof(*data), GFP_KERNEL);
-+	if (!cfg)
-+		return ERR_PTR(-ENOMEM);
-+
-+	cfg->highest_bank_bit = hbb;
-+
-+	return cfg;
- }
- EXPORT_SYMBOL_GPL(qcom_ubwc_config_get_data);
- 
-+static void __exit ubwc_config_exit(void)
-+{
-+	kfree(cfg);
-+}
-+module_exit(ubwc_config_exit);
-+
- MODULE_LICENSE("GPL");
- MODULE_DESCRIPTION("UBWC config database for QTI SoCs");
+interrupts-extended = <&tlmm 31 IRQ..>
 
--- 
-2.55.0
+> +		pinctrl-0 = <&nfc_clk_req_default>, <&nfc_irq_default>,
+> +			    <&nfc_pd_default>;
 
+You can create a group of pins (see below
+
+> +		pinctrl-names = "default";
+> +		pvdd-supply = <&vreg_l20b>;
+> +		wake-gpios = <&tlmm 7 GPIO_ACTIVE_HIGH>;
+
+Please group the -gpios properties together
+
+> +	};
+>  };
+>  
+>  &i2c3 {
+> @@ -825,6 +845,31 @@ &tlmm {
+>  			       <13 1>, /* NC */
+>  			       <63 2>; /* WLAN UART */
+>  
+> +	nfc_clk_req_default: nfc-clk-req-default-state {
+> +		pins = "gpio6";
+> +		function = "gpio";
+> +		drive-strength = <2>;
+> +		bias-disable;
+> +	};
+> +
+> +	nfc_irq_default: nfc-irq-default-state {
+> +		pins = "gpio31";
+> +		function = "gpio";
+> +		drive-strength = <2>;
+> +		bias-disable;
+> +	};
+> +
+> +	/*
+> +	 * Pulled up so the NFC chip stays powered down while the line is
+> +	 * not driven (it is the chip's active-high power-down input).
+> +	 */
+> +	nfc_pd_default: nfc-pd-default-state {
+> +		pins = "gpio56";
+> +		function = "gpio";
+> +		drive-strength = <2>;
+> +		bias-pull-up;
+> +	};
+
+You can group them into something like:
+
+nfc_default_state: nfc-default-state {
+	nfc-clk-req-default-pins {
+		gpios = ""
+		...
+	};
+
+	...
+};
+
+Konrad
