@@ -1,184 +1,152 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E92A739CD0A
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 18:12:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFC223B6C15;
+	Mon, 27 Jul 2026 18:24:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785175935; cv=none; b=WVi7XaVMxPvSf6xOfgonPqmU1jeU70kACj+TNL9e1C6FWPl6h3VTfq7hrG/nroNvQhHynIUs5Xi99Tfin9PmTTubrY9FtmhUf4nhVBKIBit43HEVpEalKchWa1oA8kNZolJQR9vJDXz5zoNHmnJH4bbaObqbpDjyXQUDN/rhvoc=
+	t=1785176700; cv=none; b=CelcZhsieMs9Egd5Ao/zM6+u0LCwIVtQPoID+vaTjONsJlqobv7pdxIMeK/P0LkVM+uYyrPW7yODIeF6dkhj66kN1GVhQXQv/HEzB5iLCh8Ve0/o/8uY0/dA7nEuLIdZZ2NWJFemLWtTWpj7NcSbavcynY5wOs5a30HD2xIqKA8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785175935; c=relaxed/simple;
-	bh=gLMEKqEEwV/fRvQQ1VmFy+8sHppbwdhNA9c9SfGg1oI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=bVJ7slt7cCV5G+5e7WoU+nz/R19EY2H8QJtw/Psl5RsaHQaRZFm2HqcIkNU2c0IdUTJaSjrJKqeT64riFElsUJRNZ0TXU+kPPl8IuAieseF9WrtqWKsHTTIMT/Lp7uZ7wL3UCoOwKvyEFkLswW0B40rOiudo7XSny9l1Nmci42E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=eZRh8Cae; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ZQtdhh9T; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785176700; c=relaxed/simple;
+	bh=f/rT0JgtbPCubTUxIQnEbYDwx9dV6LxXDNxNrQf6l90=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=SE2C03eO9ZPVK/wmTKzC9fwi4tI+/Aw6pl16vtLgtZOnKbvpJQ5UcpWj9SvR14j+v/fHuDZbQt9G87BRtjiTkfBH67mtiaRLcyrAWR72e6YZ69ILqPIGgvyw6L5dqKqweiE85guGSKuNWaakRwHO7w4c72V4pDkoH1bYntT6F5Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GR0xbCsa; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="eZRh8Cae";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ZQtdhh9T"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66RIC1uw245557
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 18:12:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=P051N9m9fNC2s4r4wBi5jlim
-	x4aHj3hNeJV9vNXg7lI=; b=eZRh8CaeF3/j1iPYpyGsjLL74xlFpNPLjI8DBjfZ
-	YuP+5UfxtyrZ6TnDXvtl/gSfsDXb1kW0PEwBkPqSDlWswy+9v0KRDw9v84xUxYtE
-	aEsWmbLGN0sli3fQXtEbfwqCkzYHvt/mdp1BrBmpJCdB8RJLIZdSEdBXkSA9NWSM
-	o8HkgzBFW2yIqXuGxRAmBUBT/woaGFhf7D0x4F9xbnT5x1eJxvi2LmVhmOiqbJxX
-	jL+3gJ175OItl8z+gFoX0i+FSSkKi1Wk97GRoG0+L7DmMCe1E/3kKfTQxSobEuDn
-	MHWqcSFP2FEp0U20ZAhrglGR1gVadmd+11oEohyrpVtH2w==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fp4nbtbf5-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 18:12:13 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38dbe39ce62so161160a91.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 11:12:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785175932; x=1785780732; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=P051N9m9fNC2s4r4wBi5jlimx4aHj3hNeJV9vNXg7lI=;
-        b=ZQtdhh9ToVInDvH5dtmwruZXvBQo3AFMbKvvhWlzx0rjtp0GGE9aVvN5x2EQkELLlm
-         qYctBexSf3g9WcUyGV/Unpr8lXSTrX7zSW2rhGyw7WDXU2VAhmfsHxW1ffeB7+OLK+oQ
-         y0LVZqJcbSAKyMIXQ3O0zaumlfFshpbsZ0MJVPUGTQuj7iB6VDeSmhra5IzbFswzP/SB
-         MvsaYxvPv1cp05qbl93uwSCeo/O+kObZ+Rs89/v9VSbf6mOHZk8ZqT21W3cWoZCy2Vui
-         SxYRoT/yX0CAENBUAjPiTQNjjlDGmHjmn2cGB3incE65eijbBjN34NSDzwwlLxohXFrB
-         HhSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785175932; x=1785780732;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=P051N9m9fNC2s4r4wBi5jlimx4aHj3hNeJV9vNXg7lI=;
-        b=C8zD2XrHHk0mzcP2yywzUr/XWcOPeLc/ys7Z6jCo7l+aDkHdf4P+idXTDUH+9UrEUM
-         0WdZp1OjAMCiaFqJ44AwD+CMItWP6rtL1y8oqKlh94dbwYeuI+nAm5d4PzDEPkyRtuO2
-         54GMlPrqAWfuKBpg1jWurYgjXTqvBYvusQ2F/TnFc36wlFCo4DnWJgpTa7oCDd3a/Azd
-         kuFj602ID8d3HDOs9Eq+ycX583/At5UyE7XMNsFnmZI9wRmHyEAM+WauVdSE09F9VD5B
-         KewFTiVq3ae5DBP9SbEoW0L8gOR65vMi/9aDsMWf48LkeFK3mLfOoCHoTRczF0vG9g8E
-         tAnQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqUtU3rMsEq2v3Df/Z3+Fl34r+BmKuPYu4afEi21J/Lzu6H77J4Yb0U+BdGyW4UFZ29XuOBvhRHN8/a7W7e@vger.kernel.org
-X-Gm-Message-State: AOJu0YyOUKCZHLA11mwNH2swKTZRiSO8D5Tv6DrxpQwU2DuU/VxgSvzT
-	WGnA7b8przjbaGx9OmKIpaybQk+ptPYUvtwlGrzF/a1EODVcRJLFBn/anxT4BvXwp07Vu1kths6
-	v384gwLAaELNcA4yEmPg6EK8VRqIH8Vv76XVcJS9GoimzthvnKIjyju0AwdehPWhm8bw6
-X-Gm-Gg: AR+sD10zxDxOhM7VI9wNK3hbGOUQmsTmNwDTO9HNQ4R/RcA3syvyXFOhGUrPi8WRLeU
-	DNGE/zVvEKCmYY+vauk1+N6fRSruudBcHvuyRo4YowFsE97n39iWSeB98bHD5WUilZwsPUSSg/M
-	7UmhMZH9A7KdQKrGn0Zh6lIyVh1Yd2opb9eOzGhhUVgNTfwy92o1LvchfT0oilDd0SDkNtJzcug
-	3YSiOKUW4zypGh+88Ow3Vhz0jPGKz7BoIW62mgYovMD3G4qnXWmAo9jyLaAR6EgLbj4C03J+HMc
-	KRjIqv0J73bUPl89RnlnAegWQerHwNDzKeoIQK/9sQYhfJnQbNTnanQtD+OVSKYzdly5gh6uXks
-	WcYfqNYBpZs8RkJNbHHv8lOeCyA==
-X-Received: by 2002:a17:90b:5625:b0:38d:eaed:4adb with SMTP id 98e67ed59e1d1-38f644f8641mr451037a91.20.1785175932480;
-        Mon, 27 Jul 2026 11:12:12 -0700 (PDT)
-X-Received: by 2002:a17:90b:5625:b0:38d:eaed:4adb with SMTP id 98e67ed59e1d1-38f644f8641mr451004a91.20.1785175931937;
-        Mon, 27 Jul 2026 11:12:11 -0700 (PDT)
-Received: from hu-mdsor-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13d2d1d0d1esm33096048c88.0.2026.07.27.11.12.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Jul 2026 11:12:11 -0700 (PDT)
-Date: Mon, 27 Jul 2026 23:42:04 +0530
-From: Mohit Dsor <mohit.dsor@oss.qualcomm.com>
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        venkata.valluru@oss.qualcomm.com,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Mohit Dsor <mdsor@oss.qualcomm.com>
-Subject: Re: [PATCH v2 1/2] arm64: dts: qcom: shikra-iqs-evk: Add LT9611UXD
- HDMI bridge support
-Message-ID: <amefdKQOfyRgeWn9@hu-mdsor-hyd.qualcomm.com>
-References: <20260717-shikra-work-v2-0-86ae8552259e@oss.qualcomm.com>
- <20260717-shikra-work-v2-1-86ae8552259e@oss.qualcomm.com>
- <04a9d8ce-e83a-4307-8b14-4afe739b31e0@oss.qualcomm.com>
- <altiV4pSkfVs5UKM@hu-mdsor-hyd.qualcomm.com>
- <hmqt3rwlcx23lndkeky3ykk6or6ibfm7si7gh27utexeonxzqj@67yvhyey6oje>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GR0xbCsa"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB8071F000E9;
+	Mon, 27 Jul 2026 18:24:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785176698;
+	bh=DWE6icRF9aMpvirBO28Yf8kKjTRC61zhlwkSjnTCAQs=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=GR0xbCsawzjVjBmVmMTdO/tOeE8/uMHVs+459jkYBW78w8w1MxfAOU6lNqxhhWAog
+	 gPwvov9Pf9EhiSMrAS1NkCzTTjETfFPjf/dXwf4vFVvzhVJlqq0vyhRCpY010PZ6A2
+	 wm7esc3tkqiTbHMNQAIvGhV/JmXjCOYvAHpkFAyx9u+yqQ2dcZ8JVGIeZQ0zd+CZgJ
+	 5PFQBnGcUvu/20LmD6P3NH/oCrra2PdT6UDjg5aCoAO9Ynr+3qgJwrt0Uxmwp3agef
+	 Is8KzY6wLSNhN+hcI6aGVH3T82YnIshbq04WKrcwxWzoLv2P+4hY2k5zq8FP8cWSE3
+	 lrWnJ4u2jc0FA==
+Message-ID: <86ef62b5-9896-49cd-9beb-4e7435a6324e@kernel.org>
+Date: Mon, 27 Jul 2026 20:24:50 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <hmqt3rwlcx23lndkeky3ykk6or6ibfm7si7gh27utexeonxzqj@67yvhyey6oje>
-X-Proofpoint-ORIG-GUID: GfURt_W6DTnKh8aSgEKlWvauwurFeaQK
-X-Authority-Analysis: v=2.4 cv=cJjQdFeN c=1 sm=1 tr=0 ts=6a679f7d cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=5IGsX73iB-lTh6suV3gA:9 a=CjuIK1q_8ugA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI3MDE2OCBTYWx0ZWRfXwJRD1p9Hf6Km
- ODwVWqRSMt9RTB8HAxL+uvrBijWEMXXOQOdLlacVQyDdN1fSIQPwwR4mEoUmTyZ0sI7m+z7EkC5
- ZlwxpXhNTI9bb+IMUF32Th89USDfks8=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI3MDE2OCBTYWx0ZWRfX0qWqlly2nQLu
- ICilavsxFlxytteoJFxTRhGZ5ETgG7ySQc3wbv0gX1sRdWr7+1CT5n0MXUYWHXWA7L64iAcx57D
- swdsdn+w9GYiCcGwbzssWfeoVA8uJgSD7Ns28bPw/oJaZKLuK71vNzSjTZJ1SdznZvua9g0vfML
- Gfi+Dd6HSlh8RDif79ecO0XBVEPBWqNvFMWU4z5Oz1jXTXv8nkqcsMaPZzEhLDN48RAZQe3jCWo
- +GPemSTw5zIoR4nzO+eSCwVo+TtIynAebPj3dEwEsBAzaVDi8qPJlHxL74kQKG7yxajsUtPXW0K
- D1TzW1mkdC28Q+p1Es80AIR2+i/wVmiA+WTQu0s8u7RUujIOLKNjT/6tVoIaItq75n5XpQfN09p
- swpnfNVvVO8DRBhfiP7HCHIGMhg0uoBHlpbT3E4yhI4n+9stLaaJLKbgKMr56SY0o66AcuYcW7l
- EXFXEOLDwlF7rkgCLZw==
-X-Proofpoint-GUID: GfURt_W6DTnKh8aSgEKlWvauwurFeaQK
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-27_05,2026-07-27_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 spamscore=0 adultscore=0 suspectscore=0
- clxscore=1015 priorityscore=1501 lowpriorityscore=0 bulkscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607270168
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] checkpatch: Validate committer sign-off
+To: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+ Joe Perches <joe@perches.com>
+Cc: Dwaipayan Ray <dwaipayanray1@gmail.com>,
+ Lukas Bulwahn <lukas.bulwahn@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, Andy Whitcroft <apw@canonical.com>,
+ linux-arm-msm@vger.kernel.org, workflows@vger.kernel.org,
+ linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260724-checkpatch-committer-sob-v1-1-68550513106b@oss.qualcomm.com>
+ <933506f1f210d3498d515d55266951e1914cbc9b.camel@perches.com>
+ <ameceGEbXlQNGOEt@058f6326d650>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <ameceGEbXlQNGOEt@058f6326d650>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jul 22, 2026 at 04:49:45PM +0300, Dmitry Baryshkov wrote:
-> On Sat, Jul 18, 2026 at 04:54:07PM +0530, Mohit Dsor wrote:
-> > On Fri, Jul 17, 2026 at 11:17:10AM +0200, Konrad Dybcio wrote:
-> > > On 7/16/26 9:30 PM, mohit.dsor@oss.qualcomm.com wrote:
-> > > > From: Mohit Dsor <mdsor@oss.qualcomm.com>
-> > > > 
-> > > > Enable the Shikra MDSS display subsystem on the Qualcomm Shikra IQS
-> > > > EVK board and add the Lontium LT9611UXD DSI-to-HDMI bridge node.
-> > > > 
-> > > > The LT9611UXD is connected via I2C (bus 4, address 0x41), powered by
-> > > > a GPIO-controlled 3.3V regulator (PM8150 GPIO4) and an always-on 1.8V
-> > > > rail. Reset is on GPIO76 and interrupt on GPIO85.
-> > > > 
-> > > > The bridge receives DSI output from MDSS and drives an HDMI-A
-> > > > connector, with the link wired as: DPU -> DSI0 -> LT9611UXD -> HDMI.
-> > > > 
-> > > > Signed-off-by: Mohit Dsor <mohit.dsor@oss.qualcomm.com>
-> > > > ---
-> > > 
-> > > Does the other EVK not have this same hardware?
-> > Yes other variants have this hardware but only IQS variant has
-> > DS-HDMI as default, others have DLC panel as default.
+On 27/07/2026 19:59, Bjorn Andersson wrote:
+> On Sat, Jul 25, 2026 at 03:47:34PM -0700, Joe Perches wrote:
+>> On Fri, 2026-07-24 at 18:56 +0000, Bjorn Andersson wrote:
+>>> ```
+>>> checkpatch validates the Signed-off-by trailers against the patch's
+>>> author, but misses the opportunity to also validate the committer when
+>>> run with --git. Maintainers therefor need third-party scripts for the
+>>> final Signed-off-by check.
+>>
+>> I don't actually see that need as an issue for checkpatch.
+>>
+>> checkpatch is for patches, not things that are already committed.
+>>
 > 
-> By 'default' do you mean some DIP switches? If so, please consider
-> providing overlays for the bridge to be used on other variants of the
-> EVK.
-There are separate daughter cards for DLC Panel and DSI-HDMI, at a time
-only one of them can be connected.
-We are planning to submit a separate patch series covering all overlays together, if that is Ok
-DLC panel overlay for the IQ variant
-DSI-to-HDMI overlays for the CQ and CM variants
+> Fair, this is only applicable for people managing/receiving/collecting
+> patches - be it maintainers or people gathering patches and then resend
+> them...
 > 
-> > > 
-> > > [...]
-> > > 
-> > > > +&pm8150_l11 {
-> > > > +	/* DSI VDDA - must be at NOM voltage for PHY PLL lock */
-> > > 
-> > > This comment is superfluous
-> > This comment will be removed in next revision.
-> > > 
-> > > Konrad
+> I didn't dig deeper, but my LLM found 32 cases in the last 90 days where
+> linux-next maintainers points out missing committer sobs, so it seems
+> like making this check more conveniently accessible would help more than
+> me.
 > 
-> -- 
-> With best wishes
-> Dmitry
+>> If something like this is added, it should _only_ be used when
+>> --git is on the command line.
+> 
+> The 3rd hunk (that extracts commiter, sha1 and subject) only runs "if
+> $(git)", and hence $committer (from $git_committers{$filename}) will be
+> '', as such signoff_match_status($1, $committer) will not be evaluated,
+> and the check will be skipped.
+
+The issue Bjorn is trying to solve is real and as he pointed out - every
+second day maintainers fail to commit properly (srsly... still!). Some
+of us implemented git commit hooks [1][2], but many still don't care
+enough, even though installing such commit hook is basically 30 seconds.
+
+Four reports from Mark yesterday:
+https://lore.kernel.org/linux-next/?q=signed
+
+Therefore adding verify_signedoff features to checkpatch.pl might be
+useful - maybe some maintainer workflows will improve. Or maybe having
+it in tree will help them. I don't have any other idea how to encourage
+other people to solve it long term - my talk in 2023 did not fix it,
+Steven's and Mark's emails fix only commits but not the root cause, me
+mentioning the git hook convinces one maintainer per 6 months to adopt it.
+
+Maybe checkpatch would help people to get it right...
+
+[1] slides from https://lpc.events/event/17/contributions/1498/
+[2] verify_signedoff which I recently moved to soc-tools repo:
+https://web.git.kernel.org/pub/scm/linux/kernel/git/soc/soc-tools.git/tree/verify_signedoff.sh
+
+
+Best regards,
+Krzysztof
