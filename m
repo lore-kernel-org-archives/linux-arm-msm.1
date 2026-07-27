@@ -1,89 +1,89 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3DABB3112C1
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 14:11:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56E7D28AB0B
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 14:11:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785161508; cv=none; b=VI34xrDqMMMWPqIooSah2KnBTX//QjmMki2RVVGErV5WEkcQoH+zX2ZrIEg9opXJ0TBYz+IBv6IaFQVIelB+dsUZgYnSVyrtkAZs6v8mk0tvyAz2E9+XPEQlRbvBN2EjBkelAruSz3xWJM9cHPIzy5GmRKUwRKz3gzhRpkXyT6U=
+	t=1785161515; cv=none; b=WEvn6VLOBCdsB7CSy6jfL8j60aushL978N3jpqx2+pIb/cN0cZUYr4evHc7RF1C9ETnj2j25HHweTX/8bi1VdkoTDYWlMcp7xXzjmOyVT4369xmfM41B0/RvkAUrs5d92AboF+q1Pv4f0CdJ2fIha+MSGHRt9v0/sfv17FbRdFw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785161508; c=relaxed/simple;
-	bh=hMCvPgBPB3q9MAdNcGHYbIRCM3IAMI96J+Q0IZtiLy0=;
+	s=arc-20240116; t=1785161515; c=relaxed/simple;
+	bh=J3/FslZeXvF1hQA687dDy7g7sg3gktD5SIW96+lNrLo=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=qOxg/1VYGZ/NoKtbmt4CS32N14NdFllvdURAeZoWZScRboG/JAthABdgFBxzrABkCgFiTiOS1nDn2uvZARMpJO4n/vsMZ2BVM35mw7ruUZA7+OA72bzQWdQVK/ci5SRhE976v6Dz1s0cO8jtL2Cr6qR7UiBQR9vx4EIU1bIj1U0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=NuU61zqi; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=S5LPPuKD; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=sryTw6+2nYeXUw2XVVf/BntlDSVUagIzXEbEeCHZ1aa2pKRZWsaIPlkhjtncCHBSciNgdakcfEJcjeyY0seBR2Iez8aihXqAoyR6J4AEQpdiZxhgHyQ4/W8+FypIJipbjSht9lzhbbm0sRyUHJllvo7lpuExH5/m596ihGaKgx4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IyINozOI; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=j/9KcqTc; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="NuU61zqi";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="S5LPPuKD"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66RDlfKw033185
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 14:11:46 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IyINozOI";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="j/9KcqTc"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66RDldaD3414105
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 14:11:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	x42XRV/b+7FIQ3y9QK+srSnj/CLDUIWtj9CDTSVpPG4=; b=NuU61zqiqq2V4LDG
-	YqpwxlTM/ewh4kAkgGhQm4kIPOL27ilJaRl485OLGByUiBsF+SVUh+c4ZJVrNy93
-	Znx7V1lnLEdeKLEyvdOPNuJXfK1c+s7W2y7r7GaZRLUj+P35RhaAhoiPHPAhWiV/
-	c+kWdhvQVPRlmp62THn07X3NoU6wT4m07d8mKjSPv8uH4JCwzR9++VHxLtw4dX1J
-	uGGnShy5Cr3vtNcTYHlezyYRPpgKM9TB1Kwhq7S8MfjHzl21VoNdTpE54bhSdNoV
-	Bn4U2q5LJUwsuOFD9KOwdNH2p36hpxY7ATnO5Td/BT0QmtBPPywBYlaUgZmZnvmZ
-	6kQ3dg==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fp4c615hy-1
+	Axk35BRvKnxYf82KyO60grXp2umHgw5Lx1L6tsjMvH4=; b=IyINozOIfGtXDcsG
+	F6C7fKcMX2qkT6saFoazNMtjbo3CnpQGCHYQAq8ogzwyhZ8IgDzknCl08JcxoXid
+	3eqKHTgdxt2NMaIF6ovFyK7rNhLvGVt1N0Nh0QvD5yjo4W51BPNIS4C2FvVzYPtX
+	tOD+Qyl69BcRjvLe2rrm3Pgc1BK/wH3f3lP64ZNiL1HkDffQZXgJnLaA//3tD5PC
+	cBgdfgosLLVNumkOGubJn8vP4fQnUSwX/KJdweGFPRWCujKLdLYcua+tC3j0rVXw
+	xlVIeDLb3f4G1Q7PP/x/TeuMFVYUBk1DCGA1mz5onG+TnsgZypogxnnX7HT8s0ar
+	zzTuZA==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fp4v690j6-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 14:11:46 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cb74d5db64eso3058582a12.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 07:11:46 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 14:11:52 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38dde0df80bso4372903a91.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 07:11:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785161505; x=1785766305; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1785161512; x=1785766312; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=x42XRV/b+7FIQ3y9QK+srSnj/CLDUIWtj9CDTSVpPG4=;
-        b=S5LPPuKDHiNNMeGyUvNOt09HG6/3jRZBVnnNQUPsK33l6+3YZ2dpGkirxaOuQAwJSY
-         NCG46bntYviLWsoO6Ox4epkxALaGMO5j12pBMFdxC4lVWu4MAkXSOiwik1vWw7dvcgPi
-         QnygolIIAbrxZrsy4fR5XtuZa24dGZss5OHFdNG+Gsm/vmuafFZYcnHoMWcp/OfpTOXM
-         Tlr8uvEqnJqBVDLaSKAvJWEL8yWWqQnbo6w9PUbG+LdR2Hi5XvfVsaF4OLuUz/3x5cJc
-         dO1SBXFuXLtHJKl8CVYFEox53vrqnbyLlekUwturr7JNmlOOjgA9NtFdbu0i4amLKG/6
-         RiQg==
+        bh=Axk35BRvKnxYf82KyO60grXp2umHgw5Lx1L6tsjMvH4=;
+        b=j/9KcqTcEoBn3b/xI7TEh0assiQg2RS9rE1QuVxolz2Ay7RcKrbcEr++aKaYjqOq5a
+         DgFmg+6O5e+B2Romc8M3PcCcRRbi5CH9Umq7FsLwygqAupjInPqOj8NZyEbspSk21Arn
+         o2tXih+joHZYmjXbD6HC/Z89kto8yAAFG2ZROqkKuj7TQf2KfvVCn0022I3WMOe0gnhx
+         4FAHGmk70R4QcxnXTC7Wvd0C7UVN+YOvnZeXjdr/SyG6UCWYEnMKYxzJcXbfJ8ElDWsb
+         AYQmImrhM5eoo7iaXOB2kPiqC7szKnhUwW7eCj+Wixs7I6U3yrl7R/B5UVen0z96rZAo
+         uwfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785161505; x=1785766305;
+        d=1e100.net; s=20251104; t=1785161512; x=1785766312;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=x42XRV/b+7FIQ3y9QK+srSnj/CLDUIWtj9CDTSVpPG4=;
-        b=FZP/q2QDp0HDJWWvl7e4Rbv4H+88B93ZmM+Hs7PVUPu6u1ej8adEAyKztGumuaOKPl
-         0KBjm2Wk2KYKqsak9qQH9eeZEXQrgf0qId62T7Y7QEeTSTTFdrwn1BVCiT/8Eop8B17+
-         25f+QNYWnZqlkCN+QZaG7/fgInmnk0PLpsT2zw5WetYVO27xao8KOyvC3HBQNIviTGHg
-         skA9LOa6oxGgfNsGrk3Dy2UBTWGWdgeeZDSvJhBMNGoISezYCC4PNo0BJkR62+gXItK7
-         NKq5RMwgtlYqDnhGwXQj1eKoeLU01CERqZrbntagRP+EuSRxoPfoxU+sFYC1ozF68t4N
-         b9Pg==
-X-Forwarded-Encrypted: i=1; AHgh+Rqv9/ji++LrCJti/7oJpJbTCBlamYgLmD02kNmdqxjuv+wZSFUlpehscTFj7AaREbd3/n4k1zk2Ym8i06G6@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx/c8EvqB54aaALDj1jmjtfd7j+HJnLIePXyg1MhOOsT5YxRxON
-	WMER56D9Z21Qx4XYLuoj0jEQsopwomJVtR1oEKYF3fdmGh1OPWYrl7q5O1qaxmGmLWYE8euIErC
-	rKZKjJDKA6r7pg/JvZZU/eNNlJzAxYfVdAJ1NtRS1HPSSe3xRABL9BiU5vZNq+xGmdl28LK4fWw
-	qn
-X-Gm-Gg: AR+sD11cuN7HyWSBKCDLJfErLOFhDzcwuMpqE79U/0SVdP1NUI9FGuLf6WXzafi/BLU
-	n2BDvzblFca8/Y4ezotxZuCFX/ZO5mw4O2cxxmY8ENDk/FFVu6RspFjhok+hcScHL8+iKNoSF0s
-	pNfwNgglK0NP+s8BUlitIRnCYO0RJxqmqwxWHQ02Z23ZGwNjSs6hgduVXhEgYAC1LGucLq3wkC4
-	i6paPcBVtEGivqRbohtaELLhiFx3jNAMPoiUU+vD5Pqq2iL+kk1lVWPWTiLg1NZsVdyI5L0r9SD
-	FmdeDEqCJjsyIDM8FFHsz+UjORB/ZOD/gMxw5veUXGhjSQxZHjAP+Xtb9LIRrhJjMm8TzBvtEUN
-	5owH+jUIvKmzs1A3G4farvHSte1HFu9U=
-X-Received: by 2002:a05:6a20:1602:b0:3c3:a140:9380 with SMTP id adf61e73a8af0-3c67da110cbmr7593824637.16.1785161505462;
-        Mon, 27 Jul 2026 07:11:45 -0700 (PDT)
-X-Received: by 2002:a05:6a20:1602:b0:3c3:a140:9380 with SMTP id adf61e73a8af0-3c67da110cbmr7593784637.16.1785161505023;
-        Mon, 27 Jul 2026 07:11:45 -0700 (PDT)
+        bh=Axk35BRvKnxYf82KyO60grXp2umHgw5Lx1L6tsjMvH4=;
+        b=g+htjfPNboSW/qiIzBwbhpr0hIZit6lzFBBqLvnPAlLh/GGwG1lK3sPbqj7SSV2V06
+         5RTi6iVaWzZKeHZpkftYZYZvkCxlNQuOHcbTJQOL2T3ZRrjVmiLwDcHzRpdvT+MuW1sG
+         GZF1t9SGs0etIz3q5ejdjqPcgWOoRHw0dtd/FIdWpa93maCxZiRwjOJj9uwxF8YnEiv7
+         Ej6TNw2e7fyHpbPdSz0A9AFOTikvgPkauTuWyXlca06bNfylHhPlTuwneD8OLeFUwwin
+         JuOSXvy3WQFnQCpXU0Gf+Tqqr93byX691klvFzs+N3VLPJ1hVGbwgXXGx60HWVMt3aPP
+         6LTg==
+X-Forwarded-Encrypted: i=1; AHgh+RppdAgQ5Phm7pRrdNmhuWbPiStodsngMCUrnPlxXb7L8Yupgu2pRnxGUDN6AwBf4HtLQowj4eouxdEThKEl@vger.kernel.org
+X-Gm-Message-State: AOJu0YxpLEC5RNB3gLrrOTwv8dzhgpzktIySAiLzKRWe6dWYege78lgp
+	f2HkQ8yoJdHbQfQJ41p+eFYDxLJXaB85W+B1ECc9DsztlM8gD2XLJOZPTA3bkH9CBlmc/4Yh++a
+	LDz9BGelJYLhTsYFy+phJmaf+GfHiDbMVFns9Elbvlq3vMuQIiYHfj7f/sLePlsNZ+eVncwKl2P
+	N4
+X-Gm-Gg: AR+sD11Wtd2SY5QUDowCTo60kCmvoYI2iPBbhKppfajH652o0cwq4Bd/dh8L9haao3U
+	eD8azoUpcogEcHC9cVky1gsPorVXT5YV/HqQek3GxcpCjJnHqcD9/RtBMowiMcSCFeVSADNQa7K
+	rTjNS46xz78AVwIsXusgBIEOZiyIcwholJLkIXu4UkooqyPgRdF1y1uAbbJExwmrxwltmOxW6y2
+	31Rh6ZdgihL3SzDYRfRYu+jTBhg28zDpyWN82Mc8rfV3PP4tA+zmnCMlRzzsriSF2dpos5oSOAa
+	R7LpeZliG+/h8dg4kThFpZMFgaqyM/Dtb8VC/G3AWBV+JfbCcCXwaZAKejGCAsntbqn7iU8GgZc
+	VE4uHnFDPW4XtBYcdBhwqgMn7J2Z1toA=
+X-Received: by 2002:a17:90b:3912:b0:381:6c5:3f63 with SMTP id 98e67ed59e1d1-38f60486a1fmr901826a91.6.1785161511667;
+        Mon, 27 Jul 2026 07:11:51 -0700 (PDT)
+X-Received: by 2002:a17:90b:3912:b0:381:6c5:3f63 with SMTP id 98e67ed59e1d1-38f60486a1fmr901792a91.6.1785161511114;
+        Mon, 27 Jul 2026 07:11:51 -0700 (PDT)
 Received: from hu-imrashai-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-314bc44cb92sm53438677eec.13.2026.07.27.07.11.39
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-314bc44cb92sm53438677eec.13.2026.07.27.07.11.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Jul 2026 07:11:44 -0700 (PDT)
+        Mon, 27 Jul 2026 07:11:50 -0700 (PDT)
 From: Imran Shaik <imran.shaik@oss.qualcomm.com>
-Date: Mon, 27 Jul 2026 19:40:58 +0530
-Subject: [PATCH 2/6] dt-bindings: ptp: Document TSCSS hardware on Qualcomm
- QDU1000 SoC
+Date: Mon, 27 Jul 2026 19:40:59 +0530
+Subject: [PATCH 3/6] ptp: qcom: Add PTP driver for the Qualcomm TSC
+ hardware
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -92,7 +92,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260727-tscss-v1-2-beed14e72510@oss.qualcomm.com>
+Message-Id: <20260727-tscss-v1-3-beed14e72510@oss.qualcomm.com>
 References: <20260727-tscss-v1-0-beed14e72510@oss.qualcomm.com>
 In-Reply-To: <20260727-tscss-v1-0-beed14e72510@oss.qualcomm.com>
 To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
@@ -111,242 +111,497 @@ Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
         linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
         Imran Shaik <imran.shaik@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Authority-Analysis: v=2.4 cv=eYQNubEH c=1 sm=1 tr=0 ts=6a676722 cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI3MDEzNSBTYWx0ZWRfX6QouBxfkC9bm
+ YhQR4j8vcM4lR3LDMbioJ5rKExLUv7jV8DYHeePP+9/kQmy6JDEN1KCVbAdtXdBlB5SNkeb5E4G
+ Vlu2EIbSzOiAtuGiL8YaPzxJN0m7UVk=
+X-Proofpoint-GUID: TG7-J3y0mWxsScxLwg6r-ea2zNF0O5Z-
+X-Authority-Analysis: v=2.4 cv=ev3vCIpX c=1 sm=1 tr=0 ts=6a676728 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=-YqWXAWF1hLJgJDcJRIA:9 a=QEXdDO2ut3YA:10
- a=bFCP_H2QrGi7Okbo017w:22 a=sptkURWiP4Gy88Gu7hUp:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI3MDEzNSBTYWx0ZWRfXxzNteun2WKPJ
- ODMfdowMAyG/88W/RwC2ziNQdtR58Z8FPZXLBpKMH3zKP6jGNXmYIF0AkVrRLkMtMqOniBih/gk
- wiDtCFrukDbAUWx7ncwKzAQlP8Ypgbk=
-X-Proofpoint-ORIG-GUID: ywy5SZfZE9-XAQJZiTeAKxDyUmcf33Zb
-X-Proofpoint-GUID: ywy5SZfZE9-XAQJZiTeAKxDyUmcf33Zb
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI3MDEzNSBTYWx0ZWRfX3YWcXa6ooHO1
- eBj9WB3QM0lOi6QZQpIZJpMGZ0ly8JICAPPvpvxA8vdyHA6ifnvdq+3aMEDlFHt8fXKZq7lgSKx
- h4svOHu72Tb/GO/2XarW+XblXH548TGY/HyMlmKun8WMtkA2Eizw10ypfmKKDMoEhG5hXyf0Bdo
- E/nujquhu/lpcdlvGhinBfNu1MCpEknQtDdPaZ5DAPpH3VdU1cHHrdPQ9nMUMcYRJfz8ud7Oww9
- +UeGM6A8gm2A+2mjAy3wqp6sPcHytap9UPmBd4JJDmLDQuhU2FMLNuTXhgAdZKbuggr9biBTOaQ
- uDvEnuSpjoisMfbAHQ88I49PRXsTNQEgoGRooNkydO6G3m7hx2yJz25T1vGzg8pVW8OKsQDW5XZ
- 5wCThmaNDqZsxVbUzT3VFe2bI2ayqALNUHhKT0th7cqbP0cEpRmlu2Jlh9ZXIFBsPrdbtB0Uq2r
- XnR4/u7gG90nJPWNRVA==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=s8D5YFcVUybaX_pMzJwA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-ORIG-GUID: TG7-J3y0mWxsScxLwg6r-ea2zNF0O5Z-
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI3MDEzNSBTYWx0ZWRfX9v8eQCz7Xp5k
+ tp/9oGIAUx7PtqDY8qzjkSDT0UZ48Fj5yM3CVA58jIV45SjUF9OCr6p3IDOMfgFByh+z2hHyt5h
+ uTx7rPXkQY8x7tR7EvBQgl74bfgrC8VPwJF2zOSxLWat4p4zYdyxLELqzKflUomrHhERnsBT2i8
+ 7HWSHkwGSPg46jIhUpMTyU/dGRKVPD6DPexyOKi2hCtB049s4vmMX+vv7m4YPPJ8YVV3cHQj9Av
+ D4leM9bw60mKMrlWbj+INbMFmG5NDG5JFyw9eeWPdDhONOSX84vhFYIrJTkzuKQaXvmJEUz7KQC
+ YshUhLPDJNQSuHRbEVQK4MDE6TX3gdo/sZMawtk1TxsvAcKAER64LUIH2/h4oXJ62qmCUnx/loS
+ yeqBoTC/6t2q8lNLOR+RtgHOrpjBulkaDsdJ9Tf8OSDdZhjOLXvAJOvnZkn0dHh/6aCMU34DU0d
+ f3zlTZgYvU1LLI23M9g==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-27_04,2026-07-24_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 suspectscore=0 spamscore=0 adultscore=0 priorityscore=1501
- lowpriorityscore=0 bulkscore=0 impostorscore=0 malwarescore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607270135
+ adultscore=0 phishscore=0 lowpriorityscore=0 priorityscore=1501
+ suspectscore=0 clxscore=1015 impostorscore=0 bulkscore=0 malwarescore=0
+ spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607270135
 
-Add Devicetree bindings for the Timestamp Counter Subsystem (TSCSS) found
-on Qualcomm QDU1000 SoC.
-
-TSCSS is a time synchronization subsystem composed of two main blocks:
-Timestamp Counter (TSC) and Event Timestamp Unit (ETU). The TSC block
-provides a continuously running counter used for timekeeping, while the
-ETU captures timestamps for external hardware event triggers.
+Add a PTP Hardware Clock driver for the Qualcomm Timestamp Counter (TSC)
+hardware found on Qualcomm Lemans and QDU1000 SoCs. The TSC is a free
+running hardware counter used for time synchronization, clocked by an AHB
+configuration clock and a global counter clock, with the counter resolution
+varying across SoCs.
 
 Co-developed-by: Taniya Das <taniya.das@oss.qualcomm.com>
 Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
 Signed-off-by: Imran Shaik <imran.shaik@oss.qualcomm.com>
 ---
- .../bindings/ptp/qcom,qdu1000-tscss.yaml           | 187 +++++++++++++++++++++
- 1 file changed, 187 insertions(+)
+ drivers/ptp/Kconfig        |  10 ++
+ drivers/ptp/Makefile       |   1 +
+ drivers/ptp/ptp_qcom_tsc.c | 413 +++++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 424 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/ptp/qcom,qdu1000-tscss.yaml b/Documentation/devicetree/bindings/ptp/qcom,qdu1000-tscss.yaml
+diff --git a/drivers/ptp/Kconfig b/drivers/ptp/Kconfig
+index b93640ca08b7286fd4298519a17d1daf19056498..d3ceb1ee01a505cdd0bd056649d245308fc9f140 100644
+--- a/drivers/ptp/Kconfig
++++ b/drivers/ptp/Kconfig
+@@ -263,4 +263,14 @@ config PTP_NETC_V4_TIMER
+ 	  synchronization. It also supports periodic output signal (e.g. PPS)
+ 	  and external trigger timestamping.
+ 
++config PTP_QCOM_TSC
++	tristate "Qualcomm TSC as PTP clock"
++	depends on COMMON_CLK && PTP_1588_CLOCK
++	help
++	  This driver adds support for using the Qualcomm Timestamp Counter
++	  Subsystem (TSCSS) as a PTP clock.
++
++	  To compile this driver as a module, choose M here: the module
++	  will be called ptp_qcom_tsc.
++
+ endmenu
+diff --git a/drivers/ptp/Makefile b/drivers/ptp/Makefile
+index bdc47e284f14e7e77460ccf4ea30ab20c6df4fe4..ff029323e98f5e7ced55b5000e8555929a6e8e54 100644
+--- a/drivers/ptp/Makefile
++++ b/drivers/ptp/Makefile
+@@ -22,3 +22,4 @@ obj-$(CONFIG_PTP_1588_CLOCK_OCP)	+= ptp_ocp.o
+ obj-$(CONFIG_PTP_DFL_TOD)		+= ptp_dfl_tod.o
+ obj-$(CONFIG_PTP_S390)			+= ptp_s390.o
+ obj-$(CONFIG_PTP_NETC_V4_TIMER)		+= ptp_netc.o
++obj-$(CONFIG_PTP_QCOM_TSC)		+= ptp_qcom_tsc.o
+diff --git a/drivers/ptp/ptp_qcom_tsc.c b/drivers/ptp/ptp_qcom_tsc.c
 new file mode 100644
-index 0000000000000000000000000000000000000000..39387614ef8939b7840df2f0d5640b9e142fb4e5
+index 0000000000000000000000000000000000000000..b29248150388f32f2c2d211f69c11599dc743d78
 --- /dev/null
-+++ b/Documentation/devicetree/bindings/ptp/qcom,qdu1000-tscss.yaml
-@@ -0,0 +1,187 @@
-+# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/ptp/qcom,qdu1000-tscss.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
++++ b/drivers/ptp/ptp_qcom_tsc.c
+@@ -0,0 +1,413 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
 +
-+title: Timestamp Counter Subsystem (TSCSS) on Qualcomm QDU1000 SoC
++#include <linux/bitfield.h>
++#include <linux/clk.h>
++#include <linux/err.h>
++#include <linux/iopoll.h>
++#include <linux/io.h>
++#include <linux/module.h>
++#include <linux/mutex.h>
++#include <linux/of.h>
++#include <linux/ptp_clock_kernel.h>
++#include <linux/platform_device.h>
 +
-+maintainers:
-+  - Imran Shaik <imran.shaik@oss.qualcomm.com>
-+  - Taniya Das <taniya.das@oss.qualcomm.com>
++#define ROLLOVER_VAL				999999999
++#define NSEC_SHIFT				32
++#define PULSE_WIDTH_MASK			GENMASK(7, 6)
++#define DRIFT_MAX_RES				0x1FFFF
++#define DRIFT_JUMP_SWALLOW			BIT(31)
++#define DRIFT_PERIOD_MASK			GENMASK(28, 12)
++#define DRIFT_SUBPERIOD_MASK			GENMASK(11, 0)
++#define DRIFT_INTERVAL_US			10
++#define DRIFT_MIN_TIMEOUT_US			5000
 +
-+description: |
-+  Qualcomm TSCSS is a time synchronization subsystem composed of two main
-+  blocks - the Time Stamp Counter (TSC) and the Event Timestamp Unit (ETU).
++#define DRIFT_TIMEOUT_US(period, subperiod, cntr_res)			\
++	max_t(u64, div_u64((u64)(period) * (subperiod) * (cntr_res), NSEC_PER_USEC), \
++	      DRIFT_MIN_TIMEOUT_US)
 +
-+  The TSC block is a timestamp generator that maintains a running counter used
-+  for system timekeeping, and is functional with just the AHB and counter
-+  clocks.
-+  The ETU block is optional and captures TSC timestamps for external
-+  hardware events, each ETU slice binding a slice identifier to an external
-+  event selector. Support for the ETU block requires the additional ETU
-+  clock along with the per slice interrupt and slice subnodes.
++struct qcom_tsc_regs {
++	u32 control_cntcr;
++	u32 control_cntcv_lo;
++	u32 control_cntcv_hi;
++	u32 drift_correct_incr_val;
++	u32 drift_correct_duration;
++	u32 drift_correct_cmd;
++	u32 rollover_val;
++	u32 offset_lo;
++	u32 offset_hi;
++	u32 read_cntcv_lo;
++	u32 read_cntcv_hi;
++};
 +
-+properties:
-+  compatible:
-+    const: qcom,qdu1000-tscss
++/**
++ * struct qcom_tsc_soc_data - SoC specific TSC hardware capabilities
++ *
++ * @rollover: indicates the counter uses sec/nsec split
++ * @offset_correction: hardware supports one-shot offset correction
++ * @pulse_width: valid pulse width in cycles for drift correction
++ * @cntr_res: TSC counter resolution in nsec
++ * @reg_layout: register layout for this SoC/version
++ */
++struct qcom_tsc_soc_data {
++	bool rollover;
++	bool offset_correction;
++	int pulse_width;
++	int cntr_res;
++	const struct qcom_tsc_regs *reg_layout;
++};
 +
-+  reg:
-+    maxItems: 1
++struct qcom_tsc {
++	struct device *dev;
++	void __iomem *base;
++	const struct qcom_tsc_soc_data *soc;
++	struct clk *ahb_clk;
++	struct clk *cntr_clk;
++	struct clk *etu_clk;
++	struct ptp_clock *ptp;
++	struct ptp_clock_info ptp_info;
++	/* Mutex to protect operations from being interrupted */
++	struct mutex lock;
++};
 +
-+  reg-names:
-+    items:
-+      - const: tsc
++static bool qcom_tsc_is_enabled(struct qcom_tsc *tsc)
++{
++	const struct qcom_tsc_regs *regs = tsc->soc->reg_layout;
 +
-+  clocks:
-+    minItems: 2
-+    items:
-+      - description: TSC AHB configuration clock.
-+      - description: TSC global counter clock.
-+      - description: TSC ETU clock.
++	return readl_relaxed(tsc->base + regs->control_cntcr) & BIT(0);
++}
 +
-+  clock-names:
-+    minItems: 2
-+    items:
-+      - const: ahb
-+      - const: cntr
-+      - const: etu
++static int qcom_tsc_read_time(struct qcom_tsc *tsc, struct timespec64 *ts)
++{
++	const struct qcom_tsc_regs *regs = tsc->soc->reg_layout;
++	u32 hi, lo;
 +
-+  assigned-clocks: true
-+  assigned-clock-rates: true
++	if (!qcom_tsc_is_enabled(tsc))
++		return -EINVAL;
 +
-+  "#address-cells":
-+    const: 2
++	hi = readl_relaxed(tsc->base + regs->read_cntcv_hi);
++	lo = readl_relaxed(tsc->base + regs->read_cntcv_lo);
 +
-+  "#size-cells":
-+    const: 2
++	if (tsc->soc->rollover) {
++		ts->tv_sec = hi;
++		ts->tv_nsec = lo;
++	} else {
++		u64 ns = ((u64)hi << NSEC_SHIFT) | lo;
 +
-+  ranges: true
++		*ts = ns_to_timespec64(ns);
++	}
 +
-+patternProperties:
-+  "^etu-slice@[0-9a-f]+$":
-+    type: object
-+    description: ETU slice configuration
-+    properties:
-+      reg:
-+        maxItems: 1
++	return 0;
++}
 +
-+      pinctrl-0: true
++static int qcom_tsc_gettime(struct ptp_clock_info *ptp, struct timespec64 *ts)
++{
++	struct qcom_tsc *tsc = container_of(ptp, struct qcom_tsc, ptp_info);
++	int ret;
 +
-+      pinctrl-names:
-+        items:
-+          - const: default
++	mutex_lock(&tsc->lock);
++	ret = qcom_tsc_read_time(tsc, ts);
++	mutex_unlock(&tsc->lock);
 +
-+      interrupts:
-+        description: Per slice interrupt generated by ETU based on external event trigger.
-+        maxItems: 1
++	return ret;
++}
 +
-+      qcom,etu-event-sel:
-+        description: Event selection value for this slice.
-+        $ref: /schemas/types.yaml#/definitions/uint32
++static inline void qcom_tsc_split_ts(struct qcom_tsc *tsc, struct timespec64 ts, u32 *hi, u32 *lo)
++{
++	if (tsc->soc->rollover) {
++		*hi = ts.tv_sec;
++		*lo = ts.tv_nsec;
++	} else {
++		u64 ns = timespec64_to_ns(&ts);
 +
-+      qcom,etu-slice:
-+        description: ETU slice identifier.
-+        $ref: /schemas/types.yaml#/definitions/uint32
++		*lo = lower_32_bits(ns);
++		*hi = upper_32_bits(ns);
++	}
++}
 +
-+    required:
-+      - reg
-+      - interrupts
-+      - qcom,etu-event-sel
-+      - qcom,etu-slice
-+      - pinctrl-0
-+      - pinctrl-names
-+    unevaluatedProperties: false
++static int qcom_tsc_update_counter(struct qcom_tsc *tsc, struct timespec64 ts)
++{
++	const struct qcom_tsc_regs *regs = tsc->soc->reg_layout;
++	u32 regval, hi, lo;
 +
-+required:
-+  - compatible
-+  - reg
-+  - reg-names
-+  - clocks
-+  - clock-names
++	qcom_tsc_split_ts(tsc, ts, &hi, &lo);
 +
-+allOf:
-+  - if:
-+      properties:
-+        clock-names:
-+          contains:
-+            const: etu
-+    then:
-+      properties:
-+        clocks:
-+          minItems: 3
-+        clock-names:
-+          minItems: 3
-+      required:
-+        - "#address-cells"
-+        - "#size-cells"
-+        - ranges
++	writel_relaxed(lo, tsc->base + regs->control_cntcv_lo);
++	writel_relaxed(hi, tsc->base + regs->control_cntcv_hi);
 +
-+unevaluatedProperties: false
++	regval = readl_relaxed(tsc->base + regs->control_cntcr);
++	regval |= BIT(0);
++	writel_relaxed(regval, tsc->base + regs->control_cntcr);
 +
-+examples:
-+  - |
-+    #include <dt-bindings/clock/qcom,qdu1000-gcc.h>
++	return 0;
++}
 +
-+    soc {
-+      #address-cells = <2>;
-+      #size-cells = <2>;
++static int qcom_tsc_update_offset(struct qcom_tsc *tsc, const struct timespec64 ts)
++{
++	const struct qcom_tsc_regs *regs = tsc->soc->reg_layout;
++	struct timespec64 tod;
++	u32 regval, hi, lo;
++	int ret;
 +
-+      tscss@1da0000 {
-+        compatible = "qcom,qdu1000-tscss";
-+        reg = <0x0 0x01da0000 0x0 0x2000>;
-+        reg-names = "tsc";
++	if (tsc->soc->offset_correction) {
++		qcom_tsc_split_ts(tsc, ts, &hi, &lo);
 +
-+        clocks = <&gcc GCC_TSC_CFG_AHB_CLK>,
-+                 <&gcc GCC_TSC_CNTR_CLK>;
-+        clock-names = "ahb", "cntr";
-+        assigned-clocks = <&gcc GCC_TSC_CNTR_CLK>;
-+        assigned-clock-rates = <500000000>;
-+      };
-+    };
++		writel_relaxed(lo, tsc->base + regs->offset_lo);
++		writel_relaxed(hi, tsc->base + regs->offset_hi);
 +
-+  - |
-+    #include <dt-bindings/clock/qcom,qdu1000-gcc.h>
-+    #include <dt-bindings/interrupt-controller/arm-gic.h>
++		return 0;
++	}
 +
-+    soc {
-+      #address-cells = <2>;
-+      #size-cells = <2>;
++	/*
++	 * No hardware offset correction support: disable and reload the
++	 * counter with the corrected time, as recommended by the hardware
++	 * design team.
++	 */
++	ret = qcom_tsc_read_time(tsc, &tod);
++	if (ret)
++		return ret;
 +
-+      tscss@1da0000 {
-+        compatible = "qcom,qdu1000-tscss";
-+        reg = <0x0 0x01da0000 0x0 0x2000>;
-+        reg-names = "tsc";
-+        #address-cells = <2>;
-+        #size-cells = <2>;
-+        ranges;
++	regval = readl_relaxed(tsc->base + regs->control_cntcr);
++	regval &= ~BIT(0);
++	writel_relaxed(regval, tsc->base + regs->control_cntcr);
 +
-+        clocks = <&gcc GCC_TSC_CFG_AHB_CLK>,
-+                 <&gcc GCC_TSC_CNTR_CLK>,
-+                 <&gcc GCC_TSC_ETU_CLK>;
-+        clock-names = "ahb", "cntr", "etu";
++	return qcom_tsc_update_counter(tsc, timespec64_add(tod, ts));
++}
 +
-+        assigned-clocks = <&gcc GCC_TSC_CNTR_CLK>,
-+                          <&gcc GCC_TSC_ETU_CLK>;
-+        assigned-clock-rates = <500000000>, <500000000>;
++static int qcom_tsc_settime(struct ptp_clock_info *ptp, const struct timespec64 *ts)
++{
++	struct qcom_tsc *tsc = container_of(ptp, struct qcom_tsc, ptp_info);
++	const struct qcom_tsc_regs *regs = tsc->soc->reg_layout;
++	struct timespec64 tod;
++	u32 regval;
++	int ret;
 +
-+        etu-slice@1db1000 {
-+          reg = <0x0 0x01db1000 0x0 0x1000>;
-+          interrupts = <GIC_SPI 329 IRQ_TYPE_EDGE_RISING>;
-+          pinctrl-0 = <&cci_timer0>;
-+          pinctrl-names = "default";
-+          qcom,etu-event-sel = <1>;
-+          qcom,etu-slice = <1>;
-+        };
++	mutex_lock(&tsc->lock);
 +
-+        etu-slice@1db2000 {
-+          reg = <0x0 0x01db2000 0x0 0x1000>;
-+          interrupts = <GIC_SPI 330 IRQ_TYPE_EDGE_RISING>;
-+          pinctrl-0 = <&cci_timer1>;
-+          pinctrl-names = "default";
-+          qcom,etu-event-sel = <2>;
-+          qcom,etu-slice = <2>;
-+        };
-+      };
-+    };
-+...
++	if (qcom_tsc_is_enabled(tsc)) {
++		qcom_tsc_read_time(tsc, &tod);
++		ret = qcom_tsc_update_offset(tsc, timespec64_sub(*ts, tod));
++		mutex_unlock(&tsc->lock);
++		return ret;
++	}
++
++	/* Configure and enable the TSC counter */
++	regval = readl_relaxed(tsc->base + regs->control_cntcr);
++	regval |= FIELD_PREP(PULSE_WIDTH_MASK, tsc->soc->pulse_width);
++	writel_relaxed(regval, tsc->base + regs->control_cntcr);
++
++	if (tsc->soc->rollover)
++		writel_relaxed(ROLLOVER_VAL, tsc->base + regs->rollover_val);
++
++	ret = qcom_tsc_update_counter(tsc, *ts);
++	mutex_unlock(&tsc->lock);
++
++	return ret;
++}
++
++static int qcom_tsc_adjtime(struct ptp_clock_info *ptp, s64 delta)
++{
++	struct qcom_tsc *tsc = container_of(ptp, struct qcom_tsc, ptp_info);
++	int ret;
++
++	mutex_lock(&tsc->lock);
++	ret = qcom_tsc_update_offset(tsc, ns_to_timespec64(delta));
++	mutex_unlock(&tsc->lock);
++
++	return ret;
++}
++
++static int qcom_tsc_drift_correction(struct qcom_tsc *tsc, long scaled_ppm)
++{
++	const struct qcom_tsc_soc_data *soc = tsc->soc;
++	const struct qcom_tsc_regs *regs = soc->reg_layout;
++	long ppb = scaled_ppm_to_ppb(scaled_ppm);
++	u64 period, incval = 0;
++	u32 regval = 0, subperiod;
++
++	if (ppb < 0) {
++		ppb = -ppb;
++		regval &= ~DRIFT_JUMP_SWALLOW;
++
++		period = div_u64(ppb, soc->cntr_res);
++		if (period >= DRIFT_MAX_RES)
++			period = DRIFT_MAX_RES;
++	} else {
++		regval |= DRIFT_JUMP_SWALLOW;
++
++		period = div_u64(ppb, soc->cntr_res);
++		if (period >= DRIFT_MAX_RES) {
++			period = DRIFT_MAX_RES;
++			incval = soc->cntr_res * 2;
++		} else if (ppb < soc->cntr_res) {
++			incval = soc->cntr_res + ppb;
++			period = 1;
++		} else {
++			incval = soc->cntr_res * 2;
++		}
++	}
++
++	subperiod = soc->pulse_width * 2;
++	regval |= FIELD_PREP(DRIFT_SUBPERIOD_MASK, subperiod);
++	regval |= FIELD_PREP(DRIFT_PERIOD_MASK, period);
++
++	/* Update jump/swallow, period, subperiod */
++	writel_relaxed(regval, tsc->base + regs->drift_correct_duration);
++
++	writel_relaxed(incval, tsc->base + regs->drift_correct_incr_val);
++
++	/* Trigger the drift correction */
++	regval = readl_relaxed(tsc->base + regs->drift_correct_cmd);
++	regval |= BIT(0);
++	writel_relaxed(regval, tsc->base + regs->drift_correct_cmd);
++
++	return readl_poll_timeout(tsc->base + regs->drift_correct_cmd, regval,
++				  !(regval & BIT(1)), DRIFT_INTERVAL_US,
++				  DRIFT_TIMEOUT_US(period, subperiod, soc->cntr_res));
++}
++
++static int qcom_tsc_adjfine(struct ptp_clock_info *ptp, long scaled_ppm)
++{
++	struct qcom_tsc *tsc = container_of(ptp, struct qcom_tsc, ptp_info);
++	int ret;
++
++	if (scaled_ppm == 0)
++		return 0;
++
++	mutex_lock(&tsc->lock);
++	ret = qcom_tsc_drift_correction(tsc, scaled_ppm);
++	mutex_unlock(&tsc->lock);
++
++	return ret;
++}
++
++static struct ptp_clock_info qcom_ptp_info = {
++	.owner		= THIS_MODULE,
++	.name		= "PTP_QCOM_TSC",
++	.max_adj	= 9999999,
++	.adjfine	= qcom_tsc_adjfine,
++	.adjtime	= qcom_tsc_adjtime,
++	.gettime64      = qcom_tsc_gettime,
++	.settime64      = qcom_tsc_settime,
++};
++
++static const struct qcom_tsc_regs qcom_tsc_layout = {
++	.control_cntcr            = 0x0,
++	.control_cntcv_lo         = 0x8,
++	.control_cntcv_hi         = 0xc,
++	.drift_correct_incr_val   = 0x2c,
++	.drift_correct_duration   = 0x30,
++	.drift_correct_cmd        = 0x34,
++	.rollover_val             = 0x3c,
++	.offset_lo                = 0x50,
++	.offset_hi                = 0x54,
++	.read_cntcv_lo            = 0x1000,
++	.read_cntcv_hi            = 0x1004,
++};
++
++static const struct qcom_tsc_soc_data qcom_tsc_lemans = {
++	.reg_layout		= &qcom_tsc_layout,
++	.rollover		= false,
++	.offset_correction	= false,
++	.pulse_width		= 2,
++	.cntr_res		= 64,
++};
++
++static const struct qcom_tsc_soc_data qcom_tsc_qdu1000 = {
++	.reg_layout		= &qcom_tsc_layout,
++	.rollover		= true,
++	.offset_correction	= true,
++	.pulse_width		= 3,
++	.cntr_res		= 2,
++};
++
++static const struct of_device_id qcom_tsc_of_match[] = {
++	{ .compatible = "qcom,lemans-tscss", .data = &qcom_tsc_lemans },
++	{ .compatible = "qcom,qdu1000-tscss", .data = &qcom_tsc_qdu1000 },
++	{ }
++};
++MODULE_DEVICE_TABLE(of, qcom_tsc_of_match);
++
++static void qcom_ptp_tsc_remove(struct platform_device *pdev)
++{
++	struct qcom_tsc *tsc = platform_get_drvdata(pdev);
++
++	if (tsc && tsc->ptp) {
++		ptp_clock_unregister(tsc->ptp);
++		tsc->ptp = NULL;
++	}
++}
++
++static int qcom_ptp_tsc_probe(struct platform_device *pdev)
++{
++	const struct qcom_tsc_soc_data *soc;
++	struct qcom_tsc *tsc;
++	struct resource *r_mem;
++	int ret;
++
++	soc = of_device_get_match_data(&pdev->dev);
++	if (!soc)
++		return -ENODEV;
++
++	tsc = devm_kzalloc(&pdev->dev, sizeof(*tsc), GFP_KERNEL);
++	if (!tsc)
++		return -ENOMEM;
++
++	tsc->dev = &pdev->dev;
++	tsc->soc = soc;
++
++	ret = devm_mutex_init(&pdev->dev, &tsc->lock);
++	if (ret)
++		return ret;
++
++	r_mem = platform_get_resource_byname(pdev, IORESOURCE_MEM, "tsc");
++	if (!r_mem) {
++		dev_err(&pdev->dev, "no IO resource defined\n");
++		return -ENXIO;
++	}
++
++	tsc->base = devm_ioremap_resource(&pdev->dev, r_mem);
++	if (IS_ERR(tsc->base))
++		return PTR_ERR(tsc->base);
++
++	tsc->ahb_clk = devm_clk_get_enabled(&pdev->dev, "ahb");
++	if (IS_ERR(tsc->ahb_clk))
++		return PTR_ERR(tsc->ahb_clk);
++
++	tsc->cntr_clk = devm_clk_get_enabled(&pdev->dev, "cntr");
++	if (IS_ERR(tsc->cntr_clk))
++		return PTR_ERR(tsc->cntr_clk);
++
++	/* ETU clock is optional, only required when the ETU block is used */
++	tsc->etu_clk = devm_clk_get_optional_enabled(&pdev->dev, "etu");
++	if (IS_ERR(tsc->etu_clk))
++		return PTR_ERR(tsc->etu_clk);
++
++	tsc->ptp_info = qcom_ptp_info;
++
++	tsc->ptp = ptp_clock_register(&tsc->ptp_info, &pdev->dev);
++	if (IS_ERR(tsc->ptp)) {
++		ret = PTR_ERR(tsc->ptp);
++		dev_err(&pdev->dev, "Failed to register ptp clock\n");
++		return ret;
++	}
++
++	platform_set_drvdata(pdev, tsc);
++
++	return 0;
++}
++
++static struct platform_driver qcom_ptp_tsc_driver = {
++	.probe  = qcom_ptp_tsc_probe,
++	.remove = qcom_ptp_tsc_remove,
++	.driver = {
++		.name = "qcom_ptp_tsc",
++		.of_match_table = qcom_tsc_of_match,
++	},
++};
++module_platform_driver(qcom_ptp_tsc_driver);
++
++MODULE_DESCRIPTION("PTP QCOM TSC driver");
++MODULE_LICENSE("GPL");
 
 -- 
 2.34.1
