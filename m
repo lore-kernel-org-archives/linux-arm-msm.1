@@ -1,152 +1,171 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFC223B6C15;
-	Mon, 27 Jul 2026 18:24:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 104BD432E72
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 18:29:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785176700; cv=none; b=CelcZhsieMs9Egd5Ao/zM6+u0LCwIVtQPoID+vaTjONsJlqobv7pdxIMeK/P0LkVM+uYyrPW7yODIeF6dkhj66kN1GVhQXQv/HEzB5iLCh8Ve0/o/8uY0/dA7nEuLIdZZ2NWJFemLWtTWpj7NcSbavcynY5wOs5a30HD2xIqKA8=
+	t=1785176969; cv=none; b=IQKrHBzKo0nsW0OYZnOp43kuw0oSRznzyCBJNFZWBoKvZavxgZyA5Q5Fs/xKPSx1DhKrWlqouWq3/VdrGBAsgFHNQLNodiVpeQOJhZEkZSmT2XYEaqU2peLKeBebiOLH5HZgdfqdVhtb9DQCcNZnJ9abYWPbSf77BFR7kt5rMTY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785176700; c=relaxed/simple;
-	bh=f/rT0JgtbPCubTUxIQnEbYDwx9dV6LxXDNxNrQf6l90=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=SE2C03eO9ZPVK/wmTKzC9fwi4tI+/Aw6pl16vtLgtZOnKbvpJQ5UcpWj9SvR14j+v/fHuDZbQt9G87BRtjiTkfBH67mtiaRLcyrAWR72e6YZ69ILqPIGgvyw6L5dqKqweiE85guGSKuNWaakRwHO7w4c72V4pDkoH1bYntT6F5Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GR0xbCsa; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785176969; c=relaxed/simple;
+	bh=JwCLR9iFFFFuRnYMfZ24S/lkYDC1+Mq6uVmbgytz5J4=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=E5C6KVNgDEbvf4AVd+7cae1Gi/wuZ5kWgmbyQdu7TxD5Y9kjYh3NMpGOErpgeoq+walCXuWqGK6WgsLkfO3Iuiz/fYqyek+19WWOLj4v7ZVvd5ikuX7fM/1cGnEkfuKXOzO7JgMG6tH/6citex56mwzgZ3S+6CTDZBaapxMH7Jk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GIP6F6Uo; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=aAQRr9Zb; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GR0xbCsa"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB8071F000E9;
-	Mon, 27 Jul 2026 18:24:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785176698;
-	bh=DWE6icRF9aMpvirBO28Yf8kKjTRC61zhlwkSjnTCAQs=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=GR0xbCsawzjVjBmVmMTdO/tOeE8/uMHVs+459jkYBW78w8w1MxfAOU6lNqxhhWAog
-	 gPwvov9Pf9EhiSMrAS1NkCzTTjETfFPjf/dXwf4vFVvzhVJlqq0vyhRCpY010PZ6A2
-	 wm7esc3tkqiTbHMNQAIvGhV/JmXjCOYvAHpkFAyx9u+yqQ2dcZ8JVGIeZQ0zd+CZgJ
-	 5PFQBnGcUvu/20LmD6P3NH/oCrra2PdT6UDjg5aCoAO9Ynr+3qgJwrt0Uxmwp3agef
-	 Is8KzY6wLSNhN+hcI6aGVH3T82YnIshbq04WKrcwxWzoLv2P+4hY2k5zq8FP8cWSE3
-	 lrWnJ4u2jc0FA==
-Message-ID: <86ef62b5-9896-49cd-9beb-4e7435a6324e@kernel.org>
-Date: Mon, 27 Jul 2026 20:24:50 +0200
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GIP6F6Uo";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="aAQRr9Zb"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66RIC2mZ649209
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 18:29:27 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=s7rXRbvXwU7+wfekH6skCa
+	5uexonXhISDvr9zJy5MwI=; b=GIP6F6Uo6d9hSobkFne6b5FPiO5v8fJjRNTYFU
+	KMCBYZ9WMJwz58geoDhZ0Rzy+ZGXM1TGmelXfNAHWWSobM36tsiiYCeZFxh6QtwM
+	nRWwD8W6TDXZksptgcVHhmrx6SXsgBRO4NZvpOeFwu888zXnmr7Vfj+2IJH1+bfp
+	LR02BdBsiNMCAPgQgzK5FExQ+1vPyETCRX8aT8PXtNjvkWxhmwYVUWDNdpsxBD0w
+	ivdVcpHxg80xmNtTJhyUTLajy8t7MafDMCJMG3DpSxuenwZ3aLVqFTVc49HG6quV
+	6Sn7jzVdPTV8k8ENL3O5bVTzFKfVfIzm09UUCfGUTpCU4fgQ==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fp4c62fu6-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 18:29:27 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cbb467e56aaso3085975a12.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 11:29:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785176966; x=1785781766; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=s7rXRbvXwU7+wfekH6skCa5uexonXhISDvr9zJy5MwI=;
+        b=aAQRr9ZbSWV/h0PDs4VUd7hOUDH/zGtl3IhJSjB6mS4OOCDjRXiplAs6QQl6gYWB9Z
+         UnjxewmbMQUsKKd9KJlblBsOPOv4P50jnZ64bQhJ4t1BondTkkvSi1hXZE51LighHxDW
+         B5158gazrOImDa3ZfbVN0+J5GC4sGyKr3gGT/zuoy0ufUZUZIs9QcfctB9d9Ubq6TOPY
+         mfFA4eby1O0tVq28yKyy5kS7nPGlDBG2Q+Aiq/t+TsjKFphmx60TGciPrGPk9OIsh97T
+         KcHdzJAc3zmiH6gV9sjPYYm5cM1m7FDlpyV4AuvLnjKblGi4DBH9XiZ5zpgCHu1X1K55
+         /HsA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785176966; x=1785781766;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=s7rXRbvXwU7+wfekH6skCa5uexonXhISDvr9zJy5MwI=;
+        b=ThIELMyoEqaxGXxCWbwdiaVFAMTQQGLkRR6b3YE3IeNA1GnChVLJU7Rh6kQaXNFjdc
+         2hTCqXQTNSJPYR9O0nojEbDVGj+p8seVhj+EpKSN/fps6OFthsJTrzsDKtljCmaxnpYj
+         fyEucrbbaOhzRUGagAATF7XxdOqq9drkSLh5xLD3WlT9HEuv8Xn+lwSR5zPB486LUUUM
+         0XlitI0vUf5ibc/40p62VcYwf6cUOD4JYrBBa9MYV4LbdrGHDTcA7Ghxo+GSmLA+g/0g
+         staLufrJq7QEb5PjsV2hyynVCCspqYTA1i34PIL6pCyg6wlX8YsTZKi3CExVE/057aqb
+         F/rQ==
+X-Gm-Message-State: AOJu0Yy3O9eCM/h6OO44qV4+eEeqV4wvyPmKGq98TEDUoAsYx0j++fkD
+	505tPe5Bu/+VKgLqyc4kkunBdJ47CP4gX2hZkaCpVaz+SX29E9BszyOAdvnchsI7SWNcrD0cneK
+	lZTEf//VJJYGdpsF1xxPFc6xIpu8lO1xjSZu/OtuQPgg1kFL33cn5QS3NfVlahSTI/LDEs93c00
+	Po74k=
+X-Gm-Gg: AR+sD10t33h1EN0V++TXzhg2WmAgfC/3BuTApFvdUaZG/8uu2k4j6b/9Q0Mirhp6iiB
+	nZ0Z74NlzGys3C3UCdZKbiERzPEeDy4gaoHi5PoJhetq/JOv/SH0i3fJtjt2JYP/2sPE1Dwnxip
+	eMMpuUuZmGMOiHHll+kDR9IvlWOzlwep89lDZEByEq2Dbg3WZCYXvZXqiHYNf3CFlzg/CLZvYUP
+	AT9N+P69emkBXX4TbbJ1Hbl64k4LpllPdONP82OpF6234Tsvs1ijcIe8O2gOu9Dbaj2r2+ijuJZ
+	JRHlCb1TjB0J4jwovNaGRLOfouA5Yd4L47FbfqdoJo5DORy3C7xyt6FeDqhGrJ/Uv8mFeGjWQtR
+	a0wIK8K3e2t5cgaoN3J+n9JNNCdY1GVo=
+X-Received: by 2002:a05:6a21:3418:b0:3bf:b931:b3f4 with SMTP id adf61e73a8af0-3c6c80438d5mr740525637.51.1785176966514;
+        Mon, 27 Jul 2026 11:29:26 -0700 (PDT)
+X-Received: by 2002:a05:6a21:3418:b0:3bf:b931:b3f4 with SMTP id adf61e73a8af0-3c6c80438d5mr740472637.51.1785176965916;
+        Mon, 27 Jul 2026 11:29:25 -0700 (PDT)
+Received: from hu-jkona-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-314bc5a04b2sm31963087eec.28.2026.07.27.11.29.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 27 Jul 2026 11:29:25 -0700 (PDT)
+From: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+Subject: [PATCH 0/2] clk: qcom: Add camera clock controllers support for
+ Qualcomm Maili SoC
+Date: Mon, 27 Jul 2026 23:59:08 +0530
+Message-Id: <20260727-maili_camcc-v1-0-01dbd7ddb276@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] checkpatch: Validate committer sign-off
-To: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
- Joe Perches <joe@perches.com>
-Cc: Dwaipayan Ray <dwaipayanray1@gmail.com>,
- Lukas Bulwahn <lukas.bulwahn@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
- Shuah Khan <skhan@linuxfoundation.org>, Andy Whitcroft <apw@canonical.com>,
- linux-arm-msm@vger.kernel.org, workflows@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260724-checkpatch-committer-sob-v1-1-68550513106b@oss.qualcomm.com>
- <933506f1f210d3498d515d55266951e1914cbc9b.camel@perches.com>
- <ameceGEbXlQNGOEt@058f6326d650>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <ameceGEbXlQNGOEt@058f6326d650>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAHSjZ2oC/02OW07DMBBFtxL5G0uOH7HjraCq8ozHdEQeJQkBq
+ ereMQ0IPs+VztG9iZUWplXE5iYW2nnlearQPjUCL2l6Icm5stBKd8prL8fEA58xjYiSbMkeewu
+ uR1GN60KFPx+159PBC7291+h2jH/N2DyKXftb5Ik3TsMZhxlfJXrSYJ1ROai4G/H/zo/qVJDHj
+ Uv6YGmBQvBkgMDFvf02IK0kcR5H3mJjA6WsvTWQVDE6lOCwvneA2jloS0d9h7kHcbrfvwD/99B
+ UFgEAAA==
+X-Change-ID: 20260727-maili_camcc-e4fd7c94b59c
+To: Bjorn Andersson <andersson@kernel.org>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Jagadeesh Kona <quic_jkona@quicinc.com>,
+        Taniya Das <taniya.das@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Authority-Analysis: v=2.4 cv=eYQNubEH c=1 sm=1 tr=0 ts=6a67a387 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=fMwyTfTMBRYe1uhAUZ8A:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI3MDE3MCBTYWx0ZWRfXzilVTZxXVCzy
+ NLTGpjgIN9yCyijct2CjKHNVCrwotuWDTOQIqQI95mb1Ekz6JgvLc65MnvnEaYahCL3SgLTD2/h
+ M3k2Z1VhohsmEQMZcnoFDKtbTqeHrGw=
+X-Proofpoint-ORIG-GUID: JLDEWsezrsZq75Twwdfcb15Mfh-5b66y
+X-Proofpoint-GUID: JLDEWsezrsZq75Twwdfcb15Mfh-5b66y
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI3MDE3MCBTYWx0ZWRfX5bvMoJGKpDEG
+ wYqRvxQShTGDzp8VgB16oZJjyNRrEVw8V3RyJ2rXAA+TvcMuTvjAPWz2LgvlDXIrMAEmsY1d6Yx
+ 79ijAw9LRITgWJ6pf/KS577eFh2j6W0rpSIDWWPUN+RhxGP4uiegwIsb8BbRbKPifx5EtuK8dL9
+ MxkmW/DGzX5c9NBmcayV1+/Uuxjed04dgCiPnQj8D/vnd3b2o1cIiVPy1ghHM3LQE1+QWiZt+yl
+ MsZrH3RwzlUQ5OIleX0sK3TIo3yzAfLAzTTAO7A+H6gCt1o+mwEy5X/xSiM+9Or8hyamsE9pjgr
+ cwRQHUgmGhTwSoUff83ZqVF0zh7hy5FheLBLm9sMG3LWkbJulSaS9uQvkx6EuojV/JqUjXZwJHM
+ O9ixP02ybHPm2Y80oN6wRX4H6/AQAkBpEYEcPGwuK1ESU0FVvkJUmSVtrE3pkHydRkRMtFFWafq
+ HlrqT9ndj4SBUYSzVHg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-27_05,2026-07-27_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 suspectscore=0 spamscore=0 adultscore=0 priorityscore=1501
+ lowpriorityscore=0 bulkscore=0 impostorscore=0 malwarescore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607270170
 
-On 27/07/2026 19:59, Bjorn Andersson wrote:
-> On Sat, Jul 25, 2026 at 03:47:34PM -0700, Joe Perches wrote:
->> On Fri, 2026-07-24 at 18:56 +0000, Bjorn Andersson wrote:
->>> ```
->>> checkpatch validates the Signed-off-by trailers against the patch's
->>> author, but misses the opportunity to also validate the committer when
->>> run with --git. Maintainers therefor need third-party scripts for the
->>> final Signed-off-by check.
->>
->> I don't actually see that need as an issue for checkpatch.
->>
->> checkpatch is for patches, not things that are already committed.
->>
-> 
-> Fair, this is only applicable for people managing/receiving/collecting
-> patches - be it maintainers or people gathering patches and then resend
-> them...
-> 
-> I didn't dig deeper, but my LLM found 32 cases in the last 90 days where
-> linux-next maintainers points out missing committer sobs, so it seems
-> like making this check more conveniently accessible would help more than
-> me.
-> 
->> If something like this is added, it should _only_ be used when
->> --git is on the command line.
-> 
-> The 3rd hunk (that extracts commiter, sha1 and subject) only runs "if
-> $(git)", and hence $committer (from $git_committers{$filename}) will be
-> '', as such signoff_match_status($1, $committer) will not be evaluated,
-> and the check will be skipped.
+This series adds support for the camera clock controllers on the upcoming
+Qualcomm Maili SoC.
 
-The issue Bjorn is trying to solve is real and as he pointed out - every
-second day maintainers fail to commit properly (srsly... still!). Some
-of us implemented git commit hooks [1][2], but many still don't care
-enough, even though installing such commit hook is basically 30 seconds.
+This series is dependent on Maili gcc[1] and Hawi camcc[2] clock series
+[1]: https://lore.kernel.org/all/20260724-maili_initial_clock-v3-0-45b577241c91@oss.qualcomm.com/
+[2]: https://lore.kernel.org/all/20260723-camcc-hawi-v1-0-7057658c5c47@oss.qualcomm.com/
 
-Four reports from Mark yesterday:
-https://lore.kernel.org/linux-next/?q=signed
+Signed-off-by: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+---
+Jagadeesh Kona (2):
+      dt-bindings: clock: qcom: Add Maili camera clock controllers
+      clk: qcom: Add support for camera clock controller on Maili
 
-Therefore adding verify_signedoff features to checkpatch.pl might be
-useful - maybe some maintainer workflows will improve. Or maybe having
-it in tree will help them. I don't have any other idea how to encourage
-other people to solve it long term - my talk in 2023 did not fix it,
-Steven's and Mark's emails fix only commits but not the root cause, me
-mentioning the git hook convinces one maintainer per 6 months to adopt it.
-
-Maybe checkpatch would help people to get it right...
-
-[1] slides from https://lpc.events/event/17/contributions/1498/
-[2] verify_signedoff which I recently moved to soc-tools repo:
-https://web.git.kernel.org/pub/scm/linux/kernel/git/soc/soc-tools.git/tree/verify_signedoff.sh
-
+ .../bindings/clock/qcom,sm8450-camcc.yaml          |   2 +
+ drivers/clk/qcom/camcc-hawi.c                      | 158 +++++++++++++++++++++
+ 2 files changed, 160 insertions(+)
+---
+base-commit: 48ead2743ba0f328f85cfd75bc255b1f6e96cd9b
+change-id: 20260727-maili_camcc-e4fd7c94b59c
+prerequisite-change-id: 20260617-maili_initial_clock-c7e2b4530d80:v3
+prerequisite-patch-id: cb2499a822715bf6d411ea000e525e5feab52e7f
+prerequisite-patch-id: 4280283ee9f782a5ba46e4419ab0b7186add0211
+prerequisite-patch-id: 3e9a75794efb1633818ffe387d1f4e5048c361a4
+prerequisite-patch-id: 4b5fc2ccabb6be0eef59a9a223a228bb1ecba981
+prerequisite-patch-id: 7e5ac7db1fba3258b45b689b11d0ca93d65aa38a
+prerequisite-change-id: 20260508-camcc-hawi-4be887e3beb5:v1
+prerequisite-patch-id: 9fbee6bee0a3235a188c9380c8d7574f5a4774c2
+prerequisite-patch-id: 38b41881b46403d8f8ec68b5eb12654d854995e6
 
 Best regards,
-Krzysztof
+-- 
+Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+
