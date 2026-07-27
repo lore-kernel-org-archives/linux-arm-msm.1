@@ -1,160 +1,142 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0D2140097C;
-	Mon, 27 Jul 2026 15:51:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DABD7393DF0
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 15:52:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785167495; cv=none; b=biyAVJYvp/4wtNQ9sQq3z6ayNv3RwmVhIqrDAPBhXxV9VMscVF7c0EVKOi5dYl6mP9al8/nci9/jkxIPllvoAFqAEZaU75x62h75ayno8GN0f1ciTUtUMXutSdFSeVIVFiizy0gofzbswfgssUBjlVaCQ5I2QVI9i0ho0wWd1NM=
+	t=1785167551; cv=none; b=En8QsVx1KNVob1QrSntG4ZyQEAZs30zfSb5L+Q4KR3Ejs6s1ZHsyRubho/d+DLXhoitHy3iPNbWy0q/bUwYGvPwHsFOj3mQEFDaA1nZLd+7tFklYOAY/24NbYyA3/HgYtj5IxlYz+E+Yb6VavTQ2a3T8zFZN9YVBym9WxK54hBs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785167495; c=relaxed/simple;
-	bh=DMbk7odlrLbWcT/0B/AuwO8wR/FQjBsTATVbhYryaVs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=dq34A6wOlGjQ6flJEccqOvoQE6WhMXUb0o0ts/cCNnvnOxaPnnZEsFaJCI8faMGtUOzE7wzVtvuoXnp4cwGBFMw73g075PJB0ugNGHZaXI5Buu7TPDoR5mqKTmnTLoC0wtQStV4WDZeOrEkgFsrAIS4rBbFHmkUkLAv1PIL17Pk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=a4OYg1hI; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785167551; c=relaxed/simple;
+	bh=eLHa4dPs9DCUDJ1kmdQMo3rCaQZSwpaKrV5cA3MJQxg=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=CVxUn5TckaP26nx+qh/mYRQNYMrG5PgWS9B9pHozA6vJPUK52VjVVdLVN6lEKnPhI6Ml5Adm91leARvuuC327f1Ph62J+VWhZsXFaAyPbWk9V5T6YoxBadQcYJct5XKWY8O58R6X0eGeXPp9gLm0jR9ZTKsdEVF2yUWti/cdcSo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk; spf=pass smtp.mailfrom=thegoodpenguin.co.uk; dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b=PutC60I+; arc=none smtp.client-ip=209.85.221.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thegoodpenguin.co.uk
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="a4OYg1hI"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04B141F000E9;
-	Mon, 27 Jul 2026 15:51:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785167490;
-	bh=bId9mau3ViNmF7rLJyY58n1Xss9ciYxqYMK2+cP9dlA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=a4OYg1hIf1OcQiP0ScXw1HAV8yQcwu04sjDwLyHiYLaAW05oqtw9jTleS/RMwxYZc
-	 60gLPkbokgTy/uzvdRtSfNH2IPUWBwkE0Np8Kf5pIgKvGueF6Jlxm19yBBBZz/Pblo
-	 hgfWZiLVLtYmjAlc+BRJb5EV1tTM4R8OVVnb0W1R1QrnkcM/6PWTI6LIvNyY++TiNM
-	 FR0YgemqPs9WzMKEo1xFmWo/Goy8dnCx9D/XXvL+Pow1UTLUWpJ0EVQrdE3eAADfpt
-	 F8OLH5OOcx5GK/exFRP2VU2NOgipgoTNy+dHDC/BVXZwaLtsZom1P+otBvZKcDTiOY
-	 lyHyAsKsyP8Pw==
-Message-ID: <184d7977-891b-4d18-983f-7d23a7d9ff83@kernel.org>
-Date: Mon, 27 Jul 2026 17:51:20 +0200
+	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20251104.gappssmtp.com header.i=@thegoodpenguin-co-uk.20251104.gappssmtp.com header.b="PutC60I+"
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-4798bea72f9so1845245f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 08:52:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=thegoodpenguin-co-uk.20251104.gappssmtp.com; s=20251104; t=1785167548; x=1785772348; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=/usFwe3FqFKu0J40zc5DLz7dssBvetQFn/WiBSSIrIA=;
+        b=PutC60I+VnbIgpioJ7L0hCSsVtIbDNmicXYoOBE3EvlDprWzfYMzXE1zhiVZeej2yD
+         ki2HmGw6B9yogUYZ3MIR0ww5cHaj8qlLZg7edpmY68snXhZlkPbRT+nY68Eq5eJ2re/P
+         ESOK6MhzobA1CzB8YfOwih6Ja2XsBU1XUZyvv/RRf8Rg2p4zFl5fWvVgr9NCyZcm91Ts
+         7vS4fyySDGsVukRwGtZktrLj41X43CeYnpgO4tbhXEWZ3AhTy01QTLFaUK0EmwfG099j
+         cHx9pW1PNjVqnZ1AE7sqCPYJ+xZ6ZzsWuZMRbCIcDWl2KoOhsGKbzE/P+u9Mcb9DX/PC
+         SWtQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785167548; x=1785772348;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=/usFwe3FqFKu0J40zc5DLz7dssBvetQFn/WiBSSIrIA=;
+        b=CiVirGl0RmzSL76FJTTY5lfT0H4KCa/QFTBN4BrdJ5z0V5UpneRv/YfP21zrju3sml
+         OJVabjRMr+9PlOaPfqfaMNisAlOB81WoDzL9IHwoTgAMXolNtT+89/FGg0JOPtOeGxnm
+         zxGvPVcXhbdDFpN6/eTq4ba8ttKnnomdiX1eFSe9zCUC6OdBu1Weur7M2jFSg0At/IF7
+         xUrXipUQR840xfa/hZRtiSTsl/QVF8IWvzfb7dMymZeeiRXvyK+hEfzhxL7skRJkHvCw
+         TCJMzqWpwXc2dbiZhAT07bRZyUxjtnPQo5C3tXiliV8C2Dhg+DjQo0rH0xNJMWkUocVl
+         Fjew==
+X-Forwarded-Encrypted: i=1; AHgh+Rp5MgGE5UKZbtCThXIfa2LasrwkWE9duPRJ4xqEwrxwtb93R6BYZO+pMVW3yaKnhbAdq2tfEs67unqCk3t+@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxe0K3PKan87pQH5WtXkH3R1X4/0ajQIOZY7kT/YuWWOrD2pIWC
+	bCZFA26OJ325JltVoFm6YS6OizprJwXiTjyfptutgqo5zCzGBP/mOctBVMLtPS6EoN0=
+X-Gm-Gg: AR+sD13hB1prWXOlxKAXhA4sUSlTSWy8WgeAP4AjByPxqfpXIyGfARbzCMqVL+G+E8A
+	0k8m28o3hGt0aXz9rMwDf6/inEcK85EMaNv8yrAptxYZh5D2R8KyC92tngPiz1X8d4LSWNQw4qY
+	ooavb62wLMxIUD4TUuT9wJI2NMVuNzzPXJPeAaPfcRAgZvZiMzrtThSQ5pQPR20FT1rHrHk+8la
+	IJ4/2SNB74IJE7TLKF7cJv74huG1E9G9n82slffg0c74rJl6Ant/983hstWgRK923E1SKiI00EN
+	+lFqf812div3CVtb6zDHy1KCibwMeA+9Rg0i1NCaNk3aDh2Y4AZZJDJbYye2tn41lFJawb44ARo
+	CqYynBe8vIvMETYlgxpMAymaVn8XKLFFvBIADvi939jr2mUfd8/ifQT0UOy+yTIGVlfcKfHs/2o
+	2G4oJy0cjqI1VeOWU8eBQ=
+X-Received: by 2002:a5d:5d86:0:b0:47f:8ed4:1337 with SMTP id ffacd0b85a97d-47f9feb26bdmr11243556f8f.46.1785167548075;
+        Mon, 27 Jul 2026 08:52:28 -0700 (PDT)
+Received: from [10.42.0.1] ([2a00:23c7:1d1a:9c01:7aab:bc55:e039:4aac])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f85c52fa9sm51005161f8f.20.2026.07.27.08.52.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 27 Jul 2026 08:52:27 -0700 (PDT)
+From: "Pawel Zalewski (The Capable Hub)" <pzalewski@thegoodpenguin.co.uk>
+Subject: [PATCH 0/2] Bluetooth: use named initializers for acpi_device_id
+Date: Mon, 27 Jul 2026 16:51:50 +0100
+Message-Id: <20260727-acpi-bluetooth-v1-0-b5558d53e6e7@thegoodpenguin.co.uk>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] dt-bindings: ptp: Document TSCSS hardware on Qualcomm
- QDU1000 SoC
-To: Imran Shaik <imran.shaik@oss.qualcomm.com>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Richard Cochran <richardcochran@gmail.com>,
- Andrew Lunn <andrew+netdev@lunn.ch>, "David S. Miller"
- <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
- Taniya Das <taniya.das@oss.qualcomm.com>,
- Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, netdev@vger.kernel.org
-References: <20260727-tscss-v1-0-beed14e72510@oss.qualcomm.com>
- <20260727-tscss-v1-2-beed14e72510@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20260727-tscss-v1-2-beed14e72510@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAJZ+Z2oC/yXMTQ5AMBBA4avIrDUZJSSuIhZaU0ZEpT8iEXdXL
+ L/Fexd4ckwe2uwCRwd7tltCkWeg52GbSPCYDBJljY1sxKB3FmqNFKwNs9ASTYEKqTQVpGh3ZPj
+ 8hl3/20e1kA7vBe77AXndVzNyAAAA
+X-Change-ID: 20260727-acpi-bluetooth-c20f10b0e3f4
+To: Marcel Holtmann <marcel@holtmann.org>, 
+ Luiz Augusto von Dentz <luiz.dentz@gmail.com>, 
+ Bartosz Golaszewski <brgl@kernel.org>
+Cc: linux-bluetooth@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, 
+ "Pawel Zalewski (The Capable Hub)" <pzalewski@thegoodpenguin.co.uk>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785167547; l=2140;
+ i=pzalewski@thegoodpenguin.co.uk; s=20260430; h=from:subject:message-id;
+ bh=eLHa4dPs9DCUDJ1kmdQMo3rCaQZSwpaKrV5cA3MJQxg=;
+ b=OjFd4Z7BwigHzM38dyo/UnRdSBOrqEpVutkWyO5huNc5uog1lWZUs0749CPSIUQ0CRk4TDLzA
+ o/PpK97yrk0AFI3JL/vn4elKJ+0jCzoC+BZ4S5+2pvEhhiup2ORXmwa
+X-Developer-Key: i=pzalewski@thegoodpenguin.co.uk; a=ed25519;
+ pk=vHq4n9IonORH2GTzLv8r6CWAFHzgfBuNkQPXA8NSly0=
 
-On 27/07/2026 16:10, Imran Shaik wrote:
-> Add Devicetree bindings for the Timestamp Counter Subsystem (TSCSS) found
-> on Qualcomm QDU1000 SoC.
-> 
-> TSCSS is a time synchronization subsystem composed of two main blocks:
-> Timestamp Counter (TSC) and Event Timestamp Unit (ETU). The TSC block
-> provides a continuously running counter used for timekeeping, while the
-> ETU captures timestamps for external hardware event triggers.
-> 
-> Co-developed-by: Taniya Das <taniya.das@oss.qualcomm.com>
-> Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
-> Signed-off-by: Imran Shaik <imran.shaik@oss.qualcomm.com>
-> ---
->  .../bindings/ptp/qcom,qdu1000-tscss.yaml           | 187 +++++++++++++++++++++
->  1 file changed, 187 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/ptp/qcom,qdu1000-tscss.yaml b/Documentation/devicetree/bindings/ptp/qcom,qdu1000-tscss.yaml
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..39387614ef8939b7840df2f0d5640b9e142fb4e5
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/ptp/qcom,qdu1000-tscss.yaml
-> @@ -0,0 +1,187 @@
-> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/ptp/qcom,qdu1000-tscss.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Timestamp Counter Subsystem (TSCSS) on Qualcomm QDU1000 SoC
-> +
-> +maintainers:
-> +  - Imran Shaik <imran.shaik@oss.qualcomm.com>
-> +  - Taniya Das <taniya.das@oss.qualcomm.com>
-> +
-> +description: |
-> +  Qualcomm TSCSS is a time synchronization subsystem composed of two main
-> +  blocks - the Time Stamp Counter (TSC) and the Event Timestamp Unit (ETU).
-> +
-> +  The TSC block is a timestamp generator that maintains a running counter used
-> +  for system timekeeping, and is functional with just the AHB and counter
-> +  clocks.
-> +  The ETU block is optional and captures TSC timestamps for external
-> +  hardware events, each ETU slice binding a slice identifier to an external
-> +  event selector. Support for the ETU block requires the additional ETU
-> +  clock along with the per slice interrupt and slice subnodes.
-> +
-> +properties:
-> +  compatible:
-> +    const: qcom,qdu1000-tscss
+This series is converting lists that contain the acpi_device_id
+struct, which is defined in the include/linux/device-id/acpi.h
+to makes use of named initializers (which they do not use currently).
+This work is part of the on going effort in the kernel associated
+with device-ids [1]
 
-Why do you create a new file with exactly the same binding?
+The plan is to convert acpi_device_id::driver_data to have an anonymous
+union, similarly to what was introduced for PCI and I2C device ID tables.
+The goal is to increase type-safety (as most of the existing casts are gone),
+to improve readability and to make use intent a bit more clear:
 
-Anyway, all comments apply.
+```
+union {
+	kernel_ulong_t driver_data;
+	const void *driver_data_ptr;
+}
+```
+
+But for that to work all lists containing the structs need to use named
+initializers first. I already have patches that implement this and touching
+a lot of kernel subsystmes that use the acpi_device_id struct and that list
+keeps on growing. Therefore, I have decided to split the series per every
+subsystem into:
+- pre-clean-ups that convert the lists to use named initializers
+- actual implementations that make some of the modules use the new driver_data_ptr
+
+That way the task can be fragmented into manageable and independent
+chunks of work and makes this effort easier to review.
+
+Tested builds on arm64 and x86-64 in Yocto on 7.2-rc5
+
+[1] https://lore.kernel.org/all/cover.1780048925.git.u.kleine-koenig@baylibre.com/
+
+Signed-off-by: Pawel Zalewski (The Capable Hub) <pzalewski@thegoodpenguin.co.uk>
+---
+Pawel Zalewski (The Capable Hub) (2):
+      Bluetooth: use a named initializer for acpi_device_id
+      Bluetooth: hci_intel: drop unused assignment of acpi_device_id::driver_data
+
+ drivers/bluetooth/hci_bcm.c   | 336 +++++++++++++++++++++---------------------
+ drivers/bluetooth/hci_h5.c    |   6 +-
+ drivers/bluetooth/hci_intel.c |   4 +-
+ drivers/bluetooth/hci_qca.c   |  12 +-
+ 4 files changed, 179 insertions(+), 179 deletions(-)
+---
+base-commit: f5098b6bae761e346ebcd9da7f95622c04733cff
+change-id: 20260727-acpi-bluetooth-c20f10b0e3f4
 
 Best regards,
-Krzysztof
+--  
+Pawel Zalewski (The Capable Hub) <pzalewski@thegoodpenguin.co.uk>
+
