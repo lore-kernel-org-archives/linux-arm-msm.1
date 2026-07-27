@@ -1,279 +1,170 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f181.google.com (mail-pf1-f181.google.com [209.85.210.181])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FB343DE43D
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 08:06:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C045391E4B
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 08:09:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.181
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785139570; cv=none; b=Yy6rXz50X1T2oKBLTQU6liFI+vfID7xA3O1vt6OkqP7/ofyAWjpDjxch+KXApHPCzNRlQXaQczvWXt3BmwDZR8QlQHYFdnIpgXSpz1RfCOUmij8JVBvTci6aq5uI31Zk+JHZeswMHbwbdnE15hWMu6FhmH9qzgEkuerTBGAzC/s=
+	t=1785139748; cv=none; b=J0iRDCoyXFK+f/rPgBUziFZrbNxkYoNusqqMH8pW9pj7X2hJNNr2EAZGgio68KXqSuvJ1yYGxcr1Oflt5p9A/1QpRRPcJhQr3ZoK5DEYr4iGrzm83cMq/os1d7/zR3K7jIG6VqgOBkEgjpONs7ZbXerjEN+g92CI8acmGEh5THQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785139570; c=relaxed/simple;
-	bh=BeKZrPy9fdW7EVHNpMyq4DyCehXspxqakFUqSMoELj8=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=L1lou/y+BrvYFz5OFWB9oE8ZJypCFrC6uQoMFHkeSt0mDINEyn2bM0a40VJ6MhT3ZAfoBA7DDSbUJyXkPW2vqhps6jAty8qIZT9r4MkL3701EN0ADQJW03MoClY6pjY1Rl671gkCX1b3c5ug8RqbyX7OAv9boIo8LGVucXSWXlQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=d46Ez4+/; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Jh0GZIk5; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785139748; c=relaxed/simple;
+	bh=o+0VBZGZpUXbU+6zVjhJ8wUMQVpyFOeluaJKjWJ7TDQ=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=tT9Pfxf5EFq7iuRdi0VHar65j+TwrPY6Wk84c46ps1UQRzJ2PoRMy7wwpMq4aHT0xu5RmHUyOPgpAVz0NN2//PuuTm70zcLd6t8aZfrziRL96DCmaKY7GjuMEozEU/NM+g26kj/AZjOgRtujkp0ov4bOySi7c9zMbVnnCKfh96Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=oQBzvxjJ; arc=none smtp.client-ip=209.85.210.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="d46Ez4+/";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Jh0GZIk5"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66R7Rit53180996
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 08:06:07 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=ApEcPXJdRgfW9Ddtf5dUPtHM
-	c6KvRM1cTYchNq42FjI=; b=d46Ez4+//CoLy2SQom6QAe2tIbOIbXhIkTh1xQ6K
-	4kcXYF2VVLpb2aay15O84a2dLX3le4pVY0JFKpqu5Gek5pyzQB+Ignq4xljPODek
-	p6G2qhftNrngwuJFU7hK9/2lJVzUidCWT6PG1K5ToyxUYpbArEr1iQMZp6JlkEOL
-	8CVaiZiUxfSwWa0QS2PW5miRHNEOU32tcyLtaDLFLZZMIb3X/VjH/IYnLsW2daXu
-	Y4S0cq8nzKDcBgbzI8cVaNjXGCgBvyEfRYER9dGoyntHOTcXgJco6O6slAR/59v8
-	mX62cMtm2b4DXL/nPib+SsrxpxB6f4zgW564GIdxYoYq3Q==
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fngystbvn-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 08:06:07 +0000 (GMT)
-Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-84a67b16217so4271767b3a.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 01:06:07 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="oQBzvxjJ"
+Received: by mail-pf1-f181.google.com with SMTP id d2e1a72fcca58-84861fc51f5so1734876b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 01:09:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785139567; x=1785744367; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=ApEcPXJdRgfW9Ddtf5dUPtHMc6KvRM1cTYchNq42FjI=;
-        b=Jh0GZIk5iWXo6p6oNiU58/uWiKCSUlJLyZ25AzLILfO1V6EiB7SI83jxIkZwa3bTED
-         fepvGn01pL89ITKEuPhj3FkuncGdyNzhsVu25neOSLZn48hDrgiyOpVDc+Ogmw6xmGDK
-         pRG1M6s+O/xwGSAwyFCEuH/dMCKUnM+BF/VaISl1rZzquktOlqWdEukayzaeL31hx1E8
-         lBAxjUad3NHsE4RyCQKpmgpg8RfaQsplx1b55y1/ZL1y43iqR5VhdP6oCUKS0u47Abq5
-         zy+BIbYyYa3PileQSKX6JRI702zBbbyr6K6PQ7jhPmiNjDsxAwQ7LZh8tnYKbdxa8jX0
-         z3/g==
+        d=linaro.org; s=google; t=1785139746; x=1785744546; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=5lOIBQB+cpFjp6D6aOc1DsVhI/qzX8t4m07LpbMLmU0=;
+        b=oQBzvxjJmADkc7FMbDcpU0dFTxJYDRCo+FcQoW5VrrGlP3gi3EVYSz/CAJtyg3xvyt
+         kZjCZZ/mjIHM1lIrfItspbwVmBlIz1hAy7egprSE+PNnq8RF2zNqh+2K7uWBHK5CoswW
+         QqDxVHHABiZ7F8avkjwpWXwqbfDCo+wVcQvvXip8VFwJjGoWyEy0MPwmeqD1km03o7hS
+         4i2Bh/nKua0+iqG1J6ELbVl+Kj21j763OA+vYdaoDigw+AZ6JEW5mbABEPlXrhuue/Y1
+         MqLWJPg5kJCUP7xXAtct2vYhT+qwTuD3+KAgc18Mj7M/y0fS/m4HXtyhSj26opg7OIn/
+         KqoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785139567; x=1785744367;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ApEcPXJdRgfW9Ddtf5dUPtHMc6KvRM1cTYchNq42FjI=;
-        b=mcPSOtwgYyp26yS6xRbkKvyva2fsPKDwbTaIo82myBNYUKs2pAGRtj/OffG+DFMSfo
-         g1BqmOZYeLBwZ8ydPRotKE0wb7LU9zqS91f/u08yBK4LLZg6OB+7HVnolZ0fbGUjIrZ0
-         WSA8SgRwt0rT8PMbiZbCRggZt1yBvfIxzaYZfx8UG4Dx3/qm/+NWsw3Z5YyxnpN/IcgD
-         rkW4c2B5myzLfwS6OM2lYf2zveSZQXLTB+ye6yNadApQOrIftsFDdcubuHmPgkU9BDAa
-         QiTeR2ouU4yHNvoHB6sd2K8F6y2Q2KLB3LzyoXb/Hga7v78i3HBwE+C/sABTzx4LTBxh
-         e60A==
-X-Forwarded-Encrypted: i=1; AHgh+RoympJYZ0i9jGqkXERAnD3DbwDLUe1jrwiXlb3YBvHZHGrV2SnyEXMk8nz9UxiXN3tU3zxW9nx6RMzs21F4@vger.kernel.org
-X-Gm-Message-State: AOJu0YzuSEzd/KnghZV5OJJ/Xd8icVcE55YJMFZBJo7woEfo91I2ys2V
-	eMEpyAnbo4xvp+d2IuoSriznjLFu+lsnDM0I+de1jFZwRzW5I21u5QP2foz95tHNqjREmqIl8az
-	qrzsxjCkxYWos+eYE8fbXYpdvM2YLsma0f22ZCvCbWEDbZ0S72EuDDaZTLjyDXzq32Gul
-X-Gm-Gg: AR+sD10yb4oCKvYSgdMCi8hFdNo98c4qCRlGU9brd+xXBdU0s4XRwu+2q13GD6ze2e8
-	RggyGSgYb2TexE34oVXxJ7mvv6t3FDpV5FzP3NQMSKILX4ZfGxoXHwuU+9d/xWyYV8n/iN8Bhrv
-	Wkrk8OJQ03aZY/J2VRPIzGsxXxdEm3eBknGYwZ5+Hrdy1224AjJZ9qWa+7SemjA7o76sWj+TtTu
-	yOksEClRsx/rwaXnmersZHaVWbePZ4d4WpluXLOufohORg1p+Kb+OVBpLZV5ryINcmJn/aihaTi
-	Z9BK/RvSzu2qSu8GBmszzcTWzFpJcEnqmvR4nJ5XMemMQ/DtlSYUacYfE9nwsZJbYc69viPXf4F
-	K92qOIR/Godq5sGzsmhiKVeoaDH7cQP2TOZj/ronSsnk=
-X-Received: by 2002:a05:6a00:801b:b0:848:6720:6fec with SMTP id d2e1a72fcca58-84e5946745bmr5855634b3a.28.1785139566649;
-        Mon, 27 Jul 2026 01:06:06 -0700 (PDT)
-X-Received: by 2002:a05:6a00:801b:b0:848:6720:6fec with SMTP id d2e1a72fcca58-84e5946745bmr5855619b3a.28.1785139566150;
-        Mon, 27 Jul 2026 01:06:06 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84e5344e577sm2627352b3a.58.2026.07.27.01.06.02
+        d=1e100.net; s=20251104; t=1785139746; x=1785744546;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=5lOIBQB+cpFjp6D6aOc1DsVhI/qzX8t4m07LpbMLmU0=;
+        b=OqPPDhCzM6DOsUUHeTfsqi7N0fc5czeg2W9w7DjA331La5Pcszdkss5XK5EomJEzU+
+         TfYoR8OZSnGpnsfMPTU6GILMTOAkayxyv6+S+VusMR/F2QlnAv4jddej0qcvnUjZSH2u
+         SEQ+mhNchRCYJ+gNjpArnWZy1/UgL6eloi7nKL6qSnlDyrpuwmkk9EMpj6t1WOAYEIeU
+         fOkLiEy5Eu+1gUi43rVMEL5e9Zs1oKRUQ4tLXVcobBzxcDoCeaoLVvgfSxOmK8TJ/Z3R
+         tC1CtaGUVyRdKpdxGFyroiaioWArF7ul8CJWP4hIlNE1n5wn5bpRdsVLn7FeJFBi5ADJ
+         Xmkw==
+X-Gm-Message-State: AOJu0YwlN3zREN3kkpf87ZhMg9QBmpSdCF0IEc5LMo9isauUKYqHhq9j
+	ovlSn4Qswr9N9R/MbWAi3gAMOPqPgU/kPYPv0LOcZHUM+cnopwYyL2ngn5H3tjivHIjrPcQ6n/9
+	m2W2yLmWmDw==
+X-Gm-Gg: AR+sD10TJYRxREgvAwuf+SkpgTcq7cKTQNoVUTO0VwgJgSrT6uU4HT+R7x/TSt9VJ7B
+	v9PLOdCfpq08wrjWlk0VVblgNyuRxrnZbcE96EQ3LeJr4hk91MAyb2PdXxw0TGSR6q+wKY0iITx
+	PqrI1OGMdsaRHLBG9oj+9mi4Jn7PHH7me0pEi0SWJtyKWCL+qot5PQbGQ57ttHX48+F8OfYItoS
+	jjMB/oTzcOk32yrpgBpjAIaEOpMEdsEZs75OyJvNlutY0EPiJldWjgSZAET5I+HqarBz1Qs2s/g
+	0mj81m1EXkDQ39J7Ghnk3F0P7n0B47i1syHDIM2pABvnCYiBN+FzKNsMr/xlB6TXBF44ninvUDl
+	DSAz5imfuwJmYQBy2FLeyWAJ3LLzoA+Qd4af7KCAUFfMvd2yrksl0t2zUdz62hE1YQIy21LB3C7
+	I8oQ==
+X-Received: by 2002:a05:6a00:a889:b0:848:3dae:66e2 with SMTP id d2e1a72fcca58-84e594483a9mr5962215b3a.26.1785139746420;
+        Mon, 27 Jul 2026 01:09:06 -0700 (PDT)
+Received: from [127.0.1.1] ([116.237.168.131])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84e5344e577sm2630658b3a.58.2026.07.27.01.08.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Jul 2026 01:06:05 -0700 (PDT)
-Date: Mon, 27 Jul 2026 16:05:59 +0800
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 3/3] remoteproc: qcom: pas: Add Nord ADSP and CDSP
- support
-Message-ID: <amcRZ8OpfhBytcT4@QCOM-aGQu4IUr3Y>
-References: <20260727074621.561661-1-shengchao.guo@oss.qualcomm.com>
- <20260727074621.561661-4-shengchao.guo@oss.qualcomm.com>
+        Mon, 27 Jul 2026 01:09:06 -0700 (PDT)
+From: Jun Nie <jun.nie@linaro.org>
+Subject: [PATCH v5 0/6] Add support to 2 panels in bonded-DSI mode
+Date: Mon, 27 Jul 2026 16:08:39 +0800
+Message-Id: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260727074621.561661-4-shengchao.guo@oss.qualcomm.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI3MDA3OSBTYWx0ZWRfX8r7jr33g3BcV
- iSkExtCnWZP6X9apHtog7ht6pDai4W9EHEuQIoDxKqeJUsx3wI5hHOfKjcsEIYt8rLcLYrZVhJ4
- gKX6xXduLvCbXR/1VGtbo7CU4bYxk6ghCXeLzTjAdEoIjWeic48kRGIs+QLkR8d9zgvbsINT0DU
- bxYLp2pCJXcyM0gROWQwvc/2jl/W6/80VXcPoh76QUQtgf/7YXLF65Cjj513q5sL0/lomjuzgh0
- R+ztNi9mSYGvx40UdS6XMYr7Mvxr8DkHyzVuNoLVa40BF52JIYqAo10WCqzrV8kn2UtzzoSr2fa
- RTeVsBOllZWnzX8E62maiCxzu5zhJDO5Vq8I6LTF7QYuBgkI+gD+6jP2SdlalpY07TlEPgc+2ep
- Y6cIA4g0RF0syI7waA2oUpnYr5DMQraG7Muiwojp880CGDPf8UsgCXuVptpn+Mg6T4aMf4jy/er
- VXPGSfxefiHV/XUUmfg==
-X-Proofpoint-GUID: T4W4N8elavyha_6e3WsdY9xH0VEFvu7v
-X-Authority-Analysis: v=2.4 cv=DNG/JSNb c=1 sm=1 tr=0 ts=6a67116f cx=c_pps
- a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=VojNNS5daEuw-N1JAjYA:9 a=CjuIK1q_8ugA:10
- a=zc0IvFSfCIW2DFIPzwfm:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI3MDA3OSBTYWx0ZWRfX4OzibipuWZ+T
- bi0v/e6Zx5qZUUuZ85GL9cB9mnXsnyF4RDEShgXaPLfzR3R6BUgVbvCBTZsdbX73NnNjfNrP8DV
- PZJzrjYfHzzAtV0popZNRssZsVPzfDY=
-X-Proofpoint-ORIG-GUID: T4W4N8elavyha_6e3WsdY9xH0VEFvu7v
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-27_02,2026-07-24_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 clxscore=1015 malwarescore=0 bulkscore=0 adultscore=0
- suspectscore=0 impostorscore=0 lowpriorityscore=0 phishscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607270079
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAcSZ2oC/4WNQQ6CMBBFr0Jm7ZiBUEpceQ/CojgDTKKtaQ3Rk
+ N7dygVcvpf893dIElUSXKodomyaNPgC5lTBbXV+EVQuDA01HZmmxvToO0NoscYpeBZGTorWWTa
+ TpbnrLZTtM8qs76M7jIVXTa8QP8fN1v7sv+LWIqFrmY1Qb2iur3f1LoZziAuMOecvMKQuZrsAA
+ AA=
+To: Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ devicetree@vger.kernel.org, Jun Nie <jun.nie@linaro.org>, 
+ Jonathan Marek <jonathan@marek.ca>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785139738; l=3282;
+ i=jun.nie@linaro.org; s=20240403; h=from:subject:message-id;
+ bh=o+0VBZGZpUXbU+6zVjhJ8wUMQVpyFOeluaJKjWJ7TDQ=;
+ b=sIrxg75P//yvScd7tBPPu7ciNJByr6dNug1y7gdFARHoomw3+5tOcT2zAuODE7BR9r4tP/p/C
+ cbr/QMz6Af1B/NGuDzPbSRwSigk0kO38yF4+9rETSgn7DgX2bguVlx3
+X-Developer-Key: i=jun.nie@linaro.org; a=ed25519;
+ pk=MNiBt/faLPvo+iJoP1hodyY2x6ozVXL8QMptmsKg3cc=
 
-On Mon, Jul 27, 2026 at 03:46:21PM +0800, Shawn Guo wrote:
-> Add support for ADSP (HPASS DSP) and 4 CDSPs found on Nord SoC. The ADSP
-> is pre-booted by XBL before Linux starts, so set early_boot flag for
-> attach path rather than a cold boot sequence.
-> 
-> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> ---
->  drivers/remoteproc/qcom_q6v5_pas.c | 110 +++++++++++++++++++++++++++++
->  1 file changed, 110 insertions(+)
-> 
-> diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-> index 25599d728208..6f3850a3fa9e 100644
-> --- a/drivers/remoteproc/qcom_q6v5_pas.c
-> +++ b/drivers/remoteproc/qcom_q6v5_pas.c
-> @@ -1434,6 +1434,111 @@ static const struct qcom_pas_data milos_cdsp_resource = {
->  	.smem_host_id = 5,
->  };
->  
-> +static const struct qcom_pas_data nord_adsp_resource = {
-> +	.crash_reason_smem = 423,
-> +	.firmware_name = "adsp.mdt",
-> +	.dtb_firmware_name = "adsp_dtb.mbn",
-> +	.pas_id = 1,
-> +	.dtb_pas_id = 36,
-> +	.minidump_id = 5,
-> +	.auto_boot = true,
-> +	.early_boot = true,
-> +	.proxy_pd_names = (char*[]){
-> +		"cx",
-> +		"mx",
-> +		NULL
-> +	},
-> +	.load_state = "adsp",
-> +	.ssr_name = "lpass",
-> +	.sysmon_name = "adsp",
-> +	.ssctl_id = 0x14,
-> +	.smem_host_id = 2,
-> +};
-> +
-> +static const struct qcom_pas_data nord_cdsp0_resource = {
-> +	.crash_reason_smem = 601,
-> +	.firmware_name = "cdsp.mdt",
-> +	.dtb_firmware_name = "cdsp_dtb.mbn",
-> +	.pas_id = 18,
-> +	.dtb_pas_id = 37,
-> +	.minidump_id = 7,
-> +	.auto_boot = true,
-> +	.proxy_pd_names = (char*[]){
-> +		"cx",
-> +		"mx",
-> +		"nsp",
-> +		NULL
-> +	},
-> +	.load_state = "cdsp",
-> +	.ssr_name = "cdsp0",
-> +	.sysmon_name = "cdsp0",
-> +	.ssctl_id = 0x17,
-> +	.smem_host_id = 5,
-> +};
-> +
-> +static const struct qcom_pas_data nord_cdsp1_resource = {
-> +	.crash_reason_smem = 633,
-> +	.firmware_name = "cdsp1.mdt",
-> +	.dtb_firmware_name = "cdsp1_dtb.mbn",
-> +	.pas_id = 30,
-> +	.dtb_pas_id = 59,
-> +	.minidump_id = 20,
-> +	.auto_boot = true,
-> +	.proxy_pd_names = (char*[]){
-> +		"cx",
-> +		"mx",
-> +		"nsp",
-> +		NULL
-> +	},
-> +	.load_state = "cdsp1",
-> +	.ssr_name = "cdsp1",
-> +	.sysmon_name = "cdsp1",
-> +	.ssctl_id = 0x20,
-> +	.smem_host_id = 69,
-> +};
-> +
-> +static const struct qcom_pas_data nord_cdsp2_resource = {
-> +	.crash_reason_smem = 665,
-> +	.firmware_name = "cdsp2.mdt",
-> +	.dtb_firmware_name = "cdsp2_dtb.mbn",
-> +	.pas_id = 57,
-> +	.dtb_pas_id = 60,
-> +	.minidump_id = 29,
-> +	.auto_boot = true,
-> +	.proxy_pd_names = (char*[]){
-> +		"cx",
-> +		"mx",
-> +		"nsp",
-> +		NULL
-> +	},
-> +	.load_state = "cdsp2",
-> +	.ssr_name = "cdsp2",
-> +	.sysmon_name = "cdsp2",
-> +	.ssctl_id = 0x1f,
-> +	.smem_host_id = 133,
-> +};
-> +
-> +static const struct qcom_pas_data nord_cdsp3_resource = {
-> +	.crash_reason_smem = 666,
-> +	.firmware_name = "cdsp3.mdt",
-> +	.dtb_firmware_name = "cdsp3_dtb.mbn",
-> +	.pas_id = 58,
-> +	.dtb_pas_id = 61,
-> +	.minidump_id = 30,
-> +	.auto_boot = true,
-> +	.proxy_pd_names = (char*[]){
-> +		"cx",
-> +		"mx",
-> +		"nsp",
-> +		NULL
-> +	},
-> +	.load_state = "cdsp3",
-> +	.ssr_name = "cdsp3",
-> +	.sysmon_name = "cdsp3",
-> +	.ssctl_id = 0x1a,
-> +	.smem_host_id = 197,
-> +};
-> +
->  static const struct qcom_pas_data sm8450_mpss_resource = {
->  	.crash_reason_smem = 421,
->  	.firmware_name = "modem.mdt",
-> @@ -1695,6 +1800,11 @@ static const struct of_device_id qcom_pas_of_match[] = {
->  	{ .compatible = "qcom,milos-cdsp-pas", .data = &milos_cdsp_resource },
->  	{ .compatible = "qcom,milos-mpss-pas", .data = &sm8450_mpss_resource },
->  	{ .compatible = "qcom,milos-wpss-pas", .data = &sc7280_wpss_resource },
-> +	{ .compatible = "qcom,nord-adsp-pas", .data = &nord_adsp_resource },
-> +	{ .compatible = "qcom,nord-cdsp0-pas", .data = &nord_cdsp0_resource },
-> +	{ .compatible = "qcom,nord-cdsp1-pas", .data = &nord_cdsp1_resource },
-> +	{ .compatible = "qcom,nord-cdsp2-pas", .data = &nord_cdsp2_resource },
-> +	{ .compatible = "qcom,nord-cdsp3-pas", .data = &nord_cdsp3_resource },
+The 2 DSI interfaces may be connected to 2 independent panels in bonded-DSI
+mode. Horizontal timing and DSC configuration are adjusted per individual
+panel in DSI host side. Support to multiple slice per packet is added for
+the device setup to test the usage case. A panel driver is included as an
+use case example.
 
-Oops! It breaks the alphabetic order. Will fix.
+Changes vs v4:
+- Add git commit message to clarify dual_panel member of mipi_dsi_device does
+  not force panel to handle panel topology if panel driver does not intend to
+   support dual panels.
+- Add git commit message to clarify dsc->pic_width does not impact crtc
+  configuration.
+- Clear dsc parameter of dsi host to handle non-DSC case.
+- Fix device tree document and pass "make dt_binding_check"
+- Remove unrelated platform dts nodes in panel device tree document.
+- Fix regulator resource release sequence and device leak on failure.
+- Fix possible unalignment of DSC pps buffer usage.
+- Link to v4: https://lore.kernel.org/r/20260521-sm8650-7-1-bonded-dsi-v4-0-a4dd5e0850f1@linaro.org
 
-Shawn
+Changes vs v3:
+- A panel driver is added as an use case example.
+- Move dsc_slice_per_pkt to struct drm_dsc_config.
+- Polish commit messages.
+- Link to v3: https://lore.kernel.org/all/20250924-dsi-dual-panel-upstream-v3-0-6927284f1098@linaro.org
 
->  	{ .compatible = "qcom,msm8226-adsp-pil", .data = &msm8996_adsp_resource },
->  	{ .compatible = "qcom,msm8953-adsp-pil", .data = &msm8996_adsp_resource },
->  	{ .compatible = "qcom,msm8974-adsp-pil", .data = &msm8996_adsp_resource },
-> -- 
-> 2.43.0
-> 
+Changes vs v2:
+- Polish commit message to describe usage case and requirements to
+  panel driver.
+- Remove changes in device tree and add dual_panel flag in mipi_dsi_device
+  to pass information from panel to dsi host.
+- Drop the register programming to DSI_VBIF_CTRL, as no issue is seen
+  in latest test.
+- Link to v2: https://lore.kernel.org/r/20250220-dual-dsi-v2-0-6c0038d5a2ef@linaro.org
+
+Change vs v1:
+- Add device tree binding for dual panel case in handling frame width for
+  DSC to avoid breaking existing dual-DSI case.
+- Leverage Marijn's patch to configure proper slice per interface in
+  dsi_update_dsc_timing().
+- Polish commit comments.
+- Link to v1: https://lore.kernel.org/all/20240829-sm8650-v6-11-hmd-pocf-mdss-quad-upstream-8-v1-0-bdb05b4b5a2e@linaro.org/
+
+Signed-off-by: Jun Nie <jun.nie@linaro.org>
+---
+---
+Jun Nie (6):
+      dt-bindings: display: panel: Modify reset gpio number constrain
+      drm/msm/dsi: support DSC configurations with slice_per_pkt > 1
+      drm/mipi-dsi: Add flag to support dual-panel configurations
+      drm/msm/dsi: Support dual panel use case with single CRTC
+      dt-bindings: display: Add Synaptics R63455 panel support
+      drm/panel: Add driver for Synaptics R63455 DSI panel
+
+ .../bindings/display/panel/panel-common.yaml       |   2 +-
+ .../bindings/display/panel/synaptics,r63455.yaml   | 133 +++++
+ drivers/gpu/drm/msm/dsi/dsi_host.c                 |  37 +-
+ drivers/gpu/drm/panel/Kconfig                      |  11 +
+ drivers/gpu/drm/panel/Makefile                     |   1 +
+ drivers/gpu/drm/panel/panel-synaptics-r63455.c     | 644 +++++++++++++++++++++
+ include/drm/display/drm_dsc.h                      |   7 +
+ include/drm/drm_mipi_dsi.h                         |   2 +
+ 8 files changed, 820 insertions(+), 17 deletions(-)
+---
+base-commit: 6654f8f33aa6229a90d4401519a62a2bf96cb851
+change-id: 20260521-sm8650-7-1-bonded-dsi-7a7d5b70f687
+
+Best regards,
+-- 
+Jun Nie <jun.nie@linaro.org>
+
