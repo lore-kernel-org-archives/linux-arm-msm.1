@@ -1,372 +1,403 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C72033BC69C
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 07:08:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C46373DAAB7
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 07:10:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785136135; cv=none; b=j0xbcpcX2tZNYS69mNDfeR4oltPPoXPNURT1+wuDjJbo/vPehJaKbgOtxjIcagVrkTI+RsYvtb5BRuysNaAY0sMp8BdaXwoxxSTuoycSqhPxwOC2b1KUoG2RNiZbFeXIrk6iDxk+4nyxKvKiAGyOgYqJSuilA7f7x3kl+pJaliw=
+	t=1785136261; cv=none; b=clNgaM1vN/OtuBWGQ/pTnRARfe9nDVNe1RDhb03Ixgi4YfSysSAHkSbF3C9FOhI4cIAp+Dv+tnnM7U+IlR1c46g4wCmXoNDPOZWLMTIkmw63mPvkfqvkPYLoKXrLhH8L2J7KYEp/utzjTsD1dLcY9emvIV89spaKd5HAY7n91j8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785136135; c=relaxed/simple;
-	bh=twagioRdj5u3/xO0H1aHI4KeYj3p0rE+xd5vR4npmSQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=rXlxXgrJuwf9edBN2qpV8kJpJZGW8/WD9d1qbafaM7SREOm0An+/Od/cxkk1ONCErVGYdFRFD58miEP/V68e/Rzp46XJlOJJVPaaeLrMmO2hgdUOLJEDvvuL9B3bGsYJjqj92QWWrICODNYZhZMQndiO21QN7cwnoQRq9z/nANQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=KkgoqhPe; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=WoEIjDFf; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1785136261; c=relaxed/simple;
+	bh=zFBKrhK2pwXaG3WNgdlDnhSSB8c0jrON3i7enZymGB8=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=fqkDE9zL8F/G2UZV6+vQphUu5Ixctaz0aPW6ofTbihyPExYYL+sEViLKTkdAtJzsOy/7aNX482g1TbVVXfwfDRgVnDCvsooK2lc920aPqYj5wmHhCXO/zTNqBdBDMZI8WG7RgBuBUpQyXqXmuVjwNmz01bP1n43f3MGZXva1D34=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Ny/2z2x+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Y8qlmoZL; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="KkgoqhPe";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="WoEIjDFf"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66R1fl4G2381682
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 07:08:52 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ny/2z2x+";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Y8qlmoZL"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66R1fv7w2175959
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 07:10:59 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=41UrwuY56K8
-	Y7TuW8jERGpcIANnENE9wq4kghuHCYIE=; b=KkgoqhPeuL8pnk+UV1Oeq1Jkm23
-	WBK9uq58o/NAIKV2NxqM/w5aXCzv4lsnzSS/cIZmkkpmWa5lcY47yDgBMojx2saR
-	tlenhlkjVojoIqtn7VUgI7VQspW65yhEweCAP/R+xMGdg6JU+NzUVyEYJ8SoUU39
-	tuim51jrli8BY5/5YcR0x4146lOypJhGXPOkBKtK4MZtDdCBn/m2mHucNyWp/bdP
-	W9BAo6vLeLbf2+sikTgL21BImgu15FNmgGEJsnSgdBzYfFy+E7lY7+NVk/c2PXvI
-	bx21BlDypa3LsxYkae4UGRcKoJuyWC+lgiC8BF7+9LdM3rzPFKIzDEYNEcw==
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fmn7vcw8t-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	llsXN0N3BdtWqiMXZg7L9PFfjnaDu3GJ9CPFx7LxGYQ=; b=Ny/2z2x+MJTejbam
+	kCCQNttTzWmqvpsp3OW17+bN3aN9crFbrwBBdhmiOq+u8/ugo+PxMhUC2ZFz5/hy
+	56f5Dj4frBgSYq1LTZPeBo5nUfqf/zkyS984nxPBsGlphtbDCXkqw5NAJCTPGx3w
+	mCkINWOTlFnRjE1n3xvExPQbpjznUF0czx0i+lO6hfnzS5VDNEeVxle+aNdXXhEW
+	adkidbY/mpb25HQXzpxReSaVlIg4Du4B9jqldXvtjuuupTDZa7L4euWsJP0jR1Lh
+	28LZ+TsXxAE9CY1aLbmKwCvXBjgT5fjAg3gmFoSdA7vrAaJypM/AVx7nkHFwRMhI
+	yICr8g==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fmnwevt9h-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 07:08:52 +0000 (GMT)
-Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-8eeba1d9e47so39187206d6.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 00:08:52 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 07:10:58 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cfbf3e4a63so69790335ad.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 00:10:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785136132; x=1785740932; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=41UrwuY56K8Y7TuW8jERGpcIANnENE9wq4kghuHCYIE=;
-        b=WoEIjDFfVd3sMZi8Sn6lrKbHXAXvJr8U9EP9eNwZESg6Skf9V6T5JOb29xkZy/2Z8n
-         lyJUxj82oOiE53u1MexaXxS6Pt1yLhOMU44erlJCnYEm7d7alTaUnhbvnOTCLYEC6Lrr
-         E3N9YXMqDV14XzFRDTLuevFQRpNYMmrXuTFf92NEXqnyv1fnHPrcYGMNJ2VsO545BoRH
-         vmzKvY8Ma+dErPrPvNW4ebf5O1AP0V1d/UqbbW53TCdZd+adt16+ZyNSZ6aM57SeZ80P
-         xWrRUVPDMKIv26Fmp9ozEMsl83zDOCWE7NiQIx10oQU1ASua6cG8AQenQQM1thsuVVjd
-         ZvzQ==
+        d=oss.qualcomm.com; s=google; t=1785136258; x=1785741058; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=llsXN0N3BdtWqiMXZg7L9PFfjnaDu3GJ9CPFx7LxGYQ=;
+        b=Y8qlmoZLFjKnzKDAbAqK60BNjYafsgCNQUiOsFQFdNNIvfjCJ7fPHX2+yu3eL46THG
+         YZJUBnheXLkuZkSg0RZnpTXGXJy5L42nRuZYgdgrR7F+emgM4aiC1eyTNUihEYtx381s
+         K/D/HkjM3P2TZRsHg1dFghjfp0u/T2Sg5qCDuJJ0ruFDkCdd/GP2+DuXZWdEYatPHUXa
+         FS6a+4FQ4XwOz9iJfpX2KHImxGAFrsa0120riElkODL7Zo53n3WQzBB/Q25YwVAIVYfu
+         9iriCwkHTkd07Y0N+RSKWEHQlj+/258wAcP/g2GlxpjnCFPLHPvsO6U04eJUIrmb7uJD
+         Npuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785136132; x=1785740932;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=41UrwuY56K8Y7TuW8jERGpcIANnENE9wq4kghuHCYIE=;
-        b=QRwjN3OhPvXWlEjZlWsF/xm5DM/Zy+tzwS5dXooaIXSKJrR8BiwBUYd27ZJ217Dq5X
-         A2PaW14C1ihW7aLCuLwssXoIXR0hbKfzc30igqsz1S6RTOS8S3PAOI3D63TDOydU9S0Z
-         2zD849FeBfPXwT2yOHqVWsFcSvDwmseczGg/vvOhXpYVIQvXRR1x0QM8ryz9DraSSZ80
-         h3Qo45bS6gEgeGLGX6feuKfXMlEG4LegMKQw0bJOeuZttF/2Hp6+CAb9YixQ1azlZ2AE
-         SoaIXyJ+O4Vbk3KVP7W+VUjIf9vplzfv/PTOBYXAdkVcWuFFCWO7pOB1KKZZktcjExgU
-         kHnw==
-X-Gm-Message-State: AOJu0Yy4KNm8x3LlI+tE6oNVWWJQXawWNS9Ds5zaogUYEsBUXm+FPcuf
-	Al8KgszUTYVmYGM1+UhhuX3oiWnEZ/+HiHdDeac5KLXqEdxtAS+nrFCm0GmfLewebVElOvhaHoK
-	NVQaG3FbELym4fJRWsq/ralDo3rPVEeh07FVT7pWnzjXpzBi32TYiMjURFiTlcRPrRWHV
-X-Gm-Gg: AR+sD12WqXSmSLlpRpk8sZ7GrgGHDEjRE4TOSJnBgnKOxq2rUV9ZSPq6ToTvc7+i6kq
-	FKwADJDyx/0fk3aHKFaXs/Cr26DYtjk5ibsRGLbxHdWreeKNIvYYHbFrWCkdX8FOb6Su2Vv3Ad0
-	blX1RY7bIhv5tHPD6NNMAIO1MvSARU5nivPeox5D5u68MABR8VHrEQ9eFM25PzA+XPHaqvDHdyX
-	rqEZtaQewq95BitsADvx13VQStjoAeK7nKyLoCNERu/th1/qBywP0LN2AeoNnjkpiMAEXF3fL/b
-	/lvQETA0u0rwKlbufD9TfYZc0i57iB86FE0IiBOPuePf1fWeNqrWMDRRf0HX/RgFNZm5aaw6aMP
-	wiBMrjH/KIXKdPtZvyxlL5rdLhxVHcKDB4Q+eby8an7KgV7PCnzyYKtn9OAE=
-X-Received: by 2002:a05:6214:5c01:b0:8fd:6e32:1aa7 with SMTP id 6a1803df08f44-907ec954226mr89398196d6.65.1785136131895;
-        Mon, 27 Jul 2026 00:08:51 -0700 (PDT)
-X-Received: by 2002:a05:6214:5c01:b0:8fd:6e32:1aa7 with SMTP id 6a1803df08f44-907ec954226mr89397986d6.65.1785136131422;
-        Mon, 27 Jul 2026 00:08:51 -0700 (PDT)
-Received: from YUANJIEY2.qualcomm.com (Global_NAT1_IAD_FW.qualcomm.com. [129.46.232.65])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-907e8522e88sm58884446d6.1.2026.07.27.00.08.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 27 Jul 2026 00:08:51 -0700 (PDT)
-From: Yuanjie Yang <yuanjie.yang@oss.qualcomm.com>
-To: andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org,
-        krzk+dt@kernel.org, conor+dt@kernel.org
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, yuanjie.yang@oss.qualcomm.com,
-        tingwei.zhang@oss.qualcomm.com,
-        Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>,
-        Ziyue zhang <ziyue.zhang@oss.qualcomm.com>
-Subject: [PATCH v2 2/2] arm64: dts: qcom: Add base HAMOA-IOT-COME board
-Date: Mon, 27 Jul 2026 15:07:17 +0800
-Message-ID: <20260727070758.528-3-yuanjie.yang@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260727070758.528-1-yuanjie.yang@oss.qualcomm.com>
-References: <20260727070758.528-1-yuanjie.yang@oss.qualcomm.com>
+        d=1e100.net; s=20251104; t=1785136258; x=1785741058;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=llsXN0N3BdtWqiMXZg7L9PFfjnaDu3GJ9CPFx7LxGYQ=;
+        b=NfSvFxaC0psz8xzIbvB4VZPwkR8oRHXZDnjmFzOG/J2J1Ff1K6rRJ/B6XYOXnPvaTF
+         ptwNS6nob4CIf6rjUzcqGU1t/tZbA30W6jDn18tiByTBcLHn50iPKbaaAB9qRN1mbYFS
+         dkrnE3JkpbrbgwDA4hAinpN/a3pJu3IGr2g/kLje8l5GHV0Q9IR+bYljECN937diptdA
+         RAifbPBT9RjKwYzgHQM5kWHAQhMJPDohxmJP2/BtbrROAvtOuttdt29pzDHXE9+eppPu
+         pLvS5AbdNPLeVRnr09C/bwW4FY3CFhrFWJ9EFJyKqpjXjhN4/ZFbCHMGyzcCCXY4xqKG
+         WaEA==
+X-Gm-Message-State: AOJu0Yxo6wi1bstBp/Gp7ObIpvbRMgEKohyvlSvRI2sIKc8+pzxrThfH
+	39cfW3zQBjrlPGoWCvw4FkaC7lbHgoUIMRFoVRBZyueSGseXTaT5hixcxgJxmdjiwbeJC4AbKJD
+	8a8v+BVkUVr+vqnRr/DjXnuwY6J7wwyBckLvIJrcwd1fXVKvd9vL/xTkABGpxaRp6Lp9z
+X-Gm-Gg: AR+sD10509AdC2ABfXUtMp1mXtXj4VfMi5HZ3riWFR5NtlPkUqIiDwzsfIWBwJ4m9yt
+	LWygsLBCSlEWeQGjsMS4grRD/Q8o6Kmug7MrRJZT6w6vtNcyDYZmwCsA2O18wwUTGukDAwlujY8
+	aUEQGdgfCzQexXdCpsaBwnL+B7lbdEV0xeANcI0j/2Ec6qu1ac1HXjl8sXx8EIdz6r810VggKBl
+	AgKjdaxHGZdJNnGcuItDFD0SOAhtybv31i+VR0ZBYxo4T1sjp309s2YQ+0OB+khkuAlAa4Er0Ne
+	/ERT1pyCP7p9pMqp95rHZdeDmPTjQmLqS/AZysk3rlzX8r3ujICcyBT71A9a9b4hDrbi+EqqeQ2
+	ZLM9L7RsqBt4nFn9x0qjCBkDm
+X-Received: by 2002:a17:903:2412:b0:2c1:98b7:ecf3 with SMTP id d9443c01a7336-2cfde851de6mr69686145ad.23.1785136258150;
+        Mon, 27 Jul 2026 00:10:58 -0700 (PDT)
+X-Received: by 2002:a17:903:2412:b0:2c1:98b7:ecf3 with SMTP id d9443c01a7336-2cfde851de6mr69685855ad.23.1785136257729;
+        Mon, 27 Jul 2026 00:10:57 -0700 (PDT)
+Received: from [10.206.98.126] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cfde59b8d6sm29863575ad.3.2026.07.27.00.10.54
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 27 Jul 2026 00:10:57 -0700 (PDT)
+Message-ID: <ebf3d2e2-b747-4075-80da-b60ce2ba4da8@oss.qualcomm.com>
+Date: Mon, 27 Jul 2026 12:40:52 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] misc: fastrpc: map ADSP remote heap into remoteproc IOMMU
+ domain
+To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Amol Maheshwari <amahesh@qti.qualcomm.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org, quic_bkumar@quicinc.com,
+        quic_chennak@quicinc.com
+References: <20260618-audio_fix_clean_v3-v1-1-ec1ee66fe455@oss.qualcomm.com>
+ <d3e8023c-cc52-4617-8095-cf4bfe109391@oss.qualcomm.com>
+Content-Language: en-US
+From: Anandu Krishnan E <anandu.e@oss.qualcomm.com>
+In-Reply-To: <d3e8023c-cc52-4617-8095-cf4bfe109391@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=GKk41ONK c=1 sm=1 tr=0 ts=6a670404 cx=c_pps
- a=oc9J++0uMp73DTRD5QyR2A==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
- a=lzBAuNTtmfptpNFdFGMA:9 a=iYH6xdkBrDN1Jqds4HTS:22
-X-Proofpoint-GUID: SK6XRq5SsXTxFluBElvS4zBIuhEZnS1o
-X-Proofpoint-ORIG-GUID: SK6XRq5SsXTxFluBElvS4zBIuhEZnS1o
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI3MDA2OSBTYWx0ZWRfX5FN1gmoJVFjp
- +FmsexpNpQjLI+kccCN1xuuHjiUYU+OeK4tzJZvKceNPgCq4wt+QE/3/CbTxPRRxUXIQibrZh/v
- 3GRi0mIjShe88a1g70licOhm7t7ttIA=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI3MDA2OSBTYWx0ZWRfXzEsaNDpSMexb
- zEn3hAcbdzMBlcs0Jk+6Eg4h1Zvj59s7AELVO8XLvgHoasWfNFug09lmy39Z0mhar2oQX+/f4Hk
- mjrf2bxyy7HXHpXQiTLgsJBOEEZm7f7QMTgGw0hvcFRVwe0Lap9nIOYj3bsPLnPZ1C0Xa47AAOX
- zX16QBtpaBFyLGRGhBIcolmA8rdwwrkS+DV1Xx6lsbrSW76pdym+8EEggXPf6a3z2uVSvmdMoFo
- Q1d/XW+j+XeGsF13OMwBQGVpoJMwWXCv0+wxi7FnloXdOGl5KzkYYGAJ8FG6ELJVSgcvcfIVjV6
- JNKRushCwU1/Wzus2xit8wa+jVjBH5sirlJ+5JZkdJU4rS6Pp/9XjWFMkh2C+TSPv4xZz8/CcFu
- 1/7eg/OXKRl5lWiMMNvxAE09i+iaGOdBHGwprYTnmGIevuGzytAI2HKFHbUqE17LLAy1RgYk+U8
- flniEgL9w6c3QTe/T5A==
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI3MDA2OSBTYWx0ZWRfX+MOrHovnb82S
+ 5X2NgCBS/3pOJjwzcwas6tvAnmAn14I8tijKPAM0QlGTXjPuVRcTwatohNJFeiHO3WQz2nxcMoW
+ 8QCAUMVAMg0Dnvop3/8xdeFoh99cJ6IGV9kvGxtaqo0gTH1ihWlfEZr3QsAmu0O7UKcNlyyVViU
+ Akah8ChhAnXKs8qZRcemQqgbTdJ3unoZMQmYNAGwJdK/tq9xXdsPjv5dhAeQ6PdCcWYuZ0bvw7R
+ SYzQ/gF6pCqDzVc6syzNqZMUCzuZEPX68uE4jLKMRo7wW1tc03litFEOms9zaL8+kU5QhxK6LUt
+ LoBWHZfb0Hy54c7UXYrL1OzqKxlR1kX7c9+UqvNAyKOkaUDgIGeNTMerRToBu6brukp37cPq0xG
+ m52CJ14gG7W1y0En+7dbiDJTYb1aZ98d3gcIdOdG6Z28E2rJ+qpItPPD0idEPgKPdeowBlA1xW2
+ HmGbBC1GQ9mkVgt2qtQ==
+X-Proofpoint-GUID: ef455OwHUBZZGV1QtaT1KHTcg3hxEeCm
+X-Authority-Analysis: v=2.4 cv=S77pBosP c=1 sm=1 tr=0 ts=6a670482 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=PhU69RS8PR5OjDqLnIAA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=1OuFwYUASf3TG4hYMiVC:22
+X-Proofpoint-ORIG-GUID: ef455OwHUBZZGV1QtaT1KHTcg3hxEeCm
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI3MDA2OSBTYWx0ZWRfX6plHljxA9+So
+ 7Mbc38fqB97/aCEuc4OBDlxbebykr9Vwmwz9xL34RM2LDGq3kjPBBrJUlCv+dUTs9vlVxTH6CQU
+ +sAmIdL+FIMgRRpYA6sd4UuYNp1JESY=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-27_01,2026-07-24_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 spamscore=0 malwarescore=0 lowpriorityscore=0 adultscore=0
- clxscore=1015 bulkscore=0 suspectscore=0 priorityscore=1501 phishscore=0
+ bulkscore=0 suspectscore=0 phishscore=0 clxscore=1015 impostorscore=0
+ priorityscore=1501 lowpriorityscore=0 malwarescore=0 adultscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607270069
 
-Add the initial device tree for the HAMOA-IOT-COME platform based on
-the Qualcomm X1E80100 SoC.
 
-The platform consists of a system-on-module (SoM) mounted on a carrier
-board. The SoM integrates the core system functionality through a SiP
-containing the X1E80100 SoC and its supporting components.
 
-Hierarchy:
-
-    Carrier Board
-        -> SoM
-            -> SiP
-                -> SoC
-
-The COME SiP hardware is effectively the same as the SoM used on the
-Qualcomm HAMOA EVK, while the carrier board provides the platform-specific
-peripherals and connectivity.
-
-Compared to the HAMOA EVK, PCIe controllers 3, 5 and 6 are routed to
-expansion slots, while PCIe controller 4 is connected to an ASM1164
-SATA controller. The platform does not provide a USB Type-C connector.
-The eUSB repeater (TUSB2E111YCGR) is configured through hardware strapping
-pins and therefore requires no software control.
-
-The initial device tree includes support for:
-- UART
-- Regulators
-- USB
-- PCIe
-- Pinctrl
-- ADSP, CDSP
-- UFS
-- Graphics
-- Video
-
-Regulators, pinctrl, graphics, video, ADSP and CDSP support are
-inherited from the common hamoa-iot-som.dtsi description.
-
-Co-developed-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-Signed-off-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-Co-developed-by: Ziyue zhang <ziyue.zhang@oss.qualcomm.com>
-Signed-off-by: Ziyue zhang <ziyue.zhang@oss.qualcomm.com>
-Signed-off-by: Yuanjie Yang <yuanjie.yang@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/Makefile             |   1 +
- .../boot/dts/qcom/hamoa-iot-come-som.dtsi     |  52 ++++++++
- arch/arm64/boot/dts/qcom/hamoa-iot-come.dts   | 116 ++++++++++++++++++
- 3 files changed, 169 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/hamoa-iot-come-som.dtsi
- create mode 100644 arch/arm64/boot/dts/qcom/hamoa-iot-come.dts
-
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index e05414290d8e..09847b4ff337 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -17,6 +17,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= apq8096-ifc6640.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= eliza-cqs-evk.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= eliza-mtp.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= glymur-crd.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= hamoa-iot-come.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= hamoa-iot-evk.dtb
- 
- hamoa-iot-evk-el2-dtbs	:= hamoa-iot-evk.dtb x1-el2.dtbo
-diff --git a/arch/arm64/boot/dts/qcom/hamoa-iot-come-som.dtsi b/arch/arm64/boot/dts/qcom/hamoa-iot-come-som.dtsi
-new file mode 100644
-index 000000000000..d8d9765be64b
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/hamoa-iot-come-som.dtsi
-@@ -0,0 +1,52 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+#include "hamoa-iot-som.dtsi"
-+
-+/ {
-+	vph_pwr: regulator-vph-pwr {
-+		compatible = "regulator-fixed";
-+
-+		regulator-name = "vph_pwr";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+
-+		regulator-always-on;
-+		regulator-boot-on;
-+	};
-+};
-+
-+&ufs_mem_phy {
-+	vdda-phy-supply = <&vreg_l3i_0p8>;
-+	vdda-pll-supply = <&vreg_l3e_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&ufs_mem_hc {
-+	reset-gpios = <&tlmm 238 GPIO_ACTIVE_LOW>;
-+
-+	vcc-supply = <&vreg_l17b_2p5>;
-+	vcc-max-microamp = <1300000>;
-+	vccq-supply = <&vreg_l2i_1p2>;
-+	vccq-max-microamp = <1200000>;
-+
-+	status = "okay";
-+};
-+
-+&usb_1_ss0 {
-+	/delete-property/ usb-role-switch;
-+	dr_mode = "peripheral";
-+};
-+
-+&usb_1_ss1 {
-+	/delete-property/ usb-role-switch;
-+	dr_mode = "host";
-+};
-+
-+&usb_1_ss2 {
-+	/delete-property/ usb-role-switch;
-+	dr_mode = "host";
-+};
-diff --git a/arch/arm64/boot/dts/qcom/hamoa-iot-come.dts b/arch/arm64/boot/dts/qcom/hamoa-iot-come.dts
-new file mode 100644
-index 000000000000..735a2b4efd97
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/hamoa-iot-come.dts
-@@ -0,0 +1,116 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+/dts-v1/;
-+
-+#include "hamoa-iot-come-som.dtsi"
-+
-+/ {
-+	model = "Qualcomm Technologies, Inc. Hamoa IoT ComE";
-+	compatible = "qcom,hamoa-iot-come", "qcom,hamoa-iot-come-som",
-+		     "qcom,hamoa-iot-som", "qcom,x1e80100";
-+	chassis-type = "embedded";
-+
-+	aliases {
-+		serial0 = &uart21;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+};
-+
-+&pcie3_port0 {
-+	reset-gpios = <&tlmm 143 GPIO_ACTIVE_LOW>;
-+	wake-gpios = <&tlmm 145 GPIO_ACTIVE_LOW>;
-+};
-+
-+&pcie4_port0 {
-+	reset-gpios = <&tlmm 146 GPIO_ACTIVE_LOW>;
-+	wake-gpios = <&tlmm 148 GPIO_ACTIVE_LOW>;
-+};
-+
-+&pcie5_port0 {
-+	reset-gpios = <&tlmm 149 GPIO_ACTIVE_LOW>;
-+	wake-gpios = <&tlmm 151 GPIO_ACTIVE_LOW>;
-+};
-+
-+&pcie6a_port0 {
-+	reset-gpios = <&tlmm 152 GPIO_ACTIVE_LOW>;
-+	wake-gpios = <&tlmm 154 GPIO_ACTIVE_LOW>;
-+};
-+
-+&thermal_zones {
-+	gpuss-0-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+
-+	gpuss-1-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+
-+	gpuss-2-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+
-+	gpuss-3-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+
-+	gpuss-4-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+
-+	gpuss-5-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+
-+	gpuss-6-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+
-+	gpuss-7-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+};
-+
-+&uart21 {
-+	compatible = "qcom,geni-debug-uart";
-+
-+	status = "okay";
-+};
--- 
-2.43.0
+On 27-07-2026 12:19 pm, Ekansh Gupta wrote:
+> On 18-06-2026 15:21, Anandu Krishnan E wrote:
+>> On KVM-based targets the kernel runs at EL2 without a separate
+>> hypervisor to manage inter-VM memory access control.  In this
+>> configuration the remoteproc is assigned its own IOMMU domain, and
+>> any memory carveout the DSP must access requires an explicit mapping
+>> into that domain before the DSP can reach it.
+>>
+>> The existing code calls qcom_scm_assign_mem() to transfer ownership
+>> of the ADSP remote heap carveout from HLOS to the DSP VM.  This SCM
+>> call is only meaningful when a separate hypervisor (e.g. Gunyah) is
+>> present to enforce inter-VM memory access control.  On KVM-based
+>> targets no such hypervisor exists, so the carveout must instead be
+>> mapped into the remoteproc's IOMMU domain via an identity mapping
+>> (IOVA == PA) using iommu_map().  Without this mapping the DSP
+>> triggers an SMMU translation fault when accessing the remote heap
+>> during audio PD static process creation.
+>>
+>> Detect whether the remoteproc has an IOMMU by checking for the
+>> "iommus" property on the remoteproc DT node and store the result in
+>> a new has_iommu flag in fastrpc_channel_ctx.  When the flag is set,
+>> map the carveout into the remoteproc's IOMMU domain instead of
+>> calling qcom_scm_assign_mem().  Introduce fastrpc_remote_heap_map()
+>> and fastrpc_remote_heap_unmap() helpers to encapsulate the IOMMU
+>> domain lookup and map/unmap operations.
+>>
+>> This change relies on the remote heap handling introduced in:
+>> https://lore.kernel.org/r/20260609025938.457-1-jianping.li@oss.qualcomm.com
+>>
+>> Link: https://lore.kernel.org/r/20260609025938.457-1-jianping.li@oss.qualcomm.com
+>> Signed-off-by: Anandu Krishnan E <anandu.e@oss.qualcomm.com>
+>> ---
+>> This patch depends on:
+>>
+>>   [PATCH v8 0/4] misc: fastrpc: Add missing bug fixes
+>>   https://lore.kernel.org/r/20260609025938.457-1-jianping.li@oss.qualcomm.com
+>>
+>> Please apply after that series.
+>> ---
+>>  drivers/misc/fastrpc.c | 141 +++++++++++++++++++++++++++++++++++++++----------
+>>  1 file changed, 114 insertions(+), 27 deletions(-)
+>>
+>> diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
+>> index a5af901c1cb8..9ce7af2091f1 100644
+>> --- a/drivers/misc/fastrpc.c
+>> +++ b/drivers/misc/fastrpc.c
+>> @@ -21,6 +21,7 @@
+>>  #include <linux/slab.h>
+>>  #include <linux/firmware/qcom/qcom_scm.h>
+>>  #include <uapi/misc/fastrpc.h>
+>> +#include <linux/iommu.h>
+>>  #include <linux/of_reserved_mem.h>
+>>  #include <linux/bits.h>
+>>  
+>> @@ -285,6 +286,8 @@ struct fastrpc_channel_ctx {
+>>  	struct list_head invoke_interrupted_mmaps;
+>>  	bool secure;
+>>  	bool unsigned_support;
+>> +	/* set when remoteproc has an IOMMU; use iommu_map instead of hyp_assign */
+>> +	bool has_iommu;
+> maybe something like use_iommu_map will be more meaningful here?>  	u64
+> dma_mask;
+sure will update 
+>>  	const struct fastrpc_soc_data *soc_data;
+>>  };
+>> @@ -2343,10 +2346,65 @@ static const struct fastrpc_soc_data default_soc_data = {
+>>  	.dma_addr_bits_default = 32,
+>>  };
+>>  
+>> +static int fastrpc_remote_heap_map(struct device *rdev,
+>> +				   struct device_node *rproc_node,
+>> +				   struct fastrpc_buf *heap)
+>> +{
+>> +	struct platform_device *rproc_pdev;
+>> +	struct iommu_domain *domain;
+>> +	int ret;
+>> +
+>> +	rproc_pdev = of_find_device_by_node(rproc_node);
+>> +	if (!rproc_pdev) {
+>> +		dev_err(rdev, "failed to find remoteproc platform device\n");
+>> +		return -ENODEV;
+>> +	}
+>> +
+>> +	domain = iommu_get_domain_for_dev(&rproc_pdev->dev);
+>> +	if (!domain) {
+>> +		put_device(&rproc_pdev->dev);
+>> +		dev_err(rdev, "no IOMMU domain for remoteproc\n");
+>> +		return -ENODEV;
+>> +	}
+>> +
+>> +	ret = iommu_map(domain, heap->dma_addr, heap->dma_addr, heap->size,
+>> +			IOMMU_READ | IOMMU_WRITE, GFP_KERNEL);
+>> +	if (ret)
+>> +		dev_err(rdev, "failed to map remote heap phys=0x%llx size=0x%llx err=%d\n",
+>> +			heap->dma_addr, heap->size, ret);
+>> +
+>> +	put_device(&rproc_pdev->dev);
+>> +	return ret;
+>> +}
+>> +
+>> +static void fastrpc_remote_heap_unmap(struct rpmsg_device *rpdev,
+>> +				      struct fastrpc_buf *heap)
+>> +{
+>> +	struct device_node *rproc_node;
+>> +	struct platform_device *rproc_pdev;
+>> +	struct iommu_domain *domain;
+>> +
+>> +	rproc_node = of_get_parent(of_get_parent(rpdev->dev.of_node));
+>> +	if (!rproc_node)
+>> +		return;
+>> +
+>> +	rproc_pdev = of_find_device_by_node(rproc_node);
+>> +	of_node_put(rproc_node);
+>> +	if (!rproc_pdev)
+>> +		return;
+>> +
+>> +	domain = iommu_get_domain_for_dev(&rproc_pdev->dev);
+>> +	if (domain)
+>> +		iommu_unmap(domain, heap->dma_addr, heap->size);
+>> +
+>> +	put_device(&rproc_pdev->dev);
+>> +}
+>> +
+>>  static int fastrpc_rpmsg_probe(struct rpmsg_device *rpdev)
+>>  {
+>>  	struct device *rdev = &rpdev->dev;
+>>  	struct fastrpc_channel_ctx *data;
+>> +	struct device_node *rproc_node;
+>>  	int i, err, domain_id = -1, vmcount;
+>>  	const char *domain;
+>>  	bool secure_dsp;
+>> @@ -2390,9 +2448,12 @@ static int fastrpc_rpmsg_probe(struct rpmsg_device *rpdev)
+>>  		}
+>>  	}
+>>  
+>> +	rproc_node = of_get_parent(of_get_parent(rdev->of_node));
+>> +	if (rproc_node)
+>> +		data->has_iommu = of_property_present(rproc_node, "iommus");
+>> +
+>>  	if (domain_id == SDSP_DOMAIN_ID || domain_id == ADSP_DOMAIN_ID) {
+>>  		struct resource res;
+>> -		u64 src_perms;
+>>  
+>>  		err = of_reserved_mem_region_to_resource(rdev->of_node, 0, &res);
+>>  		if (!err) {
+>> @@ -2401,21 +2462,41 @@ static int fastrpc_rpmsg_probe(struct rpmsg_device *rpdev)
+>>  					kzalloc_obj(*data->remote_heap, GFP_KERNEL);
+>>  				if (!data->remote_heap) {
+>>  					err = -ENOMEM;
+>> -					goto err_free_data;
+>> +					goto err_put_node;
+>>  				}
+>>  
+>>  				data->remote_heap->dma_addr = res.start;
+>>  				data->remote_heap->size = resource_size(&res);
+>> +
+>> +				if (data->has_iommu) {
+>> +					err = fastrpc_remote_heap_map(rdev,
+>> +								      rproc_node,
+>> +								      data->remote_heap);
+>> +					if (err) {
+>> +						kfree(data->remote_heap);
+>> +						data->remote_heap = NULL;
+>> +						goto err_put_node;
+>> +					}
+>> +				}
+>>  			}
+>> -			src_perms = BIT(QCOM_SCM_VMID_HLOS);
+>>  
+>> -			err = qcom_scm_assign_mem(res.start, resource_size(&res), &src_perms,
+>> -				    data->vmperms, data->vmcount);
+>> -			if (err)
+>> -				goto err_free_data;
+>> +			if (!data->has_iommu) {
+>> +				u64 src_perms = BIT(QCOM_SCM_VMID_HLOS);
+>> +
+>> +				err = qcom_scm_assign_mem(res.start,
+>> +							  resource_size(&res),
+>> +							  &src_perms,
+>> +							  data->vmperms,
+>> +							  data->vmcount);
+>> +				if (err)
+>> +					goto err_put_node;
+>> +			}
+>>  		}
+>>  	}
+>>  
+>> +	of_node_put(rproc_node);
+>> +	rproc_node = NULL;
+>> +
+>>  	secure_dsp = !(of_property_read_bool(rdev->of_node, "qcom,non-secure-domain"));
+>>  	data->secure = secure_dsp;
+>>  	data->soc_data = soc_data;
+>> @@ -2471,6 +2552,9 @@ static int fastrpc_rpmsg_probe(struct rpmsg_device *rpdev)
+>>  	if (data->secure_fdevice)
+>>  		misc_deregister(&data->secure_fdevice->miscdev);
+>>  
+>> +err_put_node:
+>> +	of_node_put(rproc_node);
+>> +
+>>  err_free_data:
+>>  	kfree(data->remote_heap);
+>>  	kfree(data);
+>> @@ -2513,28 +2597,31 @@ static void fastrpc_rpmsg_remove(struct rpmsg_device *rpdev)
+>>  	list_for_each_entry_safe(buf, b, &cctx->invoke_interrupted_mmaps, node)
+>>  		list_del(&buf->node);
+>>  
+>> -	if (cctx->remote_heap && cctx->vmcount) {
+>> -		u64 src_perms = 0;
+>> -		struct qcom_scm_vmperm dst_perms;
+>> -
+>> -		for (u32 i = 0; i < cctx->vmcount; i++)
+>> -			src_perms |= BIT(cctx->vmperms[i].vmid);
+>> -
+>> -		dst_perms.vmid = QCOM_SCM_VMID_HLOS;
+>> -		dst_perms.perm = QCOM_SCM_PERM_RWX;
+>> -
+>> -		err = qcom_scm_assign_mem(cctx->remote_heap->dma_addr,
+>> -					  cctx->remote_heap->size, &src_perms,
+>> -					  &dst_perms, 1);
+>> -		if (err)
+>> -			dev_err(&rpdev->dev,
+>> -				"Failed to assign memory back to HLOS: dma_addr %pad size %#llx err %d\n",
+>> -				&cctx->remote_heap->dma_addr, cctx->remote_heap->size, err);
+>> +	if (cctx->remote_heap) {
+>> +		if (cctx->has_iommu) {
+>> +			fastrpc_remote_heap_unmap(rpdev, cctx->remote_heap);
+>> +			kfree(cctx->remote_heap);
+>> +			cctx->remote_heap = NULL;
+>> +		} else if (cctx->vmcount) {
+>> +			u64 src_perms = 0;
+>> +			struct qcom_scm_vmperm dst_perms;
+>> +
+>> +			for (u32 i = 0; i < cctx->vmcount; i++)
+>> +				src_perms |= BIT(cctx->vmperms[i].vmid);
+>> +
+>> +			dst_perms.vmid = QCOM_SCM_VMID_HLOS;
+>> +			dst_perms.perm = QCOM_SCM_PERM_RWX;
+>> +
+>> +			err = qcom_scm_assign_mem(cctx->remote_heap->dma_addr,
+>> +						  cctx->remote_heap->size,
+>> +						  &src_perms, &dst_perms, 1);
+>> +			if (!err) {
+>> +				kfree(cctx->remote_heap);
+>> +				cctx->remote_heap = NULL;
+> why is this needed under error check? Won't it lead to memory leak? > +			}
+> yes , will udpate and share new version
+>> +		}
+>>  	}
+>>  
+>> -	kfree(cctx->remote_heap);
+>> -	cctx->remote_heap = NULL;
+>> -
+>>  	of_platform_depopulate(&rpdev->dev);
+>>  
+>>  	fastrpc_channel_ctx_put(cctx);
+>>
+>> ---
+>> base-commit: f1256704b88067430e255e5c85d6b727e1bbb2ea
+>> change-id: 20260618-audio_fix_clean_v3-9df607546095
+>>
+>> Best regards,
+>> --  
+>> Anandu Krishnan E <anandu.e@oss.qualcomm.com>
+>>
 
