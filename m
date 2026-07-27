@@ -1,225 +1,112 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pf1-f172.google.com (mail-pf1-f172.google.com [209.85.210.172])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D366D38657E;
-	Mon, 27 Jul 2026 20:29:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 552253D25AF
+	for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 20:41:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.210.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785184177; cv=none; b=BMZNhTn2lzn6QxOsRSQtwoLiieKIFWQAU42J49qqDnkF8YdDYpxVjAU97OFuMw8hQ7ZyIZrzgPVH7dMfNI9BZAT69qDMudSFHgTENinzlRAgz4MN7hEwkhH6WBFGS3uxIbTkQhzWP1FNHQq2TAccjjhrsyDXuiEiU4LPpEhugS8=
+	t=1785184878; cv=none; b=Z/ZdcrmnmAlhscni3qbLHSyfIDpK5qr+33sgpge5nbLUALb5g6XuWu9iiNSPAGlq7WJ9PUoBoJnGxHV4X5wJM72+oeOd443g6aPuuTtsTOER13uxMNdq7oWuSqSLm4xKujv/8mgSrKf49ajEzmaIsyO9KwWaF5YWF60uSy6VUBs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785184177; c=relaxed/simple;
-	bh=Kdjg1rajS8cAG0WAE+1RmS+9GaYG6ZKuLeGP9a00ncY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=caqxPWhrpIio1dqUedHTpvjObXt2uxc2l38aYoX5PGlu4eF019TtiviavFoJsbkQzGtGxGaY913Z9/dZHCx+UMd6AhauANKq7NCgEjRTVednJkIgtayByVRKm7JZ7c/iQuzJb1Gx8y7an3tlQEbVnLw7gBwhHy7Ew2jq1sK2nVE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=VOccvNly; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785184878; c=relaxed/simple;
+	bh=cWjP7LzlVqxQbyKR9XTomd8cu5XOyupmxbQxtPdo3aY=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=nErPiuF3eHxEYx6+P/wU3hsAw9zVf1TDhv/CI08Vxw2JencA8ASqBTEbe+NAGwVmyZ8/ZKlBFCXJT51p/YmRfYxHls2BxNxhbsUjhFZlxo9bUstg8Y5mOmxCWnuPi47RoaIBRJa0WQoM29+UyhtQBTGWjxPFG60VCCcZuOCG30A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=phGd7+kh; arc=none smtp.client-ip=209.85.210.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="VOccvNly"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F07A81F000E9;
-	Mon, 27 Jul 2026 20:29:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785184175;
-	bh=hma6c/O+4dubSDjB1fhfl/X7eMkAj80EhqTMeqQfkeg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=VOccvNlyG487f3FXDFLQ+/ir23zrzc10+Fjvvnzas4sykIwsEHeuNU+vqaGx2DfsK
-	 mvq64BQKNGexQ0UDKrRO6W/6vKivWPz29429jBm3jpkawTdG1FQ+LrIYb7ux+EzqbM
-	 1/32w0U1EDq1W0H6hi1t9bx+bSqRmNTWlmkP0At6OTneAvubLe7jrQ506heaxVaUbq
-	 9MP0og7ev98B+3pmIr1nQ4vMUy0nvvGPRXD8KG671/9EMgqWDCxyhXrgoC2viF+TKy
-	 7aMHe+25qJcNh4DlhAiymQ/OT4CfgCYYcvtlB5qglJ0jCABg9MsGqX20tLlMCliklw
-	 TCbW3jKMcjpWw==
-Date: Mon, 27 Jul 2026 22:29:31 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Jun Nie <jun.nie@linaro.org>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, 
-	Dmitry Baryshkov <lumag@kernel.org>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
-	Abhinav Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>, 
-	Sean Paul <sean@poorly.run>, Marijn Suijten <marijn.suijten@somainline.org>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH v5 5/6] dt-bindings: display: Add Synaptics R63455 panel
- support
-Message-ID: <20260727-spotted-winged-mantis-7aa1ce@quoll>
-References: <20260727-sm8650-7-1-bonded-dsi-v5-0-c042266b9eeb@linaro.org>
- <20260727-sm8650-7-1-bonded-dsi-v5-5-c042266b9eeb@linaro.org>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="phGd7+kh"
+Received: by mail-pf1-f172.google.com with SMTP id d2e1a72fcca58-848d21bbaffso3241343b3a.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 13:41:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785184873; x=1785789673; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=7r5DtL0sBQKxu51vWXlifLkndvEzBXXj/6XC44jQqeo=;
+        b=phGd7+khM+4p/6gWgYo1+kjMkPZ9yVuZqqQJjgpaNfC2ZTSYp/Ik29KL1TNgPVjzlf
+         pLr9ELUzmP8fN+GAW927truFv0meoxxeZ1AflAcY8bZnfLRLMD2C/YsghCIGhy3OjqBh
+         t8ZVn5k1V+kc4OUaCzEQT0ULdCAS62Vl+zD11pdXa+DBIPohqNd5GIrh08LcN5Vgi8+v
+         1YHBhp1AoJscXKmCy7pmYvLhSDv0PnA3MSEe4mRNqp7jjGzt2e4tosZIs6OoweC0Lj0O
+         gQVjrA8uqlFm2bGPF0+m0eg8JM5n+TsNiS3/Oh7ZRcrSTG6T+ym47o/U7nnQX+rJyd4C
+         JGuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785184873; x=1785789673;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=7r5DtL0sBQKxu51vWXlifLkndvEzBXXj/6XC44jQqeo=;
+        b=ITt4+zV+qlkam/tiIKMJGV9y+IU30GgCdVu2coPOVUgIXj6lk9rK53ejuPLLZUzB+S
+         LzoBTVVw3rUAlFGRUzV4VDxE2JkmMCuDT4LNwHW79gI5+ngj1Bo3oEFZSnUzAkBxCxQV
+         AgF69V4wGhGgvYyi0TaX3xZXDVHg9HkVOWLVVX0fMMI3kvZgXcwP7i/ombs7tFhvBVjJ
+         acjU41OayP1gVobubJ0OJ4r2J75Nbw6couabso69ExtMF867bh0Wx4vzNcD0ntWPJecb
+         qTeArQ8xxCGyi8fmBM0wOsaCocK/r/YF2gAlDSmAtvMwTKmNBWjp5rVzfQ0E7xzKKKEC
+         KAkg==
+X-Forwarded-Encrypted: i=1; AHgh+Rqz/aOX9Lr4k9wvSHlJ5TyDPPdNA3PvMNQfcSQGzBhJuZpU8FKZGOd3bs0OZmXM6H83+6fCfVByJpvZSxaR@vger.kernel.org
+X-Gm-Message-State: AOJu0YwMq9cKeIsRsM7mdwYNHDXgRrMCqGuXJy1JfhefOYltiLd39KKx
+	UB7b5UcZ3bIebC2JlXBrgVS8ND2xdeRfODr5ggYHUxb1ff2yiXqQvIHZ
+X-Gm-Gg: AR+sD11PKYfErryWx34zxeM+XSSaQ4E3QMpk+NC+SmAQ9goQ3KzctkekrQc8WjUFPCo
+	FwTTOBKUw/+a0KOKn9cJEI4JZnojZzTHiv9XvmbnDhkvgw58U7S9DD2oqvA1s+vXAKnvjt0AbM1
+	pHfZQ+/TKSsnV4fBr7t+G4c7D5e3NAI7BAWscahl5/+og0433o6EKGTvoJq+3xptW1cK9JXASER
+	acwEmUhCe4lHmjyDmshIH/HK08Od3oOp1om1iONafO7nxYyjQSoSTYJ/bW7r5gEnjR/mXmT7x6F
+	2uyaSWYNwOJVQ96JookKuoIJepT6kanYrOMBrB/7kfw8QA5j0CarTlq1HYzwteRAFJqAKzNQJ/7
+	aHJZigezBbu6B1L6Xlk1mnfdmnzKwHakXhbEgPx9E6DY2usYISKa31gJNwcQDHpKAtHXDlpScj6
+	EwkJsgBduvHmJ0xlY=
+X-Received: by 2002:a05:6a00:9a3:b0:84c:539e:a355 with SMTP id d2e1a72fcca58-84e8d12951dmr861522b3a.74.1785184873509;
+        Mon, 27 Jul 2026 13:41:13 -0700 (PDT)
+Received: from cryptic.lan ([2001:569:7fab:e200:3789:64f9:8855:c0af])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84e533d1351sm3583338b3a.39.2026.07.27.13.41.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 27 Jul 2026 13:41:12 -0700 (PDT)
+From: Allen Pais <allen.lkml@gmail.com>
+To: Vinod Koul <vkoul@kernel.org>,
+	Frank Li <Frank.Li@kernel.org>
+Cc: Allen Pais <allen.lkml@gmail.com>,
+	dmaengine@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Arnd Bergmann <arnd@arndb.de>,
+	Kees Cook <kees@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+	linux-arm-msm@vger.kernel.org
+Subject: [PATCH v2 58/64] dmaengine: qcom-adm: use dma_chan_kill_bh
+Date: Mon, 27 Jul 2026 13:39:20 -0700
+Message-ID: <295b8a8c7e6a8e3da7a7eb1f632906569c5ab87a.1785183549.git.allen.lkml@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <cover.1785183549.git.allen.lkml@gmail.com>
+References: <20260108080332.2341725-1-allen.lkml@gmail.com> <cover.1785183549.git.allen.lkml@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260727-sm8650-7-1-bonded-dsi-v5-5-c042266b9eeb@linaro.org>
+Content-Transfer-Encoding: 8bit
 
-On Mon, Jul 27, 2026 at 04:08:44PM +0800, Jun Nie wrote:
-> Add support for the dual-panel system found in the virtual reality device.
-> This system consists of two physical 2160x2160 panels, each connected via
-> a MIPI DSI interface. The backlight is managed through DSI link.
-> 
-> Signed-off-by: Jun Nie <jun.nie@linaro.org>
-> ---
->  .../bindings/display/panel/synaptics,r63455.yaml   | 133 +++++++++++++++++++++
->  1 file changed, 133 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/display/panel/synaptics,r63455.yaml b/Documentation/devicetree/bindings/display/panel/synaptics,r63455.yaml
-> new file mode 100644
-> index 0000000000000..c3bc8df981df7
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/display/panel/synaptics,r63455.yaml
-> @@ -0,0 +1,133 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/display/panel/synaptics,r63455.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> +
-> +title: Synaptics R63455 based dual 2160x2160 MIPI-DSI Panel
-> +
-> +maintainers:
-> +  - Jun Nie <jun.nie@linaro.org>
-> +
-> +description:
-> +  Synaptics R63455 is a Virtual Reality Display Driver and VR Bridge, used in
-> +  pair in Headset devices. The Virtual Reality Display complex is composed of
-> +  two strictly identical display panels, each driven by its own DSI interface
-> +  but forms a single virtual display for the human eye perception and thus
-> +  requires a strict synchronization of the two display panel content update.
-> +
-> +allOf:
-> +  - $ref: panel-common.yaml#
-> +
-> +properties:
-> +  compatible:
-> +    items:
-> +      - enum:
-> +        - sharp,ls026b3sa06
-> +        - boe,vs026c4m-n52-6000
+virt-dma now dispatches completion callbacks through per-channel BH
+work instead of its tasklet. Cancel that work during teardown before
+channel storage is released.
 
-Not build checked. Please use tools, not humans for trivial things.
-
-> +      - const: synaptics,r63455
-> +
-> +  reg:
-> +    maxItems: 1
-> +    description: DSI virtual channel
-> +
-> +  reset-gpios:
-> +    maxItems: 2
-> +    description: 2 reset pins for 2 physical panels
-
-Won't work. gpio-consumer-common expects only one reset line. You need
-two separate properties.
-
-> +
-> +  left-pos-supply:
-> +    description: Positive 5.7V supply for left panel
-> +
-> +  right-pos-supply:
-> +    description: Positive 5.7V supply for right panel
-> +
-> +  left-neg-supply:
-> +    description: Negative 5.7V supply for left panel
-> +
-> +  right-neg-supply:
-> +    description: Negative 5.7V supply for right panel
-> +
-> +  left-backlight-supply:
-> +    description: Backlight 21V supply for left panel
-> +
-> +  right-backlight-supply:
-> +    description: Backlight 21V supply for right panel
-> +
-> +  vdda-supply:
-> +    description: core 1.8V supply for panels
-> +
-> +  ports:
-> +    properties:
-> +      port@0:
-> +        $ref: /schemas/graph.yaml#/properties/port
-> +        description: DSI input port for primary DSI link
-> +
-> +      port@1:
-> +        $ref: /schemas/graph.yaml#/properties/port
-> +        description: DSI input port for secondary DSI link
-> +
-> +    required:
-> +      - port@0
-> +      - port@1
-> +
-> +required:
-> +  - compatible
-> +  - reset-gpios
-> +  - left-pos-supply
-> +  - left-neg-supply
-> +  - right-pos-supply
-> +  - right-neg-supply
-> +  - left-backlight-supply
-> +  - right-backlight-supply
-> +  - vdda-supply
-> +
-> +additionalProperties: false
-> +
-> +examples:
-> +  - |
-> +    #include <dt-bindings/gpio/gpio.h>
-> +
-
+Signed-off-by: Allen Pais <allen.lkml@gmail.com>
 ---
+ drivers/dma/qcom/qcom_adm.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-> +    dsi@ae94000 {
-> +        vdda-supply = <&vreg_l3i_1p2>;
-> +        status = "okay";
-> +
-> +        qcom,dual-dsi-mode;
-> +        qcom,master-dsi;
+diff --git a/drivers/dma/qcom/qcom_adm.c b/drivers/dma/qcom/qcom_adm.c
+index 07fbe32d31fa..ea24e2de5154 100644
+--- a/drivers/dma/qcom/qcom_adm.c
++++ b/drivers/dma/qcom/qcom_adm.c
+@@ -918,8 +918,8 @@ static void adm_dma_remove(struct platform_device *pdev)
+ 		/* mask IRQs for this channel/EE pair */
+ 		writel(0, adev->regs + ADM_CH_RSLT_CONF(achan->id, adev->ee));
+ 
+-		tasklet_kill(&adev->channels[i].vc.task);
+-		adm_terminate_all(&adev->channels[i].vc.chan);
++		dma_chan_kill_bh(&achan->vc.chan);
++		adm_terminate_all(&achan->vc.chan);
+ 	}
+ 
+ 	devm_free_irq(adev->dev, adev->irq, adev);
+-- 
+2.43.0
 
-None of above is relevant. Drop
-
-> +
-> +        panel: panel@0 {
-
-Unused label.
-
-> +            compatible = "sharp,ls026b3sa06", "synaptics,r63455";
-> +            reg = <0>;
-> +
-> +            reset-gpios = <&pm8550_gpios 3 GPIO_ACTIVE_HIGH>,
-> +                          <&pm8550_gpios 11 GPIO_ACTIVE_HIGH>;
-> +
-> +            left-pos-supply = <&vpos_left>;
-> +            left-neg-supply = <&vneg_left>;
-> +            right-pos-supply = <&vpos_right>;
-> +            right-neg-supply = <&vneg_right>;
-> +            left-backlight-supply = <&backlight_left>;
-> +            right-backlight-supply = <&backlight_right>;
-> +
-> +            vdda-supply = <&vreg_l12b_1p8>;
-> +
-> +            ports {
-> +                #address-cells = <1>;
-> +                #size-cells = <0>;
-> +                port@0 {
-> +                    reg = <0>;
-> +                    panel0_in: endpoint {
-> +                        remote-endpoint = <&dsi0_out>;
-> +                    };
-> +                };
-> +
-> +                port@1 {
-> +                    reg = <1>;
-> +                    panel1_in: endpoint {
-> +                        remote-endpoint = <&dsi1_out>;
-> +                    };
-> +                };
-> +            };
-> +        };
-> +    };
-> +
-> +...
-> 
-> -- 
-> 2.43.0
-> 
