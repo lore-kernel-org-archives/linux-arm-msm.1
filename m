@@ -1,56 +1,42 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AEE02D63E5;
-	Tue, 28 Jul 2026 14:44:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F33BA46AF38;
+	Tue, 28 Jul 2026 14:54:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785249890; cv=none; b=jc+B9yQ+qYytebabm/QB7Nm4JHvauUsKFxNrLZcMRK3QTrtHFiMPMqHMcwGBtjJVNh38gvX+Idp9aHJj+WeMN2vU1Xzu/bUgVFuKAHFNF49tt3YlWyU1g+pIWq1uw80Ye/nqUVdbJp8yqbGlHxDZX15xGx8Sy8BVi2EeJlfnzm8=
+	t=1785250460; cv=none; b=qjQwlL0NJMsI5eI3BmujrQAr09RFCsbo5yyktSSlemCW/tlsEHjJ7+Ri+3VaR34SxS2LTf8u5POLMjYjTQOo7peAlFuG+GaN/B/x3o6dqcq6fdg6UQdclW/83CusFUrYg71k0tRYFLHQ/Gi8cdGL8gklMHpxDvv3GNgWDexgWDQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785249890; c=relaxed/simple;
-	bh=kOhmCqaxZODmZk6btdTA2PVU+CUzyU0gnkLKTPQAlNM=;
+	s=arc-20240116; t=1785250460; c=relaxed/simple;
+	bh=UJm8H35I+8nfeaaMci1paDXuofcCLcDQmqdMrIFR8zE=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=eL/4bMYDIW/71x2iqYr/fZtWkifdP22jO5N+7CL/GPFBFZc8yKWwSHYa7A7vqDjueR4UxvoJkwOAs3lwIomqhHtWxi0xf440WOmZ4kbYscsNZDe5dWpU9GVOeZFa0ht3n9CMNUtN4f9exDkO83Rue9B6Y9dYvCvjkaX8DiIDtdA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KO/zvN8U; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=lgNi/Ys6c2mgyMLDViMTXapd33p7tEqx2HLXexmscNgwTOdOH+7OOW2nz8PJbkcnvhxq10iHXtsuF1jjLPYjibbyzyixUu2BU2NYhaUwewNEzV4EORWrx8mkNIQUHlPDse+LvnSzbthQ9uLfzKdBKh3qjpS6v/bzXFcxL6mZGV0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Mqe7LPXa; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KO/zvN8U"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5551C1F000E9;
-	Tue, 28 Jul 2026 14:44:49 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Mqe7LPXa"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7CBA61F000E9;
+	Tue, 28 Jul 2026 14:54:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785249889;
-	bh=Ce5ER9Xw9t9EopKeTVZ+aHMj4IN3bllc8/wVi2v+V1Q=;
+	s=k20260515; t=1785250458;
+	bh=h+fAmrTW72qqMMcOYFoeOWHWqQS7fUq9zxncIYnGVww=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=KO/zvN8UK0A62WaFsM/6njVFWvccitglsZXd0JGCSV1o+hML8VEF9pO//K6+2ZJGE
-	 r5nwFnWupDA6CnYuWetbTdv0yY4NYnWJKTJeLjwkyBrheXeqBuIj6W+OzQXG6i4vYD
-	 QCHbVViFzpivK8p8jZ/PSB1pz0MSYZyN9qNzF454nKMhk9trIKvSMDFoeJPy4U2jDU
-	 fixcLYrr828ipT6y49LGP93XUUL+wN07Kicnsu/d6y3g4ey0ViMUz7r/tMhNDmN6qz
-	 llRI6Ivml/TyPJ9Mnd1IHNR4dtMtd0pyyIlBIS8l+Fwk4CSkdjxN8yLOjYFYqlDXoH
-	 tbchRyzKWKwVw==
-Date: Tue, 28 Jul 2026 09:44:48 -0500
-From: Rob Herring <robh@kernel.org>
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
-	Todor Tomov <todor.too@gmail.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-media@vger.kernel.org, linux-phy@lists.infradead.org,
-	Krzysztof Kozlowski <krzk@kernel.org>
-Subject: Re: [PATCH v13 4/5] dt-bindings: media: qcom,x1e80100-camss:
- Describe iommu entries
-Message-ID: <20260728144448.GA2141274-robh@kernel.org>
-References: <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-0-ae811e2f0799@linaro.org>
- <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-4-ae811e2f0799@linaro.org>
+	b=Mqe7LPXaoUVmN2CjQpJVqJoo6XOe+Gy2GFpVJit4QAn4lh1+zDdq2gBXI7HkMU17Q
+	 qSJEmYdZ4PzIByNblC0qluKMyQmF5GCJA2QNdLCjPWZBJjxnx9aRwrqXUxZWis4+OZ
+	 pllbQYh5WMYoa2JVkNx/N83meROpHim6x7Lo0i9+1/OiAlW04wr2L1vOdmz01xxYQZ
+	 6+BAfCe+MWHerCn3K1uTW6CcW5uhSYYOUIi82mvjLes7ApSs7zFm5qZ1Je0ltNESVv
+	 cPwzgi9SzaJ0DcYWuONEWf1h6hzuDM6zT4YtlAr+S+fRrwAVJsNnNtyIaAHQhf0TLu
+	 FGoFLnJnTsbCw==
+Date: Tue, 28 Jul 2026 09:54:18 -0500
+From: "Rob Herring (Arm)" <robh@kernel.org>
+To: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	devicetree@vger.kernel.org, Bjorn Andersson <andersson@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, linux-kernel@vger.kernel.org,
+	Lee Jones <lee@kernel.org>
+Subject: Re: [PATCH RESEND] dt-bindings: mfd: qcom,tcsr: Document the IPQ9650
+ TCSR block
+Message-ID: <178525045757.2160571.123555841344177214.robh@kernel.org>
+References: <20260727-ipq9650_tcsr_binding-v1-1-931ac0e056d0@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -59,19 +45,17 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-4-ae811e2f0799@linaro.org>
+In-Reply-To: <20260727-ipq9650_tcsr_binding-v1-1-931ac0e056d0@oss.qualcomm.com>
 
-On Tue, Jul 28, 2026 at 10:35:35AM +0100, Bryan O'Donoghue wrote:
-> The original iommus list included entries for ICP and BPS/IPE S1
-> contexts. Only the five S1 HLOS stream IDs are required by the CAMSS
-> ISP hardware: IFE/IFE_LITE read and write, SFE read and write, and
-> CDM IFE. The remaining entries serve other hardware blocks which will
-> be described in their own nodes as support is added.
+
+On Mon, 27 Jul 2026 14:14:12 +0530, Kathiravan Thirumoorthy wrote:
+> Document the TCSR block found on the Qualcomm's IPQ9650 SoC.
 > 
-> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-
-What happened to krzk's reviewed-by?
-
+> Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
 > ---
->  .../bindings/media/qcom,x1e80100-camss.yaml        | 26 ++++++++++++++++------
->  1 file changed, 19 insertions(+), 7 deletions(-)
+>  Documentation/devicetree/bindings/mfd/qcom,tcsr.yaml | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+
+Acked-by: Rob Herring (Arm) <robh@kernel.org>
+
