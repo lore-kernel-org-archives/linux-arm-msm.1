@@ -1,104 +1,61 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E5BE3B7B7F
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 08:38:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E4F03F4854;
+	Tue, 28 Jul 2026 08:38:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785227915; cv=none; b=e3REhT4qj7R6N6DRab9wxsUwfY6r42ZpPGZq+tZBvT5D2HU9YurjBga0ZPQhkD1ffEYXHAkE6pisyxHXc9UvClOSzeyRFgYPoMGqMAXsr0iVCyC0pn7Aro3BGoyQPHS2IjBCNas1CDIbbL7WYmReHlDpU8LaU8h9NKp7lL2Xwwo=
+	t=1785227932; cv=none; b=TbILfZvrGUEKSSzIfZGTIUqNugNtZ8LZnyu/HFlNT5PxX+QQtAP7vlNFp2byMVbYeC19UqWdfEnqbh3xpVu8V+t0fjotB+GXvZUi5WRiiq5PHaplHz+RI7yJZR6obaYTDRDyKHLnTiYtu53ZXbV/CEgK+Im0BUVY8CBQRectWxU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785227915; c=relaxed/simple;
-	bh=MsE7kWv93Ru2CI/UP8lj5CPPu0bIHQsm0Bgg+ICPJzU=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=LDMaH+o1fyGwYkICzX85AXWvwPeytswTg/r3i8qhcurkMaZMogNceGPziEMTFBKdSQp7wFZIBUcmyHVflOnCejkqrP3EExEie2qvJH3kVDsPvvj0K0MfxUyFbmS2WpgiTTPalQrzL6ozbtKWEJX2xJLIyk4Uvnu7MefbYJlEZWs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bOH94iVm; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785227932; c=relaxed/simple;
+	bh=/+3WW/263h2+7sfo7G3yXBjL2PrSIaFOs3LMhgKDWNc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Dp5C/buFD5mkTOoEWaKqX3p9UPX98SnVVwmznWnrAggTKPAcdNp+FH32uY29DsqPSzWvxk7GXksvh7xEoX4A0o9prH/CY5VCAipLl8hi+qCvc9PwbE3E24Jm2a5Xzv/RUMjjFWXSE9udqKX7GnguDYKBIT6PrP/B/qY3eSyAzRQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=khNceyOE; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bOH94iVm"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8F1B1F00A3D
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 08:38:33 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="khNceyOE"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E93D21F000E9;
+	Tue, 28 Jul 2026 08:38:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785227913;
-	bh=jZ5KLdFG0Kj7A/1hGVR5FcdyB7fl+ixHwnKCoNYMBoQ=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=bOH94iVmiXTGTMKPJ2FmfAM9t0SowgeInt9/I6ZSV92z7SqJo14ivGOKf37iTZFWo
-	 NAkptJHSNt/XHYRfEPjnYAJOLpAjHWAoLQuOmIwAaycDxXV43XBkeir4r6xl3IN+Dp
-	 KYhslTnUBHsK2n4Vzsr9ljTg6ksadpPvnjg6ozS86BnmjaN+g9cCJlWVcSPf1Y3ZUQ
-	 ZaG+1jgZczVhC++dwkEd85tBsVsTRuESVyZzb2aXUJ7+hLSzQXeSxZQrQBqYhoVBYD
-	 pgCnWcx7RFPw6bgse9Bd48EO/hc7nSK5lHsiSROr1oiz4S0QRfoMwp041/nzH9tGMF
-	 mY19TKoAMJZuQ==
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5b28c91fba5so887877e87.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 01:38:33 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RoewECBOHRkwfKceKCJSMuSB4E4BL17LWCQzlvYIjS3wfJj7sGXkYYaJYrdBYfdkcRjK3QfuDpDsyfhdXnZ@vger.kernel.org
-X-Gm-Message-State: AOJu0YwN9NrJuXTpAAaVxi/ss5Lsq9vhn13CtTP3dcN4/rYv/qj7lmzO
-	BCJ55vZPboCJLhrS61y7Yps7gC/aVtUyYbDTgy5s+llXOe98lXVH71Q0ZmxrCB2+V0hx/7aVN4r
-	a7cI5e1UGy06qH3WtYFF0raMDfQi31qzkkq652H/uoQ==
-X-Received: by 2002:a05:6512:2353:b0:5b2:aaa2:1d92 with SMTP id
- 2adb3069b0e04-5b2d025d23fmr274035e87.25.1785227912591; Tue, 28 Jul 2026
- 01:38:32 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 28 Jul 2026 01:38:30 -0700
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 28 Jul 2026 01:38:30 -0700
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <b4d1a1d4b56f548e157a4d9d8bed785f507dc157.1785183549.git.allen.lkml@gmail.com>
+	s=k20260515; t=1785227930;
+	bh=JIKbj3Lai/hOj6cxZ+umv6T98HNivsqn1aYwSt+Qz/M=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=khNceyOEPKHd55JXXtl21Yu/g6XmudTclb7rFSLn5/EW9DiTkshdPli5JWXmR7R/V
+	 R8ZjpI0/H64hz/nL4dXrKjSh2PiME2DP13xME6pswEUaaDu6k7HKqUf8ssCyxI0Gmz
+	 dei3EyYmcKHC5qhpGQ/B9FMAldLEf1JwLlJa00LMpK/6lbsuwpsqJkBwD9jSPEJq8L
+	 PL2xAz7LLQ6vFjCgz6bBQCqyKzpC6OQ2FfMKodn2b72WDfyb30x26xktsojQWkY0Pg
+	 C5FCc4nNjCmgEcj1El007cHQ/bg5CBF0sQ9pAUv8jBki0FCcyPMdU5UNDHq1C5/aH+
+	 BpJ9hOlWNT7xQ==
+Date: Tue, 28 Jul 2026 10:38:47 +0200
+From: Andi Shyti <andi.shyti@kernel.org>
+To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Cc: Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Praveen Talari <praveen.talari@oss.qualcomm.com>, linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] dt-bindings: i2c: qcom,sa8255p-geni-i2c: Add compatible
+ for Nord SA8797P
+Message-ID: <amhqA_av-HNk99Ql@zenone.zhora.eu>
+References: <20260707095708.3801043-1-shengchao.guo@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260108080332.2341725-1-allen.lkml@gmail.com>
- <cover.1785183549.git.allen.lkml@gmail.com> <b4d1a1d4b56f548e157a4d9d8bed785f507dc157.1785183549.git.allen.lkml@gmail.com>
-Date: Tue, 28 Jul 2026 01:38:30 -0700
-X-Gmail-Original-Message-ID: <CAMRc=MdDEQ2JcQtJ0AwHq0atv9SJ1Y47W6Djzs_JGVoYkk8zFQ@mail.gmail.com>
-X-Gm-Features: AUfX_mweuV2NQV2gdk5hEPPVqRK6kr4uxF3tef-qVA898oqyarmW2SDHO7pBrzw
-Message-ID: <CAMRc=MdDEQ2JcQtJ0AwHq0atv9SJ1Y47W6Djzs_JGVoYkk8zFQ@mail.gmail.com>
-Subject: Re: [PATCH v2 60/64] dmaengine: bam-dma: use dma_chan_kill_bh
-To: Allen Pais <allen.lkml@gmail.com>
-Cc: dmaengine@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Arnd Bergmann <arnd@arndb.de>, Kees Cook <kees@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>, 
-	Stephan Gerhold <stephan.gerhold@linaro.org>, 
-	Andy Shevchenko <andriy.shevchenko@linux.intel.com>, linux-arm-msm@vger.kernel.org, 
-	Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260707095708.3801043-1-shengchao.guo@oss.qualcomm.com>
 
-On Mon, 27 Jul 2026 22:39:22 +0200, Allen Pais <allen.lkml@gmail.com> said:
-> virt-dma now dispatches completion callbacks through per-channel BH
-> work instead of its tasklet. Cancel that work during teardown before
-> channel storage is released.
->
-> Signed-off-by: Allen Pais <allen.lkml@gmail.com>
-> ---
->  drivers/dma/qcom/bam_dma.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
-> index 1bb26af0405f..74bc2fe445b3 100644
-> --- a/drivers/dma/qcom/bam_dma.c
-> +++ b/drivers/dma/qcom/bam_dma.c
-> @@ -1387,7 +1387,7 @@ static int bam_dma_probe(struct platform_device *pdev)
->  	dma_async_device_unregister(&bdev->common);
->  err_bam_channel_exit:
->  	for (i = 0; i < bdev->num_channels; i++)
-> -		tasklet_kill(&bdev->channels[i].vc.task);
-> +		dma_chan_kill_bh(&bdev->channels[i].vc.chan);
->  err_tasklet_kill:
->  	tasklet_kill(&bdev->task);
->  err_disable_clk:
-> @@ -1413,7 +1413,7 @@ static void bam_dma_remove(struct platform_device *pdev)
->
->  	for (i = 0; i < bdev->num_channels; i++) {
->  		bam_dma_terminate_all(&bdev->channels[i].vc.chan);
-> -		tasklet_kill(&bdev->channels[i].vc.task);
-> +		dma_chan_kill_bh(&bdev->channels[i].vc.chan);
->
->  		if (!bdev->channels[i].fifo_virt)
->  			continue;
-> --
-> 2.43.0
->
->
+Hi Shawn,
 
-Acked-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+On Tue, Jul 07, 2026 at 05:57:08PM +0800, Shawn Guo wrote:
+> Add compatible for Nord SA8797P QUP GENI I2C controller, which is
+> compatible with SA8255P controller.
+> 
+> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+
+merged to i2c/i2c.
+
+Thanks,
+Andi
