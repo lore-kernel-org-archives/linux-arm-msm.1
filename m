@@ -1,73 +1,181 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 83DFB25B0BE;
-	Mon, 27 Jul 2026 23:20:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B73C1A680B;
+	Tue, 28 Jul 2026 00:20:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785194411; cv=none; b=ePDYJE97jVlyw+DMldAUrOvUDzhzJFRwNb6qAetURT03VNC/2zCBKzLFl1xmbMVrJpmM6u8rVDA9Ct5X7rvRvXO7IrXUGjzi8swKqzqQKwxwUByUT40KBxhbxb50ZIBkylpcA7yZRYECI5bciLeRaLmBbKoJu5NbrH3y+83t0no=
+	t=1785198014; cv=none; b=DNsItOkcrWaxw7tOkSjaLB88NMk4tm3QrYJnvjUkbHp14QjNSjciPuQ+lKouGmIcIekg75cehru4M6jbvh3UsTfckKJekAfrR7zHTNcsVvV9duezN1hJrUALwoF+qcCeCSa6OMGBJ4V7HVgx3n2bQ0IrAZ5lvDf+izfHSjJNMnA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785194411; c=relaxed/simple;
-	bh=X0h99WVsqXjK1wXbNVpFcYM2IvOD132XVPGyS+znnM0=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=MHL06rM6I3vX63XhikJ1HF6M8xs75xTjaPdEeLgWREao+XpdOv1haE9WLdjhgPrJ0dmUm6hnsun6Am45Vcx0grHF9/6cGpu1tJEzNq7tyHljF/FXGAexPLz6IyLsTF9Hh8RcQxmyQrODv9OMssvKAXh7ExKdE140uhyJLnTHYBA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=h//dHP9T; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785198014; c=relaxed/simple;
+	bh=wfyDTMZsh3mVx0GSk6DrAqznk5sGqgRtPNh7Xz1fR3o=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=udS5dwRO+aITDYQ5sCqaN4WhIxJfVylejcraWX5I8Ld8jc5ss6q6zJJaRuIKnUSi9dNp3ckqrzJoEDB/nKgo89BB8yqTjbbVALr/bqASE6/ZSyddQM0JOs4X+RG95CV0cOLexh7ZMR+8wSIKw4l4oSdEAdG1XFMC3rYZ1LuYQH0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=J0euQ1cc; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="h//dHP9T"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83F171F000E9;
-	Mon, 27 Jul 2026 23:20:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785194410;
-	bh=cq4mJ0RXeim+Euv7PLuGb1Hgr0qLC63V7rQjWD9Hqa0=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=h//dHP9T53GpQJb21bLLrTAVE8BJ5RGB3rrEH1tdQwlHuEsz3dxyDdOcNCj1XBJv8
-	 yjb8jsnOwS1YUXHPu44574Tsw+XMMp3qSZePBth+G3GT7fdtj8ObE9KF7x7kMzb3LW
-	 iS2+qBYEITk8omuPp36x4ghcKDbZueQYGIs8/XwbBhk14I/twQ5Ns4vXEPUUBj0ypz
-	 8nziQl9JSn6W0Mb8Lg9Egf/Izdk1CRMiwodYl6/3PDqAUI4VNDtxXUuUWlV6pwZc/E
-	 mQKld6iPn0ZUu9w20mtevYMF/MmYyslbwjvpgIBCKutpPijSkYphM78x3yIqq5cHG0
-	 Z1EbF6jQfjsgQ==
-Date: Mon, 27 Jul 2026 16:20:08 -0700
-From: Jakub Kicinski <kuba@kernel.org>
-To: Imran Shaik <imran.shaik@oss.qualcomm.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Richard Cochran
- <richardcochran@gmail.com>, Andrew Lunn <andrew+netdev@lunn.ch>, "David S.
- Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@google.com>, Paolo
- Abeni <pabeni@redhat.com>, Bjorn Andersson <andersson@kernel.org>, Konrad
- Dybcio <konradybcio@kernel.org>, Ajit Pandey
- <ajit.pandey@oss.qualcomm.com>, Taniya Das <taniya.das@oss.qualcomm.com>,
- Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, netdev@vger.kernel.org
-Subject: Re: [PATCH 3/6] ptp: qcom: Add PTP driver for the Qualcomm TSC
- hardware
-Message-ID: <20260727162008.2b93959d@kernel.org>
-In-Reply-To: <20260727-tscss-v1-3-beed14e72510@oss.qualcomm.com>
-References: <20260727-tscss-v1-0-beed14e72510@oss.qualcomm.com>
-	<20260727-tscss-v1-3-beed14e72510@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="J0euQ1cc"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id C1F4EC19425;
+	Tue, 28 Jul 2026 00:20:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1785198013;
+	bh=wfyDTMZsh3mVx0GSk6DrAqznk5sGqgRtPNh7Xz1fR3o=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=J0euQ1ccmWRrpg2jNV3GretWAbtdfyhl3Fsckx/sI2QgjCgbeKiRcD7AM2czbH8sn
+	 Fi+Y2Kht0Q5M7FIiPzY87458QtYXhmsjqtarcggtQenHktCLuKTo0Ikq1Go3o3tL0S
+	 0F4cjs0SFHeJwn2SH5I8tCfzDkgv2pcS9jFQwx7SG0qWE0p2xoryAmQ+gtQad0LEsw
+	 JcPrrBW5GqGXRoVL5zh9VqwvYcXvDMhWJh5g8n9PVsVkBL941fHMA/a5VRrxEp3unc
+	 YmmhdEa9sdNi1FDjhEfBs6IBbPXx13nwH+p3hC/32vJzh00Wbxi1qZGH3lSck105iv
+	 wrsGdkGyhQzzQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 9DB33C531C9;
+	Tue, 28 Jul 2026 00:20:13 +0000 (UTC)
+From: Aaron Kling via B4 Relay <devnull+webgeek1234.gmail.com@kernel.org>
+Subject: [PATCH v9 0/6] arm64: dts: qcom: Support AYN QCS8550 Devices
+Date: Mon, 27 Jul 2026 19:20:08 -0500
+Message-Id: <20260727-ayn-qcs8550-v9-0-e3db456e10e5@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33Py27CMBAF0F9BXtfV2ONXuup/VF1MnDFYKgQSG
+ hWh/HsNLPJAYnlHOndmrqLnLnMvPjZX0fGQ+9weSqjeNiLu6LBlmZuShQbtQCsv6XKQp9gHa0E
+ qF8HXDhvWThRx7Djlv3vb1/cjd3z6LaXnabjL/bntLveNg7pNH+Wo1KJ8UBJk4lDrRNQops/tn
+ vLPe2z34tYz6BdWF8vOVcExJIj12uLMar20WKyhRKGKGkIIa2vmFpfWFItIgSI2FtPTzXayBsL
+ S2mJjBVRz7UlZvbZuZhGW1hULjjz72hqip73+hfXF2kpR5TzaRLi2YbIWVv+GYhuPmCxbb4yb2
+ 3Ec/wHuG6umXwIAAA==
+X-Change-ID: 20260217-ayn-qcs8550-16c07b63de26
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Aaron Kling <webgeek1234@gmail.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Teguh Sobirin <teguh@sobir.in>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785198012; l=4384;
+ i=webgeek1234@gmail.com; s=20250217; h=from:subject:message-id;
+ bh=wfyDTMZsh3mVx0GSk6DrAqznk5sGqgRtPNh7Xz1fR3o=;
+ b=Ivf/TE6XAbUmV5RlPsxyAmFuTO0UcVpfrzlqfd00nXIWQiEIOBbmBGZwVmGaGrtfkSTdO6yUG
+ Soi+KllHpcYBsHxTt1ycV7Sg8MZayiEi1XCczw+EsynjOI/eZvA9j3Y
+X-Developer-Key: i=webgeek1234@gmail.com; a=ed25519;
+ pk=TQwd6q26txw7bkK7B8qtI/kcAohZc7bHHGSD7domdrU=
+X-Endpoint-Received: by B4 Relay for webgeek1234@gmail.com/20250217 with
+ auth_id=342
+X-Original-From: Aaron Kling <webgeek1234@gmail.com>
+Reply-To: webgeek1234@gmail.com
 
-On Mon, 27 Jul 2026 19:40:59 +0530 Imran Shaik wrote:
-> +static inline void qcom_tsc_split_ts(struct qcom_tsc *tsc, struct timespec64 ts, u32 *hi, u32 *lo)
-> +{
-> +	if (tsc->soc->rollover) {
-> +		*hi = ts.tv_sec;
-> +		*lo = ts.tv_nsec;
-> +	} else {
-> +		u64 ns = timespec64_to_ns(&ts);
-> +
-> +		*lo = lower_32_bits(ns);
-> +		*hi = upper_32_bits(ns);
-> +	}
-> +}
+This specifically includes:
+* Odin 2 Mini
+* Odin 2 Portal
+* Thor
 
-Are you sure the compiler doesn't inline this trivial function with 2
-callers even without the inline keyword. Compilers seem to inline as
-much as possible these days.
+The original Odin 2 dts is not currently included as it has not yet
+been verified.
+
+The initial port was done by Teguh Sobirin for ROCKNIX and was made
+available on the AYN github [0].
+
+Support has been removed for things not yet supported by the upstream
+kernel, these will be added later when the related drivers are submitted
+and picked up. Such includes:
+
+* The Odin 2 Mini panel, backlight, and touch
+* All rgb leds
+* The built-in uart gamepad
+
+[0] https://github.com/AYNTechnologies/linux/commits/sm8550/v6.17.5/
+
+Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
+---
+Changes in v9:
+- Add mi2s clock control in patch 2 as driver support for such was
+  recently picked up
+- Drop unnecessary address and size cells from patches 4 and 5
+- Track renamed pcie port label from current linux-next
+- Add panels to patches 4 and 5 as driver support has been picked up
+- Add patch to document chipwealth vendor as used by patch 5
+- Delete ipa node in patch 2 as it now depends on the mem node already
+  being deleted
+- Link to v8: https://lore.kernel.org/r/20260503-ayn-qcs8550-v8-0-d733f5e57446@gmail.com
+
+Changes in v8:
+- Properly order and format amplifier properties
+- Set amplifiers name prefix to Amplifier L/R
+- Link to v7: https://lore.kernel.org/r/20260430-ayn-qcs8550-v7-0-591a96735fa3@gmail.com
+
+Changes in v7:
+- Add back pinmuxes dropped last revision, but without output-low
+- Link to v6: https://lore.kernel.org/r/20260430-ayn-qcs8550-v6-0-06a7e7b54aaa@gmail.com
+
+Changes in v6:
+- Fix comment style in patch 3
+- Drop a pair of unnecessary pinmuxes in patch 3
+- Lower usb sbu pins drive strength in patch 3
+- Link to v5: https://lore.kernel.org/r/20260408-ayn-qcs8550-v5-0-c90abeb7a152@gmail.com
+
+Changes in v5:
+- Fix some style reviews in patch 6 which required matching labels in
+  patch 3
+- Drop hdmi support in patch 4, since it doesn't work
+- Link to v4: https://lore.kernel.org/r/20260323-ayn-qcs8550-v4-0-33a8ac3d53fa@gmail.com
+
+Changes in v4:
+- Fold vendor description patch into the series
+- Link to v3: https://lore.kernel.org/r/20260322-ayn-qcs8550-v3-0-4afa89c20888@gmail.com
+
+Changes in v3:
+- Drop unused backlight regulator in patch 3
+- Move zap shader firmware to standalone reference
+- Move i2c controller enables from common to devices
+- Add ABL dtbo workarounds to patch 2 as per:
+  https://lore.kernel.org/linux-arm-msm/dczz4uvcq4hc6p3zb6xnrsgmfeomwliagwhf36tewdz4z6mndp@afbxzhjziiwv/
+- Fix multiple property alphabetical order issues in patch 2
+- Use interrupts-extended for pwm-fan in patch 2
+- Ensure blank line before status in patches 2-5
+- Rename spk_amp_l/r to amplifier in patch 2
+- Remove a few properties that are already in the soc dtsi in patch 2
+- Order tlmm nodes by pin index in patch 2
+- Drop qcom,dll-config from sdhc node in patch 2
+- Drop dtbo support, convert common to dtsi, and include it directly in
+  device specific dts'
+- Link to v2: https://lore.kernel.org/r/20260311-ayn-qcs8550-v2-0-e66986e0f0cb@gmail.com
+
+Changes in v2:
+- Drop awinic bindings dep as a duplicated patch already exists
+- Change Co-authored-by tags to Co-developed-by
+- Drop alias to currently unused uart15 in patch 2
+- Link to v1: https://lore.kernel.org/r/20260311-ayn-qcs8550-v1-0-fe8b2faad1ea@gmail.com
+
+---
+Aaron Kling (2):
+      dt-bindings: vendor-prefixes: Add Chip Wealth Technology
+      dt-bindings: arm: qcom: Add AYN QCS8550 Devices
+
+Teguh Sobirin (4):
+      arm64: dts: qcom: Add AYN QCS8550 Common
+      arm64: dts: qcom: Add AYN Odin 2 Mini
+      arm64: dts: qcom: Add AYN Odin 2 Portal
+      arm64: dts: qcom: Add AYN Thor
+
+ Documentation/devicetree/bindings/arm/qcom.yaml    |    9 +
+ .../devicetree/bindings/vendor-prefixes.yaml       |    2 +
+ arch/arm64/boot/dts/qcom/Makefile                  |    3 +
+ .../arm64/boot/dts/qcom/qcs8550-ayntec-common.dtsi | 1819 ++++++++++++++++++++
+ .../boot/dts/qcom/qcs8550-ayntec-odin2mini.dts     |   44 +
+ .../boot/dts/qcom/qcs8550-ayntec-odin2portal.dts   |   99 ++
+ arch/arm64/boot/dts/qcom/qcs8550-ayntec-thor.dts   |  250 +++
+ 7 files changed, 2226 insertions(+)
+---
+base-commit: 0d33d21e47d9dc66f91e44da3fc9220c74d93df7
+change-id: 20260217-ayn-qcs8550-16c07b63de26
+
+Best regards,
+-- 
+Aaron Kling <webgeek1234@gmail.com>
+
+
