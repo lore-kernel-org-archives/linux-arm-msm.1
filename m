@@ -1,34 +1,34 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3155843A7F5;
-	Tue, 28 Jul 2026 13:21:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CFEF43B4AD;
+	Tue, 28 Jul 2026 13:21:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785244873; cv=none; b=lyycrPzHvJe8CFVG6HJ+07s+HMeH2NgTHsf98TalSJoiJY5AlRVNs/T+TSYke0UMriiAJE1USfna9sN4TvNeA/u5MhORy6W880PNLPtRmmYdZDyB7xzIs7xo/FUebNkx94Pp7cg+4i2h9PupgraASvpqfkOIFWFo1y2mP3KCTSU=
+	t=1785244880; cv=none; b=rqbIGNoRKuRyl3HPbUPy71i/eolhylczJMvt1I/9N6BHmsbga26EbcXC18wxHsOnlceOhuQnh+IdSon5uY847HjpjJVm7UX3+t0SHhYav6HMYKG7SsHIhzdoBP/Ltvod82ufVGeUJKJ+S+DhhL8kzawdAP5knE4xHOj7EH2mxFw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785244873; c=relaxed/simple;
-	bh=nBRzbzjZgQ97bJd/UFQfw8744AlxXn/Jp+mgk8RhBK4=;
+	s=arc-20240116; t=1785244880; c=relaxed/simple;
+	bh=2RKQ264C14OD/lDZBhKsAmPl2RMvmmYLQ6nZm3WEGqs=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=BnDy2sjvRkDhvOgDRSXHvQdTcoars5VZlDHRkfv10ECMom6QLZSsZtZVPfc5JKzcaExvnVXvbhGQD/NggK20VC1lg71ykEHIZxm2tGb/CZr/LKc5IAZdvWmdfUQXWRJUZL/R3fgRSCosc2zvGUtpjQSDvhjND/OqnmnRw90s084=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lZLybfIC; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:To:Cc; b=ZKLrbjNZLQcY5DzKlkFLO31yaPNrWHFjLuL69Rur535sh96s7OCBBzTp5xtvVm6JDWwL7WZa+RaLUAR2X2pfR63BR19lLQ5EtQeyom4mn25hSKWmZ0jTwhMlp2KRqrPFFLHhgM+QLAHb1+F41hhMv+0pZ/g4DdB1OAcQhmxAoYo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GH/MoWob; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lZLybfIC"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0554F1F000E9;
-	Tue, 28 Jul 2026 13:21:05 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GH/MoWob"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4BF9B1F00A3A;
+	Tue, 28 Jul 2026 13:21:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785244871;
-	bh=twprasiO3gxSKmLz5pAFqxjHVAGx7BUZ+ykfPhsj374=;
+	s=k20260515; t=1785244878;
+	bh=UkaySPbO6R14pZqLamkgEmCGH3jDKMohFVrrV3zXE0k=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=lZLybfICfBzA8IgGDed36dxDFiSFDnjCG5Wqi2UHBuQnSfZODXkbNkCem7bzoDDg6
-	 HWcQkIaCgdCziKG7ms8w1bZNjDPkZPVI09QOZ4mAblYZeUQ2gpdQz8viS9khz5bqOC
-	 clAQ7a5enAr13zDLUPQ5+GI8Tqn3/vIcjQEExt0yZvtLrauUgDuz6nbXLz+SaVjWct
-	 UbhMyrwpKXwWSwSE/zojzDx/mExL5OXsUIYSvUrP/QhBb8XsRZlziYpg75KP8p+kKG
-	 FKbQ+J4iwpDD6Q+xSjxWxiVCuDREiOBl//UX7lPwozfNF9BEhlnVWoxkmpYJyt2tQ/
-	 2YBVXF8+SwcaA==
+	b=GH/MoWobq7eSgWcRUefa4NWx5AZb8WLD9TEvw5lQaTtpPBZ2juv+sbSZ8eK6HAKUz
+	 4n55j/mLSPXQL+xN7NtHMuT94R3Jhp4hGzuTf6WMfWM5apv3DRdnAOIU1SlcB35zLr
+	 3/VzNUEYvRs9dqmGSblbMHvjDk02a9gVyTa/I7w8z3Sx+/akV/KN70K/X0stX2/Cw2
+	 wUXI9YsymjO3lF9jRL74hw6bKfPjhAR7bRtvinkW/xa6e78DQ94agCwhBhaYpmHfT4
+	 L4VXA9V/ccqBSD1ziZmXc+mYHKNEsPI7ZZH7zgbmOPmmuehVnEnGFNuL9Rxw6VmeHu
+	 WP6EvgHoA1DkQ==
 From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Tue, 28 Jul 2026 15:20:46 +0200
-Subject: [PATCH 2/3] drm/msm/dp: Drop dev_pm_opp_set_rate(0)
+Date: Tue, 28 Jul 2026 15:20:47 +0200
+Subject: [PATCH 3/3] drm/msm/dsi: Drop dev_pm_opp_set_rate(0)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -37,7 +37,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260728-topic-dpu_power-v1-2-e7783b859a70@oss.qualcomm.com>
+Message-Id: <20260728-topic-dpu_power-v1-3-e7783b859a70@oss.qualcomm.com>
 References: <20260728-topic-dpu_power-v1-0-e7783b859a70@oss.qualcomm.com>
 In-Reply-To: <20260728-topic-dpu_power-v1-0-e7783b859a70@oss.qualcomm.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>, 
@@ -60,11 +60,11 @@ Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
  Tanmay Shah <tanmay@codeaurora.org>, 
  Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785244852; l=1915;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785244852; l=1150;
  i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=+LhFgGkJrqk4wZmByeCFu5tu4RH4SlmyTOEJtxcxmJw=;
- b=rDxoCi+JjFskmgLy1r9w3lQdtAaA5XXNk/VwqV3yR5d7uEwIkdAJ1H2TQ+sVc0Byw98yWa9qm
- j81is6eotLEBv4BarmU1VcPuVhaGlelSzpeD6+cyLVtTkPIfEpcXK6t
+ bh=VD+ZXgF1dIQP/JgFkoMm5g8EhdthFzlelG4tHhgDFEw=;
+ b=kODgFzDE5Td8wuk1N5UY3XrVPcUpe87T5FwtX6dM4Yt/Lu8gQ2tGguIj65VPBq3vgUae2Uma/
+ 7gYa6mifRB8DQIHvZsQim/IyYmZM0cq3FmiYh02K9GCLq/eJxhruW4U
 X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
  pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
 
@@ -72,57 +72,30 @@ From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
 dev_pm_opp_set_rate(0) removes the vote specified in required-opps but
 does not actually park the clock, making it run without the necessary
-power backing. Drop the explicit calls to it.
+power backing. Drop the explicit call to it.
 
-Fixes: c943b4948b58 ("drm/msm/dp: add displayPort driver support")
+Every call site of ops->link_clk_disable() is followed by
+pm_runtime_put(), so the power vote will be rescinded if deemed safe.
+
+Fixes: 32d3e0feccfe ("drm/msm: dsi: Use OPP API to set clk/perf state")
 Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 ---
- drivers/gpu/drm/msm/dp/dp_ctrl.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ drivers/gpu/drm/msm/dsi/dsi_host.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-index 86ef8c89ad44..e09924eae5a7 100644
---- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
-+++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-@@ -1950,13 +1950,12 @@ static int msm_dp_ctrl_reinitialize_mainlink(struct msm_dp_ctrl_private *ctrl)
- 	msm_dp_ctrl_mainlink_disable(ctrl);
- 	ctrl->phy_opts.dp.lanes = ctrl->link->link_params.num_lanes;
- 	phy_configure(phy, &ctrl->phy_opts);
-+
- 	/*
- 	 * Disable and re-enable the mainlink clock since the
- 	 * link clock might have been adjusted as part of the
- 	 * link maintenance.
- 	 */
--	dev_pm_opp_set_rate(ctrl->dev, 0);
--
- 	msm_dp_ctrl_link_clk_disable(&ctrl->msm_dp_ctrl);
+diff --git a/drivers/gpu/drm/msm/dsi/dsi_host.c b/drivers/gpu/drm/msm/dsi/dsi_host.c
+index 59125d342fcb..7e4e3718b536 100644
+--- a/drivers/gpu/drm/msm/dsi/dsi_host.c
++++ b/drivers/gpu/drm/msm/dsi/dsi_host.c
+@@ -550,8 +550,6 @@ int dsi_link_clk_enable_v2(struct msm_dsi_host *msm_host)
  
- 	phy_power_off(phy);
-@@ -1982,7 +1981,6 @@ static int msm_dp_ctrl_deinitialize_mainlink(struct msm_dp_ctrl_private *ctrl)
- 
- 	msm_dp_ctrl_reset(&ctrl->msm_dp_ctrl);
- 
--	dev_pm_opp_set_rate(ctrl->dev, 0);
- 	msm_dp_ctrl_link_clk_disable(&ctrl->msm_dp_ctrl);
- 
- 	phy_power_off(phy);
-@@ -2573,7 +2571,6 @@ void msm_dp_ctrl_off_link_stream(struct msm_dp_ctrl *msm_dp_ctrl)
- 		ctrl->stream_clks_on = false;
- 	}
- 
--	dev_pm_opp_set_rate(ctrl->dev, 0);
- 	msm_dp_ctrl_link_clk_disable(&ctrl->msm_dp_ctrl);
- 
- 	phy_power_off(phy);
-@@ -2602,7 +2599,6 @@ void msm_dp_ctrl_off(struct msm_dp_ctrl *msm_dp_ctrl)
- 		ctrl->stream_clks_on = false;
- 	}
- 
--	dev_pm_opp_set_rate(ctrl->dev, 0);
- 	msm_dp_ctrl_link_clk_disable(&ctrl->msm_dp_ctrl);
- 
- 	phy_power_off(phy);
+ void dsi_link_clk_disable_6g(struct msm_dsi_host *msm_host)
+ {
+-	/* Drop the performance state vote */
+-	dev_pm_opp_set_rate(&msm_host->pdev->dev, 0);
+ 	clk_disable_unprepare(msm_host->esc_clk);
+ 	clk_disable_unprepare(msm_host->pixel_clk);
+ 	clk_disable_unprepare(msm_host->byte_intf_clk);
 
 -- 
 2.55.0
