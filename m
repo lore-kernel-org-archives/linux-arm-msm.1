@@ -1,159 +1,239 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6E543DA7D0
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 08:11:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785226297; cv=none; b=qdxAECLTwRLL+uCp0yS+boCUlK+XHpPvUWDQVhkGtU6DMSHv9pN57IE4KMCGlLCW9hktZjbx82jQsuAlH1eOWbkDoo9E0fz5hwb85p0HDJno+3uRe04nOJC0lpiA0t6Fg1LAkQMnTUygwch1Uh/bYoJCN5kEiFSyW0FoUajYqNs=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785226297; c=relaxed/simple;
-	bh=lxycCgBRfOdu619pMjw9Iov8dyA7lRr9iuLTBphj8m0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=pz72dNZwB0FZGvA8D7pSEFjXGNWD4+NyDxqC26KI3L12hNSjbGt03JWcvjVgrmG64Fb69VzxBRS9Z1FmtP9sDkmUuur7BH1txKKk8BACcsUBnOn4/u31RAbfCHMMp7ZOo8w4oBrTzwMl47ZZWvdWN+9Jj0Mms3cY2xDx1It58l0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=leeJ6MqX; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Zso1FJHu; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BCDBE3FCB06
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 08:21:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785226873; cv=pass; b=nMJZZC+ypAW/Yt4hhVJ0B/UvBdOjBnBDcAVA6C7C+i8V/1d4scayZC+iYYyIoaW71LuLf56Gf7ROeozYrH4O8YKwDg8c06R2HEjYUD2ho5zianWgCzhRQGMn+PwGKziHcnSPdwA6+8CcZyXhUj+PdRmz8/u0tMhpV3VRRrz2ZMU=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785226873; c=relaxed/simple;
+	bh=psbVZug5PRiB7TIApmYfCqaUIt7m7uBgwaKFqFfBhgg=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=FcDsM28qPpIb5Y2Imi1xJDUvgCKyXZpQIq9YiGYB/Vwr2vTDKwWByvAX72bg4Jys7u1b0w9dkrb6MoOe4wYt7drLMDOPujjkEMrIcKa6k/zB6pRCtWfsATCpzVsckvxCZCab2Jms5zTL8c42PpEhtRhOiowbbFVZRmXmH/18PXw=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jb4WFy6w; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hthpaN9Z; arc=pass smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="leeJ6MqX";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Zso1FJHu"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66S81wGC1663528
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 08:11:35 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jb4WFy6w";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hthpaN9Z"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66S82FCV2144844
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 08:21:09 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	lJptslHQ6l+nT8mWDFrBIbturzPh9CDbZuwZj2F9CXI=; b=leeJ6MqXnhFBIEzQ
-	1di6t4pzzoPQwiI57mSOM66FPaCnjUBQJOFZkfjN+PDQq+7or0AipMYLW+DvejUt
-	gZQb0nK5Q2ezRxebRz6P/dmIFUERY+61kJUorGx9Hkrp9zNj9aYfTTaToahvb/H5
-	vT2xjfijvcOmwDugyTkhDg6Ww+G3NKLiQ+KnJYr24au1lV/NjKEulJqge+mW1SwH
-	4di/QeC7ZjVBBTeoyxOPIHuBy1S1sn5lpOoyZ26qa16sd4EBcLsvyRH7rmZ0A9Pq
-	KaQRZoPL5RMAO6rrZmxTcheJOum3tuDyx8VJTk3oRkumeIFxeBphsp36aUkhCOC2
-	umFtwQ==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fppttrgrt-1
+	psbVZug5PRiB7TIApmYfCqaUIt7m7uBgwaKFqFfBhgg=; b=jb4WFy6w+C3vBF45
+	B1f/F2ZUZXQinx5ZKBwrwmNP7X4YMbEhhwOYcrkCSBbffIeYbKfQo/YQI71EZJBB
+	Gx8jguhUwEvj4MBJnCW8/8+P0JnQQZ6u2IvIS7juiZvLFKMVdPYBhDECWd34WzXu
+	t/cVPrT9ZsFC5AJVPvVLDecexAntedNAMOBPRpL47s3f1w5D2e8fPxLWfq6J8l2n
+	PYwi9pHRSZ7+xItoIoPDz6ctG/KyCLOxWcjAU3FUxutXIYdgRHRkD9WxmdkRr58U
+	QyvMgKf6ZQge34rgks6TuJY+CU4SQ1iO3U8KVI0hHMJQf2/6n6pyTj9CP5y3CHGc
+	oHHxBg==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fpn19gxyk-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 08:11:35 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-90786218dd0so12982376d6.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 01:11:34 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 08:21:09 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-92e4f946461so449139985a.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 01:21:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785226869; cv=none;
+        d=google.com; s=arc-20260327;
+        b=PRz7D+CQmPDkvCEyIS+WGs7MFHd1FPr6rFAtVpXuhH0YfCCkZhYTxQirBdViqMOG5k
+         Z+p3JN2VOAf+RyDhVxpsetY1t0I5TlW3Tm/K3a5Nq7YyZqCORhw7fZS8leF09QsczDep
+         6H0V9j+fKuc6I2yDRG/5/mFCSzKY+ZR7krCsauLXri1/kyqpxk1Kp3HXhKzWQh1e4D+s
+         I0xP2Rzobsmfoe2oqzy8UkRkCKR/hNh72F/ufLO/HbfF4xzMqeGx2hii/7iv0aIB8eNI
+         30Do4jAT2xgU7EtzYUnkLHL/js0oN84XjDLabAlY9vSSVbbEaM9gJj2Oj7FpZeYLIw6u
+         rg+w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=psbVZug5PRiB7TIApmYfCqaUIt7m7uBgwaKFqFfBhgg=;
+        fh=GUiwhsij6CXapE1SfDVXHDXyNLWvLYmFFDhHqv24Rto=;
+        b=IpxXp7jM4qjcvZ+90meFGSVy4KN+8ty+dbDs3XN6rBLw7izAGy5lfXEDKX+mVJR3K/
+         cL5KqEiM3u3XZYoRIYeirJ4EuQuIWQwoqL8f1R4xnvbaXFg2R6qdrIJdZ4vBOev3lnnC
+         LD3c182BnQLYLC1ItwfJwvTd5FqDQJ3Ol/pReObgYLb9Ehj4mjTFce+EZFZJdCeY21LI
+         cHQ1TODZ/iHpD7EvwIY4nR/7ZZMxKbXRMTMx5ufFFCFBOIx3bu5gIi6P+XvgOS15DKXh
+         DJYUXyUQlfJtH4VAOtMlcuuUB+PgRlMBIqFUPhV9dg9uuHe7CzKQ6NM38YL5owB9oXbi
+         0c5g==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785226294; x=1785831094; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=lJptslHQ6l+nT8mWDFrBIbturzPh9CDbZuwZj2F9CXI=;
-        b=Zso1FJHuirGWzFNI8KRu6ta1W1DMIncdLNKAY0zinCOYKA/5aBEoyKWDpwhKXW1We1
-         FXcfH0/7NEOvQqO5ns3nJlsPaS7/A7k6VhH2nzyN95xOdmBIMy7Hk8ATd+gMA1hWgDZq
-         zERwE4ICFfKZEoqcPZ/sJabE1WfiKmyNEiRFqekJOCONfkTL/Z30xaNhuty1RucxAfab
-         aFwsnMVIVw9Tdk5bAc6QqZNFJxlK9RB1IMuNZD3IR5tZuW0oe/shstPtI29bZMnOBBMJ
-         X7lji8semko1wB0nlgMU6NNdKbJKjsWrmXMbscH1SZnYznEI0YYBqiili5RHSF7ToLgl
-         g/GA==
+        d=oss.qualcomm.com; s=google; t=1785226869; x=1785831669; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=psbVZug5PRiB7TIApmYfCqaUIt7m7uBgwaKFqFfBhgg=;
+        b=hthpaN9ZYv9R/NSXhLPjzgngjdcna3fTDgi5F5ZqWcFpddAkW/05RRjCw/IKmXMD7f
+         fvlWIPoxvfeJwctWma8ZUC2rNTkAJlNw8Y8+6RsUyTSB/n3cPRYK2ncBuYklFrWqV+OY
+         v5Qv5q/vKmFs+qAyUuOoy3Sjozo2QO9m8YifXIVYLac63ZHoZEOAObx0gQ5RF/PuhAH8
+         fxC4tG10W5DTOhnjoMiuYFYNSc07H9bjbK7EQkRDj+1GqXdYWo3idWfn8KNGCx4Os93W
+         ThVgMMTcPy7ATyWFEHv6SdA9xFg0u6wDPTfiRYWVJEgY89bRuabNkHWDBuOcnLf8Og5u
+         zNug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785226294; x=1785831094;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=lJptslHQ6l+nT8mWDFrBIbturzPh9CDbZuwZj2F9CXI=;
-        b=p0aZH39I++twiHqeDn1ctt6d6dBWzlKX1sOhBfFEi1IxOgeNTOau3mZgmO3RcDSbCd
-         SZDN/s92Fk2cYCts3ywzCcWTlZYuWJUoS02UmPP+MDt3pGU1jEHpe9V/Mta9YRKbdNvw
-         8GM1x8M1+wncu+goHFPLbNWSeEiKbcEuc7Q8POJP41wAXz9ytz0jops03orq8f+wZ9SB
-         Loyp0q2JxLZr7M9+Ege/fnwMB9insFqUoCQX68psreUzXrAWCBPSuOly/dq1h1D1v1V4
-         VNKlee/LEWXePDfBpDHYDJdzgM2BdpaBTcjE0enskuvjaLFoAXgDeIGvGs+zN4uRDxbe
-         dQ2w==
-X-Forwarded-Encrypted: i=1; AHgh+Rp28V7pIihbhjbdhTyNaJtrNCc2LpsQi8w41DfK4swoCc/WfI1q41HgXAItDgxaxJXR78stegmX1+PjPGwu@vger.kernel.org
-X-Gm-Message-State: AOJu0YyfAIVkA28r51je9Bfl1fuIdpSnHrywXOpwGLDSRffaDRG1QdX1
-	5MlDpsHwo/mKghPay6oxHLLGzy72TNulEzJII0Qai17DerwRs3eJ148qJapBDmXVjPrXAOiKmpS
-	/2ehQ1fCKNTtvNXZVqKShynMiA8dBkgdj894TKC6Vkfsf+2d7Jmcr8k9C2ze/xobj3B90
-X-Gm-Gg: AR+sD13VsDzTwrKvM1T6P7TP6s8a8xYsLnFgbel+z6rCL0/WkPCptAZ14uGxz+8owCg
-	VS0+vrRwKhZdUDULl+vH+hsb9IvIBbaAxZEco3Uv54vtVno5JVGeBGa8/tTCncm7/LamDex942X
-	5rabAPxxGTt98lKCWC6WoNwzG0GVnoTXFpxs8hMqgWysXJrwch7rKKQq59IfV0YWQTuIEF0wjmv
-	VCukN86F/dkM1FXADG+gsX9ZSW6WSTlrzuAyq7fExMpu4jhV3DzeMUalc4cgbWFohTdLPdKHj7F
-	1hEkBt+HN/PuqMXVCvp6zFUOTe80+E4JrEdxZtkqRkepTkhv5tIoNBfP/nTpihOxtaxKJ9VGFXI
-	9assire/lyiQsdsirK/IgY99h
-X-Received: by 2002:a05:6214:21ca:b0:907:c846:e682 with SMTP id 6a1803df08f44-908173add3fmr10604476d6.5.1785226294112;
-        Tue, 28 Jul 2026 01:11:34 -0700 (PDT)
-X-Received: by 2002:a05:6214:21ca:b0:907:c846:e682 with SMTP id 6a1803df08f44-908173add3fmr10604316d6.5.1785226293739;
-        Tue, 28 Jul 2026 01:11:33 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-69fb5746da2sm3452087a12.21.2026.07.28.01.11.31
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 28 Jul 2026 01:11:32 -0700 (PDT)
-Message-ID: <c547f8c1-7a49-4cdf-b1d9-22f00c6035de@oss.qualcomm.com>
-Date: Tue, 28 Jul 2026 10:11:30 +0200
+        d=1e100.net; s=20251104; t=1785226869; x=1785831669;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=psbVZug5PRiB7TIApmYfCqaUIt7m7uBgwaKFqFfBhgg=;
+        b=KkjjWj6khYNkXYV7ZB356BxUeDpFFWzapwyEtuy4DtQsv+GNgYf6nPZ0Ws97i92llt
+         BeeKPhTRUlrzr8LB5U53ClrzaAXF1SsotKVnBUGedqJTln4NAG+ZTyJFPRNI25hJgK4H
+         IYXqtu93KyxhBWl9nLPQLYqwQL3HGoZstin/7FnhqbaRCfo7SQK6Z9XAEg8Jx4iI60Y0
+         PDsefA6R8FdXrqBW6rE9l00EeMFWsnJQDcoJ0uit+C696Ryf2nFK51sVeyyeRnGr+2JL
+         PS8An3FNtIvSIRmNAFd6JGwPDw42C36yP+8Y5aqS8jFKUhe84llIinKpPa05oI5bhdYh
+         eeeg==
+X-Forwarded-Encrypted: i=1; AHgh+Rp0azBRdar2x94jBjRAPQ1c+YKyy56LZXU7xEST79BsrYxGjHO9ce4wea16uzG9Na+NRg0fnLd2PJ/8Kqld@vger.kernel.org
+X-Gm-Message-State: AOJu0YzC/mywFeNBXFlG6rlrjdgspDc7+SWcxrTpm/HkT7H38hP2GI7U
+	eynsZLML69JA9n0Nc08T0pDQ4nScSCoPtPVmHIuIw3RCn27wICvKabzkGOmKnvvBpVUKyzHJ8yT
+	zNW37K+3R0VxLsI0WBRLW7gLIrLjp0sB8Ksh2I4Z6ycOh/juqqi6LNl1Fnzr+4zksFMQRG06GUE
+	KrpISZ8k2ztzzRboj4tii0VzJGf37ty3kbJjeVy9I3OGU=
+X-Gm-Gg: AR+sD12xBo+qwe5c5rQNEbs93bYWr+6Iqg4Wxtxu9Wk/1OT54RpYw1wZloL+2pXqPrf
+	QZhnVHCCqba0zLOoFCjGmzft5IwDlxzalWDY//9wgkbPGfziAmNsxS84HyBVFC55lmXEUd/2Wzj
+	nZ6RyNazQdZgMrECGkdwGKqGXVOV1acrH9JwQsLY30Olbbej+U1E0VOTajTIJQSR7KDrS/y68jD
+	TA7AikaKzOTclX94bLpnUVYhdgpb5E5t9ce0H7s4lOE/tAsa/pK6fA/XEkSIrp0T0ZKMZ2ioxFd
+	zZdu9MitHyNuN0vMP+w+xz3pvLzz
+X-Received: by 2002:a05:620a:1b99:b0:8cf:c106:faca with SMTP id af79cd13be357-933025a6cecmr116305385a.36.1785226868501;
+        Tue, 28 Jul 2026 01:21:08 -0700 (PDT)
+X-Received: by 2002:a05:620a:1b99:b0:8cf:c106:faca with SMTP id
+ af79cd13be357-933025a6cecmr116302785a.36.1785226867986; Tue, 28 Jul 2026
+ 01:21:07 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm64: dts: qcom: monaco-evk: Describe the PCIe M.2
- Key E connector
-To: Wei Deng <wei.deng@oss.qualcomm.com>
-Cc: andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org,
-        krzk+dt@kernel.org, conor+dt@kernel.org, quic_chezhou@quicinc.com,
-        cheng.jiang@oss.qualcomm.com, shuai.zhang@oss.qualcomm.com,
-        jinwang.li@oss.qualcomm.com, xiuzhuo.shang@oss.qualcomm.com,
-        mengshi.wu@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260728033903.2803187-1-wei.deng@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260728033903.2803187-1-wei.deng@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDA2OSBTYWx0ZWRfXyTNr/R4RqKHI
- BjlAjUIA2yhNZLKcx7hFmLrRqT/0WGYLNBn2tzue4I9LmK0wpoQZe8KSNLasNHDVWncG2uOTsaI
- NjVJ7ufa1MKPktLUCllx87eOJuPKvjk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDA2OSBTYWx0ZWRfX+Rn2Zl5wVauZ
- 5j65S4HD/vGVvZBgJdPlvgLRfqVzFZKiNT97MebD1wyEKD5961pMRiCKXHIqUALgWyv8Db/LXSu
- zwwcP3oQvtVrvd0eerqYObeTxynlNVwOtIwe4dUF3w3cdHQRmx3JAS7OdKbdn4nrOspUQ/9N3rC
- UJ0kqcAVyi1nO19m2UNrIVij6p0pc3eYs2aSY2zoi+KOJbgHlltoovrn6Jt82uVkS5Sby47YPj2
- jaoX4KXdAz2eQVsgqLxx3kc8YLF1DqH4aDFF2nXkUSae9YxqBe7I2nWz5C3wpmtCVCyh2fUhsNV
- RC7ZhAJRIcZInYOfCS2rk9G3TEuipsS4DhhBqJFUiSFGWLpto4hqGA0Rxvt2CNPy8WMXRPT5aG8
- 3MvfVPIGxnI6TMd8iDWS4Wu4KVvId5+9BS4DsWnEXzI1s0erk6dUmJLY2FVqUobeSq2kznEfani
- 3ypaaMJAc91GuhFbEpQ==
-X-Authority-Analysis: v=2.4 cv=aa1RWxot c=1 sm=1 tr=0 ts=6a686437 cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=iuMMG4RN3S9VbU4l2-YA:9 a=QEXdDO2ut3YA:10 a=pJ04lnu7RYOZP9TFuWaZ:22
-X-Proofpoint-GUID: 0JNn-X1I0_4qOkGZJraDCE6nBysM5dmO
-X-Proofpoint-ORIG-GUID: 0JNn-X1I0_4qOkGZJraDCE6nBysM5dmO
+References: <20260727-cci-clk-fix-v2-0-c3958f28b045@oss.qualcomm.com>
+ <20260727-cci-clk-fix-v2-1-c3958f28b045@oss.qualcomm.com> <c7b0213d-a4c9-4ac8-be09-b449da457230@linaro.org>
+In-Reply-To: <c7b0213d-a4c9-4ac8-be09-b449da457230@linaro.org>
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Date: Tue, 28 Jul 2026 10:20:56 +0200
+X-Gm-Features: AUfX_mxSXGa68pk4Kz1yQ8PsRKYdtiXqJrr9OnpBEFcc6F3FtJJEooLPHFz-yKg
+Message-ID: <CAFEp6-2VP1pVbKJEkPTOFdMn8kv=83CrP-MCYPDTN0BHURn2Jg@mail.gmail.com>
+Subject: Re: [PATCH v2 1/3] i2c: qcom-cci: Switch msm8953 to the CCI v2
+ timing/rate config
+To: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+Cc: Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+        Wolfram Sang <wsa+renesas@sang-engineering.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Luca Weiss <luca@lucaweiss.eu>, linux-i2c@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Authority-Analysis: v=2.4 cv=TJV1jVla c=1 sm=1 tr=0 ts=6a686675 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=ZpdpYltYx_vBUK5n70dp:22 a=KKAkSRfTAAAA:8 a=vOiYUO998qp6HqxB24gA:9
+ a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDA3MCBTYWx0ZWRfXymPGDdOcRYZy
+ HyYPvE8KulAWilE40auIXz0b4/l0PdcP7qc8bdAJOSoh3km4LLoJo9DxPF1L8ikrix9LvXveZ/5
+ um1vgjTjgPy8DmMO+5/8od/dhsgfDY+VnLobjA/ONvTCjpCTXIXTjDu9gbpyYfUBa8WbHw4iAPr
+ h/NjjoPMLYumsrLytmAcX4lUKYtjsrEHSFJjQpojE4Fhtrxo76V5TgRWiQOASW2+Qwh/UJUwqiv
+ +hvcm9fGsa0whTZgu8R9UFDtTdWqIRT3TDBzE1Fmdhh261vl8gozGHXegMmupu7DbjRWYhawfRk
+ eTq7rrHlIqvEo9Buj115GCFDTN5CChDyCaxPkDTesrIYdlElsgtqlIAnBaI/3uUrkY2I02aDfhD
+ M5elhf2BSUATFP1+sWpDZmhWrBN6zS4WFnKT8wzSDpQuB0hRY23IasgShY2W7AJrGeZ1EPTfBlc
+ rsh5fqXCF8X49ISUsOQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDA3MCBTYWx0ZWRfX4vhMtr6MQlH0
+ ZSFIqjQoTqeHs6xY3sIFd4aQGo7k6gR14WErTr6L/v7sJnohggcPSTN5mQlbcyzggzHnUGmnFKx
+ 8hF/piwprW9zA3J9wrMOnrqa/5fNXk8=
+X-Proofpoint-GUID: ChnxobuD9rx19EGGkmZBEuC3z32iiUMz
+X-Proofpoint-ORIG-GUID: ChnxobuD9rx19EGGkmZBEuC3z32iiUMz
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-28_02,2026-07-27_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 lowpriorityscore=0 bulkscore=0 clxscore=1015 adultscore=0
- suspectscore=0 impostorscore=0 malwarescore=0 phishscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607280069
+ malwarescore=0 priorityscore=1501 suspectscore=0 lowpriorityscore=0
+ spamscore=0 impostorscore=0 bulkscore=0 phishscore=0 clxscore=1015
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607280070
 
-On 7/28/26 5:39 AM, Wei Deng wrote:
-> Hi Konrad,
-> 
-> On Mon, 27 Jul 2026 16:43:50 +0200, Konrad Dybcio wrote:
->> On 7/27/26 4:16 PM, Wei Deng wrote:
->>> @@ -644,6 +701,12 @@ &pcie1_phy {
->>>  &pcieport0 {
->>>  	reset-gpios = <&tlmm 2 GPIO_ACTIVE_LOW>;
->>>  	wake-gpios = <&tlmm 0 GPIO_ACTIVE_HIGH>;
->>> +
->>> +	port {
->>> +		pcieport0_ep: endpoint {
->>> +			remote-endpoint = <&m2_e_pcie_ep>;
->>> +		};
->>> +	};
+Hi Vladimir,
 
-[...]
+On Mon, Jul 27, 2026 at 9:21=E2=80=AFPM Vladimir Zapolskiy
+<vladimir.zapolskiy@linaro.org> wrote:
+>
+> Hi Loic,
+>
+> On 7/27/26 12:21, Loic Poulain wrote:
+> > The msm8953 CCI timing table is internally inconsistent. Its Standard
+>
+> likely I was misunderstood in my v1 review comments, and I believe v3
+> will be needed...
+>
+> If there is just one master, or two masters set in equal speed mode,
+> then there is no such issue as "msm8953 CCI timing table is internally
+> inconsistent". In other words generally it shall be permitted to have
+> supply clock frequency intermixed speed modes for any CCI variant.
 
-> The concern I have with moving these to monaco.dtsi is that other
-> boards sharing the same DTSI (e.g. qcs8300-ride.dts) don't have an
-> M.2 connector. Adding port/endpoint nodes in the SoC DTSI would
-> create dangling endpoints on those boards.
+The two masters sharing the supply clock are independently
+configurable in terms of mode, so we simply can't guarantee they will
+run in same mode.
 
-Is that a problem?
+>
+> I'll repeat the same point as given in v1, namely supply clock frequency
+> is not a property of CCI revision (therefore v1 1/3 or v2 2/3 is invalid)=
+,
+> it is a property of the mode settings. It's correct to remove 'cci_clk_ra=
+te'
+> from 'struct cci_data', and it will be correct to add (or parameterize in
+> any other way) 'cci_clk_rate' to 'struct hw_params'. Each instance of
+> 'struct hw_params' is strictly bound to a particular CCI clock frequency.
+>
+> > and Fast timings match v1/v1.5, which are calibrated for a 19.2 MHz CCI
+> > clock, but its Fast+ timings are essentially the v2 values, which are
+> > calibrated for 37.5 MHz. Since all masters share a single CCI clock,
 
-Konrad
+So, you're right that the supply clock frequency is a property of the
+mode/timing settings (though I'm not entirely sure timings are fully
+hardware rev agnostic). I don't dispute that.
+However, this reflects the current driver behavior. It's not
+incorrect, it is a simplified approach that uses a single frequency
+point across all operating modes of a given platform.
+I added a brief paragraph in the V2 cover letter to explain why it's
+out of scope.
+
+My argument is about scope. Today the driver has no mechanism to pick
+a rate per mode, a single CCI clock is shared by N masters (usually
+two) that can run in different modes simultaneously, so per-mode
+scaling requires (1) per-mode rate info in the params table, and (2)
+vote/arbitration logic to select the highest required rate and still
+apply correct timings for every master at that rate. Concretely, with
+one master in Standard and another in Fast+, you'd need a 37.5 MHz
+shared clock and a Standard-mode row calibrated for 37.5 MHz, which
+the msm8953 table simply does not provide today. So this isn't a small
+tweak, it's a new capability backed by new table data. It would bring
+more fine tuned supply rate, but without huge benefit, as cci clock is
+gated most of the time due to runtime-pm.
+
+> But what if you have only one master?..
+
+It's not important here? we have N master (usually two) and have to
+deal with that.
+
+> I think the msm8953 data is correct, it shall not be removed.
+
+The msm8953 table as it stands is internally inconsistent (without
+per-mode rate info), no single clock makes all three modes correct.
+Moreover, msm8953 is the same HW version as msm8996/sdm630, which
+already use cci_v2_data, there's no strong reason for msm8953 to keep
+a bespoke, half-and-half table.
+
+> > no single rate can satisfy all three modes with the current table, and
+> > the DT assigns 19.2 MHz, so Fast+ timings are wrong.
+
+This series intentionally does the minimal correct thing, aligning the
+timings with a single supply clock and enforcing that clock in the
+driver, which owns hw_params and has all the info to produce correct
+timing. It fixes reported devices misbehaving when no (or incorrect)
+assigned-clock-rate is set.
+
+Not saying what you propose is not do-able, and I clearly understand
+what you mean, but I'd prefer to land this simple
+alignment/enforcement first and treat per-mode clock scaling as a
+follow-up, rather than coupling a straightforward fix to a larger
+refactor. Please clearly Nack if you do not agree with this first
+step.
+
+Cheers,
+Loic
