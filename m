@@ -1,87 +1,33 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C649341F5ED
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 10:15:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66F403E638E;
+	Tue, 28 Jul 2026 10:20:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785233707; cv=none; b=QagdwUvvHokxkSRJMxaqPcc2QuByIMS5uWLkRxPmepVvBoCsfo0Ffvkp+we8e2A/eNRTiWUKWl5aMWB9Rumss3NTGfyij/xxj1b8setWD/yhgBSX0TqaJhrC8x2153eMxOPSYvq6zpWneAbVmY4fESSBphH1mzz/M5KwwQqlf+A=
+	t=1785234022; cv=none; b=dhx37iqmnxZsmH6vw0KlgWKWD7O4GAQnLzOGM/Yows2h9sN3r78OsAPnIa7npOybK4J1KxYBr7NpMjvfb/yPiv9BpU/JJ3aUTspP22P05VoSEfkFt1dNRM+sRF9oq7JRe4E7JV8AuABedsH213TjVe2n8aM5dKEWbkuKfvlhvMQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785233707; c=relaxed/simple;
-	bh=MMmeuxILIP+TAdSL+HmgIqFdpj+gmOWW38hJ1+E4IBI=;
+	s=arc-20240116; t=1785234022; c=relaxed/simple;
+	bh=fKw85KVXRLi4QXqCb/P7we/zdwA/I29yPM/Girk/sUg=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=eR7s8L83fjdoDzFWXq7rVaWOpP97JTM2F6zbsVg5LlgwYloQuRcKmDxthGldJiyT9EbfdjO/GKGxIteG13kim0J9IghAr/orZHszDYqSxlWTqwKLohjjb4Z13nCW1O65qbqn4slvg7pYuRoa7OM/M40TMgp6QJ001xWNk3AhxsY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=C8y5Nkfp; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Mi73dijC; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=dB9HYA4HWy/Mll6HZl3VMOoyGtV1aif1Y16lfYNA9RRyzBxDY4j0lK7Q6tZuE9yVKcHf2B+j6s3rjBKo4tPNPDxbB34Pe7zrPTDAOKfMv4ftAT9V8FwlddKqCWYeZiJ8ViHwLUzBLU3D/kV9ILHAOmjNK12rhKINsTOzucFXLPk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eLGgne3c; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="C8y5Nkfp";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Mi73dijC"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66S82C1H2480090
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 10:15:05 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	j0hLbfdy5mgjgFCzYatzKmlRtop8Ya/eJckf6yBTaIw=; b=C8y5Nkfp254qpf60
-	4x3RqPMyxvx0inCaro3dT2qVZJEQqZcDbOG1/aLK75ptIBG0D6kuEIGRPFTMxbw+
-	qs70Cp85rEZ2eFmgJM66XuyOkneca7pGinjbsDBfZEFNm3/58ew7OkFb1Z1v4tdf
-	qIhJjmlZYc/MptbPLpXmV8Qd/igoSDokXrDS/s0bXdGTtis0wlEx/DZ8BEoABhrB
-	fC38g9VRNWAHw9iPxKo75+ogsRriQooTS0qPzedYYvxOsn02JznoPxRPktb3T1gh
-	N3DR7MUekdHAJY5FjWd4asX8ARiIJq0EgWbgODB+iqkxpUpuGujAy1Uw4UtB4Yv2
-	iyUMAg==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fpmy11e85-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 10:15:04 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cbb467e56aaso3880593a12.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 03:15:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785233704; x=1785838504; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=j0hLbfdy5mgjgFCzYatzKmlRtop8Ya/eJckf6yBTaIw=;
-        b=Mi73dijCbs81F7ueGvNNBe89ncPEidxPAHcoRYRrzg5bDW6OwzS8w3jK4Hg9ZFMfP5
-         ggrA4i16eP6cwE++mnCwmne10CtBhq2OMorL6SSddpEyzbMfob2epUeXzJ/TYWZSjK9Z
-         87kxDPDkCEjD1Mtjd1tTnMCf2pgCndJsOUjaqjQW4pmrEUY3XuAesU2Je1aZ2vi3k/uW
-         sc6RB4KsRA3SEoEwKLQZjuzlVAG69cXEeWGV1N+yhWeqjwJgZDDMz9VPt7IVPb0ck8YI
-         w5OlfLBduPZn3/kkjBeB/cc7T9IeWwt7c9d9CSOkt7SI51HwCNod7pFPiNg0Gy+k8dlv
-         /u4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785233704; x=1785838504;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=j0hLbfdy5mgjgFCzYatzKmlRtop8Ya/eJckf6yBTaIw=;
-        b=j1uVK/LKZqCN4A0QM1QgJMBxjc3Fg7D2dsJQEaKVJxhRK7C1CydBeMG0YHK+uEKyxI
-         CMmcglaEoMytD4pv37xS0O3bQ9OvBwvXQo/Jn9NqQ6OCG6+wTCcXq3+x+hptIcioxc31
-         3/MsE0v1X07bSrInxb3lfXI0zHcGGzFn++qwEKfIxzgh/svhvnWgx9h2ge5KB8O+rSEx
-         +Jibkxqaeq2k4dJi63pb4IOPnWGwlHkhS62yXvVrC/lCF05/zqJbYBo8jFD0xL0xT1DC
-         4DwngRtowH2QVO+UnKf5ph3go/UwZWnVHcbBI/0PbPUZi5c9FyHagiiZoYdP2gfpDBon
-         30aQ==
-X-Forwarded-Encrypted: i=1; AHgh+RreYWVki0LXjXddZJdXlexs2sak2MIUQPeLepi1QD59vT7ko9NhO+LjUGvMbEceAsjQpkOFEFjdHoqE2uIG@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw5LFeZIWNFTAy2Lvjt/gKm49LyD1bqWqDv4y33rvzOG4FNo3CH
-	HxO3xEGa05MtAuFHy1jrrzDczfrJObwlYF0WE79MmspUSu9KPbVn8+qj7UlsrrK4LoN5ROMDtWN
-	2Uyf4hT36d1N23pvF00UBl+gHdZs8Sjho1JtQig7iBIk4+lNQBmbgmFXzBzsIlE0qv57R
-X-Gm-Gg: AR+sD13VokUi+NOf2znFMxakJrMBGaeEPXu2is83THZiXxk8LTvUVsU5OjMbEieS8jM
-	D5HBq5hwj0swhQUxQ53/RIK+sYks0dau694DdiHAiFEwCTt2H+DmIxiWU2k0sAekl1lZc2JpHAz
-	ZdTuHJZ8U+URiTDaRsljKxtXBV4iNuosXc+gRRTn4jah+W0hRNAUxG+fxRBumNYZq967Y/k6zUs
-	ACpjbcwNqamQUp271cbAMlS5IfxjxNOrVvXXU/EiIBhOR7o+GcylIxFzUM6QDg9001u0Ye1aoSE
-	zevQwGnStnoME42zTVyAtK93sVwGw31ONJ97Y45+QiNy0RYJI+cVSJgLKqvCsBHD7gHVgvl0YaY
-	qHCHeY7RbF5Y+hG60G7UOXEUkOJKFJF9cFw==
-X-Received: by 2002:a05:6a00:10d0:b0:845:e41f:9696 with SMTP id d2e1a72fcca58-84e9325b4famr1835429b3a.25.1785233704078;
-        Tue, 28 Jul 2026 03:15:04 -0700 (PDT)
-X-Received: by 2002:a05:6a00:10d0:b0:845:e41f:9696 with SMTP id d2e1a72fcca58-84e9325b4famr1835405b3a.25.1785233703606;
-        Tue, 28 Jul 2026 03:15:03 -0700 (PDT)
-Received: from [10.217.219.72] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84e532590bdsm4210071b3a.3.2026.07.28.03.14.59
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 28 Jul 2026 03:15:02 -0700 (PDT)
-Message-ID: <fc90084e-c9bf-43da-bb8b-43a8d2d0cb7f@oss.qualcomm.com>
-Date: Tue, 28 Jul 2026 15:44:58 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eLGgne3c"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 615EC1F000E9;
+	Tue, 28 Jul 2026 10:20:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785234021;
+	bh=kSPnhViqx3Kje71wTQOzYJlariIKYc5Rlrp3Gssb9RU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=eLGgne3cdhdphYSsfMWhkGGynLD5eXG5PARcG1Kx9nK6bq1dP4OaE9zLqqur2lUcY
+	 6p2ZnnE4cgbsCOzNqLU0SQLC8fkC9roFxVQbU6uJbT52rIwdRCryZ7oUNbn14+Jwzc
+	 g0AXGPxmYrwdF++oG/pDgGfJow82MdN0z/2K+vMKhYFuThtC6+EOkKjCnCt2PLjBIM
+	 6iWs4qAnVZmQfYYDNDohcEJCqCTjT8gknoDumbCxNml13sp0Fesyb52+Qcss9L310O
+	 uGu7SwG/EPs/eVqUYcN92ogwZknPiihl3rpIWsbDZ4/F1QzMSlLi+ccTPEnBgwK9mD
+	 1UqjuZZn9rHgg==
+Message-ID: <3e50d846-e850-4c85-97c2-60a34b66e976@kernel.org>
+Date: Tue, 28 Jul 2026 12:20:12 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,133 +35,96 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/2] i2c: core: Add i2c_update_timeout() helper for
- dynamic transfer timeouts
-To: Wolfram Sang <wsa+renesas@sang-engineering.com>
-Cc: Andi Shyti <andi.shyti@kernel.org>,
-        Aniket Randive <aniket.randive@oss.qualcomm.com>,
-        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        linux-i2c@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, Wolfram Sang <wsa@kernel.org>
-References: <20260720-master-v6-0-671261b05c61@oss.qualcomm.com>
- <20260720-master-v6-1-671261b05c61@oss.qualcomm.com>
- <amZkf3lu7gjWhw04@zenone.zhora.eu>
- <0c0d1406-949b-49ee-b203-3833b9f8433b@oss.qualcomm.com>
- <ame2tX1RwOo4F6Lk@zenone.zhora.eu>
- <cb1e00ea-658a-416b-aef6-46c151d15685@oss.qualcomm.com>
- <amh5l4Yvwemws6Cx@shikoro>
+Subject: Re: [PATCH v6 2/3] dt-bindings: power: reset: fix minimum reg count
+ for pmk8350-pon
+To: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
+Cc: Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, linux-pm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+ Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+References: <20260724-b4-add_pwrkey_and_resin-v6-0-41acc214d93a@oss.qualcomm.com>
+ <20260724-b4-add_pwrkey_and_resin-v6-2-41acc214d93a@oss.qualcomm.com>
+ <20260727-weightless-fierce-tiger-a9c6ed@quoll>
+ <20260728101223.5uvgmqmpwgvjvysz@hu-kotarake-hyd.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
-From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
-In-Reply-To: <amh5l4Yvwemws6Cx@shikoro>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: glFifiS-acYtOqX32AxzjnTnM-0QKf3q
-X-Proofpoint-ORIG-GUID: glFifiS-acYtOqX32AxzjnTnM-0QKf3q
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDA4OSBTYWx0ZWRfX/ImsQo4QVIvW
- Lbdw7ip2BfroP59bTjn+DIDG31pTivp32FtKtcCINuHJOY9G39Fh3JVci039E3EJBxSKie67/nQ
- X183ZMxVM7SEkDyJ0aHWb/c78xsx6eRGqx+Vtc4mSLheaWkHZ4/rlRj9Ftvs+c926lNer+olsaB
- X5XsTbzAmnyC/z4OoQpqmfsvubUjDgUaMCpU6zbFtbouUZpYSq2j9zOmh7n7W7dNrq0fn7neM59
- v2M5eWEdFHjty5u0Y3zER59TM/9onn8uwBNwgSa32jmASAO7bFeXD6hsJF0S+PJswZRyreQV3So
- h+mdD943irP5lfmWFkzaEPCGWYZ4OXcSdKHO2cK45sBXlcJZaHTDcEfTyUmye5ubL9iwtMoYhD6
- J0xe6+t3vTadN1XkCBQCwE/zK7IkXURvI3vPAeL5dE+6ayUBTuM55sNx3PZVSaApVPqH2mGe++Q
- BSnUz+XSdQO+z+Mf2qw==
-X-Authority-Analysis: v=2.4 cv=PJo/P/qC c=1 sm=1 tr=0 ts=6a688129 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=QebkMiaCAiKBxjCz028A:9 a=QEXdDO2ut3YA:10 a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDA4OSBTYWx0ZWRfX75QLGJ9jq2s0
- tKfHIh3/jeDUWmfEtxo2D+JFQnKCP6CucRN0p4xfGpOVtyGhEeUsPtpKbrRHGG62fKIkBveqgVh
- JdPuFz+Ue1eoqtfSOIY8jxUTBdUxW24=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-28_02,2026-07-27_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
- priorityscore=1501 malwarescore=0 adultscore=0 suspectscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607280089
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260728101223.5uvgmqmpwgvjvysz@hu-kotarake-hyd.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Thanks a lot Wolfram !
-
-On 7/28/2026 3:12 PM, Wolfram Sang wrote:
-> Hi,
-> 
->> My thinking was that we are trying to derive a timeout for transfer
->> completion, so the transfer length and bus frequency should already give
->> us the theoretical on-the-wire transfer time.
-> 
-> With my experience in all these years with I2C, this is exactly true. It
-> is a _theoretical_ value, and the practical value is at least board(!)
-> dependant. It may also depend on the environment in other cases. So, the
-> theoretical value may supply a minimum but IMO this doesn't help.
-> Because we want a precise value, but we don't know it.
-> 
-I agree that the precise timeout is platform dependent and cannot be 
-derived exactly from the transfer parameters alone. My intention is not 
-to determine the perfect value, but rather to provide a reasonable 
-kernel-side default for cases where no timeout has been configured 
-explicitly.
-
-Since kernel-space clients have no generic mechanism to tune adapter 
-timeouts on a per-system basis, deriving a baseline from the transfer 
-length and bus frequency, combined with a conservative margin, seems 
-preferable to relying solely on a fixed constant.
-
-I am also suggesting let userspace add something on top of this if the 
-core derived final timeout is not sufficient.
-
->> On top of that, we could add a fixed margin to account for interrupt and
->> system scheduling latency before converting the result to jiffies.
+On 28/07/2026 12:12, Rakesh Kota wrote:
+> On Mon, Jul 27, 2026 at 08:36:38AM +0200, Krzysztof Kozlowski wrote:
+>> On Fri, Jul 24, 2026 at 03:44:12PM +0530, Rakesh Kota wrote:
+>>> The GEN3 PON peripheral requires two register address spaces: "hlos"
+>>> for the primary PON block and "pbs" for the address needs to be
+>>> specified to facilitate software debouncing. Set minItems: 2 for reg
 >>
->> The exact margin is open for discussion. I was considering something on
->> the order of a few hundred milliseconds (e.g. 500 ms), but perhaps that
->> is still too optimistic on some systems?
+>> That's ABI break and I do not underestand if this was broken before or
+>> not. Driver ignores the PBS, so everything was working fine, no? Then
+>> why PBS is required now? Is it actually working or not?
+>>
 > 
-> See, you simply cannot know. So, why not leaving it to those who do know
-> for their system?
+> Not an ABI break. All in-tree GEN3 DTs using qcom,pmk8350-pon have
+> always specified both "hlos" and "pbs" reg entries — pmk8350.dtsi,
+
+That's not related to ABI.
+
+What about my DTS?
+
+> pmk8550.dtsi, pmk8850.dtsi, sc8280xp-pmics.dtsi. No issues were seen
+> precisely because PBS was never omitted on any GEN3 platform.
 > 
+> minItems: 2 simply enforces in the schema what has always been present
+> in practice, ensuring future GEN3 DTs cannot accidentally omit the PBS
+> address space which is a GEN3 hardware requirement.
+This does not answer my questions.
 
-This is an option for userspace. Should we expose device attributes for 
-kernel space ? if no, then there has to be some calculated value with 
-reasonable offset.
-
->> Alternatively, the core could provide a calculated baseline timeout
->> (transfer time + fixed margin) and allow userspace to add an optional
->> extra offset when needed. That way the default behavior remains automatic
->> and works for most clients, while systems with unusual latency
->> requirements can still increase the timeout without every userspace client
->> having to determine an appropriate value itself.
-> 
-> We already have a mechanism for userspace to set a timeout.
-> 
-
-Yes, and I fully support keeping I2C_TIMEOUT as the mechanism for 
-userspace adjustment. What I am proposing is complementary rather than a 
-replacement. The core could calculate a baseline timeout from the 
-transfer characteristics and apply a conservative margin, while 
-I2C_TIMEOUT would remain available for systems that require additional 
-headroom beyond the default calculation.
-
->> Do you see cases where a transfer-time-based timeout with a generous
->> system-latency margin would still be insufficient?
-> 
-> Regressions. You could time out too early on boards which worked before.
-> 
-
-That is a valid concern. My assumption is that any calculated timeout 
-would include a sufficiently conservative margin, based on measurements 
-across a range of systems, so that existing working platforms would not 
-regress. If a platform still requires significantly larger values due to 
-exceptional latency characteristics, I would expect that requirement to 
-be addressed through the existing timeout override mechanism rather than 
-by forcing every client to use a large fixed timeout.
-
-Looking further for common approach to be finalized considering both 
-userspace, kernel space.
-
-> Happy hacking,
-> 
->     Wolfram
-> 
-
+Best regards,
+Krzysztof
