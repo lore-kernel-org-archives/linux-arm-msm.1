@@ -1,352 +1,107 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DE5A1DF74F;
-	Tue, 28 Jul 2026 00:20:14 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE2C31B7910
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 00:25:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785198014; cv=none; b=cksZxvR6SOar5dx8iXGmENTVf3Lua5f0njyZeCTYbQspRQ94YHCQ5pbtBhzeA+SQB6RY+speBm0/5jgHvHtvTrjtTaIZckkpYMmqP6FB9zLBFhKpYP8gnfRd524ICTsmNqG1/FXcmzu4hIp8ntM8/TD30FKMfTYPp8W4B7WEDVw=
+	t=1785198346; cv=none; b=YRJUy9VhGbSOrKcxs2+Rp3DJqCHBbUkTC3h9s8twGh/UWINgDmuN8Ry4FDZxDcijh3FWi1bW92LAN14ye0MYKyZLZRz2Ewepuv2TxG9diDnc1e/bhCr5NOI69npnpBGfSvcp7EBRGgskXOUTITaOM5zcZXbJJcCWGi1oUvJ6s/U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785198014; c=relaxed/simple;
-	bh=CW4Yr2SdkWc+3uB8ESOASxncqY/qhG7hylCK07GP6Vk=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=PXNWXOdlTBArzcT+CkQjZxvmzfQqIP0Wsde6EHpRO4TnBbdltvtR6VRMrsGB874mb82Z0qNNC+sqp3HS7hauAsNSOLNSy8+yehnkPNnCebil0qWxKYbkB6rOg6LXgZB5eljII2WKRA/m5TveO0p2IAMPjdWt6CYadffgYuTBqHg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YNddxpta; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1785198346; c=relaxed/simple;
+	bh=JXtzyZbPdKYunneaFIecOBMZxaTfcF91zRrVJogtLIA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=jH7Mnf48XYmZ7egHqP/Ee6LLTxc9kIhNv/w8allI/DQdKyqrEJ6paUl7FE5ACTYirpX8CtuiLbCVov3Q2SzbeedgrjSS69beCH4w95TSs3Ho5IcV+gFwzsY55H4enOcH8uKiQtoe9t8QmQKuQwZvqs3b/WdcvEWHUD6IPL4mkqM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZNJFaIpK; arc=none smtp.client-ip=209.85.216.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YNddxpta"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 1CEDAC2BCFC;
-	Tue, 28 Jul 2026 00:20:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1785198014;
-	bh=CW4Yr2SdkWc+3uB8ESOASxncqY/qhG7hylCK07GP6Vk=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=YNddxptavDHGmMxT+V25lbIyJ9oG4fzUypw7jkLiGp1VosxzbahTkhTDmitrwxHL0
-	 Yf2OZ+e27LL9MckdTNF8V9B28Q4W+F2+LI0w2etOHvDBIsmwPfk36uvriwDRJkMVXE
-	 Usx/hMV8mZYgd1QTVTofTUoLskfr06rPJ0S5qHwlG+ZCSj7mNqTHOI5FuYq23RDpeg
-	 5HkHKjO3dorfwK6kR/e5dC1x9Y64FqxiZU13wYY92+dkt1WucxMcpNty/D3+NrHClG
-	 MJYemzpm2se6pgP3oOterx2WiW7bsn+YzY6bs1uSN7Ztbqtvdh6tlto7sBTr8p2Xqi
-	 WhtKfOPbuWlvw==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 06980C54F51;
-	Tue, 28 Jul 2026 00:20:14 +0000 (UTC)
-From: Aaron Kling via B4 Relay <devnull+webgeek1234.gmail.com@kernel.org>
-Date: Mon, 27 Jul 2026 19:20:14 -0500
-Subject: [PATCH v9 6/6] arm64: dts: qcom: Add AYN Thor
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZNJFaIpK"
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-3856d4015e0so282336a91.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 17:25:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785198344; x=1785803144; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=as53GHjZpbLbIzF+K9Jx+5/hmvo3LdjCnw1qaLvpW0Q=;
+        b=ZNJFaIpKzs21RaUNfDzCHspb6ETYAHDbRd/6tX9urC6HPupDL2DzV950f65MA+cisn
+         OHdY5vr77EHu4T1thxoP/todYh3lhhYyORAiVjFapHijugY6RtRRi9bk6hFpS0fGQdfF
+         WArhBfDlRR/lRDFk0lz0mCra9v9BZsitv14PWnhoSy0/w0LjqFcjiAn08NRPhi56M/rS
+         5MbDOOMvuT/K/v5ZGrA+0CBgKcIdBzAzuk/POPDA525Pp4F/JPVAb05+Jiwyq/UwYt3z
+         8CG1PDxa1wYtrBgkXCZqObsPW+JeW5TLsnh+a2fIVIkFmx/y4RocD+WtsIk5jfmJrGnP
+         XgYg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785198344; x=1785803144;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=as53GHjZpbLbIzF+K9Jx+5/hmvo3LdjCnw1qaLvpW0Q=;
+        b=GRLHK8habmRqksAFBVWNzeEWvsp9cEBcePSQP+7Tl73V6s4oyJ4yYRCaWCkhV7LzBt
+         D1rtzWlzeFViBtYIlv9vPVci65pN67+H3Hp3leGA+bhx+8aKD04I/IEGugEVTk9Xbg6L
+         2bqdj1kQJ+B/DhV1qHPRMrRpID7AyIldf9GQONlmuwnwNht479+PctpUuwIRPhRWFeYT
+         s3dtnGL0l7cT15s/JnVsz8YWOxXEXBD+30l5hWjmME6tcTsqUz0RVXSoNnzz47b309tg
+         ppIvxUHl+CHig/C2++Q937VvhcWGnLfPrwfeZcDTNXc3pYGyWCRDqtYKcUwr8my9G4cC
+         swNA==
+X-Forwarded-Encrypted: i=1; AHgh+RqDU7jAa9xMe0s3paoibj8nOG6wjyKI7HUm9y9/HN42g7VgqOF4RlRDFvjNfOta5yv1n4TnRYtHEBB9RJZh@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy/ubCF8iawHJRVbyD3yR8LUnCo3aMnYpnwujOrNisJN4IR0Sf8
+	cF8Ohd5cRarVrjy5Hw/8uthQOk8IPcUmlnoc6yN5GLyfmKpa8WyC3Peh
+X-Gm-Gg: AR+sD10rpqS1kJsJSK3Lw+9cRW03xNy7KgOA30rByQkxvZNKmmsp6PYykZHVoYTXR5W
+	Ohv6VXLY31i2d/JloksMnsT4r80US8xFC+nWzVL5xm5XRMRECuZf4SbrEf4dp8r71ejAt85+9rm
+	AoSzItfplz5FSU1NomKJgvbhEQaZFTu4i8/ryMScVxNhHmyPUj1QwKbY+/HTpVR4g2kWAHJIs7U
+	vOT8h/HuM/+hWxsOmjVIl6O2K8U8+AYIxVN6V3XeHMCN90kGNXXlOmlHBm1HmhWWZMYIfTZCEKU
+	7wRPxR2yS68uOgcz2Tpve/2G3iBW/r0AVp2FkknMzEANwL4aIhBQkwFv69EXqkCsv/vJ8KRB90u
+	lsjIZqy5++yI1BgvgfW+t7y4C+vi3+PLQDDts1Yh8vmLep/UFjLS/0sIxz3YO5PwSBDpc3w6wXK
+	7G47shzfgVLAA99PsScuYnPLpAHL/Bl1bHiXoWx9zt9DjXLCH6SgG5J7HUqo9dLkl0jKpwcZPzk
+	a/WcT2KZgc/pIhrZEE=
+X-Received: by 2002:a17:90b:5864:b0:381:2788:a437 with SMTP id 98e67ed59e1d1-38f6a324937mr107418a91.1.1785198343326;
+        Mon, 27 Jul 2026 17:25:43 -0700 (PDT)
+Received: from FAIZEL-KB ([2001:569:5b64:e100:37da:2f8a:5b33:6b68])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f64111441sm482942a91.1.2026.07.27.17.25.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 27 Jul 2026 17:25:42 -0700 (PDT)
+Date: Mon, 27 Jul 2026 17:25:40 -0700
+From: Faizel K B <faizel.kb@gmail.com>
+To: Ricardo Ribalda <ribalda@chromium.org>
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, 
+	Vikash Garodia <vikash.garodia@oss.qualcomm.com>, Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, 
+	Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>, 
+	Shuah Khan <skhan@linuxfoundation.org>, Kieran Bingham <kieran.bingham@ideasonboard.com>, 
+	Bin Du <bin.du@amd.com>, Nirujogi Pratap <pratap.nirujogi@amd.com>, 
+	Sultan Alsawaf <sultan@kerneltoast.com>, Svetoslav Stoilov <Svetoslav.Stoilov@amd.com>, 
+	Sakari Ailus <sakari.ailus@linux.intel.com>, Abylay Ospan <aospan@amazon.com>, linux-media@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH 4/9] media: vimc: Ensure that pixel_rate fits in 32 bits
+Message-ID: <2vz75korzgv3s32ekl2fsgs45erst3s4wd3yxsh6uxyxxn7ddy@2ynykg6ary52>
+References: <20260629-cocci-7-2-v1-0-5884c80ee3b6@chromium.org>
+ <20260629-cocci-7-2-v1-4-5884c80ee3b6@chromium.org>
+ <qrcq3ntszxswpk2wbeb7uq4gq3mncegwtoncyplkhdhrslzghs@dhkvpb6n5jsf>
+ <CANiDSCs9s03DUjKwcPgDtZt2QJ4i0FGwab4zpEP+wCawagSC2Q@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260727-ayn-qcs8550-v9-6-e3db456e10e5@gmail.com>
-References: <20260727-ayn-qcs8550-v9-0-e3db456e10e5@gmail.com>
-In-Reply-To: <20260727-ayn-qcs8550-v9-0-e3db456e10e5@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Aaron Kling <webgeek1234@gmail.com>, 
- Teguh Sobirin <teguh@sobir.in>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785198012; l=7059;
- i=webgeek1234@gmail.com; s=20250217; h=from:subject:message-id;
- bh=fy7O2f4hARL19dvp0RORykEjV1fC0UR3ZItnFH8IsXQ=;
- b=ZjwN2d0ECdDqp5PsozImAq0gYEWAh1yxq+DxI21Ev74o+Yoxl9EmKXcXmrMMioN0E2uyvyeft
- CHfAugbOuNKBZLoqiJcJg+oZobxrP50VuC8Lol8rvqnb8TL0pYiT3T5
-X-Developer-Key: i=webgeek1234@gmail.com; a=ed25519;
- pk=TQwd6q26txw7bkK7B8qtI/kcAohZc7bHHGSD7domdrU=
-X-Endpoint-Received: by B4 Relay for webgeek1234@gmail.com/20250217 with
- auth_id=342
-X-Original-From: Aaron Kling <webgeek1234@gmail.com>
-Reply-To: webgeek1234@gmail.com
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <CANiDSCs9s03DUjKwcPgDtZt2QJ4i0FGwab4zpEP+wCawagSC2Q@mail.gmail.com>
 
-From: Teguh Sobirin <teguh@sobir.in>
+On Mon, Jul 27, 2026 at 12:15:35AM +0200, Ricardo Ribalda wrote:
+>Hi Faizel
+>
+>I was not on cc on
+>https://lore.kernel.org/lkml/CAMuHMdVx80Eh8w5-OioH-Uyahea0ZRQHUVg9MBfQ4uEjaxM5Lg@mail.gmail.com/
+>so I was unaware of that proposal
+>
+>I agree, something like this looks cleaner and removes the sanity check.
+>
+>My patch has already landed in media-committers/next so you need to
+>send a patch on top of it.
+>
 
-The AYN Thor is a high-performance Android-based handheld gaming console
-powered by the Qualcomm Snapdragon 8 Gen 2 processor featuring dual
-AMOLED touchscreens.
+Thank you. Its done
+Link: https://lore.kernel.org/lkml/20260728001545.331638-1-faizel.kb@gmail.com/ 
 
-Signed-off-by: Teguh Sobirin <teguh@sobir.in>
-Co-developed-by: Aaron Kling <webgeek1234@gmail.com>
-Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
----
- arch/arm64/boot/dts/qcom/Makefile                |   1 +
- arch/arm64/boot/dts/qcom/qcs8550-ayntec-thor.dts | 250 +++++++++++++++++++++++
- 2 files changed, 251 insertions(+)
-
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 0f71d5bd3efaa..6d8205b82032a 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -194,6 +194,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= qcs8300-ride-el2.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs8550-aim300-aiot.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs8550-ayntec-odin2mini.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs8550-ayntec-odin2portal.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= qcs8550-ayntec-thor.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs8550-rb5gen2.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs9100-ride.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= qcs9100-ride-r3.dtb
-diff --git a/arch/arm64/boot/dts/qcom/qcs8550-ayntec-thor.dts b/arch/arm64/boot/dts/qcom/qcs8550-ayntec-thor.dts
-new file mode 100644
-index 0000000000000..7683911914be3
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/qcs8550-ayntec-thor.dts
-@@ -0,0 +1,250 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) 2025, Teguh Sobirin.
-+ */
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/input/input.h>
-+#include <dt-bindings/interrupt-controller/irq.h>
-+#include "qcs8550-ayntec-common.dtsi"
-+
-+&{/} {
-+	model = "AYN Thor";
-+	compatible = "ayntec,thor", "qcom,qcs8550", "qcom,sm8550";
-+
-+	vdd_bl_5v0: vdd-bl-5v0-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdd_bl_5v0";
-+
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+
-+		gpio = <&tlmm 52 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	vdd_disp_1v8: vdd-disp-1v8-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdd_disp_1v8";
-+
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+
-+		gpio = <&tlmm 70 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	vdd_disp1_2v8: vdd-disp1-2v8-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdd_disp1_2v8";
-+
-+		regulator-min-microvolt = <2800000>;
-+		regulator-max-microvolt = <2800000>;
-+
-+		gpio = <&tlmm 142 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	vdd_disp2_2v8: vdd-disp2-2v8-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdd_disp2_2v8";
-+
-+		regulator-min-microvolt = <2800000>;
-+		regulator-max-microvolt = <2800000>;
-+
-+		gpio = <&tlmm 143 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	vdd_ts_3v0: vdd-ts-3v0-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdd_ts_3v0";
-+
-+		regulator-min-microvolt = <3000000>;
-+		regulator-max-microvolt = <3000000>;
-+
-+		gpio = <&tlmm 144 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+
-+	vdd_ts_1v8: vdd-ts-1v8-regulator {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vdd_ts_1v8";
-+
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+
-+		gpio = <&tlmm 102 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+	};
-+};
-+
-+&display_panel {
-+	compatible = "ayntec,thor-panel-top", "chipone,icna3520";
-+
-+	pinctrl-0 = <&dsi_s_rst_active>, <&dsi_s_te_active>;
-+	pinctrl-1 = <&dsi_s_rst_suspend>, <&dsi_s_te_suspend>;
-+	pinctrl-names = "default", "sleep";
-+
-+	vdd-supply = <&vreg_l11b_1p2>;
-+	vddio-supply = <&vreg_l12b_1p8>;
-+	vci-supply = <&vreg_l14b_3p2>;
-+	disp-supply = <&vdd_disp1_2v8>;
-+	blvdd-supply = <&vdd_bl_5v0>;
-+
-+	reset-gpios = <&tlmm 137 GPIO_ACTIVE_LOW>;
-+
-+	rotation = <90>;
-+};
-+
-+&gpio_keys {
-+	pinctrl-0 = <&volume_up_n &key_ayn_n>;
-+
-+	key-ayn {
-+		label = "AYN Key";
-+		debounce-interval = <15>;
-+		gpios = <&tlmm 41 GPIO_ACTIVE_LOW>;
-+		linux,code = <KEY_F24>;
-+		linux,can-disable;
-+	};
-+
-+	switch-lid {
-+		label = "Hall Lid Sensor";
-+		gpios = <&tlmm 17 GPIO_ACTIVE_LOW>;
-+		linux,input-type = <EV_SW>;
-+		linux,code = <SW_LID>;
-+		linux,can-disable;
-+		wakeup-source;
-+	};
-+};
-+
-+&i2c4 {
-+	clock-frequency = <400000>;
-+
-+	status = "okay";
-+
-+	touchscreen@38 {
-+		compatible = "focaltech,ft5426";
-+		reg = <0x38>;
-+
-+		interrupt-parent = <&tlmm>;
-+		interrupts = <25 IRQ_TYPE_EDGE_FALLING>;
-+
-+		reset-gpios = <&tlmm 24 GPIO_ACTIVE_LOW>;
-+
-+		vcc-supply = <&vreg_l14b_3p2>;
-+		iovcc-supply = <&vreg_l12b_1p8>;
-+
-+		pinctrl-0 = <&ts_p_rst_default &ts_p_int_default>;
-+		pinctrl-1 = <&ts_p_rst_sleep &ts_p_int_sleep>;
-+		pinctrl-names = "default", "sleep";
-+
-+		touchscreen-size-x = <1080>;
-+		touchscreen-size-y = <1920>;
-+		touchscreen-swapped-x-y;
-+		touchscreen-inverted-x;
-+	};
-+};
-+
-+&i2c_hub_3 {
-+	clock-frequency = <100000>;
-+
-+	status = "okay";
-+
-+	touchscreen@38 {
-+		compatible = "focaltech,ft5452";
-+		reg = <0x38>;
-+
-+		interrupt-parent = <&tlmm>;
-+		interrupts = <15 IRQ_TYPE_EDGE_FALLING>;
-+
-+		reset-gpios = <&tlmm 14 GPIO_ACTIVE_LOW>;
-+
-+		vcc-supply = <&vdd_ts_3v0>;
-+		iovcc-supply = <&vdd_ts_1v8>;
-+
-+		pinctrl-0 = <&ts_s_rst_default &ts_s_int_default>;
-+		pinctrl-1 = <&ts_s_rst_sleep &ts_s_int_sleep>;
-+		pinctrl-names = "default", "sleep";
-+
-+		touchscreen-size-x = <1080>;
-+		touchscreen-size-y = <1240>;
-+		touchscreen-swapped-x-y;
-+		touchscreen-inverted-x;
-+	};
-+};
-+
-+&mdss_dsi0 {
-+	vdda-supply = <&vreg_l3e_1p2>;
-+
-+	status = "okay";
-+
-+	panel@0 {
-+		reg = <0>;
-+		compatible = "ayntec,thor-panel-bottom", "chipwealth,ch13726a";
-+
-+		pinctrl-0 = <&dsi_p_rst_active>, <&dsi_p_te_active>;
-+		pinctrl-1 = <&dsi_p_rst_suspend>, <&dsi_p_te_suspend>;
-+		pinctrl-names = "default", "sleep";
-+
-+		vdd1v2-supply = <&vreg_l11b_1p2>;
-+		vddio-supply = <&vdd_disp_1v8>;
-+		vdd-supply = <&vreg_l13b_3p0>;
-+		avdd-supply = <&vdd_disp2_2v8>;
-+
-+		reset-gpios = <&tlmm 133 GPIO_ACTIVE_LOW>;
-+
-+		rotation = <90>;
-+
-+		port {
-+			panel0_in: endpoint {
-+				remote-endpoint = <&mdss_dsi0_out>;
-+			};
-+		};
-+	};
-+};
-+
-+&mdss_dsi0_out {
-+	remote-endpoint = <&panel0_in>;
-+	data-lanes = <0 1 2 3>;
-+};
-+
-+&mdss_dsi0_phy {
-+	vdds-supply = <&vreg_l1e_0p88>;
-+
-+	status = "okay";
-+};
-+
-+&mdss_dsi1_out {
-+	qcom,te-source = "mdp_vsync_s";
-+};
-+
-+&pm8550_multi_led {
-+	status = "disabled";
-+};
-+
-+&remoteproc_adsp {
-+	firmware-name = "qcom/sm8550/ayntec/thor/adsp.mbn",
-+			"qcom/sm8550/ayntec/thor/adsp_dtb.mbn";
-+
-+	status = "okay";
-+};
-+
-+&spk_amp_l {
-+	firmware-name = "qcom/sm8550/ayntec/thor/aw883xx_acf.bin";
-+};
-+
-+&spk_amp_r {
-+	firmware-name = "qcom/sm8550/ayntec/thor/aw883xx_acf.bin";
-+};
-+
-+&tlmm {
-+	key_ayn_n: key-ayn-n-state {
-+		pins = "gpio41";
-+		function = "gpio";
-+		bias-pull-up;
-+		output-disable;
-+	};
-+};
-
--- 
-2.54.0
-
-
+Regards
+Faizel
