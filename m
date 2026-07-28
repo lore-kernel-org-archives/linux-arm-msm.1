@@ -1,482 +1,127 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lj1-f178.google.com (mail-lj1-f178.google.com [209.85.208.178])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9421345DF48
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 15:50:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACDD61FC110
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 15:58:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785253818; cv=none; b=m4Miw7B2uWH8wTiHfnM7pgORTIk6U7jjGDUqRcUfXWiyjPlpmajlAFgiJ0FHgyqroh4JKNSAQmXFeAg1YGD7UiRaSO2x91avTuugqr1/5sYJE10IcfGvDzWo9dqq+rr3GXMyIYdCuRYZm0aEGvaVtjTLJfvJu2NueOzqf4/X73g=
+	t=1785254284; cv=none; b=NHwuxTR3ZkD0uY984QGXOo7xQqo2nQMHy88B6bTrmrvnkCOsNJzIn1mNE5ZDlRLk0vxy7j7863ZTwbePJWVy6KfeuwTgyo3JEyXvtbbTu+1iIymJcxJlc+VNNDB2IPt0Q6cviLVuBesLVDVfWnc0qvsjr8yuneRhSSIKHELpynM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785253818; c=relaxed/simple;
-	bh=t0JADh5rQL/dD2qzNT/1zVD/Dmq8n7CefHidi+F6erg=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Cvo5d2GdXWWdoSN6qi9iM7X0yz20t+Fmh0y4aES1sOztBizdectCNK9LWK5m11tNRHEEYOK/HfPE4/C05qCeY3rJweKPLLWhuHiD0prDnfLlHhD8JW6YzMsyHBeZa/dgxyOhThNnTzrIoIOzI3rfUqJvTT+qlT5UF26A+UM6YcY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=N6khnyeS; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hU3v0x62; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785254284; c=relaxed/simple;
+	bh=wzrSebO+w9w3kBvI6MwAzB5vFBayEMq0YCoanNZiL5o=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=kFdmEaytehdqGirFJaZDighkjGZtFHsfcDkDuOQxZCwOEAAJ6xtidRJ76jspIwVrAqIE/MzUA9u7Ud44popYsnEb8wbS+ZwW3IPgcf+/KKypGwt0E1ueGsUqMJnVImrRZuejQAI70n0AsNrAUnGQy4EwynirMAcKkGW1KPY7148=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=EQll9DjO; arc=none smtp.client-ip=209.85.208.178
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="N6khnyeS";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hU3v0x62"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66SEcgoU2996534
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 15:50:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Fe6EBY8XOMJJ1yXmrLmeHyVfFc0r89RDiXPBVEk9/Vw=; b=N6khnyeS2Dxh6VN8
-	zNZG2r99WJdoF/f9X9IwoRwXXkYtQUSUsfsGz3gBSE2cvDoQSHAopnS47UPYCZ1T
-	POgN8e61V3IpmgwektXXhSK6UXlid/ehnBcG0XsMfZrJ4pbeyqnXSVnxOZEjZAoz
-	AQBps2QXWhqLh8jD0RgzMqREp0l1dcL2SzxoKG1jYO5+VeX0teLgGBuJYlldXXqV
-	g4sZP9ey14fxobKdG5gm+IQ52RS9AqCTfVXqalDKpO+mhpsOncXVOPTdJLKwjS3v
-	MYRRnu7DpiAvZp3VfwfPnRm81sqGZKZeyZ14j7uf22px3iwSjcylsusla4NXhi9a
-	/rMyOA==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fpqxjjck2-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 15:50:15 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2ccd1958e8fso141835ad.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 08:50:15 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="EQll9DjO"
+Received: by mail-lj1-f178.google.com with SMTP id 38308e7fff4ca-39c61a350e1so1554071fa.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 08:58:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785253815; x=1785858615; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Fe6EBY8XOMJJ1yXmrLmeHyVfFc0r89RDiXPBVEk9/Vw=;
-        b=hU3v0x62pi7i885jDmtqSCDnzHt5bzRUEda7rkSZf8/6hi4iRCDBpY4GEL1IDQisOG
-         Ts0hWW0g1d+Abo3rWG7x2VxCjCRnAFSKHIRfVpRaqeA6ddmZgEUVicxf0nwxYU6JXX/s
-         jO2qQ2pkv2Eoiv3/ewCPOU2oYvxS3fckVwvipcYGfxnr0en/AmiSMDKW+3/rJtC7K9tJ
-         ZjOrwKtlxxb5vY/UyMMKBfMenhATfzEzTteQoQ33+EPebJRVAF6WjYJ8eogNNItx0Lg2
-         kbIRa5VvMHBqaaBZtvWxUGD+AoMVsMkoFpaKdkPevNGTc+c2b9x2AnW9+9tEGsADZoj+
-         kcxg==
+        d=linaro.org; s=google; t=1785254281; x=1785859081; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=BoQDMsK71P8WdtwDto5BJ9mnOWyzEPnr5SRIuRHG/wE=;
+        b=EQll9DjOmX0bLFvEzRKdIaMcEG1NvO0XhJjnUEpJNoOJsPq0x2ke/Kp0HM9EYRe1E/
+         lViPQJtf7h+aDPCftN39sYmWMkMdaEzUsKJY0yBDgTg1EXTDcqQxxNxRHszMMAe/PZWE
+         iK5b+HBqOHFLjDx/iPBKooyOkWpL67+pI5WfInnJ53KGMkr6C7sU5o4WtEKshWe6txX5
+         kdzZhCwlDfNVCogYp4f2CwIBw4QiqnwKXCiyrY35a426X0+/Dbiwu0iUVQNjwvpqP3Ma
+         hoqQ+H3k4ScFZn855pFJJq2U7VOPVcg89KYGVANOl406W1Ava6FfslRP767NDF4ViBcc
+         z5uQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785253815; x=1785858615;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
+        d=1e100.net; s=20251104; t=1785254281; x=1785859081;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Fe6EBY8XOMJJ1yXmrLmeHyVfFc0r89RDiXPBVEk9/Vw=;
-        b=i9u3qIe0KsJdtXsXzi/dmVJX7hNyDh3ojF2Sxp4LCzSY0C2jwz+cbsxK5QHbK9tdz8
-         BCX0pplAX2VrbWJJtotuFbu/ku7xWU6yF44gqlERcQ685oFDqyTXTrnIUqJCCMRJTVjw
-         MurNojVcDk9U6kX/GV5QtHU0GPhdWTslqesxfWrcktzPy/cC++p+Bkj5f+IDx9H/p9SC
-         RnVPYt1WJuQEvANV8eCyStj0+XibHnex0Dgr09twi+t4CGTHtPJJQ1hU0LpRs9XxHpja
-         HJfcbMVCmto5bPKUbGYSD//pKLs7ain/kUwckEtTyHDtxBnEQseajSS/QnyJDDL9U7hT
-         4tEg==
-X-Gm-Message-State: AOJu0YxC/AIlBfGOTxDPbH6rThKL7TYXH4LxryDG/ku7cTCL36PqtyMw
-	TmtoIGQMVZEXUa9slUsohc1kdC+mJPhADLbp0AfOeiuf6wkZ/v+UxNtUkfG0YW4SBGBtp+qd2LI
-	nmX4FB+u2lOMGw8M8urb5aKyM+y/nBeBI7ud1Wf55C2bFhxReWJSKbHYvekARbZpUG8+4Zk+vHH
-	Pw
-X-Gm-Gg: AR+sD12Z1Fq//iqItIZ2KvAtYaeULcE4NJt+O7UDq/LgAqoBUiRXZd8MtgJfhQ4w1G3
-	KduvaobHN5fqca13sF3FTpb05omOxfBP8Y7GBCheHnqHeD9LCqpUHntylhJxBzK+0jlNwCqNxlg
-	8M90PYcI/ccEBLETN5XYeKVHCYLVoHmwD3hw2IUkhFcorLrYe0YCeROeYIE8b3/sjR+RvxmsqPd
-	egmh/73yARyUHvIy9P9A3fQ1GQvNgVD7BT9e6X4dqqfqxMrKW3+BuHJubxvhvz8z9KdEADdeQwQ
-	nOoKfc3augA35ZFbNDz8f6g5CfAAcJJWpEnV+i6k5XtU4n5eNz8oZU1o4uHF4t1qMY6zv/0duZD
-	6JHMTx8Szc/kmH9FJdwo=
-X-Received: by 2002:a17:902:d483:b0:2ca:b4b9:4586 with SMTP id d9443c01a7336-2d015ae7bd4mr36498335ad.19.1785253814897;
-        Tue, 28 Jul 2026 08:50:14 -0700 (PDT)
-X-Received: by 2002:a17:902:d483:b0:2ca:b4b9:4586 with SMTP id d9443c01a7336-2d015ae7bd4mr36497815ad.19.1785253814371;
-        Tue, 28 Jul 2026 08:50:14 -0700 (PDT)
-Received: from [10.213.109.130] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cfde7eea52sm55688695ad.61.2026.07.28.08.50.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Jul 2026 08:50:14 -0700 (PDT)
-From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Date: Tue, 28 Jul 2026 21:19:44 +0530
-Subject: [PATCH v4 4/4] arm64: dts: qcom: hamoa-pmics: Add ADC support
+        bh=BoQDMsK71P8WdtwDto5BJ9mnOWyzEPnr5SRIuRHG/wE=;
+        b=A2tGXVRRwAYXd00RIxTTaCVe3T1boQ5HggK9RkFDp+iNi7u0AmKrzVOISchntqGAnT
+         ZSKcvByjLzyeWASMSj+Z4KoCn/ulgvc4f2Ea2LLDCtisJsUHz6PDAYfVmB7/Ra21XyvI
+         +Jy0r+eEF4ih7iOwYXU/OMsDUYpzx/EJmMGRdvLI4dFRhAGzfRRyA0MtmP/2IC2x/w7F
+         BQdqCu7W1Piv8kvXG+LY9kSl+8hAh3xGK1Ffbg5m5mkMOgNF5bBuCmVd0V+LF1kTOpKV
+         XGFO+5Ywu0pqbAG4UbcooyrTWhQfw9YXlJFiEqWQEqS3X+ptyh5OT8Bo1vBWWppsA5Mc
+         KvhQ==
+X-Forwarded-Encrypted: i=1; AHgh+RqRNrqSswUaqZlzaGLhhFeC2S5Y1bh5F9dK9qzIMWq9Tfzt4xUpGjpN1yn0DbF95cmPLQg9rgqLBxM00Rfc@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxd1HBI5RqypDsDUinokB36awOWElefILoI7v01ASb4RIaACIfn
+	D+sNyBf2bpp9UhoSKVZDzp2Nbgf9DhWlshAv3g3n910W179Kd/G5yLGjfw6PV/2Nv+c=
+X-Gm-Gg: AR+sD102/ZeXwPsI9PnTqCxrVya9AbnTVRKsbzRVHz7xF3JI4hGP3mWCzcABMUNE9Zd
+	BWIiQFmTEJDe0ONF2cxGnNZHUBKOhIMJybq+1bZ59gkERec6pN6mkJhDAl0tqlHOawwoyRuAvRe
+	kDWyGT1Br96bfsQsPrewDwaAevtN9zRwPEBEAsM3LGYlNcGhOYjc3Zu06F5sY3r4/0gTwI2HC2S
+	WUrpb9aqZaOVf9GwreJYSwbPWhtmZKv231j/dciZGR8jI+W8/KIyW840QWrQBJgeOthbJfL/Ehx
+	cZi0Lcp9/4q0h1ufvB33n64uK/snDbE42CjJ33Klzh1n3C/BNk/4bRSfyku7SKajCKQ/S1o2cIy
+	wUXKuL0zXgkQh6dBXIHJj4REn8MSVk2D6HDaZYz34cA2qZrfNQaMtBJcs19Hl/KQviCgyxXW9IN
+	brlY/4XM6nvD1ncuzq/USV2VS6bgYpCEdrvPH1R0IacC0HrJ1tmxQq2y33
+X-Received: by 2002:a05:651c:1504:b0:39b:302f:feb3 with SMTP id 38308e7fff4ca-39f51eaf43amr3268711fa.5.1785254280452;
+        Tue, 28 Jul 2026 08:58:00 -0700 (PDT)
+Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-39f2226c208sm19436771fa.41.2026.07.28.08.57.59
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 28 Jul 2026 08:57:59 -0700 (PDT)
+Message-ID: <9fc0577e-ce2a-43fe-85ac-e382e930d5da@linaro.org>
+Date: Tue, 28 Jul 2026 18:57:59 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/3] i2c: qcom-cci: Fix CCI clock rate enforcement
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+ Wolfram Sang <wsa+renesas@sang-engineering.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Luca Weiss <luca@lucaweiss.eu>
+Cc: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+References: <20260727-cci-clk-fix-v2-0-c3958f28b045@oss.qualcomm.com>
+ <20260727-cci-clk-fix-v2-3-c3958f28b045@oss.qualcomm.com>
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+In-Reply-To: <20260727-cci-clk-fix-v2-3-c3958f28b045@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260728-adc5_gen3_dt-v4-4-355f0edece77@oss.qualcomm.com>
-References: <20260728-adc5_gen3_dt-v4-0-355f0edece77@oss.qualcomm.com>
-In-Reply-To: <20260728-adc5_gen3_dt-v4-0-355f0edece77@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Ayyagari Ushasreevalli <aushasre@qti.qualcomm.com>,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785253792; l=10469;
- i=jishnu.prakash@oss.qualcomm.com; s=20251014; h=from:subject:message-id;
- bh=WAiiD76RQMexLqkKulCw1SnNLWCGooliicmwQ4NoiyA=;
- b=oQyX/mOBA0tbSJHTDd57VCNudm+JSCvwLbE7cbzQZpu9ernLZbQdvAPjS1UiIH8JWfCAU1vmq
- 4VOGPSfak3xB8oNTue+FvTJoft+8KcD4rMvQjNakBZe9CEzYOj+7ltl
-X-Developer-Key: i=jishnu.prakash@oss.qualcomm.com; a=ed25519;
- pk=g89pXdLVwRjdTeQ+uX1QzvBO346E3hQAc1N7fcTXgmk=
-X-Proofpoint-GUID: Ap3LJ73vrH__pAXekUv9J0aOxShyMZYD
-X-Authority-Analysis: v=2.4 cv=MORQXsZl c=1 sm=1 tr=0 ts=6a68cfb7 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=43omsC6mbmG0p7PtmyUA:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDE0MCBTYWx0ZWRfXw9fsOc3Mhwcu
- AkEOtJZW6YEtX9ejTXiKQTu1fypYrYr6cKHkcPdriHIHS0VrYEZr8WNpp3dJmcVxWTT7SDK5dgW
- Fy9yIGfsuyvczl0tNPQqfXWRBzdHNaE=
-X-Proofpoint-ORIG-GUID: Ap3LJ73vrH__pAXekUv9J0aOxShyMZYD
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDE0MCBTYWx0ZWRfX9os6fwcMtvWR
- gsZy33k1GwpVYSYFLdTVH76V6blEpNJ3xnk+Vb6whMIK9jD7ZIAsBWf1alxb1ygNIdz13V8vyQa
- e0z6UO514eKTvpS9/n6Ghdsq321uc/ET/QWsLx7ZyyQ3pVMpQ65NYhDrByzlQvGmE3xLKsrz3Vc
- LDlAsXJ5LCgvOjsWxRT0qAbfcVGgPUnSV5uZ7h7xv4NMsd6JZon3xv9Q+UiINHqPqQiZUv5wHar
- /4ZIlTOXSlk8nraUpq/9QoTjfbIKNvkQkMz2F86PIGKthxGzPvv9G751TY+Ab9miIr/U+3YZFM4
- NszYNx6XfwiEgkHj/Jmvup31UthzY+lHjmV04YbEGflmuox4GxIIVKfyBqFVWk31116cSwbU+DN
- 6E6yvHAkVpqrwBmZ8mVkUDYgeN7CTZhv5lg4WqkdRFRFMcWCjOKOa+6mYVc4hnPwoTR28o/Dku2
- HBCaKcOADldG9VUCuyA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-28_04,2026-07-28_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 clxscore=1015 suspectscore=0 impostorscore=0 bulkscore=0
- malwarescore=0 priorityscore=1501 spamscore=0 phishscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607280140
 
-From: Ayyagari Ushasreevalli <aushasre@qti.qualcomm.com>
+Hi Loic.
 
-Add ADC node and define channels for:
-- Die temperature for PMK8550, PM8550VE* and PMC8380* PMICs.
-- PM8550: Die temperature, VPH power, and system thermistors.
+On 7/27/26 12:21, Loic Poulain wrote:
+> The hw_params timing values (thigh, tlow, etc.) are in CCI clock ticks
+> and were calibrated for a specific clock rate per hardware variant. If
+> the clock is running at a different rate the I2C timings will be wrong,
+> potentially violating the I2C specification.
+> 
+> Rather than just warning about a mismatch like before, actively set
+> the clock to the expected rate, using the OPP framework so that boards
+> which (will) describe an opp table also get the required power-domain and
+> regulator votes for that rate. The OPP table is optional, boards without
+> one simply fall back to a plain clk_set_rate() behavior, so existing DTs
+> keep working.
+> 
 
-Add io-channels and io-channel-names properties to the
-temp_alarm nodes so that they can get temperature reading
-from the ADC die_temp channels.
+Can you please share any deficiencies you see, if a regular mechanism
+of 'assigned-clock-rates' is used in dt descriptions instead of setting
+a supported clock rate from the driver? Or is opps mechanism supposed to
+substitute it?
 
-Remove die_temp channel of PMC8380_6 for Purwa boards where
-this PMIC is not present.
+For instance qcom,i2c-cci.yaml example uses 'assigned-clock-rates'
+properly, in many .dtsi files (NB, but not all, which means for a number
+of platforms CCI hw programming is done incorrectly today) CCI clock
+rate is set this way.
 
-Signed-off-by: Ayyagari Ushasreevalli <aushasre@qti.qualcomm.com>
-Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/hamoa-pmics.dtsi          | 158 +++++++++++++++++++++
- arch/arm64/boot/dts/qcom/purwa-iot-som.dtsi        |   1 +
- .../boot/dts/qcom/x1p42100-asus-vivobook-s15.dts   |   1 +
- .../boot/dts/qcom/x1p42100-asus-zenbook-a14.dtsi   |   1 +
- arch/arm64/boot/dts/qcom/x1p42100-crd.dts          |   1 +
- .../boot/dts/qcom/x1p42100-hp-omnibook-x14.dts     |   1 +
- .../boot/dts/qcom/x1p42100-lenovo-thinkbook-16.dts |   1 +
- 7 files changed, 164 insertions(+)
+It seems to be sufficient to get the clock rate in probe, compare it
+against the supported clock rate associated with a wanted mode, return
+-EOPNOTSUPP if there is no match.
 
-diff --git a/arch/arm64/boot/dts/qcom/hamoa-pmics.dtsi b/arch/arm64/boot/dts/qcom/hamoa-pmics.dtsi
-index 6a31a0adf8be..17d754d57e18 100644
---- a/arch/arm64/boot/dts/qcom/hamoa-pmics.dtsi
-+++ b/arch/arm64/boot/dts/qcom/hamoa-pmics.dtsi
-@@ -6,7 +6,9 @@
- #include <dt-bindings/input/input.h>
- #include <dt-bindings/input/linux-event-codes.h>
- #include <dt-bindings/interrupt-controller/irq.h>
-+#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
- #include <dt-bindings/spmi/spmi.h>
-+#include "qcom-adc5-gen3.h"
- 
- / {
- 	thermal-zones {
-@@ -277,6 +279,134 @@ pmk8550_pwm: pwm {
- 
- 			status = "disabled";
- 		};
-+
-+		pmk8550_vadc: adc@9000 {
-+			compatible = "qcom,spmi-adc5-gen3";
-+			reg = <0x9000>, <0x9100>;
-+			interrupts-extended = <&spmi_bus0 0x0 0x90 0x1 IRQ_TYPE_EDGE_RISING>,
-+					      <&spmi_bus0 0x0 0x91 0x1 IRQ_TYPE_EDGE_RISING>;
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+			#io-channel-cells = <1>;
-+			pinctrl-0 = <&sys_therm_0_gpio3>, <&sys_therm_1_gpio4>;
-+			pinctrl-names = "default";
-+
-+			channel@3 {
-+				reg = <ADC5_GEN3_DIE_TEMP(0)>;
-+				label = "pmk8550_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@103 {
-+				reg = <ADC5_GEN3_DIE_TEMP(1)>;
-+				label = "pm8550_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@144 {
-+				reg = <ADC5_GEN3_AMUX1_THM_100K_PU(1)>;
-+				label = "pm8550_therm_2";
-+				qcom,ratiometric;
-+				qcom,hw-settle-time = <200>;
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@145 {
-+				reg = <ADC5_GEN3_AMUX2_THM_100K_PU(1)>;
-+				label = "pm8550_therm_3";
-+				qcom,ratiometric;
-+				qcom,hw-settle-time = <200>;
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@146 {
-+				reg = <ADC5_GEN3_AMUX3_THM_100K_PU(1)>;
-+				label = "pm8550_therm_4";
-+				qcom,ratiometric;
-+				qcom,hw-settle-time = <200>;
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@147 {
-+				reg = <ADC5_GEN3_AMUX4_THM_100K_PU(1)>;
-+				label = "pm8550_therm_5";
-+				qcom,ratiometric;
-+				qcom,hw-settle-time = <200>;
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@148 {
-+				reg = <ADC5_GEN3_AMUX5_THM_100K_PU(1)>;
-+				label = "pm8550_therm_6";
-+				qcom,ratiometric;
-+				qcom,hw-settle-time = <200>;
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@14a {
-+				reg = <ADC5_GEN3_AMUX1_GPIO_100K_PU(1)>;
-+				label = "pm8550_gpio_01";
-+				qcom,ratiometric;
-+				qcom,hw-settle-time = <200>;
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@14b {
-+				reg = <ADC5_GEN3_AMUX2_GPIO_100K_PU(1)>;
-+				label = "pm8550_gpio_02";
-+				qcom,ratiometric;
-+				qcom,hw-settle-time = <200>;
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@18e {
-+				reg = <ADC5_GEN3_VPH_PWR(1)>;
-+				label = "pm8550_vph_pwr";
-+				qcom,pre-scaling = <1 3>;
-+			};
-+
-+			channel@203 {
-+				reg = <ADC5_GEN3_DIE_TEMP(2)>;
-+				label = "pm8550ve_2_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@303 {
-+				reg = <ADC5_GEN3_DIE_TEMP(3)>;
-+				label = "pmc8380_3_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@403 {
-+				reg = <ADC5_GEN3_DIE_TEMP(4)>;
-+				label = "pmc8380_4_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@503 {
-+				reg = <ADC5_GEN3_DIE_TEMP(5)>;
-+				label = "pmc8380_5_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			pmc8380_6_die_temp: channel@603 {
-+				reg = <ADC5_GEN3_DIE_TEMP(6)>;
-+				label = "pmc8380_6_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@803 {
-+				reg = <ADC5_GEN3_DIE_TEMP(8)>;
-+				label = "pm8550ve_8_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+
-+			channel@903 {
-+				reg = <ADC5_GEN3_DIE_TEMP(9)>;
-+				label = "pm8550ve_9_die_temp";
-+				qcom,pre-scaling = <1 1>;
-+			};
-+		};
- 	};
- 
- 	/* PMC8380C */
-@@ -291,6 +421,8 @@ pm8550_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x1 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(1)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pm8550_gpios: gpio@8800 {
-@@ -301,6 +433,18 @@ pm8550_gpios: gpio@8800 {
- 			#gpio-cells = <2>;
- 			interrupt-controller;
- 			#interrupt-cells = <2>;
-+
-+			sys_therm_0_gpio3: sys-therm-0-gpio3-state {
-+				pins = "gpio3";
-+				function = PMIC_GPIO_FUNC_NORMAL;
-+				bias-high-impedance;
-+			};
-+
-+			sys_therm_1_gpio4: sys-therm-1-gpio4-state {
-+				pins = "gpio4";
-+				function = PMIC_GPIO_FUNC_NORMAL;
-+				bias-high-impedance;
-+			};
- 		};
- 
- 		pm8550_flash: led-controller@ee00 {
-@@ -329,6 +473,8 @@ pm8550ve_2_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x2 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(2)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pm8550ve_2_gpios: gpio@8800 {
-@@ -354,6 +500,8 @@ pmc8380_3_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x3 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(3)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pmc8380_3_gpios: gpio@8800 {
-@@ -378,6 +526,8 @@ pmc8380_4_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x4 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(4)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pmc8380_4_gpios: gpio@8800 {
-@@ -402,6 +552,8 @@ pmc8380_5_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x5 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(5)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pmc8380_5_gpios: gpio@8800 {
-@@ -426,6 +578,8 @@ pmc8380_6_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x6 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(6)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pmc8380_6_gpios: gpio@8800 {
-@@ -451,6 +605,8 @@ pm8550ve_8_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x8 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(8)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pm8550ve_8_gpios: gpio@8800 {
-@@ -476,6 +632,8 @@ pm8550ve_9_temp_alarm: temp-alarm@a00 {
- 			reg = <0xa00>;
- 			interrupts = <0x9 0xa 0x0 IRQ_TYPE_EDGE_BOTH>;
- 			#thermal-sensor-cells = <0>;
-+			io-channels = <&pmk8550_vadc ADC5_GEN3_DIE_TEMP(9)>;
-+			io-channel-names = "thermal";
- 		};
- 
- 		pm8550ve_9_gpios: gpio@8800 {
-diff --git a/arch/arm64/boot/dts/qcom/purwa-iot-som.dtsi b/arch/arm64/boot/dts/qcom/purwa-iot-som.dtsi
-index 394e65518ac5..661dca4fbee3 100644
---- a/arch/arm64/boot/dts/qcom/purwa-iot-som.dtsi
-+++ b/arch/arm64/boot/dts/qcom/purwa-iot-som.dtsi
-@@ -10,6 +10,7 @@
- 
- /delete-node/ &pmc8380_6;
- /delete-node/ &pmc8380_6_thermal;
-+/delete-node/ &pmc8380_6_die_temp;
- 
- / {
- 	reserved-memory {
-diff --git a/arch/arm64/boot/dts/qcom/x1p42100-asus-vivobook-s15.dts b/arch/arm64/boot/dts/qcom/x1p42100-asus-vivobook-s15.dts
-index 63e29d2cc4ab..c754104adac7 100644
---- a/arch/arm64/boot/dts/qcom/x1p42100-asus-vivobook-s15.dts
-+++ b/arch/arm64/boot/dts/qcom/x1p42100-asus-vivobook-s15.dts
-@@ -11,6 +11,7 @@
- 
- /delete-node/ &pmc8380_6;
- /delete-node/ &pmc8380_6_thermal;
-+/delete-node/ &pmc8380_6_die_temp;
- 
- / {
- 	model = "ASUS Vivobook S 15 X1P-42-100";
-diff --git a/arch/arm64/boot/dts/qcom/x1p42100-asus-zenbook-a14.dtsi b/arch/arm64/boot/dts/qcom/x1p42100-asus-zenbook-a14.dtsi
-index 7f5860d2b6cc..b5226c1ae370 100644
---- a/arch/arm64/boot/dts/qcom/x1p42100-asus-zenbook-a14.dtsi
-+++ b/arch/arm64/boot/dts/qcom/x1p42100-asus-zenbook-a14.dtsi
-@@ -11,6 +11,7 @@
- 
- /delete-node/ &pmc8380_6;
- /delete-node/ &pmc8380_6_thermal;
-+/delete-node/ &pmc8380_6_die_temp;
- 
- / {
- 	wcn6855-pmu {
-diff --git a/arch/arm64/boot/dts/qcom/x1p42100-crd.dts b/arch/arm64/boot/dts/qcom/x1p42100-crd.dts
-index 7ed4116b9590..5de91bca3fd5 100644
---- a/arch/arm64/boot/dts/qcom/x1p42100-crd.dts
-+++ b/arch/arm64/boot/dts/qcom/x1p42100-crd.dts
-@@ -10,6 +10,7 @@
- 
- /delete-node/ &pmc8380_6;
- /delete-node/ &pmc8380_6_thermal;
-+/delete-node/ &pmc8380_6_die_temp;
- 
- / {
- 	model = "Qualcomm Technologies, Inc. X1P42100 CRD";
-diff --git a/arch/arm64/boot/dts/qcom/x1p42100-hp-omnibook-x14.dts b/arch/arm64/boot/dts/qcom/x1p42100-hp-omnibook-x14.dts
-index 0f338e457abd..0e4dfb0f0a2a 100644
---- a/arch/arm64/boot/dts/qcom/x1p42100-hp-omnibook-x14.dts
-+++ b/arch/arm64/boot/dts/qcom/x1p42100-hp-omnibook-x14.dts
-@@ -7,6 +7,7 @@
- #include "x1-hp-omnibook-x14.dtsi"
- /delete-node/ &pmc8380_6;
- /delete-node/ &pmc8380_6_thermal;
-+/delete-node/ &pmc8380_6_die_temp;
- 
- / {
- 	model = "HP Omnibook X 14-fe1";
-diff --git a/arch/arm64/boot/dts/qcom/x1p42100-lenovo-thinkbook-16.dts b/arch/arm64/boot/dts/qcom/x1p42100-lenovo-thinkbook-16.dts
-index 500809772097..9e6f679758a9 100644
---- a/arch/arm64/boot/dts/qcom/x1p42100-lenovo-thinkbook-16.dts
-+++ b/arch/arm64/boot/dts/qcom/x1p42100-lenovo-thinkbook-16.dts
-@@ -18,6 +18,7 @@
- 
- /delete-node/ &pmc8380_6;
- /delete-node/ &pmc8380_6_thermal;
-+/delete-node/ &pmc8380_6_die_temp;
- 
- / {
- 	model = "Lenovo ThinkBook 16 Gen 7 QOY";
+To get a better idea of my proposal please check this simple commit:
+
+* https://github.com/torvalds/linux/compare/master...vzapolskiy:linux-lpc32xx:cci-speed-modes
+
+> Tested-by: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
+> Suggested-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 
 -- 
-2.43.0
-
+Best wishes,
+Vladimir
