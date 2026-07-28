@@ -1,160 +1,120 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 600F33A9D83
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 09:31:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F29FE3A9015
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 09:32:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785231112; cv=none; b=Eylv0rzFehHXuA3K17fV5SnjX+hdw0zTFK3LQDpHMXb8wVQ3VdXnxlu+iPY6yfttR8A+k+xqqcYPCsoZ6hZRBHDoEEfDoDSy54UCz+DyGnuPMR3i28nF100ZaP8u3TkEi9HmyOIsfIMSbyeFHKJxAf70e1ZScC8cBhl6sov/G7g=
+	t=1785231122; cv=none; b=uJE9DmUmD5dPFngeDaWtejj6WE4LSR4D1b2P9vyOkyqSxs75yiHcuAWDfXK/ofhG2NAZSjsOO4yUS3JI0h9ZDO+3kCdojJYBl1xJyiFf8cNENs4LLTfH8u3EGd6LIX4cxLvVJJmyLYkX5OP5GQ38ZjUNon29ReBu5nZfkTecXcE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785231112; c=relaxed/simple;
-	bh=/obxe1Vb7NFTaioTc0WNXa5Lkv4qFvuJ2105wMCse8Y=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=MyE5UwO5ZnbEMErEF1bNid/mep4LujwU6o8AwhK6l7WS2pTDDXmZBDz2GRHEV0C58gZsIvlhKTCgUlgdOKtVzZlPag0QqHv6upWnIbvfhCd0E+RgMA1/m0iNKzfrgx/qyKzigq/cPAzI3wOlxPYN+1BEW89T+uA8mvVJJUwlIVs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=XB2gS5sT; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bwTjZj7n; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785231122; c=relaxed/simple;
+	bh=thP/GwB4GLCCXTXiIlgnJ68amkbzT1D925DfODkrm2w=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=iPPrQSziGuNH8YCqTdlztwauehEFSKZOJPwb5Cds9w6u87UQLiFI8aa9+ftpZ2gHeramN7eup8lmAFrfNltZMy3r4Ty2oULT3XpX8zdqVRFQojRlvlMcmY68Kg3oUxFhMvqrjz6sv8oNuuinQv4elE1h/XY/lICIw00LbAESURA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=ErqpLB7D; arc=none smtp.client-ip=209.85.128.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="XB2gS5sT";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bwTjZj7n"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66S82nAU2309805
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 09:31:50 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=x1Z67kqGGzp/351X1MKH582E
-	OuE2QOqRdpP9R/VwDZc=; b=XB2gS5sTrNvwZxI4lCixwjKTHncOUw14DfqU7qpt
-	JbrWatVN3FPNOLbquOjVSPIy5WZTtW6NeOHVopjOtMU9r6heI/SIQ5Ld4fZUgtYx
-	NWy/L1yeGp/hinJejoW6KaIGqBl7pcJI4FnnX1unmRn/RuL95r+zuakGnkkF5Pom
-	dZGvsdUoAqCJGBdT5aa2d/Hgq9Hd4p9jfeZRynzG/w5FkwYRyRuGHPVAQRY/qxAt
-	nf8L7kPXHoM3ZEo+ItlaPerdrOzKTxzOFGjnMtV7F5+rRzT8AkwB6oRrgNtZn4wG
-	J4QhFJYOnPuvurdxCZuMP9bsK9/Crg0NxSt7vPhoQLFiAw==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fphh7j1bc-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 09:31:50 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2ce7dfd33ffso50310385ad.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 02:31:50 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="ErqpLB7D"
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-495635a85d2so29861325e9.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 02:32:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785231109; x=1785835909; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=x1Z67kqGGzp/351X1MKH582EOuE2QOqRdpP9R/VwDZc=;
-        b=bwTjZj7nU1Mh45XMyQfovOhT6ey+a0Q+J90ifjFpi2iNtUtvHD4avOG5wLx9RClR4M
-         Id0/Cke1vH0MzYv+IlN04V5OUWKNYGyQ0roTz1yCXvxILjJmd2y322dWdBXBwIGrbxHV
-         4DrpWyiWTBDZKOUrV7/dav6CLEoJRHgBpht8zfB5axkCyDqUaYyKYzRPlX3Dhp/TyfxN
-         FC9xv8DdGH4C2yISnIO55KuC53lqxN+LLj/ZfcTfmQX5ivSoju+kCxDXr+URRYrMPVJ6
-         OH4gaqrjzrqAsaxRpXE+mEo3pqv6gH56FcuKKOTVjkcSz6bqa/KP5L+UevZ/hQnxvXm3
-         sq+A==
+        d=linaro.org; s=google; t=1785231119; x=1785835919; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=QauyaNd/XQMqVFtAv3ll2oSoodU/3X6RpqEB6YOpU4A=;
+        b=ErqpLB7D8MBJa6XWZ/kh9TPPuzm/m7PIZgTR2DGLs2kX9UWVHMXzp+VLOHCJzuJgkw
+         F5FmEM64blO5Szzxow7MZs/JF5NvhK2t38PiYTrGVuHkXf0SroANcF/OxNQ+xQ3QMJ9Z
+         RaZjSLHKV4XERU7UoSWc8ap18fehEB4invCFHXKh3GyISOctwIqfTGGbsyfBE2GxsiEg
+         +HBpOE0Ve8WGA0K06yoWm/tQfjj5CtZdzkqiv2QVPlWh041znbMrcqM2upApdlZYOafE
+         F+nOFepgphZgFnzeWXu4OPhqSPlvNQGF5l3uLi95wWC7tuU/Wb4si6Yli9LH1jWRfMkA
+         OMlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785231109; x=1785835909;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=x1Z67kqGGzp/351X1MKH582EOuE2QOqRdpP9R/VwDZc=;
-        b=rToXEjSWRryDqeEPeakEPO/nafDFr+hSeydad/Qsu5x7V29GlbSGz1UjsLQIsKjlj6
-         mqpfKWRh3aVAVd5+1gz7UjyBAp4h/+BMPEslRZ0xI2lRO57Ew3zgkY1iTFSGxFVUn1f9
-         bHBxftFbxlEQu/x3ch2i9qsmdFi8QzqWpEfSZbnHUVEh1FH7JuDzb73KsJjDRJZwWN61
-         ViCAaPT6ndF5UPS5wQmhj3SiBETYWYvv0Z7Vof9XEwsf9WK6CGxvKKmkCBofU7mq9pzk
-         ENwf2U17OYf3zk24B+PvI29XjNbJH4wDW7AnYXAIttbhJszQs6yl0xxQZPqanciyFQ40
-         zzPQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrgBKquBfAeqxTU6W/S5e1BdQJwRfe7HKh17AFquP9rsBrmY+RsP09rr2zzlb9zJ+gVHl8NH/gLnTTUfdMC@vger.kernel.org
-X-Gm-Message-State: AOJu0YyiHH3HqT7opyNmA6HT7GEJDUIrqwKGerK1yQRjSYVEn5UgYGbn
-	xo2vAALY6cP9X7cgOb3QmV6x1gxyy0suDkKrdjwpTMSFPR8Tfrhnm1jpPLy8ZZsbQim14G1m7g+
-	ncZmSTYDdt2om+DYNSG37FgnSOk3wcFFl8H+4p1FZVc3yasmfaYGgOLvt9e6XtDZhSVzI
-X-Gm-Gg: AR+sD11gPB1brMyE0FjKbawguiYz10LU8Uf4ieHvUdMKC/ZZjgr7WpSCXMfVYzhtvrD
-	fDhBNR6BfJrWwxg8WZ36io7sQqUNKuj3poX/6emmatzw0PLCQZ0AsDzGPaXqMCY6yv+vaiDd74H
-	fRyRFQZmXwvLZH/eUcioIa9/X7A+1D0YlLYzA8qLRMe++x3YSO2kauQY9LKdsu2m4aou30FoKhz
-	qllYmPu3QL1BIe75yfPp2d6MiRj9W3zJ49H37EBEWZ5VSut/z+BvlKcSWf3LOVsi8QtofAZXksA
-	QwK7mSYohyfX2KU9TsZYvMq9hyGHTfcIfdkIeHLkd+6q4r02F4MP8GkiwrFm6rLl1ANi7SvxmR9
-	gZJTnePeAaJ1GxTkUZbIg1LMVFpElzN4/R0Qqc2nZLgA=
-X-Received: by 2002:a17:903:390c:b0:2cc:df15:91de with SMTP id d9443c01a7336-2d015db9a6cmr18856785ad.42.1785231109204;
-        Tue, 28 Jul 2026 02:31:49 -0700 (PDT)
-X-Received: by 2002:a17:903:390c:b0:2cc:df15:91de with SMTP id d9443c01a7336-2d015db9a6cmr18856465ad.42.1785231108765;
-        Tue, 28 Jul 2026 02:31:48 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cfde7bc4f4sm48841915ad.39.2026.07.28.02.31.44
+        d=1e100.net; s=20251104; t=1785231119; x=1785835919;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=QauyaNd/XQMqVFtAv3ll2oSoodU/3X6RpqEB6YOpU4A=;
+        b=XKaysI6E6EwHbJxpYgS0EQmVtgmWyzdgBQE4HuVv8INAOL1binZfPHyKnCwxh2kDz+
+         vu6WcC2hsp1+/SZwi+dDQJWfMC5mPmngXpzMSJY32poIX/zWHvu2WCNdiNVK1DI70hqC
+         MnMiu+/PiIY4QXwrxlP45KwyhgzJTDc15fLbIN6yOZaqdnLrF8dwZ1uI+kOK2iUE1ZrI
+         IERFlceCoo0Xo5dD+xutMYmXG36PLUUv6oqwzgprJ9IMwuj6gVe4uzc1Xe3F62D5z2FU
+         TPIxPipBa2XmzKL5VFI81caMns9g+vu6e0Yiy4mQiUSLvQcznUVpw1XgKYM0avqfsgdQ
+         YcKw==
+X-Gm-Message-State: AOJu0YwiYPQiPoSRxMASmLh2k6+SIOyjStTvQegHa8RavuP0J5lPmd/G
+	xrRLbIdn7Xwf4FL9+Tj3TuuZDx0pnOw0X9/ZOjJ2LfCHC5Ea6IEFKzCwFqgMYzL3plA=
+X-Gm-Gg: AR+sD11TozuSVZeuYqSDPVpW3ISFVSMlW0CYAeAh3O64TF+roUAnhn+IZLqDjlMKm8h
+	dB77zk35LdbWIhNxnWheSP4dNYIQIKLz5W07Sa/Da1UkruLpbbJ62U1TjsQ2tpiVevYwICVAli2
+	k/B1fwUKN4m1i5xt5ai/o3rtXk9GfZg7OEZy7cXSFS09cXF0uGdwN2TaoZxaJAQz1JmAW3t8eZa
+	5BlBSSMnB9B0lERxT21J5zrGFRXT3QO69jR3DZw0KUkCQvxCmEwPZsHmjkMLvOyHpgyyZt8mJvV
+	0QnExkGdFb6/JOEklsBZg+UgQQ9196/MD+aZCbVnK59rOqaGb7GRysJxNHDgwcxhkRfgjhQKSYd
+	qJVX7FS+CDIGncPpxJo/zJf76/W+vnKG6SSr6rwWyLI3L7cBmCq4aS20TrPjL5lzMCnUTBDAplh
+	m8bpZQsndWMtslsOUQt8xtk5oKUldQiuT9ZA==
+X-Received: by 2002:a05:600c:1d0a:b0:495:7838:7e25 with SMTP id 5b1f17b1804b1-496c642c881mr18935325e9.15.1785231118874;
+        Tue, 28 Jul 2026 02:31:58 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f85b9a64dsm62389384f8f.1.2026.07.28.02.31.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Jul 2026 02:31:48 -0700 (PDT)
-Date: Tue, 28 Jul 2026 17:31:42 +0800
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 3/3] remoteproc: qcom: pas: Add Nord ADSP and CDSP
- support
-Message-ID: <amh2_i8Z-_gn6tdB@QCOM-aGQu4IUr3Y>
-References: <20260728084012.685036-1-shengchao.guo@oss.qualcomm.com>
- <20260728084012.685036-4-shengchao.guo@oss.qualcomm.com>
- <2a66d7a8-91e6-4aa0-a650-b951fb5fafba@oss.qualcomm.com>
+        Tue, 28 Jul 2026 02:31:58 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH 0/3] arm64: defconfig: Enable drivers for the Ayaneo Pocket
+ S2
+Date: Tue, 28 Jul 2026 11:31:55 +0200
+Message-Id: <20260728-topic-sm8650-ayaneo-pocket-s2-defconfigs-v1-0-49e3ac1c8ff4@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <2a66d7a8-91e6-4aa0-a650-b951fb5fafba@oss.qualcomm.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDA4MiBTYWx0ZWRfX91gcKxwHZTZK
- +WUX79lcjbqS4CH+U8dbF23Pn2PsYR2q60YaYQBynvCoq2b1RPTutZ2V3NX04wjYE9tab/+qo5O
- 2m1BuZ2Ixtd2ipcObpLV3PiaVr/wD6UYX1CxYCVYoI0VN/QwuezfRhyt+OpItbMGR3I8M0QY0nH
- E5ih44TB+mXtVFin68SKOY9aAJ5ri56GoGSBLlXAKfxd34gnkmofOV9j9rbrsdz6DyHkvcinwyQ
- KCrhWQPlbrmUW8b5o8yOyRujtMqxE4zSaZzjsNiNw5dGNbPekXO4v+ge+c8OlhBIfLI7HI/wNb5
- y4ECNQ9GEhLmIiIBi5KHX4hrwIThqb93gOI35RoVqOZ7srQmDujgpw0etnU77EX2rh7R6xUtSON
- lypniwVp/fcrj/Lr8KDMaCGUr5JCwu+bMka2cnE2khPb7CAZVzEExC8g29BmJh6hn+8nscLAdDg
- 73dqrdELl6bMcfVaZdA==
-X-Proofpoint-ORIG-GUID: UfUgb1_phf1oI2H8h7eAMg3XndLBUWTG
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDA4MiBTYWx0ZWRfX3oJS6l2yGozr
- lYv3LGYyyL285AQWs5YCstAAsCIwTGJJG1dgHbyGYUspC8vsR84aiufCVK5rrLGgtBj8x2uYpPm
- tjhyxxvhUdZ8y91/KgrTMFlp2pr0NXc=
-X-Proofpoint-GUID: UfUgb1_phf1oI2H8h7eAMg3XndLBUWTG
-X-Authority-Analysis: v=2.4 cv=b+6CJNGx c=1 sm=1 tr=0 ts=6a687706 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=j4koS-U5rW7OSw6DyBUA:9 a=CjuIK1q_8ugA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-28_02,2026-07-27_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0
- priorityscore=1501 impostorscore=0 malwarescore=0 bulkscore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607280082
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAt3aGoC/yXNQQ7CIBBA0as0s3YSSiygVzFdIB3qaISGQaNpe
+ ndRl2/z/wpChUng2K1Q6MnCOTX0uw7CxaeZkKdm0EobZbXDmhcOKHdnBoX+7RNlXHK4UUXROFE
+ MOUWeBW1U1gyHvTOxh5ZbCkV+/Van8W95nK8U6rcP2/YBdazrQIwAAAA=
+X-Change-ID: 20260728-topic-sm8650-ayaneo-pocket-s2-defconfigs-7f07659486f1
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ linux-kernel@vger.kernel.org, Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.15.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=787;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=thP/GwB4GLCCXTXiIlgnJ68amkbzT1D925DfODkrm2w=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqaHcMvmTlTF00t6xn6JmmL4J0JWAfT8Mc+AvjDgD8
+ DxwSIayJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCamh3DAAKCRB33NvayMhJ0SEZEA
+ CtENtR//eZGAcMjDmMkbG0XBDwq76s5PEOacmTiz1Us9425b1MUfpvJ2EQi9TEdrqBFvjKO1/Jim+n
+ 7iNUlNXvZBso4ox/xPCuLFiinaLvBJZijNIvNufCU/jHxkFECENvHtbeNTwO+ORwyRy5iEbKjtSjPh
+ whWWctxIfYZgmzqQPpTWxI2BAw0ZjNTTsH9eFpX0AmshtzZT2/jsaWj2YBH3BdOJVxE1SVjif4BGyt
+ UZDu4cLCqCgNsCH+xYFKrgoaFgSGz0m7zF3f3yOhJ7JhSvhGlvXdkaibEBw7ymjJi7qWMOdJyIGcD7
+ i6/FzV3YUiZiKuVCw+AFmF+iMlcj3RamBDDfVmZbuXPhrhYTv8Lkcr4V6d0EfkS6Gi/lb9bfvjGQlC
+ tYeQlRDGLcuFswrphYld600eNphsdIxEQvgxttvSxg8rL2bbJUZKxRVwDQb8fhdCADvBtJlTkllSt9
+ 53CZwmoOEni/Kya+EBsZy3qlcbwDFDbMQ3VZgMppRgbF9snLmd0bWYUB0iqwakFkCRBW+smQYrY+cS
+ 5V3N7hrtso8QFBPouNKWVi1dxF+E/o8xPWF2/OuMHq99sFsQRIogDKhx26YdIInv1b3ZmsHKhpC1+S
+ wV3IoDm6xnKtG7DfJNhtqZeVMrfDTDezghUBsjZHco/WXqghnY1WurhCkkrw==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-On Tue, Jul 28, 2026 at 11:19:56AM +0200, Konrad Dybcio wrote:
-> On 7/28/26 10:40 AM, Shawn Guo wrote:
-> > Add support for ADSP (HPASS DSP) and 4 CDSPs found on Nord SoC. The ADSP
-> > is pre-booted by XBL before Linux starts, so set early_boot flag for
-> > attach path rather than a cold boot sequence.
-> > 
-> > Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> > ---
-> 
-> > +static const struct qcom_pas_data nord_adsp_resource = {
-> > +	.crash_reason_smem = 423,
-> > +	.firmware_name = "adsp.mdt",
-> 
-> Please use .mbn everywhere
+Enable the missing drivers for the Ayaneo Pocket S2 to allow
+full support of the Gaming device with defconfig.
 
-Ah, something copied over. Will update.
+The missing configs enables the drivers for the Display
+regulator, backlight and DSI panel.
 
-> 
-> with that:
-> 
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
- 
-Thank you, Konrad!
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Neil Armstrong (3):
+      arm64: defconfig: enable the SGM3804 regulator driver as module
+      arm64: defconfig: enable the SY7758 backlight driver as module
+      arm64: defconfig: enable the Renesas 63419 panel driver as module
 
-Shawn
+ arch/arm64/configs/defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
+---
+base-commit: 0d33d21e47d9dc66f91e44da3fc9220c74d93df7
+change-id: 20260728-topic-sm8650-ayaneo-pocket-s2-defconfigs-7f07659486f1
+
+Best regards,
+--  
+Neil Armstrong <neil.armstrong@linaro.org>
+
