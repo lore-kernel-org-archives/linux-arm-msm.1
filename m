@@ -1,81 +1,68 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 142A3412272;
-	Tue, 28 Jul 2026 08:47:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7942E3DA7D0;
+	Tue, 28 Jul 2026 08:48:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785228459; cv=none; b=N+InhAizxF3xmW+qNZWbsLxFTLD6HbbCBb7fwKrzc0oK4GznKqaANQETU2BAFnA8/+7HCQ2IABZ0TNL4DHskPgXFrB/RGvAB8pTTHVZsG2Wrd2Wu50a64QOzmPPTWGlo74+rD8Ox5j2lmJdSMPwCeKv2+MrDHKb4Mfypfaxiuck=
+	t=1785228484; cv=none; b=OicECUUiojW12UlnjdQyml0+KEwGKlZpAUgRDAjduXlDLvwX+RjkPNvGJ2wmkTcWFrt5tIjJOlzdmKscjy2qf45WfX7kDsimlGz0GM8yeczZgE1e02G1Fxy2fNuIborhaLRNY9xFaENz/AsU48E+housnIBiAqcLgcUI9TNspSc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785228459; c=relaxed/simple;
-	bh=qjEdplqj0S9dpKOCcxVkN/tc35crYOEZADGH0H488oQ=;
+	s=arc-20240116; t=1785228484; c=relaxed/simple;
+	bh=3SFQMMZ4Sqee/3tiL2U7/s7G4R8uK8ZAHXtuel4CWc8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=RlVrnMLdxsMm8H9OpLa6Y1Tt0C0yq9t6PhC7EOniEwZWhS3fdzSQSaIMgbHhPeAvohuz/IupF6An+zUd7vSQpRHV/7/yUcuzxVaKeqI2O6SEb6h09I2A7Lpjx2p1n3VGMszFpxr6TetJs0Oivo0y0MKPgFdTWzL8tZdBcdH1HE4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ctlf9Pr6; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=jSA/OHcSOZiMpO3FGScUy5mWOzYB9M/uKbbto9I3B+OBoedMKRx+Q5r5zWFORlQbH2AVPVjQYKZxxj92geIN/IXp6Gnnk6xIw5rTLkhu0/P9lI7/6UN6MxpJ1rWwZhQYInBZw7n/u1iLh52HtucY0YR2A3omO84KYctkxfqmQo8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=L6KFjZYK; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ctlf9Pr6"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9BED91F000E9;
-	Tue, 28 Jul 2026 08:47:36 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="L6KFjZYK"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9DFD71F000E9;
+	Tue, 28 Jul 2026 08:48:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785228457;
-	bh=YLNMgxu9KJ3EYns/+gkiFA9V2FZvIehbev2U1fhQ+TY=;
+	s=k20260515; t=1785228483;
+	bh=zjxYoxPJm2y9I1tZrtcuT5McS8yD8t8fy/r1wYWueD8=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Ctlf9Pr67UaygTbT7ORjcpvh82jynvPx6+DM81r6y5hEEIrGbUpWubh5ldj3aqNGs
-	 pqIEID0vZu7u0Dy0vj4iIUIvf1n5Sg0GXFeFys9PUmLAvGOG0tQAw7D25wp5uX4DAq
-	 oX3yS5cnuTYTiK+oQUYdNtOzEKGv7M69do6YuD2Vr8nV0Hf4l/XkdSmkfx0AnA7j8m
-	 HwJJ6Oc5aCIErihTBZsboy89PwrI6RNsOCbD12/bhFvUiJ1GO/nd5Z2Ql6lR8Cg6Wa
-	 8J9Hit5Slh1d8B6fTt0z/6HPUwivoUq7AvePlZQwatTxvxwmtyMAy/xlFrhJOGorZa
-	 WS100JMbF2bGA==
-Date: Tue, 28 Jul 2026 10:47:33 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Trilok Soni <trilokkumar.soni@oss.qualcomm.com>
-Cc: Umang Chheda <umang.chheda@oss.qualcomm.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Ruidong Tian <tianruidong@linux.alibaba.com>, 
-	Tony Luck <tony.luck@intel.com>, Borislav Petkov <bp@alien8.de>, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-acpi@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, linux-edac@vger.kernel.org, faruque.ansari@oss.qualcomm.com, 
-	avaneesh.dwivedi@oss.qualcomm.com
-Subject: Re: [PATCH v2 1/4] dt-bindings: arm: ras: Introduce bindings for ARM
- RAS error sources
-Message-ID: <20260728-determined-lorikeet-from-tartarus-cf124e@quoll>
-References: <20260720081954.1858180-1-umang.chheda@oss.qualcomm.com>
- <20260720081954.1858180-2-umang.chheda@oss.qualcomm.com>
- <f6443353-b3c5-4922-a98a-1292db381ca7@oss.qualcomm.com>
+	b=L6KFjZYK2r6XGUzIkg+Nxf1Kb/O+Zp33uJGE/Ky1DVV73FtN1BDK9EqhOB5U+ZcB5
+	 9GJgsolfOnKvIj1OcPgWGsYuqe86LnnjUIjP2kCK2NaVJaHObjEtgUK25agga9ZVyq
+	 /NFeUKFtSjl/HMUbiG/NcbF8xvT5m4zMmOK3kE6wNlS/G23KfJ3JgtTQdn5T1d0jhJ
+	 pTqljLcpnzJCkANImhuFBqW5Y3ePkgLshr8aA2SGUDJcjt0TLR4fV8mFmblASThvSh
+	 ZrN4baFXHTSs5Rh/aruWFWaOuu0QiUhFZOnfb/h2/063JGsppX1pxyYhP52zbs1/qo
+	 BuyyKQH7G5X9Q==
+Date: Tue, 28 Jul 2026 10:47:59 +0200
+From: Andi Shyti <andi.shyti@kernel.org>
+To: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
+Cc: konrad.dybcio@oss.qualcomm.com, viken.dadhaniya@oss.qualcomm.com, 
+	linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3] i2c: qcom-geni: Use devm_pm_runtime_enable() for PM
+ management
+Message-ID: <amhsr3heA6hZy9v2@zenone.zhora.eu>
+References: <20260714051512.3732551-1-mukesh.savaliya@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <f6443353-b3c5-4922-a98a-1292db381ca7@oss.qualcomm.com>
+In-Reply-To: <20260714051512.3732551-1-mukesh.savaliya@oss.qualcomm.com>
 
-On Mon, Jul 27, 2026 at 01:51:08PM -0700, Trilok Soni wrote:
-> On 7/20/2026 1:19 AM, Umang Chheda wrote:
-> > new file mode 100644
-> > index 000000000000..c2f4e1f8243e
-> > --- /dev/null
-> > +++ b/include/dt-bindings/arm/arm-ras.h
-> > @@ -0,0 +1,11 @@
-> > +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-> > +
-> > +#ifndef _DT_BINDINGS_ARM_RAS_H
-> > +#define _DT_BINDINGS_ARM_RAS_H
-> > +
-> > +/* arm,group-format - error record group register window page size */
-> > +#define ARM_RAS_GROUP_4K		0	/* 4 KiB,  1 ERRGSR  */
-> > +#define ARM_RAS_GROUP_16K		1	/* 16 KiB, 4 ERRGSRs */
-> > +#define ARM_RAS_GROUP_64K		2	/* 64 KiB, 14 ERRGSRs */
+Hi Mukesh,
+
+On Tue, Jul 14, 2026 at 10:45:12AM +0530, Mukesh Kumar Savaliya wrote:
+> The current implementation manually calls pm_runtime_enable() in probe()
+> and pm_runtime_disable() in remove() and error paths. This pattern is
+> error-prone and requires careful cleanup in all failure paths. Using the
+> devres-managed variant eliminates this complexity.
 > 
-> Do you want me to have different DT for 4k and 16k and 64k? This is not a right approach. 
+> Migrate from manual pm_runtime_enable()/pm_runtime_disable() calls to
+> the devres-managed devm_pm_runtime_enable() API. This simplifies the
+> driver by automatically handling runtime PM cleanup when the device is
+> removed or probe fails. This helps  with Simplified error handling and
+> Automatic cleanup.
 > 
+> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> Signed-off-by: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
 
-Is this page size or register window page size? If the latter, why would
-device registers be a binding?
+merged to i2c/i2c.
 
-Best regards,
-Krzysztof
-
+Thanks,
+Andi
