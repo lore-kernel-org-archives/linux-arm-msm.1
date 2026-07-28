@@ -1,192 +1,227 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7D47D3BAD82
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 06:29:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785220188; cv=none; b=ahFeWAnTRxF+gBcGaBD6kVIJu+vSZ5Pliy8GY56aj0QqvDrO/0L1p7Cxak5CIPTgq2lISRaDRQTy5VrHZFrfwGghdJ6Of6ImRdZxfFqV0YCH5rsZwDx6VtEYq/3KLv/HEtF/tnGs+IBqV9vFbCtpmAb3rtcL5Xp7WEpBsSB3wKw=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785220188; c=relaxed/simple;
-	bh=oWTrgw2+xrfm/slKCNW9ibJEwJpUcJYQbtbrwcMPRUM=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=U+ou8rbtizmF6UKnr8MzE7hegaNOnd2urmAo+2qSDxcnynrj66nQSOUXH0nn77Ysq37YZsKcMprSH2K1xsVx5It3DgK4JqmGa9hmvHc8SulJ+Fr9GsUyamuEg+bpm6mFRRTl3Zb91P6eSjEPLCvT6Pqk/HmOf8+wUbxTwIjQ/0s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Lw6aNC6o; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=H+OnVDVp; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24D353AFAF8
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 06:36:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.218.45
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785220567; cv=pass; b=u9thYPEJDFjM+qMKHc0S+61U6zuBaa/wDbAvA/SfSrumdWU4c4knV7wih02/LGvAVKpOZIVT3J24ATJaLtJIq9jy27fp3tzinawRf6BZcgDQ0eZK5z6mpLtt06qkK5kxZCCSvqlL3JEuGRJSoPL2Zk6MDITYurAtXueeCIdDEgE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785220567; c=relaxed/simple;
+	bh=uKxcPvvi9THW59oy8ygK8tFBpk8FtDiIG2d01vDjCVw=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=lzUzd/xA3hesz+nUvD+Epobw4mAJl5LTnLe4RQm68ABFaDWsoQ8xrdm/bDNs1YmTzL5mlVJsf/BDX2BsDP8noOBEohGUWfERDNMOn0xsF75hGWVQSPiuRWFDj95tgmHAB3cWRU8JjpWKPHvVbqUU11bKjPfVZEhswuGHDGQ8z28=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=HAa9Vfun; arc=pass smtp.client-ip=209.85.218.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Lw6aNC6o";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="H+OnVDVp"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66S3aWiY1467081
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 06:29:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	9ElPf8a6niFpR9VyWE5K88kAbHmmM11rpy3xejveZiY=; b=Lw6aNC6oJsGJ22zP
-	wH0FGSxU/BAaA0jgrP9qG+uuz6T3VP3jrW9hpgxhaqjS45Wf5T/agkULeMe63V9P
-	pVz7r6I+RWTigja4ZCxY0xKuzvYtBl9Lff2hCk4i3WxI9jLUSChxQtR91qNGuNd5
-	rvbmfSd91E+s/db55LGKMHwjfu6qjDglMHNdgTdQTHeFKu/7g660raFRbu2EOqH9
-	j95VAi4gt+HVR6vWejRnb/cO+8xt0AxAqBQFefewHnJ162iwevXRJ9WJrcagjcF3
-	eOuxWdAZ3TMxKsWoclW1MNTvEmu6mMo5SNyqMo5FXVQSnWMaEQH72xNxo/kYmeNf
-	dQE+TQ==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fp4nbvvn3-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 06:29:44 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cc7e86e7c5so66630735ad.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 23:29:44 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="HAa9Vfun"
+Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-c1c4db7ca93so477886466b.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 27 Jul 2026 23:36:05 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785220564; cv=none;
+        d=google.com; s=arc-20260327;
+        b=cLpZQqfygeqbY3y5YMDwaUAErXjFP5g2KMMI5Un5HIcAe6zSUYxTmWuhgpoV/Imv0t
+         IuEVR0c/n/wcE0dwBa3/h6/EUxnHzvfUOoUWmOTf1sr17JjhqX/BG/2LXxyOglwIlCuY
+         QvpeiQNlyjvN0K1bCLSMzY3Z9lN5vfwN0rFb4Q3KnJhp4VWcwttv2nLESA6pMtLPOy/8
+         hDTXPqaOwcPEK8tnfm1O4CZ/4kqlorEF55nXFaLyNJg6UzocXzPiPCSlbT7JcTwvsnDB
+         l8/4EF1vl6IjO+lqFgXZGkso0E+KrlnRxyTadV2lls9ZbHM2QAXqgsvGdN2bKA8PEJx7
+         PgZQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=duzfZmLmmvJhemX2jMFCmPO9f3XrbkW2eTjJNcX7UWE=;
+        fh=aE3u/SFyYRRLKiBWq9Lqd5zP8qE+1kSrwxZe8KGhr2A=;
+        b=oQXYygWZ2pdHi1bqVVBt1CFl5Kg2BM8OvJN5L5VmXgm+ZCwibpKaZuRGB5ZsS7l+Sh
+         yvieczpQjT8phSPDV/xuZMgQEhN12AYtBeCXFYf3T0fcE+KWkn4mtoPC/6u61RfJaSyN
+         47wZqlFsPIIy3b7ketpt8oHhKDBVGU/Ma0W5o7xj4KYkMace9SFoJmzkADDm885hnIhe
+         7DO6RkScC28NSadbr/m+eMSvKRGGMY2KYNtTyRO9YlFGArNL39jOspNQUBcGqg5a40RF
+         SvR6BAt2CnKgvMKWUsj8bMMlH3hOEykCZy+niYo/1HNp1MVfAsjwuMMoQnN3yiML5CLG
+         4qAQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785220183; x=1785824983; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=9ElPf8a6niFpR9VyWE5K88kAbHmmM11rpy3xejveZiY=;
-        b=H+OnVDVpteVcuxTzshSkMeQ+mr6TV7mHQJjyX+M0ZgmneElY1w3nhD2xOCkidqOQwM
-         CIwsqkb0clIynFB1tFVuiGzPRTiknceHcddOgzTLu9ojaJyilblRMadPrYfC6L7ximo1
-         2lKnI+novotnsIpEVI5gZhxLrQntXHCRwcDmfGpdNTdDBAckRTXz7n8G78fPNmEdjmv2
-         pj0cEUm9vKFSbvtlYGqHFiFqDoS82m87GTS8J5dJRW5lc54fICAr9kpZPCh4s7xy8hx+
-         8GJqntYlPmC9pukwmKw4RrX+v4ZZQBw6iDh4mBb9bwhP6e0y+JMcPYku4GMHh18kaovy
-         GD4w==
+        d=linaro.org; s=google; t=1785220564; x=1785825364; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=duzfZmLmmvJhemX2jMFCmPO9f3XrbkW2eTjJNcX7UWE=;
+        b=HAa9VfunyfzIp0v1vTKNufbBGo3uIL/zoJzECyD1g5EZx7aJowIO+IfPQMu/cFtayZ
+         BV3RBjaOBcrhfRWk9U27jsHc1VUPCSVfjgWE3Du/B+Z8kMxurDTDgzQ+lEkMclT6pzfx
+         4BETg2XcLFfwTeifm7stHwoR8QnuhILBiIDoxonmmYJbLnyjMp7CLIRlOfuGIp3KGnIs
+         wYXNCT77IfwC6ELK3Iov4kXqZKjVaQ0YVTBvOQb9UzTv+3M5wchWcGQvswlydQdXSu2I
+         R+n91BdsSd0JtysDD6m0j1AbgdPNWpSjLY5vxfeYW9p5IIk8Zb57rqx5ulB8CvCSy4ag
+         HI5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785220183; x=1785824983;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=9ElPf8a6niFpR9VyWE5K88kAbHmmM11rpy3xejveZiY=;
-        b=jKcCJZ/KCri32q9jjHBe2cZ/pmcaBzhVGHWmiTh9Huw9EnGsB/F/k4NHTTz9657a3W
-         tb8yznZ05VkcP8TV6KeW0dpzTvvFzN4aQqjbRhl7eoRcu7WvOkWzjqs08JSpEFhv403A
-         zn7dFb34TmDp+aZiZtB8BWP0+K/u4+bQRFhzrPG0/Jn98xpU34kYlTAapLJKYsYwWAyL
-         029s2b/JSqOVX+0tDW1G5qvHbuS3DwQYwwWGXLI472xUkkxeroYXmS4ZdPwGIO4lNAr+
-         A6GrSMeukrnZjQ2KHnkgAHNTaRY69SbuKe8nOBoHAFV6wBbEXV3ytfKaTRvmvHQKdX3s
-         R0KQ==
-X-Gm-Message-State: AOJu0YwVHEej0WBYes2PNpe2YXA1+UtNFDQdiA4iy6lLzm0M+WkVP3YA
-	YFxjqXzYuZkh2/N4iaxJwBD/A1lCepcjccIdzopMRctK9crde+oyhBtPuA4aPLr3TcecJtBteHp
-	90VEFvfoILZRb6X/Y62J32qcTLsH+VJi6TiW8R3vqIHeGyMj/5Sx4R6pcpi7sH21VMe9NXXKNqF
-	eo
-X-Gm-Gg: AR+sD10wJyfeCuPBu0O9B/i7zskhNzuaZLsG2L/kaZUIlGTeUxgvVNbw2LCyJ1b6iPI
-	u+/WP65WzD/+xFn4U8Kfc3DK0NF/CgatT1AuJj8PIuRKG4eZMo/dBZygmczNukciVerYHP3L1iC
-	dTmn1b6Ci+HIbFfvcYwyDGC/9WvxHukL5i/qS1IFfJLKAMZSyP5CG5+Rg8o8ArcDAfAt7m70UiO
-	0Qo3cSGVMR4P6pwKf19zmV3ExVp6CSWeEF8I1+G7tolXDaJU1DznA7THDrQOA/rvl3BRjA0d8V2
-	WGsC6K//vc5zLBkA0M9W3Hh8h070pe3jb32DLQpBWs9oS87SyTy+jnnA/JvQbJxQhgm2ONVTWyk
-	fl/MgxSamN+hRI2M07gdJgKCpsDe3iOZXabE=
-X-Received: by 2002:a17:903:fb0:b0:2ca:e565:7b15 with SMTP id d9443c01a7336-2d015c91d62mr12700035ad.10.1785220183504;
-        Mon, 27 Jul 2026 23:29:43 -0700 (PDT)
-X-Received: by 2002:a17:903:fb0:b0:2ca:e565:7b15 with SMTP id d9443c01a7336-2d015c91d62mr12699815ad.10.1785220183074;
-        Mon, 27 Jul 2026 23:29:43 -0700 (PDT)
-Received: from [10.218.37.132] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2cfde81cd32sm45706925ad.78.2026.07.27.23.29.38
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 27 Jul 2026 23:29:42 -0700 (PDT)
-Message-ID: <e5516c61-44ea-4224-9da2-1694eac10fec@oss.qualcomm.com>
-Date: Tue, 28 Jul 2026 11:59:36 +0530
+        d=1e100.net; s=20251104; t=1785220564; x=1785825364;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=duzfZmLmmvJhemX2jMFCmPO9f3XrbkW2eTjJNcX7UWE=;
+        b=EX6PRBHG3W8t/dAbCWXCi20rseV0rMMlsFOCwkyVDNP34tFwd+in22TVPMI3uwmmKk
+         OQxaJ/zGGE89rFDAwbiwCbFLd/pDstINSGFOHpU3Suip7vxzqZ4RWFrvQKV9zCIiOKKk
+         xEjjxGp9RFQntiKX2FGezB3Cl/9n8+rUgrpNdXTXl4Tq9lN8OE32NZct4lz974dh4c+N
+         V8UePWdYiXuwnBD5fq0jogN10FQswikJDC/XP9rhEqERP7QBhWeNU8CpZUhWpfbh6dgL
+         7oXbqfjaHGDRHnkdVRFJcimXwOjL1GNd83eg8j0vXEcEzCzspulWWGAc729UmU/NFhb6
+         gpZA==
+X-Forwarded-Encrypted: i=1; AHgh+RrgnZwj4afXWYU+zNhogNINwr0UiYdmjUQb3GbPwk1CgzNnIJ3VPBBPJfaOhN5EAy/y1kuh8uLjWD484jsT@vger.kernel.org
+X-Gm-Message-State: AOJu0YyxIHMr0rQPuuDTaH945EsmABic6p+hAFnNa4vaG3o9xmG8Xw8F
+	CyLYIBZDMQ2c6aaaBm64WsazaKqiUXtXnaXajYo3i4incyJYKAwDm27VHRts2V/+HIabqO605Qo
+	Q2feBsJYCPJ94iOeaOYU4TX9ZoftHG5BfaETmTl3PlQ==
+X-Gm-Gg: AR+sD10teeiOi/WLvfkNgxr/2ETLOQzwX85OpOwohDjTi2qkYpyXpkd6MdFkQbcrqjg
+	958pWy8ieRe3BIjzI9s4uwt7Xz/2Y9ZFM7nHDhY0d8gCb4oSQaNQy1ic8XP59YqA/eRSFChCEgi
+	sTpMPQnzXayXkfqPTYiviwEL8BNsYb35uX6YVF69h9ek94TFbjGgj8P4tqsRte8gZYRDN2+sqFr
+	1+AZZuHWcFSLMKGz+Qp+ddXtDZ71i3Jf+zlUADUb9D/yb4JTBGNgdE8Q0Lp7yfUh90unNyCw0Kp
+	1CyP1Cmnj6VaepeJY5Q0hiLYvLqD
+X-Received: by 2002:a17:907:d10:b0:c15:d422:3bde with SMTP id
+ a640c23a62f3a-c1f72143dccmr45688966b.32.1785220564048; Mon, 27 Jul 2026
+ 23:36:04 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] dt-bindings: phy: qcom,sc8280xp-qmp-pcie-phy: Add
- Maili PCIe PHY compatibles
-To: Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
-        Bjorn Helgaas <bhelgaas@google.com>,
-        Krzysztof Kozlowski
- <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>, Vinod Koul <vkoul@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-phy@lists.infradead.org
-References: <20260703-vdev_maili_dt_bindings-v1-0-c9df0916cd5e@oss.qualcomm.com>
- <20260703-vdev_maili_dt_bindings-v1-2-c9df0916cd5e@oss.qualcomm.com>
-Content-Language: en-US
-From: vivek pernamitta <vivek.pernamitta@oss.qualcomm.com>
-In-Reply-To: <20260703-vdev_maili_dt_bindings-v1-2-c9df0916cd5e@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: xOGYmO9Uj_QDnrEiAgY8RC8wnAXLeNpU
-X-Authority-Analysis: v=2.4 cv=cJjQdFeN c=1 sm=1 tr=0 ts=6a684c58 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=4DM8Ldo2K2qSuXsH2HoA:9
- a=0bXxn9q0MV6snEgNplNhOjQmxlI=:19 a=QEXdDO2ut3YA:10 a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDA1NyBTYWx0ZWRfX3/mxw6zeyeQs
- EEmYChcJtw+TnC0lqRGUuO5I2TKY+rQl2jaaZCCWQzx5QC47RhlHm2QzMshfutag9UY7N+rjc/j
- NeCyw0WE/uPt5HW54YbTyo9tA83iYws=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDA1NyBTYWx0ZWRfX+/1Omp/tlKFo
- WK2uQf1ZSCls6IGc+Remy1aqdQJbRxVd9N/DHzZKHhPB9YHwQ6cm0vJtKyHkwwNJmSU6hweKj3l
- uqrST9T87yLalU1KZm2xpznu8i2qPlrvuzjh6aVYKLx+f9GJmVRUaZsj85Xyxkwj4dwLkDF3OTm
- JUe+DoS2qJXSr/IvgXfMO3KfO5eNnsoiev941BzNDbiLv9yTr6EL8x8frqk6hmrw0El18eyCtc5
- g+UqyL+a9dl2qN6xj/+doQUbi+6Sr7U8apasUStq0w3XPZOx0OplFtdGAv4VSJpmsC4uqigpSr3
- XTdbAs0VRrn3FMvQ3Uq0BmlOYCFzBFCjUT2i5eyBxW4vFhm/LkLDzQowezyxC5EZvXrcBHo40T1
- 2KhhunXjjve+YZTXCNVHfKaD3XBJxECUpKXAR2RGdKc57AJn9j8hyIuLtRPP3d7hIU8j4TtghLR
- Phg2xW9sJd262QAsRsQ==
-X-Proofpoint-GUID: xOGYmO9Uj_QDnrEiAgY8RC8wnAXLeNpU
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-28_01,2026-07-27_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 spamscore=0 adultscore=0 suspectscore=0
- clxscore=1015 priorityscore=1501 lowpriorityscore=0 bulkscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607280057
+References: <CABdmKX21NHc2=9Sk2F-BFpu6is0vTg-QXLE+wiFNEPdsWWjvog@mail.gmail.com>
+ <20260714114654.3885457-1-shoubaineng@gmail.com> <20260714114654.3885457-2-shoubaineng@gmail.com>
+ <20260714141359.7758575d@pumpkin> <CAGCp47zPkd6MWcMpxobphJp6giufpnJL46iFQMt9p76gb7OtKA@mail.gmail.com>
+ <20260714153319.07b2b1e1@pumpkin> <CAGCp47wsjwstEebFcKSv+Hox0LJo=oYgt5n-2xfKWgq4WLZK1Q@mail.gmail.com>
+ <CAGCp47zxaZsoBKeXz2YdyxbX8QOy_g8dGwnC9gVpJ-Sqng48Qg@mail.gmail.com>
+In-Reply-To: <CAGCp47zxaZsoBKeXz2YdyxbX8QOy_g8dGwnC9gVpJ-Sqng48Qg@mail.gmail.com>
+From: Sumit Semwal <sumit.semwal@linaro.org>
+Date: Tue, 28 Jul 2026 12:05:52 +0530
+X-Gm-Features: AUfX_mwmHSb9ULjRcWMzRfxF5YDIQvTQbS3OokFwfCg21Sudlmr7BMxr4LzKAj0
+Message-ID: <CAO_48GGxJj6AU6vsu-Y18WKtL_9RT=zsXWp3L+ifZdLM7CgGtw@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] dma-buf: dma-heap: don't publish fd before
+ copy_to_user() succeeds
+To: =?UTF-8?B?5a+/5p+P6IO9?= <shoubaineng@gmail.com>
+Cc: David Laight <david.laight.linux@gmail.com>, 
+	=?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+	"T . J . Mercier" <tjmercier@google.com>, Benjamin Gaignard <benjamin.gaignard@collabora.com>, 
+	Brian Starkey <Brian.Starkey@arm.com>, John Stultz <jstultz@google.com>, 
+	Sandeep Patil <sspatil@android.com>, "Andrew F . Davis" <afd@ti.com>, Srinivas Kandagatla <srini@kernel.org>, 
+	stable@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Gentle reminder
+Hello Baineng,
 
-On 7/3/2026 5:38 PM, Vivek Pernamitta wrote:
-> Add qcom,maili-qmp-gen3x2-pcie-phy and qcom,maili-qmp-gen4x1-pcie-phy
-> compatible strings for the Maili SoC PCIe QMP PHY.
-> 
-> The Maili SoC is a derivative of Hawi and shares the same PCIe QMP PHY
-> architecture, allowing reuse of the existing Hawi PCIe PHY DT bindings.
-> 
-> Signed-off-by: Vivek Pernamitta <vivek.pernamitta@oss.qualcomm.com>
-> ---
-> Dependencies:
-> - phy: qcom: qmp-pcie: Add PCIe PHY support for Hawi
->    https://lore.kernel.org/all/20260618-hawi-phy-pcie-v3-0-3fa42ca45ea4@oss.qualcomm.com/
-> ---
->   .../devicetree/bindings/phy/qcom,sc8280xp-qmp-pcie-phy.yaml         | 6 ++++++
->   1 file changed, 6 insertions(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-pcie-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-pcie-phy.yaml
-> index 259ed9678393f12c03535389b972fed0c7e36517..971474526cf97cf333a80a31e8fb13abcb995e97 100644
-> --- a/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-pcie-phy.yaml
-> +++ b/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-pcie-phy.yaml
-> @@ -23,6 +23,8 @@ properties:
->         - qcom,hawi-qmp-gen3x2-pcie-phy
->         - qcom,hawi-qmp-gen4x1-pcie-phy
->         - qcom,kaanapali-qmp-gen3x2-pcie-phy
-> +      - qcom,maili-qmp-gen3x2-pcie-phy
-> +      - qcom,maili-qmp-gen4x1-pcie-phy
->         - qcom,qcs615-qmp-gen3x1-pcie-phy
->         - qcom,qcs8300-qmp-gen4x2-pcie-phy
->         - qcom,sa8775p-qmp-gen4x2-pcie-phy
-> @@ -200,6 +202,8 @@ allOf:
->                 - qcom,glymur-qmp-gen5x4-pcie-phy
->                 - qcom,hawi-qmp-gen3x2-pcie-phy
->                 - qcom,hawi-qmp-gen4x1-pcie-phy
-> +              - qcom,maili-qmp-gen3x2-pcie-phy
-> +              - qcom,maili-qmp-gen4x1-pcie-phy
->                 - qcom,qcs8300-qmp-gen4x2-pcie-phy
->                 - qcom,sa8775p-qmp-gen4x2-pcie-phy
->                 - qcom,sa8775p-qmp-gen4x4-pcie-phy
-> @@ -230,6 +234,8 @@ allOf:
->                 - qcom,hawi-qmp-gen3x2-pcie-phy
->                 - qcom,hawi-qmp-gen4x1-pcie-phy
->                 - qcom,kaanapali-qmp-gen3x2-pcie-phy
-> +              - qcom,maili-qmp-gen3x2-pcie-phy
-> +              - qcom,maili-qmp-gen4x1-pcie-phy
->                 - qcom,sm8550-qmp-gen4x2-pcie-phy
->                 - qcom,sm8650-qmp-gen4x2-pcie-phy
->                 - qcom,x1e80100-qmp-gen3x2-pcie-phy
-> 
+On Mon, 27 Jul 2026 at 08:56, =E5=AF=BF=E6=9F=8F=E8=83=BD <shoubaineng@gmai=
+l.com> wrote:
+>
+> Ping. Any chance this can be picked up?
 
+Thank you for the patch.
+
+While discussing with T J, we realised that adding a selftest for this
+would also be helpful. Could you please re-submit with a selftest
+added?
+>
+> Baineng
+
+Thanks and best regards,
+Sumit.
+
+>
+> =E5=AF=BF=E6=9F=8F=E8=83=BD <shoubaineng@gmail.com> =E4=BA=8E2026=E5=B9=
+=B47=E6=9C=8815=E6=97=A5=E5=91=A8=E4=B8=89 10:04=E5=86=99=E9=81=93=EF=BC=9A
+>>
+>> Hi David
+>>
+>> The rollback here is the simplest possible case (put_unused_fd +
+>> dma_buf_put), not the complex sockopt scenario you describe.
+>>
+>> Baineng
+>>
+>> David Laight <david.laight.linux@gmail.com> =E4=BA=8E2026=E5=B9=B47=E6=
+=9C=8814=E6=97=A5=E5=91=A8=E4=BA=8C 22:33=E5=86=99=E9=81=93=EF=BC=9A
+>>>
+>>> On Tue, 14 Jul 2026 21:38:07 +0800
+>>> =E5=AF=BF=E6=9F=8F=E8=83=BD <shoubaineng@gmail.com> wrote:
+>>>
+>>> > Hi David,
+>>> >
+>>> > Thanks for the feedback.
+>>> >
+>>> > The concern is not just about the EFAULT return =E2=80=94 it's about =
+the race
+>>> > window between fd_install() and copy_to_user().  Once fd_install()
+>>> > returns, the fd is immediately observable by other threads in the sam=
+e
+>>> > process (via /proc/self/fd, SCM_RIGHTS, etc.), even before
+>>> > copy_to_user() has a chance to fail.  The triggering condition is a
+>>> > deliberate mprotect() flip, not a corrupted heap.
+>>>
+>>> That is what makes doing the close wrong.
+>>> But that is a program aggressively trying to hit the timing window,
+>>> not a normal program that has managed to pass an invalid pointer.
+>>> The most likely reason for a real program passing an invalid pointer
+>>> is a corrupted heap (assuming the stupid coding errors are fixed).
+>>>
+>>> It is really no different from the sockopt code that receives
+>>> SCM_RIGHTS messages.
+>>> In that case once you've removed the FILE from the socket (or similar)
+>>> you really don't want to have to put it back because the write to the
+>>> sockopt buffer or length field fails.
+>>> The chance of correctly reverting the kernel state is small - and won't
+>>> be tested.
+>>>
+>>>         David
+>>>
+>>> >
+>>> > The fix itself is small and follows the standard kernel idiom:
+>>> > get_unused_fd_flags() reserves the fd without publishing it, so the
+>>> > window between reservation and install is entirely under kernel contr=
+ol.
+>>> >
+>>> > Baineng
+>>> >
+>>> > David Laight <david.laight.linux@gmail.com> =E4=BA=8E2026=E5=B9=B47=
+=E6=9C=8814=E6=97=A5=E5=91=A8=E4=BA=8C 21:14=E5=86=99=E9=81=93=EF=BC=9A
+>>> >
+>>> > > On Tue, 14 Jul 2026 19:46:53 +0800
+>>> > > Baineng Shou <shoubaineng@gmail.com> wrote:
+>>> > >
+>>> > > > DMA_HEAP_IOCTL_ALLOC allocates a dma-buf and installs an fd into =
+the
+>>> > > > caller's fd table via dma_buf_fd() -> fd_install() before
+>>> > > > dma_heap_ioctl() copies the result back to userspace.  If the tra=
+iling
+>>> > > > copy_to_user() fails, userspace never learns the fd number, but t=
+he
+>>> > > > fd (and the underlying dma-buf reference) are already visible to
+>>> > > > other threads in the same process and are leaked for the lifetime=
+ of
+>>> > > > the process.
+>>> > > >
+>>> > > > The obvious "close it on the failure path" fix is unsafe: once
+>>> > > > fd_install() has run, another thread can already dup() the fd, se=
+nd
+>>> > > > it via SCM_RIGHTS, or close() it and let its number be reused, so=
+ a
+>>> > > > subsequent close_fd() from the ioctl path can operate on an unrel=
+ated
+>>> > > > file.  This was pointed out by Christian K=C3=B6nig on v1 [1].
+>>> > > ...
+>>> > >
+>>> > > My 2c:
+>>> > >
+>>> > > The other option is just to leave it as a 'problem for user space'.
+>>> > > No reasonable program is going to handle the EFAULT return by doing
+>>> > > anything other than exiting.
+>>> > > Even getting an EFAULT is really an indication that the application
+>>> > > is already in a real mess - most likely with a badly corrupted heap=
+.
+>>> > >
+>>> > > Anything else leaves error recovery code in the kernel that is pret=
+ty
+>>> > > much never executed and open to a variety of bugs.
+>>> > > While the recovery here is probably ok, there are some sockopt call=
+s
+>>> > > where it is all more complicated.
+>>> > >
+>>> > >         David
+>>> > >
+>>>
