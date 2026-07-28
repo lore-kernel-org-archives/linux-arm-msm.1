@@ -1,115 +1,194 @@
-Received: from MTA-08-4.privateemail.com (mta-08-4.privateemail.com [198.54.122.147])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D91A332EAD;
-	Tue, 28 Jul 2026 17:36:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.54.122.147
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7EEDD37BE8B
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 17:45:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785260177; cv=none; b=Ptg5du1K3gDr5Ql9dirWnq3ji1/BqDmYmSnXIIW3nF2+lhki11TjFll7bEsGZcJB2MQRKr+87XTMEp6QDM8AmqdUzT+LfKbgEUZv/V9zousH/bsX/z3ovJ7pYogQ98rdoITfsdMLjrErHILYfSb4LUZ4PhPs9gIE9eTUYEhpnm4=
+	t=1785260711; cv=none; b=DquhMr8yyGlUuPHMJMr/gqwdMiaTOSEpM32AvZ7t2AWoC/PdnKFMXb9Bqa9TvVWXxJQcZukDAxq1wjWNQBSSPD+Y8QKpYbSO6SrFl6oBlKfHiDsyTkJFDMII+eObn6xee2CM1CGS7NFzM1Y2VwYVUasZuYV9i+2qink+ZHVfH3s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785260177; c=relaxed/simple;
-	bh=PtU/dDLvgAqA2dfULkmT75pXzWXmrQc8jXvtBHVviGk=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=b5l/KGig6vuFOIB5e6X9u7MSo5vPMxh/pTN5J2V5pPzA2fGUBvvdr2Q95r8hcxoorttUuGB3U6znhtgtNcnCeyDlQFshhJPLmAJCQRQQsAAqCoIYEmUnP6PubYmquLuP+z4MFTAdLbyV9ToGFObFHjsSzaFCo2D5FgqpwqJ4E34=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net; spf=pass smtp.mailfrom=catcrafts.net; arc=none smtp.client-ip=198.54.122.147
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=catcrafts.net
-Received: from mail.privateemail.com (K8S-PROD-WORKER-04 [87.215.145.39])
-	by mta-08.privateemail.com (Postfix) with ESMTPA id 4h8jLF5wG9z3hhTF;
-	Tue, 28 Jul 2026 13:36:04 -0400 (EDT)
-From: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
-To: Vinod Koul <vkoul@kernel.org>,
-	Bard Liao <yung-chuan.liao@linux.intel.com>,
-	Srinivas Kandagatla <srini@kernel.org>
-Cc: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	Luca Weiss <luca.weiss@fairphone.com>,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2 2/2] soundwire: honor clock_reg_supported in the clock scaling check
-Date: Tue, 28 Jul 2026 19:35:42 +0200
-Message-ID: <20260728173542.61146-2-jorijnvdgraaf@catcrafts.net>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260728173542.61146-1-jorijnvdgraaf@catcrafts.net>
-References: <20260728173542.61146-1-jorijnvdgraaf@catcrafts.net>
+	s=arc-20240116; t=1785260711; c=relaxed/simple;
+	bh=YYu+02XUxmIkYZHnHU3pXQ1N83B3DGyGDxJ4k5VauOQ=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=KhoszZS7MILd4oReeTrEyQWuc0EFLLI10Iy2F0PM1lzG30obTPyAUK9QSuevEWQalxkUKERAz8RfF0YGnzrD1xNn/HUb+5yenhcTtvPB53lDi2tIEbg7JaqMsVC/pXWlGT3bZFfFg67EaSLHpMQWjJ4WCcBUgPEvT1V1wzZk8B0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DHh0gsoz; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=LpePB9Qo; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DHh0gsoz";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="LpePB9Qo"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66SHI8832978193
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 17:45:09 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=BJQD2/7JQgGlMnG4nTcU0Y
+	IrWVQGkH/hoz8MewlllFI=; b=DHh0gsozwy5Z8DuvfNNK1chFIZmtrAOEPPhFkJ
+	sOnufb8ueM7y/zeG5oABsqKjwBuzUhEvGQkJD63Q/RKD2kWgzYQx7KsrO7ypRgCP
+	KOhnjVwXj+wmOGvIb7u79VL4JALoXeYVFix8KDQv2E06+bfC+k7uSJjsa1UQ0eVJ
+	wNlIQM4ZvzIicIfyRPo8Kgr0+/o2vS8HsMrqSC8vP+KOr3WLCHdZ3sOCONJgXnX1
+	WWKTDu/457JpyDY71gA2zqDhD6+0s3rcWUqKVcW/2+y9L09QkB0lx7nWBjpMosBV
+	Mbo5rtPIPYgVWo7qop74cI3vhAhHQDMp8VsZcYI8WsQ0QLQg==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fq0q0g3ny-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 17:45:09 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cbbb9c9bfc3so5263a12.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 10:45:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785260709; x=1785865509; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=BJQD2/7JQgGlMnG4nTcU0YIrWVQGkH/hoz8MewlllFI=;
+        b=LpePB9QoDS70+LHNHr0//++AkIzgoGkpZzkqKEYG1LwvPH3/E+dPSeXu7tDV/f6k9l
+         ZIpTskoNbRtxAwM0Q0hx0fZKVVfAZTtFbQydEfbPF6Y8fySRtZZBZPmFn6WjYX1dV/WJ
+         1nUtZM6JlUaR9xIPLLf1lTO7vFm1hCaMlP+okDcDHz6yt4xCZVUNQFnXsWNpFOSIVzF1
+         TpdOo8RFgGXSGHgnUbWhtQU7fQ/X12hmHKaGyHzCk7gKeMxx2RL2BXfU++NjxyP13I3o
+         RtU57xZ6MydeI2my4pswSVsEuc4mIk9z/RnkDffK03SH8lOA2btG/XroXn+TWQWiSVm/
+         HY+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785260709; x=1785865509;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=BJQD2/7JQgGlMnG4nTcU0YIrWVQGkH/hoz8MewlllFI=;
+        b=hKasE2eKptHWzHyWhIu9S27YkHlAkLCl96omO44LLwW2x16AXpNHdqaf0GTP4VBgJL
+         sYInfp3+RrrRuOFTgsCAD8jOb4qz0k9o4gSIG4z2OauJZT3MUW31hYve35o+0V+e7u4Q
+         msH/q5DgLxmcBgMv8OpKDP16MsKrpf1MNXuTgUVsGwjrq19DhTzYkr4ZIkX066qg2SUn
+         5MKTEBNx6WF4d1ngMG9bNjPz5tm0UHtDBTL4T6Xjd/VBrm0Scw9O7oMHElf//krR5Zwb
+         fi6yuRGaZi4VO1ctYOhly3qf0jNpdz013NpByyfcHAFNB7n005gv/9FOTldTeYvDBuMo
+         pZ3A==
+X-Gm-Message-State: AOJu0Ywvyue4Y8QXNSoRhz3qlmxFdJkeQogNirFl98Ln33OHL3rD0ecA
+	UwNDzMinwmUzVB7lbhQKMbkNaiSfFpnJe44ussc0zoEu+CzGraHxSAdIXIODCZOK8qJ0aUHZwdi
+	lsIlgKqNqSmthQ3YByi93zmQxK82wn+178d0wpbl11Fx82WgKTgKFzNd+lxP58Ixy5EKx
+X-Gm-Gg: AR+sD11+3YV9vO9xR4xf/Uv64YMHUhvlRxZ/gS8woEuuZT/UJkvxaNCHfNFikmpvnS0
+	ey/G15jg27DXSGyiJ/ZC1mD3uyLib3NuvGMF6gso3ojJIi2jf3bwAhDdBJwDUyy+kpfzls9QOrw
+	kw/mtkda8gcNTPSXrgo+4YumfbARpnrMcHyJOl7BF1NdwDYGsjt8eiLn8XKHqS7qdIMqWg6o1hj
+	YZQ8l1YERkkpoBvJnWw4n50mLjLSrdS/ESyzE83wTSNWTMyvdrtXYpQcDajd+v5MAbUt15yTkt7
+	gmJSQlkbx5FW6hUcveoy8rucFAILy4MW9mSFs+Qxb4brpZWvQZicVvXTYBH34KYr5sH/rXyo4/i
+	SxV/sX1sl5pKnc0sGJgN+E/2jufLI+HkbWzCFdWRdO8qHhrCD7ES0qEnyl4FRqUk6TMudR32qKu
+	/j94uQznNoDpRP
+X-Received: by 2002:a05:6a20:cd96:b0:3c3:990b:2292 with SMTP id adf61e73a8af0-3c8ba617e44mr4082633637.57.1785260708602;
+        Tue, 28 Jul 2026 10:45:08 -0700 (PDT)
+X-Received: by 2002:a05:6a20:cd96:b0:3c3:990b:2292 with SMTP id adf61e73a8af0-3c8ba617e44mr4082589637.57.1785260708003;
+        Tue, 28 Jul 2026 10:45:08 -0700 (PDT)
+Received: from hu-ajainp-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13e7273cd9esm749553c88.13.2026.07.28.10.45.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 28 Jul 2026 10:45:05 -0700 (PDT)
+From: Anvesh Jain P <anvesh.p@oss.qualcomm.com>
+Subject: [PATCH 0/8] Extend Qualcomm reference device EC driver with fan
+ LUT, profile and SoC Tj support
+Date: Tue, 28 Jul 2026 23:14:28 +0530
+Message-Id: <20260728-ec_add_more_commands-v1-0-771abd65ee1a@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAH3qaGoC/yWO4QqCMBSFX0X2u8l0baZE9B4R47bdapTOdtUC6
+ d2b9ufAd+B8986MMHok1mQzizh58qFLUGwyZu/Q3ZB7l5iVotRCiYqjNeCcaUNEY0PbQueI16B
+ VIaWWslIsTfuIV/9ZtafznyO+xmQf/iVrkQhWe5PtV3kl5CKnse9DHMw1RNOP8Q0GpwefSi64V
+ TWAVVanPAai/DXCc/khT3FY7l6AkC+NH5psh7XeKSfttrDs/P3+AN7vI7DsAAAA
+X-Change-ID: 20260507-ec_add_more_commands-9a6513363375
+To: Anvesh Jain P <anvesh.p@oss.qualcomm.com>,
+        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Hans de Goede <hansg@kernel.org>,
+        =?utf-8?q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, platform-driver-x86@vger.kernel.org
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785260700; l=2492;
+ i=anvesh.p@oss.qualcomm.com; s=20260313; h=from:subject:message-id;
+ bh=YYu+02XUxmIkYZHnHU3pXQ1N83B3DGyGDxJ4k5VauOQ=;
+ b=b6FK90TXWC71UQ50jiq4eXW7V5TfRrOiIS41tMsLWGHzzyiyUhGIRkPulC5s6VmzadICscZ6z
+ 4v8flGx0K0SBo32b99faAa5sK4Tq7ZOmYLVwSC1MexJUgDyak6j6qSl
+X-Developer-Key: i=anvesh.p@oss.qualcomm.com; a=ed25519;
+ pk=8o9EG7gkPe2Er9y9UVCx8MTdcFCwU8Pa54hBZPuduXE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDE1NiBTYWx0ZWRfX1xenB/zmSNax
+ 9XH/1omyk9aywHPrmkSPSyjVu0pqxLSEnCIpp4B5avDMrlSvUVgqltbotmujn4rdOc+waM8Ipnk
+ +djLY6bACQMGoBd6m7zLO5rFUrWUxLujN7+g7uWr7XWDRmCRNxGVSrmLNqZvRAvN/JumkcVmf2T
+ tq1keAe/+HxLcbIXDrXZs/ciWU4xKjFJWbcuP5b7Ti1iAtkTHAOOwA4QQCw4bMdGfjyPCdaAAZc
+ bEp6GjY8N0Q6ADz4npjg/xKu86eIlHB1crJgrMp1V5XbdfrgNSIdSy7qYIg8KuIOqA3zq5gfDrV
+ TUcTC76UUxDf61r5B5v5HQFTkPgwKAyP6O6jDiV9a2X1MfniwciBjhgnu2Lz3WD2OmVddG//8rj
+ 7T8jhfaoz4N7/H/ttdWlqrHLodW1+hy/wrc/WjWmKtjmNh8JqxTKQSnapEzLALKNwpmC/5qMz0t
+ JHyJ5PNXkWlX7gUU1dw==
+X-Proofpoint-ORIG-GUID: jBy161upV2cpWdUsvJ-VCLXTw1kbvhOf
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDE1NiBTYWx0ZWRfX2VDGDqkvWyQU
+ LtS+4vv4BAgFR7RHPo8cBmaKr+Qp1+Q2gn9Z7k2ya89MsBZzbtiVh7viBOkF83m0hjviVS73HoD
+ 2y3VgPMgWO32h0ozp1g+dW59IS3gQ3E=
+X-Authority-Analysis: v=2.4 cv=VezH+lp9 c=1 sm=1 tr=0 ts=6a68eaa5 cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=RE8P6aYtBQjt_bj6LrEA:9 a=QEXdDO2ut3YA:10
+ a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-GUID: jBy161upV2cpWdUsvJ-VCLXTw1kbvhOf
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-28_04,2026-07-28_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 impostorscore=0 clxscore=1015 malwarescore=0
+ suspectscore=0 bulkscore=0 spamscore=0 lowpriorityscore=0 phishscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607280156
 
-sdw_slave_set_frequency() treats class_id and prop.clock_reg_supported
-as equivalent evidence that a slave implements the bus-clock base and
-scale registers, but the bank-switch reprogramming path checks class_id
-alone, so a class-0 slave that declared the registers never gets the
-next-bank scale written there. The registers are SoundWire 1.2, not
-SDCA, so a device may well implement them without setting the class
-field.
+This series extends the EC driver for Qualcomm reference devices
+introduced in the earlier series to support auto-scaling of fan speed
+based on the average SoC junction temperature. The commands added in
+this series exist to facilitate that: querying fan RPM and programming
+the fan speed LUT, switching between fan profiles, and periodically
+reporting the SoC junction temperature to the EC.
 
-Extend the helper to honor clock_reg_supported, as discussed with
-Pierre-Louis in the WCD9378 review. This also makes a link whose
-peripherals all declare clock_reg_supported eligible for dynamic clock
-scaling in the generic bandwidth allocation, which is what declaring
-the registers means.
+Fan profile switching is driven by a power supply notifier that
+selects best performance on AC and better battery on battery. The
+fan LUT is programmed on probe and on each profile switch using
+board-specific configurations for hamoa (16 entries) and glymur
+(8 entries).
 
-With the helper extended, sdw_slave_set_frequency()'s open-coded test
-computes the same predicate; call the helper there instead, so future
-quirks or updates land in one place.
+SoC Tj temperature reporting averages readings across the
+thermal-sensors listed for the EC node and sends the result to the
+EC every 125ms, paused during suspend. Glymur does not send this
+temperature to the EC, since the EC on glymur is capable of obtaining
+it itself.
 
-Link: https://lore.kernel.org/all/5717102b-f7ab-42b2-8065-064d94dd2bee@linux.dev/
-Link: https://lore.kernel.org/all/6991398d-4ae4-45ee-85d0-3b66462fec1d@linux.dev/
-Assisted-by: Claude:claude-fable-5
-Signed-off-by: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
+EC command reads and writes are retried a bounded number of times
+on NACK, since the EC NACKs the bus instead of clock-stretching
+while busy.
+
 ---
-v2: also call the helper from sdw_slave_set_frequency() instead of
-keeping the same test open-coded there, as Pierre-Louis suggested.
+Anvesh Jain P (8):
+      dt-bindings: embedded-controller: qcom,hamoa-crd-ec: Add qcom,tsens
+      platform: arm64: qcom-hamoa-ec: Add SoC junction temperature reporting
+      platform: arm64: qcom-hamoa-ec: Switch fan profile based on power supply state
+      platform: arm64: qcom-hamoa-ec: Add fan RPM query and LUT calibration
+      platform: arm64: qcom-hamoa-ec: Verify required I2C adapter functionality
+      platform: arm64: qcom-hamoa-ec: Retry I2C transfers on NACK
+      arm64: dts: qcom: x1p42100-crd: Add qcom,tsens for EC fan thermal management
+      arm64: dts: qcom: x1e80100-crd: Add qcom,tsens for EC fan thermal management
 
-Both patches re-verified together at v2 on the Fairphone 6 (SM7635,
-WCD9378): "Configured bus base 1, scale 2, mclk 19200000, curr_freq
-9600000" for both slaves at enumeration, no codec errors, capture
-works. On the qcom bus the helper extension only adds next-bank scale
-writes of the same value on bank switches (the clock is fixed).
+ .../embedded-controller/qcom,hamoa-crd-ec.yaml     |   31 +
+ arch/arm64/boot/dts/qcom/x1e80100-crd.dts          |    6 +
+ arch/arm64/boot/dts/qcom/x1p42100-crd.dts          |    6 +
+ drivers/platform/arm64/qcom-hamoa-ec.c             | 1014 +++++++++++++++++++-
+ 4 files changed, 1020 insertions(+), 37 deletions(-)
+---
+base-commit: 8e9685d3c41c35dd1b37df70d854137abcb2fbac
+change-id: 20260507-ec_add_more_commands-9a6513363375
+prerequisite-message-id: <20260703-ec_support_for_purwa_evk-v2-0-c59aac5c6aac@oss.qualcomm.com>
+prerequisite-patch-id: f5031e367e940109367f5fff1a679ea5ee453a8b
+prerequisite-patch-id: 890ce0b8b86b3027b3bca383c85e9861398e6dc5
 
-One behavior change I cannot test: the helper also feeds
-is_clock_scaling_supported() in the generic bandwidth allocation, so an
-Intel link whose peripherals all pass the check - max98363 is the
-in-tree clock_reg_supported case - becomes eligible for dynamic clock
-scaling where it previously ran at a fixed clock. Only configurations
-that fail the bandwidth check today can select a different frequency; I
-could not test that combination, flagging it for the Intel side.
-
- drivers/soundwire/bus.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/soundwire/bus.c b/drivers/soundwire/bus.c
-index 0490777fa406..0c1cdd603926 100644
---- a/drivers/soundwire/bus.c
-+++ b/drivers/soundwire/bus.c
-@@ -817,8 +817,11 @@ bool is_clock_scaling_supported_by_slave(struct sdw_slave *slave)
- 	/*
- 	 * Dynamic scaling is a defined by SDCA. However, some devices expose the class ID but
- 	 * can't support dynamic scaling. We might need a quirk to handle such devices.
-+	 * The clock base and scale registers themselves are SoundWire 1.2, so a device
-+	 * may implement them without setting the class field; the driver says so with
-+	 * clock_reg_supported.
- 	 */
--	return slave->id.class_id;
-+	return slave->id.class_id || slave->prop.clock_reg_supported;
- }
- EXPORT_SYMBOL(is_clock_scaling_supported_by_slave);
- 
-@@ -1385,7 +1388,7 @@ static int sdw_slave_set_frequency(struct sdw_slave *slave)
- 	 * DisCo property to discover support for the scaling registers
- 	 * from platform firmware.
- 	 */
--	if (!slave->id.class_id && !slave->prop.clock_reg_supported)
-+	if (!is_clock_scaling_supported_by_slave(slave))
- 		return 0;
- 
- 	scale_index = sdw_slave_get_scale_index(slave, &base);
+Best regards,
 -- 
-2.55.0
+Anvesh Jain P <anvesh.p@oss.qualcomm.com>
 
