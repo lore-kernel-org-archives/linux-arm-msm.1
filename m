@@ -1,33 +1,66 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D243735972;
-	Tue, 28 Jul 2026 12:41:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00F0D3AA1A1
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 12:52:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785242466; cv=none; b=vBFPQLyWa6SUg45nTDlIOb1DwrrjsrD2ToS18N1o+xdsbMmULJoIJFyvKXIFug6F9ZNPospdkvMrekxO8srxaTWiPux4TX+oOoCyFfp271NyB6BopzVUre63kGFI1qHmd4FuioaEdCfHFxDY3WR5msNDk5SN8G6k+ERKLWOa08w=
+	t=1785243136; cv=none; b=oD7OAPVU8hCTcpyfUXRc4IXFAt35BS7s2vtR915xxPNGe27wCJLADmmhpwawNDi9xpAtoKsNsqmW3M2eSZPXIJCJtAxJOaOqLKU1ww9qFma+jJYjvo+OEm6MyA6arEmUdHbgl34EexM4BnSTifTsWdlzOxODiIO+r/WFrX6STlw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785242466; c=relaxed/simple;
-	bh=WG1GyLv0pSZNYRhB9yvdBpyFmoRgxSoVow7ZBVd9JaI=;
+	s=arc-20240116; t=1785243136; c=relaxed/simple;
+	bh=FMdMDb1hsRT2zerT6pupP/XGqPrIeGTpfhSoF7SeLBw=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=MQgPdkOAs2YIJiXvVDH3hTtVuWNYOxtqdI5Qps3Tehmvfcd7yfDHR4uTyebCVt3BZAArjKB4INoBOCkO+4C/jSf30QjPDFTxqld86a4gtGEgOhhTRyYCDMDZ5DRpHrfK562ihzly/sXQVLDXy3guhdszApjuKXyj5RFd2Kz0mpI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GkfaIIN6; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=HSULy888tVwokUSFk+e7BZI0H+2MW990nhWzKyj7bi3KA1ty3qQQ0Ir6WVVAYtAv7YZ83TbcEP1u2eWzb/yMI9TVPWiNmXFoposCz5gltjkCEDG6pszTaT5d+diol2v4XNG8xjc9A4XeNWkW1X1hzsS43sDT2gpXSw0FjjEMpRc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=lVuEeVgv; arc=none smtp.client-ip=209.85.218.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GkfaIIN6"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C55271F000E9;
-	Tue, 28 Jul 2026 12:41:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785242465;
-	bh=hacR1O1zQDkWC962C9OhYfRTy1n/alcwjZr2/HHxOis=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=GkfaIIN61LQ0kRhkEiCyn/hP83E+kKdv87tJUsY/orbgeN98wLeouqSjwPJqdMu3S
-	 NOTJQ7Jx3nQqa45AiCnbnGtnuOWoEedv7U7aXB7wiV3ETt/Yi0PPZ2yYM/TFdEomZT
-	 WjDyop0m8HXbHmiMGAvtHgV2w5WaDswUtTN0++OH4MOanv2j2rUe48xVTI+NgD1v6/
-	 +lCi6ICiPyzQf2DXmlbKsyWM2PVzzPIPVzwcKmmyUhS658eiglf5RCHY6pYwzqL9Dl
-	 fJw6UQxpVrGe+yaTqNTB7GoeP4KVdCdSim2JcB4PDt7woxFBnbMrJiqJXIEiIwr87u
-	 zsJKhppodXLlw==
-Message-ID: <3a7bd9e9-e752-4962-91f8-96a23a1a89e7@kernel.org>
-Date: Tue, 28 Jul 2026 14:40:57 +0200
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="lVuEeVgv"
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-c1f758014b8so48630666b.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 05:52:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1785243133; x=1785847933; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=6CEzrLHR91J0dNl9cxgDm1rKeXDnUWpCXkb68sIs8ng=;
+        b=lVuEeVgvaH6RZ8PTiEAncKufX/MFlrRTYav1+NEPLJwhc/TpTZKzuvPo5avKNuPA8r
+         nA5PeMln1hGBBqiD994YNDE4d7i8AmIzKLlyzwPpjNvvmJA1tGy05T7KYQVs+4JOYZ6G
+         L7S29FQdKfdtS8JK/nex1/ywtCMX+hkqdVVtNaf5HgFOwzB9EgDGdi5H0BH33WnXLZYD
+         Fu/20JOyKV77I8Czubto2j5hlM+ifbhcJ3m0/7Dk4Qglvd1KeNnks7XnVCpkrk6XPQAS
+         ZGiolDVKP7vNv4xsCr2q17oLlPS2v3UVihnLUIwHdOXQYSOVglVXwCq8V8jcTHbAvzYh
+         pwZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785243133; x=1785847933;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=6CEzrLHR91J0dNl9cxgDm1rKeXDnUWpCXkb68sIs8ng=;
+        b=dvhFQek4kiBStnIQrJA1AN8oX0VWcLmY5f6Voaja0fRvBCTSJtG1IreEXOhqRKIa5v
+         cmY+8dmMIiQ65PhckJcszb0+0eGkoxzv9m1/pAUkaC817rojPDyGeOYMuem8tFGPGhtJ
+         lecTvabx9Cq4jsEGTzQ4ifsVwAjU4tdB/31m8T3xJlyYyjoafgxhStYYA2a7nZlIQAsL
+         0Db4UnkV70qJJnSj/8NazfhOBzpHsDcs7N58OueYc8iCsX//aYatX+gpL1NfcU4hnG3E
+         wvd8QiVq2sTEP5//1Aizs6SKd7Pe8aqLVqcpy4eXgo84IDGQVKO55l+pG3wSxmmDdk+e
+         Xb7g==
+X-Forwarded-Encrypted: i=1; AHgh+RpabtqCt2+qGmq1kmllW41Rls7MiihD7Ce1y6T6+hzwl5n/7PQqMrnRDrjAJoqFalKb2rrjcVJy6+chwxQz@vger.kernel.org
+X-Gm-Message-State: AOJu0YztaCqoWmIGpLTa+dRvcH4ums4PN4lKv07IobCf8nhN1OpR1Mt9
+	Hx5AspaJ5/vsC4OIThZWMDnWXWo2DlGlBeeqoaUzOc2u24/8ny4RbI4ahDbyRlp4Iwo=
+X-Gm-Gg: AR+sD12wBVqglBS1TfWlZeVhkGgHtl2pjR7j3qZ+YgH8GKs9c2BYJ1jswLeojU5Bmh9
+	pkY8igTWpx9Zz9qhUSEw5TLwqtzQkGjp/QQJc0/UxLnlXFy+QlgSOzFqKlJ7Sp6odlEJwEd81Se
+	pUdS6R9rEjBZlS5vaAuKirG0VQ7lWkGegMnL+5sxIruIFdd+6T3wfYdcT9MqtPDyAsQAePnnpDC
+	0iJKCJ30F/vKont1brK1z156ZKWN3DO5lONFzFXcNYdjR8jrAOwJqMkT3xX3ln3A3SFJMlRHm/5
+	yDkHil8igtmybhybxuoH5RKCl4S6i0Nk7CDPEjJzJ07uRb1WumxKPx5Qiy494gxfjsy4m4wBsnk
+	KqpgXo8SDKMRpxDGHUlWE8rG7ID85OLFPFiYFhyRcQQWgJGHUL+xTQ15Oy06kpFF1WAv8URY8my
+	OSOjd5WfBfG6z78Q==
+X-Received: by 2002:a17:906:6a18:b0:c1c:254c:16c1 with SMTP id a640c23a62f3a-c1f719f4dbemr120090466b.0.1785243133082;
+        Tue, 28 Jul 2026 05:52:13 -0700 (PDT)
+Received: from [192.168.0.101] ([109.77.204.94])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1c32f151fbsm773063966b.56.2026.07.28.05.52.12
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 28 Jul 2026 05:52:12 -0700 (PDT)
+Message-ID: <cfd2e58c-e42b-44e3-a901-2048e496fb08@linaro.org>
+Date: Tue, 28 Jul 2026 13:52:11 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,79 +68,42 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V4 2/4] dt-bindings: mmc: sdhci-msm: Document the Glymur
- compatible
-To: Monish Chunara <monish.chunara@oss.qualcomm.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Nitin Rawat <nitin.rawat@oss.qualcomm.com>,
- Pradeep Pragallapati <pradeep.pragallapati@oss.qualcomm.com>,
- Komal Bajaj <komal.bajaj@oss.qualcomm.com>,
- Sachin Rathore <sachin.rathore@oss.qualcomm.com>,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+Subject: Re: [PATCH v2] media: qcom: iris: handle runtime PM resume failure in
+ core deinit
+To: Hungyu Lin <dennylin0707@gmail.com>, vikash.garodia@oss.qualcomm.com
+Cc: dikshita.agarwal@oss.qualcomm.com, abhinav.kumar@linux.dev,
+ mchehab@kernel.org, stefan.schmidt@linaro.org, hverkuil@kernel.org,
+ linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
  linux-kernel@vger.kernel.org
-References: <20260722142342.990384-1-mchunara@oss.qualcomm.com>
- <20260722142342.990384-3-mchunara@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20260722142342.990384-3-mchunara@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+References: <tR8w2GUkOUcarBSbnLxQsLPJsDQrGHIxWcizc8oRS0vu5wWNbeqYLWN5I8JKOpgJg61rd7q3XoGBl0KeV4V9JQ==@protonmail.internalid>
+ <20260604050451.41583-1-dennylin0707@gmail.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20260604050451.41583-1-dennylin0707@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 22/07/2026 16:23, Monish Chunara wrote:
-> From: Monish Chunara <monish.chunara@oss.qualcomm.com>
+On 04/06/2026 06:04, Hungyu Lin wrote:
+> Check the return value of pm_runtime_resume_and_get() in
+> iris_core_deinit().
 > 
-> Document the SDHCI controller on Qualcomm Glymur SoC, fully compatible
-> with existing MSM SDHCI v5.
+> If runtime PM resume fails, skip hardware power-off operations but
+> still perform software teardown and state transition. Also skip the
+> corresponding pm_runtime_put_sync() call to avoid unbalanced runtime
+> PM references.
 > 
-> Signed-off-by: Monish Chunara <monish.chunara@oss.qualcomm.com>
-
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-
-Best regards,
-Krzysztof
+> Fixes: bb8a95aa038e ("media: iris: implement power management")
+> Signed-off-by: Hungyu Lin <dennylin0707@gmail.com>
+> ---
+> Changes in v2:
+> - Keep software teardown and state transition when runtime PM resume fails
+> - Skip only hardware power-off operations and pm_runtime_put_sync()
+> 
+>   drivers/media/platform/qcom/iris/iris_core.c | 12 +++++++++---
+>   1 file changed, 9 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/media/platform/qcom/iris/iris_core.c b/drivers/media/platform/qcom/iris/iris_core.c
+> index dbaac01eb15a..bf3c7f722490 100644
+> --- a/drivers/media/platform/qcom/iris/iris_core.c
+> +++ b/drivers/media/platform/qcom/iris/iris_core.c
+Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
