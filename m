@@ -1,121 +1,149 @@
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 480C241A540
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 09:32:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3697D3C3F7D
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 09:32:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785231124; cv=none; b=C07kJ0xhvn+0hNF5MO/G+gio6q425VNsAlZkHoE7XIdUZ2j76RQW4baqBhW5Ds1zKwjpRG3D/78B4X/tXfTu7J0AHcZiikEkbsyJZfeD+etqBaS6wsRJUUFF0rMrH6Twz502KI9Iru829pVeN9MVFFdh+D7HjSjat22G6ASGiwI=
+	t=1785231146; cv=none; b=P+kaZwj4S/u/vPJ7mqLEX3A/ZODzDcMIEpCiWTKTOpd8RCYwl6hEi3IPKHldMX5M1L9vxwNfOaEDQO71Vq3SIKLK5xqP62idiVTeWL1cjnxxUMFZCmG9vaf1oljElyI4MQQjrBNBAz5dBoRCN2px8VBVRG8K4Ecjga7/Li5F9H4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785231124; c=relaxed/simple;
-	bh=JjYMe727moSW6eydoRmug1B3W1rHx22Xuo5S8BcfpRg=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Y11nlHTxmxMkle36cPGGGMBnoHSHD3ABrEII1KgqWOZ29IftgsxN2Rd+Zs2o8WWfDBJt5CBylS77iQ/P5RrLj3bF0UGcO6u8upJQFN6Q2EXTkcM6TfbXOGjjBzTeYEtQ+y0ZCSrekmAeUb4shDJmxdiIahLbosVQW9Qz3CP7nlM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=NycrQNqI; arc=none smtp.client-ip=209.85.128.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1785231146; c=relaxed/simple;
+	bh=U76fj7KOyjCv+TI0P1EkomwWv2FVIj0e58YuahYfQ1A=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=G2+MVVakNu+5pM4riW56WQLtrEJpipNB9aNyqD9tfYj9r52q68/jPNM4mGkfIjTvH+lbwpeN4usELdIlb2gv7sRA5FtZitBePz7+CP7fQtcH9nuwjUyhQBa23Tat+1mGfb9/gC846HFUh5ovZVW2kpD06jpQ4ADGxk5XHnUtyws=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FwGEsm9L; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fqe/zWcU; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="NycrQNqI"
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4954df200ddso23882435e9.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 02:32:03 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FwGEsm9L";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fqe/zWcU"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66S82G9A1908923
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 09:32:24 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	U76fj7KOyjCv+TI0P1EkomwWv2FVIj0e58YuahYfQ1A=; b=FwGEsm9L14tIqU34
+	8JT86Xw9NsHPUDED6BSAzbeV77w0HJQTPPIc/fXecEUHiYR1IuaDMAMIXeWeUxi/
+	feZNTCesIvr98vPyp8uHXeGAQfR3uotybbL3LnR3tmdW9p0FC9IF+Bl5NwYL3GEc
+	8910FyR1+lxHED9MG2NHYh1HNTxVjaKO5E9ZDGKQcSP3nYNYtNHfUul9RDmkAPKv
+	2tBpQMopzrmtd1IRDACOwVIw70+A2gWlKKUbvuA4WC0IAvwWak8jyoyJVW16LAUn
+	dY3gSig19aIsvSj1LqADyMIWnyd14qT/K5HmAuTZB0fPu0yd1vjpac5kcpQ17Ryi
+	8WxIZQ==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fpbp8bkbs-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 09:32:24 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51bfd1772d8so6805441cf.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 02:32:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1785231121; x=1785835921; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=wyvrkTEX8gg8MffaShVtSJAUi6pWJubSIpFntBYoA74=;
-        b=NycrQNqIKe8MWkjnVFwlUWQZawDI/yMKMotq+9WA8WA5JpYmIvYsNOfKPQQShOu7Dr
-         rOy0mqCt3ESTy3ovq4O5xR5OouSSWP5DGscsoMakrCX67pzYdJh7K46e0Q+ucXY8ORXF
-         jb3sjK1iSRSNY28dxiZh80kF/7lZOZCOLBhnivgJcibQorN3RxWnH7ih1to9EOV8EhUL
-         fyfqCzM6zw4tdUybaeyX4JJNrfOao6GeHeL3fgMPNsAz4C6+aWHw8vIH050Q/CW//lpe
-         RbxUntUeDGH75/o4ocipMMR515i85OH8P6eZel1P0NqKb/Jpq7GbxAjGrhrg12k4yljx
-         Fw2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785231121; x=1785835921;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1785231143; x=1785835943; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=wyvrkTEX8gg8MffaShVtSJAUi6pWJubSIpFntBYoA74=;
-        b=mnPeWU6U0/z1rIGBuPWlMTgId/nFQPP9HEyDFPSnqK3iqFS7nx0u1wpaXV+Uz19qMd
-         kULdmE1DMns/d78/G3JV+/u5+UAjhSMSS7/EzhWJ5+aL8JoGSL8mU6DMNo/zbxTs95qE
-         GBLdDeJYWTly1LsCpo0ZDxfX4vUJEdXW4A1oU4n8v4IsjrP4laBAuWfB0xlIainJpefU
-         1Nd/ScQuo1njXbnzhfrF+UYo5EpIWAEQoQQXjBKJjuDFMG+LbXbmPmyeXOyIQf3ARwXk
-         KPZK0Kjqct86bYo+0BAeCOEO1Z6KLzSTUiVIL9uxYmRWU3ZgMTBMN/PNVNjJBauEUcS5
-         5Zkg==
-X-Gm-Message-State: AOJu0YxzD3nkXpaJLfETTo5lqH5w5wNdYzu3IwrgEj4Sh6//v7qjXIpD
-	LedhVpAtfCK0NyKDsrMQIcFzZU/FxpzB77wYu0NhrLmZnm9yGIUqSC2rjGQvKOphLVE=
-X-Gm-Gg: AR+sD13OQ9IPH/E4EquNQqvmKymuehHTJlinUVRWzMLNlfy0iprAIthp+Ms0gOnyhvi
-	Uv2wUuFBEI9/uKk4ar5UOmsP+0oINhN1dsZgdRV8bKDjha51n/YLznZFCaMuWJlTD6ghLezNR0s
-	YtRnskQAcZItjWAjBAUqUaOXTzdAPA80DPFcbCsuZKqo00oESgRhQS41xCIgQB/sZ5JKu812zVq
-	/guxcEdHmV4e2enVr9oEYsVQxmuA3U9JzeaECFR8mYEomybUNpw9PksOempUP4/Q9950500vble
-	ITID2hul8SmfW6jo1dUevUoZxlLP2aJndaAz6VaUiF8Q4rylRKF8bnJXAkyd6XZnBRtRzCmB833
-	vG2HbUUzJ06xVAMT7nLdljYJbeBOrLqwuDNNvOcSVgwp99SBTRxHcrzwFD6PCF/LuCXFFiHnua9
-	R6uccccot+IV32XJgVCttK5iuel5OMMuVPQA==
-X-Received: by 2002:a05:600c:5486:b0:495:7040:c7e9 with SMTP id 5b1f17b1804b1-496c6414bddmr15782155e9.6.1785231121094;
-        Tue, 28 Jul 2026 02:32:01 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:52eb:f6ff:feb3:451a])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47f85b9a64dsm62389384f8f.1.2026.07.28.02.32.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Jul 2026 02:32:00 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 28 Jul 2026 11:31:58 +0200
-Subject: [PATCH 3/3] arm64: defconfig: enable the Renesas 63419 panel
- driver as module
+        bh=U76fj7KOyjCv+TI0P1EkomwWv2FVIj0e58YuahYfQ1A=;
+        b=fqe/zWcUinBO6JNzpSdTRXKvR4AOxnGKvK0jAuZ0/UGM3vpUuIs0rzf4hn0ivmYhNr
+         0lkUKI8wnGg5oo8k6dusOfke6mAxgHEWFl2jwxs3zMZyyJipkH3fq7WpBFje9x4iWei4
+         qhtrwQxz5BzmO5O2gQn1ZMD1L/1WUhdwiyocxVyU7WKfXbuiqSOZXs9KG2yQRfPL/n6s
+         CEIQsgWZVyNsqPIU58VgScDxEn+V7bgemYWIXPvlTHJAs9p4wgDtWvk76aV1VMOYQbZo
+         Dzb11sBznGbchpGqWqoArqWOD3vjnOAr6oCTSVg6wUt1U6NpHugd8q1SHFXVfnlhzj/c
+         pIQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785231143; x=1785835943;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=U76fj7KOyjCv+TI0P1EkomwWv2FVIj0e58YuahYfQ1A=;
+        b=PK3ZsVe1qwxC1q9JosO5HS1SkZtlOTIqhSvPq73NZgsswMyETJbeBaUpxgxGvOABOQ
+         1iR0jbEQPq75RATNpx5IV1yzu6BA1a7Rzz2vBBr1M8xjOnZ6QLPYdxHTGaSLRO7k3LKU
+         D5cSwSuq6pP4wuOnQb/IRSwOySuTUO7uhnYEosMhss6oOVrvbgA7k8r/j7UaSVmiEsiO
+         thaPZKdb2/1UhT3x9LHi7Ardjpp637h0D+29K4VEFfia5vvrxOfjOUiz2HagC5zZLIbQ
+         WCzEgIKu2k6qmrY+IYYLPLz9EK14spW25ibgk7Z3ogoRC2kCpY6AFxc8bfdee7Ke/q30
+         eAlg==
+X-Gm-Message-State: AOJu0Yxn8Ul3yYQx/CFeZnnBLBuFYi1deVHYooyHdG1OJU6tjECu42PV
+	cwzZVKEmejBlyDZ6fcbrO91F4Nd2RJyNodI8hwiU4k8mVVLyNc4gnNxIbmHJZaFB39bd5O4pm6z
+	/eLHYTdAIixR8UCOHarIMF7at4VcC4yy4est9OnUJq4ZhHz20JPgxV3zLdnIJNUrxuacf
+X-Gm-Gg: AR+sD11Wv2SHTdsFWlbrnAeumCJwYwO6bf59XA91BUMyGvs1Z6sgBhqlOCHDI46EVpS
+	MwEPHONiUXjJVCiBhle9/6/QqbP6NNV0SZ6IXYzkYT/SHwhu6YtyeHlaKgZ9Q9cIsobd8jVbbHb
+	7AhSjdvhIuAgtxh9QeH8I8xvSPghgxAZDkJ27lwA9ERxIpgyzNGB8zdYvi1neJ5ipRVGRG7rH26
+	FcwLoMqzQ9tEiBVPVuy4X3KNHvLQXdlYYUrsazoBRg4uBFnQhh5u/P0p/NX35kYAFbNGOlt0liO
+	bVuQgPogyuuoJxaR1JyhvhzENHqG4PHtvY7u0x6IHIiQECj5/B5/5jOW12W/7sIrh9abiMjAPw+
+	wAG9jPNPFkNK5+xB5XoRzllxz
+X-Received: by 2002:ac8:5e54:0:b0:51b:f40b:2fa2 with SMTP id d75a77b69052e-529d708f340mr9811201cf.1.1785231143405;
+        Tue, 28 Jul 2026 02:32:23 -0700 (PDT)
+X-Received: by 2002:ac8:5e54:0:b0:51b:f40b:2fa2 with SMTP id d75a77b69052e-529d708f340mr9811021cf.1.1785231143029;
+        Tue, 28 Jul 2026 02:32:23 -0700 (PDT)
+Received: from [192.168.120.193] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-69fb59468dbsm3835627a12.28.2026.07.28.02.32.19
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 28 Jul 2026 02:32:22 -0700 (PDT)
+Message-ID: <c08192fb-7d5a-43b5-93ce-f17c5a0b3cb1@oss.qualcomm.com>
+Date: Tue, 28 Jul 2026 11:32:18 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 09/12] clk: qcom: ipq-cmn-pll: Add clock gate support for
+ fixed clocks
+To: Luo Jie <jie.luo@oss.qualcomm.com>,
+        Bjorn Andersson
+ <andersson@kernel.org>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+        quic_kkumarcs@quicinc.com, quic_linchen@quicinc.com,
+        quic_leiwei@quicinc.com, quic_suruchia@quicinc.com
+References: <20260724-qcom_ipq5210_cmnpll-v1-0-a8b8679d215f@oss.qualcomm.com>
+ <20260724-qcom_ipq5210_cmnpll-v1-9-a8b8679d215f@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260724-qcom_ipq5210_cmnpll-v1-9-a8b8679d215f@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260728-topic-sm8650-ayaneo-pocket-s2-defconfigs-v1-3-49e3ac1c8ff4@linaro.org>
-References: <20260728-topic-sm8650-ayaneo-pocket-s2-defconfigs-v1-0-49e3ac1c8ff4@linaro.org>
-In-Reply-To: <20260728-topic-sm8650-ayaneo-pocket-s2-defconfigs-v1-0-49e3ac1c8ff4@linaro.org>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- linux-kernel@vger.kernel.org, Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.15.1
-X-Developer-Signature: v=1; a=openpgp-sha256; l=693;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=JjYMe727moSW6eydoRmug1B3W1rHx22Xuo5S8BcfpRg=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqaHcNvEg9FKSEskmsNfnAVoNdgaTw48R7NYY2c1Bs
- 5GTAv9qJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCamh3DQAKCRB33NvayMhJ0VUJD/
- 0VpinGW//GB5TMg3yTAG7U0iv4ccidJP6YZvu+379Lb56v9guHbXKtrnYsTvyg8HIxbMpNGDGxjmRC
- xoLPoz1AFSqPcjR6flS5x2tZeuNMC2mFRoqjlrtQbyvMNBLjhSBT7sTbDACb/a90o4qBMM92/6/gdI
- S0A/G6oubcWsGGjXbC4UXW4OxzFG74NNCde29bO/W3oGs1efpEmdnrB1OBxfoKB/VpO8rQey0tNq3n
- Ni4Icw9Es1qZkra2QWI/G3mkohzaMO1z8ysYfY/qE8GugvsaS7Nj4R3GDHlhzQXya2UAcE6LEqWMC5
- JYU5CmrOLgi5q+7Bp7icHJwD/aFQMjcZS04aIKpK/i1n6Z3wTpPCRXLql2kDni4lPSy7idPQM9MXFS
- yv+FjKWo+XZ8O1V6i2YKxu/93wDpfFCDe0KlTJIm0nxqU/023hQzoaVv1wDExZpqhKg4ohaq5hWHUD
- XJ60n1154EB1sJzLUXAaBDXmRtNxJZYeMIZlqklklFJF9j+5uTmkgUVfFZj5fdrv66Kagy9Ht+V/oR
- npgZEC6KjhDH5xvmWZpwiAx5K3/WLX1m+EYu6MERv+/s8K+T/IPdTwcjOir/mqdItc02rjPhRkz53T
- aWxCMFgfQix7E0lYhlxOBEqnu4jDcsZKc1h2s6U4mFHnlnn+9XREA8LaeCQA==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDA4MiBTYWx0ZWRfXyCegk399CcGA
+ FFQofwc3S/gthTxC2le3QtXAqL3br139bbM25QPR4NIykR2LWPTrLRTc63At53PK1Ei5m8NX1kr
+ qHg865y92BWlKvkrGnUxuRl/PAsOFXc=
+X-Proofpoint-GUID: o8SzZ6Dln-_H_ca6iqFbJ98xP0XtVgcV
+X-Proofpoint-ORIG-GUID: o8SzZ6Dln-_H_ca6iqFbJ98xP0XtVgcV
+X-Authority-Analysis: v=2.4 cv=KLJqylFo c=1 sm=1 tr=0 ts=6a687728 cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=XRWevJX1GK7jOFrGjf0A:9 a=QEXdDO2ut3YA:10 a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDA4MiBTYWx0ZWRfX8Wxav5iMhpjN
+ En6MlTwY9sEpt70KNI2/lK3A3F38+Tcz6X/HjUGz/l2fXxgrf4Dl/qnApQEzlEAFXOpUTpq52Zp
+ GiV11x8eIfW3Y22XdSyljR5HT71GeXIbRB+dJP1N/qkNCP86xQ7FDQgbvwJUACRsWkWZMGs3QiO
+ Lq1ZCfwbiEpjyLXKXWGLI/FUkUV5RxwJWq4MfTCScDd88pGEXfx4N6bgdCW1RXGZ8cPIP6LBAQq
+ T2QYwYxvBfPT+3wuhZg3rYe0eY3etS7gQhAK9ZUDb3HsgKe6droUi0xZc7VKUlae8La7iSnEIiv
+ mrpvo7DCQNqLLcTaVMpyiLL6NbRZSeSfAo2AUVDwtacmLP14ywPVLqV8MB5sISldIkdTk/mYUmg
+ ck7YHcCSWD789VApf5ldDEnMaCVQDEFyWPsbvp8ToZ8YW8yruLOVVLYFXhJ2o9F8Z1wDI9oCJeB
+ e4nmg2Pq9m4G54BTSGw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-28_02,2026-07-27_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 priorityscore=1501 suspectscore=0 spamscore=0 impostorscore=0
+ lowpriorityscore=0 malwarescore=0 adultscore=0 bulkscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607280082
 
-Enable the Renesas 63419 panel driver as module since it's
-used by the Ayaneo Pocket S2 board to drive the dual-DSI panel.
+On 7/24/26 5:00 PM, Luo Jie wrote:
+> Some CMN PLL output clocks require a hardware gate in addition to a
+> fixed rate. The gate control bits reside in the register
+> CMN_PLL_OUTPUT_RELATED_1 (0x79c). Each such clock is registered as a
+> composite clock combining a clk_fixed_rate provider with a clk_gate.
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- arch/arm64/configs/defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Would toggling this register in .enable/.disable not be good enough?
+Do we need to register a separate gate?
 
-diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
-index 90903bd082b2..98d4b7d2e8bd 100644
---- a/arch/arm64/configs/defconfig
-+++ b/arch/arm64/configs/defconfig
-@@ -964,6 +964,7 @@ CONFIG_DRM=m
- CONFIG_DRM_HDLCD=m
- CONFIG_DRM_MALI_DISPLAY=m
- CONFIG_DRM_KOMEDA=m
-+CONFIG_DRM_PANEL_RENESAS_R63419=m
- CONFIG_DRM_DISPLAY_CONNECTOR=m
- CONFIG_DRM_FSL_LDB=m
- CONFIG_DRM_I2C_NXP_TDA998X=m
-
--- 
-2.34.1
-
+Konrad
