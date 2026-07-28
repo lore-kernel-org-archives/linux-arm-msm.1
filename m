@@ -1,271 +1,215 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 494F2413796
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 08:40:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA3FC40D576
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 08:46:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785228056; cv=none; b=BopgVYZ1D1FPAdHwv8uQJJSpx4muxaoInmDeX2T658JqZETQv0Vf/79Ta83bEmx9OROWozXIb3CugwP7mYSFuyXlzb6JFf5i6CuapvdxRPct7hlQtoBMPxJ/hxLig9AA1WB3ZhbpRPJWl+2SaI4wh1CMlFELu8xSEWTUfnUgH64=
+	t=1785228414; cv=none; b=OykdfHErl6UEznR1BhebB7rsJ6JqiKwSue7oXl3z8Gilk8njgXiXfLGSxS8nN4TK5Nq7AofKgutmVu3jbjrfLWtJ7pFvNr4+Bb9TYCRvKDuEoR5aLkTb6j8tofwPYij85NTLMhSTh9BzV0y4xKcfhiTXVnvM0aJWh9WtTy+vvLs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785228056; c=relaxed/simple;
-	bh=yh7omN7QmSLIDUhxylRwnAYQoNTHBYgtT5w9QjEIgBc=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=PeAkKpxaIJCq60D/6cMAZ7G2DDpKORFBvtZKS3oF9gd02+jFh0/cpeQ6/ooXZNqOCpbi+3EUEjzFbdUBlAxXKrKcGwoRDfaRA0/m+qRgKeRt9QzZb5dklmz6gXXP1F1+tGTah9quGJElVR+GxUSmgoo6Tb/jGq25HJ7fyZlXdfo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=K710jn2m; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Jfe8zaOu; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785228414; c=relaxed/simple;
+	bh=sHs5xySGuDN2Xqec2Tl41jmiL1sPHuObMTPhDLc0Mrs=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=dkcyJZbkvj0gcjZvtYoS7x6u4Jmqy/iO8zZhKZunTdWhEA33y2cCixVLtN1533uQmkSlqmiPVbRy0xOntMDcN+KDln7Iw0uCkX5RPR1GstB687XsVslzZVvyRu+ZFrj5R8WNvq7jNvIbdU4TWjiGJ7a1wjkf5P77uoDT4cGfaBA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=qYnW18jU; arc=none smtp.client-ip=209.85.128.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="K710jn2m";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Jfe8zaOu"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66S82ljq2275985
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 08:40:53 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=OA7ufRK8NeF
-	pheonCHj36Io4/bhZQD6wPfpD77Fh0JA=; b=K710jn2mHfI3xU++zIhYU8hPAa0
-	clM+mePOMySUcM+CBxot2m3BEg5Bb4JsSU23UBapUVn7OFOBdVNg2KJpgyZTVilK
-	VceYmrK16vlBEENvBL9ToWFJ9+GWV1gjsuT1QvFM09OnvrKiS/twhNCAr1yZ2NNx
-	71gW2Uytk3ioODadp4no2EI/XavLFirxJCldF5GQoxpCABJHs2YFW98yCCExCUlW
-	3wYaVgW0dfj/dK8e77iZYCGRzhWxDP6kAxmfJSYOdnsYvdShoeJoXUons4aSFFLi
-	DacG1PikxT4p6XN7maRkpn5KFGUEzBYpOgCHjX0d7kY7RwkLZJ48XGOrE3w==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fpbrsu905-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 08:40:52 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2ccd1958e8fso50684885ad.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 01:40:52 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="qYnW18jU"
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-49558ce01afso26894615e9.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 01:46:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785228052; x=1785832852; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=OA7ufRK8NeFpheonCHj36Io4/bhZQD6wPfpD77Fh0JA=;
-        b=Jfe8zaOuh+6yO/IFdkzvJWp6XFiYF77xoShc2nRwptc52GACSNFj5BEyCKiVvsdhoB
-         x7CaNecZcGwYaGbzLrChtrxE2RdAZXvFrpFxtwM+MHVwDU2Va9UE5h2HUtZEl3csrutu
-         9uO/bme0PuL2aNI/JArKPxiJlVSpCpsyaZEvLLU2WYCzb9c2zHoVfco0cQQvxx9o/tm3
-         W8R+BgCod6/ChVH3k6QJ+oNkeDt909kzGSkNvhXeu/TpLXXLzr89Aw81b1YYgLWaDxk7
-         1fDcbPCoK0zM/gRWt5Pit1KFOJVJR8HrxuoZ9gGmwGRiEnbPvn4dOzw1k6GL/dhH771h
-         XFww==
+        d=linaro.org; s=google; t=1785228411; x=1785833211; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=WbYgWOqEqy1rmlqrA90GT53N9i1YD4wuNMRoa3lJxZw=;
+        b=qYnW18jU0cTFxPJEaSLx1ns0iwCDgzVMMwVFywOKO2XRnURmhHdQKWIQJnyUau4EJ5
+         jBeeR9vaG2CHxJJ8BR0yVrr884QZjXpG1lluteSxXay4rpA8ZaGrebxTx/VvF85RejQU
+         4QwF+5zbX2xEC7NBiBnjMODO8m9E3gSM93WPe/BOk3sdhFGtHM7hQ6fKIjgtghHLe+Vl
+         hDp2XbCGmvEtFRkKTU8b8q5/EALXiewc24IszOChsmX2m4NfnAmOO8rz8bzhq2Wu5V7o
+         F0POT7mKG0LtSOEqdZEgxh/4BSoKrb+U0tygaAlr5HYTx7Kp9I2CHMJ5/Pis/q+GizL7
+         qgNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785228052; x=1785832852;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=OA7ufRK8NeFpheonCHj36Io4/bhZQD6wPfpD77Fh0JA=;
-        b=JH3yPcs24J06eSWUflePJ9xsCErRHuHShH0x+mBv4oc3biP0yL9QQ1El09P8cBR5re
-         ZCs6Hf4qAsc99ij79WEHAxa3Jd/dklaCBQXZRrk9okJyyJDytDtIg5iXbKcAR3jicsR2
-         cUV7Rb2LugKUmN7pqGmm0EZLwVs1oImI8LqNIceK+nNunGrBc1Fo1aQ1tCwXrZXMXCmY
-         uS+M4iXhnGgwyWZRy2lAeOESQb2ndAxZwSIaL0tJyOZOn6f5TYMJakL+81xelY6q0k3e
-         MIsO8riPAlA5OolT+OzMFDHsboyUxoKs7uCMrWgtCjbF8vG0qnpQn6Di8d0MdCd9lOzw
-         rlEQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rqd7+8oArfqYPTiyDRAITSWTmJ/wq3NzzDuoXuuRJI1xMJsbIBcmnVWTkMdv7KURyYNSRLsVEV4R40fTquL@vger.kernel.org
-X-Gm-Message-State: AOJu0YxEk54dGCeJH4ATp5CQBPDB2TtvRsmJZQ0zR3qjPIRWKtbH/pk5
-	ELuqMs73cGxjTvaYaPyhTPOtb3lkSgrKCM002v7ZTKWeFS5XaCckh/PAJIGN3XQv6Yv1hxbqfGV
-	e0OVxsN59J0choogAir3apI7MPrtS7kEWiYh1ct/RgzcTudYgQHTqSrMCGLv2+qUQqnpE
-X-Gm-Gg: AR+sD1002nE5133352Pl1TV/2lmdQvyx4vN6mgDeiD9RJdwIhr4bLW0KnSDCGyYnQS4
-	jb4iK7RcYEvUObLfmiZhyQTl0ggkp+Z4A8CkmxyN3eDz9oCUmjUN6g7YI+cjPgUIjiKooTJqLYo
-	jSsuMiB/TJtjeDC/9mrRXOiW5eg+0+IkcxhkOKrIfCRzT8eDY3xkb3gqxDzB6xf1yYLHzw3+1rj
-	hFC67NYsYtgHlrnAz43olFC3blTCwk9CZhEu4nK8IZ/Zfa2kyLPMWhYs8t90WtOhkoCig9oF1+M
-	qmu5KcqTyl3XVEfeZVmtjDB3/vzuoo0SmGvMToZyHTXqfw3zeX3+nUebTBoommSrqrGvwd2fhzc
-	vCXGSAk5WNL/pN9LDB1ZPvy2KzHxWO573L3LRbTroXSgNH6he921Wom7hy8oh
-X-Received: by 2002:a17:90b:3b8c:b0:383:f52b:d616 with SMTP id 98e67ed59e1d1-38f6a471784mr1605441a91.10.1785228052005;
-        Tue, 28 Jul 2026 01:40:52 -0700 (PDT)
-X-Received: by 2002:a17:90b:3b8c:b0:383:f52b:d616 with SMTP id 98e67ed59e1d1-38f6a471784mr1605419a91.10.1785228051605;
-        Tue, 28 Jul 2026 01:40:51 -0700 (PDT)
-Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f642bfc66sm916277a91.10.2026.07.28.01.40.47
+        d=1e100.net; s=20251104; t=1785228411; x=1785833211;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=WbYgWOqEqy1rmlqrA90GT53N9i1YD4wuNMRoa3lJxZw=;
+        b=lZ+eQ0WaEAdSCVUBKuwQ1NY0m4QKqC5YulDhINj24RyLD+mzvwduPDfspHYktYhkVL
+         Ah1sAobeSMdM+4a5UqRkVhneVifT3nfZ6Jt9g7DLBV4ODgcjN8/kq5SmOKcNdWdXHiHH
+         /32TbuLJd/ziJIto6WFQJthBLCkIV3cO+dIlUjMHpUirOftBtPVzYI0f+EM2BB1TJdtR
+         blZRJwO1vUERNErA7KM4I3/VmGiqSRsRQNbEg6H2Mcm4Hp3jMjatOuiXttXgPlzhuze5
+         UDwXG2SsVJah51I51c3Aa0xBHNIPvSbxydVvXy67GcZnvlHwkaM+u1+u7/aERp/XxuAG
+         4WXA==
+X-Forwarded-Encrypted: i=1; AHgh+RrsUmmz7LvOUzikOwKw++d87/7En6LGLpfKoBU7qFH4s5K/SePmStC1rPgxqVmU/WnDjST2fbyo3ncCQNpK@vger.kernel.org
+X-Gm-Message-State: AOJu0YzCiA1ZRoQ+/X7RRvLzEejOjBTpY0Wh986yEQwx49XmtYDeTZHl
+	qF0LuiMlDu6L3HSd7cTgav0t/9s63e72Aw3CuKftdlAp8QZbKx4VECkb4Gr+5IPXXBs=
+X-Gm-Gg: AR+sD11dSrp0wc52kEKbcnuY5aNNoPOeJQE6KirFrELt3o0xTPuUyd2KM3K1BGMfWb7
+	8k+uVQVARLrnPimRzEn68p5Q555NzNpJKrmbkN0UaY+T0bP5SbMKtfVPW6y926Mq4KWnCanFHrC
+	1M4iGaXQc0JJtwdhNFzYhaZ+sKzSR+LwO6TJZJawA9kxP+kqkS7qakw9UYLlZBLrmdZHztahzxS
+	Ma3PcpdwLjCq6L72bmdTsXXeKpxMPndZm1mz0UcfNbDiNK5E+0zDURk8E8FMWhxw4lHLmlUOHnE
+	979x46X+FZ3OrkqnJ7msRp58XjFc+OxmYrjUyHKBu5sZtkqKlekB3aaKIRc6ZpUDfaOEF0UbiHn
+	CaNFg9JA5yJTdcOFXNxwere0OguChDOJ6I8UjT7svlJFZmw5/pV46G9QH+gOBaTfzIdckcFQpIk
+	EgEM5158j7654h0zS+zLfIOBI=
+X-Received: by 2002:a05:600c:154b:b0:495:4859:8f9b with SMTP id 5b1f17b1804b1-496c6420e39mr15126845e9.9.1785228410812;
+        Tue, 28 Jul 2026 01:46:50 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-496c4632263sm64658175e9.15.2026.07.28.01.46.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Jul 2026 01:40:51 -0700 (PDT)
-From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Subject: [PATCH v4 3/3] remoteproc: qcom: pas: Add Nord ADSP and CDSP support
-Date: Tue, 28 Jul 2026 16:40:12 +0800
-Message-ID: <20260728084012.685036-4-shengchao.guo@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260728084012.685036-1-shengchao.guo@oss.qualcomm.com>
-References: <20260728084012.685036-1-shengchao.guo@oss.qualcomm.com>
+        Tue, 28 Jul 2026 01:46:50 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH v3 0/3] ASoC: qcom: audioreach: support WSA speakers only
+ on WSA2
+Date: Tue, 28 Jul 2026 10:46:42 +0200
+Message-Id: <20260728-topic-sm8650-ayaneo-pocket-s2-wsa2-fix-v3-0-b29f44720178@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDA3NCBTYWx0ZWRfX54D9lYGYXZNU
- TmL23m+fcwiCQAvkm45jvs0fpjVy6koPFJ/2wWViSQRGBAx13xPLTI9Kj4zxs9Rsio9tx3r2kqz
- 8fAduE8PN5kOXAb98aTSxJDupLKlCI3hJNBZ/dMtF1M2mhuNZCGouxRMIOvpNGp9fc87UujiW7j
- Ndjl99w96fJM0hprn2360Xe9it4ljmFIsuPu5VXQlsdc4ArH3n+NotHyxRyti/JzuPlMxePR/Pb
- vrUl29034XZCyuN36H+1Bu3igjwFPinMerY59PYoj9cx7zH3k12CVoLZUSNfdxXZ7JQeU576jFf
- uV4v6tyhXCoWfuhWgdoPtbxWr3t2njwX7wHPnrXez6wlT4rU3GQ8NAKTZHvkuOKhZhEjUPVLJLP
- hnEJSOeuN2CoDuxSJjGSe441FaXAhMqAEcmpafStssAFbhvLWy2rr4msasuxaz+1Ty9PnSlijVc
- 1rya1L6JQiXcQJsImvw==
-X-Proofpoint-ORIG-GUID: JXm4hrWpy2XfJu69y5Rwh1gkXonNE6zQ
-X-Proofpoint-GUID: JXm4hrWpy2XfJu69y5Rwh1gkXonNE6zQ
-X-Authority-Analysis: v=2.4 cv=ALkdLnG8 c=1 sm=1 tr=0 ts=6a686b14 cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
- a=wKDsrv0q4RgBVPAhY5MA:9 a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDA3NCBTYWx0ZWRfX+gDxuUbzDWLJ
- M5NS2U7Pj/o8mVKSfowDT0ampNb8UTPIY+t6gfwcORrHegcJ88MTvvr8xdz/tny1T9CfdIdLJjR
- 29if4VqDuozLr7/ZKWTJvnkUaHCHxm0=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-28_02,2026-07-27_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 impostorscore=0 phishscore=0 bulkscore=0 clxscore=1015
- priorityscore=1501 adultscore=0 suspectscore=0 malwarescore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607280074
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAHJsaGoC/42Qy07DMBBFf6XymkF+xE7cVf8DsbAnk9ZA4mC7g
+ arqv+M0SIhdl3d0dc7MXFmmFCiz/e7KEi0hhzjVoJ52DE9uOhKEvmYmuTTccAslzgEhj53RHNz
+ FTRRhjvhOBbKEr+wkDOEbyFuuTTsYdJpV2Jyoju+il9ct57N/IywrfW2cQi4xXe6bLGLt/UoFf
+ 1S6COAgOu+FRY1OysNHmFyKzzEd2Wpd5B+35fJhrly5NHRIvkNL+I97285J9Hmu7yvbjcy7TIB
+ xHEPZ70SDvcPWqA6VMi0q6wbJTaMN9XKQvWpJ24aLCrv9AMpURKmTAQAA
+X-Change-ID: 20260609-topic-sm8650-ayaneo-pocket-s2-wsa2-fix-eb90567f6ca5
+To: Srinivas Kandagatla <srini@kernel.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: kancy2333@outlook.com, linux-sound@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ devicetree@vger.kernel.org, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.15.1
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4204;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=sHs5xySGuDN2Xqec2Tl41jmiL1sPHuObMTPhDLc0Mrs=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBqaGx4H2g8Z9PDfxFXfsSyklGITDxAFBTuUTDNA/9e
+ Z5lrLO6JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCamhseAAKCRB33NvayMhJ0QgJD/
+ 4jmw7Cued79rXnGsKLFJ4p5uNPfOqMbOrn/lxIinMiOd07Xs6zRHTNzKvPsjWKgsYAJh19GCBiAiDq
+ UtJvwuSaBQ6KkOEHly6Rz1PDaGZ2tL1YPaed7IPwTPBD9KM2MQ+vOPl2PX3HCktwvRITXc6IQjVC0/
+ XuI52Ji5d+0nyc5uPmdopTNEZzmreMKCOAyMbkSzl96TaxfDRmoK3o2/PiGvvpvW5XH8ZiharMc8wf
+ dw+V8I9jOfuCNIrz/oOMEStN2MDbqGRfPvXfj1VioO1Fbwyx8Ip3kcdyf/CI+3ni4jH0jvU/f16BjI
+ oi0KHU6SrULwm6AogHBePdjB4yvC1o7zlyck4XEPlxtMpei7GFV8o2W6eIJzkhlEVaARUgeRxWe5If
+ NnGNHUPqjvxj8JMjNIwdW++NjwuEwm/nniy8r/86RbsnT/c3R4evF+kyHvpg648gdaECEZUkNTLXrP
+ P6fTK2d9BJsQJSdDBYTuRbOLSw4osEINx6u21nVgzrOPHlD0K0nYyjgQ9WcAb1UJmYp+OZVGQmblWg
+ 4voyzIpDJZ0NrnHJwtAw3vgfqzaWCQIX3lndknNo2nKTzy4Ln1HP6e2c7sh4+fo5/njPm8rXbGgbZS
+ b3mInOz8+VOY7bHNYHGOV5uPCd8ABxV/BHe5kKIY1y65zz5Skz75tv+U8Y8A==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-Add support for ADSP (HPASS DSP) and 4 CDSPs found on Nord SoC. The ADSP
-is pre-booted by XBL before Linux starts, so set early_boot flag for
-attach path rather than a cold boot sequence.
+The Qualcom SM8650 based Ayaneo Pocket S2 gaming device has a set
+of 2 WSA speakers connected on the WSA2 lines.
 
-Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+But the Audioreach DSP only handles WSA2 in pair with the WSA
+interface by using the upper bits of the active_channels_mask
+for WSA2 and the lower bits for WSA:
+
+ __________________________________________________
+| Bits  |     3    |     2    |   1     |     0   |
+---------------------------------------------------
+| Line  | WSA2 Ch2 | WSA2 Ch1 | WSA Ch2 | WSA Ch1 |
+---------------------------------------------------
+
+Setting only the WSA2 upper bits is perfectly valid and
+functional but the current Audioreach code builds the bitmask
+from the channels count with:
+	active_channels_mask = (1 << num_channels) - 1;
+
+In order to enable the WSA2 bits the channel count should be 4,
+but the lower WSA bits are then also enabled and the DSP errors
+out when trying to play on the disabled WSA interface.
+
+A solution would've been to add a fake WSA2 topology element which
+would be translated into the top bits only, but it's not clean and
+add some special exceptions in the generic Audioreach code.
+
+The solution suggested by Srinivas is to use the channel mapping to
+set this bitmask.
+
+This works but makes all the other calls using the channel mapping fail
+because the DSP requires the channel_mapping table to start from index 0
+and using num_channel length in order to apply the mapping on the
+active_channels_mask bits in order.
+
+So if you have an active_channels_mask like:
+ _______________________
+| Bits  | 3 | 2 | 1 | 0 |
+-------------------------
+| Mask  | 1 | 1 | 0 | 0 |
+------------------------
+
+And the channel mapping:
+ _________________________________
+| Channel |  3 |  2 |   1  |   0  |
+-----------------------------------
+| Mapping | FR | FL | NULL | NULL |
+-----------------------------------
+
+Will need to be converted to:
+ ____________________
+| Channel |  1 |  0 |
+---------------------
+| Mapping | FR | FL |
+---------------------
+
+And the DSP will map FR on WSA2 Ch2 and FL on WSA2 Ch1 as:
+ _________________________________
+| Line    |  WSA2 Ch2 | WSA2 Ch1 |
+----------------------------------
+| Mapping |     FR    |     FL   |
+----------------------------------
+
+So we need to skip the empty channel mapping entries in all other
+users of the channel_map to build valid channel_mapping tables.
+
+This should not break any other usecases since the default channel
+mapping always start from index 0, and will add flexibilty to allow
+some special non linear mapping for other interfaces as well.
+
+Finally we add a special prepare callback for the Ayaneo PS2 sound card
+which sets the custom channel mapping for the WSA interface to make audio
+work properly on the gaming device.
+
+Depends on (applied):
+- https://lore.kernel.org/all/20260608023011.942228-1-mohammad.rafi.shaik@oss.qualcomm.com/
+
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/remoteproc/qcom_q6v5_pas.c | 110 +++++++++++++++++++++++++++++
- 1 file changed, 110 insertions(+)
+Changes in v3:
+- Rebased on broonie/sound.git for-7.3 with the MI2S changes applied
+- Dropped DT change to be applied separately
+- Link to v2: https://patch.msgid.link/20260702-topic-sm8650-ayaneo-pocket-s2-wsa2-fix-v2-0-1ef8ceb8c9ec@linaro.org
 
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index 25599d728208..63a26c6ced8c 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -1434,6 +1434,111 @@ static const struct qcom_pas_data milos_cdsp_resource = {
- 	.smem_host_id = 5,
- };
- 
-+static const struct qcom_pas_data nord_adsp_resource = {
-+	.crash_reason_smem = 423,
-+	.firmware_name = "adsp.mdt",
-+	.dtb_firmware_name = "adsp_dtb.mbn",
-+	.pas_id = 1,
-+	.dtb_pas_id = 36,
-+	.minidump_id = 5,
-+	.auto_boot = true,
-+	.early_boot = true,
-+	.proxy_pd_names = (char*[]){
-+		"cx",
-+		"mx",
-+		NULL
-+	},
-+	.load_state = "adsp",
-+	.ssr_name = "lpass",
-+	.sysmon_name = "adsp",
-+	.ssctl_id = 0x14,
-+	.smem_host_id = 2,
-+};
-+
-+static const struct qcom_pas_data nord_cdsp0_resource = {
-+	.crash_reason_smem = 601,
-+	.firmware_name = "cdsp.mdt",
-+	.dtb_firmware_name = "cdsp_dtb.mbn",
-+	.pas_id = 18,
-+	.dtb_pas_id = 37,
-+	.minidump_id = 7,
-+	.auto_boot = true,
-+	.proxy_pd_names = (char*[]){
-+		"cx",
-+		"mx",
-+		"nsp",
-+		NULL
-+	},
-+	.load_state = "cdsp",
-+	.ssr_name = "cdsp0",
-+	.sysmon_name = "cdsp0",
-+	.ssctl_id = 0x17,
-+	.smem_host_id = 5,
-+};
-+
-+static const struct qcom_pas_data nord_cdsp1_resource = {
-+	.crash_reason_smem = 633,
-+	.firmware_name = "cdsp1.mdt",
-+	.dtb_firmware_name = "cdsp1_dtb.mbn",
-+	.pas_id = 30,
-+	.dtb_pas_id = 59,
-+	.minidump_id = 20,
-+	.auto_boot = true,
-+	.proxy_pd_names = (char*[]){
-+		"cx",
-+		"mx",
-+		"nsp",
-+		NULL
-+	},
-+	.load_state = "cdsp1",
-+	.ssr_name = "cdsp1",
-+	.sysmon_name = "cdsp1",
-+	.ssctl_id = 0x20,
-+	.smem_host_id = 69,
-+};
-+
-+static const struct qcom_pas_data nord_cdsp2_resource = {
-+	.crash_reason_smem = 665,
-+	.firmware_name = "cdsp2.mdt",
-+	.dtb_firmware_name = "cdsp2_dtb.mbn",
-+	.pas_id = 57,
-+	.dtb_pas_id = 60,
-+	.minidump_id = 29,
-+	.auto_boot = true,
-+	.proxy_pd_names = (char*[]){
-+		"cx",
-+		"mx",
-+		"nsp",
-+		NULL
-+	},
-+	.load_state = "cdsp2",
-+	.ssr_name = "cdsp2",
-+	.sysmon_name = "cdsp2",
-+	.ssctl_id = 0x1f,
-+	.smem_host_id = 133,
-+};
-+
-+static const struct qcom_pas_data nord_cdsp3_resource = {
-+	.crash_reason_smem = 666,
-+	.firmware_name = "cdsp3.mdt",
-+	.dtb_firmware_name = "cdsp3_dtb.mbn",
-+	.pas_id = 58,
-+	.dtb_pas_id = 61,
-+	.minidump_id = 30,
-+	.auto_boot = true,
-+	.proxy_pd_names = (char*[]){
-+		"cx",
-+		"mx",
-+		"nsp",
-+		NULL
-+	},
-+	.load_state = "cdsp3",
-+	.ssr_name = "cdsp3",
-+	.sysmon_name = "cdsp3",
-+	.ssctl_id = 0x1a,
-+	.smem_host_id = 197,
-+};
-+
- static const struct qcom_pas_data sm8450_mpss_resource = {
- 	.crash_reason_smem = 421,
- 	.firmware_name = "modem.mdt",
-@@ -1702,6 +1807,11 @@ static const struct of_device_id qcom_pas_of_match[] = {
- 	{ .compatible = "qcom,msm8996-slpi-pil", .data = &msm8996_slpi_resource_init },
- 	{ .compatible = "qcom,msm8998-adsp-pas", .data = &msm8996_adsp_resource },
- 	{ .compatible = "qcom,msm8998-slpi-pas", .data = &msm8996_slpi_resource_init },
-+	{ .compatible = "qcom,nord-adsp-pas", .data = &nord_adsp_resource },
-+	{ .compatible = "qcom,nord-cdsp0-pas", .data = &nord_cdsp0_resource },
-+	{ .compatible = "qcom,nord-cdsp1-pas", .data = &nord_cdsp1_resource },
-+	{ .compatible = "qcom,nord-cdsp2-pas", .data = &nord_cdsp2_resource },
-+	{ .compatible = "qcom,nord-cdsp3-pas", .data = &nord_cdsp3_resource },
- 	{ .compatible = "qcom,qcs404-adsp-pas", .data = &adsp_resource_init },
- 	{ .compatible = "qcom,qcs404-cdsp-pas", .data = &cdsp_resource_init },
- 	{ .compatible = "qcom,qcs404-wcss-pas", .data = &wcss_resource_init },
--- 
-2.43.0
+Changes in v2:
+- Collected review tags
+- Reordered bindings patch before card and DT changes
+- Fixed DT patch commit message
+- Link to v1: https://patch.msgid.link/20260610-topic-sm8650-ayaneo-pocket-s2-wsa2-fix-v1-0-18bb19c5ca22@linaro.org
+
+---
+Neil Armstrong (3):
+      ASoC: qcom: audioreach: compute active channel maps from channel_map
+      ASoC: dt-bindings: qcom,sm8250: Add Ayaneo Pocket S2 sound card
+      ASoC: qcom: sc8280xp: add Ayaneo Pocket S2 card with special WSA channel mapping
+
+ .../devicetree/bindings/sound/qcom,sm8250.yaml     |  1 +
+ sound/soc/qcom/qdsp6/audioreach.c                  | 47 ++++++++++++++----
+ sound/soc/qcom/sc8280xp.c                          | 57 ++++++++++++++++++++++
+ 3 files changed, 95 insertions(+), 10 deletions(-)
+---
+base-commit: 14cdac7638c3367c39af206456ed2f2d37e59401
+change-id: 20260609-topic-sm8650-ayaneo-pocket-s2-wsa2-fix-eb90567f6ca5
+
+Best regards,
+--  
+Neil Armstrong <neil.armstrong@linaro.org>
 
