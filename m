@@ -1,168 +1,153 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F2E9423E88
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 10:48:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3623E3AFCEF
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 10:51:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785235725; cv=none; b=gR+SLVjjpYAIVur3fyEarVTAneCRqtstBSpX7U8+Y4nQDsWGen+wWs0LxsAM8F1qQCE4qY333jGtgU8uVd5InPG/Nb8Ziu9Ibsw4nTDe64f74Bp1MsVLAr/SGgoFY3hutDSQ3eYoyP3va9NUrf0sm8/eHgxjMT+4BxYoOZYvK7I=
+	t=1785235900; cv=none; b=CZX+PtNJwWYukgL16I9MZAUA+W0CN/HFSndw5ivTfLSfdaM99U9i0iOP1FtmGy+qD4KzwKPUhbFBs+DZBNXv1ZzxAn5savCayD9QM+A0KZ9G49jkJ2N76Rou3j0lR0nNByEJHjt76qvc7v/La8vYcKtx3aGy1+5LsHMSORT5DZ4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785235725; c=relaxed/simple;
-	bh=+2VXiGMIOCH2pmyuRHa2hoo5DBgV4E80jSEKqltfTVU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=a8GCAJaE/F4gIn7R0BL1rUbYhJF4Tl3Jw5thsM60R1nIOsLe/vFJJ4sla/mBadyjf1lcjb4cOCJt5vlwQFTS3Mkb6ImbVSuq6FnzX1bvsIIphVHEkYEl5ZdXJZWojtQh7pa58S/pUuzLWA5EqN5ZwutGRyTclgL3ASlktuIVzQo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Rb3RRpvN; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=GGcYkXDA; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785235900; c=relaxed/simple;
+	bh=uFRNW+3w9EnOK3PrrtaSrrFmRFgj9UhlYBeXgQfDtfU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=VkQ3f5z7eJrESfhTIl8zZCrr0tFetmCcFDZsgQLEZ2BUIH8NbPNoi8TWcKtFnu+3587lq33y+JnLFkmXJHQzrVrnGPef9PrKL5CndnaVRJZa28VNMerg8waifVzCpJKzSB7Z9SEWT2s4z/na//HitCQgGpx26/BcXB9+qUShSeY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=XT0+OBqP; arc=none smtp.client-ip=209.85.208.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Rb3RRpvN";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GGcYkXDA"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66SAgi7T2289004
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 10:48:43 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=mYrJRtpE/M58oknn6w6g6s4C
-	5iZ5GXjvqTFr0fKnh8g=; b=Rb3RRpvNDCVmZgKAWDSILLWRAEltX43yQo8Ftzdh
-	F4DPobVjgY/XhDNK9SmMEpx2id0sctqiUSNakZV8T0ptJO5SrHGhg4LJn5mJLxM0
-	GvhQVSo6EOoIiHzB0cV9zf7M098wGYb2w/l6b6ZAMWT2zsgyxyYmUi+NtZOQ9T9E
-	tSADJ9gP0qALRepBxvRL5unRcZcv7aVSZvtwHdp1j/E8J3GWWqONVqgUBsmyuAZN
-	92ftSV6Uvl7WwSoXx5nibWv0/H/32z38G+tQjCwwA7H400BAA21UZ8Qr8w0ToNxr
-	WyheF9UfznuzcRxnrsFFhEzTzJ2xIcawzreNt11gf/dH5w==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fpbp8bwnv-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 10:48:42 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-5276aa86d00so45073731cf.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 03:48:42 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="XT0+OBqP"
+Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-69e8ea2783aso5063039a12.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 03:51:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785235722; x=1785840522; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=mYrJRtpE/M58oknn6w6g6s4C5iZ5GXjvqTFr0fKnh8g=;
-        b=GGcYkXDAjR2TFp0HV8t82BmaikYoh8w3kKbixL2HpVoyuLx9jp20hEmhj0v6AnbOa9
-         /PRLGKJNUIbfWLyiqClwo/DfUiyxvl0zb6jsuB9yH5UwfOv4rlda/WThSgVlUl7XUeDs
-         FUxDrO+hFrIh1BR1xZs7ACPUdC+esulpXNQYjNpbsq3FLnZa/pb02TnYCfWshzblBIoD
-         xPCtn5urtO14T+K6wXbDuQgW2SvKXGNsAAuRRrESA0c9Zzbwkjhht2/SbivISFKcH8+/
-         d0i2BaCMlVT/b3VwJRM53Uw/ZzKhLXiSBIxNmdf/0uCVPpFkHtkkaOM4Lcnd9fUCTFn2
-         Ubxg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785235722; x=1785840522;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=linaro.org; s=google; t=1785235895; x=1785840695; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=mYrJRtpE/M58oknn6w6g6s4C5iZ5GXjvqTFr0fKnh8g=;
-        b=HNUANnWVT7QHNvUCMYqdovAhAi59lxIBmRkiHuDPp4sfSdL03K5v4gxu5W+Vnt23fx
-         ReiKi918XIuCyv9KoBVTP3Um/qyuyiCfspAc/1oaw+m/3vEj83ZJNd/82ErGfr3SZF3k
-         of6X7LC/jExQzDD0oP84Fkhr9QqQy3sYO/6qe0rqNJXI3sU1Eqv96KEv/DExkrztJGAD
-         xwHlWhypF7xWpDnX9NYvNwmqLZMWE8/IGS0gZ98fjcTQ34RpP8d8HfIRLc+i5Kf9G1yq
-         X3d/i9JQti8MrTRtTkooqFa4WmCKUGm9e429T1i59A6XtJh3J+NUsMgdzzVOq40n/0Sn
-         xAxg==
-X-Forwarded-Encrypted: i=1; AHgh+RqNSjuJL9Vv86a0i5Pj5xtebIkJQ35D0QwH+6R9Bk0ZKJooZuCJW1E60aPCI7ZPFEjHMs8VSZfxliL7BxdI@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz6hPZrEsjictXvePSDx21tBrEvXwtLbSQWobEksOop5qYmBL9U
-	SpJXzSmsxn79NUdtgrRtITIjsWJQTv9+H34mnSQlevYh/ke01XNDpPDhDvmWhH1lrMokPp9ihpi
-	hNFGDI/cuN+yVrSdmHrhiHvGFTgufHEmsiNq/MAVibhf3buFX3Hzj6sWw/y7oQgUVs9Ys
-X-Gm-Gg: AR+sD13ILgRQiMzMOOLyDTJ0luQIXkoc9A+wgrN1QomUTab5VIKF52+Aiq1mnyAJbLk
-	7xXWHed9xVtvoDeWteqlDwuf8enb0xpTtAoi0vLXezLep21zp0iqDdrSvkJPdc7j81obz84FrUA
-	rC+3uwJ268VC8aN/hjsg23CZQSdG43qHfrwDpWrOmcW2cLbKwWw8keuVb3YM9NCEQ6V4bhaeYhN
-	9jULSdVGJuFfMYHL2YEyoI6l9jABk465uuANVkIaZHxmDV0Af7Rd96TRQQh0fdwsMwrG18QX4fv
-	YVG5Xqrj1/RWnFoi0EWTmZA6/s7VgSrFECt1wQ2EN1C4kTlFqhVh168p2ErQCr9IAecyusahXT8
-	SDql3MF+69kvl6I2B2WIDCzYFaEEQZmfcLduw0x+xC4wW3pxxDW/zNahuWQl/mFEE+BvhBN9Ymz
-	OJro2X6gXPU0vAqQ==
-X-Received: by 2002:a05:622a:412:b0:51a:8c9b:64a1 with SMTP id d75a77b69052e-529d7169f3amr14419891cf.69.1785235721470;
-        Tue, 28 Jul 2026 03:48:41 -0700 (PDT)
-X-Received: by 2002:a05:622a:412:b0:51a:8c9b:64a1 with SMTP id d75a77b69052e-529d7169f3amr14419721cf.69.1785235721070;
-        Tue, 28 Jul 2026 03:48:41 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2be1f9721sm1917162e87.76.2026.07.28.03.48.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Jul 2026 03:48:40 -0700 (PDT)
-Date: Tue, 28 Jul 2026 13:48:38 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
-        Todor Tomov <todor.too@gmail.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Vinod Koul <vkoul@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-media@vger.kernel.org, linux-phy@lists.infradead.org,
-        Krzysztof Kozlowski <krzk@kernel.org>
-Subject: Re: [PATCH v13 3/5] media: qcom: camss: Add support for PHY API
- devices
-Message-ID: <jy2gc6ojh3sh2araz67vdk4jo6wsmx4xamgl6hjfuqpdphxxjr@aykdzj6ewhm6>
-References: <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-0-ae811e2f0799@linaro.org>
- <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-3-ae811e2f0799@linaro.org>
+        bh=s0DjSdXiKBw0ZZEMZd8FTQi9iSoUjrgkZuIJH9PB0eg=;
+        b=XT0+OBqPLlgwsZrZdZioLsy8Z13LP1eySQdC8+FRBOfn2RbaTFDEkVw/Ge/n3+efSk
+         QIQ+O/CirVFyXuT9m5cqgDOqB1Qg+qdQE9h6vzpA55KP1qKM1Z6Ioa7bkIovCcLFKzUH
+         aF39TY6+RG5VGy6EaTgDnBZuLAPBH/I0gqnJwYivYfQXhgokfUy3s5AtUh++xP1H7/Uv
+         FWA+XcQMA1uKiAsHUj4sOXB44hUnk2INPOLQuXt63fWxZa7mFtdMdYn0y8ktrfE5ZAVH
+         jqIsPRUKRnbdmBKB8lay+ibWUoEnjJXW4RE4Z4Lq3oyGNrGc7ei9pPFtMKq4hOvx2raq
+         0VZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785235895; x=1785840695;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=s0DjSdXiKBw0ZZEMZd8FTQi9iSoUjrgkZuIJH9PB0eg=;
+        b=BEIn/5uzc6emT4ZapjFNQNuq+FgQVctr3MrnRRF4Jv/kE5cs5IU14sTJGnCW5lGBH0
+         tM4/NVHCUbLwGq9J6JDoccMUZbWemOYRTrUgU3ufGZ5PzWyqnF5/zW4oESlZnCYO0Dvw
+         h15FlMG/paNPsHthKbuzUgZGl2cXSmPO8B2K0HwkyGs0zm5qGYiUrvdX5LtBXjgai50Y
+         lRw+bjpdgTpc89Vyk+tGBizv/3aB7NqQ2phG8U1OCFuMeGrRPZ8QBpe519oRsf5tTQ1e
+         OAUEa529XnMZHNOks9ZAHC46o5zRpNkmgDV0v+1UOaYgzxUWEVW/+2N/Ay8osa5LorWG
+         bFRA==
+X-Forwarded-Encrypted: i=1; AHgh+Rq2w7OlddDvy7D+goO6aAQlO7EZpeLfitW59eenBNzDCwkd+9uKl7ULv5BIsUtChjAQlmPGFEu1axz+gaYb@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz5J8jfS43kVtfGzxMrgPa6DvN1AYwdSQOq8ZkYyyHcyLBpLosv
+	7V7nLS6c/QtMjMIQlnTGJneEQv2xO5NroCrEcEjQPq1wjC1gMh3btEfTD3KaJJTURWM=
+X-Gm-Gg: AR+sD10lWevEQiYGRvYea9PwhZWXoA9rG1TVQY1pO0U8BS2qFz56G0bsi9No2P9cs7h
+	1ThAXb5bA7+PMzziwpwzxai3DFeyRCKqxiD2gmevp6Atm7eQg636xONBtQa/pDOV7QzaAq4vrVY
+	PvrWdkTDqqV8WnQvoVx0e47cuJhQ9czjRSvhOOpFVHGhgQflBaBWDzLAL4TlDQRYecLxKRiTxaD
+	zberewdB/x79ltFlbln347NocJooa134AgCfD0gssvu45HfMvzhYMj+ZmCf5IceHirmDC7DK/es
+	1Dt8kD35zI0O9WLLDQvAGHJ5x5ofyR8A/RwJIga4tfR5XTvfo2WRpofcC0H3BGI/0IAUOdHk8tQ
+	LzjuxE6WKYVSCOfephMOvJFYt1d5cnZWN9EFwGNiriDqUjoAFk4C1u9WvgzTpxMImQstraG7485
+	xPV2dqH4GfOB0t
+X-Received: by 2002:a17:906:fe43:b0:c15:ce72:9352 with SMTP id a640c23a62f3a-c1f72147fe4mr100806566b.33.1785235894410;
+        Tue, 28 Jul 2026 03:51:34 -0700 (PDT)
+Received: from [192.168.0.35] ([109.77.204.94])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1c32ebc3c0sm744772166b.51.2026.07.28.03.51.32
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 28 Jul 2026 03:51:33 -0700 (PDT)
+Message-ID: <bdcb1c93-a560-42c2-9239-bc197b230a13@linaro.org>
+Date: Tue, 28 Jul 2026 11:51:31 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-3-ae811e2f0799@linaro.org>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDA5NCBTYWx0ZWRfX9/MmSzWlAe6e
- xi4xRvm3qUyiWnBajV7Ign3iyYQfFT/xg9H22kak7OCCxoH4Ut/y2r7BaTStIBOYLQw7zOeuy5t
- zPC5oZykadonXzwEEZmCPJR806Hj28o=
-X-Proofpoint-GUID: nXjjdSnQGqpfKv7fkSHxB56W0fsJ1XG8
-X-Proofpoint-ORIG-GUID: nXjjdSnQGqpfKv7fkSHxB56W0fsJ1XG8
-X-Authority-Analysis: v=2.4 cv=KLJqylFo c=1 sm=1 tr=0 ts=6a68890a cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=KKAkSRfTAAAA:8
- a=EUspDBNiAAAA:8 a=SmOWCKbkXSXCNfC1NdcA:9 a=CjuIK1q_8ugA:10
- a=uxP6HrT_eTzRwkO_Te1X:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDA5NCBTYWx0ZWRfX4lWkJufEGpAZ
- 84a9l9EkTpt2T4v0P2Nrdt/Skhdxhfz+UZ+85pl4gHcfqstJGYkmlwtjPFl+bOdNQs/O08wObmi
- X+QN0ei4X1uov4L5bXKUot4RDzE4acmgr/CYlaRXK7XX7JtZz5SEsu39EMabHSY1vRxMQdYdHWo
- GDwrmAafv2uRwuYTqt5fIAlFtiN6rtwMt48S6fNwzCuztVMx9v39lcD09zX01kD6GMfSoT48mAv
- 68VZhwlbELk95Ph9Lwy10NyrdZkIDksn2VdpfOnuV4L1kWOMHwpkkK/OV+creXBtb6qSS82iyvW
- k6MWUA9KYHkZjfGkKPGvpDYFNe1gD3VyFLOufPR4OKM52ZpvpBwtUlcZc+BOJ1Ez8l3YT92qJbo
- c5j3bRrOzJIOtScDLYNTX/0KjXUg0qcQ80QZs2IpOWbqDI0OcLQmbfQC+4z4C+S3xLElLpOsnsu
- aOfjOy8f57ADHUfu79w==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-28_02,2026-07-28_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 suspectscore=0 spamscore=0 impostorscore=0
- lowpriorityscore=0 malwarescore=0 adultscore=0 bulkscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607280094
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v13 2/5] phy: core: Add devm_phy_get_by_of_node()
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+ Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
+ <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
+ Todor Tomov <todor.too@gmail.com>, Mauro Carvalho Chehab
+ <mchehab@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Bryan O'Donoghue <bod@kernel.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, linux-arm-msm@vger.kernel.org,
+ linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+ linux-phy@lists.infradead.org, Krzysztof Kozlowski <krzk@kernel.org>
+References: <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-0-ae811e2f0799@linaro.org>
+ <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-2-ae811e2f0799@linaro.org>
+ <t2c7lvpp3xyoumd2gdzntkwb6xpdjvhzyp2hllukimzfzbwbvm@fkgwdtcqxof5>
+Content-Language: en-US
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+In-Reply-To: <t2c7lvpp3xyoumd2gdzntkwb6xpdjvhzyp2hllukimzfzbwbvm@fkgwdtcqxof5>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jul 28, 2026 at 10:35:34AM +0100, Bryan O'Donoghue wrote:
-> Add the ability to use a PHY pointer which interacts with the standard PHY
-> API.
-> 
-> In the first instance the code will try to use the new PHY interface. If no
-> PHYs are present in the DT then the legacy method will be attempted.
-> 
-> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-> ---
->  drivers/media/platform/qcom/camss/Kconfig        |   1 +
->  drivers/media/platform/qcom/camss/camss-csiphy.c | 177 +++++++++++++++++++++--
->  drivers/media/platform/qcom/camss/camss-csiphy.h |  11 +-
->  drivers/media/platform/qcom/camss/camss.c        | 104 +++++++++++--
->  drivers/media/platform/qcom/camss/camss.h        |   1 +
->  5 files changed, 263 insertions(+), 31 deletions(-)
-> 
+On 28/07/2026 11:46, Dmitry Baryshkov wrote:
+> On Tue, Jul 28, 2026 at 10:35:33AM +0100, Bryan O'Donoghue wrote:
+>> Add a devm variant of phy_get_by_of_node() to allow for the familiar
+>> pattern of having devres automatically release resources on the driver's
+>> exit path.
+>>
+>> Signed-off-by: Bryan O'Donoghue<bryan.odonoghue@linaro.org>
+>> ---
+>>   drivers/phy/phy-core.c  | 34 ++++++++++++++++++++++++++++++++++
+>>   include/linux/phy/phy.h |  7 +++++++
+>>   2 files changed, 41 insertions(+)
+>>
+>> diff --git a/drivers/phy/phy-core.c b/drivers/phy/phy-core.c
+>> index ebfad5325072e..7af24f2f4120f 100644
+>> --- a/drivers/phy/phy-core.c
+>> +++ b/drivers/phy/phy-core.c
+>> @@ -1029,6 +1029,40 @@ struct phy *phy_get_by_of_node(struct device_node *np)
+>>   }
+>>   EXPORT_SYMBOL_GPL(phy_get_by_of_node);
+>>   
+>> +/**
+>> + * devm_phy_get_by_of_node() - devm managed lookup and obtain phy reference by device node
+>> + * @dev: device requesting the PHY
+>> + * @np: device_node of the PHY provider
+>> + *
+>> + * Returns phy associated with the device_node or ERR_PTR. devres manages
+>> + * releasing resources.
+>> + */
+>> +struct phy *devm_phy_get_by_of_node(struct device *dev, struct device_node *np)
+>> +{
+>> +	struct phy **ptr, *phy;
+>> +	struct device_link *link;
+>> +
+>> +	ptr = devres_alloc(devm_phy_release, sizeof(*ptr), GFP_KERNEL);
+>> +	if (!ptr)
+>> +		return ERR_PTR(-ENOMEM);
+>> +
+>> +	phy = phy_get_by_of_node(np);
+>> +	if (IS_ERR(phy)) {
+>> +		devres_free(ptr);
+>> +		return phy;
+>> +	}
+>> +
+>> +	*ptr = phy;
+>> +	devres_add(dev, ptr);
+>> +	link = device_link_add(dev, &phy->dev, DL_FLAG_STATELESS);
+> Why are you adding devlink here?
 
-This is nice
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Looking at 987351e1ea77 ("phy: core: Add consumer device link support") 
+- adds this link to 
+phy_get()/devm_of_phy_get()/devm_of_phy_get_by_index() to enforce 
+suspend/resume ordering between PHY consumer and provider.
 
-.
+So the get_by_of_node() replicates that logic.
 
--- 
-With best wishes
-Dmitry
+---
+bod
