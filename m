@@ -1,131 +1,91 @@
-Received: from out-177.mta0.migadu.com (out-177.mta0.migadu.com [91.218.175.177])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBBE53B0ACE
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 17:54:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.177
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1A9F3BE16E;
+	Tue, 28 Jul 2026 18:07:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785261244; cv=none; b=Sd2DIUlfvUjA03psRiH9KMfK9aUl2oiIV3fjzraaOTJuYbW9SjJ0K3685klOtmu8ODGWVTr80i35NsIfDc2hBLIWQxd5vRVX/euPRGpEMN18QPDFVrt/ihC69GFa1mceYMx3P9wmROGl61kHS5GuRZwbuu15tTnwaqNutJmjqF8=
+	t=1785262044; cv=none; b=l2bzTXOIYoDJRutYs+tGfiCwbw75Pp+IveIiV7xMKtIsgeTYvlEGjqGG785iZtYgu3WieEenSOgfP2kK6THvveN6JieP1uTSqUuQ5o1jhzHz1wObk4fZ6t+bvgEafUj8HTyl71AbTLK+uc8XedJo+eAeV9BT4E9e5TRJpaK5TzI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785261244; c=relaxed/simple;
-	bh=iSOwtiLLBLiWxGPJADdMlgslBm5K7SwbX2FbXZ2yxTU=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=fl0PNFFrpraaXGAbfenIp7vVGgJe1KxTGd7o+WipkWBQ+vSkrn4lt+H8v+aN2USYAaOSmExS0URrSfTSaN8gf97rpmgRMS30pePZG85qPDEgTyGaxnu/721ZfhJEoAEZSUwk8yEwIkzsS/TRRqO/WhAlJUxqFCI21+FEmPtrF3g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=f9MjRsfl; arc=none smtp.client-ip=91.218.175.177
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+	s=arc-20240116; t=1785262044; c=relaxed/simple;
+	bh=W0iB4+AT1cPCKQg6Rp/xWTfVfmE+6q4ImU4tigbv/uQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ftMt4SEG/i0g6JA+gNmJl7oFx6lKkflmzzxwfnwgpaX9DbnqQ96Hyj6KuShxoijnUkV9MCwU532GNDsKPvhafz0P0i96FsgaKTa4nwP69kwF+ymBYiXeOLw/DimwmW9ia9AReGpHZyBx5kOSnyh9bJS9t8oPbFX6WEmPn16RGHM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AeB992mk; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="f9MjRsfl"
-Message-ID: <d3105aac-7018-4b4d-8ed9-1e821179ce42@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1785261230;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=DnvFG7bfATbXiCziQpDxDLo4VX7GwG39x66H5lok2aE=;
-	b=f9MjRsflN54Qp3PlQQ0mJ7tyWsE+83uFS12s7kc+nae/VISQTw2yPCa2mB1dZR1GWa0c81
-	IlkglCajaNwdcwpkUZ9Z1axAI9pSEnZ7+6rMt83ttCnw0jK06TaUt/ot5ZqKzPF0JmDsbw
-	bMLUBTGnCfSbl9NrmXLKBU9Zc0TnUlQ=
-Date: Tue, 28 Jul 2026 19:53:38 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AeB992mk"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D33D31F000E9;
+	Tue, 28 Jul 2026 18:07:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785262043;
+	bh=W0iB4+AT1cPCKQg6Rp/xWTfVfmE+6q4ImU4tigbv/uQ=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=AeB992mktcBaBtCfEPdb3yObg95xcLx+i4xHjC0hZHWMYAnqEgKRDToZF5mxrIpTd
+	 KhnhU+vISSsWF951twN+uJ/EuL4jCh4KfDnL3/Ji9Rkcf8kRNbmImM60AbfhgfL5cv
+	 BPsawIHVgqp8ZFM4+DZNZ0BulwzPR7qUtbAvOinu774a0abwMa86B1mwkSw9OJGrI2
+	 Oc96OChCAyYQ6Cdob9n8GeokNFuMWK9P7x+q2zhBk5Qml8JYWYnfnuWyJLYiZv3D1N
+	 SE97zNMpIWLeL6MnXnUBzfWDoQleEOylVroZaW/kH3pxovAhavM/i4lhKmkuqCDIfh
+	 P771GmeXlr58g==
+Date: Tue, 28 Jul 2026 19:07:18 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Praveen Talari <praveen.talari@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org, linux-spi@vger.kernel.org,
+	Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v3 2/2] spi: qcom-geni: add GENI SE registers trace event
+ on error paths
+Message-ID: <97815304-6952-4db4-8bb3-111e04b9e0b5@sirena.org.uk>
+References: <20260715-add-tracepoints-for-se-reg-dump-v3-0-0f787f93badd@oss.qualcomm.com>
+ <20260715-add-tracepoints-for-se-reg-dump-v3-2-0f787f93badd@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 2/2] soundwire: honor clock_reg_supported in the clock
- scaling check
-To: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
- Vinod Koul <vkoul@kernel.org>, Bard Liao <yung-chuan.liao@linux.intel.com>,
- Srinivas Kandagatla <srini@kernel.org>
-Cc: Luca Weiss <luca.weiss@fairphone.com>, linux-sound@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260728173542.61146-1-jorijnvdgraaf@catcrafts.net>
- <20260728173542.61146-2-jorijnvdgraaf@catcrafts.net>
-Content-Language: en-US
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-From: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
-In-Reply-To: <20260728173542.61146-2-jorijnvdgraaf@catcrafts.net>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Migadu-Flow: FLOW_OUT
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="0/r9wjd+OZ4HyyO2"
+Content-Disposition: inline
+In-Reply-To: <20260715-add-tracepoints-for-se-reg-dump-v3-2-0f787f93badd@oss.qualcomm.com>
+X-Cookie: Stop me, before I kill again!
 
-On 7/28/26 19:35, Jorijn van der Graaf wrote:
-> sdw_slave_set_frequency() treats class_id and prop.clock_reg_supported
-> as equivalent evidence that a slave implements the bus-clock base and
-> scale registers, but the bank-switch reprogramming path checks class_id
-> alone, so a class-0 slave that declared the registers never gets the
-> next-bank scale written there. The registers are SoundWire 1.2, not
-> SDCA, so a device may well implement them without setting the class
-> field.
-> 
-> Extend the helper to honor clock_reg_supported, as discussed with
-> Pierre-Louis in the WCD9378 review. This also makes a link whose
-> peripherals all declare clock_reg_supported eligible for dynamic clock
-> scaling in the generic bandwidth allocation, which is what declaring
-> the registers means.
-> 
-> With the helper extended, sdw_slave_set_frequency()'s open-coded test
-> computes the same predicate; call the helper there instead, so future
-> quirks or updates land in one place.
-> 
-> Link: https://lore.kernel.org/all/5717102b-f7ab-42b2-8065-064d94dd2bee@linux.dev/
-> Link: https://lore.kernel.org/all/6991398d-4ae4-45ee-85d0-3b66462fec1d@linux.dev/
-> Assisted-by: Claude:claude-fable-5
-> Signed-off-by: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
 
-Reviewed-by: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
+--0/r9wjd+OZ4HyyO2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> ---
-> v2: also call the helper from sdw_slave_set_frequency() instead of
-> keeping the same test open-coded there, as Pierre-Louis suggested.
-> 
-> Both patches re-verified together at v2 on the Fairphone 6 (SM7635,
-> WCD9378): "Configured bus base 1, scale 2, mclk 19200000, curr_freq
-> 9600000" for both slaves at enumeration, no codec errors, capture
-> works. On the qcom bus the helper extension only adds next-bank scale
-> writes of the same value on bank switches (the clock is fixed).
-> 
-> One behavior change I cannot test: the helper also feeds
-> is_clock_scaling_supported() in the generic bandwidth allocation, so an
-> Intel link whose peripherals all pass the check - max98363 is the
-> in-tree clock_reg_supported case - becomes eligible for dynamic clock
-> scaling where it previously ran at a fixed clock. Only configurations
-> that fail the bandwidth check today can select a different frequency; I
-> could not test that combination, flagging it for the Intel side.
+On Wed, Jul 15, 2026 at 10:50:48AM +0530, Praveen Talari wrote:
+> The GENI SPI driver reports various transfer failures such as command
+> timeouts, DMA reset timeouts, DMA transaction errors, and unexpected
+> interrupt conditions. However, diagnosing the root cause of these
+> failures is difficult as the hardware state is not captured when the
+> error occurs.
 
-I don't see this as a major risk, the bandwidth needs are limited and
-the BPT/BRA protocol isn't used. Worst-case there will be a bug report
-on Chromebooks and we'll quirk this...
+This breaks at least an x86_64 allmodconfig build:
 
->  drivers/soundwire/bus.c | 7 +++++--
->  1 file changed, 5 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/soundwire/bus.c b/drivers/soundwire/bus.c
-> index 0490777fa406..0c1cdd603926 100644
-> --- a/drivers/soundwire/bus.c
-> +++ b/drivers/soundwire/bus.c
-> @@ -817,8 +817,11 @@ bool is_clock_scaling_supported_by_slave(struct sdw_slave *slave)
->  	/*
->  	 * Dynamic scaling is a defined by SDCA. However, some devices expose the class ID but
->  	 * can't support dynamic scaling. We might need a quirk to handle such devices.
-> +	 * The clock base and scale registers themselves are SoundWire 1.2, so a device
-> +	 * may implement them without setting the class field; the driver says so with
-> +	 * clock_reg_supported.
->  	 */
-> -	return slave->id.class_id;
-> +	return slave->id.class_id || slave->prop.clock_reg_supported;
->  }
->  EXPORT_SYMBOL(is_clock_scaling_supported_by_slave);
->  
-> @@ -1385,7 +1388,7 @@ static int sdw_slave_set_frequency(struct sdw_slave *slave)
->  	 * DisCo property to discover support for the scaling registers
->  	 * from platform firmware.
->  	 */
-> -	if (!slave->id.class_id && !slave->prop.clock_reg_supported)
-> +	if (!is_clock_scaling_supported_by_slave(slave))
->  		return 0;
->  
->  	scale_index = sdw_slave_get_scale_index(slave, &base);
+ERROR: modpost: "__tracepoint_geni_se_regs" [drivers/spi/spi-geni-qcom.ko] undefined!
+ERROR: modpost: "__SCT__tp_func_geni_se_regs" [drivers/spi/spi-geni-qcom.ko] undefined!
+ERROR: modpost: "__SCK__tp_func_geni_se_regs" [drivers/spi/spi-geni-qcom.ko] undefined!
 
+--0/r9wjd+OZ4HyyO2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmpo79UACgkQJNaLcl1U
+h9BSqAf+M/DbYeVQ4i/5qnKWuxushz2kAEpeZtoUYXJOlCfvA5eWPxn9NWR4OPOS
+yHKNeUaBP3aDbNJNXLRwxyMw648J+UjAmCLQhDBQ+evb1sLFeHAFyVzH2ai6FIW9
+QM3x2bmknBwuVop+EXbTSwAiblJAqDbosoSQhmOY50WN6rUtC3ZTauPWWtOecUE8
+V1bTzdRVCI/VkKSBhtFZcmXWJU/4PjYZQ4LgTQBhSIU8X7ybOt2N/aFhBv/A5RSn
+Ax/1InibDPqfWUjiK2WnsL8utwpOKdyhsHwIrv6qipp5KQlgurgyu/BJhctCUpvu
+JSe/aUF1CMWy7dpq0DVGNxfV3xaY0A==
+=sfnX
+-----END PGP SIGNATURE-----
+
+--0/r9wjd+OZ4HyyO2--
