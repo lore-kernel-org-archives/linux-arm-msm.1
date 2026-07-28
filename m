@@ -1,87 +1,33 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D593842FCC5
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 12:25:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACA563B47D6;
+	Tue, 28 Jul 2026 12:29:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785241559; cv=none; b=Kd9enDJmiEV/7lvzNC6DYHoS+Nae5Nw7uRjQeL/UrrZMkiQPgF6CMiWB0XJusFK8eKlN6Xsz5JtvnmRr0PFqnRvSlefUR26h6vU0X1WY1TyBgv52dq2ECnq1zUwKe7i0w2LsBEq6gHzDfo9SUblnvfbCEImBXtpSFkyvl//T7M0=
+	t=1785241757; cv=none; b=fc6xogJBvhRvYGfa4hNJkh+Iw6yCm6QXxQGcM9/D4ilokSdvh2P/5F2wmdPfzXiuLE1FnwqwhgAySHi3dE6VCK5qXL3Xex+dEtL85fJZNO49TDTft1jpPmm2VLXaa3yMw/gsOoEzSFUuBfkEgUyQ/f1AfP7SZLcWMMokJnwbS9k=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785241559; c=relaxed/simple;
-	bh=G/woI9Q47jogCzFfhduFoZMD5TPthjdX7zwCwHvy1Uk=;
+	s=arc-20240116; t=1785241757; c=relaxed/simple;
+	bh=wyG4GECzfSIB9jn/cnBZRJGNhr3BkoIzJAgycItNeL8=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=N3hlVspneCMCqglvzzE3OiyZBhC48bKbHgnmH71gF8lP2GpgIa3xlpldVUtaxU9J+xEKOVZDJLNYF2ihL2dljuBQvRlVvuzwowYUVit+shlShVuQBgtuc2QsQxizJPvFo15lB9EfLoF0lsDeeFoWgLfhok518XH76ib1+tAhNL0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=heap4DMy; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=WN2j9f/1; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=HOS2CSPnxlJfq24MWyRCFRkLBk7mO19FPivFWny1YAwmghCIa8v2GTXCBYuUZjSuld7aXg1f/xnc0AI5SSy3NbpPVbyu4/Cab0beGFSOUn4/ibnBNabGLn6BvEOOl6n2Os1zju9RYV6RduKemMhc6DyCfais0At0mAg2U2sqJQ0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AU7C3ZTB; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="heap4DMy";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="WN2j9f/1"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66SBHG0r2527770
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 12:25:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	kcRITBA7JDI6PKJS5pcYOCNKwYysxM9dz7iOzLdqem4=; b=heap4DMyr/5u/Aed
-	7lSnS7JeVni2kShBec9ucNmp54Nfd5TOIb7uUU2pS+QrHk9ZIz2by2RHRJ8/ItBU
-	u4/fyjLchirf6dAmAATBke7EAw80Ap0eG7OUKU5cCnbKOAn8GmVX+bSRaOvdaQX9
-	70YNpV9LeBZGeqvpTVZ3QT+V/2Lnvwl91U3Bb+DroXWB9IK0JGPyJJuwj0m+Aptu
-	Z/OU1SCmivHA6mx0ySmCfBWAFAse8g0Aj7H0hqFjIh0gL64KMSGMtVoebPpM7E4v
-	QbVo3xHe2Ry1WHBIsC9mZRh3jVvM6LnhZHQlu3UTIq2S2ufcQ/lb/UQriVPMBpql
-	5OYHEQ==
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fpqxjh62g-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 12:25:57 +0000 (GMT)
-Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-84a67b16217so1755157b3a.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 05:25:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785241556; x=1785846356; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=kcRITBA7JDI6PKJS5pcYOCNKwYysxM9dz7iOzLdqem4=;
-        b=WN2j9f/1b1ep4jxn1GAxMgdagYhlkjj2ZTNoM9pfho7HoTCnlP21g8eqrqLE1jyOhX
-         fqdo0ODaanDrR/aDau2wH00ufvUYOAOvtc97kjjyC1l0LWXmx2x6g5xTZaRyT9rFPUsU
-         U8YnrAng52GMyewwiQVZAM84pMzPda6tatj68zOE/nm+WcSTLarofbdumDCThtGOG0zh
-         9IGAMIYh6PEpACpoeMIbbEQrq3tRc29EDua+VYaZzB22bSh8aeTL+H657VrysC2I2xHl
-         1rGJtJUkPGSiTu8+ujdfhqhmc7YHOHLvXSzSqbZ6lNuXOxle040NHZG1B+4D/W8PsC0K
-         PudQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785241556; x=1785846356;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=kcRITBA7JDI6PKJS5pcYOCNKwYysxM9dz7iOzLdqem4=;
-        b=RuRt3yNoojeCFicobkAwTH/BNPSG71JP1McYWoMwmVxyZ/MMIC8H5aU8D+VuETwAnY
-         4+PqXUJiBl7QHEFGX1s95RzK6+VZV/joc/48RGGxxM0D7pS9WkfqUkjJGQtER8WPiAX7
-         Mffv4OgyDm8SDbgqds1UPVAuDGMjm9hzrKYGVIxyx5BKV7R0ItfK5QIHiZOVBb1nj+0p
-         6iYVmps7hEcAxaxp3xg56UmKSPm42zRvXT1HRLmenj+01pB9E7E/844rqnbwEyVgbjjR
-         pzVDOkFcR1j51ikLvAiRUj6WFmU4Y+zkrELDltaioRvZ3CcPHIIvAxVB9+XTMvnfKYX/
-         JPRA==
-X-Forwarded-Encrypted: i=1; AHgh+Rq9bR2BmiyHoMY9LsZZ1A+2gXGiqe2u3YaNHeX8jUxNCg/i8gxfhevHt019UDikbfWk+OZahIGU2dBn6f3n@vger.kernel.org
-X-Gm-Message-State: AOJu0YwAq1Mho5LvvxjDi0+tf0IjzvXgPjXocaWrgSKsS/o70f9SQIwH
-	FvAssSyXHy3NkepMueln1+8Xe37o3ymx29Ptv4be258d8cOkjSQulnOzqg7diTP2f0Ym0/Q5+pY
-	kpIUOmjoD+aJIVBfhnmF5zR2vibgAtkc2m9c70QYvWDDFk7AiHEUth9vPBrVm2P6i9YHy
-X-Gm-Gg: AR+sD13BJT7tm0Xy+eize4sojyq3X8Ypu7ciIzuLWfHhTID/DttWeuww1HfgqePmH5w
-	Jg0wwdAGOCelBg+YsSJjWKcm1VRr5qDk++lsBBZ4HD26PlLkk7CY9Kf89YXW+SLgBGEHj6EEDiX
-	DvDASkAcGvoRxxtLN3fI8VUPzSIj5z+kT171+O9becPWBJkuL4oQlpdLMzDcpRhzDDUTvWw+tYM
-	7qcJr4vhQ+PoNW3WJJG1PWIoCttXFxTTiEM9CmuHTljsLR1E5wiX8Ugdsglg4cVFmFRDgAFDsF2
-	xN1Gz6DBGwArWjStRXrZOEwPEJZuyr6hhN5OFjOfQeWzTg8Lu4Je836Zye3t0VLO9xaRKjhBd30
-	+zbk2m0CUZqRyixSuURxm5tYWBDlPm35S
-X-Received: by 2002:a05:6a00:4003:b0:848:7a8a:48c4 with SMTP id d2e1a72fcca58-84e932ec00dmr2212690b3a.40.1785241556406;
-        Tue, 28 Jul 2026 05:25:56 -0700 (PDT)
-X-Received: by 2002:a05:6a00:4003:b0:848:7a8a:48c4 with SMTP id d2e1a72fcca58-84e932ec00dmr2212652b3a.40.1785241555953;
-        Tue, 28 Jul 2026 05:25:55 -0700 (PDT)
-Received: from [10.217.217.72] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84e532807ddsm4362773b3a.21.2026.07.28.05.25.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 28 Jul 2026 05:25:55 -0700 (PDT)
-Message-ID: <147593cd-fc4e-41b9-83cf-2e42988c5e74@oss.qualcomm.com>
-Date: Tue, 28 Jul 2026 17:55:50 +0530
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AU7C3ZTB"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4A8601F000E9;
+	Tue, 28 Jul 2026 12:29:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785241756;
+	bh=BlUioloYSGbVufswcJ7MSaU+6w+Mef3HekvOtjpEtHA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=AU7C3ZTBM6yTkTimQbZm5n08WZyQfG98HcfFJdW5Ul6jklfTBePDEFmibnzpejLYF
+	 j9wBoJsmZWG6epj+rz6o7hM00zeCnK16Zh5k6P6+OVUmTmKbapLwFV4hH43obRdEfj
+	 B2UXtsXA24kK1I1KCC5O+1aCQQ+iskuu2T/elIU6SzNOv1Xjpyj3Jup3pk6YnzsUjr
+	 DZJXQDijrMxK6iy7xJFoq6QPz9Ixf9m9f4tM7ap893gNqY4FnaK+znleCD49a5WvYv
+	 bKGqMUvEb28FebUzctXWHWsKrkmxcNbosHMQDklD0qzmcI3jLmnprX6idE9A2hJ/KJ
+	 ofAL2mWmxz58Q==
+Message-ID: <1d648ff6-1936-4002-bd2a-f521e99bc71c@kernel.org>
+Date: Tue, 28 Jul 2026 14:29:08 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,107 +37,126 @@ MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH V3 2/4] dt-bindings: mmc: sdhci-msm: Document the Glymur
  compatible
-To: Krzysztof Kozlowski <krzk@kernel.org>
+To: Monish Chunara <monish.chunara@oss.qualcomm.com>
 Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Nitin Rawat <nitin.rawat@oss.qualcomm.com>,
-        Pradeep Pragallapati <pradeep.pragallapati@oss.qualcomm.com>,
-        Komal Bajaj <komal.bajaj@oss.qualcomm.com>,
-        Sachin Rathore <sachin.rathore@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Sachin <ssachin@qti.qualcomm.com>
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Nitin Rawat <nitin.rawat@oss.qualcomm.com>,
+ Pradeep Pragallapati <pradeep.pragallapati@oss.qualcomm.com>,
+ Komal Bajaj <komal.bajaj@oss.qualcomm.com>,
+ Sachin Rathore <sachin.rathore@oss.qualcomm.com>,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Sachin <ssachin@qti.qualcomm.com>
 References: <20260706141346.4180348-1-mchunara@oss.qualcomm.com>
  <20260706141346.4180348-3-mchunara@oss.qualcomm.com>
  <20260708-purring-infallible-bullmastiff-8f6dea@quoll>
  <afb0862a-04d0-4171-887b-7f32ee64163f@oss.qualcomm.com>
  <c714e746-8b58-42d8-8c37-160f8c5b5a59@kernel.org>
+ <147593cd-fc4e-41b9-83cf-2e42988c5e74@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
-From: Monish Chunara <monish.chunara@oss.qualcomm.com>
-In-Reply-To: <c714e746-8b58-42d8-8c37-160f8c5b5a59@kernel.org>
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <147593cd-fc4e-41b9-83cf-2e42988c5e74@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: D5T1bKKGsx068SxqDM2goLvptXpKC4--
-X-Authority-Analysis: v=2.4 cv=MORQXsZl c=1 sm=1 tr=0 ts=6a689fd5 cx=c_pps
- a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=XEvzoQxivL6IAxnHEBIA:9 a=QEXdDO2ut3YA:10
- a=OpyuDcXvxspvyRM73sMx:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI4MDEwOSBTYWx0ZWRfXzqil8xR3BTcA
- gp64sdNh5cNoLnGAPdeK59DQSLEDYb0mzUz7jLBjcG7TYlUfe2mc+zvHNjh5WGNfYawHy8esM1p
- 6r8c/EgjtgSFzA0Swq/kpD+Uld2g5Ww=
-X-Proofpoint-ORIG-GUID: D5T1bKKGsx068SxqDM2goLvptXpKC4--
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI4MDEwOSBTYWx0ZWRfXxfmYZI5R0SGN
- /OrFu803O3WmApY07wyE9OWkTFYsYQGccGh6qGH8vFGQQMv8S4Mr+L50PXwtazHWrSOypwIDakH
- zhxzWKQLMfjsftESeqamLiBIadEvPuliZh8MEfkGIZybSUHWRlZ9oiaO+HZTWMlkbph1dds2SBz
- iT4tJamCfqw/RTnXR2rPD770a9ER1O/NC7UfzguJCIeZH85YSGIjfC9j+FeT4uGcHqIjcVvJ9Sm
- Sq/vdREfGLCXixq69lX0PkmOU2GgXac6P/wDvMRqQAN0ZX1QTwmZJvU2yCpSRYXpO7rYiX6XcOS
- sIcVqFRkFY1qh/mP9NrpycfNyxZjIS7ukCUTlBcHZRQWneC4BThKtAGb5SdsobC/+6Ji7aaNgLC
- KTUhkyGWaPcxvp5lveJLopyawfjmTMXc+mUARS0hv7WBVLOx6ppxDAGaJ4G4z8I/iIKhJDES9f9
- MQqRXz8saz4cdWpKNUw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-28_03,2026-07-28_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 clxscore=1015 suspectscore=0 impostorscore=0 bulkscore=0
- malwarescore=0 priorityscore=1501 spamscore=0 phishscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607280109
 
-
-
-On 7/28/2026 5:52 PM, Krzysztof Kozlowski wrote:
-> On 21/07/2026 16:30, Monish Chunara wrote:
->>
->>
->> On 7/8/2026 12:18 PM, Krzysztof Kozlowski wrote:
->>> On Mon, Jul 06, 2026 at 07:43:44PM +0530, Monish Chunara wrote:
->>>> From: Monish Chunara <monish.chunara@oss.qualcomm.com>
+On 28/07/2026 14:25, Monish Chunara wrote:
+> 
+> 
+> On 7/28/2026 5:52 PM, Krzysztof Kozlowski wrote:
+>> On 21/07/2026 16:30, Monish Chunara wrote:
+>>>
+>>>
+>>> On 7/8/2026 12:18 PM, Krzysztof Kozlowski wrote:
+>>>> On Mon, Jul 06, 2026 at 07:43:44PM +0530, Monish Chunara wrote:
+>>>>> From: Monish Chunara <monish.chunara@oss.qualcomm.com>
+>>>>>
+>>>>> Glymur integrates the MSM SDHCI v5 controller. Document the SoC-specific
+>>>>> 'qcom,glymur-sdhci' compatible as required by binding convention to
+>>>>> identify the hardware and reserve the namespace for future SoC-specific
+>>>>> quirks, with 'qcom,sdhci-msm-v5' as the fallback.
 >>>>
->>>> Glymur integrates the MSM SDHCI v5 controller. Document the SoC-specific
->>>> 'qcom,glymur-sdhci' compatible as required by binding convention to
->>>> identify the hardware and reserve the namespace for future SoC-specific
->>>> quirks, with 'qcom,sdhci-msm-v5' as the fallback.
+>>>> Drop half of above sentence.
+>>>>
+>>>> "Document the SDHCI controller on Qualcomm Glymur soC, fully compatible
+>>>> with existing MSM SDHCI v5."
+>>>>
+>>>> You do not need to say anything about some conventions or reserving
+>>>> namespaces. We do not reserve namespaces...
+>>>>
+>>>> Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+>>>>
+>>>> Best regards,
+>>>> Krzysztof
+>>>>
 >>>
->>> Drop half of above sentence.
+>>> Sure, thanks. will update in v4. 
 >>>
->>> "Document the SDHCI controller on Qualcomm Glymur soC, fully compatible
->>> with existing MSM SDHCI v5."
->>>
->>> You do not need to say anything about some conventions or reserving
->>> namespaces. We do not reserve namespaces...
->>>
->>> Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
->>>
->>> Best regards,
->>> Krzysztof
+>>> Just for my understanding, though: how does the suggested wording capture the 
+>>> why behind the change? Per previous comments and understanding, the rationale 
+>>> for introducing the SoC-specific compatible is the reason we are making this 
+>>> change. For future submissions, this would help to avoid similar back-and-forth.
 >>>
 >>
->> Sure, thanks. will update in v4. 
+>> Why do you think you need to document the "why" if it is 100% obvious
+>> (and I did state it many times)?
 >>
->> Just for my understanding, though: how does the suggested wording capture the 
->> why behind the change? Per previous comments and understanding, the rationale 
->> for introducing the SoC-specific compatible is the reason we are making this 
->> change. For future submissions, this would help to avoid similar back-and-forth.
->>
+>> Best regards,
+>> Krzysztof
 > 
-> Why do you think you need to document the "why" if it is 100% obvious
-> (and I did state it many times)?
+> This was asked because it was suggested on first-post to add a why. 
 > 
-> Best regards,
-> Krzysztof
+> "Same questions as always... why? Don't explain what you did. Explain why
+> ou did that way."
+> 
+> https://lore.kernel.org/all/9bb28a60-2c01-449d-9456-bcf2d780b68c@kernel.org/
+> 
+> Pardon, if this was a misunderstanding.
 
-This was asked because it was suggested on first-post to add a why. 
+Yes, so you need to explain why you did that way. Not why you are
+sending this patch. We all know why you are sending this patch.
 
-"Same questions as always... why? Don't explain what you did. Explain why
-ou did that way."
-
-https://lore.kernel.org/all/9bb28a60-2c01-449d-9456-bcf2d780b68c@kernel.org/
-
-Pardon, if this was a misunderstanding.
-
-Regards,
-Monish
+Best regards,
+Krzysztof
