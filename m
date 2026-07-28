@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27B84431487;
-	Tue, 28 Jul 2026 12:20:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 407A642BC35;
+	Tue, 28 Jul 2026 12:22:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785241235; cv=none; b=JgmWVt6Oy9mp6zCauL0pJJGs6rZ4rpiRvjBNc3R1T8f0AhtqXCEAxNBIJUJ0DtNPFVJzbTDaJvcLz6Q505b73kM0P/JKKwUUSv18NQm7AKgeb74N5yWljzStmakZzPUoHxVWEc/OQpNpXFvFEWxw5xpyGlbuBCVPxKiAR33kMs8=
+	t=1785241343; cv=none; b=fb6x6ZHPHoYf68/AiNMtAABhDN2Udps0S7WsIo5t4/4/dslPkG0pNEp5x/gjdtgb3hxxsKITMcmUOxE6GZfM8BYpkzhPkw8c6SqzL3zfWYQtqrPOh9WcOh7rBVtb2//LII2kAGYoguioWkrd+i9ojWFV2vRTbcRXgAokN+AXypo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785241235; c=relaxed/simple;
-	bh=94X/t/wFPt6hAJN91J1eefxIIYl70X3CYrWKhYCePEY=;
+	s=arc-20240116; t=1785241343; c=relaxed/simple;
+	bh=B1PKlz59XZ5PS/KbSFuub8qaNxWpUel59+yPqHEeOko=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=CCbPcED5lrVUx8Ame3EPrX9uSKPsPcQZ4Q8XAMf6Nuf5qNAhzQR4gLA+OrEmvL8MMewOvQI53jVShcMR9bi2BWfV2JQ9pZhh1QlYjRJlU/tNHm4KfMv2lnDH2DMUDH+6JzeSwsZmNW9o9rNXtev6XGnEMaFMAksHjhPYBSXpPNs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PRNFkZxL; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=PRK7gFk0NXuYIZiwvrmNwQ9GxU4yhkdgYvPJWS2IDZYlzB2il3/wiz4Wu16O0OSKvYSXD/0doYl0koVT+FwHmzv3lkK0W18OX/kclq5ud3JcX+/u00D3nDSdG3ovqJ+ZRR9BzIRT19Xcn15aY7088uTKpqXrnbCRN1jmOLl06z4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=deiLwknW; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PRNFkZxL"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 102E11F00A3A;
-	Tue, 28 Jul 2026 12:20:27 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="deiLwknW"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2683F1F000E9;
+	Tue, 28 Jul 2026 12:22:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785241233;
-	bh=LnAa5DPtaq1tSMyAWzOHvdDVwyrIwlkh7/QWPPUV+9Q=;
+	s=k20260515; t=1785241341;
+	bh=rBy5g8NYcnJbw7Xgeeb96XTeGXA83PiVJTflhJ4BZfo=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=PRNFkZxLn8nOXQk4VvmCmnJBFECkP63/NyyZu2BcJHR66Qpeb7DQA9Lm9DOjlG3bQ
-	 B6xgT68C6D/qH8hq+v11hZ/ZqK+u9zWcumg6pPjBCsEDBr2CZy42sQmGWssBkpVXzr
-	 A4ODLe7EFIWiAN1jSngPXXago9L/Zcsn2Y9i3dvgzGr4fpzIahhQUPRbBvO/YATbv4
-	 mxnQfczuxk/O/esx3+8BKib3xCxEi+1tasIYTyjaQVLP6q+EHs4Ke7Y6F0hpx301v3
-	 aJTyMRIqjnVPTa7vo2j46JHGk71x1TJC6VxFdthWRrF2YI2W4fsSa2yiHakxi91S1w
-	 pKw1nBmVkpe2g==
-Message-ID: <e58778e3-86ae-483b-b52d-d3a0b0d5c59c@kernel.org>
-Date: Tue, 28 Jul 2026 14:20:23 +0200
+	b=deiLwknWBRyU1HtBPVUmhOvNSLR21oGECMpdrqfLi7KwcqzFNR1ptipP+AgBy29nr
+	 kARdcOEI4UNMvH9jTtGFax3qGXN4UUoKBXUWb9ZVQ1XJh2dMmwAOq/tPjQFVQlrUPz
+	 U/4Djn0jqK99rTgIQOUUrJfwNpK2HGELv0/7W/F8YpfaOZjuARCUp3/eWSABMdg204
+	 PYRvw1642VY5nHUucltDtFx/MhOT9ywwmmNN2H8QHrT6XaAFiD/ynNVludDR6LLcTb
+	 +vqOhhcqASIRJWlbgwEtbnReCDXb6APNozkMO04u/tZPzAj1qNdyoOj9N1bDXWJHRt
+	 YrCM4pzkg+aqQ==
+Message-ID: <c714e746-8b58-42d8-8c37-160f8c5b5a59@kernel.org>
+Date: Tue, 28 Jul 2026 14:22:12 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,24 +35,22 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH V4 2/4] dt-bindings: mmc: sdhci-msm: Document the Glymur
+Subject: Re: [PATCH V3 2/4] dt-bindings: mmc: sdhci-msm: Document the Glymur
  compatible
-To: Monish Chunara <monish.chunara@oss.qualcomm.com>,
- Rob Herring <robh@kernel.org>
+To: Monish Chunara <monish.chunara@oss.qualcomm.com>
 Cc: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
  Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Nitin Rawat <nitin.rawat@oss.qualcomm.com>,
+ <conor+dt@kernel.org>, Nitin Rawat <nitin.rawat@oss.qualcomm.com>,
  Pradeep Pragallapati <pradeep.pragallapati@oss.qualcomm.com>,
  Komal Bajaj <komal.bajaj@oss.qualcomm.com>,
  Sachin Rathore <sachin.rathore@oss.qualcomm.com>,
  linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20260722142342.990384-1-mchunara@oss.qualcomm.com>
- <20260722142342.990384-3-mchunara@oss.qualcomm.com>
- <20260723195417.GA2688724-robh@kernel.org>
- <c99f89c1-fcae-41df-8426-9bdb3e8e9b5e@oss.qualcomm.com>
+ linux-kernel@vger.kernel.org, Sachin <ssachin@qti.qualcomm.com>
+References: <20260706141346.4180348-1-mchunara@oss.qualcomm.com>
+ <20260706141346.4180348-3-mchunara@oss.qualcomm.com>
+ <20260708-purring-infallible-bullmastiff-8f6dea@quoll>
+ <afb0862a-04d0-4171-887b-7f32ee64163f@oss.qualcomm.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -98,40 +96,46 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <c99f89c1-fcae-41df-8426-9bdb3e8e9b5e@oss.qualcomm.com>
+In-Reply-To: <afb0862a-04d0-4171-887b-7f32ee64163f@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 28/07/2026 14:02, Monish Chunara wrote:
+On 21/07/2026 16:30, Monish Chunara wrote:
 > 
 > 
-> On 7/24/2026 1:24 AM, Rob Herring wrote:
->> On Wed, Jul 22, 2026 at 07:53:40PM +0530, Monish Chunara wrote:
+> On 7/8/2026 12:18 PM, Krzysztof Kozlowski wrote:
+>> On Mon, Jul 06, 2026 at 07:43:44PM +0530, Monish Chunara wrote:
 >>> From: Monish Chunara <monish.chunara@oss.qualcomm.com>
 >>>
->>> Document the SDHCI controller on Qualcomm Glymur SoC, fully compatible
->>> with existing MSM SDHCI v5.
->>>
->>> Signed-off-by: Monish Chunara <monish.chunara@oss.qualcomm.com>
+>>> Glymur integrates the MSM SDHCI v5 controller. Document the SoC-specific
+>>> 'qcom,glymur-sdhci' compatible as required by binding convention to
+>>> identify the hardware and reserve the namespace for future SoC-specific
+>>> quirks, with 'qcom,sdhci-msm-v5' as the fallback.
 >>
->> Missing krzk's ack.
+>> Drop half of above sentence.
 >>
->> Rob
+>> "Document the SDHCI controller on Qualcomm Glymur soC, fully compatible
+>> with existing MSM SDHCI v5."
+>>
+>> You do not need to say anything about some conventions or reserving
+>> namespaces. We do not reserve namespaces...
+>>
+>> Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+>>
+>> Best regards,
+>> Krzysztof
+>>
 > 
-> I wasn't sure whether to carry over the Acked-by tag since the commit 
-> message changed, so I left it out and queried on the previous series.
+> Sure, thanks. will update in v4. 
 > 
-> I'll make sure to retain it appropriately in future patches.
+> Just for my understanding, though: how does the suggested wording capture the 
+> why behind the change? Per previous comments and understanding, the rationale 
+> for introducing the SoC-specific compatible is the reason we are making this 
+> change. For future submissions, this would help to avoid similar back-and-forth.
+> 
 
-And where is it explained? Please quote me the cover letter explaining this.
-
-You did not read neither kernel docs nor internal guideline.
-
-And please explain me the logic behind your thinking - you received
-comment from the reviewer and tag, you implemented the comment of
-reviewer and this means that reviewer did not ack it?
-
-How does this logic exactly work?
+Why do you think you need to document the "why" if it is 100% obvious
+(and I did state it many times)?
 
 Best regards,
 Krzysztof
