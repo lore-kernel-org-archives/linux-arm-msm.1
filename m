@@ -1,140 +1,134 @@
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A7ED448B8E
-	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 14:28:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BE3844C667
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 14:30:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785248941; cv=none; b=Oi1gutXo6KA9N3UP6OQ0HlBiKjR2zDpsGs+yI6IyR57ldAOHUve/zKHAlt0hLRU+AcZi50z+BYwXF5L98YpsL75Brw26RoHNl2NmX9Hf+3cE1LnU2JfR+KbKVZ/ViTSdW4Uv2qwUDvzzSRaIp1AyWMuf9pUD6YrYTr1mgl/wf4Y=
+	t=1785249046; cv=none; b=noG8u+hnEqvpQ+ZH29UKrvN29HCQ5Uy2qQTQoXzWpZitFQdF2HCYG9GSLRvBJQ8F13KGQE8wNUqB/J8t6RdPYtQpwSCyZwjYX8eI0De2wU9ULwDilVB77g0kg/uImSg+TM2Ubw3cN9veZzaVaN4aSU1zWcmINR+PdTuVQZKs6+Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785248941; c=relaxed/simple;
-	bh=zyuhGX/3N+wI7ceGoP40unsL9AFFjmxrAgXkFycZex0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=QHqGx5XTWZqWy0H07e7DgOWHX8VK7Re08jSFdZG4cUN2GxKyHDiwyfYKzPVGSO598PN9/UqTjExmUV3GlpBvXTPRwLVV6muCo522b2IObdXl64157dh7tEcRVHHBa1mzWi+UKNG7VreeH+5qAIB20xfcP0F9uB6MEO7opYaaeCE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=iOKuUeMJ; arc=none smtp.client-ip=209.85.221.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1785249046; c=relaxed/simple;
+	bh=nMUD66vXKd3gKHm4PvwhUTfpMRJXNK9FiMak8utaw3U=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=nvzRY0v9gQlYKM+fJjeyXSfTUGOVsJLy14JS5xhWI2asJrf7MWzm0w0Wf/wa6ymDlrG7yuyLfzYtbdQShNjzKJ/24ufxUIFLU/McYZKUMjCYOPt5TYg4BoARae3hvV6BlmMPfWkP+RN/tjywV7NBAgKTq3uWhlGN6tHZqCpmV6g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Y3GMQA78; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="iOKuUeMJ"
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-47362928f65so3736860f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 07:28:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785248937; x=1785853737; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=gLqJ67GqELfYXKH0xBSIba5YqhAXnitzWC8wHwVpGsQ=;
-        b=iOKuUeMJh7D1y+V5MCHo2qIl4yWwVMFaX4pAGDNQNBBBQFlHBvIXRsXdu/YV96ItWt
-         BnUua7XMKFou4921d1PDhBEOirl0kIzpcZcTVUyAVn4fe0vhfOzLQ5ucixn3xZLO/97u
-         RfP8YISCAg/dCF0IEOJZt7kZuCjMk0pQIvMqC2y85uxQusrcsvFS4GCaCmuPchEKJe+L
-         JpKExZkurdlIYfL0pO0CZNhsk36ao9UvC2S7FiKONE8AnKmdyDO176sFLUQpWWRKEq0k
-         iEi8duwpHpQ2puNejYQ6/p2TipdSsfOk9lgWF7ekzDgjEoae9uY7W19usZ4M3xYN3lrV
-         PQGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785248937; x=1785853737;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=gLqJ67GqELfYXKH0xBSIba5YqhAXnitzWC8wHwVpGsQ=;
-        b=jnpA/b0zq3n6lzvjWuYz1KQHdaskHiHmFBVQJuHVz/tgolrl/qPKw8kGtZfPuhkqKf
-         fOHlRHnTDlF4BveqL+V9xvh1lDGcgI1Gdrh8WN1hYq+MdTJsmGQCdbjxjiQ8Q3rsuKtR
-         d22KtaGOTc9OTcA6jw73O3RLj4TXPel5MXmC9U2ok4KRny0jLuJHZvAU7QNUN7rUrraC
-         3FD6blSiHjJgSMFqDvQT3IXiZfLoHl3ZiV32rKdiP+SnVZjAcct+Lcr+btRnMaaLuM16
-         KtMPAfRo+NMWqAbXJb5rmo4mvuYsOnLnl3dJfQ6YxcVtawTmCXP4Z5hJX63Oi+fWtAWk
-         yZzQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rp9HK1ApdjXFqhXG/cYyUWE71U3nDAAuJjCJNGyq/BDtbi3JywlB1q5+/AlEzipGTHNj3hsp0YmOVC+kY49@vger.kernel.org
-X-Gm-Message-State: AOJu0YzdtE36B6dxxacJ0cS6UhLAxoeRXttaK07S1YOTGS8UmXBZ8mjz
-	t/V097ZAQPPITMoN7VyFQ8IOddVfjaOjbmoN+TcChaaE1tXYZirigeIa
-X-Gm-Gg: AR+sD10nJhRZggS7nEQXODydafsym6rYezCwzZyDe8kEZJzsehWQzImp96/Mo2yDzoL
-	Qnw/q3ikHM5adrNQL+BqmmuAeVxd5DWHRxWETKovyDRg9IqRcvLEbitkiVo52bBhw77FEcCliFV
-	J2H5VcVSCnPwKBA8wp/BNBmhzJuL39ycmtpSXtvWOta+RSSsEJG0SjEOkUBHIaNUagtlCJDsn8L
-	401Yq3BsMWLV3rSdmnimt6mZm0rwCjNiuXtuXBWE4SUdxWy7lRfJowDVoJsix0YmpfanYWwiFbD
-	MXOaYJCm9oqmElrMBUYYnfkvFskBCf7kn4loG+dK/XsEU7rIHKLfySg6wFeaRjDAxfMW7ecSONS
-	rGlQGStZPBk8mju55c8etOi1M0/+l91IwY7HodpsoGjaAJH9tPntB49QhWQ1c6hD/5w26mZ971J
-	p6AGURv09Kxo7Hg32JJ71T+qxQwBsfPbjRZCPTwy3LhAsTo5TZh0GuQKEfo4vJGxex6BTzpA==
-X-Received: by 2002:a05:600c:b85:b0:495:6400:ab62 with SMTP id 5b1f17b1804b1-496c6568fc6mr33023445e9.20.1785248937306;
-        Tue, 28 Jul 2026 07:28:57 -0700 (PDT)
-Received: from [10.128.10.232] (195-23-151-163.net.novis.pt. [195.23.151.163])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-496c45b1c2asm84007205e9.5.2026.07.28.07.28.55
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 28 Jul 2026 07:28:56 -0700 (PDT)
-Sender: Julian Braha <julian.braha@gmail.com>
-Message-ID: <be91ae0a-61b2-43d7-9028-411bc3d7f13f@gmail.com>
-Date: Tue, 28 Jul 2026 15:28:55 +0100
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Y3GMQA78"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A82571F000E9
+	for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 14:30:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785249044;
+	bh=3GUXLfzdyYUR+OBqXaq/+u7BsqRzK2Iz4nJOnvUrJrU=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=Y3GMQA78fCGVHwRveZWDotCS0NX+lPvO6gcTbwwpC17+xnfhZiIzKX/XGgOX1DEPA
+	 Hc1Mm9yJw/iBmXF6nB72+qXEblwoEeZ7zyv1FOjrbBMPNo5q8V7qdPOOl3+mWLF61A
+	 r6R6nQ1FhoxSqqRbgP+BUyK3ijINDl/7h8Lt87i7YDRGW4I+VfL0QXRlwWz3G0QOOl
+	 V51VfjK9S7MzZhk60Rdt9PjOy0juXnqE+BILgyTqR8iLrU1A2t8TMj3sCiip/LPxre
+	 8Atreu2Q3AWB0Dln8P58uUNUruY4JUgHQO+BiwIA8H2j8bEdwpBG+S5P+HOJ7Auajl
+	 WhteJ96pQG9vQ==
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-c197f968b3cso562768366b.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 07:30:44 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+Rrps1oLRSIu9kyHGnjj1s7RRdddgu4WBfEtF/j4+X+72JPYuz63B9EH+BiUjQVxmQ4uMJ2dhIWIo6IN17av@vger.kernel.org
+X-Gm-Message-State: AOJu0YzkNfmH1r6El6onih++CIOiasLrGMhc/8qUeCEXcn/N2FAIXEGp
+	2L74NTLzERnh8035VgLMoM3yDKUX+gfYBgXPd2/tdBNjcq4FB61B4fboPEAnNFvHkMetwgNWAJR
+	ESHDvfcmmI7Oc9dYlKUq1o3cOV+SwNw==
+X-Received: by 2002:a17:907:9414:b0:c1f:6822:945a with SMTP id
+ a640c23a62f3a-c1f7249e8f5mr142111366b.57.1785249043360; Tue, 28 Jul 2026
+ 07:30:43 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] soc: qcom: PDR_HELPERS, PDR_MSG are independent of
- QCOM_SOC
-To: Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org
-Cc: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
- Dmitry Baryshkov <lumag@kernel.org>, Arnd Bergmann <arnd@arndb.de>
-References: <20260727211124.853520-1-rdunlap@infradead.org>
-Content-Language: en-US
-From: Julian Braha <julianbraha@gmail.com>
-In-Reply-To: <20260727211124.853520-1-rdunlap@infradead.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20260721-tcsr_qre_0721-v10-0-d2fa68c63b78@oss.qualcomm.com> <178512251610.15997.11111449058382808559.b4-ty@kernel.org>
+In-Reply-To: <178512251610.15997.11111449058382808559.b4-ty@kernel.org>
+From: Rob Herring <robh@kernel.org>
+Date: Tue, 28 Jul 2026 09:30:31 -0500
+X-Gmail-Original-Message-ID: <CAL_JsqLHb_9qgQAgVfa_mb+zLPPqe5Ze-U9oc6HB9aRZe3cGUA@mail.gmail.com>
+X-Gm-Features: AUfX_mxuX8ugJmMU2lsLcjqtuKrFPArIpVB-vqZ_ufPEa1Pluh9A5xkDYZMLj0M
+Message-ID: <CAL_JsqLHb_9qgQAgVfa_mb+zLPPqe5Ze-U9oc6HB9aRZe3cGUA@mail.gmail.com>
+Subject: Re: (subset) [PATCH v10 0/7] clk: qcom: Add common clkref support and
+ migrate Glymur and Mahua
+To: Bjorn Andersson <andersson@kernel.org>
+Cc: Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Brian Masney <bmasney@redhat.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Taniya Das <taniya.das@oss.qualcomm.com>, 
+	Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Qiang Yu <qiang.yu@oss.qualcomm.com>, 
+	linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-hardening@vger.kernel.org, 
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 7/27/26 22:11, Randy Dunlap wrote:
-> Currently QCOM_PDR_MSG depends on QCOM_SOC (it's inside the
-> "if QCOM_SOC" block). It appears to be independent of QCOM_SOC, as
-> though it was entered in the wrong location in the Kconfig file.
-> 
-> Moving QCOM_PDR_MSG after the end of the QCOM_SOC block fixes the
-> kconfig unmet dependencies warning and survives both randconfig and
-> allmodconfig builds.
-> 
-> WARNING: unmet direct dependencies detected for QCOM_PDR_MSG
->   Depends on [n]: QCOM_SOC [=n]
->   Selected by [y]:
->   - QCOM_PDR_HELPERS [=y] && NET [=y]
-> 
-> Caused by SLIM_QCOM_NGD_CTRL selecting QCOM_PDR_HELPERS.
-> 
-> Fixes: 0ac5c7d933de ("soc: qcom: pdr: extract PDR message marshalling data")
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> ---
-> Cc: Bjorn Andersson <andersson@kernel.org>
-> Cc: Konrad Dybcio <konradybcio@kernel.org>
-> Cc: linux-arm-msm@vger.kernel.org
-> Cc: Dmitry Baryshkov <lumag@kernel.org>
-> Cc: Arnd Bergmann <arnd@arndb.de>
-> 
->  drivers/soc/qcom/Kconfig |    6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> --- linux-next-20260726.orig/drivers/soc/qcom/Kconfig
-> +++ linux-next-20260726/drivers/soc/qcom/Kconfig
-> @@ -90,9 +90,6 @@ config QCOM_PD_MAPPER
->  	  implementation of the service. It is a simpler alternative to the
->  	  userspace daemon.
->  
-> -config QCOM_PDR_MSG
-> -	tristate
-> -
->  config QCOM_PMIC_PDCHARGER_ULOG
->  	tristate "Qualcomm PMIC PDCharger ULOG driver"
->  	depends on RPMSG
-> @@ -297,6 +294,9 @@ endif
->  # Options selected by other drivers from different subsystems must be outside
->  # of the menuconfig if-block:
->  
-> +config QCOM_PDR_MSG
-> +	tristate
-> +
->  config QCOM_INLINE_CRYPTO_ENGINE
->  	tristate
->  	select QCOM_SCM
+On Sun, Jul 26, 2026 at 10:22=E2=80=AFPM Bjorn Andersson <andersson@kernel.=
+org> wrote:
+>
+>
+> On Tue, 21 Jul 2026 22:58:55 -0700, Qiang Yu wrote:
+> > This series adds a common clkref_en implementation and converts glymur
+> > and mahua to use it, along with the related binding and DTS updates.
+> >
+> > The PCIe clkref clocks on Glymur and Mahua gate the QREF block which
+> > provides reference clocks to the PCIe PHYs. QREF requires LDO supplies
+> > and a reference voltage from the refgen block to operate. The refgen
+> > block itself requires vdda-refgen_0p9 and vdda-refgen_1p2 LDOs to
+> > function.
+> >
+> > [...]
+>
+> Applied, thanks!
+>
+> [1/7] dt-bindings: clock: qcom: Move glymur TCSR to own binding
+>       commit: f9cbc4bddb636dd9d446bfba31f58fbceaf09424
+> [2/7] dt-bindings: clock: qcom,glymur-tcsr: Add mahua support
+>       commit: 0998cf30b0e0d02dbcdfc1f989b745137b21f682
+> [3/7] clk: qcom: Add generic clkref_en support
+>       commit: 22c70e5732005356a4bc2601e7dcf878aab101e0
+> [4/7] clk: qcom: tcsrcc-glymur: Add regulator supplies and migrate to clk=
+_ref helper
+>       commit: 0753091abc4b480abf76cb40c10fffe2764bfcf7
+> [5/7] clk: qcom: tcsrcc-glymur: Add Mahua QREF regulator support
+>       commit: 0f87ded5f8398182fbac232f0f287d45baa10d6a
 
-This is a better solution than my earlier attempt:
-https://lore.kernel.org/all/20260719022242.139472-1-julianbraha@gmail.com/
+A bunch of new warnings with this series:
 
-- Julian Braha
+      2 (qcom,glymur-tcsr): 'vdda-refgen4-1p2-supply' is a required propert=
+y
+      2 (qcom,glymur-tcsr): 'vdda-refgen4-0p9-supply' is a required propert=
+y
+      2 (qcom,glymur-tcsr): 'vdda-refgen3-1p2-supply' is a required propert=
+y
+      2 (qcom,glymur-tcsr): 'vdda-refgen3-0p9-supply' is a required propert=
+y
+      2 (qcom,glymur-tcsr): 'vdda-qreftx1-0p9-supply' is a required propert=
+y
+      2 (qcom,glymur-tcsr): 'vdda-qreftx0-1p2-supply' is a required propert=
+y
+      2 (qcom,glymur-tcsr): 'vdda-qreftx0-0p9-supply' is a required propert=
+y
+      2 (qcom,glymur-tcsr): 'vdda-qrefrx5-0p9-supply' is a required propert=
+y
+      2 (qcom,glymur-tcsr): 'vdda-qrefrx4-0p9-supply' is a required propert=
+y
+      2 (qcom,glymur-tcsr): 'vdda-qrefrx2-0p9-supply' is a required propert=
+y
+      2 (qcom,glymur-tcsr): 'vdda-qrefrx1-0p9-supply' is a required propert=
+y
+      2 (qcom,glymur-tcsr): 'vdda-qrefrx0-0p9-supply' is a required propert=
+y
+      2 (qcom,glymur-tcsr): 'vdda-qrefrpt4-0p9-supply' is a required proper=
+ty
+      2 (qcom,glymur-tcsr): 'vdda-qrefrpt3-0p9-supply' is a required proper=
+ty
+      2 (qcom,glymur-tcsr): 'vdda-qrefrpt2-0p9-supply' is a required proper=
+ty
+      2 (qcom,glymur-tcsr): 'vdda-qrefrpt1-0p9-supply' is a required proper=
+ty
+      2 (qcom,glymur-tcsr): 'vdda-qrefrpt0-0p9-supply' is a required proper=
+ty
+
+Rob
