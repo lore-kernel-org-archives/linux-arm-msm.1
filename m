@@ -1,87 +1,87 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 997CB44682B
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 10:27:43 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22238446C01
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 10:27:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785320865; cv=none; b=iBwTKbg4fq35RlC55JrC7QL3nxx+7E3NtvTq7VZI7sHY5lnKJQSQdJ+czp5SEXd5ZznzsBOURFOrjHh/gd1h7TvMFNweciSAVEiMs67DpdduwDnKDIsd4q4dMtZ7xXs0kZgv9erlkyWNMCiv0qa34IIk4Q2DHGV6SGzpA20FEjU=
+	t=1785320870; cv=none; b=LKSMdYBfU4vB2X6HsY5fCzIQPqmSTM1h1OjbddIF6zYt9PdP8FRvLmp+hAi/0NCqOae+RWOWSvTS5jDdW9UxLOFX/nm8iD1613elWh9SH0BFc6VeA9TOZaDmcREgv7OreRxQXM/ZtESUh8ctODHKO6yz+1ExP9BrzVhUHmcPWOg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785320865; c=relaxed/simple;
-	bh=VA9ryQpuFW+TP/KlLhRrZsh20avtp74GOWPwmq6me5k=;
+	s=arc-20240116; t=1785320870; c=relaxed/simple;
+	bh=qAYoyP+pPP7eZDuSytpTJCmFQs2DJRNvaK9uhyQU3E0=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=og09Gxb8SREKvdMqbe5ukXZRPSTJc0pyVZT4o5nIZSGhvT+bEIUiYL5LjcNXZ8wK/MW5caN0CJBylqQ9B5KbwRDBFuT7Ps//luFLZ+ZL7i4/vFjYxYa8JVv5dXIDAmwBoRPfss1jKQPJpLadUPpdTxUChT2WhqemFE8zh8tTG8Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=geRhkQ1R; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cVLLOboP; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=ABFT0mfdBhg6hUrBzxKZNINjuTk7Ppv2RWdCZJ6RotDkfs6fOVMrcOP8Jl2wcl1AjDdU9ldl3gmETCSzKuxwnRymHvPOPFol4GtPhe6pMvcZOR/S4AbNHha60JlNpj1tG3/w8/vcvdWwQcT4EEIOQxqfPql0DCPwTl7zdLgVp3c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cmroLBxB; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YZobkHST; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="geRhkQ1R";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cVLLOboP"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cmroLBxB";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YZobkHST"
 Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66T7f3ei1167941
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 10:27:42 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66T7f3ej1167941
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 10:27:48 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	pYfMPL52K2NTKf0PF0OmsrszrBlQ7Hy1Y5N+shPjCXA=; b=geRhkQ1R/KaRnr5p
-	Y6fJlxSyajb2ZeAJwqiiG5lcNBG0ymcbVUJ3+gf9UwKdmhpu2OejScJ1WUZLCpo3
-	BoU9w0AXSdedeVG4Y5O7CkY3Oy3Emjzliw8BIG31SfHA6TtR5RIb+0qwHDFLwS4U
-	Qz32nf1VWSRoif3xL/uZ9243USFfyfvWfF/X9ioDRNe0hVxcgMN55RrIGxWTSawv
-	EY98V3CStxKk5ZHk66N1B9W+/K5MLGkcmhz95k9hSem1YbtGOA+1NHr7Md4Q1xLH
-	+XEuERwCnR90NYNK+78g2nRrYiZ7ue9aOdxpzNSEwHW+22YOMuMT0BLU6v88kWRP
-	tvEpBg==
+	MGjHYPWSAqlU3qMkzc1rPYo+YF4ghABRIYUlxbmHTZQ=; b=cmroLBxBHPyZHLJ/
+	QniOkIFl1W0FEliI4tMMXHlDBlkqOe92eio2VitmGNoFnEg3qR8R/f1T5wDCbj1Q
+	FJ4SPpFWUDpjhETMDNDN0vTCT7tFeNoC4oL8HnOgHie2TaeMNl2R9tzVDeF7MZn2
+	TpjlDIgqv4MvLi7M/rzEyJmwrZpoWnUR/XlUSKEtsrB5G9+XnM8YpVTjHIrNldcS
+	UJupPOwndB2R7dMg1u99kfwuslnvFtYcnHO/crhhy0w2nkpj8YU618i2M5OrCY0R
+	6bws5xsmeeDVfjhW+anfg9wvzDEPJjjXZ7M09sOzX6mWs+Y+ji+ywXSdpdZr/swU
+	wv/FgQ==
 Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fqbhj96rp-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fqbhj96ry-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 10:27:42 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38dc0eee75dso185830a91.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 03:27:42 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 10:27:47 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38de4c60f0eso176008a91.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 03:27:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785320861; x=1785925661; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1785320867; x=1785925667; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=pYfMPL52K2NTKf0PF0OmsrszrBlQ7Hy1Y5N+shPjCXA=;
-        b=cVLLOboP2sRc7F4lkf7xscwv2KeIqYRgQS9H6psv3/Fzl58i7b+PPl5SQdmm9Rz1a1
-         wehwPEPTkDAH8tuVOR4An6pFoE1AvWgSv5dLN2a+XBGXE3PcMjeDPMJkNTfwfLozC4aB
-         bJG4wjMgOfTXO0/4Zjcx+AClxeSlT3lv/CSrj6fES0wumDd8w6eHqnoXqGdeBMMOmOXW
-         YCpiVRuXdQ+vzdDqlp+WRBb7VsuZX2E9lXK4q+ZlibjmhHBXNxTPVpwq8IazIW5oCuIX
-         aqSEjZhSZ2eMsMPas3rhfjmZy1AxbolKQ6VJ+2eKWLmgXPyB4HAKuSLlp+EkCBVynAGZ
-         zgew==
+        bh=MGjHYPWSAqlU3qMkzc1rPYo+YF4ghABRIYUlxbmHTZQ=;
+        b=YZobkHST0DRmbMcN/lU6ZRGMbFI1v3qX0VNKAfYiEohaIfs7aGhi34hmbAlOmQfjFA
+         dUQZTjjjfzpVov2LPKJBIl8m5omadFVFROV3uDov3LIKudxCKxQsVfyfwNEoMSbWBddy
+         +59YcdtzFPtoP7UqlEwdHMyUl9Pov+s/eXRS5YOs1nQMgkRoPV/mTW29vFtcqLYUr+c/
+         yX3SwKJcD8ETnx+W/l3ezJDidS6Ahg1v0i0kP0enN67NK4Z4KlbJGugV/RFEYkQvfERt
+         l9OUHAcVhFfFWJnDVf0iQjf46SRM2uLge+GP41Zliao9Klx6VXj+FEUCX6F67YYQExMM
+         3xjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785320861; x=1785925661;
+        d=1e100.net; s=20251104; t=1785320867; x=1785925667;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=pYfMPL52K2NTKf0PF0OmsrszrBlQ7Hy1Y5N+shPjCXA=;
-        b=bvI+VjchZrPJLmOBHvnB0CdxroaWfW25Ftd0fNyq5vym9WICz3j0Y5j5FrLXiiNhqb
-         jV298gj/QcM17MvjZXAY9TEB5E8BzESY68jjLswmZ8xr2cY66dj36AH+zT3aijP21688
-         xqonEw1OyUP9ETJpNQAhtfN9HQ5+qGZgQg6GxrGimN1Ug686jUZYSTrsNC2TchwzVFYP
-         74vvMguLFsLSWk6I82OoWmuO2vYzonlECwzlKRMARt5BDXh6iKdPFADjxS6ZZxKb8GMr
-         VIGlD+UYugysKn4Snj/hi+xLVH34MEIww9ekSVH2YGqpcQC065uWsBYn+paRZgmE+MJ8
-         mmhA==
-X-Gm-Message-State: AOJu0YzUXzn8lp08ANrI8INXW2Ct0ljJeQtkoJnceg2Y/y6NxDwEgynu
-	nwsU6F94n+RCneXIxG53ygGzjs0FMPUfEL7eYS35Fqv8WVxiLJ+P98pAibTC8u4eZRZ3XWg9OE3
-	zNqjkp0juOaPARwBqbYb+FtdoldNJW6S6g2G/C9dQ5RIX8yCeX6kFNjcVrg0QTVObAwxr
-X-Gm-Gg: AR+sD13/HyOzWs+YzeUeROeUvYyFdP9nFbm7TYoez4q8I8VvT3LXmAFjADmMgKSLwIQ
-	4aRR8SZ1cAyK1uwR78Lq6GTA3xDgARmgiXYjfJ3pW/m4bOMhmhTSVmxzM7r1qvvPNbYxjNxEpM8
-	4HC9qhKsXrjYqbBTT0Q7qFdt9Q5Ym2Zmv8sJT3AHqTy2wnABUBHwZlw1Is/tFgi12GVUB+7X84R
-	Jl4IFJkBK3W1pDDQxsY9ty03Q5uvhJf6cvqT4GuiVKJ2o/Q2Ik4bI8OD0X9GdXlqkorUskTx0Yz
-	J9n9SNSPkGJIFnK4MVF7OVq7M9az8NLc8H6Bj3J64IAuXrKIv1fcGVbo6BCq3D8k7tUj3/U5JZl
-	l4Lr+NOlOTYAAeI5GQHkRarrVDmMfVLzg0n8On4w7wy2j7Xdwr3c=
-X-Received: by 2002:a17:90b:1ccb:b0:38e:76f8:fcbb with SMTP id 98e67ed59e1d1-38f6a3796a6mr5651513a91.4.1785320861477;
-        Wed, 29 Jul 2026 03:27:41 -0700 (PDT)
-X-Received: by 2002:a17:90b:1ccb:b0:38e:76f8:fcbb with SMTP id 98e67ed59e1d1-38f6a3796a6mr5651484a91.4.1785320861026;
-        Wed, 29 Jul 2026 03:27:41 -0700 (PDT)
+        bh=MGjHYPWSAqlU3qMkzc1rPYo+YF4ghABRIYUlxbmHTZQ=;
+        b=LGvrDV0c/FOKt4PWhvNTUsIF49vR7U6AP6kPWUGW2PdAGBH1tChj+HDwqJvib+OgNp
+         AqTDX7c1CnX06SsR/FHKMMic3p/jqiBuZx8j1L4Hq54aOWfK/87WdFS3Tj5xocCNvMx2
+         YGr0SuFYx/BqgWXlXLxXLd3i/D7brvTfDnJiu+w6jLQDm+5UkMuzoHpLkr0YN5aY0TbN
+         GnkxEplKIOEe/+a9NWFuemmZztvATtMh6VXLZF2+0Y6AXHtY9y/Vcizdd+g//9YYTHx6
+         FMazvFXntXUYaVxcUN7L/bUfIhM9x+WZnh9YLZ4WKsvV26rad13A2JGExGi1HtzfM6FC
+         EHqg==
+X-Gm-Message-State: AOJu0YxifLjazTmUpSs4+gI4fmlQngXzX7UNJ4mLWkOxT9kEJ/Sdcflb
+	EqaMMrU+VqWgng62SEWFhDe0sOkked6L6K4YI0lestexj1i6CM7hJVP/vBIp5xEcl7IKjPW52a1
+	UyCgNxkb9iB9SW6rTIDET1v3ynqHsNL8prQwdmeNva+SSLs8xlfm5LhNYDa7oxy8D9MJM
+X-Gm-Gg: AR+sD10NGglVmygSfuHv3puaT+hDY/BWTQbrICrV2uebJ92+vsZEUqm/FIMmlAJtmgP
+	Qsvt/ih42BjDn8suff2UjIFAV07UqLN/UiLs5FlAbBQgi8G8Bc4cEB+H+TX3G/9SNn4ESJJ6aTg
+	5SR+lGdYJAZGW3dlxL3cA9kkMNu/l2ycDcmslVsDQPE1mkPWPKuYmp3MikTLa3YIFsOb+pU/AJm
+	cIEYNRXxDqtfGmCmPgEDLOIHek5rLxbgHz2HpmUVXzabN2CiW6Itsgeva+J/7K6yoQ3MIxOBaEW
+	nED4jcVk7nU1SAe2newiinZB0mJTeh0aqszRVm/gF3rPsjA3t+MOOkIdf0fCzix14x1PoHrMhae
+	wXwhfgnMOBoJnkYgcT40Ne6cjCxQxszhfem15oEemkb5xAmGF/GQ=
+X-Received: by 2002:a17:90b:17cb:b0:38e:55ec:e436 with SMTP id 98e67ed59e1d1-38f6a0b11f1mr5477358a91.0.1785320866773;
+        Wed, 29 Jul 2026 03:27:46 -0700 (PDT)
+X-Received: by 2002:a17:90b:17cb:b0:38e:55ec:e436 with SMTP id 98e67ed59e1d1-38f6a0b11f1mr5477321a91.0.1785320866244;
+        Wed, 29 Jul 2026 03:27:46 -0700 (PDT)
 Received: from hu-weiden-sha.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f7f0ed10csm1121477a91.4.2026.07.29.03.27.36
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f7f0ed10csm1121477a91.4.2026.07.29.03.27.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 29 Jul 2026 03:27:40 -0700 (PDT)
+        Wed, 29 Jul 2026 03:27:45 -0700 (PDT)
 From: Wei Deng <wei.deng@oss.qualcomm.com>
-Date: Wed, 29 Jul 2026 15:57:26 +0530
-Subject: [PATCH v3 2/3] arm64: dts: qcom: hamoa: Add compatible to the PCIe
- Root Port
+Date: Wed, 29 Jul 2026 15:57:27 +0530
+Subject: [PATCH v3 3/3] arm64: dts: qcom: hamoa-iot-evk: Describe the PCIe
+ M.2 Key E connector
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260729-hamoa-m2-dts-v2-v3-2-4d7ef9274575@oss.qualcomm.com>
+Message-Id: <20260729-hamoa-m2-dts-v2-v3-3-4d7ef9274575@oss.qualcomm.com>
 References: <20260729-hamoa-m2-dts-v2-v3-0-4d7ef9274575@oss.qualcomm.com>
 In-Reply-To: <20260729-hamoa-m2-dts-v2-v3-0-4d7ef9274575@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
@@ -103,27 +103,26 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         Chen-Yu Tsai <wenst@chromium.org>, quic_chezhou@quicinc.com,
         cheng.jiang@oss.qualcomm.com, shuai.zhang@oss.qualcomm.com,
         jinwang.li@oss.qualcomm.com, xiuzhuo.shang@oss.qualcomm.com,
-        mengshi.wu@oss.qualcomm.com, Wei Deng <wei.deng@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+        mengshi.wu@oss.qualcomm.com, Wei Deng <wei.deng@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDA4NiBTYWx0ZWRfXxq2JJLfbe0F9
- 1ARb+q9J3+lDoRXMFztGAEUCqdUuoMTTQ1REytynYAn1l+nB71Fp6KgcGQ/hSALmpvwihnMuK3x
- jjsZVO4VqK2PUIhfycmBGdYRqUHpeYBQOvAAp8Z7rflI1Acix6DvbNZj2Wi3ziUHgYLCa2Lp/56
- /YQa5FsxsXAejUwQE+8fbsbT9b5TcMtkPWdRtptFaUITIKOKspjt36TJT0QYa6GvEhaeqMM2f6c
- xjBPg17899g5MYvSKzeMKYloEshWsxexEljwHYTkry1WzQbRr0Ly0gMCTV84XNN7Spj4XSpHoqc
- 6DpYtbN2mb682LBTaCYE2gHLkQt4RYp1MK+5Vlw7qVFiqyQ9ZotoikfSloDB04BvbOqsUoiXcJx
- jNVluO0z8/c4bAqJmLYp+gV9SOTlr0JdA0zX2Vv+29Gm/Vx+sUOVjTFKEBerirfeHI5VH1wm89G
- SNMRAbxqKeuscpbRxFQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDA4NiBTYWx0ZWRfXwKHJHQcw64Wq
- 6zw5C/8Q44QWAZ/WGZApcAJqsmM7QJXPtwSUeRrg5Jr7GLil0jWi+2erZLcP4yeG4Yvvqp9IwPl
- zAY89E3BCoTNr5TBz1vBq8Bi4G9A7rU=
-X-Proofpoint-ORIG-GUID: wnUldhXPTpa0T0b3db5jG3F4UiuIECy8
-X-Proofpoint-GUID: wnUldhXPTpa0T0b3db5jG3F4UiuIECy8
-X-Authority-Analysis: v=2.4 cv=dsvrzVg4 c=1 sm=1 tr=0 ts=6a69d59e cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDA4NiBTYWx0ZWRfX0N3X/93gfnpV
+ CnwI3DQDvv7Uf/fMcBKrGtHyU0CE5//r7AvLRlxHi4IBMMZZqakFp84s9Hu7KfXtsu+D25l+tO/
+ gABdpcYfcjhS13p+2SZyYz54hPJwn25Lt736LuiYf/Y8HE9SFv57x66Y5g/C/+AsfTyQOSWXQzU
+ 1uRFkX26F70KPSVc+cUab0hxTMWs+VjaKkbg01yMh8b7I8BSmImFHVwF8kZSg7dO8x1yLLUq1fK
+ kqrZJ8In1HjplBA7dmmZ7IhSwqPOKFUpp5uNJZGHk+GR0Tua9j9UIZ7EkAVxz4CvldRKb+rrhOz
+ 4NLyGXyeP9y5bF2VQN8bx6T//dnCmLXMlnKqyrKOqJDPRLsCu2CmLWiQhpDM5Zn9ulPH14vkF5J
+ mQBll8yvJHrE8MYn6sac9OVM4N64KUyQ7k+CehhE/eMTrPq2DdAc2PYr6iE9KWD57ptE3rYLTNU
+ RLPNTAxzfsjdAbEEmZw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDA4NiBTYWx0ZWRfXx0vqXxaCqUel
+ z5rZq3UM39q5TdVU1yHf2Kw2wF5biNN89WounpV/gs1JlgOn760lyhuPlCkUse2j0fNqhQrQdb0
+ rwpiYnonKeabO6SHFS1HmT3ffhYqjG4=
+X-Proofpoint-ORIG-GUID: iMr53aTdhhM2gzZ6X-75by73kYsxjzNZ
+X-Proofpoint-GUID: iMr53aTdhhM2gzZ6X-75by73kYsxjzNZ
+X-Authority-Analysis: v=2.4 cv=dsvrzVg4 c=1 sm=1 tr=0 ts=6a69d5a3 cx=c_pps
  a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=unBuS9T_dDH4f9JXRc8A:9 a=QEXdDO2ut3YA:10
+ a=EUspDBNiAAAA:8 a=maK4k0u04xuWkcZLn_MA:9 a=QEXdDO2ut3YA:10
  a=uKXjsCUrEbL0IQVhDsJ9:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
@@ -134,29 +133,252 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607290086
 
-Add 'compatible = "pciclass,0604"' to the pcie4_port0 node in hamoa.dtsi
-to allow the PCI subsystem to associate the DT node with the PCI-to-PCI
-bridge device, which is required for M.2 connector graph endpoint
-association.
+The Hamoa IoT EVK has a PCIe M.2 Mechanical Key E connector for wireless
+connectivity cards exposing Wi-Fi over PCIe and Bluetooth over either
+UART or USB, depending on the card variant.
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Describe the connector node with:
+- port@0: PCIe for Wi-Fi, linked to pcie4_port0
+- port@2: USB for Bluetooth (USB variants), linked to usb_2 port@1
+- port@3: UART for Bluetooth (UART variants), linked to uart14
+
+This allows the pwrseq-pcie-m2 driver to manage card power and
+dynamically create the UART serdev for UART BT variants, while USB
+BT variants are enumerated via the USB hub pwrseq path.
+
+Remove the chip-specific wcn7850-pmu node, the static bluetooth
+serdev under uart14, and the wifi@0 PCI child node, as the M.2
+connector approach replaces WCN7850-specific power sequencing with
+a chip-agnostic model.
+
+Also remove the now-unused vreg_wcn_0p95 and vreg_wcn_1p9 dummy
+fixed regulators whose only consumers were the wcn7850-pmu node.
+
 Signed-off-by: Wei Deng <wei.deng@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/hamoa.dtsi | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts | 170 ++++++++++-------------------
+ 1 file changed, 60 insertions(+), 110 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/hamoa.dtsi b/arch/arm64/boot/dts/qcom/hamoa.dtsi
-index 724471152fab..767d2fb1f113 100644
---- a/arch/arm64/boot/dts/qcom/hamoa.dtsi
-+++ b/arch/arm64/boot/dts/qcom/hamoa.dtsi
-@@ -3782,6 +3782,7 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
+diff --git a/arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts b/arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts
+index 9fa86bb6438e..34e3fb9bbdcf 100644
+--- a/arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts
++++ b/arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts
+@@ -479,32 +479,6 @@ vph_pwr: regulator-vph-pwr {
+ 		regulator-boot-on;
+ 	};
  
- 			pcie4_port0: pcie@0 {
- 				device_type = "pci";
-+				compatible = "pciclass,0604";
- 				reg = <0x0 0x0 0x0 0x0 0x0>;
- 				bus-range = <0x01 0xff>;
+-	/*
+-	 * TODO: These two regulators are actually part of the removable M.2
+-	 * card and not the EVK mainboard. Need to describe this differently.
+-	 * Functionally it works correctly, because all we need to do is to
+-	 * turn on the actual 3.3V supply above.
+-	 */
+-	vreg_wcn_0p95: regulator-wcn-0p95 {
+-		compatible = "regulator-fixed";
+-
+-		regulator-name = "VREG_WCN_0P95";
+-		regulator-min-microvolt = <950000>;
+-		regulator-max-microvolt = <950000>;
+-
+-		vin-supply = <&vreg_wcn_3p3>;
+-	};
+-
+-	vreg_wcn_1p9: regulator-wcn-1p9 {
+-		compatible = "regulator-fixed";
+-
+-		regulator-name = "VREG_WCN_1P9";
+-		regulator-min-microvolt = <1900000>;
+-		regulator-max-microvolt = <1900000>;
+-
+-		vin-supply = <&vreg_wcn_3p3>;
+-	};
+-
+ 	vreg_wcn_3p3: regulator-wcn-3p3 {
+ 		compatible = "regulator-fixed";
  
+@@ -538,6 +512,55 @@ vreg_wwan: regulator-wwan {
+ 		regulator-boot-on;
+ 	};
+ 
++	wifi-bt-connector {
++		compatible = "pcie-m2-e-connector";
++		vpcie3v3-supply = <&vreg_wcn_3p3>;
++
++		w-disable1-gpios = <&tlmm 117 GPIO_ACTIVE_LOW>;
++		w-disable2-gpios = <&tlmm 116 GPIO_ACTIVE_LOW>;
++
++		pinctrl-0 = <&wcn_wlan_en>, <&wcn_bt_en>;
++		pinctrl-names = "default";
++
++		ports {
++			#address-cells = <1>;
++			#size-cells = <0>;
++
++			port@0 {
++				reg = <0>;
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				m2_e_pcie_ep: endpoint@0 {
++					reg = <0>;
++					remote-endpoint = <&pcie4_port0_ep>;
++				};
++			};
++
++			port@2 {
++				reg = <2>;
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				m2_e_usb_ep: endpoint@0 {
++					reg = <0>;
++					remote-endpoint = <&usb_2_m2_ep>;
++				};
++			};
++
++			port@3 {
++				reg = <3>;
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				m2_e_uart_ep: endpoint@0 {
++					reg = <0>;
++					remote-endpoint = <&uart14_ep>;
++				};
++			};
++		};
++	};
++
+ 	sound {
+ 		compatible = "qcom,x1e80100-sndcard";
+ 		model = "X1E80100-EVK";
+@@ -677,66 +700,9 @@ usb_1_ss0_sbu_mux: endpoint {
+ 		};
+ 	};
+ 
+-	wcn7850-pmu {
+-		compatible = "qcom,wcn7850-pmu";
+-
+-		vdd-supply = <&vreg_wcn_0p95>;
+-		vddio-supply = <&vreg_l15b_1p8>;
+-		vddaon-supply = <&vreg_wcn_0p95>;
+-		vdddig-supply = <&vreg_wcn_0p95>;
+-		vddrfa1p2-supply = <&vreg_wcn_1p9>;
+-		vddrfa1p8-supply = <&vreg_wcn_1p9>;
+-
+-		bt-enable-gpios = <&tlmm 116 GPIO_ACTIVE_HIGH>;
+-		wlan-enable-gpios = <&tlmm 117 GPIO_ACTIVE_HIGH>;
+-
+-		pinctrl-0 = <&wcn_bt_en>, <&wcn_wlan_en>;
+-		pinctrl-names = "default";
+-
+-		regulators {
+-			vreg_pmu_rfa_cmn: ldo0 {
+-				regulator-name = "vreg_pmu_rfa_cmn";
+-			};
+-
+-			vreg_pmu_aon_0p59: ldo1 {
+-				regulator-name = "vreg_pmu_aon_0p59";
+-			};
+-
+-			vreg_pmu_wlcx_0p8: ldo2 {
+-				regulator-name = "vreg_pmu_wlcx_0p8";
+-			};
+-
+-			vreg_pmu_wlmx_0p85: ldo3 {
+-				regulator-name = "vreg_pmu_wlmx_0p85";
+-			};
+-
+-			vreg_pmu_btcmx_0p85: ldo4 {
+-				regulator-name = "vreg_pmu_btcmx_0p85";
+-			};
+-
+-			vreg_pmu_rfa_0p8: ldo5 {
+-				regulator-name = "vreg_pmu_rfa_0p8";
+-			};
+-
+-			vreg_pmu_rfa_1p2: ldo6 {
+-				regulator-name = "vreg_pmu_rfa_1p2";
+-			};
+-
+-			vreg_pmu_rfa_1p8: ldo7 {
+-				regulator-name = "vreg_pmu_rfa_1p8";
+-			};
+-
+-			vreg_pmu_pcie_0p9: ldo8 {
+-				regulator-name = "vreg_pmu_pcie_0p9";
+-			};
+-
+-			vreg_pmu_pcie_1p8: ldo9 {
+-				regulator-name = "vreg_pmu_pcie_1p8";
+-			};
+-		};
+-	};
+ };
+ 
++
+ &i2c1 {
+ 	clock-frequency = <400000>;
+ 	status = "okay";
+@@ -1024,21 +990,10 @@ &pcie3_port0 {
+ &pcie4_port0 {
+ 	reset-gpios = <&tlmm 146 GPIO_ACTIVE_LOW>;
+ 	wake-gpios = <&tlmm 148 GPIO_ACTIVE_LOW>;
++};
+ 
+-	wifi@0 {
+-		compatible = "pci17cb,1107";
+-		reg = <0x10000 0x0 0x0 0x0 0x0>;
+-
+-		vddaon-supply = <&vreg_pmu_aon_0p59>;
+-		vddwlcx-supply = <&vreg_pmu_wlcx_0p8>;
+-		vddwlmx-supply = <&vreg_pmu_wlmx_0p85>;
+-		vddrfacmn-supply = <&vreg_pmu_rfa_cmn>;
+-		vddrfa0p8-supply = <&vreg_pmu_rfa_0p8>;
+-		vddrfa1p2-supply = <&vreg_pmu_rfa_1p2>;
+-		vddrfa1p8-supply = <&vreg_pmu_rfa_1p8>;
+-		vddpcie0p9-supply = <&vreg_pmu_pcie_0p9>;
+-		vddpcie1p8-supply = <&vreg_pmu_pcie_1p8>;
+-	};
++&pcie4_port0_ep {
++	remote-endpoint = <&m2_e_pcie_ep>;
+ };
+ 
+ &pcie5 {
+@@ -1530,19 +1485,10 @@ wcn_usb_sw_n: wcn-usb-sw-n-state {
+ 
+ &uart14 {
+ 	status = "okay";
++};
+ 
+-	bluetooth {
+-		compatible = "qcom,wcn7850-bt";
+-		max-speed = <3200000>;
+-
+-		vddaon-supply = <&vreg_pmu_aon_0p59>;
+-		vddwlcx-supply = <&vreg_pmu_wlcx_0p8>;
+-		vddwlmx-supply = <&vreg_pmu_wlmx_0p85>;
+-		vddrfacmn-supply = <&vreg_pmu_rfa_cmn>;
+-		vddrfa0p8-supply = <&vreg_pmu_rfa_0p8>;
+-		vddrfa1p2-supply = <&vreg_pmu_rfa_1p2>;
+-		vddrfa1p8-supply = <&vreg_pmu_rfa_1p8>;
+-	};
++&uart14_ep {
++	remote-endpoint = <&m2_e_uart_ep>;
+ };
+ 
+ &uart21 {
+@@ -1612,6 +1558,10 @@ &usb_2_hsphy {
+ 	pinctrl-names = "default";
+ };
+ 
++&usb_2_m2_ep {
++	remote-endpoint = <&m2_e_usb_ep>;
++};
++
+ &usb_mp_hsphy0 {
+ 	phys = <&eusb3_repeater>;
+ };
 
 -- 
 2.34.1
