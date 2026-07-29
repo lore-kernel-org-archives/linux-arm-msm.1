@@ -1,127 +1,197 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 962303DEAC1;
-	Wed, 29 Jul 2026 21:53:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9782B3BED78
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 21:58:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785361993; cv=none; b=qH2ha2+k/9GhHACiib2FL6ghRVbnp2DLnnYP3al8KlWSoHUG0sHh3JRgm3bEAlkyYjWSEoAkGxwEA7V6JlTZd9s3YaE8HSf1QRr1NgpBRid1uW7CJXPx7mLl68rglyFxrr+iP27wKlPv/NL5BB2xZkcCNAcG1d2DtHL/kE7UNi4=
+	t=1785362327; cv=none; b=Ql+W/sTePv0Vy18CyjDQO0iHtaiY0GJ8ohlC0TC2AD060NjC8tKd4FFYmM1GlAmOufUx+RGOruTsnXy84fmL41JNtlEa8Nx25XHa5Rf2UKrBARiKo47cfoBi5t5E0c2SlQW9E+KCDjVzRCgqdP6kxm6GYKeyPqcS5LWyeV82fh0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785361993; c=relaxed/simple;
-	bh=oYUP+Vnff20ntgLnvHo60QOZ87WDo1RjdNjMn2rOI/s=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=EoZf7RPGv39WgLGGtdRrwF0y8qUCLWnHR9C48G6aAaeHDoAbuq1GedwiH2jg5HokGV7EYTnEGNZRvRb9igyL6dlyW1NPIJfL/AnCN3Adk0dozYFVfRTbQsMAnwfnEDx3FIGcZy6aMLRNOoHV+Ojn34BalFN7J3zkwaV3k1TBcoc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cn51GpOf; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1785362327; c=relaxed/simple;
+	bh=qA0b1NjYq45z22xs3h56x/1iopvGcIIBdMwVFhpANsc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=s4uF6eP5qppVPdh1Wx6riH2yKxuYxTYi3c6dd9J+d0RTyKNqOoSazf2p8uCOo2kOISdtRPeDHKrd/60Gy+mCNnUr2VKUW45e9Uw0U7M0CrYIquEyEQkri6iOLjTWtnFlxmsZh58DbA3F0hMCMzKizInKd1kio0cJlukvvZRLnC0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=EvXA67bS; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CqGFjVo9; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cn51GpOf"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 72081C2BCB3;
-	Wed, 29 Jul 2026 21:53:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1785361992;
-	bh=oYUP+Vnff20ntgLnvHo60QOZ87WDo1RjdNjMn2rOI/s=;
-	h=From:Subject:Date:To:Cc:Reply-To:From;
-	b=cn51GpOf2uaETPflx5AdSQEIrxgof64dQCsCHZRI+hg0swdCijbMzOlX85wDB9W+D
-	 El+l8RXzcPpjQWyG5+RfddT4zOboXDXZl48rk2/U3a7oMbPDT+DThYkUmhjy0vDXWw
-	 EIVwZ52YYrmvfiXWMGS4Q6o8EcMAXoAOn8ri/Srjvta4MBskPv7zrfdtELSA8GHYp1
-	 ++/K37TulUmvI9ZafgZgOMzg8n1FpwD3pa+vN6hUtYk73o+m2YCj2hetYzmBfoI3zL
-	 1AXIpuOcKE9lPIojx2zgxRMHRRlrpv99deP8ixfDe+/2lgRpXCcZwoHVZ/LC1Aza3H
-	 K+k+zgbyrA0WA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5BF0FC53200;
-	Wed, 29 Jul 2026 21:53:12 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Subject: [PATCH 0/2] Enable DW9714V camera focus coil on SHIFT 6MQ
-Date: Wed, 29 Jul 2026 23:53:08 +0200
-Message-Id: <20260729-dw9714v-v1-0-3c479b3cf8c0@ixit.cz>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="EvXA67bS";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CqGFjVo9"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66TLiM7r042883
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 21:58:46 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=VqWy9eqY0puowDROPV7VBf7D
+	CFVRv1JL0+EraPp7HBk=; b=EvXA67bSnMotfF55i2kwy093ZKkQVHMErOngWnzr
+	Km3vIJ+aGkblSkDEJARtu51i59o1ibCyC12im3s0I6C/JPzHbV6wmBKn01qcDvyh
+	eQ3Lz0XyQn+SfVppznCRhQRMIq5BmLRB3Eo1NFFa+UHDpTc6/qXrVKO6Hg+lBQ73
+	kGe+ygZGVoRmGtGHAShtS0ISHlzv3sColxNKaT6a96Xt8+5z1iYb3NJC9Cat8dzW
+	G9EDCdEDxAdhJNps0Ay4pebJ6LM+fSSofyBzmqSF2ZT/jc9sKFCiDP6HcEmYM05M
+	uC7MY+P2UoySNIEIRQ0O+fxQYjMTt2hiBZ0x1w2tRA2VIg==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fqspv01gy-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 21:58:45 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38dde0df80bso2307766a91.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 14:58:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785362325; x=1785967125; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=VqWy9eqY0puowDROPV7VBf7DCFVRv1JL0+EraPp7HBk=;
+        b=CqGFjVo9iy1N8N7oEJv3BTHwOkoWodpE3WpUVuyPo6qqzJZuOh3BquAYSGEg4k+af6
+         22LpCbxwjfUIGVBkv9UFPRjD4ibKeszF2AXvSeNiCy6wiwN+7XIsOCDGnQLrN5mCQShd
+         wwjASSYzjBfZOXiLCArOt6bQjgYrtrCfonQHBG6oOMzpURE5i7AB/ZNgG+iUNPpfEJNg
+         i8GE9hNDrq/klyD4ljqHe26KGNDBuBW6stUVmEfSnfI+DSxQKYamfPpWhYPdFVoht8jA
+         vqBfhefX04gvJhx7nRHVxgqRKERRo4W5IQ8EVL2Y0bKZb9L1Ug1M5ugfrGcWq2YrX9eG
+         gYMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785362325; x=1785967125;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=VqWy9eqY0puowDROPV7VBf7DCFVRv1JL0+EraPp7HBk=;
+        b=pef499LccOrsihc+ViBEg9FrkvQkM5+KyjK/uadwm3TYJOSAoReVPknSZvYEazN+JY
+         x7StLuD0CGbitTmC7co8Y1TIHZc1ZSr0hy17qJ0lc+BRkUi3xqXNM0UKzEydz/YqLtnQ
+         H4HXJjRF0Fyx9pJq9RlAGHX+lFljveiHWDhZeKoJbu/FIir4JAgQz+axVNaVvPcXfbgU
+         NsQPQnezeblAXnV9Qhv6gkeX7JXsJf7T3KdK7pV4fXO++sK29ogiM4ZXBr7eQWi16q0I
+         0qHRkBRUHiEk1WRqN9t2C1L2RPgPQtpg7xrOin9o5NcUJ8vSZ7Ar4GInLD+DxVWRXfjA
+         S6ww==
+X-Forwarded-Encrypted: i=1; AHgh+RoyAB8gcLxhPqJPy9DKZni0B9d4LyWXY5ZErnEjRlk22om9SRaZPUrBmLE9JAJrv4g3zLTxZkXX8wM7nzLQ@vger.kernel.org
+X-Gm-Message-State: AOJu0YyfNeOMr6/gUsuipA/ekt10m9pkF/hMYSD/Ej/1YdQV5s8wzeX8
+	kFSeJyV2Qb6Wb+ky3K9NYD9qygnEK2P9ae4fSvcYc2sdBSt+r/7Vn2a1rcY9T6CT+PX0uzDahSH
+	5F05G5M9ZnTi3vENR6dF5SaccPVD+z0YoZzV4FFTSyTOaqiX3+NzNvLNNxQrVxYeJ0SyG
+X-Gm-Gg: AR+sD10/Tv4kLMKKMTnLhOyTktw6Y3+bYGY/1iZDj2+0quN/hDv9Yf4Uq4iSULrD0k2
+	I9a/gOCWuA1oXNwegOkcPDwUFFjWwggiUmqJ2qTCj5wxNj07l40hTfQHJIEI/r927rMyPC6XuwK
+	KgCZFL9rr1reDaYcRl7Z/rL/MrL1cj+pUK7sK04rkfK4sCbF4yuEHE5Yw++pzP3iRSHzvJkx3Mk
+	IaQfPP4pVbyHe9IxCmQBubvrrQzFTtE2GZ/JWwQP4hFbWhcMoVPkG1I2uvDzJwILorWjv2Gv0gV
+	bLJii7pGoAO9tOm/nxfLHFiCJzAXgqpm4nt6emEARlBukFPdFSX8mR2u9HAsyIOIshYg9vxIphV
+	Lwry44ordsMsCXfHmMcg/Nn+1w5946Q==
+X-Received: by 2002:a17:90b:540b:b0:381:6c5:3f63 with SMTP id 98e67ed59e1d1-38f9bd12dc6mr30935a91.6.1785362325027;
+        Wed, 29 Jul 2026 14:58:45 -0700 (PDT)
+X-Received: by 2002:a17:90b:540b:b0:381:6c5:3f63 with SMTP id 98e67ed59e1d1-38f9bd12dc6mr30909a91.6.1785362324582;
+        Wed, 29 Jul 2026 14:58:44 -0700 (PDT)
+Received: from hu-kamalw-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31504d37368sm24483029eec.22.2026.07.29.14.58.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 29 Jul 2026 14:58:44 -0700 (PDT)
+Date: Thu, 30 Jul 2026 03:28:39 +0530
+From: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
+To: Mark Brown <broonie@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Vinod Koul <vkoul@kernel.org>,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5 3/4] regulator: qcom-rpmh: readback
+ voltage/bypass/mode/status set during bootup
+Message-ID: <j2tncckz6mex4q7yqkw2prpi5yml7sdka2etlmnf3knyamvfun@pizpb76ilcsw>
+References: <20260720-b4-read-rpmh-v5-v5-0-cb93fb95f565@oss.qualcomm.com>
+ <20260720-b4-read-rpmh-v5-v5-3-cb93fb95f565@oss.qualcomm.com>
+ <da299944-0093-4d1a-b092-f7857b101199@sirena.org.uk>
+ <gaigrfpfunsqwuxf24uonw4mrkdse4ap3cywi2eg2qdyfgfzsd@hk6zghfqnkty>
+ <amNfHiL2W-uLlPjY@sirena.co.uk>
+ <e25dsbpp3chldtoh2awrtxfxkju3jevphn5pcoqvfehibwg2nr@yj5pfelpti63>
+ <bc461376-292d-4550-8518-3b84eb4fc602@sirena.org.uk>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDE0Mz3ZRyS3NDkzJdE1MzMxMz09SkVPMUJaDqgqLUtMwKsEnRsbW1AA0
- HLx5ZAAAA
-X-Change-ID: 20260416-dw9714v-4566465ebe7d
-To: Sakari Ailus <sakari.ailus@linux.intel.com>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>, linux-media@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org, 
- David Heidelberg <david@ixit.cz>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2151; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=oYUP+Vnff20ntgLnvHo60QOZ87WDo1RjdNjMn2rOI/s=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqanZGT4yuviAXM6et2q4veAeQvdBVKomBvYnWx
- 3h7Dpd0gqyJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCamp2RgAKCRBgAj/E00kg
- chWNEACN7rsLP2gi4i+3pyVwXWd1subptuyXbin6eiSrR5h4Dh82gTnjoDA+4rW5wEedPhWcn0/
- KSU/OESMA8nRVZ0Avj0ko1n0pFmMzLZgsk3yu2zOdC5xncGJ7DOIb3g4SmVgvDCNlk/y+qobXxw
- d0ymhh9pwdaJGd8XvTGqkrcEbiJm52qbvBTzHVkbkLSqsgfkPTh5xZs/SSRq7co+B4neRcbAyV5
- Ss46dhNYpLX8m32iQAwIok6DWcOceZsHj6YyyXQ38ROirLr9KUxffz9PwsjnH7luzRqbs/7Q6Ht
- Ts4LIXYn0mVvTS7KEaYe1Qjzd+DOVEF7N10PKL+DMgbIPSJ2R9ySdgBofDMX8TR9q064e0S2U/S
- wRDzuoaLSm3N3up3A5Ug2K8FeAGTqhYiy0/TX++lsFGo5qMi9BRteeexJUPERaUYGr5jUku3L+N
- xhS0DdnpPwBMhtKOh/5G7aiRwjvI7NOgbCKHMKZzea2duYqvARvz7OkOoYVR8UBi4zIJT5ukM0L
- LI5PZLpq2GoQzC5F5hTI1DZVhDkKdDVC0mEyXaEWyt1LFlqvzyhA2YvUjKudH8HnzEjsfcRvUeQ
- 1LBgK3lrubpe3Tz5I18T53m9Oqe+YqOb/UY+50GKn+g9chME+NQ4av2bOyjvmX1N+NzpbqLzM1p
- K1eWLO12M4OQ79A==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <bc461376-292d-4550-8518-3b84eb4fc602@sirena.org.uk>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDE2NiBTYWx0ZWRfX7wXHCvfOAUCR
+ EKpz2M0bsTn0PTXnMmU1SZmaTYTeUPNH0v4QmuINdEtfEb7PTQXngQukL+pL2KJNKyWo/H/N+z/
+ SNo2+YJxsFbbEAFcFh2MXgBSQs7THaU=
+X-Authority-Analysis: v=2.4 cv=HMrz0Itv c=1 sm=1 tr=0 ts=6a6a7795 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=kj9zAlcOel0A:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=ne3m7yMffpSDnRU9SVgA:9 a=CjuIK1q_8ugA:10 a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-ORIG-GUID: ZO2oq9mtkCadrVW1wRnvY5i1kaX729TH
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDE2NiBTYWx0ZWRfX8If5IkAq4oj8
+ fZaoUuWmsTxYAEDya9lzSdgNnR8hp1NFRatD7x7r4lEuVXOYkUplMQszZOkvzIOVVeeOPZCuCFI
+ T07UTODUrSwojUIDNmEOklAgS9lQSxsRB/+ugRxFOG3Q0VHBlLbUe/kXgKn9pb/hjn/3eDbH3WB
+ 5FK9VXvajXYqkeuqfpX0SPOoPtKdiI8YmpzKVuQ01T81QTmSqNaDea4gdqEntvnbgyItQ/K1FiA
+ u74MlSx+mAuJfmwnrDbsHFOZZJreuOcR2K9fEoCbNweONv6C6eK/7MPYOzx4aGtYTQ1jLE9mt0e
+ gniNbnMJBIHPOuLycFTBFGdbnqKLJrQCNM3UI97rZB6ZffQah4nVTqkVMx/k5MkCp0k8OmKmNFr
+ mH6ukYZuGSlOtBYXPbJNFADx7TZiJH6PDWaHPJnizU7SrxIb2aqB6KKxxDUKb9P8QVTxUpMcB7h
+ 8fo8xFinEYC8ZZwZ4lA==
+X-Proofpoint-GUID: ZO2oq9mtkCadrVW1wRnvY5i1kaX729TH
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-29_08,2026-07-29_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 suspectscore=0 bulkscore=0 clxscore=1015 spamscore=0
+ phishscore=0 priorityscore=1501 adultscore=0 malwarescore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607290166
 
-Implements wiring for:
- - SGM2036 linear regulator used by the cci i2c camera module [1]
- - Dongwoon 9714V focus coil used by IMX519 camera sensor [2]
+On Wed, Jul 29, 2026 at 09:04:47PM +0100, Mark Brown wrote:
+> On Thu, Jul 30, 2026 at 01:11:36AM +0530, Kamal Wadhwa wrote:
+> > On Fri, Jul 24, 2026 at 01:48:30PM +0100, Mark Brown wrote:
+> 
+> > > No, that's not the point.  A get_status() operation needs to return the
+> > > actual hardware status *now*, not a cached value from some random time
+> > > in the past and not something that was written by the driver.
+> 
+> > I can drop it. But I seek your guidance on how should i implement logic
+> > to HOLD the enable/voltage/mode for the regulators which are turned ON by
+> > bootloader.
+> 
+> You could cache the values currently written to the control interface?
 
-[1] https://www.sg-micro.com/rect/assets/efa85993-263c-41aa-9274-b488f59f85d5/SGM2036.pdf
-[2] https://datasheet4u.com/pdf/1247146/DW9714V.pdf
+We can cache it, but i was planning to add change in core,
+which will require get_status() or something similar i think.
 
-Open question for future work: modeling the I2C bus supply.
+> 
+> > I was planning to use get_status() (in a subsequent patch series) to check if
+> > the rail was left ON by bootloader at the regulator registration stage, and
+> > use that criteria to decide if we need to hold the voltage/mode/enable state
+> > or not.
+> 
+> That's logic that should be implemented in the core rather than driver
+> specific, this is an issue that affects everything - we just mostly get
+> away with it since we don't start touching things until drivers do so.
+> It's a real problem, just tough to solve.
 
-Like many similar chips, the DW9714 has a single VDD supply, but its I2C
-lines go through a level shifter to a 1.8V rail, and there is currently no
-place in DT to describe that rail so it gets enabled during I2C access to
-the device. As a stopgap, this series models it as an always-on fixed
-regulator (see the TODO in the cam_bus_2p8 node).
+yes yes, it needs to be fixed in core.
 
-Direction agreed with Rob Herring and Mark Brown on IRC:
+> 
+> > Besides this, since the sync_state() cannot be used.. i was thinking if holding
+> > the voltage/mode/enable till regulator_late_cleanup(). is that ok?
+> 
+> Consider what happens if something really needs a voltage raising to
+> enumerate - if you ignore it then the hardware might be in for a bad
+> time.
 
- - Modeling the level shifter itself is overkill as long as it is just a
-   supply; modeling the connector would come first if needed.
- - Since each side of the shifter has its own supply, the proper solution
-   is a generic 'bus-supply' property valid in both the I2C controller and
-   device nodes.
- - Defining it per-device-schema would ideally use an I2C equivalent of
-   spi-peripheral-props.yaml, which does not exist yet. The pragmatic
-   interim is to define bus-supply in i2c-controller.yaml for both places
-   and add 'bus-supply: true' to schemas that need it now (dw9714),
-   deferring the peripheral-props question until more shared device
-   properties accumulate.
+May be we can allow the up-ing of voltage/mode to go through? but cache the
+lowering requests for voltage/mode and apply them in regulator_late_cleanup()
+so we are sure that there is more then sufficient power during this sensitive
+phase. will that work?
 
-Once bus-supply exists, the regulator-always-on workaround in this DTS can
-be dropped.
+> 
+> > > > So, shall I read the HW MODE/BYPSS/ENABLE value in every get_status() call?
+> 
+> > > If they reflect values that might be dynamically updated by the
+> > > hardware, yes.  If they are just control registers that the hardware
+> > > will not update autonomously they are not suitable for a get_status()
+> > > operation.
+> 
+> > It not will autonomously update, but it may be updated by the APPS bootloader.
+> > I guess, that still would make it unsuitable to be used in get_status() ?
+> 
+> Will the bootloader be running at the same time as the kernel, I really
+> mean "by something else" rather than "autonomously" - usually that's the
+> device itself (eg, reporting that a regulator was shut down due to over
+> current) but it could be something else I guess.
 
-Signed-off-by: David Heidelberg <david@ixit.cz>
----
-David Heidelberg (2):
-      dt-bindings: media: i2c: dongwoon,dw9714: Document DW9714A and V variant
-      arm64: dts: qcom: sdm845-shift-axolotl: Add actuator for main rear camera
+Ok, so is there something similar to get_status() that i can use to pass on the
+info to core (from the driver) that regulator state was ON at bootloader stage?
 
- .../bindings/media/i2c/dongwoon,dw9714.yaml        | 10 +++-
- arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts  | 61 ++++++++++++++++++++++
- 2 files changed, 70 insertions(+), 1 deletion(-)
----
-base-commit: 78bc8af4affb9a732504eb22eeac7d1e50883853
-change-id: 20260416-dw9714v-4566465ebe7d
-
-Best regards,
---  
-David Heidelberg <david@ixit.cz>
-
-
+Regards,
+Kamal
