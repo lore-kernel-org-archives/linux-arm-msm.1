@@ -1,123 +1,183 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24F60381EA3;
-	Wed, 29 Jul 2026 23:11:30 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A00603FBB5E
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 23:11:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785366691; cv=none; b=Ouc7Drl3VGFfZeL9gT5IPiqBuRkP3oSMJkHZV3TA07JAPAFwyu1upsTWGs4JI34m5g/dGsZM/7W5r0ObWSpGtIowGh8UjNjRqpNQRR/RULkN3r4XPq+3+PRbv/yAj0JeWl6QjcadUaEviTTfWT8QtKQUwcTuovUcLYOIM7pgs8s=
+	t=1785366714; cv=none; b=fEsyCNigoX4qSvo9YocWbCs75tHkD5yuT5VSLG0WXvZpkFJEaDFwxcznEPLwBvU0rXpFYQgup83FZKQRkhBKicZeUp+zWqaDQ99fKI+zsU6c4RdL3z2OKpSu5vLJM1HXz863a2LC8Dzgx1oG6x1ZVNcmFZzhex8urdkXXGuu0S0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785366691; c=relaxed/simple;
-	bh=xVhJMoGB8f/Wyc9AcM3Qk4r5yWG7dabsKJ8X9m158oM=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OAE4BtXgxHITBibJeV/L9jCIO9+ZSMH+RuIbrN0Y2BIBCnI9HFRN+xiwc5b5wYW7TEQ8AdQ9kM2GaJu7TI+bKNAM2XpYxebKts3SixjT7ORIaxfkix/4sa6pukKPCCKSlu0846l40c/b96yN2EUEIU7mXd3RqJRJa70uJ1ZYWns=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=F8swS/ca; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785366714; c=relaxed/simple;
+	bh=mX+uXiXqmR3+strMhFm04SU2uyDc7C91wtsmT25MVT4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ki71p6zt3Bm9y46fWQf5wwrnAfr0/d4BS0c9W2gDOax3C1obr+jitXg0/tNBPCXYuNK17dieC8/UaNdo3vxKclEERbPopWrh9wBWGSBbE594xJGMCPcblDl+ZtGl8o+oV0NBYOsxUuUISrPbO21N0lAJhJWw4NByEqgFQc2WPLQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=J9l+b2Ao; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=O1fn1Zbi; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="F8swS/ca"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 961E91F000E9;
-	Wed, 29 Jul 2026 23:11:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785366690;
-	bh=JPrRO2GL50+pJAUYIEECC/MaO7uH5tNAKmX17j7xXnU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=F8swS/ca3u6mpgMpAOSXcdBx+Q5nrwoHKimqnT2xRxM5lKUzbVhkYnQ6Iz0HR/F82
-	 IcGWL1dcuq17ip+E+pWyHoeXD2kVYEOsRkDUskde02YS3Dun4XA8ZjNjXqdT8XMR5L
-	 JdOUYxnBBKLDVxyXNOWP/6svNmK4YTR0xKOLsValS9j0UKyORslbvuD9ndLTGPipHo
-	 kA9ewgWxKuY6Y0WoR225dwFocXAkAa0HJFPs/rIgcrtfOIY6P59LTlbIxOF0srjckl
-	 QuIhJWa3TffTfCQ1vFS2SfpfwBNEJXgdx6+DnmFAm6ZP0WxklkDtgTHDNP2rxiHfOz
-	 tU1ao92tb8IFw==
-Date: Thu, 30 Jul 2026 00:11:26 +0100
-From: Mark Brown <broonie@kernel.org>
-To: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>, Vinod Koul <vkoul@kernel.org>,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v5 3/4] regulator: qcom-rpmh: readback
- voltage/bypass/mode/status set during bootup
-Message-ID: <791a22c8-8c3e-403d-9737-c5957ca2a0d8@sirena.org.uk>
-References: <20260720-b4-read-rpmh-v5-v5-0-cb93fb95f565@oss.qualcomm.com>
- <20260720-b4-read-rpmh-v5-v5-3-cb93fb95f565@oss.qualcomm.com>
- <da299944-0093-4d1a-b092-f7857b101199@sirena.org.uk>
- <gaigrfpfunsqwuxf24uonw4mrkdse4ap3cywi2eg2qdyfgfzsd@hk6zghfqnkty>
- <amNfHiL2W-uLlPjY@sirena.co.uk>
- <e25dsbpp3chldtoh2awrtxfxkju3jevphn5pcoqvfehibwg2nr@yj5pfelpti63>
- <bc461376-292d-4550-8518-3b84eb4fc602@sirena.org.uk>
- <j2tncckz6mex4q7yqkw2prpi5yml7sdka2etlmnf3knyamvfun@pizpb76ilcsw>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="J9l+b2Ao";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="O1fn1Zbi"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66TN9S2N3134252
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 23:11:51 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	8Wa4zOrWIiejtu6vYmYh+QujFwCPkBq+i8oI0dFrBAg=; b=J9l+b2AoygGm2gwY
+	OZncAuAapuZSzxSi03eA3UGAp0FQp01EeYiCgLoR0vSPXmqXmiJNxf5QL9692E8f
+	xlJdKkLNl+T5FRYnz8yGC6lxR5pzsyEqSbThJXSl4bjVgDSTmuux1Z/4DFKrgoSC
+	ytuGxGe5/Nqv+lvQOqsecDP52drH6ICIaTPLwpag79zmPo31O9pPhQIA0+c5NS8G
+	ofjTRQ7rtskyflXtqC66ETzpSLSNnyjrNJKJbP+VchbhQbVyg299Q0gcbapLZW6x
+	6qy5ArEyqjrziPZCwow3CUa1/fOnsvqEDLjbqO0ygC1Nv1tPTb6OciWKaNP7yp/A
+	w4Ojww==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fqtxq808m-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 23:11:51 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-51c20762d21so18964341cf.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 16:11:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785366710; x=1785971510; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=8Wa4zOrWIiejtu6vYmYh+QujFwCPkBq+i8oI0dFrBAg=;
+        b=O1fn1ZbiuANgWVgennbbQ4rR3inAWlMqoojv0IYOPPD3PtOdQaL2RoYuiZXHOsR8fr
+         VzRBQZGsecA3G34MJR3MvFTfLjLOIuvb+Nd7OiSsgtdpoSjyI6cVmTvkZuSo2YpnwU0Z
+         Gc0Wn+CDslhPSndkvfCuBAeVK03ORw+7AY/DfPyG+KfVRBVIS6kWA0dj4sNERm1uwFPn
+         k7z8DSwYJL9/M5HgfKIVdsFPZOlytolKt13Vy3F6J5wU52UyMzo16bt8YeNBfNgnxmio
+         +udG9tpmod0rEwLIMxMT8KMt1kucOsV609hYqvdaGkfgCnxrQ8G/R3ZOWc5KYv+8yTEN
+         ltgA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785366710; x=1785971510;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=8Wa4zOrWIiejtu6vYmYh+QujFwCPkBq+i8oI0dFrBAg=;
+        b=XcjW4Qm65dRyCnY7za/wMV7IHGCxMWSGCS0OI3DssoAwICEJAPs4Nq/9fsocZ9j1Ux
+         F2CKx2BjQUcktT4VjHTkvOzZOHAzYiKwHYO7HaOyR38YQnID8dfDUgs4lXbBi/zosCsG
+         Oz5HyqlwiaLYGvJENt7FCCmzOjLqGJ4kl/ho/s9hFUBinPX/mZN5W7ko6wknQcoj3HgE
+         PFyy2CyIcIDujwixqbFL0O/x8XGeZBKuXoOK47XCA2Z+0w8pBr/zweKjuH9jvue/Fiv6
+         4qY6XRAYq6WF7qnl9niBo4ng7Qxiua1RU+FszR0czftQIDx9rIq5zjwqoQUvvdkJGBDZ
+         3EiQ==
+X-Gm-Message-State: AOJu0YxuoHbLUho3xvzKmit4T3WH/JWLCN9J0psQBBvcv2roDjrKveJi
+	w8ySDzy3uze8S4KS3mEOBykN4tpTkAYDzWAEV5ZB6PSlaX4D5B6t8eoZ01mekItVaI2IUSi8A2I
+	PND7kXkKy9UTdZfeLtxxwUUt2A1dMtHYJMcj3TvbqgLYtU7OIYogU7v8Kjzq2P0tOzRsJ
+X-Gm-Gg: AR+sD114lXYvwrKv9ZLMS7r38VIiMnk5wuFM8f9389SzV9M3JsKHhyX4K3NktEsOBxd
+	6qlREuAwGykNfIgk8ikZHhttmbWdgiCz5NuoCkzERBYUzb4giJfAwpdlAt+CBklkoMm6MGxVWSR
+	5kVzl14soiZa8iOO42fW6TYbNMm/79q9kJZkqFU7FoJvhBWYVw898p/tPNCokERLoTYckJhwSTd
+	zM2z4rCD/MlfgWvMzz64+FJyIepZYT/UVfSbjJZOTHWT+xHO8zg3UQXQQrg1D1g8e6KbeaezdEx
+	hROQB+Go2i2NzWs6YjoDlo1YhBiXXR033/ZXf8kXFPfBEjoCJD3H8vkWMqX3WmwH1Zb2wSlLVuY
+	74+FjmhXmklG/ldzb7lLEoh/4hIU=
+X-Received: by 2002:ac8:594d:0:b0:51c:17cd:1fe8 with SMTP id d75a77b69052e-52b38497620mr5750661cf.33.1785366710549;
+        Wed, 29 Jul 2026 16:11:50 -0700 (PDT)
+X-Received: by 2002:ac8:594d:0:b0:51c:17cd:1fe8 with SMTP id d75a77b69052e-52b38497620mr5750301cf.33.1785366709984;
+        Wed, 29 Jul 2026 16:11:49 -0700 (PDT)
+Received: from [192.168.68.105] ([5.133.47.210])
+        by smtp.googlemail.com with ESMTPSA id ffacd0b85a97d-47fc892cdeasm184393f8f.22.2026.07.29.16.11.48
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 29 Jul 2026 16:11:49 -0700 (PDT)
+Message-ID: <667133b5-10c9-4007-b5db-27e553dd5034@oss.qualcomm.com>
+Date: Thu, 30 Jul 2026 00:11:48 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="YMspz0hZlNo/nuDB"
-Content-Disposition: inline
-In-Reply-To: <j2tncckz6mex4q7yqkw2prpi5yml7sdka2etlmnf3knyamvfun@pizpb76ilcsw>
-X-Cookie: Captain's Log, star date 21:34.5...
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] ASoC: qcom: sc8280xp: Add support for SM8475
+To: esteuwu@proton.me, Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        phone-devel@vger.kernel.org
+References: <20260729-sm8475-asoc-v1-0-3edad8aa7628@proton.me>
+ <20260729-sm8475-asoc-v1-2-3edad8aa7628@proton.me>
+Content-Language: en-US
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+In-Reply-To: <20260729-sm8475-asoc-v1-2-3edad8aa7628@proton.me>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: 5t5KTvx9KVkKQiGqxR4bybne5liBj8XY
+X-Authority-Analysis: v=2.4 cv=Ou1/DS/t c=1 sm=1 tr=0 ts=6a6a88b7 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=KGg2J5DcaUvRLS7BGUYA:9 a=QEXdDO2ut3YA:10
+ a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDE3MyBTYWx0ZWRfX9qGApGZQ0VTa
+ KDNO3rO5/kPMbViYbrR2nBSeu5lGdcOZxeEUFCqscDItZ0DwEMmJNO/hNmRcWd7M4laLQ4ZYmAk
+ Asl4SiICEEV2OIDNed55tgwacnsef7s=
+X-Proofpoint-ORIG-GUID: 5t5KTvx9KVkKQiGqxR4bybne5liBj8XY
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDE3MyBTYWx0ZWRfX7wplam0jVeyx
+ UnivWuz0mrQ0XdfYfzwxCSCi55qJyGf+hhdjZw3QBiMe5f62VO/yELuKNa7uSmOehD7tedNCDKG
+ JkyKnhUkLiE4QRiCnf7mv2FEvBrdn7O/6GCNs6Tx5Fs7EzW+3NtAryhapvyI+KOEuTWLBNh5wgS
+ 0qYwZtvjsSjWheoM8hrNYtzT0eXq0rhItVFg0CyBoBHAjH1a5IQRVifpGYG0Bmoq9MQOzFHNnvQ
+ aMsnHgK6b24LJvJsQnqNmUkwLMIg6emSt7oUiTG1JHK5QlIIKIx27ohOKII7jRkD2cjQbTiIXE+
+ sQ2x4Psl4hTgBoJ+/5hPhWvnzOyIGPIsn9jyCEWmn8fiTmQTCMFiQxT4vhndhcxNimX5wwUuNAN
+ QI8FBubkG8Rdww48SwqpvfXf8jsxp53X/S5wX0mCL314N5Q/mxION4yKjr7UzoN2N/2K6RTcwLx
+ 3viPH7IF8lXd/PkmtCw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-29_08,2026-07-29_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 clxscore=1015 bulkscore=0 adultscore=0 lowpriorityscore=0
+ phishscore=0 impostorscore=0 priorityscore=1501 malwarescore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607290173
+
+On 7/29/26 8:31 PM, Esteban Urrutia via B4 Relay wrote:
+> From: Esteban Urrutia <esteuwu@proton.me>
+> 
+> With this, SM8475 topologies can have their own firmware folder.
+
+Patch itself looks sane to me, but the commit log needs bit more love.
+Its too short and does not explain what this is platform is supporting.
 
 
---YMspz0hZlNo/nuDB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Once fixed.
 
-On Thu, Jul 30, 2026 at 03:28:39AM +0530, Kamal Wadhwa wrote:
-> On Wed, Jul 29, 2026 at 09:04:47PM +0100, Mark Brown wrote:
-> > On Thu, Jul 30, 2026 at 01:11:36AM +0530, Kamal Wadhwa wrote:
+Reviewed-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 
-> > > I can drop it. But I seek your guidance on how should i implement logic
-> > > to HOLD the enable/voltage/mode for the regulators which are turned ON by
-> > > bootloader.
+--srini
+> 
+> Signed-off-by: Esteban Urrutia <esteuwu@proton.me>
+> ---
+>  sound/soc/qcom/sc8280xp.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+> 
+> diff --git a/sound/soc/qcom/sc8280xp.c b/sound/soc/qcom/sc8280xp.c
+> index a9304784d41e..f0f3cd8fca38 100644
+> --- a/sound/soc/qcom/sc8280xp.c
+> +++ b/sound/soc/qcom/sc8280xp.c
+> @@ -362,6 +362,13 @@ static const struct snd_soc_common sm8450_priv_data = {
+>  	.wcd_jack = true,
+>  };
+>  
+> +static const struct snd_soc_common sm8475_priv_data = {
+> +	.driver_name = "sm8475",
+> +	.dapm_widgets = sc8280xp_dapm_widgets,
+> +	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
+> +	.wcd_jack = true,
+> +};
+> +
+>  static const struct snd_soc_common sm8550_priv_data = {
+>  	.driver_name = "sm8550",
+>  	.dapm_widgets = sc8280xp_dapm_widgets,
+> @@ -395,6 +402,7 @@ static const struct of_device_id snd_sc8280xp_dt_match[] = {
+>  	{ .compatible = "qcom,qcs9100-sndcard", .data = &qcs9100_priv_data },
+>  	{ .compatible = "qcom,sc8280xp-sndcard", .data = &sc8280xp_priv_data },
+>  	{ .compatible = "qcom,sm8450-sndcard", .data = &sm8450_priv_data },
+> +	{ .compatible = "qcom,sm8475-sndcard", .data = &sm8475_priv_data },
+>  	{ .compatible = "qcom,sm8550-sndcard", .data = &sm8550_priv_data },
+>  	{ .compatible = "qcom,sm8650-sndcard", .data = &sm8650_priv_data },
+>  	{ .compatible = "qcom,sm8750-sndcard", .data = &sm8750_priv_data },
+> 
 
-> > You could cache the values currently written to the control interface?
-
-> We can cache it, but i was planning to add change in core,
-> which will require get_status() or something similar i think.
-
-I would have thought we could use the currently configured state here.
-
-> > > Besides this, since the sync_state() cannot be used.. i was thinking if holding
-> > > the voltage/mode/enable till regulator_late_cleanup(). is that ok?
-
-> > Consider what happens if something really needs a voltage raising to
-> > enumerate - if you ignore it then the hardware might be in for a bad
-> > time.
-
-> May be we can allow the up-ing of voltage/mode to go through? but cache the
-> lowering requests for voltage/mode and apply them in regulator_late_cleanup()
-> so we are sure that there is more then sufficient power during this sensitive
-> phase. will that work?
-
-It's certainly much less likely to be an issue.  There's some similar
-issues around enables for exclusive regulatorss though, and I wouldn't
-discount lower voltages being an issue (off the top of my head I've got
-a feeling MMC needs to lower voltages to up clock rates but I could be
-misremembering the use case).  Whole thing is a massive can of worms,
-that's why it's not been addressed :/
-
-> > Will the bootloader be running at the same time as the kernel, I really
-> > mean "by something else" rather than "autonomously" - usually that's the
-> > device itself (eg, reporting that a regulator was shut down due to over
-> > current) but it could be something else I guess.
-
-> Ok, so is there something similar to get_status() that i can use to pass on the
-> info to core (from the driver) that regulator state was ON at bootloader stage?
-
-is_enabled() would be the usual thing.
-
---YMspz0hZlNo/nuDB
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmpqiJ0ACgkQJNaLcl1U
-h9Be3gf/di2sXqEtyYXhmHQS5pr3XLxPyXCMDpocWS6hzQxTPETLmDqxk1v8MTbU
-fivXkGO6pik+LXDHNJRrGxJGAtF0owCnuxT1lkJEM/NBDNd1Nc0cN0qy8CCf0uDC
-UjaUYW7ekbVryQM6+uFjGCRNvN9xtgIJTGSqN/aBqjvEK8yfaswXT2m8ZddZnqdt
-XXQm6Cpi7fPypexD12aUuVcIGqdfpJLV2r0FmGOiW1ccavgdai4+VHByuBw/Ou3Y
-E3X/jtseehiIh3YcdU1ZEAqT45RIlP9EjwKk8Oz1g767oJOTxNALLXckYAFVkOM0
-38Czk+/sMB6ohX/bPwO4qwEYcPlbpw==
-=kwvh
------END PGP SIGNATURE-----
-
---YMspz0hZlNo/nuDB--
