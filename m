@@ -1,33 +1,87 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEB2B3D75AB;
-	Wed, 29 Jul 2026 20:31:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE6F93803F9
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 20:52:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785357119; cv=none; b=i2KLdADZZcMeoYuO0gir9ic+ud3HA7gWuP/hh0/ogFWCKMAUl8jypMJCH0Ev+4bkG9op42hDK71WjczNuysKh04FqQfL/NMnh8r9eb9m3iy7NcTRlfYxDXmMmxCiBcmqtTRxZ5BL+E1A3s7mOBUr6xqjO6LSumJYY+FUALpH4ZM=
+	t=1785358375; cv=none; b=dzAFhmFU/3bI9odruJ6Z8RG+YcobhhXSCq1fH6BHSrNk9X0gQ9QRJjDGmhFq7rOXBAK7VvLYOyBl7qTHv4WipFAPkCwFe7hFaUiwyMjBfagwVwDFw2MR0eaCVw9FdvzZaSqaZGYKOQfC3qhB6aqhBC4yASIm486668pQ0qlAFo4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785357119; c=relaxed/simple;
-	bh=TpOPqPM0yfsdY+T7EN3hGc701SXFTUjQWJ3JCuJ9oQw=;
+	s=arc-20240116; t=1785358375; c=relaxed/simple;
+	bh=vD/s6wza0g9D+mKcX5bzPQ93KpB79g9VydwRgG15eM8=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=G6TmN93A9Pphxf20/6JnG9htuXKEfpgWxW0nqrLc3ZtL3JUISwm5cb+7aMDrPl1lrKEVaJJvapmWlX+wtM6tJT5rHP8XR9WSsePlpDonGUWFT56iTP3yLmFxiq02H+y1UScGIxijOTHvuMG65kp/AzFLmm2kFFJdOvZ/H4L8pQI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=elZPAY36; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=Jfb0tv/QhD8vm17v0bjYFG7HepYjdBW2qrt4Lv++00agvFetXI2lYdXo4EgcY80b9ZZNjL2dHKASqIxLPvpG6gePkpceOB5h2i1bniJN28aAGXsQBvhmyXvRXliR25BZUtYLED4/obYo0FEVVb+H8g9+kTj//jhFJew8nXxwOyA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Od9m5I16; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XcoHCiF7; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="elZPAY36"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A80641F000E9;
-	Wed, 29 Jul 2026 20:31:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785357117;
-	bh=4aKy79id/k5rZYSRIjBweFs5AzGWuqksrl9M8jcvWk4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=elZPAY36keHsXlXbFM49u2/CGDTiCOzc9LZxYhN++GrWR+B0kFSZIEJONUae3EwAn
-	 hqjAH+kNh22vazH6aptgsmGWJezWZn0/bBGjQT9/kCihF4tvRekiuGY8FbUo5++lQV
-	 g7PqZ2evyhq/hLHKvNvN1En5GzVI0epdVZ/FRxh3ynsIVEtp6ij+5AMF+0n/lVZG/s
-	 ol5b+F7rLdOseq4TTxOHKagodTg2vYfuV07E+zg/Z+JM3eNTEK6Ckw7vZpDX9AYrRf
-	 2eQL91UZAnu149Ej4LcblBCa6GhUGdVXmP7qBI6GdzX+trPAJSFwahtuzApj7ip1L4
-	 E9d/F8AoTC4nA==
-Message-ID: <25ef6b91-62b4-4e8e-bc8f-8400dc293273@kernel.org>
-Date: Wed, 29 Jul 2026 21:31:50 +0100
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Od9m5I16";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XcoHCiF7"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66TKVqfJ3103208
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 20:52:54 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	critbA2mnXZKO3iDwpU36SfNN90IioeFvggdcTePRqw=; b=Od9m5I16gMZP8va2
+	BWOWBBeX1lTjGgULKVTorUrJorHn+qPo+FYF/S/1+i/dj2Bbo3tWt25xVkxNL0o1
+	gDNqIeP4VbGOCiKkIe/PGHJx1G8XZYA//FnSTyWc/9hpJ5suiuURaW8t/EFBz9EW
+	w7V8a2qhpB1UzwDPwENGla9fbqNUEK35VxharlBmcjLXQv5NQvXJ5l4A4zeLopJf
+	dW52PZKEBORHRQZzF7mzyqrus3HGeMVrFU+nQeF813oWza/bQlF8NmTx61Qvnyll
+	KCjCG02TeBTe8L2UIF3p2gW30KuAFWeRywK4jzIWCf1ZYCqtLcxGiN2Nt71Yi41p
+	KfH8Nw==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fqrmvg22v-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 20:52:54 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-848662cd2a1so1567277b3a.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 13:52:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785358373; x=1785963173; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=critbA2mnXZKO3iDwpU36SfNN90IioeFvggdcTePRqw=;
+        b=XcoHCiF7OBgmlL0nJ7cJDk/ST+JSi2i8mCxtoanw9U/gpZ9KmcergOiSICKwWd4DLo
+         8IwZVcTxkbpjiNfd1tSbCPlQnZvUonYthBAVX9YtUUO5ryJ40sQrv5Zma/PDUwlCfdrh
+         vi6zzEf3dEAdD6NcnEHyeNVnU4VMeu7vUwTFyOdX8vXl9WDw/sGCOyejjR3P7IrmFHlk
+         qTIoUoijFpXm2cUA0aWt0wg/YFNEIX5y52NCLrttEnmvCXUcvQXAqlslHIYsDq9R5DbD
+         nPCHUSuzLu88nbp0OotcJSklp3XG1z7fsL8FVJoNQjasPmEBhcDbdBhoFeCYAXcwwxK5
+         +4OQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785358373; x=1785963173;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=critbA2mnXZKO3iDwpU36SfNN90IioeFvggdcTePRqw=;
+        b=GpN4QxiujyDNF30B2bS52NOfRNu3JfPH7P7fJPeno2t7F8FU6bwqlyzQymgajpaooM
+         FfHfxg7N9ycGyeqIsleVnVX2ZZqyHo9phtsJpOKpf7rP+3NuX+X4/4O5xNEcD69/ZwuC
+         OYzfx17wzTI0TCiSu9PKUTY0KnMdwOelJ9LsJ0W2rslVyG9iEooeFcyITJZGTi6Pj0Cz
+         8MnXkVhOAUP+5Quk7XyDw/FqtXM4aEGBQLrWkK+2IX6iXyFkzLzAbnETFKD28OxfXNPD
+         p2pHEc1xXAh4GXUiR30JzXsN0y6uJyW+Yb0w2lLLDm1WvauAQD8NWnA+UXtBlAo0fPxu
+         cfLA==
+X-Forwarded-Encrypted: i=1; AHgh+RpMiQKsvSaBiSXJFmW7xXYVJh0K2/8xYvFihnINTnwXQBBUuayxPHXzKhwZ1r0gkF8G60fOIbiYLe1iQYx5@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx8J6KujbWpTF+Mca9KFbltlTtY924rrTXGYux3s0j1GgeQgmN7
+	qtSEl+0DRdAeHnpA4zhxwYlAvI/Vo4s+Hfbl0nw3BtX5g2v2Gkr7S/WAOdP/SbvrLjLtx6uyN26
+	yz7kxjkbHAqv/dBUOQO5IueuHkQvbumDKTsVErAsWSq6T9s4GTG3jzOT7Zsope8ubm7Hb
+X-Gm-Gg: AR+sD11Vu4bXN+nG43LeojHnUZLtt2NVu2Itj3npEJziQBX6FsvgAIEEyWaQ8LlnHsO
+	PgLppwZdd2Cm7T4dseO4rp78Ayv+qxz/1qMQtSW/lFuyfD7+7nw40GUw4jclAr6XSbPnGo83zve
+	knsUzBjQceCydG8SAxmfnBH3U5UU5Wl079rru3qcIzx9dPDrik7++Mq/SRad194NA+/cC+LQlRr
+	8HnpvkEHzCcA8G+2KSox94/Pckz90/UgaC9YgGfMunIMaEu34uAd/iSQlZYm10Cn+8A6AixUbfs
+	ca20n09zyk9is6YLuIgE7dLIkHko6VpfGaWumRc5PLGGs+cXjZzMyAlobywKRzE+NzsiDkqEdSX
+	yUSeEBJCQOiTTCcyCLhn8D1nElNmiatdRPR5Z7/R1S5vz+YBff5kHTQ==
+X-Received: by 2002:a05:6a20:6a0e:b0:3c3:6544:6083 with SMTP id adf61e73a8af0-3c89cadcdbbmr9304003637.0.1785358373345;
+        Wed, 29 Jul 2026 13:52:53 -0700 (PDT)
+X-Received: by 2002:a05:6a20:6a0e:b0:3c3:6544:6083 with SMTP id adf61e73a8af0-3c89cadcdbbmr9303973637.0.1785358372886;
+        Wed, 29 Jul 2026 13:52:52 -0700 (PDT)
+Received: from [10.226.59.182] (i-global254.qualcomm.com. [199.106.103.254])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31504b10cdcsm13512172eec.3.2026.07.29.13.52.51
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 29 Jul 2026 13:52:52 -0700 (PDT)
+Message-ID: <187d7b00-748c-4056-aec6-b498044fe1c7@oss.qualcomm.com>
+Date: Wed, 29 Jul 2026 14:52:50 -0600
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,346 +89,63 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v13 3/5] media: qcom: camss: Add support for PHY API
- devices
-To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
- <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
- Todor Tomov <todor.too@gmail.com>, Mauro Carvalho Chehab
- <mchehab@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-media@vger.kernel.org, linux-phy@lists.infradead.org,
- Krzysztof Kozlowski <krzk@kernel.org>
-References: <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-0-ae811e2f0799@linaro.org>
- <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-3-ae811e2f0799@linaro.org>
- <qTmyhh5ukxu4BQAZXvNyyUvZxucwjv6bNoe2v30cfjsdhuzg3ud5DZzGmSBlYICc_POjXS2sSvhbRop0i67mxg==@protonmail.internalid>
- <8210513c-288b-4d02-9688-1de10e40d9f9@oss.qualcomm.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- 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
-In-Reply-To: <8210513c-288b-4d02-9688-1de10e40d9f9@oss.qualcomm.com>
+Subject: Re: [PATCH] accel/qaic: use sizeof(*trans_hdr) for transaction length
+ check
+To: Muhammad Bilal <meatuni001@gmail.com>
+Cc: carl.vanderlip@oss.qualcomm.com, ogabbay@kernel.org,
+        dan.carpenter@linaro.org, linux-arm-msm@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
+References: <20260617212520.59801-1-meatuni001@gmail.com>
+Content-Language: en-US
+From: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+In-Reply-To: <20260617212520.59801-1-meatuni001@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDE1OCBTYWx0ZWRfXyKSfTOWxv0dF
+ fiq8rwv5yinIAqYX+82JbBZl6buyCe0BxeIVI+28/hgaBL1J94v+0DQ+hMJpA5L5tZu+GEwyWoS
+ 6BRt8Gum2xEv5SCDhejubgpxohNpo5A=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDE1OCBTYWx0ZWRfX+Lll+Z8IoX27
+ 8m3idC58F0ct6myMA1CvluD84I2AWYTsgHV4ViXCpdG3roYYC36wVdK/y96ljcDgVhuMAOmipMy
+ O+N42TIJLANmVtuMLs5xHv6DO/xabjzmsusGxR0Bv9/7yRs+k0Y/xWfdP8rx0jgikU5dZjcrLEQ
+ edRBd/DIw/PI68PCDtf0BXWUgJaqBz8WZnVPZt5XE1elH594Gngv33s5fjRPFlf5Uvpq6MwU5oL
+ 6KthjPm1C9lowIifrR3SGJkiHnpZm90oueXYnyap5K3bNNmUordcI2Q8SblrZ6g681oKoOikzN+
+ e12VPzbI6BBlMt+qeBHcTmNWL7tES9hL28QOnb6ZL78pE7FL1OwpGI3lrLjjauISj+J3B3ApDXl
+ sjI9bYxIHyezVjjetQZh9DPR3UEnH/OznoAC6ltqNJ+XBQF+vK7/L9ZYpBycg2kALeufcaTI3XO
+ 4F+fQWF1vzrhonZSy/w==
+X-Authority-Analysis: v=2.4 cv=K8AS2SWI c=1 sm=1 tr=0 ts=6a6a6826 cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=GD8_rapH8p4utXL01xcA:9 a=QEXdDO2ut3YA:10
+ a=zgiPjhLxNE0A:10 a=2VI0MkxyNR6bbpdq8BZq:22
+X-Proofpoint-GUID: 7rdW9f_Um-4sU7Wbzx2mROhiGUHr8q3J
+X-Proofpoint-ORIG-GUID: 7rdW9f_Um-4sU7Wbzx2mROhiGUHr8q3J
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-29_07,2026-07-29_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 bulkscore=0 impostorscore=0 malwarescore=0 adultscore=0
+ spamscore=0 clxscore=1015 priorityscore=1501 lowpriorityscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607290158
 
-On 29/07/2026 14:45, Nihal Kumar Gupta wrote:
+On 6/17/2026 3:25 PM, Muhammad Bilal wrote:
+> In encode_message() the per-transaction lower-bound check compares
+> trans_hdr->len against sizeof(trans_hdr), i.e. the size of the pointer,
+> instead of sizeof(*trans_hdr), the size of struct qaic_manage_trans_hdr.
 > 
+> Every other length check in this file (encode_message() at the loop
+> guard, decode_message(), etc.) correctly uses sizeof(*trans_hdr), so
+> this is an inconsistency. On 64-bit builds the pointer and the struct
+> are both 8 bytes, so the check is correct by coincidence and there is
+> no behavioural change. On 32-bit builds the pointer is 4 bytes, which
+> weakens the minimum-length check below the 8-byte header size.
 > 
-> On 28-07-2026 15:05, Bryan O'Donoghue wrote:
->> +				ret = PTR_ERR(csd);
->> +				goto err_cleanup;
->> +			}
->> +		}
->> +
->>   		if (IS_ERR(csd)) {
->>   			ret = PTR_ERR(csd);
->>   			goto err_cleanup;
->> @@ -4819,6 +4854,29 @@ static int camss_parse_ports(struct camss *camss)
->>   	return ret;
->>   }
-> Hi Bryan,
+> Use sizeof(*trans_hdr) so the check validates against the actual
+> transaction header size on all builds.
 > 
-> While rebasing Glymur on the following series I found an issue —
-> Could you please review the changes below.
-> 
-> Tested on
-> 1. Glymur CRD with OV08X40, working as expected.
-> 2. Monaco EVK with IMX577(legacy path) — working as expected.
-> 
-> Picked up following for testing:
-> - PHY driver:     Add a CSI2 MIPI DPHY driver [v14]
-> - CAMSS PHY API:  Add dt-bindings and PHY updates for CAMSS on x1e80100 silicon [v13]
-> - Below patchset
-> - Glymur DT binding/DTS: locally
-> 
-> Holding off formal submission until the above stabilise.
-> 
-> ----------------------------------------------------------------------
->  From b86af6812bb655e885dbcd23ffd28c92177017cd Mon Sep 17 00:00:00 2001
-> From: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-> Date: Wed, 29 Jul 2026 18:18:54 +0530
-> Subject: [PATCH] media: qcom: camss: Read lane config from PHY endpoint for
->   PHY API path
-> 
-> In the new PHY API topology the CAMSS endpoint carries only port/ID
-> information. The bus-type and data-lane configuration are described on
-> the PHY node's sensor-side endpoint (port@0), not on the CAMSS endpoint.
+> Fixes: ea33cb6fc278 ("accel/qaic: tighten bounds checking in encode_message()")
+> Signed-off-by: Muhammad Bilal <meatuni001@gmail.com>
 
-So I don't think this model is in-keep with established DT practices - 
-if a driver needs to parse a property it needs to have that property in 
-the device node it handles.
-
-So with data-lanes per existing camss bindings in the IFE/CSID node 
-everything though should work as-is for you.
-
-https://gitlab.com/Linaro/arm64-laptops/linux/-/tree/arm64-laptops-v7.2-rc2-camss-v11?ref_type=heads
-
-https://gitlab.com/Linaro/arm64-laptops/linux/-/blob/arm64-laptops-v7.2-rc2-camss-v11/arch/arm64/boot/dts/qcom/x1-crd.dtsi?ref_type=heads#L947
-
-&camss {
-	status = "okay";
-
-	ports {
-		/*
-		 * port0 => csiphy0
-		 * port1 => csiphy1
-		 * port2 => csiphy2
-		 * port3 => csiphy4
-		 */
-		port@3 {
-			camss_csiphy4_inep: endpoint {
-				data-lanes = <0 1 2 3>;
-				remote-endpoint = <&csiphy4_out_ep>;
-			};
-		};
-	};
-};
-
-&cci1 {
-	status = "okay";
-};
-
-&cci1_i2c1 {
-	camera@36 {
-		compatible = "ovti,ov08x40";
-		reg = <0x36>;
-
-		reset-gpios = <&tlmm 237 GPIO_ACTIVE_LOW>;
-		pinctrl-0 = <&cam_rgb_default>;
-		pinctrl-names = "default";
-
-		clocks = <&camcc CAM_CC_MCLK4_CLK>;
-		assigned-clocks = <&camcc CAM_CC_MCLK4_CLK>;
-		assigned-clock-rates = <19200000>;
-
-		orientation = <0>; /* front facing */
-
-		avdd-supply = <&vreg_l7b_2p8>;
-		dovdd-supply = <&vreg_l3m_1p8>;
-
-		port {
-			ov08x40_out_ep: endpoint {
-				data-lanes = <1 2 3 4>;
-				link-frequencies = /bits/ 64 <400000000>;
-				remote-endpoint = <&csiphy4_in_ep>;
-			};
-		};
-	};
-};
-
-&csiphy4 {
-	vdda-0p9-supply = <&vreg_l2c_0p8>;
-	vdda-1p2-supply = <&vreg_l1c_1p2>;
-
-	status = "okay";
-
-	ports {
-		#address-cells = <1>;
-		#size-cells = <0>;
-
-		port@0 {
-			reg = <0>;
-			csiphy4_in_ep: endpoint {
-				bus-type = <MEDIA_BUS_TYPE_CSI2_DPHY>;
-				data-lanes = <0 1 2 3>;
-				remote-endpoint = <&ov08x40_out_ep>;
-			};
-		};
-
-		port@1 {
-			reg = <1>;
-			csiphy4_out_ep: endpoint {
-				remote-endpoint = <&camss_csiphy4_inep>;
-			};
-		};
-	};
-};
-
-
-> Add a phy_in parameter to camss_parse_endpoint_node(). Extract csiphy_id
-> from the CAMSS endpoint port number and read bus-type and lane properties
-> from phy_in. Check fwnode_device_is_available() on the PHY node and skip
-> disabled PHYs. Fix missing fwnode_handle_put() on the disabled-PHY early
-> exit path. For legacy DTS phy_in is the CAMSS endpoint itself so existing
-> behaviour is preserved.
-> 
-> Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-> ---
->   drivers/media/platform/qcom/camss/camss.c | 49 +++++++++++++++++------
->   1 file changed, 36 insertions(+), 13 deletions(-)
-> 
-> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-> index 84097d82d99c..7254f2b28eb0 100644
-> --- a/drivers/media/platform/qcom/camss/camss.c
-> +++ b/drivers/media/platform/qcom/camss/camss.c
-> @@ -4742,11 +4742,13 @@ static const struct parent_dev_ops vfe_parent_dev_ops = {
->    */
->   static int camss_parse_endpoint_node(struct device *dev,
->   				     struct fwnode_handle *ep,
-> +				     struct fwnode_handle *phy_in,
->   				     struct camss_async_subdev *csd)
->   {
->   	struct csiphy_lanes_cfg *lncfg = &csd->interface.csi2.lane_cfg;
->   	struct v4l2_mbus_config_mipi_csi2 *mipi_csi2;
->   	struct v4l2_fwnode_endpoint vep = { { 0 } };
-> +	struct v4l2_fwnode_endpoint phy_vep = { { 0 } };
->   	unsigned int i;
->   	int ret;
-> 
-> @@ -4754,18 +4756,26 @@ static int camss_parse_endpoint_node(struct device *dev,
->   	if (ret)
->   		return ret;
-> 
-> +	csd->interface.csiphy_id = vep.base.port;
-> +
-> +	/* bus-type and lane config from csiphy endpoint (phy_in) */
-> +	ret = v4l2_fwnode_endpoint_parse(phy_in, &phy_vep);
-> +	if (ret) {
-> +		dev_err(dev, "parse_endpoint: failed to parse phy_in ep (%pfw): %d\n",
-> +			phy_in, ret);
-> +		return ret;
-> +	}
-> +
->   	/*
->   	 * Most SoCs support both D-PHY and C-PHY standards, but currently only
->   	 * D-PHY is supported in the driver.
->   	 */
-> -	if (vep.bus_type != V4L2_MBUS_CSI2_DPHY) {
-> -		dev_err(dev, "Unsupported bus type %d\n", vep.bus_type);
-> +	if (phy_vep.bus_type != V4L2_MBUS_CSI2_DPHY) {
-> +		dev_err(dev, "Unsupported bus type %d\n", phy_vep.bus_type);
->   		return -EINVAL;
->   	}
-> 
-> -	csd->interface.csiphy_id = vep.base.port;
-> -
-> -	mipi_csi2 = &vep.bus.mipi_csi2;
-> +	mipi_csi2 = &phy_vep.bus.mipi_csi2;
->   	lncfg->clk.pos = mipi_csi2->clock_lane;
->   	lncfg->clk.pol = mipi_csi2->lane_polarities[0];
->   	lncfg->num_data = mipi_csi2->num_data_lanes;
-> @@ -4798,15 +4808,15 @@ static int camss_parse_ports(struct camss *camss)
-> 
->   	fwnode_graph_for_each_endpoint(fwnode, ep) {
->   		struct camss_async_subdev *csd;
-> -
-> -		if (!fwnode_device_is_available(ep))
-> -			continue;
-> +		struct fwnode_handle *phy_in;
-> 
->   		if (camss->legacy_phy) {
->   			csd = v4l2_async_nf_add_fwnode_remote(&camss->notifier, ep,
->   							      typeof(*csd));
-> +			/* legacy DTS has bus-type/data-lanes on the camss endpoint */
-> +			phy_in = fwnode_handle_get(ep);
->   		} else {
-> -			struct fwnode_handle *phy_out, *phy_node, *phy_in, *sensor_ep;
-> +			struct fwnode_handle *phy_out, *phy_node, *sensor_ep;
-> 
->   			phy_out = fwnode_graph_get_remote_endpoint(ep);
->   			if (!phy_out)
-> @@ -4817,31 +4827,44 @@ static int camss_parse_ports(struct camss *camss)
->   			if (!phy_node)
->   				continue;
-> 
-> +			if (!fwnode_device_is_available(phy_node)) {
-> +				dev_info(dev, "parse_ports: phy_node=%s disabled\n",
-> +				 of_node_full_name(to_of_node(phy_node)));
-> +				continue;
-> +			};
-
-This is a correct change I can take into my patch - I'll add you down as 
-Co-developed by.
-
-> +
-> +			/* port@0 of the phy node is the sensor-side input port */
->   			phy_in = fwnode_graph_get_endpoint_by_id(phy_node, 0, 0, 0);
->   			fwnode_handle_put(phy_node);
-> -			if (!phy_in)
-> +			if (!phy_in) {
-> +				dev_info(dev, "parse_ports: csiphy port@0 has no endpoint, skip\n");
->   				continue;
-> +			};
-> 
->   			sensor_ep = fwnode_graph_get_remote_endpoint(phy_in);
-> -			fwnode_handle_put(phy_in);
-> -			if (!sensor_ep)
-> +			if (!sensor_ep) {
-> +				fwnode_handle_put(phy_in);
->   				continue;
-> +			};
-> 
->   			csd = v4l2_async_nf_add_fwnode(&camss->notifier, sensor_ep,
->   						struct camss_async_subdev);
->   			fwnode_handle_put(sensor_ep);
->   			if (IS_ERR(csd)) {
-> +				fwnode_handle_put(phy_in);
->   				ret = PTR_ERR(csd);
->   				goto err_cleanup;
->   			}
->   		}
-> 
->   		if (IS_ERR(csd)) {
-> +			fwnode_handle_put(phy_in);
->   			ret = PTR_ERR(csd);
->   			goto err_cleanup;
->   		}
-> 
-> -		ret = camss_parse_endpoint_node(dev, ep, csd);
-> +		ret = camss_parse_endpoint_node(dev, ep, phy_in, csd);
-> +		fwnode_handle_put(phy_in);
->   		if (ret < 0)
->   			goto err_cleanup;
->   	}
-> --
-> 2.34.1
-
+Reviewed-by: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
