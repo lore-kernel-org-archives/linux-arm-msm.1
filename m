@@ -1,306 +1,186 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f49.google.com (mail-pj1-f49.google.com [209.85.216.49])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 028B631328E
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 04:07:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785298079; cv=none; b=tYMp2ODOESDaZTAsjBk+P4C2Gm3Wjpf9R+Gv+eBgnZZF0c4fVFr2fKotfd8HG1Fzr9CGVSM2GZ2zF8dqqX+UYPWMV6pj6C9FcCqcv1RxbTYBVIpRolRE3QIasGf8NtUZHOWkR46oqxjWnrOhpfz+DhU9Z09KQgy9iTLC9nGmgj0=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785298079; c=relaxed/simple;
-	bh=CJDFYscSgJO1rJLffEeW1pefyZ+BZTcU4/nQQVc8ttg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=c0nlXyn7n1P8GYHPZ7Fx4fhS0+6Sxf86FMvikXAuxblHwSY0b/Ra7GsCMIY2Jud9BephrKlu379r/+7z1jXm8droukip4hk8XEaJfWcZkFFAcvHwo92HPS2WhNGQttRegfY14O6ibJmo71ccvYFYC6zr/ZI8lYzhxAAmvgMVBYE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=XrDq2vNp; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=U65ceHGC; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5CCD83921EC
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 04:14:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.216.49
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785298463; cv=pass; b=Rx1PjvkTsYDeMYo3KZLg5VnQnHyWjJO5Gd9b7AWoxo4rueXEWc8K1lXartgJVC4pis59qTOwZ3+2DWhQ48W9PJzbsZa0OiRd5J6+jqotJj2DCgb1jGfM0dWnloGwffsQpFk3Qpw55Va1ya/MKuVG3iFd2rAO5PVe5VIY+2Utwhc=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785298463; c=relaxed/simple;
+	bh=CepGmDEK6OBNfUfXuejBy9kdH9EdttPI4R03Nv6jgnk=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=BdXW9nDrd4YulzyzILRNQAmJu9YyJ9XvOwIu/u8UrVD1pjXmMhqJfWmcXwnhRqau+tyVMlULy+e0f/9kUAvk3HP0a0ZudnbX1eCE7xK81UiyJ0GxlH3GK96bb4oagJYNHVguUTyptWMYVbXDRDVUGKlmufRN833ku3h2OBAy7Rg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=quora.org; spf=pass smtp.mailfrom=quora.org; dkim=pass (1024-bit key) header.d=quora.org header.i=@quora.org header.b=po7WJ0mz; arc=pass smtp.client-ip=209.85.216.49
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=quora.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=quora.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="XrDq2vNp";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="U65ceHGC"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66T1HWMM309477
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 04:07:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	FGjCIVQno7cuhBScC143ida5jzS7EfDwNlNjCfxKits=; b=XrDq2vNpSqcxRZex
-	Pe0iaq92eSnKeR9oX/t2X+O4ga/7CteF231spCbysQGzoaivJWlu8QR2AF6cfjt5
-	XM0b5+TJWIUX3rPSM9H18mchNkmZuQcy/OQO39VtlqP5Xi5kepffcRwYXhGZ4Exw
-	eaH//ze2wYlJs6puZidVWufZh58zRyde+sYCGlBen4sAdXectdi2O853u1pkPGcd
-	nbhUadnp+m6xB57g6r/QSD7vJPtg19gy3FTbuzHPIrEfBJNy1WBfhvxQLDajBUlA
-	D6ylHkEVyLquoBjhqun2OyBbLrLCVo30PqG74X7fOHxwmvfOWpCZvDojm3zq0NXJ
-	gq1USA==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fpuygby5e-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 04:07:56 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2cfa4e4684bso15135065ad.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 21:07:56 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=quora.org header.i=@quora.org header.b="po7WJ0mz"
+Received: by mail-pj1-f49.google.com with SMTP id 98e67ed59e1d1-381216921aaso468675a91.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 21:14:21 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785298461; cv=none;
+        d=google.com; s=arc-20260327;
+        b=NqoTasdk/JZ/hN6QPHar+Z1w4TqH24UphG0Gk2fnSuTHTTnPGPaYVFHl/k7nB0Pela
+         Cz/WrHLnz2upuuwkZOZOzM/Spll1qkpu264zPtWbU2GBUSzQycXpKEHoRkypaPFPJQbO
+         PKzq+Xy9BZj5fDCJCAi9CohJHNsJvcVkMKIro1h9OBZeJqHbTUtapDmAiAODX27ByNdq
+         tsdBHe/KVQ28CWTjYWwUWTkFRs3B0zWZuEEV1hBsj49zvQn+S1LTh9Qc7pb8tz4+AJxB
+         PgQj/4sxdUDjqdpuXP86mmw54OFL5Dxg9cIDOOIQ6vSnHv98d+946l9EUqin9XflPr2H
+         AEIw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=hP1SH2landNf+VecwvUxNLCDVGixxdgRDv2mXpbX3tw=;
+        fh=+9lnHBSOkUJY1M76sNitd1gpVstk40OT0RSN65qi4Ao=;
+        b=iw4VtqY80h/ZSoY2nuATxZYPKI10mO5PF7WnHvA26e/TnLQVi3+vPLgfhPmZpkoo60
+         ea8y5OqMiHf9ZQkQVjEeDJaaRJE0szxDKL8LB7NPayFZVf7z4t1olDWaEnr+DVRku9Tm
+         MZ996Ble/uNjKkgimLW/YgsCyjd1UF0UGAupY8+FHJrLhCAtUZX63EAVi5z6+Dq0e3WZ
+         J80zN0e2FwjoKP8lR6rzAvc7mdimBcQS2C6NR+FOGxyeRnrLTja7hLwGyXJkaB8ZfimY
+         URfBBL82MW3rOgQDHNBuNgU4JO2HYujeh5ipXUbu7neYiD2es2YoPjz+Sf0nAILOArCs
+         TI1g==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785298076; x=1785902876; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+        d=quora.org; s=google; t=1785298461; x=1785903261; darn=vger.kernel.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=FGjCIVQno7cuhBScC143ida5jzS7EfDwNlNjCfxKits=;
-        b=U65ceHGCm0jrru8kOhHclUsRhADIDoX7wqtbEcWYmh9Nhz0A2rRDJcGaCJAjHkKFiT
-         NHryltnY36lAICdST4y/nj+Q/YSgwcfvJ2iWbDrVZpfJeXFIuYbpwW5uDbaD6oitXHiD
-         4GI/ImaiEDNCB1YSHJjuZ3k+6KdkX+Wvj1yW+It546ISzjzhTPSfCIZ1nkg9w/ZJrVKV
-         lHVGD0cQBbJPIwwfzger/1UuJff2B1zicx6ncw6OEb8w9/f7zDlMw5TSz9KjltCdN4JA
-         qDaFF6CcPq4FKEnqytp97BHJIZTuQpJU7EnTwflWbsLEebhsaS2CvGEWsiuLQhiWr863
-         fHxg==
+        bh=hP1SH2landNf+VecwvUxNLCDVGixxdgRDv2mXpbX3tw=;
+        b=po7WJ0mz8XbXgy6flAcU+7X5sPbiB8mTQIe28JSqHv6ywcaGKb7StiIopGb9kF4DgF
+         Kd71DbnAjtdW0MZZOFvM+xqKajJLuilGOhZaPVK+Lq0SVEdJAd+Dmc4kePyLu6KH3peV
+         SvvULEysPFhUXUU28d2DWnjSdcGiOUTF3E+gY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785298076; x=1785902876;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=FGjCIVQno7cuhBScC143ida5jzS7EfDwNlNjCfxKits=;
-        b=LHNgFodt8ScpuMuMY+FtlRDLLNfg0VKRyBonvH4lmufUYziEQY7E/UGaQnp43u3d7I
-         f+vUKP0AmowPYJRX93OxFagGnzMFT1SZfKm3iXuR3XuVbeyLdqb6craiIhuc8POKNx6w
-         0yCc9iqs+JAQkST8rEYddMzqN4jieaakKqtiN4qMdBNjI4/sB7nRjUFzTskdWf+GR/am
-         jVnH9NokmI9YPwRz108LTQIt64z0QJYXJ8dxAAkuGXkc2UM93JsZsCuBkJO9MzTzmYlW
-         M/0VuJqPjO6wzywdEKiOvYzLJJk9ZHXDDeUPntejpaq8MwvTSdydhpAHPZxfqOvyakLF
-         1L/w==
-X-Forwarded-Encrypted: i=1; AHgh+Rrd9xqY54ezP8vh43nEmOkKRB6sb7+QDnMLttfuc4h1hn4+LaEEX4U6YNWJV1Ux71zUgihDiDAikaAa40p2@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw1TtRG1V+W4bUU4w/HflooHPMLcNBnvQsDZwZSqjQN+qMUAEs+
-	ESO9xYHjABfo7V8BlGvDHL2Y+wpCV0ThaF3rwlwQxfyz9jVHCpDg6/+fy3vtEGIdSVfPV5CCQjU
-	HR74eIZYN/WVfSQwoohlm35/iD/jEVXHX3PfQZ7np5OBgqxJ/OPusyAj2/GZFP5MSV9Dk
-X-Gm-Gg: AR+sD13DSV9yDlHxfLVtX4j88nREwDYPDgYEMYMj4y9gJcekeFRHTWnAuJ51jxGNgd1
-	rC2c64mu8SFneUhkZQGVxhXdBDQEiu8Nse6vdun5rIgHJmgmyXufcmCEXKnp200EPeIkQsKW5BK
-	M/egB/wZi7RSj2WnDcvMfBrQJRfbjdc7HzL4+pGiSwOmr/m+rzLhQZPJZrUDBIr99cWriL0ujYf
-	no04ka1h+KJ70as+/Ul9BVl5PTYCzQnHFDp4dJVRSxINgNfxgptb4l6/CFoFH9/yPgkA16EHFhk
-	cc0Wr/XmvTrzlhT0eJp/TPPUNYHD+JHaQ7+kpzhFB4OnzjmNFegBQB0dgvjcfKstx/RZteD55ZN
-	w/tLsTgw5n8N+otfjcCHFiMsEJiBCeiqnL0A=
-X-Received: by 2002:a17:903:1844:b0:2ca:d91d:d3a7 with SMTP id d9443c01a7336-2d015c9cd4cmr69196645ad.10.1785298075762;
-        Tue, 28 Jul 2026 21:07:55 -0700 (PDT)
-X-Received: by 2002:a17:903:1844:b0:2ca:d91d:d3a7 with SMTP id d9443c01a7336-2d015c9cd4cmr69196445ad.10.1785298075384;
-        Tue, 28 Jul 2026 21:07:55 -0700 (PDT)
-Received: from [192.168.29.63] ([49.43.230.245])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31504db2c4csm4492170eec.28.2026.07.28.21.07.50
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 28 Jul 2026 21:07:54 -0700 (PDT)
-Message-ID: <3eee6637-0b6e-431c-b3cc-959bba5b2646@oss.qualcomm.com>
-Date: Wed, 29 Jul 2026 09:37:47 +0530
+        d=1e100.net; s=20251104; t=1785298461; x=1785903261;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=hP1SH2landNf+VecwvUxNLCDVGixxdgRDv2mXpbX3tw=;
+        b=j7rXDKuZF5Reu3RiPEMXYVTipYanK0KwSaZ4Wm0A9R2j2BhAlICW2oMDb2PPzKHWV6
+         r8QXSEgV+tvAqN5xppBFzxpuSmyuH2h5CNPqsM6CkO352oZgVMMY9LqxvGsxT6JxX6VR
+         KD3x8LkRqDZLVu7o6qwcRU3oPqtYYIIw5oPzTmKXCpTGRGsj22JzbW5SrEWi+bDHP8CP
+         nygq+4Np1FbNassQ6kiQ+gGdKskhusHU2CgfXOVfG7czmANr9txBb2utcSi/lMswaaKq
+         szTknya2r4e57uUzahudS51ey9BJOxj+seg9FbLRDcDMtj0uwxXTCyjiJeGRnqaUxrAg
+         CRxw==
+X-Forwarded-Encrypted: i=1; AHgh+RrAzYYwce5Np4m9eMKyvCnZefmr4kgOFcbA7QST1AWyemEB0hfpcClFBGqTJwbCux+AxGlbsfdCfFpwFxJs@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy9UCWlQF5apboAue0nkwbw7tEDEbEa19PKZNBPbPkcZbyykNc9
+	vX2Etv0SGMXSeqvpkQwqKCMSreopdzsAuVKyKcdRNWPTg/9pbpPl31G1LMC4li25GcnIxS7NzLo
+	+y+3Oa2gAVLg89hyBpYM8Qx7AQ5o5Rnb1YawWf8yrEw==
+X-Gm-Gg: AR+sD13i5JU2+olna+x40XEjzz3bXphT5Tx4loR2XTINIu642oqmn326gHyR3l3UPLK
+	WD/qAKlDFBGhvSS9UMgwrqTU5LfdAJVgfxD31eJcbyQn+UnKVJ6C/JJkCYWYfwvzbsLZY2YI6m8
+	7I/qXjvywI7yrpCWnM/OCZpuq8mlKhZgFJ1HyvzG1Ac1CpCd2CMSDQcC6af8Nv3j/7tb2QidAc0
+	FVCVpHZE56g75UNZxwQu38tWPad20oxxdaihdu2COZoZzhP2lV0yhhLqP33fL6gACd/6hrZbV0E
+	yJ2qk58L/AUXy6VPGf4O25P+dlmKOQjxjtQFvwQt+V7e2/xMEx9PoTswQSTjP1fGBakywZsqfR/
+	2yVKLUbsYqNJgoqyUblTraQ2RqaPD2uulg6kACXjYoRuywfHJVOqdWA+XxMuQDkZZpM9Fgcoomz
+	EilFxYC+/wOvDFkVouN8RLjHDk/R+nq4HCQb3aElW5rbzg50Cs00Q6FuNjVig5qgVDmyyTJv/Cp
+	QJSXpoB9RQc0eEFBPXDtpFF
+X-Received: by 2002:a17:90b:56cf:b0:38d:c0f9:30be with SMTP id
+ 98e67ed59e1d1-38f6a480100mr5165016a91.38.1785298460785; Tue, 28 Jul 2026
+ 21:14:20 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/4] PCI: qcom: Add link retention support
-To: Manivannan Sadhasivam <mani@kernel.org>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
- <neil.armstrong@linaro.org>,
-        Philipp Zabel <p.zabel@pengutronix.de>,
-        Jingoo Han <jingoohan1@gmail.com>,
-        Lorenzo Pieralisi
- <lpieralisi@kernel.org>,
-        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?=
- <kwilczynski@kernel.org>,
-        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
-        linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
-        linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org,
-        Qiang Yu <qiang.yu@oss.qualcomm.com>
-References: <20260709-link_retain-v3-0-81a9d187bb61@oss.qualcomm.com>
- <20260709-link_retain-v3-3-81a9d187bb61@oss.qualcomm.com>
- <63rwvquftwg77cy6wmsw7stubpluvmp6dplg3nt5lzhdilio2e@dmdesbk63frc>
-Content-Language: en-US
-From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-In-Reply-To: <63rwvquftwg77cy6wmsw7stubpluvmp6dplg3nt5lzhdilio2e@dmdesbk63frc>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: zpgC6TIMwoBDUDfA-TEL5VOTpl1D14e8
-X-Proofpoint-ORIG-GUID: zpgC6TIMwoBDUDfA-TEL5VOTpl1D14e8
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDAzMCBTYWx0ZWRfXwFalgfMSNdiJ
- adHDntCwBCZ3ijaa0+e+8mcrIsCjayxgFXLuZv5Xnt2LI44GmDMkP/lLppkhexyknYCQfiF+/Eo
- lwMJoQhSMKxGC6zGqh5lKefUqhVtMxsHGdNEc6Sj8kUuHWMCvYJEYk3sA2w4HEMjo0m1UjGXyS8
- 7UyOvZIvwZgQIFYn4b3XnoYH0CsU6Uhl/1ivhn9SXVbdb/jewqK4gldD0bRGbpFb0vyg6exaxNj
- fFYx6G6Mbcj+RX0TYlcUEgAL44tUKVA2fyZOFiokOlGxg699luIpgFfEqwhZRskcZ/TY3TwL232
- PXArVC8H6Jla+dFMV4DsJfzXibO5Zy00HwTWt3+QFI5c3ZoxG1FtOls9RdBuknF18TjZGw7IXfe
- geqoiNv4pi+enIeKIFRWEb+XgdsoW95gOybMSsCZI6ePZ2UafYOoD8EzWo7cPyvILWHdXR3BABl
- lXIcDNnK+YsCoGCWutQ==
-X-Authority-Analysis: v=2.4 cv=aoWCzyZV c=1 sm=1 tr=0 ts=6a697c9c cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=/XdJXUgKm5apizxDBrSIVA==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=G0H1kKVpKd3q3zwLEq4A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDAzMCBTYWx0ZWRfX1TP5kT9sk/nw
- 6hg15AfGyz6Gha03qihIFXGaRO5VCUDC71WyqG59ktmHE0AD/1ghX31ew1FftIaVRaxbtdDHmyl
- T3KiJ6Nl0kxzg83OU6Bh1s3dCchS0/w=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-29_01,2026-07-28_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 clxscore=1015 spamscore=0 bulkscore=0
- adultscore=0 malwarescore=0 impostorscore=0 phishscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607290030
+References: <20250110-soc-qcom-pmic-glink-fix-device-access-on-worker-while-suspended-v1-1-e32fd6bf322e@linaro.org>
+In-Reply-To: <20250110-soc-qcom-pmic-glink-fix-device-access-on-worker-while-suspended-v1-1-e32fd6bf322e@linaro.org>
+From: Daniel J Blueman <daniel@quora.org>
+Date: Wed, 29 Jul 2026 12:14:09 +0800
+X-Gm-Features: AUfX_myf3MWvQnicni0oin27mcV4qjlzSadUHqw9n9Hnpgvs05MyQmBe0-bNBK4
+Message-ID: <CAMVG2ssS4=Kb=OxuVXb_062fgvBfKz+X0q1N2rFob0TH6JypYg@mail.gmail.com>
+Subject: Re: [PATCH RFC] soc: qcom: pmic_glink: Fix device access from worker
+ during suspend
+To: Abel Vesa <abel.vesa@linaro.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>, 
+	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Johan Hovold <johan@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
+	Val Packett <val@packett.cool>
+Content-Type: text/plain; charset="UTF-8"
 
-
-
-On 7/13/2026 10:20 AM, Manivannan Sadhasivam wrote:
-> On Thu, Jul 09, 2026 at 12:05:18PM +0530, Krishna Chaitanya Chundru wrote:
->> Some platforms keep the PCIe link active across bootloader and kernel
->> handoff. Reinitializing the controller and toggling PERST# in such cases is
->> unnecessary when the driver does not need to retrain the link.
->>
->> Introduce link_retain in both qcom_pcie_cfg and qcom_pcie to indicate when
->> link retention is supported. During initialization, check the LTSSM state;
->> if the link is already in L0 or L1 idle and LTSSM is enabled, set
->> link_retain and skip controller reset, PERST# toggling, and other post-
->> init steps.
->>
->> The max-link-speed and num-lanes properties in Device Tree cap the link's
->> maximum capability. Retrain the link if the controller's max link speed or
->> width exceeds the Device Tree cap, unless the currently negotiated speed
->> or width is already within that cap, in which case the existing link can
->> still be retained.
->>
->> Configure the DBI and ATU base addresses in the retention path, since the
->> bootloader may use different base addresses than those provided by the
->> device tree.
->>
-> Where is this base address change?
-It is being covered as part of  dw_pcie_setup_rc(), this part can be removed
-as this being called unconditionally in this patch.
->> Set l1ss_support in the retention path as well, since it is otherwise only
->> set later in the normal init flow which is skipped when the link is
->> retained.
->>
->> Tested-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
->> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
->> ---
->>  drivers/pci/controller/dwc/pcie-designware.h |  1 +
->>  drivers/pci/controller/dwc/pcie-qcom.c       | 68 ++++++++++++++++++++++++++--
->>  2 files changed, 66 insertions(+), 3 deletions(-)
->>
->> diff --git a/drivers/pci/controller/dwc/pcie-designware.h b/drivers/pci/controller/dwc/pcie-designware.h
->> index de4b245b1758..0c98b914eb52 100644
->> --- a/drivers/pci/controller/dwc/pcie-designware.h
->> +++ b/drivers/pci/controller/dwc/pcie-designware.h
->> @@ -471,6 +471,7 @@ struct dw_pcie_rp {
->>  	bool			native_ecam;
->>  	bool                    skip_l23_ready;
->>  	bool			skip_pwrctrl_off;
->> +	bool			link_retain;
->>  };
->>  
->>  struct dw_pcie_ep_ops {
->> diff --git a/drivers/pci/controller/dwc/pcie-qcom.c b/drivers/pci/controller/dwc/pcie-qcom.c
->> index 9ca620d4746a..77d2d989e9da 100644
->> --- a/drivers/pci/controller/dwc/pcie-qcom.c
->> +++ b/drivers/pci/controller/dwc/pcie-qcom.c
->> @@ -260,12 +260,14 @@ struct qcom_pcie_ops {
->>    * @override_no_snoop: Override NO_SNOOP attribute in TLP to enable cache
->>    * snooping
->>    * @firmware_managed: Set if the Root Complex is firmware managed
->> +  * @link_retain: Set if controller supports retaining link from bootloader
->>    */
->>  struct qcom_pcie_cfg {
->>  	const struct qcom_pcie_ops *ops;
->>  	bool override_no_snoop;
->>  	bool firmware_managed;
->>  	bool no_l0s;
->> +	bool link_retain;
->>  };
->>  
->>  struct qcom_pcie_perst {
->> @@ -996,6 +998,50 @@ static int qcom_pcie_get_resources_2_7_0(struct qcom_pcie *pcie)
->>  	return 0;
->>  }
->>  
->> +/*
->> + * Determine whether the link established by the bootloader can be reused.
->> + *
->> + * The max-link-speed and num-lanes specified in Device Tree are meant to cap
->> + * the link's maximum capability. Retrain the link if the controller's max
->> + * link speed/width exceeds the Device Tree cap, unless the currently
->> + * negotiated speed/width is already within that cap, in which case the
->> + * existing link can be retained as-is.
->> + */
->> +static bool qcom_pcie_check_link_retain(struct qcom_pcie *pcie)
->> +{
->> +	u32 cap, speed, cur_speed, val, ltssm, width, cur_width;
->> +	struct dw_pcie *pci = pcie->pci;
->> +	u8 offset;
->> +
->> +	val = readl(pcie->parf + PARF_LTSSM);
->> +	ltssm = val & 0x1f;
->> +	if ((val & LTSSM_EN) &&
->> +	    (ltssm == DW_PCIE_LTSSM_L0 || ltssm == DW_PCIE_LTSSM_L1_IDLE)) {
->> +		qcom_pcie_configure_dbi_atu_base(pcie);
->> +
->> +		offset = dw_pcie_find_capability(pci, PCI_CAP_ID_EXP);
->> +		cap = dw_pcie_readl_dbi(pci, offset + PCI_EXP_LNKCAP);
->> +		speed = FIELD_GET(PCI_EXP_LNKCAP_SLS, cap);
->> +		width = dw_pcie_link_get_max_link_width(pci);
->> +
->> +		val = dw_pcie_readw_dbi(pci, offset + PCI_EXP_LNKSTA);
->> +		cur_speed = FIELD_GET(PCI_EXP_LNKSTA_CLS, val);
->> +		cur_width = FIELD_GET(PCI_EXP_LNKSTA_NLW, val);
->> +
->> +		if (pci->max_link_speed > 0 && speed > pci->max_link_speed &&
->> +		    cur_speed > pci->max_link_speed)
->> +			return false;
->> +
->> +		if (pci->num_lanes > 0 && width > pci->num_lanes &&
->> +		    cur_width > pci->num_lanes)
->> +			return false;
->> +
->> +		return true;
->> +	}
->> +
->> +	return false;
->> +}
->> +
->>  static int qcom_pcie_init_2_7_0(struct qcom_pcie *pcie)
->>  {
->>  	struct qcom_pcie_resources_2_7_0 *res = &pcie->res.v2_7_0;
->> @@ -1014,6 +1060,15 @@ static int qcom_pcie_init_2_7_0(struct qcom_pcie *pcie)
->>  	if (ret < 0)
->>  		goto err_disable_regulators;
->>  
->> +	if (pcie->cfg->link_retain) {
->> +		pci->pp.link_retain = qcom_pcie_check_link_retain(pcie);
->> +		pci->l1ss_support = true;
->> +		if (pci->pp.link_retain) {
->> +			dev_info(dev, "Retaining PCIe link\n");
->> +			return 0;
->> +		}
->> +	}
->> +
->>  	ret = reset_control_assert(res->rst);
->>  	if (ret) {
->>  		dev_err(dev, "reset assert failed (%d)\n", ret);
->> @@ -1074,6 +1129,9 @@ static int qcom_pcie_post_init_2_7_0(struct qcom_pcie *pcie)
->>  {
->>  	const struct qcom_pcie_cfg *pcie_cfg = pcie->cfg;
->>  
->> +	if (pcie->pci->pp.link_retain)
->> +		return 0;
->> +
->>  	if (pcie_cfg->override_no_snoop)
->>  		writel(WR_NO_SNOOP_OVERRIDE_EN | RD_NO_SNOOP_OVERRIDE_EN,
->>  				pcie->parf + PARF_NO_SNOOP_OVERRIDE);
->> @@ -1364,12 +1422,13 @@ static int qcom_pcie_host_init(struct dw_pcie_rp *pp)
->>  	struct qcom_pcie *pcie = to_qcom_pcie(pci);
->>  	int ret;
->>  
->> -	qcom_pcie_perst_assert(pcie);
->> -
-> This is problematic. Most of the init callbacks do operations like reset the
-> PHY, enable clocks... If those operations affect the link state and the device
-> is not reset using PERST#, it will cause the device to crash.
-PERST# is only for endpoint, not for internal controller so it will not cause
-any crash.
-More over the perst default state can be set be assert through pincntrl if you
-still
-suspect this can cause some issue on the pcie controller side.
-
-- Krishna Chaitanya.
-> - Mani
+On Fri, 10 Jan 2025 at 23:29, Abel Vesa <abel.vesa@linaro.org> wrote:
 >
+> The pmic_glink_altmode_worker() currently gets scheduled on the system_wq.
+> When the system is suspended (s2idle), the fact that the worker can be
+> scheduled to run while devices are still suspended provesto be a problem
+> when a Type-C retimer, switch or mux that is controlled over a bus like
+> I2C, because the I2C controller is suspended.
+>
+> This has been proven to be the case on the X Elite boards where such
+> retimers (ParadeTech PS8830) are used in order to handle Type-C
+> orientation and altmode configuration. The following warning is thrown:
+>
+> [   35.134876] i2c i2c-4: Transfer while suspended
+> [   35.143865] WARNING: CPU: 0 PID: 99 at drivers/i2c/i2c-core.h:56 __i2c_transfer+0xb4/0x57c [i2c_core]
+> [   35.352879] Workqueue: events pmic_glink_altmode_worker [pmic_glink_altmode]
+> [   35.360179] pstate: 61400005 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
+> [   35.455242] Call trace:
+> [   35.457826]  __i2c_transfer+0xb4/0x57c [i2c_core] (P)
+> [   35.463086]  i2c_transfer+0x98/0xf0 [i2c_core]
+> [   35.467713]  i2c_transfer_buffer_flags+0x54/0x88 [i2c_core]
+> [   35.473502]  regmap_i2c_write+0x20/0x48 [regmap_i2c]
+> [   35.478659]  _regmap_raw_write_impl+0x780/0x944
+> [   35.483401]  _regmap_bus_raw_write+0x60/0x7c
+> [   35.487848]  _regmap_write+0x134/0x184
+> [   35.491773]  regmap_write+0x54/0x78
+> [   35.495418]  ps883x_set+0x58/0xec [ps883x]
+> [   35.499688]  ps883x_sw_set+0x60/0x84 [ps883x]
+> [   35.504223]  typec_switch_set+0x48/0x74 [typec]
+> [   35.508952]  pmic_glink_altmode_worker+0x44/0x1fc [pmic_glink_altmode]
+> [   35.515712]  process_scheduled_works+0x1a0/0x2d0
+> [   35.520525]  worker_thread+0x2a8/0x3c8
+> [   35.524449]  kthread+0xfc/0x184
+> [   35.527749]  ret_from_fork+0x10/0x20
+>
+> The solution here is to schedule the altmode worker on the system_freezable_wq
+> instead of the system_wq. This will result in the altmode worker not being
+> scheduled to run until the devices are resumed first, which will give the
+> controllers like I2C a chance to resume before the transfer is requested.
+>
+> Fixes: 080b4e24852b ("soc: qcom: pmic_glink: Introduce altmode support")
+> Cc: stable@vger.kernel.org    # 6.3
+> Signed-off-by: Abel Vesa <abel.vesa@linaro.org>
+> ---
+>  drivers/soc/qcom/pmic_glink_altmode.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/soc/qcom/pmic_glink_altmode.c b/drivers/soc/qcom/pmic_glink_altmode.c
+> index bd06ce16180411059e9efb14d9aeccda27744280..bde129aa7d90a39becaa720376c0539bcaa492fb 100644
+> --- a/drivers/soc/qcom/pmic_glink_altmode.c
+> +++ b/drivers/soc/qcom/pmic_glink_altmode.c
+> @@ -295,7 +295,7 @@ static void pmic_glink_altmode_sc8180xp_notify(struct pmic_glink_altmode *altmod
+>         alt_port->mode = mode;
+>         alt_port->hpd_state = hpd_state;
+>         alt_port->hpd_irq = hpd_irq;
+> -       schedule_work(&alt_port->work);
+> +       queue_work(system_freezable_wq, &alt_port->work);
+>  }
+>
+>  #define SC8280XP_DPAM_MASK     0x3f
+> @@ -338,7 +338,7 @@ static void pmic_glink_altmode_sc8280xp_notify(struct pmic_glink_altmode *altmod
+>         alt_port->mode = mode;
+>         alt_port->hpd_state = hpd_state;
+>         alt_port->hpd_irq = hpd_irq;
+> -       schedule_work(&alt_port->work);
+> +       queue_work(system_freezable_wq, &alt_port->work);
+>  }
+>
+>  static void pmic_glink_altmode_callback(const void *data, size_t len, void *priv)
 
+Reviewed-by: Daniel J Blueman <daniel@quora.org>
+Tested-by: Daniel J Blueman <daniel@quora.org> # Lenovo Slim 7x, X1E80100
+
+I have been hitting the same case (resulting in dead monitor on
+resume) and independently reached the same fix. Dropping
+IRQF_NO_SUSPEND does not prevent the race window, therefore there is
+no better solution until the glink driver gets rewritten.
+
+@Bjorn @Konrad given the real UX impact this minimal fix resolves,
+what objections do you have for taking it into v7.2-rc other than
+revising it to include a note that this is a medium-term fix until the
+glink driver is rewritten?
+
+Thanks,
+  Dan
+-- 
+Daniel J Blueman
