@@ -1,61 +1,62 @@
-Received: from mail-pj1-f44.google.com (mail-pj1-f44.google.com [209.85.216.44])
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A48CE3A3E77
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 06:46:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B95703AEB29
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 06:46:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785307566; cv=none; b=VwVs5HEn4rDmz0W3Lye3iM2mij0At6Xqv/5KUYvp3yp0QoyeY1Kc+KA+d++fW315VECn/Jg0kilpklNrbnGeSYTq6BJ9v935V/Jmne2SiAYJcen8NOL1YFBTh8Rnd53Fgf9L4BczCu72yenJX6NhCuEfiCIPeHYgo8/M3xt5Frs=
+	t=1785307577; cv=none; b=HAHgZtoFk7vNiYOorQyuDo9Fene13Lz279VYv3b11BtMDXmp3c1zBVG8kD1wtgMRNggmhr+n8WDGV34kGp2S+DIGs97i+k05yaaSb9E1+4yoKtNnjwziy84kAv5gaNbZZWsxup9PQGHyig/uGNk//BLFtLk21yNic97MN/gKxWs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785307566; c=relaxed/simple;
-	bh=UtKjADk2rPeLePZUyAblyIugJRkeY1U111MtwFxEW4I=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=b8Mf58a6a/Rr2M9QZ6GjtMyHmQknGDqJYdakTCg27tWqldpa1S2qRbzyqeQ8rP6EBWyTQL+PXIa29YTtopS2J112iD8VhCVZ0Z5lz4GcuqQ1zxvXL/CBvIppnViA62z78iRxCCXS3CG/t2B/Bgv0gMrSs3l4wRq9C8nGP9Ui/gM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=XOWg1sLj; arc=none smtp.client-ip=209.85.216.44
+	s=arc-20240116; t=1785307577; c=relaxed/simple;
+	bh=DU5hZk2w72UN7XPPKKC0Ei9MPQopHgndGyHLU8P+5b8=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=FpnphcuGYC2eMv3QBJcVzXjKILPhN3lKRd4FGqGESK94EHm+xn63DxkMwqlKAwpRgfebH9Tt7aAHcvLmEjsQ5gNucwIDTs4Tisg4tMEcNrVe10DWXrd7IUfghkFkCzcdTZbTrdJbM3v9TkU97IowHJ6fVOJhV8WhZJ+CQYPTEqU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=V2p8c2PP; arc=none smtp.client-ip=209.85.215.179
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XOWg1sLj"
-Received: by mail-pj1-f44.google.com with SMTP id 98e67ed59e1d1-38d489b6b71so587535a91.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 23:46:04 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="V2p8c2PP"
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-ca7c1176317so496257a12.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 28 Jul 2026 23:46:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785307563; x=1785912363; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=XzqpL/KwNW7VWHUSuueZGeJItvlfPLClzRtDIOx/B9o=;
-        b=XOWg1sLjw3t9p6pNHq03Rj3pJdEMtVOkLRG3Lwo9jdK04qIjPQVRmhfjUjJVdIXmpM
-         ps7oBrEKIBu0ImBSWyBIGQOtCfzM1MWJlbWDjy35arONmvMM+G82i7kw49cGAm2+P5F7
-         3siRc8gvO1Yijxt5fWlqWLX7TA7+C4ttPF/vdQQkhSwiDYw7yyawOvfkkuvkJbmoIyC0
-         E32zj1lb9zUdOyb5PgNFvM4j2qebFE3U2auJZZMwoKZRhBjl6i6+2hPxLImo4AqJX04x
-         T7ikRGp/NCV4NmGQvEkEjCXtvonWeQ/FdnwisfldbDNhVXSt3Kp2nStrQ+Ui8hMihixZ
-         3OVA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785307563; x=1785912363;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1785307575; x=1785912375; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=XzqpL/KwNW7VWHUSuueZGeJItvlfPLClzRtDIOx/B9o=;
-        b=jWkusivCKtPNByMA2GLzre7enFJgX96t922uddlwBcJpld80j5B7HFQ9OoIs8w+bnp
-         9cdjKgpZEr3vZCL7DwLakXdHQxTVDniZ7C5VFZ9u8g6g7PGQSh0Xzjn1PvolRWHTYpQ2
-         eOWIgFiPMjcTGoJduGFFCy5u4rENU6dDTXbagkof3qaG9h8R8xm8y/MMmi1pcepnhvlJ
-         LVuxcTrPyUO0SAjpdX4MSsDN3yS5CucZBc8cEFATY5bszSoR9DedrVYD0otVprXlsugu
-         x1VzDjDLQckTL+Oao7BvLnQdpF2HYzdsYeepQv85WyiQmOyhreeO4+6Lkj+ZbzZYu3B8
-         KdOw==
-X-Gm-Message-State: AOJu0Yyh9hdX/ClkJ5Lq0d1fvvkESVA+ijfp/EaBxU0dx35/UYdd4otC
-	P+4ZJ1G0a+YWqFCjisfVeEdV1DqD3WCtvtk+wytsxkkfVbP5zjbGn2mZNaxmNZIxTNg=
-X-Gm-Gg: AR+sD11u6LaNxzNn4+NUEAnR8I8+kvT1F/YTGtIkfVkvJ0qXWdfY4yKRkhN0BPy8Lm5
-	uzoBgvf76vrLvSfYS98GMTieCVzI8rr2N1zC6HBharSmKdAaNqp1Ciog7ZOtWoF3g7zGe3TCm/a
-	TAiP0878jSSMvK5noDLBWyW2ceQPgn9ihYvA9bm335RjfltBxdkS88q5ysnCHL6DQ91I1w0jv7A
-	yy9c47+qfmZ1jAwzseDHdBBFLCnnB8FPj2v6UYMmpP68zahVWVHCCdrEYQqKl018/ompfVy7dZB
-	RwYdxNifzQdclwSNw0TK1a71EExK0XSuXGowsoUTmK3cKaUXELYQZiYrVj1lFNdYQax4MQlaxyB
-	WD2iHCD8jL/Kmwdpl0yG/zqhHbnANwVWTcw0MQ6y4c9vIGcXaGY1vDSEGAgsy45akGoShRo0LjY
-	dZq7j0RY9GSNizQWQQTTj/QZD3oqHUHcsyNltoPxJSt0JHz/ocHrF8S6p7KVU1FyRMtxce1irbB
-	p8NNHU=
-X-Received: by 2002:a05:6a21:9e0f:b0:3c3:83e8:c211 with SMTP id adf61e73a8af0-3c8ba63ad14mr6402910637.63.1785307562881;
-        Tue, 28 Jul 2026 23:46:02 -0700 (PDT)
+        bh=3aZILo0UhPf6mB0ZTQXoidi3QecrcEcdbBPeLfd20Is=;
+        b=V2p8c2PPB60B+EinNORlkRwWtHWf+N9kO851CjIZaZ7B7pBP9zmHYmOJxBpI40JXnR
+         s5C3b08ZMpWFMNPM3a+aEW5qR+vpc2/PhItZ0xbbBm+8sQzzRrPYwQYLyOIIkCbvJAtH
+         YzV5P2os9FfXyZBbkwxIs/gedTNQ/U0OtcEyVsvM+jT9OJW1ydlSdwu4NMcAMTKuXCNR
+         2K3o9cLpnd3sk+lk42PnPQEJleGJdk+ehLKWAvlEr8im0VQ9K5PHmVu22f5UY4Pmm0cF
+         MSXDsSc0eLxtUJXI3OQyOovoEthiifSdXW0swQTsJ9NzEp7EnnobFPJdKy7NrcChCYUz
+         y5nQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785307575; x=1785912375;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=3aZILo0UhPf6mB0ZTQXoidi3QecrcEcdbBPeLfd20Is=;
+        b=fLY/+Yh2sME5COU6EggeDJQ4YXbwNhExC//iSMycVka2IyS1BAjehdgzGvD/9agL1c
+         q83SuyEw6bjyMDUsYRbNu2dsq/O9TFlQc0q7QurjGQ+xueQl/VNzI2JE+SixdpQpMLtU
+         udthWszQHtd9m8u1lyZk5vbt21OdmE7Pg9SwoCB5A14cg1nng7a61NPVmlxUv70yC6yt
+         zLD3oVxv8roHZv4R6/IRmmu3NLeTnSeYH8ionhmYJr5AEQ4L22f2FlAVbKvs8KXM9qga
+         /Un75CkttS6eJGqDubiybjeeToC5iFriJioWrzwX2EUbJaK7J3OFNxmOwwtCwFURGGvn
+         2IqQ==
+X-Gm-Message-State: AOJu0Yw4WQoNApo13XPNcLPpY2rZoCZ3MCxhkmZxeNfvVpVtLyB5vc35
+	l6U2ltP22OQ6sPvQFDu/WQN+W/vi/LAjN+yaKXjYBvZo/wgfYGhgu9wy
+X-Gm-Gg: AR+sD11uEJAFCReQT98Gn0m+pRlxII0BfR+WvqJnINHhljHBoksaW37zpAAbvffsjvZ
+	CDF9m3lzu6UEaztNFa1XZxeQhJLs3Pe3GLFEbI+A8KtBCCuO+ZewIvAi3wXjMSlhIlXSJ4v4ZNg
+	8PMoo0TKHll7R3bFspy7AryhNMlubPs8JpiSb4l2QDtmewVJ7VYAV+45derPq7MbGDgMpW9GP46
+	kxexmpO6pOTPGdhJ8d/QcTXx8k1aztse7t0F0rWv4rTI0/A6XEtBOtX4DHAPAGlwFvZbU7CHWHe
+	BM5fy1vOccWlpBhXNL5BN8FZ9UjYyEvV38Q9B8wOm3GrfNymXvKsLP56w+rS7gUSyRJdrRsZGVV
+	ilIOB44jZfdzamCp6ptIRf4qduzkI4KzkaZHaMAteY8Sk3eGkbv1Uo2cKRm84phjCSVWRVg0H1O
+	gT/335D+cq/35dO/nQqmgqi6aOdc1H60dG3sWX+T6Niejn1o1oUdfFQmrFCDoUGIqv5d4=
+X-Received: by 2002:a05:6a20:7f9a:b0:3c3:8bab:808 with SMTP id adf61e73a8af0-3c8ba616720mr6668535637.61.1785307575040;
+        Tue, 28 Jul 2026 23:46:15 -0700 (PDT)
 Received: from ada.lan (cwgw.codeweavers.com. [4.36.164.2])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cbdba35196esm480673a12.17.2026.07.28.23.45.58
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cbdba35196esm480673a12.17.2026.07.28.23.46.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 28 Jul 2026 23:46:02 -0700 (PDT)
+        Tue, 28 Jul 2026 23:46:14 -0700 (PDT)
 From: Kaipeng Zeng <kaipeng94@gmail.com>
 To: devicetree@vger.kernel.org
 Cc: linux-arm-msm@vger.kernel.org,
@@ -64,11 +65,14 @@ Cc: linux-arm-msm@vger.kernel.org,
 	robh@kernel.org,
 	konradybcio@kernel.org,
 	andersson@kernel.org,
-	Kaipeng Zeng <kaipeng94@gmail.com>
-Subject: [PATCH v3 0/2] Add device tree for Acer Swift Go Pro AI (SFA14-11)
-Date: Wed, 29 Jul 2026 14:45:36 +0800
-Message-ID: <20260729064538.19564-1-kaipeng94@gmail.com>
+	Kaipeng Zeng <kaipeng94@gmail.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: [PATCH v3 1/2] dt-bindings: arm: qcom: Add Acer Swift Go Pro AI (SFA14-11)
+Date: Wed, 29 Jul 2026 14:45:37 +0800
+Message-ID: <20260729064538.19564-2-kaipeng94@gmail.com>
 X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260729064538.19564-1-kaipeng94@gmail.com>
+References: <20260729064538.19564-1-kaipeng94@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -77,70 +81,27 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The work started with x1-crd.dtsi as initial template.
-HDMI refers to ThinkPad T14s.
-Bluetooth refers to x1-crd.dtsi from the ubuntu-concept kernel [1].
-PWM brightness control refers to Ratizux's GitHub repository [2].
+Add Acer Swift Go Pro AI (SFA14-11), a laptop based on the Snapdragon X
+Elite (X1E78100) SoC.
 
-Tested on linux-next / Ubuntu 26.04 LTS.
-
-Tested and working devices:
-
- - NVMe
- - Keyboard & Touchpad
- - USB Type-A, Type-C
- - Battery & charging status
- - Internal display & Backlight brightness control
- - HDMI & Type-C display
- - Bluetooth & Wi-Fi
- - Webcam (usb_2)
- - GPU
-
-[1] https://git.launchpad.net/~ubuntu-concept/ubuntu/+source/linux/+git/resolute
-[2] https://github.com/Ratizux/linux-device-acer-sfa14-11.git
-
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: Kaipeng Zeng <kaipeng94@gmail.com>
 ---
-Changelog:
-V3:
-- Re-sort *-link and its sub-nodes. (Konrad Dybcio)
-- Keep a '\n' before 'status'. (Konrad Dybcio)
-- Remove 'output-low' from wcd_default. (Konrad Dybcio)
+ Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-V2:
-- Fix Makefile entry ordering. (Krzysztof Kozlowski)
-- Use readable compatible string. (Krzysztof Kozlowski)
-- Fix sound card model name for this device. (Krzysztof Kozlowski & Konrad Dybcio)
-- Re-sort nodes, pinctrl-*. (Krzysztof Kozlowski & Konrad Dybcio)
-- Remove those regulators without consumer and lack of a required value in DSDT. (Konrad Dybcio)
-- Remove ADSP/CDSP fastrpc memory. (Konrad Dybcio)
-- Add iris firmware path. (Konrad Dybcio)
-- Delete usb_1_ss1_qmpphy/usb_1_ss2_qmpphy properties of Type-C. (Sashiko)
-- Delete usb_1_ss2_hsphy. (Sashiko)
-- Remove unused pmic-glink orientation-gpio. (Sashiko)
-- Remove node related to WWAN. 
-
-- The Webcam is a USB device, can be probed without any additional
-  node. (Sashiko)
-- Using reset-gpios in swr* seems common in X1E devices, like Lenovo
-  Yoga Slim7x, ThinkPad t14s and Microsoft Romulus.
-  Because speakers do not completely work and I could not see any
-  effect of changing it, just retain it. (Sashiko)
-- Also, the HDMI audio is the same reason as above. (Sashiko)
-
-- Link to V1: https://lore.kernel.org/linux-devicetree/20260702063156.35169-1-kaipeng94@gmail.com/
-
-Kaipeng Zeng (2):
-  dt-bindings: arm: qcom: Add Acer Swift Go Pro AI (SFA14-11)
-  arm64: dts: qcom: Add support for Acer Swift Go Pro AI (SFA14-11)
-
- .../devicetree/bindings/arm/qcom.yaml         |    1 +
- arch/arm64/boot/dts/qcom/Makefile             |    1 +
- .../boot/dts/qcom/x1e78100-acer-sfa14-11.dts  | 1483 +++++++++++++++++
- 3 files changed, 1485 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/x1e78100-acer-sfa14-11.dts
-
-
-base-commit: 0d33d21e47d9dc66f91e44da3fc9220c74d93df7
+diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
+index c7c9a9279684..da653b787d4d 100644
+--- a/Documentation/devicetree/bindings/arm/qcom.yaml
++++ b/Documentation/devicetree/bindings/arm/qcom.yaml
+@@ -1180,6 +1180,7 @@ properties:
+ 
+       - items:
+           - enum:
++              - acer,swift-go-sfa14-11
+               - medion,sprchrgd14s1
+               - tuxedo,elite14gen1
+           - const: qcom,x1e78100
 -- 
 2.53.0
 
