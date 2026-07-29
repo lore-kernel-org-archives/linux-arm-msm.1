@@ -1,92 +1,90 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from MTA-08-4.privateemail.com (mta-08-4.privateemail.com [198.54.122.147])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 448F82BEFF6;
-	Wed, 29 Jul 2026 17:18:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0AF1534216C;
+	Wed, 29 Jul 2026 17:23:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.54.122.147
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785345534; cv=none; b=G3hDgJ3SqbUO0JYd9tCGNwefcp6Q204zEc8WJCliNYH84iZtaXxRLDfM4RQD0WPhSxXV66ZFBnUS8c/G29al0wZ/54uJGeTlse4fj3CONhmdThr2AYCb4nDPCVcF3hQ1YcwWzLp9wVSEQ9VOgjSCQaA7Ebd2QppxQWenf0Qs2gM=
+	t=1785345830; cv=none; b=TFGMqNENU8jGGwYHnybLDFsqYMrSr9vNkFRsnoDj9fO4kR1nTx+dDXSGdTI2uNYm6KMOlPBnve+QSwcZ1zo1T8iVmKvqRKJ/yaf4sBNZUpcxSX3bj9Dg1xJBlChbIcrxJaRfgYfzu7wIfGv8565h4nu7YIwz0Hm6E8sKSpM1cL4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785345534; c=relaxed/simple;
-	bh=YE2LdluA4GvGR6IM7unXihvs9bwrb8WIgmcEUbn3Bsc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=pMhAI4dW3NNtvrkQTDiohZXQ6DaWaq58vLpjTNW7fSuy4XIP/ATiC0MvAcBPh76YPCyyxJlk7YOjthK+SCeWDDJ30C9yQPusnjAct7Ozs9AOw6Fd2gOFdiM8MAtLjT+HjvewcFzV5tLn78ZS2tsWhUq/0GV6PU1Yp6DGdAg5yBE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ViK0zRp4; arc=none smtp.client-ip=100.103.45.18
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ViK0zRp4"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6928B1F000E9;
-	Wed, 29 Jul 2026 17:18:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785345532;
-	bh=XRQ2w9SEWqa3KGSO4eP0kr7mEec58GfHOL/Fav5sanw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=ViK0zRp4UdqVs45klAkMoXtTi2CTs467E9pwdsgs5r3Yg1VjidQf4bd1p68yPtKjt
-	 hcKexf22HQhcHXxAIA6AqTsbWdNseueG46m+kwOehTQshWaOyKKe/geb6koJWLni8t
-	 yb64ORX73U4d82W4TottqTSKBOvgf3aXPR9Ic/s3zXWZiF7o2eKDOtWD5CPburWfGN
-	 PKvcervMzSyfEQTVtxqeGxnngIrYvm6aryLb7z0jxvveVH3G5zhH5Lawrz+6GIa0we
-	 JlzaYfNRUbZ9019emFTgEP5Xv2F7dPUZOZ/uBHurURXDFnvNPRkggNqCsCH+Bq16gc
-	 sHdpkZ0B5CcHw==
-Date: Wed, 29 Jul 2026 10:18:50 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Konrad Dybcio <konradybcio@kernel.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Bartosz Golaszewski <brgl@kernel.org>, linux-crypto@vger.kernel.org,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	Demi Marie Obenour <demiobenour@gmail.com>,
-	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: Re: [PATCH] crypto: qce - Remove driver
-Message-ID: <20260729171850.GA4454@quark>
-References: <20260724141414.GB1876@sol>
- <CAMRc=MfU1egvJwmgPEN-GXPbz8_JL2XnP-LV0T2+jG-drfXYwg@mail.gmail.com>
- <2026072455-subtly-prayer-0a8a@gregkh>
- <20260724150932.GA6763@sol>
- <2026072428-ungodly-outsource-b20c@gregkh>
- <20260724155144.GA2032@sol>
- <20260728152241.GA4281@quark>
- <15904301-fd03-45e5-b909-dfce52449726@kernel.org>
- <20260729145520.GA1702@sol>
- <50d9d0e4-28c9-42b6-8b71-e75682b4959c@oss.qualcomm.com>
+	s=arc-20240116; t=1785345830; c=relaxed/simple;
+	bh=ZhLMvacTOrHBow+sxLM+A0As0oYsRxeOKlzy39KpUQE=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=GN0TmNbnmHIYD5e726hkCjJsIH5SolUv6l6Hl1htZ5ltDcvkUC5qlCGQQjexHukpMlz9dMGhqn1UMq3tzUY/ZUyRFEEihtnRYnWol2c7xxl0NFuPI78R9hyWycwUcsnBQzL93l+3mFOLdgFXO8HiIkt9euoNNymq8vToYiV/qjo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net; spf=pass smtp.mailfrom=catcrafts.net; arc=none smtp.client-ip=198.54.122.147
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=catcrafts.net
+Received: from mail.privateemail.com (K8S-PROD-WORKER-03 [87.215.145.39])
+	by mta-08.privateemail.com (Postfix) with ESMTPA id 4h9K164ljCz3hhTM;
+	Wed, 29 Jul 2026 13:23:22 -0400 (EDT)
+From: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Mark Brown <broonie@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>,
+	Charles Keepax <ckeepax@opensource.cirrus.com>,
+	Maciej Strozek <mstrozek@opensource.cirrus.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bard Liao <yung-chuan.liao@linux.intel.com>,
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+	Richard Fitzgerald <rf@opensource.cirrus.com>,
+	Luca Weiss <luca.weiss@fairphone.com>,
+	patches@opensource.cirrus.com,
+	linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [RFC PATCH 7/8] dt-bindings: sound: qcom: add Tambora WCD9378 SDCA codec
+Date: Wed, 29 Jul 2026 19:23:08 +0200
+Message-ID: <20260729172308.43573-1-jorijnvdgraaf@catcrafts.net>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <6a901a72-fbcf-4478-b798-e5f234c5e9d8@kernel.org>
+References: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com> <20260722234221.884765-8-srinivas.kandagatla@oss.qualcomm.com> <219d44e2-28ed-4c54-bd00-66e687a0ba48@kernel.org> <d0891f90-b69b-4b27-ad58-94c342ad9a6a@oss.qualcomm.com> <3c484a68-5db8-464f-992a-6c7584841a10@kernel.org> <0cb5a2dd-c49e-47e3-8cc5-ab2ffd397a32@oss.qualcomm.com> <ba147ca6-3788-4cbe-95c3-949ae73ee8f0@kernel.org> <54f1c3e5-0b84-44a6-a03c-3cd65792de9c@oss.qualcomm.com> <6ed441b8-7148-43ef-9c9f-4bc30c468443@kernel.org> <b123882c-c51f-44b3-9004-bc1c4242af81@oss.qualcomm.com> <6a901a72-fbcf-4478-b798-e5f234c5e9d8@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <50d9d0e4-28c9-42b6-8b71-e75682b4959c@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
 
-On Wed, Jul 29, 2026 at 06:55:20PM +0200, Konrad Dybcio wrote:
-> >> Unfortunately removing it drains way more battery, because the buses
-> >> never hit sync_state and are kept at their maximum frequencies:
-> >>
-> >> [   18.021823] qnoc-glymur interconnect-1: sync_state() pending due to 1dfa000.crypto
-> >> [   18.029605] qnoc-glymur 16e0000.interconnect: sync_state() pending due to 1dfa000.crypto
-> >>
-> >> (it transiently also pins DRAM and friends to max-freq which absolutely
-> >> kills battery life)
-> > 
-> > Isn't that easily fixable by marking the node as "disabled" in the
-> > device tree, or even just deleting it entirely?
-> 
-> Avoided? Yes. Fixed? No. The DT is valid but Linux can't deal with it
-> [since the driver is gone]
+On 7/29/26 4:04 PM, Krzysztof Kozlowski wrote:
+> All this should be part of TX.
 
-If needed we can keep a stub driver that just disables power and doesn't
-register anything with the crypto API.  I can send a patch that does
-that.
+I have prototyped this with my mobile-mode wcd9378 driver for the
+FP6. For the paths my driver implements (TX/capture), the following
+works:
 
-This is an interesting twist though, because it means the claim that
-people can just disable this driver in their kconfig to avoid the
-problems in it (which is being used as justification for keeping it) is
-actually false as well.  As well as the claim that adding the node to
-the DT file is "just describing the hardware" and has no impact.
+- the TX slave node owns reset-gpios, the supplies and the mic-bias
+  voltages; the RX slave is referenced from the TX node by phandle;
+- like the wsa883x/wsa8840 speaker amps (powerdown GPIO and supplies
+  on the slave node), the TX slave driver does the supply/reset
+  bring-up itself from its probe, and both slaves then enumerate
+  normally;
+- the ASoC component and DAIs register on the TX slave device; the
+  aggregation is TX-over-RX instead of a third device over both.
 
-This would also imply that no driver using this sync_state mechanism can
-ever be completely removed from Linux, ever, which seems odd.
+Verified on the FP6 across two boots: both slaves enumerate, the card
+registers, and handset-mic capture passes the same kind of 1 kHz
+speaker-to-mic round-trip check used to validate [1]. However RX playback and
+MBHC are not implemented in my driver in either shape, so I cannot
+speak to those paths.
 
-- Eric
+Since, as agreed with Srinivas, [1] already carries this binding:
+whatever shape is decided here, I would like to respin [1] to match
+rather than have the two threads resolve differently.
+
+[1] https://lore.kernel.org/all/20260729000649.263426-1-jorijnvdgraaf@catcrafts.net/
+
+Prototype: commit 7b720141754b, the top commit of
+https://forgejo.catcrafts.net/Catcrafts/milos-linux/src/branch/wcd9378-parentless-proto
+(milos v7.1.2 integration tree; the parentless conversion is that one
+commit on top of the posted v2 driver).
+
+Jorijn
