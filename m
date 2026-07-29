@@ -1,321 +1,201 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A3CD3B995B
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 07:06:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B47013C37AF
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 07:12:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785308773; cv=none; b=a7IVC51X9woxUl9qAjfgntYZv6iDjRzfs+aWNG2MBDSEoyhIP1LmR6W6bKMjcvLYf2CNimfzVtxFO1R45oNLr6mBVdngcmsR706L3xx4iRUFb0wZgeynWbNgn4mT2+LBQerUiPxvMpn7bNZCF6buEwINpeixIoHnic+PUr8anKI=
+	t=1785309177; cv=none; b=b/2p8M+lhK0yzx0AijpM0Q0PfAnp89kSv9bcM1bDHP1SSJy0Mcx25iG7iKbsVJgFFF7k1wJmmNalM5aaqu5LJKC5RGcN6/7WEadjNItws9T9h1AHoxTZagKZSJs/BEY4s+bE5YNtHfvoPmO91fQ14rzaYTsOOJtGgFB23x0LKro=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785308773; c=relaxed/simple;
-	bh=JpbjOed841uoNyZgbbrf8oa3r2l9U4SVOjjXNLfnmJI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=i847xZnTnufE5kimHcd1IFnc+J33R2HsETtlp6/nBV5KkBcEBIH+S14OHr4evawmzi1fJVcyOpFmnrb+Pn9/sz2/FcDjwt/k0/iZg5VxDO4NzAAwMIrIUpp+I3O3nKNZMuDIGMVL2pe+dNnrzaNXbgfZA7lT0s/eFqXpHx4BvF4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Mjv1wOyW; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Nh3sbl8t; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1785309177; c=relaxed/simple;
+	bh=l0CeNX9dfErki8GBi2ziGIBC/5+r6EN7i1WjKu+b3iU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=TlUfBwKZ4ss4ZSqU899ad3c7p8MLuPAkapTHHqSE+cDC4jYMAYRKxGH1oyx52l2tyxwMoAsj/vjE5/47KCCmHRUoXlRE5TEP0xegQIGCNDhBkxyabgmqRdDFN/SuG9vWAhHDiEjq/gJxtWSQ30//E07a1n/yQ88r36rPi2P2Q2E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=D55Wl4PI; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hRj+l2hy; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Mjv1wOyW";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Nh3sbl8t"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66T4cKKf677686
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 07:06:11 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="D55Wl4PI";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hRj+l2hy"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66T4cKIZ897801
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 07:12:54 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	0OUBm1wl/4W/uyUJqKNXcBjQ/DSKUZnbvbwlpTjWvcM=; b=Mjv1wOyWnFk/+5+G
-	B/vIP2NNnvtgeD6gNYkjDrHF5ANhV+8F4dc8IZJkAVd1PY9KjSRdm+M4f0QWiiu4
-	zhU9HS7BkxDp7htc30m4tKu/3xoiY1XJvKkYzyKgtkpcK3iHzeW2hf8VCqMLaegs
-	b3c8JVg1WxjLmyE5bwA2w6MmnBbw91Z38ZW3NZoDpNMRtYmIMtIZ24ce/mnGUDt+
-	xD0ebUJ9ZuIzZ1WQk/WTdpaKNZBxDiUU1c+WWAIq03wnGEqwRuz3V9KcpICNuBKo
-	1b5erltXPrx5qEgqPhRC3vcV51cY7Q8IgVE0u4zp9XIVGYKnpHREcEXiiKFSCZSf
-	/kJpQg==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fq5saheqr-1
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=SnloaealkmuKUdtscWJ56PcucYTV8n1BDo0
+	/2qHaktA=; b=D55Wl4PIFfGlX6RZ5NPDYjWngH2/pfMHmd5XqSkIu+gB09vcCVH
+	Uu9m2ObrXnGkYbosiZOx+39w0LhHpWUKXzWM+RROmcn+a9cb2TdJz4Alpxm0V2UG
+	ec8lAcHfJP9tI1g5jZ6/eMVmhNvd8zeXIP7ll7Nv/INEu5tiwLWki2vCDhmqwKYu
+	0+Xjrv86Ra1vI/9eAigntpWpncihhnZQ7piKlA6JY+xJ/Gam3IDcTZ765/VRnwQi
+	FLCeK16+dI6hzZUYR6ZAOr8ARYhZFX3Pcsb5d0wPrhCi5COggWtc9wJFwEmnJT3K
+	MHVELnXAsqu0X0w87HVZS9QVp02/5WnMlGQ==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fqa330mx8-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 07:06:11 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38e25e4b41cso792793a91.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 00:06:11 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 07:12:54 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2cfa4e4684bso18617455ad.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 00:12:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785308771; x=1785913571; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=0OUBm1wl/4W/uyUJqKNXcBjQ/DSKUZnbvbwlpTjWvcM=;
-        b=Nh3sbl8t8TyNPbrVvzHJSOXHmNH5pPVVue+0qmOsdnys69T1iEIvINpR61TLKD+NYw
-         F/EWEQNyTczKbp4TmPopNq7v9Ov66q+3iXx87Q+5jcrIIlUr+TzjzXRXSKjMI4VoZVpv
-         1C1sV7ZVUxXN2wmc/l69KNK828dEkIYu49yV+YxSjzScusTg/vwxazRd7wGm0LsrHgDC
-         sM0vlk+UrliCwTs0YlCIMR6pCTIfp9WGcRf/lgVjzMriVE+9q+9EUtW5oq7HXo/slX6p
-         IdkUTVuXONseyLNH0UgcU7mMrvnAC9AUnRXFzSW/1AxsKkH8mPyuqUfNMS6rDwqPEEW0
-         tNKA==
+        d=oss.qualcomm.com; s=google; t=1785309173; x=1785913973; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=SnloaealkmuKUdtscWJ56PcucYTV8n1BDo0/2qHaktA=;
+        b=hRj+l2hyFqafa2oFWfKw4xIDFetjLXoy6Vl6HQoj/hTalJQDy1i6BD89CZIPEAko4k
+         QVNAr5dqxTeRT53CSP6VzBeOHG1GHdRPiV6ChVWBTHDW1a9M+17+mGmTeJYFJSDmuRWN
+         TyvgPKmDT7VbSiQwUNcxZt39Z4U2MvpN3Z/bMlRR14Dn5T/HCsnhmIlhf7e9WZ8cjCLz
+         WwnvDSlduy3tCLycKpEwCm6LU1DVshI7BDgozJvBAAI3AIFox1BB5etdd64/KH2/U8WR
+         DM+bM1fPRXW2sblNDWhqSxiD9iDTMHc315FtDE+LQ8hLGY4Dd17xXS6uc3a6ROJSUj7a
+         FXtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785308771; x=1785913571;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1785309173; x=1785913973;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=0OUBm1wl/4W/uyUJqKNXcBjQ/DSKUZnbvbwlpTjWvcM=;
-        b=NfW1/kK73WGigwZSPlc7Y1hQpcCC9/jmKvUTksO1ZdHEtraL8rZ+fimSrdrOZUu3Wb
-         fvBxnfW7WBF4oOudlTLA+JMi5l26qX3ZyvC9FAU8slEUC3KKo4CyggCgmS4FD/bpysk+
-         QCFEl+7tbwojYdsu+K2956rQ6RRe/6QxfJXHmzgN4n7y6iKJwgdVWpDvEbTqPdcT5pvr
-         kj7bJylev0/Tfg62R1wk//9r5Pm3ee4iNl9WZZQc8a031CqPSpfAYUUFqYoiRNqjmKct
-         sOt0WOO0rk0yZDvzwOzr/mfkbZs+NZz8nv0K8KIVFENEHp6/nZWmmDdSu9zTkD1NdBP0
-         MYIQ==
-X-Forwarded-Encrypted: i=1; AHgh+RpoHSFQE+GXD73KujditfnFRVQpuV9fCPMDA4FLsFJOmfn7mRH0/AFP5R+oABmhCNIXliUrhfYhV5LZELS9@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw6P0Hr6kazjkhsDTBBepybI0iGYTjtP07wpCVEn61gXYXDntCK
-	XpZmeP9YGjYJwFtL2ail26UfdJr99eZqoJdGEpp7WGv9UfCU3+5un7/DWCBa9z1nR9RZzZKBBmq
-	evndBmogNR0HIbxODLjs9b3QLfSN+AKq0W5tCPk0UkFTgZ3wmtB79kyuZaHn8XgGQmr8=
-X-Gm-Gg: AR+sD11sJGvlzvaWIQforIEl5I1qeFV7umrfIB1lu7Xp6Iqq03ardHz8fZwR2/UeRKU
-	yCvVhy84hoHOKlYgs+YhY20EIA88OBmGnU7tcoVPfEe7nXR2e1fmCTSxNpYWDgzcGNZLs7d/1p/
-	8vBhiO4W7NQPvubFcBo9htcJ72+V8Ev6E69PEa85S251zf6F7Pwq4AsIm44gdTz/mcBmJWlFl3P
-	KGms9SZ5v1G6onbzN7UKYcvJHmZrUOo+8vdL9dyXwGg17oOWwlFQi69e3PfUfqRmyd1E+LSf124
-	QUEFSYT1AW0NEUpoZQEtowbqvb02yAnAxuPMuUoYYiW7y36pdi28Wo7tOnpTeH84JSTSK6rOFjB
-	PJ2uDMzfVErpP6lYOWHr1pwUxd1B9pDk8rA==
-X-Received: by 2002:a17:90b:3a4c:b0:37f:e326:6559 with SMTP id 98e67ed59e1d1-38f6a438830mr6228980a91.22.1785308770283;
-        Wed, 29 Jul 2026 00:06:10 -0700 (PDT)
-X-Received: by 2002:a17:90b:3a4c:b0:37f:e326:6559 with SMTP id 98e67ed59e1d1-38f6a438830mr6228940a91.22.1785308769668;
-        Wed, 29 Jul 2026 00:06:09 -0700 (PDT)
-Received: from [192.168.1.86] ([65.181.12.101])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f80717ec5sm450542a91.0.2026.07.29.00.06.04
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 29 Jul 2026 00:06:09 -0700 (PDT)
-Message-ID: <ac5760cc-a4ab-4fe1-9962-6b6890de4f36@oss.qualcomm.com>
-Date: Wed, 29 Jul 2026 17:06:02 +1000
+        bh=SnloaealkmuKUdtscWJ56PcucYTV8n1BDo0/2qHaktA=;
+        b=aqEGCrkhdtVtvZn5mgvV2RPeaUsC4qSzJmQtQQeTs//SYh4Cd8ZxN3AQySBzdGIEVO
+         QKQA5QeAeKttNxTwrQ8lHxKylxlOmEYwlsfgqltGpYH0EvPKtkG9j6ACqFGoPMVaeOaV
+         DdxHWe36OMGUA4sFyZzArO/yJ1rZtSuyrkgwRkIlEndz4Jn3ziJB4aVQoUn2/VsCZPvS
+         C75IuA5n/LUSU/hS3b/+Fe9/ELuq+kHWgbLxX5rU5SMtptEH2JY8VUD/DJ5KgnYzyP65
+         AC5ZV/ayEie92SVVD83vJmPZPCHs7GkMuY37Di7+bBoQxma7QFuGuWVuMvTEKkf2Ul46
+         6PRg==
+X-Forwarded-Encrypted: i=1; AHgh+RpU/feo7+mj6B8zMoDPgi8gXElY3vHMhrz4kx0/xDLCJ8W1m10Q6Wh1mQoLyfSJFenU5KP8Dl88XD+05Tpa@vger.kernel.org
+X-Gm-Message-State: AOJu0YyoyBNNimsKCbwJQ9xQ9HxBNm1ogMDlVQn9Jvh2fnug3nSW7w9N
+	bIjpZxwRHvNsxTTw2X3p4kQl/OjHIBSZbAlt5GKUfTEUuK6+BwAtk+9ZFzRbcyDCtSMytLcBRsJ
+	7RYf8k0vD46jJn8QIpqyXsqgZhtrAiRk5G5rgk2IgTFFcDIa85B6CGxrVeRqcywAVmcBG
+X-Gm-Gg: AR+sD10Fmvaz1IOR0Yy9OAqfP1S8S/lk9Y/BfEXpUxvVKZdiRcjMTSJYpNDFBlfVirI
+	XnXob45/8gGcF9OdDiv3vWPqUTJj/KZ0SuCJFhshtwQEOYixehu0RMiBp9ZaFJ9HuP3BgIK0r91
+	UxGWeCfAWFCtvI8F+OU0Vlnyu6f0+ULFUHWFaCYop4hBI3T2oCQ2zQSqylpTRYIeSZ66M+3VaIT
+	Qd+KbKuRSp72J8qc+osW0dXyejuYtPkuUJEGhFuPMaezPVrQ7toCkYa7XFtxaM+fAICNGy+RK8E
+	3WyRW++SZ0dtrGI1++fnKk9NfmjbSbyHSzqRSAWT4IuQPvQpT1shTyCi6KfbgwUt/yzE0xHNoNK
+	tU/LOSk7uUNFl4o/OtdZ/fmTpCqKWl607+PDJw+SjpYN2jIztvTMm50cS3F7l
+X-Received: by 2002:a17:903:11c3:b0:2ca:b89:7bcf with SMTP id d9443c01a7336-2d015f00e62mr57224585ad.22.1785309173320;
+        Wed, 29 Jul 2026 00:12:53 -0700 (PDT)
+X-Received: by 2002:a17:903:11c3:b0:2ca:b89:7bcf with SMTP id d9443c01a7336-2d015f00e62mr57224315ad.22.1785309172870;
+        Wed, 29 Jul 2026 00:12:52 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d022bc8400sm6719185ad.47.2026.07.29.00.12.49
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 29 Jul 2026 00:12:52 -0700 (PDT)
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Srinivas Kandagatla <srini@kernel.org>
+Cc: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org,
+        Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Subject: [PATCH v2 RESEND] misc: fastrpc: Drop unhandled DSP PD exit notification
+Date: Wed, 29 Jul 2026 15:12:35 +0800
+Message-ID: <20260729071235.946502-1-shengchao.guo@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/6] tee: qcomtee: Allow object invokes from kernel
- clients
-To: Harshal Dev <harshal.dev@oss.qualcomm.com>,
-        Jens Wiklander <jens.wiklander@linaro.org>,
-        Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
-        Sumit Garg <sumit.garg@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: Basant Kumar <basantk@qti.qualcomm.com>,
-        Apurupa Pattapu <apurupa@qti.qualcomm.com>,
-        Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
-        op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org
-References: <20260722-qcom_uefisecapp_migrate_qcomtee-v2-0-b8a8fcbe4211@oss.qualcomm.com>
- <20260722-qcom_uefisecapp_migrate_qcomtee-v2-3-b8a8fcbe4211@oss.qualcomm.com>
-Content-Language: en-US
-From: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-In-Reply-To: <20260722-qcom_uefisecapp_migrate_qcomtee-v2-3-b8a8fcbe4211@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: 0WmXFEKc8tR5FNEhE7fkdeUvwaUJCOTM
-X-Authority-Analysis: v=2.4 cv=C5fZDwP+ c=1 sm=1 tr=0 ts=6a69a663 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=1tOsOel+q48EdXbnVOFv2g==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=Xs04euXehvGDb6oPuSgA:9 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-ORIG-GUID: 0WmXFEKc8tR5FNEhE7fkdeUvwaUJCOTM
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDA1NSBTYWx0ZWRfX8jrI5S8MZvuA
- CQvNnmYsUafds8NaZDaP16OE11T66o7AQeILWU3GCPk5cRTK211fKff+DR7edpv95MvgUbu1at/
- llDmIkELFLNbogHEN9tR5bNwofNrIjM=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDA1NSBTYWx0ZWRfX7/Z1jlALRh9Y
- KD6ntLsQO5w8ck8gzhvxBz24zSz32im1M7QMpScgK/MmxDtuT0dGs8FJUmpcRob/UilwcA2t9xA
- QCiAb/Z69IPqxyWbV8Wfp84LutjKi0NgymkXc9r+/qTtQSWzur4h4QBSD46UnTwNgMEginzdX1t
- Ehhu6VxiB2XcvK5I1Phu3VuDyEsJkt8GuWw3ay6jmt0ZcR2MzhRJOLZNmcmCY/pA8lgygHBxi21
- DdmpyC3zHHS4o1Oz0J6akzPPTrgacgAF9Jn8ARLNPlc2g3Q8XN3FDZLPol/VUm8tQarR82urBu2
- kM/+mSBuCwddism/+MMWlVp77xvdMsc7E1jsSzMIFbzTTLzrIyC8qi7ABLWc6bP1NULwSkCTNX6
- 2Y/af6bMkPBKY60DHWcw5waiYIcCAvmSv8A9JZ+WoR3o2XRiAsKbGohCnc/EnnBtbJH+DfvxrMS
- cN6Omj/vUZoOBlhOELw==
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDA1NyBTYWx0ZWRfX0RnKtwATYtVI
+ ct03jzvhj6tvxp29KNGYhwZCgWgQQ0locRwayVIcwJdci5doRcS2K4abXEE1y/kp66ruvBvxv+R
+ IB9jTFcHVTBPshiHfq6HNX5lSlaARO7eP+uxtFPG4eYW417Qmw+1qx8H8pXThc39JDurVLbPT3i
+ WAiT1hqr1lgAAbHK8HImVhGJdjxDfPr6vOC66S2gtT+T2NHYOYJcQSUTyECSV41ZfTtW8yQdzjq
+ aRRPPnkrc+NiwpkCA2vgRM3KmZAU3j+eiMUBfYUsEiILqTpbUuqfGiD/ITTDmBRtJ2kTVrjnW2a
+ LKKQzcbuc49qZlW8ay/zVeqCKA+fKW3tkxFwsO2fYxkthsljmHA0D5WW5qdGem5mYqRa2Do93l1
+ BJKW7Ua0Dn55LygS+ktCTGayST0aK4SiIOqcU4z3a+qIJxlrue3zxxHvv2XujtVGvdZ7UUR/GmA
+ ThCYcbNDV7QfuGEZ32A==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDA1NyBTYWx0ZWRfX8jL9AJ3NK0aR
+ Ltnpke8HILFHN6wUAtxf5n95h/RGNrsnQLKuYDv6yK6UmWriQX6fBchvv9LcPpaKJbIwFr1nj6r
+ k+SgX6pw3MfhLm4XZLXDGPCr30+5CkA=
+X-Proofpoint-ORIG-GUID: ViBTkjfQPwdOSVpQdN06FdF08ojavP7M
+X-Authority-Analysis: v=2.4 cv=Ap/eGu9P c=1 sm=1 tr=0 ts=6a69a7f6 cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=G6LYrpz0uQ56CJO9uQMA:9 a=324X-CrmTo6CU4MGRt3R:22
+X-Proofpoint-GUID: ViBTkjfQPwdOSVpQdN06FdF08ojavP7M
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-29_02,2026-07-28_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 impostorscore=0 malwarescore=0 adultscore=0
- clxscore=1015 priorityscore=1501 bulkscore=0 lowpriorityscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607290055
+ spamscore=0 lowpriorityscore=0 adultscore=0 clxscore=1015 priorityscore=1501
+ suspectscore=0 bulkscore=0 malwarescore=0 phishscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607290057
 
-Hi Harshal,
+Newer DSP firmware implements a PD (Protection Domain) notification
+framework that sends PD state notifications upon request. The PD exit
+notification is unconditionally sent by the DSP with a fixed sentinel
+0xABCDABCD in the context field.
 
-On 7/22/2026 4:59 PM, Harshal Dev wrote:
-> From: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-> 
-> QCOMTEE currently treats UBUF parameters as userspace addresses and
-> applies userspace restrictions when invoking the root object. This is
-> not suitable for object invocation requests issued by kernel clients.
-> 
-> Use the kernel_ctx flag to distinguish kernel client requests from
-> userspace requests. For kernel contexts, do not mark UBUF parameters as
-> user addresses, and allow permitted root-object operations to proceed
-> without applying the userspace-only checks.
-> 
-> This allows in-kernel users of tee_client_object_invoke_func() to issue
-> object invocation requests through the qcomtee backend.
-> 
-> Co-developed-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
-> Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
-> Signed-off-by: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
-> ---
->  drivers/tee/qcomtee/call.c           | 34 +++++++++++++++++++++++-----------
->  drivers/tee/qcomtee/qcomtee_object.h |  5 +++--
->  include/linux/tee_drv.h              |  5 ++++-
->  3 files changed, 30 insertions(+), 14 deletions(-)
-> 
-> diff --git a/drivers/tee/qcomtee/call.c b/drivers/tee/qcomtee/call.c
-> index 03d33b118f6d..c1bba5fbfa3e 100644
-> --- a/drivers/tee/qcomtee/call.c
-> +++ b/drivers/tee/qcomtee/call.c
-> @@ -202,7 +202,7 @@ int qcomtee_objref_from_arg(struct tee_param *param, struct qcomtee_arg *arg,
->   */
->  static int qcomtee_params_to_args(struct qcomtee_arg *u,
->  				  struct tee_param *params, int num_params,
-> -				  struct tee_context *ctx)
-> +				  struct qcomtee_object_invoke_ctx *oic)
->  {
->  	int i;
->  
-> @@ -210,8 +210,14 @@ static int qcomtee_params_to_args(struct qcomtee_arg *u,
->  		switch (params[i].attr) {
->  		case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_INPUT:
->  		case TEE_IOCTL_PARAM_ATTR_TYPE_UBUF_OUTPUT:
-> -			u[i].flags = QCOMTEE_ARG_FLAGS_UADDR;
-> -			u[i].b.uaddr = params[i].u.ubuf.uaddr;
-> +			u[i].flags = oic->kernel_ctx ? 0 :
-> +				QCOMTEE_ARG_FLAGS_UADDR;
-> +
-> +			if (u[i].flags && QCOMTEE_ARG_FLAGS_UADDR)
-> +				u[i].b.uaddr = params[i].u.ubuf.uaddr;
-> +			else
-> +				u[i].b.addr = params[i].u.ubuf.addr;
-> +
+fastrpc_rpmsg_callback() treats every inbound message as an invoke
+response, so the sentinel is masked and shifted like any real response
+((0xABCDABCD & 0xFF0) >> 4 == 188) and looked up in the channel's
+context idr.
 
-it is & not &&.
-Rather than ?:, can you have single if and update both flags and addr/uaddr.
+This is not merely cosmetic. In the common case idr slot 188 is empty,
+the lookup fails, and the driver only logs a spurious "No context ID
+matches response" error on every teardown. But the context idr is shared
+by every protection domain and the listener thread on the channel and is
+filled cyclically over [1, FASTRPC_CTX_MAX]. If slot 188 holds a live
+context when the sentinel arrives, the sentinel's return value is written
+into that unrelated in-flight invocation and it is completed early.
 
-- Amir
+Since neither the fastrpc library nor the driver supports the DSP PD
+notification framework, it is safe to drop the PD exit notification
+before it is ever turned into a context lookup. This removes both the
+log spam and the mis-completion race. A genuine response can never be
+masked: a real context is (idr_index << 4) | pd (at most 0xFF3) and
+can never equal the sentinel.
 
->  			u[i].b.size = params[i].u.ubuf.size;
->  
->  			if (params[i].attr ==
-> @@ -223,7 +229,7 @@ static int qcomtee_params_to_args(struct qcomtee_arg *u,
->  			break;
->  		case TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_INPUT:
->  			u[i].type = QCOMTEE_ARG_TYPE_IO;
-> -			if (qcomtee_objref_to_arg(&u[i], &params[i], ctx))
-> +			if (qcomtee_objref_to_arg(&u[i], &params[i], oic->ctx))
->  				goto out_failed;
->  
->  			break;
-> @@ -270,7 +276,7 @@ static int qcomtee_params_to_args(struct qcomtee_arg *u,
->   */
->  static int qcomtee_params_from_args(struct tee_param *params,
->  				    struct qcomtee_arg *u, int num_params,
-> -				    struct tee_context *ctx)
-> +				    struct qcomtee_object_invoke_ctx *oic)
->  {
->  	int i, np;
->  
-> @@ -288,7 +294,8 @@ static int qcomtee_params_from_args(struct tee_param *params,
->  			break;
->  		case QCOMTEE_ARG_TYPE_OO:
->  			/* TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT */
-> -			if (qcomtee_objref_from_arg(&params[np], &u[np], ctx))
-> +			if (qcomtee_objref_from_arg(&params[np], &u[np],
-> +						    oic->ctx))
->  				goto out_failed;
->  
->  			break;
-> @@ -304,7 +311,7 @@ static int qcomtee_params_from_args(struct tee_param *params,
->  	/* Undo qcomtee_objref_from_arg(). */
->  	for (i = 0; i < np; i++) {
->  		if (params[i].attr == TEE_IOCTL_PARAM_ATTR_TYPE_OBJREF_OUTPUT)
-> -			qcomtee_context_del_qtee_object(&params[i], ctx);
-> +			qcomtee_context_del_qtee_object(&params[i], oic->ctx);
->  	}
->  
->  	/* Release any IO and OO objects not processed. */
-> @@ -357,7 +364,8 @@ static int qcomtee_params_check(struct tee_param *params, int num_params)
->  }
->  
->  /* Check if an operation on ROOT_QCOMTEE_OBJECT from userspace is permitted. */
-> -static int qcomtee_root_object_check(u32 op, struct tee_param *params,
-> +static int qcomtee_root_object_check(struct qcomtee_object_invoke_ctx *oic,
-> +				     u32 op, struct tee_param *params,
->  				     int num_params)
->  {
->  	/* Some privileged operations recognized by QTEE. */
-> @@ -366,6 +374,9 @@ static int qcomtee_root_object_check(u32 op, struct tee_param *params,
->  	    op == QCOMTEE_ROOT_OP_ADCI_SHUTDOWN)
->  		return -EINVAL;
->  
-> +	if (oic->kernel_ctx)
-> +		return 0;
-> +
->  	/*
->  	 * QCOMTEE_ROOT_OP_REG_WITH_CREDENTIALS is to register with QTEE
->  	 * by passing a credential object as input OBJREF. TEE_OBJREF_NULL as a
-> @@ -429,7 +440,8 @@ static int qcomtee_object_invoke(struct tee_context *ctx,
->  	/* Get an object to invoke. */
->  	if (arg->id == TEE_OBJREF_NULL) {
->  		/* Use ROOT if TEE_OBJREF_NULL is invoked. */
-> -		if (qcomtee_root_object_check(arg->op, params, arg->num_params))
-> +		if (qcomtee_root_object_check(oic, arg->op, params,
-> +					      arg->num_params))
->  			return -EINVAL;
->  
->  		object = ROOT_QCOMTEE_OBJECT;
-> @@ -437,7 +449,7 @@ static int qcomtee_object_invoke(struct tee_context *ctx,
->  		return -EINVAL;
->  	}
->  
-> -	ret = qcomtee_params_to_args(u, params, arg->num_params, ctx);
-> +	ret = qcomtee_params_to_args(u, params, arg->num_params, oic);
->  	if (ret)
->  		goto out;
->  
-> @@ -455,7 +467,7 @@ static int qcomtee_object_invoke(struct tee_context *ctx,
->  
->  	if (!result) {
->  		/* Assume service is UNAVAIL if unable to process the result. */
-> -		if (qcomtee_params_from_args(params, u, arg->num_params, ctx))
-> +		if (qcomtee_params_from_args(params, u, arg->num_params, oic))
->  			result = QCOMTEE_MSG_ERROR_UNAVAIL;
->  	} else {
->  		/*
-> diff --git a/drivers/tee/qcomtee/qcomtee_object.h b/drivers/tee/qcomtee/qcomtee_object.h
-> index 2528d07e4576..7bd6e23b038c 100644
-> --- a/drivers/tee/qcomtee/qcomtee_object.h
-> +++ b/drivers/tee/qcomtee/qcomtee_object.h
-> @@ -112,8 +112,9 @@ struct qcomtee_buffer {
->   * @b: address and size if the type of argument is a buffer.
->   * @o: object instance if the type of argument is an object.
->   *
-> - * &qcomtee_arg.flags only accepts %QCOMTEE_ARG_FLAGS_UADDR for now, which
-> - * states that &qcomtee_arg.b contains a userspace address in uaddr.
-> ++ * If %QCOMTEE_ARG_FLAGS_UADDR is set in &qcomtee_arg.flags then it implies
-> ++ * that &qcomtee_arg.b contains a userspace address in uaddr.
-> ++ * Otherwise, &qcomtee_arg.b contains a kernel address in addr.
->   */
->  struct qcomtee_arg {
->  	enum qcomtee_arg_type type;
-> diff --git a/include/linux/tee_drv.h b/include/linux/tee_drv.h
-> index ca99c6b747a8..71d0536db60e 100644
-> --- a/include/linux/tee_drv.h
-> +++ b/include/linux/tee_drv.h
-> @@ -83,7 +83,10 @@ struct tee_param_memref {
->  };
->  
->  struct tee_param_ubuf {
-> -	void __user *uaddr;
-> +	union {
-> +		void *addr;
-> +		void __user *uaddr;
-> +	};
->  	size_t size;
->  };
->  
-> 
+Assisted-by: Claude:claude-opus-4-8
+Reviewed-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+---
+Resend by rebasing on Srini's fastrpc for-next branch
+
+Changes for v2:
+- Update per Ekansh's input about PD state notification (Thanks Ekansh!)
+- Link to v1: https://lore.kernel.org/all/20260727130940.577721-1-shengchao.guo@oss.qualcomm.com/
+
+ drivers/misc/fastrpc.c | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+
+diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
+index a859edb75499..dd51d475a74e 100644
+--- a/drivers/misc/fastrpc.c
++++ b/drivers/misc/fastrpc.c
+@@ -51,6 +51,17 @@
+ /* Sequence number occupies bits 63:16 of the ctxid / message context */
+ #define FASTRPC_CTXID_SEQ_SHIFT	16
+ #define FASTRPC_CTXID_SEQ_MASK	GENMASK_ULL(63, 16)
++
++/*
++ * Newer DSP firmware implements a PD (Protection Domain) notification
++ * framework that sends PD state notifications upon request. The PD exit
++ * notification is unconditionally sent by the DSP with this fixed sentinel
++ * in the context field rather than the context of an outstanding invocation.
++ * Since the fastrpc driver does not support the DSP PD notification framework,
++ * this message must be dropped rather than matched against the context idr.
++ */
++#define FASTRPC_DSP_PD_NOTIFY_CTX	0xABCDABCD
++
+ #define INIT_FILELEN_MAX (2 * 1024 * 1024)
+ #define INIT_FILE_NAMELEN_MAX (128)
+ #define FASTRPC_DEVICE_NAME	"fastrpc"
+@@ -2710,6 +2721,14 @@ static int fastrpc_rpmsg_callback(struct rpmsg_device *rpdev, void *data,
+ 	if (!cctx)
+ 		return -ENODEV;
+ 
++	/*
++	 * A PD exit notification from the DSP PD notification framework carries
++	 * this sentinel rather than a real context. Drop it: a real context is
++	 * (idr_index << 4) | pd and can never collide with this value.
++	 */
++	if (rsp->ctx == FASTRPC_DSP_PD_NOTIFY_CTX)
++		return 0;
++
+ 	ctxid = FIELD_GET(FASTRPC_CTXID_MASK, rsp->ctx);
+ 
+ 	spin_lock_irqsave(&cctx->lock, flags);
+-- 
+2.43.0
 
