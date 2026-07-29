@@ -1,67 +1,67 @@
-Received: from mail-ej1-f51.google.com (mail-ej1-f51.google.com [209.85.218.51])
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4137443CE77
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 09:06:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 25E6B43DA31
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 09:06:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785315965; cv=none; b=CTwb2EBnySJv/cPA4sbmZ+u0YyA8e8m4szKCRG2aVlHb4JBMbeArlDd/rnmi+7PjF5IpApJXjuRuYJ4DI7UdpRsVYEIwyFLuGVv3sMGDqcpgiiRG1rURNDiDKqmIrJt2ijzo9t5G3PFIusZFLySunJd5xsf7mbSB1+v09Wtdjec=
+	t=1785316006; cv=none; b=XjmfPjuCS3QS8ISGtmF+xAEPt+moY+I6ryW6AOLfTuNpHWGDZe0IAEgH9YiLsPI7aSHgQlOTfjuM8LzlbIdfqkgNdeeT2O0Rv72rr5CH5pMJzhpJWpTGyEesLkZat0iCKRi6rDdqWU3OxvtbmDKDwpG3uELYvE1K2HjcI1plnfk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785315965; c=relaxed/simple;
-	bh=Pgzdd8QWkHLx5iJntf57eHKC3caXUVrMC3GRDLNiXIU=;
+	s=arc-20240116; t=1785316006; c=relaxed/simple;
+	bh=Tj2A7G3xOugsZdpTkzC7PSnEnC2yGvZhcunhbg8M3xc=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=VNjcW+BSFI2/MCXfCbKxdJ7l24/NRFBxqDt0+TY2WtAXfSBTURKCWBZ3MD5D1FB5stYGydI3Vl9c3xi5R4knMqIFeeihAcUCvIXtVj5/3gYP4/6u/GXu+AQwOZR9guDBcid/0lvxpJGcNw4XyQdRbpWIDurp79Nl27ZkubbDYjk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=mE0/FiJy; arc=none smtp.client-ip=209.85.218.51
+	 In-Reply-To:Content-Type; b=fzzXf0yhzgnz3+Xt6/KZUUt7MHl+Xfz4Q6OuFajYwKwt8NI0+eZQa9E21bt0i/UhnCxszCOwoIRF6myS9A/JE/kEVgIzQKZPpPueSZUGEVqDum5CXlSRjXk6zjhkZfzNCmMKwJypXGMjfFBZIKxDK1wbvl1k31EMw/XLQ59Nt8Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=GBbSHl+p; arc=none smtp.client-ip=209.85.218.47
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="mE0/FiJy"
-Received: by mail-ej1-f51.google.com with SMTP id a640c23a62f3a-c15c42a45adso255610566b.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 02:06:02 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="GBbSHl+p"
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-c15e2dab83eso106549366b.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 02:06:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1785315960; x=1785920760; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1785316002; x=1785920802; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=S/MLmidGDM5QU9T+4fBVHNCPTr7RK0V7QVFC0bGSvSY=;
-        b=mE0/FiJyriFLB0XSsNSfv8S1OPGzSI/6lTdLM0KcToXv2AgUM2COud11WYHC0PMJtH
-         Piebq4RkZZ6Hhdn99hEW1GDRTwynXyKhs3GfgN7a4nClWVoej32HCrDPyzRl630HaLXv
-         xPZtsBySSGNKKuriqT1COFcSsKKLK1OYSIrJbQx8Bw06jIYNegOs4f4z1PIQ5Wn6F6Xq
-         rO038n1NcG3MTgWksqkd3PWcBqs+euQ7sJkAv6daRCGuhHbroGFHCsQmbzl3oqzQan0E
-         d6xsB/3D5QG9FOgqqubGBb/6Tp0WuuJYrMbIsMrgxmecv9N1euvyIeaxkJKMYRNiTxFB
-         AM2A==
+        bh=4ErTA5SmPrm2LDng6tlFDy5jDtcI+zchVNjeWFoCdYk=;
+        b=GBbSHl+pS9ZsQi4PCOgA5QMbzkHSkkrmDAzFVu4Ilqa4uS01z1LrCc109Kb/9gAgue
+         sloX7ZrnFL5oo7BYjIqjeek9KeY0wRlDm+cQy7yRzovRoKZkomdNgG0nVmH6CDL7fQjG
+         mTjc8vbUJ75Ps4B3vAn4WPP5MUBvya8Em0CBzenH+g5AJte0gNdUgCkSbJ4pbB7gQuw6
+         gD116gQe3HSvhbBSgW1vDz6ErWMRr7+wsub367V1ifTc2cGIUi3GAxRYMi7/rkyf65O3
+         U+GB7431TytddnqnGuK52Ey1dWl+XamypOuinjxS2efQKFw5qYiiDmsEUoWNoqoY12rE
+         Awrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785315960; x=1785920760;
+        d=1e100.net; s=20251104; t=1785316002; x=1785920802;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=S/MLmidGDM5QU9T+4fBVHNCPTr7RK0V7QVFC0bGSvSY=;
-        b=UbodvGqI0O50QVTMZ1eP8fUdbhrDvIme/P+0zjyFQ2AzaoxR+3rUjnqB8u/2J5d2BA
-         nn3ubanAfno+pr4hh6J+YmozFCjc5DcBT6Z6mU6VrGrkRaHK0LyiGv5IqTsntSjSJ0jM
-         PECDIgFZ1vALX3s42Exp6ZK1iBm7IloKmbIbvixYZqoYByS36IYQgMUPLaxz8tWVoYDO
-         kLa9/SUUueM5OMClV7E3W+8Dp9yZg5OZfgly2VxTQuT0DM/qrbFFjIy40NCBSdfzsLd5
-         +J6j/xYn1xToB35C9z9fpjqQ0nAoP3XW8c5VmbzPhQv7am34V2UWz/nKUAwuxWY8WMpz
-         DrEA==
-X-Forwarded-Encrypted: i=1; AHgh+RpFpdIWccps0VnxIl6/+909/h84+8PXDnaIRvrUD3a/P58jmmNMng42FS2ofJpyqAR0R/1pmh3P4xYLkynH@vger.kernel.org
-X-Gm-Message-State: AOJu0YzTy0+i+l6xDk5EaF2Bc/9s2Q+8ZTEUPY1GXilJn93ofbcsZmzF
-	JDh4KqA+oX/sR9jtOUOscJZA4qSWRwbsyuKkNa1pJaLDEnCvKB76mBQt7so5eDI/IhY=
-X-Gm-Gg: AR+sD11Xxpde9mhpdss5RXUHXSM8DNufFtqPD+WcHf6H1sqhNTTMbfkfO1KII01ZIu5
-	hIoMXTk/H8vWAoIRFYxHXULsZ/Zffd7FROxty1RrkzAkW2wWa0/8Eb/BDigzl4GehQoVJlJ8y3g
-	HzLNjFqvaKBZzoNfGi9UNRLCHFEEOp9LfoEN3gyYHAq0QjaxqlYH++ZJtMMNRc19awBQTXuECZp
-	iI9qfmvf1cmd+zU9lmhlA4X4/ywl028K68nU2BHw8BqnzqRQAUA95jwnjqtBlUYMRtveve8xKoz
-	VROIBeKIhvl+V9h7cc++SQFg2f5vMsqv5xjJh2rOBlQHgRYTZ2X5ugkELvM5RUM85zC0ATJUiMp
-	GUwlJ4AqHXntSdonLseaQe/oJNM1diTcwYAK7zpYVNIYWzQY81tgjnsBt3uD4ty3JYt+FsxAhej
-	0qvvGdQSZYgAtpE+7vYXJ51NKZ7HPjZ4cLJ/Kb05Zsm+IdOlex0MKkrkZcJ/r3HBmk+biM1A==
-X-Received: by 2002:a17:907:6d0a:b0:c15:a7b9:2ae1 with SMTP id a640c23a62f3a-c1f8cbc0449mr86006066b.6.1785315960387;
-        Wed, 29 Jul 2026 02:06:00 -0700 (PDT)
+        bh=4ErTA5SmPrm2LDng6tlFDy5jDtcI+zchVNjeWFoCdYk=;
+        b=U2lMb+vB41JiKbkjy469ScwBB3QZvNv8FRfTUYeSemXJGuzfw9EwNCNY8IdsvzM5RL
+         hQcfWpAf+rDJ+EssgDOb3DXV7KeuWiTAtKY4fX3JaCOC6i3ifSWAbJEdGp05xYrrh11M
+         pP2HWsLUgqhrrrtuSZiz9kn9pEhi3ipfXeNNsugelYrzJYj+dzEKEZc/r3c7ZGFwMwv0
+         xpo915GVfbzg6gchZ8cVe900yc7AA5HU4D/EAunQdikN6C9Vib9ZBbIPmjhNndrDS8OM
+         sQbN954Cq5ZT6Sn9s1BEWxsW6ChG09V3sXmu0tjq898SapOSWoZfD1nsbCYKmh7PnIYD
+         +RsA==
+X-Forwarded-Encrypted: i=1; AHgh+RqcITog+P09UWtsFQ6oc0UDm5uSSyLvNyfh5Zud017Xw7C1hE1uUnBFUZHtLCg0PqNBPfl1oZ4oaqfJBuf1@vger.kernel.org
+X-Gm-Message-State: AOJu0YyryoynI7D5S8rnxSMS16fqTrC3XhtOLwUTAW5cQIpTe1OA7VO5
+	gXmbJZdE3kaM498O6CUa58roRdBSpHg2pkHd+5X9f6L3GzQhH/qGVtgMq8WCTaoXk4Y=
+X-Gm-Gg: AR+sD10E25r87pSWpLLoc0dcuUlGX0wsBr3o3AGFQl21H0mzkTYb805sOtyp4LA/RSk
+	M1AFabBIljP0rWWPDywmDy5msdPfvPyXYa76vMysp26tuO6IEzMthB85hceeijlr8+ShtrzpwZ4
+	u3xRrXp3babe9OogPLS3FbVnxFZlyDag/5FiMXxtfSsUpxe5LqcSCZbH1Rmvcc98u41MuWcm+4/
+	1JarA1VFhLu3XFjkUojct+js7NGSODrxePCHYHA28XqpDcOKOdY+CoTZI+FbSprZK75DszqCFiO
+	V2OdVl3djCqfPhjiFFaTxOKtEsOHkhAbK8ZuUyDmvbhkrA450aaVydf0Gg93gP6+AuUdwjDj2SY
+	rxpa7zVpnJjn1a8FWOYDQAKOteRkX3Q1nY19hsO+zek2SHTMUQ7ouxbkMtefzHq3hc5EMj03Qwm
+	M3xoN13lwC920Sk2yleIUeVbAqx+3A48klo/vIvZpn13qxZdavKImlrcEPE/9EFRaMFGpO7w==
+X-Received: by 2002:a17:906:f599:b0:c16:12ff:dc8b with SMTP id a640c23a62f3a-c1f72216e04mr326056966b.54.1785316002175;
+        Wed, 29 Jul 2026 02:06:42 -0700 (PDT)
 Received: from [192.168.0.35] ([109.77.24.32])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1f83cebf3fsm87314766b.25.2026.07.29.02.05.59
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1f83ce1649sm86953066b.21.2026.07.29.02.06.40
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 29 Jul 2026 02:05:59 -0700 (PDT)
-Message-ID: <a661e25a-c889-4c6a-9052-5429d9924030@linaro.org>
-Date: Wed, 29 Jul 2026 10:05:58 +0100
+        Wed, 29 Jul 2026 02:06:40 -0700 (PDT)
+Message-ID: <53d0bd5e-60c0-40ce-83e0-c123d191a72b@linaro.org>
+Date: Wed, 29 Jul 2026 10:06:39 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,13 +69,14 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v13 4/5] dt-bindings: media: qcom,x1e80100-camss: Describe
- iommu entries
-To: Rob Herring <robh@kernel.org>
+Subject: Re: [PATCH v13 5/5] dt-bindings: media: qcom,x1e80100-camss: Make
+ vdd-csiphy supplies optional
+To: Krzysztof Kozlowski <krzk@kernel.org>
 Cc: Bjorn Andersson <andersson@kernel.org>,
  Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
- <sboyd@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
+ <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
  Todor Tomov <todor.too@gmail.com>, Mauro Carvalho Chehab
  <mchehab@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
  Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
@@ -84,33 +85,29 @@ Cc: Bjorn Andersson <andersson@kernel.org>,
  Neil Armstrong <neil.armstrong@linaro.org>, linux-arm-msm@vger.kernel.org,
  linux-clk@vger.kernel.org, devicetree@vger.kernel.org,
  linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
- linux-phy@lists.infradead.org, Krzysztof Kozlowski <krzk@kernel.org>
+ linux-phy@lists.infradead.org
 References: <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-0-ae811e2f0799@linaro.org>
- <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-4-ae811e2f0799@linaro.org>
- <20260728144448.GA2141274-robh@kernel.org>
+ <20260728-b4-linux-next-25-03-13-dtsi-x1e80100-camss-v13-5-ae811e2f0799@linaro.org>
+ <20260729-uptight-proficient-whippet-1a4aa8@quoll>
 Content-Language: en-US
 From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-In-Reply-To: <20260728144448.GA2141274-robh@kernel.org>
+In-Reply-To: <20260729-uptight-proficient-whippet-1a4aa8@quoll>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 28/07/2026 15:44, Rob Herring wrote:
-> On Tue, Jul 28, 2026 at 10:35:35AM +0100, Bryan O'Donoghue wrote:
->> The original iommus list included entries for ICP and BPS/IPE S1
->> contexts. Only the five S1 HLOS stream IDs are required by the CAMSS
->> ISP hardware: IFE/IFE_LITE read and write, SFE read and write, and
->> CDM IFE. The remaining entries serve other hardware blocks which will
->> be described in their own nodes as support is added.
->>
->> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+On 29/07/2026 07:25, Krzysztof Kozlowski wrote:
+> On Tue, Jul 28, 2026 at 10:35:36AM +0100, Bryan O'Donoghue wrote:
+>> Moving the csiphy to peer nodes means making the current supplies optional.
 > 
-> What happened to krzk's reviewed-by?
+> There is no move here, thus this change is incomplete.
 > 
->> ---
->>   .../bindings/media/qcom,x1e80100-camss.yaml        | 26 ++++++++++++++++------
->>   1 file changed, 19 insertions(+), 7 deletions(-)
+> Best regards,
+> Krzysztof
+> 
 
-I didn't run `b4 tailers --update` is what.
+Hmm, I've obviously missed a comment from you.
+
+Sorry about that.
 
 ---
 bod
