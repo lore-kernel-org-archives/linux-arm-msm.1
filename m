@@ -1,127 +1,122 @@
-Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96D653CC303
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 19:57:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 480973CCA19;
+	Wed, 29 Jul 2026 20:04:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785355073; cv=none; b=GQZecwcv7SQ78o+H9RMAD1QupV+j3rjQPqYnNMCfTyvw/sA6ymb880tIiJEtMDaL7VEHIuRaYXNB96af2gjt0RjrOIFVF+4ahQAjZgqtlLrxiS1sUqoh1muLLZTG2uoR7pQz3FUm+vm2CBjGYWaGX5ZwDyzHV7elv06Nz89RFWU=
+	t=1785355493; cv=none; b=DV6LA4YNJoDPJWMw7EehA13Fvhxi68IsxRKoujYMpNnyVZSERZXSDgubpz3K9Woswfz1kZ0mLUz0pK7fvcKUQbuzD6FJ50gUcVus7cuvrO7lb6VlyHQXK9t3PS8CY+zgD5a+MfS3NtXHdsTVgGfcOHgx81zqX2E6yQCjZVKoJ2A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785355073; c=relaxed/simple;
-	bh=jbGSyWqJyLohTYmCLKvB730dHsQBMDNbc5XkanPK7/I=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=X2+WWicic/AiNhiPSUptGCsmJ073C8YT9HGAsu9wL61bWsfa8sGgwh9F8G4xHVJ6OOR/LksTAARIykSq2kSL30/7en72ufTdvPrLBjT8yGwUeR1y6TwpTnhamY0hFHK5i59HHT2qn8qNsO6ymb8OE7LoWiReUpoQkLZNV05Iqqs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=a8zbIz3e; arc=none smtp.client-ip=209.85.167.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1785355493; c=relaxed/simple;
+	bh=JZ9MLE3H9TJ6EGOX5qtqz9ZVXm7ARpOQsgcPHjCEOQE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=np9S8+NLChG+qYBe8boNpe9eSo4VNAQMy/yM+bh6vdSG4NSHEvCkmKxuKwLlaa1IQIuvXJqYyVJlBUIf1/2gQ8pot5coeoDiolagCL5PdURukk6tI4XSG4whwDabBz2UqccvBFblI/In8GsCw6E1YXAMDGvHHshbsKyRdY612Js=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A8l1lS6t; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="a8zbIz3e"
-Received: by mail-lf1-f42.google.com with SMTP id 2adb3069b0e04-5aeb906d6c6so210590e87.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 12:57:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1785355068; x=1785959868; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=LE8yxChc+WSkATkEhDd8gBfNPkNIzWWJVjtjI5ufJCo=;
-        b=a8zbIz3e5YssqPIFskmSJFHAlHwnDJILzX0FZOsqLNOgP4KKGys/2ZuOLm7uFyfuyl
-         8lHJgWtilFvmU/VltwU82KxyX8+yOFeOs0HOJubkGKRU02UduNgfK/xtY6fLXvjJbPtN
-         lkxRIpVJuh5hbm3+WeQt3up/zZ87pcsdjg649ieYkU/0AXdeGSjjwMkSOFPplLm18VqC
-         r3gxuwi/s8Swme5HMcc97NVjy8PJiVoNJQlPFkz+YVMx6KCiQMNtYgaZMkYcoZSodvgo
-         FLcYyo4f1CBIaRruD23D/wp5UAKSv+0wmaJIiGba8T1AcTtZjNV5BReCkkrW0l5ZWN0r
-         CKfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785355068; x=1785959868;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=LE8yxChc+WSkATkEhDd8gBfNPkNIzWWJVjtjI5ufJCo=;
-        b=k3jXAp5P5bUnZ0YjWEI6a8yliHz645RsZ3jPjnlvm6egausXvaO/yx5QXzElsCqd56
-         2n/gKCcdSxTK0kjFHYjrZY9wMOiaieE38eomG+HdvnYWpa82x9H7bCIdrTWGK6evm0Yj
-         J0sMDv4mNSx7uzKu74aM60ndZtYs4GhtnPu2/TyPrTGLLh5yG5GDbADr4f1PA9wTc9/t
-         WbieIwxD2eAlhCdfC1iHv0e3TcCcMLBNQ/6quQpubYB+t80vYKZbQUh1tZ4e3vCJ0w5h
-         Il6Uyaq8k+DzaNxJU02TWWWadlhdKZhxsEzRb+MxS4jEqVSCR0WNwiSE4k0Nn7SIreka
-         0mUg==
-X-Forwarded-Encrypted: i=1; AHgh+RrBfAyazyBPoTZ/6p4Ky0b1yrrk935JqeXSFo3khW/QS1qMrMZFdmOeaIhBkewwFqhb+VlHfIJCTZz0LKj7@vger.kernel.org
-X-Gm-Message-State: AOJu0YxIy+sUS/Z2ktSk96Vkinvmmc8/6Gf2qMTVJ4WP7ssxWbFYJXna
-	RhLQb44aEyWawq6wL+EQp/XMvNYJ62rXw+r69+WHzhXQXYhJK6QXEGphPYiXu9nQhCU=
-X-Gm-Gg: AR+sD107vun4Gj0EaSU/QsInFGMxYvbRfTWJunQ7cPQMIWGf1zRDFvO8hQkuBC6zwzh
-	UmQRD5Pq4Yt0zMW5I6JBXgpIUFAxCHWfRAQ0bMjk6+hgHU7RhFjYL9yl1yjIMzXqiMaLhp53EWD
-	X16yBb0gKwR6Gl+FWO2JIpubAvVWT/6ZilCYTAX903uSjmbFxJdH1be6hcgY83tapBiA0c8YkP3
-	Lhx2iuu2iynaFDoN9P6cqwwZP/77A071hEr4agVnr4trZCbjnBqy0gl0B+D96DnHQL5RPplT4PM
-	4Dgw9WkwijXwxbF1LVQhujPM4YayDkmx4ehPld+P1e5itRZgpEBw2AAmSztqH4WjkAD7tjRfsjZ
-	d5v/x504tIPQT23thLhA6AmpgpnAuAYctRpiL+WDrkpwcAB+s9L3/5gaqmiHZDeRW6PXDAw3bdW
-	/gzZBif91fdoUB2dJhKE3+o7pR9GoyU66ZC7LoSQw2ThiklSq8WDaG6RbLH/WLOhtZhCcyXyhdD
-	coJXm04nymDR9GKiIYRGhNsNaLVu6UcHoxf2wXSSpQ24DM5k8Q5Sw==
-X-Received: by 2002:a05:6512:2250:b0:5b1:5e89:30f6 with SMTP id 2adb3069b0e04-5b2da4cfa64mr16335e87.3.1785355068442;
-        Wed, 29 Jul 2026 12:57:48 -0700 (PDT)
-Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2d78ea812sm572610e87.43.2026.07.29.12.57.47
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 29 Jul 2026 12:57:47 -0700 (PDT)
-Message-ID: <99ffd9e6-f47b-45cc-a039-d8cd5dacc28c@linaro.org>
-Date: Wed, 29 Jul 2026 22:57:47 +0300
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="A8l1lS6t"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4350F1F000E9;
+	Wed, 29 Jul 2026 20:04:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785355491;
+	bh=jaR4SAL/ghbKg4OExwH9psv9FHOylZnxt9q6YxKaO2o=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=A8l1lS6tHFmQHP7mGHhV9HRmrhJhFN5WMOM4nyd6uokBLjHsY7sLFC1n1l4pA59G4
+	 T7HTNV1dG3agD/BGfrQHw41ioi7xGQKruK9IK3yro6p2hQn/zsog/6m0yF2sU8AMtI
+	 JFW6/AWDU7ahReI6av6hmPPu6ojM+8ly2xAESRisPyJ480ItqAnxB6R6cWR2gJ6Tui
+	 sZ6Yvzdb37Lgsvv7mBqNKvm5u0kgIfsTlEyW5Nn8RhEtZuKIt0FmLVg/hymg7OfvzS
+	 ydhmjhPzFJSlH1+GuNhw+efGU/LETouV5+vcLfxwM6utNr6QzILsboovC07RT/h2Al
+	 QJ/9QWNn/6VwA==
+Date: Wed, 29 Jul 2026 21:04:47 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>, Vinod Koul <vkoul@kernel.org>,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5 3/4] regulator: qcom-rpmh: readback
+ voltage/bypass/mode/status set during bootup
+Message-ID: <bc461376-292d-4550-8518-3b84eb4fc602@sirena.org.uk>
+References: <20260720-b4-read-rpmh-v5-v5-0-cb93fb95f565@oss.qualcomm.com>
+ <20260720-b4-read-rpmh-v5-v5-3-cb93fb95f565@oss.qualcomm.com>
+ <da299944-0093-4d1a-b092-f7857b101199@sirena.org.uk>
+ <gaigrfpfunsqwuxf24uonw4mrkdse4ap3cywi2eg2qdyfgfzsd@hk6zghfqnkty>
+ <amNfHiL2W-uLlPjY@sirena.co.uk>
+ <e25dsbpp3chldtoh2awrtxfxkju3jevphn5pcoqvfehibwg2nr@yj5pfelpti63>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v14 1/2] dt-bindings: phy: qcom: Add CSI2 C-PHY/DPHY
- schema
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Vinod Koul <vkoul@kernel.org>, Kishon Vijay Abraham I <kishon@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Bryan O'Donoghue <bod@kernel.org>, linux-arm-msm@vger.kernel.org,
- linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260727-x1e-csi2-phy-v14-0-27d1bf477593@linaro.org>
- <20260727-x1e-csi2-phy-v14-1-27d1bf477593@linaro.org>
- <1e1bc17a-4c7a-4c08-b0c8-2a2ff31fe870@linaro.org>
- <e9cbff02-fd47-453d-8743-8816560f0f6b@linaro.org>
-From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-In-Reply-To: <e9cbff02-fd47-453d-8743-8816560f0f6b@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="5Ifbv/oNmyhmtpwZ"
+Content-Disposition: inline
+In-Reply-To: <e25dsbpp3chldtoh2awrtxfxkju3jevphn5pcoqvfehibwg2nr@yj5pfelpti63>
+X-Cookie: Captain's Log, star date 21:34.5...
 
-On 7/27/26 23:06, Bryan O'Donoghue wrote:
-> On 27/07/2026 21:03, Vladimir Zapolskiy wrote:
->>> +                description:
->>> +                  Logical lane indices 0-3, not physical pad positions.
->>
->> In hardware description it's physical data lane indexes, the same is
->> said in
->> video-interfaces.yaml documentation, the numeration starting from zero is
->> selected to follow even bits in CSI_COMMON_CTRL5 register (D-PHY mode):
->>
->> * https://lore.kernel.org/
->> all/59331aa7-8430-4754-861c-4ba6a4810ccd@oss.qualcomm.com/
-> 
-> I'm not sure what you're asking for here - this exact text ?
-> 
 
-Returning to the description of 'data-lanes' property:
+--5Ifbv/oNmyhmtpwZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> Logical lane indices 0-3, not physical pad positions.
+On Thu, Jul 30, 2026 at 01:11:36AM +0530, Kamal Wadhwa wrote:
+> On Fri, Jul 24, 2026 at 01:48:30PM +0100, Mark Brown wrote:
 
-Logical lane index is the same as a position of a physical lane index in
-the 'data-lanes' array, this array data cannot be "logical lane indices".
+> > No, that's not the point.  A get_status() operation needs to return the
+> > actual hardware status *now*, not a cached value from some random time
+> > in the past and not something that was written by the driver.
 
-A valid description is found in video-interfaces.yaml: "An array of
-physical  data lane indexes". So, it should be an array, and specifically
-an array of physical data lane indices, this contradicts to the given
-description for CSIPHY.
+> I can drop it. But I seek your guidance on how should i implement logic
+> to HOLD the enable/voltage/mode for the regulators which are turned ON by
+> bootloader.
 
-Here the open question is how physical lanes of CSIPHY are numerated, this
-requires a verbose comment. For instance Qualcomm CSIPHY configured in D-PHY
-combo mode (two sensors attached) has 2 or 3 data lanes and 2 clock lanes,
-for such and other cases a 'data-lanes' property description should be clear
-and unambiguous to allow a valid configuration to be provided.
+You could cache the values currently written to the control interface?
 
--- 
-Best wishes,
-Vladimir
+> I was planning to use get_status() (in a subsequent patch series) to check if
+> the rail was left ON by bootloader at the regulator registration stage, and
+> use that criteria to decide if we need to hold the voltage/mode/enable state
+> or not.
+
+That's logic that should be implemented in the core rather than driver
+specific, this is an issue that affects everything - we just mostly get
+away with it since we don't start touching things until drivers do so.
+It's a real problem, just tough to solve.
+
+> Besides this, since the sync_state() cannot be used.. i was thinking if holding
+> the voltage/mode/enable till regulator_late_cleanup(). is that ok?
+
+Consider what happens if something really needs a voltage raising to
+enumerate - if you ignore it then the hardware might be in for a bad
+time.
+
+> > > So, shall I read the HW MODE/BYPSS/ENABLE value in every get_status() call?
+
+> > If they reflect values that might be dynamically updated by the
+> > hardware, yes.  If they are just control registers that the hardware
+> > will not update autonomously they are not suitable for a get_status()
+> > operation.
+
+> It not will autonomously update, but it may be updated by the APPS bootloader.
+> I guess, that still would make it unsuitable to be used in get_status() ?
+
+Will the bootloader be running at the same time as the kernel, I really
+mean "by something else" rather than "autonomously" - usually that's the
+device itself (eg, reporting that a regulator was shut down due to over
+current) but it could be something else I guess.
+
+--5Ifbv/oNmyhmtpwZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmpqXN4ACgkQJNaLcl1U
+h9B0HQf/Rago1E98pkYI2E+J7WjYeBPpBRQhYTJVYtzNdQSDc9E0L9RRC+xN2IJV
+3MAh0sYvR+z7IB1Ub6EJY3GtVQQtj8cohKXKeSfoEXU1sltIo2P5NGq/RL52/qvW
+ub9OwU2FnankhsU2Z56DEb27hh0cW/luhhgMvs3EdZ723GKsvSEBwIw3j1JiUMcp
+2gfVpZD7mq/YbHTAlfQDqvXkybtAtArONbbesFSOXdhLynUBJ0U0YcqQhaydtimI
+SxeOXOo4rhQQNbjSyhl0dHI7w3id3wtpCSJ27hxOD+gqv1c9Op3m2B5CLR1lCFOk
+KzVunrOu12pux/20DHpMPl/HCbUDCw==
+=VZDO
+-----END PGP SIGNATURE-----
+
+--5Ifbv/oNmyhmtpwZ--
