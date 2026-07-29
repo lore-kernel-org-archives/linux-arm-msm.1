@@ -1,87 +1,87 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A783A486B9D
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 13:02:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30F40436BD3
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 13:03:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785330170; cv=none; b=AhPTyBertrIbL6ceUskdNtaPnRhs1O0cyX5TJ4yb/tlk5Jo2t1d3gEpEMZm6X/CP0bHeCluD4hm5y8H9cVE6aUSUH/kvlzcnzBJTE94fa6OdA6xs4iqSLF8FwpFiM5qlYVg+rXwwTmLEyqPqW4mZPIMEwUriCGiS4/tAgEix5tY=
+	t=1785330202; cv=none; b=APXaLyAxm5JH0co6HYB0TnKs58KqVg6Kc/T+tXrOL5OFGlIWABew0/pbvVWhHCp8BVIOxxh7xOucB2h5tGt0MoMn24RICimEIXcSrCkPM+YMT0UxsCMbwmmfZOV8/9EiWkXLG0ZYvk4rxLIp1oBS0Riws3v+YjdKj+GinwYxRPI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785330170; c=relaxed/simple;
-	bh=MCtTFsBgiMKuSPU0viJO2vBQAkoqsXjzOHlzyF8bXsg=;
+	s=arc-20240116; t=1785330202; c=relaxed/simple;
+	bh=/YeA6e4h90/TYAApBQ5RFPCojqWub7XeOGXkeguNddg=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=bBdXllGekXpKN0fQT4ZB7o5m3Pp2huicsiWHKlvT/t937KF7J8nwI0T/9PlrQ37kFxAHw/7qW3XHBezy8rNUh3lc2PXEPa3E8vRhZ+R7QYFhOJ3ad92JVN3ueLjy8AUuD5m17+9NhLf58FAot5he+dCR443qmG5eCqFM9jmuKrw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=aofZj3Dg; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Ku/hAxqs; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=Wov0DWPPOAjfzustax5k9C3VMLTbDWHauhWd9oZMRuINpAykkLmHa6TdCJTcQR3LVblH5aqbhYhuDpocCYpNXWcrCXA18F486Bwl1ob5Iwx/MNxaUtAekoA/ddbXTHLDYvi5FXxt153hr+DyisvIh+9p96gvs6F1LIEx8tcPDIM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=opC6dvDf; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bEEAoVJW; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="aofZj3Dg";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Ku/hAxqs"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66TCOIUu1814605
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 13:02:45 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="opC6dvDf";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bEEAoVJW"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66TBt6iF1767569
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 13:03:18 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	6eyYevD9BwUwoCNxtRnZBfyIBLfOZ0QksRn8gxgBDIw=; b=aofZj3DgVtwwaFNT
-	/HTAlvHKZ0BsIHImPKTAZtCFBaFrEZCsnojaDjOocMMNFMotQlV79JaASo3BW3xZ
-	MtDkqQ3MKXC3BqTKz3r2NwWAlvmNPZ7V3A36IVS91/G2NQAMBVCD9asDPZH4yG7B
-	E+mthjS13rGxyDnfEfMDAenaPCh3X05pPr5fj7qhqnJaheRI5uiGCY//Aq7+vQSD
-	+erTL2gSeqBNKZxgm2Fox1Dj5WlY8Nwbm0+MMGHIRyhFTy5bKUtZbGeFfV29MSxp
-	Dzjo3iZ/kGIfwExZ37mLLLvUwaP/60UxRLGoVk+UsCdGtTymR4dhP/RQo3wyk8hQ
-	lq8ETQ==
-Received: from mail-ot1-f69.google.com (mail-ot1-f69.google.com [209.85.210.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fqhg8r4hp-1
+	tlh3rnxfJkXfV5KarGkZfL1Q3S+pBYhT9xp1RWLyIIQ=; b=opC6dvDf4y7teSIq
+	f1gZnd7WLAx8MAXMbfxooWoZlq+OgUkKeTEFcLhao8AZlmjo8kNpYbBz+O03AtMT
+	89w1oWmt4iQnJkwyMKmNyW1FpJxk1Z75bSnpPhT71QOaqI0nCWCZIG7n7gZAv2YU
+	JqDJJkLc5Mzdm/mQlq17YUTZutsubQxjumWApDHuwcWH1vAOr0NYM//2d+p4gVqd
+	zIrWAX59UsOANgV6LQJ85bqfNh+Dltm3EFvdjtDS6KmsX3bMieEYFQ5fPbVie7UI
+	AsdoKYZZgLjuCXn8vs5x9STsc5JBBPRjdpt2JF1KCzHRjhc3LwDCO8yOLlQ23IVL
+	Pz0N7Q==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fqh2kg865-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 13:02:44 +0000 (GMT)
-Received: by mail-ot1-f69.google.com with SMTP id 46e09a7af769-7e74781faaaso2135144a34.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 06:02:44 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 13:03:18 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38f5ac7354dso1560676a91.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 06:03:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785330164; x=1785934964; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1785330198; x=1785934998; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=6eyYevD9BwUwoCNxtRnZBfyIBLfOZ0QksRn8gxgBDIw=;
-        b=Ku/hAxqsbp21BJOz48M4B9oBNzXa+EkV8iZLzYbPIpAb6F34evAWVve2ZnCWZMRPY0
-         0p8B3lOkNP4MJfKa3quKnezGT9fV3IjgZNet9zDeHOOJ7p+V/gEqQ6aBqBfe11p2cewq
-         8r+ugLX+X7IU3rHbeJZ5iS6uI/xXr/bg/T8AZ5OSYtk/n/jH83CXZ1woBel3ak2cSZam
-         G+2uiSphkpN/gkVcts+au0uWnm5iqtLHK/q5b7cpUUyHGwe2chrZoXlr2VriBSLdDZnn
-         Pkrlx17nyQG1deVsV0JGFDfmjOPKIqVSyZPz1sI5HxfkiFj6uVS93E3caNxfoFOTZk/e
-         wvlg==
+        bh=tlh3rnxfJkXfV5KarGkZfL1Q3S+pBYhT9xp1RWLyIIQ=;
+        b=bEEAoVJW7hBeKuLwerY/7vNXT8Lv95w9Nbaqc4P77hDC8MLllq8kJFiMDNiasGZJ0h
+         Qgp9usvixjWO705BEnrowjnONvPkDS+kPFWKuZKg2g9xdfDzwIaOpgo8CwFwX1s9dV3I
+         KhMRw8GZChLzhgeYGapwbWjYAg5QMhIjObzaEsSNj4CYeSNrw1hculAftkiATSum6/BR
+         YOd4PyuKYNbxaAiBrIJ5/5rdUXIOAwisiydCHfPG8sZH3Re/WX5XofVK/p0IWhNGGc51
+         bzDEsl8mgueo3YuNxmUcdMy+bEzttvkTdbh1DI51BkjdYrqwOXhbhyn9TWH6sPU1+kgy
+         pZbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785330164; x=1785934964;
+        d=1e100.net; s=20251104; t=1785330198; x=1785934998;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=6eyYevD9BwUwoCNxtRnZBfyIBLfOZ0QksRn8gxgBDIw=;
-        b=Tcsg2+NcJGfI/cL7YvMPGRErljIhUREXtKjnV0kpjmpUH8mKjIpz3uBVqes36bs6Ne
-         5ZKCx5XYztW5uOl/X09+oRgDlMiNuCc0Kkn3z3bNxBaXxeldAq8IOY2t1xbiM1Rl4YbH
-         VKdMdsgrJkniEadBpajknAIDw9JV45UJtSQE/sVFtdvut5S4WGGg2cfR6Z+owFysE849
-         XHbegBpNQckBvcqZBwgeBxr/OYgIJY94yzDxb9vx8nVYkAXm5LnETVZFSkO0uKCTqR3V
-         sctquZSIUy1+X7JEJL5EA4M8JQzILqGRAMipZ+q3LCJDO+BtUsECv0UTZdNtjRB+nnra
-         tWdg==
-X-Forwarded-Encrypted: i=1; AHgh+RqFgKh8O3gxl5BmKY2bG0nqMbbsxvzn/TsvTZykr0C5dd0KQ5n9G5YVHJ3hVXOAtmQ2iEeGNK9ZC2Vq/d76@vger.kernel.org
-X-Gm-Message-State: AOJu0YysBS5edEwAl+kcBIyQq2WXirgBr0nplESLTzepEEgfTDuYjloj
-	UGiOmWHVZXLLlFW0zAPW9dJk2zv6WhFWmJh5BKjpoq0UH5x/L/PKFR4lirp1H23apbxzwLAudO5
-	BYDn9BLaTLi/bZ6Z1z+vl2Z0RRNWieJIQfO90XvBvJ+ymf2EJ+G7EgkOzbuFHLbmbZ14i
-X-Gm-Gg: AR+sD12jfAgt8vA6/4mr2sI++fEh2Gf1Z/1URG9EewqGXAm9a0tfpdcqq/esOHVhPJ4
-	2ou6mlinquYAkcBZLFZqIDGorQyhSVKKt6/o1wIl28Djk4M1QDfsMsSqa/INyuRKzveUdRM9Tea
-	3q8Aj5tCu99s7aOfFML3ZJqeNE8y2v0mNjHgLUibBpHGY16bkwC3p4qjDutKKjBVRyHmPdtMmmP
-	RZYcg8O/TstWNcrr0fT+gDnZ6JoQOFE5hDBNd7xYyG4x1zDeRbpgBtmQtm7dQlNbCHPdqcBw0gL
-	oNHPt1YMXOAti5qQ/KCZxdi84JA/AhvIiASgpuasiKM6udecUflyplj7kYpbtd4Ko8uP/Aq+H0f
-	eTj73+mPOBUD36ITTrB/0s5I7B2A=
-X-Received: by 2002:a05:6830:2705:b0:7e9:e860:6f6 with SMTP id 46e09a7af769-7efff3244d6mr3873200a34.30.1785330164128;
-        Wed, 29 Jul 2026 06:02:44 -0700 (PDT)
-X-Received: by 2002:a05:6830:2705:b0:7e9:e860:6f6 with SMTP id 46e09a7af769-7efff3244d6mr3873156a34.30.1785330163502;
-        Wed, 29 Jul 2026 06:02:43 -0700 (PDT)
-Received: from [192.168.68.112] ([5.133.47.210])
-        by smtp.googlemail.com with ESMTPSA id a640c23a62f3a-c1f83fabcdasm110147866b.48.2026.07.29.06.02.41
+        bh=tlh3rnxfJkXfV5KarGkZfL1Q3S+pBYhT9xp1RWLyIIQ=;
+        b=KUIk7OQXumSsX5+c5n+0V+Bm7Hb8BGLtpX3zQZfBd/03OeODMRlz1eyrf8IH5sSGaW
+         /qgeS4WCidluMtE1iDs8kfO/s3KGRykGezW7canEunNBIpktA7APPiaARblOA52dcu1O
+         gsFJ094OSq3cnlcH/x+/Hq5PbU52arwjsI+neXmC0H9uSphHXxPcZTGCVeWuDZ35XPnY
+         1fQr4tdz7FWYtyQnQDuBsL0Wv6IUj6FrnqaQE4C2lKIQKyjrxqMLxOllnKCArz3lWW85
+         fGOB+aTZI/p3wpCOCRwVgia6wxJNVQVmUQlXKdYlhAUJ+nfdTRYuXFbvJL/rXjNJuMzQ
+         O3IQ==
+X-Gm-Message-State: AOJu0YwwCjigzHAmOWxuiXCU7y0lcoiCFIk9STaz68hFMznsLZn2tQ8y
+	P641Mi8x41d0NLB4o42h67uD2ZGH2FW2Z9o3aNyuLUds7wZTKdvbdb3aEV5KBEAPYTQ8Jjv5KTl
+	vvHwWjDoJ+rVPXK65MwvQo6ked5+961uOCaLLktnCwiiLVq8ehR6Uqg7ZC89aVxtYfP7o
+X-Gm-Gg: AR+sD12WzPwN5tL51FSrI6h9log2C0L++jDjSnpVWujBRCqZvwNS/3yL4TlpR98PSnU
+	GRjHrm+8sZMyuysxnZvWDDNnrWgzwQqY9NMEmxKmOBGmii6tO2GkpBhZkO+DxIgEzaFKj14dshv
+	HqcbrSdsAu3CjxGTHg8Omyx78e6Da7vAXYJYcFe8cItoGhc4NL/1do3TiBomz861LhQpdr3gWJq
+	aXOgyiuzcElLFsBy+CGCvy0haabi2diIQsDQ1yRKuFGx03yoLyejFbhZS0y/MW0PzpVt0wpiTcd
+	r4MqjfIu2J2XQ+WfIjHMIoEx8Uuq0HhIITbCabyrGxtUWaXgBJmuEd0OnFbUfygVZGtws24p0FW
+	ltpESJ6e6iRkUQw+M1AwNaOWU1qK94z8BasZ33n/va50i5PjYloQ3pCdWIYYhDZDckinmjhYXzT
+	4V3b5EMzTreSUr
+X-Received: by 2002:a17:90b:55c5:b0:366:3517:1aa2 with SMTP id 98e67ed59e1d1-38f6a1b8aa0mr6429839a91.0.1785330197195;
+        Wed, 29 Jul 2026 06:03:17 -0700 (PDT)
+X-Received: by 2002:a17:90b:55c5:b0:366:3517:1aa2 with SMTP id 98e67ed59e1d1-38f6a1b8aa0mr6429771a91.0.1785330196459;
+        Wed, 29 Jul 2026 06:03:16 -0700 (PDT)
+Received: from [10.149.71.180] (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f642bfc71sm2710478a91.11.2026.07.29.06.03.11
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 29 Jul 2026 06:02:42 -0700 (PDT)
-Message-ID: <54f1c3e5-0b84-44a6-a03c-3cd65792de9c@oss.qualcomm.com>
-Date: Wed, 29 Jul 2026 14:02:41 +0100
+        Wed, 29 Jul 2026 06:03:15 -0700 (PDT)
+Message-ID: <95133f63-c7fa-4c68-9db0-2123cf754f50@oss.qualcomm.com>
+Date: Wed, 29 Jul 2026 18:33:09 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,189 +89,168 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 7/8] dt-bindings: sound: qcom: add Tambora WCD9378
- SDCA codec
-To: Krzysztof Kozlowski <krzk@kernel.org>,
-        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
-        Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-        Charles Keepax <ckeepax@opensource.cirrus.com>,
-        Maciej Strozek <mstrozek@opensource.cirrus.com>,
+Subject: Re: [PATCH 2/8] platform: arm64: qcom-hamoa-ec: Add SoC junction
+ temperature reporting
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
         Rob Herring <robh@kernel.org>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Srinivas Kandagatla <srini@kernel.org>
-Cc: Bard Liao <yung-chuan.liao@linux.intel.com>,
-        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-        Richard Fitzgerald <rf@opensource.cirrus.com>,
-        Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
-        linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, patches@opensource.cirrus.com,
-        linux-kernel@vger.kernel.org
-References: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com>
- <20260722234221.884765-8-srinivas.kandagatla@oss.qualcomm.com>
- <219d44e2-28ed-4c54-bd00-66e687a0ba48@kernel.org>
- <d0891f90-b69b-4b27-ad58-94c342ad9a6a@oss.qualcomm.com>
- <3c484a68-5db8-464f-992a-6c7584841a10@kernel.org>
- <0cb5a2dd-c49e-47e3-8cc5-ab2ffd397a32@oss.qualcomm.com>
- <ba147ca6-3788-4cbe-95c3-949ae73ee8f0@kernel.org>
+        Conor Dooley
+ <conor+dt@kernel.org>, Hans de Goede <hansg@kernel.org>,
+        =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, platform-driver-x86@vger.kernel.org
+References: <20260728-ec_add_more_commands-v1-0-771abd65ee1a@oss.qualcomm.com>
+ <20260728-ec_add_more_commands-v1-2-771abd65ee1a@oss.qualcomm.com>
+ <94081897-2e6a-4c8f-bd95-1961ca843478@oss.qualcomm.com>
 Content-Language: en-US
-From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-In-Reply-To: <ba147ca6-3788-4cbe-95c3-949ae73ee8f0@kernel.org>
+From: Anvesh Jain P <anvesh.p@oss.qualcomm.com>
+In-Reply-To: <94081897-2e6a-4c8f-bd95-1961ca843478@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDEwOCBTYWx0ZWRfX70zfJWCDAWKq
- 4Vw9JBm/GNB1eeeHbX7AqCEQyUJ2VCrJkUG672MB2gA58Lr6AJVTc5/FkaJWeqNxeWmQe52Q+QY
- 2fgJ71fC4QXLEwQCmXGOl7xV6X2u6Uo=
-X-Proofpoint-GUID: h5Uz5gMCL_E3EOfqGQfQO6ZA1pVvlhFL
-X-Authority-Analysis: v=2.4 cv=LOdWhpW9 c=1 sm=1 tr=0 ts=6a69f9f5 cx=c_pps
- a=z9lCQkyTxNhZyzAvolXo/A==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDEwOCBTYWx0ZWRfX+bsUlwHeqYYV
+ MvYJVUKgFYzg3Dus/WYXxI+XkomOb2WBJ9rz4ldmFIL+m7jo+XqCHCPAqFbuff0PEKW0g9rQO6t
+ ElOo7fnv+R147MzQRUlwTxJEMJ6HQOJ4vIo7eSFKasCmBVhzTIzUu7t79VMxaycr3SwYdJXYE8Y
+ kIswvCxm90LJqwWg+bzXYzJV6nUyD9wbQSl+0bI8s8SZpEYyHkXA/QO8sgXz62q4FAE/gE5PgeV
+ RM2EieNX8GqcMx6B3QfcTUs8mXLMesoN6EY1KHUXlyIt+GYp/1gzhyDosBbUJKrSEQWSvGlhKgC
+ XdvwT6HJxJBv8R2QGozaTbyPrm5UBu614ArkiiEg3MdLdwO96Boq/Wc91BQtOkLg8+jQLP3ubOV
+ eANI/XYEWT+DQEbSPZcQIL6v2X0IxYbX5NEkBvFs7bcQB0XR7TG4kcWmffRSpajpt7MLtFMo/FJ
+ h5b11KsRZOFKTMWaKvg==
+X-Proofpoint-GUID: F5yDHyha85D5ofXoBxOyG-kIbBAkoC-o
+X-Authority-Analysis: v=2.4 cv=Q4biJY2a c=1 sm=1 tr=0 ts=6a69fa16 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=GYSh3LzNAAAA:8 a=Cn2VO0AzQ6tcIWzUNyUA:9
- a=QEXdDO2ut3YA:10 a=EyFUmsFV_t8cxB2kMr4A:22 a=sptkURWiP4Gy88Gu7hUp:22
- a=lWcdFasyL5yHfcDTNXXo:22
-X-Proofpoint-ORIG-GUID: h5Uz5gMCL_E3EOfqGQfQO6ZA1pVvlhFL
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzI5MDEwOCBTYWx0ZWRfXyukqTulKl2Vj
- 84pB0+7XK/et4LsYgPw9NLQYq9sbzkjongtGkbCitcr3MYpLvkVBzuPSytUA3HvW1DOHK8+adlF
- Ut4rZj8QdKKBSdQ98ClRJluQB/s03ECfPJxyJExg093vT5IpFoVNX2rBuC53Rwi3jdZv6WAWALW
- ywcZRo19RnV/On8cdoMjaOb86y0v8N/Vgekqf+Qhu/5Jm4WVyMjt+vkfQZha1hjkx++u2Iadcp2
- 8FpQ1fNZ9Fu/x0wBVlB4kWl8IOAO4ZXVOC/gE1BkJ5H2bZdiBv72Nf8jvhrC6r8suHluJ/rDlYC
- 3HRp5QAdMamgFTcp6xV21Br88XS2G9Z0qT7O6Bn6lpYFHk1+QVcZMmf/yil9Be4lYO+bsJRcnUB
- ObViTV9o6Co/4WVdBT5+yF8iEe2yblC44BKFe8G5As9e3QSzOnPSGRGcURItp9msR5CLxCUuG6j
- RldPtNjalvnDZMGxuEg==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=gdiicE2fkixeoH3Uy70A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzI5MDEwOCBTYWx0ZWRfX8sEQ1NF09ly/
+ Pr3GrKwjydWoBTr5KM6PmpGbMRWmnPg6LAFVU2bpKYhcnYbPLD7yu4bWk3q+aBrZNw8HJxSuotS
+ uy5AIphKDppmbUaZpvu/mq8ZM3vHn0E=
+X-Proofpoint-ORIG-GUID: F5yDHyha85D5ofXoBxOyG-kIbBAkoC-o
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-29_04,2026-07-28_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 clxscore=1015 impostorscore=0 suspectscore=0 adultscore=0
- spamscore=0 phishscore=0 priorityscore=1501 lowpriorityscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607290108
+ impostorscore=0 priorityscore=1501 adultscore=0 suspectscore=0
+ lowpriorityscore=0 bulkscore=0 clxscore=1015 malwarescore=0 spamscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607290108
 
 
 
-On 7/29/26 1:43 PM, Krzysztof Kozlowski wrote:
-> On 29/07/2026 14:36, Srinivas Kandagatla wrote:
->> On 7/29/26 1:30 PM, Krzysztof Kozlowski wrote:
->>> On 29/07/2026 14:17, Srinivas Kandagatla wrote:
->>>> On 7/29/26 12:40 PM, Krzysztof Kozlowski wrote:
->>>>> On 23/07/2026 01:42, Srinivas Kandagatla wrote:
->>>>>> Describe the WCD9378 SDCA peripheral node (compatible sdw20217011000)
->>>>>> driven by the wcd9378-sdca codec driver for headphone playback, headset
->>>>>> mic capture and jack detection via the SimpleJack SDCA function type.
->>>>>>
->>>>>> WCD9378 codec can be wired up in 2 different modes.
->>>>>> "mobile mode" on phone/tablet SoCs is enumerated as tx and rx device,
->>>>>> each of which has dedicated control and data lines.
->>>>>> "compute mode" on compute platforms such as Glymur is enumerated as
->>>>>> single standard MIPI SDCA class device.
->>>>>>
->>>>>> Both modes share same Device ID, compatible; qcom,compute-mode selects
->>>>>> which driver path is taken.  Supplies, reset GPIO and mic-bias voltages
->>>>>> live on the SoundWire slave node in compute mode and are forbidden in
->>>>>> mobile mode (owned by the top-level codec parent there).
->>>>>>
->>>>>> Assisted-by: Claude:claude-opus-4-7
->>>>>> Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
->>>>>> ---
->>>>>>  .../bindings/sound/qcom,wcd9378-sdw.yaml      | 200 ++++++++++++++++++
->>>>>>  1 file changed, 200 insertions(+)
->>>>>>  create mode 100644 Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml
->>>>>>
->>>>>> diff --git a/Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml b/Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml
->>>>>> new file mode 100644
->>>>>> index 000000000000..2ed4ad92958e
->>>>>> --- /dev/null
->>>>>> +++ b/Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml
->>>>>> @@ -0,0 +1,200 @@
->>>>>> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
->>>>>> +%YAML 1.2
->>>>>> +---
->>>>>> +$id: http://devicetree.org/schemas/sound/qcom,wcd9378-sdw.yaml#
->>>>>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
->>>>>> +
->>>>>> +title: Qualcomm SoundWire Slave devices on WCD9378
->>>>>> +
->>>>>> +maintainers:
->>>>>> +  - Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
->>>>>> +  - Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
->>>>>> +
->>>>>> +description: |
->>>>>> +  The Qualcomm WCD9378 codec presents its SoundWire slave devices with
->>>>>> +  class ID sdw20217011000 in both operating modes:
->>>>>> +
->>>>>> +    * mobile mode -- two slave instances sit on separate SoundWire
->>>>>> +      masters carrying data only.  A separate top-level codec node
->>>>>> +      owns the codec's supplies, mic-bias voltages and reset GPIO.
->>>>>> +
->>>>>> +    * SDCA / compute mode -- one aggregated slave sits on a multi-lane
->>>>>> +      master and carries both control and data.  There is no separate
->>>>>> +      top-level codec node, so the SoundWire slave node itself owns
->>>>>> +      supplies, reset GPIO and mic-bias voltage configuration.  It is
->>>>>> +      marked with qcom,compute-mode.
->>>>>> +
->>>>>> +  Codec drivers that match sdw20217011000 use qcom,compute-mode to
->>>>>> +  decide which mode to serve; the presence or absence of this property
->>>>>> +  also gates whether the supply and mic-bias properties on this node
->>>>>> +  are required or forbidden.
->>>>>> +
->>>>>> +properties:
->>>>>> +  compatible:
->>>>>> +    const: sdw20217011000
->>>>>> +
->>>>>> +  reg:
->>>>>> +    maxItems: 1
->>>>>> +
->>>>>> +  qcom,compute-mode:
->>>>>> +    description: |
->>>>>> +      Marks this SoundWire slave as the single aggregated slave that
->>>>>> +      implements the codec in SDCA / compute mode.  Only present when
->>>>>> +      the codec has no separate top-level codec parent; in that case
->>>>>> +      this slave node also owns the codec's supplies, reset GPIO and
->>>>>> +      mic-bias voltage configuration.  Absent in mobile mode.
->>>>>
->>>>> I doubt there is really "compute" or "mobile" mode, so you just wrote to
->>>>> match use case, but that does not match hardware.
->>>>>
->>>> This is hardware fuse setting, its not just usecase based but it changes
->>>> complete wcd9378 hardware topology, in mobile mode we have 2 soundwire
->>>> devices representing tx and rx side of wcd9378 however in compute mode
->>>> it only has one soundwire device dealing with both tx and rx. compute
->>>> mode is sdca class compliant device.
->>>>
->>>>
->>>>> I think there should be no separate top-level codec parent in the first
->>>>> place, thus this property is not needed. You always list here all resources.
->>>> There is no top level aggregated device when the codec is fused in
->>>> compute mode.
->>>
->>> There should not be a top-level in either case. This was always Linux
->>> driver limitation.
+On 7/29/2026 4:29 PM, Konrad Dybcio wrote:
+> On 7/28/26 7:44 PM, Anvesh Jain P wrote:
+>> Add the EC command definitions and handler function for reporting the
+>> SoC junction temperature (Tj) to the EC.
 >>
->> That is not true, its clearly a hardware topology thing.
->> Codec has two devices tx and rx, Only one of the device (tx) has access
->> to CSR registers of the codec, so rx and tx are pretty much a single
->> aggregate codec device which is why we have top-level representation of
->> the aggregate device.
+>> Discover the platform's thermal sensor to zone mapping via the
+>> qcom,tsens device tree property, average the junction temperatures
+>> across the mapped zones, and periodically report the result to the EC
+>> over SMBus using a delayed work item. Serialize this and the existing
+>> EC command sequences (firmware version read, thermal capability read,
+>> SCI event control, and the SCI IRQ handler) under a new io_lock mutex,
+>> since the delayed work item now runs concurrently with those paths.
+>>
+>> Re-arm the periodic report on resume and cancel it on suspend to avoid
+>> racing with the modern standby transition.
+>> ---
 > 
-> So two devices, but not three. If TX has access to RX, it does not mean
-> there is third device. If there was a third device (that top level
-> thingy) you would have it here as well. You don't have, because it is
-> purely for Linux.
+> Missing sign-off, have you run b4 prep --check?
+>
 
-WCD codec is a single Codec IP Hardware block which contains two
-soundwire interface devices. Effectively we have one aggregate device
-representing codec which encompasses two soundwire devices.
+Thanks for reviewing my series.
 
-Third device is the only place where we could represent entire Codec
-rather than just soundwire interface devices of the codec.
-
-Am not sure what is Linux specific here, its purely hardware topology.
-
---srini
-
+Ack, I missed to add sign-off while splitting the patches. I verified b4
+prep --check did pass clean here. Will add the trailer in v2.
+> [...]
 > 
-> Best regards,
-> Krzysztof
+> 
+>> +	mutex_lock(&ec->io_lock);
+>>  	ret = qcom_ec_read(ec, EC_FW_VERSION_CMD, EC_FW_VERSION_RESP_LEN, resp);
+>> +	mutex_unlock(&ec->io_lock);
+> 
+> Does it make more sense to simply stick a guard(mutex)(&ec->io_lock)
+> at the beginning of qcom_ec_read()?
+>
+
+For this call site it'd be equivalent, but a few other callers (e.g.
+qcom_ec_update_profile_from_power_supply(), qcom_ec_fan_calibrate())
+hold io_lock across multiple qcom_ec_read()/qcom_ec_write() calls plus
+state checks in between, for atomicity. Pushing the lock into
+qcom_ec_read()/qcom_ec_write() themselves would self-deadlock those
+callers unless their outer locking is also removed, which would then
+narrow the lock scope to a single command and break that atomicity.
+Keeping it at the call site here for consistency with the rest of the file.
+
+> [...]
+> 
+>> +static struct thermal_zone_device *
+>> +qcom_ec_sensor_to_zone(struct device_node *sensor_np, u32 sensor_id)
+>> +{
+>> +	struct device_node *tz_np __free(device_node) =
+>> +		of_find_node_by_name(NULL, "thermal-zones");
+>> +
+>> +	if (!tz_np)
+>> +		return ERR_PTR(-ENODEV);
+>> +
+>> +	for_each_available_child_of_node_scoped(tz_np, child) {
+>> +		struct of_phandle_args args;
+>> +
+>> +		if (of_parse_phandle_with_args(child, "thermal-sensors",
+>> +					       "#thermal-sensor-cells", 0, &args))
+>> +			continue;
+>> +
+>> +		of_node_put(args.np);
+>> +
+>> +		if (args.np == sensor_np &&
+>> +		    sensor_id == (args.args_count ? args.args[0] : 0))
+>> +			return thermal_zone_get_zone_by_name(child->name);
+>> +	}
+> 
+> I'm not sure that's the intended use of the API, but this is NHI
+> of_thermal_zone_find()
+>
+
+You're right, this duplicates of_thermal_zone_find()'s algorithm almost
+exactly. It's static in drivers/thermal/thermal_of.c though, so it's not
+callable from here as-is — keeping the local copy rather than touching
+that file.
+
+> [...]
+> 
+>> +static void qcom_ec_sci_evt_disable(void *data)
+>> +{
+>> +	struct device *dev = data;
+>> +	int ret;
+>> +
+>> +	ret = qcom_ec_sci_evt_control(dev, false);
+>> +	if (ret < 0)
+>> +		dev_err(dev, "Failed to disable SCI events: %d\n", ret);
+>>  }
+> 
+> This should be a separate fix. FWIW suspending and resuming on
+> linux-next/master currently gives me:
+> 
+> [   43.754787] geni_i2c a84000.i2c: error turning SE resources:-13
+> [   43.754811] qcom-hamoa-ec 3-0076: Failed to read EC SCI Event: -13
+> 
+> Konrad
+
+Agreed, will split the devm_add_action_or_reset() conversion into its
+own commit — it's an independent correctness fix (also disables SCI
+events on partial probe failure, not just on remove()), unrelated to SoC
+Tj reporting.
+
+On the -13 during suspend/resume: that looks like the SCI IRQ firing (or
+its threaded handler still running) while the I2C SE resources are down
+for suspend. Will dig into whether the IRQ needs to be quiesced/disabled
+around suspend/resume here and follow up.
+
+-- 
+Best Regards,
+Anvesh
 
