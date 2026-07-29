@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 404023B9618;
-	Wed, 29 Jul 2026 06:07:42 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 49D21242D65;
+	Wed, 29 Jul 2026 06:19:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785305263; cv=none; b=NyxQBYSSMlDMXNYcZ4efwH+JwaAc4KyQqEUGdqorsV3BScKWeEeFrRUdrjx7+U5AHImKrKsVyLQIKU0b7nbwHOHt0ajRI0uMf+n5BFaex9GXvZP5QRZK01mJKMppyB42FytSmMrMeU+o923gBk8djvfsFMjz79uJ2UsEIMah67Y=
+	t=1785305984; cv=none; b=iu7tpBGRKqzgpQsuj5cC0AfuzVXktjgC286spiZwaAMoqh9rrieSRrYO3AwGrrG3qpFrXi/CA7JxDh59TBGsrUJUZZuPin3FIzNSqyMSwrosCKE7fgBuROHo8XpS67M8DDmNP8pHChGvWVdCgKZuhQ0p8NnQk/hDLtIkDgmHQQc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785305263; c=relaxed/simple;
-	bh=kV8Qhk4mpIxcMTqOaaALzZ9UAGRv+cXxe9h8Zfz+a4g=;
+	s=arc-20240116; t=1785305984; c=relaxed/simple;
+	bh=whgiEArBV8aOm8noH6sp2Q0y+DeuBi6QC1lj8Ogv14U=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=b+7gxukadg7I9Kb7g33TKXiCX/GtSKtvq9vHKKXXD7tPSF2IlHyJ5NMNngUPqBgME1R4vRFfQicneXb+9IuqQ5TpY6GmV2W5aLeSyCX960TNMO+3jv5hlYbanTxevstuGf9q724hjZAAMatFKwFtcacfs2PFdwz5tXke/JTmsUA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Now1ymS6; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=sgoS3dn6Zh1mdPFT7r52bPmAIHclN98an59QZ7aA8UM8I8AEJ+Wql5yNZ991WZNT/Znj8tuZpu8a4IAA8lVYvcJsbBuwmE1+mGNFJh0CXtr8P5EDaGGouTSfa3hJrE8OXHvgiMiDNQ90gqCY4AfW9xdVPE1AZk2TFwMkWxPOPhM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=GCrm57jO; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Now1ymS6"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 206441F000E9;
-	Wed, 29 Jul 2026 06:07:38 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="GCrm57jO"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9528F1F000E9;
+	Wed, 29 Jul 2026 06:19:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785305262;
-	bh=mYBkBa9qOKuJSlovngUkstEKpxlnMSal9Q9mxymmbP8=;
+	s=k20260515; t=1785305983;
+	bh=1ahsh8KGGbbw/1MbGvQhKGLLx27DzaCVwhsg9q5kqLc=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=Now1ymS6J7wHfFNtmlRqWR/FdcBtSqv5f6ftf27jVevtgEqNJEA0MjQy7h9EbsbQs
-	 jj5FGpwjFdSrC37N+7sbjsdR04pV5tM0btL5U8lfyXerf91pIj6fSHvUs90by4/n1c
-	 4LYBTArFaQKM2ZW7Gv8TR3YLvNch28Gvro+u2Jcu2xGXi05C3eg7fkRRo6ene2aDrQ
-	 EAw+wQyYi06Q7ImLK7iiJaHYavXMAPWQD2SDoOp2D8L2iBeyLy643KAnvD3/S+MuD1
-	 A6glnNsN4TPgwMn4nLcxK4RPo2rrPN1uKmb5mM8+n3pp9g1Qzz9GXX38Ys7o2lJ7x3
-	 +mNv9Q6vOBAQQ==
-Message-ID: <042cfd12-9a64-4f15-a331-bfd796056f64@kernel.org>
-Date: Wed, 29 Jul 2026 08:07:36 +0200
+	b=GCrm57jOMSzOzA3MwBPPQtUmDjo88LSUC5D8TTrgEfGhqjKgLuz1qquihSknF8Aia
+	 kp1dYTkiL/vNmi49xSM/5yRrU/MGi1TagDuFFEyzeyF5ZUDWdO1xzKiRzqQdGI8eiw
+	 iC04bX4I1+bWBkJiLxTMsen6RAK/iNN3zSuLE9iAEJP0ur/rKdas5qecHWFZkClxbW
+	 5WVEdwePKcXbb3/RJ3H4Vkg7HffGkk8CXrp7csJIC5WzsjhFOYxrWorj0EOcDlCUcR
+	 1DsbX5eZyirr3aEP+Fvm093ddJ378h5rwpYDMwrXN+r7tCseBYZE3eMl9kK1EW1pUZ
+	 6k7gO4KG2zq7w==
+Message-ID: <ee479488-9f36-412f-b6d0-725180cc1122@kernel.org>
+Date: Wed, 29 Jul 2026 08:19:36 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,15 +35,17 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] arm64: defconfig: enable the Renesas 63419 panel
- driver as module
-To: Neil Armstrong <neil.armstrong@linaro.org>,
+Subject: Re: [PATCH v3 1/2] arm64: dts: qcom: shikra-iqs-evk: Add LT9611UXD
+ HDMI bridge support
+To: Mohit Dsor <mohit.dsor@oss.qualcomm.com>,
  Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-kernel@vger.kernel.org
-References: <20260728-topic-sm8650-ayaneo-pocket-s2-defconfigs-v1-0-49e3ac1c8ff4@linaro.org>
- <20260728-topic-sm8650-ayaneo-pocket-s2-defconfigs-v1-3-49e3ac1c8ff4@linaro.org>
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+Cc: linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, venkata.valluru@oss.qualcomm.com,
+ Jessica Zhang <jesszhan0024@gmail.com>
+References: <20260728-shikra-work-v3-0-e08c322596ac@oss.qualcomm.com>
+ <20260728-shikra-work-v3-1-e08c322596ac@oss.qualcomm.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -89,17 +91,26 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20260728-topic-sm8650-ayaneo-pocket-s2-defconfigs-v1-3-49e3ac1c8ff4@linaro.org>
+In-Reply-To: <20260728-shikra-work-v3-1-e08c322596ac@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 28/07/2026 11:31, Neil Armstrong wrote:
-> Enable the Renesas 63419 panel driver as module since it's
-> used by the Ayaneo Pocket S2 board to drive the dual-DSI panel.
+On 28/07/2026 14:00, Mohit Dsor wrote:
+> Enable the Shikra MDSS display subsystem on the Qualcomm Shikra IQS
+> EVK board and add the Lontium LT9611UXD DSI-to-HDMI bridge node.
 > 
+> The LT9611UXD is connected via I2C (bus 4, address 0x41), powered by
+> a GPIO-controlled 3.3V regulator (PM8150 GPIO4) and an always-on 1.8V
+> rail. Reset is on GPIO76 and interrupt on GPIO85.
+> 
+> The bridge receives DSI output from MDSS and drives an HDMI-A
+> connector, with the link wired as: DPU -> DSI0 -> LT9611UXD -> HDMI.
+> 
+> Signed-off-by: Mohit Dsor <mohit.dsor@oss.qualcomm.com>
+> ---
 
-All three are one commit - you enable necessary drivers for Ayaneo
-Pocket S2.
+Did you ignore here previous review as well, just like you did on
+LT9611C patchset?
 
 Best regards,
 Krzysztof
