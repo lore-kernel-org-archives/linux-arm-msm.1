@@ -1,122 +1,123 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 480973CCA19;
-	Wed, 29 Jul 2026 20:04:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 681B22FB969;
+	Wed, 29 Jul 2026 20:20:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785355493; cv=none; b=DV6LA4YNJoDPJWMw7EehA13Fvhxi68IsxRKoujYMpNnyVZSERZXSDgubpz3K9Woswfz1kZ0mLUz0pK7fvcKUQbuzD6FJ50gUcVus7cuvrO7lb6VlyHQXK9t3PS8CY+zgD5a+MfS3NtXHdsTVgGfcOHgx81zqX2E6yQCjZVKoJ2A=
+	t=1785356408; cv=none; b=O2vrErF3wUmufmdXuzDBqacT3S6m0oHEXs0kwXvoJygujQqmz671XVYcXvnMwqTF1dlgBGJEA+pwATXn+gqI7ZCfismrTq+ovtvGUlVuvZ6QUrfA+GrJ06aQ1iAoKp7BjwJhtrAg9bnE9Ajjz51JgHamOXjsWq4Y6OYSMSZtBgY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785355493; c=relaxed/simple;
-	bh=JZ9MLE3H9TJ6EGOX5qtqz9ZVXm7ARpOQsgcPHjCEOQE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=np9S8+NLChG+qYBe8boNpe9eSo4VNAQMy/yM+bh6vdSG4NSHEvCkmKxuKwLlaa1IQIuvXJqYyVJlBUIf1/2gQ8pot5coeoDiolagCL5PdURukk6tI4XSG4whwDabBz2UqccvBFblI/In8GsCw6E1YXAMDGvHHshbsKyRdY612Js=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A8l1lS6t; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785356408; c=relaxed/simple;
+	bh=Uk/b7YYDhvgsGviOg3h2t2SDHyXuI+Sg+OG/3Q4uIb4=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=XVxHqge1L4nv6BxqdMaqwQY43f5fMPGooLfTLmW94PIY987DiXLh0UCtH80Zdf4PBfiAj4k15WDWgHyKwz+E40yQZRwqMz2SOg6ZuUgGOzy5+I/0R30tM4YuOjqkKO83O/Hr2qMgRGRnyaTluh2KT10XJTBSjSzko4iyM5VHJ+k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=sbSGOru2; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="A8l1lS6t"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4350F1F000E9;
-	Wed, 29 Jul 2026 20:04:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785355491;
-	bh=jaR4SAL/ghbKg4OExwH9psv9FHOylZnxt9q6YxKaO2o=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=A8l1lS6tHFmQHP7mGHhV9HRmrhJhFN5WMOM4nyd6uokBLjHsY7sLFC1n1l4pA59G4
-	 T7HTNV1dG3agD/BGfrQHw41ioi7xGQKruK9IK3yro6p2hQn/zsog/6m0yF2sU8AMtI
-	 JFW6/AWDU7ahReI6av6hmPPu6ojM+8ly2xAESRisPyJ480ItqAnxB6R6cWR2gJ6Tui
-	 sZ6Yvzdb37Lgsvv7mBqNKvm5u0kgIfsTlEyW5Nn8RhEtZuKIt0FmLVg/hymg7OfvzS
-	 ydhmjhPzFJSlH1+GuNhw+efGU/LETouV5+vcLfxwM6utNr6QzILsboovC07RT/h2Al
-	 QJ/9QWNn/6VwA==
-Date: Wed, 29 Jul 2026 21:04:47 +0100
-From: Mark Brown <broonie@kernel.org>
-To: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>, Vinod Koul <vkoul@kernel.org>,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v5 3/4] regulator: qcom-rpmh: readback
- voltage/bypass/mode/status set during bootup
-Message-ID: <bc461376-292d-4550-8518-3b84eb4fc602@sirena.org.uk>
-References: <20260720-b4-read-rpmh-v5-v5-0-cb93fb95f565@oss.qualcomm.com>
- <20260720-b4-read-rpmh-v5-v5-3-cb93fb95f565@oss.qualcomm.com>
- <da299944-0093-4d1a-b092-f7857b101199@sirena.org.uk>
- <gaigrfpfunsqwuxf24uonw4mrkdse4ap3cywi2eg2qdyfgfzsd@hk6zghfqnkty>
- <amNfHiL2W-uLlPjY@sirena.co.uk>
- <e25dsbpp3chldtoh2awrtxfxkju3jevphn5pcoqvfehibwg2nr@yj5pfelpti63>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="sbSGOru2"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 6C285C2BCF5;
+	Wed, 29 Jul 2026 20:20:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1785356407;
+	bh=Uk/b7YYDhvgsGviOg3h2t2SDHyXuI+Sg+OG/3Q4uIb4=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=sbSGOru2Cf07i6EgTxmnhqr+7TQQHOwUBip4BGSC4q6QdwUUSpcKn+C4LDKtWrSjC
+	 0ar8BJYgfzfe+olIH7OlgYSd0VLs3Qno2h33GZhRFK+tEmxSSYQPqVevlHZLagN3LY
+	 yo2iOHzBE8ieQ9F5utBm7SYE0LEFzImupKJJC+/b5cUXkyAFG8VAmoPH/8tpnporlH
+	 hgzZUKt3uII44NErW7ZuDaeisLNWcXYkOf+12d6DUuwggV/coiF72j97Ja5MKlfUnw
+	 NluJdRVgmuEtj8rvwb+Wt1C1dZiTEhbGTu332wv/Lg/ip3p0sFLO67vRw0ypNiFj3r
+	 Pfy1VYsY++oPw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 4722DC54F51;
+	Wed, 29 Jul 2026 20:20:07 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Wed, 29 Jul 2026 22:19:56 +0200
+Subject: [PATCH RESEND v9 1/9] media: qcom: camss: csiphy-3ph: Fix lane
+ mask calculation
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="5Ifbv/oNmyhmtpwZ"
-Content-Disposition: inline
-In-Reply-To: <e25dsbpp3chldtoh2awrtxfxkju3jevphn5pcoqvfehibwg2nr@yj5pfelpti63>
-X-Cookie: Captain's Log, star date 21:34.5...
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260729-qcom-cphy-v9-1-1f8d9fdab037@ixit.cz>
+References: <20260729-qcom-cphy-v9-0-1f8d9fdab037@ixit.cz>
+In-Reply-To: <20260729-qcom-cphy-v9-0-1f8d9fdab037@ixit.cz>
+To: Robert Foss <rfoss@kernel.org>, Todor Tomov <todor.too@gmail.com>, 
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Bryan O'Donoghue <bod@kernel.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, 
+ Luca Weiss <luca.weiss@fairphone.com>, Petr Hodina <phodina@protonmail.com>, 
+ "Dr. Git" <drgitx@gmail.com>, Cory Keitz <ckeitz@amazon.com>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+ Hans Verkuil <hverkuil@kernel.org>, 
+ Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+Cc: Frank Li <Frank.Li@nxp.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Kieran Bingham <kbingham@kernel.org>, 
+ Sakari Ailus <sakari.ailus@linux.intel.com>, linux-media@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ phone-devel@vger.kernel.org, David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1187; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=4gZLnNPEAXXeOriBAOpQ0RLijJCSPBaruO2JK2La25Y=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqamB0D/WEwBLCTjLj8KeBnVkmz70gKtjM+vX5r
+ RH9WRRTRUSJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCampgdAAKCRBgAj/E00kg
+ ctcuEADJTLBzW99W5nyfBGx+t44Y8VhURBxCKlTzKZkxgbLt5NkzPvIi6k+LQCiQtbR4KE1BRH6
+ +uTClKFxsyUslZKgBaJi3qVPY8AYPgS3MHlW8d42aUJPTh96LVCqeGrbomLOXiDelfrT9dEaPUQ
+ +DM04Bv3QQ0YfbFsXuDxOWSqSelGbCtwBtF3jBkTzoe5TNdkyrJMvKEznMMK7IB5CmA2zzHb3Q3
+ ksADiLAg6cmC1wi8qK5mbEZPcRz4kKY0OEEeFxvDyGoPfoel4xcH0/WxI/UK6HW16hQG6die2KG
+ mdStvJ3Lz8DArQFDi5UyiDByIhIT0h01TUEuICOgOUnmPWSNd4d20HfThUqu7tiNgfx5rbFMJhB
+ AEXSOr7d29BlGY9bFt8AYCim5rsTTxbUjWV4JQ47+8rJlPm9VqOpFWRAX2oUNKu9cj+3v9aSqUA
+ 2CuMLDbNJ40KomJalvlLhnyKgoVnxt1Ybatq1kznQ+dHCU/m6l+jrZQAYf/RxnPdXCgsP01q7Qs
+ uNBnSJUlS/Rz9TBRvchvYqwb4j8MHu6Faq0DWPr8xSoBsr414WbIGCPX6HJFEqLdM6eAqM5ESfG
+ p2usBT8qhMLnMroY8EW10nkCdY/QUfaT8dIPfJupi0HlNTbWhhYFtcX6M6FHW0kYZB//0s7ABHn
+ Dx25ZG6RMV703Yw==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
+
+From: David Heidelberg <david@ixit.cz>
+
+The lane mask must be multiplied by 2, but this was accidentally omitted.
+
+Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+Suggested-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+Signed-off-by: David Heidelberg <david@ixit.cz>
+---
+ drivers/media/platform/qcom/camss/camss-csiphy-3ph-1-0.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/media/platform/qcom/camss/camss-csiphy-3ph-1-0.c b/drivers/media/platform/qcom/camss/camss-csiphy-3ph-1-0.c
+index dac8d2ecf7995..7c8c0e41bc62f 100644
+--- a/drivers/media/platform/qcom/camss/camss-csiphy-3ph-1-0.c
++++ b/drivers/media/platform/qcom/camss/camss-csiphy-3ph-1-0.c
+@@ -1114,17 +1114,17 @@ static void csiphy_gen2_config_lanes(struct csiphy_device *csiphy,
+ static u8 csiphy_get_lane_mask(struct csiphy_lanes_cfg *lane_cfg)
+ {
+ 	u8 lane_mask;
+ 	int i;
+ 
+ 	lane_mask = CSIPHY_3PH_CMN_CSI_COMMON_CTRL5_CLK_ENABLE;
+ 
+ 	for (i = 0; i < lane_cfg->num_data; i++)
+-		lane_mask |= 1 << lane_cfg->data[i].pos;
++		lane_mask |= BIT(lane_cfg->data[i].pos * 2);
+ 
+ 	return lane_mask;
+ }
+ 
+ static bool csiphy_is_gen2(u32 version)
+ {
+ 	bool ret = false;
+ 
+
+-- 
+2.53.0
 
 
---5Ifbv/oNmyhmtpwZ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Thu, Jul 30, 2026 at 01:11:36AM +0530, Kamal Wadhwa wrote:
-> On Fri, Jul 24, 2026 at 01:48:30PM +0100, Mark Brown wrote:
-
-> > No, that's not the point.  A get_status() operation needs to return the
-> > actual hardware status *now*, not a cached value from some random time
-> > in the past and not something that was written by the driver.
-
-> I can drop it. But I seek your guidance on how should i implement logic
-> to HOLD the enable/voltage/mode for the regulators which are turned ON by
-> bootloader.
-
-You could cache the values currently written to the control interface?
-
-> I was planning to use get_status() (in a subsequent patch series) to check if
-> the rail was left ON by bootloader at the regulator registration stage, and
-> use that criteria to decide if we need to hold the voltage/mode/enable state
-> or not.
-
-That's logic that should be implemented in the core rather than driver
-specific, this is an issue that affects everything - we just mostly get
-away with it since we don't start touching things until drivers do so.
-It's a real problem, just tough to solve.
-
-> Besides this, since the sync_state() cannot be used.. i was thinking if holding
-> the voltage/mode/enable till regulator_late_cleanup(). is that ok?
-
-Consider what happens if something really needs a voltage raising to
-enumerate - if you ignore it then the hardware might be in for a bad
-time.
-
-> > > So, shall I read the HW MODE/BYPSS/ENABLE value in every get_status() call?
-
-> > If they reflect values that might be dynamically updated by the
-> > hardware, yes.  If they are just control registers that the hardware
-> > will not update autonomously they are not suitable for a get_status()
-> > operation.
-
-> It not will autonomously update, but it may be updated by the APPS bootloader.
-> I guess, that still would make it unsuitable to be used in get_status() ?
-
-Will the bootloader be running at the same time as the kernel, I really
-mean "by something else" rather than "autonomously" - usually that's the
-device itself (eg, reporting that a regulator was shut down due to over
-current) but it could be something else I guess.
-
---5Ifbv/oNmyhmtpwZ
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmpqXN4ACgkQJNaLcl1U
-h9B0HQf/Rago1E98pkYI2E+J7WjYeBPpBRQhYTJVYtzNdQSDc9E0L9RRC+xN2IJV
-3MAh0sYvR+z7IB1Ub6EJY3GtVQQtj8cohKXKeSfoEXU1sltIo2P5NGq/RL52/qvW
-ub9OwU2FnankhsU2Z56DEb27hh0cW/luhhgMvs3EdZ723GKsvSEBwIw3j1JiUMcp
-2gfVpZD7mq/YbHTAlfQDqvXkybtAtArONbbesFSOXdhLynUBJ0U0YcqQhaydtimI
-SxeOXOo4rhQQNbjSyhl0dHI7w3id3wtpCSJ27hxOD+gqv1c9Op3m2B5CLR1lCFOk
-KzVunrOu12pux/20DHpMPl/HCbUDCw==
-=VZDO
------END PGP SIGNATURE-----
-
---5Ifbv/oNmyhmtpwZ--
