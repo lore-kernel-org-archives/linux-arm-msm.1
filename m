@@ -1,66 +1,33 @@
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 168A844C4F1
-	for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 11:38:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7965427732;
+	Wed, 29 Jul 2026 11:40:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785325137; cv=none; b=rRaYSP9yoRqJVs2bI6UvPcdTPqHg+3qhhAKeE6Z91WjVFwZO+fLG8YMw7ogL05jhD1fuY+PKzHVNPLgYTlKYGCGeor/CZfK9g36lxcaGnfJOvsLAD3sUiFnOjke/GKJ+3DxMk9FMyAeK80cFebcGwBb5s6H1VdAdRqfLyecjpG8=
+	t=1785325235; cv=none; b=c+WFmx95wZ2RfX1/G9+J6JZMtcqIUAore3fn5QdIqoWmuZYTAABc7iUJTGTN3q4qIac7BhHeo6kD1e+qU/J15sU6rBX54zErtlYMtSr2OPFnzHAYhdVgh1D/akw+JsXDrwMPeEBuep0e7G9P9dCRW6Rgxed/mCBA2UaHOTHae6o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785325137; c=relaxed/simple;
-	bh=+bl7W/DghJ2lNo8ihHQByUSlt3smL+/7HO/f5BD68Hc=;
+	s=arc-20240116; t=1785325235; c=relaxed/simple;
+	bh=VM3h0RywmyUIUsx6KslBy8ZIWCU7iukzdNJEx5aJCO8=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=lu3QIEHzYAVVX02H5EgrfC3aQBe380rBWg54JQ2Yd+8AI7HQIRkBwxpyI7ds4EoLfbXP+GSPrLIXibm7PApDgXmA1Rz+y4UQr+64cEpvuyHO9dNSSseE4gcyyePBiAX3o8hRBTHvenPBR5Fd3io1+dH/HCMvpI9ZDRZvN2OrjNI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=nejlkA2+; arc=none smtp.client-ip=209.85.221.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	 In-Reply-To:Content-Type; b=KnR6FS4cGpyQeWDG4bvEPdbXTHfVzPRjCrVWp1Ib4UFQNx64N1tY48FVDu+zUjtP+7N2AiwWDIgBWLVlnYNbEmDPvHsBBiAF1mXBBcDOUyYT9Z2G2APdh0JFiqMZFEW8GhHUSRi04YDDE0zzHInySFq4hRrcG9JbQ6RqmZJLqoY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TSL96bqB; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="nejlkA2+"
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-47db714766aso1184191f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 04:38:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1785325133; x=1785929933; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=5iX3sEVovVYi3DpvUrl6PGylYfhOnizJPhWXlTW0MXY=;
-        b=nejlkA2+NzyvGg8tmcTtdNPOQ6J5qEh5WK1TNnNPzsC59uemIEyg3wx/1Gt6LQqKkA
-         XbDmwtSrZCz/ASbPdQVAGpH3nJS5kN6K201Vfuh7w1xBbjOOrtGLa1siIui6KVneDaRx
-         GWzy4tZobZ8wg47hoEu7QXdAinREusNW1rNZI6oj6Sg4Pz3W9ZelMjdSOXU9pATnJHqP
-         Yoml7SIRAX/y5jPEyxytHNrvxfCODisa1A1DARKRBDNlcJ4/SYhNsaooM7E/23Chbta2
-         rj47ZtnFpDUUfZ4N5Yw3GtpQ5hUmYj9QhC5CoXEZU7nx2rvn3JiEEjOY5rfWOKWLf5ol
-         UJXA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785325133; x=1785929933;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=5iX3sEVovVYi3DpvUrl6PGylYfhOnizJPhWXlTW0MXY=;
-        b=IqEMk1rKuRVgwigrA/q2ixJpEqvhjpExYkAO1qCRXxkd4pLUG1CiNENfuNsYo0fL6h
-         UIq01fKVpQiIPZwE+sWFZZRGRjnaLUyPeyg5yoxYCD1hrixvuI5S2s8kmDKMjwnPG2Y5
-         OWGHTVxoUXUrsEEz4XWNidxOmC1lGV8iszSeK6jhoUMtEBKKncxP/l2ra9Ofo+Ldfu5+
-         FP8Etd3zwzsrjFytz9TGl7oTOdE9XBu4XtQz8GcckoK3kjVQUylygcg1OAk0bNMacBWN
-         LBjtb5h5Xu9Q1WTgVLg7q3HAfm0/p5C5PXYvnqucOOYS3opf3cQCZ0Vkv/2vhrsGwnVq
-         RT9g==
-X-Forwarded-Encrypted: i=1; AHgh+RpA5vD7q7tGv8CA749OnRSaz+wCxWe9C395ynj6vowATNeyJXKthL9HOwnoFY2E3qacIyoBPHA8y5z8toPX@vger.kernel.org
-X-Gm-Message-State: AOJu0YwqmEpyFeZTWigDO3AsI18dnUPSFMi/c7f5+ZpsndBET36cGezb
-	AyHwipsKC570Oy/dAcDwlvOgIKyUeY3kD2iCAILry7WSOWSpoXpF27VSJl+qibRfFI4=
-X-Gm-Gg: AR+sD13XpJVJo+v+DTJOcQTvPPPFJE+ceJiuU8kbhFtqvkoHtweAju1lfI3/Gty805l
-	w9fUgm2mDKrv4bJrefF+nABGPLvROdoDQUwdKltchj/48QS8056K3bUXqUtlmSOHM39HwmKi0i8
-	1PVQ1zilaSQDaqf6RGVHGeuZxnbuTU2fAqQUL7UqmCAeHdDOQw27W82pHFMdkWNGXeNBzbRNXTs
-	JEKraK0Phpt4ISI/71M99iuERbK0/nTuWFp7XoiLoVsVoAujGReCQFy65sZHX5MupdPYVCZqwBa
-	JUsXuRZqeupDOIau5JITxG24KuPwGK2M/2KKA4dUHJeVhwULlHaiQi4wy0zoGq24yYJlALt/sut
-	XyPdAXWpVI18GH2E0AthqNmOH0CUvuTSTKyUL4DWA/G7Hktd+YiP2bmDuI3Mqgpgujm6XVEAx0l
-	V28SZ5RLIrlLDGUOQKAVUvQDYc0mIBcRq/+RLpWc6Nzmefyq1Ofm4hcGKs28E8sTiDzTSzf/0=
-X-Received: by 2002:a05:6000:2c05:b0:47f:9763:9864 with SMTP id ffacd0b85a97d-47fbabee850mr2432854f8f.19.1785325133163;
-        Wed, 29 Jul 2026 04:38:53 -0700 (PDT)
-Received: from [192.168.0.101] ([109.77.24.32])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47fb6b0f039sm7702125f8f.18.2026.07.29.04.38.51
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 29 Jul 2026 04:38:52 -0700 (PDT)
-Message-ID: <f77aab11-0e1b-4962-9d53-0bb2fcd6486a@linaro.org>
-Date: Wed, 29 Jul 2026 12:38:50 +0100
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TSL96bqB"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 90CD01F000E9;
+	Wed, 29 Jul 2026 11:40:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785325232;
+	bh=gd9feqrDoNJUw6NO1CcIvNjiMFzuYqKGLrbTqWwnmUo=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=TSL96bqBO6eCqo9wVjtdiQbfFabsERoK2wduUtmXWLOsuHDBFS/4DQW/WD36iCYiR
+	 +7XdNvV8COROTSZhN3UcDmQP4XnPH5UfrmXzAQdo1un2oiZ+SMeno05aCSYZlviT1n
+	 rLyqWGiuNvKVdDc5SwgNb6abiloLq1k8GvQra78e6UMgTLdU9L21eBLCyfBD6notnY
+	 qkBPUYrrQ2qvSvXlP3mmKOPI88aXxUerEAhChwSedmFZvVQ8/P/1NpD1PLZA1bel6/
+	 fFDjgTW29OX82QUPupe9GqEAu7BhasX2+POLqwlCnk0gB/f1N7HMOj6S3xJ8QlWUJ8
+	 iFe9ckVX0NQaw==
+Message-ID: <219d44e2-28ed-4c54-bd00-66e687a0ba48@kernel.org>
+Date: Wed, 29 Jul 2026 13:40:22 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -68,94 +35,153 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/4] media: qcom: camss: use
- fwnode_graph_for_each_endpoint_scoped() to simplify code
-To: Frank.Li@oss.nxp.com, Andy Shevchenko
- <andriy.shevchenko@linux.intel.com>, Daniel Scally <djrscally@gmail.com>,
- Heikki Krogerus <heikki.krogerus@linux.intel.com>,
- Sakari Ailus <sakari.ailus@linux.intel.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, Danilo Krummrich <dakr@kernel.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Dafna Hirschfeld <dafna@fastmail.com>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Heiko Stuebner <heiko@sntech.de>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: driver-core@lists.linux.dev, linux-acpi@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
- linux-rockchip@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
- linux-arm-msm@vger.kernel.org, imx@lists.linux.dev,
- Guoniu Zhou <guoniu.zhou@nxp.com>, Frank Li <Frank.Li@nxp.com>,
- Guoniu Zhou <guoniu.zhou@oss.nxp.com>,
- Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
-References: <20260625-fw_scoped-v3-0-ffd0868e498d@nxp.com>
- <20260625-fw_scoped-v3-4-ffd0868e498d@nxp.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20260625-fw_scoped-v3-4-ffd0868e498d@nxp.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [RFC PATCH 7/8] dt-bindings: sound: qcom: add Tambora WCD9378
+ SDCA codec
+To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+ Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
+ Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+ Charles Keepax <ckeepax@opensource.cirrus.com>,
+ Maciej Strozek <mstrozek@opensource.cirrus.com>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Srinivas Kandagatla <srini@kernel.org>
+Cc: Bard Liao <yung-chuan.liao@linux.intel.com>,
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+ Richard Fitzgerald <rf@opensource.cirrus.com>,
+ Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+ linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, patches@opensource.cirrus.com,
+ linux-kernel@vger.kernel.org
+References: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com>
+ <20260722234221.884765-8-srinivas.kandagatla@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
+ cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
+ JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
+ gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
+ J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
+ NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
+ BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
+ vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
+ Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
+ TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzSVLcnp5c3p0b2Yg
+ S296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+wsGPBBMBCgA5AhsDBgsJCAcDAgYVCAIJCgsE
+ FgIDAQIeAQIXgBYhBJvQfg4MUfjVlne3VBuTQ307QWKbBQJp2mE8AAoJEBuTQ307QWKbeaIP
+ /ihHTkTW4KsN/DQ945JJbyu5tI0J80Wue7QyyLPglyKfhgb5cLLNPpOC8cCIJsc7+W3i2P38
+ s2c1cOH6CYGE7E9ur3Vfme8NW2S2I/Z8VC7bZnzyS23wT17LrsdS/qCpx4o8U+pt/xdXDKph
+ EGRYrIEmMpUWvyYzyYKGIe25FtaayIIKpq8eZYyFcp2f/sG5IkOW5uZzHPMPdcm87jU7fyuQ
+ rAU2vx9r+ulUfQ/q9Z2roC/ode3l7t2pN7BCBCsUDp6JCrUyZrtT1e7EbA0ZRP3aOBNk2P2E
+ DQOgJGjGdO5Yx2Y9LFtltu6JbsBJHi1syGRX3AtQYOMc4Y1WGoeZJmMlvKj2ZqqXNkcWi2DS
+ IQEWB0uW6CqFsBBIMGDa+6OzdaVO/uAVXWDWml02Men3CILdI1MbVjoh8ECqYUY7OQ+JJvNN
+ vnliuq5WM3Ghd3jg/LZZrxXjdIginRHFQCjIJYLKpLZWm1/iDFedcfzqRNYmTtqscdCNHW41
+ oT3Z7BmO9xwdjuwBS6nmS6JJwkbf5Ot2QR4pB/DRU7ZwjT1qHe+9r9gF32wXVQatHNGK/VVu
+ sfwOnkdxCWkp/qb2gdQRmZh+SedStWshigH6sNfuHBloF/q+hjMRc8b2m326OZdrbSHwY1Sz
+ vti8Hn7n8NjdHO9LKB7BIdjkA9DA5WsqOuVCzsFNBFVDXDQBEADNkrQYSREUL4D3Gws46JEo
+ Z9HEQOKtkrwjrzlw/tCmqVzERRPvz2Xg8n7+HRCrgqnodIYoUh5WsU84N03KlLueMNsWLJBv
+ BaubYN4JuJIdRr4dS4oyF1/fQAQPHh8Thpiz0SAZFx6iWKB7Qrz3OrGCjTPcW6eiOMheesVS
+ 5hxietSmlin+SilmIAPZHx7n242u6kdHOh+/SyLImKn/dh9RzatVpUKbv34eP1wAGldWsRxb
+ f3WP9pFNObSzI/Bo3kA89Xx2rO2roC+Gq4LeHvo7ptzcLcrqaHUAcZ3CgFG88CnA6z6lBZn0
+ WyewEcPOPdcUB2Q7D/NiUY+HDiV99rAYPJztjeTrBSTnHeSBPb+qn5ZZGQwIdUW9YegxWKvX
+ XHTwB5eMzo/RB6vffwqcnHDoe0q7VgzRRZJwpi6aMIXLfeWZ5Wrwaw2zldFuO4Dt91pFzBSO
+ IpeMtfgb/Pfe/a1WJ/GgaIRIBE+NUqckM+3zJHGmVPqJP/h2Iwv6nw8U+7Yyl6gUBLHFTg2h
+ YnLFJI4Xjg+AX1hHFVKmvl3VBHIsBv0oDcsQWXqY+NaFahT0lRPjYtrTa1v3tem/JoFzZ4B0
+ p27K+qQCF2R96hVvuEyjzBmdq2esyE6zIqftdo4MOJho8uctOiWbwNNq2U9pPWmu4vXVFBYI
+ GmpyNPYzRm0QPwARAQABwsF2BBgBCgAgAhsMFiEEm9B+DgxR+NWWd7dUG5NDfTtBYpsFAmna
+ YUkACgkQG5NDfTtBYptX+BAApg32CkxwNucNEi8WfWA8oKkW0y8YDuY6ORMo9FWNGiT/OTy0
+ vyJrLocrpn86zwfjVp+eCrssPYh8eqJfnWqmYv6ACQtHPYzPZQ3mSo8H97Z01oUxITzCxpXm
+ ZkLgPIqtDPcC2E3dPM/fVxcyowM8XsaMA9wcsaUYrta8toOq2b9tKcjleKMfMrm0gQ9u7wUc
+ QbLkwj6TCLOwucb07GXzLTNF9PZmaDUpKAZjMjmrW+le+SFvQbhamx0rxLWPR0NWntXpbCn+
+ +ACch03p/JyTBVktxFsFyCt7pTPE1kEaeuXBTe/a2D9iQvRxRW19LvuO2e59/u1wYUiH/orz
+ wbIC2S4dBsPAPihL3ztOU1yE86GPyQtSE0kU+/7snnLt4QGi6PChf3t5gnNjAzjUUovO8rgI
+ c+5yN5heq5loYHgK6OQ9OlHzsPHO9e9MOQcKlFycs1pyijFGzDwdNUm/SchK8iWT2QApTx4A
+ K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
+ n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
+ qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
+In-Reply-To: <20260722234221.884765-8-srinivas.kandagatla@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 25/06/2026 15:17, Frank.Li@oss.nxp.com wrote:
-> From: Frank Li <Frank.Li@nxp.com>
+On 23/07/2026 01:42, Srinivas Kandagatla wrote:
+> Describe the WCD9378 SDCA peripheral node (compatible sdw20217011000)
+> driven by the wcd9378-sdca codec driver for headphone playback, headset
+> mic capture and jack detection via the SimpleJack SDCA function type.
 > 
-> Use fwnode_graph_for_each_endpoint_scoped() to simplify code.
+> WCD9378 codec can be wired up in 2 different modes.
+> "mobile mode" on phone/tablet SoCs is enumerated as tx and rx device,
+> each of which has dedicated control and data lines.
+> "compute mode" on compute platforms such as Glymur is enumerated as
+> single standard MIPI SDCA class device.
 > 
-> No functional changes.
+> Both modes share same Device ID, compatible; qcom,compute-mode selects
+> which driver path is taken.  Supplies, reset GPIO and mic-bias voltages
+> live on the SoundWire slave node in compute mode and are forbidden in
+> mobile mode (owned by the top-level codec parent there).
 > 
-> Reviewed-by: Guoniu Zhou <guoniu.zhou@oss.nxp.com>
-> Reviewed-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-> Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-> Reviewed-by: Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
-> Signed-off-by: Frank Li <Frank.Li@nxp.com>
+> Assisted-by: Claude:claude-opus-4-7
+> Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 > ---
-> change in v2
-> - fix typo simplify
-> - collect andy, gouniou and loic's review tags
-> ---
->   drivers/media/platform/qcom/camss/camss.c | 17 +++++------------
->   1 file changed, 5 insertions(+), 12 deletions(-)
+>  .../bindings/sound/qcom,wcd9378-sdw.yaml      | 200 ++++++++++++++++++
+>  1 file changed, 200 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml
 > 
-> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-> index 2123f6388e3d7..23f3cc30a15a5 100644
-> --- a/drivers/media/platform/qcom/camss/camss.c
-> +++ b/drivers/media/platform/qcom/camss/camss.c
-> @@ -4793,30 +4793,23 @@ static int camss_parse_endpoint_node(struct device *dev,
->   static int camss_parse_ports(struct camss *camss)
->   {
->   	struct device *dev = camss->dev;
-> -	struct fwnode_handle *fwnode = dev_fwnode(dev), *ep;
-> +	struct fwnode_handle *fwnode = dev_fwnode(dev);
->   	int ret;
->   
-> -	fwnode_graph_for_each_endpoint(fwnode, ep) {
-> +	fwnode_graph_for_each_endpoint_scoped(fwnode, ep) {
->   		struct camss_async_subdev *csd;
->   
->   		csd = v4l2_async_nf_add_fwnode_remote(&camss->notifier, ep,
->   						      typeof(*csd));
-> -		if (IS_ERR(csd)) {
-> -			ret = PTR_ERR(csd);
-> -			goto err_cleanup;
-> -		}
-> +		if (IS_ERR(csd))
-> +			return PTR_ERR(csd);
->   
->   		ret = camss_parse_endpoint_node(dev, ep, csd);
->   		if (ret < 0)
-> -			goto err_cleanup;
-> +			return ret;
->   	}
->   
->   	return 0;
-> -
-> -err_cleanup:
-> -	fwnode_handle_put(ep);
-> -
-> -	return ret;
->   }
->   
->   /*
-> 
-Acked-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+> diff --git a/Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml b/Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml
+> new file mode 100644
+> index 000000000000..2ed4ad92958e
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/sound/qcom,wcd9378-sdw.yaml
+> @@ -0,0 +1,200 @@
+> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/sound/qcom,wcd9378-sdw.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Qualcomm SoundWire Slave devices on WCD9378
+> +
+> +maintainers:
+> +  - Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
+> +  - Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+> +
+> +description: |
+> +  The Qualcomm WCD9378 codec presents its SoundWire slave devices with
+> +  class ID sdw20217011000 in both operating modes:
+> +
+> +    * mobile mode -- two slave instances sit on separate SoundWire
+> +      masters carrying data only.  A separate top-level codec node
+> +      owns the codec's supplies, mic-bias voltages and reset GPIO.
+> +
+> +    * SDCA / compute mode -- one aggregated slave sits on a multi-lane
+> +      master and carries both control and data.  There is no separate
+> +      top-level codec node, so the SoundWire slave node itself owns
+> +      supplies, reset GPIO and mic-bias voltage configuration.  It is
+> +      marked with qcom,compute-mode.
+> +
+> +  Codec drivers that match sdw20217011000 use qcom,compute-mode to
+> +  decide which mode to serve; the presence or absence of this property
+> +  also gates whether the supply and mic-bias properties on this node
+> +  are required or forbidden.
+> +
+> +properties:
+> +  compatible:
+> +    const: sdw20217011000
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  qcom,compute-mode:
+> +    description: |
+> +      Marks this SoundWire slave as the single aggregated slave that
+> +      implements the codec in SDCA / compute mode.  Only present when
+> +      the codec has no separate top-level codec parent; in that case
+> +      this slave node also owns the codec's supplies, reset GPIO and
+> +      mic-bias voltage configuration.  Absent in mobile mode.
+
+I doubt there is really "compute" or "mobile" mode, so you just wrote to
+match use case, but that does not match hardware.
+
+I think there should be no separate top-level codec parent in the first
+place, thus this property is not needed. You always list here all resources.
+
+Best regards,
+Krzysztof
