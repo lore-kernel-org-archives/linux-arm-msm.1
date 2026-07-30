@@ -1,112 +1,344 @@
-Received: from mail-m49207.qiye.163.com (mail-m49207.qiye.163.com [45.254.49.207])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D9262D7DE7;
-	Thu, 30 Jul 2026 03:47:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.254.49.207
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DFE239A061
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 04:40:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785383229; cv=none; b=CkDXvuwwHtduo1N+HO2r3JLruyPsStclpLb4VikZGOtb8FIx7Rr6rsN2nnDjxPs8EGuno25+F28uImWeNnlqZVZD0UrMExHbIdeFwFQktM7kLUYlX2+dvBjX0mnYu+iBnAMM7qNnKNWPsuYiHWoMjkyl/XFS5xs3LtmyRimKpzk=
+	t=1785386405; cv=none; b=aApLgMm8lsPNXIDmOnRqbtFR8OVQJujHEPGg2ZRDisHqJ0l8wkhx0aR2pA6SNEjXkssh3TymKU+NqTeXjAM+ncfqWl7dhJNDUsKNYo4XbL9XYi32rE8iIcyoWG/hvYkxWKmO/3hJRCOa+7XLlqYE5B4+Rz3U/USi6T4hpqe1km4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785383229; c=relaxed/simple;
-	bh=hcwOydZtLLbDDRhCFxr27cUxWlNGAcdn2080Ocrk3nk=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=DC0cRUcSD6NZY2yYnVS5o3PdGjo0ktAFMGT4Z/viESm5sz/1C1UzHvEiOc4n0C4KZxId8h2KyaTb251Wj5Q1RgvJmAv9gVetissfIAT5BNqWo36mzgoHldFLTd2BD9+TBWVkIbu1VuT1J+pKqA1hPk5t9s8/zV6V6urJgj69NR0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com; spf=pass smtp.mailfrom=thundersoft.com; dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b=LxfXREz7; arc=none smtp.client-ip=45.254.49.207
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thundersoft.com
+	s=arc-20240116; t=1785386405; c=relaxed/simple;
+	bh=8l07eIxeAIEL/Qh5VQISoclAjhvJhvZHzf2IzyPlrq0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=u+uMrbHY4ki9GFi4m6mW1UlVs1CRn4i8bmT2ey9bQORl66xmKHw/1x11HHpimjKM2Qn7jQMXkR6rVTIkA6R84+ZC3pzX1Yfbt+D7bdgqC3NT9WK4qA8aVcAtkg9DhpCsKDvqxvkZKIQ4WnvxYSxjHve3I33j1Kp8MmPOaAhy7CA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Dyunrh/Y; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=PLGgFDut; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b="LxfXREz7"
-Received: from tsdl-HP-EliteDesk-880-G6-Tower-PC.. (unknown [36.129.139.90])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 481c9b915;
-	Thu, 30 Jul 2026 11:31:42 +0800 (GMT+08:00)
-From: Hongyang Zhao <hongyang.zhao@thundersoft.com>
-To: konrad.dybcio@oss.qualcomm.com
-Cc: Frank.Li@nxp.com,
-	andersson@kernel.org,
-	conor+dt@kernel.org,
-	devicetree@vger.kernel.org,
-	festevam@gmail.com,
-	hongyang.zhao@thundersoft.com,
-	imx@lists.linux.dev,
-	kernel@pengutronix.de,
-	konradybcio@kernel.org,
-	krzk+dt@kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	robh@kernel.org,
-	rosh@debian.org
-Subject: Re: [PATCH v2 1/2] arm64: dts: qcom: qcs6490-rubikpi3: Add 3.3 V output supply
-Date: Thu, 30 Jul 2026 11:31:33 +0800
-Message-ID: <20260730033133.63823-1-hongyang.zhao@thundersoft.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <ad142a95-ffcd-46fa-8d55-b3328bc00e20@oss.qualcomm.com>
-References: <ad142a95-ffcd-46fa-8d55-b3328bc00e20@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Dyunrh/Y";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PLGgFDut"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66U4ZXkI4087678
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 04:40:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	5cdk8Yiwk/sa/VglH2VfCbyGGThIsIyvwEWETM1Y7xE=; b=Dyunrh/Y+P34Hnu3
+	pvJ94Myn6z4uODclHr02s9/iGWbx0YZtS8ghl5C2tNRandRpGBRMFWTGZ1j9BhbF
+	q9qrKhq+ujcOkClOwVxMQpZrhnWjPB3XFc/FazkMIZ1olv+ZjtSd+VKifB3zKIMP
+	DaEHqFtFRO7+9QTfpyMOBPwZhKuruorg0QKlZ5ynZSeMRTvJOPBKfc8upP74L2qe
+	Mu86Sylht6SPu+kCrRvjUp9RmQJqqnP/ZuxmjxfDkDmGf+dPTa4WFFTb8cC9ekHw
+	1lgUNg0vEoP+unpZeiXvHP0TzsypJtYBgAoB5Ktnh7xLgqu0ZsmfZGspMBrYb8Ms
+	LIT7Lg==
+Received: from mail-yx1-f72.google.com (mail-yx1-f72.google.com [74.125.224.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fqyqkr0hm-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 04:40:02 +0000 (GMT)
+Received: by mail-yx1-f72.google.com with SMTP id 956f58d0204a3-66927fe1796so1197022d50.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 21:40:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785386401; x=1785991201; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=5cdk8Yiwk/sa/VglH2VfCbyGGThIsIyvwEWETM1Y7xE=;
+        b=PLGgFDut0WV3KxtDQ0nbK9Dn3OMWP6cmNk11MqKFya8H8DcHF3YnnhDNWxAfC6sGle
+         BmEUNUC90DLdpEADyT3AdflcKp65OjQ9yFIhUROzftoZ5OPfwSj/jOfDm8Bkq/PQvoGM
+         Fj/ka93ZeIN9+BeXbVKQ/ipxO3gCihOGJJxyrr3MCMuwvdGrjW+ZSRmiPyaHOCuSlZ/M
+         /efjBmSqyohDpxLQMU1XitGpbEN2qacyRVFT3D9afxfJZ2acIq2UVQkzs8dmZRh0WhCF
+         ttzzeE5wvr/QBviChAtVFTy/LpIFqEot/1iNXqrwkATwLMLpPKwR6gGvBDv9kPsyD7yP
+         Acfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785386401; x=1785991201;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=5cdk8Yiwk/sa/VglH2VfCbyGGThIsIyvwEWETM1Y7xE=;
+        b=rnq2GlRQEB5+gcP2XoqrBrMNX2MO9fwqpSztANlBN13dhK5jQ3AmO1Hzx5i6OoSkPY
+         gbTgAbo4p1CHRRBvCSHA7JSbj562g06nYBqvpnYKI4MpiBT1ab8qWbvaYjE1LbCggkFQ
+         pWCaJZpazwbsi0nFW0egn88r1A3PahyzS/SdghQOhd4+J82wSm19NUHzPd1HC9X7wbiF
+         LgR2sGaUJoX4WBYlysfGTgJDk5dIbstvCGUEjAujOHxTzMps48QMz/aJH1GP0F1vTVGm
+         tmVRg/mla3OyN39OYengTWQVic0awl/CDqn2L62z0XpsvSyyOd0lCO6ft2QdyFTroDI/
+         rSJQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrZzNkOdIOgYHt3ro24mmpV5a9QNaxsbx8uSMglIF7+IqV/gKK4mL8/Z0d9CQQAqV6JHDIlsfxJUNhjmxbA@vger.kernel.org
+X-Gm-Message-State: AOJu0YxoC372m3ua0LlVnbzA4LakE+9N/dIbsMvv8DE10iIXpS+NGXqK
+	YraqGYr8JhfdsaMBCgepPRQgA6NAbDZsaNDwVlcqiYmjzB2WwkdI71ExvsfC6XJtVWxx5s2nIlC
+	mJnJVr8k99uWQZCKWmXnQaRLPJsCkT2T16i5Ubh47O2RymMsBhvCX9wtSG7VKShDhmOIT
+X-Gm-Gg: AR+sD12RG8ZRyBZcGZuIjbG8G5iwh9Nk5tTPfSsCKiQTZc+1CWsPC4yonZhytviQedO
+	7CcZwLhu2dCIYFTmaR69CfPrKW85Q1FeDRGl7QC8MLIu7V5V+j2gjTrO/v3ipo9IUPMqDtxM14b
+	x+WmOWvCPIRjCYuNWXfrcpR7f79ai2DLZd37aUjZmCpSDN3XRfTK+JD60WtCVP4x0YejBjXRhr9
+	C4o9AdPuTwDCt45jFGJ9Kr84jUHIUR+H1i6CYWbmKQm1/MAu7Bdi0fw9VH8WrdIyy1v3Cy2GymQ
+	fm44OOQdA6dDFAOq6Mn/8AxOkLn5MzYVQuvfPUMyrg1UeFIS5qKijZ1ufwfLe4N/E643VRZc24f
+	nzMRchyc2tWMIkJWHRxW5kUYWqO4nog==
+X-Received: by 2002:a17:90b:3908:b0:38f:657:6823 with SMTP id 98e67ed59e1d1-38f9d3e383fmr498567a91.8.1785386059822;
+        Wed, 29 Jul 2026 21:34:19 -0700 (PDT)
+X-Received: by 2002:a17:90b:3908:b0:38f:657:6823 with SMTP id 98e67ed59e1d1-38f9d3e383fmr498546a91.8.1785386058885;
+        Wed, 29 Jul 2026 21:34:18 -0700 (PDT)
+Received: from [10.204.78.242] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31504dd42a9sm19203723eec.30.2026.07.29.21.34.13
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 29 Jul 2026 21:34:18 -0700 (PDT)
+Message-ID: <889c46b2-6c6e-4119-b748-a1d5706c276b@oss.qualcomm.com>
+Date: Thu, 30 Jul 2026 10:04:12 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0a9fb113f1b109d5kunmc26dca11408bbf
-X-HM-MType: 1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaGEtCVkhJQkNJHUhIH0hMTFYVFA
-	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlITVVKSUJVSkhCVUJLWVdZFhoPEhUdFFlBWU9LSFVCQk
-	lOS1VKS0tVSkJLQlkG
-DKIM-Signature: a=rsa-sha256;
-	b=LxfXREz7/oJn1rTqqBe7zYYcNmwJmZHwqlClRstYIi0c3doYORY0AN+nEIVzvOmwe/lEL4jYoNjnkQcxgXUnsF4PaEtQ2wUicCjH2B11+UdzUArtRtdOseABWpfboUwCdVcLKmnoxSVnBzi0B9DlCj9yaPtYfmn3ZSrWy0FovIQ=; s=default; c=relaxed/relaxed; d=thundersoft.com; v=1;
-	bh=CpM9Y/DW/rPww6MoRecMawp94vW2lyXOoX1QBOllpIk=;
-	h=date:mime-version:subject:message-id:from;
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] misc: fastrpc: avoid duplicate DMA mappings in
+ fastrpc_create_maps()
+To: Jianping Li <jianping.li@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>
+Cc: Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+        Ling Xu <quic_lxu5@quicinc.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
+        linaro-mm-sig@lists.linaro.org, quic_chennak@quicinc.com,
+        stable@kernel.org
+References: <20260716113254.570-1-jianping.li@oss.qualcomm.com>
+Content-Language: en-US
+From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+In-Reply-To: <20260716113254.570-1-jianping.li@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: qBIlySBBz8kt93PF1yo93YSIHi-2wj2I
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDAyNyBTYWx0ZWRfXyzy7DcXMnZOZ
+ 41RbYcxJzvQNPvmW3zWPGDI0aheFXU0RB2VzzxCLtxx1Sqn/ePMKNCizRnptGsIToInncEnQQkf
+ IUknCSsZB2mnHERUSrloyJT5dGqt5RofXF5wxnV96fv8iXgdSnyzoKTaYZWyC01ATQ4lgJlK/xg
+ pGpZeyqLzhEG152+gcS7lqUoTLKyzgS4SB448E/vnWi4GiXLJ/JpiePJlein1blCR7el+n1vvsU
+ s30GYmGZ/g/j929MA2GbzFUKxVcYdf36BnJX9CmzS9mQc2TkJ2hCVsCx4fgYs2Adrc5eonjsJJK
+ CAMdIWJvN1eU4gNqCoO/71ejMUYQee5DkDa3QgWoAcgUwMGbNJRnGDjW79euToZaAvHzYiA8U5u
+ zLE7TD0fAfwsYkgk2El6Otcb4ipalrDLOK+9icauQwHOpUmzXbxe3Pyettoo/hVCj41TI50IIAA
+ 2ipVaaKFclbOG86zgoQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDAyNyBTYWx0ZWRfX/DL99s8XHG/M
+ svdncA4DS1nbuulX7N37Rv1bx6CHWOa097evutv3zZEvj9IByS1nlhNjTcOeZh967Ol4KtdFkr7
+ 72xHQ9LIiLWZvTIf0zU7APvKRWGbC7U=
+X-Authority-Analysis: v=2.4 cv=DcgnbPtW c=1 sm=1 tr=0 ts=6a6ad5a2 cx=c_pps
+ a=VEzVgl358Dq0xwHDEbsOzA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=pdARdrlki2Vdj_-LtegA:9 a=QEXdDO2ut3YA:10
+ a=uujmmnXaIg8lM0-o0HFK:22
+X-Proofpoint-ORIG-GUID: qBIlySBBz8kt93PF1yo93YSIHi-2wj2I
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-30_01,2026-07-29_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 clxscore=1015 suspectscore=0 spamscore=0
+ lowpriorityscore=0 malwarescore=0 impostorscore=0 phishscore=0 bulkscore=0
+ adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607300027
 
-Thanks for the review!
+On 16-07-2026 17:02, Jianping Li wrote:
+> DMA handles passed as invoke arguments (scalars beyond nbufs) may refer
+> to the same dma_buf fd as an input/output buffer argument. Taking an
+> extra reference for such DMA handle maps leads to duplicate mappings and
+> an unbalanced reference count, since DMA handle maps are released
+> separately when the DSP returns the fd through the fdlist.
+> 
+> Fix this by not taking an extra reference for DMA handle arguments
+> (take_ref = false) and tagging them with FASTRPC_MAP_DMA_HANDLE. As
+> these maps are borrowed references, fastrpc_get_args() re-validates the
+> map via fastrpc_map_lookup() before dereferencing it, so it is not used
+> after being freed. fastrpc_put_args() only releases maps flagged as
+> FASTRPC_MAP_DMA_HANDLE and clears the flag to guarantee the map is freed
+> exactly once.
+> 
+> Also reject FASTRPC_MAP_DMA_HANDLE in fastrpc_req_mem_map(), since such
+> handles are already mapped implicitly during the remote invoke call and
+> must not be mapped again through the explicit MEM_MAP path.
+> 
+> Fixes: 10df039834f84 ("misc: fastrpc: Skip reference for DMA handles")
+> Cc: stable@kernel.org
+> Signed-off-by: Jianping Li <jianping.li@oss.qualcomm.com>
+> ---
+> Patch [v1]: https://lore.kernel.org/all/20260625080832.17477-1-jianping.li@oss.qualcomm.com/
+> 
+> Changes in v2:
+> - Rework the commit message to describe the DMA handle reference and
+>   lifetime problem more precisely.
+> - Introduce a new FASTRPC_MAP_DMA_HANDLE uapi flag and a 'flags' field
+>   in struct fastrpc_map to explicitly tag DMA handle maps, instead of
+>   relying only on the nbufs boundary / take_ref.
+> - Plumb an mflags argument through fastrpc_map_create() and
+>   fastrpc_map_attach() so DMA handle maps are tagged at creation time.
+> - Re-validate the borrowed map in fastrpc_get_args() via
+>   fastrpc_map_lookup() before dereferencing it, to avoid a
+>   use-after-free when the map was created with take_ref = false.
+> - In fastrpc_put_args(), only release maps tagged FASTRPC_MAP_DMA_HANDLE
+>   and clear the flag afterwards, so such maps are freed exactly once.
+> - Reject FASTRPC_MAP_DMA_HANDLE in fastrpc_req_mem_map(), since these
+>   handles are already mapped implicitly during the remote invoke and
+>   must not be mapped again through the explicit MEM_MAP path.
+> ---
+>  drivers/misc/fastrpc.c      | 56 ++++++++++++++++++++++++++-----------
+>  include/uapi/misc/fastrpc.h |  2 ++
+>  2 files changed, 42 insertions(+), 16 deletions(-)
+> 
+> diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
+> index d86e79134c68..fa8c58a97e35 100644
+> --- a/drivers/misc/fastrpc.c
+> +++ b/drivers/misc/fastrpc.c
+> @@ -223,6 +223,7 @@ struct fastrpc_map {
+>  	u64 len;
+>  	u64 raddr;
+>  	u32 attr;
+> +	u32 flags;
+>  	struct kref refcount;
+>  };
+>  
+> @@ -833,7 +834,7 @@ static dma_addr_t fastrpc_compute_dma_addr(struct fastrpc_user *fl, dma_addr_t s
+>  }
+>  
+>  static int fastrpc_map_attach(struct fastrpc_user *fl, int fd,
+> -			      u64 len, u32 attr, struct fastrpc_map **ppmap)
+> +			      u64 len, u32 attr, struct fastrpc_map **ppmap, int mflags)
+>  {
+>  	struct fastrpc_session_ctx *sess = fl->sctx;
+>  	struct fastrpc_map *map = NULL;
+> @@ -850,6 +851,7 @@ static int fastrpc_map_attach(struct fastrpc_user *fl, int fd,
+>  
+>  	map->fl = fl;
+>  	map->fd = fd;
+> +	map->flags = mflags;
+>  	map->buf = dma_buf_get(fd);
+>  	if (IS_ERR(map->buf)) {
+>  		err = PTR_ERR(map->buf);
+> @@ -924,13 +926,13 @@ static int fastrpc_map_attach(struct fastrpc_user *fl, int fd,
+>  	return err;
+>  }
+>  
+> -static int fastrpc_map_create(struct fastrpc_user *fl, int fd,
+> -			      u64 len, u32 attr, struct fastrpc_map **ppmap)
+> +static int fastrpc_map_create(struct fastrpc_user *fl, int fd, u64 len, u32 attr,
+> +			      struct fastrpc_map **ppmap, bool take_ref, int mflags)
+>  {
+> -	if (!fastrpc_map_lookup(fl, fd, ppmap, true))
+> +	if (!fastrpc_map_lookup(fl, fd, ppmap, take_ref))
+>  		return 0;
+>  
+> -	return fastrpc_map_attach(fl, fd, len, attr, ppmap);
+> +	return fastrpc_map_attach(fl, fd, len, attr, ppmap, mflags);
+>  }
+>  
+>  /*
+> @@ -1000,23 +1002,25 @@ static int fastrpc_create_maps(struct fastrpc_invoke_ctx *ctx)
+>  	int i, err;
+>  
+>  	for (i = 0; i < ctx->nscalars; ++i) {
+> +		bool take_ref = i < ctx->nbufs;
+> +		int mflags = 0;
+>  
+>  		if (ctx->args[i].fd == 0 || ctx->args[i].fd == -1 ||
+>  		    ctx->args[i].length == 0)
+>  			continue;
+>  
+> -		if (i < ctx->nbufs)
+> -			err = fastrpc_map_create(ctx->fl, ctx->args[i].fd,
+> -				 ctx->args[i].length, ctx->args[i].attr, &ctx->maps[i]);
+> -		else
+> -			err = fastrpc_map_attach(ctx->fl, ctx->args[i].fd,
+> -				 ctx->args[i].length, ctx->args[i].attr, &ctx->maps[i]);
+> +		/* Set the DMA handle mapping flag for DMA handles */
+> +		if (i >= ctx->nbufs)
+> +			mflags = FASTRPC_MAP_DMA_HANDLE;
+> +
+> +		err = fastrpc_map_create(ctx->fl, ctx->args[i].fd, ctx->args[i].length,
+> +					 ctx->args[i].attr, &ctx->maps[i], take_ref, mflags);
+>  		if (err) {
+>  			dev_err(dev, "Error Creating map %d\n", err);
+>  			return -EINVAL;
+>  		}
+> -
+>  	}
+> +
+>  	return 0;
+>  }
+>  
+> @@ -1144,6 +1148,16 @@ static int fastrpc_get_args(u32 kernel, struct fastrpc_invoke_ctx *ctx)
+>  		list[i].num = ctx->args[i].length ? 1 : 0;
+>  		list[i].pgidx = i;
+>  		if (ctx->maps[i]) {
+> +			/* It is possible that map is created with
+> +			 * mflags FASTRPC_MAP_DMA_HANDLE and take_ref
+> +			 * is false. Check if map still exists or is
+> +			 * being freed as take_ref is false
+> +			 */
+> +			if (fastrpc_map_lookup(ctx->fl, ctx->args[i].fd,
+> +					       &ctx->maps[i], false)) {
+> +				ctx->maps[i] = NULL;
+> +				return -EINVAL;
+> +			}
+if map is created by R1 call with DMA handle flag, when any inbuf/outbuf
+carries the same fd for R2 call, wouldn't the refcount get increased as
+part of fastrpc_create_maps()? So if the refcount is already increased
+there, why do you need to have a check here?>  			pages[i].addr =
+ctx->maps[i]->dma_addr;
+>  			pages[i].size = ctx->maps[i]->size;
+>  		}
+> @@ -1200,8 +1214,13 @@ static int fastrpc_put_args(struct fastrpc_invoke_ctx *ctx,
+>  	for (i = 0; i < FASTRPC_MAX_FDLIST; i++) {
+>  		if (!fdlist[i])
+>  			break;
+> -		if (!fastrpc_map_lookup(fl, (int)fdlist[i], &mmap, false))
+> +		/* Validate the map flags for DMA handles and skip freeing map if invalid */
+> +		if (!fastrpc_map_lookup(fl, (int)fdlist[i], &mmap, false) &&
+> +		    mmap->flags == FASTRPC_MAP_DMA_HANDLE) {
+> +			/* Allow DMA handle maps to free only once */
+> +			mmap->flags = 0;
+flags are getting updated without any locks, this is considering that
+DSP can updated a particular fd on fdlist only once. Can you add this
+information here?>  			fastrpc_map_put(mmap);
+> +		}
+>  	}
+>  
+>  	return ret;
+> @@ -1511,7 +1530,7 @@ static int fastrpc_init_create_process(struct fastrpc_user *fl,
+>  	fl->pd = USER_PD;
+>  
+>  	if (init.filelen && init.filefd) {
+> -		err = fastrpc_map_create(fl, init.filefd, init.filelen, 0, &map);
+> +		err = fastrpc_map_create(fl, init.filefd, init.filelen, 0, &map, true, 0);
+>  		if (err)
+>  			goto err;
+>  	}
+> @@ -2107,9 +2126,14 @@ static int fastrpc_req_mem_map(struct fastrpc_user *fl, char __user *argp)
+>  
+>  	if (copy_from_user(&req, argp, sizeof(req)))
+>  		return -EFAULT;
+> -
+> +	/*
+> +	 * Prevent mapping backward compatible DMA handles here, as they are
+> +	 * already mapped in the remote call.
+> +	 */
+> +	if (req.flags == FASTRPC_MAP_DMA_HANDLE)
+> +		return -EINVAL;
+>  	/* create SMMU mapping */
+> -	err = fastrpc_map_create(fl, req.fd, req.length, 0, &map);
+> +	err = fastrpc_map_create(fl, req.fd, req.length, 0, &map, true, 0);
+>  	if (err) {
+>  		dev_err(dev, "failed to map buffer, fd = %d\n", req.fd);
+>  		return err;
+> diff --git a/include/uapi/misc/fastrpc.h b/include/uapi/misc/fastrpc.h
+> index c6e2925f47e6..142ddaeed85f 100644
+> --- a/include/uapi/misc/fastrpc.h
+> +++ b/include/uapi/misc/fastrpc.h
+> @@ -44,6 +44,8 @@ enum fastrpc_map_flags {
+>  	FASTRPC_MAP_FD = 2,
+>  	FASTRPC_MAP_FD_DELAYED,
+>  	FASTRPC_MAP_FD_NOMAP = 16,
+> +	/* Map the DMA handle in the invoke call for backward compatibility */
+> +	FASTRPC_MAP_DMA_HANDLE = 0x20000,
+>  	FASTRPC_MAP_MAX,
+>  };
+>  
 
-On 7/22/26 6:12 PM, Hongyang Zhao wrote:
-> > Describe the GPIO-controlled VCC3V3_OUTPUT rail. This board-level rail
-> > supplies the two camera connectors and the 40-pin expansion header.
-> >
-> > Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
-> > ---
-> >  .../boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts | 24 ++++++++++++++++++++++
-> >  1 file changed, 24 insertions(+)
-> >
-> > diff --git a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
-> > index d8a9a7e47bdc..45514918562b 100644
-> > --- a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
-> > +++ b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
-> > @@ -214,6 +214,23 @@ vreg_usbhub_rest_1v8: regulator-usbhub-rest-1v8 {
-> >  		regulator-boot-on;
-> >  	};
-> >
-> > +	vreg_vcc3v3_output: regulator-vcc3v3-output {
-> > +		compatible = "regulator-fixed";
-> > +
-> > +		regulator-name = "vcc3v3_output";
-> > +		regulator-min-microvolt = <3300000>;
-> > +		regulator-max-microvolt = <3300000>;
-> > +
-> > +		gpio = <&tlmm 14 GPIO_ACTIVE_HIGH>;
-> > +		enable-active-high;
-> > +
-> > +		pinctrl-0 = <&vcc3v3_output_en>;
-> > +		pinctrl-names = "default";
-> > +
-> > +		regulator-always-on;
-> > +		regulator-boot-on;
->
-> Is it really on by default at boot?
-
-Before submitting the patch, I measured GPIO14 and found that it was
-already high before the kernel started, so I described the regulator
-as regulator-boot-on.
-
-I have now checked the bootloader code and confirmed that it does not
-drive GPIO14 high. According to the schematic, GPIO14 is actually pulled
-high by VREG_L18B_1P8.
-
-Therefore, I will remove regulator-boot-on in the next revision of the
-patch series while retaining Bryan's Reviewed-by tag.
-
-Thanks,
-Hongyang
