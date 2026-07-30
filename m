@@ -1,33 +1,39 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from ixit.cz (ixit.cz [185.100.197.86])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 981353F0AA9;
-	Thu, 30 Jul 2026 09:11:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 41E9B3C1F46;
+	Thu, 30 Jul 2026 09:15:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.100.197.86
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785402714; cv=none; b=QheiMaPYBPZ8Xst4BK70cFNBhbh6fPf+GQudkUi3fm6xFhBJyA6CjSwQmjt0/2EbYgUuW9GSMIEcXG7KucD2qAnILFsaZ8hZs7rRK6/tlVq7nn7K30gIU87G/axvEQXGgt6jQmuHtl2y8L6rqLdGsqHCzmZBLH4e0j5guqibqMg=
+	t=1785402928; cv=none; b=FcLxyT9aOiNxKH93JP7ZpepbJnKy2AciQyyj1F1bah1h4/fjThetVIlAXfYNTTpkGOKdtOlgZXXu4a/k/wS+iFfspNXPy1KviEkRPWIuwDrckryL7dGQZLf4pKYnfBCc85F7blKxXP0AQ4D04ybTRHUWStq7gNAOVNP8pRHfcpM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785402714; c=relaxed/simple;
-	bh=x99WJ7l+a+Wc9KUr9nDOnsRaM6WCCUFPpb1qDhsJXak=;
+	s=arc-20240116; t=1785402928; c=relaxed/simple;
+	bh=UmwN+WTJEJE7oKulH1Yg0C5zd6Y9t88c1da4+WxIRLU=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=GbgzyjtP/pznugl9CTdAvQ3dpsbGhSLdueeCSEC6BIglCFMPyiF3uutoH4WnZYdVzVENJssAfO6EdjAdk0XVmWJ07UIau+/pfSMoKrfpJkNA3xfubXsRQkDh6oSh2DxeSGI1mjB3BS390Tt5hGJW1CvEbU68tfcRmp2ak7aXFHI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=A87lX1Dj; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=sXLU0OGV+6H7aBPHBRQyRPCQpE97jHkqQ9I3WttXTC/WW6I8dMK6LEQycFd9pCXShlgGn9SQ8yHKt+i8HsHrl+JE0dl0x0Penb2HbP+ou/G8Ss7EpGRovhSAy5QAKuvSrs0Wq/5B38e9iJmgTycehxSpqU2ffWfSV4c7mO1moy0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=bFrob3te; arc=none smtp.client-ip=185.100.197.86
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="A87lX1Dj"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 621671F000E9;
-	Thu, 30 Jul 2026 09:11:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785402712;
-	bh=QK4tDLOcM/21OJCALRNmyHHG89ja+dYbL/N4PbUWHbk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=A87lX1Djn1UMlVJWg/0kKRKtEUrE7q5RoT5ozDUPvCOx5P0fCO2OAsg6LPYaAYf1h
-	 4Xxrkx/GQlZ0pMf/PQuiKWa0rFUKiWZMs2JVhHQ6NOI2/2sSMsT6O5GsEVyONnoblG
-	 yFXB0bjpcmz6Xbh7LsaBbE6GHcx9gbkvCf72NWrb9WwvthsF+u0hMvwxcFLrngjMCH
-	 fNlATwYZX8sy4anrf0dUOcmrtgxTM5AbauBSULAtTX1LHq1NJFZ1OTduy7T6UMHNZ+
-	 fDfIRvsxEHEJ+cgXhVpSn4xBZZBz59gKMIAYlAXrYQMTXBHsAMSCqUvHIDevE2PBDZ
-	 fsdtPXxGthNfw==
-Message-ID: <ec991e49-c23a-4c11-b0bb-32c12c427eee@kernel.org>
-Date: Thu, 30 Jul 2026 11:11:41 +0200
+	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="bFrob3te"
+Received: from [172.20.10.2] (78-80-17-116.customers.tmcz.cz [78.80.17.116])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id 4E01153401D8;
+	Thu, 30 Jul 2026 11:15:18 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1785402919;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=N+hma7a5kVC2Y5gdV6R4vjgQiSTBA8PLN2bcB14p5/0=;
+	b=bFrob3te3onucFY7WzPjAAeVNTL2d1dTRXkuHXKFHilSYM41Y5PmdYb5vKqosSy13EaJtt
+	RBtYQdRiIm9/GD+C5qhYw39Ue1fls2dvMoyVeq4Zm5diK4BFyYFNOJP6qMZcDQt6sG6AKC
+	aNUHnBzBFpr71qyNPnXYaKomQAlQfeI=
+Message-ID: <3648ba47-fa2a-4e2d-a3f2-040cd9568ace@ixit.cz>
+Date: Thu, 30 Jul 2026 11:15:17 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,138 +41,257 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 0/8] ASoC: SDCA: enable on DT platforms and add
- Qualcomm WCD9378 (Tambora) codec
-To: Charles Keepax <ckeepax@opensource.cirrus.com>
-Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
- Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- Maciej Strozek <mstrozek@opensource.cirrus.com>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Srinivas Kandagatla <srini@kernel.org>,
- Bard Liao <yung-chuan.liao@linux.intel.com>,
- Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
- Richard Fitzgerald <rf@opensource.cirrus.com>,
- Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
- linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org, patches@opensource.cirrus.com,
- linux-kernel@vger.kernel.org
-References: <20260722234221.884765-1-srinivas.kandagatla@oss.qualcomm.com>
- <amHqO5pMFmKRNYTT@opensource.cirrus.com>
- <cedd89d4-28ec-4a86-99ab-249637d81736@kernel.org>
- <amsUlWAueA51eSDC@opensource.cirrus.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
+Subject: Re: [PATCH RESEND v9 6/9] media: qcom: camss: csiphy-3ph: Add Gen2
+ v1.1 MIPI CSI-2 C-PHY init
+To: Frank Li <Frank.li@oss.nxp.com>
+Cc: Robert Foss <rfoss@kernel.org>, Todor Tomov <todor.too@gmail.com>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Bryan O'Donoghue <bod@kernel.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Luca Weiss <luca.weiss@fairphone.com>, Petr Hodina <phodina@protonmail.com>,
+ "Dr. Git" <drgitx@gmail.com>, Cory Keitz <ckeitz@amazon.com>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Hans Verkuil <hverkuil@kernel.org>,
+ Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>, Frank Li
+ <Frank.Li@nxp.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Kieran Bingham <kbingham@kernel.org>,
+ Sakari Ailus <sakari.ailus@linux.intel.com>, linux-media@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ phone-devel@vger.kernel.org
+References: <20260729-qcom-cphy-v9-0-1f8d9fdab037@ixit.cz>
+ <20260729-qcom-cphy-v9-6-1f8d9fdab037@ixit.cz>
+ <ampyJ9FmwKmpE0YW@lizhi-Precision-Tower-5810>
 Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <amsUlWAueA51eSDC@opensource.cirrus.com>
-Content-Type: text/plain; charset=UTF-8
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <ampyJ9FmwKmpE0YW@lizhi-Precision-Tower-5810>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 30/07/2026 11:08, Charles Keepax wrote:
-> On Wed, Jul 29, 2026 at 01:41:57PM +0200, Krzysztof Kozlowski wrote:
->> On 23/07/2026 12:17, Charles Keepax wrote:
->>> On Thu, Jul 23, 2026 at 12:42:10AM +0100, Srinivas Kandagatla wrote:
->>>> At Linux Plumbers 2025 in the Devicetree MC I raised the "SDCA and the
->>>> classic ACPI-DT problem" [1]: MIPI SDCA is built around ACPI/DisCo
->>>> firmware descriptors, and the in-tree ASoC SDCA framework
->>>> (sound/soc/sdca/) enumerates functions, entities, controls and PDEs by
->>>> walking those tables. On ARM64 DT platforms there is no DisCo, so the
->>>> framework is unreachable and sdca codecs will not be able to use the
->>>> generic sdca drivers and duplicating.
->>>>
->>>> The direction from that discussion was to let DT platforms reuse the
->>>> same class/function auxiliary driver plumbing and have codec drivers
->>>> supply the small amount of static function/entity metadata that DisCo
->>>> would otherwise carry, plus hooks for device-specific bring-up.  This
->>>> series is a first cut at that, with the Qualcomm WCD9378 ("Tambora")
->>>> SDCA codec on the Glymur CRD as the first consumer. Static table that in
->>>> part of this codec is generated from acpi tables.
->>>
->>> Fascinating, a shame I missed the discussion. Main question
->>> I have is what was the reasoning behind using static tables
->>> rather than just putting the data in device tree? All the core
->>> code uses the generic firmware parsing function so should be
->>> perfectly capable of parsing the data out of device tree. The
->>> only bit that is missing is really the sdca_lookup_functions
->>> bit you ifdef out, but updating that to also support DT should
->>> be pretty simple.
->>>
->>> Looking through your presentation (thanks for linking that),
->>> am I to guess this was mostly a device tree people didn't like
->>> the stuff SDCA contains problem? I do see that some of the SDCA
->>> stuff isn't an exact match for how Linux has traditionally liked
->>> to handle DT but also really not sure I see any benefit to DT
->>> and ACPI support being different.
+On 29/07/2026 23:35, Frank Li wrote:
+> On Wed, Jul 29, 2026 at 10:20:01PM +0200, David Heidelberg wrote:
+>> Add a PHY configuration sequence for the sdm845 which uses a Qualcomm
+>> Gen 2 version 1.1 CSI-2 PHY.
 >>
->> We do not describe in DT properties which are implied/deducible from the
->> compatible, because it is redundant and we do not like redundancy.
->>
->> The device is WCD9378 as defined by compatible, thus all or most of SDCA
->> properties do not belong to DT.
+>> The PHY can be configured as two phase or three phase in C-PHY or D-PHY
+>> mode.
 > 
-> Do we really want to take this line? It basically forces us to
-> do "board files" again, which is the problem DT was solving in
+> too much or, according to my understand D-PHY use 2 phase,  C-PHY use 3
+> phase?
+> 
+> The PHY can be configured as two phase (D-PHY) or three phase (C-PHY) ?
 
-Again? We since long, long, long do board files and they are approved.
-Although now they are called software nodes, but same stuff.
-
-> the first place. I can't speak for Qualcomm, but at least for
-> our devices the SDCA properties can change a fair amount
-> between different laptops.
-
-Sure, all properties which are not implied by compatible make sense for DT.
+Yes, I'll address the wrong wording in the next version then :)
 
 > 
-> Also there is the fact SDCA is already a thing and is gaining a
-> fair amount of traction pushing against it does really feel like
-> it is just making life much harder for ourselves.
+> Frank
+> 
+>> This configuration supports three-phase C-PHY mode.
+>>
+>> Acked-by: Cory Keitz <ckeitz@amazon.com>
+>> Signed-off-by: David Heidelberg <david@ixit.cz>
+>> ---
+>>   .../platform/qcom/camss/camss-csiphy-3ph-1-0.c     | 78 +++++++++++++++++++++-
+>>   1 file changed, 76 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/media/platform/qcom/camss/camss-csiphy-3ph-1-0.c b/drivers/media/platform/qcom/camss/camss-csiphy-3ph-1-0.c
+>> index 5c07aa9d19c51..83de89a88dbb1 100644
+>> --- a/drivers/media/platform/qcom/camss/camss-csiphy-3ph-1-0.c
+>> +++ b/drivers/media/platform/qcom/camss/camss-csiphy-3ph-1-0.c
+>> @@ -45,16 +45,23 @@
+>>
+>>   #define CSIPHY_3PH_CMN_CSI_COMMON_CTRLn(offset, n)	((offset) + 0x4 * (n))
+>>   #define CSIPHY_3PH_CMN_CSI_COMMON_CTRL5_CLK_ENABLE	BIT(7)
+>>   #define CSIPHY_3PH_CMN_CSI_COMMON_CTRL6_COMMON_PWRDN_B	BIT(0)
+>>   #define CSIPHY_3PH_CMN_CSI_COMMON_CTRL6_SHOW_REV_ID	BIT(1)
+>>   #define CSIPHY_3PH_CMN_CSI_COMMON_STATUSn(offset, common_status_offset, n) \
+>>   	((offset) + (common_status_offset) + 0x4 * (n))
+>>
+>> +#define CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(n) \
+>> +	(0x0100 + ((n) * 0x4))
+>> +#define CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(n) \
+>> +	(0x0300 + ((n) * 0x4))
+>> +#define CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(n) \
+>> +	(0x0500 + ((n) * 0x4))
+>> +
+>>   #define CSIPHY_DEFAULT_PARAMS		0
+>>   #define CSIPHY_LANE_ENABLE		1
+>>   #define CSIPHY_SETTLE_CNT_LOWER_BYTE	2
+>>   #define CSIPHY_SETTLE_CNT_HIGHER_BYTE	3
+>>   #define CSIPHY_DNP_PARAMS		4
+>>   #define CSIPHY_2PH_REGS			5
+>>   #define CSIPHY_3PH_REGS			6
+>>   #define CSIPHY_SKEW_CAL			7
+>> @@ -141,16 +148,17 @@ csiphy_lane_regs lane_regs_sa8775p[] = {
+>>   	{0x0460, 0xFD, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x0464, 0x7F, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x065C, 0x00, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x0660, 0xFD, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x0664, 0x7F, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   };
+>>
+>>   /* GEN2 1.0 2PH */
+>> +/* 5 entries: clock + 4 lanes */
+>>   static const struct
+>>   csiphy_lane_regs lane_regs_sdm845[] = {
+>>   	{0x0004, 0x0C, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x002C, 0x01, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x0034, 0x0F, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x001C, 0x0A, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x0014, 0x60, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x0028, 0x00, 0x00, CSIPHY_DNP_PARAMS},
+>> @@ -215,16 +223,82 @@ csiphy_lane_regs lane_regs_sdm845[] = {
+>>   	{0x0608, 0x00, 0x00, CSIPHY_SETTLE_CNT_LOWER_BYTE},
+>>   	{0x060C, 0x00, 0x00, CSIPHY_DNP_PARAMS},
+>>   	{0x0610, 0x52, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x0638, 0xFE, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x0660, 0x00, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x0664, 0x7F, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   };
+>>
+>> +/* GEN2 1.0 3PH */
+>> +/* 3 entries: 3 lanes (C-PHY) */
+>> +static const struct
+>> +csiphy_lane_regs lane_regs_sdm845_3ph[] = {
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(23), 0x43, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(26), 0xa0, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(27), 0x25, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(1),  0x06, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(3),  0x12, 0x00, CSIPHY_SETTLE_CNT_LOWER_BYTE},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(2),  0x00, 0x00, CSIPHY_SETTLE_CNT_HIGHER_BYTE},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(5),  0x20, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(20), 0x00, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(6),  0x3e, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(7),  0x41, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(8),  0x41, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(9),  0x7f, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(10), 0x00, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(11), 0x00, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(17), 0x12, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(24), 0x02, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(51), 0x41, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(25), 0x00, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN1_CSI_3PH_CTRLn_ADDR(55), 0x51, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(23), 0x43, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(26), 0xa0, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(27), 0x25, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(1),  0x06, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(3),  0x12, 0x00, CSIPHY_SETTLE_CNT_LOWER_BYTE},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(2),  0x00, 0x00, CSIPHY_SETTLE_CNT_HIGHER_BYTE},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(5),  0x20, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(20), 0x00, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(6),  0x3e, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(7),  0x41, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(8),  0x41, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(9),  0x7f, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(10), 0x00, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(11), 0x00, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(17), 0x12, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(24), 0x02, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(51), 0x41, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(25), 0x00, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN3_CSI_3PH_CTRLn_ADDR(55), 0x51, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(23), 0x43, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(26), 0xa0, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(27), 0x25, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(1),  0x06, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(3),  0x12, 0x00, CSIPHY_SETTLE_CNT_LOWER_BYTE},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(2),  0x00, 0x00, CSIPHY_SETTLE_CNT_HIGHER_BYTE},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(5),  0x20, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(20), 0x00, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(6),  0x3e, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(7),  0x41, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(8),  0x41, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(9),  0x7f, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(10), 0x00, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(11), 0x00, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(17), 0x12, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(24), 0x02, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(51), 0x41, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(25), 0x00, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +	{CSIPHY_LN5_CSI_3PH_CTRLn_ADDR(55), 0x51, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> +
+>> +};
+>> +
+>>   /* GEN2 1.1 2PH */
+>>   static const struct
+>>   csiphy_lane_regs lane_regs_sc8280xp[] = {
+>>   	{0x0004, 0x0C, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x002C, 0x01, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x0034, 0x0F, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x001C, 0x0A, 0x00, CSIPHY_DEFAULT_PARAMS},
+>>   	{0x0014, 0x60, 0x00, CSIPHY_DEFAULT_PARAMS},
+>> @@ -1169,18 +1243,18 @@ static void csiphy_lanes_enable(struct csiphy_device *csiphy,
+>>   	int i;
+>>
+>>   	switch (csiphy->camss->res->version) {
+>>   	case CAMSS_845:
+>>   		if (c->phy_cfg == V4L2_MBUS_CSI2_DPHY) {
+>>   			regs->lane_regs = &lane_regs_sdm845[0];
+>>   			regs->lane_array_size = ARRAY_SIZE(lane_regs_sdm845);
+>>   		} else if (c->phy_cfg == V4L2_MBUS_CSI2_CPHY) {
+>> -			regs->lane_regs = NULL;
+>> -			regs->lane_array_size = 0;
+>> +			regs->lane_regs = &lane_regs_sdm845_3ph[0];
+>> +			regs->lane_array_size = ARRAY_SIZE(lane_regs_sdm845_3ph);
+>>   		}
+>>   		break;
+>>   	case CAMSS_2290:
+>>   	case CAMSS_6150:
+>>   		if (c->phy_cfg == V4L2_MBUS_CSI2_DPHY) {
+>>   			regs->lane_regs = &lane_regs_qcm2290[0];
+>>   			regs->lane_array_size = ARRAY_SIZE(lane_regs_qcm2290);
+>>   		} else if (c->phy_cfg == V4L2_MBUS_CSI2_CPHY) {
+>>
+>> --
+>> 2.53.0
+>>
 
-I do not understand this comment. I am not pushing against SDCA. I am
-giving you guideline what can go to DT. Are you saying that SDCA somehow
-received review/approval of DT maintainers, so that we are bound by it now?
+-- 
+David Heidelberg
 
-
-Best regards,
-Krzysztof
