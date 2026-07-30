@@ -1,33 +1,69 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 87E083B6C1E;
-	Thu, 30 Jul 2026 22:55:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DAA6A3CC324
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 22:55:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.171
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785452119; cv=none; b=G0SIQQUhSTrrVTDcTC+sWSHeNf0CwoKzvthbp8ntehRKu8lghvkYGwHJHLzD4jqK3WT/57G5K2zcUtcmgvfA62Aj7/gc4Tpx14UOIIMUsDaDMB45MMYd0vSyUWX81J1PykEZOsZ0WsItn22K7itGb7QcEev6LdiYQldfTdfzT6U=
+	t=1785452130; cv=none; b=CIb3eOD/Yrs4Sg3q/b4psgR6i+JOw3Et9NOarS17GQGRDQvMficy/AjhG15ssrLuxy6rR9NFzRQU0mb3LW0M7Bh2p5G/xc5MT47JqYzd6nDUZV6s1xcl4uSSyY9XzrcZAfwlAP5CqYYIDoE+FCnYkBTAut7uo/NOjpkyNjlM8Jc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785452119; c=relaxed/simple;
-	bh=9+dzL1lfdELc64z30DFpqf8koJ3+Few0YN/M+bKcERU=;
+	s=arc-20240116; t=1785452130; c=relaxed/simple;
+	bh=JnHBnZJqMnAruKI0EV6KVHEf+ZLz1OA1FdQcaaHjlEw=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=pvjNy5NGTbBEzrYaoiMVV2IsJE63mKYeaEpSk4DIVvZnaRQfwBSZEkF8VttVvDnksFnv6CmRYhuLYB7v0L5CevtcQdq9Y14b/iLPQD6CbB/wYcLHvdZ2/b3cEM8Akw2GZEm1/1xrb0GslfwBz2T6mhWECjeBbK1/bF89NIPd7pY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jj0d29U4; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=LZSDmgehGgoWZWAKaD6fw/1cd1Sh6lEpYuVUm9zWOABZF7V9zqXBdtmQ1mvRl4xULlfgMhJ0krITSa+C4WJfIE17rnxnWL1CCFHzQjmdl2Re6BV/hMrO6X1jUTn6lFIVpeUasncqsyO6T7sC+ffvZrtZOrbTJdQyDuSp+/wEFcw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=rG8jhTRJ; arc=none smtp.client-ip=209.85.214.171
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jj0d29U4"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7912E1F000E9;
-	Thu, 30 Jul 2026 22:55:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785452118;
-	bh=8n6EZsu6zxAP8hs+Er60xjQBLbhJq/AwGa+qOiGSm9o=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=jj0d29U48RyU7uU6uFtekFtpZcNTVxIgH7/pml9vxIKxwE3F46aQcV0FGxijiaeq0
-	 jlXAR7WJa6e78WcPlV0ZeOUp7IJZ+fZbIutoCVfUvxdkNuJeVE2FuTBshrbzQkk6Vs
-	 yVvkEBhp181cjEVGf7A080RIK6d9bUJtbH0SsoSquFGJGs7eZXZDRg628FdGg4hFak
-	 mlg91EOcuoGIRGRZ0d3yfdibc5wRLV0qbBd848WuirVSwCdtQAw4Mz9quB+8FTRsqQ
-	 nMzz1pr4Akve3WjOZhu6oXSsC1mFE/XHxBjma9vcAA3eTa4ahB5KylE+FO+2DEQZDH
-	 RBhp09GeL/wug==
-Message-ID: <58fa6d76-b61f-4f8c-8b89-56fe103495ce@kernel.org>
-Date: Thu, 30 Jul 2026 23:55:13 +0100
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="rG8jhTRJ"
+Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2cab973140bso3671655ad.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 15:55:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785452128; x=1786056928; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=rZJMc2oKGKKsdo81EEeZxLgwe/ZEUa/SJJOiMzrescI=;
+        b=rG8jhTRJev1KWEfcu+bIIUUxMVA8nbZ8j+O1jgMnzG4irMBIT/gsNU9dG+oPdhGH6D
+         cByuKO5Ey9FP7ke6hwkVCqSUz4nzBe8OFRT5nlrfXTfo79lGIW2EVmjYQNoYDN1jE54z
+         rUahwoSb3Ewzb9EZJt6qWKZk98aCFuBuyF/Q0/+pvNGFKJjXwRDv2bzPdEcYd5nedrf6
+         CXsDUux/bnIOo8XbgIYYK50J4G4XDLHxVoN4VlPf+NKrZA/17MNjoaimMD3U4ZLD1IzJ
+         5kYqEtuiH+XXkJkOdlbleYg1P2SLLNiR/auxpjNMi6mJeVvH1Ch4QCjnFItPvxSVY/JN
+         3tVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785452128; x=1786056928;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=rZJMc2oKGKKsdo81EEeZxLgwe/ZEUa/SJJOiMzrescI=;
+        b=a77VFzuvjRzWHDj5JlNqcY/xOD3h5ANmzRY6lqZu8ncEycCBBXiYTHpjmfzIooz0Ue
+         0kINaDo1LA+w33rI0PV+qwKF6ahplPYe+GOZeHfGDuQeqyXRtMFTzQvNLaIFFV/utDwe
+         1Y8VsAy5iLz2vQ8VbpxApE592nP8T/DvaobrK9KyY9YW5T4HWfGPlfucAaV5gU1Ye0UQ
+         j/+GDWWAM8QSzsml4a3maCiBMTnh37cFUUwtV4bHdaLyRx82JmcJdxRpKwUsJ93MDQex
+         1jIpCGnqMBiGx4T/JMvxwBhH1o6nqzOJDMcTJ5yfqiiGZsI5PLX3k1EGswWUoa3mcUt+
+         DIFQ==
+X-Forwarded-Encrypted: i=1; AHgh+RpFWrHbURPLlQNcFZvsh8VzzJ4v8GrC9uWyHjIIgcsCKy6bpraJiVOKZThSNaeIGkonZalMjfHgOEZel0wI@vger.kernel.org
+X-Gm-Message-State: AOJu0YwvfCnoKVMrBFLtlNR/vWyb8rVUbgOpp+iRCctyd6a1IFt3ZQpV
+	yHr+8xqYEKveVPen0lw5SKy/utbDbacqzW4JdSKGSYD/SRUrPk1rqY8/
+X-Gm-Gg: AR+sD13MMvlD+sjmac0Ub6SlfGTlDB2GwTWruD2XyB3i+Iaw7zMEeGMm94oHL8BYVh7
+	KFeuI7Kcy9g/sEpn2jorKn0HmBdnFYPhDT5pfqsTL9UGRZoNewL4/TjYNur+zrK76ofrYTxRWJE
+	vcPlN61K4Q6cEvO+qRZVWzxFWQRmOU9BdHl+6bDNfSlz+JSNaSKk6+yjbhbRleYQbRgNQmPFf8M
+	UZMvOfuA4JNNHRn7tRAlgyASw0lUMF1RSxjIJnzIJfXWOKtYiyuZZ91yFsKxrPm3zSg/p1EuJbn
+	OW6f/qEckFdQG/eP5GKHgGMo3Jp0slxMJpX/BpCiW6XRlx4vIO4+dF4KzowNw2IKdClYbkgOLZA
+	2zEQxNshY8XvtWSx94N8t4CowreOHAmQJl5gShcQJN0otTFO69BVegBA8WmrB7nk9iaUcJ0pDSy
+	J9OIkYkq7AXaRQ20QoHfAJCxhzFXGriONaejATeapfanZZWQnyUBnyQn1Z1vFSxRspGlquZxKZQ
+	bWFwuOM6bNBwQWdMLsvBVrvX9wwCPgzQ0bKuw==
+X-Received: by 2002:a17:902:e845:b0:2cc:c9cb:371c with SMTP id d9443c01a7336-2d035cd7591mr41764995ad.40.1785452128027;
+        Thu, 30 Jul 2026 15:55:28 -0700 (PDT)
+Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31504927a7bsm27220284eec.0.2026.07.30.15.55.26
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 30 Jul 2026 15:55:27 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <eddc90dc-3223-4356-9e9b-350af904b144@roeck-us.net>
+Date: Thu, 30 Jul 2026 15:55:26 -0700
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,127 +71,130 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 08/15] ASoC: qdsp6: q6afe-dai: add internal mi2s
- support
-To: Richard Acayan <mailingradian@gmail.com>,
- Srinivas Kandagatla <srini@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
- Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
- Takashi Iwai <tiwai@suse.com>, Konrad Dybcio <konradybcio@kernel.org>,
- linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org
-Cc: Nickolay Goppen <setotau@mainlining.org>,
- Adam Skladowski <a39.skl@gmail.com>,
- Vladimir Lypak <vladimir.lypak@gmail.com>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
- Johan Hovold <johan@kernel.org>, Kees Cook <kees@kernel.org>,
- Charles Keepax <ckeepax@opensource.cirrus.com>,
- Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
-References: <20260730174353.108023-1-mailingradian@gmail.com>
- <20260730174353.108023-9-mailingradian@gmail.com>
+Subject: Re: [PATCH 2/3] genirq: Export NMI APIs
+To: Doug Anderson <dianders@chromium.org>, mrungta@google.com
+Cc: Wim Van Sebroeck <wim@linux-watchdog.org>,
+ Thomas Gleixner <tglx@kernel.org>, linux-watchdog@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ "Kirill A. Shutemov" <kas@kernel.org>
+References: <20260730-qcom-wdt-nmi-series-v1-0-3aa86d162914@google.com>
+ <20260730-qcom-wdt-nmi-series-v1-2-3aa86d162914@google.com>
+ <CAD=FV=V+nrmtK6FJ2G+LGnvxkLEWMR+2A253-gQ2smxf9LoEWg@mail.gmail.com>
 Content-Language: en-US
-From: Srinivas Kandagatla <srini@kernel.org>
-In-Reply-To: <20260730174353.108023-9-mailingradian@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Guenter Roeck <linux@roeck-us.net>
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ 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
+ np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
+In-Reply-To: <CAD=FV=V+nrmtK6FJ2G+LGnvxkLEWMR+2A253-gQ2smxf9LoEWg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-
-
-On 7/30/26 6:43 PM, Richard Acayan wrote:
-> The bindings for LPI MI2S ports, originally exclusive to q6apm, can be
-> used for internal MI2S ports on q6afe. Add the internal MI2S ports found
-> on the SDM660 internal sound card using the LPI MI2S bindings.
+On 7/30/26 14:49, Doug Anderson wrote:
+> Hi,
 > 
-> Signed-off-by: Richard Acayan <mailingradian@gmail.com>
-> ---
-
-Reviewed-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-
---srini
-
->  sound/soc/qcom/qdsp6/q6afe-dai.c | 48 ++++++++++++++++++++++++++++++++
->  1 file changed, 48 insertions(+)
+> On Thu, Jul 30, 2026 at 2:33 PM Mayank Rungta via B4 Relay
+> <devnull+mrungta.google.com@kernel.org> wrote:
+>>
+>> From: Mayank Rungta <mrungta@google.com>
+>>
+>> Currently, request_nmi(), free_nmi(), enable_nmi() and disable_nmi_nosync()
+>> are restricted to built-in kernel code because they are not exported to
+>> loadable modules.
+>>
+>> Export these APIs to allow loadable modules to register and manage NMIs.
+>> This allows watchdog drivers configured as loadable modules to register
+>> their bark interrupt as an NMI.
+>>
+>> Signed-off-by: Mayank Rungta <mrungta@google.com>
+>> ---
+>>   kernel/irq/manage.c | 4 ++++
+>>   1 file changed, 4 insertions(+)
+>>
+>> diff --git a/kernel/irq/manage.c b/kernel/irq/manage.c
+>> index 2fbff2618a1e..fb0b8da32f4c 100644
+>> --- a/kernel/irq/manage.c
+>> +++ b/kernel/irq/manage.c
+>> @@ -766,6 +766,7 @@ void disable_nmi_nosync(unsigned int irq)
+>>   {
+>>          disable_irq_nosync(irq);
+>>   }
+>> +EXPORT_SYMBOL_GPL(disable_nmi_nosync);
+>>
+>>   void __enable_irq(struct irq_desc *desc)
+>>   {
+>> @@ -833,6 +834,7 @@ void enable_nmi(unsigned int irq)
+>>   {
+>>          enable_irq(irq);
+>>   }
+>> +EXPORT_SYMBOL_GPL(enable_nmi);
+>>
+>>   static int set_irq_wake_real(unsigned int irq, unsigned int on)
+>>   {
+>> @@ -2080,6 +2082,7 @@ const void *free_nmi(unsigned int irq, void *dev_id)
+>>
+>>          return __cleanup_nmi(irq, desc);
+>>   }
+>> +EXPORT_SYMBOL_GPL(free_nmi);
+>>
+>>   /**
+>>    * request_threaded_irq - allocate an interrupt line
+>> @@ -2342,6 +2345,7 @@ int request_nmi(unsigned int irq, irq_handler_t handler,
+>>
+>>          return retval;
+>>   }
+>> +EXPORT_SYMBOL_GPL(request_nmi);
 > 
-> diff --git a/sound/soc/qcom/qdsp6/q6afe-dai.c b/sound/soc/qcom/qdsp6/q6afe-dai.c
-> index a0d21034a626..920345609d2c 100644
-> --- a/sound/soc/qcom/qdsp6/q6afe-dai.c
-> +++ b/sound/soc/qcom/qdsp6/q6afe-dai.c
-> @@ -412,6 +412,8 @@ static int q6afe_dai_prepare(struct snd_pcm_substream *substream,
->  	case SENARY_MI2S_RX ... SENARY_MI2S_TX:
->  	case QUINARY_MI2S_RX ... QUINARY_MI2S_TX:
->  	case PRIMARY_MI2S_RX ... QUATERNARY_MI2S_TX:
-> +	case LPI_MI2S_RX_0 ... LPI_MI2S_TX_4:
-> +	case LPI_MI2S_RX_5 ... LPI_MI2S_TX_6:
->  		rc = q6afe_i2s_port_prepare(dai_data->port[dai->id],
->  			       &dai_data->port_config[dai->id].i2s_cfg);
->  		if (rc < 0) {
-> @@ -665,6 +667,21 @@ static const struct snd_soc_dapm_route q6afe_dapm_routes[] = {
->  
->  	/* USB playback AFE port receives data for playback, hence use the RX port */
->  	{"USB Playback", NULL, "USB_RX"},
-> +
-> +	{"LPI RX0 MI2S Playback", NULL, "LPI_MI2S_RX_0"},
-> +	{"LPI_MI2S_TX_0", NULL, "LPI TX0 MI2S Capture"},
-> +	{"LPI RX1 MI2S Playback", NULL, "LPI_MI2S_RX_1"},
-> +	{"LPI_MI2S_TX_1", NULL, "LPI TX1 MI2S Capture"},
-> +	{"LPI RX2 MI2S Playback", NULL, "LPI_MI2S_RX_2"},
-> +	{"LPI_MI2S_TX_2", NULL, "LPI TX2 MI2S Capture"},
-> +	{"LPI RX3 MI2S Playback", NULL, "LPI_MI2S_RX_3"},
-> +	{"LPI_MI2S_TX_3", NULL, "LPI TX3 MI2S Capture"},
-> +	{"LPI RX4 MI2S Playback", NULL, "LPI_MI2S_RX_4"},
-> +	{"LPI_MI2S_TX_4", NULL, "LPI TX4 MI2S Capture"},
-> +	{"LPI RX5 MI2S Playback", NULL, "LPI_MI2S_RX_5"},
-> +	{"LPI_MI2S_TX_5", NULL, "LPI TX5 MI2S Capture"},
-> +	{"LPI RX6 MI2S Playback", NULL, "LPI_MI2S_RX_6"},
-> +	{"LPI_MI2S_TX_6", NULL, "LPI TX6 MI2S Capture"},
->  };
->  
->  static int msm_dai_q6_dai_probe(struct snd_soc_dai *dai)
-> @@ -1011,6 +1028,35 @@ static const struct snd_soc_dapm_widget q6afe_dai_widgets[] = {
->  		0, SND_SOC_NOPM, 0, 0),
->  
->  	SND_SOC_DAPM_AIF_IN("USB_RX", NULL, 0, SND_SOC_NOPM, 0, 0),
-> +
-> +	SND_SOC_DAPM_AIF_IN("LPI_MI2S_RX_0", NULL,
-> +		0, SND_SOC_NOPM, 0, 0),
-> +	SND_SOC_DAPM_AIF_OUT("LPI_MI2S_TX_0", NULL,
-> +		0, SND_SOC_NOPM, 0, 0),
-> +	SND_SOC_DAPM_AIF_IN("LPI_MI2S_RX_1", NULL,
-> +		0, SND_SOC_NOPM, 0, 0),
-> +	SND_SOC_DAPM_AIF_OUT("LPI_MI2S_TX_1", NULL,
-> +		0, SND_SOC_NOPM, 0, 0),
-> +	SND_SOC_DAPM_AIF_IN("LPI_MI2S_RX_2", NULL,
-> +		0, SND_SOC_NOPM, 0, 0),
-> +	SND_SOC_DAPM_AIF_OUT("LPI_MI2S_TX_2", NULL,
-> +		0, SND_SOC_NOPM, 0, 0),
-> +	SND_SOC_DAPM_AIF_IN("LPI_MI2S_RX_3", NULL,
-> +		0, SND_SOC_NOPM, 0, 0),
-> +	SND_SOC_DAPM_AIF_OUT("LPI_MI2S_TX_3", NULL,
-> +		0, SND_SOC_NOPM, 0, 0),
-> +	SND_SOC_DAPM_AIF_IN("LPI_MI2S_RX_4", NULL,
-> +		0, SND_SOC_NOPM, 0, 0),
-> +	SND_SOC_DAPM_AIF_OUT("LPI_MI2S_TX_4", NULL,
-> +		0, SND_SOC_NOPM, 0, 0),
-> +	SND_SOC_DAPM_AIF_IN("LPI_MI2S_RX_5", NULL,
-> +		0, SND_SOC_NOPM, 0, 0),
-> +	SND_SOC_DAPM_AIF_OUT("LPI_MI2S_TX_5", NULL,
-> +		0, SND_SOC_NOPM, 0, 0),
-> +	SND_SOC_DAPM_AIF_IN("LPI_MI2S_RX_6", NULL,
-> +		0, SND_SOC_NOPM, 0, 0),
-> +	SND_SOC_DAPM_AIF_OUT("LPI_MI2S_TX_6", NULL,
-> +		0, SND_SOC_NOPM, 0, 0),
->  };
->  
->  static const struct snd_soc_component_driver q6afe_dai_component = {
-> @@ -1045,6 +1091,8 @@ static void of_q6afe_parse_dai_data(struct device *dev,
->  		case SENARY_MI2S_RX ... SENARY_MI2S_TX:
->  		case QUINARY_MI2S_RX ... QUINARY_MI2S_TX:
->  		case PRIMARY_MI2S_RX ... QUATERNARY_MI2S_TX:
-> +		case LPI_MI2S_RX_0 ... LPI_MI2S_TX_4:
-> +		case LPI_MI2S_RX_5 ... LPI_MI2S_TX_6:
->  			priv = &data->priv[id];
->  			ret = of_property_read_variable_u32_array(node,
->  							"qcom,sd-lines",
+> This seems reasonable to me. One thought I had was that we could
+> possibly get by with fewer exported symbols by changing
+> disable_nmi_nosync() and enable_nmi() to "static inline" functions in
+> the header file. That being said, what Mayank has here feels slightly
+> better to me.
+> 
+
+I don't claim to understand the NMI APIs used, but Sashiko's feedback
+seems real to me. Someone who knows that code will need to confirm that
+there are no unexpected pitfalls.
+
+Thanks,
+Guenter
 
