@@ -1,85 +1,84 @@
-Received: from mail-vk1-f181.google.com (mail-vk1-f181.google.com [209.85.221.181])
+Received: from mail-vk1-f178.google.com (mail-vk1-f178.google.com [209.85.221.178])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38D393921D5
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 21:47:13 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F343E3C0621
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 21:49:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.178
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785448034; cv=none; b=W7PJPmPMTx72TK0Vw5LhuR3nbI+l5aFqmfiqgn8AJmY/yJy9IrkXGfF3i0Tg8GuhHNYux/wb5qQ+mFl8Dvz+udXnLOwrRaqbASmzpna0cDcdQnYT+fLzzES7xL5Jh2d2XENOC0Q6DBJNj+3+wecMrKx0sXdOP1gJieVTPxq3IU8=
+	t=1785448189; cv=none; b=AUgRUsh/TT20OnkW/LPzSGOnMI4SjNM6gB4B9LttMEs/4KJbq2gNtDY47B+H3uvjpHJHrSzWjP/QlR5tK7PKrx0WqYQlYVexDbXIvkx5MNEtf9ggGHUpPa9Pi6rhLKHVm+NXVF46RinPHN3THyM6m548DvKmNdE0FMZp4X7qAyc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785448034; c=relaxed/simple;
-	bh=3zePUSKPuVEhoLen7Dlseb8ZqqhKGqql9NuBj13jea0=;
+	s=arc-20240116; t=1785448189; c=relaxed/simple;
+	bh=lx0FGf5TmIOgBSRTo5B2LdRy2tEopY15uCgKfmlb5gw=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=B8IzE5WNTF8EF7B6rio8u4zpHyo4th3lsXGimQpfolO9v5uckLdtypwxu72ROXiHYe0wSnms36Pm0Sh1vCMCaHGSUOP3WyZdELNavrL1wRHiK6SlabwodQkgwpMEswDtwEFiX1CSN4FwONf711Ab1IbcHDBwS+wc74TjIelpEcs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=T6fyRCtX; arc=none smtp.client-ip=209.85.221.181
+	 To:Cc:Content-Type; b=tZQBJsOlbQrZ0ZsvFAhsjtCK/L2fxQv8WDz3JmIpmZR/INz2yXp8Qr/n3QNvfAAaW8EFhSNwuSk91jLRx+GT5F4nsKifI7l54Re9lsZ5Nb7jk1AZ8yw1BlysWmzkuh7vdytmEFCtnUkhX4wBEnITjEPM4iqOLldMRG/VDytQ36c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=aMaQIOkF; arc=none smtp.client-ip=209.85.221.178
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="T6fyRCtX"
-Received: by mail-vk1-f181.google.com with SMTP id 71dfb90a1353d-5c2c46a428eso218403e0c.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 14:47:12 -0700 (PDT)
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="aMaQIOkF"
+Received: by mail-vk1-f178.google.com with SMTP id 71dfb90a1353d-5bfdbc68bbeso121394e0c.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 14:49:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1785448032; x=1786052832; darn=vger.kernel.org;
+        d=chromium.org; s=google; t=1785448184; x=1786052984; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=BEcZSaSov64w+SqDtqbhCImxhflXKNQ/vSfdSGSImp0=;
-        b=T6fyRCtX0BxQOQEGS9QkEgl3GVP53KWdfpNTTAGKnLi81+jmjQMjriL2lPW9MREwFv
-         aPh3fSoHDvxF2rIFBO+prpR0zRT3mmx+QU7VcmUtrXXeomAm2j32syjPRwm7WF6eC/Bc
-         kMFBTk+hMBalXOzhms7FBSSZPXV9/FD3rMDmA=
+        bh=tad7KNNYJZEBGqiqlpXRjVKHZPLRhBKw+ZwCMBqoTfo=;
+        b=aMaQIOkF9OWPOotIM8FD1ZdqTOm5/tg5jDeef4zUp4Z9eMAC3RXZOLevXznMy9WwOe
+         idllwxtYxG8pUwModD9gRwKmROO35ZTmaQAeihjpnaSL9ottYRYbtmIVqPUbq3G1HPoI
+         /wG8MJ6FLMywqVczc/BawCQLB8kBrO3/PGxs8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785448032; x=1786052832;
+        d=1e100.net; s=20251104; t=1785448184; x=1786052984;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=BEcZSaSov64w+SqDtqbhCImxhflXKNQ/vSfdSGSImp0=;
-        b=nCvQK+i9kUMs8R+e6R1PZ4y2OMEhpbR3wEwYyW/tkNkvOgtkRz/ODeA26Vr7z+9vcx
-         3hl2YEV6DKSRtSZlqEX8AToKtBIkqXuh6Fl0dzyKw5fnpRQIPP0Ho8suyO0kHHx6LYuC
-         55xCIaasv+Mc+2H7G60v93bmV8aUyuw4rQ8eWd7wwy4lAFLSgf0gd5BPGS9HEciDyV6Z
-         DPoHKtV2G/AYD8zdZg65h6YVG8PuyPav6Lxju6b1xlUGJhUs1z1+ExovYs0GgAYhWTq3
-         +eQJIG+N+18+wy6n06nBiOkhKrVATBXaYc8cQ+s3lxTq7kZh5QCwJYE713dsca4x+NgJ
-         huPA==
-X-Forwarded-Encrypted: i=1; AHgh+RpbzCpoxbBA7nl7Tqp+lTAhWtvjOb4Ajb9lke+lJKd7T2N2GdcCivo7dWkH0PP/ghLGcL+p9fR+DLis8pF3@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzz3fTMif2w3W9mh+b+LLLesz7djvWNSkcK9evb0b1LD8/0TwPK
-	bp7o+cUTaW3jyQiC/rKJFJ2129pYOXipo+nQRrIWFHslT9wodnYIGpqGctNbBAi7X3Gu9HqHzfG
-	7Rn4=
-X-Gm-Gg: AR+sD11/Fm8uR9joZ3S4cOnDxJUwiHaJG3ufnlWetMo/Y3UW8GlggqD+CuFStB+NJLZ
-	s1HpSzCnGXTTSAS6pojfaHk49DsVplKnxrA2c9NrH1JscnwCaIEtWA7Oz4hAtw5q1Aptl7b7Rho
-	6yWBM6OjWqPhIhMmLbXwSWtB3PEn8+XRH7N597lZwWsRnYYdRakRg7BfSU2vMMDJr87RGLlf8hG
-	gtwTpZZUN+Cn2prF9fhvLoTrizh1eqmjI7FtOOvRHym3xWkXVofAmWJysRRnboKUFVVur6qkDw1
-	GHXeCBQRwYFY+P/wifleZp3yDl6XTF5XelbmfCX3m0fP7pMXzbdLbzqpinhw0rFjE7XXyxrUG7+
-	Qpk+hpAbkhgr+MG5x4uhntfYT+rgXIQ3Mzr/kJ/u3NQq6JObtXaPM3O+PupvdHl2ykVnqLp581S
-	qOWar/Ftd5L4xVfnIwfxLDSdYUivoqV95X8KYyzVtKw1BPsnv70X6UYkcwh08ZwKwppTQewrxjX
-	Uh6P2tro7mPWABSmyAarVRoqHw=
-X-Received: by 2002:a05:6122:4892:b0:5c2:d11b:dfbc with SMTP id 71dfb90a1353d-5c36602407emr1741869e0c.7.1785448032020;
-        Thu, 30 Jul 2026 14:47:12 -0700 (PDT)
-Received: from mail-ua1-f50.google.com (mail-ua1-f50.google.com. [209.85.222.50])
-        by smtp.gmail.com with ESMTPSA id 71dfb90a1353d-5c366725662sm2397363e0c.13.2026.07.30.14.47.10
+        bh=tad7KNNYJZEBGqiqlpXRjVKHZPLRhBKw+ZwCMBqoTfo=;
+        b=flKYANiirHBrooCXHkSXhr9MTJTchFPgMCIt1r2GMj9UHPPQhVmedoVw6toEVj+j98
+         RGLBvV1wD9d4CvBoTv9IVMjXyNQ+4+90+PZoBzYyrXvaIcoYk2za821z718bTLg2tASc
+         7NpSjWO7qr5/sjoJGSKKvgW+7wddN7QuPyr8AS9p30w3cEywM1NSILUUM5+c+zfK42eZ
+         Y7vHg9cM+onOoyharPW29AgmxLOyck+/k3gh6EmvmaC/sVQ1bVU6Zpx0Nt/PIJsJU8Pt
+         wMcNEfqmvXw9L2O0hY1CPp7rMP71OMtb2ct+O98J5pGGqVEkKT7K+2/TRykntzPoEBXF
+         cHew==
+X-Forwarded-Encrypted: i=1; AHgh+RqjotI6zJo3dFRWtJftm1q9z9tgrLs0SiaL6on6Geb3bHysgQRBTGVvMKCYllqoN6MXNUgdhDvS8gC8nE7d@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxn6VE9vWZARg7Y7UtKKq4EdcZMTg86ejuIRpe7/zvHmlDnMcQs
+	BKdMz+wwimXiWK3UTNY27+UOxRyFrQbg2UMymNebL5tQRCk2HHeYihma9Z2AG+zMS/uE0seFqqF
+	TxI4=
+X-Gm-Gg: AR+sD104VItNYCGMPOOzWQ0+qcXiTiPw8Xc9bcexEP1ur9CKT8CNJVW1+KCwcw8wzB2
+	CQ6Vq820RCbMeqTGeDnRaytSo6lTMyrMOTTqEy50ESi4Bij6bFVILsaELegs1mzSibuZ2BdxXTX
+	OTguRnqOxzj+Ns/PGwkUhFGJ/ufybFPPySkfxSMGVgSc0WqQ85JjlLN1Y6+fd5LdWe93C/GRVav
+	bOIlmF8gGO0JgtaNL0CmkX/S3chJrLuJrZjp3A2dJj49Atv6t4rHH70e97ntv8bmsd4a8OCV/5z
+	goFelCjMbplPVhWhp5+W50rd0Xi8t3pzkChCOMYXGJUyIqnp95sn3tFdDOpXC+cuZGlOUML9Uw3
+	rajtid7wf7p+M8qQ5zrMFdQcyY/5u3s0NPg1NLdkFhVVCFFqct9BaNXoGVbpALtOomeIpDVXUck
+	9opS3ZPBY1Xb9n2rUxnmoU22N6O/6QKn3WT4mx8mgHJPmrGXSrf35k6sscJxtMYmtkxJImSoSo5
+	RD5jRZd0szipJUTpRGLEPzpU9Y+
+X-Received: by 2002:a05:6122:2987:b0:56f:6cc0:681e with SMTP id 71dfb90a1353d-5c365fe14d2mr1450583e0c.1.1785448184005;
+        Thu, 30 Jul 2026 14:49:44 -0700 (PDT)
+Received: from mail-vs1-f50.google.com (mail-vs1-f50.google.com. [209.85.217.50])
+        by smtp.gmail.com with ESMTPSA id 71dfb90a1353d-5c36673a58fsm2448463e0c.14.2026.07.30.14.49.42
         for <linux-arm-msm@vger.kernel.org>
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Jul 2026 14:47:10 -0700 (PDT)
-Received: by mail-ua1-f50.google.com with SMTP id a1e0cc1a2514c-9725084c547so132049241.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 14:47:10 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RpZ1ABq1a05hLKFX0LRxHwL+7EXBiLYP0lLh+DZJiBs9Yx80EUpcXPoqJRtnZyPVtKl/NPFJa7YEwjw7ETN@vger.kernel.org
-X-Received: by 2002:a05:6102:3047:b0:740:127:c81b with SMTP id
- ada2fe7eead31-7574dca124dmr1665460137.7.1785448029188; Thu, 30 Jul 2026
- 14:47:09 -0700 (PDT)
+        Thu, 30 Jul 2026 14:49:43 -0700 (PDT)
+Received: by mail-vs1-f50.google.com with SMTP id ada2fe7eead31-74aa416ebb1so102351137.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 14:49:42 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RrdQ7phFvxG6X+IceDXFkJu5E3K9CN+v034s3yN5FX1gpqp+igihKiPGvz3X3ZPp96IJmJPeMzzXOPlM0L5@vger.kernel.org
+X-Received: by 2002:a05:6102:3e85:b0:73e:9fae:5841 with SMTP id
+ ada2fe7eead31-7575057a17dmr1646770137.29.1785448181666; Thu, 30 Jul 2026
+ 14:49:41 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260730-qcom-wdt-nmi-series-v1-0-3aa86d162914@google.com> <20260730-qcom-wdt-nmi-series-v1-1-3aa86d162914@google.com>
-In-Reply-To: <20260730-qcom-wdt-nmi-series-v1-1-3aa86d162914@google.com>
+References: <20260730-qcom-wdt-nmi-series-v1-0-3aa86d162914@google.com> <20260730-qcom-wdt-nmi-series-v1-2-3aa86d162914@google.com>
+In-Reply-To: <20260730-qcom-wdt-nmi-series-v1-2-3aa86d162914@google.com>
 From: Doug Anderson <dianders@chromium.org>
-Date: Thu, 30 Jul 2026 14:46:58 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=V_7RLjcAtKk5MHiABj1rA2CTkPw2UY2gJnVzH=3Gbp5Q@mail.gmail.com>
-X-Gm-Features: AUfX_mytlaDARoR1dw85A5VeD-oPperL8oh_dbbeAf-fbsBmoOf0-Vxqm2C-FZs
-Message-ID: <CAD=FV=V_7RLjcAtKk5MHiABj1rA2CTkPw2UY2gJnVzH=3Gbp5Q@mail.gmail.com>
-Subject: Re: [PATCH 1/3] watchdog: pretimeout: Protect governor access with
- RCU for NMI safety
+Date: Thu, 30 Jul 2026 14:49:30 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=V+nrmtK6FJ2G+LGnvxkLEWMR+2A253-gQ2smxf9LoEWg@mail.gmail.com>
+X-Gm-Features: AUfX_myzYDcjOimdsQMJqbaAJeswgkX9PwwN6ZxD0rYVoVz06zk8N3Y-SCHwA60
+Message-ID: <CAD=FV=V+nrmtK6FJ2G+LGnvxkLEWMR+2A253-gQ2smxf9LoEWg@mail.gmail.com>
+Subject: Re: [PATCH 2/3] genirq: Export NMI APIs
 To: mrungta@google.com
 Cc: Wim Van Sebroeck <wim@linux-watchdog.org>, Guenter Roeck <linux@roeck-us.net>, 
 	Thomas Gleixner <tglx@kernel.org>, linux-watchdog@vger.kernel.org, 
@@ -95,31 +94,60 @@ On Thu, Jul 30, 2026 at 2:33=E2=80=AFPM Mayank Rungta via B4 Relay
 >
 > From: Mayank Rungta <mrungta@google.com>
 >
-> Currently, watchdog_notify_pretimeout() acquires pretimeout_lock using
-> spin_lock_irqsave() to safely dereference wdd->gov before invoking the
-> pretimeout callback.
+> Currently, request_nmi(), free_nmi(), enable_nmi() and disable_nmi_nosync=
+()
+> are restricted to built-in kernel code because they are not exported to
+> loadable modules.
 >
-> On architectures supporting pseudo-NMIs (ARM64 GICv3), watchdog drivers
-> may register their pretimeout warning interrupt (bark) as an NMI.
-> Because spin_lock_irqsave() disables regular interrupts but leaves NMIs
-> unmasked, if a pretimeout NMI fires while pretimeout_lock is already
-> held by normal process context, attempting to re-acquire pretimeout_lock
-> triggers an unrecoverable deadlock.
->
-> To make pretimeout notifications completely safe to execute from NMI,
-> convert read access to wdd->gov inside watchdog_notify_pretimeout() from
-> a spinlock to lockless RCU. Use rcu_assign_pointer() when modifying
-> wdd->gov and invoke synchronize_rcu() during governor unregister and
-> pretimeout unregister routines.
+> Export these APIs to allow loadable modules to register and manage NMIs.
+> This allows watchdog drivers configured as loadable modules to register
+> their bark interrupt as an NMI.
 >
 > Signed-off-by: Mayank Rungta <mrungta@google.com>
 > ---
->  drivers/watchdog/watchdog_pretimeout.c | 47 +++++++++++++++++++---------=
-------
->  include/linux/watchdog.h               |  2 +-
->  2 files changed, 27 insertions(+), 22 deletions(-)
+>  kernel/irq/manage.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/kernel/irq/manage.c b/kernel/irq/manage.c
+> index 2fbff2618a1e..fb0b8da32f4c 100644
+> --- a/kernel/irq/manage.c
+> +++ b/kernel/irq/manage.c
+> @@ -766,6 +766,7 @@ void disable_nmi_nosync(unsigned int irq)
+>  {
+>         disable_irq_nosync(irq);
+>  }
+> +EXPORT_SYMBOL_GPL(disable_nmi_nosync);
+>
+>  void __enable_irq(struct irq_desc *desc)
+>  {
+> @@ -833,6 +834,7 @@ void enable_nmi(unsigned int irq)
+>  {
+>         enable_irq(irq);
+>  }
+> +EXPORT_SYMBOL_GPL(enable_nmi);
+>
+>  static int set_irq_wake_real(unsigned int irq, unsigned int on)
+>  {
+> @@ -2080,6 +2082,7 @@ const void *free_nmi(unsigned int irq, void *dev_id=
+)
+>
+>         return __cleanup_nmi(irq, desc);
+>  }
+> +EXPORT_SYMBOL_GPL(free_nmi);
+>
+>  /**
+>   * request_threaded_irq - allocate an interrupt line
+> @@ -2342,6 +2345,7 @@ int request_nmi(unsigned int irq, irq_handler_t han=
+dler,
+>
+>         return retval;
+>  }
+> +EXPORT_SYMBOL_GPL(request_nmi);
 
-I pre-reviewed this for Mayank. I'm not an RCU expert, but this looks
-right based on my understanding. My AI was also happy with it. ;-)
+This seems reasonable to me. One thought I had was that we could
+possibly get by with fewer exported symbols by changing
+disable_nmi_nosync() and enable_nmi() to "static inline" functions in
+the header file. That being said, what Mayank has here feels slightly
+better to me.
 
 Reviewed-by: Douglas Anderson <dianders@chromium.org>
