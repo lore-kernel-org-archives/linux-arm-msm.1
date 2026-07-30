@@ -1,290 +1,227 @@
-Received: from mail-yw1-f181.google.com (mail-yw1-f181.google.com [209.85.128.181])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0CBD83750CF
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:40:39 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A94BE41C72
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:40:55 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785429641; cv=none; b=JeyKTABzNC6QiFs12VC0njenvykcD/LxQMap12/kE3Telm0qZB2WIoZSv2LFAwBKLjP5ok2ew1LKspNzpKXFyZoHBJ37XVy5f4ilB35a73F/lCTNx5/jetUL1NDrVjTaE/WqwS3m5gfBEPX50u5ACTgMDBZkl/BQhspi6z1+DR0=
+	t=1785429656; cv=none; b=m0rmVYSHdSWjpz6enKPz6Ua4/FMjBdIzprQG7t3O/Tw7SGsFzHQZU/ep3DAo1PnKP+iVmJLrX90aoWmJYp45BdEzuBAr6HTkLhqTbLA2WFNg/bxcyp3RJFPDEfWMLaIMTrRWXC6gAfyoFToyGL73yUEaYZSmVgbFZPnZKldva/4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785429641; c=relaxed/simple;
-	bh=MDmncVH+R1f9SNuCm3TxZ87o8ZL83l/aYHCM3HJKBXc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=oUKpZesNBetnQ8raTf1rjG8HIf7BeKB+6vLaP/o64knbxHYxvAEsZ7OzHtMtt91s+alxpwV5mJbHrSA/WmP1Hr9JUmnBKXQeXTk36U29Wiq0uasWZllL6Y6+SmQSNCmLYb95LSeobcuElrdvzUGFvva+FppBCSDv17ZSdKXUuOA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cezdU55Y; arc=none smtp.client-ip=209.85.128.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1785429656; c=relaxed/simple;
+	bh=wmIAcXC/31QOHhElKMkv99yGY6JwN5ZF8GjiYzQzbpA=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=EOVj4UMWHdok2Ku5GAef0ujhmM84/nmUYy1jTbS9csUUgA07heHBH1m9TTee3eTEl9Vlu3QpUPci1NVExbL/4runxE0cvEEP5k4nsPiQxZxVqqXcYSH0SSP1aXAtMdGGOyAJwBscm299Ov9CQx69y1f4Cp1I8nB1mdUezbcLcqY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IzI2sCib; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cezdU55Y"
-Received: by mail-yw1-f181.google.com with SMTP id 00721157ae682-8143daf89c7so242807b3.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 09:40:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785429639; x=1786034439; darn=vger.kernel.org;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=YfpnUPF7TlTq7vSAp+ZqT2dgaYktImF1Phgue3yKrAI=;
-        b=cezdU55YG9d58j99fyRmRxbtj3BRXRpC6lJmRoCueBW9COK7Y99PupjhmrwEm52k+I
-         Ze4e6GfOt3cP4R7W9bkUK3bOknkp5GNOT28HWahgzY6q17NGMklcFBkrtxZwg3euShSE
-         TiN6TknXWLNXmovWiEpNpubHa4UglOzEqKt3u8CCv9EImdpwih6KpHbdMWnhCafBgi4A
-         7/qkpPc6FqyNJAVOSKpcB5CnJ+NMzVB7PaAIY+IKVUU5dTPjuoD3NaTkVRTdyQUdURgo
-         ImShKV3J6xKSovjNj2NJNQSLWe7q12Try+w6xcPLAs59aWx5dnOXC51UtrKZ0cnDAVMu
-         FAhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785429639; x=1786034439;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=YfpnUPF7TlTq7vSAp+ZqT2dgaYktImF1Phgue3yKrAI=;
-        b=nBqbwXZ5s2g8UcvTLnqDHA2yu+fNAJi1QhdR7PoOD9sm+UGhmS2fH77u9ZLnfZpbUJ
-         BFjGHAxAL2zhwn7K50lJGX3YO8Qi0uPMc1dShHNs5la1DtBhvuimbUn+Kvf+EpEI5RM9
-         SChyhgwnFdTp13+cEL9iSSaKTJmZyHpgrs9bl8OVb4RW0PW2J4I75aG5CLekbgF7jW/D
-         p3Jp2E8sxN7mBAinCaoVL3aeIXKLyBLiKDcHEtVzwlBoHK8nT3iLUD2Yx/O7tz+Y7OlK
-         FFnm/Oj6S+hLFRQzlAgEFi1S+qi0ryIibBGIoPVCy6lWE3cyiqUFREj9SSZeSfeeghf0
-         /OcQ==
-X-Forwarded-Encrypted: i=1; AHgh+RoB6hYW3p+C4kUCIXklblDgCoTcnbOEahaGSnqsxKmQ2pLgbY2WT6cIyv2VVXH6i9suvXZ547gcrOk3Bc2C@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw7nYdZOeSZumH0EwYzYeHjVoukJjLUvfk8D7RV60+gNwUuJq/1
-	LO8oXjbNbRady4mr8Vm3uyMhNRPUSNruTfX84yFMwT9LVNXyGNc6f1EU
-X-Gm-Gg: AR+sD12IatMbYsSFaFq1Ve/6ttOhPZREm+ZQfzpzymACh1W24RlStr7k2+ZOoBzSr4V
-	VKXOMxFY4subfFM3wO5LaYXQaNFOSqZAjER4iyWCeW/nLo8VgW704lqmk2dYtl5GoUMmWiK2TEm
-	gvw8aAvfuvtYs8iU9Cfsta0cCPcYcOAd6naG887Mj2tpWMsR00gBjKYfO4rNfya6LjiQC0uUC1x
-	SBYpCuGzBP3kpzuodj/ZKsujx7J67CU7/s+bF+F5fhS19JIv4pbDmMWu8S/+6BnLUcxCHZsXiaQ
-	8DYq5psfcia/nhxLZsa4TSXgtersSJo3QhemrontWwMlZOlwje6HHbAhHIb8dZuBsizQuSbngAp
-	gullLvOQY+os8q0T6BwOO0kum7cfE7knl3qumzLkv94SP6FCQ7waGdZa/l0v2LUr1tYoFhcWyp4
-	KEzGBGCDWxja/7mo4foSGJGS1d+CO8CACdaIGMixsR1rzWEc/NLNIKLY2NWf1xnbU=
-X-Received: by 2002:a05:690c:6307:b0:80b:bc16:8a2a with SMTP id 00721157ae682-81fb8a61e5dmr22019597b3.36.1785429638853;
-        Thu, 30 Jul 2026 09:40:38 -0700 (PDT)
-Received: from [10.138.10.6] ([185.98.168.14])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-81fb8a8dc3asm13141507b3.25.2026.07.30.09.40.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Jul 2026 09:40:37 -0700 (PDT)
-Message-ID: <38162447-df7e-4fbc-b438-b48181d10186@gmail.com>
-Date: Thu, 30 Jul 2026 12:40:22 -0400
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IzI2sCib"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D241B1F000E9;
+	Thu, 30 Jul 2026 16:40:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785429655;
+	bh=eOClrm/u2VRY9VSgrwD7HR56oauHzrkY9aLE4Ys3yG8=;
+	h=From:To:Cc:Subject:Date;
+	b=IzI2sCib+1llKImo2BoNONVnf54FVGWgowOMSlcU4rwp4GKOIS9NqwRtNt7C5rsbT
+	 MJKDn9m4jbExjd96TYZe8UFKlMj7ehxcxTVhMuulKAav/AsGFGU4xKOr9Qt3NtQ9iB
+	 XrIcHravELEV1XngGoPqo5/oUykgVeoX52brE8VzB+KIZbEHPNBkF8ZP8+HFmk16rW
+	 BZHWeIk1C/5alpUs1FY4OJasT69VspeCM9HS6j4HVvDlpN5ErzuCR8k9INlv6WXUpj
+	 6c7jIyW/9GHoHy8IAa1oYZJZ8fYpVkXAGQOinGvYdysSwZiWeBQ2CPzV1tS6AojT2L
+	 Aq+ARZBQCP6gA==
+From: Bjorn Andersson <andersson@kernel.org>
+To: arm@kernel.org,
+	soc@kernel.org
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	Arnd Bergmann <arnd@arndb.de>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Sumit Garg <sumit.garg@oss.qualcomm.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+	Komal Bajaj <komal.bajaj@oss.qualcomm.com>,
+	Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+	Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
+	Pengpeng Hou <pengpeng@iscas.ac.cn>,
+	Yuvaraj Ranganathan <yuvaraj.ranganathan@oss.qualcomm.com>,
+	Chunkai Deng <chunkai.deng@oss.qualcomm.com>,
+	David Heidelberg <david@ixit.cz>,
+	Faiyaz Mohammed <faiyaz.mohammed@oss.qualcomm.com>,
+	Fenglin Wu <fenglin.wu@oss.qualcomm.com>,
+	Konstantin Shabanov <mail@etehtsea.me>,
+	Luca Weiss <luca.weiss@fairphone.com>,
+	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+	Mayur Kumar <kmayur809@gmail.com>,
+	Nabige Aala <nabige.aala@oss.qualcomm.com>,
+	Ruoyu Wang <ruoyuw560@gmail.com>,
+	Sneh Mankad <sneh.mankad@oss.qualcomm.com>
+Subject: [GIT PULL] Qualcomm driver updates for v7.3
+Date: Thu, 30 Jul 2026 11:40:52 -0500
+Message-ID: <20260730164052.176832-1-andersson@kernel.org>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] crypto: qce - Remove driver
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Eric Biggers <ebiggers@kernel.org>
-Cc: Konrad Dybcio <konradybcio@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Bartosz Golaszewski <brgl@kernel.org>, linux-crypto@vger.kernel.org,
- Herbert Xu <herbert@gondor.apana.org.au>, linux-arm-msm@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-References: <20260724141414.GB1876@sol>
- <CAMRc=MfU1egvJwmgPEN-GXPbz8_JL2XnP-LV0T2+jG-drfXYwg@mail.gmail.com>
- <2026072455-subtly-prayer-0a8a@gregkh> <20260724150932.GA6763@sol>
- <2026072428-ungodly-outsource-b20c@gregkh> <20260724155144.GA2032@sol>
- <20260728152241.GA4281@quark>
- <15904301-fd03-45e5-b909-dfce52449726@kernel.org> <20260729145520.GA1702@sol>
- <50d9d0e4-28c9-42b6-8b71-e75682b4959c@oss.qualcomm.com>
- <20260729171850.GA4454@quark>
- <a5e953b8-89fb-4f65-a299-37352d9f6fa8@oss.qualcomm.com>
-Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
-Autocrypt: addr=demiobenour@gmail.com; keydata=
- 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
- +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <a5e953b8-89fb-4f65-a299-37352d9f6fa8@oss.qualcomm.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------t0ihQmACXOEWelq02XhLBP1h"
+Content-Transfer-Encoding: 8bit
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------t0ihQmACXOEWelq02XhLBP1h
-Content-Type: multipart/mixed; boundary="------------2XlfptUy3V5rxBrmNjBlQbIv";
- protected-headers="v1"; hp="clear"
-Message-ID: <38162447-df7e-4fbc-b438-b48181d10186@gmail.com>
-Date: Thu, 30 Jul 2026 12:40:22 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] crypto: qce - Remove driver
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Eric Biggers <ebiggers@kernel.org>
-Cc: Konrad Dybcio <konradybcio@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Bartosz Golaszewski <brgl@kernel.org>, linux-crypto@vger.kernel.org,
- Herbert Xu <herbert@gondor.apana.org.au>, linux-arm-msm@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
- Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-References: <20260724141414.GB1876@sol>
- <CAMRc=MfU1egvJwmgPEN-GXPbz8_JL2XnP-LV0T2+jG-drfXYwg@mail.gmail.com>
- <2026072455-subtly-prayer-0a8a@gregkh> <20260724150932.GA6763@sol>
- <2026072428-ungodly-outsource-b20c@gregkh> <20260724155144.GA2032@sol>
- <20260728152241.GA4281@quark>
- <15904301-fd03-45e5-b909-dfce52449726@kernel.org> <20260729145520.GA1702@sol>
- <50d9d0e4-28c9-42b6-8b71-e75682b4959c@oss.qualcomm.com>
- <20260729171850.GA4454@quark>
- <a5e953b8-89fb-4f65-a299-37352d9f6fa8@oss.qualcomm.com>
-Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
-Autocrypt: addr=demiobenour@gmail.com; keydata=
- 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
- +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <a5e953b8-89fb-4f65-a299-37352d9f6fa8@oss.qualcomm.com>
 
---------------2XlfptUy3V5rxBrmNjBlQbIv
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit dc59e4fea9d83f03bad6bddf3fa2e52491777482:
 
-On 7/30/26 07:15, Konrad Dybcio wrote:
-> On 7/29/26 7:18 PM, Eric Biggers wrote:
->> On Wed, Jul 29, 2026 at 06:55:20PM +0200, Konrad Dybcio wrote:
->>>>> Unfortunately removing it drains way more battery, because the buse=
-s
->>>>> never hit sync_state and are kept at their maximum frequencies:
->>>>>
->>>>> [   18.021823] qnoc-glymur interconnect-1: sync_state() pending due=
- to 1dfa000.crypto
->>>>> [   18.029605] qnoc-glymur 16e0000.interconnect: sync_state() pendi=
-ng due to 1dfa000.crypto
->>>>>
->>>>> (it transiently also pins DRAM and friends to max-freq which absolu=
-tely
->>>>> kills battery life)
->>>>
->>>> Isn't that easily fixable by marking the node as "disabled" in the
->>>> device tree, or even just deleting it entirely?
->>>
->>> Avoided? Yes. Fixed? No. The DT is valid but Linux can't deal with it=
+  Linux 7.2-rc1 (2026-06-28 12:01:31 -0700)
 
->>> [since the driver is gone]
->>
->> If needed we can keep a stub driver that just disables power and doesn=
-'t
->> register anything with the crypto API.  I can send a patch that does
->> that.
->=20
-> I believe we (are going to) need something like that in the kernel
-> for similar cases, however I'd rather see this driver kept/reinstated
-> for the reasons Bartosz is arguing
+are available in the Git repository at:
 
-What about removing all of the code that actually does cryptography?
-The problem isn't that the driver can't be fixed, but that:
+  https://git.kernel.org/pub/scm/linux/kernel/git/qcom/linux.git tags/qcom-drivers-for-7.3
 
-1. It requires additional maintenance, and not just by the driver
-   maintainer.
+for you to fetch changes up to 43584144a46bccbe90482cd8eede9596d8fc47dc:
 
-2. Even if the driver never needed maintenance, the QCE is so slow,
-   and the driver overhead so great, that the features currently
-   exposed by the driver should never be used.
+  soc: qcom: llcc: Skip ECC interrupt setup on Shikra, pre-configured by DSF (2026-07-17 17:22:44 -0500)
 
-As Eric pointed out, the future use-cases Bartosz mentions should be
-implemented by a driver that isn't in drivers/crypto.
---=20
-Sincerely,
-Demi Marie Obenour (she/her/hers)
+----------------------------------------------------------------
+Qualcomm driver updates for v7.3
 
---------------2XlfptUy3V5rxBrmNjBlQbIv--
+Add Maili platform bindings for SCM, IMEM, AOSS, and PMIC GLINK. Add
+Shikra IMEM, RPM SMD, LLCC, and UBWC support, including handling for
+firmware-configured LLCC ECC interrupts.
 
---------------t0ihQmACXOEWelq02XhLBP1h
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+Add the generic Peripheral Authentication Service with SCM and OP-TEE
+backends, and migrate the MSM DRM and IPA drivers to it.
 
------BEGIN PGP SIGNATURE-----
+Add SCM SMC-call tracepoints and configurable minidump delivery through
+always-on SRAM. Correct SCM download-mode pointer ordering and improve
+download-mode probe diagnostics.
 
-iQIzBAEBCgAdFiEEopQtqVJW1aeuo9/sszaHOrMp8lMFAmprfoAACgkQszaHOrMp
-8lMBZQ/9H6ZnMZ4uJsLXk8rgQwcjpwkvE2geQEnARvBDB6Iqj12QyxW9XwqYXuCI
-PfY3jgcYXQKXKQ+ym1t9Gzxp7cJSbofZaF9gEbem32oWVr6y/i77jmo+rXfnnfLb
-bQzaRIx/6iVWvonQBG2zpNfcxN7FlWCWo2pb66X/S/NcSQIOtzDaOnU7K+uYGper
-UVdhLsmoKl05OI1YOyQblE2dTyIAHGwEfpBOdxyIU1zxLZEnXSXsrJ9k4EUbH8WG
-rSKbgOi2Z2ShTMb0KtopbDRvRvq3f4OltTP/esti0Zl42zrq9rQCTiHb9hU2KDFc
-w8/KBdFUUj3J3vX7h56NiLtNEdONy5bECFf3WdlD90Q6ljA+wJTONcDM0Ltf9Lqb
-RXXmVu17gzQGPKndNezR9Hry/h120dMAuh6MYSQdtbgSqMonOr64BinIABvJPq4B
-2kyOatWo/Cl6J3ZRdAB57B0QGeOloazN/RtorcAY53ahQND16k3KXSWE47gd62lI
-3VEF6pxF0Mn9MDCcgj6ZBgAnnzAUMSN2Vt9j+diV4hD+gKAsWVtjd6HEAyDpBonF
-crI6EV9BI64v+xjL9mEv8uaMmSW6T6M3Fd90HcO/o1p7css3J2LZhCUD+rKQzaHC
-DonTImuEaFapgVYepstb5q9eWIEb+mhH+k6UMeQQ16jEJWa/63A=
-=zInT
------END PGP SIGNATURE-----
+Rework the UBWC configuration database and add Milos and Shikra
+configuration. Add protection-domain mappings for SA8775P and QCS8300,
+support newer ICE versions, Hawi subsystem statistics, and SDM850
+identification.
 
---------------t0ihQmACXOEWelq02XhLBP1h--
+Simplify Qualcomm SoC Kconfig selection and architecture dependencies.
+Use managed resources in EBI2 and RPMh RSC probe paths to correct cleanup
+on failures.
+
+----------------------------------------------------------------
+Bjorn Andersson (1):
+      Merge branch '20260702115835.167602-2-sumit.garg@kernel.org' into drivers-for-7.3
+
+Chunkai Deng (1):
+      dt-bindings: soc: qcom,aoss-qmp: Document the Maili AOSS side channel
+
+David Heidelberg (1):
+      soc: qcom: socinfo: Add SoC ID for SDM850
+
+Dmitry Baryshkov (7):
+      soc: qcom: ubwc: set min_acc length to 64 for all UBWC 1.0 targets
+      soc: qcom: ubwc: drop ubwc_dec_version
+      soc: qcom: ubwc: drop ubwc_bank_spread
+      soc: qcom: ubwc: drop macrotile_mode from the database
+      soc: qcom: ubwc: use fixed values for UBWC swizzle for UBWC < 4.0
+      soc: qcom: ubwc: sort out the rest of the UBWC swizzle settings
+      soc: qcom: ubwc: deduplicate UBWC configuration data
+
+Faiyaz Mohammed (1):
+      soc: qcom: llcc: Skip ECC interrupt setup on Shikra, pre-configured by DSF
+
+Fenglin Wu (1):
+      dt-bindings: soc: qcom: qcom,pmic-glink: Add Maili compatible string
+
+Jingyi Wang (2):
+      dt-bindings: firmware: qcom,scm: Document SCM on Maili SOC
+      dt-bindings: sram: Document qcom,maili-imem compatible
+
+Komal Bajaj (3):
+      dt-bindings: soc: qcom: smd-rpm: Add Shikra rpm-smd compatible
+      soc: qcom: llcc: Add configuration data for Shikra SoC
+      dt-bindings: sram: Document qcom,shikra-imem compatible
+
+Konstantin Shabanov (1):
+      firmware: qcom: scm: Allow QSEECOM on Honor Magicbook Art 14
+
+Krzysztof Kozlowski (5):
+      soc: qcom: Unify user-visible "Qualcomm" name
+      soc: qcom: Hide all drivers behind selectable menu
+      soc: qcom: Restrict drivers per ARM/ARM64
+      soc: qcom: Make important drivers default
+      soc: qcom: Avoid SCM and SPM for cpuidle drivers
+
+Luca Weiss (1):
+      soc: qcom: ubwc: Add config for Milos
+
+Manivannan Sadhasivam (1):
+      soc: qcom: ice: Support IP version beyond v3
+
+Mayur Kumar (1):
+      soc: qcom: cmd-db: use C-style SPDX comment for source file
+
+Mohammad Rafi Shaik (2):
+      soc: qcom: pd-mapper: Add support for SA8775P
+      soc: qcom: pd-mapper: Add support for QCS8300
+
+Mukesh Ojha (4):
+      dt-bindings: firmware: qcom,scm: Add minidump SRAM property
+      firmware: qcom: scm: Fix missing smp_load_acquire()
+      firmware: qcom: scm: use dev_err_probe() for dload address failure
+      firmware: qcom: scm: Add minidump SRAM support
+
+Nabige Aala (1):
+      soc: qcom: ubwc: Add Shikra UBWC config
+
+Pengpeng Hou (2):
+      soc: qcom: rpmh-rsc: manage PM notifiers with devres
+      bus: qcom-ebi2: use managed resources for clocks and children
+
+Ruoyu Wang (1):
+      bus: qcom-ebi2: Fix clock leak on probe failure
+
+Sneh Mankad (1):
+      soc: qcom: qcom_stats: Add SoCCP and DCP subsystems stats
+
+Sumit Garg (6):
+      firmware: qcom: Add a generic PAS service
+      firmware: qcom_scm: Migrate to generic PAS service
+      firmware: qcom: Add a PAS TEE service
+      MAINTAINERS: Add maintainer entry for Qualcomm PAS TZ service
+      drm/msm: Switch to generic PAS TZ APIs
+      net: ipa: Switch to generic PAS TZ APIs
+
+Yuvaraj Ranganathan (2):
+      firmware: qcom: scm: add trace events for the SMC call interface
+      firmware: qcom: scm: instrument SMC call path with tracepoints
+
+ .../devicetree/bindings/firmware/qcom,scm.yaml     |   9 +
+ .../bindings/soc/qcom/qcom,aoss-qmp.yaml           |   1 +
+ .../bindings/soc/qcom/qcom,pmic-glink.yaml         |   1 +
+ .../devicetree/bindings/soc/qcom/qcom,smd-rpm.yaml |   1 +
+ Documentation/devicetree/bindings/sram/sram.yaml   |   2 +
+ MAINTAINERS                                        |   9 +
+ drivers/bus/qcom-ebi2.c                            |  44 +-
+ drivers/cpuidle/Kconfig.arm                        |   4 +-
+ drivers/firmware/qcom/Kconfig                      |  22 +-
+ drivers/firmware/qcom/Makefile                     |   3 +
+ drivers/firmware/qcom/qcom_pas.c                   | 298 +++++++++++++
+ drivers/firmware/qcom/qcom_pas.h                   |  50 +++
+ drivers/firmware/qcom/qcom_pas_tee.c               | 479 +++++++++++++++++++++
+ drivers/firmware/qcom/qcom_scm-smc.c               |  10 +
+ drivers/firmware/qcom/qcom_scm.c                   | 456 +++++++++++---------
+ drivers/firmware/qcom/qcom_scm_trace.h             | 143 ++++++
+ drivers/gpu/drm/msm/Kconfig                        |   1 +
+ drivers/gpu/drm/msm/adreno/a5xx_gpu.c              |   4 +-
+ drivers/gpu/drm/msm/adreno/adreno_gpu.c            |  11 +-
+ drivers/net/ipa/Kconfig                            |   2 +-
+ drivers/net/ipa/ipa_main.c                         |  13 +-
+ drivers/soc/qcom/Kconfig                           | 120 +++---
+ drivers/soc/qcom/cmd-db.c                          |   2 +-
+ drivers/soc/qcom/ice.c                             |   4 +-
+ drivers/soc/qcom/llcc-qcom.c                       |  30 ++
+ drivers/soc/qcom/qcom_pd_mapper.c                  |  38 ++
+ drivers/soc/qcom/qcom_stats.c                      |   2 +
+ drivers/soc/qcom/rpmh-rsc.c                        |  37 +-
+ drivers/soc/qcom/socinfo.c                         |   1 +
+ drivers/soc/qcom/ubwc_config.c                     | 302 ++++---------
+ include/linux/firmware/qcom/qcom_pas.h             |  43 ++
+ include/linux/soc/qcom/ubwc.h                      |  81 ++--
+ 32 files changed, 1662 insertions(+), 561 deletions(-)
+ create mode 100644 drivers/firmware/qcom/qcom_pas.c
+ create mode 100644 drivers/firmware/qcom/qcom_pas.h
+ create mode 100644 drivers/firmware/qcom/qcom_pas_tee.c
+ create mode 100644 drivers/firmware/qcom/qcom_scm_trace.h
+ create mode 100644 include/linux/firmware/qcom/qcom_pas.h
