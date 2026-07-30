@@ -1,87 +1,88 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 63B1E43634F
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 13:29:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D40DA43801B
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 13:29:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785418179; cv=none; b=LjXXc492yD5CVSKGkE0/5QtYt7y7Ne9M3DXO0f9KOoNoIWq/nhnWHtypy4rajMLVvDJUHdg7BL3fApcl/fNiz3Isqw+eq84X5WmRAy6hiHlpvPmECzDAaoxkMsP0e+kVRcnmpfBblufCREs6Du7VVWSnc3w1BCXtqLw/PMWSQdU=
+	t=1785418182; cv=none; b=pUSUNiUW9YPvTgMQCrYHufLP73TrLuJwCJA1bfYv3KOJLvwPBeYR4ki0vuXzZI0CxuSFqR/W2/WeVe0YDiJIjL9hguYJfeKp1AaTZNox8VBr722SW//6EzX3GIB/2Bo1yIXuqNLxVw1TVquQxqUVkjv/Efa+0B+vy7n5n5bmb2Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785418179; c=relaxed/simple;
-	bh=QeuOZ/3E7srmsN4kZYdWvz+jVIa+pIBlQp4fMxk0c0c=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=bTMNscY46jAQ9jIKVd5Pd9FA0OPcafxP3C+XMq+Yr1z45GIThbved4a0q3XvDiuYflR6HGNPnPnBoX5BXbM0pObpPiC1VdKoD0uON+oIdZvVy9KYYG/FzcTNr08vbTuLuNuH34nEQtgo+SWsIPo+UasJyYIspEuK3/6c/+wgJdo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=W1Ki/nu1; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=BfQyQgIn; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1785418182; c=relaxed/simple;
+	bh=HDvKxpINpBdyUinpnTD4Zel+FLNhUAi/UNzRGhoHMSU=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=JtX03YJKJmhYH8Ri4xRB72ZCYXhHzANLxr7FnI2FDzZVBcerDEnyxutZqmv97yWg+CuGJ5zXBtlJ8jn+cbUPP2cdBbfvvgVU+zC1ReQSmYaJwtpksNpGIURXPp4mzcZ+3s2K122tZZGm4kk4S4eHLAbJ1TA2xIrmVTsOl6IBz1o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=I4XhQVO/; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SJe+Sz4C; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="W1Ki/nu1";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="BfQyQgIn"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66UDDRxu427148
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 13:29:36 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="I4XhQVO/";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SJe+Sz4C"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66UDDQU01373220
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 13:29:38 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=FrBxWxjqRXZNRvOm43VwxP
-	FxRLqKBA6+pd4WCL/GOZE=; b=W1Ki/nu1aVDuyPmM9trr6PPb7poeN5QDAOHsEd
-	jbhxiSE6nzIRlG6VNHVvOWDlxFMQViG076Bqb32lcOWyDA11SbzoNQuFcWndSZMR
-	coFq/pFW78LlK7l6/SU8ZAfJEF1kqB6mhymB891IP2occB8EOuORh89+Z3umwfiu
-	3nJpXOCbyDIlG2AHNzAA9xVamUUf0z+LaE5AXSPC3N6D3F37fh7gnq2WekrmZEbv
-	jU8oNIbAamDOLMHLdYipWTirAWXO/57+xL347zRIFM3qABSy3Qz8Ww0ucD33k8t1
-	HnqTJiKpmwfYcme6ZpzR2LIkHopmHTUrYZ5P64P3tutXgW+g==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr3tyh1h3-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	EyQnsFr+AkCF9FJZQJYLZH0Aizak4PdcRcM5bMpVZbc=; b=I4XhQVO/0yt5Fapx
+	y6FEqK1dFBP3zbhxBiDkxGJ+C86CPlnylu5yZpbMk09f/jeabXeWZnzgB6oxSduH
+	QIvOMw5QSaEsjyKRdn3wVA2y9EwGV8/kZ3gSaoSKcBGwsMsVB7iaOICypJisskg+
+	6bqFzp6RodZFV6mi5oB6yyZ7SYGZEaW252Lq+EgDITMdvY8fyDgBZot20bvwYimW
+	HsFzkYEyqqgywiO3Wrw3JYm+NFAxUP5T3pdMTBe7ZoHXub2loyr1piOunOkfO1fA
+	ynFnggbqS6rc6c7UF0HuUANmhUCqXMLdv4qrFUMv0j1tSWYV6W3kfpx4bWH5pR3K
+	cNLtRw==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr70bg5ee-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 13:29:36 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51a8db414c7so31816961cf.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 06:29:36 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 13:29:37 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-51bfe3fa93bso22865651cf.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 06:29:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785418175; x=1786022975; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=FrBxWxjqRXZNRvOm43VwxPFxRLqKBA6+pd4WCL/GOZE=;
-        b=BfQyQgInvrqpatp/kurRga2Xfac1zregmpo1T9+7zuWd7mrmRYYpY3/JmUxhvHpH3N
-         ovfJyZ6XBrTSrGrzvWn4cgK1/sVIQnxpY2nbLKtr6mEv6rxcSVUP6hVPs+qM28Pvrpim
-         iNZJxjrANBLKxsRROnlhomho7qJiHmwMYXi6F35WzvNrEZqhmtkc8g/mBnYeAe6HBrDL
-         1H7J1hxAlsV01VYzKxnoRk4Sbagp39xYd+FbX2qm/BYT1orOhHA/5xK8X0sA+gT/P6+R
-         bCc6HAZdB84rO6d43zT8rHgMgES+wwTwYyaV2NwrjHFrvY2+tiYtHrWh/zxX0KuC8nIr
-         TVbw==
+        d=oss.qualcomm.com; s=google; t=1785418177; x=1786022977; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=EyQnsFr+AkCF9FJZQJYLZH0Aizak4PdcRcM5bMpVZbc=;
+        b=SJe+Sz4Ci/gxa6CcynScU8Li4KjVBj7VTlQuycAjvBh4pS4SdUCjwVS0bKSFCeEFZH
+         dJszlSV4OuIFfIDmlMenxKpyf3anpYcbF+gbb7BoDOXexghXX18TjxhM/pVCvBRSR36C
+         5nWFf5JN8iNYLmveVdAfFESMihUT5TFKon1TgdLJF2qs5s3BEfT8IpRzXF4wIOTpb+o3
+         qtZ0eQohNL5CAJCl6SFDr2xOtXAU3WZal5NqCerHUu3KbpdR9ifFvLryYOT5kclpDZ/p
+         unRZ1OYXSKAi19mZEKUFisVWyxqFZZXc1P+GcqAFFvznYbWxqecA5K4+xR1H1fAdL69V
+         md3A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785418175; x=1786022975;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=FrBxWxjqRXZNRvOm43VwxPFxRLqKBA6+pd4WCL/GOZE=;
-        b=n7bd5k0KJ7OjHtgHJORjB8SjP2+hD/iZxux3+qPGnRCNWxilV+6nZdkUFgV4mXU9TC
-         sWA9R2kxbIlE8cSGKgmlUxrKW1wr/L/Fjgib+DdQBfMh19Bb8KvXv87P3Lr5/ELVtWVb
-         ET1eBbASqFOWRWSCmKRZ4Tw/IKZ/RHLPWFKcKT7QRzepGlXJOU6/SEcRulVdDv0I/ZI3
-         AyL3aBdTkApXVweYaCCbnzubF/xxmS4qfbiQDHg4W2tlH7SoIdMkiejUakv36DO3v+7f
-         uC2URsP3e5iOuewrwAst02WVmcV5fqXl/a6RkSLlZQCZZ7yKXuLl3KwaF72yQg6t/xd2
-         gqSw==
-X-Gm-Message-State: AOJu0YwMnRwW6bkhPXXD+gg9oxZHPYcDsCc+Mzwx5xASxNOajHCDQ8+i
-	AlJuI4BP7+hHmE9ybaR/skD7co+oDTIHPPdpZ7YgCPy+qTT512ya743lkioaBsEemaJRdYR5k+P
-	eXByC+wi4wOT4qJsTnMIMt5Guh8THc64vm1SurPEnCi9WviB6LuAS0aERneI2Fc9BicD6ZtZKky
-	SBShw=
-X-Gm-Gg: AR+sD11GROdeZUWY2I4omaLZCJeVTXV+UX7DsZiRYuD4j2rcXbMukXZgXpLDFz+LlGs
-	XzWU/SqpnDcioDcYDdAq81/6MI8lN9iohq1b+laktppINpI9Ixr3vJHFolnfnC06SKtkKxnK5I0
-	qTnV0H6cJh9l4LjqC1QqRjn4XZnhnbLVVrTW5odjYA9FUM8FiPy4togvZUf9YswUoQ/Q39Z/G8G
-	8wPstIoVrsYmv+82wlmu/+WPfATWUFmacdID6ZsmjFYZciU6Fqr4ykORenDAqK4SOW/2XvAnedK
-	jfznMZc+gPekodP9t8mHjSxCkM9nL815d7VqWNK2jkvlQb2u55XCU5vcXEvHU7xZqf6P9rUbDY3
-	QIbPc1SobFp41k4FjQsMhm4Ae6prJ+sHAac8VpexyuQQp7FkiR2i+nnJqyvnVpUg7fLsfUXYx/P
-	0EgmxCzlPbue6wfg==
-X-Received: by 2002:a05:622a:1aa0:b0:51c:61a:50fa with SMTP id d75a77b69052e-52b385eded3mr25658371cf.39.1785418175014;
-        Thu, 30 Jul 2026 06:29:35 -0700 (PDT)
-X-Received: by 2002:a05:622a:1aa0:b0:51c:61a:50fa with SMTP id d75a77b69052e-52b385eded3mr25657711cf.39.1785418174288;
-        Thu, 30 Jul 2026 06:29:34 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1785418177; x=1786022977;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=EyQnsFr+AkCF9FJZQJYLZH0Aizak4PdcRcM5bMpVZbc=;
+        b=oSEtwo+4HILO/nU5PTsDwqD7ZEFSTIh/m9GUOHTQSLU2uKtLJcaMQkWERiMK94g0jo
+         A9I+oA3jnIWVVSgWaOkHNT8Mm09CJ7mOascad+2y5MaoIgKkq7LmsJ2YJXhjKFHleKjo
+         4Ku8onk24JBYBnjwtl3YJ0p3fXZSfqRUICb3MhMhYQgKtfz40ASgoGTJ2xReF8F9ZkPa
+         ufhlTNZ2UiwpkmOmGDTKqHRw7ctxV6PfUIbxsQ05flJdgcIWzszqt3QevcSRM/z/WXOi
+         bCGlFm6My7UejVe6p8GLMRhHypwzXNNMHWVltI5keEHvZBc0turFt4N9cFrc9ZkirrhQ
+         hDIw==
+X-Gm-Message-State: AOJu0Yyf0AbAjLyHKg4z/6RMVCXh/GZxxbVhCq8wv+g5boJvENQwx8kO
+	VRt5YXqij3W20BAGqF1mCeQEO5nlIP6PZM7+hYLnC+J0cNahXOvrtm0NtDnx7Bt5jbzO42yImTl
+	89uEKMomjO7qnN8hPdbGZuqOvnZkvSUmR34Q/cBT0sT8ZrHLdKS33Ft7ZtZY2tBA/jlh5Ukk5IA
+	3Xmqc=
+X-Gm-Gg: AR+sD110PrOwWy6lcM10GoyUckLeJSNC1L8Rqiso81veqiARUCGW236al5TqQmm1XfE
+	QKKgLT7vlLA2170feIhXd42Q0XTHYrj1WtN14fBSpouregFn5x/1BqYIawYTrFbYagF0CqFCGJi
+	YQT54x8cT6BEQryq6qhS8KwHN+8kQ4d/nXyaV9Amq95VmQ2l7Lb+QOV+OJ5Oia8HNrLCmp/9g+W
+	Bp1Uatmgt6kQGgp8TCnPChtbXLleGWx5OTO/rUlBWWxBCH3R911a7MBejv+0U+g5y1sv2ZofGPA
+	ZSnAKpYKwEtVW8z5tioMkBIr20xu8XgnMHxtgUjr7VjIziLb19Z+5MULvmij1J7UqmvSIh9f0Rq
+	99L+FZwssQ0zwoTQdICfWIcYVFJgiJCjmi+EDdg+Gtp+IJhMNetJf550AvGdHYl4HIpkfXlfIN0
+	cJdefL863XtBjY5A==
+X-Received: by 2002:ac8:598e:0:b0:528:3ae6:14a0 with SMTP id d75a77b69052e-52b42c461ccmr2050621cf.46.1785418176576;
+        Thu, 30 Jul 2026 06:29:36 -0700 (PDT)
+X-Received: by 2002:ac8:598e:0:b0:528:3ae6:14a0 with SMTP id d75a77b69052e-52b42c461ccmr2050201cf.46.1785418176070;
+        Thu, 30 Jul 2026 06:29:36 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-39f6acaa009sm2976631fa.34.2026.07.30.06.29.32
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-39f6acaa009sm2976631fa.34.2026.07.30.06.29.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Jul 2026 06:29:33 -0700 (PDT)
+        Thu, 30 Jul 2026 06:29:34 -0700 (PDT)
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: [PATCH 0/3] Fix GPU and display on ARM32 platforms using the MSM
- IOMMU
-Date: Thu, 30 Jul 2026 16:29:30 +0300
-Message-Id: <20260730-fix-qcom-smmu-v1-0-b12fa067804e@oss.qualcomm.com>
+Date: Thu, 30 Jul 2026 16:29:31 +0300
+Subject: [PATCH 1/3] iommu/msm: track a context master per device and IOMMU
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,11 +91,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIALpRa2oC/0WOQQ6CMBBFr9J07UQoUqBXMSxKGaUmBekUQkK4u
- wWMLn/y5r1ZOaG3SFyxlXucLdmhjyO9MG463T8RbBs3F4mQSSEyeNgFRjM4IOcmaPKiKo3MW1l
- WPN68PUbg8N3rc9PUvNCEXfIlPI5TDIUT+3cU+1UcuaNkvKYOSpNmQiRtdZO5mtNd02hCiG84G
- xTrcQlXpymg5/W2fQAr4Tap1QAAAA==
-X-Change-ID: 20260723-fix-qcom-smmu-b5798c65d689
+Message-Id: <20260730-fix-qcom-smmu-v1-1-b12fa067804e@oss.qualcomm.com>
+References: <20260730-fix-qcom-smmu-v1-0-b12fa067804e@oss.qualcomm.com>
+In-Reply-To: <20260730-fix-qcom-smmu-v1-0-b12fa067804e@oss.qualcomm.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>,
         "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
         Robin Murphy <robin.murphy@arm.com>,
@@ -113,99 +112,154 @@ Cc: linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev,
         dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
         linux-rockchip@lists.infradead.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2815;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4681;
  i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=QeuOZ/3E7srmsN4kZYdWvz+jVIa+pIBlQp4fMxk0c0c=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqa1G8vHFfUkazJpdtkfWB5qcSLTbcR9WeggcWK
- ZnHvv659nSJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCamtRvAAKCRCLPIo+Aiko
- 1Q4KB/45W5IuLGMfukDxWtAm4Kn8WpvsrZCG43DTGKSpOFCALq9XgwWFi8s9keLSIB4kYrYNe06
- XtyxqMCC0IkQ0FM1E//oevvm9bvqUqL/VeNT9pSZykkGfRuEFxlwC04OkBZMAY86IHws8iYgGeA
- TBNi1Xu3GnAMhqtBzcqeHzGdVUn87pGMjczIsbbM8CX2dT+xSCjA1ztwD6ZIPhEC4eeYw8XhlyA
- Oew1C0tmhzqsF/zcB37ma81WyXwpOiLc7RGR66XnWNPAIvKsmhyC6UUHLA9v7La6w5GRi890tNo
- uTB4CSpg9MoHUsrXHeKMbwt/nxWdl1Z0ZcaMEM7DxFp2bEvp
+ bh=HDvKxpINpBdyUinpnTD4Zel+FLNhUAi/UNzRGhoHMSU=;
+ b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqa1G8k9/g5eNcbQTp950ENXclQTiusv0LgYSR2
+ XAet/hi4xKJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCamtRvAAKCRCLPIo+Aiko
+ 1VpfB/9FYILN4yvdF3Vwn4jVt5QhJoVPIwN0sjpqfAnTByi95EeWKKE5S87ktT0abAPbZ2UOVT/
+ Z2k/Ru/yCM7HCPUm42G7XLGJIRiJ+TGSojMsfCIu4vAVXgWqO5jyv62CSaMCw8zNuuJz10C6wuK
+ OVh7YrahohCLi3+ZsXvJELj0N092LIAY5idouHvL0w9oX3x279RmxMw2C2MB7OuOzowOu1ZGydf
+ ZYTyz45hsbQf9YS8JQq8u8gpJJPEltmaIL+9mTTsqPdRhRw4uUqApovyaLGZxXxYnw4iKFVsZFl
+ vjxJXlzNI9fWzWdu6RJh4IxnKnbjlisUbM4Iky6LJp3ctWbl
 X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
  fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Proofpoint-GUID: 3r9_ACrmAEY9ACbIMMijmgqW9xdntJ9V
-X-Authority-Analysis: v=2.4 cv=JZOMa0KV c=1 sm=1 tr=0 ts=6a6b51c0 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDEwMiBTYWx0ZWRfX//6ADfJ4YmYW
+ lSUTu5PUrVwsNcTpkw5DScykjo4mGUydkSZxWg18PJE3jUXasUXKS4RtGNEibA8qWMa+mihRZet
+ Dw4N1DMrqfSSPycy+A462ztrES8YIFnU0lR8HOtFjtQtGP4Ibe0rVLxVWtIvzwIWTxvPj4cQ5XJ
+ aqvPpvv+teRpPtWeuQbYOWKcAxUx8YY8l8K7v0uXl/zgvP+dE7wxi1LYJVW7xvlB3qqi3hduA//
+ IEC2oQstPdImgk7jku9z2zdiWCXz8TZjkuMGraNJjsYaEr4HyFEMU3bFmDVfaqu/81Nt635Rmwq
+ soFsg842M6kjteGlcZcAlKbErGWojYV8st21AE8O0tuYG/sF8IJ7AuACunOzZq81KP7U0wzj+Is
+ Du7YBCf1vj0Y58PZKpL2NjSybBDLs0nHyOFw18bHdENf9oBu+HMx4KlanMNOQpRSGTmh3zrKX57
+ 8ZttlcSylM/hRdWneSA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDEwMiBTYWx0ZWRfXz0qH+ZR+7sjG
+ MYtCIagaRja6OpC9xGRDdE1OA1buCLQUL7q9NKdnSV/8MwJNvPeyit9VfV8fAPn9dXaXHSg27XN
+ KYFy3biP0n+hBL1u/EKpSE2QEPgiiso=
+X-Proofpoint-GUID: L_R-V4uTJoU3MsE9nPN6G2RAaQ_dW2q0
+X-Proofpoint-ORIG-GUID: L_R-V4uTJoU3MsE9nPN6G2RAaQ_dW2q0
+X-Authority-Analysis: v=2.4 cv=P58KQCAu c=1 sm=1 tr=0 ts=6a6b51c1 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=shkEvlnnkTupmQYayisA:9 a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDEwMiBTYWx0ZWRfX5UIGSEGsD6Wd
- k7Q+ynDjcaNA6Mvo9f/nVYsP94RSqPHpfjMB5kUZ2ULa9di2BrMvE9A8LKXxefeJnflxczgngiL
- LCWdOuouHVMl+t+xYTvuFqL4Tz+Ibz4DL5uvDXaHEhiYr/RnljSj2WS/oljm1a4YMDwIwriQpRV
- QqaQ0bTbl+30zIvgwYLJ2lZao7R62udTw/GJpWOy7+Ht8AmhWm7SCuqkGieuvASGjE8BuexQJuj
- npsWIiFqTVvBD+0XioJK4R4aD0XQAwbYO6MY7kGNTVOdzmhF/6vRq1nHATXTx9VpXlbK4xW9r8j
- Jat6um8ntT0qrmIFDOmrfYQ44CpY5GoCTjROgtICvpXZLIkJWjGSZfxHVnYBdo+uqJdTkXIefGC
- HdbY7Xew3k8hegIo77o9M/fJi7B/b7IVGRZ3xrRcL8lrJWUd9vrG//BafBHZWb2oQg2IxWSBwXU
- W29I18K/ed36EdXQmGg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDEwMiBTYWx0ZWRfX/ootI9rutaIw
- C7XKEdpmLK1SCpGpaZfZzxD/UIWeHe8p40I39yyYi/WZuuEjadmiD4Nb14JjSTht62oLLaJ21MW
- fM5STIGMD3PKw99jj6XTvuJexEeycyI=
-X-Proofpoint-ORIG-GUID: 3r9_ACrmAEY9ACbIMMijmgqW9xdntJ9V
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=wn2kx61HezQC-XnySuMA:9 a=QEXdDO2ut3YA:10 a=uxP6HrT_eTzRwkO_Te1X:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-30_04,2026-07-29_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0
- phishscore=0 clxscore=1015 malwarescore=0 impostorscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607300102
+ impostorscore=0 spamscore=0 phishscore=0 bulkscore=0 adultscore=0
+ malwarescore=0 suspectscore=0 priorityscore=1501 clxscore=1015
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607300102
 
-On apq8064 (tested on the IFC6410 board) neither the GPU nor the display
-controller comes up in mainline: with CONFIG_ARM_DMA_USE_IOMMU enabled
-both devices either fail to probe with -EBUSY or take the kernel down
-during the ensuing unwind. Three independent problems stack up on that
-path, one in each of three subsystems, and only fixing all of them makes
-the board usable.
+insert_iommu_master() decided whether to allocate a struct
+msm_iommu_ctx_dev by testing whether the IOMMU's ctx_list was empty,
+caching the result in dev_iommu_priv, then unconditionally dereferenced
+the master:
 
-First, the MSM IOMMU driver does not handle a device that is attached to
-several IOMMU instances, which is exactly how apq8064 describes both the
-GPU (&gfx3d and &gfx3d1) and the display controller (&mdp_port0 and
-&mdp_port1). It keyed the per-device bookkeeping off two mismatched
-things, a per-IOMMU list and a per-device pointer, so only one of the
-instances ever got programmed with the stream IDs. That had been merely
-wrong for years, but it turned into a NULL dereference once the IOMMU
-core started deferring probe per instance, so today the board does not
-even reach a shell with the display enabled.
+	master = dev_iommu_priv_get(dev);
+	if (list_empty(&(*iommu)->ctx_list)) {
+		master = kzalloc_obj(...);
+		...
+	}
+	for (sid = 0; sid < master->num_mids; sid++)
 
-Second, on ARM32 the arch code gives every IOMMU-backed device a
-dma_iommu_mapping of its own and attaches it. drm/msm manages its address
-spaces itself and cannot take over a device whose group already has that
-foreign domain attached. The other ARM32 DRM drivers that are in the same
-position (tegra, rockchip, exynos) drop the arch mapping first; drm/msm
-has to do the same.
+Neither key is right. A master describes one device on one IOMMU
+instance: the attach and lookup paths find a device on an IOMMU by
+walking that IOMMU's ctx_list for a master whose of_node matches. The
+ctx_list emptiness test is per-IOMMU, and the dev_iommu_priv cache is
+per-device, so the two disagree as soon as one device spans several
+IOMMUs. On apq8064 the GPU uses &gfx3d and &gfx3d1 and the display
+controller uses &mdp_port0 and &mdp_port1, each instance carrying the
+same stream IDs.
 
-Third, arm_iommu_detach_device() undoes things in the opposite order from
-the one arm_iommu_attach_device() set them up in. An IOMMU driver that
-allocates its page tables during attach therefore frees them with the
-IOMMU DMA ops installed rather than the direct ops that mapped them,
-which ends in a NULL pointer dereference. This is trivially reachable as
-soon as any of the probe failures above unwinds, and it is what turns the
-GPU probe failure into a crash rather than an error message.
+The per-device cache also turns into a NULL dereference. When the first
+of a device's IOMMUs registers, iommu_device_register() walks the bus and
+drives ->of_xlate(), which links a master onto that IOMMU's ctx_list. The
+device cannot finish probing because its second IOMMU is not registered
+yet (-EPROBE_DEFER); that tears down dev->iommu and drops the cached
+master, but the master stays linked on the first IOMMU's ctx_list. Once
+the second IOMMU registers, its bus walk replays of_iommu_configure() for
+all of the device's entries, so ->of_xlate() runs again for the first
+IOMMU: dev_iommu_priv is NULL while ctx_list is not empty, allocation is
+skipped and master->num_mids dereferences NULL:
 
-The three patches are independent and are expected to be picked up by
-three different maintainers.
+  qcom_iommu_of_xlate from of_iommu_xlate
+  of_iommu_xlate from of_iommu_configure
+  of_iommu_configure from platform_dma_configure
+  platform_dma_configure from __iommu_probe_device
+  __iommu_probe_device from probe_iommu_group
+  probe_iommu_group from bus_for_each_dev
+  bus_for_each_dev from iommu_device_register
+  iommu_device_register from msm_iommu_probe
 
+The faulty guard has been there since the driver gained generic master
+bindings, but it stayed dormant for years because a device's ->of_xlate()
+only ran once all of its IOMMUs were present. It became reachable when
+iommu_fwspec_init() started deferring per instance on the ->ready flag,
+which is what lets a master be stranded on the first IOMMU and then have
+->of_xlate() replayed with dev_iommu_priv already reset. Hence the two
+Fixes below: the first introduced the guard, the second made it fatal.
+
+Look the master up in the target IOMMU's ctx_list instead, allocating one
+only when that IOMMU has none for the device yet. Each instance now keeps
+its own master and gets programmed with the full set of stream IDs. A
+stream ID seen twice is an expected consequence of the replay described
+above and is already ignored, so demote that message to dev_dbg().
+
+Fixes: f78ebca8ff3d ("iommu/msm: Add support for generic master bindings")
+Fixes: da33e87bd2bf ("iommu: Handle yet another race around registration")
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Assisted-by: Claude:claude-opus-5
 ---
-Dmitry Baryshkov (3):
-      iommu/msm: track a context master per device and IOMMU
-      ARM: dma-mapping: reset DMA ops before detaching from the IOMMU
-      drm/msm: detach the ARM DMA mapping before attaching our own domain
+ drivers/iommu/msm_iommu.c | 27 +++++++++++++++------------
+ 1 file changed, 15 insertions(+), 12 deletions(-)
 
- arch/arm/mm/dma-mapping.c       |  5 ++++-
- drivers/gpu/drm/msm/msm_iommu.c | 22 ++++++++++++++++++++++
- drivers/iommu/msm_iommu.c       | 27 +++++++++++++++------------
- 3 files changed, 41 insertions(+), 13 deletions(-)
----
-base-commit: 3652b49adac266a3d27cb41cdfdb7d8790fc3633
-change-id: 20260723-fix-qcom-smmu-b5798c65d689
-prerequisite-change-id: 20260723-msm-fix-crash-8c13220d9465:v1
-prerequisite-patch-id: 3556d41e924ad64e8e9c06cc5bd1972c66957f42
+diff --git a/drivers/iommu/msm_iommu.c b/drivers/iommu/msm_iommu.c
+index 0ad5ff431d5b..3847f5f0059f 100644
+--- a/drivers/iommu/msm_iommu.c
++++ b/drivers/iommu/msm_iommu.c
+@@ -601,24 +601,27 @@ static int insert_iommu_master(struct device *dev,
+ 				struct msm_iommu_dev **iommu,
+ 				const struct of_phandle_args *spec)
+ {
+-	struct msm_iommu_ctx_dev *master = dev_iommu_priv_get(dev);
++	struct msm_iommu_ctx_dev *master;
+ 	int sid;
+ 
+-	if (list_empty(&(*iommu)->ctx_list)) {
+-		master = kzalloc_obj(*master, GFP_ATOMIC);
+-		if (!master) {
+-			dev_err(dev, "Failed to allocate iommu_master\n");
+-			return -ENOMEM;
+-		}
+-		master->of_node = dev->of_node;
+-		list_add(&master->list, &(*iommu)->ctx_list);
+-		dev_iommu_priv_set(dev, master);
++	/* A master describes one device on one IOMMU instance. */
++	list_for_each_entry(master, &(*iommu)->ctx_list, list)
++		if (master->of_node == dev->of_node)
++			goto add_sid;
++
++	master = kzalloc_obj(*master, GFP_ATOMIC);
++	if (!master) {
++		dev_err(dev, "Failed to allocate iommu_master\n");
++		return -ENOMEM;
+ 	}
++	master->of_node = dev->of_node;
++	list_add(&master->list, &(*iommu)->ctx_list);
+ 
++add_sid:
+ 	for (sid = 0; sid < master->num_mids; sid++)
+ 		if (master->mids[sid] == spec->args[0]) {
+-			dev_warn(dev, "Stream ID 0x%x repeated; ignoring\n",
+-				 sid);
++			dev_dbg(dev, "Stream ID 0x%x repeated; ignoring\n",
++				sid);
+ 			return 0;
+ 		}
+ 
 
-Best regards,
---  
-With best wishes
-Dmitry
+-- 
+2.47.3
 
