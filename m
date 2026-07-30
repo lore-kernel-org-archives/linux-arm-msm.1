@@ -1,81 +1,120 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F64F367B79;
-	Thu, 30 Jul 2026 01:55:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C5D421CC5C
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 02:06:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785376550; cv=none; b=sSlX8EKVw2TwOwMM0T6MmV7T7UXcvZXvxqXekA9HWVh+7k5fJ3oOctBt6qfq/i7ixLb9Jl5XuM4oyx8MPWRESM1Na7BrjgNvQ62U8qYInPRlydX7GvYck9CdcYfVNJ7dwE10ljIbwzJZI2vyf7TmKAXSBq+mBP/V9gVLDZlQUkY=
+	t=1785377207; cv=none; b=kSR0n7uryIGeYsHlOf6Z2cag1PqKIZhUdiXge1KXglvI/xSaPyuMRU/U14yJRn/GFemvbJR/qXiSTGxGKMdVuVYBRd8sHoGYFz18zCZGDonj+3kDo73hAtOFUTITySRg5EZKow5Bac7Z1x8aMNNc3lKRynT5hjjhpZdO9I6J64U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785376550; c=relaxed/simple;
-	bh=f6SqdBlQnbH+oHOo9OjfUS63JXdzmYH+2I6PPWishIk=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=m6VVwsKV4nQTGgK9rk+COkNKH1VVWn6L/Mlq9tStqBoTZDdIxnPMWO17bcSbMHR0APAR+VhtImsF19gA6CTRWyuVYAUtOu1JAkzMa/VlSe+dteZfi7xa4Q+syixUTBqay//YEB5DO18mQ5cshSVG0e5/V3bRbzRYCdemEOYy6F8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Tn4zkkr8; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785377207; c=relaxed/simple;
+	bh=CpHO3RZDQ+NyGUCtuZdusXsaETAe8lzjbPfQoIJ58So=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=QgRdXvim3S/dhYAx5tkkEpDjfR9DMSppmdBd31vbub4LJhSHwxd6d+M+t9qpn4pUiIchIyySgFhmDcpF8/ftmH32w6mz2gN11K4VIRXHOIfSEW4omrS1wgLJybyLHtNLrhqeulShT2GuvbG1UW8fvELKWYeKoeKFSG2LmGnPyh8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fZl/qbuU; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Tn4zkkr8"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB26E1F00A3D;
-	Thu, 30 Jul 2026 01:55:48 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fZl/qbuU"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3CB41F000E9;
+	Thu, 30 Jul 2026 02:06:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785376549;
-	bh=fWV7GMCe5lzSc5wF/O77Fqd9HTAmstf/wVTVT2lMemw=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=Tn4zkkr8LS5tLLcEnpV85nJDKV4lfwtHJVI4seSqVrkGHYjTqfRI9SStgL8JiXWFB
-	 yxD6otMSdPF1RJV5mBOJaDWMBP77UH0RBzLIW1WuLWCirTmFWwTF5gLh6xPoxkUgxl
-	 bVNV9jYSiCqZMhNm6qI4UY3cSlrIe1Sf3xW9VrzauxSgU19tMn2NmhTFJ7m9A6nLGN
-	 r+3bcJcXbfr1ifB1An+sSLWsQDLsx4CWX9hT24SPLK5NoMDC0mFBxtAiUDqlrLhUek
-	 Sp5RNvbU6AgiaAAENAfASz3PkM3xwjM4c24kmRC1el0jSX9Uu/EBIxMjuI4EFwb/LR
-	 0rhXz1jOWOxKQ==
+	s=k20260515; t=1785377205;
+	bh=PAt+eZwf8tQx/cEfnmLtW7Yb9P3v3HHpCqPrZ+zoQ4Q=;
+	h=From:To:Cc:Subject:Date;
+	b=fZl/qbuU/+0Cy/P550elaPKyJIDbtw0qsVazlVfw/W4DQPKrwm4s+xrQHjaGavvY1
+	 93aa5LuQQZ6erVoOCiY1TlvjMU6E2kqnkgj18O8jCGuHTM/BRn57MKzmpNB2CDIjc3
+	 H79WTXnp41nnCOmI2KIP4e/yzRvWP0Lk9TAr/mTFtsnTU3xPXlGYqE5pJhrqG4w608
+	 TaoOLdH76R52xBbVM+PT2lKL1CkLzjV5iP5jbSgzxwJ66d4tg/DcZ6vYtlI+DR9lwi
+	 0nZDVweBmfkBeiYfpWUPEH20mQ9RHM4rybavp2bsH36TgoR1/ygqs/gjPCnYuiZAC2
+	 IGj9S0+rorVlA==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+To: arm@kernel.org,
+	soc@kernel.org
 Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 0/4] dt-bindings: arm: qcom-soc: Improve validation of expected SoC naming
-Date: Wed, 29 Jul 2026 20:55:40 -0500
-Message-ID: <178537653468.67965.7066106292961080059.b4-ty@kernel.org>
+	linux-arm-kernel@lists.infradead.org,
+	Arnd Bergmann <arnd@arndb.de>,
+	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+	Pengyu Luo <mitltlatltl@gmail.com>,
+	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+	Alexander Koskovich <akoskovich@pm.me>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Subject: [GIT PULL] Qualcomm Arm64 DeviceTree fixes for 7.2
+Date: Wed, 29 Jul 2026 21:06:42 -0500
+Message-ID: <20260730020642.68595-1-andersson@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260721-dt-bindings-qcom-soc-naming-v3-0-8f275c9d3412@oss.qualcomm.com>
-References: <20260721-dt-bindings-qcom-soc-naming-v3-0-8f275c9d3412@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Tue, 21 Jul 2026 17:51:02 +0200, Krzysztof Kozlowski wrote:
-> Changes in v3:
-> - Extend qcom,[ak]pss-wdt-xxx pattern to cover also qcom,apss-wdt-x1e80100
-> - Extend qcom,scm-xxx pattern to cover also qcom,scm-x1e80100
-> - Add patterns for qcom,rpm-codename, qcom,rpmcc-codename and
->   qcom,scm-codename (all used with Shikra)
-> - Rework patch #3 incorporating Rob's suggestions, but not dropping
->   legacy-model-name compatible checks. Now use "contains" in compatible
->   property schema and drop all fallbacks from previous approach.
-> - Tags.
-> - Link to v2: https://patch.msgid.link/20260707-dt-bindings-qcom-soc-naming-v2-0-1b7d695be2e1@oss.qualcomm.com
-> 
-> [...]
+The following changes since commit dc59e4fea9d83f03bad6bddf3fa2e52491777482:
 
-Applied, thanks!
+  Linux 7.2-rc1 (2026-06-28 12:01:31 -0700)
 
-[1/4] dt-bindings: arm: qcom-soc: Include Eliza, Kaanapali and others in SoC names
-      commit: ec31c2fb9286ace04394e8ed98ef5f2b1b34cbdd
-[2/4] dt-bindings: arm: qcom-soc: Document more of existing legacy style compatibles
-      commit: d00d2656884fb8cabc81543457d3dd2685532521
-[3/4] dt-bindings: arm: qcom-soc: Validate nodes with fallbacks
-      commit: 8ed9b7baf47cc876fcf44944b79dc30b493c9374
-[4/4] dt-bindings: arm: qcom-soc: Allow WSA88xx speaker compatible
-      commit: ab7b4c7b351809538698dfb1634510b5730b1a74
+are available in the Git repository at:
 
-Best regards,
--- 
-Bjorn Andersson <andersson@kernel.org>
+  https://git.kernel.org/pub/scm/linux/kernel/git/qcom/linux.git tags/qcom-arm64-fixes-for-7.2
+
+for you to fetch changes up to a3ba349af8e1bb7e0efdcd2dd53d69282f18478a:
+
+  arm64: dts: qcom: eliza: Fix DSI1 phy reference clock rate (2026-07-29 16:15:06 -0500)
+
+----------------------------------------------------------------
+Qualcomm Arm64 DeviceTree fixes for 7.2
+
+Correct the ESPI interrupt specifiers for PCIe SMMU and QUP nodes in
+Glymur.
+
+Correct the GIC address cells on Monaco, to avoid DeviceTree validation
+failures introduces in v7.2-rc1.
+
+Drop the secondary interrupt from the GPU SMMU on Purwa.
+
+Fix the invalid PDC IRQ mapping for SC8280XP to ensure associated GPIOs
+have functional interrupt handling. Correct the EC interrupt on Huawei
+Matebook E Go.
+
+Reduce the depth of the requested sleep state for SDM850-based Lenovo
+Yoga C630, to work around the regression of suspend crashing the
+machine.
+
+Adjust the IPA IMEM address on SM8650, to avoid clobbering the wrong
+memory region in IMEM.
+
+Correct the DSI1 PHY reference clock on Eliza, to ensure that the right
+clock rate is used.
+
+----------------------------------------------------------------
+Akhil P Oommen (1):
+      arm64: dts: qcom: purwa: Fix GPU IOMMU property
+
+Alexander Koskovich (1):
+      arm64: dts: qcom: sm8650: Fix IPA IMEM slice
+
+Bjorn Andersson (2):
+      arm64: dts: qcom: glymur: fix PCIe SMMU interrupts
+      arm64: dts: qcom: glymur: fix QUP serial engine IRQs
+
+Dmitry Baryshkov (1):
+      arm64: dts: qcom: sdm850-lenovo-yoga-c630: lower PSCI cluster idle
+
+Krzysztof Kozlowski (2):
+      arm64: dts: qcom: monaco: Add default GIC address cells
+      arm64: dts: qcom: eliza: Fix DSI1 phy reference clock rate
+
+Pengyu Luo (2):
+      arm64: dts: qcom: sc8280xp: add several missing pdc map entries
+      arm64: dts: qcom: sc8280xp: gaokun3: correct EC interrupt pin
+
+ arch/arm64/boot/dts/qcom/eliza.dtsi                |  2 +-
+ arch/arm64/boot/dts/qcom/glymur.dtsi               | 32 +++++++++++-----------
+ arch/arm64/boot/dts/qcom/monaco.dtsi               |  1 +
+ arch/arm64/boot/dts/qcom/purwa.dtsi                |  2 ++
+ .../boot/dts/qcom/sc8280xp-huawei-gaokun3.dts      |  2 +-
+ arch/arm64/boot/dts/qcom/sc8280xp.dtsi             |  4 +--
+ .../boot/dts/qcom/sdm850-lenovo-yoga-c630.dts      |  4 +++
+ arch/arm64/boot/dts/qcom/sm8650.dtsi               |  4 +--
+ 8 files changed, 29 insertions(+), 22 deletions(-)
