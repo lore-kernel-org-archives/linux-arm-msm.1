@@ -1,331 +1,221 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C85B3A4F35
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 04:52:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2A58424886A
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 04:57:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785387163; cv=none; b=lutUAM8F1gs4TJMuALRriTzW+17zPN3qkN1Ml1DF8saW3pP4kvB65mBI8itiBBF/sqnIq/jLBHT84tpW5E7FeIhiyvbEgv6sndb8ElC071NebxTTY1+q4Bpm1Fz1fuG3rzqDrfEH/RJkakjlJezyxLnQo2SmDMQPLpLi2TW2+78=
+	t=1785387438; cv=none; b=rhKigsWbQbHqMScgJXZ3w2ZC9u8VAWBLl/y6ZCQS2AgOJ1jPLiR4/gAjmV2IvvFLo4TCGpLURmetENa8tAk/v9PXwUyWh/2Z6/oWdanRKGz61afR3jpNInaM5FNcpw2ZUdLZ9ghYAsLfPiJKWBCkcZ3Ha3rWMo668yksibp07UU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785387163; c=relaxed/simple;
-	bh=9R1jnhq2oXjdoMBKLvZuU0Q/c4UWJnm/6cs+1wVuRyY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=edJkOsAnDQPRsZv4Kbx3LsWaaGqMO6gREBV2K09HTi97Scsmx0qZcB75027QO6NtNHusQr8yWKkoviPVPTYzFPT70k/CAPwhOtW54oXc0VfWvdnMFmXBnEGp8F6GXc5twilBcKJ77ehvcwdWDrEKZLDyEvA+VyUaP5AzFyKGhHs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fir2qQNx; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NvPS2KRX; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1785387438; c=relaxed/simple;
+	bh=VZJXh43ij+6wvEZ9BoY5kUezW782iYppxl1ls6FH3Fo=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=p071K15oUiIVNMWxOD+NxFFtj65ap2RdbDGfSCiKmRvxKq4QdZgb/JpDM/rN47ZZKluh4yQBnZfNY2XArixDnntrGUIB5kGs3tcLl0fQxg6OEqUwhz4MbBYSHIa28rnfRdMN64Uw0RklKx2x4DvROvyx5w5F1GwSjvghIHv6r+I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FDvBnjZJ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=FGbPT8eQ; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fir2qQNx";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NvPS2KRX"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66U4kvQ23978102
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 04:52:41 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FDvBnjZJ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FGbPT8eQ"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66U4atAV4130802
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 04:57:16 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	kTnb0bbBTOh0ujs8xWkkOVPWXcBEgS7OoCRQ+dvQBes=; b=fir2qQNxhq8EnkM7
-	DvTLumrNy8XRHoHnQEsATqTf0fbMZyUte1xt2nwo8+jSAV5pfVyMsxhXXptxFqD2
-	XURBZg3KGec47VkFQjsEzJUWpvTOnQaq00AkH8cO8YavrB7cYzI1pnmZcXaDatPs
-	7VIJCzlHL6H3eGfTNCsh4b0x6WJbJ5LWADmMIXovkbOsysT9XnGaij5rNPMQ5iOO
-	MagHalEgOEfyYhknPKBMkP5tyNwTOpKvvngGl7WwejYFQ1W3UWWfhr9fjIWgUNNe
-	sPLZv5noskD2EB7fMc4gEcYa2cmbljuXCYq3LM9L3OenaXlgvU42Di6rTuBUNRCS
-	62u5MA==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fqyvxr0ne-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=RRv8WoojXtJXS2tAE77IAi
+	WJVFbG8DsJeoMpD+E8Wbc=; b=FDvBnjZJw+jhQEs+aY+dvx6sLKhEXjn02yRgmx
+	lLwq4MZW5Njt5TPKEDi8d1K/gEl5A7PHQOXsm1a63ea0yFITq+44lvVn/PylHsx+
+	Ljz+Ioj+w5biMAOehI7dc/8Yp0ObSiS7fL1UXFjqbumjzwyGM0GFAd191b+YuHCn
+	qWWSZ+nPGcw4mOpB4VRnH+pjTLrwXI97+S3vf9/adfMNJ8BHi3VxVm7dXpiwWx/a
+	0fYGFJJ8m/5srMEUwAWWXYHkbTn89oy4ms3gkQIRUOlfresmyG+3ukFHaB9tMLGs
+	i3CG3oHsuOwAkq1e8htWyz7/f0tgs1WIDAgY0kHuRqIcE2wA==
+Received: from mail-oa1-f70.google.com (mail-oa1-f70.google.com [209.85.160.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fqyr1029h-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 04:52:40 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cb11535e6a1so1408582a12.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 21:52:40 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 04:57:16 +0000 (GMT)
+Received: by mail-oa1-f70.google.com with SMTP id 586e51a60fabf-4488f192768so1849175fac.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 29 Jul 2026 21:57:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785387159; x=1785991959; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=kTnb0bbBTOh0ujs8xWkkOVPWXcBEgS7OoCRQ+dvQBes=;
-        b=NvPS2KRXqf8dz6dO4mTatDuw6mQJaX/lejg6G/yxpsVLO2o3UZlduLftpKfwipLn/+
-         Zu9+uBOv9enX7iPFs0LCGFuGI8dICXl44yJP2zSQev2NXgpipoxNuR2Z7c+j2LbdJ+l8
-         VCukmUpmPFZUZNCaM7QS7wCW35vDHqQBEQPbp5jLx+x15sbb/QqRTI2M8P4IKW2maOCp
-         veewvi8C8NEFNWbrtL9CQaAQpPwo4U1oguXSE3HWkHkg5yuk1vAJyrPt91uSBWe9Hwig
-         ShNyK8SJol96mmdKZD5rkPHS9G7HS7f1THjMyuy6W+2yq2/DeIm7bme7c07bpwQimfFk
-         HXqg==
+        d=oss.qualcomm.com; s=google; t=1785387435; x=1785992235; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=RRv8WoojXtJXS2tAE77IAiWJVFbG8DsJeoMpD+E8Wbc=;
+        b=FGbPT8eQA1qq1G5AYZHld6Q9A2VjW8VaSLEWuv7htSnmgJxknTiZnqDeJLi4n0ua1H
+         MvJRe0YlWQZrj9cYAJbjjrTD1DCI7Pf5vUHHsPv9bXo6Up3ik3XpD4kW6j9KFAk4aqcB
+         J/7yvnlUKz7XynzZZhp1dCCeeWO84Yq1juS5uU5ucGBatSvl21rO6AaGLpE8N7OTGi5s
+         Pf9y2RLYccCmAQ4BKpVhYNYtYHwSjI/3LYmotjkfw4gXBPDYWtSLrheC6nX6qXpp5L9a
+         yoji6FX4Y2k5IN1G/OQM23a3NclyG2Snp1usYUIc6KZyXjZvZyz5AtKGoZXq9+NxdG6/
+         ckLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785387159; x=1785991959;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=kTnb0bbBTOh0ujs8xWkkOVPWXcBEgS7OoCRQ+dvQBes=;
-        b=KVt2MD6VvFWT1MtEvWsLBMrVEq1JdeHgmBp6wVQcffyL8DY2CGhUXNIHM3UK9HS4ZG
-         8yJyK38qSpegPYP8usCzHZBCl6exh60PdbAwqYrDEniGfJK28lQpvmNk10JjB4ulVxbN
-         JABXQj0s48pyZ/TJigRtOmikRxvrEBa/f3cOgeesa4RbJTUVvdcuN6/yF7wNjRWMPNl6
-         0SCxKHo3wvoICip9Bo29do9AQaGbAwqA2rO8Xh0hpovphPCnvX4goMqT5loZuxJa8b2M
-         LlEAtgDuOvGSMQCT9UiqWC4+Q+N7SvRTtorgHHdlLwWF47a/7+TMvOoWciscTc2UqAWz
-         /Sdw==
-X-Forwarded-Encrypted: i=1; AHgh+Rr3YsIVqKfX5cJ1eCFbiN1ojniheJD2O8LCmIthrb7PZKUc6ECTkrREstpxrUulTfJZcRyw3/fwd1edimBP@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx1NOx6Dejoui9IGhVdESzfDpwwivaGmqDQK+RIUfNuscCy0NP7
-	FiRDNVYiJ67CVd+0eqn2sQFyjkDw/frvuMveMqWWViYHYSx5+cX9KgSSqVa0kPgfGE55VgW+Om3
-	S+cZ4nmV3jCtsaJVxNfooWF5UAuSt6d9I0eVH2ewy8dCUrr8oa0J2f3idZQAbf9jA0ZhD
-X-Gm-Gg: AR+sD11eevnqhSDe/0N1Aev0u2Sn3g5MOH7XQi9dMKeKSdCZwuBqAkBOJCqDbs4Ct/O
-	JGhf04LMEdpEKHeiD56j2XMGcxMQ0+C6zT6PlLeWCEae4IPWWgbJFQzD0jADz63eXpt/sAs9xxh
-	SkDs98jpl7CF4O6ZK9WPw+d1xCrpUjyG+MD28QWjP0VzchnideekDnfNmzcpxUSUExhD8banNLy
-	uTNbUjbtv2jS/BjcK7w0LHxv0AcetrxLWAWBpxL8h340tJVdhsVt5XEiSdwFLS/dTS/BQ3phhdh
-	vwGwO2sOwU85Pe8Rh1jgnupkf+zKrYJI2XTKCiLLUGpnlY+ieHz19WtutczTHtB2+il8/nbD2tl
-	/DMhINtO+3bsdmU0d9hU4bcdaW5Jglw==
-X-Received: by 2002:a05:6a20:7f99:b0:3c4:42d9:58e3 with SMTP id adf61e73a8af0-3c90066b1c6mr1078125637.13.1785387159511;
-        Wed, 29 Jul 2026 21:52:39 -0700 (PDT)
-X-Received: by 2002:a05:6a20:7f99:b0:3c4:42d9:58e3 with SMTP id adf61e73a8af0-3c90066b1c6mr1078107637.13.1785387159035;
-        Wed, 29 Jul 2026 21:52:39 -0700 (PDT)
-Received: from [10.204.78.242] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cbdb78ae98asm1601217a12.1.2026.07.29.21.52.35
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 29 Jul 2026 21:52:38 -0700 (PDT)
-Message-ID: <7942487a-1a1c-41bd-850b-25f1f4bb0773@oss.qualcomm.com>
-Date: Thu, 30 Jul 2026 10:22:33 +0530
+        d=1e100.net; s=20251104; t=1785387435; x=1785992235;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=RRv8WoojXtJXS2tAE77IAiWJVFbG8DsJeoMpD+E8Wbc=;
+        b=mTLm65aMZw9kQtZgNY+pYVV+/uPVUKZbowkE61LfAHofHCOXTYQhg9ha69jIapHWay
+         MaZQwGZrG3GDiG1O96E3NEvRftERRCDWpbNesD5ZOUrESZLuVsYbGO1CAip+L2vEL4RB
+         qg0gdwzrlzSVGVtq6IajzKWdTtyQgn4sD21ECbSVYAcBcAWxuNsyZrIZ2aoZL0o42xGf
+         BzBML7fJIXsfKxjkz8VNO08u/Haf3nd10uin1lnMLzjiR1602O90N9vRcwPPgv28VYpA
+         Qte1rR/eDI0k0He6xz+z24LWnl2FsEuO95YM0r/q6NEsSvNmNbacufElatj/skn+g9QN
+         IJog==
+X-Gm-Message-State: AOJu0Yyaj2kpDKkKmPQuLNX8iffcFOfdR/ruWdVxavwpR2ksmMHP3WJt
+	ylLVkT6DWliaegNIme8rQI8kHBo+4Y+DjEvH9KP+Ge6WtauKtW8cWqYhrV5SfHvPgEQ5d3GwIXF
+	RxC9RXe1j1BKh4e9uGLNp7vEeiNZ99o1tt5WaUnqwagNIBZ9bQYmS99b6EyDB/PpKleBt
+X-Gm-Gg: AR+sD11n+2/8LY3+bJhHLL1GvXRcFzpwslbOnun+J6RZiod3Ab6AAjEasPWTkaoiU4Q
+	Xv+knf6c+mHk8eBpBzs/KhSznpTnS7yOHYtWccXYFvAI0kZ39/Ixz1WkaK0NMlPyOZuo2QS2VE6
+	54/LOLybdmRkxFQQj2k4ZshLGpFHAdCS2tNZvFWUnq4cKcKrqfxPar27vSy8xRp88rgY5CsH/p6
+	BxKCx07KTxP6nA3Bm2whHPsWYpE/iOwQduI9VuWbkKU05Cn7Li26u/Lbqmj5xuBD8eBFJqtyndi
+	JJXAZur94jN4GrGZeE4gS8lH0WIvHXWNPD5UlU2InyYx4Nti2DuL4pV4FAspGR8aLQnWvBwtxMj
+	JNVjBWRuwJXi55FHBoEZ9KA3P2nbNN2EPzSk=
+X-Received: by 2002:a17:902:d2c6:b0:2c6:9f66:d573 with SMTP id d9443c01a7336-2d035bee57dmr11587635ad.2.1785386949323;
+        Wed, 29 Jul 2026 21:49:09 -0700 (PDT)
+X-Received: by 2002:a17:902:d2c6:b0:2c6:9f66:d573 with SMTP id d9443c01a7336-2d035bee57dmr11587335ad.2.1785386948856;
+        Wed, 29 Jul 2026 21:49:08 -0700 (PDT)
+Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31504cc9dffsm17740241eec.14.2026.07.29.21.49.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 29 Jul 2026 21:49:08 -0700 (PDT)
+From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Subject: [PATCH v6 0/3] arm64: dts: qcom: eliza-evk: Enable PCIe0 and PCIe1
+ with M.2 and TC9563 switch
+Date: Thu, 30 Jul 2026 10:18:52 +0530
+Message-Id: <20260730-eliza_evk-v6-0-40ece2d33114@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] misc: fastrpc: fix UAF and kernel panic during cleanup
- on process abort
-To: Jianping Li <jianping.li@oss.qualcomm.com>,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Amol Maheshwari <amahesh@qti.qualcomm.com>
-Cc: Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Thierry Escande <thierry.escande@linaro.org>,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        linux-kernel@vger.kernel.org, quic_chennak@quicinc.com,
-        stable@kernel.org
-References: <20260630063409.475-1-jianping.li@oss.qualcomm.com>
-Content-Language: en-US
-From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-In-Reply-To: <20260630063409.475-1-jianping.li@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=c7ubhx9l c=1 sm=1 tr=0 ts=6a6ad898 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-B4-Tracking: v=1; b=H4sIALXXamoC/3WS3W7bMAyFX8Xw9VRQ/1YwDHuPYRgkkWq81U1iO
+ cbWIu9e2h4GF11uBFDg+Q51qNe20thTbQ/NazvS3Nf+9MyF+9S0+RifH0n0yHWrQDlwKgh66l/
+ iD5p/CVc0uM4l6WRpuf88Uul/r6xv37e6XtNPytMC+Nsx0uXKJtPW1p7jlI9scWgCScCSSDsIR
+ maMGTRAjEU6LU3w1garStic/qkK5UwgPWgrUywAOVFXXNKgUCIVgyGkVPJ7VfAZXU4m2IIoAwu
+ QPHsbS0UrMtHpjnJYVQPVGtcYDs3nLQUNAqcqLvk0bHGIYTqLJZKIKM5Dn6uYpZCiGMZB8bnr0
+ tdTrQ+Xa3xi1fDAx5eFnmIlsdz006HBbAOZQjFg1y4JHvs6ncY/63JmuQa2TsDP3e2BrUB4p4w
+ xkNA7/GC1wma1B3R7gGIAewdlXKYU5R2A3gGU3AM0A4JKEkB3Rep7E5g94N0EhgHIu/SFLE9Bd
+ wB2D9j/xdkywEgfINqoDP4PcLvd3gB4kVcf7wIAAA==
+X-Change-ID: 20260629-eliza_evk-6f30686b161f
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org,
+        linux-pm@vger.kernel.org,
+        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785386943; l=3461;
+ i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
+ bh=VZJXh43ij+6wvEZ9BoY5kUezW782iYppxl1ls6FH3Fo=;
+ b=0lKAQgskhw1e8uBRucCRgynMWN1r3x/DurUgL8ZVXIPg7Cfv6WmKrOPaSkrQPiTyqoPHrIkvn
+ BbWKKVESGH9CWHqwJ+ZL7nC6gWQXbHozOzjrNILGySwC0kUF/ujtJSs
+X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
+ pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
+X-Authority-Analysis: v=2.4 cv=Hb0kiCE8 c=1 sm=1 tr=0 ts=6a6ad9ac cx=c_pps
+ a=nSjmGuzVYOmhOUYzIAhsAg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=IFEFMmON-DzK0gGTnVEA:9 a=QEXdDO2ut3YA:10
- a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDAzMCBTYWx0ZWRfX8/eseWNr2Mzp
- YFsahh65lz9Nd9/areN8cbswg6ev/PagWjn57N7Aci0JLdC7aIQMXUi+H3EkEG5D6IvTdj6cmzC
- NM08OkAgmXe6neXQZ0hnfwzUWT0cY/Q=
-X-Proofpoint-ORIG-GUID: 3M4__MdjwTemZRya7NzQR0TzwT4qAI-Z
-X-Proofpoint-GUID: 3M4__MdjwTemZRya7NzQR0TzwT4qAI-Z
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDAzMCBTYWx0ZWRfX9j87rTvsPw/T
- KMuDzNszQf8qKgMvIREj05AvEUQLsrSkG9YDfhQxmOwV2it5C7WSN5ymVVO7ZfQXcyt7tlOnH8l
- fwN1r/uJE66+AEp2neETGQ4HIJYE4IT7EoeaUxeUQ03sVC9mboOUMAoW62jvltREbnGiaa/T8ty
- wc6Q57Kr9GgITHTXpyit24d8imyRiDLJbxgUm+6NXn/4K2SHoNikBXyfiFs21HnCmQoWVzdd/0T
- AI2kNmnQyVSJuMWOANaJpuh/z6SKfxuIwTe7UbV/Sam/wsaAdJ+qIlVA/7rlfyz0I7BBCyPbsUR
- +El3Ght23mHbzT11RaO2Y7zyAAtx3MrFVEO1gZlaphudZ98qQWsnmnKHBxc9l9ziLkATiv4JxX3
- 1v/vYqjpPafCufFy/mXq1O2ufo4hT7ntKl6eaBFkebTDnvDtKKvaV7TCxzluVWxc/KtOuHytwjN
- Wk+54b9o7gJQ/+EAG3A==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=bC-a23v3AAAA:8 a=0uohWpJSiqPYzphn-GwA:9
+ a=QEXdDO2ut3YA:10 a=1zu1i0D7hVQfj8NKfPKu:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-ORIG-GUID: hWwyd0KUiPW3rWSdbrvKpKy_LYnxeLfs
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDAzMCBTYWx0ZWRfX836Ru/+rHnhe
+ /Kpyjx1sritAKWQIZMtmDJf9l7zTEOUuV8+V6VeT4FBSSPivTB4qizqytNzse5l0Ts2pU4tCj0L
+ HKDcgw7degoBLf10FPaNJi8lgawEMgLDLrRjHVzqpIQDhCyIXQKnmdFPkAy7sblpXA6mPsw6Dm9
+ GLbaSzhC/RFbQRXJ0ufr52QVLDQNpzTl9epvLcflEIIZbSZJnVCj+8tzCnIcm9RL6xjbGLO8FXE
+ 5DD3Th1a5MsWwk/QkFZCJX3TDyO/imkMWyyaR2AyWpFiPxmidAGRcRbtItQ2ulWYkt3PA9/ukdZ
+ tXqlScAD9VStkj6c33nDMUYrmIuvv7LWZe+Uyih1YszYkQg/lmu8EOU36IggMEKgCE092pyON+h
+ r/7JRIUGbV3u5SU66ZkEH/7rXE8E9FHE9XyC4MCbxGQvL7bvXVRslVy5nxwkjk2NNSqxXFQk6OG
+ nva/bwbnq7LHWgI7Ldw==
+X-Proofpoint-GUID: hWwyd0KUiPW3rWSdbrvKpKy_LYnxeLfs
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDAzMCBTYWx0ZWRfXw8+403mWD9Jc
+ uuXCpr8x09Ge6VRHMl0+c2vNq8S2BkTj++kG4QBas2NDVjMfitk9RERgphw5AM0eXJzRR81U0WI
+ XUeY18T7pOJHtSQxAhi7MSMNqSwxQwo=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-30_01,2026-07-29_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 suspectscore=0 impostorscore=0 priorityscore=1501 clxscore=1015
- malwarescore=0 phishscore=0 adultscore=0 lowpriorityscore=0 spamscore=0
+ bulkscore=0 priorityscore=1501 malwarescore=0 suspectscore=0 phishscore=0
+ lowpriorityscore=0 adultscore=0 clxscore=1015 impostorscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607300030
 
-On 30-06-2026 12:04, Jianping Li wrote:
-> When a userspace FastRPC client is abruptly terminated, FastRPC
-> cleanup paths can race with device and session teardown.
-> 
-> This results in kernel panics in different release paths:
-> - fastrpc_release() when using remote heap, originating from
->   fastrpc_buf_free()
-> - fastrpc_device_release() when using system heap, originating from
->   fastrpc_free_map()
-> 
-> In addition, fastrpc_map_put() may trigger refcount use-after-free
-> due to concurrent cleanup without proper synchronization.
-> 
-> The root cause is that buffer and map cleanup paths may access map
-> and buf resources after the associated device or session has
-> already been released.
-> 
-> Fix this by:
-> - Introducing mutex protection for map and buf lifetime
-> - Serializing buffer and map cleanup against device teardown
-> - Skipping buffer and map operations when the device is already gone
-> 
-> These changes ensure cleanup paths are safe against unexpected
-> process aborts and prevent use-after-free and kernel panic scenarios.
-> 
-> Fixes: c68cfb718c8f9 ("misc: fastrpc: Add support for context Invoke method")
-> Cc: stable@kernel.org
-> Signed-off-by: Jianping Li <jianping.li@oss.qualcomm.com>
-> ---
->  drivers/misc/fastrpc.c | 57 ++++++++++++++++++++++++++++++++++++++----
->  1 file changed, 52 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
-> index a9b2ae44c06f..3521518f9fe5 100644
-> --- a/drivers/misc/fastrpc.c
-> +++ b/drivers/misc/fastrpc.c
-> @@ -255,6 +255,8 @@ struct fastrpc_session_ctx {
->  	int sid;
->  	bool used;
->  	bool valid;
-> +	bool allocated;
-> +	struct mutex mutex;
->  };
->  
->  struct fastrpc_soc_data {
-> @@ -335,9 +337,14 @@ static inline u64 fastrpc_sid_offset(struct fastrpc_channel_ctx *cctx,
->  static void fastrpc_free_map(struct kref *ref)
->  {
->  	struct fastrpc_map *map;
-> +	struct fastrpc_user *fl;
->  
->  	map = container_of(ref, struct fastrpc_map, refcount);
->  
-> +	fl = map->fl;
-> +	if (!fl)
-> +		return;
-> +
->  	if (map->table) {
->  		if (map->attr & FASTRPC_ATTR_SECUREMAP) {
->  			struct qcom_scm_vmperm perm;
-> @@ -356,10 +363,16 @@ static void fastrpc_free_map(struct kref *ref)
->  				return;
->  			}
->  		}
-> +		mutex_lock(&fl->sctx->mutex);
-> +		if (!fl->sctx->dev) {
-> +			mutex_unlock(&fl->sctx->mutex);
-in this case, should you still delete map from fl->maps list?
-should you still do dma_buf_put to remove dma_buf reference?
+This series enables PCIe for the Eliza EVK board (CQS SoM on EVK carrier).
 
-Also, there was a recent change where fl refcounting was added[1]. Can
-you see if you can take use of that mechanism instead of adding checks
-at all these places?
+The Eliza EVK exposes two PCIe ports:
 
-[1]
-https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/drivers/misc/fastrpc.c?id=e85eb5feca8e254905ffa6c57a3c99c89a674a0f>
-+			return;
-> +		}
->  		dma_buf_unmap_attachment_unlocked(map->attach, map->table,
->  						  DMA_BIDIRECTIONAL);
->  		dma_buf_detach(map->buf, map->attach);
->  		dma_buf_put(map->buf);
-> +		mutex_unlock(&fl->sctx->mutex);
->  	}
->  
->  	if (map->fl) {
-> @@ -422,9 +435,18 @@ static int fastrpc_map_lookup(struct fastrpc_user *fl, int fd,
->  
->  static void fastrpc_buf_free(struct fastrpc_buf *buf)
->  {
-> -	dma_free_coherent(buf->dev, buf->size, buf->virt,
-> -			  fastrpc_ipa_to_dma_addr(buf->fl->cctx, buf->dma_addr));
-> -	kfree(buf);
-> +	struct fastrpc_user *fl = buf->fl;
-> +
-> +	if (!fl)
-> +		return;
-> +	mutex_lock(&fl->sctx->mutex);
-> +	if (fl->sctx->dev) {
-> +		dma_free_coherent(buf->dev, buf->size, buf->virt,
-> +				  fastrpc_ipa_to_dma_addr(buf->fl->cctx,
-> +							  buf->dma_addr));
-> +		kfree(buf);
-kfree should happen unconditionally here, it's a leak if you skip it.
+- PCIe0 drives an M.2 E key connector. The 3.3V supply is GPIO-controlled
+  via a TCA9538 I/O expander on I2C4. The slot hosts a WLAN module
+  (connected over PCIe) and a Bluetooth device (connected over UART5),
+  modelled with the pcie-m2-e-connector binding.
 
-//ekansh> +	}
-> +	mutex_unlock(&fl->sctx->mutex);
->  }
->  
->  static int __fastrpc_buf_alloc(struct fastrpc_user *fl, struct device *dev,
-> @@ -447,8 +469,11 @@ static int __fastrpc_buf_alloc(struct fastrpc_user *fl, struct device *dev,
->  	buf->dev = dev;
->  	buf->raddr = 0;
->  
-> -	buf->virt = dma_alloc_coherent(dev, buf->size, &buf->dma_addr,
-> -				       GFP_KERNEL);
-> +	mutex_lock(&fl->sctx->mutex);
-> +	if (fl->sctx->dev)
-> +		buf->virt = dma_alloc_coherent(dev, buf->size, &buf->dma_addr,
-> +					       GFP_KERNEL);
-> +	mutex_unlock(&fl->sctx->mutex);
->  	if (!buf->virt) {
->  		mutex_destroy(&buf->lock);
->  		kfree(buf);
-> @@ -491,6 +516,10 @@ static void fastrpc_channel_ctx_free(struct kref *ref)
->  	struct fastrpc_channel_ctx *cctx;
->  
->  	cctx = container_of(ref, struct fastrpc_channel_ctx, refcount);
-> +	for (int i = 0; i < FASTRPC_MAX_SESSIONS; i++) {
-> +		if (cctx->session[i].allocated)
-> +			mutex_destroy(&cctx->session[i].mutex);
-> +	}
->  
->  	kfree(cctx);
->  }
-> @@ -855,19 +884,28 @@ static int fastrpc_map_attach(struct fastrpc_user *fl, int fd,
->  		goto get_err;
->  	}
->  
-> +	mutex_lock(&fl->sctx->mutex);
-> +	if (!fl->sctx->dev) {
-> +		err = -ENODEV;
-> +		mutex_unlock(&fl->sctx->mutex);
-> +		goto attach_err;
-> +	}
->  	map->attach = dma_buf_attach(map->buf, sess->dev);
->  	if (IS_ERR(map->attach)) {
->  		dev_err(sess->dev, "Failed to attach dmabuf\n");
->  		err = PTR_ERR(map->attach);
-> +		mutex_unlock(&fl->sctx->mutex);
->  		goto attach_err;
->  	}
->  
->  	table = dma_buf_map_attachment_unlocked(map->attach, DMA_BIDIRECTIONAL);
->  	if (IS_ERR(table)) {
->  		err = PTR_ERR(table);
-> +		mutex_unlock(&fl->sctx->mutex);
->  		goto map_err;
->  	}
->  	map->table = table;
-> +	mutex_unlock(&fl->sctx->mutex);
->  
->  	if (attr & FASTRPC_ATTR_SECUREMAP)
->  		map->dma_addr = sg_phys(map->table->sgl);
-> @@ -2246,6 +2284,8 @@ static int fastrpc_cb_probe(struct platform_device *pdev)
->  	sess->used = false;
->  	sess->valid = true;
->  	sess->dev = dev;
-> +	mutex_init(&sess->mutex);
-> +	sess->allocated = true;
->  	dev_set_drvdata(dev, sess);
->  	sess->sid = sid;
->  
-> @@ -2260,6 +2300,8 @@ static int fastrpc_cb_probe(struct platform_device *pdev)
->  				break;
->  			dup_sess = &cctx->session[cctx->sesscount++];
->  			memcpy(dup_sess, sess, sizeof(*dup_sess));
-> +			mutex_init(&dup_sess->mutex);
-> +			dup_sess->allocated = true;
->  		}
->  	}
->  	spin_unlock_irqrestore(&cctx->lock, flags);
-> @@ -2282,6 +2324,11 @@ static void fastrpc_cb_remove(struct platform_device *pdev)
->  	spin_lock_irqsave(&cctx->lock, flags);
->  	for (i = 0; i < FASTRPC_MAX_SESSIONS; i++) {
->  		if (cctx->session[i].sid == sess->sid) {
-> +			spin_unlock_irqrestore(&cctx->lock, flags);
-> +			mutex_lock(&cctx->session[i].mutex);
-> +			cctx->session[i].dev = NULL;
-> +			mutex_unlock(&cctx->session[i].mutex);
-> +			spin_lock_irqsave(&cctx->lock, flags);
->  			cctx->session[i].valid = false;
->  			cctx->sesscount--;
->  		}
+- PCIe1 (8GT/s x2) connects to a Toshiba TC9563 PCIe switch, whose
+  management interface sits on I2C4 (address 0x77). The TC9563 RESX# and
+  PERST# lines are OR-ed internally; reset is driven via a TLMM GPIO on
+  the RESX# pin. The iommu-map covers all downstream switch ports
+  (SID range 0x1400-0x1408).
+
+The M.2 WLAN module carries a Qualcomm QCC2072 Bluetooth chip. A device-ID
+entry is added to the M.2 power sequencer so the serdev node for the BT
+UART interface is created on PCI enumeration.
+
+This seris Depends-on:
+  https://lore.kernel.org/all/20260630-eliza-dts-qcs-evk-v4-3-18cbbdba6e7e@oss.qualcomm.com/
+  https://lore.kernel.org/all/20260630-dts-qcom-eliza-mtp-evk-add-pmics-v1-1-f4f320f7c88b@oss.qualcomm.com/
+
+Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+---
+Changes in v6:
+- change 0 to 0x0 & remove num-lanes property (Mani)
+- Link to v5: https://patch.msgid.link/20260729-eliza_evk-v5-0-41790a5a24de@oss.qualcomm.com
+
+Changes in v5:
+- change from pci to pcie for subnode names (konrad)
+- Link to v4: https://patch.msgid.link/20260728-eliza_evk-v4-0-decc7fe5246e@oss.qualcomm.com
+
+Changes in v4:
+- Added new line and used pcie port names as pcieN_portM (Konrad).
+- Link to v3: https://patch.msgid.link/20260721-eliza_evk-v3-0-92b10038f13d@oss.qualcomm.com
+
+Changes in v3:
+- Clubbed pcie nodes to this series (Bjorn A)
+  (https://lore.kernel.org/all/20260708-eliza_dt-v2-1-e6281da26408@oss.qualcomm.com/)
+- Added comment for PERST (Mani).
+- Extended ranges property for pcie1 (Konrad).
+- Link to v2: https://patch.msgid.link/20260708-eliza_evk-v2-0-c599246ceba1@oss.qualcomm.com
+
+Changes in v2:
+- Drop patch 3, as this is already applied
+- Rebase on top of https://lore.kernel.org/all/20260708055017.A90C91F000E9@smtp.kernel.org/
+  and remove pincntrl as pincntrl is added in the eliza.dtsi patch and also remove
+  pinctrl for resx as this is covered in pcie1_default_state as perst gpio.
+- Link to v1: https://patch.msgid.link/20260703-eliza_evk-v1-0-7624440bd76d@oss.qualcomm.com
+
+---
+Krishna Chaitanya Chundru (3):
+      arm64: dts: qcom: eliza: Add PCIe PHY and controller nodes
+      arm64: dts: qcom: eliza-evk: Add PCIe0 with M.2 E key connector
+      arm64: dts: qcom: eliza-evk: Add PCIe1 with TC9563 PCIe switch
+
+ arch/arm64/boot/dts/qcom/eliza-evk.dtsi | 229 ++++++++++++++++++
+ arch/arm64/boot/dts/qcom/eliza.dtsi     | 413 +++++++++++++++++++++++++++++++-
+ 2 files changed, 640 insertions(+), 2 deletions(-)
+---
+base-commit: dc59e4fea9d83f03bad6bddf3fa2e52491777482
+change-id: 20260629-eliza_evk-6f30686b161f
+prerequisite-patch-id: 9e10dfbe360941cdac0300aaf163149755952f9f
+prerequisite-patch-id: fecce0170351baf00cbe8f6b302d1def4d99bbfc
+prerequisite-patch-id: 97cd6cb495fdd198f6de7fbe45ef32e4a638ec9c
+prerequisite-message-id: <20260630-dts-qcom-eliza-mtp-evk-add-pmics-v1-1-f4f320f7c88b@oss.qualcomm.com>
+prerequisite-patch-id: f3615b5c1e2222a2491f862a7fba3994058ecc53
+
+Best regards,
+--  
+Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 
