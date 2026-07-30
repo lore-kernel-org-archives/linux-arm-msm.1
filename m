@@ -1,227 +1,165 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A94BE41C72
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:40:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E9E236A02E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:41:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785429656; cv=none; b=m0rmVYSHdSWjpz6enKPz6Ua4/FMjBdIzprQG7t3O/Tw7SGsFzHQZU/ep3DAo1PnKP+iVmJLrX90aoWmJYp45BdEzuBAr6HTkLhqTbLA2WFNg/bxcyp3RJFPDEfWMLaIMTrRWXC6gAfyoFToyGL73yUEaYZSmVgbFZPnZKldva/4=
+	t=1785429691; cv=none; b=jUh1zASoLIA6XAKsTQDi5roLlpO/X96QpLT+StatPirSw/5j1kcGO8CcQfktLtQF7uzcKZZTrqHOfh5pnudsQtWBV3tcQ+k/lC5kJmEayhIxIWBoNzFsKbeNEafCeXKdgCdv4/zFW6/MbRMctO4oqePdbthAkf98Eyc32jJC0c0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785429656; c=relaxed/simple;
-	bh=wmIAcXC/31QOHhElKMkv99yGY6JwN5ZF8GjiYzQzbpA=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=EOVj4UMWHdok2Ku5GAef0ujhmM84/nmUYy1jTbS9csUUgA07heHBH1m9TTee3eTEl9Vlu3QpUPci1NVExbL/4runxE0cvEEP5k4nsPiQxZxVqqXcYSH0SSP1aXAtMdGGOyAJwBscm299Ov9CQx69y1f4Cp1I8nB1mdUezbcLcqY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IzI2sCib; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785429691; c=relaxed/simple;
+	bh=W1qHPOfiLKP9reR3QhYi9YeVhYLovQs0sDLJcbc29/c=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=j4UzCdyTo6m9VQcXhjbLodrFNHQ53tVc1G/REcxqefbdoABMiSpOlHtLHGvdBvRpplpsfIsl+xoUtJf5NuOPy5QyE5qTWvOvvEunNZde6EzcjUocnnmw7lEpeJ3wKaBbjANflK8fBkBV1e+cfSh2Fb/4VRb0fISaitFyctIU0L0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=P0dTlVDc; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hNPFOvHN; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IzI2sCib"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D241B1F000E9;
-	Thu, 30 Jul 2026 16:40:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785429655;
-	bh=eOClrm/u2VRY9VSgrwD7HR56oauHzrkY9aLE4Ys3yG8=;
-	h=From:To:Cc:Subject:Date;
-	b=IzI2sCib+1llKImo2BoNONVnf54FVGWgowOMSlcU4rwp4GKOIS9NqwRtNt7C5rsbT
-	 MJKDn9m4jbExjd96TYZe8UFKlMj7ehxcxTVhMuulKAav/AsGFGU4xKOr9Qt3NtQ9iB
-	 XrIcHravELEV1XngGoPqo5/oUykgVeoX52brE8VzB+KIZbEHPNBkF8ZP8+HFmk16rW
-	 BZHWeIk1C/5alpUs1FY4OJasT69VspeCM9HS6j4HVvDlpN5ErzuCR8k9INlv6WXUpj
-	 6c7jIyW/9GHoHy8IAa1oYZJZ8fYpVkXAGQOinGvYdysSwZiWeBQ2CPzV1tS6AojT2L
-	 Aq+ARZBQCP6gA==
-From: Bjorn Andersson <andersson@kernel.org>
-To: arm@kernel.org,
-	soc@kernel.org
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	Arnd Bergmann <arnd@arndb.de>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Sumit Garg <sumit.garg@oss.qualcomm.com>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-	Komal Bajaj <komal.bajaj@oss.qualcomm.com>,
-	Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-	Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
-	Pengpeng Hou <pengpeng@iscas.ac.cn>,
-	Yuvaraj Ranganathan <yuvaraj.ranganathan@oss.qualcomm.com>,
-	Chunkai Deng <chunkai.deng@oss.qualcomm.com>,
-	David Heidelberg <david@ixit.cz>,
-	Faiyaz Mohammed <faiyaz.mohammed@oss.qualcomm.com>,
-	Fenglin Wu <fenglin.wu@oss.qualcomm.com>,
-	Konstantin Shabanov <mail@etehtsea.me>,
-	Luca Weiss <luca.weiss@fairphone.com>,
-	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
-	Mayur Kumar <kmayur809@gmail.com>,
-	Nabige Aala <nabige.aala@oss.qualcomm.com>,
-	Ruoyu Wang <ruoyuw560@gmail.com>,
-	Sneh Mankad <sneh.mankad@oss.qualcomm.com>
-Subject: [GIT PULL] Qualcomm driver updates for v7.3
-Date: Thu, 30 Jul 2026 11:40:52 -0500
-Message-ID: <20260730164052.176832-1-andersson@kernel.org>
-X-Mailer: git-send-email 2.53.0
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="P0dTlVDc";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hNPFOvHN"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66UGXGWG886058
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:41:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	aF+l9BeJEjOCx930xc+un+WIoVHa/ZgTrH/eyrfC/jI=; b=P0dTlVDc8DfrJ4wI
+	pytp3nTccA75LMtWp+hPPaH2FIDyucvJc7kaK5q8mDhNrGle7ySsOMYKUqPib6Ul
+	n5BUUdH2o9OU6mc07tT2CVHB+KYKyl6YA3TeYBaHKxsXDhjDB/fK1LmSlom44ubz
+	dJuxLCFcbzcQqer/yZgurp/AxMGPYU3fBu5eyPGylsomifbrpHShWeBY/+RwUSPB
+	4UxFKqH1ynlD1DmpEiExcjSSP/0AVE75LqRlRRwG2uOGvS9p608BhwPmzvtP4ZRl
+	MFzGDEfbPiLoJxjtdzWx3A2V1ipYpx6ycV4dmSEXgjY5XBxy45AgwG0ZOZqquiAj
+	mV1tFQ==
+Received: from mail-yx1-f70.google.com (mail-yx1-f70.google.com [74.125.224.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr8j7rpy0-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:41:29 +0000 (GMT)
+Received: by mail-yx1-f70.google.com with SMTP id 956f58d0204a3-66799e7a177so6481878d50.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 09:41:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785429688; x=1786034488; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=aF+l9BeJEjOCx930xc+un+WIoVHa/ZgTrH/eyrfC/jI=;
+        b=hNPFOvHNfPB7M7/sL1hU0w+URzSY3c/KCWd/YiPqaYrGBi3P3gjWnXCCcy1lN0Xtua
+         lvNM0+9k/+ZrrdJ5mYGYZ7mqMRR8eTUzlv6U24VkF+zQ02fP1vTqmkFQ41Ws2byK89uz
+         EogKm+x8QIkCsHLJTchWPfsWHqpXarR7IQptLYmc7wyFjXmmaU6rzGKm97JqaOz/brBF
+         4kULrl3Jav2e7b3hOD1gt8FSx3kYZW3E1EVCoIsBPgOWr4HEnLyvsqEF7vtWj45XTSUq
+         v9wU7H1L8RmZRkVfaCHzldBLXyYsGo3PqN47uvj1uvedxo75V3QJWTep4zrMhONssK5k
+         WgRQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785429688; x=1786034488;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=aF+l9BeJEjOCx930xc+un+WIoVHa/ZgTrH/eyrfC/jI=;
+        b=jjPZdl+vu5MhLLbrZP7jEda0DmP++k6nWz+VBCTq7w++ioP5RzsPkH7gP/9J8XZO6V
+         goBmZDLqIe++JzlZSJ8XETNMjkV1hhYQICHTAzuYcTE4Uaw1HMtE6fL/MO2JD6I7nxCY
+         m+so0JwyKiH5Du4rqAMc8RN8dsn0/D8b9iSb1mdQPUEbWTcG0nG33Xx+KLYZbP0/JnJm
+         NvT6GxOqySffjgr8DvY5qecUyroSXM7FpXMaheiETNCunBgynrwSBEQ/PsG3wXCJbM5t
+         DrBsNSBzt3z7dVg9E2rIx6dnz4RURZecVtluGmy7rUXsCwwI36+1qjSmeimindctrTxp
+         rLAA==
+X-Gm-Message-State: AOJu0YygLlvmkvsZTPniact+GcfsIb4TInOv5zWffMnCHtenb8Bd19rr
+	erGPIgUXaZqdpLmTis4XzUZw8zd89sJNZQUDjS4AKGRa+SdJCgZ2FZhfJEa2LvJSGfykEeuljja
+	8T2DRu9CWdyufBmYLGql7GRvY8BjnvGbENPiLLw9Pwdr5kUNX0hhU/by5t3RFLuIMATBawDpKpd
+	0ZZzbwWw==
+X-Gm-Gg: AR+sD11LeJyP+tuTSchIfQ7uMEddoPvFi99JX+mvK7deSL5Pu+ypCTCV9DTseHFS++j
+	RNk8gYdAqSXHSY95DtA5ZXJik/PpXZm2fYFjgyc2pwIhWLzlxHzeZ0xNSaGnD559NQRNGLEsLfe
+	NrW0yBhRSIEmWiWXqxeRcffipO6ivFyz1tpdZOAVIuWvVWgd2vcP6SXKP4NYG9yy+aUd70n3E8l
+	ISwLkFvoH+F8R6WjdEHZh7sCY4N8n79GNC2uL9C/hKpIR1Al6JfOZxyGk5j9kdxpLGbSMJQKyA6
+	JqxHIT8RIfcvTd4UML6KAdA2rpsfGf0p4cibTgbSK8ijyNlMDfwEnoyZ+W9sWUkLaiHCulpOxTf
+	q6r80hItT2k0AuW46MZb42FkTbbopGzcPqAkrCltWLkv1nle6kaoxY67G8CpOZHhIOQ==
+X-Received: by 2002:a53:aecf:0:b0:667:b5d4:98a3 with SMTP id 956f58d0204a3-6693a62cff9mr530847d50.96.1785429688488;
+        Thu, 30 Jul 2026 09:41:28 -0700 (PDT)
+X-Received: by 2002:a53:aecf:0:b0:667:b5d4:98a3 with SMTP id 956f58d0204a3-6693a62cff9mr530830d50.96.1785429688008;
+        Thu, 30 Jul 2026 09:41:28 -0700 (PDT)
+Received: from ?IPV6:2a01:cde0:108:24ed:2206:62e9:bbc4:c360? ([2a01:cde0:108:24ed:2206:62e9:bbc4:c360])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-6692c95ca34sm1627738d50.17.2026.07.30.09.41.22
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 30 Jul 2026 09:41:27 -0700 (PDT)
+Message-ID: <ac813518-1fc2-4262-a166-dc54545bff9b@oss.qualcomm.com>
+Date: Thu, 30 Jul 2026 18:41:20 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 6/9] arm64: dts: qcom: lemans: Enable CDSP cooling
+To: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Amit Kucheria <amit.kucheria@oss.qualcomm.com>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        "Rafael J. Wysocki"
+ <rafael@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+        Manivannan Sadhasivam <mani@kernel.org>, Kees Cook <kees@kernel.org>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+        cros-qcom-dts-watchers@chromium.org
+Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-pm@vger.kernel.org, linux-hardening@vger.kernel.org,
+        manaf.pallikunhi@oss.qualcomm.com,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+References: <20260727-b4-qmi-tmd-v6-0-973cd3a226af@oss.qualcomm.com>
+ <20260727-b4-qmi-tmd-v6-6-973cd3a226af@oss.qualcomm.com>
+Content-Language: en-US
+From: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+In-Reply-To: <20260727-b4-qmi-tmd-v6-6-973cd3a226af@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDEyNSBTYWx0ZWRfX1HV5AkNyKt8/
+ lyWljRW7AYm+T5S9dHPLKPYP5NqId3eX9eTo9K17OqZJH3175uNrjqlZgCYpQCJIH8AwpPOR9YM
+ sFxg8I6SnT3/nJxEH+kdYXIP1i/zXmLlfkidHGF3VI4Y4Wn3u5KoRACnOZu/BVHVM4x8OQMojux
+ we7C1IQoc8snrJAof24di0r8WCxwFkXeMpM+FPQ7Y7INJoNE3Hi4XttcLz+2+joemj0oqQrheh2
+ tfBmxOgi7Jv9ySgdEekz10XyCoSQE2/otG0x+V6F5j1RKmbYZzoxkTZNsLAv8N71jKigH3pKnqj
+ 1xnYdxtYalyEPDzVhaIP0wDiT0deWwjNKQL4Q4D71A7JmbICEHLIcZrVyY8JAcco8Tg4mRYX7fx
+ CUNHSNpU0a76rNwwZZV3a2etbVW8h9MQpZ89PRP4ha87tjReEYEISoxQNuzq9ZxnNPONviCGS2q
+ l6zNTfCTflvJNsyZkLA==
+X-Proofpoint-GUID: zaHynIsvsJbjkA5TiI8J_t5Scfkk4rqJ
+X-Proofpoint-ORIG-GUID: zaHynIsvsJbjkA5TiI8J_t5Scfkk4rqJ
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDEyNSBTYWx0ZWRfX7todOekmnUhO
+ qV+pT9bCgmWRJXXPw2bKHnBN/K9PjDRxtWx2P9vvTcrI8hqqwcZP6xT2Gck3XfYqMdKFAB2zvHE
+ SlyO7yTHZeqDcvYA/te50zfS2aCbTYA=
+X-Authority-Analysis: v=2.4 cv=LraiDHdc c=1 sm=1 tr=0 ts=6a6b7eb9 cx=c_pps
+ a=S/uc88zpIJVNbziUnJ6G4Q==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
+ a=Oo7k-GI02y8c9wmTVmcA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=nd2WpGr1bMy9NW-iytEl:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-30_05,2026-07-30_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 adultscore=0 spamscore=0 bulkscore=0
+ priorityscore=1501 malwarescore=0 impostorscore=0 clxscore=1015
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607300125
 
+On 7/27/26 16:22, Gaurav Kohli wrote:
+> Unlike the CPU, the CDSP does not throttle its speed automatically
+> when it reaches high temperatures in lemans.
+> 
+> Set up CDSP cooling for both instances by throttling the cdsp, when
+> it reaches 105°C.
+> 
+> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> Signed-off-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+> ---
 
-The following changes since commit dc59e4fea9d83f03bad6bddf3fa2e52491777482:
+Reviewed-by: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
 
-  Linux 7.2-rc1 (2026-06-28 12:01:31 -0700)
-
-are available in the Git repository at:
-
-  https://git.kernel.org/pub/scm/linux/kernel/git/qcom/linux.git tags/qcom-drivers-for-7.3
-
-for you to fetch changes up to 43584144a46bccbe90482cd8eede9596d8fc47dc:
-
-  soc: qcom: llcc: Skip ECC interrupt setup on Shikra, pre-configured by DSF (2026-07-17 17:22:44 -0500)
-
-----------------------------------------------------------------
-Qualcomm driver updates for v7.3
-
-Add Maili platform bindings for SCM, IMEM, AOSS, and PMIC GLINK. Add
-Shikra IMEM, RPM SMD, LLCC, and UBWC support, including handling for
-firmware-configured LLCC ECC interrupts.
-
-Add the generic Peripheral Authentication Service with SCM and OP-TEE
-backends, and migrate the MSM DRM and IPA drivers to it.
-
-Add SCM SMC-call tracepoints and configurable minidump delivery through
-always-on SRAM. Correct SCM download-mode pointer ordering and improve
-download-mode probe diagnostics.
-
-Rework the UBWC configuration database and add Milos and Shikra
-configuration. Add protection-domain mappings for SA8775P and QCS8300,
-support newer ICE versions, Hawi subsystem statistics, and SDM850
-identification.
-
-Simplify Qualcomm SoC Kconfig selection and architecture dependencies.
-Use managed resources in EBI2 and RPMh RSC probe paths to correct cleanup
-on failures.
-
-----------------------------------------------------------------
-Bjorn Andersson (1):
-      Merge branch '20260702115835.167602-2-sumit.garg@kernel.org' into drivers-for-7.3
-
-Chunkai Deng (1):
-      dt-bindings: soc: qcom,aoss-qmp: Document the Maili AOSS side channel
-
-David Heidelberg (1):
-      soc: qcom: socinfo: Add SoC ID for SDM850
-
-Dmitry Baryshkov (7):
-      soc: qcom: ubwc: set min_acc length to 64 for all UBWC 1.0 targets
-      soc: qcom: ubwc: drop ubwc_dec_version
-      soc: qcom: ubwc: drop ubwc_bank_spread
-      soc: qcom: ubwc: drop macrotile_mode from the database
-      soc: qcom: ubwc: use fixed values for UBWC swizzle for UBWC < 4.0
-      soc: qcom: ubwc: sort out the rest of the UBWC swizzle settings
-      soc: qcom: ubwc: deduplicate UBWC configuration data
-
-Faiyaz Mohammed (1):
-      soc: qcom: llcc: Skip ECC interrupt setup on Shikra, pre-configured by DSF
-
-Fenglin Wu (1):
-      dt-bindings: soc: qcom: qcom,pmic-glink: Add Maili compatible string
-
-Jingyi Wang (2):
-      dt-bindings: firmware: qcom,scm: Document SCM on Maili SOC
-      dt-bindings: sram: Document qcom,maili-imem compatible
-
-Komal Bajaj (3):
-      dt-bindings: soc: qcom: smd-rpm: Add Shikra rpm-smd compatible
-      soc: qcom: llcc: Add configuration data for Shikra SoC
-      dt-bindings: sram: Document qcom,shikra-imem compatible
-
-Konstantin Shabanov (1):
-      firmware: qcom: scm: Allow QSEECOM on Honor Magicbook Art 14
-
-Krzysztof Kozlowski (5):
-      soc: qcom: Unify user-visible "Qualcomm" name
-      soc: qcom: Hide all drivers behind selectable menu
-      soc: qcom: Restrict drivers per ARM/ARM64
-      soc: qcom: Make important drivers default
-      soc: qcom: Avoid SCM and SPM for cpuidle drivers
-
-Luca Weiss (1):
-      soc: qcom: ubwc: Add config for Milos
-
-Manivannan Sadhasivam (1):
-      soc: qcom: ice: Support IP version beyond v3
-
-Mayur Kumar (1):
-      soc: qcom: cmd-db: use C-style SPDX comment for source file
-
-Mohammad Rafi Shaik (2):
-      soc: qcom: pd-mapper: Add support for SA8775P
-      soc: qcom: pd-mapper: Add support for QCS8300
-
-Mukesh Ojha (4):
-      dt-bindings: firmware: qcom,scm: Add minidump SRAM property
-      firmware: qcom: scm: Fix missing smp_load_acquire()
-      firmware: qcom: scm: use dev_err_probe() for dload address failure
-      firmware: qcom: scm: Add minidump SRAM support
-
-Nabige Aala (1):
-      soc: qcom: ubwc: Add Shikra UBWC config
-
-Pengpeng Hou (2):
-      soc: qcom: rpmh-rsc: manage PM notifiers with devres
-      bus: qcom-ebi2: use managed resources for clocks and children
-
-Ruoyu Wang (1):
-      bus: qcom-ebi2: Fix clock leak on probe failure
-
-Sneh Mankad (1):
-      soc: qcom: qcom_stats: Add SoCCP and DCP subsystems stats
-
-Sumit Garg (6):
-      firmware: qcom: Add a generic PAS service
-      firmware: qcom_scm: Migrate to generic PAS service
-      firmware: qcom: Add a PAS TEE service
-      MAINTAINERS: Add maintainer entry for Qualcomm PAS TZ service
-      drm/msm: Switch to generic PAS TZ APIs
-      net: ipa: Switch to generic PAS TZ APIs
-
-Yuvaraj Ranganathan (2):
-      firmware: qcom: scm: add trace events for the SMC call interface
-      firmware: qcom: scm: instrument SMC call path with tracepoints
-
- .../devicetree/bindings/firmware/qcom,scm.yaml     |   9 +
- .../bindings/soc/qcom/qcom,aoss-qmp.yaml           |   1 +
- .../bindings/soc/qcom/qcom,pmic-glink.yaml         |   1 +
- .../devicetree/bindings/soc/qcom/qcom,smd-rpm.yaml |   1 +
- Documentation/devicetree/bindings/sram/sram.yaml   |   2 +
- MAINTAINERS                                        |   9 +
- drivers/bus/qcom-ebi2.c                            |  44 +-
- drivers/cpuidle/Kconfig.arm                        |   4 +-
- drivers/firmware/qcom/Kconfig                      |  22 +-
- drivers/firmware/qcom/Makefile                     |   3 +
- drivers/firmware/qcom/qcom_pas.c                   | 298 +++++++++++++
- drivers/firmware/qcom/qcom_pas.h                   |  50 +++
- drivers/firmware/qcom/qcom_pas_tee.c               | 479 +++++++++++++++++++++
- drivers/firmware/qcom/qcom_scm-smc.c               |  10 +
- drivers/firmware/qcom/qcom_scm.c                   | 456 +++++++++++---------
- drivers/firmware/qcom/qcom_scm_trace.h             | 143 ++++++
- drivers/gpu/drm/msm/Kconfig                        |   1 +
- drivers/gpu/drm/msm/adreno/a5xx_gpu.c              |   4 +-
- drivers/gpu/drm/msm/adreno/adreno_gpu.c            |  11 +-
- drivers/net/ipa/Kconfig                            |   2 +-
- drivers/net/ipa/ipa_main.c                         |  13 +-
- drivers/soc/qcom/Kconfig                           | 120 +++---
- drivers/soc/qcom/cmd-db.c                          |   2 +-
- drivers/soc/qcom/ice.c                             |   4 +-
- drivers/soc/qcom/llcc-qcom.c                       |  30 ++
- drivers/soc/qcom/qcom_pd_mapper.c                  |  38 ++
- drivers/soc/qcom/qcom_stats.c                      |   2 +
- drivers/soc/qcom/rpmh-rsc.c                        |  37 +-
- drivers/soc/qcom/socinfo.c                         |   1 +
- drivers/soc/qcom/ubwc_config.c                     | 302 ++++---------
- include/linux/firmware/qcom/qcom_pas.h             |  43 ++
- include/linux/soc/qcom/ubwc.h                      |  81 ++--
- 32 files changed, 1662 insertions(+), 561 deletions(-)
- create mode 100644 drivers/firmware/qcom/qcom_pas.c
- create mode 100644 drivers/firmware/qcom/qcom_pas.h
- create mode 100644 drivers/firmware/qcom/qcom_pas_tee.c
- create mode 100644 drivers/firmware/qcom/qcom_scm_trace.h
- create mode 100644 include/linux/firmware/qcom/qcom_pas.h
+A side note, not related to these changes. The passive polling intervals 
+look very short (10ms) on this platform, may be worth to double check 
+these values in the future
