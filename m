@@ -1,217 +1,81 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 058C94519B7
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:19:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E9EF2469834;
+	Thu, 30 Jul 2026 16:20:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785428360; cv=none; b=LblxD0qUGVbG3t4n/2hbXTztCx1TzPVEVsjSLrp4WPWPzIvSeE3weLYDpOWgSbzUB2e7oxgk4pJJg6/oeq4ydKa8MSQUHYad+WDajNyPCga4fGQGt0A1+39My4jDRa/VxWcgqbuWDXmbr84NcP3E+yWuNxzMTMn2k5VaQz85fKE=
+	t=1785428436; cv=none; b=JwwpCNo5vMRv6nqcU/iZi9I0n+EJr5s6yRQb/vXBhwd9pA6BfKDfFRfgueoKenugYG/RTLI955cHwF03aYriLKm8HnMgqs/ZI9hFMWRt5DMouUQSlykMbdo6UNNm3DhHJUlWT8HXcIzyDv8Kctp9/xkunYpwDjp4BPEfFw/Tnvg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785428360; c=relaxed/simple;
-	bh=wYyXYRqo+5m6fDSZrA7VcCiGU6fKVHm0kgX5xTnPxGc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ujt1mCSpSElBr00oetUzEh9uyiPNAn/Ib/XD9uXjtcpEuQxL4nqKLn3zvlJ/w39+5ZJMn7Km8/Ek9ny/96AeDc5LcX1HcAVqRZK0V4tjByHmtG3D0J3CI2DzLdlLqItW4HzOQCat7ct4iC2P1JaFfqD+jbbOfWO2/mL389cosbs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=me/lWvC4; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CStaQZZS; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785428436; c=relaxed/simple;
+	bh=A4/1tW7h6zxlQBWRUA6+Wqi1bzSlxLg8MltiLeRi83s=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Hj26vf+bNC0d4hXyzosD9WbrqkWsWWKJtEYfv6PW2CgLbmaWwimAgkw0p22ifNmfeTQaFAaTpbbChUyJWBiV8GcFiyz3ztoR89PDENtByJcYwCTtpg3EfuNAJC1jUjGqEk1pSjXEzV+JInC8XW2ZHPW/eumHC9CQNpqZFDFkk90=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b=IWhLp4u2; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="me/lWvC4";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CStaQZZS"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66UFQrSO1145129
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:19:18 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	cs2s79pOcvGj18JkogxK17ApOg6ZjNFEALIFF0mhsrk=; b=me/lWvC4cS2dSAZa
-	q6cw/iggGzMi45EjSSLI9v5U5/FeqXSwMsxFlXPsFUNJN8x8HhPsvVMSQs/Lz4oo
-	p/XF+M/AdOfhArexBdtDyduBx/mOOxoTy7mFgCmCirtQlRLAJRGxkDaOB13KlU1j
-	dcqhY/uqegYDLL+WvfACQjfNwLZHw30hJkRAS6wNY6YNq3ZfdUZbzlFhTZjdFal+
-	jvEBlL7CFEbB2pj0+x1BAOtiyXhiF2w2VGC4a+sENmQJPRCeKNavAjUPjvEp69Tj
-	QeDKTNPzV6s7nxJIM7jfteRoyStCpZWInZAxMCUXNYjeV9KQDOgFZg8WaVqc1mYH
-	RnxxVQ==
-Received: from mail-vk1-f198.google.com (mail-vk1-f198.google.com [209.85.221.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr8k60krm-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:19:18 +0000 (GMT)
-Received: by mail-vk1-f198.google.com with SMTP id 71dfb90a1353d-5bf259655cbso7047e0c.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 09:19:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785428357; x=1786033157; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=cs2s79pOcvGj18JkogxK17ApOg6ZjNFEALIFF0mhsrk=;
-        b=CStaQZZSN6VsuTbloChJZqTvpcrFedifTLYReNiLD+2v9T0kZgtBGhr4LEiCeGBjoy
-         lExxOXFYCyeUILuDlGcQoMr3mfXYOeMdMTjzpB0OGI+AjylcaSNfedZw090mZBby6pIt
-         zdT2ZZl12S0QAlxB81E8zSh4/qxyJnT2pjxsJ8eUggpbiOmvtI9Vl1ZZbaxyW8spP5eR
-         /pnp9Eo/WlpLy7vSQiqoIUCbNsBKv3IYIwcdsKNeEDkj781HiSyBC1n/g498YKqHfTFX
-         3p6Umbtw+BewTJTyGM79aLpnvve+0AEkS/d6oBOMxu0iE1bu5lrNjl3q6N+KXnhG5KLy
-         8hBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785428357; x=1786033157;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=cs2s79pOcvGj18JkogxK17ApOg6ZjNFEALIFF0mhsrk=;
-        b=Y9sLdUlO52YBpVS1zieBoProSL0sdwQn/TX+H2p0ssedUXZ12tMeNAfU2YwhnsrgIK
-         LRfNFX14D1mLosYsa6xn6n50tnijtEYC1Bi8A0FCTd8xjGnCNEr2W1OFPzDt/cIja+X7
-         xJcICkZgKtoKykSLxl/JFhrp5sNJVwK7kGM3uMiyaf8oXXVKU0Kbw7+XiULQzrnAHLUj
-         BOVgcoC1I/3pEdVpLWzQ8EpO1I3nZR+KcB4/8vwZuYFnK3MKcv2qrsca74NmFTh5vAoW
-         9qts7u8zmkqDB/VsCTJh+L5788/aahUTQ3ynct4dgncENHutqe7FUAtkYHFgoQJRxjTu
-         +Zlw==
-X-Gm-Message-State: AOJu0YzXvPIl7hJ5N15pkcoDz3jUrsTtn4HkYtWFMN1rrix7ll9SaNm3
-	BW5bc5F5RfkV4rlDLTA6ZCc/Pv7urhXKTJqRtihxojlmCfYwwh7a1h3+HzFgnRuxxNAniYi+0hd
-	ZleK9Uc2zveSTWmRXNwyA9b682pnyDbfG7fntDqzVVsSoyqjj5YPyY1oLu3yA4DXxJPkL
-X-Gm-Gg: AR+sD13DAIWgZ6yzKwZySEWDAJPDlroLcjfaiGF7oiolqkQv+B3IBUqwl3Yxdtibff4
-	wuDas3wmwdhzZ2z43jxXR6MgVFmtwC0cpqzjoWB/NYSnw1lOtukJTblp6KlerprrQNmGzTFMUGt
-	M1SGVD4kwS/yPSCJ5PCT+hUzYMgTN4ZfAtk0+zULpVeS+RubemkSNFWYg2mtcUdYRJrSMSddapu
-	0eTvnL9sbt74OZG1mcLnEnT86tdkhBMpRYp7+j3jsvE5PQFKCPpjUm4dkttrYbkMjk6zUiwo+TV
-	uEt3zXZSsNixDXHyyNuBH2sNYJQfyizLmeIdSpEH5/QaJFKGIo+X23FRIuHHnm1hO8rbV2RU9Af
-	+xRu+B0CN+ATL0m/BZiG90JF2
-X-Received: by 2002:a05:6102:3585:b0:74a:b1ee:e21b with SMTP id ada2fe7eead31-7583f18ec20mr587444137.1.1785428357052;
-        Thu, 30 Jul 2026 09:19:17 -0700 (PDT)
-X-Received: by 2002:a05:6102:3585:b0:74a:b1ee:e21b with SMTP id ada2fe7eead31-7583f18ec20mr587435137.1.1785428356560;
-        Thu, 30 Jul 2026 09:19:16 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2db9baa18sm467105e87.48.2026.07.30.09.19.14
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Jul 2026 09:19:15 -0700 (PDT)
-Message-ID: <ef2a2f3a-1051-4527-8e13-0af263a443ba@oss.qualcomm.com>
-Date: Thu, 30 Jul 2026 18:19:12 +0200
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.b="IWhLp4u2"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 584171F000E9;
+	Thu, 30 Jul 2026 16:20:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linuxfoundation.org;
+	s=korg; t=1785428434;
+	bh=+iuGoat9AdxQzu1rkzKWJvdxdqSaBy046101iklSDi8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=IWhLp4u2N6DG8voIA3Bvg3NayfUCwAbpGYTNNUeF1wl3agb1mo7JmEc0U1ORVnYmy
+	 D0wth+eMaTuJ7owG99/H+H1kdj0ld7T7fcYE6n6Er+TTUt7KUw7LdkhRrXs1zO/D85
+	 P+Bs6i6gbQcpluy3VzvQEspD2YCQ466SF0/vsVSY=
+Date: Thu, 30 Jul 2026 17:00:10 +0200
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Praveen Talari <praveen.talari@oss.qualcomm.com>
+Cc: Jiri Slaby <jirislaby@kernel.org>, konrad.dybcio@oss.qualcomm.com,
+	bjorn.andersson@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-serial@vger.kernel.org,
+	chandana.chiluveru@oss.qualcomm.com,
+	mukesh.savaliya@oss.qualcomm.com
+Subject: Re: [PATCH 0/3] serial: qcom-geni: Reuse common GENI framework
+ helpers
+Message-ID: <2026073053-gracious-creole-cbaa@gregkh>
+References: <20260720-reuse_common_geni_framework_helpers-v1-0-c3330ab9b982@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] serial: qcom-geni: Convert console to nbcon
-To: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jiri Slaby <jirislaby@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-serial@vger.kernel.org
-References: <20260729-qcom-geni-nbcon-v1-0-3053b96465ed@oss.qualcomm.com>
- <20260729-qcom-geni-nbcon-v1-1-3053b96465ed@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260729-qcom-geni-nbcon-v1-1-3053b96465ed@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: Z67Y2QVqjcJM6ZfkPqXt7qKgfg0sEVtk
-X-Proofpoint-ORIG-GUID: Z67Y2QVqjcJM6ZfkPqXt7qKgfg0sEVtk
-X-Authority-Analysis: v=2.4 cv=Wqgb99fv c=1 sm=1 tr=0 ts=6a6b7986 cx=c_pps
- a=1Os3MKEOqt8YzSjcPV0cFA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=fnIB__cAoprSpsgZYR4A:9 a=QEXdDO2ut3YA:10
- a=hhpmQAJR8DioWGSBphRh:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDEyMyBTYWx0ZWRfX0gcIg5NdGAux
- f1BpflLInNJ0Db8/xLbxiwgPsX1cUUYvvkrh/3W39a+Fp3iu3wEl4Qs6fzA6Aki3kIVnM9KvABi
- BqUp+UB+HcetbrFCDxKrc9IJSiDyLfxpSgkTTogmaNrhqdLEJJe6Z+kojRB4qD05XkdJ8oMSkA7
- hnEoihn+9gQ6mYda0ifH3uwBUz4U9fRKjXJB0R3qoiTph8gpdMLtN9gRi7NcEOej00Fr2Ele15G
- CQsaka6tdDPgFvpToCwQ9lkArmMONJN+VNED9nYtiXbeCgDHoKM75j0PLkP3ODL8qUeEuCpytHO
- EVtGxvqbNtjmiWFwkKtEBck26xjPWqKz3JwGSbhhEFNQ72PaIPVlpNemhbZgBCNQIx4hOpHDsiQ
- tVLDNfd0ssQiP/97kk4Xq33zwwguuthJIYVxtVcTkq2k+1j/VS/+TZjq1WaHg93Xuud3OoSYZK/
- gOBMKJEsHE7K020go3g==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDEyMyBTYWx0ZWRfX7qDYyLdWoiid
- xBiF72EK+lLxDDwBNRS9OIi+ZubsgOM0dJEvqIuEQGM+VxWjtHDC8u+pUw7WUkO6pT3yLrgJNd4
- D+Pa7ALwgDJ21IHEVnP/AQrH+VCW2Xw=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-30_04,2026-07-30_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 phishscore=0 lowpriorityscore=0 suspectscore=0
- malwarescore=0 impostorscore=0 adultscore=0 bulkscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607300123
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260720-reuse_common_geni_framework_helpers-v1-0-c3330ab9b982@oss.qualcomm.com>
 
-On 7/29/26 11:44 PM, Bjorn Andersson wrote:
-> The legacy GENI console writer serializes every message around a
-> synchronous polled M-side transfer. It blocks printk callers for UART
-> wire time and cannot provide atomic output while normal console output is
-> active.
+On Mon, Jul 20, 2026 at 08:37:48PM +0530, Praveen Talari wrote:
+> The Serial driver currently maintains several helpers that duplicate
+> functionality already available in the GENI core, including resource
+> initialisation, power-domain attachment, runtime PM resource
+> management, and perf-level selection.
 > 
-> Convert the console to nbcon threaded and atomic writers. Use the UART
-> port lock as the device lock and bound threaded M-side commands so
-> urgent diagnostics can take over atomic output. The threaded writer is
-> batching the output in 32-source-byte commands, a value chosen to
-> balance the command setup overhead with atomic-handoff latency.
+> Replace these with common GENI helper APIs for resource initialization,
+> runtime PM resource management, and performance-level configuration.  This
+> reduces code duplication and centralizes GENI resource handling.
 > 
-> Atomic output can cancel an active normal TX command. Use irq_work to
-> resume queued TTY output afterward, honor flow control, and prevent the
-> deferred restart from accessing the port during shutdown or removal.
-> 
-> Assisted-by: OpenCode:GPT-5.5
-> Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
+> Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
 > ---
+> Praveen Talari (3):
+>       serial: qcom-geni: Use common GENI resource initialisation helpers
+>       serial: qcom-geni: Use resources helper APIs in runtime PM functions
+>       serial: qcom-geni: Use geni_se_set_perf_level() for baud rate perf level
+> 
+>  drivers/tty/serial/qcom_geni_serial.c | 204 ++++++----------------------------
+>  1 file changed, 34 insertions(+), 170 deletions(-)
+> ---
+> base-commit: 782f4dbd1794b4f30dc116a7ca42c5962c409be8
+> change-id: 20260720-reuse_common_geni_framework_helpers-787081bd61a7
+> 
+> Best regards,
+> --  
+> Praveen Talari <praveen.talari@oss.qualcomm.com>
+> 
 
-[...]
+Doesn't apply to my tty-testing branch now, perhaps because I took your
+other patch for this driver?
 
-> +	while (offset < wctxt->len) {
+thanks,
 
-Other nbcon drivers access wctxt->len in write_thread with READ_ONCE,
-I believe we need to do the same
-
-[...]
-
-> +static void qcom_geni_serial_console_write_atomic(struct console *co,
-> +						  struct nbcon_write_context *wctxt)
-> +{
->  	struct qcom_geni_serial_port *port;
-> +	struct uart_port *uport;
->  	u32 m_irq_en, s_irq_en;
-> -	bool locked = true;
-> -	unsigned long flags;
-> -
-> -	WARN_ON(co->index < 0 || co->index >= GENI_UART_CONS_PORTS);
-
-Unrelated?
-
-[...]
-
-> +/* Caller holds the UART port lock. */
-> +static void qcom_geni_serial_resume_tx(struct uart_port *uport)
-> +{
-> +	if (!uart_tx_stopped(uport) &&
-> +	    !kfifo_is_empty(&uport->state->port.xmit_fifo))
-> +		qcom_geni_serial_start_tx_fifo(uport);
-> +}
-
-This is a single-use oneliner, but perhaps having 3+2 conditions
-is better than having 5 conditions to an if statement..
-
-
-> +
-> +static void qcom_geni_serial_restart_tx(struct irq_work *work)
-> +{
-> +	struct qcom_geni_serial_port *port = container_of(work,
-> +						      struct qcom_geni_serial_port, tx_kick);
-> +	struct uart_port *uport = &port->uport;
-> +
-> +	if (!READ_ONCE(port->tx_kick_enabled) || !uport->state || uport->suspended)
-> +		return;
-> +
-> +	uart_port_lock(uport);
-> +	if (READ_ONCE(port->tx_kick_enabled) && uport->state && !uport->suspended)
-> +		qcom_geni_serial_resume_tx(uport);
-> +	uart_port_unlock(uport);
-> +}
-> +
->  static void qcom_geni_serial_stop_tx_fifo(struct uart_port *uport)
->  {
->  	u32 irq_en;
-> @@ -1182,6 +1284,11 @@ static int setup_fifos(struct qcom_geni_serial_port *port)
->  
->  static void qcom_geni_serial_shutdown(struct uart_port *uport)
->  {
-> +	struct qcom_geni_serial_port *port = to_dev_port(uport);
-> +
-> +	/* Atomic console output queues tx_kick without taking the port lock. */
-
-non-atomic?
-
-Konrad
+greg k-h
