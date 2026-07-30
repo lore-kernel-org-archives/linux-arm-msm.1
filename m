@@ -1,89 +1,109 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8CFF1404BE8;
-	Thu, 30 Jul 2026 11:56:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 055A4422540;
+	Thu, 30 Jul 2026 11:56:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785412569; cv=none; b=J9yvAVSwjz5GI5HijrtSPQhpDlrNXkIgMKD+xwv5AGYjBMY/jqjfyipmPqIiYh20lWH2LJZCOQxxAZKIC3B+1WHx0EmevVEFjc+NWsoVINsoYWEYUM6xYTGbk4hHiZYEwTtSPDlTeni9seoNgNl2Q9Jk7rqOJwXPHLj//54qFF4=
+	t=1785412576; cv=none; b=FOLiDS+tLmBEzsAC9yhg5Ceh9LF62CXqgra45kP9w+EGp0uR6OxG6BEIkifhacOmBdDjMkcefjaAwV1kRVsQ6DPrkTEURn7EvOjlGbEBcip580t6I1Pn5rwcjSDoCO0eAkCyl7OePGSEnTQkaORTxzCMzJxUJiON7a5oajH3+0g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785412569; c=relaxed/simple;
-	bh=pWWaV4L2WQLV8lswXNeL6Djig5CWGG9Ths2HqYhhniU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=nEvCflZCEm7FCUUrLOlt0FimDr96cYAUMn44wzMKQ9AQg5XUraEiYiWP3OqSE+ArGhAlcHFUSObiwEk/B8xQVOLL0g1V/cm4zdwTGk3G6fukZe6qaP1dYlt8NwACRP/nyMNPYRmdEaqGN/w9zsRmTTI+RE2X8NKFVF3ZUtFj6/o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=l2p6XA/2; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785412576; c=relaxed/simple;
+	bh=KMY7SMrHixeBHZkiAY1gILgBoxRoZjVD8c7KQEu6ysU=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=e7UNQjJoRHtjCpv2TD1ZFRjOCvnNdZq7QJR3iV69lW2JaRt8Aig1PHCKRDsDnWFpfjM6/K7AMQKhd3zt92lF7X9w8Fliv2B3BWdolZe38soGkVjBuFX5vrX7nPWXXqsiwtA0F5VETHwLDOJlGPOs0odymM12f9iV86PQvxOnz1U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=u+FSGnJ1; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="l2p6XA/2"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 43E2B1F00A3A;
-	Thu, 30 Jul 2026 11:56:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785412568;
-	bh=DVZNDGpx2fF7ZIE+o5dbaYPa66WPrFHS8f0qW3kHd9g=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=l2p6XA/25synrlFjSzD316VNKsb7kaJO8SkX3Y5cHDAbrHDvXEm5UGtWEs9erhrXh
-	 OoCC7USjpo358Ejh65YBkmOjCsqB0bIinSYykaj9E1s1VtFl75uuMq77cCKuUzgDoi
-	 ABWqj5IGeSLd4Itm3/Qovrh/YJLLd609s7futEo2CdZXLbkuzO/Tt125uljqJFuuFC
-	 ajTRIa1Ep+h2KSG72pqOWALd1WAvqfCowrW5OKGbLYdhpjHQHEAhw/lwP4bvt7P9Nm
-	 UAzepT3aTY95lAkROXDbIRi56AJLVA/gAiKQdJ+S53bSltI0QBklQzKBz+16PFXFbf
-	 A/SPPIPlSkIMw==
-Date: Thu, 30 Jul 2026 12:56:03 +0100
-From: Mark Brown <broonie@kernel.org>
-To: me@dawidwrobel.com
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Subject: Re: [PATCH v2 1/2] ASoC: codecs: lpass-tx-macro: Fix enum kcontrol
- accesses
-Message-ID: <e9b81e2d-a140-452c-950e-2cf299d7aef7@sirena.org.uk>
-References: <20260730-worktree-lpass-tx-macro-enum-fix-v2-0-6d091c736116@dawidwrobel.com>
- <20260730-worktree-lpass-tx-macro-enum-fix-v2-1-6d091c736116@dawidwrobel.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="u+FSGnJ1"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B565AC19425;
+	Thu, 30 Jul 2026 11:56:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1785412575;
+	bh=KMY7SMrHixeBHZkiAY1gILgBoxRoZjVD8c7KQEu6ysU=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=u+FSGnJ1lWMf88+/epKPIog8JlohHdGyrEKVxZKs0FAnCT+GlShtAMXj/U1CdWFm/
+	 3bvO8o9LDgt3TSLUjr2/4XCjqEJiIRbClXtsJTMuIcWfxD6fqXq4iXcjJf3kvG6c4j
+	 x+5KU1n6vaxBnHRn/0/tFxUPbdKQndbX1biOVKcgq259J8rLWNKGA2QjXq/qhJ9wI6
+	 lHmu5VMZORlERIYoLiLoRXWI99Iqg9QsZOW2PRWZ+ikgYMBnwke5W6Y54cSc+Od18x
+	 YZP4bz26omvdk4QGepqFal9Rqi29svRe1xXmppSdoBimhxEwDf4W+DTY/YMF9hW4FU
+	 1GynY76GwZHhg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8FB9EC55162;
+	Thu, 30 Jul 2026 11:56:15 +0000 (UTC)
+From: Manivannan Sadhasivam via B4 Relay <devnull+manivannan.sadhasivam.oss.qualcomm.com@kernel.org>
+Date: Thu, 30 Jul 2026 13:55:42 +0200
+Subject: [PATCH 01/22] arm64: dts: qcom: kaanapali: Fix the PCIe iommu-map
+ entries
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="8KUNt4IWGcLLWBMz"
-Content-Disposition: inline
-In-Reply-To: <20260730-worktree-lpass-tx-macro-enum-fix-v2-1-6d091c736116@dawidwrobel.com>
-X-Cookie: In specially marked packages only.
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260730-iommu-map-fix-v1-1-83405d37ba41@oss.qualcomm.com>
+References: <20260730-iommu-map-fix-v1-0-83405d37ba41@oss.qualcomm.com>
+In-Reply-To: <20260730-iommu-map-fix-v1-0-83405d37ba41@oss.qualcomm.com>
+To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>, 
+ Krzysztof Kozlowski <krzk@kernel.org>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1369;
+ i=manivannan.sadhasivam@oss.qualcomm.com; h=from:subject:message-id;
+ bh=fqg4PT/LIk3+0yQMdHA5v5Jc+6vCvndh9JSNuzOVZqk=;
+ b=owGbwMvMwMUYOl/w2b+J574ynlZLYsjKtr5qfs+wLKCj6mmlea/dF52AD97mf273VF38tOSxd
+ nnO8o7VnYzGLAyMXAyyYoos6UudtRo9Tt9YEqE+HWYQKxPIFAYuTgGYyGcP9v+F1jNE2B6YyXxe
+ 3P9G9VtCla3lkqj3nRkJM07dk7X8yWx5uz3KQyvi9xOJh/d0J3Yabr9V7PdZW0NJlu9H7pV1ma4
+ C/XsWp8jMm5IwvfuAYsGr5IVWJ6pT171L2p7hPCcgxWmJ+v6jm0qel7rIn5+inJqdcUfndOJCrp
+ mHBRkU1hsWnxbk4qg22KnOwFDiZRncXPNLf9NRIaaoQ+9TL8bunx21rM2bb5mi8l8dFXYrXV7Hb
+ 9uKNJ7LfXJN7n6wVba87KCh7uHO4LrZwv3cagzZGablx+JeJZQq5P25pfJ3W/VZMxaf9Lz6OR57
+ P74NE7f01NLct0PEXP3CIh8HNmUruS0Sy+b7yKdOnb0WAA==
+X-Developer-Key: i=manivannan.sadhasivam@oss.qualcomm.com; a=openpgp;
+ fpr=C668AEC3C3188E4C611465E7488550E901166008
+X-Endpoint-Received: by B4 Relay for
+ manivannan.sadhasivam@oss.qualcomm.com/default with auth_id=461
+X-Original-From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Reply-To: manivannan.sadhasivam@oss.qualcomm.com
+
+From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+
+The IOMMU provider apps_smmu uses '#iommu-cells = <2>', but the PCIe
+iommu-map entries specify only one cell for the SID, omitting the SID
+mask. This went unnoticed until the OF core started warning with commit
+ccb2fd725d41 ("of: Respect #{iommu,msi}-cells in maps"):
+
+  iommu-map has 1-cell entries targeting 2-cell #iommu-cells, treating as 1-cell output
+
+So fix the entries to match the provider's '#iommu-cells' property.
+
+Fixes: 2eeb5767d53f ("arm64: dts: qcom: Introduce Kaanapali SoC")
+Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+---
+ arch/arm64/boot/dts/qcom/kaanapali.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/kaanapali.dtsi b/arch/arm64/boot/dts/qcom/kaanapali.dtsi
+index 7aa9653bd456..011fb00beb0e 100644
+--- a/arch/arm64/boot/dts/qcom/kaanapali.dtsi
++++ b/arch/arm64/boot/dts/qcom/kaanapali.dtsi
+@@ -2310,8 +2310,8 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
+ 
+ 			operating-points-v2 = <&pcie0_opp_table>;
+ 
+-			iommu-map = <0 &apps_smmu 0x1400 0x1>,
+-				    <0x100 &apps_smmu 0x1401 0x1>;
++			iommu-map = <0 &apps_smmu 0x1400 0x0 0x1>,
++				    <0x100 &apps_smmu 0x1401 0x0 0x1>;
+ 
+ 			interrupt-map = <0 0 0 1 &intc 0 0 GIC_SPI 149 IRQ_TYPE_LEVEL_HIGH>,
+ 					<0 0 0 2 &intc 0 0 GIC_SPI 150 IRQ_TYPE_LEVEL_HIGH>,
+
+-- 
+2.43.0
 
 
---8KUNt4IWGcLLWBMz
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Jul 30, 2026 at 12:58:12PM +0200, Dawid Wro=CC=81bel via B4 Relay w=
-rote:
->   snd-sm8250 sound: control 2:0:0:DEC0 MODE:0: access overflow
->=20
-> Fixes: c39667ddcfc5 ("ASoC: codecs: lpass-tx-macro: add support for lpass=
- tx macro")
-> Assisted-by: Claude:claude-fable-5
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Dawid Wro=CC=81bel <me@dawidwrobel.com>
-> ---
-
-You had tags for this and patch 2 on v1, what happened with them?
-
---8KUNt4IWGcLLWBMz
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmprO9IACgkQJNaLcl1U
-h9CXlAf/SohBD6rv7Le3Eto/QfkfWNKUh8iS88MvStNPKfiNUy3+iUFUro9AAyGx
-jGQSJoGPwPAlpGBm0C7RUyZjTlYPJ2LggXnTUC+Vile1oYzfwTvOa3X/FsKsRIJh
-FdNp0z5ZQVFZxnA2GS+qVa6CmHdY8dVCYoPPvAPjlAyGqafPokg9uIb3RWQszG7j
-k3oTm2j7eY23Q9bmuD0RgEeHXfnDMTAnVW8LTBPK08sNhW6+woNsWWFaYA2m43X/
-e90G29wPEq8QnmbtqmampNUVoeMyo8hJ2mT8JuZHAJtstrIZ32Q2lKA+6ycetmsW
-+ZAqRr1fa2wt1kmWke4sdjy8/jiTDQ==
-=BFhX
------END PGP SIGNATURE-----
-
---8KUNt4IWGcLLWBMz--
