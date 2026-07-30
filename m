@@ -1,166 +1,120 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C536C439343
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 13:43:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00126435A94;
+	Thu, 30 Jul 2026 13:44:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785418987; cv=none; b=bPEosc2QEsJ0l4RGW4R47FnswPJfoPwMUjaBWgiHGW46aXPD+ENm5klvmV/VJ77U6kUeTQ1NvqvpWGgw/H10ZsB1szmFUmXWpjkonq87S8YdEpBkLQxZu44KwxJkqqbX79KK4mteuzVpR2kePuQede3S67tkxX0rVzdKhUL4Arw=
+	t=1785419056; cv=none; b=SWQhnzReS6DtPwJbKtiVYyPeY1VN2YzX1OO+nCYSOpsPSmDWUtn6qzglyIfIFFHBKWXhfevn0O2UWtvtk2iUHlR32a9Zo09ac4Iv5593PKHESEfS8X+bOtVodbDr4EuqN/beot0LjVeG9wT1zLE6p0cQBNgRDCxoazBVZsEqoM4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785418987; c=relaxed/simple;
-	bh=yzhUy4o0mOiRrgJ+9DOMPc8IwPfnEtJ/dCNB3RDvKao=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=IYVgC6okv2SUgZbEXQ1iU+M+h173zf1u5ed6uRpJ+bALtI8tnKqbROATb1bi0oEN8geF2l/fXN8oRo/a4CF30DYwbqJgAxjKBe/m6qB6KIAR45S3u1pmRA3BatXIJpBPHyCEhfjQWIaSCwhWpyt7Mk/eFMBVjQYY8cukz/9NvwE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=WuBkjEPE; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QZxekst1; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785419056; c=relaxed/simple;
+	bh=HagWrrgaVOY2dk7GGN12DLo7KTMXEEq5ZiIAEVTxqZQ=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=hDnFTyPKr4wW4S8FEL4mMqlyF5i4CAg+imgBy77bj/yLN1jD11E5mjZUe2B+ljeZ1N9TbriYi2Izo2BHWL0h0AAUIafPWkZqMciWceoEgnybYIDMzFm3UgggieuDKeZrLV5vR3J9Nqkap5T5SprNtTxdtAhSOF+T25nMy9+Zp/w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LwB+ZkUt; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="WuBkjEPE";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QZxekst1"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66UDcqXN841038
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 13:43:04 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	LIHC0dGoCfL4jo/TTDqxxd8bs6eGi4j6fVBGNZoeJSw=; b=WuBkjEPEQ6+jaMAP
-	mb7/eJ2DfGQPN8Y84dNiQ6j+CFSIFrqWAsxwUjY42fZuux0vSgKE4CwYUBxJX4y8
-	YW4Lhs5BtJG87JVyfjtLs88SO1AZ9VVRACBDSd1dLjCwmFixdKS+k5Jq8L/SkslP
-	dy7pA3v31WKP9bof+R+XetAssoV7ZE4Lakkcg1MI8X0lJ3jGB5a8srg9e6F3+byW
-	ZbuW12hYQtj5jkMBvX09jKqK0u8ngTBgksd9BOf1ZQrpL6/nfooMFvXsBvRTHLkC
-	ktGGj8VTarBbnRPHMG+yr8jQnddWlMP8CDG+t94qhxht+gDofuOu8d9l73N7yi/E
-	UvDZVw==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr7nq80kd-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 13:43:04 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51cab6f7517so2618291cf.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 06:43:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785418984; x=1786023784; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=LIHC0dGoCfL4jo/TTDqxxd8bs6eGi4j6fVBGNZoeJSw=;
-        b=QZxekst19v2l4C7SkalKfKr4feAwJ4gNrfrThPCP5FN4H4l+l5qwSAoyBoYBioeMU3
-         tvQHy8RGKgsbp76C4SR8Pi86ziIXtwDZsou5peuR9pHlj/MLTOhbIi67zU/GVIkKfcSt
-         +W9fhA8fpRnvMGnlVwJOkyCux2IPEB629+0+3CB6vxk7OGxPOGh/T01Osdwh4XUUYK03
-         /dg2mvu5KgpnU72S8W13KVtjLkfHsE9GUUMbULS9jmulG9mnxmXYDh8A2FiIoc0nfC+6
-         LjN0P/v0eNbfkXbHvoYFHOa9C0JTNLuV/Ds0FGylbz8jsZsVKTBsH7x5U0LjUgr8NC6y
-         hjyw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785418984; x=1786023784;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=LIHC0dGoCfL4jo/TTDqxxd8bs6eGi4j6fVBGNZoeJSw=;
-        b=YtJpbYcMBLw74dnqEMOYkG3CtqLGB0CEJnBWhySxr37vbwaIVX7oE7L3WVSghieI7+
-         KNB4T4CBkDTANlFD64LcC0QJRUHdqzR9Wjtt1pLfPWgnaVrQjJYu95pW9SyP7gUHScF5
-         myXuIwKkBpCtxCOWvFhx3gpg94gJTHLvPDBOTFJ51Jvka1F47VxrC/hkfe563/nvOh0S
-         JLygjYXzw/zOjM7odTJMdSv7PBu65tg3UsitmH8fFzcougirH1MT1vJN9hVsDJfgQTgG
-         YW+GwdahgOjY6Ebli5dJR3xHcwYpMh07IH/7fdRyLRu+2BXNTTQc44nALb4rNRmH9Qz3
-         Om5Q==
-X-Gm-Message-State: AOJu0Yy+DfXQfJn49an/qFXAq3OrO8donVYkQmPfbIMvT1AJ9En9J8SB
-	kUWxrhaCRxTINH5ZkSCqgPgVr+DJyWubM1z/Nz2nnbByGQsmXdb/qslmVEgrJsaliLPRxCcFj8p
-	B94mbhfqV9F7kUMgXBTBEWyOxfHjA/rGfUmMP8QwaXhbviSMpwx5uaSO5Z4CN91JOgJbPTyi125
-	FG
-X-Gm-Gg: AR+sD10616ClseMhBxDr13wDlRwA2qBg1ZiADHoGH1BCHQrsl5cXpuGcUc0132BFOSy
-	ghe7fKx9bxBqr4uEhRZ2JoI1rGqZbTd2UyGFXGayUgFZ7W7NkfNg2mXUdATcqTYERoTwYtnHjlG
-	zMlIlvZhGmCQveXfwgwDVDrp4vNlyWs5XMWTb5DROhSmx0QS5X5UwF59MP82+7NX8AJVGfr7rOJ
-	0N6jr9wpupl1jXQDe5apzsD6zYqD5OQGHPBFHgGTYX7MAG+27/HlAXDRErcQrxA+/DfgkIrLbZN
-	sszKFcXKDJDK/3pwOpaRM1WqyyWNT4d+2XArHp+5WU1Hb9/33h9cA6XStn1rGlRafEEkBjGwCUv
-	+eyy7+CvORcclIb7HhaiQ1j8M
-X-Received: by 2002:a05:622a:a98b:20b0:51b:f9e0:87b0 with SMTP id d75a77b69052e-52b42b7f23dmr3221621cf.2.1785418983759;
-        Thu, 30 Jul 2026 06:43:03 -0700 (PDT)
-X-Received: by 2002:a05:622a:a98b:20b0:51b:f9e0:87b0 with SMTP id d75a77b69052e-52b42b7f23dmr3221211cf.2.1785418983387;
-        Thu, 30 Jul 2026 06:43:03 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1fa8b6dbdesm66080166b.36.2026.07.30.06.42.59
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Jul 2026 06:43:02 -0700 (PDT)
-Message-ID: <8e55ef12-6c4a-42b4-923b-238b3739ea51@oss.qualcomm.com>
-Date: Thu, 30 Jul 2026 15:42:58 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LwB+ZkUt"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 80BC2C2BCF4;
+	Thu, 30 Jul 2026 13:44:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1785419055;
+	bh=HagWrrgaVOY2dk7GGN12DLo7KTMXEEq5ZiIAEVTxqZQ=;
+	h=From:Date:Subject:To:Cc:Reply-To:From;
+	b=LwB+ZkUt3rqYKr739S/sKifj3mUeCeVTQTmStQGO9PtqT8XXezuNze3wVR6vv+U//
+	 iuRLmvQR1KztXcEPpH+9DZBbSYSdGVJUbR7JlDMzE8r9ot2sfIKAU25qNJzeHMWzA6
+	 bIg8AodMEXe73tdzWpqaWAZOvgakul4eHqftl9MsT+dnQc+FsgVXMC2ncyajy/gEKD
+	 Ckam1SlmAAtG2F3w6Kd+SOqLPzH/CQCQ1ETN4Ju5m59jO129pEhH9z49n0qpRPAaJT
+	 BcN9Cln9g9taoVXTvt3KWqQ3FUIRw9zUqY2Mm1XFPOpelde4xnaG2SCq6h66mf3JWe
+	 bLhcAsnKgkBdw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 59414C55162;
+	Thu, 30 Jul 2026 13:44:15 +0000 (UTC)
+From: =?utf-8?q?Dawid_Wro=CC=81bel_via_B4_Relay?= <devnull+me.dawidwrobel.com@kernel.org>
+Date: Thu, 30 Jul 2026 15:44:07 +0200
+Subject: [PATCH] arm64: dts: qcom: sm8250-xiaomi-elish: correct the board
+ ID
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] drm/msm: detach the ARM DMA mapping before attaching
- our own domain
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Sricharan Ramabadhran <quic_srichara@quicinc.com>,
-        Joerg Roedel <jroedel@suse.de>, Russell King <linux@armlinux.org.uk>,
-        Lu Baolu <baolu.lu@linux.intel.com>,
-        Jerry Snitselaar <jsnitsel@redhat.com>, Jason Gunthorpe <jgg@ziepe.ca>,
-        Dmitry Baryshkov <lumag@kernel.org>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Heiko Stuebner <heiko@sntech.de>
-Cc: linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev,
-        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
-        linux-rockchip@lists.infradead.org
-References: <20260730-fix-qcom-smmu-v1-0-b12fa067804e@oss.qualcomm.com>
- <20260730-fix-qcom-smmu-v1-3-b12fa067804e@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260730-fix-qcom-smmu-v1-3-b12fa067804e@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=HIvz0Itv c=1 sm=1 tr=0 ts=6a6b54e8 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=mSMHI8jCXtBZcuwA1AYA:9 a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-GUID: k_jKeb8aQyHWKkokmOo2EsqDrwcQiYZV
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDEwMyBTYWx0ZWRfX70tndZcVG0O2
- XudFwKmU/3ybU5z0ozTR7DqSwzsYXpJ6D2iTtzgx1/Oc2I+NTqaE1ebW0MVWT6txezahFIEXX6Z
- nciJxfPZiYmeFIWOYheYV3oWFWa1bw4=
-X-Proofpoint-ORIG-GUID: k_jKeb8aQyHWKkokmOo2EsqDrwcQiYZV
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDEwMyBTYWx0ZWRfX4dKBp6SagnCY
- eauMaJixt9hKF7OUWUVarRL71b1zK7tIZkrT3gYxDvDpum/AkT/+1QgdUN35a9gav7yvBNMWy8H
- tHf2PyTzCma/5ocK5KvYuXbdIEvCAUJCc7JghK3Vhk2TRs1Fvei7NWeVJO0bGM+5/qyqimVvH/B
- cdHww9Mohk8bGw60XWzuUjIXLgWDb+3loantiRzKAZfaM+NIV+2Ks+hZXTMMEUxdDKD5HTqVEj4
- QDXuZRBlmMH/fWtTZdvEiQCN1JwlON6dST9y+Picd5cSncSxs4KYlSr3ytzZX2spfvhkygYalBi
- 8wnxchM2WFRK/kHZGDvxcBDSw+WuMvd2zphSTYk8ET0d/2yXsChZI/O8tvIC5lhrcRCsq5yA/AZ
- Vwv9MB4L5KVNovnv6bAYfYD2x495/LKhdV62Nv35NSAE0jqHOzF99f0PfI/af9SF80mv03Nj4qm
- av0073TYMB9I8/YmuEA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-30_04,2026-07-29_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 lowpriorityscore=0 clxscore=1015
- malwarescore=0 adultscore=0 bulkscore=0 phishscore=0 suspectscore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607300103
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20260730-elish-board-id-v1-1-92f99e9722ec@dawidwrobel.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/x2MQQqAIBAAvxJ7TjCltL4SHUy3XAgNhQjEvycdh
+ 2GmQMZEmGHpCiR8KFMMDYa+A+tNOJGRawyCi4kryRlelD3bo0muKaatdbPRo5JaQIvuhAe9/3D
+ dav0AcqmXi2AAAAA=
+X-Change-ID: 20260730-elish-board-id-8ccd9a857382
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jianhua Lu <lujianhua000@gmail.com>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, 
+ =?utf-8?q?Dawid_Wro=CC=81bel?= <me@dawidwrobel.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1968; i=me@dawidwrobel.com;
+ h=from:subject:message-id;
+ bh=g2fcCipVqt2i1yfS91bVrhhCHQ1qcOIxuxiWk6CgcA8=;
+ b=kA0DAAoWynV8R6nV7u0ByyZiAGprVS7IpwJaoOcWCNIk/6xxU2PlpnqNRIfQW/7aagx5XWc5T
+ Yh1BAAWCgAdFiEELmZSvDpT6ffu6PtXynV8R6nV7u0FAmprVS4ACgkQynV8R6nV7u0SNwEAkN19
+ VoNGLym2TUlAVfOUATPIQKKQt4u0HEVgo6pAwhYBAJ69dfHOjwk/NhcCL3SOv2gvvkxBkaTibZB
+ 3SQye/SkH
+X-Developer-Key: i=me@dawidwrobel.com; a=openpgp;
+ fpr=B64A778E0E64049A70C831C8B7B81FA12B282A92
+X-Endpoint-Received: by B4 Relay for me@dawidwrobel.com/default with
+ auth_id=901
+X-Original-From: =?utf-8?q?Dawid_Wro=CC=81bel?= <me@dawidwrobel.com>
+Reply-To: me@dawidwrobel.com
 
-On 7/30/26 3:29 PM, Dmitry Baryshkov wrote:
-> On ARM32 with CONFIG_ARM_DMA_USE_IOMMU, arch_setup_dma_ops() creates a
-> dma_iommu_mapping for every IOMMU-backed device and attaches its domain
-> to the device's IOMMU group. That domain is neither the group's default
-> nor its blocking domain, so when msm_iommu_new() later attaches the
-> domain the driver manages itself, __iommu_attach_group() refuses it:
+From: Dawid Wróbel <me@dawidwrobel.com>
 
-[...]
+elish declares the same qcom,msm-id and qcom,board-id pair as
+sm8250-sony-xperia-edo.dtsi, so a bootloader choosing between appended
+device trees cannot tell the two boards apart.
 
-> +#if defined(CONFIG_ARM_DMA_USE_IOMMU)
-> +#include <asm/dma-iommu.h>
-> +#else
-> +#define arm_iommu_detach_device(...)	({ })
-> +#define arm_iommu_release_mapping(...)	({ })
-> +#define to_dma_iommu_mapping(dev)	NULL
-> +#endif
+0x10008 is Sony's value. The downstream device tree for this board,
+elish-sm8250-overlay.dts, uses qcom,board-id = <47 0>, i.e. platform
+type 0x2f.
 
-I see this is prior art, but should we support this config being off?
+Fixes: a41b617530bf ("arm64: dts: qcom: sm8250: Add device tree for Xiaomi Mi Pad 5 Pro")
+Signed-off-by: Dawid Wróbel <me@dawidwrobel.com>
+---
+Not tested on elish hardware: the corrected value comes from the
+downstream device tree:
+https://github.com/LineageOS/android_kernel_xiaomi_sm8250/blob/a04dba03999b36cc8f472c014063395b41fb1022/arch/arm64/boot/dts/vendor/qcom/elish-sm8250-overlay.dts#L14
 
-Konrad
+That import commit (bf5acbcaca99) credits Xiaomi's munch-s-oss and
+dagu-s-oss releases; Xiaomi's published kernel repo doesn't contain
+the device trees, so LineageOS seems to be the only public source.
+
+No user-visible impact: nothing in the kernel reads qcom,board-id, and it
+is only consulted when a bootloader selects between several appended
+device trees. Not needed for stable.
+---
+ arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-common.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-common.dtsi b/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-common.dtsi
+index 19aff83ecf7b..945127dacc82 100644
+--- a/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-common.dtsi
+@@ -29,7 +29,7 @@ / {
+ 
+ 	/* required for bootloader to select correct board */
+ 	qcom,msm-id = <QCOM_ID_SM8250 0x20001>; /* SM8250 v2.1 */
+-	qcom,board-id = <0x10008 0>;
++	qcom,board-id = <0x2f 0>;
+ 
+ 	aliases {
+ 		serial0 = &uart6;
+
+---
+base-commit: 7f102800164990609e2b272396d45b197a55bd04
+change-id: 20260730-elish-board-id-8ccd9a857382
+
+Best regards,
+-- 
+Dawid Wróbel <me@dawidwrobel.com>
+
+
