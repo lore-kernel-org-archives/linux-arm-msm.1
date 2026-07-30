@@ -1,116 +1,125 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-vk1-f181.google.com (mail-vk1-f181.google.com [209.85.221.181])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66E193B71A6;
-	Thu, 30 Jul 2026 21:33:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38D393921D5
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 21:47:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.181
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785447183; cv=none; b=LvF7++qeJufSN5qtvc6H+/WxlVz7sDrQmHwZudeu6ILhXtThDvokBjleTC3QUui8QOZkkbieV7DA3K+wYlDHC70W0hvrSLQJdDV4uPI6bN/PFk4G4/uAjlH6rRY4nkQNoPMB9Ww5R2SkO4mTED7j+P+xV9MfsCFX4UabTcM4Pk8=
+	t=1785448034; cv=none; b=W7PJPmPMTx72TK0Vw5LhuR3nbI+l5aFqmfiqgn8AJmY/yJy9IrkXGfF3i0Tg8GuhHNYux/wb5qQ+mFl8Dvz+udXnLOwrRaqbASmzpna0cDcdQnYT+fLzzES7xL5Jh2d2XENOC0Q6DBJNj+3+wecMrKx0sXdOP1gJieVTPxq3IU8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785447183; c=relaxed/simple;
-	bh=E00UjiY9NGFXivfMUet7mSE4cZ9O3b+2c5MluuPTLmQ=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=alq9ehCoHa4CIC2MCefY+QZSG9LYxp8c45GNdoKMfSAW/THKmu6pbH5Glo1XWOGwINGm0Jget7FyKY/tMJwgVb04HB1FIGFDTEiGdc9g+IANL9btV02ePsgq6p9zAqeH3AAz7m1YeyzEN8a74uK4BcQvcgtaGac4g1E4ruLCeJg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=LSNqkABE; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1785448034; c=relaxed/simple;
+	bh=3zePUSKPuVEhoLen7Dlseb8ZqqhKGqql9NuBj13jea0=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=B8IzE5WNTF8EF7B6rio8u4zpHyo4th3lsXGimQpfolO9v5uckLdtypwxu72ROXiHYe0wSnms36Pm0Sh1vCMCaHGSUOP3WyZdELNavrL1wRHiK6SlabwodQkgwpMEswDtwEFiX1CSN4FwONf711Ab1IbcHDBwS+wc74TjIelpEcs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=T6fyRCtX; arc=none smtp.client-ip=209.85.221.181
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="LSNqkABE"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 6A00BC19425;
-	Thu, 30 Jul 2026 21:33:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1785447182;
-	bh=E00UjiY9NGFXivfMUet7mSE4cZ9O3b+2c5MluuPTLmQ=;
-	h=From:Subject:Date:To:Cc:Reply-To:From;
-	b=LSNqkABErTHWTqIOfSbAkJy21aYexHW/Tir+rOxJJ7mqj+UMzVNQyXr409rAHLy0G
-	 5AUCCtZrWluHgQ0Jv37kdATb3E4Ds+QMlMs3e7MX/peqe2tjqUM1/MZDIsyMdY1s5+
-	 iRQlL1pqrwDvdqR1rWpMC72KjfVquJD8dWH2Jw0ymCDCauU5+8k6VqOXNm96nTebkK
-	 qseAOZoUMYsPcwAFA/rcmNdAFo9hqjeAvJ9c38hS2MU1EdI3XzA7pz0J250bAT2fN4
-	 V7WvqkvYPmf9l+Baq7Ht8UbEYb5ToF5XlJ0BVBcPkWvMqS24MeApL/4FT7MjTwh6Vn
-	 Ocs1pLQj2WFmw==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 46DE1C55162;
-	Thu, 30 Jul 2026 21:33:02 +0000 (UTC)
-From: Mayank Rungta via B4 Relay <devnull+mrungta.google.com@kernel.org>
-Subject: [PATCH 0/3] watchdog: qcom: Support NMI pretimeout warnings
-Date: Thu, 30 Jul 2026 14:32:46 -0700
-Message-Id: <20260730-qcom-wdt-nmi-series-v1-0-3aa86d162914@google.com>
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="T6fyRCtX"
+Received: by mail-vk1-f181.google.com with SMTP id 71dfb90a1353d-5c2c46a428eso218403e0c.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 14:47:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google; t=1785448032; x=1786052832; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=BEcZSaSov64w+SqDtqbhCImxhflXKNQ/vSfdSGSImp0=;
+        b=T6fyRCtX0BxQOQEGS9QkEgl3GVP53KWdfpNTTAGKnLi81+jmjQMjriL2lPW9MREwFv
+         aPh3fSoHDvxF2rIFBO+prpR0zRT3mmx+QU7VcmUtrXXeomAm2j32syjPRwm7WF6eC/Bc
+         kMFBTk+hMBalXOzhms7FBSSZPXV9/FD3rMDmA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785448032; x=1786052832;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=BEcZSaSov64w+SqDtqbhCImxhflXKNQ/vSfdSGSImp0=;
+        b=nCvQK+i9kUMs8R+e6R1PZ4y2OMEhpbR3wEwYyW/tkNkvOgtkRz/ODeA26Vr7z+9vcx
+         3hl2YEV6DKSRtSZlqEX8AToKtBIkqXuh6Fl0dzyKw5fnpRQIPP0Ho8suyO0kHHx6LYuC
+         55xCIaasv+Mc+2H7G60v93bmV8aUyuw4rQ8eWd7wwy4lAFLSgf0gd5BPGS9HEciDyV6Z
+         DPoHKtV2G/AYD8zdZg65h6YVG8PuyPav6Lxju6b1xlUGJhUs1z1+ExovYs0GgAYhWTq3
+         +eQJIG+N+18+wy6n06nBiOkhKrVATBXaYc8cQ+s3lxTq7kZh5QCwJYE713dsca4x+NgJ
+         huPA==
+X-Forwarded-Encrypted: i=1; AHgh+RpbzCpoxbBA7nl7Tqp+lTAhWtvjOb4Ajb9lke+lJKd7T2N2GdcCivo7dWkH0PP/ghLGcL+p9fR+DLis8pF3@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzz3fTMif2w3W9mh+b+LLLesz7djvWNSkcK9evb0b1LD8/0TwPK
+	bp7o+cUTaW3jyQiC/rKJFJ2129pYOXipo+nQRrIWFHslT9wodnYIGpqGctNbBAi7X3Gu9HqHzfG
+	7Rn4=
+X-Gm-Gg: AR+sD11/Fm8uR9joZ3S4cOnDxJUwiHaJG3ufnlWetMo/Y3UW8GlggqD+CuFStB+NJLZ
+	s1HpSzCnGXTTSAS6pojfaHk49DsVplKnxrA2c9NrH1JscnwCaIEtWA7Oz4hAtw5q1Aptl7b7Rho
+	6yWBM6OjWqPhIhMmLbXwSWtB3PEn8+XRH7N597lZwWsRnYYdRakRg7BfSU2vMMDJr87RGLlf8hG
+	gtwTpZZUN+Cn2prF9fhvLoTrizh1eqmjI7FtOOvRHym3xWkXVofAmWJysRRnboKUFVVur6qkDw1
+	GHXeCBQRwYFY+P/wifleZp3yDl6XTF5XelbmfCX3m0fP7pMXzbdLbzqpinhw0rFjE7XXyxrUG7+
+	Qpk+hpAbkhgr+MG5x4uhntfYT+rgXIQ3Mzr/kJ/u3NQq6JObtXaPM3O+PupvdHl2ykVnqLp581S
+	qOWar/Ftd5L4xVfnIwfxLDSdYUivoqV95X8KYyzVtKw1BPsnv70X6UYkcwh08ZwKwppTQewrxjX
+	Uh6P2tro7mPWABSmyAarVRoqHw=
+X-Received: by 2002:a05:6122:4892:b0:5c2:d11b:dfbc with SMTP id 71dfb90a1353d-5c36602407emr1741869e0c.7.1785448032020;
+        Thu, 30 Jul 2026 14:47:12 -0700 (PDT)
+Received: from mail-ua1-f50.google.com (mail-ua1-f50.google.com. [209.85.222.50])
+        by smtp.gmail.com with ESMTPSA id 71dfb90a1353d-5c366725662sm2397363e0c.13.2026.07.30.14.47.10
+        for <linux-arm-msm@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 30 Jul 2026 14:47:10 -0700 (PDT)
+Received: by mail-ua1-f50.google.com with SMTP id a1e0cc1a2514c-9725084c547so132049241.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 14:47:10 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RpZ1ABq1a05hLKFX0LRxHwL+7EXBiLYP0lLh+DZJiBs9Yx80EUpcXPoqJRtnZyPVtKl/NPFJa7YEwjw7ETN@vger.kernel.org
+X-Received: by 2002:a05:6102:3047:b0:740:127:c81b with SMTP id
+ ada2fe7eead31-7574dca124dmr1665460137.7.1785448029188; Thu, 30 Jul 2026
+ 14:47:09 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAP7Ca2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDcyMT3cLk/Fzd8pQS3bzcTF2IZl0Ds0QTi5RE8yQTQ1MloM6CotS0zAq
- wqdGxtbUAKmScq2UAAAA=
-X-Change-ID: 20260724-qcom-wdt-nmi-series-06a48da7b415
-To: Wim Van Sebroeck <wim@linux-watchdog.org>, 
- Guenter Roeck <linux@roeck-us.net>, Thomas Gleixner <tglx@kernel.org>
-Cc: linux-watchdog@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, "Kirill A. Shutemov" <kas@kernel.org>, 
- Douglas Anderson <dianders@chromium.org>, 
- Mayank Rungta <mrungta@google.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785447181; l=2279;
- i=mrungta@google.com; s=20260212; h=from:subject:message-id;
- bh=E00UjiY9NGFXivfMUet7mSE4cZ9O3b+2c5MluuPTLmQ=;
- b=xBPfmoKsQ/I33VuZIsAs6ZyS5mn84msN1YcbFg2FZUvdVLGIogeKQ13E9wuGaA+EGPbkxedtQ
- O8eKW00VAxaBSx8IucQpmg/mCjApdn+ITmCAPonxuNF96QQvGykrDeG
-X-Developer-Key: i=mrungta@google.com; a=ed25519;
- pk=2Bjwbv/ibL10QnyvK9G7DoKpffXy7z6+M4NawEYgYDI=
-X-Endpoint-Received: by B4 Relay for mrungta@google.com/20260212 with
- auth_id=634
-X-Original-From: Mayank Rungta <mrungta@google.com>
-Reply-To: mrungta@google.com
+References: <20260730-qcom-wdt-nmi-series-v1-0-3aa86d162914@google.com> <20260730-qcom-wdt-nmi-series-v1-1-3aa86d162914@google.com>
+In-Reply-To: <20260730-qcom-wdt-nmi-series-v1-1-3aa86d162914@google.com>
+From: Doug Anderson <dianders@chromium.org>
+Date: Thu, 30 Jul 2026 14:46:58 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=V_7RLjcAtKk5MHiABj1rA2CTkPw2UY2gJnVzH=3Gbp5Q@mail.gmail.com>
+X-Gm-Features: AUfX_mytlaDARoR1dw85A5VeD-oPperL8oh_dbbeAf-fbsBmoOf0-Vxqm2C-FZs
+Message-ID: <CAD=FV=V_7RLjcAtKk5MHiABj1rA2CTkPw2UY2gJnVzH=3Gbp5Q@mail.gmail.com>
+Subject: Re: [PATCH 1/3] watchdog: pretimeout: Protect governor access with
+ RCU for NMI safety
+To: mrungta@google.com
+Cc: Wim Van Sebroeck <wim@linux-watchdog.org>, Guenter Roeck <linux@roeck-us.net>, 
+	Thomas Gleixner <tglx@kernel.org>, linux-watchdog@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	"Kirill A. Shutemov" <kas@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On ARM64 Qualcomm SoCs, when a system freezes completely due to hard
-locked CPUs with standard interrupts disabled, a standard watchdog
-pretimeout warning interrupt (bark) fails to fire. To diagnose total
-system lockups, we need to transition the Qualcomm hardware watchdog
-pretimeout bark interrupt into an NMI (or pseudo-NMI).
+Hi,
 
-Enabling NMI pretimeout handlers within loadable driver module requires
-making watchdog pretimeout NMI-safe and unlocking GPL module access to
-NMI registration functions.
+On Thu, Jul 30, 2026 at 2:33=E2=80=AFPM Mayank Rungta via B4 Relay
+<devnull+mrungta.google.com@kernel.org> wrote:
+>
+> From: Mayank Rungta <mrungta@google.com>
+>
+> Currently, watchdog_notify_pretimeout() acquires pretimeout_lock using
+> spin_lock_irqsave() to safely dereference wdd->gov before invoking the
+> pretimeout callback.
+>
+> On architectures supporting pseudo-NMIs (ARM64 GICv3), watchdog drivers
+> may register their pretimeout warning interrupt (bark) as an NMI.
+> Because spin_lock_irqsave() disables regular interrupts but leaves NMIs
+> unmasked, if a pretimeout NMI fires while pretimeout_lock is already
+> held by normal process context, attempting to re-acquire pretimeout_lock
+> triggers an unrecoverable deadlock.
+>
+> To make pretimeout notifications completely safe to execute from NMI,
+> convert read access to wdd->gov inside watchdog_notify_pretimeout() from
+> a spinlock to lockless RCU. Use rcu_assign_pointer() when modifying
+> wdd->gov and invoke synchronize_rcu() during governor unregister and
+> pretimeout unregister routines.
+>
+> Signed-off-by: Mayank Rungta <mrungta@google.com>
+> ---
+>  drivers/watchdog/watchdog_pretimeout.c | 47 +++++++++++++++++++---------=
+------
+>  include/linux/watchdog.h               |  2 +-
+>  2 files changed, 27 insertions(+), 22 deletions(-)
 
-This 3-patch series achieves NMI pretimeout enablement for qcom-wdt:
- 1) Replaces spinlocks in watchdog_notify_pretimeout() with RCU to
-    guarantee safe execution from NMI context.
- 2) Exports request_nmi(), free_nmi(), enable_nmi(), and
-    disable_nmi_nosync() to GPL loadable kernel modules.
- 3) Updates qcom-wdt to request its pretimeout bark interrupt as a
-    NMI (or pseudo-NMI).
+I pre-reviewed this for Mayank. I'm not an RCU expert, but this looks
+right based on my understanding. My AI was also happy with it. ;-)
 
-Testing & Verification:
- - Built and tested on ARM64 Qualcomm Snapdragon SoC (Google CoachZ)
-   loadable module configurations (CONFIG_QCOM_WDT=m).
- - With GICv3 pseudo-NMI enabled, simulated hard CPU lockups and
-   IRQ-disabled hang conditions via lkdtm. Confirmed that qcom-wdt traps
-   the watchdog pretimeout bark interrupt as a pseudo-NMI, safely
-   executes watchdog_notify_pretimeout() without deadlocks.
- - Verified that runtime transitions between pretimeout governors in
-   sysfs execute safely.
- - Booted with pseudo-NMIs disabled and confirmed that qcom-wdt detects
-   unsupported NMI and falls back to standard IRQ.
-
-Signed-off-by: Mayank Rungta <mrungta@google.com>
----
-Mayank Rungta (3):
-      watchdog: pretimeout: Protect governor access with RCU for NMI safety
-      genirq: Export NMI APIs
-      watchdog: qcom: Register pretimeout interrupt as NMI
-
- drivers/watchdog/qcom-wdt.c            | 55 +++++++++++++++++++++++++++++++---
- drivers/watchdog/watchdog_pretimeout.c | 47 ++++++++++++++++-------------
- include/linux/watchdog.h               |  2 +-
- kernel/irq/manage.c                    |  4 +++
- 4 files changed, 82 insertions(+), 26 deletions(-)
----
-base-commit: 3fe08b9796f36ef437ab9328e7dd1e5ff2d66603
-change-id: 20260724-qcom-wdt-nmi-series-06a48da7b415
-
-Best regards,
--- 
-Mayank Rungta <mrungta@google.com>
-
-
+Reviewed-by: Douglas Anderson <dianders@chromium.org>
