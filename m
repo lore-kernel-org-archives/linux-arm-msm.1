@@ -1,86 +1,86 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 92A84445ADB
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:34:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BCFC4457D7
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:34:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785429264; cv=none; b=hhRsp1lDWOrnr5JvjkJvo/qF4lbKvWwvxsE+TMkZCk9bemYJAbn2GHyrIS5Rln20h5qTiAsGVCh5QtnZF4XcNk7VzxbS2XlEeE6mG9hBpAGJz1ng6z0UAm+YqmTrv9zU+NwJaLjiNt/HLfJR4s/qeOhSVXSQmlwmxvskxcaslcw=
+	t=1785429269; cv=none; b=UZ6uBpH66+N2wmRyoeueKJ2uG2EygpRfpgI1qP14I3Ym9AJ75QJACruwoXnTSTPkF+3ufwvOoEwvm1g9n9CcinLYYF8dh/8XElQEr2h8lElyp29O7PZ7QVDs0f01evc094a6vbtq1gXDlzCnRet6dkRcdgTzNVyLvIsLPibtKZ0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785429264; c=relaxed/simple;
-	bh=/ItBIOPawXYNwAswd6tU9RRlpCU1vzYrY9wUqopKFzE=;
+	s=arc-20240116; t=1785429269; c=relaxed/simple;
+	bh=gXRfC2VjDT+XZheOHTbKbVXeBbM9bMyYA1/mdxx+YNU=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Gtbl1558pyIanU02u3Myxz83uID/lxZ34szuLrXpSMR8GI6WVMs6/tnxoiemiPNPMWvr7lvBYxAmKB2sPt6hqImLfGo8QePIWYt+aKHXponrBTmT7jFAVyAtqUjkluWL+3v+Sg485dRnzIVSdNveMRN0nJMqr1M3ZTbRcjiDIq8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=aApoPp4b; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SMQVL67e; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:Content-Type; b=a8Y9WiFLyi/Yd1xI+l4KKrDUNWn1X1yhlVr16RShghTChnbtlMZkchgZ3opZSEc1vU4zjUNV8LGSD0QE6vaE9isKyvcluGLD2VpZsiUinKGPcJEyFx35L6Ib12O1b+UWyDnJCP8/d6Gd3syWzAfnybDUyv5ds3KhXu1EH4m7dpA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OPWTosx7; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hoXwg1RF; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="aApoPp4b";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SMQVL67e"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66UGWmFU1525354
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:34:20 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OPWTosx7";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hoXwg1RF"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66UGWgTk1835867
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:34:26 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	IKNH2juaex08xlmIycCn4O+g3eG2ZSGfqAkX5dJNlEk=; b=aApoPp4b0e+BKO9q
-	+sdqEimE7lSZ6e/yDktabAmXMzTC03CGajP+kTFLy9JUnXHmTjGBVL1UmtSbMO1q
-	q8a+R2qoPNBZaHEeHBirFAIRlVrFmzOQcntPZvjdNmGZpbybaG/uBnQIqV/4T/eQ
-	KSEoFbT06uBsrNzhn1NxNPG5n4AgdjTPTR3YTxMTK1s5MApjumhqLakzJqxZFvzQ
-	DR9G4lLL9O959y4NP98tnZvU4Ij7VtzdxcjUB614a/jgP7yrEMKMm3o31VEwQpVo
-	zCZyobn4dln8kQSmfW2VitneGyoLtwPcLzzdJkO6aqNwf4IMFTxBLbnimz/InHkc
-	7ByIZg==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr6yfs5yw-1
+	XnjmdFxiHJbplHqHTRM7ARcmcbr5wAPPkXRM+q1ZZUI=; b=OPWTosx7xtooPdQV
+	yHjJ9jqz2rPsoV/aQcdBbj2WYdVyYFc3+pR9Nj95skiup16r1SX477S/gIEdiIQy
+	2OZEZ4XGs2PThTrpQbjBzqNmXguKyQeXssRrTg51tZX3w2mgPXK32H7Q8vSxU6Ok
+	ifoB596Q+i+aNlqiXKsQsDi8o3DC//Vc2KJkYYa8Dod+TQo7jJ9yhBveMG7RG/Dx
+	N+oJEj9oVl5z/Oj59WwKiHGgT2V2orrdjlxLrb6lnnfZRm5zgEVQFdJndVAgofKv
+	aKW9LxFMjuoBN0DMBkUc08CI1upgaOBUUR/9PQ8EsLq3kb21g65hRauxd6QRRu89
+	mOhP7g==
+Received: from mail-yx1-f70.google.com (mail-yx1-f70.google.com [74.125.224.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr8gy0pat-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:34:20 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-92eebb130dcso581085a.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 09:34:19 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 16:34:26 +0000 (GMT)
+Received: by mail-yx1-f70.google.com with SMTP id 956f58d0204a3-66898cc78f7so3471198d50.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 09:34:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785429259; x=1786034059; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1785429265; x=1786034065; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=IKNH2juaex08xlmIycCn4O+g3eG2ZSGfqAkX5dJNlEk=;
-        b=SMQVL67eyetFYP/pEH48rMeQdZr4XD6VfWJFdN3KkMQF5COZIQBrEU5z8GXCyc9gD8
-         mBpRh0VJant6z1Bui/TSkTkaaSm/8/a/ghk/UkujuaUMEWpROXZ13RCagsB1eEdayuKc
-         o5cIEyYSiIQ179RuOaW68IYDqMtlSM2lEoXMNzPa3hpAzAn4Swr/etwieJX91ztsJMMp
-         3CoxkcMMNod2ySzxyRMtidmhY/HkdNbsjD3HAMWbRIrNyKrJjko0gKTj56WzYVdivevN
-         CkGqNHxsXoMIzC/FheVAXagB/layavNLTWm1ts9T1tsLzSIvY8DQAMN8OHk3l4utzbeI
-         v5gA==
+        bh=XnjmdFxiHJbplHqHTRM7ARcmcbr5wAPPkXRM+q1ZZUI=;
+        b=hoXwg1RFG0f6ihOF8Nm6IKR5MVmyknRS1dlLi9BlqQxjoFyfA6MeoR2rtZxh+BC8wW
+         r05xB+6lMcUgmdcZ5TjiIwqULlTgBlNfV7Td8AlSolFAatGxnLqTj3YyHsIxE89GVkrR
+         aNiCRX7Op4qhr/UcCHrM1cJyqK4A6icFLOB+e2Icld99++Yxg+dGLPJBaVhMEBJ96QIQ
+         d/Bkj8WSRj0dDaYX2uCAF9pFusvLKMbwi+u9/SniqC4AGpgJigbhEtoQJmmr5XIgNUNF
+         h40DGkO1BWh//27k6pucvDZiVaPTU+NlUSpX2fyjFxvQOMzmJ2LE+R0MeSAwWxzuaWtH
+         /HqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785429259; x=1786034059;
+        d=1e100.net; s=20251104; t=1785429265; x=1786034065;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=IKNH2juaex08xlmIycCn4O+g3eG2ZSGfqAkX5dJNlEk=;
-        b=eEvGxK+UR/sgGjN9tE6EoJE19BnUNbtqy9txqn4rr+t08EVJDpxCjLK9BkAbBVNTBe
-         mpRBVhbdzDmQR3TvoRMJ+qkCgBYEPzR/+Gum651uRvvQ5O0KUDPaAGdRiSgECpOhoB7w
-         yqgZLqi+cS8j1Bgg7iBO663YLD0T2+QXp0oVaPEZGewxFWjRyUzkJHatN1f6D0/7ge5v
-         WH2TBf5RkCk0V/y1fCw3YAxFf6c1olrktJKbt+k8rlzpIPGOwEIh1I8yQJ4XVKbnKqk5
-         kVJWRAdWv9qg5bMFhb3Dpx/xjT/wrmTUe6E8RavfuUxbtWUV2E3s5pFAsvb8gMi1iI8J
-         H2Qw==
-X-Gm-Message-State: AOJu0Yy6ZLK689fZFMG8l/UI2uo2sNYEWWduMO6jMfzFov4V3zS7K6dB
-	aVHFxPRvC6CtAH5JPrJt/1QUC4GREQnHv/wrVstSGvNP6ZUUCO9ZOPzk8EAShyiupRX5SvFS4QV
-	xcblBRh15biQw+jx4xE3xB/+8xUtrs2GquIwHG7KLMeb41gBvC4j2GR7Uaim8ZYGganl2
-X-Gm-Gg: AR+sD13VzF6aw3qrBaLswOZ03uGx8pbHjS/l9UM62CY4A6VyHSUQc4xvFB9A+GYsbbs
-	31DUcYZzswImCIj9rCNiK3u9OC3kRsPoJZiZT90vziwARdR+0Pasj3kv6vZPVRTHYiuw6W83B/g
-	q1V631OkDD2wja7kYeiHqhGgCGC5agwbkjWJPxzst+fijWPRMnlFU7GWbDWyIA9eQ44RTjwPzQL
-	0tM2bMX98RrOk6qsQqAvOH5JfbdRccKy/emPofi9rna0o032eH/VCKkVx/D3zQyXyjn3HCU7UMw
-	tUOdOnksPK0+XHjHalHkcafAjBKJ+wu/DffCz49OJ7tO+gg61SJW39g+eEfBKromuBXGFvxcL+g
-	0nKwkuF3CSMogFN5lSWW+f/1x
-X-Received: by 2002:a05:620a:2707:b0:92a:d10e:bde3 with SMTP id af79cd13be357-9348dc47b06mr196850885a.3.1785429259245;
-        Thu, 30 Jul 2026 09:34:19 -0700 (PDT)
-X-Received: by 2002:a05:620a:2707:b0:92a:d10e:bde3 with SMTP id af79cd13be357-9348dc47b06mr196842885a.3.1785429258737;
-        Thu, 30 Jul 2026 09:34:18 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1fa8bf20a9sm86982166b.58.2026.07.30.09.34.16
+        bh=XnjmdFxiHJbplHqHTRM7ARcmcbr5wAPPkXRM+q1ZZUI=;
+        b=Y7TC4SDIitBkrbwIhPhW1fQ4nvlicHOA817audVhFEXb5opFtnTVXja6WxspnQ0keG
+         z8eHRIevNziZ8hqi1GL3wwFob+8R1LMB1MmN2lPeabtZZJ5TcOvga4I/pi2wbrz3rZQI
+         sIc2afpfGYPQ9Oz8V7nHZ7dV38+yi8B7fyZZUkat7/mBeyPeHvOJmGR5uVZ+NE4bmQL5
+         IjXnNr4RAnpPR14v5X7TcsJ9nBC74Eo6eBH/sb5NeYkMdURL2H79dVgmTDUM/Sb9ukjk
+         LS169PGBEv5SiM61OqgnMoN5Q02Nid/wuICDPlsEmV33mJPLaews05KVuHao6c5c9PyQ
+         uzhQ==
+X-Gm-Message-State: AOJu0YypU0HF240HkSx9gvUQdYS5LkkDV11A6lBoolWhdGQLp7Hio9lK
+	YOClSIzDPjQ9sgJOkyZy+RLFIxxl9Dfg2aZuM6NNxPWQbN/Mrr9mgT5V2yB+c2Q3XtBHY9xFyuA
+	RHdoV8/dhGd/ldKYi7ryhYDo/9a9HjWZs4DNRzGnVcif6bHUsaz710s6kQny5gZhS+wCk
+X-Gm-Gg: AR+sD130ZCLoGvopmocvlZx8upFYAK2JjJ7wZOkIU8cqlfc30nYJVwNP4jfzKPoUJRu
+	a1LibN4KEYyDy+6Et/qAzefCPe0hCOeIrRNq8zJgJ+/aHVYjflCZNyJa1wVy1lxZX5t1E3rVrvK
+	RaRFdhEET6Tjc1XS7esswSVo5bOlb5h6cdXrdHYRm4b+KyJUsntkkJYQYrdsM79BH/sHBkPY7Ci
+	szcF8i+Gsx9cRi1XqhCyXZa+nVDMTXf4T9ig75m5aRkBMEWpHMKOyd3TTzXI237PJUctWnmujOt
+	EBSEh0GDFD2748M1LnOZ5Rru148aufpz3hKIY5UtrnYEGyc0cAgOdpKeynHlgrNYxvEoIP+gMd7
+	2AJWzLBR05ocFFvq+fLJv8z8M7eQDegO7C1A0/N06f5mdVC6Fq0utP0wXvz379B3G7A==
+X-Received: by 2002:a05:690e:d4b:b0:668:8986:83a4 with SMTP id 956f58d0204a3-6692f83a99bmr1913837d50.98.1785429265638;
+        Thu, 30 Jul 2026 09:34:25 -0700 (PDT)
+X-Received: by 2002:a05:690e:d4b:b0:668:8986:83a4 with SMTP id 956f58d0204a3-6692f83a99bmr1913793d50.98.1785429265109;
+        Thu, 30 Jul 2026 09:34:25 -0700 (PDT)
+Received: from ?IPV6:2a01:cde0:108:24ed:2206:62e9:bbc4:c360? ([2a01:cde0:108:24ed:2206:62e9:bbc4:c360])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-6692c9315ddsm1608848d50.16.2026.07.30.09.34.21
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Jul 2026 09:34:17 -0700 (PDT)
-Message-ID: <0fbc8b4a-3920-4504-b1ec-62894def2d0e@oss.qualcomm.com>
-Date: Thu, 30 Jul 2026 18:34:16 +0200
+        Thu, 30 Jul 2026 09:34:24 -0700 (PDT)
+Message-ID: <9d14fbef-43db-4463-b7d7-e5daee1368e6@oss.qualcomm.com>
+Date: Thu, 30 Jul 2026 18:34:19 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,315 +88,78 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] serial: qcom-geni: Keep FIFO RX active during console
- TX
-To: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jiri Slaby <jirislaby@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-serial@vger.kernel.org,
-        Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-        buses.k2c.reviewers@qti.qualcomm.com
-References: <20260729-qcom-geni-nbcon-v1-0-3053b96465ed@oss.qualcomm.com>
- <20260729-qcom-geni-nbcon-v1-2-3053b96465ed@oss.qualcomm.com>
+Subject: Re: [PATCH v6 5/9] arm64: dts: qcom: kodiak: Enable CDSP & Modem
+ cooling
+To: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Amit Kucheria <amit.kucheria@oss.qualcomm.com>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        "Rafael J. Wysocki"
+ <rafael@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+        Manivannan Sadhasivam <mani@kernel.org>, Kees Cook <kees@kernel.org>,
+        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
+        cros-qcom-dts-watchers@chromium.org
+Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-pm@vger.kernel.org, linux-hardening@vger.kernel.org,
+        manaf.pallikunhi@oss.qualcomm.com
+References: <20260727-b4-qmi-tmd-v6-0-973cd3a226af@oss.qualcomm.com>
+ <20260727-b4-qmi-tmd-v6-5-973cd3a226af@oss.qualcomm.com>
 Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260729-qcom-geni-nbcon-v1-2-3053b96465ed@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDEyNCBTYWx0ZWRfX0c9R4fQnOaWB
- 8SI6nuQ/igLBidV0Fjfug2tQuFJjFktCiDFvhHFHgfuuBFPzgNNL/IWW45UZvUQ+a0mGYSueEEk
- SPKyCiKz/sNWFDKz8zNqBE7R6oPNbuySW8QbDf5IsezDRl3BHH9nrmt9ei2z40EASrw6+lGeYWh
- 0vyXiXoPP9yhUZTmpwSPluEMfzqcAh7uyQ+JASqHebvuFY4+KM+k5fgBfrkiLkM2mcmYtG6mkCH
- Oz5kwj5pLJMpZGj2pdndTO5MSA0jvTHNVTYnaIFBKMwGAEuaFhmN17ddqUzVwN/riECbGMKizWU
- JtwrXt8M46HymivillKfmnuGPoztN0dJaq5PZiBD9qlN/85aIoq+aMHl2fySowoqcIADAU2FQ2a
- MgmYinRGOeXeA5QoxjfYmHtQz2NjbEK+F1dQR0Hci7I9W8N4zCEyTJHOCPuy71+RIPj8ANmqabS
- tNryN0tKlI54/v/PAzg==
-X-Proofpoint-GUID: Iu4x15u0OUxOHYstrwQQTmL8cB5W_RJF
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDEyNCBTYWx0ZWRfXzpPWMwOOus7p
- kU7WkdEvu6yWq0Ek306okx8dntDhmzowREjNvunxX/afK2FDKAunogVtoKhX/892f1rb0retQdN
- jsp6cUshMmX96Yl+tnukcKEpXDkomK0=
-X-Authority-Analysis: v=2.4 cv=Tv3WQjXh c=1 sm=1 tr=0 ts=6a6b7d0c cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=zuUasCYdOxZzd_muCtMA:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-ORIG-GUID: Iu4x15u0OUxOHYstrwQQTmL8cB5W_RJF
+From: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
+In-Reply-To: <20260727-b4-qmi-tmd-v6-5-973cd3a226af@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: 9w_y9ADkJMxQ3dc54hNjo2CXz4Ss5sEf
+X-Proofpoint-ORIG-GUID: 9w_y9ADkJMxQ3dc54hNjo2CXz4Ss5sEf
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDEyNCBTYWx0ZWRfX25JGzpPybKIr
+ 8kk90/fjHmtWlzPg9VvsVDq6EfNLSOJvtEXrLw9E655n8YQVV3hv9U6p9hA1FUl9yEFF/EdS+gz
+ NdoTqGS1DPkPEM8ERoUlWmvwyLCBrqKXlFYBGRnk+TGonp5On8kr+7kr2VhK6d0yJBAfgLGrPJt
+ edb51PxKUuw14QbkooMZRKz7JlBXJsFbrN9zwTyL83zAcTbI3y4ZQPrPc535GeLZT77ZSoHWqfp
+ xvF4fe1SQ4gaEf1E/T7lsjnEeStw2Fyczp0ytA8BJ/uaXO+81c2GxC3dGfS/QmG0gAITkkmq5mz
+ hnAJiYOMQxPXbFLxxhIY9MM2mkFFK0u1Kv6T4kxzXQ8DHTjpjDU/P+qxDblpiMyarBgUCA+VHnS
+ boCK6w9AkrK30K1vSlsnxYcLTyqAhSA9SPnqTU9drx65pDASe0v9+F64goJjhnWTYSyN+sICl6y
+ wMuKewYd94r7M/2SAcA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDEyNCBTYWx0ZWRfX5XoN0Cmu+Owm
+ QrTac8Qj+HKue93sCtpFSTipo+9LubUkdRhU9t3e2AWMWnRmMGJptXxZrjI4mFlphXCgUmhIYMa
+ eNI90BhPBgxVeM5YK2nhN6tHZXyqLgM=
+X-Authority-Analysis: v=2.4 cv=MuliLWae c=1 sm=1 tr=0 ts=6a6b7d12 cx=c_pps
+ a=S/uc88zpIJVNbziUnJ6G4Q==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=oKFihCAVH3oSEhwhxOsA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=nd2WpGr1bMy9NW-iytEl:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-30_05,2026-07-30_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 adultscore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0
- spamscore=0 phishscore=0 priorityscore=1501 bulkscore=0 suspectscore=0
+ priorityscore=1501 phishscore=0 suspectscore=0 malwarescore=0 spamscore=0
+ impostorscore=0 lowpriorityscore=0 bulkscore=0 clxscore=1015 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607300124
 
-On 7/29/26 11:44 PM, Bjorn Andersson wrote:
-> The GENI main sequencer handles console TX while the secondary sequencer
-> handles FIFO RX. Before nbcon, the legacy console writer disabled both
-> interrupt domains while it performed a long polled M-side transfer. This
-> left the small S-side FIFO unserviced, allowing console input to overrun
-> and be lost.
+On 7/27/26 16:22, Gaurav Kohli wrote:
+> Unlike the CPU, the CDSP/Modem does not throttle its speed automatically
+> when it reaches high temperatures in kodiak.
 > 
-> The nbcon conversion replaces IRQ masking with the UART port lock, but a
-> threaded console write still prevents the RX handler from draining the
-> FIFO. Keep S-side RX enabled independently of M-side TX and drain it
-> while refilling each bounded console command. This preserves interactive
-> input during console output.
+> Set up CDSP cooling by throttling the cdsp when it reaches 100°C and
+> for modem when it reaches to 95°C.
 > 
-> Atomic output masks only M-side TX state, leaving FIFO RX handling
-> independent. The threaded writer can also detect a SysRq character while
-> it drains RX, so defer delivery until device_unlock() drops the UART port
-> lock, as the existing IRQ path does with uart_unlock_and_check_sysrq().
+> Add polling-delay-passive so the governor periodically evaluates
+> the zone during passive cooling and steps up cooling levels when
+> temperature stabilizes below the next trip.
 > 
-> Assisted-by: OpenCode:GPT-5.5
-> Signed-off-by: Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>
-> ---
+> Since the remoteproc_mpss node doesn't exist on non modem boards, the
+> cooling-maps that reference it cause DT compilation errors. To fix that
+> remove inherited mdmss cooling-map nodes.
+> 
+> Signed-off-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
 
-I think this looks alright, although my ability here to judge is not
-superb..
-
-+Cc Mukesh and the reviewers list
-
-Konrad
-
->  drivers/tty/serial/qcom_geni_serial.c | 112 +++++++++++++++++++++++-----------
->  1 file changed, 75 insertions(+), 37 deletions(-)
-> 
-> diff --git a/drivers/tty/serial/qcom_geni_serial.c b/drivers/tty/serial/qcom_geni_serial.c
-> index 08427390c173..a473d5521067 100644
-> --- a/drivers/tty/serial/qcom_geni_serial.c
-> +++ b/drivers/tty/serial/qcom_geni_serial.c
-> @@ -173,6 +173,7 @@ static void qcom_geni_serial_cancel_tx_cmd(struct uart_port *uport);
->  static int qcom_geni_serial_port_setup(struct uart_port *uport);
->  static void qcom_geni_serial_start_tx_fifo(struct uart_port *uport);
->  static void qcom_geni_serial_resume_tx(struct uart_port *uport);
-> +static void qcom_geni_serial_poll_rx_fifo_locked(struct uart_port *uport);
->  
->  static inline struct qcom_geni_serial_port *to_dev_port(struct uart_port *uport)
->  {
-> @@ -493,7 +494,7 @@ static void qcom_geni_serial_wr_char(struct uart_port *uport, unsigned char ch)
->  
->  static void
->  __qcom_geni_serial_console_write(struct uart_port *uport, const char *s,
-> -				 unsigned int count)
-> +				 unsigned int count, bool poll_rx)
->  {
->  	struct qcom_geni_private_data *private_data = uport->private_data;
->  
-> @@ -525,6 +526,8 @@ __qcom_geni_serial_console_write(struct uart_port *uport, const char *s,
->  		if (!qcom_geni_serial_poll_bit(uport, SE_GENI_M_IRQ_STATUS,
->  						M_TX_FIFO_WATERMARK_EN, true))
->  			break;
-> +		if (poll_rx)
-> +			qcom_geni_serial_poll_rx_fifo_locked(uport);
->  		chars_to_write = min_t(size_t, count - i, avail / 2);
->  		uart_console_write(uport, s + i, chars_to_write,
->  						qcom_geni_serial_wr_char);
-> @@ -593,7 +596,7 @@ static void qcom_geni_serial_console_write_thread(struct console *co,
->  			return;
->  
->  		__qcom_geni_serial_console_write(uport, wctxt->outbuf + offset,
-> -						 count);
-> +						 count, true);
->  		offset += count;
->  
->  		if (!nbcon_exit_unsafe(wctxt))
-> @@ -612,7 +615,7 @@ static void qcom_geni_serial_console_write_atomic(struct console *co,
->  {
->  	struct qcom_geni_serial_port *port;
->  	struct uart_port *uport;
-> -	u32 m_irq_en, s_irq_en;
-> +	u32 m_irq_en;
->  
->  	port = get_port_from_line(co->index, true, NULL);
->  	if (IS_ERR(port))
-> @@ -623,15 +626,14 @@ static void qcom_geni_serial_console_write_atomic(struct console *co,
->  		return;
->  
->  	m_irq_en = readl(uport->membase + SE_GENI_M_IRQ_EN);
-> -	s_irq_en = readl(uport->membase + SE_GENI_S_IRQ_EN);
-> -	writel(0, uport->membase + SE_GENI_M_IRQ_EN);
-> -	writel(0, uport->membase + SE_GENI_S_IRQ_EN);
-> +	writel(m_irq_en & ~(M_CMD_DONE_EN | M_TX_FIFO_WATERMARK_EN),
-> +		uport->membase + SE_GENI_M_IRQ_EN);
->  
-> +	/* Atomic console output takes priority over an active normal TX command. */
->  	qcom_geni_serial_console_takeover(uport, false);
-> -	__qcom_geni_serial_console_write(uport, wctxt->outbuf, wctxt->len);
-> +	__qcom_geni_serial_console_write(uport, wctxt->outbuf, wctxt->len, false);
->  
->  	writel(m_irq_en, uport->membase + SE_GENI_M_IRQ_EN);
-> -	writel(s_irq_en, uport->membase + SE_GENI_S_IRQ_EN);
->  	nbcon_exit_unsafe(wctxt);
->  
->  	/* Restart TTY data left queued when atomic output canceled M TX. */
-> @@ -655,12 +657,25 @@ static void qcom_geni_serial_console_device_unlock(struct console *co,
->  						    unsigned long flags)
->  {
->  	struct qcom_geni_serial_port *port;
-> +#ifdef CONFIG_MAGIC_SYSRQ_SERIAL
-> +	u8 sysrq_ch;
-> +#endif
->  
->  	port = get_port_from_line(co->index, true, NULL);
->  	if (IS_ERR(port))
->  		return;
->  
-> +#ifdef CONFIG_MAGIC_SYSRQ_SERIAL
-> +	/* The threaded console writer can receive a SysRq character. */
-> +	sysrq_ch = port->uport.sysrq_ch;
-> +	port->uport.sysrq_ch = 0;
-> +#endif
->  	__uart_port_unlock_irqrestore(&port->uport, flags);
-> +
-> +#ifdef CONFIG_MAGIC_SYSRQ_SERIAL
-> +	if (sysrq_ch)
-> +		handle_sysrq(sysrq_ch);
-> +#endif
->  }
->  
->  static void handle_rx_console(struct uart_port *uport, u32 bytes, bool drop)
-> @@ -902,6 +917,34 @@ static void qcom_geni_serial_handle_rx_fifo(struct uart_port *uport, bool drop)
->  	handle_rx_console(uport, total_bytes, drop);
->  }
->  
-> +/* Caller holds the UART port lock. */
-> +static void qcom_geni_serial_poll_rx_fifo_locked(struct uart_port *uport)
-> +{
-> +	struct qcom_geni_serial_port *port = to_dev_port(uport);
-> +	struct tty_port *tport = &uport->state->port;
-> +	u32 s_irq_status;
-> +	bool drop_rx = false;
-> +
-> +	s_irq_status = readl(uport->membase + SE_GENI_S_IRQ_STATUS);
-> +	writel(s_irq_status, uport->membase + SE_GENI_S_IRQ_CLEAR);
-> +
-> +	if (s_irq_status & S_RX_FIFO_WR_ERR_EN) {
-> +		uport->icount.overrun++;
-> +		tty_insert_flip_char(tport, 0, TTY_OVERRUN);
-> +	}
-> +
-> +	if (s_irq_status & (S_GP_IRQ_0_EN | S_GP_IRQ_1_EN)) {
-> +		if (s_irq_status & S_GP_IRQ_0_EN)
-> +			uport->icount.parity++;
-> +		drop_rx = true;
-> +	} else if (s_irq_status & (S_GP_IRQ_2_EN | S_GP_IRQ_3_EN)) {
-> +		uport->icount.brk++;
-> +		port->brk = true;
-> +	}
-> +
-> +	qcom_geni_serial_handle_rx_fifo(uport, drop_rx);
-> +}
-> +
->  static void qcom_geni_serial_stop_rx_fifo(struct uart_port *uport)
->  {
->  	u32 irq_en;
-> @@ -912,10 +955,6 @@ static void qcom_geni_serial_stop_rx_fifo(struct uart_port *uport)
->  	irq_en &= ~(S_RX_FIFO_WATERMARK_EN | S_RX_FIFO_LAST_EN);
->  	writel(irq_en, uport->membase + SE_GENI_S_IRQ_EN);
->  
-> -	irq_en = readl(uport->membase + SE_GENI_M_IRQ_EN);
-> -	irq_en &= ~(M_RX_FIFO_WATERMARK_EN | M_RX_FIFO_LAST_EN);
-> -	writel(irq_en, uport->membase + SE_GENI_M_IRQ_EN);
-> -
->  	if (!qcom_geni_serial_secondary_active(uport))
->  		return;
->  
-> @@ -949,10 +988,6 @@ static void qcom_geni_serial_start_rx_fifo(struct uart_port *uport)
->  	irq_en = readl(uport->membase + SE_GENI_S_IRQ_EN);
->  	irq_en |= S_RX_FIFO_WATERMARK_EN | S_RX_FIFO_LAST_EN;
->  	writel(irq_en, uport->membase + SE_GENI_S_IRQ_EN);
-> -
-> -	irq_en = readl(uport->membase + SE_GENI_M_IRQ_EN);
-> -	irq_en |= M_RX_FIFO_WATERMARK_EN | M_RX_FIFO_LAST_EN;
-> -	writel(irq_en, uport->membase + SE_GENI_M_IRQ_EN);
->  }
->  
->  static void qcom_geni_serial_stop_rx_dma(struct uart_port *uport)
-> @@ -1182,25 +1217,11 @@ static irqreturn_t qcom_geni_serial_isr(int isr, void *dev)
->  
->  	uart_port_lock(uport);
->  
-> -	m_irq_status = readl(uport->membase + SE_GENI_M_IRQ_STATUS);
->  	s_irq_status = readl(uport->membase + SE_GENI_S_IRQ_STATUS);
-> -	dma_tx_status = readl(uport->membase + SE_DMA_TX_IRQ_STAT);
->  	dma_rx_status = readl(uport->membase + SE_DMA_RX_IRQ_STAT);
-> -	geni_status = readl(uport->membase + SE_GENI_STATUS);
-> -	dma = readl(uport->membase + SE_GENI_DMA_MODE_EN);
-> -	m_irq_en = readl(uport->membase + SE_GENI_M_IRQ_EN);
-> -
-> -	trace_geni_serial_irq(uport->dev, m_irq_status, s_irq_status,
-> -			      dma_tx_status, dma_rx_status);
-> -
-> -	writel(m_irq_status, uport->membase + SE_GENI_M_IRQ_CLEAR);
->  	writel(s_irq_status, uport->membase + SE_GENI_S_IRQ_CLEAR);
-> -	writel(dma_tx_status, uport->membase + SE_DMA_TX_IRQ_CLR);
->  	writel(dma_rx_status, uport->membase + SE_DMA_RX_IRQ_CLR);
->  
-> -	if (WARN_ON(m_irq_status & M_ILLEGAL_CMD_EN))
-> -		goto out_unlock;
-> -
->  	if (s_irq_status & S_RX_FIFO_WR_ERR_EN) {
->  		uport->icount.overrun++;
->  		tty_insert_flip_char(tport, 0, TTY_OVERRUN);
-> @@ -1215,12 +1236,35 @@ static irqreturn_t qcom_geni_serial_isr(int isr, void *dev)
->  		port->brk = true;
->  	}
->  
-> +	m_irq_status = readl(uport->membase + SE_GENI_M_IRQ_STATUS);
-> +	dma_tx_status = readl(uport->membase + SE_DMA_TX_IRQ_STAT);
-> +	geni_status = readl(uport->membase + SE_GENI_STATUS);
-> +	dma = readl(uport->membase + SE_GENI_DMA_MODE_EN);
-> +	m_irq_en = readl(uport->membase + SE_GENI_M_IRQ_EN);
-> +
-> +	trace_geni_serial_irq(uport->dev, m_irq_status, s_irq_status,
-> +			      dma_tx_status, dma_rx_status);
-> +
-> +	writel(m_irq_status, uport->membase + SE_GENI_M_IRQ_CLEAR);
-> +	writel(dma_tx_status, uport->membase + SE_DMA_TX_IRQ_CLR);
-> +
-> +	if (WARN_ON(m_irq_status & M_ILLEGAL_CMD_EN))
-> +		goto handle_rx;
-> +
->  	if (dma) {
->  		if (dma_tx_status & TX_DMA_DONE) {
->  			qcom_geni_serial_handle_tx_dma(uport);
->  			qcom_geni_set_rs485_mode(uport, SER_RS485_RTS_AFTER_SEND);
-> +		}
-> +	} else if (m_irq_status & m_irq_en &
-> +		   (M_TX_FIFO_WATERMARK_EN | M_CMD_DONE_EN)) {
-> +		qcom_geni_serial_handle_tx_fifo(uport,
-> +				m_irq_status & M_CMD_DONE_EN,
-> +				geni_status & M_GENI_CMD_ACTIVE);
->  	}
->  
-> +handle_rx:
-> +	if (dma) {
->  		if (dma_rx_status) {
->  			if (dma_rx_status & RX_RESET_DONE)
->  				goto out_unlock;
-> @@ -1237,12 +1281,6 @@ static irqreturn_t qcom_geni_serial_isr(int isr, void *dev)
->  				qcom_geni_serial_handle_rx_dma(uport, drop_rx);
->  		}
->  	} else {
-> -		if (m_irq_status & m_irq_en &
-> -		    (M_TX_FIFO_WATERMARK_EN | M_CMD_DONE_EN))
-> -			qcom_geni_serial_handle_tx_fifo(uport,
-> -					m_irq_status & M_CMD_DONE_EN,
-> -					geni_status & M_GENI_CMD_ACTIVE);
-> -
->  		if (s_irq_status & (S_RX_FIFO_WATERMARK_EN | S_RX_FIFO_LAST_EN))
->  			qcom_geni_serial_handle_rx_fifo(uport, drop_rx);
->  	}
-> @@ -1632,7 +1670,7 @@ static void qcom_geni_serial_earlycon_write(struct console *con,
->  {
->  	struct earlycon_device *dev = con->data;
->  
-> -	__qcom_geni_serial_console_write(&dev->port, s, n);
-> +	__qcom_geni_serial_console_write(&dev->port, s, n, false);
->  }
->  
->  #ifdef CONFIG_CONSOLE_POLL
-> 
+Reviewed-by: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>
