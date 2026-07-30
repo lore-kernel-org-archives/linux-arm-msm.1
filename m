@@ -1,37 +1,37 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DD4642587A;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 68F7E424D47;
 	Thu, 30 Jul 2026 11:56:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785412576; cv=none; b=Y8qok+pI2GNV4LbLHyrGw3UqxcmXafRuX9Bj61r43BjQ8B+jM19fBkqcjZw0hDQs4fdxznIKdkp+Yb53M2aOdhFFAPCl8Dn8DOHpgo732hkgQzgUxujuwNNIFXoH6i9wJFpHfxH4y2S1ZLx4PRASxca694lDAe/b/FyKmg+OYsY=
+	t=1785412576; cv=none; b=tfgDM/6rwajFpaUjW9S99D96nZswW8vvKoARDO+/YvxuWrB3a5j0Ml7MvvxH9ch0VV3D5a1yTasOaZzEJCtOLcaGN+KQAaCi5AjdmVJz08g+e/kwhAsvcgARyvl0pOr+dUHEgmCGDYg7jvQi3aWwMHtUAhdl99UgamQ6HAK36NE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1785412576; c=relaxed/simple;
-	bh=chVTMU6yFK1AbEDuzXefTfNRENRx8V85YCUCZ/BECWY=;
+	bh=YcD56gemXWWPNcFg/6r0UFn76lkkSjv3r1OTikfyHxE=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Qfyiunzu4fqgBaIYmEUh7RbJZW3uoyXxBDAcCe+97o9OXk16vbtvzZ2XvnEbE8lYZ/huGHxXg+UFBv0938Zr7Mh5RqqskysDIFmp0jL+KBTq6tCd7AFYCOzJB82qg95o5ZrpgA3kXtkQ2nW+L5XpzpvH5SdazPTclo6nftOCl/w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IZbRLQih; arc=none smtp.client-ip=10.30.226.201
+	 In-Reply-To:To:Cc; b=gukIo6KaGItlf0wUiA9E89P1B0GTfE2J9s/5WukxZzX3z3gcDRcmj1JzE67l38PkOv498tDad7Ad88hG+fw8mZbyLn+gDBWCs1DQv8Is5l9cqGZKDPEOBFzm2coOyen7Gn/qUNHCCn9/pDZYn7rmLmwb8Z6S8gwx6i7toGeQX2k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Go1xBPU0; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IZbRLQih"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 61937C4AF12;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Go1xBPU0"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 34907C19425;
 	Thu, 30 Jul 2026 11:56:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1785412576;
-	bh=chVTMU6yFK1AbEDuzXefTfNRENRx8V85YCUCZ/BECWY=;
+	bh=YcD56gemXWWPNcFg/6r0UFn76lkkSjv3r1OTikfyHxE=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=IZbRLQihw+A52ZXleECh4YN0bFClj8ho95H+omS8cO2CsYSgjMoXJngwbzOtK4zxZ
-	 5kC1JwpBy6nDKxksKb69X2dlzBPsKTG9wASLognRQGO+O5uPI9cCSlaUhazL4NxI6p
-	 PuNlraR8v/1TRGY0Kn+F2OzIineP4I6iUlRZbTCJotG/7T39R7rYa3UtdFjkr7uJg8
-	 J0rOHFlPec20F9AqEUyOFPpnq2hBzUTZe7pqqT3d6MyNhlE6AKJtfO69GkuJJy84hh
-	 MsjCr3K5+CkL7rrJ0BZq/WPs3MNvMpO1M9QaFlCX2tG9W7+toQiMN7huyb7/dK3uLe
-	 TYpgxSsRG3vQQ==
+	b=Go1xBPU0CTjc7fl0WW/CKfbw6D3HAUTT2vLd+7jeZw8HVFAn8+tZaLEnUPQMt/Z/f
+	 PxCarOVkhbwYrEVQeUv0A8RlLKGQbW8gPujeFl1XmDzmmFrX10wSoCBmdBMocqy6B9
+	 2w1vFIZIpYo/2cXZBEsQNbrIBs/BYmK68/E3SwUwCl14nmeg15Q+In666xe4VjSx5V
+	 HW/BeHUoyOecT5XFLs8Y1AwVwKOz0h2sy8bTb6/8LfwBFqUnOWf+r+BLu+R57mDVP8
+	 tUOLr9Y9CSDiXfC/apoPCP1Nkq5trTYRLAI8nyx0b9BhncCgE5Akblohf0qAiVP+lW
+	 thoWSBwgVEiKQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 4F1DDC55165;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 215CBC55167;
 	Thu, 30 Jul 2026 11:56:16 +0000 (UTC)
 From: Manivannan Sadhasivam via B4 Relay <devnull+manivannan.sadhasivam.oss.qualcomm.com@kernel.org>
-Date: Thu, 30 Jul 2026 13:55:54 +0200
-Subject: [PATCH 13/22] arm64: dts: qcom: talos: Fix the PCIe iommu-map
+Date: Thu, 30 Jul 2026 13:55:51 +0200
+Subject: [PATCH 10/22] arm64: dts: qcom: sm8550: Fix the PCIe iommu-map
  entries
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -41,7 +41,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260730-iommu-map-fix-v1-13-83405d37ba41@oss.qualcomm.com>
+Message-Id: <20260730-iommu-map-fix-v1-10-83405d37ba41@oss.qualcomm.com>
 References: <20260730-iommu-map-fix-v1-0-83405d37ba41@oss.qualcomm.com>
 In-Reply-To: <20260730-iommu-map-fix-v1-0-83405d37ba41@oss.qualcomm.com>
 To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -53,16 +53,16 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
  Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
  Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1334;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1756;
  i=manivannan.sadhasivam@oss.qualcomm.com; h=from:subject:message-id;
- bh=7OSGlRaQko8HFbJoyzKNn3gvY6RV4+U4dviVNJnyu48=;
- b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBqazvZOx7u+ytVugz1dUzBIRXSfJdw8Np/NVc2e
- q/PFs13KemJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCams72QAKCRBVnxHm/pHO
- 9W9PB/0VlGvU3kNIS57SSScpzhVs+aSwwmwwSmLEmMdKaWgfZSI05HfpR5kgMXU1RTfHwz44iZe
- ZkC0hGY2HusEvIm4CYOmiMOjXwtDN7K3OTiguqXOH1I50BFerly8rbdFr/SNXQmQtsWVUwDg60W
- OJRlXwCR3nezHpPAZ+4a+ACl+xI/0z4voa4epar/sD71JPobQqFjwqtlxC4maZs8H2oCnnz4S3/
- nMhVeNbD2/WiidSK3pUa4lCX0NRZiR91MfZLr4MrZ4n8dTXzDIYxqdd39/GC/UukE2B043wX2ER
- t5zNGQyFDkC2MvFaK7rd5FQB+hcPVN7hmzElXVlKtyfP17+A
+ bh=9ObHrmTgy9auFRif7hmm/21tCC3Yej1+FVeyNLCSdIY=;
+ b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBqazvYOuSFHpNxpoZ07rvC89A5aFvFol/zLf4Tk
+ f+DsZih+7iJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCams72AAKCRBVnxHm/pHO
+ 9dDLCACmT0SNwuIedSqwmmn9dCKchBmWyCf2KS+CboupXUfpOHP7Ww6irpKnfg3+pEs9AA+k9z4
+ 1AHBBR7rylyX8zBUOHu40amxWP4nAPkBXIFrWNtU22ZdY80jDZCAYw9Y9fbXfa0NGWZyRf4qhsw
+ yVpyTtbieEgUzwsO/lO1XHf52ebQ3wdsNqW54p8iY2KPMf/1tUgc0ZS3M4XUvo/8tkmL4hCEDBX
+ crarNFDLkuAu/pjoBwLwvcFwE4ndh0p+MPtqX/egxY5g9dHcRCk3ZRpXHu3yUFLOvTase9QaMmp
+ TGmRnuQfXIMMIor74eOW+unSd+tEkNILdP2UAhK1HPXpKSJO
 X-Developer-Key: i=manivannan.sadhasivam@oss.qualcomm.com; a=openpgp;
  fpr=C668AEC3C3188E4C611465E7488550E901166008
 X-Endpoint-Received: by B4 Relay for
@@ -81,27 +81,38 @@ ccb2fd725d41 ("of: Respect #{iommu,msi}-cells in maps"):
 
 So fix the entries to match the provider's '#iommu-cells' property.
 
-Fixes: 718cc7542a00 ("arm64: dts: qcom: qcs615: enable pcie")
+Fixes: 7d1158c984d3 ("arm64: dts: qcom: sm8550: Add PCIe PHYs and controllers nodes")
 Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/talos.dtsi | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/arm64/boot/dts/qcom/sm8550.dtsi | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/talos.dtsi b/arch/arm64/boot/dts/qcom/talos.dtsi
-index fb1bbc51bb8a..76b1e86b57b0 100644
---- a/arch/arm64/boot/dts/qcom/talos.dtsi
-+++ b/arch/arm64/boot/dts/qcom/talos.dtsi
-@@ -1349,8 +1349,8 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
- 					 &config_noc SLAVE_PCIE_0 QCOM_ICC_TAG_ACTIVE_ONLY>;
- 			interconnect-names = "pcie-mem", "cpu-pcie";
+diff --git a/arch/arm64/boot/dts/qcom/sm8550.dtsi b/arch/arm64/boot/dts/qcom/sm8550.dtsi
+index 396201905ef2..69babd26c678 100644
+--- a/arch/arm64/boot/dts/qcom/sm8550.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8550.dtsi
+@@ -2382,8 +2382,8 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
  
--			iommu-map = <0x0 &apps_smmu 0x400 0x1>,
--				    <0x100 &apps_smmu 0x401 0x1>;
-+			iommu-map = <0x0 &apps_smmu 0x400 0x0 0x1>,
-+				    <0x100 &apps_smmu 0x401 0x0 0x1>;
+ 			msi-map = <0x0 &gic_its 0x1400 0x1>,
+ 				  <0x100 &gic_its 0x1401 0x1>;
+-			iommu-map = <0x0   &apps_smmu 0x1400 0x1>,
+-				    <0x100 &apps_smmu 0x1401 0x1>;
++			iommu-map = <0x0   &apps_smmu 0x1400 0x0 0x1>,
++				    <0x100 &apps_smmu 0x1401 0x0 0x1>;
  
  			resets = <&gcc GCC_PCIE_0_BCR>;
  			reset-names = "pci";
+@@ -2561,8 +2561,8 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
+ 
+ 			msi-map = <0x0 &gic_its 0x1480 0x1>,
+ 				  <0x100 &gic_its 0x1481 0x1>;
+-			iommu-map = <0x0   &apps_smmu 0x1480 0x1>,
+-				    <0x100 &apps_smmu 0x1481 0x1>;
++			iommu-map = <0x0   &apps_smmu 0x1480 0x0 0x1>,
++				    <0x100 &apps_smmu 0x1481 0x0 0x1>;
+ 
+ 			resets = <&gcc GCC_PCIE_1_BCR>,
+ 				<&gcc GCC_PCIE_1_LINK_DOWN_BCR>;
 
 -- 
 2.43.0
