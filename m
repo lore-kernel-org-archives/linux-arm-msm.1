@@ -1,100 +1,102 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 665F93016F1;
-	Thu, 30 Jul 2026 19:25:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4E6A44CF44
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 19:34:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785439533; cv=none; b=Pu7LzO9PDqR+VNNBnIfUQpJiygmlglc3xoUpdBCCrV41iIjlSOwqch3w4nQVYy3uMFc58hvH1qWNg1NwBdfRWuRX61BwmaLXzQ9fdj4TEhvHY89f5GE0FqrrJjSMj5k6xgOP6M2q6YPVAiPYsL7etkV516L2+d5tC2DJhh5fviI=
+	t=1785440099; cv=none; b=gQ8m0EXbUvkUm/E6crBtFtkb7/0WpTWuaSuMbmQxXCMc0R1WVjp9M/QZaCavuWsPE7UujpiAvONTvi7+A3GGDWkrGuHhIFGX4UATPiayGTf9dfSFzpUoEpwTdxZgE8bXoTNiXtSVbUFNF/lYwzXGERu7Foq2GltBcivnYewjFuQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785439533; c=relaxed/simple;
-	bh=ZYo4gt/Cp5FikglU+FBYuXTfkXQf+fV3BH9Fj3n6cEc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=kEQKqYx1OX+klUdfjWuXvbL3myydVEkp8n8oZTRDhtjw5DSZOthae+gLXPet2ontMof5/R5Ym2lFhuRZUPdxDEgsr087JqolGVJA6oMJboI2Kl4ztHN3Im3EvV4qjkLZv1eKMnNpZdOp9QBWompKg6qIv5+o6Sj8Tb4G49uhoTU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=J/KTZczZ; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785440099; c=relaxed/simple;
+	bh=A9kTsIlpFM9/4kED2Jbar6fygXdSxA4cqWt7xu3coGI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=jsklkTreq7Yka+TVDhZdBm/MrX4hSWw1lfPpHuNc3UDw88Vvce8wosHNxBl6UF0/KDeQum/S9hYtWirMo9jZZGs1sqbfBC4vpG4I4aVJPHiYajSfZUjHd/xXWZZmxlOEmV38BBn3JbQMgDTNmYHzogbaV2WCe7jL0FE3Xq5zVzQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=zVxHl0Vp; arc=none smtp.client-ip=209.85.221.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="J/KTZczZ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA9951F000E9;
-	Thu, 30 Jul 2026 19:25:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785439532;
-	bh=gtMLKNFZrJT3gGOu/uZ3lsR4QIZzulOfoT9Jg7yrq/M=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=J/KTZczZr7U+X+xmXYSMf4bwK1cvo/fPQPguzcjPhKR2WAOp+9jrw3oXamiSNXxAu
-	 3iExrfjB0VKjGNufCeXxAiYxjF9j+/v0pvj9WHd3Sryq86NrJ4E25lsLjy0+zltzv5
-	 PgcTSuwr6cfBLh/NEl6N0gvP+BDS3q1gnIoG/cvf84qAOhBJvpvbOHao0wOMh0+2DV
-	 OU58XAprzflZQqCSniKGF/SbCgVI9q0xb/5vZvh6epXxx1VJki8DnMVyvnOqtvbBvo
-	 ociV8mu0Jf3A5GT3urQ3llv5WhnsSgcPSYdqJ9Lyv3UlJWGUvD3hs81TASO3HBFoEv
-	 DG++pPf+Lw0Hg==
-Date: Thu, 30 Jul 2026 12:23:36 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Neeraj Soni <neeraj.soni@oss.qualcomm.com>
-Cc: ulf.hansson@linaro.org, adrian.hunter@intel.com,
-	quic_dmukhopa@quicinc.com, quic_rampraka@quicinc.com,
-	quic_nitirawa@quicinc.com, quic_sachgupt@quicinc.com,
-	quic_bhaskarv@quicinc.com, quic_gaurkash@quicinc.com,
-	quic_sartgarg@quicinc.com, ram.gupta@oss.qualcomm.com,
-	linux-mmc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v5 3/4] mmc: sdhci-msm: Use pm ops instead of macro to
- restore crypto keys
-Message-ID: <20260730192336.GE3139@sol>
-References: <20260730140822.1976635-1-neeraj.soni@oss.qualcomm.com>
- <20260730140822.1976635-4-neeraj.soni@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="zVxHl0Vp"
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-47db714766aso690707f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 12:34:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1785440084; x=1786044884; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=4Xwq7roaqwaiY129Ws3twDa5FLFPnW6tapCxowp6w0k=;
+        b=zVxHl0Vpw3rsME+vXOLzhu5WVxldB1vgIfkdB7DNp8tVWdkNhoUOSfEG+oMMfGGZrQ
+         XvNQA1vEpmyf5XGZ+BSiPU8nIOY3uNK+zneZa485KCLDxkm1UwnI4CMLujhKjXaTbA/U
+         2tWR8603j/HtG4+LrFiJChUAVZN/2/Esv/bagEsz/sPWgg96UhDwUhWgo0LqTJFyKUDC
+         iiBDVCF2D1wASc+XzNvgmga8BKw7qJlp3XRsqR8Twz+uK1tfLBbvqwidtdJCfLfE/QIj
+         HRyzCwywon1nKgrMFhBSiJQpUZbNk4uwlMANQiOf6FJzYO8pQPWHfn67Bslbs4E7QOsj
+         DU8A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785440084; x=1786044884;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=4Xwq7roaqwaiY129Ws3twDa5FLFPnW6tapCxowp6w0k=;
+        b=shTIgNJSeg1ibnEq70+Jv8Ym1IXHFZ2unG0gSocmnJBHISXjryNN8lh5+Lnygr3ZLu
+         rl2sScgYfTwjHS0SPC4d4/QmAiU2lR4hCbg7Qq8SU/2bkZnH8VeRaoNE3Ct38H5ldpZM
+         GnFlUvp5R0wUD0RE8ZpQnhoqa2aZPJC+i00YY8JrXYZModS2LIxdIpU3629i2fCb4p0S
+         2iOunM4tfnFXC+8bPEIl+2u9OZdH9XjcUYkVrh17S/sGPpCwsUO2zsxXpt+HckHijsi7
+         2GptnbtHWCQeLEsdC1ksJ2JdI1JAqXY1lRsUdkHdtXPCgbnIqjqFY+UWa4kSD1muHP3y
+         O83A==
+X-Forwarded-Encrypted: i=1; AHgh+Ro7sx/PosPgwiF/qH0sYtRYXdSFsRX1AplnZNDwpqOrpb6cJOP3o2paZp1yrCjfKZsbpriNAgcK4oEr1vDL@vger.kernel.org
+X-Gm-Message-State: AOJu0YxkyY5DKN6KQow5PbbpjwUoDGQcXLeEuSSiiVF7FrIrKGmKLezI
+	uunvVS2PoMiKDEjk8LF6VXqFQB4SB8fjN3SQ09ZFvh/EPWQ76CakjlPdHI3LCulXh2c=
+X-Gm-Gg: AR+sD10Trzf566Hgmo9UUSpNPFHvN2zCDrOfa+7EOPHpIzQblYuFoDNOoQVxk74tH5d
+	Mhy0o7pzdTajbEPRQkEFyix4uAenUAzGW2sVsOK1C6hCjfWIAdQNlYh6Uu74MPgqm+Kc8bgqOuY
+	Kd+5gst455uncVmo5d7ZUIXS6s3W8aWCSpXPHUDHPNXq5Mqy94AUBBu9N3/Idl43rTrAqF2Sitl
+	ycN9HLsQ2usMtbL2PDKK+zOrNT06f0pgcvyjsLfMxacY+38sQNHlrXHDaPCFL6ZSm4FpBpDKgwv
+	PjRMs9QCDgL0diG4MkYGk3oq4sBKuhQYDU7eUl7fcgZOfst+9L1NiBkOyL+ETkJmZ8O+r4nZa+Y
+	FS81wpTXzKhup0UcX9THdceUBVgCfze8UVPu2Nv1kyisCFg97iFVaS4ObW6zRwNcinxcoHkP9Hs
+	LLooF7urk5jIW/xKUa7EXPtPUyh7Tt7b1MPkGvfzwf5OLqBIdlq7V/AMFtQoppDMaEwOsLlIhx
+X-Received: by 2002:adf:f390:0:b0:47f:87f9:6ccc with SMTP id ffacd0b85a97d-47fcbcddac0mr1938150f8f.30.1785440083631;
+        Thu, 30 Jul 2026 12:34:43 -0700 (PDT)
+Received: from [192.168.0.101] ([109.77.38.123])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47fc88e4721sm6911106f8f.16.2026.07.30.12.34.42
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 30 Jul 2026 12:34:43 -0700 (PDT)
+Message-ID: <c2636e38-fde8-4ab4-8103-c3c21dee5c1a@linaro.org>
+Date: Thu, 30 Jul 2026 20:34:41 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260730140822.1976635-4-neeraj.soni@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/4] media: qcom: camss: Add PM clock support and
+ integrate with runtime PM
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Frank Li <Frank.Li@nxp.com>
+References: <20260730-camss-version-v3-0-74a87302dd9f@oss.qualcomm.com>
+ <20260730-camss-version-v3-1-74a87302dd9f@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20260730-camss-version-v3-1-74a87302dd9f@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jul 30, 2026 at 07:38:21PM +0530, Neeraj Soni wrote:
-> From: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
-> 
-> Inline Crypto Engine (ICE) keys are lost after hibernation entry and this
-> needs to be restored when hibernation exits. ICE keys are re-programmed
-> during sdhci_msm_ice_init() but it may not cover cases where the
-> hibernation image is already restored.
-> 
-> Unwrap the pm ops and use directly in driver to add the call to restore
-> Inline Crypto Engine (ICE) keys. This ensures that ICE is brought into
-> same state as before hibernation.
-> 
-> Signed-off-by: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
-> Signed-off-by: Neeraj Soni <neeraj.soni@oss.qualcomm.com>
-> ---
->  drivers/mmc/host/sdhci-msm.c | 19 ++++++++++++++++++-
->  1 file changed, 18 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/mmc/host/sdhci-msm.c b/drivers/mmc/host/sdhci-msm.c
-> index 7d71dc6f388d..a4998e74a2bd 100644
-> --- a/drivers/mmc/host/sdhci-msm.c
-> +++ b/drivers/mmc/host/sdhci-msm.c
-> @@ -2986,9 +2986,26 @@ static int sdhci_msm_runtime_resume(struct device *dev)
->  	return ret;
->  }
->  
-> +static int sdhci_msm_restore(struct device *dev)
-> +{
-> +	struct sdhci_host *host = dev_get_drvdata(dev);
+On 30/07/2026 10:24, Loic Poulain wrote:
+> +	ret = camss_init_pm_clks(camss);
+> +	if (ret)
+> +		goto err_v4l2_device_unregister;
 > +
-> +#ifdef CONFIG_MMC_CRYPTO
-> +	if (host->mmc->caps2 & MMC_CAP2_CRYPTO)
-> +		blk_crypto_reprogram_all_keys(&host->mmc->crypto_profile);
-> +#endif
-> +
-> +	return pm_runtime_force_resume(dev);
-> +}
 
-Is it correct to access the ICE registers before
-pm_runtime_force_resume() has run?  Aren't clocks and power still off?
+I don't think this makes sense if !CONFIG_PM_CLK
 
-Also, prefer IS_ENABLED() to '#ifdef'.  However, this suggests to me
-that we actually should just keep MMC_CAP2_CRYPTO defined to 0 when
-!IS_ENABLED(CONFIG_MMC_CRYPTO), as that solves this naturally without
-any need for #ifdef or IS_ENABLED().
+->
 
-- Eric
+I don't think the read routine in patch #4 should happen if 
+!CONFIG_PM_CLK either.
+
+Happy to retain the RB with those changes in place.
+
+---
+bod
