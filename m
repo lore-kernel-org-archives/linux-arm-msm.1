@@ -1,178 +1,309 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DEA6401A06
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 09:25:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785403558; cv=none; b=V6sbFkf03bBKCqHoLCH3kRO0RlJsCFqjOeEM8iL9Bcw/lo3Pth67wT4mN8tvFlI+Sv8Q1fgvTK44wN/zrl7iV77sqhIPiyEyXVLtshlQYdv4Qny9rIsFky3pTQtr5vGUO5hy+2bju/rHjZ/LM9yF3oynVbN5KA1JwZNPkm1FTug=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785403558; c=relaxed/simple;
-	bh=e+kemegnfd25Sop3xdW/Diw7KF46KmCCUk4+XwwvsRQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=UQ3uRSUc6htszDYcgfamqkZ970mN+BNJwUI+uviPG0MD1BAEeWDJZvOzgfAZIQGngYOkvsjyjt8kERwjYXHudSnlfujcptcDjqsn0V8+HtvFayWDWvk4H2vvctWHfIJFsEbqyprm/1Lbu79RHf1SflBtZAqNKBV0ynbk9SVVgJU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=djH7gx4i; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=d9XYEhMY; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64F273E51E2
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 09:26:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785403568; cv=pass; b=YAqbrhRk0pHq91rrfJNZLGTm6uwz6mpYvhHwa4Ys3au31AtO3BMZwXml56/xzFRt375sQyG7tDJRoJsWboNK+pSTlQGEWHk3ZU6IWbdjjs+0ZLuqCjCQ9WYYhY4DLW1l2h4kbjt1frfUQOE/jYYWGiDS5lusFPtcbnF/0Dcx+ko=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785403568; c=relaxed/simple;
+	bh=d6jBdyE9RvlKKjJldB/+re0AqKKURAyopW6Wd6wovmM=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=ANZuRwDRSkse1YBmWbbu0sWSsdsu0rgVbqGZRDKqcgwZ8FD+j1qmZmbnqk8tkYjRB31xi897p3YhdbennNttGLtQi6gcy/W4GF+6o3E5rdg1s9A2G7wKbJpoQrgiofz79lePz6HvLA11cU41HcIBaZpJgECSGyViN5/GBgO9Xgo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FDP2u/ft; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cuOk13eN; arc=pass smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="djH7gx4i";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="d9XYEhMY"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66U8wwWu599196
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 09:25:56 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FDP2u/ft";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cuOk13eN"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66U8u6N8263828
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 09:26:06 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	CpwG7cUwCiBQiNOvTzmfNMlN8+MeLdJPK4zcBEkWFB4=; b=djH7gx4ile1RlJg4
-	SoMWfm+PZI8SQ7T6KhXEmU5zRY/TWjmp5u8wMDGtp9mnYPuWd+TAcjdqiF9UmrlE
-	E3B6m0XJNsGaXTRS+o9ANbm7PBAXCoERL14DOzk/GfCwYzleJwRRh9RVOlQipfUZ
-	L7cXtrTDaJSsyrM/QWoSn1DJJWPm6GjD51trDw9kmx77fv0CkNTwPAe+7Tj3OkgT
-	C6hpb9/+Te204tTpVCa6cSkIf0v5uu8gVH0a7H9m1FE+MCjseV90VLrhgYiQUD87
-	XVSMWe0hZe+rJXa11yLw0m2QkAEF0NMsQUHhSK6heJZPWuVz5j266zc/xMecN6d+
-	YqnarA==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr3jv04hh-1
+	qk9h6nzsDMo5dT+RocG4O8A/lOdfDKX3bHop1qBAp+c=; b=FDP2u/ftT3BNPClS
+	pHrm3gZy9cvUA4WRh4VSmAjAn8keKOeY2M+hndXYumQvmD+epXd+Qybd3LYj2iYD
+	FO0JxrePbPEKMOYfPbvv08aT7TDNCGRSKzm1zl4iXTdc82lmLA1hjf7BmfZpYGb0
+	BVh/ydCnlydc0Cv6vhRCi+shywvSI/JiF2+rTs+5bPX7g0akiQNrz+CTdV4gnsvh
+	HNRpQOunKhAj4mTrEXpVxzriOe7A/BQTv9Lpagni0UlYa+OXQstb6vmwvQiBaTTz
+	s4kDRKmeAOfce082GQdk1jjNaIy7AWeNqvpB5QGEJEGDJcx+qsjK0PjkXcDVWxWE
+	kWh1Nw==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr3hrg4tj-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 09:25:56 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51ca37ce4c3so4248541cf.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 02:25:56 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 09:26:06 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-8efe7db1c42so21616036d6.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 02:26:06 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1785403565; cv=none;
+        d=google.com; s=arc-20260327;
+        b=MwwW1caCjqETZLSNYQzr6yDf9slKiOiEF+4QIWq11iorplyAhAEG9RntbwRYfzHzRa
+         r+0a/WWecZEv5aWf+xVqet1WGnhfyZM6gDdf4DtKhYY6/Arp7BVdxNAMjnI4YsUTXu0y
+         2T4/p9GxKMHZMgkKNmv7Q3jeyCPRIPu5Bv5dni4Ze4RDbFzJrUGF520kbNcz0CRINrFq
+         sinubCNeTl45XOaH2ztU8CwSjsWDWMJbfmMzGTyZ9wHlao47u40Kwd+cpk9te+53sbTd
+         6RIDvH76gwnUbHkoaimcMHcItoBiMX1JOHvuUWShTVYUFxjXMrNjQUAIGrt8bZpiQesI
+         V84g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=qk9h6nzsDMo5dT+RocG4O8A/lOdfDKX3bHop1qBAp+c=;
+        fh=5D6hAWjEn4jBPDJ2Y1kB1XLAJg+zjo01uxWxbsPs08c=;
+        b=PlBdYUSXvfcNeEQQJ3YwyNBh46kDkVngCLDtDwsTt85ywPKtXkDo4KQySOnF9VS28w
+         A6F5S8jP8A3K20byIyrfVeQpwu5g5jMfRYiIvG+/uHPlvbBBbhm/gfba/8WoR+VAFnHb
+         e3dgEfauORfr7e4OvyHHeBwwHL7dldAAjHjMWvavnBOA+hwXcWNnsMJY8A0KEjIDsZ66
+         ZnB4FOf0t7pqbhMV//f34PdQkb87sgegvWAxVKDVqE54I7sdlEUnn1DDjfWW7QfxeXZf
+         mutJNqFrHyltnAVeEEizKiLrLaDCNLZ1qGLVrW4oykxw7ofEErrXyqrgqPzU2wjrcbki
+         /vXw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785403556; x=1786008356; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=CpwG7cUwCiBQiNOvTzmfNMlN8+MeLdJPK4zcBEkWFB4=;
-        b=d9XYEhMYjHlaGfZnQfbxdUOkZCpkCkTxxeNspBU6SQqmcuzm7V1w5N8IfvvgGjYOuJ
-         /zRv4e1cioxqjvGgtZK1ROnABzWRiCXE34s0f2B0J9pOtdEKPGEUJYWVhQd628qECwMy
-         dxn34AaOoykTyb6jeT+QzMruQ4wlBNqdL5n6CUtw1sa7ME+4RcQR2rnwpfmWR7g4tap3
-         IHfjiFY22hmjJxejo0ObpFyBK+ZQABqx8K2fwxz+3ElOE9j+EZ93ny2yUbQLEI/W6w6j
-         YEBke7s6Ze5YDsNM8Jv14RBikH4M8i7pWaJ03oVVmWH8QJLHyNhNYhkmJE15We3YR+lt
-         /KTQ==
+        d=oss.qualcomm.com; s=google; t=1785403565; x=1786008365; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=qk9h6nzsDMo5dT+RocG4O8A/lOdfDKX3bHop1qBAp+c=;
+        b=cuOk13eNWtReVDWgYASJpDsia4O77VPmTutmCPAhbJjCkpPViVTNsh419bGmm/lbBI
+         YsuQMizzPnMD3Uc4nWuDcb3GOHGZqsn6uVaMIMVa8N+1U6i9qD8towa/ztJqTdSoI6jW
+         feMn2nBF6lfwsDAqystmfkqWpOruABVb8maEEUiKdUW9JcWGrGXTblII4oihTVHH/Onm
+         u9MAVI3HNNkiTVh3HobScKcI1Lai6Wrs/5+lgjrDUd0MV/ZHssKtgI32oJEyykKIh3AN
+         juVNPcyG6gHuQr40YiLN+cRfVrORxXyk0kfCoIPVSNW76ijvY06yDU1NRBV0V7EsusSf
+         EAsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785403556; x=1786008356;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=CpwG7cUwCiBQiNOvTzmfNMlN8+MeLdJPK4zcBEkWFB4=;
-        b=FaUJKPSA9XM98nRT6OlUxOpUNrtSqJ5m00M49CXtaGT4u47r7t64/MVKIc8CAsQ4zv
-         TjRVaPrhwIN/qb2SczaXWzxCBhwH/6NrWiYwie28u0XsG3KP3CEGKvMZcBwsjHjdWIyc
-         P8Wit1/Su7mwzBbmpn7+R2Z1msUjqo5NfAVx73jVeBRmXeg2TR+Fx8ltv2iAzzsLKFs8
-         1qDi86PLizJmBHBQbpliE0Eb7vqMr0/0ERw7EJh5pDWDzWJziJAn57nUY6ENvAOgeOBP
-         6qKkmhU9xe3Fs+74K8wPQQ+uXKT58EmxGxI5/BP6LNgfErw02SxowfK1qURb96vCU3ER
-         yl8Q==
-X-Forwarded-Encrypted: i=1; AHgh+RrKGqMMyh/H1f2QbEXiwdZY0UHOf90kYAHHYjCtjO0R49hmjonOHdSucoOL29srxQoSDT68z2uSCD8E0ZpW@vger.kernel.org
-X-Gm-Message-State: AOJu0YzpIMhyLfDz+SnP0RvDyV5fati0sPpsvLVUE6CAD8K5u6+BO/CP
-	RPV1UM7G1aQyhhVuQaVlTY3lFUsMWIpQQ4w4fMaRXoZgDiUifPbu418Z12ksUpVjLKks4CH00Mv
-	DQP/CEHwcUiemZtixCNEK90j9x+JgFyZAC/JCP9eI5SxkaJ+DkXMPRGRaxfinl9a7O4P4
-X-Gm-Gg: AR+sD11J+81TJwsjRjaCoaPkWGAQ8jyttnVNNb2284sStuwYodxxAzOEkCrJPhTdXF5
-	TQaBWCy4dkP+WjOykOxUng1C3bWHkz4IuCTI2BWl6+Dpa+CRRt6GvYMVFT3bphGiPrqJHvJ/30j
-	4ww22U9ztUgtRuQIwd3O3/YT23u0dAyjCF0X/8GPSTWnXINyZl/8yAG9YnsUp0SgGW55po0Y+jr
-	eHwJWt8qnavpYcRMS9TM1/BVy9BDUEZ3JwO4dyiLReRUKbh9ATieKvn2bTaObSHa5zxPK140TBk
-	EVyBcupPYwUTvtDCjrDoutTtsSgXX8GGh59kuHynlzpjRgG//h/8g5nN3KDRcMsfO37dXiDiYrD
-	i+taVNwE4XVV7VrrNi4gXz2fo
-X-Received: by 2002:a05:622a:4d8a:b0:51b:f40b:2faf with SMTP id d75a77b69052e-52b386e56d9mr33502231cf.4.1785403555721;
-        Thu, 30 Jul 2026 02:25:55 -0700 (PDT)
-X-Received: by 2002:a05:622a:4d8a:b0:51b:f40b:2faf with SMTP id d75a77b69052e-52b386e56d9mr33501871cf.4.1785403555230;
-        Thu, 30 Jul 2026 02:25:55 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1fa8bb46f0sm46325366b.44.2026.07.30.02.25.53
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Jul 2026 02:25:54 -0700 (PDT)
-Message-ID: <f122889b-1278-43b0-966b-562b5388e587@oss.qualcomm.com>
-Date: Thu, 30 Jul 2026 11:25:52 +0200
+        d=1e100.net; s=20251104; t=1785403565; x=1786008365;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=qk9h6nzsDMo5dT+RocG4O8A/lOdfDKX3bHop1qBAp+c=;
+        b=jN4F+zueuSeSExCaQwXtyGV4UbrVLGDt6LHq7ArHG0MbGKNi32/MJq08Pdf08HDJhv
+         Q5Dq7JG42bU8CACkB4I671kCsjQ6+O5V19L1zggKTXIea+OBnaC+Dy0Xnzu7JNs2KSIg
+         Y1Edc4Gn7XXTUwknmDsg8iuJBA9+wcjmmq0eutsNXZUl0hV8J31f/Po0SpGeJWkIbcgn
+         kJT2E0Fdzw8MNikMxF8RSF/bF8pycHDFapu5T4QHT1EEHQCVwadSI64DEitp11/qt3ac
+         TeHTfcwIGhPan3Z2a349AG4av38QXW9e/zGbVqo9wWMFV/1VILQTCqMEYSRNdoviTcue
+         9I1Q==
+X-Forwarded-Encrypted: i=1; AHgh+RqFV9O74EG7nC7UbIbqXmNQj8IFNS8kD0toieLUaB0zUnlnwEAVY3ajdKwlDgg4HkvCYB0YsvAj7b+Eu73E@vger.kernel.org
+X-Gm-Message-State: AOJu0YxP46LjZ+d/Aiv3PCyUYtvGaHLjA0WjDkL3J/0fAtJwyXdyhUGC
+	4crSr8TkYI/w7MVZ39YuSvvCMaWLB+xuz0+vFSUlS/6gSdHA53AaGzAZ32w+ru349tNWlRdpGUH
+	akzBWziW6BarsvtmleWkE68P/HIg7ADf3lhwUWODzV5Q3EPjUf+WvKMfkG0afTx8BrF5lpumeSC
+	ZdopCjYK32PVYC6Ot7HE6Ab06ygktRd+nbElFXYyOiRWU=
+X-Gm-Gg: AR+sD13n83DY7u6z0t8r+Z0QW9oGrJ2zPGZezdKYBOwsuDrD8sV0G/xwE5Kt51ODm4Q
+	Pfyza9rhzBexHSgAbh0UfsqvI0kHj+VdByGp/MFoAK6I/5AVn8RedvPApVx6a6twP7z99155HLp
+	Jb9bgz75qFjpkbU5ueB307Fs/pEhfE2onhBovRqabFxGuuLf6Qg+OHhwrsl5WDUGEKsKBhLn7uS
+	IOhPY7VNo7TRrc+nbxNVIk207os+rnLf3VuA3EDAh+H43KYOyPzC+1xwk6wkn9x+wgqh/sEsG0=
+X-Received: by 2002:a05:6214:5702:b0:904:2a2a:d3 with SMTP id 6a1803df08f44-908347eb8ffmr17145866d6.47.1785403565327;
+        Thu, 30 Jul 2026 02:26:05 -0700 (PDT)
+X-Received: by 2002:a05:6214:5702:b0:904:2a2a:d3 with SMTP id
+ 6a1803df08f44-908347eb8ffmr17145746d6.47.1785403564947; Thu, 30 Jul 2026
+ 02:26:04 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 4/6] arm64: dts: qcom: glymur-crd: Add PHY supplies for
- pcie3_phy
-To: Qiang Yu <qiang.yu@oss.qualcomm.com>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
- <neil.armstrong@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
-        Philipp Zabel <p.zabel@pengutronix.de>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+References: <20260717-camss-version-v1-0-7ed71fea95e8@oss.qualcomm.com>
+ <20260717-camss-version-v1-1-7ed71fea95e8@oss.qualcomm.com> <a4a1dc46-ff07-4ecb-b41f-341b6aacb3ab@linaro.org>
+In-Reply-To: <a4a1dc46-ff07-4ecb-b41f-341b6aacb3ab@linaro.org>
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Date: Thu, 30 Jul 2026 11:25:52 +0200
+X-Gm-Features: AUfX_my2K2kAR81YYtKMh29QHm6PVDAYVdCeK_BkR_HVuUNHZjZo17pEJloalkM
+Message-ID: <CAFEp6-0ZBEb6x52dabGjF1XLgq4j6Ty3dKtMDJ1qNUTPGS+kHw@mail.gmail.com>
+Subject: Re: [PATCH 1/4] media: qcom: camss: Add PM clock support and
+ integrate with runtime PM
+To: "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>
+Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-kernel@vger.kernel.org
-References: <20260724-glymur_linkmode_0724-v7-0-65c8469c6b65@oss.qualcomm.com>
- <20260724-glymur_linkmode_0724-v7-4-65c8469c6b65@oss.qualcomm.com>
- <74907d0a-cf14-43b6-bcfb-8c283926a820@oss.qualcomm.com>
- <ammhm1mnHhn2okgJ@hu-qianyu-lv.qualcomm.com>
- <2091d5bf-8c76-479b-98fd-fc75b3adf644@oss.qualcomm.com>
- <amnDqhTpMffP9M1w@hu-qianyu-lv.qualcomm.com>
- <cc185dfa-4271-4c63-89a9-05b8990db242@oss.qualcomm.com>
- <amnM/dVT3tZeR4h7@hu-qianyu-lv.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <amnM/dVT3tZeR4h7@hu-qianyu-lv.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDA2OSBTYWx0ZWRfX3LrhCMGh0Apn
- LbHndvsZEfF6Qr9g4ZcniguoNyNh65J637trCfx0fyR1y8xvw07ywcFcU63KqDIpacW6LutVjL0
- 3IRRDNVdILyG9ifoJIPYHlvGLpmRy5E=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDA2OSBTYWx0ZWRfX9sBHIAACbgwY
- l5ND1m1K8mHNtbEqXl6ihTQEDmbgaCsUVBRSlj2214WgbhJsXNwWRDz9XKXFYt+RpORT4sMCapZ
- QgmClMIelcIDPZD9bRmJXFR9PulDnUa+YErmw8JM9cI9l0tRr1kun0rnzlSQrYvrjK6mm13+Otx
- nkyFFn9VFW8lGhxI07VtG+jwxNzUQ58BtR59agzP/oxhWfMgMHVbh09esVJciISMKqiXcJ3Jpoe
- +wSMGcBwCM1nFzlhC1y+SUrRaQ0emZLO/sn+SkBZRAQHFgKU2b3QcnQ1c4Rb/mJkXAv+Qf0qcEA
- N0JlZXF2HigkP3UuMYeIzxniFT5E0D1tz/ovI9/6RzyIM+V3BfVarlno4rKDSL826RVa3UEnaa7
- 6DVRGHJRNrvvG81Q6GS1NtkIpdBa4Gh7jCeMO+v/l9JbYmxHnY1dYRVFaRngIRM12+OVFvKrf76
- 7qJAYnxMtMeOdPdJiNw==
-X-Proofpoint-ORIG-GUID: SQqi33VDFXw8lPiWC41bvjIU0LkOC7mE
-X-Proofpoint-GUID: SQqi33VDFXw8lPiWC41bvjIU0LkOC7mE
-X-Authority-Analysis: v=2.4 cv=Tb6mcxQh c=1 sm=1 tr=0 ts=6a6b18a4 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=yc642J7MXfvTOP0XSmYA:9 a=QEXdDO2ut3YA:10
- a=a_PwQJl-kcHnX1M80qC6:22
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-GUID: jiByZ1e6ZuJ5GP9NEv9F9Yx5jwW5J5E0
+X-Proofpoint-ORIG-GUID: jiByZ1e6ZuJ5GP9NEv9F9Yx5jwW5J5E0
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDA2OSBTYWx0ZWRfX0gyCBipPJxhx
+ 9omwTaWGmJr0XnsWK2/nYk/4WOXD+UilBkbnn7UV4eR67fL3/A1c2bxEW7gvNNdJ+Cbd9YcJ/1/
+ +k1azWOceVxx9cV2K+uwDDzcHh74zOYHZtIBHfugWhoylvEgBK1fFYD1cDABNmHW5WAu7KSQfca
+ szKUAfgSJvaG5SitUWc7GzcPJ6zzw81RR3YhFzBDG9uoSc+OFudxTrzdpvpAyEzR0jmtZOkyHpL
+ 0TEyGvbf78vHcBRkhwbxvb0SlvaTh6UWmMj2mOau9Cx0nWc72flFpvui7LVuecsvmqqSvekUzLn
+ lWSbVgB3xYsRDL42m02hslP/kikqM1+9jrp6CN6kXeGoGkJ1kXkUIrHqUrUhK4nIdEG5BiU3Xdj
+ MvoAxheOIksldquNLShmrh3PZZUP6mxwRd0XdkN7r/qQq/MSoYMSTUojqsdPllPd4TgDsB6peRB
+ 248ee1iviWzt01Phzzg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDA2OSBTYWx0ZWRfXxg5iJo/MlEzL
+ t01t1gOS96AtkvKmEaV3dcxnJRgFpp9U2OrxPXvkB3QdVI8f4+yuVUwTr4kVxGee9iBu0d2kG0f
+ Ies6iveI3lial0Lh16gw3n13a3Kuuew=
+X-Authority-Analysis: v=2.4 cv=a7QAM0SF c=1 sm=1 tr=0 ts=6a6b18ae cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=_K5XuSEh1TEqbUxoQ0s3:22 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
+ a=RhRaUx0EnXGA07yME0YA:9 a=QEXdDO2ut3YA:10 a=pJ04lnu7RYOZP9TFuWaZ:22
+ a=cvBusfyB2V15izCimMoJ:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-30_02,2026-07-29_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0 adultscore=0
- clxscore=1015 suspectscore=0 impostorscore=0 spamscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607300069
+ impostorscore=0 phishscore=0 priorityscore=1501 lowpriorityscore=0
+ adultscore=0 clxscore=1015 malwarescore=0 spamscore=0 bulkscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607300069
 
-On 7/29/26 11:50 AM, Qiang Yu wrote:
-> On Wed, Jul 29, 2026 at 11:22:45AM +0200, Konrad Dybcio wrote:
->> On 7/29/26 11:11 AM, Qiang Yu wrote:
->>> On Wed, Jul 29, 2026 at 10:30:27AM +0200, Konrad Dybcio wrote:
->>>> On 7/29/26 8:45 AM, Qiang Yu wrote:
->>>>> On Mon, Jul 27, 2026 at 04:47:15PM +0200, Konrad Dybcio wrote:
->>>>>> On 7/24/26 12:01 PM, Qiang Yu wrote:
->>>>>>> CRD wires the shared Gen5x8 PCIe PHY's regulator supplies through
->>>>>>> board-specific PMIC rails. Add the vdda-phy, vdda-pll, and
->>>>>>> vdda-refgen0p9/1p2 supplies for &pcie3_phy.
->>>>>>>
->>>>>>> Signed-off-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
->>>>>>> ---
+Hi Bryan,
 
-[...]
+On Thu, Jul 30, 2026 at 10:39=E2=80=AFAM Bryan O'Donoghue
+<bryan.odonoghue@linaro.org> wrote:
+>
+> On 17/07/2026 15:20, Loic Poulain wrote:
+> > Add optional PM clock support to the CAMSS driver using the PM clock
+> > framework. This allows CAMSS clocks to be registered once and
+> > automatically managed during runtime suspend and resume.
+> >
+> > This is especially useful for global CAMSS clocks that are shared acros=
+s
+> > multiple CAMSS subblocks.
+> >
+> > This avoids the need for each subblock to reference and manage the
+> > shared clocks individually. A typical example is the set of clocks in
+> > the top_group, which may be used by CSID, PHY, CCI, and other CAMSS
+> > blocks.
+> >
+> > Introduce a small PM clock descriptor table in the CAMSS resources
+> > structure to describe clocks and their optional rates. Initialize
+> > these clocks at probe time and delegate clock ownership to the PM
+> > core.
+> >
+> > Hook PM clock handling into the runtime PM callbacks to ensure clocks
+> > are properly suspended and resumed alongside power domains and ICC
+> > paths.
+> >
+> > Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> > ---
+> >   drivers/media/platform/qcom/camss/camss.c | 40 ++++++++++++++++++++++=
+++++++++-
+> >   drivers/media/platform/qcom/camss/camss.h |  1 +
+> >   2 files changed, 40 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/=
+platform/qcom/camss/camss.c
+> > index 2123f6388e3d7eafe669efd6b033e22d8eb5cf79..6a2bf3373e8755805c8cd0f=
+8fe5037b788d68fa2 100644
+> > --- a/drivers/media/platform/qcom/camss/camss.c
+> > +++ b/drivers/media/platform/qcom/camss/camss.c
+> > @@ -18,6 +18,7 @@
+> >   #include <linux/of_graph.h>
+> >   #include <linux/pm_runtime.h>
+> >   #include <linux/pm_domain.h>
+> > +#include <linux/pm_clock.h>
+> >   #include <linux/slab.h>
+> >   #include <linux/videodev2.h>
+> >
+> > @@ -5346,6 +5347,35 @@ static void camss_genpd_cleanup(struct camss *ca=
+mss)
+> >       dev_pm_domain_detach(camss->genpd, true);
+> >   }
+> >
+> > +/*
+> > + * camss_init_pm_clks - register shared CAMSS clocks with the PM clock=
+ framework
+> > + *
+> > + * Clocks listed in res->pm_clks are shared across all CAMSS sub-devic=
+es (e.g.
+> > + * top_ahb, axi). They are managed automatically by the PM framework.
+> > + */
+> > +static int camss_init_pm_clks(struct camss *camss)
+> > +{
+> > +     struct device *dev =3D camss->dev;
+> > +     unsigned int i;
+> > +     int ret;
+> > +
+> > +     if (!camss->res->pm_clks[0])
+> > +             return 0;
+> > +
+> > +     ret =3D devm_pm_clk_create(dev);
+> > +     if (ret)
+> > +             return ret;
+> > +
+> > +     for (i =3D 0; i < CAMSS_RES_MAX && camss->res->pm_clks[i]; i++) {
+> > +             ret =3D pm_clk_add(dev, camss->res->pm_clks[i]);
+> > +             if (ret)
+> > +                     dev_warn(dev, "failed to add pm_clk %s: %d\n",
+> > +                              camss->res->pm_clks[i], ret);
+> > +     }
+> > +
+> > +     return 0;
+> > +}
+> > +
+> >   /*
+> >    * camss_probe - Probe CAMSS platform device
+> >    * @pdev: Pointer to CAMSS platform device
+> > @@ -5434,6 +5464,10 @@ static int camss_probe(struct platform_device *p=
+dev)
+> >
+> >       pm_runtime_enable(dev);
+> >
+> > +     ret =3D camss_init_pm_clks(camss);
+> > +     if (ret)
+> > +             goto err_v4l2_device_unregister;
+> > +
+> >       ret =3D camss_parse_ports(camss);
+> >       if (ret < 0)
+> >               goto err_v4l2_device_unregister;
+> > @@ -5775,7 +5809,7 @@ static int __maybe_unused camss_runtime_suspend(s=
+truct device *dev)
+> >                       return ret;
+> >       }
+> >
+> > -     return 0;
+> > +     return pm_clk_suspend(dev);
+>    CC      drivers/media/platform/mediatek/vcodec/common/mtk_vcodec_dbgfs=
+.o
+>    CC      drivers/media/platform/mediatek/mdp3/mtk-mdp3-vpu.o
+>    AR      drivers/staging/media/ipu7/built-in.a
+> In file included from ./include/uapi/linux/posix_types.h:5,
+>                   from ./include/uapi/linux/types.h:14,
+>                   from ./include/linux/types.h:5,
+>                   from ./include/linux/kasan-checks.h:5,
+>                   from ./include/asm-generic/rwonce.h:26,
+>                   from ./arch/x86/include/generated/asm/rwonce.h:1,
+>                   from ./include/linux/compiler.h:369,
+>                   from ./include/linux/err.h:5,
+>                   from ./include/linux/clk.h:12,
+>                   from drivers/media/platform/qcom/camss/camss.c:10:
+> drivers/media/platform/qcom/camss/camss.c: In function
+> =E2=80=98camss_runtime_suspend=E2=80=99:
+> ./include/linux/stddef.h:8:14: error: called object is not a function or
+> function pointer
+>      8 | #define NULL ((void *)0)
+>        |              ^
+> ./include/linux/pm_clock.h:77:25: note: in expansion of macro =E2=80=98NU=
+LL=E2=80=99
+>     77 | #define pm_clk_suspend  NULL
+>        |                         ^~~~
+> drivers/media/platform/qcom/camss/camss.c:5841:16: note: in expansion of
+> macro =E2=80=98pm_clk_suspend=E2=80=99
+>   5841 |         return pm_clk_suspend(dev);
+>        |                ^~~~~~~~~~~~~~
+> drivers/media/platform/qcom/camss/camss.c: In function
+> =E2=80=98camss_runtime_resume=E2=80=99:
+> ./include/linux/stddef.h:8:14: error: called object is not a function or
+> function pointer
+>      8 | #define NULL ((void *)0)
+>        |              ^
+> ./include/linux/pm_clock.h:78:25: note: in expansion of macro =E2=80=98NU=
+LL=E2=80=99
+>     78 | #define pm_clk_resume   NULL
+>        |                         ^~~~
+> drivers/media/platform/qcom/camss/camss.c:5851:15: note: in expansion of
+> macro =E2=80=98pm_clk_resume=E2=80=99
+>   5851 |         ret =3D pm_clk_resume(dev);
+>        |               ^~~~~~~~~~~~~
+> make[7]: *** [scripts/Makefile.build:289:
+> drivers/media/platform/qcom/camss/camss.o] Error 1
+> make[7]: *** Waiting for unfinished jobs....
+>    CC      drivers/media/usb/pwc/pwc-misc.o
+>
+> Please fix.
 
->> Do we know what happens if UEFI sets this to x8-mode? (is that even
-> 
-> UEFI will not set it two x8 mode on crd.
-> 
->> a concern on CRDs specifically though?) Will the second controller fail
->> to probe and become a sync_state hog?
-> 
-> PCIe3b is not enabled in UEFI by default, if we enable it here, we will
-> see probe fail.
+Thanks, I submitted a v3 with this fixed.
 
-OK, I'm happy with the patch as-is then
-
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-
-Konrad
+Regards,
+Loic
