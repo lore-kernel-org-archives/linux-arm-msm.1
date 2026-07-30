@@ -1,120 +1,63 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-10631.protonmail.ch (mail-10631.protonmail.ch [79.135.106.31])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C5D421CC5C
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 02:06:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE60E36B93A;
+	Thu, 30 Jul 2026 02:24:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=79.135.106.31
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785377207; cv=none; b=kSR0n7uryIGeYsHlOf6Z2cag1PqKIZhUdiXge1KXglvI/xSaPyuMRU/U14yJRn/GFemvbJR/qXiSTGxGKMdVuVYBRd8sHoGYFz18zCZGDonj+3kDo73hAtOFUTITySRg5EZKow5Bac7Z1x8aMNNc3lKRynT5hjjhpZdO9I6J64U=
+	t=1785378285; cv=none; b=W66Zc/v9mlrOLvYfOZkc+FYAC15GNjfkUY3kZcRNA/U/2UeUFVOpDH8WORpWvuybGhNYapo24FCS3GpOlygKih9WBt0t+RyefvGkBCp7bo0ieDWBsIKP2V+O2qHEstn3ldOkcKgMV5j/7Mgi9gzJQ7sP+C2pV7XYMi+n2t4TdMY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785377207; c=relaxed/simple;
-	bh=CpHO3RZDQ+NyGUCtuZdusXsaETAe8lzjbPfQoIJ58So=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=QgRdXvim3S/dhYAx5tkkEpDjfR9DMSppmdBd31vbub4LJhSHwxd6d+M+t9qpn4pUiIchIyySgFhmDcpF8/ftmH32w6mz2gN11K4VIRXHOIfSEW4omrS1wgLJybyLHtNLrhqeulShT2GuvbG1UW8fvELKWYeKoeKFSG2LmGnPyh8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fZl/qbuU; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785378285; c=relaxed/simple;
+	bh=faQGHyzsqOboMyGKSXdPzb5LA7GJgulr+Q/mJtOt/5I=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=Im4BEpImLUpoVNKlEhTm0nds9WWAAC/SePKnkoHdfYazUqA5c3kvggbt0p5hb6lQJaT3gL7NqJNG++mM03BNlhS0uOxF5gYK+UpmfH4/10Smt2tW0H9ydE6/t9sAeBrTQCB1Fv+F/u0B0CNnh380n65QbPxLt9tbvyJZYameT5I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=R8hWTNgY; arc=none smtp.client-ip=79.135.106.31
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proton.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fZl/qbuU"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D3CB41F000E9;
-	Thu, 30 Jul 2026 02:06:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785377205;
-	bh=PAt+eZwf8tQx/cEfnmLtW7Yb9P3v3HHpCqPrZ+zoQ4Q=;
-	h=From:To:Cc:Subject:Date;
-	b=fZl/qbuU/+0Cy/P550elaPKyJIDbtw0qsVazlVfw/W4DQPKrwm4s+xrQHjaGavvY1
-	 93aa5LuQQZ6erVoOCiY1TlvjMU6E2kqnkgj18O8jCGuHTM/BRn57MKzmpNB2CDIjc3
-	 H79WTXnp41nnCOmI2KIP4e/yzRvWP0Lk9TAr/mTFtsnTU3xPXlGYqE5pJhrqG4w608
-	 TaoOLdH76R52xBbVM+PT2lKL1CkLzjV5iP5jbSgzxwJ66d4tg/DcZ6vYtlI+DR9lwi
-	 0nZDVweBmfkBeiYfpWUPEH20mQ9RHM4rybavp2bsH36TgoR1/ygqs/gjPCnYuiZAC2
-	 IGj9S0+rorVlA==
-From: Bjorn Andersson <andersson@kernel.org>
-To: arm@kernel.org,
-	soc@kernel.org
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	Arnd Bergmann <arnd@arndb.de>,
-	Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-	Pengyu Luo <mitltlatltl@gmail.com>,
-	Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-	Alexander Koskovich <akoskovich@pm.me>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: [GIT PULL] Qualcomm Arm64 DeviceTree fixes for 7.2
-Date: Wed, 29 Jul 2026 21:06:42 -0500
-Message-ID: <20260730020642.68595-1-andersson@kernel.org>
-X-Mailer: git-send-email 2.53.0
+	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="R8hWTNgY"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=protonmail; t=1785378272; x=1785637472;
+	bh=faQGHyzsqOboMyGKSXdPzb5LA7GJgulr+Q/mJtOt/5I=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=R8hWTNgY4o5V2ugRjgcRGOiMxZyywm9BYcMOdu1w89fAw60rwk5WE29BANpwZb43F
+	 +kfRMgQUjW5B4xQawbdm0ZVQx9rRekLiIdBd6VU/rWJAZglkXRg5jUpwMJP3LIRSd9
+	 FaHwa1lxYYWe6sD7duAgVyVySi/x4fDlyKVhBNhfwT3/fYMXQdqRR4Oj9ABx5q8/0d
+	 1xyxEesD1SikADLXTT6wKvRWx2aCnEk05aq/oK6UvFNHGnWxsXMrcgeQYLTU3oR8vJ
+	 pCYoplnIdj8dxGmSF3j2Sa0XrSxDjItC4jKkrvxOaqPSTJfTo+WtXhXECrRn09BmPR
+	 qjLD5/CnQyd6A==
+Date: Thu, 30 Jul 2026 02:24:27 +0000
+To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Srinivas Kandagatla <srini@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+From: Esteban Urrutia <esteuwu@proton.me>
+Cc: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org
+Subject: Re: [PATCH 2/2] ASoC: qcom: sc8280xp: Add support for SM8475
+Message-ID: <32d3c172-8210-4553-8dad-9b1b5d7fee5b@proton.me>
+In-Reply-To: <667133b5-10c9-4007-b5db-27e553dd5034@oss.qualcomm.com>
+References: <20260729-sm8475-asoc-v1-0-3edad8aa7628@proton.me> <20260729-sm8475-asoc-v1-2-3edad8aa7628@proton.me> <667133b5-10c9-4007-b5db-27e553dd5034@oss.qualcomm.com>
+Feedback-ID: 147889766:user:proton
+X-Pm-Message-ID: bace4fb72e50feb96fc72ccd2cd4ea6d6bba9f26
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
+On 7/29/26 7:11 PM, Srinivas Kandagatla wrote:
+> Patch itself looks sane to me, but the commit log needs bit more love.
+> Its too short and does not explain what this is platform is supporting.
+>=20
+>=20
+> Once fixed.
+>=20
+> Reviewed-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
 
-The following changes since commit dc59e4fea9d83f03bad6bddf3fa2e52491777482:
+Will fix in v2, thanks.
 
-  Linux 7.2-rc1 (2026-06-28 12:01:31 -0700)
+Regards,
+Esteban
 
-are available in the Git repository at:
-
-  https://git.kernel.org/pub/scm/linux/kernel/git/qcom/linux.git tags/qcom-arm64-fixes-for-7.2
-
-for you to fetch changes up to a3ba349af8e1bb7e0efdcd2dd53d69282f18478a:
-
-  arm64: dts: qcom: eliza: Fix DSI1 phy reference clock rate (2026-07-29 16:15:06 -0500)
-
-----------------------------------------------------------------
-Qualcomm Arm64 DeviceTree fixes for 7.2
-
-Correct the ESPI interrupt specifiers for PCIe SMMU and QUP nodes in
-Glymur.
-
-Correct the GIC address cells on Monaco, to avoid DeviceTree validation
-failures introduces in v7.2-rc1.
-
-Drop the secondary interrupt from the GPU SMMU on Purwa.
-
-Fix the invalid PDC IRQ mapping for SC8280XP to ensure associated GPIOs
-have functional interrupt handling. Correct the EC interrupt on Huawei
-Matebook E Go.
-
-Reduce the depth of the requested sleep state for SDM850-based Lenovo
-Yoga C630, to work around the regression of suspend crashing the
-machine.
-
-Adjust the IPA IMEM address on SM8650, to avoid clobbering the wrong
-memory region in IMEM.
-
-Correct the DSI1 PHY reference clock on Eliza, to ensure that the right
-clock rate is used.
-
-----------------------------------------------------------------
-Akhil P Oommen (1):
-      arm64: dts: qcom: purwa: Fix GPU IOMMU property
-
-Alexander Koskovich (1):
-      arm64: dts: qcom: sm8650: Fix IPA IMEM slice
-
-Bjorn Andersson (2):
-      arm64: dts: qcom: glymur: fix PCIe SMMU interrupts
-      arm64: dts: qcom: glymur: fix QUP serial engine IRQs
-
-Dmitry Baryshkov (1):
-      arm64: dts: qcom: sdm850-lenovo-yoga-c630: lower PSCI cluster idle
-
-Krzysztof Kozlowski (2):
-      arm64: dts: qcom: monaco: Add default GIC address cells
-      arm64: dts: qcom: eliza: Fix DSI1 phy reference clock rate
-
-Pengyu Luo (2):
-      arm64: dts: qcom: sc8280xp: add several missing pdc map entries
-      arm64: dts: qcom: sc8280xp: gaokun3: correct EC interrupt pin
-
- arch/arm64/boot/dts/qcom/eliza.dtsi                |  2 +-
- arch/arm64/boot/dts/qcom/glymur.dtsi               | 32 +++++++++++-----------
- arch/arm64/boot/dts/qcom/monaco.dtsi               |  1 +
- arch/arm64/boot/dts/qcom/purwa.dtsi                |  2 ++
- .../boot/dts/qcom/sc8280xp-huawei-gaokun3.dts      |  2 +-
- arch/arm64/boot/dts/qcom/sc8280xp.dtsi             |  4 +--
- .../boot/dts/qcom/sdm850-lenovo-yoga-c630.dts      |  4 +++
- arch/arm64/boot/dts/qcom/sm8650.dtsi               |  4 +--
- 8 files changed, 29 insertions(+), 22 deletions(-)
