@@ -1,63 +1,63 @@
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
+Received: from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61E04446BF1
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 17:44:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3760044605D
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 17:44:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785433462; cv=none; b=rt4SpSb7sXBYS+ee1CpshyMIEnCsmKSi/6+5ciakM/Cp+45FEvNWQQHdTUpgpNwJ2/uF5nxsXeJQts9xZapJptBgXfJD5JQx1SjEWx3KzsbO2k2Zr7TDWaCDbAeoDbCFg74Uc8Ss3D8EfxnZuByP9w6JgsG+2K8LrCNCz82pZrY=
+	t=1785433469; cv=none; b=p2ZgmwO11DSnmUAfRIfTdLnGn80jy87hSj2cuebAI5BuaVyGhwqiWnvKqHmDqTxQd65XHWNJlSY5revCaVnSYzZ1WV0Dkc43M1XPYpU9o6HHhBTEMXOq1KeZFUlBVJrRF9c+eoMbS+MVhkXuxx/FNDbYKLc3XViKlb1WXC4DPIo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785433462; c=relaxed/simple;
-	bh=7kIt3VDOmhqDwU+Vb6EyEntTuqJB8bsltDHuVoseCHU=;
+	s=arc-20240116; t=1785433469; c=relaxed/simple;
+	bh=j9vCI7MYFQbub+zVo37jZ+ycn799Z1jub8PWaH/JRu8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=fDQ3Q3cvES2+yLisRhAxrA76wTOCxBKXiBv6vGKAsoXmxa8rV1XDqaX6w7je1lhX74OL/Txc45/X14tOlWxhV+9kHAXgcDGeaqcUGI1Js7NVAz2n+OKDpNDjdqPtPZaEx3Wm6snLN94E0Wmu3klZSWbVxEv7qWjacT+z3fETR70=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=b7lRthR3; arc=none smtp.client-ip=209.85.222.172
+	 MIME-Version; b=eUh5VIcIW5AZsMnYSh2rv3hOMhrkXYbdGRj79BPk/OVLUjhPW4PCEkENVXp+mYKROttn6Bzw1koqDYMlMlOb4WPpS4anB3o6eghRF4Vut81M9ckRT6+vgWcZnfGbuXbeWy/Ik/OyhG3QGhD29Jf+dW9HOyt/1UYWrZHmvcMo8mE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=N8geKsa6; arc=none smtp.client-ip=209.85.160.179
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="b7lRthR3"
-Received: by mail-qk1-f172.google.com with SMTP id af79cd13be357-92edb12cdf2so8508185a.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 10:44:19 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="N8geKsa6"
+Received: by mail-qt1-f179.google.com with SMTP id d75a77b69052e-52b3934af3fso389231cf.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 10:44:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785433457; x=1786038257; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1785433461; x=1786038261; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=a6pr9y+eV6Wrb9MmFfo+z0pmIGyd9l991e5f78BS73g=;
-        b=b7lRthR3Fa8uiXh3uKwNdWGnR47yN8/K9YJyzM2IpSYIqHAHcchyERCWAmr0sC8Q2z
-         qt6IsW6I48jVUCKIozmx4YXVUcncDPUpIMnv07kougsXYJZyXb5p316dlLHXhW2wDLgf
-         TgWLZA2BIraw9EWeGOuWd8e2VWrvCVulkv5JNOlBc/UBkO+sDXHNPS2wK9U20Yj4SW9E
-         vI0fmu8NRVXyoA8IkfJTrGAKW81GVGKp5Z8GQt/lbcFXzapS9WZtQXbjPb2Lvmhrr9Dq
-         57Ss8u/DH6TL7ftpjV/9l3jlnWpLtgQVjx1LH5RIK2/s1MatiUITlN2XiBdPfW2yYZjC
-         TUVQ==
+        bh=EugK49fJVHb0zpjpqA3vUSpevCys/KR4Qdx7ZSAmJmo=;
+        b=N8geKsa6rJ/GsSWcszSQ1FSMsxZxGypqQmyXq15yi5wcPgDRjX9HZ3uQX15eyALS3J
+         xntRLb/YxwSgaH1+eLLR+PUC1Cx01SKLIKbvABfX3pIzq4GnzbQBsD9SY6nOiw7yPXGo
+         jp4xKe9LuXj+mGGK6u5zOMPziKI9E5kt0WbQwMEmeeX2m7D/v0itK5y+YHJyQut+4fVt
+         nanMsgEG6tj/1MI8H7KSbgcIfEMBbm0lXDpjl+mqMoBrfaudIaB/e2/FNJR6XewPPJUk
+         Eu+80vnbz531+4KtUvvt0jmwTNh/AirmhDT8l+2UqyMGgFJikij5IaGUGvhtz0uAj4qg
+         Jh6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785433457; x=1786038257;
+        d=1e100.net; s=20251104; t=1785433461; x=1786038261;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=a6pr9y+eV6Wrb9MmFfo+z0pmIGyd9l991e5f78BS73g=;
-        b=Ux5zBjtBTw90kgC3rkCJOoQy0exvGkbiIfzBNeBEVjS6TahoUAY8JPQeQadQYVjlvX
-         AUh5lsGNd7fNH2xj0ha/615wcfJNt0fQr8h2P2F/0sBefS5zTpvsjlG3P8W5T3P5oEj4
-         vs60H8QpgTw2J7K57NSA/GFdKcoTAWkEwhHFZbNDOaGPuyPsz42r0jgE3IKVvOWXI14j
-         CKA9p5X8SSVaP0MmeHIkn/8OG+fPjnm3kZqAk7kMQ+YjNdGDPJ85btVoO924KEG7pK1l
-         7lkVD3oYPYk56r7P3mKFdtnIY9t09ZppN61QnoKHMvgkPNs3koHv93G4sGRyK4udLfP/
-         tY+A==
-X-Forwarded-Encrypted: i=1; AHgh+RoX0ctkY1YjogckVBxGU/87QTSK2plE5+a/SmQHXR8cS9zNFVeCSPj8mQJq3V/L5K22bcuH95SGsgTIG3hB@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzo0ikuW6+r/YYZbqmfOiExuJAqE+xVBnkW6Vy1odm5WWIJ5fc6
-	K7x40Aqs5yZBVqe5TTXD9JCJMjQvGeWKCjbtPocM1A/l0QVUgmSKLm43
-X-Gm-Gg: AR+sD11cy5i+fwU4IVDr7zmda/Ee8p/S9uXOKYyCLOUJwBIH03NOUShAYvxqPF2X6Tg
-	VDOoNJTd7XPSCnsQFOe5kz/PtZeR8QMwJB6Td0iyuMgEVek02+ucMXI9GYkHxyy9x3LaWBWzsnV
-	r9kfdMm83I+Nac4eEg835/qMQiXmfMiRABcG481Yw+Yt+1M+S+M6xMYJsjhrmt8v6Jao1gTWFBq
-	EDve+S5CfuoE5GNWm8gon/2Vr7A8Haa1pzuKvNOlzhYrCIE/o/lB/4RYQxtoLiOaQ1Qf6vRAsiw
-	NZeS/HONrv37lFh/YHT0BfFR4FIGzeI6NNVQ/Ogn+d+FlTvGjKkTgiu4hGzkYYY31czqBsJPxk8
-	wO+Oi5XyhPvCsWfVSegQ2Bvc0F83TfKBWllZ85yvDRW1FtGDyR7qx0SdNGVKrl7GukyNbI3WeHm
-	g6+GX5ZsUPuVb6QBQ1dzPDez1hvbA1RelFmtgTxRObHUxyjke5QvTCdafMzLs=
-X-Received: by 2002:a05:620a:a2d5:10b0:92f:bed:e252 with SMTP id af79cd13be357-93486af7b4bmr303925785a.48.1785433457373;
-        Thu, 30 Jul 2026 10:44:17 -0700 (PDT)
+        bh=EugK49fJVHb0zpjpqA3vUSpevCys/KR4Qdx7ZSAmJmo=;
+        b=Zz5pVz47JJit9ed9bK7GOvzeWYSFVsGksjNsDpoAoWKpclA8I2t2/FUlAeiUXEGUFn
+         QwfYikg3tYUloi8LxRRb4hH1L9PFnvQIMiE+tnq72MlruXUNukch5JXejWuf0kqFQ9Zy
+         8PpX53ysWxw8/sX3TIZ/gDKYL/YpF8N4eKhTS8XfN2N3oGOgVOgXgMhtpXZz9Eh+rk6q
+         U8PAmXP9dCZ/o8m8ut3OlucP+ueovYqZbF7VBJX9HH/ws7H1p/1auicpPd3kmQvwUhnc
+         UUm85RtGycS+hTPGqw9yTneS/+VWiKk9+JC0SuSDqxEDeHuZyWZ9s8pz5SGvE+cpsAkv
+         fdRQ==
+X-Forwarded-Encrypted: i=1; AHgh+RqN7COQAAcfY95eBaAR7uS3Z2/idgh1fgO6dvVXMoa7eYvR5um93DwlRX9kEWJ0IDTpX7dZDc1ic7POOgmN@vger.kernel.org
+X-Gm-Message-State: AOJu0YzoSTawb/PXmm8Nwc6vqYUUfor2QBqz2DrKnF6ElpJFVr1dKb/D
+	H72gg5TV8EwozVvPYOy0bqlbklaSTy4gDOsgowLPGAsya2IXuDH5tEqo
+X-Gm-Gg: AR+sD13Rkt1LP6e2kZFlZ408bndz3+w8a1YxZf68D5ctRx8GjhLK/sYlCE4BmQLfHa8
+	zoibU0HJSyWDM6/zrfik8IW1hOZ4MV0Xkp+NdJQRBfitFmBAkzMxD1OQn8/VrR56pgAUW9LBViu
+	vnjJQiuAfvOu85+4sWhaQjZZDvOgevmEjCoPGHOwMWOKN9aXr0uqvkw5u6bD66T5ekAToWPLhzT
+	8bqbkQoMVPyXjn8cuNE/Daikyxkn8dNr1BXZh3GDXbzKXuvzGJAMGK77q0M99YS/VpZybUkqlEo
+	P6a5fArAWboMojhNZjXFX3RthAknpVyRZkCrEaPc/ZVvBhQniC1cRQV23P1Ek+B2jZkjr8RE/85
+	1MPYayIEc+GgWkXikch0RuwWimlRgqYZz9yei9bc/tpOIN9Oise+8U9acsBHnFU3nPfqtlwv2wQ
+	db6P9L+WHD9lbjZNmLTubhu57cZY9naNl3Bd43FLA9MGPNtblXYkpyTUdoLGo=
+X-Received: by 2002:a05:622a:81:b0:517:5bc1:e1f5 with SMTP id d75a77b69052e-52b381e85cfmr37513861cf.0.1785433461345;
+        Thu, 30 Jul 2026 10:44:21 -0700 (PDT)
 Received: from localhost ([70.54.57.80])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-933d325a17fsm460156685a.13.2026.07.30.10.44.16
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-908322fa713sm22425916d6.6.2026.07.30.10.44.20
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Jul 2026 10:44:16 -0700 (PDT)
+        Thu, 30 Jul 2026 10:44:20 -0700 (PDT)
 From: Richard Acayan <mailingradian@gmail.com>
 To: Srinivas Kandagatla <srini@kernel.org>,
 	Liam Girdwood <lgirdwood@gmail.com>,
@@ -81,9 +81,9 @@ Cc: Nickolay Goppen <setotau@mainlining.org>,
 	Charles Keepax <ckeepax@opensource.cirrus.com>,
 	Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
 	Richard Acayan <mailingradian@gmail.com>
-Subject: [PATCH v6 05/15] ASoC: dt-bindings: msm8916-digital-codec: Add SDM660 compatible
-Date: Thu, 30 Jul 2026 13:43:43 -0400
-Message-ID: <20260730174353.108023-6-mailingradian@gmail.com>
+Subject: [PATCH v6 06/15] ASoC: qdsp6: q6dsp-lpass-ports: add support for lpi mi2s ports 5-6
+Date: Thu, 30 Jul 2026 13:43:44 -0400
+Message-ID: <20260730174353.108023-7-mailingradian@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260730174353.108023-1-mailingradian@gmail.com>
 References: <20260730174353.108023-1-mailingradian@gmail.com>
@@ -95,35 +95,56 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The MSM8916 digital codec is also found on SDM660, typically connected to
-the SDM660 internal sound card. Provide a space
-for specific compatibles and add the compatible for SDM660.
+Add the extra LPI MI2S ports used for internal MI2S on SDM660.
 
+Link: https://android.googlesource.com/kernel/msm-extra/+/530cffa4cc977a348753831b163eb9d3302b954a/asoc/msm-dai-q6-v2.c#4597
 Signed-off-by: Richard Acayan <mailingradian@gmail.com>
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 ---
- .../bindings/sound/qcom,msm8916-wcd-digital-codec.yaml    | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+ sound/soc/qcom/common.h                  | 2 +-
+ sound/soc/qcom/qdsp6/q6dsp-lpass-ports.c | 5 +++++
+ 2 files changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/Documentation/devicetree/bindings/sound/qcom,msm8916-wcd-digital-codec.yaml b/Documentation/devicetree/bindings/sound/qcom,msm8916-wcd-digital-codec.yaml
-index a899c4e7c1c9..33bc23b6176a 100644
---- a/Documentation/devicetree/bindings/sound/qcom,msm8916-wcd-digital-codec.yaml
-+++ b/Documentation/devicetree/bindings/sound/qcom,msm8916-wcd-digital-codec.yaml
-@@ -14,7 +14,13 @@ description:
+diff --git a/sound/soc/qcom/common.h b/sound/soc/qcom/common.h
+index ee6662885593..48b114eb46a5 100644
+--- a/sound/soc/qcom/common.h
++++ b/sound/soc/qcom/common.h
+@@ -7,7 +7,7 @@
+ #include <dt-bindings/sound/qcom,q6afe.h>
+ #include <sound/soc.h>
  
- properties:
-   compatible:
--    const: qcom,msm8916-wcd-digital-codec
-+    oneOf:
-+      - items:
-+          - enum:
-+              - qcom,sdm660-wcd-digital-codec
-+          - const: qcom,msm8916-wcd-digital-codec
-+
-+      - const: qcom,msm8916-wcd-digital-codec
+-#define LPASS_MAX_PORT			(SENARY_MI2S_TX + 1)
++#define LPASS_MAX_PORT			(LPI_MI2S_TX_6 + 1)
  
-   reg:
-     maxItems: 1
+ int qcom_snd_parse_of(struct snd_soc_card *card);
+ int qcom_snd_wcd_jack_setup(struct snd_soc_pcm_runtime *rtd,
+diff --git a/sound/soc/qcom/qdsp6/q6dsp-lpass-ports.c b/sound/soc/qcom/qdsp6/q6dsp-lpass-ports.c
+index e5cd82f77b55..c3d8116ad503 100644
+--- a/sound/soc/qcom/qdsp6/q6dsp-lpass-ports.c
++++ b/sound/soc/qcom/qdsp6/q6dsp-lpass-ports.c
+@@ -553,11 +553,15 @@ static struct snd_soc_dai_driver q6dsp_audio_fe_dais[] = {
+ 	Q6AFE_MI2S_RX_DAI("LPI RX2", LPI_MI2S_RX_2),
+ 	Q6AFE_MI2S_RX_DAI("LPI RX3", LPI_MI2S_RX_3),
+ 	Q6AFE_MI2S_RX_DAI("LPI RX4", LPI_MI2S_RX_4),
++	Q6AFE_MI2S_RX_DAI("LPI RX5", LPI_MI2S_RX_5),
++	Q6AFE_MI2S_RX_DAI("LPI RX6", LPI_MI2S_RX_6),
+ 	Q6AFE_MI2S_TX_DAI("LPI TX0", LPI_MI2S_TX_0),
+ 	Q6AFE_MI2S_TX_DAI("LPI TX1", LPI_MI2S_TX_1),
+ 	Q6AFE_MI2S_TX_DAI("LPI TX2", LPI_MI2S_TX_2),
+ 	Q6AFE_MI2S_TX_DAI("LPI TX3", LPI_MI2S_TX_3),
+ 	Q6AFE_MI2S_TX_DAI("LPI TX4", LPI_MI2S_TX_4),
++	Q6AFE_MI2S_TX_DAI("LPI TX5", LPI_MI2S_TX_5),
++	Q6AFE_MI2S_TX_DAI("LPI TX6", LPI_MI2S_TX_6),
+ 	Q6AFE_TDM_PB_DAI("Primary", 0, PRIMARY_TDM_RX_0),
+ 	Q6AFE_TDM_PB_DAI("Primary", 1, PRIMARY_TDM_RX_1),
+ 	Q6AFE_TDM_PB_DAI("Primary", 2, PRIMARY_TDM_RX_2),
+@@ -712,6 +716,7 @@ struct snd_soc_dai_driver *q6dsp_audio_ports_set_config(struct device *dev,
+ 		case QUINARY_MI2S_RX ... QUINARY_MI2S_TX:
+ 		case PRIMARY_MI2S_RX ... QUATERNARY_MI2S_TX:
+ 		case LPI_MI2S_RX_0 ... LPI_MI2S_TX_4:
++		case LPI_MI2S_RX_5 ... LPI_MI2S_TX_6:
+ 			q6dsp_audio_fe_dais[i].ops = cfg->q6i2s_ops;
+ 			break;
+ 		case PRIMARY_TDM_RX_0 ... QUINARY_TDM_TX_7:
 -- 
 2.55.0
 
