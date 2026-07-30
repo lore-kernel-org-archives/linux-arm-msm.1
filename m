@@ -1,129 +1,226 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f48.google.com (mail-ej1-f48.google.com [209.85.218.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DECF13CF670;
-	Thu, 30 Jul 2026 08:34:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A548B3D47A3
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 08:39:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785400479; cv=none; b=rJe38j+7+/8LCZr15KX1WK0MM1yOoANaR3GaenKfiNYPLZeFwDLF8+nEiOh5uu+6LA2fZSD+oflfvcIZdiW1QLSqOPJ98IvYQci6aUg9dM99IIm/6+l9sbk4cyu/3Ys3G4Pjy95eajQ9y7Q2q5bUG/1UClL6GVn0A9/fqVn3TXI=
+	t=1785400745; cv=none; b=Q0pRD94wu13GI4NJ1EPZby5tL+i2ReWvoOngQb0LaPxHCYMMeotwMtlfu7sb5YXJmMPlix82O2OiKaylpBJKqfJQ5VmXQmxBH8Wj8V/XRQN0/eRkU0uDSV0kPLSVurchAYrWCKwPNweTD417Omp/0Zgquw4hYCaaRXJYMn+X60o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785400479; c=relaxed/simple;
-	bh=De0gQlELGrLm32l2TpJstemPd5DiPvzZcCrDG5s1Zj4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=NU4gQAodo+QwA8YzvA+bQIFY8dq3I/gK7U70fnvhFhqkNeukz8ORqbUZQkHnu0nRrjYKbgUdttBLcNpRP8O9CoPncOcAhNIv/1eBu6wZS1IT2xlmtB7yNQRjMGziFrT1lZLDkYj7R28fH1KCPWUvRLeI/m+58e/KvMWJI9qutpo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=HRvIBjW/; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785400745; c=relaxed/simple;
+	bh=bnoklQTVbTeNGwqtd87yLfBvVJfKM3Ux5RhP73hG3Dg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ZBIRsTOJ8HMdyYP8COIofAE8jZDITnHKjzvFaHFhlp0Iyv2Of2ggFLu2CthmbkL+fgVk6C//fYTouyPiJI3ZI3s+Y5W5XT66PxlQ/Nv3J+TpXC+2l2lUIrFzicxQysxrY/F645vh/0dQqkty//LK4jpCY0/zVfLVo4f2KDvTeF8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=x0CHts/7; arc=none smtp.client-ip=209.85.218.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="HRvIBjW/"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AF8CF1F000E9;
-	Thu, 30 Jul 2026 08:34:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785400474;
-	bh=9vZEGCpRAyQ1lYwDLn0Kz7DAWtHYOLS6RlF/eTt/9pI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=HRvIBjW/Z3cwoSoJao1pDIOuvORcw2OJylnuO/y2qbAT7dEafDOdeDDdu65xicPiv
-	 BLj9+la1KZZMsvYVUeKixIR1Ef10sGtK4uv1rtnB8UxsJY7H5twlwXvUnZssYvvhWn
-	 pHekOqRdzG/rQSFmvSz+WHsJW6FLNdR6WXnlFZ07OX+jTuO5+7k07zcdHZqYFgWtZy
-	 vsePlrBK1YJqosRovbBqNMMiuzc2pYqLzxuygf3NH1oa6Oar6FWju47i9vg4LPreRI
-	 YlSglDMMzba55UvouH7jQPbP+u6K1LUfIB6Hw3i83Ms2IKQ5z4fcT2EcTTW9TI+Yty
-	 D8IdbDrcyDwcA==
-Date: Thu, 30 Jul 2026 10:34:30 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Dongfang Zhao <dongfang.zhao@oss.qualcomm.com>
-Cc: sboyd@kernel.org, andersson@kernel.org, krzk+dt@kernel.org, 
-	conor+dt@kernel.org, robh@kernel.org, mturquette@baylibre.com, 
-	mike.tipton@oss.qualcomm.com, linux-clk@vger.kernel.org, konrad.dybcio@oss.qualcomm.com, 
-	linux-kernel@vger.kernel.org, taniya.das@oss.qualcomm.com, devicetree@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH 1/2] dt-bindings: clock: qcom: Add Hawi GPU clock
- controllers
-Message-ID: <20260730-sapphire-mackerel-of-fertility-c0e3da@quoll>
-References: <20260726-gpucc-hawi-v1-0-224e7884cf9a@oss.qualcomm.com>
- <20260726-gpucc-hawi-v1-1-224e7884cf9a@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="x0CHts/7"
+Received: by mail-ej1-f48.google.com with SMTP id a640c23a62f3a-c1c24ec9525so318530966b.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 01:39:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1785400740; x=1786005540; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=7FkYK6dd5edwcDAVNaFfBC6T7A7KyI3+YEgz2sgH0OM=;
+        b=x0CHts/7Waqq+8s+MChmXEifypKYd+RlaKjKb9wnD9jfMg8aR0Tjz3RecFwF8YoTL8
+         8lmG0MZ2n/37XckqGFu300vJ6WfsEjA299wMeLOLxZdD5t5N1MlvwpN8CiCZYIPR2NPt
+         zaoN6HqClQV8U3q125HhEQGTAPmQRGAw4OKj4Di9sq7R0fe+2LClafKAmY1n0a+TLfXa
+         7e1dtu3EKj2yxULXF7Lw97HEASt+zbMOf0gwif0ofmTS4o3bqU1b04aFXa83aOG2X9KN
+         jTtD12DGKFt1Lyu/cyHFpE9PdNA7wVwwIb+vdWq8aHxSZDh4i0j2pu9k84qjWGKFb3Rt
+         svZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785400740; x=1786005540;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=7FkYK6dd5edwcDAVNaFfBC6T7A7KyI3+YEgz2sgH0OM=;
+        b=U14G2C+dtlyrJrWK+QIR4qSJVONs0tqW41hXVRCIhWNlEKfkp7jh5zs19gTXIN1xcW
+         udhnlDaNNM9oz6LtHq+9SCKsH/CScx3ZZza1I3GKUzUcAaZX27USmx9CPzmcS6+LOcw6
+         h+83+tJ3mxcRv7R9y9uLhN0XRkqRnfAsSBopOO3WPyOqtd/GU5gpfNOSH8XJW6dQyLO2
+         4cHqo8RS8QSm4Epq/YfcuciKsp3tyJRFZ/BhuayxuxdbZ1XX9GwnX+l+RS2B2j9CljkU
+         NZum0HEbGMDmW2Y1+UQWtGaLiqrRRWlsaU4SHW2YR5a9+BrgadayaPDcIzSR3Fw1emBL
+         wtOA==
+X-Forwarded-Encrypted: i=1; AHgh+RoTT8uZdNDoIa4gqutPsAqi8v759poZI1Gd9YNLo7F2kmjU8oRUXN2cEqk02i5MdW7+UCivAndetamj4wm2@vger.kernel.org
+X-Gm-Message-State: AOJu0Ywiz9qtP5JTWhQzUffeM3eCEmnBglf1+i3d27xPi8YjbMtgxhp7
+	6ouKaSoK2pmdxQ5lFH/6Slv4d0VuBDKZubksT0S4pcMJ3OraBxLq5VS/oJ76Sgrf5lo=
+X-Gm-Gg: AR+sD11k7quleurQVanuwVh5oV7yM8R4CyTfyJa12sSPqV3QpkTC1HG6tJ9nii4+v8w
+	JVEoI2vVQgA0Sxg5nbJ9Dyyl53z1JZs6AVz6nMwfkb+D36MYFRyr1U+wxhc0uapA3z9pmjB9skT
+	fuyXhmF3VMP7U0pDwsOKSAkVVWt9TNgWwncgWgNQ1zBSd3ZCv2FIQOuoE+OtYC6/mkaGoPyhlzb
+	vQHS1zND/svQkrKR4Qme8XqE1LOvT6CieqiXEpBB1ORMpydrGfYKlwzshue93bZOfCx1HPY00pg
+	Tl9FDSK71mqysENPFdgoSXqcVREbr+5mWuc/Weh8yT93ix801e7J9OEpyh/98NfYwzZ2tgyWaGX
+	atOuNxpJcPF1if3ffSmprPb+/tKMKAV+h8YZf7b01Ejt/EukpYdaB3JTx+k/Ni8sr1I8UbNcRtd
+	mlnXxofnv8bTzTin/IeEQy+CEUXAAZLmeAAmCaSfCanUFqVf4e2gJ3xY7Fx71lAjTwv5XWqvTr
+X-Received: by 2002:a17:907:d10:b0:c12:959a:1477 with SMTP id a640c23a62f3a-c1fa57076cemr85304566b.40.1785400739622;
+        Thu, 30 Jul 2026 01:38:59 -0700 (PDT)
+Received: from [192.168.0.101] ([109.77.38.123])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a07c7682bfsm337996a12.1.2026.07.30.01.38.58
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 30 Jul 2026 01:38:59 -0700 (PDT)
+Message-ID: <a4a1dc46-ff07-4ecb-b41f-341b6aacb3ab@linaro.org>
+Date: Thu, 30 Jul 2026 09:38:58 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260726-gpucc-hawi-v1-1-224e7884cf9a@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] media: qcom: camss: Add PM clock support and
+ integrate with runtime PM
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260717-camss-version-v1-0-7ed71fea95e8@oss.qualcomm.com>
+ <20260717-camss-version-v1-1-7ed71fea95e8@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20260717-camss-version-v1-1-7ed71fea95e8@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Sun, Jul 26, 2026 at 10:49:53PM -0700, Dongfang Zhao wrote:
-> Add the device tree binding and clock, reset and power-domain IDs for the
-> Hawi graphics clock controller. This lets Hawi device trees describe the
-> GPU clocks, resets and power domains, and lets dtbs_check validate those
-> nodes.
+On 17/07/2026 15:20, Loic Poulain wrote:
+> Add optional PM clock support to the CAMSS driver using the PM clock
+> framework. This allows CAMSS clocks to be registered once and
+> automatically managed during runtime suspend and resume.
 > 
-> Add the qcom,hawi-gxclkctl compatible for the Hawi GX clock controller,
-> using qcom,kaanapali-gxclkctl as the fallback because the register layout
-> is identical.
+> This is especially useful for global CAMSS clocks that are shared across
+> multiple CAMSS subblocks.
 > 
-> Signed-off-by: Dongfang Zhao <dongfang.zhao@oss.qualcomm.com>
+> This avoids the need for each subblock to reference and manage the
+> shared clocks individually. A typical example is the set of clocks in
+> the top_group, which may be used by CSID, PHY, CCI, and other CAMSS
+> blocks.
+> 
+> Introduce a small PM clock descriptor table in the CAMSS resources
+> structure to describe clocks and their optional rates. Initialize
+> these clocks at probe time and delegate clock ownership to the PM
+> core.
+> 
+> Hook PM clock handling into the runtime PM callbacks to ensure clocks
+> are properly suspended and resumed alongside power domains and ICC
+> paths.
+> 
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 > ---
->  .../devicetree/bindings/clock/qcom,hawi-gpucc.yaml | 78 ++++++++++++++++++++++
->  .../bindings/clock/qcom,kaanapali-gxclkctl.yaml    | 22 +++---
->  include/dt-bindings/clock/qcom,hawi-gpucc.h        | 47 +++++++++++++
->  3 files changed, 139 insertions(+), 8 deletions(-)
+>   drivers/media/platform/qcom/camss/camss.c | 40 ++++++++++++++++++++++++++++++-
+>   drivers/media/platform/qcom/camss/camss.h |  1 +
+>   2 files changed, 40 insertions(+), 1 deletion(-)
 > 
-> diff --git a/Documentation/devicetree/bindings/clock/qcom,hawi-gpucc.yaml b/Documentation/devicetree/bindings/clock/qcom,hawi-gpucc.yaml
-> new file mode 100644
-> index 000000000000..3ba6e4d212ed
-> --- /dev/null
-> +++ b/Documentation/devicetree/bindings/clock/qcom,hawi-gpucc.yaml
-> @@ -0,0 +1,78 @@
-> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-> +%YAML 1.2
-> +---
-> +$id: http://devicetree.org/schemas/clock/qcom,hawi-gpucc.yaml#
-> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
+> index 2123f6388e3d7eafe669efd6b033e22d8eb5cf79..6a2bf3373e8755805c8cd0f8fe5037b788d68fa2 100644
+> --- a/drivers/media/platform/qcom/camss/camss.c
+> +++ b/drivers/media/platform/qcom/camss/camss.c
+> @@ -18,6 +18,7 @@
+>   #include <linux/of_graph.h>
+>   #include <linux/pm_runtime.h>
+>   #include <linux/pm_domain.h>
+> +#include <linux/pm_clock.h>
+>   #include <linux/slab.h>
+>   #include <linux/videodev2.h>
+>   
+> @@ -5346,6 +5347,35 @@ static void camss_genpd_cleanup(struct camss *camss)
+>   	dev_pm_domain_detach(camss->genpd, true);
+>   }
+>   
+> +/*
+> + * camss_init_pm_clks - register shared CAMSS clocks with the PM clock framework
+> + *
+> + * Clocks listed in res->pm_clks are shared across all CAMSS sub-devices (e.g.
+> + * top_ahb, axi). They are managed automatically by the PM framework.
+> + */
+> +static int camss_init_pm_clks(struct camss *camss)
+> +{
+> +	struct device *dev = camss->dev;
+> +	unsigned int i;
+> +	int ret;
 > +
-> +title: Qualcomm Graphics Clock & Reset Controller on Hawi
+> +	if (!camss->res->pm_clks[0])
+> +		return 0;
 > +
-> +maintainers:
-> +  - Dongfang Zhao <dongfang.zhao@oss.qualcomm.com>
+> +	ret = devm_pm_clk_create(dev);
+> +	if (ret)
+> +		return ret;
 > +
-> +description: |
-> +  Qualcomm graphics clock control module provides the clocks, resets and power
-> +  domains on Qualcomm SoCs.
+> +	for (i = 0; i < CAMSS_RES_MAX && camss->res->pm_clks[i]; i++) {
+> +		ret = pm_clk_add(dev, camss->res->pm_clks[i]);
+> +		if (ret)
+> +			dev_warn(dev, "failed to add pm_clk %s: %d\n",
+> +				 camss->res->pm_clks[i], ret);
+> +	}
 > +
-> +  See also: include/dt-bindings/clock/qcom,hawi-gpucc.h
+> +	return 0;
+> +}
 > +
-> +properties:
-> +  compatible:
-> +    const: qcom,hawi-gpucc
+>   /*
+>    * camss_probe - Probe CAMSS platform device
+>    * @pdev: Pointer to CAMSS platform device
+> @@ -5434,6 +5464,10 @@ static int camss_probe(struct platform_device *pdev)
+>   
+>   	pm_runtime_enable(dev);
+>   
+> +	ret = camss_init_pm_clks(camss);
+> +	if (ret)
+> +		goto err_v4l2_device_unregister;
 > +
-> +  clocks:
-> +    items:
-> +      - description: Board XO source
-> +      - description: GPLL0 main branch source
-> +      - description: GPLL0 div branch source
-> +
-> +  power-domains:
-> +    items:
-> +      - description: A phandle to the CX power-domain
-> +      - description: A phandle to the MX power-domain
+>   	ret = camss_parse_ports(camss);
+>   	if (ret < 0)
+>   		goto err_v4l2_device_unregister;
+> @@ -5775,7 +5809,7 @@ static int __maybe_unused camss_runtime_suspend(struct device *dev)
+>   			return ret;
+>   	}
+>   
+> -	return 0;
+> +	return pm_clk_suspend(dev);
+   CC      drivers/media/platform/mediatek/vcodec/common/mtk_vcodec_dbgfs.o
+   CC      drivers/media/platform/mediatek/mdp3/mtk-mdp3-vpu.o
+   AR      drivers/staging/media/ipu7/built-in.a
+In file included from ./include/uapi/linux/posix_types.h:5,
+                  from ./include/uapi/linux/types.h:14,
+                  from ./include/linux/types.h:5,
+                  from ./include/linux/kasan-checks.h:5,
+                  from ./include/asm-generic/rwonce.h:26,
+                  from ./arch/x86/include/generated/asm/rwonce.h:1,
+                  from ./include/linux/compiler.h:369,
+                  from ./include/linux/err.h:5,
+                  from ./include/linux/clk.h:12,
+                  from drivers/media/platform/qcom/camss/camss.c:10:
+drivers/media/platform/qcom/camss/camss.c: In function 
+‘camss_runtime_suspend’:
+./include/linux/stddef.h:8:14: error: called object is not a function or 
+function pointer
+     8 | #define NULL ((void *)0)
+       |              ^
+./include/linux/pm_clock.h:77:25: note: in expansion of macro ‘NULL’
+    77 | #define pm_clk_suspend  NULL
+       |                         ^~~~
+drivers/media/platform/qcom/camss/camss.c:5841:16: note: in expansion of 
+macro ‘pm_clk_suspend’
+  5841 |         return pm_clk_suspend(dev);
+       |                ^~~~~~~~~~~~~~
+drivers/media/platform/qcom/camss/camss.c: In function 
+‘camss_runtime_resume’:
+./include/linux/stddef.h:8:14: error: called object is not a function or 
+function pointer
+     8 | #define NULL ((void *)0)
+       |              ^
+./include/linux/pm_clock.h:78:25: note: in expansion of macro ‘NULL’
+    78 | #define pm_clk_resume   NULL
+       |                         ^~~~
+drivers/media/platform/qcom/camss/camss.c:5851:15: note: in expansion of 
+macro ‘pm_clk_resume’
+  5851 |         ret = pm_clk_resume(dev);
+       |               ^~~~~~~~~~~~~
+make[7]: *** [scripts/Makefile.build:289: 
+drivers/media/platform/qcom/camss/camss.o] Error 1
+make[7]: *** Waiting for unfinished jobs....
+   CC      drivers/media/usb/pwc/pwc-misc.o
 
-First MX, then CX, to keep with existing GPUCC.
+Please fix.
 
-> +      - description: A phandle to the GMXC power-domain
-> +
-> +  required-opps:
-> +    items:
-> +      - description: A phandle to an OPP node describing CX performance points
-> +      - description: A phandle to an OPP node describing MX performance points
-
-Same here and: s/A phandle to an OPP node describing//
-
-> +      - description: A phandle to an OPP node describing GMXC performance points
-> +
-> +required:
-> +  - compatible
-> +  - clocks
-> +  - power-domains
-> +  - required-opps
-> +  - '#power-domain-cells'
-
-Best regards,
-Krzysztof
-
+---
+bod
