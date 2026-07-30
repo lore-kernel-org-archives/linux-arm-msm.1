@@ -1,38 +1,37 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18930422E24;
-	Thu, 30 Jul 2026 11:56:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13AC14229D9;
+	Thu, 30 Jul 2026 11:56:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785412576; cv=none; b=kAylKlTv2eBW5D3cB0Ndygp6UXIYNNIy9SQZUvJe4oLcAovP9xuEsasBfNbte2Vnf5MIU8rbZ/r5rJChr9JLG/kXRDkUx96k58/KYMnT3zoOEUrZQIhMekBGgz2cWGVnERCbOc7ZAegMerd6hjAchy1NF1eJ7uL2114gvsvBAs8=
+	t=1785412576; cv=none; b=Ztim1O0nNBGaWdn24+WwTRepeNoEy4D7u2n+P5g8WK+mI5koql40bfkm7icjPhUwNPUJsg9LyBJ1xbp7qTPL+m5DE/L2iuTls97UdzAWZ50v/dpMoAF3XJZG3B65Djp0y2f4n0PfanNI84+x2DvocGbry7F4xI2T1H/umTCu9z8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1785412576; c=relaxed/simple;
-	bh=NLZP4AAZzrH5DJTWxorrumh58yd7RsQ6t+ORU+yI/m0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Cp4+gOZzU5uGMO3A9uhaqV3K8/SFWpLrm3Diij77ThxLaCeLZbHLdqvCTxr4VqIwQF0JwpE4IE5uvFCkBwL3AadJF5Xv0i9ZS4jYg2fFzvbJV3eb621g8Ltwmm6sxrFcLKUqBH4YUKEFCGjCICCU/jhP/Ldu6UCGnEU2ZJzZ+Yc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iQNpMadz; arc=none smtp.client-ip=10.30.226.201
+	bh=Jv+Y+B7vW5zw3dtOTvZ7DUoUVDoPl9faWBEpmq7vOFg=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=HqvjoAC9K92+CDE+yJaVvNJNUOaHmv5/Ouj7+OBmLs/aKdAHfLvuvA2mBA7a02P7R0gxxRFdO2rdU6lbTqO+SrYw8sGNAvSMwLZ/x/ESDxfidqMIkXv6FI1ppYrW9Rzy+6xtLxYdHx8XSBLMXA2KGWaQzm1kfe6SDbhSD7pq9NU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OBsNzq4+; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iQNpMadz"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id C5FDCC4AF0B;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OBsNzq4+"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id AA5D3C2BCB3;
 	Thu, 30 Jul 2026 11:56:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1785412575;
-	bh=NLZP4AAZzrH5DJTWxorrumh58yd7RsQ6t+ORU+yI/m0=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=iQNpMadzCGWhbvK32z9UH6qlXqPrg7QPnfv0/eeXxUEXmdibD/k2nzfvneSNmsupJ
-	 5a2d0t31kZSszp573gdAVh+TzQvRYhUkowgNJST49YGK0Hz+RHXF9CKBCqzJKxTWHe
-	 i0JCHH0B85akMuCy9gl7hGKsl+HCwlnGiYe+sdYWowjMf4c6tPEWO8HoTsFxzR/eIf
-	 hTTeMNn9VEmM6Ikoe/7ydlNskW4GTotWqzO1B0YncL+6EsIBLdPVhK62rDCpvJ9ZBD
-	 DgLZJS0hxsIj28FgQ6NqqWcuCZOUtAcPSKjyMFBm1Qani2zEKqdOhIhl+vKybXjOg6
-	 +tnQqv3+tbD9w==
+	bh=Jv+Y+B7vW5zw3dtOTvZ7DUoUVDoPl9faWBEpmq7vOFg=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=OBsNzq4+sPgQE9AU4rPS0B0C5HShuhZnDF0pIvqeqyhhco29lGTX3pw7h+cKTTbwO
+	 qhL7NuK/XdEZPMcz22DKvRe5j3QbHCe0ZyyIgahSjUNmK2hOZehRA++ekwmk0vkXYg
+	 /GBAMrvQAaho/WPFUTSCfWDkaFQS+CKzNREREnpy1UdLYK7YcttKB8o5NqhbV6xT3x
+	 xdlOcU9/Fcc94UC7Sef/izmIv4DW0xhtOJR8aiFO/TkyjeR7qXRYOrzReeeIxBBFXN
+	 0Bsb+meG2EjwAVYCrC1fEdXG6lknrGhsKl7SglKzmT2JSjEz8QpYW1snYL2RjCZ4jZ
+	 zKFC+lQcIIEeg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 9C679C55165;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 80908C54FD2;
 	Thu, 30 Jul 2026 11:56:15 +0000 (UTC)
 From: Manivannan Sadhasivam via B4 Relay <devnull+manivannan.sadhasivam.oss.qualcomm.com@kernel.org>
-Date: Thu, 30 Jul 2026 13:55:43 +0200
-Subject: [PATCH 02/22] arm64: dts: qcom: kodiak: Fix the PCIe iommu-map
- entries
+Subject: [PATCH 00/22] arm64: dts: qcom: Fix the PCIe iommu-map entries
+Date: Thu, 30 Jul 2026 13:55:41 +0200
+Message-Id: <20260730-iommu-map-fix-v1-0-83405d37ba41@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -40,10 +39,11 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260730-iommu-map-fix-v1-2-83405d37ba41@oss.qualcomm.com>
-References: <20260730-iommu-map-fix-v1-0-83405d37ba41@oss.qualcomm.com>
-In-Reply-To: <20260730-iommu-map-fix-v1-0-83405d37ba41@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAL07a2oC/yXM0QpAQBCF4VfRXJtaK8SryMUag1GLdpGSd7e4/
+ E6d/wLPTthDFV3g+BAvyxyQxBHQaOaBUbpg0ErnqkgVymLtjtas2MuJRidMZU+KygzCZ3Uc5q9
+ XN7/93k5M2xuB+34ANdJEQHEAAAA=
+X-Change-ID: 20260730-iommu-map-fix-a21ec9fc0c95
 To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
  Conor Dooley <conor+dt@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>
 Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
@@ -53,16 +53,16 @@ Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
  Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
  Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1580;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3950;
  i=manivannan.sadhasivam@oss.qualcomm.com; h=from:subject:message-id;
- bh=u5umQY4RpI4bndoHDt9p9X7nUakt6H/UIdXBtvA+1Co=;
- b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBqazvVYh0sEYeXURVUG7SdNmTHK0ve106HfRHx/
- vce4U/sZReJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCams71QAKCRBVnxHm/pHO
- 9RfVB/4qnPAcy+Yn8FeS2ffMN7320emBNVdaedFOdqo7R6uzYJZ48MnvKfj0W5Sz4/mA4gsvWnm
- YLBXFwpTuaPuDo1HGD5FXFuQIPReLUQ2q592gLpNzfRbfC9WvgJWJJDC5mW4mK5ECBuvSQgJpwA
- +CCD2sus+jRDW5to+UdF1U/lYT7CX/osnM8BLvt/o1SLS/+YRPowQ147NGxi0wbLJ8JBliL/nmL
- s996NQZ0Votxz8pbAKJphwEZQ7lQZT7UR9w6bTnNtDJM8FNhpk4hrHPW0PRBMCqZgfkmAVtEZtx
- nVL29WVftohtVkHyv6b9Hlm6ivROjXYrMNxtXQ3DrR4RDlNJ
+ bh=Jv+Y+B7vW5zw3dtOTvZ7DUoUVDoPl9faWBEpmq7vOFg=;
+ b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBqazvU6wfi+7nPSDv4gG0rmYtE7MjBcxIEFvjXY
+ N/Pf0xQ1KuJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCams71AAKCRBVnxHm/pHO
+ 9TSBB/0QSpb1PekwaQMaBy/Alfc+h2gKqXTo2opNHcnG8tv9qRZDEcEUtSqqExYdproF92ggfgY
+ Y49+flXXBoYqgjBhS//ZiHeaieGaMjSbqD0dJHmBNAULDd6vwQ1ZYh2biMJllMyx3gmIfe9uqWP
+ qgmmzVvS8EC4hpV0wTfTWXQSV6a/7KutwQohW4AaRg77DoCZ0M/It3pqfzEIWxpDL6MgoxDg0jh
+ qlO0drKdWa38tPtxbSXul7IoKr8x7o9MckeKakp0FFB4sOxCeg4jPBAqSySVG/0+xqfbG9GP2iX
+ KqilFfPIs84HAhuBIcX0oSbLTKy5PQTUiAvD6kKxZyZeeVrD
 X-Developer-Key: i=manivannan.sadhasivam@oss.qualcomm.com; a=openpgp;
  fpr=C668AEC3C3188E4C611465E7488550E901166008
 X-Endpoint-Received: by B4 Relay for
@@ -70,51 +70,73 @@ X-Endpoint-Received: by B4 Relay for
 X-Original-From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 Reply-To: manivannan.sadhasivam@oss.qualcomm.com
 
-From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-
-The IOMMU provider apps_smmu uses '#iommu-cells = <2>', but the PCIe
-iommu-map entries specify only one cell for the SID, omitting the SID
-mask. This went unnoticed until the OF core started warning with commit
+Several Qualcomm SoCs declare their IOMMU providers like apps_smmu and
+pcie_smmu, with '#iommu-cells = <2>', where the two cells are the SID
+and the SID mask. But the PCIe iommu-map entries on these SoCs specify
+only one output cell for the SID and omit the mask. This went unnoticed
+until the OF core started warning with commit
 ccb2fd725d41 ("of: Respect #{iommu,msi}-cells in maps"):
 
   iommu-map has 1-cell entries targeting 2-cell #iommu-cells, treating as 1-cell output
 
-So fix the entries to match the provider's '#iommu-cells' property.
+So this series fixes the iommu-map entries across the affected SoC, SoM, board
+and overlay files to match the provider's '#iommu-cells' property.
 
-Fixes: f8328b7549e1 ("arm64: dts: qcom: sc7280: Describe the first PCIe controller and PHY")
 Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/kodiak.dtsi | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+Manivannan Sadhasivam (22):
+      arm64: dts: qcom: kaanapali: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: kodiak: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: sar2130p: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: sc8180x: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: sdm845: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: sm8150: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: sm8250: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: sm8350: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: sm8450: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: sm8550: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: sm8650: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: sm8750: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: talos: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: lemans: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: monaco: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: monaco-monza-som: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: monaco-evk-ifp-mezzanine: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: lemans-evk-ifp-mezzanine: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: qcs6490-radxa-dragon-q6a: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: qcs6490-thundercomm-minipc-g1iot: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: qcs6490-rb3gen2: Fix the PCIe iommu-map entries
+      arm64: dts: qcom: qcs6490-rb3gen2-industrial-mezzanine: Fix the PCIe iommu-map entries
 
-diff --git a/arch/arm64/boot/dts/qcom/kodiak.dtsi b/arch/arm64/boot/dts/qcom/kodiak.dtsi
-index fa540d8c2615..2eb613dd6716 100644
---- a/arch/arm64/boot/dts/qcom/kodiak.dtsi
-+++ b/arch/arm64/boot/dts/qcom/kodiak.dtsi
-@@ -2278,8 +2278,8 @@ pcie0: pcie@1c00000 {
- 				      "aggre0",
- 				      "aggre1";
- 
--			iommu-map = <0x0   &apps_smmu 0x1c00 0x1>,
--				    <0x100 &apps_smmu 0x1c01 0x1>;
-+			iommu-map = <0x0   &apps_smmu 0x1c00 0x0 0x1>,
-+				    <0x100 &apps_smmu 0x1c01 0x0 0x1>;
- 
- 			resets = <&gcc GCC_PCIE_0_BCR>;
- 			reset-names = "pci";
-@@ -2424,8 +2424,8 @@ pcie1: pcie@1c08000 {
- 
- 			dma-coherent;
- 
--			iommu-map = <0x0 &apps_smmu 0x1c80 0x1>,
--				    <0x100 &apps_smmu 0x1c81 0x1>;
-+			iommu-map = <0x0 &apps_smmu 0x1c80 0x0 0x1>,
-+				    <0x100 &apps_smmu 0x1c81 0x0 0x1>;
- 
- 			status = "disabled";
- 
+ arch/arm64/boot/dts/qcom/kaanapali.dtsi            |  4 +-
+ arch/arm64/boot/dts/qcom/kodiak.dtsi               |  8 +--
+ .../boot/dts/qcom/lemans-evk-ifp-mezzanine.dtso    | 18 +++---
+ arch/arm64/boot/dts/qcom/lemans.dtsi               |  8 +--
+ .../boot/dts/qcom/monaco-evk-ifp-mezzanine.dtso    | 18 +++---
+ arch/arm64/boot/dts/qcom/monaco-monza-som.dtsi     | 16 +++---
+ arch/arm64/boot/dts/qcom/monaco.dtsi               |  8 +--
+ .../boot/dts/qcom/qcs6490-radxa-dragon-q6a.dts     | 18 +++---
+ .../qcom/qcs6490-rb3gen2-industrial-mezzanine.dtso | 50 ++++++++---------
+ arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts       | 18 +++---
+ .../dts/qcom/qcs6490-thundercomm-minipc-g1iot.dts  | 18 +++---
+ arch/arm64/boot/dts/qcom/sar2130p.dtsi             |  8 +--
+ arch/arm64/boot/dts/qcom/sc8180x.dtsi              | 16 +++---
+ arch/arm64/boot/dts/qcom/sdm845.dtsi               | 64 +++++++++++-----------
+ arch/arm64/boot/dts/qcom/sm8150.dtsi               |  8 +--
+ arch/arm64/boot/dts/qcom/sm8250.dtsi               | 12 ++--
+ arch/arm64/boot/dts/qcom/sm8350.dtsi               |  8 +--
+ arch/arm64/boot/dts/qcom/sm8450.dtsi               |  8 +--
+ arch/arm64/boot/dts/qcom/sm8550.dtsi               |  8 +--
+ arch/arm64/boot/dts/qcom/sm8650.dtsi               |  8 +--
+ arch/arm64/boot/dts/qcom/sm8750.dtsi               |  4 +-
+ arch/arm64/boot/dts/qcom/talos.dtsi                |  4 +-
+ 22 files changed, 166 insertions(+), 166 deletions(-)
+---
+base-commit: dc59e4fea9d83f03bad6bddf3fa2e52491777482
+change-id: 20260730-iommu-map-fix-a21ec9fc0c95
 
--- 
-2.43.0
+Best regards,
+--  
+மணிவண்ணன் சதாசிவம்
 
 
