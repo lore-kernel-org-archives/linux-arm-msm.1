@@ -1,94 +1,112 @@
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BF743F077C
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 09:35:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D73EE3F9F22
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 09:35:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785404106; cv=none; b=bIkZaWDb7gXgPqpWHfjzWCY9Lr/1f3z7Yd1KMpvqPjPU+o4EbgFRBXpScfmUw8p35lMfFffEIYNiyWyBUrYRd6f1OgembbGLHNI9iptvVqsxU8UrY/EiLH4BV6mJgnnbq8iPPNmnIYGZ5FNkh8biblFgsI8mswS+nAHOKOuzRo4=
+	t=1785404109; cv=none; b=N8NQ1+oUs0tJAwW+nu30FZMsbA1E/7tmwSYOA53UJBQzjYT5Y7C/yLz1MPemW7/0r5tG0NdwvtZsba1d8/olhcjCPLsnG3rXFsmH6SsyBu60WXKXhqFWwL1ub2GIH3CwMGfhY8UodVyBQROB1aZHGBU9N9lzd2xcrzGHJ+V2Auo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785404106; c=relaxed/simple;
-	bh=WRSKlHcAwr3G1F+wQ5iSAxUHLgUwnf9+Sax49YuQ9XI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=FzZBocDk4ckbaJ1mWcGS8I0bQftd6DY2cwgcQJ7k9VV1wuMUKmEPyU3k9p7UKOK82Ce1w8zy5xZswktuwVh3nUq/SdKfc7kO5qMOkQrAXQPIt3quUagx5soRIlKSDFZr6PQnUxZLE3j68/lG7w91axNby/ww6eYd+zYtw1OWqQA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=t4qlZvFY; arc=none smtp.client-ip=209.85.208.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1785404109; c=relaxed/simple;
+	bh=vuwucA9vipnQ6DR1ZbZrDDrjcEvHXJZFOVBWKVa4tds=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=CqGdWh2012E/ArDI/BI9MTE33BeerTrDIt6Ja7fe90fzqCXrsx0rHdDuPpTir5VlpTWKl1M8G9XBWuffauQWwK4R5Pn6DQ5u6A9Hs+o/JepibO+W28iSvhrrzQZOZa/oCRY59hxmTwLSVd7C5sQZ0SMh/KHvw+Cag5r7FTrN5aA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=OJq67jNz; arc=none smtp.client-ip=209.85.218.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="t4qlZvFY"
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-69c108fee7fso2675833a12.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 02:35:05 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OJq67jNz"
+Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-c1f7666a90bso267107566b.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 02:35:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1785404104; x=1786008904; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=CnUAmpFzxzwhVA75taAM2rHQHvnmLOjgpDvXD3WMWyw=;
-        b=t4qlZvFYMa5JZKh8Ev7Df5Zjwm620FeN/hdvu6HIr9YRtv6NREXmp7swOu4kinPK77
-         /V9IvT3Jy67a9ZP6BN63FVfp2zjWjB6noEg5QPoQc/mJ7D8EHH1Dp+/xVKbI38GdlJo0
-         IJRoky5M5ENlDAOUjqRx2GmXhoDCaBjgD8WwbRisYNjMs5l545YqSQZ/tkQXN0FVqFJF
-         oXqlA7YyJwFEjnNTXo0oCSQT6fQkQFHW89w4xK/vpasYLE5sjoDbtwYgZzv4QiTD9ZAL
-         bZhdtNBkyxllY/lFKEugb0EvPLhWy7SE1ubx3SnHZKBLtTk0knvjh2K+2uUArWly0X79
-         FicA==
+        d=gmail.com; s=20251104; t=1785404106; x=1786008906; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=LorXrpjvB9CH6Civ3yNIe2+RrIhqKWqCrvDhWx+glCc=;
+        b=OJq67jNzp82vgB4CVKRXaMGpzqr5LOcQ+F85YYJf6h0iTH3RtFbW0NmM8Jz2ftc289
+         ZiROiXTkzR86Q2rheVQN0LmIy//4otmwhibj0EOc7g/roeKzueK5k8bM1Z+J2Y8PHa3n
+         ixDT9DalEC1aNW6m2kfBHDdWULd60wuHOYznKi+9QObqpdJw0S5HctwCkpJuq/kdtIY4
+         txaDXvZFTDQSfLfvrHebm12I8Jn8xyhDsGATMkAn+DsToFha4oiPX8dbZbE7GXulMFm3
+         h9Rm06lgHUF4sT+VhXQ19LImYNKr+DrmnohkeUjSBswdhh5q9CzpNr1OubeVO2s+Nq9c
+         3dew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785404104; x=1786008904;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1785404106; x=1786008906;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=CnUAmpFzxzwhVA75taAM2rHQHvnmLOjgpDvXD3WMWyw=;
-        b=VyTvPLwkOJX4iT9R6QuHxFl2Rut2d4fLjHCu/fyf1RD1q2BIuEwRt4r4pZ8AV2XMfK
-         iodAbfHUY7lM/qzEck8uPV7E7zH/5eepkM5Mwzzxg+g8quTk+VqPytWnuGtw+XyVFN1m
-         TwQZzR90e3q5lkIbDAzFzbSFIheHTn8lbFcJGjfecPkCXmUz804NxD1o0N7EndMBnUOq
-         hI6WkWhatxZZvA0nfr06sJW/O0e5g02WLE0i7i0RleS5VZFGr3BfL/GkRFHsTqar9tEq
-         7jQYyigcDGNTskog4YwE59vCAY/VSVilRc3BQ3Xwnj/RpEUVisTwrQwDz4kjWxmx18l8
-         NnVg==
-X-Forwarded-Encrypted: i=1; AHgh+RqQdTNkYzjWlQ97jkvZVIorv3QidA5Hnz1pXmO7phI2tylsHMsINoXQLBRve83tjHIofByhdokETSmL4+vD@vger.kernel.org
-X-Gm-Message-State: AOJu0YwfB4ohow32LVoMcyK+gO6Fp51SM31MS/H5gwopZEzLEkSqqf2m
-	7xJYMjbLYOql6BSANFjph5dqxjMJ/RCufSPTdZUKem9OSYvMelG2+rfvLZSXrO4L1iY=
-X-Gm-Gg: AR+sD13ZuPAUjSwonXyWoVxx44JgYqpR7DuosaJH7jJzfnzjQ01ftjF60FcpcykUdmX
-	Ns7moCdhRpt4MtuOZsUzxcGCgSfaJHe3ONeofX1kAk/DEYf7S64dPRSqAfTWbmhFc6SmXs2QIGr
-	pJZP/4LxApBTwTfRVESw/vRLTFJUF9Us9HP2/uQNUGitzzlV6BiWGO2ZYLX9NU/4hP/cBr7Xc47
-	zm1+Auac2mvPuHveLRAw/4xSPry+MLTmTgn72/ZkPBZBN9/XLjYllGugr3M+t+R8vdyKSoByC8P
-	lIivh5y5E5LynqNpeUyHxyMPrZ6iVUq22ixQpiBlMW06EMssU/jyLVTk2xKF8gnTyn+rWSbYNmM
-	AZ8DY+3g9OGXbAgKAhEA04jY0z0PbJ8BUuihbAG2S7ZFAvb1tN/JP5U0Qr3EaNtIcHYf67ZdKb3
-	M+O0CjT7UHnwsuL8DehWiv2ul+QylYcygLQLIVc46TqrBPGyHd1Rgn+SVdd1iMB8D7W/4yrtyf
-X-Received: by 2002:a05:6402:42d0:b0:697:decc:7f9a with SMTP id 4fb4d7f45d1cf-6a07b7ebcbbmr964799a12.9.1785404103643;
-        Thu, 30 Jul 2026 02:35:03 -0700 (PDT)
-Received: from [192.168.0.101] ([109.77.38.123])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a07d4a8e96sm404347a12.30.2026.07.30.02.35.01
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Jul 2026 02:35:02 -0700 (PDT)
-Message-ID: <a880d399-a39e-491f-9724-c892b1a7ac5f@linaro.org>
-Date: Thu, 30 Jul 2026 10:35:01 +0100
+        bh=LorXrpjvB9CH6Civ3yNIe2+RrIhqKWqCrvDhWx+glCc=;
+        b=QCr9b/q/lw63WBZHtNt9HalwEEwxrABitc3OvBO3zsjQq/k21QZTE+QfiWO/i1R2BZ
+         Ot4mAEzpIspayjvRTu7TlChYdFeNt9qmV5g3au9Ps5I4rP3dDc49euWYdiedJLJtyRto
+         TQZ+8oZjI3aT503QEDS/+RdCIsLtUdMX/xuHZI9yrfePKoTOjkIStL7CUqXiszaMGMPj
+         YMTX6KKsDiKPwQf75gODvB06YtNhnK4PrTyTzz5ryKA7S74s5Jl5jhEJ44E7swC5bxot
+         j86lMlXrW1H7+JJtqCpf+nCl8kO8YewT0zSseHMK7sPAr3iaEDp1t1wRmi2EZrMolfWq
+         fmog==
+X-Gm-Message-State: AOJu0Yyct2GaKe8S0BEPGiiLH4Olqm/2/pC8YnQ1cN1WuNzAEQsDWmkl
+	4XjEua4rrtGFzgBLPS+swP8RqB/5NybSPoGPOm0XamRzswBEdu3nKFHC
+X-Gm-Gg: AR+sD134cfTVDw+OPaSyLAwfs/ADAhQ6JU5PT+k/f6+PUZ3ZLSNKHikMQc6c1CzAUL0
+	ZyE97Xw3bYoct0rZFiIBB8u4+qrCeQ1bmEiGeK5Jz2VheGbgubTPw+yUX4HIf8Qt6DXwum3xJaV
+	mlK29y+dQ5C8lljqetYt14sIvoo5+ldxEVEXT1hVhICfHtrhYXo9HbFFdPa4MGbm1Jmv3mPzGtJ
+	GQPz8enscozo6i1PV1MsKPcwEau4pdyV/HbN7wOfnoTD6jBOI/Ly5jw56VfysxBqQl5fjZOd/S3
+	bqmFQBouzYoyURPcVmAxfqoJr3R/BNwa+e6eL74eJ6UeeT5OR1CV0XdNu9LzqiiKl4fSICmyvV7
+	fH3EsATrxqFralmKc5vHr2N2dPsoFslgYV24kIrcGt8EMJtpqWSWeNc/ijQtBCxaYF5qdUz887i
+	0cVoCwNDcHOTk29Nxacfr1CX39heA7wrUoooEszHAZvGKyQJuLFwQZFgj0TDq//hD8a62L2VTTY
+	eIF8zbTSah5/LW8q3TEQQ==
+X-Received: by 2002:a17:907:c08c:b0:c12:7934:52fd with SMTP id a640c23a62f3a-c1fa55ce082mr100963066b.32.1785404105894;
+        Thu, 30 Jul 2026 02:35:05 -0700 (PDT)
+Received: from workstation (161-53-210-87.ftth.glasoperator.nl. [87.210.53.161])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1fa8577e78sm46733066b.20.2026.07.30.02.35.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 30 Jul 2026 02:35:05 -0700 (PDT)
+From: Stanislav Zaikin <zstaseg@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Sebastian Reichel <sre@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	Stanislav Zaikin <zstaseg@gmail.com>
+Subject: [RFC PATCH 0/3] Add Xiaomi 12 Lite 5G (taoyao) battery support
+Date: Thu, 30 Jul 2026 11:34:59 +0200
+Message-ID: <20260730093502.689505-1-zstaseg@gmail.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/4] media: qcom: camss: Add PM clock support and
- integrate with runtime PM
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, Frank Li <Frank.Li@nxp.com>
-References: <20260730-camss-version-v3-0-74a87302dd9f@oss.qualcomm.com>
- <20260730-camss-version-v3-1-74a87302dd9f@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20260730-camss-version-v3-1-74a87302dd9f@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 30/07/2026 10:24, Loic Poulain wrote:
-> +	ret = devm_pm_clk_create(dev);
-> +	if (ret)
-> +		return ret;
+Xiaomi 12 Lite 5G (taoyao) has an additional property with ID 12 that
+breaks the parsing in qcom_battmgr. Fix that by introducing separate
+maps for lookups properties in both directions.
 
-!PM_CLK this is an -EINVAL I think.
+The other approach that I tried is manual shifting properties:
 
----
-bod
++	if (battmgr->variant == QCOM_BATTMGR_TAOYAO && prop > BATT_CHG_CTRL_LIM_MAX)
++		prop++;
+...
++		if (battmgr->variant == QCOM_BATTMGR_TAOYAO && property > BATT_CHG_CTRL_LIM_MAX + 1)
++			property--;
+
+But I found that more obscure.
+
+Will be happy to switch if the maintainers prefer this one.
+
+Stanislav Zaikin (3):
+  dt-bindings: soc: qcom: add xiaomi,taoyao-pmic-glink compatible
+  power: supply: qcom_battmgr: add Xiaomi taoyao support
+  arm64: dts: qcom: sm7325-xiaomi-taoyao: switch to device-specific
+    pmic-glink compatible
+
+ .../bindings/soc/qcom/qcom,pmic-glink.yaml    |  1 +
+ .../boot/dts/qcom/sm7325-xiaomi-taoyao.dts    |  2 +-
+ drivers/power/supply/qcom_battmgr.c           | 86 ++++++++++++++++++-
+ 3 files changed, 84 insertions(+), 5 deletions(-)
+
+-- 
+2.53.0
+
