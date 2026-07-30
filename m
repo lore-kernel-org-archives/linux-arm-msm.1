@@ -1,87 +1,67 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 706A642BE80
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 12:01:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 503F34229A2
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 12:02:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785412861; cv=none; b=NSx0BIgnYwmPtsXq8AHQ/KzUzqx6c26Y4gO7UpYucmu3ip09EZHYBmspGUm0HtWc42xhApjA7qO8wdXeHtyaHZb4zet1jfBvItEF3xZu/c46Ze3r6lmE1ZIE2uG0hCSoZAOQLafI63cTzKiRX2/PofY2YENkxiVbVVCJJfubZs0=
+	t=1785412942; cv=none; b=elcnLE2w1GITpSpaJSERFuTMg24bHALevtFoVSiHUdlVLr3vVR9Drx2PSzYxrJ0oa4PFBKpmXFa79xPrN2B/rjAeyk7kEv9ITARuE+5v+GgOrIqORkwhhPh7GQ/4H8xWIctWxdKHE05ty6aRQ3lLxH2X+28EOYF47v3UPOr4OPM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785412861; c=relaxed/simple;
-	bh=ySDiR9YPLrb5IFR36TCBslNdsY8sArZgsyYs5F+l2SQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=oxNZv1hXXmTWjKk2hPtw8IT4W1nrHZNCbXmNOaGVKythCQSg9VRW6GeoT/5ntKFcH1YFGFVEdGULys1lnQkCrG+Pp3krL9owsWi8a3fCPBOptigMkqHtYXZR6GQQEj7+dGPpKVBwTUTlTtUXJnvsVTMOsqK6m3Sx55CehvW8oI0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ek69fdz3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gayedlQ7; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785412942; c=relaxed/simple;
+	bh=hnOoBe2wmw+LgI+ww3+lweW+pue0CBjMNv2hb/pyG7U=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=P/2VPn/OgCrkO0WdkRAQ0U5sPRDzLula7GQj/yVffA9FKAdy8J43pbL6mG8GC6uKH+MjIxutdCS0Yj5FXUET7xNzguZyFTXi7TytyFBJt2GTgnvwRj529EDcxZuWG+ZFszh8Kw0whJ5z5zII54XSPWYU6sP7Kh0AP0FlJ0wSOEY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=yPLVJeE+; arc=none smtp.client-ip=209.85.221.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ek69fdz3";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gayedlQ7"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66UB8J4H827239
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 12:01:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	6JK9gzvvCPLMwkZwM+DdBcV1dmsHnyUD0kCzj/Lw3mo=; b=ek69fdz3q0ljydi5
-	XXbWSeTg7eopKzhhhFEje2gX6ZggnNMInKd4b9l5Lhpaf7woGTd8vJrcousg+OZF
-	DdvGX3jzyIGvUO90+oiHsYRaECesfiVXMFQXe42d8Q8Pf/PiudnM8NyBJH3BpYhN
-	tjIUyM6kRdv02/Pyr3jQgDf69RyuQeY1bCRXCjVKVJUEUfPOKbR43FQDiOl1uCAu
-	l8BMYvq6sUdOY4ZRYRZh7HN24RqhbWZ2iVHdIyb1ECpctNEy7exZ4d1oCWt+NFIZ
-	TcuvuJFSuQw1OPxs5LE7PR8dz+1xR3b9tP0UnbdETu7ZmleCQK3px4jbojQm6rqb
-	H4HFRA==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr5fpr5uq-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 12:00:59 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-ca7c1e22995so3357771a12.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 05:00:59 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="yPLVJeE+"
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-47f7854678bso1094136f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 05:02:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785412859; x=1786017659; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6JK9gzvvCPLMwkZwM+DdBcV1dmsHnyUD0kCzj/Lw3mo=;
-        b=gayedlQ7qR/VGI6FlSqFspwDeLN34EZjWkIZm42pgS5gyDOQQxutrZFJNV9Q1A9ALm
-         1kwIgRyzxZbP16zmsC/Im6+NZzEhn5tksWPf5Jangew8Q8bBmZoNmIkFvlxYvvfgmpnQ
-         UXElJineH6VZfaJcjnIHxQc6fNVOQitQnJXxrZJXoJS5dsdH2kXREFM+6wm+MiMoUaS2
-         kMuwl5ur34ZRSJxQZc65gy7y8zWOG3YupRq4kIIpWK8CxcNetrP0OBACqUNinXkRAW2X
-         2frm5P64gDPkIoRplYirrogiFw0MC0L9AJYttvr2/kV0YhrYxxNZlWo7KneDTgq6Vs+E
-         UtZw==
+        d=linaro.org; s=google; t=1785412936; x=1786017736; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=XJNQW4hWhLlkEQQl0iu4BRKiR2BjH2DMfU+W0frPOGc=;
+        b=yPLVJeE+bLmmhEvptQXOPwJEHdRefmZ7LW75kBoVXGalif58+Uegwv48HQIhHc0XUN
+         aqm/ljVDxftj2NOVpt7wSATE0QkXNwsu99l0gwm/npK/ASuaFJAIQ2rjr+4Xg/5ERh8y
+         UhUhQpWSXN/PDaUgH2RlUgH0m7lSjyKPwGcC2SF0Ztywcf2O15v3quspaA7GxGYX/ZlE
+         yOfB8SaeTJvPtaHmFXR/WMlNNCPI0yU9TA7sr9/JWEF6djfC1irxG8qmVLwsE16O/hZP
+         YQuNj3BGYcf4qJl0FwsUMJnUACe6bodTkaLZKl1vScmnMR7dM5Fdmqnai6g4c2Weeblv
+         HNrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785412859; x=1786017659;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=6JK9gzvvCPLMwkZwM+DdBcV1dmsHnyUD0kCzj/Lw3mo=;
-        b=MtJ5uI22cadoPAWQplXirAVYmrhrQ8MjAeO4CB+CprfCEZlYEnPBAu2G905n1lGK6V
-         cs3auhLjJyiyIefWFh+OLsKRmcLYK/RBZWursqft/3tGSUf6WJjmTFq9pz61HVPl7cJl
-         Zc+NHeEXxBWjxP+hDpd8NsO3myp6azrqnVPGk7FhXJy92vcc2lKe4pVcBb+m6EPeLia6
-         izFIPk1LiyWUyeBkfgZPax2Rkm/sRe5UTt78ZGb9xCvXImBvRalHap7gYrR02bdstDvQ
-         mVaJCJ7tC4b97vZPR6OgLTWTDPVZXi3OlxR/fRlL5XSKACV0xSpJTIlfY6uqekdRvwgx
-         Kcig==
-X-Gm-Message-State: AOJu0YyzhCF14o82Oq+EtuNw5gkOENsSp+DYkXI3DqIFVeHgxpyLL+ww
-	iX/eEabqmLzX3Ps26rEJkZHIpVn565rFheS59pSxBpILO+TMfFUmgmrqOoC3L5uW0eURd9HDv3A
-	rVmad89ufwDm/FIKfzBuCHjjHRUQFEC0l17oOQy56HGJHHOI8v0ss4juEYWRnEH3ZSbSk
-X-Gm-Gg: AR+sD12aJlE7BXNeaI9QPUNOxlT7JX3og7R4lRxxkNhgdbESKVfSIEq8aVc4TEKr8L3
-	dpLU0yOdu/bxqI3amGSjrErVg19RsBVZJ60zDbvbLAK1re0sVpBRJZkDPgUJQ0Z5wh7W0rImB12
-	Rb9anf/X6p4MNkXCqleJf83i8g9sZXrwgKlGyLxbxjh3aDJaTZfQO/wlSUsC40mr9dcuSFg5YRp
-	FL4wpbH83OXKGPqJmLtNqyHlgy8OOZNd0hp+pcYWj++PuvQ6hbFY2qS4VJToKb6TDe81KUBJEEm
-	Mp/Ubth03D0OzOq21i4u943Eb8TurgyQZC27L2233cc/x79UDms7n4m48grv6lKmFKqGmSij8wu
-	ERcSIC3X2K9QkAAfu/ygdty9m5G19fRBaZC4=
-X-Received: by 2002:a05:6a21:9983:b0:3c8:e000:96f8 with SMTP id adf61e73a8af0-3c9006f112bmr2293911637.65.1785412858931;
-        Thu, 30 Jul 2026 05:00:58 -0700 (PDT)
-X-Received: by 2002:a05:6a21:9983:b0:3c8:e000:96f8 with SMTP id adf61e73a8af0-3c9006f112bmr2293789637.65.1785412857247;
-        Thu, 30 Jul 2026 05:00:57 -0700 (PDT)
-Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13f9a041e36sm7822776c88.7.2026.07.30.05.00.52
+        d=1e100.net; s=20251104; t=1785412936; x=1786017736;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=XJNQW4hWhLlkEQQl0iu4BRKiR2BjH2DMfU+W0frPOGc=;
+        b=Y57A45CDbRVOriylAIceFK2aTsz/za2+BWklxdBHXUZb24id7awdodL+g22505OA0z
+         yaDRNZUy0+KLcDqjYVoOKfGd9yfMdJSE1strFyx8DqAryhvV32CFr2pZnm/KsVkS0wYD
+         JiN6vWrOgdNFRswin/DydFiS8+JdQKODGEWDUf85YATvNEKETTfUsx/tT47VpsgyF/MS
+         IIoDVo5YnE6l44ULoDm1TUrnvGE5OUDH38jobzHLHR9q4bUstUmN//nH8x5tl8kjul/u
+         AkhzbkBXv0tL7AOl57ebcPHPn9JB7rv+Wx9dR7aAM93izQKm6duLEhSKdzHEnEC+9Oxg
+         WgjQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rq5UvggIrrUC7drg3G5f9PY5E1hpM4hq4IRt1zytSS2obpHVjDOebm7QGyNlZSRXrfEZeL8L0SwGGN+MZN5@vger.kernel.org
+X-Gm-Message-State: AOJu0YxVJSW6dkaVdSRomxWQqV0RtdD4CdXsl+QnC0qvDJWcdMQ6Ash9
+	I91Hz0w8mRKwQg8D5GsEWmMaV2smQUfGF5/c5IZupwnmH0nDQ/e1X4tDZFbg0Cp44qMjY7ZrPjn
+	o76NdSZs=
+X-Gm-Gg: AR+sD11MRt+dQfbGd3WZldptSD5qLz5msE4790N39koaOERsR7qsLO8nPcD/06G6fab
+	cmYFjsol579o/QzfdUKqCQEqYuFG9KHC9KjPc7/2eE7F2T50hG/MuqufiDT+npXIGmXVrd3mGaP
+	LBnR6cFY8vp6Ds4EGVybI6cfnXuidwgPO+47QIpHdZYlfYSt4sxs/N8OMoftnt7tS9/K5eCHeuA
+	9qfhWDhmnL8Ryg0Jl2zJUjO0v5afUbgcsqcdzy8nBLAgyIJlJ8buhqPnNXsDBvA4G1+hxtQ1zOH
+	lpheRVo2HTOzUWv5DzER6SXhtFUmTb2NsJ4+ZaIAhEzQVxZDgPJROEDaLWjT0U3/byMzMVB9ei5
+	ZS0bsT8C3kCZfDkw3If4OXsFUhLKVzL5TZJZUCci6a9YYgle+bCV9376uAtXeJOGpqr1/2wKZgi
+	ni7bUTdv9lC3VvymlL9PjOBB2+FSnBoxZRxeiKh/I1F9sDCHIZhKq+5NHdaZyuYpv+K0LDy28=
+X-Received: by 2002:a5d:584d:0:b0:47f:6e23:64d6 with SMTP id ffacd0b85a97d-47fc81f59d8mr3349450f8f.16.1785412936162;
+        Thu, 30 Jul 2026 05:02:16 -0700 (PDT)
+Received: from [192.168.0.35] ([109.77.38.123])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47fc89342f7sm5992175f8f.26.2026.07.30.05.02.12
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Jul 2026 05:00:56 -0700 (PDT)
-From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Date: Thu, 30 Jul 2026 17:30:18 +0530
-Subject: [PATCH v7 3/3] arm64: dts: qcom: eliza-evk: Add PCIe1 with TC9563
- PCIe switch
+        Thu, 30 Jul 2026 05:02:12 -0700 (PDT)
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Subject: [PATCH v15 0/2] phy: qcom-mipi-csi2: Add a CSI2 MIPI DPHY driver
+Date: Thu, 30 Jul 2026 13:02:08 +0100
+Message-Id: <20260730-x1e-csi2-phy-v15-0-f284131de1fa@linaro.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,203 +70,366 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260730-eliza_evk-v7-3-7ac7b66a3e6d@oss.qualcomm.com>
-References: <20260730-eliza_evk-v7-0-7ac7b66a3e6d@oss.qualcomm.com>
-In-Reply-To: <20260730-eliza_evk-v7-0-7ac7b66a3e6d@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org,
-        linux-pm@vger.kernel.org,
-        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/33SS2oDMQwG4KuUWddFkt9d9R6lC78mGShJmClDQ
+ sjdaw+UuHbapQ2fJMv/dVjSPKVleH26DnNap2U6HvIB5fPTEPbusEtsivliICAJGoGdMbGwTMR
+ O+wsbleDCK4mRuyGT05zG6bzVe//I5/20fB3ny1Z+xXL7R6EVGTAtXPBeelTk3z6ng5uPL8d5N
+ 5RKK/1oBUSy0VS0lipFr3RyttO81qrRPGvEpMBoaQVCp8Vdc2x7i6wtBLAE3BgTOy0r3fWWWWc
+ 8Bj3KANi/W921JGy0Kr2j5tH6qCP1k+taU6N12ZoNHsnA6KLqtKk1b7TJ2hmplBHS5tE6be9ag
+ 2m0Le8mBF9WJ8LYaYSKY8tzfoBJTeB03rmVvPdYe9t63DYHDlMExan/NaR/fUlcCJoj5j+ND/4
+ Nq8jlOVu/ZU5B4GilMerB/KL2uvUldaRz41Hk4Nvf/na7fQOi6kKY2gMAAA==
+X-Change-ID: 20250710-x1e-csi2-phy-f6434b651d3a
+To: Vinod Koul <vkoul@kernel.org>, 
+ Kishon Vijay Abraham I <kishon@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Bryan O'Donoghue <bod@kernel.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
+ linux-media@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785412836; l=3785;
- i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
- bh=ySDiR9YPLrb5IFR36TCBslNdsY8sArZgsyYs5F+l2SQ=;
- b=nqUC1f8G5lYQx8G8Qvk2JfIGkirB8bK6RMI5BvdAbyzIKNX76NMnkHjvfguQiilT6WmDoZn8Q
- yFZeb6X3u+EDY5FQ2kfMamv9eoEUmkaRrAc8mQgq+4yIJfSLg+yt7Ku
-X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
- pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
-X-Authority-Analysis: v=2.4 cv=ErfiaycA c=1 sm=1 tr=0 ts=6a6b3cfb cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=qQkGquXN9PvF_GGjQ98A:9 a=QEXdDO2ut3YA:10
- a=bFCP_H2QrGi7Okbo017w:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDA5MCBTYWx0ZWRfXz8XEV/ChzEgD
- Poe22RSwLfn2psbqfTLOHXmVcaXfYUQX9a1/mvQi6+E+h1XzwykvfVgoDqYEG8O9xhpAuEWI0II
- 7OY0XMG2UIFBQ0WKxOAxdb2r+gs/M+PWjTTuELlGjXhI49SV2h/KqKeZr04fpcj5V/DfsQ2shMT
- ry509623I4l9NsRdaDGvEF73K7vyQ7XrAZTEb38PuiNR50pM4GTDSDZTWnG7IatR4lNP79HwZGQ
- 4WXPgfW6kHHBFFUyhDv3GSZpa7yE4mxPIORe/6Tl+Mxag1t//u1wstWzOHMjbuWbiYUb2vtJIVx
- +QIh1jhc6/DFPX2c6J9RaCCG9pKEaRUnY437Rc8QRelIA7ShRScO8N//BF1emP1kD1beFYvbPly
- /nl0m6XgDB0Gc4NUK5EikmdMYvzfxH6l/NFxlcEld53L40Enk7f3dsA1L8BfwAjObpTan54S4kh
- bU4/ZC25pJQzb2wrMRA==
-X-Proofpoint-GUID: Ot7g40sTfesZKY_ee8fdzId4yyvpt9Bd
-X-Proofpoint-ORIG-GUID: Ot7g40sTfesZKY_ee8fdzId4yyvpt9Bd
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDA5MCBTYWx0ZWRfX5kWOPaAYh7mx
- XiY3I+vlQpYSACcBT8AyTlkSU4YrJbWaSD03eWRsCDEoYYQ9ivFuEBcYcnTajcr2IeWc5V9Ru5+
- 1D9MJcpV8HuRkEjwU8XhhsRDr4o0L8M=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-30_03,2026-07-29_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0
- clxscore=1015 impostorscore=0 malwarescore=0 adultscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607300090
+X-Developer-Signature: v=1; a=openpgp-sha256; l=15431;
+ i=bryan.odonoghue@linaro.org; h=from:subject:message-id;
+ bh=hnOoBe2wmw+LgI+ww3+lweW+pue0CBjMNv2hb/pyG7U=;
+ b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBqaz1C2DnK9zWqo1hulwd5avZcSpAQzhfxqynOq
+ +SWztNtrR6JAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCams9QgAKCRAicTuzoY3I
+ Oj/FD/0VYKhw7mQLNyq6a/W6cXBS04kOcpCnPRgnyOOuSiUD2xL7MvQbQyGtBhfdoBTQr0JWXSo
+ iCzSJVVzsa1mITBhgNXMvqq/eTOB/3eoJvIKRoLf35dehdI/RQ2FdxIV17z9a1Au5ZmXPaphhbL
+ pOoMw4TpCm1IhZujCm02TPtZvvonW+UcA8N0eWruV+tdnK7t93IB5E7f7XmCaYDlAcvyygb0enL
+ Du4lGOhlG/OPPmgZqct/rKfa52OXwz85+hjriKFPyDNzMN21Fodp4wigZeGw6Pyeq2+uID74sRd
+ TfZAd7NKY9nJQRb+r5ms40kRw6MkoV8xH9TEIrY0qePY4cQNnBOV68s5eJIfgg5kbJVgXArrnTx
+ OJMFY7mBkvEWW4VOeaK0Whe9Sn10EAIakzGOFztB+zNIoDvo2kWmb7c3xlZjT+1gDbnf17597Oq
+ A+j5abFDucRef+N7WN8szhRjgN6pqiRrY7LDzRVOBOLOYhPPpjEWWtlrgLp3N3aM0c6wdExQngs
+ rmpk1U43r5NGGhF/rDVDclS0t6zAuDKR76ME0kCCrwgaXaUyCh7TQTaEbKxUoKmGGd2TOov+SAu
+ yrC4xtUw6BmUn+zaI4rbLZWla69uTf7C8h/rF9HAv4MoO2e1gp8FHd54ia1olASqIb8UC7aMTlg
+ kXHtq7f6NZnmG9g==
+X-Developer-Key: i=bryan.odonoghue@linaro.org; a=openpgp;
+ fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
-The Eliza EVK board connects PCIe1 (8GT/s x2) to a Toshiba TC9563
-PCIe switch. Enable PCIe1 and its QMP PHY nodes.
+This driver is very critical to several SoCs being merged and CPHY being
+added to Qualcomm SoCs.
 
-TC9563 uses I2C (at address 0x77 on I2C4) for its management interface.
+It would be very beneficial therefore to get this merged in this cycle. A
+lot of other enablement code depends on it.
 
-Override the base iommu-map with the expanded set covering all the
-switch's downstream ports (0x1400-0x1408 SID range).
+Vinod, Kishon is it possible to still merge this in 7.2 - just before -rc6
+so still feasible I think.
 
-The TC9563 RESX# and PERST# are OR-ed internally to assert reset on the
-switch. Use TC9563 RESX# pin via a TLMM GPIO and skip wiring PERST#
-from the PCIe controller.
+Changes in v15:
+- Defines combo-mode as 2+1 or 1+1. - Vlad
+- Updates data-lanes with more descriptive text. - Vlad
+- Makes endpoint regex less broad - Vlad
+- Adds Vlad's suggested-by - bod
+- bus-type kept required can be relaxed later
+  defaulting now is ABI - Vlad, bod
+- Changes include-order in example - Vlad
+- Link to v14: https://patch.msgid.link/20260727-x1e-csi2-phy-v14-0-27d1bf477593@linaro.org
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Reviewed-by: Manivannan Sadhasivam <mani@kernel.org>
-Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Changes in v14:
+
+Discussed outstanding review comment resolution with Neil and Vlad.
+Use media-graph not phys = <> to find nodes in dt. Small impact on this
+series a new helper added where it is used in camss series.
+
+- Drops phy-cells.
+- bus-type used to derive mode instead.
+- Includes relevant video-interfaces.h where necessary
+- set_mode - used to validate csiphy and camss agree on bus-mode.
+- Reverting to of_phy_simple_xlate instead of custom xlate.
+- Minor schema change - dropped Krzysztof's RB.
+
+- Link to v13: https://patch.msgid.link/20260720-x1e-csi2-phy-v13-0-160c31958863@linaro.org
+
+Changes in v13:
+- Fixed two sashiko "high" flagged items. Hopefully for the last time.
+- Added PM_OPP to depends - Sashiko
+- Link to v12: https://patch.msgid.link/20260719-x1e-csi2-phy-v12-0-cc7311326d1b@linaro.org
+
+Changes in v12:
+- Fixes indexing for data-lanes = <0 1 2 4> which is out of range - Sashiko
+- The rest of Sashiko's review rebutted on list - bod
+- Link to v11: https://patch.msgid.link/20260719-x1e-csi2-phy-v11-0-9d0a1ed0632d@linaro.org
+
+Changes in v11:
+- Adds RB - Krzysztof
+- Fixes div_u64 to div64_u64 - Sashiko
+- Fixes pos * 2 reg offset - Sashiko
+- Fixes devm_pm_runtime_enable. Missed in v10 - Frank
+
+- Link to v10: https://patch.msgid.link/20260718-x1e-csi2-phy-v10-0-5720a7888953@linaro.org
+
+Changes in v10:
+- Rewords commit log of yaml schema to read more organically - Krzysztof
+- title: Qualcomm X1E80100 SoC CSI2 PHY - Krzysztof
+- opp-table: object - Krzysztof
+- Example opp-table in PHY node - Krzysztof
+- port@1 uses stock graph.yaml - Krzysztof
+- Dropped redundant remote-endpoint declaration - Krzysztof
+- vdda-0p9 - SoC pins are vdda-0p9 rail is l2c_0p8. Named as with pin - Vlad, Konrad
+- Retaining #phy-cells = 1.
+  Rob gave a steer to have the consumer configure this via DT. Not the way
+  Vlad suggests but I'm sticking to Rob's guidance for now - Rob/Vlad.
+- data-lanes - retained as per CAMSS existing.
+  Nihal suggested, I agreed and Loic added his assent too. Vlad disagrees
+  with this. I accept Nihal's suggestion though we should remain
+  consistent. - Nihal, Loic, Vlad.
+
+- pd_data = {} - Sashiko, Wengmeng
+- lanes_enable() failure unwinds - Sashiko
+- power_off and error paths drop OPP rate before performance state - Sashiko
+- probe returns -ENODEV when pd_list is NULL with ret == 0 - Sashiko
+- Move to devm_clk_bulk_get_all(), timer clock taken from the bulk,
+  clk_names indirection removed from soc_cfg - Frank
+- Drop static CSI_COMMON_CTRL5 (0x1014) table row - Nihal
+
+- Link to v9: https://patch.msgid.link/20260708-x1e-csi2-phy-v9-0-0210b90c04cf@linaro.org
+
+Changes in v9:
+
+Key advantages of implementing this logic as drivers/phy:
+
+  a) Per-PHY power rails become declarable and enforceable on a per-PHY
+     basis.
+  b) With future adaptations of CAMSS routing the PHY output to something
+     other than the CSI Decoders becomes possible.
+  c) Standard framework contract. phy_configure(mipi_dphy opts) / power_on / of_xlate.
+  d) Introduction of CPHY in this driver will elaborate CPHY for Linux in
+     general as there is currently no mipi_cphy_opts structure.
+
+- TITAN_TOP_GDSC retained. Further elaboration in below link. - Vlad
+  Link: https://lore.kernel.org/all/d5407ab1-1af7-4678-ae67-5cf30ce8fa4b@kernel.org/
+- Consumer selects PHY mode - Rob Herring
+  Link: https://lore.kernel.org/linux-media/20250710230846.GA44483-robh@kernel.org/
+- Incorporates two comments by Krzysztof I missed previously - krzk
+- Changes 0p9 rail name to 0p8 - Konrad, Sashiko
+- Uses port@0 and port@1 to denote input/output - Vladimir
+- Label phy@ instead of csiphy@ in example - Sashiko
+- Drops additional entries in example opp one is enough - bod
+- return 0 on timer_period_ps < 6. - Sashiko
+- Use power-domain names and a "scaled" bool to flag if
+  a power-domain needs to be scaled or not. Allowing the code to
+  attached to all PDs, GDSC and RPMPD alike but only scale the
+  RPMPD. - Sashiko
+- Fixes error cleanup flagged by Sashiko.
+- Checks args->args_count. Sashiko
+- Performs checks on pd_list == NULL. Sashiko
+- Makes opp-table required. Sashiko
+- Uses const "core" and "timer" when getting clocks. - Loic
+- Adds AHB clock - Vijay
+- Revert v7 lane-enable change, BIT(pos * 2) is correct: data-lanes
+  are logical indices, CSI_COMMON_CTRL5 is a physical bitmap - Nihal
+- Adds a comment to explain clock-lane - Nihal
+- Link to v8: https://patch.msgid.link/20260523-x1e-csi2-phy-v8-0-a85668459521@linaro.org
+
+Changes in v8:
+- Fixes two dt verification splats I missed by passing the wrong yaml file
+  to my checking script :( - Rob's bot
+- Fixes the polarity offset error - thanks Sashiko.
+- CONFIG_PM implies CONFIG_GENERIC_PM_DOMAINS no change - Sashiko, Bryan
+- Implemented suggested unwinding by Sashiko
+- Leaving the flagged settle_cnt alone. Requires invalid DT settings and in
+  addition the result is just a long settle count. Not real bug - Sashiko
+- Link to v7: https://patch.msgid.link/20260522-x1e-csi2-phy-v7-0-79cb1280fad6@linaro.org
+
+Changes in v7:
+- Made CONFIG_PM a dependency. Sashiko commented on the pd_list being NULL
+  and suggested I check the pointer but, we need to ramp the rails when
+  switching clock rate so we need CONFIG_PM full stop. - Sashiko.ai, Bryan
+- Added unwind operation for performance state error path - Sashiko
+- Made clock-lanes genuinely optional for the supported use-case. - Sashiko
+- Fixed the enable of lanes. Thus far we have had forever it seems
+  val |= BIT(lane.pos * 2) which I've never looked at much because it
+  has always worked. But looking at how to switch on polarities I realised
+  the relevant register is a linear bitmask without gaps so the correct
+  method is `val |= BIT(lane.pos)`.
+  This needs an update in the legacy PHY too in another series - Bryan
+- I opted not to do any of the "but if DT send junk into your driver" fixes
+  from Sashiko since TBH I think the code would be Spaghetti afterwards.
+  We trust DT and if DT is wrong we fix it, we don't try to graph its
+  relative (in)sanity.
+- Fixed my example in the yaml. Sashiko
+- Link to v6: https://patch.msgid.link/20260521-x1e-csi2-phy-v6-0-9d73d9bd7d20@linaro.org
+
+Changes in v6:
+- Taking feedback from lively debate added ports and
+  endpoints to the PHY - Neil, Vlad
+- Detection of split mode by way of which ports are declared.
+  port@0 is always a sensor input.
+  port@1 is optional and if present implies split-mode
+  port@2 is always the output. - Dmitry, Neil, Vlad.
+- Split mode is left as -ENOTSUPP unless/until someone with the appropriate
+  hardware can take on responsibility to drive to completion.
+- Extending phy_config_opts dropped.
+  I think this is a worthwhile extension but this series no longer depends
+  on it so dropped. - Bryan
+- MX/MXC.
+  Two OPP tables one for CSIPHY0/1/2 scaling MXC one for CSIPHY4 keeping
+  MXA at LOWSVS_D1 - to be implemented in DT not here. Taniya, Konrad, Bryan
+- Changed MAINTAINERS from Supported to Maintained.
+  Hobby time for me right now. - Bryan
+- Link to v5: https://lore.kernel.org/r/20260326-x1e-csi2-phy-v5-0-0c0fc7f5c01b@linaro.org
+
+v5:
+- Adds support to apply passed parameters for clock/data position/polarity - Neil
+- Drops GEN1/GEN2 differentiation this can be reconstituted if GEN1 ever
+  gets supported in this driver - Dmitry
+- Drops camnoc_axi, cpas_ahb - Konrad
+- Renames csiphy->core csiphy_timer->timer - Konrad
+- Renames rail from 0p8 to 0p9 schematics say  VDD_A_CSI_n_0P9 - Konrad
+- TITAN_TOP_GDSC dropped - Konrad
+- Passes PHY_QCOM_CSI2_MODE_{DPHY|CPHY|SPLIT_DPHY} with the controller
+  selecting the mode. Only DPHY mode is supported but the method to pass
+  CPHY or split-mode DPHY configuration is there.
+  Since split-mode is a Qualcomm specific mode the PHY modes are defined in
+  our binding instead of adding a new type to include/linux/phy/phy.h - bod
+- Depends-on: https://lore.kernel.org/r/20260325-dphy-params-extension-v1-0-c6df5599284a@linaro.org
+- Link to v4: https://lore.kernel.org/r/20260315-x1e-csi2-phy-v4-0-90c09203888d@linaro.org
+
+v4:
+- MMCX, MCX and MX/MXA power-domains added - Dmitry, Vijay, Konrad
+- power-domain-names added as required - bod
+- opp-tables amended to capture RPMHPD deps - Dmitry, Vijay
+- Switched to dev_pm_opp_set_rate, dev_pm_domain_attach_by_name etc
+  dropped inherited CAMSS code - Dmitry
+- Amended parameters structure to specify power-domain name list - bod
+- Removed dead defines - Dmitry
+- Noted in CSIPHY commit log intention to rework patterns of
+  PHY lane configs into loops/defines/bit-fields later - Dmitry, bod
+- Lowercase hex throughout - Dmitry
+- The yaml and code in this driver doesn't care if the node is a
+  sibling or a sub-node of CAMSS confirmed to work both ways - Dmitry, bod
+- Link to v3: https://lore.kernel.org/r/20260226-x1e-csi2-phy-v3-0-11e608759410@linaro.org
+
+v3:
+
+- Resending this to make clear this submission is additive to x1e/Hamoa
+  The existing bindings and code will continue to work 
+  Bindings are added only, nothing is subtracted from existing ABI.
+- Link to v2: https://lore.kernel.org/r/20260225-x1e-csi2-phy-v2-0-7756edb67ea9@linaro.org
+
+v2:
+
+In this updated version
+
+- Added operating-point support
+  The csiphy clock sets the OPP prior to setting the rate
+  for csiphy and csiphy_timer - Konrad
+
+- Combo mode
+  Combo mode in CAMSS yaml has been added. Right now
+  no code has been changed in the PHY driver to support it as
+  I don't have hardware to test. In principle though it can
+  be supported. - Vladimir
+
+- CSIPHY init sequences
+  I left these as their "magic number formats". With my diminished
+  status as a non-qcom VPN person - I can no longer see what the bits
+  map to. Moreover this is the situation any non-VPN community member
+  will be in when submitting CSIPHY sequences derived from downstream.
+
+  I think it is perfectly reasonable to take public CSIPHY init sequences
+  as magic numbers. If someone with bit-level access wants to enumerate
+  the bits that's fine but, it shouldn't gate in the interim. - Konrad/bod
+
+- Sensor endpoints
+  I've stuck to the format used by every other CSIPHY in upstream.
+  Sensor endpoints hit the CAMSS/CSID endpoint not a endpoint in the PHY.
+  Given the proposed changes to CAMSS though to support "combo mode" I
+  think this should achieve the same outcome - multiple sensors on the one
+  PHY without introducing endpoints into the PHY that no other CSIPHY in
+  upstream currently has.
+
+- Bitmask of enabled lanes
+  Work needs to be done in the v4l2 layer to really support this.
+  I propose making a separate series dedicated to non-linear bit
+  interpretation after merging this so as to contain the scope of the
+  series to something more bite (byte haha) sized. - Konrad/bod
+
+- Link to v1: https://lore.kernel.org/r/20250710-x1e-csi2-phy-v1-0-74acbb5b162b@linaro.org
+
+v1:
+This short series adds a CSI2 MIPI PHY driver, initially supporting D-PHY
+mode. The core logic and init sequences come directly from CAMSS and are
+working on at least five separate x1e devices.
+
+The rationale to instantiate CSI2 PHYs as standalone devices instead of as
+sub-nodes of CAMSS is as follows.
+
+1. Precedence
+   CAMSS has a dedicated I2C bus called CCI Camera Control Interface.
+   We model this controller as its own separate device in devicetree.
+   This makes sense and CCI/I2C is a well defined bus type already modelled
+   in Linux.
+
+   MIPI CSI2 PHY devices similarly fit into a well defined separate
+   bus/device structure.
+
+   Contrast to another CAMSS component such as VFE, CSID or TPG these
+   components only interact with other CAMSS inputs/outputs unlike CSIPHY
+   which interacts with non-SoC components.
+
+2. Hardware pinouts and rails
+   The CSI2 PHY has its own data/clock lanes out from the SoC and indeed
+   has its own incoming power-rails.
+
+3. Other devicetree schemas
+   There are several examples throughout the kernel of CSI PHYs modeled as
+   standalone devices which one assumes follows the same reasoning as given
+   above.
+
+I've been working on this on-and-off since the end of April:
+Link: https://lore.kernel.org/linux-media/c5cf0155-f839-4db9-b865-d39b56bb1e0a@linaro.org
+
+There is another proposal to have the PHYs be subdevices of CAMSS but, I
+believe we should go with a "full fat" PHY to match best practices in
+drivers/phy/qualcomm/*.
+
+Using the standard PHY API and the parameter passing that goes with it
+allows us to move away from custom interfaces in CAMSS and to conform more
+clearly to established PHY paradigms such as the QMP combo PHY.
+
+Looking at existing compat strings I settled on
+"qcom,x1e80100-mipi-csi2-combo-phy" deliberately omitting reference to the
+fact the PHY is built on a four nano-meter process node, which seems to
+match recent submissions to QMP PHY.
+
+My first pass at this driver included support for the old two phase
+devices:
+
+Link: https://git.codelinaro.org/bryan.odonoghue/kernel/-/commit/a504c28d109296c93470340cfe7281231f573bcb#b6e59ed7db94c9da22e492bb03fcda6a4300983c
+
+I realised that the device tree schema changes required to support a
+comprehensive conversion of all CAMSS to this driver would be an
+almost certainly be unacceptable ABI break or at the very least an enormous
+amount of work and verification so I instead aimed to support just one new
+SoC in the submission.
+
+I've retained the callback indirections give us scope to add in another type of
+future PHY including potentially adding in the 2PH later on.
+
+This driver is tested and working on x1e/Hamoa and has been tested as not
+breaking sc8280xp/Makena and sm8250/Kona.
+
+Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 ---
- arch/arm64/boot/dts/qcom/eliza-evk.dtsi | 105 ++++++++++++++++++++++++++++++++
- 1 file changed, 105 insertions(+)
+Bryan O'Donoghue (2):
+      dt-bindings: phy: qcom: Add CSI2 C-PHY/DPHY schema
+      phy: qcom-mipi-csi2: Add a CSI2 MIPI DPHY driver
 
-diff --git a/arch/arm64/boot/dts/qcom/eliza-evk.dtsi b/arch/arm64/boot/dts/qcom/eliza-evk.dtsi
-index b35fffb50976..ccd6f0113513 100644
---- a/arch/arm64/boot/dts/qcom/eliza-evk.dtsi
-+++ b/arch/arm64/boot/dts/qcom/eliza-evk.dtsi
-@@ -12,6 +12,26 @@ chosen {
- 		stdout-path = "serial0:115200n8";
- 	};
- 
-+	vreg_0p9: regulator-0v9 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "VREG_0P9";
-+
-+		regulator-min-microvolt = <900000>;
-+		regulator-max-microvolt = <900000>;
-+		regulator-always-on;
-+		regulator-boot-on;
-+	};
-+
-+	vreg_1p8: regulator-1v8 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "VREG_1P8";
-+
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+		regulator-always-on;
-+		regulator-boot-on;
-+	};
-+
- 	vreg_pcie_m_3p3: regulator-3p3 {
- 		compatible = "regulator-fixed";
- 
-@@ -99,6 +119,91 @@ pcieport0_ep: endpoint {
- 	};
- };
- 
-+&pcie1 {
-+	iommu-map = <0x0 &apps_smmu 0x1400 0x0 0x1>,
-+		    <0x100 &apps_smmu 0x1401 0x0 0x1>,
-+		    <0x208 &apps_smmu 0x1402 0x0 0x1>,
-+		    <0x210 &apps_smmu 0x1403 0x0 0x1>,
-+		    <0x218 &apps_smmu 0x1404 0x0 0x1>,
-+		    <0x300 &apps_smmu 0x1405 0x0 0x1>,
-+		    <0x400 &apps_smmu 0x1406 0x0 0x1>,
-+		    <0x500 &apps_smmu 0x1407 0x0 0x1>,
-+		    <0x501 &apps_smmu 0x1408 0x0 0x1>;
-+
-+	status = "okay";
-+};
-+
-+&pcie1_phy {
-+	vdda-phy-supply = <&vreg_l1k>;
-+	vdda-pll-supply = <&vreg_l3k>;
-+
-+	status = "okay";
-+};
-+
-+&pcie1_port0 {
-+	wake-gpios = <&tlmm 53 GPIO_ACTIVE_LOW>;
-+	/* Same GPIO is used for both PERST# and resx-gpio */
-+
-+	tc9563: pcie@0,0 {
-+		compatible = "pci1179,0623";
-+		reg = <0x10000 0x0 0x0 0x0 0x0>;
-+		#address-cells = <3>;
-+		#size-cells = <2>;
-+
-+		device_type = "pci";
-+		ranges;
-+		bus-range = <0x2 0xff>;
-+
-+		vddc-supply = <&vreg_0p9>;
-+		vdd18-supply = <&vreg_1p8>;
-+		vdd09-supply = <&vreg_0p9>;
-+		vddio1-supply = <&vreg_1p8>;
-+		vddio2-supply = <&vreg_1p8>;
-+		vddio18-supply = <&vreg_1p8>;
-+
-+		i2c-parent = <&i2c4 0x77>;
-+
-+		resx-gpios = <&tlmm 54 GPIO_ACTIVE_LOW>;
-+
-+		pcie@1,0 {
-+			reg = <0x20800 0x0 0x0 0x0 0x0>;
-+			#address-cells = <3>;
-+			#size-cells = <2>;
-+
-+			device_type = "pci";
-+			ranges;
-+			bus-range = <0x3 0xff>;
-+		};
-+
-+		pcie@2,0 {
-+			reg = <0x21000 0x0 0x0 0x0 0x0>;
-+			#address-cells = <3>;
-+			#size-cells = <2>;
-+
-+			device_type = "pci";
-+			ranges;
-+			bus-range = <0x4 0xff>;
-+		};
-+
-+		pcie@3,0 {
-+			reg = <0x21800 0x0 0x0 0x0 0x0>;
-+			#address-cells = <3>;
-+			#size-cells = <2>;
-+			device_type = "pci";
-+			ranges;
-+			bus-range = <0x5 0xff>;
-+
-+			ethernet@0,0 {
-+				reg = <0x50000 0x0 0x0 0x0 0x0>;
-+			};
-+
-+			ethernet@0,1 {
-+				reg = <0x50100 0x0 0x0 0x0 0x0>;
-+			};
-+		};
-+	};
-+};
-+
- &uart13 {
- 	compatible = "qcom,geni-debug-uart";
- 
+ .../bindings/phy/qcom,x1e80100-csi2-phy.yaml       | 202 +++++++++
+ MAINTAINERS                                        |  10 +
+ drivers/phy/qualcomm/Kconfig                       |  15 +
+ drivers/phy/qualcomm/Makefile                      |   5 +
+ drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c | 385 +++++++++++++++++
+ drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c     | 460 +++++++++++++++++++++
+ drivers/phy/qualcomm/phy-qcom-mipi-csi2.h          |  97 +++++
+ 7 files changed, 1174 insertions(+)
+---
+base-commit: 8dac27bfa2f994ecb11f01a63641527d17d48fc1
+change-id: 20250710-x1e-csi2-phy-f6434b651d3a
 
--- 
-2.34.1
+Best regards,
+--  
+Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 
