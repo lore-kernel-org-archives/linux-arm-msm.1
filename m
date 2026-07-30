@@ -1,189 +1,200 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B83C43C7A6
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 14:56:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F013B36D50D
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 15:02:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785423390; cv=none; b=MuFJD7IFP5Qsg+h8M4fchgtvl7wfXHvsWsVv9fY7hpXY/n4ARV3EenhVK7CzZ8+nVzwueHMJpVoWq6yaa18yMhEGukSWiogHiFiucub1O+bX7FpuMptsMXqXajwwHVW71KtkpwOwkK6RuirS9TOJxYN2yEO5ymI/HtbEFhK6WI4=
+	t=1785423760; cv=none; b=GzBAukflUI7gVaCiONz0F3KwE4C65unWXoIJKwoeX9Ihhh1LQ1yXr4Mbt9XQBf5n8vfrOBHDs3ooz2YoKhhdjBLnrZSvjv59fHDbt75eyporP1IZlcuc2nXjITlFBENZT5DRCYfkL3uRVMmbr9g4aNhvuWQubFPSyUiUlfHyqyM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785423390; c=relaxed/simple;
-	bh=i15v7NfA0G8LeL3ceoHb0AHZBBYXSLVi9w5fDNayDw8=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=ClM0AhoPcXWEVY7ovrsBg1EjWQ9GGjHq/V7m/eXa8i7n+EfuMy0CrPxPFTVTTCK/mTraGya1V10Esv61UIR0mECIAgwYYdZz5IzmWJKXdp9EQnOwbeJumXgXYXOF4YxcNqldmlONR4bLzvJWqXto8azwqxUcJzmblA5mCUWPS04=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VVr/+qXi; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KQQHAngl; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785423760; c=relaxed/simple;
+	bh=lnPmujkoSvOOLGMqjbquxyL4hLjA/ramPgRYAIoT/Kg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=aqhFuzoYXKWh1ttZ53hXaOIudHm3VH6SHunCxe2iDwJmlD2AzjNMJue6ktHC/oqywqJyidQEftYpc5k9CQzhTbJFRfzncHRZJx6a+NZ7P8amIZnu3uTJoZrwlPFJgBsXSif3nO1HfPgVhm0SwZJ0SivJc3HESxtO5rKTurOQuhk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hlpkFiHa; arc=none smtp.client-ip=209.85.214.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VVr/+qXi";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KQQHAngl"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66UDeeDP1229047
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 14:56:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=YVZUhyoBEN4fRFwvQshCw5
-	QZvFSf3IlNlL4R2vxJ3Sk=; b=VVr/+qXi7KTq51V4HBUpaEL4CWldZf/LLWdVuG
-	FQMVlp2wPkQ74QnBlg+Y89NZ4oyiOOgHCM399XBcaYvd87qPSZTpccsnPeVtwl5R
-	QrKzYOqPFOIioYDCg/mjZeh8P+EtHKx7nqsnAbhFpQz+kAbB2lgni5hMcVY3bPgv
-	GQjBitiEENAh5Mi+rWL4E9ih6Onf7agkXoR0fkr7v9RGnsXVjbAfmvs1Bb/HXoFh
-	+10ex3pRrQcyAoZZQFmdjMEqwmbE/FfJglGJZfg0gtQW8oR2d3PZEPTi4HnplzJH
-	dOCCdkMksE9vjM0KeEquqVAy1LxODgplBkat9PlVr66gqVGg==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr7q3gc0t-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 14:56:27 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38e8e864ef0so182360a91.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 07:56:27 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hlpkFiHa"
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2cc73e322dbso24629455ad.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 08:02:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785423387; x=1786028187; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=YVZUhyoBEN4fRFwvQshCw5QZvFSf3IlNlL4R2vxJ3Sk=;
-        b=KQQHAnglk0kN8qc9gyR4sf8nQIqIQyWsJ6TezA6gW6RLEp2leIKlOeIPmxDm4pzuFD
-         y7unGIPNmztQu9pI9x53RyZ3NLoIfSoFs+d498HMT1R0EwRz/IY79xqftRYV9Cz8muZ/
-         j/Ewr4TUbn8NQNsc18giNGwfqPCW3AXZR01cB4i1eid9VGB7YV1JATxBq896IfPPvcAJ
-         x74/9LJXb2wZRqlfEyCIs40goLKGycOaHqZqn+JvSyD8mmUMwGrNMvg3X8FbVmqBPg5z
-         t8kQULWqh38u+gPAel4yjD9z+57MS4g/Cw6a+LiI2G4nC/zmxa4kafpA+JMcxM4qyRaf
-         B5gg==
+        d=gmail.com; s=20251104; t=1785423758; x=1786028558; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=tLEzUW8o0U9S9X6t6tu33UKtz4CdGONFnEDfRlrAs9U=;
+        b=hlpkFiHaWXAbF5gmE61wop6HWRAMKi/SOO1f4458Z81MLYAvDSOh2ONOOIPYcpeH60
+         2m/9sr5wp0O/zXG7IdTYgEi50mysifIrw9ztcWO3JU2UB2BCyatNBIHRKnCINrRODNYk
+         0yKmDjw+CC0njxwUMn2SR5GrqbFU8Xi7FKbEQ7TGmNwC1NsJ7Rf84YiOLwSyjJY8s8Hd
+         EzL/xD5W9MoxtE/5MNVflbqKWpYCh/4gvcs0O5Qb9jtgBanTpseB8xSYgROkzjsBPkg+
+         iBSjD1i1bK7nXzbeCs+YR7mTFLpiPQbjPkYsRR6ygQbtCvd6mypGmzCuEsMuXHVsQ507
+         pbdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785423387; x=1786028187;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20251104; t=1785423758; x=1786028558;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=YVZUhyoBEN4fRFwvQshCw5QZvFSf3IlNlL4R2vxJ3Sk=;
-        b=eptrb9G5j0SVOK8PEWUNCQypKV7HwZzUxbXxVvhsGuFjdN7bEeDX4IlIiV0lxPfg6Y
-         wntPxLCe8mORbyJTD6NhyEahPbyZoE4+WRz0fNynMnlpxZC/LZKrif0NYPm5u7XzGU10
-         jE7dKlTQgzBTuV6PPNtQK/oFHJCPGEHLZIIdcDjwacc23SZkrLAgTE1ZJoF3pAk8h/5Q
-         AxQ1arSb9T3sLejynzBsmz5t/KX32q7A+Ien5UuIlCTcKAynufB1ZQS7wB0i6RUlgJzi
-         DLrISk7LFroQWvHuRS8KVUfK7ODAfe39OokxcH3+TxBNnPZYB3GoilnIui60Dh2RJB86
-         2MDA==
-X-Forwarded-Encrypted: i=1; AHgh+Rp8NG4R9gb4pEvvGTaueve9XS3wAx8DYJ3XlnMibiGJCBslRLXYCmdOVqc34tIaYrcaR2sgjE2ceQzfb+2M@vger.kernel.org
-X-Gm-Message-State: AOJu0YwKdpDSPE7W5iafKI12xSxjWUHkUaTicosoG9KT0Pc70PdVJg39
-	bfeOtWaoavikzhov0MNbim7r4fEgGkemXln3KKj5ZT90HCKQdgwwdeL7al71MXrkZEj6SKrj5Tj
-	VfAxWRuCm4AfxG7msypIGMC3xGxJyUDGMfhifgQ1dKrTYUnP3gz0W+5NR2lEoslOL1MiXOmzM4g
-	zw
-X-Gm-Gg: AR+sD120ducQno3raa+7/LIieq8deU0K3hJkiPsRsQApwJP19ldvp4gSmX0A3kTt/7L
-	mhWOmcKJ5Kcgg87VHgP+VwamVQcDVo96HSstSf09zDRsvYYGXSDiyIMfxR0YBFJ0GFqkewz+CSW
-	evWu8tzkOyIlXRM6OOlbT83WkcbwRIthun9AzV9gDhJuGs9XX45xHeRu1YfgwLYskvMYwId/l7F
-	FeUJHlmH7yhdkz7scStHTgdIUQhoXbg7ZQse4I41yU3CgOMkWv3ApT28hkaeAvjnKBsDdHl6hs3
-	5+XK80aY9zVgKf4rmWmgmb7ptzr0z7s6EMLCxVctoESARV1f+mwj0G5sLXFnQa4MI0PcYekUezv
-	JFqGkGcuUSiI5URYzVeCrkVH5o0DNsmQ=
-X-Received: by 2002:a17:90b:3c8d:b0:38e:9e9d:9209 with SMTP id 98e67ed59e1d1-38fa7e3bcc2mr397052a91.17.1785423386913;
-        Thu, 30 Jul 2026 07:56:26 -0700 (PDT)
-X-Received: by 2002:a17:90b:3c8d:b0:38e:9e9d:9209 with SMTP id 98e67ed59e1d1-38fa7e3bcc2mr395451a91.17.1785423342801;
-        Thu, 30 Jul 2026 07:55:42 -0700 (PDT)
-Received: from hu-sachinku-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38f9b7ace53sm1236775a91.17.2026.07.30.07.55.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Jul 2026 07:55:42 -0700 (PDT)
-From: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
-Subject: [PATCH 0/2] media: iris: add vbv delay support
-Date: Thu, 30 Jul 2026 20:25:25 +0530
-Message-Id: <20260730-iris_vbv_delay-v1-0-7b5a7953bcdf@oss.qualcomm.com>
+        bh=tLEzUW8o0U9S9X6t6tu33UKtz4CdGONFnEDfRlrAs9U=;
+        b=FZnNCYX3rXaquQJIUG50wWUKtY1xHDcQLsSMDAYxT5c3iN1wy5rW6yk2zjd5ZnbOmm
+         ysneiVA3O+/ANXZfipdyKrdOfGcRTbitkAdTJjsC8cNszjF85toHQXP0drqCTlw94ZI5
+         +h4JbryOiY2FfG0Grf3fOvDjso5m0RY3b7WINJBSywn2Odae43TV0dP1L3DvoCCucLj8
+         opyXPM95npEJHF9VLiwnmm9wDeomwt+5rW1cd4CD9hHGrdKXg3NjvKZtTYZrVZidUnHM
+         yto71GGRrS6TRc0G8U6loongzI5yT+zWKtbsbphACRlIyyP2+wji+dEYRoFlnwCEJKAx
+         qygg==
+X-Forwarded-Encrypted: i=1; AHgh+RpdDCegFpG+gGyn+c0E213XQC8K2Wdf3NvNqmevcD5AOdA1ber75HBCDQeVbKWNRyoqwdTxnIoQ2DhzbwJ2@vger.kernel.org
+X-Gm-Message-State: AOJu0YxKalhdw9T8N492Y94/wS30hfJUcDUk1kK4uj2AZp3MIK69QPcq
+	jtbgdaAZnCn5B+iU05Q4ld3sQTEOrFOEl1GG8jGVxXPWuAiFKLNZmS5y
+X-Gm-Gg: AR+sD11WM3p1WNK/5QmoBNs8YyKhudTuIdyis4jjwkfxZBss1GBcUNALky486pau35j
+	wXRrwMWrqm7pPFYShakzYz0469wvL6+N5/U/I3kykI1AMTPFKD4rEP9lHfXrLmDv+yHU1Z358Vx
+	OCGjFBkQR78VpLWn4GpDgEPyuJoXdLJGCEPw/DCWbs4+7XTU1jlPzlKaETXSFqvhbwHwywnmYEv
+	2Zc4MD6bPhhByO4T3u2qGFzCyvFvxUFX+NockCYgrpj7jhIsvJkcADqpI8O7zAyrKnenZ9yJ+ST
+	uTbkTgVNQQuM8Bds0sdDXg3NbY8bwo8GYaJ/ePl5gGFv13ekDefxXhIsakcVTnPS6HQzZVDh4yi
+	QJBasIsDacIynrNtHZ/LycPg6MsEqdqj4mt4vEsl5LFuz3NvgAW3ywaiNFf/4KcRn9JQ9UFX1a9
+	gmGeOv2xukiI7s/QoL8moz8hsUW4db/JhbF/hmEWgoucWmdSlqV8FlFCW3dgQGJ4BHaBbiHoJqP
+	jX67dNO1+YNj6SyEtJOg5R+/I/5sRBzwwheGA==
+X-Received: by 2002:a05:6a20:54a1:b0:3c3:2e2b:29ee with SMTP id adf61e73a8af0-3c900948db6mr2952552637.55.1785423758227;
+        Thu, 30 Jul 2026 08:02:38 -0700 (PDT)
+Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31504d37368sm41415686eec.22.2026.07.30.08.02.36
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 30 Jul 2026 08:02:37 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <19a2b8bd-09ea-4df9-b0ba-f78f60c44848@roeck-us.net>
+Date: Thu, 30 Jul 2026 08:02:35 -0700
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] power: reset: pscrr: add watchdog pretimeout
+ reason tracking
+To: Oleksij Rempel <o.rempel@pengutronix.de>,
+ Matti Vaittinen <mazziesaccount@gmail.com>
+Cc: Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
+ Sebastian Reichel <sre@kernel.org>, Wim Van Sebroeck
+ <wim@linux-watchdog.org>, Benson Leung <bleung@chromium.org>,
+ Tzung-Bi Shih <tzungbi@kernel.org>, Srinivas Kandagatla <srini@kernel.org>,
+ Daniel Lezcano <daniel.lezcano@kernel.org>, linux-pm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-watchdog@vger.kernel.org,
+ linux-arm-msm@vger.org, kernel@pengutronix.de,
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, =?UTF-8?Q?S=C3=B8ren_Andersen?=
+ <san@skov.dk>, Guenter Roeck <groeck@chromium.org>,
+ Ahmad Fatoum <a.fatoum@pengutronix.de>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ avaneesh.dwivedi@oss.qualcomm.com,
+ Umang Chheda <umang.chheda@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org
+References: <20260722-pscrr-reboot-reason-v2-0-495ba3005953@oss.qualcomm.com>
+ <20260722-pscrr-reboot-reason-v2-2-495ba3005953@oss.qualcomm.com>
+ <98e65507-3084-4948-8096-4e2d8d20dc81@gmail.com>
+ <amrgDC0s3rb5Xv4N@pengutronix.de>
+Content-Language: en-US
+From: Guenter Roeck <linux@roeck-us.net>
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ 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
+ np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
+In-Reply-To: <amrgDC0s3rb5Xv4N@pengutronix.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAN1la2oC/x3MQQqAIBBA0avErBNMpaKrRIjlWANhoSCFePek5
- Vv8nyFiIIwwNRkCJop0+YqubWA7jN+Rka0GwUXPB8kZBYo6rUlbPM3LpJJWOCP5qATU6A7o6Pm
- H81LKB5EsBwRgAAAA
-X-Change-ID: 20260730-iris_vbv_delay-343d2fa30842
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785423339; l=2393;
- i=sachin.garg@oss.qualcomm.com; s=20260211; h=from:subject:message-id;
- bh=i15v7NfA0G8LeL3ceoHb0AHZBBYXSLVi9w5fDNayDw8=;
- b=qwwwCqdUu5sUP/qT03eOGkXPKPimJJsfDcs1Y1p1fLBPFEe/dx52w0YRUd5CTyYrxjQOrfWf+
- X+GJzpIxYi4DNmm0D5lkiparjLnnkWYdSq9Q9BYYOOSSLGYQxjnYdBn
-X-Developer-Key: i=sachin.garg@oss.qualcomm.com; a=ed25519;
- pk=KcRhp4CP9cR1V2tg6xSNRnB2STYaU0vVigdUF4Actu0=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDExMyBTYWx0ZWRfXxcJ16OGWkGDK
- QWNzuFPLEgjIgge3IPSNQdQPMcUST+A9jl+xQbCX2/Tb8VBeBVJ66qHfS7YzjTDixcE7eb9xPYc
- 5z6mnUPdhDWn8NnepWsLeBoe9Dl754Vg2RNa3Y+9b1HJGzQaijrl0s2RQ9cVb+7kSjD3KQN69ZC
- TFQ/9pabM2pDTKsQ1SawiiHHZwEMMaKcD+wT3mCUVoXYfaVq7iS6q+5zr9T3LwAHD78kduIBSmo
- XeHQHd1fAH1LwK7EyqixXJk7SqvERy74xgTdRtNhsA3/YidlUcQq6nOmApGYvbepk2oNVr440X3
- aEwjW1jzKuEKo0xhP8ZZJ1ntVl9+BGam/+8d/enYI5duOKvfjH7Lgkrgmvvv4qbTxsKPmknmIpP
- VOVnh5r/OZjyG0u2nAIljLpYmwQ87uU4UqfXZiymh5pzb0DgKSuubO12H5mvyADmhkTXB+356FE
- xHJkhfAGR9Qrc2RgETg==
-X-Proofpoint-GUID: FJIwoKNV1B9L-Kal1JAFMdkTzhlxXyy-
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDExMyBTYWx0ZWRfX1GtgiXNBFIIR
- IeGmDJqwD0IHqhvNZJwi0DPg7vTAM04aVlPAFPLYBzpz354jEf61xQ3s27j7p3FGH6+l8t0lby1
- T0qRtV1RNEAapGAyLsHh4Ahp3LPwSGo=
-X-Proofpoint-ORIG-GUID: FJIwoKNV1B9L-Kal1JAFMdkTzhlxXyy-
-X-Authority-Analysis: v=2.4 cv=WuQb99fv c=1 sm=1 tr=0 ts=6a6b661b cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=aUd6qWveWT22gvq2jjMA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-30_04,2026-07-29_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 impostorscore=0 adultscore=0 spamscore=0
- lowpriorityscore=0 suspectscore=0 malwarescore=0 bulkscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607300113
 
-This series adds VBV_DELAY (V4L2_CID_MPEG_VIDEO_VBV_DELAY) support
-for Qualcomm iris encoder sessions, allowing users to configure the
-initial VBV (Video Buffer Verifier) delay for CBR-encoded streams.
-This is useful for latency-sensitive encoding use cases (e.g.
-low-latency streaming) where the client needs explicit control over
-the encoder's buffering delay.
+On 7/29/26 22:24, Oleksij Rempel wrote:
+> Hi Matti,
+> 
+> On Thu, Jul 30, 2026 at 07:49:41AM +0300, Matti Vaittinen wrote:
+>> On 22/07/2026 18:13, Faruque Ansari wrote:
+>>> Watchdog pretimeout resets are not recorded with a dedicated reset
+>>> reason, causing subsequent boots to report PSCR_UNKNOWN and making it
+>>> difficult to distinguish them from other unexpected resets.
+>>>
+>>> Add PSCR_WATCHDOG_PRETIMEOUT as a dedicated reset reason code and
+>>> prevent the panic notifier from overwriting a watchdog pretimeout
+>>> reason with PSCR_KERNEL_PANIC when the pretimeout governor triggers a
+>>> panic.
+>>>
+>>> Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+>>> ---
+>>>    drivers/power/reset/pscrr.c           | 7 ++++++-
+>>>    include/linux/power/power_on_reason.h | 1 +
+>>>    include/linux/reboot.h                | 1 +
+>>>    kernel/reboot.c                       | 1 +
+>>>    4 files changed, 9 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/drivers/power/reset/pscrr.c b/drivers/power/reset/pscrr.c
+>>> index b5906f127e88..5b107c62fe82 100644
+>>> --- a/drivers/power/reset/pscrr.c
+>>> +++ b/drivers/power/reset/pscrr.c
+>>> @@ -149,7 +149,12 @@ static int pscrr_panic_notifier(struct notifier_block *nb,
+>>>    	if (!backend || !backend->ops || !backend->ops->write_reason)
+>>>    		return NOTIFY_OK;
+>>> -	set_psc_reason(PSCR_KERNEL_PANIC);
+>>> +	/*
+>>> +	 * Do not overwrite a previously recorded watchdog pretimeout reason
+>>> +	 * during panic handling.
+>>> +	 */
+>>> +	if (get_psc_reason() != PSCR_WATCHDOG_PRETIMEOUT)
+>>> +		set_psc_reason(PSCR_KERNEL_PANIC);
+>>
+>> Hi Faruque,
+>>
+>> I like the idea of adding WDG pretimeout resets in pscrr. I am just
+>> wondering what makes WDG reason so special, that it shouldn't be overwritten
+>> while other reasons can be? Can this notifier be called (now or in the
+>> future) so, that there are other reasons getting overwritten? For some
+>> reason I think the PSCRR was designed to be able to store multiple
+>> reasons(?)
+> 
+> It depends on the backed. A simple nvmem cell, would be able to hold
+> only one reason.
+> 
 
-Patch 1 is a prerequisite for patch 2. The PIPE capability (control
-over the number of VPP hardware pipes used for a session) was
-previously only wired up for decoder sessions. Achieving low VBV delay
-values (34-100 ms) requires the encoder to be constrained to a single
-VPP pipe, so patch 1 enables the PIPE capability on the encoder path as
-well, which patch 2 then relies on to force single-pipe operation when
-VBV delay falls in that low-latency range.
+That makes me wonder: Shouldn't the priority be a back-end decision, not a
+front-end decision ?
 
-Patch 2 adds the VBV_DELAY capability: it registers HFI_PROP_VBV_DELAY,
-wires up the V4L2_CID_MPEG_VIDEO_VBV_DELAY control for the gen2
-encoder, and only applies the property when rate control is set to CBR
-since VBV delay is only meaningful for constant-bitrate encoding.
-It adds vbv_delay support for iris HFI Gen2 based targets (qcs8300,
-sm8550, sm8650, sm8750, x1p42100). Support for HFI Gen1 targets will
-be added in a follow-up series.
-
-This series has been verified with GST level testing.
-Command used:
-gst-launch-1.0 -v videotestsrc ! video/x-raw,format=NV12, \
-width=1280,height=720,framerate=30/1 ! v4l2h264enc output-io-mode=4 \
-capture-io-mode=4 extra-controls="controls,video_bitrate_mode=1, \
-initial_delay_for_vbv_control=300;" ! filesink location=/opt/test_enc.h264
-
-Signed-off-by: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
----
-Sachin Kumar Garg (2):
-      media: iris: enable pipe for hfi gen2 encoder
-      media: iris: add support for vbv delay
-
- drivers/media/platform/qcom/iris/iris_ctrls.c      | 47 ++++++++++++++++++++--
- drivers/media/platform/qcom/iris/iris_ctrls.h      |  1 +
- drivers/media/platform/qcom/iris/iris_hfi_gen2.c   | 19 ++++++++-
- .../platform/qcom/iris/iris_hfi_gen2_defines.h     |  1 +
- .../platform/qcom/iris/iris_platform_common.h      |  1 +
- 5 files changed, 65 insertions(+), 4 deletions(-)
----
-base-commit: a52e6f7923c17a672135b485ffd96fbd72f46267
-change-id: 20260730-iris_vbv_delay-343d2fa30842
-
-Best regards,
--- 
-Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
+Guenter
 
