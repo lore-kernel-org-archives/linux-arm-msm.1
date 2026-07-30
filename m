@@ -1,200 +1,314 @@
-Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F013B36D50D
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 15:02:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.170
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AA17341F362
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 15:05:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785423760; cv=none; b=GzBAukflUI7gVaCiONz0F3KwE4C65unWXoIJKwoeX9Ihhh1LQ1yXr4Mbt9XQBf5n8vfrOBHDs3ooz2YoKhhdjBLnrZSvjv59fHDbt75eyporP1IZlcuc2nXjITlFBENZT5DRCYfkL3uRVMmbr9g4aNhvuWQubFPSyUiUlfHyqyM=
+	t=1785423931; cv=none; b=iwad3qQFP5rn4/gdjvFLPqNLpuq5OZOiImL4kVIJMApmCS7peSXFOEeNNAQRXZj7D2rnw+KEIOn+sghPk5gHOyyY2Taiz91Vns8sTNEzCwGoooetYtWR7tSnbe7x5TFgc5FeDxxphNdgYC8I9lUdgNWyr/VhsUCZHvlUfvw4hxo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785423760; c=relaxed/simple;
-	bh=lnPmujkoSvOOLGMqjbquxyL4hLjA/ramPgRYAIoT/Kg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=aqhFuzoYXKWh1ttZ53hXaOIudHm3VH6SHunCxe2iDwJmlD2AzjNMJue6ktHC/oqywqJyidQEftYpc5k9CQzhTbJFRfzncHRZJx6a+NZ7P8amIZnu3uTJoZrwlPFJgBsXSif3nO1HfPgVhm0SwZJ0SivJc3HESxtO5rKTurOQuhk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hlpkFiHa; arc=none smtp.client-ip=209.85.214.170
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1785423931; c=relaxed/simple;
+	bh=ix+RjGMTFu/RsD1GKAUl8ke3Cvt8fbFhsPIgvsxo5rg=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=kEtpoz8W7f9y/LY/ENJi2LkRyQ4F30qDDUe+C8qBEfVqoEZRotHNk0Tv9GBC/Impd0J92538FiQjQqcgu41iOrgZ8pqUBTc3m5BBSJkfqsmGmbIjNr49IAxGoiV8mX5ctmp1C4XsoKYcG91Tj0imXt9sTESqpVSs4XkDykGEYmk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TWMKhKNb; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=he5FCYFG; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hlpkFiHa"
-Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2cc73e322dbso24629455ad.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 08:02:38 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TWMKhKNb";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="he5FCYFG"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66UEdQJX1110208
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 15:05:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=HmVjUb4JTfmUvkHsT8y3djVv3OXH8nRRMGe
+	kIVJn1wo=; b=TWMKhKNb6HapA0mQnqxM8UuNlKBWkQZ66xInyzD8u1/vzhOpIIx
+	3uEux8H+kH5YuBmKEl1cDkRiyoSPT+H6C/EuTVsJlucWWUri6Uo+v/6hUmFLs81l
+	ggT90SMXXr40CvptNaDl6oZJ7mYUAauyz1/E5ZDqOWNesWDYDlnzGo3kB2lmwHKG
+	aJ305RmLeJjbhRXBfEHUN+hXvJEPJ664iUfVULBFA0cJAxPLfB1NQDGDWxOi40lO
+	XP5iicITj9Qc3IspGERjFYBb55VZg11Xm8EqXyI5H+WHcfiuK8Ax91Gjf6IAOobU
+	VR3UxZCie4kuAgQzE2PAamxt1Ir0cSeuiuA==
+Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr8jmr4tx-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 15:05:28 +0000 (GMT)
+Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-75116a48926so1978637137.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 08:05:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785423758; x=1786028558; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=tLEzUW8o0U9S9X6t6tu33UKtz4CdGONFnEDfRlrAs9U=;
-        b=hlpkFiHaWXAbF5gmE61wop6HWRAMKi/SOO1f4458Z81MLYAvDSOh2ONOOIPYcpeH60
-         2m/9sr5wp0O/zXG7IdTYgEi50mysifIrw9ztcWO3JU2UB2BCyatNBIHRKnCINrRODNYk
-         0yKmDjw+CC0njxwUMn2SR5GrqbFU8Xi7FKbEQ7TGmNwC1NsJ7Rf84YiOLwSyjJY8s8Hd
-         EzL/xD5W9MoxtE/5MNVflbqKWpYCh/4gvcs0O5Qb9jtgBanTpseB8xSYgROkzjsBPkg+
-         iBSjD1i1bK7nXzbeCs+YR7mTFLpiPQbjPkYsRR6ygQbtCvd6mypGmzCuEsMuXHVsQ507
-         pbdw==
+        d=oss.qualcomm.com; s=google; t=1785423927; x=1786028727; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=HmVjUb4JTfmUvkHsT8y3djVv3OXH8nRRMGekIVJn1wo=;
+        b=he5FCYFG2hiQ1s+DKbygKwBvEnjGyukNvC7iZKIl7Lim4Sv0nQaV/VWSFnnClnODrs
+         6YDLOwayk3xX/reDIdOFntLNkRnLXjlauOuaVOak70aI4ytfBeNAu1w2MJYL9kylqEll
+         9WiPN/OlqcGTExV49YqZWDzfGmzzdH/MDmMbvsO25PGkaDAXDFCNWgXHsCmQEwPTVPc9
+         wocMyIPt8VHcja4YISeEWfd+q6qwfSCFFouCe7nhqhevymnLFr6g2byTQ/SAON2I2lxb
+         2U8B3NEFc5m6CDCg/vUP3W/7ugarCJiq3RG87wYYJzmOxqTAqbwXvKKXQEboupdhYIQ6
+         sMjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785423758; x=1786028558;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=tLEzUW8o0U9S9X6t6tu33UKtz4CdGONFnEDfRlrAs9U=;
-        b=FZnNCYX3rXaquQJIUG50wWUKtY1xHDcQLsSMDAYxT5c3iN1wy5rW6yk2zjd5ZnbOmm
-         ysneiVA3O+/ANXZfipdyKrdOfGcRTbitkAdTJjsC8cNszjF85toHQXP0drqCTlw94ZI5
-         +h4JbryOiY2FfG0Grf3fOvDjso5m0RY3b7WINJBSywn2Odae43TV0dP1L3DvoCCucLj8
-         opyXPM95npEJHF9VLiwnmm9wDeomwt+5rW1cd4CD9hHGrdKXg3NjvKZtTYZrVZidUnHM
-         yto71GGRrS6TRc0G8U6loongzI5yT+zWKtbsbphACRlIyyP2+wji+dEYRoFlnwCEJKAx
-         qygg==
-X-Forwarded-Encrypted: i=1; AHgh+RpdDCegFpG+gGyn+c0E213XQC8K2Wdf3NvNqmevcD5AOdA1ber75HBCDQeVbKWNRyoqwdTxnIoQ2DhzbwJ2@vger.kernel.org
-X-Gm-Message-State: AOJu0YxKalhdw9T8N492Y94/wS30hfJUcDUk1kK4uj2AZp3MIK69QPcq
-	jtbgdaAZnCn5B+iU05Q4ld3sQTEOrFOEl1GG8jGVxXPWuAiFKLNZmS5y
-X-Gm-Gg: AR+sD11WM3p1WNK/5QmoBNs8YyKhudTuIdyis4jjwkfxZBss1GBcUNALky486pau35j
-	wXRrwMWrqm7pPFYShakzYz0469wvL6+N5/U/I3kykI1AMTPFKD4rEP9lHfXrLmDv+yHU1Z358Vx
-	OCGjFBkQR78VpLWn4GpDgEPyuJoXdLJGCEPw/DCWbs4+7XTU1jlPzlKaETXSFqvhbwHwywnmYEv
-	2Zc4MD6bPhhByO4T3u2qGFzCyvFvxUFX+NockCYgrpj7jhIsvJkcADqpI8O7zAyrKnenZ9yJ+ST
-	uTbkTgVNQQuM8Bds0sdDXg3NbY8bwo8GYaJ/ePl5gGFv13ekDefxXhIsakcVTnPS6HQzZVDh4yi
-	QJBasIsDacIynrNtHZ/LycPg6MsEqdqj4mt4vEsl5LFuz3NvgAW3ywaiNFf/4KcRn9JQ9UFX1a9
-	gmGeOv2xukiI7s/QoL8moz8hsUW4db/JhbF/hmEWgoucWmdSlqV8FlFCW3dgQGJ4BHaBbiHoJqP
-	jX67dNO1+YNj6SyEtJOg5R+/I/5sRBzwwheGA==
-X-Received: by 2002:a05:6a20:54a1:b0:3c3:2e2b:29ee with SMTP id adf61e73a8af0-3c900948db6mr2952552637.55.1785423758227;
-        Thu, 30 Jul 2026 08:02:38 -0700 (PDT)
-Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31504d37368sm41415686eec.22.2026.07.30.08.02.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Jul 2026 08:02:37 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <19a2b8bd-09ea-4df9-b0ba-f78f60c44848@roeck-us.net>
-Date: Thu, 30 Jul 2026 08:02:35 -0700
+        d=1e100.net; s=20251104; t=1785423927; x=1786028727;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=HmVjUb4JTfmUvkHsT8y3djVv3OXH8nRRMGekIVJn1wo=;
+        b=lHEK6UmoXZVsdPv4syyvkbCfB+bGQf9XZviAjPbAj9cf8h/emxvq0GVGvKV7QJ050j
+         ruUElWwqb5ZHu56KVQWBps71Z/XRUJ5MZD8CGkEFGvyBfxLhjCI6JWt3+lfosUVFnJQW
+         psK8z0GJCB9sJfrw3A2kpJepsyTdJoHjP8+78Y8KrS+eXEePviZco11JSbZ7r1C8HznA
+         f4dASR9f122mjA3RMNPNl00s/24k+1N3tIApERGk7C7cCgsWYIdG4ALzraBVlqf8SiDa
+         0fsJ84Q3g9uaNgPzWyWjvR6OmUVasK9O2qkpCdv2zZNah1AZ0NJfuMuXlMV8Xi+Q7Y32
+         d26A==
+X-Forwarded-Encrypted: i=1; AHgh+RqX8jT7NP2lmDRsrfxUgtXEZLb189bBzXgtoloYTRAMNzdexgN1NGjiQH2X2W0Tw2CCyxaznS+sMYn5a06R@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw4o1AA35V3eRR1qR+e1mT12ttgB2TCBNr03OkkHdRoeOJNpVJ9
+	MTYm25aUpwGxBUZSNg6y/pzpGuEZ9jppyiCJIwae7U2+qXNqZA+u7S+c3owHdtbOIDcW9MFSMTF
+	luAhalI7kwikIvzBtOcu5AC55snTzdzxdQRiEtXdPhzzU6mG5jeHJIu55B9cn9YB+VIQSMOTXXp
+	/aqd0=
+X-Gm-Gg: AR+sD12Sy8uSymTVzV6El5YeB16yWHXDzjD86pHKZDbzL1newfLg62+x+4DLwUh0egm
+	4Pe1nLt9nlU73AwFsoxL4C5moaHpm8pBUh8miSEiqv45pOGGB6O07bLTQdMtcenl2/QlqQ1X0mU
+	9pRDrsnxsqmsLVObcIIF/GNiZHICxOCUUYDbTQ+G+M2gPTKTlYMA83wENrUiZ5Fd+vNrKVNXLWz
+	P6hXn0WuNts4iqoySIuqKHCWNuRRFiq7pNlYgW6yJqo29mBBYO2eD99xdOtkVt7ZiWDY9ziJP/O
+	APRgoMib4rRwAaufOckExgRutWpLWo6Sfis5ZI3K3AKI+3N1BNe9X7/lfcQO/YkGK48cpVM9nlB
+	1DF41vpGxNZeVz71hkP4RW9Px
+X-Received: by 2002:a05:6102:26c5:b0:729:1a8d:b2d9 with SMTP id ada2fe7eead31-757507909f5mr1159596137.22.1785423927437;
+        Thu, 30 Jul 2026 08:05:27 -0700 (PDT)
+X-Received: by 2002:a05:6102:26c5:b0:729:1a8d:b2d9 with SMTP id ada2fe7eead31-757507909f5mr1159562137.22.1785423926828;
+        Thu, 30 Jul 2026 08:05:26 -0700 (PDT)
+Received: from lin-0772.qualcomm.com ([212.136.9.4])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1fa8bf2417sm75211166b.59.2026.07.30.08.05.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 30 Jul 2026 08:05:26 -0700 (PDT)
+From: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+To: linux-media@vger.kernel.org
+Cc: bod@kernel.org, mchehab@kernel.org, robh@kernel.org, krzk+dt@kernel.org,
+        conor+dt@kernel.org, andersson@kernel.org, konradybcio@kernel.org,
+        loic.poulain@linaro.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v6 0/3] Add Qualcomm JPEG V4L2 encoder for SM8250
+Date: Thu, 30 Jul 2026 18:05:21 +0300
+Message-Id: <20260730150524.2659577-1-atanas.filipov@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] power: reset: pscrr: add watchdog pretimeout
- reason tracking
-To: Oleksij Rempel <o.rempel@pengutronix.de>,
- Matti Vaittinen <mazziesaccount@gmail.com>
-Cc: Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
- Sebastian Reichel <sre@kernel.org>, Wim Van Sebroeck
- <wim@linux-watchdog.org>, Benson Leung <bleung@chromium.org>,
- Tzung-Bi Shih <tzungbi@kernel.org>, Srinivas Kandagatla <srini@kernel.org>,
- Daniel Lezcano <daniel.lezcano@kernel.org>, linux-pm@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-watchdog@vger.kernel.org,
- linux-arm-msm@vger.org, kernel@pengutronix.de,
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
- "Rafael J. Wysocki" <rafael@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
- Lukasz Luba <lukasz.luba@arm.com>, =?UTF-8?Q?S=C3=B8ren_Andersen?=
- <san@skov.dk>, Guenter Roeck <groeck@chromium.org>,
- Ahmad Fatoum <a.fatoum@pengutronix.de>,
- Andrew Morton <akpm@linux-foundation.org>,
- avaneesh.dwivedi@oss.qualcomm.com,
- Umang Chheda <umang.chheda@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org
-References: <20260722-pscrr-reboot-reason-v2-0-495ba3005953@oss.qualcomm.com>
- <20260722-pscrr-reboot-reason-v2-2-495ba3005953@oss.qualcomm.com>
- <98e65507-3084-4948-8096-4e2d8d20dc81@gmail.com>
- <amrgDC0s3rb5Xv4N@pengutronix.de>
-Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- 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
- np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <amrgDC0s3rb5Xv4N@pengutronix.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=V4tNF+ni c=1 sm=1 tr=0 ts=6a6b6838 cx=c_pps
+ a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
+ a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=fvEfv-lMOMBzJYUFIVYA:9
+ a=gYDTvv6II1OnSo0itH1n:22
+X-Proofpoint-GUID: gADeh2T9GNYl1zkfkTXpBVjsFJc0QS9k
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDExNCBTYWx0ZWRfX2mDFbjVaj7HM
+ GpCnEb/gOVA+rh2zNi3nMejE5JNSPPG40uAmiWt00/J0WsJb9Mo0lfhuoIEDMyYePJ+j7+gvcq+
+ BwPhplG8KBu62TNSPfHu1Yz5gm0MomX/oRQ7n7YizGLWI3tI5sBv4Pa2yDHWrlE1xKWCODFFpei
+ yc0h1RNO5FzlwmTjZGDW4FJEOhsEH46qVFe03suUPjcJFU0uFldHwOFSH6QGlbum9ohBkey7mTO
+ WF9Rh5KRqlL5VEkWRpvVLkZNubGLqdTEMCjvLi1yBgTezRXRbcrmakNnOqfqt9T8Srv40N6uPAC
+ bAWSK476JmIHh57/IU4V1Xbhv80jvgtFlEMvUUXY/uYCfBaTiv6tkHG0/6JPSWPtoD4C2S//iVP
+ awE/6/xsKG6h8xCxTbQiqOicCANMmymKMFsP9hOSC6o3W/NB4W2sHpa0+THKNEhYFD/rPIhsNq2
+ sCXHs/NE08qVRFeSkRw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDExNCBTYWx0ZWRfX10wfHxw9nmnL
+ HxSrS16MOvMcCLlRdM9JacPWCfsGN+dQnb4vo9UvA0ZXoplgU0EpsJBtj7skk0PoBOYwlLHWhUa
+ qOLq30DOOTFN2XZLtefhBQZAT3l6EpU=
+X-Proofpoint-ORIG-GUID: gADeh2T9GNYl1zkfkTXpBVjsFJc0QS9k
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-30_04,2026-07-29_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 bulkscore=0 impostorscore=0 suspectscore=0 phishscore=0
+ adultscore=0 spamscore=0 priorityscore=1501 lowpriorityscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607300114
 
-On 7/29/26 22:24, Oleksij Rempel wrote:
-> Hi Matti,
-> 
-> On Thu, Jul 30, 2026 at 07:49:41AM +0300, Matti Vaittinen wrote:
->> On 22/07/2026 18:13, Faruque Ansari wrote:
->>> Watchdog pretimeout resets are not recorded with a dedicated reset
->>> reason, causing subsequent boots to report PSCR_UNKNOWN and making it
->>> difficult to distinguish them from other unexpected resets.
->>>
->>> Add PSCR_WATCHDOG_PRETIMEOUT as a dedicated reset reason code and
->>> prevent the panic notifier from overwriting a watchdog pretimeout
->>> reason with PSCR_KERNEL_PANIC when the pretimeout governor triggers a
->>> panic.
->>>
->>> Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
->>> ---
->>>    drivers/power/reset/pscrr.c           | 7 ++++++-
->>>    include/linux/power/power_on_reason.h | 1 +
->>>    include/linux/reboot.h                | 1 +
->>>    kernel/reboot.c                       | 1 +
->>>    4 files changed, 9 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/drivers/power/reset/pscrr.c b/drivers/power/reset/pscrr.c
->>> index b5906f127e88..5b107c62fe82 100644
->>> --- a/drivers/power/reset/pscrr.c
->>> +++ b/drivers/power/reset/pscrr.c
->>> @@ -149,7 +149,12 @@ static int pscrr_panic_notifier(struct notifier_block *nb,
->>>    	if (!backend || !backend->ops || !backend->ops->write_reason)
->>>    		return NOTIFY_OK;
->>> -	set_psc_reason(PSCR_KERNEL_PANIC);
->>> +	/*
->>> +	 * Do not overwrite a previously recorded watchdog pretimeout reason
->>> +	 * during panic handling.
->>> +	 */
->>> +	if (get_psc_reason() != PSCR_WATCHDOG_PRETIMEOUT)
->>> +		set_psc_reason(PSCR_KERNEL_PANIC);
->>
->> Hi Faruque,
->>
->> I like the idea of adding WDG pretimeout resets in pscrr. I am just
->> wondering what makes WDG reason so special, that it shouldn't be overwritten
->> while other reasons can be? Can this notifier be called (now or in the
->> future) so, that there are other reasons getting overwritten? For some
->> reason I think the PSCRR was designed to be able to store multiple
->> reasons(?)
-> 
-> It depends on the backed. A simple nvmem cell, would be able to hold
-> only one reason.
-> 
+The goal is to upstream a standards-based JPEG encode path using the V4L2 M2M
+framework, with DT-described hardware resources and SoC DTS integration.
 
-That makes me wonder: Shouldn't the priority be a back-end decision, not a
-front-end decision ?
+The JPEG encoder is a standalone hardware IP within the camera subsystem.
+It is modelled as a peer node of CAMSS directly under the SoC bus, with all
+resources self-described in its own device tree node (power-domains, clocks,
+interconnects, iommus). This follows the consensus reached in the v4 review
+thread (Bryan O'Donoghue, Konrad Dybcio, Gjorgji Rosikopulos).
 
-Guenter
+Supported compatibles:
+- qcom,sm8250-jpeg-enc
+
+Driver scope and design choices:
+- uses the standard V4L2 mem2mem + vb2 workflow
+- maps runtime resources from DT (clocks/interconnects/iommu/power-domains)
+- PM managed via power-domains (TITAN_TOP_GDSC, MMCX, MX) and OPP framework
+
+Note on CAMNOC AXI clock (cnoc_axi): this clock is shared across camera IP
+clients. In downstream a dedicated CPAS driver aggregates AHB/AXI clock votes
+from all camera IP clients. No equivalent exists upstream. The OPP table
+ensures cnoc_axi is at the correct frequency when JPEG runs standalone.
+
+Functional validation:
+- tested with v4l2-ctl and GStreamer (v4l2jpegenc)
+- V4L2 compliance test (v4l2-compliance) passed
+
+Known limitations:
+- scaling is not supported
+- width and height must be aligned to 16 pixels
+- cnoc_axi clock voting is not aggregated (see note above)
+
+Changes since v5:
+
+  Binding (dt-bindings: media: qcom,sm8250-jpeg-enc):
+  - Removed GCC_CAMERA_HF_AXI_CLK (hf_axi) clock and hf-mnoc interconnect
+    path. The JPEG encoder uses only the SF CAMNOC port; the HF port is for
+    real-time capture pipelines. (Loic Poulain)
+  - Added RPMHPD_MMCX and RPMHPD_MX to power-domains. (bod)
+  - Added power-domain-names property with entries "titan_top", "mmcx", "mx".
+  - Added power-domain-names to the required list.
+
+  DTS (arm64: dts: qcom: sm8250):
+  - Removed GCC_CAMERA_HF_AXI_CLK (hf_axi) clock and hf-mnoc interconnect
+    path from jpeg-encoder node. (Loic Poulain)
+  - Added RPMHPD_MMCX and RPMHPD_MX to power-domains. (bod)
+  - Added power-domain-names = "titan_top", "mmcx", "mx".
+
+Changes since v4:
+
+  Architecture:
+  - Dropped patch 1/5 (devm_of_platform_populate in camss.c) entirely.
+    JPEG is now a peer node of CAMSS, not a child node. (bod)
+  - Dropped patch 2/5 (camss binding unevaluatedProperties). (krzk, bod)
+  - Moved jpeg-encoder DTS node from camss@ to soc@ level. (bod)
+
+  Binding (dt-bindings: media: qcom,sm8250-jpeg-enc):
+  - Renamed binding file from qcom,jpeg-encoder.yaml to
+    qcom,sm8250-jpeg-enc.yaml to match compatible string convention.
+  - Renamed compatible from qcom,sm8250-jenc to qcom,sm8250-jpeg-enc
+    for readability. (Bjorn Andersson)
+  - Added power-domains property and required entry. (bod)
+  - Added iommus description with SID value 0x2040 for SM8250. (bod)
+  - Dropped soc{} wrapper from example; node is directly under soc. (Dmitry)
+  - Added Gjorgji Rosikopulos as co-maintainer.
+  - Patch order corrected: binding before driver before DTS. (krzk)
+
+  Driver (media: qcom: jpeg):
+  - Removed <linux/mod_devicetable.h> include. (Uwe Kleine-Koenig)
+  - Removed dev_dbg calls from OPP clock selection path. (Dmitry)
+  - Removed camss_dev field and pm_runtime_resume_and_get(camss_dev);
+    PM is now managed independently via power-domains. (Dmitry)
+  - Removed incorrect device_link_add() to parent; not needed in peer
+    node model.
+  - Moved file-local defines out of qcom_jenc_defs.h to their respective
+    .c files. (Dmitry)
+  - Fixed dev_pm_opp_put() placement: called before rc check. (Dmitry)
+  - Replaced _DEFINE_DEV_PM_OPS() with SYSTEM_SLEEP_PM_OPS() +
+    RUNTIME_PM_OPS() macros, consistent with other media drivers. (Frank Li)
+  - Fixed Kconfig source order to alphabetical. (krzk)
+  - Updated compatible string in driver match table to qcom,sm8250-jpeg-enc.
+
+  DTS (arm64: dts: qcom: sm8250):
+  - Added status = "disabled" to jpeg-encoder node.
+  - Used 0x0 instead of bare 0 for zero cells in reg property. (Dmitry)
+  - Dropped opp-peak-kBps and opp-avg-kBps from OPP table; no upstream
+    aggregation mechanism available yet.
+
+Changes since v3:
+
+  CAMSS binding (dt-bindings: media: qcom,sm8250-camss):
+  - Added as new patch 2/5; allows #address-cells, #size-cells, ranges,
+    and child nodes using unevaluatedProperties: false.
+
+  Binding (dt-bindings: media: qcom,jpeg-encoder):
+  - Dropped soc and camss wrapper nodes from example. (Dmitry)
+  - Removed opp-level from all OPP table entries. (Dmitry)
+
+  CAMSS (media: qcom: camss):
+  - Replaced patch 1/4 with Bryan O'Donoghue's original upstream commit.
+
+  Driver (media: qcom: jpeg):
+  - Cleaned up driver patch commit. (bod)
+
+  DTS (arm64: dts: qcom: sm8250):
+  - Restored camss interconnect-names to original values.
+
+Changes since v2:
+
+  Binding (dt-bindings: media: qcom,jpeg-encoder):
+  - IOMMU stream IDs documented in binding description. (bod)
+  - Dropped "Properties documented:" section from commit message. (krzk)
+  - Dropped clocks minItems constraint. (krzk)
+  - Renamed clock-names to match hardware signal names. (krzk)
+  - Renamed interconnect-names to reflect path topology. (krzk, Dmitry)
+
+  DTS (arm64: dts: qcom: sm8250):
+  - Removed cell-index; use lowercase hex. (Dmitry)
+  - Moved jpeg-encoder node into the camss block as a child node. (bod)
+
+  Driver (media: qcom: jpeg):
+  - Sort obj-y entries alphabetically in qcom/Makefile. (krzk)
+  - Use devm_mutex_init() instead of mutex_init(). (Frank Li)
+
+Changes since v1:
+
+  Binding (dt-bindings: media: qcom,jpeg-encoder):
+  - Removed qcm6490 and sm8550 compatible strings; SM8250 only.
+  - Fixed clock-names block in the binding example.
+  - Dropped reg-names: with a single reg entry it is unnecessary.
+  - Removed description literal block scalar (|).
+  - Dropped _clk suffix from clock-names.
+  - Added iommus description in the properties section.
+
+  Driver (media: qcom: jpeg):
+  - Migrated to devm_clk_bulk_get_all().
+  - Migrated to the OPP framework for clock rate management.
+  - Switched to RUNTIME_PM_OPS() and SYSTEM_SLEEP_PM_OPS() macros.
+  - platform_set_drvdata() moved to immediately after allocation.
+  - .pm uses pm_ptr().
+
+Atanas Filipov (3):
+  dt-bindings: media: qcom: Add JPEG encoder binding
+  media: qcom: jpeg: Add Qualcomm JPEG V4L2 encoder
+  arm64: dts: qcom: sm8250: Add JPEG encoder node
+
+Atanas Filipov (3):
+  dt-bindings: media: qcom: Add JPEG encoder binding
+  media: qcom: jpeg: Add Qualcomm JPEG V4L2 encoder
+  arm64: dts: qcom: sm8250: Add JPEG encoder node
+
+ .../bindings/media/qcom,sm8250-jpeg-enc.yaml  |  156 ++
+ arch/arm64/boot/dts/qcom/sm8250.dtsi          |   72 +
+ drivers/media/platform/qcom/Kconfig           |    1 +
+ drivers/media/platform/qcom/Makefile          |    1 +
+ drivers/media/platform/qcom/jpeg/Kconfig      |   15 +
+ drivers/media/platform/qcom/jpeg/Makefile     |    9 +
+ .../media/platform/qcom/jpeg/qcom_jenc_defs.h |   23 +
+ .../media/platform/qcom/jpeg/qcom_jenc_dev.c  |  284 +++
+ .../media/platform/qcom/jpeg/qcom_jenc_dev.h  |  108 ++
+ .../media/platform/qcom/jpeg/qcom_jenc_hdr.c  |  331 ++++
+ .../media/platform/qcom/jpeg/qcom_jenc_hdr.h  |  119 ++
+ .../media/platform/qcom/jpeg/qcom_jenc_ops.c  | 1629 +++++++++++++++++
+ .../media/platform/qcom/jpeg/qcom_jenc_ops.h  |   52 +
+ .../media/platform/qcom/jpeg/qcom_jenc_res.c  |   15 +
+ .../media/platform/qcom/jpeg/qcom_jenc_res.h  |   19 +
+ .../qcom/jpeg/qcom_jenc_v420_hw_info.h        |  410 +++++
+ .../media/platform/qcom/jpeg/qcom_jenc_v4l2.c | 1163 ++++++++++++
+ .../media/platform/qcom/jpeg/qcom_jenc_v4l2.h |   23 +
+ include/media/jpeg.h                          |   33 +
+ include/uapi/linux/v4l2-controls.h            |   21 +
+ 20 files changed, 4484 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/media/qcom,sm8250-jpeg-enc.yaml
+ create mode 100644 drivers/media/platform/qcom/jpeg/Kconfig
+ create mode 100644 drivers/media/platform/qcom/jpeg/Makefile
+ create mode 100644 drivers/media/platform/qcom/jpeg/qcom_jenc_defs.h
+ create mode 100644 drivers/media/platform/qcom/jpeg/qcom_jenc_dev.c
+ create mode 100644 drivers/media/platform/qcom/jpeg/qcom_jenc_dev.h
+ create mode 100644 drivers/media/platform/qcom/jpeg/qcom_jenc_hdr.c
+ create mode 100644 drivers/media/platform/qcom/jpeg/qcom_jenc_hdr.h
+ create mode 100644 drivers/media/platform/qcom/jpeg/qcom_jenc_ops.c
+ create mode 100644 drivers/media/platform/qcom/jpeg/qcom_jenc_ops.h
+ create mode 100644 drivers/media/platform/qcom/jpeg/qcom_jenc_res.c
+ create mode 100644 drivers/media/platform/qcom/jpeg/qcom_jenc_res.h
+ create mode 100644 drivers/media/platform/qcom/jpeg/qcom_jenc_v420_hw_info.h
+ create mode 100644 drivers/media/platform/qcom/jpeg/qcom_jenc_v4l2.c
+ create mode 100644 drivers/media/platform/qcom/jpeg/qcom_jenc_v4l2.h
+
+
+base-commit: 78bc8af4affb9a732504eb22eeac7d1e50883853
+-- 
+2.34.1
 
