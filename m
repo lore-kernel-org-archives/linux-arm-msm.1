@@ -1,317 +1,323 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7912D4562A8
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 15:26:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5BE6533438F
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 15:39:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785425190; cv=none; b=HMt8p8N+nget7chGpJh7kMHdULMZaOrk9DFpQSzNhGP/4xQ7aa2LkQ/QvXyTiuxvbc9nlFrDZPZ90i+j6rTXj0N2SiD3d+zopYmnihHvd0tqAKzBAq/dRC6kS7yM3VdjqvSp8FkQXB5W8+s/XBJN1H6/YV0C5S5jwInHG4mTKwY=
+	t=1785425996; cv=none; b=MvHg4orwG/nlrW+Ee25g+L9vDiAQFJ/nZM0/wSB2kAHI9AZcz+CcfRJRlZqlYkHlQoa+buy1Fgu1T094TDcZbpCgf4wbEZv3SiD6Ajb1ORmPjIgkmbFlIUUAVwwSHJIsKoSai4JJUYDzqMeLnXnPXhsUO3d3aq+7Ou2sYUahBis=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785425190; c=relaxed/simple;
-	bh=EUJn+8g0f7NVaANbcYBTFYGJVuQTg+xY+WBNZFKq8hY=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=jPOXEZIHmCZBMExluhhjFegFboIZ35IsVrWoH6DUd5ZCJ6HSLvh0ocNDdGEiEvCA2m51csmUxmYBQmj4aErEEs0Q9A+0Cl9PND/tFs6hIe5hQ1FbCo1JQFo5khmnARN3z8raBGUSSCOvgXEQnVuzY1iWr31MqRN74JrOl2d92mg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=c1jK1zny; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fvewxXiS; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1785425996; c=relaxed/simple;
+	bh=gPtLqOdjJYrtxJtyBeb0+7ugCf09osdrZohv1qNSs7g=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=jrPDrmDk6YD56IS5R9sRfrY4tKHV5d9JqCE6Xt3LxSoS77WocD4+pHpm5SHfJyp3pWKoHUIYJ1u+4/A8o5cdpzr/gliD2QqNGSQFNVB2Iy8X3kE7qcG4i1N80wU48Iqul7RnocW8tRImrdS8c4kGfbwDkwB9zOFcriOXz8fg5zA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=T5J2q5xw; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iRJa/j1q; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="c1jK1zny";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fvewxXiS"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66UEcnMk615671
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 15:26:28 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="T5J2q5xw";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iRJa/j1q"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66UFQjFP1414023
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 15:39:54 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	J2f4PjyWWckEdMtbV7gIe8pFQqnvY9M/viyklw2D1WI=; b=c1jK1znyYwSNsom0
-	oPcsdY0HjA4vbvfCx8vkuD+2ylVe9qpPUIImrl8wnmtC8dLvVCndtOTvRQMIF8aw
-	AYSeR0JSYWc0hPDf1g2F+qkKR97MUfo2cOuoiDvhRvnpTbinr7LcWsgAB+U5GoKn
-	h0sJc3n1AyyBxMhNGoVafJZyJrHRUqiXdYUS8m9L3A7F0x39J8keKZwydjNot2cG
-	RA6TMLvKxGhmS9Ukdb7Cd6JgQVrIxqOe1GzhvsiVu5mX2jD40KR4l6v62R+5FIKc
-	ncLCjTIxYMeh+BKnPnHf8gbkeu5EOA2X/ehnHsmVjG94ZaagR3Kqlz3sUSdlIbHf
-	Oh08QQ==
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=3NATPyl9EF1MFAAgPEVj1qlE
+	fNz3DMx7Yme+KQx5q1c=; b=T5J2q5xw44ld2jueITsqPaD6LQ6GECVfbFnr06aI
+	+OSsA5GpPsYvosQHc6QQgVwhh1qZEFWbOHAh4YFDdYr8f6icVQeJFd3gT/HTAg8P
+	y4uJtAC6SaEDrnPL51Sr3yQJS80TaKUUs6S4jXDKuIGPElaDazm017lFqwJq9SbJ
+	YivGFgH883qMKuJb9t9tJqfe/J0+yW5l9UAoUcH8EEwCZPE6BwEpsaNtvFfbFTSO
+	RtBMfbSAY4PsHDM8eterVvxBb3dFD96Dq/tYUnTiUVVYV3xBbQkFXT1LNMw1FexT
+	LjThxI02YI63F7tORhX8MyqjaVL4+tB5L2Zt9gdh+Ml7lQ==
 Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr8j7r90v-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fr891ger3-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 15:26:27 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51c0f0a0760so46629321cf.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 08:26:27 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 15:39:54 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51c01ff996dso25191381cf.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 08:39:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785425187; x=1786029987; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=J2f4PjyWWckEdMtbV7gIe8pFQqnvY9M/viyklw2D1WI=;
-        b=fvewxXiSPraPXM7eiu8kgamStxk2BD/YeMzVgF1eAAmfhhkodQePNM1NcLfHng+QDN
-         YPzox8tWSN1y1z4ix7YZ7yZTGKlon/3vdLof4P9Vt9eV2ANtANGHP0RNIKpjOqESpvjd
-         UozRI5tmxaVFtMVSEzVsVMu751faEM1YloNyAum7aznjRY4zI70N1vwBm49chFybuDHD
-         G68uQ0aa5lAwXkAGJNS7AO2+7Noi7ngk+nqWkuYxO4TPZ9UKbDTbUNcCaqHvVKrFOU4u
-         S67A65S8UBpqJViVBu3yatM2qAwe0oYfP1IMy14Sfd51gC6MAxrt6pCpD+bEZhE2j8u4
-         h0qg==
+        d=oss.qualcomm.com; s=google; t=1785425993; x=1786030793; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=3NATPyl9EF1MFAAgPEVj1qlEfNz3DMx7Yme+KQx5q1c=;
+        b=iRJa/j1qsfYYvJn4GmPlsn30lN7/DmhDIiMpYcD6NQo31WlxtvY7M8Poa+1P6A/TRe
+         XJTmZTGB0lVcYlwya/2gflGLswpv4eZYQajsI5jihW1B/Da7olRaK/GT9XW8qW7m2a4V
+         xL2+TAIUJutlN7ag3pb9UC7eqJd6/dh1G9o+GIDx+Zb8W9xv6KLJgDD4Ms61DBI3M5oS
+         +iIwORV8UiLUxpHv16ULyR178OsdH7wWH8fG/+rroKYAlmRQmrZP9Szell/STifrCP5s
+         Mvv36pr1mREc4mavgvUFryI8JjgCf9Nuf9zD1wTNpTvKXAJJK8HHHSv3fjQyTBhMpqwn
+         G57A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785425187; x=1786029987;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
+        d=1e100.net; s=20251104; t=1785425993; x=1786030793;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=J2f4PjyWWckEdMtbV7gIe8pFQqnvY9M/viyklw2D1WI=;
-        b=GAfzK+yhDGfJ6rzfnWueuUvCbNQM4C+W0waT332SPFJyT15FJvosf79zh853BsmUG3
-         al8N4Mba/V5RGlrVCUvoAhIgDir6W1uidNuZ2lDjEgcxxWWkRbrDnDnNpo8PI/87yIaM
-         48xP4tZrKlxKLMNigSozDs/rh/4PS9yZNQ6ci3qweRZ7ErHNij5dPuJXPQXC6ktpkzqz
-         1P0CncGalZOt28g/Ihfw7W2fu/hQpyaOLEqLe626sJS4y15NP9A8qD2d1bjVYRgOlOfG
-         vQxzW+CC5HjKOFge/WNUhzxmDZICZASbrxRpL8CKudCfRBvUhMHQaV7yuDW7Od0FBKcQ
-         8Z2g==
-X-Forwarded-Encrypted: i=1; AHgh+Roenwlsq7NLUMtX64D8BcXr2kxUOVW3AQMw1b5iwneaiH3cyHvcJIXc4jl1VyoMJLJXff2C20hY/LmkxugC@vger.kernel.org
-X-Gm-Message-State: AOJu0YxBE6OLgpgNVSz11jietpg+i0ewTOFpKenmlwGLFAiTPDpJaB/v
-	gVs4lGL1SavJSKWHt1eZ5PTqThPjWYW5MNN9mQBMe00Zjg4bvcZhWAGrgPuN32AkLd0OSLOS186
-	c98+YS0LkVknqxbD+DN183ThkmgCvutKHYr4fK/JR8akVZuH6IQhdPGfmnJEQ34/b3KAR
-X-Gm-Gg: AR+sD11OX2+l3dOIZnHaHyUHUQZpO7k3xNi82aSyPUIz5Y/ATiozO0tLyxgc9vqaLQR
-	dV0VfA5TUo+J+++3Q6Xj547UX1vqJoTGegTulr8CZ19u9i8/uqjZrlm1wm0hvjBysa1UWDUtB7y
-	eBJajSJFL3NtXVP1pSdcXYnRrp+HsSg3zeDsgvCYkgUph6olvZta6YWxhOdpcJsK4kLtTxDErvR
-	lxOTLz3YlYEss+3EAIGWormh0HIFiFj5PYqrhHDDRkcuozqBsYuxZ5HYz9/ezW50fQS0v+Ggs4+
-	dXfqOdTxfeXWaiztHzehjd/O27aoWslGFjoVslyCVT7ZUKhR8aC1Xv337cL7na2k8BCqAsIC+tM
-	fDS3oo68J4yw3XmW27Z8DEBSjrG3+PtLYdhB4exrHAYri382YfFLSl7oz8/1c9RTT0HXqLwQ/J6
-	2DaNyyaf1juqXdhg==
-X-Received: by 2002:a05:622a:5c7:b0:519:55c0:a1e5 with SMTP id d75a77b69052e-52b38389be0mr34032081cf.8.1785425186648;
-        Thu, 30 Jul 2026 08:26:26 -0700 (PDT)
-X-Received: by 2002:a05:622a:5c7:b0:519:55c0:a1e5 with SMTP id d75a77b69052e-52b38389be0mr34031541cf.8.1785425186070;
-        Thu, 30 Jul 2026 08:26:26 -0700 (PDT)
+        bh=3NATPyl9EF1MFAAgPEVj1qlEfNz3DMx7Yme+KQx5q1c=;
+        b=fDP1XQrWW81BDMOBhl4VbOfKPk3oKpjOe/jyk9NR6pdlWmPZp5EKkvMm+TJZRB3qsK
+         UGQ6Zz+WV3U3Tc1zYx8D/xE641OmnaXBX/z+rIj+SRnOSAF1DfWrp2QLCt2BtpJZ8+O7
+         J731pzMeaUv9GVHhTW8N65hZ7V9FzklO2Ede/m2lVj1auwTEW0VmAkueaLBfmHK9k77C
+         HbY5R7Ch24rxpoxKqFWStfV4EljvewKLuKZiuWBh9OQ2YQ56lfvbKWrq8S3LDoSX3Suu
+         xBI6q7vXa7rMPLOakjvg392xoVMdOmBdzf5XsSM84mh+x2lZ1jn6ONFYFXvXFWqFz2er
+         KLQg==
+X-Forwarded-Encrypted: i=1; AHgh+RoD9PzIM4gTUcCrj5nDlWFeeoX3Rc0LnlgRPsTy0nqYf0Yu6CQr9ElgDe6DKkSsILA9DsSbxxpMkWHToCeu@vger.kernel.org
+X-Gm-Message-State: AOJu0YyElj0eDgU1yznn5yhVA2gwJXNLnFUTyFcZJI1OHm8YOQcQGLfs
+	GACxJQZDCh3gEKS3WPw8A+DicGFNAXRSisNhmYkNdeT/SVZR4H9EuCHrhgoODYfoEb3w/QgiWl4
+	MslC9+iQ+DgQCYCl8BklU+ftrkwwpXUwyhe9akFSRzeKdyMR7Wn1pRdL1kAXotd0ZRaPZ
+X-Gm-Gg: AR+sD13Yt7V4S+/v82BAzx16fuBJCXNMWIrCm50k9WkbHPWBX6Hf6sCIm6DuPJRoa8A
+	iF4KhzPNsJ/xR3X1UUtQbRv06DtR0FJOnpikfrZ1QYW/pzaulOkXxA0h/L5i5cnf0exRMleA/n3
+	SpwfT8nlGgxepc3FwKUidVirgHzIpHB5zWqnAvTBpWZbhAEd7UZlwHpBfpe42XuPLoaJZ3w4o5f
+	xAzj9GsZcDWM+sjWogR8S0YJzIxmLSWxJToVKnkACc/izOm/lJL2QXQmr9siLNErl8GdxYBca7c
+	ahocFzbRrPNXPhImhyud73c92ClDRLJJ3K1/3EIYBZL7f3STr7ZNoMb8FEM4NLalueFgIsd2C5f
+	ArzqNa8iUJrA2STAbEz/fsiK7mdRNXCKXy7lLVlcI1I+S88Dm3m6hLj+NgGk/7z7BShYw6LogAN
+	Jk+jMYvghHxEk1pQ==
+X-Received: by 2002:ac8:5f07:0:b0:51c:7b12:1201 with SMTP id d75a77b69052e-52b386c7b4emr35206451cf.79.1785425993425;
+        Thu, 30 Jul 2026 08:39:53 -0700 (PDT)
+X-Received: by 2002:ac8:5f07:0:b0:51c:7b12:1201 with SMTP id d75a77b69052e-52b386c7b4emr35206031cf.79.1785425992901;
+        Thu, 30 Jul 2026 08:39:52 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2db9ed57asm443160e87.69.2026.07.30.08.26.23
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-39f6ac80d6bsm3746191fa.29.2026.07.30.08.39.51
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Jul 2026 08:26:24 -0700 (PDT)
+        Thu, 30 Jul 2026 08:39:51 -0700 (PDT)
+Date: Thu, 30 Jul 2026 18:39:50 +0300
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Date: Thu, 30 Jul 2026 18:26:12 +0300
-Subject: [PATCH 5/5] media: iris: reference count video instances
+To: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+Cc: linux-media@vger.kernel.org, bod@kernel.org, mchehab@kernel.org,
+        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+        andersson@kernel.org, konradybcio@kernel.org, loic.poulain@linaro.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v6 1/3] dt-bindings: media: qcom: Add JPEG encoder binding
+Message-ID: <3cbnmjmit4gsldga5nzct4odg6hpixzlwxbj72elnogyevr2tg@6esyjj2mvyom>
+References: <20260730150524.2659577-1-atanas.filipov@oss.qualcomm.com>
+ <20260730150524.2659577-2-atanas.filipov@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260730-iris-fixes-v1-5-413d6cfaa8ca@oss.qualcomm.com>
-References: <20260730-iris-fixes-v1-0-413d6cfaa8ca@oss.qualcomm.com>
-In-Reply-To: <20260730-iris-fixes-v1-0-413d6cfaa8ca@oss.qualcomm.com>
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Hans Verkuil <hverkuil@kernel.org>,
-        Stefan Schmidt <stefan.schmidt@linaro.org>,
-        Vedang Nagar <quic_vnagar@quicinc.com>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6909;
- i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=EUJn+8g0f7NVaANbcYBTFYGJVuQTg+xY+WBNZFKq8hY=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqa20SMlWo0+aMkPlsdsk/IubwsM043KLqrnWvY
- ZybrbwxuqKJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCamttEgAKCRCLPIo+Aiko
- 1RxDB/0VWfFqVoq065svqM3kCzBlRmZGkoWYSEm4R7fl88NxiKLaQKtPwbg6/X/T0MiEdzuqa2r
- CFq9hfCZfPwZaW7Gzi2PgEnGO4AFIVuLudn1ioVwd07YNxsCQ/0UA/TqI5GjO5Nn0X2TteyGKun
- jNDy67FvyCeGS9i3DIw/TKn+xM4ylzquNgycmaapAt9ckLb8AC2SH3gADSJt606DX9nWXhcSvGe
- EtOsRvDx6S/e5LOnwgmXFU6IxtoQKAafUBXNUAMLltcgD+ksOOnljIFm+CiI/qAhP6j+kxsewmQ
- r0dPOGAKpkNzi79aG9pf0BoBp2zr6YwttsdF7uRtRXPfOkVo
-X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
- fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDExNyBTYWx0ZWRfX88PXLj60qdf9
- w/Mva7IyGduAvOSoZKX5z6TyK7+ZxAfyBPh3hTx1aff97j/liilbdMeRdW3EQ99MwsbSSJZnABp
- BKugrgrXa7dqtKVbex+UMfG6xqINBDJmCBMkfinLo3xue7QFuCu6vd+vI+TXSRMU1e14KoS1iQ5
- AIz1/IjQRbUHtyX8IgoJc0/xUTOMJoUiXrmKbfG4rVpS1OrLtfsxr6nYGN9+Kl63bh3JzDGUjMQ
- fOzaffp9Vh8h+/8IKeCzVNNeQMGFhi6BQc5pQUydW9CNQrvLC9kVuQhKZ7eaz9MDJUDTqAf9l6D
- h79Vr7HfgoQiVsuSV8cj3vul4mHhFwjWWeClfYLq0+ofxD4OJ1tOIHrB1YtdICuY8sAQlG2D51i
- 5s7RIeWGVy6PbpqKvlA6MqONOaM5wFXDcstzuzqFpvyPbY+f3Y76eZZplIjkCJheSHvIZZNMMGI
- 6FLYwfULZk2sexNKANg==
-X-Proofpoint-GUID: ZxctPgSbquK4IScpPsdA00bgdX-qp66j
-X-Proofpoint-ORIG-GUID: ZxctPgSbquK4IScpPsdA00bgdX-qp66j
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDExNyBTYWx0ZWRfX/NYMEd86udBg
- SRZ4XCfz7KIUUjLAfcqHw8ixyWEmEAmrt8Y+xwxokW6LOZUdfEw2BgiAiu/jNnrELyaZ/R6lDx9
- R0d/PsmQWFqHRdhisSeXIQO7Du+NG3w=
-X-Authority-Analysis: v=2.4 cv=LraiDHdc c=1 sm=1 tr=0 ts=6a6b6d23 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260730150524.2659577-2-atanas.filipov@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMwMDExOSBTYWx0ZWRfXzUuWybxdKsjb
+ Mvr9pqe3R46MohnaXwPoysZaNa5Qz+GenCxm4e0RPiyKFyzSmxAnQX0H+sYrJZF/Y8UN6RcjcJA
+ /K7wEbGQ+Zw3CCKaRWqsj8W+BCPLymS9SSiL9AZUadFCI/2rxVfxByHnJCw1zvEaReg+xAdBzqK
+ Sx+p9k0PP9D566zkSymGylyas9JCp7wa/vajPW3pYhywMbciOxZ/Z8Hthn6EuJqaw1VQF7p9eYe
+ 3SnLZOBJgIW+mYeRV3HWl+nsSnbBMXvKsc2bcZnpgSiWbOyfU+ho09Iloif8U5uqYOYKkp7Ocl1
+ amKdbISQ9QQOllegr0XB35Qe/AxZcEtYvJ39IZBTvH9Z+UIHUOcsTEiEtROq6IwhY82NcMWkmcS
+ sr/nj/aDHwQzzKZLkQQRMq2FGfEiheGpuPfQXyY0Ehe/hDhG2tjBb0sIXELfcQRDQn2TsLJrzfr
+ eZ8x8VipJ+V3lShyAFw==
+X-Proofpoint-ORIG-GUID: xGVE65nHfa3mwIVRJi4ehjapZ348UQTa
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMwMDExOSBTYWx0ZWRfXxjKmcYrO2V0V
+ 4tTHGdYJA8aF/eq+R9Sh53m5yyfSV7JPCG9EHcUUTZzvBgJLW2e2WKujdhKGTTAogLCjsHkTH+P
+ HpwHtPq1WHifE+x1mz6xIHk7xqq/IL4=
+X-Authority-Analysis: v=2.4 cv=PdzPQChd c=1 sm=1 tr=0 ts=6a6b704a cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
  a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=D3wWFwynQU2KHtTvd0MA:9 a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=gEfo2CItAAAA:8
+ a=EUspDBNiAAAA:8 a=chD5afejWsUDTP9WW8EA:9 a=CjuIK1q_8ugA:10
+ a=kacYvNCVWA4VmyqE58fU:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-GUID: xGVE65nHfa3mwIVRJi4ehjapZ348UQTa
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-30_04,2026-07-29_01,2025-10-01_01
+ definitions=2026-07-30_04,2026-07-30_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 adultscore=0 spamscore=0 bulkscore=0
- priorityscore=1501 malwarescore=0 impostorscore=0 clxscore=1015
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2607300117
+ suspectscore=0 malwarescore=0 clxscore=1015 bulkscore=0 lowpriorityscore=0
+ adultscore=0 phishscore=0 impostorscore=0 spamscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607300119
 
-iris_get_instance() looks up an instance on core->instances and returns
-it after dropping core->lock, without taking any reference. The threaded
-interrupt handler uses this to find the instance a firmware response
-belongs to and then takes inst->lock. Meanwhile userspace may close the
-same file descriptor: iris_close() removes the instance from the list,
-destroys inst->lock and frees the instance. The interrupt handler then
-operates on freed memory and a destroyed mutex, a use-after-free.
+On Thu, Jul 30, 2026 at 06:05:22PM +0300, Atanas Filipov wrote:
+> Add device-tree binding for the Qualcomm JPEG encoder hardware block
+> present in SM8250 (Kona) SoCs.
+> 
+> The JPEG encoder is a standalone hardware IP within the camera subsystem
+> that performs JPEG compression in memory-to-memory fashion.  It is
+> separate from the CAMSS ISP pipeline and has its own register space,
+> interrupt, clocks, power domain, IOMMU streams, and interconnect paths.
+> 
+> Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+> ---
+>  .../bindings/media/qcom,sm8250-jpeg-enc.yaml  | 156 ++++++++++++++++++
+>  1 file changed, 156 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/media/qcom,sm8250-jpeg-enc.yaml
+> 
+> diff --git a/Documentation/devicetree/bindings/media/qcom,sm8250-jpeg-enc.yaml b/Documentation/devicetree/bindings/media/qcom,sm8250-jpeg-enc.yaml
+> new file mode 100644
+> index 000000000000..70f573100573
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/media/qcom,sm8250-jpeg-enc.yaml
+> @@ -0,0 +1,156 @@
+> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/media/qcom,sm8250-jpeg-enc.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Qualcomm JPEG Encoder
+> +
+> +maintainers:
+> +  - Atanas Filipov <atanas.filipov@oss.qualcomm.com>
+> +
+> +description:
+> +  Qualcomm JPEG Encoder is the JPEG encode hardware present in Qualcomm SoCs.
+> +  The encoder is a standalone hardware IP within the camera subsystem that
+> +  performs JPEG compression in memory-to-memory fashion.
+> +
+> +properties:
+> +  compatible:
+> +    enum:
+> +      - qcom,sm8250-jpeg-enc
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  interrupts:
+> +    maxItems: 1
+> +
+> +  clocks:
+> +    maxItems: 5
+> +
+> +  clock-names:
+> +    items:
+> +      - const: sf_axi
+> +      - const: core_ahb
+> +      - const: cpas_ahb
+> +      - const: cnoc_axi
+> +      - const: jpeg
+> +
+> +  power-domains:
+> +    maxItems: 3
+> +
+> +  power-domain-names:
+> +    items:
+> +      - const: titan_top
+> +      - const: mmcx
+> +      - const: mx
+> +
+> +  interconnects:
+> +    maxItems: 2
+> +
+> +  interconnect-names:
+> +    items:
+> +      - const: cpu-cfg
+> +      - const: sf-mnoc
+> +
+> +  iommus:
+> +    description:
+> +      SMMU stream ID for the JPEG hardware. The stream ID 0x2040 is used
+> +      for the JPEG core engine on SM8250.
+> +    maxItems: 1
+> +
+> +  operating-points-v2: true
+> +
+> +  opp-table:
+> +    type: object
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - clocks
+> +  - clock-names
+> +  - interrupts
+> +  - power-domains
+> +  - power-domain-names
+> +  - interconnects
+> +  - interconnect-names
+> +  - iommus
+> +
+> +additionalProperties: false
+> +
+> +examples:
+> +  - |
+> +    #include <dt-bindings/clock/qcom,camcc-sm8250.h>
+> +    #include <dt-bindings/clock/qcom,gcc-sm8250.h>
+> +    #include <dt-bindings/interconnect/qcom,icc.h>
+> +    #include <dt-bindings/interconnect/qcom,sm8250.h>
+> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
+> +    #include <dt-bindings/power/qcom,rpmhpd.h>
+> +
+> +    jpeg-encoder@ac53000 {
+> +        compatible = "qcom,sm8250-jpeg-enc";
+> +        reg = <0x0ac53000 0x1000>;
+> +
+> +        interrupts = <GIC_SPI 474 IRQ_TYPE_EDGE_RISING>;
+> +
+> +        power-domains = <&camcc TITAN_TOP_GDSC>,
+> +                        <&rpmhpd RPMHPD_MMCX>,
+> +                        <&rpmhpd RPMHPD_MX>;
+> +        power-domain-names = "titan_top", "mmcx", "mx";
+> +
+> +        clocks = <&gcc GCC_CAMERA_SF_AXI_CLK>,
+> +                 <&camcc CAM_CC_CORE_AHB_CLK>,
+> +                 <&camcc CAM_CC_CPAS_AHB_CLK>,
+> +                 <&camcc CAM_CC_CAMNOC_AXI_CLK>,
+> +                 <&camcc CAM_CC_JPEG_CLK>;
+> +        clock-names = "sf_axi",
+> +                      "core_ahb",
+> +                      "cpas_ahb",
+> +                      "cnoc_axi",
+> +                      "jpeg";
 
-Add a kref to struct iris_inst. iris_get_instance() takes a reference
-under core->lock, so an instance it returns cannot be freed until the
-caller drops that reference with iris_inst_put(). The instance is
-released (mutexes destroyed, memory freed) only when the last reference
-goes away, whether that is held by the closing thread or the interrupt
-handler.
+What are the pin input names for these clocks on the JPEG side? Can we
+use a better name?
 
-Fixes: 38fc8beaba55 ("media: iris: implement reqbuf ioctl with vb2_queue_setup")
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Assisted-by: Claude:claude-opus-4-8
-Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
----
- .../platform/qcom/iris/iris_hfi_gen1_response.c    |  2 ++
- .../platform/qcom/iris/iris_hfi_gen2_response.c    |  1 +
- drivers/media/platform/qcom/iris/iris_instance.h   |  4 ++++
- drivers/media/platform/qcom/iris/iris_utils.c      |  6 ++++++
- drivers/media/platform/qcom/iris/iris_utils.h      |  1 +
- drivers/media/platform/qcom/iris/iris_vidc.c       | 23 +++++++++++++++++-----
- 6 files changed, 32 insertions(+), 5 deletions(-)
+> +
+> +        interconnects = <&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
+> +                         &config_noc SLAVE_CAMERA_CFG QCOM_ICC_TAG_ACTIVE_ONLY>,
+> +                        <&mmss_noc MASTER_CAMNOC_SF QCOM_ICC_TAG_ALWAYS
+> +                         &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ALWAYS>;
+> +        interconnect-names = "cpu-cfg",
+> +                             "sf-mnoc";
+> +
+> +        iommus = <&apps_smmu 0x2040 0x400>;
+> +
+> +        operating-points-v2 = <&jpeg_opp_table>;
+> +
+> +        jpeg_opp_table: opp-table {
+> +            compatible = "operating-points-v2";
+> +
+> +            opp-100000000 {
+> +                opp-hz = /bits/ 64 <400000000>,
+> +                         /bits/ 64 <100000000>;
 
-diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c b/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
-index bfd7495bf44f..e2b95c22f4d1 100644
---- a/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
-+++ b/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
-@@ -632,6 +632,7 @@ static void iris_hfi_gen1_handle_response(struct iris_core *core, void *response
- 			mutex_lock(&inst->lock);
- 			iris_hfi_gen1_session_event_notify(inst, hdr);
- 			mutex_unlock(&inst->lock);
-+			iris_inst_put(inst);
- 		} else {
- 			iris_hfi_gen1_sys_event_notify(core, hdr);
- 		}
-@@ -667,6 +668,7 @@ static void iris_hfi_gen1_handle_response(struct iris_core *core, void *response
- 			}
- 		}
- 		mutex_unlock(&inst->lock);
-+		iris_inst_put(inst);
- 
- 		break;
- 	}
-diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-index 25162ae71357..1a1c221b8467 100644
---- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-+++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_response.c
-@@ -967,6 +967,7 @@ static int iris_hfi_gen2_handle_session_response(struct iris_core *core,
- 		iris_hfi_gen2_handle_dequeue_buffers(inst);
- 
- 	mutex_unlock(&inst->lock);
-+	iris_inst_put(inst);
- 
- 	return ret;
- }
-diff --git a/drivers/media/platform/qcom/iris/iris_instance.h b/drivers/media/platform/qcom/iris/iris_instance.h
-index a770331d1675..dde5d0b8a83b 100644
---- a/drivers/media/platform/qcom/iris/iris_instance.h
-+++ b/drivers/media/platform/qcom/iris/iris_instance.h
-@@ -6,6 +6,8 @@
- #ifndef __IRIS_INSTANCE_H__
- #define __IRIS_INSTANCE_H__
- 
-+#include <linux/kref.h>
-+
- #include <media/v4l2-ctrls.h>
- 
- #include "iris_buffer.h"
-@@ -35,6 +37,7 @@ enum iris_fmt_type_cap {
-  * struct iris_inst - holds per video instance parameters
-  *
-  * @list: used for attach an instance to the core
-+ * @kref: reference count, keeps the instance alive while the IRQ thread uses it
-  * @core: pointer to core structure
-  * @session_id: id of current video session
-  * @hfi_session_ops: iris HFI session ops
-@@ -82,6 +85,7 @@ enum iris_fmt_type_cap {
- 
- struct iris_inst {
- 	struct list_head		list;
-+	struct kref			kref;
- 	struct iris_core		*core;
- 	u32				session_id;
- 	const struct iris_hfi_session_ops	*hfi_session_ops;
-diff --git a/drivers/media/platform/qcom/iris/iris_utils.c b/drivers/media/platform/qcom/iris/iris_utils.c
-index ba5c8dc1280c..1096cc4b01c3 100644
---- a/drivers/media/platform/qcom/iris/iris_utils.c
-+++ b/drivers/media/platform/qcom/iris/iris_utils.c
-@@ -92,6 +92,12 @@ struct iris_inst *iris_get_instance(struct iris_core *core, u32 session_id)
- 	mutex_lock(&core->lock);
- 	list_for_each_entry(inst, &core->instances, list) {
- 		if (inst->session_id == session_id) {
-+			/*
-+			 * Take a reference under core->lock, paired with
-+			 * iris_inst_put() once the caller is done, so the
-+			 * instance cannot be freed by a concurrent close().
-+			 */
-+			kref_get(&inst->kref);
- 			mutex_unlock(&core->lock);
- 			return inst;
- 		}
-diff --git a/drivers/media/platform/qcom/iris/iris_utils.h b/drivers/media/platform/qcom/iris/iris_utils.h
-index 228a5f963812..be23acc0e848 100644
---- a/drivers/media/platform/qcom/iris/iris_utils.h
-+++ b/drivers/media/platform/qcom/iris/iris_utils.h
-@@ -48,6 +48,7 @@ bool iris_split_mode_enabled(struct iris_inst *inst);
- bool iris_fmt_is_8bit(u32 pixelformat);
- bool iris_fmt_is_10bit(u32 pixelformat);
- struct iris_inst *iris_get_instance(struct iris_core *core, u32 session_id);
-+void iris_inst_put(struct iris_inst *inst);
- void iris_helper_buffers_done(struct iris_inst *inst, unsigned int type,
- 			      enum vb2_buffer_state state);
- int iris_wait_for_session_response(struct iris_inst *inst, bool is_flush);
-diff --git a/drivers/media/platform/qcom/iris/iris_vidc.c b/drivers/media/platform/qcom/iris/iris_vidc.c
-index b68b98f02e26..53f1296aa4c5 100644
---- a/drivers/media/platform/qcom/iris/iris_vidc.c
-+++ b/drivers/media/platform/qcom/iris/iris_vidc.c
-@@ -39,6 +39,22 @@ static void iris_v4l2_fh_deinit(struct iris_inst *inst, struct file *filp)
- 	v4l2_fh_exit(&inst->fh);
- }
- 
-+static void iris_inst_release(struct kref *kref)
-+{
-+	struct iris_inst *inst = container_of(kref, struct iris_inst, kref);
-+
-+	mutex_destroy(&inst->ctx_q_lock);
-+	mutex_destroy(&inst->lock);
-+	kfree(inst->fmt_src);
-+	kfree(inst->fmt_dst);
-+	kfree(inst);
-+}
-+
-+void iris_inst_put(struct iris_inst *inst)
-+{
-+	kref_put(&inst->kref, iris_inst_release);
-+}
-+
- static int iris_add_session(struct iris_inst *inst)
- {
- 	struct iris_core *core = inst->core;
-@@ -169,6 +185,7 @@ int iris_open(struct file *filp)
- 	inst->domain = session_type;
- 	inst->session_id = hash32_ptr(inst);
- 	inst->state = IRIS_INST_DEINIT;
-+	kref_init(&inst->kref);
- 
- 	mutex_init(&inst->lock);
- 	mutex_init(&inst->ctx_q_lock);
-@@ -308,11 +325,7 @@ int iris_close(struct file *filp)
- 	iris_check_num_queued_internal_buffers(inst, V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
- 	iris_remove_session(inst);
- 	mutex_unlock(&inst->lock);
--	mutex_destroy(&inst->ctx_q_lock);
--	mutex_destroy(&inst->lock);
--	kfree(inst->fmt_src);
--	kfree(inst->fmt_dst);
--	kfree(inst);
-+	iris_inst_put(inst);
- 
- 	return 0;
- }
+So, you've identified the issue earlier. The shared clocks need to be
+scaled, taking all users in account. Please come up with the solution
+too.
+
+> +                required-opps = <&rpmhpd_opp_min_svs>;
+> +            };
+> +
+> +            opp-200000000 {
+> +                opp-hz = /bits/ 64 <400000000>,
+> +                         /bits/ 64 <200000000>;
+> +                required-opps = <&rpmhpd_opp_low_svs>;
+> +            };
+> +
+> +            opp-400000000 {
+> +                opp-hz = /bits/ 64 <400000000>,
+> +                         /bits/ 64 <400000000>;
+> +                required-opps = <&rpmhpd_opp_svs>;
+> +            };
+> +
+> +            opp-480000000 {
+> +                opp-hz = /bits/ 64 <400000000>,
+> +                         /bits/ 64 <480000000>;
+> +                required-opps = <&rpmhpd_opp_svs_l1>;
+> +            };
+> +
+> +            opp-600000000 {
+> +                opp-hz = /bits/ 64 <400000000>,
+> +                         /bits/ 64 <600000000>;
+> +                required-opps = <&rpmhpd_opp_nom>;
+> +            };
+> +        };
+> +    };
+> -- 
+> 2.34.1
+> 
 
 -- 
-2.47.3
-
+With best wishes
+Dmitry
