@@ -1,46 +1,46 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 446E43890F8;
-	Fri, 31 Jul 2026 03:25:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82775357D19;
+	Fri, 31 Jul 2026 03:25:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785468303; cv=none; b=Afd767cxS/2YhGR8QBWDfItZdk6RozjgEoPIucOnEfMlnYNQ/4Tkw7FM6uEw12T9Mtlr7Y/YV3eSRi5xZp7z64wRqyk4uXQHTE6JiwPx7sUrvW9GzjQOZTi5Sdg2wGEnitV4EOhqD3HD8UtTbeVjFuGWsjt8lL/8cRUaRl92zgg=
+	t=1785468306; cv=none; b=XR9s5zwwbDl6GfnpRQz0Y3BtNFOwmv7vk61BavgVOVfY7Rh9q9LGjfhFRyRnPaxVCC7GeIfGRd0tbYsPTnX5DKtoWTEONDmvQQl52fOyKCWIWIs+Sgs/AXyI2Q3WHTozlKdyA35eWn3Ey5WxfUcEIttuiOVJzDPeKPeMJLFWYmo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785468303; c=relaxed/simple;
-	bh=yhtkPTeNYDs/5sGaalYwIv86a2hIjajAVIGzZQHpwmE=;
+	s=arc-20240116; t=1785468306; c=relaxed/simple;
+	bh=/CozXdVYRFBgqIx3gXqGBahXZZwWg2RX8ZJ3Ew9weqQ=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=dLcIWLHCRFSKZXAHvpW3C12fotJfDuPY82W7UMU5iatzwh7qXd8gQWZgdD3pT0VJa2DTD07lkO8qzZGXxxC3r+5H3PzQjJc2oq59SRlko9CXiXzlcFRaOxehqeUNJ8CzYxrM5R6RDFlcgpufXgKCTSV1nRm64FWva/cgJfiu8mw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=e63bdmzW; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=a1ZWjBiLSB5NoaICOHupSSnI8+Bg4tUmzZdFvNzqzGuLxHQzSLocMgcpmd1rGv/M7pjh1FV3+l0EbkCY2G9R5xqXzgVCjJZB03MYElNPcK7nWz4+12BZBbQMp2T56mPBYnaqNYPHFeDV51T1OlIXchWGVKbHFUUU2JO6C5qpIkU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=C7Xmzw5B; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="e63bdmzW"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8F4EF1F00A3A;
-	Fri, 31 Jul 2026 03:25:01 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="C7Xmzw5B"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 629001F00A3E;
+	Fri, 31 Jul 2026 03:25:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785468302;
-	bh=fjN6zZsz8Z4eflNgi6KSFQep1nTH1VNNNxjgONUm8fY=;
+	s=k20260515; t=1785468303;
+	bh=kHSnNHgNIJxAE4JM7VBVR+qD+ZFP19PVdAkmYvKU7bc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=e63bdmzWTJz2xcLuVWO46+vtVRhHlY0qY5tH5v1V2dEfNTn59gcSLfQsyeXiSDJ7B
-	 jpKThxXmT55FaumOZWWaAMdkPg4YD2ifHBxBWOke/IOBVDqjabhPy50di7jR2Tz5bP
-	 aynleu2jZmhKP35buEs0hXUqibdWaXwklTD2d1Xm9N0KYJZvoIHcJARr0bsrB1cNX7
-	 b/aM2Z2N6VR3awp8w8TYRuvL0xdMjV1ao2xDVGNpF4FkmvTpcO1nDQDvBuhuowzYMV
-	 tkromlca+arzSIRbmI+pXse6noAHZrUltkEbIC7ARJ5JhvudQskzs3Qs8ARluKStVX
-	 MmIlvPeO0acFw==
+	b=C7Xmzw5BnWL+Cm+/pShLKpnaCWSVTzzY8QnkJA2hiAy+mOqYMZf/eP3X8MmCoxrot
+	 vU3F9zPFd5yNJ1vOC2fTWygr5pkEg1o6CoPicNS0/xFogbzoNnKPDwhmJrhqybqmZ4
+	 a35IeNN6d9uPdFeBf5WjvoovpBGy5mEfnZFy/Lo4vtDj2/KPTRskLftxmxsuqYLCZw
+	 7qYuUho9fAjjQTY2pIviQsCye28k4Jp+luPxba9sOvX/vABDnarO3o8BtIqIawV17d
+	 f9EQmn93DsWyriSD2rT04h1QGdUfSyHYACxLUusxIHbiX+4/SQg1roX9AzUrx/FSiB
+	 jq89YODTamL/A==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>,
-	=?UTF-8?q?Uwe=20Kleine-K=C3=B6nig=20=28The=20Capable=20Hub=29?= <u.kleine-koenig@baylibre.com>
-Cc: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-	Brian Masney <bmasney@redhat.com>,
+To: Konrad Dybcio <konradybcio@kernel.org>,
+	Stanislav Zaikin <zstaseg@gmail.com>
+Cc: Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
 	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
+	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v1] clk: qcom: Drop inclusions of <linux/mod_devicetable.h>
-Date: Thu, 30 Jul 2026 22:24:34 -0500
-Message-ID: <178546826824.316815.1924718881037127202.b4-ty@kernel.org>
+Subject: Re: [PATCH] arm64: dts: qcom: taoyao: Drop adsp_rpc_remote_heap_mem override
+Date: Thu, 30 Jul 2026 22:24:35 -0500
+Message-ID: <178546826839.316815.12078225254771791081.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <7b6441aa3b0dba35112ea486bfea3b3171d8527b.1784225976.git.ukleinek@kernel.org>
-References: <7b6441aa3b0dba35112ea486bfea3b3171d8527b.1784225976.git.ukleinek@kernel.org>
+In-Reply-To: <20260730085422.631896-1-zstaseg@gmail.com>
+References: <20260730085422.631896-1-zstaseg@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -51,18 +51,22 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Thu, 16 Jul 2026 20:21:05 +0200, Uwe Kleine-König (The Capable Hub) wrote:
-> The only used symbol in these four drivers that is provided by
-> <linux/mod_devicetable.h> is of_device_id and this is also provided by
-> <linux/platform_device.h>. So drop the unneeded include which brings us
-> one step closer to removing <linux/mod_devicetable.h>.
+On Thu, 30 Jul 2026 10:54:21 +0200, Stanislav Zaikin wrote:
+> taoyao originally redefined adsp_rpc_remote_heap_mem at a fixed address
+> to avoid overlapping with cdsp_mem, since kodiak.dtsi's version was a
+> fixed-address at the time.
 > 
+> kodiak.dtsi now defines adsp_rpc_remote_heap_mem as a dynamically
+> allocated "shared-dma-pool" region instead, which removes the fixed
+> address entirely and so cannot overlap with cdsp_mem. This makes the
+> override unnecessary.
 > 
+> [...]
 
 Applied, thanks!
 
-[1/1] clk: qcom: Drop inclusions of <linux/mod_devicetable.h>
-      commit: 205986f9e81ddad510763f26e9ccdea0f49b3083
+[1/1] arm64: dts: qcom: taoyao: Drop adsp_rpc_remote_heap_mem override
+      commit: c8748463283738aacf323eb3f7853e6533d941dc
 
 Best regards,
 -- 
