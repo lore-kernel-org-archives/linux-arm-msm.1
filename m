@@ -1,207 +1,173 @@
-Received: from mail-yx1-f45.google.com (mail-yx1-f45.google.com [74.125.224.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 96D2443CE54
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 15:25:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=74.125.224.45
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785511549; cv=pass; b=nfuizeiHmY1dOsY3SM3j+kYFl9nJAAFaqNr8BoQjd2fsZ1WklqGtOrNj0YRxUQ9HFgYc/MSzGZBgGFnVqeNSOD5uhUd51UPXFH2evHAnmniYkb2vQuVH/QkQoLL4tVZxPaPx3jYKb0KNu5lXjZLd64dgFCNTD/H+f9jDn3mAmcY=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785511549; c=relaxed/simple;
-	bh=r3BGYhuAYAfTixk0FCpnDsR6p4q7mVxOkENcHc5JNeA=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=kUNh7XDujMgUYtGmimr/ryBtEDi8xccv13TaZwxidWp7heZbnFMAeAGkU7gh0ODMTOLIU3pvtmH9ajWGh+G5kdEiRoMy38s/TRC6+/inJ///ZA5aB3fiGfscH/LSWLKyCwvV+cMYopFPi7EhIb2//MfSxIb9eM8U5xsa3BQ9cIU=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QNGd0gLt; arc=pass smtp.client-ip=74.125.224.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 089D243C041
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 15:27:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785511645; cv=none; b=QbOkiBy8lD9dLsDVWjTjSNrMaVKFM5/Okin5FJELQsar8vvch5/1RlHB1XZoO70AOF24xc98PHGopMHNxgKJlspcRe0bP+H/ICnIMHkEroT5dFncGhdLEjBrCJP94WLjSEQPro1hZveE1Ji2XYu5xwByDnxt44v1RHnf2Qcu/bw=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785511645; c=relaxed/simple;
+	bh=7klZEho0H83j8ylpjNW4TH0V0nFQueKsAusCKPgOKBY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ew977f+WdJLCjFyCwtUV0JQnY68y8p91al8pJpehFevATnYVmkfDWL70qPqxZtKV/cwDtj4OtRV2IbpWB4E/ZXLPKUQytceDsPXoOF7BQAOu+HBUjyTkeVMgRCoOq7htGhHr+ALZsg6lQ3hCydX/F3Ygdhb6YyrcmM8tBFNIChU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ot8syubV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RELFfAQu; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QNGd0gLt"
-Received: by mail-yx1-f45.google.com with SMTP id 956f58d0204a3-6685483aad2so1564963d50.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 08:25:45 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785511543; cv=none;
-        d=google.com; s=arc-20260327;
-        b=qNIv3gw0cKk89acr7OttKCYLHFNMKsHGu2uMBqQ6QHxy0rn3rZtRc3iIAagG7v8JRY
-         yf02hUDm3kwiOooDbcyZAiXhd0Cxt36EHhrD7x+RTtKVGwlDhLGeVHm3OIOGrCugEXkk
-         XHKAAUjEcK4m4VrXQHqgtguAQRRLAO6VyuYI8pbzdYFWDZ1wSo7x/a+IZI/xeZu0XhWN
-         O+akHwPwNdNOoBUaQXap16nFCG+ORtCBqFkEmxyyA1Asj2Vti7R+6RqiqiAe9JaX49Bh
-         N1UaQ1WAK8ofX5xu/7doE71LxiMRDCNT0p/kIfoTUB9eSudfvsxS5MNrKZjtGJlHuY5w
-         NFhA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=aeXGsNobYcCbssuhzV+aneWfZNBxdavhRmXzGbjYdbc=;
-        fh=+b4xqD6oncahnLKyM9O0Zp7skDMUbiQTBn9QMC/rMBI=;
-        b=eXsgg6X2Etvkt2Ol8t5SCxcqWamGtvKmOVH7wmj3mD+4tqkTueFrE0OhYAf9xzSpy2
-         hBZcHk6ed/uG/F7mIAlk+4nb7TCL1a4A3Mg85W68IKR0N1kqAPd6+8zbiX+UXt58GCJZ
-         cAanXxonHHv2XElYNNmXyl20djcFu+g2vzjsWcPzIWqgEFdCgn1PSgXJYH6UrBhLTY/a
-         6dFivfvglXyBzpmeUmup6jDe/ZZC8GtedVUzmW/IBOInbm/kaQYTQlGNL0xfDf/ndW5i
-         m94YMxOtAC66O+9kfsuZpIRdUZlmpfXYMSevK+25I16SYGhYLJPHI1HY8Pf7ZX88Mmth
-         Cy3A==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ot8syubV";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RELFfAQu"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66VFOndn404258
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 15:27:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	7uFsYuCwq0Qx2h2L72I1/1dKPl18cLwGQgBX9DoqR+E=; b=ot8syubVxIKhBaXY
+	GbPyChFT7d9PiDexEP7CrEwOpsRi04eXQ0sXIz0aj+UnJtEDIRMWEafWe4EZENP9
+	fiwNniIZ+8HMU8SdoY2NEi4wIruZDsnkqBu+tOgNgQ5HClFzpZII4DHoN5rRyweP
+	wPAhFj3UaBiAMiuTzjVN79DhDzL50NrehJvU0Czkr/q4drmt4rDAxdRI1wiiodeH
+	JptdpRGBAaRcMEHsL5PUbyioKRf/4kjA9DoUCfwYftiYjlcHd2G3eowN47I7gtXO
+	soJKm1+8HJWAGTb+N5Ly1C/dWOnYiJzZeosHZifZA+DyP54z6pG88hoV8qgrJSCd
+	lhA56g==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4frufkgux0-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 15:27:23 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c21be5bb4so2216201cf.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 08:27:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785511543; x=1786116343; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=aeXGsNobYcCbssuhzV+aneWfZNBxdavhRmXzGbjYdbc=;
-        b=QNGd0gLt5biSDdt1mfZ49OhAm/vuE7vZkny3azIe/YhS2XVcUEk99eXICqqcGyG3Cn
-         XE+/ofg3kcImvIoWvD3M0laJPybFyAAZ/G9PfoArywh7syCfPixUPk6HfSv9dozElakt
-         ztyYjK1rV874UtR21l4EwIo5Zqtq0vHZeQmGfsyNzMOoTdMAJB1ESaT8/6Y11Dz3j6Ev
-         VpudTKc6iTd8O680r0bg2CVfpI1LjPFeJk5WaGOJ6lPECWyPFBmqyWOHi0uXvKfe5khV
-         0T7zw1tmTNN3hQN/4gVUkXmCI/RWgxiohd9UepHsoTjco32yOS7z3LA8ba9Z79OH4d3s
-         Ctow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785511543; x=1786116343;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1785511642; x=1786116442; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=aeXGsNobYcCbssuhzV+aneWfZNBxdavhRmXzGbjYdbc=;
-        b=I66bTRH5gi1d5YEaxkOa1Lu/0VdQa8k14kySHsgb0VjZb20dHi6Lpza4hxY+ncdgpk
-         BFlxWZWtqcQonl6EkJd+dUvWxRZH8WMDfNLJwYDmKjS1PnsMDcmX23RkUE33en4FKhcS
-         H5+tuxFB3j4sk8J+c0nXd4VXg1fqGGHfIDNAjCnZbG4zIErJ9DL1o4CFdUlVr89sSD4Q
-         jiLkEdbixLaKy37FQnwMiyVNnfU54+1tEQUCjgTB2EWiIuEFjoTJdSWVjEPv/LMRJxKp
-         kxoGM01lti1kWjr+fl8MOLXq/gMTXOuKSZDB72O6ZO+dGEkDEssuq/kz1NXJ7z/tSnW4
-         oX5A==
-X-Forwarded-Encrypted: i=1; AHgh+Rrl03Z94MBGa9bnKJje/jip9/Kvpw6YdP6qVFFnlRSkRmHLINWBafEiaxagSN+YELaqQJPRBDvXGZc+yU5X@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy0g07f86+wWU54GRSh3E9kQvjW9jCZ1Fm8ay6sL7OLleCWeM8V
-	2B+rCRZRSle4L7E1SBB6oVpiCYbDtJ7I8WK48fIimBaaqxiyXRwexg/X1pA6qfud3v9/JqgIaQN
-	bJkYsxRG57vzAfw+EhHUPFjeRn7ktZ3g=
-X-Gm-Gg: AR+sD11rou+qFbYmY8ZOmQMfy3YZ668Iip1hgdryK/ks3ydKyEmtBCpA+Qn+2v9FiYC
-	Ao9Y3G6IUodNQQkMNVsz2so7amplNykwDsX3q5AIRiya0QoxtAbV1CxWks6S1/Zqw9ZNZH/O3ja
-	sSvDa74w0VAV2QbI/Wonm4FD4PZpJj33ZbgtkowKjVRzxTTktA+kw0abCkB/is3a+MT/vGbMQ3q
-	BbkSEGIH7Nxx0kOGcx0S9E1kkuo93P+6v32vO/ohuJG7khKu+p19GhpJ5/HO1hJqIEmS97ZDw2h
-	D+hM/KlY4e7ZUekpqeJhQVW86H5kskthtMSwC+fyjXt/a2mgWz3xnfLua8nfn6PJdL3Cbw4AY+L
-	nzuhuGyPWdbFYgtfw51bL8TBP5NCWJuNiP10=
-X-Received: by 2002:a05:690e:23db:b0:668:434d:a2f5 with SMTP id
- 956f58d0204a3-6694efe1128mr419973d50.1.1785511543228; Fri, 31 Jul 2026
- 08:25:43 -0700 (PDT)
+        bh=7uFsYuCwq0Qx2h2L72I1/1dKPl18cLwGQgBX9DoqR+E=;
+        b=RELFfAQuGwVTMoPjQW0CkpzoY3qZ5rAD64tfmeYLQ7YmAQquRNDOgV4H/mIVgHpL5J
+         kK7EnFyrjfDrrWa7Xt6YnBxCKDJt2SHrUPhz3mXYA1ZEVNWPhjc7PTkZ92k8x8z6Eprn
+         HComGYtsU7AfvEkbz7SJ5q/qQh+FB1i/gcNkd5J1RptyFc1zMAJ1B9RsbDDBE8F+St7p
+         kJmcWRsW1iA+E8R6oL92NjteY/Jhmqyrotn/Tiba1W9RFET7IoMYq+HlzJbygr1ERF1E
+         hEhsyiELJ5N+6lk0URri/JKVTif4v4svjL4y9uNcqorKlPbnvXfjHACFm1VfiT0gkzPn
+         4pNA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785511642; x=1786116442;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=7uFsYuCwq0Qx2h2L72I1/1dKPl18cLwGQgBX9DoqR+E=;
+        b=QpcWrDdXXgDYD+O26vsXzdCoBi45oGrCKdlMI2Dinmfk4hUmrmTRE5baoRezlrL9r2
+         ZZC+9j/pc8C7zLebWgLW7X7eX1IkdRJrpz3rID9aRar/YOSTWWqztVX+Gm+tn4AlZ9ZL
+         HAYpc2UG9p2sceZpmlDP6M0g/WUupErvKlohtvZ2Q79+XycB3QUzY3aGe4KhgsjDYNL5
+         cvi5u89GOJDLLyEmriAd7ZCgEejsncBJHaUVVF9WK2EJUiBDjlbHb3TRQ0kSX8uxD0BK
+         YvMzLo5pB5EzdZJfIVd7aUwcSLCLB6TbkxXACq9PtJ1qR8Qui/V+5aEYFXsxnK6a8VRp
+         wGEQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rrqutr1+4myXYwkdvFjDjs5ITffyvgHwWLWXkPm4JmgTsGR20FMh2VkvPzWLbAACCk0qMiMy7/xZAm7RncU@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxx8/rtaD4NSt/ea8lFs0YpYE8KbroT6KYRm5USYPxinH9nLTa2
+	h2TrHqwVPlzfjrxSBP3PrYSJbU3e5KGi8dsdJ8QJAecl+aEhG+koFQQ7qi/LW1ZvdTNXBENPdHC
+	9vAx2F3l+LJ0xrAWU9nWv2nxgqhDXI5AtwwA5SZXUTB/PNxxs5GL+nvvD/WtG9BPNOYEX
+X-Gm-Gg: AR+sD11Oa6dNJDFhwwbdjCfqghuBrLzwdqo4SYHsRMAbQst1oyEKS824ktXhdfECVFh
+	SEDpy3iWumh+bV8rP4s46+pVpUsD+NV8Xv57DzpbDTkp5vlP5VnljEJBFw0fb5hJYZ/oFOhT/oB
+	6VIEVnOCUALXawUWIqUjMsb6JACt04wt4Ewh9EDKO7LG6+n+sbcdOCRRkBi0OtNDcOoOUJ99rbv
+	pL/B9H5Sv/8qF7ODUQ86QtlW1iKxPWs6gr7BKUvtWB9XszFhl+EHn1f7iQmpBcMaMtIEByxvCVj
+	Rgg7lrbHFOpXHbUC+zxSiW4TFSPPgKq7Teqf5gWrINUVgs53fIgiv6fTwRYi+qLsD3G73Z1I/j6
+	18J8fmndrgpCMJjvQJ9zuIp4H
+X-Received: by 2002:a05:622a:e198:10b0:51b:eab3:4ef1 with SMTP id d75a77b69052e-52b567b3aafmr5993571cf.4.1785511641998;
+        Fri, 31 Jul 2026 08:27:21 -0700 (PDT)
+X-Received: by 2002:a05:622a:e198:10b0:51b:eab3:4ef1 with SMTP id d75a77b69052e-52b567b3aafmr5993261cf.4.1785511641664;
+        Fri, 31 Jul 2026 08:27:21 -0700 (PDT)
+Received: from [192.168.120.193] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a09c655446sm1975608a12.21.2026.07.31.08.27.20
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 31 Jul 2026 08:27:20 -0700 (PDT)
+Message-ID: <db3c439b-d5b2-41c5-a3f0-bb528843a85c@oss.qualcomm.com>
+Date: Fri, 31 Jul 2026 17:27:19 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260731042920.2431343-1-shuai.zhang@oss.qualcomm.com>
-In-Reply-To: <20260731042920.2431343-1-shuai.zhang@oss.qualcomm.com>
-From: Luiz Augusto von Dentz <luiz.dentz@gmail.com>
-Date: Fri, 31 Jul 2026 11:25:31 -0400
-X-Gm-Features: AUfX_mxNSOCDAeGLeIjPAMPEEY6vriJ4fIIQAzX8I6gPSwfUMPUdB1nzVJokPr8
-Message-ID: <CABBYNZJuenvKSvHuf6DCkt9hpdhuECm3gf5hiV+FyS2E9AM7nQ@mail.gmail.com>
-Subject: Re: [PATCH v1] Bluetooth: mgmt: always reply when a queued mgmt
- command is cancelled
-To: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
-Cc: Marcel Holtmann <marcel@holtmann.org>, linux-bluetooth@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	chejiang@qti.qualcomm.com, quic_chezhou@quicinc.com, 
-	wei.deng@oss.qualcomm.com, jinwang.li@oss.qualcomm.com, 
-	mengshi.wu@oss.qualcomm.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] pwm: ipq: fix period calculation
+To: Stephane Lepain <stephanelepain@gmail.com>,
+        =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <ukleinek@kernel.org>
+Cc: linux-pwm@vger.kernel.org, Kenneth Kasilag <kenneth@kasilag.me>,
+        George Moussalem <george.moussalem@outlook.com>,
+        Devi Priya <quic_devipriy@quicinc.com>,
+        Baruch Siach
+ <baruch.siach@siklu.com>, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260731070542.155398-1-stephanelepain@gmail.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260731070542.155398-1-stephanelepain@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDExNyBTYWx0ZWRfX4KtVUX8iyAbS
+ jf1DIGQQsynok/JdMHnUlTWVF1L6VhqsZTrIx5CbgnxyXKfjZfWxOpgeccGWR5qYB6KnCh8uw2E
+ koBiUxmLCh7ZrMXwVYkc7l6yeUBIwDU=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDExNyBTYWx0ZWRfX74eNrNl+T9B/
+ wK+GpAKdGAR5sE9AmRXiXQc3STqs9jvz0evTGki3ckWPVwwLIePYYhINq8PBj+gU6Zh3oW3s3kw
+ xgvYjD+5wOE9I2Ydbd7LcLhZ7TLiFsPcDnv0yrDhyECBhAkwO8kcBHWvT0RT8jjerSxVkIKX7ER
+ BGY+gXYmELIunaSemHt25TCfe56c1i1x7xodaw5OfxZ3HlkSBCoOGVjc8GgtUi8E/jAW26ycYjS
+ g7e59NnjepSx/7RrHRFmr5FtVEoayZLfv7nUFWkoAxeq1LuWNgxjHbiDmJFObXCUDpmB3S2ThaR
+ j2HkLBqV4mvBF8CHI9AoO8IasqaeYW64jgi4+POw1Xwh3WBZcinPYaVlfHxveqbsvyN2Mpw4MeM
+ yDiTyghS+B2zoJYtf0V9U7KNlzywm/HP4flNJmY5LKhx2p4z4XRBAYROeoQUNS8xa+xEq24ACXG
+ 5Jby2WlsH+Bs9sncV/A==
+X-Proofpoint-GUID: lVuiLgFd7l0AFAJ24UkxsFZqkCcbY9Uq
+X-Authority-Analysis: v=2.4 cv=BpOtB4X5 c=1 sm=1 tr=0 ts=6a6cbedb cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=nVPmijOAcTPNv26JQuwA:9 a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
+X-Proofpoint-ORIG-GUID: lVuiLgFd7l0AFAJ24UkxsFZqkCcbY9Uq
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-31_05,2026-07-30_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 clxscore=1015 bulkscore=0 spamscore=0 lowpriorityscore=0
+ impostorscore=0 phishscore=0 adultscore=0 priorityscore=1501 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607310117
 
-Hi Shuai,
+On 7/31/26 9:05 AM, Stephane Lepain wrote:
+> From: Kenneth Kasilag <kenneth@kasilag.me>
+> 
+> ipq_pwm_apply() fixes pwm_div at its maximum and derives only pre_div
+> from the requested period. Since the period spans
+> (pre_div + 1) * (pwm_div + 1) input clocks, pinning pwm_div near its
+> maximum forces pre_div towards zero for short periods: once pre_div
+> rounds to 0 the shortest representable period is (pwm_div + 1) / clk_rate,
+> and any shorter request is rejected outright:
 
-On Fri, Jul 31, 2026 at 12:29=E2=80=AFAM Shuai Zhang
-<shuai.zhang@oss.qualcomm.com> wrote:
->
-> On boot, the kernel's HCI_AUTO_OFF timer powers a newly probed
-> controller back off after 2 seconds if nothing has taken ownership of
-> it yet. bluetooth.service is expected to take ownership within that
-> window by powering the adapter on, but on slower boots bluetoothd can
-> start late enough that the two race: HCI_AUTO_OFF fires and the
-> controller is torn down and re-initialised while bluetoothd is still
-> in the middle of its own adapter setup sequence.
->
-> When that teardown happens, any mgmt command bluetoothd had already
-> queued for that adapter is cancelled - but userspace is never told.
-> bluez's mgmt command queue is strictly serialised, so a command that
-> never receives a reply blocks every command queued after it on that
-> adapter indefinitely. In practice this means bluetoothd gets stuck
-> before it can register the adapter, and reports no controller being
-> available at all, even though the controller itself is healthy and
-> fully usable moments later.
->
-> Fix this by treating a cancelled command like any other failure
-> instead of silently dropping it: always send a reply back to
-> userspace, using the existing "cancelled" status value. This mirrors
-> how other mgmt commands already behave when they fail for other
-> reasons, and lets bluetoothd's normal error handling take over
-> (log the failure and continue) instead of hanging forever.
->
-> Verified on a QCS6490 rb3gen2 board where this HCI_AUTO_OFF vs.
-> bluetooth.service race was reproduced: before this change, hitting
-> the race left the adapter permanently unavailable to bluetoothd until
-> the service was restarted; after this change, hitting the same race
-> no longer affects adapter registration and the controller comes up
-> normally.
->
-> Signed-off-by: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
-> ---
->  net/bluetooth/mgmt.c | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
->
-> diff --git a/net/bluetooth/mgmt.c b/net/bluetooth/mgmt.c
-> index 167d75e34..9031b5d5d 100644
-> --- a/net/bluetooth/mgmt.c
-> +++ b/net/bluetooth/mgmt.c
-> @@ -301,6 +301,8 @@ static u8 mgmt_errno_status(int err)
->                 return MGMT_STATUS_ALREADY_CONNECTED;
->         case -ENOTCONN:
->                 return MGMT_STATUS_DISCONNECTED;
-> +       case -ECANCELED:
-> +               return MGMT_STATUS_CANCELLED;
->         }
->
->         return MGMT_STATUS_FAILED;
-> @@ -1338,7 +1340,7 @@ static void mgmt_set_powered_complete(struct hci_de=
-v *hdev, void *data, int err)
->         struct mgmt_mode *cp;
->
->         /* Make sure cmd still outstanding. */
-> -       if (err =3D=3D -ECANCELED || !mgmt_pending_valid(hdev, cmd))
-> +       if (!mgmt_pending_valid(hdev, cmd))
->                 return;
+[...]
 
-On set_powered_sync:
+>  	/*
+> -	 * Pick the maximal value for PWM_DIV that still allows a
+> -	 * 100% relative duty cycle. This allows a fine grained
+> -	 * selection of duty cycles.
+> +	 * The period spans (pre_div + 1) * (pwm_div + 1) input clocks. Rather
+> +	 * than fixing pwm_div at its maximum (which gives usable duty
+> +	 * resolution only for long periods and collapses to ~0% for short
+> +	 * periods) search for the (pre_div, pwm_div) split whose period best
+> +	 * approximates the request while leaving pwm_div large enough to
+> +	 * resolve the duty cycle.
+>  	 */
 
-    mutex_lock(&hdev->mgmt_pending_lock);
+I think the comment can just go
 
-    /* Make sure cmd still outstanding. */
-    if (!__mgmt_pending_listed(hdev, cmd)) {
-        mutex_unlock(&hdev->mgmt_pending_lock);
-        return -ECANCELED;
-    }
+> -	pwm_div = IPQ_PWM_MAX_DIV - 1;
+> +	if (ipq_chip->clk_rate > 16ULL * GIGA)
+> +		return -EINVAL;
 
-Which is why we consider -ECANCELED as a NOP, also if you dig deeper
-you will see that hci_power_off -> hci_dev_do_close ->
-hci_dev_close_sync -> if (!auto_off) __mgmt_power_off ->
-mgmt_pending_foreach(0, hdev, true, cmd_complete_rsp, &match);
+That's a very fast clock..
 
-So the reason this is not working as intended is because we are not
-clearing HCI_AUTO_OFF once we receive Set Powered command only once we
-run hci_power_on_sync which create a race where the likes of
-bluetoothd will be trying to power the adapter but power_off work is
-still pending, so we should probably clear HCI_AUTO_OFF whenever
-setting HCI_MGMT as at that point we know there is a user already
-there is no point in powering it off.
+[...]
 
->         cp =3D cmd->param;
-> @@ -5651,9 +5653,6 @@ static void mgmt_remove_adv_monitor_complete(struct=
- hci_dev *hdev,
->         struct mgmt_pending_cmd *cmd =3D data;
->         struct mgmt_cp_remove_adv_monitor *cp;
->
-> -       if (status =3D=3D -ECANCELED)
-> -               return;
-> -
->         hci_dev_lock(hdev);
->
->         cp =3D cmd->param;
-> --
-> 2.34.1
->
+> -	hi_div = hi_dur * (pre_div + 1);
+> +	hi_div = (u64)hi_dur * (pre_div + 1);
 
+This looks like a separate fix
 
---=20
-Luiz Augusto von Dentz
+Konrad
