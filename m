@@ -1,188 +1,113 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A5B12E738D
-	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 12:03:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35D811DFFB;
+	Mon,  3 Aug 2026 12:05:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785758608; cv=none; b=LP+B16gH5jAgj4HnRul6afynKBB+yq/tEMAsc4lLGYvBL70vNghvdIvn4zYViVlVBwjwl5OZUAJrHoy2DU2yzDfxcuagI/ZLJDJfBxOfvd9GMfuEn+F1H26rDQ0cZMd4Xbz28lroqizH0nYip0YiCRuu7VJWGenacZF4S+YTK9I=
+	t=1785758756; cv=none; b=mbNr2KFI+f9f8OtbUVZ70u2oflvyNtrOYrwjgHx20hQ4ITFCeRnp5tGRsXE8jbN2Fr1ZNHUyQSGe7qkdC5KpwoUlInE7dFxY9wfweMe7wJKXVUICanAPU0Zfb3vQhPJnAuUt6wDSy2UivUM9i/yCiodJo3ezwqQ+dMkznRQkJ2w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785758608; c=relaxed/simple;
-	bh=b4P5gpqQXJvE+5D7NTYuJLS8awT2aYmEnf2h2Wt8eps=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=Me5lgm6g6PFHNjBDJiSN9MwQwC4HmeZxwkau8fworA4I+chaZq1YCZEsdta0eBM7xYGdo+Y47TVsR4VfqD1od6tEuqDB7vZDmxs9hE+Jv1u/J1pTB2ETCmOPq+4VIexNkNLP3v/XwT2IRQJSWdJafHCGPYZSRzOUyyZksARIxVQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PO+1I9VK; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=M7t7IbCx; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785758756; c=relaxed/simple;
+	bh=o9BDYjroSfvjw6WE8VUTd6Zi89w2LPG+xHYD8KX3P9I=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=Xj47M/HtmEvY1BUvgkhsa3Aivb6w/ImOAPlLMSJ2zc7ilJIfdf2XBf2Ce2nQygS/RcVrlWz28T/U8pBar5w8JOJAgpTD1zfU7LyctDZQzfGjJdtkbFiYngOfJiB6PkI9bPEeUcSxRER30psab9uJscS2U/6Q4vNyKZa2QAaceHU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Si7N9zre; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PO+1I9VK";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="M7t7IbCx"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 673AlEb03957180
-	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 12:03:24 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=QwIMHmcwUjBkFbCKRQ/lfdbRU1+R9mO353t
-	JF2bxxE4=; b=PO+1I9VKv2lrpw8v/8EVLtGTOvPF4itjfUmjrGZTY1dg93d6g6z
-	yQ3B7BZY9QkdkA8dhWWBEScXaxF257kgFkZKF9/3c5PVHoSusFPoWFQpM53L75ET
-	VxViz068cRWWmLYJL/Ri9DZYQTWgtiT7KxewOdph0cBTwpEXXOXfVPz6w8HadWjm
-	vteLHwuD70T/eS5sX+wOoWsR+gLX9l6wt/FC58P1VP+eJgIAWDoeHLa9jBHHPd1J
-	AbSnsUDHwAP1DxpTmg+Vja0dz/rYqGnEDJXdLqjbKaDjRE6FexZHLupeJ7cqeieu
-	fToNgPNQpXJZ7VRqAJWcthnw9I25nILVhhQ==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftnvnhc2c-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 12:03:24 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-84e3d575d6eso7093186b3a.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 05:03:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785758604; x=1786363404; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=QwIMHmcwUjBkFbCKRQ/lfdbRU1+R9mO353tJF2bxxE4=;
-        b=M7t7IbCxD8XN+Nz/ViKI+1Gm4TeSeV7vBixhrzJYyDkLNPX6LANFVMak8fvZrBH6qC
-         zqRjnO+gWojZwa9mDOzhGnPeRSIM9nYylyxCX4IcUg3NC9j75j32inQ9/y8Qwr5ZZsUQ
-         DOQy+9PW4+c10ZH759o6gQavjNPbcRa7mS5nJwoX8Kp82w2i1QGZSqO/TXfb/HpIVQId
-         C4aHLzJb/XXaw8T58snIYPCjvj9OdX3C2J2/uZ57OkqD5oLEZUEorl9bPyPaWMY5sqtX
-         mwZ0R6jR7dsb08440lk8TRNNe5+XBogwYh+xBcWNlC6RWcDu3TU/gXbY8WrP2BO6XyEz
-         dUYA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785758604; x=1786363404;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=QwIMHmcwUjBkFbCKRQ/lfdbRU1+R9mO353tJF2bxxE4=;
-        b=hfJHiAeYP1JcD6J5202zqrDmRpo3njEJfOwnDubz76cfkpDSQgESKQEVVpZ/c/ldAk
-         bHjyGGwHdlz+a47PPA/d2K6vOudxlZJAKL8d8jc3Y9xehwy5G2SpeAmOPf/8VU+8hBPo
-         XbL7k3KgLIOUffLVnL10vAf5phw6C53t8/HysOsapUgg/tInbkY0BbhVKEAb1tyafW/e
-         /Ms/DJTvxVqYYn6XgouCIhJmc66lqg7V9ME1ZITJhMtQ3ej2tWjxK2GLtM247mDcgZ3M
-         pT970yJ+f68ihF2UaYZMIxQd0W4DSxuYmJ23C3i7EmtZyCahb8D57siowLAdy/wnIoFG
-         vQrA==
-X-Forwarded-Encrypted: i=1; AHgh+Ro0EJbupBTR7UBSoSxKAMMy7kU1lrSdqLeR8wrRYgr+5yNCLvCfTMxTc9SFPZBx+r5WM7E+BcdHGCms3EPr@vger.kernel.org
-X-Gm-Message-State: AOJu0YyL3z98dyUXZZ9G2YValYpBwqjagwj3fOdEoOo/8E/Hmyhy9xQk
-	+WQgSvY5+V36fGN5M2WR2z50xGE5rPBDr+LS0scL5HKHaBzk4DAt2SyIpg5/sj2lqmT9dARYJ5Y
-	u4e2AwkANybLVpeii5zNtsl4mVJJlhMbV42qszb0Ppo3UNOVSazyh4/7sqIMZWKOJDExp
-X-Gm-Gg: AR+sD12LIXHCjV5cXL5GHEvMsQJda1mmO7Cm6yh49xZxgJ5hdlDp+IONjJ0aeCPjOCq
-	0B7gZqLEQfSXJMG05VZ4v5JCMbZVLh0PsaUBXrK5IywDQgy52FsLCyeaTKSFGUvdJCy5Dqf84iY
-	1BGXLUjuAPAcsBJyPf+Cc/jroj7OFuvSP4zHc4zacqV2UkMTh6tlJtQHpOmQRNC0P37oDwapw5c
-	vOGh3AXAmdnGdLHYpK8xPoBpRWvq5eC1FM9mD0kWHhu6clZBggvmn8pHA9qSFUZ9Udswyb3NgmQ
-	DgG2W7De6fOCVPsJbf3DOEsyhcM4cPUJeAvE0V2fh3aR6t36PITAcCfZVmabnXQMjNEBvL/iWR8
-	VxkKwgsSfvl30o6wG9LzvWxODGdxTcqGrAgo=
-X-Received: by 2002:a05:6a00:188b:b0:845:eadb:821 with SMTP id d2e1a72fcca58-84ee47e4818mr9124409b3a.14.1785758603678;
-        Mon, 03 Aug 2026 05:03:23 -0700 (PDT)
-X-Received: by 2002:a05:6a00:188b:b0:845:eadb:821 with SMTP id d2e1a72fcca58-84ee47e4818mr9124381b3a.14.1785758603305;
-        Mon, 03 Aug 2026 05:03:23 -0700 (PDT)
-Received: from hu-arandive-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84edc2d7bbdsm3633916b3a.47.2026.08.03.05.03.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Aug 2026 05:03:22 -0700 (PDT)
-From: Aniket Randive <aniket.randive@oss.qualcomm.com>
-To: Vinod Koul <vkoul@kernel.org>
-Cc: Frank Li <Frank.Li@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Kees Cook <kees@kernel.org>, Icenowy Zheng <zhengxingda@iscas.ac.cn>,
-        Jyothi Kumar Seerapu <quic_jseerapu@quicinc.com>,
-        Miaoqian Lin <linmq006@gmail.com>, linux-arm-msm@vger.kernel.org,
-        dmaengine@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Aniket Randive <aniket.randive@oss.qualcomm.com>
-Subject: [PATCH v1] dmaengine: qcom: gpi: Fix channel cleanup in unwind path
-Date: Mon,  3 Aug 2026 17:33:16 +0530
-Message-Id: <20260803120316.2703956-1-aniket.randive@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Si7N9zre"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B932B1F00A3A;
+	Mon,  3 Aug 2026 12:05:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785758754;
+	bh=9JDu+Y0kXE0cIuki0Jpsoq3K8xv49qjhQ8yZxe90Y28=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=Si7N9zreIbejL2eQ7ytQI2m5sEypUc+eozaAqI+LJbcuypCS0HfBIUJ80yt/FqVWB
+	 cdoyUzwn6GKIvWGlBReJFpTe+xKtt/NhFVNsxHnVP/62in7JVAaOkmh6N3tjOX42Y+
+	 vMpHevScEROoptD7JyDMPif93BiWNo2Q+io5cmgyXqaYWIC5XRASnSsx4FR3UMCZ4c
+	 S1zI+QUq12tiUISY7vKWIiGRRhLwX6ZmUGIzbcQsaVb7oWwa6BWFzT6wbXjeaZKhFU
+	 8nIVpcz7IMxLTlF13ss0gpy0ICFPm1JGU8t3mQ1jURGY478oSQcpvq7H5J16AGWGiP
+	 dkyNrZdeBdJxA==
+From: Mark Brown <broonie@kernel.org>
+To: Bartosz Golaszewski <brgl@kernel.org>, 
+ Bjorn Andersson <andersson@kernel.org>, Linus Walleij <linusw@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, 
+ Srinivas Kandagatla <srini@kernel.org>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>, 
+ Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, 
+ Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, 
+ linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-sound@vger.kernel.org
+In-Reply-To: <20260724141708.2212057-1-prasad.kumpatla@oss.qualcomm.com>
+References: <20260724141708.2212057-1-prasad.kumpatla@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v6 0/5] Subject: [PATCH v6 0/7] ASoC: qcom and
+ pinctrl: add LPASS LPR voting and Hawi LPASS LPI support
+Message-Id: <178553935171.353541.12577645858362068543.b4-ty@b4>
+Date: Sat, 01 Aug 2026 00:09:11 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=aoaCzyZV c=1 sm=1 tr=0 ts=6a70838c cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
- a=FETWPXT763Spi1ujXv4A:9 a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-GUID: Lmk6iFA6G_HOlnLAualsH7x8QxPUwKtj
-X-Proofpoint-ORIG-GUID: Lmk6iFA6G_HOlnLAualsH7x8QxPUwKtj
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDEwNyBTYWx0ZWRfX22mg5Aqtfaha
- uGjXCGH3j/nKxHpbjfqBxCKjAUvvZVEBOnAsEyBCZfaA1rh5M/KitbqahI8QREWgGbY8CnB6sVy
- gztJJcCRAtgYAxt0FXr5u08pSdGhj8gR1bxdaIGF3rrbAwgGCyDWPn7toC3VKfm2qJF8teeLQMz
- Keaon3EnDqwZx/rJ9nVUwf9gRMlI9Dj5PWAaTIxVI0yAyyryPRkAfcWG4H1nZ7AoJTv2gOU7/m+
- MDJzV4xqleSBUsAX38uuu1fGNwIz8m+jgTlQkxjba2NzecjHxUjPliGL2egLAP5Pr/R6sh03Tyy
- xpSRhxT8sZXN1y5hOOYVpGkkxFvfdpb7vt9Jr76MknmLKpKjsV0CSwacFS05IES788y74djwAx/
- XRJgqcryHOqJHZRtI9yp5O986rT5eSKJQwKpyZiJ+wOiuGETfdHl6ZAQnrXMkv0t1PFr3NioBsG
- PL33qhVdVjkGYxgO0pg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDEwNyBTYWx0ZWRfX8m5ywOZN7iWW
- hC1La4vJXL+JsHyThpT/+S6ZweVkgjmXnwtmQn7y4gGI+7/1RQtZPW6v/df8KDPcWOL4DvPFvLg
- mO/GgaMX+bGdHtZyY4+zh+kHe7oHbNA=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-02_06,2026-07-30_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0 suspectscore=0 priorityscore=1501 adultscore=0
- spamscore=0 lowpriorityscore=0 malwarescore=0 phishscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608030107
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.16-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1809; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=o9BDYjroSfvjw6WE8VUTd6Zi89w2LPG+xHYD8KX3P9I=;
+ b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqcIQewSTDm+2N9X7G/ueL8x+82BXIH2i/PCrwF
+ 1v6fdKeFLKJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCanCEHgAKCRAk1otyXVSH
+ 0HDGB/0RSBIfyTLGmxlApye6wypM9TQMVo/vsLP8Mp7edZ5SsfmNk6a3yitankVnffKNo+OV+Lt
+ 9rA5RvyxS7vDs6COymAyUmvYR3GqENdg0TQk9gW/+Q6byKgDDIRnNOY5CfVGcS8rb2FK0oRJB3B
+ vh0eainnp/f4nqwaww4seIxWoB4Pa7EHNro1TwREMvXxMTrvDCBf29lq9bPsMs4yAXp/jPZcL2e
+ RQjlXgZH+xJQD6/tXfymdRVh8zN4WPtAFoVz9+Fb5doS3bwdhxlhFEa8sTvHHOygSvAS/WOAHP6
+ KmsjN6tXT7OV5XeLdTuQGO/Kj2m+44Vpy7kxPkWXIHQDcIE5
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-Fix three issues in the gpi_ch_init() error path.
+On Fri, 24 Jul 2026 19:47:03 +0530, Prasad Kumpatla wrote:
+> Subject: [PATCH v6 0/7] ASoC: qcom and pinctrl: add LPASS LPR voting and Hawi LPASS LPI support
+> 
+> This series adds support for LPASS low-power resource (LPR) voting
+> through PRM and introduces LPASS LPI TLMM pinctrl support for newer
+> platforms such as Hawi.
+> 
+> On such platforms, LPASS requires LPR resource voting via PRM to keep
+> the subsystem active. This is handled by adding a new clock ID and
+> support for PARAM_ID_RSC_CPU_LPR in q6prm.
+> 
+> [...]
 
-Use the indexed channel in the error_start_chan and
-error_alloc_chan unwind loops instead of the original gchan
-pointer. Otherwise, each iteration operates on the same channel,
-leaving sibling channels unreset and undeallocated on failure.
+Applied to
 
-Clear pm_state after freeing the event ring in the error path.
-gpi_alloc_ev_chan() sets pm_state to ACTIVE_STATE, but the error
-path frees ev_ring without restoring pm_state. As a result,
-gpi_free_chan_resources() may attempt to deallocate an already
-freed event ring and issue a redundant EV_CMD_DEALLOC.
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.3
 
-Also free ch_ring in gpi_alloc_chan_resources() if gpi_ch_init()
-fails. The ring is allocated before calling gpi_ch_init(), so a
-failure leaves it leaked without this free.
+Thanks!
 
-Fix all three issues by unwinding the correct channels, restoring
-pm_state to DISABLE_STATE after freeing the event ring, and freeing
-ch_ring on gpi_ch_init() failure.
+[1/5] ASoC: dt-bindings: qcom: add LPASS LPR vote clock ID
+      https://git.kernel.org/broonie/sound/c/cdba62ff7413
+[2/5] ASoC: qcom: qdsp6: Increase Q6DSP_MAX_CLK_ID for LPASS LPR vote clock
+      https://git.kernel.org/broonie/sound/c/037826ea448d
+[3/5] ASoC: qcom: q6prm: add support for LPASS LPR resource voting
+      https://git.kernel.org/broonie/sound/c/42cc644e071c
 
-Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
----
- drivers/dma/qcom/gpi.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
 
-diff --git a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
-index a5055a6273af..c41bfac65ddf 100644
---- a/drivers/dma/qcom/gpi.c
-+++ b/drivers/dma/qcom/gpi.c
-@@ -1965,16 +1965,19 @@ static int gpi_ch_init(struct gchan *gchan)
- error_start_chan:
- 	for (i = i - 1; i >= 0; i--) {
- 		gpi_stop_chan(&gpii->gchan[i]);
--		gpi_send_cmd(gpii, gchan, GPI_CH_CMD_RESET);
-+		gpi_send_cmd(gpii, &gpii->gchan[i], GPI_CH_CMD_RESET);
- 	}
- 	i = 2;
- error_alloc_chan:
- 	for (i = i - 1; i >= 0; i--)
--		gpi_reset_chan(gchan, GPI_CH_CMD_DE_ALLOC);
-+		gpi_reset_chan(&gpii->gchan[i], GPI_CH_CMD_DE_ALLOC);
- error_alloc_ev_ring:
- 	gpi_disable_interrupts(gpii);
- error_config_int:
- 	gpi_free_ring(&gpii->ev_ring, gpii);
-+	write_lock_irq(&gpii->pm_lock);
-+	gpii->pm_state = DISABLE_STATE;
-+	write_unlock_irq(&gpii->pm_lock);
- exit_gpi_init:
- 	return ret;
- }
-@@ -2065,6 +2068,8 @@ static int gpi_alloc_chan_resources(struct dma_chan *chan)
- 		goto xfer_alloc_err;
- 
- 	ret = gpi_ch_init(gchan);
-+	if (ret)
-+		gpi_free_ring(&gchan->ch_ring, gpii);
- 
- 	mutex_unlock(&gpii->ctrl_lock);
- 
--- 
-2.34.1
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
+
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
+
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
+
+Thanks,
+Mark
 
