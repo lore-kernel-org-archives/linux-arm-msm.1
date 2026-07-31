@@ -1,173 +1,106 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 089D243C041
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 15:27:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35022B67E;
+	Fri, 31 Jul 2026 15:29:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785511645; cv=none; b=QbOkiBy8lD9dLsDVWjTjSNrMaVKFM5/Okin5FJELQsar8vvch5/1RlHB1XZoO70AOF24xc98PHGopMHNxgKJlspcRe0bP+H/ICnIMHkEroT5dFncGhdLEjBrCJP94WLjSEQPro1hZveE1Ji2XYu5xwByDnxt44v1RHnf2Qcu/bw=
+	t=1785511773; cv=none; b=HdVSA2vexYYaceaKPtKLEPnROZLmOIQt/Jwb/rUnjUcPJFYBTE6h6G36NOie30hU1D4ZKrnocyZLk1KB+MaAJBgbPr5WlM5TPRvcEskkiJjoO9ZWgdA6v+P6aC2wGJTdJShPLkNKPCgCZxf0crwo6ZBCIctgIXX9n1LzevUBkFY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785511645; c=relaxed/simple;
-	bh=7klZEho0H83j8ylpjNW4TH0V0nFQueKsAusCKPgOKBY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ew977f+WdJLCjFyCwtUV0JQnY68y8p91al8pJpehFevATnYVmkfDWL70qPqxZtKV/cwDtj4OtRV2IbpWB4E/ZXLPKUQytceDsPXoOF7BQAOu+HBUjyTkeVMgRCoOq7htGhHr+ALZsg6lQ3hCydX/F3Ygdhb6YyrcmM8tBFNIChU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ot8syubV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RELFfAQu; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785511773; c=relaxed/simple;
+	bh=AsBHKg/iMrJeIOAWASl9TexSLzpABfkf4KgBlQa4VpQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ep2wXhIYT3ONACgUvZoMukTjfDzgkskLM4hJrjPj3AmcG3Jz2IFrzqCnxcZ6YThL6097QuvavVsngHe3W9Ra/euUSUNKXoteAXkEzV5Ky+U+Bn3BAqqlYacE+t8Tg94r0KPfzIwi9B04Ijc2NJ8MkSIpNjbJF7nu7ZmexAvprj4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=G9Ym41Jz; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ot8syubV";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RELFfAQu"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66VFOndn404258
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 15:27:23 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	7uFsYuCwq0Qx2h2L72I1/1dKPl18cLwGQgBX9DoqR+E=; b=ot8syubVxIKhBaXY
-	GbPyChFT7d9PiDexEP7CrEwOpsRi04eXQ0sXIz0aj+UnJtEDIRMWEafWe4EZENP9
-	fiwNniIZ+8HMU8SdoY2NEi4wIruZDsnkqBu+tOgNgQ5HClFzpZII4DHoN5rRyweP
-	wPAhFj3UaBiAMiuTzjVN79DhDzL50NrehJvU0Czkr/q4drmt4rDAxdRI1wiiodeH
-	JptdpRGBAaRcMEHsL5PUbyioKRf/4kjA9DoUCfwYftiYjlcHd2G3eowN47I7gtXO
-	soJKm1+8HJWAGTb+N5Ly1C/dWOnYiJzZeosHZifZA+DyP54z6pG88hoV8qgrJSCd
-	lhA56g==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4frufkgux0-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 15:27:23 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c21be5bb4so2216201cf.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 08:27:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785511642; x=1786116442; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=7uFsYuCwq0Qx2h2L72I1/1dKPl18cLwGQgBX9DoqR+E=;
-        b=RELFfAQuGwVTMoPjQW0CkpzoY3qZ5rAD64tfmeYLQ7YmAQquRNDOgV4H/mIVgHpL5J
-         kK7EnFyrjfDrrWa7Xt6YnBxCKDJt2SHrUPhz3mXYA1ZEVNWPhjc7PTkZ92k8x8z6Eprn
-         HComGYtsU7AfvEkbz7SJ5q/qQh+FB1i/gcNkd5J1RptyFc1zMAJ1B9RsbDDBE8F+St7p
-         kJmcWRsW1iA+E8R6oL92NjteY/Jhmqyrotn/Tiba1W9RFET7IoMYq+HlzJbygr1ERF1E
-         hEhsyiELJ5N+6lk0URri/JKVTif4v4svjL4y9uNcqorKlPbnvXfjHACFm1VfiT0gkzPn
-         4pNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785511642; x=1786116442;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=7uFsYuCwq0Qx2h2L72I1/1dKPl18cLwGQgBX9DoqR+E=;
-        b=QpcWrDdXXgDYD+O26vsXzdCoBi45oGrCKdlMI2Dinmfk4hUmrmTRE5baoRezlrL9r2
-         ZZC+9j/pc8C7zLebWgLW7X7eX1IkdRJrpz3rID9aRar/YOSTWWqztVX+Gm+tn4AlZ9ZL
-         HAYpc2UG9p2sceZpmlDP6M0g/WUupErvKlohtvZ2Q79+XycB3QUzY3aGe4KhgsjDYNL5
-         cvi5u89GOJDLLyEmriAd7ZCgEejsncBJHaUVVF9WK2EJUiBDjlbHb3TRQ0kSX8uxD0BK
-         YvMzLo5pB5EzdZJfIVd7aUwcSLCLB6TbkxXACq9PtJ1qR8Qui/V+5aEYFXsxnK6a8VRp
-         wGEQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rrqutr1+4myXYwkdvFjDjs5ITffyvgHwWLWXkPm4JmgTsGR20FMh2VkvPzWLbAACCk0qMiMy7/xZAm7RncU@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxx8/rtaD4NSt/ea8lFs0YpYE8KbroT6KYRm5USYPxinH9nLTa2
-	h2TrHqwVPlzfjrxSBP3PrYSJbU3e5KGi8dsdJ8QJAecl+aEhG+koFQQ7qi/LW1ZvdTNXBENPdHC
-	9vAx2F3l+LJ0xrAWU9nWv2nxgqhDXI5AtwwA5SZXUTB/PNxxs5GL+nvvD/WtG9BPNOYEX
-X-Gm-Gg: AR+sD11Oa6dNJDFhwwbdjCfqghuBrLzwdqo4SYHsRMAbQst1oyEKS824ktXhdfECVFh
-	SEDpy3iWumh+bV8rP4s46+pVpUsD+NV8Xv57DzpbDTkp5vlP5VnljEJBFw0fb5hJYZ/oFOhT/oB
-	6VIEVnOCUALXawUWIqUjMsb6JACt04wt4Ewh9EDKO7LG6+n+sbcdOCRRkBi0OtNDcOoOUJ99rbv
-	pL/B9H5Sv/8qF7ODUQ86QtlW1iKxPWs6gr7BKUvtWB9XszFhl+EHn1f7iQmpBcMaMtIEByxvCVj
-	Rgg7lrbHFOpXHbUC+zxSiW4TFSPPgKq7Teqf5gWrINUVgs53fIgiv6fTwRYi+qLsD3G73Z1I/j6
-	18J8fmndrgpCMJjvQJ9zuIp4H
-X-Received: by 2002:a05:622a:e198:10b0:51b:eab3:4ef1 with SMTP id d75a77b69052e-52b567b3aafmr5993571cf.4.1785511641998;
-        Fri, 31 Jul 2026 08:27:21 -0700 (PDT)
-X-Received: by 2002:a05:622a:e198:10b0:51b:eab3:4ef1 with SMTP id d75a77b69052e-52b567b3aafmr5993261cf.4.1785511641664;
-        Fri, 31 Jul 2026 08:27:21 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a09c655446sm1975608a12.21.2026.07.31.08.27.20
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 31 Jul 2026 08:27:20 -0700 (PDT)
-Message-ID: <db3c439b-d5b2-41c5-a3f0-bb528843a85c@oss.qualcomm.com>
-Date: Fri, 31 Jul 2026 17:27:19 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="G9Ym41Jz"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B1BD51F000E9;
+	Fri, 31 Jul 2026 15:29:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785511771;
+	bh=hUpsQ3BmLeNBlpe2GOxu0xoX8ggLMcZ+LQKRuRp5yMM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=G9Ym41JzYfPLG5j9iWzb2bQleQ8IM7ezY+6eJ4XA1lC5YhcFCgJbMHJ3D6/0tfgxB
+	 FJh2692QhvMgjIha3iBtPmf8cn3ZFCAw4nToynUFgZ0u/LqvD+whJJsr8+q2XJ7+go
+	 /dqnaZa5TJhn/yNeT/DqQzFXyp5rnqazlDVtQtR7VdGWHTm7btNsJMB4K/o+LQTqB6
+	 O44wJo8NAEhcO/fWaWzOw8w3WiaS/cyfRhCyS3567qN/yDyap/RpMF+AYNjM1gmi3Z
+	 v8IzvCXuzhBJ3Dg19IBXvhJWnBEar9K8tOuWcEugNC8sUylScx/N19y2iDHcJB9cud
+	 7LIt1KTGTsmBg==
+Date: Fri, 31 Jul 2026 16:29:24 +0100
+From: Mark Brown <broonie@kernel.org>
+To: phucduc.bui@gmail.com
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>,
+	Takashi Iwai <tiwai@suse.com>, Lars-Peter Clausen <lars@metafoo.de>,
+	nuno.sa@analog.com, Shenghao Ding <shenghao-ding@ti.com>,
+	Kevin Lu <kevin-lu@ti.com>,
+	Cezary Rojewski <cezary.rojewski@intel.com>,
+	Richard Fitzgerald <rf@opensource.cirrus.com>,
+	Baojun Xu <baojun.xu@ti.com>, Sen Wang <sen@ti.com>,
+	Steven Eckhoff <steven.eckhoff.opensource@gmail.com>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+	Charles Keepax <ckeepax@opensource.cirrus.com>,
+	Linus Walleij <linusw@kernel.org>, u.kleine-koenig@baylibre.com,
+	Thorsten Blum <thorsten.blum@linux.dev>,
+	Kees Cook <kees@kernel.org>, Chen Ni <nichen@iscas.ac.cn>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Shengjiu Wang <shengjiu.wang@nxp.com>,
+	Sebastian Krzyszkowiak <sebastian.krzyszkowiak@puri.sm>,
+	Pengpeng Hou <pengpeng@iscas.ac.cn>, patches@opensource.cirrus.com,
+	linux-kernel@vger.kernel.org, linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH v3 11/26] ASoC: codecs: wcd-mbhc: Use guard() for mutex
+ locks
+Message-ID: <ee9bddef-0918-4036-9c8e-8b0d4af7f5bd@sirena.org.uk>
+References: <20260731030648.8706-1-phucduc.bui@gmail.com>
+ <20260731030648.8706-12-phucduc.bui@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] pwm: ipq: fix period calculation
-To: Stephane Lepain <stephanelepain@gmail.com>,
-        =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <ukleinek@kernel.org>
-Cc: linux-pwm@vger.kernel.org, Kenneth Kasilag <kenneth@kasilag.me>,
-        George Moussalem <george.moussalem@outlook.com>,
-        Devi Priya <quic_devipriy@quicinc.com>,
-        Baruch Siach
- <baruch.siach@siklu.com>, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260731070542.155398-1-stephanelepain@gmail.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260731070542.155398-1-stephanelepain@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDExNyBTYWx0ZWRfX4KtVUX8iyAbS
- jf1DIGQQsynok/JdMHnUlTWVF1L6VhqsZTrIx5CbgnxyXKfjZfWxOpgeccGWR5qYB6KnCh8uw2E
- koBiUxmLCh7ZrMXwVYkc7l6yeUBIwDU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDExNyBTYWx0ZWRfX74eNrNl+T9B/
- wK+GpAKdGAR5sE9AmRXiXQc3STqs9jvz0evTGki3ckWPVwwLIePYYhINq8PBj+gU6Zh3oW3s3kw
- xgvYjD+5wOE9I2Ydbd7LcLhZ7TLiFsPcDnv0yrDhyECBhAkwO8kcBHWvT0RT8jjerSxVkIKX7ER
- BGY+gXYmELIunaSemHt25TCfe56c1i1x7xodaw5OfxZ3HlkSBCoOGVjc8GgtUi8E/jAW26ycYjS
- g7e59NnjepSx/7RrHRFmr5FtVEoayZLfv7nUFWkoAxeq1LuWNgxjHbiDmJFObXCUDpmB3S2ThaR
- j2HkLBqV4mvBF8CHI9AoO8IasqaeYW64jgi4+POw1Xwh3WBZcinPYaVlfHxveqbsvyN2Mpw4MeM
- yDiTyghS+B2zoJYtf0V9U7KNlzywm/HP4flNJmY5LKhx2p4z4XRBAYROeoQUNS8xa+xEq24ACXG
- 5Jby2WlsH+Bs9sncV/A==
-X-Proofpoint-GUID: lVuiLgFd7l0AFAJ24UkxsFZqkCcbY9Uq
-X-Authority-Analysis: v=2.4 cv=BpOtB4X5 c=1 sm=1 tr=0 ts=6a6cbedb cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=nVPmijOAcTPNv26JQuwA:9 a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-ORIG-GUID: lVuiLgFd7l0AFAJ24UkxsFZqkCcbY9Uq
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-31_05,2026-07-30_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 clxscore=1015 bulkscore=0 spamscore=0 lowpriorityscore=0
- impostorscore=0 phishscore=0 adultscore=0 priorityscore=1501 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607310117
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="XRplbUsisyBfTVo3"
+Content-Disposition: inline
+In-Reply-To: <20260731030648.8706-12-phucduc.bui@gmail.com>
+X-Cookie: No shirt, no shoes, no service.
 
-On 7/31/26 9:05 AM, Stephane Lepain wrote:
-> From: Kenneth Kasilag <kenneth@kasilag.me>
-> 
-> ipq_pwm_apply() fixes pwm_div at its maximum and derives only pre_div
-> from the requested period. Since the period spans
-> (pre_div + 1) * (pwm_div + 1) input clocks, pinning pwm_div near its
-> maximum forces pre_div towards zero for short periods: once pre_div
-> rounds to 0 the shortest representable period is (pwm_div + 1) / clk_rate,
-> and any shorter request is rejected outright:
 
-[...]
+--XRplbUsisyBfTVo3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
->  	/*
-> -	 * Pick the maximal value for PWM_DIV that still allows a
-> -	 * 100% relative duty cycle. This allows a fine grained
-> -	 * selection of duty cycles.
-> +	 * The period spans (pre_div + 1) * (pwm_div + 1) input clocks. Rather
-> +	 * than fixing pwm_div at its maximum (which gives usable duty
-> +	 * resolution only for long periods and collapses to ~0% for short
-> +	 * periods) search for the (pre_div, pwm_div) split whose period best
-> +	 * approximates the request while leaving pwm_div large enough to
-> +	 * resolve the duty cycle.
->  	 */
+On Fri, Jul 31, 2026 at 10:06:33AM +0700, phucduc.bui@gmail.com wrote:
 
-I think the comment can just go
+> @@ -419,9 +420,8 @@ static void wcd_cancel_hs_detect_plug(struct wcd_mbhc=
+ *mbhc,
+>  				      struct work_struct *work)
+>  {
+>  	mbhc->hs_detect_work_stop =3D true;
+> -	mutex_unlock(&mbhc->lock);
+> +	guard(mutex)(&mbhc->lock);
+>  	cancel_work_sync(work);
+> -	mutex_lock(&mbhc->lock);
+>  }
+> =20
+This replacing dropping a lock with taking a lock which will both take
+the lock twice and deadlock.
 
-> -	pwm_div = IPQ_PWM_MAX_DIV - 1;
-> +	if (ipq_chip->clk_rate > 16ULL * GIGA)
-> +		return -EINVAL;
+--XRplbUsisyBfTVo3
+Content-Type: application/pgp-signature; name="signature.asc"
 
-That's a very fast clock..
+-----BEGIN PGP SIGNATURE-----
 
-[...]
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmpsv1MACgkQJNaLcl1U
+h9C1OQf9EXP0htSdWsSyOlW9QYiNmlfv5JrohdnCZ2cGQ09Cq87ZcpF3FKiK3+je
+1+llmoy6HFtSkRw9UKwYLHMinjK3IGP/VN0IgjJ6Q6uBaNycdZXvcnjua0VSJvFM
+MNV077KbEeFF6hrGtItXh9tuUSuwuBcVUbis+gfgcJz/Gh/ig8b5rrnScXD7GSjz
+WKYHqoH0yx5cUkk6UUEVwOD7zOvWYoDxczcQovKHOU+bIS5k2UH62XlRz4jjOmdw
+H3Gkb3yrzhIWYwY6wJvPteRmM1RX1T/ejLusu3fRUKOtEkFOySQhnB8GDtFXK5e1
+AUSUjXfQkPkX99TBrb9YUOk0nBGAgw==
+=ymKr
+-----END PGP SIGNATURE-----
 
-> -	hi_div = hi_dur * (pre_div + 1);
-> +	hi_div = (u64)hi_dur * (pre_div + 1);
-
-This looks like a separate fix
-
-Konrad
+--XRplbUsisyBfTVo3--
