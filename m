@@ -1,208 +1,173 @@
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A16542CB0A
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 14:39:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.41
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE8C242F6F6
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 14:43:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785508764; cv=none; b=UjVhuVENOC/VLg7jCZF9Iz9cmUrw0csgC69uz/fRmiwXThf+AqDaFWzl6J0DfVZ5BkZlskUAgcBEQQwY9QO0rFRh51HvqX266EGleLzB/zZxrVb8jiHOhDLwVQF5L/BliPMKEwpIjAu0JQtuagS220Ws3X1dVbRwjGG/KsFxgDU=
+	t=1785508986; cv=none; b=uvXwAWdkGhxHRldTB2+JW2lcLU/Ue0Zkn8VK0eIul0uqOA7WlCJ7LdaUJCW+U7l0667N7Lcju/gCQTCFt+BqlcniIoRGAiW3zpeM+Ia9FpFwxDfRgbDvhTvzRxrU9fWpHT/bbGLDpH4yFOOoosR+NFOTLsPNWwH3PNr+5ViZBvE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785508764; c=relaxed/simple;
-	bh=cnQ9TofivQ2bZjfAeMX/42E8H6DyN5sLo6QUxEVqqAE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=WHQkniwB/vVWHaKHgVWi2Pifxy4I7S7nwICe1KvqlXhUxfcKqUoEKHQ+VX6jaRqD2TFMkP3XTuAM691vbf6RfXx44yaL5KrwB07YidNbvyGHwu6wsJhN2lc3xCmjyf03ZQnL2Q7v1M7wbbov1y4yayz3KRwiAUqZPTzar6mIMiw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JYl8zoAv; arc=none smtp.client-ip=209.85.218.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1785508986; c=relaxed/simple;
+	bh=qx8l3UVS8c5euUQMfo4OmyRRN6xpsv6rGMc3uSXvTWI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=t3dSZIF3aa6e08kZbJEICn/MtN4LiVSD2uU02v+cnHQxJGLdHSAkjbMoJch3ZxDNLQ7wOvBbVr58dHyUZOzXh1T227Gt03ZiOFzhMASpgQLdtndIn1ZNufFsc2bzJ0/Y8xFYgtIAMQZJOVs2P9epx8aLUUTv3bchxq2rPHRultk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MqOeYkg8; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=f6229nMq; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JYl8zoAv"
-Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-c1670dad7a8so142595366b.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 07:39:22 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MqOeYkg8";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="f6229nMq"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66VBeWe1188850
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 14:43:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	WiH4hSb83BJjS6QAoHv3slk5Ye3oYZZALKE7uFJo9PM=; b=MqOeYkg8IoINhOnr
+	SyxxEZQs2OU+VP5zShCKxeI6ntXBEu0XDXIPJYz6SZ9xlrokx9HMALzxj5z3QPR1
+	ROOYONt9lwcekccytzHaLgGT+xZyVT4sINq6grnK9YRFxhlsD24LSRJ8OtRoYNsh
+	RhYqW0K68pugh1XaltkZeRZzu0o80qPRbzgK5uDeUuSElcaUf9z03+QVMAIy5TUf
+	NXzb5b+VBkn3Nidgos+CUyRKN46ZtSu3iJ2o01O0hkacuE56VrjglkbBJMQ4Suqw
+	oQU9yw7+4NTRRexkNWSMv0izV5K3t8pSZBiD2KE/IC5gMxuX8SbsXqgpEP9GzJtF
+	4VSz0w==
+Received: from mail-vs1-f70.google.com (mail-vs1-f70.google.com [209.85.217.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fru1u0rxt-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 14:43:04 +0000 (GMT)
+Received: by mail-vs1-f70.google.com with SMTP id ada2fe7eead31-758dfd578b2so22744137.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 07:43:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785508761; x=1786113561; darn=vger.kernel.org;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=AN1hgiiAoYSEc22S0IPUHYzAb+H+vIEA+bbNrXR6jng=;
-        b=JYl8zoAvXM9gf0yons8RI3aMHzgpLyIt61d5EwtQll3Tk3D4ttfC+Ttub+IapHXXwf
-         tvq5+RF4O2mCwRovdBjuAnwRgIz2S0zIZLjSMVgn5E1KDqhyjezjSYj1cmHCi3UWcWUv
-         VWN9bGou+VoRyY31xtKD/PwZnFeA35MBhWbQs7hRS2PeI+FC04xvPs9wDzBUlyB/hvll
-         TH9DwHSrqu17kian6n1yteiFoaKFnD/IXgFoPXketHKwFxPOtf4iqM1SXgjOFMNYTu7D
-         HD6LdxpRsliB6DUJL7q6i2RgzmqvY62mRmJNiDvFO8ZgkGGfELagwDllidLu1mMPXQFw
-         uU2g==
+        d=oss.qualcomm.com; s=google; t=1785508983; x=1786113783; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=WiH4hSb83BJjS6QAoHv3slk5Ye3oYZZALKE7uFJo9PM=;
+        b=f6229nMq9HrDljVrY7Y8l1X2xOIKqP29V7NBaV6uam6FHVu+ipS6TXNxWzqfSAAia4
+         A4nLkCLE8/pwBNb1u4jyxgdTUOnomNeSbrxyKOxW5swMMIvbVRBgvp1g7iM/43pDftM0
+         qyshseGla3l5ttm9BFBrUfn4EnWvTyGrHnhNBjDGDElXSDptwF6tOxztisFOUBpHWXw1
+         QVg29azgcXZDV5h5pgS/8d1zhGCX8/N3ZlYJfLWI9mI6DF8RMTkRW2I22mQBzw3tMhN1
+         wAW54E8lAueJTG/SrYWo9FQpKQCzV7I/00qKfFi2idneJfeM1d5hvhVtaonvHBWl0CMB
+         IbYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785508761; x=1786113561;
-        h=in-reply-to:content-transfer-encoding:content-disposition
-         :content-type:mime-version:references:message-id:subject:cc:to:from
-         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=AN1hgiiAoYSEc22S0IPUHYzAb+H+vIEA+bbNrXR6jng=;
-        b=hj3IulmHBd3DHNXWBaT6x6zuTWmp7gyvXQyKnCWCJPo2RdlglNX54/7k7g8+dnYq0f
-         FaMOkdNWyEfYXnhA/kEr7NTVYsCCdeP4jc9OTgQwTYR2oKQT7n59YD+h9uZojpsWQtvA
-         bHaNgOI3c0m6eIRGKiloD9VrPfCh5tcBCvCtjzUEywen3KikrsJEmjQ+KcGNtXQoGDge
-         8mNnlMOb7yjRYOnZz14CQDCNxPZAyL1A2izGtcx8E7cSekKdW5AmbC5v0uir3w7aYyTr
-         L1cYbPChrVpqx9lDGOKjghFFgMzUha4SDEPWbCT/oSAvIPM6m3WS3KfVHVteCRi8QX4E
-         3NqQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrU3Bn4brjYIG/YWSYCYH4sxENorjrAs4zcZRqye9vv4PQt3pQxJMiqXWA6ONKvBCdhUoQImUp7Oph0SV3a@vger.kernel.org
-X-Gm-Message-State: AOJu0YzibF4sc8IEdywqgrm0uBg9BL0PfO3VOovpiH2woTbUJWrszihm
-	VkvCStHAKQ5e4wrePLANGHw7wAXPqj99seYbwjjlOFPBn+8MxWjAyU7dv5DlgyiU
-X-Gm-Gg: AR+sD12LhngOXUkgIDejnHrbJn5ptppZ6Dyz1Ma3fPSwKpvRJPr83DojrRAMCss2vJB
-	dI8yHNTbrIOQq+sqdKHhXTHzyM/6meDfuUUoMt8rb4VklBijkpUiGJ1WpwsHeoGwzsg/z7UL9ks
-	PnRufNeRG4aoMht+wNv/f0oPjvQpM2VEkx85IkC5+VaorTQ+BfTUAhxFUf5CphRf5tgYyo1LJQn
-	QeBJNPDQOpOhMou6E/nthku/ekDO48TcMdKyNJUIS6M+ySgnm0f6ya3vsMWX2bumDBDwuApBUsm
-	PvtfEi8e1KhJMlbc6Vv7HVCr+4eRnBKfqD4VPG8clki+JQxYwZJX/fVv9xBGSfBzx1HTMR+rSXE
-	SGjclcPjWoDWYYm3nBUUGmHcA4PNJRPi8g+oh4QTgxI3v6Ndz4hx+ApZWYWZn/9ZGyWb3v34GJD
-	sR7zGOQ2jMdm7cMPSYRmWNjZmCEcCVQtscm4llK3nfX8C/K0UaBlQD4V9Pk6cFRw==
-X-Received: by 2002:a17:906:4784:b0:c16:12ff:dc8b with SMTP id a640c23a62f3a-c1fd26df3c9mr145773966b.54.1785508745515;
-        Fri, 31 Jul 2026 07:39:05 -0700 (PDT)
-Received: from localhost ([188.65.190.39])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1fd3cc3b64sm163629266b.27.2026.07.31.07.39.04
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 Jul 2026 07:39:05 -0700 (PDT)
-Date: Fri, 31 Jul 2026 16:39:01 +0200
-From: Richard Acayan <mailingradian@gmail.com>
-To: Jeff Johnson <jeff.johnson@oss.qualcomm.com>
-Cc: david@ixit.cz, Jeff Johnson <jjohnson@kernel.org>,
-	Johannes Berg <johannes.berg@intel.com>,
-	Kalle Valo <kvalo@qca.qualcomm.com>,
-	Michal Kazior <michal.kazior@tieto.com>,
-	linux-wireless@vger.kernel.org, ath10k@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	phone-devel@vger.kernel.org
-Subject: Re: [PATCH RFC v2] wifi: ath10k: make in-order rx amsdu buffers
- persistent
-Message-ID: <amyzhVgSeYO6MptG@rdacayan>
-References: <20260719-ath10k-a-msdu-v2-1-f479bb9d1217@ixit.cz>
- <0b9f80bf-73e8-4e9d-9726-b8816c9a364b@oss.qualcomm.com>
+        d=1e100.net; s=20251104; t=1785508983; x=1786113783;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=WiH4hSb83BJjS6QAoHv3slk5Ye3oYZZALKE7uFJo9PM=;
+        b=NvS54YfzJQrbojuZkrRd8TZZOrl7J+x03xiKukJyb+/joj2NznwCd0xRCUtPOlO7xm
+         k76yqoHsxRK8cUi0veKWY9xuQlpPZhrOq0C9ECEYuL3XQ4YTJhLZnJ33eAya2Vl3RhCn
+         ODtyL5Jam2Gbj5FxcDFotEC5TCBCulyjZ+BBVPRaUowV14IlbKp5inrE+X+d9X/R3BzU
+         BQ7E4mfDwNcISgAAQknGDFp8igzGMpjskVhjAhnGjns5SrE7IgKjki6dHYCIyq/4i3aO
+         b9e2OzUA7WcCJ6wSkRwQ4sddmG6/SyjQn2OsyPc/+CQH8px0Dy0y6um40tUWssMSHJnG
+         Y0Mg==
+X-Forwarded-Encrypted: i=1; AHgh+RoPe+DIWHE61D99lTKB3gXcGtyi7Lwr0Ta23Jl22VfFBLQHB+5Dl6BQWTv9lKtoibz9XoLYaNFMSZMbDBHc@vger.kernel.org
+X-Gm-Message-State: AOJu0YwVIx+Qa4sRquCMRy7AwXu0WResEGOpdvfy50w3HIwQmSXbjjmB
+	FwOhw1MiYHXIHxKJEWxPrDo7bcShMLnKGXgw6H6k8IdJSOV2rX1F1ReNCpAuF1eIZUPmTrkR+BZ
+	5HzM2hQ/vqO6VR4FdDZlHJpPqre1h5EMMomp0sQWS7OXFu5GNHaRuo0orr6hpouAtIAY3
+X-Gm-Gg: AR+sD11Bz80NPPYbXkrWq3NY2760Jrc/AZjod29iZNY0835YCLZOFWcL/SDefcimhH0
+	WNGNcos2cGDoWk+LjL9Qhld/vhys5jXxR71ofkBIgVfenBf0acsTmrZqwtbT1ZidKJBTOjtzMAE
+	3zRvYyaq2JL6Tx4rsz5Lh5m4sIo7hZJQBJ4NMoXjSMIF3da54IdBLWuRI2mjP+DTZJ3uoGAb31u
+	xTqbg50VZ9RAuaT0w86zlHA4EM3S3i11AVGZeBekxX0dHDP2ZObcLF/39aCQZyxTMEdrGtjMI63
+	sxGdmnAhiGicaBBo90Wyv2rhV5gpPIdqVrv+X/LmeomTcMlNPvEqFTdALCsjkGxkbCs2RcZOpna
+	ybgOmq1LONVdngkjPa6PiGk2k
+X-Received: by 2002:a05:6102:3750:b0:745:17b0:10d5 with SMTP id ada2fe7eead31-75b2447344dmr238220137.3.1785508983027;
+        Fri, 31 Jul 2026 07:43:03 -0700 (PDT)
+X-Received: by 2002:a05:6102:3750:b0:745:17b0:10d5 with SMTP id ada2fe7eead31-75b2447344dmr238209137.3.1785508982596;
+        Fri, 31 Jul 2026 07:43:02 -0700 (PDT)
+Received: from [192.168.120.193] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2e2455607sm358942e87.69.2026.07.31.07.42.59
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 31 Jul 2026 07:43:01 -0700 (PDT)
+Message-ID: <7ecf9354-f292-425a-8a05-13346a4ec3df@oss.qualcomm.com>
+Date: Fri, 31 Jul 2026 16:42:58 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <0b9f80bf-73e8-4e9d-9726-b8816c9a364b@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/3] arm64: dts: qcom: hamoa: Number usb_2 HS port and
+ add M.2 endpoint stubs
+To: Wei Deng <wei.deng@oss.qualcomm.com>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Chen-Yu Tsai <wenst@chromium.org>, quic_chezhou@quicinc.com,
+        cheng.jiang@oss.qualcomm.com, shuai.zhang@oss.qualcomm.com,
+        jinwang.li@oss.qualcomm.com, xiuzhuo.shang@oss.qualcomm.com,
+        mengshi.wu@oss.qualcomm.com
+References: <20260729-hamoa-m2-dts-v2-v3-0-4d7ef9274575@oss.qualcomm.com>
+ <20260729-hamoa-m2-dts-v2-v3-1-4d7ef9274575@oss.qualcomm.com>
+ <8dd0680a-901a-465e-898d-88a17a9a71a4@kernel.org>
+ <20260731073306.1895428-1-wei.deng@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260731073306.1895428-1-wei.deng@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=H5vrBeYi c=1 sm=1 tr=0 ts=6a6cb478 cx=c_pps
+ a=N1BjEkVkxJi3uNfLdpvX3g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=5J5LCJH7VlOFKgF9C9EA:9 a=QEXdDO2ut3YA:10
+ a=crWF4MFLhNY0qMRaF8an:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDExMiBTYWx0ZWRfX+2EbgquY7lQm
+ o1xpsy36UJ/y5yApFUZx609KxMW4c7heXEnM8OOf9DtAG8Nca/B/GKnIqgFffSkxipxW1cCA4Xq
+ 3lcZOlLzolYRduer1QEoQFqj0GQjaJ9ecPIOb+axWsnXfoI0Xm8wscjjfPYLPwkUokVtZcHJFwx
+ dYr6Vb80APU5Gwl0xK+6kul/9+ZlYmiHUIu4zNE9wydk+VZJxglBii7bGLy8vnTU8/MWvr2kvSl
+ XmldK+wDWBx2YdvPMBRSXZf0bd5iv11gBiqlFdLlLZtZiGwtEhlQzpXMiZfkeTG2bWzXFuAT/uQ
+ ZcUxOPHgh66CGanhZu1KzsFcMIXXx5M9uyf3l5gizWdCUhojxlNuU7uHaNhbt9cPqlZEsrBa4Wc
+ jIgPWvL6iAKr7+TC29bOBGAE4tQMeZgn9OnWbimf3hC3W3lXUwYQA2s3JAryQU50+HK4dpJMWza
+ VAzWTxs7B02uO67UMqg==
+X-Proofpoint-GUID: 0Hr9h1irfHjAd3CBMpXHzJK3uK6Ja9w1
+X-Proofpoint-ORIG-GUID: 0Hr9h1irfHjAd3CBMpXHzJK3uK6Ja9w1
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDExMiBTYWx0ZWRfXyK3SlCGc+hiI
+ rhowaj/yGttwzrh9kSKv5L7+ZWj5CyMyUzikH2X8HW95t+zxsG47oT+pJCCVVVwIY5FRWs4g7qD
+ DAqUjsurf43cV/m6fxl0IisBy86e5SU=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-31_04,2026-07-30_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 clxscore=1015 impostorscore=0 malwarescore=0 phishscore=0
+ adultscore=0 bulkscore=0 spamscore=0 priorityscore=1501 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607310112
 
-On Thu, Jul 30, 2026 at 07:24:00PM -0700, Jeff Johnson wrote:
-> On 7/19/2026 2:45 PM, David Heidelberg via B4 Relay wrote:
-> > From: Richard Acayan <mailingradian@gmail.com>
-> > 
-> > The WCN3990 might split MSDUs among multiple "in-order" indications. The
-> > driver needs information from previous indications to handle MPDUs that
-> > are not started by the same indications that complete them. Move the
-> > list that tracks unprocessed MSDUs to the driver state so the driver can
-> > handle MPDUs that are split in this way and be less confused.
-> > 
-> > Fixes: c545070e404b ("ath10k: implement rx reorder support")
-> > Signed-off-by: Richard Acayan <mailingradian@gmail.com>
-> > Co-developed-by: David Heidelberg <david@ixit.cz>
-> > Signed-off-by: David Heidelberg <david@ixit.cz>
-> > ---
-> > This one we have in-tree forever.
+On 7/31/26 9:33 AM, Wei Deng wrote:
+> Hi Konrad,
 > 
-> I'm transcribing a few comments from my review agent (which may overlap
-> Sashiko). I have not vetted them for correctness. Hopefully I placed them at
-> the correct spots!
-> 
-> > 
-> > Changes in v2:
-> > - checkpatch & style. (Jeff)
-> > - Improve comments.
-> > - Link to v1: https://lore.kernel.org/linux-wireless/20260210021249.12132-2-mailingradian@gmail.com/
-> > ---
-> >  drivers/net/wireless/ath/ath10k/htt.h    |  4 +++
-> >  drivers/net/wireless/ath/ath10k/htt_rx.c | 50 +++++++++++++++++++++++++-------
-> >  2 files changed, 43 insertions(+), 11 deletions(-)
-> > 
-> > diff --git a/drivers/net/wireless/ath/ath10k/htt.h b/drivers/net/wireless/ath/ath10k/htt.h
-> > index 25c6b2e2f81c8..07c3dc088f07b 100644
-> > --- a/drivers/net/wireless/ath/ath10k/htt.h
-> > +++ b/drivers/net/wireless/ath/ath10k/htt.h
-> > @@ -1924,16 +1924,20 @@ struct ath10k_htt {
-> >  
-> >  	bool tx_mem_allocated;
-> >  	const struct ath10k_htt_tx_ops *tx_ops;
-> >  	const struct ath10k_htt_rx_ops *rx_ops;
-> >  	bool disable_tx_comp;
-> >  	bool bundle_tx;
-> >  	struct sk_buff_head tx_req_head;
-> >  	struct sk_buff_head tx_complete_head;
-> > +
-> > +	u8 rx_in_ord_split_tid;
-> > +	u16 rx_in_ord_split_peer_id;
-> > +	struct sk_buff_head rx_in_ord_split;
-> >  };
-> >  
-> >  struct ath10k_htt_tx_ops {
-> >  	int (*htt_send_rx_ring_cfg)(struct ath10k_htt *htt);
-> >  	int (*htt_send_frag_desc_bank_cfg)(struct ath10k_htt *htt);
-> >  	int (*htt_alloc_frag_desc)(struct ath10k_htt *htt);
-> >  	void (*htt_free_frag_desc)(struct ath10k_htt *htt);
-> >  	int (*htt_tx)(struct ath10k_htt *htt, enum ath10k_hw_txrx_mode txmode,
-> > diff --git a/drivers/net/wireless/ath/ath10k/htt_rx.c b/drivers/net/wireless/ath/ath10k/htt_rx.c
-> > index ab2d373b4750d..732bd3a2f9992 100644
-> > --- a/drivers/net/wireless/ath/ath10k/htt_rx.c
-> > +++ b/drivers/net/wireless/ath/ath10k/htt_rx.c
-> > @@ -291,16 +291,18 @@ void ath10k_htt_rx_free(struct ath10k_htt *htt)
-> >  		return;
-> >  
-> >  	timer_delete_sync(&htt->rx_ring.refill_retry_timer);
-> >  
-> >  	skb_queue_purge(&htt->rx_msdus_q);
-> >  	skb_queue_purge(&htt->rx_in_ord_compl_q);
-> >  	skb_queue_purge(&htt->tx_fetch_ind_q);
-> >  
-> > +	skb_queue_purge(&htt->rx_in_ord_split);
-> > +
-> >  	spin_lock_bh(&htt->rx_ring.lock);
-> >  	ath10k_htt_rx_ring_free(htt);
-> >  	spin_unlock_bh(&htt->rx_ring.lock);
-> >  
-> >  	dma_free_coherent(htt->ar->dev,
-> >  			  ath10k_htt_get_rx_ring_size(htt),
-> >  			  ath10k_htt_get_vaddr_ring(htt),
-> >  			  htt->rx_ring.base_paddr);
-> > @@ -841,16 +843,18 @@ int ath10k_htt_rx_alloc(struct ath10k_htt *htt)
-> >  	htt->rx_ring.sw_rd_idx.msdu_payld = 0;
-> >  	hash_init(htt->rx_ring.skb_table);
-> >  
-> >  	skb_queue_head_init(&htt->rx_msdus_q);
-> >  	skb_queue_head_init(&htt->rx_in_ord_compl_q);
-> >  	skb_queue_head_init(&htt->tx_fetch_ind_q);
-> >  	atomic_set(&htt->num_mpdus_ready, 0);
-> >  
-> > +	skb_queue_head_init(&htt->rx_in_ord_split);
-> > +
-> >  	ath10k_dbg(ar, ATH10K_DBG_BOOT, "htt rx ring size %d fill_level %d\n",
-> >  		   htt->rx_ring.size, htt->rx_ring.fill_level);
-> >  	return 0;
-> >  
-> >  err_dma_idx:
-> >  	dma_free_coherent(htt->ar->dev,
-> >  			  ath10k_htt_get_rx_ring_size(htt),
-> >  			  vaddr_ring,
-> > @@ -3156,16 +3160,20 @@ static int ath10k_htt_rx_extract_amsdu(struct ath10k_hw_params *hw,
-> >  	struct rx_msdu_end_common *rxd_msdu_end_common;
-> >  
-> >  	if (skb_queue_empty(list))
-> >  		return -ENOBUFS;
-> >  
-> >  	if (WARN_ON(!skb_queue_empty(amsdu)))
-> >  		return -EINVAL;
-> >  
-> > +	msdu = skb_peek(list);
-> > +	rxd = HTT_RX_BUF_TO_RX_DESC(hw,
-> > +				    (void *)msdu->data - hw->rx_desc_ops->rx_desc_size);
-> 
-> Dead rxd computation before the loop — VALID, MINOR
-> 
-> Lines 3168–3170 compute rxd via skb_peek(), but the while loop at 3172
-> immediately dequeues the same SKB and unconditionally recomputes rxd at lines
-> 3175–3177. The pre-loop assignment is never read. It's dead code. The original
-> patch must have introduced this when restructuring (the pre-existing code
-> likely used rxd from before the loop). It should be removed.
+> On Wed, Jul 29, 2026 at 12:46:49PM +0200, Konrad Dybcio wrote:
+>> On 7/29/26 12:27 PM, Wei Deng wrote:
+>>> Number the existing High-Speed data bus port of the usb_2 DWC3
+>>> controller as port@0, consistent with the snps,dwc3 binding convention.
+>>>
+>>> Also add an empty port@1 endpoint stub (usb_2_m2_ep) for the USB 2.0
+>>> interface to M.2 peripherals, and an empty UART endpoint stub
+>>> (uart14_ep) in the uart14 serial controller, so that board DTS files
+>>> can reference these labels directly without re-entering the port
+>>> hierarchy.
+>>>
+>>> Signed-off-by: Wei Deng <wei.deng@oss.qualcomm.com>
+>>> ---
 
-This was removed on 20 January 2026 before v1 was submitted. It seems
-this v2 is based on applying the commits to the pre-2026 patch.
+[...]
+
+> I want to avoid redefining the binding unilaterally, so two questions:
+> 
+>   Konrad: is there a DTS pattern I'm missing that would satisfy the
+>   current binding and still let fwnode_graph_get_port_by_id(fwnode, 1,
+>   ...) land on the M.2 connector for USB port 1? If not, would you be
+>   open to a snps,dwc3-common.yaml renumbering patch along the lines of
+>   Chen-Yu's mtk-xhci change?
+
+Thanks for the detailed story. I'll respond to that series directly.
+
+Konrad
