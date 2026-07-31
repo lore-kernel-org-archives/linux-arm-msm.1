@@ -1,65 +1,65 @@
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
+Received: from mail-pl1-f173.google.com (mail-pl1-f173.google.com [209.85.214.173])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2EDE4A23
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 03:12:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AAD5B347BBD
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 03:12:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.173
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785467530; cv=none; b=DJBWrVPboybv4jZ1jU3qzKDXbenSiKPhnFHpwUWrYLwSZu2bms2YozfHYKyqHYsMb6wcJBqcDsgn+lJ3fKyfQSKTg/Cyzn5HO2BDUEVhe1rKm8fqUdqdsl5FWf17kBJe0LdLKOdXQ3dVJwLtFZ38PKg9+/IOCwxlNqefn3ScaHo=
+	t=1785467540; cv=none; b=Rwa947jh4kjOloI9h4yNBwlsxlbN9i4xJ2/AHnBjm8kjky5YDzDUfBmANgYoFd5On8kP4N7KOFTH0v6Uj0NVDLsXAq30OUyfSYgVg2gCND0tuOTZv9wKpn64M25K+Sh8ueNVERQs7CJlfxBRoG0tQcKOeDxbB7fu/11lUoaRFgQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785467530; c=relaxed/simple;
-	bh=qK5oLqa99LwEbJPzMKlzORfyTf5bRebbJlbRHy6TwSE=;
+	s=arc-20240116; t=1785467540; c=relaxed/simple;
+	bh=2ZQcxyuElWSG2ZM+lBRNbAim+UgXbAvs1+qEvw0iTPg=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=SDEbDpAFx14a2vyvYXkFlFWPA6+ccguxLQj26gEspPm0jr8eaXRYp1juEXD8QRbZkSdFzqD81Xsbp7b3InKg/Ug6ASW28Nh8itradEf09PrXBxd5TNsJyWj/MT52y6Yw7YfQfFFiQr7CHFTwgDyuvFebA7mvy/VRj6cJxLt37xU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HVsGEb6v; arc=none smtp.client-ip=209.85.214.169
+	 MIME-Version; b=Ipg4LhJZGC3pvm47C1kj5j+SePV5NDfDmli/St4tNU3tRkYKNQGd0sJm4NjaT1Rwi9FS3SpiRjRgPE2ngr85+oB3hrg5kEgS/bf0+AtNUNgQIvfO8+wsnUB4ph+JzS4usaYy1BYROP1FEoQu4ShL+8i2apTNB/YN1ywnxRIiP6Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=M2uLYN1p; arc=none smtp.client-ip=209.85.214.173
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HVsGEb6v"
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2ce87c7e3bbso4672515ad.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 20:12:09 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="M2uLYN1p"
+Received: by mail-pl1-f173.google.com with SMTP id d9443c01a7336-2cacb8416a1so5011245ad.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 20:12:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785467529; x=1786072329; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1785467538; x=1786072338; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=TeHMMHG26wLFUe8JtsiyvcDWtHIXZd7QcS7ThdQpwx8=;
-        b=HVsGEb6vqy+Yz8212CAWJO6hyY1oQB9OW4JSPmHkfvSi9I/P6BiuwrFlMtQC9vTFP9
-         kVsfS9499m5YFW428EBIqlk2bQMOXelhAxwW8Zpj+HQnUSfP/kVeByEnZ7dEgEEoeoOg
-         oqdzqqeAOOdeTgnLlc2G5jq+APmIULDI/SXxF4wBzyN9txcMj2VOFi2YGSiXV6N/T1AN
-         byFWy8fNOyQKDlI5dVjnjgMNA1sTmBkMfc8pZ7KiQDwxF/1PxD6TVBcm5BRzlDnqfYGw
-         Ci67guF5SzJel0ChGKNH0HhbAmCWesvzCRx7gTQ7fGA5wWfI+Y4pnUl72tpkSMnSxj01
-         ll1Q==
+        bh=pRp7w3aucssFRgkLpXLJWYD4cpAPyrp4T/SLglC5YPg=;
+        b=M2uLYN1pdRjLcD+vYyS8eCCjuJAP0hKC1YSMpSM9dqZf0qAydJ7gyg0rc9XHuQ68JR
+         Ql5rGlYC+PFYS7DTmpUopB+2YeIlh5Xs0Y8onBEa45xWSSexTelVfQUZ6OAsxXwDakEJ
+         hVi39ae7JDyq8CyxiuM53cJIe/ss4MC80+Xo3IoEh6+HWkBfAbLFrqknq39wkhhD4LhU
+         z4dxDvAGP0IaNkWS3/3NXnGQiRzuKDAEQabGo0oUIUIi4Nx4wCAe1c9dSakigxND1kSN
+         SCZ+hk1F3hNxb9ORtZADC+m8DMMO4Y+M6lxfnMLmiLar+BQ8Hv8bq/Z2b/Zwpdp43j2V
+         sIVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785467529; x=1786072329;
+        d=1e100.net; s=20251104; t=1785467538; x=1786072338;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=TeHMMHG26wLFUe8JtsiyvcDWtHIXZd7QcS7ThdQpwx8=;
-        b=RR66mGOcMjTkthbyurE/matjw7yJM+8eJVuQ1d9sotyFoz+AsU/xbdN5rR2eQDEeIN
-         cTD/PyrRyvNjExXTvpDf2ae6U8DejdOvd+pwb5BqeuemU0r9szWmUjs/C+82GBGZYZ8i
-         Vr5Bru4GDWQ+g1XwWZKTRJ75mbT6mP7SYpiSUQ6fZUIyID9SpQ9beLpBrng3CZCZ5JUU
-         X1DzfSrLYfoT/mhqsViHDsgoxe/zvzU2Ocs17CD7wyaG0R0rbwzdUb7RoILP6KRoRimc
-         HwFo1zdrpcvOzwuP1eMH/nL9zhAeEzBRbsl6JhEb/BNvxxaYO9fpwwC0034VHNKAUYJs
-         cpKQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rqeo9CrduVejGBBKRu6vKHzjLGEU82ludtlxJdCizUPJiYkvucQK5CJFODrhvpBvCOg5lxH17HMJVC6CJIp@vger.kernel.org
-X-Gm-Message-State: AOJu0YwSlKZw/ve4zgPp59CQcAQNl0opY0pMYlIgXduVvIvGybcPzfZ2
-	HmvwQQLJrlezrDVTm0Mq6mLEHatfM0Xp1pc0lKYRhPq3ci70tZi/KMfZOPatOg==
-X-Gm-Gg: AR+sD135lFSgpDyI6CI/QluKLj/XqjjMQ2k8uCa4Cf82ZY76O2Gc8UXuzmzCYbghhEd
-	k6pq1D2DZ7RXnllH7wgh8wGeD9uiqFBFnAwb94//5rKKSbbVU+rs2OWJK1SvQPw+Wf3KCKttBxy
-	MHpYi4LAQx+Ck5JnNkKPh+FPanL3n/bQ20Z9ByFK+Bw7L1soFkMb4vuOeEuPLxoHNo3vN52HZBJ
-	LaoFuU8aMuyZT8saQHk4D72bWKG6oNWnZhld2J+bXeZM2sK5TfHBKuU39IwXVuRUcgCeoOWm0j7
-	gmtBrDfIVz/R9WxcOTPEU85Xz318r2hXpt3QPQnHdoHD5YRi1aiTu1HcJDa6CI9BB1N8JY3ZQoa
-	IOfOzAMvjZqsFtn7hI5wTZZOfJo8nCnZ5epNSLm1iJeEOlSZodiJULLktmTlRAVmpHVIVQu8JcK
-	62uw+Kcv2HN3X2L43S8bbLjTZhNZK6/UjGczotRdQ/+arVTQjmeL4GdEb2vagbr60LnEvq6Ntrw
-	8hVLYhFBDpPpIbmpT7fRHwcbqklHXUwnZX/2qAo9VjK9nZr3xaSNCGVl7TaGTx415p7rp5PaeNl
-	1Kz0
-X-Received: by 2002:a17:903:3886:b0:2c8:4c29:afeb with SMTP id d9443c01a7336-2d046d6d244mr4956035ad.8.1785467529096;
-        Thu, 30 Jul 2026 20:12:09 -0700 (PDT)
+        bh=pRp7w3aucssFRgkLpXLJWYD4cpAPyrp4T/SLglC5YPg=;
+        b=QSlOj4M5BhVH7hGpCCizz0ROw4DdrntkI77oqimFeKOoMq8tTtaquHt09Z1SpkjKBK
+         jhrAGJLAanMasM94ouM/JhpPb63/CZ8WXQ/gjLlXOas+xn6ckjoh8cetcGc2qqa1cKOj
+         HQSOq8iwrjj0lX38kG7BiHxT/4nzd6LL4Z/rlumDvxu1uLNrt440TPfd//9518drUlr2
+         yWP8M72fvMfWoe/qJTcPsyQU5dlwOPlLX2l806fzbDcZDciuG049V4yC+VAeAO0R288T
+         sMMO+wa2VaTAcI8orEU1SVSKq3pkscPzk/Y78EkECGW4NcHlJ+0JFM5UXQHyCMAwHEAc
+         gg4A==
+X-Forwarded-Encrypted: i=1; AHgh+RoTnXm3q35anu/bXVz44oJTgX8FKI/WuqJpmE24X+50QjCXwSJPS8I/3aoiwE949G/4NRlsfcK3arXYSmuf@vger.kernel.org
+X-Gm-Message-State: AOJu0YwPQJE4KPJ38tAMMT4u5RprJaRnYHeDxbVB/gYlD1lGaS0oYQlv
+	gnsX+YmSGkpxWgTn0z5pmpgnOTiZpt2Yqj2CSq2Vs0Z72g/z6CIYEVi7
+X-Gm-Gg: AR+sD10LXj62oAwM6OFSzo2YV9y44/crdHM0FnC96NB/myDJEwVsyaH6DM/ZKtEyQh9
+	5lrEGG2RtujImwdPZEJdunV9o4WuEFUJAdYbtqWPhmPtsvwFO7HXc0WBy28o+Ktz8BSp4WI9dlK
+	9S/kOePky90SVKMowPmd/Ap7Ajq5Yfb/pQeXZ3ndLc9N8NRydApZjww/OVR0j4R7Yd5i+k4/k/5
+	uppczK69Nc4qn1+c7j6EpISNqpXdxAq9OlonxlBU0ZPi2O8wu5Dk5DFVYu0V4R9nvZBh8cBFo2I
+	EZDX/EuQ8fq938GTmTa6YeF0sAEnjSie49rnnhtgIr8GXZI4MDdV3BJCZ/WcgTpgFIPEL4MFW/k
+	G/+23tmQW9hRrNxtwlJZelxo4Nkyguta+Eh6MRfUKJp1GjrRo6/NVNnTPGrMbVcpoqy1R/k47Kh
+	aGcbJR6oaE1GBmoxljDGS5bPKba61BmrusQKUGbxN79iKNt+Z9/rv+57bvxA6YuqNNiD11Sk9kB
+	MlNiSi8zeaKf9LGtE8DWLny3+qmqXyTcngx2aC9bGY1eEjIm+cCkhjxeNNOYTv4Mwji/4Jo3fwg
+	NKjZ
+X-Received: by 2002:a17:902:d2c8:b0:2cc:dacc:fe27 with SMTP id d9443c01a7336-2d046e70aecmr4504055ad.30.1785467537989;
+        Thu, 30 Jul 2026 20:12:17 -0700 (PDT)
 Received: from phuc-desktop.. ([183.91.15.56])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d047ae9f31sm737595ad.60.2026.07.30.20.12.01
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d047ae9f31sm737595ad.60.2026.07.30.20.12.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Jul 2026 20:12:07 -0700 (PDT)
+        Thu, 30 Jul 2026 20:12:17 -0700 (PDT)
 From: phucduc.bui@gmail.com
 To: Mark Brown <broonie@kernel.org>,
 	Liam Girdwood <lgirdwood@gmail.com>,
@@ -91,9 +91,9 @@ Cc: Baojun Xu <baojun.xu@ti.com>,
 	linux-sound@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	bui duc phuc <phucduc.bui@gmail.com>
-Subject: [PATCH v3 16/26] ASoC: codecs: wm0010: Use guard() for mutex & spin locks
-Date: Fri, 31 Jul 2026 10:06:38 +0700
-Message-ID: <20260731030648.8706-17-phucduc.bui@gmail.com>
+Subject: [PATCH v3 17/26] ASoC: codecs: wm2000: Use guard() for mutex locks
+Date: Fri, 31 Jul 2026 10:06:39 +0700
+Message-ID: <20260731030648.8706-18-phucduc.bui@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260731030648.8706-1-phucduc.bui@gmail.com>
 References: <20260731030648.8706-1-phucduc.bui@gmail.com>
@@ -107,93 +107,97 @@ Content-Transfer-Encoding: 8bit
 
 From: bui duc phuc <phucduc.bui@gmail.com>
 
-Clean up the code using guard() for mutex & spin locks.
+Clean up the code using guard() for mutex locks.
 Merely code refactoring, and no behavior change.
 
 Reviewed-by: Richard Fitzgerald <rf@opensource.cirrus.com>
 Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
 ---
- sound/soc/codecs/wm0010.c | 28 +++++++++++-----------------
- 1 file changed, 11 insertions(+), 17 deletions(-)
+ sound/soc/codecs/wm2000.c | 28 +++++++---------------------
+ 1 file changed, 7 insertions(+), 21 deletions(-)
 
-diff --git a/sound/soc/codecs/wm0010.c b/sound/soc/codecs/wm0010.c
-index 2a8c61a72c17..58c0c601ee6c 100644
---- a/sound/soc/codecs/wm0010.c
-+++ b/sound/soc/codecs/wm0010.c
-@@ -9,6 +9,7 @@
-  *          Scott Ling <sl@opensource.wolfsonmicro.com>
-  */
- 
+diff --git a/sound/soc/codecs/wm2000.c b/sound/soc/codecs/wm2000.c
+index 9b68ee69324b..897b0acac5f3 100644
+--- a/sound/soc/codecs/wm2000.c
++++ b/sound/soc/codecs/wm2000.c
+@@ -23,6 +23,7 @@
+ #include <linux/kernel.h>
+ #include <linux/init.h>
+ #include <linux/firmware.h>
 +#include <linux/cleanup.h>
- #include <linux/module.h>
- #include <linux/moduleparam.h>
- #include <linux/interrupt.h>
-@@ -148,13 +149,11 @@ static const char *wm0010_state_to_str(enum wm0010_state state)
- static void wm0010_halt(struct snd_soc_component *component)
- {
- 	struct wm0010_priv *wm0010 = snd_soc_component_get_drvdata(component);
--	unsigned long flags;
- 	enum wm0010_state state;
+ #include <linux/clk.h>
+ #include <linux/delay.h>
+ #include <linux/pm.h>
+@@ -612,20 +613,15 @@ static int wm2000_anc_mode_put(struct snd_kcontrol *kcontrol,
+ 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+ 	struct wm2000_priv *wm2000 = dev_get_drvdata(component->dev);
+ 	unsigned int anc_active = ucontrol->value.integer.value[0];
+-	int ret;
  
- 	/* Fetch the wm0010 state */
--	spin_lock_irqsave(&wm0010->irq_lock, flags);
--	state = wm0010->state;
--	spin_unlock_irqrestore(&wm0010->irq_lock, flags);
-+	scoped_guard(spinlock_irqsave, &wm0010->irq_lock)
-+		state = wm0010->state;
+ 	if (anc_active > 1)
+ 		return -EINVAL;
  
- 	switch (state) {
- 	case WM0010_POWER_OFF:
-@@ -173,9 +172,8 @@ static void wm0010_halt(struct snd_soc_component *component)
- 		break;
- 	}
+-	mutex_lock(&wm2000->lock);
++	guard(mutex)(&wm2000->lock);
  
--	spin_lock_irqsave(&wm0010->irq_lock, flags);
--	wm0010->state = WM0010_POWER_OFF;
--	spin_unlock_irqrestore(&wm0010->irq_lock, flags);
-+	scoped_guard(spinlock_irqsave, &wm0010->irq_lock)
-+		wm0010->state = WM0010_POWER_OFF;
+ 	wm2000->anc_active = anc_active;
+ 
+-	ret = wm2000_anc_set_mode(wm2000);
+-
+-	mutex_unlock(&wm2000->lock);
+-
+-	return ret;
++	return wm2000_anc_set_mode(wm2000);
  }
  
- struct wm0010_boot_xfer {
-@@ -190,11 +188,9 @@ struct wm0010_boot_xfer {
- static void wm0010_mark_boot_failure(struct wm0010_priv *wm0010)
+ static int wm2000_speaker_get(struct snd_kcontrol *kcontrol,
+@@ -645,20 +641,15 @@ static int wm2000_speaker_put(struct snd_kcontrol *kcontrol,
+ 	struct snd_soc_component *component = snd_kcontrol_chip(kcontrol);
+ 	struct wm2000_priv *wm2000 = dev_get_drvdata(component->dev);
+ 	unsigned int val = ucontrol->value.integer.value[0];
+-	int ret;
+ 
+ 	if (val > 1)
+ 		return -EINVAL;
+ 
+-	mutex_lock(&wm2000->lock);
++	guard(mutex)(&wm2000->lock);
+ 
+ 	wm2000->spk_ena = val;
+ 
+-	ret = wm2000_anc_set_mode(wm2000);
+-
+-	mutex_unlock(&wm2000->lock);
+-
+-	return ret;
++	return wm2000_anc_set_mode(wm2000);
+ }
+ 
+ static const struct snd_kcontrol_new wm2000_controls[] = {
+@@ -676,9 +667,8 @@ static int wm2000_anc_power_event(struct snd_soc_dapm_widget *w,
  {
- 	enum wm0010_state state;
--	unsigned long flags;
+ 	struct snd_soc_component *component = snd_soc_dapm_to_component(w->dapm);
+ 	struct wm2000_priv *wm2000 = dev_get_drvdata(component->dev);
+-	int ret;
  
--	spin_lock_irqsave(&wm0010->irq_lock, flags);
--	state = wm0010->state;
--	spin_unlock_irqrestore(&wm0010->irq_lock, flags);
-+	scoped_guard(spinlock_irqsave, &wm0010->irq_lock)
-+		state = wm0010->state;
+-	mutex_lock(&wm2000->lock);
++	guard(mutex)(&wm2000->lock);
  
- 	dev_err(wm0010->dev, "Failed to transition from `%s' state to `%s' state\n",
- 		wm0010_state_to_str(state), wm0010_state_to_str(state + 1));
-@@ -734,9 +730,8 @@ static int wm0010_set_bias_level(struct snd_soc_component *component,
- 		break;
- 	case SND_SOC_BIAS_STANDBY:
- 		if (snd_soc_dapm_get_bias_level(dapm) == SND_SOC_BIAS_PREPARE) {
--			mutex_lock(&wm0010->lock);
--			wm0010_halt(component);
--			mutex_unlock(&wm0010->lock);
-+			scoped_guard(mutex, &wm0010->lock)
-+				wm0010_halt(component);
- 		}
- 		break;
- 	case SND_SOC_BIAS_OFF:
-@@ -832,9 +827,8 @@ static irqreturn_t wm0010_irq(int irq, void *data)
- 	case WM0010_OUT_OF_RESET:
- 	case WM0010_BOOTROM:
- 	case WM0010_STAGE2:
--		spin_lock(&wm0010->irq_lock);
--		complete(&wm0010->boot_completion);
--		spin_unlock(&wm0010->irq_lock);
-+		scoped_guard(spinlock, &wm0010->irq_lock)
-+			complete(&wm0010->boot_completion);
- 		return IRQ_HANDLED;
- 	default:
- 		return IRQ_NONE;
+ 	if (SND_SOC_DAPM_EVENT_ON(event))
+ 		wm2000->anc_eng_ena = 1;
+@@ -686,11 +676,7 @@ static int wm2000_anc_power_event(struct snd_soc_dapm_widget *w,
+ 	if (SND_SOC_DAPM_EVENT_OFF(event))
+ 		wm2000->anc_eng_ena = 0;
+ 
+-	ret = wm2000_anc_set_mode(wm2000);
+-
+-	mutex_unlock(&wm2000->lock);
+-
+-	return ret;
++	return wm2000_anc_set_mode(wm2000);
+ }
+ 
+ static const struct snd_soc_dapm_widget wm2000_dapm_widgets[] = {
 -- 
 2.43.0
 
