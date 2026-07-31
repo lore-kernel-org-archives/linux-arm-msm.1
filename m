@@ -1,65 +1,65 @@
-Received: from mail-pl1-f172.google.com (mail-pl1-f172.google.com [209.85.214.172])
+Received: from mail-pl1-f170.google.com (mail-pl1-f170.google.com [209.85.214.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E713E3403F1
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 03:11:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 468A334887B
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 03:11:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785467504; cv=none; b=A4tIzHBbR1tkA3DN8S+aHO6PUUtk4wGkIcnqUmzZFdpY13Uz0piFC/bCt9kwJyR+B+0+r/s8uaXeCp7vGJtQ3E0fCydX1hZfRus+1JYcOt4ra/zS8LG+udOzuvBKWJU2JoXP3CLGubic0hQOeQS5Chci5YgNNSHDblbO5g/ylvE=
+	t=1785467512; cv=none; b=E7S7mKM7d0jdcBnOgwQrmywGSVMkooe81FXaS+QinrCvcOY7ODGkfdixYHg1ODKvcyMSDVNLnX00jq2s9m79oeD/FaBCmi4kYBjUNLjJ1TN3E0ITPa8ycYL6m0kOIzl4SNZquCk6mPULE6stLSWimpFmxRQae20Dec0Nde3WVfs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785467504; c=relaxed/simple;
-	bh=ejYwKV1fvCU+OGYNk147FP+gAndpm1ujSerj4glbyk0=;
+	s=arc-20240116; t=1785467512; c=relaxed/simple;
+	bh=XnhnsPyA5QSjzg0tuQcdHLbqpbZbFqUdXNayJneipxM=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=PGnIg4Z0ruRPobTwOixe384taZzYGRURjBa8ficcEAuqkPssDcoeBug35X5VqA4ZiSb6OJt2JA2yOSQJNFqZmGfYLMUKLGqNphl/GnIVf+4bGc16niu/o2XRRXvaJF89uCte6DI4SsItnmBwIUQu/NEhI50Fz0XrEAGGfUj/f3I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JabWkbSV; arc=none smtp.client-ip=209.85.214.172
+	 MIME-Version; b=fVzqWxcojqbmUVYK/alY2UoV68wQ8hCpyc7zl0BPfh43lwCHc8M9xZINGWHBpmvGSqtxNYti3jH9SEtvFKW1pSIeWbdm9ikXxyY0T+1Y4Ljjgapua3iSzqv8Gqm0fGPg0j/4UsMQRcsgtqd4bmBxMIwYQliR84bgrX6XoY9g7oE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=WxjC6fIY; arc=none smtp.client-ip=209.85.214.170
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JabWkbSV"
-Received: by mail-pl1-f172.google.com with SMTP id d9443c01a7336-2cc7e86e7aeso4474395ad.2
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 20:11:41 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="WxjC6fIY"
+Received: by mail-pl1-f170.google.com with SMTP id d9443c01a7336-2cea3004256so5647845ad.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 20:11:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785467501; x=1786072301; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1785467511; x=1786072311; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=PMQIA5NlQdKTc/dqW/t5DllpXIgAMPtDSEZ406vK3Lc=;
-        b=JabWkbSV4H1erldfwGeSIN5t+MrJEN2ukgUHWpjgZUWhcOux1+5J1//tOwyAOyrYas
-         JQKAJs8Tv0gOTxAWqFK4SD6zwUY5LyY/Wv6XRrf7CCYMNjXUh7CEP3TUjO5TPWuJfK+9
-         ASc1vjzYWSmuzDPI7CsSem2pFncwDMEoYlVuRpaPTOGrM8MZzDFhnvdU7SZf06ec/Wdc
-         ryE1g7a3V0VMHxMFIZh56XjZlzEPYM+VlnnmJ6/6+6FiLwIg97yk8kw2c5NJ/IKgK+AD
-         1i5ZEGYvvX+Tot7Mv5J0jkRblD97jDDE4/u2FKbaGXHjoTMI1cx23ICC5hKEsf/gwZ8i
-         rjSQ==
+        bh=RK1Qg1zMLuqf3deYuh7H14WODBPPcltBb1uxyeY+ius=;
+        b=WxjC6fIYji/q5DMH34TSnRdULpn4qcc2XByd9T5k2fOingd6FmBcVXyaz+qYLsAzTg
+         wf1QaA71Bvb5fYFlqYJ7kXHsOhgMkQf0JV13OwhqisobXwAwEWRlH7ege8ufoOSHBPl6
+         bdTCwwlkX54k4yzBwmNl03qMgeCuhldfI57dlx51JEzz49mrqjpG/fB86Tg3cmngiKMc
+         sZWd93GempgWA5sW54PL2iM4gkb7CAobqgMwt2cOM3Hg+LZYotGLeNoRy6ddKvoo2io/
+         vELEZ/+Ptv6AhR6atXKX1X/jBoRBuXhj8IItIUimlRDBDdImXw0N0blclKYaeTgs1mTe
+         v3Pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785467501; x=1786072301;
+        d=1e100.net; s=20251104; t=1785467511; x=1786072311;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=PMQIA5NlQdKTc/dqW/t5DllpXIgAMPtDSEZ406vK3Lc=;
-        b=ng8Fi+6uxzRM82o+N7IBD092ZqPXh/WsVbyCGDurLobaUFioPbFTw/ELvAfUr9VwW1
-         pt9/uB1GhEUDaM9Vgv9xJ4oh3BSadu/7RGDeVeWmlOjOT0Qu5eyRGfQVXpJEb9XDALUF
-         kjrfjRsF0lSh732CKKYPusJzu8H/lreSo5fx/PClw4wtQbgOU+cTXzRT+7HPgvDRLfAQ
-         S4ZGx//rEw5eYzN3utzY/PgTlGtX74oENJBp8rGctfWqc8wwX8/THEFPmbhuby1nNuzt
-         Urt0kekiQLtFvuFzxKW9bscHvxuaE2/INl5wgVk9uKSX21t3/B/19nmBncWP7U+AeauU
-         z0Lw==
-X-Forwarded-Encrypted: i=1; AHgh+Rq7qqdymKwZ99OciBT0mYEQ9s3biJeT1kRTODMR01D15v4iZraKOFy17tP0/vQ4eVPNZ+PtTEgD/7HaxrBw@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz9uGsK43uYKjeiDZLMP5cW11R7dgB10SLaZCjAWnV6JR8bbrW/
-	3gcM37i8O6kqCZtfvCFmzjFghdplIpKtj2BBYRsN0f4tOn2UiNQIRcb6
-X-Gm-Gg: AR+sD10JzV7NCwT8GKeNRiUgqpQMyDrZmXB/wUgh+MvaFqmlv+3d7/UnwsRSCDWXtgW
-	I82csXL3843WowleJo6ZxwAm9ZYyXxvryJgb+MBjFyJC7WMHk//cfeRhLDCQwwVTI0h4ycW6Gni
-	nMAjofHrRbf6SHV85d7V1RIjlkdcv7viZdnGk4XiR9zS/OSgGW6cJwqLUz5EIj6w6iffNLaZgUx
-	lrVmKmQx58eyvPfdUheoBVsK6ndKymbeyPHN/1w+X7lba1Am3r9hIaBXftLK+mR5QclhPjsmOWr
-	88ozUJe2lcFGQT3Jee5R+BJBoyZ/qJ7y+qzzJHGefE59LKSO1/OAj+WGQHgQzh5WHYfc9MIMZjD
-	KY7dbPVppniKouEUkADKbQ6eJHtF5mTIZ17uOiCefM1URrR06k15DBUqpVWT+vc+WSYFHj3LOZJ
-	cC3+Evo4uswgnKdIzxq2xBdCTwH0BtigECnqcDY0YIX8viETd0sp6U5WfJ3mvRGR9PxkfHX+qTb
-	fi1V56CtHZ43EwUkLJGpBhTHunjDA9/O/4Ko6YSIe/nRSwRXIRKu+aOfKpf9XiqoDQB5/VCEC++
-	ZIby
-X-Received: by 2002:a17:903:2c50:b0:2c9:97a7:f543 with SMTP id d9443c01a7336-2d046ec8829mr4422505ad.41.1785467501244;
-        Thu, 30 Jul 2026 20:11:41 -0700 (PDT)
+        bh=RK1Qg1zMLuqf3deYuh7H14WODBPPcltBb1uxyeY+ius=;
+        b=s82At1OVTArNU/eqoALohkvezBMzzXTEvyzA3WiolLu09ehomrPb87GkQm7PMy7yer
+         RmD+A3z0X/t1XkP2XS3d+R2Mxzzfl7CuoWmfp/Y6139vDXi25bNHS2JZ74b8VtYZ7IRs
+         ktSsyXIgUluWo7x6bqalKri34so3vuc3b4IiNCsbf10WDKmBROq/+jn5PYc2/Lydr1hV
+         ymyFwsPpMxa4Y2midewgLmc1uesZ/EKkA69cZapJD3r2NUR8apjPP/Rcl8dTSAuep4nF
+         wJ+L6qE1lfGn7ucxHAHBLc/eWfi9XEDDfb7l3q8tVzGnAybLM2TinWCDpFcG6UymPfdu
+         dZUA==
+X-Forwarded-Encrypted: i=1; AHgh+RpxpCE0Xxk9EV6uNAByNzZugn3kWDlkGf7Bm3luG7twLNEbaTSC1XFnQV7CbvzIfDoxpx5AkX6qdOWXepcx@vger.kernel.org
+X-Gm-Message-State: AOJu0YxIwdn+MgDVDZHKKVW7Tkisxgak0HyZT2DJDs1jes2Ehx6grOdo
+	NCH/W5EJhUHJrk8KUs09eqI69td1Hx6qTEd9JesW/EgmdaNak4P9Niql
+X-Gm-Gg: AR+sD12+A+o3LgzoWGoXxAbvpab9HEKe/XgKraD59h+wCDDfSoixm288P4pmHqOaSmm
+	2UuJk1h3DLdAN44F2wEVQhC82tGJRGIO8y1BAD5gXGgZAzvrUPjyRMm47Ub/VeqS/boDhAgC2bu
+	6YfTah60K1EsamjvYrox+kuiCpYTpMXGW5Rtcoch6tHEF0e/O7S3JbzNP2+PrM4nbAhjZY/pOzJ
+	Np8mFSib3hSOvBPM3knMShO9YmxCQ2Guu83V7OWI7bChHKTZWfPd0MqiPGV+loma9xgc9OWPq5T
+	u3bd3WMaEwA2iLaeBuyf//9I+VOPCdWN/EBiVdGDXVThLtwAmoKOiSbXryU4D2S3vMKAhgfCBl9
+	htNdDbflsn1ECQ0ki1DCKeeINiBzfKa8tis8eXfeOmFxQr9h25UxuYd5Q7CbaqSF2YBVJBtKhqh
+	L+r8kwc7ZzJJIPceRx+xSaEZq6qAfjrmi4mmCKXWhl/OoFkLm9ABokS5cofXNRfBbwgBfDp6Pgg
+	BteVlSEwfipyukvQdSTW7xlppiVhRQMTRVKAVW24HMREy3Qq9nJa0yXBAStNSOk1IdjVwKfKtgD
+	qFS6
+X-Received: by 2002:a17:903:2c10:b0:2c9:bd37:ae76 with SMTP id d9443c01a7336-2d046ec8af4mr4558385ad.47.1785467510586;
+        Thu, 30 Jul 2026 20:11:50 -0700 (PDT)
 Received: from phuc-desktop.. ([183.91.15.56])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d047ae9f31sm737595ad.60.2026.07.30.20.11.33
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d047ae9f31sm737595ad.60.2026.07.30.20.11.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Jul 2026 20:11:40 -0700 (PDT)
+        Thu, 30 Jul 2026 20:11:49 -0700 (PDT)
 From: phucduc.bui@gmail.com
 To: Mark Brown <broonie@kernel.org>,
 	Liam Girdwood <lgirdwood@gmail.com>,
@@ -91,9 +91,9 @@ Cc: Baojun Xu <baojun.xu@ti.com>,
 	linux-sound@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	bui duc phuc <phucduc.bui@gmail.com>
-Subject: [PATCH v3 13/26] ASoC: codecs: wcd937x: Use guard() for mutex locks
-Date: Fri, 31 Jul 2026 10:06:35 +0700
-Message-ID: <20260731030648.8706-14-phucduc.bui@gmail.com>
+Subject: [PATCH v3 14/26] ASoC: codecs: wcd938x: Use guard() for mutex locks
+Date: Fri, 31 Jul 2026 10:06:36 +0700
+Message-ID: <20260731030648.8706-15-phucduc.bui@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260731030648.8706-1-phucduc.bui@gmail.com>
 References: <20260731030648.8706-1-phucduc.bui@gmail.com>
@@ -112,58 +112,41 @@ Merely code refactoring, and no behavior change.
 
 Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
 ---
- sound/soc/codecs/wcd937x.c | 25 ++++++++++---------------
- 1 file changed, 10 insertions(+), 15 deletions(-)
+ sound/soc/codecs/wcd938x.c | 22 +++++++++-------------
+ 1 file changed, 9 insertions(+), 13 deletions(-)
 
-diff --git a/sound/soc/codecs/wcd937x.c b/sound/soc/codecs/wcd937x.c
-index e0169e783ee9..0dd05604f5b8 100644
---- a/sound/soc/codecs/wcd937x.c
-+++ b/sound/soc/codecs/wcd937x.c
-@@ -2,6 +2,7 @@
- // Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
+diff --git a/sound/soc/codecs/wcd938x.c b/sound/soc/codecs/wcd938x.c
+index c69e18667a85..9a9ea37ecab3 100644
+--- a/sound/soc/codecs/wcd938x.c
++++ b/sound/soc/codecs/wcd938x.c
+@@ -1,6 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0-only
+ // Copyright (c) 2018-2020, The Linux Foundation. All rights reserved.
  
- #include <linux/component.h>
 +#include <linux/cleanup.h>
- #include <linux/delay.h>
- #include <linux/device.h>
- #include <linux/gpio/consumer.h>
-@@ -1056,7 +1057,7 @@ static int wcd937x_micbias_control(struct snd_soc_component *component,
- 		return -EINVAL;
- 	}
- 
--	mutex_lock(&wcd937x->micb_lock);
-+	guard(mutex)(&wcd937x->micb_lock);
- 	switch (req) {
- 	case MICB_PULLUP_ENABLE:
- 		wcd937x->pullup_ref[micb_index]++;
-@@ -1136,7 +1137,6 @@ static int wcd937x_micbias_control(struct snd_soc_component *component,
- 		}
- 		break;
- 	}
--	mutex_unlock(&wcd937x->micb_lock);
- 
- 	return 0;
- }
-@@ -1460,7 +1460,7 @@ static int wcd937x_mbhc_micb_adjust_voltage(struct snd_soc_component *component,
+ #include <linux/module.h>
+ #include <linux/slab.h>
+ #include <linux/platform_device.h>
+@@ -1976,7 +1977,7 @@ static int wcd938x_mbhc_micb_adjust_voltage(struct snd_soc_component *component,
  					    int req_volt, int micb_num)
  {
- 	struct wcd937x_priv *wcd937x = snd_soc_component_get_drvdata(component);
+ 	struct wcd938x_priv *wcd938x =  snd_soc_component_get_drvdata(component);
 -	int cur_vout_ctl, req_vout_ctl, micb_reg, micb_en, ret = 0;
 +	int cur_vout_ctl, req_vout_ctl, micb_reg, micb_en;
  
  	switch (micb_num) {
  	case MIC_BIAS_1:
-@@ -1475,7 +1475,7 @@ static int wcd937x_mbhc_micb_adjust_voltage(struct snd_soc_component *component,
+@@ -1994,7 +1995,7 @@ static int wcd938x_mbhc_micb_adjust_voltage(struct snd_soc_component *component,
  	default:
  		return -EINVAL;
  	}
--	mutex_lock(&wcd937x->micb_lock);
-+	guard(mutex)(&wcd937x->micb_lock);
+-	mutex_lock(&wcd938x->micb_lock);
++	guard(mutex)(&wcd938x->micb_lock);
  	/*
  	 * If requested micbias voltage is same as current micbias
  	 * voltage, then just return. Otherwise, adjust voltage as
-@@ -1490,15 +1490,11 @@ static int wcd937x_mbhc_micb_adjust_voltage(struct snd_soc_component *component,
- 						    WCD937X_MICB_VOUT_MASK);
+@@ -2009,15 +2010,11 @@ static int wcd938x_mbhc_micb_adjust_voltage(struct snd_soc_component *component,
+ 						    WCD938X_MICB_VOUT_MASK);
  
  	req_vout_ctl = wcd_get_micb_vout_ctl_val(component->dev, req_volt);
 -	if (req_vout_ctl < 0) {
@@ -180,20 +163,20 @@ index e0169e783ee9..0dd05604f5b8 100644
 +	if (cur_vout_ctl == req_vout_ctl)
 +		return 0;
  
- 	if (micb_en == WCD937X_MICB_ENABLE)
+ 	if (micb_en == WCD938X_MICB_ENABLE)
  		snd_soc_component_write_field(component, micb_reg,
-@@ -1519,9 +1515,8 @@ static int wcd937x_mbhc_micb_adjust_voltage(struct snd_soc_component *component,
+@@ -2038,9 +2035,8 @@ static int wcd938x_mbhc_micb_adjust_voltage(struct snd_soc_component *component,
  		 */
  		usleep_range(2000, 2100);
  	}
 -exit:
--	mutex_unlock(&wcd937x->micb_lock);
+-	mutex_unlock(&wcd938x->micb_lock);
 -	return ret;
 +
 +	return 0;
  }
  
- static int wcd937x_mbhc_micb_ctrl_threshold_mic(struct snd_soc_component *component,
+ static int wcd938x_mbhc_micb_ctrl_threshold_mic(struct snd_soc_component *component,
 -- 
 2.43.0
 
