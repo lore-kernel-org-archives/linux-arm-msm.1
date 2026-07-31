@@ -1,45 +1,52 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5E331DFFB;
-	Mon,  3 Aug 2026 12:06:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13C5A401A0B;
+	Mon,  3 Aug 2026 12:09:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785758767; cv=none; b=S/k57hmkHC2RitxeI1rY18kY7iKl86SGC1JCBby9afH4KXC/wxnoIEEqQrW7i/3cPc7ti/3fSCX+uvWPZ3o+BrER1TBcm4Uxs2jN4nFk8Z+IMWUMjeISRUyVIcYFGKcbARwjCHWhNIeOYN1azzlDMMv7khI3YkvWuBEL5zS3M4M=
+	t=1785758974; cv=none; b=E6lHxIVAkqjJgdFDov81CtPXY88kAYe05nZZPOHibDzSd/XxFIlOA1oYbXsqojLR26DKuUdZ0pStBHAB9KmKEAQF0FpFZbp1EbWphfJVxsH+jcVmc8BB7JswSOqzc29FzRap/nzYKavR7oqnUOkJBgAgm/y5bU2LSeUqmn4WwSM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785758767; c=relaxed/simple;
-	bh=LmrZPd0sXoO1lZfpdxiRX9ff149gvbgTbp/A/5LhyxQ=;
+	s=arc-20240116; t=1785758974; c=relaxed/simple;
+	bh=0ubLwj31Q148WFirjvyUycb1uebMl4Y4Fg4bbxK+EE4=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=lPslMX5oyN3y3RC2Zk0kP312Ot4hj4rA7bxFoGjRs9AdEkyZc1RAW3v71JjiNkcTh45NW0/H6MTa//NyVhhlAMgycSTmSNq85hggKWmqNdrCROt2eJLVz0PYRkuVVI0gM9lQ5JF4YcXbQYp9hcVvhmFv50SuwCNX+w0asntrJcE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dzpQ3qXN; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=offDDnzEmCzO54NVItGprT/ujq7q10KYM/lhxxzYVvJBViAPHLXSI5tvA4w5nR1bn1cNSe97z237Q0c9ocvj012zqFOPzVrCuU8NOPNl4Tf9aUo4UyUtmb4KHZT3AzgdPYJFqpzvkgUOVmnJK//cEjrQ6O2o4oHcdpM/553+ZhY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TFhYjIXY; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dzpQ3qXN"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DA05A1F000E9;
-	Mon,  3 Aug 2026 12:06:04 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TFhYjIXY"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E67D11F000E9;
+	Mon,  3 Aug 2026 12:09:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785758766;
-	bh=GwiisxtxnRbjDd426dl411y8wKX4uuzvgnveiiV+zlA=;
+	s=k20260515; t=1785758972;
+	bh=gLgqvs3sTRNrs/tckGqlVL1dJSc5lNbXDd2F4BvaDac=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=dzpQ3qXNlgtGGtOcrD0U2ShzzrqMsnplHupbtdOUqpHXauGaDbEXRqrGrCMYcXwVw
-	 TJpzVo/UY/wzOlDHbFE1b8ZmE1oTgXHVIirIpBu4S6mvuOymqBSssMZsb+44rofNUa
-	 mSRPsriSXw0VXRs22pJmrtMGaNIIQxy53HVAnKpbuhibP2gsIP2RzYFW8wow9CzFfF
-	 nE13mTxGoAoKzagi1pDYcCu1speJ1DV5yEBcIUOYKyCgx/1rORBJHL44gTVxVEXWqO
-	 W12DB1kkj8CTPIj98filsSQfhOefRUwpCuFJpHim16TzJ70hdYFMjV6pC7+Hy0sxwa
-	 ABaHj1w7KBwkg==
+	b=TFhYjIXY/6CMmgHNMuQpbwkmxee3Ad8Z6LjnfHKo+z3wLv9NrX4Z9bgFSby/ww5Pf
+	 c7JdNCd1oku+48Q5n/H1ggZFoBzZo7EWA16Nl8681Z4cw5REzjVyKWy7uEsOWkB9F3
+	 VPO+c8HN3I9fa/pLwjzaUDzPo8SPKPYLx1WQDdPk8QCk5efI/aUBPehMdAvujriKvA
+	 +rbPz+e5oduZQLkzoGunsGmP3u2qeVoZX8CmVFkC/gIwhhX/FO5ZEzQKWHmroa7HIv
+	 gSglZf8iCtgt16t6ymD47iejCmjzrrydg/+xcxUjU49qShwBjgi8+AJ6Dcu04ryY1N
+	 7f95/udgrltUw==
 From: Mark Brown <broonie@kernel.org>
 To: Srinivas Kandagatla <srini@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
- Takashi Iwai <tiwai@suse.com>, 
- Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>, 
- =?utf-8?q?Dawid_Wro=CC=81bel?= <me@dawidwrobel.com>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, stable@vger.kernel.org
-In-Reply-To: <20260730-worktree-lpass-tx-macro-enum-fix-v2-0-6d091c736116@dawidwrobel.com>
-References: <20260730-worktree-lpass-tx-macro-enum-fix-v2-0-6d091c736116@dawidwrobel.com>
-Subject: Re: [PATCH v2 0/2] ASoC: codecs: lpass-{tx,wsa}-macro: fix enum
- kcontrol accesses
-Message-Id: <178554254606.353541.16114714913692707408.b4-ty@b4>
-Date: Sat, 01 Aug 2026 01:02:26 +0100
+ Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>, Konrad Dybcio <konradybcio@kernel.org>, 
+ linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, Richard Acayan <mailingradian@gmail.com>
+Cc: Nickolay Goppen <setotau@mainlining.org>, 
+ Adam Skladowski <a39.skl@gmail.com>, 
+ Vladimir Lypak <vladimir.lypak@gmail.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+ Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>, 
+ Johan Hovold <johan@kernel.org>, Kees Cook <kees@kernel.org>, 
+ Charles Keepax <ckeepax@opensource.cirrus.com>, 
+ Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
+In-Reply-To: <20260730174353.108023-1-mailingradian@gmail.com>
+References: <20260730174353.108023-1-mailingradian@gmail.com>
+Subject: Re: [PATCH v6 00/15] SDM660 sound card and internal MI2S support
+Message-Id: <178554049927.353541.14417243139211059408.b4-ty@b4>
+Date: Sat, 01 Aug 2026 00:28:19 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -47,40 +54,60 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1519; i=broonie@kernel.org;
- h=from:subject:message-id; bh=LmrZPd0sXoO1lZfpdxiRX9ff149gvbgTbp/A/5LhyxQ=;
- b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqcIQrWTkq4bz/8qyU1z3GHWxO0eSvnwLU8qEEs
- U6g5DaamMqJATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCanCEKwAKCRAk1otyXVSH
- 0InVB/4+5hAUgsj77ZVk98Q8SJlVK6FhxtAr2+XB1yGKSAFOXsTSvpRj+TXd0mOT3mW6LH8msKK
- Kgprp67UDCdRuryf0h/RZGpMKuuFJ+a+sKd5bBhJl+WsOAStLHSk+q8uK8jtVBZsb/csZXE1+XQ
- afngOhgQIp1cQeh1OuwIr6SH5HA90Gpg4eNP/NriqmjZbQH6abmp25DHznlXuHvB0UNOkihr83m
- tmjWAK/3CC2rvOUI3UAwUED2XMGuIIk19DpO9c8dglb6XjJktJePDXYN2zS7q5KoPUVQtO7BDI3
- zH9KMJh0wfkY/AdisXO9goyn4t7pU3w+0VubcdQVgSoUOp/z
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-On Thu, 30 Jul 2026 12:58:11 +0200, Dawid Wróbel wrote:
-> ASoC: codecs: lpass-{tx,wsa}-macro: fix enum kcontrol accesses
+On Thu, 30 Jul 2026 13:43:38 -0400, Richard Acayan wrote:
+> SDM660 sound card and internal MI2S support
 > 
-> Both drivers access enumerated controls through value.integer.value[0]
-> instead of value.enumerated.item[0]. The same bug was fixed in rx-macro
-> and va-macro in 2022 (bcfe5f76cc40, 0ea5eff7c606); tx-macro and
-> wsa-macro were missed.
+> This adds support for the SDM660 (formerly "SDM660 internal") sound card
+> and support for WCD codecs over internal MI2S (represented in APIs as
+> LPI MI2S).
+> 
+> Like on MSM8916 and MSM8953, some SDM660 and SDM670 devices connect to a
+> digital and analog codec. The connection to the digital codec is through
+> special "internal" MI2S ports. The digital and analog codecs are used on
+> the Xiaomi Redmi Note 7 for headset (playback + capture) and earpiece,
+> and also on the Google Pixel 3a for the headset.
 > 
 > [...]
 
 Applied to
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.2
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.3
 
 Thanks!
 
-[1/2] ASoC: codecs: lpass-tx-macro: Fix enum kcontrol accesses
-      https://git.kernel.org/broonie/misc/c/1ba381759e45
-[2/2] ASoC: codecs: lpass-wsa-macro: Fix enum kcontrol accesses
-      https://git.kernel.org/broonie/misc/c/56f24311fd56
+[01/15] ASoC: dt-bindings: qcom,sm8250: add compatible for sdm660
+        https://git.kernel.org/broonie/misc/c/c143608b5602
+[02/15] ASoC: dt-bindings: qcom: q6dsp: add support for lpi mi2s ports 5-6
+        https://git.kernel.org/broonie/misc/c/96591d7030a6
+[03/15] ASoC: dt-bindings: pm8916-wcd-analog-codec: Document pm8950/pm8953
+        https://git.kernel.org/broonie/misc/c/e70f03958849
+[04/15] ASoC: dt-bindings: pm8916-analog-codec: Add PM660L compatible
+        https://git.kernel.org/broonie/misc/c/5f42d4525b43
+[05/15] ASoC: dt-bindings: msm8916-digital-codec: Add SDM660 compatible
+        https://git.kernel.org/broonie/misc/c/6f48a57f4bb2
+[06/15] ASoC: qdsp6: q6dsp-lpass-ports: add support for lpi mi2s ports 5-6
+        https://git.kernel.org/broonie/misc/c/68400191e005
+[07/15] ASoC: qdsp6: q6afe: add internal mi2s support
+        https://git.kernel.org/broonie/misc/c/bfe9098dc275
+[08/15] ASoC: qdsp6: q6afe-dai: add internal mi2s support
+        https://git.kernel.org/broonie/misc/c/0b494ae6a582
+[09/15] ASoC: qdsp6: q6routing: add lpi mi2s support
+        https://git.kernel.org/broonie/misc/c/14d3cca9c2ed
+[10/15] ASoC: qdsp6: common: support headphone jacks connected to lpi mi2s
+        https://git.kernel.org/broonie/misc/c/bd8216bfe24f
+[11/15] ASoC: qcom: sm8250: add support for LPI_MI2S_RX_0 and LPI_MI2S_TX_3
+        https://git.kernel.org/broonie/misc/c/5e913c10bd0d
+[12/15] ASoC: qcom: sm8250: add SDM660 compatible
+        https://git.kernel.org/broonie/misc/c/84f950973d91
+[13/15] ASoC: msm8916-wcd-analog: add pm8950 codec
+        https://git.kernel.org/broonie/misc/c/a3e1181e12c7
+[14/15] ASoC: msm8916-wcd-analog: add pm8953 codec
+        https://git.kernel.org/broonie/misc/c/4583c124538d
+[15/15] ASoC: msm8916-wcd-analog: add quirk for cajon 2.0
+        https://git.kernel.org/broonie/misc/c/ff01bff07665
 
 All being well this means that it will be integrated into the linux-next
 tree (usually sometime in the next 24 hours) and sent to Linus during
