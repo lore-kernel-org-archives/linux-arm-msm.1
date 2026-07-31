@@ -1,51 +1,50 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8BA234A794;
-	Fri, 31 Jul 2026 03:24:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32E5F307492;
+	Fri, 31 Jul 2026 03:24:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785468280; cv=none; b=XSrDElzzCRkCKoIta7u/B81BbeBBP8glg8IrL2PVEiR0gFezuJDFZw/tsbQq+sa+S6lsnsgxcKhidlqbN/yAuFj1su6Si7wa/bObh1qpumP6vjQuVm1yXQSmLtCGqj73EtEFINzEPFLWQhy/42ZoIkUoVbZpnSQWoMPY9fPTT7E=
+	t=1785468282; cv=none; b=JwfMrLTevQBIgFUjWKLMual1w1Z9XgChPs4wfK9dr29+t01O20KlY11Pc30Df/tDcMdHJWWEXdIAGhpxFG4W+F+aAVq6q9LG3QO1NwhRcKGXsY3BNCbLB83WgEfqgM/6q1NxE5LvJpX+u3QiuqEF7/yS1mmo3BsLMnf34QB7Oko=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785468280; c=relaxed/simple;
-	bh=qnpQ3C8tQGBhiH8+1xx7PGgCFO6nxvLoFbSifEJaN1w=;
+	s=arc-20240116; t=1785468282; c=relaxed/simple;
+	bh=pqfh11gL7jr4rj+3u+RnHpw/16XVf7mH5+aRsk8fO5I=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=KvYzwN9iZsvk1uEBnzZrpuPxoLD/vom7zDXIfMdO/X/223OPZTiK0gHw7pBb37lT7U0SNdQHql5fKRs0obx9khzFgh4IJMou7mvFBI7LDe1ZJ5MPdvPWt1D40iDfd1Iki54pclfHk0oFzewqPqNR2tl2+kY7JMCsE6tHHML169s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KBwJk+/a; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=SksYrXUGp41FsWJXeysdElw1XjVnQk3PUlxWnF4aqNmwkFGoylMlpRM1aBAVGs51MyNfwox6Chk5bo+fHG3mIy3YiIgID1fiStCPcBxoiYX7PfiP0Yg+6MBWdUrtbhth+5tqyufQ8Tg84VizWB7sMncLn9WSYBZFk6a327hvtQU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AIrKYUs4; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KBwJk+/a"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D83FD1F00A3D;
-	Fri, 31 Jul 2026 03:24:38 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AIrKYUs4"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F2FAB1F00A3E;
+	Fri, 31 Jul 2026 03:24:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785468279;
-	bh=umkrpUBEPc8SIINgE+7qFjJJf8smKomRBsYMgg+ta+g=;
+	s=k20260515; t=1785468280;
+	bh=OWp6pWdWfSagrW5LseG9mMr4Rvzs50E50ICjZ+mt1z4=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=KBwJk+/abdiMqShKcCa8h0Zob0h++kRf7nK4pDJXGXJVlAjSiANwAEQPBBkdGJBTH
-	 HQdZhZp5dmUe6pACM8sXL+ARoLx8miEvV6NJf32WjgTNKEqpIbIBQ79OB592ETHxZk
-	 3vYQTwykqiwmh/dJac4vA0OtRfFAKZ3FwV6nc8EMAQkvDKXby9FV+US8gi8l1a96ND
-	 9C5PdpONJgq/ac2fKI/Us7s2iH1+LiIJZISERbZ/PEx4Py0fsxFCBVyRpcm1eImfb/
-	 HlW7N3HK9vUOCxqkSYHjpTL+kWgSpM7SK8DMGOsRzeC0kJ9eCa83WaDwLO0+/Qn5AW
-	 bry1aivYghwxw==
+	b=AIrKYUs4cKwuOv18buf/e0JgrkaPz2Ew2ehBcCmNsCz1uV+diMlJiZr1o3pWQ4eCx
+	 joerkEqma63357qIPPfIiw9O0154PNKmE6bW5Mw6WKGux4KnYyofJz8F5Ygp+CYz59
+	 W70ofKnLclWrcpySdWbqoki9WHfUdKOX9SH7+lAEkyrn2Voxmn5ZmM8QvMJvUD8HU8
+	 fqZ3oEcrNqNDaJ8XHbLEBHfLEMZdq7uuSyBTSjx7Bzjf+Bc7xR8NlPQootZFPsZTU1
+	 Sh/Sv0laoG7Q++VzTcPMhM9uB5KArHUUnAK2uEKTuqFl/3tViTJwAli8mvX27IGSsf
+	 Le+SAbia0ppjg==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Raviteja Laggyshetty <raviteja.laggyshetty@oss.qualcomm.com>,
+To: Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney@redhat.com>,
 	Imran Shaik <imran.shaik@oss.qualcomm.com>
 Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
 	Taniya Das <taniya.das@oss.qualcomm.com>,
 	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
 	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: talos: Fix cpu6 1094.4MHz OPP frequency typo
-Date: Thu, 30 Jul 2026 22:24:12 -0500
-Message-ID: <178546826835.316815.15711657746061443702.b4-ty@kernel.org>
+	linux-clk@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v2] clk: qcom: gcc-shikra: Add additional frequencies for EMAC RGMII clocks
+Date: Thu, 30 Jul 2026 22:24:13 -0500
+Message-ID: <178546826812.316815.9609566068248456737.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260730-talos-cpu6-opp-fix-v1-1-f4886fdff13f@oss.qualcomm.com>
-References: <20260730-talos-cpu6-opp-fix-v1-1-f4886fdff13f@oss.qualcomm.com>
+In-Reply-To: <20260722-b4-shikra-gcc-emac-freqs-v2-1-2e480e2de8de@oss.qualcomm.com>
+References: <20260722-b4-shikra-gcc-emac-freqs-v2-1-2e480e2de8de@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -56,20 +55,16 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Thu, 30 Jul 2026 15:45:10 +0530, Imran Shaik wrote:
-> opp-1094400000 in cpu6_opp_table has a typo in opp-hz, missing a trailing
-> zero. Fix it to resolve the following OPP update failures:
-> 
-> cpu cpu6: Voltage update failed freq=1094400
-> cpu cpu6: failed to update OPP for freq=1094400
+On Wed, 22 Jul 2026 10:11:14 +0530, Imran Shaik wrote:
+> Add support for 2.5MHz and 25MHz GCC EMAC RGMII clock frequencies required
+> for EMAC 10M and 100M speeds respectively on Qualcomm Shikra SoC.
 > 
 > 
-> [...]
 
 Applied, thanks!
 
-[1/1] arm64: dts: qcom: talos: Fix cpu6 1094.4MHz OPP frequency typo
-      commit: f2eb18c66b98fbfcbab4daef42c04f4becba7d79
+[1/1] clk: qcom: gcc-shikra: Add additional frequencies for EMAC RGMII clocks
+      commit: 60276a9469a1df6c86666ecc21fa8ad10d90e809
 
 Best regards,
 -- 
