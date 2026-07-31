@@ -1,146 +1,112 @@
-Received: from fout-b5-smtp.messagingengine.com (fout-b5-smtp.messagingengine.com [202.12.124.148])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7B4D40099D;
-	Fri, 31 Jul 2026 13:10:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.12.124.148
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D5223C10A8;
+	Fri, 31 Jul 2026 13:16:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785503413; cv=none; b=W9X5l+wCHhGtpWEd/eqa/TL60ubxfK37GaIMgZe/k/tIZ5vqAj51DpALnuqsP7YAU25GpTD8ys/PzmP+12TqWPJZCIYz2D2YHMeAcPXkE0TRWfLSF60AZzf1LtMi8YHipgupQBBFksqpGZ1nz+Fo9f/yrkUKGPvB/K8jR44bK+o=
+	t=1785503790; cv=none; b=NRjFoTe/UGjQr1J/vCewQ0SFwAFphFb9/GFrln4dTlE6VtzZnfbkbIpfMR7rCPTZ3/ChbEgRWeyE/P3wS10l3olVlG5vF3m2X8FdG6Rx8rfILPTryUQrvqKXS46l8UlBjycnJDW0wEnRsOjaPOy7/ynOatmmBzDJ7j/mBPNjO1o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785503413; c=relaxed/simple;
-	bh=9WVkLD2lLcg0SFcbtY3rhbmFcO0wynNwKdmGgeYUQz0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=j/jCzTap24AzDTKFKs0PwkNQPW4jtPjLG+Yeood/WY4Z+B0Wt6w2fJ+1lafD+wl2+mRA6k+zwrxXPCrXVtFaIsJvkzoRYvSdd1sSOe/VifDswBfcZTfVF3SiPbHxjTWfQmkn940WU+pPEr0X+sVFHZnNlc5IucJKArbfrh3qWRY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=jaseg.de; spf=pass smtp.mailfrom=jaseg.de; dkim=pass (2048-bit key) header.d=jaseg.de header.i=@jaseg.de header.b=YkLoNMaH; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=fWVsSrV/; arc=none smtp.client-ip=202.12.124.148
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=jaseg.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=jaseg.de
+	s=arc-20240116; t=1785503790; c=relaxed/simple;
+	bh=dpXJxHk/WOztM8vlg8pihpDWkJwAEsZTWNi8H+ISmRg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Q8R78+jDcOiUTrizHZa6HxzS8pHwS6MgNUlI7I5abkkOYwatmS7TUvrcoVCatnuFaZTO05FJIW4Jgy6y3+og4/k6pwTt7pURriCyb15y5QvXvBb5Hqx2f8cWWdFMaKahAxWHEcUJKFGbhRta0147iSQtHtf7fsueCAgTtLJS+60=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mRUkusCl; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=jaseg.de header.i=@jaseg.de header.b="YkLoNMaH";
-	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="fWVsSrV/"
-Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
-	by mailfout.stl.internal (Postfix) with ESMTP id 8569F1D00101;
-	Fri, 31 Jul 2026 09:10:10 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
-  by phl-compute-04.internal (MEProxy); Fri, 31 Jul 2026 09:10:10 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jaseg.de; h=cc
-	:cc:content-transfer-encoding:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm2; t=1785503410;
-	 x=1785589810; bh=0MZZibYW67xADGTAt/lSyot78KbHgOWc+Oa0nMmO+Js=; b=
-	YkLoNMaHpk47MLjfAChDj3IJN8DAEoueUAmLjjfU4Gwy1lCUbW/UmLbx91AzhsIK
-	diHVLAcZ/+32O73cem7qQuvkS0fZnJ65mTksqyDqtODLz40PoGNoeFtqX8tXp+Ds
-	m/oePy+ch00dBSh/tKKh8uZmVr/0pX/3WogZybKufLyjmonR/lPYyG1vr+J+bKXA
-	ydGyv6on30CeRcXm4Yn887FrxI03C6elYdq7IwREMN4mwju1Z9E9cMvVZfCb5pu0
-	DWQiGHXq/dofGym4l8vQsWyfEL6zQjWuAEd4WfjPdwJZKFl7CjaCvR2B1c2J7/ci
-	J5+/FEQ14YSwDvBPw34YKw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to:x-me-proxy
-	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1785503410; x=
-	1785589810; bh=0MZZibYW67xADGTAt/lSyot78KbHgOWc+Oa0nMmO+Js=; b=f
-	WVsSrV/nO7PK9we9ol1qxpz9iK4beucyqdrDdGSQenjX6RbdbY3F1nVLyOyiViRp
-	iAcgwzl7y81n6r5TkAgV7v5bTDZ53Qs2S+rfIJAIJrISpMLpSdySTMPhKAgR9YAq
-	Y+Ox88xaGLFJ1C3Xfqyr7f/f0osqddPSUtuAZ9PksI1Q3ZUsonDpIRwR0/M+jQB/
-	Gw2FooIBLYXcz7LdnMhSuPxXHrMxMV6YX1W08LD5RYJ4mCShUM5NZIbXXg2Tjbrq
-	+29NUACAQLuLlaRsbMUlvBOb/H4q71xRlKunN7yXmPOkxqpk5ChHwHZsDMjGWrzW
-	A6C/QbQMNZAJDwYKTaJSw==
-X-ME-Sender: <xms:sp5saraxsOlhaqGR3AjHBeO8wkzfByac6ri5piNr539PYfi-ru7y7Q>
-    <xme:sp5savXjOfWk5PpfIxcD5PQ03b9Ws-ivfhqLijnJw_h8z0QNX29OJTBQJY_HTaCoK
-    DqbDLLSktjc1PG7QAolVCleB7zA_zdyZRl2ID1X6-jclP_SXthtkQ>
-X-ME-Received: <xmr:sp5saiNd0Imt598bUzkSYMDWcBXDz9kaP4buVEhLCHOwOvjigh5IwENajEo1WziM5cnustjpjIVolBSp2Q>
-X-ME-Proxy-Cause: dmFkZTGMegkBMIH5qpuWckrHEVUojchyzO6NIccURlPweuDN5JEQfNBPKB2dx8aRw3it3i
-    NomNL1wqkeY81e/5vakyroDkM6w/fDio/T0pdAjdpFYi+Jg+yVmD6AsSDBfcEAbtqnSP2t
-    ha449OU03nVQnhvYCjWFMbLNB8Tdz/A2v0UOo7ku1DmRssgZvhtavxt18+GuAj/fFieLyY
-    wZm+pBemDfKPZ6kYaDyYI6tViNLSSHpw/6sSNQcSte+67NNpFWbI4S370yB0qyh04gxlxu
-    h+Ucl6Rv4poGjf/HB0TkxiEREK1mv2QDn5eWXCEd/mvPFuglFk2AebFTAqeX8tKYkHTEf5
-    qzmP+70NDUVeqG0u4/dPeSos8mRrEQloINL+gSeP+q57Mn+pxM7PN1Ket2GSMtoJHpxpUN
-    Bs7ko/Gks/SOa8H34E29O5lpdLhUUSSPT4V2K32ZQURt5+6E/yGNebdBSDvtpQR8Gemq49
-    SRCmcuax7RIVzD6OAF9dj/rUfOdlNLpZMOH6/uJPd7MB03HQl/SE7p0hpRNgg9Z10GFYyD
-    0T2+OXkfhhNABWud9FBAsk35h6VUx2CWOknSebIDBBrUAZsEes0i8nP1VS36hSAZJ0d1Ov
-    zcYaRv8LTZviVuJLKdVkfvKSe3ceLVO2oiH8A3RfuxFReoJHBbez4MvHgMhg
-X-ME-Proxy: <xmx:sp5sahbQSilzXWhmLhGkXI5l-pOPOPZSRL72yyGk3r_pvRsbmULSGA>
-    <xmx:sp5sap9ZHX1dnl-TFH5SZalZncJCBtC40n4U_Vc0_zt-_nqwRaPivQ>
-    <xmx:sp5saqTpY5w2zIyPqlCIhTSqz6ZBN3I36kFA6QwntOJWGUiO2SSwiA>
-    <xmx:sp5sarcLSml_57ulZxDpWZK15AEgSX3GVfPDZ6NDTVmdjf9JfGk7gQ>
-    <xmx:sp5samC0uKAiAl1Ui_ss23l64AqaG7naU3LTsIIqKpCvN9MwXOToC7IJ>
-Feedback-ID: i60a14417:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 31 Jul 2026 09:10:08 -0400 (EDT)
-From: =?UTF-8?q?Jan=20Sebastian=20G=C3=B6tte?= <linux@jaseg.de>
-To: Ulf Hansson <ulfh@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>
-Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	linux-pm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	=?UTF-8?q?Jan=20Sebastian=20G=C3=B6tte?= <linux@jaseg.de>,
-	stable@vger.kernel.org
-Subject: [PATCH v2] pmdomain: core: Wait for device link removals before dropping genpd->dev
-Date: Fri, 31 Jul 2026 15:10:02 +0200
-Message-ID: <20260731131002.142671-1-linux@jaseg.de>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <ivkwuomer5vsajf2lq6otpgxwqljkwooh3p7e5ne23j37pv22t@iluamo6gxmq3>
-References: <ivkwuomer5vsajf2lq6otpgxwqljkwooh3p7e5ne23j37pv22t@iluamo6gxmq3>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mRUkusCl"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C37831F000E9;
+	Fri, 31 Jul 2026 13:16:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785503789;
+	bh=WV+jYURdiXcT2nyjhn/fxVeJaR+freDjSCEpiaE2zWs=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=mRUkusClTRkapsoWZ5rNeOfDRt1nUTRB/gq0RJN+mR1oiQfHf6s8xHTiJfeQIWc6+
+	 0Sm4SdLjO9Pq0yD4nauD06NbTfPfTo107MsloY6jA9fyE9g76+LNK2JcvWviBS0jUO
+	 DV0Ji6USu51JonjJwPTs3LwoBwKZ+RpBY3xMJYcLsFH7qaWxtT3rGJtp051dLKsmcV
+	 bSXrMx/RryGI/j0z99d2dmadKtTbnZQWKfuYOLk85pSVnx0Bbiua/o/vd9h8k5nMKG
+	 DiVP0CUyMPLyxkrmp4KZ1EQwe89jS0NamU0rUqHHOrzkA6p3i066v5n6iSFnGh2HZk
+	 KjZFWcywXCO9A==
+Message-ID: <a305f816-b297-4619-8a27-01219367ac08@kernel.org>
+Date: Fri, 31 Jul 2026 15:16:23 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] arm64: defconfig: enable the necessary drivers for the
+ Ayaneo Pockegt S2
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org
+References: <20260731-topic-sm8650-ayaneo-pocket-s2-defconfigs-v2-1-fc409e59290c@linaro.org>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260731-topic-sm8650-ayaneo-pocket-s2-defconfigs-v2-1-fc409e59290c@linaro.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-genpd->dev is embedded in struct generic_pm_domain and its release
-function is empty, so providers free the containing genpd with a plain
-kfree() once of_genpd_remove_last() returns, ignoring its refcount.
+On 31/07/2026 10:13, Neil Armstrong wrote:
+> Enable the SGM3804 regulator, SY7758 backlight and Renesas 63419 panel
+> drivers as module since used by the display on the Qualcomm SM8650 based
+> Ayaneo Pocket S2 Gaming Console.
+> 
+> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> ---
+> Changes in v2:
+> - squashed into a single patch
+> - Link to v1: https://patch.msgid.link/20260728-topic-sm8650-ayaneo-pocket-s2-defconfigs-v1-0-49e3ac1c8ff4@linaro.org
+> ---
+>  arch/arm64/configs/defconfig | 3 +++
+>  1 file changed, 3 insertions(+)
 
-Since genpd->dev is registered on the genpd provider bus, fw_devlink
-creates device links to it, and those are torn down asynchronously.
-Nothing made genpd_remove() wait for those teardowns, so the provider
-could free the memory backing genpd->dev while the queued workers still
-used it.
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
-This is reachable at boot on qrb2210, where the firmware rejects PC mode
-and psci_cpuidle_domain_probe() removes all the CPU PM domains before
-returning -EPROBE_DEFER. The bug is asymptomatic on defconfig, but shows
-up when enabling KASAN or INIT_ON_FREE_DEFAULT_ON. In some builds, it
-causes the kernel to crash a few hundred ms into the boot.
-
-Call device_link_wait_removal() before dropping the final reference. All
-link removal work is queued from device_del(), via
-device_links_driver_cleanup() and device_links_purge(), which precedes
-genpd_free_data(), and flush_workqueue() waits for it to complete.
-
-Assisted-by: Claude:claude-5-opus
-Fixes: 18a3a510ecfd ("pmdomain: core: Add the genpd->dev to the genpd provider bus")
-Cc: stable@vger.kernel.org
-Signed-off-by: Jan Sebastian Götte <linux@jaseg.de>
----
-v2: remove this note from the commit text.
-
-Note: This patch was LLM-assisted. I reproduced the issue and tested
-this patch on hardware, and I did my best to verify it by hand. However,
-I'm far from an expert in pmdomain, so YMMV.
-
- drivers/pmdomain/core.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/drivers/pmdomain/core.c b/drivers/pmdomain/core.c
-index 842c4169e290..4eeb980e5a40 100644
---- a/drivers/pmdomain/core.c
-+++ b/drivers/pmdomain/core.c
-@@ -2348,6 +2348,9 @@ static int genpd_alloc_data(struct generic_pm_domain *genpd)
- 
- static void genpd_free_data(struct generic_pm_domain *genpd)
- {
-+	/* Pending device link removals still reference genpd->dev. */
-+	device_link_wait_removal();
-+
- 	put_device(&genpd->dev);
- 	if (genpd->device_id != -ENXIO)
- 		ida_free(&genpd_ida, genpd->device_id);
--- 
-2.53.0
-
+Best regards,
+Krzysztof
