@@ -1,112 +1,190 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp-bc0f.mail.infomaniak.ch (smtp-bc0f.mail.infomaniak.ch [45.157.188.15])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0B063D5C2A;
-	Fri, 31 Jul 2026 12:29:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44E93246762
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 12:30:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.157.188.15
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785500973; cv=none; b=X+p1rykTg2/38Xuq6a0d615hpC4wE6MTdTAz0V6l0rWFlSaK8mYxJoPrWXkRw3AmkSQsZ5iTgfOdDo91jPnmUFfG11bo+PpvTQE4GRvTCH4IoarShy0BLTf020QQ7RRgEXTxSHTo7abs5fjHC6sN405whHPpg6O5bRfwFXRED4s=
+	t=1785501020; cv=none; b=EjueB3zAJSU2JZvf4tpYt5XhJQPMf6AP7SvKOt8zv4zMp1sVAgWhyzTBme4AciZwNUN8TsAJqGj5qQn3NUQee/qOWqWrEc6t+Phesi+NsQuUlqJHK3x1FrlCAzGyA+/Lp70K3NDIGKuH0Q/fBOZ9ULi9apbGl4SB0Eh1bnNngVM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785500973; c=relaxed/simple;
-	bh=fcTNybD60hHHX2uRQ0TiAaWsqkVT5xGWvUUpxuHYEJ4=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=qQXe+vJOLCpsIvsRDSxn0v7SYUXHjbFXd+FPWkz/EK8xba2nXzrWWsiw50Bz8sgt7a2lPVrK0m2S7ry2nc6YXJmwg/ImhVuNWXgYcpndH0Owl1BCT3k8oFzAgYEUyN/VkwM/cgUi4U8LM+dzvFIk/QCxb40sZ4skHGCiJQ1kBQM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JoxRIE4S; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785501020; c=relaxed/simple;
+	bh=B3gbOU1609xgQfTraAjHyxGAmIN+X3B+HfT1WcROsgs=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=aRZdhZ2P/I57dmuQqR6qbNbOvRQvlbMoEDyfla8+w2gMH+wsS43W0GFc0RUW7EU9pLZc75GZtUPzKNtXvEZw5RA2IVaVPRLpFdVqeKwo4RCWBv71MqWhcP/JWkbA6+HTprCuYy03QNTUnipbPxoSEzAQFmONXjgYJj9yPf8oHJo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=humanlearning.ch; spf=none smtp.mailfrom=humanlearning.ch; dkim=pass (2048-bit key) header.d=humanlearning.ch header.i=@humanlearning.ch header.b=B+ttijuO; arc=none smtp.client-ip=45.157.188.15
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=humanlearning.ch
+Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=humanlearning.ch
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JoxRIE4S"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72CB51F000E9;
-	Fri, 31 Jul 2026 12:29:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785500971;
-	bh=eT8FQf3PxqRsPOImv7z6foKRzZimedLgLDX/bPt86xg=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=JoxRIE4S93zPVijJCmh1VAJ9CjnVZAs5nMdR8opOwLR8T+kuHPIApxaOZOeYRJPEG
-	 KlPH4zY4WRM8qCQ8VtkOG6r9QiJhttABLgRgf4kX0Rep6BFCc/XYsgSYFvfnORG74N
-	 hhDOkR/ZJGKAYVWhQ82tOZeu1VLg3q1Q5sjlRzfIY0NUSMgLzqA4LUTQzjoZWKahJE
-	 thDM5i0FqwAY+2NLnEPBPlhS5wfFnp0hLElfqklFLhLqvde7fIMLCd6jGzJnTFRuSB
-	 FJnJdpEo95GHQlEHMpB5jSyBZ5KGN9PQbe46ZZ/2K6YkkruCiuxqdWg1pPbvO/3RXB
-	 iswMN1ZEzclig==
-From: Mark Brown <broonie@kernel.org>
-To: Srinivas Kandagatla <srini@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
- Takashi Iwai <tiwai@suse.com>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>
-Cc: kancy2333@outlook.com, linux-sound@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- devicetree@vger.kernel.org, 
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-In-Reply-To: <20260728-topic-sm8650-ayaneo-pocket-s2-wsa2-fix-v3-0-b29f44720178@linaro.org>
-References: <20260728-topic-sm8650-ayaneo-pocket-s2-wsa2-fix-v3-0-b29f44720178@linaro.org>
-Subject: Re: [PATCH v3 0/3] ASoC: qcom: audioreach: support WSA speakers
- only on WSA2
-Message-Id: <178550094533.136247.8108653420741029312.b4-ty@b4>
-Date: Fri, 31 Jul 2026 13:29:05 +0100
+	dkim=pass (2048-bit key) header.d=humanlearning.ch header.i=@humanlearning.ch header.b="B+ttijuO"
+Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch [10.4.36.107])
+	by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hBQFC6SHNzHym;
+	Fri, 31 Jul 2026 14:22:39 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=humanlearning.ch;
+	s=20250828; t=1785500559;
+	bh=qm9TKB413pUdh/ietlgH5F8e6i++Iz+1hU9IMjGeM2U=;
+	h=From:To:Cc:Subject:Date:From;
+	b=B+ttijuOv/F66fc14/JgbO4BIxjao9QnJhkFp0ej07xqHbm2P7VdBJwLQgsQnk9+P
+	 ne4rBOWNTV6W0oyANioi8EZWEX4oZhR2BoxEuaY52ACAYOnSEQ67nSnSNnjaOHvfjA
+	 XtZAnr05RCyNIwp4Oq/6k183q5lbHmHCf70Z6gideGQuhpP3vHqzLxg8h1t80X0vPE
+	 Tqy9oXt8pcotJ414ZusAMqUeOu45QpA/wuMSU+jUdn8WyqmiZKk3M8ihXLQaqIgbNq
+	 GAlQlK6fc1s83uNdfHq0DQFRhmCBrpCpI2WE7jtK3oI9E3jzpShx2P4RKgP5NUpNFX
+	 Y2flfzZtH8xSg==
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA id 4hBQFB4F1pzkWR;
+	Fri, 31 Jul 2026 14:22:38 +0200 (CEST)
+From: franzelverbier <info@humanlearning.ch>
+To: Manivannan Sadhasivam <mani@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>
+Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>,
+	Krzysztof Wilczynski <kwilczynski@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	regressions@lists.linux.dev,
+	linux-pci@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	franzelverbier <info@humanlearning.ch>
+Subject: [REGRESSION] PCIe/qcom: on-board WCN7850 link stuck in Polling on X1E80100 (Surface Pro 11)
+Date: Fri, 31 Jul 2026 14:22:25 +0200
+Message-ID: <20260731122233.18345-1-info@humanlearning.ch>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1729; i=broonie@kernel.org;
- h=from:subject:message-id; bh=fcTNybD60hHHX2uRQ0TiAaWsqkVT5xGWvUUpxuHYEJ4=;
- b=owEBbQGS/pANAwAKASTWi3JdVIfQAcsmYgBqbJUn0uttozTmqjmRUjYG2vVApeHToC71qSqDm
- hqZWSKskI2JATMEAAEKAB0WIQSt5miqZ1cYtZ/in+ok1otyXVSH0AUCamyVJwAKCRAk1otyXVSH
- 0NBkB/9Dd9EHUC0zJ25vNdFv/cUap6IUkcnmHyodT5qtb7blF4iKzk7iR4lNhEbPtKCskYixxfe
- cRd0UWU2ddLDs9g/t1y8Ljm25RdVl3cxOVJMGGydOaSqrupb4VsmSTk3GVdPU6kxAPSbb3+2JYd
- WUCyCXa3GznspNNR5BUXLcF76JC0NVgAuWueXs1X61wAvEylMytUnarSeFLm+ruGTPvesA0k5cF
- 4ZJdX+vuApOt9cPL9aYQCcEzIJPjR/P9NZt/Z2eAw4hoV9r8eLDema+gGEyYuinteJRH6v0PjIc
- pmtB+GzRSOcIuty/0EtcTLreVkNO3NTpQkMlCA4VBlsHCW2Z
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Transfer-Encoding: 8bit
+X-Infomaniak-Routing: alpha
 
-On Tue, 28 Jul 2026 10:46:42 +0200, Neil Armstrong wrote:
-> ASoC: qcom: audioreach: support WSA speakers only on WSA2
-> 
-> The Qualcom SM8650 based Ayaneo Pocket S2 gaming device has a set
-> of 2 WSA speakers connected on the WSA2 lines.
-> 
-> But the Audioreach DSP only handles WSA2 in pair with the WSA
-> interface by using the upper bits of the active_channels_mask
-> for WSA2 and the lower bits for WSA:
-> 
-> [...]
+Hi,
 
-Applied to
+On a Microsoft Surface Pro 11 (Snapdragon X Elite, X1E80100, board
+x1e80100-microsoft-denali-oled), the on-board WCN7850 Wi-Fi PCIe link
+no longer trains on linux-next. It works on 6.17.
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.3
+  Good: v6.17
+  Bad:  next-20260721, next-20260723
 
-Thanks!
+#regzbot introduced: v6.17..next-20260721
+#regzbot title: PCIe/qcom: WCN7850 link stuck in Polling on X1E80100
 
-[1/3] ASoC: qcom: audioreach: compute active channel maps from channel_map
-      https://git.kernel.org/broonie/misc/c/c663014e452d
-[2/3] ASoC: dt-bindings: qcom,sm8250: Add Ayaneo Pocket S2 sound card
-      https://git.kernel.org/broonie/misc/c/b7b0a445ace2
-[3/3] ASoC: qcom: sc8280xp: add Ayaneo Pocket S2 card with special WSA channel mapping
-      https://git.kernel.org/broonie/misc/c/968d38918ae8
+The device sits behind PCIe controller 1c08000.pci (pcie4,
+qcom,pcie-x1e80100, gen3x2) and has no PERST# GPIO -- it is
+power-sequenced via wcn7850-pmu / pwrseq.
 
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
+Symptom
+=======
 
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
+  qcom-pcie 1c08000.pci: Device found, but not active
+  qcom-pcie 1c08000.pci: PCI host bridge to bus 0004:00
 
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
+dw_pcie_wait_for_link() finds the LTSSM in POLL_ACTIVE/POLL_COMPLIANCE
+and returns -EIO. The endpoint 0004:01:00.0 is never enumerated, ath12k
+never probes, and there is no wlan interface. On 6.17 the same
+controller trains at ~0.6 s and ath12k probes normally.
 
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
+Ruled out: the chip is powered, and power control is bound
+==========================================================
+
+- Bluetooth on the same WCN7850 (UART) comes up fine, so the PMU and
+  regulators are on.
+
+- pwrseq_qcom_wcn is loaded, and pci-pwrctrl-pwrseq is bound to the
+  platform device 1c08000.pci:pcie@0:wifi@0 (compatible pci17cb,1107 is
+  present in pwrseq_pwrctrl_of_match[]). The vddaon-supply
+  validate_device() check passes.
+
+Ruled out: not a device-tree regression
+=======================================
+
+The wifi@0, &pcie4 and &pcie4_phy nodes are equivalent between the 6.17
+and 7.2 device trees -- same supplies, same compatibles. The only
+difference in wifi@0 is "disable-rfkill;" (6.17), which is
+post-enumeration ath12k behaviour and cannot affect link training.
+
+What changed
+============
+
+qcom_pcie_host_init() was reworked around the pci-pwrctrl framework,
+and qcom_pcie_start_link() now calls qcom_pcie_common_set_equalization()
+-- absent in 6.17 -- before enabling the LTSSM.
+
+Finding 1: Gen3 equalization prevents link training
+===================================================
+
+Forcing the port to Gen1 makes the link train and ath12k probe:
+
+  &pcie4 { max-link-speed = <1>; status = "okay"; };
+
+  qcom-pcie 1c08000.pci: PCIe Gen.1 x2 link up
+  ath12k_wifi7_pci 0004:01:00.0: Wi-Fi 7 Hardware name: wcn7850 hw2.0
+
+qcom_pcie_common_set_equalization() only programs GEN3_EQ_* for speeds
+>= 8GT, so max-link-speed=<1> skips it entirely, reproducing the 6.17
+behaviour of no EQ programming.
+
+Note this is not a wrong preset value. The presets come from DT via
+of_pci_get_equalization_presets() and are applied by the DWC host core.
+In hamoa.dtsi:
+
+  pcie4  (pci@1c08000, gen3x2, on-board WCN7850)
+    eq-presets-8gts = /bits/ 16 <0x5555 0x5555>;
+
+  pcie6a (pci@1bf8000, NVMe, gen4x4)
+    eq-presets-8gts = /bits/ 16 <0x5555 0x5555 0x5555 0x5555>;
+
+Both use the same per-lane preset 0x5555. The NVMe port trains at Gen4
+fine; only the WCN7850 port fails. So the WCN7850 endpoint specifically
+cannot complete Gen3 equalization with these presets on this
+controller, while an NVMe SSD on the same SoC can.
+
+The board DTS (x1-microsoft-denali.dtsi, also in mainline) leaves
+&pcie4 as status = "okay" with no per-port override, so it inherits the
+SoC preset.
+
+Finding 2: an LTSSM re-kick does not recover the link
+=====================================================
+
+Even at Gen1, the link does not train on the first attempt at boot
+(~4 s); in one instance it only came up much later via a pciehp slot
+event. An experimental retry in qcom_pcie_start_link() toggling
+PARF_LTSSM.LTSSM_EN (clear/set) for up to 30 s never recovered the
+link.
+
+That suggests the endpoint needs a full power/reset re-sequence
+(pwrseq) to leave the failed state, not just an LTSSM restart -- i.e.
+the pwrseq power-on may be racing link bring-up at boot for PERST-less
+on-board devices.
+
+When the link does come up late (fragmented CMA, tight PCI windows),
+secondary symptoms appear that are absent on a clean boot-time
+bring-up:
+
+  ath12k ... qmi dma allocation failed
+  BAR 0 ... failed to assign
+  rfkill ... Hard blocked: yes
+
+Questions
+=========
+
+1. Are the qcom_pcie_common_set_equalization() Gen3 EQ presets expected
+   to be safe for a gen3x2 PHY driving an on-board WCN7850? They
+   prevent link training here, and skipping them (Gen1) works.
+
+2. Is pci-pwrctrl/pwrseq power-on racing link training at boot for
+   on-board devices with no PERST# GPIO, such that the endpoint is not
+   ready on the first LTSSM attempt and cannot be recovered by an LTSSM
+   re-kick?
+
+I have not bisected to a single commit yet -- the range above is v6.17
+to next-20260721. I am happy to bisect, test patches, or dump any
+register on this hardware; rebuilding is a short loop here.
+
+Environment
+===========
+
+linux-next next-20260723, CONFIG_PCIE_QCOM=y, CONFIG_CMA_SIZE_MBYTES=128,
+ath12k, board x1e80100-microsoft-denali-oled, Arch Linux ARM (aarch64).
 
 Thanks,
-Mark
-
+franzelverbier
