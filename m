@@ -1,247 +1,316 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-yx1-f47.google.com (mail-yx1-f47.google.com [74.125.224.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 768FD470421
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 18:23:51 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4989A477980
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 18:32:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785522233; cv=none; b=NCbXTdMWgeiFqVJ5esO507fYch50o1nJr9I70+p91A6wiGn0ftKGeoVn/COSWnnQZ/y45K67Oi5SV7XgUa0/fX8ychs3p/Q7e8dxYU77KB+lxKKfq+IhZG7sg4qZmZZdd0MfyqXBSYB/gQz8Gjx622YZhw2YxZd3jUYYOdTiap4=
+	t=1785522724; cv=none; b=nflwcvAShRLyC66SjSjoLVg3azGdbcf5g5APRFNyqyLQ4DXN1MMBqvhRpgd8TvOAiCAVG8P70fj4d6BoIfC9hEyxNWE9umpd4fVpH8YgKrZjnjupOYwZeoUlVbOR+aa1AtJcWyKnkYuUF3Lv5ZaPZtY53kfrCd4nl9UrjTv11Ck=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785522233; c=relaxed/simple;
-	bh=Ylggv5ukM9cL+Qy7BuVA8yvNM4fwEAff5bDtks1Oxh4=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=V+5egxfnw0K35ZnJhzanzel1eAstoA+hppNkIpQd41jKw9Ei5RNM8s8GsxZOaV30VXKEZ7Me1ityQwr68JUljTMTlzLWvtDXGau1/qxFCxL2HW8szBvxOCTdsAHbjeSp7EGXWdy4LvFFTHHUzsDKZDIiSqX6B/jOqzV8BxxyRh4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=KACdZtun; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Q9QTO2sb; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785522724; c=relaxed/simple;
+	bh=WtJ5MLapSs/5+OHOfelAdhfT+m5cHtdwpiikQ9In/tI=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Tt5yGks8bBkQEP3k1MCiww3MFKAhW2F0EFpJkMJLmBZ0T62wQF1GUQisoc2fAAsGePnGmfPf1J/rIoN/nNRdFZe6oiSRFRMEd/sJTpz8RpkPxwRmC9h9Ok8y/54m0gGrvHsEQ5yth5olyxrT8X8m7puFDGQTw/+jFzHA/2Dla5Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=LegumlpE; arc=none smtp.client-ip=74.125.224.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="KACdZtun";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Q9QTO2sb"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66VFNwpo019781
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 18:23:50 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	VzhVX5WD0XnAhIfnqoRt17YMyLSYbQFbZtW3hEYJn9o=; b=KACdZtunScbY3WjR
-	ly0OgQTN/c8pVWn0akOLzuHG1kXPhhpvYlxWXu4vT2q7cYuxNsypdFteYk1XS/Rj
-	KjHxPq9jIXHtEe+mFtBe4mr+wkPjXCbYEe8haKFZcB/z0V7ToOBBKCJjShGRw0US
-	YuL/VwXQP0zawVayFL9+hN+uDnSbQnSJgheJxzHYN5dFXqVcOb3J1Ev4QApiWtnu
-	bLBMC/GkONPlibOFmzg5JFUosVtzTQcX/Z4qwdARnBFr7C2N6D2ZHowrP6uvdzJZ
-	Q1fBOwPKu+IlFzPXMl/9LJnv9An/845Ic4WCK4yZRdTbCAN3lJ4w/+ouaBoQ9e3F
-	qJzqkg==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4frugh1q6w-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 18:23:50 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cb6cf425e86so1472652a12.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 11:23:50 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="LegumlpE"
+Received: by mail-yx1-f47.google.com with SMTP id 956f58d0204a3-66893db7bccso1932569d50.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 11:32:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785522230; x=1786127030; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=VzhVX5WD0XnAhIfnqoRt17YMyLSYbQFbZtW3hEYJn9o=;
-        b=Q9QTO2sbMRmtqZSdbQyfG1ssoncIVsRpl88xjgocOLL4FjrgIxrd5ax//hRAqi8qh3
-         UbR9PnZBKPFJsvKT23jQh4YYhwarpvJ3KQQ8NaF9VmHhBPba8/qw0QnTgdwmJTJRPEa2
-         bYjTXVGrB32+V6xRWdFhvpaXoQ/wUCR82R0LAku0BgzuvcwKlZ2EVqtfQhBTdm/u7o9T
-         EUug2XDeIa04RWoN+CxNKHIngjlqZV/oRo5EC+kOiNLzy3nmFnwZYH9Kf0GjhY72qzUg
-         Da0pGRoHSmKW1olyk+QJKdmNQlvWGEaFtrGnZKwe+9z5xaoFyP4cHibPMSGmkkk0V1u6
-         DSgg==
+        d=gmail.com; s=20251104; t=1785522722; x=1786127522; darn=vger.kernel.org;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=1pgvz5gAD7Hw+MqfudMvXhhl6EBpJRyIn40riGMqdVs=;
+        b=LegumlpE+ea8c8V6Xy2aYV3NinlSwoFwk+Z4+UAHyVYZ12e2hL8ExYAAdSbMGDYWKs
+         sTd16EmWhpSHktOvShUUnpnuYuJ+MsdhJo56yXsL196Q6WBHd/mQNkRmCQMsUSCVBj4R
+         ruez2/ggAxxMv6JbrqhYzRDerk54Raq+Fz6cBzq2MJUb2+daLo9to6bC7CbgE3pTf7IY
+         CPk1v15ytecQ12k33afdvZ+5CHN4H6MBnm1NOInxB/dIfRk8G1hVbQsg8cPLExiqSVi2
+         VS5Wlt+T9rzc9EBjTEaOSZscwv7Np/Yxm6dkNzEvfG76SIsTzzASKYGaZPu1UHEMk+6D
+         Ji7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785522230; x=1786127030;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
+        d=1e100.net; s=20251104; t=1785522722; x=1786127522;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=VzhVX5WD0XnAhIfnqoRt17YMyLSYbQFbZtW3hEYJn9o=;
-        b=YBHftWgcf76zvQpxCsWpJj8tBN/9zs18/0Gn8SlHOoSETpR6HqnuoebINROVjGr38i
-         DUH1+BPW5X/nCg/Wv8xwkpxaqf5VAtDqSFL5V35pCsHI2yWIfLVeogq91CUeA5kidUf0
-         T79QG8k5+1P3mlZwULlu5cAQv5+S6+9Ib7H3biQtJVggRYqBLUriCpa/sdQJv/pCafBz
-         Nx6xcS8RXH0uMtK1WUcMkJPMUfKrecVKT2X546a52jyZvolVsyfEBrFsAB7JJ8SYb3uQ
-         wDL4Z3wqXnLEXhG7sFtgX026UN1JOlZEn5uM/663etQmPFMIAd31WLGWi5inMTe5LVuZ
-         ZJyA==
-X-Forwarded-Encrypted: i=1; AHgh+RoliM5PjAasK34Ak+Vw3koEITASZC4+CE/rDWqmPDkN1EgsvXHPpP0jSQTxAM1LWSp4MJCao6cqVjx/GF4C@vger.kernel.org
-X-Gm-Message-State: AOJu0YwVvt3MKAhNK5Xwc+ZWJQwMQiN4fZhx/Rt9cZ6xGmQAhRxb/uX1
-	NOqx0b5qMhAB6Wz6EmBQZyUb+3C4i1wd6CEuiJEaoyiByELoltIv75bRl4asWt3LAnAXptvvPtJ
-	RvQ+9Qvr5JeYyi6Kr2/AlcVfHt1loSKqtxCZtVeW5Nf20G0Cwg1iKq7zToC3OzPWTqQEJ
-X-Gm-Gg: AR+sD12FOK6kBEgwHtY513eu8Axr6Qttok+oPPOACZUumOugcG7dakGayolzngHQCxs
-	tdpnkOCj/YJ8OCN9QN2C566vBXI+lQAkY9wbOxgjQ/TvT5TcGcnwPTzWcZUBZrWy5s/2pVlnX+S
-	PxGhxFfa/Ps/XwvSZiky5KJhCciyUQqFlcjV9Wb64eAtEUB+I9Ugizoc8Fv88Y+O6/b8EbRNULe
-	gPnEyQMMfr5qQB1Fp8b8dFqqW1e62AJwGNlG1KLl6yRofYhuUSaPPDyEF2ZSIz19776V3BxdxIE
-	TyYf+CYC9noCOIg4sGUy3vwBh3E4ofDil8Qp7grLuNhLWSNNx03aH7MpRku1CE4v/iMvyPyozJ+
-	xP8kVnUrei/L+UZOLKQtoDEohMyvp3BQlcG4=
-X-Received: by 2002:a05:6a20:2591:b0:3bf:9c93:ac44 with SMTP id adf61e73a8af0-3c92a5d3558mr817747637.19.1785522229742;
-        Fri, 31 Jul 2026 11:23:49 -0700 (PDT)
-X-Received: by 2002:a05:6a20:2591:b0:3bf:9c93:ac44 with SMTP id adf61e73a8af0-3c92a5d3558mr817708637.19.1785522229301;
-        Fri, 31 Jul 2026 11:23:49 -0700 (PDT)
-Received: from hu-vgarodia-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153e04456dsm7203089eec.14.2026.07.31.11.23.42
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 Jul 2026 11:23:48 -0700 (PDT)
-From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-Date: Fri, 31 Jul 2026 23:52:27 +0530
-Subject: [PATCH v2 12/12] arm64: dts: qcom: sm8650: Add Iris context bank
- subnodes
+        bh=1pgvz5gAD7Hw+MqfudMvXhhl6EBpJRyIn40riGMqdVs=;
+        b=MWBBjXlIL9zR35Rrr65cHqxobQalJ7ZJ9bYc36nRfdQb1FtncrmULKk4b2chpF8E7F
+         7QGjZ9jykB6wfsgblRJNKrzDd6nT46cuM97+2CeQ/KGFYpmdx5tpW/ph1AgIsa6JxOzv
+         94Tk3V8LVJi34EO3c++QQ6dXFlqVA13YY1Co43r/H36cpCK/xE3ElASIdyRwtHWrSITW
+         zZh/RCXRwKEaOaKmF8nWtQxwT1yNH3B32tF0MR83tu7hVIg4kzWPT147jYAqmJMtCyPw
+         6rGwQGZtgotTt0WPq8Y+Y4RmDVSZOfkNi2/xkEkwa1nwvKQpJYQgtGEkXSgELdMOulYC
+         UqKQ==
+X-Gm-Message-State: AOJu0YwbQ3n1Oe7O0yIo3f77c5ujHSajT0g/PI8PtMRYEPnh/kMcVJot
+	pY8h2vdQST3taJsimuNDY+EPfLc1yNqKcxzaAyWecG0964kI3lmy+MAJ
+X-Gm-Gg: AR+sD13h+k6Ri2DyCaxhQk3/QLzTld9fDjTn7waUGXrpn/yyGQ4viOOjXoNfqmOhOVe
+	mSVeXn3++wm89BBPWifLpPzzs59HqcIfbuEKJlwpgK0b86tO6Z0DVmOucLtHY7bvDz8OLQ/mW7S
+	08FTExRUGqxAEbJEuVeN+PfkTTC5PgRoZ4QFPlCgyxAr5J3JBeR393h5d7LfbJHzJ2xrr9ND8Lp
+	YrcglS1hFqqpugSkag0TpA2nxi6qnh/O/jt7OAxQ0Q+uGGLMGBOhcKyPdunowQF59YrGqhCOqXR
+	WiaLBY+HUgnqnAkVifiXP75WlPav14RNUw5AJDEmJQdvY5mhyovcYo/8CR8nnuprx1l3YpGuJ59
+	7rCFddRwuKDFDbEe3zYeMhSI4jqRs+U4FlBeg0odzPQQOTHPAWFsn43cI6xl97sH8W/E1y3ThjE
+	WyKPlKH+lpQ91S6ZM2HR+v+WU/Ia19Q7UPmHM3xcPGkh7RlQ3QRYgFvc1/J0Dy9Aw=
+X-Received: by 2002:a05:690e:4811:b0:652:5567:b3ec with SMTP id 956f58d0204a3-6694f1baaeamr929342d50.37.1785522721944;
+        Fri, 31 Jul 2026 11:32:01 -0700 (PDT)
+Received: from [10.138.10.6] ([185.98.168.14])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-66948cff660sm1073441d50.3.2026.07.31.11.31.59
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 31 Jul 2026 11:32:00 -0700 (PDT)
+Message-ID: <3ba57269-3305-4d80-b3f2-aa82fa59b59d@gmail.com>
+Date: Fri, 31 Jul 2026 14:31:45 -0400
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260731-vpu_iommu_iova_handling-v2-12-da52b5228dbd@oss.qualcomm.com>
-References: <20260731-vpu_iommu_iova_handling-v2-0-da52b5228dbd@oss.qualcomm.com>
-In-Reply-To: <20260731-vpu_iommu_iova_handling-v2-0-da52b5228dbd@oss.qualcomm.com>
-To: Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Stanimir Varbanov <stanimir.varbanov@linaro.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        stable@vger.kernel.org, Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
-        Daniel J Blueman <daniel@quora.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785522138; l=3736;
- i=vikash.garodia@oss.qualcomm.com; s=20241104; h=from:subject:message-id;
- bh=Ylggv5ukM9cL+Qy7BuVA8yvNM4fwEAff5bDtks1Oxh4=;
- b=J/81NlQ0HTG3zYB4u+otyNn1pTWp4eMXgVHr2h5/hboHaAJFIDc4FrrsBS5BFTm9bCTQv1E5A
- 47MQ/1wRgikAMTj55617cAmwAxwm6EwsDa6ncplR1Rqu+jh6gFc0F+Z
-X-Developer-Key: i=vikash.garodia@oss.qualcomm.com; a=ed25519;
- pk=LY9Eqp4KiHWxzGNKGHbwRFEJOfRCSzG/rxQNmvZvaKE=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDE0MSBTYWx0ZWRfX2cDs1jgTNO6A
- d5i/SjBk+llxgzY7hivSaUdyVZ9UKzd/xUfJKad8i1SEC/mjvrUq+k30QFtjauWG4Yj28sRznL2
- 5SuNVWxPClRNzTB+IWVRKVfJJNtcWs/Ca/9g8SrCfqyNW7zS3EOPw92LV1YtVongN1r0mT5JFsp
- rB6qpenGhH7yqlXA1ztf6CIV8AVLDs9uSplKz1WzlezZX2qrnaKJeBz88gNWep6roMxfhuG456e
- aSizxodDXQ1dB2+rmIgUxIY7cwzmhNiLJWSCoP+Y0NaMDri/DCJX1OZBFdcrGV3oGSZZeVVapNg
- bTzrIvuEJdwc4QKWNBi2UpcWBrgamZz0YJZ8kTZMzLykyPn0n2fU+u3l3UjBs9lnm68iwHx4eXU
- YZE8IpPeVzRe6sfJZH2bEvijJCUQLr703d9QjwsbzcD24o3Y9I/yzi1T4w/m+U6oAa6r2RMvfU9
- jn+sGMe65Hc//KWgMFg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDE0MSBTYWx0ZWRfXxS4+uIQoe6xy
- 6KxDg5XZ5DwT3w1vWVA/hNZoD3yDmKa0CODTvJbrCUhtGUuguKNhOu7qGFB4I6MlMzt5lTN9b8v
- YCnyqsjTMln/uKkXsXIE5byXisZ1OiA=
-X-Authority-Analysis: v=2.4 cv=U+iiy+ru c=1 sm=1 tr=0 ts=6a6ce836 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=e5mUnYsNAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=t9ty7G3lAAAA:8
- a=v0Z7u7uCyoCEKL_A5NIA:9 a=QEXdDO2ut3YA:10 a=x9snwWr2DeNwDh03kgHS:22
- a=Vxmtnl_E_bksehYqCbjh:22 a=CsAS6f0m0zARWR-uHzm3:22
-X-Proofpoint-ORIG-GUID: 5UEMETnh8JDZ0lrh0M7rgbvgtQg1IMJV
-X-Proofpoint-GUID: 5UEMETnh8JDZ0lrh0M7rgbvgtQg1IMJV
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-31_05,2026-07-30_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 spamscore=0 lowpriorityscore=0 adultscore=0
- impostorscore=0 suspectscore=0 bulkscore=0 clxscore=1015 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607310141
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] crypto: qce - Replace with stub driver
+To: Krzysztof Kozlowski <krzk@kernel.org>, Eric Biggers
+ <ebiggers@kernel.org>, linux-crypto@vger.kernel.org,
+ Herbert Xu <herbert@gondor.apana.org.au>
+Cc: linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org, Bartosz Golaszewski <brgl@kernel.org>,
+ Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+References: <20260731050838.158825-1-ebiggers@kernel.org>
+ <a28c2903-0976-4559-b870-4de5553ba9ab@kernel.org>
+Content-Language: en-US
+From: Demi Marie Obenour <demiobenour@gmail.com>
+Autocrypt: addr=demiobenour@gmail.com; keydata=
+ xsFNBFp+A0oBEADffj6anl9/BHhUSxGTICeVl2tob7hPDdhHNgPR4C8xlYt5q49yB+l2nipd
+ aq+4Gk6FZfqC825TKl7eRpUjMriwle4r3R0ydSIGcy4M6eb0IcxmuPYfbWpr/si88QKgyGSV
+ Z7GeNW1UnzTdhYHuFlk8dBSmB1fzhEYEk0RcJqg4AKoq6/3/UorR+FaSuVwT7rqzGrTlscnT
+ DlPWgRzrQ3jssesI7sZLm82E3pJSgaUoCdCOlL7MMPCJwI8JpPlBedRpe9tfVyfu3euTPLPx
+ wcV3L/cfWPGSL4PofBtB8NUU6QwYiQ9Hzx4xOyn67zW73/G0Q2vPPRst8LBDqlxLjbtx/WLR
+ 6h3nBc3eyuZ+q62HS1pJ5EvUT1vjyJ1ySrqtUXWQ4XlZyoEFUfpJxJoN0A9HCxmHGVckzTRl
+ 5FMWo8TCniHynNXsBtDQbabt7aNEOaAJdE7to0AH3T/Bvwzcp0ZJtBk0EM6YeMLtotUut7h2
+ Bkg1b//r6bTBswMBXVJ5H44Qf0+eKeUg7whSC9qpYOzzrm7+0r9F5u3qF8ZTx55TJc2g656C
+ 9a1P1MYVysLvkLvS4H+crmxA/i08Tc1h+x9RRvqba4lSzZ6/Tmt60DPM5Sc4R0nSm9BBff0N
+ m0bSNRS8InXdO1Aq3362QKX2NOwcL5YaStwODNyZUqF7izjK4QARAQABzTxEZW1pIE1hcmll
+ IE9iZW5vdXIgKGxvdmVyIG9mIGNvZGluZykgPGRlbWlvYmVub3VyQGdtYWlsLmNvbT7CwXgE
+ EwECACIFAlp+A0oCGwMGCwkIBwMCBhUIAgkKCwQWAgMBAh4BAheAAAoJELKItV//nCLBhr8Q
+ AK/xrb4wyi71xII2hkFBpT59ObLN+32FQT7R3lbZRjVFjc6yMUjOb1H/hJVxx+yo5gsSj5LS
+ 9AwggioUSrcUKldfA/PKKai2mzTlUDxTcF3vKx6iMXKA6AqwAw4B57ZEJoMM6egm57TV19kz
+ PMc879NV2nc6+elaKl+/kbVeD3qvBuEwsTe2Do3HAAdrfUG/j9erwIk6gha/Hp9yZlCnPTX+
+ VK+xifQqt8RtMqS5R/S8z0msJMI/ajNU03kFjOpqrYziv6OZLJ5cuKb3bZU5aoaRQRDzkFIR
+ 6aqtFLTohTo20QywXwRa39uFaOT/0YMpNyel0kdOszFOykTEGI2u+kja35g9TkH90kkBTG+a
+ EWttIht0Hy6YFmwjcAxisSakBuHnHuMSOiyRQLu43ej2+mDWgItLZ48Mu0C3IG1seeQDjEYP
+ tqvyZ6bGkf2Vj+L6wLoLLIhRZxQOedqArIk/Sb2SzQYuxN44IDRt+3ZcDqsPppoKcxSyd1Ny
+ 2tpvjYJXlfKmOYLhTWs8nwlAlSHX/c/jz/ywwf7eSvGknToo1Y0VpRtoxMaKW1nvH0OeCSVJ
+ itfRP7YbiRVc2aNqWPCSgtqHAuVraBRbAFLKh9d2rKFB3BmynTUpc1BQLJP8+D5oNyb8Ts4x
+ Xd3iV/uD8JLGJfYZIR7oGWFLP4uZ3tkneDfYzsFNBFp+A0oBEAC9ynZI9LU+uJkMeEJeJyQ/
+ 8VFkCJQPQZEsIGzOTlPnwvVna0AS86n2Z+rK7R/usYs5iJCZ55/JISWd8xD57ue0eB47bcJv
+ VqGlObI2DEG8TwaW0O0duRhDgzMEL4t1KdRAepIESBEA/iPpI4gfUbVEIEQuqdqQyO4GAe+M
+ kD0Hy5JH/0qgFmbaSegNTdQg5iqYjRZ3ttiswalql1/iSyv1WYeC1OAs+2BLOAT2NEggSiVO
+ txEfgewsQtCWi8H1SoirakIfo45Hz0tk/Ad9ZWh2PvOGt97Ka85o4TLJxgJJqGEnqcFUZnJJ
+ riwoaRIS8N2C8/nEM53jb1sH0gYddMU3QxY7dYNLIUrRKQeNkF30dK7V6JRH7pleRlf+wQcN
+ fRAIUrNlatj9TxwivQrKnC9aIFFHEy/0mAgtrQShcMRmMgVlRoOA5B8RTulRLCmkafvwuhs6
+ dCxN0GNAORIVVFxjx9Vn7OqYPgwiofZ6SbEl0hgPyWBQvE85klFLZLoj7p+joDY1XNQztmfA
+ rnJ9x+YV4igjWImINAZSlmEcYtd+xy3Li/8oeYDAqrsnrOjb+WvGhCykJk4urBog2LNtcyCj
+ kTs7F+WeXGUo0NDhbd3Z6AyFfqeF7uJ3D5hlpX2nI9no/ugPrrTVoVZAgrrnNz0iZG2DVx46
+ x913pVKHl5mlYQARAQABwsFfBBgBAgAJBQJafgNKAhsMAAoJELKItV//nCLBwNIP/AiIHE8b
+ oIqReFQyaMzxq6lE4YZCZNj65B/nkDOvodSiwfwjjVVE2V3iEzxMHbgyTCGA67+Bo/d5aQGj
+ gn0TPtsGzelyQHipaUzEyrsceUGWYoKXYyVWKEfyh0cDfnd9diAm3VeNqchtcMpoehETH8fr
+ RHnJdBcjf112PzQSdKC6kqU0Q196c4Vp5HDOQfNiDnTf7gZSj0BraHOByy9LEDCLhQiCmr+2
+ E0rW4tBtDAn2HkT9uf32ZGqJCn1O+2uVfFhGu6vPE5qkqrbSE8TG+03H8ecU2q50zgHWPdHM
+ OBvy3EhzfAh2VmOSTcRK+tSUe/u3wdLRDPwv/DTzGI36Kgky9MsDC5gpIwNbOJP2G/q1wT1o
+ Gkw4IXfWv2ufWiXqJ+k7HEi2N1sree7Dy9KBCqb+ca1vFhYPDJfhP75I/VnzHVssZ/rYZ9+5
+ 1yDoUABoNdJNSGUYl+Yh9Pw9pE3Kt4EFzUlFZWbE4xKL/NPno+z4J9aWemLLszcYz/u3XnbO
+ vUSQHSrmfOzX3cV4yfmjM5lewgSstoxGyTx2M8enslgdXhPthZlDnTnOT+C+OTsh8+m5tos8
+ HQjaPM01MKBiAqdPgksm1wu2DrrwUi6ChRVTUBcj6+/9IJ81H2P2gJk3Ls3AVIxIffLoY34E
+ +MYSfkEjBz0E8CLOcAw7JIwAaeBT
+In-Reply-To: <a28c2903-0976-4559-b870-4de5553ba9ab@kernel.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------HdbkbXaosHtNrC3ZM5XYZQZq"
 
-The VPU issues DMA through several SMMU streams, and the hardware does
-not give every stream the same addressable range. The non-pixel stream
-is restricted to use 0-600MB of IOVA space, while the pixel stream can
-address the full range:
-    +-----------------------------------------------------------+
-    | non-pixel stream addressable range (600 MB - 3.5 GB)      |
-    | 0x25800000 - 0xe0000000                                   |
-    +-----------------------------------------------------------+
-    | pixel stream addressable range (0 - 3.5 GB)               |
-    | 0x00000000 - 0xe0000000                                   |
-    +-----------------------------------------------------------+
-A single "iommus" property on the video-codec node puts every stream in
-one IOMMU domain sharing one IOVA allocator, so nothing keeps a
-non-pixel buffer above 600 MB. Once an allocation lands below that
-boundary the hardware faults, which shows up as unhandled SMMU page
-faults and spontaneous reboots:
-https://gitlab.freedesktop.org/drm/msm/-/work_items/100
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------HdbkbXaosHtNrC3ZM5XYZQZq
+Content-Type: multipart/mixed; boundary="------------xNPkSkf7BAKQGc6JdueYE4T0";
+ protected-headers="v1"; hp="clear"
+Message-ID: <3ba57269-3305-4d80-b3f2-aa82fa59b59d@gmail.com>
+Date: Fri, 31 Jul 2026 14:31:45 -0400
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] crypto: qce - Replace with stub driver
+To: Krzysztof Kozlowski <krzk@kernel.org>, Eric Biggers
+ <ebiggers@kernel.org>, linux-crypto@vger.kernel.org,
+ Herbert Xu <herbert@gondor.apana.org.au>
+Cc: linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org, Bartosz Golaszewski <brgl@kernel.org>,
+ Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+References: <20260731050838.158825-1-ebiggers@kernel.org>
+ <a28c2903-0976-4559-b870-4de5553ba9ab@kernel.org>
+Content-Language: en-US
+From: Demi Marie Obenour <demiobenour@gmail.com>
+Autocrypt: addr=demiobenour@gmail.com; keydata=
+ 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
+ +MYSfkEjBz0E8CLOcAw7JIwAaeBT
+In-Reply-To: <a28c2903-0976-4559-b870-4de5553ba9ab@kernel.org>
 
-Describe the two streams as "non-pixel" and "pixel" subnodes so each gets
-its own IOMMU domain, with stream 0x1940 becoming non-pixel and 0x1947
-becoming pixel. Point the non-pixel subnode at a reserved-memory node
-whose "iommu-addresses" covers [0, 0x25800000), which excludes the low
-600 MB from that domain's IOVA allocator and keeps its allocations above
-the boundary the stream can address. The reservation node carries no
-"reg", so it is a pure IOVA carve-out rather than a memory mapping. The
-pixel stream is left free to use the whole range.
+--------------xNPkSkf7BAKQGc6JdueYE4T0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-The video-codec node also gains '#address-cells' and '#size-cells' of 2,
-which set the cell widths used to parse the "iommu-addresses" entry that
-refers to the non-pixel subnode, and an empty "dma-ranges" declaring the
-1:1 DMA translation into the parent. Both are described in the common
-schema change.
+On 7/31/26 05:06, Krzysztof Kozlowski wrote:
+> On 31/07/2026 07:08, Eric Biggers wrote:
+>> None of the algorithms the QCE driver registers with the crypto API ar=
+e
+>> even close to being useful.  They're massively outperformed by the
+>=20
+> The amount of patches you send towards removal of QCE is really
+> stunning. Or rather worrying. This is like third approach or so.
+>=20
+> Your previous approaches received valid feedback, including even fixes
+> and committment of new maintainer.
+>=20
+> But you even complained that it does receive fixes! [1]
+>=20
+> We removed the driver temporarily from typical configurations, so no on=
+e
+> will be affected, by whatever is found now and not yet fixed. Still not=
 
-Fixes: 56cf5ad39a55 ("arm64: dts: qcom: sm8650: add iris DT node")
-Cc: stable@vger.kernel.org
-Co-developed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-Tested-by: Daniel J Blueman <daniel@quora.org>
-Signed-off-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/sm8650.dtsi | 20 +++++++++++++++++---
- 1 file changed, 17 insertions(+), 3 deletions(-)
+> enough! For you this was reason to remove the driver (AGAIN!) [2]
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8650.dtsi b/arch/arm64/boot/dts/qcom/sm8650.dtsi
-index 9ecbc0010694faf8005eabdeb033efe630f95037..6fccd8a886ec0aaa42e20b7a20333a7b77c31b48 100644
---- a/arch/arm64/boot/dts/qcom/sm8650.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm8650.dtsi
-@@ -1905,6 +1905,10 @@ llcc_lpi_mem: llcc-lpi@ff800000 {
- 			reg = <0 0xff800000 0 0x600000>;
- 			no-map;
- 		};
-+
-+		iris_resv: reservation-iris {
-+			iommu-addresses = <&iris_non_pixel 0x0 0x0 0x0 0x25800000>;
-+		};
- 	};
- 
- 	smp2p-adsp {
-@@ -5275,11 +5279,12 @@ &config_noc SLAVE_VENUS_CFG QCOM_ICC_TAG_ACTIVE_ONLY>,
- 				      "xo",
- 				      "core";
- 
--			iommus = <&apps_smmu 0x1940 0>,
--				 <&apps_smmu 0x1947 0>;
--
- 			dma-coherent;
- 
-+			#address-cells = <2>;
-+			#size-cells = <2>;
-+			dma-ranges;
-+
- 			/*
- 			 * IRIS firmware is signed by vendors, only
- 			 * enable on boards where the proper signed firmware
-@@ -5287,6 +5292,15 @@ &config_noc SLAVE_VENUS_CFG QCOM_ICC_TAG_ACTIVE_ONLY>,
- 			 */
- 			status = "disabled";
- 
-+			iris_non_pixel: non-pixel {
-+				iommus = <&apps_smmu 0x1940 0x0>;
-+				memory-region = <&iris_resv>;
-+			};
-+
-+			iris_pixel: pixel {
-+				iommus = <&apps_smmu 0x1947 0x0>;
-+			};
-+
- 			iris_opp_table: opp-table {
- 				compatible = "operating-points-v2";
- 
+A stub driver needs to be added for power management reasons.  It turns
+out that if there is no driver, power consumption is very high.
 
--- 
-2.34.1
+> This is beyond comprehension and very unpleasant, because you actively
+> work against the community with this approach.
 
+I trust that Bartosz can fix the driver with enough work.  However,
+even if the QCE driver had never had a single bug, it would still not
+be worth using.  Its performance is so poor that one should always
+use CPU-based crypto instead.  In the default configuration, that is
+in fact what happens.
+
+The QCE's algorithm implementations only provide a way people can
+misconfigure their systems and ruin their performance.  There are
+debug options that also severely harm performance, but they have
+legitimate uses during development.  The current QCE driver doesn't.
+
+I have no problem with a driver for the QCE that does something actually
+useful.  While there are disagreements about whether restricted media
+processing is a feature or an anti-feature, my view is that it is
+better for it to be implemented upstream than in an out-of-tree driver.
+However, the driver as it currently exists does not implement this.
+
+I expect that such a driver would not use the crypto API at all.
+Instead, I suspect it would use dmabufs for source and destination
+buffers and integrate with the secure world firmware in some way.
+That means that the driver doesn't belong under drivers/crypto.
+
+These are the reasons I submitted a patch to mark the driver as BROKEN,
+which Herbert Xu has since accepted.
+
+> NAK
+>=20
+> Nacked-by: Krzysztof Kozlowski <krzk@kernel.org>
+>=20
+>=20
+> [1] https://lore.kernel.org/all/20260728152241.GA4281@quark/
+> [2] https://lore.kernel.org/all/20260724050645.223799-1-ebiggers@kernel=
+=2Eorg/
+>=20
+>> CPU-based crypto (even actually using far more CPU cycles than the
+>> CPU-based crypto, due to the massive driver overhead), don't provide a=
+ny
+>> security benefits over the CPU-based crypto, and have various other
+>> issues.  They're also unrelated to the Inline Crypto Engine which work=
+s
+>> far better and is what is actually being used these days.
+>>
+>> Due to the major performance problems people experienced when
+>> accidentally using this driver, the algorithms were already demoted to=
+
+>> below the priority of ARMv8 CE in the crypto API several years ago.
+>> Regardless of priority, these algorithms also aren't compatible with t=
+he
+>> most common uses of in-kernel crypto; for example, they don't support
+>> dm-crypt because they allocate memory, and they don't support IPsec
+>> since they take a mutex which isn't compatible with softirq context.
+>>
+>> It's time to move on and just drop this obsolete functionality entirel=
+y.
+>=20
+> Best regards,
+> Krzysztof
+
+
+--=20
+Sincerely,
+Demi Marie Obenour (she/her/hers)
+
+--------------xNPkSkf7BAKQGc6JdueYE4T0--
+
+--------------HdbkbXaosHtNrC3ZM5XYZQZq
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEopQtqVJW1aeuo9/sszaHOrMp8lMFAmps6hsACgkQszaHOrMp
+8lNwUBAAptSx+21WOpvepRQf2mxAoPgmKhOGw1fC0yyfvoukdVfEZyHnJIDWgy5V
+S7pRzbRzJo4rCQh5G8pkdCQFWm3HAT2O9rG3t4KT1NF8Rag3s8G38TsTVzaaOzae
+V5HYh8JxgImWPMP2pS087NR97KbQR+WfyYEjCXIERuMc9dW3ksM6fXj0Des36KpW
+6hfqwmZWNThhThoAJqr5j/8nPNk/FCPyhMi6vuZlzFuMlsv2kgWxKhZjEpHYnYak
+oopcGAQMPuqX2/lKblSeKEbW1fSa9faTcmDeH152e7p/fw/WRq5XSsK+DIhiP3ie
+wyWSNTBbGhLgH84rdIfBhNsSA6NchJFMYfMe0hfLIhFmv2mjtlOX/YW53nHzqZ0+
+8K847CDDhrz79DhYxhyYhGjmUhTxteaAei+gO1vzY49Ysf/9+6Vccc8YIDMdcoAS
+22PMQkYJkTjzIfHLcYToxu38LoDJPQy3neM9XUvsLSYp2uQTb/TJSoy+HoPYXy6+
+kS8zb3jTMJ3iCCOdM9CabOUplA5Rgxa92Gy87OEBZwPcRWf9w1LYI4Cob4XHEuub
+41dku0PWGWuas8MKLH2NTRctKrvLvC9BClbC165SiQRm6QsgnJja+L9IvZzRqtfw
+V55UjORv9Il8pY96/wo+0lg2UamEkcInsTMULyFdlelhPQe/02g=
+=D3dI
+-----END PGP SIGNATURE-----
+
+--------------HdbkbXaosHtNrC3ZM5XYZQZq--
