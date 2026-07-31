@@ -1,37 +1,85 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 843134562AB;
-	Fri, 31 Jul 2026 18:10:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 53E43364E85
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 18:22:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785521447; cv=none; b=k7ENM1twK+mL9rMeOwXolNhBqhPMQzML1YKHlg1T+RxNQh7RooU0BK/bPt72QbGvrh7u3t1RTCDtxL0d5qV6BfKSbYrzn9M4ibULKF/ybaD6FTkInAm/Vw9ZniINKJC2tTRy3BfxoqzDP/9fOt+I1+ROe6yjNiESsypNz/v2NC4=
+	t=1785522151; cv=none; b=kzacfMoKEkUuh/El6WS59nrFuV20Ws6r9PLsEHKads+reR696ivNTbd6AbGsyKd23X/qh50u2vk2jVYmZOBV1TXo6ww7MpQhtO9ZZc9qfsF+QIlhuz/ZxSx2m0IAlbtlMj8u3AFPKm0KnPPmogEaJ2ttu+3sn0EWcITpV8ZYoZ8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785521447; c=relaxed/simple;
-	bh=0Ub6+6oge9n6qmLgOMNxwOmeJ1tEE28hucNGPqA9TMw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=CK+JurPLdI6aEUkHG9DpvGUAZ+tk4ALz1Xk0jGpkvoBjpu1EKSfwhLTum59l//xMBahFsrJ4w85GXgdU4c/QmQYo5SLAKCscSBwmNtLg7aLQrILOVnLmAURuKbzzYV6tfcdwv54olkt7Uhgn1NweGHWQAvm7J//Fl5sEkfQ4KUw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nP3vU+ud; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1785522151; c=relaxed/simple;
+	bh=cu4pPclpDZcAviAJxFeTJo/ayR7Q8C44r0iQltHM1U8=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=iS+pAKSdpJ43WHl32ZH4l870BPbAV7QhwSEzOKnfwJVf15z49/SqGwpuP3iZ0N4cIYjE/peLOzZQsPE+iDcOR0DNueDH+zRt2oJwIu3aReaIulP5EkY1phjbMoGu924rkHrHySStciRrj38iGQtSzljAgiCgCfoKcuw0YhUsTTM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=oKkS0Di8; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UXxMC5/r; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nP3vU+ud"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id AECA0C2BCFB;
-	Fri, 31 Jul 2026 18:10:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1785521446;
-	bh=0Ub6+6oge9n6qmLgOMNxwOmeJ1tEE28hucNGPqA9TMw=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=nP3vU+ud0mKIQXnRIB8SNN91LkAxAuPpMsx3of8hTMC1PIEINOqsYkeaQ6SGPa1mf
-	 xQJqwSMMF2YXFtTBhn0MSfeLfhXhoBDtFZ0GNw5VO4lobfp8UrN+doHU3UTRq4bZj0
-	 KOODR5XdbDnrRaVbRyaoNIcKD7yEGqzR8n05dXyvRPl9S/k3Qc7Y6en6AhU02EyQ08
-	 WULn5fC3fMzZ5CshxHVlgNPerBDNYojyeTzqtwVQSj/BB3vSncbYCPdFE4P+IUJvEX
-	 aN15hFzOHEYghqLMXan6onpJprPkTocJA8G0RjyGmU/lLl9SmHBR1oOxAG2JMZNUxn
-	 ZkzjMnBHTeTaA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 88785C5516D;
-	Fri, 31 Jul 2026 18:10:46 +0000 (UTC)
-From: Esteban Urrutia via B4 Relay <devnull+esteuwu.proton.me@kernel.org>
-Date: Fri, 31 Jul 2026 14:08:23 -0400
-Subject: [PATCH 1/3] pinctrl: qcom: Commonize pinctrl-sm8450 headers
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="oKkS0Di8";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UXxMC5/r"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66VFOKjg489180
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 18:22:27 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=054i4meXxT28F/sqxTyxwv
+	fLZnm6tcmnQPyqe5M48xg=; b=oKkS0Di8VkvV76wOrpCbXrOdISX2/lfUm1Wlce
+	J345gCq9LwtCFzhRl8ZnA/5NYmBvh/4jIpZDjPs1EqnV2xwo/Yqw8unY1YFuj8hq
+	m/YGk7R80UBiwAuw8VsmTnggPgyWJ4pG+YPeUWrUngx1D93iWNqtot7hEy7FxeEQ
+	2sJDByX1SIzYkWxyTR8q8ImG0B9cYVXMaPSVFpS0WYqwOBoy1QDW5NRQPE3WU1cS
+	vqNhxEz5SRfkvcYOf80gFrdtCaFjcmVTY7zuSLV/9f7cD74v1WbtV96+strDIWxD
+	xWiQyyEl8KUKfq7XYxKF7rQCl1b0fzvPefheN9PxICoRIJIQ==
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fruk8ss6c-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 18:22:27 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2cee1ec30f2so14149895ad.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 11:22:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785522146; x=1786126946; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=054i4meXxT28F/sqxTyxwvfLZnm6tcmnQPyqe5M48xg=;
+        b=UXxMC5/rFnBi0DYhcEfWgVbzI+Lx1owOrku+1NTE/VyuvR4u8BLFQhdnFtkIfTZSay
+         wzjqLC4J0OoMPeecslKBFeo2j4uK+ifiF7PGYhLa89+1lrJsSfAYu1TnCrHHdXazjmb/
+         QYT187x1rNWBF6vOYMn2Id28wIHaUlOp52wJrS21XGOIVvuD6V/BAuqsDbedUjQ8xuWw
+         LQ6JzuhJF5ep3GHI2JU1mKYYBoj7vMoE8m7GkXrJSQ/BqLMcBzhnyGCU8GGFL1E6Et75
+         XvX566ZC0jcl3j1U1PxUW7hOZ718C4R29kSbsdqoH3zMlfnCbosE9AcQj2HhHrfgICS7
+         uA6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785522146; x=1786126946;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=054i4meXxT28F/sqxTyxwvfLZnm6tcmnQPyqe5M48xg=;
+        b=T9f6ZpaPdubbz8xPPLZ3hyZCWzKEZsEeC8w2pygyW5+ZDr1CfvGFu4GkYDyY0/PSUg
+         azfk2Hi0GAmDnUPZo3bG29tqe57YBWQEXNJN+xPAsXza/pValBvnTSEu7PLCaEO4NAKh
+         eg2MrLMqzPdIR2hmpTBSlbMMne0w0t5kRGot1UNB1uBqbHinc5VxCgKtXgXZUz6Q45hx
+         XuD4fWJHhHWmQSvQuPZCc4Ofq3JoPdZGu4a6+zvwaCtYUh9ADUIEVRDZmCNtvvPJnDRp
+         YQEvOgCJWVOqwwrkxFKFHBMMYXsAeEvgUFv1d5BZXjOkTkncdeUIiO65j1p79DrEe9kR
+         k0HA==
+X-Forwarded-Encrypted: i=1; AHgh+RryvutSv9fHwmc16MuRtT27ISuOcYbrxNGvlk+cYSqiKnFPw5V2t7FgYmm7TKkhpJqF9J8KGsyuTy/Xv6Zv@vger.kernel.org
+X-Gm-Message-State: AOJu0YygK/nH45cAgejztKVPiFNiqn7aIr0kOreqMeuA2qE247dTOzgh
+	HZ/993Rlp34uBORsa8zansRGThf4/ExdVF0mwAdoJKPlotXDD1mm1l9yttVnza9DCY8hFAgRfZY
+	cf8NSwpwIqs1RZNxWNDiRXdgkAGOV3onyQ6TE52VKbKalhrrp9cHdkbgp0E59+l/UWOog
+X-Gm-Gg: AR+sD115nGX8T8w0EqAiMYQOrsq/wXbCmCaBuUb079/as1SWFEXFFBvKrfFjq5Z5Ue8
+	Na/rGfdhfdlgXhsBUywytgcuzNFWItIsdMNc9Z08SrJ5StF1f6c0QWO0j7KAp+2Yf/uaRXuE+J+
+	Tac5JhUuHDp4AjJpOVwbwO6DiLOTWZuHXRwpWaXRfoGBcMHrhsF83k6hC34t4k3p4HsxTtQCWM+
+	h3pkTlD8y5iOymGtbHpSe2fkzgBTC0fBXQXP6glvFj8dE3FHRsSyyWF8bNOrczCCPuawgVqUoP2
+	NayLRxI47PiSw3DBZU9Tk5hsgTtvrbaiK20NiqL4WitrLCAvDXu0yyYs5ZBsSSu2V5AvKNCNtpO
+	5G7eLKaodrUnmeFaOz8EGPYZXuRDtDn2MxGc=
+X-Received: by 2002:a17:902:ebc3:b0:2ca:2079:91cc with SMTP id d9443c01a7336-2d052188c55mr10360815ad.5.1785522146106;
+        Fri, 31 Jul 2026 11:22:26 -0700 (PDT)
+X-Received: by 2002:a17:902:ebc3:b0:2ca:2079:91cc with SMTP id d9443c01a7336-2d052188c55mr10360305ad.5.1785522145478;
+        Fri, 31 Jul 2026 11:22:25 -0700 (PDT)
+Received: from hu-vgarodia-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153e04456dsm7203089eec.14.2026.07.31.11.22.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 31 Jul 2026 11:22:25 -0700 (PDT)
+From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+Subject: [PATCH v2 00/12] media: iris: Migrate iommus to iris sub nodes
+Date: Fri, 31 Jul 2026 23:52:15 +0530
+Message-Id: <20260731-vpu_iommu_iova_handling-v2-0-da52b5228dbd@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -40,552 +88,161 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260731-sm8475-tlmm-v1-1-3007a8e4aa62@proton.me>
-References: <20260731-sm8475-tlmm-v1-0-3007a8e4aa62@proton.me>
-In-Reply-To: <20260731-sm8475-tlmm-v1-0-3007a8e4aa62@proton.me>
-To: Bartosz Golaszewski <brgl@kernel.org>, 
- Bjorn Andersson <andersson@kernel.org>, Linus Walleij <linusw@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Vinod Koul <vkoul@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-gpio@vger.kernel.org, devicetree@vger.kernel.org, 
- phone-devel@vger.kernel.org, Esteban Urrutia <esteuwu@proton.me>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785521444; l=12925;
- i=esteuwu@proton.me; s=20260622; h=from:subject:message-id;
- bh=LhzjaVscZHR6jyLbymZUjeXvDivPKoMM0j0J+uAXra4=;
- b=n+w+u/77KYZX8X1v71Sa4/DEFIW2/BGUMoKoo5uRHG0P2b2+TUrdtD3GgIAxLuKqweS09S50+
- Q4uZYHLly14A1tkgK1ZpIqtYVwqJEN9JFcPMtMmq5a5FA09i1t9HkBm
-X-Developer-Key: i=esteuwu@proton.me; a=ed25519;
- pk=wToFt4mOAWkzbqb15Ye1hrhevI13vK9BcMUFiQ/me1M=
-X-Endpoint-Received: by B4 Relay for esteuwu@proton.me/20260622 with
- auth_id=835
-X-Original-From: Esteban Urrutia <esteuwu@proton.me>
-Reply-To: esteuwu@proton.me
+X-B4-Tracking: v=1; b=H4sIANfnbGoC/3WNQQqDMBBFryKzbiQJGLGr3qOIxCTqgBpNamgR7
+ 95R6LKbD2/4/80O0QV0Ee7ZDsEljOhnAnnLwAx67h1DSwySS8VLLlhatgb9NJ2ZdEMdO+Lcs6J
+ QrlKVFp0wQOsluA7fl/lZEw8YXz58rkdJnNefs/rrTIJxVsq2VdK00nb24WPM102Phto5BdTHc
+ XwB8Cj1X8UAAAA=
+X-Change-ID: 20260701-vpu_iommu_iova_handling-556e969a1f1c
+To: Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Stanimir Varbanov <stanimir.varbanov@linaro.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Stephan Gerhold <stephan.gerhold@linaro.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        stable@vger.kernel.org, Daniel J Blueman <daniel@quora.org>,
+        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785522138; l=5190;
+ i=vikash.garodia@oss.qualcomm.com; s=20241104; h=from:subject:message-id;
+ bh=cu4pPclpDZcAviAJxFeTJo/ayR7Q8C44r0iQltHM1U8=;
+ b=d3AiWXBgtaAaCrEGWKOfCxWqFRgXkeBtOaBkJqnJrnN79zcPEKVePvs6z62kKYgh1SGjiaXHx
+ adkvzMB0o6bDryLR50IVFmstuEdNdOR02QjO7POzRmzDdTwsJHemxd2
+X-Developer-Key: i=vikash.garodia@oss.qualcomm.com; a=ed25519;
+ pk=LY9Eqp4KiHWxzGNKGHbwRFEJOfRCSzG/rxQNmvZvaKE=
+X-Authority-Analysis: v=2.4 cv=W8sIkxWk c=1 sm=1 tr=0 ts=6a6ce7e3 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=e5mUnYsNAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=yNWNZktwws4dcwluj8EA:9
+ a=QEXdDO2ut3YA:10 a=GvdueXVYPmCkWapjIL-Q:22 a=Vxmtnl_E_bksehYqCbjh:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDE0MSBTYWx0ZWRfX8vzfskss05Zt
+ Zn7G6dPQ7JxNMByuGdLOYFpzGQmdcqOrlTPdnac9RgCudzRTpqLYvb4wVmoBBDodmsEbSJ9lEvu
+ 3KLYdaFYSVZ+JgjCYg8P5nZkeud+Dr8=
+X-Proofpoint-ORIG-GUID: G7f7xrM7p67bFbPo4Y_XlVF0yg6Ab1Gu
+X-Proofpoint-GUID: G7f7xrM7p67bFbPo4Y_XlVF0yg6Ab1Gu
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDE0MSBTYWx0ZWRfX0joQA1ZekeK8
+ pPqxNjtF8I1LfhIOgfpHAs/8rUJw7Ogcnb8TR5kd+AXsZ/wIDbHkvDA2v/2G7OjzMFRmF5MAIRm
+ h7uPa9E7J8K8M03mfUTIDBkvGBzhu6gVvNwnYVxaaemyWliMI947+urNi5f39e3jxvVfjo4VBgO
+ Uhgug54VqEvyU8+ypQuTLB4vtqQl1URmhOHFinyiGM+MslzYWBDYFrZ0ddbIpy8D0eA16RwlCto
+ iFgfzMrykOh0HDuBjX3IWAf+tvY3pOBHF5j3eHzEq1LC876BdgY8jqHRjnrsb47bLVawCgLMx6L
+ e6qvPq8/nnSKM2zkNSHV0o8zl7W+zVAmTbq1viGnRoRi0CA3qSFaj3gATrkUB1nx/tp6+JQ+l8a
+ 2M6Rcwu8CI/JWj2dsBCGzIewXHI/sIR/STgfpYceXNASwrb65z10vM/wsT+FXq5oCm1R5n7Ea1E
+ u6CVXpP7FufMkllnmHA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-31_05,2026-07-30_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 phishscore=0 lowpriorityscore=0 adultscore=0 impostorscore=0
+ malwarescore=0 suspectscore=0 spamscore=0 clxscore=1015 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607310141
 
-From: Esteban Urrutia <esteuwu@proton.me>
+The VPU issues DMA through several SMMU streams, and the hardware does
+not give every stream the same addressable range. The non-pixel stream
+is restricted to use 0-600MB of IOVA space, while the pixel stream can 
+address the full range:
+    +-----------------------------------------------------------+
+    | non-pixel stream addressable range (600 MB - 3.5 GB)      |
+    | 0x25800000 - 0xe0000000                                   |
+    +-----------------------------------------------------------+
+    | pixel stream addressable range (0 - 3.5 GB)               |
+    | 0x00000000 - 0xe0000000                                   |
+    +-----------------------------------------------------------+
 
-Some headers found on pinctrl-sm8450 are compatible with SM8475.
-Commonize these headers to prepare for adding pinctrl support for SM8475.
+A single "iommus" property on the video-codec node puts every stream in
+one IOMMU domain sharing one IOVA allocator, so nothing keeps a
+non-pixel buffer inside the low 600 MB. Once an allocation lands below
+that boundary the hardware faults, which shows up as unhandled SMMU page
+faults and spontaneous reboots:
+https://gitlab.freedesktop.org/drm/msm/-/work_items/100
 
-Signed-off-by: Esteban Urrutia <esteuwu@proton.me>
+Daniel, who reported the crash issue, have also raised a patch to workaround
+the issue. While the patch partially handles the limitation, it is inefficient
+in a way that it keep iris hardwares away from using the 600MB address space
+for all the different streams.
+
+To address this limitation, the subset of stream/s are now represented as
+sub nodes, so that they can be associated to the respective addressable
+range.
+In the past, this limitation was tried with iommu-map approach, with iris
+driver dynamically creating the devices. The approach was later concluded
+as an hack to avoid having sub nodes and NAKed by iommu maintainers.
+It was discussed in detail in the discussion
+https://lore.kernel.org/all/c7b956a9-d3e8-4e18-b780-5d08f5cd2ca1@kernel.org/
+
+It was agreed by maintainers to proceed with sub node approach to address
+the VPU hardware limitation.
+
+Stable branch handling - one of the suggestion was to bring the 
+workaround on mainline and stable, and later revert it on mainline and
+apply this series. This would ideally breach the binding policy of
+adding something to describe the hardware and then reverting it. As per 
+binding maintainer, the approach is not acceptable.
+This series can be applied to mainline as well as -stable, and in the process
+if there are any conflicts in stable, I would resolve them.
+
+Signed-off-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
 ---
- drivers/pinctrl/qcom/pinctrl-sm8450.c | 233 +-------------------------------
- drivers/pinctrl/qcom/pinctrl-sm8450.h | 246 ++++++++++++++++++++++++++++++++++
- 2 files changed, 247 insertions(+), 232 deletions(-)
+Changes in v2:
+- Fixed sashiko issues.
+- Moved subnodes into common schema (Dmitry)
+- Kept the firmware name as the one defained earlier (Dmitry)
+- Added dma-ranges to specify parent-child address translation
+- Moved context bank hooks to VPU ops (Dmitry)
+- Updated commit description.
+- Link to v1: https://lore.kernel.org/r/20260709-vpu_iommu_iova_handling-v1-0-72bb62cb2dfd@oss.qualcomm.com
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-sm8450.c b/drivers/pinctrl/qcom/pinctrl-sm8450.c
-index 8ca5b6e15e6c..7b2627989d68 100644
---- a/drivers/pinctrl/qcom/pinctrl-sm8450.c
-+++ b/drivers/pinctrl/qcom/pinctrl-sm8450.c
-@@ -9,96 +9,7 @@
- #include <linux/platform_device.h>
- 
- #include "pinctrl-msm.h"
--
--#define REG_SIZE 0x1000
--
--#define PINGROUP(id, f1, f2, f3, f4, f5, f6, f7, f8, f9)	\
--	{					        \
--		.grp = PINCTRL_PINGROUP("gpio" #id, 	\
--			gpio##id##_pins, 		\
--			ARRAY_SIZE(gpio##id##_pins)),	\
--		.funcs = (int[]){			\
--			msm_mux_gpio, /* gpio mode */	\
--			msm_mux_##f1,			\
--			msm_mux_##f2,			\
--			msm_mux_##f3,			\
--			msm_mux_##f4,			\
--			msm_mux_##f5,			\
--			msm_mux_##f6,			\
--			msm_mux_##f7,			\
--			msm_mux_##f8,			\
--			msm_mux_##f9			\
--		},				        \
--		.nfuncs = 10,				\
--		.ctl_reg = REG_SIZE * id,			\
--		.io_reg = 0x4 + REG_SIZE * id,		\
--		.intr_cfg_reg = 0x8 + REG_SIZE * id,		\
--		.intr_status_reg = 0xc + REG_SIZE * id,	\
--		.mux_bit = 2,			\
--		.pull_bit = 0,			\
--		.drv_bit = 6,			\
--		.egpio_enable = 12,		\
--		.egpio_present = 11,		\
--		.oe_bit = 9,			\
--		.in_bit = 0,			\
--		.out_bit = 1,			\
--		.intr_enable_bit = 0,		\
--		.intr_status_bit = 0,		\
--		.intr_target_bit = 5,		\
--		.intr_target_kpss_val = 3,	\
--		.intr_raw_status_bit = 4,	\
--		.intr_polarity_bit = 1,		\
--		.intr_detection_bit = 2,	\
--		.intr_detection_width = 2,	\
--	}
--
--#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
--	{					        \
--		.grp = PINCTRL_PINGROUP(#pg_name, 	\
--			pg_name##_pins, 		\
--			ARRAY_SIZE(pg_name##_pins)),	\
--		.ctl_reg = ctl,				\
--		.io_reg = 0,				\
--		.intr_cfg_reg = 0,			\
--		.intr_status_reg = 0,			\
--		.mux_bit = -1,				\
--		.pull_bit = pull,			\
--		.drv_bit = drv,				\
--		.oe_bit = -1,				\
--		.in_bit = -1,				\
--		.out_bit = -1,				\
--		.intr_enable_bit = -1,			\
--		.intr_status_bit = -1,			\
--		.intr_target_bit = -1,			\
--		.intr_raw_status_bit = -1,		\
--		.intr_polarity_bit = -1,		\
--		.intr_detection_bit = -1,		\
--		.intr_detection_width = -1,		\
--	}
--
--#define UFS_RESET(pg_name, offset)				\
--	{					        \
--		.grp = PINCTRL_PINGROUP(#pg_name, 	\
--			pg_name##_pins, 		\
--			ARRAY_SIZE(pg_name##_pins)),	\
--		.ctl_reg = offset,			\
--		.io_reg = offset + 0x4,			\
--		.intr_cfg_reg = 0,			\
--		.intr_status_reg = 0,			\
--		.mux_bit = -1,				\
--		.pull_bit = 3,				\
--		.drv_bit = 0,				\
--		.oe_bit = -1,				\
--		.in_bit = -1,				\
--		.out_bit = 0,				\
--		.intr_enable_bit = -1,			\
--		.intr_status_bit = -1,			\
--		.intr_target_bit = -1,			\
--		.intr_raw_status_bit = -1,		\
--		.intr_polarity_bit = -1,		\
--		.intr_detection_bit = -1,		\
--		.intr_detection_width = -1,		\
--	}
-+#include "pinctrl-sm8450.h"
- 
- static const struct pinctrl_pin_desc sm8450_pins[] = {
- 	PINCTRL_PIN(0, "GPIO_0"),
-@@ -317,8 +228,6 @@ static const struct pinctrl_pin_desc sm8450_pins[] = {
- 	PINCTRL_PIN(213, "SDC2_DATA"),
- };
- 
--#define DECLARE_MSM_GPIO_PINS(pin) \
--	static const unsigned int gpio##pin##_pins[] = { pin }
- DECLARE_MSM_GPIO_PINS(0);
- DECLARE_MSM_GPIO_PINS(1);
- DECLARE_MSM_GPIO_PINS(2);
-@@ -535,146 +444,6 @@ static const unsigned int sdc2_clk_pins[] = { 211 };
- static const unsigned int sdc2_cmd_pins[] = { 212 };
- static const unsigned int sdc2_data_pins[] = { 213 };
- 
--enum sm8450_functions {
--	msm_mux_gpio,
--	msm_mux_aon_cam,
--	msm_mux_atest_char,
--	msm_mux_atest_usb,
--	msm_mux_audio_ref,
--	msm_mux_cam_mclk,
--	msm_mux_cci_async,
--	msm_mux_cci_i2c,
--	msm_mux_cci_timer,
--	msm_mux_cmu_rng,
--	msm_mux_coex_uart1,
--	msm_mux_coex_uart2,
--	msm_mux_cri_trng,
--	msm_mux_cri_trng0,
--	msm_mux_cri_trng1,
--	msm_mux_dbg_out,
--	msm_mux_ddr_bist,
--	msm_mux_ddr_pxi0,
--	msm_mux_ddr_pxi1,
--	msm_mux_ddr_pxi2,
--	msm_mux_ddr_pxi3,
--	msm_mux_dp_hot,
--	msm_mux_egpio,
--	msm_mux_gcc_gp1,
--	msm_mux_gcc_gp2,
--	msm_mux_gcc_gp3,
--	msm_mux_ibi_i3c,
--	msm_mux_jitter_bist,
--	msm_mux_mdp_vsync,
--	msm_mux_mdp_vsync0,
--	msm_mux_mdp_vsync1,
--	msm_mux_mdp_vsync2,
--	msm_mux_mdp_vsync3,
--	msm_mux_mi2s0_data0,
--	msm_mux_mi2s0_data1,
--	msm_mux_mi2s0_sck,
--	msm_mux_mi2s0_ws,
--	msm_mux_mi2s2_data0,
--	msm_mux_mi2s2_data1,
--	msm_mux_mi2s2_sck,
--	msm_mux_mi2s2_ws,
--	msm_mux_mss_grfc0,
--	msm_mux_mss_grfc1,
--	msm_mux_mss_grfc10,
--	msm_mux_mss_grfc11,
--	msm_mux_mss_grfc12,
--	msm_mux_mss_grfc2,
--	msm_mux_mss_grfc3,
--	msm_mux_mss_grfc4,
--	msm_mux_mss_grfc5,
--	msm_mux_mss_grfc6,
--	msm_mux_mss_grfc7,
--	msm_mux_mss_grfc8,
--	msm_mux_mss_grfc9,
--	msm_mux_nav,
--	msm_mux_pcie0_clkreqn,
--	msm_mux_pcie1_clkreqn,
--	msm_mux_phase_flag,
--	msm_mux_pll_bist,
--	msm_mux_pll_clk,
--	msm_mux_pri_mi2s,
--	msm_mux_prng_rosc,
--	msm_mux_qdss_cti,
--	msm_mux_qdss_gpio,
--	msm_mux_qlink0_enable,
--	msm_mux_qlink0_request,
--	msm_mux_qlink0_wmss,
--	msm_mux_qlink1_enable,
--	msm_mux_qlink1_request,
--	msm_mux_qlink1_wmss,
--	msm_mux_qlink2_enable,
--	msm_mux_qlink2_request,
--	msm_mux_qlink2_wmss,
--	msm_mux_qspi0,
--	msm_mux_qspi1,
--	msm_mux_qspi2,
--	msm_mux_qspi3,
--	msm_mux_qspi_clk,
--	msm_mux_qspi_cs,
--	msm_mux_qup0,
--	msm_mux_qup1,
--	msm_mux_qup10,
--	msm_mux_qup11,
--	msm_mux_qup12,
--	msm_mux_qup13,
--	msm_mux_qup14,
--	msm_mux_qup15,
--	msm_mux_qup16,
--	msm_mux_qup17,
--	msm_mux_qup18,
--	msm_mux_qup19,
--	msm_mux_qup2,
--	msm_mux_qup20,
--	msm_mux_qup21,
--	msm_mux_qup3,
--	msm_mux_qup4,
--	msm_mux_qup5,
--	msm_mux_qup6,
--	msm_mux_qup7,
--	msm_mux_qup8,
--	msm_mux_qup9,
--	msm_mux_qup_l4,
--	msm_mux_qup_l5,
--	msm_mux_qup_l6,
--	msm_mux_sd_write,
--	msm_mux_sdc40,
--	msm_mux_sdc41,
--	msm_mux_sdc42,
--	msm_mux_sdc43,
--	msm_mux_sdc4_clk,
--	msm_mux_sdc4_cmd,
--	msm_mux_sec_mi2s,
--	msm_mux_tb_trig,
--	msm_mux_tgu_ch0,
--	msm_mux_tgu_ch1,
--	msm_mux_tgu_ch2,
--	msm_mux_tgu_ch3,
--	msm_mux_tmess_prng0,
--	msm_mux_tmess_prng1,
--	msm_mux_tmess_prng2,
--	msm_mux_tmess_prng3,
--	msm_mux_tsense_pwm1,
--	msm_mux_tsense_pwm2,
--	msm_mux_uim0_clk,
--	msm_mux_uim0_data,
--	msm_mux_uim0_present,
--	msm_mux_uim0_reset,
--	msm_mux_uim1_clk,
--	msm_mux_uim1_data,
--	msm_mux_uim1_present,
--	msm_mux_uim1_reset,
--	msm_mux_usb2phy_ac,
--	msm_mux_usb_phy,
--	msm_mux_vfr_0,
--	msm_mux_vfr_1,
--	msm_mux_vsense_trigger,
--	msm_mux__,
--};
--
- static const char * const gpio_groups[] = {
- 	"gpio0", "gpio1", "gpio2", "gpio3", "gpio4", "gpio5", "gpio6", "gpio7",
- 	"gpio8", "gpio9", "gpio10", "gpio11", "gpio12", "gpio13", "gpio14",
-diff --git a/drivers/pinctrl/qcom/pinctrl-sm8450.h b/drivers/pinctrl/qcom/pinctrl-sm8450.h
-new file mode 100644
-index 000000000000..7501c694db57
---- /dev/null
-+++ b/drivers/pinctrl/qcom/pinctrl-sm8450.h
-@@ -0,0 +1,246 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Copyright (c) 2020-2021, The Linux Foundation. All rights reserved.
-+ * Copyright (c) 2021, Linaro Limited
-+ */
-+#ifndef __PINCTRL_SM8450_H__
-+#define __PINCTRL_SM8450_H__
-+
-+#include <linux/array_size.h>
-+
-+#include <linux/pinctrl/pinctrl.h>
-+
-+#define REG_SIZE 0x1000
-+
-+#define PINGROUP(id, f1, f2, f3, f4, f5, f6, f7, f8, f9)	\
-+	{					        \
-+		.grp = PINCTRL_PINGROUP("gpio" #id, 	\
-+			gpio##id##_pins, 		\
-+			ARRAY_SIZE(gpio##id##_pins)),	\
-+		.funcs = (int[]){			\
-+			msm_mux_gpio, /* gpio mode */	\
-+			msm_mux_##f1,			\
-+			msm_mux_##f2,			\
-+			msm_mux_##f3,			\
-+			msm_mux_##f4,			\
-+			msm_mux_##f5,			\
-+			msm_mux_##f6,			\
-+			msm_mux_##f7,			\
-+			msm_mux_##f8,			\
-+			msm_mux_##f9			\
-+		},				        \
-+		.nfuncs = 10,				\
-+		.ctl_reg = REG_SIZE * id,			\
-+		.io_reg = 0x4 + REG_SIZE * id,		\
-+		.intr_cfg_reg = 0x8 + REG_SIZE * id,		\
-+		.intr_status_reg = 0xc + REG_SIZE * id,	\
-+		.mux_bit = 2,			\
-+		.pull_bit = 0,			\
-+		.drv_bit = 6,			\
-+		.egpio_enable = 12,		\
-+		.egpio_present = 11,		\
-+		.oe_bit = 9,			\
-+		.in_bit = 0,			\
-+		.out_bit = 1,			\
-+		.intr_enable_bit = 0,		\
-+		.intr_status_bit = 0,		\
-+		.intr_target_bit = 5,		\
-+		.intr_target_kpss_val = 3,	\
-+		.intr_raw_status_bit = 4,	\
-+		.intr_polarity_bit = 1,		\
-+		.intr_detection_bit = 2,	\
-+		.intr_detection_width = 2,	\
-+	}
-+
-+#define SDC_QDSD_PINGROUP(pg_name, ctl, pull, drv)	\
-+	{					        \
-+		.grp = PINCTRL_PINGROUP(#pg_name, 	\
-+			pg_name##_pins, 		\
-+			ARRAY_SIZE(pg_name##_pins)),	\
-+		.ctl_reg = ctl,				\
-+		.io_reg = 0,				\
-+		.intr_cfg_reg = 0,			\
-+		.intr_status_reg = 0,			\
-+		.mux_bit = -1,				\
-+		.pull_bit = pull,			\
-+		.drv_bit = drv,				\
-+		.oe_bit = -1,				\
-+		.in_bit = -1,				\
-+		.out_bit = -1,				\
-+		.intr_enable_bit = -1,			\
-+		.intr_status_bit = -1,			\
-+		.intr_target_bit = -1,			\
-+		.intr_raw_status_bit = -1,		\
-+		.intr_polarity_bit = -1,		\
-+		.intr_detection_bit = -1,		\
-+		.intr_detection_width = -1,		\
-+	}
-+
-+#define UFS_RESET(pg_name, offset)				\
-+	{					        \
-+		.grp = PINCTRL_PINGROUP(#pg_name, 	\
-+			pg_name##_pins, 		\
-+			ARRAY_SIZE(pg_name##_pins)),	\
-+		.ctl_reg = offset,			\
-+		.io_reg = offset + 0x4,			\
-+		.intr_cfg_reg = 0,			\
-+		.intr_status_reg = 0,			\
-+		.mux_bit = -1,				\
-+		.pull_bit = 3,				\
-+		.drv_bit = 0,				\
-+		.oe_bit = -1,				\
-+		.in_bit = -1,				\
-+		.out_bit = 0,				\
-+		.intr_enable_bit = -1,			\
-+		.intr_status_bit = -1,			\
-+		.intr_target_bit = -1,			\
-+		.intr_raw_status_bit = -1,		\
-+		.intr_polarity_bit = -1,		\
-+		.intr_detection_bit = -1,		\
-+		.intr_detection_width = -1,		\
-+	}
-+
-+#define DECLARE_MSM_GPIO_PINS(pin) \
-+	static const unsigned int gpio##pin##_pins[] = { pin }
-+
-+enum sm8450_functions {
-+	msm_mux_gpio,
-+	msm_mux_aon_cam,
-+	msm_mux_atest_char,
-+	msm_mux_atest_usb,
-+	msm_mux_audio_ref,
-+	msm_mux_cam_mclk,
-+	msm_mux_cci_async,
-+	msm_mux_cci_i2c,
-+	msm_mux_cci_timer,
-+	msm_mux_cmu_rng,
-+	msm_mux_coex_uart1,
-+	msm_mux_coex_uart2,
-+	msm_mux_cri_trng,
-+	msm_mux_cri_trng0,
-+	msm_mux_cri_trng1,
-+	msm_mux_dbg_out,
-+	msm_mux_ddr_bist,
-+	msm_mux_ddr_pxi0,
-+	msm_mux_ddr_pxi1,
-+	msm_mux_ddr_pxi2,
-+	msm_mux_ddr_pxi3,
-+	msm_mux_dp_hot,
-+	msm_mux_egpio,
-+	msm_mux_gcc_gp1,
-+	msm_mux_gcc_gp2,
-+	msm_mux_gcc_gp3,
-+	msm_mux_ibi_i3c,
-+	msm_mux_jitter_bist,
-+	msm_mux_mdp_vsync,
-+	msm_mux_mdp_vsync0,
-+	msm_mux_mdp_vsync1,
-+	msm_mux_mdp_vsync2,
-+	msm_mux_mdp_vsync3,
-+	msm_mux_mi2s0_data0,
-+	msm_mux_mi2s0_data1,
-+	msm_mux_mi2s0_sck,
-+	msm_mux_mi2s0_ws,
-+	msm_mux_mi2s2_data0,
-+	msm_mux_mi2s2_data1,
-+	msm_mux_mi2s2_sck,
-+	msm_mux_mi2s2_ws,
-+	msm_mux_mss_grfc0,
-+	msm_mux_mss_grfc1,
-+	msm_mux_mss_grfc10,
-+	msm_mux_mss_grfc11,
-+	msm_mux_mss_grfc12,
-+	msm_mux_mss_grfc2,
-+	msm_mux_mss_grfc3,
-+	msm_mux_mss_grfc4,
-+	msm_mux_mss_grfc5,
-+	msm_mux_mss_grfc6,
-+	msm_mux_mss_grfc7,
-+	msm_mux_mss_grfc8,
-+	msm_mux_mss_grfc9,
-+	msm_mux_nav,
-+	msm_mux_pcie0_clkreqn,
-+	msm_mux_pcie1_clkreqn,
-+	msm_mux_phase_flag,
-+	msm_mux_pll_bist,
-+	msm_mux_pll_clk,
-+	msm_mux_pri_mi2s,
-+	msm_mux_prng_rosc,
-+	msm_mux_qdss_cti,
-+	msm_mux_qdss_gpio,
-+	msm_mux_qlink0_enable,
-+	msm_mux_qlink0_request,
-+	msm_mux_qlink0_wmss,
-+	msm_mux_qlink1_enable,
-+	msm_mux_qlink1_request,
-+	msm_mux_qlink1_wmss,
-+	msm_mux_qlink2_enable,
-+	msm_mux_qlink2_request,
-+	msm_mux_qlink2_wmss,
-+	msm_mux_qspi0,
-+	msm_mux_qspi1,
-+	msm_mux_qspi2,
-+	msm_mux_qspi3,
-+	msm_mux_qspi_clk,
-+	msm_mux_qspi_cs,
-+	msm_mux_qup0,
-+	msm_mux_qup1,
-+	msm_mux_qup10,
-+	msm_mux_qup11,
-+	msm_mux_qup12,
-+	msm_mux_qup13,
-+	msm_mux_qup14,
-+	msm_mux_qup15,
-+	msm_mux_qup16,
-+	msm_mux_qup17,
-+	msm_mux_qup18,
-+	msm_mux_qup19,
-+	msm_mux_qup2,
-+	msm_mux_qup20,
-+	msm_mux_qup21,
-+	msm_mux_qup3,
-+	msm_mux_qup4,
-+	msm_mux_qup5,
-+	msm_mux_qup6,
-+	msm_mux_qup7,
-+	msm_mux_qup8,
-+	msm_mux_qup9,
-+	msm_mux_qup_l4,
-+	msm_mux_qup_l5,
-+	msm_mux_qup_l6,
-+	msm_mux_sd_write,
-+	msm_mux_sdc40,
-+	msm_mux_sdc41,
-+	msm_mux_sdc42,
-+	msm_mux_sdc43,
-+	msm_mux_sdc4_clk,
-+	msm_mux_sdc4_cmd,
-+	msm_mux_sec_mi2s,
-+	msm_mux_tb_trig,
-+	msm_mux_tgu_ch0,
-+	msm_mux_tgu_ch1,
-+	msm_mux_tgu_ch2,
-+	msm_mux_tgu_ch3,
-+	msm_mux_tmess_prng0,
-+	msm_mux_tmess_prng1,
-+	msm_mux_tmess_prng2,
-+	msm_mux_tmess_prng3,
-+	msm_mux_tsense_pwm1,
-+	msm_mux_tsense_pwm2,
-+	msm_mux_uim0_clk,
-+	msm_mux_uim0_data,
-+	msm_mux_uim0_present,
-+	msm_mux_uim0_reset,
-+	msm_mux_uim1_clk,
-+	msm_mux_uim1_data,
-+	msm_mux_uim1_present,
-+	msm_mux_uim1_reset,
-+	msm_mux_usb2phy_ac,
-+	msm_mux_usb_phy,
-+	msm_mux_vfr_0,
-+	msm_mux_vfr_1,
-+	msm_mux_vsense_trigger,
-+	msm_mux__,
-+};
-+
-+#endif /* __PINCTRL_SM8450_H__ */
+---
+Vikash Garodia (12):
+      dt-bindings: media: qcom,venus: Add context bank subnodes to common schema
+      dt-bindings: media: qcom,sm8550-iris: Add context bank subnodes
+      media: iris: Add platform hooks for context bank device setup
+      media: iris: Add helper to create a context bank device
+      media: iris: Route buffers to the matching context bank device
+      media: iris: Skip DMA mask setup when the core device has no IOMMU
+      media: iris: Create pixel and non-pixel context banks on VPU3x
+      arm64: dts: qcom: hamoa: Add Iris context bank subnodes
+      arm64: dts: qcom: sm8550: Add Iris context bank subnodes
+      arm64: dts: qcom: lemans: Add Iris context bank subnodes
+      arm64: dts: qcom: monaco: Add Iris context bank subnodes
+      arm64: dts: qcom: sm8650: Add Iris context bank subnodes
 
+ .../bindings/media/qcom,sc7180-venus.yaml          | 15 -----
+ .../bindings/media/qcom,sm8550-iris.yaml           | 18 +++++-
+ .../bindings/media/qcom,venus-common.yaml          | 51 ++++++++++++++++
+ arch/arm64/boot/dts/qcom/hamoa.dtsi                | 19 +++++-
+ arch/arm64/boot/dts/qcom/lemans.dtsi               | 19 +++++-
+ arch/arm64/boot/dts/qcom/monaco.dtsi               | 19 +++++-
+ arch/arm64/boot/dts/qcom/qcs8550.dtsi              |  4 ++
+ arch/arm64/boot/dts/qcom/sm8550.dtsi               | 19 +++++-
+ arch/arm64/boot/dts/qcom/sm8650.dtsi               | 20 ++++++-
+ drivers/media/platform/qcom/iris/iris_buffer.c     |  8 +--
+ drivers/media/platform/qcom/iris/iris_core.h       |  4 ++
+ drivers/media/platform/qcom/iris/iris_hfi_queue.c  | 16 ++---
+ drivers/media/platform/qcom/iris/iris_probe.c      | 33 +++++++++--
+ drivers/media/platform/qcom/iris/iris_resources.c  | 69 ++++++++++++++++++++++
+ drivers/media/platform/qcom/iris/iris_resources.h  |  2 +
+ drivers/media/platform/qcom/iris/iris_vidc.c       |  4 +-
+ drivers/media/platform/qcom/iris/iris_vpu3x.c      | 38 ++++++++++++
+ drivers/media/platform/qcom/iris/iris_vpu_common.h |  2 +
+ 18 files changed, 314 insertions(+), 46 deletions(-)
+---
+base-commit: 95d6a9ccef99117115e41e9adb271243bd5e985b
+change-id: 20260701-vpu_iommu_iova_handling-556e969a1f1c
+
+Best regards,
 -- 
-2.55.0
-
+Vikash Garodia <vikash.garodia@oss.qualcomm.com>
 
