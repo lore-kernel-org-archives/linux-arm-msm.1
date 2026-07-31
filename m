@@ -1,179 +1,208 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com [209.85.218.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC64E42E000
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 14:25:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.168.131
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785507927; cv=pass; b=lnW7C8266OFN7r7xExv1qcmkqObXKhA7CRIq+3wwJa/LKug5jdRhwmnn5NoZZMomeKs9eyYp0lCG4lqjsdC1HcPuiAz/KrvHI0+9/FTUg/+CQxahnTg+jT4Qlx4mbEDMSqMWXqeux+qZd9x5uYzuXFsgyPh4QY1BJI2gspIjGK0=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785507927; c=relaxed/simple;
-	bh=EzMoMaTdDGQBqIdaJmKzvd8zpTVC4eUSTXLdE3n4PwE=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=pWUj61ns4fbdycStHQVilMA4E+PdMpowbbsOmHv2AQ+Dox2aFN4dP5afjSASDYqjpNcrV+uvF9undxx975N9Z9DEjlRz+YwMrrn5h9DAbRd3B8NEXR41sJlk/jGRSFVrmy82oar+hjbsvF8x9QwN8h2CnrKeNSLoxJ2oB33PYvc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dB0Hr2Jn; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bqrfcnCh; arc=pass smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A16542CB0A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 14:39:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.41
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785508764; cv=none; b=UjVhuVENOC/VLg7jCZF9Iz9cmUrw0csgC69uz/fRmiwXThf+AqDaFWzl6J0DfVZ5BkZlskUAgcBEQQwY9QO0rFRh51HvqX266EGleLzB/zZxrVb8jiHOhDLwVQF5L/BliPMKEwpIjAu0JQtuagS220Ws3X1dVbRwjGG/KsFxgDU=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785508764; c=relaxed/simple;
+	bh=cnQ9TofivQ2bZjfAeMX/42E8H6DyN5sLo6QUxEVqqAE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=WHQkniwB/vVWHaKHgVWi2Pifxy4I7S7nwICe1KvqlXhUxfcKqUoEKHQ+VX6jaRqD2TFMkP3XTuAM691vbf6RfXx44yaL5KrwB07YidNbvyGHwu6wsJhN2lc3xCmjyf03ZQnL2Q7v1M7wbbov1y4yayz3KRwiAUqZPTzar6mIMiw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=JYl8zoAv; arc=none smtp.client-ip=209.85.218.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dB0Hr2Jn";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bqrfcnCh"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66VBeWZg188850
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 14:25:24 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	EzMoMaTdDGQBqIdaJmKzvd8zpTVC4eUSTXLdE3n4PwE=; b=dB0Hr2Jn/dvSDwXF
-	qBK7OpDZEAFPbfJFhqct+4W2FWvZds6W6as0ylgGYCzto1EqrjZGc4EaW4REIbuP
-	3Gz97izsoKBUmeKXa7INLDk7Rav2hB7gyTQCFZiFfQzYmbN97TXZ/cVOnoxy0mK1
-	ja2V0Lqk3F0AdluugG5fmM+L0CyolU7br5RmGf4Eue6yBvS4VdHCP0l1WasHs2ZV
-	wxquCo/xfjLPVKiTTbMFRXQ1ZvGZRlLRkILW5QlCGDoubEAV9OYUYRdpsg8E2Xje
-	N/LFzwazPU7MYQQi3wMoAEW5HS5+oMcO/oin86jXuqGAunmffOC9u2QBxcAf7YpT
-	QkqvCQ==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fru1u0nwq-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 14:25:23 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-92ac0a54110so113562185a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 07:25:23 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785507919; cv=none;
-        d=google.com; s=arc-20260327;
-        b=MD6tHENK13YaUOGVdtmizSwY8p/GG1xOlpqHXWxuRen11jQmWgnAv7+mY4OeXwsBAb
-         mVrJolFwzuNQyt/2hu4GE0hFmWfUEz8JNTwa6euym9i4OwcTF3WqjBtEcds28ToRlJDA
-         iYcad6IrBhtswymPOFGoWlYreIW+8LIXvW3UXFKGMueJSQkbf/rCo23UptotBAiOVofB
-         0YE8K+3jWTCAx33SLFI9i8qRBa28X5WIdgsEhyA9vyKWfeIuB5szZy/QzZ7pnbNcs3Mq
-         tdcjY3wTMhDIZ5zzmXZVFIIWdyf2pdXTpW5Thn69giB8TgohF9k2PlrjTSl1ywYuVzv/
-         +5Ww==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=EzMoMaTdDGQBqIdaJmKzvd8zpTVC4eUSTXLdE3n4PwE=;
-        fh=2O27M9DcQV6CmcovhaXLKzPHa1wOs/2MZ5hBgBqlGSk=;
-        b=iUM0EOiFmBNBqfmcBc3v5Eson4OEfL5b1/NOpHsywSekoGFYn74maJNYeIF16XfigK
-         izKUJTHmV3EAX9GRRTGr4RUQwFE4LBfwPpQ2h+lsFIf8hoG5VdURrtS4NMdhHNa+VAig
-         ly/+gVas9bVha4G8MmlitetafTP2KrSbxNkeEi05IzI5t575NexJO2ptj3molg8liWeC
-         EciEmhWKmaeFN2TsiH9o7qRgpcd8g28rAhcrzoEazZ1hzAnVi6zJEn7XUGyhgb2uBbwN
-         +r4wCKugDWHJ2rXMLmFXtWL34/mxVAf0mEh39b77HqZFfVLa9EeqD3aB1nmdeLL1r05Z
-         0FXw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="JYl8zoAv"
+Received: by mail-ej1-f41.google.com with SMTP id a640c23a62f3a-c1670dad7a8so142595366b.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 07:39:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785507919; x=1786112719; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=EzMoMaTdDGQBqIdaJmKzvd8zpTVC4eUSTXLdE3n4PwE=;
-        b=bqrfcnCh4RwHQecCX9h/Al3bDsnrH7RPC+RWxoDm6MjLl/EfGI4D1TvSnMj4C52Btq
-         NcuLxhhI0YnWXd93ik9JYq74xqtl0k2YuJHwOPyRjMEzMLTgsZQvTEDBKugF0IoZzQDh
-         OEdFsG8mofaluj6+tyddIi4VY/S6Mrg26BvBXoejENZgreVVcvIcolrVO+pp/Hm6XG3u
-         LiAfDcfV/jxwhXaG5N54ZYCt6ebUvRMdfH0cuBZup1JXtS8ehUvwrDj3zcQztSbufaa4
-         0/zfkrQesl2q0H4QD57LBclJNsXVQP7KHn8vyINYqNh4szWQJr11DXjoaWAYCh6xrkSt
-         HMjg==
+        d=gmail.com; s=20251104; t=1785508761; x=1786113561; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=AN1hgiiAoYSEc22S0IPUHYzAb+H+vIEA+bbNrXR6jng=;
+        b=JYl8zoAvXM9gf0yons8RI3aMHzgpLyIt61d5EwtQll3Tk3D4ttfC+Ttub+IapHXXwf
+         tvq5+RF4O2mCwRovdBjuAnwRgIz2S0zIZLjSMVgn5E1KDqhyjezjSYj1cmHCi3UWcWUv
+         VWN9bGou+VoRyY31xtKD/PwZnFeA35MBhWbQs7hRS2PeI+FC04xvPs9wDzBUlyB/hvll
+         TH9DwHSrqu17kian6n1yteiFoaKFnD/IXgFoPXketHKwFxPOtf4iqM1SXgjOFMNYTu7D
+         HD6LdxpRsliB6DUJL7q6i2RgzmqvY62mRmJNiDvFO8ZgkGGfELagwDllidLu1mMPXQFw
+         uU2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785507919; x=1786112719;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=EzMoMaTdDGQBqIdaJmKzvd8zpTVC4eUSTXLdE3n4PwE=;
-        b=lKFmWQvz80Anq97Ty6blyM9Qeb7tg0RJlaXD9qZjm9cOqBhXaNJkelrMurB7qu7tkG
-         OmofjBCIzraQieYieculwis/qhFsuChCBi+KXGQYRMf7GBkptpkDyGZKkJfYUA4uuGuy
-         7MShF6yafiQjgePmKqDngDU/p7ifm0ouVUQs0EnBEgNxC4p5QyGZBhHnp/Ck85gIOSYo
-         iEJGV8gGV5P8HhYxDkueynaoFHodeV5EbahM1EHs5LRcbbz5WXr8+gCeVMv9F8nOA7Bq
-         Wqu7yA2D0u1Hq7eAVbWQbWQdpC/4i65Q2pCNDkXLpp55OxPtd2EbLdatoeuRaq/yl/JN
-         lw+g==
-X-Forwarded-Encrypted: i=1; AHgh+RoyojVDoS1rPh4Mqqb6RsYK9pkOAdLEZlJNpcm/rIJR/QSj17f/q8NRfFEBvgYh6AzKsZ5v8kuC3bQnfpus@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz5iZOaL0qld3tfN8hu8Dlwk4GxZzIyByBlz4X84txEJzGEwC/L
-	latgbX0pb+smRdFcKB9c/iRPCVy9MOGSt2MjjSz/Xq0j+wvfWPWaeQYgyJFclR5WDx/rZLI0+Ao
-	81J5evh2VTP/zzAB6gftgszHu7Z4dvFdGsXIzPibZlYIODigzO6VBIJACZU6mWVJE94SRGYgicX
-	LQyjA3vnCOeg4wlsPobiCRc6eiIM5bQ8bIWx+Tlp8z+n4=
-X-Gm-Gg: AR+sD10H0OmJY7UGhIHZgSoOj78MtMz4iAwASqkkB1zQd7X6RAjxy6EGlv08bOAgkmM
-	dftrDuXgpjl4BnpPSaa2YJJpZG6BRcXbi3U8fKaUuIUwVBficbttFkqSDnyuLnfkXYmMPgShtpN
-	Xgwai6hLEUfE+F14b0T/jd3iAXcdr6T3SmdAARq5RzyZ5bAcZZ1s0fMqZHzK5nEXWqJQmGzjEGD
-	5X9kvilJYlA282c9N0T2SRnBzckeyGdrLAHbcJm2yHBBQu7zvKlcUNCTYKXKuOP7oHM2B+UDOss
-	jPMnV2JUVQ27Gnbyvs4JSoTBCAfs
-X-Received: by 2002:a05:620a:27d0:b0:92e:8734:b721 with SMTP id af79cd13be357-934a093c1bdmr27813985a.29.1785507918758;
-        Fri, 31 Jul 2026 07:25:18 -0700 (PDT)
-X-Received: by 2002:a05:620a:27d0:b0:92e:8734:b721 with SMTP id
- af79cd13be357-934a093c1bdmr27782885a.29.1785507916660; Fri, 31 Jul 2026
- 07:25:16 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1785508761; x=1786113561;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=AN1hgiiAoYSEc22S0IPUHYzAb+H+vIEA+bbNrXR6jng=;
+        b=hj3IulmHBd3DHNXWBaT6x6zuTWmp7gyvXQyKnCWCJPo2RdlglNX54/7k7g8+dnYq0f
+         FaMOkdNWyEfYXnhA/kEr7NTVYsCCdeP4jc9OTgQwTYR2oKQT7n59YD+h9uZojpsWQtvA
+         bHaNgOI3c0m6eIRGKiloD9VrPfCh5tcBCvCtjzUEywen3KikrsJEmjQ+KcGNtXQoGDge
+         8mNnlMOb7yjRYOnZz14CQDCNxPZAyL1A2izGtcx8E7cSekKdW5AmbC5v0uir3w7aYyTr
+         L1cYbPChrVpqx9lDGOKjghFFgMzUha4SDEPWbCT/oSAvIPM6m3WS3KfVHVteCRi8QX4E
+         3NqQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrU3Bn4brjYIG/YWSYCYH4sxENorjrAs4zcZRqye9vv4PQt3pQxJMiqXWA6ONKvBCdhUoQImUp7Oph0SV3a@vger.kernel.org
+X-Gm-Message-State: AOJu0YzibF4sc8IEdywqgrm0uBg9BL0PfO3VOovpiH2woTbUJWrszihm
+	VkvCStHAKQ5e4wrePLANGHw7wAXPqj99seYbwjjlOFPBn+8MxWjAyU7dv5DlgyiU
+X-Gm-Gg: AR+sD12LhngOXUkgIDejnHrbJn5ptppZ6Dyz1Ma3fPSwKpvRJPr83DojrRAMCss2vJB
+	dI8yHNTbrIOQq+sqdKHhXTHzyM/6meDfuUUoMt8rb4VklBijkpUiGJ1WpwsHeoGwzsg/z7UL9ks
+	PnRufNeRG4aoMht+wNv/f0oPjvQpM2VEkx85IkC5+VaorTQ+BfTUAhxFUf5CphRf5tgYyo1LJQn
+	QeBJNPDQOpOhMou6E/nthku/ekDO48TcMdKyNJUIS6M+ySgnm0f6ya3vsMWX2bumDBDwuApBUsm
+	PvtfEi8e1KhJMlbc6Vv7HVCr+4eRnBKfqD4VPG8clki+JQxYwZJX/fVv9xBGSfBzx1HTMR+rSXE
+	SGjclcPjWoDWYYm3nBUUGmHcA4PNJRPi8g+oh4QTgxI3v6Ndz4hx+ApZWYWZn/9ZGyWb3v34GJD
+	sR7zGOQ2jMdm7cMPSYRmWNjZmCEcCVQtscm4llK3nfX8C/K0UaBlQD4V9Pk6cFRw==
+X-Received: by 2002:a17:906:4784:b0:c16:12ff:dc8b with SMTP id a640c23a62f3a-c1fd26df3c9mr145773966b.54.1785508745515;
+        Fri, 31 Jul 2026 07:39:05 -0700 (PDT)
+Received: from localhost ([188.65.190.39])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1fd3cc3b64sm163629266b.27.2026.07.31.07.39.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 31 Jul 2026 07:39:05 -0700 (PDT)
+Date: Fri, 31 Jul 2026 16:39:01 +0200
+From: Richard Acayan <mailingradian@gmail.com>
+To: Jeff Johnson <jeff.johnson@oss.qualcomm.com>
+Cc: david@ixit.cz, Jeff Johnson <jjohnson@kernel.org>,
+	Johannes Berg <johannes.berg@intel.com>,
+	Kalle Valo <kvalo@qca.qualcomm.com>,
+	Michal Kazior <michal.kazior@tieto.com>,
+	linux-wireless@vger.kernel.org, ath10k@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	phone-devel@vger.kernel.org
+Subject: Re: [PATCH RFC v2] wifi: ath10k: make in-order rx amsdu buffers
+ persistent
+Message-ID: <amyzhVgSeYO6MptG@rdacayan>
+References: <20260719-ath10k-a-msdu-v2-1-f479bb9d1217@ixit.cz>
+ <0b9f80bf-73e8-4e9d-9726-b8816c9a364b@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260729-cci-clk-fix-v3-0-f3c731d1596e@oss.qualcomm.com>
- <20260729-cci-clk-fix-v3-1-f3c731d1596e@oss.qualcomm.com> <016603e6-8e87-47d7-96fb-5441ddbaeb28@oss.qualcomm.com>
-In-Reply-To: <016603e6-8e87-47d7-96fb-5441ddbaeb28@oss.qualcomm.com>
-From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Fri, 31 Jul 2026 16:25:05 +0200
-X-Gm-Features: AUfX_mzY82V-q8dyHQoiYlzmsnaF9JauNvq3EY0Yu4Zwqm6rRPBr8DI40JfzuYo
-Message-ID: <CAFEp6-1j9E82SzCKjYaFxhzYD-UiniEMPN=_Cqe4_NZVC2LHdA@mail.gmail.com>
-Subject: Re: [PATCH v3 1/5] i2c: qcom-cci: Switch msm8953 to the CCI v2
- timing/rate config
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
-        Wolfram Sang <wsa+renesas@sang-engineering.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Luca Weiss <luca@lucaweiss.eu>, linux-i2c@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        vladimir.zapolskiy@linaro.org, konradybcio@kernel.org,
-        stephan.gerhold@linaro.org, Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=H5vrBeYi c=1 sm=1 tr=0 ts=6a6cb053 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8 a=XFPRkxQX0av47yOvrY4A:9
- a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDEwOSBTYWx0ZWRfX1OJAAHXFnprj
- ZVCGHNQ65wDRC+VTNz3lSWV388gFQysAxnBEtNkg/aNlowYSGGO2Fl90IUUlXUzrxDWmRWptd5c
- o6zuBNb39CzULIf/+hTfQmtjtMuWbI+QRQEmSO5HpKI80ssWhbxlRgb4m0zeUXX9CB9BWgmEQ6M
- 1DBnR//TWZbUZM65K4JuZEznNf0hL/Rh0LGs32cDFWB7tO48ZwUTrsb1OlyCSMQ2nwyslkoO++f
- JgMpm75wkkgMBRvtu+2+s9nCm1KazyOQzp33A1Sgshl9SsUPc8ZHqP02v3yCcBf4RkqjXk424pF
- r3mbC3ZHZqIjhH5unFQd4181uk3B/lUPYi5zaPwaBualZW5gu4LdbPU/BvC13pq0yumrD8xOXg/
- 81aNkvkpfR19vV6dYSNr3YP1WTUXFxDwrsOPvgK+CruvyH9V7xnKFpQz0mW6kBHl9iya1+KvTNC
- Qf29DzxsRVuEIYzllbw==
-X-Proofpoint-GUID: lR-L37dfQc9ZOYnW3AI1EScT7sODmdQ0
-X-Proofpoint-ORIG-GUID: lR-L37dfQc9ZOYnW3AI1EScT7sODmdQ0
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDEwOSBTYWx0ZWRfX9OZkpBAZetnj
- M8CQpU65O28ml3arKiuEZ3V6dGYBQcMudsQYKnMxnFbmevU89gbRacJohM6I53TvO6vc23O2D9R
- XTgcQLCPXeXTomPe4goNh88c+geKmVY=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-31_04,2026-07-30_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 impostorscore=0 malwarescore=0 phishscore=0
- adultscore=0 bulkscore=0 spamscore=0 priorityscore=1501 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607310109
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <0b9f80bf-73e8-4e9d-9726-b8816c9a364b@oss.qualcomm.com>
 
-On Fri, Jul 31, 2026 at 4:07=E2=80=AFPM Konrad Dybcio
-<konrad.dybcio@oss.qualcomm.com> wrote:
->
-> On 7/29/26 2:25 PM, Loic Poulain wrote:
-> > The msm8953 CCI timing table is internally inconsistent. Its Standard
-> > and Fast timings match v1/v1.5, which are calibrated for a 19.2 MHz CCI
-> > clock, but its Fast+ timings are essentially the v2 values, which are
-> > calibrated for 37.5 MHz. Since all masters share a single CCI clock,
-> > no single rate can satisfy all three modes with the current table, and
-> > the DT assigns 19.2 MHz, so Fast+ timings are wrong.
-> >
-> > The msm8953 CCI is the same hardware version as msm8996/sdm630, which
-> > already use the cci_v2_data config (37.5 MHz). 37.5 MHz is supported by
-> > the msm8953 CCI RCG, so reuse cci_v2_data for msm8953 as well and drop
-> > the redundant, inconsistent standalone table. This makes all three I2C
-> > modes self-consistent under a single clock rate.
-> >
-> > Note this requires the CCI clock to run at 37.5 MHz, the driver selects
-> > and enforces the proper rate in following patches.
-> >
-> > Tested-by: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
->
-> Wenmeng, have you actually tested this on MSM8953 device?
+On Thu, Jul 30, 2026 at 07:24:00PM -0700, Jeff Johnson wrote:
+> On 7/19/2026 2:45 PM, David Heidelberg via B4 Relay wrote:
+> > From: Richard Acayan <mailingradian@gmail.com>
+> > 
+> > The WCN3990 might split MSDUs among multiple "in-order" indications. The
+> > driver needs information from previous indications to handle MPDUs that
+> > are not started by the same indications that complete them. Move the
+> > list that tracks unprocessed MSDUs to the driver state so the driver can
+> > handle MPDUs that are split in this way and be less confused.
+> > 
+> > Fixes: c545070e404b ("ath10k: implement rx reorder support")
+> > Signed-off-by: Richard Acayan <mailingradian@gmail.com>
+> > Co-developed-by: David Heidelberg <david@ixit.cz>
+> > Signed-off-by: David Heidelberg <david@ixit.cz>
+> > ---
+> > This one we have in-tree forever.
+> 
+> I'm transcribing a few comments from my review agent (which may overlap
+> Sashiko). I have not vetted them for correctness. Hopefully I placed them at
+> the correct spots!
+> 
+> > 
+> > Changes in v2:
+> > - checkpatch & style. (Jeff)
+> > - Improve comments.
+> > - Link to v1: https://lore.kernel.org/linux-wireless/20260210021249.12132-2-mailingradian@gmail.com/
+> > ---
+> >  drivers/net/wireless/ath/ath10k/htt.h    |  4 +++
+> >  drivers/net/wireless/ath/ath10k/htt_rx.c | 50 +++++++++++++++++++++++++-------
+> >  2 files changed, 43 insertions(+), 11 deletions(-)
+> > 
+> > diff --git a/drivers/net/wireless/ath/ath10k/htt.h b/drivers/net/wireless/ath/ath10k/htt.h
+> > index 25c6b2e2f81c8..07c3dc088f07b 100644
+> > --- a/drivers/net/wireless/ath/ath10k/htt.h
+> > +++ b/drivers/net/wireless/ath/ath10k/htt.h
+> > @@ -1924,16 +1924,20 @@ struct ath10k_htt {
+> >  
+> >  	bool tx_mem_allocated;
+> >  	const struct ath10k_htt_tx_ops *tx_ops;
+> >  	const struct ath10k_htt_rx_ops *rx_ops;
+> >  	bool disable_tx_comp;
+> >  	bool bundle_tx;
+> >  	struct sk_buff_head tx_req_head;
+> >  	struct sk_buff_head tx_complete_head;
+> > +
+> > +	u8 rx_in_ord_split_tid;
+> > +	u16 rx_in_ord_split_peer_id;
+> > +	struct sk_buff_head rx_in_ord_split;
+> >  };
+> >  
+> >  struct ath10k_htt_tx_ops {
+> >  	int (*htt_send_rx_ring_cfg)(struct ath10k_htt *htt);
+> >  	int (*htt_send_frag_desc_bank_cfg)(struct ath10k_htt *htt);
+> >  	int (*htt_alloc_frag_desc)(struct ath10k_htt *htt);
+> >  	void (*htt_free_frag_desc)(struct ath10k_htt *htt);
+> >  	int (*htt_tx)(struct ath10k_htt *htt, enum ath10k_hw_txrx_mode txmode,
+> > diff --git a/drivers/net/wireless/ath/ath10k/htt_rx.c b/drivers/net/wireless/ath/ath10k/htt_rx.c
+> > index ab2d373b4750d..732bd3a2f9992 100644
+> > --- a/drivers/net/wireless/ath/ath10k/htt_rx.c
+> > +++ b/drivers/net/wireless/ath/ath10k/htt_rx.c
+> > @@ -291,16 +291,18 @@ void ath10k_htt_rx_free(struct ath10k_htt *htt)
+> >  		return;
+> >  
+> >  	timer_delete_sync(&htt->rx_ring.refill_retry_timer);
+> >  
+> >  	skb_queue_purge(&htt->rx_msdus_q);
+> >  	skb_queue_purge(&htt->rx_in_ord_compl_q);
+> >  	skb_queue_purge(&htt->tx_fetch_ind_q);
+> >  
+> > +	skb_queue_purge(&htt->rx_in_ord_split);
+> > +
+> >  	spin_lock_bh(&htt->rx_ring.lock);
+> >  	ath10k_htt_rx_ring_free(htt);
+> >  	spin_unlock_bh(&htt->rx_ring.lock);
+> >  
+> >  	dma_free_coherent(htt->ar->dev,
+> >  			  ath10k_htt_get_rx_ring_size(htt),
+> >  			  ath10k_htt_get_vaddr_ring(htt),
+> >  			  htt->rx_ring.base_paddr);
+> > @@ -841,16 +843,18 @@ int ath10k_htt_rx_alloc(struct ath10k_htt *htt)
+> >  	htt->rx_ring.sw_rd_idx.msdu_payld = 0;
+> >  	hash_init(htt->rx_ring.skb_table);
+> >  
+> >  	skb_queue_head_init(&htt->rx_msdus_q);
+> >  	skb_queue_head_init(&htt->rx_in_ord_compl_q);
+> >  	skb_queue_head_init(&htt->tx_fetch_ind_q);
+> >  	atomic_set(&htt->num_mpdus_ready, 0);
+> >  
+> > +	skb_queue_head_init(&htt->rx_in_ord_split);
+> > +
+> >  	ath10k_dbg(ar, ATH10K_DBG_BOOT, "htt rx ring size %d fill_level %d\n",
+> >  		   htt->rx_ring.size, htt->rx_ring.fill_level);
+> >  	return 0;
+> >  
+> >  err_dma_idx:
+> >  	dma_free_coherent(htt->ar->dev,
+> >  			  ath10k_htt_get_rx_ring_size(htt),
+> >  			  vaddr_ring,
+> > @@ -3156,16 +3160,20 @@ static int ath10k_htt_rx_extract_amsdu(struct ath10k_hw_params *hw,
+> >  	struct rx_msdu_end_common *rxd_msdu_end_common;
+> >  
+> >  	if (skb_queue_empty(list))
+> >  		return -ENOBUFS;
+> >  
+> >  	if (WARN_ON(!skb_queue_empty(amsdu)))
+> >  		return -EINVAL;
+> >  
+> > +	msdu = skb_peek(list);
+> > +	rxd = HTT_RX_BUF_TO_RX_DESC(hw,
+> > +				    (void *)msdu->data - hw->rx_desc_ops->rx_desc_size);
+> 
+> Dead rxd computation before the loop — VALID, MINOR
+> 
+> Lines 3168–3170 compute rxd via skb_peek(), but the while loop at 3172
+> immediately dequeues the same SKB and unconditionally recomputes rxd at lines
+> 3175–3177. The pre-loop assignment is never read. It's dead code. The original
+> patch must have introduced this when restructuring (the pre-existing code
+> likely used rxd from before the loop). It should be removed.
 
-Hmm, No, the b4 trailers got confused after the series was reworked
-and incorrectly carried over the tag to this patch.
-Unless Wenmeng provides it, I'll remove it in the next revision once
-I've collected a bit more review feedback.
+This was removed on 20 January 2026 before v1 was submitted. It seems
+this v2 is based on applying the commits to the pre-2026 patch.
