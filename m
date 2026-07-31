@@ -1,337 +1,104 @@
-Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 370162DB780
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 05:32:32 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C651B33B96B;
+	Fri, 31 Jul 2026 05:34:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785475953; cv=none; b=cdEfqPgegZiJTmnvCobHuN1Ms+6A+jSnMsBZp7lnKE3RxTeiu57HLW++dygfhTP4XJPDN8lfgi6ABq5YEsnsbbGvLLIc86LEmW52xX9RDFqBMEp1gyuKbObJB95adiCINJlfMHQXJTOvB8B7DaPk+TI2ia19NpBc7JWJdy2CPx8=
+	t=1785476089; cv=none; b=BM7hHVrT5HMJp+VvR9pQmc3BGMNhir4IZb9xp8h5POZCqrs/SYLtJUd9JLttVlxCjH9XUU10KeWC9l9PhGSAlskSn8Ql45yesKqX/AVSUhux0pHXY2W/XYbujX2Y8ywdSRGAqiLpdSdH2SKDFHII9NuUIKj/rn0A9fU5ZfnLkYA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785475953; c=relaxed/simple;
-	bh=iOHzM2M4piEKEYzHGFGLCDrdx0S5Yz+VmEc4oRmDh04=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=t0SdWiCfoOx5leKsIciY7OnS1IbCfWVMh7H8g+lmPPW5YaoeCTJO6gzR+UIxyzplkiguT+/PFvAOS6RsWf1vgsLLQC4maBwglnBGQhYcrgcSRXvzr2+q8rrZ10NGBUMav/sRSSZWJBbR7SIBtUqbU1JwZdiaqHPxxjbw6L7+kgo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=htYN18bx; arc=none smtp.client-ip=209.85.128.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1785476089; c=relaxed/simple;
+	bh=XTNraHYMygssnhQ91rxtme9TYs0hFFn4RZ7P2Gst86A=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Wfxm8d6F8SPvnp+qVED133lUudFalJluNiHz9aLWosNAFuy1hceB0xk8O9MLdLWf3OAs9cZbexcK4B2o5556FspGkmZCxeSFmqAsEb0cpU4d/ijeyg0kbwnma3xpJme+SylbcD1/LNkIcTG/Iq4PypjMQQcae41EfctQS9Qi4qQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nk4IYXiy; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="htYN18bx"
-Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-81ee6b2da98so7809857b3.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 22:32:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785475951; x=1786080751; darn=vger.kernel.org;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=OeBALyhsov2NLs00r6InPbscizzSCCVjkUFaijF0MxY=;
-        b=htYN18bxFj2WxmLo6gWPeydYc9AwK8Y4z8/goexO0sjHfhRG5W/otfI21f9RLJuJEB
-         2ZWm55bHS2tLxawXjLszxnJ3FY7ThgFHgH/+A2Crio+9taXbU91Y3UOggcs2ycPYZs76
-         4U0pr3Wjt0iyAD//T2kDTwBLOct4Sfvf9X8Cu1g5pdNM68LGMKD1DWgf7kAw8avuYrxJ
-         FHyys6STgQRNdCIcsRx3F+ViwGVH/aMEOtSTV0N3i5e0ukrqhqPQ3d3bGAv83zXLw3EO
-         0e7TYafkrEQ0wBiiXfbSkylizqobC9ZQmBVaqRMDAM995XnOkD8WG4LTymGeEbUT78qj
-         Q6wg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785475951; x=1786080751;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=OeBALyhsov2NLs00r6InPbscizzSCCVjkUFaijF0MxY=;
-        b=UMwLtnmI+b6ZN6Td4PKx4JrLIxvpx3+qfxepkyL6HsnjFgQL8s6YRj6ssFsYwnlxwr
-         3W6vlnIR11shUBkiPJBFaZZS6QTLQkPVrXk61UtHaf5ApZhXNOPE0on9piwCSB6uoIzr
-         d1ln81+1QUJ0KoCJATKUn85v/FhfLXajYtZh+F4ag1JNQfC75w+RWA4YhvTGSzlYRspb
-         ChrL/saQxEsU1gIl7jI+PhfqvoS5fw+JppbNG2fk9mPeFIwGTLIYTOSETI+x7/qXQsHX
-         F8eEnL4+WltMcmAGGNmXgN7lQIewc2xqi10E7ex1jS3muJOvdeRfycg7g2dE5H2T94o+
-         zvww==
-X-Gm-Message-State: AOJu0Yy5ce/mYMuol9EMMzB0A9/NIN0KlJyYfa13addDkkZTmcT97Uhl
-	dlENjie90ZQap6qrhsZAJzp3IHdWt0GDALvWVxhlxGn0e6P7tP0t7vjQ
-X-Gm-Gg: AR+sD13JHlFecaZvdyFieMdmiFOl/7PxDKNUFI11QqWmqk5ZLMcAjvjMVjR1Ib8IttG
-	+rzcxVDpvgFu+KYnKga9AVKrRYBdUQqm0YVknLiHzfHPfPuMKK6PoGzfmQmqFvwVNTOIUB41Ozr
-	Li3nlvGLvT13/C1nK7E/l6xbs5iOAbTvWLg8yf/JFoc4exLnnLIf+vgGT9bqokrlpWpJExbpmDL
-	6Ij1feVsXFVGaH7OH0QopDn8b0e2jYIH38TaBlcd7EFEb7Oplwf0GkVKUpL3rYvIhrox+MLv9pr
-	zkInruODnkepg/ymKsUWjQJKv83ZLMjAw9QjWYISHC4fDxbXYw0GCtTTclC0qpYgLei1VGHjWpm
-	CPwTWQ3Hp+Yi69qxHKiC4PBHpybDB7uJCvYIP8zBAWaHRIyUNOuoNJiXb9o/C3VGXzoKEHnc7vd
-	V4Dod7im7ZwlGMEXm5bJnVCmzQuE8WFtp0bW5lNyn+07SCNQaO++yXS1zUooObSBM=
-X-Received: by 2002:a05:690c:310:b0:81e:a425:fe88 with SMTP id 00721157ae682-81fcbac3e90mr3433897b3.33.1785475951029;
-        Thu, 30 Jul 2026 22:32:31 -0700 (PDT)
-Received: from [10.138.10.6] ([185.98.168.14])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-81fcd0fd97dsm1266127b3.34.2026.07.30.22.32.29
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 30 Jul 2026 22:32:30 -0700 (PDT)
-Message-ID: <c1594714-5cc5-4370-bba3-9af886a9c8d7@gmail.com>
-Date: Fri, 31 Jul 2026 01:32:11 -0400
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nk4IYXiy"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 26CC81F000E9;
+	Fri, 31 Jul 2026 05:34:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785476088;
+	bh=X+kGKFP4B0Q+9BVZYTfIdRIGmMHCgn6SIs9Evw3RV1Q=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=nk4IYXiykYXlE48Hp6ym9KzOxQfc0H9nG51s5RXUokPSWdGVru9LBZQgCg7v1YtUI
+	 YlXO9czxwUtxyiuGMB2gH2sbAQC/5218+Y98+BWXpobH0ido5dLVYsaVxBkbA4F09t
+	 jkF/rco8kwIiuUKNyFDlAJuESVS/DC/aUqVLO43ezkAjL2sM3+RCc8/79RXwxeESjc
+	 BRWMyd1zELS9gEofbu/wRNjxov1L3fYXA36DL8KqTLc5kd62CjXutD+wHzvLJz+j40
+	 9Ncd5j7bS9kLoEunkHDadrHufpCRy2qsICffHGkEEem2J4uPiYVm1Hbeis5LymT36D
+	 /kef17IVEHeKg==
+Date: Fri, 31 Jul 2026 07:34:39 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Bjorn Helgaas <helgaas@kernel.org>
+Cc: Bjorn Helgaas <bhelgaas@google.com>, 
+	Lorenzo Pieralisi <lpieralisi@kernel.org>, Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Nirmal Patel <nirmal.patel@linux.intel.com>, 
+	Jonathan Derrick <jonathan.derrick@linux.dev>, Jeff Johnson <jjohnson@kernel.org>, linux-pci@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-wireless@vger.kernel.org, 
+	ath12k@lists.infradead.org, ath11k@lists.infradead.org, ath10k@lists.infradead.org, 
+	Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>, Qiang Yu <qiang.yu@oss.qualcomm.com>, 
+	Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>, Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Subject: Re: [PATCH v3 6/8] wifi: ath12k: Use
+ pci_{enable/disable}_link_state() APIs to enable/disable ASPM states
+Message-ID: <lmmrcv2dpuitbqmuargtsbk647z66gs6aqanzis226py2hjhys@d5h5p6ltmg4e>
+References: <20260708-pci-aspm-fix-v3-6-6bd72451746e@kernel.org>
+ <20260710202546.GA989860@bhelgaas>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] crypto: qce - Replace with stub driver
-To: Eric Biggers <ebiggers@kernel.org>, linux-crypto@vger.kernel.org,
- Herbert Xu <herbert@gondor.apana.org.au>
-Cc: linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-kernel@vger.kernel.org, Bartosz Golaszewski <brgl@kernel.org>,
- Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-References: <20260731050838.158825-1-ebiggers@kernel.org>
-Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
-Autocrypt: addr=demiobenour@gmail.com; keydata=
- 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
- +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <20260731050838.158825-1-ebiggers@kernel.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------8Y1ZwW6gByfOgAxE8eSRugEz"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260710202546.GA989860@bhelgaas>
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------8Y1ZwW6gByfOgAxE8eSRugEz
-Content-Type: multipart/mixed; boundary="------------92vHKN2OdgGoaT10ogyC5U4F";
- protected-headers="v1"; hp="clear"
-Message-ID: <c1594714-5cc5-4370-bba3-9af886a9c8d7@gmail.com>
-Date: Fri, 31 Jul 2026 01:32:11 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] crypto: qce - Replace with stub driver
-To: Eric Biggers <ebiggers@kernel.org>, linux-crypto@vger.kernel.org,
- Herbert Xu <herbert@gondor.apana.org.au>
-Cc: linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-kernel@vger.kernel.org, Bartosz Golaszewski <brgl@kernel.org>,
- Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-References: <20260731050838.158825-1-ebiggers@kernel.org>
-Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
-Autocrypt: addr=demiobenour@gmail.com; keydata=
- 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
- +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <20260731050838.158825-1-ebiggers@kernel.org>
+On Fri, Jul 10, 2026 at 03:25:46PM -0500, Bjorn Helgaas wrote:
+> On Wed, Jul 08, 2026 at 04:30:20PM +0200, Manivannan Sadhasivam wrote:
+> > From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+> > 
+> > It is not recommended to enable/disable the ASPM states on the back of the
+> > PCI core directly using the LNKCTL register. It will break the PCI core's
+> > knowledge about the device ASPM states. So use the APIs exposed by the PCI
+> > core to enable/disable ASPM states.
+> > 
+> > Tested-on: WCN7850 hw2.0 PCI WLAN.HMT.1.0.c5-00481-QCAHMTSWPL_V1.0_V2.0_SILICONZ-3
+> > 
+> > Reported-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
+> > Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+> > ---
+> >  drivers/net/wireless/ath/ath12k/Kconfig |  2 +-
+> >  drivers/net/wireless/ath/ath12k/pci.c   | 19 +++----------------
+> >  drivers/net/wireless/ath/ath12k/pci.h   |  4 +++-
+> >  3 files changed, 7 insertions(+), 18 deletions(-)
+> > 
+> > diff --git a/drivers/net/wireless/ath/ath12k/Kconfig b/drivers/net/wireless/ath/ath12k/Kconfig
+> > index 4a2b240f967a..7852ede3eaea 100644
+> > --- a/drivers/net/wireless/ath/ath12k/Kconfig
+> > +++ b/drivers/net/wireless/ath/ath12k/Kconfig
+> > @@ -1,7 +1,7 @@
+> >  # SPDX-License-Identifier: BSD-3-Clause-Clear
+> >  config ATH12K
+> >  	tristate "Qualcomm Wi-Fi 7 support (ath12k)"
+> > -	depends on MAC80211 && HAS_DMA && PCI
+> > +	depends on MAC80211 && HAS_DMA && PCI && PCIEASPM
+> 
+> As Sashiko pointed out [1], I think adding the PCIEASPM dependency is
+> an issue.  The PCI core should provide stubs or whatever is necessary
+> to make ath12k work even if PCIEASPM isn't selected.
+> 
+> I'm guessing this hardware depends on the ability to disable ASPM even
+> without PCIEASPM so we probably would need more than just empty stubs.
+> We do build aspm.c unconditionally now and we provide LTR and L1SS
+> save/restore regardless of PCIEASPM.  Maybe we need something similar
+> here.
+> 
 
---------------92vHKN2OdgGoaT10ogyC5U4F
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+This was discussed in v2 and Ath maintainer Jeff was in agreement with the
+dependency:
+https://lore.kernel.org/linux-pci/705a4fe5-658e-25ac-9e4d-6b8089abca46@linux.intel.com
 
-On 7/31/26 01:08, Eric Biggers wrote:
-> None of the algorithms the QCE driver registers with the crypto API are=
+- Mani
 
-> even close to being useful.  They're massively outperformed by the
-> CPU-based crypto (even actually using far more CPU cycles than the
-> CPU-based crypto, due to the massive driver overhead), don't provide an=
-y
-> security benefits over the CPU-based crypto, and have various other
-> issues.  They're also unrelated to the Inline Crypto Engine which works=
-
-> far better and is what is actually being used these days.
->=20
-> Due to the major performance problems people experienced when
-> accidentally using this driver, the algorithms were already demoted to
-> below the priority of ARMv8 CE in the crypto API several years ago.
-> Regardless of priority, these algorithms also aren't compatible with th=
-e
-> most common uses of in-kernel crypto; for example, they don't support
-> dm-crypt because they allocate memory, and they don't support IPsec
-> since they take a mutex which isn't compatible with softirq context.
->=20
-> It's time to move on and just drop this obsolete functionality entirely=
-=2E
->=20
-> However, the driver does serve one purpose which is to bind to the
-> devicetree node and allow the interconnects to scale down (though even
-> that part is broken, as it holds static interconnect bandwidth votes).
->=20
-> Thus, clear out the crypto functionality, leaving just a stub driver
-> that drops the interconnection bandwidth votes to zero.
->=20
-> Tested on the SM8650 HDK.
->=20
-> Signed-off-by: Eric Biggers <ebiggers@kernel.org>
-
-Some thoughts:
-
-1. Should this be put under a different subdirectory?  This
-   is now a power management driver, not a crypto driver.
-   IMO it should just fall under ARCH_QCOM, without a separate
-   Kconfig entry (or at least a "default y" one).
-
-2. Should it be re-added to the defconfigs?  Most distros
-   will want to turn it on, as it saves power and is minuscule.
-
-3. Will this the smallest driver in the whole kernel?
-> ---
->  drivers/crypto/Kconfig        | 117 +----
->  drivers/crypto/qce/Makefile   |   7 -
->  drivers/crypto/qce/aead.c     | 787 ----------------------------------=
-
->  drivers/crypto/qce/aead.h     |  56 ---
->  drivers/crypto/qce/cipher.h   |  56 ---
->  drivers/crypto/qce/common.c   | 564 ------------------------
->  drivers/crypto/qce/common.h   |  94 ----
->  drivers/crypto/qce/core.c     | 271 ------------
->  drivers/crypto/qce/core.h     |  64 ---
->  drivers/crypto/qce/dma.c      | 135 ------
->  drivers/crypto/qce/dma.h      |  47 --
->  drivers/crypto/qce/qcrypto.c  |  43 ++
->  drivers/crypto/qce/regs-v5.h  | 322 --------------
->  drivers/crypto/qce/sha.c      | 498 ---------------------
->  drivers/crypto/qce/sha.h      |  71 ---
->  drivers/crypto/qce/skcipher.c | 434 -------------------
->  16 files changed, 50 insertions(+), 3516 deletions(-)
->  delete mode 100644 drivers/crypto/qce/aead.c
->  delete mode 100644 drivers/crypto/qce/aead.h
->  delete mode 100644 drivers/crypto/qce/cipher.h
->  delete mode 100644 drivers/crypto/qce/common.c
->  delete mode 100644 drivers/crypto/qce/common.h
->  delete mode 100644 drivers/crypto/qce/core.c
->  delete mode 100644 drivers/crypto/qce/core.h
->  delete mode 100644 drivers/crypto/qce/dma.c
->  delete mode 100644 drivers/crypto/qce/dma.h
->  create mode 100644 drivers/crypto/qce/qcrypto.c
->  delete mode 100644 drivers/crypto/qce/regs-v5.h
->  delete mode 100644 drivers/crypto/qce/sha.c
->  delete mode 100644 drivers/crypto/qce/sha.h
->  delete mode 100644 drivers/crypto/qce/skcipher.c
->=20
-> diff --git a/drivers/crypto/Kconfig b/drivers/crypto/Kconfig
-> index 0189dfdcbbe1..03113ad3467c 100644
-> --- a/drivers/crypto/Kconfig
-> +++ b/drivers/crypto/Kconfig
-> @@ -527,119 +527,16 @@ source "drivers/crypto/marvell/Kconfig"
->  source "drivers/crypto/intel/Kconfig"
-> =20
->  config CRYPTO_DEV_QCE
-> -	tristate "Qualcomm crypto engine accelerator"
-> -	depends on (BROKEN && ARCH_QCOM) || COMPILE_TEST
-> +	tristate "Qualcomm crypto engine"
-> +	depends on ARCH_QCOM || COMPILE_TEST
->  	depends on HAS_IOMEM
->  	help
-> -	  This driver supports Qualcomm crypto engine accelerator
-> -	  hardware. To compile this driver as a module, choose M here. The
-> -	  module will be called qcrypto.
-> -
-> -	  This driver does not have exclusive access to the
-> -	  hardware, causing races with the secure world.  It
-> -	  is also slower than the CPU.
-> +	  This driver provides a stub for the Qualcomm crypto engine. It exis=
-ts
-> +	  only to bind to the devicetree node and allow interconnects to scal=
-e
-> +	  down, saving power. It doesn't expose any cryptographic functionali=
-ty.
-
-Should this mention why the cryptographic functionality
-available in the hardware has been proven unsuitable for use?
---=20
-Sincerely,
-Demi Marie Obenour (she/her/hers)
-
---------------92vHKN2OdgGoaT10ogyC5U4F--
-
---------------8Y1ZwW6gByfOgAxE8eSRugEz
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEopQtqVJW1aeuo9/sszaHOrMp8lMFAmpsM2gACgkQszaHOrMp
-8lMpZQ//XmVsj3tB3HhWXcYdo+MuFGqo0LEB/WLs84lQS9j/8jPpEEXLR2LBjNff
-pd8Oip7/yDaN6I5K7bSUKBHFjVZYZ1EuAP89pgQGk3zkUdTz6q7gpop65PbU1+nO
-55YRhqbDOeD3PDue2JswDg2gVljwqCjbifxHiQBTl0UsTWv2aMJ4u30Ca9ml9DCy
-0UCr2C8bjjLcY3m8NTpJSglU3biU7JOOBlw4ie/mQcmKk+LlvLjNWam/hQpDfU4Z
-xNOva6EVAQ6q5fwy/AeZ3BP0ItDaoxcjjb0pfO2VNe9Cj/JO2pXp5LzlujaD7EAi
-eBFjCFlzNKkrOvwTuaeDUf0hXS/fpr44VxURHjz5RWl5ygSjIktmCFMvA8GK1+SM
-39xoAE1VsTCG+jCRM/fou4MbtBZPLgqNGE8g6KPoItKYJqb2cMRWZOVxHge/6ex1
-FBKyITbYiuYmazv0obKDSwuJO9h+D+a2gg8hBLyliTap+/d846gQMxQ9fhDWOGhQ
-kspyE+OnneI2zQzURHpd5rxvqIMPhmwi0PLCzQYCHhwjF13wVnxsJg2qOarpzT41
-qOE+XazlsoxTJjsARymKMd3SfReNKmJYMpqSDi+5gX4LDe1CK3Dqb3JuA1lvsWzf
-e3AQeZuL/67+fbt5rYZ2hoUpnFRMXqijqH8gR4ThSVpQ2Fnjypc=
-=5vyR
------END PGP SIGNATURE-----
-
---------------8Y1ZwW6gByfOgAxE8eSRugEz--
+-- 
+மணிவண்ணன் சதாசிவம்
