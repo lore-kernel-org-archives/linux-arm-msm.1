@@ -1,200 +1,187 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6C4733F5A3
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 14:17:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11B724279EE
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 14:20:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785507455; cv=none; b=FWLl6qVPgFlJO6v7c4iTgS9v0FLfP9SvJF12ij4oa0YD448P8LURrr6Me1z0kYk/kVmT2mrOmD3YctjSThcVVuiVvfBpKiB9Z8m3SP/UgWay176GE5QcdFNaWW05YRumVpB4SyzW1AT+rWcZRdmDJXrd4oURejWz0YajVnsDgmQ=
+	t=1785507657; cv=none; b=RUicAHSbrbZ8IV1doRbGwK1/Y8GFZBNaVWTPCiw4eLirZEr7c+d6pji8P+/2TeGyWW9mCdus0imSQX15EIefyuA2P/hp2MsGBkvm3NgAjwm+SnenZPDZw683AhUoS6SxeVwYlnrnpgdvqvcG3fdmBSMYhZbv+/3+sWYdqQyI5xU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785507455; c=relaxed/simple;
-	bh=kvV24HDq2pW6zQ1KUp26qMcUcr50um0GSf7Whahrcm4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=uaBQbytkIgz/ITK9u68P0Q7GBnQSpbseyOOaMa4s9DloNuqVUxwob58/qpPmbiR7eVhjkl6v5S/aX8bgN+n/34usV+Uhoag2qlIv0x7OGucwYCuSVX3fOGcdNfMaKIc2x5NlVbIeywiujF165iH2/JaVGhCfanRMZtcNhMnGzZQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Z/wHmwzI; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=PbvfVBbZ; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1785507657; c=relaxed/simple;
+	bh=QQbrQC64DOKFrs81hP2K6iVbP4JhcL9Ejso6A8dmgtg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=te/wSR4Iwj84G3gNrrnTZ0fjnPnHOpphFiI1O5oUxV0ySfm7+5T0WPKfvxi+pip3ndjZu266Awctx0zFr+CL+OhDd+hNKfcMAUofm7bS9Sz3xtiPBkDY0F/OoV2cuJKCURUNL0tf9uTJxOCEwa629kkzKnmU/FR7EtVuZ7BLu1U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=gRcolZea; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iaYBA2X7; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Z/wHmwzI";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PbvfVBbZ"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66VBeXlK188861
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 14:17:32 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="gRcolZea";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iaYBA2X7"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66VC9wBW4154445
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 14:20:55 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=s5AJxZBwX5mdbJEKMHHuL+U3
-	UVoTEIUr3b1RqdyL5Jc=; b=Z/wHmwzI0J/xGBX+2HmqQYRDu8BhHnn6cHf3Muw8
-	0qTMsBv6bmscd7wjWtqoT9EpHTOUKPXI6lQ33V91h5tWxx0KOtz1VJRKQv4SGpo/
-	eFpipcorY5wFkEy1VYvd24qzSYptHENOMsIydOd1WvHOeQwlWxp4wNUX1rFLz9zH
-	9Ft/cu2YNufKb+1LljqtP463Z0K129st+JU7r4g8jQ1yJ65qWCIV4sSrvN1nOuLc
-	D4WPztdj/VOKLuQd1WoQF8HBQK7/GoROobDkI41xPAA+U193OC9zulnowAHefoY0
-	9WeEihGYFjHTgFxmkHLR90ug4g8RkHILezaF7VW+MMQbeg==
-Received: from mail-vs1-f69.google.com (mail-vs1-f69.google.com [209.85.217.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fru1u0mte-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	FjpPkOD7u5iityBLQ910RqkrcCltlUnYQsWx6dR7ODA=; b=gRcolZeaIYazIXsq
+	TCw97cGNBVdYWyJbPFliK0KBnPmUt2eILaOnkA1CadKuCGqtMBD+GboVYzm/15ke
+	dTglQeRB88EgdudWx9bwwnXFJg/g6zx/TUcFx9177KhVBd4AtrV+Rj0mBaDQ9piM
+	ugJj2zpzhame7/0u01kT2dw9gkgDt57BhltwUBkHO3qmEQtL5GmQ8SE+ey9KmxyJ
+	kjGBL7PxZVMBoSv9XDtcybLXfj1tT45UiXy/vvWN9AFjGjxXXV/zwlqUB73Eq8fR
+	YV0j5uegJiWLLp8mrLjnkHzBNlp7nKmsk3UKrMIXjp6ggsjYtcmDL2Pkl+i7ZQpI
+	4+jvkA==
+Received: from mail-vs1-f71.google.com (mail-vs1-f71.google.com [209.85.217.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4frufkgjb1-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 14:17:32 +0000 (GMT)
-Received: by mail-vs1-f69.google.com with SMTP id ada2fe7eead31-73850dfc198so161726137.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 07:17:32 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 14:20:55 +0000 (GMT)
+Received: by mail-vs1-f71.google.com with SMTP id ada2fe7eead31-737ddaf8c57so35605137.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 07:20:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785507451; x=1786112251; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=s5AJxZBwX5mdbJEKMHHuL+U3UVoTEIUr3b1RqdyL5Jc=;
-        b=PbvfVBbZPbSqITXVghe9PrC5u+3vVYa7lIonycMeVvzFBXbKvwk2YFc7cxSpJrKMiK
-         FG5rvyfiWXrMtMw2G37hpgFQFaupq2dOBqixgueFRrnPPJRUq0zunQPDmL7nf++ZvbDK
-         knnxs0z9eWMfUYIGWx2Jn3onI+jjjnimYm/lrNJdfU5zcHXclL+cxlBglOC4WzME0iBq
-         A4HsaLYWZCKFheEC+tPMNGdE3tbedWhciUVWFMFP70uHUXcZO72REaX4U0X2mz9o3spy
-         00E3okE9MFZzhc8Qoa/LUSUUqLeClZj/s01603Y0PiNrJFAUToJ0ApYznJp6hpwZgVD9
-         uMCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785507451; x=1786112251;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1785507654; x=1786112454; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=s5AJxZBwX5mdbJEKMHHuL+U3UVoTEIUr3b1RqdyL5Jc=;
-        b=W5dRlWQtVOL9kYO2/4lu5YfOuvyJDVsPrp04UCbz1MgqYzV4oAIacUokn5PTD1bic2
-         M7u2shuJu6LB4c7j4cqXCS5H19jTbsJlxtGXEusbb5taitni9KyGPtTIPmGssOpDzyu5
-         0LISYgWoBhTlItyuuPVg3gvsn7IwTx+a8VnxXTmFviq1iTsgiBTc3L1hKTJ16xl0Rmxh
-         Dlu7Ot/xu/rIrALSrtXIRQBq/C0GdpnxbrhdPUSpcrub09KAYB/cwvm8PY/hxKlPFVTC
-         DkZ/scZtksg/ao9Rml18LxVUGECC4mwS4VBixij434eY1ai80dD3otQkmbTEnReoFbP8
-         0yFg==
-X-Forwarded-Encrypted: i=1; AHgh+RrVCouAkZB0w1o3Opd2ruNdNOFDN8NnfK42qWdsDkcypGMqGBihaWRE4SwIGHY9YwAc8qVUv8ThFboJjyCM@vger.kernel.org
-X-Gm-Message-State: AOJu0YzpdNqQLmlFb9tlzHhAMOAy2ieTk3pT7XPvi1xAZ1qupQR8u8bo
-	H6VRrJ+XBHei7a7JMECbLA44Mug+PWczyhW2A2mWcIFLv1jrZAG1sQLRTm9KzV2eOqK7lqhwiUQ
-	/hDdqoJe045NP2TJUkd2gOtgvblDUcwChlFxQk0yEOkFhyLeE/j9i0EbYB45+OwH7RNZS
-X-Gm-Gg: AR+sD126fB640im02OWGVe5NacTzNHHa/p6NQM+wC6iS/u5NTxQV1GzP2tOfRsv76f/
-	JIkM0faJXi/cGjRbU2Vy1jp+CPrcb2Oi4LJnVXC8E35aBG0ta/clQX83DiBiK5LRKTxGS78bDfP
-	4pvlknd5sxebR4WiK/hr/6StMhQtYIvX+ABGAcThK3pQ9xa4E0IUa6mcY0vOpG3FNP0cCG87A2F
-	v6h3jGSUGKUi+UEodFuig+nLkXDFw2k2v7cxfkUKMXn9RJ3pju/RFwOrtSxXIfsn2pn7doUFx4w
-	bFgkPJm6STAmTxFcli29Nf4jlrByhyzg+Ai5wbFvjwwzlTq31GUQhBENdomb4Pm/8b0V+ZtAKzA
-	Hfh+v+FmsJm2wyXyYZ73Kn+KdJn0J+PBD8+jEZWKLq5CcgIH75DYa4a+m82/ZbOnGRaB2ndX5pb
-	rq6dlckn0qEj5okQ==
-X-Received: by 2002:a05:6102:549e:b0:6c3:1bcd:31dd with SMTP id ada2fe7eead31-75b2226aa3cmr244633137.6.1785507451123;
-        Fri, 31 Jul 2026 07:17:31 -0700 (PDT)
-X-Received: by 2002:a05:6102:549e:b0:6c3:1bcd:31dd with SMTP id ada2fe7eead31-75b2226aa3cmr244598137.6.1785507450531;
-        Fri, 31 Jul 2026 07:17:30 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2e23c46ebsm329552e87.10.2026.07.31.07.17.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 Jul 2026 07:17:29 -0700 (PDT)
-Date: Fri, 31 Jul 2026 17:17:27 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Jianping Li <jianping.li@oss.qualcomm.com>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-        Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        quic_chennak@quicinc.com, stable@kernel.org
-Subject: Re: [PATCH v11] misc: fastrpc: Allocate entire reserved memory for
- Audio PD in probe
-Message-ID: <ba6v23dn6mmhnowqigsojbnjnuhzr7hwmoe3treklr2zpbnfxt@vgvdxiarcb3k>
-References: <20260731093210.473-1-jianping.li@oss.qualcomm.com>
+        bh=FjpPkOD7u5iityBLQ910RqkrcCltlUnYQsWx6dR7ODA=;
+        b=iaYBA2X7Z9mX2fbIQpBttWq/y/xGUKRJpY2Gr3Imy0oaqTk0ak6VBKd7LwpmLCb2lc
+         Z7y4lqXmb/59CVWyNDv78DZZQAxjzdalGTlxl3XPIzjSa4/Q0nb5Na9SksyRMKsA9h2o
+         FDcTf/JZ42aoDGJkEJLlnWSEatTZ1DlvlDdpJvVNV2mwVKXPPkbl8zK/hGZpUZSyv8Yj
+         bD70SiJbCGegz2HhrYblwuFAKyy0WZxRJE2OBW9uVZZHbCGxJLF2dgEkfFoGlV9E9IbB
+         Bo1FR7ou6vPlwxGtmeR5qTuZI2p6Dt7COUS9OyEtNygzuXiHQ2w70rNAbDwMyfsZBmPm
+         joDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785507654; x=1786112454;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=FjpPkOD7u5iityBLQ910RqkrcCltlUnYQsWx6dR7ODA=;
+        b=GS2bjADsnAzmKhpGNk7iyBycHGqKWzvlKiGjeLvza16X6QTUWTG6Sx3eQzHazwdeYO
+         pwxMaO0AOPzOhNWTO2veuWg1w0ujl8YilAGNnwX+pAU/wwAtNE+PliiYK0qfhiMZocms
+         7PczXm5EQT8OA6i77rJdQD/ZKI67+0uPXTvjZQ5U7IXavgjMmvpv1zbrXMONGx360tq+
+         8f7nsL3yo7VP8z4YhDFCIcxDtFkIXCqsp6q2s0rS8gMlIo/75LqRv+NsZ5UXlJE3/jXc
+         20Tl2FlGUaDlOnCzWbF68j7D79zYn6sUoj0VHzEv6/+WsZE9ftNxVAVTkAGLSgBGibhr
+         yLoQ==
+X-Forwarded-Encrypted: i=1; AHgh+RoYWc3+XiGBskmjHLAEH9TNnm7vvBBIEUclGPZX+uO/QGUxgPID3kvJflZUREQAuZAbccepdfVbKdLLsBQm@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy7FWuIBPUVpAtXn6Yi19Cdt7HQtAD8nHuLBLjdTXnfUmtLtzUm
+	dtPH7FY3RchQUbbGsIBRiaTIaW6A52wlxNLR0sKjVHdKGS7iX9dmoaqNBgT7paIZSF0fHyrsIsi
+	36UKy+GTz6ukJdYcEdBM+XFDl3iCDNYoUYWk06bI/0FhtgO1AbHcmCWApw1V7s8JzVifS
+X-Gm-Gg: AR+sD10a8tdoDb2/0OCLjZZREV5PDOWADTpweRsJAhDBEuWJCjswiuiRLyD7cNf9r+s
+	s7Fwhmnw/MtzYubpurzBsHa84dnwhAa4qkyImowc8LgC2PdN+WxbZT9evw8yxSOLSKmG1LrcMsy
+	Jb1W8691uHgJ+Yj6oIqTEtwRrcofDe+frb39xl/HOJCSZAZAVZhNzgOaYQoQaGQy2VRqwOlFhMV
+	tS65eX+L/TGaaORafexV6PGueCKMu2uXxesmtY0nkhTMjR19uvVCMiqpWlH3yqo3jhkcwdRsOHs
+	KztQ3DJAs4tJE/BL0sa9rsOTEnPek67ExUs5P1gJA46RaRJ/qt4LoGcT5Wp1E1lZubiYZIuILzr
+	M4awgkE4EpkzfNl4qSAR4PrBq
+X-Received: by 2002:a05:6102:5249:b0:745:17b0:10cc with SMTP id ada2fe7eead31-75b2498305bmr147234137.4.1785507654214;
+        Fri, 31 Jul 2026 07:20:54 -0700 (PDT)
+X-Received: by 2002:a05:6102:5249:b0:745:17b0:10cc with SMTP id ada2fe7eead31-75b2498305bmr147200137.4.1785507653674;
+        Fri, 31 Jul 2026 07:20:53 -0700 (PDT)
+Received: from [192.168.120.193] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a09c6615a1sm1609212a12.27.2026.07.31.07.20.51
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 31 Jul 2026 07:20:52 -0700 (PDT)
+Message-ID: <7a0c4a70-b838-4c7c-9f16-d394ffef95ba@oss.qualcomm.com>
+Date: Fri, 31 Jul 2026 16:20:50 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260731093210.473-1-jianping.li@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=H5vrBeYi c=1 sm=1 tr=0 ts=6a6cae7c cx=c_pps
- a=5HAIKLe1ejAbszaTRHs9Ug==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=NXPZQVn-1uHl1nTrLQEA:9 a=CjuIK1q_8ugA:10
- a=gYDTvv6II1OnSo0itH1n:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDEwOSBTYWx0ZWRfX9fz5bPVmHjiy
- 9h5DuvaplFYPAm0ttozIxAwmJCQA0TlInhNNS+w2m/xra2LRlSA7keWMAFf7rzlHM32wrbD68Ia
- htCMDsy2rRQsGxbYQlaVexyD9CXQLCy9R7aUjYkVWZw6xNLx9u3dMOs6qEVYsfIFbpX7hzC25fj
- jdB/znTV7NoOADPX2Dp6hrLOTZ1zCMKDMBrMcjBdGg0XpEwZkZXk7RYb7C/OdjxuX6ofw1/vj5G
- sBrdibw6Djrw45U3ynyUrHjlT3FKdVkdFSB3QJbHH186xIaJhGG/kQt4tEPg0PoetDOIVnkljLY
- wzjISCwh/bMjc1jctc10zNQ0zMHCPuzRs6b/1QrGgT5JuZwwMnk4z8qak+KPlupSdBBOg/CXnt9
- nmYE6ouAm+RCgtWK3KVhtiaBq3eGV32gRa8NbmN7W5bmKLoC89WDQ0KbYVDzT2IDWR3Uol0E1kr
- R6jwN/99aB7BjS1RbOQ==
-X-Proofpoint-GUID: zBpJbXUNfVH_ojua7B8XqQRGCkTXDgPz
-X-Proofpoint-ORIG-GUID: zBpJbXUNfVH_ojua7B8XqQRGCkTXDgPz
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDEwOSBTYWx0ZWRfX3ljU5Tx/xqlI
- +frMKHaWCX6huw48jiVNReqFc0Zs/dd+YUuw/gJoRHwg+ACvkVfKzUM6eunYD79Ei2B6ESV5PGr
- Z/l/kRMJT1CISoanFhoUOqE6TNtUg6s=
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] leds: rgb: leds-qcom-lpg: Add PWM frequency mode support
+To: Fenglin Wu <fenglin.wu@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
+        Lee Jones <lee@kernel.org>, Pavel Machek <pavel@kernel.org>
+Cc: David Collins <david.collins@oss.qualcomm.com>,
+        Subbaraman Narayanamurthy <subbaraman.narayanamurthy@oss.qualcomm.com>,
+        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+        linux-leds@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260729-lpg-pwm-fm-support-v1-1-16d3c72a9921@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260729-lpg-pwm-fm-support-v1-1-16d3c72a9921@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDEwOSBTYWx0ZWRfX/7nEGXPiJu1o
+ 08C4ZFANKZ4ACcyAwQEA6DfNFAvJIVPUbTQMy2wUVNSYsJCL62eZKQHt/kxfEl+uwXnvpvnceJC
+ P5CRlaz9/14/6sde2bJt+JcF7GXVRis=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDEwOSBTYWx0ZWRfX4TFr2Ogyl5Bi
+ JkvJ7tlsnoFeUgghsPs4udB48prsZOYXij/cbZp2uQ6ARb1FwhAQro/ZyCYVJkdlVp7TGLsI+X7
+ 5gOOyzeeAdBW/ENrVpDiUUr7T9416xBt2D0QxyO3FOphWWklPqfoo7f3zyQWaEhY+L7fpQv4Lhn
+ 2MjiJbx2w6GgIvLobUyFNS2REPgdYCPJR0wj+WOBgc1ApSmA3Nstwe/+3NWj5/aeidVVrZAgt1U
+ RhBejHjtnZsA2RJEQbGODnZbn3Q6x9W+acdr8XhhFFZY0Paf+XYLnXGNeGAnz5ZZwElUp4cSmu6
+ qrL0y7no7OuBu9TGwGdWXVWFn6nS+SiHzQwEyDZfi9oPHF4uBMwziGOYgjQv5i/+eE6xu6YZ4xz
+ 71Xjpk3uNYq6A7V97z2pV2hAKwOk9tXgIZ+tIhkTkK+v4QJw6hJhgOm9i3qRABe1sc3AHaQpVlI
+ YO2qA5BXivPibZuzTkw==
+X-Proofpoint-GUID: 9rfxGxabdtvyuGl4thsKorXuLld_ALan
+X-Authority-Analysis: v=2.4 cv=BpOtB4X5 c=1 sm=1 tr=0 ts=6a6caf47 cx=c_pps
+ a=P2rfLEam3zuxRRdjJWA2cw==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=AUv8OMIDIaVCD8xAqLQA:9 a=QEXdDO2ut3YA:10
+ a=ODZdjJIeia2B_SHc_B0f:22
+X-Proofpoint-ORIG-GUID: 9rfxGxabdtvyuGl4thsKorXuLld_ALan
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-31_04,2026-07-30_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 impostorscore=0 malwarescore=0 phishscore=0
- adultscore=0 bulkscore=0 spamscore=0 priorityscore=1501 lowpriorityscore=0
+ malwarescore=0 clxscore=1015 bulkscore=0 spamscore=0 lowpriorityscore=0
+ impostorscore=0 phishscore=0 adultscore=0 priorityscore=1501 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607310109
 
-On Fri, Jul 31, 2026 at 05:32:10PM +0800, Jianping Li wrote:
-> Allocating and freeing Audio PD memory from userspace is unsafe because
-> the kernel cannot reliably determine when the DSP has finished using the
-> memory. Userspace may free buffers while they are still in use by the DSP,
-> and remote free requests cannot be safely trusted.
+On 7/29/26 11:48 AM, Fenglin Wu wrote:
+> Certain PWM channels on a PMIC (e.g. PM8350C PWM4) support a Frequency
+> Mode (FM) that can generate waveforms with more frequency points than
+> the standard LPG PWM mode. The trade-off is that the duty cycle can
+> only be fixed at 50%. Add the FM support. When the PWM channel is
+> requested to set a duty cycle to exactly 50%, use FM mode by default
+> as it provides a finer-grained frequency resolution in that case.
 > 
-> Additionally, the current implementation allows userspace to repeatedly
-> grow the Audio PD heap, but does not support shrinking it. This can lead
-> to unbounded memory usage over time, effectively causing a memory leak.
-> 
-> Fix this by allocating the entire Audio PD reserved-memory region during
-> rpmsg probe and tying its lifetime to the rpmsg channel. This removes
-> userspace-controlled alloc/free and ensures that memory is reclaimed only
-> when the DSP process is torn down.
-> 
-> Validate the presence of the Audio PD reserved-memory region during
+> Signed-off-by: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+> ---
 
-This will break compatibility with existing DTs, which is a no-go.
-Existing DTs _must_ continue to work.
+[...]
 
-> rpmsg probe and fail early if it is missing, so that a misconfigured
-> device tree is caught at probe time instead of at process creation.
-> 
-> Fixes: 0871561055e66 ("misc: fastrpc: Add support for audiopd")
-> Cc: stable@kernel.org
-> Signed-off-by: Jianping Li <jianping.li@oss.qualcomm.com>
-> 
-> Patch [v10]: https://lore.kernel.org/all/20260716095847.479-1-jianping.li@oss.qualcomm.com/
-
-All of this should go under the --- line.
-
-> 
-> @@ -2584,12 +2547,22 @@ static int fastrpc_rpmsg_probe(struct rpmsg_device *rpdev)
->  		}
->  	}
->  
-> -	if (domain_id == SDSP_DOMAIN_ID) {
-> +	if (domain_id == SDSP_DOMAIN_ID || domain_id == ADSP_DOMAIN_ID) {
->  		struct resource res;
->  		u64 src_perms;
->  
->  		err = of_reserved_mem_region_to_resource(rdev->of_node, 0, &res);
+> +	for (clk = 1; clk < clk_len; clk++) {
+> +		last_err = U64_MAX;
 > +
-> +		if (err && domain_id == ADSP_DOMAIN_ID) {
-> +			dev_err(rdev, "missing mandatory remote heap memory-region\n");
-> +			goto err_free_data;
-> +		}
-
-This is what I mean. This has been working beforehand. It must continue
-to work.
-
+> +		for (exp = 0; exp <= LPG_MAX_M; exp++) {
+> +			/* Calculate pwm_value_lsb for this (clk, exp) pair */
+> +			lsb_tmp = period_ns;
+> +			lsb_tmp = div64_u64(lsb_tmp, clk_period_arr[clk]);
+> +			lsb_tmp >>= (exp + 1);
 > +
->  		if (!err) {
-> +			if (domain_id == ADSP_DOMAIN_ID) {
-> +				data->remote_heap_addr = res.start;
-> +				data->remote_heap_size = resource_size(&res);
-> +			}
+> +			if (lsb_tmp == 0 || lsb_tmp - 1 > U8_MAX)
+> +				continue;
+> +
+> +			lsb = lsb_tmp - 1;
+> +
+> +			period_actual = (u64)(lsb + 1);
 
-Too much of the spaghetty code. Can we replace all domain checks with
-the functions?
+Did you mean `(u64)(lsb) + 1` here?
 
->  			src_perms = BIT(QCOM_SCM_VMID_HLOS);
->  
->  			err = qcom_scm_assign_mem(res.start, resource_size(&res), &src_perms,
+[...]
 
--- 
-With best wishes
-Dmitry
+> +	/* Calculate actual period for reference */
+> +	period_actual = (u64)(best_lsb + 1);
+
+And here too?
+
+In general, I think there's nothing that prevents you from
+turning all of these variables into u64s
+
+[...]
+
+
+>  		regmap_read(lpg->map, chan->base + LPG_SUBTYPE_REG, &chan->subtype);
+> +		if (data->channels[i].fm_capable) {
+> +			ret = regmap_read(lpg->map, chan->base + PWM_STATUS1_REG, &status);
+> +			if (ret < 0)
+> +				return ret;
+> +
+> +			chan->fm_capable = !!(status & PWM_FM_PRESENT);
+
+Can we read this register blindly by chance and drop the match data?
+
+Konrad
