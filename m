@@ -1,139 +1,172 @@
-Received: from mx1.white.stw.pengutronix.de (mx1.white.stw.pengutronix.de [185.203.200.13])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DD721F099C;
-	Fri, 31 Jul 2026 05:27:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.203.200.13
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1ADB634DB7B
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 05:27:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785475643; cv=none; b=BQrUE5Lr3cBgUVGmMx4MzlEhMVcCAY6sLkEdkKKPpy2TF2Tw7QCgYcrKwNkQBt9or3PmXIql47Nmgz8VsNVPO1RjFBniYUb1j9XP9ZawAwi0DKMB9MXRArOIIC95ihOoChak7ZZ259U6l863KVAtGFLI+C9ZqxscCdugFU00vVI=
+	t=1785475651; cv=none; b=okkjyv9RQV+H0qCX2qVI/38EhIPVhS6EUwHMtQcSMgzXI/sIuOUATS5H6nb1h2SNn64l1P8d8bskiw9hjDuiOQiWRJyZlHWeCmwc3GiZVdiQzeofkZxF7AiEdSKXw+/XujQZQQNTpzChmSDrFdNsdCHzQmbQK221PB8E9N35K7c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785475643; c=relaxed/simple;
-	bh=Taq9Emffc0JgQctjUF0f/fjJSkYr1mCfvGtn95VqwtY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ovkM0ze9hu3sZWdyGdOgvzyNr0Xn5IuY6sDqSVqIiPe0WcpY4/2VLEjMJaSYmV31KWHIIFMKlcN1VKzYwGeAUtlsgkA83ttrB9HU9IjhlM5KFujWadLq5aaF/KOgvLmCzqbxROwkHmveRIBxvAvs0Dub7CK5W8EFrzml0CJdxRM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de; spf=pass smtp.mailfrom=pengutronix.de; arc=none smtp.client-ip=185.203.200.13
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
-Received: from drehscheibe.grey.stw.pengutronix.de (drehscheibe.grey.stw.pengutronix.de [IPv6:2a0a:edc0:0:c01:1d::a2])
-	(Authenticated sender: relay-from-drehscheibe.grey.stw.pengutronix.de)
-	by mx1.white.stw.pengutronix.de (Postfix) with ESMTPSA id B238C2021B4;
-	Fri, 31 Jul 2026 07:27:14 +0200 (CEST)
-Received: from pty.whiteo.stw.pengutronix.de ([2a0a:edc0:2:b01:1d::c5])
-	by drehscheibe.grey.stw.pengutronix.de with esmtps  (TLS1.3) tls TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-	(Exim 4.96)
-	(envelope-from <ore@pengutronix.de>)
-	id 1wpfm6-0029vM-23;
-	Fri, 31 Jul 2026 07:27:14 +0200
-Received: from ore by pty.whiteo.stw.pengutronix.de with local (Exim 4.98.2)
-	(envelope-from <ore@pengutronix.de>)
-	id 1wpfm6-0000000HXxW-1z7w;
-	Fri, 31 Jul 2026 07:27:14 +0200
-Date: Fri, 31 Jul 2026 07:27:14 +0200
-From: Oleksij Rempel <o.rempel@pengutronix.de>
-To: Guenter Roeck <linux@roeck-us.net>
-Cc: Matti Vaittinen <mazziesaccount@gmail.com>,
-	Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
-	Sebastian Reichel <sre@kernel.org>,
-	Wim Van Sebroeck <wim@linux-watchdog.org>,
-	Benson Leung <bleung@chromium.org>,
-	Tzung-Bi Shih <tzungbi@kernel.org>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-watchdog@vger.kernel.org, linux-arm-msm@vger.org,
-	kernel@pengutronix.de, Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-	=?utf-8?B?U8O4cmVu?= Andersen <san@skov.dk>,
-	Guenter Roeck <groeck@chromium.org>,
-	Ahmad Fatoum <a.fatoum@pengutronix.de>,
-	Andrew Morton <akpm@linux-foundation.org>,
-	avaneesh.dwivedi@oss.qualcomm.com,
-	Umang Chheda <umang.chheda@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v2 2/3] power: reset: pscrr: add watchdog pretimeout
- reason tracking
-Message-ID: <amwyMsvA9Q3_1aw1@pengutronix.de>
-References: <20260722-pscrr-reboot-reason-v2-0-495ba3005953@oss.qualcomm.com>
- <20260722-pscrr-reboot-reason-v2-2-495ba3005953@oss.qualcomm.com>
- <98e65507-3084-4948-8096-4e2d8d20dc81@gmail.com>
- <amrgDC0s3rb5Xv4N@pengutronix.de>
- <19a2b8bd-09ea-4df9-b0ba-f78f60c44848@roeck-us.net>
+	s=arc-20240116; t=1785475651; c=relaxed/simple;
+	bh=wMJ3xQGJXV7bZq82amQNntL3Rd4I7Rp3ZWh+Mll8cuM=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=dtilffmFXnlDB6455wDybJ71mU4bCcFxM8gcI0WRCxfdWmw2FwJFnl8NTk7ix2Wl5cQGyVsTfOMGlmmLV0ZpCKX+xty+NMEC74coZY8i03xXvyzyG3W/4YwN8kuhcIWqLLG0qrLSFcLuMvSJZjkmblop/ss2WBlpI8CnmXYqWS8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=moVu9eI3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OQuM+BQ3; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="moVu9eI3";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OQuM+BQ3"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66V4uhmj2485590
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 05:27:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	+lqVX/RPwnow+8A1vtIvSpCnxQwfN3TRAdDLdw44pbw=; b=moVu9eI3VlVszSVD
+	k4eykvEMHkNnGj77hMBLokwFrErP4X6MsVRq9TzlMCEmsIpp3yirgiiz3pmNoKg/
+	ondc1ADCtFj7df5uJKtZN08GfU4Yx1/ZPHQJZKmb1nh0f7FINCXZ51knMJN0RAnt
+	j8Qee+Y3erIebr+PzLpIheIfDfIhrHbHMXuSIcqvEKNYy30PnCphau6jnLVSBVrl
+	qt+I53ZbR11S5AF22ScHHyY8BDmirjYBBIJXx5HtQRp9shXW+B95jZNo/XngE2OQ
+	NKzCSY8W83xJDMlhRlqo0X6kGCAv5dEC4qk3ltB82Das5AwcSOPZWknIxjFwR5Cz
+	wVTOMg==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4frmr905rf-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 05:27:29 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-c89704da8c7so862517a12.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 22:27:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785475649; x=1786080449; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=+lqVX/RPwnow+8A1vtIvSpCnxQwfN3TRAdDLdw44pbw=;
+        b=OQuM+BQ3o11gFc/XCAsBl5dpeI7gWUN6NFZ1p7LVERzqyg0URfY//7EakRIcXollWp
+         Fy6ge2DkDyXOuAKnmJaojMmAJkn2u909fM27y5o5+mX24MGwfwLLielR3lPHbvQw5YuK
+         +8UoV+wtIwEchPb4Fk8zrSadM3DAUt8piG05NMGlWSbm1fkcogsHadEuiXfXZSHvezIj
+         /yIovR0cGWZmO8zx8i5gJsWSTPAnmt4QxsyRNJP/eqk2IquenzhK/PcEZxuJCqAsEWSR
+         e3QSfd49XlS12OAWcXdDOtYPjv3P7/1uVWWOKr+UiKQ/sHE7jSYAi9+osHk4wtV0Isi3
+         SSOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785475649; x=1786080449;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=+lqVX/RPwnow+8A1vtIvSpCnxQwfN3TRAdDLdw44pbw=;
+        b=aX1rUOzBpkcJYz0Q3JOslp0HoqnNrU71ycR1QrOI80UC736JDjLvoWMLLwdoIuuCU8
+         JBQV5DfuGVsGdK7DpSRHxXipWB1VHrDfG6s4L3e2EA8iMxIdVojMwnFY10x3ot+/wYZf
+         LirwINSlhFZrSYBptH0+42LBk+8jmf7SvhZfXgimj3PQFcuSkP2sEQnF7/3m1x4zZo3B
+         aQh4mpa9cMNINPbagkupAsrNvtdPPW8JESKdWl3ozZHHU5R0fiIyNOCTyToZG7rDsjX6
+         q3pkC/ERAG76Wx2GoHxwhoQrvAykj0H7QgCi3PLuMioePYfTmc6SJ5PXT4hozbqOUUXg
+         Z3vQ==
+X-Forwarded-Encrypted: i=1; AHgh+Ro5ZKMsg1Fl68sRnSiFnH0TlFScRmO05j2Cjr1NfokY7XZpTCvcOMmGgA1OkTBaBO69ERiZeiXtl9LYOdFB@vger.kernel.org
+X-Gm-Message-State: AOJu0YxOdukcYABPvX6sD8osZS6jwIGvZdfR99+gq1CsFg9OvsyzsvaG
+	X03wAapcOokcGyMdParleA8skdOIzV4vaU28MZu2cTuZM2gPRptTIN2txh8jASnXw7w3Nb1iumM
+	ybLfLrk2NOeQON+lfxUwOMTElWd+tqa8c7oo9TAQzfVqNogi4g5lJgzl0BBGdsxwRNEDC
+X-Gm-Gg: AR+sD13KkO4rWIWVK61b+exRXtm6CdMvKkH6PRvkBQ/BM1zPi8NDqYxQxmQiS3LwOZI
+	X/yEaIc0Tiq8m6zEajS7p61BL04UUYA1MhCgYq9crhmRCUgkZdqyZYLeZm8A1qM5bMZsUDk6Mkj
+	Cn26X9KxOtdwnqqLuASSAaxritqByPWpor/HHKYW93YfDgV3Kf12pEpDmYcCH5gWaq9DNTk/vnF
+	mokg7vbi6PwntC1JdI2pT+A8lYW30UJpW8PM/acHyFmvClRPLVkZiqEwf7dN4wfKAJLBjObDkwN
+	VRLs9zR0TDR75VE7rPLdT/X+6AxKsJWZ+vEuIGQnpmz/0Kx+5MJT6t9qyZJ0Uabw9jhYjjOrma0
+	hiZWJMOKKt9HRl/gu94BA5EfRvSo0yCqPjg==
+X-Received: by 2002:a05:6a21:180a:b0:3c3:c07b:5322 with SMTP id adf61e73a8af0-3c91b1f7b7emr521457637.34.1785475648631;
+        Thu, 30 Jul 2026 22:27:28 -0700 (PDT)
+X-Received: by 2002:a05:6a21:180a:b0:3c3:c07b:5322 with SMTP id adf61e73a8af0-3c91b1f7b7emr521436637.34.1785475648179;
+        Thu, 30 Jul 2026 22:27:28 -0700 (PDT)
+Received: from [192.168.0.172] ([49.205.255.44])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd4e5c7sm1424781eec.5.2026.07.30.22.27.22
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 30 Jul 2026 22:27:27 -0700 (PDT)
+Message-ID: <5d8c7e51-1969-4b48-affc-94007d0f3295@oss.qualcomm.com>
+Date: Fri, 31 Jul 2026 10:57:20 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <19a2b8bd-09ea-4df9-b0ba-f78f60c44848@roeck-us.net>
-X-Sent-From: Pengutronix Hildesheim
-X-URL: http://www.pengutronix.de/
-X-Accept-Language: de,en
-X-Accept-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 00/19] media: iris: Add AR50LT core support and enable
+ Agatti platform
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+References: <20260731-iris-ar50lt-v9-0-d71a782001c0@oss.qualcomm.com>
+Content-Language: en-US
+From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+In-Reply-To: <20260731-iris-ar50lt-v9-0-d71a782001c0@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: 1OmReZvaYMYXMg033rJZZitSwmQEOlnw
+X-Authority-Analysis: v=2.4 cv=FMsrAeos c=1 sm=1 tr=0 ts=6a6c3241 cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=azT4Vr2vIDLY4WjjlbZISw==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=VwQbUJbxAAAA:8 a=9Z6RCAdTk4ZiZ6hpEs8A:9 a=QEXdDO2ut3YA:10
+ a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDAzNCBTYWx0ZWRfXwNtCsgkxX1nV
+ /Sg9M8zEQTJ+bBuP+zdOrnaXt31ApWtHthAQzL+AnIjOS55+YDD+N04a+zPAwpgZpibeMA5tWNy
+ bd3qWOKjhtLpVRBI99Gr27EjTIUQ1DdMacNSiyLB015QDDHggGBuydpGjnvPBi93V2TPu7Qjk8f
+ 6UXHsNc76MmVBVrZ0VGe0yZK6pHTI8sAMFXkhQDv/kUKlL9Gb9zE5Ifad07bTEvMRoYQ2aSx/B5
+ +uX3r+lzL2TC+zw05ZygBFmhIjndRKgA5uQzLV+2vuf9def35yTvzdSsgwlLJtPv0KY6bqm75cf
+ /s0eOQsBmInHG+znuwd5OlYJ/qgzRNP2dUXigs8aLu6n8zQkL3t1qsXxZ72jJ14bGtPnwamTkrM
+ 3NPv89VrRmR0lH8UZWjhIRMWCIBWhv6SJuGIBvervPRDFyNUPMwtLuwhla3ckW/zgjlf6BwBedj
+ pAcdT5gaTqFrdcqf0eA==
+X-Proofpoint-ORIG-GUID: 1OmReZvaYMYXMg033rJZZitSwmQEOlnw
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDAzNCBTYWx0ZWRfXwsLblRz1jwbT
+ xewZ80Lu6sXYwq2D8dqBEHetQ8mQE2xGumEhlMaQjWF3dlyENBXCzmg5NR3kW9DWSjhtbiailuQ
+ ZFl2IoNqggQEDIfjRSNj24/7ZS10hBY=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-31_02,2026-07-30_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 adultscore=0 lowpriorityscore=0 malwarescore=0 suspectscore=0
+ phishscore=0 priorityscore=1501 clxscore=1015 bulkscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607310034
 
-On Thu, Jul 30, 2026 at 08:02:35AM -0700, Guenter Roeck wrote:
-> On 7/29/26 22:24, Oleksij Rempel wrote:
-> > Hi Matti,
-> > 
-> > On Thu, Jul 30, 2026 at 07:49:41AM +0300, Matti Vaittinen wrote:
-> > > On 22/07/2026 18:13, Faruque Ansari wrote:
-> > > > Watchdog pretimeout resets are not recorded with a dedicated reset
-> > > > reason, causing subsequent boots to report PSCR_UNKNOWN and making it
-> > > > difficult to distinguish them from other unexpected resets.
-> > > > 
-> > > > Add PSCR_WATCHDOG_PRETIMEOUT as a dedicated reset reason code and
-> > > > prevent the panic notifier from overwriting a watchdog pretimeout
-> > > > reason with PSCR_KERNEL_PANIC when the pretimeout governor triggers a
-> > > > panic.
-> > > > 
-> > > > Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
-> > > > ---
-> > > >    drivers/power/reset/pscrr.c           | 7 ++++++-
-> > > >    include/linux/power/power_on_reason.h | 1 +
-> > > >    include/linux/reboot.h                | 1 +
-> > > >    kernel/reboot.c                       | 1 +
-> > > >    4 files changed, 9 insertions(+), 1 deletion(-)
-> > > > 
-> > > > diff --git a/drivers/power/reset/pscrr.c b/drivers/power/reset/pscrr.c
-> > > > index b5906f127e88..5b107c62fe82 100644
-> > > > --- a/drivers/power/reset/pscrr.c
-> > > > +++ b/drivers/power/reset/pscrr.c
-> > > > @@ -149,7 +149,12 @@ static int pscrr_panic_notifier(struct notifier_block *nb,
-> > > >    	if (!backend || !backend->ops || !backend->ops->write_reason)
-> > > >    		return NOTIFY_OK;
-> > > > -	set_psc_reason(PSCR_KERNEL_PANIC);
-> > > > +	/*
-> > > > +	 * Do not overwrite a previously recorded watchdog pretimeout reason
-> > > > +	 * during panic handling.
-> > > > +	 */
-> > > > +	if (get_psc_reason() != PSCR_WATCHDOG_PRETIMEOUT)
-> > > > +		set_psc_reason(PSCR_KERNEL_PANIC);
-> > > 
-> > > Hi Faruque,
-> > > 
-> > > I like the idea of adding WDG pretimeout resets in pscrr. I am just
-> > > wondering what makes WDG reason so special, that it shouldn't be overwritten
-> > > while other reasons can be? Can this notifier be called (now or in the
-> > > future) so, that there are other reasons getting overwritten? For some
-> > > reason I think the PSCRR was designed to be able to store multiple
-> > > reasons(?)
-> > 
-> > It depends on the backed. A simple nvmem cell, would be able to hold
-> > only one reason.
-> > 
+
+On 7/31/2026 5:18 AM, Dmitry Baryshkov wrote:
+> This series adds support for the AR50Lt VPU core to the iris driver and
+> enables the Agatti SoC to use Gen2 firmware and HFI.
 > 
-> That makes me wonder: Shouldn't the priority be a back-end decision, not a
-> front-end decision ?
+> AR50Lt introduces a few platform-specific requirements that need to be
+> handled in the iris core and VPU abstraction layer. To accommodate
+> this, the series adds minimal hooks and updates needed to allow the
+> firmware to operate correctly on AR50Lt without impacting existing
+> supported platforms.
+> 
+> Additionally, the series wires up Agatti to use the Gen2 firmware and
+> HFI path, aligning it with newer generations of supported Qualcomm
+> video hardware.
+>
 
-Backend provides capabilities, most nvmem cells will be able to store
-only one record. Which record matters (first or last) is a
-use/investigation case specific policy. 
+<snip>
+> ---
+> Changes in v9:
+> - Rebased on Bryan's tree, reverted the previous version of firmware
+>    detection patch
 
--- 
-Pengutronix e.K.                           |                             |
-Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
-31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
-Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
+I see that the dependent patch for dynamic sync frame is part of the 
+tree as well, so would have been better to pick the 3rd patch as well in 
+this series. 3rd part is now left out and #1/#2 are part of this series.
+
+https://lore.kernel.org/all/5vmfrdc7skmo2e3holugnhryjkhwwhndbsrklpjp5dsxfujyvs@a64y4x6lb5mp/
+
+Regards,
+Vikash
