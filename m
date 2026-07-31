@@ -1,88 +1,89 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D993D41DEDE
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 18:07:57 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 841B845040C
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 18:08:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785521279; cv=none; b=VWeA6tG0kIXB/4uKkeYksBltAvcul4Ql3pV9PQ1jlDS6OrrElzqoCjSPZp4gsdfmwiCJaxKwz8RoUloDxT7MtUucTkJ8eUGRU/jhH3yt1cvfxNXIK5fyByrhuHpN0JVMIMcaQ63G/5x8t+U3/idGJS4Lir2/w+1UJgGkR8P2LQI=
+	t=1785521292; cv=none; b=ecHPA1TIfylQQAuo3ZMGLuGG45kdqCBnwDoybhDnfVnX4lbT0h22qnk7hBD2P16OkLnFs5T2L8f/S1HT1GgzqXSqKYo4tDzdOBb94ZZdgI4aZogrA/5rccxFYk6fUvbbzI0ugAtXvonaV19Mu/AjtaiX8zfpR04/sAbek0+5ZCc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785521279; c=relaxed/simple;
-	bh=CBnS7t1mizIEi2Yz8x8q0f7r1o0b48xywSRR695Tg4E=;
+	s=arc-20240116; t=1785521292; c=relaxed/simple;
+	bh=LOxUXcHUW8m9HTKf4+InD/drBKNdjdniL/Lo17aWE68=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=bUu2N11DhuL7NEfwr9akeaC3IzDLEJIDL+eVEKzCYDTZDz/L251USBQ5fG5nHtjy7T5+79M9XyWowECy5YrmtYGn2rQs16OwgCoD5pv1cgOkuaOl00sm7aBSCITPqmZK7v7Z9g/6qr8kwLI980buhwIlBw+lJOKgIc7spf+f7ro=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=N9tK1dNe; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=GmE2xhn5; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=SYXLGbDzCntnE0SdbBLVgN0KTmpGTzfUlk450jEYYARf9Ok81SiA4bt3lqTmHjvsevoWMPIH+IcHn+vOpkCoOHbpSeyVLLttsM4STXoRZ3A8zrIizgrgyCyxSZ65JZ1/n8CWJyS5a0aCHWGaWcagMBs/A+uyuYZk3Rtagp/YM8k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hvhn8enK; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Nj2SG1WI; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="N9tK1dNe";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GmE2xhn5"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66VFOB4J1399391
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 18:07:57 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hvhn8enK";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Nj2SG1WI"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66VFOjae404135
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 18:08:10 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	YVGf3/uCJX9art/BsRFLlGRAM16RNT99A8fSY/yy6bQ=; b=N9tK1dNe80/RbOr+
-	OvEd2wpQNyM9YLMk4vfqjNhqSXmY41YUa12fqDS0Vwg/YtnNSQJwpss+2S52lvcP
-	iCN2U1rdB1D5pP69Ii50n6H49JK8zfB0ejkK0Ic4JLlZubSdrr3GOCOQmokQcav1
-	H2ghyDKavbWybLwYfwSo60M6EfW3tjHHvEwT4AduvFUyORcZppNEpAIeSbuARt7Z
-	VE3HnPdWMqzIuAeoQT7Nr07FcsFsFKv273Fb7s3A1UjkI4Q5iNbJGgtclODZEven
-	AC2xeX3yAEaNItl3tf4VdSTY+r8ZUXS6qZzglLfJT7VkYUM277mWgZ/r5DHP5zLh
-	uqzV6A==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fru1x9rms-1
+	0+1IF6MZZfV+s/U2Wuif1+TYpS3Jw4Ys7hOvFs6NAL8=; b=hvhn8enKlqlqQuge
+	bsJagM44/Lh3QU0xM3phPlR0hBWuo4tYfVj28zA9s5sRpoicFO/0/f886A0Msl3w
+	y3eEIKT33GZf5lmlMhno6xuxDdPf6RLiLD5fFC9K89BjwlBsVtgK8Ji+hHBfUVwj
+	JMBh0NTYtqAUODJniHLN0CmFLMClnQ76G01zxfbbV6pFwbmips0xkirTeHTsB3Kv
+	zaqalmd3dfsmXLG5As6OZVdGF4ACd/GzP7zRZ0bP4zxyp5AtGXWrFIawpl6YJnx9
+	IX6VqnjjR4F7GxkBuMJV+8Ht1Hrd2cjw3LInczy1LdtI7iWWUVQgceN8VBVzLkFy
+	Yhtg3g==
+Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4frufkhnfu-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 18:07:56 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38dbf293831so2858422a91.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 11:07:56 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 18:08:09 +0000 (GMT)
+Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2cee1ec30f2so14012815ad.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 11:08:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785521276; x=1786126076; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1785521284; x=1786126084; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=YVGf3/uCJX9art/BsRFLlGRAM16RNT99A8fSY/yy6bQ=;
-        b=GmE2xhn5wWr2K4U1RdY7FZjjcggneiJ9euuAWdCJ1a7IUhu3QaSD30T8NHvC23F/T+
-         H2tG62P394BAcUD3kxyKqYB2M4l71bZx8tEbbwrtrW7ryv4qsKJovA2NishKYG2ueElO
-         ZseuRLrz8vfP9nqsIuHNr7QtMrot0+qmjlmpYo9hf1dbzsZ0pDTpJEqXlwDFisXt5U5O
-         euS2JdufyiZNpAmzNLNSncnfFP+cpw+GnJ1yD5O+Q4wVKSMAV4ZBtT7lUsY/gdYzO4xH
-         JC5fZHUGtg93bhZ+TtG4SSzRVdNc++cJKoc+cBEVq+UpJM/Nk0ww57i6CgXJhavht4Iz
-         f8Jw==
+        bh=0+1IF6MZZfV+s/U2Wuif1+TYpS3Jw4Ys7hOvFs6NAL8=;
+        b=Nj2SG1WIZN4Prorbs1RkTQAiG5PwCSrOJ46FaaD7ATPKDGEAifMFL+ZOdhKTG5vuFM
+         8Ac5ALBpvpaGPoV7V4kNTY0kfJstItJL8wRVq+AsmJ4TEOQmQMhF9/a+m+29zLaF9u4Q
+         0rdtkvEaREgNtU9Q8zh2V05ruwFycKIXsaJne4p9CmLv1uMxTjOTAyzCt8JZjNVRKxSE
+         AukcY+LL+WRwM5r5+f+0E5HyCkxlAVt50Vh1ph3lsGCvHDSeBT9xEQHqiqjXU29PlIZ1
+         dDgWCIK8DB62Aaec/1AN5oAVr1/P/0XNCvLv0euSPEu+F+mlNb6+pIvS5Fb1VkP1wKXU
+         jOUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785521276; x=1786126076;
+        d=1e100.net; s=20251104; t=1785521284; x=1786126084;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=YVGf3/uCJX9art/BsRFLlGRAM16RNT99A8fSY/yy6bQ=;
-        b=IVnsVW1feefXw7Jp2QCm77wV8fMrPrUsL7+cKGiqHxWtInld6UslEf34QoknnIAxZh
-         c8UMzMOAJhq1zjYdnNxk+qfy8bY0tUgB+NhbGEH8FeBlS6bCZg02KFCwzInoKHCSAT92
-         8bzBLHAU2Tqpk2G9ycWI5ImMjWGpEKZOQIuasEQidadbZtP1GboLPKo0yTSJUw5schfI
-         qtKXz0QpLoK1o97JC+/j+OjTOrwSR+rPzLIzjHYhh2W4a7C2Hp06AVKIcYXiJCw5RqbJ
-         WjETBvtkr2f/xYqa6G3CKdfAj9dtzNbIth7CbiskR8pMvH01DTBMbmVJ7Ru53xiQZ488
-         uPFg==
-X-Forwarded-Encrypted: i=1; AHgh+RofxWYYj1v4JObIdyp5rzqbkw3iZNA1+ltuTDudfX4xonFjo8RLhR7OPk51FPtx0HbmCdH6NeLy9cIRCs5u@vger.kernel.org
-X-Gm-Message-State: AOJu0YwD/hmyLwg6pTY3Es59e/QdzsYYC7HCKuVxcS3gvTQQaLw0Lt2T
-	pIO1+McsMgLydb/x/SCIpLJ7HNdVaB46N43QvFIDK4tQzM+6VxTGaIgAUHvBZQ01Darlg0e8q5V
-	S6KcJB/j6cAJxYndUUUjdhgqi2Fb6e1Yol15kEJplscv6XzKLh8r8DF+K7gau27hLIUCB
-X-Gm-Gg: AR+sD12XMcGfE1LYvXt+wzlTSeLzMLUEJXTe69tcbtqBSWsXPn8c0eAzFFofUt6faQR
-	l+RXZZ3bDstvHBK87qkdKQbcHFxtHjIvT/cMtWtU4GXCi4pSX5F7l6Dyl1JyBkQ9dmLw9lBso+j
-	s5QDMF7CFAYqqTedSV84oTOilExuoZgEOkWVjzYPtbT+wAFyf0XCjwZxY8ixgw8gj9UKnBEwjtc
-	UHxHnKhXaGIzQg941eaZne5GpLIN+Oum2Cjsidcg5K0GIW0XvbrpVVK7cKYJYgE8lOrAVEGTdkG
-	A5bPk8Ct4iKzbrXkpLqFnLYgxb1EPAxy5++Bw1p6S7ghCkAHovqxBFko+B74xHG0Q4M4XO4L4WW
-	gUUpjKn23VXCsgkoclzE=
-X-Received: by 2002:a17:90b:5807:b0:387:e0db:3fae with SMTP id 98e67ed59e1d1-38fbc588cc1mr781571a91.39.1785521275978;
-        Fri, 31 Jul 2026 11:07:55 -0700 (PDT)
-X-Received: by 2002:a17:90b:5807:b0:387:e0db:3fae with SMTP id 98e67ed59e1d1-38fbc588cc1mr781534a91.39.1785521275532;
-        Fri, 31 Jul 2026 11:07:55 -0700 (PDT)
+        bh=0+1IF6MZZfV+s/U2Wuif1+TYpS3Jw4Ys7hOvFs6NAL8=;
+        b=BDHxQkKPh0MKouMPOQrNgYeT5zrWwd+ox0H1Q3yil3QmvPvZpDbWdrOSh7uBCOyyGN
+         niOw+yPsClG3VK135FujvxzCf+nbAnxICNVbOMIBgG+yTZ29+xOARE/H5MRa2uHxlAHR
+         Pe3skUAZr1qNmYKeOOlnMLJNpN6oyLEkQKNF1NvHRc3Hv3M0BJihqfAO2r523s98/FlI
+         QLk5OGrRV3gZPfT/w2QIB71U4Iaz88IeaOwV9MmSUmUVJaYO/lYhqXMyhtc3GeNxAUtM
+         P2D/1Vy385T8aNEzMpeF7xmOc4FVt410bsxwHHJJ5uXh18QTP3X8i67BEjgf/L7PyryF
+         VkqQ==
+X-Forwarded-Encrypted: i=1; AHgh+RpQSBPzCA6h6S3HzU0aqVkrm1WUW1ojsxUFpBDvErLP6pIHvPU4rZpuM8/NAZi8sYyjwcO7kltEaca8BxPC@vger.kernel.org
+X-Gm-Message-State: AOJu0YwwZ18G04JdOlXPtm0qE1uzvAA1l8pdU3pHhz7XpPynTzNRUa+w
+	3ZCBYZpVhdx+dBpEykeRcPEAsKNiVjLWcBDWfaKZxVa3sd6qlACtpuHqC2daJyCtqHPYN/6oh5V
+	RBkSO6WZugzJZ1FJoHYinsElZ5QJsLXU6KZ38uFtd4Wmb6VQFB6LFBz3XN0sgnZupc/5soOBgWh
+	4j
+X-Gm-Gg: AR+sD11/rLkV4w8CST6gQhZCwWzxgDrOFd+Zc8min6RYb82tiWU9/OTxakj07crRgX0
+	S1MQaN0H2JOhN3RLakh2c7PVMadxozIYy2cLQA7VxYPMrVafiSSvVueLARrbFqaGCe/DLRgQ9kr
+	eHvQozEL07JtR9JAANJioNBsJ/b7TiwbQ4ZnPHModsGqyvM0pVOaYmKXQcI3voeXgdqdFJaGc19
+	drIORyWK/22x57EKUiebGigJyJO2zhQpF/0W/Qdot0sDd6FQuzscWQ0IcKjSIxDXydlFjAwY8si
+	izINWHx+9gTEYE/k2gEn6RCCWZFJRPKC/GN2oqNzr2fsWeQvf13s0/tdZ79npzazVH/vQuF6hC+
+	Qm/olDo9tqt30VsoI3ts=
+X-Received: by 2002:a05:6a20:9f46:b0:3c3:b656:4f5b with SMTP id adf61e73a8af0-3c92a8f424fmr698465637.56.1785521283781;
+        Fri, 31 Jul 2026 11:08:03 -0700 (PDT)
+X-Received: by 2002:a05:6a20:9f46:b0:3c3:b656:4f5b with SMTP id adf61e73a8af0-3c92a8f424fmr698426637.56.1785521283314;
+        Fri, 31 Jul 2026 11:08:03 -0700 (PDT)
 Received: from [10.213.109.130] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153e06fe9fsm7069923eec.25.2026.07.31.11.07.48
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153e06fe9fsm7069923eec.25.2026.07.31.11.07.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 Jul 2026 11:07:55 -0700 (PDT)
+        Fri, 31 Jul 2026 11:08:03 -0700 (PDT)
 From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Date: Fri, 31 Jul 2026 23:36:16 +0530
-Subject: [PATCH 3/7] thermal: qcom: qcom-spmi-adc-tm5-gen3: Add support for
- QCOM PMIC5 Gen4 ADC
+Date: Fri, 31 Jul 2026 23:36:17 +0530
+Subject: [PATCH 4/7] arm64: dts: qcom: Add header file for ADC5 Gen4
+ channel macros
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +92,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260731-pmic5_gen4_adc-v1-3-9c49b2eea6f9@oss.qualcomm.com>
+Message-Id: <20260731-pmic5_gen4_adc-v1-4-9c49b2eea6f9@oss.qualcomm.com>
 References: <20260731-pmic5_gen4_adc-v1-0-9c49b2eea6f9@oss.qualcomm.com>
 In-Reply-To: <20260731-pmic5_gen4_adc-v1-0-9c49b2eea6f9@oss.qualcomm.com>
 To: Jonathan Cameron <jic23@kernel.org>, David Lechner <dlechner@baylibre.com>,
@@ -113,166 +114,152 @@ Cc: linux-iio@vger.kernel.org, devicetree@vger.kernel.org,
         Priyansh Jain <priyansh.jain@oss.qualcomm.com>,
         Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785521244; l=5321;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785521244; l=7279;
  i=jishnu.prakash@oss.qualcomm.com; s=20251014; h=from:subject:message-id;
- bh=CBnS7t1mizIEi2Yz8x8q0f7r1o0b48xywSRR695Tg4E=;
- b=59vZircmYcZ0ERDsSkZssy77HNxYRTa8SE77jx7AWQl+/YFdOShCc/i0cfXWqxNdVK4zgKZAV
- aEGb6J1jRrPDXsYhBe7oXjJ0lDRd1vO+StwGLyBuLwpjlFnZoa8x0Ep
+ bh=LOxUXcHUW8m9HTKf4+InD/drBKNdjdniL/Lo17aWE68=;
+ b=3HpwDAlmeDOVM/nq0/kPljvLl2A+JEzarXEbWEv6JZaNrDLYsYsAtNRlZSnqgrI93JKsOeJtm
+ sAuOExLVFViDZKRdH/KegtrGRhYp2CkuWubfJ+t1zOhkd4phSXk+sbu
 X-Developer-Key: i=jishnu.prakash@oss.qualcomm.com; a=ed25519;
  pk=g89pXdLVwRjdTeQ+uX1QzvBO346E3hQAc1N7fcTXgmk=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDEzOSBTYWx0ZWRfX1BwhufOlET4s
- x1V9N66YNehNpqftT9WBTlmoyjb6BzOtbrdhGE+v+u3rlrQRKMT6BLwCQAMb9K4VWM5GucTWQW5
- VFSOSZjqM+ykDFAlnTd1eftt1O3rGIM=
-X-Authority-Analysis: v=2.4 cv=GpByPE1C c=1 sm=1 tr=0 ts=6a6ce47c cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDEzOSBTYWx0ZWRfX8eZPgaAbIJj7
+ /h6dAwQ3bM061KcBIwz2zTALbCvaJwJgDLRzqGF/E+j9UMxXhdMy8PK4uHbalHZCk7ECpPLA7+w
+ G4x2fqquXq+xDuJvSS85Uk50OoHISVM=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDEzOSBTYWx0ZWRfX3wvtGVrX0gbw
+ kVVVFc7jxoLPDkdAGLvYe0wbpGm3puwfkUnyA1x6sR8T3kTfZEpLae/9VhCCyjvagv5V5A0H133
+ 0SQ/d2EMtC6FCfw+4MEucPedHmEkmk2EbVA11c8gX5JGfnXnMygtksvpNFuHqkqmi9B1PmKT4mY
+ H6VKsOuGwDiHEq1Zdi/IgvBMuuBQuIG/rWzEXOJN0foZIyNvEXErG5ex28VC+5wrHCRu5L2R8O1
+ Uojsi6qWL2rUhh5Q42n+55pcky5sfo2HNKqSN7/Fq5nvbMOMoknDYFyVHFXj8sA2WW8U9Uvxena
+ EoLey0o9JyindSIdiM3VL5EWIwa/g5guGj0U6uq+t0bgz3TRwB8om56QWfuW4EkzVX1vxx5JoLv
+ 0dst4Nw1nT2cMObzTGwa7BQ/qR1yP3EJFx+ZW8dNpOU7F1azgHfNYvtE6EF2ZMc5OyiQ7ISX+U2
+ YSRZofzc8FdhGlisNYQ==
+X-Proofpoint-GUID: UB7gEXWec2cZ5Rv70EfjkXJsQ0T_7rFh
+X-Authority-Analysis: v=2.4 cv=BpOtB4X5 c=1 sm=1 tr=0 ts=6a6ce489 cx=c_pps
+ a=JL+w9abYAAE89/QcEU+0QA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=mq5v3e01y4o_RV37-9wA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDEzOSBTYWx0ZWRfXz6IQ3YOWKYo8
- Cmn6573C/PeGvuK4AUfTOO/iC7eCBlxfm0jXIQCs3SwV+vrDKhou6H+d6hDPRRiuLJWMW77E2Of
- 5VX9f4W0iR7c7d83dH4mG97HRN87DB2e3mkphTb1jO7UnnpGtufa8uf3/J7OJYho5dXsDdNWu8k
- 1WBuSs9fmBZFX2//gimlHDvn/Htdmffzw8l02Em9DDypKOEbnvOM4biIrtWVMTkVZShvqNWW4+v
- OfkNIQHfqri4tVfHfU2fS0Za1WpmspNqSSsvf25pkyNXgJisuYN3I6unXrLFUCJ+Q9aMeDiK1Uy
- AFnAim4mhMkMh9zP5atzNeD3yDI0/NSwaag5/zfuwUzSluvuNYNbua6qTsNzE7Nt07LuYDz17ot
- z15ne4LOnrZzrH6ms5nE7HP815GC1Sp1lK3so7UIqt/quzVxjfjRCxuqaEhKmp/eIFiq1FWBA3O
- BVeoz6oczKZAO52C6aw==
-X-Proofpoint-ORIG-GUID: Zg1zJHIKlQEjVKQaZDfIvinMaISdUQnc
-X-Proofpoint-GUID: Zg1zJHIKlQEjVKQaZDfIvinMaISdUQnc
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=-dRfuHEhnKqeEr1aVL8A:9 a=QEXdDO2ut3YA:10
+ a=324X-CrmTo6CU4MGRt3R:22
+X-Proofpoint-ORIG-GUID: UB7gEXWec2cZ5Rv70EfjkXJsQ0T_7rFh
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-31_05,2026-07-30_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 impostorscore=0 suspectscore=0 clxscore=1015
- lowpriorityscore=0 priorityscore=1501 adultscore=0 bulkscore=0 spamscore=0
+ malwarescore=0 clxscore=1015 bulkscore=0 spamscore=0 lowpriorityscore=0
+ impostorscore=0 phishscore=0 adultscore=0 priorityscore=1501 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607310139
 
-PMIC5 Gen4 ADC is similar to PMIC5 Gen3 ADC, with several changes made
-for improved performance, mostly at the hardware level.
+Add macro definitions for virtual channels (combination of ADC channel
+number, PMIC SID number and PMIC bus ID number), to be used in devicetree
+by clients of ADC5 GEN4 device and in the "reg" property of ADC channels.
 
-One significant software change is that ratiometric conversion resolution
-has been increased from 14 bits to 16 bits. Add a reverse scaling function
-for Gen4 ADC thermistor channels.
-
-In the latest PMIC arbiter version (v8), there can be up to 4 buses
-under the PMIC arbiter and 32 PMICs under each bus. In order to
-support communication between ADC on the master PMIC and ADCs on any
-of the other PMICs, a field of width 2 bits is added for bus index
-and the bits for SID are extended from 4 to 5 bits, in the SID
-register. Add support for this.
-
-Co-developed-by: Anjelique Melendez <anjelique.melendez@oss.qualcomm.com>
-Signed-off-by: Anjelique Melendez <anjelique.melendez@oss.qualcomm.com>
 Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
 ---
- drivers/iio/adc/qcom-vadc-common.c            | 11 +++++++++++
- drivers/thermal/qcom/qcom-spmi-adc-tm5-gen3.c | 19 ++++++++++++++-----
- include/linux/iio/adc/qcom-vadc-common.h      |  2 ++
- 3 files changed, 27 insertions(+), 5 deletions(-)
+ arch/arm64/boot/dts/qcom/qcom-adc5-gen4.h | 96 +++++++++++++++++++++++++++++++
+ 1 file changed, 96 insertions(+)
 
-diff --git a/drivers/iio/adc/qcom-vadc-common.c b/drivers/iio/adc/qcom-vadc-common.c
-index cb23d0d178c7..25bd4622c389 100644
---- a/drivers/iio/adc/qcom-vadc-common.c
-+++ b/drivers/iio/adc/qcom-vadc-common.c
-@@ -720,6 +720,17 @@ u16 qcom_adc_tm5_gen2_temp_res_scale(int temp)
- }
- EXPORT_SYMBOL(qcom_adc_tm5_gen2_temp_res_scale);
- 
-+u16 qcom_adc_tm5_gen4_temp_res_scale(int temp)
-+{
-+	s64 resistance;
+diff --git a/arch/arm64/boot/dts/qcom/qcom-adc5-gen4.h b/arch/arm64/boot/dts/qcom/qcom-adc5-gen4.h
+new file mode 100644
+index 000000000000..cf94e3185e21
+--- /dev/null
++++ b/arch/arm64/boot/dts/qcom/qcom-adc5-gen4.h
+@@ -0,0 +1,96 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-3-Clause) */
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
 +
-+	resistance = qcom_vadc_map_temp_voltage(adcmap7_100k,
-+						ARRAY_SIZE(adcmap7_100k), temp);
++#ifndef __DTS_ARM64_QCOM_ADC5_GEN4_H__
++#define __DTS_ARM64_QCOM_ADC5_GEN4_H__
 +
-+	return div64_s64(resistance * RATIO_MAX_ADC5_GEN4, resistance + R_PU_100K);
-+}
-+EXPORT_SYMBOL(qcom_adc_tm5_gen4_temp_res_scale);
++/* ADC channels for PMIC5 Gen4 */
 +
- int qcom_adc5_hw_scale(enum vadc_scale_fn_type scaletype,
- 		    unsigned int prescale_ratio,
- 		    const struct adc5_data *data,
-diff --git a/drivers/thermal/qcom/qcom-spmi-adc-tm5-gen3.c b/drivers/thermal/qcom/qcom-spmi-adc-tm5-gen3.c
-index 9cf552d36868..80e820b6dc4b 100644
---- a/drivers/thermal/qcom/qcom-spmi-adc-tm5-gen3.c
-+++ b/drivers/thermal/qcom/qcom-spmi-adc-tm5-gen3.c
-@@ -207,15 +207,23 @@ static int adc_tm5_gen3_disable_channel(struct adc_tm5_gen3_channel_props *prop)
- 			       ADC5_GEN3_CONV_REQ, &val, sizeof(val));
- }
- 
-+typedef u16 (*temp_res_scale)(int temp);
++#define ADC5_GEN4_VIRT_CHAN(bus_id, sid, chan)	((bus_id) << 13 | (sid) << 8 | (chan))
 +
- static int adc_tm5_gen3_configure(struct adc_tm5_gen3_channel_props *prop,
- 				  int low_temp, int high_temp)
- {
- 	struct adc_tm5_gen3_chip *adc_tm5 = prop->chip;
- 	u8 buf[ADC_TM5_GEN3_CONFIG_REGS];
-+	temp_res_scale tm_scal_fn;
- 	u8 conv_req;
- 	u16 adc_code;
- 	int ret;
- 
-+	if (prop->common_props.generation == ADC5_GEN4)
-+		tm_scal_fn = qcom_adc_tm5_gen4_temp_res_scale;
-+	else
-+		tm_scal_fn = qcom_adc_tm5_gen2_temp_res_scale;
++#define ADC5_GEN4_OFFSET_REF(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x00)
++#define ADC5_GEN4_1P25VREF(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x01)
++#define ADC5_GEN4_VREF_VADC(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x02)
++#define ADC5_GEN4_DIE_TEMP(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x03)
 +
- 	ret = adc5_gen3_poll_wait_hs(adc_tm5->dev_data, prop->sdam_index);
- 	if (ret < 0)
- 		return ret;
-@@ -225,8 +233,9 @@ static int adc_tm5_gen3_configure(struct adc_tm5_gen3_channel_props *prop,
- 	if (ret < 0)
- 		return ret;
- 
--	/* Write SID */
--	buf[0] = FIELD_PREP(ADC5_GEN3_SID_MASK, prop->common_props.sid);
-+	/* Write SID and bus_id*/
-+	buf[0] = FIELD_PREP(ADC5_GEN4_BUS_INDEX_MASK, prop->common_props.bus_index) |
-+		 FIELD_PREP(ADC5_GEN4_SID_MASK, prop->common_props.sid);
- 
- 	/* Select TM channel and indicate there is an actual conversion request */
- 	buf[1] = ADC5_GEN3_CHAN_CONV_REQ | prop->tm_chan_index;
-@@ -252,7 +261,7 @@ static int adc_tm5_gen3_configure(struct adc_tm5_gen3_channel_props *prop,
- 	/* High temperature corresponds to low voltage threshold */
- 	prop->low_thr_en = (high_temp != INT_MAX);
- 	if (prop->low_thr_en) {
--		adc_code = qcom_adc_tm5_gen2_temp_res_scale(high_temp);
-+		adc_code = tm_scal_fn(high_temp);
- 		put_unaligned_le16(adc_code, &buf[8]);
- 		buf[7] |= ADC5_GEN3_LOW_THR_INT_EN;
- 	}
-@@ -260,7 +269,7 @@ static int adc_tm5_gen3_configure(struct adc_tm5_gen3_channel_props *prop,
- 	/* Low temperature corresponds to high voltage threshold */
- 	prop->high_thr_en = (low_temp != -INT_MAX);
- 	if (prop->high_thr_en) {
--		adc_code = qcom_adc_tm5_gen2_temp_res_scale(low_temp);
-+		adc_code = tm_scal_fn(low_temp);
- 		put_unaligned_le16(adc_code, &buf[10]);
- 		buf[7] |= ADC5_GEN3_HIGH_THR_INT_EN;
- 	}
-@@ -306,7 +315,7 @@ static int adc_tm5_register_tzd(struct adc_tm5_gen3_chip *adc_tm5)
- 	int ret;
- 
- 	for (int i = 0; i < adc_tm5->nchannels; i++) {
--		channel = ADC5_GEN3_V_CHAN(adc_tm5->chan_props[i].common_props);
-+		channel = ADC5_GEN4_V_CHAN(adc_tm5->chan_props[i].common_props);
- 		tzd = devm_thermal_of_zone_register(adc_tm5->dev, channel,
- 						    &adc_tm5->chan_props[i],
- 						    &adc_tm_ops);
-diff --git a/include/linux/iio/adc/qcom-vadc-common.h b/include/linux/iio/adc/qcom-vadc-common.h
-index 4be682083843..55efad27ed73 100644
---- a/include/linux/iio/adc/qcom-vadc-common.h
-+++ b/include/linux/iio/adc/qcom-vadc-common.h
-@@ -159,6 +159,8 @@ u16 qcom_adc_tm5_temp_volt_scale(unsigned int prescale_ratio,
- 
- u16 qcom_adc_tm5_gen2_temp_res_scale(int temp);
- 
-+u16 qcom_adc_tm5_gen4_temp_res_scale(int temp);
++#define ADC5_GEN4_AMUX1_THM(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x04)
++#define ADC5_GEN4_AMUX2_THM(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x05)
++#define ADC5_GEN4_AMUX3_THM(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x06)
++#define ADC5_GEN4_AMUX4_THM(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x07)
++#define ADC5_GEN4_AMUX5_THM(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x08)
++#define ADC5_GEN4_AMUX6_THM(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x09)
++#define ADC5_GEN4_AMUX1_GPIO(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x0a)
++#define ADC5_GEN4_AMUX2_GPIO(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x0b)
++#define ADC5_GEN4_AMUX3_GPIO(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x0c)
++#define ADC5_GEN4_AMUX4_GPIO(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x0d)
++#define ADC5_GEN4_AMUX5_GPIO(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x1e)
 +
- int qcom_adc5_prescaling_from_dt(u32 num, u32 den);
- 
- int qcom_adc5_hw_settle_time_from_dt(u32 value, const unsigned int *hw_settle);
++#define ADC5_GEN4_CHG_TEMP(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x10)
++#define ADC5_GEN4_USB_SNS_DIV20(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x11)
++#define ADC5_GEN4_VIN_DIV20_MUX(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x12)
++#define ADC5_GEN4_USBC_MUX(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x13)
++#define ADC5_GEN4_VREF_BAT_THERM(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x15)
++#define ADC5_GEN4_IIN(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x17)
++
++#define ADC5_GEN4_VREF_BAT2_THERM(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x1a)
++#define ADC5_GEN4_ATEST1(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x1b)
++#define ADC5_GEN4_ATEST2(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x1c)
++#define ADC5_GEN4_VBAT_2S_MID_CHGR(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x1d)
++
++/* 10k pull-up1 */
++#define ADC5_GEN4_AMUX1_THM_10K_PU(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x24)
++#define ADC5_GEN4_AMUX2_THM_10K_PU(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x25)
++#define ADC5_GEN4_AMUX3_THM_10K_PU(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x26)
++#define ADC5_GEN4_AMUX4_THM_10K_PU(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x27)
++#define ADC5_GEN4_AMUX5_THM_10K_PU(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x28)
++#define ADC5_GEN4_AMUX6_THM_10K_PU(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x29)
++#define ADC5_GEN4_AMUX1_GPIO_10K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x2a)
++#define ADC5_GEN4_AMUX2_GPIO_10K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x2b)
++#define ADC5_GEN4_AMUX3_GPIO_10K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x2c)
++#define ADC5_GEN4_AMUX4_GPIO_10K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x2d)
++#define ADC5_GEN4_USBC_MUX_10K_PU(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x33)
++#define ADC5_GEN4_AMUX5_GPIO_10K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x3e)
++
++/* 100k pull-up2 */
++#define ADC5_GEN4_AMUX1_THM_100K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x44)
++#define ADC5_GEN4_AMUX2_THM_100K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x45)
++#define ADC5_GEN4_AMUX3_THM_100K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x46)
++#define ADC5_GEN4_AMUX4_THM_100K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x47)
++#define ADC5_GEN4_AMUX5_THM_100K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x48)
++#define ADC5_GEN4_AMUX6_THM_100K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x49)
++#define ADC5_GEN4_AMUX1_GPIO_100K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x4a)
++#define ADC5_GEN4_AMUX2_GPIO_100K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x4b)
++#define ADC5_GEN4_AMUX3_GPIO_100K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x4c)
++#define ADC5_GEN4_AMUX4_GPIO_100K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x4d)
++#define ADC5_GEN4_USBC_MUX_100K_PU(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x53)
++#define ADC5_GEN4_AMUX5_GPIO_100K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x5e)
++
++/* 400k pull-up3 */
++#define ADC5_GEN4_AMUX1_THM_400K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x64)
++#define ADC5_GEN4_AMUX2_THM_400K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x65)
++#define ADC5_GEN4_AMUX3_THM_400K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x66)
++#define ADC5_GEN4_AMUX4_THM_400K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x67)
++#define ADC5_GEN4_AMUX5_THM_400K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x68)
++#define ADC5_GEN4_AMUX6_THM_400K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x69)
++#define ADC5_GEN4_AMUX1_GPIO_400K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x6a)
++#define ADC5_GEN4_AMUX2_GPIO_400K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x6b)
++#define ADC5_GEN4_AMUX3_GPIO_400K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x6c)
++#define ADC5_GEN4_AMUX4_GPIO_400K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x6d)
++#define ADC5_GEN4_USBC_MUX_400K_PU(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x73)
++#define ADC5_GEN4_AMUX5_GPIO_400K_PU(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x7e)
++
++/* 1/3 Divider */
++#define ADC5_GEN4_AMUX1_GPIO_DIV3(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x8a)
++#define ADC5_GEN4_VPH_PWR(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x8e)
++#define ADC5_GEN4_VBAT_SNS_QBG(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x8f)
++#define ADC5_GEN4_VBAT_SNS_CHG(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x94)
++#define ADC5_GEN4_VBAT_2S_MID_QBG(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x96)
++#define ADC5_GEN4_VPH2_PWR(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x99)
++#define ADC5_GEN4_VBAT_2S_MID_CHGR_DIV3(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x9d)
++#define ADC5_GEN4_VBAT_2S_MID2(bus_id, sid)	ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0x9f)
++
++#define ADC5_GEN4_ICHG_FB(bus_id, sid)		ADC5_GEN4_VIRT_CHAN(bus_id, sid, 0xa1)
++
++#endif /* __DTS_ARM64_QCOM_ADC5_GEN4_H__ */
 
 -- 
 2.43.0
