@@ -1,77 +1,102 @@
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE52736D50D
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 07:06:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 451BE3ACF0B
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 07:33:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785481592; cv=none; b=i3m+1c7/RKXjl4FhNmstJXwFBFPhQj/UH9UPJ3bQlYHws1nODTg9hHaF4rlSFUXnAxJHN/KSIintj0ByrK8pGj+kc3DDJb4Oh6/TrdI934hr57wRJLVEMkT/4DFJk4Qhj4FtU+F9mH3zWoOyX3y/Zs68NBwFaiW0IdtNvIg7UXs=
+	t=1785483199; cv=none; b=t41hcrY+FUrAhMIC/O+dmQLcvkNloXsCQ0gf4uhz0rHuWt/Dlmc4Nhl3WZ16I6PB9aVK6AOz5mqiOFpRxLB+bidtA8IQP2+91RgSUcqN/D+D7Nn9rd2LaLWmfTjVBhYfW7DKtvJofOEQpEuJM3nw6yYpghu0qk29qut8UdKiVTg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785481592; c=relaxed/simple;
-	bh=bMlMzpNZgnDCsAf7WdgXqrfIrIswbj8QSlguBmRvcZo=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=Gl6p+uuAeskd+UUxtuV4ZqDBsh3ok4N5/vOAs671T+HLeZhivUcthu5mW3E5JW7GES+Z3iytueIJA/iBTG1NnOc8ePIy8MERbXsn5D0HqR2fIMsULlhWGSwLVXNQiJguVdsQrkJn6v1/wgeKTNKp8j8zS9rfZUbGATssbsyezX8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=OBDC/C1j; arc=none smtp.client-ip=209.85.221.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1785483199; c=relaxed/simple;
+	bh=YqmyT/qYu2cAbEn9E2TIrN4Qg2QW80P2POHFMYOKMz4=;
+	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=DZZAy+pthtAHUZkDgybHA9KAZkNj52qTiSD+6Qi3+uLDedKFMUXpv0bWaLu6n7WWXtWmtEUMFpws9LI+KZQXROi2mDXDRr8184rarubD+CLflb2wgeNxJl8E1VYkJKEcKwQTQBgF+8DPUVaqjTdpmUKCreYiHH89LvhIm2VgRdE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Imaswwqq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=V2SkQtug; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="OBDC/C1j"
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-47640541585so434583f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 00:06:29 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Imaswwqq";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="V2SkQtug"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66V7Kbl63308338
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 07:33:16 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	vpdokqVBnZKXEDjkp04OU7LpdQXx434D5TMJ95t5YV8=; b=Imaswwqq8gmPTlZy
+	t2dsZeH2OtJEn6rlV+uTaqGyuwvnpTkxgur6b/DFPs/2RHSXrnqVU+n4Lyv/XixS
+	EgYbaahSV4R7XWLniAyXX8ywNS6JXNaJJoWPoQEkTH50xdIyAJBcCnIjnMB8MEJO
+	LAL3MmQ6SRMG4QGZU0fjT+iOcMd3HH5dVx57aDEFNNDYwfhxCRdAwUWSY72rOyLK
+	OaPAHzqLKf9VYwvLTRW4b38XHLcDkCU5aR6JmiZQX5TkTredskpOLRv8U/uY2pHo
+	oyaU1+q1cPRuVmJFSBHelu0gQZyNf+6b+grUhPEQb1h7a3sXiBwGZOvln6fl1NEA
+	uezBjg==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4frq7yr1ph-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 07:33:15 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3883dc4ad23so149361a91.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 00:33:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785481588; x=1786086388; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=eQP3A8Ri8GoyiqwKZFBiae11D7hzkz6JOLVj9BPG99A=;
-        b=OBDC/C1jZ9+jAozsXY2s8Rc/YHFbi4FFDx05rOw5zn6wiPmCgZvCWRDO8MYMmfPi2a
-         3km9lla+cvTz/6WOTGaOcqPK2si7bXAhyRSinSQJNEuVbpu/24ffC0zbmAT3324+BVrE
-         qP3gdI0AtV2+m9wQsmluyWjPrYGIfiOsNk0O1sUCrNmsegzpeRXCVwuFfP9g1+iwrWZh
-         5GvyNLRQfqEFdfEu6bU3tDyW+KGu6WuFbYJgBwnUwM2Hasx4Y9lMFxe1x7AvbF0GoEWE
-         nSyJW26etJQ15+Jd1P3aMI8Dhq6AetITlFkkZ78Aie6HXDRZY7sWeUpwpQ91hkZ3JiUM
-         Xnvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785481588; x=1786086388;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+        d=oss.qualcomm.com; s=google; t=1785483195; x=1786087995; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=eQP3A8Ri8GoyiqwKZFBiae11D7hzkz6JOLVj9BPG99A=;
-        b=CTnzmiA/MVJwZA65oVmAthv99hXI51NY+O+DMCQJOEnxSOpt4Qsh1t8wUttSjZTdxE
-         joyrJgYaGU3sFjphbGL2zKesST+6W5acvDl3r8/ufCRSDzsf7fZ10FM5EPYNIAXfzK0G
-         GFx/2W44LuG+dqt+fX7gdWcOMEEZOMTa2gpbshpcHhUkk6sUvzbWvR79htZyv6pkRY3V
-         v0KuNUMZzQAB1EgjYQJW+PUdqkIL3tZcfx5m8SBRc5/ngGUS6Ed2vculIxvP/YmreUkn
-         klmShVuhbvSMLvpEsFki19zxbsnY6ynXVw+i7btarXp+i01dZIvKodC38yCGnYrRidq0
-         JWng==
-X-Forwarded-Encrypted: i=1; AHgh+Rp2RWbaTu+GjW51v81/Ysi9RkqBkmTlaAvwgeyCHtgNXj0ifaNfE1RonBEKjUP/BqpP8cHzb9pKVXQq9Jrv@vger.kernel.org
-X-Gm-Message-State: AOJu0YwaYwAQpsBiz5wMBr6Q12UYlo8DskULQ/KmikV8fd+F8rbwait7
-	PvnXsLmf0SmhmjKhMpRJiaD9Xq2r8f3KawO0DTRR0OshRed736P0Tpvp
-X-Gm-Gg: AR+sD11OimfKz9/ssdL4s3cvVWYBG+Uf5E7rdad3WNDq81t5MtvsOQiRGafX79e1DfK
-	7z5O5US+4hp0RlE+UFCLRDIKJ+nsx6xBUA4iAM0953G5xyk/zsl4hgF5WPNUeMnxUi/Q0eNJ5+C
-	xFXuo7LDnZLYfo30POu5IDmRHxr5u5samFb3b2zncG9TvBK7WjdGP9qr7zSZrdsUqRn+bisVV8F
-	kw1hcLJ0oKjUPNEcOBMhrT9VI2Quwu1EJ2gO6/Psj/G5E1f4YgCn9jM9kc5M+G19zH+DifM8Nba
-	g6NHwehGvMAtwGOcLvsOnjaFXqWgcumdbWQ9/01MsbYsdpQjbwNktWsWrFOECdQpUnQMlqa0/A0
-	KDL/CUDGIlDAoKUz60Zk+YgfCLlSfRsBtGs7ChAhZi/3RK7ijUDHLEeV+EKTIyOZFpo3MMO0C8r
-	EEJCpkmDW5twE20Xk7SCGNMcjMV/6h3653qkTjDfZ8siwI8qW/i7MyKsNvELV/k8xaRMGSBnAWC
-	0B/5AW5Fim1m4GMxM0eaHhphgeZ1o17Cc/U3cG66wgooZm3dRbSPYM369ifz+xQ9peFHA==
-X-Received: by 2002:a05:6000:25c1:b0:47e:96f4:4a5b with SMTP id ffacd0b85a97d-47fd2b5a058mr2035326f8f.51.1785481587728;
-        Fri, 31 Jul 2026 00:06:27 -0700 (PDT)
-Received: from rocinante (lfbn-tou-1-1098-107.w90-76.abo.wanadoo.fr. [90.76.164.107])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47fd458ab61sm1276850f8f.25.2026.07.31.00.06.27
+        bh=vpdokqVBnZKXEDjkp04OU7LpdQXx434D5TMJ95t5YV8=;
+        b=V2SkQtugNtswbFHC4RjPP/Tm+fqBrS7X1jHvonr78I1GNRhA34X6dj0vxYieaEyvnQ
+         ADWLmD+mEpWivv/kX54Xj1zj+tDsEurePeVgrkiZJ03PHiZfIs+sCEmzcOiblnlv4gXa
+         YF8xibCjD/QFbUeun3bYOITmLcLTwoTKwqev1jmA6C1bw82jSWIz9ycsF/C1PgduQEKf
+         Kf+M6p2ZK47Q4uaczuMZJEX3RIhwXXLy2ZkizPD+n/8ZKyuEH5s7CZhKd6VwBPQAx20i
+         NObALY+aDSluWYtgbOLSuSHKlFKE7uWyLm1tlQjvMU4gv01WZcj88d37FJPloqzaj52r
+         /fJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785483195; x=1786087995;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=vpdokqVBnZKXEDjkp04OU7LpdQXx434D5TMJ95t5YV8=;
+        b=cgxOEnwCwX/Yqi9ZeWwnvHtNFkJ82k8sd19+vky72gZvoh3lRKrtYNHxIlBvLfORkn
+         NdBSOjyY8m4+SyOHEQR+c/hjETp/9z0tG/Wblt+A4dkHge2l5YbXzUTAMJCba7erV1tF
+         1+IUMijDieohQGOmxiemMuX/JEO5Ce69FMI7ZGdsYQ3+QOshaPxEC/S3pfq0uwfyZ7Dw
+         bTWMiu72ZboHgz48BcLt4VNJ6b103tOKOaD2GJSZxvUbayClP5EGT/B61A0hhS9t8tfA
+         LcbmrthIjqubZuOnBTYPU1jVeWUzjIYPz1iVW+UBZqhtMSS0KtkZ1jU2Jvyu0CADyf4C
+         6KMA==
+X-Forwarded-Encrypted: i=1; AHgh+Rr2DHD9OhpEPdf3NxYxbLVrZgoF9c+ObZ5bQ+gDC/xDxejpuGd73EgPn4ik38WVu+Urbg6vGZWekB6byhdM@vger.kernel.org
+X-Gm-Message-State: AOJu0YzU0h2TKqx4qp9v+qRppeK9jaQgxQEJWLD/hfzUOC6VshQOt0yw
+	YT+IIbBcIqy3xtNzWcXlUnvbVeUfNKIKplcGYhS1vSyXbyY3EEPg1XwgwEFxidqo0Ta6wkKa/1k
+	ofSwrV++H4XDfI1D13TJcUCB9fdUKPtN0dyrOIRalatnRmumqHjDfXji8hgwhtBjxSMtW
+X-Gm-Gg: AR+sD13tICKKMHMVDx7A7fLO4HefLWNOSCsv8efvZk0w/cyYBh6uO4uZ3gjAUhT7rAA
+	dogmtUXdBUp5FAn2nYblq0+klnuE9t5ahfpfm0GFnu+inUjKit4V17/1s1109pevcNtxJCvmKig
+	UpkBlQHbiKQzjyJj/JmtZtOGivwQ8HoxXLDD0YQdqYfD7B8RQE2pMomCScH3iUZyvS8vvG+MajD
+	z/6FfqeK0B+T+7PzqmqQrqweZVw2yLTEOjTcBFmnORvT21G+KFIQtdhAidAeMRpm4FwdIhZkVIu
+	KsB4aY1n4iRn8E5UGRWddVUUijeRMbfWCK0vxygS+Q1nE6KzyDTPC8aKlzEpOtDB/UlB1BF5uYa
+	J4/27q+i1nD+ccuyy90acjP6smiv+wDOAUBKG5FgdUFL+VLsphVQ=
+X-Received: by 2002:a17:902:ce06:b0:2cf:9e90:8be with SMTP id d9443c01a7336-2d046fa078amr17274495ad.4.1785483194657;
+        Fri, 31 Jul 2026 00:33:14 -0700 (PDT)
+X-Received: by 2002:a17:902:ce06:b0:2cf:9e90:8be with SMTP id d9443c01a7336-2d046fa078amr17274125ad.4.1785483194200;
+        Fri, 31 Jul 2026 00:33:14 -0700 (PDT)
+Received: from hu-weiden-sha.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153e18e70esm4933384eec.29.2026.07.31.00.33.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 Jul 2026 00:06:27 -0700 (PDT)
-From: Stephane Lepain <stephanelepain@gmail.com>
-To: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <ukleinek@kernel.org>
-Cc: linux-pwm@vger.kernel.org,
-	Kenneth Kasilag <kenneth@kasilag.me>,
-	George Moussalem <george.moussalem@outlook.com>,
-	Devi Priya <quic_devipriy@quicinc.com>,
-	Baruch Siach <baruch.siach@siklu.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Stephane Lepain <stephanelepain@gmail.com>
-Subject: [PATCH] pwm: ipq: fix period calculation
-Date: Fri, 31 Jul 2026 09:05:42 +0200
-Message-ID: <20260731070542.155398-1-stephanelepain@gmail.com>
-X-Mailer: git-send-email 2.55.0
+        Fri, 31 Jul 2026 00:33:13 -0700 (PDT)
+From: Wei Deng <wei.deng@oss.qualcomm.com>
+To: Konrad Dybcio <konradybcio@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Chen-Yu Tsai <wenst@chromium.org>, quic_chezhou@quicinc.com,
+        cheng.jiang@oss.qualcomm.com, shuai.zhang@oss.qualcomm.com,
+        jinwang.li@oss.qualcomm.com, xiuzhuo.shang@oss.qualcomm.com,
+        mengshi.wu@oss.qualcomm.com
+Subject: Re: [PATCH v3 1/3] arm64: dts: qcom: hamoa: Number usb_2 HS port and add M.2 endpoint stubs
+Date: Fri, 31 Jul 2026 13:03:06 +0530
+Message-Id: <20260731073306.1895428-1-wei.deng@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <8dd0680a-901a-465e-898d-88a17a9a71a4@kernel.org>
+References: <20260729-hamoa-m2-dts-v2-v3-0-4d7ef9274575@oss.qualcomm.com> <20260729-hamoa-m2-dts-v2-v3-1-4d7ef9274575@oss.qualcomm.com> <8dd0680a-901a-465e-898d-88a17a9a71a4@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -80,221 +105,153 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=BKSDalQG c=1 sm=1 tr=0 ts=6a6c4fbb cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=VwQbUJbxAAAA:8 a=cm27Pg_UAAAA:8 a=EUspDBNiAAAA:8 a=GMep2Sy8T26hx5v__mYA:9
+ a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-GUID: KzM9SgTmjCVKp2Eom7Bth0mBtaTwqYwM
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDA1MiBTYWx0ZWRfX90HzQjiilYaR
+ 0otvRbMundkGQh/1DNshP5/pRzXijaXfugKM8qk2aCEqSiec6Otk+oydDgKJ8UUcz4/XhLTseng
+ RXs8YSI6UfElVFirpq9xisSxPyHwTHk=
+X-Proofpoint-ORIG-GUID: KzM9SgTmjCVKp2Eom7Bth0mBtaTwqYwM
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDA1MiBTYWx0ZWRfX9Rzf8hE6gdfy
+ x/aUbSyplCRPEzmuALqg5pL1Hjxm+9iRyHmqT07G01asdF3kl9Wd+95sSATA1B4IHWhKqVy+Brt
+ VPJQbKz0gcCm6Mmezp8ZB8w2TIjJzoAxZ2RVuH07HGo8wPlX0BtCiwohYyXFUHeQgBwvFI9Sbab
+ TnKq72jIUOxaLER0y+q99zOq6HE4HBN7c87JdP9zno7Tf/BxbAk4GtZTCe2D8cqHkCTDSd9f2mA
+ +5pKS0XMuB2utIlADM0SL4gsKjZfa3gROJpxzvvN5PMzwvu1Jg5TCXHM29+8I804MdT8Hci9B1x
+ ybwuBQrEW9F8Ynh9ZhsMU9eh7J2kY64lnvmNkfj+U3vrKnusLs2tF+bICH4kgDsSE2uLUmDtkng
+ oUuRQftb0dw9FuwtsN+DWCDyJY4g2xfyxZ9wFs0K/jTW5WJPiV3RB7SZwiYxpOzf9xGyWQwcpSx
+ rYFRgLf83/YvYcRFbZQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-31_02,2026-07-30_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 spamscore=0 phishscore=0 malwarescore=0 suspectscore=0
+ lowpriorityscore=0 adultscore=0 bulkscore=0 priorityscore=1501
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607310052
 
-From: Kenneth Kasilag <kenneth@kasilag.me>
+Hi Konrad,
 
-ipq_pwm_apply() fixes pwm_div at its maximum and derives only pre_div
-from the requested period. Since the period spans
-(pre_div + 1) * (pwm_div + 1) input clocks, pinning pwm_div near its
-maximum forces pre_div towards zero for short periods: once pre_div
-rounds to 0 the shortest representable period is (pwm_div + 1) / clk_rate,
-and any shorter request is rejected outright:
+On Wed, Jul 29, 2026 at 12:46:49PM +0200, Konrad Dybcio wrote:
+> On 7/29/26 12:27 PM, Wei Deng wrote:
+>> Number the existing High-Speed data bus port of the usb_2 DWC3
+>> controller as port@0, consistent with the snps,dwc3 binding convention.
+>>
+>> Also add an empty port@1 endpoint stub (usb_2_m2_ep) for the USB 2.0
+>> interface to M.2 peripherals, and an empty UART endpoint stub
+>> (uart14_ep) in the uart14 serial controller, so that board DTS files
+>> can reference these labels directly without re-entering the port
+>> hierarchy.
+>>
+>> Signed-off-by: Wei Deng <wei.deng@oss.qualcomm.com>
+>> ---
+>
+> [...]
+>
+>> -			port {
+>> -				usb_2_dwc3_hs: endpoint {
+>> +			ports {
+>> +				#address-cells = <1>;
+>> +				#size-cells = <0>;
+>> +
+>> +				port@0 {
+>> +					reg = <0>;
+>> +
+>> +					usb_2_dwc3_hs: endpoint {
+>> +					};
+>> +				};
+>> +
+>> +				port@1 {
+>> +					reg = <1>;
+>> +
+>> +					usb_2_m2_ep: endpoint {
+>> +					};
+>
+> What? Why?
+>
+> 1. what's wrong with assigning the existing endpoint to the m2 graph?
+> 2. this breaks bindings - port@1 is supposed to represent the superspeed
+>    connection
+> 3. why would we have two endpoints for the same physical HS connection?
+>
+> Konrad
 
-	pre_div = mul_u64_u64_div_u64(period_ns, ipq_chip->clk_rate,
-				      (u64)NSEC_PER_SEC * (pwm_div + 1));
-	if (!pre_div)
-		return -ERANGE;
+Thanks for the review. I tried (1) locally — repointing the existing
+usb_2_dwc3_hs endpoint at the M.2 graph and keeping the singular
+"port { endpoint { ... } }" structure — and hit a functional failure
+I'd like your and Chen-Yu's input on before v4.
 
-Four-wire fans commonly expect a ~25 kHz PWM, which is therefore
-unusable. On an IPQ6018 with the PWM block clocked at 100 MHz, a
-40,000 ns (25 kHz) request computes floor(0.061) == 0 and returns
--ERANGE deterministically. Where a request is not rejected outright, the
-high duration truncates to 0 and the output collapses to ~0% duty.
+Test on Hamoa IoT EVK with the Chen-Yu Tsai V6 pwrseq series applied [1]:
 
-Search for the (pre_div, pwm_div) pair whose period best approximates
-the request instead of fixing pwm_div. Starting pre_div at the smallest
-value that keeps pwm_div within its field and stopping once pre_div
-exceeds pwm_div bounds the loop and keeps pwm_div as large as possible
-for fine duty resolution. For a 25 kHz request at 100 MHz this selects
-pre_div = 0, pwm_div = 3999, i.e. exactly 4000 clocks, with full 0..4000
-duty resolution.
+  Option A (v3 as posted: ports { port@0 { usb_2_dwc3_hs }; port@1 {
+  usb_2_m2_ep }; }):
+      BT USB device enumerates; pwrseq_m2 refcount matches expectation.
 
-While reworking the high-duration computation, round it to nearest
-rather than truncating, so mid-range duty cycles are not biased low, and
-clamp it to pwm_div + 1. Rounding, or a 100% duty request, could
-otherwise push hi_dur past the period length and overflow the 16-bit
-HI_DURATION field.
+  Option (1) (singular port { usb_2_dwc3_hs } with remote-endpoint
+  pointing to M.2's port@2):
+      BT USB does not enumerate; pwrseq_m2 refcount is 1 less than the
+      Option A run.
 
-Also compute hi_div in get_state() in 64-bit; hi_dur * (pre_div + 1) can
-exceed 32 bits before the existing promotion.
+Root cause, following the V6 series:
 
-This was first fixed downstream in OpenWrt for the qualcommbe target
-after testing on the Askey SBE1V1K, and has since been applied to
-OpenWrt's qualcommax target as well.
+  V6 patch 6 (usb: hub: Associate port@ fwnode with USB port device),
+  for each USB roothub port, calls
 
-Tested on a GL.iNet GL-AXT1800 (IPQ6018, 100 MHz PWM clock) whose DTS
-requests a 25 kHz period for its four-wire fan:
+      fwnode_graph_get_port_by_id(fwnode, port1, ...)
 
-  pwms = <&pwm 1 40000 0>;
+  where port1 is the USB port number (starts at 1). usb_2 is HS-only
+  (maximum-speed = "high-speed", single usb2-phy), so this is called
+  with port1 = 1 and looks up a DT node with reg = <1>.
 
-Before, pwm-fan failed to probe on every boot:
+  V6 patch 12 (pwrseq-pcie-m2: support matching on remote "port"
+  node) uses of_graph_get_remote_port(endpoint) to match the USB port
+  device's of_node against the M.2 endpoint's remote port.
 
-  pwm-fan pwm-fan: failed to enable PWM
-  pwm-fan pwm-fan: Failed to configure PWM: -34
-  pwm-fan pwm-fan: probe with driver pwm-fan failed with error -34
+Under Option (1) the singular "port { }" has no reg, so
+port_by_id(1) returns NULL, port_dev->dev.of_node is left NULL, the
+pcie-m2 match falls through, pwrseq_get() is never called for the USB
+target, port->pwrseq stays NULL, and W_DISABLE2# is never deasserted
+from the USB path. That's the missing refcount and the failed
+enumeration. Under Option A, port@1's reg = <1> matches port1 = 1,
+graph walks all the way to the M.2 slot and pwrseq_get() succeeds.
 
-The same failure is reproducible without pwm-fan, straight from sysfs:
+So on your (2) and (3): I don't disagree that "port@1 = SS" and "one
+endpoint per physical HS connection" are what the current
+snps,dwc3-common.yaml wants. The v3 shape is what works against the V6
+fwnode lookup, not what I think is semantically clean. Choice seems to
+be between:
 
-  # echo 40000   > period; echo 1 > enable   -> write error (-ERANGE)
-  # echo 2700000 > period; echo 1 > enable   -> succeeds
+  (a) keep "port@1 = SS" — then USB port 1 on a HS-only DWC3 has
+      nowhere to advertise its downstream connector node to the V6
+      lookup, and this M.2 wiring is not expressible; or
 
-Because probe returns before the tachometer IRQ is requested and before
-fan-supply is claimed, the board also lost fan RPM reporting and its
-vcc_fan regulator stayed disabled, leaving the DTS cooling-maps with no
-cooling device to bind to.
+  (b) renumber snps,dwc3 ports to match USB port numbering (port@1 =
+      HS if HS-only or SS if SS-capable, port@2 = HS if SS-capable),
+      parallel to Chen-Yu's mediatek,mtk-xhci change in V6 patch 11 [2].
 
-After, pwm-fan probes cleanly and the fan is confirmed spinning by its
-own tachometer:
+I want to avoid redefining the binding unilaterally, so two questions:
 
-  /sys/class/hwmon/hwmon7/name                          = pwmfan
-  /sys/devices/platform/pwm-fan/hwmon/hwmon7/fan1_input = 3548
-  /sys/class/regulator/regulator.3 (vcc_fan)            = enabled
-  /sys/class/thermal/cooling_device1                    = pwm-fan
+  Konrad: is there a DTS pattern I'm missing that would satisfy the
+  current binding and still let fwnode_graph_get_port_by_id(fwnode, 1,
+  ...) land on the M.2 connector for USB port 1? If not, would you be
+  open to a snps,dwc3-common.yaml renumbering patch along the lines of
+  Chen-Yu's mtk-xhci change?
 
-with idle SoC temperature dropping from ~76 °C to ~51 °C.
+  Chen-Yu: given the parallel with your patch 11, does snps,dwc3 need
+  the same treatment on the QCom side, and would you rather see that
+  patch go in ahead of your V6 or as a followup?
 
-Fixes: c436e3e9c265 ("pwm: Driver for qualcomm ipq6018 pwm block")
-Signed-off-by: Kenneth Kasilag <kenneth@kasilag.me>
-Tested-by: Stephane Lepain <stephanelepain@gmail.com>
-Signed-off-by: Stephane Lepain <stephanelepain@gmail.com>
----
- drivers/pwm/pwm-ipq.c | 101 +++++++++++++++++++++++++++++++-----------
- 1 file changed, 76 insertions(+), 25 deletions(-)
+The 3/3 sort-order comment will be fixed in v4 regardless.
 
-diff --git a/drivers/pwm/pwm-ipq.c b/drivers/pwm/pwm-ipq.c
-index c533739..2d8a013 100644
---- a/drivers/pwm/pwm-ipq.c
-+++ b/drivers/pwm/pwm-ipq.c
-@@ -89,10 +89,10 @@ static int ipq_pwm_apply(struct pwm_chip *chip, struct pwm_device *pwm,
- 			 const struct pwm_state *state)
- {
- 	struct ipq_pwm_chip *ipq_chip = ipq_pwm_from_chip(chip);
--	unsigned int pre_div, pwm_div;
--	u64 period_ns, duty_ns;
-+	unsigned int pre_div, pwm_div, best_pre_div, best_pwm_div;
-+	u64 period_ns, duty_ns, period_rate, min_diff;
- 	unsigned long val = 0;
--	unsigned long hi_dur;
-+	u64 hi_dur;
- 
- 	if (!state->enabled) {
- 		/* clear IPQ_PWM_REG1_ENABLE */
-@@ -113,34 +113,85 @@ static int ipq_pwm_apply(struct pwm_chip *chip, struct pwm_device *pwm,
- 	duty_ns = min(state->duty_cycle, period_ns);
- 
- 	/*
--	 * Pick the maximal value for PWM_DIV that still allows a
--	 * 100% relative duty cycle. This allows a fine grained
--	 * selection of duty cycles.
-+	 * The period spans (pre_div + 1) * (pwm_div + 1) input clocks. Rather
-+	 * than fixing pwm_div at its maximum (which gives usable duty
-+	 * resolution only for long periods and collapses to ~0% for short
-+	 * periods) search for the (pre_div, pwm_div) split whose period best
-+	 * approximates the request while leaving pwm_div large enough to
-+	 * resolve the duty cycle.
- 	 */
--	pwm_div = IPQ_PWM_MAX_DIV - 1;
-+	if (ipq_chip->clk_rate > 16ULL * GIGA)
-+		return -EINVAL;
-+	period_rate = period_ns * ipq_chip->clk_rate;
-+
-+	best_pre_div = IPQ_PWM_MAX_DIV;
-+	best_pwm_div = IPQ_PWM_MAX_DIV;
-+	min_diff = period_rate;
- 
- 	/*
--	 * although mul_u64_u64_div_u64 returns a u64, in practice it
--	 * won't overflow due to above constraints. Take the max period
--	 * of 10^9 (NSEC_PER_SEC) and the pwm_div + 1 (IPQ_PWM_MAX_DIV)
--	 *  10^9 * 10^8
--	 * ------------- => which fits well into a 32-bit unsigned int.
--	 * 10^9 * 65,535
-+	 * Smaller pre_div than this cannot represent the period (pwm_div would
-+	 * have to exceed its field), so start the search there.
- 	 */
--	pre_div = mul_u64_u64_div_u64(period_ns, ipq_chip->clk_rate,
--				      (u64)NSEC_PER_SEC * (pwm_div + 1));
--
--	if (!pre_div)
--		return -ERANGE;
-+	pre_div = div64_u64(period_rate,
-+			    (u64)NSEC_PER_SEC * (IPQ_PWM_MAX_DIV + 1));
-+
-+	for (; pre_div <= IPQ_PWM_MAX_DIV; pre_div++) {
-+		u64 remainder;
-+
-+		pwm_div = div64_u64_rem(period_rate,
-+					(u64)NSEC_PER_SEC * (pre_div + 1),
-+					&remainder);
-+		/* pwm_div is unsigned; the swap check below catches underflow */
-+		pwm_div--;
-+
-+		/*
-+		 * Swapping pre_div and pwm_div yields the same period but a
-+		 * larger pwm_div gives finer duty resolution, so once pre_div
-+		 * exceeds pwm_div every further candidate is strictly worse.
-+		 */
-+		if (pre_div > pwm_div)
-+			break;
-+
-+		/* need room for 100% duty, where hi_dur == pwm_div + 1 */
-+		if (pwm_div > IPQ_PWM_MAX_DIV - 1)
-+			continue;
-+
-+		if (remainder < min_diff) {
-+			best_pre_div = pre_div;
-+			best_pwm_div = pwm_div;
-+			min_diff = remainder;
-+
-+			if (min_diff == 0)
-+				break;
-+		}
-+	}
- 
--	pre_div -= 1;
-+	pre_div = best_pre_div;
-+	pwm_div = best_pwm_div;
- 
--	if (pre_div > IPQ_PWM_MAX_DIV)
--		pre_div = IPQ_PWM_MAX_DIV;
-+	/*
-+	 * If the search found no usable candidate, best_pwm_div is left at
-+	 * IPQ_PWM_MAX_DIV; cap it so pwm_div + 1 still fits the 16-bit field
-+	 * and 100% duty remains expressible.
-+	 */
-+	if (pwm_div > IPQ_PWM_MAX_DIV - 1)
-+		pwm_div = IPQ_PWM_MAX_DIV - 1;
- 
--	/* pwm duty = HI_DUR * (PRE_DIV + 1) / clk_rate */
--	hi_dur = mul_u64_u64_div_u64(duty_ns, ipq_chip->clk_rate,
--				     (u64)NSEC_PER_SEC * (pre_div + 1));
-+	/*
-+	 * high duration = duty_ratio * (pwm_div + 1)
-+	 *              = duty_ns * clk_rate / ((pre_div + 1) * NSEC_PER_SEC)
-+	 *
-+	 * Round to nearest to avoid biasing every duty cycle low, then clamp
-+	 * to (pwm_div + 1): rounding or a 100% duty request can otherwise push
-+	 * hi_dur past the period length and overflow the 16-bit HI_DURATION field
-+	 * (which would alias a full-on request down to a near-zero high time)
-+	 * and asking the hardware to stay high beyond one period. pwm_div is
-+	 * at most IPQ_PWM_MAX_DIV - 1, so pwm_div + 1 always fits the field.
-+	 */
-+	hi_dur = DIV64_U64_ROUND_CLOSEST(duty_ns * ipq_chip->clk_rate,
-+					 (u64)(pre_div + 1) * NSEC_PER_SEC);
-+	if (hi_dur > (u64)pwm_div + 1)
-+		hi_dur = (u64)pwm_div + 1;
- 
- 	val = FIELD_PREP(IPQ_PWM_REG0_HI_DURATION, hi_dur) |
- 		FIELD_PREP(IPQ_PWM_REG0_PWM_DIV, pwm_div);
-@@ -186,7 +237,7 @@ static int ipq_pwm_get_state(struct pwm_chip *chip, struct pwm_device *pwm,
- 	state->period = DIV64_U64_ROUND_UP(effective_div * NSEC_PER_SEC,
- 					   ipq_chip->clk_rate);
- 
--	hi_div = hi_dur * (pre_div + 1);
-+	hi_div = (u64)hi_dur * (pre_div + 1);
- 	state->duty_cycle = DIV64_U64_ROUND_UP(hi_div * NSEC_PER_SEC,
- 					       ipq_chip->clk_rate);
- 
+[1] https://lore.kernel.org/all/20260721065413.2306137-1-wenst@chromium.org/
+[2] https://lore.kernel.org/all/20260721065413.2306137-12-wenst@chromium.org/
+
+Thanks,
+
 -- 
-2.55.0
-
+Best Regards,
+Wei Deng
