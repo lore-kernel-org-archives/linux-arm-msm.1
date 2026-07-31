@@ -1,85 +1,88 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFC1F35E93B
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 05:53:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52ADA35EDBD
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 05:53:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785477233; cv=none; b=uADF0vmwbTEcEIUE5GoEQsX01yqF2yZLAvcpG6cdrq7DlDnKqKiHFJdRFYBWpszP2WgmAVkI0me9YckPMr/n24lojBO6RqRtrBzs6+Q/4opOFktklGbdsRUXlxAWKeLULPFMaqrXAhkk/TrkoPQjtXZCnsFozhaKlrpmWgh/+bs=
+	t=1785477234; cv=none; b=bCR8d87YD3HFcvD9jbhoSr5ihvDt4p3yXQ0S8I8BQ+YjmMWIRcXWdc8FKEpF5ZbCoKGe/wdRRaqfmSY1mVFRFaDJXcAangaqXIfZhJnwGsLfNvRLb7L7IfVA/GnhcNUnWeQCe7/p0HtlpvYmUIViHwbIAFtv03CWXcpWudQf4yo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785477233; c=relaxed/simple;
-	bh=e38rX0l4uVxIOcbqc8igZXZ/CMjDHKSXoW7V/dIp8dA=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=kI4PUiMZyjJ+toyQYQ8lcEjHr7Cb2k+4hfZyFeVO/CG9Wrh3klyrv6t3C/KPrjFXzICOb5KwB3qvQMV1D5YFo+dBJqC6P/UdTHsx3oofIQMoYfCIGTT8ktG3HKpN+8lieT+btNBlzp53vPm6f5bJK8oyiVXw5RA1SAEf3XaKm00=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Wvg3mPtU; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SkBiXV8y; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1785477234; c=relaxed/simple;
+	bh=TbWn2omPVPJIUFrb413uT0CtEMn7ALcSOCfFDea8q0o=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=Q4+GWU7sDaAQjt7XexTkV1EUcwjHgXqdUmyNPai8OX5uA/peswNxqYqykHeBolC/JVFiGOtsME+KAisp/mh6LhudQ7n+I58MqPawt3/7UmyOzy+jIesZ4YQTeOSEdVitBnZPg0/blXGht5Ed8m7KEK9mxmmci26MpzgL+PKLkGs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=aYeqRl0e; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RQTFw7QJ; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Wvg3mPtU";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SkBiXV8y"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66V5FBVU028661
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="aYeqRl0e";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RQTFw7QJ"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66V5HFDQ3235216
 	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 05:53:51 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=sG2maHNBlRhpFNm0jTg2CG
-	r6GPIhTgnZNBndxYr+Duk=; b=Wvg3mPtUahQQ6qwritD94y7ddMmjjVyZe1Shi2
-	jHUIcAIzEqujNwhe9YgnNRd5UrmCo6lw/8Id6aKF4VdhbQ3kiJZNAq0A2OAiZHjS
-	413eg3u1WTevrT+mph+OslSjun5odq4z1WhilCb4uZw9Ui+Tbi8OiZZf7uYkwBFT
-	FFYNaeNwgeOgiiTtbGxU5Y0oJ+1pIw8ayXIPOn6cTMqNYUxg5/Sp3bzIueoOJL2/
-	HxerYZHbCpCvWISJuutAt+ic5jkmwniqhQ6nTEpXE6Cy0cz2QMBO7ttCQr9POfr7
-	smvBHyAvfbWY/4LOlYMnVsKHRnMsvXP7cXnjwF+ydXtHFVfg==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4frnd5844f-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	6XBW2VUOMNQTO5Y3M800/LxQKX1APaxx1lbkAE2luv4=; b=aYeqRl0edc5CDyaN
+	bYQy48/jHDbsg3yC8Lv3J98el965SUJJjH6nK4BNc/CccvwSdK4QPFCothHjAFDa
+	frfFNTbd9Bc72IwmDqT3Ot8QwVcppNsbncmWYxTUTE9laFaakZ1czHH2eNpykMaZ
+	r5URikCdqfscqycBn5aXE+TRepAjxyko2fr+EvuYuRWR57TQ4Y+sAZ7nMMykpd4L
+	MJj1lzGdiZQYAc7GxgLZgBaNlCgLDIYV1zauePHs9w9pJ0XJDoyzW36yv+uqS+u1
+	Ri+RzWSCh8tUvCjgbE1vRrkVWQGBfMGQTlen5qNK2Y7XMzZYSEOlEUDQ4ovwkFYi
+	iqAIqw==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4frne503sg-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 05:53:50 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cab041eced3so927378a12.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 22:53:50 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 05:53:51 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-cb5bdd8450dso405410a12.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 22:53:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785477230; x=1786082030; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=sG2maHNBlRhpFNm0jTg2CGr6GPIhTgnZNBndxYr+Duk=;
-        b=SkBiXV8yPRnT4J2a1sJ03yC6NYfgyIzxq1CMdwnEryEZDvQBK8rfddQ6n7l8ukbLX8
-         XIumLEKl1BIokdXS+eB4p97ejS1ob7PwUodGJ83GKY8FsDKrk+KjK5C2jf96EvPBi4CN
-         06L7z1UIXSd24C2IHOPBSVMZUq2mAyDTa9NwZvaszuDGzmECEJJe3SjlUwpD/HVUuQau
-         XT7/QGkljwK556fodXtIM5q8UTFicg6a5lmg5Wv8YfgTwG5TUzg4gxdrwQQ0icpN3Jqe
-         xo9CDawdmLA6vdnjTyoyhposs1KxOFQRrf4fVKoLlvkuoS7sS0taVDDVQRynlU6A4Lr8
-         9q+A==
+        d=oss.qualcomm.com; s=google; t=1785477231; x=1786082031; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=6XBW2VUOMNQTO5Y3M800/LxQKX1APaxx1lbkAE2luv4=;
+        b=RQTFw7QJvNVjLbYBNQJoIIYHEhkHfgzfLql1Ns0qEpo0F+ddWAfeTk9ZEWemPiLOKK
+         A6E7ZStabvEMmLAYkS2KmjUrl1V286n7ROJSFEkNZLBApZ6liaJfnFW9pv3xN5FK308o
+         GPZ7MUhGFF3h3zxdXyAZLN9NIzSFF+7B6LYeS40lh/QQjzw/hTZtbDtmRZiXXjUIqDSF
+         xTZTdtXC7exTSUCpryxUPgSaEEbGLP6yjnUTyBCKuCRTshYyfXNz2QbTS6bz2oSwXAKF
+         qSKLeeWAII4jxRgTciLTnZO3NIBx2agGMr/jwlWhkPf1VXFFN7rxSZo/9dWt6StsuWev
+         nxrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785477230; x=1786082030;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=sG2maHNBlRhpFNm0jTg2CGr6GPIhTgnZNBndxYr+Duk=;
-        b=RRZchl11in6XMTNZB+65ru1aDvQd0cJrPC1q1fHDVIYVHd329QvYNX0lz+jPl5D04K
-         VXHOvA00N0OxbtZe8mt7F2M/0OOGD7DJkOYLubyU+teFnXw9X3PJXOBytTaQyzeT0WTw
-         q0/ZzOOngjP7uJ3N6RTroLq+cxvI1blQgtWVRzfKLiTIOX8a+V7Js2rieQk6a3zxouN1
-         wRNUY5QIl9wmO504tTctDD4BleNRX5HYZucdK6atUhhzuTUeqZKjmxH8xte1zxWtc1cf
-         IB5g4XAoKWgFmegq4q/n7WuaJLFXs6nDfi6igFwnm9v7d2bd+Kfe2G/N7316zNlszSQm
-         6EIw==
-X-Forwarded-Encrypted: i=1; AHgh+Rp5KYeo7TJcmZj1T2HhieeCkeAyU4MaDmELOCvotoBMbjFppcL/LfUmZqgG4rjsvN9FescTLm1F4U8mIWhA@vger.kernel.org
-X-Gm-Message-State: AOJu0YyDBcMaq/KRSYSqEmLJ7Qra8tsqlTbuUOpayJLB87eK+SXgbthi
-	t4A0iNN2fEm6iXAelm42WypPbO/uesJw5jlwXhJD2irZtJJf0d9RGRz/51gqKxRouG3bb87WFFH
-	NhT9y9426P4r1SFiE9/OwsoqnXQQYvN1RnDvEjMgJ8PjsCnXoV21JCh6T6hN82mGkgAKK
-X-Gm-Gg: AR+sD12N8R3CUpBo99c3852sW4erOa6fKo+jv3q6qGeO4LSCnDH0i/iXjP27CwfovWr
-	5V7XzoIfD7nBxXJOZw7NGNytI/yjkzlIwxhBe0tUGvIBZBQaXo4Q0cvR17PTy6ffpkbK5YojGSv
-	o71wPaBVsqJyiAbgGTNkZOb2PKfv6woH29cFG8A1yA45lPAly8R/DP9536eTwKnf/hz16DNK0+e
-	FIHxVfRrFaP3QHv7X8GbnIsJS99+8Dsc2rbD/njxT9UFoNkrmM8OYL+mYh/98/hmbuVA9fx169X
-	i1fwgplqPBT0n5qG4jVZit+3eRodKlsCZk2ZqUwTJ5FDW3klAyt/NQ/FYeVHhNq6YKIph0x2ywY
-	VQb3R0teSZ+/OHw/Fb8u5wlYuAcz6QFx1xQgsSV1N8tVOSwnBZg==
-X-Received: by 2002:a05:6a20:258a:b0:3b4:b340:411d with SMTP id adf61e73a8af0-3c91b11865emr535670637.24.1785477230118;
+        d=1e100.net; s=20251104; t=1785477231; x=1786082031;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=6XBW2VUOMNQTO5Y3M800/LxQKX1APaxx1lbkAE2luv4=;
+        b=qcrBzAvCB+0L6QlkIX7FHkS99NN8+hQ07iNDJyjWPJPTUnRIc7T7k0bQD2xdrz3fej
+         Li8cCGj8F3vbV+TVNOI/8f3/eNEzcXyTujnU6uX01hmIdnryR/DurA3nCDEvMQQA2+sK
+         H30YSkwn3TNtaaSJO4JyBThtF/Lg3/Q16QHhDJb6WyYmp92Rjlko+DJ50+1k4of4b8qV
+         rNe0sbk3e3ITvOam6teedvWG6SiJu6J7o8SxOXvIspc/EPVOzay/qalNO+0oySFbL7F0
+         BSBw/LI+euV5LmvRPoJO1Pb3VJWZFd0N1ok6L2omOX5IiDclP3h0O0IGFPFzOQ10qVp2
+         0CkQ==
+X-Forwarded-Encrypted: i=1; AHgh+Ro7zPaxLOW1V+gNH6xce5hixS7H3WcOjAjpy6WZ2Kd+gW6iLEK4J9csDDAYcHFubZeumiA360unSaKwv/+N@vger.kernel.org
+X-Gm-Message-State: AOJu0YzcrGjwXzHDoQIiyRT5SH7Nt1kzIvd+uC4xJJYbK1Ct2k0g3Ee4
+	OMLICdMQyYooj1xU4ICXDemuMoGqGd1Dx3U6jS5FMf3l+8SFz7f328zrXnea4c+VZufl14ZVYd3
+	fL16ydRGIDvyTKRxUR7npiPHOrg3MOP5iZ+rHdvk6EVmBXK5ImipRpUidZUexOOAKv/Bv
+X-Gm-Gg: AR+sD11qsME4X4vZOXJxzz9RFDk/9aC58+3NnB0H+74luUQC3rSVinrV1fxb5l0BCvV
+	FPBmJcnqYgbdBaz1aLAltSdYX4OfKCvszSoaOCdIg93YEoa8s2059ihdRhwyNiOk0O6uRdOK/U2
+	fMD2lTDUu02nrZgRMlybukSZjrzALivcyAUkLXBd9Fa1iD9Kg7Zaac+mTxydTwc1+FmYDDdWlhy
+	gjKzxKZCqF1nUezi51qYKEK6JGof6rJ/qaFE9QuacAy97otPT4y6CeiLvKGyj86IC7bU4bWTzp0
+	SsCMhU2I51mFugyKCYl+EmdZuEWW9iyV9vdNkIoPHpH6M9gLz3DxjYsXiFfjcp9giTPEzLkwjfe
+	2oUbEd1x/4N+qXf1tLqOSZ/tsheXQ1vwJ0T9EbcZpRBjr+2vOtw==
+X-Received: by 2002:a05:6a20:7b20:b0:3c3:b57b:645e with SMTP id adf61e73a8af0-3c91b0bf2a3mr469238637.5.1785477230817;
         Thu, 30 Jul 2026 22:53:50 -0700 (PDT)
-X-Received: by 2002:a05:6a20:258a:b0:3b4:b340:411d with SMTP id adf61e73a8af0-3c91b11865emr535650637.24.1785477229662;
-        Thu, 30 Jul 2026 22:53:49 -0700 (PDT)
+X-Received: by 2002:a05:6a20:7b20:b0:3c3:b57b:645e with SMTP id adf61e73a8af0-3c91b0bf2a3mr469213637.5.1785477230358;
+        Thu, 30 Jul 2026 22:53:50 -0700 (PDT)
 Received: from hu-doz-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd9c96asm1643675eec.7.2026.07.30.22.53.48
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd9c96asm1643675eec.7.2026.07.30.22.53.49
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 30 Jul 2026 22:53:49 -0700 (PDT)
+        Thu, 30 Jul 2026 22:53:50 -0700 (PDT)
 From: Dongfang Zhao <dongfang.zhao@oss.qualcomm.com>
-Subject: [PATCH v2 0/2] clk: qcom: Add GPUCC and GXCLK support for Hawi
-Date: Thu, 30 Jul 2026 22:53:47 -0700
-Message-Id: <20260730-gpucc-hawi-v2-0-7bf618ab8a34@oss.qualcomm.com>
+Date: Thu, 30 Jul 2026 22:53:48 -0700
+Subject: [PATCH v2 1/2] dt-bindings: clock: qcom: Add Hawi GPU clock
+ controllers
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,11 +91,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAGs4bGoC/03MQQ6CMBCF4auQWVtSCpTqynsYFs04wCRCsRXUk
- N7dSly4meSf5H0bBPJMAU7ZBp5WDuymFOqQAQ526knwNTUoqbRsZC36eUEUg32yMFjWVJRG6w4
- hDWZPHb927NKmHjg8nH/v9lp8vz9G6X9mLYQUSlXUGFNhd7RnF0J+X+wN3Tjm6UAbY/wArkcKH
- asAAAA=
-X-Change-ID: 20260705-gpucc-hawi-8c35e13866fc
+Message-Id: <20260730-gpucc-hawi-v2-1-7bf618ab8a34@oss.qualcomm.com>
+References: <20260730-gpucc-hawi-v2-0-7bf618ab8a34@oss.qualcomm.com>
+In-Reply-To: <20260730-gpucc-hawi-v2-0-7bf618ab8a34@oss.qualcomm.com>
 To: mturquette@baylibre.com, robh@kernel.org, andersson@kernel.org,
         conor+dt@kernel.org, sboyd@kernel.org, krzk+dt@kernel.org
 Cc: linux-kernel@vger.kernel.org, konrad.dybcio@oss.qualcomm.com,
@@ -100,77 +101,240 @@ Cc: linux-kernel@vger.kernel.org, konrad.dybcio@oss.qualcomm.com,
         linux-clk@vger.kernel.org, taniya.das@oss.qualcomm.com,
         bmasney@redhat.com
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785477228; l=1652;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785477228; l=6690;
  i=dongfang.zhao@oss.qualcomm.com; s=20260706; h=from:subject:message-id;
- bh=e38rX0l4uVxIOcbqc8igZXZ/CMjDHKSXoW7V/dIp8dA=;
- b=KUggpb9+KqNXldhI2q8TbnrZZke4Vct/nVbk7naRyJUW50oMX67yPg3WFDIfiz5rxqg6ozIqI
- wDbmCXmSBjDABIQIR1nj3lRClJImbocrsOj+sQEtQvWIJghiBx4Ornc
+ bh=TbWn2omPVPJIUFrb413uT0CtEMn7ALcSOCfFDea8q0o=;
+ b=Lpr4jff/WunGOZzFx51LAO2b7vBuX/mRxMATPtmKcSQw8y0hQsi014jobANWP5t3BXl4rSpLf
+ 5Tjja03Y1yvB12BjBvWPsasxG+py0F+2kD1Obe+0s05xenvIizYm26t
 X-Developer-Key: i=dongfang.zhao@oss.qualcomm.com; a=ed25519;
  pk=oRbMthG8BHvTvcxks87U5rUBoZiRXWKs6KZR6lV5C64=
-X-Proofpoint-ORIG-GUID: qcUlFla7QzY4-Puf3y7xzy-E5WVIQJwO
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDAzOCBTYWx0ZWRfXxGBHu2Hxp6UR
- +edoqlfuz4N8RlcF7bZMgPghm06fjRl8FjjskRRDnxJx6CY1vyMAIlE357UM25UdGG42UDfJO7G
- XG8Z4VfzuWQs73OIRzv51rV6Hp2wIHuyX3fKhODFvk7WeG3Mb5mhUsWgnjM0GVKlqBvcar7XXrD
- r2GJWOY++sAF1dWAPGxvQlvrFCf7ORkzvHmM7sUIjg1geEgo03IxSIyIf1U6wRJASTZ/0wPFHJX
- KW6sRO+GgEQ+VfW2r9qjG5UUg684CVBRwidmcs+4XrQ9DArWhPLvRfriOu+uEpofAy8QdUPld8f
- 9ZFOi3EqeZ/GIrYBctjU9kv82YSnULkGUIRWkg1YLifOmnFyliiJn8zKVpcSjfhh6vLqDZy9jd4
- GFA+khOrL09r/HP9XI2c1V2Aomjir8aVdBl7BALsnaf5K7gaACun04gUjaj4Jbv4e4lOETP+cov
- 2MaS72UBi+jOb7KGGbA==
-X-Proofpoint-GUID: qcUlFla7QzY4-Puf3y7xzy-E5WVIQJwO
-X-Authority-Analysis: v=2.4 cv=MLBQXsZl c=1 sm=1 tr=0 ts=6a6c386e cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+X-Authority-Analysis: v=2.4 cv=ftzsol4f c=1 sm=1 tr=0 ts=6a6c386f cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
  a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=LjwRoHMMlgVm7myvQdUA:9 a=QEXdDO2ut3YA:10
- a=bFCP_H2QrGi7Okbo017w:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDAzOCBTYWx0ZWRfXykz2YOrdBSfu
- U3/lBCRKPzQxMVCFnUZPtfiWe8o5/GRipn4vPrTk2IiIjZYF47bXpTxcrMcnc5DSWb7dvs/rlDL
- xvRpHaJ/cQBv4QyNzC01YVBxbGhsm0M=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=A1q_97lxy2FG9aqMPMkA:9 a=QEXdDO2ut3YA:10
+ a=_Vgx9l1VpLgwpw_dHYaR:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDAzOCBTYWx0ZWRfX4kPwY0kUVvuO
+ nQDqcqpVjW4GT4yPR1X5RVznj99argw5HW21HwoNGh4nC6z4Z/KFBw0hxj4VaHfVbyLnruTtCX/
+ ONI63CwNLtJJ4e1pu8K6gUaeCXcrfOw=
+X-Proofpoint-ORIG-GUID: Spk8ZEhljGi9Q11O6UoAFGo4OZaERfwx
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDAzOCBTYWx0ZWRfXylldIqmY4CLw
+ WODGJdfvXbLdbFvthYUBTqqFwqQ0VLM7xs/YZw25urKliKhe+6l+VjfeMnPkSdCu80evzPzjMwZ
+ Qm3W4FgEIQ/QKfRae+3Up2l95YE9ieCg3Wi2t9rw47ASPdkmds2Fdamw7K9byqi64B5+INkBf3T
+ QcSi6HDLpt2D5KKjSn0oL74TuNCQceX5+N6UHEr+CM3ZX4uwYyocMNptZTGk3iwq70iiy8z+QRC
+ 8CYwTNpjh8xnOxmUCUsihi0+OWiCEI4nV/vX0LfoaVym/d9alv320OiEzGsH9GrkcH+Hov6tY6X
+ PdCA6oyY+VU9yTwvCuY9q/3xiZ9DESYF4ijaMft4I2g39Ie8hn+abSU1DW9Givs6jc68A6BgR5H
+ +tZhhnECKM1RghsZvKYVeR0bHLtbsMLWm1YzAo/Iq+YV6NTwDuMkPKNrg8CiIy16p7ezw6ZdHPq
+ bpA3NM53GjlTdpTWr0g==
+X-Proofpoint-GUID: Spk8ZEhljGi9Q11O6UoAFGo4OZaERfwx
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-31_02,2026-07-30_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 priorityscore=1501 clxscore=1015 impostorscore=0 adultscore=0
- spamscore=0 bulkscore=0 suspectscore=0 lowpriorityscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607310038
+ spamscore=0 clxscore=1015 lowpriorityscore=0 priorityscore=1501
+ impostorscore=0 malwarescore=0 suspectscore=0 bulkscore=0 adultscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2607310038
 
-Add GPU clock controller (GPUCC) and GX clock controller (GXCLKCTL)
-support for the Qualcomm Hawi SoC.
+Add the device tree binding and clock, reset and power-domain IDs for the
+Hawi graphics clock controller. This lets Hawi device trees describe the
+GPU clocks, resets and power domains, and lets dtbs_check validate those
+nodes.
 
-The GPUCC provides clocks, resets and power domains for the GPU
-subsystem. The GXCLKCTL manages only the GX GDSC; remaining resources
-are handled by firmware. Hawi's GX clock controller reuses the existing
-gxclkctl-kaanapali driver via a fallback compatible
-("qcom,hawi-gxclkctl", "qcom,kaanapali-gxclkctl"), so no driver change
-is needed unless Hawi-specific behaviour is required later.
+Add the qcom,hawi-gxclkctl compatible for the Hawi GX clock controller,
+using qcom,kaanapali-gxclkctl as the fallback because the register layout
+is identical.
 
-Changes in v2:
-- dt-bindings: qcom,hawi-gpucc: reorder power-domains and required-opps
-  to MX, CX, GMXC to match existing GPUCC bindings (suggested by
-  Krzysztof Kozlowski)
-- dt-bindings: qcom,hawi-gpucc: shorten required-opps item descriptions
-  (suggested by Krzysztof Kozlowski)
-- clk: qcom: gpucc-hawi: collect Reviewed-by from Taniya Das
-- Rebased onto linux-next (20260730)
-
+Signed-off-by: Dongfang Zhao <dongfang.zhao@oss.qualcomm.com>
 ---
-Dongfang Zhao (2):
-      dt-bindings: clock: qcom: Add Hawi GPU clock controllers
-      clk: qcom: Add support for Hawi GPUCC
+ .../devicetree/bindings/clock/qcom,hawi-gpucc.yaml | 78 ++++++++++++++++++++++
+ .../bindings/clock/qcom,kaanapali-gxclkctl.yaml    | 22 +++---
+ include/dt-bindings/clock/qcom,hawi-gpucc.h        | 47 +++++++++++++
+ 3 files changed, 139 insertions(+), 8 deletions(-)
 
- .../devicetree/bindings/clock/qcom,hawi-gpucc.yaml |  78 ++++
- .../bindings/clock/qcom,kaanapali-gxclkctl.yaml    |  22 +-
- drivers/clk/qcom/Kconfig                           |  12 +
- drivers/clk/qcom/Makefile                          |   1 +
- drivers/clk/qcom/gpucc-hawi.c                      | 461 +++++++++++++++++++++
- include/dt-bindings/clock/qcom,hawi-gpucc.h        |  47 +++
- 6 files changed, 613 insertions(+), 8 deletions(-)
----
-base-commit: 95d6a9ccef99117115e41e9adb271243bd5e985b
-change-id: 20260705-gpucc-hawi-8c35e13866fc
+diff --git a/Documentation/devicetree/bindings/clock/qcom,hawi-gpucc.yaml b/Documentation/devicetree/bindings/clock/qcom,hawi-gpucc.yaml
+new file mode 100644
+index 000000000000..3e40bc3c061d
+--- /dev/null
++++ b/Documentation/devicetree/bindings/clock/qcom,hawi-gpucc.yaml
+@@ -0,0 +1,78 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/clock/qcom,hawi-gpucc.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Qualcomm Graphics Clock & Reset Controller on Hawi
++
++maintainers:
++  - Dongfang Zhao <dongfang.zhao@oss.qualcomm.com>
++
++description: |
++  Qualcomm graphics clock control module provides the clocks, resets and power
++  domains on Qualcomm SoCs.
++
++  See also: include/dt-bindings/clock/qcom,hawi-gpucc.h
++
++properties:
++  compatible:
++    const: qcom,hawi-gpucc
++
++  clocks:
++    items:
++      - description: Board XO source
++      - description: GPLL0 main branch source
++      - description: GPLL0 div branch source
++
++  power-domains:
++    items:
++      - description: A phandle to the MX power-domain
++      - description: A phandle to the CX power-domain
++      - description: A phandle to the GMXC power-domain
++
++  required-opps:
++    items:
++      - description: MX performance points
++      - description: CX performance points
++      - description: GMXC performance points
++
++required:
++  - compatible
++  - clocks
++  - power-domains
++  - required-opps
++  - '#power-domain-cells'
++
++allOf:
++  - $ref: qcom,gcc.yaml#
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/clock/qcom,hawi-gcc.h>
++    #include <dt-bindings/power/qcom,rpmhpd.h>
++
++    soc {
++        #address-cells = <2>;
++        #size-cells = <2>;
++
++        clock-controller@3d90000 {
++            compatible = "qcom,hawi-gpucc";
++            reg = <0x0 0x03d90000 0x0 0x9800>;
++            clocks = <&bi_tcxo_div2>,
++                     <&gcc GCC_GPU_GPLL0_CLK_SRC>,
++                     <&gcc GCC_GPU_GPLL0_DIV_CLK_SRC>;
++            power-domains = <&rpmhpd RPMHPD_MX>,
++                            <&rpmhpd RPMHPD_CX>,
++                            <&rpmhpd RPMHPD_GMXC>;
++            required-opps = <&rpmhpd_opp_low_svs>,
++                            <&rpmhpd_opp_low_svs>,
++                            <&rpmhpd_opp_low_svs_d3>;
++            #clock-cells = <1>;
++            #reset-cells = <1>;
++            #power-domain-cells = <1>;
++        };
++    };
++...
+diff --git a/Documentation/devicetree/bindings/clock/qcom,kaanapali-gxclkctl.yaml b/Documentation/devicetree/bindings/clock/qcom,kaanapali-gxclkctl.yaml
+index e868963f659b..28b653f6b64d 100644
+--- a/Documentation/devicetree/bindings/clock/qcom,kaanapali-gxclkctl.yaml
++++ b/Documentation/devicetree/bindings/clock/qcom,kaanapali-gxclkctl.yaml
+@@ -4,25 +4,31 @@
+ $id: http://devicetree.org/schemas/clock/qcom,kaanapali-gxclkctl.yaml#
+ $schema: http://devicetree.org/meta-schemas/core.yaml#
+ 
+-title: Qualcomm Graphics power domain Controller on Kaanapali
++title: Qualcomm Graphics GX Power Domain Controller
+ 
+ maintainers:
+   - Taniya Das <taniya.das@oss.qualcomm.com>
+ 
+ description: |
+-  Qualcomm GX(graphics) is a clock controller which has PLLs, clocks and
+-  Power domains (GDSC). This module provides the power domains control
+-  of gxclkctl on Qualcomm SoCs which helps the recovery of Graphics subsystem.
++  The Qualcomm graphics GX clock controller (GXCLKCTL) contains PLLs, clocks
++  and power domains (GDSC). This module provides the power domain control of
++  GXCLKCTL on Qualcomm SoCs, which helps the recovery of the graphics
++  subsystem.
+ 
+   See also:
+     include/dt-bindings/clock/qcom,kaanapali-gxclkctl.h
+ 
+ properties:
+   compatible:
+-    enum:
+-      - qcom,glymur-gxclkctl
+-      - qcom,kaanapali-gxclkctl
+-      - qcom,sm8750-gxclkctl
++    oneOf:
++      - enum:
++          - qcom,glymur-gxclkctl
++          - qcom,kaanapali-gxclkctl
++          - qcom,sm8750-gxclkctl
++      - items:
++          - enum:
++              - qcom,hawi-gxclkctl
++          - const: qcom,kaanapali-gxclkctl
+ 
+   power-domains:
+     description:
+diff --git a/include/dt-bindings/clock/qcom,hawi-gpucc.h b/include/dt-bindings/clock/qcom,hawi-gpucc.h
+new file mode 100644
+index 000000000000..181534771b10
+--- /dev/null
++++ b/include/dt-bindings/clock/qcom,hawi-gpucc.h
+@@ -0,0 +1,47 @@
++/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ */
++
++#ifndef _DT_BINDINGS_CLK_QCOM_GPU_CC_HAWI_H
++#define _DT_BINDINGS_CLK_QCOM_GPU_CC_HAWI_H
++
++/* GPU_CC clocks */
++#define GPU_CC_AHB_CLK						0
++#define GPU_CC_CB_CLK						1
++#define GPU_CC_CX_ACCU_SHIFT_CLK				2
++#define GPU_CC_CX_GMU_CLK					3
++#define GPU_CC_CXO_AON_CLK					4
++#define GPU_CC_CXO_CLK						5
++#define GPU_CC_DEMET_CLK					6
++#define GPU_CC_DPM_CLK						7
++#define GPU_CC_FREQ_MEASURE_CLK					8
++#define GPU_CC_GMU_CLK_SRC					9
++#define GPU_CC_GPU_SMMU_VOTE_CLK				10
++#define GPU_CC_GX_ACCU_SHIFT_CLK				11
++#define GPU_CC_HUB_AON_CLK					12
++#define GPU_CC_HUB_CLK_SRC					13
++#define GPU_CC_HUB_CX_INT_CLK					14
++#define GPU_CC_HUB_DIV_CLK_SRC					15
++#define GPU_CC_MEMNOC_GFX_CLK					16
++#define GPU_CC_MXG_AHB_CLK					17
++#define GPU_CC_MXG_XO_CLK					18
++#define GPU_CC_PLL0						19
++#define GPU_CC_RSCC_HUB_AON_CLK					20
++#define GPU_CC_RSCC_XO_AON_CLK					21
++#define GPU_CC_SLEEP_CLK					22
++
++/* GPU_CC power domains */
++#define GPU_CC_CX_GDSC						0
++#define GPU_CC_MXG_GDSC						1
++
++/* GPU_CC resets */
++#define GPU_CC_CB_BCR						0
++#define GPU_CC_CX_BCR						1
++#define GPU_CC_FAST_HUB_BCR					2
++#define GPU_CC_GMU_BCR						3
++#define GPU_CC_GX_BCR						4
++#define GPU_CC_MXG_BCR						5
++#define GPU_CC_XO_BCR						6
++
++#endif
 
-Best regards,
 -- 
-Dongfang Zhao <dongfang.zhao@oss.qualcomm.com>
+2.43.0
 
