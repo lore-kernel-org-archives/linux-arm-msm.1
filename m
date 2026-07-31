@@ -1,68 +1,33 @@
-Received: from mail-wr1-f49.google.com (mail-wr1-f49.google.com [209.85.221.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55E85357D05
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 08:55:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A78F61EEA3C;
+	Fri, 31 Jul 2026 09:06:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785488119; cv=none; b=pPL3KxwxWM95kR7/2j5+H3mRlGbXwA/vIIkpye+QosHZYiL0050sFK7LyfXsfFgDfRn/221xnC9WVrN397dop6Zee4bexJt07Qj4I0u2iSghr7ozAku1Y5ODCWIdpzKRVw4KXAVAL3Vh+NMeqRKeb82I0mvsy32lwb9ptg2WUDw=
+	t=1785488797; cv=none; b=Bx5V6GOepfYdE0ak8qDRqmmJaoEZSgAxle3gnJ+JF1/uwbKS4VNFRn6LtJGHQpyXQjX+Vgf3F0W9JvDvFDdvtPy4o9XioYIX4EjFy+nzosIo4aJcO3ROvAdE9jLqoRRlJBaBr9AJ1IJ3yu0OFqul71m+S9sZsEnhoP3D+iK2veg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785488119; c=relaxed/simple;
-	bh=yIpEzvjKVOlYYV/ZI/h1Drlk6YvOIqNwrObuWA/sS8M=;
+	s=arc-20240116; t=1785488797; c=relaxed/simple;
+	bh=X6CY4GPNH27/gyynup8HiT1qUJM1NisPjvOe1AUUwms=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=PJLtJ4Ex9X5OiA3oOMq95JKJNvyI4AvCyetRUBnTDGpr46GnfiiX3Qw7Mh7b9o/xtiAhc1QZi/ZRIhdkjj9fOCGj++pTzm/GlTOhsdnJMvlm6qINYVl2donX772F1VQOwLo3KuzXr0WSjjzGORFFBLm6ZOxKymWSU06/McD74no=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=qgG72Ui5; arc=none smtp.client-ip=209.85.221.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	 In-Reply-To:Content-Type; b=gFTTrVMz3YLDLJAonmFv0ioJXFUuSZGesjR0CjW9NLCDtKzy2RG62e/LGj01oGXGkyWTKmMnpRjBaMa2KPphYID56/AiAbXilt+uW+4fhmY5UqLvYbBkJNG9gzMYFlhN+gX/DDA6SnyDGo/9+wxyoj+fkPOzmcX8jNJRU9kRwaI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=h3Duyklu; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="qgG72Ui5"
-Received: by mail-wr1-f49.google.com with SMTP id ffacd0b85a97d-476a130c138so873151f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 01:55:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1785488114; x=1786092914; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:from:references:cc:to:subject:reply-to
-         :user-agent:mime-version:date:message-id:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=fkKzcL3RL55Va2wcGsVulbs5kxhckxkItU6uV2P+1l4=;
-        b=qgG72Ui5UTjTwxE2CpyF4iAszRHTIfR8E9CMDd2PIxVp7x0ZowUJZiwk/Gjhc3BKbJ
-         jXoJNbnnTXvd0DvgVbCteyDfVvgfK2ITaUgWzXcCCXeBziaIqBFNYjTqNFQsu9X+D57A
-         kYCIuOPHgRCJiPKRSZCC1HiKJ/zffTzfzKj8MsA0pys8CkQGVHJDfMk/xKcAa54Ap6cD
-         n7T+MUzPODDLdfjNBUmt7Jo3PAG1ZtffqtW52NRu25dClFg5NEoXzOxRXvTXJA3xHzLv
-         +dU2rkYlIT8svlXTExftOco7jpq29QpZTomkSRH/CR0P+oDLJ2VPxGtJr6u6Ud17/Vce
-         oH3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785488114; x=1786092914;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :autocrypt:content-language:from:references:cc:to:subject:reply-to
-         :user-agent:mime-version:date:message-id:x-gm-gg:x-gm-message-state
-         :from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=fkKzcL3RL55Va2wcGsVulbs5kxhckxkItU6uV2P+1l4=;
-        b=WRXDfQ9kh/hQKg3GRL4uhkCdYQkPCvIaBscbJplLH3VXUKBz52xUOI8It1wF2nJoSg
-         Pzsbu/IZrVK0KXZaRPJeM16pboKdoA86pGqw93+oa4f4shqT/rIMdijrU5rvCduv0I2c
-         OisBisHLap3+nVmj/YQRTAj+kTtiiEBdIko+ga5omSi8N9MtvZ1tKWeJiIESFIwbe5R1
-         hKhyAAOm9OwfjUp+pPODWAbxgCAc5EKDTcq3dEIgzkdwtZzKfR19Vt56HWVY0ztjsROq
-         1IeCUS2h5x9G1cAM29USMuRYMArOcSb8sjmKN+nudg9ZcPDIrWsbiWBRUKt4HAdkB+Cq
-         evWA==
-X-Forwarded-Encrypted: i=1; AHgh+RrsBtond7kXE0H1mkwMgqvTiTLOxo4E2NCJKlBdtXTmYIKIQDHpmVqgWPjts3AULZ77OJ1puEtC6NNEpMxF@vger.kernel.org
-X-Gm-Message-State: AOJu0Yws6aJquA4VdPj7kApzr+/Ck60hgscQToiHAtL1A9jrlMQCCkB9
-	e0t+SSETx9NzY1El3whlhPjWsjPSIYmyff5s+SdJGFKmVZGv4oHSTj3g9AhUMrXPmSg=
-X-Gm-Gg: AR+sD10V+H0d8P77XCCv9hbCdQ6jtND7/yAXhK5fWJzyhwjXexVuZxULcOyvxuc3PlU
-	gYA0Y1UXQRXSuDBtQ3f8UUZfmKXgHH0N0AA1suzS42vVfUmSlWnZKqSj/LBJ2Lmc0g9sI3BIr4w
-	DC+0jWpFw5PHOo2+BJZjcJzMirzzoJ3VlUuLdxCO443o7ymrazZNDWV9xvz3EkYG8+IbnViP/0x
-	AfvXH6H6XsAW8oQfhNwDqmLCHoV6oo0dAvlGyN0ej2zRZ52Q4NBEN3C/ibEwS4EUhGkXB5mzs2J
-	jnFihhsJP3vj8CxtlmCBndgpKEAYv8o8lXwhf2K/hsN4SP+C6O1uWjHnL//KuobigUlTBprBHww
-	pHJAF6NgmgT/+4zJZ/uoCIKy3PLxTtwkbB3J+GyGF2LvX4PmWgH1cH0qLJy4lvB7kwyGf0tMDcp
-	e4UvlTafJz0IFqkz0hPbKnWoIPjOsCVjacAobsoVGfLZhMtZobTDp1ZPqfyUn38yQuaeVjB2h6O
-	hJnTrdwCEWP3VINEVReXgacHLAcgLNTvj1zEcIONg==
-X-Received: by 2002:a05:6000:70e:b0:47f:91eb:342 with SMTP id ffacd0b85a97d-47fd2ac9f82mr3008798f8f.13.1785488113613;
-        Fri, 31 Jul 2026 01:55:13 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:106d:1080:6c49:d2f1:f94:1fb2? ([2a01:e0a:106d:1080:6c49:d2f1:f94:1fb2])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-47fd458ab61sm2254023f8f.25.2026.07.31.01.55.12
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 31 Jul 2026 01:55:13 -0700 (PDT)
-Message-ID: <34d2df7e-1754-4c0c-a685-c1b511161702@linaro.org>
-Date: Fri, 31 Jul 2026 10:55:12 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="h3Duyklu"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 039D41F000E9;
+	Fri, 31 Jul 2026 09:06:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785488796;
+	bh=rKzJJsEhcg9aCW+oJgDz0AYX9+9OY1teunyfmPeNJGU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=h3DuykluckXSB08Y1LZyRt+8HscaZjyaPvXrPBgSKvqvquqWI7SSliBPeu5gEe9Dc
+	 W8tJF6TjQ6kp2OxZHboXBzh+oZxRT3ikThB2unVrmoPcyAaODzBefAnbxWPlNvGsjF
+	 2PtGyK8jqv4RHYcGEjrXUsqXB2Jhzwj+GJlYnHmnThi7SaTe7+wnFgRgOcioYaokcP
+	 r9SGKMNgGUEKFC1UURGua9x/Gz8GKyNOx+oW2fcCPK2qBlggrd/Pwgu84wWMI+Di1/
+	 bOL8jrg9v3cZ9NumbySueuHBi/3r3sbQYzJQd5TzV3RJiIj9cHTy9i8YiqXyBBH97q
+	 F3QCQ9ZdMsapQ==
+Message-ID: <a28c2903-0976-4559-b870-4de5553ba9ab@kernel.org>
+Date: Fri, 31 Jul 2026 11:06:28 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -70,89 +35,108 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Reply-To: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] arm64: dts: qcom: sm8650: Assign CCI clock rates to
- 37.5MHz
-To: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org
-References: <20260729112719.1151700-1-vladimir.zapolskiy@linaro.org>
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20260729112719.1151700-1-vladimir.zapolskiy@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [PATCH] crypto: qce - Replace with stub driver
+To: Eric Biggers <ebiggers@kernel.org>, linux-crypto@vger.kernel.org,
+ Herbert Xu <herbert@gondor.apana.org.au>
+Cc: linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-kernel@vger.kernel.org, Demi Marie Obenour <demiobenour@gmail.com>,
+ Bartosz Golaszewski <brgl@kernel.org>,
+ Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+References: <20260731050838.158825-1-ebiggers@kernel.org>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20260731050838.158825-1-ebiggers@kernel.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 7/29/26 13:27, Vladimir Zapolskiy wrote:
-> Setting CCI supply clock rate to higher value of 37.5MHz allows to
-> program the controller to configure its I2C bus speed to Fast-mode plus.
-> 
-> Signed-off-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-> ---
->   arch/arm64/boot/dts/qcom/sm8650.dtsi | 6 ++++++
->   1 file changed, 6 insertions(+)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/sm8650.dtsi b/arch/arm64/boot/dts/qcom/sm8650.dtsi
-> index a64922c21267..a14e11d81488 100644
-> --- a/arch/arm64/boot/dts/qcom/sm8650.dtsi
-> +++ b/arch/arm64/boot/dts/qcom/sm8650.dtsi
-> @@ -5615,6 +5615,8 @@ cci0: cci@ac15000 {
->   			clock-names = "camnoc_axi",
->   				      "cpas_ahb",
->   				      "cci";
-> +			assigned-clocks = <&camcc CAM_CC_CCI_0_CLK>;
-> +			assigned-clock-rates = <37500000>;
->   			pinctrl-0 = <&cci0_0_default &cci0_1_default>;
->   			pinctrl-1 = <&cci0_0_sleep &cci0_1_sleep>;
->   			pinctrl-names = "default", "sleep";
-> @@ -5648,6 +5650,8 @@ cci1: cci@ac16000 {
->   			clock-names = "camnoc_axi",
->   				      "cpas_ahb",
->   				      "cci";
-> +			assigned-clocks = <&camcc CAM_CC_CCI_1_CLK>;
-> +			assigned-clock-rates = <37500000>;
->   			pinctrl-0 = <&cci1_0_default &cci1_1_default>;
->   			pinctrl-1 = <&cci1_0_sleep &cci1_1_sleep>;
->   			pinctrl-names = "default", "sleep";
-> @@ -5681,6 +5685,8 @@ cci2: cci@ac17000 {
->   			clock-names = "camnoc_axi",
->   				      "cpas_ahb",
->   				      "cci";
-> +			assigned-clocks = <&camcc CAM_CC_CCI_2_CLK>;
-> +			assigned-clock-rates = <37500000>;
->   			pinctrl-0 = <&cci2_0_default &cci2_1_default>;
->   			pinctrl-1 = <&cci2_0_sleep &cci2_1_sleep>;
->   			pinctrl-names = "default", "sleep";
+On 31/07/2026 07:08, Eric Biggers wrote:
+> None of the algorithms the QCE driver registers with the crypto API are
+> even close to being useful.  They're massively outperformed by the
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+The amount of patches you send towards removal of QCE is really
+stunning. Or rather worrying. This is like third approach or so.
 
-Thanks,
-Neil
+Your previous approaches received valid feedback, including even fixes
+and committment of new maintainer.
+
+But you even complained that it does receive fixes! [1]
+
+We removed the driver temporarily from typical configurations, so no one
+will be affected, by whatever is found now and not yet fixed. Still not
+enough! For you this was reason to remove the driver (AGAIN!) [2]
+
+This is beyond comprehension and very unpleasant, because you actively
+work against the community with this approach.
+
+NAK
+
+Nacked-by: Krzysztof Kozlowski <krzk@kernel.org>
+
+
+[1] https://lore.kernel.org/all/20260728152241.GA4281@quark/
+[2] https://lore.kernel.org/all/20260724050645.223799-1-ebiggers@kernel.org/
+
+> CPU-based crypto (even actually using far more CPU cycles than the
+> CPU-based crypto, due to the massive driver overhead), don't provide any
+> security benefits over the CPU-based crypto, and have various other
+> issues.  They're also unrelated to the Inline Crypto Engine which works
+> far better and is what is actually being used these days.
+> 
+> Due to the major performance problems people experienced when
+> accidentally using this driver, the algorithms were already demoted to
+> below the priority of ARMv8 CE in the crypto API several years ago.
+> Regardless of priority, these algorithms also aren't compatible with the
+> most common uses of in-kernel crypto; for example, they don't support
+> dm-crypt because they allocate memory, and they don't support IPsec
+> since they take a mutex which isn't compatible with softirq context.
+> 
+> It's time to move on and just drop this obsolete functionality entirely.
+
+Best regards,
+Krzysztof
