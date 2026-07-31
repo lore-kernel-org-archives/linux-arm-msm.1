@@ -1,167 +1,173 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f42.google.com (mail-lf1-f42.google.com [209.85.167.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BECA72DB780;
-	Fri, 31 Jul 2026 04:29:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDD3A342509
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 04:58:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785472171; cv=none; b=bGMQSl9A8GwGMzvgRDvg0+0lt2mv+sT7V1mcP7qGmnKBb69nnZshaCDFhy5LygLpnpAgFqNdovjyZI0/l1TgDZjSGa6znoiYc4jHv5DWWsXYLREmlWjseO9dx4S4Psxv+/IQZDYUKsFp7pkYekoKwQsYJNPM1/motU/VbGB9nUs=
+	t=1785473882; cv=none; b=OanB+q9CmUlv1DVfjHB/a9FtqlaVVcz6hN80YDg1tyFPBZTY2VpIKGfnVlN85DPCrZRd7rNNUr7nZMamt/VwVSPVdP4bmJ541L2X9GBn5R2XTvodsDtazXHU12Sj7aGBtdzI1nTiFRjW/P93WyuQJqpKuMVO7WofdMlTTUtYH3g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785472171; c=relaxed/simple;
-	bh=xVT41tiow7rGr8rDiJVtMRgY3HThsFhiKy3F6dkB6iU=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=si10ZayKdQrM8wYthYI4UHX/By+K3ZT6zsTtFKhsOHHJ+D7NACTQiZYupyqhC1kLraE7ifh40f7XZPiYV7Eyqa6pubnBXn6bCeC8Vhh5GI3s6SdkWdYgHYje+3w/fSVPVObYXONfupYSpZ6mMIa5uhGrboDZXDx63cdMV034M4g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=IAvsapQT; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
+	s=arc-20240116; t=1785473882; c=relaxed/simple;
+	bh=X6OGDm/VB6iIh58IJAWY8WxflOxDrgUmL0JJMy/Fk+k=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Wqgx7HsSXE8KpP9hwpDyalwwN2j5xvI3/Nd+r+GWkc1V2Tp13hG+WKNlivaxzdzfy6/sck2LHkk9UyBed80nxzXcjkB2vvi0qm+CHpqL997SIi2fApNtRDKG3xFUkRA/2iO72y56MbMpo2KC80Sr0WHlUR2PxkZOEzu+fd5f3wg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=qGGkgCzw; arc=none smtp.client-ip=209.85.167.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="IAvsapQT"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66V1uXA63063088;
-	Fri, 31 Jul 2026 04:29:25 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=lGlKRjmAC0x2z10mK08MbuMqi2JAh0ejIVP
-	hL9lmmy8=; b=IAvsapQT6LRVzdD348AQr8thgFNplQWZMzHwEH9r7x3cqCK8tD5
-	8B0WLrL3uXBwQt9MrhA5kRd8mJOLAEl1IRNtPOJjpuUZnZN48HK7KLfYjP1Fm3i3
-	Rqv0UagTLZed1QZKeDLfR1Eet4EnEVMU4gJeUC5z5jIYV/etMl8XJNE154YRy+rK
-	dvjQZz8jcbvT+UIHrAQXj74+lDGkAK1FQWw6ZveXmVXQI1JFWWfu2MKsED41wDMM
-	/p7NlSFO8tzsCWkE+kM7ohJyNDXuOeOtmFfCkOkTB1wKxlmReit3vi3hVgseWpbA
-	wOeWsoa5a4Mp8c7oW0h62/wS4JgrFm5iCNg==
-Received: from aptaippmta01.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4frj750gfm-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 31 Jul 2026 04:29:25 +0000 (GMT)
-Received: from pps.filterd (APTAIPPMTA01.qualcomm.com [127.0.0.1])
-	by APTAIPPMTA01.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTP id 66V4TNPb002787;
-	Fri, 31 Jul 2026 04:29:23 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by APTAIPPMTA01.qualcomm.com (PPS) with ESMTPS id 4fmp7ku4j4-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 31 Jul 2026 04:29:23 +0000 (GMT)
-Received: from APTAIPPMTA01.qualcomm.com (APTAIPPMTA01.qualcomm.com [127.0.0.1])
-	by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 66V4TMjA002781;
-	Fri, 31 Jul 2026 04:29:23 GMT
-Received: from shuaz-gv.ap.qualcomm.com (smtphost-taiwan.qualcomm.com [10.249.136.33])
-	by APTAIPPMTA01.qualcomm.com (PPS) with ESMTPS id 66V4TMbS002776
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 31 Jul 2026 04:29:22 +0000 (GMT)
-Received: by shuaz-gv.ap.qualcomm.com (Postfix, from userid 4467449)
-	id 90DDE638; Fri, 31 Jul 2026 12:29:21 +0800 (CST)
-From: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
-To: Marcel Holtmann <marcel@holtmann.org>,
-        Luiz Augusto von Dentz <luiz.dentz@gmail.com>
-Cc: linux-bluetooth@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, chejiang@qti.qualcomm.com,
-        quic_chezhou@quicinc.com, wei.deng@oss.qualcomm.com,
-        jinwang.li@oss.qualcomm.com, mengshi.wu@oss.qualcomm.com,
-        Shuai Zhang <shuai.zhang@oss.qualcomm.com>
-Subject: [PATCH v1] Bluetooth: mgmt: always reply when a queued mgmt command is cancelled
-Date: Fri, 31 Jul 2026 12:29:20 +0800
-Message-Id: <20260731042920.2431343-1-shuai.zhang@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="qGGkgCzw"
+Received: by mail-lf1-f42.google.com with SMTP id 2adb3069b0e04-5b01910b499so412126e87.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 21:58:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785473879; x=1786078679; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=cWVsaGtK4t8BYwwX0u/oZhTbeS39OgGPkH3ocWt5uz4=;
+        b=qGGkgCzwqvlkSj2llLZEgYbpahz4ulNM6i4HwHIhrer1UpYBu6EFOijQ0eBJ/7qyYV
+         hkdn3REp/ps7gLN1+nkR6vmTJKDCO1nZe0v5aPpyz52epWDfIDVLXIWTLpVuDNYWa1e/
+         CckMk4ysuFISquriklIK9s6IAUkhgX7Krxt5g4/TUGVdMMwjHA6y8U/kWlaq/Cu6+/uz
+         UutGfwK9o9Fvbm4A2MGnUJIaZNGUiWnN4jTvHZiMJ2AzAL0ZV7izMCEO4eSnEox1HDN5
+         ileVxK2b9D8OLWlNKxgs88QRxZtyDiVLCFDv/dwIh5u1/70UZEDV8ghgdYG7qTBKjbTi
+         Em0w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785473879; x=1786078679;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=cWVsaGtK4t8BYwwX0u/oZhTbeS39OgGPkH3ocWt5uz4=;
+        b=HZ9pjyw4Ag5qiKLsyulBk8xKaQAgq/MK9VYYtEVp8wX4ava0XYWLsktfIFMwgr85Rk
+         E9iN3KK6G6lDEzodwQq5ocsEKnNVmAQVLcG2UW3x3cCqrPzf1c5haWsZae4zS/glcr8A
+         aE6kcRzylg8Niim/0/6z2oXjeBtO5qKYAlC0T4QbJcjImkBKCN1Xe4UfRSOr00bN26tq
+         wzvXbzkfWZ/zcvvyMWHYeJbChoZepDfC6Ne0+vw17+x0ZKlzn6BOHsHlFZZLu+o0IvG4
+         FF6noKuIL7eez252kGNGTQkY7ojdA51z9BvjvG5lTflU+B9GmFWlXqquKyiWvva3PsP3
+         lmtw==
+X-Forwarded-Encrypted: i=1; AHgh+RrICLFLXwgnITDvuwfHs7Dyj9VrzzS9ec8E1AShLiPJ8kU21Mn3XKuFjFLahCQoCDS7RMWJoWfcYoozyfQH@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxw0HlDwk/+H3AUx7iVayKzBEJJploI36ZO1iDhq3XVqz1KLI27
+	B2WGCpoUXfqOeXuzH+K7ABOlTYvt86HoWgVdFl29TVaMKjjQJZfHsmMY
+X-Gm-Gg: AR+sD10NzsKHcbnYVlHVX3sy5YEReKkVj/50WxRU4umweNp2fN1l+C/Nep/7diyomAx
+	OLoU8z37OifN0Gk/6y4cCcd/ygRuqei55HlXN/WoNfYhBlyXcdZSNEs3hUnU+wQSINtmIxj3o3x
+	5K8KnX9SmC135WdDbQqppCnLNGqEDFJrOctjiaXTOWbLAcpY6tXXhSJHsarvY4YFpwAZ6NoYD/s
+	urIq4dYCiOsd9RJ1t+XSkk/U3m/xdsWanhc0O6gz7PAwWJqQGT4nn58zQyOgJ6aVedIBYoxkW7u
+	Ipk17tDEV857wpIgtQWn/JNZUke1nfBoBnBbzxK/EXUVVPSRaIncL8Chm8HdVsCAjhR3qYoI+Ky
+	0LMhWY4KRKd+Y3tDpfLfJm10js50IfxU+LMvI0mLmzfklm6sIOGdyT46U3XFwM/1ZzstQgmDtBK
+	GFlC0Pe3/k9p+t0Cq4rfTA8YRBnadcdy7qLEfUG6g8+LD13xuDt45Y1Dgp+JUyjQz2oeqlRFc7d
+	7CkblHtz5Rn+YKpbEU8kNSdNxmRcn+eulScAItS2BiCOA==
+X-Received: by 2002:a05:6512:6185:b0:5b2:afd7:ec48 with SMTP id 2adb3069b0e04-5b2e2349c05mr70476e87.32.1785473878783;
+        Thu, 30 Jul 2026 21:57:58 -0700 (PDT)
+Received: from ?IPV6:2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703? ([2a10:a5c0:800d:dd00:8fdf:935a:2c85:d703])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2e245c8basm58952e87.84.2026.07.30.21.57.57
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 30 Jul 2026 21:57:58 -0700 (PDT)
+Message-ID: <1cc56b2d-457a-4152-b701-ee05c2e203db@gmail.com>
+Date: Fri, 31 Jul 2026 07:57:56 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/3] power: reset: pscrr: add watchdog pretimeout
+ reason tracking
+To: Guenter Roeck <linux@roeck-us.net>,
+ Oleksij Rempel <o.rempel@pengutronix.de>
+Cc: Faruque Ansari <faruque.ansari@oss.qualcomm.com>,
+ Sebastian Reichel <sre@kernel.org>, Wim Van Sebroeck
+ <wim@linux-watchdog.org>, Benson Leung <bleung@chromium.org>,
+ Tzung-Bi Shih <tzungbi@kernel.org>, Srinivas Kandagatla <srini@kernel.org>,
+ Daniel Lezcano <daniel.lezcano@kernel.org>, linux-pm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-watchdog@vger.kernel.org,
+ linux-arm-msm@vger.org, kernel@pengutronix.de,
+ Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+ "Rafael J. Wysocki" <rafael@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, =?UTF-8?Q?S=C3=B8ren_Andersen?=
+ <san@skov.dk>, Guenter Roeck <groeck@chromium.org>,
+ Ahmad Fatoum <a.fatoum@pengutronix.de>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ avaneesh.dwivedi@oss.qualcomm.com,
+ Umang Chheda <umang.chheda@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org
+References: <20260722-pscrr-reboot-reason-v2-0-495ba3005953@oss.qualcomm.com>
+ <20260722-pscrr-reboot-reason-v2-2-495ba3005953@oss.qualcomm.com>
+ <98e65507-3084-4948-8096-4e2d8d20dc81@gmail.com>
+ <amrgDC0s3rb5Xv4N@pengutronix.de>
+ <19a2b8bd-09ea-4df9-b0ba-f78f60c44848@roeck-us.net>
+Content-Language: en-US, en-AU, en-GB, en-BW
+From: Matti Vaittinen <mazziesaccount@gmail.com>
+In-Reply-To: <19a2b8bd-09ea-4df9-b0ba-f78f60c44848@roeck-us.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDAyNSBTYWx0ZWRfX6ZPjsa3jQgDR
- jYlHNmx41Ke2lJIqxvHuAt/qGfzaQbWFzlOqRyjroGtRveVxj1OH3aOos1OFnOPtoi0rRwIbM8u
- rS3V4lXk9mImVPUCo9TnzBS9bub4G6Q=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDAyNSBTYWx0ZWRfXy3gr1+8Dj+rQ
- UZykn2fEgAB0ZH8RJmKqtaMVrka2kQXAiGumLcRUKXsQhwLT42Wg2B4vG31Wu6Dr0UgTDAv4trs
- ZpLMCihSoUFdlGJRq/ABqA47e7tYBZN7dC7NFkxs0jDHJy1AE/LEXuVqi4OJGZ+kTVezAicyxr8
- 5R4q0XR73FdoluBxLPnXqh1j6+b83qcO/om9yF9r4dfaVmOmD9REx0afxMgTxlK2PdB4PMacBu8
- zb2ttmHRWKMiAxF6gfncdevmSIxl5799xwmqdQdnQcqlus+Mno1fqkcE05Tx44uI8iqZMg1jVIp
- ccOGCIWnNnXlnFkX0Ck/5K3HMlRhInNjIe0O/3yltJMtnTlMzPOo9p5dsE92VC19Mu5dSXlNilx
- vvfVbGzOP0bKMJ6D735MxVCkNTywf8dAnnbvmMmBQt/0H0pXAnaRfw4vGX6lSkIhFHeI/l8hd+4
- VY85/iqHUsgFjZ3sRDA==
-X-Proofpoint-ORIG-GUID: jNIDJpSqHGXNTR0B5sjpLTy5qh3iyhzJ
-X-Proofpoint-GUID: jNIDJpSqHGXNTR0B5sjpLTy5qh3iyhzJ
-X-Authority-Analysis: v=2.4 cv=L9otheT8 c=1 sm=1 tr=0 ts=6a6c24a5 cx=c_pps
- a=nuhDOHQX5FNHPW3J6Bj6AA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=RAioF0-LDSMA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8 a=nXokoBoABDjQELSMSggA:9
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-07-31_01,2026-07-30_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 spamscore=0 phishscore=0 impostorscore=0 suspectscore=0
- bulkscore=0 clxscore=1015 malwarescore=0 priorityscore=1501 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607310025
 
-On boot, the kernel's HCI_AUTO_OFF timer powers a newly probed
-controller back off after 2 seconds if nothing has taken ownership of
-it yet. bluetooth.service is expected to take ownership within that
-window by powering the adapter on, but on slower boots bluetoothd can
-start late enough that the two race: HCI_AUTO_OFF fires and the
-controller is torn down and re-initialised while bluetoothd is still
-in the middle of its own adapter setup sequence.
+On 30/07/2026 18:02, Guenter Roeck wrote:
+> On 7/29/26 22:24, Oleksij Rempel wrote:
+>> Hi Matti,
+>>
+>> On Thu, Jul 30, 2026 at 07:49:41AM +0300, Matti Vaittinen wrote:
+>>> On 22/07/2026 18:13, Faruque Ansari wrote:
+>>>> Watchdog pretimeout resets are not recorded with a dedicated reset
+>>>> reason, causing subsequent boots to report PSCR_UNKNOWN and making it
+>>>> difficult to distinguish them from other unexpected resets.
+>>>>
+>>>> Add PSCR_WATCHDOG_PRETIMEOUT as a dedicated reset reason code and
+>>>> prevent the panic notifier from overwriting a watchdog pretimeout
+>>>> reason with PSCR_KERNEL_PANIC when the pretimeout governor triggers a
+>>>> panic.
+>>>>
+>>>> Signed-off-by: Faruque Ansari <faruque.ansari@oss.qualcomm.com>
+>>>> ---
+>>>>    drivers/power/reset/pscrr.c           | 7 ++++++-
+>>>>    include/linux/power/power_on_reason.h | 1 +
+>>>>    include/linux/reboot.h                | 1 +
+>>>>    kernel/reboot.c                       | 1 +
+>>>>    4 files changed, 9 insertions(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/drivers/power/reset/pscrr.c b/drivers/power/reset/pscrr.c
+>>>> index b5906f127e88..5b107c62fe82 100644
+>>>> --- a/drivers/power/reset/pscrr.c
+>>>> +++ b/drivers/power/reset/pscrr.c
+>>>> @@ -149,7 +149,12 @@ static int pscrr_panic_notifier(struct 
+>>>> notifier_block *nb,
+>>>>        if (!backend || !backend->ops || !backend->ops->write_reason)
+>>>>            return NOTIFY_OK;
+>>>> -    set_psc_reason(PSCR_KERNEL_PANIC);
+>>>> +    /*
+>>>> +     * Do not overwrite a previously recorded watchdog pretimeout 
+>>>> reason
+>>>> +     * during panic handling.
+>>>> +     */
+>>>> +    if (get_psc_reason() != PSCR_WATCHDOG_PRETIMEOUT)
+>>>> +        set_psc_reason(PSCR_KERNEL_PANIC);
+>>>
+>>> Hi Faruque,
+>>>
+>>> I like the idea of adding WDG pretimeout resets in pscrr. I am just
+>>> wondering what makes WDG reason so special, that it shouldn't be 
+>>> overwritten
+>>> while other reasons can be? Can this notifier be called (now or in the
+>>> future) so, that there are other reasons getting overwritten? For some
+>>> reason I think the PSCRR was designed to be able to store multiple
+>>> reasons(?)
+>>
+>> It depends on the backed. A simple nvmem cell, would be able to hold
+>> only one reason.
 
-When that teardown happens, any mgmt command bluetoothd had already
-queued for that adapter is cancelled - but userspace is never told.
-bluez's mgmt command queue is strictly serialised, so a command that
-never receives a reply blocks every command queued after it on that
-adapter indefinitely. In practice this means bluetoothd gets stuck
-before it can register the adapter, and reports no controller being
-available at all, even though the controller itself is healthy and
-fully usable moments later.
+Thanks for the explanation Oleksij :)
 
-Fix this by treating a cancelled command like any other failure
-instead of silently dropping it: always send a reply back to
-userspace, using the existing "cancelled" status value. This mirrors
-how other mgmt commands already behave when they fail for other
-reasons, and lets bluetoothd's normal error handling take over
-(log the failure and continue) instead of hanging forever.
+> That makes me wonder: Shouldn't the priority be a back-end decision, not a
+> front-end decision ?
 
-Verified on a QCS6490 rb3gen2 board where this HCI_AUTO_OFF vs.
-bluetooth.service race was reproduced: before this change, hitting
-the race left the adapter permanently unavailable to bluetoothd until
-the service was restarted; after this change, hitting the same race
-no longer affects adapter registration and the controller comes up
-normally.
+I have no strong opinion on that but even if the priority was decided by 
+front, the decision whether to store multiple or single reason should 
+perhaps be left for (or depend on) the backend.
 
-Signed-off-by: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
----
- net/bluetooth/mgmt.c | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+Yours,
+	-- Matti
 
-diff --git a/net/bluetooth/mgmt.c b/net/bluetooth/mgmt.c
-index 167d75e34..9031b5d5d 100644
---- a/net/bluetooth/mgmt.c
-+++ b/net/bluetooth/mgmt.c
-@@ -301,6 +301,8 @@ static u8 mgmt_errno_status(int err)
- 		return MGMT_STATUS_ALREADY_CONNECTED;
- 	case -ENOTCONN:
- 		return MGMT_STATUS_DISCONNECTED;
-+	case -ECANCELED:
-+		return MGMT_STATUS_CANCELLED;
- 	}
- 
- 	return MGMT_STATUS_FAILED;
-@@ -1338,7 +1340,7 @@ static void mgmt_set_powered_complete(struct hci_dev *hdev, void *data, int err)
- 	struct mgmt_mode *cp;
- 
- 	/* Make sure cmd still outstanding. */
--	if (err == -ECANCELED || !mgmt_pending_valid(hdev, cmd))
-+	if (!mgmt_pending_valid(hdev, cmd))
- 		return;
- 
- 	cp = cmd->param;
-@@ -5651,9 +5653,6 @@ static void mgmt_remove_adv_monitor_complete(struct hci_dev *hdev,
- 	struct mgmt_pending_cmd *cmd = data;
- 	struct mgmt_cp_remove_adv_monitor *cp;
- 
--	if (status == -ECANCELED)
--		return;
--
- 	hci_dev_lock(hdev);
- 
- 	cp = cmd->param;
 -- 
-2.34.1
+Matti Vaittinen
+Linux kernel developer at ROHM Semiconductors
+Oulu Finland
 
+~~ When things go utterly wrong vim users can always type :help! ~~
