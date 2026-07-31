@@ -1,120 +1,413 @@
-Received: from zg8tmtyylji0my4xnjqumte4.icoremail.net (zg8tmtyylji0my4xnjqumte4.icoremail.net [162.243.164.118])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5D522318121;
-	Fri, 31 Jul 2026 02:21:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=162.243.164.118
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65B77314A79
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 02:24:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785464486; cv=none; b=km2XBliQYiAsCWvKnjCbfdLxRvHJL0lHTjWNzVqCgIhlDUnLKvOxGdh0dyNjzeVvW9cqZoQDWrYJdp/8ZAm0knR6ra+5Jb8Pzr8xdLbjfHgJynGLi6jCnz2pMuY0ozdYlqDcpq+qB9jhNSz5Kt6hV6vLlTEViesCcHSNRXTDMrQ=
+	t=1785464650; cv=none; b=W5pF1cw+s/kyNgPrhNstqAFpq3v5olBy4eO/c81jUItsOPfzQNpx73eQMUCGlaVu1+B1xQ9ozwJFkLq/WnyT4arVw8B9tt50MxTtczNtNDeNp8yq4xHR4ePOrzaZ/urKmSXeKGKG8CLByt2Z7EbGox9TiqGTici54WCEakxXsJs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785464486; c=relaxed/simple;
-	bh=7LaM6hGzKUCUT2Tp6oALb5MO2CH/V7rbICfdfbUTYEA=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=k8AvU/KGl0Ht1YowViIdcuXSOGJcr7BG8O9Ya4mp7v50uOHMjjLf/N0UbSrxn4gRfGfHXvG49OMgczf1BRdWDZKrv0sHvh0DDLUCGYJ+MNE9tYxlSkKNcEZ6HANrrXP+t7ex5wJI+EJL/coX3qX35BeWjHNNd6qlSracLxUYHi8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=zju.edu.cn; spf=pass smtp.mailfrom=zju.edu.cn; arc=none smtp.client-ip=162.243.164.118
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=zju.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zju.edu.cn
-Received: from zju.edu.cn (unknown [10.98.66.117])
-	by mtasvr (Coremail) with SMTP id _____wA3ITeRBmxqawpSAA--.3444S3;
-	Fri, 31 Jul 2026 10:21:06 +0800 (CST)
-Received: from localhost.localdomain (unknown [10.98.66.117])
-	by mail-app2 (Coremail) with SMTP id zC_KCgDHEcaNBmxqaSdjAw--.43748S2;
-	Fri, 31 Jul 2026 10:21:01 +0800 (CST)
-From: Fan Wu <fanwu01@zju.edu.cn>
-To: linux-pm@vger.kernel.org
-Cc: sre@kernel.org,
-	andersson@kernel.org,
-	neil.armstrong@linaro.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org,
-	Fan Wu <fanwu01@zju.edu.cn>
-Subject: [PATCH] power: supply: qcom_battmgr: fix use-after-free of battmgr on remove
-Date: Fri, 31 Jul 2026 02:20:06 +0000
-Message-Id: <20260731022006.317192-1-fanwu01@zju.edu.cn>
-X-Mailer: git-send-email 2.34.1
+	s=arc-20240116; t=1785464650; c=relaxed/simple;
+	bh=fMbVQDHd0E34Q9EFoNIhweZeXg7ARlyrUDMDULe2zug=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=usqkSAmQCHSfIWrVFaU+R9F/JsYdLamKF0TaA1MJ6OhxcU4T1M57hQn78ylkSaekQQBxYm5HfSDWnoCYuN2gb5fRYa7yiQaRynFuArUUJJRt+bJRe9wOiAE8Vm9in27D3ss7OExktBhj3n+lrusYQS/cDleSHqm19DdlBFtfS1M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=HPOOOKTU; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Di1Mt9MG; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="HPOOOKTU";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Di1Mt9MG"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 66V2N8op2510505
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 02:24:07 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	ZQoI3G7BPgfzmJi/xWF6ywnQxpARjLNuk85Wk6DNVbw=; b=HPOOOKTUiEvSajhz
+	QPOLI8zorirKYsJCA7bSgGwtPhyLUzG7y/dFQgSy8KZRHeiG/dWQENRKR/M2Y3Vj
+	kO0Jx43n6jAHHHfsdzcQgjX86Iw69f/YkRB2ndeVbi0l69A2fWC2ELDcT2OI5MhZ
+	WKMJRlyzOeDxN7kiLSNAtNIJXY64JMoBAv1V06Z6gGT4IkxiLIzgn6mXgOSCjUw+
+	wGhdrIPN5vf4emTuDImRj0fcBgzCpQv9sXmeMKfFG6Em8xq0OxghJXgKIJIGNDi6
+	va0/aYuTHrecCbDpDA7yFHaeaaTPWuRGYvMLxePUeIufx+0X0IZ9eOE1ujangbYz
+	8KmsKg==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4frjv9r054-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 02:24:06 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cb6dd278512so299641a12.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 30 Jul 2026 19:24:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785464646; x=1786069446; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=ZQoI3G7BPgfzmJi/xWF6ywnQxpARjLNuk85Wk6DNVbw=;
+        b=Di1Mt9MGAsr6Cd1ccl40YMs20pHpmFXvTcZ2NxU7xSOGTfhkcavDaF8o1b8PRa1wKe
+         SLHvFOpVlDZTaqPiZUrmK7FixqudF5nVe0+31XyLcif3W62EDkweneu4WfhCv/ETn9NT
+         wLfPve3adZ3iKHfzUTVo5xoLOEKPU3Dc1YeR6WVAfn0b5weBrmW68h9innACJKE2YflE
+         xLIQN9rDtkcRf8DPCH/wMx4YGQdoRY5tQgEZbwTHdN4uFUtQPGYWjFgWJn8Ok25EAqaE
+         729upuZ351PMvDaAe5T4z2UDuTYgGioSoKkYvZf/bnDwqm0xsa/aZjNzLq6oHyh9PQA/
+         CGSg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785464646; x=1786069446;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ZQoI3G7BPgfzmJi/xWF6ywnQxpARjLNuk85Wk6DNVbw=;
+        b=OycPN7TaTVK5sLgabxvEreqLOBTql9eJHGVUZPzx3hNZj15tmzcXgOzFdnvSCG3Ty0
+         9YNNP6M9mx/kX20F0rmUe3UR1mmYR3TRequEr2uxKEHKExVsvk7+9YPVMtiNlVro6stM
+         GOriniz5wuxyIy1AjAS5+ua0I9UEXfaCS4PbYt2cfDI42oQBNwIkuGeCdWjjpVtbznpo
+         lKHVloGGQywMA5vmnk54P3qGj9xnWfJdJ0U4lMwhAdjKbjEeohWflQowg5T0dq2xt+Lq
+         JnGZ3ortY5QrQ2JHgTKDUbWNMa4UGZTP1gI23Uy0wlsq6nz2hl2AwJmvAIEmyzZ2yS/I
+         4YHw==
+X-Forwarded-Encrypted: i=1; AHgh+Ro/ZIGcoKAUp2XbtEthE7R44FjIyZJtDOZ/E3t2AsMaQXVC0KBktWG0i5ZA0Dzkq8Vv8g3xzMad2Yfe/W/p@vger.kernel.org
+X-Gm-Message-State: AOJu0YxVs33DKr4uuROy2ARH/mh0N2dpoBE0vaR8y6whSF2tfK1FwWue
+	RggzqaWgHRYyNdGs5ZQkqCOF0CfpZDQhhYIMr5i+fDWq5WK9oBxVBYLfjXUqKRXkdj4hh5Jrj58
+	FE3bPOoK2z91hqXK/4PH1wcUdMdaf8rkTgl8WgbnIwB+MRYFk+r07AzfQD+wVk9yIGlwq
+X-Gm-Gg: AR+sD12/hd5a38MZ+B9TebA2cugQHcdc89yxUh+UXyL8r82Qi2a14JVsDTG1tFmu99S
+	xkP7yhG+UTao1DRwaN3AhgmPOEGBZU5DzWJfyvew0HN6TKjqWOq3hE8MFC9+E15uCv2pVLai3uS
+	IRle7wPMt4cPyrvc3L9JVszMA4xP2o1hgc0dIXK3ntp62EUnB3bZFq/5jO7GfM0gcatnQq8GEi9
+	TgqXksouc7mxW4MHXp/4aiKdecYSJmcI84iuywyRUUnMHgPMJRxVjbjJQT4CIDVOOui9xYakJEF
+	vg67zPEOwnwoB1S4frxLz42LCKdDvqUPFel3s2CYPS9Qx+3LiXl2h86cVZYs5EGRcn1QvGZV+UB
+	kCDvRWFizoxlDPdTlFnU8h4Y/V4Iaddb+ZwPQVIxSk1xMNhZn1X0sY8aY3zQ=
+X-Received: by 2002:a05:6a20:548c:b0:3c3:954d:279a with SMTP id adf61e73a8af0-3c91b1f34c5mr45051637.33.1785464645783;
+        Thu, 30 Jul 2026 19:24:05 -0700 (PDT)
+X-Received: by 2002:a05:6a20:548c:b0:3c3:954d:279a with SMTP id adf61e73a8af0-3c91b1f34c5mr45011637.33.1785464645243;
+        Thu, 30 Jul 2026 19:24:05 -0700 (PDT)
+Received: from [192.168.1.9] (103.sub-97-215-187.myvzw.com. [97.215.187.103])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153aee6790sm595372eec.28.2026.07.30.19.24.02
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 30 Jul 2026 19:24:04 -0700 (PDT)
+Message-ID: <0b9f80bf-73e8-4e9d-9726-b8816c9a364b@oss.qualcomm.com>
+Date: Thu, 30 Jul 2026 19:24:00 -0700
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFC v2] wifi: ath10k: make in-order rx amsdu buffers
+ persistent
+To: david@ixit.cz, Jeff Johnson <jjohnson@kernel.org>,
+        Johannes Berg <johannes.berg@intel.com>,
+        Kalle Valo
+ <kvalo@qca.qualcomm.com>,
+        Michal Kazior <michal.kazior@tieto.com>
+Cc: linux-wireless@vger.kernel.org, ath10k@lists.infradead.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        phone-devel@vger.kernel.org, Richard Acayan <mailingradian@gmail.com>
+References: <20260719-ath10k-a-msdu-v2-1-f479bb9d1217@ixit.cz>
+From: Jeff Johnson <jeff.johnson@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <20260719-ath10k-a-msdu-v2-1-f479bb9d1217@ixit.cz>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:zC_KCgDHEcaNBmxqaSdjAw--.43748S2
-X-CM-SenderInfo: qrstjiaswqq6lmxovvfxof0/
-X-CM-DELIVERINFO: =?B?c5bTJQXKKxbFmtjJiESix3B1w3vZ3A9ovKVTomAyoQazvoRs/NHSP8GI2EvgeEEW7R
-	sfncGSG+szpQCInt5Y8rbJUI0taF0N0kZZZ0tR6irGjEFRcKWeojhCgW6dpE3YRGCeJXm+
-	Nr3uGInxBeApWKp/hlSp9E6mavGmQbzmcFsnzP86
-X-Coremail-Antispam: 1Uk129KBj93XoW7AFW5AF4xJF4DCr4DAFWxXwc_yoW8uF48pa
-	s3tF9I9ry5ZFZxXa4jyr47AFyfGw4qkry3Gry7Wa40vrnIyr18XFW5KF10vFy5Jrs7ta12
-	y39Iqr98WF4fCwbCm3ZEXasCq-sJn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7ZEXa
-	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUU9lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
-	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
-	0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AK
-	xVW0oVCq3wAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc804V
-	CY07AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AK
-	xVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48Icx
-	kI7VAKI48JM4x0Y48IcxkI7VAKI48G6xCjnVAKz4kxMxAIw28IcxkI7VAKI48JMxC20s02
-	6xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_Jr
-	I_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v2
-	6r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj4
-	0_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8
-	JbIYCTnIWIevJa73UjIFyTuYvjxU7gAwDUUUU
+X-Authority-Analysis: v=2.4 cv=Iokutr/g c=1 sm=1 tr=0 ts=6a6c0746 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=UaEkX0D7FlC0tWE/LoNF7Q==:17
+ a=IkcTkHD0fZMA:10 a=RAioF0-LDSMA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8 a=7m40zdTuHQOX8Ya2pEUA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-GUID: y2DdCzW3Ipj5f-GVFa21de54lbMHVQ41
+X-Proofpoint-ORIG-GUID: y2DdCzW3Ipj5f-GVFa21de54lbMHVQ41
+X-Proofpoint-Spam-Info: AW1haW4tMjYwNzMxMDAxMiBTYWx0ZWRfXwR9Yt/MVQu/U
+ CLL6Wo9IDKvaIGCcM5Dv2Sh4tkDk3Szzenvkgcs8X0YGrpQ8JWdV+qTaCeTxPvvl0jkdApge25h
+ huErkyzg7bg1D431dEnPP1EhiKYE4HI=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwNzMxMDAxMiBTYWx0ZWRfX2gtpwMEb4nYs
+ e6FTB+IrfIYsJTu/QHc36OtsMmUaiM0JLOQ8z9oF5oSCrqX0ESi7yNsImmaVC7rooYokpM606G+
+ IjsV6XHgFfEm8HP/uh+/8b1pvU/VyeMhyfLFcdXIeoa+py89UTfR9Jf6d0XyVFXjNbcm0Eleqwc
+ G9N1bLN0BmTFZq4CHNylkk5oHuZPjufRAYhoX5AvgnVWZBZYK2NvKKq9VH4VJd+P8iZ7rNVHFM2
+ C8gJzdSQk0BINaCfT8cHq7cVnYwC2C3A6yABwvlXI5RAN105263rQUVaTm68uRk7jZgKTjMhIqd
+ a4BIxSe0kgBETdlX1OcR5nbaUiLxjLjYC03G8gpEev3x9vqhJP+MJPq9xoR2Wz6bp+zfztIw6em
+ TCV/nKcMOTVrvWP66lVWvroBpfQSlZo6OSF8+1UD/gvj2yTJZOpv4SlJw4/iCUTwxJVV24YzcA2
+ BqHLOU7KcQzoBcinTcw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-07-31_01,2026-07-30_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 lowpriorityscore=0 bulkscore=0 suspectscore=0 adultscore=0
+ spamscore=0 malwarescore=0 impostorscore=0 clxscore=1015 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2607310012
 
-qcom_battmgr_pdr_notify() queues enable_work when the PMIC GLINK service
-comes up. The worker recovers battmgr through container_of() and issues a
-firmware request.
+On 7/19/2026 2:45 PM, David Heidelberg via B4 Relay wrote:
+> From: Richard Acayan <mailingradian@gmail.com>
+> 
+> The WCN3990 might split MSDUs among multiple "in-order" indications. The
+> driver needs information from previous indications to handle MPDUs that
+> are not started by the same indications that complete them. Move the
+> list that tracks unprocessed MSDUs to the driver state so the driver can
+> handle MPDUs that are split in this way and be less confused.
+> 
+> Fixes: c545070e404b ("ath10k: implement rx reorder support")
+> Signed-off-by: Richard Acayan <mailingradian@gmail.com>
+> Co-developed-by: David Heidelberg <david@ixit.cz>
+> Signed-off-by: David Heidelberg <david@ixit.cz>
+> ---
+> This one we have in-tree forever.
 
-The driver has no remove callback, so a pending or running enable_work can
-access battmgr after devres frees it. The PMIC GLINK client stays on the
-client list until its devres release action, so a PDR notification can
-also queue the work while remove is running.
+I'm transcribing a few comments from my review agent (which may overlap
+Sashiko). I have not vetted them for correctness. Hopefully I placed them at
+the correct spots!
 
-Add a remove callback that disables and drains enable_work before devres
-release. Unlike cancel_work_sync(), disable_work_sync() also blocks a later
-PDR notification from queueing the work. Store battmgr with
-auxiliary_set_drvdata() in probe so remove can retrieve it.
+> 
+> Changes in v2:
+> - checkpatch & style. (Jeff)
+> - Improve comments.
+> - Link to v1: https://lore.kernel.org/linux-wireless/20260210021249.12132-2-mailingradian@gmail.com/
+> ---
+>  drivers/net/wireless/ath/ath10k/htt.h    |  4 +++
+>  drivers/net/wireless/ath/ath10k/htt_rx.c | 50 +++++++++++++++++++++++++-------
+>  2 files changed, 43 insertions(+), 11 deletions(-)
+> 
+> diff --git a/drivers/net/wireless/ath/ath10k/htt.h b/drivers/net/wireless/ath/ath10k/htt.h
+> index 25c6b2e2f81c8..07c3dc088f07b 100644
+> --- a/drivers/net/wireless/ath/ath10k/htt.h
+> +++ b/drivers/net/wireless/ath/ath10k/htt.h
+> @@ -1924,16 +1924,20 @@ struct ath10k_htt {
+>  
+>  	bool tx_mem_allocated;
+>  	const struct ath10k_htt_tx_ops *tx_ops;
+>  	const struct ath10k_htt_rx_ops *rx_ops;
+>  	bool disable_tx_comp;
+>  	bool bundle_tx;
+>  	struct sk_buff_head tx_req_head;
+>  	struct sk_buff_head tx_complete_head;
+> +
+> +	u8 rx_in_ord_split_tid;
+> +	u16 rx_in_ord_split_peer_id;
+> +	struct sk_buff_head rx_in_ord_split;
+>  };
+>  
+>  struct ath10k_htt_tx_ops {
+>  	int (*htt_send_rx_ring_cfg)(struct ath10k_htt *htt);
+>  	int (*htt_send_frag_desc_bank_cfg)(struct ath10k_htt *htt);
+>  	int (*htt_alloc_frag_desc)(struct ath10k_htt *htt);
+>  	void (*htt_free_frag_desc)(struct ath10k_htt *htt);
+>  	int (*htt_tx)(struct ath10k_htt *htt, enum ath10k_hw_txrx_mode txmode,
+> diff --git a/drivers/net/wireless/ath/ath10k/htt_rx.c b/drivers/net/wireless/ath/ath10k/htt_rx.c
+> index ab2d373b4750d..732bd3a2f9992 100644
+> --- a/drivers/net/wireless/ath/ath10k/htt_rx.c
+> +++ b/drivers/net/wireless/ath/ath10k/htt_rx.c
+> @@ -291,16 +291,18 @@ void ath10k_htt_rx_free(struct ath10k_htt *htt)
+>  		return;
+>  
+>  	timer_delete_sync(&htt->rx_ring.refill_retry_timer);
+>  
+>  	skb_queue_purge(&htt->rx_msdus_q);
+>  	skb_queue_purge(&htt->rx_in_ord_compl_q);
+>  	skb_queue_purge(&htt->tx_fetch_ind_q);
+>  
+> +	skb_queue_purge(&htt->rx_in_ord_split);
+> +
+>  	spin_lock_bh(&htt->rx_ring.lock);
+>  	ath10k_htt_rx_ring_free(htt);
+>  	spin_unlock_bh(&htt->rx_ring.lock);
+>  
+>  	dma_free_coherent(htt->ar->dev,
+>  			  ath10k_htt_get_rx_ring_size(htt),
+>  			  ath10k_htt_get_vaddr_ring(htt),
+>  			  htt->rx_ring.base_paddr);
+> @@ -841,16 +843,18 @@ int ath10k_htt_rx_alloc(struct ath10k_htt *htt)
+>  	htt->rx_ring.sw_rd_idx.msdu_payld = 0;
+>  	hash_init(htt->rx_ring.skb_table);
+>  
+>  	skb_queue_head_init(&htt->rx_msdus_q);
+>  	skb_queue_head_init(&htt->rx_in_ord_compl_q);
+>  	skb_queue_head_init(&htt->tx_fetch_ind_q);
+>  	atomic_set(&htt->num_mpdus_ready, 0);
+>  
+> +	skb_queue_head_init(&htt->rx_in_ord_split);
+> +
+>  	ath10k_dbg(ar, ATH10K_DBG_BOOT, "htt rx ring size %d fill_level %d\n",
+>  		   htt->rx_ring.size, htt->rx_ring.fill_level);
+>  	return 0;
+>  
+>  err_dma_idx:
+>  	dma_free_coherent(htt->ar->dev,
+>  			  ath10k_htt_get_rx_ring_size(htt),
+>  			  vaddr_ring,
+> @@ -3156,16 +3160,20 @@ static int ath10k_htt_rx_extract_amsdu(struct ath10k_hw_params *hw,
+>  	struct rx_msdu_end_common *rxd_msdu_end_common;
+>  
+>  	if (skb_queue_empty(list))
+>  		return -ENOBUFS;
+>  
+>  	if (WARN_ON(!skb_queue_empty(amsdu)))
+>  		return -EINVAL;
+>  
+> +	msdu = skb_peek(list);
+> +	rxd = HTT_RX_BUF_TO_RX_DESC(hw,
+> +				    (void *)msdu->data - hw->rx_desc_ops->rx_desc_size);
 
-This issue was found by an in-house static analysis tool.
+Dead rxd computation before the loop — VALID, MINOR
 
-Fixes: 29e8142b5623 ("power: supply: Introduce Qualcomm PMIC GLINK power supply")
-Cc: stable@vger.kernel.org # v6.10+
-Assisted-by: Codex:gpt-5.6
-Signed-off-by: Fan Wu <fanwu01@zju.edu.cn>
----
- drivers/power/supply/qcom_battmgr.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+Lines 3168–3170 compute rxd via skb_peek(), but the while loop at 3172
+immediately dequeues the same SKB and unconditionally recomputes rxd at lines
+3175–3177. The pre-loop assignment is never read. It's dead code. The original
+patch must have introduced this when restructuring (the pre-existing code
+likely used rxd from before the loop). It should be removed.
 
-diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
-index 490137a23d..f8c3efd2c9 100644
---- a/drivers/power/supply/qcom_battmgr.c
-+++ b/drivers/power/supply/qcom_battmgr.c
-@@ -1638,6 +1638,8 @@ static int qcom_battmgr_probe(struct auxiliary_device *adev,
- 	if (!battmgr)
- 		return -ENOMEM;
- 
-+	auxiliary_set_drvdata(adev, battmgr);
-+
- 	battmgr->dev = dev;
- 
- 	psy_cfg.drv_data = battmgr;
-@@ -1729,9 +1731,17 @@ static const struct auxiliary_device_id qcom_battmgr_id_table[] = {
- };
- MODULE_DEVICE_TABLE(auxiliary, qcom_battmgr_id_table);
- 
-+static void qcom_battmgr_remove(struct auxiliary_device *adev)
-+{
-+	struct qcom_battmgr *battmgr = auxiliary_get_drvdata(adev);
-+
-+	disable_work_sync(&battmgr->enable_work);
-+}
-+
- static struct auxiliary_driver qcom_battmgr_driver = {
- 	.name = "pmic_glink_power_supply",
- 	.probe = qcom_battmgr_probe,
-+	.remove = qcom_battmgr_remove,
- 	.id_table = qcom_battmgr_id_table,
- };
- 
--- 
-2.34.1
+> +
+>  	while ((msdu = __skb_dequeue(list))) {
+>  		__skb_queue_tail(amsdu, msdu);
+>  
+>  		rxd = HTT_RX_BUF_TO_RX_DESC(hw,
+>  					    (void *)msdu->data -
+>  					    hw->rx_desc_ops->rx_desc_size);
+>  
+>  		rxd_msdu_end_common = ath10k_htt_rx_desc_get_msdu_end(hw, rxd);
+> @@ -3257,17 +3265,16 @@ static void ath10k_htt_rx_h_rx_offload(struct ath10k *ar,
+>  	}
+>  }
+>  
+>  static int ath10k_htt_rx_in_ord_ind(struct ath10k *ar, struct sk_buff *skb)
+>  {
+>  	struct ath10k_htt *htt = &ar->htt;
+>  	struct htt_resp *resp = (void *)skb->data;
+>  	struct ieee80211_rx_status *status = &htt->rx_status;
+> -	struct sk_buff_head list;
+>  	struct sk_buff_head amsdu;
+>  	u16 peer_id;
+>  	u16 msdu_count;
+>  	u8 vdev_id;
+>  	u8 tid;
+>  	bool offload;
+>  	bool frag;
+>  	int ret;
+> @@ -3292,64 +3299,85 @@ static int ath10k_htt_rx_in_ord_ind(struct ath10k *ar, struct sk_buff *skb)
+>  		   "htt rx in ord vdev %i peer %i tid %i offload %i frag %i msdu count %i\n",
+>  		   vdev_id, peer_id, tid, offload, frag, msdu_count);
+>  
+>  	if (skb->len < msdu_count * sizeof(*resp->rx_in_ord_ind.msdu_descs32)) {
+>  		ath10k_warn(ar, "dropping invalid in order rx indication\n");
+>  		return -EINVAL;
+>  	}
+>  
+> -	/* The event can deliver more than 1 A-MSDU. Each A-MSDU is later
+> -	 * extracted and processed.
+> +	if (!skb_queue_empty(&htt->rx_in_ord_split)) {
+> +		/*
+> +		 * It might still be possible to handle this case if there is
+> +		 * only one peer that splits at each given moment. We are
+> +		 * bailing out because we should have a test case for this
+> +		 * before trying to fix it.
+> +		 */
+> +		if (tid != htt->rx_in_ord_split_tid ||
+> +		    peer_id != htt->rx_in_ord_split_peer_id ||
+> +		    offload) {
+
+Dead offload disjunct — VALID, MINOR
+
+ath10k_htt_rx_h_rx_offload() at line 3346 drains rx_in_ord_split entirely (via
+__skb_dequeue loop). After it runs, the while (!skb_queue_empty(...)) loop at
+3348 never executes. Therefore a split (-EAGAIN from
+ath10k_htt_rx_extract_amsdu) can never occur for offload frames. The ||
+offload condition at line 3316 in the split-validation guard is unreachable.
+It should be removed for clarity.
+
+
+> +			ath10k_warn(ar, "split amsdu did not resume immediately\n");
+> +			htt->rx_confused = true;
+> +			ath10k_core_start_recovery(ar);
+> +			return -EIO;
+> +		}
+> +	}
+> +
+> +	/*
+> +	 * The event can deliver more than 1 A-MSDU or continue a previous one.
+> +	 * Each A-MSDU is later extracted and processed.
+>  	 */
+> -	__skb_queue_head_init(&list);
+>  	if (ar->hw_params.target_64bit)
+>  		ret = ath10k_htt_rx_pop_paddr64_list(htt, &resp->rx_in_ord_ind,
+> -						     &list);
+> +						     &htt->rx_in_ord_split);
+>  	else
+>  		ret = ath10k_htt_rx_pop_paddr32_list(htt, &resp->rx_in_ord_ind,
+> -						     &list);
+> +						     &htt->rx_in_ord_split);
+>  
+>  	if (ret < 0) {
+>  		ath10k_warn(ar, "failed to pop paddr list: %d\n", ret);
+>  		htt->rx_confused = true;
+>  		ath10k_core_start_recovery(ar);
+>  		return -EIO;
+
+rx_in_ord_split not purged on pop_paddr error — VALID BUG
+
+Lines 3335–3339: on pop_paddr error, htt->rx_confused = true and
+ath10k_core_start_recovery() are called, but
+__skb_queue_purge(&htt->rx_in_ord_split) is missing. If a split is already in
+progress (queue is non-empty) when pop_paddr fails on the continuation event,
+the existing SKBs are stranded. The default: path at lines 3371–3377 does
+purge the queue, making this an inconsistency. This will leak DMA-mapped SKBs.
+
+>  	}
+>  
+>  	/* Offloaded frames are very different and need to be handled
+>  	 * separately.
+>  	 */
+>  	if (offload)
+> -		ath10k_htt_rx_h_rx_offload(ar, &list);
+> +		ath10k_htt_rx_h_rx_offload(ar, &htt->rx_in_ord_split);
+>  
+> -	while (!skb_queue_empty(&list)) {
+> +	while (!skb_queue_empty(&htt->rx_in_ord_split)) {
+>  		__skb_queue_head_init(&amsdu);
+> -		ret = ath10k_htt_rx_extract_amsdu(&ar->hw_params, &list, &amsdu);
+> +		ret = ath10k_htt_rx_extract_amsdu(&ar->hw_params,
+> +						  &htt->rx_in_ord_split, &amsdu);
+>  		switch (ret) {
+>  		case 0:
+>  			/* Note: The in-order indication may report interleaved
+>  			 * frames from different PPDUs meaning reported rx rate
+>  			 * to mac80211 isn't accurate/reliable. It's still
+>  			 * better to report something than nothing though. This
+>  			 * should still give an idea about rx rate to the user.
+>  			 */
+>  			ath10k_htt_rx_h_ppdu(ar, &amsdu, status, vdev_id);
+>  			ath10k_htt_rx_h_filter(ar, &amsdu, status, NULL);
+>  			ath10k_htt_rx_h_mpdu(ar, &amsdu, status, false, NULL,
+>  					     NULL, peer_id, frag);
+>  			ath10k_htt_rx_h_enqueue(ar, &amsdu, status);
+>  			break;
+>  		case -EAGAIN:
+> -			fallthrough;
+> +			htt->rx_in_ord_split_tid = tid;
+> +			htt->rx_in_ord_split_peer_id = peer_id;
+> +
+> +			return -EIO;
+
+frag flag not saved across -EAGAIN — VALID BUG
+
+frag is a local extracted from the current event's header (line 3296). On
+-EAGAIN (line 3366–3370), only tid and peer_id are saved. When the
+continuation event arrives, ath10k_htt_rx_h_mpdu() at line 3362 is called with
+the frag from the new event, not the original split event. If the original
+said frag=1, the fragments will be misprocessed by mac80211 on continuation.
+This needs rx_in_ord_split_frag added alongside _tid and _peer_id.
+
+>  		default:
+>  			/* Should not happen. */
+>  			ath10k_warn(ar, "failed to extract amsdu: %d\n", ret);
+>  			htt->rx_confused = true;
+> -			__skb_queue_purge(&list);
+> +			__skb_queue_purge(&htt->rx_in_ord_split);
+>  			ath10k_core_start_recovery(ar);
+>  			return -EIO;
+>  		}
+>  	}
+>  	return ret;
+>  }
+>  
+>  static void ath10k_htt_rx_tx_fetch_resp_id_confirm(struct ath10k *ar,
+> 
+> ---
+> base-commit: 0718283ab28bc3907e10b61a6b4be6fefa1cbb2f
+> change-id: 20260719-ath10k-a-msdu-c49334eb091d
+> 
+> Best regards,
 
