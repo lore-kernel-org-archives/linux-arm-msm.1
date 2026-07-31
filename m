@@ -1,180 +1,146 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from fout-b5-smtp.messagingengine.com (fout-b5-smtp.messagingengine.com [202.12.124.148])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FFC438AC83
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 13:04:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7B4D40099D;
+	Fri, 31 Jul 2026 13:10:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=202.12.124.148
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785503076; cv=none; b=Wac08Tkj9KnkWkFf9PLnKv0kT4p2jk4G3p8FWJjYg+ZHPxpcREDaN22tn4hzuCtPosu0nnjvl7p4ZRuYGEgqzO6MihUPX5xRPogEnbCjxx0rs34dPvN/QN/4h04pSrHfZXloC3QNQ68Og4WPQcMqN/6Y5fPkSnGVEH2e/qkVT10=
+	t=1785503413; cv=none; b=W9X5l+wCHhGtpWEd/eqa/TL60ubxfK37GaIMgZe/k/tIZ5vqAj51DpALnuqsP7YAU25GpTD8ys/PzmP+12TqWPJZCIYz2D2YHMeAcPXkE0TRWfLSF60AZzf1LtMi8YHipgupQBBFksqpGZ1nz+Fo9f/yrkUKGPvB/K8jR44bK+o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785503076; c=relaxed/simple;
-	bh=pJXXlYng5KRlwgquFu+DGy8KkkZm2v71nQREvSXkIp0=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=p/5M29Vs7qfXM7gi7RUUVC4PWvjSBEQ5oupZDp06r4NXavyN6dUTrYs510OHEP0Zv+Lr8dtFVZQ4T50AR3SImxBCFkTKbHes8rXjb8hrH8hxJddNrldlHS6KhNx/qatbuEMaz1W1UrxjwA3USIMUSbwvvWgm49f+lJbwHhOMlAc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kDTY8SSg; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785503413; c=relaxed/simple;
+	bh=9WVkLD2lLcg0SFcbtY3rhbmFcO0wynNwKdmGgeYUQz0=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=j/jCzTap24AzDTKFKs0PwkNQPW4jtPjLG+Yeood/WY4Z+B0Wt6w2fJ+1lafD+wl2+mRA6k+zwrxXPCrXVtFaIsJvkzoRYvSdd1sSOe/VifDswBfcZTfVF3SiPbHxjTWfQmkn940WU+pPEr0X+sVFHZnNlc5IucJKArbfrh3qWRY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=jaseg.de; spf=pass smtp.mailfrom=jaseg.de; dkim=pass (2048-bit key) header.d=jaseg.de header.i=@jaseg.de header.b=YkLoNMaH; dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b=fWVsSrV/; arc=none smtp.client-ip=202.12.124.148
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=jaseg.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=jaseg.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kDTY8SSg"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1270E1F000E9
-	for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 13:04:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785503074;
-	bh=CjVcHniSLBRKWrFsvh8Ah11kb/c0CCbICSTiExfKTL4=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=kDTY8SSg2DvDRu4yerj6P2/KRGWPXKPVdCkx3GGtU+QyCTiEF3B+6cT/A8fXVC9J8
-	 4Cs7lYME0Gr0Zof98cYuhyP7NKFllsvmKYY9l+exMH9vTpuE4gguSk5ySlsy7nQCrb
-	 F7TKXLgpm3Mg6E7ev0rPBSmSa9LHkreXpNEScPPJ2bJ59j7nzrllJtEW+zeF63rqem
-	 9/YrjsWFaWM7gPyh7a0kiitUWSv4XnO3kD6qYXY5Pkc56p2Z33LDrKvm/PxyX01O6p
-	 TW0mud+0y728uJ7Boxsv5sNUCzPKLomkOvyTwNz1g3SaNnOakHNLxj+hdcYGY/KCSf
-	 1E4yWCAJLqMyQ==
-Received: by mail-lj1-f181.google.com with SMTP id 38308e7fff4ca-39f75e0a2f1so7313341fa.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 06:04:33 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RoaQ8gbsHod+wGESV24Oeg2dQcNMfJfr7R9i4an0ENlORbw1DPuUwe0K2ijxuFpWspLxTUkJA3P37WhiJc/@vger.kernel.org
-X-Gm-Message-State: AOJu0YxQDk4mObMmIsKcjM5ZHJqgVkAzukFjIdntZv0SweQrXwRpncRj
-	BKuB+/Ao08XJKfhpGy6p4PhTV6ZWUYf/c9gUkUTEfIgpbG2dIWYyj/LCenCVCaU9G7Zqxm/AtKJ
-	FnYuOMSGcUekEDv56YdVyNLWifp4+rBjodtPOhsvKXg==
-X-Received: by 2002:a05:651c:4396:20b0:39c:a06f:12ba with SMTP id
- 38308e7fff4ca-39f7e44b426mr2905841fa.40.1785503072391; Fri, 31 Jul 2026
- 06:04:32 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 31 Jul 2026 08:04:30 -0500
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Fri, 31 Jul 2026 08:04:30 -0500
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <CAFEp6-3X+PCXZdEy1p47XUDs7cT16JDjt0=928Jjkeik_haaQw@mail.gmail.com>
+	dkim=pass (2048-bit key) header.d=jaseg.de header.i=@jaseg.de header.b="YkLoNMaH";
+	dkim=pass (2048-bit key) header.d=messagingengine.com header.i=@messagingengine.com header.b="fWVsSrV/"
+Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
+	by mailfout.stl.internal (Postfix) with ESMTP id 8569F1D00101;
+	Fri, 31 Jul 2026 09:10:10 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+  by phl-compute-04.internal (MEProxy); Fri, 31 Jul 2026 09:10:10 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jaseg.de; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1785503410;
+	 x=1785589810; bh=0MZZibYW67xADGTAt/lSyot78KbHgOWc+Oa0nMmO+Js=; b=
+	YkLoNMaHpk47MLjfAChDj3IJN8DAEoueUAmLjjfU4Gwy1lCUbW/UmLbx91AzhsIK
+	diHVLAcZ/+32O73cem7qQuvkS0fZnJ65mTksqyDqtODLz40PoGNoeFtqX8tXp+Ds
+	m/oePy+ch00dBSh/tKKh8uZmVr/0pX/3WogZybKufLyjmonR/lPYyG1vr+J+bKXA
+	ydGyv6on30CeRcXm4Yn887FrxI03C6elYdq7IwREMN4mwju1Z9E9cMvVZfCb5pu0
+	DWQiGHXq/dofGym4l8vQsWyfEL6zQjWuAEd4WfjPdwJZKFl7CjaCvR2B1c2J7/ci
+	J5+/FEQ14YSwDvBPw34YKw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1785503410; x=
+	1785589810; bh=0MZZibYW67xADGTAt/lSyot78KbHgOWc+Oa0nMmO+Js=; b=f
+	WVsSrV/nO7PK9we9ol1qxpz9iK4beucyqdrDdGSQenjX6RbdbY3F1nVLyOyiViRp
+	iAcgwzl7y81n6r5TkAgV7v5bTDZ53Qs2S+rfIJAIJrISpMLpSdySTMPhKAgR9YAq
+	Y+Ox88xaGLFJ1C3Xfqyr7f/f0osqddPSUtuAZ9PksI1Q3ZUsonDpIRwR0/M+jQB/
+	Gw2FooIBLYXcz7LdnMhSuPxXHrMxMV6YX1W08LD5RYJ4mCShUM5NZIbXXg2Tjbrq
+	+29NUACAQLuLlaRsbMUlvBOb/H4q71xRlKunN7yXmPOkxqpk5ChHwHZsDMjGWrzW
+	A6C/QbQMNZAJDwYKTaJSw==
+X-ME-Sender: <xms:sp5saraxsOlhaqGR3AjHBeO8wkzfByac6ri5piNr539PYfi-ru7y7Q>
+    <xme:sp5savXjOfWk5PpfIxcD5PQ03b9Ws-ivfhqLijnJw_h8z0QNX29OJTBQJY_HTaCoK
+    DqbDLLSktjc1PG7QAolVCleB7zA_zdyZRl2ID1X6-jclP_SXthtkQ>
+X-ME-Received: <xmr:sp5saiNd0Imt598bUzkSYMDWcBXDz9kaP4buVEhLCHOwOvjigh5IwENajEo1WziM5cnustjpjIVolBSp2Q>
+X-ME-Proxy-Cause: dmFkZTGMegkBMIH5qpuWckrHEVUojchyzO6NIccURlPweuDN5JEQfNBPKB2dx8aRw3it3i
+    NomNL1wqkeY81e/5vakyroDkM6w/fDio/T0pdAjdpFYi+Jg+yVmD6AsSDBfcEAbtqnSP2t
+    ha449OU03nVQnhvYCjWFMbLNB8Tdz/A2v0UOo7ku1DmRssgZvhtavxt18+GuAj/fFieLyY
+    wZm+pBemDfKPZ6kYaDyYI6tViNLSSHpw/6sSNQcSte+67NNpFWbI4S370yB0qyh04gxlxu
+    h+Ucl6Rv4poGjf/HB0TkxiEREK1mv2QDn5eWXCEd/mvPFuglFk2AebFTAqeX8tKYkHTEf5
+    qzmP+70NDUVeqG0u4/dPeSos8mRrEQloINL+gSeP+q57Mn+pxM7PN1Ket2GSMtoJHpxpUN
+    Bs7ko/Gks/SOa8H34E29O5lpdLhUUSSPT4V2K32ZQURt5+6E/yGNebdBSDvtpQR8Gemq49
+    SRCmcuax7RIVzD6OAF9dj/rUfOdlNLpZMOH6/uJPd7MB03HQl/SE7p0hpRNgg9Z10GFYyD
+    0T2+OXkfhhNABWud9FBAsk35h6VUx2CWOknSebIDBBrUAZsEes0i8nP1VS36hSAZJ0d1Ov
+    zcYaRv8LTZviVuJLKdVkfvKSe3ceLVO2oiH8A3RfuxFReoJHBbez4MvHgMhg
+X-ME-Proxy: <xmx:sp5sahbQSilzXWhmLhGkXI5l-pOPOPZSRL72yyGk3r_pvRsbmULSGA>
+    <xmx:sp5sap9ZHX1dnl-TFH5SZalZncJCBtC40n4U_Vc0_zt-_nqwRaPivQ>
+    <xmx:sp5saqTpY5w2zIyPqlCIhTSqz6ZBN3I36kFA6QwntOJWGUiO2SSwiA>
+    <xmx:sp5sarcLSml_57ulZxDpWZK15AEgSX3GVfPDZ6NDTVmdjf9JfGk7gQ>
+    <xmx:sp5samC0uKAiAl1Ui_ss23l64AqaG7naU3LTsIIqKpCvN9MwXOToC7IJ>
+Feedback-ID: i60a14417:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 31 Jul 2026 09:10:08 -0400 (EDT)
+From: =?UTF-8?q?Jan=20Sebastian=20G=C3=B6tte?= <linux@jaseg.de>
+To: Ulf Hansson <ulfh@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	linux-pm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	=?UTF-8?q?Jan=20Sebastian=20G=C3=B6tte?= <linux@jaseg.de>,
+	stable@vger.kernel.org
+Subject: [PATCH v2] pmdomain: core: Wait for device link removals before dropping genpd->dev
+Date: Fri, 31 Jul 2026 15:10:02 +0200
+Message-ID: <20260731131002.142671-1-linux@jaseg.de>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <ivkwuomer5vsajf2lq6otpgxwqljkwooh3p7e5ne23j37pv22t@iluamo6gxmq3>
+References: <ivkwuomer5vsajf2lq6otpgxwqljkwooh3p7e5ne23j37pv22t@iluamo6gxmq3>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260731-pwrseq-vote-rename-v2-1-480357946e00@oss.qualcomm.com> <CAFEp6-3X+PCXZdEy1p47XUDs7cT16JDjt0=928Jjkeik_haaQw@mail.gmail.com>
-Date: Fri, 31 Jul 2026 08:04:30 -0500
-X-Gmail-Original-Message-ID: <CAMRc=McA3BqoazxvGDu1_WoT9x0ujXT_80jKPp+5Jb0Rda9zOA@mail.gmail.com>
-X-Gm-Features: AUfX_my34O5ZqodmTjdz_FwlJrp9NnalnGl6Ep4FvspsE7xopR-UD4qRTMMPUOE
-Message-ID: <CAMRc=McA3BqoazxvGDu1_WoT9x0ujXT_80jKPp+5Jb0Rda9zOA@mail.gmail.com>
-Subject: Re: [PATCH v2] power: sequencing: rename pwrseq_power_on/off() to pwrseq_enable/disable()
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Bartosz Golaszewski <brgl@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Marcel Holtmann <marcel@holtmann.org>, 
-	Luiz Augusto von Dentz <luiz.dentz@gmail.com>, Alessio Belle <alessio.belle@imgtec.com>, 
-	Luigi Santivetti <luigi.santivetti@imgtec.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Jeff Johnson <jjohnson@kernel.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Bjorn Helgaas <bhelgaas@google.com>, Chen-Yu Tsai <wens@kernel.org>, linux-pm@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org, 
-	imagination@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
-	linux-wireless@vger.kernel.org, ath10k@lists.infradead.org, 
-	linux-pci@vger.kernel.org, Jeff Johnson <jeff.johnson@oss.qualcomm.com>, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Fri, 31 Jul 2026 10:43:19 +0200, Loic Poulain
-<loic.poulain@oss.qualcomm.com> said:
-> On Fri, Jul 31, 2026 at 10:29=E2=80=AFAM Bartosz Golaszewski
-> <bartosz.golaszewski@oss.qualcomm.com> wrote:
->>
->> The way power sequencing works means that a call to pwrseq_power_on()
->> does not necessarily result in the pwrseq target being powered-on at
->> that time: it may have already been powered on before. Similarly: a call
->> to pwrseq_power_off() does not have to result in an actual powering off
->> of resources: there may still be other users that requested a power-on
->> before.
->>
->> We will also introduce the concept of "non-controllable" pwrseq targets
->> soon which further increases the disconnect between the naming
->> convention and the actual semantics.
->>
->> What consumers of pwrseq descriptors actually do is: they *vote* for a
->> powering on of a given target or retract that vote. These operations
->> could be called get/put in line with runtime PM but this could become
->> confusing since we already provide pwrseq_get/put() for a different
->> purpose. pwrseq_vote_on/off() also have been rejected as unusual in
->> the tree.
->>
->> Change the name of the two functions to pwrseq_enable/disable() which
->> better reflects their purpose and semantics and also mirrors other
->> enable-counted resources like regulators and clocks. No functional chang=
-e
->> intended.
->>
->> If at any point users need to know *when* the exact power event happens,
->> we can provide that information in the form of a notifier.
->>
->> Acked-by: Jeff Johnson <jeff.johnson@oss.qualcomm.com>
->> Acked-by: Bjorn Helgaas <bhelgaas@google.com>
->> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com=
->
->> ---
->> I've floated the idea to rename the two pwrseq functions from "power
->> on/off" to "vote on/off". I've sent a patch but the overwhelming
->> consensus seem to be that enable/disable naming is preferred.
->>
->> I'm doing it in a single commit that should go through the pwrseq tree
->> with Acks from subsystem maintainers.
->>
->> [1] https://lore.kernel.org/all/CAMRc=3DMefxn81d0VUwmQgwFtffkL1=3DEr_1VQ=
-ZCbC1Sa-Qph4t1w@mail.gmail.com/
->> ---
->> Changes in v2:
->> - Change the naming convention to enable/disable
->> - Link to v1: https://patch.msgid.link/20260727-pwrseq-vote-rename-v1-1-=
-a2029aeeac65@oss.qualcomm.com
->> ---
->>  Documentation/driver-api/pwrseq.rst      |  4 ++--
->>  drivers/bluetooth/hci_qca.c              |  4 ++--
->>  drivers/gpu/drm/imagination/pvr_power.c  |  4 ++--
->>  drivers/net/wireless/ath/ath10k/snoc.c   |  6 +++---
->>  drivers/pci/pwrctrl/generic.c            |  4 ++--
->>  drivers/pci/pwrctrl/pci-pwrctrl-pwrseq.c |  4 ++--
->>  drivers/power/sequencing/core.c          | 16 ++++++++--------
->>  include/linux/pwrseq/consumer.h          |  8 ++++----
->>  8 files changed, 25 insertions(+), 25 deletions(-)
->>
->> diff --git a/Documentation/driver-api/pwrseq.rst b/Documentation/driver-=
-api/pwrseq.rst
->> index ad18b2326b689a41471216f3889480b11768ca82..0c315ab1138b02540fae60b3=
-9928c580027c0f7c 100644
->> --- a/Documentation/driver-api/pwrseq.rst
->> +++ b/Documentation/driver-api/pwrseq.rst
->> @@ -50,9 +50,9 @@ Consumer interface
->>  The consumer API is aimed to be as simple as possible. The driver inter=
-ested in
->>  getting a descriptor from the power sequencer should call pwrseq_get() =
-and
->>  specify the name of the target it wants to reach in the sequence after =
-calling
->> -pwrseq_power_up(). The descriptor can be released by calling pwrseq_put=
-() and
->> +pwrseq_enable(). The descriptor can be released by calling pwrseq_put()=
- and
->>  the consumer can request the powering down of its target with
->> -pwrseq_power_off(). Note that there is no guarantee that pwrseq_power_o=
-ff()
->> +pwrseq_disble(). Note that there is no guarantee that pwrseq_disble()
->>  will have any effect as there may be multiple users of the underlying r=
-esources
->>  who may keep them active.
->>
->> diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
->> index 345f602e9ce233a0934a73a85d1e7c17c4f3210d..e713fc06b73402ae3d57794e=
-d0870df8394a796a 100644
->> --- a/drivers/bluetooth/hci_qca.c
->> +++ b/drivers/bluetooth/hci_qca.c
->> @@ -2259,7 +2259,7 @@ static void qca_power_off(struct hci_uart *hu)
->>         }
->>
->>         if (power && power->pwrseq) {
->> -               pwrseq_power_off(power->pwrseq);
->> +               pwrseq_disble(power->pwrseq);
->
-> Nit: s/pwrseq_disble/pwrseq_disable ?
->
+genpd->dev is embedded in struct generic_pm_domain and its release
+function is empty, so providers free the containing genpd with a plain
+kfree() once of_genpd_remove_last() returns, ignoring its refcount.
 
-Ah dang it, how did I miss it, I test-built it. :/
+Since genpd->dev is registered on the genpd provider bus, fw_devlink
+creates device links to it, and those are torn down asynchronously.
+Nothing made genpd_remove() wait for those teardowns, so the provider
+could free the memory backing genpd->dev while the queued workers still
+used it.
 
-Thanks for catching it.
+This is reachable at boot on qrb2210, where the firmware rejects PC mode
+and psci_cpuidle_domain_probe() removes all the CPU PM domains before
+returning -EPROBE_DEFER. The bug is asymptomatic on defconfig, but shows
+up when enabling KASAN or INIT_ON_FREE_DEFAULT_ON. In some builds, it
+causes the kernel to crash a few hundred ms into the boot.
 
-Bart
+Call device_link_wait_removal() before dropping the final reference. All
+link removal work is queued from device_del(), via
+device_links_driver_cleanup() and device_links_purge(), which precedes
+genpd_free_data(), and flush_workqueue() waits for it to complete.
+
+Assisted-by: Claude:claude-5-opus
+Fixes: 18a3a510ecfd ("pmdomain: core: Add the genpd->dev to the genpd provider bus")
+Cc: stable@vger.kernel.org
+Signed-off-by: Jan Sebastian Götte <linux@jaseg.de>
+---
+v2: remove this note from the commit text.
+
+Note: This patch was LLM-assisted. I reproduced the issue and tested
+this patch on hardware, and I did my best to verify it by hand. However,
+I'm far from an expert in pmdomain, so YMMV.
+
+ drivers/pmdomain/core.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/pmdomain/core.c b/drivers/pmdomain/core.c
+index 842c4169e290..4eeb980e5a40 100644
+--- a/drivers/pmdomain/core.c
++++ b/drivers/pmdomain/core.c
+@@ -2348,6 +2348,9 @@ static int genpd_alloc_data(struct generic_pm_domain *genpd)
+ 
+ static void genpd_free_data(struct generic_pm_domain *genpd)
+ {
++	/* Pending device link removals still reference genpd->dev. */
++	device_link_wait_removal();
++
+ 	put_device(&genpd->dev);
+ 	if (genpd->device_id != -ENXIO)
+ 		ida_free(&genpd_ida, genpd->device_id);
+-- 
+2.53.0
+
