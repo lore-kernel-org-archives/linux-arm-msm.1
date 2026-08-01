@@ -1,169 +1,157 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 011E8280037;
-	Sat,  1 Aug 2026 17:12:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08C8C3B71BD
+	for <linux-arm-msm@vger.kernel.org>; Sat,  1 Aug 2026 17:31:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785604366; cv=none; b=V/uJocpvz82IK11ib9pCQzxBdjROF7Sz7gAme5BhxBC2bIr2nJcCaFQoRWJTd3t7/l2i+G8OZ9Wt0NYNudk8Msm+f+gu0wyM25dpS4NvoQ4oBaSjtOgn9qW04oSJCvjrGdkIM5KMt8AUzRB9o3huRC6EWJK/Auxq+2Pcla8TrZc=
+	t=1785605500; cv=none; b=i22T5vAv3DiJolUQ6b7ldgljpJjUJ1CbEOLpg7sw8Oc7s1IlNouzTmrOcK7IhVkw5X/3Q4plC4j/U+MpscT5CoOUOBboAajoKdJqPQTw9XIK/c3BX138R2R7AxE10OMS1wmpwbGPszQix/5GJpsA6USAKLniccnnXWji5QLeN04=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785604366; c=relaxed/simple;
-	bh=FXyJNUvcREYdJmiVRpyLyPOESIE4bH+IZ1nlrammsxc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=UVQtMi7pZGhzVXmSl2MUiDo/avxFriBuWOt2QOpu5sMuILplTbJKT8vS5w2IoMThhEHax1UwjXMoDZh4F/Xd/9qXVgPrRjPElqZqZQ13WPGwrvX5gt/vgVQYJWi7ElQ4PS3/8e1WDxO1/r9WL8Q8o5uUIaSwO0pY2V6SakVlDTk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bXLFDEU6; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785605500; c=relaxed/simple;
+	bh=8zIKtWkixYnWKaNS4ShLPwBlu4JArri3oVb+gFP15Eo=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=jNdtj+BGs3cFadraKPsccwWtCGv3Ff10FsGlJIjTWRBoCGGaobThjqE3Ru6l+kMhpph1zlLLmeDC9DViZvik6sCUnziKeSAFhdK9OlpyXwNhkRXlZWnXSP0MP8md3jSPV+GnMte7gr6BaxujqvXasgDpWSzsjm3P7Uye75/9clg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GwIfCWBR; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=dLuAPhXA; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bXLFDEU6"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 361451F00AC4;
-	Sat,  1 Aug 2026 17:12:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785604364;
-	bh=rCPlU7hrQPc6vJ/hKYoczMIsWwECwKwXXqOPWCqBxt4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=bXLFDEU6nPr4rHtHRjfCv9SehnnYYX4LeSVUi/WEZQRPyn8Azq3JDxvAcFAtjOO7C
-	 XHhvyGQzBx3ruIqQm4iElOcrargZrOflp7EDhnLdHjXPkoegTZwsF7qJS7ocDuFqDP
-	 AIxgJHo9+5Gn8KHjGHxk25TsKuOugF1h66vPL3qLZ3g+fzqe3rtX2Dqy3sroG276Zh
-	 eB7CNnWE/DuiVk5+5fPTpzNPdgFO9ZJFbI5ArU5SR0WSv/R0Et/tqD0jZxIRlLyVFK
-	 +S6ThfIUuuqaXYUh3f01UiLr5uowTOD/BWkfcsD3DUUJPef8l15Qkp97EdCoomC14E
-	 iqI9FUMLZhd/A==
-Date: Sat, 1 Aug 2026 10:12:42 -0700
-From: Eric Biggers <ebiggers@kernel.org>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Demi Marie Obenour <demiobenour@gmail.com>,
-	linux-crypto@vger.kernel.org,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org, Bartosz Golaszewski <brgl@kernel.org>,
-	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Subject: Re: [PATCH] crypto: qce - Replace with stub driver
-Message-ID: <20260801171242.GA3567@quark>
-References: <20260731050838.158825-1-ebiggers@kernel.org>
- <a28c2903-0976-4559-b870-4de5553ba9ab@kernel.org>
- <3ba57269-3305-4d80-b3f2-aa82fa59b59d@gmail.com>
- <b9b655a9-c683-4c4e-ba0d-f98577dd2912@kernel.org>
- <20260801162900.GA2021@quark>
- <e7aeec9b-11aa-4635-bde9-fb8c7ca38260@kernel.org>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GwIfCWBR";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="dLuAPhXA"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 671Faejs2762607
+	for <linux-arm-msm@vger.kernel.org>; Sat, 1 Aug 2026 17:31:38 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=gMNQP3NsH6b5dYLI5Edekz
+	3dzWCbr978ac4GaUxKlX4=; b=GwIfCWBRjT4b7efILdzqAX3FaHZHv5UVv6zeBJ
+	mIbZttl3mwc52dj25pYC5nkkXwzTJQb8ySoC1/clovk1tzudau/Gtnedc8ypMjwB
+	pqlwTx6ymJK4BbQzuwWhor4IX31MslYAqjX+TjXybhJpnffDNm2Gf1250oCyUm01
+	KmIf/gw28CCNc+sAPcCn/vn+3FQ7BL3wr96qld+EtsI1b83O4SZqjzxZoK8xivWy
+	JH1WlQo6p1A1OiPI1a2Z8r0gLZoluXSplPlClmt3ktkzOF0TNKIuDq670qg9IH4f
+	8SFy1pHW9X7N2kYDBJPGfi9pWKZz+MCYoo1ihtOicuSB0qtg==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fs9ygh693-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 17:31:38 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cb7049fa552so1400441a12.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 10:31:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785605497; x=1786210297; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=gMNQP3NsH6b5dYLI5Edekz3dzWCbr978ac4GaUxKlX4=;
+        b=dLuAPhXA6TyRVF1qWHhwP46c1Q5+TPsTqIBqyGQt3y2v3vj8WLhcO/vJekAQZpki/f
+         OKXk6sq75wdZD2w/eK7UoYtedFrMsus42kV7ZkqCxz1ryeqML6E2Z1Suo96TjX7lMIgs
+         JBR0GNnjgRqPawmITXtdMPrVvnbCLiG5hzqg92zJ0EIGCGT1hwWD9/CD9ZVF9gZC9LlZ
+         nKiZsBJHyIRapzmBH99zrjJcQTTrQdEZQHFZROR29lppMoiU/PkGriOgJ5N2BQXfy+Wa
+         DBZ/WHFXIiEi9VIJCMbtmZpkdze3bR0uK6ymBgeIm+F6twICxFbX4CroKb/9biw5BweO
+         D4Kg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785605497; x=1786210297;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=gMNQP3NsH6b5dYLI5Edekz3dzWCbr978ac4GaUxKlX4=;
+        b=HUdL8OuoeCv4Tydh+cHkDkr0ZLp6xz9dMX+bHHRKwP1C5uV9LkT7eUN8NF44kJmgJl
+         Or/ClQKG3rFpL3YJljNFF93NV1QlooiIneb/SkxGWbfh9EwbOym37vTtfERFjYr1nr+3
+         nCFl+vFd2b5mj4O9EJ/GM8ykh7QnuJuWVA1LgR0XWKeY2eckSZ2MQNdo0OKrNX0ULWQC
+         xsFL0kbkdqSyaNP+gRIAn33lLZ1uasaquI1KKn1djG5tPE5cC1ilSgbUX+/xEJBnwHXr
+         O4R0fNz3+We6l/h9pBnCEYMagxBwXxN5cqCtdHu98pJoTeKQiqfR6vbPi2GS+Whd5qH5
+         Vt0w==
+X-Gm-Message-State: AOJu0Yx5m9gdIKfg+E7Ij2k2utz9U4QDjBWJ4MB7pNDLJbn8/ekSPHX6
+	W0OtBiuxKFlAe651ZBBTdmpt4Wc86y0jObIEcHOhxzsqKp3NOFN031kRP8rmtR4Bba8kUZj/JOr
+	gXf1Top+dB+H2b8Bpkj70E2JP5aaUwDkvtfs7WqHIpGC0fCWjce9dim4mtxOxjUZgox4w
+X-Gm-Gg: AR+sD129ly9S9+q1BKkFEgcDA6zLvzIq7AYzqEgcMwp3Tt6CCTX/vi6MMfoSYyOrCUE
+	Q1+AUewQt9CbXpMl9vj21WpZ5fRj902KqNWBJ4c0iSi/u0G73pj4jRx74eqVXHv/9DgPwFp9KOZ
+	hBMzzQr5R+92rCV8Ae+kTZC/t7acUJHATcIUzL/TDn54XqONcc5fgm/zrtpv6ErR80QM+WPivM5
+	iLwnAO6HJOENZUlZSWnxtv6d5O+CfN10QUXG5BPxNLWzw4S0MrEqeJlYVw5JYW6CXCNTdyli2o2
+	P04ITqK6Q5ZubchY3GNFzZJ1cSJqbH7muAf3XzML6tL/G9osAM7g/oFqna2roVan+3iJifGsiKM
+	/rbBy5i3SpTcFGGnVcTCr0E1A
+X-Received: by 2002:a05:6a21:710b:b0:3c4:4297:d5a0 with SMTP id adf61e73a8af0-3c92a9c710cmr4181387637.40.1785605497562;
+        Sat, 01 Aug 2026 10:31:37 -0700 (PDT)
+X-Received: by 2002:a05:6a21:710b:b0:3c4:4297:d5a0 with SMTP id adf61e73a8af0-3c92a9c710cmr4181357637.40.1785605497142;
+        Sat, 01 Aug 2026 10:31:37 -0700 (PDT)
+Received: from hu-tdas-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13fab4e44bcsm21865553c88.12.2026.08.01.10.31.32
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 01 Aug 2026 10:31:36 -0700 (PDT)
+From: Taniya Das <taniya.das@oss.qualcomm.com>
+Subject: [PATCH 0/2] clk: qcom: Mark the GPU CX GDSC as votable for Glymur
+ and Kaanapali
+Date: Sat, 01 Aug 2026 23:01:16 +0530
+Message-Id: <20260801-kaanapali-gpu-voteable-v1-0-fe804d24d2e9@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <e7aeec9b-11aa-4635-bde9-fb8c7ca38260@kernel.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAGQtbmoC/x3MSwqAMAwA0atI1gZa8X8VcZFq1KDU0qoI4t0tL
+ t9i5oHAXjhAmzzg+ZIgu43QaQLDQnZmlDEaMpWVqlYaVyJLjjbB2Z147QeT2RjzouZqMqoaGg0
+ xdp4nuf9x17/vBwQ8G1poAAAA
+X-Change-ID: 20260801-kaanapali-gpu-voteable-458e7fb07c91
+To: Bjorn Andersson <andersson@kernel.org>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+        Imran Shaik <imran.shaik@oss.qualcomm.com>,
+        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
+        Taniya Das <taniya.das@oss.qualcomm.com>
+X-Mailer: b4 0.15-dev-aa3f6
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODAxMDE0MSBTYWx0ZWRfX6U9c0IXqJ9J8
+ kw3/H7mQRmZMYhbYcwuG5jmJ+LeG/V588qnV0q1Vs++6BfaajhYa5MLyFUneARENRCoT096lKaA
+ AP4G2l4dc2LQYEGTEhxcEqQx0vTaXnM=
+X-Proofpoint-GUID: xZ3TdxsGbBbq3bX27ejPuszTA-B6lEV1
+X-Authority-Analysis: v=2.4 cv=Gu5yPE1C c=1 sm=1 tr=0 ts=6a6e2d7a cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=a-e0-BfYgLFPZv1eouEA:9 a=QEXdDO2ut3YA:10
+ a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-ORIG-GUID: xZ3TdxsGbBbq3bX27ejPuszTA-B6lEV1
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAxMDE0MSBTYWx0ZWRfX3QIg44wWunjA
+ wEnZJDouRQwBSoYLu4Xr/KIj1Xp2ooW9vQang0WofbWfiMFs/qtdElqahtxGi/b1Wq36G5nDqDb
+ Lu9W39kRNowShW/6KzcDALPUn91vBDeQtcz5v+qr/e29UaeXxjs40z9wFBi+2JysIDWPtMCoi26
+ d2567UGhjafWTpThrOIGDmYw2TxusipS5t6MJv7yKqM7O7eb82G6nTJslrarI4crb5Q21OmGJj0
+ cx8A9uw3uwJ9DxtUbq9xKSoepY+2xFhuRfsSDg/5OECbeMjCF9HaJ5Rhn+J1ayyqjGr2dcMcawT
+ w6UT4HohktaszjPZya5262Ji8Ll1sLsLDzEQUYbdN6WjAt+ct2U4mtZXpABExYgzyOzOUsrlZ/I
+ XCaYyu9qG8ItWOYfjXKoyVTz7Blksp1+e2V2o4kkapyeSDh9XDHzZ5mNGDQCARurM1zCcGYRWix
+ 11yf/BUcSgOBXhfXzBw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-01_02,2026-07-30_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 bulkscore=0 clxscore=1015 phishscore=0 priorityscore=1501
+ lowpriorityscore=0 spamscore=0 malwarescore=0 adultscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608010141
 
-On Sat, Aug 01, 2026 at 06:35:56PM +0200, Krzysztof Kozlowski wrote:
-> On 01/08/2026 18:29, Eric Biggers wrote:
-> > On Sat, Aug 01, 2026 at 11:18:46AM +0200, Krzysztof Kozlowski wrote:
-> >> On 31/07/2026 20:31, Demi Marie Obenour wrote:
-> >>> On 7/31/26 05:06, Krzysztof Kozlowski wrote:
-> >>>> On 31/07/2026 07:08, Eric Biggers wrote:
-> >>>>> None of the algorithms the QCE driver registers with the crypto API are
-> >>>>> even close to being useful.  They're massively outperformed by the
-> >>>>
-> >>>> The amount of patches you send towards removal of QCE is really
-> >>>> stunning. Or rather worrying. This is like third approach or so.
-> >>>>
-> >>>> Your previous approaches received valid feedback, including even fixes
-> >>>> and committment of new maintainer.
-> >>>>
-> >>>> But you even complained that it does receive fixes! [1]
-> >>>>
-> >>>> We removed the driver temporarily from typical configurations, so no one
-> >>>> will be affected, by whatever is found now and not yet fixed. Still not
-> >>>> enough! For you this was reason to remove the driver (AGAIN!) [2]
-> >>>
-> >>> A stub driver needs to be added for power management reasons.  It turns
-> >>> out that if there is no driver, power consumption is very high.
-> >>>
-> >>>> This is beyond comprehension and very unpleasant, because you actively
-> >>>> work against the community with this approach.
-> >>>
-> >>> I trust that Bartosz can fix the driver with enough work.  However,
-> >>> even if the QCE driver had never had a single bug, it would still not
-> >>> be worth using.  Its performance is so poor that one should always
-> >>> use CPU-based crypto instead.  In the default configuration, that is
-> >>> in fact what happens.
-> >>>
-> >>> The QCE's algorithm implementations only provide a way people can
-> >>> misconfigure their systems and ruin their performance.  There are
-> >>> debug options that also severely harm performance, but they have
-> >>> legitimate uses during development.  The current QCE driver doesn't.
-> >>>
-> >>> I have no problem with a driver for the QCE that does something actually
-> >>> useful.  While there are disagreements about whether restricted media
-> >>> processing is a feature or an anti-feature, my view is that it is
-> >>> better for it to be implemented upstream than in an out-of-tree driver.
-> >>> However, the driver as it currently exists does not implement this.
-> >>>
-> >>> I expect that such a driver would not use the crypto API at all.
-> >>> Instead, I suspect it would use dmabufs for source and destination
-> >>> buffers and integrate with the secure world firmware in some way.
-> >>> That means that the driver doesn't belong under drivers/crypto.
-> >>>
-> >>> These are the reasons I submitted a patch to mark the driver as BROKEN,
-> >>> which Herbert Xu has since accepted.
-> >>
-> >> And Bartosz and other people committed to work on this by improving,
-> >> fixing and in the long term providing you with the actual important user
-> >> of this. All this was already said.
-> >>
-> >> And then after having all these discussions Eric sends AGAIN patch to
-> >> remove the driver. How many times this will have to be discussed the
-> >> same way? If we now reach agreement the driver stays, next month again
-> >> there will be a patch to remove it? And then one more month again?
-> >>
-> >> The driver is marked as BROKEN, thus absolutely NO ONE is affected by
-> >> any issues the driver has.
-> >>
-> >> It's some personal vendetta to keep coming after that - unimportant now
-> >> - driver.
-> > 
-> > Well, there was also feedback that BROKEN drivers should not stay in the
-> > tree and instead just be removed.  So I was considering that feedback
-> > too, as well as the results of additional testing and review of this
-> > driver, including evidence that the driver performs even worse than
-> > thought and is actually getting even worse; the performance seems
-> > irredeemable.  As for proposing the stub driver, that is addressing the
-> > power management issue that was mentioned on the other thread.
-> > 
-> > Anyway, it sounds like you support it being BROKEN.  Okay, but again, as
-> > Greg mentioned
-> > (https://lore.kernel.org/linux-crypto/2026071312-uncover-refining-8cac@gregkh/)
-> > it is awkward to have BROKEN stuff in the tree since it cannot even be
-> > built.  I'm not sure we can have it both ways!
-> 
-> Which was I think pointed already a few times that it will not stay
-> BROKEN but will get fixed and get proper useful use cases.
+The GPU CX GDSC on both Glymur and Kaanapali is a votable power
+domain, but it was configured with POLL_CFG_GDSCR instead of VOTABLE
+when the respective GPUCC drivers were added. Fix both drivers to set
+the VOTABLE flag so the GDSC driver correctly treats collapse requests
+as always successful, matching other platforms with a votable GPU CX
+GDSC (e.g. SM8750, Milos).
 
-Well, that again brings us back to the core issue which is the actual
-current functionality of the driver, which is to register crypto_ahash,
-crypto_skcipher, and crypto_aead algorithms with the crypto API.
+Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
+---
+Taniya Das (2):
+      clk: qcom: gpucc-glymur: Mark the GPU CX GDSC as votable
+      clk: qcom: gpucc-kaanapali: Mark the GPU CX GDSC as votable
 
-It isn't useful functionality, but rather just a footgun that allows
-users to misconfigure their systems, an issue I've seen happen multiple
-times.  CPU-based implementations of *every one* of those algorithms
-already exist.  On a typical SoC that has this hardware, the CPU-based
-implementations are ~50x faster as shown in tests.  Pending patches make
-the difference even greater at ~100x.  And the CPU-based implementations
-actually use significantly less CPU time, as well.  There seems to be no
-path forward for significantly fixing this issue, either.
+ drivers/clk/qcom/gpucc-glymur.c    | 2 +-
+ drivers/clk/qcom/gpucc-kaanapali.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+---
+base-commit: 415606a7be939835db9b0d6b711887586646346d
+change-id: 20260801-kaanapali-gpu-voteable-458e7fb07c91
 
-Then, if these algorithms are removed, the rest of the code in the
-driver (besides setting the interconnect bandwidth) becomes unused.  The
-policy in the kernel for dead code is that it should be removed.  So
-that is why it makes sense to drop that code as well, but really the
-core issue is the crypto algorithm registrations, not the supporting
-code per se.
+Best regards,
+-- 
+Taniya Das <taniya.das@oss.qualcomm.com>
 
-An alternative we could consider is dropping the cra_priority further,
-to further decrease the chance that these algorithms are used.  But I
-feel it's hard to justify why they're there at all, if the rationale for
-keeping them is "we made sure that no one can actually use them, so they
-can't be causing problems anymore"...
-
-- Eric
