@@ -1,113 +1,388 @@
-Received: from mail.zeus03.de (zeus03.de [194.117.254.33])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FB02386426
-	for <linux-arm-msm@vger.kernel.org>; Sat,  1 Aug 2026 21:02:38 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=194.117.254.33
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CABD73C76BC
+	for <linux-arm-msm@vger.kernel.org>; Sat,  1 Aug 2026 21:03:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785618160; cv=none; b=d+lzMcdTxzXB/0XJUqaGiDdYFcosDEOCil+E7fygtNMJWf8jBveULcptoZg4kyrH7lxYeCifD5tSU/7eMfkKQDOTzXH0V/lDe/BEL+Dkn4pzcLnWOMTeEqNGOT4FJFechf8tO88A8vB9gjysFBm65/5ky0HW/OCbpxLCEM6Mmog=
+	t=1785618234; cv=none; b=JANRBwFLR+167z2UNT4ykCjtjC8vXzMDcfKP7pSqKypMmpzI1LPi/Xkgy2zoc8lB/4wMixQOYpgQU3KmmRMfT7igv+0jNd07iH6dP6gJL8tPI9sjA5tx59P6o4ZOJ0LHB9+qq0PikHMU64xtfK6TNfNM84ahRlrcsCEBqoEtjEw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785618160; c=relaxed/simple;
-	bh=xwwA1YvI/X4mutqLIpkbuE4ICC1y+3Y/dUHwcE6ZnCE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OtIIYrgoiUryIfCzwJWgCWsCz7qGrBm9Yg4aXHDBJLRHTX9ddJTbDHq9w41m2VeKpu109LPL70XUWtsWXs+bICzVoJ5dMZ032HjuL+lrLmmDhLy0TMtSlS9jFq6EeWdQ53PjNK9kxab1szXTKxpodEQ83QJ3ECgwAkKqfghdhos=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com; spf=pass smtp.mailfrom=sang-engineering.com; dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b=KBLDwAHD; arc=none smtp.client-ip=194.117.254.33
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=sang-engineering.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=sang-engineering.com
+	s=arc-20240116; t=1785618234; c=relaxed/simple;
+	bh=8icYOIciXQJbqjsymh1gv7pwq8X/+z3ZUzlkXheap/w=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=HFoi9ZAddZa3JZrGGwGcv+8YyLdDWrueo2ilTvaunH5hkOMLOEH5c/95XKgPLu+J5Z0Rp9abqwGgfU64CN8k7b11bDbVVbuE8f/17F3oBn18n5jB3d8aod0FfXIQoPUheY69sk9D3rKtdFWFZHCusK2502hgvMPddwXcX88d7BI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=EuqsQKNT; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=VSImt6rU; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=sang-engineering.com header.i=@sang-engineering.com header.b="KBLDwAHD"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	sang-engineering.com; h=date:from:to:cc:subject:message-id
-	:references:mime-version:content-type:in-reply-to; s=k1; bh=xwwA
-	1YvI/X4mutqLIpkbuE4ICC1y+3Y/dUHwcE6ZnCE=; b=KBLDwAHDAvlkUu959dME
-	HJu9Dl3iBTtLVwOtuIhXPCm8v9sLSxb0DCCU0bGHJcaiik85fUyaBxR4x3itu1y2
-	9vWPpfWg+Y9+TukkJYrMjJEnwK1dFsOq8MdpBLodVOZwLJ+ABHzcp0NSjtMEm1bj
-	aP0A8RQqcDQl9fG9c/32jvc+KzQB/Mc4DcC0xxsf6yhLtvImPucV8in+5YaC3fGW
-	Ug29mZwro0Iyvl5Su7mn6KzTJOwJNM4pK1USNtBajB3RM5PhwveT0im6ckLMrcku
-	pTDn5BNGB4vVbEwWaMVyVN8cCYI2z72/p2/UskRiFB0hrO7lxwWP6JPnqsVOJBBH
-	eA==
-Received: (qmail 2496436 invoked from network); 1 Aug 2026 23:02:36 +0200
-Received: by mail.zeus03.de with ESMTPSA (TLS_AES_256_GCM_SHA384 encrypted, authenticated); 1 Aug 2026 23:02:36 +0200
-X-UD-Smtp-Session: l3s3148p1@TZ7lnwJYKKwujnt8
-Date: Sat, 1 Aug 2026 23:02:35 +0200
-From: Wolfram Sang <wsa+renesas@sang-engineering.com>
-To: Aniket RANDIVE <aniket.randive@oss.qualcomm.com>
-Cc: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-	Andi Shyti <andi.shyti@kernel.org>,
-	Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-	linux-i2c@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, Wolfram Sang <wsa@kernel.org>
-Subject: Re: [PATCH v6 1/2] i2c: core: Add i2c_update_timeout() helper for
- dynamic transfer timeouts
-Message-ID: <am5e6yBm-4ZH1W27@shikoro>
-References: <20260720-master-v6-1-671261b05c61@oss.qualcomm.com>
- <amZkf3lu7gjWhw04@zenone.zhora.eu>
- <0c0d1406-949b-49ee-b203-3833b9f8433b@oss.qualcomm.com>
- <ame2tX1RwOo4F6Lk@zenone.zhora.eu>
- <cb1e00ea-658a-416b-aef6-46c151d15685@oss.qualcomm.com>
- <amh5l4Yvwemws6Cx@shikoro>
- <fc90084e-c9bf-43da-bb8b-43a8d2d0cb7f@oss.qualcomm.com>
- <amoaEGX8Q4zwHF2i@shikoro>
- <be5ba8e8-15d0-4fe4-a66c-fe7ce8da6cc3@oss.qualcomm.com>
- <amuy0mdHQlYCcRfb@shikoro>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="EuqsQKNT";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="VSImt6rU"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 671J08N24033794
+	for <linux-arm-msm@vger.kernel.org>; Sat, 1 Aug 2026 21:03:51 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=nVpB27mNjYgywm5x8b3G1uEA/Q02HqWEHi2
+	q5/nWi6s=; b=EuqsQKNTR5b+LnQNZuN7TkbdXZo6tftzjlIEMrIu0zFQZI6110J
+	CXa3F+Ez+z+YoHuIF7XGlsouvkvE5mL3xrmeVV97y68JptCPDMcbn7AR+HyVv3tB
+	gOdK6HqwL/zkF5mkZGZGflL8Gep/RW5yRCGieXvbTk2XHkvFjqfPq9oJb3hqI0NM
+	uqLtuQ+p/0qIPF6xCDnidLC6a6E7+nUsO3NUTdXVXHIKkaw+8RvC+4MotN67R0bx
+	Km4byLM/4ql5axid1adP6QQQBlkXRui8z1OVdLUdtZcHY4s5ejXMnawMozYhiehT
+	VYEEQLhzVsXrvVtu8UEJq2eHDIYCsxNUi/A==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fs8q51qv2-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 21:03:51 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-5283df62d68so19995151cf.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 14:03:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785618231; x=1786223031; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=nVpB27mNjYgywm5x8b3G1uEA/Q02HqWEHi2q5/nWi6s=;
+        b=VSImt6rUpFsXWEfWKHKWvkRl4UM/UlEh0CkTvvulYEleqLvVjvV+yKCCi255sbaPpZ
+         4CfNhwLZtu5BPw+lNxv5y8g8ma45bkZegi55TGIn0vcWq7ur7BUGpkQQK270PDLSe3ad
+         DG8Lpo8Kk7rsBOrEMXp5vxapVd61QzgZ/gO/aDP67KFZbAc9kJMPjWAMMMIWvTDu9GRy
+         vd9pS8KOhDYcGURLYH+S8BJkaStoIKMnwLgRH4OSxAx1oXEH+aHFYMC25hDd5MQWF1QZ
+         9KR0aRCzv8Jqz7IpmPCLkTTo3RHb4AgAl/BZfcsibDv3i3NgftNvIoPKbea7dyDXgoMT
+         8fvQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785618231; x=1786223031;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=nVpB27mNjYgywm5x8b3G1uEA/Q02HqWEHi2q5/nWi6s=;
+        b=C2aMQGFazxXym9vjuMFeMFseUXsAueNbWE4TSIoAQpTPFEWyW+OYayhHsOtQ82wh3x
+         c/SoADz4luy9kYKRDHQ0a8zdC+nXteqIaZ2/YX5CqK3Rjlz5eRRKDm+ok72dK3K07mhc
+         a9Gl7Tuu3upepcbgHKAmGFjpshIz5jGz2Wjp7694HpBihVWJXlSj4amkK0r9x18fWtAp
+         NJoQ5EcW5alfCYR3JGsA4RvvUztuI9SexS8REEwZ++KELZxXUxOlrkmOI10bXfjH7Qc6
+         yZJPiRMCyvp2j1CXJrSPpMhqo1Wb6ly65KF2y7pihthMq6dCXpASoJx7mn0PWXaIyU5N
+         SQwg==
+X-Forwarded-Encrypted: i=1; AHgh+RpQiguxWKcdOLuro9vZ4gvrpG0SYm7MR99MDuhi5rR7tF68GEDs8Auk1kcPkfHvylcKUIeqTzglXVwXb189@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx4LmkznJn9myL8J6SQr6P7P1h2fmTGKBCj0lDWlHxcsoC3WQKr
+	banoQkz4SUsjEilJMl/3kuptG6NxOnI/iMaDX3gdkxEsOrv0jLbhy3Av7EsddLosc4WAv9BNwih
+	qJ1EpUZsM4drqI9HhyQ6ifREf0gKB4YCryqpQEHhwbSEaBnRfOKvu8pi845FeEdLcmbnh
+X-Gm-Gg: AR+sD12dyDpLVRkIhQaycRGj8jKi+71DvEftFvHoOYTg6aHP7DROlLIXUJR71ZIxVJj
+	FTDxgQSyjXKfyPLVLxU6rEPSy9Db3xR3R+zru4o4cFgNHkCMqM2XTxHiKnqKuKodNvKgDLl4BAp
+	xqInusWcrqhzwUnGWUnVGKTt+0J7Ig04Hx/zkbTVmPu5lmTZc9co1UYHWFGwep2wgvinOffbWtE
+	4JZQTWPR7Kq9oZzli9Er5vLesDrDijf0KV/JIJjdGrnoLAaU5ZjnzmIRbLqb/mpMEYdiAUD7d6l
+	O4qfuEIyQXGcMspjKgaqS5nmLNIHVKxbFIPO0a21WdhyYiR7Bs0FB2o6tXiYbODi5Ok6C56ANK4
+	wpVbh5XtcMjBy0GSo
+X-Received: by 2002:ac8:7f0a:0:b0:517:7e26:36a9 with SMTP id d75a77b69052e-52b56832ef1mr90278481cf.39.1785618230800;
+        Sat, 01 Aug 2026 14:03:50 -0700 (PDT)
+X-Received: by 2002:ac8:7f0a:0:b0:517:7e26:36a9 with SMTP id d75a77b69052e-52b56832ef1mr90278031cf.39.1785618230273;
+        Sat, 01 Aug 2026 14:03:50 -0700 (PDT)
+Received: from quoll ([178.197.223.174])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49807b4bdc7sm50432815e9.0.2026.08.01.14.03.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 01 Aug 2026 14:03:48 -0700 (PDT)
+From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        cros-qcom-dts-watchers@chromium.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: [PATCH] arm64: dts: qcom: Correct white-space style
+Date: Sat,  1 Aug 2026 23:03:44 +0200
+Message-ID: <20260801210343.383834-2-krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="1qJfCwis4bv+clGb"
-Content-Disposition: inline
-In-Reply-To: <amuy0mdHQlYCcRfb@shikoro>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=9047; i=krzysztof.kozlowski@oss.qualcomm.com;
+ h=from:subject; bh=8icYOIciXQJbqjsymh1gv7pwq8X/+z3ZUzlkXheap/w=;
+ b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBqbl8vi/gWAQ+u7fDCqxXt61PEi7M9z/l8JKlYu
+ 4AFTcmsV8KJAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCam5fLwAKCRDBN2bmhouD
+ 101wD/4sZqMbua2Uk6a3uojhA2g++iGSjRq3owpLtdXwYaYgILn/r7Lyg1LMwh/G3ut3IPNYfjG
+ wOMinjBFFOMD6idgNRU0sWeLv3gSDdeErxQkK+EnHcyVWc0hJrabgFMa+vkFG4lgZ3FzEMjSxBm
+ YMhLIqaBeZD64cUEUl9mi+M79NzVBl56/rn3CpM07kVT9UET69lWQcd7UPTb8Nz9jFnl5bIvLp/
+ DOQ96Ekpj5gKU83iyiCEwzJrGCTdb6oRhwSMckBfuWFG10375Oa002fKxA0zOg/R8M1P7SQORwI
+ uR2PIw8OzxSnBxD9SMxIWCW7/pqEdkut49k+po0MDqSB26m8zRpKQpzyeb6SUcxqpf3q/bHUeFD
+ vqCMHAPgmQL57Qh8zTe145vU9QaqszR7A5ni262GqrMLYTKT8oZt8qoK/Sy0jeDOaib9JZ2t3ud
+ WgwxGSxKSHG6THHbD1JzVCMC4NJvm6zt62bj0bJwURGy9E41wNTiQtGgs7jLPmpisFZtm5yHD3A
+ gJbRByjoBj6l/weeQVUn2G+6NYOAOq68+aDswBJg0k5ucPnRqw02nJ3Bcja5L3ZxIhyJdfHJbrS
+ 4M6txfvxBgCzZ6ZTJYlf+8mSQ7B3OBuGJEHZWM3wJNpibnpTcmI1qIYMK6tuIBzVe83T+SKqNS8 SQoND7cHnXqif/Q==
+X-Developer-Key: i=krzysztof.kozlowski@oss.qualcomm.com; a=openpgp; fpr=9BD07E0E0C51F8D59677B7541B93437D3B41629B
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODAxMDE2OSBTYWx0ZWRfX/m+a8PScqZP8
+ WAX6aSAuow1v9sBZtAZ5pgU1oqIHN4yH9fuKOCRCCm/fzrumIK1WmC+ueOGe9QoYWWVCs+gT2sg
+ 0XIjswPoe6BCqpc/aJtsrtGmF11CNvE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAxMDE2OSBTYWx0ZWRfX3/2BaRTdMW5o
+ RVjpWrRjlVd/1TkcvCH1wnY3fgCb1cmdKRCwBX2z4FvJH2TusYrHITKBC9U2sd2MaH3XRfQqcSG
+ DLaQsSw8bIhSrVp7m5LsqIk4T+GyAcOL8wCj92ZqBkbXhIfuDhOpIzKVB9spgrCWJZGciEJzaPy
+ DGyT00s8Ly6rFTADs9Ljzt2VPqFZ9G9jLKLotMzMeCPZdHGrC4LsCFv67yMevyKPsvBwMilDCAY
+ EBZD3V6pTx9AfhaG3KmUWIuke4iFQJ/6UVQ9ctJ9TQBSdlp5AaxfEEMOLgwq+pKWqPR60GWKChB
+ oI2CR3KDVnT1AE59rP1bEjo785l1MWuoAoGxp5XaHESrCl/xrn2oMe3RCfR7GBJuMF+RF5FUhzg
+ 49Pq+hlA2KcE2dcMeG2XJmNtWINrpHvy7YOgNkVjaLlgRYqYBJ/XvYcsXn26n8t9dG65FOy3Yhw
+ adRY2FPOIO8bavmkoNg==
+X-Proofpoint-GUID: qvFdPeIfvhcLcRoEbcCWfDoyfv4O8TaP
+X-Authority-Analysis: v=2.4 cv=IYC3n2qa c=1 sm=1 tr=0 ts=6a6e5f37 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=N6niishs+lR9UBL1FN3Qrw==:17
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=EUspDBNiAAAA:8
+ a=uAbLrKBG7wNs62mBha8A:9 a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-ORIG-GUID: qvFdPeIfvhcLcRoEbcCWfDoyfv4O8TaP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-01_03,2026-07-30_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 phishscore=0
+ suspectscore=0 priorityscore=1501 spamscore=0 malwarescore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608010169
 
+Correct a few white-space issues, like missing space before bracket '{'
+character or spurious space, which will be flagged by dt-check-style
+("redundant-whitespace" warning).  No functional changes.
 
---1qJfCwis4bv+clGb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+---
+ arch/arm64/boot/dts/qcom/agatti.dtsi                  | 2 +-
+ arch/arm64/boot/dts/qcom/glymur.dtsi                  | 8 ++++----
+ arch/arm64/boot/dts/qcom/hamoa.dtsi                   | 2 +-
+ arch/arm64/boot/dts/qcom/kaanapali.dtsi               | 2 +-
+ arch/arm64/boot/dts/qcom/lemans.dtsi                  | 8 ++++----
+ arch/arm64/boot/dts/qcom/monaco-evk.dts               | 2 +-
+ arch/arm64/boot/dts/qcom/msm8976.dtsi                 | 2 +-
+ arch/arm64/boot/dts/qcom/qdu1000.dtsi                 | 6 +++---
+ arch/arm64/boot/dts/qcom/sc7180-trogdor-homestar.dtsi | 2 +-
+ arch/arm64/boot/dts/qcom/sm8350-hdk.dts               | 2 +-
+ arch/arm64/boot/dts/qcom/sm8750.dtsi                  | 2 +-
+ arch/arm64/boot/dts/qcom/talos.dtsi                   | 2 +-
+ 12 files changed, 20 insertions(+), 20 deletions(-)
 
-On Thu, Jul 30, 2026 at 10:23:46PM +0200, Wolfram Sang wrote:
->=20
-> > Given the feedback so far, would maintainers prefer that if i drop the =
-core
-> > helper entirely and keep the dynamic timeout calculation local to the
-> > qcom-geni driver or should we continue exploring an opt-in core-based
-> > approach?
->=20
-> Well, I suggested a potential way in my last mail (Kconfig option). So,
-> what do you think about it? Does it handle your use case?
+diff --git a/arch/arm64/boot/dts/qcom/agatti.dtsi b/arch/arm64/boot/dts/qcom/agatti.dtsi
+index f0b6ae9b8152..b258f640715a 100644
+--- a/arch/arm64/boot/dts/qcom/agatti.dtsi
++++ b/arch/arm64/boot/dts/qcom/agatti.dtsi
+@@ -1917,7 +1917,7 @@ camss: camss@5c11000 {
+ 				 <&gcc GCC_CAMSS_TFE_0_CLK>,
+ 				 <&gcc GCC_CAMSS_TFE_0_CPHY_RX_CLK>,
+ 				 <&gcc GCC_CAMSS_TFE_1_CLK>,
+-				 <&gcc GCC_CAMSS_TFE_1_CPHY_RX_CLK> ;
++				 <&gcc GCC_CAMSS_TFE_1_CPHY_RX_CLK>;
+ 			clock-names = "ahb",
+ 				      "axi",
+ 				      "camnoc_nrt_axi",
+diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
+index f32af66a3f1c..4e4781adfb15 100644
+--- a/arch/arm64/boot/dts/qcom/glymur.dtsi
++++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
+@@ -2359,7 +2359,7 @@ usb_mp_hsphy0: phy@fa1000 {
+ 			status = "disabled";
+ 		};
+ 
+-		usb_mp_hsphy1: phy@fa2000  {
++		usb_mp_hsphy1: phy@fa2000 {
+ 			compatible = "qcom,glymur-m31-eusb2-phy",
+ 				     "qcom,sm8750-m31-eusb2-phy";
+ 
+@@ -2524,7 +2524,7 @@ usb_dp_qmpphy_dp_in: endpoint {
+ 			};
+ 		};
+ 
+-		usb_1_hsphy: phy@fdd000  {
++		usb_1_hsphy: phy@fdd000 {
+ 			compatible = "qcom,glymur-m31-eusb2-phy",
+ 				     "qcom,sm8750-m31-eusb2-phy";
+ 
+@@ -4437,7 +4437,7 @@ lpass_ag_noc: interconnect@7e40000 {
+ 			#interconnect-cells = <2>;
+ 		};
+ 
+-		usb_2_hsphy: phy@88e0000  {
++		usb_2_hsphy: phy@88e0000 {
+ 			compatible = "qcom,glymur-m31-eusb2-phy",
+ 				     "qcom,sm8750-m31-eusb2-phy";
+ 
+@@ -6733,7 +6733,7 @@ qm_tpdm_out: endpoint {
+ 			};
+ 		};
+ 
+-		itnoc@11200000  {
++		itnoc@11200000 {
+ 			compatible = "qcom,coresight-itnoc";
+ 			reg = <0x0 0x11200000 0x0 0x3c00>;
+ 
+diff --git a/arch/arm64/boot/dts/qcom/hamoa.dtsi b/arch/arm64/boot/dts/qcom/hamoa.dtsi
+index 09527dcf9576..424a3d1ae27f 100644
+--- a/arch/arm64/boot/dts/qcom/hamoa.dtsi
++++ b/arch/arm64/boot/dts/qcom/hamoa.dtsi
+@@ -2100,7 +2100,7 @@ &config_noc SLAVE_QUP_1 QCOM_ICC_TAG_ACTIVE_ONLY>,
+ 			};
+ 		};
+ 
+-		gpi_dma0: dma-controller@b00000  {
++		gpi_dma0: dma-controller@b00000 {
+ 			compatible = "qcom,x1e80100-gpi-dma", "qcom,sm6350-gpi-dma";
+ 			reg = <0 0x00b00000 0 0x60000>;
+ 
+diff --git a/arch/arm64/boot/dts/qcom/kaanapali.dtsi b/arch/arm64/boot/dts/qcom/kaanapali.dtsi
+index 74699bc3eadb..03e976dbbe7c 100644
+--- a/arch/arm64/boot/dts/qcom/kaanapali.dtsi
++++ b/arch/arm64/boot/dts/qcom/kaanapali.dtsi
+@@ -1865,7 +1865,7 @@ &clk_virt SLAVE_QUP_CORE_3 QCOM_ICC_TAG_ALWAYS>,
+ 				status = "disabled";
+ 			};
+ 
+-			i2c16: i2c@198c000  {
++			i2c16: i2c@198c000 {
+ 				compatible = "qcom,geni-i2c";
+ 				reg = <0x0 0x0198c000 0x0 0x4000>;
+ 				interrupts = <GIC_SPI 585 IRQ_TYPE_LEVEL_HIGH>;
+diff --git a/arch/arm64/boot/dts/qcom/lemans.dtsi b/arch/arm64/boot/dts/qcom/lemans.dtsi
+index 3b0539e27b51..ac3dbb393108 100644
+--- a/arch/arm64/boot/dts/qcom/lemans.dtsi
++++ b/arch/arm64/boot/dts/qcom/lemans.dtsi
+@@ -1029,7 +1029,7 @@ gpu_speed_bin: gpu-speed-bin@240c {
+ 			};
+ 		};
+ 
+-		gpi_dma2: dma-controller@800000  {
++		gpi_dma2: dma-controller@800000 {
+ 			compatible = "qcom,sa8775p-gpi-dma", "qcom,sm6350-gpi-dma";
+ 			reg = <0x0 0x00800000 0x0 0x60000>;
+ 			#dma-cells = <3>;
+@@ -1562,7 +1562,7 @@ &clk_virt SLAVE_QUP_CORE_2 QCOM_ICC_TAG_ALWAYS>,
+ 
+ 		};
+ 
+-		gpi_dma0: dma-controller@900000  {
++		gpi_dma0: dma-controller@900000 {
+ 			compatible = "qcom,sa8775p-gpi-dma", "qcom,sm6350-gpi-dma";
+ 			reg = <0x0 0x00900000 0x0 0x60000>;
+ 			#dma-cells = <3>;
+@@ -2023,7 +2023,7 @@ &clk_virt SLAVE_QUP_CORE_0 QCOM_ICC_TAG_ALWAYS>,
+ 			};
+ 		};
+ 
+-		gpi_dma1: dma-controller@a00000  {
++		gpi_dma1: dma-controller@a00000 {
+ 			compatible = "qcom,sa8775p-gpi-dma", "qcom,sm6350-gpi-dma";
+ 			reg = <0x0 0x00a00000 0x0 0x60000>;
+ 			#dma-cells = <3>;
+@@ -2516,7 +2516,7 @@ &config_noc SLAVE_QUP_1 QCOM_ICC_TAG_ALWAYS>,
+ 			};
+ 		};
+ 
+-		gpi_dma3: dma-controller@b00000  {
++		gpi_dma3: dma-controller@b00000 {
+ 			compatible = "qcom,sa8775p-gpi-dma", "qcom,sm6350-gpi-dma";
+ 			reg = <0x0 0x00b00000 0x0 0x58000>;
+ 			#dma-cells = <3>;
+diff --git a/arch/arm64/boot/dts/qcom/monaco-evk.dts b/arch/arm64/boot/dts/qcom/monaco-evk.dts
+index 9d17ef7d2caf..8d275ba2daf4 100644
+--- a/arch/arm64/boot/dts/qcom/monaco-evk.dts
++++ b/arch/arm64/boot/dts/qcom/monaco-evk.dts
+@@ -809,7 +809,7 @@ expander3_int: expander3-int-state {
+ 		bias-pull-up;
+ 	};
+ 
+-	expander6_int:  expander6-int-state {
++	expander6_int: expander6-int-state {
+ 		pins = "gpio52";
+ 		function = "gpio";
+ 		bias-pull-up;
+diff --git a/arch/arm64/boot/dts/qcom/msm8976.dtsi b/arch/arm64/boot/dts/qcom/msm8976.dtsi
+index 80a0a09e055d..20a43684cec0 100644
+--- a/arch/arm64/boot/dts/qcom/msm8976.dtsi
++++ b/arch/arm64/boot/dts/qcom/msm8976.dtsi
+@@ -818,7 +818,7 @@ data-pins {
+ 				};
+ 			};
+ 
+-			wcss_wlan_default: wcss-wlan-default-state  {
++			wcss_wlan_default: wcss-wlan-default-state {
+ 				wcss-wlan2-pins {
+ 					pins = "gpio40";
+ 					function = "wcss_wlan2";
+diff --git a/arch/arm64/boot/dts/qcom/qdu1000.dtsi b/arch/arm64/boot/dts/qcom/qdu1000.dtsi
+index 26cc86d12f72..f24b385e7e6e 100644
+--- a/arch/arm64/boot/dts/qcom/qdu1000.dtsi
++++ b/arch/arm64/boot/dts/qcom/qdu1000.dtsi
+@@ -411,7 +411,7 @@ ecpricc: clock-controller@280000 {
+ 			#reset-cells = <1>;
+ 		};
+ 
+-		gpi_dma0: dma-controller@900000  {
++		gpi_dma0: dma-controller@900000 {
+ 			compatible = "qcom,qdu1000-gpi-dma", "qcom,sm6350-gpi-dma";
+ 			reg = <0x0 0x900000 0x0 0x60000>;
+ 			interrupts = <GIC_SPI 244 IRQ_TYPE_LEVEL_HIGH>,
+@@ -627,7 +627,7 @@ uart7: serial@99c000 {
+ 			};
+ 		};
+ 
+-		gpi_dma1: dma-controller@a00000  {
++		gpi_dma1: dma-controller@a00000 {
+ 			compatible = "qcom,qdu1000-gpi-dma", "qcom,sm6350-gpi-dma";
+ 			reg = <0x0 0xa00000 0x0 0x60000>;
+ 			interrupts = <GIC_SPI 279 IRQ_TYPE_LEVEL_HIGH>,
+@@ -1191,7 +1191,7 @@ qup_uart7_rx: qup-uart7-rx-state {
+ 				function = "qup07";
+ 			};
+ 
+-			qup_uart7_tx: qup-uart7-tx-state  {
++			qup_uart7_tx: qup-uart7-tx-state {
+ 				pins = "gpio134";
+ 				function = "qup07";
+ 			};
+diff --git a/arch/arm64/boot/dts/qcom/sc7180-trogdor-homestar.dtsi b/arch/arm64/boot/dts/qcom/sc7180-trogdor-homestar.dtsi
+index 8fee8d7a7d4c..f6919e051312 100644
+--- a/arch/arm64/boot/dts/qcom/sc7180-trogdor-homestar.dtsi
++++ b/arch/arm64/boot/dts/qcom/sc7180-trogdor-homestar.dtsi
+@@ -184,7 +184,7 @@ &secondary_mi2s {
+ };
+ 
+ &sound_multimedia1_codec {
+-	sound-dai = <&max98360a>, <&max98360a_1>, <&max98360a_2>, <&max98360a_3> ;
++	sound-dai = <&max98360a>, <&max98360a_1>, <&max98360a_2>, <&max98360a_3>;
+ };
+ 
+ &wifi {
+diff --git a/arch/arm64/boot/dts/qcom/sm8350-hdk.dts b/arch/arm64/boot/dts/qcom/sm8350-hdk.dts
+index d98ec4bcfd87..c45bcac8db12 100644
+--- a/arch/arm64/boot/dts/qcom/sm8350-hdk.dts
++++ b/arch/arm64/boot/dts/qcom/sm8350-hdk.dts
+@@ -392,7 +392,7 @@ &mdss_dsi0_out {
+ 	data-lanes = <0 1 2 3>;
+ };
+ 
+-&mdss_dsi0_phy  {
++&mdss_dsi0_phy {
+ 	vdds-supply = <&vreg_l5b_0p88>;
+ 	status = "okay";
+ };
+diff --git a/arch/arm64/boot/dts/qcom/sm8750.dtsi b/arch/arm64/boot/dts/qcom/sm8750.dtsi
+index 3496f00ac4f5..b5ddf6acb9c7 100644
+--- a/arch/arm64/boot/dts/qcom/sm8750.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8750.dtsi
+@@ -462,7 +462,7 @@ gpu_micro_code_mem: gpu-micro-code@9b09a000 {
+ 			no-map;
+ 		};
+ 
+-		spss_region_mem: spss@9b0a0000  {
++		spss_region_mem: spss@9b0a0000 {
+ 			reg = <0x0 0x9b0a0000 0x0 0x1e0000>;
+ 			no-map;
+ 		};
+diff --git a/arch/arm64/boot/dts/qcom/talos.dtsi b/arch/arm64/boot/dts/qcom/talos.dtsi
+index bdfb70ca9740..ad93b27d4760 100644
+--- a/arch/arm64/boot/dts/qcom/talos.dtsi
++++ b/arch/arm64/boot/dts/qcom/talos.dtsi
+@@ -794,7 +794,7 @@ opp-384000000 {
+ 			};
+ 		};
+ 
+-		gpi_dma0: dma-controller@800000  {
++		gpi_dma0: dma-controller@800000 {
+ 			compatible = "qcom,qcs615-gpi-dma", "qcom,sdm845-gpi-dma";
+ 			reg = <0x0 0x800000 0x0 0x60000>;
+ 			#dma-cells = <3>;
+-- 
+2.53.0
 
-Another bit which may be important for you: there is currently a patch
-set under discussion [1] to allow changing bus speeds dynamically. You
-probably want to base your work on top of it and/or help getting it
-discussed?
-
-Happy hacking!
-
-[1] https://lore.kernel.org/all/20260719-i2c-mux-v12-0-a5010d623a57@gmail.c=
-om/
-
-
-
---1qJfCwis4bv+clGb
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAmpuXusACgkQFA3kzBSg
-Kbbq6hAAoYOvUh7GIllIPMFO4jAtyc0tuw1DDAPrJxsovz3cOGtm03SVzXLiQ2QM
-Eysn/mQmoczzYnkEpX7UQAYyJBTUVn4IBSCrrQkximE84QnfsRdOnsZRD6R1s8w/
-/WcG8nBPWyHlqNcvZDOrKyk+LIRA8WtD2sr5/Fqvnb/92H2XTeHxfoK/YA4xHROT
-qCugmqdH0LIU5i5Ys1LZ4rYsi57yqCa4dHC8NZnT/SeSKy3xQlSKiaOWbx435HBE
-bpKNrokG9oOQU8HKWVQCZA+0xbqBfk/iC4zMg8IhjDikfjuCb7ydxbQAjbuTkm10
-Db+3FEGgHDjPmG52M1lfSeEiLCSMGrWYR4ktYLriJeF0irk49GSwdbKBHZJMWAM3
-pYKwoNIMy50Xfa5hJywCeD4tuowDpMQRQDyj0KraabOMhGJdClpI6II3ZiNvbKz4
-HrK3IsIFt6ywU/K7oUcZaUTcVkztpkLS4uQ/8k5duI9js3P2s6Lnno8PblNLN3zu
-q/266a2Bk40eTbRFzIaGrTTFtgPWjxMruOmAfNg2+JNLB0TE287WbJjLybTV/YbW
-s1QYJGE5HYq6puYVLnpZ0cdXwsUZ4t9IOuFLN1IjF8loLOIBUrGRN9H5CJwFWAFN
-/H+naDrdeJaF546jJ6eS2tUDFiDfgiTR2794FI2Hzyq0XXnQNS0=
-=ToTX
------END PGP SIGNATURE-----
-
---1qJfCwis4bv+clGb--
