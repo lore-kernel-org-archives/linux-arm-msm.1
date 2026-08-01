@@ -1,87 +1,89 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A696B42AF8A
-	for <linux-arm-msm@vger.kernel.org>; Sat,  1 Aug 2026 05:48:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9AA38382286
+	for <linux-arm-msm@vger.kernel.org>; Sat,  1 Aug 2026 06:45:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785563322; cv=none; b=u+IDdGl6yeZxxFnKF9EEpNSzPJgeXHEYULWcbqgX3Uft1mexQhhshKyQTcB/Fp8ufLkJv1VG02ryd6kihnKz6cy0eMVjWFzPLX0mRW5Uxk+7UHQe0yKqVGRsP/yqUK0b9VFP0BcJ//RnxZP+/2H+AGpRlbfbr4w0YVl91Pp5HXs=
+	t=1785566703; cv=none; b=gw8lYSbp4aM/OjcOf3IdpZmTJcklb2dgjzEYpgkdOOxt5/SLFaIk/ujJV8BpYgkiNoQWlUp5SZlgPZxbMqfiJ4aH6bYTjgmbioM63ObpwxHUmRNOhltyqDtGLWRTz1ZBs1LH2GG32y98tjzJn2QAUqD0vzb6fg6jCjxbqBnYLX8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785563322; c=relaxed/simple;
-	bh=s/SpZVFR71r8SdtWW9hrvSUzEPlBLFRIa8WCs8dVUO0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=kx9ntnL1NGvHvw34ofXiST2a1pW9C56msZNo+JET3XB4oC4XQRXOeuLz4JYFXQXFLi7A9dzVey73m5Z7LoWcok5IJ/E13JOr+RyVT/iX+7Q4CLwmzvJQmbVid+MQkbyPCySZPPx38mTFngtcOf1KzpZXdqFVBGolBh0Ctu3909U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=BzqWKM1h; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bOeQT8DA; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1785566703; c=relaxed/simple;
+	bh=bu8Z4vw7yCArmYfRZxkMAPJT/o9xfi+bqiymwdKIC34=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 In-Reply-To:References:To:Cc; b=IExj8oOCBwV/5cvyNmalwSK81KbncxpMyutCuuUhkG1Pg0VgSVBTkPUFyqkwFLNIi+vuZOsvwlyWzDIqD7Rv89dBf6XiPAPNwwodkHl4AYLN6dgCc33+wtzrHIUuJUT1X6ZgxwwIT1gXouYiXZvOkSoSPa/2RSjAozAMD0+6sO4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MI0Mq64a; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Ojqgf8Kv; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="BzqWKM1h";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bOeQT8DA"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6713PaT21918935
-	for <linux-arm-msm@vger.kernel.org>; Sat, 1 Aug 2026 05:48:39 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MI0Mq64a";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Ojqgf8Kv"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6713DjNV2066119
+	for <linux-arm-msm@vger.kernel.org>; Sat, 1 Aug 2026 06:45:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	vz/GnDP1sDXC+PDBe27vaFvPUtMnYs1VOZ2X6B7ojT4=; b=BzqWKM1hPimp2fAO
-	STyB9hkvCtzvIF/e4ZKeXdjo4wZAmWVT7dPf0kif/w0Q801kZ4KnY7uksaOKL0NW
-	xs2Vj//S1s8ig9n1gDxFnXWBHqSm1n1NEtDwjo4108/rFRaowJoBJ8X5wH+DkjbE
-	M6MRhTobd2UVh29ODuNQe2Y7PsFkoF+H9dY1O9951Ck8MArXzwDjZ3eHr5UNC6gX
-	8Snp3yuw/mShmV2uYmfAIOviH/xJLb4o1lOh8tqCE13g3ZqQB94WSbUyktla8pmn
-	6lfStYfqNg8EPVEDEaXtuwjtWD0ggzPiicdx9BuaEaStwD+wlUFjaYSEpfbTy23K
-	4k1mew==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fs8vt89bg-1
+	1vQN+Rc8ZpgObLyYJrV52E4d++M/9CtJzl6cQs//2CI=; b=MI0Mq64azaPuQ1/a
+	fYqy0xkbJFD2AvAni2gkkzMSrBzcsrp5qzn6xu70JmYb/emwNn2DJ0KItFr/RFjo
+	2thXutcEQw8FkWsgj1uXK28IYz31wE6mgREh6RkT6tLzyvZPmtS1MRAnECQ8pTN0
+	w8gjSaH7Yy78GsadEXMJg2w7khqJh5CiYWyIeLROcrqD0uSOrri1NPnjzJxEe5iI
+	aa8KpWbjfrOw+1x4kixjcBSlfzZq9eh1bDu8us6CUEuP5ztu70MCLLMCecco9KDa
+	gHWO1aJtHWPi1qVbS76+bWyC8ZgqoE6PTBk5P0Eyq8+tyfqQy+GmtHbtZ2nFCrZa
+	VPjQjw==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fs8q50cvs-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 05:48:39 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2cec4226c70so31108945ad.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 22:48:39 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 06:45:00 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cb6cf425e86so2041755a12.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 31 Jul 2026 23:45:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785563318; x=1786168118; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+        d=oss.qualcomm.com; s=google; t=1785566699; x=1786171499; darn=vger.kernel.org;
+        h=cc:to:references:in-reply-to:content-transfer-encoding:content-type
+         :mime-version:message-id:date:subject:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=vz/GnDP1sDXC+PDBe27vaFvPUtMnYs1VOZ2X6B7ojT4=;
-        b=bOeQT8DAKL6LDtCwhSBkBlxXQLaXKIZumtHJ/Pu5mIopQpMOeNgJoXKmBfnRGLUOqh
-         E+Qq7L8Y9SBROB15swFzZYtWjdMLfdw2AXKYqis6JC4TuT61dDPFps/gVEtcaJRxfIv6
-         eTWRQJrlBJlGzIipMRkMVcljt4jGSoUVy/JZwhkLP+7pzfOXQCLz2fv1+W9Ge8vBbJQ0
-         jZQhp4fe1L3dFlPNgMNlfrCrvO9FEd/Eh8i5iKDJ1JisylZZtjOD/8//0cwnWE55clHj
-         rbZ6dM4GAtrtzji5Kr8MdtLwQlNCTydwYY5d5ccZciIAWDdRPrHTnoLQEu7teQ6Jq/TF
-         YQwg==
+        bh=1vQN+Rc8ZpgObLyYJrV52E4d++M/9CtJzl6cQs//2CI=;
+        b=Ojqgf8KvWSVGL4OcapleGXuL4fRpTSbcEfchbOQq7u2AX4hFcwph9PNsQa4xXq76ZR
+         h9c8pYzaA/klja1pT5L1w/lS4lO5GxwZtJLd7K6sRXSc3FMotQ7FDu29lGWGP4/5NFSP
+         dQAmeDpo+r2qWjqkXHi0byillP8dCF27FCPxrcouzbkDySvSlTnHZDR/y8yHWARIF6tV
+         FZJTqv3EnrBgg1TE6JqnEfUrenF1HF3RxmnPEkvZ0Rrl4TjZn51jfmxMfsDTjsWNCjdx
+         kYzP6H4aCRJHfZgby2pRsUvNmrbRSjYiHXDfqFEzKj8gkFLUqZ40vlCk6pkyUzldJhu7
+         bQbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785563318; x=1786168118;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
+        d=1e100.net; s=20251104; t=1785566699; x=1786171499;
+        h=cc:to:references:in-reply-to:content-transfer-encoding:content-type
+         :mime-version:message-id:date:subject:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=vz/GnDP1sDXC+PDBe27vaFvPUtMnYs1VOZ2X6B7ojT4=;
-        b=auiq1NpnTbcs5u5lP5T3bo1VfxrwVIcT/jX6TtE3nk+vvye5BgePQK2TsJrHshXFh9
-         cQdjCEUPUwo34GOLlgEOE+TqP8xphmDHPNvEwmXqVzXLW2nsJ0G8zpAfs9j1/vVJBk7W
-         eiLn82kuV/pJmFFgPK4jLHwicLQDPXgje893SPEbIrV89CGUZTeQTOlTj5iMLUwJIb40
-         C3f8assDQhXxvvIXoIpO39KS0Z/JPZ1tr28TLCanNkVo42wnVzMBMAbxNy8Ld3xthHnM
-         4ogcdAkGc1fjJKAOQkP3EjeGN8wpHM+5LAS6fFVUb/hVCmYcqYwONAAEpSdBLpwN/o67
-         1N+g==
-X-Gm-Message-State: AOJu0Yxx3uYYkWpd3clv9g925gKAYsMQdlHgBVoBplmt+jtdOBRvUkbi
-	hTFTQUrhc6lmt3obmI3fIPlJhZTdCbPBqqyAhIKi5+O/5R/QuP4HhOBjMxI545RraRR/LkBMsQX
-	THYjpUoLFYnyZKkZByoPaIiLqqOvuieoMcRJ4J3VCZ361q46eRiqRUEFvBwYsVsC/4+lv
-X-Gm-Gg: AR+sD12Rld7GsYpIHhnNv74uhDKUbCBdbASQi5dfH+2nyy1QRMECbd45LTicr+AC8/D
-	nNiPVeOt1WTQ8Ko4UbIgXv83yTtkjuPnSCEkG1Ju8vF44gQQfbykMrunhpZGXeTRxhSrk1wHWy5
-	s1V6DkdAU9KdcBWj3jjKkS2WtIHiqQSv+JknyF8poTCRXEwzoEImkpLhoxFBNNxk90rDQjRUir5
-	SlE+FadByxd7+E0K/PY7kloH3/0Pxybm7CwNHjr/5ZhuuUR4edBGqqxW4KKDiR9QoUbNCMtGdF0
-	LyYpmFqKgwjjU61F3BH3oR0sQqTCaczxxN+19JF+KVE4SbL/y51bcPjW2a7J9zYe61dRm/GEHPI
-	6ps6Ynk+b7Ru2NhCL6kt08NYaLv4ZUephFA==
-X-Received: by 2002:a17:903:41c9:b0:2cb:14b3:4cfe with SMTP id d9443c01a7336-2d0524cd9famr23685145ad.45.1785563318533;
-        Fri, 31 Jul 2026 22:48:38 -0700 (PDT)
-X-Received: by 2002:a17:903:41c9:b0:2cb:14b3:4cfe with SMTP id d9443c01a7336-2d0524cd9famr23684845ad.45.1785563317944;
-        Fri, 31 Jul 2026 22:48:37 -0700 (PDT)
-Received: from hu-ptalari-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd4e666sm18305211eec.4.2026.07.31.22.48.34
+        bh=1vQN+Rc8ZpgObLyYJrV52E4d++M/9CtJzl6cQs//2CI=;
+        b=G6f5AFMQEH0wFyclaN/skIqOldnz4nVuH1dW39fLwX3qgH10TEaxcxANnLsNRBp6Iy
+         7GhJWAnJR5Kiy0uKIucNhiwUNSXfgiDTBGT2fzfU0SPfblOzDT7TFiFt/lMb95WX6w7c
+         nRGD+5ZQ/OAisU0LFAH2Wn78qZKPXsGnmlOoelbXP8caiokSbFMigrErUZ64JMNMeS7r
+         mCqDvqZD+PoA7+4RYOXCqrY9cVatUJO7yfou7ldiJRlb9/BmKPexbSzBURQHrWsgJEfx
+         Q9xc8KBTCKaA/qoybUNYKzvmAqw7G4Gg+CvQNSAZh8QldbHn9GrMXPgsilVH2Le3SJY+
+         1+4w==
+X-Forwarded-Encrypted: i=1; AHgh+RpL7C5aYtvLNgTuD/T7bQze8TmTRCdtvaKr5go9exOmIkfpcyMEN4AyIxwXBKzyDUqvc6Urj4Ee5fPKMTrb@vger.kernel.org
+X-Gm-Message-State: AOJu0YziU+9J0w9pWVsDwEjk/hJCsXrRpzsmRIlEg4AWrhc94s3qHeT5
+	RtPdPVEeReUauWbes3N2H/U0gEd/b/9TviVXcN5/bmjy2dt5k+WYJ8UFOZkbvek1QO2GKEuOtLl
+	TK7zui/7MlPhZN6yanEpPgJsUENnJvIlid5fggcYng/s23bF1PqwRBoKEfk+PmqnIsZwDktUvQ4
+	6w
+X-Gm-Gg: AR+sD10wgf78PrOhqupG5/eWWzTgf2fVrvJFuLCT/RgTfxHfYJ55hbD4b7Xr6zLC5Dw
+	MaXULxvjwF0NwNslj+ODPVFQT68MMDpTHh5IFp+LZ46rGqtuKpAYIUp6Rk2H8KFekyuTgKMxWIc
+	eOrxh/xmk4JFWIPXrQJmBklInD8a5oFf2jvHkz5BMBmZezrjqIAFikuEAsjI+dWG+H9/cZlINZ8
+	kcE2gHX0eT/chb63Rso2LZI932FWQ1pjgCc8rLkUMMKcjFHVC2qCj8cngdlJfAef+cN2q+aYIiy
+	Y/MYhQP97N0qicS1KqDc9cvhKKFQu1ni3+7PRPuDHxyqbReviaVahDp3T1D0ZMFyP24PJzDl3mX
+	99PPyXZLfseO/pPbZSMtCOJLW98RX1KY=
+X-Received: by 2002:a05:6a20:93a0:b0:3c3:bbe6:95b1 with SMTP id adf61e73a8af0-3c92a5d6d57mr2458546637.24.1785566699277;
+        Fri, 31 Jul 2026 23:44:59 -0700 (PDT)
+X-Received: by 2002:a05:6a20:93a0:b0:3c3:bbe6:95b1 with SMTP id adf61e73a8af0-3c92a5d6d57mr2458516637.24.1785566698844;
+        Fri, 31 Jul 2026 23:44:58 -0700 (PDT)
+Received: from hu-sachinku-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153ddda5d9sm16863759eec.13.2026.07.31.23.44.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 31 Jul 2026 22:48:37 -0700 (PDT)
-From: Praveen Talari <praveen.talari@oss.qualcomm.com>
-Date: Sat, 01 Aug 2026 11:18:17 +0530
-Subject: [PATCH v2 3/3] serial: qcom-geni: Use geni_se_set_perf_level() for
- baud rate perf level
+        Fri, 31 Jul 2026 23:44:57 -0700 (PDT)
+From: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
+Subject: [PATCH v9 0/3] media: qcom: iris: add multi slice support
+Date: Sat, 01 Aug 2026 12:14:47 +0530
+Message-Id: <20260801-iris_multi_slice-v9-0-bddf1449c280@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -90,181 +92,214 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260801-reuse_common_geni_framework_helpers-v2-3-13753256ef71@oss.qualcomm.com>
-References: <20260801-reuse_common_geni_framework_helpers-v2-0-13753256ef71@oss.qualcomm.com>
-In-Reply-To: <20260801-reuse_common_geni_framework_helpers-v2-0-13753256ef71@oss.qualcomm.com>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jiri Slaby <jirislaby@kernel.org>, konrad.dybcio@oss.qualcomm.com,
-        bjorn.andersson@oss.qualcomm.com
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-serial@vger.kernel.org, chandana.chiluveru@oss.qualcomm.com,
-        mukesh.savaliya@oss.qualcomm.com,
-        Praveen Talari <praveen.talari@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785563302; l=4995;
- i=praveen.talari@oss.qualcomm.com; s=20251114; h=from:subject:message-id;
- bh=s/SpZVFR71r8SdtWW9hrvSUzEPlBLFRIa8WCs8dVUO0=;
- b=L2NOFZcYhKKwZJdiq2lU6giAl26lNImCJ/fUM2bLBKfMWVhZmBqiYj2KKoRRsxg5sL9+KCWW+
- 3eOpzgAmwMjCFf+sWF/PnAPxbD6L5FgnN1w3FUryDixlslb3ibfrsqg
-X-Developer-Key: i=praveen.talari@oss.qualcomm.com; a=ed25519;
- pk=NGK/88fjyHXgfhIKwag7+uIytOmyOypvZ/hDFaYPEss=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAxMDAzNyBTYWx0ZWRfX77YqcEcP873H
- f+bOO78vXZTTcEQSmhwqQnsIHeoYU4cJI+Y7NCEOi//Oy3BPHfCNKLZP8wcG/VSi+TZtLFTK8CQ
- YwsMZRZHE3s+D2EAZMAEy81y0/BICL0=
-X-Proofpoint-ORIG-GUID: 9uK3N-1dBuorsm_FP5oJHJAWA1RalmW1
-X-Proofpoint-GUID: 9uK3N-1dBuorsm_FP5oJHJAWA1RalmW1
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAxMDAzNyBTYWx0ZWRfX9kFTvRGqARX+
- Z8AZ6pF6+5rKZ2OlnDKaeLNuJc/psJzSz0L/5mrWQiWONxGksKA6CTP6rVlrK7GOH+qinzSfFIN
- ls5FqEFcWMsh7lyG1Q9eluqyw7kMeN/dr2/0LgXgXt67uUXQfyB3e5li3yxFh6tOmy9sseY4nIg
- +hcyNlBu6ON5ZCamyOYRA+nwuNbN5Iu0CwvHpdGUkXqhx2QMLKPm9AemoM2kb9ZGCqYpmYoC3yU
- gYaBnLVpUnWR5xhK0uwqcO8IlumcXDGkohak4RsI/+VMEDIM2uVGVV9HChQYqmXQMh3NXplI59I
- 6VtINU4Ul+yIFHPE/Vb9KgjCxTT10dl/vJbHoMV3+lpYXkF4bbL9TxyeJsgMH+uB/CTicZWWekY
- KpfvJY3+vRr52QZfdfeHFFJoS0ruQmXFiCHa576Yo25OcRPlwLglbJEA8EZtwQUJ0VTnqGpQqtA
- IP3TPYL2NwoK/ErcjLA==
-X-Authority-Analysis: v=2.4 cv=fKMJG5ae c=1 sm=1 tr=0 ts=6a6d88b7 cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-B4-Tracking: v=1; b=H4sIAN+VbWoC/53SXWvCMBQG4L8ivV4k3x8yxv7HEEnSkxlorSa1T
+ MT/vlQZK9gy2E3gXOTJecl7rTKkCLnarK5VgiHm2B3KYF5Wld/bwyegWJe5ophKrIhEMcW8a89
+ NH3e5iR6QkFxRrawRklXl2jFBiF938mNb5pC6FvX7BPYX4lQ/QwNBBBnqGVWSGHDhvct5fTrbx
+ ndtuy7HyMcDSnBsLqjvfvea5TTCCBzRwciAodaz3D7mvkuXe/6Bjjv/RFUzJC2kEQI7EsAx457
+ JMfHAJg4lMw4rjq29JFZqBQoWHD512IzDi8NFwJYFUMEvOWLq8BlHjE5wwrCaGsf5giP/cuSYy
+ 5iaSOwdp3bBUVNHzDiqOI4zKTw3DIelXHrq/K8C29ujsglO51L+/tHbqoWc7b38m9Xr4wH2+Eh
+ kk8BNjwZT7FoRqzTFmHj8ZL8V/PYNUW+zvmEDAAA=
+X-Change-ID: 20260716-iris_multi_slice-5647287a9563
+In-Reply-To: <20260728-iris_multi_slice-v8-0-eb18f96f0ed8@oss.qualcomm.com>
+References: <20260728-iris_multi_slice-v8-0-eb18f96f0ed8@oss.qualcomm.com>
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Hans Verkuil <hverkuil@kernel.org>,
+        Vedang Nagar <quic_vnagar@quicinc.com>,
+        Stefan Schmidt <stefan.schmidt@linaro.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        20260731-iris-ar50lt-v9-0-d71a782001c0@oss.qualcomm.com,
+        Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>,
+        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785566693; l=7724;
+ i=sachin.garg@oss.qualcomm.com; s=20260211; h=from:subject:message-id;
+ bh=bu8Z4vw7yCArmYfRZxkMAPJT/o9xfi+bqiymwdKIC34=;
+ b=bz1o3rHUbNYIhEjplrPgs38BpDLB4Zwi6FxszQpIfPRQ3uZ5ZyVNGlAXR5HJUBPwcQUt1wnoV
+ xU+I6VQRwGNC6KLSA3LnoLBTrXM5FocGMhzTJDy+UiUnA3vUr3GnC2I
+X-Developer-Key: i=sachin.garg@oss.qualcomm.com; a=ed25519;
+ pk=KcRhp4CP9cR1V2tg6xSNRnB2STYaU0vVigdUF4Actu0=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODAxMDA0NSBTYWx0ZWRfX6QXEjwRRAPD7
+ U3hKWmUTz0ERrBhg9W4PHPq0CSNhE9ywycyFnjX4WdQPtB1my//zRB1i43nJsqNpzJq8GGa9WUM
+ DH277SyE+vLIJPC+VOZ/EAt0PHFbVkc=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAxMDA0NSBTYWx0ZWRfX4aQizWi6Qq9v
+ ObNTV+cV2Hq4p7616VLqgriidCq5a4iu+eB1Oj8oPvzcbxnG5EJJiGgcUbL/T8ovx8WAY7AnEvo
+ jZDyYWPyKvbZqLsWuFn6W1hYqDXwcP+2x/pWwIso50XbrZgzqtJ5x2dzOIhrfVWRy2QBS2pAtLm
+ BAagCgcqVrblx1ycYr+RG2Ks50lTQ7mxJKjoyYZXGr0GjEnVovk856AqoGmk6gG8e+NvJAuDLIm
+ zHQo5sIVzKFQpGc9DjRqhdrnElHkXJEenwxHN+3qOSksYieDSMZ46sWGNYM4xriHGAFt4ciXfRc
+ aalGNLm++lzC/jPyyJZlOqOAS1DtJ2uHP0dugptD8hcecQMEyFLujpUqWIde9V4kWcRuK4/ZvGQ
+ 9iyJ35nfTj6sPEAfZAnJm48pXNwCNaxhpi3Rgf71q3V3j2sf+WELiSHRMp/cBPohFPgptxFiNPS
+ VoalnLqaBCYwyAorbQQ==
+X-Proofpoint-GUID: 1pcMXtEweOz2-7qEioRMjjpUTmd7vq2G
+X-Authority-Analysis: v=2.4 cv=IYC3n2qa c=1 sm=1 tr=0 ts=6a6d95ec cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=iFx-AcfrQKbmC_lMXXIA:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=T8lcpxUem0FCnaQ_rB4A:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-ORIG-GUID: 1pcMXtEweOz2-7qEioRMjjpUTmd7vq2G
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-31_07,2026-07-30_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 lowpriorityscore=0 priorityscore=1501 malwarescore=0
- spamscore=0 phishscore=0 clxscore=1015 impostorscore=0 bulkscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608010037
+ adultscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 phishscore=0
+ suspectscore=0 priorityscore=1501 spamscore=0 malwarescore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608010045
 
-The driver implements its own helper to select the performance level
-corresponding to a requested baud rate. The helper duplicates
-functionality already provided by geni_se_set_perf_level() in the GENI
-core.
+This series adds support for multi-slice encoding in the Qualcomm Iris
+driver.
 
-Replace the local implementation with the common helper and remove the
-associated duplicate definitions and code. This consolidates
-performance-level management in the GENI framework and reduces driver
-specific code.
+Multi-slice mode allows encoding a single frame into multiple slices,
+which can improve error resilience and enable parallel processing.
+The feature supports two slice modes:
+- MAX_MB mode: slices are created based on macroblock count, controlled
+  via V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_MB
+- MAX_BYTES mode: slices are created based on byte size, controlled via
+  V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MAX_BYTES
 
-Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
+Clients can enable slice mode using the V4L2_CID_MPEG_VIDEO_MULTI_SLICE_MODE
+control.
+
+Patch 1 is a prerequisite fix: iris_set_stage() computes a work_mode
+but never caches it back into inst->fw_caps[STAGE].value, leaving
+buffer-size and clock-frequency calculations based on a stale value.
+
+Patch 2 is another prerequisite fix: iris_set_stage() currently always
+selects STAGE_2 work mode for encoder sessions, but CBR rate control
+requires STAGE_1. This is fixed by forcing STAGE_1 when BITRATE_MODE is
+set to CBR.
+
+Patch 3 adds the multi-slice support itself for Iris HFI Gen2 based
+targets (qcm2290, sc7280, qcs8300, sm8550 and other SM8550-derived targets).
+Support for HFI Gen1 targets will be added in a follow-up series.
+
+This series has been verified with GST level testing.
+Command used:
+gst-launch-1.0 -v videotestsrc ! video/x-raw,format=NV12, \
+width=1280,height=720,framerate=30/1 ! v4l2h264enc output-io-mode=4 |
+capture-io-mode=4 extra-controls="controls,video_bitrate_mode=1, \
+slice_partitioning_method=1,number_of_mbs_in_a_slice=460;" \
+! filesink location=/opt/test_enc.h264
+
+Depends-on: message-id: 20260731-iris-ar50lt-v9-0-d71a782001c0@oss.qualcomm.com
+
+Changes in v9:
+- Rebased on top of AR50_LT enablement series v9
+  (https://lore.kernel.org/all/20260731-iris-ar50lt-v9-0-d71a782001c0@oss.qualcomm.com/)
+- Link to v8: https://lore.kernel.org/r/20260728-iris_multi_slice-v8-0-eb18f96f0ed8@oss.qualcomm.com
+
+Changes in v8:
+- Rebased on top of AR50_LT enablement series
+  (https://lore.kernel.org/all/20260709-iris-ar50lt-v7-0-76af9dd4d1f6@oss.qualcomm.com/)
+- Extend multi-slice support to VPU2 (sc7280) and AR50LT (qcm2290)
+  platforms, in addition to the existing VPU3x platforms.
+- Rename the shared slice_caps instance from slice_caps_vpu3x to
+  iris_vpu2_vpu3x_slice_caps to reflect that it is now shared across
+  VPU2 and VPU3x platforms, and wire it into sc7280_data.
+- Add a new iris_ar50lt_slice_caps instance for the AR50LT platform,
+  and wire it into qcm2290_data.
+- Link to v7: https://lore.kernel.org/r/20260725-iris_multi_slice-v7-0-b4365c4930fe@oss.qualcomm.com
+
+Changes in v7:
+- Moved slice_caps_vpu3x from a static const in iris_platform_vpu3x.c
+  to a real definition in iris_hfi_gen2.c, extern-declared in
+  iris_platform_common.h (same pattern as iris_hfi_gen2_data), so it
+  no longer has to sit between #include lines to satisfy ordering.
+- Link to v6: https://lore.kernel.org/r/20260724-iris_multi_slice-v6-0-a99d160cb42a@oss.qualcomm.com
+
+Changes in v6:
+- Reordered local variable declarations in iris_set_slice_count() to
+  follow reverse Christmas tree style.
+- Renamed default_slice_caps_vpu3x to slice_caps_vpu3x.
+- Link to v5: https://lore.kernel.org/r/20260724-iris_multi_slice-v5-0-4fb593d29b44@oss.qualcomm.com
+
+Changes in v5:
+- Fixed unbounded slice count under RC_OFF in iris_set_slice_count()
+  for the MAX_BYTES use case.
+- Addressed remaining coding-style review comments.
+- Link to v4: https://lore.kernel.org/r/20260723-iris_multi_slice-v4-0-45f0a3fe7fce@oss.qualcomm.com
+
+Changes in v4:
+- Split out a new prerequisite patch (patch 1) to cache the computed
+  work_mode into inst->fw_caps[STAGE].value in iris_set_stage(), since
+  this fixes a pre-existing bug independent of the CBR change and
+  needed its own Fixes tag.
+- Deduplicated the per-target slice capability limits that were
+  previously repeated identically across platform_inst_cap_qcs8300 and
+  platform_inst_cap_sm8550. Introduced struct platform_inst_slice_caps
+  and moved it to iris_platform_data (one level up from
+  platform_inst_caps), since all Iris HFI Gen2 targets share the same
+  encoder capability table and hence the same slice limits; a single
+  default_slice_caps_vpu3x instance is now referenced by all Gen2
+  platforms.
+- Link to v3: https://lore.kernel.org/r/20260721-iris_multi_slice-v3-0-adc61a687e7e@oss.qualcomm.com
+
+Changes in v3:
+- Patch 1 (force stage 1 work mode for CBR RC): cache the computed
+  work_mode into inst->fw_caps[STAGE].value so buffer-size and
+  clock-frequency calculations stay consistent with what is actually
+  configured on firmware.
+- Patch 2 (multi-slice support):
+  - Use inst->hfi_rc_type instead of the raw V4L2 BITRATE_MODE value
+    when validating/deriving slice parameters, avoiding a mismatch
+    between V4L2 and firmware rate-control enums.
+  - Round up (instead of truncate) when computing the minimum
+    MAX_MB and MAX_BYTES slice size floors, so the hardware's
+    max-slices-per-frame limit is never exceeded.
+
+Changes in v2:
+- Added a prerequisite patch to force STAGE_1 work mode for CBR rate
+  control on the encoder, required for multi-slice encoding to work
+  correctly.
+- Addressed review comments on the multi-slice patch (updated commit
+  subject and description).
+
+Signed-off-by: Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
 ---
- drivers/tty/serial/qcom_geni_serial.c | 53 ++++++-----------------------------
- 1 file changed, 8 insertions(+), 45 deletions(-)
+Sachin Kumar Garg (3):
+      media: iris: cache work mode after computing it in iris_set_stage
+      media: iris: force stage 1 work mode for CBR RC on encoder
+      media: iris: add support for multi_slice in iris encoder
 
-diff --git a/drivers/tty/serial/qcom_geni_serial.c b/drivers/tty/serial/qcom_geni_serial.c
-index 83ba0f5433ef..c268ebba2ee2 100644
---- a/drivers/tty/serial/qcom_geni_serial.c
-+++ b/drivers/tty/serial/qcom_geni_serial.c
-@@ -109,14 +109,12 @@
- #define DMA_RX_BUF_SIZE		2048
- 
- static DEFINE_IDA(port_ida);
--#define DOMAIN_IDX_POWER	0
--#define DOMAIN_IDX_PERF		1
- 
- struct qcom_geni_device_data {
- 	bool console;
- 	enum geni_se_xfer_mode mode;
- 	int (*resources_init)(struct geni_se *se);
--	int (*set_rate)(struct uart_port *uport, unsigned int baud);
-+	int (*set_rate)(struct geni_se *se, unsigned long baud);
- 	int (*power_on)(struct geni_se *se);
- 	int (*power_off)(struct geni_se *se);
- };
-@@ -1440,9 +1438,10 @@ static int qcom_geni_serial_startup(struct uart_port *uport)
- 	return 0;
- }
- 
--static int geni_serial_set_rate(struct uart_port *uport, unsigned int baud)
-+static int geni_serial_set_rate(struct geni_se *se, unsigned long baud)
- {
--	struct qcom_geni_serial_port *port = to_dev_port(uport);
-+	struct qcom_geni_serial_port *port = dev_get_drvdata(se->dev);
-+	struct uart_port *uport = &port->uport;
- 	unsigned long clk_rate;
- 	unsigned int avg_bw_core, clk_idx;
- 	unsigned int clk_div;
-@@ -1458,7 +1457,7 @@ static int geni_serial_set_rate(struct uart_port *uport, unsigned int baud)
- 
- 	ret = geni_se_clk_freq_match(&port->se, baud * sampling_rate, &clk_idx, &clk_rate, false);
- 	if (ret) {
--		dev_err(port->se.dev, "Failed to find src clk for baud rate: %d ret: %d\n",
-+		dev_err(port->se.dev, "Failed to find src clk for baud rate: %lu ret: %d\n",
- 			baud, ret);
- 		return ret;
- 	}
-@@ -1496,42 +1495,6 @@ static int geni_serial_set_rate(struct uart_port *uport, unsigned int baud)
- 	return 0;
- }
- 
--static int geni_serial_set_level(struct uart_port *uport, unsigned int baud)
--{
--	struct qcom_geni_serial_port *port = to_dev_port(uport);
--	struct device *perf_dev = port->se.pd_list->pd_devs[DOMAIN_IDX_PERF];
--
--	/*
--	 * The performance protocol sets UART communication
--	 * speeds by selecting different performance levels
--	 * through the OPP framework.
--	 *
--	 * Supported perf levels for baudrates in firmware are below
--	 * +---------------------+--------------------+
--	 * |  Perf level value   |  Baudrate values   |
--	 * +---------------------+--------------------+
--	 * |      300            |      300           |
--	 * |      1200           |      1200          |
--	 * |      2400           |      2400          |
--	 * |      4800           |      4800          |
--	 * |      9600           |      9600          |
--	 * |      19200          |      19200         |
--	 * |      38400          |      38400         |
--	 * |      57600          |      57600         |
--	 * |      115200         |      115200        |
--	 * |      230400         |      230400        |
--	 * |      460800         |      460800        |
--	 * |      921600         |      921600        |
--	 * |      2000000        |      2000000       |
--	 * |      3000000        |      3000000       |
--	 * |      3200000        |      3200000       |
--	 * |      4000000        |      4000000       |
--	 * +---------------------+--------------------+
--	 */
--
--	return dev_pm_opp_set_level(perf_dev, baud);
--}
--
- static void qcom_geni_serial_set_termios(struct uart_port *uport,
- 					 struct ktermios *termios,
- 					 const struct ktermios *old)
-@@ -1550,7 +1513,7 @@ static void qcom_geni_serial_set_termios(struct uart_port *uport,
- 	/* baud rate */
- 	baud = uart_get_baud_rate(uport, termios, old, 300, 8000000);
- 
--	ret = port->dev_data->set_rate(uport, baud);
-+	ret = port->dev_data->set_rate(&port->se, baud);
- 	if (ret)
- 		return;
- 
-@@ -2161,7 +2124,7 @@ static const struct qcom_geni_device_data sa8255p_qcom_geni_console_data = {
- 	.console = true,
- 	.mode = GENI_SE_FIFO,
- 	.resources_init = geni_se_domain_attach,
--	.set_rate = geni_serial_set_level,
-+	.set_rate = geni_se_set_perf_level,
- };
- #endif
- 
-@@ -2178,7 +2141,7 @@ static const struct qcom_geni_device_data sa8255p_qcom_geni_uart_data = {
- 	.console = false,
- 	.mode = GENI_SE_DMA,
- 	.resources_init = geni_se_domain_attach,
--	.set_rate = geni_serial_set_level,
-+	.set_rate = geni_se_set_perf_level,
- };
- 
- static const struct dev_pm_ops qcom_geni_serial_pm_ops = {
+ drivers/media/platform/qcom/iris/iris_ctrls.c      | 91 ++++++++++++++++++++++
+ drivers/media/platform/qcom/iris/iris_ctrls.h      |  1 +
+ drivers/media/platform/qcom/iris/iris_hfi_gen2.c   | 86 ++++++++++++++++++++
+ .../platform/qcom/iris/iris_hfi_gen2_defines.h     |  2 +
+ .../platform/qcom/iris/iris_platform_common.h      | 18 +++++
+ .../media/platform/qcom/iris/iris_platform_vpu2.c  |  1 +
+ .../media/platform/qcom/iris/iris_platform_vpu3x.c |  5 ++
+ .../platform/qcom/iris/iris_platform_vpu_ar50lt.c  |  1 +
+ 8 files changed, 205 insertions(+)
+---
+base-commit: a4e49d59acd3ebbe00d252a5ca14c5c4c981bd60
+change-id: 20260716-iris_multi_slice-5647287a9563
+prerequisite-message-id: <20260731-iris-ar50lt-v9-0-d71a782001c0@oss.qualcomm.com>
+prerequisite-patch-id: 564b79f382140b898543358f7f4fa87dd138d509
+prerequisite-patch-id: 8dbbaedb2f9b45ab480ca7971172e2db2b51b323
+prerequisite-patch-id: e669517302297a7b315c9aa4f4189e4928091e0c
+prerequisite-patch-id: 922bc325dbd9a499a3a209d2f8dbbce6a4166e60
+prerequisite-patch-id: a5a49cda4e21d835558fa84f2f6bd25b8f7e72b4
+prerequisite-patch-id: e62e8285bcbddade64c026379f23a8c5ae70fe52
+prerequisite-patch-id: cac29b25348e2e791638a0286283109f2546f9a7
+prerequisite-patch-id: 4dfaff2f9644d7a168b1b35fe947660b8f464af6
+prerequisite-patch-id: 6198a3555246c62bc989161894bdd7d799e6885b
+prerequisite-patch-id: d97c79463fe1487fa7bc9eebd4cfb4610713f44a
+prerequisite-patch-id: 76eafea8230160a3b5e6503c68a5c9c3c2d1497e
+prerequisite-patch-id: ea9cd9a8e6561321cd9cf338a76da1382ff47e13
+prerequisite-patch-id: 26e9083b709cc8f2f1184edf6b39fb89f365a9f1
+prerequisite-patch-id: ce4576bd3d20880939a97a1cda9bb8678808ea65
+prerequisite-patch-id: 6f98157cee1161d27a8bcf1b9003f57ef7730921
+prerequisite-patch-id: 6e258cd475b77927d6476704cbf91bf48a63aa0d
+prerequisite-patch-id: 200af0b22740dcc006b6de6d4e0744da5e6a745a
+prerequisite-patch-id: f5479d2ca6b850c0c750944a8e0b05a7df2cc5a8
+prerequisite-patch-id: 96dfec1c2df69f748c1a4bd741628e946cb7bec1
 
+Best regards,
 -- 
-2.34.1
+Sachin Kumar Garg <sachin.garg@oss.qualcomm.com>
 
