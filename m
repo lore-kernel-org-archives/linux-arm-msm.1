@@ -1,85 +1,86 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ACC23B8413
-	for <linux-arm-msm@vger.kernel.org>; Sat,  1 Aug 2026 07:49:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3A0E38DC57
+	for <linux-arm-msm@vger.kernel.org>; Sat,  1 Aug 2026 08:00:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785570551; cv=none; b=PYrswz2z5Htls6pBfvDCUt4zZQ++vLNP3+niKqDJHQE+/LWOrX+qYR25HyX4l0zU8e7LTiMvC5FhqSITQjqEOfrzdJi+fX9AdwrGi9bH3jeFdTZw+C0fv7QQn3J5UF/kXqAUEN2B81YNFPJqRefuLlUCMYMAe4xb5xDKfaPxC9k=
+	t=1785571254; cv=none; b=J+nUTveCpryv/51JTv0vorG4h1XfJXxX0XgFivRvnBzL0Bdfz32AqYK3CvuKeK906G6asraaIPV473xD2PX9viZdZIJeX1zVnLznBF4MifEaGfCsUVRjmkuwLNModyPAXDMtj7lPGae8fQ5U/CIgll0itMjWIRsBzgEdpDtA8YQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785570551; c=relaxed/simple;
-	bh=wckzg7u3tcRfa6jZax71MInhaQ/FdjfR66RHknyTaWY=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=Aqnbf+mQTIH9Ho5cpSIeueLMGrV6cceG3AJpNS2UefaRZbt/nIKo2LnMIT+jOHkYKQrcJsHbtS6nrvD7lFcQGkSNluRCQZtaqydDevmQ+/k+++TRXBslNq9IsXZlo/dyCVVFzMm4jO9gai7HmyitaFcxUZVR8FeQ3XyhyReaSBg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=HB9bGlik; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=X5+iNvth; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1785571254; c=relaxed/simple;
+	bh=/lQS+ClgoGUixR/QI1y225RxGswvnDRbQRyL4FSIIY8=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=TInywE0TcCFGy11IK3fbhmqDEWDV3sRlqa5szLNxBGa/Nd24QxXi5B9mqRbx3KPWLdGmCw43ptgWsb+1BR6vWIuXNhDpDU+ovD0M5CRHwoDy+PorYY6QrGRBEbnU0XAfUg2xpjEdjyGgQWvUVhz2JlX3ENA/8s9f8alFduyOfxI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YvcfLphF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UBYtmzRf; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="HB9bGlik";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="X5+iNvth"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6713PW931918849
-	for <linux-arm-msm@vger.kernel.org>; Sat, 1 Aug 2026 07:49:08 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YvcfLphF";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UBYtmzRf"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6713DjSc2066119
+	for <linux-arm-msm@vger.kernel.org>; Sat, 1 Aug 2026 08:00:48 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=AR4d/t3FeZghBRdNEvysF+
-	dmiVXYZTZuk9ukn2d2jJw=; b=HB9bGlikE+hKDtQkZY5255y2GDa7C57OI23AF4
-	lWcQOMdaHc7rNnnZl+xq+oKdpZCnQP6yfGv+CeZuK0A+IKUugvQ1jd5G8bv5vSoA
-	vDyDCsr5e5QI+dPalRdJcJfCvzSQI0Ww1/HZ++9KFzU/jeJdQRv6Pig5HX2ayM4S
-	oLgn7YvVqnetcRw4bAZ1gJ07mMgH7bc97WBK+sm+uPICCjuf3TlizREGK9jvtzqh
-	WKPRq5xhaRnLkjXPNdgQEpqA7ZUuHCJilv4wUiQBxaVRp0oCPgZQQc6kbi6LvuQQ
-	AawQHhrNdSukOtFuC8XJk302stXqAPgQ1Mp4BpLN6YKiaGhw==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fs8vt8gr1-1
+	:mime-version:subject:to; s=qcppdkim1; bh=GiYcVjBZ09W9+YUl1IOFMv
+	wZDm0LSVBwbrIB5vHXWwk=; b=YvcfLphFZlXjbdZi5RDWcKXjt6V3vv7eRo2TD9
+	8wOoFNwCv1RWTttNpwLvLzpA3SL803T3AIJ0HhUOoldkNICyOiRLkBemFAoY7a79
+	FgbIG5J37WOi+a9L/616k9Mjq0Z3YCPPm/JAZoV/E1Y4sZaaWqKuqwUDj6pW7mEy
+	9yydcTUDjZA39F6rlYTed4Fz+AR9g334VxKisiw2kmjmdPMTTBY9wkN9/m3jI8yX
+	TqrD6rIho3olicWIC9IUeyjePgnC6RdjZfZYFBsnYxZhHfCl+TK4isRu4YhcUlz7
+	qRlRMsN3VakdfuJN+jUtGD7hgENlkdUD7Rk1RFlD2VmB/IcA==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fs8q50hfk-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 07:49:08 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-ca6bd8a190cso2176998a12.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 00:49:08 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 08:00:47 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38dde0df80bso2122494a91.3
+        for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 01:00:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785570547; x=1786175347; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+        d=oss.qualcomm.com; s=google; t=1785571247; x=1786176047; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=AR4d/t3FeZghBRdNEvysF+dmiVXYZTZuk9ukn2d2jJw=;
-        b=X5+iNvthr3btkhia5PRUogo/+KmzCs/TZoQI4uQA8mpUCzTm0ym2WdFMXVfU2DqWEb
-         0BCDTdEYMhjjvEaI4lzN31Wd0RoRKJ4azwHST3y+XuuzDdOxzvdm4U1txjPtfehFO+Z8
-         8vAXolyNS/LsaR3EQpkzUxiC5MFcwpc8wsBlMKlwJXr7r6/0arMex3LZrTlermmIDxnS
-         q6nPTiw3fLFoQJS94Gt428iNffvVgozkJzTWLjPQPayV/56JJzGxrhCpQwXvTaRiLv8p
-         zHpH3+vpZpovbA5oE25x7GoOWRhlod0RI9Y6arVlE68/8+FDdqenP5r5PEPwrAIR0RMV
-         bD5g==
+        bh=GiYcVjBZ09W9+YUl1IOFMvwZDm0LSVBwbrIB5vHXWwk=;
+        b=UBYtmzRffRewX5YDDKmZu+tjxbrQocOmEjJssmYnA9/RzgpRsQ7Mqs5RBRkPXnZrWc
+         buEXhXuZ31tJMtiQa65gvl8mBtMi3uGovE+8Z2PNBJXJiBaZ0VOTF2+kajR6kpaiardM
+         ycQm1RLFpnj4stg2Sob1i1epPDlDk+GyjSAGoL4o9XZPZegUXgCBwPnu+Q45T0O6CB1s
+         SXyAtEz0gdGTiTsvFHUFA6jtmkTeVR7jojI6Wh9uuzqJI3F8xiyjNk9c+0ZekvGqveF6
+         r56vNgb32srSlrToXf5jCzPzo6+58wTPshqhOt4uv7MO8hRaZzeHDL9ER8iQNRtEGhe6
+         IXnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785570547; x=1786175347;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=AR4d/t3FeZghBRdNEvysF+dmiVXYZTZuk9ukn2d2jJw=;
-        b=d9g15RiYy0aC0v8Lx5MKVfn3yUBJ849tGg75eODtxyWC45orhafOTnRDpRtlfp73cE
-         TP2tU6jvdLArYTHpnPg5zWcvL2Xme0wrycobuGvdMpRaSCqcRFv/TL7yk4ZhYqEEcNK7
-         GNTVv+YKhCBBwvKmRy4lkKvEHAU2JobNKoT/JvCpWwjAROrz7ivGvEeP+Sk/3GXYE2qZ
-         M1Y6PgP3+Oh7tr8Yk9TsjFjsGEqqkeBUlsllBFAPaIm4akUynMBNieSklfp42rFGzcFg
-         B8Vc5PfJvQv09Bp17JF+yDc7ILv0WtZCf7uKgorBZx4RIlZ7YeiVQUwQDEr0ESNUYo06
-         NLTg==
-X-Gm-Message-State: AOJu0Yzr+b1XxUZvfaTo/g7fzX9kPTFLMnEo+2y3YmcmKzD/5JcmHBTG
-	x/AmGe3xzxO90jtS4P2X9yXqWYIKJEYBsBK4BWA5ACLOp51eaQ80KNTbTVASl+PwNakVioZbV86
-	uyZGvw88JahTuhvcf0mJnv5HWROjV4NEDQjA5Vrnj6KkLK58j3w1micu4xxoYxYBUP9/5Kc8wNB
-	vt
-X-Gm-Gg: AR+sD12t3RPF1M05aFYSbyY/JeXQtPXOAztGUbZZBqA7hUUKxsZSkOJFxydYvr/bFcg
-	gq+EDByt5Jyte2xRAHLkFyf/2FFcE8eCx7QpegQO0yoDbv8c344vwQVLq/S9Z2Ft7xhmAyge2Vj
-	vHWKAMZH60BydMjC7KVqJk3ms6ruaERUs1R4WoVLRRu85ybEFR4KKVP+5rnBDkYDHiWSoU1uVfh
-	ZnHd4bbl29etoXEGQAPD6dZBo1g5L5t4Xlp8yzjBgKc8MLwxWH0Hxw1cehJ+HJMWjJgDIkm5p9C
-	PdGzZipeeSZxIf336aausA0Z/uM7KE5PQjACfFFAxXRv07LapGjBFn8miYGxIq/9bpFIv4B9oxC
-	e6ZS7s2tdsVS2R+HklO3++ey/f4mf5Q==
-X-Received: by 2002:a05:6a21:7d01:b0:3c6:3c5b:fe66 with SMTP id adf61e73a8af0-3c92a89c78amr2513278637.41.1785570547109;
-        Sat, 01 Aug 2026 00:49:07 -0700 (PDT)
-X-Received: by 2002:a05:6a21:7d01:b0:3c6:3c5b:fe66 with SMTP id adf61e73a8af0-3c92a89c78amr2513247637.41.1785570546546;
-        Sat, 01 Aug 2026 00:49:06 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1785571247; x=1786176047;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=GiYcVjBZ09W9+YUl1IOFMvwZDm0LSVBwbrIB5vHXWwk=;
+        b=iArVYMjDtXjdKmKcfhkHtouXWqNXWXx+x0nYOpKfEsRgm5tPQ4cVIGJsCxMh+bFpy+
+         4qzWoEeN2FHIbBIcajvNntGZCzwppcEGNXAATokFFDAFya3py6bvSoNFqf/afS/li/a/
+         MvFcM2M0URdkvAoB0qyH/pExK2oH+USGjOwjsLYeFLYRv3lC6nOcgjpF/r+Bpfi50NJk
+         ogsoueAfLwZ5oLOKoc7u6DwVWCaie9SQOzt5doMJ+CHZCYEmXt+cy8zpKuPKKnjbu05m
+         QlIFzTKDZ36nnadM0JTS/RVlmVjDXKCHX/y8LqmtJOLJwjlUQVXyIbe6GWe9p9q0WAHD
+         Ni/Q==
+X-Forwarded-Encrypted: i=1; AHgh+RoqrahrD1bgSJ/I5e26HA5IISig7sAcykdH8D+4QMt24JY5JqWcFg9qD+u+hMMlmLJ8d8yrggMg4APSQNCP@vger.kernel.org
+X-Gm-Message-State: AOJu0YwVjljNa9icyZx0S1U4SbXvKh0ad/EuzlpcPbmm+YAD2OBMvRLe
+	oS5aufbOBxFf4k0TjvJ0D6z0T5Bit3U9lTXt/eFod2gU2EPm7kzvHeWNyyQZBn2gPWO7InHqXg9
+	7AQ1HVgwrYHOizuXlK2D4FSxqqnCHev6zfZhnLVDzo2PbuqxiGVbKRdqN5ehj2iSKOPXU
+X-Gm-Gg: AR+sD12Pl7khUcWPCZCYsB/gOxZGc6xHF1oCsM0uPhTxxxxNbLcU0VoIGQ0U4wBk4FI
+	JLqrEgnqMMHGbHqk3kpKi0voA0ynMLNgSoJ3raoMz9lJxbauNnYivdJ9l6JW6hdDZOfd4NhXI/+
+	/9snpN6aiiIqEKefX2u7TCH8DFUWWn2VjBQrIJqGP9PihWANsIjn+U0sp6+2tPCE+bi1aslGu4q
+	vcvCOdw7RfUcmocV/KqX41bggfYHbx6odKe03Wazjjj5ZDXFFK42WI8jeCrhPPwsQpl6CYQ34kP
+	FZA7t7ebNwz2+ifMDOfit4TQR5gVeVZi9dA+U6bgNVdApHLcNE7pBS5SS8+ZCfnK4DMoV6Gs7vg
+	KMWkeZXrjG8BzN93jUxugS3evyaqHQg==
+X-Received: by 2002:a17:90b:4cce:b0:38e:4cb:51f with SMTP id 98e67ed59e1d1-38fbc422a55mr2509617a91.11.1785571246497;
+        Sat, 01 Aug 2026 01:00:46 -0700 (PDT)
+X-Received: by 2002:a17:90b:4cce:b0:38e:4cb:51f with SMTP id 98e67ed59e1d1-38fbc422a55mr2509584a91.11.1785571245858;
+        Sat, 01 Aug 2026 01:00:45 -0700 (PDT)
 Received: from hu-kamalw-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13fab4fdb80sm9645923c88.15.2026.08.01.00.49.04
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153e18e114sm24739838eec.28.2026.08.01.01.00.42
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Aug 2026 00:49:06 -0700 (PDT)
+        Sat, 01 Aug 2026 01:00:45 -0700 (PDT)
 From: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
-Date: Sat, 01 Aug 2026 13:18:45 +0530
-Subject: [PATCH] power: supply: qcom_battmgr: Add multi-port USB-C power
- supply support
+Subject: [PATCH v6 0/4] regulator: qcom-rpmh: Support RPMH address reads
+ and use it for rpmh-regulators
+Date: Sat, 01 Aug 2026 13:30:26 +0530
+Message-Id: <20260801-b4-read-rpmh-v5-v6-0-9fcb54928523@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,555 +89,200 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260801-b4-battmgr-multiport-usb-v1-1-89d90bf5de1f@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIANykbWoC/yXMTQrCQAxA4auUrA1MSxlHryIumprWiP0hyYhQe
- ndHXX6L9zYwVmGDc7WB8ktMlrmgPlTQ37t5ZJRbMTShiSGFGqlF6tynUXHKT5d1UcdshG1kCsd
- TijENUPJVeZD3b325/m2ZHtz79wf7/gFTLsCpfAAAAA==
-X-Change-ID: 20260801-b4-battmgr-multiport-usb-46eb0798668f
-To: Sebastian Reichel <sre@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAJqnbWoC/3WNQQ6CMBBFr0Jm7ZCCDgZX3sOw6JRBaoRiC0RDu
+ LsF1yaTn7zk/zcLBPFWAlySBbzMNljXRygOCZhW93dBW0eGXOWFOucK+YRedI1+6FqcCVlzxnV
+ mWIggrgYvjX3vxlv14zDxQ8y4abZGa8Po/Gd/OdPW+2+Pp9BweWy4pIYKuroQ0tekn8Z1XRoDq
+ nVdvxyr8g7HAAAA
+X-Change-ID: 20260720-b4-read-rpmh-v5-bab1bd1cbe55
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Vinod Koul <vkoul@kernel.org>
+Cc: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Maulik Shah <maulik.shah@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785570543; l=16255;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785571241; l=7633;
  i=kamal.wadhwa@oss.qualcomm.com; s=20260406; h=from:subject:message-id;
- bh=wckzg7u3tcRfa6jZax71MInhaQ/FdjfR66RHknyTaWY=;
- b=LpBXz4x4Qa8BCLCHZnjP+HyhPBnPNoUfHEC98tKrz9Zx0pS9HQXIGYAvfmd4EbNJ8bG7Ax8KR
- D8z7+vhS+yhDhP8fWCBRS2NNX4yOjUK+5J9M5qQzE3dRmYDSgfggi05
+ bh=/lQS+ClgoGUixR/QI1y225RxGswvnDRbQRyL4FSIIY8=;
+ b=Zvn4/DHyGeZOJ1zmwEh46+ss26YV+oHY5Ih5LdZ7TICY01M3rTZ1FUB5Grc9BK+FbuuQlQ/zF
+ wVdlYbRB4/pDveOk7sU4PkIQ4SbzE2AX8II+gFJjPrTEu+J9ar/rM92
 X-Developer-Key: i=kamal.wadhwa@oss.qualcomm.com; a=ed25519;
  pk=ylH1NxUZkBpYsmww89g6zVxpS0q8qthtzcORkYxn/Ag=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAxMDA1NSBTYWx0ZWRfX1atr4/l3h5Fw
- jJ3ufwsnDTdpKwYjHTfW/UTR9vcaC94cjQDTFhyihwgk/E98pguxnFjYmf7T3HCvHgdsMelWRQe
- Fqr/CmuhIsU6DyN2v4GJBOXDyPUhRAA=
-X-Proofpoint-ORIG-GUID: DZbMaGqsFG6A07DFbkxBShdN2ohfoo5v
-X-Proofpoint-GUID: DZbMaGqsFG6A07DFbkxBShdN2ohfoo5v
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAxMDA1NSBTYWx0ZWRfX8wwt+qMexP9P
- hFIdSWzmnTJW5nDcVh6i+xW07+NJr8majjwIK/JtqvofkAqbOzwQm5DNHNVuih14YHjyf0hw3v4
- QjZogZQvWZ9lvU7fsHwEjxAeUm28kbL+lWiXnyCjtPHH0FZOTVuddbJ17KjYKMAV+CSdOzs6QlL
- at9b/R1VUBc+bdQ4ybK9FKlcxHn5hz7uiNNBKQjj18Z/MYNEdv3ceJ7hjFuWsl+AUUEp+ErMpCW
- Mc4jlp7Y/m9xYy9kF6w4N/X+trIgntH242Y7IHYv2FQv5FV5B13EcDosItXl8SsldqSlI3T9VCw
- Hb3nJySl6U0MM5jSehNn+vN8G2bLk1frNiG+JFQ6lW5FQjy4dA4zi1ro9WEo2UAAq/VjDOabJLS
- 9SiHpAYItRW0z/JBeI76admEsQ4bqR+XT4sVfiWJx7O7x7TCOOJNtHj33L4/APDG2uz0lwlFN+i
- yrRLqr/sXTdLxpQTMMg==
-X-Authority-Analysis: v=2.4 cv=fKMJG5ae c=1 sm=1 tr=0 ts=6a6da4f4 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODAxMDA1NyBTYWx0ZWRfX+eDYXwkvPsaX
+ UjHoX5t4s3/pCoV0P4Wj6za2MpNljpqDXbmXfdInvnV2EY+aIoBZXoSOX54czzpz/v3tJUYfZ6a
+ a3SIaDTnQdoK359KX/97mJsFeJKy20E=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAxMDA1NyBTYWx0ZWRfX37Kcp/ySqje+
+ dWBfKWyY1jupxyC2OgVVbhq/485LAK5tMLfQB/QWxctLeIGTchH14YsbbdFFqPBgY/FIFlXEK1j
+ 77krDNKq162gBG2TkKqWknceGHx7bEDfJPcP/p3NNTVl/m41aSUAvnYTzKiourCoBc9FINhUQI1
+ H69Rqfyib+5n697BPrNEo+QvYKn3hYa7F2P1R2SO2wKOHTCjocNFVJ+j1IJtvymucnM4JnVW/o2
+ SEOOIvNqodKOwQZUm5FaU4M+dDvtK5XrlNFbpNY3bQ5CzD+KQ0nyJ1Ug5wABMroknl3PA0wAkL2
+ FvS4rxru+SyaiankJnbyF+cbIF9911xwMLFlbPwJQW0zDbE8OnLWtlDwOSHRoVoI45RyeqeGymJ
+ gNvjFK7lQry3oVkbZ5WytoyqpN28Hmp/NXBAFB4WhTlFSeO6pAH4qXQYts8+FAqt0phNUGlAroZ
+ 8yA1sek0Gev5eiMOzOQ==
+X-Proofpoint-GUID: Po5nSF53tPHnt2tZjjygnyW3AUvwhOaB
+X-Authority-Analysis: v=2.4 cv=IYC3n2qa c=1 sm=1 tr=0 ts=6a6da7af cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=zFCAPC_QsuEp93vFkkwA:9 a=QEXdDO2ut3YA:10
- a=x9snwWr2DeNwDh03kgHS:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8
+ a=MK4DTrBJAt5pQD0oKkIA:9 a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22
+ a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-ORIG-GUID: Po5nSF53tPHnt2tZjjygnyW3AUvwhOaB
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-31_07,2026-07-30_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 lowpriorityscore=0 priorityscore=1501 malwarescore=0
- spamscore=0 phishscore=0 clxscore=1015 impostorscore=0 bulkscore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608010055
+ adultscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 phishscore=0
+ suspectscore=0 priorityscore=1501 spamscore=0 malwarescore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608010057
 
-Extend the qcom_battmgr driver to report up to MAX_USB_PORTS (3)
-USB-C power supply ports on the X1E80100 & Glymur platform, which
-exposes more than one charger port to firmware.
+This patch series adds a new `rpmh_read()` API to allow reading RPMH
+addresses. Using this API enhances the RPMH regulator driver by adding
+readback of the voltage/bypass/mode settings as they have been applied by
+APPS during the bootloader stage, so regulator framework can get them
+via `get_mode`, `get_bypass` & `get_voltage_selector` callbacks during
+regulator registration.
 
-At firmware-enable time, query USB_NUM_PORTS over the existing
-BATTMGR_USB_PROPERTY_GET opcode to discover how many ports the
-firmware actually reports, and register the additional
-"qcom-battmgr-usb2"/"qcom-battmgr-usb3" power supplies only when the
-firmware confirms a second/third port. Each additional port is polled
-independently via new BATTMGR_USB2_PROPERTY_GET/SET (0xC0/0xC1) and
-BATTMGR_USB3_PROPERTY_GET/SET (0xC2/0xC3) opcodes so its properties
-are not aliased to the primary port's state.
+This is needed because currently regulator framework does a unnecessary
+write with `min-microvolt` DT setting for all the RPMH regulators during
+regulator registration, because the first time after boot the value is
+seen as -ENOTRECOVERABLE, as there is no option to read these regulator
+settings.
 
-Also add the POWER_SUPPLY_PROP_CAPACITY entry to x1e80100_bat_props[].
+With this change this unnecessary write can be avoided and regulator
+framework gets a sense of the initial state set during the bootloader
+stage for all regulator settings.
 
-Assisted-by: Claude:claude-sonnet-5
+NOTE - During discussion on the v2 series - PATCH 3/4, reviewer had
+inquired about possible need for the use of the sync_state() to handle the
+"multiple" client case - for maintaining the regulator settings till all
+the clients are probed.
+
+This case was not covered in my previous series and had originally planned
+to do that series separately. But after the discussion decided to merge
+the 2 series as it seemed this would be a better approach. But after
+working on sync_state change. I realized a basic issue with using
+sync_state() for regulators - that its per-driver and not per-regulator
+resource. But we needed a sync_state callback for each regulator separately.
+
+I had been experimenting with few ideas but seems its going to need more
+time for me to close on the equivalent solution that has per-regulator
+sync_state or something to that effect. So I thought to close on this
+series and attend to that separately.
+
 Signed-off-by: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
 ---
- drivers/power/supply/qcom_battmgr.c | 353 +++++++++++++++++++++++++++++++++++-
- 1 file changed, 351 insertions(+), 2 deletions(-)
+Changes in v6:
+- Dropped the `get_status()` callback and all associated status-tracking
+  (vreg->status, rpmh_vreg_update_status(), rpmh_regulator_vrm_get_status()),
+  as Mark pointed out get_status() must reflect actual hardware state, not a
+  cached/driver-computed value, and the ENABLE/MODE/BYPASS registers are
+  control/vote registers written by this driver rather than free-running
+  status registers. Renamed determine_initial_status() to
+  determine_initial_mode() accordingly; mode/bypass/voltage readback via
+  get_mode()/get_bypass()/get_voltage_sel() is unaffected.
+- Link to v5: https://patch.msgid.link/20260720-b4-read-rpmh-v5-v5-0-cb93fb95f565@oss.qualcomm.com
 
-diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
-index 490137a23d00..17675a9975d6 100644
---- a/drivers/power/supply/qcom_battmgr.c
-+++ b/drivers/power/supply/qcom_battmgr.c
-@@ -26,6 +26,8 @@ enum qcom_battmgr_variant {
- 	QCOM_BATTMGR_X1E80100,
- };
- 
-+#define MAX_USB_PORTS                   3
-+
- #define BATTMGR_BAT_STATUS		0x1
- 
- #define BATTMGR_REQUEST_NOTIFICATION	0x4
-@@ -76,6 +78,10 @@ enum qcom_battmgr_variant {
- 
- #define BATTMGR_USB_PROPERTY_GET	0x32
- #define BATTMGR_USB_PROPERTY_SET	0x33
-+#define BATTMGR_USB2_PROPERTY_GET	0xC0
-+#define BATTMGR_USB2_PROPERTY_SET	0xC1
-+#define BATTMGR_USB3_PROPERTY_GET	0xC2
-+#define BATTMGR_USB3_PROPERTY_SET	0xC3
- #define USB_ONLINE			0
- #define USB_VOLT_NOW			1
- #define USB_VOLT_MAX			2
-@@ -86,6 +92,13 @@ enum qcom_battmgr_variant {
- #define USB_ADAP_TYPE			7
- #define USB_MOISTURE_DET_EN		8
- #define USB_MOISTURE_DET_STS		9
-+#define USB_CONNECTOR_TEMP		10
-+#define USB_REAL_TYPE			11
-+#define USB_TYPEC_COMPLIANT		12
-+#define USB_SCOPE			13
-+#define USB_CONNECTOR_TYPE		14
-+#define USB_F_ACTIVE			15
-+#define USB_NUM_PORTS			16
- 
- #define BATTMGR_WLS_PROPERTY_GET	0x34
- #define BATTMGR_WLS_PROPERTY_SET	0x35
-@@ -297,6 +310,7 @@ struct qcom_battmgr_usb {
- 	unsigned int current_max;
- 	unsigned int current_limit;
- 	unsigned int usb_type;
-+	unsigned int num_ports;
- };
- 
- struct qcom_battmgr_wireless {
-@@ -316,6 +330,8 @@ struct qcom_battmgr {
- 	struct power_supply *ac_psy;
- 	struct power_supply *bat_psy;
- 	struct power_supply *usb_psy;
-+	struct power_supply *usb2_psy;
-+	struct power_supply *usb3_psy;
- 	struct power_supply *wls_psy;
- 
- 	enum qcom_battmgr_unit unit;
-@@ -329,8 +345,12 @@ struct qcom_battmgr {
- 	struct qcom_battmgr_status status;
- 	struct qcom_battmgr_ac ac;
- 	struct qcom_battmgr_usb usb;
-+	struct qcom_battmgr_usb usb2;
-+	struct qcom_battmgr_usb usb3;
- 	struct qcom_battmgr_wireless wireless;
- 
-+	struct power_supply_config usb_psy_cfg;
-+
- 	struct work_struct enable_work;
- 
- 	/*
-@@ -829,6 +849,7 @@ static const enum power_supply_property x1e80100_bat_props[] = {
- 	POWER_SUPPLY_PROP_STATUS,
- 	POWER_SUPPLY_PROP_PRESENT,
- 	POWER_SUPPLY_PROP_TECHNOLOGY,
-+	POWER_SUPPLY_PROP_CAPACITY,
- 	POWER_SUPPLY_PROP_CYCLE_COUNT,
- 	POWER_SUPPLY_PROP_VOLTAGE_MAX_DESIGN,
- 	POWER_SUPPLY_PROP_VOLTAGE_NOW,
-@@ -1042,8 +1063,136 @@ static int qcom_battmgr_usb_get_property(struct power_supply *psy,
- 	return 0;
- }
- 
-+static int qcom_battmgr_usb2_x1e80100_update(struct qcom_battmgr *battmgr,
-+					     enum power_supply_property psp)
-+{
-+	unsigned int prop;
-+	int ret;
-+
-+	if (psp >= ARRAY_SIZE(sm8350_usb_prop_map))
-+		return -EINVAL;
-+
-+	prop = sm8350_usb_prop_map[psp];
-+
-+	mutex_lock(&battmgr->lock);
-+	ret = qcom_battmgr_request_property(battmgr, BATTMGR_USB2_PROPERTY_GET, prop, 0);
-+	mutex_unlock(&battmgr->lock);
-+
-+	return ret;
-+}
-+
-+static int qcom_battmgr_usb3_x1e80100_update(struct qcom_battmgr *battmgr,
-+					     enum power_supply_property psp)
-+{
-+	unsigned int prop;
-+	int ret;
-+
-+	if (psp >= ARRAY_SIZE(sm8350_usb_prop_map))
-+		return -EINVAL;
-+
-+	prop = sm8350_usb_prop_map[psp];
-+
-+	mutex_lock(&battmgr->lock);
-+	ret = qcom_battmgr_request_property(battmgr, BATTMGR_USB3_PROPERTY_GET, prop, 0);
-+	mutex_unlock(&battmgr->lock);
-+
-+	return ret;
-+}
-+
-+static int qcom_battmgr_usb2_get_property(struct power_supply *psy,
-+					  enum power_supply_property psp,
-+					  union power_supply_propval *val)
-+{
-+	struct qcom_battmgr *battmgr = power_supply_get_drvdata(psy);
-+	int ret;
-+
-+	if (!battmgr->service_up)
-+		return -EAGAIN;
-+
-+	ret = qcom_battmgr_usb2_x1e80100_update(battmgr, psp);
-+	if (ret)
-+		return ret;
-+
-+	switch (psp) {
-+	case POWER_SUPPLY_PROP_ONLINE:
-+		val->intval = battmgr->usb2.online;
-+		break;
-+	case POWER_SUPPLY_PROP_VOLTAGE_NOW:
-+		val->intval = battmgr->usb2.voltage_now;
-+		break;
-+	case POWER_SUPPLY_PROP_VOLTAGE_MAX:
-+		val->intval = battmgr->usb2.voltage_max;
-+		break;
-+	case POWER_SUPPLY_PROP_CURRENT_NOW:
-+		val->intval = battmgr->usb2.current_now;
-+		break;
-+	case POWER_SUPPLY_PROP_CURRENT_MAX:
-+		val->intval = battmgr->usb2.current_max;
-+		break;
-+	case POWER_SUPPLY_PROP_INPUT_CURRENT_LIMIT:
-+		val->intval = battmgr->usb2.current_limit;
-+		break;
-+	case POWER_SUPPLY_PROP_USB_TYPE:
-+		val->intval = battmgr->usb2.usb_type;
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
-+static int qcom_battmgr_usb3_get_property(struct power_supply *psy,
-+					  enum power_supply_property psp,
-+					  union power_supply_propval *val)
-+{
-+	struct qcom_battmgr *battmgr = power_supply_get_drvdata(psy);
-+	int ret;
-+
-+	if (!battmgr->service_up)
-+		return -EAGAIN;
-+
-+	ret = qcom_battmgr_usb3_x1e80100_update(battmgr, psp);
-+	if (ret)
-+		return ret;
-+
-+	switch (psp) {
-+	case POWER_SUPPLY_PROP_ONLINE:
-+		val->intval = battmgr->usb3.online;
-+		break;
-+	case POWER_SUPPLY_PROP_VOLTAGE_NOW:
-+		val->intval = battmgr->usb3.voltage_now;
-+		break;
-+	case POWER_SUPPLY_PROP_VOLTAGE_MAX:
-+		val->intval = battmgr->usb3.voltage_max;
-+		break;
-+	case POWER_SUPPLY_PROP_CURRENT_NOW:
-+		val->intval = battmgr->usb3.current_now;
-+		break;
-+	case POWER_SUPPLY_PROP_CURRENT_MAX:
-+		val->intval = battmgr->usb3.current_max;
-+		break;
-+	case POWER_SUPPLY_PROP_INPUT_CURRENT_LIMIT:
-+		val->intval = battmgr->usb3.current_limit;
-+		break;
-+	case POWER_SUPPLY_PROP_USB_TYPE:
-+		val->intval = battmgr->usb3.usb_type;
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
- static const enum power_supply_property sc8280xp_usb_props[] = {
- 	POWER_SUPPLY_PROP_ONLINE,
-+	POWER_SUPPLY_PROP_VOLTAGE_NOW,
-+	POWER_SUPPLY_PROP_VOLTAGE_MAX,
-+	POWER_SUPPLY_PROP_CURRENT_NOW,
-+	POWER_SUPPLY_PROP_CURRENT_MAX,
-+	POWER_SUPPLY_PROP_INPUT_CURRENT_LIMIT,
-+	POWER_SUPPLY_PROP_USB_TYPE,
- };
- 
- static const struct power_supply_desc sc8280xp_usb_psy_desc = {
-@@ -1064,6 +1213,42 @@ static const struct power_supply_desc sc8280xp_usb_psy_desc = {
- 		     BIT(POWER_SUPPLY_USB_TYPE_APPLE_BRICK_ID),
- };
- 
-+static const struct power_supply_desc x1e80100_usb2_psy_desc = {
-+	.name = "qcom-battmgr-usb2",
-+	.type = POWER_SUPPLY_TYPE_USB,
-+	.properties = sc8280xp_usb_props,
-+	.num_properties = ARRAY_SIZE(sc8280xp_usb_props),
-+	.get_property = qcom_battmgr_usb2_get_property,
-+	.usb_types = BIT(POWER_SUPPLY_USB_TYPE_UNKNOWN) |
-+		     BIT(POWER_SUPPLY_USB_TYPE_SDP)     |
-+		     BIT(POWER_SUPPLY_USB_TYPE_DCP)     |
-+		     BIT(POWER_SUPPLY_USB_TYPE_CDP)     |
-+		     BIT(POWER_SUPPLY_USB_TYPE_ACA)     |
-+		     BIT(POWER_SUPPLY_USB_TYPE_C)       |
-+		     BIT(POWER_SUPPLY_USB_TYPE_PD)      |
-+		     BIT(POWER_SUPPLY_USB_TYPE_PD_DRP)  |
-+		     BIT(POWER_SUPPLY_USB_TYPE_PD_PPS)  |
-+		     BIT(POWER_SUPPLY_USB_TYPE_APPLE_BRICK_ID),
-+};
-+
-+static const struct power_supply_desc x1e80100_usb3_psy_desc = {
-+	.name = "qcom-battmgr-usb3",
-+	.type = POWER_SUPPLY_TYPE_USB,
-+	.properties = sc8280xp_usb_props,
-+	.num_properties = ARRAY_SIZE(sc8280xp_usb_props),
-+	.get_property = qcom_battmgr_usb3_get_property,
-+	.usb_types = BIT(POWER_SUPPLY_USB_TYPE_UNKNOWN) |
-+		     BIT(POWER_SUPPLY_USB_TYPE_SDP)     |
-+		     BIT(POWER_SUPPLY_USB_TYPE_DCP)     |
-+		     BIT(POWER_SUPPLY_USB_TYPE_CDP)     |
-+		     BIT(POWER_SUPPLY_USB_TYPE_ACA)     |
-+		     BIT(POWER_SUPPLY_USB_TYPE_C)       |
-+		     BIT(POWER_SUPPLY_USB_TYPE_PD)      |
-+		     BIT(POWER_SUPPLY_USB_TYPE_PD_DRP)  |
-+		     BIT(POWER_SUPPLY_USB_TYPE_PD_PPS)  |
-+		     BIT(POWER_SUPPLY_USB_TYPE_APPLE_BRICK_ID),
-+};
-+
- static const enum power_supply_property sm8350_usb_props[] = {
- 	POWER_SUPPLY_PROP_ONLINE,
- 	POWER_SUPPLY_PROP_VOLTAGE_NOW,
-@@ -1212,6 +1397,10 @@ static void qcom_battmgr_notification(struct qcom_battmgr *battmgr,
- 		break;
- 	case NOTIF_USB_PROPERTY:
- 		power_supply_changed(battmgr->usb_psy);
-+		if (battmgr->usb2_psy)
-+			power_supply_changed(battmgr->usb2_psy);
-+		if (battmgr->usb3_psy)
-+			power_supply_changed(battmgr->usb3_psy);
- 		break;
- 	case NOTIF_WLS_PROPERTY:
- 		power_supply_changed(battmgr->wls_psy);
-@@ -1260,6 +1449,7 @@ static void qcom_battmgr_sc8280xp_callback(struct qcom_battmgr *battmgr,
- 	unsigned int opcode = le32_to_cpu(resp->hdr.opcode);
- 	unsigned int source;
- 	unsigned int state;
-+	unsigned int property;
- 	size_t payload_len = len - sizeof(struct pmic_glink_hdr);
- 
- 	if (payload_len < sizeof(__le32)) {
-@@ -1355,6 +1545,121 @@ static void qcom_battmgr_sc8280xp_callback(struct qcom_battmgr *battmgr,
- 	case BATTMGR_CHG_CTRL_LIMIT_EN:
- 		battmgr->error = 0;
- 		break;
-+	case BATTMGR_USB_PROPERTY_GET:
-+		property = le32_to_cpu(resp->intval.property);
-+		if (payload_len != sizeof(resp->intval)) {
-+			dev_warn(battmgr->dev,
-+				 "invalid payload length for %#x request: %zd\n",
-+				 property, payload_len);
-+			battmgr->error = -ENODATA;
-+			return;
-+		}
-+
-+		switch (property) {
-+		case USB_ONLINE:
-+			battmgr->usb.online = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_VOLT_NOW:
-+			battmgr->usb.voltage_now = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_VOLT_MAX:
-+			battmgr->usb.voltage_max = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_CURR_NOW:
-+			battmgr->usb.current_now = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_CURR_MAX:
-+			battmgr->usb.current_max = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_INPUT_CURR_LIMIT:
-+			battmgr->usb.current_limit = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_TYPE:
-+			battmgr->usb.usb_type = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_NUM_PORTS:
-+			battmgr->usb.num_ports = le32_to_cpu(resp->intval.value);
-+			break;
-+		default:
-+			dev_warn(battmgr->dev, "unknown property %#x\n", property);
-+			break;
-+		}
-+		break;
-+
-+	case BATTMGR_USB2_PROPERTY_GET:
-+		property = le32_to_cpu(resp->intval.property);
-+		if (payload_len != sizeof(resp->intval)) {
-+			dev_warn(battmgr->dev,
-+				 "invalid payload length for %#x request: %zd\n",
-+				 property, payload_len);
-+			battmgr->error = -ENODATA;
-+			return;
-+		}
-+
-+		switch (property) {
-+		case USB_ONLINE:
-+			battmgr->usb2.online = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_VOLT_NOW:
-+			battmgr->usb2.voltage_now = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_VOLT_MAX:
-+			battmgr->usb2.voltage_max = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_CURR_NOW:
-+			battmgr->usb2.current_now = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_CURR_MAX:
-+			battmgr->usb2.current_max = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_INPUT_CURR_LIMIT:
-+			battmgr->usb2.current_limit = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_TYPE:
-+			battmgr->usb2.usb_type = le32_to_cpu(resp->intval.value);
-+			break;
-+		default:
-+			dev_warn(battmgr->dev, "unknown property %#x\n", property);
-+			break;
-+		}
-+		break;
-+	case BATTMGR_USB3_PROPERTY_GET:
-+		property = le32_to_cpu(resp->intval.property);
-+		if (payload_len != sizeof(resp->intval)) {
-+			dev_warn(battmgr->dev,
-+				 "invalid payload length for %#x request: %zd\n",
-+				 property, payload_len);
-+			battmgr->error = -ENODATA;
-+			return;
-+		}
-+
-+		switch (property) {
-+		case USB_ONLINE:
-+			battmgr->usb3.online = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_VOLT_NOW:
-+			battmgr->usb3.voltage_now = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_VOLT_MAX:
-+			battmgr->usb3.voltage_max = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_CURR_NOW:
-+			battmgr->usb3.current_now = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_CURR_MAX:
-+			battmgr->usb3.current_max = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_INPUT_CURR_LIMIT:
-+			battmgr->usb3.current_limit = le32_to_cpu(resp->intval.value);
-+			break;
-+		case USB_TYPE:
-+			battmgr->usb3.usb_type = le32_to_cpu(resp->intval.value);
-+			break;
-+		default:
-+			dev_warn(battmgr->dev, "unknown property %#x\n", property);
-+			break;
-+		}
-+		break;
- 	default:
- 		dev_warn(battmgr->dev, "unknown message %#x\n", opcode);
- 		break;
-@@ -1583,6 +1888,8 @@ static void qcom_battmgr_callback(const void *data, size_t len, void *priv)
- 		qcom_battmgr_sm8350_callback(battmgr, data, len);
- }
- 
-+static char *qcom_battmgr_battery[] = { "battery" };
-+
- static void qcom_battmgr_enable_worker(struct work_struct *work)
- {
- 	struct qcom_battmgr *battmgr = container_of(work, struct qcom_battmgr, enable_work);
-@@ -1591,11 +1898,53 @@ static void qcom_battmgr_enable_worker(struct work_struct *work)
- 		.hdr.type = cpu_to_le32(PMIC_GLINK_NOTIFY),
- 		.hdr.opcode = cpu_to_le32(BATTMGR_REQUEST_NOTIFICATION),
- 	};
-+	struct power_supply *psy;
- 	int ret;
-+	int num_ports_fw = 0;
- 
- 	ret = qcom_battmgr_request(battmgr, &req, sizeof(req));
- 	if (ret)
- 		dev_err(battmgr->dev, "failed to request power notifications\n");
-+
-+	if (battmgr->variant == QCOM_BATTMGR_X1E80100) {
-+		mutex_lock(&battmgr->lock);
-+		ret = qcom_battmgr_request_property(battmgr, BATTMGR_USB_PROPERTY_GET,
-+						     USB_NUM_PORTS, 0);
-+		mutex_unlock(&battmgr->lock);
-+		if (ret < 0) {
-+			dev_dbg(battmgr->dev, "Failed to read USB_NUM_PORTS from SoCCP, rc=%d\n",
-+				ret);
-+		} else {
-+			num_ports_fw = battmgr->usb.num_ports;
-+			if (num_ports_fw > MAX_USB_PORTS) {
-+				dev_err(battmgr->dev, "USB ports reported by SoCCP: %d exceeds max %d\n",
-+					num_ports_fw, MAX_USB_PORTS);
-+				num_ports_fw = MAX_USB_PORTS;
-+			}
-+		}
-+
-+		if (num_ports_fw >= 2 && !battmgr->usb2_psy) {
-+			psy = devm_power_supply_register(battmgr->dev, &x1e80100_usb2_psy_desc,
-+							  &battmgr->usb_psy_cfg);
-+			if (IS_ERR(psy)) {
-+				dev_err(battmgr->dev, "failed to register USB port-1 power supply: %ld\n",
-+					PTR_ERR(psy));
-+			} else {
-+				battmgr->usb2_psy = psy;
-+			}
-+		}
-+
-+		if (num_ports_fw >= 3 && !battmgr->usb3_psy) {
-+			psy = devm_power_supply_register(battmgr->dev, &x1e80100_usb3_psy_desc,
-+							  &battmgr->usb_psy_cfg);
-+			if (IS_ERR(psy)) {
-+				dev_err(battmgr->dev, "failed to register USB port-2 power supply: %ld\n",
-+					PTR_ERR(psy));
-+			} else {
-+				battmgr->usb3_psy = psy;
-+			}
-+		}
-+	}
- }
- 
- static void qcom_battmgr_pdr_notify(void *priv, int state)
-@@ -1621,8 +1970,6 @@ static const struct of_device_id qcom_battmgr_of_variants[] = {
- 	{}
- };
- 
--static char *qcom_battmgr_battery[] = { "battery" };
--
- static int qcom_battmgr_probe(struct auxiliary_device *adev,
- 			      const struct auxiliary_device_id *id)
- {
-@@ -1648,6 +1995,8 @@ static int qcom_battmgr_probe(struct auxiliary_device *adev,
- 	psy_cfg_supply.supplied_to = qcom_battmgr_battery;
- 	psy_cfg_supply.num_supplicants = 1;
- 
-+	battmgr->usb_psy_cfg = psy_cfg_supply;
-+
- 	INIT_WORK(&battmgr->enable_work, qcom_battmgr_enable_worker);
- 	mutex_init(&battmgr->lock);
- 	init_completion(&battmgr->ack);
+Changes in v5:
+- In `_rpmh_regulator_vrm_get_voltage()`, removed the min/max voltage
+  range check that was suppressing out-of-range readback values, as
+  suggested by Mark. The raw hardware-read voltage is now always
+  reported to the regulator framework. A separate patch will be sent
+  to handle out-of-range voltage constraint handling in core.c.
+- Sorted the `#include <linux/bits.h>` alphabetically with the rest of
+  the include block, as pointed out by Konrad.
+- Removed the `rpmh_regulator_read_data()` wrapper (a oneliner around
+  `rpmh_read()`) and inlined `rpmh_read()` at each call site instead,
+  as suggested by Konrad.
+- Dropped the unnecessary `sts = 0` initialization in
+  `rpmh_regulator_determine_initial_status()`, since it is always
+  initialized before use, as pointed out by Konrad.
+- Added a blank line above the `return` statements in the `!pmic_mode`
+  block of `rpmh_regulator_determine_initial_status()`, for consistency
+  with the rest of the function, as pointed out by Konrad.
+- Link to v4: https://lore.kernel.org/all/20260420-read-rpmh-v3-v4-0-70c152e6c958@oss.qualcomm.com/
+
+Changes in v4:
+- Modified the register mask macros to use  GENMASK()/BIT() instead of
+  numbers as suggested by reviewer.
+- Removed the unreachable code in the determine_initial_status() for XOB
+  type regulators status update logic as suggested by reviewer.
+- Link to v3: https://lore.kernel.org/all/20260407-read-rpmh-v3-v3-0-34079f92691c@oss.qualcomm.com/
+
+Changes in v3:
+- Removed "bypass_supported" as that is not needed for regulators
+  that don't have set_bypass implemented, as pointed by Dmitry.
+- Handled the corner case where the mode/bypass setting is read 0, but
+  its unclear if the register has been set to 0 or its un-accessed.
+- Dropped `convert_mode_to_status()` and use the `regulator_mode_to_status()`
+  instead.
+- Refactored some code to simplify the `status` update after every
+  enable/mode/bypass setting change.
+- Corrected subject line of all patches to have `regulator: qcom-rpmh:`
+  for all the `qcom-rpmh-regulator.c` file changes, as pointed by Bjorn.
+- Re-ordered the series to have the `rpmh.c` driver patches first and
+  than `qcom-rpmh-regulator.c` driver patches as asked by Bjorn.
+- In the BOB5 bypass fix patch (PATCH 1/4 in previous series), added
+  the fixes commit#, as it was missed earlier.
+- In the rpmh driver change(PATCH 2/4 in previous series), modified
+  commit wording and removed linked as suggested by reviewer.
+- Fixed kernel test robot issues and other formatting issues in
+  PATCH 3/4 of last series.
+- Corrected the checkpatch error fix PATCH 4/4 to keep to only
+  one error in comment section which existed prior to this
+  series.
+- Modified the subject line a little and added proper tags
+- Link to v2: https://lore.kernel.org/all/20251022-add-rpmh-read-support-v2-0-5c7a8e4df601@oss.qualcomm.com/
+
+Changes in v2:
+- Fixed the BOB bypass mode handling (existing issue in current driver).
+  This was needed for `get_status()` implementation.
+- Implemented `get_status()` callback.
+- Callbacks for `is_enabled()` & `get_mode()` will now be used as-is
+  ie. v1 changes reverted.
+- Bootstrapped the read values for `mode` and `status` in probe, based on
+  comments received from reviewer.
+- Callback for `get_voltage_sel()` has been modified to handle cases
+  where read voltage is out-of-range defined in the regulator DT settings,
+  this is needed to ensure backward compatibilty. Regulator probes may
+  fail otherwise for some older targets.
+- This patch is rebased & tested on:
+  https://lore.kernel.org/all/176070318151.57631.15443673679580823321.b4-ty@kernel.org/
+  to avoid any merge issues.
+- Fixed code style issues reported by checkpatch.pl script.
+- Link to v1: https://lore.kernel.org/r/20250623-add-rpmh-read-support-v1-0-ae583d260195@oss.qualcomm.com
+
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+To: Liam Girdwood <lgirdwood@gmail.com>
+To: Mark Brown <broonie@kernel.org>
+To: Vinod Koul <vkoul@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Signed-off-by: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
 
 ---
+Kamal Wadhwa (3):
+      regulator: qcom-rpmh: Fix PMIC5 BOB bypass mode handling
+      regulator: qcom-rpmh: readback voltage/bypass/mode set during bootup
+      regulator: qcom-rpmh: Fix coding style issues
+
+Maulik Shah (1):
+      soc: qcom: rpmh: Add support to read back resource settings
+
+ drivers/regulator/qcom-rpmh-regulator.c | 128 +++++++++++++++++++++++++++++++-
+ drivers/soc/qcom/rpmh-rsc.c             |  13 +++-
+ drivers/soc/qcom/rpmh.c                 |  47 +++++++++++-
+ include/soc/qcom/rpmh.h                 |   5 ++
+ include/soc/qcom/tcs.h                  |   2 +
+ 5 files changed, 187 insertions(+), 8 deletions(-)
+---
 base-commit: 5c73cd9f0819c1c44e373e3dabb68318b1de1a12
-change-id: 20260801-b4-battmgr-multiport-usb-46eb0798668f
+change-id: 20260720-b4-read-rpmh-v5-bab1bd1cbe55
 
 Best regards,
 --  
