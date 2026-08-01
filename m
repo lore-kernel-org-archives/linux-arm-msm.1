@@ -1,198 +1,107 @@
-Received: from mail-106112.protonmail.ch (mail-106112.protonmail.ch [79.135.106.112])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BF753BE16A
-	for <linux-arm-msm@vger.kernel.org>; Sat,  1 Aug 2026 18:23:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=79.135.106.112
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE15D3B1009
+	for <linux-arm-msm@vger.kernel.org>; Sat,  1 Aug 2026 19:02:44 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785608595; cv=none; b=QKjNIb+2+DQT3Az4y8NXfvWifsylZVqMVN6AAxPXJf9YEVMs8tTjkDLshuYeGwoauYKsCd0p2PF4DfdEsheEe6apt4aErtBlpcwhEB1jUBsWHH4WS3DV5ktAfDu016DOTyCbBZfvN3vtPZ9ySfVH869nC4TipEZTHo7Mhidikjo=
+	t=1785610966; cv=none; b=C+RfSqo2HlYEg3p0nXs+uKSo0FNP9W0vmUHzKxQYBI1xO508sDpSym03GoEFhGhiB/7TeLhIXAyuHgXY5y/lFiOOiUuqi6xDBgwZtxtO8Ty7xrw4KfqQbJC5aHLYNlPCOQsFYRlZRk7CpOzmD+mGHiusljVHax+4PVMdWeg44bU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785608595; c=relaxed/simple;
-	bh=oNBsncJky7ip5AyMa7VzaVmnAs0Z0PXWyNAfy7mhbkE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=PDoZoWhm5JtkTxUgUXVO5A7o3/sAkZu/Mjuycv1aVnhYy74SL4KCvBWj/FrM8QA6F93pP56EBsiVYSSKHmWptdFxsdU+rsfeJXhSvDV1K3JmzL0dQq7zInoySHTqCmLJHOAkj5EXtra59dGdw2LREAPOOMmfwXmE38DeUwuMr+U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vinarskis.com; spf=pass smtp.mailfrom=vinarskis.com; dkim=pass (2048-bit key) header.d=vinarskis.com header.i=@vinarskis.com header.b=h2O2BdsF; arc=none smtp.client-ip=79.135.106.112
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vinarskis.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=vinarskis.com
+	s=arc-20240116; t=1785610966; c=relaxed/simple;
+	bh=ONgjSmtJqhZYCOi4k3AvcYjqSx3slhnNZpj2V8m1SnY=;
+	h=From:Message-ID:Date:MIME-Version:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=ibl4sq5Mnw+JnA2B9rULzESEgjniyM6sCchDTfqjAd6yGizzwUsZ2nzGlP7gLk4Sn5tiGQSe6NoF3puY76+6+rqJUkcrd1ggEIhZG37/ElkTardzmIT6lH20mI5vpTjKw5xU0KQox5pzMo79161SMUUddTsPcezSN40aCu3udlY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=onSSLjcG; arc=none smtp.client-ip=209.85.128.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=vinarskis.com header.i=@vinarskis.com header.b="h2O2BdsF"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vinarskis.com;
-	s=protonmail2; t=1785608581; x=1785867781;
-	bh=B4SBI9qu+1fGfU735aEX4C1Gip+rRdABa/qY27g/wiM=;
-	h=From:Date:Subject:Message-Id:References:In-Reply-To:To:Cc:From:To:
-	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=h2O2BdsFiTnTHbtiiv0w96xUWj3BONsUn8cmGPexEyRYhzIBgt5B4ahrwnwvHK9Lv
-	 9VT2hc5119kGcPwFzz4g7K0A2reWNRLdLRsommDy/yRWSs45qg0Dee2GYhf1rkvlx2
-	 9YfU+JlVCyS4L1Ai32MaYPOBO7XfdjLRp8SLF7q7IlNG0yLSs24w5Lfb5dWE6cFXht
-	 zwfcFl6OwDpSL6z46zYnli4JoDKi27yilyjfwVoKnvqHSyqWleViuF3JusN/Q7dVrp
-	 8nY0l3nvZm4jRC+6YSsIAwta3XCOebs+7TIouM0mXuabmCn4zYbQr4LwLHB7SBWXPc
-	 AOqMTvwkPZQ0g==
-X-Pm-Submission-Id: 4hCBBT3Jx9z2Sd4y
-From: Aleksandrs Vinarskis <alex@vinarskis.com>
-Date: Sat, 01 Aug 2026 20:22:37 +0200
-Subject: [PATCH v3 3/3] arm64: dts: qcom: x1e80100-dell-xps13-9345:
- introduce EC
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="onSSLjcG"
+Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4955aa106b1so7739675e9.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 12:02:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1785610963; x=1786215763; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=+cDiTNkfT7RBUUTIaN/X9QMQFiUy4egwCdPKgzjjC28=;
+        b=onSSLjcGqQ8O2m5+rJc1gnLOZ+gXdLnhyvzO6y3lg+5qNMDkTW0cyXR2Gr8FSmu+eH
+         TSKX8nsnarSQYA+MPeBhZvCUDa0geEdEXcMaLEhDbmAHbHhgD85PjSkVYSLpb4AN3l2E
+         nw8459hDB6gRejhkqb6LM6KEp4TvzVowHu1YBQe5RLVLZvsGUIjkAiFinE0N8YPw8Ujr
+         c00wh3nrbqsPCx08fKUBPGN5E5NniCbsow8H/14dd2WDRj2+6grOY51sSB67Df3ESUPr
+         dEF8QFySDIN8L9JHXiKDjXuvz8LkVwEmCZ+IQjKnNuevEg4J6XkThc7qX2cMHyZxm9gy
+         NIRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785610963; x=1786215763;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:user-agent:mime-version:date:message-id
+         :from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=+cDiTNkfT7RBUUTIaN/X9QMQFiUy4egwCdPKgzjjC28=;
+        b=EDDDUqINpBwH52wqKoVHHp8EgMRm9mOUO3OrchXdZfInJWzZUR7+PcSkvYqjLcGfc1
+         Z5/phxwsIZjGePr5QlIr98quJkHlw2MnJ5A02HcB4SOuILrW8pNZ6d6RZiqgOrU7/q2L
+         782cqzr1b5damzenuGreiQNgkLr0ibtJbyXUIWWuhFp+JDH0+TT7kAXz0QXallyCUqDW
+         WYNt+Zyo9pF9n/wYk3OHic5L2GsK8vNDchIC3T2fwDczmNakbwOrKkRTFCp9WkLwZk6y
+         7tkRH6EuiSVUGoQrT7KbPlVsLsBy3GY3B+aS3UH6GDsxsPBDSpLDF9NRK6Xk2CeFAwz3
+         iQfQ==
+X-Forwarded-Encrypted: i=1; AHgh+RpFbYphXE0tB/Y2AfTriFgOqnZnkBLUkCxbVMeqleVWg4D1M01iwRYhj2HNHZUwbQxJWFOMYhiUrhCdberq@vger.kernel.org
+X-Gm-Message-State: AOJu0Yziqs+lyhIiLCfx4QNgN4ZvtXTh0a0HTtG9j1RIk/8kEwtdco20
+	HkA3U7y2vQmBRVgkw82MLJnReedIAVgTRe4PQKmcImLdariRnV+BxMpI
+X-Gm-Gg: AR+sD11Yo0fOORgYW7+8kInBRGzO/juc3WxwWgEUC3e4p4IWW4VzcogXOClztpvT2Xq
+	TY2J9cAMCWEtUpBxIn3OQFgZ7cqks7H8g9lIKlNWEVKb4nvfzzUXvfKIhV7OHNMii8OExydcvz2
+	j0kynKIH/pXW/ICeocSD6cOZTCVwOleHov0RTdNtidnh7eLiPwcs+s5CM1NB+oD5ajigmdJPDyZ
+	2GE+cugGAQoEjMjUJe8u5bHJ8xcMIxzZy/jHM903Ofj7ILtHUfYqf5cIJVuhhg+SqYGQd+EvY9y
+	6lnKpRB0FDfTRXc7Syy0oZlnlIpYOCZ5QWPzlrv7t/wGiyuSqxXxevjxQkE2q9JYG5Ji4Fa+Wc8
+	cKgxwo6DcR76I/+mvmOCBUn0C+xBpy8vv5VulTwKLsVmS9lgBdY488Bq7mOOqrvNvSuebaJOOTh
+	BhZ8NIxZeJGcwC1HaZc2vILT3p0T0CsbA/XsZgA1xoyDpMuN63y0KZBE8=
+X-Received: by 2002:a05:600c:1553:b0:498:ee7:e40a with SMTP id 5b1f17b1804b1-4980ee7e62amr59215235e9.16.1785610962658;
+        Sat, 01 Aug 2026 12:02:42 -0700 (PDT)
+Received: from [172.23.0.7] ([64.188.68.34])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4980878dcb4sm122720995e9.13.2026.08.01.12.02.40
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 01 Aug 2026 12:02:42 -0700 (PDT)
+From: Neko <nekodevelopper@gmail.com>
+X-Google-Original-From: Neko <neko@altlinux.org>
+Message-ID: <8b4fc7c7-a0c5-477b-b03a-dd1e7c2467b9@altlinux.org>
+Date: Sat, 1 Aug 2026 22:02:40 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFT 3/3] arm64: dts: qcom: sm7325-nothing-spacewar: Add UW
+ camera actuator
+To: Danila Tikhonov <danila@mainlining.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, =?UTF-8?Q?Andr=C3=A9_Apitzsch?= <git@apitzsch.eu>,
+ Daniel Scally <dan.scally@ideasonboard.com>,
+ Sakari Ailus <sakari.ailus@linux.intel.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Eugene Lepshy <fekz115@gmail.com>,
+ Achill Gilgenast <achill@achill.org>, Luca Weiss <luca.weiss@fairphone.com>,
+ Griffin Kroah-Hartman <griffin.kroah@fairphone.com>
+Cc: linux-media@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ ~postmarketos/upstreaming@lists.sr.ht
+References: <20260801-dw9800w-clean-v1-0-38978de67963@mainlining.org>
+ <20260801-dw9800w-clean-v1-3-38978de67963@mainlining.org>
+Content-Language: en-US
+In-Reply-To: <20260801-dw9800w-clean-v1-3-38978de67963@mainlining.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260801-dell-xps-9345-ec-v3-3-9f4bdb5a5dad@vinarskis.com>
-References: <20260801-dell-xps-9345-ec-v3-0-9f4bdb5a5dad@vinarskis.com>
-In-Reply-To: <20260801-dell-xps-9345-ec-v3-0-9f4bdb5a5dad@vinarskis.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Hans de Goede <hansg@kernel.org>, 
- =?utf-8?q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, 
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, platform-driver-x86@vger.kernel.org, 
- laurentiu.tudor1@dell.com, Abel Vesa <abel.vesa@oss.qualcomm.com>, 
- Tobias Heider <tobias.heider@canonical.com>, Val Packett <val@packett.cool>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Stephan Gerhold <stephan.gerhold@linaro.org>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3588; i=alex@vinarskis.com;
- h=from:subject:message-id; bh=oNBsncJky7ip5AyMa7VzaVmnAs0Z0PXWyNAfy7mhbkE=;
- b=owGbwMvMwCX2dl3hIv4AZgHG02pJDFl5ltWK/5wSli9tufzpAJ/U2WdPqsOzsszF1P8s5BGcE
- 3dqttCOjlIWBjEuBlkxRZbuP1/TuhbNXctwXeMbzBxWJpAhDFycAjCRW68Z/inN1390kG//32x+
- tqutErbuVXImGSylJ3ct8vGUSZxm+p7hf53LjGcLJ7eHx7Q6BMrLbqmwuXvxXeR5ltPFOcdLOJf
- GsQMA
-X-Developer-Key: i=alex@vinarskis.com; a=openpgp;
- fpr=8E21FAE2D2967BB123303E8C684FD4BA28133815
 
-Describe embedded controller, its interrupt and required thermal zones.
-Add EC's reset GPIO to reserved range, as triggering it during device
-operation leads to unrecoverable and unusable state.
+On 8/1/26 9:04 PM, Danila Tikhonov wrote:
+> Add a node for the Dongwoon DW9800W actuator, used for focus of the
+> ultra-wide camera sensor.
+>
+> Signed-off-by: Danila Tikhonov <danila@mainlining.org>
+> ---
+>   arch/arm64/boot/dts/qcom/sm7325-nothing-spacewar.dts | 10 +++++++++-
+>   1 file changed, 9 insertions(+), 1 deletion(-)
+>
+> diff --git a/arch/arm64/boot/dts/qcom/sm7325-nothing-spacewar.dts b/arch/arm64/boot/dts/qcom/sm7325-nothing-spacewar.dts
 
-Signed-off-by: Aleksandrs Vinarskis <alex@vinarskis.com>
----
- .../boot/dts/qcom/x1e80100-dell-xps13-9345.dts     | 86 +++++++++++++++++++++-
- 1 file changed, 84 insertions(+), 2 deletions(-)
-
-diff --git a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-index ce7b10ea89b6..8d8d8014049b 100644
---- a/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-+++ b/arch/arm64/boot/dts/qcom/x1e80100-dell-xps13-9345.dts
-@@ -759,8 +759,32 @@ retimer_ss0_con_sbu_out: endpoint {
- 
- &i2c5 {
- 	clock-frequency = <100000>;
--	status = "disabled";
--	/* EC @0x3b */
-+	status = "okay";
-+
-+	embedded-controller@3b {
-+		compatible = "dell,xps13-9345-ec";
-+		reg = <0x3b>;
-+
-+		interrupts-extended = <&tlmm 66 IRQ_TYPE_LEVEL_LOW>;
-+
-+		pinctrl-0 = <&ec_int_n_default>;
-+		pinctrl-names = "default";
-+
-+		io-channels = <&pmk8550_vadc ADC5_GEN3_AMUX3_GPIO_100K_PU(1)>,
-+			      <&pmk8550_vadc ADC5_GEN3_AMUX4_GPIO_100K_PU(1)>,
-+			      <&pmk8550_vadc ADC5_GEN3_AMUX1_THM_100K_PU(1)>,
-+			      <&pmk8550_vadc ADC5_GEN3_AMUX2_THM_100K_PU(1)>,
-+			      <&pmk8550_vadc ADC5_GEN3_AMUX3_THM_100K_PU(1)>,
-+			      <&pmk8550_vadc ADC5_GEN3_AMUX4_THM_100K_PU(1)>,
-+			      <&pmk8550_vadc ADC5_GEN3_AMUX5_THM_100K_PU(1)>;
-+		io-channel-names = "sys_therm0",
-+				   "sys_therm1",
-+				   "sys_therm2",
-+				   "sys_therm3",
-+				   "sys_therm4",
-+				   "sys_therm5",
-+				   "sys_therm6";
-+	};
- };
- 
- &i2c7 {
-@@ -1025,6 +1049,57 @@ rtmr0_1p8_reg_en: rtmr0-1p8-reg-en-state {
- 	};
- };
- 
-+&pmk8550_vadc {
-+	sys_therm0: channel@14c {
-+		reg = <ADC5_GEN3_AMUX3_GPIO_100K_PU(1)>;
-+		qcom,hw-settle-time = <200>;
-+		qcom,ratiometric;
-+		label = "lpddr5_therm";
-+	};
-+
-+	sys_therm1: channel@14d {
-+		reg = <ADC5_GEN3_AMUX4_GPIO_100K_PU(1)>;
-+		qcom,hw-settle-time = <200>;
-+		qcom,ratiometric;
-+		label = "usb_charger_left_therm";
-+	};
-+
-+	sys_therm2: channel@144 {
-+		reg = <ADC5_GEN3_AMUX1_THM_100K_PU(1)>;
-+		qcom,hw-settle-time = <200>;
-+		qcom,ratiometric;
-+		label = "vph_pwr_therm";
-+	};
-+
-+	sys_therm3: channel@145 {
-+		reg = <ADC5_GEN3_AMUX2_THM_100K_PU(1)>;
-+		qcom,hw-settle-time = <200>;
-+		qcom,ratiometric;
-+		label = "usb_charger_right_therm";
-+	};
-+
-+	sys_therm4: channel@146 {
-+		reg = <ADC5_GEN3_AMUX3_THM_100K_PU(1)>;
-+		qcom,hw-settle-time = <200>;
-+		qcom,ratiometric;
-+		label = "ssd_conn_therm";
-+	};
-+
-+	sys_therm5: channel@147 {
-+		reg = <ADC5_GEN3_AMUX4_THM_100K_PU(1)>;
-+		qcom,hw-settle-time = <200>;
-+		qcom,ratiometric;
-+		label = "sys_therm5";
-+	};
-+
-+	sys_therm6: channel@148 {
-+		reg = <ADC5_GEN3_AMUX5_THM_100K_PU(1)>;
-+		qcom,hw-settle-time = <200>;
-+		qcom,ratiometric;
-+		label = "keyboard_therm";
-+	};
-+};
-+
- &qupv3_0 {
- 	status = "okay";
- };
-@@ -1071,6 +1146,7 @@ &smb2360_1_eusb2_repeater {
- 
- &tlmm {
- 	gpio-reserved-ranges = <44 4>,  /* SPI11 (TPM) */
-+			       <65 1>,  /* EC Reset, accessible but yields system unusable */
- 			       <76 4>,  /* SPI19 (TZ Protected) */
- 			       <238 1>; /* UFS Reset */
- 
-@@ -1081,6 +1157,12 @@ cam_indicator_en: cam-indicator-en-state {
- 		bias-disable;
- 	};
- 
-+	ec_int_n_default: ec-int-n-state {
-+		pins = "gpio66";
-+		function = "gpio";
-+		bias-disable;
-+	};
-+
- 	edp_bl_en: edp-bl-en-state {
- 		pins = "gpio74";
- 		function = "gpio";
-
--- 
-2.54.0
+Tested-by: Vasiliy Doylov <neko@altlinux.org>
 
