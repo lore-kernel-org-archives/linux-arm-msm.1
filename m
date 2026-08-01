@@ -1,86 +1,89 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3A0E38DC57
-	for <linux-arm-msm@vger.kernel.org>; Sat,  1 Aug 2026 08:00:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E709930FC03
+	for <linux-arm-msm@vger.kernel.org>; Sat,  1 Aug 2026 08:00:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785571254; cv=none; b=J+nUTveCpryv/51JTv0vorG4h1XfJXxX0XgFivRvnBzL0Bdfz32AqYK3CvuKeK906G6asraaIPV473xD2PX9viZdZIJeX1zVnLznBF4MifEaGfCsUVRjmkuwLNModyPAXDMtj7lPGae8fQ5U/CIgll0itMjWIRsBzgEdpDtA8YQ=
+	t=1785571254; cv=none; b=feXPsoeT0PB5vzHOsBDSjuFIyRIX16x2oKlDQ31lBVlgEaPlZjQs9Xp9BUqo7Ib40xyO+JNaiPHOSNf77Cah+8rB9MuHH7NPlezUJ/gCxDTBmnQmOnLLIvV8Edy04I0gxi0uEpnz+MIggxe+LL4vn92RO38w9Q7HzPPQ7/lGuN8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1785571254; c=relaxed/simple;
-	bh=/lQS+ClgoGUixR/QI1y225RxGswvnDRbQRyL4FSIIY8=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=TInywE0TcCFGy11IK3fbhmqDEWDV3sRlqa5szLNxBGa/Nd24QxXi5B9mqRbx3KPWLdGmCw43ptgWsb+1BR6vWIuXNhDpDU+ovD0M5CRHwoDy+PorYY6QrGRBEbnU0XAfUg2xpjEdjyGgQWvUVhz2JlX3ENA/8s9f8alFduyOfxI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YvcfLphF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=UBYtmzRf; arc=none smtp.client-ip=205.220.180.131
+	bh=ETMJ6aJUjQDC/YVIh0I4Vf8wferbQVh2mtgDYw8tyfI=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=Jv5iQuBNZ/1nP06VZ+VNrMuTRSrueuc22HV6AzOSmd4ZWK05dL/pld6BnHVLUO8r8ZuZEqP8p8y3zrgINMbMNw6m5hy5EbbAkFL38Tpfow7RsP4Poeg9g790XdTkroCQ+4qgp4L4fEOphUfF67Cftkz85FYubTqNKTUJhgLxu4c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=QM7+urB+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OFKNjRrb; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YvcfLphF";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="UBYtmzRf"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6713DjSc2066119
-	for <linux-arm-msm@vger.kernel.org>; Sat, 1 Aug 2026 08:00:48 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="QM7+urB+";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OFKNjRrb"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6713M7ug2061133
+	for <linux-arm-msm@vger.kernel.org>; Sat, 1 Aug 2026 08:00:52 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=GiYcVjBZ09W9+YUl1IOFMv
-	wZDm0LSVBwbrIB5vHXWwk=; b=YvcfLphFZlXjbdZi5RDWcKXjt6V3vv7eRo2TD9
-	8wOoFNwCv1RWTttNpwLvLzpA3SL803T3AIJ0HhUOoldkNICyOiRLkBemFAoY7a79
-	FgbIG5J37WOi+a9L/616k9Mjq0Z3YCPPm/JAZoV/E1Y4sZaaWqKuqwUDj6pW7mEy
-	9yydcTUDjZA39F6rlYTed4Fz+AR9g334VxKisiw2kmjmdPMTTBY9wkN9/m3jI8yX
-	TqrD6rIho3olicWIC9IUeyjePgnC6RdjZfZYFBsnYxZhHfCl+TK4isRu4YhcUlz7
-	qRlRMsN3VakdfuJN+jUtGD7hgENlkdUD7Rk1RFlD2VmB/IcA==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fs8q50hfk-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	Zt4rjJh0Mr/fd1Jmxd+h3Cy43pcxP7RnHzW6QwphjHA=; b=QM7+urB+fekjmjVQ
+	dIgMM/MBGQ8Z8CRv1a65slxzRRs6dayNDygRKQ9jxHzZnf9uVDUkuV9aJnTdmtKO
+	d8CJ0Rnj15v9uO3wnRSkgUpLCRxk+BY0kxzIj/64GJdykMLKbM/NQ7gJy95jvCLi
+	SCPLd9MjNzj++8FR8tgAaSXQ0pa59gMQ825lKTvXKkVf9ckx0AEny49XwCvPxJFj
+	JyIjTacuirnfKD2g/F9sIx0acqIquhhhBksrAtX9nRArGgzxVILuZuTYki+FnmXQ
+	AKNm5sdED2WJ+qC6tS6jWy2rE4BELTlTxRsmnRSkyh+j2NOi7FDa0E6/JcL0+6Yp
+	RYRKKQ==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fs8tx0guy-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 08:00:47 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38dde0df80bso2122494a91.3
-        for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 01:00:47 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 08:00:51 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38fa7b09921so2987914a91.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 01:00:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785571247; x=1786176047; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=GiYcVjBZ09W9+YUl1IOFMvwZDm0LSVBwbrIB5vHXWwk=;
-        b=UBYtmzRffRewX5YDDKmZu+tjxbrQocOmEjJssmYnA9/RzgpRsQ7Mqs5RBRkPXnZrWc
-         buEXhXuZ31tJMtiQa65gvl8mBtMi3uGovE+8Z2PNBJXJiBaZ0VOTF2+kajR6kpaiardM
-         ycQm1RLFpnj4stg2Sob1i1epPDlDk+GyjSAGoL4o9XZPZegUXgCBwPnu+Q45T0O6CB1s
-         SXyAtEz0gdGTiTsvFHUFA6jtmkTeVR7jojI6Wh9uuzqJI3F8xiyjNk9c+0ZekvGqveF6
-         r56vNgb32srSlrToXf5jCzPzo6+58wTPshqhOt4uv7MO8hRaZzeHDL9ER8iQNRtEGhe6
-         IXnA==
+        d=oss.qualcomm.com; s=google; t=1785571250; x=1786176050; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Zt4rjJh0Mr/fd1Jmxd+h3Cy43pcxP7RnHzW6QwphjHA=;
+        b=OFKNjRrbU5TP5vuslCqLRaGjnLSrQZzNoOaK06JiYn8e430s/+GthTgiecHrqe74Za
+         L8fEM/smRa5Hch1/OAXTDhktmEZ6hqqxfC9qubiBQpP+qavky4NgCik5jQm5EMQ+eTGS
+         /zTEISk9ILv6kZsqr25ZO6JBLt1p55UNl+ZVTvgYg+txsXyh1tDD8G+VpzYKoUAPwB7l
+         WsvKVBYFjK/7GkC/dlE5U9Vu3VC3izFPKvsrLmP80TW/9Lu+hpEKqzx6P8ZNM0zGFVdX
+         oMLNKocIpCnxtpJtUs9B3e9mRvyTXbb1x8Zn7wXMcMH7yf3T80VE2ngnESw5v6DMqdKF
+         Ekwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785571247; x=1786176047;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=GiYcVjBZ09W9+YUl1IOFMvwZDm0LSVBwbrIB5vHXWwk=;
-        b=iArVYMjDtXjdKmKcfhkHtouXWqNXWXx+x0nYOpKfEsRgm5tPQ4cVIGJsCxMh+bFpy+
-         4qzWoEeN2FHIbBIcajvNntGZCzwppcEGNXAATokFFDAFya3py6bvSoNFqf/afS/li/a/
-         MvFcM2M0URdkvAoB0qyH/pExK2oH+USGjOwjsLYeFLYRv3lC6nOcgjpF/r+Bpfi50NJk
-         ogsoueAfLwZ5oLOKoc7u6DwVWCaie9SQOzt5doMJ+CHZCYEmXt+cy8zpKuPKKnjbu05m
-         QlIFzTKDZ36nnadM0JTS/RVlmVjDXKCHX/y8LqmtJOLJwjlUQVXyIbe6GWe9p9q0WAHD
-         Ni/Q==
-X-Forwarded-Encrypted: i=1; AHgh+RoqrahrD1bgSJ/I5e26HA5IISig7sAcykdH8D+4QMt24JY5JqWcFg9qD+u+hMMlmLJ8d8yrggMg4APSQNCP@vger.kernel.org
-X-Gm-Message-State: AOJu0YwVjljNa9icyZx0S1U4SbXvKh0ad/EuzlpcPbmm+YAD2OBMvRLe
-	oS5aufbOBxFf4k0TjvJ0D6z0T5Bit3U9lTXt/eFod2gU2EPm7kzvHeWNyyQZBn2gPWO7InHqXg9
-	7AQ1HVgwrYHOizuXlK2D4FSxqqnCHev6zfZhnLVDzo2PbuqxiGVbKRdqN5ehj2iSKOPXU
-X-Gm-Gg: AR+sD12Pl7khUcWPCZCYsB/gOxZGc6xHF1oCsM0uPhTxxxxNbLcU0VoIGQ0U4wBk4FI
-	JLqrEgnqMMHGbHqk3kpKi0voA0ynMLNgSoJ3raoMz9lJxbauNnYivdJ9l6JW6hdDZOfd4NhXI/+
-	/9snpN6aiiIqEKefX2u7TCH8DFUWWn2VjBQrIJqGP9PihWANsIjn+U0sp6+2tPCE+bi1aslGu4q
-	vcvCOdw7RfUcmocV/KqX41bggfYHbx6odKe03Wazjjj5ZDXFFK42WI8jeCrhPPwsQpl6CYQ34kP
-	FZA7t7ebNwz2+ifMDOfit4TQR5gVeVZi9dA+U6bgNVdApHLcNE7pBS5SS8+ZCfnK4DMoV6Gs7vg
-	KMWkeZXrjG8BzN93jUxugS3evyaqHQg==
-X-Received: by 2002:a17:90b:4cce:b0:38e:4cb:51f with SMTP id 98e67ed59e1d1-38fbc422a55mr2509617a91.11.1785571246497;
-        Sat, 01 Aug 2026 01:00:46 -0700 (PDT)
-X-Received: by 2002:a17:90b:4cce:b0:38e:4cb:51f with SMTP id 98e67ed59e1d1-38fbc422a55mr2509584a91.11.1785571245858;
-        Sat, 01 Aug 2026 01:00:45 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1785571250; x=1786176050;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Zt4rjJh0Mr/fd1Jmxd+h3Cy43pcxP7RnHzW6QwphjHA=;
+        b=WLHqUn+6lZiMWEki+zwTRH6J0XPmhOVWwsEH3OV8xxWadi+b0ZBW83Om9OuB0Y6fje
+         QD2F8ncNyQNLbyIwEhOEuK0FP/MOFnDxfesPEcoEvRTr6/S8jLb3fUCuQSJ8Qj/LaoQd
+         qZbAFJUl24mTazO+1jvsBERv8zt097TuTAXx+YLmrKCeoRTBxj2tFe2JWdApSR6mL8s+
+         ZmWaY3xJB652ZROqt30J9hstgQky6arocCgPoHl+Pe7hq2VXlfxDI94x4rV01bi2r9R4
+         yePikp0BSRY3gI7Kpy1bj6/ce0aJql6ic38ZLG3fDGMR7/Zbb2KjR5ws4u1h7bb6Dxmj
+         1FXQ==
+X-Forwarded-Encrypted: i=1; AHgh+RriiwITXVFR/3/y7Qd52LVxXvytI7KS/JQ5+HPqKDKa2UJGa4i0OaMByGwq1+wHGfw7cT1ALLbuvyci5Skz@vger.kernel.org
+X-Gm-Message-State: AOJu0YxBpM3Cr80u1F61D66Er7SJi3xtIOyFeQKqXSEchwZeniAr9346
+	9gGyjpuMOf3sgjRCO3tUtdyJHCTvKluEXW7QQ2RB2kCEguQi9T1uSxTzMwZTp/hP993hy8gqs+C
+	6FNnomvn88bpTy0i2o/EJ8oVw2OfXSLSvLf58FQ1W2JQvBj09m7TdJTPwW7Bv0InFx+MOVGIXXJ
+	hx
+X-Gm-Gg: AR+sD13zSBe6SiehedRGQJQ982O20tG/NVOAJILr36eRwqB5XlLR4QTi8ug6QqBYrmL
+	OuscO5hdidQsPqG16/bpjFxovoXaDaiBwo6L8WFHkafizEVa4g2RpEQgK/FNkBcdX0Bk0FFgWCo
+	Qyc97qfOwVnGSpzmHAo8QF4km7X+nr9PSCfoshw0YWv7YGwxsPpfV/h/ryuF521b6UZx/0eFrvh
+	+6bb4CvuXJWOKOt2hd2M5zuHoDp4qMiHxrl9B/xRwA9zXC4LMro2Abu3rJFb+VwxgJIWg0wM39v
+	lXrwVXUUt2DaG2qzKGCu3f+EEDhlP8rqo+9oIfME0h2MM2dI2CotXMhH8sRLyD9yMtwFCZ676/j
+	D9JS/3bld+o8z3VAl2bMcT5rpegcJGw==
+X-Received: by 2002:a17:90b:4b81:b0:38d:dfd1:7c1 with SMTP id 98e67ed59e1d1-38fbc3e5c7bmr2526012a91.2.1785571250392;
+        Sat, 01 Aug 2026 01:00:50 -0700 (PDT)
+X-Received: by 2002:a17:90b:4b81:b0:38d:dfd1:7c1 with SMTP id 98e67ed59e1d1-38fbc3e5c7bmr2525970a91.2.1785571249836;
+        Sat, 01 Aug 2026 01:00:49 -0700 (PDT)
 Received: from hu-kamalw-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153e18e114sm24739838eec.28.2026.08.01.01.00.42
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153e18e114sm24739838eec.28.2026.08.01.01.00.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Aug 2026 01:00:45 -0700 (PDT)
+        Sat, 01 Aug 2026 01:00:49 -0700 (PDT)
 From: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
-Subject: [PATCH v6 0/4] regulator: qcom-rpmh: Support RPMH address reads
- and use it for rpmh-regulators
-Date: Sat, 01 Aug 2026 13:30:26 +0530
-Message-Id: <20260801-b4-read-rpmh-v5-v6-0-9fcb54928523@oss.qualcomm.com>
+Date: Sat, 01 Aug 2026 13:30:27 +0530
+Subject: [PATCH v6 1/4] soc: qcom: rpmh: Add support to read back resource
+ settings
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,11 +92,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAJqnbWoC/3WNQQ6CMBBFr0Jm7ZCCDgZX3sOw6JRBaoRiC0RDu
- LsF1yaTn7zk/zcLBPFWAlySBbzMNljXRygOCZhW93dBW0eGXOWFOucK+YRedI1+6FqcCVlzxnV
- mWIggrgYvjX3vxlv14zDxQ8y4abZGa8Po/Gd/OdPW+2+Pp9BweWy4pIYKuroQ0tekn8Z1XRoDq
- nVdvxyr8g7HAAAA
-X-Change-ID: 20260720-b4-read-rpmh-v5-bab1bd1cbe55
+Message-Id: <20260801-b4-read-rpmh-v5-v6-1-9fcb54928523@oss.qualcomm.com>
+References: <20260801-b4-read-rpmh-v5-v6-0-9fcb54928523@oss.qualcomm.com>
+In-Reply-To: <20260801-b4-read-rpmh-v5-v6-0-9fcb54928523@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
         Konrad Dybcio <konradybcio@kernel.org>,
         Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
@@ -104,187 +105,261 @@ Cc: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
         Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
         Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785571241; l=7633;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785571241; l=7518;
  i=kamal.wadhwa@oss.qualcomm.com; s=20260406; h=from:subject:message-id;
- bh=/lQS+ClgoGUixR/QI1y225RxGswvnDRbQRyL4FSIIY8=;
- b=Zvn4/DHyGeZOJ1zmwEh46+ss26YV+oHY5Ih5LdZ7TICY01M3rTZ1FUB5Grc9BK+FbuuQlQ/zF
- wVdlYbRB4/pDveOk7sU4PkIQ4SbzE2AX8II+gFJjPrTEu+J9ar/rM92
+ bh=qXqGyOeLWQGaBEmgdBm09rvUYbv256ay6Gp1qlrL2is=;
+ b=w3CvmUdDEukecARXLPWxqGRpVLKhbwemHPkaR/u8ouktez+9BtTuXoCLyBsZ+W6N5ECZsqv7M
+ xC45j8Z2bQtArcbEkqvatIqZ2TQkwbZaycRQUhe/7/p/FzwHA+kiB4R
 X-Developer-Key: i=kamal.wadhwa@oss.qualcomm.com; a=ed25519;
  pk=ylH1NxUZkBpYsmww89g6zVxpS0q8qthtzcORkYxn/Ag=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAxMDA1NyBTYWx0ZWRfX+eDYXwkvPsaX
- UjHoX5t4s3/pCoV0P4Wj6za2MpNljpqDXbmXfdInvnV2EY+aIoBZXoSOX54czzpz/v3tJUYfZ6a
- a3SIaDTnQdoK359KX/97mJsFeJKy20E=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAxMDA1NyBTYWx0ZWRfX37Kcp/ySqje+
- dWBfKWyY1jupxyC2OgVVbhq/485LAK5tMLfQB/QWxctLeIGTchH14YsbbdFFqPBgY/FIFlXEK1j
- 77krDNKq162gBG2TkKqWknceGHx7bEDfJPcP/p3NNTVl/m41aSUAvnYTzKiourCoBc9FINhUQI1
- H69Rqfyib+5n697BPrNEo+QvYKn3hYa7F2P1R2SO2wKOHTCjocNFVJ+j1IJtvymucnM4JnVW/o2
- SEOOIvNqodKOwQZUm5FaU4M+dDvtK5XrlNFbpNY3bQ5CzD+KQ0nyJ1Ug5wABMroknl3PA0wAkL2
- FvS4rxru+SyaiankJnbyF+cbIF9911xwMLFlbPwJQW0zDbE8OnLWtlDwOSHRoVoI45RyeqeGymJ
- gNvjFK7lQry3oVkbZ5WytoyqpN28Hmp/NXBAFB4WhTlFSeO6pAH4qXQYts8+FAqt0phNUGlAroZ
- 8yA1sek0Gev5eiMOzOQ==
-X-Proofpoint-GUID: Po5nSF53tPHnt2tZjjygnyW3AUvwhOaB
-X-Authority-Analysis: v=2.4 cv=IYC3n2qa c=1 sm=1 tr=0 ts=6a6da7af cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAxMDA1NyBTYWx0ZWRfX6FWTeDrI3L7g
+ DcMC//hgcnN+wYqiDejNYrQYWoGn3HP5RxjwIEorkwMQjw1Y4WT2vSoK55rllmdl4+msQC8ncFk
+ /9FJAeDtJAPhbo2eGtITfqqXbcNypYCqrX52zEAmdns+0rnvh9sqgx02M9+zDMfqqoRS91a2Y6S
+ ObCgyicYfABig8q2LBK3UbfSXCarjwYwcp+53QopJL08TBwzI891VkSpzT571etmFcrmih9jgcw
+ p9tRucGm6omLTyBzC3hw/+6Xzivz6aCzXr5syZ0OtU2ot8TCVTBvOWMkEQSNKroGWXZJcDBTOSF
+ 8MBVAUkMKKFfCDn9McbNyRYwHGPxOy40TgvljW3zuzQh0d7V4Af6+tBYEKczFIz1tcqAknq90k2
+ STHyUS1Im7932cwySyqz6m5VZ1YZvJX64iNV3d6d5wZFnnaShnrkQGRkoz669wEwPv5LrZl2LN+
+ gXE3c7o0AiDqo/4Pzbg==
+X-Proofpoint-GUID: 8AdSGQ8rBK9ndNlTTqzD6Na0st-BQVD4
+X-Authority-Analysis: v=2.4 cv=T9C8ifKQ c=1 sm=1 tr=0 ts=6a6da7b3 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8
- a=MK4DTrBJAt5pQD0oKkIA:9 a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22
- a=FO4_E8m0qiDe52t0p3_H:22
-X-Proofpoint-ORIG-GUID: Po5nSF53tPHnt2tZjjygnyW3AUvwhOaB
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=RgaPuue0vXMEEcOqpiYA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODAxMDA1NyBTYWx0ZWRfX7zoypCGr1vGR
+ qa0mxO97f99Lgi9PcCX8V0qhFMIFarEan95qA9UAzmjQmjj/msv0SoiuoY7gCDMJRZSZPz2xFGv
+ W8L1SPuNn3LGtIKVqCFSFXhmuyhSkoM=
+X-Proofpoint-ORIG-GUID: 8AdSGQ8rBK9ndNlTTqzD6Na0st-BQVD4
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-07-31_07,2026-07-30_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 phishscore=0
- suspectscore=0 priorityscore=1501 spamscore=0 malwarescore=0 clxscore=1015
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608010057
+ phishscore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0
+ priorityscore=1501 adultscore=0 suspectscore=0 spamscore=0 malwarescore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608010057
 
-This patch series adds a new `rpmh_read()` API to allow reading RPMH
-addresses. Using this API enhances the RPMH regulator driver by adding
-readback of the voltage/bypass/mode settings as they have been applied by
-APPS during the bootloader stage, so regulator framework can get them
-via `get_mode`, `get_bypass` & `get_voltage_selector` callbacks during
-regulator registration.
+From: Maulik Shah <maulik.shah@oss.qualcomm.com>
 
-This is needed because currently regulator framework does a unnecessary
-write with `min-microvolt` DT setting for all the RPMH regulators during
-regulator registration, because the first time after boot the value is
-seen as -ENOTRECOVERABLE, as there is no option to read these regulator
-settings.
+All rpmh_*() APIs so far have supported placing votes for various resource
+settings but the H/W also have option to read resource settings.
 
-With this change this unnecessary write can be avoided and regulator
-framework gets a sense of the initial state set during the bootloader
-stage for all regulator settings.
+Add new rpmh_read() API to allow clients to read back resource setting
+from H/W. This will be useful for clients like regulators, which currently
+don't have a way to know the settings applied during bootloader stage.
 
-NOTE - During discussion on the v2 series - PATCH 3/4, reviewer had
-inquired about possible need for the use of the sync_state() to handle the
-"multiple" client case - for maintaining the regulator settings till all
-the clients are probed.
-
-This case was not covered in my previous series and had originally planned
-to do that series separately. But after the discussion decided to merge
-the 2 series as it seemed this would be a better approach. But after
-working on sync_state change. I realized a basic issue with using
-sync_state() for regulators - that its per-driver and not per-regulator
-resource. But we needed a sync_state callback for each regulator separately.
-
-I had been experimenting with few ideas but seems its going to need more
-time for me to close on the equivalent solution that has per-regulator
-sync_state or something to that effect. So I thought to close on this
-series and attend to that separately.
-
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Signed-off-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
 Signed-off-by: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
 ---
-Changes in v6:
-- Dropped the `get_status()` callback and all associated status-tracking
-  (vreg->status, rpmh_vreg_update_status(), rpmh_regulator_vrm_get_status()),
-  as Mark pointed out get_status() must reflect actual hardware state, not a
-  cached/driver-computed value, and the ENABLE/MODE/BYPASS registers are
-  control/vote registers written by this driver rather than free-running
-  status registers. Renamed determine_initial_status() to
-  determine_initial_mode() accordingly; mode/bypass/voltage readback via
-  get_mode()/get_bypass()/get_voltage_sel() is unaffected.
-- Link to v5: https://patch.msgid.link/20260720-b4-read-rpmh-v5-v5-0-cb93fb95f565@oss.qualcomm.com
+ drivers/soc/qcom/rpmh-rsc.c | 13 +++++++++++--
+ drivers/soc/qcom/rpmh.c     | 47 +++++++++++++++++++++++++++++++++++++++++----
+ include/soc/qcom/rpmh.h     |  5 +++++
+ include/soc/qcom/tcs.h      |  2 ++
+ 4 files changed, 61 insertions(+), 6 deletions(-)
 
-Changes in v5:
-- In `_rpmh_regulator_vrm_get_voltage()`, removed the min/max voltage
-  range check that was suppressing out-of-range readback values, as
-  suggested by Mark. The raw hardware-read voltage is now always
-  reported to the regulator framework. A separate patch will be sent
-  to handle out-of-range voltage constraint handling in core.c.
-- Sorted the `#include <linux/bits.h>` alphabetically with the rest of
-  the include block, as pointed out by Konrad.
-- Removed the `rpmh_regulator_read_data()` wrapper (a oneliner around
-  `rpmh_read()`) and inlined `rpmh_read()` at each call site instead,
-  as suggested by Konrad.
-- Dropped the unnecessary `sts = 0` initialization in
-  `rpmh_regulator_determine_initial_status()`, since it is always
-  initialized before use, as pointed out by Konrad.
-- Added a blank line above the `return` statements in the `!pmic_mode`
-  block of `rpmh_regulator_determine_initial_status()`, for consistency
-  with the rest of the function, as pointed out by Konrad.
-- Link to v4: https://lore.kernel.org/all/20260420-read-rpmh-v3-v4-0-70c152e6c958@oss.qualcomm.com/
+diff --git a/drivers/soc/qcom/rpmh-rsc.c b/drivers/soc/qcom/rpmh-rsc.c
+index c6f7d5c9c493..ec85c457ea45 100644
+--- a/drivers/soc/qcom/rpmh-rsc.c
++++ b/drivers/soc/qcom/rpmh-rsc.c
+@@ -443,6 +443,7 @@ static irqreturn_t tcs_tx_done(int irq, void *p)
+ 	int i;
+ 	unsigned long irq_status;
+ 	const struct tcs_request *req;
++	u32 reg;
+ 
+ 	irq_status = readl_relaxed(drv->tcs_base + drv->regs[RSC_DRV_IRQ_STATUS]);
+ 
+@@ -453,6 +454,11 @@ static irqreturn_t tcs_tx_done(int irq, void *p)
+ 
+ 		trace_rpmh_tx_done(drv, i, req);
+ 
++		if (req->is_read) {
++			reg = drv->regs[RSC_DRV_CMD_RESP_DATA];
++			req->cmds[0].data = read_tcs_reg(drv, reg, i);
++		}
++
+ 		/* Clear AMC trigger & enable modes and
+ 		 * disable interrupt for this TCS
+ 		 */
+@@ -493,13 +499,15 @@ static void __tcs_buffer_write(struct rsc_drv *drv, int tcs_id, int cmd_id,
+ 			       const struct tcs_request *msg)
+ {
+ 	u32 msgid;
+-	u32 cmd_msgid = CMD_MSGID_LEN | CMD_MSGID_WRITE;
++	u32 cmd_msgid = CMD_MSGID_LEN;
+ 	u32 cmd_enable = 0;
+ 	struct tcs_cmd *cmd;
+ 	int i, j;
+ 
+ 	/* Convert all commands to RR when the request has wait_for_compl set */
+ 	cmd_msgid |= msg->wait_for_compl ? CMD_MSGID_RESP_REQ : 0;
++	if (!msg->is_read)
++		cmd_msgid |= CMD_MSGID_WRITE;
+ 
+ 	for (i = 0, j = cmd_id; i < msg->num_cmds; i++, j++) {
+ 		cmd = &msg->cmds[i];
+@@ -513,7 +521,8 @@ static void __tcs_buffer_write(struct rsc_drv *drv, int tcs_id, int cmd_id,
+ 
+ 		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_MSGID], tcs_id, j, msgid);
+ 		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_ADDR], tcs_id, j, cmd->addr);
+-		write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_DATA], tcs_id, j, cmd->data);
++		if (!msg->is_read)
++			write_tcs_cmd(drv, drv->regs[RSC_DRV_CMD_DATA], tcs_id, j, cmd->data);
+ 		trace_rpmh_send_msg(drv, tcs_id, msg->state, j, msgid, cmd);
+ 	}
+ 
+diff --git a/drivers/soc/qcom/rpmh.c b/drivers/soc/qcom/rpmh.c
+index ca37da3dc2b1..f881c4c757ec 100644
+--- a/drivers/soc/qcom/rpmh.c
++++ b/drivers/soc/qcom/rpmh.c
+@@ -175,6 +175,9 @@ static int __rpmh_write(const struct device *dev, enum rpmh_state state,
+ 	struct cache_req *req;
+ 	int i;
+ 
++	if (rpm_msg->msg.is_read)
++		goto send_data;
++
+ 	/* Cache the request in our store and link the payload */
+ 	for (i = 0; i < rpm_msg->msg.num_cmds; i++) {
+ 		req = cache_rpm_request(ctrlr, state, &rpm_msg->msg.cmds[i]);
+@@ -182,6 +185,7 @@ static int __rpmh_write(const struct device *dev, enum rpmh_state state,
+ 			return PTR_ERR(req);
+ 	}
+ 
++send_data:
+ 	if (state == RPMH_ACTIVE_ONLY_STATE) {
+ 		ret = rpmh_rsc_send_data(ctrlr_to_drv(ctrlr), &rpm_msg->msg);
+ 	} else {
+@@ -194,7 +198,7 @@ static int __rpmh_write(const struct device *dev, enum rpmh_state state,
+ }
+ 
+ static int __fill_rpmh_msg(struct rpmh_request *req, enum rpmh_state state,
+-		const struct tcs_cmd *cmd, u32 n)
++		const struct tcs_cmd *cmd, u32 n, bool is_read)
+ {
+ 	if (!cmd || !n || n > MAX_RPMH_PAYLOAD)
+ 		return -EINVAL;
+@@ -204,10 +208,45 @@ static int __fill_rpmh_msg(struct rpmh_request *req, enum rpmh_state state,
+ 	req->msg.state = state;
+ 	req->msg.cmds = req->cmd;
+ 	req->msg.num_cmds = n;
++	req->msg.is_read = is_read;
+ 
+ 	return 0;
+ }
+ 
++/**
++ * rpmh_read: Read a resource value
++ *
++ * @dev: The device making the request
++ * @cmd: The payload having address of resource to read
++ *
++ * Reads the value for the resource address given in tcs_cmd->addr
++ * and returns the tcs_cmd->data filled with same.
++ *
++ * Context: May sleep. Do not call from atomic contexts.
++ *
++ * Return: 0 on success, negative errno on failure
++ */
++int rpmh_read(const struct device *dev, struct tcs_cmd *cmd)
++{
++	DECLARE_COMPLETION_ONSTACK(compl);
++	DEFINE_RPMH_MSG_ONSTACK(dev, RPMH_ACTIVE_ONLY_STATE, &compl, rpm_msg);
++	int ret;
++
++	ret = __fill_rpmh_msg(&rpm_msg, RPMH_ACTIVE_ONLY_STATE, cmd, 1, true);
++	if (ret)
++		return ret;
++
++	ret = __rpmh_write(dev, RPMH_ACTIVE_ONLY_STATE, &rpm_msg);
++	if (ret)
++		return ret;
++
++	ret = wait_for_completion_timeout(&compl, RPMH_TIMEOUT_MS);
++	cmd[0].data = rpm_msg.cmd[0].data;
++
++	return (ret > 0) ? 0 : -ETIMEDOUT;
++}
++EXPORT_SYMBOL_GPL(rpmh_read);
++
+ /**
+  * rpmh_write_async: Write a set of RPMH commands
+  *
+@@ -230,7 +269,7 @@ int rpmh_write_async(const struct device *dev, enum rpmh_state state,
+ 		return -ENOMEM;
+ 	rpm_msg->needs_free = true;
+ 
+-	ret = __fill_rpmh_msg(rpm_msg, state, cmd, n);
++	ret = __fill_rpmh_msg(rpm_msg, state, cmd, n, false);
+ 	if (ret) {
+ 		kfree(rpm_msg);
+ 		return ret;
+@@ -257,7 +296,7 @@ int rpmh_write(const struct device *dev, enum rpmh_state state,
+ 	DEFINE_RPMH_MSG_ONSTACK(dev, state, &compl, rpm_msg);
+ 	int ret;
+ 
+-	ret = __fill_rpmh_msg(&rpm_msg, state, cmd, n);
++	ret = __fill_rpmh_msg(&rpm_msg, state, cmd, n, false);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -352,7 +391,7 @@ int rpmh_write_batch(const struct device *dev, enum rpmh_state state,
+ 	rpm_msgs = req->rpm_msgs;
+ 
+ 	for (i = 0; i < count; i++) {
+-		__fill_rpmh_msg(rpm_msgs + i, state, cmd, n[i]);
++		__fill_rpmh_msg(rpm_msgs + i, state, cmd, n[i], false);
+ 		cmd += n[i];
+ 	}
+ 
+diff --git a/include/soc/qcom/rpmh.h b/include/soc/qcom/rpmh.h
+index bdbee1a97d36..14ecbf242b6b 100644
+--- a/include/soc/qcom/rpmh.h
++++ b/include/soc/qcom/rpmh.h
+@@ -11,6 +11,8 @@
+ 
+ 
+ #if IS_ENABLED(CONFIG_QCOM_RPMH)
++int rpmh_read(const struct device *dev, struct tcs_cmd *cmd);
++
+ int rpmh_write(const struct device *dev, enum rpmh_state state,
+ 	       const struct tcs_cmd *cmd, u32 n);
+ 
+@@ -24,6 +26,9 @@ void rpmh_invalidate(const struct device *dev);
+ 
+ #else
+ 
++static inline int rpmh_read(const struct device *dev, struct tcs_cmd *cmd)
++{ return -ENODEV; }
++
+ static inline int rpmh_write(const struct device *dev, enum rpmh_state state,
+ 			     const struct tcs_cmd *cmd, u32 n)
+ { return -ENODEV; }
+diff --git a/include/soc/qcom/tcs.h b/include/soc/qcom/tcs.h
+index cff67ce25488..45b8513be2f9 100644
+--- a/include/soc/qcom/tcs.h
++++ b/include/soc/qcom/tcs.h
+@@ -51,6 +51,7 @@ struct tcs_cmd {
+  * struct tcs_request: A set of tcs_cmds sent together in a TCS
+  *
+  * @state:          state for the request.
++ * @is_read:        set for read only requests
+  * @wait_for_compl: wait until we get a response from the h/w accelerator
+  *                  (same as setting cmd->wait for all commands in the request)
+  * @num_cmds:       the number of @cmds in this request
+@@ -58,6 +59,7 @@ struct tcs_cmd {
+  */
+ struct tcs_request {
+ 	enum rpmh_state state;
++	bool is_read;
+ 	u32 wait_for_compl;
+ 	u32 num_cmds;
+ 	struct tcs_cmd *cmds;
 
-Changes in v4:
-- Modified the register mask macros to use  GENMASK()/BIT() instead of
-  numbers as suggested by reviewer.
-- Removed the unreachable code in the determine_initial_status() for XOB
-  type regulators status update logic as suggested by reviewer.
-- Link to v3: https://lore.kernel.org/all/20260407-read-rpmh-v3-v3-0-34079f92691c@oss.qualcomm.com/
-
-Changes in v3:
-- Removed "bypass_supported" as that is not needed for regulators
-  that don't have set_bypass implemented, as pointed by Dmitry.
-- Handled the corner case where the mode/bypass setting is read 0, but
-  its unclear if the register has been set to 0 or its un-accessed.
-- Dropped `convert_mode_to_status()` and use the `regulator_mode_to_status()`
-  instead.
-- Refactored some code to simplify the `status` update after every
-  enable/mode/bypass setting change.
-- Corrected subject line of all patches to have `regulator: qcom-rpmh:`
-  for all the `qcom-rpmh-regulator.c` file changes, as pointed by Bjorn.
-- Re-ordered the series to have the `rpmh.c` driver patches first and
-  than `qcom-rpmh-regulator.c` driver patches as asked by Bjorn.
-- In the BOB5 bypass fix patch (PATCH 1/4 in previous series), added
-  the fixes commit#, as it was missed earlier.
-- In the rpmh driver change(PATCH 2/4 in previous series), modified
-  commit wording and removed linked as suggested by reviewer.
-- Fixed kernel test robot issues and other formatting issues in
-  PATCH 3/4 of last series.
-- Corrected the checkpatch error fix PATCH 4/4 to keep to only
-  one error in comment section which existed prior to this
-  series.
-- Modified the subject line a little and added proper tags
-- Link to v2: https://lore.kernel.org/all/20251022-add-rpmh-read-support-v2-0-5c7a8e4df601@oss.qualcomm.com/
-
-Changes in v2:
-- Fixed the BOB bypass mode handling (existing issue in current driver).
-  This was needed for `get_status()` implementation.
-- Implemented `get_status()` callback.
-- Callbacks for `is_enabled()` & `get_mode()` will now be used as-is
-  ie. v1 changes reverted.
-- Bootstrapped the read values for `mode` and `status` in probe, based on
-  comments received from reviewer.
-- Callback for `get_voltage_sel()` has been modified to handle cases
-  where read voltage is out-of-range defined in the regulator DT settings,
-  this is needed to ensure backward compatibilty. Regulator probes may
-  fail otherwise for some older targets.
-- This patch is rebased & tested on:
-  https://lore.kernel.org/all/176070318151.57631.15443673679580823321.b4-ty@kernel.org/
-  to avoid any merge issues.
-- Fixed code style issues reported by checkpatch.pl script.
-- Link to v1: https://lore.kernel.org/r/20250623-add-rpmh-read-support-v1-0-ae583d260195@oss.qualcomm.com
-
-To: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>
-To: Liam Girdwood <lgirdwood@gmail.com>
-To: Mark Brown <broonie@kernel.org>
-To: Vinod Koul <vkoul@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Signed-off-by: Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
-
----
-Kamal Wadhwa (3):
-      regulator: qcom-rpmh: Fix PMIC5 BOB bypass mode handling
-      regulator: qcom-rpmh: readback voltage/bypass/mode set during bootup
-      regulator: qcom-rpmh: Fix coding style issues
-
-Maulik Shah (1):
-      soc: qcom: rpmh: Add support to read back resource settings
-
- drivers/regulator/qcom-rpmh-regulator.c | 128 +++++++++++++++++++++++++++++++-
- drivers/soc/qcom/rpmh-rsc.c             |  13 +++-
- drivers/soc/qcom/rpmh.c                 |  47 +++++++++++-
- include/soc/qcom/rpmh.h                 |   5 ++
- include/soc/qcom/tcs.h                  |   2 +
- 5 files changed, 187 insertions(+), 8 deletions(-)
----
-base-commit: 5c73cd9f0819c1c44e373e3dabb68318b1de1a12
-change-id: 20260720-b4-read-rpmh-v5-bab1bd1cbe55
-
-Best regards,
---  
-Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>
+-- 
+2.43.0
 
