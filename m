@@ -1,345 +1,314 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 865A43AE191
-	for <linux-arm-msm@vger.kernel.org>; Sun,  2 Aug 2026 13:53:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A5A8396D1C
+	for <linux-arm-msm@vger.kernel.org>; Sun,  2 Aug 2026 14:06:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785678829; cv=none; b=UgF8KmVHZ+MB/QqMg6EGX1LnSvONvC16khJLUENHncUVtTztcMakNgWdMhkS9AAZiZrxqOoBVttahdOFccTDoLoF9Jovk0EOsQbipGH4At3rJ/bvSi3O+YflH4J77p2Q2sYMImUFVBAzG5NFC44vXa8bX//cbRA5sNG8s1wBpkA=
+	t=1785679563; cv=none; b=BPWYo0VLlGB3vANdeB+l2dSAYouxbgjTowH2GIPJ3gFLPTZFLJnKfZfgiBphcHQhJ6Iycyg0Es3Ib0Zqn517Rgj3C1VRxV2V6ipqkMvNqotq0zJzYIwQOLA/kFIxpNGgnfvFq+dKebIiiTmKmJzGXJL+koM0Ft8Fpb06JNiALfA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785678829; c=relaxed/simple;
-	bh=HPq5yoFkEG3iBtpfzCUK0AbF2MdytGEBN2NqVBLK5uI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=rNvSGlCAZWC3ZSg5+61kKsBh8XyiSh140RMBYPAAvFyyiV8WCEWircx3uUXJfbV+vJS5E0s9EXVJYn/IVYMNg00S7sKp8HRIbmhcqKTnm+uv6tQVWnNiircklP4E2CbrVGL2jf30x7EnKxXyVZ53K4KBBg/cECE2r8dSeLr6Z3o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=U3SqX3z3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ALSwtpFc; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1785679563; c=relaxed/simple;
+	bh=NBDioksG5pOpKo0k7xIWjDfLaLsiWZzCb//BdAiMZP4=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=o4aiYJrOjFxKGHQSqeYzykc2m+ncX7avpNkhEfMTpqA8EwaChkPNnP+3JgLUWtC3eOn2WmMQvbAVskxflxzLBX6Zo4CoNIa8KDfWYeDjPpjyxoONjAYIWMQr8ButmpZZhcJV4MUHHrR6xUu9Wh04zH1ykQaOK6W/kQWpLIgzUgs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YKVtLapQ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kGtl0acz; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="U3SqX3z3";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ALSwtpFc"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 672B6nMJ1487504
-	for <linux-arm-msm@vger.kernel.org>; Sun, 2 Aug 2026 13:53:46 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YKVtLapQ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kGtl0acz"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 672B6oFJ936814
+	for <linux-arm-msm@vger.kernel.org>; Sun, 2 Aug 2026 14:06:01 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	7telvqZIHvBxRLOf2U1lLAlMZd2ZOrGQxmdLTaOPOGU=; b=U3SqX3z3zUv1AOcf
-	HGHTqXmIm63hoxajqhEAWxpD7Wv7TWStJyZEozCuq9R7uyF5fHSbGJRjmVr58n8N
-	4hq47uLwSZF/loWxLMiYlFEwNQDRffEggam1AnkenJbtuV1DMLeQx6aOSsuu3I65
-	5V19RTPiZGLoL3TeAh9ArChg4HGxEXAj+c6O+UWwxoO4nHq5cQ0ew4Q073Lv4OQ2
-	9MuwKJRW3J63u/1w8C+WJhPlgUeT6CeGLLglyVf1NsZAoHqac1LepexwtWbDUyIr
-	yk1HXZXZbASSp9oMcUdnKXbLfYF3E7mNSmqLfP4vVBOulIUEIU3lqW7ZbYChdHdk
-	+RX52Q==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fs8r6jy20-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=IUBrw7txsJyrtbO2uks4gb
+	XgkSo0IF8NQtTXkzJyWQc=; b=YKVtLapQxcdEBSB6WppKRo5LugMC7Yg56KlN0m
+	et8x9EJVV63bsrTS6MhujKgjwtbj40Uc+p9c7V9R4yPxaVgIGS3fDghv5xtBsU9P
+	xNUY58kIJwahtmetyXBo5M8u+NJn1kTyMr5/M/z6I4xRMfYQuyY8uyX/NAuz5C1U
+	en2w5P3lDYbIBbOPh7i2wpmz7s6lD+xNMWW2eKFGFiZ3/jwgDRgxQ9sHKGCZL1dS
+	Hzrs/fm22rhDw+E/Ha2WzICFPko5IJYvQ7mbyYFDrdPQpbMEopoLRW0tG+wMNWCN
+	bqRrw9t78SEajFGLVe+ZOw2cf1GI+U04UqylDaiO//v0o8sA==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fs9ygjrpm-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 02 Aug 2026 13:53:46 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-92e53b8a302so243560585a.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 02 Aug 2026 06:53:46 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 02 Aug 2026 14:06:01 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38dbe39ce62so2332132a91.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 02 Aug 2026 07:06:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785678826; x=1786283626; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=7telvqZIHvBxRLOf2U1lLAlMZd2ZOrGQxmdLTaOPOGU=;
-        b=ALSwtpFce6vYmVkBfV8AQwRN69jmYhPg4xhex9IKZ2fCFPb0ZKJuU5hKQIvkC3mPmi
-         JJS7Gb1pNMd+/zTLeWcF2ghZ5k07VCaOxZAesp75uPZ2MlRxSsw0xp0Hgn1ESGhYext9
-         RjY1BOz5qMklMYY5W+kun9Rte12CITuj2taewFeTh7HWmHtRvWvldLHvlr56WfapzdT8
-         CQst6XXHPd5HPFlO0IIZqs8su3L8yH4gFkz3qiN5EcXxmhJQcksBA5dwgm/WbM5F1/9m
-         aVx5j9Eh8QA2j8ksijFSdWt4kY9VinmHNvFJtGP7loFMwz7tglB7lnuf9/1K9KZMArlO
-         QYrA==
+        d=oss.qualcomm.com; s=google; t=1785679561; x=1786284361; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=IUBrw7txsJyrtbO2uks4gbXgkSo0IF8NQtTXkzJyWQc=;
+        b=kGtl0aczCQpTPSuJ13nIiQvBuhF3kZxQgqyAl3IoTSACVMwkjCKBYyNTFV/wXFkyVt
+         u2I8y9Qhe9JOko/PYOpbbk6ZSFEd0yt1hbn8J4QCwnbXzyCPslPeSp3GwWSfGPC+Dn/K
+         HLrgguwfHkWCnzQRrqTOKH85gg+6T2sHDEkof4VaxU3o1rPi2Ir3Tr/A+RLwCNXQ0iY7
+         qYpNDPjHjUeLW+ujEGNyecOVAE+2+AV8EWnLwQiHMRSgZOgNErtYv3JTG0F9eprD6hPy
+         axKGEr+ngGOLgsfnLawNG7/NfRDXqeYIuzsJpvMUPz6BL0GvNCDrxiZ8r1w00EGboyjm
+         jPhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785678826; x=1786283626;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=7telvqZIHvBxRLOf2U1lLAlMZd2ZOrGQxmdLTaOPOGU=;
-        b=fl50xvWKYVaGX7z1ecGAg9Hma3EQjrJhkmKKVhTEaSR+VVJBFoe5TSRktbaSyxn13v
-         wT6frJWm7ow1NEgUi3ihr60QafLD6Uk1xN9lXpMrhoXUQvXUmJSh6RPuPzRYkVliAiVq
-         8txaCsGf+vyMHFCJQMkmBs5wu7umESFJNi8R1Z5/zFkdBhEVXPlGyxZ4Z1aTuzGGPB0x
-         OMKl03t67rQNORRDMUimAhSRq0O+fibPZgXIzTbyjM9WXJnq0W6bMR6Pd/TODg5NkY0x
-         xnaTJig3jfl6/7mseOBDzbaHu/CC7F3xJJg/2abboOUPa1U150anGmcNvZm3p3VekCSr
-         84Rg==
-X-Forwarded-Encrypted: i=1; AHgh+Rp82LYgsCEsN+id94Uh/uMs8N07AsEzcA2LCh5oqTGhDcMS2AWV9eWOajNQgrLsq+Ty/5bqfOdKLTo5pzF1@vger.kernel.org
-X-Gm-Message-State: AOJu0YwySjUOl33q8NGy4ftGIkVofrsrprTCQIZdreGtjQar75cjqtcA
-	ZYd3cQRFUpEvpdVNYj4A1X/4C8ZCO28FTpvePUJ06pJ51zHfJW0OrXifnDEYMXUCMv+IIz2unDQ
-	R0usxt8qFp7KW/jOQw/xyZfknvft9aOPzYxZjhFCnbghM6WvqAb68uCUS4wpj3LaiU7oh
-X-Gm-Gg: AR+sD11LjYmuO7Q7U9HCtEeRsKylhBnWn3G44MI5nkVpKkEJqDgE32sKRwiq3K9pU5w
-	HJ2fbrB1hR0NS2iV3/Mg4WIYFIIs58k4Q1r6FoULzOwgC9MQQvwZd2J910o7CihNSSKpWAlpSAC
-	4nj1xPynwOvZsIQqQb7onLJjKFIK91CP4JoT3JFfI23XR+eOBEEI6k6G1jVRm182Bs/00n78OLD
-	i+oFiGVogeM+1bGwyJEiJd3fyy8TIkpUG3dQKejgB+lhaZnj71qiGxeyQK+kQd7ecEUolFHQ9V4
-	w6GaR7Ef23zXFe1x27N1EeG1qhcAawJoIlN1osCpgCl7KQEaNqtfjvfkrBMAPURaa6/e4m+9e8U
-	8rasbEZzdV+WOw1IFZeSZFF9fvtUkXddp
-X-Received: by 2002:a05:620a:2252:10b0:930:adff:9aa1 with SMTP id af79cd13be357-934a078753bmr981848985a.13.1785678825531;
-        Sun, 02 Aug 2026 06:53:45 -0700 (PDT)
-X-Received: by 2002:a05:620a:2252:10b0:930:adff:9aa1 with SMTP id af79cd13be357-934a078753bmr981845185a.13.1785678824938;
-        Sun, 02 Aug 2026 06:53:44 -0700 (PDT)
-Received: from [192.168.1.73] ([92.247.57.178])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1fd3c5b0fasm438716966b.5.2026.08.02.06.53.42
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 02 Aug 2026 06:53:44 -0700 (PDT)
-Message-ID: <2d7cafb1-acd3-4be6-9fdd-3071a55a7b08@oss.qualcomm.com>
-Date: Sun, 2 Aug 2026 16:53:41 +0300
+        d=1e100.net; s=20251104; t=1785679561; x=1786284361;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=IUBrw7txsJyrtbO2uks4gbXgkSo0IF8NQtTXkzJyWQc=;
+        b=K/DTVvMbJ2vpppEGG/qQJPKHNgrp84SUHKh88rv9Fl8w+Wkv6z9b/poziQA3ndym5I
+         3JIFk3Vbq7HSW5zG7SylLTrAqgZi3R+cjHpja7IYQrAIiO2dPRK7Xq3mFK5K0nFPSEtA
+         HvkHPEsKugQgKyzGNA+Mo+fbXjBXrgFRPd7fijc1NEqDtoIeK8nq9XKrfNHQ2tIvIkPg
+         s8JttuKu/w2AzwCKXSJCwabzSHFuBSo5aZYzgb4qrW4wt20+ZLNk4mAYhXOtthnrIuVF
+         dxpa2eLARyXvIe07NDjJSfs4cHeF4V0Oyywiti3XgcVkzBOf57Tic85XYoV2jwHPE68b
+         KdxQ==
+X-Forwarded-Encrypted: i=1; AHgh+RqO3FGLbcr3dL0f44eQzBimvd6rFprmpfCVvh0kQbAfdS78F8GMlRmOg8gqFJ3v5hcyavM7qJhw5RgYOVG4@vger.kernel.org
+X-Gm-Message-State: AOJu0YwnjQ4iz19QdbOjetXCbP/EcJVe7PeL+ikVxXsBXRs+7Uoa0Ycr
+	DfDyAK90egn6wNqYOs9SqEK0udCTFZ4aAfdQ9kZgXJ3hhU9y0Ionpqcka2ql4xMAdkgEu1SMl4d
+	7kJ/dld+8pcGMuRIGQV+7M6pSE1TfWsRY90tNYRWc3kElasJMzJP5WE8Tl9JyE+HPILQ6
+X-Gm-Gg: AR+sD10VlQcggZiiDMgTh1xNmrK3kzau0zoVnsC5HDgEc4fVRg1yI4yW3Mb+Vmp7chS
+	FAnYcld9tVfIKl+AQMB4drVg7jE7V8L1K8tekLSgv2MUfd41CRNIjuEz3oDAnTswTMqxaZ2dE/e
+	GVf44m1zzSPiJQDDptdGYlCE+qjzvalIMR3VMePoZNdvKSJzl9pxiAdpNTOATNlocZtp9R7hJAt
+	135fZx94wthvxjWfIZXFIFkhbaJ3vYDNrj9VfB9OVqQBP+bIrYalnjyzFG+ruje+eesE7GFG3Et
+	DI7jYgY6C9Tm8mZByahqaFCbX6bFCLTaoRvDtFhqUQdjLaITo3sgg4pcp1dQLaEbC9E+xRfVAO9
+	8WrjaW6Ys/2z1F3ipBf5SHo9EdqI5
+X-Received: by 2002:a17:90b:57ed:b0:385:3ab:fecb with SMTP id 98e67ed59e1d1-38fbc9f3ebemr4727137a91.4.1785679560490;
+        Sun, 02 Aug 2026 07:06:00 -0700 (PDT)
+X-Received: by 2002:a17:90b:57ed:b0:385:3ab:fecb with SMTP id 98e67ed59e1d1-38fbc9f3ebemr4727101a91.4.1785679559963;
+        Sun, 02 Aug 2026 07:05:59 -0700 (PDT)
+Received: from hu-mkshah-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13fab4cb51asm34484816c88.9.2026.08.02.07.05.51
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 02 Aug 2026 07:05:59 -0700 (PDT)
+From: Maulik Shah <maulik.shah@oss.qualcomm.com>
+Date: Sun, 02 Aug 2026 19:35:43 +0530
+Subject: [PATCH] pinctrl: Use IRQ trigger mask helpers
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/3] dt-bindings: media: qcom: Add JPEG encoder binding
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        "Gjorgji Rosikopulos (Consultant)" <gjorgji.rosikopulos@oss.qualcomm.com>
-Cc: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        linux-media@vger.kernel.org, bod@kernel.org, mchehab@kernel.org,
-        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
-        andersson@kernel.org, konradybcio@kernel.org, loic.poulain@linaro.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260730150524.2659577-1-atanas.filipov@oss.qualcomm.com>
- <20260730150524.2659577-2-atanas.filipov@oss.qualcomm.com>
- <3cbnmjmit4gsldga5nzct4odg6hpixzlwxbj72elnogyevr2tg@6esyjj2mvyom>
- <deee4b5e-167a-4f37-b2fa-84f06ec33721@oss.qualcomm.com>
- <fcc464a8-3d1c-4b6e-ab2d-ef61c4b18b2e@oss.qualcomm.com>
- <CAFEp6-3vecjDQE1DBwQXHoj5ez5ALUVq_iwS5UB4YxaW7YGckA@mail.gmail.com>
-Content-Language: en-US
-From: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
-In-Reply-To: <CAFEp6-3vecjDQE1DBwQXHoj5ez5ALUVq_iwS5UB4YxaW7YGckA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAyMDEyMyBTYWx0ZWRfXxashMRzWKTrn
- HZPXW9+r198GQYLnfzPzzpOuCbJEZ/ytkT+x3AjriWgGNOA5L97pT1VmdubPVzTDqB8Z3V4A68F
- kZ/IMlcSHOsSDh7Kp3qGTSKeWI/LcyM=
-X-Proofpoint-GUID: IHW4i0xUzbJ5SUPy-V35aBeGwhwBGNaX
-X-Proofpoint-ORIG-GUID: IHW4i0xUzbJ5SUPy-V35aBeGwhwBGNaX
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAyMDEyMyBTYWx0ZWRfX1sGAUEr5/k3A
- ptJlAZkhlebScCeqeFuUkxzU3TOcn0x/CGYYv5wSr0CQfjoRz2gBLN3YCKY18vV1NlqeNxM+Gol
- qu9/YHgA/csAjBMIP0QXXbk2lYXEaaHQA4/MIKvrSEbk4OC92DrInPwfUoB0nM5YDX6Pld99ynR
- AirJcQWUMzDv2ZeUMG3IvKyznPqxRfKgmCxs1ULKaEppJGPjvoZNOTz2i6xpdt6e+WqsQssGq1v
- AIQ8ZXhCJngnbsKiKMT6jxkrG1bBxvHwIk1fwkbOO6Z+d4AUCdhmwRxt1cV8vuTdKk/L0kfarE6
- 5PnpSbwdDYNHngWQ2zST95T8Pu2PRYXUBkL3A1KqfKviPawVGDCpvupE4kRKJtDjvT5eORg7dCk
- KAkUOYiJ+my9lDUpwPbTE0z98IIx+ArKPHuLvNYDzKuChD1TzSAOWfrCO+9Nc9hO3O669zEST+x
- wYLzzzBZrWJF2KKYHKw==
-X-Authority-Analysis: v=2.4 cv=Q5ziJY2a c=1 sm=1 tr=0 ts=6a6f4bea cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=ybD9qRDIDfZaXNPQ7Ca20A==:17
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260802-b4b4-irq-trigger-mask-pinctrl-v1-1-1c398ab53d28@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIALZOb2oC/yXMOw7CMAwA0KtUnrGUpgEVroIYamOC+YTWCQip6
+ t0JML7lzZDFVDLsmhlMXpr1kSraVQN8HlIU1GM1eOc3rnceKVBAtQmLaYxieB/yFUdNXOyG3Xr
+ LoWcKbUdQj9HkpO/fvz/8nZ90ES7fFJblAxVw+3aBAAAA
+X-Change-ID: 20260802-b4b4-irq-trigger-mask-pinctrl-359c48cb413b
+To: Linus Walleij <linusw@kernel.org>,
+        =?utf-8?q?Andreas_F=C3=A4rber?= <afaerber@suse.de>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Lorenzo Bianconi <lorenzo@kernel.org>, Ray Jui <rjui@broadcom.com>,
+        Scott Branden <sbranden@broadcom.com>,
+        Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+        Sean Wang <sean.wang@kernel.org>,
+        Matthias Brugger <matthias.bgg@gmail.com>,
+        AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+        Andrew Jeffery <andrew@codeconstruct.com.au>,
+        Avi Fishman <avifishman70@gmail.com>,
+        Tomer Maimon <tmaimon77@gmail.com>, Tali Perry <tali.perry1@gmail.com>,
+        Patrick Venture <venture@google.com>, Nancy Yuen <yuenn@google.com>,
+        Benjamin Fair <benjaminfair@google.com>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Viresh Kumar <vireshk@kernel.org>
+Cc: linux-gpio@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-actions@lists.infradead.org, linux-kernel@vger.kernel.org,
+        linux-mediatek@lists.infradead.org, openbmc@lists.ozlabs.org,
+        linux-arm-msm@vger.kernel.org, soc@lists.linux.dev,
+        Maulik Shah <maulik.shah@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785679551; l=6841;
+ i=maulik.shah@oss.qualcomm.com; s=20240109; h=from:subject:message-id;
+ bh=NBDioksG5pOpKo0k7xIWjDfLaLsiWZzCb//BdAiMZP4=;
+ b=c21evJbK163GncmcfCcbMaR7yLK/XPxyAIAtf7iEWai9uXE/ByvKLgPIYH43r4tLlQgGRBNDB
+ 1flMBKgF77UCMyTh6ruqr+wSpTq0lACBWDakgwRVSnCqIKrHE0AmMJv
+X-Developer-Key: i=maulik.shah@oss.qualcomm.com; a=ed25519;
+ pk=bd9h5FIIliUddIk8p3BlQWBlzKEQ/YW5V+fe759hTWQ=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODAyMDEyNSBTYWx0ZWRfX01ErgynVtQNi
+ BktswZU/AIxbenS60UkcI8OKFg+kfHPyp+72QhXrXE3EZvNVGmQscOgivj1b7kgorK8Alo8rxu+
+ YfRT+MeWdH149L1wjHdVl+mqKGIXs9U=
+X-Proofpoint-GUID: 55wJhetzdyrhiP5nbZHgd0NzwI6k_61H
+X-Authority-Analysis: v=2.4 cv=Gu5yPE1C c=1 sm=1 tr=0 ts=6a6f4ec9 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=gEfo2CItAAAA:8 a=D19gQVrFAAAA:8 a=EUspDBNiAAAA:8 a=DArUqyWxf9ZkW7bf0ckA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
- a=sptkURWiP4Gy88Gu7hUp:22 a=W4TVW4IDbPiebHqcZpNg:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=aROEccOD733urgNQ4cUA:9 a=QEXdDO2ut3YA:10
+ a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-ORIG-GUID: 55wJhetzdyrhiP5nbZHgd0NzwI6k_61H
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAyMDEyNSBTYWx0ZWRfX1V4YElg1p2kH
+ RzZRvp7Xvp7L1GWvqd0GH2MyJTCETEL3DObLLZ+OVOMkPgmCIBvjyCNdOYYfx79Y4hlTEv09hRc
+ A+VZVAx9ZsX2FPIiCBG0sGN46arGn3QobZgEOqgTOR0XUvve6ZiSYd2lyRXMqgY92MccgKGuEfQ
+ ro1iLj6W7rqXrlxl8NpIspoGWa92FpXN20+g1+1kp4bc6VIN4/Mr/ntAoLQf1Szwb5xTvxXcZNv
+ Px1uLaHzcUYUFX6jrStt3NYjo1Y1cqui5/jX9Ib4kzgARup1EttZ9r+mA4P8J3usWcM6+wOtgQo
+ CJRL/cgZeQQtNrm8YaGAdBC3eo7x69h3PxnWNtQAVozLfWEv8wMm7SdQfe1cAM1N4o7XeR6OR3C
+ tRrh0z0w+a2Q1LemMhG6rHI/vwTH8mbU1MIo7Qa5+MhOggcpiFlbsrBXbeV/KX5miJgAASj42GD
+ Tfd/RzF9j/Vpq7ltpcA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-02_04,2026-07-30_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 spamscore=0 clxscore=1015 impostorscore=0
- priorityscore=1501 suspectscore=0 adultscore=0 bulkscore=0 malwarescore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608020123
+ impostorscore=0 bulkscore=0 clxscore=1015 phishscore=0 priorityscore=1501
+ lowpriorityscore=0 spamscore=0 malwarescore=0 adultscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608020125
 
-On 8/1/2026 10:48 PM, Loic Poulain wrote:
-> On Fri, Jul 31, 2026 at 9:27 PM Gjorgji Rosikopulos (Consultant)
-> <gjorgji.rosikopulos@oss.qualcomm.com> wrote:
->>
->> Hi Dmitry, Atanas,
->>
->> On 7/30/2026 7:24 PM, Atanas Filipov wrote:
->>> On 7/30/2026 6:39 PM, Dmitry Baryshkov wrote:
->>>> On Thu, Jul 30, 2026 at 06:05:22PM +0300, Atanas Filipov wrote:
->>>>> Add device-tree binding for the Qualcomm JPEG encoder hardware block
->>>>> present in SM8250 (Kona) SoCs.
->>>>>
->>>>> The JPEG encoder is a standalone hardware IP within the camera subsystem
->>>>> that performs JPEG compression in memory-to-memory fashion.  It is
->>>>> separate from the CAMSS ISP pipeline and has its own register space,
->>>>> interrupt, clocks, power domain, IOMMU streams, and interconnect paths.
->>>>>
->>>>> Signed-off-by: Atanas Filipov <atanas.filipov@oss.qualcomm.com>
->>>>> ---
->>>>>    .../bindings/media/qcom,sm8250-jpeg-enc.yaml  | 156 ++++++++++++++++++
->>>>>    1 file changed, 156 insertions(+)
->>>>>    create mode 100644 Documentation/devicetree/bindings/media/qcom,sm8250-jpeg-enc.yaml
->>>>>
->>>>> diff --git a/Documentation/devicetree/bindings/media/qcom,sm8250-jpeg-enc.yaml b/Documentation/devicetree/bindings/media/qcom,sm8250-jpeg-enc.yaml
->>>>> new file mode 100644
->>>>> index 000000000000..70f573100573
->>>>> --- /dev/null
->>>>> +++ b/Documentation/devicetree/bindings/media/qcom,sm8250-jpeg-enc.yaml
->>>>> @@ -0,0 +1,156 @@
->>>>> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
->>>>> +%YAML 1.2
->>>>> +---
->>>>> +$id: http://devicetree.org/schemas/media/qcom,sm8250-jpeg-enc.yaml#
->>>>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
->>>>> +
->>>>> +title: Qualcomm JPEG Encoder
->>>>> +
->>>>> +maintainers:
->>>>> +  - Atanas Filipov <atanas.filipov@oss.qualcomm.com>
->>>>> +
->>>>> +description:
->>>>> +  Qualcomm JPEG Encoder is the JPEG encode hardware present in Qualcomm SoCs.
->>>>> +  The encoder is a standalone hardware IP within the camera subsystem that
->>>>> +  performs JPEG compression in memory-to-memory fashion.
->>>>> +
->>>>> +properties:
->>>>> +  compatible:
->>>>> +    enum:
->>>>> +      - qcom,sm8250-jpeg-enc
->>>>> +
->>>>> +  reg:
->>>>> +    maxItems: 1
->>>>> +
->>>>> +  interrupts:
->>>>> +    maxItems: 1
->>>>> +
->>>>> +  clocks:
->>>>> +    maxItems: 5
->>>>> +
->>>>> +  clock-names:
->>>>> +    items:
->>>>> +      - const: sf_axi
->>>>> +      - const: core_ahb
->>>>> +      - const: cpas_ahb
->>>>> +      - const: cnoc_axi
->>>>> +      - const: jpeg
->>>>> +
->>>>> +  power-domains:
->>>>> +    maxItems: 3
->>>>> +
->>>>> +  power-domain-names:
->>>>> +    items:
->>>>> +      - const: titan_top
->>>>> +      - const: mmcx
->>>>> +      - const: mx
->>>>> +
->>>>> +  interconnects:
->>>>> +    maxItems: 2
->>>>> +
->>>>> +  interconnect-names:
->>>>> +    items:
->>>>> +      - const: cpu-cfg
->>>>> +      - const: sf-mnoc
->>>>> +
->>>>> +  iommus:
->>>>> +    description:
->>>>> +      SMMU stream ID for the JPEG hardware. The stream ID 0x2040 is used
->>>>> +      for the JPEG core engine on SM8250.
->>>>> +    maxItems: 1
->>>>> +
->>>>> +  operating-points-v2: true
->>>>> +
->>>>> +  opp-table:
->>>>> +    type: object
->>>>> +
->>>>> +required:
->>>>> +  - compatible
->>>>> +  - reg
->>>>> +  - clocks
->>>>> +  - clock-names
->>>>> +  - interrupts
->>>>> +  - power-domains
->>>>> +  - power-domain-names
->>>>> +  - interconnects
->>>>> +  - interconnect-names
->>>>> +  - iommus
->>>>> +
->>>>> +additionalProperties: false
->>>>> +
->>>>> +examples:
->>>>> +  - |
->>>>> +    #include <dt-bindings/clock/qcom,camcc-sm8250.h>
->>>>> +    #include <dt-bindings/clock/qcom,gcc-sm8250.h>
->>>>> +    #include <dt-bindings/interconnect/qcom,icc.h>
->>>>> +    #include <dt-bindings/interconnect/qcom,sm8250.h>
->>>>> +    #include <dt-bindings/interrupt-controller/arm-gic.h>
->>>>> +    #include <dt-bindings/power/qcom,rpmhpd.h>
->>>>> +
->>>>> +    jpeg-encoder@ac53000 {
->>>>> +        compatible = "qcom,sm8250-jpeg-enc";
->>>>> +        reg = <0x0ac53000 0x1000>;
->>>>> +
->>>>> +        interrupts = <GIC_SPI 474 IRQ_TYPE_EDGE_RISING>;
->>>>> +
->>>>> +        power-domains = <&camcc TITAN_TOP_GDSC>,
->>>>> +                        <&rpmhpd RPMHPD_MMCX>,
->>>>> +                        <&rpmhpd RPMHPD_MX>;
->>>>> +        power-domain-names = "titan_top", "mmcx", "mx";
->>>>> +
->>>>> +        clocks = <&gcc GCC_CAMERA_SF_AXI_CLK>,
->>>>> +                 <&camcc CAM_CC_CORE_AHB_CLK>,
->>>>> +                 <&camcc CAM_CC_CPAS_AHB_CLK>,
->>>>> +                 <&camcc CAM_CC_CAMNOC_AXI_CLK>,
->>>>> +                 <&camcc CAM_CC_JPEG_CLK>;
->>>>> +        clock-names = "sf_axi",
->>>>> +                      "core_ahb",
->>>>> +                      "cpas_ahb",
->>>>> +                      "cnoc_axi",
->>>>> +                      "jpeg";
->>>>
->>>> What are the pin input names for these clocks on the JPEG side? Can we
->>>> use a better name?
->>
->> The name of the the clock on jpeg side(based on documentation we have) is
->> cam_cc_jpeg_clk, There was comment from Krzysztof "https://lkml.org/lkml/2026/5/15/1112"
->> to drop cam and clk, so it remains cc_jpeg or only jpeg.
->>
->> As i can see in ope patches ope_clk is named as "core", do we have some general
->> guidance how to name those clocks? or if you have any preference or proposal it will
->> be included in next patchset.
-> 
-> In ope series I named the clocks based on OPE block PoV ant its
-> function, so usually the main function clock (the one you named jpeg
-> above) is the 'core' clock, the AHB is usually for clocking the
-> 'config' bus and the axi one is usually for the actual 'data' bus.
-> IMO, it's clearer like that.
-> 
+Use IRQ_TYPE_LEVEL_MASK and IRQ_TYPE_EDGE_BOTH instead of open-coded
+trigger type combinations in irqchip callbacks.
 
-Thank you for the feedback. I'll make the necessary changes in next version.
+No functional change intended.
 
->>>>
->>>
->>> In my opinion, there is no such thing as a better name; the only
->>> important thing is that it matches the HW documentation. As can be seen
->>> from the clock names in the FW shown above. So, could you be more
->>> specific about which names you would like to see used here?
->>>
->>> Regards,
->>> Atanas
->>>
->>>>> +
->>>>> +        interconnects = <&gem_noc MASTER_AMPSS_M0 QCOM_ICC_TAG_ACTIVE_ONLY
->>>>> +                         &config_noc SLAVE_CAMERA_CFG QCOM_ICC_TAG_ACTIVE_ONLY>,
->>>>> +                        <&mmss_noc MASTER_CAMNOC_SF QCOM_ICC_TAG_ALWAYS
->>>>> +                         &mc_virt SLAVE_EBI_CH0 QCOM_ICC_TAG_ALWAYS>;
->>>>> +        interconnect-names = "cpu-cfg",
->>>>> +                             "sf-mnoc";
->>>>> +
->>>>> +        iommus = <&apps_smmu 0x2040 0x400>;
->>>>> +
->>>>> +        operating-points-v2 = <&jpeg_opp_table>;
->>>>> +
->>>>> +        jpeg_opp_table: opp-table {
->>>>> +            compatible = "operating-points-v2";
->>>>> +
->>>>> +            opp-100000000 {
->>>>> +                opp-hz = /bits/ 64 <400000000>,
->>>>> +                         /bits/ 64 <100000000>;
->>>>
->>>> So, you've identified the issue earlier. The shared clocks need to be
->>>> scaled, taking all users in account. Please come up with the solution
->>>> too.
->>
->> One proposal is to have camnoc icc clock provider, there is implementation
->> available and it will be posted, What is the preference to have different
->> patchset or to have camnoc icc provider as part of this patchset new version?
->>
->> Regards,
->> ~Gjorgji
->>
->>
->>
->>
+Assisted-by: Claude:claude-sonnet-5
+Signed-off-by: Maulik Shah <maulik.shah@oss.qualcomm.com>
+---
+ drivers/pinctrl/actions/pinctrl-owl.c     | 2 +-
+ drivers/pinctrl/airoha/pinctrl-airoha.c   | 2 +-
+ drivers/pinctrl/bcm/pinctrl-nsp-gpio.c    | 4 ++--
+ drivers/pinctrl/mediatek/mtk-eint.c       | 2 +-
+ drivers/pinctrl/nuvoton/pinctrl-npcm7xx.c | 5 ++---
+ drivers/pinctrl/pinctrl-ocelot.c          | 2 +-
+ drivers/pinctrl/pinctrl-sx150x.c          | 2 +-
+ drivers/pinctrl/qcom/pinctrl-msm.c        | 4 ++--
+ drivers/pinctrl/spear/pinctrl-plgpio.c    | 2 +-
+ 9 files changed, 12 insertions(+), 13 deletions(-)
+
+diff --git a/drivers/pinctrl/actions/pinctrl-owl.c b/drivers/pinctrl/actions/pinctrl-owl.c
+index 1f0ef4727ba7..9f5637756bd3 100644
+--- a/drivers/pinctrl/actions/pinctrl-owl.c
++++ b/drivers/pinctrl/actions/pinctrl-owl.c
+@@ -824,7 +824,7 @@ static int owl_gpio_irq_set_type(struct irq_data *data, unsigned int type)
+ 	struct gpio_chip *gc = irq_data_get_irq_chip_data(data);
+ 	struct owl_pinctrl *pctrl = gpiochip_get_data(gc);
+ 
+-	if (type & (IRQ_TYPE_LEVEL_LOW | IRQ_TYPE_LEVEL_HIGH))
++	if (type & IRQ_TYPE_LEVEL_MASK)
+ 		irq_set_handler_locked(data, handle_level_irq);
+ 	else
+ 		irq_set_handler_locked(data, handle_edge_irq);
+diff --git a/drivers/pinctrl/airoha/pinctrl-airoha.c b/drivers/pinctrl/airoha/pinctrl-airoha.c
+index abfb018f207e..90372827639d 100644
+--- a/drivers/pinctrl/airoha/pinctrl-airoha.c
++++ b/drivers/pinctrl/airoha/pinctrl-airoha.c
+@@ -2435,7 +2435,7 @@ static int airoha_irq_type(struct irq_data *data, unsigned int type)
+ 		if (gpiochip->irq_type[data->hwirq])
+ 			return 0;
+ 
+-		type = IRQ_TYPE_EDGE_RISING | IRQ_TYPE_EDGE_FALLING;
++		type = IRQ_TYPE_EDGE_BOTH;
+ 	}
+ 	gpiochip->irq_type[data->hwirq] = type & IRQ_TYPE_SENSE_MASK;
+ 
+diff --git a/drivers/pinctrl/bcm/pinctrl-nsp-gpio.c b/drivers/pinctrl/bcm/pinctrl-nsp-gpio.c
+index 1fbb101386a3..83fcc80d5967 100644
+--- a/drivers/pinctrl/bcm/pinctrl-nsp-gpio.c
++++ b/drivers/pinctrl/bcm/pinctrl-nsp-gpio.c
+@@ -159,7 +159,7 @@ static void nsp_gpio_irq_ack(struct irq_data *d)
+ 	u32 trigger_type;
+ 
+ 	trigger_type = irq_get_trigger_type(d->irq);
+-	if (trigger_type & (IRQ_TYPE_EDGE_FALLING | IRQ_TYPE_EDGE_RISING))
++	if (trigger_type & IRQ_TYPE_EDGE_BOTH)
+ 		writel(val, chip->base + NSP_GPIO_EVENT);
+ }
+ 
+@@ -177,7 +177,7 @@ static void nsp_gpio_irq_set_mask(struct irq_data *d, bool unmask)
+ 	u32 trigger_type;
+ 
+ 	trigger_type = irq_get_trigger_type(d->irq);
+-	if (trigger_type & (IRQ_TYPE_EDGE_FALLING | IRQ_TYPE_EDGE_RISING))
++	if (trigger_type & IRQ_TYPE_EDGE_BOTH)
+ 		nsp_set_bit(chip, REG, NSP_GPIO_EVENT_INT_MASK, gpio, unmask);
+ 	else
+ 		nsp_set_bit(chip, REG, NSP_GPIO_INT_MASK, gpio, unmask);
+diff --git a/drivers/pinctrl/mediatek/mtk-eint.c b/drivers/pinctrl/mediatek/mtk-eint.c
+index 8b022545a3e9..827231dc0d24 100644
+--- a/drivers/pinctrl/mediatek/mtk-eint.c
++++ b/drivers/pinctrl/mediatek/mtk-eint.c
+@@ -216,7 +216,7 @@ static int mtk_eint_set_type(struct irq_data *d, unsigned int type)
+ 		writel(mask, reg);
+ 	}
+ 
+-	if (type & (IRQ_TYPE_EDGE_RISING | IRQ_TYPE_EDGE_FALLING)) {
++	if (type & IRQ_TYPE_EDGE_BOTH) {
+ 		reg = mtk_eint_get_offset(eint, d->hwirq, eint->regs->sens_clr);
+ 		writel(mask, reg);
+ 	} else {
+diff --git a/drivers/pinctrl/nuvoton/pinctrl-npcm7xx.c b/drivers/pinctrl/nuvoton/pinctrl-npcm7xx.c
+index 0df749cbcba8..e051ff141d6c 100644
+--- a/drivers/pinctrl/nuvoton/pinctrl-npcm7xx.c
++++ b/drivers/pinctrl/nuvoton/pinctrl-npcm7xx.c
+@@ -259,11 +259,10 @@ static int npcmgpio_set_irq_type(struct irq_data *d, unsigned int type)
+ 		return -EINVAL;
+ 	}
+ 
+-	if (type & (IRQ_TYPE_LEVEL_HIGH | IRQ_TYPE_LEVEL_LOW)) {
++	if (type & IRQ_TYPE_LEVEL_MASK) {
+ 		npcm_gpio_clr(&bank->chip, bank->base + NPCM7XX_GP_N_EVTYP, gpio);
+ 		irq_set_handler_locked(d, handle_level_irq);
+-	} else if (type & (IRQ_TYPE_EDGE_BOTH | IRQ_TYPE_EDGE_RISING
+-			   | IRQ_TYPE_EDGE_FALLING)) {
++	} else if (type & IRQ_TYPE_EDGE_BOTH) {
+ 		npcm_gpio_set(&bank->chip, bank->base + NPCM7XX_GP_N_EVTYP, gpio);
+ 		irq_set_handler_locked(d, handle_edge_irq);
+ 	}
+diff --git a/drivers/pinctrl/pinctrl-ocelot.c b/drivers/pinctrl/pinctrl-ocelot.c
+index 0fe0527863b8..58d3cde9f964 100644
+--- a/drivers/pinctrl/pinctrl-ocelot.c
++++ b/drivers/pinctrl/pinctrl-ocelot.c
+@@ -2317,7 +2317,7 @@ static const struct irq_chip ocelot_irqchip = {
+ 
+ static int ocelot_irq_set_type(struct irq_data *data, unsigned int type)
+ {
+-	if (type & (IRQ_TYPE_LEVEL_HIGH | IRQ_TYPE_LEVEL_LOW))
++	if (type & IRQ_TYPE_LEVEL_MASK)
+ 		irq_set_chip_handler_name_locked(data, &ocelot_level_irqchip,
+ 						 handle_level_irq, NULL);
+ 	if (type & IRQ_TYPE_EDGE_BOTH)
+diff --git a/drivers/pinctrl/pinctrl-sx150x.c b/drivers/pinctrl/pinctrl-sx150x.c
+index 89fdfa96843f..2dd1f220bff1 100644
+--- a/drivers/pinctrl/pinctrl-sx150x.c
++++ b/drivers/pinctrl/pinctrl-sx150x.c
+@@ -525,7 +525,7 @@ static int sx150x_irq_set_type(struct irq_data *d, unsigned int flow_type)
+ 	struct sx150x_pinctrl *pctl = gpiochip_get_data(gc);
+ 	unsigned int n, val = 0;
+ 
+-	if (flow_type & (IRQ_TYPE_LEVEL_HIGH | IRQ_TYPE_LEVEL_LOW))
++	if (flow_type & IRQ_TYPE_LEVEL_MASK)
+ 		return -EINVAL;
+ 
+ 	n = irqd_to_hwirq(d);
+diff --git a/drivers/pinctrl/qcom/pinctrl-msm.c b/drivers/pinctrl/qcom/pinctrl-msm.c
+index 641113831a7b..27f06bbc113c 100644
+--- a/drivers/pinctrl/qcom/pinctrl-msm.c
++++ b/drivers/pinctrl/qcom/pinctrl-msm.c
+@@ -1191,9 +1191,9 @@ static int msm_gpio_irq_set_type(struct irq_data *d, unsigned int type)
+ 
+ 	raw_spin_unlock_irqrestore(&pctrl->lock, flags);
+ 
+-	if (type & (IRQ_TYPE_LEVEL_LOW | IRQ_TYPE_LEVEL_HIGH))
++	if (type & IRQ_TYPE_LEVEL_MASK)
+ 		irq_set_handler_locked(d, handle_level_irq);
+-	else if (type & (IRQ_TYPE_EDGE_FALLING | IRQ_TYPE_EDGE_RISING))
++	else if (type & IRQ_TYPE_EDGE_BOTH)
+ 		irq_set_handler_locked(d, handle_edge_irq);
+ 
+ 	return 0;
+diff --git a/drivers/pinctrl/spear/pinctrl-plgpio.c b/drivers/pinctrl/spear/pinctrl-plgpio.c
+index 1ec22010a3f9..5fcbea32089d 100644
+--- a/drivers/pinctrl/spear/pinctrl-plgpio.c
++++ b/drivers/pinctrl/spear/pinctrl-plgpio.c
+@@ -339,7 +339,7 @@ static int plgpio_irq_set_type(struct irq_data *d, unsigned trigger)
+ 	if (plgpio->regs.eit == -1)
+ 		supported_type = IRQ_TYPE_LEVEL_HIGH;
+ 	else
+-		supported_type = IRQ_TYPE_EDGE_RISING | IRQ_TYPE_EDGE_FALLING;
++		supported_type = IRQ_TYPE_EDGE_BOTH;
+ 
+ 	if (!(trigger & supported_type))
+ 		return -EINVAL;
+
+---
+base-commit: 415606a7be939835db9b0d6b711887586646346d
+change-id: 20260802-b4b4-irq-trigger-mask-pinctrl-359c48cb413b
+
+Best regards,
+--  
+Maulik Shah <maulik.shah@oss.qualcomm.com>
 
