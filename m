@@ -1,172 +1,128 @@
-Received: from mail-vs1-f48.google.com (mail-vs1-f48.google.com [209.85.217.48])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7689D396B6F
-	for <linux-arm-msm@vger.kernel.org>; Sun,  2 Aug 2026 09:42:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.217.48
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785663776; cv=pass; b=c9TTjA0B9fxwOnBb2NsiwGqV5J7z4TCROMognpoWbaQBl9iEhLX1OLID/706N8uTYTbb1pUTElPuwfGL7W92V0K0o/bBTHlfzdtcdz+r9/UVDCQ4Eob1pdcBsXk5IyQGG113buMsii7w4/RTL/k32wSt5z0ayaV/UE+XtVQFApo=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785663776; c=relaxed/simple;
-	bh=dJOBLOQUqN6A2keWqFB+qT5VTZMw6IdkXrYBZAaa2+I=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=YtoDbsF0mUBg1N48rThjV3ZFqcxHeH3zXPHk+hNZkdayZCc9nJEtnR6TY8HcS9tbm3AOCOknXixmhHoHIv/L3pSI7j/+onP50WJkeL7fZv7TRW4RDQkyRPNjfdpMjhC5D1xrWrACS/OGF14EPHbRhMrFhjBwEVpu54rqJdkOTvo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=IejQJV7R; arc=pass smtp.client-ip=209.85.217.48
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C25733938C;
+	Sun,  2 Aug 2026 12:29:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785673760; cv=none; b=qO/rcRAFnXWUWQa341URwKoj+uLscP9GrkSPKxZkoNdwcmCN8pkW95QJdsliHDIbo0P3HGI7oI04CspwLrYFILyJ22H4SgRPshtdSN+8kcwkiGC09DKA2Fb+earvHYjBTHHZBGm9whHuiv5uGKdmGySmAQAx99ydDsYeP2ipHp4=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785673760; c=relaxed/simple;
+	bh=Oc+Pf6P+wet7UHezAuJRNaKASH+UQW2bFsWGp3UkczE=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=mf6Fm0hvQAAJI/h04j0SzTVXjWRPswwTU27YOyhlujQ7ZrDNjgplkL+GDpzp9b6k+m4xH/0IQuJl8+yhfwf4G8iWpdan3u1w46NCn+rwFND3hL21/ucXdoIw6hOSUu1VmJTdFK211Wbo9aCInysHqXes8SmoV6c62l1WL3IOzWc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=H2OmZJER; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="IejQJV7R"
-Received: by mail-vs1-f48.google.com with SMTP id ada2fe7eead31-739906c1b32so66572137.3
-        for <linux-arm-msm@vger.kernel.org>; Sun, 02 Aug 2026 02:42:53 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1785663772; cv=none;
-        d=google.com; s=arc-20260327;
-        b=X+o+POHsjraiRZC4hrSvvGSJL9yZWQvnPOb7PfnM4GJqElPww0+a/EhpbRmRepCMji
-         H0Lzk7hAEXsPv6CM/1xrrlHtPKIF7Mfyk2wsAWa7qyGh8oYr3mmxEoOFAmc/wSLpQ5FX
-         prNOX+Y8GiP+IyJc2c7OLEB6rBQlk2fSKsT9c1yAjnyFBevLBZE0H83CEgqvJWtUhyh7
-         Ltlyt4df2veJsxhpW2KeUZEjoj/yZrhxBbZ2SK+ajLl9mu/+jmA/OARoMeInaCC8S0kG
-         Pqh60hDSMjQjnLulkSeLk9GhCpy1GPNCRP2lIbMJezDQAhTFb+DUB/HqPEfCkOf3ItS4
-         cr1A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=Pri826G5hCYV5/lZ6dHjcACUrXFqOhWQRiRJJshfs9c=;
-        fh=H4JDzx39xXg9obANcMP1Duc7BIY9fT9Vje+k23UKXYI=;
-        b=enBizCpovUJfQyQM1W7bDfbULpYLh26RSJPw2eWNxuQkYxz9zgGQvveVHgD0GjByyY
-         yAkJ4nYgdEfrV1y6cu5dPg3lyzaz44YimdTvhMdO//vkf9C+musyXMEMWilheg4NVbAe
-         ickOAKPxmx1mgFq82iS89oyQdkaSSey3Vr9JcGMhKVQ2vudoiqT4HWdC0vxoFYJw+aHK
-         VCbTfzBn/BIG8MHoIXKuf4R3Syh6i4DhsLOTA3bpebRr32b+W0Pr+mmlSfoMenS0JsPq
-         Ti3b5nyqIQAFt9COARDp/YYg3Zfw5jt2dr/i7ZJGCL2rvrUZMcYX7bKg6mNJkZ8ee/QC
-         W/gQ==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785663772; x=1786268572; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Pri826G5hCYV5/lZ6dHjcACUrXFqOhWQRiRJJshfs9c=;
-        b=IejQJV7Rj0U83T9r4pxml+OeFbWRiUJJMSxtZgIzGbfu4dqK1j4nHrgStYziTiEKMq
-         BCcTmEzxdXFQhuN8mp0bpOQyWAOahx+esD+ekEmMkdf3FfAR+ABG8QBFVyUfG8+IFHAe
-         rTDVhgbyQZrzMoQ1Odrn7KQGcQnKT9ksZunlHxcOs/R3h7KtgBPrqbfmrRC+Q8yiINQ6
-         CZDkJM8+XVFr+tl4zUZ8fBJ8L8BgaNvNlelCrXoJSZdXfwhe0kgbh0KlbG1eVmx1PHRv
-         KrodULNRQpn6O8/h1sZctKpi7+b7/dCUUjuXQ0/ZPxYZRH+dnGqgrgujW2P3r4Z5yW7w
-         l/4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785663772; x=1786268572;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Pri826G5hCYV5/lZ6dHjcACUrXFqOhWQRiRJJshfs9c=;
-        b=qYitCqtZezqRIcKG9vaIAXebVeqLuH0HilIwBBlwchmF9/kowvox/OpMoX8rctWFmm
-         qMHADCRhy79P3BQuGiJ3iPO4Tx5nrSLc8Inji565CH73GfvDQFinYfUYnEm4stfveDrc
-         nTpwnDFzRlqjKnOMdrAL0eR59+ikLa7lBnB9CBtIrDgbGkKzzLpweSPSZE0HsD0uXvvm
-         4A81UVCGieFkJtBZ+wpF2P8zD1C9emdGxardGc+QFJCaUdGThJ7dIxf4N6nn1Tau23nV
-         agy+AAvBbXXuHlnu1G5hOGJDLGGiBTwFVBy2yO6nxxxFTTZV6316sybK6agPiGc9alVl
-         JQbQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrT7oS/lWmivLHqMHPTvf+8zJZOTEPAr6wCnNbYWFxFr9yhZr80WK3irCysqPlxKkd9vfaW4gS6Wt2h02B5@vger.kernel.org
-X-Gm-Message-State: AOJu0YzXJlPJK1QkDJOKz32oh9BdRxdFoKvb9rlUk2Zy1W2LG/A2jSGN
-	ORa6NlSZ5A8VUyclt4ZEdnuhABDjPZ0Dn0iI5zOCEV6taWzI31a2A6+4eVw9Pr7O0leSyoCUxw1
-	1EnPX349fs8UDCcSR3V1w0Q3hel7azLI=
-X-Gm-Gg: AR+sD128BpHgkc2ll2iIk6H4cRlFX70WrZjXi+tgqcYc7oY7dF44pQ+/jSO4Ayhcse1
-	Vxvn/TOduGFkY5I4fTmO9b6hQWWeYhF7XDGty8zAVYXutNHQXvJY0uDfv8mN9yv7VsFzbgUoUeh
-	JbOz8bjR/xWlwnJUQTvZQx725u2h+WxAYrMxLwBH3VJ896Ij+qlbYCKXOTnOkvKo1vJzBmTXIHQ
-	Pgm8derj+6L1aegsIdbHTMS2OXf33p/ob1mD5BPylQ1lZXd2UGXT+d/vtpnFWiz7ykgK2tH5J9W
-	sjEIS1AzNTRaz0Adq6jJAJayIQ8zhBXKEjdlYe7mstnMx/4=
-X-Received: by 2002:a05:6102:f8c:b0:74c:551:54d2 with SMTP id
- ada2fe7eead31-75b2507b572mr1757974137.4.1785663772295; Sun, 02 Aug 2026
- 02:42:52 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="H2OmZJER"
+Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id C46541F000E9;
+	Sun,  2 Aug 2026 12:29:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785673758;
+	bh=SHSGsM0vu6t3zdEJHGFOqvnDDQ/hs9cDuA8s50LeKfA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=H2OmZJERCYxtrOOph6nrStzZdf9Px2+Qu52EKRUMyRnmj4QfSbClOGXvOwLQl/4aA
+	 QXrUGppcGBhRWhY9tW992RTQ83AkGGQJozNyGViEgllW7DJ8ayJ1pfg/mDZfKLYM+O
+	 iaCJu9ozHHoC9OJbqbp8GE2FXVc48vGCq9wTtZKsOYsPdu40/jveDStEa4FnAS8dvh
+	 eBwmazAysE+S1N5/1Od2as8vkHZiBiRzJzW/3NReG/Vr6BQSlyRO9SCgOFK91LoO0Z
+	 4Wat2UmYU94tkzX5l86TF3Srukt7Yi+4nQ/P5F5pqFRu3Ol3LaLh9TJ1K2EelnS/lt
+	 PpuVHx/cRwcTg==
+Date: Sun, 2 Aug 2026 14:29:15 +0200
+From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <ukleinek@kernel.org>
+To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Cc: Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Mark Rutland <mark.rutland@arm.com>, Lorenzo Pieralisi <lpieralisi@kernel.org>, 
+	Suzuki K Poulose <suzuki.poulose@arm.com>, Mike Leach <mike.leach@arm.com>, 
+	James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>, Damien Le Moal <dlemoal@kernel.org>, 
+	Niklas Cassel <cassel@kernel.org>, Jyri Sarha <jyri.sarha@iki.fi>, 
+	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, David Airlie <airlied@gmail.com>, 
+	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+	Matthias Brugger <matthias.bgg@gmail.com>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Linus Walleij <linusw@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Patrice Chotard <patrice.chotard@foss.st.com>, 
+	Andi Shyti <andi.shyti@kernel.org>, Jassi Brar <jassisinghbrar@gmail.com>, 
+	Lee Jones <lee@kernel.org>, Johannes Berg <johannes@sipsolutions.net>, 
+	Jeff Johnson <jjohnson@kernel.org>, Viresh Kumar <vireshk@kernel.org>, Nishanth Menon <nm@ti.com>, 
+	Stephen Boyd <sboyd@kernel.org>, Yangbo Lu <yangbo.lu@nxp.com>, Paul Walmsley <pjw@kernel.org>, 
+	Samuel Holland <samuel.holland@sifive.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Richard Cochran <richardcochran@gmail.com>, Jens Wiklander <jenswi@kernel.org>, 
+	Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>, YC Hung <yc.hung@mediatek.com>, 
+	Svyatoslav Ryhel <clamor95@gmail.com>, Sean Wang <sean.wang@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
+	Peter Ujfalusi <peter.ujfalusi@gmail.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, coresight@lists.linaro.org, linux-arm-msm@vger.kernel.org, 
+	linux-ide@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+	linux-mediatek@lists.infradead.org, linux-gpio@vger.kernel.org, linux-i2c@vger.kernel.org, 
+	mfd@lists.linux.dev, linux-wireless@vger.kernel.org, ath10k@lists.infradead.org, 
+	linux-pm@vger.kernel.org, netdev@vger.kernel.org, linux-pwm@vger.kernel.org, 
+	linux-riscv@lists.infradead.org, linux-usb@vger.kernel.org
+Subject: Re: [PATCH] dt-bindings: Correct white-space style
+Message-ID: <am83ac93gyowUgSQ@monoceros>
+References: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260710194638.1502-1-saileshnandanavanam@gmail.com>
- <bc13f78b-287c-4832-b2f1-a68e7b35b57d@oss.qualcomm.com> <CAF+TLO0F9jQ0+pPei7iFDqcC-gKd44gc5SXa-o_dBKzNsHKU=g@mail.gmail.com>
-In-Reply-To: <CAF+TLO0F9jQ0+pPei7iFDqcC-gKd44gc5SXa-o_dBKzNsHKU=g@mail.gmail.com>
-From: Sailesh Nandanavanam <saileshnandanavanam@gmail.com>
-Date: Sun, 2 Aug 2026 15:12:57 +0530
-X-Gm-Features: AUfX_myUV3Xx5wjT5xpW_9kPbTIvUToAVZXKQdsgk1k18pyiY3j3cgrBd5FxHu8
-Message-ID: <CAF+TLO0S-Sp9PWKhvGeRfnxMaV7ZH=Ncr-p4NAu1pvE8odLTjA@mail.gmail.com>
-Subject: Re: [PATCH] remoteproc: qcom_q6v5_mss: Fix off-by-one error in
- regulator error cleanup
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: andersson@kernel.org, mathieu.poirier@linaro.org, 
-	quic_akdwived@quicinc.com, linux-arm-msm@vger.kernel.org, 
-	linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	stable@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="ynduf7ixmtnk7fvw"
+Content-Disposition: inline
+In-Reply-To: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
+
+
+--ynduf7ixmtnk7fvw
+Content-Type: text/plain; protected-headers=v1; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH] dt-bindings: Correct white-space style
+MIME-Version: 1.0
 
-Hi Konrad,
+On Sat, Aug 01, 2026 at 09:56:14PM +0200, Krzysztof Kozlowski wrote:
+> Correct a few white-space issues, like double space after '=3D' or before
+> bracket '{' characters, which will be flagged by dt-check-style.  No
+> functional changes.
+>=20
+> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> [...]
+> diff --git a/Documentation/devicetree/bindings/pwm/pwm-sifive.yaml b/Docu=
+mentation/devicetree/bindings/pwm/pwm-sifive.yaml
+> index bae993128981..40397bdf2d69 100644
+> --- a/Documentation/devicetree/bindings/pwm/pwm-sifive.yaml
+> +++ b/Documentation/devicetree/bindings/pwm/pwm-sifive.yaml
+> @@ -62,7 +62,7 @@ additionalProperties: false
+> =20
+>  examples:
+>    - |
+> -    pwm:  pwm@10020000 {
+> +    pwm@10020000 {
+>        compatible =3D "sifive,fu540-c000-pwm", "sifive,pwm0";
+>        reg =3D <0x10020000 0x1000>;
+>        clocks =3D <&tlclk>;
 
-Just following up on this - wanted to check if you had a chance to
-look at my question above. Happy to send a v2 as soon as I know
-whether the concern is about correctness or the label structure.
+I'm ok with this change (as &pwm is unused in the example), I also don't
+care much about this not being a whitespace only change and thus not
+really matching the commit log.
 
-Thanks,
-Sailesh Nandanavanam
+Acked-by: Uwe Kleine-K=F6nig <ukleinek@kernel.org> # for Documentation/devi=
+cetree/bindings/pwm
 
-On Sat, Jul 18, 2026 at 1:27=E2=80=AFAM Sailesh Nandanavanam
-<saileshnandanavanam@gmail.com> wrote:
->
-> On 7/17/26 3:01 PM, Konrad Dybcio wrote:
-> > The first two labels only unwind a single regulator
->
-> Thanks for taking a look. Could you clarify whether this is a
-> correctness concern (e.g. the fallthrough from err_enable/err_set_load
-> into err_set_voltage not doing what you'd expect), or more a
-> structural/style preference (e.g. avoiding three chained labels in
-> favor of a different approach)? Happy to send a v2 once I understand
-> what you'd like changed.
->
-> Thanks,
-> Sailesh
->
->
-> On Fri, Jul 17, 2026 at 3:01=E2=80=AFPM Konrad Dybcio
-> <konrad.dybcio@oss.qualcomm.com> wrote:
-> >
-> > On 7/10/26 9:46 PM, Sailesh Nandanavanam wrote:
-> > > In q6v5_regulator_enable(), when any operation fails for regulator at
-> > > index 'i', the error cleanup path unconditionally calls
-> > > regulator_disable() starting from index 'i'. However, regulator 'i'
-> > > was never successfully enabled at this point, resulting in an
-> > > unbalanced disable.
-> > >
-> > > There are three distinct failure points:
-> > > - regulator_set_voltage() failure: voltage was never set, load was
-> > > never set, regulator was never enabled.
-> > > - regulator_set_load() failure: voltage was set, but regulator was
-> > > never enabled.
-> > > - regulator_enable() failure: voltage and load were set, but
-> > > regulator was never enabled.
-> > >
-> > > Fix this by introducing three separate error labels to handle each
-> > > failure point correctly. For the failing regulator at index 'i',
-> > > only reset the resources that were actually configured, without
-> > > calling regulator_disable(). Then roll back all previously enabled
-> > > regulators using 'i--' in the for loop initializer to skip the
-> > > never-enabled regulator.
-> > >
-> > > Fixes: 19f902b53b47 ("remoteproc: qcom: Initialize and enable proxy a=
-nd active regulators.")
-> > > Cc: stable@vger.kernel.org
-> > > Signed-off-by: Sailesh Nandanavanam <saileshnandanavanam@gmail.com>
-> > > ---
-> >
-> > [...]
-> >
-> > > -err:
-> > > -     for (; i >=3D 0; i--) {
-> > > +err_enable:
-> > > +     if (regs[i].uA > 0)
-> > > +             regulator_set_load(regs[i].reg, 0);
-> > > +err_set_load:
-> > > +     if (regs[i].uV > 0)
-> > > +             regulator_set_voltage(regs[i].reg, 0, INT_MAX);
-> >
-> > The first two labels only unwind a single regulator
-> >
-> > Konrad
+Best regards
+Uwe
+
+--ynduf7ixmtnk7fvw
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmpvOBgACgkQj4D7WH0S
+/k5+WQf8CivH89faKCp48CBlupnrahHpA3qdaBm48BnUdJduo4BaximYlTqDGSxO
+NXL529LwysgvuiHkOxrg9bUdk/Lx68V5xZboTmO5BFwMGnqiXaazc9iWfyHrau7M
+YVderOTLj5yWcB/0FkMdHb59nmaH6H3DTA7lTyzhEH2rK1e56Xe0bWxXn5wPx//K
+Fg6BzFpjoO28RLKp88OCsgzFiu3Y6yaJNenCx2MeV0T15/L721ZmHJDKsQqu5iDJ
+iXzPSntzwtR7HAs/3NUW1jSaAV2Jq41LUqlqjX4CeZDwSDaX6iquowVSJDhJvYuK
+ZtKTkgqchOdbv2qhQEqje3UkwK9pWQ==
+=9CRH
+-----END PGP SIGNATURE-----
+
+--ynduf7ixmtnk7fvw--
