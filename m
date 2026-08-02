@@ -1,78 +1,76 @@
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C60B4331EC2
-	for <linux-arm-msm@vger.kernel.org>; Sun,  2 Aug 2026 22:17:29 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E55E25B090
+	for <linux-arm-msm@vger.kernel.org>; Sun,  2 Aug 2026 22:20:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785709051; cv=none; b=izeQ7qcHF339eBAq2tAlroiXQyul8a5iODL1XWZkkKGjGO0Bz4GU+DdElnQfveOs7wSuCKN79dmkU4QjQIbYcypLvdnVNji1jvMWlB0PepMBGBpsaPpBXDvkailCQ/moZhldnxXQOjjjzbet1OcMQjPZr0/FlnYC5PlX34GURQc=
+	t=1785709246; cv=none; b=gWOFO+SVn8T0ege9vG/N+KMXkcFnx28pHcvyNatSidWfDB+6xshRg9bWyv+r5FfJQ2XHEn9pIX7/Wo0N3cqSGk/IwXLcikbvRjHIrAO4dstvnobFT8boEVNwvlqkPEDJizCHA/vuN4gR6Ve99wHgmwG7wRYAVTF7rbqI+aAm804=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785709051; c=relaxed/simple;
-	bh=T8GIVGVx3IVGy3cz7RX/iIVlyqRH0fdXuqZLWkXg95I=;
+	s=arc-20240116; t=1785709246; c=relaxed/simple;
+	bh=K/2jAp6khRcklPkNtuC/joaYI5lCI1uQRDZekKuvXIc=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Y5qKK8cJBc9vnnvjF/w39yoqBm4VaEw9H63GCLJHn8FPALNvJ8DG0m/BrEwH2NB33IEgKpftc9SWLPXEzGJUjvASpVuooUk967n/f8t1vjBUf0yFvtWLy7LYQ/RcUbEaV32t/tdnObQVdIJZ6vJ5K9tWFIpU+OeBBA4mkJ3X91I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=l30D97X0; arc=none smtp.client-ip=209.85.221.53
+	 Content-Type:Content-Disposition:In-Reply-To; b=E2a6zhLs6RqI0Hzshpuesls8ZF8xo42dISs5VTc8NYDRNMCyjbj9u30Ewp0CT3/G6/8dkY0VTDPkEjeiK9J3Ty/TzqJjMeIi7RcOVgGeO6T7wPlqirs2dsaqj+Ww9wAWzmLNQsm8F0pZJUA9LjqdWJpbcTnQQDHJyTRkZQbBoBA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=KucLgUYr; arc=none smtp.client-ip=209.85.128.48
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="l30D97X0"
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-47f7027ca11so1682612f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Sun, 02 Aug 2026 15:17:29 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="KucLgUYr"
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-495590dde14so14307725e9.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 02 Aug 2026 15:20:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1785709048; x=1786313848; darn=vger.kernel.org;
+        d=baylibre.com; s=google; t=1785709244; x=1786314044; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=6bsPGvzNC3Iop4WsfghniduLra8GHqGeExlE9Ii45fI=;
-        b=l30D97X0haxplDJA1LQczHII77xXxIut2oUbt5aPYMTZ+cNYgj5AD3f6h+CjF2kS9M
-         ME5VilM82USaF0Kc7kgaPRVwy+IhJgbLylvhiBu3k7s5SQss20MZqTGXwIcsKNrtfe9r
-         tOfESoOpFErqibVvLhQZQi+5gWmFpA3roEh1D4kCxlk38fvV5zXevDQiPI+i4dCxTCRh
-         +s97HbuKcFi3JLXCeVDWyNsYtLc8Y1kS6IBOX2ucWxzuvw0Bi5YYR+yYf2hYvOXZXjqn
-         LfMe0R3KlIVeilGv2nFVxr3JF4IOapSkEL4VuIt2vAeo0WDpjEAKKQ0SAb9hqpf899bx
-         uiJQ==
+        bh=i9RUjiVyXXCN2eHfX1I53hQWCYFwzgd7w4b5P9lpT/E=;
+        b=KucLgUYrXLYkqFnnrB+OswFPm43aE4h+rQLBGHyCrPaPHwHsOg0wXRAX2KQJrPx3h+
+         EGAv8BsR0jrLauQPLWS1a0aaETpcngmntxISpqgHs0Cc7q/9ysdMNtzxqp0pnbrd02ct
+         ON34Lyg/Vc9ZJc+PkqeucW5X3bXGI/L5Ma4tdm9jlQrvvgDXTuVCoxZAZHLs1XKnx6UX
+         YAmNueUDeTPOBOkv8IqfCznAn/ncOvQOwC63Ylzc/7CwN/toh1OIrTntYZ0osH3BpGXa
+         wdLuDJg44HljRBy3GWId3xSRUDjM7JMnm1pr7ZBiRSKUgsvxgQTKz5dQBVrl2yD6+4OY
+         wv7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785709048; x=1786313848;
+        d=1e100.net; s=20251104; t=1785709244; x=1786314044;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=6bsPGvzNC3Iop4WsfghniduLra8GHqGeExlE9Ii45fI=;
-        b=iyeuG7hQ9m/511hn+8nHTnokwQWMIBYTwRkdVfrkdImgs+tSxxGbIRLhK3Tz0wyBqq
-         dZ1QxgpqtkzAhSjmoNSt+Ozyf92/tZi92O3q7E5kV9Si+tzdbSostV8ZydYa1zlVU90C
-         rod3wTFzpUic4Ka+Q+EGD3f37AG9TeuPGwiBW1QYMaQyncAAet+pM1WWzo9uWgWv3Qsp
-         +Uw5/PeKpOJ4VKfUqk9xoEhBLp4+ASdURmvEJozhGCHxMlu/VjcIppBzGmigzYmpzJhx
-         mE3BGm802TtBpTmAufOisXu8sCx4pGfE4D341DITiS5uHf9v10jdhfpkwkyfhDtjYT3/
-         cb1A==
-X-Forwarded-Encrypted: i=1; AHgh+RqlNIvaPRrFFNLRDcnbSsA/usqdxGseA5Ga30arN5zEE5cDuz63J5bUopXqj3BFZ3YWT3rCKV8cTdbdU1oR@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz+LeDJlH9uF4N2UjHRQjI0RzXBtJ1Qqo1TEdNF4K8kC/C5XOqB
-	HJTlHYpXn77JTw+sEmDk9t7crm0GXFonawsG2sll6FY8Wr4kkmXWHVi3MKNDqBfanx8=
-X-Gm-Gg: AR+sD11aozpeygNjpxtN4gEnUpzGrhn8Jg96URaERPF20zpC8o5MPaDmxDAI9k7pPfI
-	y9HeSwCH0+bVNfWmCkxRhKntVYRtgjyQF21cU5nJWXCYjTAd/NuyuZQagER5Nr22XobY9ko3G4n
-	pp0eCwTmIY618S9pXs6M/idDDXEL5t/f3s68owt+a1p9Zp0omzufb3S6aoqoETLaYb4TeFwKUzc
-	oqxuBpJ2uV8VfUgkzVOY/t1bauf4qqpE4fnVDQOvfLcG/7vYdaeEvu4HtsUvR2LO89TF4Suq/kX
-	6Vd08350jfyutMPirdVRhF6RN/cgbcXjT+53pD/FfIYW4QrpGxGKLXCXCoWM8+Sbb6c312HOXQJ
-	Es4ohcB9zoZhM0EZMZOH0OSWGoVZ9xLcr21A40z/J2mcPCKjqpaiXiQ+b+OIBDzoimLS5KUEuEb
-	X0QrL5MeEXl4RYyBq6vtRZw1pRQBVlc9TEfx4Gs5eIdqKg/4Kwqc3N5iNC3RCKkwriTQ==
-X-Received: by 2002:a7b:cd93:0:b0:495:3de8:33a6 with SMTP id 5b1f17b1804b1-4980c65ed1bmr126447945e9.16.1785709047703;
-        Sun, 02 Aug 2026 15:17:27 -0700 (PDT)
+        bh=i9RUjiVyXXCN2eHfX1I53hQWCYFwzgd7w4b5P9lpT/E=;
+        b=l6L/h9UTnEoNL9MxQb2Xqg3SIXd2pUuW4zUnZnfskmv79+YKS4R3cj1uDz7cUlwUw/
+         a19e8l80HF+EvTkprk5Pvnv/VZv55Uj+HQM8vyxDz0eHaS4IZji3zoWTjG+m2nB9RENF
+         OqUEsikQVHPEaOb6/CO6f0LTBTymPOdMP3jal98YJkAdGxW+PM3tXnCe+Viiqw2SyT3c
+         aFOfXd38P/hQ/1yGJBu21wgzLQC3vsi8ZHe23IOmIKyp0J0KOwTiQpRQ4DpqiLAjh9dq
+         UAmSMmvM7anJW+RnZ7qvhjrJNgFm34wxlUnGE4SQMbdHNt0n+Bw3ws0y/AnfDLla/QkF
+         7//Q==
+X-Forwarded-Encrypted: i=1; AHgh+RqXtB0LzbaTLNVpOKNaUiWN8d0qtbIvoNClyYc/ZHUxQrd3ETj5ZfWCK00QsW0QLHb5xFdZCLGoho0eQ91v@vger.kernel.org
+X-Gm-Message-State: AOJu0YykG9EMBOXeOQzPU5s/kdQEpDXL0ZwOuxnOprr2L+luFuvMbDZW
+	A5ASVvwS5ArCAzNRayi8tgMXih5cOeTvnleNIiOPPIMcGbw+i1RRWp85diwjRpKPgfI=
+X-Gm-Gg: AR+sD12QUp/hXoGRKeUfNjXuHkSCjCDv+QFbLJOcgC7g12L9Tx4e6xrAaclDNSmXkCT
+	H5Y1kZwdU5RHsCexFJ449X/O+kiX0wpHLb9GwdFdyAWJuIDxI4ptXtJUOCZZxc4bGseEMYNFJtp
+	qugNgAG1hNFrIuX0drRxag/qSIIOG9VxASFvkluVl35FXr7xhthIembTD3kRS2FzVp/6okklyG1
+	bZkaVKJIPPjIjRHIErBiilKmMBjlBHjdp0O2U+zqyxp4+mF80n3T4Jh2Xs3ejd2oKkbLOeIQg/d
+	/SUIrHY4paFyGie6jMMt45xT5bldvvv5l/JpK3LhjNeYvuIgWXDM4jzFeyZWTMJG1O04dhyHwqV
+	IWrcL9OmN8HLQhY8lHNs/Z9JG4r5W23KlNSqh8KK5xBqDsWJ1avT2Wd1Iti/Cd9U8RpV5W6HzVG
+	Emc5ukEKY36MzhjUcE3d7Jm2uZlThvgvP+mfY6i41FQN8VocmQbE+rkjjrDzmsMi9sxw==
+X-Received: by 2002:a05:600c:564b:b0:495:52dc:73a9 with SMTP id 5b1f17b1804b1-4980c675370mr125127215e9.11.1785709243887;
+        Sun, 02 Aug 2026 15:20:43 -0700 (PDT)
 Received: from localhost ([2a02:8071:56d1:2de0:1d24:d58d:2b65:c291])
-        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-49807b5f0c3sm155072855e9.5.2026.08.02.15.17.25
+        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-47fd456a6besm25058203f8f.22.2026.08.02.15.20.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 02 Aug 2026 15:17:26 -0700 (PDT)
-Date: Mon, 3 Aug 2026 00:17:24 +0200
+        Sun, 02 Aug 2026 15:20:41 -0700 (PDT)
+Date: Mon, 3 Aug 2026 00:20:39 +0200
 From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-To: David Heidelberg <david@ixit.cz>
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org
-Subject: Re: [PATCH RFC 2/3] ASoC: codecs: tfa98xx: add driver for TFA2
- amplifiers
-Message-ID: <am_BahJARF9z0P0u@monoceros>
-References: <20260802-tfa98xx-upstream-v1-0-4dd55cdd658a@ixit.cz>
- <20260802-tfa98xx-upstream-v1-2-4dd55cdd658a@ixit.cz>
+To: Eric Biggers <ebiggers@kernel.org>
+Cc: linux-crypto@vger.kernel.org, Herbert Xu <herbert@gondor.apana.org.au>, 
+	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-kernel@vger.kernel.org, Demi Marie Obenour <demiobenour@gmail.com>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Subject: Re: [PATCH] crypto: qce - Replace with stub driver
+Message-ID: <am_CG_kR24lpos6D@monoceros>
+References: <20260731050838.158825-1-ebiggers@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -80,54 +78,99 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="eissgc2t76naakqg"
+	protocol="application/pgp-signature"; boundary="ll56pjw5fggcc5xl"
 Content-Disposition: inline
-In-Reply-To: <20260802-tfa98xx-upstream-v1-2-4dd55cdd658a@ixit.cz>
+In-Reply-To: <20260731050838.158825-1-ebiggers@kernel.org>
 
 
---eissgc2t76naakqg
+--ll56pjw5fggcc5xl
 Content-Type: text/plain; protected-headers=v1; charset=us-ascii
 Content-Disposition: inline
-Subject: Re: [PATCH RFC 2/3] ASoC: codecs: tfa98xx: add driver for TFA2
- amplifiers
+Subject: Re: [PATCH] crypto: qce - Replace with stub driver
 MIME-Version: 1.0
 
 Hello,
 
-On Sun, Aug 02, 2026 at 02:42:41PM +0200, David Heidelberg wrote:
-> +#include <linux/i2c.h>
+On Thu, Jul 30, 2026 at 10:08:38PM -0700, Eric Biggers wrote:
+> diff --git a/drivers/crypto/qce/qcrypto.c b/drivers/crypto/qce/qcrypto.c
+> new file mode 100644
+> index 000000000000..d526902b3060
+> --- /dev/null
+> +++ b/drivers/crypto/qce/qcrypto.c
+> @@ -0,0 +1,43 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (c) 2010-2014, The Linux Foundation. All rights reserved.
+> + */
+> +
+> +#include <linux/device.h>
+> +#include <linux/interconnect.h>
+> +#include <linux/module.h>
 > +#include <linux/mod_devicetable.h>
+> +#include <linux/platform_device.h>
 
-Please don't include <linux/mod_devicetable.h>, that is going away soon.
-Also <linux/i2c.h> already provides i2c_device_id and of_device_id
-(ie. the two structures that used to be defined in
-<linux/mod_devicetable.h> that you're using), so just drop the #include
-for <mod_devicetable.h>.
+<linux/platform_device.h> already makes sure that of_device_id is
+available, so don't include <linux/mod_devicetable.h> which will go away
+soon.
 
-> [...]
-> +static const struct i2c_device_id tfa98xx_i2c_id[] = {
-> +	{ "tfa9894", (kernel_ulong_t)&tfa9894_chip },
+Also I wonder why/if you need <linux/device.h> here.
 
-Please make this
+> +static int qce_crypto_probe(struct platform_device *pdev)
+> +{
+> +	struct icc_path *mem_path;
+> +
+> +	mem_path = devm_of_icc_get(&pdev->dev, "memory");
+> +	if (IS_ERR(mem_path))
+> +		return PTR_ERR(mem_path);
+> +
+> +	return icc_set_bw(mem_path, 0, 0);
+> +}
+> +
+> +static const struct of_device_id qce_crypto_of_match[] = {
+> +	{ .compatible = "qcom,crypto-v5.1", },
 
-	{ .name = "tfa9894", .driver_data = (kernel_ulong_t)&tfa9894_chip },
+No , before a closing } please
+
+> +	{ .compatible = "qcom,crypto-v5.4", },
+> +	{ .compatible = "qcom,qce", },
+> +	{}
+
+A single space between { and } is the most usual form, please stick to
+that.
+
+> +};
+> +MODULE_DEVICE_TABLE(of, qce_crypto_of_match);
+> +
+> +static struct platform_driver qce_crypto_driver = {
+> +	.probe = qce_crypto_probe,
+> +	.driver = {
+> +		.name = KBUILD_MODNAME,
+> +		.of_match_table = qce_crypto_of_match,
+> +	},
+> +};
+> +module_platform_driver(qce_crypto_driver);
+> +
+> +MODULE_LICENSE("GPL v2");
+> +MODULE_DESCRIPTION("Qualcomm crypto engine stub driver");
+> +MODULE_ALIAS("platform:" KBUILD_MODNAME);
+> +MODULE_AUTHOR("The Linux Foundation");
 
 Best regards
 Uwe
 
---eissgc2t76naakqg
+--ll56pjw5fggcc5xl
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmpvwfEACgkQj4D7WH0S
-/k5ofAf/fcXOQAhsDuQI1vXZjfYD+Nu2PG5sMkw/QbLri499oQfMbAfRG0JWATEF
-QlWrFmVUB03381JLDXyXWtkO5evnjkldLr3bqGY7QevsfpxmOHDV9zLomJjfAqyL
-RmIcbr5btKIh2FZJRZslqHYoKiG7SeNZJLyxeYU4lW8vZcohMMRHlPGSCEC7RoNI
-sJdx+JMXR+ZHBOuwOrObZDxREbyQwdSnxD1gEEwmXEcpb0rZUWVIEZKXNekbV2XN
-izdCJ/P/vwPVNl7yrZLjlzfD6t2AFmYBYIq4kLKM1vrAd8gxMcxwTQH+XKnFNaWC
-RZQ+MsjqlG8Lw4wj970ztO4ky/yXFQ==
-=/KIq
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmpvwrUACgkQj4D7WH0S
+/k67nQf+OehFcZIDtgFxkyFvQZvZvj8xuSmIv0XdUJH05uJUlrPzdkpGEIhFcanz
+X8NT6EKrJBiBvrf3pUe00j0mjuhrKvSlNwD/OIOfIyKO/vqCUA7I9I7Z2rytufiF
+ctDEwPQm1DhHjgqODVsHjkhxh8GL/DJRZfJI5rlD/owrDhjUVV23+9el/AnKy9Pa
+rbNI92rAQ0E6Oqn6PzhUz7szbSaZwNOIHHwEDSKza6Nz2ReOBoqmNzb+wtiSV0Zw
+ZU88/nUiGRYBZohrjw28Vog4+tLMFK5yqZunqMgevvJNdVSkJCt/6DSH0F5uI4py
+p1VS4MphWJzPY13zmlS5FUlxowzcFQ==
+=dBQw
 -----END PGP SIGNATURE-----
 
---eissgc2t76naakqg--
+--ll56pjw5fggcc5xl--
