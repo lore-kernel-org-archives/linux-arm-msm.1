@@ -1,115 +1,133 @@
-Received: from sonic308-9.consmr.mail.ne1.yahoo.com (sonic308-9.consmr.mail.ne1.yahoo.com [66.163.187.32])
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EA1C2AE76
-	for <linux-arm-msm@vger.kernel.org>; Sun,  2 Aug 2026 21:04:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=66.163.187.32
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C60B4331EC2
+	for <linux-arm-msm@vger.kernel.org>; Sun,  2 Aug 2026 22:17:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785704654; cv=none; b=N4kOesiHGgA9GiYhZXxynsTEQTn+LmCp/3NLKCu6CVla/befSCKhppMDFNFx/NourIApUGl3e2VXv0np5XJEEpOFgugpk8ZX7tIqps6uf6wGigua0sBfVp0bx+wfsvtJyH01qYRHmUdTy6MRyfBoNYsVz296rlPVN3dm+Cmey4g=
+	t=1785709051; cv=none; b=izeQ7qcHF339eBAq2tAlroiXQyul8a5iODL1XWZkkKGjGO0Bz4GU+DdElnQfveOs7wSuCKN79dmkU4QjQIbYcypLvdnVNji1jvMWlB0PepMBGBpsaPpBXDvkailCQ/moZhldnxXQOjjjzbet1OcMQjPZr0/FlnYC5PlX34GURQc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785704654; c=relaxed/simple;
-	bh=+1MY16bzPt4NbE9V8wWBlAuy6VoQh39Dz4XbvEKls5s=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=gVBf4YDPI2HWdpUDa2/pfZsPE6ZihU7x4UAFvSZEryMjshkVVhNU5kAfttQqrUkWVhLvB0bQbMclIyZu9Mmwifnw8Jzod8XboK2LkyHZACe9Hmrd5N4vSW7mF2oplxbvYXYV2PDTiRUSWquagoAcSbjvWLXnb9XobQMtt01ymrY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=yahoo.com; spf=pass smtp.mailfrom=yahoo.com; dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com header.b=Wh8YvV9i; arc=none smtp.client-ip=66.163.187.32
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=yahoo.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yahoo.com
+	s=arc-20240116; t=1785709051; c=relaxed/simple;
+	bh=T8GIVGVx3IVGy3cz7RX/iIVlyqRH0fdXuqZLWkXg95I=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=Y5qKK8cJBc9vnnvjF/w39yoqBm4VaEw9H63GCLJHn8FPALNvJ8DG0m/BrEwH2NB33IEgKpftc9SWLPXEzGJUjvASpVuooUk967n/f8t1vjBUf0yFvtWLy7LYQ/RcUbEaV32t/tdnObQVdIJZ6vJ5K9tWFIpU+OeBBA4mkJ3X91I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=l30D97X0; arc=none smtp.client-ip=209.85.221.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com header.b="Wh8YvV9i"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1785704646; bh=mEzogKwXFQyY4BX5HpkwhAYEsRSuIVZrjPgfR0QJz2c=; h=Date:Subject:To:Cc:References:From:In-Reply-To:From:Subject:Reply-To; b=Wh8YvV9iBoqEk2Pw8KkDScdP9BSH/X5jw8khqJhnznrY8fo2yK8QZqNpzKGz3kh8q0/tOZV91gVZgEjyG50137B543HRDT8gtUMzo1FsGDIQqjMivTatBJ2LMa3BgftxpKoboo1qlyAjb6e/s7UVH/PdFpphLq7pLN79cH4erNfQxXqxb+Iiomiu+1FvL8xf5DFpcTbxKaUqlkIGcdxtxgQRt2Zkbif92SzKFaPzlunKuMafKrmoeB7bwUdWbch7WyN1etP0pDg0lS32RRXgkCvtlQx1+EGYiCJ2p711J0HEQCkyPcBwd0wLE5nYvajQZGL2awPYNAOvS5dmYNOFtQ==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1785704646; bh=XEKxc7dAurDzp5cGNzu7Gl1PkS5Wy9bylRWkEGLcyDP=; h=X-Sonic-MF:Date:Subject:To:From:From:Subject; b=U9BGDCEnHEh2d11VdV9nIz+5od1K8PphBw5eujJftl4P3Z4m+awoMEmJTHjl2Bkn07CFIJISEhCsi+cV7gjqRqRT1CUDTtilT7DYE8NhFMOBTp5bHVRl4cyYs/1cx6KShVaUXIq1m78gfrGOKMWGInAp/fpHOmOQauBDsPhH2Rw/8KElhp3MUfEROdn0VtWsmhRQdxSzYAQSPbTxpjz8m1c1j1LLvEbttMwLRD3y7+tKR9c68L4kKNpy5KghL5XaaA3dnPMeLRH8Gp0zzNnbBJKdPAE9V3HaVE0bGm/QGa2u9pfmELPUThTl5RcPP/5PBsR84pXMfvvjQlMWo5AVHA==
-X-YMail-OSG: CwBv9F0VM1mrQd7HrVIbI6wM1dl2kNiL3SUTDrOVHswp40CmDWgUte5NsMQFP2F
- h715xuz.ZKh9QVkdNwTuj_lqW_i.GxWWum.Li2JOCESaY5VSw5YWoU9kgUR19WNTjaaKSXEoxJuB
- nOE0APysgG__D.kS6D2CO19W6VHDBcjWI82FfSNpI6t34GhUsK3oNgTuok_ZDGt8iboRqEhpfuXx
- jzIcVVU9TUl8hGuZTrBp.F7EC0WBbyxvRQH_54MN7uf7rE.WselQ1yshq7Ch6HSui4ZaX8q5ofUI
- uBjPkeDNamZARj4ACIlM5Nyf8EIf9G4ltSBY5UZ9yZ2HEvDhwGuhGLY2UUJgSs23p.TCoh7HtNwm
- FplWXQIxGBdYxadB8GcgBif6mbnyIb1mVfnPdgsnXKdLE57vguk3O_9ssMtcB_20WQwMNk49Qnfq
- N5ZWzCc7FMiPla6RT.HtvBEpVXx5RApiVHDdjCsJ4diRPV3aqzuwDdUbvCzEKl.uE3kzlUcIuUiE
- S6MmJsdpS48ZqnICRdPGQ7aWFi9POGEXvFgK1l_af3J2OEewwfdADeGdiPmqZQWywbtR4y3Bg.YV
- 4p0hbGpltY3YQSnzjDPRlrqTiPJFjkfmX9oHtlDmO9LC_Oqn4DE6f1nX9vxHBFdf6rUjovCE_YGJ
- py8Sib7dTT4yn5izS5TTBaN7BKNJf0O3H3FANbfkT.WuQIZPSNjIYr_z2x1pqLe7XJKOK1cNyFuL
- RF8TPuIcS4KRacbLtEeDDofzP12CcocoCfL3NgWhGxnulKUofiP.k9PANpLy1kD.oegWLNItj8Du
- RY_2k5acgFCCI4uSCGJMmoBLRPEzXZ9wAElE6CIY6C08_cgacdD6FshSaBkcOl4dPl3vX4.b.0Xe
- ILDnSjiJLPgLhNSQitNETKvBblpUwjAlTi2v62dpqCggqM0hZq8TjDNGdObMvKqIBmpqapP4oTZi
- cvfRVdF8PTR.KGfH6HgHI0XiqqiNNC8aGcZF0.CLKa5jIxtzMBipZnGCSCEMpp0bYhnGlsRsHSe7
- Cpwn71niwMnJTt05n5HFEhejfMXKwdEFvvmKLCv6fuxezY1bSBdjwWZSXml0itVZu4LWQnBNVNvi
- zkkErnsegavUw2qvUN0.owrQcpblhoJwUWPSd1sz7TswXjtP8GO3ZWzRJRZhHdCtbfoICKASWQ9S
- DhPrzTmwv4falWAHAVc7KAFddNqjcUsUMiyIpr_BwXaCqsi9CbLX0G9oSp6VqzcFicRu2qBfGgm1
- brtD3_qj_78x8yaC5TSMIiLEZgimiPZ.tPqW_9ZGFwhGcpuPeclJ0OgVY9xV_C29MACisn8LzxNC
- 0MZhUQ8enJ77BgMM88aPHwqLs04WiMPocOVK4SNbP0J4wuriJNOv1yyGbR04fbU72jmsABtruthA
- 3uaqj17tidV3R.c5j91aJOFuOpr8NGtPHe.HzxUCvEA067J5ikN_MFOIGLjb6QeWngcudtRmkGhG
- _oAVn36geCSxmdJ.30OxuNgJUo.54qxDngIOm_AVLl6zKr5AbX9W_ZRWUkI_87GC1RrfnxGJMnn1
- H9SNgmpylVnA3wCfZif.z1jdMilc4E6UqVsZoKY0Bq90CWKGrX14jTaW.rgz5.sk7CTvHhQjzlKP
- 4j2nhXEwGA.Goy.M0yMcnMiVqaEajlkPcdzuMKYNi5cyW5oc9M7cTrzL5qVCPaiMqaEaQNWOXqnN
- JjkD64D5jGyu12.rtdepIjPhQGmUZsZcoBlVO5Sh1hT.OI9DrYJDB1cCR9RN12kaRl9a.x.ae_rz
- Cc8SOd7f5BSvRu78f3j5TX9Ul9MydVjOjRzpPhebyz869RSLODXMPZojPL6e6CtbctkgzCmnx_6B
- EGI.TDR47FmjQOyGqTCzFQHVfGA9DwbxXEG.FifP_T2xmOUbUmzBCTWy0.uzySTw33lPiOfSAWdd
- k0BczAQ.uif4yunm_ow2Mc4Pvp1Cta37TXPW.ESLRjSiKgkeq2dyE2plEpaolq5EK5_L2kseH7HH
- u0MymQsfjf6ItGqjmgOqlUj3ssJEiCyCeD.2SuvVs4u8UEgYYID6xeDLThWrqoMFsiM45jU8rYav
- nKaNmEhHkGoa2uuTtv9LffX.AE.z98H2WjvlvXIvmITPvuzkx.Zgb6TRjLr8YCdBfNyNH0TPvzRD
- y6oP.ury8Nn4hm9M8ifMIBefWzrNELZtGJL4UePLjwDWq7lqgbaRKNsAavYbcmzqcJ0Rm3cXrVl8
- qkUB4YYFCV49j9lnm.9jkvuHHR1SSnnHR8T9BCBlaE1xw85xztnv0UldsLmJ0yxMuF9r7Y9rY6ns
- sgozWz4P4mBAkA_jliTsV9UeIgOC4CoEPXgpL1w--
-X-Sonic-MF: <namiltd@yahoo.com>
-X-Sonic-ID: ae814843-2d79-4005-91f5-1c49b9393985
-Received: from sonic.gate.mail.ne1.yahoo.com by sonic308.consmr.mail.ne1.yahoo.com with HTTP; Sun, 2 Aug 2026 21:04:06 +0000
-Received: by hermes--production-ir2-676cb4d88b-zqvpl (Yahoo Inc. Hermes SMTP Server) with ESMTPA ID 0d00dc9ab74d64b5db223939a75cca93;
-          Sun, 02 Aug 2026 20:53:48 +0000 (UTC)
-Message-ID: <21ce0556-e32b-4335-bfcb-510cc6064272@yahoo.com>
-Date: Sun, 2 Aug 2026 22:53:45 +0200
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="l30D97X0"
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-47f7027ca11so1682612f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 02 Aug 2026 15:17:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1785709048; x=1786313848; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=6bsPGvzNC3Iop4WsfghniduLra8GHqGeExlE9Ii45fI=;
+        b=l30D97X0haxplDJA1LQczHII77xXxIut2oUbt5aPYMTZ+cNYgj5AD3f6h+CjF2kS9M
+         ME5VilM82USaF0Kc7kgaPRVwy+IhJgbLylvhiBu3k7s5SQss20MZqTGXwIcsKNrtfe9r
+         tOfESoOpFErqibVvLhQZQi+5gWmFpA3roEh1D4kCxlk38fvV5zXevDQiPI+i4dCxTCRh
+         +s97HbuKcFi3JLXCeVDWyNsYtLc8Y1kS6IBOX2ucWxzuvw0Bi5YYR+yYf2hYvOXZXjqn
+         LfMe0R3KlIVeilGv2nFVxr3JF4IOapSkEL4VuIt2vAeo0WDpjEAKKQ0SAb9hqpf899bx
+         uiJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785709048; x=1786313848;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=6bsPGvzNC3Iop4WsfghniduLra8GHqGeExlE9Ii45fI=;
+        b=iyeuG7hQ9m/511hn+8nHTnokwQWMIBYTwRkdVfrkdImgs+tSxxGbIRLhK3Tz0wyBqq
+         dZ1QxgpqtkzAhSjmoNSt+Ozyf92/tZi92O3q7E5kV9Si+tzdbSostV8ZydYa1zlVU90C
+         rod3wTFzpUic4Ka+Q+EGD3f37AG9TeuPGwiBW1QYMaQyncAAet+pM1WWzo9uWgWv3Qsp
+         +Uw5/PeKpOJ4VKfUqk9xoEhBLp4+ASdURmvEJozhGCHxMlu/VjcIppBzGmigzYmpzJhx
+         mE3BGm802TtBpTmAufOisXu8sCx4pGfE4D341DITiS5uHf9v10jdhfpkwkyfhDtjYT3/
+         cb1A==
+X-Forwarded-Encrypted: i=1; AHgh+RqlNIvaPRrFFNLRDcnbSsA/usqdxGseA5Ga30arN5zEE5cDuz63J5bUopXqj3BFZ3YWT3rCKV8cTdbdU1oR@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz+LeDJlH9uF4N2UjHRQjI0RzXBtJ1Qqo1TEdNF4K8kC/C5XOqB
+	HJTlHYpXn77JTw+sEmDk9t7crm0GXFonawsG2sll6FY8Wr4kkmXWHVi3MKNDqBfanx8=
+X-Gm-Gg: AR+sD11aozpeygNjpxtN4gEnUpzGrhn8Jg96URaERPF20zpC8o5MPaDmxDAI9k7pPfI
+	y9HeSwCH0+bVNfWmCkxRhKntVYRtgjyQF21cU5nJWXCYjTAd/NuyuZQagER5Nr22XobY9ko3G4n
+	pp0eCwTmIY618S9pXs6M/idDDXEL5t/f3s68owt+a1p9Zp0omzufb3S6aoqoETLaYb4TeFwKUzc
+	oqxuBpJ2uV8VfUgkzVOY/t1bauf4qqpE4fnVDQOvfLcG/7vYdaeEvu4HtsUvR2LO89TF4Suq/kX
+	6Vd08350jfyutMPirdVRhF6RN/cgbcXjT+53pD/FfIYW4QrpGxGKLXCXCoWM8+Sbb6c312HOXQJ
+	Es4ohcB9zoZhM0EZMZOH0OSWGoVZ9xLcr21A40z/J2mcPCKjqpaiXiQ+b+OIBDzoimLS5KUEuEb
+	X0QrL5MeEXl4RYyBq6vtRZw1pRQBVlc9TEfx4Gs5eIdqKg/4Kwqc3N5iNC3RCKkwriTQ==
+X-Received: by 2002:a7b:cd93:0:b0:495:3de8:33a6 with SMTP id 5b1f17b1804b1-4980c65ed1bmr126447945e9.16.1785709047703;
+        Sun, 02 Aug 2026 15:17:27 -0700 (PDT)
+Received: from localhost ([2a02:8071:56d1:2de0:1d24:d58d:2b65:c291])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-49807b5f0c3sm155072855e9.5.2026.08.02.15.17.25
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 02 Aug 2026 15:17:26 -0700 (PDT)
+Date: Mon, 3 Aug 2026 00:17:24 +0200
+From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+To: David Heidelberg <david@ixit.cz>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	linux-sound@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org
+Subject: Re: [PATCH RFC 2/3] ASoC: codecs: tfa98xx: add driver for TFA2
+ amplifiers
+Message-ID: <am_BahJARF9z0P0u@monoceros>
+References: <20260802-tfa98xx-upstream-v1-0-4dd55cdd658a@ixit.cz>
+ <20260802-tfa98xx-upstream-v1-2-4dd55cdd658a@ixit.cz>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: qcom: ipq-cmn-pll: keep the CMN block bus clocks
- enabled
-To: Stanislaw Pal <kuncy7@gmail.com>, Bjorn Andersson <andersson@kernel.org>,
- Stephen Boyd <sboyd@kernel.org>, Michael Turquette <mturquette@baylibre.com>
-Cc: Luo Jie <jie.luo@oss.qualcomm.com>, Brian Masney <bmasney@redhat.com>,
- linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org
-References: <20260730191353.557494-1-kuncy7@gmail.com>
-Content-Language: pl
-From: Mieczyslaw Nalewaj <namiltd@yahoo.com>
-In-Reply-To: <20260730191353.557494-1-kuncy7@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailer: WebService/1.1.26180 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.yahoo
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="eissgc2t76naakqg"
+Content-Disposition: inline
+In-Reply-To: <20260802-tfa98xx-upstream-v1-2-4dd55cdd658a@ixit.cz>
 
 
-On 7/30/2026 9:13 PM, Stanislaw Pal wrote:
-> The probe function takes a runtime PM reference to enable the GCC AHB &
-> SYS clocks of the CMN PLL block, registers the clocks, and then drops
-> the reference. Once the autosuspend kicks in, pm_clk gates both clocks
-> a few milliseconds after probe has returned.
-> 
-> That is wrong on two counts:
-> 
->   - The clock ops access the CMN PLL registers without taking a runtime
->     PM reference of their own, so any later clk_set_rate() or rate
->     recalculation touches the register file with its bus clock gated.
-> 
->   - On IPQ5018 the consequences are not contained to this device:
->     gating the CMN block bus clocks makes the SoC hang on a subsequent
->     bus access. Measured on a TP-Link Archer AX55 v1 (IPQ5018), the
->     machine dies silently within a few milliseconds of the CMN PLL
->     probe returning - mid-character on the UART - and the victim is
->     whichever device happens to probe next. Whether a given boot
->     survives the window is a micro-timing lottery: different binary
->     layouts of the same kernel ranged from occasional failures to a
->     100% reproducible boot loop.
-> 
-> Keep the runtime PM usage count elevated on the probe success path, so
-> the bus clocks stay enabled. With this one change the same board went
-> from boot-looping to surviving every boot attempt (verified across
-> three previously-failing kernel binaries, plus repeated soft and hard
-> resets on the final one).
-> 
-> Fixes: f81715a4c87c ("clk: qcom: Add CMN PLL clock controller driver for IPQ SoC")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Stanislaw Pal <kuncy7@gmail.com>
-> ---
-Reviewed-by: Mieczyslaw Nalewaj <namiltd@yahoo.com>
+--eissgc2t76naakqg
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Subject: Re: [PATCH RFC 2/3] ASoC: codecs: tfa98xx: add driver for TFA2
+ amplifiers
+MIME-Version: 1.0
+
+Hello,
+
+On Sun, Aug 02, 2026 at 02:42:41PM +0200, David Heidelberg wrote:
+> +#include <linux/i2c.h>
+> +#include <linux/mod_devicetable.h>
+
+Please don't include <linux/mod_devicetable.h>, that is going away soon.
+Also <linux/i2c.h> already provides i2c_device_id and of_device_id
+(ie. the two structures that used to be defined in
+<linux/mod_devicetable.h> that you're using), so just drop the #include
+for <mod_devicetable.h>.
+
+> [...]
+> +static const struct i2c_device_id tfa98xx_i2c_id[] = {
+> +	{ "tfa9894", (kernel_ulong_t)&tfa9894_chip },
+
+Please make this
+
+	{ .name = "tfa9894", .driver_data = (kernel_ulong_t)&tfa9894_chip },
+
+Best regards
+Uwe
+
+--eissgc2t76naakqg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmpvwfEACgkQj4D7WH0S
+/k5ofAf/fcXOQAhsDuQI1vXZjfYD+Nu2PG5sMkw/QbLri499oQfMbAfRG0JWATEF
+QlWrFmVUB03381JLDXyXWtkO5evnjkldLr3bqGY7QevsfpxmOHDV9zLomJjfAqyL
+RmIcbr5btKIh2FZJRZslqHYoKiG7SeNZJLyxeYU4lW8vZcohMMRHlPGSCEC7RoNI
+sJdx+JMXR+ZHBOuwOrObZDxREbyQwdSnxD1gEEwmXEcpb0rZUWVIEZKXNekbV2XN
+izdCJ/P/vwPVNl7yrZLjlzfD6t2AFmYBYIq4kLKM1vrAd8gxMcxwTQH+XKnFNaWC
+RZQ+MsjqlG8Lw4wj970ztO4ky/yXFQ==
+=/KIq
+-----END PGP SIGNATURE-----
+
+--eissgc2t76naakqg--
