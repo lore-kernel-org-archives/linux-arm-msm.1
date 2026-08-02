@@ -1,147 +1,177 @@
-Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A94902AD3C
-	for <linux-arm-msm@vger.kernel.org>; Sun,  2 Aug 2026 00:39:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F3AD2D7398;
+	Sun,  2 Aug 2026 03:38:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785631200; cv=none; b=HAOaOb5nE/FXGOf2lDfI2hfF0AXJ21Osp62mJp4oK61MkBXAHCxAJVts3n+jnxuytZNkJ9FRdhm4AXekJ12idvhvI1BXw+U7ejNo+jsqsci/hreZ2SkRZoaA3I0kuY3qKsD02gMQqw+sob99I2sjzZZk/YOlqmSfqt65IEFZFDk=
+	t=1785641919; cv=none; b=B1YkheHDjLs94eLitcSIj6rH/iRldF+fr7dJZRTu0jxvi2B/ZykaAeE+bCuak2CQWowF8RlBpBZVlReEBB6sstw5NtM0SyCAJ74oivChLfrBBkpX3x7foMjDC4+70zJNX8oiNCD2+9t5fhCKQhi5jNcrKo0huwyN3wdwGEy5+7I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785631200; c=relaxed/simple;
-	bh=449lDFTYzu1UCs6iHsDTtTk7jZN1jRYhqSaglmIMgRg=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=png7JK9m/cQIFSxV/Wqtiyd5Ke1i8o7T+U+KpgBBBbJ0Htuka3RkE/rhHuuk2GuvPJamDg2Ubh27nbzEO4raRvb2ZVoAEqyDSn6Nx8C4rBBszGf46bXhY8oELkwhK8xtyge1d/pXUU3/BueOhETP1v7s1mG8Ar6/sGNwR12VvnM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=s4/G2Fg3; arc=none smtp.client-ip=209.85.216.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1785641919; c=relaxed/simple;
+	bh=aF4RmHEruNGFHPMGVQ1ak9aHQShiwv1Ob0bELMip9Jk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=FyvwRQYD42q11ONS338lUC6ABcNwjeil+ViInWr8z7QByLOGisdYC5zEa2SGyDXaxyC0znRKXA5XcVkLLKy3xgG0d3Uim3eo0MGZloQU2lWn2aQgW3Pb6CxfePnkMlZ1I5P362lDIgSGe/hzzQ1wR827hZnuuPCtyk2uszL0O8c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XeCjXlI7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="s4/G2Fg3"
-Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-38101f85591so2462222a91.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 01 Aug 2026 17:39:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785631198; x=1786235998; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=VqnWyY0IoOHm0/Ecjq9A3hxNF1K5JS+wTtKYz611nCM=;
-        b=s4/G2Fg3vTcoC8VrAxLkadtZ4T0HNEgy95RoX9kb2EWIRCbRQQEajeDdCvhTmfao6E
-         MpbCSCiKhRJi9C1VNN9e0hm7+IS8SKZz7leED1p/fb3knJamjZQAd15aUXuUekmYJxzD
-         p8R8C0zqBrUAYS3+g40I8H+839oD1Vd5QUHqvUY0wbGhdJOHPkB63WwaBSonv6KQCGhq
-         6q9AD753huIqxOMhSDpxaBa92YCmqyqPyIbFLsmNZGWAHM5GDgJhG2K3NiDLbMjOnkwm
-         7oxp3Lzt5Mwj/fjRUgtEJ6nlgSK0Psmjscjsp6SEHGMp1YArXfalzk1xHFvjFMReCcby
-         0Yvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785631198; x=1786235998;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=VqnWyY0IoOHm0/Ecjq9A3hxNF1K5JS+wTtKYz611nCM=;
-        b=oaYAkC8LbBMw93WLJnfEJtTS9e7sFyOHgqIxnmsip8euvME9fdOqHnRl62rJFU53+7
-         eM7g76xvinY3kfsYDiPUBEOUmNteMHsgp76f47UAec6QXvkgwsz+d2PpxcHVxH91bO/T
-         V60CPguOI5EiYJmoZE3zUQ1oeC4y4qLBCGBOjonYk2JEx49uXqUFfsqT4AXVAnkKgpf1
-         uqxD2mZ51dRmIiGsm60eMCcBJftLrDiYJJbLMPLXar/UqOLELJYWjhvyoTTFNcEGCpdE
-         wtOzZ/sANNO6p/C0H2IoYjWoFu95KK+qUoe5mqnzitlYcfuRmX1UARkDqHwOVGe/Fk9x
-         eBhA==
-X-Forwarded-Encrypted: i=1; AHgh+RpKH22aUN676AUetZ+c1elPYooMGuBVDMUpStNFRq/l+gVks9Kf25VBdaH9L9lbHa3bJjrGFmAnoCyV9J/y@vger.kernel.org
-X-Gm-Message-State: AOJu0YznJXMDr9jBmzxzRHm2KKB++lD3K5jgMFYYUb3nb20uv3fNrn8R
-	3k4EOedI94RhOhwybGe/U2ndlVhc5OLriOcWqTkzuKnSMzLng5S3QHwlNPeRspWBfcw=
-X-Gm-Gg: AR+sD13E7jvMEs3B6drXZsCXhMxD9UpMsMM2/dvXT27pQfwMLeEOu07N+pxp5YuUmsB
-	PVM/hifskMiTEw0vB/25Z4sDuJ6TA2T9/rOlaqf5VCMGWMGTheu+UNd/juDchSDr0cQHiI1TacJ
-	jOq+R4XXv5J+BLQM7yARL2DLowkKohXxSk22bhlnAZJxP3hcsODmAXU3exIsgTfU1h6cFMRUk1Y
-	x+Uv31OMDQfR9FCJQw9oVz8qmUVpINgGjghHyiE1Vg7LkNCYagWWRMoCGmvFDSfbV4HfPFuwW+l
-	UaaufqmtZev9euMVnNO3hk5gs7X6RUL9WLr/9sbuf4J7cELAi8QrQoxPQm9OI0jEOZpNgfDnNfw
-	2Zyc95895+scE0aUvkh8EsFwOhiCRc1J6nJXpT3d5e6JJruLWEW1PMuh7drCih7nnMgcdoRKFic
-	pM6W45PCG5YYMJHXeW/AnBOmF4JB2JGbqdg5BHs5/cSn7RyWfqOB8viZzaO9tz
-X-Received: by 2002:a17:90b:5823:b0:38f:1a29:7a82 with SMTP id 98e67ed59e1d1-38fbca2363emr3552882a91.6.1785631197798;
-        Sat, 01 Aug 2026 17:39:57 -0700 (PDT)
-Received: from kdev.. ([108.180.130.139])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38fb2f657a1sm2318904a91.7.2026.08.01.17.39.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 01 Aug 2026 17:39:57 -0700 (PDT)
-From: Babanpreet Singh <bbnpreetsingh@gmail.com>
-To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-	Jens Wiklander <jenswi@kernel.org>
-Cc: Sumit Garg <sumit.garg@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	op-tee@lists.trustedfirmware.org,
-	linux-kernel@vger.kernel.org,
-	Babanpreet Singh <bbnpreetsingh@gmail.com>
-Subject: [PATCH] tee: qcomtee: fix kernel-doc warnings
-Date: Sun,  2 Aug 2026 00:39:56 +0000
-Message-ID: <20260802003956.7-1-bbnpreetsingh@gmail.com>
-X-Mailer: git-send-email 2.47.3
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XeCjXlI7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 345511F00AC4;
+	Sun,  2 Aug 2026 03:38:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1785641918;
+	bh=+TexX9rPlZFjIyLEyoK3UWWn0etmeyXn6pzQ5byloqM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=XeCjXlI7tOSJ1PRf6kZmJ+3zMIhva3ED4OoRl69JiO5HGRYGBSw3MbWTQc14PjVKV
+	 J06GMQRDQFrgwQQSV81JF0SlxOiiKT0Wl3TeMLsRSkOvI5YH03axrqJjKh/S4G4R2e
+	 CUIwOg+4FlWZUbhzkuVWzOamOuCwy5MedrTo0lx0btBxZH7ltqdDaTvwdO0QxePL5z
+	 Pl7KttgJacYwf/gtB6JSzwf17WzMCJ6ldHByp5lMcYmqp7Ym4hRL/Fziqp2cuU/LyL
+	 rxiWWh0iLEOsvteD5u/MF+tXhD3SwID/hodrx2MiI+KsPNeZ5JyCiB2kyaJ2DkhdhX
+	 /0wPNrcmAqG7Q==
+Date: Sat, 1 Aug 2026 22:38:33 -0500
+From: Bjorn Andersson <andersson@kernel.org>
+To: Rahul Samana <rahul.samana@oss.qualcomm.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Marcel Holtmann <marcel@holtmann.org>, 
+	Luiz Augusto von Dentz <luiz.dentz@gmail.com>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Balakrishna Godavarthi <quic_bgodavar@quicinc.com>, Rocky Liao <quic_rjliao@quicinc.com>, 
+	Manivannan Sadhasivam <mani@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Bartosz Golaszewski <brgl@bgdev.pl>, 
+	linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org, linux-pm@vger.kernel.org, 
+	quic_mohamull@quicinc.com, quic_hbandi@quicinc.com, quic_anubhavg@quicinc.com
+Subject: Re: [PATCH v2 6/6] arm64: dts: qcom: rb3gen2: add Industrial BT UART
+ overlay
+Message-ID: <am6572YrbAULTa88@baldur>
+References: <20260727-rb3-industrial-bt-uart-v2-0-2d100f30e202@oss.qualcomm.com>
+ <20260727-rb3-industrial-bt-uart-v2-6-2d100f30e202@oss.qualcomm.com>
+ <794424df-4714-43a4-b4b8-e960998ad1f1@oss.qualcomm.com>
+ <ce283ef7-2460-4fa4-a1f5-9757fd6b42b5@oss.qualcomm.com>
+ <6d61d749-440f-40ad-82e5-e1e909afad06@oss.qualcomm.com>
+ <b47345f1-1c7b-4424-9c6b-3dd02c0f4ab6@oss.qualcomm.com>
+ <bf7821a2-d813-4f89-b891-9c26d228ae67@oss.qualcomm.com>
+ <b5afd21c-4516-4a8c-bc8f-6598ec385d27@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <b5afd21c-4516-4a8c-bc8f-6598ec385d27@oss.qualcomm.com>
 
-Fix kernel-doc issues present since the driver was added in commit
-d6e290837e50 ("tee: add Qualcomm TEE driver"):
+On Fri, Jul 31, 2026 at 11:20:07PM +0530, Rahul Samana wrote:
+> 
+> 
+> On 31-07-2026 21:19, Konrad Dybcio wrote:
+> > On 7/31/26 4:48 PM, Rahul Samana wrote:
+> >>
+> >>
+> >> On 31-07-2026 18:20, Konrad Dybcio wrote:
+> >>> On 7/31/26 8:53 AM, Rahul Samana wrote:
+> >>>>
+> >>>>
+> >>>> On 29-07-2026 18:01, Konrad Dybcio wrote:
+> >>>>> On 7/27/26 5:45 PM, Rahul Samana wrote:
+> >>>>>> The reworked RB3 Gen 2 Industrial mezzanine keeps the common Industrial
+> >>>>>> mezzanine hardware description but routes QCC2072 Bluetooth over UART4
+> >>>>>> instead of the default Bluetooth-over-USB path.
+> > 
+> > I only noticed this now - are there 2 variants of the industrial
+> > mezz being sold concurrently? Is the already-in-kernel one some
+> > sort of a prototype SKU? i.e. should we support both?
+> > 
+> >>>>>>
+> >>>>>> Build this variant by applying the common Industrial mezzanine overlay
+> >>>>>> first, followed by the BT UART overlay. The overlay models the M.2 E-key
+> >>>>>> connector graph endpoints for PCIe and UART, and disables the on-board
+> >>>>>> WCN6750 PMU and UART7 path so the M.2 QCC2072 Bluetooth controller can be
+> >>>>>> used instead.
+> >>>>>
+> >>>>> So is the onboard module disabled? Can we not just use two in parallel?
+> >>>>>
+> >>>>
+> >>>> The Industrial mezzanine variants do not support the on-board WCN6750
+> >>>> wireless path. The common Industrial mezzanine overlay already disables
+> >>>> the on-board Wi-Fi node.
+> >>>
+> >>> What does 'do not support' it mean here? They are physically present
+> >>> as part of the SoM, so unless the lanes are somehow diverted away,
+> >>> why is it not?
+> >>>
+> >>> Konrad
+> >>
+> >> Hi Konrad,
+> >>
+> >> The WCN6750 module is physically present on the SoM. What I meant is that
+> >> the current Industrial mezzanine devicetree already disables the on-board
+> >> Wi-Fi path, and this BT UART variant followed the same board-level policy
+> >> for the on-board Bluetooth UART/PMU path.
+> > 
+> > Okay, and do we know why that's the case in the first place?
+> > 
+> >> For the endpoint labels, I can move the UART endpoint to the SoC DTSI,
+> >> kodiak.dtsi, as uart4_ep.
+> > 
+> > Please do
+> > 
+> >> For the PCIe endpoint, the PCIe path to the M.2 QCC2072 device is not the
+> >> PCIe0 root port in kodiak.dtsi. In the composed devicetree, it is
+> >> behind the Industrial mezzanine PCIe switch, under:
+> >>
+> >>     /soc@0/pcie@1c00000/pcie@0/pcie@0,0/pcie@2,0
+> >>
+> >>
+> >> So placing pcie0_port0_ep in kodiak.dtsi would not describe the actual
+> >> topology.
+> > 
+> > Yes, that was an omission from my side
+> > 
+> > 
+> >> I tried adding a generic label/endpoint to that downstream port in the
+> >> Industrial mezzanine overlay and referencing it from the BT UART overlay.
+> >> However, when the overlays are compiled separately and then composed, that
+> >> label is not available while applying the BT UART overlay, so the composed
+> >> DTB build fails with FDT_ERR_NOTFOUND.
+> > 
+> > I think this generic description is simply not achievable today without
+> > a bigger plan in place
+> > 
+> > Konrad
+> 
+> Hi Konrad, Dmitry,
+> 
+> Yes, both Industrial Kit variants need to be supported.
+> 
+> The default Industrial Kit uses the common Industrial mezzanine hardware
+> description and continues to use the existing Bluetooth-over-USB path.
 
-- async_release() documents its second parameter as @msg, but the
-  parameter is named async_msg (msg is a local variable);
-- struct qcomtee_msg_object_invoke documents member @ctx, but the
-  member is named cxt;
-- enum qcomtee_arg_type leaves QCOMTEE_ARG_TYPE_NR undescribed.
+"Kit uses the common" what do you even mean?! The mezzanine is a
+physical thing, it doesn't _use_ anything! The mezzanine exists and the
+DeviceTree describe what it is.
 
-The cxt spelling is part of the QTEE message format and is used
-throughout the driver; struct qcomtee_msg_callback in the same header
-already documents it as @cxt, so the comment is corrected rather than
-the member.
+> The
+> reworked Industrial Kit variant keeps the rest of the Industrial mezzanine
+> hardware the same, but routes Bluetooth over UART4 instead.
+> 
 
-No functional changes.
+Does "reworked mezzanine" mean what it usually does? I.e. that you have
+taken the mezzanine and modified it?
 
-Assisted-by: Claude:claude-opus-5 [kernel-doc]
-Signed-off-by: Babanpreet Singh <bbnpreetsingh@gmail.com>
----
- drivers/tee/qcomtee/async.c          | 4 ++--
- drivers/tee/qcomtee/qcomtee_msg.h    | 2 +-
- drivers/tee/qcomtee/qcomtee_object.h | 1 +
- 3 files changed, 4 insertions(+), 3 deletions(-)
+[..]
+> 
+> I am open to other suggestions if there is a better way to model this within
+> the current overlay structure.
+> 
 
-diff --git a/drivers/tee/qcomtee/async.c b/drivers/tee/qcomtee/async.c
-index 31bff4309e672..5849e51612033 100644
---- a/drivers/tee/qcomtee/async.c
-+++ b/drivers/tee/qcomtee/async.c
-@@ -97,10 +97,10 @@ static void qcomtee_get_async_buffer(struct qcomtee_object_invoke_ctx *oic,
- /**
-  * async_release() - Process QTEE async release requests.
-  * @oic: context used for the current invocation.
-- * @msg: async message for object release.
-+ * @async_msg: async message for object release.
-  * @size: size of the async buffer available.
-  *
-- * Return: Size of the outbound buffer used when processing @msg.
-+ * Return: Size of the outbound buffer used when processing @async_msg.
-  */
- static size_t async_release(struct qcomtee_object_invoke_ctx *oic,
- 			    struct qcomtee_async_msg_hdr *async_msg,
-diff --git a/drivers/tee/qcomtee/qcomtee_msg.h b/drivers/tee/qcomtee/qcomtee_msg.h
-index 878f70178a5b6..5d7b21fdd3688 100644
---- a/drivers/tee/qcomtee/qcomtee_msg.h
-+++ b/drivers/tee/qcomtee/qcomtee_msg.h
-@@ -112,7 +112,7 @@ union qcomtee_msg_arg {
- 
- /**
-  * struct qcomtee_msg_object_invoke - Direct object invocation message.
-- * @ctx: object ID hosted in QTEE.
-+ * @cxt: object ID hosted in QTEE.
-  * @op: operation for the object.
-  * @counts: number of different types of arguments in @args.
-  * @args: array of arguments.
-diff --git a/drivers/tee/qcomtee/qcomtee_object.h b/drivers/tee/qcomtee/qcomtee_object.h
-index 8b4401ecad48c..d5de02dcef3b9 100644
---- a/drivers/tee/qcomtee/qcomtee_object.h
-+++ b/drivers/tee/qcomtee/qcomtee_object.h
-@@ -74,6 +74,7 @@ enum qcomtee_object_type {
-  * @QCOMTEE_ARG_TYPE_OO: output object (OO).
-  * @QCOMTEE_ARG_TYPE_IB: input buffer (IB).
-  * @QCOMTEE_ARG_TYPE_IO: input object (IO).
-+ * @QCOMTEE_ARG_TYPE_NR: number of argument types.
-  *
-  * Use the invalid type to specify the end of the argument array.
-  */
--- 
-2.43.0
+I don't think it's possible to give you other suggestions as you haven't
+described what this thing is, you just explaining how you're hacking
+something together and ask us to help adjust your hack without knowing
+what it is you're trying to describe with your DeviceTree.
 
+Regards,
+Bjorn
+
+> Thanks,
+> Rahul
+> 
