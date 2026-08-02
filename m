@@ -1,138 +1,163 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D017B20A5C4;
-	Sun,  2 Aug 2026 03:57:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 477462BE639;
+	Sun,  2 Aug 2026 04:08:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785643073; cv=none; b=ITWLVAlQhPja9FNp/hpka5jinIof3emJN8HXo8kiZOVLsZq0fZUnViFaoB4Zj3RaU9QTMHXKv5TFoNblzfD4+OaYqkN8NqRE3kYcnXjiFj97SN8yy7gljT55Rd+F3+u7I0cw5zd87Pp+9y1ksBkjz2vqELak8aqjuMlZfagMK+Y=
+	t=1785643715; cv=none; b=EFQWeXATERgN7BhqkGyXOuvVyEGtm5lAxJSmy4CLSySv1oELjY2ADjmU9eGAWkcsjzbtxgccuGZ4kWC5IIDWlcScTZvMVV5MJwdZuEy2hHt0eV20FqcpneafVVucZ/sLsOGh6ChiywNYpjScf2o1wufV8voqUm4EQYRCGOyuZKo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785643073; c=relaxed/simple;
-	bh=q1pARS5jbKSDrkB9t9HhaunyyBy2cboPHge2yfedUCI=;
+	s=arc-20240116; t=1785643715; c=relaxed/simple;
+	bh=RnFQL6YjnhYoRCAoIPQes8fo7PDgH0+TITsSNhSPtY8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=IU7WUvcwlEa0ZrkXpX9R+asfAo+SIEXu+m9CIPEAb6PHu5EbWjgfaGeEicNsP2cGHZUmHsAxRvS+3Stpmf4vlTIsP8gdBMZmZGyagMw3nc11pkYuPMh17JYfa+/C9HXxy5d3eJCKQHLYru2lhg+pWxspw7FRrr9dZGf5qoyb9Tw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=l8Ejf1aw; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=Ew8QzaU+3FX+L15NRZRmF5KJWj8DgrJhmG0LszwV3kz5UeV0RZQzsS05mSvMsksess4TrTt2KwG8P2iBiemZI2q2C5sZ+NGvmLwO33A2vb/22Cvpkk/nQZYh78jOWvptVb4mkbH+YnAPr5lDr1VPc6aM4HAvVd70SovcoTIKur8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=X5R0iidb; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="l8Ejf1aw"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2F8B1F00AC4;
-	Sun,  2 Aug 2026 03:57:49 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="X5R0iidb"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 208521F00AC4;
+	Sun,  2 Aug 2026 04:08:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785643070;
-	bh=Z6jKwCBwUouAbos6vdXsbSCPkFo09fH0Ecr1wnrqOmo=;
+	s=k20260515; t=1785643713;
+	bh=uUbaLxHS/enWwBQFVGCaLcGfc4XcbrRZeJRf2gUpHi4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=l8Ejf1awpBz1WS/OwPhGlOaBtCDS4hVpNvzM122iNNItoDE7jO1iW3zQ+GwBrB7zV
-	 SO6vrglalI0lTZeDoj9aqsHaVSKxrpzFUvQ/UxL1OSUbsyDenF8IoQCPpnMY8GiYw8
-	 JMj2INBsLjjxuNurkdkje9fvCgsV2FgU3qu9UmqgW7DLCByJ9Dzg4DyACw/YzdC/a9
-	 o/AuvT+WMQgEPj6ozmgTNkqsWih60atiVvgB7GuuS2/EvAMODbPFmguzLOwghrTYrR
-	 x/sVY4NxZ06uSPLhspdSPrjUrGD7ne23kVGi0Tw2LtoGI0aXkC+p4cvMcPtoPvwe0s
-	 Lx+vQTNDy0i9w==
-Date: Sat, 1 Aug 2026 22:57:47 -0500
+	b=X5R0iidbgpYl3wYNMDeNH7ThdY/zELAswCS+kIM9exhZ+CLjaS2eKwB6FJ2OH0yeR
+	 We8g9NLSLO7pA3DOYYJVTpCEQEhTR2aLxOxTFxxg20M66Xv6NrOSjGxyRXGwivbkO3
+	 /9DE/I/E6LCotKREvgMQyAGIp2qgMCY/xJwz+JyZkz75dCS5GMe5KMsmjmY6yLhXss
+	 O3utZ+wRibShbZ7KBcLl7PgrQr4fPwrXDimQdRbM8PUxZy9ZPNv8IYQ/Nh++s6MI8c
+	 6uL9ZfeMcmd13R0OY0zLfHCu2cOqcsbTu+Y+cP+zOcFedtONMufcF3OFdn79z+Gx2t
+	 YSLH0J7VBz1nA==
+Date: Sat, 1 Aug 2026 23:08:30 -0500
 From: Bjorn Andersson <andersson@kernel.org>
-To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Manivannan Sadhasivam <mani@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-pci@vger.kernel.org, linux-pm@vger.kernel.org, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
-	Abel Vesa <abel.vesa@oss.qualcomm.com>
-Subject: Re: [PATCH v7 0/3] arm64: dts: qcom: eliza-evk: Enable PCIe0 and
- PCIe1 with M.2 and TC9563 switch
-Message-ID: <am6_-E6qSKY1C1dN@baldur>
-References: <20260730-eliza_evk-v7-0-7ac7b66a3e6d@oss.qualcomm.com>
+To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, 
+	Mathieu Poirier <mathieu.poirier@linaro.org>, Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-remoteproc@vger.kernel.org
+Subject: Re: [PATCH v5 6/6] firmware: qcom: scm: introduce keep_mdt_buf flag
+ in PAS context
+Message-ID: <am7Aj5UdrrtGUHjA@baldur>
+References: <20260724182858.1868271-1-mukesh.ojha@oss.qualcomm.com>
+ <20260724182858.1868271-7-mukesh.ojha@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260730-eliza_evk-v7-0-7ac7b66a3e6d@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260724182858.1868271-7-mukesh.ojha@oss.qualcomm.com>
 
-On Thu, Jul 30, 2026 at 05:30:15PM +0530, Krishna Chaitanya Chundru wrote:
-> This series enables PCIe for the Eliza EVK board (CQS SoM on EVK carrier).
+On Fri, Jul 24, 2026 at 11:58:58PM +0530, Mukesh Ojha wrote:
+> The PAS image initialization path always retains the metadata buffer
+> when a valid qcom_scm_pas_context is provided, even if the caller does
+> not require it. This implicit behavior leads to unclear buffer ownership
+> and forces new users of qcom_mdt_pas_load() to manually release
+> metadata, which is error‑ prone and incorrect.
 > 
-> The Eliza EVK exposes two PCIe ports:
+> Add a keep_mdt_buf flag to struct qcom_scm_pas_context to make metadata
+> retention explicit.  Metadata buffers are now freed by default and are
+> only preserved when this flag is set. qcom_q6v5_pas enables this during
+> probe for contexts that require retained metadata for subsequent PAS
+> operations, while existing callers continue to work unchanged.
 > 
-> - PCIe0 drives an M.2 E key connector. The 3.3V supply is GPIO-controlled
->   via a TCA9538 I/O expander on I2C4. The slot hosts a WLAN module
->   (connected over PCIe) and a Bluetooth device (connected over UART5),
->   modelled with the pcie-m2-e-connector binding.
-> 
-> - PCIe1 (8GT/s x2) connects to a Toshiba TC9563 PCIe switch, whose
->   management interface sits on I2C4 (address 0x77). The TC9563 RESX# and
->   PERST# lines are OR-ed internally; reset is driven via a TLMM GPIO on
->   the RESX# pin. The iommu-map covers all downstream switch ports
->   (SID range 0x1400-0x1408).
-> 
-> The M.2 WLAN module carries a Qualcomm QCC2072 Bluetooth chip. A device-ID
-> entry is added to the M.2 power sequencer so the serdev node for the BT
-> UART interface is created on PCI enumeration.
-> 
-> This seris Depends-on:
->   https://lore.kernel.org/all/20260630-eliza-dts-qcs-evk-v4-3-18cbbdba6e7e@oss.qualcomm.com/
->   https://lore.kernel.org/all/20260630-dts-qcom-eliza-mtp-evk-add-pmics-v1-1-f4f320f7c88b@oss.qualcomm.com/
 
-As far as I can tell these where merged 3 weeks ago, please help me
-understand what dependencies we're missing.
+I presume given that this was sent together with the remoteproc patches
+that this can't be merged until those other changes has made it into the
+tree.
+
+Please confirm if there is an actual dependency here.
+
+> Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+> ---
+>  drivers/firmware/qcom/qcom_scm.c       | 18 +++++++++++++++---
+>  drivers/remoteproc/qcom_q6v5_pas.c     |  3 +++
+>  include/linux/firmware/qcom/qcom_pas.h |  1 +
+>  3 files changed, 19 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
+> index 16ae42e6c434..54ffec97cc26 100644
+> --- a/drivers/firmware/qcom/qcom_scm.c
+> +++ b/drivers/firmware/qcom/qcom_scm.c
+> @@ -625,7 +625,7 @@ static int qcom_scm_pas_prep_and_init_image(struct device *dev,
+>  	mdata_phys = qcom_tzmem_to_phys(mdata_buf);
+>  
+>  	ret = __qcom_scm_pas_init_image(dev, ctx->pas_id, mdata_phys, &res);
+> -	if (ret < 0)
+> +	if (ret < 0 || !ctx->keep_mdt_buf)
+>  		qcom_tzmem_free(mdata_buf);
+>  	else
+>  		ctx->ptr = mdata_buf;
+> @@ -664,9 +664,21 @@ static int qcom_scm_pas_init_image(struct device *dev, u32 pas_id,
+>  	memcpy(mdata_buf, metadata, size);
+>  
+>  	ret = __qcom_scm_pas_init_image(dev, pas_id, mdata_phys, &res);
+> -	if (ret < 0 || !ctx) {
+> +
+> +	/*
+> +	 * Some clients still pass the PAS context as NULL. Until all clients
+> +	 * switch to qcom_mdt_pas_load() and provide a valid PAS context, check
+> +	 * for NULL before dereferencing it.
+
+Why don't we fix the problematic clients? There's no point in working
+around such things.
+
+> +	 *
+> +	 * When a valid context is provided, keep_mdt_buf controls whether the
+> +	 * metadata buffer is retained after PAS_INIT. PAS remoteproc subsystems
+> +	 * set this flag so metadata persists until auth_and_reset() completes,
+> +	 * as TrustZone keeps the buffers locked until then. Other callers leave
+> +	 * it unset and metadata is freed immediately after the PAS_INIT call.
+
+Please rewrite this to make it more succinct. It seems you could say the
+same thing with just the words "free the metadata on error or if client
+didn't request us to keep it".
 
 Regards,
 Bjorn
 
-> 
-> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-> ---
-> Changes in v7:
-> - Change the pcie sub nodes under dsp3 from pci to ethernet (Sashiko).
-> - Update the iommu-map to 2 cells from 1 cell (Mani).
-> - Link to v6: https://patch.msgid.link/20260730-eliza_evk-v6-0-40ece2d33114@oss.qualcomm.com
-> 
-> Changes in v6:
-> - change 0 to 0x0 & remove num-lanes property (Mani)
-> - Link to v5: https://patch.msgid.link/20260729-eliza_evk-v5-0-41790a5a24de@oss.qualcomm.com
-> 
-> Changes in v5:
-> - change from pci to pcie for subnode names (konrad)
-> - Link to v4: https://patch.msgid.link/20260728-eliza_evk-v4-0-decc7fe5246e@oss.qualcomm.com
-> 
-> Changes in v4:
-> - Added new line and used pcie port names as pcieN_portM (Konrad).
-> - Link to v3: https://patch.msgid.link/20260721-eliza_evk-v3-0-92b10038f13d@oss.qualcomm.com
-> 
-> Changes in v3:
-> - Clubbed pcie nodes to this series (Bjorn A)
->   (https://lore.kernel.org/all/20260708-eliza_dt-v2-1-e6281da26408@oss.qualcomm.com/)
-> - Added comment for PERST (Mani).
-> - Extended ranges property for pcie1 (Konrad).
-> - Link to v2: https://patch.msgid.link/20260708-eliza_evk-v2-0-c599246ceba1@oss.qualcomm.com
-> 
-> Changes in v2:
-> - Drop patch 3, as this is already applied
-> - Rebase on top of https://lore.kernel.org/all/20260708055017.A90C91F000E9@smtp.kernel.org/
->   and remove pincntrl as pincntrl is added in the eliza.dtsi patch and also remove
->   pinctrl for resx as this is covered in pcie1_default_state as perst gpio.
-> - Link to v1: https://patch.msgid.link/20260703-eliza_evk-v1-0-7624440bd76d@oss.qualcomm.com
-> 
-> ---
-> Krishna Chaitanya Chundru (3):
->       arm64: dts: qcom: eliza: Add PCIe PHY and controller nodes
->       arm64: dts: qcom: eliza-evk: Add PCIe0 with M.2 E key connector
->       arm64: dts: qcom: eliza-evk: Add PCIe1 with TC9563 PCIe switch
-> 
->  arch/arm64/boot/dts/qcom/eliza-evk.dtsi | 221 +++++++++++++++++
->  arch/arm64/boot/dts/qcom/eliza.dtsi     | 413 +++++++++++++++++++++++++++++++-
->  2 files changed, 632 insertions(+), 2 deletions(-)
-> ---
-> base-commit: dc59e4fea9d83f03bad6bddf3fa2e52491777482
-> change-id: 20260629-eliza_evk-6f30686b161f
-> prerequisite-patch-id: 9e10dfbe360941cdac0300aaf163149755952f9f
-> prerequisite-patch-id: fecce0170351baf00cbe8f6b302d1def4d99bbfc
-> prerequisite-patch-id: 97cd6cb495fdd198f6de7fbe45ef32e4a638ec9c
-> prerequisite-message-id: <20260630-dts-qcom-eliza-mtp-evk-add-pmics-v1-1-f4f320f7c88b@oss.qualcomm.com>
-> prerequisite-patch-id: f3615b5c1e2222a2491f862a7fba3994058ecc53
-> 
-> Best regards,
-> --  
-> Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+> +	 */
+> +	if (ret < 0 || !ctx || !ctx->keep_mdt_buf) {
+>  		dma_free_coherent(dev, size, mdata_buf, mdata_phys);
+> -	} else if (ctx) {
+> +	} else {
+>  		ctx->ptr = mdata_buf;
+>  		ctx->phys = mdata_phys;
+>  		ctx->size = size;
+> diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
+> index 0391e30f42ba..38e6f6019825 100644
+> --- a/drivers/remoteproc/qcom_q6v5_pas.c
+> +++ b/drivers/remoteproc/qcom_q6v5_pas.c
+> @@ -722,6 +722,7 @@ static int qcom_pas_alloc_memory_region(struct qcom_pas *pas)
+>  	if (IS_ERR(pas->pas_ctx))
+>  		return PTR_ERR(pas->pas_ctx);
+>  
+> +	pas->pas_ctx->keep_mdt_buf = true;
+>  	if (!pas->dtb_pas_id)
+>  		return 0;
+>  
+> @@ -740,6 +741,8 @@ static int qcom_pas_alloc_memory_region(struct qcom_pas *pas)
+>  	if (IS_ERR(pas->dtb_pas_ctx))
+>  		return PTR_ERR(pas->dtb_pas_ctx);
+>  
+> +	pas->dtb_pas_ctx->keep_mdt_buf = true;
+> +
+>  	return 0;
+>  }
+>  
+> diff --git a/include/linux/firmware/qcom/qcom_pas.h b/include/linux/firmware/qcom/qcom_pas.h
+> index fb2ec3be6a16..1d132e89536e 100644
+> --- a/include/linux/firmware/qcom/qcom_pas.h
+> +++ b/include/linux/firmware/qcom/qcom_pas.h
+> @@ -22,6 +22,7 @@ struct qcom_pas_context {
+>  	dma_addr_t phys;
+>  	ssize_t size;
+>  	bool use_tzmem;
+> +	bool keep_mdt_buf;
+>  };
+>  
+>  static inline void __iomem *qcom_pas_ctx_map(struct qcom_pas_context *ctx)
+> -- 
+> 2.53.0
 > 
