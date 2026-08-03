@@ -1,241 +1,306 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 270CF2F39C2
-	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 04:26:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7198826FD93
+	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 04:48:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785731171; cv=none; b=St98cQpyRSv1FjQ+h07DYf0z9L37bVJF6C1mnffReosHpVjhaulvLmBFbloL5vohsDadH/5719TWk9kpWFmQ077mtgxTFNWnRrRF9ghskp7+rYTajtGortPb27a6QCLYnxZaVzFj1frMA/KyrrgUgJUpA8l7tHL9wT4O5OZpuZM=
+	t=1785732495; cv=none; b=DSL/InGlGmZ4J0lfTwNUlm6qJkdrgyhZLh0RJXsxoQd8U/N6pRL2q2Hmvl2Nj4+k5mytRXtpzuhDI5/JBdq3G85+P08r3GR+dLya9FPSYbkbgzpNzezjGw4ArdaWzgP8TFXcHOl5dfaMWPvpcG07V0FyXFiE4lr8tNGMY7TGe6Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785731171; c=relaxed/simple;
-	bh=vaUOuNP9CEXlMt4R9gRdtJC6kku8gQd4DJAx93x9pZw=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=qhUXkPEiZUn2vlYIhQG9l27kSSyZjGIrwU6fDZKiI2q3rdk/m0RlzJXBBsxJkqoCGOrVtURwiFC8dBXvK3IXAebSV5qMT9tuGD2ngsPFedLIGx5M4WcSQ5MRbs3JQuKEFoyaf5Ma9gZewfbWrKHKA8qU8m+YgEgKYwIs7IDk/5Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TiJ8YMOL; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=LdXgCq/4; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785732495; c=relaxed/simple;
+	bh=PXTpUFFxfLcQ8bCrLbv7JGiWMl2bbsUpe/ewaTrtbKc=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=Qjbil90egE73JWrBlNXKX+3GpUy9We98vqBhdaCpZ+jvPIWwEaOI6meHvDH4lfIWMJtG6QCRNoVl6DrhnN3dgHbC4CSsInEVobvcBJ6p/U2l7Ne27DhDMApFJEKy7n97tAYjiw+uhah3g0nDsrCHWlooP/hWUbdHUGgWauR+cGk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=jvDMmZrR; arc=none smtp.client-ip=209.85.128.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TiJ8YMOL";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="LdXgCq/4"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 672LVkew3960583
-	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 04:26:09 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=GqHSUzv6TANlrKeUaTe/Y6
-	BeYPwufFXq4KfOBLJTa0A=; b=TiJ8YMOLfYXg1rLTEpdd/Z0OC7XMaxGQVKM8tV
-	Y+qn1OWUTUAFDTtmp0pEYTPDWonTBiv4RKghfQ38yKh8KjVo6R5tS5s/PsE3bwVV
-	BFyT6GVTtUFqkpfaJZsMjtgYqbnkHkI2IipHJQOoZmpZ782Al16DU8MBnQV8yTIi
-	8eKQ9ANa/GASHkbuWao0uYSpjrIwVUPNKCcm6KbmCNBxP9+XS6u6xG67PCD6JnUV
-	/MQh3U94lzBqZ1Zu28DWtlrV/Wa1ijH1W3Or7apae8lXhqwp/ZpI7eDuLp15GDPv
-	aYXKhUIcCekTIYo4ngsqw3bQlqbMTHsG7LLrD3MQbj4caEzQ==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ft9fah8un-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 04:26:09 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38e7b87ce77so7956517a91.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 02 Aug 2026 21:26:09 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="jvDMmZrR"
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-496bb7cdf51so16404835e9.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 02 Aug 2026 21:48:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785731169; x=1786335969; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=GqHSUzv6TANlrKeUaTe/Y6BeYPwufFXq4KfOBLJTa0A=;
-        b=LdXgCq/47Gj5nn9gUeVYRxUD5y5LVk3GsGhpf3WSqq4tsjFGeWX35411uPVwfm3lUH
-         Sed5Q5lIr0qrKKRQLKgYm/Y4pIdkMEh8x89RSl944YHlayxb0Q8b5oGbL0SotSEeQ7VR
-         BinwLl4VfT8HX6wrRPdlAYqQ80l9D0KcFQulzC6qFNsTmarJvgdExRN0u8PTH1+/6V8g
-         XgP7E6mM5cu/aCF2qS/Oq1yzLl4xc6HznuxBdePCAKLnnIBGPqmmsWM4HkH3eyzn2dKc
-         dhUeh3x+oswaPcTT1pwYHEpZmNAXHjNILNZw8mD4EaA5fUUVlyifxfj0GW3yDoNTpFIq
-         Rn6w==
+        d=gmail.com; s=20251104; t=1785732492; x=1786337292; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=eidjmnrjKXjAWJf77xTqxScnhJGnGwTlBVkDzO31WGk=;
+        b=jvDMmZrRPu/UDJOlLuN5gXnSkgx9ebueylPMRhwIoE0/mnL7JW0pkqwwbGBtN8EfgQ
+         VE3XgPlEFsscORG/QnsRSzAVSIoLltcNGX9soQ7jQLVKPB6jYtHeFhXse9r1sMmu5MFD
+         WrOv+x0peibqEs0AUPTnZIYqK/RHpTYyiilgJywYs1Z7SUT3RQn3VQ84X1PFqnPUQnnk
+         EIWWjVtPwBgrFOpD2pH+LPYsy80iBW8XRXKfbmwS5N48dGIYaznf8Y36c1+RfdePJuPo
+         vFJ60F9Pa0+cVU0flaMmL3AZVtZ8JkF4lw0i3D25fdnyZ47vyIDOU8UWh9Hf6t50hiRy
+         DfqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785731169; x=1786335969;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=GqHSUzv6TANlrKeUaTe/Y6BeYPwufFXq4KfOBLJTa0A=;
-        b=C/aPBlBNudWkMWuxYXQXuUj/0eQNwoONGNSH5bIUwLARVUfJzv/VTEXqTtFPi0gXg+
-         QqgpcYFEOd3Nj3EO3ztLpKRb17jjmqkzwd8liJs0gna83yx2O0tn0Lhz6oKKbbfUWGRc
-         iW8Kg8qaN3aYiU2pjZgfuuVHkOi9TWPvqX3n91BOkOQxSmNCOyo0gkgOPXoI4IaoNMOA
-         YYW1vWmxICKs6sstGEAd9P/W3my/gKbl5A0XtjY+LUz804RWSFeYGMKLYTpdM+43LPd6
-         PmpRUw5Kd1k+VmZQ21B7H3EIC/4sZsi4B4WzSSB/rEeQZ0hBTidrkiT/6kRTrk1jl/RN
-         hJ8Q==
-X-Gm-Message-State: AOJu0YxdyBEEDtGPCmqvEUJmnPbRa9Y3TNwSrafFrHAiLDqFn81CMqNC
-	wLZXe1QkU72ylFl0yQRGBA2bjE3GZuHXpz3tL6lgk/5JaIXhUwao7gMA2WgDA1h7uZPBlnJICXL
-	Ehe7Oe7EGh6AOGrBSG1b1PpugKIKIK43LIBXqkZB8FazSS3CtZ0K2rmZ9HBD7b3kp6DJ5
-X-Gm-Gg: AR+sD13MRPDqmU4lD/8T34sBP7FTqQxwQvALa0Hdp9RRi1pr/ovvX4hE9aPRRXq9FZi
-	0nZ/NTfEWR/exDBJP7vERGo+1yrSsOoj0aw4wZh274Qxu/e5upGSwx1xOuNt0MHNdRgeEEBASva
-	HTuI9cg2pTdDWYVG3OlnJMxgt2DI0pr0ykl36Uvu2QThoXR3NiwApOFAXDuUzIFNj/mmTXCXMgh
-	LwJjdxYLw6bkH9lfDSNga+qVJk4MKsZs0jZ3r0VEcGqusnMj2dfqIv6/OtlElsNDYAaTXeCjyK8
-	twKB4P/MNjpB+p5QvmImGIR0XylQupOV+frtXSIHDdyNsetPndElRc3rt5SU+vcEh4OXrK9NLca
-	j/Dn2PrUrWnXiWawRwwzBm/+X7o1WlHy6a5FhCfLi8OMOgLjC42XZfXJACCONPyRZm5QOUw==
-X-Received: by 2002:a17:90b:4b81:b0:387:e0db:3fb2 with SMTP id 98e67ed59e1d1-38fbc5abb33mr7980190a91.43.1785731168657;
-        Sun, 02 Aug 2026 21:26:08 -0700 (PDT)
-X-Received: by 2002:a17:90b:4b81:b0:387:e0db:3fb2 with SMTP id 98e67ed59e1d1-38fbc5abb33mr7980175a91.43.1785731168288;
-        Sun, 02 Aug 2026 21:26:08 -0700 (PDT)
-Received: from hu-kriskura-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13fab25227bsm26427203c88.7.2026.08.02.21.26.04
+        d=1e100.net; s=20251104; t=1785732492; x=1786337292;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=eidjmnrjKXjAWJf77xTqxScnhJGnGwTlBVkDzO31WGk=;
+        b=b6O9bnCeRwEbs02rGfSDPEVOONERaQn171WeD+97qNYuhh9GT/fBjmF64HHER8wVtw
+         wPLVaVVoebLo5KCEjxvWZu7YHhdQxTp9wlJYop0tDanTHAiPK4MS4nnefkGpv1rL4NAU
+         zHI6YAn11B9okbP9bSX3Dlkwr6W/E5c5KDDtvbDGoQPbj9p9xyTbnWnT+JoPn4TaPx2I
+         D0RI2j8clUrqqHAoFR1WDDRrSv33h48uowKjwo+kUe43pFejts1tH59kPAgDHBkN/mN9
+         JWtuyp57C7R6LFg7Q7ew3Ne4uE7BDEkKGmn5vzZM4bee8DEi9gB8++L6UrqFG1ggFYeo
+         3egA==
+X-Forwarded-Encrypted: i=1; AHgh+RqEVCkQu8vZPCX2k0FXz+GvsOwJ7f8r8PrSQYjssXzaDNe8E1njDu3rjSM2L/Q5V7xDqum+K2XfL7asGU7a@vger.kernel.org
+X-Gm-Message-State: AOJu0YxVktlRyqYezyRrxJwlFa30yieMTgxIvdXNmVwqPzHmoAwn+ENG
+	0lsCYzsFosrvbDXkJHPthY1qf4NHJA1WkatZobHCcxjxTBo60pzbf/ov
+X-Gm-Gg: AR+sD132K+vu+HcLs82TP9+Tp6XZ5TdzgHZYoTcDSbowk0nBDq3NKLDpQ65ws7yfOOR
+	WKtWXTRu7WY1raTdShgGTNYRVChK79bI3x7z7VlZgpFPSAJfoHa3wJ3NBwyzfqH5SBFJ066ZY2o
+	Zvj97uRq7vFY0WYI6BantbogUGzN3JcGUcTQReJfBTxeKRdcUHNTYGT/4C79Hb6eal1uZ/rlfvz
+	jNXajrLUlmlQCqiN0/jLOY1rrAFoSs8azdo8aOU9i0bsJ024F+2LxKT6hCRmbK3tb+gDZGfUw4q
+	F3njFEkCBGwI4OgPHtjq0k6xOr1B9hmWEemDl5Q/Qjq5CXnAhct9mLP14NMgA41q/UtbwD9j0t/
+	ovf2jZbI/4ZOTWEVcU69WM9ey1jIk9rkNF4XwCEUWTRYY8V0476TWBp7A/6YDVfzc3jXaR1/GwF
+	kxaKJNPBsXaWYa/JNoLs3JIoH/3R4pxDMPwbZABTll+d3vZkceFOxk3vqO2oJyGgHH0/D5bxGLC
+	nRQwPhwmjeyhIEGU3KBL+ICUtdwXEtmvVBiyEcLSp9QJtz2GM0F6/d2y3i66cOp7FhfAw==
+X-Received: by 2002:a05:600c:3e15:b0:495:5dcc:52b4 with SMTP id 5b1f17b1804b1-4980c649cbcmr183578235e9.3.1785732491559;
+        Sun, 02 Aug 2026 21:48:11 -0700 (PDT)
+Received: from rocinante (lfbn-tou-1-1098-107.w90-76.abo.wanadoo.fr. [90.76.164.107])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49807b86d66sm90376415e9.1.2026.08.02.21.48.10
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 02 Aug 2026 21:26:07 -0700 (PDT)
-From: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-Date: Mon, 03 Aug 2026 09:56:03 +0530
-Subject: [PATCH] arm64: dts: qcom: Fix USB interrupts in Glymur DT
+        Sun, 02 Aug 2026 21:48:11 -0700 (PDT)
+From: Stephane Lepain <stephanelepain@gmail.com>
+To: =?UTF-8?q?Uwe=20Kleine-K=C3=B6nig?= <ukleinek@kernel.org>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	linux-pwm@vger.kernel.org,
+	Kenneth Kasilag <kenneth@kasilag.me>,
+	George Moussalem <george.moussalem@outlook.com>,
+	Devi Priya <quic_devipriy@quicinc.com>,
+	Baruch Siach <baruch.siach@siklu.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Stephane Lepain <stephanelepain@gmail.com>
+Subject: [PATCH v3] pwm: ipq: fix period calculation
+Date: Mon,  3 Aug 2026 06:47:48 +0200
+Message-ID: <20260803044748.27116-1-stephanelepain@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260731070427.155221-1-stephanelepain@gmail.com>
+References: <20260731070427.155221-1-stephanelepain@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260803-glymur-dt-usb-fixes-v1-1-0f5f52853102@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAFoYcGoC/yXMQQqDMBCF4avIrDsQExHtVUoX0Ux0pLUlY0QR7
- 27U5cfjfxsIBSaBZ7ZBoJmFf2NC/sig7e3YEbJLBq10qSplsPus3xjQTRilQc8LCZbam7xwxht
- bQyr/ga4hha/3bYnNQO10XsG+H2pKZZB3AAAA
-X-Change-ID: 20260803-glymur-dt-usb-fixes-62f314d3f3a9
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785731164; l=3907;
- i=krishna.kurapati@oss.qualcomm.com; s=20260707; h=from:subject:message-id;
- bh=vaUOuNP9CEXlMt4R9gRdtJC6kku8gQd4DJAx93x9pZw=;
- b=EMk9vfc4fwL9onGUGejJFf0vqpwOWEXMUasvxCUicTPp01k5xfG4H8g8x0NJx/7F0W2qC8TJh
- nZjTeyz9jbeAGXW/wzaj7JDUEf25AgpSWQwLnWzRJUedH4SM0crvU/h
-X-Developer-Key: i=krishna.kurapati@oss.qualcomm.com; a=ed25519;
- pk=6PmiuwGCdov3wRO+bdmRlRxRtmJyDKz3ED57LLPVgds=
-X-Authority-Analysis: v=2.4 cv=PZPPQChd c=1 sm=1 tr=0 ts=6a701861 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=eq2ofp1Og2zW7akVGkcA:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-GUID: HJWoExMYL2ycnbtDxXdZ9oZCEoPAqPaq
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDAzNCBTYWx0ZWRfX8w8l397M6k4G
- T0zCBpZXhYhXJXYaW1y+GPXdT9L6pMhoIeGjHTKNQe6OPivMAEzPer/fAbMJMI9RUln5QpbK7GH
- LJSKy/VpbhgWOqwYSDACAyHjibtH1Os=
-X-Proofpoint-ORIG-GUID: HJWoExMYL2ycnbtDxXdZ9oZCEoPAqPaq
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDAzNCBTYWx0ZWRfX96fz3gGUFpZY
- 8qTfD8NANKNDbSFOUdd401Wuz/I4GZxow+ILs2+XRGhauCk3Bmi49HnYidSX2qIqJzS1JPZjBNd
- OHARkPHumcYX7czTcpLC7DoafwUYvdh/X4cQA8ozmLUEcu8b2RiLh1cC60TuFeBm5WDj2py7mdC
- USpes5xi/TrffJ2V0bARDvF5hISmhvm230d5BmIbn5DzTTRThHP+B04rpOWWo/qdKX3UYxcrjea
- YbeKU7EXGjD9LBCNhpE5H/8/2dTJkjV8WJ5zUBlyDxkRozJ+8llFbk74xpOkwAp+wfZh8jWVhQA
- xu7tgpxYvy6oofImgeiQC60N3eOuoRvYT3M0DnbbIFLCLVvtCPTsgABIgkivXFX7JAQHKgLStn5
- 83xs3MHRwqkyBCVKNaHy4ZDgdqXzLdSOubKPaEeIzG6M/n+ORi046idmrsO0jhvhw0uObAw+PXC
- zl+jZQLNWSbemWJAIvQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-02_06,2026-07-30_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 spamscore=0 clxscore=1015 adultscore=0 suspectscore=0
- malwarescore=0 impostorscore=0 bulkscore=0 phishscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608030034
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-In Glymur, DRD capable USB Nodes are missing the HS Phy IRQ. Also, fix the
-pwr_event and hs_phy interrupt numbers in Multiport coontroller node.
+From: Kenneth Kasilag <kenneth@kasilag.me>
 
-While at it, the dp and dm interrupt numbers have been swapped on HS only
-usb controller. Fix them up.
+ipq_pwm_apply() fixes pwm_div at its maximum and derives only pre_div
+from the requested period. Since the period spans
+(pre_div + 1) * (pwm_div + 1) input clocks, pinning pwm_div near its
+maximum forces pre_div towards zero for short periods: once pre_div
+rounds to 0 the shortest representable period is (pwm_div + 1) / clk_rate,
+and any shorter request is rejected outright:
 
-Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+	pre_div = mul_u64_u64_div_u64(period_ns, ipq_chip->clk_rate,
+				      (u64)NSEC_PER_SEC * (pwm_div + 1));
+	if (!pre_div)
+		return -ERANGE;
+
+Four-wire fans commonly expect a ~25 kHz PWM, which is therefore
+unusable. On an IPQ6018 with the PWM block clocked at 100 MHz, a
+40,000 ns (25 kHz) request computes floor(0.061) == 0 and returns
+-ERANGE deterministically. Where a request is not rejected outright, the
+high duration truncates to 0 and the output collapses to ~0% duty.
+
+Search for the (pre_div, pwm_div) pair whose period best approximates
+the request instead of fixing pwm_div. Starting pre_div at the smallest
+value that keeps pwm_div within its field and stopping once pre_div
+exceeds pwm_div bounds the loop and keeps pwm_div as large as possible
+for fine duty resolution. For a 25 kHz request at 100 MHz this selects
+pre_div = 0, pwm_div = 3999, i.e. exactly 4000 clocks, with full 0..4000
+duty resolution.
+
+While reworking the high-duration computation, round it to nearest
+rather than truncating, so mid-range duty cycles are not biased low, and
+clamp it to pwm_div + 1. Rounding, or a 100% duty request, could
+otherwise push hi_dur past the period length and overflow the 16-bit
+HI_DURATION field.
+
+This was first fixed downstream in OpenWrt for the qualcommbe target
+after testing on the Askey SBE1V1K, and has since been applied to
+OpenWrt's qualcommax target as well.
+
+Tested on a GL.iNet GL-AXT1800 (IPQ6018, 100 MHz PWM clock) whose DTS
+requests a 25 kHz period for its four-wire fan:
+
+  pwms = <&pwm 1 40000 0>;
+
+Before, pwm-fan failed to probe on every boot:
+
+  pwm-fan pwm-fan: failed to enable PWM
+  pwm-fan pwm-fan: Failed to configure PWM: -34
+  pwm-fan pwm-fan: probe with driver pwm-fan failed with error -34
+
+The same failure is reproducible without pwm-fan, straight from sysfs:
+
+  # echo 40000   > period; echo 1 > enable   -> write error (-ERANGE)
+  # echo 2700000 > period; echo 1 > enable   -> succeeds
+
+Because probe returns before the tachometer IRQ is requested and before
+fan-supply is claimed, the board also lost fan RPM reporting and its
+vcc_fan regulator stayed disabled, leaving the DTS cooling-maps with no
+cooling device to bind to.
+
+After, pwm-fan probes cleanly and the fan is confirmed spinning by its
+own tachometer:
+
+  /sys/class/hwmon/hwmon7/name                          = pwmfan
+  /sys/devices/platform/pwm-fan/hwmon/hwmon7/fan1_input = 3548
+  /sys/class/regulator/regulator.3 (vcc_fan)            = enabled
+  /sys/class/thermal/cooling_device1                    = pwm-fan
+
+with idle SoC temperature dropping from ~76 °C to ~51 °C.
+
+Fixes: c436e3e9c265 ("pwm: Driver for qualcomm ipq6018 pwm block")
+Signed-off-by: Kenneth Kasilag <kenneth@kasilag.me>
+[Stephane: dropped the explanatory comment, the unreachable
+ clk_rate > 16 GHz bound and the unrelated hi_div cast, per review]
+Tested-by: Stephane Lepain <stephanelepain@gmail.com>
+Signed-off-by: Stephane Lepain <stephanelepain@gmail.com>
 ---
-This series has only been compile tested.
+Changes in v3:
+- Resend: v2 accidentally carried a stray copy of the whole driver at
+  t/drivers/pwm/pwm-ipq.c (a leftover verification directory that got
+  swept into the commit). Only drivers/pwm/pwm-ipq.c is touched here.
+- No functional change from v2.
 
-Binding depedency:
-https://lore.kernel.org/all/20260803-glymur-usb-binding-fixes-v1-1-9ce334777387@oss.qualcomm.com/
----
- arch/arm64/boot/dts/qcom/glymur.dtsi | 22 ++++++++++++++--------
- 1 file changed, 14 insertions(+), 8 deletions(-)
+Changes in v2 (per Konrad Dybcio's review):
+- Dropped the explanatory comment above the divider search; the rationale
+  lives in the commit message.
+- Dropped the "clk_rate > 16 * GIGA" bound. period_ns is already clamped
+  to IPQ_PWM_MAX_PERIOD_NS (1e9), so period_ns * clk_rate only overflows
+  u64 above ~18.4 GHz, i.e. ~184x the 100 MHz this block runs at; the
+  check was unreachable.
+- Dropped the "(u64)hi_div" cast as unrelated. It is not a live bug
+  either: hi_dur and pre_div both come from 16-bit fields, so the worst
+  case 65535 * 65536 = 4294901760 still fits u32 (effective_div on the
+  line above genuinely does need the cast, at 65536 * 65536).
+- Behaviour is unchanged: for 40,000 ns at 100 MHz the search still
+  selects pre_div = 0, pwm_div = 3999.
 
-diff --git a/arch/arm64/boot/dts/qcom/glymur.dtsi b/arch/arm64/boot/dts/qcom/glymur.dtsi
-index f04058d2e089..7a71297db481 100644
---- a/arch/arm64/boot/dts/qcom/glymur.dtsi
-+++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
-@@ -4574,11 +4574,13 @@ usb_0: usb@a600000 {
- 
- 			interrupts-extended = <&intc GIC_SPI 140 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&intc GIC_SPI 371 IRQ_TYPE_LEVEL_HIGH>,
-+					      <&intc GIC_SPI 368 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&pdc 90 IRQ_TYPE_EDGE_BOTH>,
- 					      <&pdc 60 IRQ_TYPE_EDGE_BOTH>,
- 					      <&pdc 17 IRQ_TYPE_EDGE_BOTH>;
- 			interrupt-names = "dwc_usb3",
- 					  "pwr_event",
-+					  "hs_phy_irq",
- 					  "dp_hs_phy_irq",
- 					  "dm_hs_phy_irq",
- 					  "ss_phy_irq";
-@@ -4649,11 +4651,13 @@ usb_1: usb@a800000 {
- 
- 			interrupts-extended = <&intc GIC_SPI 875 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&intc GIC_SPI 369 IRQ_TYPE_LEVEL_HIGH>,
-+					      <&intc GIC_SPI 878 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&pdc 88 IRQ_TYPE_EDGE_BOTH>,
- 					      <&pdc 87 IRQ_TYPE_EDGE_BOTH>,
- 					      <&pdc 76 IRQ_TYPE_EDGE_BOTH>;
- 			interrupt-names = "dwc_usb3",
- 					  "pwr_event",
-+					  "hs_phy_irq",
- 					  "dp_hs_phy_irq",
- 					  "dm_hs_phy_irq",
- 					  "ss_phy_irq";
-@@ -4725,11 +4729,13 @@ usb_2: usb@a000000 {
- 
- 			interrupts-extended = <&intc GIC_SPI 871 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&intc GIC_SPI 370 IRQ_TYPE_LEVEL_HIGH>,
-+					      <&intc GIC_SPI 877 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&pdc 89 IRQ_TYPE_EDGE_BOTH>,
- 					      <&pdc 81 IRQ_TYPE_EDGE_BOTH>,
- 					      <&pdc 75 IRQ_TYPE_EDGE_BOTH>;
- 			interrupt-names = "dwc_usb3",
- 					  "pwr_event",
-+					  "hs_phy_irq",
- 					  "dp_hs_phy_irq",
- 					  "dm_hs_phy_irq",
- 					  "ss_phy_irq";
-@@ -4805,14 +4811,14 @@ usb_hs: usb@a200000 {
- 
- 			interrupts-extended = <&intc GIC_SPI 240 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&intc GIC_SPI 246 IRQ_TYPE_LEVEL_HIGH>,
--					      <&pdc 92 IRQ_TYPE_EDGE_BOTH>,
-+					      <&intc GIC_SPI 239 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&pdc 57 IRQ_TYPE_EDGE_BOTH>,
--					      <&intc GIC_SPI 239 IRQ_TYPE_LEVEL_HIGH>;
-+					      <&pdc 92 IRQ_TYPE_EDGE_BOTH>;
- 			interrupt-names = "dwc_usb3",
- 					  "pwr_event",
-+					  "hs_phy_irq",
- 					  "dp_hs_phy_irq",
--					  "dm_hs_phy_irq",
--					  "hs_phy_irq";
-+					  "dm_hs_phy_irq";
- 
- 			resets = <&gcc GCC_USB20_PRIM_BCR>;
- 
-@@ -4870,10 +4876,10 @@ usb_mp: usb@a400000 {
- 				      "noc_aggr_south";
- 
- 			interrupts-extended = <&intc GIC_SPI 132 IRQ_TYPE_LEVEL_HIGH>,
--					      <&intc GIC_SPI 345 IRQ_TYPE_LEVEL_HIGH>,
--					      <&intc GIC_SPI 346 IRQ_TYPE_LEVEL_HIGH>,
--					      <&intc GIC_SPI 162 IRQ_TYPE_LEVEL_HIGH>,
--					      <&intc GIC_SPI 163 IRQ_TYPE_LEVEL_HIGH>,
-+					      <&intc GIC_SPI 313 IRQ_TYPE_LEVEL_HIGH>,
-+					      <&intc GIC_SPI 314 IRQ_TYPE_LEVEL_HIGH>,
-+					      <&intc GIC_SPI 130 IRQ_TYPE_LEVEL_HIGH>,
-+					      <&intc GIC_SPI 131 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&pdc 12 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&pdc 11 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&pdc 14 IRQ_TYPE_LEVEL_HIGH>,
+ drivers/pwm/pwm-ipq.c | 91 ++++++++++++++++++++++++++++++-------------
+ 1 file changed, 65 insertions(+), 26 deletions(-)
 
----
-base-commit: 1e88112e60de707020f3def45af81f9a0180ee82
-change-id: 20260803-glymur-dt-usb-fixes-62f314d3f3a9
-
-Best regards,
---  
-Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+diff --git a/drivers/pwm/pwm-ipq.c b/drivers/pwm/pwm-ipq.c
+index c533739..797559d 100644
+--- a/drivers/pwm/pwm-ipq.c
++++ b/drivers/pwm/pwm-ipq.c
+@@ -89,10 +89,10 @@ static int ipq_pwm_apply(struct pwm_chip *chip, struct pwm_device *pwm,
+ 			 const struct pwm_state *state)
+ {
+ 	struct ipq_pwm_chip *ipq_chip = ipq_pwm_from_chip(chip);
+-	unsigned int pre_div, pwm_div;
+-	u64 period_ns, duty_ns;
++	unsigned int pre_div, pwm_div, best_pre_div, best_pwm_div;
++	u64 period_ns, duty_ns, period_rate, min_diff;
+ 	unsigned long val = 0;
+-	unsigned long hi_dur;
++	u64 hi_dur;
+ 
+ 	if (!state->enabled) {
+ 		/* clear IPQ_PWM_REG1_ENABLE */
+@@ -112,35 +112,74 @@ static int ipq_pwm_apply(struct pwm_chip *chip, struct pwm_device *pwm,
+ 	period_ns = min(state->period, IPQ_PWM_MAX_PERIOD_NS);
+ 	duty_ns = min(state->duty_cycle, period_ns);
+ 
+-	/*
+-	 * Pick the maximal value for PWM_DIV that still allows a
+-	 * 100% relative duty cycle. This allows a fine grained
+-	 * selection of duty cycles.
+-	 */
+-	pwm_div = IPQ_PWM_MAX_DIV - 1;
++	period_rate = period_ns * ipq_chip->clk_rate;
++
++	best_pre_div = IPQ_PWM_MAX_DIV;
++	best_pwm_div = IPQ_PWM_MAX_DIV;
++	min_diff = period_rate;
+ 
+ 	/*
+-	 * although mul_u64_u64_div_u64 returns a u64, in practice it
+-	 * won't overflow due to above constraints. Take the max period
+-	 * of 10^9 (NSEC_PER_SEC) and the pwm_div + 1 (IPQ_PWM_MAX_DIV)
+-	 *  10^9 * 10^8
+-	 * ------------- => which fits well into a 32-bit unsigned int.
+-	 * 10^9 * 65,535
++	 * Smaller pre_div than this cannot represent the period (pwm_div would
++	 * have to exceed its field), so start the search there.
+ 	 */
+-	pre_div = mul_u64_u64_div_u64(period_ns, ipq_chip->clk_rate,
+-				      (u64)NSEC_PER_SEC * (pwm_div + 1));
+-
+-	if (!pre_div)
+-		return -ERANGE;
++	pre_div = div64_u64(period_rate,
++			    (u64)NSEC_PER_SEC * (IPQ_PWM_MAX_DIV + 1));
++
++	for (; pre_div <= IPQ_PWM_MAX_DIV; pre_div++) {
++		u64 remainder;
++
++		pwm_div = div64_u64_rem(period_rate,
++					(u64)NSEC_PER_SEC * (pre_div + 1),
++					&remainder);
++		/* pwm_div is unsigned; the swap check below catches underflow */
++		pwm_div--;
++
++		/*
++		 * Swapping pre_div and pwm_div yields the same period but a
++		 * larger pwm_div gives finer duty resolution, so once pre_div
++		 * exceeds pwm_div every further candidate is strictly worse.
++		 */
++		if (pre_div > pwm_div)
++			break;
++
++		/* need room for 100% duty, where hi_dur == pwm_div + 1 */
++		if (pwm_div > IPQ_PWM_MAX_DIV - 1)
++			continue;
++
++		if (remainder < min_diff) {
++			best_pre_div = pre_div;
++			best_pwm_div = pwm_div;
++			min_diff = remainder;
++
++			if (min_diff == 0)
++				break;
++		}
++	}
+ 
+-	pre_div -= 1;
++	pre_div = best_pre_div;
++	pwm_div = best_pwm_div;
+ 
+-	if (pre_div > IPQ_PWM_MAX_DIV)
+-		pre_div = IPQ_PWM_MAX_DIV;
++	/*
++	 * If the search found no usable candidate, best_pwm_div is left at
++	 * IPQ_PWM_MAX_DIV; cap it so pwm_div + 1 still fits the 16-bit field
++	 * and 100% duty remains expressible.
++	 */
++	if (pwm_div > IPQ_PWM_MAX_DIV - 1)
++		pwm_div = IPQ_PWM_MAX_DIV - 1;
+ 
+-	/* pwm duty = HI_DUR * (PRE_DIV + 1) / clk_rate */
+-	hi_dur = mul_u64_u64_div_u64(duty_ns, ipq_chip->clk_rate,
+-				     (u64)NSEC_PER_SEC * (pre_div + 1));
++	/*
++	 * high duration = duty_ratio * (pwm_div + 1)
++	 *              = duty_ns * clk_rate / ((pre_div + 1) * NSEC_PER_SEC)
++	 *
++	 * Round to nearest to avoid biasing every duty cycle low, then clamp
++	 * to (pwm_div + 1): rounding or a 100% request can otherwise push
++	 * hi_dur past the period, overflowing the 16-bit HI_DURATION field
++	 * and asking the hardware to stay high beyond one period.
++	 */
++	hi_dur = DIV64_U64_ROUND_CLOSEST(duty_ns * ipq_chip->clk_rate,
++					 (u64)(pre_div + 1) * NSEC_PER_SEC);
++	if (hi_dur > (u64)pwm_div + 1)
++		hi_dur = (u64)pwm_div + 1;
+ 
+ 	val = FIELD_PREP(IPQ_PWM_REG0_HI_DURATION, hi_dur) |
+ 		FIELD_PREP(IPQ_PWM_REG0_PWM_DIV, pwm_div);
+-- 
+2.55.0
 
