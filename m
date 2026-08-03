@@ -1,238 +1,294 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47DE639A054
-	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 12:35:49 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A73531F991;
+	Mon,  3 Aug 2026 12:39:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785760550; cv=none; b=Qe1n2LZsGoxfLlpdxQEm6drRkrVtef7xe0DOY87U8fzRTOZ+XwKBWtot3W5Ysw0xfAtTGe0IR4yN3VSfc2MuKx1PSr4Ss0boM6flNbi87WbQZ6l/BBCJdrDkheVEq5SnmlRjtG1a7y5WtbN4n9oqFmC1VkItTc+F5/mnn4WCl04=
+	t=1785760747; cv=none; b=QOqCWWKvgQ2rLG5w3iyZheHOBno531Vca9VW3fTJkE00ikpAyo3vihB6XWOI988eMs/XInXSV/hiGLQQNZHxKZRKtiQC3lVoQcPLFgR+w6GIlj17Xvtx29CsB1CmU6F04RfeGZbyScvGLJYKPKfujgxqTZpIK0rZq4tOwTb1gGc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785760550; c=relaxed/simple;
-	bh=99ukNQ7BdIOZb2JpWnfJu5Xs1lh7ce+r0U0zLUuRsrw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=MQNrTeelFKWuTDKfUPE8Ozy9mXiw7+COnfoI7YMHBR50pagRs/gEJGX3KZvYEbGVol5D2BYHhnUPHHDWOn4ydcLD5sZfzk99Cfa0A3I5bbZ+9DABcyrJlLZCrpwl/sweJiMqwn1db7ZuNTJ14Spqp7lUcB3k4Bm6McVLQJ/i54k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bzz6n/gc; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=P33rGN+9; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785760747; c=relaxed/simple;
+	bh=9hpHOy1m9ICSDrTNHLJLXu9VFFuslXTqcO6D5bYwqv8=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=gn2P7IlXml2fHGS99Oo8NhI6CXH+yNd9IPlNLZ9+1dbGs14KITNuqmS5EXZhKN/p6+GjA2cFQ9GtpnnlCIk09B7IH+wL4pqktqBcE4Z3GSJdYqAf4sTceTesvEHiXQ4z30tH7VE+1Pew5DjaO9OcIhGDj2N+m0E6eCXy4fXbFXc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=O6i+wKYo; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bzz6n/gc";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="P33rGN+9"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 673C4jjL4143560
-	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 12:35:48 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=Vc34inBE7889SKrHzyISv1++
-	OnZDLFt/IxkNd1Y3Ifs=; b=bzz6n/gcx4wNDTUR80fvp7zdbk1Np0p4Q0+DfsOq
-	RUO4Rc9qgJKcKoE3mVBmJqfWPMTyzsGSgkppMaLQ+Bj1cLuU0ZpfO7fZjV+1g2N0
-	UBqH2ZzLi5rZWy/Ggv4NXZR+N3+YyqQ7hfBEcg03V+V/OE97BsNkSojdbNPW+jBV
-	j4srs+OQQNB7PYne39ga9tGf2ExmoUR6ktZu3wRs65eoN+LEDzm2W4KPLVyZNdBd
-	cSY4LgRsZZhH6hdkeZp3IeP+gLZ/xzAfPFUL0vuf7ZqoKWAr4R2TJxNHSKWk6kw8
-	EuWrqWc0aFe3DEvmbA/BvtolX/pVLJ59g55RnPmgbQdWXg==
-Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftdmxapvd-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 12:35:48 +0000 (GMT)
-Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-8fc92c5373bso36390806d6.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 05:35:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785760547; x=1786365347; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Vc34inBE7889SKrHzyISv1++OnZDLFt/IxkNd1Y3Ifs=;
-        b=P33rGN+9HCFAXO5WLSwLhJckQTHxaHMtSNwSUWyJDwi9vEfxvMT4pf40u9N1yGSOPQ
-         BMGWKGugfSCaf9ZExSSiZBKapmRMzYy9HhCNYkcYwLl/BT3S7rxVwt9IXFK/eJ9HIfga
-         kBiTh44mWLrOEXKBlAav6/9J3re3PRGyGWcGMVyQrGiRIa33iqZ2k8V/H123BCtArmFi
-         Tr7vehaDyIjXh69VwBc8IrvZ1tdtg0HWbOQjnEHZKxqOcDZpq5XOzdmRYyrhtblD/WiO
-         d9/hEFonON/xe0LYeDhKCgQn1LKFEwppBPoJS/f5cqSWCzPnTZI76P+Mp/StMKl/Z6kr
-         yvfA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785760547; x=1786365347;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Vc34inBE7889SKrHzyISv1++OnZDLFt/IxkNd1Y3Ifs=;
-        b=rgn7820JdR8byjD186M+EKxCZkZsTXePDJhBVvBjnBS5zceQov2oFiImuO4Yf1NjXC
-         TjK0iVYZSMJaGOOQpC2mt0hH1QYTzCUL4i6rsFMVq7Ffm+ojb5sAYmmVBFqMLyIgcnrM
-         KRaCOxv3/k5Z94WSBApOz/djt88vGeIbBLVkkOJEO8+9o/WSoUqHIV09fWvU4xzip+Vv
-         WKQaTP5Ga9W8Atxen3z8sDAR4UkSJuAdtp8xDtYULxhXZDSCvArMrXA0mHZJRDRqObJs
-         bR1NpKmAMcUWOHnpRfOgCutqemadtlbywhMvRjBuKECSV0HNblfd3i/vHFR5kGuBBL2T
-         FL4w==
-X-Forwarded-Encrypted: i=1; AHgh+RqV1/NQeuJLE+nj0KDdlzj3XcrwuqOn2KlYiBDhZ175ZYJt3V3KOhskSSZroejMCU8/wO+MmG1NYcQIhJMg@vger.kernel.org
-X-Gm-Message-State: AOJu0YyVbvo64PMl71iaxE8TZVVAUJ1o5/u2Vw+WaFOMLuu3cPKQb91r
-	gdN7ZE7VQgz77Qtc+5+ZgcLdpE/0Un+9/1Xbu0qbJRX3npcXS3or1ngZdF9PexZ/qd/0IB5vABe
-	TzglKEw4aN19uJ8BLQaYMmZ8airX0ml38636q4lhXBWdgUtJyG+WBWjavBheJmGfhQwbs
-X-Gm-Gg: AR+sD12P+bDEWRr8FVtV4/afivz3xA4XJqVqiHarxF6yCwSKU9G3kvwvMHmmO/9c8FI
-	6uyKDi2nVwWv5VA4b+gR8hHG1nmW79f3YXTKjOu/TW7Q7nuZGMwRqp5DnQYLkhQ0SjrSI56C94v
-	qmuq4zXhAJ2R0hBgqFHtYLaShrD7i7nyQPGnj/EwxiM5jez+RaJqRm9B/VatOzHT2kr5B7+T0qo
-	/kxqTFAAD0mxNJespaVB8+k58NgZmQgqFJzF6TEqwu5/y12FBk3ZvpVn9bJpq12bY70o4pdWEjP
-	15RfapbF45gtIrf/296PY7E6bUfC0GAaIqf4jm6R9Jb2ayj+5zsCtL8GO+T5sYereVODvLUlKZu
-	/kZCsOyYFzEic3e/HYKE6LBsYeH8=
-X-Received: by 2002:a05:6214:2e4a:b0:8f2:1663:abe9 with SMTP id 6a1803df08f44-90849602f41mr218707946d6.19.1785760547049;
-        Mon, 03 Aug 2026 05:35:47 -0700 (PDT)
-X-Received: by 2002:a05:6214:2e4a:b0:8f2:1663:abe9 with SMTP id 6a1803df08f44-90849602f41mr218706876d6.19.1785760546375;
-        Mon, 03 Aug 2026 05:35:46 -0700 (PDT)
-Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-90843604cc4sm75444116d6.43.2026.08.03.05.35.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Aug 2026 05:35:46 -0700 (PDT)
-Date: Mon, 3 Aug 2026 18:05:37 +0530
-From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Manikanta Mylavarapu <manikanta.mylavarapu@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Gokul Sriram Palanisamy <gokul.sriram.p@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Vignesh Viswanathan <vignesh.viswanathan@oss.qualcomm.com>
-Subject: Re: [PATCH v14 1/9] firmware: qcom_scm: ipq5332: add support to pass
- metadata size
-Message-ID: <20260803123537.utocak6hvhl5ijqh@hu-mojha-hyd.qualcomm.com>
-References: <20260803-rproc-v14-0-a1f87b0b0ad2@oss.qualcomm.com>
- <20260803-rproc-v14-1-a1f87b0b0ad2@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="O6i+wKYo"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8B64CC2BCB9;
+	Mon,  3 Aug 2026 12:39:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1785760746;
+	bh=9hpHOy1m9ICSDrTNHLJLXu9VFFuslXTqcO6D5bYwqv8=;
+	h=From:Date:Subject:To:Cc:Reply-To:From;
+	b=O6i+wKYou95aZ+mJFWGgW+M1yxHu3UVPhw9rc7eud6h9R1zH/fNMPUGGpDMPG6HWr
+	 Y1MM57hz2b/sNA/U66FtblPAA0hPC59HXbRNL6xYC2fw55DFK8a6FNmdhJ67MRAj1x
+	 kecmEit0LnTsqtmXwfNjj7aIFodRB2+HpDWr4vRDuiojuBvTfp0YM+sEKEtdadAOFu
+	 fq1CPOXh6Rrz1Yq1dNsYTW0LIpy0J6jOdIlOpCeEtr9G7wc6F2RMbzJlIm5GC60quf
+	 oC3Zm1DO2eZ8pQ9RXuew4U2v61NA4FxDoN63PovQnHW17Wbua6EuGbxD8OKUkY7y6d
+	 GVDKkF63VaPpg==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 67148C55184;
+	Mon,  3 Aug 2026 12:39:06 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Mon, 03 Aug 2026 14:39:04 +0200
+Subject: [PATCH RFC v3] wifi: ath10k: make in-order rx amsdu buffers
+ persistent
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260803-rproc-v14-1-a1f87b0b0ad2@oss.qualcomm.com>
-X-Proofpoint-GUID: ov6f0Olym1wP_r_C0XTWz13yOTvqpLvn
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDExMiBTYWx0ZWRfXzjoqz6QtTkkD
- HgwmMImiwhruCylxddcpjBgM2ZpyE3BIejmZJK6G3l0gdcswLdAOvsc16LedThsPeqjiz7lCg29
- hRCg5Tg3prHZtH82VcdSyIqWEy6US9FyaTcZJaG0XeK56vzNUQirpWFoii5W40W79p1VljbQX3H
- adXqe0kPu84WUavj2jFqrMiC9Ff/5fpZKHSsN5GjLquJ+dcY+EiDnd9o/yhObzwRonkapMj+GdQ
- Q+Xy+uNGqFBqvdT9ta6HxUUfQTaePow1xxNsAXs8bwkGhtlH8F5VF3dEQHfa25BP3HjoHlVKVH9
- CRJucF8WZLRw8UkJCOWHeE1H6eSeqXXhjhJgwHITyU6lFawXRzY93DVeBZMTky6bLPIee90cwm3
- EsFsNDCM/s0EG4v11Gkrnagmj9BG8LdgDjOJnnXzy5c9hu/SPo1dpPIZi7b2sVrJWdN9qMx/DUT
- IOSS0LVruHOm9O7MUZA==
-X-Proofpoint-ORIG-GUID: ov6f0Olym1wP_r_C0XTWz13yOTvqpLvn
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDExMiBTYWx0ZWRfX8DlFgsJzaMsR
- MhE77zOnplix1f7Gj3i+jwtO24y3q7mybLU/gQhvpj3DTrmeVJWHo7teWP9Mh8SdXjybmg5Y+d3
- Kr5cH8/rueDUJtPQGGu/ZDTbEValWns=
-X-Authority-Analysis: v=2.4 cv=L7MtheT8 c=1 sm=1 tr=0 ts=6a708b24 cx=c_pps
- a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=Xm20eXZJH854yidWDHkA:9 a=CjuIK1q_8ugA:10
- a=pJ04lnu7RYOZP9TFuWaZ:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-03_03,2026-07-30_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 malwarescore=0 bulkscore=0 phishscore=0
- priorityscore=1501 adultscore=0 impostorscore=0 lowpriorityscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608030112
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260803-ath10k-a-msdu-v3-1-af2af21c2f19@ixit.cz>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WNywrCMBREf6XctVfyKJa4EgQ/wK10kTSpuYitJ
+ LFUS/7dkL3LM8Oc2SC6QC7CsdkguIUizVMBuWtg8Hq6OyRbGAQTB9ZxhTp5zh6o8RntG4dWSdk
+ 6wxS3UDav4EZaq+8G18sZ+hJ6imkOn/qxiFr90S0COY5tp4xRlgvenWiltB++0Oecfy5Du3CtA
+ AAA
+X-Change-ID: 20260719-ath10k-a-msdu-c49334eb091d
+To: Jeff Johnson <jjohnson@kernel.org>, 
+ Johannes Berg <johannes.berg@intel.com>, 
+ Kalle Valo <kvalo@qca.qualcomm.com>, 
+ Michal Kazior <michal.kazior@tieto.com>
+Cc: linux-wireless@vger.kernel.org, ath10k@lists.infradead.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ phone-devel@vger.kernel.org, David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8241; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=Vyca6Kdkl5mnaYlJ5S6qCSV/AGIPFC949AIwyje/jKU=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqcIvpvtDhFNQO9qNBdEqaIRvyG6dSIJKpj9twV
+ 7orHrL99pyJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCanCL6QAKCRBgAj/E00kg
+ cnc6D/wMhnWAd46FAWl7v5+K2ANUuv6gsyzd1wAw4ysLDmhmm8fVL8uD1bvw+p+m+rPdcIQmXNb
+ YoW5wrZ2AB/o/o06gXNRPE5n0QB/y7Xr0ccGtwlY2YxCBByZIhpqviN6GIkhhj3TrE/xM/o07X7
+ ItIwqLP5MCWCNsEKXhvqhkd90mnqL4gPqXBZpbEg6XFyF30ZC69m/fCWcawokveQM8Ah8bz0pwn
+ hNTsISX7Lw/wlrnbkWliy/z34OTkzeXCbv4LtVp21Ffan0HojakIwihr83dRf/vsmt+TVMZQZen
+ 4HA1K1d52pzRsHZvBiombCoxlQQinngRGsB/Efitj7hR/f7Uq3uWD5fKmOkWI//RI33rlbD3YZ5
+ AVWOxZ3RZrM3fxPpTGjHFS3SXpIGNmLmQ3KdZ8JfOOh10n+QEbdCMTAQRi+FMOeRxgOuXoCOGMT
+ oixFJqsJmdlpR1SxU9xiLrgJABEdvpLdLlkrERAzdtYEtxpoKh0EhgWQXWzGFV7MF1pjW1i/OER
+ y+hN5kRAu20cIgy2sTHeB0aN0Qh39LO3qafpWfRAuA264CWIIGI6vyU+Dd+/MSmFTMksXccZCcc
+ Y0bdtp1FiVwO/RNDFABCiD8UpA/BDloSeO3ZfOQEskq6mpNT92i78YZ6YHsDle5sMzXDLN3h+4z
+ foSzx9P4LM5DRzQ==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-On Mon, Aug 03, 2026 at 04:16:07PM +0530, Varadarajan Narayanan wrote:
-> From: Manikanta Mylavarapu <manikanta.mylavarapu@oss.qualcomm.com>
-> 
-> IPQ5332 security software running under trustzone requires metadata size.
-> With new command support added in TrustZone that includes a size parameter,
-> pass metadata size as well.
-> 
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Signed-off-by: Manikanta Mylavarapu <manikanta.mylavarapu@oss.qualcomm.com>
-> Signed-off-by: Gokul Sriram Palanisamy <gokul.sriram.p@oss.qualcomm.com>
-> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> Tested-by: Vignesh Viswanathan <vignesh.viswanathan@oss.qualcomm.com>
-> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-> ---
->  drivers/firmware/qcom/qcom_scm.c | 16 ++++++++++++----
->  drivers/firmware/qcom/qcom_scm.h |  1 +
->  2 files changed, 13 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
-> index 3eaa4c9ccf3c..8902c445cf19 100644
-> --- a/drivers/firmware/qcom/qcom_scm.c
-> +++ b/drivers/firmware/qcom/qcom_scm.c
-> @@ -598,7 +598,7 @@ EXPORT_SYMBOL_GPL(devm_qcom_scm_pas_context_alloc);
->  
->  static int __qcom_scm_pas_init_image(struct device *dev, u32 pas_id,
->  				     dma_addr_t mdata_phys,
-> -				     struct qcom_scm_res *res)
-> +				     struct qcom_scm_res *res, size_t size)
->  {
->  	struct qcom_scm_desc desc = {
->  		.svc = QCOM_SCM_SVC_PIL,
-> @@ -619,6 +619,14 @@ static int __qcom_scm_pas_init_image(struct device *dev, u32 pas_id,
->  
->  	desc.args[1] = mdata_phys;
->  
-> +	if (__qcom_scm_is_call_available(__scm->dev, QCOM_SCM_SVC_PIL,
-> +					 QCOM_SCM_PIL_PAS_INIT_IMAGE_V2)) {
-> +		desc.cmd = QCOM_SCM_PIL_PAS_INIT_IMAGE_V2;
-> +		desc.arginfo = QCOM_SCM_ARGS(3, QCOM_SCM_VAL, QCOM_SCM_RW,
-> +					     QCOM_SCM_VAL);
-> +		desc.args[2] = size;
-> +	}
-> +
->  	ret = qcom_scm_call(dev, &desc, res);
->  	qcom_scm_bw_disable();
->  
-> @@ -644,7 +652,7 @@ static int qcom_scm_pas_prep_and_init_image(struct device *dev,
->  	memcpy(mdata_buf, metadata, size);
->  	mdata_phys = qcom_tzmem_to_phys(mdata_buf);
->  
-> -	ret = __qcom_scm_pas_init_image(dev, ctx->pas_id, mdata_phys, &res);
-> +	ret = __qcom_scm_pas_init_image(dev, ctx->pas_id, mdata_phys, &res, size);
->  	if (ret < 0)
->  		qcom_tzmem_free(mdata_buf);
->  	else
-> @@ -683,7 +691,7 @@ static int __qcom_scm_pas_init_image2(struct device *dev, u32 pas_id,
->  
->  	memcpy(mdata_buf, metadata, size);
->  
-> -	ret = __qcom_scm_pas_init_image(dev, pas_id, mdata_phys, &res);
-> +	ret = __qcom_scm_pas_init_image(dev, pas_id, mdata_phys, &res, size);
->  	if (ret < 0 || !ctx) {
->  		dma_free_coherent(dev, size, mdata_buf, mdata_phys);
->  	} else if (ctx) {
-> @@ -2528,7 +2536,7 @@ static void qcom_scm_gunyah_wdt_init(struct qcom_scm *scm)
->  	gunyah_wdt_dev = platform_device_register_simple("gunyah-wdt", -1,
->  							 NULL, 0);
->  	if (IS_ERR(gunyah_wdt_dev)) {
-> -		dev_err(scm->dev, "Failed to register Gunyah watchdog device: %ld\n",
-> +		dev_err(scm->dev, "Failed to register Gunyah watchdog device: %pe\n",
+From: David Heidelberg <david@ixit.cz>
 
-stray change..
+The WCN3990 might split MSDUs among multiple "in-order" indications.
+The driver needs information from previous indications to handle MPDUs
+that are not started by the same indications that complete them. Stash
+the MSDUs of an incomplete MPDU in the driver state, together with the
+peer id, tid and frag flag identifying it, and prepend them to the MSDU
+list of the next indication so the MPDU can be completed instead of
+being dropped and confusing the driver.
 
->  			PTR_ERR(gunyah_wdt_dev));
->  		return;
->  	}
-> diff --git a/drivers/firmware/qcom/qcom_scm.h b/drivers/firmware/qcom/qcom_scm.h
-> index cf90a565fdfb..e58c76aba45c 100644
-> --- a/drivers/firmware/qcom/qcom_scm.h
-> +++ b/drivers/firmware/qcom/qcom_scm.h
-> @@ -105,6 +105,7 @@ int qcom_scm_shm_bridge_enable(struct device *scm_dev);
->  #define QCOM_SCM_PIL_PAS_SHUTDOWN	0x06
->  #define QCOM_SCM_PIL_PAS_IS_SUPPORTED	0x07
->  #define QCOM_SCM_PIL_PAS_MSS_RESET	0x0a
-> +#define QCOM_SCM_PIL_PAS_INIT_IMAGE_V2	0x1a
->  #define QCOM_SCM_PIL_PAS_GET_RSCTABLE	0x21
->  
->  #define QCOM_SCM_SVC_IO			0x05
-> 
-> -- 
-> 2.34.1
-> 
+Keeping the actual buffers around is required, not just metadata: the
+stashed MSDUs are the payload of the incomplete MPDU, which can only be
+processed and delivered once the buffer flagged as the last MSDU
+arrives. If the next indication does not continue the pending MPDU
+(different peer id, tid or frag flag, or an offload indication), bail
+out to recovery as before, since no firmware is known to do this. Cap
+the stash at the rx ring size and bail out the same way if the last MSDU
+never arrives, so a firmware that stops mid MPDU cannot grow it without
+bound.
 
-Otherwise, looks fine.
+Based on effort of Richard Acayan.
 
-Reviewed-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Signed-off-by: David Heidelberg <david@ixit.cz>
+---
+The WCN3990 firmware may split an A-MSDU across multiple HTT "in-order"
+indications. Mainline drops these ("failed to extract amsdu: -11",
+rx_confused, recovery), collapsing throughput under load on affected
+devices. Stash the MSDUs of an incomplete MPDU in the driver state so
+it can be completed by the next indication instead of being dropped.
 
--- 
--Mukesh Ojha
+Similar patch has been carried out-of-tree (sdm845 mainline, Comma.AI
+vamOS) for a long time.
+
+Changes in v3:
+- Rework: keep the per-indication MSDU list on the stack and stash only
+  the MSDUs of an incomplete MPDU between indications; processing and
+  error paths are otherwise unchanged from mainline (Johannes)
+- Track the frag flag of the pending MPDU and bail out to recovery if
+  the continuing indication disagrees (Jeff's review agent)
+- Drop the unused msdu/rxd assignments before the extract loop, a stale
+  pre-v1 leftover (Richard)
+- Return 0 when stashing an incomplete MPDU, waiting for the
+  continuation is not an error
+- Explain in the commit message why the buffers themselves must be
+  kept, not just metadata (Johannes)
+- Link to v2: https://lore.kernel.org/r/20260719-ath10k-a-msdu-v2-1-f479bb9d1217@ixit.cz
+
+Changes in v2:
+- checkpatch & style. (Jeff)
+- Improve comments.
+- Link to v1: https://lore.kernel.org/linux-wireless/20260210021249.12132-2-mailingradian@gmail.com/
+---
+ drivers/net/wireless/ath/ath10k/htt.h    | 10 +++++++
+ drivers/net/wireless/ath/ath10k/htt_rx.c | 48 +++++++++++++++++++++++++++++++-
+ 2 files changed, 57 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/net/wireless/ath/ath10k/htt.h b/drivers/net/wireless/ath/ath10k/htt.h
+index 25c6b2e2f81c8..0a3998bdc34fd 100644
+--- a/drivers/net/wireless/ath/ath10k/htt.h
++++ b/drivers/net/wireless/ath/ath10k/htt.h
+@@ -1924,16 +1924,26 @@ struct ath10k_htt {
+ 
+ 	bool tx_mem_allocated;
+ 	const struct ath10k_htt_tx_ops *tx_ops;
+ 	const struct ath10k_htt_rx_ops *rx_ops;
+ 	bool disable_tx_comp;
+ 	bool bundle_tx;
+ 	struct sk_buff_head tx_req_head;
+ 	struct sk_buff_head tx_complete_head;
++
++	/* MSDUs of an MPDU left incomplete by an in-order indication, waiting
++	 * for the next indication to continue it
++	 */
++	struct {
++		u8 tid;
++		u16 peer_id;
++		bool frag;
++		struct sk_buff_head msdus;
++	} rx_in_ord_split;
+ };
+ 
+ struct ath10k_htt_tx_ops {
+ 	int (*htt_send_rx_ring_cfg)(struct ath10k_htt *htt);
+ 	int (*htt_send_frag_desc_bank_cfg)(struct ath10k_htt *htt);
+ 	int (*htt_alloc_frag_desc)(struct ath10k_htt *htt);
+ 	void (*htt_free_frag_desc)(struct ath10k_htt *htt);
+ 	int (*htt_tx)(struct ath10k_htt *htt, enum ath10k_hw_txrx_mode txmode,
+diff --git a/drivers/net/wireless/ath/ath10k/htt_rx.c b/drivers/net/wireless/ath/ath10k/htt_rx.c
+index ab2d373b4750d..40fdde280a6f1 100644
+--- a/drivers/net/wireless/ath/ath10k/htt_rx.c
++++ b/drivers/net/wireless/ath/ath10k/htt_rx.c
+@@ -291,16 +291,18 @@ void ath10k_htt_rx_free(struct ath10k_htt *htt)
+ 		return;
+ 
+ 	timer_delete_sync(&htt->rx_ring.refill_retry_timer);
+ 
+ 	skb_queue_purge(&htt->rx_msdus_q);
+ 	skb_queue_purge(&htt->rx_in_ord_compl_q);
+ 	skb_queue_purge(&htt->tx_fetch_ind_q);
+ 
++	skb_queue_purge(&htt->rx_in_ord_split.msdus);
++
+ 	spin_lock_bh(&htt->rx_ring.lock);
+ 	ath10k_htt_rx_ring_free(htt);
+ 	spin_unlock_bh(&htt->rx_ring.lock);
+ 
+ 	dma_free_coherent(htt->ar->dev,
+ 			  ath10k_htt_get_rx_ring_size(htt),
+ 			  ath10k_htt_get_vaddr_ring(htt),
+ 			  htt->rx_ring.base_paddr);
+@@ -841,16 +843,18 @@ int ath10k_htt_rx_alloc(struct ath10k_htt *htt)
+ 	htt->rx_ring.sw_rd_idx.msdu_payld = 0;
+ 	hash_init(htt->rx_ring.skb_table);
+ 
+ 	skb_queue_head_init(&htt->rx_msdus_q);
+ 	skb_queue_head_init(&htt->rx_in_ord_compl_q);
+ 	skb_queue_head_init(&htt->tx_fetch_ind_q);
+ 	atomic_set(&htt->num_mpdus_ready, 0);
+ 
++	skb_queue_head_init(&htt->rx_in_ord_split.msdus);
++
+ 	ath10k_dbg(ar, ATH10K_DBG_BOOT, "htt rx ring size %d fill_level %d\n",
+ 		   htt->rx_ring.size, htt->rx_ring.fill_level);
+ 	return 0;
+ 
+ err_dma_idx:
+ 	dma_free_coherent(htt->ar->dev,
+ 			  ath10k_htt_get_rx_ring_size(htt),
+ 			  vaddr_ring,
+@@ -3296,16 +3300,38 @@ static int ath10k_htt_rx_in_ord_ind(struct ath10k *ar, struct sk_buff *skb)
+ 		ath10k_warn(ar, "dropping invalid in order rx indication\n");
+ 		return -EINVAL;
+ 	}
+ 
+ 	/* The event can deliver more than 1 A-MSDU. Each A-MSDU is later
+ 	 * extracted and processed.
+ 	 */
+ 	__skb_queue_head_init(&list);
++
++	if (!skb_queue_empty(&htt->rx_in_ord_split.msdus)) {
++		/* An MPDU left incomplete by a previous indication is
++		 * pending. It might still be possible to handle indications
++		 * that do not continue it if there is only one peer that
++		 * splits at each given moment. We are bailing out because we
++		 * should have a test case for this before trying to fix it.
++		 */
++		if (tid != htt->rx_in_ord_split.tid ||
++		    peer_id != htt->rx_in_ord_split.peer_id ||
++		    frag != htt->rx_in_ord_split.frag ||
++		    offload) {
++			ath10k_warn(ar, "split amsdu did not resume immediately\n");
++			htt->rx_confused = true;
++			__skb_queue_purge(&htt->rx_in_ord_split.msdus);
++			ath10k_core_start_recovery(ar);
++			return -EIO;
++		}
++
++		skb_queue_splice_init(&htt->rx_in_ord_split.msdus, &list);
++	}
++
+ 	if (ar->hw_params.target_64bit)
+ 		ret = ath10k_htt_rx_pop_paddr64_list(htt, &resp->rx_in_ord_ind,
+ 						     &list);
+ 	else
+ 		ret = ath10k_htt_rx_pop_paddr32_list(htt, &resp->rx_in_ord_ind,
+ 						     &list);
+ 
+ 	if (ret < 0) {
+@@ -3334,17 +3360,37 @@ static int ath10k_htt_rx_in_ord_ind(struct ath10k *ar, struct sk_buff *skb)
+ 			 */
+ 			ath10k_htt_rx_h_ppdu(ar, &amsdu, status, vdev_id);
+ 			ath10k_htt_rx_h_filter(ar, &amsdu, status, NULL);
+ 			ath10k_htt_rx_h_mpdu(ar, &amsdu, status, false, NULL,
+ 					     NULL, peer_id, frag);
+ 			ath10k_htt_rx_h_enqueue(ar, &amsdu, status);
+ 			break;
+ 		case -EAGAIN:
+-			fallthrough;
++			/* The MPDU is incomplete. Stash the remaining MSDUs
++			 * and wait for the next indication to continue it.
++			 * A last MSDU that never arrives would otherwise keep
++			 * growing the stash on every indication, so give up
++			 * once it cannot plausibly be an A-MSDU any more.
++			 */
++			if (skb_queue_len(&list) > HTT_RX_RING_SIZE) {
++				ath10k_warn(ar, "split amsdu exceeds %d msdus\n",
++					    HTT_RX_RING_SIZE);
++				htt->rx_confused = true;
++				__skb_queue_purge(&list);
++				ath10k_core_start_recovery(ar);
++				return -EIO;
++			}
++
++			htt->rx_in_ord_split.tid = tid;
++			htt->rx_in_ord_split.peer_id = peer_id;
++			htt->rx_in_ord_split.frag = frag;
++			skb_queue_splice_init(&list,
++					      &htt->rx_in_ord_split.msdus);
++			return 0;
+ 		default:
+ 			/* Should not happen. */
+ 			ath10k_warn(ar, "failed to extract amsdu: %d\n", ret);
+ 			htt->rx_confused = true;
+ 			__skb_queue_purge(&list);
+ 			ath10k_core_start_recovery(ar);
+ 			return -EIO;
+ 		}
+
+---
+base-commit: 95d6a9ccef99117115e41e9adb271243bd5e985b
+change-id: 20260719-ath10k-a-msdu-c49334eb091d
+
+Best regards,
+--  
+David Heidelberg <david@ixit.cz>
+
+
