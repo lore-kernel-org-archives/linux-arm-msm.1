@@ -1,91 +1,123 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B42D83B05A9;
-	Mon,  3 Aug 2026 21:39:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D87EF34C9A6;
+	Mon,  3 Aug 2026 22:29:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785793152; cv=none; b=p8zJlWM0cnX+CtvSRcdE+/zeeFh0HM2f3hz1Q2LFiic2xM76dVlioR5LA4I5rp3YZkN/ilXVfU+f3EkXoGRhwXxe4rDdq/qabIIHxaXGEL3PzxER/ZGsGR9/P3NbSNu9X6bmRevOHA6m+dpNj8I7whrmXAnd+MR2hjXMhPYkaxQ=
+	t=1785796165; cv=none; b=XfAB5YSKZ/YdlhksyyS7bNV4PDFqtMhPRhIpFLWg5a+m2IvFhpGaWQNERtWtc6f2353a/eGgdkoEo+KnIoP48Ki8G1Yyp4mQBT+6wI6qq01CzoRCXgn/+4yeQMWHli3YK3IHcUVUeiWFgGaFtQ09uxbqarAhx3uz3okNLszkQ38=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785793152; c=relaxed/simple;
-	bh=1eKZ244Lmy6bf6DXmqYIibMqKOERDiyUj1094P2o2pA=;
+	s=arc-20240116; t=1785796165; c=relaxed/simple;
+	bh=i7cMKEmETI4J41H82pVYQpERljqoFtdp+n0moMiGl6I=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=TMs2+RF2QfyB8hSTVALWEK0ZIheHbHKe3Sho4JRUW67pyzUjdy81CcXPLY5gdRYWvkipcvJ2v1qW04VtBtNe9c6sXT5edWsFSqwhLlKBgoCqh8jELmbixrmq1n9AqCwxBrxUtikbNCYakvCc6oaZxawU3TNIyffq6HMYU+ZNmOc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Z/2iuiMs; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=KkanWlmGiKvYhO5mFl8u8S4bBXiGXd8KTLhk0UUlS59DRN8Ylju2QmpSyF0BAEdokbb8Kvqw8x3LqCC+6rHXKiD82HRznTdwdq+TnqbB0fdDZSBvcRJOInvsWLJ2u93BVMJmY15wefTodxjXYRqpt33wNxhQGPzKIXTS7HZpWYI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DmKJiF5i; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Z/2iuiMs"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 973401F000E9;
-	Mon,  3 Aug 2026 21:39:07 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DmKJiF5i"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 293B21F000E9;
+	Mon,  3 Aug 2026 22:29:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785793150;
-	bh=1eKZ244Lmy6bf6DXmqYIibMqKOERDiyUj1094P2o2pA=;
+	s=k20260515; t=1785796163;
+	bh=oLU6AvVAmTV2ZbC3IT+O0inRa1mJRdKCmd2hcYx6gBI=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Z/2iuiMsELzNzb68s/mp0XPzEff9h7c2vjnbAFdwVlhaAz2Hg9646Kz0ob7n87uO/
-	 HUyeAdL/qkR0l0LGGexl5Brpx/5Pge11fvQLVHcTjRjg01vOPDqjn57PjFf1Fmf0iu
-	 mdWBUFE6fAueyxwwSeJAmEyJhmWmAJfBL9p5w+vg/Z2rL+IxVb8lxps/a7sGsvrK94
-	 CEKOaod/9nq1hzwrs5QzKyCwMGUeGjdyQpDzbwP6WJHrjpp9ehwsG3ZWpHBaFlKLNq
-	 Rz5/0WiJP1sGgDWFY/355BbUHleVeP9xkkO2bV8NSpE6bEmtmkpqYtcQcUuaJicG0U
-	 kQPB1DqTrr8zQ==
-Date: Mon, 3 Aug 2026 22:39:05 +0100
-From: Mark Brown <broonie@kernel.org>
-To: david@ixit.cz
-Cc: Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
+	b=DmKJiF5i+Dfn7N3QvT8zUoxcutcqjN7pUT5d+Wik/cBCviAK4LQniuFMsTgQWn+fj
+	 zuyLSLmwLlp9X8MftTFYCdCowTuBQAGeJCgc2k2cbLebPEKduXBPV/l9jvXsOzV4Mf
+	 /5cuVInqu1m+Mw1pqRNm8WYLvzZ4W1D25R+PnQOCg4ON8t9IFPfa3n80DFMifwLI6q
+	 juq06h7PtZgnS/E75ewvu4NA+W5GYYbv0OpO6kWjvcvDpKPmxP9GSGv9NGdxHLWHW9
+	 h0QBhf+2j23nHj4p0tiymkluxKk7GYFn3QnRsPdMpVK9+ztCKRw8Z082N6q8JFVtik
+	 WPFmBUNSlo/Sg==
+Date: Mon, 3 Aug 2026 17:29:22 -0500
+From: "Rob Herring (Arm)" <robh@kernel.org>
+To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Cc: linux-pwm@vger.kernel.org, linux-pm@vger.kernel.org,
+	Sean Wang <sean.wang@kernel.org>, Nishanth Menon <nm@ti.com>,
+	Conor Dooley <conor+dt@kernel.org>, YC Hung <yc.hung@mediatek.com>,
+	Yangbo Lu <yangbo.lu@nxp.com>, Maxime Ripard <mripard@kernel.org>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	Jyri Sarha <jyri.sarha@iki.fi>, Lee Jones <lee@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+	Svyatoslav Ryhel <clamor95@gmail.com>,
+	Viresh Kumar <vireshk@kernel.org>, linux-wireless@vger.kernel.org,
+	Linus Walleij <linusw@kernel.org>,
+	James Clark <james.clark@linaro.org>,
+	Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <ukleinek@kernel.org>,
+	linux-usb@vger.kernel.org, David Airlie <airlied@gmail.com>,
+	linux-arm-kernel@lists.infradead.org,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	linux-ide@vger.kernel.org, ath10k@lists.infradead.org,
+	Richard Cochran <richardcochran@gmail.com>,
+	linux-riscv@lists.infradead.org, linux-gpio@vger.kernel.org,
+	linux-mediatek@lists.infradead.org,
+	Niklas Cassel <cassel@kernel.org>, Simona Vetter <simona@ffwll.ch>,
+	Paul Walmsley <pjw@kernel.org>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Jassi Brar <jassisinghbrar@gmail.com>,
+	Mike Leach <mike.leach@arm.com>, linux-arm-msm@vger.kernel.org,
+	Lorenzo Pieralisi <lpieralisi@kernel.org>,
+	coresight@lists.linaro.org, devicetree@vger.kernel.org,
+	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	mfd@lists.linux.dev, Andi Shyti <andi.shyti@kernel.org>,
+	Damien Le Moal <dlemoal@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>, Frank Li <Frank.Li@nxp.com>,
+	Patrice Chotard <patrice.chotard@foss.st.com>,
+	Jens Wiklander <jenswi@kernel.org>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>, linux-sound@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org
-Subject: Re: [PATCH RFC 1/3] dt-bindings: sound: Add NXP TFA98XX TFA2
- amplifier binding
-Message-ID: <467bc583-b0d5-4b9b-913b-0053dfe5e69d@sirena.org.uk>
-References: <20260802-tfa98xx-upstream-v1-0-4dd55cdd658a@ixit.cz>
- <20260802-tfa98xx-upstream-v1-1-4dd55cdd658a@ixit.cz>
+	Samuel Holland <samuel.holland@sifive.com>,
+	linux-i2c@vger.kernel.org, Mark Rutland <mark.rutland@arm.com>,
+	dri-devel@lists.freedesktop.org, netdev@vger.kernel.org,
+	Peter Ujfalusi <peter.ujfalusi@gmail.com>,
+	Jeff Johnson <jjohnson@kernel.org>,
+	Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
+	linux-kernel@vger.kernel.org, Leo Yan <leo.yan@arm.com>,
+	Suzuki K Poulose <suzuki.poulose@arm.com>
+Subject: Re: [PATCH] dt-bindings: Correct white-space style
+Message-ID: <178579615849.757032.17209099883451822613.robh@kernel.org>
+References: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="znd2vZhPfXf+jTWJ"
-Content-Disposition: inline
-In-Reply-To: <20260802-tfa98xx-upstream-v1-1-4dd55cdd658a@ixit.cz>
-X-Cookie: Prunes give you a run for your money.
-
-
---znd2vZhPfXf+jTWJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
 
-On Sun, Aug 02, 2026 at 02:42:40PM +0200, David Heidelberg via B4 Relay wro=
-te:
-> From: David Heidelberg <david@ixit.cz>
->=20
-> Add a YAML devicetree binding schema for the NXP/Goodix TFA98XX TFA2
-> family of I2C-controlled smart speaker amplifiers with on-chip DSP.
 
-Please submit patches using subject lines reflecting the style for the
-subsystem, this makes it easier for people to identify relevant patches.
-Look at what existing commits in the area you're changing are doing and
-make sure your subject lines visually resemble what they're doing.
-There's no need to resubmit to fix this alone.
+On Sat, 01 Aug 2026 21:56:14 +0200, Krzysztof Kozlowski wrote:
+> Correct a few white-space issues, like double space after '=' or before
+> bracket '{' characters, which will be flagged by dt-check-style.  No
+> functional changes.
+> 
+> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> 
+> ---
+> 
+> Patch applies on Rob's for-next branch.
+> ---
+>  .../arm/firmware/linaro,optee-tz.yaml         |  8 +-
+>  .../devicetree/bindings/arm/psci.yaml         | 18 ++--
+>  .../bindings/arm/qcom,coresight-tnoc.yaml     |  2 +-
+>  .../devicetree/bindings/ata/st,ahci.yaml      | 22 ++---
+>  .../bindings/display/ti/ti,am65x-dss.yaml     | 12 +--
+>  .../bindings/display/ti/ti,j721e-dss.yaml     | 96 +++++++++----------
+>  .../bindings/display/ti/ti,k2g-dss.yaml       | 36 +++----
+>  .../bindings/dsp/mediatek,mt8195-dsp.yaml     |  2 +-
+>  .../bindings/gpio/st,nomadik-gpio.yaml        |  2 +-
+>  .../devicetree/bindings/i2c/st,sti-i2c.yaml   |  2 +-
+>  .../bindings/mailbox/st,sti-mailbox.yaml      |  2 +-
+>  .../bindings/mfd/maxim,max77620.yaml          |  2 +-
+>  .../bindings/net/wireless/qcom,ath10k.yaml    | 34 +++----
+>  .../devicetree/bindings/opp/opp-v2.yaml       | 28 +++---
+>  .../pinctrl/mediatek,mt7988-pinctrl.yaml      |  2 +-
+>  .../devicetree/bindings/ptp/fsl,ptp.yaml      | 12 +--
+>  .../devicetree/bindings/pwm/pwm-sifive.yaml   |  2 +-
+>  .../bindings/usb/ti,twl4030-usb.yaml          |  2 +-
+>  18 files changed, 142 insertions(+), 142 deletions(-)
+> 
 
---znd2vZhPfXf+jTWJ
-Content-Type: application/pgp-signature; name="signature.asc"
+Applied, thanks!
 
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmpxCngACgkQJNaLcl1U
-h9BLBAf/XkpYCwWXR7nRrQXAMB5vXTfnmqNukSbg1JIMs2mOzLhzyjr+WHME096q
-SDbi9Hg2BqriGxtARQ35bdDEvpSoauIaM6DYIxU2SSiJ8dJoigyCHD39VCkR7Dtl
-Heva1uX8ivkOw7JnWwk+4JOHpDmigkdudtm0Alkx7NVv3MLXQsz1U4hwnLL/cp7e
-wFs+4g+mykOfVQVWAb2E7xycGJ7AlKi4R1eQre7k2zCY3RmLt4BkoEPj4/BHIi5W
-fKrWlkb4vgLU7FI8bRkUKC5ueGwBFV5ZtQAY/tkIwrDgQKS+YgVeVOJBUGyEKowN
-TQBzgK+E/Lp/Bh0/lj41B4kUla87Eg==
-=xfFr
------END PGP SIGNATURE-----
-
---znd2vZhPfXf+jTWJ--
