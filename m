@@ -1,87 +1,86 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE9FD303C9C
-	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 14:52:20 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E7563290B9
+	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 15:43:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785768744; cv=none; b=CNgyr9+zM6Sy7IzUEqkqzbvXoZ5HCz6txx/fcMagRygImbTAZLGyd9aF0LVaJF+OP66d9varuJCr1Gw43wSYeZ/82J5lqDAjIFGjbfsjbu44UVNJlW2IldDssN0QlCyqvG+7UkGFH6ZPPGBWV3A6wPAuS75D74fIO09Wem1D8yI=
+	t=1785771795; cv=none; b=Z9DYI0uXi0urDfgmLC6mJZdA63Q4swq2qcE3GiR9Z9BVYdqAqd85Sub+QTlYRRGwRdgji6RDf26XrSvBW7SJZ6XCtX9V7zfbFS9z2RbgTKTDgkLVLT5KiQsoyeMd1TVRzOYiWeHn2Viw26DA1lw6mLwlaZ6LRZsfgzyAYtsFKbU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785768744; c=relaxed/simple;
-	bh=eZU7vVmJacYWV5q3gZ1UCB2GHirPmhpD1iJGOqdGG7o=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=HGphR7XVWl0kgwSfRFIK0G6OnAKqM7lvtT3s7D/ex7iweJTTTjl/3MWsZI5hUultOhSs1qza5PsUR8etO3tYV974u2goO4rumlfUem6vLc/BDeWwyxx97XjmN11zJulqPFn4B/XRDJ61eT1mwr3KxgTWS3QSkW8xJnkEHKN74xs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=mS+EszkN; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gB7NxhAs; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1785771795; c=relaxed/simple;
+	bh=uch/Bpm7NjpfpIugs0DyFSb0tbz4tF6maq+limLa2d4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=GQfyUYJfNEiwRWu/5HveoRIpFOzElbLGS9+Q4ALupBeD+cEPFMqG5Em2YFjhhj2GKkKo9pjS1OwBK96f2WF1sMVetry0H+Czx9NnZVubijXJwdMmYbUoeHPWAyWHSNnTGt2A6K162JhnTiZHAbiuCftyoZZR58OfZ1OphxCifaM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=L2qXc9jB; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=e54Tn7kt; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="mS+EszkN";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gB7NxhAs"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="L2qXc9jB";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="e54Tn7kt"
 Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 673EBnjg826844
-	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 14:52:19 GMT
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 673EBo4K826851
+	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 15:43:12 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	UVt3vhmqrEq1zY4CTLJsC83gPkVS+OacXt6jIx9fB2E=; b=mS+EszkNilBtQ6yS
-	V8VUWOi7Jn/u1OPzWAIcpzJSvGU/whOFTojku09b+miXnwBNZSBLDEe2IzeDRHW3
-	tY1TA9RCNig2kHE7VYJow8MTSJCp+wETFjSRezxGZ6xEqwGoSO1Rlva2bozdUOrR
-	XvomvTzfVk2uRyVyKUEBBbafcSbg7Y0UF6Qk0a34xadRtZZKmwrh/M4BDCnw7KW0
-	I9MPvb/lNyIf0U04C4iQKHMsQXdjC74oPeDbHPeEl9SIx37oEHstr6fnZOESIaoo
-	d6O6OPTPxJOgiUeDGDzKKETW4UNHKsrH/BJlHezOrXX1JVBr0YEbVSnv8yj3/PJV
-	/K+5ww==
-Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftnhkj5aq-1
+	vSG6xJrSFYimCCTaJLPWeKHPlAcnuFSrBZk5ZWRLKI8=; b=L2qXc9jB8n8YH85I
+	QNF30Pi71Z1Yymis9ItvLRskj6Kv20VdULyUQ83HIkXhP8t4J8Hpfa6ifhb0cr/4
+	mAlXwIL1HtzqMhhV3Ta9rmMcjyBabSsDRE6XE4OZi3tE1SOYzeKrGe4cy0ctq5cs
+	h7QoFlTJP48uQIfJ5mmQASTDc0I8sJwapED+cVJE3AJyvzbBfT+5Cm2Gn7ACR0SK
+	UV+IG4NKFPjjfzYrs0spRKhRk9mrU4LPLJwd76dQkF7ZmcMq/rtS90Rpl/EiCixA
+	V3k3zVQ/8UbAU+qocy2B1wK2m8msa9DJO4DSvxtuslpp7AwN79wm7ChOW13LgVsX
+	59Wodg==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftnhkjchw-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 14:52:19 +0000 (GMT)
-Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cab3e9cd922so2338473a12.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 07:52:19 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 15:43:12 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3811279d51aso6628052a91.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 08:43:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785768738; x=1786373538; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=UVt3vhmqrEq1zY4CTLJsC83gPkVS+OacXt6jIx9fB2E=;
-        b=gB7NxhAsNKIy5sFOBVM/zPM+R4OTLnvpaRgnOQzpCQNbQ4gO17TGimr27rL4YIY/kh
-         ETyNrHb7K3btcvNeBFZP0e54GKXtsVdZ7OIZIDzv2U3QK08PQ2bYXoESL9LqpgPC3oIV
-         FabPjiGck0fqjkUDBhpiD1J8i1l2yhp+O1c8wtbbmgpnXzBPHFCB7y/IFYjLqbvKvjex
-         VCfghV3J2TDi2WJ9BFs6SJfmhPBtav/73YR0r0eu5FNeJ8vP7TJl1Q3XtHF2GZVPOL/2
-         Ew0w9regg2PjYy+/4AgTXwBLej3oPNlYpSZxEov+Nzor57OpbzGMA+z0r/jnM4gDQJ+G
-         rMrg==
+        d=oss.qualcomm.com; s=google; t=1785771791; x=1786376591; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=vSG6xJrSFYimCCTaJLPWeKHPlAcnuFSrBZk5ZWRLKI8=;
+        b=e54Tn7kt6ruTf6QIMNzH0kZk65+Um6tISSzjGEG62/vsl1Q02MEHNpYUzZBmn9BztP
+         SLKPnF0jovHYUEPIq7fTcENS36SwBHfFa+1C7Sk54g0lBWIKBPEETVIURqyHexWd0+2P
+         uyZXTKDIbWnAJFDEsSgzw4WeWyahKMJFj8Jzo9YJNgmsH/X8rqyPQsatMCmKKAxmXZHz
+         ocoNW/wYujqwk6z0PCK1OONN3deaNG0HItVF8WrdDEGuZSIPPKO5ENIAVGQw30thCJNx
+         QN3KKgvGMqdbzzlAr04DRhmC0GFhRaXIytc4ytrGTIFYsfXjhjDbLZAoXNKsOxRAB/7n
+         zbPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785768738; x=1786373538;
-        h=content-transfer-encoding:content-type:in-reply-to:organization
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=UVt3vhmqrEq1zY4CTLJsC83gPkVS+OacXt6jIx9fB2E=;
-        b=jMFzxkrINMxi29P0pFknkjIhZs3lbfJUk9c5VoNYWKgP8BbrC2U3jOZA1h9f5679j+
-         8lauUkDP8QXkxUh2Fx6f25eXx13CbjY4QtsRHlUAvG9SxHhpPS0hPcIFM5pvoRSJaaWH
-         VycMmAYZgDq4YfMO2WiD3vMx877q1pFGkgDlbaRYSF7UVtegqDuFdCG8rcZtJs3hxozl
-         EKL5uYjDifVnN9ibmaFomlN23rAhyV5SnM0PXQnSR0R1q4eKPi4TpcDGD3JutK7vw3ZL
-         zjNt95ewC8eK5XTp1RRSCnl6elUKbZ+u93cSS7DEd3un56ESH0q+tK2kjhA+IkEWROko
-         Y2lA==
-X-Forwarded-Encrypted: i=1; AHgh+Rr0K8iVQ8cQT/Vl0oKhwTFnUgGIeKVLfeo73uAI8+g2Gznx4CIE3e7k/FXPTJkoUUz3sG3iSHw8sgwPhjJJ@vger.kernel.org
-X-Gm-Message-State: AOJu0YxaCBrONc/B8D21H+V59j6TF/ypN1dY2ruR98sxD5YfveHdzKrK
-	ySG+l/wvwVQPGcaMUjJHVMkeMnwfCTwdLkV7reHP2RntOnJ6TeI7QLRnQoBWHp/cI2z1fbBQ3kK
-	GjLuBRllkm77ZxOYK3wIFoLIRG9FMK5CH+a8yonE80Ow/v+7c1ZJBh/RoBbapjrSrupGV
-X-Gm-Gg: AR+sD13qZZC6HuzPDNWjQMtUJXcxbETv+P+e+WqmHSRwD3ngL9Zi1WK7LWC7GZ1a2sx
-	MV/cOCmguGuzuCrLGE3G+Up817xzRxwtUIJrqL7ihFjbUZCMhzw5Yo6kZkNKqQTJCwwtZfL14ue
-	LbuzVnB59nghd2rs1A9pt959do3GGOHqxkqwl+YtJ9LhcQ+dGPP92DfnIBpwkbZoAzPsvJQI3hS
-	khUcdiPi301y8ozGp7yuCPdGK/keCTArUsbOf4XxQFUaaDiULlvcRK5H4nK7fAhkYoChn+z03nJ
-	6e/RLATwkfhlttMFmda8DZFx5jm5LT64TXgPq9sN2rUfbuBR+SsBYZnFcYqdvXTukrSFg7UXAjF
-	0dA/rFXX7Tae4iylyfpM7ILE1gMw=
-X-Received: by 2002:a05:6a21:e598:b0:3c0:9c1a:894d with SMTP id adf61e73a8af0-3c92a95303emr10088643637.69.1785768738344;
-        Mon, 03 Aug 2026 07:52:18 -0700 (PDT)
-X-Received: by 2002:a05:6a21:e598:b0:3c0:9c1a:894d with SMTP id adf61e73a8af0-3c92a95303emr10088602637.69.1785768737659;
-        Mon, 03 Aug 2026 07:52:17 -0700 (PDT)
-Received: from [192.168.1.6] ([182.77.67.166])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd4f197sm40356021eec.6.2026.08.03.07.52.12
+        d=1e100.net; s=20251104; t=1785771791; x=1786376591;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=vSG6xJrSFYimCCTaJLPWeKHPlAcnuFSrBZk5ZWRLKI8=;
+        b=cn2gEQ52HIg0fsobuBVpysIdKlNgLODEM8pqvo/EUaz4D4O11sGHpzB9zRbpSEEO6g
+         9pIjfa5990fW/irBzkk0VbhJfHUNC2LN1D+xGA5iyNDryxsP/VhCpc9yzlyD5PjZCReH
+         f/0uL4IVuJVWJQM1mRxYAA1RqY0g7teL1Eh5d9YiCT+J0XnsBhqiCrunfTUqUXIeC5he
+         HNxXXrH8X8fuD7sFowcX5TIaQ6NF2PJbDg4Eje7wHVQcLxntUspDNUr4bydmPQ3vUcD7
+         WGgrKNp5r5ybuIZDisN7vZpmtgfg73EK1UIqv7Fa5Y5OT87ivXmNahIObR43HUEJUdiw
+         W8LQ==
+X-Gm-Message-State: AOJu0YycdxEeIXCd9Mx3aDbKVYXUrcw6QqPnr0lSxOYqauZcydIKANos
+	nTq/RNHm4UB6qvyANlMZp0Cc+/mjPncla/8BqrDCkVMcHMRiUY/990a2qKXhpkbODWLNkyLW2Cm
+	Aqw0j47D6zKNF/S72Vak0efqdYpgJeNBaeTUhSdEyG6idBT2kqdaio3gR9bfJWs1DSgxn
+X-Gm-Gg: AR+sD104s0+2ixHnLktRHaNEDUq8YSXVmMTfbAhA+Q+wma9Eha46/lE15fvDHR46rZX
+	Q66Bu/tv4yApNUcDZqaiHMInCC/CH3/VzOHlRSk/lzAuMTEJg8DDsExE4o36Z488blBUOMSXz5H
+	HNoICgAnIBVyCNUfuICyoxzeU0SUsUdq7J8t8sQiBAgdx0LeArGpaS7p4iq5+B6bCt5yQ82UxQK
+	ohl/Mss+JYtyf1XROtaTugqtAmt1Uip62ps1P3YppomqYALrAeABEhzWbENO7e7kVQE2tle1i8a
+	UFI8nCLXg89Tt5hnBooDFNtcUpcK90OeDPr8lusJ9Ewyk6rDI5Us5XU+EbgQLlmuCD5NFP234cz
+	exbfLtIVirwnyMIGOj/G29G1xJ8sVkkox3Q==
+X-Received: by 2002:a17:90b:3e8a:b0:37f:c2a8:ce45 with SMTP id 98e67ed59e1d1-38fbc3e7dc1mr9145693a91.4.1785771791055;
+        Mon, 03 Aug 2026 08:43:11 -0700 (PDT)
+X-Received: by 2002:a17:90b:3e8a:b0:37f:c2a8:ce45 with SMTP id 98e67ed59e1d1-38fbc3e7dc1mr9145671a91.4.1785771790553;
+        Mon, 03 Aug 2026 08:43:10 -0700 (PDT)
+Received: from [10.219.49.187] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38fec124c5dsm9210a91.12.2026.08.03.08.43.06
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 03 Aug 2026 07:52:17 -0700 (PDT)
-Message-ID: <4cc5c18f-0d33-4729-9094-e520e3142c2c@oss.qualcomm.com>
-Date: Mon, 3 Aug 2026 20:22:10 +0530
+        Mon, 03 Aug 2026 08:43:09 -0700 (PDT)
+Message-ID: <084f16eb-2d7e-4cb7-843b-e2dc1722aeb0@oss.qualcomm.com>
+Date: Mon, 3 Aug 2026 21:13:05 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,49 +88,45 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/6] Add TEE based client driver for UEFI Secure
- Application
-From: Harshal Dev <harshal.dev@oss.qualcomm.com>
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Jens Wiklander <jens.wiklander@linaro.org>,
-        Jens Wiklander <jens.wiklander@oss.qualcomm.com>,
-        Sumit Garg <sumit.garg@kernel.org>,
-        Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Basant Kumar <basantk@qti.qualcomm.com>,
-        Apurupa Pattapu <apurupa@qti.qualcomm.com>,
-        Arun Kumar Neelakantam <aneelaka@qti.qualcomm.com>,
-        op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org
-References: <20260722-qcom_uefisecapp_migrate_qcomtee-v2-0-b8a8fcbe4211@oss.qualcomm.com>
- <nfijwr2ptpxqvdw625yedep7tmakwvkeavyeobrmig5hbkw77w@rcqyp7h4y327>
- <db27820a-2b43-45e4-bc4a-0e9e81aacd93@oss.qualcomm.com>
+Subject: Re: [PATCH v5 1/7] ASoC: qcom: qdsp6: add topology-driven Audio IF
+ support
+To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+        Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260801054610.4047089-1-prasad.kumpatla@oss.qualcomm.com>
+ <20260801054610.4047089-2-prasad.kumpatla@oss.qualcomm.com>
+ <ce580ddc-6bd0-4e34-b399-ef2919e6bf6a@oss.qualcomm.com>
 Content-Language: en-US
-Organization: Qualcomm
-In-Reply-To: <db27820a-2b43-45e4-bc4a-0e9e81aacd93@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: JQdjxezwCgD32165NZF5-0CtMT8Fm8Nc
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDEzMyBTYWx0ZWRfX6XfqNerZ3VGC
- 94u8nQNpWCgziTW/ylTKe5MJS6scFtX2+jCl5TXwJkFn4NxbMpKc6xDa8sQh2g/6LHSUoei2/YW
- CFzLL8HpOiXpnCCED+BMRpysqiz9bm/b37M+vgj5h1+BOj9WI+Fe5X9jNwEgmBfInw6OOIv4hVV
- C1yXvT5IzWQri8x0UtshLTvhnx7bpCjeJ82QeptQ52Ev/LFIUMK1ssRQ/N3G3fYD0H6ygoSJoq4
- 1Wpik14EWhT4VnhkWqRD01mXkGEfxL250F3V4JzgSDJw24Bl/FzlcweQavpGoE8k0se/DpILof1
- +FyFq1Nhe1JnL3LIo3L5iN1WalY8FyAlFCT17a5QzWv275D9Mi6DPw4mc0GxsOBIUejO/MBbZJs
- DbuPnXVCpqafN/vYdQ9fBvc51X2RkNifIR5KXIldmFDbDdzwcD9DKK5iUoV8FiHF1NzRfuU0AhV
- 5D/xzaTYYrzCA0Giwrw==
-X-Proofpoint-ORIG-GUID: JQdjxezwCgD32165NZF5-0CtMT8Fm8Nc
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDEzMyBTYWx0ZWRfX3QlZKSIrA/1W
- L9Q5m9/Q9augyE+w+asOuh0R8mUmJ6NX+Sh1FsHAyy03XuqvYgeiWRyNVUj4jUBLEtAXrN7FKxt
- t1K3ry2XPTic/nKUACyd12l5ZyUCHuE=
-X-Authority-Analysis: v=2.4 cv=UIjt2ify c=1 sm=1 tr=0 ts=6a70ab23 cx=c_pps
- a=rz3CxIlbcmazkYymdCej/Q==:117 a=mrmDAJacfjHp5PIfN2e9YA==:17
+From: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+In-Reply-To: <ce580ddc-6bd0-4e34-b399-ef2919e6bf6a@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: S1tXHAKockpzMR-oVANRQZU1ZHewXOvh
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDE0MCBTYWx0ZWRfX6OK9ZJVdvqlX
+ GmjWeEurqiENBijunz4N3jw/qfHSEkmKrR1VLKuVdNJ1geSTScPWUFcVzdMy6CQ3aZYZXPKE0ZH
+ wY3eK1C0TRwEATXIy45vcVM1eK9/Nz14VHxzORUb3uHjRK1hqorOtayX+/XiSBeVSFZTP+MiD2g
+ xWmurYzjtF/5ZlyH8xjlwywYUz7QArTJnwVU9YFlstE2uafHHsCNU/PqceNmalxPhYA5ptnulhV
+ RAMQD0TlqOwoL0uwgH0K+Pv7xQlBB/e4nKiYi5HnJA+P0c9wi3Xu6AONG6wiLBuRRO4TMfbgk4t
+ jrzEDuQjGbrBWPNfi0wLpQavWJN2Mo46PFDNgbAwG71WsZWVOz/Qt+5pPMzaY1LDhihurQUpY1v
+ gCEkD4oqsew6LlYfu/YyJii5Zbld5EvB6t5KrOi6L2mmdsJs5fEuezQywyVB9zMSk9Z9/bRGlSt
+ 0IWTv3beC86zyBCs1sA==
+X-Proofpoint-ORIG-GUID: S1tXHAKockpzMR-oVANRQZU1ZHewXOvh
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDE0MCBTYWx0ZWRfX45vcqeqCiXtN
+ +P3Agx03SKeS5mSiyPNRPZ1qbttM7pNNt6bT2iCMG9VkhTjtrz0RaM+GZHOIJBpPYxR7Shv9gDH
+ esuVks8gQQ0vKt808b8eXJdQwsp09WE=
+X-Authority-Analysis: v=2.4 cv=UIjt2ify c=1 sm=1 tr=0 ts=6a70b710 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=P-IC7800AAAA:8 a=NEAV23lmAAAA:8 a=EPKcpx9xAAAA:20 a=EUspDBNiAAAA:8
- a=VwQbUJbxAAAA:8 a=mXq_QK0-N2mSdiKvdKIA:9 a=QEXdDO2ut3YA:10
- a=bFCP_H2QrGi7Okbo017w:22 a=d3PnA9EDa4IxuAV0gXij:22 a=ZT_8zCgGubuJgGonBfBE:22
+ a=EUspDBNiAAAA:8 a=k7EgXL6YDVTv4WvjHTwA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=rl5im9kqc5Lf4LNbBjHf:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-03_03,2026-08-03_02,2025-10-01_01
@@ -140,233 +135,523 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  impostorscore=0 bulkscore=0 adultscore=0 spamscore=0 suspectscore=0
  phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
  route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608030133
+ definitions=main-2608030140
 
-Hi Dmitry,
 
-A gentle reminder, do let me know you opinion on my comments here.
-I plan to spin a v3 once we're aligned on any open points.
+On 8/2/2026 6:29 PM, Srinivas Kandagatla wrote:
+> On 8/1/26 6:46 AM, Prasad Kumpatla wrote:
+>> Add topology parsing and media-format programming for Audio IF source and
+>> sink modules.
+>>
+>> Add the Audio IF module IDs, the required topology tokens, and a dedicated
+>> topology loader that stores the parsed interface configuration in the
+>> AudioReach module state. Also add the Audio IF media-format path that
+>> sends the interface configuration, hardware endpoint media format, and
+>> frame-duration parameters for Audio IF modules.
+>>
+>> This keeps the serial-interface configuration topology-driven while still
+>> allowing the machine driver to provide runtime slot and media format
+>> settings. The same Audio IF path can then be reused for TDM, PCM, and I2S
+>> style backends.
+>>
+>> The new UAPI tokens (AR_TKN_U16_MODULE_SYNC_SRC=262 through
+>> AR_TKN_U8_MODULE_INV_EXT_BIT_CLK=276) are added, together with the value
+>> defines used by the sync source, sync mode, data delay, interface mode,
+>> bit clock type, and polarity tokens.
+>>
+>> MODULE_ID_AUDIO_IF_SINK (0x0700117C) and MODULE_ID_AUDIO_IF_SOURCE
+>> (0x0700117D) are introduced in this patch.
+>>
+>> This Module is validated on Hawi and Shikra platforms.
+>>
+>> Signed-off-by: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+>> ---
+> Small nits below.
+>
+>>   include/uapi/sound/snd_ar_tokens.h |  89 ++++++++++++++++++++++++
+>>   sound/soc/qcom/qdsp6/audioreach.c  |  93 +++++++++++++++++++++++++
+>>   sound/soc/qcom/qdsp6/audioreach.h  |  84 +++++++++++++++++++++++
+>>   sound/soc/qcom/qdsp6/topology.c    | 105 +++++++++++++++++++++++++++++
+>>   4 files changed, 371 insertions(+)
+>>
+>> diff --git a/include/uapi/sound/snd_ar_tokens.h b/include/uapi/sound/snd_ar_tokens.h
+>> index 6b8102eaa121..bda65311cfa9 100644
+>> --- a/include/uapi/sound/snd_ar_tokens.h
+>> +++ b/include/uapi/sound/snd_ar_tokens.h
+>> @@ -168,6 +168,58 @@ enum ar_event_types {
+>>    *						LOG_WAIT = 0,
+>>    *						LOG_IMMEDIATELY = 1
+>>    *
+>> + * %AR_TKN_U16_MODULE_SYNC_SRC:			Frame sync source
+>> + *						AR_AUDIO_IF_SYNC_SRC_EXTERNAL = 0,
+>> + *						AR_AUDIO_IF_SYNC_SRC_INTERNAL = 1
+>> + *
+>> + * %AR_TKN_U16_MODULE_CTRL_DATA_OUT_ENABLE:	Enable data-out tri-state control
+>> + *						AR_AUDIO_IF_CTRL_DATA_OE_DISABLE = 0,
+>> + *						AR_AUDIO_IF_CTRL_DATA_OE_ENABLE = 1
+>> + *
+>> + * %AR_TKN_U32_MODULE_SLOT_MASK:			Active TDM slot bitmask
+>> + *
+>> + * %AR_TKN_U16_MODULE_NSLOTS_PER_FRAME:		Number of slots per TDM frame
+>> + *
+>> + * %AR_TKN_U16_MODULE_SLOT_WIDTH:		Slot width in bits (16 or 32)
+>> + *
+>> + * %AR_TKN_U16_MODULE_SYNC_MODE:			Frame sync mode
+>> + *						AR_AUDIO_IF_FRAME_SYNC_MODE_SHORT = 0,
+>> + *						AR_AUDIO_IF_FRAME_SYNC_MODE_ONE_SLOT = 1,
+>> + *						AR_AUDIO_IF_FRAME_SYNC_MODE_LONG = 2
+>> + *
+>> + * %AR_TKN_U16_MODULE_CTRL_INVERT_SYNC_PULSE:	Invert frame sync pulse polarity
+>> + *						AR_AUDIO_IF_SYNC_NORMAL = 0,
+>> + *						AR_AUDIO_IF_SYNC_INVERTED = 1
+>> + *
+>> + * %AR_TKN_U16_MODULE_CTRL_SYNC_DATA_DELAY:	Data delay relative to frame sync
+>> + *						AR_AUDIO_IF_DATA_DELAY_NONE = 0,
+>> + *						AR_AUDIO_IF_DATA_DELAY_1_CYCLE = 1,
+>> + *						AR_AUDIO_IF_DATA_DELAY_2_CYCLE = 2
+>> + *
+>> + * %AR_TKN_U16_MODULE_INTF_MODE:			Audio IF interface mode
+>> + *						AR_AUDIO_IF_INTF_MODE_TDM = 0,
+>> + *						AR_AUDIO_IF_INTF_MODE_PCM = 1,
+>> + *						AR_AUDIO_IF_INTF_MODE_I2S = 2
+>> + *
+>> + * %AR_TKN_U16_MODULE_QAIF_TYPE:			QAIF hardware port type index
+> What are the supported types for this?
+
+Hi Srini,
+
+Thanks for the review.
+Below are supported types. I will add them as well in next revision.
+Range: 0x0 - QAIF
+              0x1 - QAIF_VA
+
+>
+>> + *
+>> + * %AR_TKN_U32_MODULE_ACTIVE_LANE_MASK:		Active lane bitmask for multi-lane
+>> + *
+>> + * %AR_TKN_U32_MODULE_FRAME_SYNC_RATE:		Frame sync rate in Hz
+>> + *
+>> + * %AR_TKN_U16_MODULE_BIT_CLK_TYPE:		Bit clock type
+>> + *						AR_AUDIO_IF_BIT_CLK_INTERNAL = 0,
+>> + *						AR_AUDIO_IF_BIT_CLK_EXTERNAL = 1,
+>> + *						AR_AUDIO_IF_BIT_CLK_SKIP = 2
+>> + *
+>> + * %AR_TKN_U8_MODULE_INV_INT_BIT_CLK:		Invert internal bit clock
+>> + *						AR_AUDIO_IF_CLK_NORMAL = 0,
+>> + *						AR_AUDIO_IF_CLK_INVERTED = 1
+>> + *
+>> + * %AR_TKN_U8_MODULE_INV_EXT_BIT_CLK:		Invert external bit clock
+>> + *						AR_AUDIO_IF_CLK_NORMAL = 0,
+>> + *						AR_AUDIO_IF_CLK_INVERTED = 1
+>> + *
+>>    * %AR_TKN_DAI_INDEX:				dai index
+>>    *
+>>    */
+>> @@ -240,6 +292,43 @@ enum ar_event_types {
+>>   #define AR_TKN_U32_MODULE_LOG_TAP_POINT_ID	260
+>>   #define AR_TKN_U32_MODULE_LOG_MODE		261
+>>   
+>> +#define AR_TKN_U16_MODULE_SYNC_SRC		262
+>> +#define AR_TKN_U16_MODULE_CTRL_DATA_OUT_ENABLE	263
+>> +#define AR_TKN_U32_MODULE_SLOT_MASK		264
+>> +#define AR_TKN_U16_MODULE_NSLOTS_PER_FRAME	265
+>> +#define AR_TKN_U16_MODULE_SLOT_WIDTH		266
+>> +#define AR_TKN_U16_MODULE_SYNC_MODE		267
+>> +#define AR_TKN_U16_MODULE_CTRL_INVERT_SYNC_PULSE	268
+>> +#define AR_TKN_U16_MODULE_CTRL_SYNC_DATA_DELAY	269
+>> +#define AR_TKN_U16_MODULE_INTF_MODE		270
+>> +#define AR_TKN_U16_MODULE_QAIF_TYPE		271
+>> +#define AR_TKN_U32_MODULE_ACTIVE_LANE_MASK	272
+>> +#define AR_TKN_U32_MODULE_FRAME_SYNC_RATE	273
+>> +#define AR_TKN_U16_MODULE_BIT_CLK_TYPE		274
+>> +#define AR_TKN_U8_MODULE_INV_INT_BIT_CLK	275
+>> +#define AR_TKN_U8_MODULE_INV_EXT_BIT_CLK	276
+>> +
+>> +#define AR_AUDIO_IF_SYNC_SRC_EXTERNAL		0
+>> +#define AR_AUDIO_IF_SYNC_SRC_INTERNAL		1
+>> +#define AR_AUDIO_IF_CTRL_DATA_OE_DISABLE	0
+>> +#define AR_AUDIO_IF_CTRL_DATA_OE_ENABLE		1
+>> +#define AR_AUDIO_IF_INTF_MODE_TDM		0
+>> +#define AR_AUDIO_IF_INTF_MODE_PCM		1
+>> +#define AR_AUDIO_IF_INTF_MODE_I2S		2
+>> +#define AR_AUDIO_IF_FRAME_SYNC_MODE_SHORT	0
+>> +#define AR_AUDIO_IF_FRAME_SYNC_MODE_ONE_SLOT	1
+>> +#define AR_AUDIO_IF_FRAME_SYNC_MODE_LONG	2
+>> +#define AR_AUDIO_IF_SYNC_NORMAL			0
+>> +#define AR_AUDIO_IF_SYNC_INVERTED		1
+>> +#define AR_AUDIO_IF_DATA_DELAY_NONE		0
+>> +#define AR_AUDIO_IF_DATA_DELAY_1_CYCLE		1
+>> +#define AR_AUDIO_IF_DATA_DELAY_2_CYCLE		2
+>> +#define AR_AUDIO_IF_BIT_CLK_INTERNAL		0
+>> +#define AR_AUDIO_IF_BIT_CLK_EXTERNAL		1
+>> +#define AR_AUDIO_IF_BIT_CLK_SKIP		2
+>> +#define AR_AUDIO_IF_CLK_NORMAL			0
+>> +#define AR_AUDIO_IF_CLK_INVERTED		1
+>> +
+>>   #define SND_SOC_AR_TPLG_MODULE_CFG_TYPE 0x01001006
+>>   struct audioreach_module_priv_data {
+>>   	__le32 size;	/* size in bytes of the array, including all elements */
+>> diff --git a/sound/soc/qcom/qdsp6/audioreach.c b/sound/soc/qcom/qdsp6/audioreach.c
+>> index e6e9eb2e85aa..6a11f2932ba5 100644
+>> --- a/sound/soc/qcom/qdsp6/audioreach.c
+>> +++ b/sound/soc/qcom/qdsp6/audioreach.c
+>> @@ -152,6 +152,13 @@ struct apm_i2s_module_intf_cfg {
+>>   
+>>   #define APM_I2S_INTF_CFG_PSIZE ALIGN(sizeof(struct apm_i2s_module_intf_cfg), 8)
+>>   
+>> +struct apm_audio_if_module_intf_cfg {
+>> +	struct apm_module_param_data param_data;
+>> +	struct param_id_audio_if_intf_cfg cfg;
+>> +} __packed;
+>> +
+>> +#define APM_AUDIO_IF_INTF_CFG_PSIZE ALIGN(sizeof(struct apm_audio_if_module_intf_cfg), 8)
+>> +
+>>   struct apm_module_hw_ep_mf_cfg {
+>>   	struct apm_module_param_data param_data;
+>>   	struct param_id_hw_ep_mf mf;
+>> @@ -168,6 +175,13 @@ struct apm_module_frame_size_factor_cfg {
+>>   
+>>   #define APM_FS_CFG_PSIZE ALIGN(sizeof(struct apm_module_frame_size_factor_cfg), 8)
+>>   
+>> +struct apm_module_hw_ep_frame_duration_cfg {
+>> +	struct apm_module_param_data param_data;
+>> +	struct param_id_hw_ep_frame_duration frame_duration;
+>> +} __packed;
+>> +
+>> +#define APM_HW_EP_FRAME_DURATION_PSIZE ALIGN(sizeof(struct apm_module_hw_ep_frame_duration_cfg), 8)
+>> +
+>>   struct apm_module_hw_ep_power_mode_cfg {
+>>   	struct apm_module_param_data param_data;
+>>   	struct param_id_hw_ep_power_mode_cfg power_mode;
+>> @@ -1042,6 +1056,81 @@ static int audioreach_i2s_set_media_format(struct q6apm_graph *graph,
+>>   	return q6apm_send_cmd_sync(graph->apm, pkt, 0);
+>>   }
+>>   
+>> +static int audioreach_audio_if_set_media_format(struct q6apm_graph *graph,
+>> +						const struct audioreach_module *module,
+>> +						const struct audioreach_module_config *cfg)
+>> +{
+>> +	struct apm_module_hw_ep_frame_duration_cfg *fd_cfg;
+>> +	struct apm_module_param_data *param_data;
+>> +	struct apm_audio_if_module_intf_cfg *intf_cfg;
+>> +	struct apm_module_hw_ep_mf_cfg *hw_cfg;
+>> +	int ic_sz = APM_AUDIO_IF_INTF_CFG_PSIZE;
+>> +	int ep_sz = APM_HW_EP_CFG_PSIZE;
+>> +	int fd_sz = APM_HW_EP_FRAME_DURATION_PSIZE;
+>> +	int size = ic_sz + ep_sz + fd_sz;
+>> +	u32 slot_mask = cfg->slot_mask ? cfg->slot_mask : module->slot_mask;
+>> +	u16 nslots_per_frame = cfg->nslots_per_frame ?
+>> +				 (u16)cfg->nslots_per_frame : module->nslots_per_frame;
+>> +	u16 slot_width = cfg->slot_width ? (u16)cfg->slot_width : module->slot_width;
+>> +	void *p;
+>> +
+>> +	struct gpr_pkt *pkt __free(kfree) = audioreach_alloc_apm_cmd_pkt(size, APM_CMD_SET_CFG, 0);
+>> +	if (IS_ERR(pkt))
+>> +		return PTR_ERR(pkt);
+>> +
+>> +	p = (void *)pkt + GPR_HDR_SIZE + APM_CMD_HDR_SIZE;
+>> +	intf_cfg = p;
+>> +
+>> +	param_data = &intf_cfg->param_data;
+>> +	param_data->module_instance_id = module->instance_id;
+>> +	param_data->error_code = 0;
+>> +	param_data->param_id = PARAM_ID_AUDIO_IF_INTF_CFG;
+>> +	param_data->param_size = ic_sz - APM_MODULE_PARAM_DATA_SIZE;
+>> +	intf_cfg->cfg.qaif_type = module->qaif_type;
+>> +	intf_cfg->cfg.intf_idx = (u16)module->hw_interface_idx;
+>> +	intf_cfg->cfg.intf_mode = module->intf_mode;
+>> +	intf_cfg->cfg.ctrl_data_out_enable = module->ctrl_data_out_enable;
+>> +	intf_cfg->cfg.active_slot_mask = slot_mask;
+>> +	intf_cfg->cfg.nslots_per_frame = nslots_per_frame;
+>> +	intf_cfg->cfg.slot_width = slot_width;
+>> +	intf_cfg->cfg.active_lane_mask = module->active_lane_mask;
+>> +	intf_cfg->cfg.frame_sync_rate = module->frame_sync_rate;
+>> +	intf_cfg->cfg.frame_sync_src = module->sync_src;
+>> +	intf_cfg->cfg.frame_sync_mode = module->sync_mode;
+>> +	intf_cfg->cfg.invert_frame_sync_pulse = module->ctrl_invert_sync_pulse;
+>> +	intf_cfg->cfg.frame_sync_data_delay = module->ctrl_sync_data_delay;
+>> +	intf_cfg->cfg.bit_clk_type = module->bit_clk_type;
+>> +	intf_cfg->cfg.inv_int_bit_clk = module->inv_int_bit_clk;
+>> +	intf_cfg->cfg.inv_ext_bit_clk = module->inv_ext_bit_clk;
+>> +
+>> +	p += ic_sz;
+>> +	hw_cfg = p;
+>> +	param_data = &hw_cfg->param_data;
+>> +	param_data->module_instance_id = module->instance_id;
+>> +	param_data->error_code = 0;
+>> +	param_data->param_id = PARAM_ID_HW_EP_MF_CFG;
+>> +	param_data->param_size = ep_sz - APM_MODULE_PARAM_DATA_SIZE;
+>> +
+>> +	hw_cfg->mf.sample_rate = cfg->sample_rate;
+>> +	hw_cfg->mf.bit_width = cfg->bit_width;
+>> +	hw_cfg->mf.num_channels = cfg->num_channels;
+>> +	hw_cfg->mf.data_format = module->data_format;
+>> +
+>> +	p += ep_sz;
+>> +	fd_cfg = p;
+>> +	param_data = &fd_cfg->param_data;
+>> +	param_data->module_instance_id = module->instance_id;
+>> +	param_data->error_code = 0;
+>> +	param_data->param_id = PARAM_ID_HW_EP_FRAME_DURATION;
+>> +	param_data->param_size = fd_sz - APM_MODULE_PARAM_DATA_SIZE;
+>> +	fd_cfg->frame_duration.frame_duration_in_us = AUDIO_IF_FRAME_DURATION_US;
+>> +	fd_cfg->frame_duration.allow_frame_duration_normalization = AUDIO_IF_FRAME_DURATION_NORMALIZATION_ENABLE;
+>> +	fd_cfg->frame_duration.min_normalized_frame_dur_us = AUDIO_IF_FRAME_DURATION_MIN_US;
+>> +	fd_cfg->frame_duration.max_normalized_frame_dur_us = AUDIO_IF_FRAME_DURATION_MAX_US;
+>> +
+>> +	return q6apm_send_cmd_sync(graph->apm, pkt, 0);
+>> +}
+>> +
+>>   static int audioreach_logging_set_media_format(struct q6apm_graph *graph,
+>>   					       const struct audioreach_module *module)
+>>   {
+>> @@ -1411,6 +1500,10 @@ int audioreach_set_media_format(struct q6apm_graph *graph,
+>>   		if (!rc)
+>>   			rc = audioreach_module_enable(graph, module, true);
+>>   		break;
+>> +	case MODULE_ID_AUDIO_IF_SOURCE:
+>> +	case MODULE_ID_AUDIO_IF_SINK:
+>> +		rc = audioreach_audio_if_set_media_format(graph, module, cfg);
+>> +		break;
+>>   
+>>   	default:
+>>   		rc = 0;
+>> diff --git a/sound/soc/qcom/qdsp6/audioreach.h b/sound/soc/qcom/qdsp6/audioreach.h
+>> index 62a2fd79bbcb..924e85f4fdf6 100644
+>> --- a/sound/soc/qcom/qdsp6/audioreach.h
+>> +++ b/sound/soc/qcom/qdsp6/audioreach.h
+>> @@ -36,6 +36,8 @@ struct q6apm_graph;
+>>   #define MODULE_ID_SPEAKER_PROTECTION	0x070010E2
+>>   #define MODULE_ID_SPEAKER_PROTECTION_VI	0x070010E3
+>>   #define MODULE_ID_OPUS_DEC		0x07001174
+>> +#define MODULE_ID_AUDIO_IF_SINK		0x0700117C
+>> +#define MODULE_ID_AUDIO_IF_SOURCE	0x0700117D
+>>   
+>>   #define APM_CMD_GET_SPF_STATE		0x01001021
+>>   #define APM_CMD_RSP_GET_SPF_STATE	0x02001007
+>> @@ -544,6 +546,68 @@ struct param_id_i2s_intf_cfg {
+>>   #define PORT_ID_I2S_OUPUT		1
+>>   #define I2S_STACK_SIZE			2048
+>>   
+>> +#define PARAM_ID_AUDIO_IF_INTF_CFG	0x08001B11
+>> +
+>> +#define AUDIO_IF_INTF_MODE_TDM		AR_AUDIO_IF_INTF_MODE_TDM
+>> +#define AUDIO_IF_INTF_MODE_PCM		AR_AUDIO_IF_INTF_MODE_PCM
+>> +#define AUDIO_IF_INTF_MODE_I2S		AR_AUDIO_IF_INTF_MODE_I2S
+> Dead code.
+Ack, will remove.
+>
+>
+>> +
+>> +/*
+>> + * struct param_id_audio_if_intf_cfg - Audio interface configuration
+>> + * @qaif_type: Audio interface type (e.g. QAIF, QAIF_VA)
+>> + * @intf_idx: Interface instance index
+>> + * @intf_mode: Interface operating mode (TDM/PCM/I2S)
+>> + * @ctrl_data_out_enable: Enable sharing of data-out signal with other masters
+>> + * @active_slot_mask: Bitmask indicating active slots
+>> + * @nslots_per_frame: Number of slots per audio frame
+>> + * @slot_width: Width of each slot in bits
+>> + * @active_lane_mask: Bitmask of active data lanes
+>> + * @frame_sync_rate: Frame sync rate in Hz
+>> + * @frame_sync_src: Frame sync source selection
+>> + * @frame_sync_mode: Frame sync mode configuration
+>> + * @invert_frame_sync_pulse: Invert frame sync polarity when set
+>> + * @frame_sync_data_delay: Data delay from frame sync in bit clocks
+>> + * @bit_clk_type: Bit clock type (internal / external)
+>> + * @inv_int_bit_clk: Invert internal bit clock when set
+>> + * @inv_ext_bit_clk: Invert external bit clock when set
+>> + *
+>> + * This structure defines configuration parameters for the Qualcomm
+>> + * Audio Interface (QAIF) block. It is used to program interface
+>> + * characteristics such as slot configuration, clocking and frame
+>> + * synchronization behaviour.
+>> + */
+>> +struct param_id_audio_if_intf_cfg {
+>> +	uint16_t qaif_type;
+>> +	uint16_t intf_idx;
+>> +	uint16_t intf_mode;
+>> +	uint16_t ctrl_data_out_enable;
+>> +	uint32_t active_slot_mask;
+>> +	uint16_t nslots_per_frame;
+>> +	uint16_t slot_width;
+>> +	uint32_t active_lane_mask;
+>> +	uint32_t frame_sync_rate;
+>> +	uint16_t frame_sync_src;
+>> +	uint16_t frame_sync_mode;
+>> +	uint16_t invert_frame_sync_pulse;
+>> +	uint16_t frame_sync_data_delay;
+>> +	uint16_t bit_clk_type;
+>> +	uint8_t inv_int_bit_clk;
+>> +	uint8_t inv_ext_bit_clk;
+>> +} __packed;
+>> +
+>> +#define PARAM_ID_HW_EP_FRAME_DURATION	0x08001B2F
+>> +#define AUDIO_IF_FRAME_DURATION_US			1000
+>> +#define AUDIO_IF_FRAME_DURATION_NORMALIZATION_ENABLE	1
+>> +#define AUDIO_IF_FRAME_DURATION_MIN_US			1
+>> +#define AUDIO_IF_FRAME_DURATION_MAX_US			100000
+>> +
+>> +struct param_id_hw_ep_frame_duration {
+> Any reason why no kernel doc for this?
+Will Update in Next revision.
+>
+>> +	uint32_t frame_duration_in_us;
+>> +	uint32_t allow_frame_duration_normalization;
+>> +	uint32_t min_normalized_frame_dur_us;
+>> +	uint32_t max_normalized_frame_dur_us;
+>> +} __packed;
+>> +
+>>   #define PARAM_ID_DISPLAY_PORT_INTF_CFG		0x08001154
+>>   
+>>   struct param_id_display_port_intf_cfg {
+>> @@ -877,6 +941,23 @@ struct audioreach_module {
+>>   	uint32_t data_format;
+>>   	uint32_t hw_interface_type;
+>>   
+>> +	/* Audio IF module (TDM/PCM/I2S) */
+>> +	u32 slot_mask;
+>> +	u32 active_lane_mask;
+>> +	u32 frame_sync_rate;
+>> +	u16 qaif_type;
+>> +	u16 sync_src;
+>> +	u16 ctrl_data_out_enable;
+>> +	u16 nslots_per_frame;
+>> +	u16 slot_width;
+>> +	u16 intf_mode;
+>> +	u16 sync_mode;
+>> +	u16 ctrl_invert_sync_pulse;
+>> +	u16 ctrl_sync_data_delay;
+>> +	u16 bit_clk_type;
+>> +	u8 inv_int_bit_clk;
+>> +	u8 inv_ext_bit_clk;
+>> +
+>>   	/* PCM module specific */
+>>   	uint32_t interleave_type;
+>>   
+>> @@ -907,6 +988,9 @@ struct audioreach_module_config {
+>>   	u32	channel_allocation;
+>>   	u32	sd_line_mask;
+>>   	int	fmt;
+>> +	u32	slot_mask;
+>> +	u16	nslots_per_frame;
+>> +	u16	slot_width;
+>>   	struct snd_codec codec;
+>>   	u8 channel_map[AR_PCM_MAX_NUM_CHANNEL];
+>>   };
+>> diff --git a/sound/soc/qcom/qdsp6/topology.c b/sound/soc/qcom/qdsp6/topology.c
+>> index 1f69fba6de26..3dd0a5c29a6e 100644
+>> --- a/sound/soc/qcom/qdsp6/topology.c
+>> +++ b/sound/soc/qcom/qdsp6/topology.c
+>> @@ -753,6 +753,105 @@ static int audioreach_widget_i2s_module_load(struct audioreach_module *mod,
+>>   	return 0;
+>>   }
+>>   
+>> +static int audioreach_widget_audio_if_module_load(struct audioreach_module *mod,
+>> +						  const struct snd_soc_tplg_vendor_array *mod_array)
+>> +{
+>> +	const struct snd_soc_tplg_vendor_value_elem *mod_elem;
+>> +	int tkn_count = 0;
+>> +	u32 val;
+>> +
+>> +	mod_elem = mod_array->value;
+>> +
+>> +	while (tkn_count < le32_to_cpu(mod_array->num_elems)) {
+>> +		val = le32_to_cpu(mod_elem->value);
+>> +		switch (le32_to_cpu(mod_elem->token)) {
+>> +		case AR_TKN_U32_MODULE_HW_IF_IDX:
+>> +			if (val > U16_MAX)
+> this check is inconsistent with supported range.
+
+Good catch. The token represents a U32 value and the |U16_MAX| check is 
+unnecessarily restrictive.
+I'll update the validation accordingly.
 
 Thanks,
-Harshal
+Prasad
 
-On 24-07-2026 02:43 pm, Harshal Dev wrote:
-> Hi Dmitry,
-> 
-> On 22-07-2026 01:56 pm, Dmitry Baryshkov wrote:
->> On Wed, Jul 22, 2026 at 12:29:11PM +0530, Harshal Dev wrote:
->>> On Qualcomm SoC based platforms, UEFI stores EFI variables within the
->>> Replay Protected Memory Block (RPMB) which is only accessible by the
->>> Qualcomm Trusted Execution Environment (QTEE).
->>
->> Is it so? I think RPMB is accessible to Linux...
-> 
-> I should have been more descriptive here, RPMB is accessible by Linux but
-> its frames can only be prepared by QTEE.
-> 
-> The RPMB key which is one-time programmed into the storage controller to allow
-> authentication of the RPMB frames is generated by and only available to a TEE.
-> So on Qualcomm platforms (and many others platforms with a TEE) Linux can only
-> route the RPMB frames generated by QTEE to the storage, it cannot create and
-> write the RPMB frames itself (it doesn't have access to the key).
-> 
-> While it is possible for Linux to generate/program/store this key, on Qualcomm
-> platforms we do not want Linux to do so because we do not trust it. We trust
-> QTEE.
-> 
-> I will re-phrase this and make it a bit more clear everywhere.
-> 
->>
->>> For Qualcomm platforms without emulated RPMB support, specifically
->>
->> What is emulated RPMB support? Why is it mentioned here? Which platforms
->> use emulated RPMB?
-> 
-> Emulated RPMB refers to RPMB on a storage which doesn't have its own firmware.
-> Primarily, NAND/NOR storage. Unlike UFS/eMMC storage, NAND/NOR storage does not
-> have a storage controller where we can program the RPMB key to be used by the
-> firmware. So we must 'emulate' RPMB by moving the storage driver within QTEE
-> and making the driver hold/use the key.
-> 
-> Qualcomm compute SoCs (Glymur, Hamoa) have RPMB available on SPI-*NOR* storage,
-> and a driver for communicating with it is also available in QTEE. And so, these
-> have 'emulated' RPMB.
-> 
-> I will add this detail in an updated cover letter.
->>
->>> platforms where RPMB is not located within SPI-NOR storage and instead
->>> located on UFS/EMMC storage, non-volatile EFI variables can only be set via
->>> a callback request from the UEFI Secure Application to the RPMB service
->>> running in user-space (within the QTEE supplicant [1]).
->>
->> Can it be moved to the kernel?
-> 
-> We have a plan to move the RPMB service to the kernel similar to OPTEE:
-> https://elixir.bootlin.com/linux/v7.2-rc3/source/drivers/tee/optee/rpc.c#L449
-> 
-> It is a work in progress. Once this happens, we don't need QTEE supplicant available
-> on the Linux distribution.
-> 
->>
->>>
->>> Unlike the QCOM-TEE driver, the QSEECOM driver (used by the current
->>> QSEECOM based uefisecapp) does not support callback requests.
->>
->> How did it work then? I think Windows has been perfectly using QSEECOM
->> rather than QTEE.
-> 
-> It works because Windows on Arm on Qualcomm has SPI-NOR storage. A driver for which
-> is available within QTEE, and so QTEE does not need to make a callback request
-> to Linux to request RPMB frame routing. However, in case of UFS/eMMC storage the
-> driver only exists in the Linux kernel and so QTEE must make a callback request.
-> 
-> And so, if you try to use the QSEECOM driver to write EFI-variables to RPMB
-> on a device with UFS/eMMC storage, it won't work.
-> 
->>
->>> And on
->>> certain Qualcomm platforms such as the RB3Gen2, attempts to access the
->>> QSEECOM interface fail due to lack of support within Qualcomm TEE.
->>
->> So, I assume, on RB3 Gen2 the QSEECOM doesn't report uefisecapp as
->> supported. Does it?
-> 
-> It doesn't, this API returns -2 if I add RB3 Gen2 in the allow-list for QSEECOM:
-> https://elixir.bootlin.com/linux/v7.2-rc3/source/drivers/firmware/qcom/qcom_qseecom.c#L46
-> 
->>
->>> On these platforms, a TEE based uefisecapp client driver is required to:
->>> 1. Access cached & volatile EFI variables stored in uefisecapp's memory.
->>> 2. Ensure persistence of non-volatile EFI variables via writes through
->>> the RPMB service hosted in the QTEE supplicant.
->>>
->>> This series introduces such a uefisecapp TEE client driver for the
->>> aforementioned Qualcomm platforms which installs efi-var operations _if_
->>> the QCOMTEE driver registers support for an object-IPC based uefisecapp
->>> service on the TEE bus during its probe. Only new QTEE firmware versions
->>> available at [2] provide this support.
->>
->> What about existing WoA devices?
-> 
-> New Windows on Arm devices like Hamoa/Glymur work perfectly fine with existing
-> QSEECOM based uefisecapp. But they will also work with this new QCOMTEE based
-> uefisecapp once they upgrade their firmware.
-> 
-> I need to double-check but this firmware release for Glymur on Qualcomm Linux
-> is probably carrying the support for QCOMTEE based uefisecapp access:
-> https://github.com/qualcomm-linux/meta-qcom/commit/728251fcbe5113980805ea6c571e33235062ee71
-> If not, the next release will definitely have it since I have merged support for
-> this in QTEE and talked to the boot firmware release team about this.
-> 
-> The next planned firmware upgrade for Hamoa will also provide this support for
-> Qualcomm Linux. And similarly, for all other targets being supported upstream.
-> 
->>
->>>
->>> Thus, QCOMTEE now maintains a static list of always-available object-IPC
->>> based secure services exposed by QTEE. These services are implemented either
->>> within the QTEE kernel or within a pre-loaded Trusted Application (TA)
->>> usually loaded by the bootloader. The uefisecapp TA is an example of a
->>> preloaded TA loaded by UEFI. A static list is required since QTEE does not
->>> yet expose any way to dynamically query and enumerate the services exposed by
->>> it.
->>
->> Can it be fixed instead of having static lists? In the end, we can't
->> guarantee that users update the firmware.
->>
-> 
-> Unfortunately, no existing QTEE release out there currently has this support.
-> But support for this is currently being added by QTEE team last I checked with them.
-> Once it is available, and a new QTEE firmware release is out there, we will add
-> support for dynamically querying QTEE services in the QCOMTEE driver. 
->>>
->>> To facilitate object-IPC interactions from the kernel-space, this
->>> series also introduces a tee_client_object_invoke_func() to allow
->>> invocation of TEE objects similar to the existing tee_client_invoke_func()
->>> API exported by the TEE subsystem which allows invocation of TEE functions.
->>> Some suporting changes are also introduced to track and handle operations
->>> for TEE contexts opened from the kernel-space in the back-end QCOM-TEE
->>> driver.
->>>
->>> Finally and as previously mentioned, access to the object-IPC based uefisecapp
->>> service is restricted on older QTEE firmware versions. A new QTEE firmware
->>> release must be picked up from QArtifactory [2] for all upstream supported
->>> Qualcomm SoCs to enable access to uefisecapp service via the TEE client
->>> driver.
->>
->> What about fused devices?
-> 
-> The procedure for updating the firmware on fused devices is slightly different.
-> The firmware images need to be signed by the OEM using the security profile
-> of the chipset before flashing/upgrading them. Security profiles are now public:
-> https://github.com/qualcomm/security-profiles
-> 
-> Regards,
-> Harshal
-> 
->>
->>>
->>> This patch series has been validated on Kodiak RB3Gen2 platform with UFS
->>> storage by attempting to read/write EFI variables via the efivar tool [3]
->>> after mounting the efivarfs filesystem. See [4] for an example.
->>>
->>> Merge Strategy:
->>>
->>> This patch series could either be taken from the OP-TEE tree or the
->>> QCOM soc tree. I would prefer it to be picked by the OP-TEE tree since
->>> all except the uefisecapp TEE client driver patch in this series make
->>> changes relevant to the TEE subsystem. It would be great if the QCOM soc
->>> tree maintainers can Ack the uefisecapp driver patch.
->>>
->>> [1] https://github.com/qualcomm/minkipc
->>> [2] https://shorturl.at/zQU07
->>> [3] https://github.com/rhboot/efivar
->>> [4] https://docs.qualcomm.com/doc/80-70020-27/topic/manage_uefi_environment_variables_using_efivar_tool.html
->>>
->>> Signed-off-by: Harshal Dev <harshal.dev@oss.qualcomm.com>
->>> ---
->>> Changes in v2:
->>> - Drop using MSB of the object_id to distingush kernel and user object invoke contexts.
->>> - Introduce enum tee_object_invoke_origin to check the context of object invocation.
->>> - Link to v1: https://lore.kernel.org/r/20260707-qcom_uefisecapp_migrate_qcomtee-v1-0-f659cbd5d04c@oss.qualcomm.com
->>>
->>> ---
->>> Amirreza Zarrabi (2):
->>>       tee: Add kernel client object invoke helper
->>>       tee: qcomtee: Allow object invokes from kernel clients
->>>
->>> Harshal Dev (4):
->>>       tee: qcomtee: Track the object invocation context
->>>       tee: Export uuidv5 generation for TEE backends
->>>       tee: qcomtee: Add support for registering QTEE services on TEE bus
->>>       firmware: qcom: Add support for TEE based EFI-var client driver
->>>
->>>  MAINTAINERS                                 |   7 +
->>>  drivers/firmware/qcom/Kconfig               |  24 ++
->>>  drivers/firmware/qcom/Makefile              |   1 +
->>>  drivers/firmware/qcom/qcom_tee_uefisecapp.c | 525 ++++++++++++++++++++++++++++
->>>  drivers/firmware/qcom/qcom_tee_uefisecapp.h | 120 +++++++
->>
->> I don't see any changes to the QSEECOM drivers. Is it allowed to use
->> QSEECOM and QTEE access to uefisecapp at the same time?
->>
->>>  drivers/tee/qcomtee/call.c                  | 205 ++++++++++-
->>>  drivers/tee/qcomtee/core.c                  |   9 +-
->>>  drivers/tee/qcomtee/qcomtee.h               |  12 +
->>>  drivers/tee/qcomtee/qcomtee_msg.h           |   1 +
->>>  drivers/tee/qcomtee/qcomtee_object.h        |  16 +-
->>>  drivers/tee/tee_core.c                      |  24 +-
->>>  include/linux/tee_core.h                    |  23 +-
->>>  include/linux/tee_drv.h                     |  18 +-
->>>  13 files changed, 952 insertions(+), 33 deletions(-)
->>> ---
->>> base-commit: f3e6330d7fe42b204af05a2dbc68b379e0ad179e
->>> change-id: 20260408-qcom_uefisecapp_migrate_qcomtee-13869d45e014
->>>
->>> Best regards,
->>> -- 
->>> Harshal Dev <harshal.dev@oss.qualcomm.com>
->>>
->>
-> 
-
+>
+>
+>> +				return -EINVAL;
+>> +			mod->hw_interface_idx = val;
+>> +			break;
+>> +		case AR_TKN_U32_MODULE_FMT_DATA:
+>> +			mod->data_format = val;
+>> +			break;
+>> +		case AR_TKN_U16_MODULE_SYNC_SRC:
+>> +			if (val > U16_MAX)
+>> +				return -EINVAL;
+>> +			mod->sync_src = (u16)val;
+>> +			break;
+>> +		case AR_TKN_U16_MODULE_CTRL_DATA_OUT_ENABLE:
+>> +			if (val > U16_MAX)
+>> +				return -EINVAL;
+>> +			mod->ctrl_data_out_enable = (u16)val;
+>> +			break;
+>> +		case AR_TKN_U32_MODULE_SLOT_MASK:
+>> +			mod->slot_mask = val;
+>> +			break;
+>> +		case AR_TKN_U16_MODULE_NSLOTS_PER_FRAME:
+>> +			if (val > U16_MAX)
+>> +				return -EINVAL;
+>> +			mod->nslots_per_frame = (u16)val;
+>> +			break;
+>> +		case AR_TKN_U16_MODULE_SLOT_WIDTH:
+>> +			if (val > U16_MAX)
+>> +				return -EINVAL;
+>> +			mod->slot_width = (u16)val;
+>> +			break;
+>> +		case AR_TKN_U16_MODULE_INTF_MODE:
+>> +			if (val > U16_MAX)
+>> +				return -EINVAL;
+>> +			mod->intf_mode = (u16)val;
+>> +			break;
+>> +		case AR_TKN_U16_MODULE_SYNC_MODE:
+>> +			if (val > U16_MAX)
+>> +				return -EINVAL;
+>> +			mod->sync_mode = (u16)val;
+>> +			break;
+>> +		case AR_TKN_U16_MODULE_CTRL_INVERT_SYNC_PULSE:
+>> +			if (val > U16_MAX)
+>> +				return -EINVAL;
+>> +			mod->ctrl_invert_sync_pulse = (u16)val;
+>> +			break;
+>> +		case AR_TKN_U16_MODULE_CTRL_SYNC_DATA_DELAY:
+>> +			if (val > U16_MAX)
+>> +				return -EINVAL;
+>> +			mod->ctrl_sync_data_delay = (u16)val;
+>> +			break;
+>> +		case AR_TKN_U16_MODULE_QAIF_TYPE:
+>> +			if (val > U16_MAX)
+>> +				return -EINVAL;
+>> +			mod->qaif_type = (u16)val;
+>> +			break;
+>> +		case AR_TKN_U32_MODULE_ACTIVE_LANE_MASK:
+>> +			mod->active_lane_mask = val;
+>> +			break;
+>> +		case AR_TKN_U32_MODULE_FRAME_SYNC_RATE:
+>> +			mod->frame_sync_rate = val;
+>> +			break;
+>> +		case AR_TKN_U16_MODULE_BIT_CLK_TYPE:
+>> +			if (val > U16_MAX)
+>> +				return -EINVAL;
+>> +			mod->bit_clk_type = (u16)val;
+>> +			break;
+>> +		case AR_TKN_U8_MODULE_INV_INT_BIT_CLK:
+>> +			if (val > U8_MAX)
+>> +				return -EINVAL;
+>> +			mod->inv_int_bit_clk = (u8)val;
+>> +			break;
+>> +		case AR_TKN_U8_MODULE_INV_EXT_BIT_CLK:
+>> +			if (val > U8_MAX)
+>> +				return -EINVAL;
+>> +			mod->inv_ext_bit_clk = (u8)val;
+>> +			break;
+>> +		default:
+>> +			break;
+>> +		}
+>> +		tkn_count++;
+>> +		mod_elem++;
+>> +	}
+>> +
+>> +	return 0;
