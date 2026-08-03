@@ -1,85 +1,85 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC4AF423780
-	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 18:10:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 794F139D6F6
+	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 18:12:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785780612; cv=none; b=jCZ0yhMiWRSTdWQDzU1enVMunkwk9swWpNZDPm/EDv5GgRTc6223rPCDeJxIOQpEb5LAs7pouNZdu1K/DueRO4Y08QWbudQHCL7dgJrOQmgNFqQHF4Xkm4CEHxiiWAljBSYGe4EG6wycZ3uJI6QApXoJW2PXLxWG86uzjV7z6dA=
+	t=1785780734; cv=none; b=cVkThRVPFA0c9vBnU/cZrtHo/F0dPFDDymHiWBfh1N/vvJwJ5ARnqf/6yCjGbpmlakvNLSVTYPCouaenddVfuUKJMdTGAutCUBbvUBLU7oiryqGG0OcDsfjAiNXbT6qvyUHcFY3YTFqyhslN7rAcUB82R+dWsTB0xWl9Ae1ZSfM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785780612; c=relaxed/simple;
-	bh=YE4PLMf59Dg/WgPWTXTveF3QF4QN6v/6/VJMlCMeQgU=;
+	s=arc-20240116; t=1785780734; c=relaxed/simple;
+	bh=zV40Ig/Q47xgMmfb1w1DsDefx9nFfpfRri82MNiTCHQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=DaCQw0VhBpOboKW2WIc7TaZoDfJxtRGn17onRQiOB0KMAX+mWfrpB5Kpk1QCiNuARbIzPQKPuOBU7kF3sU0hJjH/EhqQLBi2Qf4SuSSPCc9JQ3NGkidsaLDeTCUf0fW+LBojx79QQP0WCz+1btAKGKsLLCfaDG4ebxj0Dl1Bkbs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jm0LZQGL; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KrMjkSev; arc=none smtp.client-ip=205.220.180.131
+	 Content-Type:Content-Disposition:In-Reply-To; b=Ryt9zPsvG6wnlFd5ZzWq2avepm8H+4tnrorpYBTQ0WDldmp/S7Tp65xeXqU96a9nSoJ18wF2MfifYX1prbZAhlZBXz4IX3lza3KHPBPQ7HBq5TrS8QYd1ezA8vNszOz71Um+pgguG+G9dcQbPw3Wr6fkAy//4+qcl03O3dzAMdo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FcsUUb6O; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=HDA5kLPd; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jm0LZQGL";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KrMjkSev"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 673GwN8n1224819
-	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 18:10:09 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FcsUUb6O";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="HDA5kLPd"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 673Gw1On974057
+	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 18:12:13 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=i5R0f3/vC2IT0IYP8p2NBJ0/
-	aZ46W3TJ/3OnfruU5Ds=; b=jm0LZQGLX1bP7B1rGXB5jWUEvlPjHIlWEWJHtaXS
-	51uwzJthlakw+msQNG0RJYE5nUuCCbnPbyVJDbf0kLtEo7dqxaKqAa29Gwk4Wjj4
-	Xmske1+wVJrmhEODBWn3w6P258zkwai6G/CGmQAiTTkE+NkgJI5zzIjPx9UP5BLP
-	Vpx+CuVgtazwU/Q7gBf5GWz42jxq1AnOEubfXSgtypBMN0n5ONh0iAzZ5HN8zrcw
-	fk28ZXVsMyrRSv4SZ3c9LDL69xBUpNk8owha5HKLCuvEMz2xf6Neije3x+13eHtl
-	yS22IxNS7dSJPPFX5N8rR2lMO29w2usyU7wrWcCap4NxEQ==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftnvnjy7r-1
+	:references:subject:to; s=qcppdkim1; bh=r0BAKzWOvEXoVkK4l8UklRSB
+	xzayU8+csMIB3SSayVA=; b=FcsUUb6OX4P25AIoFQL+6zEGUzyOBtu3kP10Y7uP
+	5jxOEKdtYcBue0BSxy09wtdx0zSSTyIueZJH5j8s2SBXcBS+6+keWB6ezK8aHm1x
+	B43GnxOuM6q37pBt62x1ruySdbx35ykrrjJJ/dQJEFoZJP9ftpoMrzP6bRe/FcDW
+	4QR0IqXRonrS15OD+D8XHTIfwpTnJjDV6K6MwELVZYpSb4VT6KZkvcBLPU5litTV
+	7M9w+Ne539q+lomMxcKJCCJY8j2DkQW8MvK/5enGky5nukdXZOw/bAEQvG8MtYvO
+	eNQrGWKjNqWcpguHYOtrvemCd5Sv2Y4R4kpjlnpKyrWVGw==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftnhb33b9-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 18:10:09 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-5283fa0656dso2210081cf.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 11:10:09 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 18:12:12 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-51c19493ac2so41993511cf.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 11:12:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785780607; x=1786385407; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1785780732; x=1786385532; darn=vger.kernel.org;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=i5R0f3/vC2IT0IYP8p2NBJ0/aZ46W3TJ/3OnfruU5Ds=;
-        b=KrMjkSevKfUYFw9CpF9JEQoVx6Oyj0N0Z5sBq0zwbkpSICJB7cjyLMCSQ2YVZiur2z
-         m4cWyAq45E6EjZYJ08JDu2iYisBG8sBjA4UEcCWMrLdfTqKcHD5htU59t+qPxXQCdGQ8
-         ZwFj+4VdoyVglce2RLSP7sNbkozrLJjuUllGb8A/MPkeYTl6pgj5+qUnjXgYY8WAR3db
-         Zfa9sBlen02uCnzsFGM5R0dD7QLAIx3F/x8W2thzDEnO16rzJDy4QtOYiTCcYt5DJmUp
-         +ggu+dcA28parTyhcDaXQX/XqH/bmHUHOhV4Bsw3DIOgsWomQtWI+bK2xDp9sGI/ViXJ
-         JM6g==
+        bh=r0BAKzWOvEXoVkK4l8UklRSBxzayU8+csMIB3SSayVA=;
+        b=HDA5kLPdBWU9ipU0JQuA3jvLv6YgRvdB2r4jJt7ywlQoz2L5qgYAsdUtRkHGrWYR3d
+         c32lWAJu4rts4pZtPB+3Cfr7ich6Ik5BcGKuOShBvcAxXEaOy8Y4ONY0wOY4SmgN7Pfm
+         13gIxQwL6Jbz/IED9Uo781lcrvgsz0iH8WKeq4trKMVkwGc97do8BbFABkdB7d+GDTXM
+         ODQM9Liq3Gr+w2DH73mCPUhhHjbf9Zm+shAfzBm1TVR4yRnVy88kOXtiUnA6fpxmshir
+         Ep5Z1GqV2qQKT0AQUgt1TQUnopBRScieNLpDJMn7Rc8gBIegMh/T1lZesfq5O0gcTFrI
+         tE4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785780607; x=1786385407;
+        d=1e100.net; s=20251104; t=1785780732; x=1786385532;
         h=in-reply-to:content-disposition:content-type:mime-version
          :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=i5R0f3/vC2IT0IYP8p2NBJ0/aZ46W3TJ/3OnfruU5Ds=;
-        b=g2fvhxQGoSvAAOVNjv+TJogUGvrbldfno242DYXH73IA09Dm4cTB7wS3RipbM5ehSI
-         Zddh24lX88NcIpV9WiLMm0bE6rBO5QHBAFAaUGHyzdGG8u9DAn5oLpdOYM4lFoAnSwEr
-         wlKWnFDSSOuT7GNYEBt43oUyHuvQ6NT3HHVyBZO8soRxM9tNgjy48+wnlv+f7v0zYpQ3
-         8AvQmIayZDyDdt8DxqpNSoHXisz/5S6NY6TktWLNjDJMDMlpcLDxmoPpTTnqycgpsV89
-         dt2FWV+e/gnQzijJyKc49TQ9q9yyA2qK8igZsYXJ0Mw0Wb+QyiafZ2KPEbgkegSL7NL7
-         ntQQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqhRPlc8ZIaQJNs2mMXuNr0NvJugTpSDdnUO7YdeCjoQYGm6y7I/+SGuQD5W94e2XSZRBtPzrmiQvd7a4X+@vger.kernel.org
-X-Gm-Message-State: AOJu0YzFx8LFddoOzbwmw69eA7jXTJJVUokyXo8zsmNGcrWxKnWaeQXl
-	sKCoeqWIspnUsgvnN7UFOY4dR/G1DtrDQaWNOfBFTTd5hah9xJOfYhEiA2/oKLBAV5G1vmz8A/z
-	9MQWF6eqi3TNYLdfG21b9DFOPpiNOXOpBxdc1W87dL4mjdwBzx4pb8+m8MCoOL2TfHcgw
-X-Gm-Gg: AR+sD13O77MzRAjiE1eDNYXlxeklfVhEbk4/GoP7nohEYiRadmGA9SeKU4YU6nSgZkk
-	A+rb/dHexRbbiOIN5uwLgiC07waQzKfk97tIxJwWMfJG/MStb4IQ5nQi890dDVCvQ43PQF8NSgg
-	pqRmHoZzcesSXDpoC/a1beAzsfg/qCH5A7RFWQfraLOVZeWJrOp20DijemnovPi4SIo1KZW2BU0
-	4sxXTcMIZSL+woikZjSHHWAHJvTdRa1wAb4J0SLXDlsCyKaf6DQBcOt8KCqamiLCV8wlcAgt7AL
-	D3+x0LqFtYZfRKwwgf1b6wZjLFQQm8CM4GUA1zuiXVuoUHLy8jR6LT07zSAN8BMLDnIuwAMUgxL
-	39hHlHrRR8JAAYWbGQgtVH7qSxdjS69FIhTIwTUHQdlSRb/s1hl48B4aRvXW3S0NpJ4V40/MBiV
-	BWUg+1Ux8nqn69wQ==
-X-Received: by 2002:ac8:5d06:0:b0:528:1bad:a2a4 with SMTP id d75a77b69052e-52cd35af1d8mr10774961cf.15.1785780606756;
-        Mon, 03 Aug 2026 11:10:06 -0700 (PDT)
-X-Received: by 2002:ac8:5d06:0:b0:528:1bad:a2a4 with SMTP id d75a77b69052e-52cd35af1d8mr10774081cf.15.1785780606213;
-        Mon, 03 Aug 2026 11:10:06 -0700 (PDT)
+        bh=r0BAKzWOvEXoVkK4l8UklRSBxzayU8+csMIB3SSayVA=;
+        b=HB/ZkY+GM/cZu5PT8Rqaqj2di43Kgee9Z6LG7M9rO/5gSgBBBeapeqjjAKxMLklXfi
+         GIufbdOon5MiGZV3FdLaEeYAmkso0XOxuGWdtj9I6X/UtBawn17VmiLPt0EkJLXL3iDJ
+         AD7S/lUcO1uD50HAT60JqXsxxN6OEwhfQEn+S5eRnOLv27hT0r2LEF+aW6qRYn0IblM5
+         SN3H1s/4tCq6iqH13qpFDkN4DXmirNNC+Vgqg7HoDM+7BG8rGhvEFh7foJfBEB+cUwqY
+         l6rnKoiWIhlz77iE548QQrKc7f1f3Y8hx052FX7qkkaykMmfvhjGPOGf7O76kddeNm1V
+         DJ8A==
+X-Forwarded-Encrypted: i=1; AHgh+Rp5PQUJoFeEJfU+9Kt4H62+t93MyFXLzUuXySS3P+awD4nRJ/CbYsRIEm5XbncAZ8LgSuNPoMOA3Yy76vfv@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw9cEmR766Hi4mktlwvcCw7vIMXPJCjqjUZoexFvIa6sHOum8DD
+	GGcIK4BgMObqx/UD633l3Y05B+tHUaLbHgLVQ/rC5GHzRjTwIlI4gG3nOu1t2tfnjyh1b22DSG3
+	EwsYhXICgz3i5qpZ6yvaYwp5eHdiCf4UVh95289k02dZN6trAIji4Q3i5U8l7DtNvvyr1
+X-Gm-Gg: AR+sD11MHgeGenLoo7ZGnF+C2dUy3gH9vZSiSjvzNaIGiwqbLO0inOBSJutf8TkkXwW
+	h4A6LG95TUclDG6cXTnUjecinfDjuEOX0EYoVIpyyvTaKKYMghK5M2HYnFjOUv9ap15CTzrKqdl
+	b9DKibPbZJ7790WqcljV+FKRqHEDcyReD4wDrDVNPuEACm4Ueq06A/xKpJ7u9Kfq1lWMj9gbKqb
+	Jmmjic6NC0m4K2J6rQ71chOJ4zQ5w3DWD/5W0R+mvRdpqTy58p768tPcIewUtFEWpGogPEYL8qS
+	gIxunh/x4xPx7y2KPvfHs+QeROeMXUhFRVcF4nwxdthh6prIYG1r9xKNM6vZiPfftibzxGvJAFe
+	iPQLXEdZnl60J1uChqV08afBVwTeLBwPTtalyN3J5RMJpwpX/9s4eWtwoTWhjDx56Vc8qX8QxSs
+	MQDl2U0Bx1E9Jj0g==
+X-Received: by 2002:a05:622a:53c3:b0:528:3ae6:14b1 with SMTP id d75a77b69052e-52b5684b9aemr192077781cf.43.1785780731770;
+        Mon, 03 Aug 2026 11:12:11 -0700 (PDT)
+X-Received: by 2002:a05:622a:53c3:b0:528:3ae6:14b1 with SMTP id d75a77b69052e-52b5684b9aemr192076911cf.43.1785780731161;
+        Mon, 03 Aug 2026 11:12:11 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2e23c46c4sm2125337e87.17.2026.08.03.11.10.04
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-39f810a05b6sm15787181fa.3.2026.08.03.11.12.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Aug 2026 11:10:05 -0700 (PDT)
-Date: Mon, 3 Aug 2026 21:10:03 +0300
+        Mon, 03 Aug 2026 11:12:08 -0700 (PDT)
+Date: Mon, 3 Aug 2026 21:12:05 +0300
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 To: Neeraj Soni <neeraj.soni@oss.qualcomm.com>
 Cc: ebiggers@kernel.org, ulf.hansson@linaro.org, adrian.hunter@intel.com,
@@ -89,11 +89,11 @@ Cc: ebiggers@kernel.org, ulf.hansson@linaro.org, adrian.hunter@intel.com,
         quic_sartgarg@quicinc.com, ram.gupta@oss.qualcomm.com,
         linux-mmc@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v6 2/2] mmc: sdhci-msm: Use pm ops instead of macro to
- restore crypto keys
-Message-ID: <stu224dgiay6mau2enqyf27m54laucdzqaudya6wxcnm7ldu4o@omftbvyuvmqa>
+Subject: Re: [PATCH v6 1/2] mmc: Allow host driver to control the
+ re-programming of crypto keys
+Message-ID: <wz2zgw7kp7vsc3r43wa2kssi4niy5itsmee5rbnki6lfvmid4z@qdt6ib3sj4wl>
 References: <20260803163123.1802005-1-neeraj.soni@oss.qualcomm.com>
- <20260803163123.1802005-3-neeraj.soni@oss.qualcomm.com>
+ <20260803163123.1802005-2-neeraj.soni@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -102,55 +102,47 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260803163123.1802005-3-neeraj.soni@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=aoaCzyZV c=1 sm=1 tr=0 ts=6a70d981 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+In-Reply-To: <20260803163123.1802005-2-neeraj.soni@oss.qualcomm.com>
+X-Proofpoint-ORIG-GUID: fNkzCJhB2LjvETRlDmejw2DfiVHDdAoD
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDE2MiBTYWx0ZWRfX8M8Gy4IZBaWv
+ NyKTEq9aA3+H97EYI6iFixOgkCjVKhS5f4e2/aZv2xumkKm3nf8wDAUl6eyAG1C5IbHvvOCfjrc
+ ZpFfiyXmKBNJl5m7gIgGAdQYM3dR3cs=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDE2MiBTYWx0ZWRfXyFWeckRbe8QN
+ vUo1fxAiFMiDpgrvv++hpUpmznuOoF6XqL8XmMo1NEPpEhBHi0RmSPDWAf5mwQ2iENStb7VSEEI
+ LW0OYLs2YJKYWKshTJkySBDrboeBzpcg0b0a2ooekyQF4QIVfQFn7M+znGgUwxWfSBkkCVvF8yj
+ YWvMFjYhZg2qV+p0WHTLzlmTyIAItgsz/eErjD1LEIC6C7Dxucs4087lGdgmaMqiz73IKB4DaRa
+ ExjG5U0589KU/9BJI9wSeZS5sNPDp0oqJA+iVPJqOM+QWFZ22Vv9Mk2QdMCrdtBwBhBJ2gx2yrR
+ 0sPq5gITKdVAmkFrp0nk0QFIRNb24h59aLxxCx1Dh6tQ1N4RId88oaaoY1bR6UWeL8ImF/R+/R8
+ THynDBtGlwcwmni4bHrvk7pgjZhrruleVDtKICrQRbD/Gr5SNPvlgekbQLSs5e1eoZOeBp3e6RI
+ tGucJESA37xZ8VApeDw==
+X-Proofpoint-GUID: fNkzCJhB2LjvETRlDmejw2DfiVHDdAoD
+X-Authority-Analysis: v=2.4 cv=bKEm5v+Z c=1 sm=1 tr=0 ts=6a70d9fc cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
  a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
- a=COk6AnOGAAAA:8 a=M5MO2ui-36myvQaaUmQA:9 a=CjuIK1q_8ugA:10
- a=a_PwQJl-kcHnX1M80qC6:22 a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-GUID: -3wG9n6SBjj1SwCBriit-4ITgDnVeB4x
-X-Proofpoint-ORIG-GUID: -3wG9n6SBjj1SwCBriit-4ITgDnVeB4x
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDE2MSBTYWx0ZWRfX+WLpNdBDb2LM
- VZOdNS3fG3xmQJpxqI0VohsiNWgrXp27eCOMb4IM/N48be8qDryjE0jyiLp/uMC1JCC9svIDSYE
- LFupMjj8jWs6F5GEpOuDvRIseNN/6djGAzrE8tgXrYf0vfIRBflpkvXdsknEmt/vI/QeU/5ABeG
- YbnhheUSEGSz8GQrA3m7MqtwQmydQR77FwOlc7froObxtqlW5bWHH4WPfLLbCJxXssr2LfzHOhe
- +7W/Plqzaw+xjKLh+0LtCp4h1WJ1Trkg3hNV25h0g5XqoSMFGewqYBF8yoPMQrlIlC/5y38ftc5
- iHuitCdgTeebXIsUy7MowdvhUI6b3hfTTzYhHaokRXNTGq8K/fDkdn6+t7sFGxu2rVijfEEipQa
- qaUtQwwYJF98J26PHPnKHdytrTXPUYXqJbUgGxUAma8tTTHGR+iWcI+we/ggTNa9gAmDMuDAKUF
- LPpdmXKHnLUEZeiZCnQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDE2MSBTYWx0ZWRfXwpibakN6GLy7
- YZ9OKnTBfMCzXtT4mtj6yiliVCviOfFbH2sA1/El6Q6GAY0K93N9p/i87wqn9LIq/PGUwIzKq9y
- hiiA3kOompHSk73M8ccIpKTaikDZ33k=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=COk6AnOGAAAA:8
+ a=EUspDBNiAAAA:8 a=Ria5deTLU_ndSx9n1-gA:9 a=CjuIK1q_8ugA:10
+ a=uxP6HrT_eTzRwkO_Te1X:22 a=TjNXssC_j7lpFel5tvFf:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-03_04,2026-08-03_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0 suspectscore=0 priorityscore=1501 adultscore=0
- spamscore=0 lowpriorityscore=0 malwarescore=0 phishscore=0 impostorscore=0
+ priorityscore=1501 spamscore=0 suspectscore=0 phishscore=0 adultscore=0
+ impostorscore=0 bulkscore=0 malwarescore=0 clxscore=1015 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608030161
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608030162
 
-On Mon, Aug 03, 2026 at 10:01:23PM +0530, Neeraj Soni wrote:
-> From: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
-> 
-> Inline Crypto Engine (ICE) keys are lost after hibernation entry and this
-> needs to be restored when hibernation exits. ICE keys are re-programmed
-> during sdhci_msm_ice_init() but it may not cover cases where the
-> hibernation image is already restored.
-> 
-> Unwrap the pm ops and use directly in driver to add the call to restore
-> Inline Crypto Engine (ICE) keys. This ensures that ICE is brought into
-> same state as before hibernation.
-> 
-> Also set MMC_CAP2_CRYPTO_NO_REPROG to indicate that re-programming of ICE
-> keys is not needed during MMC runtime suspend/resume.
+On Mon, Aug 03, 2026 at 10:01:22PM +0530, Neeraj Soni wrote:
+> The register context for the crypto profile belongs to the
+> sdhci/cqhci host and not the mmc card, hence re-programming should be
+> managed by the host driver itself.
 
-Hmm, if there is a flag which controls reprogramming of the keys, why
-can't we use a default and make the core reprogram those?
+Don't you have a reference to the host in the function?
 
 > 
-> Signed-off-by: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
+> Add the flag MMC_CAP2_CRYPTO_NO_REPROG as part of host->caps2 to control
+> reprogramming keys to crypto engine for SoCs which do not require this
+> feature.
+> 
 > Signed-off-by: Seshu Madhavi Puppala <quic_spuppala@quicinc.com>
 > Co-developed-by: Ram Prakash Gupta <quic_rampraka@quicinc.com>
 > Signed-off-by: Ram Prakash Gupta <quic_rampraka@quicinc.com>
@@ -159,9 +151,22 @@ can't we use a default and make the core reprogram those?
 > Signed-off-by: Debraj Mukhopadhyay <quic_dmukhopa@quicinc.com>
 > Signed-off-by: Neeraj Soni <neeraj.soni@oss.qualcomm.com>
 > ---
->  drivers/mmc/host/sdhci-msm.c | 23 ++++++++++++++++++++++-
->  1 file changed, 22 insertions(+), 1 deletion(-)
+>  drivers/mmc/core/crypto.c | 2 +-
+>  include/linux/mmc/host.h  | 1 +
+>  2 files changed, 2 insertions(+), 1 deletion(-)
 > 
+> diff --git a/drivers/mmc/core/crypto.c b/drivers/mmc/core/crypto.c
+> index fec4fbf16a5b..a5a90bfc634e 100644
+> --- a/drivers/mmc/core/crypto.c
+> +++ b/drivers/mmc/core/crypto.c
+> @@ -15,7 +15,7 @@
+>  void mmc_crypto_set_initial_state(struct mmc_host *host)
+>  {
+>  	/* Reset might clear all keys, so reprogram all the keys. */
+> -	if (host->caps2 & MMC_CAP2_CRYPTO)
+> +	if ((host->caps2 & MMC_CAP2_CRYPTO) && !(host->caps2 & MMC_CAP2_CRYPTO_NO_REPROG))
+>  		blk_crypto_reprogram_all_keys(&host->crypto_profile);
+>  }
 
 -- 
 With best wishes
