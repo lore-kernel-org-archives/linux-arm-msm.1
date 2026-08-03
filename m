@@ -1,294 +1,590 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A73531F991;
-	Mon,  3 Aug 2026 12:39:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CDB12264A8
+	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 12:44:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785760747; cv=none; b=QOqCWWKvgQ2rLG5w3iyZheHOBno531Vca9VW3fTJkE00ikpAyo3vihB6XWOI988eMs/XInXSV/hiGLQQNZHxKZRKtiQC3lVoQcPLFgR+w6GIlj17Xvtx29CsB1CmU6F04RfeGZbyScvGLJYKPKfujgxqTZpIK0rZq4tOwTb1gGc=
+	t=1785761096; cv=none; b=eCzapSr+4uIYzUGROa4Hs5hnF8JGOK4R/Be3p1uTsYdYlIbR5kvBhdeXRygxTQVxa1JX0Yq4tfbVM2C9kvaw0o7S2UDXQqv29nBRj/09IqTYdJkiZi0xndduT8y6GU7iCYUcc255lVL3i9SMnONT1nTV0gmS3js+aMD76Kt859Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785760747; c=relaxed/simple;
-	bh=9hpHOy1m9ICSDrTNHLJLXu9VFFuslXTqcO6D5bYwqv8=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=gn2P7IlXml2fHGS99Oo8NhI6CXH+yNd9IPlNLZ9+1dbGs14KITNuqmS5EXZhKN/p6+GjA2cFQ9GtpnnlCIk09B7IH+wL4pqktqBcE4Z3GSJdYqAf4sTceTesvEHiXQ4z30tH7VE+1Pew5DjaO9OcIhGDj2N+m0E6eCXy4fXbFXc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=O6i+wKYo; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1785761096; c=relaxed/simple;
+	bh=m0MjEAjAa3m4MAFFaWYqhHdmua9fODvkFTLu52h/HNc=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=juP4xyjVeZAlrkZOdHmI44g5lOrnnqNc6b9tWk8F5EBOPOzKQRFWAbby3uSY1kLNKRI6vj/Rhy4Vai56bGAtqSzbyxxNHEL7ldZg0VcECm6OSH+5UKmQL7lRrnnvqh8VvrrJACe6i9JGpPWQ6/1AfydfO48EgDsI3CJUSEfBPfw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Rv/7586T; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TxfLFqSc; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="O6i+wKYo"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 8B64CC2BCB9;
-	Mon,  3 Aug 2026 12:39:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1785760746;
-	bh=9hpHOy1m9ICSDrTNHLJLXu9VFFuslXTqcO6D5bYwqv8=;
-	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=O6i+wKYou95aZ+mJFWGgW+M1yxHu3UVPhw9rc7eud6h9R1zH/fNMPUGGpDMPG6HWr
-	 Y1MM57hz2b/sNA/U66FtblPAA0hPC59HXbRNL6xYC2fw55DFK8a6FNmdhJ67MRAj1x
-	 kecmEit0LnTsqtmXwfNjj7aIFodRB2+HpDWr4vRDuiojuBvTfp0YM+sEKEtdadAOFu
-	 fq1CPOXh6Rrz1Yq1dNsYTW0LIpy0J6jOdIlOpCeEtr9G7wc6F2RMbzJlIm5GC60quf
-	 oC3Zm1DO2eZ8pQ9RXuew4U2v61NA4FxDoN63PovQnHW17Wbua6EuGbxD8OKUkY7y6d
-	 GVDKkF63VaPpg==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 67148C55184;
-	Mon,  3 Aug 2026 12:39:06 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Mon, 03 Aug 2026 14:39:04 +0200
-Subject: [PATCH RFC v3] wifi: ath10k: make in-order rx amsdu buffers
- persistent
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Rv/7586T";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TxfLFqSc"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 673C4dss344373
+	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 12:44:53 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=wiEjTOr3Tm8yOp0qFz6uuY1u
+	b8uyFumZPZODy1x9kgM=; b=Rv/7586TZlq48QMpNvzBveC6QSqWLykdxbKnItyC
+	NcAz9na8VqqzgmTz3GgZokclIMz+6pJ8DKj5ON6+iZU5O5yMs8PwVOGNI16724A2
+	A8fehusGD5zgiZNSXiGhTcxJjr5mxgvkzL+2RhRUkcYaKa4YRMI3LikUkf4EEpxJ
+	/j499oC5MXABrMiU/d34CWD42A9dVd4DpzucuItUxAxvaAjq4ttJaWRokHaDOGWa
+	x5gjKhlPPrIFGTZkIrZhtl8j/YkYqghF0X+bN9W/7ZnuItHcyVVVIkXBnyaAjTra
+	qvLIYgb4EhyJJBHsB6TF+3Vyg3rnwBAXkOX/Z3iPbc/hBA==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftp4r1ev1-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 12:44:52 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-c9fe4c5eb39so2378814a12.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 05:44:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785761092; x=1786365892; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=wiEjTOr3Tm8yOp0qFz6uuY1ub8uyFumZPZODy1x9kgM=;
+        b=TxfLFqScnYoyjCZWB0GLF6D01fHcuUIjWjW3kkX9OuTYS3XXxQ/bMAkeTCHbIsHFlZ
+         2zSwrua0Zb3vrqs4UKIYJM/PUnoyI+KaZde3s+hdRwMb79AjV7oxRmBhRW2LhF3oULbk
+         ZgY2P2AusRHbgWPbKztWwNeljnfGRPgygjDcIRVRK4+NX03ZKkReWFYR0YaTNhpPZlS4
+         DWQtWc1asCZ8Ec/RWk6VZW1NNnt5MvnLFNWKz5MR0rNSa9tYcnlUm8r09iYLLefUt+ZP
+         FDSGeYtjA/s8ZY36TB9/A92sWWnkW72c9ri2+Mgj8NFEF40clLNVLEgYBnyvSvYBuKZI
+         QG7w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785761092; x=1786365892;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=wiEjTOr3Tm8yOp0qFz6uuY1ub8uyFumZPZODy1x9kgM=;
+        b=HtZVhzsWrQO9e1L9UWn5KBNgYYyYPxz3NeVzYZEor8kmb5SsmEpcanxBs2X4qvz6Fw
+         2hXpaOBMT+1PRYnKL8szJMY+Pq0p6rh+1tmvZyv+18c7zmtiptai8l6omZBVfi1EOGYa
+         MUHiLjccjYQXzyPF8f6kBhnLv/iRjDjdJoYkz6Deu5wrr/ts9T+/oOi7QP6edP69+5Tv
+         yLeU7B87xq5gBHvHTiYD4jfQEiPw4SFKN6I+ulev0CGwd7/7WmgDnHsXpi467HHNbkOL
+         VG47bcqh8DmSqlmT+SZHik8DWiVFk9kPmi0/TQT0KEeYMZ/5pmjNjIB4Ffr9lYGax5Fk
+         T+RA==
+X-Forwarded-Encrypted: i=1; AHgh+RrDym3ab4kRhxM0G2ERordyMtlw7yzKBj1qIiNNd9p6v3+8N0jiFBRklCLaeFVzKDgmQGm8lTYP/UkuV5Jz@vger.kernel.org
+X-Gm-Message-State: AOJu0YwSAHun6dh+XuO6kS5t5QBkOGONhWpyXEqJgF5LBBqmBd57IlAn
+	SXkHwDfuqUbUtlAVvniRoImVQqM2ysy4StdAW4NjcbbrjO0kNyURpCZSNxZDXREuM2umTXPtvAy
+	bW4fGfFk/f9ElV4+B2XU4f2eDTG3b65zZA2VWPbEe1YN2s3ouUHb+QB1nW1dRAk7Qo0gl
+X-Gm-Gg: AR+sD12i/2qsREGN/RxfdJ6GmkYKk9/iu2D36sFz/yAo1iQwtQNV98ND0KANIHKkutA
+	5EWGQJNxV5b3mH7S2CIV54nKyHMYuz/K72gUnpl+0G7v1XG10h1j8CfsStf19Kv8eRlxNJIBPEr
+	FjMyCkSB3MZrizistQK0qAwIlEqzSeZhkad5aF+Day0kQ0ADRIfPfhns0djyeahV/yq3w60nMgI
+	EnnN6G4E2G27luz5PZkdHPjs3UQgeq0txk9NGD6vEL/pGTWsRn5SnA/BoD6OVVWYx4VuuQLw6jI
+	hzf4tLSt+A0v3VY8eL6WxUo8FPePF+FDrs9i0tAlOYBUzSFm9RbgFZ7oS5u3WwL1ry67L+FVgUO
+	ZTiwgXEE7UakWfjS89MCZq5sKkZA=
+X-Received: by 2002:a05:6a21:4514:b0:3c3:a529:1e44 with SMTP id adf61e73a8af0-3c92a8d6802mr10817200637.57.1785761091601;
+        Mon, 03 Aug 2026 05:44:51 -0700 (PDT)
+X-Received: by 2002:a05:6a21:4514:b0:3c3:a529:1e44 with SMTP id adf61e73a8af0-3c92a8d6802mr10817145637.57.1785761090937;
+        Mon, 03 Aug 2026 05:44:50 -0700 (PDT)
+Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153ddd7a33sm35397081eec.12.2026.08.03.05.44.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 03 Aug 2026 05:44:50 -0700 (PDT)
+Date: Mon, 3 Aug 2026 18:14:42 +0530
+From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+To: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Manikanta Mylavarapu <manikanta.mylavarapu@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org,
+        Vignesh Viswanathan <vignesh.viswanathan@oss.qualcomm.com>,
+        Gokul Sriram Palanisamy <gokul.sriram.p@oss.qualcomm.com>,
+        George Moussalem <george.moussalem@outlook.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Subject: Re: [PATCH v14 3/9] remoteproc: qcom: add hexagon based WCSS secure
+ PIL driver
+Message-ID: <20260803124442.krqtw6si4ujsnuul@hu-mojha-hyd.qualcomm.com>
+References: <20260803-rproc-v14-0-a1f87b0b0ad2@oss.qualcomm.com>
+ <20260803-rproc-v14-3-a1f87b0b0ad2@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260803-ath10k-a-msdu-v3-1-af2af21c2f19@ixit.cz>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WNywrCMBREf6XctVfyKJa4EgQ/wK10kTSpuYitJ
- LFUS/7dkL3LM8Oc2SC6QC7CsdkguIUizVMBuWtg8Hq6OyRbGAQTB9ZxhTp5zh6o8RntG4dWSdk
- 6wxS3UDav4EZaq+8G18sZ+hJ6imkOn/qxiFr90S0COY5tp4xRlgvenWiltB++0Oecfy5Du3CtA
- AAA
-X-Change-ID: 20260719-ath10k-a-msdu-c49334eb091d
-To: Jeff Johnson <jjohnson@kernel.org>, 
- Johannes Berg <johannes.berg@intel.com>, 
- Kalle Valo <kvalo@qca.qualcomm.com>, 
- Michal Kazior <michal.kazior@tieto.com>
-Cc: linux-wireless@vger.kernel.org, ath10k@lists.infradead.org, 
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- phone-devel@vger.kernel.org, David Heidelberg <david@ixit.cz>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=8241; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=Vyca6Kdkl5mnaYlJ5S6qCSV/AGIPFC949AIwyje/jKU=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqcIvpvtDhFNQO9qNBdEqaIRvyG6dSIJKpj9twV
- 7orHrL99pyJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCanCL6QAKCRBgAj/E00kg
- cnc6D/wMhnWAd46FAWl7v5+K2ANUuv6gsyzd1wAw4ysLDmhmm8fVL8uD1bvw+p+m+rPdcIQmXNb
- YoW5wrZ2AB/o/o06gXNRPE5n0QB/y7Xr0ccGtwlY2YxCBByZIhpqviN6GIkhhj3TrE/xM/o07X7
- ItIwqLP5MCWCNsEKXhvqhkd90mnqL4gPqXBZpbEg6XFyF30ZC69m/fCWcawokveQM8Ah8bz0pwn
- hNTsISX7Lw/wlrnbkWliy/z34OTkzeXCbv4LtVp21Ffan0HojakIwihr83dRf/vsmt+TVMZQZen
- 4HA1K1d52pzRsHZvBiombCoxlQQinngRGsB/Efitj7hR/f7Uq3uWD5fKmOkWI//RI33rlbD3YZ5
- AVWOxZ3RZrM3fxPpTGjHFS3SXpIGNmLmQ3KdZ8JfOOh10n+QEbdCMTAQRi+FMOeRxgOuXoCOGMT
- oixFJqsJmdlpR1SxU9xiLrgJABEdvpLdLlkrERAzdtYEtxpoKh0EhgWQXWzGFV7MF1pjW1i/OER
- y+hN5kRAu20cIgy2sTHeB0aN0Qh39LO3qafpWfRAuA264CWIIGI6vyU+Dd+/MSmFTMksXccZCcc
- Y0bdtp1FiVwO/RNDFABCiD8UpA/BDloSeO3ZfOQEskq6mpNT92i78YZ6YHsDle5sMzXDLN3h+4z
- foSzx9P4LM5DRzQ==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260803-rproc-v14-3-a1f87b0b0ad2@oss.qualcomm.com>
+X-Authority-Analysis: v=2.4 cv=X9Ri7mTe c=1 sm=1 tr=0 ts=6a708d44 cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=UqCG9HQmAAAA:8 a=BXM0GNU5JGEDd1tv9sUA:9 a=CjuIK1q_8ugA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-ORIG-GUID: nvOMBWZ4akq3VLyQFsesb3vjgXUGqg2m
+X-Proofpoint-GUID: nvOMBWZ4akq3VLyQFsesb3vjgXUGqg2m
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDExNCBTYWx0ZWRfX/cq+ba31XxID
+ xTQ9g5ObaeA5mhyNy3WkAJGmPdoQnEwg2mRaB/l9WKzWIPlJHeOmiLVC2AQ3MInGCHiGBv4kb7j
+ 8vWpKtcryfElgNDbP2F7jjx9chTESA0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDExNCBTYWx0ZWRfX8OK9bzcoXJ/1
+ 6UyUGkgYPtNtAKyOjOajSwbbdOGHEmf+Mmipixg5u7ka3f94Vu3oJDf0aYJnXcXzk07j8xtE4be
+ 0G7ZmaAheZMdLz1jxqp7OIkUgUKgy0EB5b+7uzK+SBzIDvLcVw62MaJ7o51f1LNOGtyz/Qgw3jD
+ LaSPKQEngEigCjkFZ3YWgo4n3/wD8essBExXbxeek04WjSupExgeFmLLrWG6AkRjsxa0lTchHV2
+ F4ywpWsAk4rIeLaDEl31b+uUqcvHuCi20hdjHLmUZDfwdaxp7cTwnOMIsNyi5RZvgNptNRvHxi0
+ EP1W9oK/RzPXA3hxcGxWyxLLoE8XoOHSx5eom0dSBKjwezEzrAbzLeIiQkFq/6heTHXuTqeZES6
+ oCxDUhhmDqCMqJQhLHbc0a7pBHRlkMc3n1dP0PuUOhSTgGmAUpGi7FWPThCu+3v6VgAcA5BwecD
+ B68jjvs1GvNtdAaXwLA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-03_03,2026-07-30_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 impostorscore=0 bulkscore=0 malwarescore=0 priorityscore=1501
+ phishscore=0 adultscore=0 spamscore=0 lowpriorityscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608030114
 
-From: David Heidelberg <david@ixit.cz>
+On Mon, Aug 03, 2026 at 04:16:09PM +0530, Varadarajan Narayanan wrote:
+> From: Vignesh Viswanathan <vignesh.viswanathan@oss.qualcomm.com>
+> 
+> Add support to bring up hexagon based WCSS using secure PIL. All IPQxxxx
+> SoCs support secure Peripheral Image Loading (PIL).
+> 
+> Secure PIL image is signed firmware image which only trusted software such
+> as TrustZone (TZ) can authenticate and load. Linux kernel will send a
+> Peripheral Authentication Service (PAS) request to TZ to authenticate and
+> load the PIL images.
+> 
+> In order to avoid overloading the existing WCSS driver or PAS driver, we
+> came up with this new PAS based IPQ WCSS driver.
 
-The WCN3990 might split MSDUs among multiple "in-order" indications.
-The driver needs information from previous indications to handle MPDUs
-that are not started by the same indications that complete them. Stash
-the MSDUs of an incomplete MPDU in the driver state, together with the
-peer id, tid and frag flag identifying it, and prepend them to the MSDU
-list of the next indication so the MPDU can be completed instead of
-being dropped and confusing the driver.
+Can you tell why you need another driver if you are using the same PAS
+method and it is using more of everything what PAS already
+supports ?
 
-Keeping the actual buffers around is required, not just metadata: the
-stashed MSDUs are the payload of the incomplete MPDU, which can only be
-processed and delivered once the buffer flagged as the last MSDU
-arrives. If the next indication does not continue the pending MPDU
-(different peer id, tid or frag flag, or an offload indication), bail
-out to recovery as before, since no firmware is known to do this. Cap
-the stash at the rx ring size and bail out the same way if the last MSDU
-never arrives, so a firmware that stops mid MPDU cannot grow it without
-bound.
-
-Based on effort of Richard Acayan.
-
-Signed-off-by: David Heidelberg <david@ixit.cz>
----
-The WCN3990 firmware may split an A-MSDU across multiple HTT "in-order"
-indications. Mainline drops these ("failed to extract amsdu: -11",
-rx_confused, recovery), collapsing throughput under load on affected
-devices. Stash the MSDUs of an incomplete MPDU in the driver state so
-it can be completed by the next indication instead of being dropped.
-
-Similar patch has been carried out-of-tree (sdm845 mainline, Comma.AI
-vamOS) for a long time.
-
-Changes in v3:
-- Rework: keep the per-indication MSDU list on the stack and stash only
-  the MSDUs of an incomplete MPDU between indications; processing and
-  error paths are otherwise unchanged from mainline (Johannes)
-- Track the frag flag of the pending MPDU and bail out to recovery if
-  the continuing indication disagrees (Jeff's review agent)
-- Drop the unused msdu/rxd assignments before the extract loop, a stale
-  pre-v1 leftover (Richard)
-- Return 0 when stashing an incomplete MPDU, waiting for the
-  continuation is not an error
-- Explain in the commit message why the buffers themselves must be
-  kept, not just metadata (Johannes)
-- Link to v2: https://lore.kernel.org/r/20260719-ath10k-a-msdu-v2-1-f479bb9d1217@ixit.cz
-
-Changes in v2:
-- checkpatch & style. (Jeff)
-- Improve comments.
-- Link to v1: https://lore.kernel.org/linux-wireless/20260210021249.12132-2-mailingradian@gmail.com/
----
- drivers/net/wireless/ath/ath10k/htt.h    | 10 +++++++
- drivers/net/wireless/ath/ath10k/htt_rx.c | 48 +++++++++++++++++++++++++++++++-
- 2 files changed, 57 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/net/wireless/ath/ath10k/htt.h b/drivers/net/wireless/ath/ath10k/htt.h
-index 25c6b2e2f81c8..0a3998bdc34fd 100644
---- a/drivers/net/wireless/ath/ath10k/htt.h
-+++ b/drivers/net/wireless/ath/ath10k/htt.h
-@@ -1924,16 +1924,26 @@ struct ath10k_htt {
- 
- 	bool tx_mem_allocated;
- 	const struct ath10k_htt_tx_ops *tx_ops;
- 	const struct ath10k_htt_rx_ops *rx_ops;
- 	bool disable_tx_comp;
- 	bool bundle_tx;
- 	struct sk_buff_head tx_req_head;
- 	struct sk_buff_head tx_complete_head;
-+
-+	/* MSDUs of an MPDU left incomplete by an in-order indication, waiting
-+	 * for the next indication to continue it
-+	 */
-+	struct {
-+		u8 tid;
-+		u16 peer_id;
-+		bool frag;
-+		struct sk_buff_head msdus;
-+	} rx_in_ord_split;
- };
- 
- struct ath10k_htt_tx_ops {
- 	int (*htt_send_rx_ring_cfg)(struct ath10k_htt *htt);
- 	int (*htt_send_frag_desc_bank_cfg)(struct ath10k_htt *htt);
- 	int (*htt_alloc_frag_desc)(struct ath10k_htt *htt);
- 	void (*htt_free_frag_desc)(struct ath10k_htt *htt);
- 	int (*htt_tx)(struct ath10k_htt *htt, enum ath10k_hw_txrx_mode txmode,
-diff --git a/drivers/net/wireless/ath/ath10k/htt_rx.c b/drivers/net/wireless/ath/ath10k/htt_rx.c
-index ab2d373b4750d..40fdde280a6f1 100644
---- a/drivers/net/wireless/ath/ath10k/htt_rx.c
-+++ b/drivers/net/wireless/ath/ath10k/htt_rx.c
-@@ -291,16 +291,18 @@ void ath10k_htt_rx_free(struct ath10k_htt *htt)
- 		return;
- 
- 	timer_delete_sync(&htt->rx_ring.refill_retry_timer);
- 
- 	skb_queue_purge(&htt->rx_msdus_q);
- 	skb_queue_purge(&htt->rx_in_ord_compl_q);
- 	skb_queue_purge(&htt->tx_fetch_ind_q);
- 
-+	skb_queue_purge(&htt->rx_in_ord_split.msdus);
-+
- 	spin_lock_bh(&htt->rx_ring.lock);
- 	ath10k_htt_rx_ring_free(htt);
- 	spin_unlock_bh(&htt->rx_ring.lock);
- 
- 	dma_free_coherent(htt->ar->dev,
- 			  ath10k_htt_get_rx_ring_size(htt),
- 			  ath10k_htt_get_vaddr_ring(htt),
- 			  htt->rx_ring.base_paddr);
-@@ -841,16 +843,18 @@ int ath10k_htt_rx_alloc(struct ath10k_htt *htt)
- 	htt->rx_ring.sw_rd_idx.msdu_payld = 0;
- 	hash_init(htt->rx_ring.skb_table);
- 
- 	skb_queue_head_init(&htt->rx_msdus_q);
- 	skb_queue_head_init(&htt->rx_in_ord_compl_q);
- 	skb_queue_head_init(&htt->tx_fetch_ind_q);
- 	atomic_set(&htt->num_mpdus_ready, 0);
- 
-+	skb_queue_head_init(&htt->rx_in_ord_split.msdus);
-+
- 	ath10k_dbg(ar, ATH10K_DBG_BOOT, "htt rx ring size %d fill_level %d\n",
- 		   htt->rx_ring.size, htt->rx_ring.fill_level);
- 	return 0;
- 
- err_dma_idx:
- 	dma_free_coherent(htt->ar->dev,
- 			  ath10k_htt_get_rx_ring_size(htt),
- 			  vaddr_ring,
-@@ -3296,16 +3300,38 @@ static int ath10k_htt_rx_in_ord_ind(struct ath10k *ar, struct sk_buff *skb)
- 		ath10k_warn(ar, "dropping invalid in order rx indication\n");
- 		return -EINVAL;
- 	}
- 
- 	/* The event can deliver more than 1 A-MSDU. Each A-MSDU is later
- 	 * extracted and processed.
- 	 */
- 	__skb_queue_head_init(&list);
-+
-+	if (!skb_queue_empty(&htt->rx_in_ord_split.msdus)) {
-+		/* An MPDU left incomplete by a previous indication is
-+		 * pending. It might still be possible to handle indications
-+		 * that do not continue it if there is only one peer that
-+		 * splits at each given moment. We are bailing out because we
-+		 * should have a test case for this before trying to fix it.
-+		 */
-+		if (tid != htt->rx_in_ord_split.tid ||
-+		    peer_id != htt->rx_in_ord_split.peer_id ||
-+		    frag != htt->rx_in_ord_split.frag ||
-+		    offload) {
-+			ath10k_warn(ar, "split amsdu did not resume immediately\n");
-+			htt->rx_confused = true;
-+			__skb_queue_purge(&htt->rx_in_ord_split.msdus);
-+			ath10k_core_start_recovery(ar);
-+			return -EIO;
-+		}
-+
-+		skb_queue_splice_init(&htt->rx_in_ord_split.msdus, &list);
-+	}
-+
- 	if (ar->hw_params.target_64bit)
- 		ret = ath10k_htt_rx_pop_paddr64_list(htt, &resp->rx_in_ord_ind,
- 						     &list);
- 	else
- 		ret = ath10k_htt_rx_pop_paddr32_list(htt, &resp->rx_in_ord_ind,
- 						     &list);
- 
- 	if (ret < 0) {
-@@ -3334,17 +3360,37 @@ static int ath10k_htt_rx_in_ord_ind(struct ath10k *ar, struct sk_buff *skb)
- 			 */
- 			ath10k_htt_rx_h_ppdu(ar, &amsdu, status, vdev_id);
- 			ath10k_htt_rx_h_filter(ar, &amsdu, status, NULL);
- 			ath10k_htt_rx_h_mpdu(ar, &amsdu, status, false, NULL,
- 					     NULL, peer_id, frag);
- 			ath10k_htt_rx_h_enqueue(ar, &amsdu, status);
- 			break;
- 		case -EAGAIN:
--			fallthrough;
-+			/* The MPDU is incomplete. Stash the remaining MSDUs
-+			 * and wait for the next indication to continue it.
-+			 * A last MSDU that never arrives would otherwise keep
-+			 * growing the stash on every indication, so give up
-+			 * once it cannot plausibly be an A-MSDU any more.
-+			 */
-+			if (skb_queue_len(&list) > HTT_RX_RING_SIZE) {
-+				ath10k_warn(ar, "split amsdu exceeds %d msdus\n",
-+					    HTT_RX_RING_SIZE);
-+				htt->rx_confused = true;
-+				__skb_queue_purge(&list);
-+				ath10k_core_start_recovery(ar);
-+				return -EIO;
-+			}
-+
-+			htt->rx_in_ord_split.tid = tid;
-+			htt->rx_in_ord_split.peer_id = peer_id;
-+			htt->rx_in_ord_split.frag = frag;
-+			skb_queue_splice_init(&list,
-+					      &htt->rx_in_ord_split.msdus);
-+			return 0;
- 		default:
- 			/* Should not happen. */
- 			ath10k_warn(ar, "failed to extract amsdu: %d\n", ret);
- 			htt->rx_confused = true;
- 			__skb_queue_purge(&list);
- 			ath10k_core_start_recovery(ar);
- 			return -EIO;
- 		}
-
----
-base-commit: 95d6a9ccef99117115e41e9adb271243bd5e985b
-change-id: 20260719-ath10k-a-msdu-c49334eb091d
-
-Best regards,
---  
-David Heidelberg <david@ixit.cz>
+> 
+> Signed-off-by: Vignesh Viswanathan <vignesh.viswanathan@oss.qualcomm.com>
+> Signed-off-by: Manikanta Mylavarapu <manikanta.mylavarapu@oss.qualcomm.com>
+> Signed-off-by: Gokul Sriram Palanisamy <gokul.sriram.p@oss.qualcomm.com>
+> Signed-off-by: George Moussalem <george.moussalem@outlook.com>
+> [ Dropped ipq5424 support ]
+> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> Tested-by: Vignesh Viswanathan <vignesh.viswanathan@oss.qualcomm.com>
 
 
+Author and tested looks weird..here..
+
+
+> Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+> ---
+>  drivers/remoteproc/Kconfig              |  20 ++
+>  drivers/remoteproc/Makefile             |   1 +
+>  drivers/remoteproc/qcom_q6v5_wcss_sec.c | 337 ++++++++++++++++++++++++++++++++
+>  include/linux/remoteproc.h              |   2 +
+>  4 files changed, 360 insertions(+)
+> 
+> diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+> index 5b56b2dcc725..3feea5bda129 100644
+> --- a/drivers/remoteproc/Kconfig
+> +++ b/drivers/remoteproc/Kconfig
+> @@ -267,6 +267,26 @@ config QCOM_Q6V5_WCSS
+>  	  Hexagon V5 based WCSS remote processors on e.g. IPQ8074.  This is
+>  	  a non-TrustZone wireless subsystem.
+>  
+> +config QCOM_Q6V5_WCSS_SEC
+> +	tristate "Qualcomm Hexagon based WCSS Secure Peripheral Image Loader"
+> +	depends on OF && ARCH_QCOM
+> +	depends on QCOM_SMEM
+> +	depends on RPMSG_QCOM_GLINK_SMEM || RPMSG_QCOM_GLINK_SMEM=n
+> +	depends on RPMSG_QCOM_GLINK || RPMSG_QCOM_GLINK=n
+> +	depends on QCOM_AOSS_QMP || QCOM_AOSS_QMP=n
+> +	select QCOM_MDT_LOADER
+> +	select QCOM_PIL_INFO
+> +	select QCOM_Q6V5_COMMON
+> +	select QCOM_RPROC_COMMON
+> +	select QCOM_SCM
+> +	help
+> +	  Say y here to support the Qualcomm Secure Peripheral Image Loader
+> +	  for the Hexagon based remote processors on e.g. IPQ5332.
+> +
+> +	  This is TrustZone wireless subsystem. The firmware is
+> +	  verified and booted with the help of the Peripheral Authentication
+> +	  System (PAS) in TrustZone.
+> +
+>  config QCOM_SYSMON
+>  	tristate "Qualcomm sysmon driver"
+>  	depends on RPMSG
+> diff --git a/drivers/remoteproc/Makefile b/drivers/remoteproc/Makefile
+> index 689686de0d41..f74519ea6502 100644
+> --- a/drivers/remoteproc/Makefile
+> +++ b/drivers/remoteproc/Makefile
+> @@ -29,6 +29,7 @@ obj-$(CONFIG_QCOM_Q6V5_ADSP)		+= qcom_q6v5_adsp.o
+>  obj-$(CONFIG_QCOM_Q6V5_MSS)		+= qcom_q6v5_mss.o
+>  obj-$(CONFIG_QCOM_Q6V5_PAS)		+= qcom_q6v5_pas.o
+>  obj-$(CONFIG_QCOM_Q6V5_WCSS)		+= qcom_q6v5_wcss.o
+> +obj-$(CONFIG_QCOM_Q6V5_WCSS_SEC)	+= qcom_q6v5_wcss_sec.o
+>  obj-$(CONFIG_QCOM_SYSMON)		+= qcom_sysmon.o
+>  obj-$(CONFIG_QCOM_WCNSS_PIL)		+= qcom_wcnss_pil.o
+>  qcom_wcnss_pil-y			+= qcom_wcnss.o
+> diff --git a/drivers/remoteproc/qcom_q6v5_wcss_sec.c b/drivers/remoteproc/qcom_q6v5_wcss_sec.c
+> new file mode 100644
+> index 000000000000..4837825d1717
+> --- /dev/null
+> +++ b/drivers/remoteproc/qcom_q6v5_wcss_sec.c
+> @@ -0,0 +1,337 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
+> +#include <linux/clk.h>
+> +#include <linux/firmware/qcom/qcom_pas.h>
+> +#include <linux/io.h>
+> +#include <linux/mailbox_client.h>
+> +#include <linux/of_reserved_mem.h>
+> +#include <linux/platform_device.h>
+> +#include <linux/soc/qcom/mdt_loader.h>
+> +
+> +#include "qcom_common.h"
+> +#include "qcom_q6v5.h"
+> +#include "qcom_pil_info.h"
+> +
+> +#define WCSS_CRASH_REASON		421
+> +
+> +#define WCSS_PAS_ID			0x6
+> +#define MPD_WCSS_PAS_ID			0xd
+> +
+> +#define Q6_WAIT_TIMEOUT			(5 * HZ)
+> +
+> +struct wcss_sec {
+> +	struct device *dev;
+> +	struct qcom_rproc_glink glink_subdev;
+> +	struct qcom_rproc_ssr ssr_subdev;
+> +	struct qcom_q6v5 q6;
+> +	phys_addr_t mem_phys;
+> +	phys_addr_t mem_reloc;
+> +	void *mem_region;
+> +	size_t mem_size;
+> +	const struct wcss_data *desc;
+> +};
+> +
+> +struct wcss_data {
+> +	u32 pasid;
+> +	const char *ss_name;
+> +	bool auto_boot;
+> +};
+> +
+> +static int wcss_sec_start(struct rproc *rproc)
+> +{
+> +	struct wcss_sec *wcss = rproc->priv;
+> +	struct device *dev = wcss->dev;
+> +	int ret;
+> +
+> +	ret = qcom_q6v5_prepare(&wcss->q6);
+> +	if (ret)
+> +		return ret;
+> +
+> +	ret = qcom_pas_auth_and_reset(wcss->desc->pasid);
+> +	if (ret) {
+> +		dev_err(dev, "wcss_reset failed\n");
+> +		goto unprepare;
+> +	}
+> +
+> +	ret = qcom_q6v5_wait_for_start(&wcss->q6, msecs_to_jiffies(Q6_WAIT_TIMEOUT));
+> +
+> +	if (ret == -ETIMEDOUT) {
+> +		dev_err(dev, "start timed out\n");
+> +		qcom_pas_shutdown(wcss->desc->pasid);
+> +		goto unprepare;
+> +	}
+> +
+> +	return 0;
+> +
+> +unprepare:
+> +	qcom_q6v5_unprepare(&wcss->q6);
+> +
+> +	return ret;
+> +}
+> +
+> +static int wcss_sec_stop(struct rproc *rproc)
+> +{
+> +	struct wcss_sec *wcss = rproc->priv;
+> +	struct device *dev = wcss->dev;
+> +	int ret;
+> +
+> +	ret = qcom_q6v5_request_stop(&wcss->q6, NULL);
+> +	if (ret == -ETIMEDOUT)
+> +		dev_err(dev, "timed out on wait\n");
+> +
+> +	ret = qcom_pas_shutdown(wcss->desc->pasid);
+> +	if (ret)
+> +		dev_err(dev, "Failed to shutdown %d\n", ret);
+> +
+> +	qcom_q6v5_unprepare(&wcss->q6);
+> +
+> +	return ret;
+> +}
+> +
+> +static void *wcss_sec_da_to_va(struct rproc *rproc, u64 da, size_t len,
+> +			       bool *is_iomem)
+> +{
+> +	struct wcss_sec *wcss = rproc->priv;
+> +	int offset;
+> +
+> +	offset = da - wcss->mem_reloc;
+> +	if (offset < 0 || offset + len > wcss->mem_size)
+> +		return NULL;
+> +
+> +	if (is_iomem)
+> +		*is_iomem = true;
+> +
+> +	return wcss->mem_region + offset;
+> +}
+> +
+> +static int wcss_sec_load(struct rproc *rproc, const struct firmware *fw)
+> +{
+> +	struct wcss_sec *wcss = rproc->priv;
+> +	struct device *dev = wcss->dev;
+> +	int ret;
+> +
+> +	ret = qcom_mdt_load(dev, fw, rproc->firmware, wcss->desc->pasid, wcss->mem_region,
+> +			    wcss->mem_phys, wcss->mem_size, &wcss->mem_reloc);
+> +	if (ret)
+> +		return ret;
+> +
+> +	qcom_pil_info_store("wcss", wcss->mem_phys, wcss->mem_size);
+> +
+> +	return 0;
+> +}
+> +
+> +static unsigned long wcss_sec_panic(struct rproc *rproc)
+> +{
+> +	struct wcss_sec *wcss = rproc->priv;
+> +
+> +	return qcom_q6v5_panic(&wcss->q6);
+> +}
+> +
+> +static void wcss_sec_copy_segment(struct rproc *rproc,
+> +				  struct rproc_dump_segment *segment,
+> +				  void *dest, size_t offset, size_t size)
+> +{
+> +	struct wcss_sec *wcss = rproc->priv;
+> +	struct device *dev = wcss->dev;
+> +
+> +	if (!segment->io_ptr)
+> +		segment->io_ptr = ioremap_wc(segment->da, segment->size);
+> +
+> +	if (!segment->io_ptr) {
+> +		dev_err(dev, "Failed to ioremap segment %pad size 0x%zx\n",
+> +			&segment->da, segment->size);
+> +		return;
+> +	}
+> +
+> +	if (offset + size <= segment->size) {
+> +		memcpy_fromio(dest, segment->io_ptr + offset, size);
+> +	} else {
+> +		iounmap(segment->io_ptr);
+> +		segment->io_ptr = NULL;
+> +	}
+> +}
+> +
+> +static int wcss_sec_dump_segments(struct rproc *rproc,
+> +				  const struct firmware *fw)
+> +{
+> +	struct device *dev = rproc->dev.parent;
+> +	struct reserved_mem *rmem = NULL;
+> +	struct device_node *node;
+> +	int num_segs, index;
+> +	int ret;
+> +
+> +	/*
+> +	 * Parse through additional reserved memory regions for the rproc
+> +	 * and add them to the coredump segments
+> +	 */
+> +	num_segs = of_count_phandle_with_args(dev->of_node,
+> +					      "memory-region", NULL);
+> +	for (index = 0; index < num_segs; index++) {
+> +		node = of_parse_phandle(dev->of_node,
+> +					"memory-region", index);
+> +		if (!node)
+> +			return -EINVAL;
+> +
+> +		rmem = of_reserved_mem_lookup(node);
+> +		of_node_put(node);
+> +		if (!rmem) {
+> +			dev_err(dev, "unable to acquire memory-region index %d num_segs %d\n",
+> +				index, num_segs);
+> +			return -EINVAL;
+> +		}
+> +
+> +		dev_dbg(dev, "Adding segment 0x%pa size 0x%pa",
+> +			&rmem->base, &rmem->size);
+> +		ret = rproc_coredump_add_custom_segment(rproc,
+> +							rmem->base,
+> +							rmem->size,
+> +							wcss_sec_copy_segment,
+> +							NULL);
+> +		if (ret)
+> +			return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct rproc_ops wcss_sec_ops = {
+> +	.start = wcss_sec_start,
+> +	.stop = wcss_sec_stop,
+> +	.da_to_va = wcss_sec_da_to_va,
+> +	.load = wcss_sec_load,
+> +	.get_boot_addr = rproc_elf_get_boot_addr,
+> +	.panic = wcss_sec_panic,
+> +	.parse_fw = wcss_sec_dump_segments,
+> +};
+> +
+> +static int wcss_sec_alloc_memory_region(struct wcss_sec *wcss)
+> +{
+> +	struct device *dev = wcss->dev;
+> +	struct resource res;
+> +	int ret;
+> +
+> +	ret = of_reserved_mem_region_to_resource(dev->of_node, 0, &res);
+> +	if (ret) {
+> +		dev_err(dev, "unable to acquire memory-region resource\n");
+> +		return ret;
+> +	}
+> +
+> +	wcss->mem_phys = res.start;
+> +	wcss->mem_reloc = res.start;
+> +	wcss->mem_size = resource_size(&res);
+> +	wcss->mem_region = devm_ioremap_resource_wc(dev, &res);
+> +	if (IS_ERR(wcss->mem_region)) {
+> +		dev_err(dev, "unable to map memory region: %pR\n", &res);
+> +		return PTR_ERR(wcss->mem_region);
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static int wcss_sec_probe(struct platform_device *pdev)
+> +{
+> +	const struct wcss_data *desc = of_device_get_match_data(&pdev->dev);
+> +	const char *fw_name = NULL;
+> +	struct wcss_sec *wcss;
+> +	struct clk *sleep_clk;
+> +	struct clk *int_clk;
+> +	struct rproc *rproc;
+> +	int ret;
+> +
+> +	ret = of_property_read_string(pdev->dev.of_node, "firmware-name",
+> +				      &fw_name);
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	rproc = devm_rproc_alloc(&pdev->dev, desc->ss_name, &wcss_sec_ops,
+> +				 fw_name, sizeof(*wcss));
+> +	if (!rproc) {
+> +		dev_err(&pdev->dev, "failed to allocate rproc\n");
+> +		return -ENOMEM;
+> +	}
+> +
+> +	wcss = rproc->priv;
+> +	wcss->dev = &pdev->dev;
+> +	wcss->desc = desc;
+> +
+> +	ret = wcss_sec_alloc_memory_region(wcss);
+> +	if (ret)
+> +		return ret;
+> +
+> +	sleep_clk = devm_clk_get_optional_enabled(&pdev->dev, "sleep");
+> +	if (IS_ERR(sleep_clk))
+> +		return dev_err_probe(&pdev->dev, PTR_ERR(sleep_clk),
+> +				     "Failed to get sleep clock\n");
+> +
+> +	int_clk = devm_clk_get_optional_enabled(&pdev->dev, "interconnect");
+> +	if (IS_ERR(int_clk))
+> +		return dev_err_probe(&pdev->dev, PTR_ERR(int_clk),
+> +				     "Failed to get interconnect clock\n");
+> +
+> +	ret = qcom_q6v5_init(&wcss->q6, pdev, rproc,
+> +			     WCSS_CRASH_REASON, NULL, NULL);
+> +	if (ret)
+> +		return ret;
+> +
+> +	qcom_add_glink_subdev(rproc, &wcss->glink_subdev, desc->ss_name);
+> +	qcom_add_ssr_subdev(rproc, &wcss->ssr_subdev, desc->ss_name);
+> +
+> +	rproc->auto_boot = desc->auto_boot;
+> +	rproc->dump_conf = RPROC_COREDUMP_INLINE;
+> +	rproc_coredump_set_elf_info(rproc, ELFCLASS32, EM_NONE);
+> +
+> +	ret = devm_rproc_add(&pdev->dev, rproc);
+> +	if (ret) {
+> +		qcom_remove_ssr_subdev(rproc, &wcss->ssr_subdev);
+> +		qcom_remove_glink_subdev(rproc, &wcss->glink_subdev);
+> +		qcom_q6v5_deinit(&wcss->q6);
+> +		return ret;
+> +	}
+> +
+> +	platform_set_drvdata(pdev, rproc);
+> +
+> +	return 0;
+> +}
+> +
+> +static void wcss_sec_remove(struct platform_device *pdev)
+> +{
+> +	struct rproc *rproc = platform_get_drvdata(pdev);
+> +	struct wcss_sec *wcss = rproc->priv;
+> +
+> +	qcom_remove_ssr_subdev(rproc, &wcss->ssr_subdev);
+> +	qcom_remove_glink_subdev(rproc, &wcss->glink_subdev);
+> +	qcom_q6v5_deinit(&wcss->q6);
+> +}
+> +
+> +static const struct wcss_data wcss_sec_ipq5332_res_init = {
+> +	.pasid = MPD_WCSS_PAS_ID,
+> +	.ss_name = "q6wcss",
+> +};
+> +
+> +static const struct wcss_data wcss_sec_ipq9574_res_init = {
+> +	.pasid = WCSS_PAS_ID,
+> +	.ss_name = "q6wcss",
+> +};
+> +
+> +static const struct of_device_id wcss_sec_of_match[] = {
+> +	{ .compatible = "qcom,ipq5018-wcss-sec-pil", .data = &wcss_sec_ipq5332_res_init },
+> +	{ .compatible = "qcom,ipq5332-wcss-sec-pil", .data = &wcss_sec_ipq5332_res_init },
+> +	{ .compatible = "qcom,ipq9574-wcss-sec-pil", .data = &wcss_sec_ipq9574_res_init },
+> +	{ },
+> +};
+> +MODULE_DEVICE_TABLE(of, wcss_sec_of_match);
+> +
+> +static struct platform_driver wcss_sec_driver = {
+> +	.probe = wcss_sec_probe,
+> +	.remove = wcss_sec_remove,
+> +	.driver = {
+> +		.name = "qcom-wcss-secure-pil",
+> +		.of_match_table = wcss_sec_of_match,
+> +	},
+> +};
+> +module_platform_driver(wcss_sec_driver);
+> +
+> +MODULE_DESCRIPTION("Hexagon WCSS Secure Peripheral Image Loader");
+> +MODULE_LICENSE("GPL");
+> diff --git a/include/linux/remoteproc.h b/include/linux/remoteproc.h
+> index ef711a5b1a7f..cf06b9846309 100644
+> --- a/include/linux/remoteproc.h
+> +++ b/include/linux/remoteproc.h
+> @@ -204,6 +204,7 @@ enum rproc_dump_mechanism {
+>   * @node:	list node related to the rproc segment list
+>   * @da:		device address of the segment
+>   * @size:	size of the segment
+> + * @io_ptr:	ptr to store the ioremapped dump segment
+>   * @priv:	private data associated with the dump_segment
+>   * @dump:	custom dump function to fill device memory segment associated
+>   *		with coredump
+> @@ -215,6 +216,7 @@ struct rproc_dump_segment {
+>  	dma_addr_t da;
+>  	size_t size;
+>  
+> +	void __iomem *io_ptr;
+>  	void *priv;
+>  	void (*dump)(struct rproc *rproc, struct rproc_dump_segment *segment,
+>  		     void *dest, size_t offset, size_t size);
+> 
+> -- 
+> 2.34.1
+> 
+
+-- 
+-Mukesh Ojha
