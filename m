@@ -1,88 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F51937F33E
-	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 10:31:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3E64386453
+	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 10:32:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785753121; cv=none; b=YtGY6FPdeJVBkfXO0ELA1o9aWqx0S1Hs03t4e+qEbYm2of4OsMHenMzll4Y633ewRkrJMhJf0qnL2cxXge0l5A0RRGPQfV3+oec3UjOXVtLgYyd7U2nTLpu5gK6J0fzRReR9gTk+NEdlspbbzMAZgfYUa5B96M7E13Vc4ue+mus=
+	t=1785753126; cv=none; b=UT0I80B/5M97Z+mHoyv+3kFxNRnsbwfMTDn98ibHYjbsBrb4UY3gc6G4itYeU3eI5TNFaaXfEDugr1snyh/IMU5jg4+hTBZybQ57PPOl+Zvr5MxjeZK3hqqf3szaGVjABcrzrInc+tNZLRJ7K8IMdLIYwr1dbxIKOiM0c35mC8U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785753121; c=relaxed/simple;
-	bh=F+fPjKe8NP3i0MZrbOhQmL14uCve9gQEON/srSIsDbM=;
+	s=arc-20240116; t=1785753126; c=relaxed/simple;
+	bh=Dt7uawwamGL5dzZbfwrTJusLP6o30EN5ycCd9lSUTTA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=EMSe1p4mKuXf/y7G49bE0J3pnJL9AcWgm2W2z9DwmzQ7GzNS4zUFeo5c8U+in1DqWHl32tVQGowWvr5dzTlfk+mhCTouersLLA7qM9d44n1XFG63gX7+HkZeYXA7y2hsgXgChMSDrWtyVy61D6MBp40e87CEuwX5rZpjKMzjNDg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GpMGoBKI; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Pb8qJOT0; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=pufjep3s2YiAxuAuq83jYeSLS8v5EpMEKXfP00SzdVeYvvPf+SAjPAzFp507nE/0MOCi+3HMOLT8Noem0NkbhWBiXUgGkcy6zjPpmZNaq7WNaEkdlh8P/N/tanTqt78C8nHBbRiDYmIfJyhNdtN8pjmqBbd5/PmW/4VSy8e/gns=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hAoOjh3E; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=P+8bTebB; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GpMGoBKI";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Pb8qJOT0"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6737HF6j3960718
-	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 10:31:59 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hAoOjh3E";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="P+8bTebB"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6736T8Sh3760315
+	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 10:32:04 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	/Rdiyohjbhr0H44YMyHYEoS5uhqb4cajhLofrK++hek=; b=GpMGoBKINU1FxXvE
-	L8mo+yFZ7nKqvo9B/3uwE8NB+TWGgDLkhJdz8KylflQ2ugrhOZ0jjE5F6z4KzlJx
-	x9KABTCQRyaNBhEVt5TJJ2A+xxoMjG+ciV+XOvqWcdaRH2j0O8/mw2jEDagAaakH
-	rKVOXIq0sLQctsL35OKl+3k+zRgxMr7fB37AERVTkBQPvBGChsB7EjLJqigHOkD8
-	FwrTrCmmCFYBzCjpJYp4oojzqTKdec4atJKOyqUHbiA3p00JPEXVpkYmlQbnLwdL
-	xkO8aBYAztXj4EApmNDrG1TBbE2zO2r+6bZtfH4sAyjVYoNeEwdyr5Kyr0tyAK3O
-	TbQ9Nw==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ft9fajqvm-1
+	cnKaf8soKtsfI46+7/IcDh6tbT8xlfKfVzMrrCqhrT0=; b=hAoOjh3E7f/wHN+1
+	M3aDHDlm2LGxlWFl8ZVuZzRSO8g7y0yP3x/gV9ZNnfE0P5JVomin8GLiIpcum0e3
+	gUEVmOevnW7h7pO9XZ5P64oJdtwkCul7d4KtYAmzjMZ/Hsmcxt+QusMaMLXcBfBT
+	/4hctq5jt+ULxRspBZrkDZsfxdSfxrAj4ey/BC+MdrsRebdoyh8jRybFXbtnYoQo
+	3N3FuTolnWmE0TXebW2hKAmhM/QilCiV7HoQ6WJaNsCTbEpbjhxw/rgxIZSqHN5E
+	x3S5qyGU/B2LRaj4YYcN0q/YNh7aj9xWLnKkzebRVzDTyW2B6AjV2ybswnOc0m3L
+	uHCkRw==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftnrns1ms-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 10:31:58 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38e22137fb3so5272622a91.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 03:31:58 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 10:32:03 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38f97b3f853so4557921a91.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 03:32:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785753118; x=1786357918; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1785753123; x=1786357923; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=/Rdiyohjbhr0H44YMyHYEoS5uhqb4cajhLofrK++hek=;
-        b=Pb8qJOT03S/gqoKeJxYzZSkrMFNnRAf9dhcEiBtMazvEw9i0taX5Zq1e3kMcg2Sj4X
-         LY521iqT5t+QPaLuW60uzgvTA9mjgWJfzKzCe5Tb9d0WOmPGmoIE9n5SHmxh4R+7s0Gr
-         7IWj05Lqm7lYd1gY+I8roUAiaYkBTXvHmjOJwOzJ7v24PMbeSaIy5jcbV3T0KEr3ez0a
-         LMFe2pLVHawFUy/dGvsfcdBwzfNKBnOzFlbxFxOYrxwDLXVH8NfrT/hdGhJqZy/Z58CM
-         9S+wsHkcs1UPSKDFlcf9gxas995C9a1EZ4cSyZKB3P6R2F0dpCAyK+tdvZ/kgPkFhnLY
-         FGNA==
+        bh=cnKaf8soKtsfI46+7/IcDh6tbT8xlfKfVzMrrCqhrT0=;
+        b=P+8bTebBNK3ABnTI/DmMmVPJnAWOjJPddtUYFdM52mu2Q7ADGf+I6oJk//DCtX4iCQ
+         AGtrsnqbbgBAJvdtw1/9cM9vJ1TC0QuccWJYfk/cRlM3Pv7vdbc/Y1cI3XHR3DXTD+zr
+         ohxHhSf//c2L+dzQhnuYNUZnqagezeXyrL5wEgv1uMWfyycaoAxDsV3UdIqA8OopDd+N
+         T7t7pUQ/E1b4UJjl573WoWKnqbyRVPifb1s9/ZlubzrvE3aI2oci7/aCGnN/cTNGyhxv
+         s/bId4fxc+QmSx7gt5tit8XB5ubRhLntzVHQ37Kqy/MAtO8wkHce0PjlMs4eW+LZni3h
+         QfCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785753118; x=1786357918;
+        d=1e100.net; s=20251104; t=1785753123; x=1786357923;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=/Rdiyohjbhr0H44YMyHYEoS5uhqb4cajhLofrK++hek=;
-        b=UTpHpJ2g4RNCFqimHbZ+CXE2yKpx4TMdmmlNkduuqBoPF483GkqgWkU4rHVcuqXEru
-         Py2NagpKz14d3CtjdoUxahfJdxrUbF3Iv7H2P0MHf3d9BmVNXdqpVUV+KhUSNhKv7kPx
-         XP8n6UXOF99M/c+01r9L4/fGqSN+hZXtWFTNnHALK2OSrkyQ2OV8rYyAmZ3Hf1kDZigJ
-         Xezl+fhk4PB0qENZr8yPiAJPGq1EfgHEG5nzW5PRFuZSihiVNnqCvK5CP7TCeL561vLi
-         s7K7vLtLtsbudIvc7yi2sYwdmhATJRaAYU5DnOfE9aIcNGkB9unVMSjp7ar+m/7r7WIi
-         aJVg==
-X-Forwarded-Encrypted: i=1; AHgh+Rp3Vo35Ha+l2IKl+ZI/dsay558n3IpYCWw6yWtQkiyWU7p21tqotxbVnnxz8w/2F33L9Gn8cjv0LE/iv8sv@vger.kernel.org
-X-Gm-Message-State: AOJu0YxESw3fYAPzlsS9AaqZ7/Qs/xzalI40nvVT27Vb0jZr9Bn/axJ1
-	FbnP6PPvzmzIBSLNryrU4NoPlRVrlK8L4Cy4HpvsSyF6Js26AwUVQW2F0LIETKJYG5JIEW5hR/e
-	y03aonnk77xcAh+sQqd1JiYlbey5zRUj8EUlBRFb5dAwodslr5nuLGAqk+FjjxT/6YQma
-X-Gm-Gg: AR+sD10y4SMEqTsOHl+GOd5xhYjMSdE2bkk1yHgimz1Mdol2kzciX84xf2UBHFWIrPE
-	nv30DlSDpZDBe2/wTJYim7JIkAabcSJH/DsMYaxTrEUjklP2phRmknPdYO01svsOWB9tnQtwMrc
-	L/09WjOHyvsvH+nKDuEuuHonsTw2aslRBzfX23ZEE+y5+dh6HGSHKQGZnHgfmVHi9to5BSQOoHU
-	KkfYhCbs3nIGaeBGn7+/s7/5OwphClXJrgo8aSgnr5tYO7fUttQnTy/3rP6zsiCjBlFAoSxs0i1
-	kfXADVMZxHHOK21zoHedBLt3+N59b6SMig5TRg7j1WMWp8oLjWQqzbZ+z3Ya6RLtSDKO1QEhKMR
-	LrAt3cmlBgqZDcidglefcAuNCxg==
-X-Received: by 2002:a17:90b:2e06:b0:38e:ab33:9551 with SMTP id 98e67ed59e1d1-38fbc60a11emr8206089a91.42.1785753117920;
-        Mon, 03 Aug 2026 03:31:57 -0700 (PDT)
-X-Received: by 2002:a17:90b:2e06:b0:38e:ab33:9551 with SMTP id 98e67ed59e1d1-38fbc60a11emr8206046a91.42.1785753117416;
-        Mon, 03 Aug 2026 03:31:57 -0700 (PDT)
+        bh=cnKaf8soKtsfI46+7/IcDh6tbT8xlfKfVzMrrCqhrT0=;
+        b=KbYCDYGVaI4uZKXvrUIG2TiZVWVKvjmc8Erv8fRvZEW/CuftV0NjsxTd9DC7zf5JFD
+         G3W75ewVOrKR5Bf64aXJk2/im+r+zbwUO00+BuJqgXusW0gEGHHBXvLPnkG4qFwqx9TJ
+         xZ6O6tWLp0Pp4pjZUR4joqeNhdeba8/zUKGpnwGMif2RrPjQfevenp9pSmwgYVVpTgEh
+         oi7HRmKQ0Ou688/Lm4NRPrsVfGWP1Dw3CW2hQ5Q2yYMbdWNY6z2W2KKBnPcFS1hD04rV
+         Bz21y0IZ8332C8NsiboIwvnpvOfc7XQf7JGdu00pZgRQ0tTz+Wrgh9D/+NsbTeQUZMMU
+         OBJA==
+X-Forwarded-Encrypted: i=1; AHgh+RohGhj5ejlnBWSWVA7km5SDQaTEML+laYgOTIl2BvKAwvyyJfrq5NE2YR6zg1hkncNyoF8UK964eFcIomRp@vger.kernel.org
+X-Gm-Message-State: AOJu0YzdWRBhXKxU1DyE6ib8eK5Npd1ADpWpC4NBjin0FQcHgqI2tfAK
+	KkZFW8yWgvVQw/W45xYQfp4XJFH7txLB/IcPuVr3RQwqIGh5gEh8H1C7b/VYx5i8KL5kmWvOfgR
+	au68PYvJv5qM2eGd0TB31DG+/zlOcTz8C0F/pFmeFZ/IzmnO4Zdyd7u0os+X4GJV4lgCU
+X-Gm-Gg: AR+sD11UHq2kiq4a7OUFV04hqhi7KgNVfReUCzhNbkXBWIe/DZmnsiKzkDjUMsyDPY5
+	wqbvQS5k9D8rnqztaIa92NVUdlgOTY3BfaX7s+INK8dfBl8zwcVF6PYu3vjIjy/ADYhf/15cAFd
+	XhxL5xu+i5K1MPFxW9COESeMn/dm5HlWaTMqSnJjZLVd6gRo62QIOmvUEmQejNX8oaHM6yUuY42
+	3C5weK0CWFDOgZM5lCUlFP9IfiydcsLI/BCSyG2kGuxaGSGVMONds0XGmgpeDmK/OATuLmqGqLj
+	9XmT1PASA4ugY8rKFg47ldSAX93ZxyI1ak5D8dHJpwvWNEsRpCEicgdmkW/kz2JV/xn0zf79QpE
+	mkvkq3gcb1fuf4AgFhvPpPeQHMA==
+X-Received: by 2002:a17:90b:280a:b0:381:a766:efcc with SMTP id 98e67ed59e1d1-38fbc45436bmr8414429a91.14.1785753123094;
+        Mon, 03 Aug 2026 03:32:03 -0700 (PDT)
+X-Received: by 2002:a17:90b:280a:b0:381:a766:efcc with SMTP id 98e67ed59e1d1-38fbc45436bmr8414407a91.14.1785753122550;
+        Mon, 03 Aug 2026 03:32:02 -0700 (PDT)
 Received: from hu-sumk-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38fb2b1244bsm3693427a91.0.2026.08.03.03.31.52
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38fb2b1244bsm3693427a91.0.2026.08.03.03.31.57
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Aug 2026 03:31:56 -0700 (PDT)
+        Mon, 03 Aug 2026 03:32:02 -0700 (PDT)
 From: Sumit Kumar <sumit.kumar@oss.qualcomm.com>
-Date: Mon, 03 Aug 2026 16:01:43 +0530
-Subject: [PATCH v2 1/5] dmaengine: Add DMA_SG support for multi-buffer
- scatter-gather transfers
+Date: Mon, 03 Aug 2026 16:01:44 +0530
+Subject: [PATCH v2 2/5] dmaengine: dw-edma: Add DMA_SG support
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +90,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260803-dma_multi_sg-v2-1-c12bb05e42d6@oss.qualcomm.com>
+Message-Id: <20260803-dma_multi_sg-v2-2-c12bb05e42d6@oss.qualcomm.com>
 References: <20260803-dma_multi_sg-v2-0-c12bb05e42d6@oss.qualcomm.com>
 In-Reply-To: <20260803-dma_multi_sg-v2-0-c12bb05e42d6@oss.qualcomm.com>
 To: Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>,
@@ -107,186 +106,275 @@ Cc: dmaengine@vger.kernel.org, linux-doc@vger.kernel.org,
         linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org,
         Sumit Kumar <sumit.kumar@oss.qualcomm.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785753106; l=7025;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785753106; l=9314;
  i=sumit.kumar@oss.qualcomm.com; s=20250409; h=from:subject:message-id;
- bh=F+fPjKe8NP3i0MZrbOhQmL14uCve9gQEON/srSIsDbM=;
- b=BHFl2Lx7cmYBNT3LrRyXX+cViMAk98sV6yIvxrf3cYqAZMo6eXZU6N8lrQyU/DB/LId6lHcMI
- O26it2Vb/6iAaYzqSf4sAwug5Cw3nZ2nsfv7C6HGhpzJL0/rgAQYwvg
+ bh=Dt7uawwamGL5dzZbfwrTJusLP6o30EN5ycCd9lSUTTA=;
+ b=Nn4l0bMMov/mSFqw3meaBaoqHEtMDdiPvrx/ENQmNWAidJ1BQ1j6oH20wYCJqtwxhbUJVyoNV
+ IyqdC0G627/CGiVmC4k+FZvC/APWNV1tor2WcbrXmTKStUezyzJwKLn
 X-Developer-Key: i=sumit.kumar@oss.qualcomm.com; a=ed25519;
  pk=3cys6srXqLACgA68n7n7KjDeM9JiMK1w6VxzMxr0dnM=
-X-Authority-Analysis: v=2.4 cv=PZPPQChd c=1 sm=1 tr=0 ts=6a706e1e cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDA5NCBTYWx0ZWRfX3htneNEg3New
+ 51iBAAY8ypZfl8YdpFNlFf2F5V8PaBp7uJKGXmPVMVwA6rUaCGd1Fj8385BN7xfR4Xn+BsrHXMK
+ zQK/t0BYWWGDOnrOwOGba4StairWBss=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDA5NCBTYWx0ZWRfXzlLBz+MuG1t1
+ vtMS+g0RncLAUJPlPTwyXFpWSqv22Vi+CH4oJ1s5fWoOSWZtksdt+9m7FWlny39t7CZ8dtrCTu2
+ zlMP3u4vg1mcT3+jcOPj2Vs/mK/ZIQjitL4lwwE2jxM1jI4QvzJQG8RX/o4r4BuCiocppdvECzJ
+ Cph7PrXvwkeUErzzAyDuH0nlR3DiulcD9cYHO78EPgMG4J/ZiCCp+jQVqqTZ+6k5CGDrFpD5vYd
+ MpMacawBXat0bnNwk4etxXeJh73xo/YQ91AwXjKo4jR5hRJ5cfI+9AINL9qv9bFwIw08DaaiYBx
+ ig1E141cG9QnZ/H2j4NbyRmlmWbi/Bz2cQCOyGnY4Z9MfWPCECeesUj234eRvoZKCNfjRxDHgr6
+ Ao+bupREEZ7++dhPgOh/zlfpkBtMGD64fulu5H3Lzbd0gTK7hrjJ2Gn3oi8+3/884NFNpxuL6Mb
+ 3At7Y+4epdliEpxI8Mw==
+X-Authority-Analysis: v=2.4 cv=Zest8MVA c=1 sm=1 tr=0 ts=6a706e23 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=0CPfFOknu0lYeC7QLpQA:9 a=QEXdDO2ut3YA:10
- a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-GUID: SZp5KBdZOr9L3ylACrV3cOvE0Orc3a0D
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDA5NCBTYWx0ZWRfX1ZxnfVF7zN6b
- Ak3+KLbnDjrcw325VT26Knl7kRlpMMimWJoMlm8OgFbBUooTv4BKWghAVqcpbWZYsy9e+AR0hj7
- q+7Yy6R+kuifI2eHd5emxnW32ZNzzzg=
-X-Proofpoint-ORIG-GUID: SZp5KBdZOr9L3ylACrV3cOvE0Orc3a0D
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDA5NCBTYWx0ZWRfX2E6WNGJWMdAz
- J9Ew7qYDyhKh7kj/yy9RfNETJlxJQVAAsJMdIgYg0A0uvVhNClBmq2vwDlZt25+3INjEpIfWc1T
- rhIXopOKITTWIUDNZ2lrsOHYxM0q/2u7M98FvNSFEDSqF6ReGekKt3AmkfSEsrnI5hu8ha6GKRC
- GDii+sar7nSbHJ1PztxVEQIfn/+zPDquLtTyvM2xiADd/QS/lSg3oTl+E9g/jAN4DuXPWCol4RN
- x67BoYfdsNBkMf3cDxu6EYibCRECCc7C9Bnu82rz0ENvTwzw7YgN9oPAq7ShJ0+1LnTPgr3Ege7
- 5zoKzuS/4m+Udj4nK4O/lDMCcUkOaaKRBIhadg+Vxuxzvpu9lczZs0Htbw1qHnkTIJH3U1XnT/X
- LrxrVpmZmu65wF8q7zFXXpHaOFlizvzrdUt1KXQGUo51t7IDmUn3BwUndw/sP1lSwXh50eAPMKs
- 8LwX+lAHkDe6F3/aNwA==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=3YK5jeb26AILRK50rYoA:9 a=QEXdDO2ut3YA:10
+ a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-GUID: c8bDw8eBxiF2hHYKryQO7nZ3XzTUzo1u
+X-Proofpoint-ORIG-GUID: c8bDw8eBxiF2hHYKryQO7nZ3XzTUzo1u
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-02_06,2026-07-30_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 spamscore=0 clxscore=1015 adultscore=0 suspectscore=0
- malwarescore=0 impostorscore=0 bulkscore=0 phishscore=0 priorityscore=1501
+ spamscore=0 phishscore=0 clxscore=1015 adultscore=0 lowpriorityscore=0
+ priorityscore=1501 bulkscore=0 suspectscore=0 malwarescore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608030094
 
-A client that needs to copy several independent, non-contiguous memory
-regions in one operation currently has to submit one DMA_MEMCPY
-transaction per region, each with its own completion interrupt, even
-when every region is known up front and the copies could be described
-as a single hardware transaction.
+Synopsys DesignWare eDMA supports a linked-list mode where each list item
+carries independent source and destination addresses, letting multiple
+independent memory transfers be described in one linked list and submitted
+to the hardware as a single DMA transaction. The IP processes list items
+strictly in order, so paired scatter-gather entries are never reordered.
 
-Partially reintroduce the DMA_SG transaction type and device_prep_dma_sg()
-API that was removed in commit c678fa66341c ("dmaengine: remove DMA_SG as
-it is dead code in kernel"). Only the core API is restored here.
+Implement the DMA_SG capability by adding a new EDMA_XFER_DUAL_SG transfer
+type and a corresponding struct dw_edma_dual_sg carrying the paired source
+and destination SG lists. dw_edma_device_transfer() walks both lists in
+lockstep, building a single hardware linked-list; a per-entry length
+mismatch or premature list end fails the whole request.
 
-The API accepts separate source and destination scatter-gather lists,
-where entry i of the source list is transferred to entry i of the
-destination list. This allows multiple independent (src[i] -> dst[i])
-transfers to be batched into a single DMA transaction instead of N
-separate submissions, reducing submission and interrupt overhead.
-
-DMA_SG is a memcpy-class operation: both endpoints are memory buffers,
-and neither DMA address is a FIFO-style peripheral register. The source
-and destination scatter-gather lists must contain the same number of
-entries; providers reject requests where the entry counts differ.
-
-Restore the DMA_SG entry in
-Documentation/driver-api/dmaengine/provider.rst and add
-CHECK_CAP(dma_sg, DMA_SG) to dma_async_device_register() to validate
-that drivers setting the capability provide the corresponding function
-pointer.
+The transfer direction is inferred from the channel hardware polarity
+(EDMA_DIR_READ/WRITE), not from dma_slave_config.direction: for local eDMA
+(DW_EDMA_CHIP_LOCAL) read channels handle DEV_TO_MEM and write channels
+handle MEM_TO_DEV; for remote eDMA the mapping is inverted. PCIe bus
+addresses are translated via dw_edma_get_pci_address() for the remote side
+of each transfer. dmaengine_slave_config() must still be called before
+dmaengine_prep_dma_sg() because dw_edma_device_transfer() gates transfers
+on chan->configured, even though the direction field itself is unused by
+the DMA_SG path.
 
 Signed-off-by: Sumit Kumar <sumit.kumar@oss.qualcomm.com>
 ---
- Documentation/driver-api/dmaengine/provider.rst | 21 +++++++++++++++
- drivers/dma/dmaengine.c                         |  1 +
- include/linux/dmaengine.h                       | 35 +++++++++++++++++++++++++
- 3 files changed, 57 insertions(+)
+ drivers/dma/dw-edma/dw-edma-core.c | 87 +++++++++++++++++++++++++++++++++++---
+ drivers/dma/dw-edma/dw-edma-core.h | 10 ++++-
+ 2 files changed, 90 insertions(+), 7 deletions(-)
 
-diff --git a/Documentation/driver-api/dmaengine/provider.rst b/Documentation/driver-api/dmaengine/provider.rst
-index f4ed98f701c918ff81bc674845880f8d01efbf1d..638e4b83e9a2f90c056111dbdd7572a4ed0f536d 100644
---- a/Documentation/driver-api/dmaengine/provider.rst
-+++ b/Documentation/driver-api/dmaengine/provider.rst
-@@ -210,6 +210,27 @@ Currently, the types available are:
-   - Used by the client drivers to register a callback that will be
-     called on a regular basis through the DMA controller interrupt
+diff --git a/drivers/dma/dw-edma/dw-edma-core.c b/drivers/dma/dw-edma/dw-edma-core.c
+index 1f893dc54c7938a9c45bafd975a4f99fdc0acb38..9fbfa5ad65b5421b164d2ab9883233225e0269e4 100644
+--- a/drivers/dma/dw-edma/dw-edma-core.c
++++ b/drivers/dma/dw-edma/dw-edma-core.c
+@@ -372,6 +372,7 @@ dw_edma_device_transfer(struct dw_edma_transfer *xfer,
+ 	struct dw_edma_chan *chan = dchan2dw_edma_chan(xfer->dchan);
+ 	enum dma_transfer_direction dir = xfer->direction;
+ 	struct scatterlist *sg = NULL;
++	struct scatterlist *dst_sg = NULL;
+ 	struct dw_edma_burst *burst;
+ 	struct dw_edma_desc *desc;
+ 	u64 src_addr, dst_addr;
+@@ -429,6 +430,9 @@ dw_edma_device_transfer(struct dw_edma_transfer *xfer,
+ 			return NULL;
+ 		if (!xfer->xfer.il->src_inc || !xfer->xfer.il->dst_inc)
+ 			return NULL;
++	} else if (xfer->type == EDMA_XFER_DUAL_SG) {
++		if (xfer->xfer.dual_sg.len < 1)
++			return NULL;
+ 	} else {
+ 		return NULL;
+ 	}
+@@ -441,16 +445,27 @@ dw_edma_device_transfer(struct dw_edma_transfer *xfer,
+ 		dst_addr = config->dst_addr;
+ 	}
  
-+- DMA_SG
-+
-+  - The device supports memory to memory scatter-gather transfers
-+    using paired source and destination scatter-gather lists, where
-+    entry ``i`` of the source list is transferred to entry ``i`` of
-+    the destination list in a single DMA transaction.
-+
-+  - The source and destination scatter-gather lists must contain the
-+    same number of entries; providers reject (return NULL for) requests
-+    where the entry counts differ. Providers that walk the two lists in
-+    lockstep pair them entry-by-entry as passed in, so clients that
-+    DMA-map the lists must ensure the mapped segmentation stays aligned
-+    between the two lists (for example by not relying on the DMA layer
-+    to merge entries of one list but not the other).
-+
-+  - Unlike DMA_MEMCPY, neither the source nor destination is a
-+    FIFO-style peripheral register; both are memory buffers. Multiple
-+    independent (src[i] -> dst[i]) copies are submitted as a single
-+    DMA transaction, reducing submission and interrupt overhead
-+    compared to N separate DMA_MEMCPY operations.
-+
- - DMA_PRIVATE
+-	if (dir == DMA_DEV_TO_MEM)
+-		src_addr = dw_edma_get_pci_address(chan, (phys_addr_t)src_addr);
+-	else
+-		dst_addr = dw_edma_get_pci_address(chan, (phys_addr_t)dst_addr);
++	/*
++	 * DUAL_SG translates each src/dst sg entry individually below
++	 * (see the burst->sar/burst->dar assignment), so it is exempt
++	 * from the single up-front translation used by other types.
++	 */
++	if (xfer->type != EDMA_XFER_DUAL_SG) {
++		if (dir == DMA_DEV_TO_MEM)
++			src_addr = dw_edma_get_pci_address(chan, (phys_addr_t)src_addr);
++		else
++			dst_addr = dw_edma_get_pci_address(chan, (phys_addr_t)dst_addr);
++	}
  
-   - The devices only supports slave transfers, and as such isn't
-diff --git a/drivers/dma/dmaengine.c b/drivers/dma/dmaengine.c
-index 6ffd8bd82154af2af2807d1c8b7ae7475eab56d3..9e790b9f165063d696438ace6370df98dffb8a32 100644
---- a/drivers/dma/dmaengine.c
-+++ b/drivers/dma/dmaengine.c
-@@ -1211,6 +1211,7 @@ int dma_async_device_register(struct dma_device *device)
- 	CHECK_CAP(dma_pq_val,      DMA_PQ_VAL);
- 	CHECK_CAP(dma_memset,      DMA_MEMSET);
- 	CHECK_CAP(dma_interrupt,   DMA_INTERRUPT);
-+	CHECK_CAP(dma_sg,          DMA_SG);
- 	CHECK_CAP(dma_cyclic,      DMA_CYCLIC);
- 	CHECK_CAP(interleaved_dma, DMA_INTERLEAVE);
+ 	if (xfer->type == EDMA_XFER_CYCLIC) {
+ 		cnt = xfer->xfer.cyclic.cnt;
+ 	} else if (xfer->type == EDMA_XFER_SCATTER_GATHER) {
+ 		cnt = xfer->xfer.sg.len;
+ 		sg = xfer->xfer.sg.sgl;
++	} else if (xfer->type == EDMA_XFER_DUAL_SG) {
++		cnt = xfer->xfer.dual_sg.len;
++		sg = xfer->xfer.dual_sg.src_sgl;
++		dst_sg = xfer->xfer.dual_sg.dst_sgl;
+ 	} else if (xfer->type == EDMA_XFER_INTERLEAVED) {
+ 		cnt = xfer->xfer.il->numf * xfer->xfer.il->frame_size;
+ 		fsz = xfer->xfer.il->frame_size;
+@@ -463,12 +478,23 @@ dw_edma_device_transfer(struct dw_edma_transfer *xfer,
+ 	for (i = 0; i < cnt; i++) {
+ 		if (xfer->type == EDMA_XFER_SCATTER_GATHER && !sg)
+ 			break;
++		/*
++		 * DUAL_SG walks the source and destination lists in lockstep;
++		 * a premature end or a per-entry length mismatch would leave
++		 * the descriptor partially built, so fail the whole request.
++		 */
++		if (xfer->type == EDMA_XFER_DUAL_SG &&
++		    (!sg || !dst_sg || sg_dma_len(sg) != sg_dma_len(dst_sg))) {
++			kfree(desc);
++			return NULL;
++		}
  
-diff --git a/include/linux/dmaengine.h b/include/linux/dmaengine.h
-index fe33a20abc6146d539670e0e6fe6c9d27d96aa2a..61aa72149f5d5cf1828b89d13d0b35f1a12bb000 100644
---- a/include/linux/dmaengine.h
-+++ b/include/linux/dmaengine.h
-@@ -65,6 +65,7 @@ enum dma_transaction_type {
- 	DMA_COMPLETION_NO_ORDER,
- 	DMA_REPEAT,
- 	DMA_LOAD_EOT,
-+	DMA_SG,
- /* last transaction type for creation of the capabilities mask */
- 	DMA_TX_TYPE_END,
- };
-@@ -848,6 +849,7 @@ struct dma_filter {
-  *	The function takes a buffer of size buf_len. The callback function will
-  *	be called after period_len bytes have been transferred.
-  * @device_prep_interleaved_dma: Transfer expression in a generic way.
-+ * @device_prep_dma_sg: prepares a memory to memory scatter-gather operation
-  * @device_caps: May be used to override the generic DMA slave capabilities
-  *	with per-channel specific ones
-  * @device_config: Pushes a new configuration to a channel, return 0 or an error
-@@ -954,6 +956,11 @@ struct dma_device {
- 	struct dma_async_tx_descriptor *(*device_prep_interleaved_dma)(
- 		struct dma_chan *chan, struct dma_interleaved_template *xt,
- 		unsigned long flags);
-+	struct dma_async_tx_descriptor *(*device_prep_dma_sg)
-+		(struct dma_chan *chan,
-+		 struct scatterlist *dst_sg, unsigned int dst_nents,
-+		 struct scatterlist *src_sg, unsigned int src_nents,
-+		 unsigned long flags);
+ 		burst = desc->burst + i;
  
- 	void (*device_caps)(struct dma_chan *chan, struct dma_slave_caps *caps);
- 	int (*device_config)(struct dma_chan *chan, struct dma_slave_config *config);
-@@ -1194,6 +1201,34 @@ static inline struct dma_async_tx_descriptor *dmaengine_prep_interleaved_dma(
- 	return chan->device->device_prep_interleaved_dma(chan, xt, flags);
+ 		if (xfer->type == EDMA_XFER_CYCLIC)
+ 			burst->sz = xfer->xfer.cyclic.len;
+-		else if (xfer->type == EDMA_XFER_SCATTER_GATHER)
++		else if (xfer->type == EDMA_XFER_SCATTER_GATHER ||
++			 xfer->type == EDMA_XFER_DUAL_SG)
+ 			burst->sz = sg_dma_len(sg);
+ 		else if (xfer->type == EDMA_XFER_INTERLEAVED)
+ 			burst->sz = xfer->xfer.il->sgl[i % fsz].size;
+@@ -492,6 +518,9 @@ dw_edma_device_transfer(struct dw_edma_transfer *xfer,
+ 				 */
+ 			} else if (xfer->type == EDMA_XFER_INTERLEAVED) {
+ 				burst->dar = dst_addr;
++			} else if (xfer->type == EDMA_XFER_DUAL_SG) {
++				burst->sar = dw_edma_get_pci_address(chan, sg_dma_address(sg));
++				burst->dar = sg_dma_address(dst_sg);
+ 			}
+ 		} else {
+ 			burst->dar = dst_addr;
+@@ -507,13 +536,19 @@ dw_edma_device_transfer(struct dw_edma_transfer *xfer,
+ 				 * and destination addresses are increased
+ 				 * by the same portion (data length)
+ 				 */
+-			}  else if (xfer->type == EDMA_XFER_INTERLEAVED) {
++			} else if (xfer->type == EDMA_XFER_INTERLEAVED) {
+ 				burst->sar = src_addr;
++			} else if (xfer->type == EDMA_XFER_DUAL_SG) {
++				burst->sar = sg_dma_address(sg);
++				burst->dar = dw_edma_get_pci_address(chan, sg_dma_address(dst_sg));
+ 			}
+ 		}
+ 
+ 		if (xfer->type == EDMA_XFER_SCATTER_GATHER) {
+ 			sg = sg_next(sg);
++		} else if (xfer->type == EDMA_XFER_DUAL_SG) {
++			sg = sg_next(sg);
++			dst_sg = sg_next(dst_sg);
+ 		} else if (xfer->type == EDMA_XFER_INTERLEAVED) {
+ 			struct dma_interleaved_template *il = xfer->xfer.il;
+ 			struct data_chunk *dc = &il->sgl[i % fsz];
+@@ -613,6 +648,44 @@ static void dw_hdma_set_callback_result(struct virt_dma_desc *vd,
+ 	res->residue = residue;
  }
  
-+/**
-+ * dmaengine_prep_dma_sg() - Prepare a memory-to-memory scatter-gather DMA descriptor.
-+ * @chan: The channel to be used for this descriptor
-+ * @dst_sg: Destination scatter list
-+ * @dst_nents: Number of entries in destination scatter list
-+ * @src_sg: Source scatter list
-+ * @src_nents: Number of entries in source scatter list
-+ * @flags: DMA engine flags
-+ *
-+ * Prepares a DMA transaction that copies data from multiple source memory
-+ * regions to multiple destination memory regions in a single DMA transaction.
-+ * Entry i of the source list is paired with entry i of the destination list,
-+ * so both lists must contain the same number of entries; the call returns
-+ * NULL otherwise.
-+ */
-+static inline struct dma_async_tx_descriptor *dmaengine_prep_dma_sg
-+		(struct dma_chan *chan,
-+		 struct scatterlist *dst_sg, unsigned int dst_nents,
-+		 struct scatterlist *src_sg, unsigned int src_nents,
-+		 unsigned long flags)
++static struct dma_async_tx_descriptor *
++dw_edma_device_prep_dma_sg(struct dma_chan *dchan,
++			   struct scatterlist *dst_sg, unsigned int dst_nents,
++			   struct scatterlist *src_sg, unsigned int src_nents,
++			   unsigned long flags)
 +{
-+	if (!chan || !chan->device || !chan->device->device_prep_dma_sg)
++	struct dw_edma_chan *chan = dchan2dw_edma_chan(dchan);
++	struct dw_edma_transfer xfer;
++	enum dma_transfer_direction dir;
++
++	if (src_nents != dst_nents || !src_nents)
 +		return NULL;
 +
-+	return chan->device->device_prep_dma_sg(chan, dst_sg, dst_nents,
-+			src_sg, src_nents, flags);
++	if (!src_sg || !dst_sg)
++		return NULL;
++
++	/* Determine direction from channel configuration */
++	if (chan->dw->chip->flags & DW_EDMA_CHIP_LOCAL)
++		dir = (chan->dir == EDMA_DIR_READ) ? DMA_DEV_TO_MEM : DMA_MEM_TO_DEV;
++	else
++		dir = (chan->dir == EDMA_DIR_WRITE) ? DMA_DEV_TO_MEM : DMA_MEM_TO_DEV;
++
++	xfer.dchan = dchan;
++	xfer.direction = dir;
++	xfer.xfer.dual_sg.src_sgl = src_sg;
++	xfer.xfer.dual_sg.dst_sgl = dst_sg;
++	xfer.xfer.dual_sg.len = src_nents;
++	xfer.flags = flags;
++	xfer.type = EDMA_XFER_DUAL_SG;
++
++	/*
++	 * dw_edma_device_transfer() rejects unconfigured channels, so
++	 * dmaengine_slave_config() must have been called on this channel
++	 * beforehand even though the direction field is unused here.
++	 */
++	return dw_edma_device_transfer(&xfer, dw_edma_device_get_config(dchan, NULL));
 +}
 +
- /**
-  * dmaengine_prep_dma_memset() - Prepare a DMA memset descriptor.
-  * @chan: The channel to be used for this descriptor
+ static void dw_edma_done_interrupt(struct dw_edma_chan *chan)
+ {
+ 	struct dw_edma_desc *desc;
+@@ -997,6 +1070,7 @@ static int dw_edma_channel_setup(struct dw_edma *dw, u32 wr_alloc, u32 rd_alloc)
+ 	dma_cap_set(DMA_CYCLIC, dma->cap_mask);
+ 	dma_cap_set(DMA_PRIVATE, dma->cap_mask);
+ 	dma_cap_set(DMA_INTERLEAVE, dma->cap_mask);
++	dma_cap_set(DMA_SG, dma->cap_mask);
+ 	dma->directions = BIT(DMA_DEV_TO_MEM) | BIT(DMA_MEM_TO_DEV);
+ 	dma->src_addr_widths = BIT(DMA_SLAVE_BUSWIDTH_4_BYTES);
+ 	dma->dst_addr_widths = BIT(DMA_SLAVE_BUSWIDTH_4_BYTES);
+@@ -1017,6 +1091,7 @@ static int dw_edma_channel_setup(struct dw_edma *dw, u32 wr_alloc, u32 rd_alloc)
+ 	dma->device_prep_config_sg = dw_edma_device_prep_config_sg;
+ 	dma->device_prep_dma_cyclic = dw_edma_device_prep_dma_cyclic;
+ 	dma->device_prep_interleaved_dma = dw_edma_device_prep_interleaved_dma;
++	dma->device_prep_dma_sg = dw_edma_device_prep_dma_sg;
+ 
+ 	dma_set_max_seg_size(dma->dev, U32_MAX);
+ 
+diff --git a/drivers/dma/dw-edma/dw-edma-core.h b/drivers/dma/dw-edma/dw-edma-core.h
+index f6a5ad31756723e6fd72f7d9d903a1204e25c0b0..e3219ae96d84f528fb7d77dbe3a0b3d7c1264f05 100644
+--- a/drivers/dma/dw-edma/dw-edma-core.h
++++ b/drivers/dma/dw-edma/dw-edma-core.h
+@@ -38,7 +38,8 @@ enum dw_edma_status {
+ enum dw_edma_xfer_type {
+ 	EDMA_XFER_SCATTER_GATHER = 0,
+ 	EDMA_XFER_CYCLIC,
+-	EDMA_XFER_INTERLEAVED
++	EDMA_XFER_INTERLEAVED,
++	EDMA_XFER_DUAL_SG,
+ };
+ 
+ struct dw_edma_chan;
+@@ -151,6 +152,12 @@ struct dw_edma_sg {
+ 	unsigned int			len;
+ };
+ 
++struct dw_edma_dual_sg {
++	struct scatterlist		*src_sgl;
++	struct scatterlist		*dst_sgl;
++	unsigned int			len;
++};
++
+ struct dw_edma_cyclic {
+ 	dma_addr_t			paddr;
+ 	size_t				len;
+@@ -163,6 +170,7 @@ struct dw_edma_transfer {
+ 		struct dw_edma_sg		sg;
+ 		struct dw_edma_cyclic		cyclic;
+ 		struct dma_interleaved_template *il;
++		struct dw_edma_dual_sg		dual_sg;
+ 	} xfer;
+ 	enum dma_transfer_direction	direction;
+ 	unsigned long			flags;
 
 -- 
 2.34.1
