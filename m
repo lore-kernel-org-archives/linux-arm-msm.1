@@ -1,37 +1,37 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0F093A383A;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 846A03A1A58;
 	Mon,  3 Aug 2026 06:34:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785738864; cv=none; b=gk8GK+J8Pu2jtWKdwfgyelBn1f3w1bUyhhOkdLk0/3XJfVTjrl3iIKJjJxacGrxixZ1GYixk760Lmd7/3X4LM87mD2cqhuXMkMa0ibCzFAUBnocJO/58BYgPM5G5WcIIYdZ5UKxHnSFVYjinGLmvXfJ7caZQJp0bwTaS2JdaqII=
+	t=1785738864; cv=none; b=KNiln+uLX1HMTnxmku/Y6q57GmSDhorVRQM/xxiH0pbAlwYuprfmHYXrdyqtQHTAvREL2lYAq0NSrJa55YeRRN4UreBWKPb3MDTBCgc6rd5V69xGs3PJ8a2EOhqyOfGs5i7m7SxjX3+29UARqZq/81+IvnXnDmihKJxO2OhOMgI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1785738864; c=relaxed/simple;
-	bh=nVmrwBXVmSlNCRQFUYE8QO6y+Z/xQN4/02P8kFLpT2c=;
+	bh=JarYoFUWuiRnKUY6NZefEarlBHffjldtovJxj0QewUQ=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=btDA8eFoMidbmzgRDjrGsmLM6BIBlDlBuu0lp/VbaZrpiylGxdMhnuz7aVtTpbm10/ZEXdC8s8HQGHaaApaqaoJE0VNhJpGtIl1KVm8PBxPDIAiBV7zKkMBMDbCRUWUOwSltdTSz4kOKFqUUGVjuTQPft2ECHCy1FIvQyf6qZkg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=uryMM8gF; arc=none smtp.client-ip=10.30.226.201
+	 In-Reply-To:To:Cc; b=bJ6TZDrTg4USqXDvo9LZIe3ZgYkKPU5bpm7seMsE3v9LJU8c+ECA+lHH86CORMYOxHbNE6r3ViGCldq1TuXraZOJdbgTELwjcOWPkGIsReQkbANzxUweO5u+yzO1SUcxRgiFAERbP7oux3ObRgHpDrq19iR/hlF2wmhfz4TEFtM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=E3fGrh+c; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="uryMM8gF"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 789DAC4AF11;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="E3fGrh+c"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 5BC23C4AF62;
 	Mon,  3 Aug 2026 06:34:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1785738864;
-	bh=nVmrwBXVmSlNCRQFUYE8QO6y+Z/xQN4/02P8kFLpT2c=;
+	bh=JarYoFUWuiRnKUY6NZefEarlBHffjldtovJxj0QewUQ=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=uryMM8gFc5jgiZFu5f3NzpBKZ1gAJvsXj0mqV9r9P6jzFQVocDVDmdufdLze0w8QU
-	 WQ0OTMATcP1H7E3bsai23AZel0665PA8riWAMGA2iIG5XqlK2CeIm/D25NGa4kc74T
-	 6BUVkiDRXswNETi8RC5ia1/t1T+XduAH5P2alvUORsn/0qlkYQt4lNxdPA27Tmw8SZ
-	 jMMsH5br6AGjzwPruxzW6rsMc9GcuYWWwzybEMBtfGiC9jNWzV5nf+b+pRBms3Zg2H
-	 u1077PQgqpQ8wgHcMi2nArfwMWHX9LXVVOl+55VjpkydFrzNOjgJk+nieRFN267adu
-	 s6x+5k2vRC0Sw==
+	b=E3fGrh+cS39JX/memYcTOvOw2YlkdrukeU9T+wiOY1SvM8+Zex63ccOcaqUDb+K3t
+	 rCf/OGdALFa0xk4YaxPTk4r21OibRDLZqA3U2XYUX6QfbLBVwnO6XpRHYdBRUUoldJ
+	 +pjcNjoFnOjLwOF0Rxm/AFgwSdjg2r56mctL+BqQDPg48AQbCatGj95+7TEBaY0Xfz
+	 jx3v3OTSu+3Wxs8MJStY/M07sdgqoXo+pIl26Ywg1u3coXaPxOPrgrHpebhCSK7zc1
+	 ekt49gdjOIRfcaPHA9r5bRlK0nudZZemoT7r1WuM6k6jrJuqyW0INF/zEU/Gv45h+D
+	 BrwPiQeSglRIQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5FE4BC5518E;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 40F13C5518F;
 	Mon,  3 Aug 2026 06:34:24 +0000 (UTC)
 From: Manivannan Sadhasivam via B4 Relay <devnull+manivannan.sadhasivam.oss.qualcomm.com@kernel.org>
-Date: Mon, 03 Aug 2026 08:34:22 +0200
-Subject: [PATCH 24/28] arm64: dts: qcom: glymur: Fix swapped USB QMP PHY
+Date: Mon, 03 Aug 2026 08:34:20 +0200
+Subject: [PATCH 22/28] arm64: dts: qcom: sar2130p: Fix swapped USB QMP PHY
  vdda-phy/vdda-pll supplies
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -41,7 +41,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260803-phy-supply-fix-v1-24-5880630cde3e@oss.qualcomm.com>
+Message-Id: <20260803-phy-supply-fix-v1-22-5880630cde3e@oss.qualcomm.com>
 References: <20260803-phy-supply-fix-v1-0-5880630cde3e@oss.qualcomm.com>
 In-Reply-To: <20260803-phy-supply-fix-v1-0-5880630cde3e@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>, 
@@ -55,16 +55,16 @@ Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
  Manivannan Sadhasivam <mani@kernel.org>, 
  Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2102;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1144;
  i=manivannan.sadhasivam@oss.qualcomm.com; h=from:subject:message-id;
- bh=JyJPDL1ZlHK9X+tyxrgwAOPJ/PXRxxJTbY4uRsNaOTU=;
- b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBqcDZpGIipb7iCX6tCEttF5R2JcJGrIBiP1eUpG
- n3CtFDsQ1GJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCanA2aQAKCRBVnxHm/pHO
- 9TaQCACZWLruzY0czIqNpmBmgNPVDDgUTSey1DVfVh4t/cnftUv2K9mEaFYV14ahY7/m6psQ+Dt
- CtEVgndPQsGzQl5sDIw7LCL5n5bCmRrl0XZA1diQhwbC53cDIypDGJifoQma2sdgoLgj9cjD7er
- yH3IZe0onHu10UfWxcR1XTT7HluDM8NwDXAqDAAa8V3W7ZYnGeK3dvr5psIV9Nvw/sEOcXeduS8
- q86WX2zFTxFhDF95KbY9VPxsCKqCA1S1S4G3Wwyhki9SLNoB6RL8yyvHuQ030mPzAgiBvu42fco
- U+UUopcJVBNfVIxfNV1hiuWJ95GKEfaVuNhUlk8CXJUhUk4l
+ bh=WKawKoYyiR4q4gN4qKPm1tu6RoVI63v74w4JT0Dpu6E=;
+ b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBqcDZoAj5EwpuJnINd90aVcqskc7TdKE9B5mITI
+ xW+7O6mGkiJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCanA2aAAKCRBVnxHm/pHO
+ 9RBNB/4nYm9dhYycWWaIwDgBqCKs7+KT7USw5oz2lsUzCetC1/3zrQpO94Lz+M+Fe7mTg/0qsVV
+ qoghb7x5Y8pB3q99MzLUjxtc7SlWgcEyYiJIC/tr9RBM5BXVVHNXbV8I4ERJZ3oF9bED/Sfry4a
+ RRwMh6fSoytqlFV+gOMDcclANoz3lKsU8k7DlkJRFlP3vqW9NdHp41L2jHfxQCmYU+pHdFbRJ5k
+ UrS8+ghJy3vsqIOCL79ZF1g2GZrZfZF/nIFMhNRu+/P/vH4LgDzVcmifhdhm36Tox/DlIz66SwG
+ 4n+s1gcenfHdkW7w1UsWGZfyQq7TfuL7MzLe4q3ek+6SNrgp
 X-Developer-Key: i=manivannan.sadhasivam@oss.qualcomm.com; a=openpgp;
  fpr=C668AEC3C3188E4C611465E7488550E901166008
 X-Endpoint-Received: by B4 Relay for
@@ -74,69 +74,36 @@ Reply-To: manivannan.sadhasivam@oss.qualcomm.com
 
 From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
-The QMP PHY expects the vdda-phy supply to be the lower voltage (~0.8V)
-and the vdda-pll supply to be the higher voltage (~1.2V), as used by the
-DisplayPort QMP PHY on this SoC. But these two supplies are swapped for
-the USB QMP PHYs on this board, feeding 1.2V to vdda-phy and 0.72V/0.83V
-to vdda-pll.
+The QMP PHY expects the vdda-phy supply to be around 0.88V and the
+vdda-pll supply to be 1.2V. But these two supplies are swapped for the
+USB QMP PHY on this board, feeding 1.2V to vdda-phy and 0.9V to
+vdda-pll.
 
 Fix it by swapping the two supplies back.
 
-Fixes: c8b63029455b ("arm64: dts: qcom: glymur-crd: Enable USB support")
+Fixes: 6339e41fa39b ("arm64: dts: qcom: sar2130p: add QAR2130P board file")
 Reported-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Assisted-by: Claude:opus-4-8
 Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/glymur-crd.dts | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ arch/arm64/boot/dts/qcom/sar2130p-qar2130p.dts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm64/boot/dts/qcom/glymur-crd.dts b/arch/arm64/boot/dts/qcom/glymur-crd.dts
-index c98dfb3941fa..9d42bd858595 100644
---- a/arch/arm64/boot/dts/qcom/glymur-crd.dts
-+++ b/arch/arm64/boot/dts/qcom/glymur-crd.dts
-@@ -339,8 +339,8 @@ &usb_0_hsphy {
+diff --git a/arch/arm64/boot/dts/qcom/sar2130p-qar2130p.dts b/arch/arm64/boot/dts/qcom/sar2130p-qar2130p.dts
+index 74778a5b19ba..80428c0b3b4e 100644
+--- a/arch/arm64/boot/dts/qcom/sar2130p-qar2130p.dts
++++ b/arch/arm64/boot/dts/qcom/sar2130p-qar2130p.dts
+@@ -551,8 +551,8 @@ &usb_1_hsphy {
  };
  
- &usb_0_qmpphy {
--	vdda-phy-supply = <&vreg_l4h_e0_1p2>;
--	vdda-pll-supply = <&vreg_l3f_e0_0p72>;
-+	vdda-phy-supply = <&vreg_l3f_e0_0p72>;
-+	vdda-pll-supply = <&vreg_l4h_e0_1p2>;
- 	refgen-supply = <&vreg_l2f_e0_0p82>;
- 
- 	status = "okay";
-@@ -368,8 +368,8 @@ &usb_1_hsphy {
- };
- 
- &usb_1_qmpphy {
--	vdda-phy-supply = <&vreg_l4h_e0_1p2>;
--	vdda-pll-supply = <&vreg_l1h_e0_0p89>;
-+	vdda-phy-supply = <&vreg_l1h_e0_0p89>;
-+	vdda-pll-supply = <&vreg_l4h_e0_1p2>;
- 	refgen-supply = <&vreg_l2f_e0_0p82>;
- 
- 	status = "okay";
-@@ -413,16 +413,16 @@ &usb_mp_hsphy1 {
- };
- 
- &usb_mp_qmpphy0 {
--	vdda-phy-supply = <&vreg_l4h_e0_1p2>;
--	vdda-pll-supply = <&vreg_l2h_e0_0p72>;
-+	vdda-phy-supply = <&vreg_l2h_e0_0p72>;
-+	vdda-pll-supply = <&vreg_l4h_e0_1p2>;
- 	refgen-supply = <&vreg_l4f_e1_1p08>;
+ &usb_dp_qmpphy {
+-	vdda-phy-supply = <&vreg_l3a_1p2>;
+-	vdda-pll-supply = <&vreg_l1a_0p91>;
++	vdda-phy-supply = <&vreg_l1a_0p91>;
++	vdda-pll-supply = <&vreg_l3a_1p2>;
  
  	status = "okay";
  };
- 
- &usb_mp_qmpphy1 {
--	vdda-phy-supply = <&vreg_l4h_e0_1p2>;
--	vdda-pll-supply = <&vreg_l2h_e0_0p72>;
-+	vdda-phy-supply = <&vreg_l2h_e0_0p72>;
-+	vdda-pll-supply = <&vreg_l4h_e0_1p2>;
- 	refgen-supply = <&vreg_l4f_e1_1p08>;
- 
- 	status = "okay";
 
 -- 
 2.43.0
