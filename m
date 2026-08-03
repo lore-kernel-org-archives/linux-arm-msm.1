@@ -1,38 +1,38 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70D1739A4BA;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7387A39B943;
 	Mon,  3 Aug 2026 06:34:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785738863; cv=none; b=IEgdPXxOJ/SZeeNdGHxgUdSTjeZR3pGoSOSH+gbki0pkdrrQLXtYo7vr9BIRYi1Y5SY6s6qzU+wZFtWFWRPu486LPQaHXAVT/obhhNMsqxKusSO4fi//RnyU/DIHBRNjDMAPEwFA0fheTcOq0vmpAhJYyncJkGBg7F0REr+oekM=
+	t=1785738863; cv=none; b=FDLF5dhBth/TdiBQvoRop8BHKG7TwGt8GDf+XRWCFvs3lKROi8R1cb8kf1/a6ae1QRKE/xVvpFyIXSZV/eVRbezDctSSmwHDQ1yarCad+vgrg4Cv0ISltxIWfkll3ciWe0Kj1LPbto/MCPRd2zs71wQ9+K5ujG56VMLqQUdgDb4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1785738863; c=relaxed/simple;
-	bh=DReL7/6vWhSTl0AJM01PqOXaRlEt5iFPZqOKbvYOgE4=;
+	bh=YP9dM2ri6SYkEDriM4K7b3rx7ToJDC/PR8bJa4YIsb4=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=nHCsZNCV0ld9VR0L5X16Mb6Kurm7wCZx9SNvCgFhVy17MW/RMdEhnuq9n56JYYOOdHct/+A7RFm+jQBI0L6moc0C1QVgECfMHf9O7NqVqk62rWaadE1+sq+XwqJzAE+wnb1kDPTK26BoMQUOTxGl6WlsHd9QJpkMCijvZXf6Bro=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=qIow42sc; arc=none smtp.client-ip=10.30.226.201
+	 In-Reply-To:To:Cc; b=kcWngUKsvMvgGQ2zuC/T0d0LaJwjOML14kb07GmUJBCRyzqQA3BLcpq4FGZB72hA44oaLmwE9RBJluB60i/eL42qAFeIXGJWvQ6LOmnCmKSzqNWSSwBPsovlvmpptNXF2P8AnpiBN4FG462xINB9I4KStGefVO0qfn/jjBXobUg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jGHTIf8w; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="qIow42sc"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 16094C2BCF7;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jGHTIf8w"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 3B6F8C2BD04;
 	Mon,  3 Aug 2026 06:34:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1785738863;
-	bh=DReL7/6vWhSTl0AJM01PqOXaRlEt5iFPZqOKbvYOgE4=;
+	bh=YP9dM2ri6SYkEDriM4K7b3rx7ToJDC/PR8bJa4YIsb4=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=qIow42scglKRtuXnJa10Z0yQhiyQUXnnVDmzX6HzRP3LgSmBGJRUxahqgHy/pLk5J
-	 WB1yZBBjXqCPiSpLXsi9Vc4P255I3BMDC8jFZ3qyX/SIWFduL1HcZIcbMpKndv1Yf7
-	 oC3agYAzI43cJPo6alsp5yX6QWSmZVUkmFAKLZqrWZljnTMmN57VJaKF/b0Cr0z3r2
-	 Xzv1bvvkjSCZLwUjfZdy3F3u+m3jo+XQVFPowkFyJ3eZwVi9ABmlTf+PnDDPBek/bM
-	 CdfV0JuxAB3A1CfHpn3MwaWGqzV5cNFaXz2Gtiewf7iXpTCDGZiUTN5sG4Ocl14wL8
-	 uSnZlNLvzpliQ==
+	b=jGHTIf8wsXKyOtcMuOv1sfCotuGiSK9+9ICZL9YDobkJBVMk6HFjN8KORbXLWQz4N
+	 hDzzHnDIHRRtnnAjTGLsFpTSqJTeDWpFy30obilxZNoRrpYbni2Dorxh2EegLjgk4M
+	 OgpGdFVhMsysUgBS+GSx6SfhwN9vAo7i/GEa4JDeOY/RmT4A648h6GAAxmFnb5tm6J
+	 vHW06E32tYobPhQChRhTAtdjUsGErYy7OVVrlJQESohmbN+MT16N/ew3Fi+M0a7Arg
+	 TQENIXq3pt+HHVY9zDry+xfGJ6t4APwPcWTsLSge3sxbYlyZKBd486GCkghgvm/XId
+	 ebSC7afq62xJA==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id E1EEEC55162;
-	Mon,  3 Aug 2026 06:34:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 1D327C5518C;
+	Mon,  3 Aug 2026 06:34:23 +0000 (UTC)
 From: Manivannan Sadhasivam via B4 Relay <devnull+manivannan.sadhasivam.oss.qualcomm.com@kernel.org>
-Date: Mon, 03 Aug 2026 08:33:59 +0200
-Subject: [PATCH 01/28] dt-bindings: phy: qcom: Describe QMP USB and UFS PHY
- vdda-phy/vdda-pll voltages
+Date: Mon, 03 Aug 2026 08:34:02 +0200
+Subject: [PATCH 04/28] arm64: dts: qcom: sdm845: Fix swapped USB QMP PHY
+ vdda-phy/vdda-pll supplies
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,7 +41,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260803-phy-supply-fix-v1-1-5880630cde3e@oss.qualcomm.com>
+Message-Id: <20260803-phy-supply-fix-v1-4-5880630cde3e@oss.qualcomm.com>
 References: <20260803-phy-supply-fix-v1-0-5880630cde3e@oss.qualcomm.com>
 In-Reply-To: <20260803-phy-supply-fix-v1-0-5880630cde3e@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>, 
@@ -55,16 +55,16 @@ Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
  Manivannan Sadhasivam <mani@kernel.org>, 
  Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5004;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6478;
  i=manivannan.sadhasivam@oss.qualcomm.com; h=from:subject:message-id;
- bh=V97d3d49T3Ee08UA2ANGKnoJaHfjqiGr+dmZjl7gLmg=;
- b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBqcDZhEYjetD5xsCIhq6BRmQLvzv4sSqmowK7vh
- L1GGmGwBhCJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCanA2YQAKCRBVnxHm/pHO
- 9QiECACV+yoFC7pE5pmYnGXoGG7FFf9w4afdXw7XUlEjXsJlvsfkwHzdyyrMytZj7U2cCWhqTJI
- gPYq9t+EN48ves/mp58BYPfis9YV9ewCvicSAYkgGASORq1C63QyBjql+4bH9bB9oiydkNsVBty
- w0v2oSwEGSwUIgg80+0cvFV4F+trc9Z9CetFrLOI0Z52/uZ9hR80JlMotmfG2YAGKuxk3pIGZt8
- 3ZSikojHUuZNiwMP64HPlgUrpFew4nK6plmV6oOGVyotb1orDafCrpnRZn5PUtkYMPAYDbbk3iX
- JzLKfmKX1GbGAZJjgAgO0mWFGV9fN1CbZsSLqUq78qr1Xvob
+ bh=mBGTc2+AZnjEfAn8jbUG8I9jasDyu2Eu0VcfvKAbU6g=;
+ b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBqcDZihvHjxwaN2ifCtNmopIqN8OPzrexyTODfO
+ sEIirJz3R6JATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCanA2YgAKCRBVnxHm/pHO
+ 9cGAB/4qE/7i7/83O9mFTqDr5QFl0DJQ3NAr9v9eTSQ4rZjUy8UJAc195Q4BKYZbtqJC+vAv6lt
+ Ew8Q1dpex3ZigY/5upNf+dPYNbzwwqNBkrb8c1CtMJteHJQyOzIfV/fSqWuV/ErSFjxqBvdWTsH
+ wf4s3QJx/Z0GYpDc6BfObcbHxDd9HT3u1ZzPDWjNP86WkE59PttrYgnBZ8D1CBD9vEDWi/OOORj
+ 0WksqxH725MrIf3BHvhB4OHdXCd4nnYb6QyShraaeh/emA4Hs728zcTF8FEvrn84AAPgK6YLiuj
+ mkUOxPdc/D0im0UKm+63rCfvY4RuKb2bUh4cuFHwbs85OcL8
 X-Developer-Key: i=manivannan.sadhasivam@oss.qualcomm.com; a=openpgp;
  fpr=C668AEC3C3188E4C611465E7488550E901166008
 X-Endpoint-Received: by B4 Relay for
@@ -74,134 +74,176 @@ Reply-To: manivannan.sadhasivam@oss.qualcomm.com
 
 From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
-The vdda-phy and vdda-pll supplies of the QMP USB and UFS PHYs are
-frequently swapped in devicetrees, as the naming does not make clear
-which supply expects which voltage. Document that vdda-phy is around
-0.8V and vdda-pll is around 1.2V, with the exact voltage varying per
-SoC, so that the correct supplies can be assigned.
+The QMP PHY expects the vdda-phy supply to be around 0.88V and the
+vdda-pll supply to be 1.2V. But these two supplies are swapped for the
+USB QMP PHYs on these boards, feeding 1.2V to vdda-phy and 0.88V to
+vdda-pll.
 
+Fix it by swapping the two supplies back.
+
+Fixes: 3f72e2d3e682 ("arm64: dts: qcom: Add Dragonboard 845c")
+Fixes: a678adbf2d22 ("arm64: dts: qcom: Add support for Pixel 3 and Pixel 3 XL")
+Fixes: 28ae8aa3923c ("arm64: dts: qcom: add device tree for LG G7 and LG V35")
+Fixes: cfe10d38aa1a ("arm64: dts: qcom: sdm845-mtp: Add nodes for USB")
+Fixes: d711b22eee55 ("arm64: dts: qcom: starqltechn: add initial device tree for starqltechn")
+Fixes: 45882459159d ("arm64: dts: qcom: sdm845: add device tree for SHIFT6mq")
+Fixes: dd6459a0890a ("arm64: dts: qcom: split beryllium dts into common dtsi and tianma dts")
+Fixes: be497abe19bf ("arm64: dts: qcom: Add support for Xiaomi Mi Mix2s")
 Reported-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Assisted-by: Claude:opus-4-8
 Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 ---
- .../devicetree/bindings/phy/qcom,msm8998-qmp-usb3-phy.yaml   | 10 ++++++++--
- .../devicetree/bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml  | 10 ++++++++--
- .../devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml   | 12 +++++++++---
- .../bindings/phy/qcom,sc8280xp-qmp-usb3-uni-phy.yaml         | 12 +++++++++---
- .../bindings/phy/qcom,sc8280xp-qmp-usb43dp-phy.yaml          | 10 ++++++++--
- 5 files changed, 42 insertions(+), 12 deletions(-)
+ arch/arm64/boot/dts/qcom/sdm845-db845c.dts                   | 8 ++++----
+ arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi           | 4 ++--
+ arch/arm64/boot/dts/qcom/sdm845-lg-common.dtsi               | 4 ++--
+ arch/arm64/boot/dts/qcom/sdm845-mtp.dts                      | 8 ++++----
+ arch/arm64/boot/dts/qcom/sdm845-samsung-starqltechn.dts      | 4 ++--
+ arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts            | 4 ++--
+ arch/arm64/boot/dts/qcom/sdm845-xiaomi-beryllium-common.dtsi | 4 ++--
+ arch/arm64/boot/dts/qcom/sdm845-xiaomi-polaris.dts           | 4 ++--
+ 8 files changed, 20 insertions(+), 20 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/phy/qcom,msm8998-qmp-usb3-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,msm8998-qmp-usb3-phy.yaml
-index 1636285fbe53..4cbcf54aef2c 100644
---- a/Documentation/devicetree/bindings/phy/qcom,msm8998-qmp-usb3-phy.yaml
-+++ b/Documentation/devicetree/bindings/phy/qcom,msm8998-qmp-usb3-phy.yaml
-@@ -39,9 +39,15 @@ properties:
-       - const: phy
-       - const: phy_phy
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-db845c.dts b/arch/arm64/boot/dts/qcom/sdm845-db845c.dts
+index 02416812b6a7..846138149b2c 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-db845c.dts
++++ b/arch/arm64/boot/dts/qcom/sdm845-db845c.dts
+@@ -1121,8 +1121,8 @@ &usb_1_hsphy {
+ &usb_1_qmpphy {
+ 	status = "okay";
  
--  vdda-phy-supply: true
-+  vdda-phy-supply:
-+    description:
-+      Supply for the PHY, typically around 0.8V, though the exact voltage
-+      varies per SoC.
+-	vdda-phy-supply = <&vreg_l26a_1p2>;
+-	vdda-pll-supply = <&vreg_l1a_0p875>;
++	vdda-phy-supply = <&vreg_l1a_0p875>;
++	vdda-pll-supply = <&vreg_l26a_1p2>;
+ };
  
--  vdda-pll-supply: true
-+  vdda-pll-supply:
-+    description:
-+      Supply for the PLL, typically around 1.2V, though the exact voltage
-+      varies per SoC.
+ &usb_2 {
+@@ -1147,8 +1147,8 @@ &usb_2_hsphy {
+ &usb_2_qmpphy {
+ 	status = "okay";
  
-   "#clock-cells":
-     const: 0
-diff --git a/Documentation/devicetree/bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml
-index efb465c71c1b..9dbe49afaa6c 100644
---- a/Documentation/devicetree/bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml
-+++ b/Documentation/devicetree/bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml
-@@ -40,9 +40,15 @@ properties:
-       - const: phy_phy
-       - const: dp_phy
+-	vdda-phy-supply = <&vreg_l26a_1p2>;
+-	vdda-pll-supply = <&vreg_l1a_0p875>;
++	vdda-phy-supply = <&vreg_l1a_0p875>;
++	vdda-pll-supply = <&vreg_l26a_1p2>;
+ };
  
--  vdda-phy-supply: true
-+  vdda-phy-supply:
-+    description:
-+      Supply for the PHY, typically around 0.8V, though the exact voltage
-+      varies per SoC.
+ &ufs_mem_hc {
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
+index b2dc0327dff8..ebeebbde6405 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi
+@@ -571,8 +571,8 @@ &usb_1_hsphy {
+ };
  
--  vdda-pll-supply: true
-+  vdda-pll-supply:
-+    description:
-+      Supply for the PLL, typically around 1.2V, though the exact voltage
-+      varies per SoC.
+ &usb_1_qmpphy {
+-	vdda-phy-supply = <&vreg_l26a_1p2>;
+-	vdda-pll-supply = <&vreg_l1a_0p875>;
++	vdda-phy-supply = <&vreg_l1a_0p875>;
++	vdda-pll-supply = <&vreg_l26a_1p2>;
  
-   "#clock-cells":
-     const: 1
-diff --git a/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml
-index b2c5c9a375a3..968a700d2a55 100644
---- a/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml
-+++ b/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml
-@@ -81,9 +81,15 @@ properties:
-     items:
-       - const: ufsphy
+ 	status = "okay";
+ };
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-lg-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-lg-common.dtsi
+index e0c3566761bf..c14b4b3d9a3c 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-lg-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sdm845-lg-common.dtsi
+@@ -677,8 +677,8 @@ &usb_1_hsphy {
+ };
  
--  vdda-phy-supply: true
--
--  vdda-pll-supply: true
-+  vdda-phy-supply:
-+    description:
-+      Supply for the PHY, typically around 0.8V, though the exact voltage
-+      varies per SoC.
-+
-+  vdda-pll-supply:
-+    description:
-+      Supply for the PLL, typically around 1.2V, though the exact voltage
-+      varies per SoC.
+ &usb_1_qmpphy {
+-	vdda-phy-supply = <&vdda_usb1_ss_1p2>;
+-	vdda-pll-supply = <&vdda_usb1_ss_core>;
++	vdda-phy-supply = <&vdda_usb1_ss_core>;
++	vdda-pll-supply = <&vdda_usb1_ss_1p2>;
  
-   "#clock-cells":
-     const: 1
-diff --git a/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-usb3-uni-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-usb3-uni-phy.yaml
-index 01342823e57f..532afa116ba0 100644
---- a/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-usb3-uni-phy.yaml
-+++ b/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-usb3-uni-phy.yaml
-@@ -64,9 +64,15 @@ properties:
-       - const: phy
-       - const: phy_phy
+ 	status = "okay";
+ };
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-mtp.dts b/arch/arm64/boot/dts/qcom/sdm845-mtp.dts
+index 091568642faa..00ea30afc9f6 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-mtp.dts
++++ b/arch/arm64/boot/dts/qcom/sdm845-mtp.dts
+@@ -729,8 +729,8 @@ &usb_1_hsphy {
+ &usb_1_qmpphy {
+ 	status = "okay";
  
--  vdda-phy-supply: true
--
--  vdda-pll-supply: true
-+  vdda-phy-supply:
-+    description:
-+      Supply for the PHY, typically around 0.8V, though the exact voltage
-+      varies per SoC.
-+
-+  vdda-pll-supply:
-+    description:
-+      Supply for the PLL, typically around 1.2V, though the exact voltage
-+      varies per SoC.
+-	vdda-phy-supply = <&vdda_usb1_ss_1p2>;
+-	vdda-pll-supply = <&vdda_usb1_ss_core>;
++	vdda-phy-supply = <&vdda_usb1_ss_core>;
++	vdda-pll-supply = <&vdda_usb1_ss_1p2>;
+ };
  
-   refgen-supply: true
+ &usb_2 {
+@@ -761,8 +761,8 @@ &usb_2_hsphy {
+ &usb_2_qmpphy {
+ 	status = "okay";
  
-diff --git a/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-usb43dp-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-usb43dp-phy.yaml
-index 4eff92343ce4..865395fe1416 100644
---- a/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-usb43dp-phy.yaml
-+++ b/Documentation/devicetree/bindings/phy/qcom,sc8280xp-qmp-usb43dp-phy.yaml
-@@ -69,9 +69,15 @@ properties:
-       - const: phy
-       - const: common
+-	vdda-phy-supply = <&vdda_usb2_ss_1p2>;
+-	vdda-pll-supply = <&vdda_usb2_ss_core>;
++	vdda-phy-supply = <&vdda_usb2_ss_core>;
++	vdda-pll-supply = <&vdda_usb2_ss_1p2>;
+ };
  
--  vdda-phy-supply: true
-+  vdda-phy-supply:
-+    description:
-+      Supply for the PHY, typically around 0.8V, though the exact voltage
-+      varies per SoC.
+ &venus {
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-samsung-starqltechn.dts b/arch/arm64/boot/dts/qcom/sdm845-samsung-starqltechn.dts
+index 0d915ecb0444..cd735417addd 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-samsung-starqltechn.dts
++++ b/arch/arm64/boot/dts/qcom/sdm845-samsung-starqltechn.dts
+@@ -949,8 +949,8 @@ &usb_1_hsphy {
+ };
  
--  vdda-pll-supply: true
-+  vdda-pll-supply:
-+    description:
-+      Supply for the PLL, typically around 1.2V, though the exact voltage
-+      varies per SoC.
+ &usb_1_qmpphy {
+-	vdda-phy-supply = <&vdda_usb1_ss_1p2>;
+-	vdda-pll-supply = <&vdda_usb1_ss_core>;
++	vdda-phy-supply = <&vdda_usb1_ss_core>;
++	vdda-pll-supply = <&vdda_usb1_ss_1p2>;
+ 	status = "okay";
+ };
  
-   refgen-supply: true
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts b/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts
+index f21b914f22b5..ca503af9b832 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts
++++ b/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts
+@@ -876,8 +876,8 @@ &usb_1_hsphy {
+ &usb_1_qmpphy {
+ 	status = "okay";
+ 
+-	vdda-phy-supply = <&vreg_l26a_1p2>;
+-	vdda-pll-supply = <&vreg_l1a_0p875>;
++	vdda-phy-supply = <&vreg_l1a_0p875>;
++	vdda-pll-supply = <&vreg_l26a_1p2>;
+ };
+ 
+ &venus {
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-xiaomi-beryllium-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-xiaomi-beryllium-common.dtsi
+index 54e58ca04693..710b296e4964 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-xiaomi-beryllium-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sdm845-xiaomi-beryllium-common.dtsi
+@@ -645,8 +645,8 @@ &usb_1_hsphy {
+ &usb_1_qmpphy {
+ 	status = "okay";
+ 
+-	vdda-phy-supply = <&vreg_l26a_1p2>;
+-	vdda-pll-supply = <&vreg_l1a_0p875>;
++	vdda-phy-supply = <&vreg_l1a_0p875>;
++	vdda-pll-supply = <&vreg_l26a_1p2>;
+ };
+ 
+ &venus {
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-xiaomi-polaris.dts b/arch/arm64/boot/dts/qcom/sdm845-xiaomi-polaris.dts
+index a44d6e776c82..cce7348e583a 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-xiaomi-polaris.dts
++++ b/arch/arm64/boot/dts/qcom/sdm845-xiaomi-polaris.dts
+@@ -668,8 +668,8 @@ &usb_1_hsphy {
+ };
+ 
+ &usb_1_qmpphy {
+-	vdda-pll-supply = <&vreg_l1a_0p875>;
+-	vdda-phy-supply = <&vreg_l26a_1p2>;
++	vdda-pll-supply = <&vreg_l26a_1p2>;
++	vdda-phy-supply = <&vreg_l1a_0p875>;
+ 	status = "okay";
+ };
  
 
 -- 
