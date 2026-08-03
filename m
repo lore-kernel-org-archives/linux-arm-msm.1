@@ -1,70 +1,66 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 061821E7C23;
-	Mon,  3 Aug 2026 07:20:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8E81A3093A6
+	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 07:55:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785741646; cv=none; b=LgsI9+SqSx0CEePm5a74HVh6NoeURBOJythriDWlicVALz9Q3NivXr9f9BSFSeWb1j2jMdA8nh8bFgFd3xH87Pe5O/FnQdXvFdOnBCGzf7bHLyvWHXnPlD6O0wtY3tKA6d8xzESOD29xhjdbtqTS/Rv0tCbhSCpstPpjrJSm/wA=
+	t=1785743727; cv=none; b=lOBvnIu6Co0ru6P72GKPjFYxTeNoBNht4I8V5u1bxEbsgHY8lg1bIXmlKfGcCbiMDB41kNkrXDR5h0B9f3nuYuY5KzE8XNUJIbTTe1/W2AsQMt7LG9KFLXNkRS5I97bzkq26GxledhlwHOJ/2GFDESyvwDgd5YNTUubEcMplB/Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785741646; c=relaxed/simple;
-	bh=ve0FnataOy6jGi9uEH2zNrT7BdRoaSTDCZW5iL/3+B4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=pqO4kNqeiqF76Hi8joviUP9uiQffMdhY25Vo2NQ3wfIm8VS2FNvjzKFd9XXhgpy4usl/rS1QdJLtyfvOTezZktT1A8qey0hNdKwK7RNfQ3ovcT1CqkiwwkcL54zFnWhZaYYgueSg1vjdJHxuIePwb/gk5S2Mw6Xx9FxK1tqVzAI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UFEbYMLj; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785743727; c=relaxed/simple;
+	bh=epolSf7q32++ypoxJpjFfLBqfrUj4L5q/+nRJ2O+U6g=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=HLIJbM4DPB9FIrfU2mLGQNzKxDH6Se2m6hOqSK/ZrMBukHX8fZDqcwJ+Ndj1AdHyz+USIATVSgBJIf9kZ/iBH9hDGY7of7pRHsngyRXcvLSy/PwdDwsA1VCHPszxyjqpf2FuK0kSD2ZbH3z8MBpLBgXpyQdzbegrYgeiyTulo3o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cCTmdMFQ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UFEbYMLj"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C0281F000E9;
-	Mon,  3 Aug 2026 07:20:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cCTmdMFQ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E3F91F000E9
+	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 07:55:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785741644;
-	bh=xTNdrUnQCfW7fN7mzKO7dzOqQ+FnXPR+Uy+Wyd5b0uE=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=UFEbYMLjD0eKmmNy1XVtLf7SqxlDnKrcBEKYfRUtAm3CAWLdSkCaeA0uPkCE6vJG8
-	 EOQbMPYum6VX4/8XPpgHgmeo1xVUaCDmkY0YbmxaEyIOViCpxc0bczZXWJx4ir6fDI
-	 4ihRs6W+U4F7X0l4VNYFs2jCvThYxfS/woqT4XN6pq3flZjHB48NnSkuvWL7B+c1B9
-	 nDw/jRxKMRcVuUr4gXwbwuj1U3Y/pHodDxG9z1XOd/Bspfm5crTLbr6FtWq5UW97y+
-	 Uds0RV+a3cJQNLn0S3vAxMTBKy+32vfdcTTuqAVG4mSFAhKxbG4IYAa2t63XpkmA7P
-	 qDDiJaoX4P02Q==
-Date: Mon, 3 Aug 2026 09:20:40 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Esteban Urrutia <esteuwu@proton.me>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	phone-devel@vger.kernel.org
-Subject: Re: [PATCH v3] dt-bindings: soc: qcom: qcom,pmic-glink: Add
- compatible string for SM8475
-Message-ID: <20260803-upbeat-banana-ermine-4fdf45@quoll>
-References: <20260802-sm8475-pmic-glink-v3-1-45216e6ec572@proton.me>
+	s=k20260515; t=1785743726;
+	bh=epolSf7q32++ypoxJpjFfLBqfrUj4L5q/+nRJ2O+U6g=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=cCTmdMFQTOPJz/XKNM+gqZhqPeSk62LDpymfxEfVvZXExDk0Zd9iOV14phvbhVidL
+	 /PYloz30xPp5GRDueJzrYQnFdkqTnhZSSzqo55xlicS1KDNO4AdMLOtxEuZKo5tQqP
+	 MrClV605o0Mu9VYsb1W+ztWh5Q56G8lREpg6xoxdztJhxQ1NtS+M1/Ir6kYtEJoYS0
+	 3PE4r1sB0zJ8aOhZV4pQWzKI0fsI4Qb7UycLcm7Oqs3rgKGn8xqzhZs+Ze09zrGnaU
+	 hF1vR2K1tFpudtNRdUGSxtYFK6CcUS1cNsPpJ/DBO9YpFb4kfYzOWHECpzb2njMTxL
+	 mO1/h+p4Ch10A==
+Received: by mail-lj1-f173.google.com with SMTP id 38308e7fff4ca-39c74722e27so37455721fa.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 00:55:26 -0700 (PDT)
+X-Gm-Message-State: AOJu0YyBXWrO1hPIZ/I9P066lCWWicWK5YUDDQ35/WuCnCRCTOHQWDSF
+	4ZZKkatAhl1AiQSGKUXv7DJnugt7CmRo1MznMcz31FgLLuFhsBtGP2x39nbnQySTxyB0BfZj6/J
+	iVKHr8XAsXMPc+xtxzPDidgpPL6YP/0M=
+X-Received: by 2002:a2e:b8ca:0:b0:39d:560a:faa with SMTP id
+ 38308e7fff4ca-39f7eaa5c8cmr20857701fa.16.1785743725143; Mon, 03 Aug 2026
+ 00:55:25 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260802-sm8475-pmic-glink-v3-1-45216e6ec572@proton.me>
+References: <20260730075501.7653-1-bartosz.golaszewski@oss.qualcomm.com>
+In-Reply-To: <20260730075501.7653-1-bartosz.golaszewski@oss.qualcomm.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Mon, 3 Aug 2026 09:55:11 +0200
+X-Gmail-Original-Message-ID: <CAD++jLm-+w8oW0TMih0mwtMBQRwEktAd72BEPmjLkLo_mBme8Q@mail.gmail.com>
+X-Gm-Features: AUfX_mxbJZx6Ao0CfxgLzc7PDN40sgXs3Sk3EhTz6lNk_zYCfH62EtKRPOaI7Yk
+Message-ID: <CAD++jLm-+w8oW0TMih0mwtMBQRwEktAd72BEPmjLkLo_mBme8Q@mail.gmail.com>
+Subject: Re: [GIT PULL] Qualcomm pinctrl fixes for v7.2-rc6
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, brgl@kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, Aug 02, 2026 at 02:39:55AM -0400, Esteban Urrutia wrote:
-> SM8475 is compatible with SM8450 with respect to pmic-glink support.
+On Thu, Jul 30, 2026 at 9:55=E2=80=AFAM Bartosz Golaszewski
+<bartosz.golaszewski@oss.qualcomm.com> wrote:
 
-"Add the Qualcomm SM8475 PMIC GLINK, compatible with the SM8450 one."
+> Please pull the following set of Qualcomm pin control fixes for the next =
+RC.
 
-(or "Add a compatible for ..." and rest as above)
+Pulled in, phew this needs to go upstream fast.
 
-> Add a compatible string for SM8475 using SM8450 as a fallback.
-
-And this is redundant.
-
-> 
-> Signed-off-by: Esteban Urrutia <esteuwu@proton.me>
-> ---
-
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-
-Best regards,
-Krzysztof
-
+Yours,
+Linus Walleij
