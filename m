@@ -1,48 +1,50 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E3643815E7;
-	Mon,  3 Aug 2026 03:24:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A567384CFA;
+	Mon,  3 Aug 2026 03:24:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785727467; cv=none; b=tPHc6+hsm/ofEvO58JDGgNYueNt4MnNER/jeCBefMSbb7h1rZTbFUMOwaRqwchoStRQHQZVRiTZAGduC3/gYc870XBmRzmFJABr1yaObsrxs1ZYyH+R0REgpiL6ty+nfc4ThKvQ24CUnrZBivZKsxkmaJH5npmm6buebGGvz79Q=
+	t=1785727470; cv=none; b=Y7xsGyF3q66EB4yzhzXMHccObfNPy/HU0HlzIqZAvZKjHPZez6vlO0FBYqQRhCyeoaMQwBBzhrGJMP2Ia/xVovLBwo6T8by3xdORNREA0iEYNz8e2UXbImrhCocDI7o5AIXzHaYYnbldPaErxXMUSi0GSn4ZO3S8oFy4GpZyBA8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785727467; c=relaxed/simple;
-	bh=eyEIn/lfnMxVFR/4GPjN5gaef3yG52uhtgXHkmUYP8I=;
+	s=arc-20240116; t=1785727470; c=relaxed/simple;
+	bh=7HNBJbFKxFM2eMUHTLpylRcce7MxNoTgOI13ndIq6iI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=shRXetMajrWLFIlOR/JTS8TGnbiiAbk+F7eddaIMvIf12k4CwrlakEl8sNDS3+cUucC7GwG1nZsKVhwNWJtdpOH00GvLlicbBtl3CmdRFDXUibJFvy018273pp8ZRxjPHSijynwtfZbv6lkS0I5cl1T0mmWtXS6TAZ9zEkBzvAg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=QCcRBr33; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=fxZQN/sD3+h+ae7FSvtpcSuH4VVIWGAkPGyfeskUzK96Gumm9r+0LwXv/USwx2lHj5St+6kL0lxTmZMDhso6X2AZV/8UBttSXhJLzAel5a/b6xjOm/9gi2nuPNgBZk0X+684f+43Vm29khmAVjBzFTaaRxW1UUnvSRFEfwCq+CM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mXTfwahV; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="QCcRBr33"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E87CD1F000E9;
-	Mon,  3 Aug 2026 03:24:23 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mXTfwahV"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9E9CB1F00A3A;
+	Mon,  3 Aug 2026 03:24:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785727466;
-	bh=6fmQd2Mh38lBN61pPJNyohnM7BGgS7htWgWPOb/EtlU=;
+	s=k20260515; t=1785727468;
+	bh=MQxlVw38aA79dqzuQNsyJyFGsPhaa6Aqu6+rT7IwlTs=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=QCcRBr33hcTs5q/dxKUtER/rnrVQ0S+WZmaoHj9/X4fMUQvoZAPSY9X91U7IS8TY3
-	 N/JPFuK5pqaNHtVLg5a1jWvimq2/EU/RGdNCT9nFbO+h9CNW0y6R1Uyb7CMNmXqHwd
-	 Ytgb3OnIXnJboeCI/dxb+uSFB9nhHwyNNUFDXcKqV6pu+wsXv9gqDEECYrv9lnv+uY
-	 jK5tUjB2CBYr53LT1/CaJ7OEE8AjJVH3HSEIgK8eNAxf2zRKcUyYRYiIdE+7GB6/HT
-	 lbC+IHRD765v7ABzeY4Ao8fyWon2TL7cn+rs++vkyCr/XSY+/kkzZXm+A/MmHDppZ6
-	 i6oZksdX7oX3w==
+	b=mXTfwahV8ZqjTVt0Cyb0lZq+gwe6z+RtCVDZPijiOfvuUEi6zPQFXV6m3Ti6xsukx
+	 y4KfYGm2/AdDeyWqlKuPdCQQl8Fgt9glj1OjmuGpXQUnzWvEHFqcD+mOeFo5mYPClY
+	 LgGi2cyx50xboWEgUtcTznH9coloDvmgjGXMY+Dy2nt1DKtFFOy56p8tAbRVx1obTs
+	 j67HmwC8T4p0sEYlHTG+I8EaVd29R9hmQ7D2DiYfUy4SdD5EedNGV+BeWxrRB4nxLB
+	 RdGaBI4eZIsVhDtDl0dzERJh2hKiMVQQ1Y1ny6qCeynawFsr9qR7MAj/YNN4TCnWT9
+	 WnO1VhOsCTKeg==
 From: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Ravi Hothi <ravi.hothi@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	mohammad.rafi.shaik@oss.qualcomm.com,
-	ajay.nandam@oss.qualcomm.com
-Subject: Re: [PATCH v4 0/2] arm64: dts: qcom: eliza: Add audio support
-Date: Sun,  2 Aug 2026 22:24:02 -0500
-Message-ID: <178572744561.408250.9516855992409401843.b4-ty@kernel.org>
+To: Michael Turquette <mturquette@baylibre.com>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney@redhat.com>,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+	Shawn Guo <shengchao.guo@oss.qualcomm.com>,
+	Taniya Das <taniya.das@oss.qualcomm.com>
+Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+	Imran Shaik <imran.shaik@oss.qualcomm.com>,
+	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/2] clk: qcom: nord: fix PHY pipe clock halt check and mux ops
+Date: Sun,  2 Aug 2026 22:24:03 -0500
+Message-ID: <178572744540.408250.15655167921821647311.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260731084032.3106477-1-ravi.hothi@oss.qualcomm.com>
-References: <20260731084032.3106477-1-ravi.hothi@oss.qualcomm.com>
+In-Reply-To: <20260716-b4-nord-pipe-clk-fixes-v1-0-e4f583633356@oss.qualcomm.com>
+References: <20260716-b4-nord-pipe-clk-fixes-v1-0-e4f583633356@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -53,22 +55,24 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Fri, 31 Jul 2026 14:10:30 +0530, Ravi Hothi wrote:
-> Add audio support for the Qualcomm Eliza SoC and CQS EVK board.
-> 
-> Patch 1 adds SoC-level LPASS WSA macro, VA macro, SoundWire controller
-> and LPASS LPI pin controller nodes to eliza.dtsi, along with DMIC and
-> WSA SoundWire pinctrl states. The SoundWire node is kept disabled so
-> board DTS files can selectively enable and configure it.
+On Thu, 16 Jul 2026 16:29:10 +0530, Taniya Das wrote:
+> Fix two PHY pipe clock issues in the Nord GCC/NE_GCC drivers: the
+> PCIe and USB3 pipe clock branches poll BRANCH_HALT_VOTED, which can
+> spuriously time out since the halt bit doesn't toggle reliably while
+> the PHY is down. The USB3 pipe clock source muxes use
+> clk_regmap_mux_closest_ops, which doesn't park on the reference clock
+> when disabled. Switch the branches to BRANCH_HALT_SKIP and convert
+> the muxes to clk_regmap_phy_mux_ops, matching existing conventions
+> elsewhere in the Qualcomm clock drivers.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/2] arm64: dts: qcom: eliza: Add LPASS macro and SoundWire support
-      commit: b9f1f97846bcb1989bb52b6cbd1205ecc22c8e43
-[2/2] arm64: dts: qcom: eliza-cqs-evk: Enable sound card support with WSA8845 and DMIC
-      commit: f016b7e86137f6a83de84f660b6bb3d7b955de25
+[1/2] clk: qcom: nord: use BRANCH_HALT_SKIP for PHY pipe clocks
+      commit: 3a8a7d597b07ffe388b47fb524827be52c9f7e0f
+[2/2] clk: qcom: negcc-nord: use clk_regmap_phy_mux for USB3 pipe clock srcs
+      commit: a5c2859ffe9c8e033e2df1ef62357fa5692008f1
 
 Best regards,
 -- 
