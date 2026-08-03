@@ -1,308 +1,122 @@
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D899396572;
-	Mon,  3 Aug 2026 06:31:23 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.167.242.64
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70C2039A05D;
+	Mon,  3 Aug 2026 06:34:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785738686; cv=none; b=kXQtbNxBKmzgEPQQFzMZEC+xt3P1DnE6mr6sJCCHNsBPo73UchO6OF81SHdbjcPWjQCMymSe5h7xhiySgjlbiHfpPOxcIp2ih/OaxJVxqgNLB6p9oI9UnP1wYYygwYkIsuhQISgwHSO1R+HsWQPkT7PlN4UxFrOgyrJM98OOdvQ=
+	t=1785738863; cv=none; b=fNMmke6M2e4LCqLUAmZKXjdQ2bPhYidUnOP6vkhhmPnepc3Ap1IjyulGAxgoE71pv7XeUaAYQ6EyHWzpcBGIFYe2TdYL8YfAYZtztRH33GJ10HIESMvCa5zkMUPXFOBPqPH+/UmQKir0x9t98SFSHgsSUgjpNvJPgHCV90qbeOE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785738686; c=relaxed/simple;
-	bh=0w26mLCibxmzad5cJ4RsBqQcZLwhm5292+fwf5AEBhg=;
-	h=Message-ID:Date:MIME-Version:Subject:To:References:Cc:From:
-	 In-Reply-To:Content-Type; b=SpiroXl7M7H0nhWnWb+cnXpRfn/Ws6M6SMBxHVCdQCYX+DRu+wPojcBNnsqrR+i9cmrjn8M7IT4lAdZGIKfWcMpTps/sX3uMLuipDijqrVKr2NbhkPUXwNtii3wSuYJQOXvaIDf9HxRqPxhDWrtawm77fgo8q68PFqnBC0fLZek=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=oer8sGJV; arc=none smtp.client-ip=213.167.242.64
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ideasonboard.com
+	s=arc-20240116; t=1785738863; c=relaxed/simple;
+	bh=oKYyRVgRmjUYYiCKKaQRvT+jwRsNJE+TlrMs7SjxWDg=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=MEe54VOExNUo78GgWLpzeoCStM9F4VKa5i7xSuiLBBR3OKM59SvFR1wu9im/AZEIN0rRbMlPBPZeigbGsjhkm2KScm86BXtGAQTA0+w9Q5k4DapQtbivVuzL1k+QBGwmy3HqoB+supLrYa9ZE7tHk0Pe39ncZlem9A73msvDGIw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XGd4NYoF; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="oer8sGJV"
-Received: from [192.168.88.20] (91-158-153-178.elisa-laajakaista.fi [91.158.153.178])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 9B0DE512;
-	Mon,  3 Aug 2026 08:30:09 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1785738612;
-	bh=0w26mLCibxmzad5cJ4RsBqQcZLwhm5292+fwf5AEBhg=;
-	h=Date:Subject:To:References:Cc:From:In-Reply-To:From;
-	b=oer8sGJVImG3eAdX/1tDX4OfNrWm4pjhxRA/1dweeK0/QNZxTPxYqBKHqEkpRPb3+
-	 Egk1n6NaDUmYkxMzDpzoE4nw/3yETSw8cW+rrdPTRWBDGvsL/5y/zRRpTIM1V1Upa9
-	 AsybJri2Bo0Ucca/CHkw+txSHZGcz913RI4heSi4=
-Message-ID: <f428f54b-90dd-425a-b204-531df0e1d5fa@ideasonboard.com>
-Date: Mon, 3 Aug 2026 09:31:14 +0300
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XGd4NYoF"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 27B4EC2BCFA;
+	Mon,  3 Aug 2026 06:34:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1785738863;
+	bh=oKYyRVgRmjUYYiCKKaQRvT+jwRsNJE+TlrMs7SjxWDg=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=XGd4NYoF2Puf8Pb4XgKUm3vsDCcwZVBeAUsoaeB9od/Oi0JkfSUNH+jpewzrqdg6E
+	 So/88ryTPcQ/U0ZgA7IHdkUfKDMMQCpNiLaF65arNJdKP7gZuyboI6zBY2s1/uS1po
+	 q/We23VUlZ+ZqeXL9WthJxDuoOuE11oheCBLTy9orlyfksm2xe0DDAwtOYHd5HeQHx
+	 CGWMqOjEzntLDjRXSLTPjNABA0bpNQ+PYxafd3XVFzKQgz6kunvIYQ1aFFn+TM0cgj
+	 trBtrAdCzK1kQiNCWncqMJF0xpxUPNdlTcwm+CVWelW/9oiYFwtLwW0gQUL1Bk09F3
+	 7fTbGiPTceDRA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id F1F0FC55177;
+	Mon,  3 Aug 2026 06:34:22 +0000 (UTC)
+From: Manivannan Sadhasivam via B4 Relay <devnull+manivannan.sadhasivam.oss.qualcomm.com@kernel.org>
+Date: Mon, 03 Aug 2026 08:34:00 +0200
+Subject: [PATCH 02/28] arm64: dts: qcom: sc8280xp-blackrock: Fix swapped
+ USB QMP PHY vdda-phy/vdda-pll supplies
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] dt-bindings: Correct white-space style
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-References: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
-Content-Language: en-US
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
- Lorenzo Pieralisi <lpieralisi@kernel.org>,
- Suzuki K Poulose <suzuki.poulose@arm.com>, Mike Leach <mike.leach@arm.com>,
- James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>,
- Damien Le Moal <dlemoal@kernel.org>, Niklas Cassel <cassel@kernel.org>,
- Jyri Sarha <jyri.sarha@iki.fi>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Matthias Brugger <matthias.bgg@gmail.com>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- Linus Walleij <linusw@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Andi Shyti <andi.shyti@kernel.org>, Jassi Brar <jassisinghbrar@gmail.com>,
- Lee Jones <lee@kernel.org>, Johannes Berg <johannes@sipsolutions.net>,
- Jeff Johnson <jjohnson@kernel.org>, Viresh Kumar <vireshk@kernel.org>,
- Nishanth Menon <nm@ti.com>, Stephen Boyd <sboyd@kernel.org>,
- Yangbo Lu <yangbo.lu@nxp.com>, =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?=
- <ukleinek@kernel.org>, Paul Walmsley <pjw@kernel.org>,
- Samuel Holland <samuel.holland@sifive.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Richard Cochran <richardcochran@gmail.com>,
- Jens Wiklander <jenswi@kernel.org>,
- Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>,
- YC Hung <yc.hung@mediatek.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Sean Wang <sean.wang@kernel.org>, Frank Li <Frank.Li@nxp.com>,
- Peter Ujfalusi <peter.ujfalusi@gmail.com>, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- coresight@lists.linaro.org, linux-arm-msm@vger.kernel.org,
- linux-ide@vger.kernel.org, dri-devel@lists.freedesktop.org,
- linux-mediatek@lists.infradead.org, linux-gpio@vger.kernel.org,
- linux-i2c@vger.kernel.org, mfd@lists.linux.dev,
- linux-wireless@vger.kernel.org, ath10k@lists.infradead.org,
- linux-pm@vger.kernel.org, netdev@vger.kernel.org, linux-pwm@vger.kernel.org,
- linux-riscv@lists.infradead.org, linux-usb@vger.kernel.org
-From: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
-In-Reply-To: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20260803-phy-supply-fix-v1-2-5880630cde3e@oss.qualcomm.com>
+References: <20260803-phy-supply-fix-v1-0-5880630cde3e@oss.qualcomm.com>
+In-Reply-To: <20260803-phy-supply-fix-v1-0-5880630cde3e@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Krzysztof Kozlowski <krzk@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Manivannan Sadhasivam <mani@kernel.org>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1429;
+ i=manivannan.sadhasivam@oss.qualcomm.com; h=from:subject:message-id;
+ bh=CcvnhusAZmfI+yh1IIykSb8F96Q6pOG85doT5s1hKoU=;
+ b=owGbwMvMwMUYOl/w2b+J574ynlZLYsgqMEtk4PkaZm/2p3335S0ML9/4ng1fWFmnOnX6voD71
+ Wc8V/nUdDIaszAwcjHIiimypC911mr0OH1jSYT6dJhBrExgU7g4BWAiux9wMDSkXXvSre9tcjBs
+ A3ev+5KVtWoOT/rn1CTGMIf2eZlfeGsxpbL2KMu6u6/0FHxDNjUb6KXbJdzhEY2fM/eo0d6zkg8
+ eae0JajR5ZyT0RcC11uraqfxd55+o3E7NYF9y78QUP5Ginrj3vz+/WtOokGkyp3fdJovfhrKL9v
+ HODnsZccRNSKn2aFNj/eXEbUvU1WvWb025n5Eo1r4suMjp33efqolr5mgf4JV30zGKeDSBcb3tv
+ WuG9kVzXY/HZFyv7bT+xvt73uuqpglWTxmMdOXv3fmouKJL1D/pU2Ck37dbqgLddv5nBYM89I3K
+ erkcwleH7RPMFHk4O+FeQwfL9Us+t/bom77gmHG85JgNAA==
+X-Developer-Key: i=manivannan.sadhasivam@oss.qualcomm.com; a=openpgp;
+ fpr=C668AEC3C3188E4C611465E7488550E901166008
+X-Endpoint-Received: by B4 Relay for
+ manivannan.sadhasivam@oss.qualcomm.com/default with auth_id=461
+X-Original-From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Reply-To: manivannan.sadhasivam@oss.qualcomm.com
 
-Hi,
+From: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
-On 01/08/2026 22:56, Krzysztof Kozlowski wrote:
-> Correct a few white-space issues, like double space after '=' or before
-> bracket '{' characters, which will be flagged by dt-check-style.  No
-> functional changes.
-> 
-> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-> 
-> ---
-> 
-> Patch applies on Rob's for-next branch.
-> ---
->   .../arm/firmware/linaro,optee-tz.yaml         |  8 +-
->   .../devicetree/bindings/arm/psci.yaml         | 18 ++--
->   .../bindings/arm/qcom,coresight-tnoc.yaml     |  2 +-
->   .../devicetree/bindings/ata/st,ahci.yaml      | 22 ++---
->   .../bindings/display/ti/ti,am65x-dss.yaml     | 12 +--
->   .../bindings/display/ti/ti,j721e-dss.yaml     | 96 +++++++++----------
->   .../bindings/display/ti/ti,k2g-dss.yaml       | 36 +++----
->   .../bindings/dsp/mediatek,mt8195-dsp.yaml     |  2 +-
->   .../bindings/gpio/st,nomadik-gpio.yaml        |  2 +-
->   .../devicetree/bindings/i2c/st,sti-i2c.yaml   |  2 +-
->   .../bindings/mailbox/st,sti-mailbox.yaml      |  2 +-
->   .../bindings/mfd/maxim,max77620.yaml          |  2 +-
->   .../bindings/net/wireless/qcom,ath10k.yaml    | 34 +++----
->   .../devicetree/bindings/opp/opp-v2.yaml       | 28 +++---
->   .../pinctrl/mediatek,mt7988-pinctrl.yaml      |  2 +-
->   .../devicetree/bindings/ptp/fsl,ptp.yaml      | 12 +--
->   .../devicetree/bindings/pwm/pwm-sifive.yaml   |  2 +-
->   .../bindings/usb/ti,twl4030-usb.yaml          |  2 +-
->   18 files changed, 142 insertions(+), 142 deletions(-)
+The QMP PHY expects the vdda-phy supply to be around 0.88V and the
+vdda-pll supply to be 1.2V. But these two supplies are swapped for the
+USB QMP PHYs on this board, feeding 1.2V to vdda-phy and 0.9V to
+vdda-pll.
 
+Fix it by swapping the two supplies back.
 
-> diff --git a/Documentation/devicetree/bindings/display/ti/ti,am65x-dss.yaml b/Documentation/devicetree/bindings/display/ti/ti,am65x-dss.yaml
-> index 49a007cbcd3a..d1e530e12604 100644
-> --- a/Documentation/devicetree/bindings/display/ti/ti,am65x-dss.yaml
-> +++ b/Documentation/devicetree/bindings/display/ti/ti,am65x-dss.yaml
-> @@ -261,9 +261,9 @@ examples:
->                   "ovr1", "ovr2", "vp1", "vp2", "common1";
->           ti,am65x-oldi-io-ctrl = <&dss_oldi_io_ctrl>;
->           power-domains = <&k3_pds 67 TI_SCI_PD_EXCLUSIVE>;
-> -        clocks =        <&k3_clks 67 1>,
-> -                        <&k3_clks 216 1>,
-> -                        <&k3_clks 67 2>;
-> +        clocks = <&k3_clks 67 1>,
-> +                 <&k3_clks 216 1>,
-> +                 <&k3_clks 67 2>;
->           clock-names = "fck", "vp1", "vp2";
->           interrupts = <GIC_SPI 166 IRQ_TYPE_EDGE_RISING>;
->           ports {
-> @@ -299,9 +299,9 @@ examples:
->               reg-names = "common", "vidl1", "vid",
->                           "ovr1", "ovr2", "vp1", "vp2", "common1";
->               power-domains = <&k3_pds 186 TI_SCI_PD_EXCLUSIVE>;
-> -            clocks =        <&k3_clks 186 6>,
-> -                            <&vp1_clock>,
-> -                            <&k3_clks 186 2>;
-> +            clocks = <&k3_clks 186 6>,
-> +                     <&vp1_clock>,
-> +                     <&k3_clks 186 2>;
->               clock-names = "fck", "vp1", "vp2";
->               interrupts = <GIC_SPI 84 IRQ_TYPE_LEVEL_HIGH>;
->               oldi-transmitters {
-> diff --git a/Documentation/devicetree/bindings/display/ti/ti,j721e-dss.yaml b/Documentation/devicetree/bindings/display/ti/ti,j721e-dss.yaml
-> index 65ae8a1c3998..cac5ef1743d3 100644
-> --- a/Documentation/devicetree/bindings/display/ti/ti,j721e-dss.yaml
-> +++ b/Documentation/devicetree/bindings/display/ti/ti,j721e-dss.yaml
-> @@ -154,54 +154,54 @@ examples:
->       #include <dt-bindings/soc/ti,sci_pm_domain.h>
->   
->       dss: dss@4a00000 {
-> -            compatible = "ti,j721e-dss";
-> -            reg =   <0x04a00000 0x10000>, /* common_m */
-> -                    <0x04a10000 0x10000>, /* common_s0*/
-> -                    <0x04b00000 0x10000>, /* common_s1*/
-> -                    <0x04b10000 0x10000>, /* common_s2*/
-> -                    <0x04a20000 0x10000>, /* vidl1 */
-> -                    <0x04a30000 0x10000>, /* vidl2 */
-> -                    <0x04a50000 0x10000>, /* vid1 */
-> -                    <0x04a60000 0x10000>, /* vid2 */
-> -                    <0x04a70000 0x10000>, /* ovr1 */
-> -                    <0x04a90000 0x10000>, /* ovr2 */
-> -                    <0x04ab0000 0x10000>, /* ovr3 */
-> -                    <0x04ad0000 0x10000>, /* ovr4 */
-> -                    <0x04a80000 0x10000>, /* vp1 */
-> -                    <0x04aa0000 0x10000>, /* vp2 */
-> -                    <0x04ac0000 0x10000>, /* vp3 */
-> -                    <0x04ae0000 0x10000>, /* vp4 */
-> -                    <0x04af0000 0x10000>; /* wb */
-> -            reg-names = "common_m", "common_s0",
-> -                    "common_s1", "common_s2",
-> -                    "vidl1", "vidl2","vid1","vid2",
-> -                    "ovr1", "ovr2", "ovr3", "ovr4",
-> -                    "vp1", "vp2", "vp3", "vp4",
-> -                    "wb";
-> -            clocks =        <&k3_clks 152 0>,
-> -                            <&k3_clks 152 1>,
-> -                            <&k3_clks 152 4>,
-> -                            <&k3_clks 152 9>,
-> -                            <&k3_clks 152 13>;
-> -            clock-names = "fck", "vp1", "vp2", "vp3", "vp4";
-> -            power-domains = <&k3_pds 152 TI_SCI_PD_EXCLUSIVE>;
-> -            interrupts =    <GIC_SPI 602 IRQ_TYPE_LEVEL_HIGH>,
-> -                            <GIC_SPI 603 IRQ_TYPE_LEVEL_HIGH>,
-> -                            <GIC_SPI 604 IRQ_TYPE_LEVEL_HIGH>,
-> -                            <GIC_SPI 605 IRQ_TYPE_LEVEL_HIGH>;
-> -            interrupt-names =       "common_m",
-> -                                    "common_s0",
-> -                                    "common_s1",
-> -                                    "common_s2";
-> -            ports {
-> -                    #address-cells = <1>;
-> -                    #size-cells = <0>;
-> -                    port@0 {
-> -                            reg = <0>;
-> +        compatible = "ti,j721e-dss";
-> +        reg = <0x04a00000 0x10000>, /* common_m */
-> +              <0x04a10000 0x10000>, /* common_s0*/
-> +              <0x04b00000 0x10000>, /* common_s1*/
-> +              <0x04b10000 0x10000>, /* common_s2*/
-> +              <0x04a20000 0x10000>, /* vidl1 */
-> +              <0x04a30000 0x10000>, /* vidl2 */
-> +              <0x04a50000 0x10000>, /* vid1 */
-> +              <0x04a60000 0x10000>, /* vid2 */
-> +              <0x04a70000 0x10000>, /* ovr1 */
-> +              <0x04a90000 0x10000>, /* ovr2 */
-> +              <0x04ab0000 0x10000>, /* ovr3 */
-> +              <0x04ad0000 0x10000>, /* ovr4 */
-> +              <0x04a80000 0x10000>, /* vp1 */
-> +              <0x04aa0000 0x10000>, /* vp2 */
-> +              <0x04ac0000 0x10000>, /* vp3 */
-> +              <0x04ae0000 0x10000>, /* vp4 */
-> +              <0x04af0000 0x10000>; /* wb */
-> +        reg-names = "common_m", "common_s0",
-> +                "common_s1", "common_s2",
-> +                "vidl1", "vidl2","vid1","vid2",
-> +                "ovr1", "ovr2", "ovr3", "ovr4",
-> +                "vp1", "vp2", "vp3", "vp4",
-> +                "wb";
-> +        clocks = <&k3_clks 152 0>,
-> +                 <&k3_clks 152 1>,
-> +                 <&k3_clks 152 4>,
-> +                 <&k3_clks 152 9>,
-> +                 <&k3_clks 152 13>;
-> +        clock-names = "fck", "vp1", "vp2", "vp3", "vp4";
-> +        power-domains = <&k3_pds 152 TI_SCI_PD_EXCLUSIVE>;
-> +        interrupts = <GIC_SPI 602 IRQ_TYPE_LEVEL_HIGH>,
-> +                     <GIC_SPI 603 IRQ_TYPE_LEVEL_HIGH>,
-> +                     <GIC_SPI 604 IRQ_TYPE_LEVEL_HIGH>,
-> +                     <GIC_SPI 605 IRQ_TYPE_LEVEL_HIGH>;
-> +        interrupt-names = "common_m",
-> +                          "common_s0",
-> +                          "common_s1",
-> +                          "common_s2";
-> +        ports {
-> +            #address-cells = <1>;
-> +            #size-cells = <0>;
-> +            port@0 {
-> +                reg = <0>;
->   
-> -                            dpi_out_0: endpoint {
-> -                                    remote-endpoint = <&dp_bridge_input>;
-> -                            };
-> -                    };
-> +                dpi_out_0: endpoint {
-> +                    remote-endpoint = <&dp_bridge_input>;
-> +                };
->               };
-> +        };
->       };
-> diff --git a/Documentation/devicetree/bindings/display/ti/ti,k2g-dss.yaml b/Documentation/devicetree/bindings/display/ti/ti,k2g-dss.yaml
-> index 96b1439f88e3..87721da0a8af 100644
-> --- a/Documentation/devicetree/bindings/display/ti/ti,k2g-dss.yaml
-> +++ b/Documentation/devicetree/bindings/display/ti/ti,k2g-dss.yaml
-> @@ -80,26 +80,26 @@ examples:
->       #include <dt-bindings/interrupt-controller/arm-gic.h>
->       #include <dt-bindings/interrupt-controller/irq.h>
->   
-> -    dss: dss@2540000 {
-> -            compatible = "ti,k2g-dss";
-> -            reg =   <0x02540000 0x400>,
-> -                    <0x02550000 0x1000>,
-> -                    <0x02557000 0x1000>,
-> -                    <0x0255a800 0x100>,
-> -                    <0x0255ac00 0x100>;
-> -            reg-names = "cfg", "common", "vid1", "ovr1", "vp1";
-> -            clocks =        <&k2g_clks 0x2 0>,
-> -                            <&k2g_clks 0x2 1>;
-> -            clock-names = "fck", "vp1";
-> -            interrupts = <GIC_SPI 247 IRQ_TYPE_EDGE_RISING>;
-> +    dss@2540000 {
-> +        compatible = "ti,k2g-dss";
-> +        reg = <0x02540000 0x400>,
-> +              <0x02550000 0x1000>,
-> +              <0x02557000 0x1000>,
-> +              <0x0255a800 0x100>,
-> +              <0x0255ac00 0x100>;
-> +        reg-names = "cfg", "common", "vid1", "ovr1", "vp1";
-> +        clocks = <&k2g_clks 0x2 0>,
-> +                 <&k2g_clks 0x2 1>;
-> +        clock-names = "fck", "vp1";
-> +        interrupts = <GIC_SPI 247 IRQ_TYPE_EDGE_RISING>;
->   
-> -            power-domains = <&k2g_pds 0x2>;
-> +        power-domains = <&k2g_pds 0x2>;
->   
-> -            max-memory-bandwidth = <230000000>;
-> +        max-memory-bandwidth = <230000000>;
->   
-> -            port {
-> -                    dpi_out: endpoint {
-> -                            remote-endpoint = <&sii9022_in>;
-> -                    };
-> +        port {
-> +            dpi_out: endpoint {
-> +                remote-endpoint = <&sii9022_in>;
->               };
-> +        };
->       };
-For the TI DSS parts:
+Fixes: 16a7fed11714 ("arm64: dts: qcom: sc8280xp-blackrock: dt definition for WDK2023")
+Reported-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Assisted-by: Claude:opus-4-8
+Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+---
+ arch/arm64/boot/dts/qcom/sc8280xp-microsoft-blackrock.dts | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-Acked-by: Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>
+diff --git a/arch/arm64/boot/dts/qcom/sc8280xp-microsoft-blackrock.dts b/arch/arm64/boot/dts/qcom/sc8280xp-microsoft-blackrock.dts
+index 125af356e24b..4e74eda7405f 100644
+--- a/arch/arm64/boot/dts/qcom/sc8280xp-microsoft-blackrock.dts
++++ b/arch/arm64/boot/dts/qcom/sc8280xp-microsoft-blackrock.dts
+@@ -1003,8 +1003,8 @@ &usb_0_hsphy {
+ };
+ 
+ &usb_0_qmpphy {
+-	vdda-phy-supply = <&vreg_l4d>;
+-	vdda-pll-supply = <&vreg_l9d>;
++	vdda-phy-supply = <&vreg_l9d>;
++	vdda-pll-supply = <&vreg_l4d>;
+ 
+ 	orientation-switch;
+ 
+@@ -1040,8 +1040,8 @@ &usb_1_hsphy {
+ };
+ 
+ &usb_1_qmpphy {
+-	vdda-phy-supply = <&vreg_l3b>;
+-	vdda-pll-supply = <&vreg_l4b>;
++	vdda-phy-supply = <&vreg_l4b>;
++	vdda-pll-supply = <&vreg_l3b>;
+ 
+ 	orientation-switch;
+ 
 
-  Tomi
+-- 
+2.43.0
+
 
