@@ -1,83 +1,81 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D36152D23BC
-	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 12:10:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 254DD3FE658
+	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 12:10:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785759055; cv=none; b=kiql7I5Q5cnCqLHBxX3lMgba5Cg8YWQOVWxFPDI6kqvil/6+LvaP//dgMCcCp5zXIoT8CVCh2pWTRMhOqChROiT3crjTMSM965hDOQzhkkaRfMnGoRkIMt7XWDLegFeUWUKo1XtOFwrMLescS/5BusqTqRYT8431BF2bBn4gv1E=
+	t=1785759059; cv=none; b=Bnn5ha8Aje/4MpySKVACMi4rLlgmZj+3DupwpehI0e9wKix9cZNRZanRnduI4xNJ+sLMF/T6sWCyrzW3PuO96dQQ3nKw6IJZxQgMWjROmSYOJzalx10iQ7I3icooaYhQ9SdiX4CRRfm3CYSklvE+i+GAgczZ+WhHDEGvwhtLKlE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785759055; c=relaxed/simple;
-	bh=tVoQTbYajMkKgEqrf3VZ5wL2L00uymH51mQnbqmhBp0=;
+	s=arc-20240116; t=1785759059; c=relaxed/simple;
+	bh=eapvQgo8pNQQNd2K/3SVJ/aSu5mhy9jcUrVO5vs84q0=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Qk5KO/fBkonEIKF2OquxDAOYYpqKBO8UUQ8Cv1+lC7s812OT26ZR3PMOZGCOsIt9cG17oyKMwTcdRptbGSylzctNvVsy0dlY6DdtpvfJYarNhAgSjIbKzuUHNGC3w+rvMpGMNCWd8duGehGWJm98tP7g84Tv/Q4FGpEVCzuGsLg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Wxbmgn65; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ay3PanOs; arc=none smtp.client-ip=205.220.168.131
+	 MIME-Version; b=hoT8oamf+Mr8RtymcLciVMqBFmeW9d7RjB/6SUoFvM4/hOi/XcDl0TuU2FBi0k0MUFbS/A19EzXOxg5A7Uu+p+dSOFSnGMZxMGR+zHqmTxIboTqOA0LFjX5DiCvHP0uBj4fU1wv5bCKN4US90DzEtdznJmrbdcwifjlSfc5hP3Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=b6RWblyr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=IE25ZPLc; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Wxbmgn65";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ay3PanOs"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 673C4bp7305436
-	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 12:10:53 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="b6RWblyr";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="IE25ZPLc"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 673C4TUw1722014
+	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 12:10:57 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	gEK2It9sbhPK3Ps5mT3CD89/vH1PdHBx2foX295rOX8=; b=Wxbmgn65Zi1MGbUT
-	TjQ0AAHPp6TYLf6IUqoqYB6OTdToG8iyhiKD8SypZ4GVIhAvj++F3RG/Lmj8a5ez
-	0ANHS1LJtDTQZ+QoeGzE1xsHMV1jne1Vj3/CzfG9Limz3sHRdeHqJTg/MUo5kYDx
-	Na00OdBHWtt/3IOv/wU/O8qVovrMfvv978PMKKZe+BoQi7yOT1CbuF12kNDFvvxI
-	Kwm+CSyt83PziNcViqmiLm05zQOlxYI+dhFzIQ3+pZP4tLFqK1eaHfcYD+ARbWy3
-	ezs/vi4azP32Wiyi/C7uxXlADt4rXYRG3SPHYc4xtkw6XSLxtqFKdC+GncZeV8P0
-	y6ygtg==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftnhb1fuv-1
+	cc:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=yYkaGrN7Ag+
+	hJIf5NRU8YRBfAeSXDK2yPw95IFjcl/8=; b=b6RWblyrsat+5s0eoqfnvLqTB1H
+	821SKwzyxB4J6L3Mlxxic5Af/dSnaoizkJ2ChpJ2deyTAjJZCAKgOcz9Iel1YtPm
+	72cr36qNTz1rK7XURXtkF9f+RZdRMqIncM8BTtXDQsyR2HTUo1DbTdDNOnWEweOL
+	TxfYuLbLzpgTQ/Xdxo42WfBoadZfsCU0OHmUjOf/OzOYtod3+OUd//SKc6+CidY1
+	xtwSFvc9Tl74ReIZWr3WVFrRBwYKdFCqWjxHkAv3IJ+ukXXJ/fiGk37E+ZRvJlUH
+	c+k850c/DRmfpwbJMgxH6dkrmYfq53xBvwhTwQuR20U3EbQI5o3s5UerFfg==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ft9fak365-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 12:10:53 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38e2f61c09dso4748557a91.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 05:10:53 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 12:10:57 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-3811279d51aso6230465a91.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 05:10:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785759052; x=1786363852; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=gEK2It9sbhPK3Ps5mT3CD89/vH1PdHBx2foX295rOX8=;
-        b=ay3PanOs1wKc+F/KKp8rkAzPi/Ix1LY5ukkQ8v43iy0knqHyxiZolEcgscnoAtggQE
-         8Njjrue2DJfHGDmth1CmSJeuLaJrsfsRg8ZiA1dd4fSFQTxvhSxukQcsdV8Z2vr+XeAn
-         oseMgOskPSSAvX/tZyByhA6gVVwl2Pvq6WB+7fOG6dWp86M5LwiOCh11lcOWOVnO5jV6
-         KLi+Db3AsCKqs2ngr2CFgDRr9rEHQooNMLxYH33XtUCYQmTHzz729lQJPdDTcHpOq3zy
-         NsWV76hIdNLsI/RvFaHhcsG2MxtrzoeGuEeFy2sFt4KvEEV1NmV0HkkbRnoknwdhUMDB
-         NAJQ==
+        d=oss.qualcomm.com; s=google; t=1785759057; x=1786363857; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=yYkaGrN7Ag+hJIf5NRU8YRBfAeSXDK2yPw95IFjcl/8=;
+        b=IE25ZPLc5zLH4gbp6QI+QHxbQa7vqli3yGumwvk5qTx3IiheBXtYKQxga8jbatzWHB
+         rIRgTXBTV7U4Z3y72hRcInzYXJAHtLV8mn1Sujbf1OxbsN3DYUIQ5Js5tM1S8aKE61WM
+         DMX+4OZYdx4KUokkBsB6ozP60DaWSqPrjnHXnnh4+EtnYy1eedoR0Nt+NQ/zi6uOIrLl
+         KyKmJqtWLa5ukbYd34nsLWDBq9Af5q58M73fAEk3JJYtDo/XnkN/hBSGr77Oz21jE1Fv
+         YO69zCNw1tWEDHQuMsq/mccMijYPADm/0dLGvVQoR0Lv/g+fEDQAy4oj2qdDIMVn1PkU
+         jNWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785759052; x=1786363852;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=gEK2It9sbhPK3Ps5mT3CD89/vH1PdHBx2foX295rOX8=;
-        b=HxWHN1cz8xmPXFonKNbGYBkPZvLo/98yHqqzb/BhFTktpw4WpP5M1Q2EkDHRJu2yIW
-         FDC8HfvoaD65UHKMedbapdMLPQoBfFo4y6uVqvBmJdmYOr7mALXe/mqhbb7hxMTu+fee
-         gRKRfoacXaeygAP82prdVP1hjaYeBFOFgTyojVDQM5meKo7BcdP1dex3ka/HfbCpmFDK
-         Qpiis4msOF+Ss3Q8DLj/q6tswDPVtFPK2d0ZQA3lZ4m1l5ywl3Cr3FL3MeqvWnV+Q0aC
-         SSa7r+e/zZvkPl+AF8XlCRmX0o5DjAK8lDMNHXIyeEWESvT/SjGdf4UWPn/KOUv4pTmj
-         diNw==
-X-Gm-Message-State: AOJu0YxL/QFzPXN/nv9gvi29mKYS8JqR4nmIwwqcRO0PhuMF/a8rVmxN
-	2bU3CgLMI0nRBlW21aU7sdGA8EkerI6V8FB+l2gvdyqgdmAjmjcvRcLnv4HdWD53x5UUTW0DXQ1
-	vC0RgjznRfRPrAZa56/Qg8lSAFne7L2HelLV8m9ww8lVXDG/03Z4QDz62/S4ulrJJkjG/
-X-Gm-Gg: AR+sD11/I1KlvVDhElxH8wx5dYJIRO42D6doW6YnbfwHJs3qeAc/QOleNlEvlIKQvgF
-	impA5J/s7dfoLyB5yQKMTlPbJQOwhJZP0WJeKJTm3Fcmnl7pUmDuEFFN3BG0NJ2QwTJvvSy0C0k
-	Se9eRR4Koj3ISDdGpE1F4CN3LGswtv7+sQIS99zRTSPiT+E4sSBpY+/tMfS8ZpVAe4sLNZ0s0XT
-	WWKBSMoAw3mE4iNIpIKYZEKntR2N3FZmKA5+WOm9VQiFVcyP5RV3YahJ/BJ2ZwhRj5EIpv3jqp5
-	FrokU5s0z8d6A1aF8Qg/fSZzwEHZrce3dkA3JNtwg7tST85BRZw6WSU140E8nyy+48WByj+FzhE
-	NrXXtNVvzELzfrvnmtCGehgf3FH8=
-X-Received: by 2002:a17:90b:4b81:b0:38d:dfd1:7c1 with SMTP id 98e67ed59e1d1-38fbc3e5c7bmr9103271a91.2.1785759052426;
-        Mon, 03 Aug 2026 05:10:52 -0700 (PDT)
-X-Received: by 2002:a17:90b:4b81:b0:38d:dfd1:7c1 with SMTP id 98e67ed59e1d1-38fbc3e5c7bmr9103245a91.2.1785759051918;
-        Mon, 03 Aug 2026 05:10:51 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1785759057; x=1786363857;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=yYkaGrN7Ag+hJIf5NRU8YRBfAeSXDK2yPw95IFjcl/8=;
+        b=p2l6nLpyvphmtIs9Zpn7uJdbwg1dS5bTUE1DKDw88exOCv+MmhtST6DpX+DaVUlLCj
+         +ybF25IF0Q0Ui+PhnM6dric5Cg2j9C/Olig6/UP3VaZGP09/IJQZNOB1TsgCjiL4vzt9
+         dCNJ84Lq0x8/el4bBRwMeCmMc4slvcejx4nKJRWec6DtyCQuPhGjTAqk5AsxFQWqcWDl
+         8W5jPHVdUHfTwXJJIGuozFwrGowG/pp08EOVvl55hXWCssjxR1ecFGEd722PBR5CwkCL
+         DCIL1l4oFmigctrkbhsPBP6QZItFMQsBbZjTj9SaVc/qsL22BAjPZXua7ktjqpt0QOl9
+         QZWw==
+X-Gm-Message-State: AOJu0YxB7jkSD1oLyNTE0KL5iIPTusNnh0Kyf75D6WeNmrG5MOP7BpCD
+	OQJXkaev9vBe6ofDOuoEWmxuWN98eD6mLWpbz8Wm4pdBAkFvX1X4dxtOLUDpGHBakKFL91sgIum
+	iDtqBF3Bb31L9BAwUYsRVZzR0S936jhZTk7ceSbyLkNY7qZAN0hy/cIx0fS9LkUMDOILr
+X-Gm-Gg: AR+sD116AVSTjeaQQ7FFzN8W9jxvJhH+1fzEkYUuu7Wm0i0lZTDnGUPt/pl2jxXBVEW
+	KRpPYZGz49D0CWG5JFYkro18pzAvhnX1SyDwH6Y6Ku3w3jC5EqiszEpbFsmdJhvRwwkSXh7N0Tu
+	Hjl4HttXmuKxSMhnFkX3xPTOEH8bfhYruDMuKVimKI76BIzfqavrpm16f2DqKv8ZNVz6IjjV1iu
+	KMOr2bxIStCcDgDOIjmJectvY6r/VFM6YQV03OMUOuJLRSaii1wA1jQwUcHK3JfyaQdRvMOSc+w
+	1PuR7n3vQyh4Mz6mSlgx+OD9TFL5tllnh4P8xyfkSj6jAG8BkwjGQOnhahRkuiS0/TqanoZMQrU
+	jIE6qEnDysKAPZiWOoNE7svPbEfA=
+X-Received: by 2002:a17:90b:1b46:b0:387:e0db:3faa with SMTP id 98e67ed59e1d1-38fbc560f00mr7646269a91.35.1785759056542;
+        Mon, 03 Aug 2026 05:10:56 -0700 (PDT)
+X-Received: by 2002:a17:90b:1b46:b0:387:e0db:3faa with SMTP id 98e67ed59e1d1-38fbc560f00mr7646243a91.35.1785759056038;
+        Mon, 03 Aug 2026 05:10:56 -0700 (PDT)
 Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38fb30a3c75sm3864076a91.9.2026.08.03.05.10.48
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-38fb30a3c75sm3864076a91.9.2026.08.03.05.10.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Aug 2026 05:10:51 -0700 (PDT)
+        Mon, 03 Aug 2026 05:10:55 -0700 (PDT)
 From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
         Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
@@ -85,10 +83,12 @@ To: Bjorn Andersson <andersson@kernel.org>,
         Conor Dooley <conor+dt@kernel.org>
 Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
         linux-kernel@vger.kernel.org,
-        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Subject: [PATCH v11 1/2] arm64: dts: qcom: qcm6490-idp/qcs6490-rb3gen2: Keep wlan_ce_mem and drop redundant wifi memory-region
-Date: Mon,  3 Aug 2026 17:40:41 +0530
-Message-ID: <20260803121042.3313824-2-mukesh.ojha@oss.qualcomm.com>
+        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+        Sumit Garg <sumit.garg@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: [PATCH v11 2/2] arm64: dts: qcom: kodiak: Add EL2 overlay
+Date: Mon,  3 Aug 2026 17:40:42 +0530
+Message-ID: <20260803121042.3313824-3-mukesh.ojha@oss.qualcomm.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260803121042.3313824-1-mukesh.ojha@oss.qualcomm.com>
 References: <20260803121042.3313824-1-mukesh.ojha@oss.qualcomm.com>
@@ -98,92 +98,146 @@ List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: Ki92SsrRxKEhueVBnE2aqjeJeJNiQsY8
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDEwNyBTYWx0ZWRfXzJv0lBfBCoKf
- HC1AUo6YF2FaRaYzmVeI6whWycCRDRoulUQ3crDSN3eCzC1o/l+BE/SN0sJkhPsnSZrBA3Oj4lg
- W0LVWMHHENAahcB3nmAnW774Rp8NJvE=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDEwNyBTYWx0ZWRfXy9vlJxOkhxi6
- WlWZqg0e0LdN/KkzTdzyLgKuMuNys1Ld9SRhg3v6fD4aiACEtj56GdjaCpOAQU2UHt4YiONCbpe
- 9C7KhD6969AUILuVrKUmJUbre7THMwbMErFZkLPmtZkzoGGv2SgRWS3B3OTbgwvVwMRQyxAVDAB
- JY2yUMoX3qrRjGkxAn+MVWyMNYwnQxz3NRSNUYIStj59fY+0rKDduwUC6K6mFX+fnHie/d/j17o
- pE8js8evUGRLx1cXtzf5jgA7FlTXF9BQ0AS/fCFDgH4ziez7Liv1xi5AnVnZFzPif5wPMUWlaZc
- FJKFfLJHEH1MSsuHxEaamtS3x9+eKpnKb2S9WcI+Jz1o0nXMK2CLaCKpHZFM1qAki9X+eX1vhff
- 0sHt4jHsVI67lxHqZ6zxCJce+KtTGGxFWhs0HZXN/AuOuEHjig+MhUgO8IhYoPJZTJ2xj+rBR6f
- zmWW8BfNPRpxRULoeWg==
-X-Proofpoint-GUID: Ki92SsrRxKEhueVBnE2aqjeJeJNiQsY8
-X-Authority-Analysis: v=2.4 cv=bKEm5v+Z c=1 sm=1 tr=0 ts=6a70854d cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=stktXEJXvQgT6foQVzgA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Authority-Analysis: v=2.4 cv=PZPPQChd c=1 sm=1 tr=0 ts=6a708551 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8
+ a=KWviAJoEAPtr9-UugcUA:9 a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-GUID: 09Cl40PfyT8X1Kgvv3rk7fU3_6W_OBk6
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDEwNyBTYWx0ZWRfX4azk7ShlLLtC
+ SvDdWzYlkZWVU0MGGMWl/Oc8oonwgRleb409uY6sOJ6Ud7QioptI9kdiIaNw7PqMIULTlKNSnbO
+ 6/RenBkRCYlUVjVbh7NNt8qpTsKHT7o=
+X-Proofpoint-ORIG-GUID: 09Cl40PfyT8X1Kgvv3rk7fU3_6W_OBk6
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDEwNyBTYWx0ZWRfX9gm/W7w8de/8
+ mEp6jZmnJjM+PMZcT05oIBD2nPThWQJa29ly6pU7udyfGAtHGO2szW/2gAA5y4KyOT+KjaCvcaq
+ ikt1ZzWarjw/V95bxQEeV29fcWm8ZhE3QdFUqWRLK1IIxoXUs0O9tS3AUEiQS0UIqNLXe5TXgdW
+ k7fm31y5XztdBhPzr8XKtB4i/qi7Z9fQ1fr9fwAwRVLEhqGABcnsegbaqpcC4e6rQNEVsVv/lLm
+ GeV02z5vkLj385/T/9O+NC7sZgTWpLMO9EfU8U384W4eMvLP7yqmZhnCCRE58fl5em+GgOTjHPQ
+ uxv0Igg6K9imcd4IM8Tg8rYqeYpCkxBfW9Opolo7AoppvCsv8b0k6Whr9IWKwBvQ6sJgai7gDc0
+ SLC0xlO9gq0SY0PXJvALQdfmXPngQRZb24AKz5g4ADU9RBS7iHKMuVKQL50L5nZL7VCCQdADC8i
+ K1lsflRdEwYbq1ZNxyQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-03_03,2026-07-30_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 spamscore=0 suspectscore=0 phishscore=0 adultscore=0
- impostorscore=0 bulkscore=0 malwarescore=0 clxscore=1015 lowpriorityscore=0
+ lowpriorityscore=0 spamscore=0 clxscore=1015 adultscore=0 suspectscore=0
+ malwarescore=0 impostorscore=0 bulkscore=0 phishscore=0 priorityscore=1501
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608030107
 
-The reserved region wlan_ce_mem is device memory used by the WCN6750
-firmware. Deleting it in qcm6490-idp.dts and qcs6490-rb3gen2.dts is
-erroneous — the region must remain present regardless of whether the
-underlying OS uses it — so drop the /delete-node/ &wlan_ce_mem; from
-both board files.
+All existing Kodiak board variants run the Gunyah hypervisor, which
+means Linux can only boot at EL1 on those devices. It is possible to
+boot Linux at EL2 on these devices [1].
 
-Also drop the per-board memory-region override from &wifi. Both
-wlan_fw_mem and wlan_ce_mem are already assigned to the wifi node in
-kodiak.dtsi, so the override is redundant.
+When running under Gunyah, remote processor firmware IOMMU streams are
+controlled by Gunyah. Without Gunyah, the IOMMU is managed by the
+consumer of the DeviceTree. Describe the firmware streams for each
+remote processor in an EL2 overlay.
 
+Add an EL2-specific DT overlay and apply it to Kodiak IoT variant
+devices to produce a -el2.dtb alongside the standard dtb. Modem and
+media subsystems are not yet supported due to missing dependencies.
+The GPU zap shader is disabled. In EL2 mode the kernel owns the
+hardware watchdog, so it is enabled here. The wifi-firmware child
+node describes the IOMMU stream for the WCN6750 firmware; the &wifi
+node itself is left untouched so that platforms without WiFi are
+unaffected by the overlay.
+
+[1] https://docs.qualcomm.com/bundle/publicresource/topics/80-70020-4/boot-developer-touchpoints.html#uefi
+
+Co-developed-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+Signed-off-by: Sumit Garg <sumit.garg@oss.qualcomm.com>
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/qcm6490-idp.dts     | 2 --
- arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts | 2 --
- 2 files changed, 4 deletions(-)
+ arch/arm64/boot/dts/qcom/Makefile        | 12 ++++++++
+ arch/arm64/boot/dts/qcom/kodiak-el2.dtso | 39 ++++++++++++++++++++++++
+ 2 files changed, 51 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/qcom/kodiak-el2.dtso
 
-diff --git a/arch/arm64/boot/dts/qcom/qcm6490-idp.dts b/arch/arm64/boot/dts/qcom/qcm6490-idp.dts
-index bdc02260f902..6ab1bbdc0a62 100644
---- a/arch/arm64/boot/dts/qcom/qcm6490-idp.dts
-+++ b/arch/arm64/boot/dts/qcom/qcm6490-idp.dts
-@@ -25,7 +25,6 @@
- /delete-node/ &adsp_mem;
- /delete-node/ &cdsp_mem;
- /delete-node/ &video_mem;
--/delete-node/ &wlan_ce_mem;
- /delete-node/ &wpss_mem;
- /delete-node/ &xbl_mem;
+diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+index e05414290d8e..c62a68a57f96 100644
+--- a/arch/arm64/boot/dts/qcom/Makefile
++++ b/arch/arm64/boot/dts/qcom/Makefile
+@@ -165,7 +165,11 @@ purwa-iot-evk-el2-dtbs	:= purwa-iot-evk.dtb x1-el2.dtbo
  
-@@ -1148,7 +1147,6 @@ &usb_1_qmpphy {
- };
+ dtb-$(CONFIG_ARCH_QCOM)	+= purwa-iot-evk-el2.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcm6490-fairphone-fp5.dtb
++
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcm6490-idp.dtb
++qcm6490-idp-el2-dtbs := qcm6490-idp.dtb kodiak-el2.dtbo
++dtb-$(CONFIG_ARCH_QCOM)	+= qcm6490-idp-el2.dtb
++
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcm6490-particle-tachyon.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcm6490-shift-otter.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcs404-evb-1000.dtb
+@@ -177,12 +181,20 @@ qcs615-ride-el2-dtbs := qcs615-ride.dtb talos-el2.dtbo
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcs615-ride-el2.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-radxa-dragon-q6a.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-rb3gen2.dtb
++qcs6490-rb3gen2-el2-dtbs := qcs6490-rb3gen2.dtb kodiak-el2.dtbo
++dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-rb3gen2-el2.dtb
  
- &wifi {
--	memory-region = <&wlan_fw_mem>;
- 	qcom,calibration-variant = "Qualcomm_qcm6490idp";
+ qcs6490-rb3gen2-vision-mezzanine-dtbs := qcs6490-rb3gen2.dtb qcs6490-rb3gen2-vision-mezzanine.dtbo
+ qcs6490-rb3gen2-industrial-mezzanine-dtbs := qcs6490-rb3gen2.dtb qcs6490-rb3gen2-industrial-mezzanine.dtbo
  
- 	status = "okay";
-diff --git a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-index 90f2eebc349f..ba60fccbb63d 100644
---- a/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-+++ b/arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts
-@@ -26,7 +26,6 @@
- /delete-node/ &adsp_mem;
- /delete-node/ &cdsp_mem;
- /delete-node/ &video_mem;
--/delete-node/ &wlan_ce_mem;
- /delete-node/ &wpss_mem;
- /delete-node/ &xbl_mem;
- 
-@@ -1464,7 +1463,6 @@ &venus {
- };
- 
- &wifi {
--	memory-region = <&wlan_fw_mem>;
- 	qcom,calibration-variant = "Qualcomm_rb3gen2";
- 
- 	status = "okay";
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-rb3gen2-industrial-mezzanine.dtb
++qcs6490-rb3gen2-industrial-mezzanine-el2-dtbs := qcs6490-rb3gen2-industrial-mezzanine.dtb kodiak-el2.dtbo
++dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-rb3gen2-industrial-mezzanine-el2.dtb
++
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-rb3gen2-vision-mezzanine.dtb
++qcs6490-rb3gen2-vision-mezzanine-el2-dtbs := qcs6490-rb3gen2-vision-mezzanine.dtb kodiak-el2.dtbo
++dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-rb3gen2-vision-mezzanine-el2.dtb
++
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-thundercomm-minipc-g1iot.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-thundercomm-rubikpi3.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-vicharak-axon-mini.dtb
+diff --git a/arch/arm64/boot/dts/qcom/kodiak-el2.dtso b/arch/arm64/boot/dts/qcom/kodiak-el2.dtso
+new file mode 100644
+index 000000000000..8daf7f02fd75
+--- /dev/null
++++ b/arch/arm64/boot/dts/qcom/kodiak-el2.dtso
+@@ -0,0 +1,39 @@
++// SPDX-License-Identifier: BSD-3-Clause
++/*
++ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
++ *
++ * Kodiak specific modifications required to boot in EL2.
++ */
++
++/dts-v1/;
++/plugin/;
++
++&gpu_zap_shader {
++	status = "disabled";
++};
++
++&remoteproc_adsp {
++	iommus = <&apps_smmu 0x1800 0x0>;
++};
++
++&remoteproc_cdsp {
++	iommus = <&apps_smmu 0x11a0 0x0400>;
++};
++
++&remoteproc_mpss {
++	status = "disabled";
++};
++
++&venus {
++	status = "disabled";
++};
++
++&watchdog {
++	status = "okay";
++};
++
++&wifi {
++	wifi-firmware {
++		iommus = <&apps_smmu 0x1c02 0x1>;
++	};
++};
 -- 
 2.53.0
 
