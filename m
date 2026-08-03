@@ -1,272 +1,195 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 75F78331EB4
-	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 07:56:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 525A73ACF12
+	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 08:03:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785743765; cv=none; b=EZUMWTuK9JVZbhMcceqSanwIIfD5POSMjncqHOeJBatfJZ1HNEVFmrZm0PKnjI0hjD4gjxEPTJZz5z3RoWVtC5Ifo+oIUqlSzvoC7sC5AgnHl9T1g5tnum/pVoYeUiGU36PtzEtLeFWUykqXsvEekNPoJBop5eW4mmia0BegaKY=
+	t=1785744182; cv=none; b=WO4ovvsY0WCnWOFE+rVxfBaK3Z2l6UxqhbJRK5DQqilqMzzw1y0bCrd8uzUkN6ZDHNNXAHqfllt2QJEECg8c+wgAfOazcbKOggo8yLwFMy8Af7M/+wHrAYatHRmD60TmDe7mZ4Ah/1SBV1FeEq9qjncApBzqjM/k35xB1niOGBM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785743765; c=relaxed/simple;
-	bh=EkHkhtZcjH1ZWXi05MLIF8vYqX/yxr5AlwxocmiI1Zs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=HbA6xSaTuWtj1pjy6HbohGQAsSRsVFZO514P0hFP0MWYVi6Z2K31Eqk738k6s5/2lNVr7ra1TZf61G1pVplhsTEAl/PJtoDF388SGKqbp7p4lfJdZZNqyAI5mhb1Jv3jC9VAyXdR+T47Smlwz0DHESmCD8qvaWhYccbwU6BPg0s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=SfTKmqQA; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TYw0t3tj; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785744182; c=relaxed/simple;
+	bh=e0BG+pJE+hg9ad13uORYq52K3Lc469BDks34Ro3IRB0=;
+	h=Mime-Version:Content-Type:Date:Message-Id:From:To:Cc:Subject:
+	 References:In-Reply-To; b=h/aQfqnIWdAeswZ55sfp1prKECpk4FULvkm2aRGb2YmpzubHGNeaIAaeXoYAl5/aODypfXyxMQygYm6uGgS//8roooUPYrdd4vDDjVntUHSyNN8adQnh/mF35Uo41Gbw9G1+T5v8vj+ufawK6ZQ84DHhubQfcmQo1S3elAciP+o=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=0SJ4XK6y; arc=none smtp.client-ip=209.85.128.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="SfTKmqQA";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TYw0t3tj"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6736bgj13957457
-	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 07:56:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=GYEKEsLD5+RSuHyzzYJcx+SU
-	LIwPICEpqweNWaypYq0=; b=SfTKmqQAw2VZPoKIjgc4+k8kTWH+n5Se0dFSVYCL
-	sRQ+SDxD9HVwtRRdVoMNVNazd1rtRUzA5CMy1gTs9LBu2oYHo7Re4NprrKtNAYKt
-	fBW9en0m7c0wJxuAQOqHHwM1Gsb7SBUByq35TCxf91FRn5ug3xR1NdOSUYKxd5Q7
-	CTdRlo04/zp+7SSAMPVl5JQ3cpw4g/wyFqLHK6rlBHXkxfCV4A8tjWhdjPcgJ2wN
-	iTXuPsxprnwN+Tsmmn5h4hVa4/L/XgtNZFuOS6ugd8Bk+a8aP+KfickyrPnBlE+Y
-	Dvre9LUYWZKQ1qgMpEPregvmXAtX/myah0AIPfVvfRWS4Q==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftnvngac3-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 07:56:02 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-92e820609d9so248935285a.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 00:56:02 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="0SJ4XK6y"
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-49554ebb87dso14692485e9.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 01:03:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785743761; x=1786348561; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=GYEKEsLD5+RSuHyzzYJcx+SULIwPICEpqweNWaypYq0=;
-        b=TYw0t3tjr1wf0sVMFW0aCY5bf7G0YcwWjANW71fYU5NUv2WQwsiLmm6JpuNTuvR6cB
-         A9bUx1Vmf7rqyRRZzG47tstuBy5a3sZmv7e3L4zf3utK2uvJxC5P4t/fO7YncbQJVIK4
-         2qdoACahMD3YYAYLHtuC4x5xg8JEwVV8v6IYzuZSzugCkg+mnKNU0VMfzPBqFiqtvNXR
-         xqSfugs5xGasn1SfP7jMZApD7A6zPAR7hnEK+pkSC1wTGdV9zPVk/P2eRAVkzHixpE8r
-         iREDB5xjEXvBxKjQNS4RbwoLIoBjDpyiEDB+2W0+rBh8qnwcxVyO4w+bBMUc50jQNs3P
-         sUaA==
+        d=fairphone.com; s=fair; t=1785744178; x=1786348978; darn=vger.kernel.org;
+        h=in-reply-to:references:subject:cc:to:from:message-id:date
+         :content-type:content-transfer-encoding:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=vc9B/yx3888mzr7CTqfaAlTdFjWQOBw2cbII84IGS9Q=;
+        b=0SJ4XK6yrMNGVIvQdST84xuRLb9JAR/HzzbblFLsf9gzdyGcWcoYQnKnJ0kbdmR4sT
+         Xu+ptCRJtB7m8BCWcls7CBd1PbdGGXw7R8z1HENvQBlVB1pLmHk8LrDnARUoLDG6fqzy
+         SqwsZLp9XjicAFZ+/Bh1chvOI5f68nw/x8KmWF8FHV6g3nIk7iGFqjhl4rskf9hj1HHA
+         PkpJ52vpZvIOn+TG9WNDQip0VMDm4qUFim2qB/0AoErPpt0gebNnQcp8jDW13BIOuyyl
+         +gJafvD4GuVbqipkboweQYQi/UaULFdxoR27WmPQjCc/6eCidVmg+AkqbgcWQ7g8UQIC
+         RqxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785743761; x=1786348561;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
+        d=1e100.net; s=20251104; t=1785744178; x=1786348978;
+        h=in-reply-to:references:subject:cc:to:from:message-id:date
+         :content-type:content-transfer-encoding:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=GYEKEsLD5+RSuHyzzYJcx+SULIwPICEpqweNWaypYq0=;
-        b=g/Nu7ZG0tMRMSllk9OJepLtvqQhbDL8b57W7AR1cbsPAK+7/2W/4ad0oo7sNmjGAWs
-         UJlq68S7OvfY5eAHsqYQd2NDj3CuYbHSNeriZGKK0gsNlUkzHrWSPfoqb3oyn4D7+ih7
-         H6XFwvdO4O8d9HA15et7aWectQ0swr2AOxk6BZ50XKSzVYCF3rgL0HguAnxfaguq6xbP
-         ZnpVz0/jMoCzCPpoHjLPsUjvsaCFuWCc8g+q+hvSOzUeXvhNi+MTFjZK/lQBgDiyzZd4
-         +LHOI89frAsPAQpOnoTeuYeIh9Wle+LpkMZK+RFpcWDmFXaWI3Gssj8SHb8iwU/E1qJK
-         OTTg==
-X-Forwarded-Encrypted: i=1; AHgh+Rou48gGzayw67zsWlSiOauZCz284iYpGeiQNNPYl/KOck0z1joLuQEYJ+28iSeGwqJBix5C/95QfiddEr9Z@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz1YWdILAB0F9pQoTvu573/yXTBD/QmPV7V/bvzinSxH+2B+be+
-	atZAQMmmCwn6WEb/2n/Mg/pPZf08Va+ctYNUmlB2qpJ/4Wobb14MZSbz+yYpPQ1xulwar7QGOZP
-	P/Ra4sgwdTQdlc+yUXnzznRAo3OJnG2wkgWirghtO5f7B5G+M+US/A2kG4yEaxR+jYKof
-X-Gm-Gg: AR+sD104OopmRtdDb/5ZOwh5l6+hRnCaiU5U0eOzsvG1DUVHJX2myJ3GsZP1yBcVRN8
-	Yts8lD+mL/LqtSvYn70GkCkhAGc0mQOySRTf8mH/Gf2OiVh91KUHhSq8RLZKwHIVa0RWMj5bGKf
-	jUI5tMls9lkUEu/lSs6W9oyF5JAvj3sotjL4LxLzzITzHcH3pglwbeuWI3WJb3Guq4TiFzNaCv5
-	yhNmqQW6R+ExRKqcVXJD6gCQh+Atbbc1BJKF8bZNB77AjoRlyUqp7cT6lV8VijAP1ljAbecoR2n
-	iPpa8aB50BWo6NMoB19XjtU+JQQzqie6sPBNECi0zlXpK88b3xRD4fflKyJPQGEdpwuNrChQCHX
-	tXKYVM0tUuD0d9JX7CXEWaRzgcG+MIxoegWWJMzouJN2D18Y8NKeb5lR3rmuOUOA=
-X-Received: by 2002:a05:620a:1b9c:b0:92b:1233:99e with SMTP id af79cd13be357-934a0a77725mr1890556185a.35.1785743761290;
-        Mon, 03 Aug 2026 00:56:01 -0700 (PDT)
-X-Received: by 2002:a05:620a:1b9c:b0:92b:1233:99e with SMTP id af79cd13be357-934a0a77725mr1890552885a.35.1785743760823;
-        Mon, 03 Aug 2026 00:56:00 -0700 (PDT)
-Received: from YUANJIEY2.ap.qualcomm.com (Global_NAT1_IAD_FW.qualcomm.com. [129.46.232.65])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-9349bc25db2sm618024485a.2.2026.08.03.00.55.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Aug 2026 00:56:00 -0700 (PDT)
-Date: Mon, 3 Aug 2026 15:55:53 +0800
-From: yuanjiey <yuanjie.yang@oss.qualcomm.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org,
-        krzk+dt@kernel.org, conor+dt@kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        tingwei.zhang@oss.qualcomm.com
-Subject: Re: [PATCH v2 1/2] dt-bindings: arm: qcom: Add HAMOA-IOT-COME board
-Message-ID: <anBJic0f2SPRi6RR@YUANJIEY2.ap.qualcomm.com>
-References: <20260727070758.528-1-yuanjie.yang@oss.qualcomm.com>
- <20260727070758.528-2-yuanjie.yang@oss.qualcomm.com>
- <20260730-alchemical-phoenix-of-excitement-fff9bc@quoll>
- <amsfSzgMArno9zRH@YUANJIEY2.ap.qualcomm.com>
- <2eb33f53-2320-40dc-8098-79fc4f48af8e@kernel.org>
- <28fb7750-bd46-4f3f-a3ba-7cc1fb88b235@kernel.org>
- <anAx4kqb4PwEImeE@YUANJIEY2.ap.qualcomm.com>
- <fe9d0f2b-3a86-4950-ae4e-fa5182706a38@kernel.org>
+        bh=vc9B/yx3888mzr7CTqfaAlTdFjWQOBw2cbII84IGS9Q=;
+        b=Xl6a0kTYfj5d07SYNKKazaMQK6oFDBRqXvI5mcsMDBXE0NrEMY8BckvykImuINYV2q
+         qptof8nxsoQVibOUSSg8o8CSHK4HGHVhYhPK5P+dj3UThPL00KS67mw9Q0ll4uQxCD9r
+         pp1N6rm+fAsunm6BxyjwVDJCsY7BT3EU5th0E32owip/3x2p4RMeAW0BWPjxa0Xpxa4s
+         6mEf7gWSQ7ky0UuHsVR+f3aqHb7MR0U9/WXeL7fGQ139sR8fS4ZjhqVVHtMM0xCmMCnG
+         GV7lcf52JWUvO18VLKQeyCpirjFViQRDYa9xiVZbIaOSXBolRC9Tww8mTTpqnsyYMw8u
+         NuZw==
+X-Forwarded-Encrypted: i=1; AHgh+Roos9T16mU2wjSD2Ipkvx1VAcA1yXlU72mJ4M1QTdgXveUze74PoQw8NCQvE9SJCJS972hndW1AbjE5rQ/D@vger.kernel.org
+X-Gm-Message-State: AOJu0YxgLEsHomu2zqP2aU/1BYzWQcy6vwmVzsYX0sgxGJL61ndjaPy9
+	npTxy6ajujQWT5XKp5nALdvFkLo1SFVnq1An5JMagblz7sDWNPvQpDj1n2WF4OebUcI=
+X-Gm-Gg: AR+sD10cn2UAK/p4dVKUjxN6CRSYRpfgvLsHzBbGgxIcIyMyAylDI3vfr3yIJw7LGf/
+	o+bDGw60VYr3XvCJGQWzSLLFpUqRTUeWPLVRRs22UC8c5JXfEOuJhZgLN1nFH4eGwGabb1JmpXl
+	6Nbc7BZgweE8j52gdkBHaM/Slt3QlADJ3vRvSU5uotZVjiLwGoTRKj1xXY0Nq8GX+R3fQ2+m2TS
+	fiRGD5wgFhT1mtpA3QIh2Rc1jFwz/79DxgIq9I9iz9XNrQ5QbUwIh3Ad0Skd6eXT6TIB9nW0Vzl
+	EWqqNjKzTjJdsQKF8GfyOLR1llhki40BVGf+Ay5O1H2VRaRBDWEAyTsGITyMABmEw6Qrn9qPs6l
+	gaQmzQ48ui/PWCUOfYH8brdhwJu52NXcadGPoVbODo5KfYCXXfv4GyGjCCJ3c2arbMrtEphE2g7
+	pXnLKxMXdDfU/UTnLDejdltsy46cxCWQjQKKvF/2EKjSrTbb1nfi4zPDtVr6A8MlejSw==
+X-Received: by 2002:a05:600c:840f:b0:493:c42e:5be0 with SMTP id 5b1f17b1804b1-4980c60705amr179044905e9.0.1785744178527;
+        Mon, 03 Aug 2026 01:02:58 -0700 (PDT)
+Received: from localhost ([213.208.155.167])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49808691014sm211742535e9.11.2026.08.03.01.02.48
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 03 Aug 2026 01:02:58 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <fe9d0f2b-3a86-4950-ae4e-fa5182706a38@kernel.org>
-X-Authority-Analysis: v=2.4 cv=aoaCzyZV c=1 sm=1 tr=0 ts=6a704992 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
- a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=TJUqZQk6AAAA:8 a=EUspDBNiAAAA:8 a=m8ToADvmAAAA:8 a=CfPy2gZGbKdSMgFAa3AA:9
- a=CjuIK1q_8ugA:10 a=PEH46H7Ffwr30OY-TuGO:22 a=Q0W1slMkcave-rSCEGgY:22
- a=kCrBFHLFDAq2jDEeoMj9:22
-X-Proofpoint-GUID: LPgL3mAd3fyYkTr9gzu7NmX0S6YlR5jB
-X-Proofpoint-ORIG-GUID: LPgL3mAd3fyYkTr9gzu7NmX0S6YlR5jB
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDA2OCBTYWx0ZWRfX3k9VQbGfcrfZ
- hUdCZb5kTtGiFF/yz7cH7afHioEMaeueYqSm6Y/h1Jh2WzZQXmZ0YfKtR+1foAkSEOvBd7QVMKh
- fCHZkQohxUQEzt9tBptW4nFDdCOP4fbnPoDlNK2VMZjmRKHmhQxZYmmmltissRJ4xSsL/OE3Mk1
- OstKFDe0wYB7pKgn+PetwqBbF0mxoxWkGR3XozWp5/IDv6q56y2ENuvv4ClqHrNGMThHAFPtOGx
- ImnbdpbksCi/jEIvPSixaJLsnIUXLmAh1oL7g8MCFiO74f+ISTPhFtjvD2IA7514TUycAUaA6t/
- dBwAG1khSSQrcF0NIYIiDqenbtpiZqVHpfTYP7c4FCNRQvTLxJToclRocW1xGE9FiW0rdmkNkJv
- EoUEem1scgSXdIHB8Xwm7Ow1XR0pSYYubPn+REgtLPPKjH6EttYU/yGFtBcXk2AQl9ySpfrIYMW
- 3/rKEBH+4f9zKSkSo5Q==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDA2OCBTYWx0ZWRfX6zGGBd2vuGxo
- 9Qg9Ex9rYkqAqhNIkoX7LF9+q5L79jsq10/MNNQeBISZ4G5flc7bfpWDrBjeSvSia/NZ1yXo/6X
- 9hvxaA7VqrlWCgp+O+8/JnqKmtM2FtQ=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-02_06,2026-07-30_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0 suspectscore=0 priorityscore=1501 adultscore=0
- spamscore=0 lowpriorityscore=0 malwarescore=0 phishscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608030068
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 03 Aug 2026 10:02:45 +0200
+Message-Id: <DKF5H4I2VHSD.HZXLHCU4TDXV@fairphone.com>
+From: "Luca Weiss" <luca.weiss@fairphone.com>
+To: "Jorijn van der Graaf" <jorijnvdgraaf@catcrafts.net>, "David Heidelberg"
+ <david@ixit.cz>, "Krzysztof Kozlowski" <krzk@kernel.org>
+Cc: "Andrew Lunn" <andrew+netdev@lunn.ch>, "David S. Miller"
+ <davem@davemloft.net>, "Eric Dumazet" <edumazet@google.com>, "Jakub
+ Kicinski" <kuba@kernel.org>, "Paolo Abeni" <pabeni@redhat.com>, "Rob
+ Herring" <robh@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>, "Bjorn
+ Andersson" <andersson@kernel.org>, "Konrad Dybcio"
+ <konradybcio@kernel.org>, "Luca Weiss" <luca.weiss@fairphone.com>,
+ <oe-linux-nfc@lists.linux.dev>, <netdev@vger.kernel.org>,
+ <devicetree@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
+ <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH v3 5/5] arm64: dts: qcom: milos-fairphone-fp6: Add NFC
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260726222405.153008-1-jorijnvdgraaf@catcrafts.net>
+ <20260726222405.153008-6-jorijnvdgraaf@catcrafts.net>
+In-Reply-To: <20260726222405.153008-6-jorijnvdgraaf@catcrafts.net>
 
-On Mon, Aug 03, 2026 at 08:36:11AM +0200, Krzysztof Kozlowski wrote:
-> On 03/08/2026 08:14, yuanjiey wrote:
-> > On Thu, Jul 30, 2026 at 12:23:56PM +0200, Krzysztof Kozlowski wrote:
-> >> On 30/07/2026 12:08, Krzysztof Kozlowski wrote:
-> >>> On 30/07/2026 11:54, yuanjiey wrote:
-> >>>> On Thu, Jul 30, 2026 at 08:51:40AM +0200, Krzysztof Kozlowski wrote:
-> >>>>> On Mon, Jul 27, 2026 at 03:07:16PM +0800, Yuanjie Yang wrote:
-> >>>>>> Document the device tree binding for the HAMOA-IOT-COME board based on
-> >>>>>> the Qualcomm X1E80100 SoC.
-> >>>>>>
-> >>>>>> The platform consists of a system-on-module (SoM) mounted on a carrier
-> >>>>>> board. The SoM integrates the core system functionality, including a
-> >>>>>> SiP containing the X1E80100 SoC and its supporting components.
-> >>>>>>
-> >>>>>> The COME SiP hardware is effectively the same as the SoM used on the
-> >>>>>
-> >>>>> Effectively the same or the same? I googled for "hamoa iot come" and it
-> >>>>> gives me zero results. Provide some URLs describing both.
-> >>>> The same.
-> >>>>
-> >>>>
-> >>>> Here is pdf about the "hamoa iot come" SiP and SoM
-> >>>> link: https://advdownload.advantech.com.cn/productfile/PIS/SOM-6820/file/SOM-6820_DS(052925)20250529110758.pdf
-> >>>>
-> >>>> The preliminary figure provides a complete overview of architecture, including the SiP, SoM.
-> >>>>
-> >>>> In Block Diagram
-> >>>> hamoa come Qualcomm X-Elite SiP Module is the SoM on haoma evk.
-> >>>
-> >>> I see on that PDF "SOM-6820", not "Hamoa IoT Come".
-> >>>
-> >>> I have an impression that all this and previous bindings and DTs did not
-> >>> match reality at all. Or did not match how upstream works with such
-> >>> hardware.
-> >>>
-> >>
-> >> Adding more: I did ask in the past to properly represent SoM and
-> >> carriers. I pointed to other examples how this is done correctly. I did
-> >> look now inside and found absolutely no reference of actual product
-> >> called "Hamoa IoT" or "Purwa IoT". For sure there is no "Hamoa IoT Come"
-> >> SoM (sometimes COMe appears).
-> > 
-> > I check the hamoa iot evk board page:
-> > https://docs.qualcomm.com/doc/80-77183-262/topic/Getting-started.html#get-familiar
-> > and 
-> 
-> It says it has "IQ-X7xxx module".
-> 
-> > purwa iot evk board page:
-> > https://docs.qualcomm.com/doc/80-80022-297/80-80022-297_REV_AC_Qualcomm_IQ-X_Series_Evaluation_Kit_-_Linux_Bringup_guide.pdf
-> 
-> And this is "IQ-X5xxx"
-> 
-> So how is this anyhow related to Hamoa IoT or Hamoa Iot Come?
+Hi Jorijn,
 
-Our current naming does not clearly reflect the specific hardware document it refers to.
+On Mon Jul 27, 2026 at 12:24 AM CEST, Jorijn van der Graaf wrote:
+> Add the Samsung S3NRN4V NCI NFC controller on i2c1. Its XI clock is
+> provided by the RF_CLK2 PMIC buffer and gated through the controller's
+> CLK_REQ line on tlmm GPIO6. PVDD is fed from PM7550 LDO20, the rail the
+> downstream driver switches for this chip.
+>
+> The enable line is routed to the chip's power-down input, which is
+> asserted high to turn the chip off (the downstream driver treats VEN as
+> active-low on this design) -- hence GPIO_ACTIVE_HIGH, unlike the
+> exynos5433-tm2 wiring of the same driver. The pin is pulled up so the
+> chip stays off while the line is not driven.
+>
+> Assisted-by: Claude:claude-opus-4-8
+> Assisted-by: Claude:claude-fable-5
+> Signed-off-by: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
+> ---
+>  .../boot/dts/qcom/milos-fairphone-fp6.dts     | 49 ++++++++++++++++++-
+>  1 file changed, 47 insertions(+), 2 deletions(-)
+>
+> diff --git a/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts b/arch/arm6=
+4/boot/dts/qcom/milos-fairphone-fp6.dts
+> index ebdca0e2d2f3..a1b86e4092fe 100644
+> --- a/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts
+> +++ b/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts
+> @@ -601,9 +601,29 @@ &gcc {
+>  };
+> =20
+>  &i2c1 {
+> -	/* Samsung NFC @ 0x27 */
+> -
+>  	status =3D "okay";
+> +
+> +	/*
+> +	 * Samsung S3NRN4V NFC controller. XI is driven by the RF_CLK2 PMIC
+> +	 * buffer; the chip has no oscillator of its own and gates the clock
+> +	 * via its CLK_REQ line, so the clock must be voted on in response
+> +	 * to it.
+> +	 */
 
-Maybe "IQ-X7181 evk module" and "IQ-X5121 evk module" can would better reflect the actual
-hardware configuration.  
-just like:
-hamoa-iot-som.dtsi --> iq-x7181-evk-som.dtsi
-purwa-iot-som.dtsi --> iq-x5121-evk-som.dtsi
+I don't think this comment deserves to be in the dtsi, having these
+details in the commit message is enough imo.
 
-IQ-X7181 evk board: 
-do some dts name fix, just like:
+> +	nfc@27 {
+> +		compatible =3D "samsung,s3nrn4v";
+> +		reg =3D <0x27>;
+> +
+> +		clk-req-gpios =3D <&tlmm 6 GPIO_ACTIVE_HIGH>;
+> +		clocks =3D <&rpmhcc RPMH_RF_CLK2>;
 
-hamoa-iq-x7181-evk.dts
-  iq-x7181-evk-som.dtsi
-    hamoa.dtsi        
+I'm not sure about these, the NFC chip is connected to PMK7635 CLK7_LN
+which is part of the LNBB clocks, CLK1_RF - CLK5_RF are the RF clks,
+CLK6_LN - CLK9_LN are the LNBB clocks so shouldn't this be <&rpmhcc
+RPMH_LN_BB_CLK2>? But I honestly couldn't find anything in the
+downstream dts so maybe either these clocks are always on anyways or
+something else is going on there?
 
-> 
-> > 
-> > And I see below info:
-> > 
-> > Dragonwing IQ-X7xxx EVK components:
-> > The kit includes the following components:
-> > Dragonwing IQ-X7xxx EVK mainboard
-> > "System in package (SiP) "
-> > 
-> > I think the current naming of hamoa-iot-som.dtsi and purwa-iot-som.dtsi in the
-> > Linux device tree is incorrect. They should be renamed to hamoa-iot-sip.dtsi
-> > and purwa-iot-sip.dtsi.
-> 
-> som/sip does not matter here. That's not what we discuss.
-> 
-> 
-> > 
-> > hamoa-iot-som.dtsi --> hamoa-iot-sip.dtsi
-> > purwa-iot-som.dtsi --> purwa-iot-sip.dtsi
-> > 
-> >> Look, this is a SoM:
-> >> https://www.toradex.com/computer-on-modules/verdin-arm-family/nxp-imx95
-> >>
-> >> And you can find corresponding bindings and DTS in tree.
-> >>
-> >> I refuse to accept more of this fake products trying to imitate well
-> >> known industry standards in their own way and effectively pushing some
-> >> downstream crap, just because that's how we do it in downstream.
-> >>
-> >> Unless you can present us with such product details matching what you
-> >> send, I will be NAK-ing these and future patches like that.
-> > 
-> > Thanks for your tips:
-> > 
-> > I check hamoa come som page:
-> > https://advdownload.advantech.com.cn/productfile/PIS/SOM-6820/file/SOM-6820_DS(052925)20250529110758.pdf
-> > and come board page:
-> > https://www.advantech.com.cn/zh-cn/products/1-fc23ff/som-db5830/mod_16b1a718-27d6-4a4c-8684-e8f2a8e9c57b
-> > 
-> > So I should rename come binding with real devices name:
-> > binding should be:
-> > 
-> >       - items:
-> >           - enum:
-> >               - hamoa-som6820-db5830.dts
-> >           - const: hamoa-som6820.dtsi
-> 
-> No clue what is this. But the links above are Advantech.
+Regards
+Luca
 
-correct here: 
+> +		en-gpios =3D <&tlmm 56 GPIO_ACTIVE_HIGH>;
+> +		interrupt-parent =3D <&tlmm>;
+> +		interrupts =3D <31 IRQ_TYPE_EDGE_RISING>;
+> +		pinctrl-0 =3D <&nfc_clk_req_default>, <&nfc_irq_default>,
+> +			    <&nfc_pd_default>;
+> +		pinctrl-names =3D "default";
+> +		pvdd-supply =3D <&vreg_l20b>;
+> +		wake-gpios =3D <&tlmm 7 GPIO_ACTIVE_HIGH>;
+> +	};
+>  };
+> =20
+>  &i2c3 {
+> @@ -825,6 +845,31 @@ &tlmm {
+>  			       <13 1>, /* NC */
+>  			       <63 2>; /* WLAN UART */
+> =20
+> +	nfc_clk_req_default: nfc-clk-req-default-state {
+> +		pins =3D "gpio6";
+> +		function =3D "gpio";
+> +		drive-strength =3D <2>;
+> +		bias-disable;
+> +	};
+> +
+> +	nfc_irq_default: nfc-irq-default-state {
+> +		pins =3D "gpio31";
+> +		function =3D "gpio";
+> +		drive-strength =3D <2>;
+> +		bias-disable;
+> +	};
+> +
+> +	/*
+> +	 * Pulled up so the NFC chip stays powered down while the line is
+> +	 * not driven (it is the chip's active-high power-down input).
+> +	 */
+> +	nfc_pd_default: nfc-pd-default-state {
+> +		pins =3D "gpio56";
+> +		function =3D "gpio";
+> +		drive-strength =3D <2>;
+> +		bias-pull-up;
+> +	};
+> +
+>  	sdc2_card_det_n: sdc2-card-det-state {
+>  		pins =3D "gpio65";
+>  		function =3D "gpio";
 
-      - items:
-          - enum:
-              - advantech,som-db5830            
-          - const: advantech,som-6820
-          - const: qcom,iq-x7181-evk-som
-          - const: qcom,x1e80100
-
-
-Thanks,
-Yuanjie
-
-
-> 
-> 
-> Best regards,
-> Krzysztof
