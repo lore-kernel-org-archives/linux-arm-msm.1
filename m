@@ -1,85 +1,88 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40D0336A34D
-	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 10:46:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A80F436A34D
+	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 10:46:32 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785753987; cv=none; b=HRyjkKSmIgiGfxcGwhx0UM/nJCDxri1xFXF0LaEZipSP9xJdu8XitLE0T5Xk22btPLJqJI9/Vk8qte2Dm+ySCWRwjHoOWY+IFy8EkVjYncZ/a/LeZO8NjjhaPVuWsWARjtCQPnWM73ZP7YDSxVa45Br7snvAVmGeDq8esQ+tw9E=
+	t=1785753994; cv=none; b=G/e9WKonUqcr1jGsQ3Ckr66ED/GV8CCWnzkH+Ee00vlRuNycnNyf1yzoXBBTnlMZHg2D+katkr58VO44wB6yN4cEpELlQsI0hKoKsuN94WWiXBodUV+oCeuA4GdvvX3JrEqtuU+BtwJV6Zk8IOmr4m5YG5eizn8yZPZDdcZzn5g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785753987; c=relaxed/simple;
-	bh=BD1HWuRr1N0w1TGuLYUCJRH3Czqul1pwUwN9qI3ORiw=;
-	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=lYYSjAGRG3hMYG7rsvvJvSM2DaPwWUHyj0c+lb6mIddkj4AdxGRnFH8CaoOxMsPDUU+ges027aJXhIr0dmEW3i8HNMnFB7Q+WQzV6EVAJhJbFaioWqWs+JlJ6JYN/s72Q8LtZa4bFOMYVYXMPyjIw3I0UoPskYxeTtgLw0bQ4IE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=HkRb/YzF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ADcKu+ye; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1785753994; c=relaxed/simple;
+	bh=IbwG9kHZnawTbsgRLjU97u4gzWRHSSuxX21hSvKDT5U=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=j8O202qU3gmKV6uzgkPZqlEAwXhz6JNKhwdiDJ75dLYZ9e7C8qw/8qJqmzT/XPRLS/sD9djsMkH6Z+In1/Ujhm26jmFIvaNytRr9P2XB59RZGuDAjlDl8tB+hCnbpIwl8okLhd8f2Kkg4/LpNNvLo2CJs4xYOZu1AeUfqZyMaZg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DJiFIaIr; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=RS9Y1ODR; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="HkRb/YzF";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ADcKu+ye"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6736SCvX250196
-	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 10:46:25 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DJiFIaIr";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="RS9Y1ODR"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6736SQcp052493
+	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 10:46:31 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=/lhsWmGHBsd0jYl/DiV/YP
-	otANEc8T5/IByKjrGNTPE=; b=HkRb/YzFpIAPflnRmr3/yDPZgkUCxzVkUGADlA
-	TRTYYkDTL8Hsq6ytv7Nwvv6QSX0fUTxZKHtHKp5ouLybTgQaEPAOKD+6SMJgAINP
-	JW1h8qi0glQBWspfBEYnPJFioP1p5pEtrgGbxkDrTRWVKZ7Q04EcsqWWnFRXvXn2
-	i0D87xKtC42PiUTW2X2IEl/xk2gjxaYP2hGny0urnND4jvI+T8GHPFP1Fu3D09WS
-	eftY2zRmDyqI19TfMiAcLSUKYzGYf3uj24D3EgaSM5QQDgPals1oTryF+hF2E78V
-	UtujAdprM0ap7ZGOU3vE2yhkH65nRAdtsi5WSW1qbRsdEbHA==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftnrd93mu-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	TZZ9yrQc+ehot+ZdvZIBeZ57GDuCcRUeTsq9WWzRl78=; b=DJiFIaIreUdz4ZTB
+	IqNBDkRCNiOEmz6yOIouneaiIerJ+rLTc012EvpL3ajSBKngg1BmhFpZ9+elYbcP
+	vy40320NkaeF9xFv0y3g7UmZszdUrur/1kLumbXXTq93+PvinpNIgvqL+uVgA1FR
+	DnUDoLSRwVO9aZdrtKCfOKAK7Mwz32dJXxZ9JGwaM+mN+Zryr0H6b5tM4n3lOLzH
+	23FB0W4857wUeukPD01nMB0Vtj0QNbM/T0PZqPDVDZ+lH6bM8P7Q7kdhyckFgAI7
+	VDzKMdiC4/ZlPXzMguWNnBVx+wSVvF807szA3TeyzrCNFOs+FJA3IqUTf5MFNiut
+	M6EQXQ==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftnrb93h1-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 10:46:25 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-ca860baea9fso8396199a12.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 03:46:25 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 10:46:31 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38ea32e57e2so2117458a91.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 03:46:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785753985; x=1786358785; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=/lhsWmGHBsd0jYl/DiV/YPotANEc8T5/IByKjrGNTPE=;
-        b=ADcKu+yeAAsesO36AGBYi1MIXR9/8VsADR9E64L2MFvI8ERX/D5YlkaEUpx5uP9xpf
-         ElIa/xNMJ5j1EnInidSixOLa9hfIVPSflbKR9s0tp0BB0bncWpA96KShUPaiP+Boh5yR
-         e1ZgRozGjvpHazPmLkGMnc+JLFmC7E+lzSZSePBQDeJsdrm7/sr/6CED8HDyndBRK2I9
-         LrljfZDHOwIbO4EN0H7qDuyC1kftqVqvIa0IoUqbbEYlGHTxJkWDbBOglaDnQc1lNThP
-         UkxOfBdd/0aRdQ0Nzt38BkLGbB5iBfm6fDoZUqgSCjwQwHwfs6N/LNKaNoMWZ2sX1yAP
-         bPXA==
+        d=oss.qualcomm.com; s=google; t=1785753990; x=1786358790; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=TZZ9yrQc+ehot+ZdvZIBeZ57GDuCcRUeTsq9WWzRl78=;
+        b=RS9Y1ODRGrVKfWRa2i+RHFaO3ptC/mnD8SjN2hnEfKnpjT+lU5g4lnfkljegU52kZT
+         nHbKf7JlKbLhRcrHGjKIiDRNz5OE7cqMQAb05YpbOOnXtC73AKpekFBbefnclCThRbbP
+         9KODzSJe+zwaXg5rkG/dvoOEGFiqULv3Q7aVG4El+On2PVVEPxYy16RPygO6+aRFjDly
+         9qqsbR3t5x+53DYN7tKbdw35jadGASvryQK+TwX5BefwVj2sbRTj1iDIw6o2YVNoZ9H8
+         AyldilV3M15nZ2l5zSDh4DAniOPXIColM08jbm6mGQDu0FzFpISMQ8zmz2KeZZNHFRnc
+         uF4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785753985; x=1786358785;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=/lhsWmGHBsd0jYl/DiV/YPotANEc8T5/IByKjrGNTPE=;
-        b=fVWNMh0frXi+TyGxi/b1rMpdCUzvUV3O22rC6zrVoeNbnAgFQLlMG4ro+Y1ADIv5UQ
-         yLLRwGklDABcsSi/aibHiYSXpGa0PBnPXd0T9agONsm+6pLW7Y007uOVXbzdNDS6TBtj
-         8/C98rp+mRqdLmeLtW08rnEMKh95ZWMYd2BiYLH0iJFeh74BBgvIA4MXgHV+X+CrYACI
-         G4doHe/JCToQsDiylYyIvrbG0QqquC3q0eTWUZU1Q/vhetmtPSIN0ldRpWFbvxY6cMtC
-         mj18uIaTk3MOORSx7dEnjYiTxvWdCXtqpOf75sI7hEFjW6FcpTHLG2uKFzVc0YQxwJZj
-         A0qA==
-X-Gm-Message-State: AOJu0YxsJe0eZ0k8zWiuCEft1nyzN8pOxYjU8d9f/gWSKwWKqmfReGir
-	8qszhpBOy6DIGuqV4LU7KPwphmvoXjas8Bv6u/NGwvBAxYnEYS+OFcEJy2wcGKAvFKc+4pZVgRF
-	7tjLfe2Y2UvtMZ2lg8MXbknB5gL1a34AwopqNBCU+24PBan48QEsgmfo+uWODLBKuSyTc
-X-Gm-Gg: AR+sD10Wjg4qwLDFm/KFfKFQHGGFQg577+gYyBaU6mGe6D0LcIt6ElC42bbwDSIftDl
-	FIWaAfBT6/gdyrywuyIcv5a6LjwN5hGTwSa921x9JPvfce005X4pb052IhVQeRL1cumyro5e90x
-	y/4rDAPqdg/L9HxURZX/UuDN1+4CQNT81F3SVnVSMIcBh8UdOuaF4gU5POa1A/h7+chjQyGuwhJ
-	KtdMgoYRh2d5gRrNJ1ZqRMnHGGBJ2p94xCCsi2B+bk4PwqAXyKgcs3k9BhsNtWez8Q6zTZeEC0S
-	XX8cf8QhFVGbv3y/1HlVltdhCmAXtDNre1TJgHvcpN4+uHe8p+bHIV4+JYXw5sJXVacXw6tL13z
-	bU2zk5bcC6buUHCrjXv5W64Kouqp6tcPwn5kpw/jNqtYIjw1v+kmuX9QbwPwNFcPnUFSubpauhn
-	XTaHFqtDTkd83WyoOvKyAqQDJGY4NFow==
-X-Received: by 2002:a05:6a21:510:b0:3c3:724d:ae7a with SMTP id adf61e73a8af0-3c92a518b52mr10054318637.9.1785753984579;
-        Mon, 03 Aug 2026 03:46:24 -0700 (PDT)
-X-Received: by 2002:a05:6a21:510:b0:3c3:724d:ae7a with SMTP id adf61e73a8af0-3c92a518b52mr10054283637.9.1785753984133;
-        Mon, 03 Aug 2026 03:46:24 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1785753990; x=1786358790;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=TZZ9yrQc+ehot+ZdvZIBeZ57GDuCcRUeTsq9WWzRl78=;
+        b=mIIxlOyKCCAGBKyGsX/apOhdiya4bEVgvOvcx5KIgMW0qtwGQ12PsvO1hEO75cFiTb
+         zT3qzav422NEDDjBhWSIUCXIoHHJZcqltBKR/5rO+Rq/bhXuKLw2Itx6nTkOdO8Li6B1
+         cydWNY+BojtC+F2l9gHsxQdzqhLtSVr6502MhEn3Fio9pcfn4sVkP+4SiMWIHCrF2sRm
+         xZtu9BucfgfKKbjkWS6EiUHWxlg157n9RxoSjbXmbKn/0fTpX4BUOiKdZunNQ+uG3Qv1
+         Kyn4phR0IagStGX3l1iw9zehTqPUAGDphS+2CZ8JFdSP7IsGLGt2rVm7zii3kSAi6Uek
+         Lrvg==
+X-Gm-Message-State: AOJu0YzhnROLLehJwYgfgh1wzVWIMHwcos8W69NPcFkRJ2ROnlHF0kcL
+	GW/1f7Bag754UFLZaXcDqYAjH5KLdmYcVS6/wJgMgnVYHJO9eAz4rPJXaD6gpw3qzHjzVi2Gh4q
+	440X2YoYR7XcbjmbKMbdotAUQMUy4/Qo9+hZ8DkY3O3o9Uhj4qtXPAoinIy6TPxSKpy/g
+X-Gm-Gg: AR+sD12bzdQ4HYzPBT+5/NMLa9sX3fi8hRkmpfZ/nWaOupB98rCCGLoIgHmE+6oUw1y
+	nWCCB8WYaxm6kSLidO+iIMptKMQdqJlFnZuWA2Oos7s3ZLk9j9iAVJra2mUIAVHsqC1tS6eZTmB
+	3WROxj1xJ22SvntMWzAhkXpB2p4RVCOAo6SVUkRtgBPeoV/INQ/WJ1TRj4rMz2xPfYsjB8/v9dy
+	RgS9aGjGMuVO7VEbCr0+uHxZuLhQhb3O5hDKpjaVuRzKRPDvtPoh9uBnr/7ZeEwX70SQyZIPXAr
+	n2uMv8I3JK5w0rwvyhDiHkcefDKk992p5ub64a2PRQ/9vwxcyBgGMDljmESPYC2oreSYrsZ8c5k
+	XXnzbP8oHeMA7Sc5+J+GQvz4PuLVK6OSvsbcB7rihrlnTAs5OCJZf4zG97TprHYGnn2SGCY5jMX
+	6OI49rzMxsiE6akGkFIP0ij9cgoiOS1A==
+X-Received: by 2002:a17:90b:5143:b0:37f:9ce2:348f with SMTP id 98e67ed59e1d1-38fbc506b07mr8368080a91.32.1785753990350;
+        Mon, 03 Aug 2026 03:46:30 -0700 (PDT)
+X-Received: by 2002:a17:90b:5143:b0:37f:9ce2:348f with SMTP id 98e67ed59e1d1-38fbc506b07mr8368057a91.32.1785753989966;
+        Mon, 03 Aug 2026 03:46:29 -0700 (PDT)
 Received: from hu-varada-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13fab4e506csm29993730c88.13.2026.08.03.03.46.18
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13fab4e506csm29993730c88.13.2026.08.03.03.46.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 03 Aug 2026 03:46:23 -0700 (PDT)
+        Mon, 03 Aug 2026 03:46:29 -0700 (PDT)
 From: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
-Subject: [PATCH v14 0/9] Add new driver for WCSS secure PIL loading
-Date: Mon, 03 Aug 2026 16:16:06 +0530
-Message-Id: <20260803-rproc-v14-0-a1f87b0b0ad2@oss.qualcomm.com>
+Date: Mon, 03 Aug 2026 16:16:07 +0530
+Subject: [PATCH v14 1/9] firmware: qcom_scm: ipq5332: add support to pass
+ metadata size
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,11 +91,9 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAG9xcGoC/y2OzQqDMBCEX0X23EhW0xY89T2Kh7iuNVCNJlEs4
- rs3/lwWZtj5Zlbw7Ax7KJIVHM/GG9tHgeqWALW6/7AwdTQgk9lDPlEKNzhLglSjaknYqDtB/B0
- cN2Y5QO/y1I7HKfLCaUKlPQuyXWdCkfS8BHEic4Q90BofrPsdQ2bMj8jVmV+d0RZSKJSIVFGtc
- 35Z79Nx0t+dm8YD5bZtfwQ6tvrVAAAA
-X-Change-ID: 20260710-rproc-c4f4d0c1f45c
+Message-Id: <20260803-rproc-v14-1-a1f87b0b0ad2@oss.qualcomm.com>
+References: <20260803-rproc-v14-0-a1f87b0b0ad2@oss.qualcomm.com>
+In-Reply-To: <20260803-rproc-v14-0-a1f87b0b0ad2@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>,
         Konrad Dybcio <konradybcio@kernel.org>,
         Mathieu Poirier <mathieu.poirier@linaro.org>,
@@ -106,282 +107,121 @@ Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
         Gokul Sriram Palanisamy <gokul.sriram.p@oss.qualcomm.com>,
         Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
         Vignesh Viswanathan <vignesh.viswanathan@oss.qualcomm.com>,
-        Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>,
-        George Moussalem <george.moussalem@outlook.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+        Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDA5NiBTYWx0ZWRfXwxBRGX5dzQN5
- gWgzBAOmIQI+3NK5J2WSbvsRAVApe5AW27SjjnoEXQWpU4LYUlv2CUzuCowv/ta25WBtgPqW16k
- cq7YGNvfzlYK9Xk+1NXYmN+WKABJT5Y=
-X-Authority-Analysis: v=2.4 cv=f/94wuyM c=1 sm=1 tr=0 ts=6a707181 cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDA5NiBTYWx0ZWRfX8s6QGtoIa0yx
+ n47sOPqMAwGcikn1PadliTRXShOkBft+b3HN/jwtBP1dVZjvNpQImufLuYgPBhPscCs2aI3dpcG
+ eLFay3H53SV69l5JQR7XHg7X7sReZy4=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDA5NiBTYWx0ZWRfXzMgLbsiDyiDP
+ uRFkmlpT+udYdTVCnr8cHXD4y0OepuDAsTQjbGh7hmzD88d8SMCpxJrsNEBt0CYitwdRWFxkBDT
+ 8yhjDAcMl+wfFHv9//A9QnsX8P6WIoVHbCkVnwhPgkItPVRXVkMAyzGrDd8IYNQfg1+tpoOA+5y
+ KVjAvaKod1TyDvacF68hGRGvX+eGTr8YT1A4EOmNMMOodlWaPwIis8vMtLkAK+p6FwOBo5p8dYv
+ 8xpsTFZoZmJgEHedo2KF1CdHdbz1qrppcAqhzV9I/sEYtLsdCfe2WJb+j3BmxwlqcE8WigrKZAE
+ tYJKZmtE9g8CqyVry7AcSnss68asfighvBfCm8Z0E83MJsq9akbOwY6MQ9+AO6hriXei0kXWiik
+ siQJfUk+7Sf5q4SsnKv4lUCFbCrCDqEPvJTLPHNYbAiENX9sKvQfLh4ye2masj8I1zl4cd86viL
+ rjpLccanuXq4dN2sU3A==
+X-Authority-Analysis: v=2.4 cv=RNSD2Yi+ c=1 sm=1 tr=0 ts=6a707187 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=VwQbUJbxAAAA:8 a=COk6AnOGAAAA:8 a=LpQP-O61AAAA:8 a=EUspDBNiAAAA:8
- a=UqCG9HQmAAAA:8 a=KKAkSRfTAAAA:8 a=PzjQg10roJYlNLfUGYoA:9 a=QEXdDO2ut3YA:10
- a=x9snwWr2DeNwDh03kgHS:22 a=TjNXssC_j7lpFel5tvFf:22 a=pioyyrs4ZptJ924tMmac:22
- a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: 5P5z-lwbbe84EVSzSZtWNH44QWaun2Sq
-X-Proofpoint-ORIG-GUID: 5P5z-lwbbe84EVSzSZtWNH44QWaun2Sq
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDA5NiBTYWx0ZWRfX2CTZwTj6y9Ig
- KF4gLCgy55tLJtuyzvkxk/HTepjk3/uG/bvrIZcyOgePnhBJIGiMmYohgZ0acDEIrNnmokMr7l9
- vvEylFoDPJrOOz8ikHN8Wq7fwqSrCEnvzcEPH1XVHumR1tiZ6vjv3q/WyB0zWok5oCcu35zEWVA
- bRerIfRgDjiLBF17wxoCybMfgkC2FS12LrcgmQT/av0EduZj4FjkVMcM3Sh+1E74wGaQeDHz8pw
- 7wK/0l/Q5vMkHkDrmESr/nox9riLE9mEmnXRTr4oxG2ZDxepk4XH6sVWUbI/VLzAyd6DOPOQof0
- R2yMGEM2FkpU6pMPW36af9ZrzOUrKegBghQDwJaiuE+xaDqGQaGwtwiL8hzPfRsppbknwVCMil6
- 0LCgNcn+7fEs+4kPNmTbBJloc/I8MNLprgRHjprtNdCrqSrQ39BhZNA815TCw5i8cJLDoX6LEUn
- gFjJc3iGG4kUDCrTLKA==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=Hho1wTqgLjreKoR7ChkA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-GUID: uPBOBjYQPuhHgxANjAYbhgjo6op5rih1
+X-Proofpoint-ORIG-GUID: uPBOBjYQPuhHgxANjAYbhgjo6op5rih1
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1143,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-02_06,2026-07-30_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 adultscore=0 priorityscore=1501 malwarescore=0 spamscore=0
- bulkscore=0 impostorscore=0 suspectscore=0 clxscore=1015 phishscore=0
+ spamscore=0 suspectscore=0 clxscore=1015 adultscore=0 lowpriorityscore=0
+ malwarescore=0 phishscore=0 impostorscore=0 priorityscore=1501 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608030096
 
-As discussed in [4] posting this series after dropping IPQ5424 support
-to remove dependency on Sricharan's tmel-qmp mailbox driver series v4 [1].
+From: Manikanta Mylavarapu <manikanta.mylavarapu@oss.qualcomm.com>
 
-Imported from 20251215-ipq5018-wifi-v7-0-ec4adba941b5@outlook.com.
+IPQ5332 security software running under trustzone requires metadata size.
+With new command support added in TrustZone that includes a size parameter,
+pass metadata size as well.
 
-Imported from f20250417061245.497803-1-gokul.sriram.p@oss.qualcomm.com
-I've resumed Gokul's work as the last submission dates back April 2025.
-
-- Secure PIL is signed, firmware images which only TrustZone (TZ)
-  can authenticate and load. Linux kernel will send a request to TZ to
-  authenticate and load the PIL images.
-
-- When secure PIL support was added to the existing wcss PIL driver
-  earlier in [2], Bjorn suggested not to overload the existing WCSS
-  rproc driver, instead post a new driver for PAS based IPQ WCSS driver.
-  This series adds a new secure PIL driver for the same.
-
-- Also adds changes to scm to pass metadata size as required for IPQ5332,
-  reposted from [3].
-
-[1]
-https://patchwork.kernel.org/project/linux-arm-msm/cover/20250327181750.3733881-1-quic_srichara@quicinc.com/
-
-[2]
-https://patchwork.kernel.org/project/linux-arm-msm/patch/1611984013-10201-3-git-send-email-gokulsri@codeaurora.org/
-
-[3]
-https://patchwork.kernel.org/project/linux-arm-msm/patch/20240820055618.267554-6-quic_gokulsri@quicinc.com/
-
-[4]
-https://lore.kernel.org/linux-arm-msm/aUN7Aer%2FGG1d5Om9@hu-varada-blr.qualcomm.com/
-
-Changes in v14:
-	- Fix dt-bindings-error
-	- Drop 'driver' from mbox description
-	- Remove Tested-by from dt-bindings patch
-	- Address applicable AI review feedback
-		Use %pe for PTR_ERR
-		Use the generic PAS context/API consistently
-		Handle wcss_sec_start() failures
-		Use proper PAS stop sequence in wcss_sec_stop()
-		Disable 'q6v5_wcss' in dtsi and enable in board specific dts
-	- Update constraints for qcom,smem-states in qcom,ipq5018-wcss-sec-pil.yaml
-	- Link to v13: https://lore.kernel.org/r/20260713-rproc-v13-0-41011cbcda3e@oss.qualcomm.com
-
-Changes in v13:
-	- Rebase to ToT (First patch alone had conflicts)
-	- Add 'Tested-by: Vignesh'
-	- Link to v12: https://lore.kernel.org/linux-arm-msm/20260505102310.2925956-1-varadarajan.narayanan@oss.qualcomm.com/
-
-Changes in v12:
-	- No code change
-	- Rebase to ToT
-	- Change quicinc mail ids to oss.qualcomm.com mail ids
-	- Link to v11: https://lore.kernel.org/linux-arm-msm/20260326043320.2507890-1-varadarajan.narayanan@oss.qualcomm.com/
-
-Changes in v11:
-	- Add R-b tags
-	- Rebase the first patch ("firmware: qcom_scm: ipq5332: add support to pass metadata size") to top of tree
-	- No change in other patches
-	- Link to v10: https://lore.kernel.org/linux-arm-msm/20260113092021.1887980-1-varadarajan.narayanan@oss.qualcomm.com/
-
-Changes in v10:
-	- Add R-b tags
-	- Remove unused fields from 'struct wcss_sec'
-	- Remove glink and ssr subdev if wcss_sec_probe() fails
-	- Link to v9: https://lore.kernel.org/linux-arm-msm/20260106105412.3529898-1-varadarajan.narayanan@oss.qualcomm.com/
-
-Changes in v9:
-	- Add R-b from Konrad for dts patches
-	- Renamed qcom,wcss-sec-pil.yaml -> qcom,ipq5018-wcss-sec-pil.yaml
-	- Restore clocks & clock-names in above yaml
-	- Fix DCO on two patches
-	- Link to v8: https://lore.kernel.org/linux-arm-msm/20251219031010.2919875-1-varadarajan.narayanan@oss.qualcomm.com/
-
-Changes in v8:
-	- Dropped Krzysztof's 'Reviewed-by' as the bindings file has changed significantly
-		* IPQ5018 support added in v6
-		* IPQ5424 support dropped in v8
-		* Updated to use IPQ9574 as example
-	- dt-bindings-check and dtbs-check passed
-	- Dropped IPQ5424 support from drivers/remoteproc/qcom_q6v5_wcss_sec.c
-	- Updated copyrights of drivers/remoteproc/qcom_q6v5_wcss_sec.c
-	- Change 'qcom,smem-state-names' order to resolve dt-bindings-check error in ipq5018.dtsi
-	- Dropped changes to ipq5424.dtsi
-	- Link to v7: https://lore.kernel.org/linux-arm-msm/20251215-ipq5018-wifi-v7-0-ec4adba941b5@outlook.com/
-
-Changes in v7:
-	- correctly sorted QCOM_SCM_PIL_PAS_INIT_IMAGE_V2 by command ID
-	- correctly sorted smp2p-wcss nodes in dtsi files
-	- Link to v6: https://lore.kernel.org/r/20251208-ipq5018-wifi-v6-0-d0ce2facaa5f@outlook.com
-
-Changes in v6:
-	- added patch to fix IPC register offset for ipq5424
-	- changed phandle description for mboxes property in dt-bindings
-	- updated bindings to define the right clocks per SoC based on
-	  compatible. Ran make dt_binding_check for validation of all
-	  SoCs
-	- use of more descriptive match data property (use_tmelcom) and
-	  added a condition in wcss_start to not error out if tmelcom
-	  isn't used
-	- mitigated potential off-by-one
-	- adopted use of of_reserved_mem_region_to_resource to acquire
-	  memory-region resource
-	- added driver support for ipq5018 SoC
-	- corrected size of reg properties as per Konrad's comments
-	- added patch to bring up Q6 in ipq5018 dtsi
-	- Link to v5: https://lore.kernel.org/r/20250417061245.497803-1-gokul.sriram.p@oss.qualcomm.com
-
-Changes in v5:
-	- retained all the patches as in v3 and addressed comments in
-	  v3.
-	- reverted changes to dt-bindings done in v4 and retained as in
-	  v3 and fixed firmware format from .mdt to .mbn and retained
-	  reviewed-by.
-	- dropped 2 patches in v4 that adds support for q6 dtb loading.
-	  Will post them as a new series.
-
-	Following tests were done:
-	- checkpatch
-	- dt_binding_check and dtbs_check
-	- Link to v4: https://lore.kernel.org/r/20250327181750.3733881-1-quic_srichara@quicinc.com
-
-Changes in v4:
-        - changed q6 firmware image format from .mdt to .mbn
-        - corrected arrangement of variable assignemnts as per comments
-          in qcom_scm.c
-        - added scm call to get board machid
-        - added support for q6 dtb loading with support for additional
-          reserved memory for q6 dtb in .mbn format
-        - updated dt-bindings to include new dts entry qcom,q6-dtb-info
-          and additional item in memory-region for q6 dtb region.
-        - removed unnecessary dependency for QCOM_Q6V5_WCSS_SEC in
-          Kconfig
-        - removed unwanted header files in qcom_q6v5_wcss_sec.c
-        - removed repeated dtb parsing during runtime in qcom_q6v5_wcss_sec.c
-        - added required check for using tmelcom, if available. Enabled
-          fallback to scm based authentication, if tmelcom is unavailable.
-        - added necessary padding for 8digt hex address in dts
-	- Link to v3: https://lore.kernel.org/r/20250107101320.2078139-1-quic_gokulsri@quicinc.com
-
-	Following tests were done:
-	- checkpatch
-	- kernel-doc
-	- dt_binding_check and dtbs_check
-
-Changes in v3:
-        - fixed copyright years and markings based on Jeff's comments.
-        - replaced devm_ioremap_wc() with ioremap_wc() in
-          wcss_sec_copy_segment().
-        - replaced rproc_alloc() and rproc_add() with their devres
-          counterparts.
-        - added mailbox call to tmelcom for secure image authentication
-          as required for IPQ5424. Added ipq5424 APCS comatible required.
-        - added changes to scm call to pass metadata size as required for
-          IPQ5332.
-	- Link to v2: https://lore.kernel.org/r/20240829134021.1452711-1-quic_gokulsri@quicinc.com
-
-Changes in v2:
-        - Removed dependency of this series to q6 clock removal series
-          as recommended by Krzysztof
-	- Link to v1: https://lore.kernel.org/r/20240820085517.435566-1-quic_gokulsri@quicinc.com
-
-George Moussalem (1):
-  arm64: dts: qcom: ipq5018: add nodes to bring up q6
-
-Manikanta Mylavarapu (4):
-  firmware: qcom_scm: ipq5332: add support to pass metadata size
-  dt-bindings: remoteproc: qcom: document hexagon based WCSS secure PIL
-  arm64: dts: qcom: ipq5332: add nodes to bring up q6
-  arm64: dts: qcom: ipq9574: add nodes to bring up q6
-
-Vignesh Viswanathan (1):
-  remoteproc: qcom: add hexagon based WCSS secure PIL driver
-
- .../remoteproc/qcom,ipq5018-wcss-sec-pil.yaml | 178 ++++++++++
- arch/arm64/boot/dts/qcom/ipq5018.dtsi         |  64 ++++
- arch/arm64/boot/dts/qcom/ipq5332.dtsi         |  64 +++-
- arch/arm64/boot/dts/qcom/ipq9574.dtsi         |  60 +++-
- drivers/firmware/qcom/qcom_scm.c              |  14 +-
- drivers/firmware/qcom/qcom_scm.h              |   1 +
- drivers/remoteproc/Kconfig                    |  19 +
- drivers/remoteproc/Makefile                   |   1 +
- drivers/remoteproc/qcom_q6v5_wcss_sec.c       | 325 ++++++++++++++++++
- include/linux/remoteproc.h                    |   2 +
- 10 files changed, 723 insertions(+), 5 deletions(-)
- create mode 100644 Documentation/devicetree/bindings/remoteproc/qcom,ipq5018-wcss-sec-pil.yaml
- create mode 100644 drivers/remoteproc/qcom_q6v5_wcss_sec.c
-
-To: Bjorn Andersson <andersson@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>
-To: Mathieu Poirier <mathieu.poirier@linaro.org>
-To: Rob Herring <robh@kernel.org>
-To: Krzysztof Kozlowski <krzk+dt@kernel.org>
-To: Conor Dooley <conor+dt@kernel.org>
-To: Manikanta Mylavarapu <manikanta.mylavarapu@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Cc: linux-remoteproc@vger.kernel.org
-Cc: devicetree@vger.kernel.org
-base-commit: next-20260710
--- 
-2.34.1
-
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Signed-off-by: Manikanta Mylavarapu <manikanta.mylavarapu@oss.qualcomm.com>
+Signed-off-by: Gokul Sriram Palanisamy <gokul.sriram.p@oss.qualcomm.com>
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Tested-by: Vignesh Viswanathan <vignesh.viswanathan@oss.qualcomm.com>
 Signed-off-by: Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
 ---
-George Moussalem (1):
-      arm64: dts: qcom: ipq5018: add nodes to bring up q6
+ drivers/firmware/qcom/qcom_scm.c | 16 ++++++++++++----
+ drivers/firmware/qcom/qcom_scm.h |  1 +
+ 2 files changed, 13 insertions(+), 4 deletions(-)
 
-Manikanta Mylavarapu (4):
-      firmware: qcom_scm: ipq5332: add support to pass metadata size
-      dt-bindings: remoteproc: qcom: document hexagon based WCSS secure PIL
-      arm64: dts: qcom: ipq5332: add nodes to bring up q6
-      arm64: dts: qcom: ipq9574: add nodes to bring up q6
+diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
+index 3eaa4c9ccf3c..8902c445cf19 100644
+--- a/drivers/firmware/qcom/qcom_scm.c
++++ b/drivers/firmware/qcom/qcom_scm.c
+@@ -598,7 +598,7 @@ EXPORT_SYMBOL_GPL(devm_qcom_scm_pas_context_alloc);
+ 
+ static int __qcom_scm_pas_init_image(struct device *dev, u32 pas_id,
+ 				     dma_addr_t mdata_phys,
+-				     struct qcom_scm_res *res)
++				     struct qcom_scm_res *res, size_t size)
+ {
+ 	struct qcom_scm_desc desc = {
+ 		.svc = QCOM_SCM_SVC_PIL,
+@@ -619,6 +619,14 @@ static int __qcom_scm_pas_init_image(struct device *dev, u32 pas_id,
+ 
+ 	desc.args[1] = mdata_phys;
+ 
++	if (__qcom_scm_is_call_available(__scm->dev, QCOM_SCM_SVC_PIL,
++					 QCOM_SCM_PIL_PAS_INIT_IMAGE_V2)) {
++		desc.cmd = QCOM_SCM_PIL_PAS_INIT_IMAGE_V2;
++		desc.arginfo = QCOM_SCM_ARGS(3, QCOM_SCM_VAL, QCOM_SCM_RW,
++					     QCOM_SCM_VAL);
++		desc.args[2] = size;
++	}
++
+ 	ret = qcom_scm_call(dev, &desc, res);
+ 	qcom_scm_bw_disable();
+ 
+@@ -644,7 +652,7 @@ static int qcom_scm_pas_prep_and_init_image(struct device *dev,
+ 	memcpy(mdata_buf, metadata, size);
+ 	mdata_phys = qcom_tzmem_to_phys(mdata_buf);
+ 
+-	ret = __qcom_scm_pas_init_image(dev, ctx->pas_id, mdata_phys, &res);
++	ret = __qcom_scm_pas_init_image(dev, ctx->pas_id, mdata_phys, &res, size);
+ 	if (ret < 0)
+ 		qcom_tzmem_free(mdata_buf);
+ 	else
+@@ -683,7 +691,7 @@ static int __qcom_scm_pas_init_image2(struct device *dev, u32 pas_id,
+ 
+ 	memcpy(mdata_buf, metadata, size);
+ 
+-	ret = __qcom_scm_pas_init_image(dev, pas_id, mdata_phys, &res);
++	ret = __qcom_scm_pas_init_image(dev, pas_id, mdata_phys, &res, size);
+ 	if (ret < 0 || !ctx) {
+ 		dma_free_coherent(dev, size, mdata_buf, mdata_phys);
+ 	} else if (ctx) {
+@@ -2528,7 +2536,7 @@ static void qcom_scm_gunyah_wdt_init(struct qcom_scm *scm)
+ 	gunyah_wdt_dev = platform_device_register_simple("gunyah-wdt", -1,
+ 							 NULL, 0);
+ 	if (IS_ERR(gunyah_wdt_dev)) {
+-		dev_err(scm->dev, "Failed to register Gunyah watchdog device: %ld\n",
++		dev_err(scm->dev, "Failed to register Gunyah watchdog device: %pe\n",
+ 			PTR_ERR(gunyah_wdt_dev));
+ 		return;
+ 	}
+diff --git a/drivers/firmware/qcom/qcom_scm.h b/drivers/firmware/qcom/qcom_scm.h
+index cf90a565fdfb..e58c76aba45c 100644
+--- a/drivers/firmware/qcom/qcom_scm.h
++++ b/drivers/firmware/qcom/qcom_scm.h
+@@ -105,6 +105,7 @@ int qcom_scm_shm_bridge_enable(struct device *scm_dev);
+ #define QCOM_SCM_PIL_PAS_SHUTDOWN	0x06
+ #define QCOM_SCM_PIL_PAS_IS_SUPPORTED	0x07
+ #define QCOM_SCM_PIL_PAS_MSS_RESET	0x0a
++#define QCOM_SCM_PIL_PAS_INIT_IMAGE_V2	0x1a
+ #define QCOM_SCM_PIL_PAS_GET_RSCTABLE	0x21
+ 
+ #define QCOM_SCM_SVC_IO			0x05
 
-Varadarajan Narayanan (3):
-      arm64: dts: qcom: ipq5018: Enable q6v5_wcss
-      arm64: dts: qcom: ipq5332: Enable q6v5_wcss
-      arm64: dts: qcom: ipq9574: Enable q6v5_wcss
-
-Vignesh Viswanathan (1):
-      remoteproc: qcom: add hexagon based WCSS secure PIL driver
-
- .../remoteproc/qcom,ipq5018-wcss-sec-pil.yaml      | 178 +++++++++++
- arch/arm64/boot/dts/qcom/ipq5018-rdp432-c2.dts     |   4 +
- arch/arm64/boot/dts/qcom/ipq5018.dtsi              |  66 ++++
- arch/arm64/boot/dts/qcom/ipq5332-rdp-common.dtsi   |   4 +
- arch/arm64/boot/dts/qcom/ipq5332.dtsi              |  64 ++++
- arch/arm64/boot/dts/qcom/ipq9574-rdp-common.dtsi   |   4 +
- arch/arm64/boot/dts/qcom/ipq9574.dtsi              |  62 +++-
- drivers/firmware/qcom/qcom_scm.c                   |  16 +-
- drivers/firmware/qcom/qcom_scm.h                   |   1 +
- drivers/remoteproc/Kconfig                         |  20 ++
- drivers/remoteproc/Makefile                        |   1 +
- drivers/remoteproc/qcom_q6v5_wcss_sec.c            | 337 +++++++++++++++++++++
- include/linux/remoteproc.h                         |   2 +
- 13 files changed, 754 insertions(+), 5 deletions(-)
----
-base-commit: 9dba66b6217aacb924d997de3866e7e4c0dcf952
-change-id: 20260710-rproc-c4f4d0c1f45c
-
-Best regards,
 -- 
-Varadarajan Narayanan <varadarajan.narayanan@oss.qualcomm.com>
+2.34.1
 
