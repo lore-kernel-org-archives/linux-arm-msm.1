@@ -1,105 +1,83 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7352B328B7F;
-	Mon,  3 Aug 2026 20:53:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C04F33B47F5;
+	Mon,  3 Aug 2026 21:31:49 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785790409; cv=none; b=pa4NkaWIWyXJQWwGzokLYGUoMHgjQwBsUM47ybrwQL9n5LyALCwIW0UZ66YQRpsY146Gbk5QQBqtIzcqwivSSJdD6Q7mRLLlbEE5T2Q7OMs3MQ+HyaItzKk2qffatFn3Tob+SBL71NMSp+4EpLGJXBotCAss+HMdopzTzY8Gv6o=
+	t=1785792710; cv=none; b=qpRI9ADEAOYU4QUYiSrreDS45FZ6XAFI2RFiPkjrjM6vMlMKohc6tD6HOjyVQ3JCcFrn4c2BZe8J1k/5iNYARp+Wfc98GTnT2QTJbs1keRphwGDFRCBY+JBSK3ax/IO4ARbxoPBoLx/bdjMBe4lRJwWkTs94KASWkjt00e/WD14=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785790409; c=relaxed/simple;
-	bh=MDzfBwhETVtZ+aaDo4ix5KcYZIh3rn9zmcx1yyWNTp8=;
+	s=arc-20240116; t=1785792710; c=relaxed/simple;
+	bh=1boA9uu9X/v8Uud12H6iu/wny3ZGrn69G5OCFDpQeqQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Fw1Z5Wg3z9t7SwTc1HP9s0Y+Ux2UVmhUK6TfXJ+t3WOKUioF4D/x91yP+YyhX0Xtbe89K3noFAAVYxeFLkuC9XRubZLUjOYyZqjgRhu4QQuPep6eP/+dx1svGbvYJVZTZ5vh0lhXgHZSHlLPT/UPw0V68my+lVxpzloLxglZ8B0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WcECJy5z; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=nm5fmxyFxMnqVMkaaWWmwHmDk2saz2Y57EQv5hDVNpRxzyhkAsrr9XhiUsRw2CqSKN9Ey5yMsG/U9PoDM9+pw9K3rBUts+0Zd0div3B0qOEBkLkrrKWgYLIUJmi3vTCBgvuZ/vcF3AwA8bKHEDhIDdjh0w5WqfDLAMfE7Xwre84=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=njBnbM5c; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WcECJy5z"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9B3681F00A3A;
-	Mon,  3 Aug 2026 20:53:26 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="njBnbM5c"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 393231F000E9;
+	Mon,  3 Aug 2026 21:31:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785790408;
-	bh=42fMjfMmyKoxIac5xGfUWe0H4Hd5p40u1U7vZae7AME=;
+	s=k20260515; t=1785792709;
+	bh=/9Ti5n/72tblCcl9KsbLsR8o/ouaD+YWMPOtsNAyORg=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=WcECJy5zwe3it57uD+HxHZblPLjWVcBNQ4VhRCHd+jKDvO2jXi+m1kaTmRCsRRtg2
-	 QZv+SCD+KsaR3eZlvT0BW/ID679n01MbA83TiXwbEoW1L+W3NZwEyTU1zQpKDvOGCE
-	 urFSI4Joboi6Hyiq5c2YqJ6nXTowsFtdF/4P6kZgUHmg/GSO7B+hNn4Hqlen68o8R/
-	 q9bBSdE7BE92kMkNHFWafNdaz3b4KDwLwEOSwwtD5f8211u/yLgB7/tTHtKXWQzNHT
-	 MQg75JSK1wxMkLL4SVfp7mSe+XGv74BCfS570fKjbcvIODC2S4wXYzjPPjvkQ2o8Q3
-	 bLV42DdnxLicQ==
-Date: Mon, 3 Aug 2026 22:53:24 +0200
-From: Andi Shyti <andi.shyti@kernel.org>
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Cc: Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Mark Rutland <mark.rutland@arm.com>, Lorenzo Pieralisi <lpieralisi@kernel.org>, 
-	Suzuki K Poulose <suzuki.poulose@arm.com>, Mike Leach <mike.leach@arm.com>, 
-	James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>, Damien Le Moal <dlemoal@kernel.org>, 
-	Niklas Cassel <cassel@kernel.org>, Jyri Sarha <jyri.sarha@iki.fi>, 
-	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	Matthias Brugger <matthias.bgg@gmail.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Linus Walleij <linusw@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Patrice Chotard <patrice.chotard@foss.st.com>, 
-	Jassi Brar <jassisinghbrar@gmail.com>, Lee Jones <lee@kernel.org>, 
-	Johannes Berg <johannes@sipsolutions.net>, Jeff Johnson <jjohnson@kernel.org>, 
-	Viresh Kumar <vireshk@kernel.org>, Nishanth Menon <nm@ti.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Yangbo Lu <yangbo.lu@nxp.com>, Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <ukleinek@kernel.org>, 
-	Paul Walmsley <pjw@kernel.org>, Samuel Holland <samuel.holland@sifive.com>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Richard Cochran <richardcochran@gmail.com>, 
-	Jens Wiklander <jenswi@kernel.org>, Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>, 
-	YC Hung <yc.hung@mediatek.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
-	Sean Wang <sean.wang@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
-	Peter Ujfalusi <peter.ujfalusi@gmail.com>, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-kernel@lists.infradead.org, coresight@lists.linaro.org, linux-arm-msm@vger.kernel.org, 
-	linux-ide@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	linux-mediatek@lists.infradead.org, linux-gpio@vger.kernel.org, linux-i2c@vger.kernel.org, 
-	mfd@lists.linux.dev, linux-wireless@vger.kernel.org, ath10k@lists.infradead.org, 
-	linux-pm@vger.kernel.org, netdev@vger.kernel.org, linux-pwm@vger.kernel.org, 
-	linux-riscv@lists.infradead.org, linux-usb@vger.kernel.org
-Subject: Re: [PATCH] dt-bindings: Correct white-space style
-Message-ID: <anD_bci501e0J3q2@zenone.zhora.eu>
-References: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
+	b=njBnbM5c32reDmarRByD8piJsLo4hAii9b8QdHFXsPCekjVQBGkMWxM8YO0SXSO9P
+	 lD+DJOSN7LlCkGYLgMFeBFabW99PhMmVHqYdIHbLCEi/y2j4afi1kdG/+HVzSWwYQw
+	 yLjcGfPuIDDnqZ6DGe9AnaZ82oinU3D4oKUOxgKESiNvPo5aiR++lcFL6/hUBiXw4K
+	 4BZVcXCeoBvKw+1BRUYOn85gaYdfHx0aWIWpJ7eWebW/FD+yUbr8nU4UKuj9fsJsaD
+	 2HIKHOKD6PqkzFAXiJE751jXnHF5EB0WijPlQTSrlnrpRxyl81MmN72D4v9LmYahjc
+	 07PLsQ8quMc+A==
+Date: Mon, 3 Aug 2026 22:31:44 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v6 0/7] ASoC: qcom: add AudioReach TDM backend support
+Message-ID: <467a15d1-158b-4ab1-825c-475fe89a8b34@sirena.org.uk>
+References: <20260803195624.3606352-1-prasad.kumpatla@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="zFEno68VFnLf+Vf2"
+Content-Disposition: inline
+In-Reply-To: <20260803195624.3606352-1-prasad.kumpatla@oss.qualcomm.com>
+X-Cookie: Prunes give you a run for your money.
+
+
+--zFEno68VFnLf+Vf2
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
 
-Hi Krzysztof,
+On Tue, Aug 04, 2026 at 01:26:17AM +0530, Prasad Kumpatla wrote:
+> Add AudioReach support for LPASS Audio IF based TDM backends and wire it
+> up for the sc8280xp machine driver.
 
-On Sat, Aug 01, 2026 at 09:56:14PM +0200, Krzysztof Kozlowski wrote:
-> Correct a few white-space issues, like double space after '=' or before
-> bracket '{' characters, which will be flagged by dt-check-style.  No
-> functional changes.
-> 
-> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-> 
-> ---
-> 
-> Patch applies on Rob's for-next branch.
-> ---
->  .../arm/firmware/linaro,optee-tz.yaml         |  8 +-
->  .../devicetree/bindings/arm/psci.yaml         | 18 ++--
->  .../bindings/arm/qcom,coresight-tnoc.yaml     |  2 +-
->  .../devicetree/bindings/ata/st,ahci.yaml      | 22 ++---
->  .../bindings/display/ti/ti,am65x-dss.yaml     | 12 +--
->  .../bindings/display/ti/ti,j721e-dss.yaml     | 96 +++++++++----------
->  .../bindings/display/ti/ti,k2g-dss.yaml       | 36 +++----
->  .../bindings/dsp/mediatek,mt8195-dsp.yaml     |  2 +-
->  .../bindings/gpio/st,nomadik-gpio.yaml        |  2 +-
->  .../devicetree/bindings/i2c/st,sti-i2c.yaml   |  2 +-
+This *also* does not apply against current code.  Whatever undisclosed
+tree you are sending this against it's none of asoc/for-7.3 (nor
+asoc/for-next so it's not missing fixes).  Please test that whatever you
+are sending can be applied to my current tree before you send it.
 
-Yes, I had noticed this recent white space which slipped off my
-review, but it looked too much hassle for a single patch removing
-the white space.
+--zFEno68VFnLf+Vf2
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Thanks!
+-----BEGIN PGP SIGNATURE-----
 
-Acked-by: Andi Shyti <andi.shyti@kernel.org>
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmpxCL8ACgkQJNaLcl1U
+h9CFRwgAgy/tC6vGRf5XVmaw9c6ySzx4UVNNUjumvVKwUbPzgulrWoK1zDcT6l9A
+c23PkhQqqymo67yC85jn5jkRtjOwvLtE+P2B3L+8LaFDNLtjD2QeQNNTVFpoKqqv
+VsjW8uZ/E+IOnUDOvWoNYrxbsfomeRtB72lZaixUFtYhoR5S11oYWewqEk+eWbOs
+Y0dEcTzAW0Ngc0zVzWpm7e4G4GCpVKichDn0R3VlaSKZGp9W5k1/nXlQDuoD/wOV
+xz5jt28/YCwEp3D0gz8DTkb0RReQAh2BJo1SsUHyrcavyzZ28mXSVN352+QF78Mb
+pFPRYBPe6HqqOfRW1bWULl8kEUeAcw==
+=lRyZ
+-----END PGP SIGNATURE-----
 
-Andi
+--zFEno68VFnLf+Vf2--
