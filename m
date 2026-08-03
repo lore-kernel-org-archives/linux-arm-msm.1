@@ -1,87 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D637E2EF66B
-	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 15:57:15 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3EAF933C183
+	for <linux-arm-msm@vger.kernel.org>; Mon,  3 Aug 2026 15:57:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785772637; cv=none; b=emaD+6pCW9D0zTLHlmDPz6IBFcIoZnGF58C3ecLrOOJIdHyl5yeQYVR+7+io/zMlVtFkk2uQzALCaRTut1EC9oHGgUbMWG2IWTcBrL6TBeq0jq+8zJQaAP5l7VrSFrBToe7hJhaGyLZjaXCXEkXoZ1zrBCGaa7pBigzmTV/UwXY=
+	t=1785772673; cv=none; b=t11KJ51zPo0BbsPkXEudESD/lQ3qEHNlEtPXHjk2xzi1EEFzkL02hfClqRosAt9hdUXKRfUh1vC//RtJFg966CIxHb97zgmdXHLPGf1yXTOs0iwbI/RHQ2HgiWiUAm4eqawECudHa/JSqq+2eQOpN/1Ndcbxw8qsnBrGCrOXPzo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785772637; c=relaxed/simple;
-	bh=MelotB0svcJUYJ5z4p2APylL+WbXDWXDLxYKckoGGNg=;
+	s=arc-20240116; t=1785772673; c=relaxed/simple;
+	bh=/fmB7Ujz5KUozMQSO1nSxFvk2smNKq537zuc49d4Ip8=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=AAJjilcpwXxpTwVBHDkVzjJpYycq3TtHzn+h18nqQM2SUILz03ApiHPVeTKfgimeK/63I3lDQvoq6UOJspK7VndGN2DvSzIHqEgOXn25iLjTWFl/0uo4tnDBfzpjL/i8AkZhD/OU9p/Z73hFcwxtfymmKrGWnEBFJk8X45pEhb0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fh34Qljt; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kcZR7Gt5; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=oEn9MN2VBgZS0KVNLAOGjppxcjz6wV9VHc2mW/NJghZ3+Zvllk7qeNI1t4rBw5iLUYJanokzfaEoLCk+jJRhVkQ9liEMQJDm7nuqA0cxJ0Vq27h0BmsOXbh3+XmZpI9eFlv+3ZNUDF30cJjhKgr4U3HU9cx8mi6KX771yFNwDQo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=N9poywF1; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CLQVMGqH; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fh34Qljt";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kcZR7Gt5"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 673ECCUq241469
-	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 15:57:15 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="N9poywF1";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CLQVMGqH"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 673EBnbh976663
+	for <linux-arm-msm@vger.kernel.org>; Mon, 3 Aug 2026 15:57:51 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	iTUnwBfCrGAlFePM3Z5/4tp5hh4dSab+LVlaWAeGrOU=; b=fh34QljtWXBEylYv
-	EPaZMq71DzEXF84QVz2eK+Jhf1YyOLbUQMYBfQWhk7b9u7LexTrM4gCnDMmqArnK
-	e6i4IDnAhcI2yRQgL6YTCsX6hxBK4Cbu7hdr6+AKnBZ5tljhw9cEMzn1Ey3HisSs
-	PBoeDn4Th33jjB1GsX9fWuKnRLCM8Ih3N0M12aHI+ode1bQk2CP6HtfrrEaaV4fe
-	wt0ohDDk4pWJNE5/hiQmxNflzELPnA78xfyfZ5bu8PLvQq5ZaBD5n/YxfUDCJv4O
-	NJbDNSdRwnof1esUYfCiBo/6u2LFfBm4DlEYmfzTcKoP/O7QY5RwOQ37mQq1fOq6
-	VaXDGA==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftdmxbjsf-1
+	nvZMTQb3sKuilMlizVd/RUgZzAHN9JyDHjQi4foIjuk=; b=N9poywF1Q4ssOAhZ
+	S1ibNJtQXlEJOqp6teNcnwYVoTPAByZBy76dS4kNd/w7rOdVCn5jBnHHdhYsQjdj
+	zHLp3A3pvNaS3DHu+rL2O8FKNSQzhUpGcydmSiD7JUYzkbV5lTs8zaacoFJnRnmE
+	xD5vT6s4sfaRPOgL/2iNyVZ97i2bqBUuydMWBhu7Fvet5pAoXqto56PCe7OVxPPE
+	eWhfgXzQ0RknyMkPIctVI26CJhyNfzcgvvC+BPuAW1gyblgRJSdZAdpunQSlHRhJ
+	Pdk4IMJumzFLFVXWD2zey/UUZw08BiTPjdVAd6O9p/qq1W7k5Hr04aljPo7eFfFp
+	mw6xnw==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4ftp16a90v-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 15:57:14 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-52cd0374265so6582061cf.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 08:57:14 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 15:57:51 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-84a251c2e3eso14202b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 08:57:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785772634; x=1786377434; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1785772671; x=1786377471; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=iTUnwBfCrGAlFePM3Z5/4tp5hh4dSab+LVlaWAeGrOU=;
-        b=kcZR7Gt5ho2Fv09qkRnpNukGVsJHIf/ucCbbxnKh4RRm9qKrRGk3AtTBHXivOKE55a
-         Dkn1UjBfR+XM9t2D7KQ315OBCA4+G6SK3NhSownvuxjGbvWKV6LBRORDVslUkLA+Gjrz
-         HYbhfN4aCNatcFmVrw3ZN8Ttp9KfeRa60UaryebZbozqC2nRBZpQYvJ8DcIaXj+OWCX6
-         U1gE1dgrf2efCIUt+rjNVkgx1cFNXKWe2WpMWcdrTkRYB6Ut/6/LHt97TAc2XYmkP0OF
-         YTXHMQhquvhssELOxk74mLaP3M/FqC+ZzkCUOyJbFrqb49ZO3fyOxGO7R1NC9QWyYbRi
-         WAUQ==
+        bh=nvZMTQb3sKuilMlizVd/RUgZzAHN9JyDHjQi4foIjuk=;
+        b=CLQVMGqHAnFWnrOLgJgL6gOPCHYR0ZLa+L3KZvu/VuwD5FEXyHRWAVamhCK/yGt/A2
+         e4mrAPziiYjeteDJ9wSQNLMe9/seKBojRrWlbpfsz8tGeHFonnhGBhT+zuIXYEoJUIgM
+         hAPewzwKhrDzKqA+CJGLCtx4evSwjjExdn2AiaAFkics28CnGuj+tfk+eiIgc6JaxF6l
+         q+eTEIpzul2HLsZ9f+UjmUSHETt4Rz+EPn/vSkQHLxA/L68t98EBa4rM3lK6zA3Kqz+q
+         /6B9krCwvOTdfQMCGG6CoCH/1VeRUcTW8ma2B+98Mop5GwR6cIWZ0VxI2D07N2oc84kn
+         mmjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785772634; x=1786377434;
+        d=1e100.net; s=20251104; t=1785772671; x=1786377471;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=iTUnwBfCrGAlFePM3Z5/4tp5hh4dSab+LVlaWAeGrOU=;
-        b=VuOx8KqTRmiZiMtBm2j+coStcf9qwYQE+2dtOnbsZ7PLMQvZr7F7EUyhQMivXe2azy
-         /3TSI4pTpMTXZliUcFvxcgKsmYf9JedORlTdlA73KLJU0tOuJDInmG9dNgfGeMujdWhP
-         3C2pA42CLNwnkyuTqF/fSno6VE/NaQt3ROwZeXJsBDou3DHToLqb6ww4j0dJr9dEQG9C
-         +pTWnQCmY4qMjwXqBtoaKZFgXqCi08uOR1Xusim2Kn43ysU9e4wmcAf6WC+V2sO+fK0I
-         ZPkni5PCL+ABF4priDY7pGhAJ2H6ZLgrS0CQ8fXwBjDWM/ZEsxXaJsgXjkIme92q8G7x
-         UaWg==
-X-Forwarded-Encrypted: i=1; AHgh+RrGqtg2vMBq1NYmX1HYi8W+q9D4wS0pvuqFPvtnnNBmFOrxbEoCyeloMCl3SDhLLi6bQT7OdRKwHAwKmHba@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw0x9W0slNTlN0VsURfVjHQNEa34b2VDkipxRol49As0kdev29d
-	e3F18PNBDfXQhOTwR/eqlorukjQUVGcGRDRy/CaGyYrFbRQ/sawWV5m3KseDS/P/BcUI3tijug4
-	LtPUIQpqrKaSimP4gN4YpwRVT2BkQqzZ3/gJEeP2n+xftm6i28jtDn1hFRgTOtmdDvan3
-X-Gm-Gg: AR+sD13tdUlK1aHg52QwRhmYXEgPpyHpeK4Rkt68zcsbiJpEm1QOfV5E14elyG57rwb
-	Drt6lqhGRfy762UDf5CLGJdK8ctr2cJ+UZV/RYhZuLYzfRUHFg+O8JlOhqSOjRBjbGZ5koDtkeE
-	u8ctN4QUIKFtPxD5n4iq7JtBaBUi1DOCklRPOnrU0u+jICSj8Pv9436rP2h4n6319Z84KuDqLky
-	JsB4tKhwL6XYCHTcnnzqcXng60IigJ/YF+9+lplkgOHA5Aj3fWRePcJuFDZAyLs2VpRzffLWY3j
-	Gvpj++c6CwghGDshvClxZbR6phWhQ/U40ho1bVK6gNoeV2SH9OCFBIXKQhh3C+VNQzfCYL2i3V4
-	1GWIP5lLs39vWqu0eTmVcVaKGy/iLA77GONtI8cJWuEHYsu3ATr21E1eXOPgueCF6lSXrzeBs
-X-Received: by 2002:ac8:5a91:0:b0:51b:fde4:cd57 with SMTP id d75a77b69052e-52b56780cb5mr233763551cf.31.1785772633542;
-        Mon, 03 Aug 2026 08:57:13 -0700 (PDT)
-X-Received: by 2002:ac8:5a91:0:b0:51b:fde4:cd57 with SMTP id d75a77b69052e-52b56780cb5mr233762891cf.31.1785772632982;
-        Mon, 03 Aug 2026 08:57:12 -0700 (PDT)
-Received: from [192.168.1.31] ([85.196.172.179])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c1fd450d71bsm546878366b.46.2026.08.03.08.57.11
+        bh=nvZMTQb3sKuilMlizVd/RUgZzAHN9JyDHjQi4foIjuk=;
+        b=siQqItuenzyY0udOrs2o32+/y6uqGnKnWGg+ja6ysVVJZynZVVkSWQjVcTi7pAYrHB
+         EzC+0pkCYtWgnYxqbdgo8JQoKJKJ/UO4/Hgfhme0EmTp7PHJU92JV73R5wEdy1Wj1VuN
+         wZjjHqGSVi6h83PjyyOEP0eAHDrAsS5LbT86luhQxpIISzVJByrBWk1WOAE2nVgn7IxI
+         Qiwwx4wrI4P1Z+lgEUEupfRVFOiusYu+LJVvyPJv+0eE3dUR0fT3cFtW0aZGQ295tGJh
+         wfTZ04QIiRmRPvDrxPTQvqCTMHRyiX3PJzXW2Lbsq930+Zc9VHfPAXhiCgKJpHbUm03A
+         8kqg==
+X-Forwarded-Encrypted: i=1; AHgh+RqijGMA2vNSXP+X5usDxcY+4yQZFP5DLP6C/LPqZryNNz78GrUHC9Enxg8D2V+6n761MvUuM7cHSzeJ7bn+@vger.kernel.org
+X-Gm-Message-State: AOJu0YyX/2ZmBXT6H2fJgS9GadcQ2gUSQ8yvKyXW0hIlmbncy068okUS
+	/t4SxxDCSvY8bc3UooFlxUWEQLfILGCK5u/e18Zt71GyBEDvLoQFFB/C99beCNpNxUsyAFgGUoE
+	CrQWmd+LMqAFyHnnwMwpzlvHvG/RKlIAkHEvp+IjaSGG5uklJvsRbIZRPFioOgih7D9f+
+X-Gm-Gg: AR+sD10eqCgJQ0eUWQUqtI/kh+hzUG54zGcV7fNejYeW2rEhn5gEWbjZBXONJcEzRN3
+	DkROxQFewWab3GMARsXy6ljNp4sf5lT4zQUjhVfUiBkUSmMLf0nGN5FFbBPFoqpzmn96dG+Ukxf
+	ejlSgImOT+/TarAdfpSjoOks53nnJEhQRJEuNjIoEZDY6xdCZ7OFxW47dH/RScA/GofYiqny1MR
+	lqpCQlvsuPv7OLv9x1MCPjeZLEuVg7nIJ67cYPCp3v/KtvR31Kugzu9L20fQHTud7cu5eHjA0Gb
+	twJLRR0Ks/ZDkxWIbx8dwOIOB+85iTiB/OHiaN7o1xMXZC4jnt0yNBOo+SJXbQ2/6g7vzhMJIOP
+	RTOJaOl77fPRl9u4Wjj8Vo0VUZcJrnMyAbl+XjQCYzCn1pWMtcUHBCw==
+X-Received: by 2002:a05:6a21:9185:b0:3ba:d7b0:fcac with SMTP id adf61e73a8af0-3cb6c75336bmr125702637.5.1785772670671;
+        Mon, 03 Aug 2026 08:57:50 -0700 (PDT)
+X-Received: by 2002:a05:6a21:9185:b0:3ba:d7b0:fcac with SMTP id adf61e73a8af0-3cb6c75336bmr125661637.5.1785772670126;
+        Mon, 03 Aug 2026 08:57:50 -0700 (PDT)
+Received: from [10.226.59.182] (i-global254.qualcomm.com. [199.106.103.254])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153e18e70esm64951283eec.29.2026.08.03.08.57.49
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 03 Aug 2026 08:57:12 -0700 (PDT)
-Message-ID: <3f40cde3-a4bd-424d-be42-60915c90e6c3@oss.qualcomm.com>
-Date: Mon, 3 Aug 2026 18:57:09 +0300
+        Mon, 03 Aug 2026 08:57:49 -0700 (PDT)
+Message-ID: <6e2fda2f-ce14-4f81-b848-9fee4e6a221a@oss.qualcomm.com>
+Date: Mon, 3 Aug 2026 09:57:47 -0600
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,202 +89,156 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 2/3] media: qcom: jpeg: Add Qualcomm JPEG V4L2 encoder
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Atanas Filipov <atanas.filipov@oss.qualcomm.com>
-Cc: linux-media@vger.kernel.org, bod@kernel.org, mchehab@kernel.org,
-        robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
-        andersson@kernel.org, konradybcio@kernel.org, loic.poulain@linaro.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260730150524.2659577-1-atanas.filipov@oss.qualcomm.com>
- <20260730150524.2659577-3-atanas.filipov@oss.qualcomm.com>
- <vz6a2qugu7kkci3fcdkd236axr3ur33ghrgoopbrz3isueml45@b4frwo4l2hfh>
+Subject: Re: [PATCH] bus: mhi: host: Flush the posted write after writing to
+ MHI_SOC_RESET_REQ_OFFSET
+To: Manivannan Sadhasivam <mani@kernel.org>
+Cc: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>,
+        mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Alex Williamson <alex@shazbot.org>
+References: <20260623145134.43976-1-manivannan.sadhasivam@oss.qualcomm.com>
+ <cc4bb54c-fee1-4478-af17-8b48ed379210@oss.qualcomm.com>
+ <af5gbjoe5eswhnofzsvvknt7dfqbgyfs4kjkwzt6viivb5vwte@wjs7pg54szz7>
 Content-Language: en-US
-From: "Gjorgji Rosikopulos (Consultant)"
- <gjorgji.rosikopulos@oss.qualcomm.com>
-In-Reply-To: <vz6a2qugu7kkci3fcdkd236axr3ur33ghrgoopbrz3isueml45@b4frwo4l2hfh>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: fuaCfpJ2oAGSlIfJnZxPhOXP039RWHrV
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDE0MyBTYWx0ZWRfX3QSkUBBg+mhZ
- TG9FAZ6R164muBcL3g221Ciw2sZx0sY4bS1h8TpvB9Qn4jA2Pb3JrbOAyb+CNPvuvf5QEauim+q
- eYqY5dEYcWoE0tqoQspkTDL/Q7nF3l6hizdx0DnvxpCTMEs9Ioi6+P88eg5ENG3KRMjv+xcSFGT
- pUu2sr7T435o0LmnTBaYQuu46kcSTX4yVQLWsRRsTpyXyENuFP36YD1Ou7DGAWO/YGuM3YY/0Qg
- f450vLdLefhCXBKpXLU6SEU+AAdWVoRDTC3u/PI37S39+8WuldyRXV/qg1VtsEBSAf5eE7V3At5
- l+SyAvSdd9eeOVIREm10/7Dz2tfZ7DBPhWaLRbZAMsYmn0AdtvMwYZL09flqOfuiyCMStWmSbmp
- SNqgLc4fDYffjrUFnM0+nKxeDWos6nbf7+AXWIJnRAO/UirDsjxATmz6R8rotv7Un2KcW7G9vzG
- t+LsJheXIc5RAmzOGqQ==
-X-Proofpoint-ORIG-GUID: fuaCfpJ2oAGSlIfJnZxPhOXP039RWHrV
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDE0MyBTYWx0ZWRfX/Cr1RrwL1a/a
- ezY9Cd5DcQk3Jy/btg+Wd6VeBvu6a+TaB44GSwOHKoaLR4tFswDmlmHcMGikFN86hPGnwWpaH/W
- bLkzOqRLP7b17J9gc9OAP8ilk1/mrXA=
-X-Authority-Analysis: v=2.4 cv=L7MtheT8 c=1 sm=1 tr=0 ts=6a70ba5a cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=Q/e3f29T3Hw2hnAEzBPF7w==:17
+From: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+In-Reply-To: <af5gbjoe5eswhnofzsvvknt7dfqbgyfs4kjkwzt6viivb5vwte@wjs7pg54szz7>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODAzMDE0MyBTYWx0ZWRfX6s2Qxb3OQ7K6
+ hEQIUztvtQm2hN6XFaBGRM7vpLW307ewmiEaS6vd/MLSntNc0ulKQHokyuEnDXPlwzJIVAbv+eE
+ BfWMQcTwv/rhpthRY7aFsUP0G8tWExakDQRqG8IInHrrs7JH3ELxWkI8ZI91ygrtv2paCix/4go
+ AwK3PmWj490KcBptPucyW83HZHnl0sFDpQKfELbmXhdvYO2AIsCRnq1t8F9h/eCXrEf+bT4dLPE
+ 9rHgq5DlMugS6Lr4uSONBjqGXgTa302G8sMeALU6XAwaqWf/dpI3ER4FsaVfyvVAM2frtyYFjgJ
+ tRT7Bfl/MNJuyizIwDwA+fJestlt76GbBQEgs37EbGG1jk1DJyJqxEfg+YR7qEMU5FM5DQypD9e
+ cxLMPE2MRZuT2bJ05CbhwPjrxwidsZGU50fJl/46KfSKuWlmuS9jHlnOg5iiYNEBhVICFdub5JV
+ OYvqf4XRKXjaULP7wNg==
+X-Authority-Analysis: v=2.4 cv=Wpob99fv c=1 sm=1 tr=0 ts=6a70ba7f cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=w18evlqGJRJg4lcxsJQA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=uxP6HrT_eTzRwkO_Te1X:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=VwQbUJbxAAAA:8 a=r1p2_3pzAAAA:8 a=EUspDBNiAAAA:8 a=balVh9TWn1L6BMhRoM0A:9
+ a=QEXdDO2ut3YA:10 a=IoOABgeZipijB_acs4fv:22 a=r_pkcD-q9-ctt7trBg_g:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODAzMDE0MyBTYWx0ZWRfX659/YdJ2wz+j
+ OeEEO7Jcg0KjkBQ1IUB2rfZ/eI6NCwXWN36H2ErRicaAWR8sWfNRs7VirTmRAbV8SGvVsLHJ8FF
+ XKyh2ODdyQd7J3aFVgkPUlCNzyGhrHQ=
+X-Proofpoint-ORIG-GUID: pd7ivpwx9AEFZqzaMFRGnfblisMyaNJM
+X-Proofpoint-GUID: pd7ivpwx9AEFZqzaMFRGnfblisMyaNJM
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-03_03,2026-08-03_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015 malwarescore=0 bulkscore=0 phishscore=0
- priorityscore=1501 adultscore=0 impostorscore=0 lowpriorityscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608030143
+ bulkscore=0 malwarescore=0 suspectscore=0 priorityscore=1501 impostorscore=0
+ spamscore=0 clxscore=1015 phishscore=0 lowpriorityscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608030143
 
-Hi Dmitry, 
-
-On 7/30/2026 6:57 PM, Dmitry Baryshkov wrote:
-> On Thu, Jul 30, 2026 at 06:05:23PM +0300, Atanas Filipov wrote:
->> Add a Qualcomm JPEG encoder driver implemented on top of the
->> V4L2 mem2mem framework.
+On 7/29/2026 11:19 PM, Manivannan Sadhasivam wrote:
+> On Wed, Jul 29, 2026 at 03:07:00PM -0600, Jeff Hugo wrote:
+>> On 6/23/2026 8:51 AM, Manivannan Sadhasivam wrote:
+>>> mhi_soc_reset() tries to reset the device by writing to the
+>>> MHI_SOC_RESET_REQ_OFFSET register. But it doesn't do a read-back to ensure
+>>> that the write gets flushed to the device before returning to the caller.
+>>>
+>>> This may lead to the delay (if implemented) on the caller to be
+>>> insufficient, if the posted write doesn't reach the device before the
+>>> delay.
 >>
->> The driver wires vb2 queue handling, format negotiation, JPEG header
->> handling, interrupt-driven job completion, and runtime PM/clock/ICC
->> integration for the standalone JPEG encode hardware block.
+>> Interesting.  Is the delay tight enough that a few ms will possibly blow it?
+>> Seems like a poorly defined delay.  All the devices I'm familiar with take
+>> multiple seconds to boot (with some variability due to ddr training and
+>> thermal constraints), and if the reset triggers a crash dump, then its
+>> easily tens of seconds.
 >>
-
-<snip>
-
->> + */
->> +
->> +#define JFIF_HEADER_WIDTH_OFFS		0x07
->> +#define JFIF_HEADER_HEIGHT_OFFS		0x05
 > 
-> And you've ignored feedback here. PLEASE move all standard-related
-> defines and code to the common helpers. Are there any other drivers
-> which construct JPEG files manually? If not, you are lucky and you can
-> just push you code. If they are, find a way to unify the codebase.
+> Which delay you are referring to? RDDM delay which is just 2ms? Yeah, that seems
+> questionable. But this function itself doesn't implement any delay. So your
+> comment was somewhat confusing.
+
+The delay at the caller of the API referenced by the commit text - "This 
+may lead to the delay on the caller to be insufficient"
+
+I looked at the thread referenced by this patch via the closes tag, and 
+while I can follow the virtualization flow, I didn't get a good view on 
+the specifics.
+
+>> Regardless, since this reset will either kill the pcie link, or disconnect
+>> the SoC from the link for a time,
 > 
-> At the very least, it would make you split this commit into at least
-> two, making them more readable.
+> No, this will not reset the PCIe link AFAIK. PERST separation logic available in
+> the Endpoint should make sure the PCIe link is active while the SoC is
+> undergoing the reset. Otherwise, if the host tries to access the device config
+> space before the device is ready, it will blow up.
 
-Yes, this comment was incorporated, maybe partially, or it wasn't fully understood.
-The helper is used for the quantization tables and wherever helpers are available, 
-similar to other drivers: hantro_jpeg.c, e5010-jpeg-enc.c.
+Reset separation (PERST separation is one part of) is not always 
+enabled.  PBL won't enable it as it requires loading the reset sequences 
+to the PMIC, which is outside the scope of ROM.  So, if you have a 
+non-flash boot device, or a flash boot device that has a 
+non-provisioned/otherwise corrupt flash, the EP may be sitting in PBL 
+from cold boot without reset separation enabled.  If the EP is then 
+passed to a VM per the related thread, a reset will occur, which will 
+take the link down.
 
-The missing JFIF tags and additional helpers can certainly be added,
-but is holding up the current driver just for that a reasonable ask? 
-This discussion may continue for a long time — is it reasonable to wait that long?
+Also, if I recall correctly, automotive products do not enable reset 
+separation at all for ASIL reasons.
 
-I agree it would be good to have all other upstream JPEG encoder drivers move to shared helpers,
-but the effort isn't uniform across them. 
-
-Five drivers — hantro_jpeg.c, mxc-jpeg.c, rcar_jpu.c, gspca/jpeg.h, and solo6x10-jpeg.h,
-build a fixed byte-array template and patch width/height/table values at hardcoded offsets, 
-so they could plausibly migrate to a shared builder with a similar shape to what we're proposing. 
-The other two, e5010-jpeg-enc.c and coda-jpeg.c, use incremental byte-by-byte writers instead, 
-so their migration would look quite different and isn't a drop-in fit for the same API.
-
-Either way, we don't have access to most of these devices and can't verify the changes ourselves, 
-so migrating them is not a simple effort to undertake as part of this series.
-
-> 
->> +#define JFIF_APP0_LENGTH_HI		0x00
->> +#define JFIF_APP0_LENGTH_LO		0x10
-
-<snip>
-
->> +#include "qcom_jenc_dev.h"
->> +
->> +/*
->> + * JENC encoder hardware operations.
->> + */
->> +struct qcom_jpeg_hw_ops {
->> +	void (*hw_get_cap)
->> +		(struct qcom_jenc_dev *jenc_dev, u32 *hw_caps);
->> +
->> +	int (*hw_acquire)
->> +		(struct jenc_context *ectx, struct vb2_queue *queue);
->> +
->> +	int (*hw_release)
->> +		(struct jenc_context *ectx, struct vb2_queue *queue);
->> +
->> +	int (*hw_prepare)
->> +		(struct qcom_jenc_dev *jenc);
->> +
->> +	struct qcom_jenc_queue * (*get_queue)
->> +		(struct jenc_context *ectx, enum qcom_enc_qid id);
->> +
->> +	int (*queue_setup)
->> +		(struct jenc_context *ectx, enum qcom_enc_qid id);
->> +
->> +	int (*src_fmt_update)
->> +		(struct jenc_context *ectx, u32 old_fourcc, u32 new_fourcc);
->> +
->> +	int (*buf_prepare)
->> +		(struct jenc_context *ectx, struct vb2_buffer *vb2);
->> +
->> +	int (*process_exec)
->> +		(struct qcom_jenc_dev *jenc, struct jenc_context *ectx, struct vb2_buffer *vb2);
->> +
->> +	irqreturn_t (*hw_irq_top)(int irq_num, void *data);
->> +	irqreturn_t (*hw_irq_bot)(int irq_num, void *data);
-> 
-> How many non-default platforms do you support? Zero?
-> 
-> Drop the call table.
-
-There is plan to add support for more platforms, if the preference is to remove platform based ops now,
-and introduce them when new platform is added i am ok with that. But will require more work now and
-for the new platform...
-
+If the link is down, the upstream component of the EP should complete 
+the read with an error, not cause the host to blow up.  The only host 
+issue I'm aware of is if flow control credits get exhausted, usually the 
+host will watchdog, but I don't see how this patch or the situation it 
+addresses would trigger that.
 
 > 
->> +};
->> +
->> +extern const struct qcom_jpeg_hw_ops qcom_jpeg_default_ops;
->> +
->> +#endif /* QCOM_JENC_OPS_H */
->> diff --git a/drivers/media/platform/qcom/jpeg/qcom_jenc_v420_hw_info.h b/drivers/media/platform/qcom/jpeg/qcom_jenc_v420_hw_info.h
->> new file mode 100644
->> index 000000000000..ebf69128cc2b
->> --- /dev/null
->> +++ b/drivers/media/platform/qcom/jpeg/qcom_jenc_v420_hw_info.h
->> @@ -0,0 +1,410 @@
->> +/* SPDX-License-Identifier: GPL-2.0-only */
->> +/*
->> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
->> + */
->> +
->> +#ifndef QCOM_JENC_V420_HW_INFO_H
->> +#define QCOM_JENC_V420_HW_INFO_H
->> +
->> +#include "qcom_jenc_defs.h"
->> +
->> +#define JPEG_V420_HW_VER_STEP_POS 0
->> +#define JPEG_V420_HW_VER_STEP_MSK \
->> +	(0xffffu << JPEG_V420_HW_VER_STEP_POS)
-
-<snip>
-
->> +
->> +/*
->> + * V4L2_CID_QCOM_JPEG_PERF_LEVEL_AUTO - enable adaptive performance scaling.
->> + *
->> + * When set to 1 the driver selects the core clock OPP level based on the
->> + * encoded frame resolution and fps target. When set to 0 (default) the
->> + * driver always runs at NOMINAL (highest) OPP level.
->> + */
->> +#define V4L2_CID_QCOM_JPEG_PERF_LEVEL_AUTO	(V4L2_CID_USER_QCOM_JENC_BASE + 0)
->> +
->> +/*
->> + * V4L2_CID_QCOM_JPEG_FPS_TARGET - target encode rate in frames per second.
->> + *
->> + * Used together with V4L2_CID_QCOM_JPEG_PERF_LEVEL_AUTO to select the lowest
->> + * OPP level whose throughput is sufficient for the requested frame rate.
->> + * Has no effect when perf_level_auto is 0. Range: 1-240, default: 30.
+>>   I've been trying to figure out how this
+>> change might break, but I haven't found a scenario, so I suspect this is
+>> good enough.
+>>
 > 
-> I assume 1-240 is only applicable to your driver.
+> This change should not break any devices as it just ensures that the posted
+> write gets flushed to the device before the delay.
 > 
-I think we can drop those controls and use s_param on output(source) video node as it
-was done for some of the other m2m drivers including OPE. Which make sense we tell the
-the driver at what rate source buffers will be received, then the driver will choose op
-level to satisfy that requirement.
-
-Regards,
-~Gjorgji
+>>> So add a read-back after writing to the MHI_SOC_RESET_REQ_OFFSET register.
+>>>
+>>> Fixes: b5a8d233a588 ("bus: mhi: core: Add device hardware reset support")
+>>> Reported-by: Alex Williamson <alex@shazbot.org>
+>>> Closes: https://lore.kernel.org/linux-pci/20260622160822.09350246@shazbot.org
+>>> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+>>> ---
+>>>    drivers/bus/mhi/host/main.c | 6 ++++++
+>>>    1 file changed, 6 insertions(+)
+>>>
+>>> diff --git a/drivers/bus/mhi/host/main.c b/drivers/bus/mhi/host/main.c
+>>> index 53c0ffe30070..4d458396233a 100644
+>>> --- a/drivers/bus/mhi/host/main.c
+>>> +++ b/drivers/bus/mhi/host/main.c
+>>> @@ -170,6 +170,9 @@ EXPORT_SYMBOL_GPL(mhi_get_mhi_state);
+>>>    void mhi_soc_reset(struct mhi_controller *mhi_cntrl)
+>>>    {
+>>> +	int __maybe_unused ret;
+>>> +	u32 tmp;
+>>> +
+>>>    	if (mhi_cntrl->reset) {
+>>>    		mhi_cntrl->reset(mhi_cntrl);
+>>>    		return;
+>>> @@ -178,6 +181,9 @@ void mhi_soc_reset(struct mhi_controller *mhi_cntrl)
+>>>    	/* Generic MHI SoC reset */
+>>>    	mhi_write_reg(mhi_cntrl, mhi_cntrl->regs, MHI_SOC_RESET_REQ_OFFSET,
+>>>    		      MHI_SOC_RESET_REQ);
+>>> +	/* Flush the posted write to the device (ignore return value) */
+>>> +	ret = mhi_read_reg(mhi_cntrl, mhi_cntrl->regs, MHI_SOC_RESET_REQ_OFFSET,
+>>> +			   &tmp);
+>>
+>> If you wanted, you could fit this all on one line.  word wrapping for a 3
+>> char parameter seems a bit silly to me, but I suspect this is highly
+>> subjective.
+>>
+> 
+> Entire driver is still 80 column width, so I was trying to be preserve the same
+> pattern.
+> 
+>> Reviewed-by: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+>>
+> 
+> Thank you!
+> 
+> - Mani
+> 
 
