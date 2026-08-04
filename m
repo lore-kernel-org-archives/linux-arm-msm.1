@@ -1,143 +1,148 @@
-Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch [45.157.188.13])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D91B243F8DB
-	for <linux-arm-msm@vger.kernel.org>; Tue,  4 Aug 2026 13:06:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=45.157.188.13
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 86BD8455164
+	for <linux-arm-msm@vger.kernel.org>; Tue,  4 Aug 2026 13:08:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785848778; cv=none; b=IrG4t4XlnlK9F4W2nhMax9RBvKhp0MqLgVXSzHVwWv3trz9bRWrMLUvUMDvUNfa1RXGv9JHrdRHMuaymzMtjLHNIujwcwsydARtpBRtQ+g4PyxgbFUg+yAz5c/LLvpS2neULHrWDBSR9LEf+ukDu3Jk52GGFs3sbzCJHVmsA+yk=
+	t=1785848894; cv=none; b=dKdpG70Fhn4fzOvTYsYxTfUow75/11jRhV1yiGNHQf97UBnhT2JKvdW428pbss5wec+mR5U3XVKWWNmvneB2cRZ/m2I7ruvEdekkG2SWGwN1Hh01Z9k8xqdhXbqr9bc0gLTPzx2/nY4X6iHVo2x47NxUdBM7vFH6FpLhJvXy81Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785848778; c=relaxed/simple;
-	bh=/uIECPQCH2XFlQ6ezbfYAxeY7I+FhCtIl7W4x/EZROg=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=HkUC2lHxMiMuwed+qhLpdvxc/NlUmGze1gWZYyFzUfTnTgCudI5SdQuFTKuQ4a32ZJ69tU+Gjy/wK0tMzP7AaHxwAks0ihKL+Yu7rrDTJof5EMuq6YyRCF5Rm70xd16eQ4gf7n1n2SvzTE3b+q0tc81VhQgG8/FzaSXURWkXjak=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=humanlearning.ch; spf=none smtp.mailfrom=humanlearning.ch; dkim=pass (2048-bit key) header.d=humanlearning.ch header.i=@humanlearning.ch header.b=kg3/dBy1; arc=none smtp.client-ip=45.157.188.13
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=humanlearning.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=none smtp.mailfrom=humanlearning.ch
+	s=arc-20240116; t=1785848894; c=relaxed/simple;
+	bh=PlD2NIDIZwT9DejzNIGPChPrCBxCUm38ftQ7OBH8g44=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=dqlf90J1veJcz/1/IxSp58oMAjEs4chvfmU0zxsGGx7FUlICanEj1HN4y11xVQV0p9irzkxp2Q2sHPxjZvhovOaQxVnlvaQ8sFdKfdec+oonj9cKglXxqQnLR4cU7ewF3z0MQadXt1iFPFxPRYaWzd9CRtyslzC8pJwhB38ZznA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ivKeJqaR; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=d/fbwfcS; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=humanlearning.ch header.i=@humanlearning.ch header.b="kg3/dBy1"
-Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch [10.4.36.108])
-	by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4hDv1Y07jVzLk3;
-	Tue,  4 Aug 2026 15:06:09 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=humanlearning.ch;
-	s=20250828; t=1785848768;
-	bh=VPOj5ntjouKI0rBQL9uDGN+P7xXno+pPAFoVXe4KbWc=;
-	h=From:To:Cc:Subject:Date:From;
-	b=kg3/dBy1FPDKhqVDGgl3YJmNDYGRZP3dITCLjaMQXRMV+XqV6sQC3NXqVJF68kWlV
-	 a3wevvKHejclxsceWnc5d7xxrjjdSQlrqp2vFLWVQBkWWBP3X6s4YSxv1NSeaVTDk+
-	 bs2Tn8M90beq+eySSS3V+lmGg14/x/ULw+oGHWMg3lO5hiknQ3uDbIZbymTCyG6Sxh
-	 wFj1rKnAAoDwy7eWn3WOesL5PLvJ2C/Q2pPouHbKWxnc6SIwdGNkdsfSOLdVdSsF3U
-	 CO8xOXFyWc1C1Z4vvuzj/ukBrSRMszrPkeDs3tDP7tK8+Wz91FAAejAq84y8I/LVb+
-	 TqlatV/yQ6tCg==
-Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA id 4hDv1W6Qm8zSHy;
-	Tue,  4 Aug 2026 15:06:07 +0200 (CEST)
-From: =?UTF-8?q?Fran=C3=A7ois=20Roux?= <info@humanlearning.ch>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Harrison van der Byl <harrison.vanderbyl@gmail.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	=?UTF-8?q?Fran=C3=A7ois=20Roux?= <info@humanlearning.ch>
-Subject: Surface Pro 12in (X1P42100): touchscreen variant, different GPIOs
-Date: Tue,  4 Aug 2026 15:05:38 +0200
-Message-ID: <20260804130603.86693-1-info@humanlearning.ch>
-X-Mailer: git-send-email 2.55.0
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ivKeJqaR";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="d/fbwfcS"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 674CXV794144202
+	for <linux-arm-msm@vger.kernel.org>; Tue, 4 Aug 2026 13:08:11 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=10XOnDn3aTYFPye/g/keLeps
+	r+kMiNC63RozS31gDI4=; b=ivKeJqaR3PxidchUlY99QMofuv19ILM9BiZX+aRp
+	n8kX2VdyPPj4WMexM9T9GJI02rQb1bIVd0m+30t5iCBFdNW/NfxApEWD+eczpe5F
+	guenZQTFHGmlWfGrvcE5YLLjiGo3ylHvZxv71edeVTdof3+IYHWPWPzDiGlX+QMo
+	q8ibet7lunY8/VqCN4bQgEfvZSpElJWg/4NH6kvL91Gt2iuN/uBSXlcmTl1SLKMZ
+	Fbx7sMQIqXbz8/3bi8qxol5BjT9nFlKx3z9CUtsFlnozgUf9VQCe9RQ/BQjZDSkT
+	snbAnInkbWQRHXHqoldXs1OcNSgmx446CzmWCp3rvUmZlA==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fu3vs32x5-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 04 Aug 2026 13:08:11 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-51c1a9764f0so47740711cf.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 04 Aug 2026 06:08:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785848891; x=1786453691; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=10XOnDn3aTYFPye/g/keLepsr+kMiNC63RozS31gDI4=;
+        b=d/fbwfcS0dPbE+khzJDtKUygPjBF5u93iXE3zgbKjLncggOz/QWEuNmSjbUgAAHCMu
+         1qZLJTDgwvqEkntQWjV4Htn4Sgfa7yKkjZ5OKIL/K+zx15yk2Ksy4JPUNMXifmy36Ju5
+         odyqCj3KpIXZsCtSOsgRsjprY7/Scf+Bobp19DJf70LFZHGR1dknvDGO+l3gPgrFyneQ
+         D6RaJ5cqksqnoxfpw2TEqyO/6maYe8LLDLTwqXizHoVRQhLryhhxcA5T+pNbTBJX/23O
+         ecHvGywj+JWjzVnSGbSrUnb5N2dr/KlzyJzuyMs1hlRWmis/1D4sc+Yigl5y69DBkeWo
+         ZQdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785848891; x=1786453691;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=10XOnDn3aTYFPye/g/keLepsr+kMiNC63RozS31gDI4=;
+        b=B0h+4z3LSPsFhwmkr5Sq1stcRtoDlGsl6ycA+Wm44se5e++nA2HeSe15nIXJCs/VN8
+         +sTbCj6m7ROPHFmPNT9CTAERxSfBEmunfHYuK9PQBEJbnUowIjON1NMfc0/ieKWhdCNs
+         nftqobRJxNLAt6TiIGt9wtrOoJOqz7q+gNdpIMYmoR//nlOBdVBBJfdozGzZa2/NGxdg
+         iCi26D0s406XQfpIs+1I1LHV5TRquCUYP9ff6vV7J2AU8J4Q602N0TiuQBd474wDO1S1
+         ImWgDnL6zOil38hOY6pndKMUJ6gUpFQFRZKC+vd3G4/RsNlnVOiVBi44r8ijWh8lXaAP
+         0yGw==
+X-Forwarded-Encrypted: i=1; AHgh+Rq2P4ghfIkkrlehk6HhLvup3T9t3mM9RLJ+ws9TmgEKAP506kBaU+RnbgokZB2hWRuFv5Qybg3ArMTFpcJ1@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx+5NDRtz/PjMXL83W8wxPsMh3TxIX0qoKBBdbLhBc+/CKIRG+3
+	nXu71kzY/fS8jkBqadEqOfeEkF9v3rDhmgqfxQJa+e75kskFj+eBFsgo6nbZ0EZbZIuVf0sxBVv
+	fkzQE5J7tfN8YlitdPL2UKeMy99s5wHz9XM2u+Zo2ItPnQjWD7VojdfyKQkB67qv4Afpj
+X-Gm-Gg: AR+sD1319SOaahBXgmv0GchdnXx3yVyEy8DA2w4BydekmgEc+UYaT6oTwWrMmWxHwIf
+	JBHMEHdts1OgEGNl7rDZNTE8eJTMwF0M2+Dgjg/CQAUyXl0QimDndYtFWyezOWiIgHsD2xOtrd6
+	Q1l6xU9sDG8EvwOHfUuTIxams2/NfppNK+ONlUdEjzuSBOEfqbpkn1zMiuTMH9CAHnZVQgOckMf
+	VDyT/YxH8rz6rQNdq9HfUmT6wqQCLLKuYS6GRc+9mfe4fJEOzZAxIoMA1Q34wCHM7tEfAavXN1P
+	YrtBo0P6uDjUddse9IdHbkqAv/bVOuPx/ObewZ+tUb0pyh0H3TWSAY2pQrxYKbRkcnXa9l/S+BU
+	XRbWPSCQIWWSJwg==
+X-Received: by 2002:a05:622a:4d0f:b0:51a:ee21:d342 with SMTP id d75a77b69052e-52b567522acmr314122651cf.20.1785848890641;
+        Tue, 04 Aug 2026 06:08:10 -0700 (PDT)
+X-Received: by 2002:a05:622a:4d0f:b0:51a:ee21:d342 with SMTP id d75a77b69052e-52b567522acmr314121601cf.20.1785848890031;
+        Tue, 04 Aug 2026 06:08:10 -0700 (PDT)
+Received: from oss.qualcomm.com ([86.121.37.248])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49807b23f6fsm281086695e9.0.2026.08.04.06.08.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 04 Aug 2026 06:08:09 -0700 (PDT)
+Date: Tue, 4 Aug 2026 16:08:06 +0300
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+To: Taniya Das <taniya.das@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Jagadeesh Kona <quic_jkona@quicinc.com>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+        Imran Shaik <imran.shaik@oss.qualcomm.com>,
+        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 2/6] clk: qcom: nwgcc-nord: Add video axi clock resets
+ for Nord
+Message-ID: <7k3quzrdkhi7r6fs2hn4mfr4wtkxmbejwa2ev3nknlc3k5wifk@yicurkulkqsg>
+References: <20260801-nord_videocc_camcc-v2-0-674d7718e41f@oss.qualcomm.com>
+ <20260801-nord_videocc_camcc-v2-2-674d7718e41f@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Infomaniak-Routing: alpha
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260801-nord_videocc_camcc-v2-2-674d7718e41f@oss.qualcomm.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA0MDEwNSBTYWx0ZWRfX4fGmXNjCTbbR
+ Bt422fhSICmzgJOvjLkEQryzBflZbYtSrERSRHApQyvAPnB3VsilWvW3nuykXTc30tlUgTcEEcJ
+ +Grs/oGWIRmYrZFfhh7/fsrLDjtcyL+pb79UJQJsaWVxhFCYczXaZggUwkClNiHl4ZE2XcaRlVe
+ d3uw9d7Cpj5a7E9OMEIh9RIlO6s0LQCvU6qp/+8btKot4fTsUkgYxjAWrcqT/iftlwaJI95Sh9p
+ svWPCTRwVzYkUsyRAxnJe8LTXhzAPxOw7+WuCGNVip/wxuB+HUeevtwfDNpDOIB+vD85EwroVVZ
+ 4zp5BmyBp7842h5EJ6tKmQKuWhnRIqvMtCtNPl/ZouK5AZKhRA3x2tk9fybDzTj/VPGN/G4szGJ
+ G4G6uYhWbcMDlFFlmgow6qjZUW/k6K2xOKfpy6TWoxfeDt8ZuSFQQyk4lyCSGmU3atgsC7Z0ZtK
+ XqIYqPiV9esIeXekS2A==
+X-Proofpoint-ORIG-GUID: aAh-QxwS7fJPG74WfSTzvSGaCElZWfAW
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA0MDEwNSBTYWx0ZWRfXxcvf5mAOPFyd
+ xRvucFix4jwV1vZzqZPAGLHv/fYSmIBfFJ9r+x+ulKa0o+/tNLuh6e9Ql55dFB5Pyq1eWEkcyfb
+ fJsoNjnz5cavrGooaNxxeNxSy7y8BA8=
+X-Authority-Analysis: v=2.4 cv=EK82FVZC c=1 sm=1 tr=0 ts=6a71e43b cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=Afnz6uBANMlDQL2PJxecKw==:17
+ a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=-zE5Bsz_LXmV53O_SacA:9 a=CjuIK1q_8ugA:10
+ a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-GUID: aAh-QxwS7fJPG74WfSTzvSGaCElZWfAW
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-04_03,2026-08-03_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 lowpriorityscore=0 malwarescore=0 priorityscore=1501
+ adultscore=0 spamscore=0 phishscore=0 clxscore=1015 bulkscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608040105
 
-Hi,
+On 26-08-01 19:43:53, Taniya Das wrote:
+> The global clock controller video axi reset clocks are required by
+> the video SW driver to assert and deassert the clock resets during
+> their power down sequence. Hence add these clock resets.
+> 
+> Fixes: a4f780cd5c7a ("clk: qcom: gcc: Add multiple global clock controller driver for Nord SoC")
+> Signed-off-by: Taniya Das <taniya.das@oss.qualcomm.com>
 
-Reporting a hardware variant rather than sending a patch, because I do
-not know how you would want it discriminated and a naive patch would
-break the other units.
-
-x1p42100-microsoft-sp12.dts describes the touchscreen as:
-
-	/* ILIT2911 or GTCH1563 */
-	touchscreen@16 {
-		compatible = "hid-over-i2c";
-		reg = <0x16>;
-		hid-descr-addr = <0x1>;
-		interrupts-extended = <&tlmm 51 IRQ_TYPE_LEVEL_LOW>;
-		vddl-supply = <&vreg_l15b_1p8>;
-		pinctrl-0 = <&ts0_default>;
-		pinctrl-names = "default";
-	};
-
-	ts0_default: ts0-default-state {
-		int-n-pins   { pins = "gpio51"; ... };
-		reset-n-pins { pins = "gpio52"; ... };
-	};
-
-My unit has neither of those controllers, and different pins.
-
-What is on this machine
-=======================
-
-	hid-over-i2c 04F3:4377 Touchscreen
-
-04F3 is ELAN. It sits at the same address (0x16) on the same bus, but
-the interrupt and reset lines differ:
-
-	                  upstream DTS      this unit
-	interrupt GPIO    51                38
-	reset GPIO        52                48
-
-Both descriptions are internally consistent -- the interrupt property
-and the pinctrl state agree with each other in each case -- so this is
-not a typo in either. It is a genuinely different board wiring.
-
-The vendor DTB shipped with Windows on this unit uses 38/48, and it
-works: touchscreen, pen and multitouch all register. Booting the
-upstream DTS on this machine would leave the touchscreen dead, since the
-driver would be waiting on a pin the controller does not drive.
-
-The unit also has `wakeup-source` on that node in the vendor DTB, which
-upstream does not carry. I have not tested whether it matters, so I
-mention it only for completeness.
-
-Machine identification
-======================
-
-	sys_vendor       Microsoft Corporation
-	product_name     Surface Pro 12in 1st Ed with Snapdragon
-	product_sku      Surface_Pro_12in_1st_Ed_with_Snapdragon_2110
-	product_version  124I:00125T:000M:0000000F:0B:10C:08M:00D:00U:00T:2R:10
-	bios_version     9.166.235
-	DT compatible    microsoft,surface-pro-12in / qcom,x1p42100
-
-Note the DT compatible above is from the vendor DTB, which predates the
-rename to `microsoft,sp12`.
-
-Why I am not sending a patch
-============================
-
-Both variants would advertise the same compatible, and the DTB is
-selected before Linux runs, so a second DTS would need something the
-bootloader can key on. `product_sku` ends in `2110` here and might be
-that discriminator, but I have exactly one unit and no way to confirm it
-distinguishes anything.
-
-Changing the GPIOs in place would obviously break whichever units the
-current values were written for.
-
-So: how would you like this handled? A separate board DTS, a runtime
-quirk, or something else entirely? I am happy to write and test whatever
-shape you prefer, and to dump any register or property from this
-machine.
-
-Environment: linux-next next-20260626 on Arch Linux ARM (aarch64), with
-the vendor DTB rather than the upstream one, for exactly this reason.
-
-Thanks,
-François Roux
+Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
