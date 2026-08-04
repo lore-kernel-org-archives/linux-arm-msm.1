@@ -1,48 +1,45 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FD1843CE4D;
-	Tue,  4 Aug 2026 08:29:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 67CD03E715E;
+	Tue,  4 Aug 2026 08:36:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785832180; cv=none; b=Igfzm466irbS6BuEyO4UqQFpRo0RJUqg2VW7u3caq8irSgSdMIhSvZkKA1KHvAFTug72n/8LGfczCwmxTt4JUqjOtHcB3joedX1GzeopyVTZImj5jpuhusHk24GC4bSh+F1FaXgh1vFxlcsnaT/aEnj92f+x2OKJYlikGCfSWDk=
+	t=1785832598; cv=none; b=eC8HiqBYOXDGEizM7QwC22B9NZfAuNLWJmXOHk9Fz7hUUYdtQ+/rYWx964IY6Fy+UlXAYIXS74RRqGhgWpI8gd+BoQgnfbVx0hm77hHWCLtPi9n2XCXqddzMYJo6WZzAmZcNgIzs4HDpL1/av9AQyNuUw8koRP59chmbY1qbC2o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785832180; c=relaxed/simple;
-	bh=u45aOxzysrT8leRCEfHEZ//saarRkjOA4gG1Cwdh6zw=;
+	s=arc-20240116; t=1785832598; c=relaxed/simple;
+	bh=heyr6V9pc5fqm8Pg1u3+bC/7Jv5hFLVtncn8urFynOo=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=FSSHCV+/xnFG22s/ty06C+iZOxqu9kkywA89u5tdzPZvf8FUifGG/WX+6KhI3r/069H0GrNW2ScfY4q+FEWv2MaNOQUvErPHNprL7UMYNdeko3gojZanquB06ZC7vOOuD8Ev1HFseoYN4o6tqVAlGKa9UlcW054rp0GoMVFMdv0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dA+B5xhQ; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=ZIcvEtQHILMirsWijiSSp5xuxeYQHoyc0JQTwhSCvGW9bx9F0HHHX6ctbR6sv+HSkcHUhFb0ZfMiliFX/lIONQMIWdO932/gwyui3Qyn4vTbiEH3JeiZi4m8dn2gSDjP1KQyJaVEk6l8XUNUpGJXgHCtYjA98gdLOFhZ1s74CI0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=OJR8Twl3; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dA+B5xhQ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4AB991F000E9;
-	Tue,  4 Aug 2026 08:29:38 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="OJR8Twl3"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DBC9D1F000E9;
+	Tue,  4 Aug 2026 08:36:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785832179;
-	bh=u45aOxzysrT8leRCEfHEZ//saarRkjOA4gG1Cwdh6zw=;
+	s=k20260515; t=1785832597;
+	bh=64Xq96YRQyhtkBPpcEjutIkSTHiC9n8HlyHblT8xDvo=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=dA+B5xhQigUK3M1mXynKOemJigcQdgcbh9OWCOwIc4eTyRFQ0CyQnHMGJNxRBAcCK
-	 eZ11mSxbvFnjo9uB82S1Sv/SMehRR0v9kDewCp3xB9Mai/9ZDxc16gO9XRgj2NpdNp
-	 WTElaUMdarHKIrshrWZK9aK4ZglNKsGKIU5KsaRrCxcuJYpMTbUEvU6cM+C91oIUWu
-	 6dxhFR/LCRUY7vKtm57pjtO9SmORhZlgL2hxQJCJNtytxAFXFypsP4IAowYI5YEsyo
-	 JtfMrX8/JfvspO28HZiUrUxu56ZSJo1ECecZAER2R6e8g4PcN7dICmBPnWWsNWuHYM
-	 /scmJQh4+PbLw==
-Date: Tue, 4 Aug 2026 10:29:35 +0200
+	b=OJR8Twl3a8iyERK7ubpNDGveorBM2Y3IM55x4JejXbJcTrdYhMIf6iH65+9hAa6Uw
+	 YGaL5g7SvjNymVqJBG3fKYlt9kku341Ca9yfJpV9lAiDKsY83RsZw5AvR2yQjObBq8
+	 PgHoUQfDv89mI+ZvDi5GA8vzjAdAuhx9SGk3xRpp1fk72hx3SFcWB646ihkpKw8d3Y
+	 hWJNoRi7uRwAIcS1B0hpcnj/rOjYj+8UJg1NT9mFa19IWTnpfzA3nw1CIh3USyw332
+	 hOMZeeW0iDik6+AdEHMBcqC/hdYvAg2Y55Ubr5S4Giftgk6lU73wKjGkqJ8jMX8AbX
+	 QeAKO5GneE+xw==
+Date: Tue, 4 Aug 2026 10:36:33 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Danila Tikhonov <danila@mainlining.org>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, =?utf-8?B?QW5kcsOp?= Apitzsch <git@apitzsch.eu>, 
-	Daniel Scally <dan.scally@ideasonboard.com>, Sakari Ailus <sakari.ailus@linux.intel.com>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Eugene Lepshy <fekz115@gmail.com>, Vasiliy Doylov <neko@altlinux.org>, 
-	Achill Gilgenast <achill@achill.org>, Luca Weiss <luca.weiss@fairphone.com>, 
-	Griffin Kroah-Hartman <griffin.kroah@fairphone.com>, linux-media@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	~postmarketos/upstreaming@lists.sr.ht
-Subject: Re: [PATCH RFT 1/3] dt-bindings: media: i2c: dw9719: Document DW9800W
-Message-ID: <20260804-terrestrial-solemn-mustang-bdfe60@quoll>
-References: <20260801-dw9800w-clean-v1-0-38978de67963@mainlining.org>
- <20260801-dw9800w-clean-v1-1-38978de67963@mainlining.org>
+To: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+	Manivannan Sadhasivam <mani@kernel.org>
+Subject: Re: [PATCH 01/28] dt-bindings: phy: qcom: Describe QMP USB and UFS
+ PHY vdda-phy/vdda-pll voltages
+Message-ID: <20260804-lemon-malamute-from-nibiru-eeedde@quoll>
+References: <20260803-phy-supply-fix-v1-0-5880630cde3e@oss.qualcomm.com>
+ <20260803-phy-supply-fix-v1-1-5880630cde3e@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -51,16 +48,27 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260801-dw9800w-clean-v1-1-38978de67963@mainlining.org>
+In-Reply-To: <20260803-phy-supply-fix-v1-1-5880630cde3e@oss.qualcomm.com>
 
-On Sat, Aug 01, 2026 at 09:04:14PM +0300, Danila Tikhonov wrote:
-> Document the Dongwoon Anatech DW9800W.
+On Mon, Aug 03, 2026 at 08:33:59AM +0200, Manivannan Sadhasivam wrote:
+> The vdda-phy and vdda-pll supplies of the QMP USB and UFS PHYs are
+> frequently swapped in devicetrees, as the naming does not make clear
+> which supply expects which voltage. Document that vdda-phy is around
+> 0.8V and vdda-pll is around 1.2V, with the exact voltage varying per
+> SoC, so that the correct supplies can be assigned.
+> 
+> Reported-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> Assisted-by: Claude:opus-4-8
+> Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+> ---
+>  .../devicetree/bindings/phy/qcom,msm8998-qmp-usb3-phy.yaml   | 10 ++++++++--
+>  .../devicetree/bindings/phy/qcom,qcs615-qmp-usb3dp-phy.yaml  | 10 ++++++++--
+>  .../devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml   | 12 +++++++++---
+>  .../bindings/phy/qcom,sc8280xp-qmp-usb3-uni-phy.yaml         | 12 +++++++++---
+>  .../bindings/phy/qcom,sc8280xp-qmp-usb43dp-phy.yaml          | 10 ++++++++--
+>  5 files changed, 42 insertions(+), 12 deletions(-)
 
-Which is different than dw9800k? How?
-
-I should not have to read your driver code to figure that out.
-
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
 Best regards,
 Krzysztof
