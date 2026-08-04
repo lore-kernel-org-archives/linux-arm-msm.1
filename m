@@ -1,131 +1,110 @@
-Received: from out-170.mta0.migadu.com (out-170.mta0.migadu.com [91.218.175.170])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD8C542122B
-	for <linux-arm-msm@vger.kernel.org>; Tue,  4 Aug 2026 04:10:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.170
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7124D313550
+	for <linux-arm-msm@vger.kernel.org>; Tue,  4 Aug 2026 04:21:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785816658; cv=none; b=YIkObTHv8tXiL5VciJ9gHf//2B/4QYhGFXTy/AW4aL9tW1LW8ll838w/qD7QfqidJ1KDtbN9RNOtDENsyKiqO9oWyy3/eO2Tuz2NK52Xm9xXRY/PowzR0LLC9kan9vIsAjB0jxce3t/HDZmKZSQj868398Xr1fWBerZbbm4ttLs=
+	t=1785817283; cv=none; b=cXzsfdl6Pyrd/X7SOxb8D2nhdA5ua5pJuV40lY9735TJaHfD5EpvQtpL3KV4EiF+AtKC3Eb8qVSx+3pTQM8rKANoL06dSt5PNi4QnNtLodVbQ90avlVCLKsARUMiyJ5rjIcvROk+RkVrnSPvqSVnyfUq3x41tgabERTnbV1uEao=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785816658; c=relaxed/simple;
-	bh=OhD/yEFhUGihcpSsRGs/dbnXlDc4PeCN7WQIqEtisDs=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=WstG3oZ/lODUxmRgdwILnG5R1Ma5UudB40n8iZ4yXqYofA+TEhjAa05dBFlqUCvZtg7RBa+HQ0ApiLXGGa0oPS3R1wHXiGcM3T51EHX0T6LMVCVVUYNPqFkr1kpkGFHUy7zxO9hMm9+KgMgNr03g9Sg8tS4uNnemN5WC9zP0Awg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=w+h+sJSG; arc=none smtp.client-ip=91.218.175.170
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+	s=arc-20240116; t=1785817283; c=relaxed/simple;
+	bh=N1U4YH2rA30TenjPpOvIQ7i8FHYyt9DTIYZxboCCGto=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=qXgCDzgWKUTFVWJzYhUgtv+XuJiv3EAqlKWTIwo4Pkgxt5ScRm/hP3ugVcq5Upl/jvHXBq4i0zacGlF+Nq3IbpMe9D5s1aTV/s0J6xSFrV92vo10I6OOFLjyxBiDU54Zkh1+FTRZALlKfjuu92GpH+TzjJy/Bvr318p2xdKPZJY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=uTEcDkei; arc=none smtp.client-ip=209.85.216.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="w+h+sJSG"
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
-	t=1785768591;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=6Idn/88+dNM3THJaU3R/zT+H0rXSmXeg/6ZwPUJ48gU=;
-	b=w+h+sJSGt2IzV6XC7ikdjTvriPeDmidh29HXG3gACWWB8LCNsXbrL8ORsWs3yxZlXGK+hD
-	SygL2nbcsRO3RSfdsX3yIps0oiDlVEl7gfPThiAnTrT3aiTxCPmVdE/vtRKzydMNQMvPr5
-	e1lyGFKGojFMwWb1od5B4xwmI8wvfx8=
-From: Junjie Cao <junjie.cao@linux.dev>
-To: sashiko-reviews@lists.linux.dev
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>,
-	Simona Vetter <simona@ffwll.ch>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Pengyu Luo <mitltlatltl@gmail.com>,
-	dri-devel@lists.freedesktop.org,
-	devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 2/2] drm/panel: Add Novatek NT36532 panel driver
-Date: Mon,  3 Aug 2026 07:49:39 -0700
-Message-ID: <20260803144941.1402261-1-junjie.cao@linux.dev>
-In-Reply-To: <20260729162847.9F4A51F00A3A@smtp.kernel.org>
-References: <20260729160804.912826-1-junjie.cao@linux.dev> <20260729160804.912826-3-junjie.cao@linux.dev> <20260729162847.9F4A51F00A3A@smtp.kernel.org>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="uTEcDkei"
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-38dc4553f62so3900262a91.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 03 Aug 2026 21:21:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1785817282; x=1786422082; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=SNaVEJ1HZqqSb/BWjpBmAcESh4gvUlmp0T6zod8QVBo=;
+        b=uTEcDkei2vb/G+qdIOtZbaB9NJHR76SZdFJ0azOpGcEjg3b9dUma5R5oaM5+67xWsk
+         2vByRxiu8ggMmw45H0y2V0m5H0INr0D7wdNaf1xGqp4oAr7PmuOnVC5QCKd/ZNFY8TDq
+         NIQFql2LV9v0AImQQG7ayFcywyuGjrDld8S9G9ZIwL9fS1eYSCnkjlOT8rLgLlhixUpI
+         OO6Yh3JqcC544zi7BR4AZ8M2uol3HRU4AeOyimbNbN7cHoqEZV7oHNKlZEfbUzSbQadS
+         CKfmIlRa5cB/PPsVYR3DS9IqOY3jvW+oeImJOSwldRfT7RfIuo+nGF/0qt6gR0D9LDEr
+         asVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785817282; x=1786422082;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=SNaVEJ1HZqqSb/BWjpBmAcESh4gvUlmp0T6zod8QVBo=;
+        b=qHbHud02KZKz2MMBfnKzLO4CM4u1k6WMWts1RKzGmlsJekkI5vfGvd8iHPsLr2vJSK
+         IRFW+IUNb2zbB/g76EzloNmSqMGRnvtYdidrEkm8R/TT19Gics3sP4ZLpJnv+zMDEtm/
+         j/V6u6kP8TEJCOxy+cKFbt61KnnqLFZq/RpYBZfr7s8FNK2nSTkLB0J66bh8IKjB43y5
+         8yafh0hNJGZMQ3/DnD6rlMx9TyYa1KdXYHRksQWgvILdMHqBSdyyH2Y41Uw7O4fmi9CG
+         EqmFgcGEbWnvrf7/GDbFBIqcUc4s4NtGmpqwEPYmnNoR1/TY6ck1Y1iQOHEzm8CEd5M/
+         4snw==
+X-Forwarded-Encrypted: i=1; AHgh+RpA2WnHJuYXDcJ4AHbX0XPiUDzOBuSxtP3RYnzTDMhMtHIGNoVtfK1ZKGSMRnaSkThuzYGRDHJDgu06plNX@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxp5zn2BegWxGu7f0AokHw4x3mPqGN+9xhw3zEBf1Wv5mq0Dtrq
+	41xBPMftADknwTZQmgcaRGcnx42GTsWE+hzFx0WKR8Nfg0ye4m4Sg9TUd2fJ2WQHPbU=
+X-Gm-Gg: AR+sD12/sSmvyHouTgko3ekBEpZt56k9JNacRq1jdyVmG6Aw3fHiA1P0wp6Q0F1H/W/
+	iG8wmOVS1t/0FjENL0BgbG37ZOlrMuK4co6sBCMxyUol+LkLibxB2EtBgha+WV8SPpGuKUJFiYY
+	seIXdVv4BGNnYvpZd2Glbuz1vwVYgdmC9I3lUlARJ+ovB2v9dS9RdthWVKEJMMnO+Ozz1m89cIi
+	WdFBMj/1y0/jHcIvrgBPHQc7TKm9rPww7E3Y1nfssxnNwe1z2Ya1zgCtnVQsjM4aEn8jYhb6+95
+	y4cFZOJr+EHMVHUYJsDGYFxBHnuDkqUbOVL9nIyuBFmQ8BxM5ka8HoUWIIuVr1vIDjIVuRWui17
+	N9v0U6YU2i1ZKo20slfQRgZT2gxFr+q2fa1SMMGkxPSDJHuXg+muMVlvEVvDqyMLYksmrvZjscq
+	wvVnRRBTSJqrR908ky6lfx05++0QQ5O0RAKJuR3t+51m4kW3KG3cZpvoUl+JqG
+X-Received: by 2002:a17:90b:4a09:b0:38d:ecfe:41aa with SMTP id 98e67ed59e1d1-38fbc60c7femr11264577a91.43.1785817281575;
+        Mon, 03 Aug 2026 21:21:21 -0700 (PDT)
+Received: from localhost ([122.172.82.94])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3153dd4e47dsm64394331eec.3.2026.08.03.21.21.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 03 Aug 2026 21:21:20 -0700 (PDT)
+Date: Tue, 4 Aug 2026 09:51:17 +0530
+From: Viresh Kumar <viresh.kumar@linaro.org>
+To: Maulik Shah <maulik.shah@oss.qualcomm.com>
+Cc: Linus Walleij <linusw@kernel.org>, 
+	Andreas =?utf-8?Q?F=C3=A4rber?= <afaerber@suse.de>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Lorenzo Bianconi <lorenzo@kernel.org>, Ray Jui <rjui@broadcom.com>, 
+	Scott Branden <sbranden@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Sean Wang <sean.wang@kernel.org>, 
+	Matthias Brugger <matthias.bgg@gmail.com>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Andrew Jeffery <andrew@codeconstruct.com.au>, 
+	Avi Fishman <avifishman70@gmail.com>, Tomer Maimon <tmaimon77@gmail.com>, 
+	Tali Perry <tali.perry1@gmail.com>, Patrick Venture <venture@google.com>, 
+	Nancy Yuen <yuenn@google.com>, Benjamin Fair <benjaminfair@google.com>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Viresh Kumar <vireshk@kernel.org>, linux-gpio@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-actions@lists.infradead.org, linux-kernel@vger.kernel.org, linux-mediatek@lists.infradead.org, 
+	openbmc@lists.ozlabs.org, linux-arm-msm@vger.kernel.org, soc@lists.linux.dev
+Subject: Re: [PATCH] pinctrl: Use IRQ trigger mask helpers
+Message-ID: <mre6ggyfjxo5dgvtrp3nsrbxngenw4r2eb6nygi4ybs5zsefyq@kcu6u33q3ien>
+References: <20260802-b4b4-irq-trigger-mask-pinctrl-v1-1-1c398ab53d28@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260802-b4b4-irq-trigger-mask-pinctrl-v1-1-1c398ab53d28@oss.qualcomm.com>
 
-On Wed, 29 Jul 2026 16:28:47 +0000, sashiko-bot@kernel.org wrote:
-> - [High] Missing Kconfig dependency for DRM_DISPLAY_DSC_HELPER leads
->   to linker errors.
-> - [High] Improper use of DCS brightness helper inside a vendor
->   sequence corrupts the initialization payload.
-> - [Medium] Global static DSC configuration structure is assigned to
->   device context and mutated by host drivers.
-> - [Medium] Missing DRM backlight device registration and OF backlight
->   mapping.
-> - [Low] Panel physical dimensions are defined but not reported to DRM
->   userspace.
+On 02-08-26, 19:35, Maulik Shah wrote:
+> diff --git a/drivers/pinctrl/spear/pinctrl-plgpio.c b/drivers/pinctrl/spear/pinctrl-plgpio.c
+> index 1ec22010a3f9..5fcbea32089d 100644
+> --- a/drivers/pinctrl/spear/pinctrl-plgpio.c
+> +++ b/drivers/pinctrl/spear/pinctrl-plgpio.c
+> @@ -339,7 +339,7 @@ static int plgpio_irq_set_type(struct irq_data *d, unsigned trigger)
+>  	if (plgpio->regs.eit == -1)
+>  		supported_type = IRQ_TYPE_LEVEL_HIGH;
+>  	else
+> -		supported_type = IRQ_TYPE_EDGE_RISING | IRQ_TYPE_EDGE_FALLING;
+> +		supported_type = IRQ_TYPE_EDGE_BOTH;
+>  
+>  	if (!(trigger & supported_type))
+>  		return -EINVAL;
 
-Thanks for the report. What I'll fix in v3 first, then the two claims
-I disagree with.
+Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
 
-Will fix in v3:
-
-1) Kconfig: add select DRM_DISPLAY_DSC_HELPER + DRM_DISPLAY_HELPER (for
-   drm_dsc_pps_payload_pack()) and DRM_KMS_HELPER (for
-   drm_connector_helper_get_modes_fixed()), plus depends on
-   BACKLIGHT_CLASS_DEVICE, like the other DSC panels. Verified on
-   arm64: disable DRM_MSM/amdgpu and the other DSC panels and Kconfig
-   happily gives you NT36532=m with the DSC helper off, leaving
-   drm_dsc_pps_payload_pack without a provider. Most DSI hosts and all
-   the DSI bridges select DRM_MIPI_DSI but not the DSC helper, so this
-   is easy to hit. Good catch.
-
-2) The set_display_brightness_multi(0x00d4) call sits in the page 0x23
-   vendor dimming table (0x4e..0x52, one byte each); 0x51 there is a
-   table entry, not the DCS brightness command. The stock OnePlus
-   Pad 2 firmware DT sends it as an 0x15 short write (51 d4), while
-   the helper emits a long write with a trailing 0x00. Will switch to
-   a plain one-byte write. The "51 07 ff" after switching to page 0x10
-   is the real brightness command and stays; I'll write it as
-   MIPI_DCS_SET_DISPLAY_BRIGHTNESS with an explicit 07 ff payload
-   instead of the byte-swapped 0xff07 (same bytes on the wire), and
-   drop the other accidental MIPI_DCS_* macro names in the vendor pages
-   (SET_GAMMA_CURVE, SET_ADDRESS_MODE, set_pixel_format, ...).
-
-3) Make the DSC template const and copy it into the instance at probe
-   time (ctx->dsc = *panel_info->dsc_cfg), like panel-novatek-nt36536 does,
-   so the module-global struct is never written.
-
-4) Call drm_panel_of_backlight(). Brightness on this device comes from
-   a separate KTZ8866 backlight controller via the standard
-   'backlight' property (already allowed through panel-common-dual.yaml,
-   so no binding change). Without the hookup the backlight stays on
-   after a panel DPMS off; reproducible on the device here.
-
-5) Move width_mm/height_mm into csot_display_mode; modetest currently
-   reports the connector as 0x0 mm.
-
-Won't change:
-
-a) "extra byte could shift subsequent commands out of alignment" - no.
-   Each DCS write is its own DSI packet with its own payload length; a
-   longer packet can't corrupt the ones after it. The 0x51 change
-   above is about matching the vendor sequence, not corruption - the
-   panel comes up fine as is.
-
-b) The two DSI devices keep sharing one drm_dsc_config; only its
-   storage moves, per 3). Both links of a bonded panel must run
-   identical DSC parameters, and the host derives the rc parameters
-   deterministically from the same seed values while the pair is
-   brought up sequentially in one thread, so there is nothing to race.
-   Per-link copies would just be two structs that must never diverge.
-
-Thanks,
-Junjie
+-- 
+viresh
