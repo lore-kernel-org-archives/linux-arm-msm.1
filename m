@@ -1,282 +1,148 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE18E4028EE;
-	Tue,  4 Aug 2026 15:35:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15CC73F7899;
+	Tue,  4 Aug 2026 15:38:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785857758; cv=none; b=N6NSN2YChFLnAqJYtqi80NUuwfFyeNjhZUjdQ2EES0LXvjYvYxUXzYvLJWL3XpfYHSEvs5+xSZQr6Wz93iNXBrMGKASZAKkPp3xzoA8MKxbdCUaOSTzYshNlRimqBZTSn3JZpkgmGkK2Hi4ZaB67WnGSsyUc9F6GHFGn8miDZF8=
+	t=1785857918; cv=none; b=MHtmlna2Uht5SMNw/2vvvydwL5kHLIrdZ7xn72paI0BOs+TOADBvpCg66363RXB1xIZfulmPoNw/ckZRo+SiGzFrBJxgd4foL/MdYDI+UQT911Qbh0DNYSer3lP50GZvoeH+3W1P1b0iH/xYoyKFIK6sZJ85O9mtUSwzYj5mhVo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785857758; c=relaxed/simple;
-	bh=ozuIT6NQ6keOFHqrAgxFSBFKp2gQ9ihWI1Rd3iiHEBI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ckJ7jZTmGJpg4G5fjgn0JC+730Lm8WvY6uucsr7EAKz6u4VzGwTYrBvtszSwZIGB7HeyupBLarjYbfYGSuLjDwmV2xNFUOWqB2mzwSDNeqdcZcg4rvsWYWT8aWL/FI9SHXi47AAe7v5PJ8sRiD62iv5zQO1XkVB8PyocV0uY/rA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BYuxkgHG; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1785857918; c=relaxed/simple;
+	bh=eh2BQOQm5KSzzSGW9l8H5doD+YZaMC+W8qiQhvuWldQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=VwIOjpGKDToUIvMy4noe6vxWtZhbDqaBLcr31WVNwOZSYMXu2YBsMmmY+g1xCte8XquKGodCYuAyxqu9HRg1L06w5rBaCUBFPteZQkeP+Q9m4kRotRaC13cjffBxQ26aiEMpCzupz11mHusg8O2SWuEIJFWM6+lM5i1LBFJYGW8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aEMPGjb7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BYuxkgHG"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E9F061F000E9;
-	Tue,  4 Aug 2026 15:35:55 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aEMPGjb7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0F2681F000E9;
+	Tue,  4 Aug 2026 15:38:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785857756;
-	bh=tb5nPy+2EZ3NnkzPH1/3D5atggOG12B5s/Z3eP57sg0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=BYuxkgHGLWe+Og0l2woUt0aHtXjZrgRxIPx1lV503W4hbN9oD6Ww+DMktzf5PrGXU
-	 lfIS5xZO2/LoARy5G/I3fHUrxC/axgWE1KnSxqnbUlRMzq2rAcDAD2kBvdX5rglZWi
-	 dBpyFM+TiMVL7aJkPq6HAiE5xQQSI5woeynLXRPeqoufcKLLvwevivTYMdKtkCqmmS
-	 wpUi+g6ZJhnwdsQENzzVI4mGSBtvg5W90aX/5KpPJ/+RUmCEJ06a7PJ3hmS9WC7Gfm
-	 e0MDGkynXjlMl4wk1C16M6DefMjrxI+EyUEaCXbmKZfpBbFuLKKSK66WzJ6Yk8XCkX
-	 VpKIloyFoeTTA==
-Date: Tue, 4 Aug 2026 10:35:53 -0500
-From: Bjorn Andersson <andersson@kernel.org>
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Cc: Bartosz Golaszewski <brgl@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Subject: Re: [PATCH v2 3/4] firmware: qcom: scm: introduce qcom_scm_clk class
- for clock management
-Message-ID: <anIGRcBuIKiil36J@baldur>
-References: <20260731-qcom-scm-code-shrink-v2-0-4ba76096915f@oss.qualcomm.com>
- <20260731-qcom-scm-code-shrink-v2-3-4ba76096915f@oss.qualcomm.com>
+	s=k20260515; t=1785857916;
+	bh=heMtMxAU7DLcCiXJWZqfk6WJKR4j0rKL6OYx7YZwycY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=aEMPGjb7GqBdfvHtpLS0nqswNqnkaBtTCOO02PwPEVRtho80RUsudHmFE78433flh
+	 ZU+eSY96zl2YgA29qUcVZyQO/GsZSKaGOyA4/A/0xSFC90etuXABhN/zHuv/JXdxco
+	 SgRFwjhxcAYcQlIu3zaA3xfK5i2tVigfsyCYqGuLM2jpoUns94Dsc2IO6scaE77a01
+	 uQ3Uach+AHwApuKQjQkEEcrtIphqX/RCdHEbgllXBhwcIDZDMm1Nb0P0hd8f3wNuBe
+	 L1O0AEj7VVrsay587M5gHTSXi1ycexHR8eoHNRL0e/kolYsS5bGkgyb4nafUsWR7CJ
+	 TpDhI2sNhGoMA==
+Message-ID: <cbc62091-ace6-4e4b-8cae-fdf9b83b118d@kernel.org>
+Date: Tue, 4 Aug 2026 17:38:28 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260731-qcom-scm-code-shrink-v2-3-4ba76096915f@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] dt-bindings: remoteproc: qcom,shikra-pas: Allow
+ bam-dmux subnode
+To: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+ Mathieu Poirier <mathieu.poirier@linaro.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Kumar Patro <bibek.patro@oss.qualcomm.com>,
+ Komal Bajaj <komal.bajaj@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
+ linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org,
+ Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+References: <20260729-shikra-pas-bam-dmux-binding-v2-1-d85fea84c141@oss.qualcomm.com>
+ <20260730-organic-chimpanzee-of-excellence-ebbcca@quoll>
+ <c1f8b5bc-6d50-42bc-b671-7e91d76cb975@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <c1f8b5bc-6d50-42bc-b671-7e91d76cb975@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jul 31, 2026 at 10:00:36AM +0200, Bartosz Golaszewski wrote:
-> Define DEFINE_CLASS(qcom_scm_clk) that calls qcom_scm_clk_enable() on
-> construction and automatically calls qcom_scm_clk_disable() at scope exit
-> *if* the enable succeeded.
+On 04/08/2026 17:18, Vishnu Santhosh wrote:
 > 
-> This allows us to convert all call sites to using
-> CLASS(qcom_scm_clk, clk)() instead of the manual enable/check/disable
-> pattern and to remove the associated goto labels.
+> On 30-07-2026 12:53 pm, Krzysztof Kozlowski wrote:
+>> On Wed, Jul 29, 2026 at 02:21:01PM +0530, Vishnu Santhosh wrote:
+>>> The BAM-DMUX node lives as a direct child of the modem PAS remoteproc
+>> No, it does not. Look:
+>>
+>>    $  git describe
+>>    next-20260729
+>>    $ git grep bam-dmux
+>>    No child node shown
 > 
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Reviewed-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-> ---
->  drivers/firmware/qcom/qcom_scm.c | 89 +++++++++++++++-------------------------
->  1 file changed, 34 insertions(+), 55 deletions(-)
+> The commit message overstated this. The dt changes are yet to be merged.
+> I'll correct it in v3.
 > 
-> diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
-> index 10c79d2e59a14af0532c515d332f65bdfea05621..bb213f64703a7adb9ce413ec00524a7d0a1d3856 100644
-> --- a/drivers/firmware/qcom/qcom_scm.c
-> +++ b/drivers/firmware/qcom/qcom_scm.c
-> @@ -209,6 +209,9 @@ static void qcom_scm_clk_disable(void)
->  	clk_disable_unprepare(__scm->bus_clk);
->  }
->  
-> +DEFINE_CLASS(qcom_scm_clk, int, if (!_T) qcom_scm_clk_disable(),
-> +	     qcom_scm_clk_enable(), void)
-> +
->  static int qcom_scm_bw_enable(void)
->  {
->  	int ret = 0;
-> @@ -509,13 +512,11 @@ static int qcom_scm_disable_sdi(void)
->  	};
->  	struct qcom_scm_res res;
->  
-> -	ret = qcom_scm_clk_enable();
-> -	if (ret)
-> -		return ret;
-> +	CLASS(qcom_scm_clk, clk)();
+>>
+>> Why isn't this part of Shikra remoteproc commit/patch? How any code
+>> could pass validation otherwise?
+> 
+> By the time the BAM-DMUX support was brought up and validated, the
+> remoteproc changes was already in a stable state. Therefore, the
 
-No matter how many times I read this line, it doesn't tell me "clocks
-will be enabled from here to the end of the scope".
+No, it was not in stable state if it was not merged.
 
-I don't like it.
+> bam-dmux change is being submitted separately.
 
-Regards,
-Bjorn
+No, bindings should be complete.
 
-> +	if (clk)
-> +		return clk;
->  	ret = qcom_scm_call(__scm->dev, &desc, &res);
->  
-> -	qcom_scm_clk_disable();
-> -
->  	return ret ? : res.result[0];
->  }
->  
-> @@ -609,22 +610,19 @@ static int __qcom_scm_pas_init_image(struct device *dev, u32 pas_id,
->  	};
->  	int ret;
->  
-> -	ret = qcom_scm_clk_enable();
-> -	if (ret)
-> -		return ret;
-> +	CLASS(qcom_scm_clk, clk)();
-> +	if (clk)
-> +		return clk;
->  
->  	ret = qcom_scm_bw_enable();
->  	if (ret)
-> -		goto disable_clk;
-> +		return ret;
->  
->  	desc.args[1] = mdata_phys;
->  
->  	ret = qcom_scm_call(dev, &desc, res);
->  	qcom_scm_bw_disable();
->  
-> -disable_clk:
-> -	qcom_scm_clk_disable();
-> -
->  	return ret;
->  }
->  
-> @@ -734,20 +732,17 @@ static int __qcom_scm_pas_mem_setup(struct device *dev, u32 pas_id,
->  	};
->  	struct qcom_scm_res res;
->  
-> -	ret = qcom_scm_clk_enable();
-> -	if (ret)
-> -		return ret;
-> +	CLASS(qcom_scm_clk, clk)();
-> +	if (clk)
-> +		return clk;
->  
->  	ret = qcom_scm_bw_enable();
->  	if (ret)
-> -		goto disable_clk;
-> +		return ret;
->  
->  	ret = qcom_scm_call(dev, &desc, &res);
->  	qcom_scm_bw_disable();
->  
-> -disable_clk:
-> -	qcom_scm_clk_disable();
-> -
->  	return ret ? : res.result[0];
->  }
->  
-> @@ -819,13 +814,13 @@ static void *__qcom_scm_pas_get_rsc_table2(struct device *dev,
->  	void *tbl_ptr;
->  	int ret;
->  
-> -	ret = qcom_scm_clk_enable();
-> -	if (ret)
-> -		return ERR_PTR(ret);
-> +	CLASS(qcom_scm_clk, clk)();
-> +	if (clk)
-> +		return ERR_PTR(clk);
->  
->  	ret = qcom_scm_bw_enable();
->  	if (ret)
-> -		goto disable_clk;
-> +		return ERR_PTR(ret);
->  
->  	/*
->  	 * TrustZone can not accept buffer as NULL value as argument hence,
-> @@ -872,9 +867,6 @@ static void *__qcom_scm_pas_get_rsc_table2(struct device *dev,
->  disable_scm_bw:
->  	qcom_scm_bw_disable();
->  
-> -disable_clk:
-> -	qcom_scm_clk_disable();
-> -
->  	return ret ? ERR_PTR(ret) : tbl_ptr;
->  }
->  
-> @@ -902,20 +894,17 @@ static int __qcom_scm_pas_auth_and_reset(struct device *dev, u32 pas_id)
->  	};
->  	struct qcom_scm_res res;
->  
-> -	ret = qcom_scm_clk_enable();
-> -	if (ret)
-> -		return ret;
-> +	CLASS(qcom_scm_clk, clk)();
-> +	if (clk)
-> +		return clk;
->  
->  	ret = qcom_scm_bw_enable();
->  	if (ret)
-> -		goto disable_clk;
-> +		return ret;
->  
->  	ret = qcom_scm_call(dev, &desc, &res);
->  	qcom_scm_bw_disable();
->  
-> -disable_clk:
-> -	qcom_scm_clk_disable();
-> -
->  	return ret ? : res.result[0];
->  }
->  
-> @@ -997,20 +986,17 @@ static int __qcom_scm_pas_shutdown(struct device *dev, u32 pas_id)
->  	};
->  	struct qcom_scm_res res;
->  
-> -	ret = qcom_scm_clk_enable();
-> -	if (ret)
-> -		return ret;
-> +	CLASS(qcom_scm_clk, clk)();
-> +	if (clk)
-> +		return clk;
->  
->  	ret = qcom_scm_bw_enable();
->  	if (ret)
-> -		goto disable_clk;
-> +		return ret;
->  
->  	ret = qcom_scm_call(dev, &desc, &res);
->  	qcom_scm_bw_disable();
->  
-> -disable_clk:
-> -	qcom_scm_clk_disable();
-> -
->  	return ret ? : res.result[0];
->  }
->  
-> @@ -1780,18 +1766,13 @@ EXPORT_SYMBOL_GPL(qcom_scm_import_ice_key);
->   */
->  bool qcom_scm_hdcp_available(void)
->  {
-> -	bool avail;
-> -	int ret = qcom_scm_clk_enable();
-> +	CLASS(qcom_scm_clk, clk)();
->  
-> -	if (ret)
-> -		return ret;
-> -
-> -	avail = __qcom_scm_is_call_available(__scm->dev, QCOM_SCM_SVC_HDCP,
-> -						QCOM_SCM_HDCP_INVOKE);
-> -
-> -	qcom_scm_clk_disable();
-> +	if (clk)
-> +		return false;
->  
-> -	return avail;
-> +	return __qcom_scm_is_call_available(__scm->dev, QCOM_SCM_SVC_HDCP,
-> +					    QCOM_SCM_HDCP_INVOKE);
->  }
->  EXPORT_SYMBOL_GPL(qcom_scm_hdcp_available);
->  
-> @@ -1829,15 +1810,13 @@ int qcom_scm_hdcp_req(struct qcom_scm_hdcp_req *req, u32 req_cnt, u32 *resp)
->  	if (req_cnt > QCOM_SCM_HDCP_MAX_REQ_CNT)
->  		return -ERANGE;
->  
-> -	ret = qcom_scm_clk_enable();
-> -	if (ret)
-> -		return ret;
-> +	CLASS(qcom_scm_clk, clk)();
-> +	if (clk)
-> +		return clk;
->  
->  	ret = qcom_scm_call(__scm->dev, &desc, &res);
->  	*resp = res.result[0];
->  
-> -	qcom_scm_clk_disable();
-> -
->  	return ret;
->  }
->  EXPORT_SYMBOL_GPL(qcom_scm_hdcp_req);
 > 
-> -- 
-> 2.47.3
+>>> node, but qcom,shikra-pas.yaml has unevaluatedProperties: false and
+>>> does not list bam-dmux, so any DT adding this subnode fails schema
+>>> validation.
+>> Fails how? How can I reproduce the error?
+>>
+>> There is no bam-dma in this binding example.
+>>
+>>
+>> Best regards,
+>> Krzysztof
 > 
+> Did you mean bam-dmux (the property this patch adds)? If so, I'll add
+> an example with a bam-dmux subnode in v3.
+
+You claim something fails. Prove it.
+
+
+Best regards,
+Krzysztof
