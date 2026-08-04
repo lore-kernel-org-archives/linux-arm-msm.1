@@ -1,224 +1,196 @@
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BB933DAAB8
-	for <linux-arm-msm@vger.kernel.org>; Tue,  4 Aug 2026 18:20:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDE173EB112;
+	Tue,  4 Aug 2026 18:27:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785867603; cv=none; b=DJ6gDi2Gp4WoG7Y1i78EoOfGSqigeCX80BKxyqvf6W/Ra2esK9Fi0g7NBKZrRTtSWlD4Wnyb7a5YVamaShejQWBYJjUJ44wYj5+OX67wgn1W9cvyn6VB9oG46CBJlyc39wg+rJJYdXL4QNmnF6tN7tM3sqbLNZsLaGVuMRu8+XA=
+	t=1785868059; cv=none; b=E7irh1tV5sG7/UvbWwETaxkFNk4y3yvbmCdcxvu7bhW6iFtdquaROnmSof2uhSlE1ni3PjCK3euLyfqFsUGjdWCAUQBoiq0NA42Dy7eg3urQb1Gg0g+Gmv+KCaFo5bFjp/Va+sukUDeAzR4bmd5mgaYKuZ2Qq7Q8weaQ7EdPrMg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785867603; c=relaxed/simple;
-	bh=PtRqzhQRb7bU7mah6yGiifES/yEQ4XiEOjC7ACQkKnQ=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=s/pZQ6fpSDusLaUgNtR2RokroiOKfQOeZCXoBlGYWz5aNzAucC/6kCqRvMwmS3kWu7VJJrWQPl1RReTaR5j9sjE97pom9JhvaR/R/VhQHheVPkO1TtL90XUODD1dB68EHUFAGDDJYUMvcjQ+vSeIHXUZrHsnT0tyG2WlzKTzjRM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HOZkSBS9; arc=none smtp.client-ip=209.85.215.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1785868059; c=relaxed/simple;
+	bh=+nx0m30jvJNLR+AVrWZqkStFCFrEd/LxWlDlNr663aQ=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=RnCdREXY9qMoYsILC8qvjjiWcpn9rEE7zyOtKXXvptujjk9zVeDeLwkDhzX7Oz70yLlyKzu85nkSd9jWtWNztla+lDPCmEWJzNxL+UJjEYHOfX+16erADXNpGyxhkRLKwFKhp7QZEzwOkzhTtfUwNFxfZMLGhDQe+n2NUglCgC0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.mailfrom=mainlining.org; dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=gLzyDobi; dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=/Z4jYYRh; arc=none smtp.client-ip=5.75.144.95
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HOZkSBS9"
-Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-cbe64a0afabso9771a12.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 04 Aug 2026 11:20:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1785867601; x=1786472401; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=jw7e5Rfr9nTLu9Xi7DMR9VP2hbwdbhAjZW2kw4eVdlQ=;
-        b=HOZkSBS94JF7pNhIcibw0zVV1uPoLMNsSB1b28wUWyRBIWgCTAlib3GyFEDp1ZaMi+
-         PIx1iGaHBaXR7sSX2Xk3zSk1Ik6SouVh42HrmExX3+8YasT7axsDjG4jnryYzpw17btN
-         CDX8TzKQxPDene03awLrz8PpijfJSPCory9DWiaQrTOeuN4lGkcjiUaumtRYrB7zQSJP
-         3ggXgJh6XAUvclu103+0ZnCeaWlcWaewcDa0T6UBt3soBZz/ZJiHwvZmmGHWB8kVn0tN
-         Fgg9Pr7lqOfjD6JIUuWiJQlKqa8w3Y4ntnk6UBqeysRUblY/nvDdJ9Uu9Vbc3BUcC/Qy
-         aysQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785867601; x=1786472401;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=jw7e5Rfr9nTLu9Xi7DMR9VP2hbwdbhAjZW2kw4eVdlQ=;
-        b=ZCtxyjh2MyyAVGHjA/MzI7nzObNhHL7cPa2V78zl+SzWUOkQTbs8LE6C78ny9JePIH
-         KMsOp3+7rg8bt8aty/4halSTVYEPQ5lELx0goWL1rAuXY7wVu2ooECxcwuZoRRZfe2C8
-         Lu9qzi34GG1n8rXKfW3uAwAC5pboQcNQdL9aQSkUe8H9YaWwjRbDcttFXTPa+PwKHScY
-         e8yKQMMqNFI/f8HZ+Sz/skg5rf3R+OqYAkF+rbJUYnS+3aTz4WXEwsijrzLY4nl6/kaE
-         9rl+XXNnSOccbPE4tj/AxUXFmc/JjD4Vxn/+RqfwOlbBhiOE0uJl5s2V85Yo28lcHDYo
-         9xwA==
-X-Forwarded-Encrypted: i=1; AHgh+RrGG04FiOhFzTxd8O382RG84gMZ006/1Du/3A4PShpkAeTNxsMhmAmo+6wvYsCMKALZBwyBxJqiXN6ufF/V@vger.kernel.org
-X-Gm-Message-State: AOJu0YzD8sxb67AODHDbTBgarLXlCpk7+mZC6r4f0QKol6L9RHG3lH8a
-	pEwjEa0RF+/W4jrgsYChrc6C/0CskDwFYm7M0Yq3d/NL6ps/+4LlGvvW
-X-Gm-Gg: AR+sD13yLWIKNCf0Pa0N5G6bmQ6lzDcsZnE5KKgTZ4c58jjHpGuavPgVFFXF+TIn4Xy
-	Dq210SQgRP/tIiYpqRk4zwhThOD7QT4Yq3NZA5t/pAi6ThnIrFsK54e5Iwc5eHhbxd0JGHbAhzI
-	aNgnimhJqCUyLHDyGZ1mcthogKxiSegSGQbczfDEQfiNAhKDhUN6rbJPAGR4pZZAQz1CNb6hj6F
-	1OolUza+njHCrU56XcPiNK+CJS0FopptHJRcf0eYVkCjEoIcWU2bbnwrutPnsz4wpQyUF2ry2kg
-	nWX5IDh82Hy/XsQ9qanYoqGPy80l/seD330Olr6QWUfvyrm6701N/o3S0dgkNJPi7vtSvpXmiTV
-	CDtsbuN62n9DJnEsnyDaG1izLewpF9Zn01cnI0sZZAf9DNHHGrEosBniwc2fNeOKswN47YJ1wWF
-	5bRLIJxlrZh9DpjkfHGDHXDHLAdgsBzaF2UedLbB+zQAz0UsRD8lu2poZbneWOT2ugwV4+kOJ/M
-	g+BfO4dc7NdjG4=
-X-Received: by 2002:a17:90b:4410:b0:38e:6d4c:14df with SMTP id 98e67ed59e1d1-3903c5bff9dmr807451a91.1.1785867601383;
-        Tue, 04 Aug 2026 11:20:01 -0700 (PDT)
-Received: from localhost.localdomain ([202.164.135.140])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13fca8e969esm4967976c88.10.2026.08.04.11.19.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Aug 2026 11:20:00 -0700 (PDT)
-From: Sailesh Nandanavanam <saileshnandanavanam@gmail.com>
-To: andersson@kernel.org,
-	mathieu.poirier@linaro.org
-Cc: neil.armstrong@linaro.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-remoteproc@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Sailesh Nandanavanam <saileshnandanavanam@gmail.com>
-Subject: [PATCH v4] remoteproc: qcom_q6v5_pas: Fix dtb firmware lifecycle and leak
-Date: Tue,  4 Aug 2026 23:49:51 +0530
-Message-Id: <20260804181951.5206-1-saileshnandanavanam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+	dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="gLzyDobi";
+	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="/Z4jYYRh"
+DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
+	h=From:To:Subject:Date:Message-ID; t=1785868024; bh=YrMMNGosshER4iLXgDtpRWx
+	BdjnbgQ6m/RcBo2d3aCo=; b=gLzyDobiekLYeul74NVwZIeqq+9U9cogl97CCXaDsOFMhbjipB
+	A/64P6yRvr2mCa/UZkATDS/PFdFrCGe3WHpfiRZpXGK3yFrfeGdQg/mXXGPP7C8IemM8+Q2KVkC
+	SqKQ3rcTtFZUODWBw1AJ/rNDIo/4jF4mEWr19aXRE+qT/gUgpOMfmAT9XbPHmoKw9lpR4rqMnlx
+	JmPIOwHHUdE2Rrjh0axObrnQDenhMrYOyeGAyBDLSggED0qKSicVMBXY3+qxK7PXrOykHqpaJHt
+	Tcy9jrelq1HZfVgqzMsW+9kb7DaX3hBQRRcPLybn5+KW5jjjhcmDNaPr1tmsmXT8g6Q==;
+DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
+	h=From:To:Subject:Date:Message-ID; t=1785868024; bh=YrMMNGosshER4iLXgDtpRWx
+	BdjnbgQ6m/RcBo2d3aCo=; b=/Z4jYYRh+7g2lZVXvXMut/rg4c/2TvcRvWAziqmMZ/2Jwvq1mG
+	G1IS8tRg7q5DQvk59l0BUGgjA+5MyfdaNvDg==;
+Message-ID: <f7cae569-0c51-41fe-92ab-f29311a22761@mainlining.org>
+Date: Tue, 4 Aug 2026 21:27:01 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH RFT 2/3] media: i2c: dw9719: Add DW9800W support
+To: Sakari Ailus <sakari.ailus@linux.intel.com>
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, =?UTF-8?Q?Andr=C3=A9_Apitzsch?=
+ <git@apitzsch.eu>, Daniel Scally <dan.scally@ideasonboard.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Eugene Lepshy <fekz115@gmail.com>,
+ Vasiliy Doylov <neko@altlinux.org>, Achill Gilgenast <achill@achill.org>,
+ Luca Weiss <luca.weiss@fairphone.com>,
+ Griffin Kroah-Hartman <griffin.kroah@fairphone.com>,
+ linux-media@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ ~postmarketos/upstreaming@lists.sr.ht
+References: <20260801-dw9800w-clean-v1-0-38978de67963@mainlining.org>
+ <20260801-dw9800w-clean-v1-2-38978de67963@mainlining.org>
+ <anGlY_kwp_I-fRnz@kekkonen.localdomain>
+Content-Language: en-US
+From: Danila Tikhonov <danila@mainlining.org>
+In-Reply-To: <anGlY_kwp_I-fRnz@kekkonen.localdomain>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-DTB co-firmware was previously requested and loaded in
-qcom_pas_load(), but its lifetime did not match the actual
-start/stop lifecycle of the remoteproc. As a result, the firmware
-reference could be retained across restart cycles, leading to a
-leak for each successful boot.
+Hi Sakari,
 
-Additionally, if qcom_pas_start() failed after loading the DTB
-firmware, the remoteproc core would not invoke .stop(), leaving
-no opportunity to release the associated firmware reference.
+Thank you for your comment.
 
-Fix this by moving DTB firmware request and loading into
-qcom_pas_start(), so that its lifetime is strictly tied to the
-remoteproc start sequence.
+On 04/08/2026 11:40, Sakari Ailus wrote:
+> Hi Danila,
+>
+> Thank you for the patch.
+>
+> On Sat, Aug 01, 2026 at 09:04:15PM +0300, Danila Tikhonov wrote:
+>> The DW9800W uses the same chip ID and register layout as the DW9800K,
+>> but requires different default VCM frequency value.
+> Is this a real difference between the two models or what fits for the
+> attached lens? Too bad the datasheet isn't publicly available. :-(
+>
+> At least the differing default and constraints for dongwoon,vcm-prescale
+> needs to be documented in bindings.
+I share your skepticism and have essentially the same concerns. Since I
+do not have the DW9800K datasheet, I cannot say with certainty how it
+differs from the DW9800W.
 
-Update qcom_pas_start() to ensure proper cleanup on all paths:
-- release PAS metadata on failure
-- release DTB firmware on both success and failure paths
-- unmap DTB carveout where applicable
+In particular, the parameter referred to as the VCM frequency in the
+driver is used to derive the SACT value. For the DW9800W, SACT[5:0]
+defines the actuator resonance period in SAC mode and the one-step
+period in LSC mode. The datasheet gives the corresponding formulas as:
+- tVIB = 6.3 ms + SACT * 0.1 ms
+- LSC 1-step period = 252 µs + SACT * 4 µs
 
-Remove DTB firmware handling from qcom_pas_load(), as it does not
-match the correct ownership and lifecycle model.
+Therefore, the default value may differ between the DW9800K and DW9800W
+if the formulas or timing characteristics used to calculate SACT are
+different.
 
-With this change, request_firmware() and release_firmware() are
-properly paired within the start path, avoiding leaks and ensuring
-consistent behavior across restart and failure scenarios.
-
-Fixes: 29814986b82e ("remoteproc: qcom_q6v5_pas: add support for dtb co-firmware loading")
-Signed-off-by: Sailesh Nandanavanam <saileshnandanavanam@gmail.com>
+This uncertainty is also one of the reasons why the series currently
+carries the RFT prefix. I hope the Fairphone guys can provide some
+insight into the rationale behind the default-value directives that were
+added for the DW9800K.
+>> Add a separate device match entry for the DW9800W and validate the
+>> common chip ID. Use the matched variant to select the appropriate
+>> default values.
+>>
+>> Tested on the Nothing Phone (1) smartphone.
+>>
+>> Signed-off-by: Danila Tikhonov <danila@mainlining.org>
+>> ---
+>>   drivers/media/i2c/dw9719.c | 25 +++++++++++++++++++++----
+>>   1 file changed, 21 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/drivers/media/i2c/dw9719.c b/drivers/media/i2c/dw9719.c
+>> index 3b7ba88fd67c..bb9319fc350b 100644
+>> --- a/drivers/media/i2c/dw9719.c
+>> +++ b/drivers/media/i2c/dw9719.c
+>> @@ -44,6 +44,7 @@
+>>   
+>>   #define DW9719_INFO			CCI_REG8(0)
+>>   #define DW9719_ID			0xF1
+>> +#define DW9800_ID			0xF2
+>>   #define DW9761_ID			0xF4
+>>   
+>>   #define DW9719_CONTROL			CCI_REG8(2)
+>> @@ -72,6 +73,8 @@
+>>   #define DW9800K_MODE_SAC_SHIFT		6
+>>   #define DW9800K_DEFAULT_VCM_FREQ		0x10
+>>   
+>> +#define DW9800W_DEFAULT_VCM_FREQ	0x60
+>> +
+>>   #define to_dw9719_device(x) container_of(x, struct dw9719_device, sd)
+>>   
+>>   enum dw9719_model {
+>> @@ -79,6 +82,7 @@ enum dw9719_model {
+>>   	DW9719,
+>>   	DW9761,
+>>   	DW9800K,
+>> +	DW9800W,
+>>   };
+>>   
+>>   struct dw9719_device {
+>> @@ -140,10 +144,6 @@ static int dw9719_power_up(struct dw9719_device *dw9719, bool detect)
+>>   			dw9719->sac_mode = DW9718S_DEFAULT_SAC;
+>>   			dw9719->vcm_freq = DW9718S_DEFAULT_VCM_FREQ;
+>>   			goto props;
+>> -		case DW9800K:
+>> -			dw9719->sac_mode = DW9800K_DEFAULT_SAC;
+>> -			dw9719->vcm_freq = DW9800K_DEFAULT_VCM_FREQ;
+>> -			goto props;
+>>   		default:
+>>   			break;
+>>   		}
+>> @@ -159,6 +159,21 @@ static int dw9719_power_up(struct dw9719_device *dw9719, bool detect)
+>>   			dw9719->sac_mode = DW9719_DEFAULT_SAC;
+>>   			dw9719->vcm_freq = DW9719_DEFAULT_VCM_FREQ;
+>>   			break;
+>> +		case DW9800_ID:
+> Ideally the detection change would be in its own patch but I guess it's ok
+> as-is.
+>
+>> +			dw9719->sac_mode = DW9800K_DEFAULT_SAC;
+>> +			switch (dw9719->model) {
+>> +			case DW9800K:
+>> +				dw9719->model = DW9800K;
+>> +				dw9719->vcm_freq = DW9800K_DEFAULT_VCM_FREQ;
+>> +				break;
+>> +			case DW9800W:
+>> +				dw9719->model = DW9800W;
+>> +				dw9719->vcm_freq = DW9800W_DEFAULT_VCM_FREQ;
+>> +				break;
+>> +			default:
+>> +				return -ENODEV;
+>> +			}
+>> +			break;
+>>   		case DW9761_ID:
+>>   			dw9719->model = DW9761;
+>>   			dw9719->mode_low_bits = 0x01;
+>> @@ -189,6 +204,7 @@ static int dw9719_power_up(struct dw9719_device *dw9719, bool detect)
+>>   
+>>   	switch (dw9719->model) {
+>>   	case DW9800K:
+>> +	case DW9800W:
+>>   		cci_write(dw9719->regmap, DW9719_CONTROL, DW9719_ENABLE_RINGING, &ret);
+>>   		cci_write(dw9719->regmap, DW9719_MODE,
+>>   			  dw9719->sac_mode << DW9800K_MODE_SAC_SHIFT, &ret);
+>> @@ -453,6 +469,7 @@ static const struct of_device_id dw9719_of_table[] = {
+>>   	{ .compatible = "dongwoon,dw9719", .data = (const void *)DW9719 },
+>>   	{ .compatible = "dongwoon,dw9761", .data = (const void *)DW9761 },
+>>   	{ .compatible = "dongwoon,dw9800k", .data = (const void *)DW9800K },
+>> +	{ .compatible = "dongwoon,dw9800w", .data = (const void *)DW9800W },
+>>   	{ }
+>>   };
+>>   MODULE_DEVICE_TABLE(of, dw9719_of_table);
+>>
 ---
-v4:
-- Rebase onto linux-next
-- Remove unused int ret from qcom_pas_load()
 
-v3:
-- Remove the unused release_dtb_firmware label
-- Release DTB firmware under the existing dtb_pas_id check
-
-v2:
-- Move DTB firmware request/load from qcom_pas_load() to qcom_pas_start()
-- Fix firmware reference leak across restart cycles
-- Handle start() failure paths where .stop() is not invoked
-- Ensure firmware is released on all success and failure paths
-- Remove DTB handling from load() and drop release from stop()
----
- drivers/remoteproc/qcom_q6v5_pas.c | 47 +++++++++++++++++-------------
- 1 file changed, 26 insertions(+), 21 deletions(-)
-
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index ca8e61254c44..864446a484f1 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -231,7 +231,6 @@ static int qcom_pas_unprepare(struct rproc *rproc)
- static int qcom_pas_load(struct rproc *rproc, const struct firmware *fw)
- {
- 	struct qcom_pas *pas = rproc->priv;
--	int ret;
- 
- 	/* Store firmware handle to be used in qcom_pas_start() */
- 	pas->firmware = fw;
-@@ -241,23 +240,6 @@ static int qcom_pas_load(struct rproc *rproc, const struct firmware *fw)
- 	if (pas->lite_dtb_pas_id)
- 		qcom_pas_shutdown(pas->lite_dtb_pas_id);
- 
--	if (pas->dtb_pas_id) {
--		ret = request_firmware(&pas->dtb_firmware, pas->dtb_firmware_name, pas->dev);
--		if (ret) {
--			dev_err(pas->dev, "request_firmware failed for %s: %d\n",
--				pas->dtb_firmware_name, ret);
--			return ret;
--		}
--
--		ret = qcom_mdt_pas_load(pas->dtb_pas_ctx, pas->dtb_firmware,
--					pas->dtb_firmware_name, &pas->dtb_mem_reloc);
--		if (ret) {
--			qcom_pas_metadata_release(pas->dtb_pas_ctx);
--			release_firmware(pas->dtb_firmware);
--			return ret;
--		}
--	}
--
- 	return 0;
- }
- 
-@@ -282,9 +264,23 @@ static int qcom_pas_start(struct rproc *rproc)
- 	struct qcom_pas *pas = rproc->priv;
- 	int ret;
- 
-+	if (pas->dtb_pas_id) {
-+		ret = request_firmware(&pas->dtb_firmware, pas->dtb_firmware_name, pas->dev);
-+		if (ret) {
-+			dev_err(pas->dev, "request_firmware failed for %s: %d\n",
-+				pas->dtb_firmware_name, ret);
-+			return ret;
-+		}
-+
-+		ret = qcom_mdt_pas_load(pas->dtb_pas_ctx, pas->dtb_firmware,
-+				pas->dtb_firmware_name, &pas->dtb_mem_reloc);
-+		if (ret)
-+			goto release_dtb_metadata;
-+	}
-+
- 	ret = qcom_q6v5_prepare(&pas->q6v5);
- 	if (ret)
--		return ret;
-+		goto release_dtb_metadata;
- 
- 	ret = qcom_pas_pds_enable(pas, pas->proxy_pds, pas->proxy_pd_count);
- 	if (ret < 0)
-@@ -352,6 +348,11 @@ static int qcom_pas_start(struct rproc *rproc)
- 	if (pas->dtb_pas_id)
- 		qcom_pas_metadata_release(pas->dtb_pas_ctx);
- 
-+	if (pas->dtb_pas_id) {
-+		release_firmware(pas->dtb_firmware);
-+		pas->dtb_firmware = NULL;
-+	}
-+
- 	/* firmware is used to pass reference from qcom_pas_start(), drop it now */
- 	pas->firmware = NULL;
- 
-@@ -361,8 +362,6 @@ static int qcom_pas_start(struct rproc *rproc)
- 	qcom_pas_unmap_carveout(rproc, pas->mem_phys, pas->mem_size);
- release_pas_metadata:
- 	qcom_pas_metadata_release(pas->pas_ctx);
--	if (pas->dtb_pas_id)
--		qcom_pas_metadata_release(pas->dtb_pas_ctx);
- 
- unmap_dtb_carveout:
- 	if (pas->dtb_pas_id)
-@@ -381,6 +380,12 @@ static int qcom_pas_start(struct rproc *rproc)
- 	qcom_pas_pds_disable(pas, pas->proxy_pds, pas->proxy_pd_count);
- disable_irqs:
- 	qcom_q6v5_unprepare(&pas->q6v5);
-+release_dtb_metadata:
-+	if (pas->dtb_pas_id) {
-+		qcom_pas_metadata_release(pas->dtb_pas_ctx);
-+		release_firmware(pas->dtb_firmware);
-+		pas->dtb_firmware = NULL;
-+	}
- 
- 	/* firmware is used to pass reference from qcom_pas_start(), drop it now */
- 	pas->firmware = NULL;
--- 
-2.34.1
+Best regards,
+Danila
 
