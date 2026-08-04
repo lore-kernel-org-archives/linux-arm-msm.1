@@ -1,35 +1,86 @@
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B816413D62;
-	Tue,  4 Aug 2026 19:44:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.167.242.64
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 029E733937F
+	for <linux-arm-msm@vger.kernel.org>; Tue,  4 Aug 2026 19:58:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785872647; cv=none; b=YhwjqfizCYiorTb7NI5Qa5UZlKUhcVHySPnOOTxs2xd1n8aJ1NfWld0adIlvEZwN2KuIoIIZxyL3Fe1lDNclrL1H19IY1SN2/sYrQPBtSwIoCRUAqWiPXuvOPbhW+TmUwwvNrNu3BynbAHJOlcZ63AqIFaPBmlOAV83Kx6hOdys=
+	t=1785873485; cv=none; b=Y/XVExnrptmJ/7pq0086ECxt045SC9fVKOlBqrNMh9nIG8IdviAWVFIX6Gp8OoSth/jFroMmA+DeVfZuKYbRFBy27pYZvpGP6vlMj5hHPyB53EnFeXP9SxiccagWx2ATEU7sqtVUgmKcS5HvHB8yomQtTa9MlUALrvvhdsEi6Ic=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785872647; c=relaxed/simple;
-	bh=2roZo+O9bfs5wZlzfHNuSLLrkhZGgewmjPJGmYrBLQQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=EO0B5iwS1NwcCM0dvix3Eoc+HRvD7QzQ9hOKbgURx6UXGattqYVMHmbOLHjA81H6zsK4zIK4Qg8T3AAPsG/hiaD2kokpiVU3RqiiSenPHngPSCujUjZHmESUu+RbUG1ocjnUYKmVu1sqidE9pmg1nqInug/uOUEs4iqrT94Kqvo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=SypZ/tnY; arc=none smtp.client-ip=213.167.242.64
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ideasonboard.com
+	s=arc-20240116; t=1785873485; c=relaxed/simple;
+	bh=30qgLQKKCow2Vd7Rsipof0YfdQ8riHpCd1YMdGG0SCQ=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=founTERLaNqRwkDKPUGd7CgOd9/Lom0f2qvvkrKBjJ9ox47/1O8aqP+3cO3TcN/hHsY5RxNJEmuWsPvfdU01heSSJRXTjJ0SpqgZJg4/PgWiJ/QXx837cVrlhSP8qccRHhyKbl6AitAj0VVV7/XC3M2s8kl1Tu9g2+BUw7G5/Wk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bLQTv8LK; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=MmqKdUOc; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="SypZ/tnY"
-Received: from [192.168.0.240] (cpc89244-aztw30-2-0-cust6594.18-1.cable.virginm.net [86.31.185.195])
-	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 50F6435D3;
-	Tue,  4 Aug 2026 21:42:41 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-	s=mail; t=1785872562;
-	bh=2roZo+O9bfs5wZlzfHNuSLLrkhZGgewmjPJGmYrBLQQ=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=SypZ/tnYmbmu60E75c5h9lWc+VFo0GGga35RYTuYVtWqKli0OFFMjM4ic4/7WwlJy
-	 tb4A63WnBm93R8JToyuWk7C3ddj548UeEDQHFYzsglHx//eoiVY8EujwxdeY0hjPWm
-	 uNP4+Ekj5Xvp9xkPGeD3lbotXlRoEl0GyKeK7n0M=
-From: Kieran Bingham <kieran.bingham@ideasonboard.com>
-Date: Tue, 04 Aug 2026 20:43:34 +0100
-Subject: [PATCH v4 7/7] ARM: tegra: Convert to new media orientation
- definitions
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bLQTv8LK";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MmqKdUOc"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 674JlQ0w434284
+	for <linux-arm-msm@vger.kernel.org>; Tue, 4 Aug 2026 19:58:03 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=96UrCWv7PjJtStf5Ags8L3
+	GA6XNzs2BmN7ZndIZVjpE=; b=bLQTv8LK0U3o0+vtg49Yy43Aaitj8WpZXbpKUL
+	dsEbRKqPO4kSvyTxeuIB8UJWqgSJlS9/R04s/Kxz3TtEUUYFasJShBiOCNyjhbiB
+	BdUEmMkX122DE4y3/lFhEGDKNuEIgSAhZ/V74/0ZyU6mZQH9c5vp5b1ANEYdYvhS
+	8lVv4JtClf+wpObhijZon2Qh6wvCGTHA6QMZGyV6wx3KW6YChBrNIHsaf5/JLZeS
+	5+zmxWJ3URA5P3+BxdhFltUpAa2BjVJF5405+HXLLNUOQxi7iG6doTf+APwwarPs
+	24Gi15VdYf/D0faOy27/qx04NnNMZUigGmKK2IeYHbhs2gUQ==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fum568uf7-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 04 Aug 2026 19:58:02 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-c96b4f58ddcso122082a12.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 04 Aug 2026 12:58:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785873482; x=1786478282; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=96UrCWv7PjJtStf5Ags8L3GA6XNzs2BmN7ZndIZVjpE=;
+        b=MmqKdUOcVJsayT/12SgQY1VooUpQ98k9VUgKp9segdDJQ56LFqMvfSnrzHAE8GsD/m
+         r8GptY46p5F3Qu7QWhu1DYctwUdJRewixq12MJUYOhBeOZlkGFX6BXbjWY9RQPAVs4bO
+         8u1D7MCq7yxZXhAaRDpm58Yc0hMnonjZHqRQ42P1Z7bvO2G6muUHjRZK1wmURgn4wVbN
+         MBOdS5JYmbAVqqQDykse06r019aoS9WjIbiuPItJ0kMsH3bhldHgDyGRYmQkHasQfp7/
+         EPAXILyewc2m5kYDjWWmwlmupFuSPdjtOqw2J92B8xMbM/jB5R+Wf8wftPX8YsbRLw8c
+         hGsg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785873482; x=1786478282;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=96UrCWv7PjJtStf5Ags8L3GA6XNzs2BmN7ZndIZVjpE=;
+        b=ALUO6Nmdn3Obk4+1yejc5dFvrjof+kc71R4VkRjzCgOfXlTbZrSqRNPN/3FHziMhmv
+         RWS2I8old6B8NLq8N4urQ1DBMk9xLfoNrTiN03dwmltxo40dB4PUS+3RxFNavkzQO6Y6
+         NvsSlUfcI4KWp9+rYeDoxZ5UUCU9CH5juc8hRPr+5fo31kBHGNfmB8IEK4X9icw6g4PY
+         sgwn0lDydQ2lRoDZHKkOwLnhOIaLTK5bOEoCXR2njfokHattbfYjNT+vO+hwESb6Ehc5
+         KPwa2CPGw9TMZe5bevVHIC7s45lFP860PCNfeFsD9UHSn+u0UISypAMPY+gqnZnLI/Ki
+         gjWw==
+X-Forwarded-Encrypted: i=1; AHgh+RpTRZRtTngenPQPdbZm17TvY+f0W7qEQpmj7Z8bOAR/lK0sZ14GNoeQsZQ4WPxJ3SvMr9w9KyY4TM9kxxOB@vger.kernel.org
+X-Gm-Message-State: AOJu0YzyPmYFyKX8hVsxCfsB5JALB/BUN+Ir6Kv/zOO17a9KnWTUj+c+
+	03a4p+WzfVgk1p6blhzzjO3EEF6iMCtk7Bae8jOHBMXRQ8DGSRITKY/5ZCZ8Rsj1ElP3Uwejede
+	0cndrH4O6Als28iWh5teWSYon2yKSPSg3fioCea744VlKp3pT9L5UeFeXKVi5p8O5oVGS
+X-Gm-Gg: AR+sD10OGnV+5BXaw9WD3pvInfl7NlnGRXeDTP0Wmdah0qcwZYs2sUarOzJRZjzcged
+	JUnA0JG1UHR20xiC4y2/hLv4ruMb8iifrHSMeEej9f1SOaCIidAvo6dhd4u1Ogq9BmKs3NtsBM9
+	OO5xEy8uCkSDYqvIZChk/q82Qkb4FjfSPhzzW1n2fjdCYsmxyB2/+MRgxX/SvXVpIeaNx9PyqwB
+	vgViOOwkdBTZiFQ0U+8TtJhaKkCn2JP2lfHwCSfkpTJ86Y/jq/c/K1hFXQthWrbdsIOzMgu8cLx
+	FjsDLJvAZ+kIctJDEBa4iqQh0ttILCQtFu7q0b1eige3ZDuAuop30ZyjPtVQtNcS4OdS6JjtXu6
+	Ioyq9iXbfe8SzdMRYwEilAIn7FcN3xSLehA==
+X-Received: by 2002:a05:6a21:998c:b0:3c3:a20f:f720 with SMTP id adf61e73a8af0-3cb85fac059mr1216107637.36.1785873481816;
+        Tue, 04 Aug 2026 12:58:01 -0700 (PDT)
+X-Received: by 2002:a05:6a21:998c:b0:3c3:a20f:f720 with SMTP id adf61e73a8af0-3cb85fac059mr1216051637.36.1785873481275;
+        Tue, 04 Aug 2026 12:58:01 -0700 (PDT)
+Received: from hu-ptalari-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315867a68fdsm12316636eec.25.2026.08.04.12.57.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 04 Aug 2026 12:58:00 -0700 (PDT)
+From: Praveen Talari <praveen.talari@oss.qualcomm.com>
+Subject: [PATCH 0/7] soc: qcom: geni: Derive SE clock configuration from
+ OPP table on SA8255P
+Date: Wed, 05 Aug 2026 01:27:38 +0530
+Message-Id: <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-0-61171ab1cdce@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -38,154 +89,117 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260804-kbingham-orientation-v4-7-336998dd63b4@ideasonboard.com>
-References: <20260804-kbingham-orientation-v4-0-336998dd63b4@ideasonboard.com>
-In-Reply-To: <20260804-kbingham-orientation-v4-0-336998dd63b4@ideasonboard.com>
-To: Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Jacopo Mondi <jacopo@jmondi.org>, 
- Sakari Ailus <sakari.ailus@linux.intel.com>, Jimmy Su <jimmy.su@intel.com>, 
- Matthias Fend <matthias.fend@emfend.at>, 
- Mikhail Rudenko <mike.rudenko@gmail.com>, 
- Daniel Scally <dan.scally@ideasonboard.com>, 
- Jacopo Mondi <jacopo.mondi@ideasonboard.com>, 
- Michael Riesch <michael.riesch@collabora.com>, 
- Benjamin Mugnier <benjamin.mugnier@foss.st.com>, 
- Sylvain Petinot <sylvain.petinot@foss.st.com>, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
- Paul Elder <paul.elder@ideasonboard.com>, 
- Martin Kepplinger <martin.kepplinger@puri.sm>, 
- Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
- Tommaso Merciai <tomm.merciai@gmail.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Richard Acayan <mailingradian@gmail.com>, Frank Li <Frank.Li@nxp.com>, 
- Sascha Hauer <s.hauer@pengutronix.de>, 
- Pengutronix Kernel Team <kernel@pengutronix.de>, 
- Fabio Estevam <festevam@gmail.com>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Geert Uytterhoeven <geert+renesas@glider.be>, 
- Magnus Damm <magnus.damm@gmail.com>, Heiko Stuebner <heiko@sntech.de>, 
- Thierry Reding <thierry.reding@kernel.org>, 
- Jonathan Hunter <jonathanh@nvidia.com>
-Cc: linux-media@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux@ew.tq-group.com, imx@lists.linux.dev, 
- linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
- linux-renesas-soc@vger.kernel.org, linux-rockchip@lists.infradead.org, 
- linux-tegra@vger.kernel.org, 
- Kieran Bingham <kieran.bingham@ideasonboard.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785872619; l=4365;
- i=kieran.bingham@ideasonboard.com; s=20260204; h=from:subject:message-id;
- bh=2roZo+O9bfs5wZlzfHNuSLLrkhZGgewmjPJGmYrBLQQ=;
- b=gTMLXiSXouOoSUS3up6VvewOqXEBidSSHEnOFsVDz0zJLC5W9GJm3Qbh0rvX6jfGMPOJ88GfQ
- 9CUVycukXTfC+X9JVbgIj+SzOhpZoU3W6T4duCH4nYOZVuKp3fypOq/
-X-Developer-Key: i=kieran.bingham@ideasonboard.com; a=ed25519;
- pk=IOxS2C6nWHNjLfkDR71Iesk904i6wJDfEERqV7hDBdY=
+X-B4-Tracking: v=1; b=H4sIADNEcmoC/yXNWwrCMBCF4a2UeTYQRyzqVkSGXCYaTZOQxCKU7
+ t1oHz84nH+BysVzhcuwQOHZV59ix343gHmoeGfhbTegxFGe5FHYvp+ZTHhR5uKo6UCupGmTTZP
+ ykVLO1JQOLNDhWdkDIo4K+mku7PznH7zeNte3frJpvwqs6xemGz+TkgAAAA==
+X-Change-ID: 20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-2f29ad32226a
+To: konrad.dybcio@oss.qualcomm.com, Sudeep Holla <sudeep.holla@kernel.org>,
+        Cristian Marussi <cristian.marussi@arm.com>,
+        Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jiri Slaby <jirislaby@kernel.org>, Mark Brown <broonie@kernel.org>,
+        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+        Andi Shyti <andi.shyti@kernel.org>
+Cc: mukesh.savaliya@oss.qualcomm.com, chandana.chiluveru@oss.qualcomm.com,
+        arm-scmi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-serial@vger.kernel.org,
+        linux-spi@vger.kernel.org, linux-i2c@vger.kernel.org,
+        Praveen Talari <praveen.talari@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785873474; l=3194;
+ i=praveen.talari@oss.qualcomm.com; s=20251114; h=from:subject:message-id;
+ bh=30qgLQKKCow2Vd7Rsipof0YfdQ8riHpCd1YMdGG0SCQ=;
+ b=VyYJLSlovV+NAczF/pwSRV3VrbTS83eTlSfC8k2adZOrG/17by3IfQqdTpqt/2kbe0n9Iwwe6
+ mwvMtxG43tmAquy+6z8OK9XeeZ4Qotp28tq/sM6GnkRHGkvbBnk30Wp
+X-Developer-Key: i=praveen.talari@oss.qualcomm.com; a=ed25519;
+ pk=NGK/88fjyHXgfhIKwag7+uIytOmyOypvZ/hDFaYPEss=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA0MDE2MSBTYWx0ZWRfX5PIQHzeesJNj
+ ASib1yOktUWGc3vabGEFgBwM6Qm8kE8Rr8lrDPXi4W3mdu1TF5Iij3HS0niHcdZSAAI8aMHWIF0
+ azMz7XCaBVQJ8LiEFauMlgj1pZjD5fd6Ss+j6rCtgnfCt0TUq0gCFgHpl7c8w1duzqPxsFyW4Tw
+ u01jUQDxSGlMQaHDaDXjAFIZp3g2nohfn4C6EgutCTj+8RvzNcYOwk7bhQIVcbKc8edAAXOJ2ZY
+ 1iIVODDXIShgAaaYJ3nyA1+i4BN8on/ayU+k3347Hb1IholW47syKiL/2HCfOOOxPrpjMWUExi+
+ yrMRttMHR4oxt3wev47/hULffzAxQ9S2+TID+YcsTMGoLMf0QHw+bWRAA22X5iEJuDmUGc6BImI
+ QZr1veAFrnOXztaYynpQppnmqQ5YzaCa/YAXyBiv7KicLKgXEortiJ8e+98n5pjg8jKiURz7t7J
+ QqD+vhnNitnLiNGXZOg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA0MDE2MSBTYWx0ZWRfXx3s588aswUuM
+ 5k8wxS94AbDPTSJeq0X5EBUB4ea1QbfPcq9ybyH4cqXN1PaaPOSWgE2Z52xL+Om09KYwGAXzThb
+ d0kChrT4dqzMorD1TRgiDXGRiqTmtso=
+X-Proofpoint-GUID: DOyfB9oiwYAhhdbzjBcSrGwwiRtp2vFt
+X-Proofpoint-ORIG-GUID: DOyfB9oiwYAhhdbzjBcSrGwwiRtp2vFt
+X-Authority-Analysis: v=2.4 cv=GL441ONK c=1 sm=1 tr=0 ts=6a72444a cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=sUha4Zbooll43uZDtmUA:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-04_05,2026-08-04_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 impostorscore=0 lowpriorityscore=0 spamscore=0
+ malwarescore=0 clxscore=1015 bulkscore=0 adultscore=0 phishscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608040161
 
-The orientation property for video interface devices now has definitions
-to prevent hardcoded integer values for the enum options.
+On firmware-managed platforms such as SA8255P, there is no Linux clock
+handler available to determine the appropriate SE source clock, source
+clock index, and divider values for a requested protocol frequency.
+However, these parameters are required when programming GSI TREs, where
+the hardware expects an explicit clock source selection and divider
+configuration for the serial engine.
 
-Update the users throughout the nvidia device trees to use the new
-definitions.
+In contrast, platforms using Linux-managed clocks derive these
+parameters through geni_se_clk_freq_match() using the source clock
+information stored in clk_perf_tbl. Since the firmware-managed path
+lacks equivalent clock information, protocol drivers cannot reuse the
+existing frequency matching logic and instead rely on a direct mapping
+between protocol-requested frequencies and performance levels. This
+creates a separate clock configuration flow and prevents
+firmware-managed platforms from deriving the actual SE clock parameters
+required for GSI TRE programming.
 
-Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Signed-off-by: Kieran Bingham <kieran.bingham@ideasonboard.com>
+To address this limitation, the performance-domain OPP table is treated
+as the representation of SE-supported source clock frequencies. During
+geni_se_domain_attach(), the OPP entries are used to populate
+clk_perf_tbl and related clock performance data, allowing
+firmware-managed platforms to leverage the same clock frequency matching
+infrastructure used by Linux-managed platforms.
+
+With this change, protocol drivers can use geni_se_clk_freq_match() to
+select the closest supported source clock frequency for a requested
+protocol rate, derive the corresponding source clock index and divider
+values required for GSI TRE programming, and apply the matched clock
+through the OPP framework. This removes the dependency on direct
+protocol-frequency-to-performance-level mappings and provides a common
+clock selection and configuration mechanism across both firmware-managed
+and Linux-managed GENI deployments.
+
+Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
 ---
-v2:
- - Fix MEDIA_ORIENTATION_REAR to MEDIA_ORIENTATION_BACK
+Praveen Talari (7):
+      pmdomain: arm: Fix -EINVAL from scmi_pd_set_perf_state() on state 0
+      soc: qcom: geni-se: Populate clk_perf_tbl with SE source clock frequencies from perf OPP table
+      soc: qcom: geni-se: Add helper to set SE clock rate via OPP
+      serial: qcom-geni: Use geni_se_set_rate() for source clock configuration
+      spi: qcom-geni: Use geni_se_set_rate() for setting source clock frequency
+      i2c: qcom-geni: Use common GENI resource initialization helper
+      i2c: qcom-geni: Use geni_se_set_rate() for setting source clock frequency
+
+ drivers/i2c/busses/i2c-qcom-geni.c      | 45 +++++++++++-----------------
+ drivers/pmdomain/arm/scmi_perf_domain.c |  2 +-
+ drivers/soc/qcom/qcom-geni-se.c         | 53 ++++++++++++++++++++++++++++++++-
+ drivers/spi/spi-geni-qcom.c             | 17 ++++-------
+ drivers/tty/serial/qcom_geni_serial.c   | 19 ++++++------
+ include/linux/soc/qcom/geni-se.h        |  2 ++
+ 6 files changed, 88 insertions(+), 50 deletions(-)
 ---
- arch/arm/boot/dts/nvidia/tegra30-asus-nexus7-grouper-common.dtsi | 3 ++-
- arch/arm/boot/dts/nvidia/tegra30-asus-transformer-common.dtsi    | 3 ++-
- arch/arm/boot/dts/nvidia/tegra30-lg-p895.dts                     | 4 +++-
- arch/arm/boot/dts/nvidia/tegra30-lg-x3.dtsi                      | 3 ++-
- 4 files changed, 9 insertions(+), 4 deletions(-)
+base-commit: 0f6da28aab51b16762ed82e8fdeaa5042da45b08
+change-id: 20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-2f29ad32226a
 
-diff --git a/arch/arm/boot/dts/nvidia/tegra30-asus-nexus7-grouper-common.dtsi b/arch/arm/boot/dts/nvidia/tegra30-asus-nexus7-grouper-common.dtsi
-index 892d718294dd105fcfbf290c38de74fc3f93ed6b..a7fdd194300c035317ae237dec7d45533246a3cd 100644
---- a/arch/arm/boot/dts/nvidia/tegra30-asus-nexus7-grouper-common.dtsi
-+++ b/arch/arm/boot/dts/nvidia/tegra30-asus-nexus7-grouper-common.dtsi
-@@ -3,6 +3,7 @@
- #include <dt-bindings/input/gpio-keys.h>
- #include <dt-bindings/input/input.h>
- #include <dt-bindings/media/video-interfaces.h>
-+#include <dt-bindings/media/video-interface-devices.h>
- #include <dt-bindings/power/summit,smb347-charger.h>
- #include <dt-bindings/thermal/thermal.h>
- 
-@@ -991,7 +992,7 @@ front-camera@48 {
- 			vdd-supply = <&vddio_cam>;
- 			vaa-supply = <&avdd_cam1>;
- 
--			orientation = <0>; /* Front camera */
-+			orientation = <MEDIA_ORIENTATION_FRONT>;
- 
- 			assigned-clocks = <&tegra_car TEGRA30_CLK_VI_SENSOR>,
- 					  <&tegra_car TEGRA30_CLK_CSUS>;
-diff --git a/arch/arm/boot/dts/nvidia/tegra30-asus-transformer-common.dtsi b/arch/arm/boot/dts/nvidia/tegra30-asus-transformer-common.dtsi
-index bf1c3a31d406240f62ca13ed351c5ba3a42c83ec..76286e15684c289e648cf75c207cd454176b4689 100644
---- a/arch/arm/boot/dts/nvidia/tegra30-asus-transformer-common.dtsi
-+++ b/arch/arm/boot/dts/nvidia/tegra30-asus-transformer-common.dtsi
-@@ -3,6 +3,7 @@
- #include <dt-bindings/input/gpio-keys.h>
- #include <dt-bindings/input/input.h>
- #include <dt-bindings/media/video-interfaces.h>
-+#include <dt-bindings/media/video-interface-devices.h>
- #include <dt-bindings/thermal/thermal.h>
- 
- #include "tegra30.dtsi"
-@@ -1262,7 +1263,7 @@ front-camera@48 {
- 			vdd-supply = <&vdd_1v8_cam>;
- 			vaa-supply = <&avdd_2v85_fcam>;
- 
--			orientation = <0>; /* Front camera */
-+			orientation = <MEDIA_ORIENTATION_FRONT>;
- 
- 			assigned-clocks = <&tegra_car TEGRA30_CLK_VI_SENSOR>,
- 					  <&tegra_car TEGRA30_CLK_CSUS>;
-diff --git a/arch/arm/boot/dts/nvidia/tegra30-lg-p895.dts b/arch/arm/boot/dts/nvidia/tegra30-lg-p895.dts
-index 896639599c12600a1225610af0ec78f5286a8000..28680063bcc05bb2c1c69effe9ad7235c81c536a 100644
---- a/arch/arm/boot/dts/nvidia/tegra30-lg-p895.dts
-+++ b/arch/arm/boot/dts/nvidia/tegra30-lg-p895.dts
-@@ -1,6 +1,8 @@
- // SPDX-License-Identifier: GPL-2.0
- /dts-v1/;
- 
-+#include <dt-bindings/media/video-interface-devices.h>
-+
- #include "tegra30-lg-x3.dtsi"
- 
- / {
-@@ -132,7 +134,7 @@ front-camera@48 {
- 			vdd-supply = <&vt_1v8_front>;
- 			vaa-supply = <&vt_2v8_front>;
- 
--			orientation = <0>; /* Front camera */
-+			orientation = <MEDIA_ORIENTATION_FRONT>;
- 
- 			assigned-clocks = <&tegra_car TEGRA30_CLK_VI_SENSOR>,
- 					  <&tegra_car TEGRA30_CLK_CSUS>;
-diff --git a/arch/arm/boot/dts/nvidia/tegra30-lg-x3.dtsi b/arch/arm/boot/dts/nvidia/tegra30-lg-x3.dtsi
-index 60e8a19aa70ecadb7d7a0d251ee3b12cf9ca01dc..77cab695d3da94ab5b8c46698fd6e94e03430bf0 100644
---- a/arch/arm/boot/dts/nvidia/tegra30-lg-x3.dtsi
-+++ b/arch/arm/boot/dts/nvidia/tegra30-lg-x3.dtsi
-@@ -4,6 +4,7 @@
- #include <dt-bindings/input/input.h>
- #include <dt-bindings/leds/common.h>
- #include <dt-bindings/media/video-interfaces.h>
-+#include <dt-bindings/media/video-interface-devices.h>
- #include <dt-bindings/mfd/max77620.h>
- #include <dt-bindings/thermal/thermal.h>
- 
-@@ -1216,7 +1217,7 @@ rear-camera@10 {
- 			dvdd-supply = <&vdd_1v2_rear>;
- 			avdd-supply = <&vdd_2v7_rear>;
- 
--			orientation = <1>; /* Rear camera */
-+			orientation = <MEDIA_ORIENTATION_BACK>;
- 			rotation = <90>;
- 
- 			nvmem = <&m24c08>;
-
--- 
-2.53.0
+Best regards,
+--  
+Praveen Talari <praveen.talari@oss.qualcomm.com>
 
