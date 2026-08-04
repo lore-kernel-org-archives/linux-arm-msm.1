@@ -1,173 +1,224 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FEA736EA8D
-	for <linux-arm-msm@vger.kernel.org>; Tue,  4 Aug 2026 18:16:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1BB933DAAB8
+	for <linux-arm-msm@vger.kernel.org>; Tue,  4 Aug 2026 18:20:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.175
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785867374; cv=none; b=KGOrlL96K/aqxdLqIJFdpu1ZBoQ5lge1fcDB4qGd4lk5VUpAA7cCD22AKdvb0ycPGfUxrzZO29O0Ro78jyksIf2eNM4ZKqce706vgV+USRaWUZ6Lekb0St5PgGZ1CuvqwtuuBEmR0rzeVOcdcY8Z2TbvOkimA1aOQGNWPOPcQDY=
+	t=1785867603; cv=none; b=DJ6gDi2Gp4WoG7Y1i78EoOfGSqigeCX80BKxyqvf6W/Ra2esK9Fi0g7NBKZrRTtSWlD4Wnyb7a5YVamaShejQWBYJjUJ44wYj5+OX67wgn1W9cvyn6VB9oG46CBJlyc39wg+rJJYdXL4QNmnF6tN7tM3sqbLNZsLaGVuMRu8+XA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785867374; c=relaxed/simple;
-	bh=l05V037Gw6KDgSPeP8gkXt7VLb9lUOoSe9YYff0dOgU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ZQbsOQ82pCc36qc87AOg76xLusF6TwrsoFutVOUYEAbdcOnKvotlAzOE+2BuP/OXlnRGLK4pJYxwc/4ZdrlrHHJ7kK0OIKtR29OMwchle7rLJNf7ZX2lV0nk4M2VKpf9uZmbpKNO3ZyIXLqb0kEHHofgX3GztDsoOOQ7NmJepJk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=AP2NH6Eu; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bsW9NE/M; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785867603; c=relaxed/simple;
+	bh=PtRqzhQRb7bU7mah6yGiifES/yEQ4XiEOjC7ACQkKnQ=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=s/pZQ6fpSDusLaUgNtR2RokroiOKfQOeZCXoBlGYWz5aNzAucC/6kCqRvMwmS3kWu7VJJrWQPl1RReTaR5j9sjE97pom9JhvaR/R/VhQHheVPkO1TtL90XUODD1dB68EHUFAGDDJYUMvcjQ+vSeIHXUZrHsnT0tyG2WlzKTzjRM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=HOZkSBS9; arc=none smtp.client-ip=209.85.215.175
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="AP2NH6Eu";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bsW9NE/M"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 674FfVn5070998
-	for <linux-arm-msm@vger.kernel.org>; Tue, 4 Aug 2026 18:16:12 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=TPVZMaTFwZtDtQEYpIn4Gvd6
-	nK8sND/eW3Vwfn4Qax0=; b=AP2NH6EuRJiQPVIhRJPuNMYbeDaUiKsFE+E6pBk6
-	qTJx6goyHVwbXGTh2WumxjE/ZCgwZmmopz+wNaMhrtVha1Mdv7H7WtsjDcapF+TE
-	z4xxHZw9seRdc5rF/F5qRjNIu99XLhcy73O7DPbY0MApPn87U2FWg1tEy7fue7n4
-	gK4dheoca2Tkved5bys1OGrLK4ZLnnPLmL+/5OhLbr9tUZ2YOMtse4dP/uUJ9MvF
-	/1Xdq0H7ew9CetnCbAmWQj9ikQtFhioIwePwZOSU52+zbcE75ggUzcJXKpOqJ/cd
-	8+ZeS8FpDk1VBnp5cYqj0buCktii+bwgWlt8LAezxoFBCA==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fujwsgsfm-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 04 Aug 2026 18:16:11 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2cfca8558d2so1671715ad.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 04 Aug 2026 11:16:11 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="HOZkSBS9"
+Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-cbe64a0afabso9771a12.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 04 Aug 2026 11:20:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785867371; x=1786472171; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=TPVZMaTFwZtDtQEYpIn4Gvd6nK8sND/eW3Vwfn4Qax0=;
-        b=bsW9NE/MfC1C+f52OcuEoZwAP4ytKcLJ+rX4IxZS2g2ZxoIPuKWxEouWV0pyE2Qlr0
-         C+Q5NcrPQ12qn7gVHYSof0z+oG3oEMCklB9CtBnPCzRdzTZ4xTAUz4DMk6OOZSdE61BP
-         bjz0dYCDNuIMu9HFaLEcCA0SMydwC7DSeKQCaTdKzmbXzTcv9qLcoDcKdkkaUyQ/tKh4
-         Fr2+a/wSy5xGixtlcRcy/NDjj4LFolfs3KQv1mmxKtpPEBrx2wnp59HmI+AxNJdDD/Kq
-         uO5azOr48rhblfICJZ3GDE0hn22MJjgrZeSJ46oe2xPhQtqkR03cpYO4E/1ZPlIlcmJL
-         c2+w==
+        d=gmail.com; s=20251104; t=1785867601; x=1786472401; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=jw7e5Rfr9nTLu9Xi7DMR9VP2hbwdbhAjZW2kw4eVdlQ=;
+        b=HOZkSBS94JF7pNhIcibw0zVV1uPoLMNsSB1b28wUWyRBIWgCTAlib3GyFEDp1ZaMi+
+         PIx1iGaHBaXR7sSX2Xk3zSk1Ik6SouVh42HrmExX3+8YasT7axsDjG4jnryYzpw17btN
+         CDX8TzKQxPDene03awLrz8PpijfJSPCory9DWiaQrTOeuN4lGkcjiUaumtRYrB7zQSJP
+         3ggXgJh6XAUvclu103+0ZnCeaWlcWaewcDa0T6UBt3soBZz/ZJiHwvZmmGHWB8kVn0tN
+         Fgg9Pr7lqOfjD6JIUuWiJQlKqa8w3Y4ntnk6UBqeysRUblY/nvDdJ9Uu9Vbc3BUcC/Qy
+         aysQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785867371; x=1786472171;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=TPVZMaTFwZtDtQEYpIn4Gvd6nK8sND/eW3Vwfn4Qax0=;
-        b=GXzi5XJlm+ElWTIj4ZPfbEM0LlHYJm3n2TMu3sdFx2dJMOJ0Qz1MscaKJJ64vcKZA4
-         +OR5W0Dh/Qdg/P19GOCMuoP/CTA3LRL8SUosEpcmpA/0Egqm2Jwinq4tNO9UnF7Gvj3t
-         QmgNEKjOWvjGQhCSlnf79/K73E3gvUFYlhtFMTZLI1gA+T/Jg8GPxIMPFjUcit0vIoYX
-         DWb1hOHM854ovlmgeEfBZSJrE0Vbf48G+74RPGjuqfpCX7gxSKIOK95y07kENZWqgpdp
-         AwclF3DnR5CtL/vnDL1IHrvpgEhGTyOkG8wr7psxbOTJeQEBTugpAjoBdxcJaQQ5X0FQ
-         ErNw==
-X-Forwarded-Encrypted: i=1; AHgh+Rq6nuKgeX+MPLF6ZZIY3+Az96XUFpZ9MAhqO5x6haJOJr31dmC5yYYssTrbHzJileZ2O+un+as+Ib7eeFzy@vger.kernel.org
-X-Gm-Message-State: AOJu0YzUS25bRDbRjGn9/Dsl5shsjPz3PokiledjcOA2uxBAzs7c5Lfc
-	zqTHnIsuLuL7DQX6jIPMlWu4HbgXrrftW+fiN2GHoWEVtkJyjKmkYdSF3diBBK1u2E9bzClmhrF
-	0VBYq6R7nyfn078MtcDa0l+kHKQW9Ald5q9+svc7spi4+W/U8wdbAo+wiHjZUba5eIniZ
-X-Gm-Gg: AR+sD12CNMV/AL96AZ9wugHxjQpKCg4FMCuDBXDbFetzNIv+5iYudwMmJpm5o+rFEvr
-	U4Xb3qKlMxNTeuM8xu4E433WSVAHVgPLbnuxj7p/EYMRl3q070RixO6f/rZwI6c0eDN714gkR/2
-	QV7eph00QXImraQM/p/ODTsMqJd1sueeCtop1o01vZVK8FCxmmCSEgXr90KLI0FDF/u3HzL3822
-	IRKhd26zyfDDnfJZ2yfLBizdhxJ46KknTWSHUTAmt0GBFGSNsg00JpG20dejRbSH0pkwXSognGB
-	GGUlpBIWqrDi2Qckpclx7QIvEVR0s0j+8Jn5/09tW9H7Rdbutq7m6GmN0cUMIN7I8gWLHieVQu4
-	szoqo+25j0IYq3BwOTt019GS6ILo=
-X-Received: by 2002:a05:6a21:4c0f:b0:3bf:6d96:ac40 with SMTP id adf61e73a8af0-3cb85ded9cbmr584481637.12.1785867370917;
-        Tue, 04 Aug 2026 11:16:10 -0700 (PDT)
-X-Received: by 2002:a05:6a21:4c0f:b0:3bf:6d96:ac40 with SMTP id adf61e73a8af0-3cb85ded9cbmr584422637.12.1785867370347;
-        Tue, 04 Aug 2026 11:16:10 -0700 (PDT)
-Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31586777bcfsm11267932eec.21.2026.08.04.11.16.05
+        d=1e100.net; s=20251104; t=1785867601; x=1786472401;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=jw7e5Rfr9nTLu9Xi7DMR9VP2hbwdbhAjZW2kw4eVdlQ=;
+        b=ZCtxyjh2MyyAVGHjA/MzI7nzObNhHL7cPa2V78zl+SzWUOkQTbs8LE6C78ny9JePIH
+         KMsOp3+7rg8bt8aty/4halSTVYEPQ5lELx0goWL1rAuXY7wVu2ooECxcwuZoRRZfe2C8
+         Lu9qzi34GG1n8rXKfW3uAwAC5pboQcNQdL9aQSkUe8H9YaWwjRbDcttFXTPa+PwKHScY
+         e8yKQMMqNFI/f8HZ+Sz/skg5rf3R+OqYAkF+rbJUYnS+3aTz4WXEwsijrzLY4nl6/kaE
+         9rl+XXNnSOccbPE4tj/AxUXFmc/JjD4Vxn/+RqfwOlbBhiOE0uJl5s2V85Yo28lcHDYo
+         9xwA==
+X-Forwarded-Encrypted: i=1; AHgh+RrGG04FiOhFzTxd8O382RG84gMZ006/1Du/3A4PShpkAeTNxsMhmAmo+6wvYsCMKALZBwyBxJqiXN6ufF/V@vger.kernel.org
+X-Gm-Message-State: AOJu0YzD8sxb67AODHDbTBgarLXlCpk7+mZC6r4f0QKol6L9RHG3lH8a
+	pEwjEa0RF+/W4jrgsYChrc6C/0CskDwFYm7M0Yq3d/NL6ps/+4LlGvvW
+X-Gm-Gg: AR+sD13yLWIKNCf0Pa0N5G6bmQ6lzDcsZnE5KKgTZ4c58jjHpGuavPgVFFXF+TIn4Xy
+	Dq210SQgRP/tIiYpqRk4zwhThOD7QT4Yq3NZA5t/pAi6ThnIrFsK54e5Iwc5eHhbxd0JGHbAhzI
+	aNgnimhJqCUyLHDyGZ1mcthogKxiSegSGQbczfDEQfiNAhKDhUN6rbJPAGR4pZZAQz1CNb6hj6F
+	1OolUza+njHCrU56XcPiNK+CJS0FopptHJRcf0eYVkCjEoIcWU2bbnwrutPnsz4wpQyUF2ry2kg
+	nWX5IDh82Hy/XsQ9qanYoqGPy80l/seD330Olr6QWUfvyrm6701N/o3S0dgkNJPi7vtSvpXmiTV
+	CDtsbuN62n9DJnEsnyDaG1izLewpF9Zn01cnI0sZZAf9DNHHGrEosBniwc2fNeOKswN47YJ1wWF
+	5bRLIJxlrZh9DpjkfHGDHXDHLAdgsBzaF2UedLbB+zQAz0UsRD8lu2poZbneWOT2ugwV4+kOJ/M
+	g+BfO4dc7NdjG4=
+X-Received: by 2002:a17:90b:4410:b0:38e:6d4c:14df with SMTP id 98e67ed59e1d1-3903c5bff9dmr807451a91.1.1785867601383;
+        Tue, 04 Aug 2026 11:20:01 -0700 (PDT)
+Received: from localhost.localdomain ([202.164.135.140])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13fca8e969esm4967976c88.10.2026.08.04.11.19.58
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 04 Aug 2026 11:16:09 -0700 (PDT)
-Date: Tue, 4 Aug 2026 23:46:02 +0530
-From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Manivannan Sadhasivam <mani@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/2] dt-bindings: remoteproc: qcom,sm8550-pas: Make
- SDX75, Hawi and Maili MPSS fallback to SM8650
-Message-ID: <20260804181602.g2tmskh64zuvl2st@hu-mojha-hyd.qualcomm.com>
-References: <20260803180021.20368-1-mukesh.ojha@oss.qualcomm.com>
- <20260804-acoustic-military-coua-cb0caf@quoll>
+        Tue, 04 Aug 2026 11:20:00 -0700 (PDT)
+From: Sailesh Nandanavanam <saileshnandanavanam@gmail.com>
+To: andersson@kernel.org,
+	mathieu.poirier@linaro.org
+Cc: neil.armstrong@linaro.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-remoteproc@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Sailesh Nandanavanam <saileshnandanavanam@gmail.com>
+Subject: [PATCH v4] remoteproc: qcom_q6v5_pas: Fix dtb firmware lifecycle and leak
+Date: Tue,  4 Aug 2026 23:49:51 +0530
+Message-Id: <20260804181951.5206-1-saileshnandanavanam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260804-acoustic-military-coua-cb0caf@quoll>
-X-Proofpoint-GUID: nGttdx6zH0es8MDRUrF4FBxbn_iJRybE
-X-Proofpoint-ORIG-GUID: nGttdx6zH0es8MDRUrF4FBxbn_iJRybE
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA0MDE0NyBTYWx0ZWRfX5QgYIlvuOos/
- rtdRtaau1BaWk66O+nfMmgYntgc2coD808hnjXeCP6lmEhpQYx+szEZGweElOlkkb0BFSlRXlBH
- +4n1JxaVJzu/6sLyMxVJ9uUGwYi9Z4A=
-X-Authority-Analysis: v=2.4 cv=Lu6iDHdc c=1 sm=1 tr=0 ts=6a722c6b cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=RRksG6cbm_02s6OBxpQA:9 a=CjuIK1q_8ugA:10
- a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA0MDE0NyBTYWx0ZWRfX3cfvxw6CDdnk
- qnzymHlg4bFmQIun9EGkBiVlkmHmeegiuyWXuZ4oBursSSom54C8NqtQfG8HWL7kRKbeiZfaUQ9
- aU3jWygY1nwu215rTKACzaKdKKjvMAkOcmrLEBSZ9/ZlsyCSI/sZ9vWPxX/S6K5ochiyJGzhpTR
- c7H0hhxJSquE6N3naTqhicHHjD5fL0S/edWbpSq1BqVZBQY8QRcmcsjtiYukPg6+OScUVdL0QQB
- JYTo4QH3yfbyZp8ml80VEutdR5nZFggkLV2z1qVDugyMkiJ+NVwJfeQZDsYGpT0RmmnD6dobGUl
- 8Ef8W6ASoLBI1JHV0ulYsnO3QuGmDWJkeYdB1KrwZ3GddvCPUfLokT/3sSQzOdNmBVVKx3dQCur
- msu8qQ0/f287DQxVm+UOAilGmi/QiXBJ3RwGcQX/J31DQ33WY4VJ3W7c1aoJDZwir+tdKG1FfSE
- jlTddnZtySfDBwejtiw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-04_03,2026-08-04_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0 impostorscore=0 malwarescore=0 spamscore=0
- priorityscore=1501 clxscore=1015 bulkscore=0 lowpriorityscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608040147
+Content-Transfer-Encoding: 8bit
 
-On Tue, Aug 04, 2026 at 10:41:19AM +0200, Krzysztof Kozlowski wrote:
-> On Mon, Aug 03, 2026 at 11:30:20PM +0530, Mukesh Ojha wrote:
-> > SDX75, Hawi and Maili MPSS are compatible with the SM8650 MPSS as
-> > they share the same set of interrupts, memory regions and power domains.
-> > Rather than describing them as standalone compatibles, model them as
-> > fallbacks to qcom,sm8650-mpss-pas.
-> > 
-> > Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-> > ---
-> >  .../bindings/remoteproc/qcom,sm8550-pas.yaml  | 29 +++++++++----------
-> >  1 file changed, 14 insertions(+), 15 deletions(-)
-> > 
-> > diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml
-> > index a062188861ff..f722c55aadf4 100644
-> > --- a/Documentation/devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml
-> > +++ b/Documentation/devicetree/bindings/remoteproc/qcom,sm8550-pas.yaml
-> > @@ -18,9 +18,6 @@ properties:
-> >      oneOf:
-> >        - enum:
-> >            - qcom,eliza-cdsp-pas
-> > -          - qcom,hawi-mpss-pas
-> 
-> There is no known user of this.
-> 
-> Why do we even document this?
-> 
-> This is unfortunately one more example why I should accept early
-> bindings without users.
+DTB co-firmware was previously requested and loaded in
+qcom_pas_load(), but its lifetime did not match the actual
+start/stop lifecycle of the remoteproc. As a result, the firmware
+reference could be retained across restart cycles, leading to a
+leak for each successful boot.
 
-Yes, it was a miss and wanted to send revision of [1] after Yijie comments
-I thought, I acked his comment somewhere later realized I acked his comment
-internally.
+Additionally, if qcom_pas_start() failed after loading the DTB
+firmware, the remoteproc core would not invoke .stop(), leaving
+no opportunity to release the associated firmware reference.
 
-[1]
-https://lore.kernel.org/lkml/20260713093237.691117-1-mukesh.ojha@oss.qualcomm.com/
+Fix this by moving DTB firmware request and loading into
+qcom_pas_start(), so that its lifetime is strictly tied to the
+remoteproc start sequence.
 
+Update qcom_pas_start() to ensure proper cleanup on all paths:
+- release PAS metadata on failure
+- release DTB firmware on both success and failure paths
+- unmap DTB carveout where applicable
+
+Remove DTB firmware handling from qcom_pas_load(), as it does not
+match the correct ownership and lifecycle model.
+
+With this change, request_firmware() and release_firmware() are
+properly paired within the start path, avoiding leaks and ensuring
+consistent behavior across restart and failure scenarios.
+
+Fixes: 29814986b82e ("remoteproc: qcom_q6v5_pas: add support for dtb co-firmware loading")
+Signed-off-by: Sailesh Nandanavanam <saileshnandanavanam@gmail.com>
+---
+v4:
+- Rebase onto linux-next
+- Remove unused int ret from qcom_pas_load()
+
+v3:
+- Remove the unused release_dtb_firmware label
+- Release DTB firmware under the existing dtb_pas_id check
+
+v2:
+- Move DTB firmware request/load from qcom_pas_load() to qcom_pas_start()
+- Fix firmware reference leak across restart cycles
+- Handle start() failure paths where .stop() is not invoked
+- Ensure firmware is released on all success and failure paths
+- Remove DTB handling from load() and drop release from stop()
+---
+ drivers/remoteproc/qcom_q6v5_pas.c | 47 +++++++++++++++++-------------
+ 1 file changed, 26 insertions(+), 21 deletions(-)
+
+diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
+index ca8e61254c44..864446a484f1 100644
+--- a/drivers/remoteproc/qcom_q6v5_pas.c
++++ b/drivers/remoteproc/qcom_q6v5_pas.c
+@@ -231,7 +231,6 @@ static int qcom_pas_unprepare(struct rproc *rproc)
+ static int qcom_pas_load(struct rproc *rproc, const struct firmware *fw)
+ {
+ 	struct qcom_pas *pas = rproc->priv;
+-	int ret;
+ 
+ 	/* Store firmware handle to be used in qcom_pas_start() */
+ 	pas->firmware = fw;
+@@ -241,23 +240,6 @@ static int qcom_pas_load(struct rproc *rproc, const struct firmware *fw)
+ 	if (pas->lite_dtb_pas_id)
+ 		qcom_pas_shutdown(pas->lite_dtb_pas_id);
+ 
+-	if (pas->dtb_pas_id) {
+-		ret = request_firmware(&pas->dtb_firmware, pas->dtb_firmware_name, pas->dev);
+-		if (ret) {
+-			dev_err(pas->dev, "request_firmware failed for %s: %d\n",
+-				pas->dtb_firmware_name, ret);
+-			return ret;
+-		}
+-
+-		ret = qcom_mdt_pas_load(pas->dtb_pas_ctx, pas->dtb_firmware,
+-					pas->dtb_firmware_name, &pas->dtb_mem_reloc);
+-		if (ret) {
+-			qcom_pas_metadata_release(pas->dtb_pas_ctx);
+-			release_firmware(pas->dtb_firmware);
+-			return ret;
+-		}
+-	}
+-
+ 	return 0;
+ }
+ 
+@@ -282,9 +264,23 @@ static int qcom_pas_start(struct rproc *rproc)
+ 	struct qcom_pas *pas = rproc->priv;
+ 	int ret;
+ 
++	if (pas->dtb_pas_id) {
++		ret = request_firmware(&pas->dtb_firmware, pas->dtb_firmware_name, pas->dev);
++		if (ret) {
++			dev_err(pas->dev, "request_firmware failed for %s: %d\n",
++				pas->dtb_firmware_name, ret);
++			return ret;
++		}
++
++		ret = qcom_mdt_pas_load(pas->dtb_pas_ctx, pas->dtb_firmware,
++				pas->dtb_firmware_name, &pas->dtb_mem_reloc);
++		if (ret)
++			goto release_dtb_metadata;
++	}
++
+ 	ret = qcom_q6v5_prepare(&pas->q6v5);
+ 	if (ret)
+-		return ret;
++		goto release_dtb_metadata;
+ 
+ 	ret = qcom_pas_pds_enable(pas, pas->proxy_pds, pas->proxy_pd_count);
+ 	if (ret < 0)
+@@ -352,6 +348,11 @@ static int qcom_pas_start(struct rproc *rproc)
+ 	if (pas->dtb_pas_id)
+ 		qcom_pas_metadata_release(pas->dtb_pas_ctx);
+ 
++	if (pas->dtb_pas_id) {
++		release_firmware(pas->dtb_firmware);
++		pas->dtb_firmware = NULL;
++	}
++
+ 	/* firmware is used to pass reference from qcom_pas_start(), drop it now */
+ 	pas->firmware = NULL;
+ 
+@@ -361,8 +362,6 @@ static int qcom_pas_start(struct rproc *rproc)
+ 	qcom_pas_unmap_carveout(rproc, pas->mem_phys, pas->mem_size);
+ release_pas_metadata:
+ 	qcom_pas_metadata_release(pas->pas_ctx);
+-	if (pas->dtb_pas_id)
+-		qcom_pas_metadata_release(pas->dtb_pas_ctx);
+ 
+ unmap_dtb_carveout:
+ 	if (pas->dtb_pas_id)
+@@ -381,6 +380,12 @@ static int qcom_pas_start(struct rproc *rproc)
+ 	qcom_pas_pds_disable(pas, pas->proxy_pds, pas->proxy_pd_count);
+ disable_irqs:
+ 	qcom_q6v5_unprepare(&pas->q6v5);
++release_dtb_metadata:
++	if (pas->dtb_pas_id) {
++		qcom_pas_metadata_release(pas->dtb_pas_ctx);
++		release_firmware(pas->dtb_firmware);
++		pas->dtb_firmware = NULL;
++	}
+ 
+ 	/* firmware is used to pass reference from qcom_pas_start(), drop it now */
+ 	pas->firmware = NULL;
 -- 
--Mukesh Ojha
+2.34.1
+
