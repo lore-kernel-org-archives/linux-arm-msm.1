@@ -1,174 +1,105 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from out-183.mta0.migadu.com (out-183.mta0.migadu.com [91.218.175.183])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E64582FE575
-	for <linux-arm-msm@vger.kernel.org>; Tue,  4 Aug 2026 07:05:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C326C427FB1;
+	Tue,  4 Aug 2026 07:35:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.183
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785827107; cv=none; b=qBuziNx1A2QQQ13snbWu6QoMzPwHliqz8IbLdGs1JNvYv5WRaFigEbz6HCJN28wG0NAzsOzS/lataQmhs0Eg426czm0f3igFeMJLaaUmVCukAfvGq2XgiYaagIk+/kuw8vi9h6nA1sZD66Y5LFE4LSoE8Z6G65ZjYE6442vVtTE=
+	t=1785828911; cv=none; b=F0yH6eLbbZXGY3oGrSYTrSdBmmKjh2XMCD0MowpV9eH5fccL9PbhhqUiqm2L9GsVTkdtyPnxRLPGA/OTsr5PWwAaqVGEmyJdEdY823FN0gimzbijEfXZ6msxW+L/tNahlCaGqEEYwFeg6Mzgen8tML81zIayw53ZAhZ84Sm8fqc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785827107; c=relaxed/simple;
-	bh=KISUaWsgNM8awv6Xd8C6fxzb9CVQoaKPTw0NYTkSMsc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=h5tMQcIsRx4+hMYhcgeUUC6S3PigkvuxXQaJrjGCqV1aSJX3JmpQ1HQqsEsYQBEhAncQpCHAhID3P8/SExe4KIrIHzWdkDGswK/Yx+ZW3h+skIZ9FEri7iLC30KiIqMx61VJ669Eryab72sipjDje33fJfJE2fTMSkiNVOevEZc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=LNdUrh3+; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=fUFK0jtG; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785828911; c=relaxed/simple;
+	bh=KazPXkOf+br4bp1cxqinwcaXXuaNW8H+zds6OLhGIFg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=IXELpmw62NpeCq3UC9sF96prvyOCjjSSEbVTjAMZwoXz5evGpse4r74LqDYV6LDf/1KOtKgXg6f6gL4a/xCXWmUWCwoqA0w02U4U4F8/ouKOYKWXIl1Z9Frd5XiLu/2iQj1bYEsjvNTs6c7vocAMncPF+TphJTPdECQ0nj4VBQM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=IGEX/we1; arc=none smtp.client-ip=91.218.175.183
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="LNdUrh3+";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="fUFK0jtG"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67417xq42352766
-	for <linux-arm-msm@vger.kernel.org>; Tue, 4 Aug 2026 07:05:05 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	JHHvqgebmTzSmaEA0DpQ2efP2IiYVPYCPSbWYcSigVI=; b=LNdUrh3+DTZX89w7
-	NCScYVlg4ymCQEoSaTFR/07J/3ArQgLT7/ZCc1fd569g4cE7bROiB/JSrKpv2ZmJ
-	IOxs4JW+K0QzCMjpc8chQQU2E5HwzEBxeMSBA7KytUMcfJpYGQmI/0LYSC2i8cfw
-	AL4s0vdlYBdJO3o8JSbteZUzJQ8wrT/wEJc6Ig3xM3Pobgf+ZyeeiBdAY0FkPftL
-	zj6ncd7xgTcvkO/bz6Scg92LDeLqjg5K8Xb1DuO8IsHYw/hDUN9fz+5Ntl8Jq7bD
-	KekDjWdtgW2W/9w8NJdce4VyGi1/ZVs/Q+XofyjMFIzF2e0+6rnxd0RnDmXfOpnt
-	XXh2Ug==
-Received: from mail-pf1-f199.google.com (mail-pf1-f199.google.com [209.85.210.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fu1p8a9pg-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 04 Aug 2026 07:05:04 +0000 (GMT)
-Received: by mail-pf1-f199.google.com with SMTP id d2e1a72fcca58-84e375d9736so6450699b3a.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 04 Aug 2026 00:05:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785827104; x=1786431904; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=JHHvqgebmTzSmaEA0DpQ2efP2IiYVPYCPSbWYcSigVI=;
-        b=fUFK0jtGd/iulvpExnYU5DmDVYVOCrA5V1tnPiIylYn7pahb5NZpll66hVljAkTNdn
-         Twf6VtJ6xnbXwLue91LTrYEmJuYtPMUn25gQjyCMa6ndm4Lgg7eiEZM/tmt7lP6UmDwh
-         b+oFi74dpMtB03ghrxpyM+Pa5aTgEyfHffJ5TSiClZtYT2ebQNcSpscNmUHPGjyZ1X95
-         Viws/FDQOGSuzq0MViuBdfVg3CmXgdl2uGtrRduTvxZHnB2fgW4b+66DOOlk2UqBIMXd
-         ZbOktuDDQSCxCd7cDA2puAzseKWF8E2rWPoVFjMsOtq13Y0ATLfCy20L38gWt7jUgQ1I
-         DKIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785827104; x=1786431904;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=JHHvqgebmTzSmaEA0DpQ2efP2IiYVPYCPSbWYcSigVI=;
-        b=lIytAQOVkg+9wOqDX4oliat28gCHpT3o0qyPwESn3ABdMsLO/Q3bykAzNqUYam0X9L
-         m7BO0LgyYd56o0QrSzZ3hjOVEOQS0zDqPCY8rFjnXTsxawDb5E//436RNJfzHJemhyRg
-         H70mp5UZcBqVCeY2TFFyJnWX0+A76rbzdTXM8tNos7bBX4SjzaBADs8mDfGwXFKBQ/MQ
-         /vF6Ijupd877mb4TR5ePEVvyqvqLUWzbwnCbNPdD33iFDdgMhSiL23jsv0MolL1KnlxR
-         61oVEP0NS9hLBtkff1mzS2wO+UMiwgEaQsyErz1kSneT4SGR26ifXcjx6RK2/q5zCToa
-         pa+Q==
-X-Forwarded-Encrypted: i=1; AHgh+RpC2FUzRShbOl/46VJu8BpOtvFSUcS147g81GtzKpFT/TMinwIMgPVnAhHwwswNkt5fDbJ5/bhhru9px0gL@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyib1jubdHiMFn/ghks4PMZtFn3tM+T582hkxZKtCxAw10jFKKD
-	/HpBYdCAB4jNoqT7mkjvnEGj5+Hj0/WxyFnmEqDR7nwCY5vmfMDcY+A/7lvtId5l6DRHrfgWmjG
-	ZTlbhJMHY5j+zT7DmVi6WautXFlb0kvK3/TtU9keWGL2NpOGP95KTmDkiKBbNPoZGpkkc
-X-Gm-Gg: AR+sD12FAeSzh+rKO63fBq2DKTWoagt4OwwY19A2kuZyoesUUr5eDv5LP7SkaExW6dh
-	2iMlobtsV+vmcEFuqPP+F2uq8RHCtp0SaFJheFo7vLONEMUSavNPlvXkTrOQBw5hvhUAg8a0L6S
-	iB3aPIfQE9P+M3PMg1gQdxMPjfhP3N4qzS/Q74LILAlXaIFcQQV4+/GZRgC4pVCgAEUMtTEuAwf
-	L5pTLvNr/lkMKOw+nuhONPlPEJuwweS4j8k+mEbH9kprfLBKLyeApQ8EEq0cV+tFjGVeeb+pgMn
-	yHwu6d6WE7pUxOtPNpI1byv/M13L256N8ijFzwtISduaRVFxO+Eyw2xj3TYJ1m//bmL/32niHRU
-	Yy3G0fXdHtWUUqE3zpEDuV5jqIuNERjDjXJ0jeiRYrt/VUPRzx+k2/BitUqP+gmhegw==
-X-Received: by 2002:aa7:9a8c:0:b0:847:7ece:3426 with SMTP id d2e1a72fcca58-84ee48ca4d1mr12140956b3a.58.1785827103770;
-        Tue, 04 Aug 2026 00:05:03 -0700 (PDT)
-X-Received: by 2002:aa7:9a8c:0:b0:847:7ece:3426 with SMTP id d2e1a72fcca58-84ee48ca4d1mr12140921b3a.58.1785827103348;
-        Tue, 04 Aug 2026 00:05:03 -0700 (PDT)
-Received: from [10.133.33.234] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84edbe565d2sm4920387b3a.13.2026.08.04.00.04.59
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 04 Aug 2026 00:05:02 -0700 (PDT)
-Message-ID: <58940156-c664-4ab2-835c-81fa43365bcd@oss.qualcomm.com>
-Date: Tue, 4 Aug 2026 15:04:58 +0800
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="IGEX/we1"
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1785828897;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=DWMTuq9NkCnrgokFcLH3C7+v8FiIoP6xFMC71YOuo3Y=;
+	b=IGEX/we1QDJAsgCIQRHFTugI6JeEnyAKDp6+LNwa6ghbmAFdvduUPZL3I/3lhcGFlwJufh
+	5CD8OSL2wmoekN11h15y1hViiMEuh/vieEU87mSvn1zzC2MzII3lVtLCvpcT+fjND/AvOI
+	u/ryaZ/YyiBWo35SAqtXEqjTfsvisQQ=
+From: Junjie Cao <junjie.cao@linux.dev>
+To: neil.armstrong@linaro.org,
+	jesszhan0024@gmail.com,
+	maarten.lankhorst@linux.intel.com,
+	mripard@kernel.org,
+	tzimmermann@suse.de,
+	airlied@gmail.com,
+	simona@ffwll.ch,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org
+Cc: dmitry.baryshkov@oss.qualcomm.com,
+	konrad.dybcio@oss.qualcomm.com,
+	mitltlatltl@gmail.com,
+	dri-devel@lists.freedesktop.org,
+	devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v3 0/2] drm/panel: Add support for Novatek NT36532 panel
+Date: Tue,  4 Aug 2026 00:34:17 -0700
+Message-ID: <20260804073419.84727-1-junjie.cao@linux.dev>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] arm64: dts: qcom: hamoa-iot-evk: switch typec0 to
- PS8830 retimer
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        tingwei.zhang@oss.qualcomm.com, jie.gan@oss.qualcomm.com,
-        Guodong Xu <guodong.xu@oss.qualcomm.com>
-References: <20260803132753.994619-1-xin.liu@oss.qualcomm.com>
- <jx5iackeevtgqxycqbmctfohuydyarxxp4uqsu5dpihca5oc7m@gyyd6l67kzhx>
-From: Xin Liu <xin.liu@oss.qualcomm.com>
-In-Reply-To: <jx5iackeevtgqxycqbmctfohuydyarxxp4uqsu5dpihca5oc7m@gyyd6l67kzhx>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=A5xc+aWG c=1 sm=1 tr=0 ts=6a718f20 cx=c_pps
- a=WW5sKcV1LcKqjgzy2JUPuA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=nF2vwnYNiXGi8mvl9yQA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=OpyuDcXvxspvyRM73sMx:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA0MDA1NCBTYWx0ZWRfX3ZL7Sg5ifm2e
- IB+v4l/fNiPYAL7bPLszXP6+eidPaEoQCjVs7IhCB7Qgf/4SXQRknQYMtL7a8dQjpa1Agnni6zD
- HSMbW0RZzvD8fLuGQeUunTAwYT8xpjL/mW89Bgm+ZOsNZSru15nNXX6IRCpDdEVj/8OQBhyXyvF
- h2XAQb9+nIPJr6TNGss+IDA3Y+fUG26z9biu52BNpCfeqZswqTV4tSL2UIq+2wXSuUZtiya0D3E
- HfzRx/tu+/K6tH3SykvIz0C22we1jJEdd4uwUyAZdEdpFF/AZU/oDC3pcTsgk2dj0qz20fJIw+c
- pm8TVzA+ltQjk8Bjpz1yggraFrPu5rBGxQxI48LOb4MZtw73t9lPjSr1hJCAhrgiZEDxEyGphLh
- 14DjNBwmVI1VijjgMSO136ePxnKXX6one9ktqd0IxEZpB1EKobyW1eHsAyOW/Z3KrInEtAlr9SN
- 8GBraL74XSoJxvPf5fg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA0MDA1NCBTYWx0ZWRfX+ZQW/6Tbs6o2
- AZMrk6blG6dH+cEfSj/FTkgsxTLo4Rela9W2vLw6ntQMp+Byma417tpEBZrafczW7+t9qAsEv3U
- 8KWLlzIJIaewJ3twg8hcIeY03sIBbT4=
-X-Proofpoint-ORIG-GUID: Pv1aW61qUAwM16w6m99s80N2wmb0T3F5
-X-Proofpoint-GUID: Pv1aW61qUAwM16w6m99s80N2wmb0T3F5
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-04_01,2026-08-03_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 malwarescore=0 priorityscore=1501 clxscore=1015
- suspectscore=0 adultscore=0 bulkscore=0 spamscore=0 impostorscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608040054
+X-Migadu-Flow: FLOW_OUT
+
+This series adds support for panels using the Novatek NT36532 Display
+Driver IC, a dual-DSI, dual-DSC controller that requires DPU support
+for MIPI_DSI_MODE_DSC_ALL_SLICES_IN_PKT.
+
+The first user is the CSOT PPC100HB1-1 panel found in the OnePlus Pad 2
+(OnePlus Pad Pro in China) tablet: 3000x2120, dual-DSI in bonded mode,
+DSC 1.2 with two slices per line.
+
+v2 has been tested on the OnePlus Pad 2: the panel comes up in its
+native 3000x2120 mode at 120Hz over dual-DSI in bonded mode with DSC,
+and displays a stable image. The only wire-level change in v3 is the
+page 0x23 0x51 write going from two bytes to one, matching the stock
+firmware DT.
+
+Changes in v3:
+- Kconfig: select DRM_DISPLAY_DSC_HELPER, DRM_DISPLAY_HELPER and
+  DRM_KMS_HELPER, depend on BACKLIGHT_CLASS_DEVICE.
+- Write the page 0x23 dimming table entry 0x51 as a plain one-byte
+  write instead of the two-byte DCS brightness helper.
+- Spell the page 0x10 brightness write as MIPI_DCS_SET_DISPLAY_BRIGHTNESS
+  with an explicit 07 ff payload instead of the byte-swapped 0xff07.
+- Drop accidental MIPI_DCS_* macro names from vendor-page register
+  writes.
+- Make the DSC config const and copy it into the panel instance at
+  probe time.
+- Support an external backlight via drm_panel_of_backlight().
+- Report the panel physical size via the display mode.
+- Link to v2: https://lore.kernel.org/all/20260729160804.912826-1-junjie.cao@linux.dev
+- Link to v1: https://lore.kernel.org/all/20251001135914.13754-1-caojunjie650@gmail.com
+
+Junjie Cao (2):
+  dt-bindings: display: panel: Add Novatek NT36532
+  drm/panel: Add Novatek NT36532 panel driver
+
+ .../display/panel/novatek,nt36532.yaml        |  83 ++++
+ MAINTAINERS                                   |   7 +
+ drivers/gpu/drm/panel/Kconfig                 |  14 +
+ drivers/gpu/drm/panel/Makefile                |   1 +
+ drivers/gpu/drm/panel/panel-novatek-nt36532.c | 431 ++++++++++++++++++
+ 5 files changed, 536 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/display/panel/novatek,nt36532.yaml
+ create mode 100644 drivers/gpu/drm/panel/panel-novatek-nt36532.c
 
 
-On 8/4/2026 3:35 AM, Dmitry Baryshkov wrote:
-> On Mon, Aug 03, 2026 at 06:27:47AM -0700, Xin Liu wrote:
->> The Hamoa IoT EVK hardware design uses a Parade PS8830 retimer on
->> I2C3 for USB Type-C port 0. Describe the retimer and route typec0
->> through it to enable USB 3.0 SuperSpeed and DisplayPort Alt Mode.
->>
->> Supply the PS8830 from the existing vreg_rtmr0_* rails and remove
->> their stale "Left unused" annotation.
->>
->> The FSUSB42 SBU mux chip is present on the PCB but with all signal
->> lines unconnected (NC), so remove the fsusb42 node and its pinctrl
->> group.
-> Why is it still present on the PCB?
+base-commit: 0d33d21e47d9dc66f91e44da3fc9220c74d93df7
+-- 
+2.43.0
 
-The FSUSB42 is retained on the PCB as a fallback for the PS8830's SBU 
-mux function.
-
-Should the PS8830's SBU path encounter any issues, the FSUSB42 can 
-be activated
-
-with a simple rework to quickly switch to a discrete solution, avoiding 
-a full board respin.
-
-
-Thanks,
-Xin
-
->> Tested on the Hamoa IoT EVK:
->>
->> USB 3.0 SuperSpeed at 5 Gbps on typec0
->> DisplayPort Alt Mode on typec0
->>
->> Signed-off-by: Guodong Xu <guodong.xu@oss.qualcomm.com>
->> Signed-off-by: Xin Liu <xin.liu@oss.qualcomm.com>
-> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
->
->
