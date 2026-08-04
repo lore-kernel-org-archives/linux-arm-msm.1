@@ -1,196 +1,182 @@
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDE173EB112;
-	Tue,  4 Aug 2026 18:27:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BE2DB411F92
+	for <linux-arm-msm@vger.kernel.org>; Tue,  4 Aug 2026 18:30:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785868059; cv=none; b=E7irh1tV5sG7/UvbWwETaxkFNk4y3yvbmCdcxvu7bhW6iFtdquaROnmSof2uhSlE1ni3PjCK3euLyfqFsUGjdWCAUQBoiq0NA42Dy7eg3urQb1Gg0g+Gmv+KCaFo5bFjp/Va+sukUDeAzR4bmd5mgaYKuZ2Qq7Q8weaQ7EdPrMg=
+	t=1785868250; cv=none; b=tZv8T7fXyqIvBkNdPG3y1tK2t87pzE+2hh0NVAak13L9H0d1xkA1rPZE4cMr+dhcm9QLFHS5DY9qJtCv7CFjQKJRZF+rmhPStyMH+M1xd0RJFpV9sazd19mlRd0szCin+ZyO6flpyMoqkgZUjHt/SP+MIKGt6O4pZVrPdjkHu9w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785868059; c=relaxed/simple;
-	bh=+nx0m30jvJNLR+AVrWZqkStFCFrEd/LxWlDlNr663aQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=RnCdREXY9qMoYsILC8qvjjiWcpn9rEE7zyOtKXXvptujjk9zVeDeLwkDhzX7Oz70yLlyKzu85nkSd9jWtWNztla+lDPCmEWJzNxL+UJjEYHOfX+16erADXNpGyxhkRLKwFKhp7QZEzwOkzhTtfUwNFxfZMLGhDQe+n2NUglCgC0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.mailfrom=mainlining.org; dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=gLzyDobi; dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=/Z4jYYRh; arc=none smtp.client-ip=5.75.144.95
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
+	s=arc-20240116; t=1785868250; c=relaxed/simple;
+	bh=D4Qny+SNB++brDPpEvfKvsrGnVhLNcnYa8NDK/rHLRY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=cdgQBC6/toV3e4Kr97syNmxc1nYa92F0ZdMMp/lEa7mde3ekoKyi8FBW5nuBxsbCKtYz6ipUW62TwMgWj8kk7+oGSgS1QeVeiWZ4+/mX/udQ0O/IaT9BI+sLvoCi2RrJ11E7hkaNCKvjefZ6Ta8Yf69cfFfFGGBBVvVyjo7DBxY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kvhpaFTF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=DDfS2+jl; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="gLzyDobi";
-	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="/Z4jYYRh"
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
-	h=From:To:Subject:Date:Message-ID; t=1785868024; bh=YrMMNGosshER4iLXgDtpRWx
-	BdjnbgQ6m/RcBo2d3aCo=; b=gLzyDobiekLYeul74NVwZIeqq+9U9cogl97CCXaDsOFMhbjipB
-	A/64P6yRvr2mCa/UZkATDS/PFdFrCGe3WHpfiRZpXGK3yFrfeGdQg/mXXGPP7C8IemM8+Q2KVkC
-	SqKQ3rcTtFZUODWBw1AJ/rNDIo/4jF4mEWr19aXRE+qT/gUgpOMfmAT9XbPHmoKw9lpR4rqMnlx
-	JmPIOwHHUdE2Rrjh0axObrnQDenhMrYOyeGAyBDLSggED0qKSicVMBXY3+qxK7PXrOykHqpaJHt
-	Tcy9jrelq1HZfVgqzMsW+9kb7DaX3hBQRRcPLybn5+KW5jjjhcmDNaPr1tmsmXT8g6Q==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
-	h=From:To:Subject:Date:Message-ID; t=1785868024; bh=YrMMNGosshER4iLXgDtpRWx
-	BdjnbgQ6m/RcBo2d3aCo=; b=/Z4jYYRh+7g2lZVXvXMut/rg4c/2TvcRvWAziqmMZ/2Jwvq1mG
-	G1IS8tRg7q5DQvk59l0BUGgjA+5MyfdaNvDg==;
-Message-ID: <f7cae569-0c51-41fe-92ab-f29311a22761@mainlining.org>
-Date: Tue, 4 Aug 2026 21:27:01 +0300
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kvhpaFTF";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="DDfS2+jl"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 674H0MID580268
+	for <linux-arm-msm@vger.kernel.org>; Tue, 4 Aug 2026 18:30:47 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=JfC9ELx4BpTN5CFmL3R6Bb9J
+	ryzEWW2TxPGog2BUjdw=; b=kvhpaFTFxP1RHthnXhX0i+WvH2QrqW/+6uAuZmEX
+	9li2N2NO+GBgk+WRuwblBBlCC+j5d8E2pEl7xG32VKgBCYxGeWhu0ynRt7O9S6hD
+	Hgfy7MgcFSZhnXVH6dYqBoL3LyILCsHhKkjpdUAs9my6DMxmG5AlU4ckFKkNVi5G
+	a8Dz4nSOhHqLdY8C1/iMBW71P5Zoo85Bb5/mQf7tHK5anRc7weJcZQJG7Qa8Hky2
+	nQHd+LvHDGw0bCIdPXf22qmbJ/c23A7B5u/BQjQN69xQh6RUjocQffrZn/KE9GAs
+	T3nY6p9CLIbLD/xt4+JcHeTwL3KXHVfWx4+zw36i1Ogp/g==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fum3q8dm4-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 04 Aug 2026 18:30:47 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38f57e31b6eso110778a91.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 04 Aug 2026 11:30:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785868246; x=1786473046; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=JfC9ELx4BpTN5CFmL3R6Bb9JryzEWW2TxPGog2BUjdw=;
+        b=DDfS2+jl17wI0fSxWncY4c7OxCnXNI5SAPWVttFkhiJ/+WrhovoyQJtCsUBzu4PGXZ
+         Mk9fToR6e7PG/IOS72TacW0pfIPjGlGiDQk6jEWTqBy9kSFCMnupfUTgxUk9mEJNoQUA
+         ua74twi44qiBNgENiNPESSUx3Ko+UO7LOnmG5lE7DWPJvTAWSz3m6iq8Ozg3t2TzJcSm
+         t5KNdwnvRL/Nev5XIVieiQsrlPU79b8QxQRmefvplL2xMMgUYOZL3gHUG+CsPL3HWuEY
+         VC7K9EvaCkwF5XLbKztdX9ONv1IHeeisyeo7HywvuOqkt0Avk0BLMP9sUXc46UuKwqKa
+         1jpQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785868246; x=1786473046;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=JfC9ELx4BpTN5CFmL3R6Bb9JryzEWW2TxPGog2BUjdw=;
+        b=F02NrPPW0NmbbfK8uLh9srWq7+ADaN/WPNmLSOy++6DiWPQcPb1JSi+dJ70Tl4Pk93
+         vZmAVjzrCpanK/Kt29NJno5G6CpO6FdPNhs98J4sKBugNauYNyOTxynmZjyZg8/GaV0V
+         xO2kn4mtgsq2sBH+0C5U75qFoObYUNgiUNyV+JligbVvitfl6UCPIOTn/q12nKgt3W85
+         mQVuB49Yqr1u0aqdqghhxFxR/DFfUqAqDcvwh9pKIQStocA/tjPUIg7sKkJbIwdl3hbh
+         huY4zSLQM/dIhqMTlVjALOXMQ01eZ3beTdYQ1jmz4guycEIFghGG/ZCCOdOI3RiIKLYX
+         shXw==
+X-Forwarded-Encrypted: i=1; AHgh+RrOoFNBbE/uyhKupRYCtFUxAc9ILNA/VnU5d9nhGRLIsN+I0o6wZhjE3ia4col3/OTdcS+mLRDMGsf+Y3mk@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzw8lpzh7CqPzAHSsvvAHz7XhU9baOGZWSLIEgfOqYQNV5rovRp
+	SX8LwVIZhb6fABInSZYcyOjy+M2C5yde53XW+zNZIECegHrcuLMSd0f6sF5+cBoF+muTIu9ocUt
+	qHvt8qGUMKtddo5mSiGZfkhwVTxo8uZ2W/BQwcKdlU2MwNID4cT89ovTa9XAmRwMzcP88
+X-Gm-Gg: AR+sD12VN7YQhPlOw4f/FIDSdl8/VAR49S4uiK71ZV04am9O2cJq8ZyddaY1fD/tqyJ
+	XIPkR8qKvwhDxTbJZxofDodE3MyTnjv08Vkoi+zLGUTb0IUXE7Bgw/oNrIcVlpEltCWfD+WUtgB
+	nPYy6RnipEf6ZPbvvbmj+j8Y3NWPAEW10iqccPCR2UM3aoRCQMMVfIdAsi7UC6ETsgzYdrpILWQ
+	/MUzNsqloDnDlAJSmMyc+NzyiwyhaNLsBl/L2bOXg8MMEyfdaQKR2yoPnRsYbyzTPRVd628RmAl
+	vdwlklGwFMhgK+PZOJ51vVFhQPqxKqmLoQQOINFuGDuTqIlMnieEHrliV36edzQHCUMeqcsy9PP
+	sgF8PE/UKQzRTiD/Zvv6pvBudXDg=
+X-Received: by 2002:a17:90b:4c89:b0:38c:a59b:5189 with SMTP id 98e67ed59e1d1-3903c5aefe9mr718458a91.15.1785868246365;
+        Tue, 04 Aug 2026 11:30:46 -0700 (PDT)
+X-Received: by 2002:a17:90b:4c89:b0:38c:a59b:5189 with SMTP id 98e67ed59e1d1-3903c5aefe9mr718378a91.15.1785868245784;
+        Tue, 04 Aug 2026 11:30:45 -0700 (PDT)
+Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-13fca52d329sm5693013c88.4.2026.08.04.11.30.42
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 04 Aug 2026 11:30:45 -0700 (PDT)
+Date: Wed, 5 Aug 2026 00:00:38 +0530
+From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>
+Cc: Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Manivannan Sadhasivam <mani@kernel.org>, linux-arm-msm@vger.kernel.org,
+        linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 1/2] dt-bindings: remoteproc: qcom,sm8550-pas: Make
+ SDX75, Hawi and Maili MPSS fallback to SM8650
+Message-ID: <20260804183038.blrgjcslwyzj67qg@hu-mojha-hyd.qualcomm.com>
+References: <20260803180021.20368-1-mukesh.ojha@oss.qualcomm.com>
+ <anIM8yN-r1wrTErT@baldur>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFT 2/3] media: i2c: dw9719: Add DW9800W support
-To: Sakari Ailus <sakari.ailus@linux.intel.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, =?UTF-8?Q?Andr=C3=A9_Apitzsch?=
- <git@apitzsch.eu>, Daniel Scally <dan.scally@ideasonboard.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Eugene Lepshy <fekz115@gmail.com>,
- Vasiliy Doylov <neko@altlinux.org>, Achill Gilgenast <achill@achill.org>,
- Luca Weiss <luca.weiss@fairphone.com>,
- Griffin Kroah-Hartman <griffin.kroah@fairphone.com>,
- linux-media@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- ~postmarketos/upstreaming@lists.sr.ht
-References: <20260801-dw9800w-clean-v1-0-38978de67963@mainlining.org>
- <20260801-dw9800w-clean-v1-2-38978de67963@mainlining.org>
- <anGlY_kwp_I-fRnz@kekkonen.localdomain>
-Content-Language: en-US
-From: Danila Tikhonov <danila@mainlining.org>
-In-Reply-To: <anGlY_kwp_I-fRnz@kekkonen.localdomain>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <anIM8yN-r1wrTErT@baldur>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA0MDE0OSBTYWx0ZWRfX2Ob5cR6aHDIY
+ NSjvJbHLWT/kvGsOJ0fwmJzV03lvIOskBAvl64GUM1+1fNyEOZNBKIKG0PQGssigwhLEQxne92L
+ uJwN3jWJ7TsiDwTFxiUnsEQHjcaWUSv/s1up/anzk+YPlFCf1YID2ZqplY7zEFW3eWqtWMLOIWN
+ CDjAMb6KgMpwum6m5Pya5E2MwSI3TzDrbx4jflEqar8AlSOoTA8Ce/hvSF+dr9PQ4mWvtY3rDfz
+ rs6L2nEd8leq8iAQDkPTdd0tq4SnGZfAP3oWHqZN6rG8aCgR379/wIzD8+9EXZ9Fv0U+IHTnIff
+ pGbrtere3r0Z68P0eZC1KErgM1/FC76p4KOHAVC3NK43lHJv2Iejv4NQq3K+Il/fa96zQ4RQjmt
+ Nho24S21H0e4izZCbxOAluf+bElehehItgsQN10yXRX6uKKTTDGgnktQK9RK5nD4GTgavSCleCn
+ s4do8DHQ9uyBjUMsJyw==
+X-Proofpoint-GUID: svN6mV6rnEXSC4ugFOry8AFQMLJst1vd
+X-Authority-Analysis: v=2.4 cv=LsiiDHdc c=1 sm=1 tr=0 ts=6a722fd7 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=lxZvx7qKqtVTtBd41IoA:9 a=CjuIK1q_8ugA:10
+ a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-ORIG-GUID: svN6mV6rnEXSC4ugFOry8AFQMLJst1vd
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA0MDE0OSBTYWx0ZWRfX4E0Q6Puvkrk0
+ 8MS1SRg3gsGGuhZbhC5ByKTPFCBoJn/kIUQF6x7pvAEw7tB56yRASfJnfdzZO8r35W3MIlFHXzr
+ Rp2x8BcR4OORy9Dy6hKZhlxKssLqGow=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-04_03,2026-08-04_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 impostorscore=0 suspectscore=0 clxscore=1015 malwarescore=0
+ priorityscore=1501 bulkscore=0 lowpriorityscore=0 adultscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608040149
 
-Hi Sakari,
+On Tue, Aug 04, 2026 at 11:11:29AM -0500, Bjorn Andersson wrote:
+> On Mon, Aug 03, 2026 at 11:30:20PM +0530, Mukesh Ojha wrote:
+> > SDX75, Hawi and Maili MPSS are compatible with the SM8650 MPSS as
+> > they share the same set of interrupts, memory regions and power domains.
+> > Rather than describing them as standalone compatibles, model them as
+> > fallbacks to qcom,sm8650-mpss-pas.
+> > 
+> 
+> This will introduce a dt-validation error in
+> arch/arm64/boot/dts/qcom/sdx75.dtsi, which you fix in patch 2.
 
-Thank you for your comment.
+Right, but it will come at some point if we want to fix this.
 
-On 04/08/2026 11:40, Sakari Ailus wrote:
-> Hi Danila,
+> 
+> But while the binding says qcom,sdx75-mpss-pas alone isn't a valid
+> compatible, we support that in the driver, so we're maintaining
+> backwards compatibility with current DT - until someone cleans up the
+> driver to match the contract defined by the binding.
+> 
+> It might be reasonable to accept both of these hiccups, but you need to
+> document the upside of it.
 >
-> Thank you for the patch.
+
+Thanks.
+
+> 
+> But if I read this correctly, it seems I merged qcom,hawi-mpss-pas and
+> qcom,maili-mpss-pas prematurely. Based on the commit message in [1] I
+> thought they would fall back to sm8650, but this patch says that was
+> wrong of me - meaning that [1] should have contained a driver change as
+> well. I.e. you didn't test [1], right?
+
+Yes, it was wrong of me. I should have acknowledged Yijie's comments
+publicly, saying it along with the sdx75 fix, and I did that internally with
+him. I did test it against Hawi, but not for Maili, which is what Yijie
+commented to take care of Maili along with Hawi.
+
+> 
+> As I said in the reply to Krzysztof, I have dropped [1] again from my
+> queue.
+
+Sure, will rebase this series accordingly with some documentation updates
+as per your comment on this one.
+
+> 
+> [1] https://lore.kernel.org/all/20260713093237.691117-1-mukesh.ojha@oss.qualcomm.com/
 >
-> On Sat, Aug 01, 2026 at 09:04:15PM +0300, Danila Tikhonov wrote:
->> The DW9800W uses the same chip ID and register layout as the DW9800K,
->> but requires different default VCM frequency value.
-> Is this a real difference between the two models or what fits for the
-> attached lens? Too bad the datasheet isn't publicly available. :-(
->
-> At least the differing default and constraints for dongwoon,vcm-prescale
-> needs to be documented in bindings.
-I share your skepticism and have essentially the same concerns. Since I
-do not have the DW9800K datasheet, I cannot say with certainty how it
-differs from the DW9800W.
 
-In particular, the parameter referred to as the VCM frequency in the
-driver is used to derive the SACT value. For the DW9800W, SACT[5:0]
-defines the actuator resonance period in SAC mode and the one-step
-period in LSC mode. The datasheet gives the corresponding formulas as:
-- tVIB = 6.3 ms + SACT * 0.1 ms
-- LSC 1-step period = 252 µs + SACT * 4 µs
-
-Therefore, the default value may differ between the DW9800K and DW9800W
-if the formulas or timing characteristics used to calculate SACT are
-different.
-
-This uncertainty is also one of the reasons why the series currently
-carries the RFT prefix. I hope the Fairphone guys can provide some
-insight into the rationale behind the default-value directives that were
-added for the DW9800K.
->> Add a separate device match entry for the DW9800W and validate the
->> common chip ID. Use the matched variant to select the appropriate
->> default values.
->>
->> Tested on the Nothing Phone (1) smartphone.
->>
->> Signed-off-by: Danila Tikhonov <danila@mainlining.org>
->> ---
->>   drivers/media/i2c/dw9719.c | 25 +++++++++++++++++++++----
->>   1 file changed, 21 insertions(+), 4 deletions(-)
->>
->> diff --git a/drivers/media/i2c/dw9719.c b/drivers/media/i2c/dw9719.c
->> index 3b7ba88fd67c..bb9319fc350b 100644
->> --- a/drivers/media/i2c/dw9719.c
->> +++ b/drivers/media/i2c/dw9719.c
->> @@ -44,6 +44,7 @@
->>   
->>   #define DW9719_INFO			CCI_REG8(0)
->>   #define DW9719_ID			0xF1
->> +#define DW9800_ID			0xF2
->>   #define DW9761_ID			0xF4
->>   
->>   #define DW9719_CONTROL			CCI_REG8(2)
->> @@ -72,6 +73,8 @@
->>   #define DW9800K_MODE_SAC_SHIFT		6
->>   #define DW9800K_DEFAULT_VCM_FREQ		0x10
->>   
->> +#define DW9800W_DEFAULT_VCM_FREQ	0x60
->> +
->>   #define to_dw9719_device(x) container_of(x, struct dw9719_device, sd)
->>   
->>   enum dw9719_model {
->> @@ -79,6 +82,7 @@ enum dw9719_model {
->>   	DW9719,
->>   	DW9761,
->>   	DW9800K,
->> +	DW9800W,
->>   };
->>   
->>   struct dw9719_device {
->> @@ -140,10 +144,6 @@ static int dw9719_power_up(struct dw9719_device *dw9719, bool detect)
->>   			dw9719->sac_mode = DW9718S_DEFAULT_SAC;
->>   			dw9719->vcm_freq = DW9718S_DEFAULT_VCM_FREQ;
->>   			goto props;
->> -		case DW9800K:
->> -			dw9719->sac_mode = DW9800K_DEFAULT_SAC;
->> -			dw9719->vcm_freq = DW9800K_DEFAULT_VCM_FREQ;
->> -			goto props;
->>   		default:
->>   			break;
->>   		}
->> @@ -159,6 +159,21 @@ static int dw9719_power_up(struct dw9719_device *dw9719, bool detect)
->>   			dw9719->sac_mode = DW9719_DEFAULT_SAC;
->>   			dw9719->vcm_freq = DW9719_DEFAULT_VCM_FREQ;
->>   			break;
->> +		case DW9800_ID:
-> Ideally the detection change would be in its own patch but I guess it's ok
-> as-is.
->
->> +			dw9719->sac_mode = DW9800K_DEFAULT_SAC;
->> +			switch (dw9719->model) {
->> +			case DW9800K:
->> +				dw9719->model = DW9800K;
->> +				dw9719->vcm_freq = DW9800K_DEFAULT_VCM_FREQ;
->> +				break;
->> +			case DW9800W:
->> +				dw9719->model = DW9800W;
->> +				dw9719->vcm_freq = DW9800W_DEFAULT_VCM_FREQ;
->> +				break;
->> +			default:
->> +				return -ENODEV;
->> +			}
->> +			break;
->>   		case DW9761_ID:
->>   			dw9719->model = DW9761;
->>   			dw9719->mode_low_bits = 0x01;
->> @@ -189,6 +204,7 @@ static int dw9719_power_up(struct dw9719_device *dw9719, bool detect)
->>   
->>   	switch (dw9719->model) {
->>   	case DW9800K:
->> +	case DW9800W:
->>   		cci_write(dw9719->regmap, DW9719_CONTROL, DW9719_ENABLE_RINGING, &ret);
->>   		cci_write(dw9719->regmap, DW9719_MODE,
->>   			  dw9719->sac_mode << DW9800K_MODE_SAC_SHIFT, &ret);
->> @@ -453,6 +469,7 @@ static const struct of_device_id dw9719_of_table[] = {
->>   	{ .compatible = "dongwoon,dw9719", .data = (const void *)DW9719 },
->>   	{ .compatible = "dongwoon,dw9761", .data = (const void *)DW9761 },
->>   	{ .compatible = "dongwoon,dw9800k", .data = (const void *)DW9800K },
->> +	{ .compatible = "dongwoon,dw9800w", .data = (const void *)DW9800W },
->>   	{ }
->>   };
->>   MODULE_DEVICE_TABLE(of, dw9719_of_table);
->>
----
-
-Best regards,
-Danila
-
+-Mukesh
