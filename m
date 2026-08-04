@@ -1,46 +1,48 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE78730B53A;
-	Tue,  4 Aug 2026 08:27:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6FD1843CE4D;
+	Tue,  4 Aug 2026 08:29:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785832083; cv=none; b=TGeudhee5byB4vHIyW9Ju+kcexatwAR7JAg7vwDSTuDuBxJ+4mVPOqKjTtwE2k2HXLqqiRd6E0dN+Zx4yldbKLUwoAUEnOtJ20AJFHZE+aj1BcxnjQ0tpyX58DwnbPL/KPQsPA747NXxVmUu1LFZ7LPccSw5vaw8Y8iugS4Uk6I=
+	t=1785832180; cv=none; b=Igfzm466irbS6BuEyO4UqQFpRo0RJUqg2VW7u3caq8irSgSdMIhSvZkKA1KHvAFTug72n/8LGfczCwmxTt4JUqjOtHcB3joedX1GzeopyVTZImj5jpuhusHk24GC4bSh+F1FaXgh1vFxlcsnaT/aEnj92f+x2OKJYlikGCfSWDk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785832083; c=relaxed/simple;
-	bh=Jy8MhVmpRBrgpJEVbB4mVg/9TaRNz4Z9JQHBwgbzusY=;
+	s=arc-20240116; t=1785832180; c=relaxed/simple;
+	bh=u45aOxzysrT8leRCEfHEZ//saarRkjOA4gG1Cwdh6zw=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=N5lqziL/nWzSiNiNHFB9FmC1GKnsGovIUZYXxia4dFj3Vzktb0gJkXd7XOwND/KeAOIRbYI30ZdWRccBmYs+FK7worobRDlcBSIs+8Y6JWrDuHvvOgAhCXCTqwiQVe7OxXqHz2sUwEScSYq6BnHQWURbupGgiswiBPU7Xj4C7MU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=EfL8d+a0; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=FSSHCV+/xnFG22s/ty06C+iZOxqu9kkywA89u5tdzPZvf8FUifGG/WX+6KhI3r/069H0GrNW2ScfY4q+FEWv2MaNOQUvErPHNprL7UMYNdeko3gojZanquB06ZC7vOOuD8Ev1HFseoYN4o6tqVAlGKa9UlcW054rp0GoMVFMdv0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=dA+B5xhQ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="EfL8d+a0"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6E981F000E9;
-	Tue,  4 Aug 2026 08:27:54 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="dA+B5xhQ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4AB991F000E9;
+	Tue,  4 Aug 2026 08:29:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785832075;
-	bh=whF1zVe6y7/APDHkqht7Ez4x9m78Aw/LGPXXXhXclE8=;
+	s=k20260515; t=1785832179;
+	bh=u45aOxzysrT8leRCEfHEZ//saarRkjOA4gG1Cwdh6zw=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=EfL8d+a039pSNiK9B+HVpElg2Y2HYjIVUqVfvSGGi1B/RQrh2JduPDDMaGg/f9Xed
-	 QVyTtsrPoF2hEwHXinl0SU/b9S1egGZokSmhwN8yHa6JOwFvuf0u6OXAOM45k9rYjS
-	 gFpQx8NUIK1VZnh4kmtiXtdtWDwr8ryPiRnItm5cNcAZvs2DiR4tfAWow8LIUO06jD
-	 rpP0xchnApyNxuImqM2kTGVi/Rj9wpSrbjSBI3Nr2BdZtMBTWBsF37bSfdMQdDbGua
-	 nNtQLnAMDCxmNX49hdX0qd4TCViF9wTCPVPWryaVO6alrDlxBLBzfoR6Icf37HZCSK
-	 1kcXpWGeKwddQ==
-Date: Tue, 4 Aug 2026 10:27:51 +0200
+	b=dA+B5xhQigUK3M1mXynKOemJigcQdgcbh9OWCOwIc4eTyRFQ0CyQnHMGJNxRBAcCK
+	 eZ11mSxbvFnjo9uB82S1Sv/SMehRR0v9kDewCp3xB9Mai/9ZDxc16gO9XRgj2NpdNp
+	 WTElaUMdarHKIrshrWZK9aK4ZglNKsGKIU5KsaRrCxcuJYpMTbUEvU6cM+C91oIUWu
+	 6dxhFR/LCRUY7vKtm57pjtO9SmORhZlgL2hxQJCJNtytxAFXFypsP4IAowYI5YEsyo
+	 JtfMrX8/JfvspO28HZiUrUxu56ZSJo1ECecZAER2R6e8g4PcN7dICmBPnWWsNWuHYM
+	 /scmJQh4+PbLw==
+Date: Tue, 4 Aug 2026 10:29:35 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney@redhat.com>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Dongfang Zhao <dongfang.zhao@oss.qualcomm.com>, Taniya Das <taniya.das@oss.qualcomm.com>, 
-	linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/2] dt-bindings: clock: qcom: Add Maili Graphics Clock
- Controllers
-Message-ID: <20260804-aromatic-married-ibis-bc5a7e@quoll>
-References: <20260801-maili_gpucc-v1-0-9d8c37bded69@oss.qualcomm.com>
- <20260801-maili_gpucc-v1-1-9d8c37bded69@oss.qualcomm.com>
+To: Danila Tikhonov <danila@mainlining.org>
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, =?utf-8?B?QW5kcsOp?= Apitzsch <git@apitzsch.eu>, 
+	Daniel Scally <dan.scally@ideasonboard.com>, Sakari Ailus <sakari.ailus@linux.intel.com>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Eugene Lepshy <fekz115@gmail.com>, Vasiliy Doylov <neko@altlinux.org>, 
+	Achill Gilgenast <achill@achill.org>, Luca Weiss <luca.weiss@fairphone.com>, 
+	Griffin Kroah-Hartman <griffin.kroah@fairphone.com>, linux-media@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	~postmarketos/upstreaming@lists.sr.ht
+Subject: Re: [PATCH RFT 1/3] dt-bindings: media: i2c: dw9719: Document DW9800W
+Message-ID: <20260804-terrestrial-solemn-mustang-bdfe60@quoll>
+References: <20260801-dw9800w-clean-v1-0-38978de67963@mainlining.org>
+ <20260801-dw9800w-clean-v1-1-38978de67963@mainlining.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -49,20 +51,14 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260801-maili_gpucc-v1-1-9d8c37bded69@oss.qualcomm.com>
+In-Reply-To: <20260801-dw9800w-clean-v1-1-38978de67963@mainlining.org>
 
-On Sat, Aug 01, 2026 at 12:42:45AM +0530, Jagadeesh Kona wrote:
-> Maili gpucc is a derivative of Hawi gpucc with pll0 configuration
-> change, and hence reuses the Hawi gpucc driver with Maili fixup.
-> Maili gxclkctl is the same as Kaanapali gxclkctl and falls back to
-> it. Add the compatibles for the graphics clock controllers on the
-> Qualcomm Maili SoC.
-> 
-> Signed-off-by: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
-> ---
->  Documentation/devicetree/bindings/clock/qcom,hawi-gpucc.yaml         | 4 +++-
->  Documentation/devicetree/bindings/clock/qcom,kaanapali-gxclkctl.yaml | 1 +
->  2 files changed, 4 insertions(+), 1 deletion(-)
+On Sat, Aug 01, 2026 at 09:04:14PM +0300, Danila Tikhonov wrote:
+> Document the Dongwoon Anatech DW9800W.
+
+Which is different than dw9800k? How?
+
+I should not have to read your driver code to figure that out.
 
 Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
