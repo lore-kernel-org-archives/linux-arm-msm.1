@@ -1,271 +1,277 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from CH5PR02CU005.outbound.protection.outlook.com (mail-northcentralusazon11012043.outbound.protection.outlook.com [40.107.200.43])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB1AA476CF5
-	for <linux-arm-msm@vger.kernel.org>; Wed,  5 Aug 2026 13:53:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785938028; cv=none; b=ik5K+7geHuGkhTCrx5o4axUEomY40kcuLJukUwSSdPnf5qCK5WaxKKLU+2C11vLa18BaXz8Q/IMic4uA1l9JhUcnvrOJTZa/9cv1gZvLKuXXvKx6A2nEmC+JKm86AqNBwyJDRVPMuLbxgALcOyTd1z2WHredmJVtGMfRNNlviUQ=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785938028; c=relaxed/simple;
-	bh=lTjpGa9aw9j7oo/7K2Uo54+/x9/nRwS5LnIyxeuI31I=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=nIX9s0qKnaMwL6ECjoA3VamrGqsYUc/eX9etOMnn+w4fY0rkBY0agDWN9RGTtwydAfXeXN/xqFKSPfm2tigLOJgEkb3HvnrX9odxVU+H3T8G5eC/5kP81+24oNXamJtKMXa94scyfl5PxaleM7l7tf4yFVmnHVO6FKH8FF1d+kA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=L9HS3tiW; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bZwch7He; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C6B045DF76;
+	Wed,  5 Aug 2026 13:57:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.200.43
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785938242; cv=fail; b=oOmISH9Yw2TX23zLqK8cZwx20O1kRVwqAmYlmXXeZYdc3SwL8YLH4OYPZEITbTGBOccDzw/ZoUyUp1FeQz1FA9I8V9ciAK1h/jyDwyP1bFjdr0ecnXq1v0WUI7hlgIEHG0ZYPEgu2yvjQQ04Jt3QXIA5UnGuWXSTAoXOsu1oGfM=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785938242; c=relaxed/simple;
+	bh=q3SBnjmhYWICBoqJmwVEfYtU75lizLcLSHGhUaDA7y8=;
+	h=From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:
+	 Content-Type:MIME-Version; b=EtaGNyNJ9lBk0n5tkuHstrCBBJGdJAYObrYyVMp+SgbRUOiDdg71XT+QA4b0cbDQ0W33BcL3vSSSmSAD+bVUpQS+mO/iQrYKLcmhRdXg9ctj0Jiyo6kBNNktbtW4Im2gaaYW/Qr/kOaOQ92Gt5IjhuE/Z2N+zaoxRLpXaqXkHOE=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nokia.com; spf=fail smtp.mailfrom=nokia.com; dkim=pass (2048-bit key) header.d=nokia.com header.i=@nokia.com header.b=fzaimKY6; arc=fail smtp.client-ip=40.107.200.43
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=nokia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=nokia.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="L9HS3tiW";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bZwch7He"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 675DHDL82986580
-	for <linux-arm-msm@vger.kernel.org>; Wed, 5 Aug 2026 13:53:45 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Y9hkkjdmafJzS9eEzwPN0UqcbjM6LEHIzsWnMQ++U3M=; b=L9HS3tiWCzeqPSks
-	zEc4JN4XqjssiJfGc15ExH8KDLT0NXO+7bDMGr40ct01adEZGRdvuRQGEnPZzYpW
-	S2/zah0JTzMM66LIrT9h0fyTqlFi3F6M0xf9URI+1WbmUQWkhB/lrZ8QXmkQJDLf
-	m47k3JP9LeJRUgj4aX5B8ItRBSgazv8zVCFrMlS2yP6QTrHmIQMpQT0x5s65R/bI
-	fblrag2FPpw8xleeWPimpKvVZZ8Hn7CLTLQoPBt2zgzVNW9y3q9zQy1xub5IfSo8
-	0u8VlEQhzsSPy6JQmkqj/4VVDNckmMR43OjsNeGOJS0mHCtDO2qNYA2Sr5iYpZoK
-	UdF3Bg==
-Received: from mail-yw1-f198.google.com (mail-yw1-f198.google.com [209.85.128.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fv5x5r5s2-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 05 Aug 2026 13:53:45 +0000 (GMT)
-Received: by mail-yw1-f198.google.com with SMTP id 00721157ae682-81e6bb29581so26013137b3.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 05 Aug 2026 06:53:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785938025; x=1786542825; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Y9hkkjdmafJzS9eEzwPN0UqcbjM6LEHIzsWnMQ++U3M=;
-        b=bZwch7HekV6dQ3yT3HhGOZKoqbQ+N/CalUljtc86eCQGhCmvkNmpZvcXQ5DP6GSZWg
-         7EDAPilmH4xCXNHSxvatODRsd/3zqFtuhAHg59pNO+4D/d4n7U0QX354qCd1g8v98ZNV
-         BjFRy1f82R9YvQrHmc+kSQk5UIGUvtutFP8DhL1DG7FOXnh50taEUqySvVTR0jeHSmzF
-         J1rgJ9x2sSrTAjepB/8aR9E/HN8wOeD/JYQ2zE9s8zXTF1F2X4E6POlWGATysd7Bldvm
-         j5F7Qnagd0btNScb7rqvx5F1FPNDw+eHyIV+dfcsl/3B/mIZqJkcGHb4eNIujR/FlW26
-         gr7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785938025; x=1786542825;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Y9hkkjdmafJzS9eEzwPN0UqcbjM6LEHIzsWnMQ++U3M=;
-        b=mVEzYEduVv1QTMqAiDiZkYxB5AD3DGbqIExoq/0CtRjqD+LLhZ1tuZ3fDgSjRPJp/r
-         nj4UmjIKLkTTYy+ONGHUvx1wI071y8bpCelsgD5ZFBwnqAcdh/qE5l56NWDg/qo95SNa
-         klsbE3fOKeJIr6VnOs/yOXbVHxJwt24jNhN9TiuTiGAl7lLRwj9XmxNNUQQcI/QaSgcW
-         qbfqAo3l3uBigOK6YMqDKdPEGnsTl0RxgBO17gBhk3LCnjE5DGPfJudqp+QB+VCd0IWh
-         ra2+yRJlyP6oA1grGnu5eeI5udGj0XxD5ms6ipVuNvgBiVbkWrvsDzMR38r/UCKOXGXF
-         s/uw==
-X-Gm-Message-State: AOJu0Yz52xP5reOfMJfYCoB6rwVPwapXethPO+HGeTSha5XysCOUz3ZD
-	BqIXTts4wSLXYJZK4rc8bpn1CYHwBY92UQJe/ywD1wnFQehmngxERperXhtw29de4Bjb6x9UH+Z
-	/4rw1Di4fZssTun95fvz5vAKEgXqAJhTz+GE58qxjWaaO54czQonb6+jAnM1UoO2JkFHB
-X-Gm-Gg: AR+sD11Agpk9Wo7+4ommKUUnZlJfvHGhrNlEyj95r+4hpV9fYmLyE7qRxWsHJ+ZcHoT
-	2f0GqVPVKyx3x1C/6ayjnMqUN5l8QNpR9rSF+eYbCZeKf+ejSBb2xqqq1bg8Mk35dPYszuov4/p
-	/mKUM3a46fk+CBQ5lvGR6B+CqEiXgsfY0H9XzLMuUMV4WYJLjsigqFp6b4qHS2fhqdXSbqpByN2
-	0pRH0mmXALEiVKcOks6KgQ2vG4FdedeOr9kWTFSFGrYETDHvuDlUiQ+mnTpZhhTDuwHSBTz34C3
-	8yzs6m5T2nE//CVi7eRK3/p0gec33AglkktYXEXUZbhbArXfxTaNmrJ+2zg9FdKA6znpZ8n/idg
-	WH4iPHTtcayXK0Wi/NVxBD8dS+OLfW6w=
-X-Received: by 2002:a05:690c:6f12:b0:81d:3018:6eca with SMTP id 00721157ae682-8201c491d4cmr43940117b3.12.1785938024963;
-        Wed, 05 Aug 2026 06:53:44 -0700 (PDT)
-X-Received: by 2002:a05:690c:6f12:b0:81d:3018:6eca with SMTP id 00721157ae682-8201c491d4cmr43939387b3.12.1785938024330;
-        Wed, 05 Aug 2026 06:53:44 -0700 (PDT)
-Received: from hu-nihalkum-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-8201320ec71sm20892517b3.12.2026.08.05.06.53.35
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Aug 2026 06:53:44 -0700 (PDT)
-From: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-Date: Wed, 05 Aug 2026 19:22:50 +0530
-Subject: [PATCH RESEND v6 5/5] arm64: dts: qcom:
- shikra-iqs-evk-imx577-camera: Add DT overlay
+	dkim=pass (2048-bit key) header.d=nokia.com header.i=@nokia.com header.b="fzaimKY6"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=eu+69jMO/FAekgEmyceFclBR4YM2h9zVj+A3/ROvXztlH9y2HAouQ/ES/z3WSkTkE9uhUYLQM5qjcTXQIwA4Iw2SgQdNKVdN80rv6BJXpJb5EaDJDQy1CqiUIsQaWC/ifZ0wWiRNXx0Hokx6Ibz+yhNJIldvtcvzeJbsoc0P4L0wLAzHfj1AjUQVitOAhZpM+OI39qA8CU4BfBvaTZ3Fse9C5jIbaIgPblohEOvftUxsF4BL612HJSUSUqHRzvmVHZSdydazAOYmXwenB8RmmI59l97L3SQwtzPB/Kd/7aIFX6sgg/U1NOyEU9h2wUti31Y1VPQSfbXpUJcSODbc9g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oeGEMk4F5OlbJqKIy6bPTuLKuwPpKD5aYlgYh9Horvk=;
+ b=twqPnyoBwyHZBlMv9GlEdx1Z9MFom2sc9bB6BfYBfwefBdEAaArrBUpazlVZWLQnPtvvV1QrAFhDpX53viETUukBW6EzuWKeFg26n04Gk3yQ6RQ91r1VrMA268abo6UoOZHMhZjGvl9XbSkSQ54Ubk4NJOduTRXkYPeVsj0qtMd28zsg7f3Gl9IVMENUTEwoVq8/DWFUMrofVI5O6lwuvbbwc6dSeRm8CtZAL5A/nXATz+eemrJWV5li/ZHmtLQqkPHhvHRsH9cn2qfnOHITGMbV8ZsB48VhhTKVGFksPMhJbUmb9hTlSdBUb/clxT8xKIRv1/hunYU9gzqwDHFoLw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nokia.com; dmarc=pass action=none header.from=nokia.com;
+ dkim=pass header.d=nokia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nokia.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oeGEMk4F5OlbJqKIy6bPTuLKuwPpKD5aYlgYh9Horvk=;
+ b=fzaimKY67g28Mfb/nIrkoW0+FCvET0v8hPNaG6pqBobV3QVU4od5yv4zldynuXtajZvPxbP2/WUM5GfLdogh6B8J2gcgzSPi6sC4HtXg0i7EymhTkzhXeP81/xfiu9dGNeY/oFv3xqxdn0dT36f+VR3JemfVedN5CBv1lO50h3dIDMhBWuIPtOmEs1qq+IDiJyqJusCr6dKRV2OK2nznKAw/LGl8+izCL3sa7ZQyEVNVmxovMuEZ7Lpl7T3uauKSV1hv2XVCHW5Ogtygj4fbtmRNEChuERNEp3y3oLsajClKw6dPuMvkGnMru8sStlFa0LhuuLzlYZ31Lr9oP6HBmA==
+Received: from LV2PR08MB11057.namprd08.prod.outlook.com (2603:10b6:408:351::9)
+ by PH0PR08MB6551.namprd08.prod.outlook.com (2603:10b6:510:31::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.15; Wed, 5 Aug
+ 2026 13:57:16 +0000
+Received: from LV2PR08MB11057.namprd08.prod.outlook.com
+ ([fe80::de3c:c87f:bb39:e706]) by LV2PR08MB11057.namprd08.prod.outlook.com
+ ([fe80::de3c:c87f:bb39:e706%6]) with mapi id 15.21.0292.018; Wed, 5 Aug 2026
+ 13:57:16 +0000
+From: "Alexandra Lu (Nokia)" <alexandra.lu@nokia.com>
+To: ": Manivannan Sadhasivam" <mani@kernel.org>
+CC: "mhi@lists.linux.dev" <mhi@lists.linux.dev>,
+	"linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>,
+	"linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>, Vivek
+ Pernamitta <quic_vpernami@quicinc.com>, Krishna Chaitanya Chundru
+	<krishna.chundru@oss.qualcomm.com>
+Subject: RE: [BUG] bus: mhi: host: pci_generic: runtime PM usage count leaked
+ on
+Thread-Topic: [BUG] bus: mhi: host: pci_generic: runtime PM usage count leaked
+ on
+Thread-Index: Ad0k1MjqLuUIyG4HQ+GAvYVcT0CCUQADNlRQ
+Date: Wed, 5 Aug 2026 13:57:15 +0000
+Message-ID:
+ <LV2PR08MB11057B554648B1B262EAE4ADE88D32@LV2PR08MB11057.namprd08.prod.outlook.com>
+References:
+ <DS4PR08MB110616F286C62E19C2C94314188D32@DS4PR08MB11061.namprd08.prod.outlook.com>
+In-Reply-To:
+ <DS4PR08MB110616F286C62E19C2C94314188D32@DS4PR08MB11061.namprd08.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nokia.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: LV2PR08MB11057:EE_|PH0PR08MB6551:EE_
+x-ms-office365-filtering-correlation-id: 8380721a-466b-4dc1-b236-08def2f97533
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|366016|376014|1800799024|23010399003|22082099003|18002099003|11063799006|5023799004|38070700021|9063799003|6133799003|10067099003|56012099006;
+x-microsoft-antispam-message-info:
+ 0Mgs7Swav2lrykPk7zF7cGPtu+4WhimaHfxgFBWGmkSo6MO/r8w+4Idtvd0/NZju6CDv4eOBCAyoScaRwDIg326slysUE6TijvMIklZU66vJhDGSJ/oKInqI7kCjl/7VstyKqSszWgPR1OFzp8UGmbx6th2sUTgxZhCRDh8Ccsq9f4l4XSAV0doOUVidZWJM6vzLO6/E2w8ydyHCAHCoP5G6qiLjEw4I8Hw3/gZ5iYJJky69INwjRxHkGCe73DdWqTfPbFI3RtcCtaeJpF4921qbL5nF349uFcys6ygg46WBN+nIPhGI1Fl+XC44km+A/5lD8jNSCUurewvb1S5exvF3bq9D3cznFoXD2427miwpBoSllc5IRw3V1ols+Gm+gy1Ab1jcyWwGaHaUBXUxZ0LQtvogOqK0Cl7eR/SJUwkfOKBhIIdIcPZJP7RGNI66FBkBfDmevwdq/5QlLco54Nu2ZBIUYK7SwxT/2QBN+cwP8HisocQRzu7pI+V32DZoXBZzN2DRNw8DnLW9F7R3EnPecQmY3fM34y8npuxFlXkDCxxiuiw6O3FJMo7M3vRW9Oz+CDKEV+Tzj6E6X0CgIuf5L3CTzNCIlxEq/ZfQqItv/vAgVKw5/FVvHK6PSw03vh47s1x1UbEKiqJBFRaaJ8VNwHPFlOA58LQgxMZAGty/4jQzk00bFZsVHRCc1+pde9g23dVucYA1Hvhg3DrpHg3extG4z9/T6a9k2RAlAVA=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV2PR08MB11057.namprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(23010399003)(22082099003)(18002099003)(11063799006)(5023799004)(38070700021)(9063799003)(6133799003)(10067099003)(56012099006);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?cwz+CVzSfIkH8ZJ5pvBmPzJB848aWCT1LPydPcwVt/vI7Nmu4dOf4ok9tp?=
+ =?iso-8859-1?Q?p8A5Jd7/+4xv3PZ0Vb5wofOhp5ES/2z24znyf7SoagKJlZSt8JyKKulNyt?=
+ =?iso-8859-1?Q?o2rX9AkPNEBBoIyLf4JQYl5x33Q42Bdd8Lk1jK1nJcVUUIGjCwLnAtKqjA?=
+ =?iso-8859-1?Q?Bs492J7B1YZ2vkRSBURJV7NcQtFTX8uLVVjQSVf2Cq2Tniiol77dtfEnS6?=
+ =?iso-8859-1?Q?Mot0cMtwZYXvT2Z+Ry81TbiU2GHeMONNobO40bZb5yu6Pwy1zCmORG5VVg?=
+ =?iso-8859-1?Q?0VnfhOQsIS1GgJN3BHhnr/Szz67YnnHlpJecX/aICwG+zAW39xP8gS2pgX?=
+ =?iso-8859-1?Q?EU+q6EF1Kih9HKaJ/cZcaURxtBJpwAk4UU1JCS1B+L9BN+WZ0Pci53TTQF?=
+ =?iso-8859-1?Q?sBVqvOLB2y4prZzl3dthRAZiCZiFvg6EVLr9Yc05vCOWFjIIUwAAOT8Lmr?=
+ =?iso-8859-1?Q?fJJ6aVgsBNcH+32O4T8uV8aNZOXmXd1zQYlRW+vop9agvCSGMkryCo5zuq?=
+ =?iso-8859-1?Q?ZGLsIwbFRkJcLxYHQy5iaPZTOb43HDpFZuMEsi7TMt16y/eqOKxanZ1F3L?=
+ =?iso-8859-1?Q?XIB6wtKLVdDuNNraEW85WgbtYzHyVQR3Azqs7jDK90D8nEpEcWS4wtsbb6?=
+ =?iso-8859-1?Q?uEhWZZTRsuKpZMPGFCxKSwNk84aCRtjbcJAxzc407qer1BJB25Ac8vJFou?=
+ =?iso-8859-1?Q?9QjxYwPMwu+LD+zoVrf6KVC3MR1ZW+Zo+yhxtbqShIuMkv2o8sQ3WzsjZR?=
+ =?iso-8859-1?Q?Lz1bm4WGHwjSn/keZH4U5zntaccL9z4lsOSGniveZIFWUrxP3ZSdmncql5?=
+ =?iso-8859-1?Q?m+ukFkRYt5XmotuNeuqYfFW4kDs2nnybjzoQjlO16uaJRdX7u/Lu6BL7Mb?=
+ =?iso-8859-1?Q?BxE4XLB7cJKH9ltGALc3AhSlGkVd3FqRnK4iXY+QkDRQA2v5QQYN/pcWWF?=
+ =?iso-8859-1?Q?wb1Gy5gi7Y9VpkqViX4MI/n5C2UG5eWoGxI0HPpOX7n9ecZyPRn4+wplLE?=
+ =?iso-8859-1?Q?YPoAhSu+PyqZQ/5QeVsvLQfJ8+LsAt8vjGBeR8EWbO4zSVIlNimKlKw8kP?=
+ =?iso-8859-1?Q?RB9Al5R61JRJqVGeKqwhJgc8jAilxmf0AiFzAWAP+2RMHmjzeVxoPOsLIM?=
+ =?iso-8859-1?Q?teSUA+Tow7Jshpxra5iMq+7Jvenz1cVjjmDBBL5Ylag4HTqvZJomnF2zhX?=
+ =?iso-8859-1?Q?fyl3mg3ZJuZ1Qb858aWJC6CFoBeHdlfWwYUDQSYTHpYS1AaW5wbWgPsuR0?=
+ =?iso-8859-1?Q?LcuCw0bR+KFGdBisxUMfp/CBW2UGDG10USiVtwZZxD/dVIjcRGUUJ+7/rX?=
+ =?iso-8859-1?Q?Gi/0mTiS296EGQD+5DXQdXxbd6qc1S4lv5m+VteVhX0HEPWhFUBZRxn9RU?=
+ =?iso-8859-1?Q?IEsyht1PYoxVeyavKDrIwriPDoH6FIx15zpcoaET9Uo/fwjKsEFXkLz8Lt?=
+ =?iso-8859-1?Q?F36+VZHJDv3O+dpzPke6UcgEF1c3RhafAw3APyJ46ik9eZ3oIS4EHJdZ/W?=
+ =?iso-8859-1?Q?uurbr8PIZriNNbtWpiMV0wEKobPl93/2836bU7w6GGLl671tACeowYKqCB?=
+ =?iso-8859-1?Q?BMVF0EeowYhbr2d+XGP6+RkBgNU8oJNgrVwdH0+cpfDSFP1VqSSt/2TTla?=
+ =?iso-8859-1?Q?bmXlQpbq+OYgC1u5E2w8bnBXvZxwXLrZqNdPBeeBDwysSTSHl6WOCl1r85?=
+ =?iso-8859-1?Q?mREz3+UOzdnthhKEapRRS/fhNQ5c6TPPBBCYBcOYxT/qdKRwyIEDSIwEKB?=
+ =?iso-8859-1?Q?hwsoDm9mXVcTxDaWqcHvZE9WKjuCXLBGLKhbF1qSxH5ZtD9XCR1DSHLhWK?=
+ =?iso-8859-1?Q?YfakjFKjdw=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260805-shikra-camss-review-v6-5-a8dbc66f0d87@oss.qualcomm.com>
-References: <20260805-shikra-camss-review-v6-0-a8dbc66f0d87@oss.qualcomm.com>
-In-Reply-To: <20260805-shikra-camss-review-v6-0-a8dbc66f0d87@oss.qualcomm.com>
-To: Bryan O'Donoghue <bod@kernel.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Robert Foss <rfoss@kernel.org>,
-        Andi Shyti <andi.shyti@kernel.org>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Frank Li <Frank.Li@nxp.com>,
-        Sascha Hauer <s.hauer@pengutronix.de>,
-        Pengutronix Kernel Team <kernel@pengutronix.de>,
-        Fabio Estevam <festevam@gmail.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-i2c@vger.kernel.org, imx@lists.linux.dev,
-        linux-arm-kernel@lists.infradead.org,
-        Suresh Vankadara <quic_svankada@quicinc.com>,
-        Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
-        Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1785937970; l=3663;
- i=nihal.gupta@oss.qualcomm.com; s=20260608; h=from:subject:message-id;
- bh=lTjpGa9aw9j7oo/7K2Uo54+/x9/nRwS5LnIyxeuI31I=;
- b=DVdk7tPHrxiR9a0X3yL4sAFZRnMhvSJDw5eUqZ1EMTNhSORE2OvZxD59JcHMpgqYI+XLBUYIC
- zlWbfOPbH9UBXiR06J5SL9aLD7spPeInAFOoGCQ7KTQmOCaKaq9QvD1
-X-Developer-Key: i=nihal.gupta@oss.qualcomm.com; a=ed25519;
- pk=DIbyFMNwqU/iMvU/0pCQp2wmRVgtHFBT3PcSu+A+Ncw=
-X-Proofpoint-GUID: EwSuUVQECCOmnctHHQSmq5zIm2yN5wVV
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA1MDExMiBTYWx0ZWRfX5H96L8fTGSN+
- l3s5heLh6122f39lLrSTtR2/2IIWdEJwEwmaUk/tQ/Kee11B6jCAzHM5UNr+qJ+3v3KfHDhk1oX
- IT6jQavV/IICSkcZylagMlC30QSRRiOShntDs24/CNkMyeE1aBq6Qv3e6Yjr3I91Iz4N0ilUsd0
- Vo+lMFwRfCpPAZVqgoupx8c2B5PrJSFc6Y2PmmIQrie/TRQ9ehoWq9/gH+oVMd5kUBiy6oogxF1
- xqk8uGae0HY/X8BB1+SmW8QKiiBds4Tw6zdLNjQ0nmh7ylCsqfKOZSEjpFFrpZWrEenV174gwgf
- b83znS/ux2qqD/TT3ppp3MmdnDOI+9dwGe8sMRgvFH3AfhtfsndLfarXoddw43pYXtkiX5z39ho
- JF1HDQ2H/6xOLF7OAy2npcko+oYat5+Zub2iasg4Wt7DLUcNdThqNqoynvXaJmbdPPFoH11fnPk
- 1lZ0xyutomLHhdZeM9Q==
-X-Proofpoint-ORIG-GUID: EwSuUVQECCOmnctHHQSmq5zIm2yN5wVV
-X-Authority-Analysis: v=2.4 cv=RcygzVtv c=1 sm=1 tr=0 ts=6a734069 cx=c_pps
- a=g1v0Z557R90hA0UpD/5Yag==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=OGCdAuOInqFJiNoUztwA:9 a=QEXdDO2ut3YA:10
- a=MFSWADHSvvjO3QEy5MdX:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA1MDExMiBTYWx0ZWRfX1fV4fWKs2Ao8
- OBtdr8aU90ZUBCZSP5ZEnzWpDJhlhrjfs3/9vbOYgHL4hL3PQaTDCp2sFSDE2xQI3ACv1xMGKYs
- CDMln9jVsK977gNUbzzFUeDUHV1GBDc=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-05_04,2026-08-04_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 priorityscore=1501 adultscore=0 phishscore=0 impostorscore=0
- spamscore=0 clxscore=1015 lowpriorityscore=0 suspectscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608050112
+X-OriginatorOrg: nokia.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: LV2PR08MB11057.namprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8380721a-466b-4dc1-b236-08def2f97533
+X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Aug 2026 13:57:15.9720
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 5d471751-9675-428d-917b-70f44f9630b0
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: WncX6tuuwzSCHcByAIUh2HgOXK3HU6odBLtholpe2OGgnFLYTjEzUaLFrX2VNlCQi7y5oxZ32TnSmg2c5h22tw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR08MB6551
 
-Shikra IQS is an industrial-grade variant using PM8150 PMIC, requiring
-different CSIPHY and sensor supply rails compared to the retail boards
-(CQM and CQS) which use PM4125.
+Resend in plain text as previous email in HTML format was rejected by the l=
+ist servers.
 
-Add a dedicated overlay for optional IMX577 integration via CSIPHY1.
 
-Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/Makefile                  |  2 +
- .../dts/qcom/shikra-iqs-evk-imx577-camera.dtso     | 79 ++++++++++++++++++++++
- 2 files changed, 81 insertions(+)
+Hi Mani,
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 03ed24afad5795b49848a2548c0facdc9f3e7115..5884ff14ad4552249b029d4aad569ccde5768647 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -342,9 +342,11 @@ dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk.dtb
- 
- shikra-cqm-evk-imx577-camera-dtbs	:= shikra-cqm-evk.dtb shikra-cqm-cqs-evk-imx577-camera.dtbo
- shikra-cqs-evk-imx577-camera-dtbs	:= shikra-cqs-evk.dtb shikra-cqm-cqs-evk-imx577-camera.dtbo
-+shikra-iqs-evk-imx577-camera-dtbs	:= shikra-iqs-evk.dtb shikra-iqs-evk-imx577-camera.dtbo
- 
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqm-evk-imx577-camera.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqs-evk-imx577-camera.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= shikra-iqs-evk-imx577-camera.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm4250-oneplus-billie2.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm4450-qrd.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sm6115-fxtec-pro1x.dtb
-diff --git a/arch/arm64/boot/dts/qcom/shikra-iqs-evk-imx577-camera.dtso b/arch/arm64/boot/dts/qcom/shikra-iqs-evk-imx577-camera.dtso
-new file mode 100644
-index 0000000000000000000000000000000000000000..d8c968a918c67cdebc0e7c6fc14ef820c97ecb75
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/shikra-iqs-evk-imx577-camera.dtso
-@@ -0,0 +1,79 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+/dts-v1/;
-+/plugin/;
-+
-+#include <dt-bindings/clock/qcom,shikra-gcc.h>
-+#include <dt-bindings/gpio/gpio.h>
-+
-+&camss {
-+	vdd-csiphy-1p2-supply = <&pm8150_l11>;
-+	vdd-csiphy-1p8-supply = <&pm8150_l12>;
-+
-+	status = "okay";
-+
-+	ports {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		port@1 {
-+			reg = <1>;
-+
-+			csiphy1_ep: endpoint {
-+				data-lanes = <0 1 2 3>;
-+				remote-endpoint = <&imx577_ep1>;
-+			};
-+		};
-+	};
-+};
-+
-+&cci {
-+	status = "okay";
-+};
-+
-+&cci_i2c1 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	camera@1a {
-+		compatible = "sony,imx577";
-+		reg = <0x1a>;
-+
-+		reset-gpios = <&tlmm 33 GPIO_ACTIVE_LOW>;
-+		pinctrl-0 = <&cam_mclk1_default &cam1_reset_default>;
-+		pinctrl-names = "default";
-+
-+		clocks = <&gcc GCC_CAMSS_MCLK1_CLK>;
-+		assigned-clocks = <&gcc GCC_CAMSS_MCLK1_CLK>;
-+		assigned-clock-rates = <24000000>;
-+
-+		/*
-+		 * avdd and dvdd are supplied by on-board regulators on the
-+		 * IMX577 module from the connector's 3.3 V rail; they are
-+		 * not SoC-controlled. dovdd (1.8 V) powers the carrier board
-+		 * level-shifter that translates CCI I2C and reset lines
-+		 * between the SoC and the connector.
-+		 */
-+		dovdd-supply = <&pm8150_l15>;
-+
-+		port {
-+			imx577_ep1: endpoint {
-+				link-frequencies = /bits/ 64 <600000000>;
-+				data-lanes = <1 2 3 4>;
-+				remote-endpoint = <&csiphy1_ep>;
-+			};
-+		};
-+	};
-+};
-+
-+&tlmm {
-+	cam1_reset_default: cam1-reset-default-state {
-+		pins = "gpio33";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+};
+The following was discovered by AI while I was working PCIe device managed =
+by Linux kernel. There appears to be an unbalanced runtime PM reference in =
+pci_generic.c
+affecting devices that set .no_m3. It checked against v7.1 and it is still =
+present there.
 
--- 
-2.34.1
+mhi_pci_probe() only releases the reference taken by local_pci_probe() when=
+ both PME from D3hot and M3 are supported:
+
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 /* Allow runtime suspend only if=
+ both PME from D3Hot and M3 are supported */
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (pci_pme_capable(pdev, PCI_D3=
+hot) && !(info->no_m3)) {
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 pm_runtime_set_autosuspend_delay(&pdev->dev, 2000);
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 pm_runtime_use_autosuspend(&pdev->dev);
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 pm_runtime_mark_last_busy(&pdev->dev);
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 pm_runtime_put_noidle(&pdev->dev);
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 }
+
+but mhi_pci_remove() re-takes that reference based on PME capability alone:
+
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 /* balancing probe put_noidle */
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (pci_pme_capable(pdev, PCI_D3=
+hot))
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 pm_runtime_get_noresume(&pdev->dev);
+
+Commit 0494cf9793b7 ("bus: mhi: host: pci_generic: Disable runtime PM for Q=
+DU100") added the !(info->no_m3) term to the probe-side condition but left =
+the removal-side condition unchanged, so the two no longer mirror each othe=
+r. For a device that is PME capable and sets .no_m3, probe never performs t=
+he put that this get is documented to balance, and one usage count is leake=
+d per bind/unbind cycle. Tracing it through, with the baseline of count=3D1=
+ / runtime_auto=3Dfalse that pci_pm_init() establishes via pm_runtime_forbi=
+d():
+
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 M3=
+ supported=A0=A0=A0=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0 no_m3
+=A0 bind:=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 core get_sync=A0=A0=
+=A0=A0=A0=A0=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0 2=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0 2
+      =A0=A0=A0=A0=A0=A0=A0=A0=A0 =A0=A0=A0=A0 probe put_noidle=A0=A0=A0=A0=
+=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 1=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 (skipped) 2
+=A0=A0=A0=A0=A0=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 mission-mode allow=A0=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0 =
+0 auto=3Dtrue=A0=A0=A0 =A01 auto=3Dtrue
+=A0 unbind: =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 core get_sync=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 1=A0=A0=
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 2
+=A0=A0=A0=A0=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 =A0remove forbid=A0=A0=A0=A0=A0=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 2 auto=3Dfalse=A0=A0 3 auto=3Dfalse
+=A0=A0=A0=A0=A0=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 remove get_noresume=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0 =A03=A0=A0=
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 4
+=A0=A0=A0=A0=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 =A0core put_noidle=A0=A0=A0=A0=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0=A0=A0=A0=A0 =A02=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =A0=
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 3
+=A0=A0=A0=A0=A0=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 core put_sync=A0=A0=A0=A0=A0=A0=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =A01=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 2
+=A0 final=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0 =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 =
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0=A0 =A01 (baseline)=A0=A0=A0 2 (baseline + 1)
+
+It derived this after f227b246307e ("bus: mhi: host: pci_generic: Add pm_ru=
+ntime_forbid() in remove callback"), since that commit also touches runtime=
+ PM balance in mhi_pci_remove(). It correctly balances the pm_runtime_allow=
+() performed on the Mission Mode transition, but that is a separate pair fr=
+om the put_noidle/get_noresume pair above, so the leak survives it unchange=
+d. The only in-tree device setting .no_m3 today is qcom-qdu100, so whether =
+this is currently observable in the field depends on that part advertising =
+PME from D3hot. If it does not, the leak is latent rather than active. Eith=
+er way the two conditions are intended to mirror each other and no longer d=
+o, and the practical impact has likely gone unnoticed because the PCI core =
+forces unbound devices to D0 regardless of their runtime PM state. Reproduc=
+ing on a .no_m3 device is just repeated bind/unbind:
+
+=A0 for i in $(seq 5); do
+=A0=A0=A0=A0=A0 echo $BDF > /sys/bus/pci/drivers/mhi-pci-generic/unbind
+=A0=A0=A0=A0=A0 echo $BDF > /sys/bus/pci/drivers/mhi-pci-generic/bind
+=A0 done
+
+
+Fixes: 0494cf9793b7 ("bus: mhi: host: pci_generic: Disable runtime PM for Q=
+DU100")
+--- a/drivers/bus/mhi/host/pci_generic.c
++++ b/drivers/bus/mhi/host/pci_generic.c
+@@ -1080,6 +1080,7 @@ struct mhi_pci_device {
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 struct work_struct recovery_work;
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 struct timer_list health_check_time=
+r;
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 unsigned long status;
++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 bool no_m3;
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 bool reset_on_remove;
+};
+
+@@ -1390,6 +1391,8 @@ static int mhi_pci_probe(struct pci_dev *pdev, const =
+struct pci_device_id *id)
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 mhi_cntrl->mru =3D info->mru_defaul=
+t;
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 mhi_cntrl->name =3D info->name;
+
++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 mhi_pdev->no_m3 =3D info->no_m3;
++
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (pdev->is_physfn)
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0 mhi_pdev->reset_on_remove =3D info->reset_on_remove;
+
+@@ -1478,7 +1481,7 @@ static void mhi_pci_remove(struct pci_dev *pdev)
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 }
+
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 /* balancing probe put_noidle */
+-=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (pci_pme_capable(pdev, PCI_D3hot))
++=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (pci_pme_capable(pdev, PCI_D3hot) && =
+!mhi_pdev->no_m3)
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=
+=A0=A0=A0 pm_runtime_get_noresume(&pdev->dev);
+
+=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 if (mhi_pdev->reset_on_remove)
+
+Note that no_m3 is cached unconditionally rather than under "if (pdev->is_p=
+hysfn)" as reset_on_remove is, because the probe-side condition applies to =
+virtual functions too; gating the cache on is_physfn would leave the same a=
+symmetry in place for VFs.
+
+Thanks,
+Alexandra
 
