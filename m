@@ -1,99 +1,37 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC1702DB7B4
-	for <linux-arm-msm@vger.kernel.org>; Wed,  5 Aug 2026 10:31:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0027B2EB10;
+	Wed,  5 Aug 2026 10:33:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785925882; cv=none; b=ARX3vrl+UHVfLgtylmq3C2AyqjRDdnAHLIZe9AuVzY7c+EY07LyW39q7CVWO3ueAPFKx3Ot65vNYNyK2Ebdo7K/mrjlHyeujUKt+c7VFRokfvTRbn4vEJ5XfCHbxFYkpPypmKel3x0aH5mjzPBs6liG/GNbYn3u9+bXWUi2sQek=
+	t=1785926007; cv=none; b=hrUJAvNtbnIG5U41m8woTiCAox8INHMl5godq3dplp6VHIjcmFfZ1XuqcvUfQL+/15ogLVao8A3c0Xse9sHFLtGyikzxI4Qj1GbKl9QAVVUOgiJyBKvqEoVtr+O65J8WG0XkMhW4WyyXQPDzReJhsT9DDdTShBgaUllpOXCXD24=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785925882; c=relaxed/simple;
-	bh=RpCeLzOb8oUsf3cplSbUopiRi4IIPCUSGeBAwhm1X8Y=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=d5lkwIUHJGeGZCe1ghj13PSAa5gEOcaVq+plCYv7hvMn/nGAGh+7OH8MGPqQHgoMUwRHc0qSoqXHEeW19BNRwC9+36SCAxzpq3tIst9TxicX78tA6N3SXoUrQSMcYS7SyRVBvBLkxTg55Gc7m+3KqiN0iLRJAPvQfYgNXF2t2MI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=UVSND4sY; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=i3VIdA88; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1785926007; c=relaxed/simple;
+	bh=KpUclSqc6f6re3FfItiLbO3O5MGeREx/fi6Z2V3ow+M=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=BUieCDCISnwm3EKbQyafEdpZzpBqdKMKM8DJWL9fuclDrmJGa0/j8fEFPC/+0ZBCNKTskCcHW8LLC4GazdSG9GqntBvOYPsU2OfQZClidnlljGlxhu13DMXQ25sDB7OkgB1Nj4VgzE2Ztfdg++wqsqQ3TWM+kb7qbOOhMSzjsU8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=CnrDHDAw; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="UVSND4sY";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="i3VIdA88"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6758dLOh3540596
-	for <linux-arm-msm@vger.kernel.org>; Wed, 5 Aug 2026 10:31:20 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	FnVwsZz7S/l99Dx+lUg5DbaKBgMiqNs7LuM9k7GvdJQ=; b=UVSND4sYRudXRGFb
-	zDgnyTLLhwikihlrImfpUHpY1FRXYrh54P7CZbgt/Ne0wRrtL20IWN/kvgH/p4Hf
-	bNv7TNyQSSYYmEAvC2++J/E3UP/FqYGhP9ltacymm+cr2NIk5E6yQKCMvQHvgCta
-	b6vOnlijiVhjo0u9w7AlYVZRUiWZtzjT1gQqsh2aOKZKpfCjhyaEqw1TDS9mQudm
-	Riez3PMLb2F4jazQy91PChYCrTBfhoykSm20DZgjhB7/JM+DWQOX82gNuAo3AG+s
-	fsAJlbOuXBYe6BP5ArWgM9xFuUkc01/LdNAJ6drrsVZ6ovsliAOWCk4zrZuSSmAN
-	dziKSw==
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fuu3uj73f-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 05 Aug 2026 10:31:20 +0000 (GMT)
-Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-8ea75996387so15511706d6.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 05 Aug 2026 03:31:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1785925879; x=1786530679; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=FnVwsZz7S/l99Dx+lUg5DbaKBgMiqNs7LuM9k7GvdJQ=;
-        b=i3VIdA88Np/0itP9C5KP6FbX93R6NGdfZDeHg6ibavoqOkhz92xm3PXD9JF3FuE3Q5
-         JAAg7uewmny+E530akRAODAiqZAarEms+3Z42UBLghGe+rH3zGMxu1fSP5J7GKjTGvc1
-         AhKNzBXQ1KxCp0xLsuv/k/UwStfB6kNKjbONNJ0HTcL2kf0VM3E9rkKNtXn2JT2Eg0pY
-         gSA0L8+WL5cMqf9bFssEhIikRbNe+nENNK9p+hYDMngRX5W6ObyMCN6oo82vvnmMn8ZS
-         l0pHNe1lHx6t4JLyI3Ul0dpF9eHCx7atsjIouhQ0UyI4QuO6LOaezM2pc7loTJPBihyG
-         wMYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1785925879; x=1786530679;
-        h=content-transfer-encoding:content-type:mime-version:references
-         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=FnVwsZz7S/l99Dx+lUg5DbaKBgMiqNs7LuM9k7GvdJQ=;
-        b=HirIcQTPNa0+cWHlO+UDUsW9LB1JBnh97OUmylljTSsgiboKYOQFgGCl37c17ulCIJ
-         WqYAX/9uKwqZjpQKodtVG2+7jU99j8cUiDXIRy+XXWMkW28Hk1W/firdOdlHb54EEW7Q
-         BRJ4QiBC1+Zo3lNjWmbreTTSPmO5U7pt/D5GX5puhQoDIYnswLRaOuyqqL4Gxf2hLo5X
-         y/SIXN3FU1A3TLt7a7L++qdC5AitBz2pPgm+uJtUysNPjEis8DS8WTOrh+N73Ur+KZaB
-         tC6b3rLesGL0rGYaYf5uhFtGn0q9NlCb2atMgRxMnmhMWDQ6cieXB28fYG17EoCJpYcG
-         3gSA==
-X-Gm-Message-State: AOJu0YwgfK+iP43Ir4tPj4EnGUvOr33/V1iprJ/RFRskz6/AXbXSa83R
-	mfrv4/A5nV2SoS5thCbXO7XLAWrxurAYvVtJbtDywAtH6i5hsrCzReD7VvVq3x0ep6Nh4wvnG0I
-	9TwFNFc2aytFLvS1BAr/mGFA69jv/sYRaHLzag8xKD0aq7gEoIFfUjvEqsIU1vgvluxNv
-X-Gm-Gg: AR+sD11Xl+GaYuLUSKPfFn09Qq6SewpC5zYr4D8TauaZfCODNIsYmeQAV5dGULQs1oq
-	lhHqjsK0/CNWJGMThCZeFhgp/kP3jjU/wjNp9C+bJN0GN1EBJsNpWTb+zyYGd3kfWJxldvs7wLG
-	WnDJVQ2vaFmWk14pdhFt6YPRT6oKG2qDgOjnbLv22oScUrrySdNLxjxyWnRGeid/Ii2xpSNPU8x
-	Y4hsaTatA9OXlDD+4OJb4twjW3P6uGIghffW9Bfz2E7wnyF1f1cF2pjo1qbbBueWE6PX0WYsOvw
-	zupEFmSGO5rfZYWBJjHGQUJ4docXVEsFn9Pfmayu+7RKtPVspVsQhOo4MgLp5hOSEfX7K9GG2zd
-	ae0GD0QAECN+3588oA7BoIK7aZ0on1JN0M8bmMCMfDC4vWes+fAfKm0QAJIU=
-X-Received: by 2002:a05:6214:407:b0:8eb:326f:9515 with SMTP id 6a1803df08f44-908811b4a45mr66512056d6.8.1785925878680;
-        Wed, 05 Aug 2026 03:31:18 -0700 (PDT)
-X-Received: by 2002:a05:6214:407:b0:8eb:326f:9515 with SMTP id 6a1803df08f44-908811b4a45mr66511196d6.8.1785925878028;
-        Wed, 05 Aug 2026 03:31:18 -0700 (PDT)
-Received: from YUANJIEY2.qualcomm.com (Global_NAT1_IAD_FW.qualcomm.com. [129.46.232.65])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-9087ff9d814sm22259706d6.10.2026.08.05.03.31.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 05 Aug 2026 03:31:17 -0700 (PDT)
-From: Yuanjie Yang <yuanjie.yang@oss.qualcomm.com>
-To: andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org,
-        krzk+dt@kernel.org, conor+dt@kernel.org, yijie.yang@oss.qualcomm.com,
-        dmitry.baryshkov@oss.qualcomm.com, abel.vesa@oss.qualcomm.com,
-        krzysztof.kozlowski@oss.qualcomm.com
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, yuanjie.yang@oss.qualcomm.com,
-        tingwei.zhang@oss.qualcomm.com,
-        Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>,
-        Ziyue zhang <ziyue.zhang@oss.qualcomm.com>
-Subject: [PATCH v3 4/4] arm64: dts: qcom: Add Advantech SOM-DB5830
-Date: Wed,  5 Aug 2026 18:30:03 +0800
-Message-ID: <20260805-hamoa-come-v3-v3-4-20463c43eae1@oss.qualcomm.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260805-hamoa-come-v3-v3-0-20463c43eae1@oss.qualcomm.com>
-References: <20260805-hamoa-come-v3-v3-0-20463c43eae1@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="CnrDHDAw"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 9469FC19425;
+	Wed,  5 Aug 2026 10:33:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1785926006;
+	bh=KpUclSqc6f6re3FfItiLbO3O5MGeREx/fi6Z2V3ow+M=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=CnrDHDAw1PdonmRrQd1zvAdHd7+1OT3uGaIIyNID1oABqAuwHx2DDnSw6QnTCwP6r
+	 914bxKokFTy8e50ARXMZvJPn8ZJa2AupYl5hUePUOeVIpsKf9QNcZzTwLD1DwDhz5C
+	 iCg2AHBWbFMpeqyzCrnE883nDj/jNw5ESwkKsetUJq1EyU6qkioiTHHo9YknSnIlQJ
+	 dVQpIDa/rr5x57W+0cR3dvZLydD8l/DiRM2rv/gg5XVP19Q6sKBvVIymAJl8mlh/qL
+	 IqVI/qa4wj+BdY2axpV8rkD0B0m3vQtH6u7srS5u0sPVhZQhHl8ooQ4ekYnaP5SvXV
+	 QTpqx+MkD44iw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 6EFF8C56201;
+	Wed,  5 Aug 2026 10:33:26 +0000 (UTC)
+From: Sarath Ganapathiraju via B4 Relay <devnull+sarath.ganapathiraju.oss.qualcomm.com@kernel.org>
+Subject: [PATCH v4 0/2] Add LPASS VA CSR HeartBeat pulse clock support
+Date: Wed, 05 Aug 2026 16:03:18 +0530
+Message-Id: <20260805-master-20260805-sync-v4-0-dfbcbf427c2c@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -101,271 +39,83 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA1MDA4MyBTYWx0ZWRfXxF5ICLvwwVrs
- n+Z2TMYYUVyUyUlKl1/UTWTlbp7YgvUuK7ecGA4lB7iKR8fIHw+ugz8JyMh3WOhrvSfojCld3sM
- nNL/dG8YT64Y94BQV3WHlUZ4Mn8LJz0=
-X-Proofpoint-GUID: JwPwMXwkKboC9O2BLJnPgN5gIFT9dfKC
-X-Authority-Analysis: v=2.4 cv=B5aJFutM c=1 sm=1 tr=0 ts=6a7310f8 cx=c_pps
- a=oc9J++0uMp73DTRD5QyR2A==:117 a=C3Dk8TwHQYyIj7nOf9RCJw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=TJUqZQk6AAAA:8 a=EUspDBNiAAAA:8 a=8c9qzvNhB2lAFPWjGvoA:9 a=QEXdDO2ut3YA:10
- a=iYH6xdkBrDN1Jqds4HTS:22 a=Q0W1slMkcave-rSCEGgY:22
-X-Proofpoint-ORIG-GUID: JwPwMXwkKboC9O2BLJnPgN5gIFT9dfKC
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA1MDA4MyBTYWx0ZWRfX1uSLpz0a15id
- YtjJL3faddcD+Tbkw8MfCd/WZg7CfcGdEajfUPmevTqz2hxWAsAFMjkJyb00FJ5fz/QHJn9lkid
- cEPB0N1y1zsVyKHed0/A/4t1tdRedztWD1hz4Wc5vBHqX2eNQ5xawyY71IzC4N1FeDgs9+a4EPx
- aIUIaY415UnzCjt6eK/5nl7IzF8pzNYU/vHxid05NbLaz0fEYPVVs17CFSwYBNx6qk1jAoiA3yG
- 5vIEj8DOB5xGB3pgldDbE0NXNJnAMa7OD/f8XAbO1HhrrsQIdQFBDjDDnGX5GE1IZ/J6Lz3BmaQ
- 85VEZr74zJxp6Cp/5OBYVI0r69snd1tJBtjqo+VynfT/7mH8BhInLEw7Z1PVIigbTIlhYW+yQdS
- ow6QPCvlgTXVpLxJd9ClmlfisqLBgCggZEKmdW1GyKJSnEGKnNNeYGuWuZ9JIquAIAz/qbRTOgv
- 55vjOfmePPXygCuibSQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-05_03,2026-08-04_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 suspectscore=0 phishscore=0 impostorscore=0 clxscore=1015
- spamscore=0 malwarescore=0 bulkscore=0 priorityscore=1501 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608050083
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAG4Rc2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyTHQUlJIzE
+ vPSU3UzU4B8JSMDIzMDCwNT3dzE4pLUIl04v7gyL1k3xcLSKM0yxTzRKNVACai1oCg1LbMCbGx
+ 0LIRfXJqUlZpcAjJLqbYWAK/OU3N4AAAA
+X-Change-ID: 20260805-master-20260805-sync-d892f9d7a2e0
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Michael Turquette <mturquette@baylibre.com>, 
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ prasad.kumpatla@oss.qualcomm.com, 
+ Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1785926004; l=2273;
+ i=sarath.ganapathiraju@oss.qualcomm.com; s=default;
+ h=from:subject:message-id;
+ bh=KpUclSqc6f6re3FfItiLbO3O5MGeREx/fi6Z2V3ow+M=;
+ b=YMAW/r8QQ29ZYG/yb1pBb8vdoLuv2Qcdis5Mq6yvn+Q+IYZ4J9C5D9vA9/1mMLQ89GKcAfUVX
+ nD+dzae7tOnBDSsxX9UnwEdbeOHNdZRz2aZFuNvuQRQkicMZ6g3uxfM
+X-Developer-Key: i=sarath.ganapathiraju@oss.qualcomm.com; a=ed25519;
+ pk=4p2FWGXM+F2sir13Lu5stw5aKX5trUymK/ttESvgxQg=
+X-Endpoint-Received: by B4 Relay for
+ sarath.ganapathiraju@oss.qualcomm.com/default with auth_id=870
+X-Original-From: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
+Reply-To: sarath.ganapathiraju@oss.qualcomm.com
 
-Add the initial device tree for the Advantech SOM-DB5830 platform based on
-the Qualcomm X1E80100 SoC.
+The LPASS VA CSR block contains rate generator hardware that produces
+a HeartBeat Pulse (also known as RateGen Pulse). This pulse
+synchronizes the start of the DMAs and Codec Interfaces for the audio
+usecases and can serve as a periodic wakeup source for the DSP.
 
-The platform consists of an Advantech SOM-6820 system-on-module (SoM)
-mounted on an Advantech SOM-DB5830 carrier board. The SOM integrates an
-IQ X7181 EVK SiP containing the Qualcomm X1E80100 SoC and its supporting
-components.
+This series adds the DT binding and driver support to model this
+rate generator as a clock provider.
 
-Compared to the HAMOA IOT EVK, PCIe controllers 3, 5 and 6 are routed to
-expansion slots, while PCIe controller 4 is connected to an ASM1164
-SATA controller. The platform does not provide a USB Type-C connector.
-The eUSB repeater (TUSB2E111YCGR) is configured through hardware strapping
-pins and therefore requires no software control.
+Patch 1 adds the YAML binding for the new qcom,hawi-lpass-va-csr
+clock provider node under Documentation/devicetree/bindings/clock/.
 
-The initial device tree includes support for:
-- UART
-- Regulators
-- USB
-- PCIe
-- Pinctrl
-- ADSP, CDSP
-- UFS
-- Graphics
-- Video
+Patch 2 adds the lpass-va-csr driver under drivers/clk/qcom that
+registers the lpass_heartbeat_pulse clock and enables/disables the
+rate generator via regmap when the clock consumer requests it.
 
-Regulators, pinctrl, graphics, video, ADSP and CDSP support are
-inherited from the common iq-x7181-evk-som.dtsi description.
+Changes in v4:
+- Renamed the binding filename and schema ID to hawi-specific naming:
+  qcom,lpass-va-csr.yaml -> qcom,hawi-lpass-va-csr.yaml.
+- Narrowed the DT example register window to the rate generator
+  registers only, and aligned the node name with the base address:
+  clock-controller@7eed000 with reg <0x0 0x07eed000 0x0 0x14>.
+- Renamed Kconfig symbol QCOM_CLK_LPASS_VA_CSR to
+  QCOM_CLK_LPASS_HEARTBEAT_PULSE.
+- Added devm_pm_runtime_enable() in lpass-va-csr probe path.
+- Dropped the qcom,lpass-va-macro binding extension patch - no in-tree
+  user yet; will be resubmitted with the hawi DTSI changes.
+- Dropped sound/soc/codecs/Kconfig select wiring from this series to
+  keep it clock-only.
+- Link to v3: https://lore.kernel.org/all/20260723-master-v3-0-3d67b79b0515@oss.qualcomm.com/
 
-Co-developed-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-Signed-off-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-Co-developed-by: Ziyue zhang <ziyue.zhang@oss.qualcomm.com>
-Signed-off-by: Ziyue zhang <ziyue.zhang@oss.qualcomm.com>
-Signed-off-by: Yuanjie Yang <yuanjie.yang@oss.qualcomm.com>
+Signed-off-by: Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/Makefile             |   1 +
- arch/arm64/boot/dts/qcom/hamoa-som-6820.dtsi  |  54 ++++++++++++
- arch/arm64/boot/dts/qcom/hamoa-som-db5830.dts | 119 ++++++++++++++++++++++++++
- 3 files changed, 174 insertions(+)
+Sarath Ganapathiraju (2):
+      dt-bindings: clock: qcom: Add LPASS VA CSR HeartBeat pulse clock
+      clk: qcom: Add LPASS VA CSR heartbeat pulse clock
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 1c86e7e98f55..0b5909115c22 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -24,6 +24,7 @@ hamoa-iot-evk-el2-dtbs	:= hamoa-iot-evk.dtb x1-el2.dtbo
- 
- dtb-$(CONFIG_ARCH_QCOM)	+= hamoa-iot-evk-el2.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= hamoa-lenovo-ideacentre-mini-01q8x10.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= hamoa-som-db5830.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= ipq5018-rdp432-c2.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= ipq5018-tplink-archer-ax55-v1.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= ipq5210-rdp504.dtb
-diff --git a/arch/arm64/boot/dts/qcom/hamoa-som-6820.dtsi b/arch/arm64/boot/dts/qcom/hamoa-som-6820.dtsi
-new file mode 100644
-index 000000000000..cc7609c33057
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/hamoa-som-6820.dtsi
-@@ -0,0 +1,54 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ *
-+ * SoM: https://advdownload.advantech.com.cn/productfile/PIS/SOM-6820/file/SOM-6820_DS(052925)20250529110758.pdf
-+ */
-+
-+#include "iq-x7181-evk-som.dtsi"
-+
-+/ {
-+	vph_pwr: regulator-vph-pwr {
-+		compatible = "regulator-fixed";
-+
-+		regulator-name = "vph_pwr";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+
-+		regulator-always-on;
-+		regulator-boot-on;
-+	};
-+};
-+
-+&ufs_mem_phy {
-+	vdda-phy-supply = <&vreg_l3i_0p8>;
-+	vdda-pll-supply = <&vreg_l3e_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&ufs_mem_hc {
-+	reset-gpios = <&tlmm 238 GPIO_ACTIVE_LOW>;
-+
-+	vcc-supply = <&vreg_l17b_2p5>;
-+	vcc-max-microamp = <1300000>;
-+	vccq-supply = <&vreg_l2i_1p2>;
-+	vccq-max-microamp = <1200000>;
-+
-+	status = "okay";
-+};
-+
-+&usb_1_ss0 {
-+	/delete-property/ usb-role-switch;
-+	dr_mode = "peripheral";
-+};
-+
-+&usb_1_ss1 {
-+	/delete-property/ usb-role-switch;
-+	dr_mode = "host";
-+};
-+
-+&usb_1_ss2 {
-+	/delete-property/ usb-role-switch;
-+	dr_mode = "host";
-+};
-diff --git a/arch/arm64/boot/dts/qcom/hamoa-som-db5830.dts b/arch/arm64/boot/dts/qcom/hamoa-som-db5830.dts
-new file mode 100644
-index 000000000000..1697e908fc39
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/hamoa-som-db5830.dts
-@@ -0,0 +1,119 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ *
-+ * SoM: https://advdownload.advantech.com.cn/productfile/PIS/SOM-6820/file/SOM-6820_DS(052925)20250529110758.pdf
-+ * carrier board: https://www.advantech.com.cn/zh-cn/products/1-fc23ff/som-db5830/mod_16b1a718-27d6-4a4c-8684-e8f2a8e9c57b
-+ */
-+
-+/dts-v1/;
-+
-+#include "hamoa-som-6820.dtsi"
-+
-+/ {
-+	model = "Advantech SOM-6820 on SOM-DB5830";
-+	compatible = "advantech,som-db5830", "advantech,som-6820",
-+		     "qcom,iq-x7181-evk-som", "qcom,x1e80100";
-+	chassis-type = "embedded";
-+
-+	aliases {
-+		serial0 = &uart21;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+};
-+
-+&pcie3_port0 {
-+	reset-gpios = <&tlmm 143 GPIO_ACTIVE_LOW>;
-+	wake-gpios = <&tlmm 145 GPIO_ACTIVE_LOW>;
-+};
-+
-+&pcie4_port0 {
-+	reset-gpios = <&tlmm 146 GPIO_ACTIVE_LOW>;
-+	wake-gpios = <&tlmm 148 GPIO_ACTIVE_LOW>;
-+};
-+
-+&pcie5_port0 {
-+	reset-gpios = <&tlmm 149 GPIO_ACTIVE_LOW>;
-+	wake-gpios = <&tlmm 151 GPIO_ACTIVE_LOW>;
-+};
-+
-+&pcie6a_port0 {
-+	reset-gpios = <&tlmm 152 GPIO_ACTIVE_LOW>;
-+	wake-gpios = <&tlmm 154 GPIO_ACTIVE_LOW>;
-+};
-+
-+&thermal_zones {
-+	gpuss-0-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+
-+	gpuss-1-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+
-+	gpuss-2-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+
-+	gpuss-3-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+
-+	gpuss-4-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+
-+	gpuss-5-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+
-+	gpuss-6-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+
-+	gpuss-7-thermal {
-+		trips {
-+			trip-point0 {
-+				temperature = <105000>;
-+			};
-+		};
-+	};
-+};
-+
-+&uart21 {
-+	compatible = "qcom,geni-debug-uart";
-+
-+	status = "okay";
-+};
+ .../bindings/clock/qcom,hawi-lpass-va-csr.yaml     |  51 +++++++
+ drivers/clk/qcom/Kconfig                           |  12 ++
+ drivers/clk/qcom/Makefile                          |   1 +
+ drivers/clk/qcom/lpass-va-csr.c                    | 148 +++++++++++++++++++++
+ 4 files changed, 212 insertions(+)
+---
+base-commit: 0f6da28aab51b16762ed82e8fdeaa5042da45b08
+change-id: 20260805-master-20260805-sync-d892f9d7a2e0
 
--- 
-2.43.0
+Best regards,
+--  
+Sarath Ganapathiraju <sarath.ganapathiraju@oss.qualcomm.com>
+
+
