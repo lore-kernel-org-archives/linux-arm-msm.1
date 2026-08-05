@@ -1,271 +1,553 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from TYVP286CU001.outbound.protection.outlook.com (mail-japaneastazolkn19011028.outbound.protection.outlook.com [52.103.43.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F2332F7F1C;
-	Wed,  5 Aug 2026 12:34:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785933242; cv=none; b=m/ugzvcVC2eD00p6BuQiJU7WeBcU9iIyJDW+cV/hM4yIMHEelPN09I/jxd4pdeUOGfcmnbsW0xmPtHC3Ze2HuKGXkfT9M6CBjpc9ZC/doUThxWWU+eBJIXhKSPSG1ehNH7NgNQ84p7Aba/kpCGtsSuwEwbuS7yzW4ZxS2x8A2B0=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785933242; c=relaxed/simple;
-	bh=8yWTpkhnKpM634lwFrGrIHnPXohxkjE0F48iMxwAimQ=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=C0LlspgISj2IutewRSX9JhuHSOFbAsRSnKEPCEOz6465js5xtHHDV4nDJ6cDbkV7Wy/noB4DqKf0rk228BINef46Z5E7/sP1SpDKg3Ugnq2l0uoIad43KkB/+khWMZRRE5gbsgmFjbSExE/zTZU1UB3DHBO+J/YzXNbLgd98cVU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=D2Wwd4y9; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA1532F290B;
+	Wed,  5 Aug 2026 12:50:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.103.43.28
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1785934215; cv=fail; b=CAmVV4lzvp+CUVHugMZEiwca+xUaIXF9MZntkUQrpoJVlXikdvitMUWnZIFm6dQgX9KyjsfjwhjFjOKWt7kuL4PvkWN6i1OnjU/mhEmgOSUuLOfmx14qgknKbdWw1Hk0i1OX5c1tj4+IJX0yHMVH8kD0CUF4tRVuHMkdft1DsaE=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1785934215; c=relaxed/simple;
+	bh=/DhYr41/GytMJRmOhHBoaGfwQa5recVC8PWnAYYc97E=;
+	h=From:To:CC:Subject:Date:Message-ID:Content-Type:MIME-Version; b=T6w8SE3Ik6lwiy87XxfsRuVvTJzZ56z2QmpbmcLXdePTM3+0teE4ccldsDb2HlNpQZEv6Wd1vtpCIZwHMXv8cGyeF8uCUqXTewoZzu6gxiWvTRwpDMNTNPqWF0CWRkfaoNyf0c1Cfd1WgaiN+r3XTgjoUS73vi941d4EE2+kN8o=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=hotmail.com; spf=pass smtp.mailfrom=hotmail.com; dkim=pass (2048-bit key) header.d=hotmail.com header.i=@hotmail.com header.b=hhzwj+WA; arc=fail smtp.client-ip=52.103.43.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=hotmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=hotmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="D2Wwd4y9"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D39D81F000E9;
-	Wed,  5 Aug 2026 12:33:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1785933241;
-	bh=faziCBXSUs4f1fN5QGqJBFJJO8BhYf4C5QWrpWwCjGM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=D2Wwd4y9VAlmraPLc9gLm8As/wTO5ULYU6/adndyRCv/NFz1HCcw4aZjl7YybzRDN
-	 qRu9OOQBVslng9u+2HVBmTbM6kYr8UnE3wG9k0Y+lM2DDnLlYLh2gnWBcJS+udIUIC
-	 PxHc2kQmEzunGzwL3I1edbRVFxkunbqvo26dvo568E1jcWYkO2nlqVyWT/hlu/94Jk
-	 HuxD0D/wZ5uty3mGaLMea7pcfbJmpiHZkvDwci/gWduHgPbLA2+S2yTAd/oDx4k//F
-	 jrXqpMiGznlpS45wVJIttU3orJcWZ89WPFLbfcYzwtC5MctFPZyAasIUXqlJmuyrt6
-	 6yk9Gb6udN4HA==
-Message-ID: <8ab6c26f-b648-447c-9fdd-f1424beb44f4@kernel.org>
-Date: Wed, 5 Aug 2026 14:33:51 +0200
+	dkim=pass (2048-bit key) header.d=hotmail.com header.i=@hotmail.com header.b="hhzwj+WA"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=O89pWEBMRCUxI09ixXESnY2icp5+PPEeF/0TjPtLVV5s85a4kpYuof1j28JEHIxUzXt4Khxjau4a3n+arY0ABCTshNWwGQvR4OHmiXO6035Yd9PjpUG9RbqgnPKlER/wvWfMzzAvYz8h3iLbCtl/T+VQ0N5/Hg9JCcNERAAGAhbYMGCpIdRx1r7o1cNVDXeQjY1ZGeOyfZ/dcIwc6ZrVtK+XaT8agyOSAsLVW2BhG69DSzC/lu9mCO+C6DkmJOVry+pLBbLaowbEs1+xwOlsTnGRj8Iq2BTJXx5rff7KnpgUZpF7x6YJPAMSl2E/oVLNXlICLBAwLLogaRpDLhzr2g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dd18Wed1tFUe6dEkUvBlkkurRvlh62pEnMpmkz1atbs=;
+ b=ZXjBi2/gD5i14qa2wViGKko0zTwgVebMRGpDelbFA60bH8+IVuggTJKGzJt4wVFBK99fCuhOvNR5f/BfKKU9/UnwfSOAFv5XCU734ZF/3VZqLC56uPEMchsA9UbYKVS90jyRSIArzaqGwfPFufE6aOIxmbtF5NPvB+Rck+NLzkuqPah+kM4SLtKxeicTuEq5QsKlTFw4MaAXty7baDV717EiMZJnAoqNyZIjpr2UVOeR7T/7cD5/tLxMRcZXlGl//cgVRQJ0Rg9KDhVzETlwII9XCgwPu4zj+kZXKY7eKAogSTengwlPIvNQCj0qZhaMywPH85hdS6RXwP19D7Crig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dd18Wed1tFUe6dEkUvBlkkurRvlh62pEnMpmkz1atbs=;
+ b=hhzwj+WAseZmNAVNCJ1vufKhiv5SpD8ni9CoWde7FzhdO/bPbGo5NmWkOpxgRiJ3MtgPqKU8hrpsSpqOk86+HrmCSLyVSO2hTUlmUAe3ngjglfb/2ZX2wLKfuBwpdUTjuLjw+e7d/+B2M7xi3U/oerlqOd7lSjuKJWKqeXKQUN8ihQFbFyYpRSf4gF84Wz6AmA75NfjKh48eXe8PPemj7HOSw7I2idXgsAuT1g5Zi8OYWDNeyrpATSaZ99Ob66oCuhFZ8jllsq0IIeq7uAs6MV3aCTrdAM84rdDkMCiRfhYY9p5d0p4/fqBFgAPbvnUYyJMGCRvV7OH0V2Q3Q5JuJA==
+Received: from OS7P301MB1784.JPNP301.PROD.OUTLOOK.COM (2603:1096:604:43d::17)
+ by TYYP301MB1479.JPNP301.PROD.OUTLOOK.COM (2603:1096:405:312::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.19; Wed, 5 Aug
+ 2026 12:50:10 +0000
+Received: from OS7P301MB1784.JPNP301.PROD.OUTLOOK.COM
+ ([fe80::c8af:2734:e148:3288]) by OS7P301MB1784.JPNP301.PROD.OUTLOOK.COM
+ ([fe80::c8af:2734:e148:3288%4]) with mapi id 15.21.0292.018; Wed, 5 Aug 2026
+ 12:50:09 +0000
+From: SuperHacker UEFI <zhuoshizhang@hotmail.com>
+To: "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>,
+	"devicetree@vger.kernel.org" <devicetree@vger.kernel.org>
+CC: "andersson@kernel.org" <andersson@kernel.org>, "konrad.dybcio@linaro.org"
+	<konrad.dybcio@linaro.org>, "robh+dt@kernel.org" <robh+dt@kernel.org>,
+	"krzysztof.kozlowski+dt@linaro.org" <krzysztof.kozlowski+dt@linaro.org>,
+	"conor+dt@kernel.org" <conor+dt@kernel.org>
+Subject: [PATCH] ARM: dts: qcom: add Nokia Lumia 920
+Thread-Topic: [PATCH] ARM: dts: qcom: add Nokia Lumia 920
+Thread-Index: AQHdJNcZORP2LF2230ezhlj8tOBSgw==
+Date: Wed, 5 Aug 2026 12:50:09 +0000
+Message-ID:
+ <OS7P301MB178480466383761525E3887CCFD32@OS7P301MB1784.JPNP301.PROD.OUTLOOK.COM>
+Accept-Language: en-US, ja-JP, zh-CN
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: OS7P301MB1784:EE_|TYYP301MB1479:EE_
+x-ms-office365-filtering-correlation-id: 325dc3d2-6f32-45b8-8c5a-08def2f01564
+x-microsoft-antispam:
+ BCL:0;ARA:14566002|24021099003|15080799012|15030799006|39105399006|4140399003|25010399006|41001999006|25031999004|24071999003|20031999006|19110799012|8062599012|8060799015|31061999003|440099028|3412199025|102099032|40105399003|2607281247196008;
+x-microsoft-antispam-message-info:
+ =?iso-8859-1?Q?PulMyleWG8freoxx6H0btFLdT5LtjsVS/oRkm/GllquaYyd2w2yUmWjgAD?=
+ =?iso-8859-1?Q?e/LloSOwm4gzOFTNAYI8baFrznb6gsj36pdo66DSlLk3udu00B3zokdrjr?=
+ =?iso-8859-1?Q?xzXphieP5dcKAJEGEv9A0pCIi1q9cf7JnjW+QaF0Hr7Wyayi3rDSBptD0h?=
+ =?iso-8859-1?Q?regrlU78vQTQEdtODb3HTHiKtMCxplxVo/hBn1tHcqJwB1STiE/l76AYNv?=
+ =?iso-8859-1?Q?ISuISXJwM1DauKG0TL/vr/WfG3K3t439j/xYjTq2uamDKUO+H6fWv6JrNn?=
+ =?iso-8859-1?Q?dbszdhIc1wqkReuoZBvLMDsMYKSjwalymys1j+OXuVMvB+T9nK5CtboPfM?=
+ =?iso-8859-1?Q?dohuUEZs58Do09+kwnVguwZYccuVkqEJUdFOB55EqFMLYd3OC7rJdm6SOO?=
+ =?iso-8859-1?Q?yC5q5Vaef8q+BOH2ioKxX30sRha0Zf0BIAART/5p5nuJFYpilF61jSiCpw?=
+ =?iso-8859-1?Q?adCQw8I45kT+PswSra8+W+Sdtb1bULNLu6t392qoeIakNejS1uoN6RuWfZ?=
+ =?iso-8859-1?Q?hwOLmiVpBjrystZ1kkEeM4x+R/WwyL5440XZyhQdKLyvHLB5y4SuLz7Qwn?=
+ =?iso-8859-1?Q?ESBKCqCy/tk54G0ORtpwWbWnWi9lzWSOF5wl9YyrUvOMPpiWR72AxkqCqw?=
+ =?iso-8859-1?Q?eDEjzzMk5iGXNLAXDG8Hwu+pBxmuemburOcsIzIX6kNgVdRr0f1a5RZM83?=
+ =?iso-8859-1?Q?kpO+MPtTv9AIqD2B6zeaZJ0SA44+TJyeii3ESn4NrKAuqyOi1T9F+2HMew?=
+ =?iso-8859-1?Q?FSj96mnoxtqV1SUlguikqiA/ni3eg+HboEn5tipe4EBivq0doZBin0RTR3?=
+ =?iso-8859-1?Q?DEpTfp0h2JCpvt8z9DmfXeaNWZPzB1KoWBWl+vS8s8DCoKzULdJT2V91Qn?=
+ =?iso-8859-1?Q?hcNDvJgqDKIcP4OkSEaKItCsUvyc/jVdJcgh7CzOfVY79eFYF+ktFxlmBm?=
+ =?iso-8859-1?Q?83Y3LVCXN2vBlEP2pw3BQhuTqQd0pNXPjTMv90W1N39IahAwx9CKjosLpS?=
+ =?iso-8859-1?Q?ABH9L8P9R0q2cJQz/suXEi83aaU4noNEeW7aXKiQWDh54SnnkcS8V0h07V?=
+ =?iso-8859-1?Q?qHEJROuQip0k+7yuFG5ifIPQ3fv3Q33o6tz70UsDIa25+1IrnBNeq8Kvrd?=
+ =?iso-8859-1?Q?FNreujIw=3D=3D?=
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?LBCy1ajYMhFpOltnaKh8Z+qcX4a1Bj/eKpls+8Facm4CT8HSoLV9xTp3er?=
+ =?iso-8859-1?Q?Xq/o8Bm25DbXTK4O1rSqnS+fsNzgCWxYaVo+9Zf9S4DOmTQVX59VY/xnlh?=
+ =?iso-8859-1?Q?lPhViPiH2ogy2Cg5jIkwjsr2lQqjjinop3Ty3yVKKMTuRgJYT7nWIHbeiP?=
+ =?iso-8859-1?Q?cwzBzHmgcOHDNxmyUF8dx8xLm/Zo5tLBUytsEPrka7JB2A178XIPe/99bE?=
+ =?iso-8859-1?Q?gYrGp4T5mk0FpcipE+FIYa5jdFmmF0QRhmqeecojuxQA/sU9wdEWFZiyjK?=
+ =?iso-8859-1?Q?keM9/vRp7hwpcWlzJ2ZXKkmzHSmaatd4+LTtanpDJts/VpW3rA0elWPieJ?=
+ =?iso-8859-1?Q?1MA9xpYVwGBs9mdtxlaEg2ttzQoKvqvwojrYHrB+jJtxq2HRzsfTPmjqI4?=
+ =?iso-8859-1?Q?C/je5KaVVUnMYySgge4JpmDOIMzYGtY5x4h9gm+6Go61joeoD52woSF3qC?=
+ =?iso-8859-1?Q?qV2ws2Op+3SiOLxOxOscSUe99BXWNIpzYrtLnVf0IbyHWfdGHS5ejjsURq?=
+ =?iso-8859-1?Q?NXaorN2guX5L8ZtvQTQSmiLRb/u2xKHh2pmMzbLSIXiw3fiEdIoV4lda8p?=
+ =?iso-8859-1?Q?zaj6DMoADIgEaH1hIdSPlvn8ywquwamIBoVnpPGXAJb7qnam+97E321sTQ?=
+ =?iso-8859-1?Q?EfNgxeXc3cUaYQsg06VXOyQRqR9QNhgvQN4BGuPlCRMQ8GWKSWuQrO6K17?=
+ =?iso-8859-1?Q?+6unxiemJuYZA4xuI6AYLCyriLbKCLcEaLhX+EX/pGCmVpC0jUoZJY7iST?=
+ =?iso-8859-1?Q?QgYi+jXeufWDTZjqwVkc1k0rxRfrUGJNtvp+YaWqyxTYvgFzji+AxCdCvT?=
+ =?iso-8859-1?Q?OifBQsSb0Fn4I7VPRRAYqTWf/YsvHrmg/0GsiS50uMmb0jXQ+a7osaeggF?=
+ =?iso-8859-1?Q?mUF3EWR1YYwkzQm5XF6uU+7IzEZC4A2Vw1AX5QEOpkr5DPiBO2C4wnUHC+?=
+ =?iso-8859-1?Q?H+D0u43mqR6f9rUVo3Odwm00ng44kXreStS2oGyYTKDnKhFZF+y30My55e?=
+ =?iso-8859-1?Q?/qcYsQuyuHATbOpOHvwpWxPPDApWih0F2OGEyDJM5iogV/1PudNGPu+j3V?=
+ =?iso-8859-1?Q?DN3DgnrcJ+cLmDz/kBkMPInxGcWsp0F9/TEmrCSTGKedGbCoKh1hJdJrG/?=
+ =?iso-8859-1?Q?SNuCEQR+jaSeqCni2b5C12cex0/NX+BzgQfj8HOliY9w8tROPfuq86/OFD?=
+ =?iso-8859-1?Q?xMmx4gpW+ONZ9ThCXmCzAKisj69Wu60TNGoYJsQtvtm54owj+1uuJIvL2g?=
+ =?iso-8859-1?Q?FHWe7J+CeN/jD1qLfegxh//xcvh7G+MaQ/u7d+u739fHAj6ASbfS920DWF?=
+ =?iso-8859-1?Q?hfCaA4bJxEE4upJvuBfG5dcfBfewg6n3RV5L3mx3CGZgRn78ztWx6qSSd9?=
+ =?iso-8859-1?Q?boq3EktOPPpCrVqnnJmAs8lpBbMrtT4tlliklClffC0xqqjcKQ80DiYcqC?=
+ =?iso-8859-1?Q?KT6nBtZevCjATnkY?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/6] dt-bindings: bluetooth: qca: add QCC2072
-To: Manivannan Sadhasivam <mani@kernel.org>
-Cc: Rahul Samana <rahul.samana@oss.qualcomm.com>,
- Bartosz Golaszewski <brgl@kernel.org>, Marcel Holtmann
- <marcel@holtmann.org>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Balakrishna Godavarthi <quic_bgodavar@quicinc.com>,
- Rocky Liao <quic_rjliao@quicinc.com>, Bjorn Andersson
- <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
- Bartosz Golaszewski <brgl@bgdev.pl>, linux-arm-msm@vger.kernel.org,
- linux-bluetooth@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org,
- linux-pm@vger.kernel.org, quic_mohamull@quicinc.com,
- quic_hbandi@quicinc.com, quic_anubhavg@quicinc.com
-References: <20260727-rb3-industrial-bt-uart-v2-0-2d100f30e202@oss.qualcomm.com>
- <20260727-rb3-industrial-bt-uart-v2-1-2d100f30e202@oss.qualcomm.com>
- <20260731-first-righteous-bear-dd72ed@quoll>
- <712f8a14-d2a1-4a90-82f9-05cd694f2658@oss.qualcomm.com>
- <c1875dd6-fe3a-4a69-a6fd-b461c8fba6e4@kernel.org>
- <6d6465bb-47ac-464c-af4e-0ca72325705f@oss.qualcomm.com>
- <8a388310-d3cc-4d02-abb6-0eb98c24cfce@kernel.org>
- <4523441f-498a-4bbd-80f3-97a7a9206c00@oss.qualcomm.com>
- <6e0b9e79-ccd4-4689-9a6b-9b4fc556d5e4@kernel.org>
- <gfhlyvoefcsvtjuxfo75qeham272cc5g2r3npjenzs5esjifiy@ro7dtkpxwizk>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
- cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
- JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
- gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
- J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
- NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
- BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
- vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
- Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
- TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzSVLcnp5c3p0b2Yg
- S296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+wsGPBBMBCgA5AhsDBgsJCAcDAgYVCAIJCgsE
- FgIDAQIeAQIXgBYhBJvQfg4MUfjVlne3VBuTQ307QWKbBQJp2mE8AAoJEBuTQ307QWKbeaIP
- /ihHTkTW4KsN/DQ945JJbyu5tI0J80Wue7QyyLPglyKfhgb5cLLNPpOC8cCIJsc7+W3i2P38
- s2c1cOH6CYGE7E9ur3Vfme8NW2S2I/Z8VC7bZnzyS23wT17LrsdS/qCpx4o8U+pt/xdXDKph
- EGRYrIEmMpUWvyYzyYKGIe25FtaayIIKpq8eZYyFcp2f/sG5IkOW5uZzHPMPdcm87jU7fyuQ
- rAU2vx9r+ulUfQ/q9Z2roC/ode3l7t2pN7BCBCsUDp6JCrUyZrtT1e7EbA0ZRP3aOBNk2P2E
- DQOgJGjGdO5Yx2Y9LFtltu6JbsBJHi1syGRX3AtQYOMc4Y1WGoeZJmMlvKj2ZqqXNkcWi2DS
- IQEWB0uW6CqFsBBIMGDa+6OzdaVO/uAVXWDWml02Men3CILdI1MbVjoh8ECqYUY7OQ+JJvNN
- vnliuq5WM3Ghd3jg/LZZrxXjdIginRHFQCjIJYLKpLZWm1/iDFedcfzqRNYmTtqscdCNHW41
- oT3Z7BmO9xwdjuwBS6nmS6JJwkbf5Ot2QR4pB/DRU7ZwjT1qHe+9r9gF32wXVQatHNGK/VVu
- sfwOnkdxCWkp/qb2gdQRmZh+SedStWshigH6sNfuHBloF/q+hjMRc8b2m326OZdrbSHwY1Sz
- vti8Hn7n8NjdHO9LKB7BIdjkA9DA5WsqOuVCzsFNBFVDXDQBEADNkrQYSREUL4D3Gws46JEo
- Z9HEQOKtkrwjrzlw/tCmqVzERRPvz2Xg8n7+HRCrgqnodIYoUh5WsU84N03KlLueMNsWLJBv
- BaubYN4JuJIdRr4dS4oyF1/fQAQPHh8Thpiz0SAZFx6iWKB7Qrz3OrGCjTPcW6eiOMheesVS
- 5hxietSmlin+SilmIAPZHx7n242u6kdHOh+/SyLImKn/dh9RzatVpUKbv34eP1wAGldWsRxb
- f3WP9pFNObSzI/Bo3kA89Xx2rO2roC+Gq4LeHvo7ptzcLcrqaHUAcZ3CgFG88CnA6z6lBZn0
- WyewEcPOPdcUB2Q7D/NiUY+HDiV99rAYPJztjeTrBSTnHeSBPb+qn5ZZGQwIdUW9YegxWKvX
- XHTwB5eMzo/RB6vffwqcnHDoe0q7VgzRRZJwpi6aMIXLfeWZ5Wrwaw2zldFuO4Dt91pFzBSO
- IpeMtfgb/Pfe/a1WJ/GgaIRIBE+NUqckM+3zJHGmVPqJP/h2Iwv6nw8U+7Yyl6gUBLHFTg2h
- YnLFJI4Xjg+AX1hHFVKmvl3VBHIsBv0oDcsQWXqY+NaFahT0lRPjYtrTa1v3tem/JoFzZ4B0
- p27K+qQCF2R96hVvuEyjzBmdq2esyE6zIqftdo4MOJho8uctOiWbwNNq2U9pPWmu4vXVFBYI
- GmpyNPYzRm0QPwARAQABwsF2BBgBCgAgAhsMFiEEm9B+DgxR+NWWd7dUG5NDfTtBYpsFAmna
- YUkACgkQG5NDfTtBYptX+BAApg32CkxwNucNEi8WfWA8oKkW0y8YDuY6ORMo9FWNGiT/OTy0
- vyJrLocrpn86zwfjVp+eCrssPYh8eqJfnWqmYv6ACQtHPYzPZQ3mSo8H97Z01oUxITzCxpXm
- ZkLgPIqtDPcC2E3dPM/fVxcyowM8XsaMA9wcsaUYrta8toOq2b9tKcjleKMfMrm0gQ9u7wUc
- QbLkwj6TCLOwucb07GXzLTNF9PZmaDUpKAZjMjmrW+le+SFvQbhamx0rxLWPR0NWntXpbCn+
- +ACch03p/JyTBVktxFsFyCt7pTPE1kEaeuXBTe/a2D9iQvRxRW19LvuO2e59/u1wYUiH/orz
- wbIC2S4dBsPAPihL3ztOU1yE86GPyQtSE0kU+/7snnLt4QGi6PChf3t5gnNjAzjUUovO8rgI
- c+5yN5heq5loYHgK6OQ9OlHzsPHO9e9MOQcKlFycs1pyijFGzDwdNUm/SchK8iWT2QApTx4A
- K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
- n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
- qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <gfhlyvoefcsvtjuxfo75qeham272cc5g2r3npjenzs5esjifiy@ro7dtkpxwizk>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-OriginatorOrg: sct-15-20-9412-4-msonline-outlook-a91ca.templateTenant
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: OS7P301MB1784.JPNP301.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-CrossTenant-Network-Message-Id: 325dc3d2-6f32-45b8-8c5a-08def2f01564
+X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Aug 2026 12:50:09.7635
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYYP301MB1479
 
-On 05/08/2026 14:09, Manivannan Sadhasivam wrote:
-> On Sat, Aug 01, 2026 at 05:49:53PM +0200, Krzysztof Kozlowski wrote:
->> On 01/08/2026 17:31, Rahul Samana wrote:
->>>
->>>
->>> On 01-08-2026 20:18, Krzysztof Kozlowski wrote:
->>>> On 31/07/2026 17:51, Rahul Samana wrote:
->>>>>
->>>>>
->>>>> On 31-07-2026 20:34, Krzysztof Kozlowski wrote:
->>>>>> On 31/07/2026 16:45, Rahul Samana wrote:
->>>>>>>
->>>>>>>
->>>>>>> On 31-07-2026 15:16, Krzysztof Kozlowski wrote:
->>>>>>>> On Mon, Jul 27, 2026 at 09:15:01PM +0530, Rahul Samana wrote:
->>>>>>>>> QCC2072 can be used on M.2 E-key cards where the card power resources are
->>>>>>>>> described by the pcie-m2-e-connector node. In that setup, the M.2 power
->>>>>>>>> sequencing provider creates the Bluetooth serdev child after matching the
->>>>>>>>> QCC2072 PCI function.
->>>>>>>>>
->>>>>>>>> Integrated non-M.2 designs need board-specific power resources. Document
->>>>>>>>> only the compatible for now and leave those properties to be added with
->>>>>>>>> matching driver support.
->>>>>>>>>
->>>>>>>>> Document the qcom,qcc2072-bt compatible used for QCC2072 Bluetooth
->>>>>>>>> controllers connected over UART.
->>>>>>>>>
->>>>>>>>> Signed-off-by: Rahul Samana <rahul.samana@oss.qualcomm.com>
->>>>>>>>
->>>>>>>> NAK, exactly same comments as before.
->>>>>>>>
->>>>>>>> Nothing got improved, although what is weird - original SoB is gone, so
->>>>>>>> this is legally dubious work.
->>>>>>>>
->>>>>>>> Best regards,
->>>>>>>> Krzysztof
->>>>>>>>
->>>>>>>
->>>>>>> Hi Krzysztof,
->>>>>>>
->>>>>>> Thanks for the review.
->>>>>>>
->>>>>>> For the binding contents, I tried to capture the current scope in the binding
->>>>>>> description itself. This series supports QCC2072 only as an M.2 E-key card,
->>>>>>> where the card power resources are described by the pcie-m2-e-connector node
->>>>>>> and the M.2 pwrseq provider creates the Bluetooth serdev child.
->>>>>>>
->>>>>>> The binding also says:
->>>>>>>
->>>>>>>   Integrated non-M.2 designs require board-specific power resources. Those
->>>>>>>   properties, together with a static devicetree example, should be added when
->>>>>>>   integrated non-M.2 support is added.
->>>>>>
->>>>>> Bindings must be complete and your driver support is irrelevant here.
->>>>>>
->>>>>> If you claim this is a PCI device thus you do not need any resources,
->>>>>> then the binding is not needed either. PCI devices are enumerable. And
->>>>>> to prove it: look at your DTS. Do you see qcom,qcc2072-bt being used? No.
->>>>>>
->>>>>>>
->>>>>>> We do not currently have an integrated non-M.2 QCC2072 design, so I do not
->>>>>>> have board-specific regulator supplies to document for that topology.
->>>>>>>
->>>>>>> Could you please suggest how you would prefer this binding to be handled for
->>>>>>> the current M.2-only use case? 
->>>>>>
->>>>>> Drop the binding, you do not need it.
->>>>>>
->>>>>> Anyway the problem is that more comments were ignored.
->>>>>>
->>>>>
->>>>> Hi Krzysztof,
->>>>>
->>>>> Just to clarify the reason for adding this binding in v2: 
->>>>> v1 did not add a binding because this series only targets the M.2 use case.
->>>>>
->>>>> I added the minimal binding in v2 because checkpatch reported
->>>>> qcom,qcc2072-bt as an undocumented compatible, and I interpreted the request
->>>>> to fix the checkpatch warnings as requiring this compatible to be documented.
->>>>> I also had the earlier feedback in mind, where the indirect
->>>>> qcom,qcc2072-bt compatible was pushed back because it was undocumented:
->>>>>
->>>>> https://lore.kernel.org/all/20260703-eliza_evk-v1-3-7624440bd76d@oss.qualcomm.com/
->>>>>
->>>>> Based on your clarification here, I will drop the binding patch in v3 and
->>>>> keep qcom,qcc2072-bt only as the pwrseq-created child compatible for this
->>>>> M.2 case.
->>>>
->>>> My previous statement is also valid, please read entire threads.
->>>>
->>>> You cannot have undocumented qcom,qcc2072-bt.
->>>>
->>>> I ask you to drop both, because they are not needed. But feel free to
->>>> prove me wrong, see my first paragraph in the previous reply.
->>>>
->>>>
->>> The PCIe M.2 power sequencing driver, pwrseq-pcie-m2.c, uses
->>> pwrseq_m2_pci_ids to translate the enumerated PCI function into the
->>> Bluetooth compatible used for the generated serdev child.
->>>
->>> For example, WCN7850 maps PCI ID 17cb:1107 to qcom,wcn7850-bt, then hci_qca
->>> matches that compatible to select qca_soc_data_wcn7850.
->>>
->>> For QCC2072, pwrseq-pcie-m2.c matches PCI ID 17cb:1112 and creates the
->>> generated Bluetooth serdev child with compatible "qcom,qcc2072-bt". The
->>> hci_qca driver then matches "qcom,qcc2072-bt" and uses qca_soc_data_qcc2072
->>> as the controller-specific data.
->>
->> The purpose of Devicetree is not to describe Linux internal driver
->> matching. Do not use compatibles for that.
->>
->>
->>>
->>> That match data is needed by hci_qca to select the QCC2072 soc_type,
->>> firmware/NVM naming, calibration handling, and capabilities. Without some
->>> identity being passed from the PCI match to the generated serdev child,
->>> hci_qca cannot distinguish QCC2072 from the other Qualcomm UART Bluetooth
->>> controllers on this path.
->>>
->>> Please correct me if I misunderstood the concern or if you are asking for
->>> this identity to be passed from pwrseq-pcie-m2.c to hci_qca through a
->>> different mechanism.
->>>
->>> I can drop the binding patch, but unless there is a preferred alternative
->>> mechanism, I think we still need the pwrseq-pcie-m2 QCC2072 PCI ID support
->>> from patch 3 so the power sequencing driver can pass the QCC2072 identity
->>> into hci_qca through the generated serdev child:
->>
->> You have plenty of options, starting from what is very common already -
->> driver name used by MFD or aux devices.
->>
-> 
-> It is not just a driver matching problem, but ensuring that we properly describe
-> the BT device in DT. Since the BT interface of the M.2 device is not
-
-This device does not exist in DT. This is the problem which started my
-entire investigation and above email.
-
-I am happy to see proofs of it existing in DTS.
-
-My proof:
-1. copy-paste the compatible (qcom,qcc2072-bt) from the binding.
-2. Open each DTS patch and look for that compatible: no results.
-
-
-
-> discoverable, we are currently using the PCIe IDs of the M.2 device to create
-> the BT node dynamically under UART node using OF_DYNAMIC as proposed in this
-> patch which got merged already [1]. Then we also create the serdev device and
-> allow the existing BT hci_qca driver to probe and make use of the created DT
-> node.
-
-Your Linux drivers are not supposed to create internal OF for regular
-DT. Please drop that patch. I do not get why that patch was merged
-without any DT approval.
-
-DT is not representation of internal device driver instantiation mechanism.
-
-Best regards,
-Krzysztof
+From 7580a1d391863c24750dab4900249dcfb9fc1626 Mon Sep 17 00:00:00 2001=0A=
+From: UEFI-code <zhuoshizhang@hotmail.com>=0A=
+Date: Wed, 5 Aug 2026 20:32:40 +0900=0A=
+Subject: [PATCH] ARM: dts: qcom: add Nokia Lumia 920=0A=
+=0A=
+Add basic Device Tree support for the Nokia Lumia 920.=0A=
+=0A=
+Currently tested:=0A=
+- eMMC=0A=
+- EFI GOP framebuffer=0A=
+- initramfs boot=0A=
+=0A=
+USB has partial functionality and other peripherals=0A=
+remain untested.=0A=
+=0A=
+Signed-off-by: UEFI-code <zhuoshizhang@hotmail.com>=0A=
+---=0A=
+ .../devicetree/bindings/arm/qcom.yaml         |   1 +=0A=
+ arch/arm/boot/dts/qcom/Makefile               |   1 +=0A=
+ .../boot/dts/qcom/qcom-msm8960-lumia-920.dts  | 361 ++++++++++++++++++=0A=
+ 3 files changed, 363 insertions(+)=0A=
+ create mode 100644 arch/arm/boot/dts/qcom/qcom-msm8960-lumia-920.dts=0A=
+=0A=
+diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentatio=
+n/devicetree/bindings/arm/qcom.yaml=0A=
+index adbfaea32..31532fbbe 100644=0A=
+--- a/Documentation/devicetree/bindings/arm/qcom.yaml=0A=
++++ b/Documentation/devicetree/bindings/arm/qcom.yaml=0A=
+@@ -204,6 +204,7 @@ properties:=0A=
+           - enum:=0A=
+               - qcom,msm8960-cdp=0A=
+               - samsung,expressatt=0A=
++              - lumia,920=0A=
+           - const: qcom,msm8960=0A=
+ =0A=
+       - items:=0A=
+diff --git a/arch/arm/boot/dts/qcom/Makefile b/arch/arm/boot/dts/qcom/Makef=
+ile=0A=
+index 3dfb1c8ce..9a7fa44a8 100644=0A=
+--- a/arch/arm/boot/dts/qcom/Makefile=0A=
++++ b/arch/arm/boot/dts/qcom/Makefile=0A=
+@@ -31,6 +31,7 @@ dtb-$(CONFIG_ARCH_QCOM) +=3D \=0A=
+ 	qcom-msm8916-samsung-serranove.dtb \=0A=
+ 	qcom-msm8960-cdp.dtb \=0A=
+ 	qcom-msm8960-samsung-expressatt.dtb \=0A=
++	qcom-msm8960-lumia-920.dtb \=0A=
+ 	qcom-msm8974-lge-nexus5-hammerhead.dtb \=0A=
+ 	qcom-msm8974-sony-xperia-rhine-amami.dtb \=0A=
+ 	qcom-msm8974-sony-xperia-rhine-honami.dtb \=0A=
+diff --git a/arch/arm/boot/dts/qcom/qcom-msm8960-lumia-920.dts b/arch/arm/b=
+oot/dts/qcom/qcom-msm8960-lumia-920.dts=0A=
+new file mode 100644=0A=
+index 000000000..a5c8d1a5f=0A=
+--- /dev/null=0A=
++++ b/arch/arm/boot/dts/qcom/qcom-msm8960-lumia-920.dts=0A=
+@@ -0,0 +1,361 @@=0A=
++// SPDX-License-Identifier: GPL-2.0=0A=
++#include <dt-bindings/input/input.h>=0A=
++=0A=
++#include "qcom-msm8960.dtsi"=0A=
++=0A=
++/ {=0A=
++	model =3D "Nokia Lumia 920";=0A=
++	compatible =3D "nokia,lumia920", "qcom,msm8960";=0A=
++};=0A=
++=0A=
++&soc {=0A=
++    qfprom: qfprom@700000 {=0A=
++        compatible =3D "qcom,msm8960-qfprom", "qcom,qfprom";=0A=
++        reg =3D <0x00700000 0x1000>;=0A=
++=0A=
++        #address-cells =3D <1>;=0A=
++        #size-cells =3D <1>;=0A=
++        ranges;=0A=
++=0A=
++        tsens_calib: calib@404 {=0A=
++            reg =3D <0x404 0x10>;=0A=
++        };=0A=
++=0A=
++        tsens_backup: backup_calib@414 {=0A=
++            reg =3D <0x414 0x10>;=0A=
++        };=0A=
++    };=0A=
++};=0A=
++=0A=
++&gcc {=0A=
++    compatible =3D "qcom,gcc-msm8960", "syscon";=0A=
++    tsens: thermal-sensor {=0A=
++        compatible =3D "qcom,msm8960-tsens";=0A=
++=0A=
++        nvmem-cells =3D <&tsens_calib>, <&tsens_backup>;=0A=
++        nvmem-cell-names =3D "calib", "calib_backup";=0A=
++=0A=
++        interrupts =3D <GIC_SPI 178 IRQ_TYPE_LEVEL_HIGH>;=0A=
++        interrupt-names =3D "uplow";=0A=
++=0A=
++        #qcom,sensors =3D <11>;=0A=
++        #thermal-sensor-cells =3D <1>;=0A=
++    };=0A=
++};=0A=
++=0A=
++&gsbi1 {=0A=
++	qcom,mode =3D <GSBI_PROT_SPI>;=0A=
++	pinctrl-names =3D "default";=0A=
++	pinctrl-0 =3D <&spi1_default>;=0A=
++	status =3D "okay";=0A=
++};=0A=
++=0A=
++&gsbi1_spi {=0A=
++	status =3D "okay";=0A=
++};=0A=
++=0A=
++&gsbi5 {=0A=
++	qcom,mode =3D <GSBI_PROT_I2C_UART>;=0A=
++	status =3D "okay";=0A=
++};=0A=
++=0A=
++&gsbi5_serial {=0A=
++	status =3D "okay";=0A=
++};=0A=
++=0A=
++&msmgpio {=0A=
++	spi1_default: spi1-default-state {=0A=
++		 mosi-pins {=0A=
++			pins =3D "gpio6";=0A=
++			function =3D "gsbi1";=0A=
++			drive-strength =3D <12>;=0A=
++			bias-disable;=0A=
++		 };=0A=
++=0A=
++		 miso-pins {=0A=
++			pins =3D "gpio7";=0A=
++			function =3D "gsbi1";=0A=
++			drive-strength =3D <12>;=0A=
++			bias-disable;=0A=
++		 };=0A=
++=0A=
++		 cs-pins {=0A=
++			pins =3D "gpio8";=0A=
++			function =3D "gsbi1";=0A=
++			drive-strength =3D <12>;=0A=
++			bias-disable;=0A=
++			output-low;=0A=
++		 };=0A=
++=0A=
++		 clk-pins {=0A=
++			pins =3D "gpio9";=0A=
++			function =3D "gsbi1";=0A=
++			drive-strength =3D <12>;=0A=
++			bias-disable;=0A=
++		 };=0A=
++	};=0A=
++};=0A=
++=0A=
++&pmicintc {=0A=
++	keypad@148 {=0A=
++		linux,keymap =3D <=0A=
++			MATRIX_KEY(0, 0, KEY_VOLUMEUP)=0A=
++			MATRIX_KEY(0, 1, KEY_VOLUMEDOWN)=0A=
++			MATRIX_KEY(0, 2, KEY_CAMERA_FOCUS)=0A=
++			MATRIX_KEY(0, 3, KEY_CAMERA)=0A=
++			>;=0A=
++		keypad,num-rows =3D <1>;=0A=
++		keypad,num-columns =3D <5>;=0A=
++	};=0A=
++};=0A=
++=0A=
++&rpm {=0A=
++	regulators {=0A=
++		compatible =3D "qcom,rpm-pm8921-regulators";=0A=
++		vin_lvs1_3_6-supply =3D <&pm8921_s4>;=0A=
++		vin_lvs2-supply =3D <&pm8921_s4>;=0A=
++		vin_lvs4_5_7-supply =3D <&pm8921_s4>;=0A=
++		vdd_ncp-supply =3D <&pm8921_l6>;=0A=
++		vdd_l1_l2_l12_l18-supply =3D <&pm8921_s4>;=0A=
++		vdd_l21_l23_l29-supply =3D <&pm8921_s8>;=0A=
++		vdd_l24-supply =3D <&pm8921_s1>;=0A=
++		vdd_l25-supply =3D <&pm8921_s1>;=0A=
++		vdd_l27-supply =3D <&pm8921_s7>;=0A=
++		vdd_l28-supply =3D <&pm8921_s7>;=0A=
++=0A=
++		/* Buck SMPS */=0A=
++		pm8921_s1: s1 {=0A=
++			regulator-always-on;=0A=
++			regulator-min-microvolt =3D <1225000>;=0A=
++			regulator-max-microvolt =3D <1225000>;=0A=
++			qcom,switch-mode-frequency =3D <3200000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_s2: s2 {=0A=
++			regulator-min-microvolt =3D <1300000>;=0A=
++			regulator-max-microvolt =3D <1300000>;=0A=
++			qcom,switch-mode-frequency =3D <1600000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_s3: s3 {=0A=
++			regulator-min-microvolt =3D <500000>;=0A=
++			regulator-max-microvolt =3D <1150000>;=0A=
++			qcom,switch-mode-frequency =3D <4800000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_s4: s4 {=0A=
++			regulator-always-on;=0A=
++			regulator-min-microvolt =3D <1800000>;=0A=
++			regulator-max-microvolt =3D <1800000>;=0A=
++			qcom,switch-mode-frequency =3D <1600000>;=0A=
++			bias-pull-down;=0A=
++			qcom,force-mode =3D <QCOM_RPM_FORCE_MODE_AUTO>;=0A=
++		};=0A=
++=0A=
++		pm8921_s7: s7 {=0A=
++			regulator-min-microvolt =3D <1150000>;=0A=
++			regulator-max-microvolt =3D <1150000>;=0A=
++			qcom,switch-mode-frequency =3D <3200000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_s8: s8 {=0A=
++			regulator-always-on;=0A=
++			regulator-min-microvolt =3D <2050000>;=0A=
++			regulator-max-microvolt =3D <2050000>;=0A=
++			qcom,switch-mode-frequency =3D <1600000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		/* PMOS LDO */=0A=
++		pm8921_l1: l1 {=0A=
++			regulator-always-on;=0A=
++			regulator-min-microvolt =3D <1050000>;=0A=
++			regulator-max-microvolt =3D <1050000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l2: l2 {=0A=
++			regulator-min-microvolt =3D <1200000>;=0A=
++			regulator-max-microvolt =3D <1200000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l3: l3 {=0A=
++			regulator-min-microvolt =3D <3075000>;=0A=
++			regulator-max-microvolt =3D <3075000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l4: l4 {=0A=
++			regulator-always-on;=0A=
++			regulator-min-microvolt =3D <1800000>;=0A=
++			regulator-max-microvolt =3D <1800000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l5: l5 {=0A=
++			regulator-min-microvolt =3D <2950000>;=0A=
++			regulator-max-microvolt =3D <2950000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l6: l6 {=0A=
++			regulator-min-microvolt =3D <2950000>;=0A=
++			regulator-max-microvolt =3D <2950000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l7: l7 {=0A=
++			regulator-always-on;=0A=
++			regulator-min-microvolt =3D <1850000>;=0A=
++			regulator-max-microvolt =3D <2950000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l8: l8 {=0A=
++			regulator-min-microvolt =3D <2800000>;=0A=
++			regulator-max-microvolt =3D <3000000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l9: l9 {=0A=
++			regulator-min-microvolt =3D <3000000>;=0A=
++			regulator-max-microvolt =3D <3000000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l10: l10 {=0A=
++			regulator-min-microvolt =3D <3000000>;=0A=
++			regulator-max-microvolt =3D <3000000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l11: l11 {=0A=
++			regulator-min-microvolt =3D <2850000>;=0A=
++			regulator-max-microvolt =3D <2850000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l12: l12 {=0A=
++			regulator-min-microvolt =3D <1200000>;=0A=
++			regulator-max-microvolt =3D <1200000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l14: l14 {=0A=
++			regulator-min-microvolt =3D <1800000>;=0A=
++			regulator-max-microvolt =3D <1800000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l15: l15 {=0A=
++			regulator-min-microvolt =3D <1800000>;=0A=
++			regulator-max-microvolt =3D <2950000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l16: l16 {=0A=
++			regulator-min-microvolt =3D <2800000>;=0A=
++			regulator-max-microvolt =3D <2800000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l17: l17 {=0A=
++			regulator-min-microvolt =3D <1800000>;=0A=
++			regulator-max-microvolt =3D <2950000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l18: l18 {=0A=
++			regulator-min-microvolt =3D <1300000>;=0A=
++			regulator-max-microvolt =3D <1300000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l21: l21 {=0A=
++			regulator-min-microvolt =3D <1900000>;=0A=
++			regulator-max-microvolt =3D <1900000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l22: l22 {=0A=
++			regulator-min-microvolt =3D <2750000>;=0A=
++			regulator-max-microvolt =3D <2750000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l23: l23 {=0A=
++			regulator-always-on;=0A=
++			regulator-min-microvolt =3D <1800000>;=0A=
++			regulator-max-microvolt =3D <1800000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l24: l24 {=0A=
++			regulator-min-microvolt =3D <750000>;=0A=
++			regulator-max-microvolt =3D <1150000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_l25: l25 {=0A=
++			regulator-always-on;=0A=
++			regulator-min-microvolt =3D <1250000>;=0A=
++			regulator-max-microvolt =3D <1250000>;=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		/* Low Voltage Switch */=0A=
++		pm8921_lvs1: lvs1 {=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_lvs2: lvs2 {=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_lvs3: lvs3 {=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_lvs4: lvs4 {=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_lvs5: lvs5 {=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_lvs6: lvs6 {=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_lvs7: lvs7 {=0A=
++			bias-pull-down;=0A=
++		};=0A=
++=0A=
++		pm8921_ncp: ncp {=0A=
++			regulator-min-microvolt =3D <1800000>;=0A=
++			regulator-max-microvolt =3D <1800000>;=0A=
++			qcom,switch-mode-frequency =3D <1600000>;=0A=
++		};=0A=
++	};=0A=
++};=0A=
++=0A=
++/* eMMC */=0A=
++&sdcc1 {=0A=
++	status =3D "okay";=0A=
++};=0A=
++=0A=
++// usb1=0A=
++&usb1 {=0A=
++    status =3D "okay";=0A=
++};=0A=
++=0A=
++&usb_hs1_phy {=0A=
++	v3p3-supply =3D <&pm8921_l3>;=0A=
++	v1p8-supply =3D <&pm8921_l4>;=0A=
++};=0A=
+\ No newline at end of file=0A=
+-- =0A=
+2.43.7=0A=
+=0A=
