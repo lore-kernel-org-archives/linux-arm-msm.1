@@ -1,456 +1,88 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D87B367B7B
-	for <linux-arm-msm@vger.kernel.org>; Thu,  6 Aug 2026 16:32:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2CE8537B021;
+	Thu,  6 Aug 2026 16:48:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786033926; cv=none; b=s74MtDxts/hL8PwmqFOY2954DmfTsp4osXTTeiSn9lu43UfjdzURWLLA6pdVx0TKbPldgapt61693gESOd/NkpBRqRcNdmyoslEDBW20V4p3KcinK8KucGtKbfL3M3aOnsaAX5JLzgdYLIfnVDo6PuSocEzSYN+ww6QIq35Ji+E=
+	t=1786034903; cv=none; b=YNyqgHHJt8QzyIofnvCekJNiJcJhJB7matuETl1c2yo8WJmF4mUXJFUny8PtY2cGcOgS4AeUBzJKyMwswAhKT0tM4Ve84HeHcXM99IntzAoi/ahwOc7dMsXtXjV8Nv68D9Vd5VvyTSwS2I/Alnd5YUnMLNrcYV3MP7JSWr6BxU4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786033926; c=relaxed/simple;
-	bh=KoKgDL1uWIdiHjw9Mk2+j0kjWHBkfOqHFyVViOWZbU0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=PsHpv6eA4i5DM1q6Wjid4rSN9GodVSEZPt95GbVBPxTSYSLg/9lNc8QTPvo9MmGpHdJXr0HTqETCYsihodkN9WFs8Ec3DT1ClhLy2NkG1cE4KTTTUphqzU707NucA5YaPgNOpdb46nHZ/5xcIl2T4r6w1ge2kOl6EDLTSS8q8a0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=E8YvwV0V; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CZTeUa2w; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1786034903; c=relaxed/simple;
+	bh=Wc4gnv8DquQhu28/lYZSm27tLoSvg9yENhK3oCIJuEA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=YHWCc75p9jTv3A/w+n+C/xOYhK3W6WdY7WSzTzTycdEui7cGULXeXGCkNoOa2UsqTmY9FhtoP7ytJeROaWlexdx8Fpmj8udFejyWJzPdfEcSTP1jgY2Ils+OWiD28QLKPCvv/dBVB8zz0Kjk3p7aFTYhJ7VNgq0xi5YUXIMg5EY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=FI7jMf6N; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="E8YvwV0V";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CZTeUa2w"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 676Ens3b2575174
-	for <linux-arm-msm@vger.kernel.org>; Thu, 6 Aug 2026 16:32:03 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	2WmlI4F57lwRnXOLo/xmw4pqD4xvVd/TDpNz3dSJTm0=; b=E8YvwV0Vx1dNq4K3
-	EFeAYbCG2TiVM1tIyIOsNCmVZI/nw5lBl/bxM5vMvcEAoz0w6OvPP6+h35DZb3Rp
-	mp4T/o9hmJkhnkd2SJjIMZTCX3wrQCKKfzDsr7uDOw43oHFK0jl1I/hLnZF/NWgu
-	yOp3KQLqesIMABaYzM4cogRHV2TEltm0UteOtnWOVaj2O0eTBb6p70hF4l+tx5Fl
-	zybp4mlXNZnC4COQxzVWMJY4AXQXwhZ7NB3Puf+XqQA9JnSQUA1Qps3UzQd9whCf
-	QMvvLWz3KezVbsu/mONeND8yhNI7XNssqMei/gVflYcvjId1fkvoNUKicnobsJux
-	Q2/XgA==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvjuckcgu-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 16:32:03 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38dbf293831so4768690a91.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 09:32:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786033921; x=1786638721; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=2WmlI4F57lwRnXOLo/xmw4pqD4xvVd/TDpNz3dSJTm0=;
-        b=CZTeUa2wGRu1ZDZ/rVRfOwJe/jtTKFQ9FM5xiWpGYMHY/et5/9wJl/PHgebsqqnGxp
-         nRsdnFctguaIJxZ8iWvbUdDrOUw1maWun8wSnNSQeNow45eiOrMgSseaSE9z5oMgDBqq
-         rpDSG1qhnwCbdXzzDGx9x8KqVt9gbgn91CABBeIoBqAUQ7K4yy6TgvZF8RV8QcUrr2QL
-         1C5gMuEv8OXNK2jpNmyuG2BGUbO0EHl1EqOoQjjLnntdhKRKxvwm7kSLr+61P85SglXP
-         ZQp40IKi+oW+IOcsrMKg1tKvORJLZo2xMECvJkgCiowQF1cYfYdiLvD3sVnymaZ5Jxkr
-         B4Lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786033921; x=1786638721;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=2WmlI4F57lwRnXOLo/xmw4pqD4xvVd/TDpNz3dSJTm0=;
-        b=XpRopx/Eakq07KpShfsyZlnJMEFv+8Nr+O6xxby5doPvove3kVKfPdDyM8Rm2d5vzp
-         D4LtnrOHF5zghpZQjT5HGSCy77wpoOT0az2sYsX6sY1pfYnpo74/CiEMMN6UVp4hB0iX
-         P77rXldM6lJ+0w5NrsjS8YFfdDl9h1k8BtZLNyMyxGzE31Jb9cRpACFMMmxgc1rqHQ56
-         r4Fu4jUigLMqS1RtyCHacN2tHAWB2F1EhwEbW/l5g54SiD9LDk5Q9P10tZtr8BeqhJdb
-         GaL2RgpvAKAAzALmZ6bOWNjv2qk++sT16/erc2vjd3DNQvPEOLI9ailBjxK+CAhXX3y3
-         ko8Q==
-X-Gm-Message-State: AOJu0Yx5tny0y5IgT/FztZD3/xo3h2kmVzoxU+tqPLnk6kNi5c9T9OLN
-	HrFYdQ25NqJcJNm0nLMA04vcpXOtFIbmLkDQ447Xa86GMOculT/u/HfSdFIzgXoBZJSssmySlXz
-	+GxVoZqPv9kCpAI1oCaVuJq/i5m+TkhKfNdSsuLFmlKMtSLtYRAYqCVVvYeOsicsnU4+kLuYMRa
-	I9
-X-Gm-Gg: AR+sD12fv4+798c7io9wmF/lBUhxIyEDMcchfbyXfu8QpXyafxGqFJ8/kCJ0Mxk0/e9
-	yWhatRmeT8rZh/HECTfjx7n+kDXCmB+MCukibXF+4DQwvVpJO0dlCQI2zBWHlTMqj2RCPVqVzoD
-	MUZfITaa6SWV5nnLHJlCeq5Zw2QeXe6HWZhH2NTmcP7mj5kb4CpSDPYxzWET7l1vNCrJPOJDPRq
-	MxUz5GYsmc5dl70dqDSQu3XCr7Ysci/ubwcpMiUDwrVsUs1lny1LwA449TdaRLU2nDbT39Jw+J/
-	VqeOr4qARALGrsBjyJf1Ut97gABcMw8ZofkVK1sMg1FJ9BXiVsTRgCEn2hct5NzEdBnvubyaXKC
-	bzqxetZsmWz5KMc9xJifUPYSZ4UwT7/Zb
-X-Received: by 2002:a17:90b:264b:b0:38a:c3f:3b87 with SMTP id 98e67ed59e1d1-3903c58a6femr17496039a91.12.1786033921312;
-        Thu, 06 Aug 2026 09:32:01 -0700 (PDT)
-X-Received: by 2002:a17:90b:264b:b0:38a:c3f:3b87 with SMTP id 98e67ed59e1d1-3903c58a6femr17495977a91.12.1786033920816;
-        Thu, 06 Aug 2026 09:32:00 -0700 (PDT)
-Received: from hu-anantiwa-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39085f2b2fdsm1853168a91.12.2026.08.06.09.31.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 06 Aug 2026 09:32:00 -0700 (PDT)
-From: Anand Tiwari <anand.tiwari@oss.qualcomm.com>
-Date: Thu, 06 Aug 2026 22:01:21 +0530
-Subject: [PATCH 2/2] arm64: dts: qcom: purwa-iot-evk: Add eDP display
- overlay
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="FI7jMf6N"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2C6401F000E9;
+	Thu,  6 Aug 2026 16:48:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786034887;
+	bh=Wc4gnv8DquQhu28/lYZSm27tLoSvg9yENhK3oCIJuEA=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=FI7jMf6NrGR/3CoFMCIq155vv3yeKTcdU1Wn5aR3k774GQPdNhP2bS/LVYi7RNTij
+	 MsfCYC5h3oclS6an4m6C6Uehjoixnc73xIUm/bi2Ea1410FQ4ZxJX048qcHZpGrdyL
+	 OLYvgdpvWug5w9rwF24etTUuPQeS9iCOsr5bTfKVLTxVkNfZMLz6nDrfPLAye6v0i2
+	 YTxYUmwrAKhNRk9c1PRctINIWEtOm3X3TCqJ3A/xSzcKnkV5q6R9Gpvj0sqtU98guP
+	 DM37KzW+gPtym6Slt3u8l7ko/HlhJblChu5/MP4Hf5/IVTN/jfBB0QENb58Dghs601
+	 siaFcUbjI/dlQ==
+Date: Thu, 6 Aug 2026 17:47:57 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Praveen Talari <praveen.talari@oss.qualcomm.com>
+Cc: konrad.dybcio@oss.qualcomm.com, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Andy Gross <agross@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	chandana.chiluveru@oss.qualcomm.com,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	linux-arm-msm@vger.kernel.org, linux-spi@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 1/2] dt-bindings: spi: qcom-geni: Document device-gpios
+ property
+Message-ID: <50834ed2-a3bd-40c6-bfe5-98a7f81856e6@sirena.org.uk>
+References: <20260806-use_gpio_to_notify_master_of_spi_target_activity-v1-0-c363a9b5df69@oss.qualcomm.com>
+ <20260806-use_gpio_to_notify_master_of_spi_target_activity-v1-1-c363a9b5df69@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260806-edp_overlay_for-next-v1-2-c3aebbc81f38@oss.qualcomm.com>
-References: <20260806-edp_overlay_for-next-v1-0-c3aebbc81f38@oss.qualcomm.com>
-In-Reply-To: <20260806-edp_overlay_for-next-v1-0-c3aebbc81f38@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Anand Tiwari <anand.tiwari@oss.qualcomm.com>,
-        venkata.valluru@oss.qualcomm.com, vishnu.saini@oss.qualcomm.com,
-        Jessica Zhang <jesszhan0024@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1786033907; l=7310;
- i=anand.tiwari@oss.qualcomm.com; s=20260717; h=from:subject:message-id;
- bh=KoKgDL1uWIdiHjw9Mk2+j0kjWHBkfOqHFyVViOWZbU0=;
- b=H/wyn8Pld1A+FIkEkkQ13tjhyYBP6hJWOQ3hrLd1CW/PZtDulMqh+bCi9pstIolbkAy+6UlxJ
- L4s3YN/MPkjBI+8Xed+xf/O5eph5G6lR38C41donszltZNevONYLnRM
-X-Developer-Key: i=anand.tiwari@oss.qualcomm.com; a=ed25519;
- pk=ygURjl6LxwG8EhgPNHYYgCZLsaXFgWZZoHRRyud5B40=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDEyOSBTYWx0ZWRfX6g3tSyIKHHxN
- lkLNxj/2h91f3qPT22iQUINveAiveTYc4lGAezHPX+smgxJWbz0g6/a/51kDRqSEM5BwjCfZUaK
- j6aWeQMiAUP6WU7jM7kaIczlMgnnRZ4=
-X-Proofpoint-GUID: 0HrxcczCYyDL0BtMdtyREHHlJnvdv0Ta
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDEyOSBTYWx0ZWRfX2nADT7moVYg0
- i7u+AQBBhQQDJXx6HQd7vpFD2hiKXQlvb7tx8nYiJdKn63bmCeSX0BbhtjXvSBkN3/TQmyV3NsS
- GXCKB4hk0yW3BtO/TnA3WPSf/nFwJcfrmUaXWcZicCAlmiIi6PeN17RYYr4JKqyd9so4y1P4wdk
- E1vLWd07wQVfyaKSbVuajOnKAL4PV0lu1rQkZyVnrW7EoIqBqRZCsece775SaLFF7uKfE3N6cWa
- tTBHDMidERF1TvsxF2WZKkeYK6B4JF4/0wXjFzgZo6h9G2/+NWkDBqPzEZX9BzV7BBiQSEqxYta
- p7z9wkciBFPvRtVRaCLfKGuISQPA0kqz6owbN+vwxjoLnMJrWqaTuki2DXXUeZmO6SnujeHiOlL
- pzoT7AXSyVZb9X1zfXbZUeIBBsnBbMkAdYCZD1BTL3EZ/l0W8ISBkeaVffjlG7bI3AAzk5gUUvF
- fB2UVvI84BviXP/6DKw==
-X-Authority-Analysis: v=2.4 cv=Mo1iLWae c=1 sm=1 tr=0 ts=6a74b703 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=CCRylzDZG6jPrKb_DEwA:9 a=QEXdDO2ut3YA:10
- a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-ORIG-GUID: 0HrxcczCYyDL0BtMdtyREHHlJnvdv0Ta
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-06_01,2026-08-05_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 impostorscore=0 priorityscore=1501 adultscore=0
- malwarescore=0 bulkscore=0 clxscore=1011 suspectscore=0 spamscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608060129
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="N8SVibxcyIJIXZIv"
+Content-Disposition: inline
+In-Reply-To: <20260806-use_gpio_to_notify_master_of_spi_target_activity-v1-1-c363a9b5df69@oss.qualcomm.com>
+X-Cookie: Brain fried -- Core dumped
 
-Move the eDP panel configuration and related power, backlight, and pinctrl
-nodes into a separate overlay. Keep the base DTB suitable for headless
-variants and provide a composite DTB for headed variants.
 
-Signed-off-by: Anand Tiwari <anand.tiwari@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/Makefile               |   3 +
- arch/arm64/boot/dts/qcom/purwa-iot-evk-edp.dtso | 126 ++++++++++++++++++++++++
- arch/arm64/boot/dts/qcom/purwa-iot-evk.dts      | 107 --------------------
- 3 files changed, 129 insertions(+), 107 deletions(-)
+--N8SVibxcyIJIXZIv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index bb0da34983c8..fc954da58402 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -165,6 +165,9 @@ dtb-$(CONFIG_ARCH_QCOM)	+= msm8998-sony-xperia-yoshino-poplar.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= msm8998-xiaomi-sagit.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= purwa-iot-evk.dtb
- 
-+purwa-iot-evk-edp-dtbs	:= purwa-iot-evk.dtb purwa-iot-evk-edp.dtbo
-+dtb-$(CONFIG_ARCH_QCOM)	+= purwa-iot-evk-edp.dtb
-+
- purwa-iot-evk-el2-dtbs	:= purwa-iot-evk.dtb x1-el2.dtbo
- 
- dtb-$(CONFIG_ARCH_QCOM)	+= purwa-iot-evk-el2.dtb
-diff --git a/arch/arm64/boot/dts/qcom/purwa-iot-evk-edp.dtso b/arch/arm64/boot/dts/qcom/purwa-iot-evk-edp.dtso
-new file mode 100644
-index 000000000000..759d05342627
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/purwa-iot-evk-edp.dtso
-@@ -0,0 +1,126 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+/dts-v1/;
-+/plugin/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+
-+&{/} {
-+	backlight: backlight {
-+		compatible = "pwm-backlight";
-+		pwms = <&pmk8550_pwm 0 5000000>;
-+		enable-gpios = <&pmc8380_3_gpios 4 GPIO_ACTIVE_HIGH>;
-+		power-supply = <&vreg_edp_bl>;
-+
-+		pinctrl-0 = <&edp_bl_en>, <&edp_bl_pwm>;
-+		pinctrl-names = "default";
-+	};
-+
-+	vreg_edp_3p3: regulator-edp-3p3 {
-+		compatible = "regulator-fixed";
-+
-+		regulator-name = "VREG_EDP_3P3";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+
-+		gpio = <&tlmm 70 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+
-+		pinctrl-0 = <&edp_reg_en>;
-+		pinctrl-names = "default";
-+
-+		regulator-boot-on;
-+	};
-+
-+	vreg_edp_bl: regulator-edp-bl {
-+		compatible = "regulator-fixed";
-+
-+		regulator-name = "VBL9";
-+		regulator-min-microvolt = <3600000>;
-+		regulator-max-microvolt = <3600000>;
-+
-+		gpio = <&pmc8380_3_gpios 10 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+
-+		pinctrl-0 = <&edp_bl_reg_en>;
-+		pinctrl-names = "default";
-+
-+		regulator-boot-on;
-+	};
-+};
-+
-+&mdss_dp3 {
-+	/delete-property/ #sound-dai-cells;
-+
-+	pinctrl-0 = <&edp0_hpd_default>;
-+	pinctrl-names = "default";
-+
-+	status = "okay";
-+
-+	aux-bus {
-+		panel {
-+			compatible = "edp-panel";
-+
-+			backlight = <&backlight>;
-+			power-supply = <&vreg_edp_3p3>;
-+
-+			port {
-+				edp_panel_in: endpoint {
-+					remote-endpoint = <&mdss_dp3_out>;
-+				};
-+			};
-+		};
-+	};
-+};
-+
-+&mdss_dp3_out {
-+	data-lanes = <0 1 2 3>;
-+	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
-+
-+	remote-endpoint = <&edp_panel_in>;
-+};
-+
-+&mdss_dp3_phy {
-+	vdda-phy-supply = <&vreg_l3j_0p8>;
-+	vdda-pll-supply = <&vreg_l2j_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&pmc8380_3_gpios {
-+	edp_bl_en: edp-bl-en-state {
-+		pins = "gpio4";
-+		function = "normal";
-+		power-source = <1>;
-+		input-disable;
-+		output-enable;
-+	};
-+
-+	edp_bl_reg_en: edp-bl-reg-en-state {
-+		pins = "gpio10";
-+		function = "normal";
-+	};
-+};
-+
-+&pmk8550_gpios {
-+	edp_bl_pwm: edp-bl-pwm-state {
-+		pins = "gpio5";
-+		function = "func3";
-+	};
-+};
-+
-+&pmk8550_pwm {
-+	status = "okay";
-+};
-+
-+&tlmm {
-+	edp_reg_en: edp-reg-en-state {
-+		pins = "gpio70";
-+		function = "gpio";
-+		drive-strength = <16>;
-+		bias-disable;
-+	};
-+};
-diff --git a/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts b/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-index ad503beec1d3..6dde925025dd 100644
---- a/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-+++ b/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-@@ -19,16 +19,6 @@ aliases {
- 		serial1 = &uart14;
- 	};
- 
--	backlight: backlight {
--		compatible = "pwm-backlight";
--		pwms = <&pmk8550_pwm 0 5000000>;
--		enable-gpios = <&pmc8380_3_gpios 4 GPIO_ACTIVE_HIGH>;
--		power-supply = <&vreg_edp_bl>;
--
--		pinctrl-0 = <&edp_bl_en>, <&edp_bl_pwm>;
--		pinctrl-names = "default";
--	};
--
- 	wcd938x: audio-codec {
- 		compatible = "qcom,wcd9385-codec";
- 
-@@ -205,38 +195,6 @@ pmic_glink_ss2_con_sbu_in: endpoint {
- 		};
- 	};
- 
--	vreg_edp_3p3: regulator-edp-3p3 {
--		compatible = "regulator-fixed";
--
--		regulator-name = "VREG_EDP_3P3";
--		regulator-min-microvolt = <3300000>;
--		regulator-max-microvolt = <3300000>;
--
--		gpio = <&tlmm 70 GPIO_ACTIVE_HIGH>;
--		enable-active-high;
--
--		pinctrl-0 = <&edp_reg_en>;
--		pinctrl-names = "default";
--
--		regulator-boot-on;
--	};
--
--	vreg_edp_bl: regulator-edp-bl {
--		compatible = "regulator-fixed";
--
--		regulator-name = "VBL9";
--		regulator-min-microvolt = <3600000>;
--		regulator-max-microvolt = <3600000>;
--
--		gpio = <&pmc8380_3_gpios 10 GPIO_ACTIVE_HIGH>;
--		enable-active-high;
--
--		pinctrl-0 = <&edp_bl_reg_en>;
--		pinctrl-names = "default";
--
--		regulator-boot-on;
--	};
--
- 	vreg_nvme: regulator-nvme {
- 		compatible = "regulator-fixed";
- 
-@@ -962,44 +920,6 @@ &mdss_dp2_out {
- 	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
- };
- 
--&mdss_dp3 {
--	/delete-property/ #sound-dai-cells;
--
--	pinctrl-0 = <&edp0_hpd_default>;
--	pinctrl-names = "default";
--
--	status = "okay";
--
--	aux-bus {
--		panel {
--			compatible = "edp-panel";
--
--			backlight = <&backlight>;
--			power-supply = <&vreg_edp_3p3>;
--
--			port {
--				edp_panel_in: endpoint {
--					remote-endpoint = <&mdss_dp3_out>;
--				};
--			};
--		};
--	};
--};
--
--&mdss_dp3_out {
--	data-lanes = <0 1 2 3>;
--	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
--
--	remote-endpoint = <&edp_panel_in>;
--};
--
--&mdss_dp3_phy {
--	vdda-phy-supply = <&vreg_l3j_0p8>;
--	vdda-pll-supply = <&vreg_l2j_1p2>;
--
--	status = "okay";
--};
--
- &pcie3_port0 {
- 	vpcie12v-supply = <&vreg_pcie_12v>;
- 	vpcie3v3-supply = <&vreg_pcie_3v3>;
-@@ -1128,19 +1048,6 @@ led@2 {
- };
- 
- &pmc8380_3_gpios {
--	edp_bl_en: edp-bl-en-state {
--		pins = "gpio4";
--		function = "normal";
--		power-source = <1>;
--		input-disable;
--		output-enable;
--	};
--
--	edp_bl_reg_en: edp-bl-reg-en-state {
--		pins = "gpio10";
--		function = "normal";
--	};
--
- 	pm_sde7_aux_3p3_en: pcie-aux-3p3-default-state {
- 		pins = "gpio8";
- 		function = "normal";
-@@ -1169,13 +1076,6 @@ usb0_pwr_1p15_reg_en: usb0-pwr-1p15-reg-en-state {
- 	};
- };
- 
--&pmk8550_gpios {
--	edp_bl_pwm: edp-bl-pwm-state {
--		pins = "gpio5";
--		function = "func3";
--	};
--};
--
- &pmk8550_pwm {
- 	status = "okay";
- };
-@@ -1326,13 +1226,6 @@ right_tweeter: speaker@0,1 {
- };
- 
- &tlmm {
--	edp_reg_en: edp-reg-en-state {
--		pins = "gpio70";
--		function = "gpio";
--		drive-strength = <16>;
--		bias-disable;
--	};
--
- 	eusb3_reset_n: eusb3-reset-n-state {
- 		pins = "gpio6";
- 		function = "gpio";
+On Thu, Aug 06, 2026 at 03:43:44PM +0530, Praveen Talari wrote:
+> When operating in SPI target (slave) mode, the GENI SPI controller can
+> use an external GPIO to notify the SPI master about the target's
+> active state.
 
--- 
-2.54.0
+Please submit patches using subject lines reflecting the style for the
+subsystem, this makes it easier for people to identify relevant patches.
+Look at what existing commits in the area you're changing are doing and
+make sure your subject lines visually resemble what they're doing.
+There's no need to resubmit to fix this alone.
 
+--N8SVibxcyIJIXZIv
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmp0ur0ACgkQJNaLcl1U
+h9CzawgAgrRJiB/a+0ACojoiex0a8Ny5N5SGq+msxZtuGPdJjwMchvBnPrCOhYmP
+NbPNuzbOAFwMlCe5bcMMnvuttBcTCJ75g4ZvMJGbhbTOmFjeC24SQaTF9aCHtosz
+rXNP1vllbXJu10fIj6rtdC+lqYImTdWxrPaS5BQIKhg0Z3RwdlH/abwvZwy/nThb
+SBlT28lUnDTVX+kCf84hjuEM72YMzGAxfK54a47K10JLQWwkk9JXr5o/q6imJPBI
+N3Xp8dgGoMg8S0HfA1bs1VJ+9EPBxh1+N720EUPNBI8lFwwPkaEUM/C29UGb6Gwh
+MftYjqp7lLyZEeuJQ9aqgT/LGohyYg==
+=Crns
+-----END PGP SIGNATURE-----
+
+--N8SVibxcyIJIXZIv--
