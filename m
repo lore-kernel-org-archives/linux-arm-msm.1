@@ -1,87 +1,143 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FBA66BB5B
-	for <linux-arm-msm@vger.kernel.org>; Thu,  6 Aug 2026 05:19:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED9C5385D66
+	for <linux-arm-msm@vger.kernel.org>; Thu,  6 Aug 2026 05:21:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1785993565; cv=none; b=qqso6WCx4m/OG0/K6tWfIAWK9vcV/ayFqd0i7rlfzhY7jc4KRmz2xfhaHk8UpS+tXAk/XMHly3zVZK532ijpWKWVdvbMgDuMaENOMfWYCtYwiuPpirbutxSmDF5A+531LT1AUKMDVgNPsciW3mPQ12uM2RnnJaipjib43Wonl1A=
+	t=1785993683; cv=none; b=sbosZtRpsEkFa/nOuwT9osfvVUDtYe7wUpJMZZ1GATZD+t5QyVMl2jgJixjdeeNHMcYnRejE/HynkixQPZAZ/PejgzNR1+Eu2V5lwqFxb3ULtLujLHOGr0iaUoLXOjYwulS+Ntf76//Jc2ZPtNJxDlDfRF5eI9Ehjv7rdcCxNkE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1785993565; c=relaxed/simple;
-	bh=USZVqPnXKF9GZaS6KQ1RN4flewbkQ3iaunSm30QJx/k=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=eyVzytmsVD7RzE5mH6HIQKnnXCNsI/BdVRLNX6/vE1mAcV5xVllIL8FOc7AFEIjspSo4yFQXUDGBVX5kHXvM6RzOlGGZey845TC+v77StBIco+hCE2axJtyHmrT8lQSA3o9Z1kFzyfujgMy2NCUKTGM+lyl3WGGmN4x049XQ+p0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b=DG0OCQiO; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=quicinc.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
+	s=arc-20240116; t=1785993683; c=relaxed/simple;
+	bh=amCW11XtA716wXJvoqPzrYwHUQN6Kiaou/zuF4QKbq4=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=A2lGdZLc0VjFlTayHHV4S+DHX+uqb97tTY/rROFkOc+zZshNkWZRB+E4T0v9qPsY1F8Z2TyItVl/DomvXtA32wmnlY6Ozzmvaj1eudrwNr3IT90FgVrz/RAmPLSJjgxNf1QsKP3KxvmEMHgpe0ehcVDxYu8Ct+UM+gi76tXzqj8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=KezrMOOH; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=b45z88+e; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=quicinc.com header.i=@quicinc.com header.b="DG0OCQiO"
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="KezrMOOH";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="b45z88+e"
 Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 675Nblcc226729;
-	Thu, 6 Aug 2026 05:19:17 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=yTSrB8W8clCC4RFRUKAH0yIkOjRUxIdDIu9
-	ZnmU4Wyg=; b=DG0OCQiOdo0YRsPp2eU4lungl2YoJAn1+ENhkoYSHMv+x8Q7vzY
-	Zl2iuvyjHK0hK32+gqZoHcUNwBGG0R6N0q9NwceuReil47JiaO2MWiA6tTnX36lh
-	ghqKEF0/jVxKghirFrNZBuZ6FRFoUKS7SM7Yr2dAMc+2vd3diVwf+IwqfBUC7DEz
-	JF2P4GGNLo7/TH6mUsqfAB6pmRA2o9r2YD7Ov8e96cQZu2aq2w9dW82hGMtqpFvJ
-	GQ7P3rQnfbT4H0rTjFmHQGZ7mvRrZ3B40k7kJCe6td9L2Jc7XkXk/k93iR5sBK1c
-	gmBaq0ByPqPyYCjhlbrOhLgV7SOMgZ1AkaQ==
-Received: from nalasppmta01.qualcomm.com (Global_NAT1.qualcomm.com [129.46.96.20])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fv2r64h26-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 06 Aug 2026 05:19:16 +0000 (GMT)
-Received: from pps.filterd (NALASPPMTA01.qualcomm.com [127.0.0.1])
-	by NALASPPMTA01.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTP id 6765Ag0d019048;
-	Thu, 6 Aug 2026 05:19:15 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by NALASPPMTA01.qualcomm.com (PPS) with ESMTPS id 4fvdbw2yne-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 06 Aug 2026 05:19:15 +0000 (GMT)
-Received: from NALASPPMTA01.qualcomm.com (NALASPPMTA01.qualcomm.com [127.0.0.1])
-	by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 6765JFJJ002631;
-	Thu, 6 Aug 2026 05:19:15 GMT
-Received: from hu-devc-lv-u22-c.qualcomm.com (hu-pravinku-lv.qualcomm.com [10.81.27.176])
-	by NALASPPMTA01.qualcomm.com (PPS) with ESMTPS id 6765JF6W002627
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Thu, 06 Aug 2026 05:19:15 +0000 (GMT)
-Received: by hu-devc-lv-u22-c.qualcomm.com (Postfix, from userid 3914598)
-	id 19C8F6DD; Wed,  5 Aug 2026 22:19:15 -0700 (PDT)
-From: Pravin Kumar Ravi <pravinku@quicinc.com>
-To: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org
-Cc: linux-accel@vger.kernel.org, christian.koenig@amd.com,
-        sumit.semwal@linaro.org, andersson@kernel.org,
-        mathieu.poirier@linaro.org, konrad.dybcio@oss.qualcomm.com
-Subject: [RFC] Synx: A global synchronization framework
-Date: Wed,  5 Aug 2026 22:19:15 -0700
-Message-Id: <20260806051915.2234481-1-pravinku@quicinc.com>
-X-Mailer: git-send-email 2.34.1
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 675NbUxj226052
+	for <linux-arm-msm@vger.kernel.org>; Thu, 6 Aug 2026 05:21:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	ZBs9/Bh2UiS1MjiVD9vmB4pwQGN/Wapz7YLt4/PsfvE=; b=KezrMOOHyLrZ1+HV
+	ozLsA45ouP8xW06m4hHMETw1HvuEKHNKwXx7kQ3QSLX5KAVnHROBYIhj29m3f1YZ
+	ftfkd7zlA+rYAtNM9FjIrfkAp6JlVLeHPgeE7tr/1VTboMOyWdsNyHAG0vqczxFz
+	742YsKC/5kVBSPXqQfRr4weQgtQIw+b+3UNEIWSh52ZcjrjFoqVEduluhg9x/SMJ
+	qSdA+IeeLDpuYuMIfVX11aSH/0SJMBPiZbo1RNctAsZEMV03hhjFLd6Bn05rWBlK
+	Jqa9Rbnyv3vxr/g04GH7un1R5U4fDR8J94WZc5G6SiuUd3IS4HIWdCOztlribRqe
+	y2SX8Q==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fv2r64h9s-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 05:21:20 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cb5cc1e139bso1313312a12.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 05 Aug 2026 22:21:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1785993680; x=1786598480; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ZBs9/Bh2UiS1MjiVD9vmB4pwQGN/Wapz7YLt4/PsfvE=;
+        b=b45z88+eNUvgKHzo4jZsZCk3f0XFpeBOaPKAGvLhSD20wDQJ7VZT24dVMU9AP95bi8
+         p1uQbk1jUs16MtJ08pBj33owGDH9UIukVsYjrnyPDkWsZFxtwxr8mWVrU/8HouWoi0Ak
+         zGPknTHwON4/Tzg1rNyEe0rsdexLU/3C7rhRETX6YfQT/dNZc4upApLWPKe6SXTQlPUr
+         YWqQ+QTHdRGgEUyZ/+JJNGizSzkQ5pcWioUk4qN/eHIxMI53Ap8rSkKihVJAPFw7+R78
+         75UJkm/ItqGXQyfZ8oaFc2j1UAfddzlGvygagp6MryTECoPMrldurXwBhTNHoNmrUs5c
+         gBSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1785993680; x=1786598480;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ZBs9/Bh2UiS1MjiVD9vmB4pwQGN/Wapz7YLt4/PsfvE=;
+        b=VkSP96D8acK6qc3gnXn9xvxH2pOn8ofEugfC6qctQpPzbCkW6r41lJ6lB0Pu7rg8rJ
+         KAgneqpzH6rkOal25diK7GQWflxh7oCRz4Ym39zw9GIhuW+pjC39bc44aTZv3wQOu49C
+         tAKWQlzp2SNS2g5Xtv47E+hY7YhQjw6PaRMMwWvbq7EcppWEjMksq38GV5nZY6jErEtB
+         HsZBgtBdcPYMTTv5jhWlHGx/qnGl3bjG7GgIzis6vd5ZjtoDeStczUxK/7eTE2hfrD88
+         fKleHvpyxTtrheiM8Lv0RExd4mmcw2B7xQLIS4qwrkUI/gDVohc6jScaXQ6tpCVXPr6R
+         Cbrg==
+X-Forwarded-Encrypted: i=1; AHgh+Rrmb//4Rb/Cpk102hXULOgygNqlq2/y+DW3fKFf0yIxL0ICQb3OhiUSESsIWjaDdYKNKajePKNHZ3jJdI8M@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy80Vjvj/HX1F7vnl7ERj214bj1VHpeGqBpyoZMLjeF4ydwD24U
+	eWUy0brQ76rWr6qcY3chNUI/wAnEqzyZHO0pKmWUzfv25nMtLRNIGX7WL0K30HWjEBgX2IWdsJz
+	PiMaGUOUmyPrY7sGLgRuNz5s3oDQuJZXKp1UKtuNQocOm1uMMm2Id/h1hkdRTvdC4xbha
+X-Gm-Gg: AR+sD10rHFFh8KA0mW3Wa2IhUs4fXIGCJPJEqZmw9wxP1RhyC7I0jEIWOuYV3i0aQpi
+	uReoorfGi1HfcFGnC8Czd1v9gWIbqKGbh9286I3ylGm9brzXtyl2IUsR4VQ7yJs/qhnQ5hZdazE
+	W2V6OdjzKdxi2n8NIIU1pZ8c4wLrMxOQp8B04Q323HpXWvL2O7PIqVcFvirofsez5dkliLY7qem
+	Bn3aiKoSvK89OGukbyqKpAKbguKYmrU/FM3gr1uCtl5dZ6EY3MemmRMVddFVsk2RPJ/klrNVvrL
+	Qq8ZgJ05FdK07jFgcKXqPGaNEInGFd73YxyUxzI0yz03Lf1MjAVMWAsFzc3xnrP26I1a8igbjEy
+	g2auqfVxfNukW5es+YY5vIyB1Epcq8xpETA==
+X-Received: by 2002:a05:6a21:6112:b0:3b4:e4f6:4f15 with SMTP id adf61e73a8af0-3cb85e9922cmr14991449637.5.1785993679930;
+        Wed, 05 Aug 2026 22:21:19 -0700 (PDT)
+X-Received: by 2002:a05:6a21:6112:b0:3b4:e4f6:4f15 with SMTP id adf61e73a8af0-3cb85e9922cmr14991394637.5.1785993679511;
+        Wed, 05 Aug 2026 22:21:19 -0700 (PDT)
+Received: from [192.168.0.173] ([183.83.140.67])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315863b76cfsm22135770eec.4.2026.08.05.22.21.12
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 05 Aug 2026 22:21:18 -0700 (PDT)
+Message-ID: <d0983bf7-a708-46ff-9f86-f94fb6a92ba7@oss.qualcomm.com>
+Date: Thu, 6 Aug 2026 10:51:10 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Authority-Analysis: v=2.4 cv=WrIb99fv c=1 sm=1 tr=0 ts=6a741954 cx=c_pps
- a=ouPCqIW2jiPt+lZRy3xVPw==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=gowsoOTTUOVcmtlkKump:22 a=G3I2PbPdawe2DYykPU8A:9
-X-Proofpoint-GUID: AtJsumE-Z_RwUoWxN2gM6GCJYj1yS9hK
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDAzNyBTYWx0ZWRfX2z0exGr9kgs4
- Gtv0Wl5hTedv3LEReaXFqJg0lbk8Z/UXdQP2F1dE1Yzj+VwORaQGPN10NfycMoYpv2WLizvc6Y1
- 4CW7QUSgYM57hcpQfp4MxFpxH8kTEPg=
-X-Proofpoint-ORIG-GUID: AtJsumE-Z_RwUoWxN2gM6GCJYj1yS9hK
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDAzNyBTYWx0ZWRfX3s3lMS+8/xtt
- sofTuzHJoED/IzpJ5Sy9Oud4OPIdfHX19RFTFcFnL7oJByV4TpVNgvB/7aglG7YW0WmmFoZKEDR
- rnirzlb9fNc33CWqgVe6KnIM/z7zQHhshJ2SuyOlCYcSyQIPrRJZpmncaI0Dr/MiyaU8nH+GuyE
- TDyjLwb2MUyBtergsvYLQTc8Sd/1EqY3QGV9XIyOYAwxeU7ZLclGfyHbmGduwt3UAtuqMPJwlHU
- WvfM+Em/nVLWdo6bxsvuSEwQIaJiBFb6X/Hj4GSk1DCv76hz54x2DN2/dy5HGMe/oK+h/ebiAxd
- RyMW1WGsNgqgQnujZJrfrl89s+asfQhSmA2AoiclI62MiU+/uTuMwMET83gZh1eRXxsP8euQwXE
- H1cJjfdyJR4layFILajEQykvgt1uGvefG2qvU/LkHmABuTUQ63f+aGf4mG1cTnkQdaezoBgjggZ
- SJM8qOaAiBm6nDqDvbA==
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 01/12] dt-bindings: media: qcom,venus: Add context bank
+ subnodes to common schema
+To: Bryan O'Donoghue <bod@kernel.org>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Stanimir Varbanov <stanimir.varbanov@linaro.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Stephan Gerhold <stephan.gerhold@linaro.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, stable@vger.kernel.org,
+        Daniel J Blueman <daniel@quora.org>
+References: <20260731-vpu_iommu_iova_handling-v2-0-da52b5228dbd@oss.qualcomm.com>
+ <futJwsC0VjGSkjrB5PP9T0jBOVgWADaDAYyRRp-OZifaKPNtjcnnA59QJaQTdqYTeayZk9jY6e1jOfun71Yp5Q==@protonmail.internalid>
+ <20260731-vpu_iommu_iova_handling-v2-1-da52b5228dbd@oss.qualcomm.com>
+ <689580d1-8169-41cf-a954-927e10135700@kernel.org>
+Content-Language: en-US
+From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+In-Reply-To: <689580d1-8169-41cf-a954-927e10135700@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=WrIb99fv c=1 sm=1 tr=0 ts=6a7419d0 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=kGzeRs6aa4G/VYrSuZk26Q==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=VwQbUJbxAAAA:8 a=t9ty7G3lAAAA:8 a=EUspDBNiAAAA:8 a=g2j97YndKkMRmPxWxGQA:9
+ a=QEXdDO2ut3YA:10 a=bFCP_H2QrGi7Okbo017w:22 a=CsAS6f0m0zARWR-uHzm3:22
+X-Proofpoint-GUID: w8L1Fhc6YDnrgvgdW48ThnYuZO3fj-TK
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDAzOCBTYWx0ZWRfX/pVMgT/5Q62/
+ ewkMkBSxgOHE0WL5/8nI/19fJxlsPFLF4xFC0awysm5RcZTw2oVQlsEFznwEC57UiJhhv7pOYiB
+ mnSV0SIr3SKRvUFOmI4rETO3vF4zedQ=
+X-Proofpoint-ORIG-GUID: w8L1Fhc6YDnrgvgdW48ThnYuZO3fj-TK
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDAzOCBTYWx0ZWRfX05zy2B8UgSu5
+ vBkLVEnpPyfokp2CPeudIPeQ5UGcdyBmlMwMCVJn05sUMCqniU1vtAhrJm8e/vQE4SD/Vp2BZtQ
+ O8fudUIF7sO+qhsDdxkGnK260HWERaqtwWcPDvbBvZ6+RWugLlqkwTcypUm7gDTFHuIa62a3w3h
+ L5gEw1eYSJJeHz0U/19g/Ah4UO6CZWcYyKz5ivzWkXPv9y2grGar00IU51w9aqrymxHy1G2WPo1
+ Dtrm8xXaHKdZxiuBwYpFC4uf/VsBsY3efB3qMmQuTO2AuH+ufFuQqAAZpDN5hsroqAwDF3Wjw8g
+ 0B8HFBtMU35wzsJ4mSV1L2lVD+QjwtoabtZIRinxGfGbTMaVprVyAiugiLbO2NY4Akk+QKKAxNP
+ vOy6V1RZZH6fchbLpo/qT4ynt0X/eZUoNPehMada3G8pEa+grHlHGrYq6BDhM/rKecSwKfW3oEJ
+ lKa/jcgW9bZVrU5PrIQ==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-05_06,2026-08-05_01,2025-10-01_01
@@ -89,149 +145,27 @@ X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
  spamscore=0 malwarescore=0 priorityscore=1501 impostorscore=0 bulkscore=0
  clxscore=1015 lowpriorityscore=0 adultscore=0 phishscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608060037
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608060038
 
-Synx: A global synchronization framework
-==========================================
 
-This RFC is intended to start a design discussion around Synx, a
-SoC-wide synchronization framework used to coordinate fences between
-Linux-hosted clients and non-Linux execution environments such as
-remote processors and firmware.
+On 8/1/2026 3:36 PM, Bryan O'Donoghue wrote:
+> On 31/07/2026 19:22, Vikash Garodia wrote:
+>> Fixes: 41661853ae8e ("arm64: dts: qcom: sm8550: add iris DT node")
+>> Cc:stable@vger.kernel.org
+>> Tested-by: Daniel J Blueman<daniel@quora.org>
+>> Signed-off-by: Vikash Garodia<vikash.garodia@oss.qualcomm.com>
+> 
+> What about venus ?
 
-The intent of Synx is not to replace dma-fence for existing in-kernel
-GPU/display style synchronization. Rather, provide a global
-synchronization mechanism spanning multiple subsystems and
-processors, while still integrating with existing Linux primitives
-such as dma-fence and sync_file where appropriate. The solution has
-shown significant power and performance benefits in the last few
-generations of Qualcomm mobile and XR chipsets, and is gathering more
-use cases. Also, the solution is SoC-agnostic, so other vendors can
-adopt it in the future if interested.
+Plan is to get the reviews for IRIS3 family SOCs, once we have a go 
+ahead from binding/DT maintainers, i can either bring in few series for 
+remaining venus and iris SOC family OR do all of them in one single 
+series. My preference would be to add in multiple series.
 
-Motivation
-----------
+Regards,
+Vikash
 
-Many multimedia and accelerator pipelines on modern SoCs are no
-longer strictly host-centric. Work may be produced, consumed, waited
-on, or signaled by multiple execution environments, including Linux
-drivers, userspace components, DSPs, ISPs, NPUs, video firmware,
-camera firmware, or other remote processors.
+> 
+> ---
+> bod
 
-dma-fence is a good fit when the fence state, callback list, and
-lifetime are owned and progressed by Linux kernel participants.
-However, for cross-processor use cases, a synchronization object must
-satisfy properties that dma-fence does not currently provide:
-
-- Cross-subsystem visibility: A fence created by one subsystem must
-  be importable, waitable, and signalable by other subsystems,
-  including non-Linux processors. struct dma_fence is local Linux
-  kernel state and is not directly visible to remote processors or
-  firmware.
-
-- Point-to-point remote signaling: One subsystem should be able to
-  signal another subsystem without interrupting the Linux host CPU
-  every time in the signaling path. Since dma-fence maintains all
-  waiters in the Linux, remote-to-remote synchronization has to
-  unnecessarily interrupt or involve the Linux host.
-
-- Distributed lifetime management: References may be held by Linux
-  and non-Linux participants. Any subsystem must have authority to
-  create and clean up fences. This requires lifetime state to be
-  tracked in a shared/global table, rather than being owned solely by
-  a local Linux object. dma-fence lifetime is centered around Linux
-  references, which does not naturally model references held and
-  released independently by remote processors.
-
-- Race-free global synchronization: Registering a waiter and
-  observing signal state must be atomic across participating
-  subsystems to avoid missed wakeups/signals. Atomicity between
-  remote waiter registration and remote signaling needs a
-  protocol-level guarantee, not just local callback handling.
-
-- Subsystem restart recovery: If a remote processor or firmware
-  subsystem restarts, references held by the crashed subsystem must
-  be released, and waiters that depend on that subsystem must be
-  completed or failed in a well-defined way. Subsystem restart
-  cleanup is outside the dma-fence model.
-
-- Global composition: It should be possible to compose fences that
-  were created by different subsystems or processors into a single
-  aggregate synchronization object. dma_fence_array can compose
-  Linux dma_fence objects, but it does not by itself solve the
-  composition of globally visible synchronization handles created by
-  different processors.
-
-- Transport abstraction: Remote signaling should be independent of
-  the underlying transport, for example rpmsg, mailbox, GLink or
-  another SoC transport.
-
-- Linux integration: Linux clients should be able to interoperate
-  with dma-fence and sync_file where that is the right ABI or
-  in-kernel interface.
-
-Proposed model
----------------
-
-Synx introduces a globally unique synchronization handle. The handle
-indexes an entry in a global synchronization table that is
-accessible to all participating subsystems. Each entry tracks: a
-global handle ID, current fence state, the set of waiting and
-subscribed cores or subsystems to allow point-to-point remote
-signaling, a distributed reference count, and parent/child
-relationships for composed fences.
-
-The design is organized around four components:
-
-- Handle and session management: Any subsystem, Linux or remote, may
-  create or import a Synx handle and hold a reference counted against
-  the global table. Handles are destroyed by the subsystem which
-  releases the last reference, regardless of which subsystem it is.
-
-- Transport abstraction: Remote wait and signal messages are
-  delivered through a pluggable transport layer. The synchronization
-  core is not tied to any specific backend (rpmsg, mailbox, GLink,
-  etc.), enabling point-to-point remote signaling without involving
-  the Linux host CPU when both producer and consumer are outside
-  Linux.
-
-- Linux interoperability: A Synx handle may be associated with a
-  dma_fence or exported as a sync_file, allowing Linux kernel drivers
-  and userspace to interact with Synx objects through existing
-  interfaces.
-
-- Fence composition: Aggregate fences are modeled as parent/child
-  relationships between global handles. A composed fence can span
-  handles created by different subsystems or processors, and its
-  completion state is derived from the states of its children in the
-  global table.
-
-- Subsystem restart recovery: When a remote processor restarts, the
-  global table is walked to drop all references held by that
-  subsystem and to complete or fail any affected waiters according
-  to the configured recovery policy.
-
-Possible initial patch structure
----------------------------------
-
-If the overall direction is acceptable, an initial RFC series could
-be split as follows:
-
-- Documentation describing the cross-subsystem synchronization
-  problem and the Synx object model.
-- Code to manage Synx sessions and handle lifetime, and
-  synchronization using wait and signal.
-- dma_fence and sync_file interoperability layer.
-- Fence composition support.
-- Transport abstraction for remote wait/signal messages.
-- SSR/restart cleanup hooks for remote processors.
-- A minimal Qualcomm SoC integration backend and example client.
-
-At this stage, feedback on the model and layering would be more
-useful than detailed code review. In particular, we would appreciate
-guidance on whether this should be pursued as a Qualcomm SoC-specific
-driver first, or whether the cross-processor synchronization pieces
-are generic enough to justify a common framework.
-
-Thanks,
-Pravin
