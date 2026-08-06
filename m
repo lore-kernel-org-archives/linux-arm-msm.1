@@ -1,172 +1,76 @@
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E6BB335067
-	for <linux-arm-msm@vger.kernel.org>; Thu,  6 Aug 2026 15:13:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.45
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786029217; cv=pass; b=gJ7owK05CE00jg8FOLcfoTH2Y3gj4DRVAbhUQ1t7bAyWYlllOWqT1LDgb/ziLZxWu6S7nlfzucLpbCjy/oXNXjVI25k2yv7GLHYJsakvxaZsWXxHpohKruyeliGLUE669dvgO0n8pmmUl+fPwKOyvZP3oZY+5lMw1rJRDgWTUE0=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786029217; c=relaxed/simple;
-	bh=AkyQ1c6CzPInzcBYPfh1GkCQm/9EGkY2qVu21m83Sxg=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=TTfI2RnSz244KR+2KO3Y0fi18HkeLlFvEDHGmaSkFSywpuQoEW62Ynvhxr1ZlaCHAzeQqhw5anvIKlzO4jtAeOtUv2bpCUHNTdoldiP09Bi1395/Veh43r5xydL7XLzcnQaPn53GoDFVFQ16lZJ+VL7rX2tSENV0rYPgIIVbaKg=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=OzVgbX7S; arc=pass smtp.client-ip=209.85.208.45
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D13D3CF678;
+	Thu,  6 Aug 2026 15:20:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786029647; cv=none; b=V7v35mIJjzdrmt4iqeOIF15Tgtrb+p4T+YuNBRrBV20vGevscULs7Sr4N/dO+1cThLds4T1s8jtYsmiQWpZB4y79RvdbrtgG/0EgZOtulkr2iyOEeKAAonFzNVeiKy+6vRz9byZROBn8YXyZJ5owr7Q6C0Rz+kW6I7HEA3+V54s=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786029647; c=relaxed/simple;
+	bh=w2GjoF3iCCNQ43O6VfUDKrRogsZV9LtBUn3to6+zRn8=;
+	h=Content-Type:MIME-Version:Subject:From:Message-Id:Date:References:
+	 In-Reply-To:To:Cc; b=aWp2SFnAvPBYYwLquO2WyhtuHrdTAJ5azgfmem7x2tBAdocldMWmMkoS/R8uaIFLjBK+77pcqivBKdei0GBuVU7Ui2FxmhingT9SUiuuUZzloBfFnKgvhghGmWcxwW3KGTIvNGpFy4MoLj2/770TqYSGn3OfAbZFVmxSLrgafBk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PA1XF+dk; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="OzVgbX7S"
-Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-6a144c8eea2so3249787a12.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 08:13:36 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786029214; cv=none;
-        d=google.com; s=arc-20260327;
-        b=f+DMPNkI640wcO71kQvJeb0UxPIA6h5l38eIKXTtBpmtBjqKTwgdenE8IEG6VWvlL/
-         XPFoL3QmtwHVpvwvO8SiZMOsKWGX8Gx+swZ7wo8piMDBAfRqr0dIt1WINSjvzndCiKHt
-         crSnmwG8TmUdC9aW3hvay+QPVZsOOKs+F1/EP3b2Z0Z1p2MwA/zM4YxL/XnGpy+5t6rF
-         8DgtM9x+0hokoeETt6k0N8a7E8cOlkgGJBYL5CS25BoIx7NeSYhncf3aDmG5B85hOm3y
-         TKBg8m2ZPp18yLf7WcymFjCSh8qQC+Aq9lF4waFInaPDPUTUCoovC0nLVyTyflsIYNam
-         o1ow==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=g15bHaQyrtJn5NpT/q2wdS6JcsWTqFslcY8HTn0xjjw=;
-        fh=qBpKXplSqD5huCEDyEXUOfECF4GIOvKDuwoTyuLo1Vc=;
-        b=L/JHbc9asiLgzG4uEdC1nqc3FjSJxWcluXylzy+wfKUw1kuAn4/7nbcJgdKNtmRPnT
-         YUsYtN00LtDX8sxOW+7JaIJi3JAw9mYy0+Lxmao0A90rrth3CP445fBRg8lBRhqGiSYx
-         G3DrQC/3Y5/MvucsXly+riwHU/ikLavn75kIIUaDCuYDpxmHX8Nx3urbGn7DXIt8n6L7
-         xDayzfnwp6NZWf8cCcakuRD9w2+KFHEWxVls4fklye5S8CL62prj5KZnf/B9ytIn6KZg
-         g4/LaiiVV+U0C7WtMhZQy33ZXjrN6X1eO4+B5hXrhaPa4zq3RoKI1RhjHAKa3EwS8Rn2
-         a/Ew==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1786029214; x=1786634014; darn=vger.kernel.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=g15bHaQyrtJn5NpT/q2wdS6JcsWTqFslcY8HTn0xjjw=;
-        b=OzVgbX7SrZCaWh7Kkc5spdANW3gm0yKDifXhglN/MytuL6kphSA/oGk3oHc3TuSs/w
-         pkgfo66rW8Urz+6Tucc5GqXaO5bQF7c5H19v/n84kts5K2PEoFh2nst63K8PaCxmeSbh
-         YD+HPjnKfdDyI0J8Rf3bcyNmQwLKN1BA3Yzwai0IScwDky0P2FXnZqIhm14fQilRi/t8
-         s/6M7sVNPQ2NeAnQwMt9pn17Oz3Q6jnKnQzd21sa6wJyw2qXnJaVdmikbOGndYBoj7o4
-         Ty2xu2zMkPlYPxxQ8M0c2LfSXWTJLDfSHb7xlDBUHP5FYAMZba68Z5pBPDMpnocIW7ET
-         9Y6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786029214; x=1786634014;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=g15bHaQyrtJn5NpT/q2wdS6JcsWTqFslcY8HTn0xjjw=;
-        b=KQBVIeTI/E3FsV3MsGnbP341AUuVivuF9tq2C0kwR+X44hJNdBPSX1C4Waw9Fitv8F
-         JvtW1GD9YsiUFLIJI1Rro2pACY776xkluI6id2+QdCfM52tvsq20e7u5LB7drCXq/Cmj
-         f1uO6OVVcwt6PuVbzvGwXvjo0brT2IjCYUzUh16SerhIUBr3d4yJ8D4Z8FfzutiJBMzT
-         jkm9kjHyfySid7aYhJ7e8atuqEfIzozaoqMvBKOXgcmCe1C0n4oYPMiYa66xrC5dvucl
-         +6/yvRuVFd1rIq7lKS717egFmmFR4EtrYAQ1OQxXC6PlZ74treiQ2LYeK9HGzOxXO8IX
-         7+Yg==
-X-Forwarded-Encrypted: i=1; AHgh+RrkCWPPR66qQRrJcgQeHk7IYqFwyrHnlONjDHk+L66m28ltgFSEWB2UGhB6JF+lK9PahvGL742zu+WSkeML@vger.kernel.org
-X-Gm-Message-State: AOJu0YwV4dYYcftBFxX2TVMM8rP32/lzaC2mMLlC/saou+1t+QMUjycy
-	yrB8VNxUi4lW+j43edlpR/5vslQQZiAs2rvQptv+51Yj58+fdxihB2WajEM2NIlbMoIjfZ282iS
-	UGFVjlAcG8ymk3eRdRC6d9yS+WS0xzzDV5NntS3JbIg==
-X-Gm-Gg: AR+sD12JgR5LFjjQTe9I4kJKd9QMh98ECCS6TKF/5cta8OmXPgemLqCDqvF7CyYoMbg
-	/+8k3lvtyzXWDwhzpA9mq9uhRH/k1TILUY8xh7fQc2Jhx0BHBuOuk3AcwxxPULpzftbYcWt0mKn
-	Q8EUpaygFWdlecMbd0K91Ttp9dGpW8cd5ZJT3wve+FmQH5yLLpz4ppP1E/PhnHz5CzCM6ixQugv
-	OLz9PSRdBYN1vcKo93S6KLeO27OuFTehli2V0+IeUFn98xa3pClftsUo8DrWNod4SfnIRSdp78k
-	AIUlqWK5wqSxBuyCfwl6jNgPIFwbVyDqS0SCZT6jIDQfS2zIsvsOoeIajO1UlvB6V3KVAXVjgfc
-	xlA==
-X-Received: by 2002:a05:6402:2353:b0:699:fbe4:16d0 with SMTP id
- 4fb4d7f45d1cf-6a14f14dbdamr8626686a12.16.1786029214367; Thu, 06 Aug 2026
- 08:13:34 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PA1XF+dk"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 100591F000E9;
+	Thu,  6 Aug 2026 15:20:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786029646;
+	bh=ZyiWLfn4i9DJLzSB7Fnhkm+6sUdCLb6IzAwTp3gRFPc=;
+	h=Subject:From:Date:References:In-Reply-To:To:Cc;
+	b=PA1XF+dkpreNIIGRIWSp/KiulwG4gs++STnV4H5ySRcK5oGnQOcLdM5rOh9igvCe9
+	 qXAqwM/xUfYwR/GT9mlwQtxI9pQfwK3xPZVbrDUM3Zu2XIbbjUljfXZB7GNqn+fJgC
+	 p5zVrTiJ9k7WiQ7bqEWaCbboSwkNRjqlIOQYHkHZLDwXh4ty9F1d2p34IquB4SBpAa
+	 GNXTFpUueX33y5QT6WZdv+ni4Gv121FI+CXOvtij0UwJEu91VghwrJiywN6zg6uWSK
+	 f7mmqCPMqh/KQahuNE8SpASr5T0p46RqznO1iosvW9Gf7/KIxP52Xlbajm1/dwmclN
+	 noscNQnr2sKzA==
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+	by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id 93A2C380820D;
+	Thu,  6 Aug 2026 15:20:06 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260806044230.909961-1-sibi.sankar@oss.qualcomm.com>
- <20260806044230.909961-3-sibi.sankar@oss.qualcomm.com> <7a4be9a1-4b00-49c4-bdbf-649268e78c7a@arm.com>
-In-Reply-To: <7a4be9a1-4b00-49c4-bdbf-649268e78c7a@arm.com>
-From: Vincent Guittot <vincent.guittot@linaro.org>
-Date: Thu, 6 Aug 2026 17:13:22 +0200
-X-Gm-Features: AUfX_mzhtw-ZvLph0pkYv4PqdWHCuZY5IIkfX99fkhNbYYFfiEWfCWKcDT_XIqc
-Message-ID: <CAKfTPtBoevmq8_Rens2Le=AGqMZRo56oD4eMGX2_2Pj_Vt9zCg@mail.gmail.com>
-Subject: Re: [PATCH 2/2] sched/cpufreq: Update schedutil's DVFS request to
- reach the boost frequencies
-To: Christian Loehle <christian.loehle@arm.com>
-Cc: Sibi Sankar <sibi.sankar@oss.qualcomm.com>, rafael@kernel.org, 
-	viresh.kumar@linaro.org, mingo@redhat.com, peterz@infradead.org, 
-	linux-arm-msm@vger.kernel.org, juri.lelli@redhat.com, 
-	dietmar.eggemann@arm.com, linux-kernel@vger.kernel.org, rostedt@goodmis.org, 
-	bsegall@google.com, mgorman@suse.de, vschneid@redhat.com, 
-	kprateek.nayak@amd.com, linux-pm@vger.kernel.org, 
-	Ionela Voinescu <Ionela.Voinescu@arm.com>, Beata Michalska <Beata.Michalska@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH] net: qrtr: ns: Raise lookup limit to 128
+From: patchwork-bot+netdevbpf@kernel.org
+Message-Id: 
+ <178602960514.1333975.17839022231659546848.git-patchwork-notify@kernel.org>
+Date: Thu, 06 Aug 2026 15:20:05 +0000
+References: <20260804201919.1148015-1-priv.luk@gmail.com>
+In-Reply-To: <20260804201919.1148015-1-priv.luk@gmail.com>
+To: =?utf-8?b?xYF1a2FzeiBQYXRyb24gPHByaXYubHVrQGdtYWlsLmNvbT4=?=@aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org
+Cc: mani@kernel.org, davem@davemloft.net, edumazet@google.com,
+ kuba@kernel.org, pabeni@redhat.com, horms@kernel.org,
+ linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org
 
-On Thu, 6 Aug 2026 at 11:02, Christian Loehle <christian.loehle@arm.com> wrote:
->
-> On 8/6/26 05:42, Sibi Sankar wrote:
-> > capacity_freq_ref, exposed to schedutil via get_capacity_ref_freq(),
-> > was introduced by commit 9942cb22ea45 ("sched/topology: Add a new
-> > arch_scale_freq_ref() method") as a fixed anchor that does not move at
-> > runtime. However, schedutil uses that same fixed anchor as the reference
-> > plugged into map_util_freq() which saturates exactly at capacity_freq_ref.
-> >
-> > As a result, a system with cpufreq boost enabled effectively never runs at
-> > boost frequencies under schedutil-governed load. Fix this by plugging in
-> > policy-max into the map_util_freq equation, so that the DVFS requests
-> > translates to the actual cpufreq driver ceiling.
-> >
-> > Signed-off-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-> > ---
-> >  kernel/sched/cpufreq_schedutil.c | 13 ++++++++++---
-> >  1 file changed, 10 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/kernel/sched/cpufreq_schedutil.c b/kernel/sched/cpufreq_schedutil.c
-> > index a1782755efcc..dcefbeaa0702 100644
-> > --- a/kernel/sched/cpufreq_schedutil.c
-> > +++ b/kernel/sched/cpufreq_schedutil.c
-> > @@ -195,10 +195,17 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
-> >                                 unsigned long util, unsigned long max)
-> >  {
-> >       struct cpufreq_policy *policy = sg_policy->policy;
-> > -     unsigned int freq;
-> > +     unsigned int freq, ref;
-> >
-> > -     freq = get_capacity_ref_freq(policy);
-> > -     freq = map_util_freq(util, freq, max);
-> > +     ref = get_capacity_ref_freq(policy);
-> > +
-> > +     /*
-> > +      * That fixed anchor governs how utilization is interpreted, but
-> > +      * the DVFS request is free to target the current policy ceiling.
-> > +      * Using ref alone would saturate the util->freq map at ref so
-> > +      * use policy->max to reach boost frequencies.
->
-> I'm not sure those two statements are compatible with the implementation below?
-> util / max is expressed in the capacity scale established using ref, multiplying
-> that ratio by policy->max changes the interpretation of every util value.
->
->
-> > +      */
-> > +     freq = map_util_freq(util, max(ref, READ_ONCE(policy->max)), max);
->
-> Isn't the underlying problem that schedutil can't handle requests above capacity 1024?
->
-> effective_cpu_util() caps util at max, and sugov_effective_cpu_perf() applies
-> the 25% headroom before clipping the result back to that same value.
-> Therefore the input here cannot exceed 1024, and mapping it against ref
-> can never request a frequency above ref.
-> Using policy->max makes boost reachable, but also stretches the complete frequency range.
-> For example, with ref = 4454400, policy->max = 4723200, and effective util 640, the request
-> changes from 2784000 to 2952000.
->
-> Making 'boost frequencies' truly compatible with schedutil (or PELT/CAS for that matter)
-> is a discussion that is yet to be had?
-> See also
-> https://lore.kernel.org/lkml/20250626093018.106265-1-dietmar.eggemann@arm.com/
+Hello:
 
-cpufreq_pressure and freq_qos_update_request could handle the case
-where boost freq is used as the ref freq when setting capacity but
-disabled. I can't remember if everything was already in place when we
-discussed this last time
+This patch was applied to netdev/net.git (main)
+by Jakub Kicinski <kuba@kernel.org>:
 
->
+On Tue,  4 Aug 2026 22:18:30 +0200 you wrote:
+> Current limit of 64 is not enough for Sony Xperia 10 VII (SM6475).
+> 
+> Fixes: 5640227d9a21 ("net: qrtr: ns: Limit the maximum number of lookups")
+> Signed-off-by: Łukasz Patron <priv.luk@gmail.com>
+> ---
+>  net/qrtr/ns.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+
+Here is the summary with links:
+  - net: qrtr: ns: Raise lookup limit to 128
+    https://git.kernel.org/netdev/net/c/7fc1c937b6b3
+
+You are awesome, thank you!
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
+
+
