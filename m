@@ -1,98 +1,88 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 666BE384CCB;
-	Thu,  6 Aug 2026 17:12:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5532F378D8D;
+	Thu,  6 Aug 2026 17:35:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786036334; cv=none; b=stcPVmNZOad4Zj+PnMz3yalm5UcO+fUgIqHSrGM8ide1V+ZwmjJetYlPXPn/4bYC1PcbmcMvrf3x7pP7d0vKM7jS0pAjApEc5GwzdcK/ONSxbstZ2wrExTDtrleosKYSHLAyAjLXG6YnOi72iS54S6ze0frGGPH7sW5EVGStQ78=
+	t=1786037729; cv=none; b=kgmqSeSRKF57pAzOXAMnZZYtj4x6vWBEHuIjS+tisVywyV62QkPr+FswtNP1DfVctQ//Whs/hHrvo5czc0PlZlIE+7Ae0MdaYvJwzluiP6gl79SuKZjdj/8WEmVyGCwU3Jzwh7bXR5mX7/HJvxIMHNg7rO7tFDVZ7XIMAjoLhpo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786036334; c=relaxed/simple;
-	bh=l3zSn6K90CqOuEnFylWRC5LRf4edRjG5GKRQma8CN3s=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=EtzUWcwNIjAVgw6I1WtSwPAaUNZldBLGP1llpBiOwtD9lra77nUL/DCY2xcIG9JS2pCv8j9+6Sr3MUxvWEj1vGs/TUchzfoBIPd5d84sMnBGdP6jKiQSn37/wWN0tjzeBSI2M0eHOdK7CfYsWbWzDxmY5SOaum8iZBqx9h+TIks=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I6ckpMAR; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786037729; c=relaxed/simple;
+	bh=bjyWqP082uW2zjdVhQPed5q9qptP9hubeufn7A91vM8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ToL7dvFe7Q9Y2gC52Wr8znbK9cjR40YQElz89EVx9nDhG38qag6QYvCdrsEAXeWRP60Wrui6Vz9+C21XLfxYu8CwJApHbHL0i7yCZx1ihwEQyz3ikMghnbIRh99GBC5YIRXHcmFz77onnCocPn7AzjFzvtVPzFuW2JCCuzclwzU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=R7mhEBv4; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I6ckpMAR"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A9481F000E9;
-	Thu,  6 Aug 2026 17:12:08 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="R7mhEBv4"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7C81D1F000E9;
+	Thu,  6 Aug 2026 17:35:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786036332;
-	bh=ZU0VrTV4GLDlCfx7g+a3UzwLYWGbzU9Cafj3dXrmRs0=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=I6ckpMARmovzb8GA7jcN41tiAxs6P02GoIqR/93Jx+k472VjftW/vJBilnwhKIho8
-	 1b3CHjckp2tdT3Oj4xUoVj/PbgSR3Bmf8bVRS+JFjxdp70v8DHvUSyl3MF6E7v6jWb
-	 sZy8rMz08u6jDcr67Yrfcf1GqmNBxH9BC8IizSQ2Qgv4i4I47ttwMtP8U+bnmtXAHl
-	 sBnvuY6caeKLEuLSECNC0gf4sCEdpT30bJn67DZ7v3PwSh9tkPpaIjP3kk8JB3Y+xN
-	 VdlrO7oUo81la9VxR3J6oxu+mefjLW6fEEUyDpayd3HB828y8GAr+sal+IidJAPM/g
-	 XOyYi5eBCmbwA==
-From: Will Deacon <will@kernel.org>
-To: Shuai Xue <xueshuai@linux.alibaba.com>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Frank Li <Frank.li@nxp.com>,
-	Xu Yang <xu.yang_2@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	Yushan Wang <wangyushan12@huawei.com>,
-	Ji Sheng Teoh <jisheng.teoh@starfivetech.com>,
-	Khuong Dinh <khuong@os.amperecomputing.com>,
-	Besar Wicaksono <bwicaksono@nvidia.com>,
-	Ilkka Koskinen <ilkka@os.amperecomputing.com>,
-	Jonathan Cameron <jic23@kernel.org>,
-	Suzuki K Poulose <suzuki.poulose@arm.com>,
-	Chengwen Feng <fengchengwen@huawei.com>,
-	Yury Norov <ynorov@nvidia.com>,
-	Ma Ke <make24@iscas.ac.cn>,
-	linux-arm-kernel@lists.infradead.org,
-	linux-perf-users@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	imx@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org,
-	Pan Chuang <panchuang@vivo.com>
-Cc: catalin.marinas@arm.com,
-	kernel-team@android.com,
-	Will Deacon <will@kernel.org>
-Subject: Re: [PATCH 0/3] perf: Remove redundant error messages on IRQ request failure
-Date: Thu,  6 Aug 2026 18:11:42 +0100
-Message-ID: <178585020446.3647840.3969322133081891560.b4-ty@kernel.org>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260717103123.34887-1-panchuang@vivo.com>
-References: <20260717103123.34887-1-panchuang@vivo.com>
+	s=k20260515; t=1786037728;
+	bh=bjyWqP082uW2zjdVhQPed5q9qptP9hubeufn7A91vM8=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=R7mhEBv4GlnqUARFRcYztxAiknGqrEnXl6/umXd43AIWFqfQD33op7z3THTMYYu0R
+	 EWoR+s1jAzpfsaNrxZVjHA1hjPDnwf5jWdvkYjDIT9eYYofFCbeaJScR26Ht9u3rgD
+	 zZ/rH2WW+MuwFT67mqyAiFDgEY71V1hrC07cBEogUSgngVkiod6kROgsE82JqG7uKl
+	 npjwWX++GYdXJEx+LPeGKt/JK0j7pasIZw3SUmiZ5IuWZZLlOBL97aWT1sQ2ze7uWN
+	 yTJpKEU2DrzNLnGYYrAcK61hVWZt2qq6AnzlWKUWOVo1oyys7Z9hehcIMAjtosonfg
+	 KqCW9E17pS9VQ==
+Date: Thu, 6 Aug 2026 18:35:22 +0100
+From: Mark Brown <broonie@kernel.org>
+To: Praveen Talari <praveen.talari@oss.qualcomm.com>
+Cc: konrad.dybcio@oss.qualcomm.com, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Andy Gross <agross@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	chandana.chiluveru@oss.qualcomm.com,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	linux-arm-msm@vger.kernel.org, linux-spi@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 1/2] dt-bindings: spi: qcom-geni: Document device-gpios
+ property
+Message-ID: <57719877-b8d8-4df0-acce-2c4faf5a5899@sirena.org.uk>
+References: <20260806-use_gpio_to_notify_master_of_spi_target_activity-v1-0-c363a9b5df69@oss.qualcomm.com>
+ <20260806-use_gpio_to_notify_master_of_spi_target_activity-v1-1-c363a9b5df69@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="D3Ywr3u5KIx2uVgC"
+Content-Disposition: inline
+In-Reply-To: <20260806-use_gpio_to_notify_master_of_spi_target_activity-v1-1-c363a9b5df69@oss.qualcomm.com>
+X-Cookie: Colors may fade in time.
 
-On Fri, 17 Jul 2026 18:31:16 +0800, Pan Chuang wrote:
-> devm_request_threaded_irq() and devm_request_any_context_irq()
-> automatically log detailed error messages on failure via
-> the devm_request_result() helper, which prints device
-> name, IRQ number, handler functions, and error code.
-> 
-> Since devm_request_irq() is a static inline wrapper around
-> devm_request_threaded_irq(), it also benefits from this
-> automatic logging.
-> 
-> [...]
 
-Applied to arm64 (for-next/perf), thanks!
+--D3Ywr3u5KIx2uVgC
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-[1/3] perf: Remove redundant dev_err()/dev_err_probe()
-      https://git.kernel.org/arm64/c/a2d0c34f6dc0
-[2/3] perf: arm_cspmu: Remove redundant dev_err()
-      https://git.kernel.org/arm64/c/3bee2a4d210b
-[3/3] drivers/perf: hisi: Remove redundant dev_err()/dev_err_probe()
-      https://git.kernel.org/arm64/c/5f254ed7149e
+On Thu, Aug 06, 2026 at 03:43:44PM +0530, Praveen Talari wrote:
+> When operating in SPI target (slave) mode, the GENI SPI controller can
+> use an external GPIO to notify the SPI master about the target's
+> active state.
 
-Cheers,
--- 
-Will
+> Document the optional device-gpios property for the qcom,spi-geni-qcom
+> and qcom,sa8255p-geni-spi bindings, restricted to spi-slave nodes.
 
-https://fixes.arm64.dev
-https://next.arm64.dev
-https://will.arm64.dev
+This seems a lot like the ready-gpios property we have for some other
+drivers?
+
+--D3Ywr3u5KIx2uVgC
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmp0xdoACgkQJNaLcl1U
+h9AmjAf8DFobBtyJkc4myDuBlSsbDbDMNgPu6Amo/ZmriQp82FZxsRWnqey4lajp
+n5YGYkNLlEXmKqlRwJTc7px1MLaBGo7+fP7+KTsxkk6jcvY6R9a/xziePBM0RwDG
+01oxXuWWKOihZjQEaP13CynG2q8loP4YiSIKPld2R7N8JBWDFJxq6iDYcPOJpRYi
+9/e+vwt2hl1lwZvRtTCjneWcBKcPEGyKscVnp4kHntSxV05g3W4coohdFXUx9IAy
+9RwyFT3T1+pzuUP7KUYn+lgOUi/N4HKnpTCslUfu4TOY7yxWEkFwdZN1DWWs8bQy
++iKlw9GXsfXz4t/PTeyGZ2ZJ+pUSrg==
+=Zubi
+-----END PGP SIGNATURE-----
+
+--D3Ywr3u5KIx2uVgC--
