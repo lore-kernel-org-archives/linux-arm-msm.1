@@ -1,184 +1,117 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C24542048F
-	for <linux-arm-msm@vger.kernel.org>; Thu,  6 Aug 2026 08:57:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 4FDE641F5C1;
+	Thu,  6 Aug 2026 09:02:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=217.140.110.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786006680; cv=none; b=QSdlv3I0C4hAF4G8KlH8ylHpo/LTK22vX9Mml3HoOUDiIU6CPFbCLQT0QE35FHqMQJ6cG5h01X4VaOIFkURTOeLLjcepL7yei/CUYfLsVAdVLlyLuEW7LNcHKWGKgpQZtLN7BvF/TWGOM2UHSXBi0+DP+lFcy2p2yQU1cwZt8dg=
+	t=1786006932; cv=none; b=pWvLGxWyJDAauCaPoA7LXTp9suUQekSOXovJ8OmfTwDErmbSkWnE/c3s/kzvRnZQ0hdMx0WGtTfubDeMqkAqpbk0CHOG4Itj98zzCu8QQo8A0/RceJM1NckArv8x1Y4Gcr6zyNjBC6rj4mEp730EJaR+cWlzybx5DZY0/E9RaJU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786006680; c=relaxed/simple;
-	bh=Fen3/2fyT2nxbdI13z08g7FVfDpoYlq5UkDkITq/4Jk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=WHqQKMJW9jU+rXX/ozkOzjLOGI3NVGo2c+p/P6nG7tHjDEXZOF3FDWJO7V7OGlviLqUibiSTjJy4RBRjEEt2El6TK2t+M5Up3GPFnpEIS5+q9lKdHFzEWtqty8Bx/pRxTp3OJQEqyA+oSw9zzyrKI6tY1MbqfG2VuuSJnJh4/Qg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fSfCm16V; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YTQjWbvi; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1786006932; c=relaxed/simple;
+	bh=m5NHGSN+QWQ8jGKH8m7qhVAsGzAtYJFkQ76VmJgsTDk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=MhowiPvV9pDJCsN14bh6Y40QOxw7fdx44PAj0/BwQvqh+7H3OaksrC7BqZ0VI+7pjf/jHlzGr8AH6hR3nicwKRk8MJ0wH1oSGO9qUP6jb0+EEX19zH+mAH/XyKPBtYfNlDychdKew5vWtKzI9RMWeAmiU1a6Pj6HaC7Os1HOGy4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com; spf=pass smtp.mailfrom=arm.com; dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b=nHbm64lf; arc=none smtp.client-ip=217.140.110.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fSfCm16V";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YTQjWbvi"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6767alkB3701850
-	for <linux-arm-msm@vger.kernel.org>; Thu, 6 Aug 2026 08:57:58 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=PCJUwbsaRK8wt4Wj9xYnHB0Y
-	srg8kjvYnURoW+3/53I=; b=fSfCm16VZCzZ2bf0yNVxPw7fUGC+28UxiwmIa0IJ
-	dWBz4jBpmhtmXUN8xgX5IKqakbZKFMhcoPmLUmpPF/Sz84gXSxZG/yAZp9BiKEYA
-	JlqMEVQcxG5QMcc/cstYOjzBMkThmhV/aQHV3aSWppV1IrmGs+qkLfSJfo43qZFc
-	IssRE3U8Fdz8wNb6wI0Z3ZVE0gaXPvHHRI5OcdLUML49YyRWeNf6d8N69G5K3cPj
-	HNmocnGVzCfgFuTLTHhpzTwXqItDBQ9rPWyFFApXpN34xwyLNDG8zNeKiumjB0yV
-	hO6NdWjze5fM4+8sQFaVqLRCEfavKSBYuSlqZOTMlfMeQA==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fv9f5ba11-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 08:57:58 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-52cd0374265so32208191cf.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 01:57:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786006677; x=1786611477; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=PCJUwbsaRK8wt4Wj9xYnHB0Ysrg8kjvYnURoW+3/53I=;
-        b=YTQjWbvi9KckHe6ZKqD99AMl00vbi05+UzVlSWqlGgQ5+gxO+XHS67jMh8uES0j0KY
-         9PbbiqGktg07iXnbceqhJoy7vrCmX6LsjTfHr180lXNl6HnJjWdiky5xG8ukTpT1Do/6
-         /GdVB2uLrYMTjHHPxwLCrRxUK7+XHsneGBUdDOfoals8VhwbPyqX0CDRWYPiFcEVN4UK
-         EkPFVqy8uraYY4RZMyKKPqg21mTw0d5+73beCPxnjULBLYZvbegJ0CLRy4EaFpvqaMPl
-         kO1RkzJ9iBnU78zDqNmvzkEpIDb2fwtKmuARTEJkehY3pKWv1e9inpaV6jBbL8h1CgtU
-         WKMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786006677; x=1786611477;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=PCJUwbsaRK8wt4Wj9xYnHB0Ysrg8kjvYnURoW+3/53I=;
-        b=VPGAvt17VZYuqXlxIoZP/eelOHwuczktkZjOCWk9EGanKT9WZdCOpReMFMkN4dSNPX
-         8+NKxBRFFms5k11z+plgLpNt5wXq7HlC9rKhB/7X9m3LMC7HsR1hNbwXx4OkWiGtjWSY
-         9DyPucyrv0U7KQrXqIGpVmL7Wyu2Ll7mWt0k4vxAi6xbl/66txiSupwK/pAOZ1wCdE5G
-         7+Ov2iYsy9EfAvMhVT3BTiygvGFDDmIKqd8D+qjLCKOrqAbpWDbf1so0a/MZcj8I6P46
-         SgTh4prCTzlKy/0YWsZgBDy4ngk1JJ/CLg5I3td8D26WBCqQg9t6Datooj9H2/3RvYm5
-         mnmA==
-X-Forwarded-Encrypted: i=1; AHgh+RpXzLoiCtSKLIty1i7zGwwRPaaFwLYAESunSum+busTZ49G3FmZdu3GyIk/fUxLdqkKN+n2amZpo8q1d/i6@vger.kernel.org
-X-Gm-Message-State: AOJu0YzDwxmeIrLzQlLB0kN+R6sAwPFsEwS52/+8Ast4OVRzBMYQTGtu
-	D9jJcy3bg+mdhDNg0JsK2WcdnrzJFQRnlmdZnOIC0oU9k9+U+jIX7GZytVu8z/XOEqd4RDJbYlO
-	i0wr+QFSRHUY7TD2XgLHUJ4sw5gHJI08dLJ1wRopK2HbIr7ikGSWAwZG3dKGLtT5sBant
-X-Gm-Gg: AR+sD10imEsaQ8ncdJutTusaFHYvjC8NZPaGP+8DjBkxMXrbsbsTjD7e3qKWpIeAfSQ
-	gM283ibSjDN+Itc2GtscIoCGn3ssXmZcf8ftLrQh+HuGuQSOyTp1Sr0dU9pj9ghCgRwDv8ZUqPk
-	kw/GMp0mRnM+o6bhD9Lbi2HsD7bsc+w7Sk4smmbXxayJ13Vjm3JgOjjgbkdzaIs46vNuIvSdU24
-	Ca9GCrPE1gxp4U0lTtQqbydBoJ7Tcr2k7h/8qHuQKWpFXfPLs8qfbGpkenJvvI/N59VDU+XUSeV
-	JhTvszgGlAqIiibmS6+THva98Dl5RZtXJ16h32Lsva4ZddlldvVOx2xUJATQ8hOxGOlNUPkhdmK
-	OP7ZS59rU+UNqpQx261o7HaNjRaXiBblVedyS60+32+ecPhrZ3n/YeK14WfYyBkBcvhg7NfhAM5
-	UwhL7eOdc1/xjQnw==
-X-Received: by 2002:a05:622a:58c4:b0:51c:1027:34d4 with SMTP id d75a77b69052e-52ce6007ef1mr155713471cf.11.1786006677300;
-        Thu, 06 Aug 2026 01:57:57 -0700 (PDT)
-X-Received: by 2002:a05:622a:58c4:b0:51c:1027:34d4 with SMTP id d75a77b69052e-52ce6007ef1mr155713081cf.11.1786006676781;
-        Thu, 06 Aug 2026 01:57:56 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2f6236405sm602068e87.6.2026.08.06.01.57.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 06 Aug 2026 01:57:55 -0700 (PDT)
-Date: Thu, 6 Aug 2026 11:57:53 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-Cc: Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Stanimir Varbanov <stanimir.varbanov@linaro.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Stephan Gerhold <stephan.gerhold@linaro.org>,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, stable@vger.kernel.org,
-        Vishnu Reddy <busanna.reddy@oss.qualcomm.com>,
-        Daniel J Blueman <daniel@quora.org>
-Subject: Re: [PATCH v2 04/12] media: iris: Add helper to create a context
- bank device
-Message-ID: <o6s5kezlsbe6z53jbsezeixp2wfrmwmvwda67t6chf57jnbm3x@ta5hktzs7mdf>
-References: <20260731-vpu_iommu_iova_handling-v2-0-da52b5228dbd@oss.qualcomm.com>
- <20260731-vpu_iommu_iova_handling-v2-4-da52b5228dbd@oss.qualcomm.com>
+	dkim=pass (1024-bit key) header.d=arm.com header.i=@arm.com header.b="nHbm64lf"
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+	by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9EFEA153B;
+	Thu,  6 Aug 2026 02:02:05 -0700 (PDT)
+Received: from [10.1.39.91] (e127648.arm.com [10.1.39.91])
+	by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C32153F632;
+	Thu,  6 Aug 2026 02:02:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1786006929; bh=m5NHGSN+QWQ8jGKH8m7qhVAsGzAtYJFkQ76VmJgsTDk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=nHbm64lfHdIi0J0dmQAmkTIhjYo1crK4cdBFSbfZpyrGGNMXAmRdw8/MhqmY+4A0U
+	 yWqibBUr7FTRRN1mKfc7wnVdc8YbhfizL/Wv1UfJHWmlKDz7l8VLr1Oi/uPl3ryG0i
+	 OT8xONLCw8KzRSpHBvjn/aiV1CNskCWtQyM479fo=
+Message-ID: <7a4be9a1-4b00-49c4-bdbf-649268e78c7a@arm.com>
+Date: Thu, 6 Aug 2026 10:02:03 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260731-vpu_iommu_iova_handling-v2-4-da52b5228dbd@oss.qualcomm.com>
-X-Proofpoint-GUID: s4cuZ820aLi7IiTzVUrmJ4godIKPdIUl
-X-Proofpoint-ORIG-GUID: s4cuZ820aLi7IiTzVUrmJ4godIKPdIUl
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDA2OSBTYWx0ZWRfX3mZyIallWmqL
- FOW4NNTz1yY+s9Cg6es1CSWfabj4KzQxtTiUcio523368Gyhcjc0MRyUMgoKDPbB5nKvmFP9NDi
- W00jjh0pEf+f/paWoQaUfZOeS0UOOmc=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDA2OSBTYWx0ZWRfXzmT/KnslszwD
- tz5LY9UmLz9l0cv3841XeUHr3ec8MolPclg0ldr1XqUHaN/zFN5IVioPiyZDPGlKEoKZuhsV7wg
- lpAwP6K5ZKHK90rjd5AOjZkEVbYhCYXI1PLD7OMirz8Zv8qm6rIgGIjNTvyOv2HSPw+FIZ3JHtZ
- 43XvVsO914cqTOosduYhoKqaRf23v9mlPfhqeJ7nb/3dTNUPQOgE+xjFGGF5mkp2Pf9LwRUz+IL
- f+BGaKA4K5+ypy4+OnyapDMTUJT+ko2Apv3Ayoy/E+ddwJ4Ts+OYb35r4mRjHmAYL4BMvoIIIFw
- QOHNY4EFbU/xB/p0iTKSxrLy1imG+XGaSCgNu4vsRylypT2aQyiidpqWy3YHvAFap3o4oPnoQ/E
- XGYLBMfVEcGYBZOhUJk4UnknxOZjl9aJB9jXvIjbpB6Toe67XqZ3cW6n5qf3FLge7htQOd62ZsM
- XJCXGTtHBtgnhPoXkbw==
-X-Authority-Analysis: v=2.4 cv=d4bFDxjE c=1 sm=1 tr=0 ts=6a744c96 cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=t9ty7G3lAAAA:8 a=dO4OCG3WZ7AYuUZzn_0A:9 a=CjuIK1q_8ugA:10
- a=dawVfQjAaf238kedN5IG:22 a=CsAS6f0m0zARWR-uHzm3:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-05_06,2026-08-05_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 spamscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0
- suspectscore=0 clxscore=1015 impostorscore=0 adultscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608060069
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] sched/cpufreq: Update schedutil's DVFS request to
+ reach the boost frequencies
+To: Sibi Sankar <sibi.sankar@oss.qualcomm.com>, rafael@kernel.org,
+ viresh.kumar@linaro.org, mingo@redhat.com, peterz@infradead.org,
+ linux-arm-msm@vger.kernel.org, juri.lelli@redhat.com,
+ vincent.guittot@linaro.org, dietmar.eggemann@arm.com
+Cc: linux-kernel@vger.kernel.org, rostedt@goodmis.org, bsegall@google.com,
+ mgorman@suse.de, vschneid@redhat.com, kprateek.nayak@amd.com,
+ linux-pm@vger.kernel.org, Ionela Voinescu <Ionela.Voinescu@arm.com>,
+ Beata Michalska <Beata.Michalska@arm.com>,
+ Dietmar Eggemann <dietmar.eggemann@arm.com>
+References: <20260806044230.909961-1-sibi.sankar@oss.qualcomm.com>
+ <20260806044230.909961-3-sibi.sankar@oss.qualcomm.com>
+Content-Language: en-US
+From: Christian Loehle <christian.loehle@arm.com>
+In-Reply-To: <20260806044230.909961-3-sibi.sankar@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jul 31, 2026 at 11:52:19PM +0530, Vikash Garodia wrote:
-> The VPU issues DMA through several SMMU streams, and the hardware does
-> not give every stream the same addressable range. The non-pixel stream
-> is restricted to use 0-600MB of IOVA space, while the pixel stream can
-> address the full range. A stream can only be confined to its range if it
-> has an IOMMU domain of its own, and the IOMMU core attaches a domain per
-> struct device, so each stream needs its own device.
-> Add iris_create_cb_dev(), which looks up a named child of the iris node
-> and registers it as a platform device parented to the iris core. The
-> child's fwnode is handed to platform_device_register_full() so the OF
-> core applies that subnode's "iommus" property and the new device gets
-> its own IOMMU domain. The DMA mask comes from platform data, and the
-> segment size and boundary are capped at 32 bits to match the addressing
-> the VPU performs.
-> Return NULL when the named child is absent, so callers can treat a
-> device tree without context bank subnodes as a supported configuration
-> rather than an error.
-> Backports are intended since the first DTS of 8550 binding schema.
-
-What does this mean in the commit message?
-
+On 8/6/26 05:42, Sibi Sankar wrote:
+> capacity_freq_ref, exposed to schedutil via get_capacity_ref_freq(),
+> was introduced by commit 9942cb22ea45 ("sched/topology: Add a new
+> arch_scale_freq_ref() method") as a fixed anchor that does not move at
+> runtime. However, schedutil uses that same fixed anchor as the reference
+> plugged into map_util_freq() which saturates exactly at capacity_freq_ref.
 > 
-> Fixes: 41661853ae8e ("arm64: dts: qcom: sm8550: add iris DT node")
-
-How can driver fix the DT?
-
-> Cc: stable@vger.kernel.org
-> Co-developed-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-> Signed-off-by: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-> Tested-by: Daniel J Blueman <daniel@quora.org>
-> Signed-off-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+> As a result, a system with cpufreq boost enabled effectively never runs at
+> boost frequencies under schedutil-governed load. Fix this by plugging in
+> policy-max into the map_util_freq equation, so that the DVFS requests
+> translates to the actual cpufreq driver ceiling.
+> 
+> Signed-off-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
 > ---
->  drivers/media/platform/qcom/iris/iris_resources.c | 28 +++++++++++++++++++++++
->  drivers/media/platform/qcom/iris/iris_resources.h |  1 +
->  2 files changed, 29 insertions(+)
+>  kernel/sched/cpufreq_schedutil.c | 13 ++++++++++---
+>  1 file changed, 10 insertions(+), 3 deletions(-)
 > 
+> diff --git a/kernel/sched/cpufreq_schedutil.c b/kernel/sched/cpufreq_schedutil.c
+> index a1782755efcc..dcefbeaa0702 100644
+> --- a/kernel/sched/cpufreq_schedutil.c
+> +++ b/kernel/sched/cpufreq_schedutil.c
+> @@ -195,10 +195,17 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
+>  				  unsigned long util, unsigned long max)
+>  {
+>  	struct cpufreq_policy *policy = sg_policy->policy;
+> -	unsigned int freq;
+> +	unsigned int freq, ref;
+>  
+> -	freq = get_capacity_ref_freq(policy);
+> -	freq = map_util_freq(util, freq, max);
+> +	ref = get_capacity_ref_freq(policy);
+> +
+> +	/*
+> +	 * That fixed anchor governs how utilization is interpreted, but
+> +	 * the DVFS request is free to target the current policy ceiling.
+> +	 * Using ref alone would saturate the util->freq map at ref so
+> +	 * use policy->max to reach boost frequencies.
 
--- 
-With best wishes
-Dmitry
+I'm not sure those two statements are compatible with the implementation below?
+util / max is expressed in the capacity scale established using ref, multiplying
+that ratio by policy->max changes the interpretation of every util value.
+
+
+> +	 */
+> +	freq = map_util_freq(util, max(ref, READ_ONCE(policy->max)), max);
+
+Isn't the underlying problem that schedutil can't handle requests above capacity 1024?
+
+effective_cpu_util() caps util at max, and sugov_effective_cpu_perf() applies
+the 25% headroom before clipping the result back to that same value.
+Therefore the input here cannot exceed 1024, and mapping it against ref
+can never request a frequency above ref.
+Using policy->max makes boost reachable, but also stretches the complete frequency range.
+For example, with ref = 4454400, policy->max = 4723200, and effective util 640, the request
+changes from 2784000 to 2952000.
+
+Making 'boost frequencies' truly compatible with schedutil (or PELT/CAS for that matter)
+is a discussion that is yet to be had?
+See also
+https://lore.kernel.org/lkml/20250626093018.106265-1-dietmar.eggemann@arm.com/
+
