@@ -1,242 +1,306 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D69343F7AAA
-	for <linux-arm-msm@vger.kernel.org>; Thu,  6 Aug 2026 10:53:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EBBB44CAC6
+	for <linux-arm-msm@vger.kernel.org>; Thu,  6 Aug 2026 11:12:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786013608; cv=none; b=H/nY6prnuzXd2x6fn/J0R8ZC7+WKcfgSeA1L4F58OUcoY6Jg2WurdlpEP+PEMdCPiTlDSdV1veP3Z54qM3traPTItehbP6YdnEGGNdGZNluRh4Bv0wH0HIqr8z3HiOEltmN7Jx5A+zkdDDFdOdOodYbtcln2Qchk53duBPGKQsQ=
+	t=1786014743; cv=none; b=N5q007fnW9adfuruCHDD+gQ48v1L+eCK1Ak6OvEEEMMZZYTzSsxYzHRajD9s5xBq2M2bztaZLVks4r2Io0InBIWVhl5aN2HTzTuAp5n4W/ZgYne6k+tagT744vjmWHA6i2bfDd3wPtHXcnZq1LfZT+Djz335HB898Cw8ZV7i9GY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786013608; c=relaxed/simple;
-	bh=dJPIcsDZlDMAfg6zUysI1OwcH+C+3jNCyN4Fa+Z/3cE=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Q+pCJPTlY7+OEKyCk1TELyKX8Bh2BxubZSAIX823yPbuvkwsRlyoxzHQfXu85i63cQtDo6TEDkBpnKz1DcM1DxpgWOmunpoTil7F3UuyenPrVidsN9pbvcqIgB42+SrKkKYgWeVKYHhni5Zdm7/TvKycGMN5etywBumkv1RqaXg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=TpZxN6TF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SOsejs3B; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1786014743; c=relaxed/simple;
+	bh=SA5xKkr4k4JH8W3UibIRq0ITHBL+VJeNdLdPDMEmYsg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=g1g/DmCpvbCs3n9iRiwwbpaBqEJ5B2GVN89pBPXqhtqHKeVQCkDvKXvQt59rZAEdJMf35+CGiCuSboQjZM3lppz47syaUdMs/HGIstecfhhWbauXLNSQvECfZIUfujM0N1u94MnxLUvnMynLz7ted8V/IKDwwUqfT1UCNhik8S8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=X+6r2Uq2; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=GNzXeIt2; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="TpZxN6TF";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SOsejs3B"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6769ne3q1533987
-	for <linux-arm-msm@vger.kernel.org>; Thu, 6 Aug 2026 10:53:25 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="X+6r2Uq2";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="GNzXeIt2"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6769nhfF1228148
+	for <linux-arm-msm@vger.kernel.org>; Thu, 6 Aug 2026 11:12:17 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	mqTT4OdC+eo+D0Ndmyh5RHA/+pCdGGJQeQVezw4oxEM=; b=TpZxN6TFkXbMCi+m
-	4hBcxBQotVcxhl1AD+K6QB6nZgmMe4v6RhPZh1yd2QQgqUjkZSPVAT7HNW+KKviS
-	8VNJDKRMjmWpiJ/zMxSnxbdoCcp+TBPEV4n25Bk1UhfTjmaYKRUh4PHRAoMsqZ/U
-	yQqksRYN1BS8bJqLeoVDzMVbPV+bNgOiBYa3i5PbDC5gNRtbeLnhPe+5NO6WkqlU
-	vVLbEInMFyw9sLvnhICiHbOr3C1L1VITUwMVQ91W7cMySVCRD3oW5sxaaskz1uAm
-	wrj8qTYeiNdkB8ohk0d7EtIrueNawBYue3dgfMwARmEdfQBrBO5UhjGheiLPDDJV
-	xqeUeQ==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvn8ps1p8-1
+	07eeDzTXVKd4op1zvdG1+PXG44SaYTB3kcWlWrEVtcg=; b=X+6r2Uq2ezM5+1YO
+	T2TaA74lLPGOU74tYAEX69R7ao4L2C/Fqo6bN41qsQMevj+DRysFWDSJw4m7DzhL
+	BF5h8Wy3o0hsU559V3kL8PZ0lHknz/w8mnXxHgNb9Wz4DJh4sWEt11hTHzLHwOfk
+	BjY4KUYpWAI+rXu5WzEA802Z/PQc0kSXWNVDGLwFNmDzOvukW3hUdxQExeWx40Yd
+	hE5+t/7Zs+hV+r0QNCXL5eYH5JhRxLiq8hJP8FeLe9by2BrGDwLdoehn4I8sgDGw
+	7rHwvwZwdqp9Duvx4bJZxnxeqb6FsuFf4Sl3ke+viICvML0y4UOhLo2CQOb19Puj
+	x6Bjfg==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvqdugjn2-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 10:53:25 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-84857446424so3537171b3a.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 03:53:25 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 11:12:17 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cab041eced3so3064881a12.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 04:12:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786013605; x=1786618405; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=mqTT4OdC+eo+D0Ndmyh5RHA/+pCdGGJQeQVezw4oxEM=;
-        b=SOsejs3BkCA4bp4bak8qaKTL3raAayl18wXunc0ul4Baoh0gNXriR73iDlOaYSwYPe
-         ugZciG0X0eD6k358nbhjZlE8a3WNx0/VnRWEO5ADOFBZgapsXjeBL7q4UuhdzeRyrL4F
-         jXuaUk0TVV4jOt7z4We8nOPpKJXl4IUGyyvKpjb+rExOt4OhVtgrtyYs0b078oY6gnOv
-         nmm161FrnKZ+YvaDraMZbDNjZve+gjRgro62oh30JeDMCrL0Lt+ssPAAkKs3pJylkQ39
-         9UXRi8xw0Ng2YKndb0olRpHLQKwjLt/2spfscDIjjGTHBr4Ta4GLy0ItG96SVS/dAzx9
-         j4qA==
+        d=oss.qualcomm.com; s=google; t=1786014737; x=1786619537; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=07eeDzTXVKd4op1zvdG1+PXG44SaYTB3kcWlWrEVtcg=;
+        b=GNzXeIt2KsHRmwH2FOgLy1uTEBAw3EFf3bheWGfH0ujhe4AGVA8ArJKzCwrXWcVHfQ
+         +ay/1RDoMtL0BneUWRMp2gHiE9RXZwSR8HC3Bmlkpqvf/AEalLMdEnXGGzL9gW6MfvBS
+         oVWgTTiiX1xh9vxoKKy5bfvKbK12j9ETuAbqhpVDKJHvaNJZVceu2eZvZtlwCN0znUUm
+         9ezJq/NN6eX7NJWyRuSfdZIB5DiFibKbRr0gcMhaNGZDq40fqyK74mAZmal2w09Ie03n
+         TcdsH+IqovJRMUzFbZbW6U6tl2cuKBUffdJ/JKQi91RPgnFTIZigJ91icoSq/0hIkie/
+         uISw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786013605; x=1786618405;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=mqTT4OdC+eo+D0Ndmyh5RHA/+pCdGGJQeQVezw4oxEM=;
-        b=Q8vAGis+hP6H29RGE3AQ3Z2HAS8QXU/3wYOJYzPSrNUW6BNMDr0rFoLhb3q0xY511L
-         ekPlb8lMgh3cfc58+kzM9FAwUJ4iyOsFVagGuFjYpjuHA1FsaqeKe/18F2GDrA0wgE70
-         1BFgLykkAfb2L4vIog2Yl9IcQLlkBWXTOJL3Zz7sPmGaEy3B3cKroA1nq8bJbzECfDC7
-         D96wLMi3Tpr+aWk/yy1yub3rcgXIi8ZK3hkJPbffLaTdykIX7EV+10We9T47UPVLr3Ho
-         FYKM6wmzPi1vKmhuooXlK3pB4SHKP0YjNhvnexVMP7/xP4G8bsvtnM1GFzYw6rw5vAtE
-         urNA==
-X-Forwarded-Encrypted: i=1; AHgh+RrTUhyqh2Hr/rYNY2lqVyExVyD6WhdVk95b+Y28dC8WqH3MyNrKD/Y0tRstyXL0m3R+BVKbDri11b4I90T5@vger.kernel.org
-X-Gm-Message-State: AOJu0YyZVFMiuzDmFVihLzrXM4vdQWGTYKzxDf3Q++WDIjqkxD/lPyYt
-	TZzAUqpezgkcpC6ulkSwyQgGVAC3mHUUp/0M59Du7qo42EeGb6/xjfAXR472OQp6SYMQIqz9IyF
-	tj+qQOrMSGhV+VyLm+M91YhXht799hCU9AGourT2UP8Cf2mrQvTTobzp8zO+8cfPpb4Fk
-X-Gm-Gg: AR+sD12X3azCzQNADTizaJmMFsCnrDfjOybEkIT99/A6lVjBvM8rzcnNgCZb8W6yGjE
-	VkvDlAFPHzi9d/gJNw7cYkccvd1orLH0jQ5d3wssvCh4eJOFcUKMGsltUrgddgnmdHULp1iuYgJ
-	3ZteiU9tZf1jyf0xiDdaa3ETOD+vfAkOsdYm2k1IfaI5RfLnBd6URv7W/lTS6nBNJVv2lEMOXtN
-	EYMEEc/WwfnU4oXuCJdtmVR+cLxgZf1XmtKHRp/idYcvIvmE2b1n8RiyKqJ4hXylqojBH2gula1
-	GpkwYfFbn8UBopxGjBrOqkg9udDKXhcahNQXtt0e0Fjj2JVcSyf4PUk5vxBUcp/NpRpTfOKzKTf
-	IgwnmqHDt71sTIwtFI3kHddQkwjOzuiRr
-X-Received: by 2002:a05:6a00:4293:b0:84a:6540:3389 with SMTP id d2e1a72fcca58-84f2dfc53e4mr16136559b3a.10.1786013604711;
-        Thu, 06 Aug 2026 03:53:24 -0700 (PDT)
-X-Received: by 2002:a05:6a00:4293:b0:84a:6540:3389 with SMTP id d2e1a72fcca58-84f2dfc53e4mr16136504b3a.10.1786013604208;
-        Thu, 06 Aug 2026 03:53:24 -0700 (PDT)
-Received: from [10.217.217.28] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84f45389e5bsm1173338b3a.1.2026.08.06.03.53.17
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 06 Aug 2026 03:53:23 -0700 (PDT)
-Message-ID: <4e25b74c-baea-4283-9730-7313162284b5@oss.qualcomm.com>
-Date: Thu, 6 Aug 2026 16:23:15 +0530
+        d=1e100.net; s=20251104; t=1786014737; x=1786619537;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=07eeDzTXVKd4op1zvdG1+PXG44SaYTB3kcWlWrEVtcg=;
+        b=lTC+GMeGkqiq2O0yjaqh9CAfkkg1YPlApnPoqWMyyt3VaU3r8FmvP6JOjwYcnwXtJY
+         JFm3RSONG7WFFuSWXPUI91CHvlE2vHS41rhWXTCcTQqeRoumtCFSQs7+mcKbPrH1ZTVI
+         3h8ZTBpW6pSfXuidRpa9oijP6eesRdtxb+xLR5UBpghaPi67/0p6HLteD0+w5NVWyyNH
+         Fb/lUs18JAG0xxG2ILJ8k/D9Bqgb7E6HJ+uv7OyOyHnxYjQ+ESgrnVZH7hUZzCpHztAz
+         fFrYjLO5VP0VNUoZquB1S5VN9H/otX0SrxW0QLtIByiK7agzj3CtXMk6gVzdQcgz6wue
+         LI9w==
+X-Forwarded-Encrypted: i=1; AHgh+RqjluBXLVbnSgxaA+7wZStC/tLxYbCAbesIba0mIY4qcg+YB8UnCp6uPejmoRvIpWMXJ+LU+07LDhedIqAw@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz31eYC8aBGMy+6ua+1uUKA/LGtNW6d7mJH5O++3X69+5cc89OA
+	1jYZ881zknuYZWQeGPM865XMvQEAmB3x/+YyjXV9nC1kzsJArbyivXLQvli3Jw/DJvDedJhfwO0
+	ohl7g1qQHwXWbD2ah6p97ihRF2PEP2yx+ZA6c5PvnBH4FLwM5q86FtpjyqSg2F+99rSrp
+X-Gm-Gg: AR+sD10y4neorzNP65Cf0552q1GhFeIhuKJSqBfCbWHrPbS/zdHB2xFpnYTWsx0DIYG
+	QYzdHy3X0NW+ZFG0OZbxT9OyPgPO7wTULlmXPrZ6hMC9c/RHUAZf8xpvE0Z9D8935EBdLBbBbqT
+	Yx2rmGoFHO/tEddheHz3NKVyyz6zwGp3OzCOqtmpWZLput26RucJLrEC2h9em72nIozAvYHJQu+
+	7mIswTcQ0W/IJcBTnFUGIjRQEwofk+Ot1XzjWYKxXYYb5DHIDPgfSOmF4jY8pqJHuqvHgi8IpVa
+	j+EL/8j6FnGQGYfNC+5GImfi0vmvrA457tBrFqrV9ZyvYpw0sV5DkCsBky2SuPTyxY2H9Dlctx8
+	V/HsHvMJLKr08UvJUys8bdcQvFxE=
+X-Received: by 2002:a05:6a21:9985:b0:3c3:bbe6:95c9 with SMTP id adf61e73a8af0-3cb85e72ec2mr15471019637.16.1786014736915;
+        Thu, 06 Aug 2026 04:12:16 -0700 (PDT)
+X-Received: by 2002:a05:6a21:9985:b0:3c3:bbe6:95c9 with SMTP id adf61e73a8af0-3cb85e72ec2mr15470931637.16.1786014736284;
+        Thu, 06 Aug 2026 04:12:16 -0700 (PDT)
+Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315867d7e4csm27992133eec.31.2026.08.06.04.12.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 06 Aug 2026 04:12:15 -0700 (PDT)
+Date: Thu, 6 Aug 2026 16:42:09 +0530
+From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+To: Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Guru Das Srinagesh <linux@gurudas.dev>,
+        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
+        Andrew Halaney <ahalaney@redhat.com>, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v4 3/3] firmware: qcom: scm: Fix tzmem state on probe
+ retry
+Message-ID: <20260806111209.eijwcaoiutjvblk4@hu-mojha-hyd.qualcomm.com>
+References: <20260724094939.613844-1-mukesh.ojha@oss.qualcomm.com>
+ <20260724094939.613844-4-mukesh.ojha@oss.qualcomm.com>
+ <CGME20260806092742eucas1p1b946452d9f0f714b27cad67cd5590c21@eucas1p1.samsung.com>
+ <5ea74dd3-7471-4c7c-9242-c2005312b1ab@samsung.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/7] dt-bindings: iio: adc: Add support for QCOM PMIC5
- Gen4 ADC
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Jonathan Cameron <jic23@kernel.org>,
-        David Lechner
- <dlechner@baylibre.com>,
-        =?UTF-8?Q?Nuno_S=C3=A1?= <nuno.sa@analog.com>,
-        Andy Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>, Amit Kucheria <amitk@kernel.org>,
-        Thara Gopinath <thara.gopinath@gmail.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, linux-iio@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
-        Anjelique Melendez <anjelique.melendez@oss.qualcomm.com>,
-        Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>,
-        Priyansh Jain <priyansh.jain@oss.qualcomm.com>
-References: <20260731-pmic5_gen4_adc-v1-0-9c49b2eea6f9@oss.qualcomm.com>
- <20260731-pmic5_gen4_adc-v1-1-9c49b2eea6f9@oss.qualcomm.com>
- <20260804-marvellous-crayfish-of-recreation-d06401@quoll>
-Content-Language: en-US
-From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-In-Reply-To: <20260804-marvellous-crayfish-of-recreation-d06401@quoll>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDA4NSBTYWx0ZWRfX6Bcj/K9kIy/b
- Yt4LTUMSZSZw3mecX/V/CnIPFoVSPtmSk52zSLIiYo/VaERCX2F3qRDau7Ei9aCY0TRY1wAri/v
- JPv9DB9pvvLGfUWywFn4+xgu8jfLm7w=
-X-Authority-Analysis: v=2.4 cv=RPeD2Yi+ c=1 sm=1 tr=0 ts=6a7467a5 cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=he8iogTWBVq0M3DZNvYA:9 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-GUID: B6sspjEfXrWJV46f4GUgsDf2NUmQTGzx
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDA4NSBTYWx0ZWRfX4W/eWQ0Vei34
- VaurpwYsM604V6RmqD7l4LE603qyXZcq4luMAyV7ZAki5FtL3zbsj72TYRzn3ZkrEmNL8Ng6Z1h
- L6SZrCKuQFlxAqBpAbAVRJg1LS91aqf+n5/FxCfFTUY5YoIeM4T0sA7UU5h3OBk+vmqBvIYR5vz
- g8ze/E/aVK8xkQ9wsctxyBo28+itZvTHV+6ufzJ7f7QmJlnmJJNNiubwskQ9216dKSJZp4y2mb5
- RaTAa5nOOnDkAJLYbNYTAviRaRdUO1yyk+sG8kiWe8XjnHft9zR/8wJXnxFSkCaQi18W/H6DSZa
- +09cJtW9wUBbQT/Mihfl7GAU7ZcMStEeKMfhMWGnyPC8iYzhszxCyt1+lVl+TRwr+J0J2pxgmxy
- tEFlm7Iht4D24uvbGooUaeBPb72aAXs+vmhp1+dmVe678+gl29oNvbKpFbMBfWGu29YMtt4Gdjf
- dsduhtNvrlF90XTDH/Q==
-X-Proofpoint-ORIG-GUID: B6sspjEfXrWJV46f4GUgsDf2NUmQTGzx
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <5ea74dd3-7471-4c7c-9242-c2005312b1ab@samsung.com>
+X-Proofpoint-GUID: _6X79Qgb2n3wK1jpZsPi4uNbpjtdz_Rp
+X-Proofpoint-ORIG-GUID: _6X79Qgb2n3wK1jpZsPi4uNbpjtdz_Rp
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDA4OCBTYWx0ZWRfX0MvrAUip42YO
+ 9+8oENg4Yhdj0gk7puso9eoFBq5ciQZZ/RCHa0P/5UNbYGcvmQhKlBo/G9uHqy2hXyaG5EuLqWF
+ +QyUhyPsd/PnYFpSC0M36egaszptk9eZsSC8REkbmmJ9oQgSi+8KuYLD5Id9P8iiCALaz7z+n2k
+ smSiKRwWf9Z40QQZ4QivpvRH8QANfX/Gtt4mhPTbdlwh8Fz/90NsSPIXedsnGUadoLRDE5JsT+R
+ QGw7sm3ex3YirQnKKM+kXR6IiHRIY5OOHQc0uNrkAk07EVdjyqJyabfl9ct4MCMs+FJV+SUXdRi
+ BGccIGrGZloGrhZqw8KV1GPefD7fVyz0IdEMQt0/WpHKfMRm5bsAg4T9L9g7nuv2OD4ImGM0g8I
+ b7ocX96iE0WfVIt9UifSUTVcsylvJ4jvUOXYjbuhrKEQ2Hq3K2tpTqdFeGk85I7dFmY1LRe75/p
+ q1gvSPMG4bhGuA+JKwg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDA4OCBTYWx0ZWRfX4C1AOPPX2N9U
+ cYIiEREae62X6aP3bYVhbJHv5V+U5dSqFZZztQ7E9o+ddOzaTkDkL04OZ0BRLdGFQNkfOpQAuwn
+ GaatrzQNj54czEFXqPc//h4AuYcwjYg=
+X-Authority-Analysis: v=2.4 cv=bdtbluPB c=1 sm=1 tr=0 ts=6a746c11 cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=8nJEP1OIZ-IA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=Jpntq_2DsLf-gPNxgnUA:9 a=3ZKOabzyN94A:10 a=wPNLvfGTeEIA:10
+ a=3WC7DwWrALyhR5TkjVHa:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-05_06,2026-08-05_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0 spamscore=0 priorityscore=1501 impostorscore=0
- adultscore=0 phishscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608060085
+ phishscore=0 clxscore=1015 spamscore=0 bulkscore=0 malwarescore=0
+ suspectscore=0 lowpriorityscore=0 priorityscore=1501 adultscore=0
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608060088
 
-Hi Krzysztof,
+On Thu, Aug 06, 2026 at 11:27:39AM +0200, Marek Szyprowski wrote:
+> On 24.07.2026 11:49, Mukesh Ojha wrote:
+> > qcom_tzmem_enable() returns -EBUSY if called a second time, but this
+> > causes probe retries to fail permanently if a later step in
+> > qcom_scm_probe() defers after qcom_tzmem_enable() has already succeeded.
+> >
+> > Use DO_ONCE() to ensure qcom_tzmem_init() runs exactly once across all
+> > calls in a thread-safe manner. qcom_tzmem_dev is set on every call since
+> > probe retries use the same device pointer. The result of the first
+> > initialisation is cached and returned to every subsequent caller.
+> >
+> > Fixes: 40289e35ca52 ("firmware: qcom: scm: enable the TZ mem allocator")
+> > Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> > Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> > Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+> > ---
+> >  drivers/firmware/qcom/qcom_tzmem.c | 13 +++++++++----
+> >  1 file changed, 9 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/drivers/firmware/qcom/qcom_tzmem.c b/drivers/firmware/qcom/qcom_tzmem.c
+> > index 0635cbeacfc8..0fd9581275f1 100644
+> > --- a/drivers/firmware/qcom/qcom_tzmem.c
+> > +++ b/drivers/firmware/qcom/qcom_tzmem.c
+> > @@ -15,6 +15,7 @@
+> >  #include <linux/kernel.h>
+> >  #include <linux/list.h>
+> >  #include <linux/mm.h>
+> > +#include <linux/once.h>
+> >  #include <linux/radix-tree.h>
+> >  #include <linux/slab.h>
+> >  #include <linux/spinlock.h>
+> > @@ -507,14 +508,18 @@ phys_addr_t qcom_tzmem_to_phys(void *vaddr)
+> >  }
+> >  EXPORT_SYMBOL_GPL(qcom_tzmem_to_phys);
+> >  
+> > +static void qcom_tzmem_do_init(int *result)
+> > +{
+> > +	*result = qcom_tzmem_init();
+> > +}
+> > +
+> >  int qcom_tzmem_enable(struct device *dev)
+> >  {
+> > -	if (qcom_tzmem_dev)
+> > -		return -EBUSY;
+> > +	static int result;
+> >  
+> >  	qcom_tzmem_dev = dev;
+> > -
+> > -	return qcom_tzmem_init();
+> > +	DO_ONCE(qcom_tzmem_do_init, &result);
+> One should use DO_ONCE_SLEEPABLE() here, otherwise it triggers a warning during
+> boot on some on my test systems. Here is a log captured with
+> CONFIG_DEBUG_ATOMIC_SLEEP=y on recent linux-next releases, where this patch is
+> applied as commit 9941fe8a04f3 ("firmware: qcom: scm: Fix tzmem state on probe
+> retry"):
 
-On 8/4/2026 1:50 PM, Krzysztof Kozlowski wrote:
-> On Fri, Jul 31, 2026 at 11:36:14PM +0530, Jishnu Prakash wrote:
->> PMIC5 Gen4 ADC is similar to PMIC5 Gen3 ADC, with several changes made for
->> improved performance, mostly at the hardware level. The main differences are
->> increased ratiometric conversion resolution (from 14 bits to 16 bits) and
->> increased bit field width for PMIC SID (to allow communication with an
->> increased number of PMICs, supported on latest SoCs).
->>
->> Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
->> ---
->>  .../bindings/iio/adc/qcom,spmi-adc5-gen3.yaml      | 47 +++++++++++++++++++++-
->>  1 file changed, 46 insertions(+), 1 deletion(-)
->>
->> diff --git a/Documentation/devicetree/bindings/iio/adc/qcom,spmi-adc5-gen3.yaml b/Documentation/devicetree/bindings/iio/adc/qcom,spmi-adc5-gen3.yaml
->> index 149f4af8f4b8..e79ddc2acca0 100644
->> --- a/Documentation/devicetree/bindings/iio/adc/qcom,spmi-adc5-gen3.yaml
->> +++ b/Documentation/devicetree/bindings/iio/adc/qcom,spmi-adc5-gen3.yaml
->> @@ -21,9 +21,14 @@ description: |
->>    All boards using a particular (SOC + master PMIC) combination will have the
->>    same number of ADC SDAMs supported on that PMIC.
->>  
->> +  PMIC5 Gen4 ADC is similar to Gen3 ADC, with some differences such as
->> +  improved ratiometric conversion resolution.
->> +
->>  properties:
->>    compatible:
->> -    const: qcom,spmi-adc5-gen3
->> +    enum:
->> +      - qcom,spmi-adc5-gen3
->> +      - qcom,spmi-adc5-gen4
->>  
->>    reg:
->>      items:
->> @@ -83,6 +88,46 @@ patternProperties:
->>            This property indicates ADC_TM monitoring is done on this channel.
->>          type: boolean
->>  
->> +      qcom,adc5-gen4:
->> +        description:
->> +          Indicates channel is of type ADC5 Gen4. This may be needed in cases where the
->> +          master PMIC has an ADC peripheral of type Gen3, but some of the other PMICs it
->> +          communicates with have ADC peripherals of type Gen4, so channels of those PMICs
->> +          need to be marked as Gen4 to ensure their conversions are handled correctly.
->> +        type: boolean
-> 
-> It is implied by the compatibles, in this case the peripheral
-> compatible.
-
-This property is needed in cases where a Gen3 master PMIC has Gen4
-channels under it.
-
-The main point to keep in mind for Gen3/Gen4 ADC is that the compatible
-describes the ADC peripheral on the master PMIC, but the master PMIC's
-ADC communicates with ADCs on other PMICs, which may not always be of
-the same generation. Under the master PMIC's ADC DT node, we have ADC
-channel nodes from all the PMICs it communicates with.
-
-
-For example, SM8750 has the following 8 PMICs, having ADC channels:
-
-PMK8550 (Gen3 master PMIC)
-PM8550
-PM8550vs (2 instances)
-PM8550ve (3 instances)
-PMIH0108
-
-
-ADCs on the first 7 PMICs are of type Gen3, but PMIH0108 has
-Gen4 ADC. So ADC channels of PMIH0108 exposed under the PMK8550
-ADC peripheral need to have the "qcom,adc5-gen4" property to
-indicate they are of a different generation and may need a
-different conversion formula.
-
-Similarly, on some variants of the upcoming mobile platform Maili,
-we have the opposite case (master PMIC has Gen4 ADC, one of the
-other PMICs has Gen3 ADC), so we would also need the "qcom,adc5-gen3"
-property for some platforms.
-
-I'll add a description for these properties too in the commit
-message, hope it helps.
-
-Thanks,
-Jishnu
-
+Thanks for reporting; I will spin a fix..and yes DO_ONCE_SLEEPABLE() is the right one.
 
 > 
-> Best regards,
-> Krzysztof
+> qcom_scm: convention: smc arm 64
+> BUG: sleeping function called from invalid context at drivers/firmware/qcom/qcom_scm.c:334
+> in_atomic(): 1, irqs_disabled(): 1, non_block: 0, pid: 49, name: kworker/u16:2
+> preempt_count: 1, expected: 0
+> RCU nest depth: 0, expected: 0
+> locks held by kworker/u16:2/49: 4, last CPU#3:
+>  #0: ffff000000032140 ((wq_completion)events_unbound){+.+.}-{0:0}, at: process_one_work+0x6b4/0x840
+>  #1: ffff800080563d90 (deferred_probe_work){+.+.}-{0:0}, at: process_one_work+0x1fc/0x840
+>  #2: ffff00000036f938 (&dev->mutex){....}-{4:4}, at: __device_attach+0x3c/0x190
+>  #3: ffffa83e89fe4af0 (once_lock){....}-{3:3}, at: __do_once_start+0x2c/0x74
+> irq event stamp: 80794
+> hardirqs last  enabled at (80793): [<ffffa83e87faa600>] _raw_spin_unlock_irqrestore+0x6c/0x70
+> hardirqs last disabled at (80794): [<ffffa83e87fa9a6c>] _raw_spin_lock_irqsave+0x84/0x88
+> softirqs last  enabled at (80780): [<ffffa83e86ccc050>] handle_softirqs+0x5dc/0x5f4
+> softirqs last disabled at (80755): [<ffffa83e86c10700>] __do_softirq+0x14/0x20
+> CPU: 3 UID: 0 PID: 49 Comm: kworker/u16:2 Not tainted 7.2.0-rc6-next-20260805+ #13357 PREEMPT
+> Hardware name: Arduino UnoQ (DT)
+> Workqueue: events_unbound deferred_probe_work_func
+> Call trace:
+>  show_stack+0x18/0x24 (C)
+>  dump_stack_lvl+0x8c/0xcc
+>  dump_stack+0x18/0x24
+>  __might_resched+0x148/0x24c
+>  __might_sleep+0x48/0x7c
+>  qcom_scm_call+0x30/0xc0
+>  __qcom_scm_is_call_available+0x98/0x100
+>  qcom_scm_shm_bridge_enable+0x60/0xbc
+>  qcom_tzmem_enable+0xf8/0x118
+>  qcom_scm_probe+0x2d0/0x680
+>  platform_probe+0x5c/0x9c
+>  really_probe+0xbc/0x29c
+>  __driver_probe_device+0x16c/0x19c
+>  driver_probe_device+0xb8/0x118
+>  __device_attach_driver+0xb8/0x118
+>  bus_for_each_drv+0x88/0xe8
+>  __device_attach+0xa0/0x190
+>  device_initial_probe+0x50/0x54
+>  bus_probe_device+0x38/0xa8
+>  deferred_probe_work_func+0x8c/0xc8
+>  process_one_work+0x24c/0x840
+>  worker_thread+0x1bc/0x368
+>  kthread+0x134/0x140
+>  ret_from_fork+0x10/0x20
+> 
+> =============================
+> [ BUG: Invalid wait context ]
+> 7.2.0-rc6-next-20260805+ #13357 Tainted: G        W
+> -----------------------------
+> kworker/u16:2/49 is trying to lock:
+> ffffa83e8a485e38 (qcom_scm_lock){....}-{4:4}, at: __scm_smc_do+0x70/0x488
+> other info that might help us debug this:
+> context-{5:5}
+> locks held by kworker/u16:2/49: 4, last CPU#3:
+>  #0: ffff000000032140 ((wq_completion)events_unbound){+.+.}-{0:0}, at: process_one_work+0x6b4/0x840
+>  #1: ffff800080563d90 (deferred_probe_work){+.+.}-{0:0}, at: process_one_work+0x1fc/0x840
+>  #2: ffff00000036f938 (&dev->mutex){....}-{4:4}, at: __device_attach+0x3c/0x190
+>  #3: ffffa83e89fe4af0 (once_lock){....}-{3:3}, at: __do_once_start+0x2c/0x74
+> stack backtrace:
+> CPU: 3 UID: 0 PID: 49 Comm: kworker/u16:2 Tainted: G        W           7.2.0-rc6-next-20260805+ #13357 PREEMPT
+> Tainted: [W]=WARN
+> Hardware name: Arduino UnoQ (DT)
+> Workqueue: events_unbound deferred_probe_work_func
+> Call trace:
+>  show_stack+0x18/0x24 (C)
+>  dump_stack_lvl+0x8c/0xcc
+>  dump_stack+0x18/0x24
+>  __lock_acquire+0x928/0x1f90
+>  lock_acquire+0x2b8/0x3ec
+>  __mutex_lock+0xbc/0x860
+>  mutex_lock_nested+0x24/0x30
+>  __scm_smc_do+0x70/0x488
+>  __scm_smc_call+0xd4/0x444
+>  qcom_scm_call+0x64/0xc0
+>  __qcom_scm_is_call_available+0x98/0x100
+>  qcom_scm_shm_bridge_enable+0x60/0xbc
+>  qcom_tzmem_enable+0xf8/0x118
+>  qcom_scm_probe+0x2d0/0x680
+>  platform_probe+0x5c/0x9c
+>  really_probe+0xbc/0x29c
+>  __driver_probe_device+0x16c/0x19c
+>  driver_probe_device+0xb8/0x118
+>  __device_attach_driver+0xb8/0x118
+>  bus_for_each_drv+0x88/0xe8
+>  __device_attach+0xa0/0x190
+>  device_initial_probe+0x50/0x54
+>  bus_probe_device+0x38/0xa8
+>  deferred_probe_work_func+0x8c/0xc8
+>  process_one_work+0x24c/0x840
+>  worker_thread+0x1bc/0x368
+>  kthread+0x134/0x140
+>  ret_from_fork+0x10/0x20
+> qcom_scm firmware:scm: qseecom: found qseecom with version 0x1402000
+> qcom_scm firmware:scm: qseecom: untested machine, skipping
+> 
+> 
+> > +	return result;
+> >  }
+> >  EXPORT_SYMBOL_GPL(qcom_tzmem_enable);
+> >  
+> 
+> Best regards
+> -- 
+> Marek Szyprowski, PhD
+> Samsung R&D Institute Poland
 > 
 
+-- 
+-Mukesh Ojha
