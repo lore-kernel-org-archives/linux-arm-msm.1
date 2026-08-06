@@ -1,76 +1,218 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [213.167.242.64])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E77913DD50F;
-	Thu,  6 Aug 2026 08:39:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3FB8741B8CB;
+	Thu,  6 Aug 2026 08:45:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.167.242.64
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786005579; cv=none; b=fLfyby26lQyhkQmQoW/L0aVjY88OLp7LqmMhaq0kmcVXY3TAa1fAN027jn4xuhzTEzVd6nrY6GS89yRJnzOgYT2vp6t9nRD8HteGx1VKM9v7fm1KA/PGSDoDNJ9E3Y1N4DVnHcey2eBgnjKuS6DFB0D7wfnLp/4oj42S2BpeLdc=
+	t=1786005908; cv=none; b=ZuZBYbI9N6sL5uOgjP9dop129HTAHjHk8eZU8JylQ2vHXrUUd/hDjnyqdPo/w0qJff5jXtz1nMRQ435tWeLGVB1kzHn2kgF+sgWvQsgSbm0WsmY9HQi3pYw0WQXBTpukteztxXYYCr3/4RGGd5eNmLy4uaMRqjYbQJE6EZA0t/A=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786005579; c=relaxed/simple;
-	bh=R5eNi1Ge3pWmbyWbEsWXQmoY/9AVKqPA02OW2OHDcCE=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=LGiPOVeTks8pC8h60VWyw3VPAVjg5A6U6JKV+2ANvy0lXup7ZYm0FitB2qd1xNUcRkDQrRbGJimEzEUmJnbYxlNanf29wZ1pR7esvyXOy0nSrjaqRDnB0sSuVCu5OJwASgO9fwMbbpQkNbEn2VUl7VZRXPTqG1kiVrDLUXDX7xo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fWlN2FMi; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786005908; c=relaxed/simple;
+	bh=48kFD23ryxgadIoWj41R5u4/Agy5Cde0AZhOezpDrmg=;
+	h=Content-Type:MIME-Version:In-Reply-To:References:Subject:From:Cc:
+	 To:Date:Message-ID; b=u0HumAumOejOO5fEEA/IMzGmWuqwoGnVJQo8RT9qDFnb74gk/w7nLSGA+O5KDlmOQPrP0o5Xr4itV7IEyJQUqsEycg+J6VfMLqj7RMlN+bE7MRisUzToOc23v1cOYGmF9FLnsb1fQAzlLC4d0QKXwjgTRk80TJmziuezvNl692E=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com; spf=pass smtp.mailfrom=ideasonboard.com; dkim=fail (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b=StEtHN8E reason="signature verification failed"; arc=none smtp.client-ip=213.167.242.64
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ideasonboard.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ideasonboard.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fWlN2FMi"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 014141F00A3D;
-	Thu,  6 Aug 2026 08:39:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786005566;
-	bh=CSRSGTDgMGtNJ0M1UzU9+Te04yRR+lPbJqyOnqEYveU=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=fWlN2FMijSg4aldJsxdbWAeeZSjHOdhZWifcj3mGJdFzLyhErXZUclMk1HzbDq5vX
-	 8y+xGOZMSNbYrIHN13XGg9HOwgayL2mH8BUSc0YC6NHoMvrodylBiWZw/nOmhIbhzq
-	 mfR1bjTCCBsZuYfmRptvBWUeebwkgB0BNHJ2YLCLjRFp3YZKGVr6DC3yPU4upVCBrc
-	 9FC7o4WvOrRyplrRJbT0c1LphbWE6R1uDpgVfbwlwjga5PyRLbl6PTIKMAPrU1F6uQ
-	 kfobxM5vDvYcOO0MPK0J5X373bZoXFWxeeoXWpSlK7da0OomTVVo4LVxGVt9QK/KiZ
-	 IuN+7IkPV8xNA==
-From: Vinod Koul <vkoul@kernel.org>
-To: Bard Liao <yung-chuan.liao@linux.intel.com>, 
- Srinivas Kandagatla <srini@kernel.org>, 
- Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
-Cc: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>, 
- Luca Weiss <luca.weiss@fairphone.com>, linux-sound@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-In-Reply-To: <20260728173542.61146-1-jorijnvdgraaf@catcrafts.net>
-References: <20260728173542.61146-1-jorijnvdgraaf@catcrafts.net>
-Subject: Re: [PATCH v2 1/2] soundwire: qcom: set the bus mclk_freq property
-Message-Id: <178600556361.593040.3334273150692681813.b4-ty@kernel.org>
-Date: Thu, 06 Aug 2026 14:09:23 +0530
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="StEtHN8E"
+Received: from ideasonboard.com (unknown [IPv6:2a00:6020:448c:6c00:1abe:f6b5:fe9e:82df])
+	by perceval.ideasonboard.com (Postfix) with ESMTPSA id 41558493;
+	Thu,  6 Aug 2026 10:43:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+	s=mail; t=1786005824;
+	bh=48kFD23ryxgadIoWj41R5u4/Agy5Cde0AZhOezpDrmg=;
+	h=In-Reply-To:References:Subject:From:Cc:To:Date:From;
+	b=StEtHN8E1NJbnrp/AEDiJfATZNIn7eii5QahD/KLVy7ja5Uf9yVYFbMDNu2PJ5PdJ
+	 yaqGuBbznjjZNO60wdAWN3VclXmoTUTf6sFiU0EAAzXwNaoHUEHX2t9AYdFG0fhqIw
+	 AgK+CXRWa2xjRWHGwF9B3n2mUeIYdCxtPjg6XDIU=
+Content-Type: text/plain; charset="utf-8"
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20260801195528.235230-2-krzysztof.kozlowski@oss.qualcomm.com>
+References: <20260801195528.235230-2-krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: [PATCH] media: dt-bindings: Correct white-space style
+From: Stefan Klug <stefan.klug@ideasonboard.com>
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+To: Andrew-CT Chen <andrew-ct.chen@mediatek.com>, AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Bin Liu <bin.liu@mediatek.com>, Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Bryan O'Donoghue <bod@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, Florian Fainelli <florian.fainelli@broadcom.com>, Jacopo Mondi <jacopo.mondi@ideasonboard.com>, Keke Li <keke.li@amlogic.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Matthias Brugger <matthias.bgg@gmail.com>, Mauro Carvalho Chehab <mchehab@kernel.org>, Raspberry Pi Kernel Maintenance <kernel-list@raspberrypi.com>, Rob Herring <robh@kernel.org>, Stanimir Varbanov <stanimir.varbanov@linaro.org>, Tiffany Lin <tiffany.lin@mediatek.com>, Vikash Garodia <vikash.garodia@oss.qualcomm.com>, Xia Jiang <xia.jiang@mediatek.com>, Yunfei Dong <yunfei.dong@mediatek.com>, Zhi Mao <zhi.mao@
+ mediatek.com>, devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, linux-media@vger.kernel.org, linux-mediatek@lists.infradead.org, linux-rpi-kernel@lists.infradead.org
+Date: Thu, 06 Aug 2026 10:44:52 +0200
+Message-ID: <178600589209.843203.9177682416623399293@localhost>
+User-Agent: alot/0.12.dev43+g2cacc0d03
 
+Hi Krzysztof,
 
-On Tue, 28 Jul 2026 19:35:41 +0200, Jorijn van der Graaf wrote:
-> sdw_slave_get_scale_index() needs bus->prop.mclk_freq to compute the
-> SCP bus-clock base and scale register values, and fails with "no bus
-> MCLK" when it is unset. The qcom controller never set it, so slave
-> initialization cannot program the clock registers on this bus: it
-> would fail outright for an SDCA-class slave, and a slave driver
-> declaring clock_reg_supported hits the same error. The pending WCD9378
-> codec driver hand-rolls these writes as a workaround, following its
-> downstream counterpart.
-> 
-> [...]
+Quoting Krzysztof Kozlowski (2026-08-01 21:55:29)
+> Correct a few white-space issues, like double space after '=3D' or before
+> bracket '{' characters, which will be flagged by dt-check-style.  No
+> functional changes.
+>=20
+> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
-Applied, thanks!
+This is an easy one.
 
-[1/2] soundwire: qcom: set the bus mclk_freq property
-      commit: f64c5d5ff8f9d25272562560ba1bc994f53a6def
-[2/2] soundwire: honor clock_reg_supported in the clock scaling check
-      commit: b3d27039466292faebbfd83ed9c4a7d2c39e79eb
+Reviewed-by: Stefan Klug <stefan.klug@ideasonboard.com>=20
 
-Best regards,
--- 
-~Vinod
+Cheers,
+Stefan
 
-
+> ---
+>  .../bindings/media/amlogic,c3-mipi-csi2.yaml  |  4 +-
+>  .../bindings/media/i2c/galaxycore,gc05a2.yaml |  2 +-
+>  .../media/mediatek,vcodec-encoder.yaml        |  2 +-
+>  .../bindings/media/mediatek-jpeg-decoder.yaml |  4 +-
+>  .../bindings/media/mediatek-jpeg-encoder.yaml |  2 +-
+>  .../bindings/media/qcom,msm8996-venus.yaml    | 40 +++++++++----------
+>  .../bindings/media/raspberrypi,pispbe.yaml    |  2 +-
+>  7 files changed, 28 insertions(+), 28 deletions(-)
+>=20
+> diff --git a/Documentation/devicetree/bindings/media/amlogic,c3-mipi-csi2=
+.yaml b/Documentation/devicetree/bindings/media/amlogic,c3-mipi-csi2.yaml
+> index b0129beab0c3..2f11e5f45839 100644
+> --- a/Documentation/devicetree/bindings/media/amlogic,c3-mipi-csi2.yaml
+> +++ b/Documentation/devicetree/bindings/media/amlogic,c3-mipi-csi2.yaml
+> @@ -96,8 +96,8 @@ examples:
+>                    <0x0 0xff01a000 0x0 0x100>;
+>              reg-names =3D "aphy", "dphy", "host";
+>              power-domains =3D <&pwrc PWRC_C3_MIPI_ISP_WRAP_ID>;
+> -            clocks =3D  <&clkc_periphs CLKID_VAPB>,
+> -                      <&clkc_periphs CLKID_CSI_PHY0>;
+> +            clocks =3D <&clkc_periphs CLKID_VAPB>,
+> +                     <&clkc_periphs CLKID_CSI_PHY0>;
+>              clock-names =3D "vapb", "phy0";
+>              assigned-clocks =3D <&clkc_periphs CLKID_VAPB>,
+>                                <&clkc_periphs CLKID_CSI_PHY0>;
+> diff --git a/Documentation/devicetree/bindings/media/i2c/galaxycore,gc05a=
+2.yaml b/Documentation/devicetree/bindings/media/i2c/galaxycore,gc05a2.yaml
+> index 0e7a7b5ac89f..99d728c47cfb 100644
+> --- a/Documentation/devicetree/bindings/media/i2c/galaxycore,gc05a2.yaml
+> +++ b/Documentation/devicetree/bindings/media/i2c/galaxycore,gc05a2.yaml
+> @@ -88,7 +88,7 @@ examples:
+>          #size-cells =3D <0>;
+> =20
+>          sensor@37 {
+> -            compatible =3D  "galaxycore,gc05a2";
+> +            compatible =3D "galaxycore,gc05a2";
+>              reg =3D <0x37>;
+> =20
+>              clocks =3D <&gc05a2_clk>;
+> diff --git a/Documentation/devicetree/bindings/media/mediatek,vcodec-enco=
+der.yaml b/Documentation/devicetree/bindings/media/mediatek,vcodec-encoder.=
+yaml
+> index 4505e66876a2..551e483f3e51 100644
+> --- a/Documentation/devicetree/bindings/media/mediatek,vcodec-encoder.yaml
+> +++ b/Documentation/devicetree/bindings/media/mediatek,vcodec-encoder.yaml
+> @@ -160,7 +160,7 @@ examples:
+> =20
+>      vcodec_enc_vp8: vcodec@19002000 {
+>        compatible =3D "mediatek,mt8173-vcodec-enc-vp8";
+> -      reg =3D  <0x19002000 0x1000>; /* VENC_LT_SYS */
+> +      reg =3D <0x19002000 0x1000>; /* VENC_LT_SYS */
+>        interrupts =3D <GIC_SPI 202 IRQ_TYPE_LEVEL_LOW>;
+>        iommus =3D <&iommu M4U_PORT_VENC_RCPU_SET2>,
+>               <&iommu M4U_PORT_VENC_REC_FRM_SET2>,
+> diff --git a/Documentation/devicetree/bindings/media/mediatek-jpeg-decode=
+r.yaml b/Documentation/devicetree/bindings/media/mediatek-jpeg-decoder.yaml
+> index a4aacd3eb189..76878050cfd9 100644
+> --- a/Documentation/devicetree/bindings/media/mediatek-jpeg-decoder.yaml
+> +++ b/Documentation/devicetree/bindings/media/mediatek-jpeg-decoder.yaml
+> @@ -72,8 +72,8 @@ examples:
+>        compatible =3D "mediatek,mt2701-jpgdec";
+>        reg =3D <0x15004000 0x1000>;
+>        interrupts =3D <GIC_SPI 143 IRQ_TYPE_LEVEL_LOW>;
+> -      clocks =3D  <&imgsys CLK_IMG_JPGDEC_SMI>,
+> -                <&imgsys CLK_IMG_JPGDEC>;
+> +      clocks =3D <&imgsys CLK_IMG_JPGDEC_SMI>,
+> +               <&imgsys CLK_IMG_JPGDEC>;
+>        clock-names =3D "jpgdec-smi",
+>                      "jpgdec";
+>        power-domains =3D <&scpsys MT2701_POWER_DOMAIN_ISP>;
+> diff --git a/Documentation/devicetree/bindings/media/mediatek-jpeg-encode=
+r.yaml b/Documentation/devicetree/bindings/media/mediatek-jpeg-encoder.yaml
+> index 5b15f8977f67..3bc1ccb25893 100644
+> --- a/Documentation/devicetree/bindings/media/mediatek-jpeg-encoder.yaml
+> +++ b/Documentation/devicetree/bindings/media/mediatek-jpeg-encoder.yaml
+> @@ -67,7 +67,7 @@ examples:
+>                     "mediatek,mtk-jpgenc";
+>        reg =3D <0x1500a000 0x1000>;
+>        interrupts =3D <GIC_SPI 141 IRQ_TYPE_LEVEL_LOW>;
+> -      clocks =3D  <&imgsys CLK_IMG_VENC>;
+> +      clocks =3D <&imgsys CLK_IMG_VENC>;
+>        clock-names =3D "jpgenc";
+>        power-domains =3D <&scpsys MT2701_POWER_DOMAIN_ISP>;
+>        iommus =3D <&iommu MT2701_M4U_PORT_JPGENC_RDMA>,
+> diff --git a/Documentation/devicetree/bindings/media/qcom,msm8996-venus.y=
+aml b/Documentation/devicetree/bindings/media/qcom,msm8996-venus.yaml
+> index 56c16458e3bb..389b545c9631 100644
+> --- a/Documentation/devicetree/bindings/media/qcom,msm8996-venus.yaml
+> +++ b/Documentation/devicetree/bindings/media/qcom,msm8996-venus.yaml
+> @@ -119,26 +119,26 @@ examples:
+>                   <&mmcc VIDEO_MAXI_CLK>;
+>          clock-names =3D "core", "iface", "bus", "mbus";
+>          power-domains =3D <&mmcc VENUS_GDSC>;
+> -        iommus =3D  <&venus_smmu 0x00>,
+> -                  <&venus_smmu 0x01>,
+> -                  <&venus_smmu 0x0a>,
+> -                  <&venus_smmu 0x07>,
+> -                  <&venus_smmu 0x0e>,
+> -                  <&venus_smmu 0x0f>,
+> -                  <&venus_smmu 0x08>,
+> -                  <&venus_smmu 0x09>,
+> -                  <&venus_smmu 0x0b>,
+> -                  <&venus_smmu 0x0c>,
+> -                  <&venus_smmu 0x0d>,
+> -                  <&venus_smmu 0x10>,
+> -                  <&venus_smmu 0x11>,
+> -                  <&venus_smmu 0x21>,
+> -                  <&venus_smmu 0x28>,
+> -                  <&venus_smmu 0x29>,
+> -                  <&venus_smmu 0x2b>,
+> -                  <&venus_smmu 0x2c>,
+> -                  <&venus_smmu 0x2d>,
+> -                  <&venus_smmu 0x31>;
+> +        iommus =3D <&venus_smmu 0x00>,
+> +                 <&venus_smmu 0x01>,
+> +                 <&venus_smmu 0x0a>,
+> +                 <&venus_smmu 0x07>,
+> +                 <&venus_smmu 0x0e>,
+> +                 <&venus_smmu 0x0f>,
+> +                 <&venus_smmu 0x08>,
+> +                 <&venus_smmu 0x09>,
+> +                 <&venus_smmu 0x0b>,
+> +                 <&venus_smmu 0x0c>,
+> +                 <&venus_smmu 0x0d>,
+> +                 <&venus_smmu 0x10>,
+> +                 <&venus_smmu 0x11>,
+> +                 <&venus_smmu 0x21>,
+> +                 <&venus_smmu 0x28>,
+> +                 <&venus_smmu 0x29>,
+> +                 <&venus_smmu 0x2b>,
+> +                 <&venus_smmu 0x2c>,
+> +                 <&venus_smmu 0x2d>,
+> +                 <&venus_smmu 0x31>;
+>          memory-region =3D <&venus_mem>;
+> =20
+>          video-decoder {
+> diff --git a/Documentation/devicetree/bindings/media/raspberrypi,pispbe.y=
+aml b/Documentation/devicetree/bindings/media/raspberrypi,pispbe.yaml
+> index 1fc62a1d8eda..5c0f2f7b1d95 100644
+> --- a/Documentation/devicetree/bindings/media/raspberrypi,pispbe.yaml
+> +++ b/Documentation/devicetree/bindings/media/raspberrypi,pispbe.yaml
+> @@ -53,7 +53,7 @@ examples:
+>          #address-cells =3D <2>;
+>          #size-cells =3D <2>;
+> =20
+> -        isp@880000  {
+> +        isp@880000 {
+>               compatible =3D "brcm,bcm2712-pispbe", "raspberrypi,pispbe";
+>               reg =3D <0x10 0x00880000 0x0 0x4000>;
+>               interrupts =3D <GIC_SPI 72 IRQ_TYPE_LEVEL_HIGH>;
+> --=20
+> 2.53.0
+>=20
+>
