@@ -1,33 +1,87 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F5DA3DC4D8;
-	Thu,  6 Aug 2026 11:19:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0DC341BA7F
+	for <linux-arm-msm@vger.kernel.org>; Thu,  6 Aug 2026 11:22:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786015158; cv=none; b=aT2F5ZUhPsyk19s8yOA0FZCAyr68ernLJceES27ISEV/acF/cWsNV1dEG2tUXx5SPKfvJldVqaC7iRLx9Vpx8Y4/nAw2MF+XNIy+h5tcVVOzKmJFsnVbCKwr+ZecarBdFgRcTVoq8iIVMMKVr7OJND/ISPQx2DhPxPU6I5c6zE8=
+	t=1786015349; cv=none; b=qNpXBh9i5gDYHX4LPDkpJOHG17Y4cLRcn+EIEokJgyhWA17BgKKd0SfS3TlRJ6QcrxzFmhoueKdkHkUZ0b2djcXR3hJc6FtthVwdDJqhkDxDXwMFQOk1kwj1OkWx7Ko7lCG7ciekg1oHWPkIr70rnPxt3zV4j4PqEINidNpRgs4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786015158; c=relaxed/simple;
-	bh=mDO4DalRgsQkqWN2w6pV1oB+QslpcIOYgWzKEmV7hMw=;
+	s=arc-20240116; t=1786015349; c=relaxed/simple;
+	bh=EmoTjcFKKWkEpYz+sN13qHspYotNdUDpMAOcLy9NsfY=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=XMLsf5snCyqwLM7WNHYc3WtRWRrdJNPtr8lKmN+X8uRW+IVGYGljoO9HWDlE0NSrC6UrxREyrS0NWSBY8MSGPaswplYHjWf/WC4K2xjQrh6w18sg/TN79kNQ4IrIoAdShZfbzB8E6UAiUOziMC6Kr47C6g3sRDQwv5p+uDZ7YLs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MgkR27ut; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=fyFnfNt+LLXmT2LOZHzUBp3JZOqKUSM73HuL9UeztKwFxzE0P71lV3x0MomxWpmbbF9zqUBU/yQiW1IRQXVKq1XUUxMHgWaI9xez6DfxPxtoyv00a/xiSN59eaueZXrWUuTYdu/XN/ak255RUpBdhyzjowwpoi7/McGbCAQDXAA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZLYUTQ4/; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=AoXEW0OW; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MgkR27ut"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 31BE11F000E9;
-	Thu,  6 Aug 2026 11:19:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786015157;
-	bh=cUva6G3vVuhnHaubIaPynbfg/2K8F3xgGh6baho7SjM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=MgkR27ut9/+rIl+XjUyw0MyvLh8SCFdkUrQW1+sQErOwca1C1ViVkrFmfVGm6B0DE
-	 rNRrFXIs12K+7fLIlSmK240bvu+4o4CPTJbcBvgPPTHgQT6OqtBe3DMJTIUvNxLoJz
-	 qu/PqOvcUk8K5LeDF8Da1/wQ01WMBXK5IL8RT6TN9diwjoQuQlVLCXsTt4gJvoXYbf
-	 /mKQvYCg+RyjYty44lbRNtdmydxXLBh8KtFA2myeIAR4MwtHHXx0Nal42J2cAChPjE
-	 dVEgacoYbVqE8zKeh7M2aQobrvcbc1lnF2tIzQJASw/4RJ+f7HrbGwUzB5twG/7lPG
-	 PGdPc8Zfw8RUQ==
-Message-ID: <d3c03fde-3845-4c1c-9ac5-0eb1ebe92a4b@kernel.org>
-Date: Thu, 6 Aug 2026 12:19:11 +0100
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZLYUTQ4/";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="AoXEW0OW"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6769neEV2724625
+	for <linux-arm-msm@vger.kernel.org>; Thu, 6 Aug 2026 11:22:28 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	el4JFaFHcBqvnx7H70Vfy2ndmqSRpKtLmn/ho+OvcDE=; b=ZLYUTQ4/21InzYzI
+	Kqp2HdEQDJI59EkODPj5yoYaPCytkZaTGg747L2v7FZI7XEZShC/UbIPX6C6sc/+
+	7KnfRvysOxR0ZhYG1AgaDgdCJlzXTj8OucxRlemLumQ6sWDez0YRHYZUqTU/IMRW
+	e6r2ZfLt9WjdO3sERIAxcUu05iWO/RxzBQ/meD21Tb3ihhwwvbbpdXhbMdyzCn8M
+	S/Nnunmhi2rZ6duabmVmX7rjs8KSz4rQ5ddSWNvbvnHZisGp5AKZUdfevoJPa/PT
+	atz4oYnoUKbDKa0iZ0e9n2ZNReDHE7HD06vxcfcYn4LClx/3WK5ayu1olUtAzMIr
+	1jivTQ==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fv9dmm1ju-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 11:22:27 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38fcaa5f82cso2043898a91.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 04:22:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786015347; x=1786620147; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=el4JFaFHcBqvnx7H70Vfy2ndmqSRpKtLmn/ho+OvcDE=;
+        b=AoXEW0OWu6Zq4/kjZJCqw1Zd5p5UC8RlrTpNK+I7aAQfOCLqo4ZGAFQVo7bzLp7Ipt
+         9KdF0lHrl14EVP6ClDrbh5wZ8sgcAfgfYXy8Ow/q+u6DkFDECZP2UT9w/A9Pn/KbLloX
+         XrtP1nUKexgMa9lXZZhhgiWMh4YJgXZpxRtV8PXNzMk1ucSaEbvUlKiI8/HAPToDyfef
+         o6IpdJ4uiG1xgu4d+XEV6Xk6U1zXLRMc465oPKx2xaF7qtBD76zBR2XBkPWD9EdUF1JA
+         oTk2zR0ZBMsf4sNO/UujeYmSCpRPNjh7ak+EJJXC/ViMLu1S5TwFiPk5cK5D0MKC9b05
+         AQYQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786015347; x=1786620147;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=el4JFaFHcBqvnx7H70Vfy2ndmqSRpKtLmn/ho+OvcDE=;
+        b=nWrTviF4nzBz5GP8TSKiLB+y4oUmubZ4k0T1w7y03zw+grwZK+QgPr4g8MkXuI2WbZ
+         h4u8XCcfB+OqwKVCfOK0t+yhlT2f12DLAPvTCG1h7X1vT15ByYmQJ41kfRhOoRTmi5dD
+         f6hLrxSvn0tZYn4/kt3A5jsDOaqHqeYxzJATszEWQtJajpOuxXC0IAq6dZ9MulN9c/nP
+         QtR4XYQSr2mjypuJa/OfHCrfCVOooFXpUuFrHdIN8QAWY/cS01Se6y+y3DSkRoIlIfbq
+         pknx/sGBXLD7z6jtqLt11PcbhVfmkK4gl9nS2AtYjlcKzyVpZcatS4kU7afOZuxZJk4E
+         Xq0Q==
+X-Forwarded-Encrypted: i=1; AHgh+Rqd9SmYG8YEBuKBqeuK10zwweQRQKFhz0FBQnTTQAV6fSBQnRu7k+xSh5SQ71219fVJqzN2lYk7PPbb3kcw@vger.kernel.org
+X-Gm-Message-State: AOJu0YwOGt4R5CjSEKJzrM9xPvtDR5aAlpOk8o06fK+6mmqhFAzqXnNK
+	bCbB4tEpfA6ReThJj832VQg9THLjbVN8gZ2UgLWByScYdSqYDWJqSbNgWkVgi+UexBIZlRD8VU0
+	MSZqM0BflqSZc/37gO8nswKtm2D+D50prI606m7YZWO4sA8zpB8QWP68aGKe82T75HfyC
+X-Gm-Gg: AR+sD133uh/fTfNn3IusShH504cqQYSpaKg1geX0/+MW9rVIllZjLgfcaAuL8gNmAVP
+	P2udLmuqHKxZXcwfR6V/xV87HV4S3hcN2Sq6uGmc5gKW/1XL/LxdlANlpCbxUzWRzsxZLTBJmum
+	Uvq3WQg6Xs8tRJxIyDfkEPb14r3F8ltBLPI7K/UzCCcx+XCv3t8LUT8MeTVWWvLwI5tHCrwkQml
+	cF9HDh9FfQXqtq6qfFo/081898xUeSfEiQGRpA/zd719OCcFw1dos5r10E1IMwyvwpBxd17FCSi
+	rk7o6qwrNCellyOwOR8hHo5tizg33IbGvImJPmOVEclUAGsqGCkITu4fHLSyhXbkI8MCwQ4Ey1l
+	RANBYESPEtd/Fqn14eWb5RpFX7b9Ilbzw5Bgy2QwzD5fo9mVczJlwEDvJka63vMlirTZtirA/
+X-Received: by 2002:a17:90b:1c84:b0:38f:5828:857e with SMTP id 98e67ed59e1d1-3903c5b4c5emr11406191a91.16.1786015346853;
+        Thu, 06 Aug 2026 04:22:26 -0700 (PDT)
+X-Received: by 2002:a17:90b:1c84:b0:38f:5828:857e with SMTP id 98e67ed59e1d1-3903c5b4c5emr11406139a91.16.1786015346367;
+        Thu, 06 Aug 2026 04:22:26 -0700 (PDT)
+Received: from [10.133.33.203] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39085f5b98csm1343904a91.13.2026.08.06.04.22.22
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 06 Aug 2026 04:22:25 -0700 (PDT)
+Message-ID: <54e74486-12f2-4b09-916a-1a8806871b6c@oss.qualcomm.com>
+Date: Thu, 6 Aug 2026 19:22:20 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,111 +89,107 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/12] dt-bindings: media: qcom,venus: Add context bank
- subnodes to common schema
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Krzysztof Kozlowski <krzk@kernel.org>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Abhinav Kumar <abhinav.kumar@linux.dev>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>,
- Stanimir Varbanov <stanimir.varbanov@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Stephan Gerhold <stephan.gerhold@linaro.org>, linux-media@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, Konrad Dybcio
- <konrad.dybcio@oss.qualcomm.com>, stable@vger.kernel.org,
- Daniel J Blueman <daniel@quora.org>
-References: <d6ffacaf-7f83-42be-a3cf-40ce00810ca9@linaro.org>
- <Ia82wa4IJDPkQZpTCt4MDMqtq1VGZ7DqIaJFNvV0MjaT3jjWrbD_iBs8RU7pqrIz-ZTMSK2irncUv7-PZ-fvkg==@protonmail.internalid>
- <8130900b-c9f2-4f5a-80f1-1e8567ee1b72@oss.qualcomm.com>
- <f252d83f-e0e7-4061-8da8-d2650f1beadf@kernel.org>
- <ea0f1777-4615-415c-86d2-2a792ea42b3e@linaro.org>
- <41163185-09e8-47b5-9ece-c6503cb48920@kernel.org>
- <72b267c5-6490-453a-9900-b196d1cfc5f8@linaro.org>
- <2tWmEJ8s0nm8efbgvq24Zwo1vkuH4Na_gC6stCr9_O1A9k9JcA2-TFN5qziPoORYrCKyDgjscvGyO64HI6qVqQ==@protonmail.internalid>
- <72b4edc0-dc80-484d-a2b0-88ea11ae001e@kernel.org>
- <995779b4-925a-48a1-9288-930e0a10b7c5@kernel.org>
- <HfY0TY7OxKdtqTVTIv6Ddtts65Zd-8uHN9Cm6BzE35GXl5WrabORHo7bS99-jJ9NEvnBuaVWo3BtAaBcKQ_iRQ==@protonmail.internalid>
- <nht5phhqatbc35rh4l4r5lbf5bytgb2zmesv433zjscs5ye7rs@6y4bczl23nao>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- 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
-In-Reply-To: <nht5phhqatbc35rh4l4r5lbf5bytgb2zmesv433zjscs5ye7rs@6y4bczl23nao>
+Subject: Re: [PATCH 1/2] cpufreq: allow cpuinfo max to decrease when boost is
+ disabled
+To: Sibi Sankar <sibi.sankar@oss.qualcomm.com>, rafael@kernel.org,
+        viresh.kumar@linaro.org, mingo@redhat.com, peterz@infradead.org,
+        linux-arm-msm@vger.kernel.org, juri.lelli@redhat.com,
+        vincent.guittot@linaro.org, dietmar.eggemann@arm.com
+Cc: linux-kernel@vger.kernel.org, rostedt@goodmis.org, bsegall@google.com,
+        mgorman@suse.de, vschneid@redhat.com, kprateek.nayak@amd.com,
+        linux-pm@vger.kernel.org, zhongqiu.han@oss.qualcomm.com
+References: <20260806044230.909961-1-sibi.sankar@oss.qualcomm.com>
+ <20260806044230.909961-2-sibi.sankar@oss.qualcomm.com>
+Content-Language: en-US
+From: Zhongqiu Han <zhongqiu.han@oss.qualcomm.com>
+In-Reply-To: <20260806044230.909961-2-sibi.sankar@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=TJR1jVla c=1 sm=1 tr=0 ts=6a746e73 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=BelGTQZ_NpiV2tDX9rUA:9 a=QEXdDO2ut3YA:10
+ a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-GUID: QIxedC0qBSykJzlVG2VT1eLJaEFHguf0
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDA4OSBTYWx0ZWRfX8NyIh2jzuF9C
+ cbNt8VmI07GQeO4SUYPYiVj2Hwcjp47oIw6aGo9VNNDr5+bAFWEb+Tp+0yMLC39WbtP1YDNnrGL
+ GmAiaWAN3I14YTlf5xtM8VbFStkq960=
+X-Proofpoint-ORIG-GUID: QIxedC0qBSykJzlVG2VT1eLJaEFHguf0
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDA4OSBTYWx0ZWRfX0NdRqai3eHFt
+ VFGPOBfGcz7pWr35oqs/yNAw/E9NuqmgpzVobT9BmsrD4nL47wqKc+spnQefL/fNQF8LARDprlm
+ W6mFSztRaPNNDJd3spss/eU0aGsp8sHBSzRyS0zdE5/OhMrfkAPbSm31XzEcjNav0HOjMp/cAjh
+ 5CYL2V3rk4OgM/dI3v6jNXqAKZroYqWnTgNiIPNl9Q8txNxPczoDHTMPRXPdAtXiXNRz60Ozna/
+ eUuwr5woX6Cu0YYDKO7hlYdEiAyYzBKCp+Hw450htak1lO0y7tMWoD4Ca/33SXigSuPhamB71Lz
+ KBB0WixJjUq4u+VJz1HKy6BICOxmkluffZMgvL6bpgjLUKMqKDuqDyfuv3LzFmMuzwm2hvERmsD
+ RQWVusf8Ci14Z/fGRuBKGYcpZV4RjGSJU508RYm1CFMjkbap91YQ8B864y+vydOwMFi1WMmW4XL
+ kSYfXFHhWnmGdwnM97A==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-05_06,2026-08-05_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1011 bulkscore=0 suspectscore=0 adultscore=0 lowpriorityscore=0
+ malwarescore=0 priorityscore=1501 phishscore=0 spamscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608060089
 
-On 06/08/2026 12:14, Dmitry Baryshkov wrote:
->> I'm all in favour of rolling out Daniel's fix.
-> The biggest problem with it is that it looks like a hotfix or a hack
-> rather than a proper description / solution. From this PoV we will land
-> the fixes for all the boards in mainline and then fix the same issue
-> _again_.
+Hi Sibi and Ananthu,
 
-The split would remain in the binding but - so what ?
+On 8/6/2026 12:42 PM, Sibi Sankar wrote:
+> From: Ananthu C V <ananthu.cv@oss.qualcomm.com>
+> 
+> Commit 538b0188da46 ("cpufreq: ACPI: Set cpuinfo.max_freq directly
+> if max boost is known") guarded cpuinfo max updates to only allow
+> increases, preserving values set directly by drivers above the freq
+> table maximum. This prevents cpuinfo max from decreasing on boost
+> disable, leaving policy max pinned at the boost ceiling.
+> 
+> Remove the guard so cpuinfo max is always derived from the frequency
+> table scan. Drivers that correctly flag boost entries are unaffected
+> since the scan already excludes them when boost is off.
+> 
+> Fixes: 538b0188da46 ("cpufreq: ACPI: Set cpuinfo.max_freq directly if max boost is known")
+> Signed-off-by: Ananthu C V <ananthu.cv@oss.qualcomm.com>
+> Signed-off-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+> ---
+>   drivers/cpufreq/freq_table.c | 7 +------
+>   1 file changed, 1 insertion(+), 6 deletions(-)
+> 
+> diff --git a/drivers/cpufreq/freq_table.c b/drivers/cpufreq/freq_table.c
+> index ea994647abc8..791118466ca4 100644
+> --- a/drivers/cpufreq/freq_table.c
+> +++ b/drivers/cpufreq/freq_table.c
+> @@ -50,12 +50,7 @@ int cpufreq_frequency_table_cpuinfo(struct cpufreq_policy *policy)
+>   	}
+>   
+>   	policy->cpuinfo.min_freq = min_freq;
+> -	/*
+> -	 * If the driver has set its own cpuinfo.max_freq above max_freq, leave
+> -	 * it as is.
+> -	 */
+> -	if (policy->cpuinfo.max_freq < max_freq)
+> -		policy->cpuinfo.max_freq = max_freq;
 
-Sub-nodes could be added progressively and once done the DT with the 
-sub-nodes can drop the additional firmware-memory.
+As I understand it, the guard added by commit 538b0188da46 is
+intended for drivers (e.g. acpi-cpufreq and AMD) that may set
+cpuinfo.max_freq above the maximum frequency in the frequency table.
+Removing it may cause those drivers to lose their boost maximum
+frequency.
 
-firmware-memory minItems:1 achieves this - while still letting sub-nodes 
-happen.
+The regression should instead be related to commit db80ad776cd2
+("cpufreq: Remove driver default policy->min/max init"), which removed
+the "policy->max = max_freq" initialization that previously allowed
+policy->max to track the result of the boost-aware frequency scan.
 
-TBH its up to vidc people to decide this - or get something mergable soon.
->> I don't want to propose BROKEN but at the same time the timeline on this
->> demands action:
-> I think this might be a solution, which everybody dislikes, but in the
-> end it is true (for both drivers).
+Please feel free to let me know what you think. Thanks
 
-I mean I really don't want this but > 6 months plus an "imperfect" but 
-functional patch which stops the reset not applied.
 
-A halt needs to be called and a resolution arrived at.
+> +	policy->cpuinfo.max_freq = max_freq;
+>   
+>   	if (min_freq == ~0)
+>   		return -EINVAL;
 
----
-bod
+
+-- 
+Thx and BRs,
+Zhongqiu Han
