@@ -1,151 +1,253 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AAB383EEAD2;
-	Thu,  6 Aug 2026 09:40:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7966F38757B
+	for <linux-arm-msm@vger.kernel.org>; Thu,  6 Aug 2026 09:40:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786009234; cv=none; b=jr/gQsvEYSS5CBP83q0PjNVHFdJwV+8dipH6+pd2cjjI29Yzd22AwzzrGbzyCbYWw8S2fUqOsMfaoeQ2Z0HmzD87eByCQt3D4Rjl6VTPV6GXdBJK9tNIsklJk88IxZ+H4gAKrgT8F8fhkv23/Z8+FkNthjhluRvFrFT9I8qgdrc=
+	t=1786009258; cv=none; b=YHdr1+S73AHmGGPzX9UtyTaGAZsS66DmRLasM4RGH/GLAoitRZa+pv76J+G5GjvgB7z4WrNqojjcB7bP0Xw363H49CsFprM41jNrpYAMpoONLpUR2cDOowVpTGtBJ0fwne41z83D8+713ML9BCWzuF4jcJlFfutD3WeuOUJKsjc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786009234; c=relaxed/simple;
-	bh=o/4gSmig/Nh6Y8SFPGzhu9zqh6nCuHRcHmGc7kXJKRw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=qk1qIK1emSRdrIvWdive4hA0LQVf65L0F5b3q9nO/AIl2U6ZG9p6xjX04hnLvdXymajbr1k6BW5+LQ0bJmCc1+1oMm3p90CCBRjMabhZaG6y3pKezs/q3biRTDz0xSUiF0jDfWQuY/PM0ZK0WUV63EHGE1ul71/D4OPR4dhuOFo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=c5uUz9WH; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786009258; c=relaxed/simple;
+	bh=2+IIh+YaaI3upzK6XxNu/VDC3LcxkPF1DIyILN9NP78=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=nK55nlDbg44ZGL40rSFI4BNoaDpKBy/g4BCGJ52cWrp6NhyU/EwcRkD6HmaFdT6uFfXQikiHYYgPRjX7y/WlVS9bZ/8JNGb2DVhDa5EK2XY8BL/9HFc+AVh85SSD2Dieau2NXRSrOhB7CvQK9OXMDdJqCSbilurCf/lo821Z0Qs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ckim+fKt; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Y03AQI8t; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="c5uUz9WH"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DFCE21F00A3E;
-	Thu,  6 Aug 2026 09:40:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786009233;
-	bh=YViHvEm1dgM1SVqz5mWxjFvaTRpnAVHD3nXeYSDSVO0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=c5uUz9WHh9lSVyflrf03ghAdcf7lMdjD3X3448xsQ4ASfoanUS9+2QGmJbXAVQCxO
-	 sLfdik94efJMO9NrevoCjpOxhZCFM9yb1OMhE63tIVjlF7udJPzvg3c6euFSLUI44X
-	 DfRetAw8HHqTiUNxNqYrqCCPIj4OhMzFNxusDytYiDJXhwYNHC0wnXAK5qae5QfU1U
-	 6mEiWR/68TGzzL6hEyjDVd7W95v+BKzNLN8gbO2TIgjPaEKXRTBel11Ee2TXdubOqb
-	 g1o+CBHs2hEK6TXdrEPHpyNup6FEiBnm+WIesmphwrHPM3pgY/24CouTB2SGt6QEic
-	 d/SPMkhV15JBQ==
-Message-ID: <f252d83f-e0e7-4061-8da8-d2650f1beadf@kernel.org>
-Date: Thu, 6 Aug 2026 10:40:28 +0100
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ckim+fKt";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Y03AQI8t"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6769eoBa1288462
+	for <linux-arm-msm@vger.kernel.org>; Thu, 6 Aug 2026 09:40:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	IOdzPcc7b2tKDYHUhaw2Emyx0bsIqZcJysJmH0I7aws=; b=ckim+fKtyU2JD5la
+	hbrb5ve1fhfwHtQY85GvBbgkw4e5ICFDRbPfuVQJpIogiOPPTWCIqpRSalXQHpiB
+	AzvfozVd0byq/xzCJqJidIL9fFzQCt5uoFmmWFwUgWXuiVFzGHLE2Lj1NsIukCB7
+	vGxYIVjtYensxX9fwkRA7n7gexpiH+5eqGFUZ6JQ3vRnsOFLHoOemeXpAVOZxias
+	Pi+OGs7n5UIk02aekV9NyPFnGkopBs26/EFWedOnEp7/iiK0Cw5anNGhv/qaMJqq
+	VFiB+Bd3K+ghmnxDzGukyXfns46i5KWxU8vrz9QRnYnBna0ZaAQq2R/rpmxibDcM
+	XbgFgQ==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvp728f6m-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 09:40:55 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51bf321d786so21615971cf.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 02:40:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786009254; x=1786614054; darn=vger.kernel.org;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=IOdzPcc7b2tKDYHUhaw2Emyx0bsIqZcJysJmH0I7aws=;
+        b=Y03AQI8tmQj0SpKlY7xSOcjuRCFyUrA6UcqeDl4mRghYxUgDp8CoIgBzVmgYs6dNEe
+         sDytqZ2CVvUUV4ANPgK74XPgG97Eo9j6if6Z8abbmj653HR1va3j/FcDpLq/VEc1bSCq
+         oda3eQDXqdf7lbWj7izgwwVT24YDJr2sMufpLVfK1urpgSLiGF+8vEGRlb1qtOVaRQq/
+         uPvhbjxsuOAcPvj8TSX6h8NA9f9z63FHaMf2zNysq6GUMektvUO1UezejXmTSulP4yBU
+         n54klGUhih4Mr0E/ZkfIugTXJ/mWfbZdzvthjNmFfl4mzgt5YW3616BqMHCpW2xl4bCH
+         XQPA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786009254; x=1786614054;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=IOdzPcc7b2tKDYHUhaw2Emyx0bsIqZcJysJmH0I7aws=;
+        b=fTpE07wAnSk936u6T2RkzHDoikTF0X8ldy9U4XSsIZ/19dkfivanEvaFD5iNRiOeP5
+         65K4ExGlzwN77QrEIuGlpjOCWhjLBR7272/iaaFcdE3u8oRPSqp5AOemC3nck6/UlxGr
+         aawSNieVdILYWLanvo49KcjSaws9PckZybKCmdYWnjqMyFJQdCrLvyR3zjkP8JJf5z/Q
+         vSg3ZzcjTLG7gVZMkT1CJ5Yg6DiGosyO735rEkY7ERnLEJXGTttng485IjVUHocuviMu
+         NXK7a0QDtWFhaI3/4CVmkhh7rdpxsqU8Ynaffhv9tf44VOqEpwt5BkhTmWdNXr2bWW7Z
+         RtSw==
+X-Forwarded-Encrypted: i=1; AHgh+Row232dylvJ9xjMaK6/kPdcnfYQay24D7mKsn3TsYM155HBUTjRSuyqkfyVP5qqWksVFeLyPToBn4KX14Z1@vger.kernel.org
+X-Gm-Message-State: AOJu0YxgICQe7Iu19We1keCcgbZsemrvUklQ03Fr3Hbl2tlJDYUoyAZB
+	tOqyKZ2Q4d0QRz/dX1hjW5aYzyMUfaVl1/vUcobnPi4qAKWp3SEQJrXYRh4l4nIpFYduccae/K5
+	aPKz2poIFtyMRy1g9wwUxWYKEtap27hgNX73SyyJsayhR7VktX3MHvBSba5C8u8EGMeDE
+X-Gm-Gg: AR+sD11Ocjxprmu/u30e2wwegYTsVH1NuKYUiQ4Z5KlrMkDYvI+jJlaaF0QpxMq/J4q
+	tyj1PEbxVLqxKfq2zww5U4r/mtBInw3vXMyETHVSDZaXumwwFpanbwDI6RhYRySNES5dBX9E5mM
+	/iiCgqOX11Hgruulkgv7oZ+1r1uq5NI/Ws26m5aI260/eR44uoNIs689QdJxve4gTaue1msZfSk
+	ZKuRMgRZO8tI6YuMf276kAARER5vEuvXl7PuKira0HWN3WPMArks8S4+sJJMziCiZM2BGhrp9ri
+	Fc6y4mvUeUyfhIKdOjIq+0jkuU3uViYXfgfBckMjQ1KF7CQD2vcl1wxbJzX00hRmfPDeBgnXIPe
+	+FxWJoAw8nITDj7cVePwUVIOr+Nz8m3v+YVbt0e3cNFOylgmW4j1J8C69tCi6uJRLDTjr6F32qV
+	rfHU82w9jvE8vnEA==
+X-Received: by 2002:a05:622a:60a:b0:52c:e0bf:dd79 with SMTP id d75a77b69052e-52ce5f7f999mr135415131cf.16.1786009254524;
+        Thu, 06 Aug 2026 02:40:54 -0700 (PDT)
+X-Received: by 2002:a05:622a:60a:b0:52c:e0bf:dd79 with SMTP id d75a77b69052e-52ce5f7f999mr135414831cf.16.1786009254035;
+        Thu, 06 Aug 2026 02:40:54 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b2f6235db6sm615847e87.4.2026.08.06.02.40.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 06 Aug 2026 02:40:52 -0700 (PDT)
+Date: Thu, 6 Aug 2026 12:40:50 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: sashiko-reviews@lists.linux.dev, linux-arm-msm@vger.kernel.org
+Cc: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>, devicetree@vger.kernel.org,
+        conor+dt@kernel.org, robh@kernel.org
+Subject: Re: [PATCH v7 2/9] soc: qcom: Add QMI TMD support for remote thermal
+ mitigation
+Message-ID: <7ptv24tcqk6ym3pkiuo5y5klhv52nycwhg2zl5usxme47cmflw@pg3lays6zpas>
+References: <20260731-b4-qmi-tmd-v7-0-3befd44403d5@oss.qualcomm.com>
+ <20260731-b4-qmi-tmd-v7-2-3befd44403d5@oss.qualcomm.com>
+ <20260731105316.BDBA51F000E9@smtp.kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/12] dt-bindings: media: qcom,venus: Add context bank
- subnodes to common schema
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Abhinav Kumar <abhinav.kumar@linux.dev>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>,
- Stanimir Varbanov <stanimir.varbanov@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, stable@vger.kernel.org,
- Daniel J Blueman <daniel@quora.org>
-References: <20260731-vpu_iommu_iova_handling-v2-0-da52b5228dbd@oss.qualcomm.com>
- <futJwsC0VjGSkjrB5PP9T0jBOVgWADaDAYyRRp-OZifaKPNtjcnnA59QJaQTdqYTeayZk9jY6e1jOfun71Yp5Q==@protonmail.internalid>
- <20260731-vpu_iommu_iova_handling-v2-1-da52b5228dbd@oss.qualcomm.com>
- <689580d1-8169-41cf-a954-927e10135700@kernel.org>
- <d0983bf7-a708-46ff-9f86-f94fb6a92ba7@oss.qualcomm.com>
- <d6ffacaf-7f83-42be-a3cf-40ce00810ca9@linaro.org>
- <Ia82wa4IJDPkQZpTCt4MDMqtq1VGZ7DqIaJFNvV0MjaT3jjWrbD_iBs8RU7pqrIz-ZTMSK2irncUv7-PZ-fvkg==@protonmail.internalid>
- <8130900b-c9f2-4f5a-80f1-1e8567ee1b72@oss.qualcomm.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- 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
-In-Reply-To: <8130900b-c9f2-4f5a-80f1-1e8567ee1b72@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260731105316.BDBA51F000E9@smtp.kernel.org>
+X-Proofpoint-ORIG-GUID: DZ13-_chy78jiQ4W0nCzmRfgPdu_3uf5
+X-Authority-Analysis: v=2.4 cv=JYCMa0KV c=1 sm=1 tr=0 ts=6a7456a7 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=8nJEP1OIZ-IA:10
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=c92rfblmAAAA:8
+ a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=fmFFBQzJVm4u-eB6PWwA:9
+ a=3ZKOabzyN94A:10 a=wPNLvfGTeEIA:10 a=a_PwQJl-kcHnX1M80qC6:22
+ a=GvGzcOZaWPEFPQC_NcjD:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDA3NSBTYWx0ZWRfX/9xkzDzvBzu+
+ cg3Bf+PilFr71qDJHlCfS5q9wLLfmY1QpNXHtXJ1dJFNDa79LxRpAbPtbLabXO4ZgQSlnOPm9og
+ B6VbjXNHeZPfw0KGjiA3Pmi82cGUtJNhAHdLNZkFL3dD4S8gSpB1TmgBNiBywb8v+p7Jg+5huaZ
+ dThmBFI7Wz9gTcbD0U0w4mVEWrB+zvDrgMKQ+v4y79Mh3NP+8LoWRG7MirDV2C9dRtmdFsYsbCs
+ HObuUddwImxTUYzh9mOirFeg+IrYA219Td2lEnMYlj9o85M15SPiG9Ns2I3DWGqA4N54KMBAFIy
+ uK185qxLyvWuI56w+hpWpkG//CXfwKK9TiPvC3nOlUrrI1A5L3hLsVIKxbxzPWeqABp7Me4nIHB
+ PQZgiVRLfcBsm1MG3mwRbBEVyqrDUtKp+SJS+Mv6Fu7+UjhWYfjHZVBRh/HBkMntW8Kg374I4e0
+ CuOrPacIsyZYqFQgDrQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDA3NSBTYWx0ZWRfX9nQhXewf/DWK
+ HxlBlCZA6UdQXeVwQSUMJqySaD+moMouDRw/YLoZejn96Wq4o1p6pnvfn2Px1k43uxUt7SHJ8UL
+ 9c3xaHoa/D5D7GwnyfR6HTkNEnYKydQ=
+X-Proofpoint-GUID: DZ13-_chy78jiQ4W0nCzmRfgPdu_3uf5
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-05_06,2026-08-05_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 impostorscore=0 priorityscore=1501 phishscore=0 adultscore=0
+ malwarescore=0 lowpriorityscore=0 spamscore=0 suspectscore=0 clxscore=1015
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608060075
 
-On 06/08/2026 08:57, Vikash Garodia wrote:
-> On 8/6/2026 1:24 PM, Bryan O'Donoghue wrote:
->> On 06/08/2026 06:21, Vikash Garodia wrote:
->>> On 8/1/2026 3:36 PM, Bryan O'Donoghue wrote:
->>>> On 31/07/2026 19:22, Vikash Garodia wrote:
->>>>> Fixes: 41661853ae8e ("arm64: dts: qcom: sm8550: add iris DT node")
->>>>> Cc:stable@vger.kernel.org
->>>>> Tested-by: Daniel J Blueman<daniel@quora.org>
->>>>> Signed-off-by: Vikash Garodia<vikash.garodia@oss.qualcomm.com>
->>>> What about venus ?
->>> Plan is to get the reviews for IRIS3 family SOCs, once we have a go
->>> ahead from binding/DT maintainers, i can either bring in few series
->>> for remaining venus and iris SOC family OR do all of them in one
->>> single series. My preference would be to add in multiple series.
->> I still don't see why we can't just set
->>
->> minItems: 1 for the memory nodes - implement a fix for stable and then
->> iterate around this new way at leisure.
-> you can follow the guidance from binding maintainer [1] and continue to
-> discuss in the same thread if you have any question.
+On Fri, Jul 31, 2026 at 10:53:16AM +0000, sashiko-bot@kernel.org wrote:
+> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
+> - [High] Returning success without saving the requested mitigation state when QMI is disconnected permanently loses thermal mitigation updates.
+> - [Medium] TOCTOU race condition when reading `tmd->cur_state` during service reconnection causes permanent thermal state desynchronization.
+> --
 > 
-> [1]
-> https://lore.kernel.org/linux-media/2b0ea2a2-c3ef-4147-801b- 
-> af41733fba7b@kernel.org/
+> --- Patch [2]: [PATCH v7 2/9] soc: qcom: Add QMI TMD support for remote thermal mitigation ---
+> commit 02c2244c0a2cebd6be4e1bf4e41d51362be19b5f
+> Author: Casey Connolly <casey.connolly@linaro.org>
+> 
+> soc: qcom: Add QMI TMD support for remote thermal mitigation
+> 
+> This commit adds support for Qualcomm Messaging Interface (QMI) based
+> Thermal Mitigation Device (TMD) cooling devices provided by remote subsystems.
+> It allows client drivers to discover the service and forward cooling state
+> updates to remote processors.
+> 
+> diff --git a/drivers/soc/qcom/qmi_tmd.c b/drivers/soc/qcom/qmi_tmd.c
+> new file mode 100644
+> index 0000000000000..37e6ef19a0b34
+> --- /dev/null
+> +++ b/drivers/soc/qcom/qmi_tmd.c
+> [ ... ]
+> @@ -236,25 +236,54 @@
+> > +/* Notify the remote subsystem of the requested cooling state */
+> > +static int qmi_tmd_send_state_request(struct qmi_tmd *tmd, int state)
+> > +{
+> > +	struct tmd_set_level_resp resp = { 0 };
+> > +	struct tmd_set_level_req req = { 0 };
+> > +	struct qmi_tmd_client *qmi_tmd_cli = tmd->qmi_tmd_cli;
+> > +	struct qmi_txn txn;
+> > +	int ret = 0;
+> > +
+> > +	guard(mutex)(&qmi_tmd_cli->mutex);
+> > +
+> > +	if (!qmi_tmd_cli->connection_active)
+> > +		return 0;
+> 
+> [Severity: High]
+> Will returning 0 here without saving the new state to tmd->cur_state cause
+> thermal mitigation updates to be permanently lost?
+> 
+> If the thermal core requests a new state while the remote QMI service is
+> down, this returns success but drops the state update. When the service
+> reconnects, qmi_tmd_register() will re-send the old tmd->cur_state to the
+> hardware. 
+> 
+> Could this leave the hardware running unmitigated while the thermal framework
+> believes it is actively mitigating?
 
-LoL seriously - system resetting bug.
+Please address at these comments.
 
-How long exactly is this going to take - do you have buy in for 
-sub-nodes and when will that get merged.
+> 
+> [ ... ]
+> @@ -298,34 +327,33 @@
+> > +static int qmi_tmd_register(struct qmi_tmd_client *qmi_tmd_cli,
+> > +			    const char *label, u8 max_state)
+> > +{
+> > +	struct device *dev = qmi_tmd_cli->dev;
+> > +	struct qmi_tmd *tmd;
+> > +	int index;
+> > +
+> > +	for (index = 0; index < qmi_tmd_cli->num_tmds; index++) {
+> > +		tmd = &qmi_tmd_cli->tmds[index];
+> > +
+> > +		if (!strncasecmp(tmd->name, label,
+> > +				 QMI_TMD_DEV_ID_LEN_MAX + 1))
+> > +			goto found;
+> > +	}
+> > +
+> > +	dev_dbg(qmi_tmd_cli->dev,
+> > +		"TMD '%s' available in firmware but not specified in DT\n",
+> > +		label);
+> > +	return 0;
+> > +
+> > +found:
+> > +	tmd->max_state = max_state;
+> > +
+> > +	/*
+> > +	 * If the cooling device already exists then the QMI service went away and
+> > +	 * came back. So just make sure the current cooling device state is
+> > +	 * reflected on the remote side and then return.
+> > +	 */
+> > +	if (tmd->cdev)
+> > +		return qmi_tmd_send_state_request(tmd, tmd->cur_state);
+> 
+> [Severity: Medium]
+> Is there a race condition between reading tmd->cur_state here and concurrent 
+> updates from the thermal core?
+> 
+> When the QMI service reconnects, tmd->cur_state is read outside of the 
+> qmi_tmd_cli->mutex. If a thermal trip point is crossed concurrently, could
+> the following sequence occur:
+> 
+> CPU1: qmi_tmd_register()
+>   reads tmd->cur_state (e.g., state A) locklessly
+>   
+> CPU2: qmi_tmd_set_cur_state()
+>   acquires qmi_tmd_cli->mutex inside qmi_tmd_send_state_request()
+>   sends state B to hardware
+>   updates tmd->cur_state = B
+>   releases mutex
+>   
+> CPU1: qmi_tmd_send_state_request(tmd, state A)
+>   acquires qmi_tmd_cli->mutex
+>   sends stale state A to hardware
+>   reverts tmd->cur_state = A
+> 
+> Will this overwrite the new state on the hardware and cause the thermal
+> framework's view of the mitigation state to become desynchronized?
+> 
+> > +
+> > +	tmd->cdev = thermal_of_cooling_device_register(dev->of_node, index,
+> > +						       label, tmd, &qmi_tmd_cooling_ops);
+> 
+> -- 
+> Sashiko AI review · https://sashiko.dev/#/patchset/20260731-b4-qmi-tmd-v7-0-3befd44403d5@oss.qualcomm.com?part=2
 
-For reference I do not care what happens my concern is an unspecified 
-window where stuff remains broken and we take our leisurely time about 
-doing something about it.
-
-If we can't target something for -stable then this driver and venus 
-should be marked as BROKEN.
-
----
-bod
+-- 
+With best wishes
+Dmitry
