@@ -1,249 +1,287 @@
-Received: from CY3PR05CU001.outbound.protection.outlook.com (mail-westcentralusazon11013016.outbound.protection.outlook.com [40.93.201.16])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EB46840A940
-	for <linux-arm-msm@vger.kernel.org>; Thu,  6 Aug 2026 11:52:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.93.201.16
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786017137; cv=fail; b=FHzqy2O/tKZBZFFq5Y4RHOlBJ65xoBRNhW3ly5LcGEllR8+O6nQJseMAVSaGmXIZ35jkhPOcKKo7kMBXhnlX1g33YD6vXO04kGKjwgeONQ/KkWlWZLRpLpY9MjcCT1KLOAu3zJZ58jZevtOe3RJW04TZscac0jhoqVrcdclbESE=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786017137; c=relaxed/simple;
-	bh=JUuKZZ4QTOkd9ogv1jytVC5CMiHpJefbr8lKUqcWEB4=;
-	h=Message-ID:Date:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:MIME-Version; b=UAESNKsSN8TIlWufiDNIy7aPpDBKnAjHBlSGx51NYRoaN4aqpPySmS7eVMhMWj2EVV2nJ9OleQo18PInAb+bT2N5cdi5u4ZJrlJI0q51d0fho8LjqnP3+0Dk0XdS8tFqfyJkIg0B2CiXwyZ0cLrgduZdEwdRVmcnQ+6dfA0WUJI=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com; spf=fail smtp.mailfrom=amd.com; dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b=uuIcYavz; arc=fail smtp.client-ip=40.93.201.16
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: smtp.subspace.kernel.org; spf=fail smtp.mailfrom=amd.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D44724772BE
+	for <linux-arm-msm@vger.kernel.org>; Thu,  6 Aug 2026 11:57:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786017426; cv=none; b=WNiwoeJ6nhSVIfzuZNFh6mAZgDTBvEpTfYt49JYzRS6cjl5Z8cl71CztruxmGWyWDm3kic250pA/VdqMd1Hled+OaIiqHkJbriPCNWRLEAUdmuuzBzXGbziaKAxVuPE2mcxIvPZf5RpCcImulaEyBqRZgFsStivmpBoJXg/5o9Y=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786017426; c=relaxed/simple;
+	bh=xNFLD4E91K9S2ZUtnWsmxgEzMpCxGHiVf/rcwec9iMk=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=FpFrNs7IPBYbUgUkXAdmp4eTau+NXUHSN0f+IWV/1zHL7lrmMj52KxG9hKH1y42A7I7IkyiFIvFbfquwvq0ugfdNiU99gjT0XYnrqsahc90VOH3MnydYf96YclVubbtyIinQUfazStucx5VBEhn2sL1R4H1rjscpGQebvqM4cd0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=GlpPpJgv; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=FfJ4z9Bp; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=amd.com header.i=@amd.com header.b="uuIcYavz"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=saqpxNjA2QG4VGf/jMad78DCQcy2AcXZZxM1uXI2QYC51tH9LCJ82hwLcnHEvK4T/iVYZv4IJvdS/Z5XD3i++74WFBVV5svXop+/24uWyUc826KCUPzqBm7WGsq004BkTdoBMM0Kbnp9hm7FORKDN16M9xJVXawgNVPkE3KmLExng3plPr133e9d1WhusHIydIUZZEcVMLqbHQIgVI3KOMqCXb1/BbiHO4n9LTtCztoZRzDzQ4oxkSP2zI3vdCJt6XDld8qGbGikbpWG8zssHjAWvHKFPOqT7EAimTz1jP59E/uleAPPK+4bFs2QMIuB/T1lhsGQyxARamfVX/I/bQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gnctqB0PwaBZuKWevvs9BaweXH1ecqdC4Q3vgrP7LLg=;
- b=dPEpOwilfXUccp2sef5hCKdPOQU/UEqDpU4SNpyzWCg6os8NiqnTOjvYXvfQF359btMIx5qHGkZzhDzH9eOg1/6QflOysee+V7bhjlDt3zzEO98QiHtezKCJpon88VuJsG/3a38+Q3gK6D53EVeRety5DymOKUG7L/1c2CYR3v95EPEtivHIALDB70zLezHwbChxsk1gK6oFKeepp9Dewm6tbAsh4gfmlHY0qbZ6XnqkXgKfjwaWJX8C3xIR4o8gJDIEn4lZsVYRbbkfHA6CxR7BRvbAmzkBOPNX+8ePar1wuKjKU0uL5BEWrFMpxRWaGaSAOmvoPPvhzw5NPqYJXw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gnctqB0PwaBZuKWevvs9BaweXH1ecqdC4Q3vgrP7LLg=;
- b=uuIcYavzN2tlAhLkSmidMtuQl1De1AOXs/WkNdRvraOSbOBjjKkdKJIfmMGTc9AqMEgJbDkYPWbKXdOkf6/AgwZad2+DErN6uG8ojBhVJQJHe0eFpsznc/7kAggNr/9J+jb3WYJ5h2PFxXjjPK9fzEWK/5pJLNl82bdA5a6dCKA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com (2603:10b6:510:13c::22)
- by IA1PR12MB6602.namprd12.prod.outlook.com (2603:10b6:208:3a2::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.21; Thu, 6 Aug
- 2026 11:52:10 +0000
-Received: from PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c]) by PH7PR12MB5685.namprd12.prod.outlook.com
- ([fe80::ce69:cfae:774d:a65c%5]) with mapi id 15.21.0270.021; Thu, 6 Aug 2026
- 11:52:10 +0000
-Message-ID: <5f90bb35-994e-48bd-bf49-3001dcefa2ee@amd.com>
-Date: Thu, 6 Aug 2026 13:52:05 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: Synx : global synchronization framework
-To: Pravin Kumar Ravi <pravinku@quicinc.com>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>,
- Faith Ekstrand <faith@gfxstrand.net>, Simona Vetter <simona@ffwll.ch>
-Cc: "linux-accel@vger.kernel.org" <linux-accel@vger.kernel.org>,
- "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>,
- "andersson@kernel.org" <andersson@kernel.org>,
- "mathieu.poirier@linaro.org" <mathieu.poirier@linaro.org>,
- "konrad.dybcio@oss.qualcomm.com" <konrad.dybcio@oss.qualcomm.com>,
- Rajesh Sastrula <vrajesh@qti.qualcomm.com>, Trilok Soni <tsoni@quicinc.com>
-References: <BY5PR02MB6866E35A2B4241CF3A728A99D3D22@BY5PR02MB6866.namprd02.prod.outlook.com>
-Content-Language: en-US
-From: =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>
-In-Reply-To: <BY5PR02MB6866E35A2B4241CF3A728A99D3D22@BY5PR02MB6866.namprd02.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR2P281CA0071.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:9a::6) To PH7PR12MB5685.namprd12.prod.outlook.com
- (2603:10b6:510:13c::22)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="GlpPpJgv";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FfJ4z9Bp"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6769ne1L1533992
+	for <linux-arm-msm@vger.kernel.org>; Thu, 6 Aug 2026 11:57:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	VkStwf3S7kCqSDAEDhjUDeg3C2rvnMkGzJXuP0MDY+I=; b=GlpPpJgvZ4rXTz3f
+	Vbsow/BTSTRqHZoBrpNGzGx138KjJFsEmgyX9Sc2fuGNub047NhdGuwleFhS4M87
+	+rgPv98MEYMz4fC1yLiveSrHxyyOw2xPq95xVuhtIznpX729wUuwdUqEEiphCr7M
+	eEoVcb12j205pC1C/FqFKPE8FelWHeK7YCcz8lvOnlc0naKn+VjN/ajhz84I9u0S
+	ymJB+jSNGRaAePHEzS9s3NldXyooEL02lVY9a9BrQgr9ZslmLb8kGX1pr7O3Ne+8
+	qHN+xYD4XgdseoK4SIDEks6IzABN9z4VZSZLBY1gQyQw/oZqeDbg2h2BsuuWVOd/
+	Dk2bmg==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvn8psbgu-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 11:57:02 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cab3e9cd922so1392141a12.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 04:57:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786017421; x=1786622221; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=VkStwf3S7kCqSDAEDhjUDeg3C2rvnMkGzJXuP0MDY+I=;
+        b=FfJ4z9BpbPicDbzACOITEcRIy8nXerTvWRJ+q7qhdJKoOJ7CCiuRnS2L7gBhcociEm
+         z6XaWnnl6t7K6FLFm4OHxYokwTWEZUJ8/PoZipEY2FoqtlRO+yhTT9IUJkZLwT02leKr
+         3ztibQ6YPqhd4CdKwj+14YgQe9BJrEz1uORcJgi/L2gkTMm9Lrywz/xj0KvKMlkjQ0WI
+         LD8lfiP8MmxpnKEt/Qr9nTG/W9lXijoGp1MlT6PAmwyWSyqLyavyZefFQXS6V8Ft0XLq
+         JE03hMfNdFnL0PywYLf0KsqNUb14adM6TsZJTZ9ZmePOrCfrlMXJtUk3lN4xAbE5Vm5+
+         X3bg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786017421; x=1786622221;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=VkStwf3S7kCqSDAEDhjUDeg3C2rvnMkGzJXuP0MDY+I=;
+        b=kYo6HEZ5LKjPJ3z4ddTJs0+aX8qRmUEjUw2zSF6SeNzUUUvsKfEIQe+AjZD4EpXqig
+         +FOgDvcfB+Qo+5pizVfFVa0Gz40ZnlmGK9H8AlsstjBxyBaCQvFCMdlVTqIg9NIFlHXN
+         JNZoEuHAHFuqDww+2CiVpNniPavvXOi/bS22vbhu3yVCB3PAJJXaMqMh56OalsLT3bPB
+         +QSf4ZeWL6FuZrGrezHanSS8JfZHptDN3NTl+F/xlCoa2c9vjCdyOjy4OEpcXOp3lg6M
+         oV0ngEcvNVWMoTHeyzTCWeR4pNgmBdKXTnvPTEcF/oog8s/wp2PqSRIE/crCU9Dj02PX
+         iWjg==
+X-Forwarded-Encrypted: i=1; AHgh+Rq/zzeMCUnC8QPbQFEWdFmqyoZEhorsisX74Nx4cXbWJM0iFETIhsBAZ+uQfOJ3YGCzYxC1cp42zSsWGOGr@vger.kernel.org
+X-Gm-Message-State: AOJu0YyTTWjBR5fFmIfR9zAy/8uvgwEXfWm7Xs0UYZBTGZB7Ll0d2HMj
+	RvhEAGt1tcI1q12OOpmvymuEPunfH/AjzjOWtCHCJGrBrTCYyl88jHShKdHJxu3JAgoiqb+ZFJT
+	7pln7zcmr5NXxu4YYanE8vwIWen4YIGLs/DgBiFC7RpIdqo//PTs7NccpbTYLJ8TGedMU
+X-Gm-Gg: AR+sD11rHCWx7RGMOE6hnOh0IVoZkFBtNM86qdreadLYBKhr62BHBeE5dMwhntgtXTs
+	gyumCP6Dydr8wA+LLT6OSW3GjMjKqeOf29yV0cAvXcSKtBaSR0+8rol+sDvW/AZTxLyp1+tneRH
+	KPR1s5LWbpm0ge9z3BNjF+cBQEKWIzvB3g5+EwiWkEIsJRf3RdcGumTHZEINwTvWdOGUzleqrKB
+	T0JzKSWvrgm2sWZfx1qCdKDUwD2cqYNiLQKujStQZFgb+aun+2uHPLEZ+//c50dPcenyzgiYlG5
+	vyYnbFoKp4RKIn4xys/QgRTkI6BER18FcJa0rVnKwoEbEsOpOWYS06J34zRt5jihVxtXTp9VkIx
+	S4Zf/1Yeol0Rntfmtnj+FYEy/n8zpz9atIP0=
+X-Received: by 2002:a05:6a20:9e0e:b0:3bf:6ac8:8d29 with SMTP id adf61e73a8af0-3cb85e736dfmr18447892637.21.1786017421177;
+        Thu, 06 Aug 2026 04:57:01 -0700 (PDT)
+X-Received: by 2002:a05:6a20:9e0e:b0:3bf:6ac8:8d29 with SMTP id adf61e73a8af0-3cb85e736dfmr18447828637.21.1786017420682;
+        Thu, 06 Aug 2026 04:57:00 -0700 (PDT)
+Received: from [192.168.0.173] ([183.83.142.146])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315ae6c1f9fsm4873066eec.17.2026.08.06.04.56.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 06 Aug 2026 04:57:00 -0700 (PDT)
+Message-ID: <d0dfd058-f0a0-41e3-a7ad-89eccd0571cb@oss.qualcomm.com>
+Date: Thu, 6 Aug 2026 17:26:51 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7PR12MB5685:EE_|IA1PR12MB6602:EE_
-X-MS-Office365-Filtering-Correlation-Id: 634cf7cb-239b-411a-ca29-08def3b125eb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|7416014|376014|1800799024|366016|56012099006|11063799006|10067099003|3023799007|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	o3bj9mu5xqYvnG7jLvAJ+w8thn0RNXIkVoGtZ+gXn8MptuXbgp9wIPCmy2kcnBVY/6p+ynaz+O/xJSqqjD0p+p2CKql6CmwxfeawLp8z52wu2k6rFXIXVT3o2OxIrBk0a+Mv7WMSEW91VquFUKH+XSgV1AFz7D4/ZzvEcHG6SsxmdccCO/9CYxlM5ObrSuKvegK8YcMj8F9JORZVDEYIv6uWV7b11slCHjQCES8x51Ew/BwNU3bBVxNA86fmv+sqBTTb+Mz4bT40/KUSmbZSAzUQJIzYmTrtK0gou+/km7j8wPwBl0St1N61vhJDJN+FrtoIh4jDe6K9cZZ/RWde+1YQLo8EL/4/HdcYMIsU/RAD72ymvNI/PmyHi0Ag/ln9K0AnEBdDiK/985UUEcJAPFykJX8jJZrsJnAmql6+7SSSIxZjiNBtfeFNi7FNUutbraWz23ZWusbN5c7h8/Q63mWrjQqGl1NCLEJgw3/lYS2WiE2beDoLVmy8sc13Ac8nYp242YTt+lSpF1DztOHuIPakv11G8C6kHdlYNOLhJdPFA/2PL+93cLfXlfZtSthsR2U2po3WL1wGBVppLjdObY3x8/JxWlOS/grGlOBbXhcNNr0G/Hfau3Aix2JPaZPEDYQecztcT7/GQhdH7oKAn6q8+6+3q/5I4+yWS8W2di8=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH7PR12MB5685.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(7416014)(376014)(1800799024)(366016)(56012099006)(11063799006)(10067099003)(3023799007)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?V3FEa1lIc29zTkpta3hVT0hrdmR1SjVnOFlRTkQ1enl0NWdkTitPZ0VQL0xq?=
- =?utf-8?B?V2pyMkNKWXRzeDBHZ21EeC9OcGtlMnRHY1Juc3dIUFdPcWZUTFVFV29GKzNu?=
- =?utf-8?B?QmtxR05tMGI5QlB0K1J6aDhUcEdYYU1OSnJuY0gyYmJuUi9kNjZOblF6WUJ2?=
- =?utf-8?B?QTlhM1VNbUxtRnBydlpJZm5Vdm1DeVlObWNwOEE1bG5ReFZ1RXRmdW1WTVpv?=
- =?utf-8?B?dklsdnpEczZnZzVla0IreXVVcnBvY0ZremJCaTU5QnBJcWFsOUpFWnd1TTcw?=
- =?utf-8?B?ZGxOOHk1aWN1YXMvalptRmFpN2JHVVZtN3MveHZoOFVmZWpaYjFZNUErQ202?=
- =?utf-8?B?Z2c4VWlLbEVPTDR6TmtTc3I2czdxY1pQUDFUMDdCdUt2Z3FwNS9VenA3S3JJ?=
- =?utf-8?B?RjBlc0FydG5XUXBkK0FzemUwY05CempCbWIyMTc1ckd3NXVQd0Q5ZVlpaHBo?=
- =?utf-8?B?RnIzdzlBTEFxNFJLSXRiZWRNVzMxajQ3TkpER20zeXpVSmF3U1M0Y3dFSFFs?=
- =?utf-8?B?ZEtuZGZXNjFEVjFHWEd0NTJ6NFdyMmNZQmxiRThMUXRhN0tkUTNOaTAyamEy?=
- =?utf-8?B?MGtvOWRwaDFvNWN1SGU0ZzBCcjNySE54eUdWNkQ4MnlCU0diRlBUS3VGM0hj?=
- =?utf-8?B?anFnRzg3RUdqVXNMSExQZE5TYU5kZFQzWFhnMEx2SUwwd2ZZcllKRU84TDZr?=
- =?utf-8?B?QkRIM2hnSXpzV3dwbHhjQmFObDNtSmtETmFYWUczS21OOXcyaUorUHoxMUZV?=
- =?utf-8?B?R0dZMmwwTFpQKzFNYlhCQStrcHExSXVISXlyK2ptK3V6bGJ4ODRWYjhXV2xD?=
- =?utf-8?B?a29iV25jK2dnVU1sTEcrRWtaUVZOWkpFdVlxQktUN1RnWEh0U3FpQmFLbjVN?=
- =?utf-8?B?cURNbDRXSVFZYzNDK1JCbEkwQWx6ZUEyMkZ1SEZrbUd5Q2s1Z3JqZ3VpeFZp?=
- =?utf-8?B?emUvT0YxSkYyTVNyYWdmV0labU9yVzdSY1JsRCtrUzVsVGhZb2NoMmJ3aHJG?=
- =?utf-8?B?WEVsZWFraGxGc2FtTUU0MGZRVWRLYzVsaXluOWhIUFRWNjBvekwrZDllTFJj?=
- =?utf-8?B?NTY5SnBhMnA4WmpmcTR1Mk1LdmdVOXdEZ01OOXhqVkdhNnVqZzl3NHFmUWw2?=
- =?utf-8?B?OVJEQTE1VnFjY0ZwOVJJdnJ1MjlyLzhuVm40R0FBMWg4QWRrS3ZBaFYrQUVV?=
- =?utf-8?B?Q3F6a3hUeCtTeFdodTlRNVNrUDhtckZuTmczaTlNRXlOTzJ2cWJKT2Fic0pP?=
- =?utf-8?B?YU1FeitPNTcwQ0Y1b1lQVTJ5UFE3VHc3YVlRTlN1czRIV3VMdWdOa0ZVcDZp?=
- =?utf-8?B?Y0Rtd1BmYTVqNUJMaFRJQ0pFakJlUGs2VlMrd2cxcWR2M1dVOHEyemlzallJ?=
- =?utf-8?B?d1htdk1OQnBQd3hoelk3K2lDWGVUM2N2T1pjZ2syKy8vUGl5UjVITmlycjdw?=
- =?utf-8?B?ellHRmFWa0VUQUlGWmRSU3ZYVGNXWEk0N3lIK2FMeldPaDNmUlVWOEZFbWhY?=
- =?utf-8?B?UFdIRUhESVNObEFkQ3RRTkhmUTJnelRZK00vTXdIdzIwVmRxS3VHV2lhdVNw?=
- =?utf-8?B?TlMvaEZyNWt6N1c1ZVRRWkNFUmx0MzJYdHc1YndGTXZQaGlPOUE4VG9TREdt?=
- =?utf-8?B?ajVRZFRyZjFxdUcvbXpDT21ibHNkREozekVZeUg1MzZRTi9OSk9PUVFKdXR1?=
- =?utf-8?B?OXZJb0thV3ZMdlpKTENxNGFJb29sdTZsYlo0VTgweTR3VHAwOWhnK0Qzby9E?=
- =?utf-8?B?eENHSzFDclNDbEtycXlHS29CYThFNTRuMjlaMUhVQlpNVjVGak16YnFEN0th?=
- =?utf-8?B?aVlRcUhJNVpQa1FucnJwOXdSZ1BMcTNlYjJEYkpwK2hKMmdmV3YvME1mbDU3?=
- =?utf-8?B?N1lZV28yR3JKQkZEQ0NqNzZqU2JKYmRKK3R2Q2xqcjdjc2ZWdzFNTEwzVngw?=
- =?utf-8?B?Si9nekltN3dhdHF1L0pFUlFpWVZZOWxWa1AxQnFQWFB3eC92YXRhQjIzUGxw?=
- =?utf-8?B?cUxhREJMa3NUYTFKd3l3Wk9EWkc2OVRNSVhmOU1KcVIvRUV2OU9LZnhybWRz?=
- =?utf-8?B?VlEwOEZ4RFpBUjZpendYdjVkZWJjS2ZpY0pZRU1ERS90Q0g4WWVSN3V4MW1T?=
- =?utf-8?B?Tlpaa2dpQ2xHYmlFMUtYZWc5NzVzajhXalkyZWVNQkJGVUpNU1FlREZYeUlB?=
- =?utf-8?B?d083NExCbjNjMDdsM0paYnBlSFU0bFZWUWJoRDgxdjN2ekZkZGxXclo5dHBt?=
- =?utf-8?B?dU5KeVA1Y0JvM2hRQUYzbkxnKzlqaHZJRVRrcVJtYVViajJhalRNYmxFditO?=
- =?utf-8?Q?WFB6jJnybdCt8hemMv?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 634cf7cb-239b-411a-ca29-08def3b125eb
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB5685.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Aug 2026 11:52:10.5778
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: S2vlkD9QqblB6E+q2KvORDd2cygTFex8Lld5/mJVXz2Dwl/NhCwec+eqT9ZIx164
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6602
-
-Oh, well history repeats itself.
-
-On 8/6/26 06:30, Pravin Kumar Ravi wrote:
-> Hi all,
-> This RFC is intended to start a design discussion around Synx, a SoC-wide synchronization framework used to coordinate fences between Linux-hosted clients and non-Linux execution environments such as remote processors and firmware.
-> 
-> The intent of Synx is not to replace dma-fence for existing in-kernel GPU/display style synchronization. Rather, provide a global synchronization mechanism spanning multiple subsystems and processors, while still integrating with existing Linux primitives such as dma-fence and sync_file where appropriate. The solution has shown significant power and performance benefits in the last few generations of Qualcomm mobile and XR chipsets, and is gathering more use cases. Also, the solution is SoC-agnostic, so other vendors can adopt it in the future if interested.
-> 
-> 
-> *Motivation*
-> Many multimedia and accelerator pipelines on modern SoCs are no longer strictly host-centric. Work may be produced, consumed, waited on, or signaled by multiple execution environments, including Linux drivers, userspace components, DSPs, ISPs, NPUs, video firmware, camera firmware, or other remote processors.
-> 
-> dma-fence is a good fit when the fence state, callback list, and lifetime are owned and progressed by Linux kernel participants. However, for cross-processor use cases, a synchronization object must satisfy properties that dma-fence does not currently provide:
-> 
->  1.
->     *Cross-subsystem visibility*: A fence created by one subsystem must be importable, waitable, and signalable by other subsystems, including non-Linux processors. struct dma_fence is local Linux kernel state and is not directly visible to remote processors or firmware.
-> 
-> 
->  2.
->     *Point-to-point remote signaling*: One subsystem should be able to signal another subsystem without interrupting the Linux host CPU every time in the signaling path. Since dma-fence maintains all waiters in the Linux, remote-to-remote synchronization has to unnecessarily interrupt or involve the Linux host.
-> 
-> 
->  3.
->     *Distributed lifetime management*: References may be held by Linux and non-Linux participants. Any subsystem must have authority to create and clean up fences. This requires lifetime state to be tracked in a shared/global table, rather than being owned solely by a local Linux object. dma-fence lifetime is centered around Linux references, which does not naturally model references held and released independently by remote processors.
-> 
-> 
->  4.
->     *Race-free global synchronization*: Registering a waiter and observing signal state must be atomic across participating subsystems to avoid missed wakeups/signals. Atomicity between remote waiter registration and remote signaling needs a protocol-level guarantee, not just local callback handling.
-> 
-> 
->  5.
->     *Subsystem restart recovery*: If a remote processor or firmware subsystem restarts, references held by the crashed subsystem must be released, and waiters that depend on that subsystem must be completed or failed in a well-defined way. Subsystem restart cleanup is outside the dma-fence model.
-> 
-> 
->  6.
->     *Global composition*: It should be possible to compose fences that were created by different subsystems or processors into a single aggregate synchronization object. dma_fence_array can compose Linux dma_fence objects, but it does not by itself solve the composition of globally visible synchronization handles created by different processors.
-> 
-> 
->  7.
->     *Transport abstraction*: Remote signaling should be independent of the underlying transport, for example rpmsg, mailbox, GLink or another SoC transport.
-> 
-> 
->  8.
->     *Linux integration*: Linux clients should be able to interoperate with dma-fence and sync_file where that is the right ABI or in-kernel interface.
-> 
-> 
-> 
-> *Proposed model*
-> Synx introduces a globally unique synchronization handle. The handle indexes an entry in a global synchronization table that is accessible to all participating subsystems. Each entry tracks: a global handle ID, current fence state, the set of waiting and subscribed cores or subsystems to allow point-to-point remote signaling, a distributed reference count, and parent/child relationships for composed fences.
-> 
-> The design is organized around four components:
-> 
->  1.
->     *Handle and session management*: Any subsystem, Linux or remote, may create or import a Synx handle and hold a reference counted against the global table. Handles are destroyed by the subsystem which releases the last reference, regardless of which subsystem it is.
-> 
-> 
->  2.
->     *Transport abstraction*: Remote wait and signal messages are delivered through a pluggable transport layer. The synchronization core is not tied to any specific backend (rpmsg, mailbox, GLink, etc.), enabling point-to-point remote signaling without involving the Linux host CPU when both producer and consumer are outside Linux.
-> 
-> 
->  3.
->     *Linux interoperability*: A Synx handle may be associated with a dma_fence or exported as a sync_file, allowing Linux kernel drivers and userspace to interact with Synx objects through existing interfaces.
-> 
-> 
->  4.
->     *Fence composition*: Aggregate fences are modeled as parent/child relationships between global handles. A composed fence can span handles created by different subsystems or processors, and its completion state is derived from the states of its children in the global table.
-> 
-> 
->  5.
->     *Subsystem restart recovery*: When a remote processor restarts, the global table is walked to drop all references held by that subsystem and to complete or fail any affected waiters according to the configured recovery policy.
-> 
-> 
-> 
-> *Possible initial patch structure*
-> If the overall direction is acceptable, an initial RFC series could be split as follows:
-> 
->   *
->     Documentation describing the cross-subsystem synchronization problem and the Synx object model.
->   *
->     Code to manage Synx sessions and handle lifetime. And synchronization using wait and signal
->   *
->     dma_fence and sync_file interoperability layer.
->   *
->     Fence composition support.
->   *
->     Transport abstraction for remote wait/signal messages.
->   *
->     SSR/restart cleanup hooks for remote processors.
->   *
->     A minimal Qualcomm SoC integration backend and example client.
-> 
-> 
-> At this stage, feedback on the model and layering would be more useful than detailed code review. In particular, we would appreciate guidance on whether this should be pursued as a Qualcomm SoC-specific driver first, or whether the cross-processor synchronization pieces are generic enough to justify a common framework.
-
-Well to make a longer story short what you describe here was the original dma_fence proposal from >10 years ago. We fortunately rejected it already back then.
-
-By now I think most people in the Linux community who have worked on dma_fences agree that stuff like that is an extremely bad idea.
-
-First of all some of the stuff you suggest here go strictly against documented dma_fence restrictions, especially no point to point remote signaling! dma_fences have a huge interaction with Linux core memory management which makes stuff like that impossible.
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 01/12] dt-bindings: media: qcom,venus: Add context bank
+ subnodes to common schema
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Bryan O'Donoghue <bod@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Stanimir Varbanov <stanimir.varbanov@linaro.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Stephan Gerhold <stephan.gerhold@linaro.org>,
+        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Konrad Dybcio
+ <konrad.dybcio@oss.qualcomm.com>,
+        stable@vger.kernel.org, Daniel J Blueman <daniel@quora.org>
+References: <20260731-vpu_iommu_iova_handling-v2-0-da52b5228dbd@oss.qualcomm.com>
+ <20260731-vpu_iommu_iova_handling-v2-1-da52b5228dbd@oss.qualcomm.com>
+ <20260805-dark-voracious-jacamar-6aae4c@quoll>
+ <7a546bc6-a2b4-457d-ac27-05fc1cfe17f5@kernel.org>
+ <m4rccl6zsdzmkzntc3njv3uczcppva3passjr5ukmru5q6rylx@wlwha7ydttfp>
+ <163c24ba-6b78-44bb-afe9-3dcbb4d47475@kernel.org>
+ <zqpgl3esozn4dgnm7remmwmquxasyc4qpyh3fgcdfblmn2xe3g@vhp5umdahvmi>
+ <9921567d-4b3a-43b6-bf5e-eb0e92102e34@kernel.org>
+ <npojagmk7x24wpbqcmzg4mijscqz63aluh6lj5uaciztzl53wl@ld342uighqaa>
+Content-Language: en-US
+From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+In-Reply-To: <npojagmk7x24wpbqcmzg4mijscqz63aluh6lj5uaciztzl53wl@ld342uighqaa>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDA5NCBTYWx0ZWRfX0aPySZ5LqX0s
+ HAqWTWoSO0tGl6shhcgLVcMXTJZEOvkDJuyt0VuUN95Gt/7W99swav5RaaH5FGmrvzg3Nk9wzS2
+ oSFZixXKQB1cZ7Iv6dI7f3LY5MiI5z4=
+X-Authority-Analysis: v=2.4 cv=RPeD2Yi+ c=1 sm=1 tr=0 ts=6a74768e cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=eVbXwf39F0J6/s7D6zfB/A==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=2aMSz8YdNj8EIwJtzwMA:9 a=QEXdDO2ut3YA:10 a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-GUID: _9RWwyvsGkxLegEeVryjH8fBCI2xw1YL
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDA5NCBTYWx0ZWRfX1V5n9tucPFO4
+ UNYx4ojA31iGHhe0HgZcDaD9LZAwv50YbF8m4EdDGfs7egfKbmwRJNdsgB6GYJ3jsAyjpc9QA0q
+ dOwAM154Z1eFNM/Uu5Ewannnb31tzhodPYvFZHlsQMmki20vlPJT6TWqrV+1FzHP/HgWhDaygUf
+ ROimcWZ0RYoni8p5cNcRRTPwdHbnHD82B5zC60B9R23oFqmXe10w2AtlvwXg9JtYau+2V7plGnr
+ Oxc4IM8HHXpNRivrUX/+FVFl9/A0mvrlhBk07bR/nwYH3DGbAdAaXwJqQjjY4dwUjq250lSYo60
+ ffmZSR/m8gSrIhRzyUrrrXcDPmeIggFW7/O1n6Coj5hMjXcwGinNRzklh0DEFzfkUsrzzEYSGD0
+ UqGlUs5wRmFSM+r5WCvTXAVuJ0au2fpg9RVfMgYI0haKCNnY23VXF0gwkhjFM3P4o+EkMmnKlin
+ zx/DiuM/mCixKBDCbFA==
+X-Proofpoint-ORIG-GUID: _9RWwyvsGkxLegEeVryjH8fBCI2xw1YL
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-05_06,2026-08-05_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 bulkscore=0 spamscore=0 priorityscore=1501 impostorscore=0
+ adultscore=0 phishscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608060094
 
 
-What you can do is to do this in userspace with DMA-buf and user space fences, signaling points etc... Take a look at how user space waits in XE work, how eventfd works and ROCm events work for an overview and maybe some starting ideas.
+On 8/6/2026 4:05 PM, Dmitry Baryshkov wrote:
+> On Thu, Aug 06, 2026 at 11:36:45AM +0200, Krzysztof Kozlowski wrote:
+>> On 06/08/2026 11:22, Dmitry Baryshkov wrote:
+>>> On Thu, Aug 06, 2026 at 11:11:09AM +0200, Krzysztof Kozlowski wrote:
+>>>> On 06/08/2026 10:46, Dmitry Baryshkov wrote:
+>>>>>
+>>>>>> dma-ranges tell how this bus - so venus/iris - performs DMA translation
+>>>>>> in respective to parent. Address/size-cells are obviously also needed if
+>>>>>> this is a bus with addressing.
+>>>>>>
+>>>>>> But there are no children with addressing, thus what sort of bus would
+>>>>>> it be?
+>>>>>>
+>>>>>> It looks to me that having here both:
+>>>>>> 1. dma-ranges + address/size-cells
+>>>>>> 2. children without bus addressing
+>>>>>> is some sort of abuse of the DT syntax. It is allowed, but does not
+>>>>>> really represent hardware.
+>>>>>>
+>>>>>> IOW, dma-ranges alone feels okay, although unusual, and it states proper
+>>>>>> DMA translation for this bus. If you add address/size-cells, it means
+>>>>>> this bus HAS addressing and thus YOU MUST use addressing.
+>>>>>>
+>>>>>> If my understanding is correct, then solution would be to add addressing
+>>>>>> to the children (so unit address and "reg" property) or drop
+>>>>>> address/size-cells as Rob pointed out. [1]
+>>>>>
+>>>>> Doesn't dma-ranges require address/size cells? In the end, how can you
+>>>>
+>>>> I think it does not require, at least how I understood the DT spec,
+>>>> unless you provide actual addresses to the property.
+>>>>
+>>>> IOW, this requires address/size-cells:
+>>>> 	dma-ranges = <0 0 0 0 0x10 0>;
+>>>>
+>>>>> specify the DMA address if the device doesn't have addressing at all (or
+>>>>> MMIO-style addressing)?
+>>>>
+>>>> Yeah, that's why having here children without bus addressing is
+>>>> confusing. I would interpret it that, children are not on MMIO bus, thus
+>>>> the venus/iris is some sort of proprietary bus with no mapping between
+>>>> parent MMIO and children nodes.
+>>>>
+>>>> If there is no mapping, then we do not have 'ranges' property. But I
+>>>> could imagine that such no-mapping bus still provides access to system RAM?
+>>>>
+>>>> Actually this feels like a huge stretch, so I tend to think that the
+>>>> only reasonable option is to have children with MMIO, which would make
+>>>> it explicit: Venus/iris is a bus which provides translation of both MMIO
+>>>> and DMA addresses to the parent.
+>>>
+>>> But there are no separate addresses for those subnodes. Would you prefer
+>>
+>> There might be some or maybe these should be the addresses of DMA?
+>>
+>>> them to duplicate the addresses of the parent node? Or would the
+>>> 'ranges' be enough?
+>>
+>> I made mistake earlier - 'dma-ranges' without values is not described in
+>> DT spec explicitly, but should be treated as 'ranges' without values,
+>> thus direct mapping from parent to the child.
+> 
+> Documentation/devicetree/bindings/iommu/iommu.txt:
+> 
+>    An empty "dma-ranges" property means that there is a 1:1 mapping from
+>    IOMMU to memory.
+> 
+>>
+>> So it also requires address/size-cells, just like 'dma-ranges =
+>> <mapping>'. And dtc checks/reports that.
+>>
+>> I think therefore now that the binding is unusual (because no bus
+>> addresses of children) but actually correct.
+>>
+>>>
+>>> Or, thinking about it, if Venus / Iris have 32-bit addressing, then
+>>> dma-range should probably define the limited DMA range.
+>>
+>> That's another point which I also raised to Vikash already - mapping
+>> should be restricted to 32-bit if this is how the child devices operate.
+> 
+> Souds so. Then we need a non-empty dma-ranges.
+> 
+> 
 
-We could certainly build a framework around that, especially eventfd sounds like a common ground to most drivers already, but please stay away from dma_fences when you want to do something like that.
+based on this discussion, below works for schema check and dtc
+
+schema:
+   '#address-cells':
+     const: 1
+
+   '#size-cells':
+     const: 1
+
+   dma-ranges:
+     maxItems: 1
+
+
+Now in the schema examples, soc is added to match the reg/dma-ranges of 
+parent (iris)
+
+   examples
+      soc {
+           #address-cells = <2>;
+           #size-cells = <2>;
+
+           video-codec@aa00000 {
+             compatible = "qcom,sm8550-iris";
+             reg = <0x0 0x0aa00000 0x0 0xf0000>;
+
+DTS
+
+iris {
+....
+   #address-cells = <1>;
+   #size-cells = <1>;
+   dma-ranges = <0x0 0x0 0x0 0xe0000000>;
+
+   iris_non_pixel: non-pixel {
+	iommus = <&apps_smmu 0x1940 0x0>;
+	memory-region = <&iris_resv>;
+   };
+
+   pixel {
+	iommus = <&apps_smmu 0x1947 0x0>;
+   };
+
+Please review if anything is missed out.
 
 Regards,
-Christian.
-
-> 
-> Thank you,
-> Pravin Kumar Ravi,
-> Qualcomm Innovation Center, Inc.
-
+Vikash
