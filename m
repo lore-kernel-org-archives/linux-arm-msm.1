@@ -1,260 +1,174 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from outbound-ip173b.ess.barracuda.com (outbound-ip173b.ess.barracuda.com [209.222.82.107])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 787CC37F755
-	for <linux-arm-msm@vger.kernel.org>; Thu,  6 Aug 2026 15:48:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786031340; cv=none; b=tiYeL6rulyv4Ljo4ms9+WtTPkhdJXHOYMWYN2lApbTfPFcogKDXGGMoPVFCYrP1KC0pH4qTUwSMYqKUeX0In981VLGliqE/t86lsTXHS1Zf7rUH5TZJoJu31bYh6uk2+F3QnCvyCaKttUBgakGLH6KG4r2gw2OojGEmfStF8tpI=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786031340; c=relaxed/simple;
-	bh=v5TDmuQpqA82E3dy438qJQ0HCn9njcWZXH83JntM5Fk=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=UWMbdSjyKNe51FxMpfpjqWuaYvQ7fRh1MfUr5vcuFrMFizqqEnf2FBcZxP9WmG5M2wB27BW3iBgFmzDB/CaWGE4maXLv6OzwwoSJRbX2NOuq4XtCCjH1aPJyDagSdKOz6szI170ZWUiYbjqeNBhD7+Our302BGIIojdJ7BqfG5s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Y9rP6uxZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=MNHboq9z; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58A5E47FB01;
+	Thu,  6 Aug 2026 15:53:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=209.222.82.107
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786031638; cv=fail; b=ENlVpIg0MjYekSXjwtCHb3XwM/d0PX88N6CdV+mf6bOrhkqarPpK7D83Osps98yaNH/mYxlCfdfAo8o4kB7rerQ1diFFc91/zEyEh0l5wdc2rV4fyfJSrYqiUZ7TsWSV0XDwozLGuiWcwBVb6XHZXj1WXF2mB/1fbI9dNnWpkbw=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786031638; c=relaxed/simple;
+	bh=6DwSuEUcc6D/epz9hpgBkmFQifwZfJP7DTbVcYohXH0=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 Content-Type:MIME-Version; b=NKo2SX8y8NZs+4u/M2HklAcRsobMPv9m6uIkCfgdVFVlkAnkygNsqFhgc38P7qM0dJGXFFuXbXrwxFEZUwLZ0mKQDaT2s52q55sPB/+Vs7vFJVs2Ro9MZhAtI0gO4aKr1P1HjuQIkKwRCX13P1CfUhoa3VjBoE7I4Z/j7+kqR+g=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opengear.com; spf=pass smtp.mailfrom=digi.com; dkim=pass (2048-bit key) header.d=opengear.com header.i=@opengear.com header.b=PD5w2cBC; arc=fail smtp.client-ip=209.222.82.107
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opengear.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=digi.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Y9rP6uxZ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MNHboq9z"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 676Enp6Y1972478
-	for <linux-arm-msm@vger.kernel.org>; Thu, 6 Aug 2026 15:48:58 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	SZXBp15b585BWkwKGjEqMmNg+nscR5MNbxgZpGEOoco=; b=Y9rP6uxZ6jARpBXU
-	smu8lSXunEjdNphRzEeAMayE3zW53ucXz2fdkQtZP3wJSjiFsKBhukXdQbmnUtIh
-	Q02vCqSwBmh+0uAk1jxauEa9h8fJeHojNQ8dm0RGAYwmOWRlbtCb4rcDFggYzy6H
-	qswN8fjZ5eeAjDye88DJ+4kAdEfHJR1A3AMlKm67FgUMCxITGkNo+HcCzXtj1jC/
-	TFFmMnWNzzf07ef5w6aeT27ww/lvJVkke8Wcjcl4uUqESCc1OxyJYHzsW3KhWT+4
-	qpKFKWLDod/mpE6KejN5xy/1e2v0ERbkNE2B4eyRsin7aB1mZM+Trt7TWfwkiIw2
-	v9Uh3A==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvjuek57f-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 15:48:58 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-92efd2ca21aso408963985a.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 08:48:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786031337; x=1786636137; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=SZXBp15b585BWkwKGjEqMmNg+nscR5MNbxgZpGEOoco=;
-        b=MNHboq9zJATk7wg0GOS9Xh5mnKV/bOi9WeC1Tw52o9o9l/v1nAs56OAyKeqRlNHdkM
-         BKiIYxhD6YSf2PSuQSJpOnN9LAh7xNP1qjLw/tDzF8DzbK0JVP5FLNWJFd7J5ROGbXGf
-         6dTvQyz8k7O6ELERf4yYeGLRA/HuMwhYI4FCtgcQFQjQ7JUzsL816UytgqwGXRk8vs+U
-         flRVf3d6ZQE5+t2jc8YuwKAbz+7hUwxoC9e6zgcsFqt2X27IRiFtFekUsZ+x6uebF+g1
-         igbz4dNJEXGG+ZVOZ2NtVl3IvtYDcMY5WWpyGRugwstR4tUbeojca5tBJ5krJ2T+C+vb
-         p6cQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786031337; x=1786636137;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=SZXBp15b585BWkwKGjEqMmNg+nscR5MNbxgZpGEOoco=;
-        b=hJ+wuju6cFmbTDo3u5194gT+QiAvJsqOc8FSx8EhPmiD8gUEzBbaUKufPkmcT5oInD
-         Q3wyRHtTrUWQbMPTZE0n0wx5RKWTupvn1OhcoI6asmxYV6uYLZuo/udP24ow88bBQaLD
-         may8S5Zeqed2Fe1++QNZ1Rurh8ylU9FSb9Xh0SWUtUyJLyynNzi2nJ7PikexsrL8jkFg
-         ZQN8b602SlDiBx0wCEB2yY+lZ3KcyiboknxzVluX2A6x0aSlZgxb2WL8Nn5r8DstAAf4
-         MJzI6mGZaLJwVft+Y4fQRGHK5kzLUtgUSsFS5UibdLeHE5Kqv0fBYKqAXlZM6FNKs9pr
-         SjhA==
-X-Forwarded-Encrypted: i=1; AHgh+Ro6WQsMYWzTee3wK9/2QG5NcBGNQWYX7SteUTPpIbQxdrLVHHFpVEc7zMBYjOpaPVmz/t9ANkO1w40frZRi@vger.kernel.org
-X-Gm-Message-State: AOJu0YyXOKOcCeOdX/kNu60WCnUIY99EdW4jBDqqbvC7Msm/VVgfsXJb
-	t5lXNjJ7clc5aNYn5KK2kPnNDzff3ICNxI0erB3XkJ2uhHMDKigLbpIDnYA+oB2CL2bdpwvt4lY
-	tHfxhKMqWOzGzBi6b9eSQzjyTdQkGsomEbpoJDsigPsUnohtbqgHPaM+bBQoy8To5+XrX
-X-Gm-Gg: AR+sD12Th1PACel+idQN/zW9RdeGc/AnUHkOyOGberW+Yk5oO7C+odHJzaDPqVGWOKB
-	qnEpSHJWRoqtf03KkhaQaYFYscfujsWwT1M511C8ru/JsARwAbUr8WAB5B1LDHVJi0jd4qTd5J8
-	wkyeFyo0/5i+LQok/JVEQM3YgcQHyWlcoGiDmXqKoIvYyPBNwbFt+xvWHj4cB4g82XGTS3oIuRL
-	2SpVVxBnYJ6ZVoiAsaAc2h9o7c7HFyQOHcfJQxLgOipwYXmW2TPGJmsbM/4bQlcOfvXDPAp8ZdS
-	4DT8qzdScIFz87J/vxKPzuE/O2SsGDZ5485FybwZ+9Z4ZULSuhOJcdmUnvFJ18fR2nBgw9dpWBU
-	GOYt93dfHjL6Ku7J0/Dw6Oa4eKt+D3n4=
-X-Received: by 2002:a05:620a:a10f:b0:92e:bd39:9993 with SMTP id af79cd13be357-936491af165mr1370753085a.31.1786031337237;
-        Thu, 06 Aug 2026 08:48:57 -0700 (PDT)
-X-Received: by 2002:a05:620a:a10f:b0:92e:bd39:9993 with SMTP id af79cd13be357-936491af165mr1370747385a.31.1786031336714;
-        Thu, 06 Aug 2026 08:48:56 -0700 (PDT)
-Received: from [192.168.1.16] ([106.222.229.34])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-936583cdd32sm274043585a.7.2026.08.06.08.48.53
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 06 Aug 2026 08:48:56 -0700 (PDT)
-Message-ID: <67fd2a5d-fef4-4292-b981-c930b55aafb4@oss.qualcomm.com>
-Date: Thu, 6 Aug 2026 21:18:51 +0530
+	dkim=pass (2048-bit key) header.d=opengear.com header.i=@opengear.com header.b="PD5w2cBC"
+Received: from BL2PR02CU003.outbound.protection.outlook.com (mail-eastusazon11021115.outbound.protection.outlook.com [52.101.52.115]) by mx-outbound42-229.us-east-2c.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Thu, 06 Aug 2026 15:53:09 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Sl8PHUk0YQAPzQ93vP2j3EhSvYRh+bs/T7jgtRdGrntvj8Ce0kb2YdafqBjmyiATxpZCjQIpXFpFE/jeDUXIHOarlaG4hmXjJOUsIBnytHOt4AHxN23lPII/y+6c3h3EW6hpJzE6BZ0//z81/o7jcWJfgNiFsEGJ76gwSjxkmBsY8G2OnOyHrJHVPv1kFzmjiq3iheWT7mO3kNgY2CDVdaqA9KqcdsWSo63JXZJkMCcGiNRGMSKgQ/Rk5bdv/ZOHwRoHKV9jA8zNBDJGDHJ9xzUBSz/E0nRUnffK3agvqLLfChO25gYN6ioOk67mQCtwDakjnMisH9kfMfWEMzfP6w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KlICyOGc4MInRat4xsn5W3hLBpGkdBnDqhnpxxhRKnY=;
+ b=qr3bVd6EO3UlNkZWN+SNBGIt7CY66NYHyFdJxI5ngDaPwkoaLT0aGNsRJoJu/EyfzMR9dENV5oUsTXJHtUtRDworvqy+R6h50McNNIaZpx7TsKdCxPV44ag0gFiFKrhSdP64RFnYFpHBK6FUREqgwGw+ffHTGG8D3tcW0YKiW3HuHaJ7U3JPmfDgjx+AuL6rSZ5QQs28Il8u3ggvf08Ag/MH8ns2R3gkRbHftweL1bV6ReIBpjtO0pM8D4hji/tc4ch5ctRtGjjO2LDkdssEYERd6PBPrjuANRM8jypoWjvlZ1+3nVPMVfkLMu9xB7WC9xv43F9ihIeGsi0lc0EV2w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=digi.com; dmarc=pass action=none header.from=opengear.com;
+ dkim=pass header.d=opengear.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=opengear.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KlICyOGc4MInRat4xsn5W3hLBpGkdBnDqhnpxxhRKnY=;
+ b=PD5w2cBCtJUb66QX6ba66oQEkHOL0zC/FBim/eXk1P1zlaooMGwKP2juBl8GL6LK/BHIayy/lVA3XgY6a8DUIhD5knLgBzwAu5CfUv5G8R32bMJSGYDvn/DpL0zqIkME5PbfL70/MThptNnEOuty6vY/BTvDETdu6sMkgfFefBkg/UJ4n6fXX5e1F9rZiJPt5+3A19aPGqlqQO6jiQMS/AO0aECARX7c0oMh+UszitfAJMX5igNWotRngMVIX0OXFA4SIYGa1Ao3BodhcJC3zNyas68PL5oh/M5XCLpcypVD6lRPVoYelpblylRVYrMrUcyKUmjsclv1Bd2FNDvqgg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=opengear.com;
+Received: from DM6PR10MB4139.namprd10.prod.outlook.com (2603:10b6:5:21d::24)
+ by IA1PR10MB5900.namprd10.prod.outlook.com (2603:10b6:208:3d4::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.16; Thu, 6 Aug
+ 2026 15:53:04 +0000
+Received: from DM6PR10MB4139.namprd10.prod.outlook.com
+ ([fe80::19e9:d558:fd6c:8e5a]) by DM6PR10MB4139.namprd10.prod.outlook.com
+ ([fe80::19e9:d558:fd6c:8e5a%6]) with mapi id 15.21.0292.018; Thu, 6 Aug 2026
+ 15:53:04 +0000
+From: Peter Hunt <peter.hunt@opengear.com>
+To: mani@kernel.org,
+	loic.poulain@oss.qualcomm.com,
+	ryazanov.s.a@gmail.com
+Cc: johannes@sipsolutions.net,
+	netdev@vger.kernel.org,
+	mhi@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Peter Hunt <peter.hunt@opengear.com>
+Subject: [PATCH net-next v2 2/3] bus: mhi: host: pci_generic: enumerate IP_CTRL channel for Sierra EM919x/EM929x
+Date: Thu,  6 Aug 2026 09:52:52 -0600
+Message-ID: <20260806155253.3378294-3-peter.hunt@opengear.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260806155253.3378294-1-peter.hunt@opengear.com>
+References: <20260806155253.3378294-1-peter.hunt@opengear.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: CH5P220CA0019.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:610:1ef::17) To DM6PR10MB4139.namprd10.prod.outlook.com
+ (2603:10b6:5:21d::24)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 2/9] soc: qcom: Add QMI TMD support for remote thermal
- mitigation
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        sashiko-reviews@lists.linux.dev, linux-arm-msm@vger.kernel.org
-Cc: devicetree@vger.kernel.org, conor+dt@kernel.org, robh@kernel.org
-References: <20260731-b4-qmi-tmd-v7-0-3befd44403d5@oss.qualcomm.com>
- <20260731-b4-qmi-tmd-v7-2-3befd44403d5@oss.qualcomm.com>
- <20260731105316.BDBA51F000E9@smtp.kernel.org>
- <7ptv24tcqk6ym3pkiuo5y5klhv52nycwhg2zl5usxme47cmflw@pg3lays6zpas>
-Content-Language: en-US
-From: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-In-Reply-To: <7ptv24tcqk6ym3pkiuo5y5klhv52nycwhg2zl5usxme47cmflw@pg3lays6zpas>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=aNzAb79m c=1 sm=1 tr=0 ts=6a74acea cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=x3UvaR+l8cLCJ1uKBUlNag==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=c92rfblmAAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8
- a=PaKyr2AS0Ek1y2y1GKQA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=NFOGd7dJGGMPyQGDc5-O:22 a=GvGzcOZaWPEFPQC_NcjD:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: TOD_uIgbapeAlvtzqnzdxxkO5dVCcuoW
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA2MDEyMiBTYWx0ZWRfX3XcAz30WMc5L
- f0L7YVXYN0y7iNWcRjCu0QCh3EotoLvaz+dkDgiRKg6MHqRjW8/tnjoRUHOLzJlS4pOvQP4bh+h
- aNs4PzPNE6QSQ9Waqa5jP1YOKiF5WZYwMWZOJN+VDywM6uoksy9Hb29wxWaRJLk1IcfSfj0HERN
- KQhNrUrsDNq55l8X1ML2sNLj+fxkmwh6PUJnZVYU74RuPSwn8LFhue+myOHWMz5VbcW6cEvadn4
- db6iiEK/EOMnSleBBY7MkV+BFVOJX/Ru43vwT3amp+RRMSFpcUEI9+0jzuQLq5bOLVuPDBfWuaV
- XBMQfQnU9h+myBxqQT/G3ZCqGQfmX22MUMGW3iS++QoUfPwPhEmmZtYhk80OcggapibJjMLeKaG
- xWxcM0XvHxvcqzjJKrBL7Tqthw+lXDTQ+egZRg7Qnag56vt6Nn94BKumoA/kZQq4a5UChaAp6qY
- rhjaVfAuem7jBTqewQQ==
-X-Proofpoint-ORIG-GUID: TOD_uIgbapeAlvtzqnzdxxkO5dVCcuoW
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA2MDEyMiBTYWx0ZWRfX/05HtNLQeJeB
- W6lv727TdUsC6SIoeXtErukydiPj5jhl2Ownl16Xg/B07c1p4x1zYvVAaFVac15C8u8n5if45Tl
- 56ie+u4z5/nuLx5jv04ldjH8biU5AdQ=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-06_01,2026-08-05_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 priorityscore=1501 lowpriorityscore=0
- impostorscore=0 suspectscore=0 adultscore=0 clxscore=1015 malwarescore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608060122
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6PR10MB4139:EE_|IA1PR10MB5900:EE_
+X-MS-Office365-Filtering-Correlation-Id: c81edad1-8954-452a-d085-08def3d2cbad
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|23010399003|366016|1800799024|6133799003|11063799006|56012099006|10067099003|18002099003|22082099003|3023799007;
+X-Microsoft-Antispam-Message-Info:
+	Lz1Og1Glx+txen6P25ZjQT8SPpw11DPrB1IfHG1u2yiRsTs5zkgfxfTRkabJSwyOw+JRIVEa+ScnDupfpGvi/0VPbqLhus2/IRWnDES9YI5/EaeLpd0hXplDqevDk7G0eeDVen47GYPQAJoT85Cp4JHIzH8lDS3KBNDtObBOTCHEpXYlwtpoL0SBbr2P3bAccmdCGWqzH9SgDRPQ9mlj/RgZ7D32boDtyi+Wvcg8XD4LHUhcPlyRSQR1H3LADX7j6EGGtYdMLG/Ly0ZOTGnRBD/jQuHexkdC1YQLLfg21Z/VA+0OXrwI9o2fbr2oDhZ2GRUFEOTt8QrSDjdamT40Ygq3O7MdDVGGZHEhnN/NMUm4KsiX2mRJxK+/iMyZk2cDGnofI3DNzVNybaaOjmeO0I6+zfqzqOC0n+IM0JpzVXA4nuG+1vu/yMTAQLJf6f8Kr/kGR4pBBeb41yI8TegI0sv2Jb5FjJc81rexdjBWBvfUIFToEx0oZSs6WvAGqfmWFeSHZTtyvjBCq4aLzxQoV7Qv+Ps3+FQKMW8EsF2La2UOp7aQkXzf6iosQmgcVhUOrm6QL+dR4kZ9T9Qw/Ff5wiOPpGS4aqWedsqvoLkWn/HGJwoIc394p4ZYQTG0/PJDk7qdwVYrg3nL5R89FMGGbdLkwSm+f45pK/WnydZ5JhM=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR10MB4139.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(366016)(1800799024)(6133799003)(11063799006)(56012099006)(10067099003)(18002099003)(22082099003)(3023799007);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?+JS+cGN2DMaFTUC4rKwdGi68vElO/hgKQa+cT3vOIbGk0FgBrjcF7iaviyeJ?=
+ =?us-ascii?Q?0RwiRPKJ72p1w/bnCCUU64KFeRDIQfcxOe6RBee9zi6ae8WZPsdXU8JS7tCL?=
+ =?us-ascii?Q?IHHByWEHVUuRIBaPMC50tQfqq0qvQcCP/U7Rc6uKN1dvoAY7y2qHTitezSbF?=
+ =?us-ascii?Q?pw1JyaPOx2wTG7UT2J49nTOiGT6+oHkHFqyNls1fKGGURDSRH2rpVQi48UjB?=
+ =?us-ascii?Q?MXAXw0aVp7UuPtCHhl7w4lPvpIEygVEE/9sXsiHGum4RD/1hHs8Nm5wtjp+l?=
+ =?us-ascii?Q?hTQ5e4GOyuISUistAhe7sf0wGZlDvNw8DTgPj1SKJoIoSqlFhxP/jpeAUhj2?=
+ =?us-ascii?Q?EWc8DH7fjGnupDOYI90F/HQKMy5kob6j2r/jKzqqrc0UqHQrgWgGqKgE+P0v?=
+ =?us-ascii?Q?v6n5t+oOYJ4DgEDi0xwpzWwAlyoHqUAJcvImBSl5WF/xoqs340GELXHLe1LW?=
+ =?us-ascii?Q?Inz9P5SZMOCfTMyVk0Ra3apxM4FMYxmGVswqg3j8nNiMzZ2Q7aSfD3CKC95q?=
+ =?us-ascii?Q?Ni16bcUKuJyIoXDOvt2KMXkQoejmIqpVtlzMEW4vPiicONm+ELC39ckFGsdP?=
+ =?us-ascii?Q?nTFkbg+ybTa4YHo6TB7+vS/+nf7EKuSu1fH4e3llNG0vLvs3q0Rhqz4ybQjf?=
+ =?us-ascii?Q?/4tii/zBhOT/zwlLv8L3E2JosJx3GiEyP4+NLeJP/QyOJngilFeO08h8sLZ5?=
+ =?us-ascii?Q?s0XYwo/rxCm+0KKsoyaR/2QInT8pUl/qtMbPD40LCAPx7oL52yHSawkPwL3/?=
+ =?us-ascii?Q?W/K0j5U+HbikYvdzzbfDc4vHrW3OtlBh6VOU2eP6hPstKTzX02NteoTK4Awt?=
+ =?us-ascii?Q?ibaonDMA/4Sm9ypg32S10nq+SWddRb2FWTxxdXLqq+XhduxWxGGq10v9HEUx?=
+ =?us-ascii?Q?BT6srXvL6ptwgQHAL4zZ0zbBRDsAGRzG0cDIxUltY4/TWbY2Dv0XS8peUtIZ?=
+ =?us-ascii?Q?yXY5PruvGNaPzRve0yZ5HFhrcyWwrWy6BRwkN6TA2gXk97aL0YSorr+JWqWK?=
+ =?us-ascii?Q?P2hTSMnSq8SOtemuzk1DyGPOM8N7ILbgVGnHT33Om/oA/5Sku9YGeek7TubJ?=
+ =?us-ascii?Q?uJfpRxmMhzUr5+wCDPwvNiebzLOtdzqND3UP18tQ51yzQ3ixjXRpDPPTZN2d?=
+ =?us-ascii?Q?y23QKhx0x5jIz4NQxoXJJunf/LTrmmQTiNbhABimyCu5UwRMEaZfA/lc4xeT?=
+ =?us-ascii?Q?twmUUuLzKAODIDuOIJcftvoWJAuaqL+c39ZW4zTpF25nlD9aqkKknFwauVDu?=
+ =?us-ascii?Q?uY48E5rX4x56lhbZuuHrMM5k1qRq8kZ6M/UpnLXUTkH6+lS4LR4Nki/fjuFn?=
+ =?us-ascii?Q?ANrfEy9Cd0l5mIwMRiNbV6aIAl2DEfzxNl2Rk59N0L8Jswqt7jV7ZYj/Ut3M?=
+ =?us-ascii?Q?bmudTjWwx1lUx8h9UY8d/fxgvBMVu/OnmxAQ4DT91msEHbLNcg80Ep1LMq7n?=
+ =?us-ascii?Q?edUbKdXN62c4bVe00dhI6rayMK9mS0MTD6B2tyg+4W5juk5AV/f7SYLB9Ox9?=
+ =?us-ascii?Q?Nnt0LAq3xIQZ6QQlgjTYLZuzv9pbmTWmLi/Jmsb3UvIHyi7J15vcGB+xc9/o?=
+ =?us-ascii?Q?HpRkvMVGgUeMLAA/4S31KhM2nESiyzX9tW+c2oIiRureYVpWWQhpc6xf5zI7?=
+ =?us-ascii?Q?HZsyh3XFVU6Cx+cNm05M0+H22JLxEZvd4Ay43arNTLJ0OSWOyIsDGGYvoQJ2?=
+ =?us-ascii?Q?qd8j7G+jtxf5lcCk6HJLS3/uHkzZnI62bBjLkjpgIg3vkLJq?=
+X-Exchange-RoutingPolicyChecked:
+	ZZm9wr/R/j2CGjyJTV5DGtmeQLpu/a8oLnGCi4oNTMPBr26aGxcX6bZm+Q3+k7/nHs0agLLTnsTv12JJavN/BfhlRV/O3BwNSONDzAGJv/L3mt/ySWMJ0A/ayy0yTOEWz3FqLF4bB5XMafxr/s06K5yhJQhLsMlkAc973yz/BwcF5Ef9LfEPVS/ZUu4HH5fBfjSTxD1cHYkMadWWxZC3iB4pv716pB4kAwHmdvmEtm36xebOrwjT+NLNsWklcBb/x0JTh8c36S1+Ppj+CrNiGcFjMz75voEidG2aSTJqBRs6fJ3OHCdkvvK4Hb7ADSnnGpMI2hMkNR8TW68DJJzFww==
+X-OriginatorOrg: opengear.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c81edad1-8954-452a-d085-08def3d2cbad
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR10MB4139.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Aug 2026 15:53:02.0153
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: NuMWTIgUMBB/kW+ADaG1lqTKfRt6BNFHql1/BtK1HfygtjV54OMaarSvLoSUwx42
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB5900
+X-BESS-ID: 1786031589-110981-15308-2975-1
+X-BESS-VER: 2019.1_20260804.2006
+X-BESS-Apparent-Source-IP: 52.101.52.115
+X-BESS-Parts: H4sIAAAAAAACA4uuVkqtKFGyUioBkjpK+cVKVoYmhmZAVgZQ0MTQ3CIpxTTJKD
+	nZyCg1McXI2DIt0cjI1MDM2NAgJdlQqTYWAD8yPqZBAAAA
+X-BESS-Outbound-Spam-Score: 0.00
+X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.275189 [from 
+	cloudscan18-7.us-east-2b.ess.aws.cudaops.com]
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------
+	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
+X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS112744 scores of KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND
+X-BESS-BRTS-Status:1
 
+IP_CTRL is a standard Qualcomm MHI control channel (channels 18/19) that
+carries the host serial control lines (DTR/RTS) to the modem; it is not
+Sierra-specific. It was not enumerated for any device in pci_generic, so
+the host had no way to drive those signals.
 
+Enumerate it in the Sierra em919x channel config (shared by the EM919x
+and EM929x) using the control event ring. This is the device the change
+was tested against; other Qualcomm modem configs that expose IP_CTRL can
+enable it the same way, since the mhi_wwan_ctrl DTR support that consumes
+it is device-agnostic and binds purely by channel name.
 
-On 8/6/2026 3:10 PM, Dmitry Baryshkov wrote:
-> On Fri, Jul 31, 2026 at 10:53:16AM +0000, sashiko-bot@kernel.org wrote:
->> Thank you for your contribution! Sashiko AI review found 2 potential issue(s) to consider:
->> - [High] Returning success without saving the requested mitigation state when QMI is disconnected permanently loses thermal mitigation updates.
->> - [Medium] TOCTOU race condition when reading `tmd->cur_state` during service reconnection causes permanent thermal state desynchronization.
->> --
->>
->> --- Patch [2]: [PATCH v7 2/9] soc: qcom: Add QMI TMD support for remote thermal mitigation ---
->> commit 02c2244c0a2cebd6be4e1bf4e41d51362be19b5f
->> Author: Casey Connolly <casey.connolly@linaro.org>
->>
->> soc: qcom: Add QMI TMD support for remote thermal mitigation
->>
->> This commit adds support for Qualcomm Messaging Interface (QMI) based
->> Thermal Mitigation Device (TMD) cooling devices provided by remote subsystems.
->> It allows client drivers to discover the service and forward cooling state
->> updates to remote processors.
->>
->> diff --git a/drivers/soc/qcom/qmi_tmd.c b/drivers/soc/qcom/qmi_tmd.c
->> new file mode 100644
->> index 0000000000000..37e6ef19a0b34
->> --- /dev/null
->> +++ b/drivers/soc/qcom/qmi_tmd.c
->> [ ... ]
->> @@ -236,25 +236,54 @@
->>> +/* Notify the remote subsystem of the requested cooling state */
->>> +static int qmi_tmd_send_state_request(struct qmi_tmd *tmd, int state)
->>> +{
->>> +	struct tmd_set_level_resp resp = { 0 };
->>> +	struct tmd_set_level_req req = { 0 };
->>> +	struct qmi_tmd_client *qmi_tmd_cli = tmd->qmi_tmd_cli;
->>> +	struct qmi_txn txn;
->>> +	int ret = 0;
->>> +
->>> +	guard(mutex)(&qmi_tmd_cli->mutex);
->>> +
->>> +	if (!qmi_tmd_cli->connection_active)
->>> +		return 0;
->>
->> [Severity: High]
->> Will returning 0 here without saving the new state to tmd->cur_state cause
->> thermal mitigation updates to be permanently lost?
->>
->> If the thermal core requests a new state while the remote QMI service is
->> down, this returns success but drops the state update. When the service
->> reconnects, qmi_tmd_register() will re-send the old tmd->cur_state to the
->> hardware.
->>
->> Could this leave the hardware running unmitigated while the thermal framework
->> believes it is actively mitigating?
-> 
-> Please address at these comments.
-> 
+Signed-off-by: Peter Hunt <peter.hunt@opengear.com>
+---
+ drivers/bus/mhi/host/pci_generic.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-thanks, checking these comments. will update on this.
-
->>
->> [ ... ]
->> @@ -298,34 +327,33 @@
->>> +static int qmi_tmd_register(struct qmi_tmd_client *qmi_tmd_cli,
->>> +			    const char *label, u8 max_state)
->>> +{
->>> +	struct device *dev = qmi_tmd_cli->dev;
->>> +	struct qmi_tmd *tmd;
->>> +	int index;
->>> +
->>> +	for (index = 0; index < qmi_tmd_cli->num_tmds; index++) {
->>> +		tmd = &qmi_tmd_cli->tmds[index];
->>> +
->>> +		if (!strncasecmp(tmd->name, label,
->>> +				 QMI_TMD_DEV_ID_LEN_MAX + 1))
->>> +			goto found;
->>> +	}
->>> +
->>> +	dev_dbg(qmi_tmd_cli->dev,
->>> +		"TMD '%s' available in firmware but not specified in DT\n",
->>> +		label);
->>> +	return 0;
->>> +
->>> +found:
->>> +	tmd->max_state = max_state;
->>> +
->>> +	/*
->>> +	 * If the cooling device already exists then the QMI service went away and
->>> +	 * came back. So just make sure the current cooling device state is
->>> +	 * reflected on the remote side and then return.
->>> +	 */
->>> +	if (tmd->cdev)
->>> +		return qmi_tmd_send_state_request(tmd, tmd->cur_state);
->>
->> [Severity: Medium]
->> Is there a race condition between reading tmd->cur_state here and concurrent
->> updates from the thermal core?
->>
->> When the QMI service reconnects, tmd->cur_state is read outside of the
->> qmi_tmd_cli->mutex. If a thermal trip point is crossed concurrently, could
->> the following sequence occur:
->>
->> CPU1: qmi_tmd_register()
->>    reads tmd->cur_state (e.g., state A) locklessly
->>    
->> CPU2: qmi_tmd_set_cur_state()
->>    acquires qmi_tmd_cli->mutex inside qmi_tmd_send_state_request()
->>    sends state B to hardware
->>    updates tmd->cur_state = B
->>    releases mutex
->>    
->> CPU1: qmi_tmd_send_state_request(tmd, state A)
->>    acquires qmi_tmd_cli->mutex
->>    sends stale state A to hardware
->>    reverts tmd->cur_state = A
->>
->> Will this overwrite the new state on the hardware and cause the thermal
->> framework's view of the mitigation state to become desynchronized?
->>
->>> +
->>> +	tmd->cdev = thermal_of_cooling_device_register(dev->of_node, index,
->>> +						       label, tmd, &qmi_tmd_cooling_ops);
->>
->> -- 
->> Sashiko AI review · https://sashiko.dev/#/patchset/20260731-b4-qmi-tmd-v7-0-3befd44403d5@oss.qualcomm.com?part=2
-> 
+diff --git a/drivers/bus/mhi/host/pci_generic.c b/drivers/bus/mhi/host/pci_generic.c
+index 0d0d9c7ffa4b..ba47dd153837 100644
+--- a/drivers/bus/mhi/host/pci_generic.c
++++ b/drivers/bus/mhi/host/pci_generic.c
+@@ -728,6 +728,8 @@ static const struct mhi_channel_config mhi_sierra_em919x_channels[] = {
+ 	MHI_CHANNEL_CONFIG_DL(13, "MBIM", 128, 0),
+ 	MHI_CHANNEL_CONFIG_UL(14, "QMI", 32, 0),
+ 	MHI_CHANNEL_CONFIG_DL(15, "QMI", 32, 0),
++	MHI_CHANNEL_CONFIG_UL(18, "IP_CTRL", 32, 0),
++	MHI_CHANNEL_CONFIG_DL(19, "IP_CTRL", 32, 0),
+ 	MHI_CHANNEL_CONFIG_UL(32, "DUN", 32, 0),
+ 	MHI_CHANNEL_CONFIG_DL(33, "DUN", 32, 0),
+ 	MHI_CHANNEL_CONFIG_HW_UL(100, "IP_HW0", 512, 1),
+-- 
+2.43.0
 
