@@ -1,67 +1,125 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f48.google.com (mail-wm1-f48.google.com [209.85.128.48])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9572358D37;
-	Thu,  6 Aug 2026 07:16:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3F4793DDAE4
+	for <linux-arm-msm@vger.kernel.org>; Thu,  6 Aug 2026 07:54:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786000587; cv=none; b=pbsoWla6pGorU/3xlxXQbrlaCTO9K5/tNUKsJIGHbyuoPrvgFXyJ/XNJYGpQpGNKaJl1c8x+8jV3mcEC0YetoBtZe/OTXhicoKk5Hqg2ZzBgc0bOvmxCRKMJXhO3AiCmBLE8CuY5hKDsbrz6VpH5UJSimWq1W1zXFPI/A8H7FsI=
+	t=1786002866; cv=none; b=n88yt+j1myupEBZX0Pu7EXGwNLwd0BoI1T9mJWqxyVfNz8X3q53V9J1hETY90AoVNXm84Cw/n/npuhPAYXwqRLh9/m0AxeRLedVsd9ZgpmZx1p+TXgG1vKhtCtxVfePLGv0yuz7wSB2gMJvvoeth0FXdsMjP/Og8YsjBf7nK7Lw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786000587; c=relaxed/simple;
-	bh=FHvhI6H2FyjyzVH5lbcV92+hCxEh/dMGTbgIIbuMPSs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=KtXhG+x7eWo+RJbBSOEmOii41uWIl6Whty2SetLT0Tus91mSuT2tafQZ9nBx4PyGnca7rc/eOlqVDDiphp3rUqMyN3jP0QGLlVf0K0KQ8sOM4x4ayIMIHFeOj2+Y6UMJO6xQldco+Yw5w4Itax548K/YXQTtcYUGoy8xJeEAyCw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=E2+JCyXr; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786002866; c=relaxed/simple;
+	bh=TiE5jS6xdQ0bA0I02w8JwxsgjymilDhoV3zVSyA8Yx0=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=KgkQ5NtyHkelJF60yPSAzhLsR+wGfVX4qrJV2lNlXa18jtu+IS0Nh8EYJge7XcV9SASfHvrIrCsEMVWPQEuLNwNdqQwtBAwpHeXvaqsLT/o//b9eNXwaCIZkL0AWHbIM9wRfuuLJ376Sv84vhhllMDPyAQ8ipnprj07TIi9DtoQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=AgBayDkl; arc=none smtp.client-ip=209.85.128.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="E2+JCyXr"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C376F1F000E9;
-	Thu,  6 Aug 2026 07:16:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786000586;
-	bh=FHvhI6H2FyjyzVH5lbcV92+hCxEh/dMGTbgIIbuMPSs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=E2+JCyXrO4pHKHHyzoBprC8Ekv1xAmHsyLo6E27A5IB2asj2vpe6MZXRIiHmveJWI
-	 2n1DxedP4yYZy4YuSS7ZZRZN+Q4pu2eYYFR3FUyoEqusrSvzZBrc8UUY/VvV9WRGfQ
-	 dSH63jhdcvPXLxQzYTzFY5WwWfY7yJfD8ysabJS8UMwdlajeKQ9bx/9wQn+6J3DbT0
-	 T+X0g3PkjM5TUtBeoidubaeCUQ72zwkYu1T5QTI2J+pOm9SitQy4zPhiPj38pwzX4C
-	 dq8eYipYmTq7wUnMLbKrSHC5FVlMAR9YCxSfoVp3/n76ZyPNUQ0iuRUFotH3h7TNqT
-	 UfPnQDU+536/g==
-Date: Thu, 6 Aug 2026 09:16:23 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Mathieu Poirier <mathieu.poirier@linaro.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>, Amit Kucheria <amit.kucheria@oss.qualcomm.com>, 
-	Konrad Dybcio <konradybcio@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
-	Lukasz Luba <lukasz.luba@arm.com>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Kees Cook <kees@kernel.org>, "Gustavo A. R. Silva" <gustavoars@kernel.org>, 
-	cros-qcom-dts-watchers@chromium.org, linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, 
-	linux-hardening@vger.kernel.org, manaf.pallikunhi@oss.qualcomm.com
-Subject: Re: [PATCH v7 1/9] dt-bindings: remoteproc: qcom,pas: add
- #cooling-cells property
-Message-ID: <20260806-turaco-of-eminent-domination-9baf8a@quoll>
-References: <20260731-b4-qmi-tmd-v7-0-3befd44403d5@oss.qualcomm.com>
- <20260731-b4-qmi-tmd-v7-1-3befd44403d5@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="AgBayDkl"
+Received: by mail-wm1-f48.google.com with SMTP id 5b1f17b1804b1-498028b3d5eso18137855e9.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 00:54:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1786002862; x=1786607662; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=VLXG2deAu9vjEHqLkwP3KT44g0q17SGCldo/DWmdJG0=;
+        b=AgBayDklbzLgSbYpFLwhYK+XLH7TQzsy0eSSSHuQMlQZ4KJoqMBHGNWEOh2qfrJXkb
+         lOudg2ji8AMjuAZbvk661DcYOBOPkJsw3yFlUGKMZIJsczj1wnORoSOQnGzM/Y9zCCp3
+         rFYUTeEoB4IjF1ab0xdqp8mgWDMxPBHxOWbdw7RBApxsApb5Yr4FSX+TORJk2X65MdIN
+         rTT+xpMP0EobH496r7HvtHcqmlhkFKJDS5JQOagmna+t4DkmZ/MNuUpJiPk23+iCkrPx
+         I4rxgGFsmpWtP4hDRJ+iPnhoJ0K3lyBggL92o6syPdnWkeM1BFWgbnfXO4w/dXG4WGAi
+         v1xw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786002862; x=1786607662;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=VLXG2deAu9vjEHqLkwP3KT44g0q17SGCldo/DWmdJG0=;
+        b=dD9d9AQsdUZSp8N3UXo9YWHupJ4dzpJwmpb8Ao9foAMDHuz2uftkAyDSWtTh6h3NGX
+         xV7no+zUV5yHdo+jYeL0oLJO8mxheeM6Ajh7/6hzIfGlBnz5/G9UKXfnDhpqGIMWgqOJ
+         RjcvysOzq2xTlBmOqa9mfg4bXk6tPA7Ym7AVD2OJs66JpyaePjM8ByTCln1/l0OsUHwO
+         dCM9+X7VC77NsVJPZmdWyXcRt7ZRWtWEAb9izSO9T7Fm3n4Do99jVoVC9oTZT8k+bOI7
+         VYqrcJU1LlmE/1lGq76OiCkISluITkYVXd6hoDJQ/zdO3sQ/YgJfdD0BEEjMT9Y86x/T
+         kBOA==
+X-Forwarded-Encrypted: i=1; AHgh+RptaTn1/LU+vFYDuToaTfN9b79MeYZTBpN6pDxilkH9IUO9sg2oPlP6TAGgxtBhKAehrK5y7osFGr02Tqm8@vger.kernel.org
+X-Gm-Message-State: AOJu0YxQNHFzWGJ4S//yj3dcs4BDosAJnSiQNsZ/W2bvqVurDT9i7tGf
+	3LsrrLyppmW0raiUJm6AuzZZ8xU3yGuMVJtUL+4awnd5L+hzbC6kYCPl9dJHleqylDI=
+X-Gm-Gg: AR+sD11QPOJr3xFHoqNKEYJsthV3s4oNKhQWBbiT/H/IIDYaTIRqtd9KOECETWk84VD
+	pSEaa0bwSG2bTMSaDcKDS+fUt9A1FoB/90WmT7mcfrzJgZIHq1SCDA4cFF76k0N3XneRk0EJoOc
+	5xg9BosVP4NWjdcHE/wi8/cMS7p1RNEvvbgHYmBp0p0BjOc0SCqv8ofwvVGStcFSxr2XPjNWrUE
+	XpYfqSZkBl6dRzKa7iUHhsYn9JABtDJaMVRbm1qX3nXPknttdUgvPzXiNgFHltGu2irx51oUdOW
+	deLJ6p/rDedP5bXMMDUxf+i3ft5bJkc89WTHSbArxtK4EO/8e8I1JJ5c2DPCz4MKLAjH/Rz484I
+	J5F7IT4D2AR0dNusBOviTvD605EVqyRvOPmXu3PQlmMiVhohLweO2LsC93LMzyg1VinV9NbzKUZ
+	kiGiLyB3DCElUB0sw1pO00w5IuhF6HHyyEjLdNrTzy+MtX+SENyOg2mw2BXVIzlNIlUvxAX8ocK
+	Q==
+X-Received: by 2002:a05:600c:4514:b0:496:bbce:f3 with SMTP id 5b1f17b1804b1-4994e71ed7bmr160522385e9.6.1786002862433;
+        Thu, 06 Aug 2026 00:54:22 -0700 (PDT)
+Received: from [192.168.0.101] ([109.76.115.165])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-499542135cesm43926455e9.4.2026.08.06.00.54.21
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 06 Aug 2026 00:54:21 -0700 (PDT)
+Message-ID: <d6ffacaf-7f83-42be-a3cf-40ce00810ca9@linaro.org>
+Date: Thu, 6 Aug 2026 08:54:19 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260731-b4-qmi-tmd-v7-1-3befd44403d5@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 01/12] dt-bindings: media: qcom,venus: Add context bank
+ subnodes to common schema
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+ Bryan O'Donoghue <bod@kernel.org>,
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+ Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ Stanimir Varbanov <stanimir.varbanov@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Stephan Gerhold <stephan.gerhold@linaro.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, stable@vger.kernel.org,
+ Daniel J Blueman <daniel@quora.org>
+References: <20260731-vpu_iommu_iova_handling-v2-0-da52b5228dbd@oss.qualcomm.com>
+ <futJwsC0VjGSkjrB5PP9T0jBOVgWADaDAYyRRp-OZifaKPNtjcnnA59QJaQTdqYTeayZk9jY6e1jOfun71Yp5Q==@protonmail.internalid>
+ <20260731-vpu_iommu_iova_handling-v2-1-da52b5228dbd@oss.qualcomm.com>
+ <689580d1-8169-41cf-a954-927e10135700@kernel.org>
+ <d0983bf7-a708-46ff-9f86-f94fb6a92ba7@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <d0983bf7-a708-46ff-9f86-f94fb6a92ba7@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jul 31, 2026 at 04:03:41PM +0530, Gaurav Kohli wrote:
-> Document the optional #cooling-cells property for Qualcomm PAS
-> remoteproc nodes so they can be used as thermal cooling devices via
-> the QMI Thermal Mitigation Device (TMD) interface.
+On 06/08/2026 06:21, Vikash Garodia wrote:
+> 
+> On 8/1/2026 3:36 PM, Bryan O'Donoghue wrote:
+>> On 31/07/2026 19:22, Vikash Garodia wrote:
+>>> Fixes: 41661853ae8e ("arm64: dts: qcom: sm8550: add iris DT node")
+>>> Cc:stable@vger.kernel.org
+>>> Tested-by: Daniel J Blueman<daniel@quora.org>
+>>> Signed-off-by: Vikash Garodia<vikash.garodia@oss.qualcomm.com>
+>>
+>> What about venus ?
+> 
+> Plan is to get the reviews for IRIS3 family SOCs, once we have a go 
+> ahead from binding/DT maintainers, i can either bring in few series for 
+> remaining venus and iris SOC family OR do all of them in one single 
+> series. My preference would be to add in multiple series.
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+I still don't see why we can't just set
 
-Best regards,
-Krzysztof
+minItems: 1 for the memory nodes - implement a fix for stable and then 
+iterate around this new way at leisure.
 
+There is a festering - system resetting bug.
+
+---
+bod
