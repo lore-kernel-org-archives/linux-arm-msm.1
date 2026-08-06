@@ -1,47 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F187248424F;
-	Thu,  6 Aug 2026 16:26:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C09227BF93;
+	Thu,  6 Aug 2026 16:26:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786033569; cv=none; b=XNA2h/9F8Oc/hMcEYgCunn5WreRBVT7MnUSV4/skMRUBSQv9GFaOxH1+ACp6UpNjW0UsdTI7FomSg9OC1VqNq9LuxB95pEAYDsrJ1mUbbhrnWvZzqk/3Xt2KptGs7+0o07jys7bEOuF3nr/C9T3whcPwzRWHdr5069VjRWGrYhs=
+	t=1786033579; cv=none; b=iVCwoYhYqYeS4jAgMQOZkwmkLPstSiF3vpvUQsNk2f7rN9fPVsjgIVnaRKDTw7UrEPG+VIOgHk6JS/FdEdTXiIOf64LDdCBExcPD5AKOG6q0FqdBO8gAxznRj/SIrjbArDniULqBVAaLTYAHm8zKwYxs/Ax9zjHddKAs6srzYb0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786033569; c=relaxed/simple;
-	bh=lVkxD3h2L8G6Ew2ANCawZcaGf2X4CBFd14jw8oWESvU=;
+	s=arc-20240116; t=1786033579; c=relaxed/simple;
+	bh=K32lkY0iyjQ6ltPX22VBJZISyAW+jJ2aq/jWcL6FMts=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=UYTLcq244GQ94n8Hgu1km1kfKU1Ct7lLQaglKXJHSEYtVEvjMuOkHQBGv4vsoOUgfYfXfiCPvBx6X++GjwbWvi+NgaImKhLyf9jTN64l3Gq9SIedmMk7IzeZ2PdfhtvR+LxfrufxzlxsJyWO5LJkSwpS/WPmcEWGFiyW7RTSYKw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PJ7dB3Gt; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=XkeIcDZFD4yCLOGlk1ci88YoMnkOvjkr9Owerip39YlkMl0g4xz/+5qOjg6b2BytvX7mVolucS3IYbQ1wAZqg/eqpG4XYm6qJRz4gLtHw+jDSYDJLYRjjZS2j2QRsj8TrplQih34hdmQhMzq4Lwb1wcMCeNpCQkNl/7iXONq81M=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=I2YXq+Ks; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PJ7dB3Gt"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2DC181F00A3D;
-	Thu,  6 Aug 2026 16:26:03 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="I2YXq+Ks"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 82D751F00A3A;
+	Thu,  6 Aug 2026 16:26:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786033567;
-	bh=l/pqGQLUylj7fu7Xe5MGl6jQ1rwT8sb60LmR8+ITD/g=;
+	s=k20260515; t=1786033577;
+	bh=J7FU8gW2VUhAfd7BYGs2hAuYby6wONMtKH3laYXT+I8=;
 	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=PJ7dB3GtqowHGBiohYKQOlEo7WTFAenWvnKz8dzGJmgm2Ebo+vi2nn8Y6jJA84Nh8
-	 WYHgBwiva7wY7w6MccMqJph9pvrMZoSx6BxgjKfCQCGJ1eFxGTD+nlG/GUq34fUxy8
-	 l5Om8YmPqABr0H3z+oTj7YgtAEvXf1p2DY7e73D9tLfx+CsOSHFgvo01SAYlowr4eW
-	 yEkjCai8jUgRnpsxwaooyX+cJV4cr7vAWmcTIdPenb5H/oU/DUs4s//SYqhg/6mlLN
-	 Cm1NW+/USJUIZZBSXtsEzwXhl7R2W2povEfP5ZskDPo3Wu4JU/moN/pdFDo9wXt2l5
-	 b6yRjBvKeXHVg==
+	b=I2YXq+KsUedHGxOYgPSJ3xf9cpbYMZaMo1D8hCe4nhKzpv+LG4lBfJNkL7RpDYn7R
+	 rIcXmbnV7SVUCFuyXU4Iq4L0E+ID59GNKgj5fU/Kp7Us3PLk/djskQLxa4kYveyi7X
+	 8ym28if7WAjeswo8sbTobs0EZC6inBE3w1iqHhlleSWibeAdh1BrP0UP7VWNkS8BaN
+	 D/VMGKaHUl7ggoaWDsBNKT+IEStQZkbjEKXO0dFBaFja8PZFbQEcO4vDwmKdW+Oh7X
+	 w7YbAZemHT5o109PqL2uS5wCytfs/C2LVf5iByIr2poT9dzBpqkVsi20qUJW4PKhh3
+	 Hg5kvM1GH6QUA==
 From: Vinod Koul <vkoul@kernel.org>
-To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Wesley Cheng <quic_wcheng@quicinc.com>, 
- Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
- linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
+To: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Esteban Urrutia <esteuwu@proton.me>
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
  devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-usb@vger.kernel.org
-In-Reply-To: <20260803091441.3040830-1-mukesh.ojha@oss.qualcomm.com>
-References: <20260803091441.3040830-1-mukesh.ojha@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH v4 0/4] phy: qcom: Introduce USB support for
- Hawi
-Message-Id: <178603356377.674490.863643484295472251.b4-ty@kernel.org>
-Date: Thu, 06 Aug 2026 21:56:03 +0530
+ phone-devel@vger.kernel.org, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+In-Reply-To: <20260804-sm8475-bup-usbss-v3-0-9a5b9ebf62de@proton.me>
+References: <20260804-sm8475-bup-usbss-v3-0-9a5b9ebf62de@proton.me>
+Subject: Re: [PATCH RESEND v3 0/2] Initial QMP USB PHY support for SM8475
+Message-Id: <178603357411.674490.11520339407340817802.b4-ty@kernel.org>
+Date: Thu, 06 Aug 2026 21:56:14 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -53,21 +50,22 @@ Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.13.0
 
 
-On Mon, 03 Aug 2026 14:44:37 +0530, Mukesh Ojha wrote:
-> This series adds USB PHY support for the Hawi SoC. It documents the
-> QMP USB3-DP combo PHY and M31 eUSB2 PHY bindings, adds the Hawi
-> compatible to the DWC3 USB binding, and adds the PHY initialization
-> sequences to the qmp-combo driver.
+On Tue, 04 Aug 2026 14:06:18 -0400, Esteban Urrutia wrote:
+> Based on the following patch:
+> [1] https://lore.kernel.org/all/20260711-sm8450-qol-qmp-v2-2-d14353bd6ff4@proton.me/
 > 
+> This series adds support for the QMP USB PHY found in the SM8475 SoC.
+> The initialization sequence varies noticeably when compared to the one
+> used in the SM8450 SoC, hence the need to add support for this PHY.
+> 
+> [...]
 
 Applied, thanks!
 
-[1/4] dt-bindings: phy: qcom,sc8280xp-qmp-usb43dp-phy: Add Hawi QMP PHY
-      commit: 19d8eca1be11bc5782f9d292d88f96ebf0cdbe7f
-[2/4] dt-bindings: phy: qcom,m31-eusb2-phy: Document M31 eUSB2 PHY for Hawi
-      commit: 7abc2c575d5b5d67349caf73509f069e6bf7445a
-[4/4] phy: qualcomm: qmp-combo: Add support for Hawi SoC
-      commit: eca0e717aab1cc90eb0b7d8c3e8aa63ca89962a5
+[1/2] dt-bindings: phy: qcom,sc8280xp-qmp-usb43dp-phy: Add SM8475 QMP PHY
+      commit: f8bb67fa3651d494427194c1e283886ad4cdbde0
+[2/2] phy: qcom: qmp-combo: Add SM8475 support
+      commit: 9583243a524c0ea4dd08541900ab2c7da95ce13f
 
 Best regards,
 -- 
