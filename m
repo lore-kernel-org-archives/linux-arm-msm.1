@@ -1,112 +1,207 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95AC7383C86
-	for <linux-arm-msm@vger.kernel.org>; Fri,  7 Aug 2026 15:50:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B8AF383C86;
+	Fri,  7 Aug 2026 15:56:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786117839; cv=none; b=sCsQiFmqEZpe7XaP4/GUpphhMe+TswxBuNHp7iCB3cmkCCeSBhpt7pin65VnMLX7GIG5nFKf3aWU73i7lrtjqjvjk0MQ2/aWoZn5nYP9zFylKDCFCVhEZ/9nW01DkcoqGZi62eAikm+tPJSeP70hSIWKyhQARdCrJyKWpR0+ZS0=
+	t=1786118202; cv=none; b=W74dTsGdP/1OVtrMHKRLTVK4jj43C8aBPIybzE+txkO43MnhT2BT/gudVw5zScXDWzmJl1TwoGuXPaREwYr9Y9N8D3tyjwTM5MtYKrtQkR9AjyyjdAVTVFMnG1HQhX+jL+xJo9EsQil3fx2hNXAHPzpclF51bpwLb6bcBGsGCf4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786117839; c=relaxed/simple;
-	bh=O9I7U9+l0+X/hkgohmgxXLRhwWWdjQ4TTE3VgHkshbQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=IupXa7cEFfoD/aSHavy3vcYh1zEjL0xRmQ4JgYp6iJ42CfM8eS6SKnjSVxk4WKuKIXriHYvQFD7188EiNsqJKYnOz5sRyYxmMnJCFMVvuK1r4u6j3O5O2lcEQng9I4HP3TAXdU07LfHZLJtJLZbrGQ/WhjhsYohpVf+FtZAfrVI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=V/KitA0f; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786118202; c=relaxed/simple;
+	bh=VA70aSST0+oXzeKBLFAIe/feNAXy4mW5hiharidblwQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ls/7lG7TP3aw63mpWmemub3RVK5aYgP22IyCf5Kffix3psIES+/3Q313QA1NV+SDySGin28Yue71ay9Rcyu+spkeV16vj7nqqmku1ki4E8MXl6EvwSVsYbV4kbPJ296d8PS/4+r+xr7yx3xIvSVEYOfn/zeZVJVbm9r5zraiCuI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BsV/FfWR; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="V/KitA0f"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E5241F000E9;
-	Fri,  7 Aug 2026 15:50:37 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BsV/FfWR"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A90391F000E9;
+	Fri,  7 Aug 2026 15:56:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786117838;
-	bh=p2nGN5ZXRiqoTtzpZL872g3TGzGSNiIhzVCcBASG2ew=;
-	h=From:To:Cc:Subject:Date;
-	b=V/KitA0fjocwxz1GdntzyJGUQRV/7s5428bv4zaiwbu5mlfGYe/aJHQ1XW93O/zBG
-	 cQ5hGOuSFSZvc6Iq/lncalhUBnIsUfwq1k4+AhDXQFAOvE2Q+AkmoFkAQfiia3KkKk
-	 LX94URQ+ixLinklf5ty1Pcgka/Rj84tEeHVpEPCXotxPXdLro6QMnKJE34CEwZT7hZ
-	 sTNUKbNxXK875P4BaijdP4dJovtHlC/CeaH87INIAtcT2fD5kCTFwFh5C2Ptvlmw47
-	 PgmxegjWdIZgFeRxmSfsR0Oh6u7/UXTVj38MIRK2jFDl3qmLmZj+oaAx07+xA3NFYK
-	 x2auKZc9BPj/g==
-From: Bjorn Andersson <andersson@kernel.org>
-To: arm@kernel.org,
-	soc@kernel.org
+	s=k20260515; t=1786118200;
+	bh=MRMaX8bBod1PGkHnlzs/1ZV4S9uRJLKErxlT+0jAdrM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=BsV/FfWRD+MvrNV5aAa3PYVyjOp9O24nf4pHGLqYuQoIB/DGF+HV2KmS8cd9BvUJb
+	 /1bOtDW5RljLVug4XNjPEeMtQSjaIDX72+SqNGnds6Wv9CYHdafzoyNpzA1h8u9iln
+	 V//adPr6RuqCnsKeQ0fsImSItT1ItcHoCbP6Ha8xDRnEoginVVeX6AD/q1MfoX46ZO
+	 1I75zHtOCWS3LjTzoWGlTGAMXAn4pletnBOmtRmUwNEyhMZZp5Yy8sOtkezQ9s4G0N
+	 8TpD2w05vrRpXOXY4HI7BjQorQxmPmWFa/sK9cEVTjEfVr1dklRIEJQZapM3iSAr7/
+	 2UAVNLkG2HuFA==
+Date: Fri, 7 Aug 2026 10:56:40 -0500
+From: Rob Herring <robh@kernel.org>
+To: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
 Cc: linux-arm-msm@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	Arnd Bergmann <arnd@arndb.de>,
-	Alexandre Messier <alex@me.ssier.org>,
-	Antony Kurniawan Soemardi <linux@smankusors.com>,
-	David Wales <daviewales@disroot.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Erikas Bitovtas <xerikasxx@gmail.com>,
-	Rudraksha Gupta <guptarud@gmail.com>
-Subject: [GIT PULL] Qualcomm Arm32 DeviceTree updates for v7.3
-Date: Fri,  7 Aug 2026 10:50:35 -0500
-Message-ID: <20260807155035.603563-1-andersson@kernel.org>
-X-Mailer: git-send-email 2.53.0
+	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	David Collins <david.collins@oss.qualcomm.com>,
+	Subbaraman Narayanamurthy <subbaraman.narayanamurthy@oss.qualcomm.com>,
+	Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+	linux-input@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: [PATCH v6 1/2] dt-bindings: input: Add Qualcomm SPMI PMIC haptics
+Message-ID: <20260807155640.GA893689-robh@kernel.org>
+References: <20260806-qcom-spmi-haptics-v6-0-19fcecd5204f@oss.qualcomm.com>
+ <20260806-qcom-spmi-haptics-v6-1-19fcecd5204f@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260806-qcom-spmi-haptics-v6-1-19fcecd5204f@oss.qualcomm.com>
 
+On Thu, Aug 06, 2026 at 11:21:40PM -0700, Fenglin Wu wrote:
+> Add binding document for the haptics module inside Qualcomm PMIC
+> PMIH0108.
+> 
+> Assisted-by: Claude:claude-4-8-opus
+> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+> Signed-off-by: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+> ---
+>  .../bindings/input/qcom,spmi-haptics.yaml          | 136 +++++++++++++++++++++
+>  1 file changed, 136 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml b/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml
+> new file mode 100644
+> index 000000000000..b1a69e9886ee
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/input/qcom,spmi-haptics.yaml
+> @@ -0,0 +1,136 @@
+> +# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+> +%YAML 1.2
+> +---
+> +$id: http://devicetree.org/schemas/input/qcom,spmi-haptics.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: Haptics device inside Qualcomm Technologies, Inc. PMIC
+> +
+> +maintainers:
+> +  - Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+> +
+> +description: |
+> +  Certain Qualcomm PMICs integrate a haptics module, such as the HAP530_HV haptics
+> +  module in the PMIH0108 PMIC, which drives an LRA (Linear Resonant Actuator) with
+> +  an output voltage up to 10 V. Several play modes are supported in HAP530_HV:
+> +
+> +    DIRECT_PLAY: The hardware outputs sinusoidal waveforms whose period is
+> +      defined by qcom,lra-period-us and whose peak voltage is defined by
+> +      qcom,vmax-microvolt. The driving amplitude can be scaled in the range
+> +      [0, 255] via a single register byte.  Hardware-based LRA auto-resonance
+> +      tracking is enabled by default in this mode, allowing the haptics engine
+> +      to follow the actual resonant frequency of the LRA and update the driving
+> +      period accordingly to achieve stronger vibration magnitude.
+> +
+> +    FIFO: The hardware can play an arbitrary waveform composed of a sequence
+> +      of 8-bit samples at a configurable play rate.  Samples are pre-filled
+> +      into the internal FIFO memory of the haptics module and continuously
+> +      replenished via the FIFO-empty IRQ until all samples have been played.
+> +      An 8K-byte FIFO memory bank is available in the HAP530_HV haptics module,
+> +      shared between the FIFO and PAT_MEM play modes. The memory partition
+> +      between the two modes is configurable via registers, and FIFO mode always
+> +      uses the 1st partition starting from offset 0.
+> +
+> +    PAT_MEM: This mode is very similar to FIFO streaming mode but without the
+> +      data refilling capability. It is designed mainly for short, latency-critical
+> +      vibrations. The memory space for PAT_MEM mode must be reserved for dedicated
+> +      usage, and the waveform data should be preloaded and remain unchanged
+> +      thereafter. The haptics module can play the waveform data from the memory
+> +      region specified by the PAT_MEM play start address and length registers.
+> +
+> +    In either FIFO mode or PAT_MEM mode, the following play rates are supported:
+> +      -- 0(T_LRA): each FIFO byte drives one full sinusoidal cycle with the
+> +        period defined in qcom,lra-period-us.
+> +      -- 1/2/3(T_LRA_DIV_2/4/8): each FIFO byte drives a half/quarter/eighth
+> +        sinusoidal cycle with the period defined in qcom,lra-period-us.
+> +      -- 4/5/6(T_LRA_X_2/4/8): each FIFO byte drives 2/4/8 sinusoidal cycles
+> +        with the period defined in qcom,lra-period-us.
+> +      -- 8/9/10/11/12/13(8KHz/16KHz/24KHz/32KHz/44.1KHz/48KHz): the FIFO
+> +        data is treated as PCM samples and drives the output with an
+> +        arbitrarily shaped waveform.  This mode is typically used to define
+> +        custom driving waveforms for specific vibration effects such as fast
+> +        attack, crisp brake, etc.
+> +
+> +    The drive voltage in FIFO or PAT_MEM mode can exceed the value defined in
+> +    qcom,vmax-microvolt to achieve a special vibration effect, but the waveform
+> +    must be short enough to prevent the LRA from being damaged by operating at
+> +    an overvoltage.
+> +
+> +    Also, hardware-based LRA auto-resonance tracking is normally disabled in
+> +    FIFO or PAT_MEM mode, as these modes are intended to drive arbitrary
+> +    waveforms that may not follow the resonant frequency; autonomous hardware
+> +    resonance correction would interfere with the intended output.
+> +
+> +properties:
+> +  compatible:
+> +    items:
+> +      - const: qcom,pmih0108-haptics
+> +      - const: qcom,spmi-haptics
+> +
+> +  reg:
+> +    items:
+> +      - description: HAP_CFG module base address
+> +      - description: HAP_PTN module base address
+> +
+> +  reg-names:
+> +    items:
+> +      - const: cfg
+> +      - const: ptn
+> +
+> +  interrupts:
+> +    maxItems: 1
+> +
+> +  interrupt-names:
+> +    items:
+> +      - const: fifo-empty
+> +
+> +  qcom,vmax-microvolt:
+> +    description:
+> +      Maximum allowed output driving voltage in microvolts, must be a multiple
+> +      of 50,000 uV. This is the peak driving voltage in DIRECT_PLAY mode,
+> +      which outputs sinusoidal waveforms. The value should be equal to the
+> +      square root of 2 times the Vrms voltage of the LRA.
+> +    minimum: 50000
+> +    maximum: 10000000
+> +    multipleOf: 50000
+> +
+> +  qcom,lra-period-us:
+> +    description:
+> +      LRA actuator initial resonance period in microseconds
+> +      (1,000,000 / resonant_freq_hz).  Used to configure T_LRA-based play
+> +      rates and the auto-resonance zero-crossing window. It could be also used
+> +      as the initial period if the LRA wants to be driven off resonance.
+> +    minimum: 5
+> +    maximum: 20475
+> +    multipleOf: 5
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +  - reg-names
+> +  - interrupts
+> +  - interrupt-names
+> +  - qcom,vmax-microvolt
+> +  - qcom,lra-period-us
+> +
+> +additionalProperties: false
+> +
+> +examples:
+> +  - |
+> +    #include <dt-bindings/interrupt-controller/irq.h>
+> +
+> +    pmic {
+> +        #address-cells = <1>;
+> +        #size-cells = <0>;
+> +
+> +        haptics@f000 {
 
-The following changes since commit dc59e4fea9d83f03bad6bddf3fa2e52491777482:
+No incomplete examples please. Put this in the example for the PMIC.
 
-  Linux 7.2-rc1 (2026-06-28 12:01:31 -0700)
+And please comment on sashiko report. Looks valid to me.
 
-are available in the Git repository at:
-
-  https://git.kernel.org/pub/scm/linux/kernel/git/qcom/linux.git tags/qcom-arm32-for-7.3
-
-for you to fetch changes up to 1c436bca83bef0f7ca8d106a878a89af17048270:
-
-  ARM: dts: qcom: msm8926-sony-xperia-yukon-eagle: add initial device tree (2026-07-11 13:11:35 -0500)
-
-----------------------------------------------------------------
-Qualcomm Arm32 DeviceTree updates for v7.3
-
-Add initial device tree support for the MSM8926-based Sony Xperia M2 and
-the MSM8226-based Motorola Moto G2 (2014).
-
-Add touchscreen, Bluetooth pin configuration, NFC, and multicolor status LED
-support to the MSM8974-based HTC One M8 device tree.
-
-Add the coreriver,tc360-touchkey compatible touchkey node to the MSM8960
-Samsung ExpressATT device tree and label PM8921 XOADC channels.
-
-Consolidate shared IPA properties in the SDX55 device tree.
-
-----------------------------------------------------------------
-Alexandre Messier (4):
-      ARM: dts: qcom: msm8974pro-htc-m8: add status LEDs
-      ARM: dts: qcom: msm8974pro-htc-m8: add NFC support
-      ARM: dts: qcom: msm8974pro-htc-m8: add Bluetooth pins
-      ARM: dts: qcom: msm8974pro-htc-m8: add touchscreen
-
-Antony Kurniawan Soemardi (1):
-      ARM: dts: qcom: pm8921: add labels for ADC channels
-
-David Wales (1):
-      ARM: dts: qcom: msm8226: Support Motorola Moto G2 (2014)
-
-Dmitry Baryshkov (1):
-      ARM: dts: qcom: sdx55: consolidate IPA properties
-
-Erikas Bitovtas (1):
-      ARM: dts: qcom: msm8926-sony-xperia-yukon-eagle: add initial device tree
-
-Rudraksha Gupta (1):
-      ARM: dts: qcom: msm8960: expressatt: Add coreriver,tc360-touchkey
-
- arch/arm/boot/dts/qcom/Makefile                    |   2 +
- arch/arm/boot/dts/qcom/msm8226-motorola-titan.dts  | 350 ++++++++++++++++++
- .../dts/qcom/msm8926-sony-xperia-yukon-eagle.dts   | 407 +++++++++++++++++++++
- arch/arm/boot/dts/qcom/pm8921.dtsi                 |  12 +
- .../dts/qcom/qcom-msm8960-samsung-expressatt.dts   |  54 +++
- arch/arm/boot/dts/qcom/qcom-msm8974pro-htc-m8.dts  |  94 ++++-
- arch/arm/boot/dts/qcom/qcom-sdx55-t55.dts          |   2 -
- .../boot/dts/qcom/qcom-sdx55-telit-fn980-tlb.dts   |   2 -
- arch/arm/boot/dts/qcom/qcom-sdx55.dtsi             |   3 +
- 9 files changed, 918 insertions(+), 8 deletions(-)
- create mode 100644 arch/arm/boot/dts/qcom/msm8226-motorola-titan.dts
- create mode 100644 arch/arm/boot/dts/qcom/msm8926-sony-xperia-yukon-eagle.dts
+Rob
