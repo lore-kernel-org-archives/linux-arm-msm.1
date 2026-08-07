@@ -1,85 +1,468 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EF4B3A6F04;
-	Fri,  7 Aug 2026 07:20:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786087239; cv=none; b=eGVZFWWsirWpdeLI8xEcO+6OLZ5w6ohtx23yDQJbT7sXNbbez7oEKYLWvN9cqHose9ykyjTFIaHMwPqBNEUPEP/uJJS3n4jUiOidAtmOfkP0GEg4VvuUS6A/PoeG1mLPLbtHbW9SnbPkG0o2rijJJ8X8CDuyz+eaZ7E6zp/PBLc=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786087239; c=relaxed/simple;
-	bh=7LzqW0Zdm+uxjIK0Xv4xihdWZ4UvDFk82BIQ04mv9f0=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=MU8lpfNDdHG9UJ3CyXnjI8W9AzHpFVWeNk8EV9nj8iNZEf2tPlsZR7E0Jex9PY7YRtg/h/me6araxgTgpOxq2u8MagjKoQFhuTVsfAk6knelWfmB8yAtjvamshIXLXUbjpK5wRgzNxQ0Mm4Rl4dhwaAnckVzcPbA1nXUPYLIh0U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=nT09GmFC; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFDA4418346
+	for <linux-arm-msm@vger.kernel.org>; Fri,  7 Aug 2026 07:38:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=205.220.180.131
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786088299; cv=pass; b=C7/7lriJTL0RIJH7hzGSx/iNXnq1b9rJsD0EpgolNWVjNOcz2uvje8wyGLVef0AF450vYe0ejTV/GV6FViIFtB+v8l0CE5wEuQ06Rbbmzipyn+vYmLrYpmdKdtb8wN40f/bSpKVYKg5AppH0sgsSRDdjOWVx+P6d4dO3H8kTC2M=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786088299; c=relaxed/simple;
+	bh=Ht8zSv5f6QYfm6RWcb2eoL2rXQiDciiI0lKtxaNwgf8=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=b+0f74E8U6iJeGPc2ijazgy8y5wi7+r35WT6k9tc2tJSu/4BL+/8aOPkfGTPWsic+E8w/JEzxTcBI5WrkJy17mJf0ue0h7GuyNsI6BJkX8fvoUGmWQfQyL+EpIfkxFvfuxZSuowJP6p7QgPXV+SfAhnwzEm/jd5T8M780mC/fDY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=FVmaOKOU; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=J4ZyPaGy; arc=pass smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="nT09GmFC"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72B5C1F000E9;
-	Fri,  7 Aug 2026 07:20:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786087231;
-	bh=Czsvv0sP4K4ItG6z24Y8gZ6kH6ypFuMj0KIE+853VKQ=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=nT09GmFCPRib5VMwoSY0M1OjqKO8x8yPmnvEOoKADQkOVP5taIcFz+5UTk0Tl/dkZ
-	 iED3gOvqYS5eWxVhiUuR7esnbVppAuvS/z0vJHPuJjsy1DNzN0zt6ETrdPhtvlnZHk
-	 GBVPimoQecJiJCaYmv/9vsNykvYGh0++KKXEFYkw5u0HZIvT9Qgcr1g9vBJS0bcqx7
-	 HZFs4dWKi+z5xcngzxk8VXz/JIMyngq4CD1ot48GeN+01GY5TOzwrGm4eRj4Yctc4Z
-	 djDUfJO7LGp0xfTL34DrSGwiAGiXli5LWuz+LIitTBP/Oyjvtp7MuyCh5Pak/hatZf
-	 1nbukMl1o3aoA==
-Date: Fri, 7 Aug 2026 09:20:26 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Elson Serrao <elson.serrao@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Peter Chen <peter.chen@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v5 1/9] dt-bindings: soc: qcom: eud: Add per-path child
- nodes for UTMI routing
-Message-ID: <20260807-shrewd-white-mayfly-a8bfea@quoll>
-References: <20260803031534.2942628-1-elson.serrao@oss.qualcomm.com>
- <20260803031534.2942628-2-elson.serrao@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="FVmaOKOU";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="J4ZyPaGy"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6770GfHk3533334
+	for <linux-arm-msm@vger.kernel.org>; Fri, 7 Aug 2026 07:38:15 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	1Sl4y9uawSGtcsCGxz2VIhjePc9AClmG5YR7AytZb0U=; b=FVmaOKOU6N1e28iH
+	agtBdnX9xb16FlJnlA5hibhqU4y3noAYdzx8g5SDjm9BG8F4o8Sr6C6nEPQSIT50
+	c0XhmFRp92/tRJK5RLTFhK5BrGWEVmixg4YdM/WO3p6Go55axx0Dz/U+dHv+uOtc
+	s/nAdMoZHdMy137mQVQGwwx8zyXjp3J4o57AyJpxyBXQ6sZ+MyPKeGaET60T4utj
+	DWXKFqfBV5+tljqcSIDzdTYx0nrB7SIqLrluwv/WmDS80rATAoXY832jj42GMDOV
+	HRblXAeHxB0fJaidpzjDIP3in1fazdGJwbbahCh5saLkLh66JteYct3aTn2EcdzQ
+	1bSO1w==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvy6ftx4k-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 07 Aug 2026 07:38:15 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-92e4f946461so323345485a.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 07 Aug 2026 00:38:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786088294; cv=none;
+        d=google.com; s=arc-20260327;
+        b=m2geU07cVK7PsVq23eJA/Y6BHvQxXHVkjy4E2Rf/U13MimB9jAnIOc/0XYZFpfIT2k
+         mwaQaih6/YNMDP2FPeB7eMd4alY+5pJzOkDO+HgTee3mgxbjV+QB/yvwQkOsx/FWR/6U
+         a4h/DZUV0d51D6twN/IQJX6rOfs3dXKuq/awDFeXC//tDhg2UDF6PeHzzdI440GbzOJK
+         uNiTsiulszj6l1oBpKXSg1cyvByFNKvlN2FBx//FISUIXD2CgZhjOZS5TuVuT8mgPKWe
+         rrXOFDOPMMWRPg6//BsnM8gnvBTXPezFIBG6/KUpCgeAvsOA0rK6i3EowEoG9LEyi/pj
+         sQCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=1Sl4y9uawSGtcsCGxz2VIhjePc9AClmG5YR7AytZb0U=;
+        fh=rljj6y4WhRtnytr1v66cbNhKw2eh2funFm+YyucdcfE=;
+        b=YPDPOEKJWgwrVkOQsLdJy2pbW+2tkNRx2vszMZcwPafPZncDtx6emoK0BZIQWtUgmw
+         uqCG5wDtvwIs0B20ZjHKjUttcRzvU6iMgeeONOPMWBM6mO8OlCjdAyAtZYdHyT9xv+Gi
+         44a1LNfKmCb48bTmL5Q4VmGCi4HGYRpHdyy2scXhWF02K0tTpmD8uC9P7+Tetbim9h//
+         GXHh2OhGyxEC/TjMPYMj8UytaLl7UHBvL4rQN6gebtV4kXp+daxtA5zKT1zwz8/JVAru
+         LSSK1QrahFGKg/qAU+WqOLGp6DklAJTKo8XSeNdPoSk1R3+5ucfGBG4RRwsomci8yVwx
+         UYkQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786088294; x=1786693094; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=1Sl4y9uawSGtcsCGxz2VIhjePc9AClmG5YR7AytZb0U=;
+        b=J4ZyPaGyrnLxTOO6Ra8eORV8c46GW8un2CfWP503XooSsUun7wNh5zCgTBMpm21m7s
+         YA5jaaBP11PR80qjjkQ4P8XbQktoGywAJC2QDTPfSmoNsQ8J5XJ69pS2CovAoHfcPkJP
+         wO+sEjndXk83lqkJgWlXo6pVEH7EDP8dxevRWv+/A8aI04RPI+xg/E6reRPNHS5Yjqp8
+         nMpkpRbfqOmXY/7E8rXszTBCnnWzYr+CFRe7mINsbyA0Q5FC1DI3X3tPcq2p/W85nxcb
+         Ee7WNCY2NsXB1tCC5DdVEFQo9kt3YgKNOouC/v+ukMpNjOOTab1uVIgAK0j3IlQr8pJ6
+         Osyg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786088294; x=1786693094;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1Sl4y9uawSGtcsCGxz2VIhjePc9AClmG5YR7AytZb0U=;
+        b=l0irrxBe0JYcc2XOL+L7z8/wa1sS1uUqxxNWmelafwSFc0ZwL+Zg/oa9gBXKOxVVUq
+         YSlSGs+uv8ICza8B3Wg8nFqXoGFqbpFyrJRLCvVJaUclV4xcxASUgZ8a5ULTOR9YbwTb
+         EK42HP2dtmgkf4e9Dfpamp74G4Y0Iv+yg3XR9h63CYESWmyRIF45mfzs8JPmIK668W+P
+         341Fv/SUv7FkIiOKLoMXTaTG3MtxQA3K2b3oK2BNC8kAPy7zgV+yOC0k7+lafRWBQ+op
+         ReFWjofJldyGOC/gZEhXQsOM2NT88Nl7+OOxIL+dNEe2KIeX2x7ivSlp36o0NMqIwtXx
+         W3CQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrfF7odKSDUqaWxHoRMbw6PTL5KArP45cmuDxRePelHdy0B/V0KtOKvgzQiQeI63x7EMe0Tm0St6YVZUjLW@vger.kernel.org
+X-Gm-Message-State: AOJu0YznKlrmd0jyRbkpprc+2Jk/iuY34rIqznAUyXYMCXY6AejOVt0K
+	4pm8yJM2ukDx8BBGDe1SHBYtNI+aDQ/xwkUrEtBZOY62iG7fi8kTgQFN1WxJUHM9KcS/X63mCT6
+	ACfsktUn8RuCAM1F8J6OY/i50juEcGPkl10K3nu3FvAHGxFZlUlLK67Br0LoGQdtomqZLY21/5R
+	2b7U/kmQkV02qsfHElFdwRPEq0OvVbibEY1ymYxxJ4q1g=
+X-Gm-Gg: AR+sD13aDatyFIgxcspI5bRe6B2zz9fZ4wldH22WjgRiEAX/PnKBhBF6hQqHUUG6jC3
+	zerKmjMgVRXu26MjBij5hrp5nD2xLh4hiegwOcSnJU7eVS4XSeFqDvoHKzSA4r1IFsnoxsOVu6G
+	Ouf2iuDssbPMAZRkAcPiz0Q8mT1k7RAjkvIZ06/yNN/s5dJEukKyX8cEPEN/UFvmho5J0kgEd7v
+	+RcPUQIZiIC+1KmUoXGtgnBcVouU/dSquZdLtL1h+Odobm+dgNsAbpz2wNGhE99Tvc2PESZOZel
+X-Received: by 2002:a05:620a:7101:b0:931:403:2442 with SMTP id af79cd13be357-93649165163mr1865748785a.18.1786088294340;
+        Fri, 07 Aug 2026 00:38:14 -0700 (PDT)
+X-Received: by 2002:a05:620a:7101:b0:931:403:2442 with SMTP id
+ af79cd13be357-93649165163mr1865746085a.18.1786088293818; Fri, 07 Aug 2026
+ 00:38:13 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260803031534.2942628-2-elson.serrao@oss.qualcomm.com>
+References: <20260806155253.3378294-1-peter.hunt@opengear.com> <20260806155253.3378294-4-peter.hunt@opengear.com>
+In-Reply-To: <20260806155253.3378294-4-peter.hunt@opengear.com>
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Date: Fri, 7 Aug 2026 09:38:01 +0200
+X-Gm-Features: AUfX_mymPBs_CKPM1r3s_yuQ5hXL1UneU-S790QkrTlZF-_1-fWvwgvXd3VHYQ0
+Message-ID: <CAFEp6-18g8VOZ00m1D=ncOJd9oHq-r3pwmj9dCnsqw0L9RSu7A@mail.gmail.com>
+Subject: Re: [PATCH net-next v2 3/3] net: wwan: mhi_wwan_ctrl: drive DTR/RTS
+ via the IP_CTRL channel
+To: Peter Hunt <peter.hunt@opengear.com>
+Cc: mani@kernel.org, ryazanov.s.a@gmail.com, johannes@sipsolutions.net,
+        netdev@vger.kernel.org, mhi@lists.linux.dev,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDA1NSBTYWx0ZWRfX61rwZzozhWFa
+ poEtVa7aTxUDDvsS+RYswNDHFXIJ0YJqyB29CEErQvWR/EZtBEui9sxFGibkKKNvWBdmfIckLPX
+ 0dQ9sKonLh33Y+TzVXfhVemGOolD2J0bP5iM3cUQG9Fdb3Q+3Wks3pDccUdbYvKFSPLH9uXJR3W
+ ovEGsR2sUHBQ5lAtwYeE7m4OCEPP/m4UvQfJ9qfxCN8gf5fMGCL7gBwO62NfFCPPLmJL59DU6S0
+ DU4Xf281QlIbtQhtxx4hLAErs9y0AHlSVcFBEvfe1fdO98aK5wgPGY2GH06gRKNmIJF1kQd56kH
+ X27PtCff2RLZoagNpuCIMvp10dTQ6KdnqOIhzQu3+Bek5HZ3BilDJkG4B6FE3gXWA3rWJNanytJ
+ Wl6THlJTDFIxaXLlKAjoXFxwI/P0NN9fQ055LTAgFKE8Cl5WrpYeotZsc3lQGxsZ1muPk3UEhHd
+ +SCGSytd17K1uc0FZvQ==
+X-Authority-Analysis: v=2.4 cv=DvhmPm/+ c=1 sm=1 tr=0 ts=6a758b67 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=rJkE3RaqiGZ5pbrm-msn:22 a=t2vznHeBAAAA:8 a=KKAkSRfTAAAA:8
+ a=IxGcHqfq4pMj3a99btUA:9 a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
+ a=V_BghkRpYkFyHJIZkSH6:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-ORIG-GUID: aAXQKSVyR9LYJw9aJjk249vifah2YEGY
+X-Proofpoint-GUID: aAXQKSVyR9LYJw9aJjk249vifah2YEGY
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDA1NSBTYWx0ZWRfXyker0bnDJ2+a
+ ePQXooT1IEhavgaqsjcK58N/jrUoogVOBRvqDZqcfH6fCZ3H+ZXuKiMJasmyEfCgVBzqjjA1r/2
+ Jtoopy0JWNc9HIfuqRIJXW0iI/hQoLs=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-07_01,2026-08-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 bulkscore=0 clxscore=1015 spamscore=0 malwarescore=0
+ suspectscore=0 adultscore=0 impostorscore=0 lowpriorityscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608070055
 
-On Sun, Aug 02, 2026 at 08:15:26PM -0700, Elson Serrao wrote:
-> The Qualcomm Embedded USB Debugger (EUD) can intercept one or two
-> High-Speed UTMI paths depending on the SoC. For example, SC7280 supports
-> EUD on the primary UTMI path only, while SM8350 supports EUD on both
-> primary and secondary UTMI paths.
-> 
-> Each UTMI path connects an independent USB controller/connector pair and
-> forms its own role-switch domain. EUD routes traffic based on USB role.
-> In device role the debug hub is inserted, while in host role it is
-> bypassed.
-> 
-> The existing binding models EUD using a flattened ports representation.
-> While sufficient for fixed device-role configurations, it cannot naturally
-> associate a controller, connector, and role switch with a specific
-> EUD-routable path. This is problematic for role-switch capable ports and
-> becomes more pronounced on SoCs with multiple paths. In such cases, each
-> path forms an independent role-switch domain and requires per-path role
-> awareness.
-> 
-> Model each UTMI path as a separate child node with its own OF graph. Add
-> an SM8350 compatible for dual-path EUD topologies while retaining the
-> legacy ports representation for backward compatibility.
-> 
-> Signed-off-by: Elson Serrao <elson.serrao@oss.qualcomm.com>
+On Thu, Aug 6, 2026 at 5:54=E2=80=AFPM Peter Hunt <peter.hunt@opengear.com>=
+ wrote:
+>
+> Qualcomm/Sierra SDX55/SDX65 modems (e.g. Sierra EM9291) withhold
+> unsolicited AT result codes (URCs such as +CREG, and the +DMI OMA-DM/LwM2=
+M
+> session indications) on an AT port until the host asserts DTR.
+> mhi_wwan_ctrl exposed the AT (DUN) ports but had no way to signal DTR, so
+> URCs never reached userspace.
+>
+> Carry the host serial-control lines to the modem over the dedicated
+> IP_CTRL MHI channel, which this module now also binds. IP_CTRL uses a
+> separate mhi_driver with its own callbacks so the AT/QMI/MBIM data path i=
+s
+> untouched; the control-channel device for each MHI controller is tracked
+> in a small registry so an AT port drives the IP_CTRL channel of its own
+> modem (multiple modems are supported).
+>
+> Mirror TTY semantics: an AT port raises DTR/RTS on open and drops them on
+> close, and the new wwan ->tiocmset op lets userspace change them via
+> TIOCMSET. This matches the TTY-based USB and legacy PCIe drivers for the
+> same modems, where DTR is asserted on open. Received device->host serial
+> state is not needed and is ignored; ->tiocmget is left unimplemented so
+> the wwan core reports the cached bits.
+>
+> Signed-off-by: Peter Hunt <peter.hunt@opengear.com>
 > ---
->  .../bindings/soc/qcom/qcom,eud.yaml           | 128 +++++++++++++++++-
->  1 file changed, 127 insertions(+), 1 deletion(-)
+> v2: Use __le32 for mhi_dtr_ctrl_msg fields and cpu_to_le32() on
+>     assignment. Use guard(mutex) in mhi_wwan_ctrl_send_dtr. Return 0
+>     when IP_CTRL is not enumerated so TIOCMSET does not regress for
+>     devices without IP_CTRL.
+>
+>  drivers/net/wwan/mhi_wwan_ctrl.c | 183 ++++++++++++++++++++++++++++++-
+>  1 file changed, 182 insertions(+), 1 deletion(-)
+>
+> diff --git a/drivers/net/wwan/mhi_wwan_ctrl.c b/drivers/net/wwan/mhi_wwan=
+_ctrl.c
+> index a31d8540fbb8..95f4f0e6e4aa 100644
+> --- a/drivers/net/wwan/mhi_wwan_ctrl.c
+> +++ b/drivers/net/wwan/mhi_wwan_ctrl.c
+> @@ -1,8 +1,12 @@
+>  // SPDX-License-Identifier: GPL-2.0-only
+>  /* Copyright (c) 2021, Linaro Ltd <loic.poulain@linaro.org> */
+>  #include <linux/kernel.h>
+> +#include <linux/list.h>
+>  #include <linux/mhi.h>
+>  #include <linux/module.h>
+> +#include <linux/mutex.h>
+> +#include <linux/slab.h>
+> +#include <linux/termios.h>
+>  #include <linux/wwan.h>
+>
+>  /* MHI wwan flags */
+> @@ -14,6 +18,30 @@ enum mhi_wwan_flags {
+>
+>  #define MHI_WWAN_MAX_MTU       0x8000
+>
+> +/* IP_CTRL channel message that sets the modem's DTR/RTS control lines *=
+/
+> +struct mhi_dtr_ctrl_msg {
+> +       __le32 preamble;
+> +       __le32 msg_id;
+> +       __le32 dest_id;
+> +       __le32 size;
+> +       __le32 msg;
+> +} __packed;
+> +
+> +#define MHI_DTR_CTRL_MAGIC     0x4C525443      /* 'CTRL' */
+> +#define MHI_DTR_MSG_DTR                BIT(0)
+> +#define MHI_DTR_MSG_RTS                BIT(1)
+> +#define MHI_DTR_HOST_STATE     0x10
+> +
+> +/* Per-controller IP_CTRL channel, used to signal DTR/RTS to that modem =
+*/
+> +struct mhi_wwan_dtr {
+> +       struct mhi_controller *cntrl;
+> +       struct mhi_device *mhi_dev;
+> +       struct list_head node;
+> +};
+> +
+> +static LIST_HEAD(mhi_wwan_dtr_list);
+> +static DEFINE_MUTEX(mhi_wwan_dtr_lock);
+> +
+>  struct mhi_wwan_dev {
+>         /* Lower level is a mhi dev, upper level is a wwan port */
+>         struct mhi_device *mhi_dev;
+> @@ -23,6 +51,9 @@ struct mhi_wwan_dev {
+>         unsigned long flags;
+>         size_t mtu;
+>
+> +       /* AT (DUN) ports raise DTR/RTS on open to receive unsolicited ou=
+tput */
+> +       bool is_at_port;
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Do we really need that? the wwan core already has this knowledge and
+so will only forward/support tiocm ops to AT ports. Also this info can
+be retrieved from the wwan_port type.
 
-Best regards,
-Krzysztof
+> +
+>         /* Protect against concurrent TX and TX-completion (bh) */
+>         spinlock_t tx_lock;
+>
+> @@ -103,6 +134,55 @@ static void mhi_wwan_ctrl_refill_work(struct work_st=
+ruct *work)
+>         }
+>  }
+>
+> +/* Signal the modem's DTR/RTS lines over its own controller's IP_CTRL ch=
+annel */
+> +static int mhi_wwan_ctrl_send_dtr(struct mhi_wwan_dev *mhiwwan, unsigned=
+ int mdmbits)
+> +{
+> +       struct mhi_controller *cntrl =3D mhiwwan->mhi_dev->mhi_cntrl;
+> +       struct mhi_device *ctrl_dev =3D NULL;
+> +       struct mhi_dtr_ctrl_msg *dtr_msg;
+> +       struct mhi_wwan_dtr *dtr;
+> +       u32 msg =3D 0;
+> +       int ret;
+> +
+> +       guard(mutex)(&mhi_wwan_dtr_lock);
+> +
+> +       list_for_each_entry(dtr, &mhi_wwan_dtr_list, node) {
+> +               if (dtr->cntrl =3D=3D cntrl) {
+> +                       ctrl_dev =3D dtr->mhi_dev;
+> +                       break;
+> +               }
+> +       }
+> +       if (!ctrl_dev)
+> +               return 0; /* IP_CTRL not enumerated; best-effort, not an =
+error */
+> +
+> +       dtr_msg =3D kzalloc_obj(*dtr_msg);
+> +       if (!dtr_msg)
+> +               return -ENOMEM;
+> +
+> +       if (mdmbits & TIOCM_DTR)
+> +               msg |=3D MHI_DTR_MSG_DTR;
+> +       if (mdmbits & TIOCM_RTS)
+> +               msg |=3D MHI_DTR_MSG_RTS;
+> +
+> +       dtr_msg->preamble =3D cpu_to_le32(MHI_DTR_CTRL_MAGIC);
+> +       dtr_msg->msg_id =3D cpu_to_le32(MHI_DTR_HOST_STATE);
+> +       dtr_msg->dest_id =3D cpu_to_le32(mhiwwan->mhi_dev->ul_chan_id);
+> +       dtr_msg->size =3D cpu_to_le32(sizeof(__le32));
+> +       dtr_msg->msg =3D cpu_to_le32(msg);
+> +
+> +       ret =3D mhi_queue_buf(ctrl_dev, DMA_TO_DEVICE, dtr_msg, sizeof(*d=
+tr_msg),
+> +                           MHI_EOT);
+> +       if (ret)
+> +               kfree(dtr_msg);
+> +
+> +       return ret;
+> +}
+> +
+> +static int mhi_wwan_ctrl_tiocmset(struct wwan_port *port, unsigned int m=
+dmbits)
+> +{
+> +       return mhi_wwan_ctrl_send_dtr(wwan_port_get_drvdata(port), mdmbit=
+s);
+> +}
+> +
+>  static int mhi_wwan_ctrl_start(struct wwan_port *port)
+>  {
+>         struct mhi_wwan_dev *mhiwwan =3D wwan_port_get_drvdata(port);
+> @@ -122,6 +202,10 @@ static int mhi_wwan_ctrl_start(struct wwan_port *por=
+t)
+>                 mhi_wwan_ctrl_refill_work(&mhiwwan->rx_refill);
+>         }
+>
+> +       /* Raise DTR/RTS on open so the modem forwards unsolicited output=
+ */
+> +       if (mhiwwan->is_at_port)
+> +               mhi_wwan_ctrl_send_dtr(mhiwwan, TIOCM_DTR | TIOCM_RTS);
 
+Why not handling this enablement directly in the wwan core?
+
+> +
+>         return 0;
+>  }
+>
+> @@ -135,6 +219,10 @@ static void mhi_wwan_ctrl_stop(struct wwan_port *por=
+t)
+>
+>         cancel_work_sync(&mhiwwan->rx_refill);
+>
+> +       /* Drop DTR/RTS on close */
+> +       if (mhiwwan->is_at_port)
+> +               mhi_wwan_ctrl_send_dtr(mhiwwan, 0);
+> +
+>         mhi_unprepare_from_transfer(mhiwwan->mhi_dev);
+>  }
+>
+> @@ -163,6 +251,7 @@ static const struct wwan_port_ops wwan_pops =3D {
+>         .start =3D mhi_wwan_ctrl_start,
+>         .stop =3D mhi_wwan_ctrl_stop,
+>         .tx =3D mhi_wwan_ctrl_tx,
+> +       .tiocmset =3D mhi_wwan_ctrl_tiocmset,
+>  };
+>
+>  static void mhi_ul_xfer_cb(struct mhi_device *mhi_dev,
+> @@ -223,6 +312,7 @@ static int mhi_wwan_ctrl_probe(struct mhi_device *mhi=
+_dev,
+>
+>         mhiwwan->mhi_dev =3D mhi_dev;
+>         mhiwwan->mtu =3D MHI_WWAN_MAX_MTU;
+> +       mhiwwan->is_at_port =3D (id->driver_data =3D=3D WWAN_PORT_AT);
+>         INIT_WORK(&mhiwwan->rx_refill, mhi_wwan_ctrl_refill_work);
+>         spin_lock_init(&mhiwwan->tx_lock);
+>         spin_lock_init(&mhiwwan->rx_lock);
+> @@ -255,6 +345,59 @@ static void mhi_wwan_ctrl_remove(struct mhi_device *=
+mhi_dev)
+>         kfree(mhiwwan);
+>  }
+>
+> +/* IP_CTRL channel driver, bound separately so the data-port path is unt=
+ouched */
+> +static void mhi_wwan_dtr_ul_xfer_cb(struct mhi_device *mhi_dev,
+> +                                   struct mhi_result *mhi_result)
+> +{
+> +       /* MHI core has done with the buffer, release it */
+> +       kfree(mhi_result->buf_addr);
+> +}
+> +
+> +static void mhi_wwan_dtr_dl_xfer_cb(struct mhi_device *mhi_dev,
+> +                                   struct mhi_result *mhi_result)
+> +{
+> +       /* Modem serial state is not needed, drop it */
+> +}
+> +
+> +static int mhi_wwan_dtr_probe(struct mhi_device *mhi_dev,
+> +                             const struct mhi_device_id *id)
+> +{
+> +       struct mhi_wwan_dtr *dtr;
+> +       int ret;
+> +
+> +       dtr =3D kzalloc_obj(*dtr);
+> +       if (!dtr)
+> +               return -ENOMEM;
+> +
+> +       ret =3D mhi_prepare_for_transfer(mhi_dev);
+> +       if (ret) {
+> +               kfree(dtr);
+> +               return ret;
+> +       }
+> +
+> +       dtr->cntrl =3D mhi_dev->mhi_cntrl;
+> +       dtr->mhi_dev =3D mhi_dev;
+> +       dev_set_drvdata(&mhi_dev->dev, dtr);
+> +
+> +       mutex_lock(&mhi_wwan_dtr_lock);
+> +       list_add(&dtr->node, &mhi_wwan_dtr_list);
+> +       mutex_unlock(&mhi_wwan_dtr_lock);
+> +
+> +       return 0;
+> +}
+> +
+> +static void mhi_wwan_dtr_remove(struct mhi_device *mhi_dev)
+> +{
+> +       struct mhi_wwan_dtr *dtr =3D dev_get_drvdata(&mhi_dev->dev);
+> +
+> +       mutex_lock(&mhi_wwan_dtr_lock);
+> +       list_del(&dtr->node);
+> +       mutex_unlock(&mhi_wwan_dtr_lock);
+> +
+> +       mhi_unprepare_from_transfer(mhi_dev);
+> +       kfree(dtr);
+> +}
+> +
+>  static const struct mhi_device_id mhi_wwan_ctrl_match_table[] =3D {
+>         { .chan =3D "DUN", .driver_data =3D WWAN_PORT_AT },
+>         { .chan =3D "DUN2", .driver_data =3D WWAN_PORT_AT },
+> @@ -278,7 +421,45 @@ static struct mhi_driver mhi_wwan_ctrl_driver =3D {
+>         },
+>  };
+>
+> -module_mhi_driver(mhi_wwan_ctrl_driver);
+> +static const struct mhi_device_id mhi_wwan_dtr_match_table[] =3D {
+> +       { .chan =3D "IP_CTRL" },
+> +       {},
+> +};
+> +MODULE_DEVICE_TABLE(mhi, mhi_wwan_dtr_match_table);
+> +
+> +static struct mhi_driver mhi_wwan_dtr_driver =3D {
+> +       .id_table =3D mhi_wwan_dtr_match_table,
+> +       .remove =3D mhi_wwan_dtr_remove,
+> +       .probe =3D mhi_wwan_dtr_probe,
+> +       .ul_xfer_cb =3D mhi_wwan_dtr_ul_xfer_cb,
+> +       .dl_xfer_cb =3D mhi_wwan_dtr_dl_xfer_cb,
+> +       .driver =3D {
+> +               .name =3D "mhi_wwan_dtr",
+> +       },
+> +};
+> +
+> +static int __init mhi_wwan_ctrl_init(void)
+> +{
+> +       int ret;
+> +
+> +       ret =3D mhi_driver_register(&mhi_wwan_dtr_driver);
+> +       if (ret)
+> +               return ret;
+> +
+> +       ret =3D mhi_driver_register(&mhi_wwan_ctrl_driver);
+> +       if (ret)
+> +               mhi_driver_unregister(&mhi_wwan_dtr_driver);
+> +
+> +       return ret;
+> +}
+> +module_init(mhi_wwan_ctrl_init);
+> +
+> +static void __exit mhi_wwan_ctrl_exit(void)
+> +{
+> +       mhi_driver_unregister(&mhi_wwan_ctrl_driver);
+> +       mhi_driver_unregister(&mhi_wwan_dtr_driver);
+> +}
+> +module_exit(mhi_wwan_ctrl_exit);
+>
+>  MODULE_LICENSE("GPL v2");
+>  MODULE_DESCRIPTION("MHI WWAN CTRL Driver");
+> --
+> 2.43.0
+>
