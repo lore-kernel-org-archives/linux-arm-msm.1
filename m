@@ -1,69 +1,90 @@
-Received: from mail-43102.protonmail.ch (mail-43102.protonmail.ch [185.70.43.102])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A060044236B
-	for <linux-arm-msm@vger.kernel.org>; Fri,  7 Aug 2026 13:23:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.70.43.102
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03FB8468C0D;
+	Fri,  7 Aug 2026 13:52:42 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786109005; cv=none; b=mAssq2rsF9sqFUP2FEeI0E4KQ0kTUVUZJIwRMt6QgSXe6KU9BM9L7UeCsidkev7fYmodhde+6q9fB3S3ZtKIB+DcVuweraJfhStDInBD1GpSyPnZhoXxgkBh3kjXE3B67f6CX4EvLFz2iwhoNuTa5CO5LE/9wgOeUYPZN4dxPvI=
+	t=1786110769; cv=none; b=GsmiktI2HgB2w3rMCSz/0ZbbKuJPy0B0kFlO4dzT3bGuXMJOPkAeHqEwjYtkjcJhEY6I/bLQxh1QX3MDy29J+eOWf8Io0lOy1bOkTUsC+yOY1Nj55PnKbAcq19Y6f2eyCqBBfkC9QSeYwViPflDgtECzoDkaq9dzfsNsB1yFIqc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786109005; c=relaxed/simple;
-	bh=8AzOmKPFHDxA8q+uSAZX9GWmAvClTspGZbGdrE9wVq0=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=LjW3hBLKfm9kkr9NmFo4+/cnDvhBzBeJU9LpiMNINHdCJhzCRzGBz3gx1tDo28Oe1xJzJHd7CFMEpO7+C3DcSyPi3bq0z5amGLjqWqt48/B6C3G21FEaCRCljzmkgc/MjVn4/qXkBy95gXx55yNLQavYm3zc+oZYiL8sj85bFpA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=ILCHpRWr; arc=none smtp.client-ip=185.70.43.102
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proton.me
+	s=arc-20240116; t=1786110769; c=relaxed/simple;
+	bh=H+Nyc4/vgdWy94CaLo6H0u8OAMw71TbP8kluCcqjd44=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=qIhl3LEjuEWyErgsiKTYyjqqe14Wd8He1v+eLMZ1j+2ApTMAkruFIw/ud3DwzNw/Tz1dgNY4dxXg+Zl1ViHBkzQnFJ9s4WHi1bCMOdBOIPduhOVbc4W1XrcLYVtpE+nDXJXEZJA7AUD2mhFILZT+3BSF25qpsEVwnNboeCr4JGU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=h2c6pEWN; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="ILCHpRWr"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1786108996; x=1786368196;
-	bh=8AzOmKPFHDxA8q+uSAZX9GWmAvClTspGZbGdrE9wVq0=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=ILCHpRWrT/i9iUVblxEpAgmMiXFzXSmX1cDffE/Z1bN7O5Rj7rGqtVrooO2CJCUJp
-	 zXkv0XSfc1QvYFghNAIstWEwVQwSy2WyT3v7/xN7HuIeLDDjR+5ar5Z0Lq5XtCH0Iz
-	 DBCfGdj3WlVIMD51rDjQlA29aDxVFqvqr0kEyvTSHSprjHZhZO1w29DceFxd43nerj
-	 t9swyi7ELYXGVgp+JmFRYIHYfZOizIMcPAUgFJ45e4/QqbActwuB6Lfy7VRCT53vnK
-	 3vPAcMYMHk6ZlLaiwDTT55r/v6E/WKU0PEgIA3zVaZrs952yabWOjzInMwTGQdbvV4
-	 XLW1ifKeE7ruw==
-Date: Fri, 07 Aug 2026 13:23:11 +0000
-To: Vinod Koul <vkoul@kernel.org>
-From: Esteban Urrutia <esteuwu@proton.me>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org
-Subject: Re: [PATCH v2 0/3] Initial PCIe0 PHY support for SM8475
-Message-ID: <a9c94d7e-f21e-4b14-8e8b-e744850730b9@proton.me>
-In-Reply-To: <anWNemb2WCYUwRJm@vaman>
-References: <20260715-sm8475-bup-pcie-v2-0-48bd91a19abf@proton.me> <f0c1eba8-c6d9-4831-a460-980bead03c4d@proton.me> <anWNemb2WCYUwRJm@vaman>
-Feedback-ID: 147889766:user:proton
-X-Pm-Message-ID: 7557f2a5859058bade0c65992c59e17045d99b5e
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="h2c6pEWN"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6F44D1F000E9;
+	Fri,  7 Aug 2026 13:52:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786110760;
+	bh=z6EKGMncM2Wze0PaGWUbY8vyrNDHhiTO8yRZPcZARKg=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=h2c6pEWNuEGV41Pf1BUoazp3KY3E2+foQv0Z9a7SeX0Gz8P4coboyNbG58kghcFQB
+	 60voaminXFK/9AgH52/lMhG+ypZk1nfzVoklFvO2vfOkOX44rcAqaAmF0/kjKOo0h4
+	 AtZmrmZ4iEJKHftF4XnxIAymGMO4iQC0fKmJABli6gOp0w93HMYf+FQ0bEPa4oIIXA
+	 xcZ4t5wM921WSYC93cNcux1xjv7dbNDtMKl3IGdFgs9QfCSqw0UYxnMdnmMwmQ6t9c
+	 VuPFdj43k0mRSQLPpuMccazT5Eh5ncF2qkQv0/EoxRZGYNx3Gpf6zLzc0uFe5mUniM
+	 6+Oj+/WUDBeHg==
+Date: Fri, 7 Aug 2026 08:52:39 -0500
+From: Rob Herring <robh@kernel.org>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Elson Serrao <elson.serrao@oss.qualcomm.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Peter Chen <peter.chen@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-usb@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5 1/9] dt-bindings: soc: qcom: eud: Add per-path child
+ nodes for UTMI routing
+Message-ID: <20260807135239.GA48030-robh@kernel.org>
+References: <20260803031534.2942628-1-elson.serrao@oss.qualcomm.com>
+ <20260803031534.2942628-2-elson.serrao@oss.qualcomm.com>
+ <20260807-shrewd-white-mayfly-a8bfea@quoll>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260807-shrewd-white-mayfly-a8bfea@quoll>
 
-On 8/7/26 3:47 AM, Vinod Koul wrote:
-> On 07-08-26, 03:27, Esteban Urrutia wrote:
->> On 7/15/26 2:37 AM, Esteban Urrutia via B4 Relay wrote:
->>> This series adds support for the PCIe0 PHY found in the SM8475 SoC.
->>> The initialization sequence varies noticeably when compared to the one =
-used
->>> in the SM8450 SoC, hence the need to add support for this PHY.
->> Any chance on this series being picked up?
->> Kind of related (since both series belong to the same subsystem): I
->> resent USB SS support for SM8475 some days ago and this has been picked
->> up already.
->=20
-> Already picked up, should be pushed later today
+On Fri, Aug 07, 2026 at 09:20:26AM +0200, Krzysztof Kozlowski wrote:
+> On Sun, Aug 02, 2026 at 08:15:26PM -0700, Elson Serrao wrote:
+> > The Qualcomm Embedded USB Debugger (EUD) can intercept one or two
+> > High-Speed UTMI paths depending on the SoC. For example, SC7280 supports
+> > EUD on the primary UTMI path only, while SM8350 supports EUD on both
+> > primary and secondary UTMI paths.
+> > 
+> > Each UTMI path connects an independent USB controller/connector pair and
+> > forms its own role-switch domain. EUD routes traffic based on USB role.
+> > In device role the debug hub is inserted, while in host role it is
+> > bypassed.
+> > 
+> > The existing binding models EUD using a flattened ports representation.
+> > While sufficient for fixed device-role configurations, it cannot naturally
+> > associate a controller, connector, and role switch with a specific
+> > EUD-routable path. This is problematic for role-switch capable ports and
+> > becomes more pronounced on SoCs with multiple paths. In such cases, each
+> > path forms an independent role-switch domain and requires per-path role
+> > awareness.
+> > 
+> > Model each UTMI path as a separate child node with its own OF graph. Add
+> > an SM8350 compatible for dual-path EUD topologies while retaining the
+> > legacy ports representation for backward compatibility.
+> > 
+> > Signed-off-by: Elson Serrao <elson.serrao@oss.qualcomm.com>
+> > ---
+> >  .../bindings/soc/qcom/qcom,eud.yaml           | 128 +++++++++++++++++-
+> >  1 file changed, 127 insertions(+), 1 deletion(-)
+> 
+> Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
-
-Thanks for the reply!
-
-Regards,
-Esteban
+sashiko correctly points out the oneOf logic is flawed.
 
