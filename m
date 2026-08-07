@@ -1,135 +1,176 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.17])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E74EB291C10;
-	Fri,  7 Aug 2026 16:25:45 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.17
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5349338D3F2
+	for <linux-arm-msm@vger.kernel.org>; Fri,  7 Aug 2026 16:35:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786119949; cv=none; b=drYar8Ygq8cA3AzD/CoLsE9hZ32/hmrJ7QaGmvVgVAZxM10k0sH/d+4Y3Kqmr1Q0F5/bktzoVhyOD1PLg5B51gM0ttDCif4k5MH6cIrDhyFVd+5JpeoOW52HRxvIH2Prdudq0ekP4xTyoYbVRxmetNWsPCeBaGAujPYqb0HYfso=
+	t=1786120547; cv=none; b=n/EM5nluisGbK5bpNo801i8CQvac4rz4RgQCIVe77FjdhncTDIap0DEFLOyMVzXePbAK+3CpIlEzNCUk1Tmtrk3zOMhKO80BvOg9fEwsID+SwyNBSkFVkHrmk8Z+SE+vLyv3aLmYLOvjnoVwmqO65HQRa0Hej5YX1oLF9hvb8/c=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786119949; c=relaxed/simple;
-	bh=g/O5BDI223k5deKY9eXjZTYthJwDKYLckf0FhghOlwk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=KoaZendtjqtP6RSGVdnppwseLMP010jTmfRZUGW1SCh2L++PQkEDsFztw1VrEfjRLXV6IuPdQOFpYfAX2Oz1TMSGkEzu1Gj419mgVjGbRp1+QWw4874xLhRphaJs99CsJSXCj57SpuiRhuS/ZpavxnF0M2XcZ4PfR/y5qXcRVDQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=ZPLZneOU; arc=none smtp.client-ip=198.175.65.17
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	s=arc-20240116; t=1786120547; c=relaxed/simple;
+	bh=MJ944Dtr3G19D2XynmpIhnAfwYIoBM9PiM0Uhgg8izM=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=TcD5g4nv7xLcH+yC1WK+Bj/j7dBANA5XYqnGymmAyMIwN0SCYiTF5xWiVdV3l/XBQiHvpnYsNbbveH+xnECq5tummJTYrPxhANjH30SWjP5r5UkHIskGPoQrF9E4zcYtzNVrMZ9eAfgnH76p5qptXvmprMKdmWOTObn4/pTq0z4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Dwzt/Sh0; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=FdJ3oSkC; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="ZPLZneOU"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1786119946; x=1817655946;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=g/O5BDI223k5deKY9eXjZTYthJwDKYLckf0FhghOlwk=;
-  b=ZPLZneOUD4Vtt6bdl2s6Qx3jYOmgJus1S7GkGZ+8B5OMgaxWvlriXgzu
-   jPBA9p9fYFtvoHTWyOkMQEKn9YX5+RE2UgE67QgRsKRJC8j0A4x7EOFmO
-   M0/gwB3LA1m1Adj6Tbr7cQ/ZCaG4BctgA+Rgh3N7yUpZkRE2eGOmUNxGY
-   OxnLfXLChHgOGlrxnqZy1+4IjHtfTLgcOIlTNIZZ2rhRz+fiqen3TbieM
-   nHqJ3e3/9onZvjTC4dbrG2FTnO/BrIto181T0L+//SRFPjfH3NH8NlFSQ
-   zuIopf9wY4VyeVqOZcDvVL6JDX12Pei0KPs0RCvB5F7Opy6DChdYl8Ztp
-   Q==;
-X-CSE-ConnectionGUID: IjLH70h5RhyBHn/LVZKr0w==
-X-CSE-MsgGUID: ZBoYwpOpTMyblqmula8YCw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11868"; a="86741963"
-X-IronPort-AV: E=Sophos;i="6.25,210,1779174000"; 
-   d="scan'208";a="86741963"
-Received: from orviesa005.jf.intel.com ([10.64.159.145])
-  by orvoesa109.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Aug 2026 09:25:45 -0700
-X-CSE-ConnectionGUID: uGOWC4ZlTyig0hGSg0YoUg==
-X-CSE-MsgGUID: igeu7tPwRaKnq+zyUHNBlg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,210,1779174000"; 
-   d="scan'208";a="266690004"
-Received: from igk-lkp-server01.igk.intel.com (HELO 3cba2a188a06) ([10.211.93.152])
-  by orviesa005.jf.intel.com with ESMTP; 07 Aug 2026 09:25:43 -0700
-Received: from kbuild by 3cba2a188a06 with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1wsNO8-000000004sk-3g6R;
-	Fri, 07 Aug 2026 16:25:40 +0000
-Date: Fri, 7 Aug 2026 18:25:34 +0200
-From: kernel test robot <lkp@intel.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>,
-	Jessica Zhang <jesszhan0024@gmail.com>,
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-	Maxime Ripard <mripard@kernel.org>,
-	Thomas Zimmermann <tzimmermann@suse.de>,
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: oe-kbuild-all@lists.linux.dev, linux-arm-msm@vger.kernel.org,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Doug Anderson <dianders@chromium.org>,
-	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-	Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v3 2/2] drm/panel: visionox-vtdr6130: switch to devm
- panel calls and drop remove
-Message-ID: <202608071839.p4QV9Yza-lkp@intel.com>
-References: <20260702-topic-sm8x50-vtdr6130-dsc-v3-2-db881a3fc026@linaro.org>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Dwzt/Sh0";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FdJ3oSkC"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 677GO8BO1545136
+	for <linux-arm-msm@vger.kernel.org>; Fri, 7 Aug 2026 16:35:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=jYt+ntlGlsC9bib6n+X+G/
+	QEoQvnYS0LNaVj45QyDEM=; b=Dwzt/Sh0eehI0RXM+ndq3IVg/gzoUdIkiVRxbM
+	Y3/F3Bhgm9BQbhlt4DihiYzWmESx8nGJnbDmaFMSosGT6iKHViitxc1KIwOBKw+f
+	a6U8fOyaUKfZFlKHJqCuWtKJghjjL0O/pzlGHDc9yjJn2dVYmYQswEqVOv1LhJnV
+	n+evjcUruZTfd08fkWiwpPgTb4bHSSze91T6IDf9uyUt6/IoRW2H7bLV/++UAjBI
+	Bd6RJPU5EQdSnzKy14e2hZESd8iMQSfstshg2aUR9EbHKUc3JhTa3Kg/C67FXR/y
+	OO051j9++CFQ5D4bG9zsoIJPEhVfoK/4VGilaePlfqhrrFCg==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwege19e4-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 07 Aug 2026 16:35:45 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cb5ea36f969so3645857a12.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 07 Aug 2026 09:35:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786120545; x=1786725345; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=jYt+ntlGlsC9bib6n+X+G/QEoQvnYS0LNaVj45QyDEM=;
+        b=FdJ3oSkCnh2lwfC5zBrGf96AxejbZn1xggRwAZDbb4h4suPT6F565j70t7HQ3f8lQH
+         NEtcXjCI897PUqAyjjC+X7MFHMaCOgQ/ISSwbn1UZqvvxher/cB5Np0rqu4L5S884Vnr
+         bxJP5bpEtrhBfaPU5fGua7zg5Mhfde2nLo8dcxYJdogALAOl3qUy//WOBCGCgfMaiUru
+         YKbx6JoAiLGX7kfI7VWrIKZ3qPgoCDPY3m3RWM1QfU1ortSvDkZC7bPG0Z6RVntRLLR1
+         4ab/oazffMMVtOvY6OcUglb74sojlqzZAlSF9BGEBCqFgMuYhdQc8N5wzRdDAJYgcYTY
+         NUAg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786120545; x=1786725345;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=jYt+ntlGlsC9bib6n+X+G/QEoQvnYS0LNaVj45QyDEM=;
+        b=kg3+LxhZ+mHWViB3t8mpYAsItmGIWPLS29Z4osEOCcKE7haG0UfCmJjn0ZjC746pNp
+         jq2b1EXv7aiEs7OMBDTVg1T/oAcDHlf8AW/s5T3YEpQsvFHf0VtpL5odA5VwrsTqNBgI
+         Fh1vTM1fgvtcW1oTm67w7MwjdsoQ26NQGpxH61n27bAkE+TBXkhv+w444+brRKFu9Q3H
+         EyfXxmeqYoduHLAwd87pSLoWXlk42nYg/48fsu4Lc3RWYt8deuyC3ymzPEHIZCnbjkpL
+         ixgWOuy8VBhKhJtG0ZTaDpv2+SJGRrSjyJCqGGIx0srVe/QJcYDpYTk9STUY4ZIULDxu
+         Km8g==
+X-Gm-Message-State: AOJu0Yyr5bt+5bFVGGgwIHS7IKNqesNDRKa+dGKNevHGIt/w4g1aPiVP
+	Xkgz8z/An+EZifXbtQZ9dYJ9hU7kF3JKXr9KJoVHChtGip6Iet5wUOouTkYpfXAwWMLobh1qvjh
+	Qaqk1D86E8FPwQ4CxSdp+q8XBPLScoIktVgEKIAa8hjCBbA4opSTrb6Sx4krBPH+HlVQF
+X-Gm-Gg: AR+sD1301tCnr4FnVWXH30tCsBpJcGASEBwb08uBQRIelcZorku55ALRSHuz+ELvm4E
+	8j9p+UHN4Xe+SL6OaKrdaQ+Fhs2Y3qn+X0iRiv1vt54DBMVT7PToVZQK8V9wrr/L0hnWpwiRZgf
+	nLAeseemb9iI/ZsRHxp/D/RWUsnCtY8BGgwzTOODn5QEbudpjOJhckLPNUHukH1AJRiTto/MXLq
+	PjiN3mTRzC+8QCAA/wW6j2mNY6itU0NtpTI6JrQhd9TG6hnDmjefO0Msl+Ae83yg9lXuYJrOPFD
+	iG3d2UKpcvUvKZQjgO0ECHpGgfh8nRnsoYliCug/3lq8Cs4WQrWbP4FzKjStSF5Oq9nLWzjA48p
+	yt93Cd0L9GipCGwNdJbSj437s3+vyUKFxrLmAHailVJ8EPe7E97nerWaSk4xLwQIgSaEXKaRbio
+	qh7BmjL0a86gw=
+X-Received: by 2002:a05:6a21:164a:b0:3c3:a08d:5b44 with SMTP id adf61e73a8af0-3cb85ef9234mr29856197637.23.1786120544883;
+        Fri, 07 Aug 2026 09:35:44 -0700 (PDT)
+X-Received: by 2002:a05:6a21:164a:b0:3c3:a08d:5b44 with SMTP id adf61e73a8af0-3cb85ef9234mr29856099637.23.1786120544299;
+        Fri, 07 Aug 2026 09:35:44 -0700 (PDT)
+Received: from hu-mdalam-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315bebde2e6sm8918689eec.21.2026.08.07.09.35.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 07 Aug 2026 09:35:43 -0700 (PDT)
+From: Md Sadre Alam <md.alam@oss.qualcomm.com>
+Subject: [PATCH v2 0/3] Enable quad SPI mode for SPI-NAND on IPQ RDP boards
+Date: Fri, 07 Aug 2026 22:05:30 +0530
+Message-Id: <20260807-quad_dts-v2-0-6f578d4152b7@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260702-topic-sm8x50-vtdr6130-dsc-v3-2-db881a3fc026@linaro.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAFIJdmoC/22PQQ6DIBBFr2JYF4MTgthV79E0DeK0klStDBob4
+ 92LuGw3k/z58B6sjNA7JHbOVuZxduSGPgY4Zcy2pn8id03MDAQoURaKj5Np7k0grmpjhdTSCm1
+ ZPP72+HBLQl1vR/Y4TpEYjiWrDSG3Q9e5cM56XAJPVC3Ufr9DIpN8WfQfRZl0fAYuuEaroUB4A
+ NSXgSiP1Wun5XGw3dg6CoP/pL/MRVL+PnsuIquUjVZlBZWU5g9r27Yv0zW5mhkBAAA=
+X-Change-ID: 20260716-quad_dts-6bac0484c08c
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Md Sadre Alam <md.alam@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Proofpoint-ORIG-GUID: yX_XCGkfB1BLnLRycl9yMKyFkJWWaaje
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDEyOSBTYWx0ZWRfX7/3drUR5XyCU
+ ZQb2lyAl95Xc7Iv0joVRYpiKjfOdN+3G6R5e9L1U+I2qwLmHBdng7QrEVt8TCePquSdQLaRul/Q
+ k7teBqe3l9UAX6+dT2QDG3cBAnru6qQ=
+X-Proofpoint-GUID: yX_XCGkfB1BLnLRycl9yMKyFkJWWaaje
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDEyOSBTYWx0ZWRfX+W5wNkgZxX5P
+ xoqb1Y+oEmNkiIqwIiXJMzIO1q/U3LehhmHkCXSDQLb8CwE2haVrq2UlFISofc7759rT7I/GrcV
+ J8OTzDRXZgZ5CraTWBPL02ywT1f/x6Fkh2P4SUpWBfSfgIkz5x3Y9pOXBUth3nf12RPtLx15rMt
+ bQWETBDFeeIwbKvsmbqlXFufbSJpxFGixCM1edbDeTpuXcXID35EATumgoxqSu0fIwzQw5CoXiD
+ NYuPJFAcXLD29a603JAhzDWzC/tDbu+R3K4IoAuATKGfptBEIyFzPLuFEc8HWm9pPj2+X4BobIr
+ MEkvUS9pcsJ66+0vEywbvcbNZUjAj6rKBshfqEKa1ynFhNPnBPCqLc+gYvXyGRXJo4Rj2IPV7Fc
+ gCytRzawt8aVxBeyu/P2TZIrtuY8YPvIrIo0SlXzq6qY/U1mdFxnrt6w559Oimda3UEjn8U8ywZ
+ Yhv8CWjCnXRZApJZvrQ==
+X-Authority-Analysis: v=2.4 cv=X71i7mTe c=1 sm=1 tr=0 ts=6a760961 cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=JIWmn_IX-yUVY0fGI_gA:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-07_03,2026-08-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 suspectscore=0 spamscore=0 bulkscore=0 clxscore=1015
+ priorityscore=1501 adultscore=0 phishscore=0 impostorscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608070129
 
-Hi Jun,
+Several Qualcomm IPQ RDP platforms support quad (x4) SPI transfers
+between the QPIC SPI-NAND controller and the attached SPI-NAND device.
+However, the corresponding device trees do not currently describe the
+bus width capabilities of the flash device, causing transfers to fall
+back to the default single-bit (x1) mode.
 
-kernel test robot noticed the following build errors:
+This series enables quad SPI operation on supported IPQ reference
+design platforms by adding spi-rx-bus-width and spi-tx-bus-width
+properties to the SPI-NAND device nodes.
 
-[auto build test ERROR on cdeb2ccd993ed8647adbbda2c3b103aa717fd6f7]
+The series updates the IPQ9574, IPQ5424 and IPQ5332 based RDPs.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Neil-Armstrong/drm-panel-Enable-DSC-for-Visionox-VTDR6130-panel/20260807-132154
-base:   cdeb2ccd993ed8647adbbda2c3b103aa717fd6f7
-patch link:    https://lore.kernel.org/r/20260702-topic-sm8x50-vtdr6130-dsc-v3-2-db881a3fc026%40linaro.org
-patch subject: [PATCH v3 2/2] drm/panel: visionox-vtdr6130: switch to devm panel calls and drop remove
-config: x86_64-rhel-9.4-rust (attached as .config)
-compiler: clang version 22.1.8 (https://github.com/llvm/llvm-project ca7933e47d3a3451d81e72ac174dcb5aa28b59d1)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260807/202608071839.p4QV9Yza-lkp@intel.com/reproduce)
+Signed-off-by: Md Sadre Alam <md.alam@oss.qualcomm.com>
+---
+Changes in v2:
+- No code changes
+- Pick R-b tags
+- rebased on top of tree
+- updated the dependecies
+- Depends-on : https://lore.kernel.org/linux-arm-msm/20260807-quad-v2-0-8ec821e2f22b@oss.qualcomm.com/
+- Link to v1: https://lore.kernel.org/r/20260716-quad_dts-v1-0-74d86792944a@oss.qualcomm.com
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202608071839.p4QV9Yza-lkp@intel.com/
+---
+Md Sadre Alam (3):
+      arm64: dts: qcom: ipq9574-rdp-common: Enable quad SPI mode for SPI-NAND
+      arm64: dts: qcom: ipq5424-rdp466: Enable quad SPI mode for SPI-NAND
+      arm64: dts: qcom: ipq5332-rdp-common: Enable quad SPI mode for SPI-NAND
 
-All errors (new ones prefixed by >>):
+ arch/arm64/boot/dts/qcom/ipq5332-rdp-common.dtsi | 2 ++
+ arch/arm64/boot/dts/qcom/ipq5424-rdp466.dts      | 2 ++
+ arch/arm64/boot/dts/qcom/ipq9574-rdp-common.dtsi | 2 ++
+ 3 files changed, 6 insertions(+)
+---
+base-commit: d56fa0b2bd2d9b2fddc10e8f5bdd42d56676935c
+change-id: 20260716-quad_dts-6bac0484c08c
+prerequisite-message-id : 20260807-quad-v2-0-8ec821e2f22b@oss.qualcomm.com
+prerequisite-patch-id: 912ede01168ddf0476ba69ab0db786186073f817
+prerequisite-patch-id: ab86c050f49d3180b10e61ec20bdcc6272c8100c
+prerequisite-patch-id: 932ca3dc3893df6de25928b24c7c24550907088d
 
->> drivers/gpu/drm/panel/Kconfig:1356: syntax error
-   drivers/gpu/drm/panel/Kconfig:1356: unknown statement "selecy"
-   drivers/gpu/drm/panel/Kconfig:1357: invalid statement
-   drivers/gpu/drm/panel/Kconfig:1358: unknown statement "Say"
-   drivers/gpu/drm/panel/Kconfig:1359:warning: ignoring unsupported character '.'
-   drivers/gpu/drm/panel/Kconfig:1359: unknown statement "VTDR6130"
-   make[3]: *** [scripts/kconfig/Makefile:85: oldconfig] Error 1
-   make[2]: *** [Makefile:757: oldconfig] Error 2
-   make[1]: *** [Makefile:248: __sub-make] Error 2
-   make[1]: Target 'oldconfig' not remade because of errors.
-   make: *** [Makefile:248: __sub-make] Error 2
-   make: Target 'oldconfig' not remade because of errors.
---
->> drivers/gpu/drm/panel/Kconfig:1356: syntax error
-   drivers/gpu/drm/panel/Kconfig:1356: unknown statement "selecy"
-   drivers/gpu/drm/panel/Kconfig:1357: invalid statement
-   drivers/gpu/drm/panel/Kconfig:1358: unknown statement "Say"
-   drivers/gpu/drm/panel/Kconfig:1359:warning: ignoring unsupported character '.'
-   drivers/gpu/drm/panel/Kconfig:1359: unknown statement "VTDR6130"
-   make[3]: *** [scripts/kconfig/Makefile:85: olddefconfig] Error 1
-   make[2]: *** [Makefile:757: olddefconfig] Error 2
-   make[1]: *** [Makefile:248: __sub-make] Error 2
-   make[1]: Target 'olddefconfig' not remade because of errors.
-   make: *** [Makefile:248: __sub-make] Error 2
-   make: Target 'olddefconfig' not remade because of errors.
+Best regards,
+-- 
+Md Sadre Alam <md.alam@oss.qualcomm.com>
 
-
-vim +1356 drivers/gpu/drm/panel/Kconfig
-
-> 1356		selecy DRM_DISPLAY_HELPER
-  1357		help
-  1358		  Say Y here if you want to enable support for Visionox
-  1359		  VTDR6130 1080x2400 AMOLED DSI panel.
-  1360	
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
