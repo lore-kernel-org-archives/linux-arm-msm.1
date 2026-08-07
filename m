@@ -1,369 +1,141 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 520C23FFD;
-	Fri,  7 Aug 2026 00:06:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01E4C4B0494;
+	Fri,  7 Aug 2026 01:25:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786061189; cv=none; b=CgKz6KaLoBV3kHom52dUHey3TsloluZuRvey9eY6UcQVNopzL7I7UuPZiVcmfVOwNIH+JRoCk7z+0me1FW+6Apf3s8/urhJ5sxPq1/gQ30uQn/f/wOGJ2njZL5kBSYotrSi1mBrOc9YlQKY5GFtvcnZ5bYr2YHP3S3uAEnGXAQM=
+	t=1786065910; cv=none; b=KaHmn18I/L9HOkESf1aOSVK/nbDRmcki/FOzfUeDU5navaQ37P8ETFJbvz09igkHOlIxu+MdK3rH665efe/jLbhP2OUySuwenMn36KiYC6KSN13POoKEnyletDC6tRPwqvTGzYYoTnb3GGMGyBYjapmnLPk+jkON6HCM29jPVKs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786061189; c=relaxed/simple;
-	bh=dgCqVgCL2YUsylvejkb1/6GhZ0n3bHar5/vRZPPkPJw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=nyjnzaI+SVyilSjIfq7KD44dJZmGSsdmPyVVXtXpUBBaxgMWCzJmMLNdK91OTmDs7oD9YzFP4WyanUjMCn65KkmNNwctf2y8jdLtzvXkTovGPFXd1MyF5ub1EIMAxe8Arn3vB9zLqEr5NJlByqGLWKEgI0U6GQolQxXf5HE/bPQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=S8NLKLYf; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786065910; c=relaxed/simple;
+	bh=bnWd9LrDId9Pwik63OJcEDNiVrd208Zmx7mpbHmSQLI=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=jzcQr5GbWiUfm3dd2froKCfqd9AMtnobJ8KBQWrbQjjSu2jFZDu0hlshwHDNoJUo1QLtQP8bX4JQMRUO4+ge5sQp217GJ0TskFj515zeas8g6qPk1N9ideuzAz5z7Hun/PDJYjqnmScTLc3U4vo6cnao5AnkUatevibq7ttROP8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=EMCJSVr1; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="S8NLKLYf"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3357E1F000E9;
-	Fri,  7 Aug 2026 00:06:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786061187;
-	bh=0cj5fEfLhvjq0e9WfHToXmikm3XkbGVNNCsETUZN5FM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=S8NLKLYf6t3nEAPiilVzEqo2lQjBCQcFn0jKTduv5+519GtN4rfs67kG62KBCSBK/
-	 IKcPuUm94sfJTp4pEjpip1nKWWHBB1MlXoXCoWWPbtJ6TPLcmbyokwW3mkRU4VfAZE
-	 p0pFFcRwkymZMm1vdUeykAOMe3J/hIh1Ggco10C7DY97NeatgwOsEetG7a5UkXbPlv
-	 shc10cYaPJP+uOIxIyGRnk3JIXSpdh/yZ4AbPv8o4OLcnngzIew3poduip56wfWzvN
-	 nvftP+Axh3ISvc1zBN1ttQXiO8w/Tr8LAkT6olmv/z7fa7fv9pl8eoSZpVa/5SY7Ub
-	 0QA5gZf06uTXg==
-Date: Thu, 6 Aug 2026 19:06:24 -0500
-From: Bjorn Andersson <andersson@kernel.org>
-To: Anand Tiwari <anand.tiwari@oss.qualcomm.com>
-Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	venkata.valluru@oss.qualcomm.com, vishnu.saini@oss.qualcomm.com, 
-	Jessica Zhang <jesszhan0024@gmail.com>
-Subject: Re: [PATCH 2/2] arm64: dts: qcom: purwa-iot-evk: Add eDP display
- overlay
-Message-ID: <anUhYybtYglbk2kD@baldur>
-References: <20260806-edp_overlay_for-next-v1-0-c3aebbc81f38@oss.qualcomm.com>
- <20260806-edp_overlay_for-next-v1-2-c3aebbc81f38@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="EMCJSVr1"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6770Gftj4063303;
+	Fri, 7 Aug 2026 01:24:57 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=Ud/w5WdlhmCptNNwsOoZb7tMUctCGHHeXYd
+	IRJasy/Q=; b=EMCJSVr11qO+605av+n0hGxzCyxKDiWwHVkD3F1qTMdUZ60WBQU
+	vDuF82nfbBMpRlSIKzaC4aVMRmB5KgtfG3xkwBleP7BvRa0tnuAsXYtIenKt/WOm
+	KqHUSVulFOAQLtYvxHue9t/8DhMuGuWoIGigBEvrFoSAgcnSmyrjKG/DExI8t01y
+	f5qE69p+Zv4lOdxrcgCWk9yRg+8SQM+9QWjnfziNCGo5+WO4BKhGliuDe53D9lR/
+	+w1RPn1iKueDwtO7nG0zvjqGAXqESbgaA8XAJVW7xJtJtR7Y+OcxL+duz27DU+d0
+	4SLCYmzY5lFWrULzHXzwakopeQ1X1uA1NGA==
+Received: from aptaippmta01.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvy6h9h80-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 07 Aug 2026 01:24:56 +0000 (GMT)
+Received: from pps.filterd (APTAIPPMTA01.qualcomm.com [127.0.0.1])
+	by APTAIPPMTA01.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTP id 6771Os8Q024372;
+	Fri, 7 Aug 2026 01:24:54 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by APTAIPPMTA01.qualcomm.com (PPS) with ESMTPS id 4fs9vknts5-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 07 Aug 2026 01:24:54 +0000 (GMT)
+Received: from APTAIPPMTA01.qualcomm.com (APTAIPPMTA01.qualcomm.com [127.0.0.1])
+	by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 6771OsM2024364;
+	Fri, 7 Aug 2026 01:24:54 GMT
+Received: from cse-cd01-lnx.ap.qualcomm.com (smtphost-taiwan.qualcomm.com [10.249.136.33])
+	by APTAIPPMTA01.qualcomm.com (PPS) with ESMTPS id 6771OsIB024360
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Fri, 07 Aug 2026 01:24:54 +0000 (GMT)
+Received: by cse-cd01-lnx.ap.qualcomm.com (Postfix, from userid 4531182)
+	id D83D220C26; Fri,  7 Aug 2026 09:24:52 +0800 (CST)
+From: Le Qi <le.qi@oss.qualcomm.com>
+To: Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, kernel@oss.qualcomm.com,
+        mohammad.rafi.shaik@oss.qualcomm.com, Le Qi <le.qi@oss.qualcomm.com>
+Subject: [PATCH] ASoC: qcom: sc8280xp: configure codec sysclk for QCS615
+Date: Fri,  7 Aug 2026 09:24:50 +0800
+Message-Id: <20260807012450.1038180-1-le.qi@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260806-edp_overlay_for-next-v1-2-c3aebbc81f38@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Authority-Analysis: v=2.4 cv=G60s1dk5 c=1 sm=1 tr=0 ts=6a7533e8 cx=c_pps
+ a=nuhDOHQX5FNHPW3J6Bj6AA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=Um2Pa8k9VHT-vaBCBUpS:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
+ a=VgxNshHlH55NMODlW1cA:9
+X-Proofpoint-GUID: LbbXvasDcKw2On3jWFfHql4wO7k0RYb1
+X-Proofpoint-ORIG-GUID: LbbXvasDcKw2On3jWFfHql4wO7k0RYb1
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDAwNyBTYWx0ZWRfX5Uotuhu20Mdi
+ 52fH1/mdeNG48ph0h2zxtYjIjWQBQPgznqoDDb6NjPxYofurj/DWdeiR7Fdjy+/Q4eRqKSQIB3F
+ ePcfYVisHymy9WtvD4Sb6GM12f/N8Pk=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDAwNyBTYWx0ZWRfX/B/ophE/tFIr
+ UJhzL2jkq+yqpOnupdtcO51Oqq4DiGgNZ5N6GcZ1M+B6Vqd3YF9wcN8+gLDm9LtYFaYTnQIfga0
+ NZw5dZ2xiUg3vOfhyeiRq97Z3vWenDOUfF/nDG3Siqj8qIU+nLeGZL7+oKCl80wtOOBhznFW2KI
+ UzzRDpm+64Uic1LuPIzcD6Ws7VuV7HPS/vtZFdeWJ/LtfixG2Sh+FY/6zaxZ+XAG6k7y4aR0+he
+ 9zlbeiE6oSrot3KWEE+gQOrlP8TTE4a7Ub1QKIpGjxYsfg0/ADeOvIWfoMmIZTwFQDj0LaunKrl
+ aHK3K7vVGTekIHLf3rnqCs9IoyWYNhxT0UOPL5MwyGH5tKBWueZiaZnpl2kavgtkrcVGdgj/gAW
+ +pxhFBXdr0xuCCT+8ysvtGkcxgkMQNIRCoDpK0wATo8plPZWAcfo1VdDmYGoVYhIHUOuQam5IMn
+ YuUktn0yiNtNNom5Rog==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-07_01,2026-08-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0 adultscore=0
+ spamscore=0 clxscore=1011 phishscore=0 suspectscore=0 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608070007
 
-On Thu, Aug 06, 2026 at 10:01:21PM +0530, Anand Tiwari wrote:
-> Move the eDP panel configuration and related power, backlight, and pinctrl
-> nodes into a separate overlay. Keep the base DTB suitable for headless
-> variants and provide a composite DTB for headed variants.
-> 
+Continuous high-amplitude noise could occur in the DA7213 microphone
+capture path after a Bluetooth out-of-range/reset event followed by
+reconnection. The noise was present in both the raw ALSA capture and
+PipeWire input, confirming that it originated before Bluetooth
+encoding.
 
-Why?
+The codec already obtains and enables MCLK through its DT clock and
+bias-level handling. However, the machine driver did not explicitly
+configure the codec sysclk during hw_params(). Enable
+codec_sysclk_set for QCS615 so that the DA7213 clock source and rate
+are configured before the codec power-up sequence.
 
-> Signed-off-by: Anand Tiwari <anand.tiwari@oss.qualcomm.com>
-> ---
->  arch/arm64/boot/dts/qcom/Makefile               |   3 +
->  arch/arm64/boot/dts/qcom/purwa-iot-evk-edp.dtso | 126 ++++++++++++++++++++++++
->  arch/arm64/boot/dts/qcom/purwa-iot-evk.dts      | 107 --------------------
->  3 files changed, 129 insertions(+), 107 deletions(-)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-> index bb0da34983c8..fc954da58402 100644
-> --- a/arch/arm64/boot/dts/qcom/Makefile
-> +++ b/arch/arm64/boot/dts/qcom/Makefile
-> @@ -165,6 +165,9 @@ dtb-$(CONFIG_ARCH_QCOM)	+= msm8998-sony-xperia-yoshino-poplar.dtb
->  dtb-$(CONFIG_ARCH_QCOM)	+= msm8998-xiaomi-sagit.dtb
->  dtb-$(CONFIG_ARCH_QCOM)	+= purwa-iot-evk.dtb
->  
-> +purwa-iot-evk-edp-dtbs	:= purwa-iot-evk.dtb purwa-iot-evk-edp.dtbo
-> +dtb-$(CONFIG_ARCH_QCOM)	+= purwa-iot-evk-edp.dtb
-> +
->  purwa-iot-evk-el2-dtbs	:= purwa-iot-evk.dtb x1-el2.dtbo
->  
->  dtb-$(CONFIG_ARCH_QCOM)	+= purwa-iot-evk-el2.dtb
-> diff --git a/arch/arm64/boot/dts/qcom/purwa-iot-evk-edp.dtso b/arch/arm64/boot/dts/qcom/purwa-iot-evk-edp.dtso
-> new file mode 100644
-> index 000000000000..759d05342627
-> --- /dev/null
-> +++ b/arch/arm64/boot/dts/qcom/purwa-iot-evk-edp.dtso
-> @@ -0,0 +1,126 @@
-> +// SPDX-License-Identifier: BSD-3-Clause
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
-> +
-> +/dts-v1/;
-> +/plugin/;
-> +
-> +#include <dt-bindings/gpio/gpio.h>
-> +
-> +&{/} {
-> +	backlight: backlight {
-> +		compatible = "pwm-backlight";
-> +		pwms = <&pmk8550_pwm 0 5000000>;
-> +		enable-gpios = <&pmc8380_3_gpios 4 GPIO_ACTIVE_HIGH>;
-> +		power-supply = <&vreg_edp_bl>;
-> +
-> +		pinctrl-0 = <&edp_bl_en>, <&edp_bl_pwm>;
-> +		pinctrl-names = "default";
-> +	};
-> +
-> +	vreg_edp_3p3: regulator-edp-3p3 {
-> +		compatible = "regulator-fixed";
-> +
-> +		regulator-name = "VREG_EDP_3P3";
-> +		regulator-min-microvolt = <3300000>;
-> +		regulator-max-microvolt = <3300000>;
-> +
-> +		gpio = <&tlmm 70 GPIO_ACTIVE_HIGH>;
-> +		enable-active-high;
-> +
-> +		pinctrl-0 = <&edp_reg_en>;
-> +		pinctrl-names = "default";
-> +
-> +		regulator-boot-on;
-> +	};
-> +
-> +	vreg_edp_bl: regulator-edp-bl {
-> +		compatible = "regulator-fixed";
-> +
-> +		regulator-name = "VBL9";
-> +		regulator-min-microvolt = <3600000>;
-> +		regulator-max-microvolt = <3600000>;
-> +
-> +		gpio = <&pmc8380_3_gpios 10 GPIO_ACTIVE_HIGH>;
-> +		enable-active-high;
-> +
-> +		pinctrl-0 = <&edp_bl_reg_en>;
-> +		pinctrl-names = "default";
-> +
-> +		regulator-boot-on;
-> +	};
-> +};
-> +
-> +&mdss_dp3 {
-> +	/delete-property/ #sound-dai-cells;
-> +
-> +	pinctrl-0 = <&edp0_hpd_default>;
-> +	pinctrl-names = "default";
-> +
-> +	status = "okay";
-> +
-> +	aux-bus {
-> +		panel {
-> +			compatible = "edp-panel";
-> +
-> +			backlight = <&backlight>;
-> +			power-supply = <&vreg_edp_3p3>;
-> +
-> +			port {
-> +				edp_panel_in: endpoint {
-> +					remote-endpoint = <&mdss_dp3_out>;
-> +				};
-> +			};
-> +		};
-> +	};
-> +};
-> +
-> +&mdss_dp3_out {
-> +	data-lanes = <0 1 2 3>;
-> +	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
-> +
-> +	remote-endpoint = <&edp_panel_in>;
-> +};
-> +
-> +&mdss_dp3_phy {
-> +	vdda-phy-supply = <&vreg_l3j_0p8>;
-> +	vdda-pll-supply = <&vreg_l2j_1p2>;
-> +
-> +	status = "okay";
-> +};
-> +
-> +&pmc8380_3_gpios {
-> +	edp_bl_en: edp-bl-en-state {
-> +		pins = "gpio4";
-> +		function = "normal";
-> +		power-source = <1>;
-> +		input-disable;
-> +		output-enable;
-> +	};
-> +
-> +	edp_bl_reg_en: edp-bl-reg-en-state {
-> +		pins = "gpio10";
-> +		function = "normal";
-> +	};
-> +};
-> +
-> +&pmk8550_gpios {
-> +	edp_bl_pwm: edp-bl-pwm-state {
-> +		pins = "gpio5";
-> +		function = "func3";
-> +	};
-> +};
-> +
-> +&pmk8550_pwm {
-> +	status = "okay";
-> +};
-> +
-> +&tlmm {
-> +	edp_reg_en: edp-reg-en-state {
-> +		pins = "gpio70";
-> +		function = "gpio";
-> +		drive-strength = <16>;
-> +		bias-disable;
-> +	};
-> +};
-> diff --git a/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts b/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-> index ad503beec1d3..6dde925025dd 100644
-> --- a/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-> +++ b/arch/arm64/boot/dts/qcom/purwa-iot-evk.dts
-> @@ -19,16 +19,6 @@ aliases {
->  		serial1 = &uart14;
->  	};
->  
-> -	backlight: backlight {
-> -		compatible = "pwm-backlight";
-> -		pwms = <&pmk8550_pwm 0 5000000>;
-> -		enable-gpios = <&pmc8380_3_gpios 4 GPIO_ACTIVE_HIGH>;
-> -		power-supply = <&vreg_edp_bl>;
-> -
-> -		pinctrl-0 = <&edp_bl_en>, <&edp_bl_pwm>;
-> -		pinctrl-names = "default";
-> -	};
-> -
->  	wcd938x: audio-codec {
->  		compatible = "qcom,wcd9385-codec";
->  
-> @@ -205,38 +195,6 @@ pmic_glink_ss2_con_sbu_in: endpoint {
->  		};
->  	};
->  
-> -	vreg_edp_3p3: regulator-edp-3p3 {
-> -		compatible = "regulator-fixed";
-> -
-> -		regulator-name = "VREG_EDP_3P3";
-> -		regulator-min-microvolt = <3300000>;
-> -		regulator-max-microvolt = <3300000>;
-> -
-> -		gpio = <&tlmm 70 GPIO_ACTIVE_HIGH>;
-> -		enable-active-high;
-> -
-> -		pinctrl-0 = <&edp_reg_en>;
-> -		pinctrl-names = "default";
-> -
-> -		regulator-boot-on;
-> -	};
-> -
-> -	vreg_edp_bl: regulator-edp-bl {
-> -		compatible = "regulator-fixed";
-> -
-> -		regulator-name = "VBL9";
-> -		regulator-min-microvolt = <3600000>;
-> -		regulator-max-microvolt = <3600000>;
-> -
-> -		gpio = <&pmc8380_3_gpios 10 GPIO_ACTIVE_HIGH>;
-> -		enable-active-high;
-> -
-> -		pinctrl-0 = <&edp_bl_reg_en>;
-> -		pinctrl-names = "default";
-> -
-> -		regulator-boot-on;
-> -	};
-> -
->  	vreg_nvme: regulator-nvme {
->  		compatible = "regulator-fixed";
->  
-> @@ -962,44 +920,6 @@ &mdss_dp2_out {
->  	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
->  };
->  
-> -&mdss_dp3 {
-> -	/delete-property/ #sound-dai-cells;
-> -
-> -	pinctrl-0 = <&edp0_hpd_default>;
-> -	pinctrl-names = "default";
-> -
-> -	status = "okay";
-> -
-> -	aux-bus {
-> -		panel {
-> -			compatible = "edp-panel";
-> -
-> -			backlight = <&backlight>;
-> -			power-supply = <&vreg_edp_3p3>;
-> -
-> -			port {
-> -				edp_panel_in: endpoint {
-> -					remote-endpoint = <&mdss_dp3_out>;
-> -				};
-> -			};
-> -		};
-> -	};
-> -};
-> -
-> -&mdss_dp3_out {
-> -	data-lanes = <0 1 2 3>;
-> -	link-frequencies = /bits/ 64 <1620000000 2700000000 5400000000 8100000000>;
-> -
-> -	remote-endpoint = <&edp_panel_in>;
-> -};
-> -
-> -&mdss_dp3_phy {
-> -	vdda-phy-supply = <&vreg_l3j_0p8>;
-> -	vdda-pll-supply = <&vreg_l2j_1p2>;
-> -
-> -	status = "okay";
-> -};
-> -
->  &pcie3_port0 {
->  	vpcie12v-supply = <&vreg_pcie_12v>;
->  	vpcie3v3-supply = <&vreg_pcie_3v3>;
-> @@ -1128,19 +1048,6 @@ led@2 {
->  };
->  
->  &pmc8380_3_gpios {
-> -	edp_bl_en: edp-bl-en-state {
-> -		pins = "gpio4";
-> -		function = "normal";
-> -		power-source = <1>;
-> -		input-disable;
-> -		output-enable;
-> -	};
-> -
-> -	edp_bl_reg_en: edp-bl-reg-en-state {
-> -		pins = "gpio10";
-> -		function = "normal";
-> -	};
-> -
->  	pm_sde7_aux_3p3_en: pcie-aux-3p3-default-state {
->  		pins = "gpio8";
->  		function = "normal";
-> @@ -1169,13 +1076,6 @@ usb0_pwr_1p15_reg_en: usb0-pwr-1p15-reg-en-state {
->  	};
->  };
->  
-> -&pmk8550_gpios {
-> -	edp_bl_pwm: edp-bl-pwm-state {
-> -		pins = "gpio5";
-> -		function = "func3";
-> -	};
-> -};
-> -
->  &pmk8550_pwm {
->  	status = "okay";
->  };
-> @@ -1326,13 +1226,6 @@ right_tweeter: speaker@0,1 {
->  };
->  
->  &tlmm {
-> -	edp_reg_en: edp-reg-en-state {
-> -		pins = "gpio70";
-> -		function = "gpio";
-> -		drive-strength = <16>;
-> -		bias-disable;
-> -	};
-> -
->  	eusb3_reset_n: eusb3-reset-n-state {
->  		pins = "gpio6";
->  		function = "gpio";
-> 
-> -- 
-> 2.54.0
-> 
+Verified on QCS615 Talos with repeated Bluetooth disconnect and
+reconnect cycles. The noise was no longer reproducible.
+
+Signed-off-by: Le Qi <le.qi@oss.qualcomm.com>
+---
+This patch depends on:
+
+ASoC: qcom: sc8280xp: enhance machine driver for board-specific config
+
+Link: https://lore.kernel.org/r/20260727151230.408122-4-mohammad.rafi.shaik@oss.qualcomm.com/
+
+The prerequisite patch introduces qcs615_priv_data and the
+codec_sysclk_set field used by this change. It has not yet been merged
+into linux-next.
+
+ sound/soc/qcom/sc8280xp.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/sound/soc/qcom/sc8280xp.c b/sound/soc/qcom/sc8280xp.c
+index cf272d0612fe..8d949e4dec5b 100644
+--- a/sound/soc/qcom/sc8280xp.c
++++ b/sound/soc/qcom/sc8280xp.c
+@@ -306,6 +306,7 @@ static const struct snd_soc_common qcs615_priv_data = {
+ 	.driver_name = "qcs615",
+ 	.dapm_widgets = sc8280xp_dapm_widgets,
+ 	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
++	.codec_sysclk_set = true,
+ };
+ 
+ static const struct snd_soc_common qcm6490_priv_data = {
+-- 
+2.34.1
+
