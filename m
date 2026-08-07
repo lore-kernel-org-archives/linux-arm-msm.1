@@ -1,25 +1,25 @@
-Received: from out-2z4y-a131.jellyfish.systems (out-2z4y-a131.jellyfish.systems [198.54.127.131])
+Received: from out-93wp-a31.jellyfish.systems (out-93wp-a31.jellyfish.systems [104.207.68.31])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 434BB3C1D4F
-	for <linux-arm-msm@vger.kernel.org>; Fri,  7 Aug 2026 02:11:02 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.54.127.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A00C33BED2B
+	for <linux-arm-msm@vger.kernel.org>; Fri,  7 Aug 2026 02:11:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=104.207.68.31
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786068664; cv=none; b=cR5bJDrE4rwGo0w9BkkYBTqlrDZUSO/8u29zx16MtvI1raMWevvSu27/5vtr9UCP7xonSHSyh0nhPbMV4eBs9GvpC0TSjotkh1hNMTfTWu/mZHCnRZh3dcXinRzpkE9T4n2gjD4H5+dJdna2Lwaf5sCw+BTn2l5pTvga2G9H2qA=
+	t=1786068689; cv=none; b=RyELhOisZiAArWpdrtnNE0K+lqz5pJ7F3QA0v28hrn8v9FeA7FSYCKPUjvm2hZN5MjUlqKwSZfIyKGxhXTZaVkTBm4E6ZZA/AtLWwdKt+sfx3eDjYgJiCIphb3zzT4HCQVNMUs2HY5CBGSwx1jQgcOAG/WCEAYqfb0gdWGz2+mg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786068664; c=relaxed/simple;
-	bh=p+SS7vZxOAXOrGGtNcEayjNQLffbukPNwaC7Z8qdp9A=;
+	s=arc-20240116; t=1786068689; c=relaxed/simple;
+	bh=hpay0Z4iP5WI8jafOAYJU7/3eg/US0fygLBZi8IsOVI=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=XHIrHp20xKwbTN1yn47Xo4K9yE6xR5d/cNEWL7bfAzOx+949XjTPSq6T6Geg3Sro3rP9TLebQKp5a0WhIxZCwRzbtEyIcqpWv3bZ/uDo1o0oEe/QDHqLRAja98KKfx1pektohLfgGIUgheJxhLwTtlVVAqaewXa3SOOI+2F9zhc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net; spf=pass smtp.mailfrom=catcrafts.net; arc=none smtp.client-ip=198.54.127.131
+	 MIME-Version; b=EUhu37v8KLv2XRL1m/Bbn9iPJvDqmkNKqJsHtm5FRhjqq4W4leb0vfH8YDmr4ksw1J6/lCrKMus2qSB2/MwQp2xBciZDviHv0JAm6DyR98ZR7eK4B7qt+fBOfOXlHXd2meWeEsknXWbklFkiEZQfrBBz9YKSP94lvhEIvOb1pCY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net; spf=pass smtp.mailfrom=catcrafts.net; arc=none smtp.client-ip=104.207.68.31
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=catcrafts.net
 Received: from mail.privateemail.com (unknown [87.215.145.39])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
 	(No client certificate requested)
-	by mail.privateemail.com (Postfix) with ESMTPSA id 4hGSL536HVz2x9C;
-	Fri, 07 Aug 2026 02:10:53 +0000 (UTC)
+	by mail.privateemail.com (Postfix) with ESMTPSA id 4hGSLS68Qtz2x9B;
+	Fri, 07 Aug 2026 02:11:12 +0000 (UTC)
 From: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
 To: David Heidelberg <david@ixit.cz>,
 	Krzysztof Kozlowski <krzk@kernel.org>,
@@ -42,9 +42,9 @@ Cc: Andrew Lunn <andrew+netdev@lunn.ch>,
 	netdev@vger.kernel.org,
 	oe-linux-nfc@lists.linux.dev,
 	Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
-Subject: [PATCH v4 2/6] nfc: s3fwrn5: use the "s3fwrn5_i2c" string literal directly
-Date: Fri,  7 Aug 2026 04:09:57 +0200
-Message-ID: <20260807021001.239389-3-jorijnvdgraaf@catcrafts.net>
+Subject: [PATCH v4 6/6] arm64: dts: qcom: milos-fairphone-fp6: Add NFC
+Date: Fri,  7 Aug 2026 04:10:01 +0200
+Message-ID: <20260807021001.239389-7-jorijnvdgraaf@catcrafts.net>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260807021001.239389-1-jorijnvdgraaf@catcrafts.net>
 References: <20260807021001.239389-1-jorijnvdgraaf@catcrafts.net>
@@ -57,57 +57,80 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Envelope-From: jorijnvdgraaf@catcrafts.net
 
-The S3FWRN5_I2C_DRIVER_NAME define is an indirection for a string that
-is fixed ABI (the driver name) and only used within this file. Spell
-the string out at its three users and drop the define.
+Add the Samsung S3NRN4V NCI NFC controller on i2c1. Its XI clock comes
+from the PMK7635 CLK7_LN buffer (RPMH_LN_BB_CLK2), and the reference is
+load-bearing: with no clocks reference at all the chip polls but never
+activates a tag, while a held rpmh clock vote lets it read (verified on
+hardware).
 
-Suggested-by: David Heidelberg <david@ixit.cz>
+PVDD is fed from PM7550 LDO20, the rail the downstream driver switches
+for this chip.
+
+The enable line is routed to the chip's power-down input. The driver
+drives its "en" descriptor to logical 1 to hold the chip powered down,
+and on this board the chip is off while the pin is physically high, so
+the line is GPIO_ACTIVE_HIGH. The pin is pulled up so the chip stays
+off while the line is not driven.
+
+Assisted-by: Claude:claude-opus-4-8
 Assisted-by: Claude:claude-fable-5
 Signed-off-by: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
 ---
- drivers/nfc/s3fwrn5/i2c.c | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+ .../boot/dts/qcom/milos-fairphone-fp6.dts     | 33 +++++++++++++++++--
+ 1 file changed, 31 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/nfc/s3fwrn5/i2c.c b/drivers/nfc/s3fwrn5/i2c.c
-index cb73993446e0..c528c085b43e 100644
---- a/drivers/nfc/s3fwrn5/i2c.c
-+++ b/drivers/nfc/s3fwrn5/i2c.c
-@@ -16,8 +16,6 @@
- 
- #include "phy_common.h"
- 
--#define S3FWRN5_I2C_DRIVER_NAME "s3fwrn5_i2c"
--
- struct s3fwrn5_i2c_phy {
- 	struct phy_common common;
- 	struct i2c_client *i2c_dev;
-@@ -186,7 +184,7 @@ static int s3fwrn5_i2c_probe(struct i2c_client *client)
- 
- 	ret = devm_request_threaded_irq(&client->dev, phy->i2c_dev->irq, NULL,
- 		s3fwrn5_i2c_irq_thread_fn, IRQF_ONESHOT,
--		S3FWRN5_I2C_DRIVER_NAME, phy);
-+		"s3fwrn5_i2c", phy);
- 	if (ret)
- 		goto s3fwrn5_remove;
- 
-@@ -205,7 +203,7 @@ static void s3fwrn5_i2c_remove(struct i2c_client *client)
- }
- 
- static const struct i2c_device_id s3fwrn5_i2c_id_table[] = {
--	{ .name = S3FWRN5_I2C_DRIVER_NAME },
-+	{ .name = "s3fwrn5_i2c" },
- 	{ }
+diff --git a/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts b/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts
+index ebdca0e2d2f3..bdba848275db 100644
+--- a/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts
++++ b/arch/arm64/boot/dts/qcom/milos-fairphone-fp6.dts
+@@ -601,9 +601,22 @@ &gcc {
  };
- MODULE_DEVICE_TABLE(i2c, s3fwrn5_i2c_id_table);
-@@ -218,7 +216,7 @@ MODULE_DEVICE_TABLE(of, of_s3fwrn5_i2c_match);
  
- static struct i2c_driver s3fwrn5_i2c_driver = {
- 	.driver = {
--		.name = S3FWRN5_I2C_DRIVER_NAME,
-+		.name = "s3fwrn5_i2c",
- 		.of_match_table = of_s3fwrn5_i2c_match,
- 	},
- 	.probe = s3fwrn5_i2c_probe,
+ &i2c1 {
+-	/* Samsung NFC @ 0x27 */
+-
+ 	status = "okay";
++
++	nfc@27 {
++		compatible = "samsung,s3nrn4v";
++		reg = <0x27>;
++
++		interrupts-extended = <&tlmm 31 IRQ_TYPE_EDGE_RISING>;
++		en-gpios = <&tlmm 56 GPIO_ACTIVE_HIGH>;
++		wake-gpios = <&tlmm 7 GPIO_ACTIVE_HIGH>;
++		clocks = <&rpmhcc RPMH_LN_BB_CLK2>;
++
++		pvdd-supply = <&vreg_l20b>;
++
++		pinctrl-0 = <&nfc_default>;
++		pinctrl-names = "default";
++	};
+ };
+ 
+ &i2c3 {
+@@ -825,6 +838,22 @@ &tlmm {
+ 			       <13 1>, /* NC */
+ 			       <63 2>; /* WLAN UART */
+ 
++	nfc_default: nfc-default-state {
++		irq-pins {
++			pins = "gpio31";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-disable;
++		};
++
++		pd-pins {
++			pins = "gpio56";
++			function = "gpio";
++			drive-strength = <2>;
++			bias-pull-up;
++		};
++	};
++
+ 	sdc2_card_det_n: sdc2-card-det-state {
+ 		pins = "gpio65";
+ 		function = "gpio";
 -- 
 2.55.0
 
