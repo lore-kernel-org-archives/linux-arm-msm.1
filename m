@@ -1,132 +1,127 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qt1-f180.google.com (mail-qt1-f180.google.com [209.85.160.180])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2AC5F306498;
-	Fri,  7 Aug 2026 17:00:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9865334CFC6
+	for <linux-arm-msm@vger.kernel.org>; Fri,  7 Aug 2026 19:58:50 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.160.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786122011; cv=none; b=MMnpSnZCqkqOsCKxT3NSKgoeAOadHuJi2QHPgEA4PAKTseGngD+BDKOA7Pt37QCLeCmgnPoBTwzU7Ac81HOGESuvVhTviyN3WFeh+KBhc0k17P84EIzVeXHh5dLycBJAGHLpRtc8T5G2a57l9cC7TQcX5ojJXKsKBgcWd7Ao5cA=
+	t=1786132732; cv=none; b=g+hFLZCq6LlLIXNp9ynTL07ahTeMNefOY23lG3VzF8ZbQJMJrAfgPgvQhZJNKp5jU/Fx4JkaiU8abcJb+HJfm2vEjqreoVZ3BE0J8r/SmZ1t9OUQpBwHx4ho4aX7ZIMr+vYEcvHglL9e++fhZQ9pY4/ObiGctylf2q47QhP/T9Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786122011; c=relaxed/simple;
-	bh=bzrvQBcKr5tk55Zeln7fwDtblFtZyeWiVqzoh0J3uRc=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=h0Y6XEpXCDhGvptwwEwW3a/EYlXLfQ51Zb0Sk6xQmYZdXKAYjhRk+wbkByvH/8v7/TsJrMlbFo9JWpWUKY7agoCfUGC9ky8xou7W4Wu0DmL/+vu6YT3CkXRpN/NAFAyFPswyi0MLtJPBpi+mKujeR16QoKXmkdxO2VJv6BXS0Dw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YMcFf9ql; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786132732; c=relaxed/simple;
+	bh=4S/lt/HkO1931UfN2Kg4poTFG5L0GtVxFxROTKf6rhI=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=uXjFdD9NPyz+zBTJsnUCFR6Q3pJwk+A+bh2o1xPiXyYuWw3sIsfMV5AerBVnwV+knENlzQpl+EbsklIkNQJEhP/wU6DRvumXnWHR42yeP7ZVtKlLgkstBiqglFW0GY4QEHHZDGbmg+xrBkj2kFUOUpQFaOGxrXjabyjneiDPjJo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com; spf=pass smtp.mailfrom=riscstar.com; dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b=fIDoXQwI; arc=none smtp.client-ip=209.85.160.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YMcFf9ql"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3BA781F000E9;
-	Fri,  7 Aug 2026 17:00:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786122009;
-	bh=xf9nrKmqN6amn15zNQh/fXJWbnKTrIbR0c/qS9OnmKk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=YMcFf9ql4ZnU7SC8wZUt+6LBOfKh4MqOR1tsKwFOXJCYkuPi+6N2TScbDEFj9W3PD
-	 ucOgr+DA1EQvcEQN3BLTII/Pooyv/VRoFSWwHefjV9zX4XXuXg4ScPCfIyR6KQNHwM
-	 eVVmQ5ifbkIgCKCAX42KrAn1Nbj/iSSU5i7h2xHCHBEU8ki8Iyf6FdrrBP5kh6FXl+
-	 VcjTIl3DLDBFcom7twYgC4e8EiwYHEBTaOHlmFuT3mX4LDlpI7Tyln112FGbpKNX6e
-	 zi/OUdkZ5d0wuMxYfSvgZzq/yQvluaDUZfCNsbdkQtZCE+cUZQzNB+jcJ/X1GupSaZ
-	 X9OKjlPWX2rVg==
-Date: Fri, 7 Aug 2026 17:00:07 +0000
-From: Eric Biggers <ebiggers@kernel.org>
-To: Neeraj Soni <neeraj.soni@oss.qualcomm.com>
-Cc: ulf.hansson@linaro.org, adrian.hunter@intel.com,
-	quic_dmukhopa@quicinc.com, quic_rampraka@quicinc.com,
-	quic_nitirawa@quicinc.com, quic_sachgupt@quicinc.com,
-	quic_bhaskarv@quicinc.com, quic_gaurkash@quicinc.com,
-	quic_sartgarg@quicinc.com, ram.gupta@oss.qualcomm.com,
-	linux-mmc@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v6 2/2] mmc: sdhci-msm: Use pm ops instead of macro to
- restore crypto keys
-Message-ID: <20260807170007.GA1172969@google.com>
-References: <20260803163123.1802005-1-neeraj.soni@oss.qualcomm.com>
- <20260803163123.1802005-3-neeraj.soni@oss.qualcomm.com>
- <20260803201803.GB63318@quark>
- <abe31a1b-e34c-d5b6-4bc4-3733acc56e98@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=riscstar-com.20251104.gappssmtp.com header.i=@riscstar-com.20251104.gappssmtp.com header.b="fIDoXQwI"
+Received: by mail-qt1-f180.google.com with SMTP id d75a77b69052e-51c15bf5000so18430551cf.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 07 Aug 2026 12:58:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=riscstar-com.20251104.gappssmtp.com; s=20251104; t=1786132729; x=1786737529; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=fLAj0swShmZIf0hJThyPujxzQ99VpzSptgNAwh7h5VE=;
+        b=fIDoXQwIHe6LgIV5IqxtBwP57TgeFvBnCIBAg0wvO5Dr1/gxkMFqw7vz7WwbKArTPm
+         7txvhlQtTb+YlhOALEe7842rACim12Oy0gluPMPVWrEbYhyz+ufPo4F5IN2bQmK/SGSq
+         vCwLfeufvZl9mCbpPsI3pDTdyKkaDsfmLckbPwemCKNFRc/+7QIOaLdPxCifypf6Xdmp
+         qoALrzWphOOgDYyiKJD+FemoFBmnYtSGKTKq06pydO0F41lunzbQXLxehz+UIAhJ4gMB
+         wfI4u9nP9GzyIkQnDVo2hu165J6pcd/IQ6JOJo3pzJTbzRRY7YjCpM+Wbmknwqgq/LNH
+         MEig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786132729; x=1786737529;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=fLAj0swShmZIf0hJThyPujxzQ99VpzSptgNAwh7h5VE=;
+        b=a9BQ/NeEecU0JirqP7gWjxD0d3c6AMjFjBYUXNg45lL1zeiY5Atvq3thWdOOSSpOY7
+         70RyjZhW9RKCjXLRbHqVGPX04sDVQ6mvO7A8rxv2BtgmDIZzXtqjnSWPNJVgaMUgB4nC
+         BEpCjVnE8lycNNLBF/3/tH3e/wlJJz9uyHiER+6QWOfLo2cwZ84+GFEm5Q5hqmFPVqWw
+         1a1MmyzA6GnzoPkqqX3+lllW6sey8G3JXaS3Nu/yxTPDXR7xur9Tjpn1APAwWbwqcwIO
+         Ez4T2SMjvjunQz5et4XJbxTo5af7Hy5UKKyLS+oAg4eV8d4R/bNPB5uDR69k26Wayany
+         SVDg==
+X-Forwarded-Encrypted: i=1; AHgh+Ro7cmbsZpBJgXEbRU/3Kqbl7hjfbookp7QLunejOC+0u+SvlUKHs+m0XIGeMpZBd3cmhiiGsHk0TI+cNkq4@vger.kernel.org
+X-Gm-Message-State: AOJu0YwO9ymP0xWgBAmIhwAkXP0xSerAenXoBaoi2wR+bkIjoBzX9q5t
+	h6rJzrI66b51mD9nNxGQy4J7NfYC5pwPFLVSbHcrnVm4fopTdKsxZ8RXzdgVVAZ4p8o=
+X-Gm-Gg: AR+sD12hUaRodBTNHfZeNIvelPHKO5arb6I7GMNAU+VeOvcqsITu3Sr0StnJptQsFmy
+	GXSXkolFvX3mZkN6bH+Ov6yt2EKzyHER5UcWpheXv56OHCCoLO5glBQ9xbr3s5TIcMDOOtDbZSt
+	OqGQ54OIJeVJ/C0T0687WZPBFS2H0dODWMSxz1YYb1c97SEnK694hkToVGqkPf5QH80distt/tC
+	+EcjCgljFt98+UTnx4UQanzWckeJVOx6kgxnHxj14DyObC5KfMqa2UF423saJ+4lUGlJ46efi1Z
+	JPNxNLbJFCreF+ZfABT37oEcN1ZTsk5d2QZuUgS+qKpqv/GDw9jWPrcSgJ9tBukxTSy6/tErfzD
+	JDO1gLTOXMdDDVxDKcFrfpoVAz3rbVsSc3xBZoaa6uYZwO3Tg5bCA21VckU3c+Yo2xCgFGTm5ga
+	7LkvYzAZJ/ge7Wg4Xen+kk0DIMnyd6w1KZgFEazu1PrSxOasmEjQ1aDIp96u06PgNAYD1fg7vWg
+	AM=
+X-Received: by 2002:a05:622a:428c:b0:51c:9193:fd9e with SMTP id d75a77b69052e-52ce5ff10e7mr301001841cf.15.1786132729475;
+        Fri, 07 Aug 2026 12:58:49 -0700 (PDT)
+Received: from zippy.localdomain ([73.62.185.64])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-908a92ff366sm15824226d6.32.2026.08.07.12.58.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 07 Aug 2026 12:58:49 -0700 (PDT)
+From: Alex Elder <elder@riscstar.com>
+To: andersson@kernel.org,
+	konradybcio@kernel.org,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org
+Cc: krishna.chundru@oss.qualcomm.com,
+	dmitry.baryshkov@oss.qualcomm.com,
+	mani@kernel.org,
+	sushrut.trivedi@oss.qualcomm.com,
+	umang.chheda@oss.qualcomm.com,
+	rosh@debian.org,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH 0/5] arm64: dts: qcom: clean up PCI function nodes
+Date: Fri,  7 Aug 2026 14:58:39 -0500
+Message-ID: <20260807195846.456079-1-elder@riscstar.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <abe31a1b-e34c-d5b6-4bc4-3733acc56e98@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
 
-On Fri, Aug 07, 2026 at 07:49:24PM +0530, Neeraj Soni wrote:
-> 
-> 
-> On 8/4/2026 1:48 AM, Eric Biggers wrote:
-> > On Mon, Aug 03, 2026 at 10:01:23PM +0530, Neeraj Soni wrote:
-> >> From: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
-> >>
-> >> Inline Crypto Engine (ICE) keys are lost after hibernation entry and this
-> >> needs to be restored when hibernation exits. ICE keys are re-programmed
-> >> during sdhci_msm_ice_init() but it may not cover cases where the
-> >> hibernation image is already restored.
-> >>
-> >> Unwrap the pm ops and use directly in driver to add the call to restore
-> >> Inline Crypto Engine (ICE) keys. This ensures that ICE is brought into
-> >> same state as before hibernation.
-> >>
-> >> Also set MMC_CAP2_CRYPTO_NO_REPROG to indicate that re-programming of ICE
-> >> keys is not needed during MMC runtime suspend/resume.
-> >>
-> >> Signed-off-by: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
-> >> Signed-off-by: Seshu Madhavi Puppala <quic_spuppala@quicinc.com>
-> >> Co-developed-by: Ram Prakash Gupta <quic_rampraka@quicinc.com>
-> >> Signed-off-by: Ram Prakash Gupta <quic_rampraka@quicinc.com>
-> >> Co-developed-by: Sarthak Garg <quic_sartgarg@quicinc.com>
-> >> Signed-off-by: Sarthak Garg <quic_sartgarg@quicinc.com>
-> >> Signed-off-by: Debraj Mukhopadhyay <quic_dmukhopa@quicinc.com>
-> >> Signed-off-by: Neeraj Soni <neeraj.soni@oss.qualcomm.com>
-> >> ---
-> >>  drivers/mmc/host/sdhci-msm.c | 23 ++++++++++++++++++++++-
-> >>  1 file changed, 22 insertions(+), 1 deletion(-)
-> >>
-> >> diff --git a/drivers/mmc/host/sdhci-msm.c b/drivers/mmc/host/sdhci-msm.c
-> >> index 4aff965f0e2e..f64788a70309 100644
-> >> --- a/drivers/mmc/host/sdhci-msm.c
-> >> +++ b/drivers/mmc/host/sdhci-msm.c
-> >> @@ -1959,6 +1959,7 @@ static int sdhci_msm_ice_init(struct sdhci_msm_host *msm_host,
-> >>  	}
-> >>  
-> >>  	mmc->caps2 |= MMC_CAP2_CRYPTO;
-> >> +	mmc->caps2 |= MMC_CAP2_CRYPTO_NO_REPROG;
-> >>  	return 0;
-> >>  }
-> >>  
-> >> @@ -2983,9 +2984,29 @@ static int sdhci_msm_runtime_resume(struct device *dev)
-> >>  	return ret;
-> >>  }
-> >>  
-> >> +static int sdhci_msm_restore(struct device *dev)
-> >> +{
-> >> +	struct sdhci_host *host = dev_get_drvdata(dev);
-> >> +	int ret;
-> >> +
-> >> +	ret = pm_runtime_force_resume(dev);
-> >> +	if (ret)
-> >> +		return ret;
-> >> +
-> >> +	if (host->mmc->caps2 & MMC_CAP2_CRYPTO)
-> >> +		blk_crypto_reprogram_all_keys(&host->mmc->crypto_profile);
-> >> +
-> >> +	return ret;
-> >> +}
-> > 
-> > Sorry, it looks like this actually does need an #ifdef because the
-> > crypto_profile field is conditional.  It doesn't need to be a new #ifdef
-> > though, as you could add a function sdhci_msm_ice_restore() within the
-> > existing CONFIG_MMC_CRYPTO section of this file (along with a no-op stub
-> > in the !CONFIG_MMC_CRYPTO section), then call it from here.  Similar to
-> > how the existing sdhci_msm_ice_resume() works, for example.
-> >
-> But MMC_CPA2_CRYPTO=0 if !CONFIG_MMC_CRYPTO so crypto_profile field is
-> not accessed if !CONFIG_MMC_CRYPTO. Does it need encapsulation?
+While working on upstream support for the Toshiba TC9564 SoC I
+learned that its PCIe endpoint function nodes included the
+device_type property, indicating each is a "pci" device.  Herve
+Codina pointed out that this is not correct; only a PCI device
+"that implements a PCI bus" should define that property.
 
-Yes, because 'if (a & 0)' just makes the code under it be optimized out
-and able to "use" undefined symbols.  It still otherwise has to be valid
-code and refer to declared symbols and fields.  See my suggestion above.
+I looked at other upstream devicetree files and I found four other
+places with this same mistake.  (All are for Qualcomm platforms,
+and all are for platforms using a TC956x SoC.)
 
-- Eric
+This series removes the device_type property where it is defined
+for a PCI endpoint function.
+
+It also removes the #address-cells, #size-cells, and ranges
+properties in these cases, with a plan to restore them only when
+they are known to be needed (to implement pci-ep-bus sub-nodes).
+
+					-Alex
+
+Alex Elder (5):
+  arm64: dts: qcom: qcs6490-rb3gen2: clean up PCI function nodes
+  arm64: dts: qcom: qcs6490-rb3gen2-industrial-mezzanine: clean up PCI
+    function nodes
+  arm64: dts: qcom: lemans-evk-ifp-mezzanine: clean up PCI function
+    nodes
+  arm64: dts: qcom: monaco-evk: clean up PCI function nodes
+  arm64: dts: qcom: qcs6490-thundercomm-minipc-g1iot: clean up PCI
+    function nodes
+
+ .../boot/dts/qcom/lemans-evk-ifp-mezzanine.dtso  |  8 --------
+ .../boot/dts/qcom/monaco-evk-ifp-mezzanine.dtso  |  8 --------
+ .../qcs6490-rb3gen2-industrial-mezzanine.dtso    | 16 ----------------
+ arch/arm64/boot/dts/qcom/qcs6490-rb3gen2.dts     |  8 --------
+ .../qcom/qcs6490-thundercomm-minipc-g1iot.dts    |  8 --------
+ 5 files changed, 48 deletions(-)
+
+
+base-commit: 064935ef6be39d086f4c40766d2b76181b70b3e1
+-- 
+2.53.0
+
