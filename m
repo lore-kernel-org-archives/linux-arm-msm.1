@@ -1,157 +1,80 @@
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEB1240FD86;
-	Sat,  8 Aug 2026 12:42:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=5.75.144.95
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5172A229B18;
+	Sat,  8 Aug 2026 12:49:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786192969; cv=none; b=c9wTgK35Uy20hoxuscjKOhhr/4/0xVNZXzQLXVfLwmo0LjNF55KGaWP5oLG1kfDMpSOSfiuX13H2NwfuxO74oxzkw7dKX5Kq5Xq20t+hBWOlhxRdE0jbE8V62X+jLTLXbN5nMBrkrNdYMArLKjvPl6mmmWVk+0bFs/RLH7caigU=
+	t=1786193377; cv=none; b=Lh4ELqMfOuGCKpEAk2WzEzLonAZYrOsrJlOUHEmscOH/lZjN81IL1kmg4B1zsUgL5tBuslasXqOzlRmkXl2FDjaQZuYjz6WTmSAGsPMGA+UZb5SEQRkittqxtOJcZ4jKx1gem6W+bEBogzAK2GP16COmGSDqKyljZOG6DkS88uc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786192969; c=relaxed/simple;
-	bh=mUoCsQbdGafhK4yw2jR4QnJOvGmcxW/iciqw7nDsy4w=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=q3nToAFvyTxSPkNmp16SnRKPvUI5oWuTwhKahCmqjxAor0rA/eS/jhCjw3FGesX1ckbqzU5O79O9YriAsbzduk9UwXFrFjowmQg40zeJKcdZ0JiRhPLfdsKAOj2P/RpvZlQum1mHdTbXa9otVwILk0kZmoItsCUyJJ3ltTJ4QhE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org; spf=pass smtp.mailfrom=mainlining.org; dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=p8HnxdkJ; dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b=YogH5M5s; arc=none smtp.client-ip=5.75.144.95
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
+	s=arc-20240116; t=1786193377; c=relaxed/simple;
+	bh=GM8qP0tMb5YOEyFvkoMduniH5nY5H93IcfZSNXeo5OE=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=XzKd1g7SetnjYhFve+CFHJjpLFamSkS0ANjSsZUEfGHhQebGxEnRK80KJV+hfcJg74SvwtRpkJJ/5x2iX6lFPYQr65l7aE17nJytwf7OZ+AN7s6a/0Ka2z7Z/wtwemp5ivl0LNWUOLW7nDxBBrBU0tZ/L/VUONQFPDE7as+8siU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=MkhYyjF6; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="p8HnxdkJ";
-	dkim=permerror (0-bit key) header.d=mainlining.org header.i=@mainlining.org header.b="YogH5M5s"
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
-	h=From:To:Subject:Date:Message-ID; t=1786192936; bh=TjAyu7WMvcZuDZqJUV1+hYw
-	J+wJ5yyIqrRwvxBioKoY=; b=p8HnxdkJZuyhBMDuOM4SHLcKMWv7MMm9U9+onZ5spIGd/5+Dzh
-	rj6bF6NJ7pVtVMPCWuhkgIi00Nfb2Wu/fDtHERkQK7VbKDywsNRbpCw1mh+ADevpjpqqpO9+iCC
-	ir5/omBAKAhQlJM0S0z3Tg2ctfkLyFRX4UWK98CPTz6ZA8cpSzhM5yG5GnRjTsnU3PmPSL5BA+0
-	+7LoR5jUU9wBD3jg+yZfivjogpmzja5UFvKWTHwbNxp1X/kXmhWGtBWuq6cc1lNTYK1oOvVx4aF
-	UfyTiBV7zLXy5W0+eVzHWjuiNpXkiR1StvmiwMdysZDKIJVbIdnwAl+u0a1Fec8qTGA==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
-	h=From:To:Subject:Date:Message-ID; t=1786192936; bh=TjAyu7WMvcZuDZqJUV1+hYw
-	J+wJ5yyIqrRwvxBioKoY=; b=YogH5M5sluQPKiHkxYCk2luSzfxl7vez0uESXE+opRQNm1l9Th
-	JUmKPJyj+ym/5lEQQ3SKlJt8rWdEOwEWooBA==;
-Message-ID: <dc1040f9-0ffc-4e64-a154-ece99b16eea5@mainlining.org>
-Date: Sat, 8 Aug 2026 15:42:14 +0300
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="MkhYyjF6"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 973001F000E9;
+	Sat,  8 Aug 2026 12:49:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786193364;
+	bh=YRWgpfz4H41W/lGXZZfeM3EypnpZfhLEoPBn1EP63zY=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=MkhYyjF6uzQmUKc22sXmaX+KgW8D0l1sBfHpk8oWUi0rXMqh6VcDBti6K2TwFa9XF
+	 cBknUE0iSda0xJKIg0YqrgkOBcXRlVvrT5XUIgJAwxukEXdIXGmwD71BFXXCeF7gsC
+	 Ze1gdqn2dzIhuauvTzoRMggevINlWDz16hbiKvW723LBh/7mIz6aUkKseMgDjm1Blk
+	 zVcwuMPx91Df8hzEoI54XTha+sENbGERC41iIrkpevcLbvoBa87mYYR2jmhzmhgHKh
+	 MlRA+9iTXhAggwa0MzKFM1dU029X2eQFmILSr2vC6mDMDNpXsamFJg3cbIIk6YbEBu
+	 Slt1XGoMyBAug==
+From: Mark Brown <broonie@kernel.org>
+To: Liam Girdwood <lgirdwood@gmail.com>, 
+ Srinivas Kandagatla <srini@kernel.org>, 
+ Peter Ujfalusi <peter.ujfalusi@linux.intel.com>
+Cc: Alexey Klimov <alexey.klimov@linaro.org>, linux-sound@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
+In-Reply-To: <20260805113911.21723-1-peter.ujfalusi@linux.intel.com>
+References: <20260805113911.21723-1-peter.ujfalusi@linux.intel.com>
+Subject: Re: [PATCH] ASoC: pm4125-sdw: sort the register default table
+Message-Id: <178611405200.279158.3215679779461259893.b4-ty@b4>
+Date: Fri, 07 Aug 2026 15:47:32 +0100
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFT 2/3] media: i2c: dw9719: Add DW9800W support
-To: Griffin Kroah-Hartman <griffin.kroah@fairphone.com>,
- Sakari Ailus <sakari.ailus@linux.intel.com>,
- Luca Weiss <luca.weiss@fairphone.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, =?UTF-8?Q?Andr=C3=A9_Apitzsch?=
- <git@apitzsch.eu>, Daniel Scally <dan.scally@ideasonboard.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Eugene Lepshy <fekz115@gmail.com>,
- Vasiliy Doylov <neko@altlinux.org>, Achill Gilgenast <achill@achill.org>,
- linux-media@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- ~postmarketos/upstreaming@lists.sr.ht
-References: <20260801-dw9800w-clean-v1-0-38978de67963@mainlining.org>
- <20260801-dw9800w-clean-v1-2-38978de67963@mainlining.org>
- <anGlY_kwp_I-fRnz@kekkonen.localdomain>
- <f7cae569-0c51-41fe-92ab-f29311a22761@mainlining.org>
- <anMeoKP6rUlgtKyR@kekkonen.localdomain>
- <3554d8d1-65f7-4556-8b99-1c03e0cdca53@fairphone.com>
-Content-Language: en-US
-From: Danila Tikhonov <danila@mainlining.org>
-In-Reply-To: <3554d8d1-65f7-4556-8b99-1c03e0cdca53@fairphone.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
 
-Hi Griffin, Sakari,
+On Wed, 05 Aug 2026 14:39:11 +0300, Peter Ujfalusi wrote:
+> ASoC: pm4125-sdw: sort the register default table
 
-Thank you for the clarification.
+Applied to
 
-On 07/08/2026 17:30, Griffin Kroah-Hartman wrote:
-> Hello Sakari, Danilla,
->
-> On 05/08/2026 13:29, Sakari Ailus wrote:
->> Hi Danila, Griffin,
->>
->> On Tue, Aug 04, 2026 at 09:27:01PM +0300, Danila Tikhonov wrote:
->>> Hi Sakari,
->>>
->>> Thank you for your comment.
->>>
->>> On 04/08/2026 11:40, Sakari Ailus wrote:
->>>> Hi Danila,
->>>>
->>>> Thank you for the patch.
->>>>
->>>> On Sat, Aug 01, 2026 at 09:04:15PM +0300, Danila Tikhonov wrote:
->>>>> The DW9800W uses the same chip ID and register layout as the DW9800K,
->>>>> but requires different default VCM frequency value.
->>>> Is this a real difference between the two models or what fits for the
->>>> attached lens? Too bad the datasheet isn't publicly available. :-(
->>>>
->>>> At least the differing default and constraints for 
->>>> dongwoon,vcm-prescale
->>>> needs to be documented in bindings.
->>> I share your skepticism and have essentially the same concerns. Since I
->>> do not have the DW9800K datasheet, I cannot say with certainty how it
->>> differs from the DW9800W.
->> Indeed. The limits should have been added for dw9800k, too, but I 
->> guess I
->> missed this in review. :-\
->>
->>> In particular, the parameter referred to as the VCM frequency in the
->>> driver is used to derive the SACT value. For the DW9800W, SACT[5:0]
->>> defines the actuator resonance period in SAC mode and the one-step
->>> period in LSC mode. The datasheet gives the corresponding formulas as:
->>> - tVIB = 6.3 ms + SACT * 0.1 ms
->>> - LSC 1-step period = 252 µs + SACT * 4 µs
->>>
->>> Therefore, the default value may differ between the DW9800K and DW9800W
->>> if the formulas or timing characteristics used to calculate SACT are
->>> different.
->> Griffin, would you be able to comment this?
->
-> After checking on my side, DW9800W and K are almost identical in both 
-> structure
-> and register values, including how tVIB and tLSC are calculated, 
-> DW9800K has an extra
-> register that can change the output current to 130mA but we don't ever 
-> use that.
->
-> We didn't have a datasheet when working on the DW9800k so we had to go 
-> off of
-> the downstream driver during runtime to get our register values. The 
-> datasheet is a
-> much more reliable source to be using for this instead.
->
-> My colleague has already identified ways to fix the bindings, which we 
-> will
-> tackle ourselves.
->
-I'm glad you were able to clarify the situation, as this should help us
-handle both IC variants correctly.
->> Another matter: the comment on dw9800k says there's no device ID. So is
->> there a device ID that wasn't just checked earlier or is there really no
->> device ID?
->
-> Indeed, it turns out the DW9800K DOES have an info register, which 
-> should be
-> 0xEB, that's on us for not updating it after we received more 
-> documentation.
->
-Given this, and assuming everyone agrees, I think it would make sense
-for me to leave the DW9800K untouched in the next version of this patch
-series. Since it turns out that the DW9800K has a different Chip ID, you
-can fix the Chip ID check for it separately based on the information you
-have.
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.3
 
-One point is still unclear to me, though: is the default VCM frequency
-the same for both ICs, or does it differ between them?
+Thanks!
 
-> Thanks for drawing our attention to this! Nice patch.
->
-> Griffin
->
----
-Best regards,
-Danila
+[1/1] ASoC: pm4125-sdw: sort the register default table
+      https://git.kernel.org/broonie/sound/c/8dd18d9956bf
+
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
+
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
+
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
+
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
+
+Thanks,
+Mark
+
