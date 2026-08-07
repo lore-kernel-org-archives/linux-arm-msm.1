@@ -1,66 +1,115 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36E713F8ED6;
-	Fri,  7 Aug 2026 09:52:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.14
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A278B3D88E7
+	for <linux-arm-msm@vger.kernel.org>; Fri,  7 Aug 2026 09:57:20 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786096324; cv=none; b=lOy/UiZCLpjSVI8w5mgdoKDLnGHV1mjKZuYiKuBosfHC36nsPskHqY73ZVhGljlcpj3kihLkTKVV8zd/HE1Af2RU9RvPbjXHd7svBFNqZH5i3K4Yh2GXLMdaETBsgOoDaTLuzSMg5tIRXJ6bNKzPkH7AVypxwUxL9KJCp8bS12E=
+	t=1786096642; cv=none; b=AxKz0dBEd/jMC6hGB4y+4COrw2ALvnGKMf+XgkDNP6Oc0eDI9Fqej9tWGJNiEGWuGHt7v+K64SKt5F/AvcomTQZYmNLQRtksKA/BrhRbPQCgOcUCsDBW92R5FXuyzjv/fPKrblT32yB3tABaZqqRJ6Vx/khEkPeK0SzMLbzhryg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786096324; c=relaxed/simple;
-	bh=nckWUvqxYBomBT0qk0CYLQmIUE0YhPuWnrKq/WEd7ko=;
+	s=arc-20240116; t=1786096642; c=relaxed/simple;
+	bh=wFUyEBwydG9qId0K6HY8JSb9tKRnMQzKvHaoEgkKfM8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=CM8YkgFsEiJ3mNWTqu06S7irqozlAM+S3Me8w82pdCfpJRCI1xMWiVMrgNMQswDg7k72+cEd7SN2fAKawwt7KSyQGhbqBQBPe8PhKlB5/+EnktAgl9BT39z3pMIjZsBRHG1EkbBZJ83xWfzIha1ybq+uytM8uk7e6Q3IACOrEy0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=cgnKVRML; arc=none smtp.client-ip=198.175.65.14
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=M5PbCF1Zy+xeuiqQyfOSazNPQveQFuSIGRGZGgJUzqJ/7oOJTOFjohZ/tm2rMFrdttPF22NsfXTDCNM62Ni09fw3b6Lum75NzS6yWO3hJKP1JGVT4lgavNPFVU3+ZeNgTDZTLQti402dKcpQNPFSxSWECXUnfI7JK6O1ldRFiTk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=BcoHgmbW; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=KqMJu7OS; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="cgnKVRML"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1786096321; x=1817632321;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=nckWUvqxYBomBT0qk0CYLQmIUE0YhPuWnrKq/WEd7ko=;
-  b=cgnKVRMLFC4Mh0SHSBzBzgYAhUr/drBNu4sfVBAhquyOikt/6MNzC86i
-   kouluCgt1EmV/2dFcbwqMlfEiKVOtTyr0DdLGn2yo2IJObXqIpyKdcZe4
-   zHATpYcMhYgrCD1sYI6zO6imc27KFdN5KbXwibjlm8oyEJK9S83qaDAmp
-   MNK4wRx2/+WobPwBayTuWMoq/QhSg4ky9zqbZVgESqTDerSUlFZZbOUl9
-   1FpyP0GXxU8fDlmroKdQPnHR5uU6Cm2yi/sIn/X39K37zo7z7WP52Sb46
-   5qt1UDz/8y9dmTFTtpbeLiCKFr5S+XcfVEcymIiSvAzqWUNhCgF8JWqtC
-   w==;
-X-CSE-ConnectionGUID: YIG0UpZJTcm2AhVnkovQFA==
-X-CSE-MsgGUID: L35zapJGRP6nH+1y703E0A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11867"; a="90582162"
-X-IronPort-AV: E=Sophos;i="6.25,210,1779174000"; 
-   d="scan'208";a="90582162"
-Received: from orviesa008.jf.intel.com ([10.64.159.148])
-  by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Aug 2026 02:52:01 -0700
-X-CSE-ConnectionGUID: HDVgAIaXTpe1qVy92RRnbg==
-X-CSE-MsgGUID: jafg/z6ISnWQv/3Ju3CiRw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,210,1779174000"; 
-   d="scan'208";a="261840145"
-Received: from lkp-server01.sh.intel.com (HELO 6eda058d650d) ([10.239.97.150])
-  by orviesa008.jf.intel.com with ESMTP; 07 Aug 2026 02:51:59 -0700
-Received: from kbuild by 6eda058d650d with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1wsHF5-00000000Hn3-46Xs;
-	Fri, 07 Aug 2026 09:51:55 +0000
-Date: Fri, 7 Aug 2026 17:51:55 +0800
-From: kernel test robot <lkp@intel.com>
-To: Yousef Alhouseen <alhouseenyousef@gmail.com>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Amol Maheshwari <amahesh@qti.qualcomm.com>
-Cc: oe-kbuild-all@lists.linux.dev, Arnd Bergmann <arnd@arndb.de>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org,
-	Yousef Alhouseen <alhouseenyousef@gmail.com>
-Subject: Re: [PATCH] misc: fastrpc: release pending invoke refs on rpmsg
- removal
-Message-ID: <202608071727.E43MoFeK-lkp@intel.com>
-References: <20260624192700.5388-1-alhouseenyousef@gmail.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="BcoHgmbW";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="KqMJu7OS"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6777nMKQ3533337
+	for <linux-arm-msm@vger.kernel.org>; Fri, 7 Aug 2026 09:57:19 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=14z5z91eG3xJmg4Pw6J1/sgK
+	CXaJLKsMSXte81Jepl8=; b=BcoHgmbWI2lYYRJK3S1JyMvL6MRmj7fWpu2xUQ+o
+	EI25LcgDehiQD1VfIBf2HJLbeQ9K8ebSP2RUtEhs/+SE5yTbiw1t4Dfo2B0LbBFo
+	4FpXWVFELciUBukeU23qyvrza9pmukWvSVUSpdIJhyTn7dJcoZd0oXkezNkWoEaR
+	lnwzOORfzr5OJQTiiN9d/HEArMx+8mV2w2USejH++tGJTXtmn7K37+H7cGiF5LIV
+	AoIj/55rMBR1HiW5rWN4bpcxd+r3AHu/EKyLQRy1aXe8ShDzikLTlRqau85oavCI
+	evc6fJ1Mn/pUhD9tvMkkM7jgNXwKXN+2nCSuC0CgZcgEgA==
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com [209.85.219.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvy6fuenr-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 07 Aug 2026 09:57:19 +0000 (GMT)
+Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-8fc6b670b4bso26911856d6.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 07 Aug 2026 02:57:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786096639; x=1786701439; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=14z5z91eG3xJmg4Pw6J1/sgKCXaJLKsMSXte81Jepl8=;
+        b=KqMJu7OS8D8Yzrzq0hkrq8uDtB5r6Djmv8dmWU+DUBxqUaMlKDRMWP39TjCQYLaxSM
+         qO+hTEs1Dn3DQX2BUQL9+xu480cE0aSdxG/v4Pe83Oi4ESt5osMK8usso9yZf/zaBGw3
+         Sjzj4HFBYzr22lSGonPl7H2XVGarfAufdaT/kIxqdgLKzokOMufGWzjOLLVAyOmlWVgn
+         /VrL+0U05yXNVynG+1D49EKbEyoHZTPxLsMivkXGaK+1NRmGOBCrQOz8+ViTiI5Ck06Q
+         pK8C9okPdEy/Rl+qpFC2dvLP8I2DzDR0yZTG80M5+dy1QDjvLGt+5VkWvYWKXz2OYjF9
+         TIdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786096639; x=1786701439;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=14z5z91eG3xJmg4Pw6J1/sgKCXaJLKsMSXte81Jepl8=;
+        b=hE8ctQ4Uw+VlgD3ETvbjxXwMaP8dmXS2R3zToSaF6Yy/0+OUe/ojgQuOkcH4w9E+jt
+         zd4iVEiMAVg5V4SpheK5GmWELaSGC57yWS9MpWXxjj8HcVg3/qx+ORWjDWLINUlGMqjl
+         QRKeXFNoKn7qmYH2Nw1YCqEZJEa37lWrrgwpYSNrIkwUcOskYhhPzz9oQFrIwwSbDNgw
+         jbnCWqs9KiEx5JHFZuQ1tmcGKncu1JPEqqpJnFa6/Aj/wViqmgYHbfchaB6syEjXfZWm
+         A5x2y4TcVZzJXr0X5FfA7pPy5erbspQTbWZ99bl/cQXLZBJsrrsA6MhDd4AJnp9yNAdo
+         xxaQ==
+X-Forwarded-Encrypted: i=1; AHgh+Rp3NxeZJw6h/wtRS85oue8e0zcX6nRP1HAaspd8yRebixIZ0882seIecT0Bmz57YIGrY0OMSeqoA67LPC+H@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz9dDOof860F8/1igwVdRYQ47JleZJs2WlRMElZFmU/X4wY5VJ7
+	ggcm5alv3MZH57m+4O4IKkt9yGmiyE9pH+ZxyRc+TaiNMFsCVs8aq/17HDmdVZGa/uzPBT1Xd/C
+	QBiS09LSEyyujhFHjRRIUndeQDE4p2YamlRnLEfNUJWBC/tCu2fnCLekxwWax07oXOn7M
+X-Gm-Gg: AR+sD126rphNY7UaP4n/qniXvBGe3zuT2tQ5uNF6megJjY+G5boE2mz55tVlktZbUK2
+	9hInbgNxAcNL37wJHfyz2IvniKZkrZHK+D/W0xogkacgjU76wai0k8ZsgSEgjDD/08UMdaiCRSI
+	GFQG6VBvoe9riOXgIGp+zUUWmj+j1h9btjlkjKDKN9yq7amIONIAeNYff1xUjc5hZ0ktxxKQ8MS
+	m+HsJWb6DFv4bBg5tvgwCD9peCGxn1kEpr8U336I7VpVAfZ1o4NvebgLvQC4KHXJH0iZJG1vB/d
+	Z3L3URx+/AUZaR58RQaGYOO8PREj0sIKxBeuOxBLNO7/OVncnfkJKTOFaTOiojzRCXcuBLr/64U
+	BaICtCJ6M6AHHTpy/PsPv6HIk8xkkrDXqbzGfEZI7bVgOPnN32+esaGqViapnTue1EHfOzxh4qd
+	PAz//H5HxVxhj0ww==
+X-Received: by 2002:ad4:5ce1:0:b0:907:e7e6:9544 with SMTP id 6a1803df08f44-908a6fb7b54mr22407856d6.9.1786096638749;
+        Fri, 07 Aug 2026 02:57:18 -0700 (PDT)
+X-Received: by 2002:ad4:5ce1:0:b0:907:e7e6:9544 with SMTP id 6a1803df08f44-908a6fb7b54mr22407366d6.9.1786096638277;
+        Fri, 07 Aug 2026 02:57:18 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b3050cfa65sm367128e87.20.2026.08.07.02.57.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 07 Aug 2026 02:57:16 -0700 (PDT)
+Date: Fri, 7 Aug 2026 12:57:15 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Rahul Samana <rahul.samana@oss.qualcomm.com>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Marcel Holtmann <marcel@holtmann.org>,
+        Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Balakrishna Godavarthi <quic_bgodavar@quicinc.com>,
+        Rocky Liao <quic_rjliao@quicinc.com>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Bartosz Golaszewski <brgl@bgdev.pl>, linux-arm-msm@vger.kernel.org,
+        linux-bluetooth@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-pci@vger.kernel.org,
+        linux-pm@vger.kernel.org, quic_mohamull@quicinc.com,
+        quic_hbandi@quicinc.com, quic_anubhavg@quicinc.com
+Subject: Re: [PATCH v2 1/6] dt-bindings: bluetooth: qca: add QCC2072
+Message-ID: <dduqm25cy2j3ab7gu65qjho76gifij3sgnvgsgqyvncjxa46x6@vg7egioz5vxx>
+References: <20260727-rb3-industrial-bt-uart-v2-0-2d100f30e202@oss.qualcomm.com>
+ <20260727-rb3-industrial-bt-uart-v2-1-2d100f30e202@oss.qualcomm.com>
+ <20260731-first-righteous-bear-dd72ed@quoll>
+ <712f8a14-d2a1-4a90-82f9-05cd694f2658@oss.qualcomm.com>
+ <c1875dd6-fe3a-4a69-a6fd-b461c8fba6e4@kernel.org>
+ <6d6465bb-47ac-464c-af4e-0ca72325705f@oss.qualcomm.com>
+ <8a388310-d3cc-4d02-abb6-0eb98c24cfce@kernel.org>
+ <4523441f-498a-4bbd-80f3-97a7a9206c00@oss.qualcomm.com>
+ <6e0b9e79-ccd4-4689-9a6b-9b4fc556d5e4@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,64 +118,156 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260624192700.5388-1-alhouseenyousef@gmail.com>
+In-Reply-To: <6e0b9e79-ccd4-4689-9a6b-9b4fc556d5e4@kernel.org>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDA3NSBTYWx0ZWRfX/eG16DhqRquE
+ RLayPedreZicEpBP5aLfRCupYPdRoXWX0CjZtgyvzNbJBRXTdb26Z/5zhqABkPI5xv6YRhpcK9M
+ udrVcJ2s1UV1i+mQMxrlOBSwLJoN4cRQ7xd8/etl9crmYTOKA4alef1kuP8phR9VerLZtC2gLyI
+ 7JmdPC2DtogJirGXuIbykBmMJewttjOSWq9KfEgY31dV0AwSeXnISCck4Jl756QnR6Nvd+PmBOI
+ +sxqt2+Vtx0kfCn3jg/asrkUeOsPhZjGXH2ape++LA6fOyGYfpkUOVRXYihWnPJ2YinZfIIUBoz
+ W/AHOwNvznaWkkHZux4SFFZlmvwX6EA0CdHrhfIvc9SBeN0lO8cGW78C4kDASft74e+QA5eCTsE
+ VhSSIBvEOlKaMj4NeAVll32bjrnAKm8736CZqO4Sb/jCLq3izu848Pa2rCvjH5hIWerFtYEl81Z
+ mXJ2Ye7SEQ0E6Jh6bVQ==
+X-Authority-Analysis: v=2.4 cv=DvhmPm/+ c=1 sm=1 tr=0 ts=6a75abff cx=c_pps
+ a=wEM5vcRIz55oU/E2lInRtA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=vuXs5oDAzq-yw9ntQScA:9 a=CjuIK1q_8ugA:10
+ a=OIgjcC2v60KrkQgK7BGD:22
+X-Proofpoint-ORIG-GUID: ZJH_7PKexjThZFeuvB7F5KUOWNnBiVPA
+X-Proofpoint-GUID: ZJH_7PKexjThZFeuvB7F5KUOWNnBiVPA
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDA3NSBTYWx0ZWRfX7N8ECYsM67SW
+ n4Uxpe9i3/PZSAA4YeQ20wqzVtmfSfVUenItGPMOl/YRKu1ZUkK6KILH/Mm5NfVvmC3mt3d3G3r
+ yyR0zgjCSUsqFaSghwejUpDl20n/KIo=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-07_01,2026-08-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 bulkscore=0 clxscore=1015 spamscore=0 malwarescore=0
+ suspectscore=0 adultscore=0 impostorscore=0 lowpriorityscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608070075
 
-Hi Yousef,
+On Sat, Aug 01, 2026 at 05:49:53PM +0200, Krzysztof Kozlowski wrote:
+> On 01/08/2026 17:31, Rahul Samana wrote:
+> > 
+> > 
+> > On 01-08-2026 20:18, Krzysztof Kozlowski wrote:
+> >> On 31/07/2026 17:51, Rahul Samana wrote:
+> >>>
+> >>>
+> >>> On 31-07-2026 20:34, Krzysztof Kozlowski wrote:
+> >>>> On 31/07/2026 16:45, Rahul Samana wrote:
+> >>>>>
+> >>>>>
+> >>>>> On 31-07-2026 15:16, Krzysztof Kozlowski wrote:
+> >>>>>> On Mon, Jul 27, 2026 at 09:15:01PM +0530, Rahul Samana wrote:
+> >>>>>>> QCC2072 can be used on M.2 E-key cards where the card power resources are
+> >>>>>>> described by the pcie-m2-e-connector node. In that setup, the M.2 power
+> >>>>>>> sequencing provider creates the Bluetooth serdev child after matching the
+> >>>>>>> QCC2072 PCI function.
+> >>>>>>>
+> >>>>>>> Integrated non-M.2 designs need board-specific power resources. Document
+> >>>>>>> only the compatible for now and leave those properties to be added with
+> >>>>>>> matching driver support.
+> >>>>>>>
+> >>>>>>> Document the qcom,qcc2072-bt compatible used for QCC2072 Bluetooth
+> >>>>>>> controllers connected over UART.
+> >>>>>>>
+> >>>>>>> Signed-off-by: Rahul Samana <rahul.samana@oss.qualcomm.com>
+> >>>>>>
+> >>>>>> NAK, exactly same comments as before.
+> >>>>>>
+> >>>>>> Nothing got improved, although what is weird - original SoB is gone, so
+> >>>>>> this is legally dubious work.
+> >>>>>>
+> >>>>>> Best regards,
+> >>>>>> Krzysztof
+> >>>>>>
+> >>>>>
+> >>>>> Hi Krzysztof,
+> >>>>>
+> >>>>> Thanks for the review.
+> >>>>>
+> >>>>> For the binding contents, I tried to capture the current scope in the binding
+> >>>>> description itself. This series supports QCC2072 only as an M.2 E-key card,
+> >>>>> where the card power resources are described by the pcie-m2-e-connector node
+> >>>>> and the M.2 pwrseq provider creates the Bluetooth serdev child.
+> >>>>>
+> >>>>> The binding also says:
+> >>>>>
+> >>>>>   Integrated non-M.2 designs require board-specific power resources. Those
+> >>>>>   properties, together with a static devicetree example, should be added when
+> >>>>>   integrated non-M.2 support is added.
+> >>>>
+> >>>> Bindings must be complete and your driver support is irrelevant here.
+> >>>>
+> >>>> If you claim this is a PCI device thus you do not need any resources,
+> >>>> then the binding is not needed either. PCI devices are enumerable. And
+> >>>> to prove it: look at your DTS. Do you see qcom,qcc2072-bt being used? No.
+> >>>>
+> >>>>>
+> >>>>> We do not currently have an integrated non-M.2 QCC2072 design, so I do not
+> >>>>> have board-specific regulator supplies to document for that topology.
+> >>>>>
+> >>>>> Could you please suggest how you would prefer this binding to be handled for
+> >>>>> the current M.2-only use case? 
+> >>>>
+> >>>> Drop the binding, you do not need it.
+> >>>>
+> >>>> Anyway the problem is that more comments were ignored.
+> >>>>
+> >>>
+> >>> Hi Krzysztof,
+> >>>
+> >>> Just to clarify the reason for adding this binding in v2: 
+> >>> v1 did not add a binding because this series only targets the M.2 use case.
+> >>>
+> >>> I added the minimal binding in v2 because checkpatch reported
+> >>> qcom,qcc2072-bt as an undocumented compatible, and I interpreted the request
+> >>> to fix the checkpatch warnings as requiring this compatible to be documented.
+> >>> I also had the earlier feedback in mind, where the indirect
+> >>> qcom,qcc2072-bt compatible was pushed back because it was undocumented:
+> >>>
+> >>> https://lore.kernel.org/all/20260703-eliza_evk-v1-3-7624440bd76d@oss.qualcomm.com/
+> >>>
+> >>> Based on your clarification here, I will drop the binding patch in v3 and
+> >>> keep qcom,qcc2072-bt only as the pwrseq-created child compatible for this
+> >>> M.2 case.
+> >>
+> >> My previous statement is also valid, please read entire threads.
+> >>
+> >> You cannot have undocumented qcom,qcc2072-bt.
+> >>
+> >> I ask you to drop both, because they are not needed. But feel free to
+> >> prove me wrong, see my first paragraph in the previous reply.
+> >>
+> >>
+> > The PCIe M.2 power sequencing driver, pwrseq-pcie-m2.c, uses
+> > pwrseq_m2_pci_ids to translate the enumerated PCI function into the
+> > Bluetooth compatible used for the generated serdev child.
+> > 
+> > For example, WCN7850 maps PCI ID 17cb:1107 to qcom,wcn7850-bt, then hci_qca
+> > matches that compatible to select qca_soc_data_wcn7850.
+> > 
+> > For QCC2072, pwrseq-pcie-m2.c matches PCI ID 17cb:1112 and creates the
+> > generated Bluetooth serdev child with compatible "qcom,qcc2072-bt". The
+> > hci_qca driver then matches "qcom,qcc2072-bt" and uses qca_soc_data_qcc2072
+> > as the controller-specific data.
+> 
+> The purpose of Devicetree is not to describe Linux internal driver
+> matching. Do not use compatibles for that.
 
-kernel test robot noticed the following build errors:
+So, if instead of M.2 module the WiFi chip gets soldered to the main
+board, the qcom,qcc2072-bt wll be a legitimate compat string?
 
-[auto build test ERROR on char-misc/char-misc-testing]
-[also build test ERROR on char-misc/char-misc-next char-misc/char-misc-linus linus/master v7.2-rc6 next-20260806]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Also, I understand your concerns about the DT bindings / usage, but
+speaking about the driver ;-)
+The BT is a serial driver attached to a serial bus. There only two
+options to bind a serial driver: OF and ACPI. But maybe we should add
+something like serial_device_id and let serials have internal IDs.
+It sounded strange in the beginning, but now I think it is a correct way
+to go.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Yousef-Alhouseen/misc-fastrpc-release-pending-invoke-refs-on-rpmsg-removal/20260807-130030
-base:   char-misc/char-misc-testing
-patch link:    https://lore.kernel.org/r/20260624192700.5388-1-alhouseenyousef%40gmail.com
-patch subject: [PATCH] misc: fastrpc: release pending invoke refs on rpmsg removal
-config: alpha-allmodconfig (https://download.01.org/0day-ci/archive/20260807/202608071727.E43MoFeK-lkp@intel.com/config)
-compiler: alpha-linux-gcc (GCC) 16.1.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260807/202608071727.E43MoFeK-lkp@intel.com/reproduce)
-
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202608071727.E43MoFeK-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
-   drivers/misc/fastrpc.c: In function 'fastrpc_notify_context':
->> drivers/misc/fastrpc.c:2661:16: error: 'struct fastrpc_invoke_ctx' has no member named 'sent'
-    2661 |         if (ctx->sent && !ctx->completed) {
-         |                ^~
->> drivers/misc/fastrpc.c:2661:30: error: 'struct fastrpc_invoke_ctx' has no member named 'completed'
-    2661 |         if (ctx->sent && !ctx->completed) {
-         |                              ^~
-   drivers/misc/fastrpc.c:2662:20: error: 'struct fastrpc_invoke_ctx' has no member named 'completed'
-    2662 |                 ctx->completed = true;
-         |                    ^~
-
-
-vim +2661 drivers/misc/fastrpc.c
-
-  2656	
-  2657	static int fastrpc_notify_context(int id, void *ptr, void *data)
-  2658	{
-  2659		struct fastrpc_invoke_ctx *ctx = ptr;
-  2660	
-> 2661		if (ctx->sent && !ctx->completed) {
-  2662			ctx->completed = true;
-  2663			schedule_work(&ctx->put_work);
-  2664		}
-  2665	
-  2666		ctx->retval = -EPIPE;
-  2667		complete(&ctx->work);
-  2668	
-  2669		return 0;
-  2670	}
-  2671	
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+-- 
+With best wishes
+Dmitry
