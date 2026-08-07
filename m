@@ -1,184 +1,160 @@
-Received: from mail-pg1-f175.google.com (mail-pg1-f175.google.com [209.85.215.175])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C5DC43CE4B
-	for <linux-arm-msm@vger.kernel.org>; Fri,  7 Aug 2026 05:34:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.175
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88AC743C067;
+	Fri,  7 Aug 2026 05:37:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786080870; cv=none; b=R4ZGNHWqJLvGneqP0XdJr7bGA6vH9TAW6QyAWUSNFCJ2tnnMQH6jv+RGIQaaG5TIfo8ENt24uPgBD2qc533Pk201NMJl8C7AaDQOhq9judtoZXi5wh8S4aKZfG9mBkz8moknqp9fhIaNUFWdHp9x3NfUabn269b367Yf2XQKruo=
+	t=1786081027; cv=none; b=KQFfZLnvQIJh0i81d01FKlz9tker/eOya1MvgM8AFo4mwQoP1NLYOZ/mC5IPs1+o3x0uCfxd775TJCGGe8f+JH1fkprdqAVYZEW9P5B/Nrtp5E+5d+2nIGXG25MWoPuKZD/HYOfW0msOX344oOanl3tzvgVGfJ5eHEZ85R0hFbE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786080870; c=relaxed/simple;
-	bh=U+1cvYLKLhwQlrOJDQVXIhS3ygcM9Ohp2tMSw+ydI9E=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Q3n5Uo7oq/nZAWACdyyS9hgejMlSgY0DKX8Yz4Fi5WYD69pnduFto2BIhUjjxabVYv9l1GKHELcqhZny/KjoxHhVSsZLXUEN6Q01CVzr51JRvFN0pIH2d4UA9cxxEJzkArL9xjZje7szOyekfPL4O+QwLg0oH+oxRfRfebcuSV4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=TzeVY/9t; arc=none smtp.client-ip=209.85.215.175
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1786081027; c=relaxed/simple;
+	bh=Ez/5K7/jrJggiY0/EKwPUVkvWoPb5Itr2Aurgjqhwlw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=empF4jwj20FgTu6GSLfCOHUYIck5KvyZEvp48uJNDL5u3OFKO5z9Ct5Uf/GX0FN+sLrDwpdyEB7eEJWl1hyUs6Bv62nznDiXJiOXaxaH+lEhV8bF90jJf5RxWG70FE4rC4OmVoL0HYEcz4zgfMa4Utmc894yr8x4BbEw5uYl304=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jf/0HPJ0; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="TzeVY/9t"
-Received: by mail-pg1-f175.google.com with SMTP id 41be03b00d2f7-ca957432c7fso2827212a12.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 22:34:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786080864; x=1786685664; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=HBs3P2zso3dU/QxL+eeX0ta5hWsWkwiBmUnjPdkOhrw=;
-        b=TzeVY/9to9PbZcmeOcqtmGbl1I/dIK7vzPW7l7nr9f9Hly9dq8n6OoBBOUrRkMyifY
-         b/w/gHRAnwv3ZwYcoaE0VtiMqimmdizqwxyDZBDA4zhutHSdgPFUwWyHGYv6DhZiqbDW
-         xOPcbCTBl7ECq9DPevGJRlpYTqiDdlsoV7pbD59GjeTsZhtHObwl4ks6sUMdB4+EVwrh
-         mk8+uuDhYD5bjCKC3rEKGUD2LAwLldF5RzhvZC3a7p9U/5OLp109MxMN1qLW/S+w7YN9
-         C+XrSssUj+h+lpU71EPekgcBJsMp5xleu2ZDe7gUTvXeYHJGEhEagaTbFlnLNrhCnOsE
-         WwTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786080864; x=1786685664;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=HBs3P2zso3dU/QxL+eeX0ta5hWsWkwiBmUnjPdkOhrw=;
-        b=GQf4/gQo30SK7+3s59RLnSgRslZyXG+pklUuk6rftoysUg30zYgrnH0upJ7q1K9RN1
-         dZlgh03/0vboxsxVDx6oTrUlDtejMh28dbB9v5PgqEEumACfXJB2lhod8zSLIMAfZzW1
-         xZzSKCKZ/ZlbARvz2J+qUkKD1c+7UfbWQOc1D9E3brm2h0c6HjDPbs1wcCuwjeUhuGu4
-         h3wNzLO5qLr4MJob+XWIY9Ej+ukT8c4oeKBt84x1qCyQotXJ7gjBRcG0zvjws65XBKkJ
-         NstgwHoq2PbrRX/fwp9EKRP9N9AiKLgODGxxz+90OUSEPPNeft1iQoovTyyznxsH/Hut
-         dipA==
-X-Forwarded-Encrypted: i=1; AHgh+RqGOr6/HSzTBQS/8XJRGYn2cZZywHWa6c65h7sREkkeFnGjQ2ET9R3a1I9n2xsiyWypIdEzY15QWHxOsKrU@vger.kernel.org
-X-Gm-Message-State: AOJu0YzpYDM4QB5ImZuDbQNFRsvasyfzKEXnv82n8nRerJ9g7hvQpd/u
-	ln2mJ8dPhd0DABUFIGrhMe5t96t2+bcAOx4vGJC/+R0qrrT2RpQkLFbj
-X-Gm-Gg: AR+sD10h07AJ1VoschG13xS2kX/UkmiPCWTKKGZunDkdMXs9aDTCObrYCiM3c2QZDvM
-	pIOsKG69Jt9Wum3rNRw128Otj54ST/q6/118ELvPUzSEHOyUox3W2cMvo8GWkOeD0DulISNyeor
-	Wfh6dvE9I2IAubj8oo04gCnpHDNzhWBp0+r1xA1G32fHDC6NNirrqS/RJGHjBY0wtDYY4ITHoi3
-	dxA5N5PfjGB4QPUmYMtOBnlZRuumjcs3o5TARzubc8AswgtDovF2MONv1ASJf0C0TklyK46JSom
-	qOIxNurJuJF2AwuyFz2WigHzgvQknvbxBR8teGFVR8CSQhdLTOIGJMPKfb+pNgmPEd14rA9WAhv
-	IATjJSRKIPDqEYf476VsBDzJFxEwsXe2XnIbf2JKGzxk7DAMAu9tH/hqoLSaSG6PlXulL+xgfw5
-	tyFSIAj8dZsr5cqjU8RQMpaVV7CYcIGgTX5QWn03pnr1BRuGR46Pr59uXdWKmuGldvauEfi8d7T
-	CcMNkv2ojQL5+NJCVBHNfFEn25f4V8yKr+NbQ==
-X-Received: by 2002:a05:6a21:9985:b0:3c3:bbe6:95c9 with SMTP id adf61e73a8af0-3cb85e72ec2mr22578898637.16.1786080864616;
-        Thu, 06 Aug 2026 22:34:24 -0700 (PDT)
-Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cbe8f35b0c3sm102504a12.15.2026.08.06.22.34.22
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 06 Aug 2026 22:34:23 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <8e5cb916-412d-41a9-8feb-0c051c9847d2@roeck-us.net>
-Date: Thu, 6 Aug 2026 22:34:21 -0700
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jf/0HPJ0"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A70E1F000E9;
+	Fri,  7 Aug 2026 05:37:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786081026;
+	bh=HB5aqcmGd7vTTi3lCtzE6edzs6AuoLjdUxI6PXwVmys=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=jf/0HPJ0l3zEoezvTQlZrfBoN01AY5ac9/ScqiwhLItZleoc1PxKMDiU7ESwrxYOq
+	 0IyQXBjUGHt5fB7yo5PRBesED7AY9IQ4pTcKR9XWcvFPzI9qDtmgT7QLJqIyPb1H0P
+	 Qi76Vm0GX7DYJrP7dh6s5t48WiGz1Ogc2gm+Ei9RCmbrHg7GHyqdMBUUr91zGfDFof
+	 v1s5q+/tpvfFU3hdqfWuYkAht0lC37eI7DPIpbTV0B07SvthsIpFceXrZcQ+H66vEl
+	 KMK3BNC/sKTvQwfiZ6yjjlSOXcRpn5VxTtEtbzDFOArJukWMQgYcEpa1huYMxav+rn
+	 /I4Q4jLPYgkjw==
+Date: Fri, 7 Aug 2026 07:36:54 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+Cc: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, 
+	mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Alex Williamson <alex@shazbot.org>
+Subject: Re: [PATCH] bus: mhi: host: Flush the posted write after writing to
+ MHI_SOC_RESET_REQ_OFFSET
+Message-ID: <csu2b6vatruvk2x6s6besbh3xy4icchivhxh4c7pef3ia4wwba@5yrilfeghx7m>
+References: <20260623145134.43976-1-manivannan.sadhasivam@oss.qualcomm.com>
+ <cc4bb54c-fee1-4478-af17-8b48ed379210@oss.qualcomm.com>
+ <af5gbjoe5eswhnofzsvvknt7dfqbgyfs4kjkwzt6viivb5vwte@wjs7pg54szz7>
+ <6e2fda2f-ce14-4f81-b848-9fee4e6a221a@oss.qualcomm.com>
+ <jmyr2afsiqml7pkz6jcty6gsgq6kchfkwebj4dkqtkutd2zafk@iifzpmhngrrf>
+ <3ce8f794-3582-4d69-8b7d-1f7c10689a0b@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] watchdog: pretimeout: Protect governor access with
- RCU for NMI safety
-To: Doug Anderson <dianders@chromium.org>, mrungta@google.com
-Cc: Wim Van Sebroeck <wim@linux-watchdog.org>,
- Thomas Gleixner <tglx@kernel.org>, linux-watchdog@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- "Kirill A. Shutemov" <kas@kernel.org>
-References: <20260730-qcom-wdt-nmi-series-v1-0-3aa86d162914@google.com>
- <20260730-qcom-wdt-nmi-series-v1-1-3aa86d162914@google.com>
- <CAD=FV=V_7RLjcAtKk5MHiABj1rA2CTkPw2UY2gJnVzH=3Gbp5Q@mail.gmail.com>
-Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- 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
- np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <CAD=FV=V_7RLjcAtKk5MHiABj1rA2CTkPw2UY2gJnVzH=3Gbp5Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <3ce8f794-3582-4d69-8b7d-1f7c10689a0b@oss.qualcomm.com>
 
-On 7/30/26 14:46, Doug Anderson wrote:
-> Hi,
+On Tue, Aug 04, 2026 at 10:51:35AM -0600, Jeff Hugo wrote:
+> On 8/3/2026 10:57 AM, Manivannan Sadhasivam wrote:
+> > On Mon, Aug 03, 2026 at 09:57:47AM -0600, Jeff Hugo wrote:
+> > > On 7/29/2026 11:19 PM, Manivannan Sadhasivam wrote:
+> > > > On Wed, Jul 29, 2026 at 03:07:00PM -0600, Jeff Hugo wrote:
+> > > > > On 6/23/2026 8:51 AM, Manivannan Sadhasivam wrote:
+> > > > > > mhi_soc_reset() tries to reset the device by writing to the
+> > > > > > MHI_SOC_RESET_REQ_OFFSET register. But it doesn't do a read-back to ensure
+> > > > > > that the write gets flushed to the device before returning to the caller.
+> > > > > > 
+> > > > > > This may lead to the delay (if implemented) on the caller to be
+> > > > > > insufficient, if the posted write doesn't reach the device before the
+> > > > > > delay.
+> > > > > 
+> > > > > Interesting.  Is the delay tight enough that a few ms will possibly blow it?
+> > > > > Seems like a poorly defined delay.  All the devices I'm familiar with take
+> > > > > multiple seconds to boot (with some variability due to ddr training and
+> > > > > thermal constraints), and if the reset triggers a crash dump, then its
+> > > > > easily tens of seconds.
+> > > > > 
+> > > > 
+> > > > Which delay you are referring to? RDDM delay which is just 2ms? Yeah, that seems
+> > > > questionable. But this function itself doesn't implement any delay. So your
+> > > > comment was somewhat confusing.
+> > > 
+> > > The delay at the caller of the API referenced by the commit text - "This may
+> > > lead to the delay on the caller to be insufficient"
+> > > 
+> > > I looked at the thread referenced by this patch via the closes tag, and
+> > > while I can follow the virtualization flow, I didn't get a good view on the
+> > > specifics.
+> > > 
+> > > > > Regardless, since this reset will either kill the pcie link, or disconnect
+> > > > > the SoC from the link for a time,
+> > > > 
+> > > > No, this will not reset the PCIe link AFAIK. PERST separation logic available in
+> > > > the Endpoint should make sure the PCIe link is active while the SoC is
+> > > > undergoing the reset. Otherwise, if the host tries to access the device config
+> > > > space before the device is ready, it will blow up.
+> > > 
+> > > Reset separation (PERST separation is one part of) is not always enabled.
+> > > PBL won't enable it as it requires loading the reset sequences to the PMIC,
+> > > which is outside the scope of ROM.  So, if you have a non-flash boot device,
+> > > or a flash boot device that has a non-provisioned/otherwise corrupt flash,
+> > > the EP may be sitting in PBL from cold boot without reset separation
+> > > enabled.  If the EP is then passed to a VM per the related thread, a reset
+> > > will occur, which will take the link down.
+> > > 
+> > > Also, if I recall correctly, automotive products do not enable reset
+> > > separation at all for ASIL reasons.
+> > > 
+> > 
+> > Ok, I was not aware of these scenarios.
+> > 
+> > > If the link is down, the upstream component of the EP should complete the
+> > > read with an error, not cause the host to blow up.
+> > 
+> > If the PCIe link is down and if the host tries to read the Endpoint config
+> > space or BAR, most of the PCIe RC integrations in ARM64 platforms return AXI
+> > error instead of the typical 'all-one' response and that causes 'Synchronous
+> > Abort' on the host. And that's what I meant as 'blow up' as it will crash the
+> > host kernel.
 > 
-> On Thu, Jul 30, 2026 at 2:33 PM Mayank Rungta via B4 Relay
-> <devnull+mrungta.google.com@kernel.org> wrote:
->>
->> From: Mayank Rungta <mrungta@google.com>
->>
->> Currently, watchdog_notify_pretimeout() acquires pretimeout_lock using
->> spin_lock_irqsave() to safely dereference wdd->gov before invoking the
->> pretimeout callback.
->>
->> On architectures supporting pseudo-NMIs (ARM64 GICv3), watchdog drivers
->> may register their pretimeout warning interrupt (bark) as an NMI.
->> Because spin_lock_irqsave() disables regular interrupts but leaves NMIs
->> unmasked, if a pretimeout NMI fires while pretimeout_lock is already
->> held by normal process context, attempting to re-acquire pretimeout_lock
->> triggers an unrecoverable deadlock.
->>
->> To make pretimeout notifications completely safe to execute from NMI,
->> convert read access to wdd->gov inside watchdog_notify_pretimeout() from
->> a spinlock to lockless RCU. Use rcu_assign_pointer() when modifying
->> wdd->gov and invoke synchronize_rcu() during governor unregister and
->> pretimeout unregister routines.
->>
->> Signed-off-by: Mayank Rungta <mrungta@google.com>
->> ---
->>   drivers/watchdog/watchdog_pretimeout.c | 47 +++++++++++++++++++---------------
->>   include/linux/watchdog.h               |  2 +-
->>   2 files changed, 27 insertions(+), 22 deletions(-)
-> 
-> I pre-reviewed this for Mayank. I'm not an RCU expert, but this looks
-> right based on my understanding. My AI was also happy with it. ;-)
+> This feels like a PCIe spec violation, or at-least undesired behavior from
+> the user perspective.  Maybe a DoS attack vector?  I assume you are
+> specifically talking about Qualcomm MSM Arm64 platforms, and not the entire
+> Arm64 ecosystem?  I don't recall seeing this in the Arm64 server space.
 > 
 
-Sashiko doesn't like it, claiming that some "const" are missing. And, indeed,
-after applying it, I get:
+This is commonly seen in ARM platforms, mostly in Embedded space, but it is not
+an ARM problem though. On these platforms, they don't properly synthesize the
+completion timeout and end up triggering Synchronous External Abort (SError),
+which the kernel treats it as a panic condition.
 
-drivers/watchdog/watchdog_pretimeout.c: In function ‘watchdog_pretimeout_governor_get’:
-drivers/watchdog/watchdog_pretimeout.c:75:13: error: assignment discards ‘const’ qualifier from pointer target type [-Werror=discarded-qualifiers]
-    75 |         gov = rcu_dereference(wdd->gov);
-       |             ^
-drivers/watchdog/watchdog_pretimeout.c: In function ‘watchdog_notify_pretimeout’:
-drivers/watchdog/watchdog_pretimeout.c:110:13: error: assignment discards ‘const’ qualifier from pointer target type [-Werror=discarded-qualifiers]
-   110 |         gov = rcu_dereference(wdd->gov);
-       |             ^
+There are drivers that try to mitigate this condition, but rather in a racy way
+as there is no proper solution available in the kernel:
 
-Please fix.
+$ git grep -rl SError drivers/pci
+drivers/pci/controller/dwc/pci-keystone.c
+drivers/pci/controller/dwc/pcie-designware-host.c
+drivers/pci/controller/dwc/pcie-rcar-gen4.c
+drivers/pci/controller/pci-aardvark.c
 
-Thanks,
-Guenter
+> Do we need to talk to Joe about this?
+> 
 
+This is a known limitation and he should be knowing this by now.
+
+> > Anyhow, the motivation of this patch is to ensure that the posted write gets
+> > flashed to the device before the delay. But I'm not sure on how one should
+> > address the concern you raised on waiting till the Endpoint reboots.
+> 
+> Sadly I think the user implementing the delay will need to be aware of the
+> specific device they are using, and the likely required delay to account for
+> the various scenarios that device implements.  I don't think we really have
+> the infrastructure to make this universal, and if we did, I'm not sure a
+> blanket "all MHI devices reboot in X time" is going to work in the long
+> term.
+
+Hmm, then let's just keep things as is and increase the timeout when someone
+complains :/
+
+- Mani
+
+-- 
+மணிவண்ணன் சதாசிவம்
