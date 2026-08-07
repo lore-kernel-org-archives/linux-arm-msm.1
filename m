@@ -1,63 +1,53 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from out-2z4y-a131.jellyfish.systems (out-2z4y-a131.jellyfish.systems [198.54.127.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01E4C4B0494;
-	Fri,  7 Aug 2026 01:25:08 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5DF933B3C1F
+	for <linux-arm-msm@vger.kernel.org>; Fri,  7 Aug 2026 02:10:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.54.127.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786065910; cv=none; b=KaHmn18I/L9HOkESf1aOSVK/nbDRmcki/FOzfUeDU5navaQ37P8ETFJbvz09igkHOlIxu+MdK3rH665efe/jLbhP2OUySuwenMn36KiYC6KSN13POoKEnyletDC6tRPwqvTGzYYoTnb3GGMGyBYjapmnLPk+jkON6HCM29jPVKs=
+	t=1786068660; cv=none; b=VEWhqJL1GKWgBOAqubCqQynqnJ2PcKJoyHrOLSrlOufIW/nP81w/kzmMnSOuRsZfF/mYUKjk8b4iJhjnqFSNmpM+u+zgE2+dmw4PMsw5RtuFFr8a+FrgMcEzRXmYUl/WHa7ZUNWaeVSuSB8zv7dnJLtvdteDmaXfTeK2moIUHeE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786065910; c=relaxed/simple;
-	bh=bnWd9LrDId9Pwik63OJcEDNiVrd208Zmx7mpbHmSQLI=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=jzcQr5GbWiUfm3dd2froKCfqd9AMtnobJ8KBQWrbQjjSu2jFZDu0hlshwHDNoJUo1QLtQP8bX4JQMRUO4+ge5sQp217GJ0TskFj515zeas8g6qPk1N9ideuzAz5z7Hun/PDJYjqnmScTLc3U4vo6cnao5AnkUatevibq7ttROP8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=EMCJSVr1; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="EMCJSVr1"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6770Gftj4063303;
-	Fri, 7 Aug 2026 01:24:57 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=Ud/w5WdlhmCptNNwsOoZb7tMUctCGHHeXYd
-	IRJasy/Q=; b=EMCJSVr11qO+605av+n0hGxzCyxKDiWwHVkD3F1qTMdUZ60WBQU
-	vDuF82nfbBMpRlSIKzaC4aVMRmB5KgtfG3xkwBleP7BvRa0tnuAsXYtIenKt/WOm
-	KqHUSVulFOAQLtYvxHue9t/8DhMuGuWoIGigBEvrFoSAgcnSmyrjKG/DExI8t01y
-	f5qE69p+Zv4lOdxrcgCWk9yRg+8SQM+9QWjnfziNCGo5+WO4BKhGliuDe53D9lR/
-	+w1RPn1iKueDwtO7nG0zvjqGAXqESbgaA8XAJVW7xJtJtR7Y+OcxL+duz27DU+d0
-	4SLCYmzY5lFWrULzHXzwakopeQ1X1uA1NGA==
-Received: from aptaippmta01.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvy6h9h80-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 07 Aug 2026 01:24:56 +0000 (GMT)
-Received: from pps.filterd (APTAIPPMTA01.qualcomm.com [127.0.0.1])
-	by APTAIPPMTA01.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTP id 6771Os8Q024372;
-	Fri, 7 Aug 2026 01:24:54 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by APTAIPPMTA01.qualcomm.com (PPS) with ESMTPS id 4fs9vknts5-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 07 Aug 2026 01:24:54 +0000 (GMT)
-Received: from APTAIPPMTA01.qualcomm.com (APTAIPPMTA01.qualcomm.com [127.0.0.1])
-	by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 6771OsM2024364;
-	Fri, 7 Aug 2026 01:24:54 GMT
-Received: from cse-cd01-lnx.ap.qualcomm.com (smtphost-taiwan.qualcomm.com [10.249.136.33])
-	by APTAIPPMTA01.qualcomm.com (PPS) with ESMTPS id 6771OsIB024360
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Fri, 07 Aug 2026 01:24:54 +0000 (GMT)
-Received: by cse-cd01-lnx.ap.qualcomm.com (Postfix, from userid 4531182)
-	id D83D220C26; Fri,  7 Aug 2026 09:24:52 +0800 (CST)
-From: Le Qi <le.qi@oss.qualcomm.com>
-To: Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, kernel@oss.qualcomm.com,
-        mohammad.rafi.shaik@oss.qualcomm.com, Le Qi <le.qi@oss.qualcomm.com>
-Subject: [PATCH] ASoC: qcom: sc8280xp: configure codec sysclk for QCS615
-Date: Fri,  7 Aug 2026 09:24:50 +0800
-Message-Id: <20260807012450.1038180-1-le.qi@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+	s=arc-20240116; t=1786068660; c=relaxed/simple;
+	bh=duP7eNodQ0s6P7VPqRXVuKyyEP5Z86+zjbz2+zrtetg=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=hGbD5/WigofUsSqRlWVbLpf8B8yDasdihEUuee02cROKZH1wEItxZtiFaODgHCL5RcbJJCMOb66IdH+cm/A3LWauirbPiGC5IXAmxEsb2kmTKFCP6n6LxqeHiGgBN3Uh0YFuWRmgazmp2U+Ch3PRmL1xU61owNcSVxvJnSEs1Zk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net; spf=pass smtp.mailfrom=catcrafts.net; arc=none smtp.client-ip=198.54.127.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=catcrafts.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=catcrafts.net
+Received: from mail.privateemail.com (unknown [87.215.145.39])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by mail.privateemail.com (Postfix) with ESMTPSA id 4hGSL047Prz2x9B;
+	Fri, 07 Aug 2026 02:10:48 +0000 (UTC)
+From: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
+To: David Heidelberg <david@ixit.cz>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>
+Cc: Andrew Lunn <andrew+netdev@lunn.ch>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Conor Dooley <conor.dooley@microchip.com>,
+	"David S . Miller" <davem@davemloft.net>,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Paolo Abeni <pabeni@redhat.com>,
+	Rob Herring <robh@kernel.org>,
+	Luca Weiss <luca.weiss@fairphone.com>,
+	devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	netdev@vger.kernel.org,
+	oe-linux-nfc@lists.linux.dev,
+	Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
+Subject: [PATCH v4 1/6] nfc: s3fwrn5: drop of_match_ptr() from the I2C driver
+Date: Fri,  7 Aug 2026 04:09:56 +0200
+Message-ID: <20260807021001.239389-2-jorijnvdgraaf@catcrafts.net>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260807021001.239389-1-jorijnvdgraaf@catcrafts.net>
+References: <20260807021001.239389-1-jorijnvdgraaf@catcrafts.net>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -65,77 +55,35 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Authority-Analysis: v=2.4 cv=G60s1dk5 c=1 sm=1 tr=0 ts=6a7533e8 cx=c_pps
- a=nuhDOHQX5FNHPW3J6Bj6AA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=Um2Pa8k9VHT-vaBCBUpS:22 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8
- a=VgxNshHlH55NMODlW1cA:9
-X-Proofpoint-GUID: LbbXvasDcKw2On3jWFfHql4wO7k0RYb1
-X-Proofpoint-ORIG-GUID: LbbXvasDcKw2On3jWFfHql4wO7k0RYb1
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDAwNyBTYWx0ZWRfX5Uotuhu20Mdi
- 52fH1/mdeNG48ph0h2zxtYjIjWQBQPgznqoDDb6NjPxYofurj/DWdeiR7Fdjy+/Q4eRqKSQIB3F
- ePcfYVisHymy9WtvD4Sb6GM12f/N8Pk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDAwNyBTYWx0ZWRfX/B/ophE/tFIr
- UJhzL2jkq+yqpOnupdtcO51Oqq4DiGgNZ5N6GcZ1M+B6Vqd3YF9wcN8+gLDm9LtYFaYTnQIfga0
- NZw5dZ2xiUg3vOfhyeiRq97Z3vWenDOUfF/nDG3Siqj8qIU+nLeGZL7+oKCl80wtOOBhznFW2KI
- UzzRDpm+64Uic1LuPIzcD6Ws7VuV7HPS/vtZFdeWJ/LtfixG2Sh+FY/6zaxZ+XAG6k7y4aR0+he
- 9zlbeiE6oSrot3KWEE+gQOrlP8TTE4a7Ub1QKIpGjxYsfg0/ADeOvIWfoMmIZTwFQDj0LaunKrl
- aHK3K7vVGTekIHLf3rnqCs9IoyWYNhxT0UOPL5MwyGH5tKBWueZiaZnpl2kavgtkrcVGdgj/gAW
- +pxhFBXdr0xuCCT+8ysvtGkcxgkMQNIRCoDpK0wATo8plPZWAcfo1VdDmYGoVYhIHUOuQam5IMn
- YuUktn0yiNtNNom5Rog==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-07_01,2026-08-06_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0 adultscore=0
- spamscore=0 clxscore=1011 phishscore=0 suspectscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608070007
+X-Envelope-From: jorijnvdgraaf@catcrafts.net
 
-Continuous high-amplitude noise could occur in the DA7213 microphone
-capture path after a Bluetooth out-of-range/reset event followed by
-reconnection. The noise was present in both the raw ALSA capture and
-PipeWire input, confirming that it originated before Bluetooth
-encoding.
+Since commit 9739e07fdb29 ("nfc: Drop __maybe_unused from of_device_id
+tables") the OF match table relies on its MODULE_DEVICE_TABLE()
+reference to count as used, while of_match_ptr() still discards the
+.of_match_table reference on !CONFIG_OF builds. Drop of_match_ptr() so
+every configuration uses the same code; the S3NRN4V support added later
+in this series carries its variant selector in this table's match data.
 
-The codec already obtains and enables MCLK through its DT clock and
-bias-level handling. However, the machine driver did not explicitly
-configure the codec sysclk during hw_params(). Enable
-codec_sysclk_set for QCS615 so that the DA7213 clock source and rate
-are configured before the codec power-up sequence.
-
-Verified on QCS615 Talos with repeated Bluetooth disconnect and
-reconnect cycles. The noise was no longer reproducible.
-
-Signed-off-by: Le Qi <le.qi@oss.qualcomm.com>
+Assisted-by: Claude:claude-fable-5
+Assisted-by: Claude:claude-opus-5
+Signed-off-by: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>
 ---
-This patch depends on:
+ drivers/nfc/s3fwrn5/i2c.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-ASoC: qcom: sc8280xp: enhance machine driver for board-specific config
-
-Link: https://lore.kernel.org/r/20260727151230.408122-4-mohammad.rafi.shaik@oss.qualcomm.com/
-
-The prerequisite patch introduces qcs615_priv_data and the
-codec_sysclk_set field used by this change. It has not yet been merged
-into linux-next.
-
- sound/soc/qcom/sc8280xp.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/sound/soc/qcom/sc8280xp.c b/sound/soc/qcom/sc8280xp.c
-index cf272d0612fe..8d949e4dec5b 100644
---- a/sound/soc/qcom/sc8280xp.c
-+++ b/sound/soc/qcom/sc8280xp.c
-@@ -306,6 +306,7 @@ static const struct snd_soc_common qcs615_priv_data = {
- 	.driver_name = "qcs615",
- 	.dapm_widgets = sc8280xp_dapm_widgets,
- 	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+	.codec_sysclk_set = true,
- };
- 
- static const struct snd_soc_common qcm6490_priv_data = {
+diff --git a/drivers/nfc/s3fwrn5/i2c.c b/drivers/nfc/s3fwrn5/i2c.c
+index 4ba762611711..cb73993446e0 100644
+--- a/drivers/nfc/s3fwrn5/i2c.c
++++ b/drivers/nfc/s3fwrn5/i2c.c
+@@ -219,7 +219,7 @@ MODULE_DEVICE_TABLE(of, of_s3fwrn5_i2c_match);
+ static struct i2c_driver s3fwrn5_i2c_driver = {
+ 	.driver = {
+ 		.name = S3FWRN5_I2C_DRIVER_NAME,
+-		.of_match_table = of_match_ptr(of_s3fwrn5_i2c_match),
++		.of_match_table = of_s3fwrn5_i2c_match,
+ 	},
+ 	.probe = s3fwrn5_i2c_probe,
+ 	.remove = s3fwrn5_i2c_remove,
 -- 
-2.34.1
+2.55.0
 
