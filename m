@@ -1,160 +1,175 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88AC743C067;
-	Fri,  7 Aug 2026 05:37:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84216383981
+	for <linux-arm-msm@vger.kernel.org>; Fri,  7 Aug 2026 05:46:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786081027; cv=none; b=KQFfZLnvQIJh0i81d01FKlz9tker/eOya1MvgM8AFo4mwQoP1NLYOZ/mC5IPs1+o3x0uCfxd775TJCGGe8f+JH1fkprdqAVYZEW9P5B/Nrtp5E+5d+2nIGXG25MWoPuKZD/HYOfW0msOX344oOanl3tzvgVGfJ5eHEZ85R0hFbE=
+	t=1786081602; cv=none; b=BM9AU6EYCsj3CMwd5LVLw0WmcHAH68g7C6ZyI3UDNMf/WjqVfJZVbGN/W0cOqS9SQE1bN2kgLdHfylM7hfQrH6qbADR1Mdxs6a54wThdyP2W5WqsL55iTlnTrr5J76kGFSCHI4fPmbOW+vvo7na7yoP0erjd6xi4WgIm8KRoGB4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786081027; c=relaxed/simple;
-	bh=Ez/5K7/jrJggiY0/EKwPUVkvWoPb5Itr2Aurgjqhwlw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=empF4jwj20FgTu6GSLfCOHUYIck5KvyZEvp48uJNDL5u3OFKO5z9Ct5Uf/GX0FN+sLrDwpdyEB7eEJWl1hyUs6Bv62nznDiXJiOXaxaH+lEhV8bF90jJf5RxWG70FE4rC4OmVoL0HYEcz4zgfMa4Utmc894yr8x4BbEw5uYl304=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jf/0HPJ0; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786081602; c=relaxed/simple;
+	bh=9P8L6zktfOKz3EL8KfCBv9cGKTCt/+m8qNRUsjtZNgE=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=d2YLPxuvsunX+upjutp61fbBRBndG8mDRgvxD0YkElQkF9kuqyAM634Vq9m/rS7fKi+H2CoDH+UkROw6cV43oIRCs7LOn/iOzvGJQ0t2785o6U1ATN33XHPSOSAe+nDzbSwzRKfnOeqwPa6bFO6+WCMFeb8Z8uySktXWgT8pdYI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PaiFLxjN; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bFZ88bnw; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jf/0HPJ0"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A70E1F000E9;
-	Fri,  7 Aug 2026 05:37:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786081026;
-	bh=HB5aqcmGd7vTTi3lCtzE6edzs6AuoLjdUxI6PXwVmys=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=jf/0HPJ0l3zEoezvTQlZrfBoN01AY5ac9/ScqiwhLItZleoc1PxKMDiU7ESwrxYOq
-	 0IyQXBjUGHt5fB7yo5PRBesED7AY9IQ4pTcKR9XWcvFPzI9qDtmgT7QLJqIyPb1H0P
-	 Qi76Vm0GX7DYJrP7dh6s5t48WiGz1Ogc2gm+Ei9RCmbrHg7GHyqdMBUUr91zGfDFof
-	 v1s5q+/tpvfFU3hdqfWuYkAht0lC37eI7DPIpbTV0B07SvthsIpFceXrZcQ+H66vEl
-	 KMK3BNC/sKTvQwfiZ6yjjlSOXcRpn5VxTtEtbzDFOArJukWMQgYcEpa1huYMxav+rn
-	 /I4Q4jLPYgkjw==
-Date: Fri, 7 Aug 2026 07:36:54 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
-Cc: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, 
-	mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Alex Williamson <alex@shazbot.org>
-Subject: Re: [PATCH] bus: mhi: host: Flush the posted write after writing to
- MHI_SOC_RESET_REQ_OFFSET
-Message-ID: <csu2b6vatruvk2x6s6besbh3xy4icchivhxh4c7pef3ia4wwba@5yrilfeghx7m>
-References: <20260623145134.43976-1-manivannan.sadhasivam@oss.qualcomm.com>
- <cc4bb54c-fee1-4478-af17-8b48ed379210@oss.qualcomm.com>
- <af5gbjoe5eswhnofzsvvknt7dfqbgyfs4kjkwzt6viivb5vwte@wjs7pg54szz7>
- <6e2fda2f-ce14-4f81-b848-9fee4e6a221a@oss.qualcomm.com>
- <jmyr2afsiqml7pkz6jcty6gsgq6kchfkwebj4dkqtkutd2zafk@iifzpmhngrrf>
- <3ce8f794-3582-4d69-8b7d-1f7c10689a0b@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PaiFLxjN";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bFZ88bnw"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6770Ggkx2802732
+	for <linux-arm-msm@vger.kernel.org>; Fri, 7 Aug 2026 05:46:41 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	baY+tDm8o2ZpImxBsWJ9XvMvFUpL5jNCZK22pWwI8qg=; b=PaiFLxjNd9nfluAA
+	hB2y4N/zJCI/Mu0sLyNFe7ibRSJWJP8rRTbo+RHYOboz9T3ln0omY6hQXhn51R0V
+	ogX9vi6Nz2Up8NBRz0g54ftog92Ui35Z29dH6SQRiCe6gZlL8+ClUDpMRRFKWV1Z
+	334+HbP8dOCIeZLkIJG3dOWpW+M6FQnJ7+JgFz9MOmKfP83xqskSLmiAye6WFABF
+	1ovWZxMxnVIpsAlr2ong06KbUgyvmT4ikqVes48ZlSJfLU2GAHMiTk9/apXI/t8B
+	vDeNCTseP+yzy9nsvummYjhkJ8QUIkv5ZoVhx5C4wL6KlECmmiqa3OCwZs7AWNSP
+	spPkqg==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fvy6htbde-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 07 Aug 2026 05:46:40 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38e7b87ce77so3581314a91.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 06 Aug 2026 22:46:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786081600; x=1786686400; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=baY+tDm8o2ZpImxBsWJ9XvMvFUpL5jNCZK22pWwI8qg=;
+        b=bFZ88bnwBkM30/iSCYzsv+Fs7HZ3F8ZWxQuPJW2iUDdigDV1Raq+Wn9BjSdEhDc9G4
+         zTVe4JcIINvYO2hBYEgvOQKt8JoC9n15Z58VYHC4WJwnQtDZ7uZEJU4w7JChSSTpof9s
+         G5jgpMWne1/J6xKoQUBYVGcUtJXfaXWExd11gi3uEMs1izIEw9LIBEjsSb48ijR+klFX
+         UIr2RHABigdw2TDTDO/xMBmQQ/TKeQ7thREvHqexSIjv+T0a2itvcEkYvJ0n4+GkG3nG
+         mfCqWIAISw0ZYojLcx/EeGW5mglPcGu8XfT9IZ+VnkHYe1O9b/6ylpVOcJxOmMi3qLKf
+         4Rfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786081600; x=1786686400;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=baY+tDm8o2ZpImxBsWJ9XvMvFUpL5jNCZK22pWwI8qg=;
+        b=ZSyz6rkbOTPCndQSZLJaoZofbWal4H7Bk9z+d2IEcTLhkYQKMtOu/MB3Z3tUt9v8Vu
+         uDTYcpRWsbn6fE7grJO1fvh90OkcTPXBkyrEiDY5j0iaNSzp3XisGrcWAKGRHW6JWWbg
+         7mhg7Hep5A7rZkW5+X2jQpOt7lCw8xHjeGZeby0z4dkY3PP67AsGjW4rPCRaJZIUUMz0
+         ZKYEteipObvYzRXVNNdYjBmKVG1+NlqR55FRyxSXuFpuNKSDgOXI/HUXPDYzUwsXTziz
+         Hsoyx46B6drQmA6HGjHDssAkKWeSEHHyvZTFGRzzoHCZ1Sukkq9780NT1VDhSv8/1PRG
+         3yug==
+X-Forwarded-Encrypted: i=1; AHgh+RqfemIEaouNRaOg3hOEW3tznWKmgHKhrA30X6wr3MMOf4e5TgfBFYR3oH4FJ/JQ+93bM6jJ5i+EACCPggU3@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxyg3tRrkBX+jRSFfrkCEISQaBH6vxtfxR0DebpuTgGpGrYSSOQ
+	/1lsxKLtJ63e5SD1whvhm7qlB9X99gEVUBydtQQVL+L4ErAC5c0ePYAwnUynddv1jo3SZmy60bp
+	LsBLPBt0riGjMe+FD12LeDna/GLHQ21xcpzTHE+9b9XXh2lYhgiqApywMaA040TcTK6wl
+X-Gm-Gg: AR+sD13ZTVn7AGzadgk4uKtN+sOwQ/KUj3CZY4yOBpxVBXsiKqOZBe1pZ0+2Pl7DZGA
+	+OCtY5OODWYHkh/jSQLSJuBF6PvUS5TueI4vJCVbs4tGZBYrK95Oo1mt8n+bs37kvIs2ULRvMJE
+	xDvmzcV5dhmBicSMjjIZ92mDs3Ivx4VJLxsJk6frx67pY89xxTfVFIN8LTfXLz5rHafipb6WZkq
+	RToVNoTno20Sl0IvcA3W0ysbxWwFcYiOu46QuYQQPPfzRr7pzMj5/24JTadw0+aE6ASUKhE0L1c
+	TiYVnd/jy1FvIAw92Mjw7i/JZPgjU+mXt33sywnDghtBJHCvewxxQaWKZXPYL0VrQl+Zz0bPh45
+	ba+CxxXvGZw+Aopk1xQBkQi7SW47smxn4
+X-Received: by 2002:a17:90b:4c03:b0:38e:655c:6516 with SMTP id 98e67ed59e1d1-39261d10765mr1471138a91.0.1786081600086;
+        Thu, 06 Aug 2026 22:46:40 -0700 (PDT)
+X-Received: by 2002:a17:90b:4c03:b0:38e:655c:6516 with SMTP id 98e67ed59e1d1-39261d10765mr1471110a91.0.1786081599673;
+        Thu, 06 Aug 2026 22:46:39 -0700 (PDT)
+Received: from [10.219.57.214] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39085de9c0fsm3310207a91.5.2026.08.06.22.46.35
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 06 Aug 2026 22:46:39 -0700 (PDT)
+Message-ID: <c5984b6e-488f-4946-920a-fdb170ddbb50@oss.qualcomm.com>
+Date: Fri, 7 Aug 2026 11:16:34 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <3ce8f794-3582-4d69-8b7d-1f7c10689a0b@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm64: dts: qcom: agatti: Add memory-region for audio PD
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Bharath Kumar <bkumar@qti.qualcomm.com>,
+        Chenna Kesava Raju <chennak@qti.qualcomm.com>,
+        Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260806-agatti-audio-v1-1-cd6766cc9ccb@oss.qualcomm.com>
+ <xbw4lpvqi2rev6ehypdng2q4mq636553ftcbcfm6wdj3aa7qfu@d6fctcmuxo57>
+Content-Language: en-US
+From: Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
+In-Reply-To: <xbw4lpvqi2rev6ehypdng2q4mq636553ftcbcfm6wdj3aa7qfu@d6fctcmuxo57>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: 4kuDSSZfVO1DiESQxceoz4SQMK7fpKDz
+X-Proofpoint-ORIG-GUID: 4kuDSSZfVO1DiESQxceoz4SQMK7fpKDz
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDA0MCBTYWx0ZWRfX+tSkdoKjMi2V
+ VLxpl2Ipi8uPKNlG16bjMayJXR7/5ldn87RVVZS4IJizzP5WDFpMr3pYIa7rmR0NCbO6dtyY2Xn
+ sfMCAuS56hLMhL59v+fCRww0zUqAatIaswxOJnzZp9GNlxq8/IvCkthl1dFibwaFOKaAumwuQeU
+ htkQ9u3Zf/Rrv2sghITNOTML8U6LU8E/5nCUcz1Z5K3orZQ1vmPlfMfjutHaLUQSaOm6qJcNPsn
+ Ns/iMBc22Rezp71BeNIlPTtbp7qL24c0rYdjJAqqT93aI7hzqc4rmarSzqgAe9EHdbhamYLLQM1
+ 1/UrxmNtKbVwKRL8le9EZlaZCRlsSz39Nt6TtBRWryoF+r1vZ4UHAuPiQxERxAFlY4nMyOWzS74
+ UwmK2wBAdwYH77jtNIXHBO4v8hMgu1SwiMPWtt2DbKC9iaU3bcNnMLyAfF8XO+2kM14UB/CfbLx
+ +QOFn/XmdnZyJXYsR5g==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDA0MCBTYWx0ZWRfX5R2cInxgDvGg
+ gw/OPv4VMrl8xcakpQ0MiXv1xVdinNnGAuMOq7TLtt30QOjtHsJbYWXZAnDHFuQY90s882m1IDS
+ LvcSL36QIS+kbxV6AQFZTo/lrNBzbp0=
+X-Authority-Analysis: v=2.4 cv=bot8wkai c=1 sm=1 tr=0 ts=6a757140 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=l-7BTWVnJWc-EXfm3eQA:9 a=QEXdDO2ut3YA:10
+ a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-07_01,2026-08-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 spamscore=0 clxscore=1015 adultscore=0 suspectscore=0
+ malwarescore=0 impostorscore=0 lowpriorityscore=0 phishscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608070040
 
-On Tue, Aug 04, 2026 at 10:51:35AM -0600, Jeff Hugo wrote:
-> On 8/3/2026 10:57 AM, Manivannan Sadhasivam wrote:
-> > On Mon, Aug 03, 2026 at 09:57:47AM -0600, Jeff Hugo wrote:
-> > > On 7/29/2026 11:19 PM, Manivannan Sadhasivam wrote:
-> > > > On Wed, Jul 29, 2026 at 03:07:00PM -0600, Jeff Hugo wrote:
-> > > > > On 6/23/2026 8:51 AM, Manivannan Sadhasivam wrote:
-> > > > > > mhi_soc_reset() tries to reset the device by writing to the
-> > > > > > MHI_SOC_RESET_REQ_OFFSET register. But it doesn't do a read-back to ensure
-> > > > > > that the write gets flushed to the device before returning to the caller.
-> > > > > > 
-> > > > > > This may lead to the delay (if implemented) on the caller to be
-> > > > > > insufficient, if the posted write doesn't reach the device before the
-> > > > > > delay.
-> > > > > 
-> > > > > Interesting.  Is the delay tight enough that a few ms will possibly blow it?
-> > > > > Seems like a poorly defined delay.  All the devices I'm familiar with take
-> > > > > multiple seconds to boot (with some variability due to ddr training and
-> > > > > thermal constraints), and if the reset triggers a crash dump, then its
-> > > > > easily tens of seconds.
-> > > > > 
-> > > > 
-> > > > Which delay you are referring to? RDDM delay which is just 2ms? Yeah, that seems
-> > > > questionable. But this function itself doesn't implement any delay. So your
-> > > > comment was somewhat confusing.
-> > > 
-> > > The delay at the caller of the API referenced by the commit text - "This may
-> > > lead to the delay on the caller to be insufficient"
-> > > 
-> > > I looked at the thread referenced by this patch via the closes tag, and
-> > > while I can follow the virtualization flow, I didn't get a good view on the
-> > > specifics.
-> > > 
-> > > > > Regardless, since this reset will either kill the pcie link, or disconnect
-> > > > > the SoC from the link for a time,
-> > > > 
-> > > > No, this will not reset the PCIe link AFAIK. PERST separation logic available in
-> > > > the Endpoint should make sure the PCIe link is active while the SoC is
-> > > > undergoing the reset. Otherwise, if the host tries to access the device config
-> > > > space before the device is ready, it will blow up.
-> > > 
-> > > Reset separation (PERST separation is one part of) is not always enabled.
-> > > PBL won't enable it as it requires loading the reset sequences to the PMIC,
-> > > which is outside the scope of ROM.  So, if you have a non-flash boot device,
-> > > or a flash boot device that has a non-provisioned/otherwise corrupt flash,
-> > > the EP may be sitting in PBL from cold boot without reset separation
-> > > enabled.  If the EP is then passed to a VM per the related thread, a reset
-> > > will occur, which will take the link down.
-> > > 
-> > > Also, if I recall correctly, automotive products do not enable reset
-> > > separation at all for ASIL reasons.
-> > > 
-> > 
-> > Ok, I was not aware of these scenarios.
-> > 
-> > > If the link is down, the upstream component of the EP should complete the
-> > > read with an error, not cause the host to blow up.
-> > 
-> > If the PCIe link is down and if the host tries to read the Endpoint config
-> > space or BAR, most of the PCIe RC integrations in ARM64 platforms return AXI
-> > error instead of the typical 'all-one' response and that causes 'Synchronous
-> > Abort' on the host. And that's what I meant as 'blow up' as it will crash the
-> > host kernel.
+
+
+On 8/6/2026 5:42 PM, Dmitry Baryshkov wrote:
+> On Thu, Aug 06, 2026 at 04:44:41PM +0530, Vinayak Katoch wrote:
+>> Reserve memory region for audio PD dynamic loading and remote heap
+>> requirements. Add the required VMID list for memory ownership
+>> transfers.
+>>
+>> Signed-off-by: Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
+>> ---
+>>  arch/arm64/boot/dts/qcom/agatti.dtsi | 11 +++++++++++
+>>  1 file changed, 11 insertions(+)
+>>
+>> @@ -2348,6 +2356,9 @@ fastrpc {
+>>  					compatible = "qcom,fastrpc";
+>>  					qcom,glink-channels = "fastrpcglink-apps-dsp";
+>>  					label = "adsp";
+>> +					memory-region = <&adsp_rpc_remote_heap_mem>;
+>> +					qcom,vmids = <QCOM_SCM_VMID_LPASS
+>> +						  QCOM_SCM_VMID_ADSP_HEAP>;
 > 
-> This feels like a PCIe spec violation, or at-least undesired behavior from
-> the user perspective.  Maybe a DoS attack vector?  I assume you are
-> specifically talking about Qualcomm MSM Arm64 platforms, and not the entire
-> Arm64 ecosystem?  I don't recall seeing this in the Arm64 server space.
+> Either put it on a single line or align on QCOM_SCM.
 > 
-
-This is commonly seen in ARM platforms, mostly in Embedded space, but it is not
-an ARM problem though. On these platforms, they don't properly synthesize the
-completion timeout and end up triggering Synchronous External Abort (SError),
-which the kernel treats it as a panic condition.
-
-There are drivers that try to mitigate this condition, but rather in a racy way
-as there is no proper solution available in the kernel:
-
-$ git grep -rl SError drivers/pci
-drivers/pci/controller/dwc/pci-keystone.c
-drivers/pci/controller/dwc/pcie-designware-host.c
-drivers/pci/controller/dwc/pcie-rcar-gen4.c
-drivers/pci/controller/pci-aardvark.c
-
-> Do we need to talk to Joe about this?
+Ack>>
+>>  					qcom,non-secure-domain;
+>>  
+>>
+>> ---
+>> base-commit: 1701fda2f58e345c050f4309971bdc07cd6146ba
+>> change-id: 20260806-agatti-audio-357bcd74ae9c
+>>
+>> Best regards,
+>> -- 
+>> Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
+>>
 > 
 
-This is a known limitation and he should be knowing this by now.
-
-> > Anyhow, the motivation of this patch is to ensure that the posted write gets
-> > flashed to the device before the delay. But I'm not sure on how one should
-> > address the concern you raised on waiting till the Endpoint reboots.
-> 
-> Sadly I think the user implementing the delay will need to be aware of the
-> specific device they are using, and the likely required delay to account for
-> the various scenarios that device implements.  I don't think we really have
-> the infrastructure to make this universal, and if we did, I'm not sure a
-> blanket "all MHI devices reboot in X time" is going to work in the long
-> term.
-
-Hmm, then let's just keep things as is and increase the timeout when someone
-complains :/
-
-- Mani
-
--- 
-மணிவண்ணன் சதாசிவம்
