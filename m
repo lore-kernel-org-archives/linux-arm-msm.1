@@ -1,96 +1,48 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5257E3A6407
-	for <linux-arm-msm@vger.kernel.org>; Fri,  7 Aug 2026 16:42:00 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2AC5F306498;
+	Fri,  7 Aug 2026 17:00:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786120923; cv=none; b=Rzc+2Puwuz4ZUt7gxkUiJ8wNv/pqghpG+/An7WYK9oXd+7PuYzSsH+/fQZTWaAyFlae8HWUwY+xo0i2Pm/7PWIYpQe07x6vVWfyTyAQD51exBqQD7ggEeMF7ZkCPQrddIHxLyGdhs9pkItLKIRgGIsSXGvV+zBVtsXZJNZaTYJw=
+	t=1786122011; cv=none; b=MMnpSnZCqkqOsCKxT3NSKgoeAOadHuJi2QHPgEA4PAKTseGngD+BDKOA7Pt37QCLeCmgnPoBTwzU7Ac81HOGESuvVhTviyN3WFeh+KBhc0k17P84EIzVeXHh5dLycBJAGHLpRtc8T5G2a57l9cC7TQcX5ojJXKsKBgcWd7Ao5cA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786120923; c=relaxed/simple;
-	bh=SF1w5WcANIRqkbDRAasm2Bv2/FCeVEU5P4n+Cp0zn68=;
+	s=arc-20240116; t=1786122011; c=relaxed/simple;
+	bh=bzrvQBcKr5tk55Zeln7fwDtblFtZyeWiVqzoh0J3uRc=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=WgTlkc2JPCPqeyjW+R6txlaUa2rwpzrUSOi4pp/cYzh/49dyMqH23413sS5dx2DA2DyAvgo3GRBQ31ABCnd4U7rKYoiY05+nzp8ktykUEUtYvFRtBsro6MFzweLRhqdibQCwLpSUtia9p+3cQ5t65NWtvP+kckL8JEaizqB5+Tk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cjhTf6uJ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ctTExG6V; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=h0Y6XEpXCDhGvptwwEwW3a/EYlXLfQ51Zb0Sk6xQmYZdXKAYjhRk+wbkByvH/8v7/TsJrMlbFo9JWpWUKY7agoCfUGC9ky8xou7W4Wu0DmL/+vu6YT3CkXRpN/NAFAyFPswyi0MLtJPBpi+mKujeR16QoKXmkdxO2VJv6BXS0Dw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YMcFf9ql; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cjhTf6uJ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ctTExG6V"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 677GbOv61537963
-	for <linux-arm-msm@vger.kernel.org>; Fri, 7 Aug 2026 16:42:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=S+xtwtaBD2E5itUbYoIJ09lq
-	mLbBFlcb3Q2IZhH3Huk=; b=cjhTf6uJB9TykRgDf/2Ud0LYQ65xrr5dF0+wmReA
-	D+P4dijgmOUCHMlQJMVqix0JCrBn5+EqzGMk9jyQHNJjr4P3rSTkxhPxoKmQ2KSY
-	5IObzXx3h94uKeIGddYY6AX3QJjrx8iC9sgoNI4bZOwZbLRrE5L7VkSaj5bm1CQX
-	w6wdBBprzXgOhQIiOlDV/wnQ42eVwSoC0OKWSPP9oX2YpQ4E/ou+dHW2ciaWnEnL
-	5GAMOV2qnL4Osv2A3TOFnUFF0nbeXM4O9gupMbr4pf4NNhWGXQCN2TvJOtM5zUFS
-	kFBT4bq5RAIkpQdpLeCBxzerKvag94lu7enfaN6iW8uM3w==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwk2000jb-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 07 Aug 2026 16:41:59 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cb48f41343aso1680784a12.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 07 Aug 2026 09:41:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786120919; x=1786725719; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=S+xtwtaBD2E5itUbYoIJ09lqmLbBFlcb3Q2IZhH3Huk=;
-        b=ctTExG6VQDTuZP0OXezKi2/FHDQS98eAhkX8/g977eEf9vTp6hVniFvJTmfd61TH8j
-         9Qp9Vjn6sUlEZE7pn6pai3waJcfmVfU1ONiiNl8fELVzgpaE3aDzSrQfvO2sU0idsO3w
-         TZR8XmaJCCOeWP1P4u8iJoMciEjQjRew68J+LiUbiz3u4tbkKE8x9yDdae5JlyZeokZo
-         pZIzA9CePZ3E9u/qDkcvc1eHNnd5h5KMxRo7dE0yWmziY5jr/X/TsoXBvPqlavtXNnml
-         pgmULDbNyg+vrplq3PHtJFhNbV8Sxl/Ks1UuvXzBhxkBltvj5bVaGXkngF8JJkTOEkas
-         pf/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786120919; x=1786725719;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=S+xtwtaBD2E5itUbYoIJ09lqmLbBFlcb3Q2IZhH3Huk=;
-        b=dzPuSlAUE3Fu9oDgtCPHBQ6KM49fspuQs50EJld2vfejCXHX6m6Kw+/FnhIl3u3Iy8
-         Kl+VyNWw3UJKROP6xVcMp67VtxHwtt9B6xB4TuwLlYgkEpH+K11EgToYD/uvnzib2c39
-         hiboHwBNall2t17Rgn14k9fnwPZkL+DPiVJtwFwWNBpkm3m9+bPHQP1eHijm7SyomXKv
-         xeBcgAsyGTqi2XQz81xbOmSTP+KZnm8sYmH+YrWenYDBfmPuQnNU9HRWp3YaV5HUI4uK
-         GE+r41htFRuz2aEdFa2JOgthanvZhFA8IDloQBsoHDbAPJcDqOsfQsQqCcQpyHnv+uva
-         74QA==
-X-Forwarded-Encrypted: i=1; AHgh+RoApawOteqYMbtpUd2f6PvIdogmlbJZfLsAONLErTX7T+WmdwmN0zll9NK9w1NRupx8R5VPPEmAubKSb4is@vger.kernel.org
-X-Gm-Message-State: AOJu0YzLd/kzX7XbLCssseL3Zke7zPZMiM/O4zOyqOzIsv4Vf4cRyh//
-	DH4cGBnw3PwkQSx4se/d6C9Ifts/tbkfXFV6sKVUDS5WFLxGGk9y7C+7j91weeSMD9lfsRdfEZO
-	AdiKjvgGYRoCPJSuXnmyTW8aSGNvOEWzLBbL6n8PUecZ+9I24AzNltbfJJSeTsmpfik5c
-X-Gm-Gg: AR+sD110lybz3DQ7bdshhEw94yDHmXNbHSwzBZvAM+gRa8oEtFeVPku1Fn3FiF5Z0GD
-	WtqAaizMIyKA4uiFKPWlRPC4X5Pp3grJcLvhK5mi+wiFySXwF3ibagVkUjPn/QzPRETZc2Mxqk1
-	+YSL0IZpG8NBFIqKpG1dVpCN6yfhqRw5OUqdDwpqEOtSe3PL5KP9DQTXzZJca1nUos63Mtipes5
-	Q9Q8FN1z5fWxqCepko9aWcCRk6EYvuoIvMF+LR+JU6QfsbQE8AkBQE6c2a1A8ZASV8Ki7nDbiTo
-	a7Swj+33mSTKh+iSBFS63Wn9E4ZpNcBR18402x8mJMu1T8NcAegGgpoUFCMhhRJalsHRALeDW+w
-	bO/sGSyLSRP4y3lJcX2lrPp22y5qA9nF6hJMEYcHr5pY4K3tRrC34lGIZC1v0xJdgJLjrWG2Ut4
-	ZSJg0jmEcLOiw=
-X-Received: by 2002:a05:6a21:32a1:b0:3a2:c9a1:2c26 with SMTP id adf61e73a8af0-3cb9c0a2b20mr17870782637.7.1786120918968;
-        Fri, 07 Aug 2026 09:41:58 -0700 (PDT)
-X-Received: by 2002:a05:6a21:32a1:b0:3a2:c9a1:2c26 with SMTP id adf61e73a8af0-3cb9c0a2b20mr17870701637.7.1786120918485;
-        Fri, 07 Aug 2026 09:41:58 -0700 (PDT)
-Received: from hu-mdalam-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-14101b7a772sm8323372c88.12.2026.08.07.09.41.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 07 Aug 2026 09:41:57 -0700 (PDT)
-Date: Fri, 7 Aug 2026 22:11:51 +0530
-From: Md Sadre Alam <md.alam@oss.qualcomm.com>
-To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/3] Enable quad SPI mode for SPI-NAND on IPQ RDP boards
-Message-ID: <anYKz46HeHF6t1EF@hu-mdalam-blr.qualcomm.com>
-References: <20260716-quad_dts-v1-0-74d86792944a@oss.qualcomm.com>
- <20260716064733.3nzgioduu7kruglv@hu-mojha-hyd.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YMcFf9ql"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3BA781F000E9;
+	Fri,  7 Aug 2026 17:00:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786122009;
+	bh=xf9nrKmqN6amn15zNQh/fXJWbnKTrIbR0c/qS9OnmKk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=YMcFf9ql4ZnU7SC8wZUt+6LBOfKh4MqOR1tsKwFOXJCYkuPi+6N2TScbDEFj9W3PD
+	 ucOgr+DA1EQvcEQN3BLTII/Pooyv/VRoFSWwHefjV9zX4XXuXg4ScPCfIyR6KQNHwM
+	 eVVmQ5ifbkIgCKCAX42KrAn1Nbj/iSSU5i7h2xHCHBEU8ki8Iyf6FdrrBP5kh6FXl+
+	 VcjTIl3DLDBFcom7twYgC4e8EiwYHEBTaOHlmFuT3mX4LDlpI7Tyln112FGbpKNX6e
+	 zi/OUdkZ5d0wuMxYfSvgZzq/yQvluaDUZfCNsbdkQtZCE+cUZQzNB+jcJ/X1GupSaZ
+	 X9OKjlPWX2rVg==
+Date: Fri, 7 Aug 2026 17:00:07 +0000
+From: Eric Biggers <ebiggers@kernel.org>
+To: Neeraj Soni <neeraj.soni@oss.qualcomm.com>
+Cc: ulf.hansson@linaro.org, adrian.hunter@intel.com,
+	quic_dmukhopa@quicinc.com, quic_rampraka@quicinc.com,
+	quic_nitirawa@quicinc.com, quic_sachgupt@quicinc.com,
+	quic_bhaskarv@quicinc.com, quic_gaurkash@quicinc.com,
+	quic_sartgarg@quicinc.com, ram.gupta@oss.qualcomm.com,
+	linux-mmc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH v6 2/2] mmc: sdhci-msm: Use pm ops instead of macro to
+ restore crypto keys
+Message-ID: <20260807170007.GA1172969@google.com>
+References: <20260803163123.1802005-1-neeraj.soni@oss.qualcomm.com>
+ <20260803163123.1802005-3-neeraj.soni@oss.qualcomm.com>
+ <20260803201803.GB63318@quark>
+ <abe31a1b-e34c-d5b6-4bc4-3733acc56e98@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -99,72 +51,82 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260716064733.3nzgioduu7kruglv@hu-mojha-hyd.qualcomm.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDEzMCBTYWx0ZWRfX0LfGFTUS5HZs
- dF3tYWrVPkMu6T2eI4cmWBLFQGlacKwFGC415daSwZlsUlR6F9x+nTD70Bv2Xv9nZnmXGDWj1jl
- LtTk8qCIYmjaLfDOr7nNIWg60/ZkE5rnuNlxA9XaGhvt+Hr3m0nFYE/dnrJM451GxPzyz/0KSFe
- A6yiy8qXN8hISXGImA7Lci394cqaUebVh+YOgQkSWUdpPLYQD7KbsCN9QwF1tWz0rL9INlkEybY
- QLSWwM/MDlwAVEpasdAFF6NW7KwiI6k7mpJUxTwTqLkXNguaBvVrqk5b91qMj/IPo2VeeXKByZh
- PXVSIItOLhYrHcZqbpNT48kf5BCavNYipLps+2LKUNzDseR7HHjoPxF8eaaqKlZ6pAj0xP06+RF
- 0FrdW1w7BNoct1EODzOIwZakrcZRWfMup8bdo2PwINdIYUHwcnWBn+LiDYh3BpuhYLhOc2JzIHs
- b/apAeoC3AlvNokpmgw==
-X-Proofpoint-ORIG-GUID: 4UJvYtk2UekRHzx7fMjZU_fzDj9djBSO
-X-Proofpoint-GUID: 4UJvYtk2UekRHzx7fMjZU_fzDj9djBSO
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDEzMCBTYWx0ZWRfX1/H1NjiT2FNe
- g+XzV6++CGHzfqN1uXoda/QcV7ArqoN2G3sTv8X8CywuhRR1/e+hV39grkbG6GXoX0sgptc5FVH
- /vSPYKvRAki+a62xVzYzflzo3hSxzAk=
-X-Authority-Analysis: v=2.4 cv=Fvw1OWrq c=1 sm=1 tr=0 ts=6a760ad7 cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=ESF4Oa33ePULE1iGifwA:9 a=CjuIK1q_8ugA:10
- a=3WC7DwWrALyhR5TkjVHa:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-07_03,2026-08-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 bulkscore=0 spamscore=0 adultscore=0
- malwarescore=0 impostorscore=0 clxscore=1015 suspectscore=0
- lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608070130
+In-Reply-To: <abe31a1b-e34c-d5b6-4bc4-3733acc56e98@oss.qualcomm.com>
 
-On Thu, Jul 16, 2026 at 12:17:33PM +0530, Mukesh Ojha wrote:
-> On Thu, Jul 16, 2026 at 11:25:11AM +0530, Md Sadre Alam wrote:
-> > Several Qualcomm IPQ RDP platforms support quad (x4) SPI transfers
-> > between the QPIC SPI-NAND controller and the attached SPI-NAND device.
-> > However, the corresponding device trees do not currently describe the
-> > bus width capabilities of the flash device, causing transfers to fall
-> > back to the default single-bit (x1) mode.
-> > 
-> > This series enables quad SPI operation on supported IPQ reference
-> > design platforms by adding spi-rx-bus-width and spi-tx-bus-width
-> > properties to the SPI-NAND device nodes.
-> > 
-> > The series updates the IPQ9574, IPQ5424 and IPQ5332 based RDPs.
-> > 
-> > Signed-off-by: Md Sadre Alam <md.alam@oss.qualcomm.com>
-> > ---
-> > Md Sadre Alam (3):
-> >       arm64: dts: qcom: ipq9574-rdp-common: Enable quad SPI mode for SPI-NAND
-> >       arm64: dts: qcom: ipq5424-rdp466: Enable quad SPI mode for SPI-NAND
-> >       arm64: dts: qcom: ipq5332-rdp-common: Enable quad SPI mode for SPI-NAND
-> > 
-> >  arch/arm64/boot/dts/qcom/ipq5332-rdp-common.dtsi | 2 ++
-> >  arch/arm64/boot/dts/qcom/ipq5424-rdp466.dts      | 2 ++
-> >  arch/arm64/boot/dts/qcom/ipq9574-rdp-common.dtsi | 2 ++
-> >  3 files changed, 6 insertions(+)
-> > ---
-> > base-commit: 19827e7930a5511c68e12aac6e4522f3661a1709
-> > change-id: 20260716-quad_dts-6bac0484c08c
-> > prerequisite-change-id: 20260716-quad-ec2765317214:v1
+On Fri, Aug 07, 2026 at 07:49:24PM +0530, Neeraj Soni wrote:
 > 
-> Above does not help.  Be explicit here in the cover letter by
-> providing the dependency link directly.
+> 
+> On 8/4/2026 1:48 AM, Eric Biggers wrote:
+> > On Mon, Aug 03, 2026 at 10:01:23PM +0530, Neeraj Soni wrote:
+> >> From: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
+> >>
+> >> Inline Crypto Engine (ICE) keys are lost after hibernation entry and this
+> >> needs to be restored when hibernation exits. ICE keys are re-programmed
+> >> during sdhci_msm_ice_init() but it may not cover cases where the
+> >> hibernation image is already restored.
+> >>
+> >> Unwrap the pm ops and use directly in driver to add the call to restore
+> >> Inline Crypto Engine (ICE) keys. This ensures that ICE is brought into
+> >> same state as before hibernation.
+> >>
+> >> Also set MMC_CAP2_CRYPTO_NO_REPROG to indicate that re-programming of ICE
+> >> keys is not needed during MMC runtime suspend/resume.
+> >>
+> >> Signed-off-by: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
+> >> Signed-off-by: Seshu Madhavi Puppala <quic_spuppala@quicinc.com>
+> >> Co-developed-by: Ram Prakash Gupta <quic_rampraka@quicinc.com>
+> >> Signed-off-by: Ram Prakash Gupta <quic_rampraka@quicinc.com>
+> >> Co-developed-by: Sarthak Garg <quic_sartgarg@quicinc.com>
+> >> Signed-off-by: Sarthak Garg <quic_sartgarg@quicinc.com>
+> >> Signed-off-by: Debraj Mukhopadhyay <quic_dmukhopa@quicinc.com>
+> >> Signed-off-by: Neeraj Soni <neeraj.soni@oss.qualcomm.com>
+> >> ---
+> >>  drivers/mmc/host/sdhci-msm.c | 23 ++++++++++++++++++++++-
+> >>  1 file changed, 22 insertions(+), 1 deletion(-)
+> >>
+> >> diff --git a/drivers/mmc/host/sdhci-msm.c b/drivers/mmc/host/sdhci-msm.c
+> >> index 4aff965f0e2e..f64788a70309 100644
+> >> --- a/drivers/mmc/host/sdhci-msm.c
+> >> +++ b/drivers/mmc/host/sdhci-msm.c
+> >> @@ -1959,6 +1959,7 @@ static int sdhci_msm_ice_init(struct sdhci_msm_host *msm_host,
+> >>  	}
+> >>  
+> >>  	mmc->caps2 |= MMC_CAP2_CRYPTO;
+> >> +	mmc->caps2 |= MMC_CAP2_CRYPTO_NO_REPROG;
+> >>  	return 0;
+> >>  }
+> >>  
+> >> @@ -2983,9 +2984,29 @@ static int sdhci_msm_runtime_resume(struct device *dev)
+> >>  	return ret;
+> >>  }
+> >>  
+> >> +static int sdhci_msm_restore(struct device *dev)
+> >> +{
+> >> +	struct sdhci_host *host = dev_get_drvdata(dev);
+> >> +	int ret;
+> >> +
+> >> +	ret = pm_runtime_force_resume(dev);
+> >> +	if (ret)
+> >> +		return ret;
+> >> +
+> >> +	if (host->mmc->caps2 & MMC_CAP2_CRYPTO)
+> >> +		blk_crypto_reprogram_all_keys(&host->mmc->crypto_profile);
+> >> +
+> >> +	return ret;
+> >> +}
+> > 
+> > Sorry, it looks like this actually does need an #ifdef because the
+> > crypto_profile field is conditional.  It doesn't need to be a new #ifdef
+> > though, as you could add a function sdhci_msm_ice_restore() within the
+> > existing CONFIG_MMC_CRYPTO section of this file (along with a no-op stub
+> > in the !CONFIG_MMC_CRYPTO section), then call it from here.  Similar to
+> > how the existing sdhci_msm_ice_resume() works, for example.
+> >
+> But MMC_CPA2_CRYPTO=0 if !CONFIG_MMC_CRYPTO so crypto_profile field is
+> not accessed if !CONFIG_MMC_CRYPTO. Does it need encapsulation?
 
-Updated in revision 2 [1]. Please review
+Yes, because 'if (a & 0)' just makes the code under it be optimized out
+and able to "use" undefined symbols.  It still otherwise has to be valid
+code and refer to declared symbols and fields.  See my suggestion above.
 
-Thanks,
-Alam.
-
-1 - https://lore.kernel.org/linux-arm-msm/20260807-quad_dts-v2-0-6f578d4152b7@oss.qualcomm.com/
+- Eric
