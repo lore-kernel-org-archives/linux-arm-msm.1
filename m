@@ -1,68 +1,89 @@
-Received: from mail-ed1-f46.google.com (mail-ed1-f46.google.com [209.85.208.46])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3D8DE390C90
-	for <linux-arm-msm@vger.kernel.org>; Fri,  7 Aug 2026 14:30:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2702348C5D
+	for <linux-arm-msm@vger.kernel.org>; Fri,  7 Aug 2026 14:33:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786113027; cv=none; b=KTza+BQlKfIS3Q9qME8XtKxqcY/eRwIB+v3JpwBVLHpeWwrzevLolqJtrXxn1hB5z5At5iQRoCMtAyYC4QrIIsiTHQgBUOnSGommNLBRIzneWikrLtNbce+RCMI9KnvKQyMpnJusRGmpXlgpTN6kxVxUCLG+sAJMdgczKuwPbYs=
+	t=1786113187; cv=none; b=l0/JVl6Qi8193Wh5/PcxxRvceBDWLNh3yuHj9n/UhNGMvrN/xRi4K0OY2WvvjBRpHoh8su3zTPDmzpC3TJ5jRzw7sodLDH4nsawBBkskYiX9w7rO1WBAt/aV8u7TfB3XZhD993lKwxQiKCuspaJgndGAl1X3pQLtmfqawJtQOT4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786113027; c=relaxed/simple;
-	bh=9chXbWvneviCBI6gsPcp6rBnUHso6qIi2DiOcMGp3AU=;
+	s=arc-20240116; t=1786113187; c=relaxed/simple;
+	bh=0hzL95W0DgdNg01n0jx3iFRTfBCebY5iM8aNdz1ZD10=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=kuEiMBpIlU4LKqEgvm90uNZomJhblYscTPNoHxYdl2UQKJUA41EwVbaRvOWY2XuAfnZLrH+BgwWYc2SF9IBIGCNPOdjRNBEfBgzyRXsizSGGU/2gqFqDDC+Jp2Upq4WbpF1yJzfsmh05FfczNpYORKnleKY5aGAkHm9zsXZ2KUs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=JVavm7f6; arc=none smtp.client-ip=209.85.208.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+	 In-Reply-To:Content-Type; b=Nz0UZSG52RUAsMFMvweImBOIaj5yqUs29XM3Iz9aYY3Q+fHQjuyBaUsCNFaiDXb9sjB6KDLtmVmwAcwjBMYVFfG2XZMzXWGE/XkEq4igt1eel8Uxv4+aSOp83a1c/NPBhSlUBm/fuHflNqY/z9aykoJlsnoaGrvG7s6cCNYnXAw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=m4sUpvH4; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=geCx6kMA; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="JVavm7f6"
-Received: by mail-ed1-f46.google.com with SMTP id 4fb4d7f45d1cf-6a0de062db5so5451313a12.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 07 Aug 2026 07:30:25 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="m4sUpvH4";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="geCx6kMA"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 677DeaDa1435610
+	for <linux-arm-msm@vger.kernel.org>; Fri, 7 Aug 2026 14:33:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	901SYsPovy4rPKGGIpqTt0xDPadw7CcjZOa24G+R6jA=; b=m4sUpvH4M8auwoYu
+	oi2Wbn4CZO84wqDghNRFiCR9TwpFHws1ctR7KfxDJdEHB33Z5XE/Cmm4bm478BCu
+	0mdi5CgB7WFCrSKRCmmZP9GHh6y/lzn2S+bIQ/giDWhz8io1IVKJGPt7Bo0Z6CKy
+	TdHicwf+4dqRBqghqRoDUXRpJRbuye7mMv+60Gf5T6+EzNNMmW2/LPOoqTljZgkd
+	ymp1S8s8hBCbiCOKy4sAhUHOkZZ+t4O2PCv5QEmp+z7ch02CEzHNxUZN+neu4WUu
+	qhSPN7zKKRR/yvtIEUfMilz+EohdXoBxpPr1mw/ffZy8YPg9CN3BBGGxtdadlcEn
+	Xe72vA==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwgewg75b-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 07 Aug 2026 14:33:02 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-9087f2fe592so22695866d6.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 07 Aug 2026 07:33:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1786113023; x=1786717823; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1786113182; x=1786717982; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=LmlvdA3j1ijNUJj1yqvwrA06bbHfnJpUaXqtqC2M7xE=;
-        b=JVavm7f6sIIjrsJWPx0XFYh1H9ETdYiYFmTgIubT02q70kVTKIM99thpu+bu5hrtGu
-         yAsfwnZuCzvQciRe73WLkwHiX+iN2A7QuWS1uJhFTMqFsB0//B9BuY8/PKv/xQe9IRi0
-         2oZXDtQuE2lJ3y+TPKUdSlE+V4soG1B+dUHm0XQWMo594nSw/0O2jIftrWApnYUSdHfx
-         4bBxA8rMZDcE0wzq5WVMegMCCDnG6Vb+WOTkOm6m8Gpp2po8MC4L3Ozb6+yrNZ4SQeVx
-         YTfDPCS4VNCKeVwlMEct5p8uJnT94cvh/gNNF3NKK2Xyu9McOiQzzzRDgDLI6LZxPdhG
-         FNtA==
+        bh=901SYsPovy4rPKGGIpqTt0xDPadw7CcjZOa24G+R6jA=;
+        b=geCx6kMAStffg5uox+A5gO+0KSz0SQrK8d11pVTeI/EN37v6lsx9S1N8CnD5QZysB/
+         wSHouaSq11S/wxEQHxWciSZDLbjA63hYEonI1L+/AgjwqvVziGpcRg5nTEtwm58BBPg3
+         s6Ebf1gKOxmf5M/524+n97/jMPYsMvxutFsXTXZS50MJYoIHV4SZRxrWrlWqCEAYaFLI
+         tmdivgIFYWrkPkufPMxjh8ou+/dSM2/3mhuOtMUfxMp92IqBqrwrxutBKckAo7miqG73
+         XLDLMcNVhdEhrdGm4UYcP0yDyX92bjCcsiSPjEjRx4ugrqkgfUrxyqHy7apO5qlULjMp
+         mrAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786113023; x=1786717823;
+        d=1e100.net; s=20251104; t=1786113182; x=1786717982;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=LmlvdA3j1ijNUJj1yqvwrA06bbHfnJpUaXqtqC2M7xE=;
-        b=am1VUhS6FRI7h9Z6mDUgySnvAcIeO0SxUDOz6R/rW/f1CRWtuH/jVrbCzQ/DXrqlzN
-         kvlwMPVXFi+2fcUhopUWZ7ikbQi5sYEPXOgcM41emuMBA4tT5FBl0Sz1k/uCVWZgv+kq
-         Nw1EzM6AYz0W1qiSXdrsCO9SgXBV+g4uMIpljQpweoUuS8exP+/xbPfMgRXiyy2Q9Cg/
-         QLMKXgYX81i3RA/rQTJozNI6wIG8StJPNUrMXMJ3lVK0ukVWOREZjZaKGmFb4BBT2TXQ
-         NayFHr75ck6Ih7JALvYpQqIcaIBDzNV+8ck7bvPbwzP03lHKq6PaQGwlHYqsaJJPgKXY
-         VVGQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrROzFMUOFE8EUifpAfJZ5GzS74S8zah242dlbmPtZ0QYzbJ/MNgZAE1oB75k4YW6QUI/vo5w7mYIP/hTc/@vger.kernel.org
-X-Gm-Message-State: AOJu0YyRf4F+w2feJxeccnFzAHOHz8u1k0Wo9ibgzW2+0TKslksgGGiG
-	l0+8m+hkMrYgj7H+caA660S6wcK3EZrPCVYBpgJhE/tETcf+WFWX3H7fF3XijuAPC3s=
-X-Gm-Gg: AR+sD128SXRhesEev8h8uw3ipwbZNG9glbk9pmgP0ECFNsImWIk8+u5QuMQrhUZzxUB
-	XdUV8GQH/vYM9vGLJxwttX8gjwtAI/xQBpzcXhqjqtL+30wXkaa7tKqLwsdroZ/F/IoeypQPCQ9
-	AFqzkt8eBjy2tgw+RKKFMhqL3V11NR1yd4K+Bv+E20VlWKbvcGzWo6iPjuUFLE7rQjYlo05JBkB
-	XGIlQ+SBK9SeiakOaPNihcTeRfGcSyOiIUR0zP8cUZdGXWodeh4f/6pwBU0vzI5LoR/TYUaVtQ9
-	bVJNRiDk/0ph2nMqvYJUq9QOPGzWMLAE6oR+KnnfKgT+aXu8xS2ei1VCF0V3ssiIkbZawdaL12b
-	UaDcY18XMyKwoq8CvJrzoz9yYBejsM7M+a9aP8PSt399j2X3uiEd7QnnFdknGe3PIIPoCoglzsU
-	xGkhH0aiLIKbJFI6B4ygX8m1y5MpatIsM261j3lApNL659L3cU6bZia+OaflEPfciIYj+MxuR46
-	KSA3G6IL7yHN2HH4OSgfeF1uRksEAw9vVkOt/pMCKEcDigjHd0ZO3uG5/VRUQ==
-X-Received: by 2002:a05:6402:28cb:b0:6a1:8fff:1590 with SMTP id 4fb4d7f45d1cf-6a1e62d7f80mr2357759a12.19.1786113023537;
-        Fri, 07 Aug 2026 07:30:23 -0700 (PDT)
-Received: from [172.16.240.238] (144-178-202-142.static.ef-service.nl. [144.178.202.142])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a1e7cab26fsm604018a12.7.2026.08.07.07.30.22
+        bh=901SYsPovy4rPKGGIpqTt0xDPadw7CcjZOa24G+R6jA=;
+        b=GDkYKLJ4BJF2VGdVT8AbDTj4DLxovg2314hRpUmGmP0O7E3E0wyqSLVTOYmKT8zHYR
+         HgIEpq3bUl72i53JeWKLtOFpiI3sHfJzj/PlrrU3mIOGt4gjYglNlkkKCrSjydvzNNFj
+         ENj64hDIvVas/MnjlsSV9aPpkIQUKWFA2wC02CHWH/TQTYFMAVBbRSBwJDcmvb9oi/aV
+         TPcXx2NCZ8wYdmPrno7KwQk3K+jWqqgG5kJruY9GriAjHbG/suaoiFdMUcSr1b25AnyS
+         q1Skk52CGWduepma30rkiBlxgTkSDnZ/qTdCjR9iVD2B15u8hgqhKe33TqoLRAx4vbkV
+         k9SQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrvkTdFC4b2wRGGmYl5Al0ZltpUygP2O6e7zvfiI9Pu2mdLWnNawR7/IKyGW/5KTl6NwnoGnNuO60DSVL58@vger.kernel.org
+X-Gm-Message-State: AOJu0YyPn5FrqWS+CkBrr5fBBEl/DoMO89eyAp84P4DQTSE+uzSYRerQ
+	K4KGTsL2mf2zEh+q3cJGaTFQHHp/aNblOe89GKT6IXNQn8hGW9HGQvoNoo9e7MhRxWZ01dGQjo+
+	O1DP4Cf2jJmELu2NuPcQkwPEHUwYmPPxaju0VLr3EtzVbMHdcTYTQvJdQMjs7H5sUz2fUZwg0ui
+	9J
+X-Gm-Gg: AR+sD133kFPr8YwuL5P7fMk38UVOeLfHr8Efqdy+Lb5Yc/KF8lZYr0Es+TDmfNoLUIG
+	2KfugjSiwAGgf7M79yFdYHUIGwGTc7oVKmumAs2yBFN0Xcz5yJNTeXtpEGuTT4JQltpmSrw0JfV
+	UnYK81jgjCJdnezNCAmPZ3E4X+bVmsMaUErWsbG0NvJnXofIzX0FOsUgwTbGkjq4S87dsIvKKtv
+	oVFQgbClIMRdHlBJX2O1yxVwhksvHTJCgq+7JaA8E45a+wJmH+BHNftWO4stkcsV7fUe2xp02oD
+	sIAzMMXA6LBQqIbD7b9sK8YXFgBK1HPMX7bypKP2cXb9vUSwNyB4PIifC8zmlICnvEY1E2z3IWv
+	X76XfOg0z6AnWrVNKNOK9hOB3J0zfO4c/NwtbgDQHh+GwwHB0uOTuz8Ey80B63jg2zwM6yUjqHh
+	5cs9MZMXe1+wdAuNvJFA==
+X-Received: by 2002:a05:6214:48f:b0:8f2:5a3e:c619 with SMTP id 6a1803df08f44-90a345985dfmr7374376d6.4.1786113181521;
+        Fri, 07 Aug 2026 07:33:01 -0700 (PDT)
+X-Received: by 2002:a05:6214:48f:b0:8f2:5a3e:c619 with SMTP id 6a1803df08f44-90a345985dfmr7372926d6.4.1786113180952;
+        Fri, 07 Aug 2026 07:33:00 -0700 (PDT)
+Received: from [10.190.200.255] (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-908a92fe515sm9918976d6.24.2026.08.07.07.32.54
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 07 Aug 2026 07:30:22 -0700 (PDT)
-Message-ID: <3554d8d1-65f7-4556-8b99-1c03e0cdca53@fairphone.com>
-Date: Fri, 7 Aug 2026 16:30:22 +0200
+        Fri, 07 Aug 2026 07:33:00 -0700 (PDT)
+Message-ID: <c1f9c858-f14a-405e-97ad-0c1748b7c5a1@oss.qualcomm.com>
+Date: Fri, 7 Aug 2026 20:02:52 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -70,96 +91,119 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFT 2/3] media: i2c: dw9719: Add DW9800W support
-To: Sakari Ailus <sakari.ailus@linux.intel.com>,
- Danila Tikhonov <danila@mainlining.org>,
- Luca Weiss <luca.weiss@fairphone.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, =?UTF-8?Q?Andr=C3=A9_Apitzsch?=
- <git@apitzsch.eu>, Daniel Scally <dan.scally@ideasonboard.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Eugene Lepshy <fekz115@gmail.com>,
- Vasiliy Doylov <neko@altlinux.org>, Achill Gilgenast <achill@achill.org>,
- linux-media@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- ~postmarketos/upstreaming@lists.sr.ht
-References: <20260801-dw9800w-clean-v1-0-38978de67963@mainlining.org>
- <20260801-dw9800w-clean-v1-2-38978de67963@mainlining.org>
- <anGlY_kwp_I-fRnz@kekkonen.localdomain>
- <f7cae569-0c51-41fe-92ab-f29311a22761@mainlining.org>
- <anMeoKP6rUlgtKyR@kekkonen.localdomain>
+Subject: Re: [PATCH 2/2] sched/cpufreq: Update schedutil's DVFS request to
+ reach the boost frequencies
+To: Vincent Guittot <vincent.guittot@linaro.org>
+Cc: rafael@kernel.org, viresh.kumar@linaro.org, mingo@redhat.com,
+        peterz@infradead.org, linux-arm-msm@vger.kernel.org,
+        juri.lelli@redhat.com, dietmar.eggemann@arm.com,
+        linux-kernel@vger.kernel.org, rostedt@goodmis.org, bsegall@google.com,
+        mgorman@suse.de, vschneid@redhat.com, kprateek.nayak@amd.com,
+        linux-pm@vger.kernel.org
+References: <20260806044230.909961-1-sibi.sankar@oss.qualcomm.com>
+ <20260806044230.909961-3-sibi.sankar@oss.qualcomm.com>
+ <CAKfTPtDQ+843t5fgknAMcfkYP_ZLxxYU8D+KJtx8QzMy=qMoCQ@mail.gmail.com>
 Content-Language: en-US
-From: Griffin Kroah-Hartman <griffin.kroah@fairphone.com>
-In-Reply-To: <anMeoKP6rUlgtKyR@kekkonen.localdomain>
+From: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+In-Reply-To: <CAKfTPtDQ+843t5fgknAMcfkYP_ZLxxYU8D+KJtx8QzMy=qMoCQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA3MDExNCBTYWx0ZWRfXzWsCW1FT0kB0
+ mKOVF+8su2gZNJOOy1zhBCXRQ0GvLRPUUkxMjefRNTu/IlZnspFg5Ddg89GUj99UjN+XVzaZ8yb
+ XRX9F+8dqttE+wDjZUA+pjoivWPO3cI=
+X-Authority-Analysis: v=2.4 cv=N5cZ0W9B c=1 sm=1 tr=0 ts=6a75ec9e cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=gPUjsufZEJvEUY1ZO68A:9 a=QEXdDO2ut3YA:10
+ a=pJ04lnu7RYOZP9TFuWaZ:22
+X-Proofpoint-GUID: o57w83IkTct1Sp1MXBD0rIh094I5w6PD
+X-Proofpoint-ORIG-GUID: o57w83IkTct1Sp1MXBD0rIh094I5w6PD
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA3MDExNCBTYWx0ZWRfX8bBkmUuomMZV
+ ngX7x5gNCkmSRr/085gS6i1ALI79fl0mxOrGC3YmV3EG7INGqaQUZlyYBSHRXtgvqzUDMuB+nSX
+ Ps46cEKDL+qG+gG9TLkeQC/GEG3+4ybEqrUNZLMSOVRFNsoo11tAqK/cvh5rpagcKlV41QbO9cV
+ GDSNJG4f8gd/cZzleNuGEH6xfcBHvE5OVWhGf3Z+E760DF9rMfZDB8Ih8fYjn6Kehgq/xz5Stoh
+ 137NYBDOfiAzNIKWY1W4BM14P90S/qkUscWkMTi8Ojfcuk+WJGtOB9mYR7CO80WL4iPCo5Kl2TF
+ HoosQ17QkE/zYYUayKPTlBBpToXxB29QSskZSE4Sm9fPb3ZY0/+rqR6ommSZzRsPH3k36Zokt+P
+ 9ax6PiepiqhByGv9f6u0J7MbbeY9uICcatCJFK102ip3XSZxoauV7afJ0UGgjeOms645TpyGjRe
+ AchDpaRN3H1cXl7ESjg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-07_02,2026-08-06_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 phishscore=0 bulkscore=0 suspectscore=0 spamscore=0
+ priorityscore=1501 clxscore=1015 impostorscore=0 adultscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608070114
 
-Hello Sakari, Danilla,
 
-On 05/08/2026 13:29, Sakari Ailus wrote:
-> Hi Danila, Griffin,
+On 8/6/2026 8:39 PM, Vincent Guittot wrote:
+> On Thu, 6 Aug 2026 at 06:42, Sibi Sankar <sibi.sankar@oss.qualcomm.com> wrote:
+>> capacity_freq_ref, exposed to schedutil via get_capacity_ref_freq(),
+>> was introduced by commit 9942cb22ea45 ("sched/topology: Add a new
+>> arch_scale_freq_ref() method") as a fixed anchor that does not move at
+>> runtime. However, schedutil uses that same fixed anchor as the reference
+>> plugged into map_util_freq() which saturates exactly at capacity_freq_ref.
+>>
+>> As a result, a system with cpufreq boost enabled effectively never runs at
+>> boost frequencies under schedutil-governed load. Fix this by plugging in
+>> policy-max into the map_util_freq equation, so that the DVFS requests
+>> translates to the actual cpufreq driver ceiling.
+>>
+>> Signed-off-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+>> ---
+>>   kernel/sched/cpufreq_schedutil.c | 13 ++++++++++---
+>>   1 file changed, 10 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/kernel/sched/cpufreq_schedutil.c b/kernel/sched/cpufreq_schedutil.c
+>> index a1782755efcc..dcefbeaa0702 100644
+>> --- a/kernel/sched/cpufreq_schedutil.c
+>> +++ b/kernel/sched/cpufreq_schedutil.c
+>> @@ -195,10 +195,17 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
+>>                                    unsigned long util, unsigned long max)
+>>   {
+>>          struct cpufreq_policy *policy = sg_policy->policy;
+>> -       unsigned int freq;
+>> +       unsigned int freq, ref;
+>>
+>> -       freq = get_capacity_ref_freq(policy);
+>> -       freq = map_util_freq(util, freq, max);
+>> +       ref = get_capacity_ref_freq(policy);
+>> +
+>> +       /*
+>> +        * That fixed anchor governs how utilization is interpreted, but
+>> +        * the DVFS request is free to target the current policy ceiling.
+>> +        * Using ref alone would saturate the util->freq map at ref so
+>> +        * use policy->max to reach boost frequencies.
+>> +        */
+>> +       freq = map_util_freq(util, max(ref, READ_ONCE(policy->max)), max);
+> But this is wrong because arch_scale_freq_ref is the freq that has
+> been used when setting the capacity of the cpu and is there to make
+> sure that the translation between freq <-> capacity is correct and
+> consistent whatever happens later on the freq table of cpufreq. This
+> ensures that utilization tracking remains correct vs other CPUS and
+> prevents or minimizes utilization oscillation, which triggers other
+> problems
 >
-> On Tue, Aug 04, 2026 at 09:27:01PM +0300, Danila Tikhonov wrote:
->> Hi Sakari,
->>
->> Thank you for your comment.
->>
->> On 04/08/2026 11:40, Sakari Ailus wrote:
->>> Hi Danila,
->>>
->>> Thank you for the patch.
->>>
->>> On Sat, Aug 01, 2026 at 09:04:15PM +0300, Danila Tikhonov wrote:
->>>> The DW9800W uses the same chip ID and register layout as the DW9800K,
->>>> but requires different default VCM frequency value.
->>> Is this a real difference between the two models or what fits for the
->>> attached lens? Too bad the datasheet isn't publicly available. :-(
->>>
->>> At least the differing default and constraints for dongwoon,vcm-prescale
->>> needs to be documented in bindings.
->> I share your skepticism and have essentially the same concerns. Since I
->> do not have the DW9800K datasheet, I cannot say with certainty how it
->> differs from the DW9800W.
-> Indeed. The limits should have been added for dw9800k, too, but I guess I
-> missed this in review. :-\
+> Either we enable the utilization value to go above CPU's capacity when
+> we transmit it to cpufreq (and above SCHED_CAPACITY_SCALE which could
+> trigger a number of problem while computing pelt)
+> Or, you take into account the boost freq when setting cpu's capacity
+> and associated capacity_freq_ref at boot even if not enabled. With
+> cpufreq pressure feature and the policy->max (not  cpuinfo_max_freq)
+> correctly updated with a freq_qos_update_request when boost is
+> enabled/disabled, the scheduler and pelt should handle that correctly
+> as we normaly take into account cpufreq_pressure everywhere in
+> scheduler.
+
+Thanks for your inputs! Ack, will try out the latter since it appears to 
+be the
+right way to address this.
+
 >
->> In particular, the parameter referred to as the VCM frequency in the
->> driver is used to derive the SACT value. For the DW9800W, SACT[5:0]
->> defines the actuator resonance period in SAC mode and the one-step
->> period in LSC mode. The datasheet gives the corresponding formulas as:
->> - tVIB = 6.3 ms + SACT * 0.1 ms
->> - LSC 1-step period = 252 µs + SACT * 4 µs
+>>          if (freq == sg_policy->cached_raw_freq && !sg_policy->need_freq_update)
+>>                  return sg_policy->next_freq;
+>> --
+>> 2.34.1
 >>
->> Therefore, the default value may differ between the DW9800K and DW9800W
->> if the formulas or timing characteristics used to calculate SACT are
->> different.
-> Griffin, would you be able to comment this?
-
-After checking on my side, DW9800W and K are almost identical in both 
-structure
-and register values, including how tVIB and tLSC are calculated, DW9800K 
-has an extra
-register that can change the output current to 130mA but we don't ever 
-use that.
-
-We didn't have a datasheet when working on the DW9800k so we had to go 
-off of
-the downstream driver during runtime to get our register values. The 
-datasheet is a
-much more reliable source to be using for this instead.
-
-My colleague has already identified ways to fix the bindings, which we will
-tackle ourselves.
-
-> Another matter: the comment on dw9800k says there's no device ID. So is
-> there a device ID that wasn't just checked earlier or is there really no
-> device ID?
-
-Indeed, it turns out the DW9800K DOES have an info register, which should be
-0xEB, that's on us for not updating it after we received more documentation.
-
-Thanks for drawing our attention to this! Nice patch.
-
-Griffin
-
