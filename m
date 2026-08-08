@@ -1,108 +1,108 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from hognose1.porkbun.com (hognose1.porkbun.com [35.82.102.206])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15A55229B18;
-	Sat,  8 Aug 2026 00:35:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B5ED364EAB;
+	Sat,  8 Aug 2026 02:46:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=35.82.102.206
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786149359; cv=none; b=CJVbmu9gz5N2/G+dio7SLIpRBr39x076oXGrPJs5UsIlFv4LK1gsmi0Nt2j6hpde1jyMRDuOK+uZAyVigeomKlr5MrzLExdCZ3gAgLW4co17MeL0OiK4tvcRsr7zw403RwDvC/5O9MUmjSLrD971gp8dUVE2KTnGDouyLl05uK8=
+	t=1786157175; cv=none; b=NUjqj7ROOOvfZvhfjJUzboF16nWhW6Foy9ZoTV1WYPNmNU27/ZXzX9OidHH3osRmSe6DhCsH+3hyLaR4/CvybqLilFZ1rSIsjH48q/LxwPlyMvto/8jB1atBd8idSrYFaK/BjKsEe4IsEJdppaxRwglSVZ+i4A+WlaJZkv4jolQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786149359; c=relaxed/simple;
-	bh=9NV5KhFstPq2OlEECq8sc3thgW2vWCQpx/TnjbQtg9M=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=nYU8S8/Dfml0UOvV8nB46sCdcsVB+oTZCbswuCRfPkV3RfNvFQn7H6W93F5YHXmr3GnSwY2HNPlJ5lBWKjVv4iRsjTZz61DSFbvTxGkK1gvl+FGwwaW2oebMA3+fVWDtqdyD/O/x+J5HT/U7JJZS4nkfkfH0oKIDpBA3SMLhvZ4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SdgMXSTH; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1786157175; c=relaxed/simple;
+	bh=TtaLkog6I66g6v4MH+dZ40tuxTnXZ/tCxB3cXkkNyBI=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type; b=u3p1nPx3SaveuZp2WjN8g7QcCflkmVq3uEQVJXU4Rd3yEbrL6wRpeBXbjbQzOp65tU3jdmvTzGCivSEvYtDrrogtT1SpeDUxU71Kmx9/BiFbcpc9CTRLTBS75hGCEPzfpB5rZCHkhgihORa3SprxvN4edS+KZ0KTtbbCFZBOVLc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=holtechnik.com; spf=pass smtp.mailfrom=holtechnik.com; dkim=pass (1024-bit key) header.d=holtechnik.com header.i=@holtechnik.com header.b=lLIiWtk8; arc=none smtp.client-ip=35.82.102.206
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=holtechnik.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=holtechnik.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SdgMXSTH"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 8CC99C2BCB8;
-	Sat,  8 Aug 2026 00:35:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1786149358;
-	bh=9NV5KhFstPq2OlEECq8sc3thgW2vWCQpx/TnjbQtg9M=;
-	h=From:Date:Subject:To:Cc:Reply-To:From;
-	b=SdgMXSTH3ynurqrrv/K25pF9AiJoFWUailsK++b6qcu6kMUDb4P5sG51V8Az1LUFi
-	 2f9u/i3uJK4HFr/4/odDt9fEZ7r2ZbVNdZe9FrGG200Ez6X4kNaB5C6qh4mD76OYbG
-	 3h8+JdxYokEvYe/dCDmnlA8jJaVXBwDj09viiEE5IHXVIINarTaiIGfPcWyYF4WLr9
-	 C+PRbf6nHu3jfWhr7V6FXaWpE5Z6NXx+rs/lfER7Nm6N26uCmBinnxQWeFuB19aEXR
-	 ijtJC6yUKbn5HTy+DZYgcx/gi0+g3Yr9rsu4rOG1iYpKUAMs9YVF+YV7+WDw/UBvJn
-	 G/SsmsJ9vlpFw==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 5CAAEC5AD2B;
-	Sat,  8 Aug 2026 00:35:58 +0000 (UTC)
-From: Casey Tunturi via B4 Relay <devnull+casey.samaritansolutions.net@kernel.org>
-Date: Fri, 07 Aug 2026 20:35:13 -0400
-Subject: [PATCH] slimbus: qcom-ngd-ctrl: match downstream DEF_ACT_CHAN
- encoding
+	dkim=pass (1024-bit key) header.d=holtechnik.com header.i=@holtechnik.com header.b="lLIiWtk8"
+Received: from localhost.localdomain (192-184-175-24.fiber.dynamic.sonic.net [192.184.175.24])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(Client did not present a certificate)
+	(Authenticated sender: phollinsky@holtechnik.com)
+	by hognose1.porkbun.com (Postfix) with ESMTPSA id 28F6247CEE6;
+	Sat,  8 Aug 2026 02:39:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=holtechnik.com;
+	s=default; t=1786156797;
+	bh=4IMInZ+M2f7yXs+SHa9tJ8pApnmxuMXar7MxhiEiLw4=;
+	h=From:To:Cc:Subject:Date;
+	b=lLIiWtk8GqC85QqdZBbXaCqNan8EgY/melK5+NzwGmFVbLs06rv4zA4sKWExGG+1z
+	 ZeBsdhiLKlQxus+C6VEjC82j0bbdBpjDDpY5Mek9wWRD5+oDdqGUbs/pRjkQS5r+YR
+	 9Qt89bS1K45OvHHi5evhFby4mV4ti54lNfvDexlE=
+From: Paul Hollinsky <phollinsky@holtechnik.com>
+To: Amit Kucheria <amitk@kernel.org>,
+	Thara Gopinath <thara.gopinath@gmail.com>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>
+Cc: Paul Hollinsky <phollinsky@holtechnik.com>,
+	Zhang Rui <rui.zhang@intel.com>,
+	Lukasz Luba <lukasz.luba@arm.com>,
+	Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+	Andy Shevchenko <andy@kernel.org>,
+	Hans de Goede <hansg@kernel.org>,
+	Svyatoslav Ryhel <clamor95@gmail.com>,
+	linux-pm@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: [PATCH] thermal: qcom-spmi-adc-tm5: fix all temperature reads failing with -EINVAL
+Date: Fri,  7 Aug 2026 19:39:37 -0700
+Message-ID: <20260808023938.57146-1-phollinsky@holtechnik.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260807-slimbus-def-act-chan-v1-1-fd542efb3d30@samaritansolutions.net>
-X-B4-Tracking: v=1; b=H4sIAMB5dmoC/y2NWw6CMBQFt0L6bZNS6AO3YvjovdxqjYC2xZgQ9
- m4RPyeZM2dliWKgxM7VyiK9QwrzVKA+VQxvbroSD0NhJoXUwgrD0yOMsCQ+kOcOM98tDkZQ68E
- 4gJqV6TOSD59f9tIfnBa4E+a99TcivZbylw+NgUvEcR7HkM+VUl6S67y3DaI0ziolNdQtYAeN9
- J12wg6akPXb9gUEzzu6xAAAAA==
-X-Change-ID: 20260807-slimbus-def-act-chan-b70e4fb7abb1
-To: Srinivas Kandagatla <srini@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org, 
- linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org, 
- stable@vger.kernel.org, Casey Tunturi <casey@samaritansolutions.net>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1786149357; l=1541;
- i=casey@samaritansolutions.net; s=20260808; h=from:subject:message-id;
- bh=e+Q5bDUByME3v5es1Uq1PGS+sTl936AilMSdVkoqZLc=;
- b=a/xPXsw22g09JQ+s5pQ5aOdlYeYCoHIxbI1RBc18HAnf2Bx0vvVajzqTLPH1wp5w3JUUE+fJA
- 4QJoSeL6h+jBzT2XrKBvJsFTpkiVKJEkXE2HRbVIpMxq0MszPOj2uB3
-X-Developer-Key: i=casey@samaritansolutions.net; a=ed25519;
- pk=oAg9oAsm2ZYWlQFWe7kijWzWnqsQZ/KIY59MAWrTRzk=
-X-Endpoint-Received: by B4 Relay for casey@samaritansolutions.net/20260808
- with auth_id=926
-X-Original-From: Casey Tunturi <casey@samaritansolutions.net>
-Reply-To: casey@samaritansolutions.net
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-From: Casey Tunturi <casey@samaritansolutions.net>
+adc_tm5_get_temp() rejects any iio_read_channel_processed() return value
+that is not IIO_VAL_INT. Since commit bb21ee31f575 ("iio: Fix
+iio_multiply_value use in iio_read_channel_processed_scale"),
+iio_read_channel_processed() returns 0 on success, per its documented
+contract, instead of passing through the value type from the underlying
+read.
 
-During my investigations, and some rather incessant cross-checking of
-blueline's SLIMbus path, I found that Qualcomm's downstream driver
-packs the first DEF_ACT_CHAN byte differently from mainline. Bits [7:5]
-hold the data format; bits [4:0] hold the five-bit client number.
+Since IIO_VAL_INT is 1, every successful read now takes the error path,
+so get_temp() returns -EINVAL unconditionally and every ADC-TM5 thermal
+zone is dead: with no valid temperature readings the core cannot
+evaluate trip points. Observed on a SC7180 Trogdor Chromebook (Lenovo
+IdeaPad Duet 3 / wormdingler), where the charger and skin-temp zones
+report an error on every read.
 
-I changed ours to match. It made no immediate difference on my own
-hardware: blueline's current values produce 0x0f either way. The
-downstream layout is correct and should help devices that use upper
-logical-address bits or a non-zero data format.
+The check no longer serves its original defensive purpose either: since
+commit 05f958d003c9 ("iio: Improve iio_read_channel_processed_scale()
+precision"), fractional value types are folded into the integer result
+by iio_multiply_value() inside the IIO core, so the return value carries
+no information beyond success or failure. Just drop the check and rely
+on the ret < 0 test above it.
 
-Fixes: 52490169cddf ("slimbus: ngd: add stream support")
-Cc: stable@vger.kernel.org
-Signed-off-by: Casey Tunturi <casey@samaritansolutions.net>
+qcom-spmi-adc-tm5 is the only iio_read_channel_processed() consumer in
+tree still testing the return value this way.
+
+Fixes: bb21ee31f575 ("iio: Fix iio_multiply_value use in iio_read_channel_processed_scale")
+Cc: stable@vger.kernel.org # 6.18+
+Signed-off-by: Paul Hollinsky <phollinsky@holtechnik.com>
 ---
- drivers/slimbus/qcom-ngd-ctrl.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/thermal/qcom/qcom-spmi-adc-tm5.c | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/drivers/slimbus/qcom-ngd-ctrl.c b/drivers/slimbus/qcom-ngd-ctrl.c
-index 3071e46d0..14192380d 100644
---- a/drivers/slimbus/qcom-ngd-ctrl.c
-+++ b/drivers/slimbus/qcom-ngd-ctrl.c
-@@ -1018,7 +1018,8 @@ static int qcom_slim_ngd_enable_stream(struct slim_stream_runtime *rt)
- 		if (txn.msg->num_bytes == 0) {
- 			int exp = 0, coef = 0;
+diff --git a/drivers/thermal/qcom/qcom-spmi-adc-tm5.c b/drivers/thermal/qcom/qcom-spmi-adc-tm5.c
+index bb6222c8cc5f..af72db6299cd 100644
+--- a/drivers/thermal/qcom/qcom-spmi-adc-tm5.c
++++ b/drivers/thermal/qcom/qcom-spmi-adc-tm5.c
+@@ -369,9 +369,6 @@ static int adc_tm5_get_temp(struct thermal_zone_device *tz, int *temp)
+ 	if (ret < 0)
+ 		return ret;
  
--			wbuf[txn.msg->num_bytes++] = sdev->laddr;
-+			wbuf[txn.msg->num_bytes++] =
-+				(port->ch.data_fmt << 5) | (sdev->laddr & 0x1f);
- 			wbuf[txn.msg->num_bytes] = rt->bps >> 2 |
- 						   (port->ch.aux_fmt << 6);
+-	if (ret != IIO_VAL_INT)
+-		return -EINVAL;
+-
+ 	return 0;
+ }
  
-
----
-base-commit: 55f2ea9ff83cc27a85526b14bc9b32f96a08d6ec
-change-id: 20260807-slimbus-def-act-chan-b70e4fb7abb1
-
-Best regards,
---  
-Casey Tunturi <casey@samaritansolutions.net>
-
+-- 
+2.55.0
 
