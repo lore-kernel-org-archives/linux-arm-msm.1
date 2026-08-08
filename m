@@ -1,302 +1,249 @@
-Received: from hognose1.porkbun.com (hognose1.porkbun.com [35.82.102.206])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98377165F1A;
-	Sat,  8 Aug 2026 03:47:18 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=35.82.102.206
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A56F326923
+	for <linux-arm-msm@vger.kernel.org>; Sat,  8 Aug 2026 04:38:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786160840; cv=none; b=THKwA1n6h53l2xGGRnaGm4Zq19tSFg9+o3qH4//0Nu8Y+jovYh2pSEyAgUsFyrhI9QtmjDRjbtV0Q9f53cEW9nwhkMazPgMEbPYNO7RmlZHZ3I3tLRU5xr76dhb+dGg3Qkl4uKdfOkvo3rYC0a813v+lLBRHRrBPGoGAuYMCjiU=
+	t=1786163888; cv=none; b=Bfz3ZQijNMOCj+fS73u2yurFpVo3/ppj27qJODk0TI1sCXVrJtHPmHgDhGemDwEf1+cYCQttZjZJRKcQmByTFWN5sJ7svg6nU0sNORv0f6Ad8G+8HGGhPc5QKt+NkkHW78sZL+rlWOBnUtFvNJryohzdxdv11MAa3A3mkvDQXlA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786160840; c=relaxed/simple;
-	bh=ECrAFzEMVgzxjpH9QjA/TOzzUVg32B0TBoV3YG4bMq4=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=GTVO454E0drSN3zFUqqRPeTEbnb1J6+H9H2pkp8yS47E0r7sYuwEJfIbV35hl3GOfENkbRmsBOEf8QVr0Gh6mm72c6yAUVfeTnLMcvYG5VdkM/Y5FG+Gnb5unq4FDPx7SyLw0nkRsbTAkmLMBTOtMr8tqdwp0GO9WArUb9jfiCo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=holtechnik.com; spf=pass smtp.mailfrom=holtechnik.com; dkim=pass (1024-bit key) header.d=holtechnik.com header.i=@holtechnik.com header.b=lQuox7AE; arc=none smtp.client-ip=35.82.102.206
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=holtechnik.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=holtechnik.com
+	s=arc-20240116; t=1786163888; c=relaxed/simple;
+	bh=Dc5ztGsIy0aJz9/GJTri7JwqP0wGVOI5md1RsmAa0Iw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=qgt9J5vf8nIrNSYr94ngGYE5GaN9dkQfHP8pwOQm55i1Q2g3ABz/gAAnCbp+pVhHaMoxMuXqhsPZpfhQL7Lyil71b3d2dq/tt6DgZZdmWvELea9FB5/DKuXoVrFBbCK+sI20v/A76BwPw7y7lOktPUTtIcod9s3Tg6Y/9z8AQTE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dd8mmTdT; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Rk35nnFb; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=holtechnik.com header.i=@holtechnik.com header.b="lQuox7AE"
-Received: from localhost.localdomain (192-184-175-24.fiber.dynamic.sonic.net [192.184.175.24])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(Client did not present a certificate)
-	(Authenticated sender: phollinsky@holtechnik.com)
-	by hognose1.porkbun.com (Postfix) with ESMTPSA id 7A35147EBFA;
-	Sat,  8 Aug 2026 03:47:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=holtechnik.com;
-	s=default; t=1786160838;
-	bh=GGDdDAc8Bdsq+Kyf4eKQQ96PLRRuWdnU9xLbdBl+78A=;
-	h=From:To:Cc:Subject:Date;
-	b=lQuox7AE/mJCZ6rYgisH7+XRBEn6/29HUk+gg9HBv/g6o2QR5WkWN1KcZ565i2Z/f
-	 cfVGDC47qTAk5dYyMOVeN3CJS51kHD5hMcpzYeZI7uo6XjpHUxa0UtavcEViQqTDbG
-	 +IqLz18eBmKHOp7fvRd1ZMacTALiIQLCYdG5p6HA=
-From: Paul Hollinsky <phollinsky@holtechnik.com>
-To: sumit.garg@oss.qualcomm.com,
-	andersson@kernel.org
-Cc: mathieu.poirier@linaro.org,
-	robin.clark@oss.qualcomm.com,
-	lumag@kernel.org,
-	abhinav.kumar@linux.dev,
-	akhilpo@oss.qualcomm.com,
-	konradybcio@kernel.org,
-	mukesh.ojha@oss.qualcomm.com,
-	cros-qcom-dts-watchers@chromium.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-remoteproc@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org,
-	regressions@lists.linux.dev
-Subject: [REGRESSION] qcom PAS TZ API migration breaks GPU and modem on TrustZone without PAS (sc7180 trogdor)
-Date: Fri,  7 Aug 2026 20:47:16 -0700
-Message-ID: <20260808034716.58888-1-phollinsky@holtechnik.com>
-X-Mailer: git-send-email 2.55.0
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dd8mmTdT";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Rk35nnFb"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6783wAIQ3267091
+	for <linux-arm-msm@vger.kernel.org>; Sat, 8 Aug 2026 04:38:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	PcfdXVqVda4nR+T+MGbj9iOc4TJuUh4We5btZ2d3Qbo=; b=dd8mmTdTegq4j4Qe
+	Wm1sDnzLstxCwrLEa6jYFXDUqP1acQRWETn668FS+liOGJs2lPF2uregsYiKovMG
+	BH5i53i1S0SAFjWjMfMkxLT4ng0vCOlGdsHitZDox6LM9cT3fKnH3q10IoCNWWBe
+	TjYSGSezKClmtto3NEpUlmEQRVo6dQJzo0B3IVZm0Ux3qyUms6+47mI6/KUqmaix
+	jJ5+DtbsuyhJ6ZM3q32FnoLrdnOn6xNGGuO5Q/09dQY/lc0q9s5A8ACJC1KL3Yl8
+	dRhZtYUmYGBU2XKEYq2JJbyNnTJFqlT77j+ecIbt9rEHNwas7TUNOzr52vuTCxT1
+	vSWM2A==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwv1y856m-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 08 Aug 2026 04:38:04 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-ca7c1e22995so270581a12.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 07 Aug 2026 21:38:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786163883; x=1786768683; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=PcfdXVqVda4nR+T+MGbj9iOc4TJuUh4We5btZ2d3Qbo=;
+        b=Rk35nnFbI4sY2wjxQCFBn0Q1b8ZP6g2Ky2q73ytzpBllcdnFEffKgiyXbthR39Vn3q
+         MsXRYSE/GWbtpAEslUCkD2M9kvNVufObNnZdL+mKK9zJHXTNkhVW3EzMnnVdUeQ1gMjv
+         o3geDTt87TYEosYaUp2BTHfT7tRCFM7EX28pEjJRdj8rmcjgX3UDe1vg/eJfBZmLTGaU
+         bs28+w6rszD+/HnfOQo0lYkQD0OWe23ZAemWAMj96lbazQxGgK3IlY25nkvL3SM62c4/
+         gW2QRnqkiXT0+unI1Ax70mTh41ES15UrHjcgGbDuYkGyzhMadL2XZFnzN9k3nyLVlKhQ
+         eYTA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786163883; x=1786768683;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=PcfdXVqVda4nR+T+MGbj9iOc4TJuUh4We5btZ2d3Qbo=;
+        b=fINBZlOicmjSORcWUsqwQpjuDw0TtZt3xSRbrLetBWPJ1RRxOxigi2vpgqBSxRXmiV
+         DzKE5LvN5NUbJaU+1l8Iu5FlnMpK5iYnW6YRDtKMTt7QIH65G8q8WhVTKoa5le0nvhU5
+         T+64MhXgSiVFQ37vZVeHH4Nbly89HdAwmGJKTmOVbzaj9lWVH24wfBfApFrBOQVjk4DY
+         R9BDQXGX9hmpR6/wkOEgvsk86Cv8dShQTilKV6pwXo3/tboZRq5dyUCZ9PGU1NIcFP0G
+         26SqpZggisacyRhM6KHyw480ZacWahT8nnw62oB8A3uTq99VpQZ6y5mGxTqYfxMrGAuc
+         EqtA==
+X-Forwarded-Encrypted: i=1; AHgh+RoFUaOWGmpupEc544jdnoovfMtC2HTsjHF7GFA9SWei/ORA7AVF1fjX1Y3/BlpEfIZy6iP/kijOxK9Gt23u@vger.kernel.org
+X-Gm-Message-State: AOJu0YwuvlfJ08wAs+OkW4Vhvlc+cc0f2AtRvWHondWt6XRRfzMYG43O
+	BiXVuJRmfG4l+n1jUkTon67m1sx7HP1f4y1ZetQ9tB9Iyq4ZOijgjknjchEO3y9m0hV2pqtkfMD
+	ZBAQUcS7D/FzY6H1z3UNNI4NYZXVW+pT57oEROyp4eCVKn5MLpPZ2cLl/h0S7m7OdrGl9
+X-Gm-Gg: AR+sD12k14p+YoxlPA21hEHapbqp0iJ05XpenCXJsiq6MBUcf1DSmDp7E1Nrbd1rpHq
+	V93iLNhh9n6J5AouUbk9eieWhKw5OvrYJlGB7BEPFbuWou6jhqXrG+R5NuEBL8sUWovLdhS7f36
+	zG++NKFlqAXyZMdcyF87U2FktowdjjHrjVdQskw0K1eeJLxKbQDiBCGtByMD6cpsCVSCfT1Cg0P
+	ydv1UvZfbL1SQyXYEAL4Xvh2xaoe1ZfdfL3IR68f8KJ0dIj7a4w5PJvxEs0o/m1KR6NGOzl7FZi
+	1Ytd5jEfv7IsxAP+KBzBFXpgS9L3JRVzG1ARs7jt2JyB+PWmn/+D9jfhjnyoFGXsYrKZgaeR/yY
+	bg6RpZH4OepZYFDq8ShvHwun2ix/wmw==
+X-Received: by 2002:a05:6a21:2293:b0:3c3:994f:b4f5 with SMTP id adf61e73a8af0-3cb85eefa11mr36524077637.28.1786163883103;
+        Fri, 07 Aug 2026 21:38:03 -0700 (PDT)
+X-Received: by 2002:a05:6a21:2293:b0:3c3:994f:b4f5 with SMTP id adf61e73a8af0-3cb85eefa11mr36524024637.28.1786163882662;
+        Fri, 07 Aug 2026 21:38:02 -0700 (PDT)
+Received: from [10.84.15.18] ([106.195.78.83])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315be86d3d1sm14702970eec.2.2026.08.07.21.37.45
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 07 Aug 2026 21:38:01 -0700 (PDT)
+Message-ID: <6ee7f32e-eb6c-e264-6f0d-541555f8fd62@oss.qualcomm.com>
+Date: Sat, 8 Aug 2026 10:07:42 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH 04/22] arm64: dts: qcom: hamoa: Reserve low IOVA range for
+ Iris
+To: Rob Herring <robh@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+Cc: Bryan O'Donoghue <bod@kernel.org>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Stanimir Varbanov <stanimir.k.varbanov@gmail.com>,
+        Sakari Ailus <sakari.ailus@linux.intel.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Stephan Gerhold <stephan.gerhold@linaro.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Stanimir Varbanov <stanimir.varbanov@linaro.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Johan Hovold <johan+linaro@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
+        Mansur Alisha Shaik <mansur@codeaurora.org>,
+        Andy Gross <andy.gross@linaro.org>,
+        Rob Clark
+ <robin.clark@oss.qualcomm.com>,
+        Stephen Boyd <sboyd@codeaurora.org>,
+        Yassine Oudjana <y.oudjana@protonmail.com>,
+        Pierre-Hugues Husson <phhusson@freebox.fr>,
+        Marc Gonzalez <mgonzalez@freebox.fr>,
+        cros-qcom-dts-watchers@chromium.org,
+        Matthias Kaehlcke <mka@chromium.org>,
+        Douglas Anderson <dianders@chromium.org>,
+        AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+        Aniket Masule <amasule@codeaurora.org>,
+        Malathi Gottam <quic_mgottam@quicinc.com>,
+        Rajendra Nayak <quic_rjendra@quicinc.com>,
+        Jonathan Marek
+ <jonathan@marek.ca>,
+        Dikshita Agarwal <dikshita@qti.qualcomm.com>,
+        Renjiang Han <quic_renjiang@quicinc.com>,
+        Krzysztof Kozlowski <krzk@kernel.org>, linux-media@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Daniel J Blueman <daniel@quora.org>, stable@vger.kernel.org
+References: <20260807-iris_iova_600mb_fix-v1-0-3996f67e33f9@oss.qualcomm.com>
+ <20260807-iris_iova_600mb_fix-v1-4-3996f67e33f9@oss.qualcomm.com>
+ <ruow4uus64krlpy2gvm3g2d6rq5kgmgxnlhstmecil3gw7lhkd@2golvucd473l>
+ <20260807162405.GA896590-robh@kernel.org>
+Content-Language: en-US
+From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+In-Reply-To: <20260807162405.GA896590-robh@kernel.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-
-Hi,
-
-Two commits from the "firmware: qcom: Add OP-TEE PAS service support"
-series break the GPU and the modem on SC7180 Chromebooks (trogdor):
-
-  f3b1357673dd ("remoteproc: qcom_q6v5_mss: Switch to generic PAS TZ APIs")
-  0be72be03ca7 ("drm/msm: Switch to generic PAS TZ APIs")
-
-Both are in linux-next as of next-20260805 and neither is in a released
-kernel yet, so there is still time to fix this before v7.3.
-
-Seen on a Lenovo IdeaPad Duet 3 (sc7180-trogdor-wormdingler) booting
-next-20260805. Reverting the two commits separately and together on an
-otherwise unmodified next-20260805 confirms them: each revert restores
-its own subsystem and only its own. Config: QCOM_SCM=y, QCOM_PAS=y,
-QCOM_TZMEM=y, DRM_MSM=m, QCOM_Q6V5_MSS=m, and CONFIG_TEE is not set so
-QCOM_PAS_TEE cannot be enabled and the SCM backend is the only possible
-PAS provider here.
-
-Both commits also revert cleanly on their own: the series migrated the
-callers but left the qcom_scm_pas_*() API exported.
-
-#regzbot introduced: f3b1357673dd
-#regzbot title: qcom: GPU and modem fail to probe on TrustZone firmware without PAS
-
-(0be72be03ca7 from the same series is an independent second culprit)
-
-
-Symptoms
-========
-
-1. The GPU never initialises and userspace falls back to llvmpipe:
-
-  adreno 5000000.gpu: [drm:adreno_zap_shader_load] *ERROR* PAS is not available
-  msm_dpu ae01000.display-controller: [drm:adreno_load_gpu] *ERROR* gpu hw init failed: -517
-
-  That pair repeats on every DRM open.
-
-2. The modem remoteproc never probes:
-
-  4080000.remoteproc: deferred probe pending
-
-  On trogdor the modem is what loads the WLAN firmware, so ath10k_snoc
-  probes, creates wifi-firmware.0, then never receives QMI. Result: no
-  wifi at all.
+X-Proofpoint-GUID: ivnlsemJ0PulUAi0wPya7FbCZiB2HRcr
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA4MDAzMyBTYWx0ZWRfX4dNf32h0VU97
+ N+/QhG72jHm0W8xJw18Q3RHN4xwd5jHWI+3AHDxG8xRZ9tt5SeByquBiWZVfsQVe2sJFOfgxwat
+ Z6K5VRRyD8zmFHvjY47YGyemlFDiX4iBF+1LghSqfyoBGTIrm04fFzTfDL7NrJ7pjLmC9nYSJAM
+ C1lXrmdcJXc2GvNoYwRn2EvYuIwwVNPEDLGElAaRAmnq0Pa9Ts9/IKfuh1BPM3do6c+FSx4K3dm
+ uOsIt/i/K5LD2IdUr+W49ENDYG0BDSpKo9V9tjbzdVTUi/EyJMYQkUxeyU3G7nKWTmS/Lh5prs0
+ 0pz4/S00jg3Xc/CVHQllpezJUP8Rq3J0B1yqiVEXEcyp4TAeyIQdDH9IFmfIvAjE3pFo14gQZhe
+ w7qCu5+y6lU4n95btuX2+6T+CFQQLh1qAF7ehdhRrfbQOh5zxBFCu80bDChvD4EPzs21wWfYtZS
+ MfT4I/C4AoBqryuCWhQ==
+X-Authority-Analysis: v=2.4 cv=PbrPQChd c=1 sm=1 tr=0 ts=6a76b2ac cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=KknAIj/64Ji5C9Eg1IdENQ==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=NEAV23lmAAAA:8 a=YG64nluAAAAA:20 a=t9ty7G3lAAAA:8 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=aHi8tEQZ11PmSqT2gCsA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22 a=CsAS6f0m0zARWR-uHzm3:22 a=bA3UWDv6hWIuX7UZL3qL:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA4MDAzMyBTYWx0ZWRfX5u207cKfPQ71
+ p99s1v5beVLVimUGscFn7QRn5zRIpA7i5GXsE9+OXmTGqUkeUp0WbVkeUAxzJUv20ENhf+93/px
+ jMbhP4ekkHA0pqZyNHbykkdNj96Yrdw=
+X-Proofpoint-ORIG-GUID: ivnlsemJ0PulUAi0wPya7FbCZiB2HRcr
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-08_02,2026-08-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 clxscore=1015 bulkscore=0 impostorscore=0 phishscore=0
+ lowpriorityscore=0 spamscore=0 adultscore=0 malwarescore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608080033
 
 
-Why PAS is unavailable here
-===========================
+On 8/7/2026 9:54 PM, Rob Herring wrote:
+> On Fri, Aug 07, 2026 at 12:03:50PM +0300, Dmitry Baryshkov wrote:
+>> On Fri, Aug 07, 2026 at 01:54:48PM +0530, Vikash Garodia wrote:
+>>> From: Daniel J Blueman <daniel@quora.org>
+>>>
+>>> On X1-family hamoa platforms, the Iris VPU reserves IOVA addresses
+>>> below 0x25800000 (600MB), primarily for secure non-pixel buffers. DMA
+>>> into that range, from any other stream id would triggers unhandled SMMU
+>>> page faults that cause spontaneous device reboots. This is readily
+>>> reproduced with one or more browser tabs driving multiple concurrent
+>>> video decode streams.
+>>>
+>>> Add a reserved-memory IOVA reservation node covering [0, 0x25800000]
+>>> and reference it from the Iris node so the IOMMU layer keeps DMA
+>>> allocations above that boundary.
+>>>
+>>> Link: https://github.com/qualcomm-linux/kernel-topics/issues/1157#issuecomment-4458933574
+>>> Fixes: 9065340ac04d ("arm64: dts: qcom: x1e80100: Add IRIS video codec")
+>>> Cc: stable@vger.kernel.org
+>>> Signed-off-by: Daniel J Blueman <daniel@quora.org>
+>>> Signed-off-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+>>> ---
+>>>  arch/arm64/boot/dts/qcom/hamoa.dtsi | 13 ++++++++++++-
+>>>  1 file changed, 12 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/arch/arm64/boot/dts/qcom/hamoa.dtsi b/arch/arm64/boot/dts/qcom/hamoa.dtsi
+>>> index 8a96ea1bdb9c4c409b2af997680d8c13fed0643e..87f424765d513c97b06303bceb75ca9f176d2ace 100644
+>>> --- a/arch/arm64/boot/dts/qcom/hamoa.dtsi
+>>> +++ b/arch/arm64/boot/dts/qcom/hamoa.dtsi
+>>> @@ -666,6 +666,17 @@ smem_mem: smem@ffe00000 {
+>>>  			hwlocks = <&tcsr_mutex 3>;
+>>>  			no-map;
+>>>  		};
+>>> +
+>>> +		/*
+>>> +		 * The Iris VPU reserves IOVA below 0x25800000 (600MB),
+>>> +		 * primarily for non-pixel buffers using different Stream IDs.
+>>> +		 * DMA into that range triggers unhandled SMMU faults and
+>>> +		 * spontaneous reboots, so reserve it to keep IOMMU
+>>> +		 * allocations above this boundary.
+>>> +		 */
+>>> +		iris_iova: iris-iova {
+>>> +			iommu-addresses = <&iris 0x0 0x0 0x0 0x25800000>;
+>>> +		};
+>>>  	};
+>>>  
+>>>  	qup_opp_table_100mhz: opp-table-qup100mhz {
+>>> @@ -5439,7 +5450,7 @@ &config_noc SLAVE_VENUS_CFG QCOM_ICC_TAG_ACTIVE_ONLY>,
+>>>  			interconnect-names = "cpu-cfg",
+>>>  					     "video-mem";
+>>>  
+>>> -			memory-region = <&video_mem>;
+>>> +			memory-region = <&video_mem>, <&iris_iova>;
+>> I don't like the idea of this series, because it _again_ doesn't tell us
+>> the truth about the hardware. This typicall ends up with bigger problems
+>> later on, when it starts to affect other bits and pieces.
+>>
+>> I don't want to NAK it, but I'd strongly ask to reconsider it.
+> I think this is an abuse of /reserved-memory. reserved-memory is 
+> reserved *physical* memory. Reserved IOVA is a property on top of that. 
+> I'm surprised this passes validation. If it does, I may go fix that.
 
-Both commits replace a qcom_scm_is_available() check with
-qcom_pas_is_available(). Those are not equivalent: the former asks
-whether the SCM transport is up, the latter whether the TrustZone
-firmware implements the peripheral authentication service.
+As per the reserved-memory.yaml schema document, the iommu-addresses
+property for IOVA reservation into /reserved-memory is allowed — it's
+documented for IOVA carveout reservations:
+https://github.com/devicetree-org/dt-schema/blob/main/dtschema/schemas/reserved-memory/reserved-memory.yaml#L56
 
-Trogdor's TZ does not implement PAS. I instrumented
-__qcom_scm_is_call_available() and the firmware answers coherently,
-yes to everything the platform actually uses, no only to PAS:
-
-  svc 0x06 cmd 0x01  IS_CALL_AVAIL      -> 1   (discovery itself works)
-  svc 0x02 cmd 0x01  PAS_INIT_IMAGE     -> 0
-  svc 0x02 cmd 0x05  PAS_AUTH_AND_RESET -> 0
-  svc 0x02 cmd 0x07  PAS_IS_SUPPORTED   -> 0
-  svc 0x0c cmd 0x16  MP_ASSIGN          -> 1   (used by ath10k MSA every boot)
-  svc 0x05 cmd 0x01  IO_READ            -> 1
-  svc 0x05 cmd 0x02  IO_WRITE           -> 1
-
-The third line is the one that matters. qcom_scm_probe() registers the
-SCM PAS backend only if qcom_scm_is_pas_available() (qcom_scm.c:2908):
-
-	if (qcom_scm_is_pas_available()) {
-		qcom_pas_ops_scm.dev = scm->dev;
-		qcom_pas_ops_register(&qcom_pas_ops_scm);
-	}
-
-and qcom_scm_is_pas_available() probes exactly
-QCOM_SCM_SVC_PIL / QCOM_SCM_PIL_PAS_AUTH_AND_RESET (svc 0x02 cmd 0x05),
-which returns 0 above. So qcom_pas_ops_register() is never called,
-ops_ptr stays NULL, and qcom_pas_is_available() (a plain
-!!smp_load_acquire(&ops_ptr)) is false for the lifetime of the boot.
-With CONFIG_TEE unset there is no OP-TEE backend to supply one either.
-
-That part is working as designed. The problem is that neither new call
-site actually needs PAS on this platform. The migration conflated "needs
-TrustZone memory protection" with "needs PAS".
-
-
-remoteproc
-==========
-
-sc7180_mss has need_mem_protection = true but need_pas_mem_setup = false.
-Its memory protection is qcom_scm_assign_mem(), a different TZ service
-(MP_ASSIGN above, which is available). Only the need_pas_mem_setup path
-issues PAS calls. Gating every need_mem_protection platform on PAS stops
-the modem probing at all.
-
-Six platforms specify need_mem_protection = true with
-need_pas_mem_setup = false:
-
-  sc7180_mss, sc7280_mss, sdm660_mss, sdm845_mss, msm8998_mss, msm8996_mss
-
-
-drm/msm
-=======
-
-Even before the SCM->PAS change, the ordering wasn't right here.
-
-zap_available is a static initialised to true (adreno_gpu.c:29), and it
-is only ever cleared inside zap_shader_load_mdt(). But
-adreno_zap_shader_load() checks for PAS *before* calling it:
-
-	if (!zap_available)		/* still true on the first call */
-		return -ENODEV;
-
-	if (!qcom_pas_is_available())	/* fails here, forever */
-		return -EPROBE_DEFER;
-
-	return zap_shader_load_mdt(...);	/* never reached */
-
-sc7180-trogdor.dtsi does /delete-node/ &gpu_zap_shader;, so the intended
-path on this board is: zap_shader_load_mdt() finds no zap-shader child,
-sets zap_available = false, returns -ENODEV, and the caller falls back to
-SECVID_TRUST_CNTL. ("Zap shader not enabled - using SECVID_TRUST_CNTL
-instead" appears on working v7.2 kernels.) With the PAS check in front of
-it, that discovery can never run, so the flag is never cleared and every
-subsequent call fails identically.
-
--EPROBE_DEFER is misleading here: it is not a probe return value.
-adreno_zap_shader_load() is called from a6xx_hw_init(), so nothing in
-the driver core retries it. It propagates up until adreno_load_gpu()
-returns NULL, and load_gpu() (msm_drv.c:200) re-attempts on every DRM
-open while priv->gpu is NULL. Each open fails the same way, and PAS can
-never become available in between.
-
-So the driver is consulting PAS before it knows whether it needs PAS.
-
-
-Suggested fix, drm/msm
-======================
-
-Given the above, I think the right fix is to move the availability check
-behind the DT discovery rather than restore the SCM check. Boards with no
-zap-shader node then never consult PAS at all, and boards that do have one
-keep the qcom_pas_is_available() gate the original patch was going for:
-
---- a/drivers/gpu/drm/msm/adreno/adreno_gpu.c
-+++ b/drivers/gpu/drm/msm/adreno/adreno_gpu.c
-@@ -52,6 +52,12 @@
- 		return -ENODEV;
- 	}
- 
-+	/* We need PAS to be able to load the firmware */
-+	if (!qcom_pas_is_available()) {
-+		DRM_DEV_ERROR(dev, "PAS is not available\n");
-+		return -EPROBE_DEFER;
-+	}
-+
- 	ret = of_reserved_mem_region_to_resource(np, 0, &r);
- 	if (ret) {
- 		zap_available = false;
-@@ -170,18 +176,11 @@
- int adreno_zap_shader_load(struct msm_gpu *gpu, u32 pasid)
- {
- 	struct adreno_gpu *adreno_gpu = to_adreno_gpu(gpu);
--	struct platform_device *pdev = gpu->pdev;
- 
- 	/* Short cut if we determine the zap shader isn't available/needed */
- 	if (!zap_available)
- 		return -ENODEV;
- 
--	/* We need PAS to be able to load the firmware */
--	if (!qcom_pas_is_available()) {
--		DRM_DEV_ERROR(&pdev->dev, "PAS is not available\n");
--		return -EPROBE_DEFER;
--	}
--
- 	return zap_shader_load_mdt(gpu, adreno_gpu->info->zapfw, pasid);
- }
- 
-
-I have this booting here: the GPU initialises and logs "Zap shader not
-enabled - using SECVID_TRUST_CNTL instead", as it did before the
-regression.
-
-
-Suggested fix, remoteproc
-=========================
-
-Keep an SCM gate for need_mem_protection and add a separate PAS gate for
-need_pas_mem_setup. This is what I did to get it working:
-
---- a/drivers/remoteproc/qcom_q6v5_mss.c
-+++ b/drivers/remoteproc/qcom_q6v5_mss.c
-@@ -2079,7 +2079,16 @@ static int q6v5_probe(struct platform_device *pdev)
- 	if (!desc)
- 		return -EINVAL;
- 
--	if (desc->need_mem_protection && !qcom_pas_is_available())
-+	/*
-+	 * Memory protection is done through qcom_scm_assign_mem(), which needs
-+	 * SCM but not PAS. Only the memory setup path issues PAS calls, so
-+	 * requiring PAS for every need_mem_protection platform prevents the
-+	 * modem from probing at all on TZ firmware that offers no PAS.
-+	 */
-+	if (desc->need_mem_protection && !qcom_scm_is_available())
-+		return -EPROBE_DEFER;
-+
-+	if (desc->need_pas_mem_setup && !qcom_pas_is_available())
- 		return -EPROBE_DEFER;
- 
- 	mba_image = desc->hexagon_mba_image;
-
-Unlike the drm/msm case there is no "remove the SCM dependency" argument
-to make here: mss calls qcom_scm_assign_mem() directly, so it is
-intrinsically an SCM client on these platforms.
-
-The SCM gate is definitely required here: qcom_scm_assign_mem()
-dereferences __scm->mempool without testing it (qcom_scm.c:1370), so
-removing the check would trigger a NULL dereference if the driver probes
-before qcom_scm has.
-
-
-On the API contract
-===================
-
-For what it is worth, the kernel-doc for qcom_pas_is_available()
-(qcom_pas.c:256) reads:
-
-  Note that it is mandatory for any PAS client to invoke this API.
-  If it returns true then only any other PAS API can be invoked.
-
-That is a guard to call before invoking a PAS API, not a statement that a
-driver touching TZ at all should refuse to probe without PAS.
-ipa_main.c:764 consults it only on the loader path that genuinely needs
-PAS rather than as a blanket probe precondition, which is the shape both
-fixes above are aiming for.
-
-Happy to send either or both as proper patches if this looks right to you,
-or to test whatever shape you prefer.
-
-All the best,
-Paul Hollinsky
+> Rob
+>
