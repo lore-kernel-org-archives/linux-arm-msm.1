@@ -1,226 +1,218 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E30D20C029
-	for <linux-arm-msm@vger.kernel.org>; Sat,  8 Aug 2026 15:49:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 077F937F8D3
+	for <linux-arm-msm@vger.kernel.org>; Sat,  8 Aug 2026 16:43:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.172
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786204143; cv=none; b=T3rPyYmZ5PW+Ix76trSj4w/d/BELx6sN8upN6wakazJAWzSaOlbQw6zuoZHr0gvMsDqXHk4IfmGEinuHdtZHNSUMtHVun7TvdtMxvVcj9nF5opg3ZPUZI0XyVZj6bdzMqvYIAo1zmdOc+gaNmPeiJ/OeOuapsIqFemO0KxchpSM=
+	t=1786207393; cv=none; b=DwJLRmSkiGefRRZfjlm1AxPTic7PqfRLTxntTXjZA+EOoZGaJg09FCT89N0v38fgibYZSvYN69M3hVKm09usAz1wpWwxLP9rOT5b7QVMMmthWz61zTwcQEgmLGPkTytniZ4HkFTEEFeUXQUbfw4qGRIeTRlTrnEAXIdUwaRN8Fw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786204143; c=relaxed/simple;
-	bh=N8Yt2YM6rMTV/wrCpmXi61IPPAlmKt+fFV3OrTRCvV4=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Yum8x0+m3FOzCvsfPUoZ8xhzerRULRNvb53Wr6LCHGoCcPmhhMTRo6ANHo3cLhF7Lbmytp+JdoFr8GL0Zt6sot2qUj6RugjiQYxGruB3sCWytTwNJtFeLbV04oKqz+OZWz3FnlnuLp97NaZRYJdXk5VdKyprC0P8rwGgNrjk8mo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MTZP2/8u; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gS+UtM7b; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1786207393; c=relaxed/simple;
+	bh=0bxXGjtUYZ12GWiuUDgAxwvkwIt/FjwVfCq8AvrhPv0=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=A6/n7Yvdl3+onl7nIyyc9Hi0E1zvsx9a4Kb07NfzInbXl/Vp3L2rKHe+aEEkhCKNR+loKXGmN85cxo8jPm4ffVtuv/4ec75y2JZw4JC/tl/SKJrfVfb39ybzGBxNtK7jvaQjOXC6nDY0ClQx6Wociho7Li+nCN+Y5YE3JQA2yHk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=H1EzjQIt; arc=none smtp.client-ip=209.85.222.172
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MTZP2/8u";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gS+UtM7b"
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 678Dbmk2275112
-	for <linux-arm-msm@vger.kernel.org>; Sat, 8 Aug 2026 15:49:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	RTmqVCewzLJ3UuxN9kqxZ/aOIecC3UmWqHTjkXzeM8Q=; b=MTZP2/8uzLzkVA8c
-	cv54y2v3sv3NMO3MlwqKbreET3ZGqSjdWMlrb00w/sK4aelgfoNbjVPETYAlH6D1
-	GoOkTC2HnoB/4pmMhi67oN2gLix5Yh0fCEs7F9gSRmdgnzHcUNjyvGhi2pH9T1l0
-	eb8Wf+q9bLc7dbkA6iLPBiz3OhrgtMMZtMQwQ92DlRbw13GIIQc2IUcpyWjj6+Hx
-	MtXq5o6ArvuKUEXsdaNfFnK8Sh24HhC2k7gXK4UATqHXflrZt3lkoCxbBAHWvIXH
-	lXNurEZJG+Rzx014R/48ZlszQ92kVaQe+RTkZy2ClTmjSEiEPA4iu0MGO3PnyJa6
-	XYOYiQ==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwuf799b1-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 08 Aug 2026 15:49:00 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-cb6ef846b33so410413a12.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 08 Aug 2026 08:49:00 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="H1EzjQIt"
+Received: by mail-qk1-f172.google.com with SMTP id af79cd13be357-92e50a650a0so24858985a.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 08 Aug 2026 09:43:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786204139; x=1786808939; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=RTmqVCewzLJ3UuxN9kqxZ/aOIecC3UmWqHTjkXzeM8Q=;
-        b=gS+UtM7bKzCfP8ipe/YeKlLQ6fwIoN21jxuacNcvY3q8kQyD9reLVdCllKrPaf4n4+
-         IPq1nxsIq43QNBZ8y0cviN1Du6t1tV3Y6Tnvh3JgOiFNndq6CehXxc0F689sGbaSMiAh
-         47XARr077ivWBuTARi25q37FtYl4+nElWfU0xWQUnvcz2E3L3fC0B48GYDV7tZ13locG
-         j0Xc9RPnWq//T0a43sTsxc+jK10djTDqY/LJib6K/QvISLujB9TDl7+JV1631wUEtAwZ
-         Z4p0RIKuF+QuSzTpMzyFvqmIEqHfyhIP11gIV6BYwMcArmffnlIsP5NiUMUU0C8U+ygc
-         sfsg==
+        d=gmail.com; s=20251104; t=1786207391; x=1786812191; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Lz/jE6jwP2/NdrVzpAXOIzj+A4PttFcfbpXJ2Xjln/8=;
+        b=H1EzjQItY4ME3a5Vc0pqyttfrr6T94PzJOMu1C/dNCZkznAIqgoaCXbb6rfrYkPW1U
+         3YWZjOxTa7YUA1fsIO0mw5ZRiyvjsnNljW1PrbMi0d4MPLFQKR8HeZK1MB08ymRScMJq
+         RZS7liV7qdLBjHifEAVWcLx732eUPxGUuO1NBCVFyDcNBRnOrZr29m2GIFCFjvH8XibI
+         CjuG6yr6wHO602pYw0iCJZUFS6k2e8lowPcAputpocIg01DDGfDnUZ6boUqTBmFW5OY6
+         D1sPoOOc7JfVemRg3Gcf/WxMRAPGXkUfMbkyZqL503pQNtbKzb3td7SPefDU91XHDg/j
+         i0QQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786204139; x=1786808939;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1786207391; x=1786812191;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=RTmqVCewzLJ3UuxN9kqxZ/aOIecC3UmWqHTjkXzeM8Q=;
-        b=ksXza5pnGdY1xSZ/ntF3HFHcO0Oh6EUq+PiiiG0jNew919ylnSCY5ceyEraxrxnheI
-         7AlH0RW7MS2KSmUTiKeokJZXYPhTO17XgUMKsb5FVzSmTa9zDivwxsdi3NN2qhh+0Zw+
-         LS7nV73FvGGgfE9chwEx1rKsZEBMZqUTGxMyS7mlsl/Duy0y43+Ad0aAnqJ+mKPkCx85
-         dlR5ItYcm0sn71IGbDlsm04uVukn9PL5Vj+hdhCSkebyoFk0StR9nn0OISQk/5tNtH6g
-         blQuj9TaY3TIPmuAKtghD3p2SnXLUvIrYHeWCs7Yifhcja8WBGyEt8A/DEcXo6NkhsJt
-         9tpA==
-X-Forwarded-Encrypted: i=1; AHgh+Rp1Cy8C3brgnQrW1jAk7/LL/fVRZv1lqnNnq37n7PONkL3xBXEUloFf09DJPOJE8+4WnFC3buqwWscRAlPi@vger.kernel.org
-X-Gm-Message-State: AOJu0YxdkV6XaqmT+80ES2Rn54bJqN8CaZlgX6hEYg1lRAmmYNmjltmn
-	4EaYAfEOAC3XPINwfP+R/HduN39yP3eoOdU/lcpDsnFTWYcmsDloLDDXS9wlZTrIMUNIYq+JRTZ
-	P0y6gNRo7rDbhKckbRFjyOc6BobEwdnr1xsMvFc09oFU0xEzDFajRczq+DjQ4YA3H68gF
-X-Gm-Gg: AR+sD13nDGq0/IfYesyvuS/2d7PYdd63QHmaeYEdgFrJs6eaoQqUI0mTvEggiIjM/ne
-	E+lsAJGw1L73IQ1+3gdrcVnpKmHg5HrtyuBl0G4D1iJRVsiPzNNyvxGFQH6ma8y0kocO9wqbdlV
-	/ybEk/l4SKL0ro6/Ar1WMGY6pee9AjGf7ALLDh2oWYiN8BAXbE/iWqCwUQypbbEghLsJi1ilLDG
-	ySNlu1t2R+3jqiDSqgMrvHy6mC8NFFt3eNKme5imW1S8QJQldiDlwT0P1plIe+vY/aAx9N49MYA
-	4vBGNmSMN56Lq1B0qjJe0cRrv3XbyGDGZwppni+M6Z9m+aKX0wgUJCef4opsV7hDgnQjRO7K88F
-	zmxf/Nhz759sXlybms6k/NX19dZpC/W2epAU=
-X-Received: by 2002:a05:6a21:9983:b0:3a3:adea:83bc with SMTP id adf61e73a8af0-3cbd39aad61mr7173140637.15.1786204139238;
-        Sat, 08 Aug 2026 08:48:59 -0700 (PDT)
-X-Received: by 2002:a05:6a21:9983:b0:3a3:adea:83bc with SMTP id adf61e73a8af0-3cbd39aad61mr7173066637.15.1786204138737;
-        Sat, 08 Aug 2026 08:48:58 -0700 (PDT)
-Received: from [192.168.0.172] ([183.83.139.112])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315bebdf796sm19528407eec.22.2026.08.08.08.48.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 08 Aug 2026 08:48:58 -0700 (PDT)
-Message-ID: <73b26356-8ccb-4a81-b626-a96de5b13173@oss.qualcomm.com>
-Date: Sat, 8 Aug 2026 21:18:42 +0530
+        bh=Lz/jE6jwP2/NdrVzpAXOIzj+A4PttFcfbpXJ2Xjln/8=;
+        b=f9E6Zh5vQ2e5D2z9U8rsV8D25OERJ7tTKUm+UbKR5LZKLqSSbg1MXIlBicNcaySATZ
+         vTTFDZXAmzPavi8SXW/1x8jE+1fZD5/7Nfkfxqgn8/N8V5qgl++bTI5bsDnVPYAcOchA
+         o/wi/p6NveDr7yzVj09IUUhU84RhcR8/9QF4RBvfmrbtF/wRYOkNSSDGx7IvaIWQ7kzd
+         XQGSex9QuUg+s4RhNwV/4OWMDJzr9ecCcs4d6vE4o8O5RemUWqMTu4S9XF+2/1VhvBlM
+         UgZ1m/vknwfjOAEHImWec9hSsko9Fl0dVqRmFZ9cCNYlFTNxrK3LaXKCv6OlyFKbKTkJ
+         jgEg==
+X-Forwarded-Encrypted: i=1; AHgh+RrzHi14PddxhR0RzjlvGBep9BwP51iLzgncdFQLLi3T+cFmkcXD4J0SovD+sHeWJzeRk0dxYru1nRlCoIUx@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzavttb65kmzh4urW4r8b6eve9kYYqubV9A0lNNz0765AzQl+pG
+	J7Yx2FHnP6XvBaqNuQTjYVUOalgUjdhk3ojJctY9qzoImKBbYU3dxBhY
+X-Gm-Gg: AR+sD11FrcSYQ2sha4UBR6WRvjdnSz1JTRVEGM2zDU2GEWKhmHKTAtcpUN3arxEUu01
+	LRwYlDaf31Y5f8HX7+uLNX6f3Ck34TQimR6XgpQ/988oGp4A/cMGUsr7ufROpLRXzhnFmMWsdMm
+	2qfL55q/nvqiDZ160SQXlGRCAdWJjeVip1EGNLfuzSQSI6YKxfm5tQwMXFYbpCYIf1e+l5zaW3U
+	xS25787fy8glmrzQOfJm9Ta0DBuWhig6sRa67L4Fu6SMe1E/WKvwVmh6WXt8gg1l4rgvHVKOfgb
+	I306Ag/0LzU2YD4nNpF9U8laqCKoZFeENjO83UrGhQmNcF6F8VYqGxtgjWIjeAP3nqMyothcQNE
+	09cXH9aewZ/QswCAXzAa6JmsRsvQLV30HJ2nhL5Bs9YmA4XMpekH1kLESD631H141E2qAxIVYSu
+	ebOMFaGj9XKgQmqfvGjY2/XnFJswTB2uSKLZbijOmZ9aEwGsSlwtt5FSHG9G7FGEj+bpNYo32Dk
+	9qrpFEb/d1sIarv2LTxvulQEmtI+wZI5WUN4CS2iYbByCd6YMw7SMwPldF4jJ0hd42e9m3Dvffz
+	YmsNV0nB4g==
+X-Received: by 2002:a05:620a:44d2:b0:92e:6f45:dfdb with SMTP id af79cd13be357-93648f51d58mr3084475285a.0.1786207390576;
+        Sat, 08 Aug 2026 09:43:10 -0700 (PDT)
+Received: from JesseofTheNorth.internal ([2600:4041:502b:ea00::1408])
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-9366e22695bsm402910885a.25.2026.08.08.09.43.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 08 Aug 2026 09:43:10 -0700 (PDT)
+From: Jesse Casco <jesse.casco@gmail.com>
+To: Vinod Koul <vkoul@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	linux-phy@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org
+Subject: phy-qcom-qmp-combo: com_aux enable fails on a DP-only instance with no USB half (Snapdragon X2 Elite / glymur)
+Date: Sat,  8 Aug 2026 12:41:48 -0400
+Message-ID: <20260808164148.123057-1-jesse.casco@gmail.com>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/22] arm64: dts: qcom: hamoa: Reserve low IOVA range for
- Iris
-To: Bryan O'Donoghue <bod@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Stanimir Varbanov <stanimir.k.varbanov@gmail.com>,
-        Sakari Ailus <sakari.ailus@linux.intel.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Stephan Gerhold <stephan.gerhold@linaro.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Stanimir Varbanov <stanimir.varbanov@linaro.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Johan Hovold <johan+linaro@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>,
-        Mansur Alisha Shaik <mansur@codeaurora.org>,
-        Andy Gross <andy.gross@linaro.org>,
-        Rob Clark
- <robin.clark@oss.qualcomm.com>,
-        Stephen Boyd <sboyd@codeaurora.org>,
-        Yassine Oudjana <y.oudjana@protonmail.com>,
-        Pierre-Hugues Husson <phhusson@freebox.fr>,
-        Marc Gonzalez <mgonzalez@freebox.fr>,
-        cros-qcom-dts-watchers@chromium.org,
-        Matthias Kaehlcke <mka@chromium.org>,
-        Douglas Anderson <dianders@chromium.org>,
-        AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-        Aniket Masule <amasule@codeaurora.org>,
-        Malathi Gottam <quic_mgottam@quicinc.com>,
-        Rajendra Nayak <quic_rjendra@quicinc.com>,
-        Jonathan Marek
- <jonathan@marek.ca>,
-        Dikshita Agarwal <dikshita@qti.qualcomm.com>,
-        Renjiang Han <quic_renjiang@quicinc.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>, linux-media@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-        Daniel J Blueman <daniel@quora.org>, stable@vger.kernel.org
-References: <20260807-iris_iova_600mb_fix-v1-0-3996f67e33f9@oss.qualcomm.com>
- <20260807-iris_iova_600mb_fix-v1-4-3996f67e33f9@oss.qualcomm.com>
- <ruow4uus64krlpy2gvm3g2d6rq5kgmgxnlhstmecil3gw7lhkd@2golvucd473l>
- <27f0b033-e940-4369-aaa0-f08426aac73f@oss.qualcomm.com>
- <tdgbfewnlj3xypfnyckivnd2b6667laapkcfs2vpnk74bh22aa@obasatns3jfr>
- <MHRdGybtgutWtIo4EOZisrGdCVgOj7AdOArjfuxCXTTNcc1o1v40eltpkDUqZl5sOY9tjRFaY6tc_OKvzrYJ4w==@protonmail.internalid>
- <429d5d1d-92d5-4949-9991-b092cc7e9937@oss.qualcomm.com>
- <181b02e3-831e-4461-9327-ab5646380a10@kernel.org>
-Content-Language: en-US
-From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-In-Reply-To: <181b02e3-831e-4461-9327-ab5646380a10@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA4MDEzNSBTYWx0ZWRfX5QanhgWr44CY
- E7Zwefrn8LCf4b7610GfHA6FrB8+RGyQBiduKvCkgUpk8RFuffT4FHAatoodAAvk/XQNABPUfgd
- ADrF8qMCRSdMhVtHeccxkap3ks49ojk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA4MDEzNSBTYWx0ZWRfX+j7rom0ZLdOq
- 28ts7lww8feaUkgODXGA33F5CVPTdZPKP7qJlazi4f8p14I0qq/QKE8HGZNK6if1vK2GseLG9vo
- AE1NG+8rVog3jHahKom/K8WkmD2qgFIEtLfdUoxYKQT3YqOIX5EJ2yC7IFi8aeK15p/t1a1+xKU
- WnI+HnnEoVTVqopjhPBzc5JcozSwaVmfMM4Sr9ouTVOE5dOSKmy2cd55m9SNA0Rc20TzkNvuZ8O
- 78unE1w6QUPGqXv2YB8Iu8XaW63TGO6ThWyjLwKry58OuVL75w26KdkLXhpDmiDHNgaJxp/FH58
- DTpjFCUbqMKZS45n83YhG07niFwN5nU+qO9rm3t2JHQoyFnLNsK9yTvH/9E/E12IKLx8LXOpDbo
- B/WC95VG569Yev25X2asVCesSMwz28586weiYzYB2e8+i0XYtHlumafcE8/S41QVmaUDSqD3esc
- +bZ4WvEDdi1CrvzmEsQ==
-X-Authority-Analysis: v=2.4 cv=ecENubEH c=1 sm=1 tr=0 ts=6a774fec cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=vZaankvBGbqXg3MvYcFdyQ==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=GtVQ2Xx2KDLxgnwpovAA:9 a=QEXdDO2ut3YA:10 a=_Vgx9l1VpLgwpw_dHYaR:22
-X-Proofpoint-ORIG-GUID: yDWWLXN0lbFPUYgNSJEn2CyFWnDb924P
-X-Proofpoint-GUID: yDWWLXN0lbFPUYgNSJEn2CyFWnDb924P
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-08_05,2026-08-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 malwarescore=0 spamscore=0 impostorscore=0
- suspectscore=0 bulkscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608080135
+Content-Transfer-Encoding: 8bit
 
+Hi,
 
+On the ASUS Zenbook A16 (UX3607OA, Snapdragon X2 Elite Extreme, glymur /
+X2E94100) the internal HDMI output never produces a picture, and a second
+problem turns that into an unusable machine. I would like verification on
+the reading of both.
 
-On 8/7/2026 6:48 PM, Bryan O'Donoghue wrote:
-> On 07/08/2026 11:22, Vikash Garodia wrote:
->>>>> I don't like the idea of this series, because it_again_ doesn't 
->>>>> tell us
->>>>> the truth about the hardware. This typicall ends up with bigger 
->>>>> problems
->>>> honestly...thats all the info i have about the vpu hardware that it
->>>> restricts non pixel to DMA from the 0-600MB range. The same i have been
->>>> trying for a year now
->>> You are not honest here. You also know that there are secure streams,
->>> which have to use their own IOMMU SIDs. And some of them, as far as I
->>> remember, also have memory range restrictions.
->> please read the commit description again, the answer is there.
-> 
-> So I don't necessarily get all of the detail out of the commit log myself.
-> 
-> Could you give some detail to address Dmitry's point.
-> 
-> The question as I read it is - are all of the other potential SIDs 
-> covered by this change ?
-> 
+The failure
 
-I get the query as "secure streams also have their dedicated reserve 
-regions, so how does this approach helps" - This patch does not reserve 
-any IOVA for secure streams, only the forward looking subnode can assign 
-specific reserve for specific streams.
-The patch enforces a common IOVA across all streams, and is good enough 
-to fix the problem we have w.r.t device reset.
+	Failed to enable clk 'com_aux': -16
+	phy phy-88e1000.phy.7: phy init failed --> -16
+	  clk_branch_toggle <- clk_branch2_enable <- qmp_combo_com_init
+	    <- qmp_combo_dp_init <- phy_init
 
->>> So, if we land these patches, how do extend it later to account for all
->>> of that?
->>>
->> forward looking design would be subnode, which we can land ontop of this
->> series.
-> 
-> Yes it should be possible to branch to make subnodes work on-top of this 
-> - accepting that once this lands it becomes ABI and support for this 
-> method must be sustained, even after sub-nodes land.
-> 
+Plugging a display in afterwards produces only "phy_power_on was called
+before phy_init", and the connector comes up with nothing behind it:
 
-Thats the plan. This goes as ABI with subnode to land on top of it.
+	                      status         EDID      modes
+	nothing attached      disconnected   0 bytes   0
+	display attached      connected      0 bytes   0
 
-> ---
-> bod
+Why this looks like the driver and not the DT
 
+phy@88e1000 has no DWC3 behind it. The USB controllers on this board are
+a400000.usb (multiport), a600000.usb and a800000.usb; none is the tertiary
+instance phy@88e1000 would pair with. That PHY is DisplayPort-only here,
+and every tertiary clock sits at an enable count of 0 while the two PHYs
+that do have controllers sit at 1:
+
+	                                en prep     rate     hw  consumer
+	gcc_usb3_tert_phy_com_aux_clk    0   0    19200000   Y   88e1000.phy
+	gcc_usb3_tert_phy_aux_clk        0   0    19200000   N   88e1000.phy
+	gcc_usb3_tert_phy_pipe_clk       0   0   125000000   N   88e1000.phy
+	gcc_usb3_sec_phy_com_aux_clk     1   1    19200000   Y   fde000.phy
+	gcc_usb3_prim_phy_com_aux_clk    1   1    19200000   Y   fd5000.phy
+
+com_aux reports hw_enable = Y at an enable count of 0 -- the hardware reads
+as on while nothing in the framework has enabled it, which is what I would
+expect if clk_branch_toggle() polls the halt bit and times out at -EBUSY.
+
+qmp_combo_clk_init() fetches {aux, cfg_ahb, ref, com_aux} with
+devm_clk_bulk_get_optional(), and qmp_combo_com_init() enables the whole
+bulk unconditionally -- including com_aux, which on this instance never
+comes out of halt.
+
+I cannot say from outside the SoC why it does not, but I can narrow it. It
+is not a shared vote: gcc_usb3_tert_phy_com_aux_clk is BRANCH_HALT with
+enable_reg == halt_reg == 0xe1074, its own CBCR rather than a bit in a vote
+register, so enabling it waits on no other master. Its source is
+gcc_usb3_tert_phy_aux_clk_src, an XO-derived RCG, at enable count 0 here
+while the secondary instance's equivalent sits at 2. That leaves the
+block's own power/reset state, which on the two working instances is
+brought up by the DWC3 controller this one does not have. I would rather be
+told the mechanism than guess at it, which is much of why I am writing.
+
+Dropping com_aux from that node's clocks/clock-names makes the PHY
+initialise cleanly: no clk-branch warnings, EDID 0 -> 512 bytes, modes
+0 -> 32. That is legal, since the bulk get is _optional and cfg_ahb already
+demonstrates it -- cfg_ahb is absent from all three combo PHY nodes here and
+nothing complains. I do not think it is the right fix, though: the DT
+describes the PHY's clocks correctly, and it is the driver that enables them
+all regardless of whether the instance has a USB half.
+
+Reproduced on the merged upstream A16 DTS
+
+The machine daily-drives linux-next next-20260807 booting the merged board
+file, e8fbbca94db7 ("arm64: dts: qcom: glymur: Add Asus Zenbook A16
+(UX3607OA)"), which builds standalone. It fails identically, and everything
+above is from that boot. The only local DT delta is an unrelated
+arm,no-completion-irq on the SCMI transport.
+
+Konrad, the merged commit lists the HDMI port as working, and it does not
+work here, so I am sure I am missing something on my side: kernel revision,
+a prerequisite, or a difference between units. One thing I can rule out --
+booting your merged DTS, the board brings up all three USB controllers
+including &usb_mp, so that is not it. Any pointer on what to check next
+would be welcome.
+
+Also, msm_dp_aux_transfer does not time out when the PHY is down
+
+This is the part I would most like help with, because it turns a dead output
+into a dead machine. With com_aux present, plugging a display in puts the DP
+IRQ thread into uninterruptible sleep, and the compositor follows it in:
+
+	STAT  PID   WCHAN                  COMMAND
+	D     480   -                      irq/230-dp_display_isr
+	Dl+   4855  msm_dp_aux_transfer    Hyprland
+
+	# /proc/480/stack
+	[<0>] msm_dp_aux_transfer+0x1e4/0x868 [msm]
+	[<0>] drm_dp_dpcd_access+0x84/0x1a0 [drm_display_helper]
+	[<0>] drm_dp_dpcd_probe+0x50/0x150 [drm_display_helper]
+	[<0>] drm_dp_dpcd_read+0x12c/0x240 [drm_display_helper]
+	[<0>] drm_dp_read_dpcd_caps+0x48/0x270 [drm_display_helper]
+	[<0>] msm_dp_display_process_hpd_high.isra.0+0x50/0x240 [msm]
+	[<0>] msm_dp_hpd_plug_handle.isra.0+0x84/0x198 [msm]
+	[<0>] msm_dp_bridge_hpd_notify+0x94/0x2a0 [msm]
+
+The AUX transfer is waiting on hardware that was never initialised -- the
+"phy_power_on was called before phy_init" above is the same fact from the
+other end -- and it never gives up. The compositor holds the DRM master lock
+while stuck, so SIGKILL does not land and the session cannot be recovered.
+
+It is not specific to hotplug: rebooting with the display attached brings
+the machine up already wedged, same two tasks in the same function, with
+phy_power_on-before-phy_init logged at 2.3s and 11.8s. An attached HDMI
+display is enough to make the graphical session unusable from power-on, with
+no user action at all. It took a cold boot with the cable out to recover.
+
+An AUX transfer that cannot complete because the PHY is down seems like
+something that should fail rather than block forever, independently of
+whatever is wrong with com_aux. I have put the msm display maintainers on Cc
+rather than writing separately, since both halves are the same event seen
+from either side -- happy to split it out if you would rather keep the PHY
+thread clean.
+
+Environment
+
+  - ASUS Zenbook A16 UX3607OA, Snapdragon X2 Elite Extreme (glymur/X2E94100)
+  - linux-next next-20260807, merged upstream board DTS
+  - HDMI chain: hdmi-connector <- Parade PS185 (simple-bridge)
+    <- mdss_dp2 (af64000) <- phy@88e1000
+  - Reproduces on every boot
+
+I have the hardware and use it daily, so I am happy to test a patch or dump
+any register state that would help.
+
+I should be upfront that I am a hobbyist rather than a kernel developer, and
+this work was AI-assisted. The measurements are real and reproducible;
+please weigh my interpretation of them accordingly.
+
+Thanks,
+
+Jesse Casco
