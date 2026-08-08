@@ -1,78 +1,78 @@
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
+Received: from mail-qv1-f44.google.com (mail-qv1-f44.google.com [209.85.219.44])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 077F937F8D3
-	for <linux-arm-msm@vger.kernel.org>; Sat,  8 Aug 2026 16:43:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.222.172
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4899430C152
+	for <linux-arm-msm@vger.kernel.org>; Sat,  8 Aug 2026 17:13:26 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.44
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786207393; cv=none; b=DwJLRmSkiGefRRZfjlm1AxPTic7PqfRLTxntTXjZA+EOoZGaJg09FCT89N0v38fgibYZSvYN69M3hVKm09usAz1wpWwxLP9rOT5b7QVMMmthWz61zTwcQEgmLGPkTytniZ4HkFTEEFeUXQUbfw4qGRIeTRlTrnEAXIdUwaRN8Fw=
+	t=1786209207; cv=none; b=WN2GmSgGBZzaF++tckS2AgzSU4ovJKKo+uSg6oNpL34RerYZ0oWlT1fu95QU3GJyin2zYTvotW1uOmidZ5I8ctLYb8OuJ3YYjf4BY8Rlw4WWs1DWXIC/0FIU1wXr3IYSpDsun+d3pShHnHr30seiLdlsHvCuqOB+kG3UGoiEy/8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786207393; c=relaxed/simple;
-	bh=0bxXGjtUYZ12GWiuUDgAxwvkwIt/FjwVfCq8AvrhPv0=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=A6/n7Yvdl3+onl7nIyyc9Hi0E1zvsx9a4Kb07NfzInbXl/Vp3L2rKHe+aEEkhCKNR+loKXGmN85cxo8jPm4ffVtuv/4ec75y2JZw4JC/tl/SKJrfVfb39ybzGBxNtK7jvaQjOXC6nDY0ClQx6Wociho7Li+nCN+Y5YE3JQA2yHk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=H1EzjQIt; arc=none smtp.client-ip=209.85.222.172
+	s=arc-20240116; t=1786209207; c=relaxed/simple;
+	bh=CmcaR6/ABzIXfL+K9Bw3YQJDPZRLUNl9mrhb+l/OLXo=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Q13xms64d0okq/BFM80Y8bPX+NEovo3BIBmYHG8qYsSez3b93bPWnv1Il5n4YYbK41rUSxivi0qSIfgcMq3s682qFZm+Oua1tVfcUBIvELvZFWU22aYTbgWhzm9f/JP9hSVwOUMAOBtDV5eStefEOr9PvDu4FuiX22NKussEWZE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=da6TjQFq; arc=none smtp.client-ip=209.85.219.44
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="H1EzjQIt"
-Received: by mail-qk1-f172.google.com with SMTP id af79cd13be357-92e50a650a0so24858985a.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 08 Aug 2026 09:43:11 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="da6TjQFq"
+Received: by mail-qv1-f44.google.com with SMTP id 6a1803df08f44-8efcfdb2b43so3532516d6.3
+        for <linux-arm-msm@vger.kernel.org>; Sat, 08 Aug 2026 10:13:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786207391; x=1786812191; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1786209205; x=1786814005; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Lz/jE6jwP2/NdrVzpAXOIzj+A4PttFcfbpXJ2Xjln/8=;
-        b=H1EzjQItY4ME3a5Vc0pqyttfrr6T94PzJOMu1C/dNCZkznAIqgoaCXbb6rfrYkPW1U
-         3YWZjOxTa7YUA1fsIO0mw5ZRiyvjsnNljW1PrbMi0d4MPLFQKR8HeZK1MB08ymRScMJq
-         RZS7liV7qdLBjHifEAVWcLx732eUPxGUuO1NBCVFyDcNBRnOrZr29m2GIFCFjvH8XibI
-         CjuG6yr6wHO602pYw0iCJZUFS6k2e8lowPcAputpocIg01DDGfDnUZ6boUqTBmFW5OY6
-         D1sPoOOc7JfVemRg3Gcf/WxMRAPGXkUfMbkyZqL503pQNtbKzb3td7SPefDU91XHDg/j
-         i0QQ==
+        bh=tOPf2FedcS2eOFBS8+PnivGCIYlDP4XiFxFJYIs9CDY=;
+        b=da6TjQFqhJGMH5k0DmC2Z/bHODT+YDAffi69B+MuEZ5SCdjj1eZTXtLMyachPBy/1R
+         xJJxl35iAq8j7oTpPe7Bj+R9EzU2fn2kpJCXO4ysfxVths+hXWXY9jGkPaNUfZ9HQssv
+         G3T1Q4ENarlPVtlLcB0TtC/UFqUN6wf8YULvrs8gPxXZPytV0Ede70hoHr3tTc+6N3NW
+         ZGmth5GE3T3ySSyMH6ixW9dFh709kNIwbsE5aMPcQsKXYLKuFqJlCxD0OdCrdZ0S+Sum
+         83dO1bm/rYbQbH/+7vExnxBYKXcSP6V0zxfc6unPdoh5nneHEGro2cL7TAykQg7RiXsc
+         WbGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786207391; x=1786812191;
+        d=1e100.net; s=20251104; t=1786209205; x=1786814005;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Lz/jE6jwP2/NdrVzpAXOIzj+A4PttFcfbpXJ2Xjln/8=;
-        b=f9E6Zh5vQ2e5D2z9U8rsV8D25OERJ7tTKUm+UbKR5LZKLqSSbg1MXIlBicNcaySATZ
-         vTTFDZXAmzPavi8SXW/1x8jE+1fZD5/7Nfkfxqgn8/N8V5qgl++bTI5bsDnVPYAcOchA
-         o/wi/p6NveDr7yzVj09IUUhU84RhcR8/9QF4RBvfmrbtF/wRYOkNSSDGx7IvaIWQ7kzd
-         XQGSex9QuUg+s4RhNwV/4OWMDJzr9ecCcs4d6vE4o8O5RemUWqMTu4S9XF+2/1VhvBlM
-         UgZ1m/vknwfjOAEHImWec9hSsko9Fl0dVqRmFZ9cCNYlFTNxrK3LaXKCv6OlyFKbKTkJ
-         jgEg==
-X-Forwarded-Encrypted: i=1; AHgh+RrzHi14PddxhR0RzjlvGBep9BwP51iLzgncdFQLLi3T+cFmkcXD4J0SovD+sHeWJzeRk0dxYru1nRlCoIUx@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzavttb65kmzh4urW4r8b6eve9kYYqubV9A0lNNz0765AzQl+pG
-	J7Yx2FHnP6XvBaqNuQTjYVUOalgUjdhk3ojJctY9qzoImKBbYU3dxBhY
-X-Gm-Gg: AR+sD11FrcSYQ2sha4UBR6WRvjdnSz1JTRVEGM2zDU2GEWKhmHKTAtcpUN3arxEUu01
-	LRwYlDaf31Y5f8HX7+uLNX6f3Ck34TQimR6XgpQ/988oGp4A/cMGUsr7ufROpLRXzhnFmMWsdMm
-	2qfL55q/nvqiDZ160SQXlGRCAdWJjeVip1EGNLfuzSQSI6YKxfm5tQwMXFYbpCYIf1e+l5zaW3U
-	xS25787fy8glmrzQOfJm9Ta0DBuWhig6sRa67L4Fu6SMe1E/WKvwVmh6WXt8gg1l4rgvHVKOfgb
-	I306Ag/0LzU2YD4nNpF9U8laqCKoZFeENjO83UrGhQmNcF6F8VYqGxtgjWIjeAP3nqMyothcQNE
-	09cXH9aewZ/QswCAXzAa6JmsRsvQLV30HJ2nhL5Bs9YmA4XMpekH1kLESD631H141E2qAxIVYSu
-	ebOMFaGj9XKgQmqfvGjY2/XnFJswTB2uSKLZbijOmZ9aEwGsSlwtt5FSHG9G7FGEj+bpNYo32Dk
-	9qrpFEb/d1sIarv2LTxvulQEmtI+wZI5WUN4CS2iYbByCd6YMw7SMwPldF4jJ0hd42e9m3Dvffz
-	YmsNV0nB4g==
-X-Received: by 2002:a05:620a:44d2:b0:92e:6f45:dfdb with SMTP id af79cd13be357-93648f51d58mr3084475285a.0.1786207390576;
-        Sat, 08 Aug 2026 09:43:10 -0700 (PDT)
+        bh=tOPf2FedcS2eOFBS8+PnivGCIYlDP4XiFxFJYIs9CDY=;
+        b=DvC2ecXVV6i5ypQOPuDJ61vdWD8F88f7QLk7139IlwTFVfkJodZb+aDDuzYf8Tsoq6
+         oiCS7GTSMMawH3/tl9XshFEANtO6N+RudUM9irp9fE4NN7tRlQbhIOgtw/nuJpMQCol/
+         qFWnehGMfPAjyp9ywOYHgFVKwRuIWNKmk1IDZYMFNj45D/862idQEdUMmhr2hu1nOntX
+         BTjddG7gHuUibJvBueHh2QjFtpWiyAEzZBQ6Ks5BwI4JoRUMoGwOpiJE1PSfQLoLovnF
+         X3I7ZIhbo63z7Xqls1CH970siBN5FffIiv9z/lW2WNAkHg3rXDB33/35J539tJ9KFDJ0
+         yoaw==
+X-Forwarded-Encrypted: i=1; AHgh+RpHrndU1aP78X9eelaKDcDFqcF8HwWFr/e/Wvdw5v/rpMn8zl2ABAc06tmi/TaXP4erL/KMoqTMzhk41/Bz@vger.kernel.org
+X-Gm-Message-State: AOJu0YxF5Nv06PiL1rjSF3vjqYTvi/XkxGajtvstrYnuU6Dw0qsXBP85
+	fBcf7iZ8KQKWjkf2YddP7gWfImGVxa4BEJd5HNINZL++vldhhbeda1kp
+X-Gm-Gg: AR+sD11woK6HEN0pVX5OV0ig4eq00umElkRKht0IM/MksGFMAlgqQKBKbNA38Fo/VsA
+	UW8j18K1hGm3WE5skSn0w8WIQRohvJyQPyA2IkMlpO+pqp+6axL73o32bQU/PmoKjB54OZQHTfY
+	+xS6dH+wgqbHvFGDfHuwPw2HcD2BeH6qNtvix8LrweMdLhdhpqNso9FWFWdOaAOgXnKIW5ZdZLm
+	9P6QDqPkH6vWjKpOIWqFkm/oVzjcIOILvKozKJ+BhVLK99noJ/ctdaiFeETbHc70lBw8IMA55SB
+	QWMdQNYgvI+a4Y/v3xHGr97HFk+ZI9qvRaHK0E9rSsFDrAP9/GhkDLSkFLkwCcw1jEA3nn/dEoL
+	ntfZztuiTX7cmwBcqo8iOjEt5HO/yOY2YnFFyEW2S1HsUN41I9Er/qY2g2/wrroy7gXo+alTTR9
+	0jUbG2nhTMlSQomUfc7RwwV66TcUSgn09im+b0kWG85U8TgKuCxYJ58GcJ5AcY+Pcg7Z9B9qyjQ
+	Jn6EJ7B8cYrYclAK/ODAOrDVSsNMaFoOed4ZfRpEx+gUuacCxH+zxL93JOS5lSSCCo/AKLxUw==
+X-Received: by 2002:a05:6214:4108:b0:907:888e:380c with SMTP id 6a1803df08f44-908813741c6mr361668286d6.26.1786209204977;
+        Sat, 08 Aug 2026 10:13:24 -0700 (PDT)
 Received: from JesseofTheNorth.internal ([2600:4041:502b:ea00::1408])
-        by smtp.gmail.com with ESMTPSA id af79cd13be357-9366e22695bsm402910885a.25.2026.08.08.09.43.09
+        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-908a91b5899sm34499566d6.17.2026.08.08.10.13.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 08 Aug 2026 09:43:10 -0700 (PDT)
+        Sat, 08 Aug 2026 10:13:24 -0700 (PDT)
 From: Jesse Casco <jesse.casco@gmail.com>
-To: Vinod Koul <vkoul@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
+To: Abel Vesa <abel.vesa@linaro.org>
+Cc: Abel Vesa <abel.vesa@oss.qualcomm.com>,
+	Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
 	Dmitry Baryshkov <lumag@kernel.org>,
+	Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
 	Abhinav Kumar <abhinav.kumar@linux.dev>,
 	linux-phy@lists.infradead.org,
 	linux-arm-msm@vger.kernel.org,
 	dri-devel@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org
-Subject: phy-qcom-qmp-combo: com_aux enable fails on a DP-only instance with no USB half (Snapdragon X2 Elite / glymur)
-Date: Sat,  8 Aug 2026 12:41:48 -0400
-Message-ID: <20260808164148.123057-1-jesse.casco@gmail.com>
+Subject: glymur eDP PHY (v8): link trains only at HBR3, all lower rates fail
+Date: Sat,  8 Aug 2026 13:13:21 -0400
+Message-ID: <20260808171321.133028-1-jesse.casco@gmail.com>
 X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -82,137 +82,94 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Hi,
+Hi Abel,
 
-On the ASUS Zenbook A16 (UX3607OA, Snapdragon X2 Elite Extreme, glymur /
-X2E94100) the internal HDMI output never produces a picture, and a second
-problem turns that into an unusable machine. I would like verification on
-the reading of both.
+On an ASUS Zenbook A16 (UX3607OA, Snapdragon X2 Elite Extreme) the internal
+eDP panel never comes up on mainline. It is the link rate: the v8 eDP PHY
+appears to bring up a usable link only at HBR3.
 
-The failure
+Tested on linux-next next-20260713, next-20260803 and next-20260807, where
+phy-qcom-edp.c is byte-identical -- so not a recent regression, and the May
+2026 series (eDP low-vdiff LDO config, unified swing/pre-emphasis tables,
+eDP/DP mode switch) is present in the tree tested here. The sweep below is
+from next-20260803; the machine has since run next-20260807 as its daily
+driver, where HBR3 still trains every boot.
 
-	Failed to enable clk 'com_aux': -16
-	phy phy-88e1000.phy.7: phy init failed --> -16
-	  clk_branch_toggle <- clk_branch2_enable <- qmp_combo_com_init
-	    <- qmp_combo_dp_init <- phy_init
+PHY: phy@faac00, "qcom,glymur-dp-phy". Panel: SDC ATNA60HR07-0.
 
-Plugging a display in afterwards produces only "phy_power_on was called
-before phy_init", and the connector comes up with nothing behind it:
+Rate sweep. Same kernel, same DTB, same PHY driver; only the requested link
+rate forced (one line in msm_dp_panel_read_dpcd(), msm rebuilt as a module
+between boots). Four lanes throughout, which the sink and the DT both allow:
 
-	                      status         EDID      modes
-	nothing attached      disconnected   0 bytes   0
-	display attached      connected      0 bytes   0
+  link rate     clock recovery (TPS1)   equalization (TPS2/3)   result
+  1620 (RBR)    FAIL -110               -                       no link
+  2700 (HBR)    FAIL -110               -                       no link
+  5400 (HBR2)   pass                    FAIL -110               no link
+  8100 (HBR3)   pass                    pass                    panel lights
 
-Why this looks like the driver and not the DT
+HBR3 trains on the first attempt, every boot. At HBR2 clock recovery succeeds
+and the sink then requests voltage swing 0 / pre-emphasis 1 on all four lanes
+and never reports EQ done, through the full retry budget, with the driver
+programming exactly what is asked each time. At HBR and RBR clock recovery
+itself never completes.
 
-phy@88e1000 has no DWC3 behind it. The USB controllers on this board are
-a400000.usb (multiport), a600000.usb and a800000.usb; none is the tertiary
-instance phy@88e1000 would pair with. That PHY is DisplayPort-only here,
-and every tertiary clock sits at an enable count of 0 while the two PHYs
-that do have controllers sit at 1:
+Why the panel never comes up: the sink advertises HBR2 as its maximum, so msm
+correctly selects the one rate that half-works.
 
-	                                en prep     rate     hw  consumer
-	gcc_usb3_tert_phy_com_aux_clk    0   0    19200000   Y   88e1000.phy
-	gcc_usb3_tert_phy_aux_clk        0   0    19200000   N   88e1000.phy
-	gcc_usb3_tert_phy_pipe_clk       0   0   125000000   N   88e1000.phy
-	gcc_usb3_sec_phy_com_aux_clk     1   1    19200000   Y   fde000.phy
-	gcc_usb3_prim_phy_com_aux_clk    1   1    19200000   Y   fd5000.phy
+  DPCD 0x001 MAX_LINK_RATE           = 0x00
+  DPCD 0x00e TRAINING_AUX_RD_INTERVAL= 0x84   (ext receiver caps present)
+  DPCD 0x2201 ext MAX_LINK_RATE      = 0x14   (HBR2)
+  DPCD 0x010..0x01f SUPPORTED_LINK_RATES = 1.62 / 2.70 / 5.40 Gbps, no more
+  DPCD 0x002 MAX_LANE_COUNT          = 0xc4   (4 lanes, TPS3, enhanced framing)
 
-com_aux reports hw_enable = Y at an enable count of 0 -- the hardware reads
-as on while nothing in the framework has enabled it, which is what I would
-expect if clk_branch_toggle() polls the halt bit and times out at -EBUSY.
+That advertised maximum does not close against the panel's own preferred
+timing: 2880x1800 @ 120.000169 Hz, pixel clock 709.633 MHz, EDID declaring 10
+bits per primary colour.
 
-qmp_combo_clk_init() fetches {aux, cfg_ahb, ref, com_aux} with
-devm_clk_bulk_get_optional(), and qmp_combo_com_init() enables the whole
-bulk unconditionally -- including com_aux, which on this instance never
-comes out of halt.
+  10 bpc -> 21.29 Gbps   HBR2 4-lane = 17.28 Gbps  123%  does not fit
+                         HBR3 4-lane = 25.92 Gbps   82%  fits
+   8 bpc -> 17.03 Gbps   HBR2                      98.6% fits, barely
 
-I cannot say from outside the SoC why it does not, but I can narrow it. It
-is not a shared vote: gcc_usb3_tert_phy_com_aux_clk is BRANCH_HALT with
-enable_reg == halt_reg == 0xe1074, its own CBCR rather than a bit in a vote
-register, so enabling it waits on no other master. Its source is
-gcc_usb3_tert_phy_aux_clk_src, an XO-derived RCG, at enable count 0 here
-while the secondary instance's equivalent sits at 2. That leaves the
-block's own power/reset state, which on the two working instances is
-brought up by the DWC3 controller this one does not have. I would rather be
-told the mechanism than guess at it, which is much of why I am writing.
+So at the depth it advertises, this panel's preferred mode cannot be carried
+by the maximum link rate it advertises. It currently runs at HBR3, four lanes,
+output_bpc 10, no DSC. I have not read the panel's DSC capability registers,
+so I cannot rule out that HBR2 plus DSC is the intended combination -- if so,
+that would explain the advertised maximum and I would be glad to be corrected.
 
-Dropping com_aux from that node's clocks/clock-names makes the PHY
-initialise cleanly: no clk-branch warnings, EDID 0 -> 512 bytes, modes
-0 -> 32. That is legal, since the bulk get is _optional and cfg_ahb already
-demonstrates it -- cfg_ahb is absent from all three combo PHY nodes here and
-nothing complains. I do not think it is the right fix, though: the DT
-describes the PHY's clocks correctly, and it is the driver that enables them
-all regardless of whether the instance has a USB half.
+Forcing the link above that advertised maximum is what our local tree does,
+and it is why this laptop has a display at all -- but it is not a fix, which
+is why I am reporting rather than sending a patch.
 
-Reproduced on the merged upstream A16 DTS
+One observation, as a question rather than a claim: of all the revisions,
+qcom_edp_com_configure_pll_v8() is the only one in which HBR2 has no PLL
+programming of its own --
 
-The machine daily-drives linux-next next-20260807 booting the merged board
-file, e8fbbca94db7 ("arm64: dts: qcom: glymur: Add Asus Zenbook A16
-(UX3607OA)"), which builds standalone. It fails identically, and everything
-above is from that boot. The only local DT delta is an unrelated
-arm,no-completion-irq on the SCMI transport.
+  rate   v4 hsclk_sel/dec_start   v6            v8 (glymur)
+  1620   0x5 / 0x69               0x5 / 0x34    0x5 / 0x34
+  2700   0x3 / 0x69               0x3 / 0x34    0x3 / 0x34
+  5400   0x1 / 0x8c               0x1 / 0x46    0x2 / 0x4f  <- falls into 8100
+  8100   0x0 / 0x69               0x0 / 0x34    0x2 / 0x4f
 
-Konrad, the merged commit lists the HDMI port as working, and it does not
-work here, so I am sure I am missing something on my side: kernel revision,
-a prerequisite, or a difference between units. One thing I can rule out --
-booting your merged DTS, the board brings up all three USB controllers
-including &usb_mp, so that is not it. Any pointer on what to check next
-would be welcome.
+DP_PHY_VCO_DIV does differ between the two (0x02 vs 0x01), but
+qcom_edp_set_vco_div() uses it to derive the pixel clock rather than the
+serial rate. Is the shared case intentional for v8, and if not, are the
+correct v8 HBR2 values available? It would not explain the RBR and HBR
+failures, whose cases are distinct, so I may be looking at the wrong thing.
 
-Also, msm_dp_aux_transfer does not time out when the PHY is down
+Ruled out by experiment here:
+ - the device tree: our board file and the merged upstream one fail
+   identically; link-frequencies allows 1.62/2.7/5.4/8.1 in both
+ - the drivers/gpu/drm/msm/dp rework between next-20260713 and next-20260803:
+   an rc6 kernel built with the 0713 dp/ directory fails the same way
 
-This is the part I would most like help with, because it turns a dead output
-into a dead machine. With com_aux present, plugging a display in puts the DP
-IRQ thread into uninterruptible sleep, and the compositor follows it in:
+Separately: when eDP training fails, msm_dp_display_atomic_disable() pushes
+the idle pattern into a link that was never enabled, and on glymur that
+resets the SoC. I am sending a patch for that to the msm list alongside this
+report.
 
-	STAT  PID   WCHAN                  COMMAND
-	D     480   -                      irq/230-dp_display_isr
-	Dl+   4855  msm_dp_aux_transfer    Hyprland
+Happy to run any test here and capture logs over netconsole -- a retail
+machine with no firmware unlock, but I can rebuild and reboot it freely.
 
-	# /proc/480/stack
-	[<0>] msm_dp_aux_transfer+0x1e4/0x868 [msm]
-	[<0>] drm_dp_dpcd_access+0x84/0x1a0 [drm_display_helper]
-	[<0>] drm_dp_dpcd_probe+0x50/0x150 [drm_display_helper]
-	[<0>] drm_dp_dpcd_read+0x12c/0x240 [drm_display_helper]
-	[<0>] drm_dp_read_dpcd_caps+0x48/0x270 [drm_display_helper]
-	[<0>] msm_dp_display_process_hpd_high.isra.0+0x50/0x240 [msm]
-	[<0>] msm_dp_hpd_plug_handle.isra.0+0x84/0x198 [msm]
-	[<0>] msm_dp_bridge_hpd_notify+0x94/0x2a0 [msm]
-
-The AUX transfer is waiting on hardware that was never initialised -- the
-"phy_power_on was called before phy_init" above is the same fact from the
-other end -- and it never gives up. The compositor holds the DRM master lock
-while stuck, so SIGKILL does not land and the session cannot be recovered.
-
-It is not specific to hotplug: rebooting with the display attached brings
-the machine up already wedged, same two tasks in the same function, with
-phy_power_on-before-phy_init logged at 2.3s and 11.8s. An attached HDMI
-display is enough to make the graphical session unusable from power-on, with
-no user action at all. It took a cold boot with the cable out to recover.
-
-An AUX transfer that cannot complete because the PHY is down seems like
-something that should fail rather than block forever, independently of
-whatever is wrong with com_aux. I have put the msm display maintainers on Cc
-rather than writing separately, since both halves are the same event seen
-from either side -- happy to split it out if you would rather keep the PHY
-thread clean.
-
-Environment
-
-  - ASUS Zenbook A16 UX3607OA, Snapdragon X2 Elite Extreme (glymur/X2E94100)
-  - linux-next next-20260807, merged upstream board DTS
-  - HDMI chain: hdmi-connector <- Parade PS185 (simple-bridge)
-    <- mdss_dp2 (af64000) <- phy@88e1000
-  - Reproduces on every boot
-
-I have the hardware and use it daily, so I am happy to test a patch or dump
-any register state that would help.
-
-I should be upfront that I am a hobbyist rather than a kernel developer, and
-this work was AI-assisted. The measurements are real and reproducible;
-please weigh my interpretation of them accordingly.
-
-Thanks,
+Thanks for the glymur PHY support -- everything else in it works here.
 
 Jesse Casco
