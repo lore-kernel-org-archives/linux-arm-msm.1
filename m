@@ -1,181 +1,192 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A80C39D6F2;
-	Sat,  8 Aug 2026 18:20:14 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20E433164B4
+	for <linux-arm-msm@vger.kernel.org>; Sat,  8 Aug 2026 20:23:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786213225; cv=none; b=nwOHSoFRRtBei0kLMJ8A99IbfmTR8u6DtZj2WW7t7ItYzC9QzeBUZ+bD4BeE7iQMdJ5XAvHAKJSY8AphqpRcj81wjvQpGwOtVpjNzYNPHH3svk7Ok+NDFMkMnqoGCC1qE9hYV9YsAWtpLl0w2WJhO3gY15U75gBTT/lsKD2ed7o=
+	t=1786220606; cv=none; b=iPZ5Cmz83UbLFbXBYUe9dp8iGkPXR7MiARvoi6zq5cyrf9GRkNVYE8R6VQwtLFNbmFDkZ0vbO0NS769kemTDMWPPDfMfETbg8f9uT+pI6+9OXC4/5vEOXSGqYivWDV25B9ZSE5Wkh23dZDgc+qbm2OUctKxJqYIODRU+WD1Kass=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786213225; c=relaxed/simple;
-	bh=orgqcrdT+1EdwlXhpoeFuH64cXFCpomuXXvTMzwE1i0=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 MIME-Version; b=Ua58DDx5JOn087FQyn9WDJk7Dtt/Xz0K8q5/aeOWmuqbrWK597HB/953FFDfj0QozbaqPJnjK33JPi4vFVUDlA6Ss99DE1DdF0L/pDsQ7JaEY+0wfOL2KkIyYO858gyOMCXQdiMTMfxbPEoRyLy9DsAWDiJYjB4iWTxkC1EReKc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=YpFzAcX1; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1786220606; c=relaxed/simple;
+	bh=oLLjuOgK040qtaqEeDmQSIpMa5K6dCEHSb8JedTqI74=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=JIijNOyV1sInnyptOG9iwav7WZNNRlMK5Bd2DXHjsXxL4l3sX2Zh1wAsyb8g6rnsw6egJA7E0ht99qbqZJf/+U9ID2ajx1i29HoFT7VHQ5pQlT13Aw8mf5lXdv1pTzX70GGk90FVXx5M64b2DMgoRal3gUJy/PNpZsWvoP1iMTI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kt+u8FVE; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=D6ZO/a7c; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="YpFzAcX1"
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 678Gn1H1350017;
-	Sat, 8 Aug 2026 18:19:57 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kt+u8FVE";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="D6ZO/a7c"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 678Jx3W91040063
+	for <linux-arm-msm@vger.kernel.org>; Sat, 8 Aug 2026 20:23:24 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=JSJlRvgpauk
-	igs3Lp4WVk0Lefxy09nbLs/0/hv72SKU=; b=YpFzAcX1hp6a1fKbb1hh5pK3ZKs
-	NnI5MpaJV1zmUkFv5KhCKBdy6RM39X82Hvtq5wOPxE1QCsW5SDGQKuoTp4qH7WF9
-	wIuTiQIwIOZ6c6LE1nlD4+FHK322keaKBFAcX8gh3XBCpifzsHjRmPhaFYHzMbKP
-	lkP/U+9EaZ+uQ8mXtdU2RtfRX90udV3V3mqt3ydrGMj5mX68cnZAWjVPmoNZXqin
-	OxMAUvGoUBa4LP7yv2jzsmvaQtc/DlA445thDVjRWFHyQ1dmYJhrDhSH4spxiFQW
-	MFHtD6nOaMerHs8u5X2sDaVC4hMycX2Uzdw6L5pjfPodBdTi4rS1LBH29LA==
-Received: from apblrppmta02.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwvhv9eg0-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sat, 08 Aug 2026 18:19:57 +0000 (GMT)
-Received: from pps.filterd (APBLRPPMTA02.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA02.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTP id 678IJrJh009399;
-	Sat, 8 Aug 2026 18:19:53 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 4fwwhhhg1j-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sat, 08 Aug 2026 18:19:53 +0000 (GMT)
-Received: from APBLRPPMTA02.qualcomm.com (APBLRPPMTA02.qualcomm.com [127.0.0.1])
-	by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 678IJrFA009393;
-	Sat, 8 Aug 2026 18:19:53 GMT
-Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-pkumpatl-hyd.qualcomm.com [10.147.245.204])
-	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 678IJrwB009392
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Sat, 08 Aug 2026 18:19:53 +0000 (GMT)
-Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 3914174)
-	id 3F4D3C0C; Sat,  8 Aug 2026 23:49:51 +0530 (+0530)
-From: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
-To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
-        Sashiko <sashiko-bot@kernel.org>
-Subject: [PATCH v1 5/5] ASoC: qcom: sc8280xp: Fix TDM hw_params error handling
-Date: Sat,  8 Aug 2026 23:49:48 +0530
-Message-Id: <20260808181948.2489187-6-prasad.kumpatla@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260808181948.2489187-1-prasad.kumpatla@oss.qualcomm.com>
-References: <20260808181948.2489187-1-prasad.kumpatla@oss.qualcomm.com>
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=LdzD5p1HJXZooPEGcGX0tp
+	QPvvizEG9tLbaiZX0cVG8=; b=kt+u8FVEh/bU2DfPfFoMg2I3guthlAy9iOyC+V
+	NdAfLJtskO4y0En7SYPgtF7/bCQPhbXQVXB/Bul2PZe8kObpTNV45sXQ1G4+CrwG
+	x7BCKcDSAEHj+Z2niKb66eB7ZXB4D3o+ZX453KJZY1Di9bkUu2B51fj1IbY0MxLu
+	J7LlnUPqWsIixMn3k5opQU+ODasu2MXu/M3A1BQCrCBtzwVg8zRQ2ld0QnmM2BCd
+	275qEjDp2vhaV4wr15rL64c14avRsM1sMuLfEauGUIjFF015KbfPBBFEeyTIvmcv
+	EXNW/FsTgJJ3hVsZcWwsZ3xelvfn7+lFvnycf/q5tJ2bvncQ==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwv1y9qdn-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sat, 08 Aug 2026 20:23:23 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2cc6dd43737so17167695ad.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 08 Aug 2026 13:23:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786220603; x=1786825403; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=LdzD5p1HJXZooPEGcGX0tpQPvvizEG9tLbaiZX0cVG8=;
+        b=D6ZO/a7cev9hTwuMGq6m3c4Qd2gyo9KT8dtBYYBWW/XAqTjieV7uXDcVcTnnvJReGW
+         r3SCU4SF/xHTjJwK9T3POc29bvp/3k3gKdpBtUmBnBBG2p/whQbs1ylwwrFASoOS5/lX
+         tPVmUHaULMCVzr3R+XcYUsB9n+rN3kp2DuAn2Bu5XWQZLFIw9u5XoKNKgrMyC2fmnz6z
+         1BtQcqVj3IXHtQZ4oDJJe5C8cPTKOUv793TgD2cG/otxCjgSmHySALrmqpN0QTGHQfeB
+         Dk2KfREFmvZD5gqz9bpM0lrZwmacA53fPKrVo9ajxGBZL5PWvAdRqeUczGKfajKNOn97
+         99jw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786220603; x=1786825403;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=LdzD5p1HJXZooPEGcGX0tpQPvvizEG9tLbaiZX0cVG8=;
+        b=hGmpNt2CnRySsPvg9OUl5tluJCbMYe9XYuOPW9tSughYFgBtDS79nf031IHudcykLV
+         wAfiO7BXU3nIJOWseaijBWYUiERtPY2ko3Qjox1N9zau5VxmNbr6U3UjTmDtoYNEb5UP
+         3IcWcxR0WjkRtH/hO9wZTaBRks5bWGpftqyBDgZjVWpraTTO/YZJBuq8bDxareX8uaym
+         Np8GUEZUarKzhnXV76agYS3JUr2mUfWqRYH3S/+EK7vJo8xoaSSzGl/bnKrpw4E/CTeb
+         g/EvwAJjdk0Fj1u6EfjKayq7dKZHLKyhF1gOioHTLR9ouQmZDFkYqYbViV9bS3a+RyRD
+         cyLg==
+X-Gm-Message-State: AOJu0YxF4U6DgTe/s7S1jFAFpfmFqexqfisgRuVWY4AJQ0beQb+RulCE
+	GKMe88BQhS39iwznADgu/xkd4cJrMmQQ+0DtY/oGURdgkYONEqvzyVVXiYkAypjnvYA/Qw+fSlg
+	EOspqG0NZIiCeh/wt/GSKqPrPEQksjgPMEJH4FIYTpFg8hL1726+Qq5bd4hIZBmNLieiY
+X-Gm-Gg: AR+sD13zVPiG+UGdZ6YieSihnGEbR7s44NJh4txwU+cTdeEpFoBxP+KfUCv8Kbw8g58
+	ZiR8MdVArYf4Y5iRGwu5SkH4/dBOu+D2n5rvccmRbUio0evJeSd1G7BOUMreE2aLvXXV7chV0NM
+	qrnyldDrAChV17AS55PIOv+Xm4efXf8l9Jk5HxKJy86xPZCoGDxofjnn4IRLPe6akwfeb5is4LM
+	yBRpjY0DPU26lVI5J5OfgVS3x73Rxwjzd1oZLwRmR6FyiLsazn7nvr6o/ltS0I6Sadhc7NfDte6
+	jQ0UshV27Xc+WSmQhLM0Jr/rhqv5d/8iUbtBtXkB5sAClPdZk5UGhSSLZGs0Y/aq7L0ng20SqNV
+	l8A2H3Pl5HOkf3gzoI4YEBWqc
+X-Received: by 2002:a17:903:1a83:b0:2cf:8131:75f4 with SMTP id d9443c01a7336-2d0ca7fbca5mr425586255ad.11.1786220602815;
+        Sat, 08 Aug 2026 13:23:22 -0700 (PDT)
+X-Received: by 2002:a17:903:1a83:b0:2cf:8131:75f4 with SMTP id d9443c01a7336-2d0ca7fbca5mr425585695ad.11.1786220602356;
+        Sat, 08 Aug 2026 13:23:22 -0700 (PDT)
+Received: from hu-akhilpo-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315be86e917sm26357417eec.5.2026.08.08.13.23.15
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 08 Aug 2026 13:23:22 -0700 (PDT)
+From: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Subject: [PATCH 0/6] drm/msm: Support for Adreno 830 GPU
+Date: Sun, 09 Aug 2026 01:53:07 +0530
+Message-Id: <20260809-pakala-gpu-v1-0-207ad1fac1c7@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Authority-Analysis: v=2.4 cv=eqbvCIpX c=1 sm=1 tr=0 ts=6a77734d cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=gowsoOTTUOVcmtlkKump:22 a=c92rfblmAAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8
- a=__KbwfSMYZr-9KUfyosA:9 a=GvGzcOZaWPEFPQC_NcjD:22
-X-Proofpoint-ORIG-GUID: KkaTFHn6ffjXbseBI-lQOil2yjYdIh3M
-X-Proofpoint-GUID: KkaTFHn6ffjXbseBI-lQOil2yjYdIh3M
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA4MDE1NyBTYWx0ZWRfX7A4QBE+Y+m/n
- 8mDwmIKy2U6zoyFfXHMAligzclDF7Pd2WYp+xOymqooAl1hbpMjQhg4k0FiTtzAl/X2bUIVGQgV
- SgqIViWt6XNpt0sjzxmTk4ePz0pZBiEvPqXF0CoICy7unLK1N7JdZ+EvOxk4Do9V14170yYuQUg
- aKHIU1vVRtd53clGDMmSjQGOFWHgGK+1Lm7NDk2hd8XktoNkijiBPF0DU0UIzm6rzGhxjkdub/5
- GucCnMKi1SOiRUzRKFdlLo3ZrsHvGsxqo0BLE/jvJGVLL0CYaFk5LmylxpFPCVU7eMPCIkfOx0r
- sQbJRE+5rPdqwtkTcKHq7qmWuqXfleDCJOrRyxjthIB8+hERk8HoMjTW1A/jVGalwumPru9/jWr
- HPhx588x/iLQfcyrwHiSO+JhiIjMdOcbhMQzswC6+kZcduuoy3geBrmYc51MRERD1/or1ZZDSe1
- IUrU+3cjD8XJQYi+02Q==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA4MDE1NyBTYWx0ZWRfXzPXSpWrAEkR8
- 2H0SJWBr4pD0SbiUd2F1h2ED74iHnaI8fTrVYztLUOUECVGM3xw/udaXdTxhfUAJb3h83TE56uc
- enzT89cQa6QvUGbcVyxTFen1P/IXivY=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIACuQd2oC/yWNWwqDMBBFtyL5bsQEjQ9K6T6KSIyjDfWZiSKIe
+ 2+MMAycGe65B0EwGpAUwUEMbBr1NDpgj4Corxw7oLpxTHjERRTzjM7yJ3tJu3mlDPJc5SJlIku
+ JC8wGWr172ae82cCyOqe9j6SWCFRNw6BtEYywW+q9WSSu/ACI0jcWwdM/UhZfTUpVja02Qd0wy
+ kTdJjzLk5Q37wkxXFbZX9LQrRcpz/MPiRq6RNYAAAA=
+X-Change-ID: 20260428-pakala-gpu-1e99c9671687
+To: Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+        devicetree@vger.kernel.org, Jie Zhang <jie.zhang@oss.qualcomm.com>,
+        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
+        Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786220595; l=2014;
+ i=akhilpo@oss.qualcomm.com; s=20240726; h=from:subject:message-id;
+ bh=oLLjuOgK040qtaqEeDmQSIpMa5K6dCEHSb8JedTqI74=;
+ b=srshORzAuxD4g4wGlcmuEJtAGJPscUkJp828BRyJ8VY8A4AOd3/8du7f4Nuh4lQ0FyKudpgBx
+ PE24IaRCe10C+2L0hvUBBExVelnQaIofQRhJejQ0tASWmvLdyM8ToVi
+X-Developer-Key: i=akhilpo@oss.qualcomm.com; a=ed25519;
+ pk=lmVtttSHmAUYFnJsQHX80IIRmYmXA4+CzpGcWOOsfKA=
+X-Proofpoint-GUID: HXXqdA91uWBrSp7EzFif-pwLHnPtVdrq
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA4MDE3NiBTYWx0ZWRfX0FqwmON2C9Zy
+ 2Q34LCSsphD5lvIYI/FZ7CfWH1ZBooPoczh8JkGkTPaA8dM7+9zgCu+8cinS7yT/JU0X4fBXFFf
+ Rc6lkbj9QA6XkeZdbg/ifuj0ONTDFbwBMgx8ziW2U20cc3cOrnZ42zPcMlBI7RaMzsa8VYLnyjG
+ uukU8/cjcE530uzqy0wgu5ApSR9flWs/+oimOYq7UEWcjbpssuduTtzZ/JMumoPB2sjhIhy5fXG
+ wQ0faLRb7WekegMh4tebBNdQhRCPDmts1qbnsj+TkYsKgPP04Rj/eec1uR7hNfPyQt4YqAujAN5
+ afikyo3rI6t3Cj+pTUYAptyYgZ6qdUsWrRlzzMnZ+nWlH5FHfDomnX4TJhJ/1SN5MPLmk4mbsp4
+ hgyxgV7F5XPN5Z9SdR/OpHwlK9D/MkwTJMb+Qd7X546HM5CJUZTya1Js8CUkKCziCWsuRBRktZz
+ MZbIYOsQa0u6GlC7evg==
+X-Authority-Analysis: v=2.4 cv=PbrPQChd c=1 sm=1 tr=0 ts=6a77903b cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=pO2zmJmEa73fCFxjQ5kA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA4MDE3NiBTYWx0ZWRfX4+v2lXDzbohu
+ Zmqx/SB+5+lWfceDGkyKqDm2ZtKoEuXO4oPrDDUxDyPVVoRdohKYtyTXSV/84DIRwdVDVa2eBz0
+ QnlrtsRcDEOOHXiN0/vAagQD4UcwbtM=
+X-Proofpoint-ORIG-GUID: HXXqdA91uWBrSp7EzFif-pwLHnPtVdrq
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-08_06,2026-08-07_01,2025-10-01_01
+ definitions=2026-08-08_07,2026-08-07_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 impostorscore=0 spamscore=0 clxscore=1011 adultscore=0
- bulkscore=0 lowpriorityscore=0 malwarescore=0 priorityscore=1501 phishscore=0
+ priorityscore=1501 clxscore=1015 bulkscore=0 impostorscore=0 phishscore=0
+ lowpriorityscore=0 spamscore=0 adultscore=0 malwarescore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608080157
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608080176
 
-Treat -ENOENT from TDM slot parsing as the optional "configuration not
-present" case and continue to propagate real configuration errors.
+This series add support for Adreno 830 GPU present in Snapdragon SM8750
+chipset, which is almost 2 yr old now. Adreno 830 is the first GPU in
+AdrenoeA8xx family [1]. So, architecturally A830 is very close to A840 GPU,
+so we just need to add a catalog entry to describe the GPU along with the
+necessary register lists. Both Mesa support and firmwares at
+linux-firmware repo are already available. Mesa needs a correction to
+the chipid value which will be fixed soon.
 
-Also ignore -ENOTSUPP from optional DAI format and codec sysclk
-callbacks, apply codec_dai_fmt to codec DAIs on TDM links, and use a
-signed bclk_freq variable so errors from snd_soc_tdm_params_to_bclk()
-are handled correctly.
+Patch [1] & [2] are for Rob Clark and the remaining devicetree patches
+are for Bjorn to pick up.
 
-Reported-by: Sashiko <sashiko-bot@kernel.org>
-Link: https://sashiko.dev/#/patchset/20260804070307.117119-1-prasad.kumpatla@oss.qualcomm.com
-Signed-off-by: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+[1] https://lore.kernel.org/lkml/20251118-kaana-gpu-support-v4-0-86eeb8e93fb6@oss.qualcomm.com/
+
+Signed-off-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
 ---
- sound/soc/qcom/sc8280xp.c | 21 +++++++++++++++------
- 1 file changed, 15 insertions(+), 6 deletions(-)
+Gaurav Kohli (1):
+      arm64: dts: qcom: sm8750: Add GPU cooling
 
-diff --git a/sound/soc/qcom/sc8280xp.c b/sound/soc/qcom/sc8280xp.c
-index 597c0d887d2f..0120443da418 100644
---- a/sound/soc/qcom/sc8280xp.c
-+++ b/sound/soc/qcom/sc8280xp.c
-@@ -115,33 +115,42 @@ static int sc8280xp_tdm_hw_params(struct snd_pcm_substream *substream,
- 	struct snd_soc_dai *codec_dai;
- 	struct qcom_snd_tdm_slot_cfg cpu_cfg;
- 	struct qcom_snd_tdm_slot_cfg codec_cfg;
--	unsigned int bclk_freq;
-+	int bclk_freq;
- 	int ret;
- 	int i;
- 
- 	ret = qcom_snd_get_dai_tdm_slots(rtd, &cpu_cfg, &codec_cfg);
- 	if (ret)
--		return ret == -EINVAL ? 0 : ret;
-+		return ret == -ENOENT ? 0 : ret;
- 
- 	if (!cpu_cfg.slots)
- 		return 0;
- 
- 	ret = snd_soc_dai_set_fmt(cpu_dai, SND_SOC_DAIFMT_BP_FP);
--	if (ret)
-+	if (ret && ret != -ENOTSUPP)
- 		return ret;
- 
-+	if (data->priv->codec_dai_fmt) {
-+		for_each_rtd_codec_dais(rtd, i, codec_dai) {
-+			ret = snd_soc_dai_set_fmt(codec_dai,
-+						  data->priv->codec_dai_fmt);
-+			if (ret && ret != -ENOTSUPP)
-+				return ret;
-+		}
-+	}
-+
- 	ret = qcom_snd_apply_dai_tdm_slots_cfg(rtd, &cpu_cfg, &codec_cfg);
- 	if (ret)
- 		return ret;
- 
- 	bclk_freq = snd_soc_tdm_params_to_bclk(params, cpu_cfg.slot_width, cpu_cfg.slots, 1);
--	if (!bclk_freq)
-+	if (bclk_freq <= 0)
- 		return -EINVAL;
- 
- 	if (data->priv->mi2s_bclk_enable) {
- 		ret = snd_soc_dai_set_sysclk(cpu_dai, LPAIF_MI2S_BCLK, bclk_freq,
- 					     SND_SOC_CLOCK_IN);
--		if (ret) {
-+		if (ret && ret != -ENOTSUPP) {
- 			dev_err(rtd->dev, "%s: failed to set cpu sysclk: %d\n",
- 				__func__, ret);
- 			return ret;
-@@ -152,7 +161,7 @@ static int sc8280xp_tdm_hw_params(struct snd_pcm_substream *substream,
- 		for_each_rtd_codec_dais(rtd, i, codec_dai) {
- 			ret = snd_soc_dai_set_sysclk(codec_dai, 0, bclk_freq,
- 						     SND_SOC_CLOCK_IN);
--			if (ret) {
-+			if (ret && ret != -ENOTSUPP) {
- 				dev_err(rtd->dev, "%s: failed to set codec sysclk on %s: %d\n",
- 					__func__, codec_dai->name, ret);
- 				return ret;
+Jie Zhang (5):
+      drm/msm/a8xx: Add support for Adreno 830 GPU
+      dt-bindings: display/msm: Document Adreno 830 GPU/GMU
+      arm64: dts: qcom: sm8750: Add GPU and GMU nodes
+      arm64: dts: qcom: sm8750-mtp: Enable Adreno 830 GPU
+      arm64: dts: qcom: sm8750-qrd: Enable Adreno 830 GPU
+
+ .../devicetree/bindings/display/msm/gmu.yaml       |   4 +-
+ .../devicetree/bindings/display/msm/gpu.yaml       |   2 +
+ arch/arm64/boot/dts/qcom/sm8750-mtp.dts            |   8 +
+ arch/arm64/boot/dts/qcom/sm8750-qrd.dts            |   8 +
+ arch/arm64/boot/dts/qcom/sm8750.dtsi               | 335 +++++++++++++++++++--
+ drivers/gpu/drm/msm/adreno/a6xx_catalog.c          | 334 ++++++++++++++++++++
+ drivers/gpu/drm/msm/adreno/a8xx_gpu.c              |   2 +-
+ drivers/gpu/drm/msm/adreno/adreno_gpu.h            |   5 +
+ 8 files changed, 672 insertions(+), 26 deletions(-)
+---
+base-commit: d56fa0b2bd2d9b2fddc10e8f5bdd42d56676935c
+change-id: 20260428-pakala-gpu-1e99c9671687
+prerequisite-message-id: <20260714-gpucc_dt_v6-v6-1-16bf5289572d@oss.qualcomm.com>
+prerequisite-patch-id: c050130345665caf00f2390fb3da0adc62667eb4
+
+Best regards,
 -- 
-2.34.1
+Akhil P Oommen <akhilpo@oss.qualcomm.com>
+
