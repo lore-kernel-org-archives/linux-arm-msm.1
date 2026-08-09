@@ -1,256 +1,505 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mail-244118.protonmail.ch (mail-244118.protonmail.ch [109.224.244.118])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4500833688A
-	for <linux-arm-msm@vger.kernel.org>; Sun,  9 Aug 2026 12:33:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A645721CC59;
+	Sun,  9 Aug 2026 13:22:24 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.118
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786278829; cv=none; b=mEN2tHhFHtSHwbtCV3JxtVJfpUAnX+qsdlKSi6u6/yzjLnXF+S3MbzTz06hY4uBkZC0xLgBjzUiQ2KdFCj0du+21aqCVBFHhb42CBE/gwV/zidEHfMWuGB+UXLVXGhykRiO9CA5ehUlqoPpou1LweIbW1ZybFjSObKwbb3jjgac=
+	t=1786281748; cv=none; b=k30B4aF+WgUbQd1l9vmj+PQ+N9K/2gMmiQ945EyrQYDkKHm/2VQZNG2iNXXxrFtayf5VQ1hp4G1mOWtdzLT1oFpOnmaqj2z98Chb55kRCV7IB9/JDBc6uoBw+Zhudx5vtgUK2KoipcvpG3rPG4uiQBxoITQynaFytXeP+Lt9sf4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786278829; c=relaxed/simple;
-	bh=510uDvyd32sgzhlGwCfHMT1JRWWiRprn1MywQxgm3J8=;
-	h=Message-ID:Date:MIME-Version:Subject:From:To:Cc:References:
-	 In-Reply-To:Content-Type; b=N0e2TSPH4Rd31PHWICOg77npAwrjoMYcW7QJEiWK2xZuW49ag4a/eFgu9TxSRp9MOlRRda+tliMM4PgNSmHzJyDQaDTKEXAO5bE3rGb/PfQEbtljji+P+XihSamkJbfIp8CxlyyEBM1Po78/GQL3gy6mlo2em9xJHBrX3wH/1RQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OVQ8uHC3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NthjEQMD; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1786281748; c=relaxed/simple;
+	bh=bbMAlE56EVfNmyZT2AiGUTlr9fjSVaPHbM11RqGcV6Y=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=nQQSWctYjJYf4y6zPmlpXgDvDlxwwJwF05e/+REBNnejNx0zGZxu60VWDhajzvEq+G/OcizM6cn6s1TZYd044cX8Pv217alvgwq6swbOfLrSxTeA7Xq+ArktaHKe7bERGG3LmRWC68r+3X93ExomkIZnfGAUenC5+LnQ9mt+1E4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vinarskis.com; spf=pass smtp.mailfrom=vinarskis.com; dkim=pass (2048-bit key) header.d=vinarskis.com header.i=@vinarskis.com header.b=Vdlci1Yv; arc=none smtp.client-ip=109.224.244.118
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=vinarskis.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=vinarskis.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OVQ8uHC3";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NthjEQMD"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 679C1YaA2328300
-	for <linux-arm-msm@vger.kernel.org>; Sun, 9 Aug 2026 12:33:46 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	IrQTEGA1d6JWldRyNS6hURK+2Oil921Orn6sio9wxXY=; b=OVQ8uHC3XxA7Q8nv
-	XVGk46q9ZuwlwnDZTmfQ/bk6+36LWyl2TFmbWnuqA11kgxHJKEs7HQKz6EK1e4e6
-	Vcr6jLRu7sgzUCREkzclgY7Vkjgi4lFYMIFzO0vv9RnnsrKdXcrGbCKVpZr1SrPA
-	yjvrY5+Z5banNVDsyFhd5HDqRYhuEmfa+D+0q1mcB6ToeRsKFp1zRLd8FZyP7JQL
-	ha3qZnt+aKs/mOlJ1RW8OKoVIeNHI5m7C71C9ZJbGdTzYSdszyA+qAJkMh6SaAc8
-	iHOjt5H0HBn3Ievggl5+cODUR56kKkMfT8QdZFQiyCs/OVuWmgUQgfAsX85Egr8W
-	uFDbPw==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwwr9jqcu-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 12:33:46 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-c860544c077so2447184a12.3
-        for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 05:33:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786278826; x=1786883626; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=IrQTEGA1d6JWldRyNS6hURK+2Oil921Orn6sio9wxXY=;
-        b=NthjEQMDOKPlMK9gv4ep8oAZ2y4ZUpBCVNWIPzYL8DFZF9JA+EYEP7VdsePsOCPTbg
-         gdtCguCplDK3D5dGtdAeETPJAkk4UtqoCGMM0hPgykFggzWSiNa7wH30zpA4b7EA1OfV
-         AD/oI89r33jHM3QaQCUaCR9Yzm6uzTRYSDybjyOr4keMlfPJ+CH/o5HsPIM2eZgTCZZg
-         2a8sXM4c45jjDV0iRkICAN5bUTGgXr1Xqj8Ue7jzB7QNmLc9GBi/HqLfrS86BCi/9Z5V
-         2Gt6gYuF45kFMKA4MhikEdKas5J6f9bZwOJnC/1ngvolhLVZL41sob7Y1USTeVG1lDox
-         ETIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786278826; x=1786883626;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=IrQTEGA1d6JWldRyNS6hURK+2Oil921Orn6sio9wxXY=;
-        b=PgJ6FFXMtz2iOh1fkuha2Xa/ziiLM21GDPCjnmL8D8+sa+nR/rIKKByI1FUAdl6ghz
-         KB3vOI67YQPEg+V+5ZczxGhbzd2DKTvO1mNsMiyeIK7nsyMWUkrcG9HogPuu5WaSHHfD
-         y/V3QqEyAVUGk6DKFlI9YW4UoYDxrCBfbM38hnGDFMwqU6+GjaTNSrBJHz9EF8ibzXou
-         85a52pF9RTydQQhrWtdo/adHgJ+woJgTryXU2ZckCxzT1v5J6VYKiPvR/VDqEmOw4oxZ
-         1ZAiCeHsLoN+LDHFdlu4Nx89ns35/rwCdQ4JMGPgelwtab69aXOaK965P+ZeQjttsA88
-         GV0w==
-X-Forwarded-Encrypted: i=1; AHgh+RpAbk3+F6B7MBjglu74pSrWbGetyoGL+q1Nau54qR8oMxRlDkhDYErYxdCVhEy+MW0Bh2pSgdSAWUf1ztiz@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywz04ytlh72zwEtyar2n3HsidU6+sqqVsP0eLIjnxhnTTOi9oXk
-	7krK4UJftcpCP0oQBGrEwBQGPburLdVn7CzsT6RWK3UHz9Uu0w8JeyqNGYBMdIRYQcE+goU86tW
-	1fjeoBWwy8AtdZwrONUnt8ZpqQSpN87oyjESrKRWCNN0+1IYMN5lO7G2IjDhF1cZFQoRb
-X-Gm-Gg: AR+sD11QyGXqZd1AkW9N1WLaRB2WxAZ4M4EB+7M/RT9QI8WDzdz2VQ6t1XPeE4gnHCt
-	gU0+RKX+zT8JhOFju6SUqvyXqscwohmlVHGCiH83PLadkEw683WGoJd03NgU60abHpo+sY/PVk0
-	INcybe00v9CFNksuAcuk3zeeukMl0JlY9ff4z61yk/2PhgHE+uxIgtmykannTZeDnAb4M+6uYO2
-	sagw0mVA8z/HHTUrtxAQvXGJ4AchupVzFiH8LRAYwydodlYUc4x97+91wnkfBHat+pmZxWA1yoD
-	pX3F0QFG1Sr4AYNDqS2e8Z1E3OLmQ/QgyMdHC3cT/FycfeX1yD/LJfiLE2rPQngd0nmO208bMcm
-	y3E6+z7llxUYM8mx7wEQ8zyumhOIfrFY=
-X-Received: by 2002:a05:6a20:d38f:b0:3b4:8bc6:138 with SMTP id adf61e73a8af0-3cbc03b5526mr19993962637.23.1786278825829;
-        Sun, 09 Aug 2026 05:33:45 -0700 (PDT)
-X-Received: by 2002:a05:6a20:d38f:b0:3b4:8bc6:138 with SMTP id adf61e73a8af0-3cbc03b5526mr19993897637.23.1786278825370;
-        Sun, 09 Aug 2026 05:33:45 -0700 (PDT)
-Received: from [192.168.1.16] ([106.222.229.34])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315bec128a0sm34798229eec.25.2026.08.09.05.33.37
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 09 Aug 2026 05:33:44 -0700 (PDT)
-Message-ID: <e8694124-ee41-4695-aa87-a4ff4ee602b5@oss.qualcomm.com>
-Date: Sun, 9 Aug 2026 18:03:36 +0530
+	dkim=pass (2048-bit key) header.d=vinarskis.com header.i=@vinarskis.com header.b="Vdlci1Yv"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vinarskis.com;
+	s=protonmail2; t=1786281740; x=1786540940;
+	bh=2KI8GEh8cDmIWVinlkYdZftm7oA5xRTpEB4A2uY9g+E=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=Vdlci1YvIqnB4kpqsR3yOTGx1adBIFUPNaOHomnIqdETiI8y6/0lF4bteh+RyGPD2
+	 XJiN5Z2KKi8CaMz/lqjTg+PNt5GvlVxhIAtGUnQNZkkJnP5O2XDj9mN/QxDLdIkwn3
+	 tvaU+sFwyLGZoL3DUgmFOPUCb2dOGXIs39mVaCNoWBKQqXV1ZytsBz++Klfp9jKW6D
+	 gM83CQJHYG8Uet43kJT9u6OW5rw7HsnbvV0d/g4kSauLPX8NXGQnw3rLLC5DoeM1Um
+	 qiBf7ddBgX19O33z97m77dLO18lmhvOw5PuU4hYGfbnSi9kjhcpWH1fMgtnvBrWA7m
+	 CSkPbFcW/emXw==
+Date: Sun, 09 Aug 2026 13:22:14 +0000
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+From: Aleksandrs Vinarskis <alex@vinarskis.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Hans de Goede <hansg@kernel.org>, =?utf-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, platform-driver-x86@vger.kernel.org, laurentiu.tudor1@dell.com, Abel Vesa <abel.vesa@oss.qualcomm.com>, Tobias Heider <tobias.heider@canonical.com>, Val Packett <val@packett.cool>, Neil Armstrong <neil.armstrong@linaro.org>, Stephan Gerhold <stephan.gerhold@linaro.org>
+Subject: Re: [PATCH v3 2/3] platform: arm64: dell-xps-ec: new driver
+Message-ID: <6BXqGe3dUjlSSoYUgSDvrO0rn9-g1fATSBg3KqwoG4kXZNXsPYKBQd4ZtFx7iYwxhm8zIC8QW9zZSHxb716u_8XhOiHeHkhs2Ah4kwuwSIg=@vinarskis.com>
+In-Reply-To: <42505e53-ff1a-43ba-8125-3f00b0895ebd@linaro.org>
+References: <20260801-dell-xps-9345-ec-v3-0-9f4bdb5a5dad@vinarskis.com> <20260801-dell-xps-9345-ec-v3-2-9f4bdb5a5dad@vinarskis.com> <42505e53-ff1a-43ba-8125-3f00b0895ebd@linaro.org>
+Feedback-ID: 158356072:user:proton
+X-Pm-Message-ID: f320a2a7a8eb1c8b9e8f59bc90afa47cb2d6c0ca
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 9/9] arm64: dts: qcom: hamoa: Enable CDSP cooling
-From: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
-To: Stephan Gerhold <stephan.gerhold@linaro.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
-        Amit Kucheria <amit.kucheria@oss.qualcomm.com>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        "Rafael J. Wysocki"
- <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-        Manivannan Sadhasivam <mani@kernel.org>, Kees Cook <kees@kernel.org>,
-        "Gustavo A. R. Silva" <gustavoars@kernel.org>,
-        cros-qcom-dts-watchers@chromium.org, linux-arm-msm@vger.kernel.org,
-        linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
-        linux-hardening@vger.kernel.org, manaf.pallikunhi@oss.qualcomm.com,
-        Dipa Ramesh Mantre <dipa.mantre@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-References: <20260731-b4-qmi-tmd-v7-0-3befd44403d5@oss.qualcomm.com>
- <20260731-b4-qmi-tmd-v7-9-3befd44403d5@oss.qualcomm.com>
- <amyFARId5K-Izco1@linaro.org>
- <34998a81-864e-42fa-904f-2e5f3490fcf3@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <34998a81-864e-42fa-904f-2e5f3490fcf3@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=d73FDxjE c=1 sm=1 tr=0 ts=6a7873aa cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=x3UvaR+l8cLCJ1uKBUlNag==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=y4XuuB6ikNK3uoXrSYsA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=_Vgx9l1VpLgwpw_dHYaR:22
-X-Proofpoint-ORIG-GUID: L-HDZFYwlh0ARQGeX5CHx2qPhYZ9zm2K
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA5MDExMSBTYWx0ZWRfX2UZhGb3FH6aE
- dybQApukAoTSVGBFIvWfopgm5QNRI/vlwPlu1gPmXKZJcSejKGhQA2n/Ih3qijTUF4sVfVrrQdh
- n1JjJB4wNHzgUH8U7eZeB0YbdCvG620BCYKbQWB4DZUHHceRFRJtJzy6ecdhDhRW9bq6lGW4Ixj
- tT0HiemqQZLtA8dwK5u5jJp2ih2wSItMZrkb0yuOm68QQO+CF3sB9j70c7syTOq7Tpp1cpTunJD
- IOcSENUn0b4YiR6DFykHscVvDmAj0uZ6nVFC1F9WhgSfOOqMfUeDBBUSQl5gDKOpo4zAx0tMwxL
- dlYfVCccHzEzgm0cGx3ET6RR60f1QAy3dpHg/eJ+49EWKMh/fRPxHuXcxXvZTxMHnMvhwQEo35S
- NtnKty5WbHZhdlW8ZtNnUXNLxkQQrZ0vt7KKKhxrWqVTaFIZJfFaIc61ISieGp0MHKlTkGfMuCu
- Wm45F+P5VOOsfcyVioA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA5MDExMSBTYWx0ZWRfXybdtyd7ai8Du
- Mvajb2SW2lcGfO943YiUor7CO5l1MVQqDjv0YvM9i6e89+sRVUSGkvOriWXjRr4VxZ25mPoZS+q
- EBDnYiCTBs9K3qfbIPM7e1uGGWYYqgc=
-X-Proofpoint-GUID: L-HDZFYwlh0ARQGeX5CHx2qPhYZ9zm2K
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-09_04,2026-08-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 phishscore=0 adultscore=0 malwarescore=0
- spamscore=0 suspectscore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608090111
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
 
+On Saturday, August 1st, 2026 at 23:15, Bryan O'Donoghue <bryan.odonoghue@l=
+inaro.org> wrote:
 
-On 7/31/2026 6:52 PM, Gaurav Kohli wrote:
-> 
-> 
-> On 7/31/2026 4:50 PM, Stephan Gerhold wrote:
->> On Fri, Jul 31, 2026 at 04:03:49PM +0530, Gaurav Kohli wrote:
->>> From: Dipa Ramesh Mantre <dipa.mantre@oss.qualcomm.com>
->>>
->>> Unlike the CPU, the CDSP does not throttle its speed automatically
->>> when it reaches high temperatures in hamoa.
->>>
->>> Set up CDSP cooling by throttling the cdsp, when it reaches 95°C.
->>>
->>> Add polling-delay-passive so the governor periodically evaluates
->>> the zone during passive cooling and steps up cooling levels when
->>> temperature stabilizes below the next trip.
->>>
->>
->> Would be good to mention why you are treating hamoa-iot-evk differently.
-> 
-> thanks for review, will add the reasoning.
-> 
->>
->>> Signed-off-by: Dipa Ramesh Mantre <dipa.mantre@oss.qualcomm.com>
->>> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
->>> Signed-off-by: Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
->>> ---
->>>   arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts | 32 +++++++++++++++
->>>   arch/arm64/boot/dts/qcom/hamoa.dtsi        | 63 +++++++++++++++++++ 
->>> +++++++++++
->>>   2 files changed, 95 insertions(+)
->>>
->>> diff --git a/arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts b/arch/arm64/ 
->>> boot/dts/qcom/hamoa-iot-evk.dts
->>> index 9fa86bb6438e..a146be1cb5fb 100644
->>> --- a/arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts
->>> +++ b/arch/arm64/boot/dts/qcom/hamoa-iot-evk.dts
->>> @@ -1684,4 +1684,36 @@ trip-point0 {
->>>               };
->>>           };
->>>       };
->>> +
->>> +    nsp0-thermal {
->>> +        trips {
->>> +            trip-point1 {
->>> +                temperature = <105000>;
->>> +            };
->>> +        };
->>> +    };
->>> +
->>> +    nsp1-thermal {
->>> +        trips {
->>> +            trip-point1 {
->>> +                temperature = <105000>;
->>> +            };
->>> +        };
->>> +    };
->>> +
->>> +    nsp2-thermal {
->>> +        trips {
->>> +            trip-point1 {
->>> +                temperature = <105000>;
->>> +            };
->>> +        };
->>> +    };
->>> +
->>> +    nsp3-thermal {
->>> +        trips {
->>> +            trip-point1 {
->>> +                temperature = <105000>;
->>> +            };
->>> +        };
->>> +    };
->>>   };
->>
->> Please avoid overriding node values like this... One quick rename of one
->> of the involved nodes and this will be silently broken without compile
->> error. Nowadays dtbs_check will *probably* catch these, but if you
->> override values using the label reference you would notice it
->> immediately when compiling.
->>
->> All those nodes already have a label you can use:
->>
->> &nsp0_alert0 {
->>     temperature = <105000>;
->> };
->>
->> &nsp1_alert0 {
->>     temperature = <105000>;
->> };
->>
->> If the same pattern is already used for other thermal overrides in
+Hi Bryan,
 
-thanks for pointing other nodes also.
-For gpu node, will send separate patch over current series.
+Thanks for review;
 
->> hamoa-iot-evk.dts, it would be good to prepend a patch to fix those too.
-> 
-> thanks for review, will update this.
-> 
->>
->> Thanks,
->> Stephan
-> 
+> On 01/08/2026 19:22, Aleksandrs Vinarskis wrote:
+> > Introduce EC driver for Dell XPS 13 9345 (codename 'tributo') which may
+> > partially of fully compatible with Snapdragon-based Dell Latitude,
+> > Inspiron ('thena'). Primary function of this driver is unblock EC's
+> > thermal management, specifically to provide it with necessary
+> > information to control device fans, peripherals power.
+> >
+> > The driver was developed primarily by analyzing ACPI DSDT's _DSM and
+> > i2c dumps of communication between SoC and EC. Changes to Windows
+> > driver's behavior include increasing temperature feed loop from ~50ms
+> > to 100ms here.
+> >
+> > While Xps's EC is rather complex and controls practically all device
+> > peripherals including touch row's brightness and special keys such as
+> > mic mute, these do not go over this particular i2c interface.
+> >
+> > Not yet implemented features:
+> > - On lid-close IRQ event is registered. Windows performs what to
+> >    appears to be thermistor constants readout, though its not obvious
+> >    what it used for.
+> > - According to ACPI's _DSM there is a method to readout fans' RPM.
+> > - Initial thermistor constants were sniffed from Windows, these can be
+> >    likely fine tuned for better cooling performance.
+> > - There is additional temperature reading that Windows sents to EC but
+> >    more rare than others, likely SoC T_j / TZ98 or TZ4. This is the onl=
+y
+> >    thermal zone who's reading can exceed 115C without triggering therma=
+l
+> >    shutdown.
+> > - Given similarities between 'tributo' and 'thena' platforms, including
+> >    EC i2c address, driver can be potentially extended to support both.
+> >
+> > Signed-off-by: Aleksandrs Vinarskis <alex@vinarskis.com>
+> > ---
+> >   MAINTAINERS                          |   1 +
+> >   drivers/platform/arm64/Kconfig       |  12 ++
+> >   drivers/platform/arm64/Makefile      |   1 +
+> >   drivers/platform/arm64/dell-xps-ec.c | 268 ++++++++++++++++++++++++++=
++++++++++
+> >   4 files changed, 282 insertions(+)
+> >
+> > diff --git a/MAINTAINERS b/MAINTAINERS
+> > index 9b5efed4c430..64e143bc5129 100644
+> > --- a/MAINTAINERS
+> > +++ b/MAINTAINERS
+> > @@ -7347,6 +7347,7 @@ DELL XPS EMBEDDED CONTROLLER DRIVER
+> >   M:=09Aleksandrs Vinarskis <alex@vinarskis.com>
+> >   S:=09Maintained
+> >   F:=09Documentation/devicetree/bindings/embedded-controller/dell,xps13=
+-9345-ec.yaml
+> > +F:=09drivers/platform/arm64/dell-xps-ec.c
+> >
+> >   DELTA AHE-50DC FAN CONTROL MODULE DRIVER
+> >   M:=09Zev Weiss <zev@bewilderbeest.net>
+> > diff --git a/drivers/platform/arm64/Kconfig b/drivers/platform/arm64/Kc=
+onfig
+> > index e32e01b2a9bd..29416f8d7232 100644
+> > --- a/drivers/platform/arm64/Kconfig
+> > +++ b/drivers/platform/arm64/Kconfig
+> > @@ -33,6 +33,18 @@ config EC_ACER_ASPIRE1
+> >   =09  laptop where this information is not properly exposed via the
+> >   =09  standard ACPI devices.
+> >
+> > +config EC_DELL_XPS
+> > +=09tristate "Dell XPS 9345 Embedded Controller driver"
+> > +=09depends on ARCH_QCOM || COMPILE_TEST
+> > +=09depends on I2C
+> > +=09depends on IIO
+> > +=09help
+> > +=09  Driver for the Embedded Controller in the Qualcomm Snapdragon-bas=
+ed
+> > +=09  Dell XPS 13 9345, which handles thermal management and fan speed
+> > +=09  control.
+> > +
+> > +=09  Say M or Y here to include this support.
+> > +
+> >   config EC_HUAWEI_GAOKUN
+> >   =09tristate "Huawei Matebook E Go Embedded Controller driver"
+> >   =09depends on ARCH_QCOM || COMPILE_TEST
+> > diff --git a/drivers/platform/arm64/Makefile b/drivers/platform/arm64/M=
+akefile
+> > index 7681be4a46e9..669dc9e79afb 100644
+> > --- a/drivers/platform/arm64/Makefile
+> > +++ b/drivers/platform/arm64/Makefile
+> > @@ -6,6 +6,7 @@
+> >   #
+> >
+> >   obj-$(CONFIG_EC_ACER_ASPIRE1)=09+=3D acer-aspire1-ec.o
+> > +obj-$(CONFIG_EC_DELL_XPS)=09+=3D dell-xps-ec.o
+> >   obj-$(CONFIG_EC_HUAWEI_GAOKUN)=09+=3D huawei-gaokun-ec.o
+> >   obj-$(CONFIG_EC_LENOVO_YOGA_C630) +=3D lenovo-yoga-c630.o
+> >   obj-$(CONFIG_EC_LENOVO_THINKPAD_T14S) +=3D lenovo-thinkpad-t14s.o
+> > diff --git a/drivers/platform/arm64/dell-xps-ec.c b/drivers/platform/ar=
+m64/dell-xps-ec.c
+> > new file mode 100644
+> > index 000000000000..7758f5dd9342
+> > --- /dev/null
+> > +++ b/drivers/platform/arm64/dell-xps-ec.c
+> > @@ -0,0 +1,268 @@
+> > +// SPDX-License-Identifier: GPL-2.0-only
+> > +/*
+> > + * Copyright (c) 2026, Aleksandrs Vinarskis <alex@vinarskis.com>
+> > + */
+> > +
+> > +#include <linux/array_size.h>
+> > +#include <linux/dev_printk.h>
+> > +#include <linux/device.h>
+> > +#include <linux/devm-helpers.h>
+> > +#include <linux/err.h>
+> > +#include <linux/i2c.h>
+> > +#include <linux/iio/consumer.h>
+> > +#include <linux/interrupt.h>
+> > +#include <linux/jiffies.h>
+> > +#include <linux/module.h>
+> > +#include <linux/pm.h>
+> > +#include <linux/unaligned.h>
+> > +#include <linux/workqueue.h>
+> > +
+> > +#define DELL_XPS_EC_SUSPEND_CMD=09=090xb9
+> > +#define DELL_XPS_EC_SUSPEND_MSG_LEN=0964
+> > +
+> > +#define DELL_XPS_EC_TEMP_CMD0=09=090xfb
+> > +#define DELL_XPS_EC_TEMP_CMD1=09=090x20
+> > +#define DELL_XPS_EC_TEMP_CMD3=09=090x02
+> > +#define DELL_XPS_EC_TEMP_MSG_LEN=096
+> > +#define DELL_XPS_EC_TEMP_POLL_JIFFIES=09msecs_to_jiffies(100)
+> > +
+> > +/*
+> > + * Format:
+> > + * - header/unknown (2 bytes)
+> > + * - per-thermistor entries (3 bytes): thermistor_id, param1, param2
+> > + */
+> > +static const u8 dell_xps_ec_thermistor_profile[] =3D {
+> > +=090xff, 0x54,
+> > +=090x01, 0x00, 0x2b,=09/* sys_therm0 */
+> > +=090x02, 0x44, 0x2a,=09/* sys_therm1 */
+> > +=090x03, 0x44, 0x2b,=09/* sys_therm2 */
+> > +=090x04, 0x44, 0x28,=09/* sys_therm3 */
+> > +=090x05, 0x55, 0x2a,=09/* sys_therm4 */
+> > +=090x06, 0x44, 0x26,=09/* sys_therm5 */
+> > +=090x07, 0x44, 0x2b,=09/* sys_therm6 */
+> > +};
+>=20
+> You ready have intuited this as a data-structure so if you define it as
+> such with __attribute(packed); it will look neater.
+>=20
 
+I looked into it again, and I think its safer to assume that the init
+sequence is a 'magic byte sequence' instead. The order and total amount
+of thermistors does not match the data structure that is being sent on
+regular intervals (off by one, short by one). I am also not sure it
+would be the same across different platforms.
+
+> > +
+> > +/*
+> > + * Mapping from IIO channel name to EC command byte
+> > + */
+> > +static const struct {
+> > +=09const char *name;
+> > +=09u8 cmd;
+> > +} dell_xps_ec_therms[] =3D {
+> > +=09/* TODO: 0x01 is sent only occasionally, likely TZ98 or TZ4 */
+> > +=09{ "sys_therm0", 0x02 },
+> > +=09{ "sys_therm1", 0x03 },
+> > +=09{ "sys_therm2", 0x04 },
+> > +=09{ "sys_therm3", 0x05 },
+> > +=09{ "sys_therm4", 0x06 },
+> > +=09{ "sys_therm5", 0x07 },
+> > +=09{ "sys_therm6", 0x08 },
+> > +};
+> > +
+> > +struct dell_xps_ec {
+> > +=09struct device *dev;
+> > +=09struct i2c_client *client;
+> > +=09struct iio_channel *therm_channels[ARRAY_SIZE(dell_xps_ec_therms)];
+>=20
+> This should come from data supplied via the probe .data and compat string=
+.
+
+Good idea, will rework.
+
+>=20
+> > +=09struct delayed_work temp_work;
+> > +};
+> > +
+> > +static int dell_xps_ec_suspend_cmd(struct dell_xps_ec *ec, bool suspen=
+d)
+> > +{
+> > +=09u8 buf[DELL_XPS_EC_SUSPEND_MSG_LEN] =3D {};
+> > +=09int ret;
+> > +
+> > +=09buf[0] =3D DELL_XPS_EC_SUSPEND_CMD;
+> > +=09buf[1] =3D suspend ? 0x01 : 0x00;
+> > +=09/* bytes 2..63 remain zero */
+> > +
+> > +=09ret =3D i2c_master_send(ec->client, buf, sizeof(buf));
+> > +=09if (ret < 0)
+> > +=09=09return ret;
+> > +
+> > +=09return 0;
+> > +}
+> > +
+> > +static int dell_xps_ec_send_temp(struct dell_xps_ec *ec, u8 cmd_byte,
+> > +=09=09=09=09 int milli_celsius)
+> > +{
+> > +=09u8 buf[DELL_XPS_EC_TEMP_MSG_LEN];
+> > +=09u16 deci_celsius;
+> > +=09int ret;
+> > +
+> > +=09/* Convert milli-Celsius to deci-Celsius (Celsius * 10) */
+>=20
+> milli-Celsius is very strange hyphenation just use the lower-case kernel
+> terminology for it millicelsius.
+>=20
+> https://www.kernel.org/doc/Documentation/devicetree/bindings/thermal/ther=
+mal.txt
+
+Will fix.
+
+>=20
+> > +=09deci_celsius =3D milli_celsius / 100;
+> > +
+> > +=09buf[0] =3D DELL_XPS_EC_TEMP_CMD0;
+> > +=09buf[1] =3D DELL_XPS_EC_TEMP_CMD1;
+> > +=09buf[2] =3D cmd_byte;
+> > +=09buf[3] =3D DELL_XPS_EC_TEMP_CMD3;
+> > +=09put_unaligned_le16(deci_celsius, &buf[4]);
+> > +
+> > +=09ret =3D i2c_master_send(ec->client, buf, sizeof(buf));
+> > +=09if (ret < 0)
+> > +=09=09return ret;
+> > +
+> > +=09return 0;
+> > +}
+> > +
+> > +static void dell_xps_ec_temp_work_fn(struct work_struct *work)
+> > +{
+> > +=09struct dell_xps_ec *ec =3D container_of(work, struct dell_xps_ec,
+> > +=09=09=09=09=09      temp_work.work);
+> > +=09int val, ret, i;
+> > +
+> > +=09for (i =3D 0; i < ARRAY_SIZE(dell_xps_ec_therms); i++) {
+> > +=09=09if (!ec->therm_channels[i])
+> > +=09=09=09continue;
+> > +
+> > +=09=09ret =3D iio_read_channel_processed(ec->therm_channels[i], &val);
+> > +=09=09if (ret < 0) {
+> > +=09=09=09dev_err_ratelimited(ec->dev,
+> > +=09=09=09=09=09    "Failed to read thermistor %s: %d\n",
+> > +=09=09=09=09=09    dell_xps_ec_therms[i].name, ret);
+> > +=09=09=09continue;
+>=20
+> Is it really legitimate to continue on in this case ? I'll leave it up
+> to you to think about that for yourself, perhaps yes is the answer but
+> if term_channels[i] is true and a read of a channel fails - surely
+> that's indicative of a bail-out situation not read the next channel
+> situation
+
+I think, its still good to continue, since its probably better to have
+some channels working than none. It is not failing silently, developer
+will be able to see it.
+
+>=20
+> > +=09=09}
+> > +
+> > +=09=09ret =3D dell_xps_ec_send_temp(ec, dell_xps_ec_therms[i].cmd, val=
+);
+> > +=09=09if (ret < 0) {
+> > +=09=09=09dev_err_ratelimited(ec->dev,
+> > +=09=09=09=09=09    "Failed to send temp for %s: %d\n",
+> > +=09=09=09=09=09    dell_xps_ec_therms[i].name, ret);
+> > +=09=09}
+> > +=09}
+> > +
+> > +=09schedule_delayed_work(&ec->temp_work, DELL_XPS_EC_TEMP_POLL_JIFFIES=
+);
+> > +}
+> > +
+> > +static irqreturn_t dell_xps_ec_irq_handler(int irq, void *data)
+> > +{
+> > +=09struct dell_xps_ec *ec =3D data;
+> > +
+> > +=09/*
+> > +=09 * TODO: IRQ is fired on lid-close. Follow Windows example to read =
+out
+> > +=09 *       the thermistor thresholds and potentially fan speeds.
+> > +=09 */
+> > +=09dev_info_ratelimited(ec->dev, "IRQ triggered! (irq=3D%d)\n", irq);
+> > +
+> > +=09return IRQ_HANDLED;
+> > +}
+> > +
+> > +static int dell_xps_ec_probe(struct i2c_client *client)
+> > +{
+> > +=09struct device *dev =3D &client->dev;
+> > +=09struct dell_xps_ec *ec;
+> > +=09int ret, i;
+> > +
+> > +=09ec =3D devm_kzalloc(dev, sizeof(*ec), GFP_KERNEL);
+> > +=09if (!ec)
+> > +=09=09return -ENOMEM;
+> > +
+> > +=09ec->dev =3D dev;
+> > +=09ec->client =3D client;
+> > +=09i2c_set_clientdata(client, ec);
+> > +
+> > +=09/* Set default thermistor profile */
+> > +=09ret =3D i2c_master_send(client, dell_xps_ec_thermistor_profile,
+> > +=09=09=09      sizeof(dell_xps_ec_thermistor_profile));
+> > +=09if (ret < 0)
+> > +=09=09return dev_err_probe(dev, ret, "Failed to set thermistor profile=
+\n");
+> > +
+> > +=09/* Get IIO channels for thermistors */
+> > +=09for (i =3D 0; i < ARRAY_SIZE(dell_xps_ec_therms); i++) {
+>=20
+> This should be num_channels passed from your compat .data
+
+Will fix.
+
+>=20
+> > +=09=09ec->therm_channels[i] =3D
+> > +=09=09=09devm_iio_channel_get(dev, dell_xps_ec_therms[i].name);
+> > +=09=09if (IS_ERR(ec->therm_channels[i])) {
+> > +=09=09=09ret =3D PTR_ERR(ec->therm_channels[i]);
+> > +=09=09=09ec->therm_channels[i] =3D NULL;
+> > +=09=09=09if (ret =3D=3D -EPROBE_DEFER)
+> > +=09=09=09=09return ret;
+> > +=09=09=09dev_warn(dev, "Thermistor %s not available: %d\n",
+> > +=09=09=09=09 dell_xps_ec_therms[i].name, ret);
+> > +=09=09}
+> > +=09}
+> > +
+> > +=09/* Start periodic temperature reporting */
+> > +=09ret =3D devm_delayed_work_autocancel(dev, &ec->temp_work,
+> > +=09=09=09=09=09   dell_xps_ec_temp_work_fn);
+> > +=09if (ret)
+> > +=09=09return ret;
+> \n
+>=20
+> > +=09schedule_delayed_work(&ec->temp_work, DELL_XPS_EC_TEMP_POLL_JIFFIES=
+);
+> > +=09dev_dbg(dev, "Started periodic temperature reporting to EC every %d=
+ ms\n",
+> > +=09=09jiffies_to_msecs(DELL_XPS_EC_TEMP_POLL_JIFFIES));
+> > +
+> > +=09/* Request IRQ for EC events */
+> > +=09ret =3D devm_request_threaded_irq(dev, client->irq, NULL,
+> > +=09=09=09=09=09dell_xps_ec_irq_handler,
+> > +=09=09=09=09=09IRQF_ONESHOT, dev_name(dev), ec);
+> > +=09if (ret < 0)
+> > +=09=09return dev_err_probe(dev, ret, "Failed to request IRQ\n");
+> > +
+> > +=09return 0;
+>=20
+> You aren't returning the ret.
+
+Good catch, switched to `if (ret)` with `return 0;` in the end instead
+to match existing implementations.
+
+>=20
+> > +}
+> > +
+> > +/*
+> > + * Notify EC of suspend
+> > + *
+> > + * This will:
+> > + * - Cut power to display/trackpad/keyboard/touchrow, wake-up source s=
+till works
+> > + */
+> > +static int dell_xps_ec_suspend(struct device *dev)
+> > +{
+> > +=09struct dell_xps_ec *ec =3D dev_get_drvdata(dev);
+> > +
+> > +=09cancel_delayed_work_sync(&ec->temp_work);
+> > +
+> > +=09return dell_xps_ec_suspend_cmd(ec, true);
+> > +}
+> > +
+> > +/*
+> > + * Notify EC of resume
+> > + *
+> > + * This will undo the suspend actions
+> > + * Without the resume signal, device would wake up but be forced back =
+into
+> > + * suspend by EC within seconds
+> > + */
+> > +static int dell_xps_ec_resume(struct device *dev)
+> > +{
+> > +=09struct dell_xps_ec *ec =3D dev_get_drvdata(dev);
+> > +=09int ret;
+> > +
+> > +=09ret =3D dell_xps_ec_suspend_cmd(ec, false);
+> > +=09if (ret)
+> > +=09=09return ret;
+> > +
+> > +=09schedule_delayed_work(&ec->temp_work, DELL_XPS_EC_TEMP_POLL_JIFFIES=
+);
+> \n> +=09return 0;
+> > +}
+> > +
+> > +static const struct of_device_id dell_xps_ec_of_match[] =3D {
+> > +=09{ .compatible =3D "dell,xps13-9345-ec" },
+> > +=09{}
+> > +};
+> > +MODULE_DEVICE_TABLE(of, dell_xps_ec_of_match);
+> > +
+> > +static const struct i2c_device_id dell_xps_ec_i2c_id[] =3D {
+> > +=09{ "dell-xps-ec" },
+>=20
+> A nice .data will allow extension of this to other systems with
+> more/less channels.
+>=20
+> Which is why you shouldn't use the ARRAY_SIZE() extents from statics
+> declared up top directly.
+
+Indeed, will fix.
+
+Thanks,
+Alex
+
+>=20
+> > +=09{}
+> > +};
+> > +MODULE_DEVICE_TABLE(i2c, dell_xps_ec_i2c_id);
+> > +
+> > +static const struct dev_pm_ops dell_xps_ec_pm_ops =3D {
+> > +=09SYSTEM_SLEEP_PM_OPS(dell_xps_ec_suspend, dell_xps_ec_resume)
+> > +};
+> > +
+> > +static struct i2c_driver dell_xps_ec_driver =3D {
+> > +=09.driver =3D {
+> > +=09=09.name =3D "dell-xps-ec",
+> > +=09=09.of_match_table =3D dell_xps_ec_of_match,
+> > +=09=09.pm =3D &dell_xps_ec_pm_ops,
+> > +=09},
+> > +=09.probe =3D dell_xps_ec_probe,
+> > +=09.id_table =3D dell_xps_ec_i2c_id,
+> > +};
+> > +module_i2c_driver(dell_xps_ec_driver);
+> > +
+> > +MODULE_AUTHOR("Aleksandrs Vinarskis <alex@vinarskis.com>");
+> > +MODULE_DESCRIPTION("Dell XPS 13 9345 Embedded Controller");
+> > +MODULE_LICENSE("GPL");
+> > +MODULE_IMPORT_NS("IIO_CONSUMER");
+> >
+>=20
+> 
