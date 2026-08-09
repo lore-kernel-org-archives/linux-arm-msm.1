@@ -1,37 +1,84 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0304B2641C6;
-	Sun,  9 Aug 2026 16:48:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 213F2390CB7
+	for <linux-arm-msm@vger.kernel.org>; Sun,  9 Aug 2026 18:58:45 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786294140; cv=none; b=MPBsu3Rpo7llyBAr7Nx6Ny8DFD47soZYfyALZfntUFZn4c+1MDH04y+BwkxlAvX1hNOXLpfVS7ywcN7Zoq3HKJMCcP8smYAJ1GihbJBKyrYOKrIU9B5i3BHD2ucVk+Uvntm0qTMqaWZ2PUemA1dbyouZ8J3CUiODY6FvLbfMghM=
+	t=1786301926; cv=none; b=DGCTn/CsKqCAGIz7uDRx3MRnc567Zgg6U3RtKTu9RjmmElN9WARCpNDxcplMZJtAZo1t+G7viU/k6dM5lBBiA2iVMrBzwTmkdjmwGWFAOPNPlMXPSuzn+2ZcbNTTdGpix9BWkbZEyn2owPwJ+6dg9mX75C3FTJii06rugiVaJNY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786294140; c=relaxed/simple;
-	bh=Uw9We6kQ1c4xNIrhFQCV7DOnxBRYbOodTiEgzXXgPbo=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=OFM/HcPzEgskKDYlU/QCwTjZ6ciQN1lgX8cM9RsIa1GDm9fJarJWEw8f8zXPuOBvC6foaSXBoVBCXtN6pPp6jCU1Y5uFz/7RiZdbs9Nz+CDiyJ5i89EFNfglK9GC5J/SWX9f1t7buvX9R5a9l8SqZz5CoQ25/YyNz3eevpvSvFQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=b/E4t5y+; arc=none smtp.client-ip=10.30.226.201
+	s=arc-20240116; t=1786301926; c=relaxed/simple;
+	bh=4kdQcLHaNqH0bNFWSMBUN1Ena+T1hMkJB23bHmNC13k=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=QNvbKbQaU5JWK0oC1Yst61gRLV0M2Swj5hjqbx1bEjG6lN5bfSuMe1lPMcZHtnlkKM4zWQ/07pJG5bNoB379T2QdRVhwow+7RzB24W94tmSpyEvgpvqCHMEoLN4lReRIMQs3PD1wuiEfCNiBd25Lv7JafH+wxQ2q1HIM04NTiN8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fdzmGQ+1; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=LiKOomIo; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="b/E4t5y+"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 9B449C2BCF6;
-	Sun,  9 Aug 2026 16:48:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-	s=k20201202; t=1786294139;
-	bh=Uw9We6kQ1c4xNIrhFQCV7DOnxBRYbOodTiEgzXXgPbo=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=b/E4t5y+fSXVBt1s35Lqwjvuxk4ye8fyZ4aQFjAvwuyFYIqhN3yqSQh64ykX4826p
-	 atw15pAhOi+QyiN/iq407/MWoXusYhMu5sQbNnZmXR0RXJT39gvUMjyQGDbGz4H40f
-	 10sRnZ4sq1eV7E9aimwPh/v05MjjNMdgQnztuGM3tXye3xkJHKE1A5VL6vDlMnDNaX
-	 dziHZ5h/GpRn56xhC9ULMjMsf7oG0tCjRiKQF2SZPLBqsq+Uk6hYxdUQ1knedH9DK3
-	 349yDwLyQlcaA7dYvkuVyut0xaV2uLfxQlpd3/TRUHip1YDCpNIe/WDdQIKxAMrbV8
-	 6FZj9374gvJoQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 7CBA3C5AE5D;
-	Sun,  9 Aug 2026 16:48:59 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Sun, 09 Aug 2026 18:48:55 +0200
-Subject: [PATCH 2/2] arm64: dts: qcom: add Xiaomi Mi 8 (dipper)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fdzmGQ+1";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="LiKOomIo"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 679IAtWO3978133
+	for <linux-arm-msm@vger.kernel.org>; Sun, 9 Aug 2026 18:58:44 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=lzRXDP37ElESnDzMwft4DO
+	8ex8QQj5ZwDC+i3fGv56Y=; b=fdzmGQ+17b/LM/OO4sBPvd02HD3/+2FnqOy1Uq
+	FOPjw2F2Qg3tlmacOrUzWRUGtFXyLUO5Wj10jw2Y/4B/PDsZlHXrGybTxOLl2SUr
+	ItwdKRXSpJifRcHNi5wckDA0JiDx59XqxOmQBlkvo8UmWm9biMqAOMUBuyEZ/RII
+	O7RQXeHIXq9CYnAn6OWcLzem+0KBWeRZayG3aXAqhk97GsVyHI1J31hWn9w/5u0G
+	KUpKH3gW02XmuC4mAQYzrsdMrilU4ZMjQWMnDURNiQNzZdPxGNYjVqJR6ucgAUkg
+	Y9vatBwbbhJ7SBzZUulm3VqLSAjhdqY78dL0SfmtV2JRZJQg==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwudqkfe6-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 18:58:44 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c1a9764f0so11527341cf.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 11:58:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786301923; x=1786906723; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=lzRXDP37ElESnDzMwft4DO8ex8QQj5ZwDC+i3fGv56Y=;
+        b=LiKOomIoejBMbzhW2zrC/+emLBzfr3UhqflfdBp3I+hE48GlSGp5TEzuA/qoDvMcSP
+         llzMM3pO6c9gbvCxrpf6DMBo7MoO/TgTcFAZ/7XzJNaOm8KAK1iVrwZnKsFenKZXeaZ0
+         uDdwSxgXvOGoYfizCMeOeyGJFO85e9CwJAGn7DIr2jlJd13Oenqy6ihAWLehXk9KM2km
+         Bxk8AJqv7oewr/icGDDQRGJnA5emss1e5BxsmXbBa9h0KNnLlt8U3cXN/Fj2bpdEpqkk
+         CDzyytkPTgY/kR37XbfQfXPvYEGKJlMSQImqpIZme+EpsK9ycMBEOaNK3pbhZkaXRB6g
+         a/GQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786301923; x=1786906723;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=lzRXDP37ElESnDzMwft4DO8ex8QQj5ZwDC+i3fGv56Y=;
+        b=AaoCelz8yxmaAL9USJz5ZNWn4TgdACOovbXeKWddCaGOZepgJuzmIAofcQiYGgtJMH
+         baW/qyev8BLCc+A5DpDcHWCOGyTCsipt2zpWcgRAyrEU8Z38pGcfg9c4lE54VHHE0ync
+         saYNZ4lyGptGMl7rmZ7p+uIfn1pvB/l85370FnCW6S1qQqUiocE0N1MtwZ2RLnNp0Wfh
+         Pqh1NI6AIHMKR6DhDh8VTiCL35sbZYtcaHtQAe8lHglZzvh5Jmin5d+L0BHCR6qzxI0w
+         mPEJRQ//TOaVuWxE+xE1CS2fZiUCoWsekY0bgeXz7FRr5ULbxqAdkE562S2qrR5id5pz
+         Imgg==
+X-Gm-Message-State: AOJu0Yygp8fd/AYa+KzEFIwjvEnCbmgiYG2kTb0m/K5A4Y2XM9Rc9bb6
+	Mp5b4jJ425k1ZCWlj86QHFHSWZwQlmAyiO9oiRRrPjaZ6z/uXXap/DUApjBvfV4mwpR+qE6fHNR
+	2HI4N0CJ9z20o1xuFeV9DeCgfyPq3CKVv1cdTVaqDjHYbfzM7sZlLmmiM5xQcegg1DSrp
+X-Gm-Gg: AR+sD13tonGgefwArWfeP7TlJW1diXimahVmcrqKUrzuRUqotWQvDP5KwqBCNTSMdM6
+	aFOavsem4AbNT69In9TrsKj/G7Xk/QVotNHqjw5WVB1hv1wDBde0yirxhZhs0IIfKaXAjBK+4lU
+	/0HCzm6pYONccMVFXCMUczO+AN6WZe0icMrwHK+oKCN7WAJkDYKFbN0HnjLb/tT16CV5ZCiPfHS
+	ZxfWx8I5rA4sJP6UFZj1TdT6oQxjvaRruVsOHrAMZsaOdwd5jICUlKGhlmoLhUuM6qd09j0/EWT
+	mrhguRUomvbvx2Usxk/u/wsnCe3Xq256uXJwUQXiR2maxgMI8QTdsKZPHuw8S9w+X6UmjUfPnmw
+	7tzGi5iv5PMJjUjBcIqYytKvBX2R0VY0F6G7Xw0rE8kmzjpPBLQL8VGkMufMIRhX6+YS1wRP55e
+	r0Yoq/YZMbzriJPw==
+X-Received: by 2002:a05:622a:a18:b0:528:399a:8f81 with SMTP id d75a77b69052e-52d20a16251mr188882321cf.23.1786301923232;
+        Sun, 09 Aug 2026 11:58:43 -0700 (PDT)
+X-Received: by 2002:a05:622a:a18:b0:528:399a:8f81 with SMTP id d75a77b69052e-52d20a16251mr188881911cf.23.1786301922818;
+        Sun, 09 Aug 2026 11:58:42 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-39fddd52514sm17157581fa.20.2026.08.09.11.58.38
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 09 Aug 2026 11:58:40 -0700 (PDT)
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Date: Sun, 09 Aug 2026 21:58:37 +0300
+Subject: [PATCH] clk: qcom: mmcc-msm8974: add GENPD_FLAG_NO_STAY_ON
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -40,749 +87,89 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260809-dipper-v1-2-eb4d501e85df@ixit.cz>
-References: <20260809-dipper-v1-0-eb4d501e85df@ixit.cz>
-In-Reply-To: <20260809-dipper-v1-0-eb4d501e85df@ixit.cz>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Kees Cook <kees@kernel.org>, 
- Tony Luck <tony.luck@intel.com>, 
- "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org, 
- David Heidelberg <david@ixit.cz>
+Message-Id: <20260809-msm8974-mmcc-fix-v1-1-50f2dcf18d2e@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIANzNeGoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDCwNL3dziXAtLcxPd3NzkZN20zArdZAvjJNO0REtDs8Q0JaC2gqJUoDD
+ YyOhYCL+4NCkrNbkEZI5SbS0AWjQNMnQAAAA=
+X-Change-ID: 20260809-msm8974-mmcc-fix-c83b5fa916af
+To: Bjorn Andersson <andersson@kernel.org>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
+        Ulf Hansson <ulfh@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-kernel@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=17394; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=4rjCrG9bzdUIBEuYnZ2hhVIIPEKBcnaBoyOqdkZwLrA=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqeK95VOPuBwvbO2PrPcEzQzYdKBbJcj581vYs8
- enqESwtAB+JAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCaniveQAKCRBgAj/E00kg
- crYnD/9xhEa5gTzVbRZAYPUjJQLE3O4ttLyZEPQMs7udyk1cIuHcnByho3YuCp8KfUyq6EP1RkK
- VEW4Gpti08Ai98+elKPFFAVuGjgNI7mkiy8DYDtFdhBvX1qJFzibej98ZhGKavxKGWWwUSp/UM5
- 6t43l2eBHs5oPh/rViOG0Fna3wShzumalm/hQ91gT7n3Tc74uVS/Fa3fzAmxK00M/Go5i4wnbzx
- cn2JQFfCMv9gO5PEjvCR8e6KE/AnLg140xQQScGNTnXwwCJNVytv3z9d3UEVlgsQapUJA/oUnda
- byVYjNXIdTzBRr++yFouZ7zdF4UWFdFSMjMLNP58Hp25yWATKTupNCpX0Z9W7+H50PvLw20JJDF
- XnmxQjAa8uKdhHvPRCCO8ykix8VfnqM/V8MJ8G6k0PiQqa6bk0FjcvowDbld1EnbIJ1FXUdSZ08
- mhXshSdDMXEm1eh1AHT09vNnXZsDwZOepIUH2+ekhSFTNPNHOYnwfusQjKAuiJOd0uQ2LykmybH
- CUpuUug1974kb+zviFO74tMttsCD/fd7JwapCOTpwlFpMDFIgHxi5u7NN3SV4gza9GWHvyopQHk
- 3NT+p2zbIL3IZW7434aK55XFDkGr3IHd4fYY9gdnrGhLqshSH6DScTaqukm2u83rBJFMLiIhd/3
- NyZ4O+7auaitZPw==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1160;
+ i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
+ bh=4kdQcLHaNqH0bNFWSMBUN1Ena+T1hMkJB23bHmNC13k=;
+ b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqeM3ewXo6wdqTel4JBpyKPYEM4EUeVztB3OGZd
+ UA2dwH2zyGJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCanjN3gAKCRCLPIo+Aiko
+ 1X6bB/4qX3fbZyLBywYfelxx/EJperTokpK4P/Cpy0VVFPQnYdjRa3eJ9n34XKgLxOK6RhWKbjh
+ Wu3x/GbisfNsX/0kucffupLZRlWbtti0UsFHAY8rLCV5y0FcLR4CUtZIqYfx0sNQbSdPs7DphpH
+ 8mc0R8MHzf5lPoUTldrkOzAdl/0UUB1aRY1WRDA7RuELKDKOpjJf2kgQ1Zd24pnVSm8Nyp0rxq/
+ qeKFhYMmU7ouLAMjSoCdXAn6z693yJHbVVsmtE3bmQOarRnkwobJPdpzgmXoH+Z5ye+MBV1fb/D
+ i620jsCSjiRN8GFiznjalxrT87G5HnL0JGDHLIUMxmNFVnsh
+X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
+ fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA5MDE3MSBTYWx0ZWRfX5mr0wl5luaHG
+ AXwWeOg984AqrIn2hvgN70fH8bWwI5X1nyogAE+8gZGDmCkXBwU9sFjKzJlmE/iBWT9aqq5YYep
+ EER421qMgxo+z/y7t8jsw4Z3t8oaz1A=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA5MDE3MSBTYWx0ZWRfXx90i1PGvGyBO
+ uQrqUaYac6bTcStVwOdSNxCUzy37/26TYFb4nm1vy9hL1NKicTy0t7aPxvTf7y7qh9oHCZJlX5a
+ WLgGfpQrhutDQw4bpfcq6yc3/jfdu/r+eKkzcaaK0YWlwkNy+bPisMmnERtZ2QJiD9M6HGb5gZo
+ dsaQGrT5A9b39MZ+GBU0o8ciwGoQHTL8uCKME539Jl//B+ijPjvcFDQQLhuqcYzx1KNtaorIjIm
+ nb1rLu1LnSJ/oZnd2J3fJXwDvOinLaHjMIzASHJhNl3699djKV4D4m2Kmq3NO9yzJit3PTlGVpU
+ VLJrcZJhheFvA+vzWFk6wKqWUK8Lxeh/HeR8KTAjYqFp1DhGsdy062lmSc+nvMujojblezw8TRW
+ JIWJTMdyPPo1MEyxA0J2xUu905ke//I6BJH82RQhekpKkjvlXyQoRhuiwvjyDoU+MKhyTcC2NQX
+ +oOOBDd0vtO0ceO+WhA==
+X-Authority-Analysis: v=2.4 cv=BNCDalQG c=1 sm=1 tr=0 ts=6a78cde4 cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=fGnOUpkfZkl4fvj9H_EA:9 a=QEXdDO2ut3YA:10 a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-ORIG-GUID: f0TWjMSbLLWjFU4jBBUyzhM8OlghzBBG
+X-Proofpoint-GUID: f0TWjMSbLLWjFU4jBBUyzhM8OlghzBBG
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-09_06,2026-08-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0
+ priorityscore=1501 adultscore=0 bulkscore=0 spamscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608090171
 
-From: David Heidelberg <david@ixit.cz>
+Commit 13a4b7fb6260 ("pmdomain: core: Leave powered-on genpds on until
+late_initcall_sync") kept power-domains on longer during boot which is
+causing DSI clock to get stuck and fail to acquire its configuration on
+DSI bringup. While this is being investigated, add the flag
+GENPD_FLAG_NO_STAY_ON for MDSS GDSC on MSM8974 to restore the previous
+behaviour to fix this.
 
-Initial submission for one member of the prime Xiaomi Mi 8 family.
-Mi 8 Pro (equuleus) and Mi 8 Explorer (ursa) are nearly identical.
-Known differences are battery capacity and fingerprint sensor placement.
-This submission includes basic abstraction for other developers to be
-able easily extend it to support other variants.
-
-What does work: framebuffer, USB, UFS, Bluetooth, Wi-Fi.
-
-Based on work of multiple people trying to bring the device in the past.
-Last attempt was done by Max Furman.
-
-Signed-off-by: David Heidelberg <david@ixit.cz>
+Fixes: 13a4b7fb6260 ("pmdomain: core: Leave powered-on genpds on until late_initcall_sync")
+Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/Makefile                  |   1 +
- .../boot/dts/qcom/sdm845-xiaomi-dipper-common.dtsi | 623 +++++++++++++++++++++
- arch/arm64/boot/dts/qcom/sdm845-xiaomi-dipper.dts  |  30 +
- 3 files changed, 654 insertions(+)
+ drivers/clk/qcom/mmcc-msm8974.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index e05414290d8e5..80b57774281b8 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -324,16 +324,17 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-mtp.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-oneplus-enchilada.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-oneplus-fajita.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-samsung-starqltechn.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-sony-xperia-tama-akari.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-sony-xperia-tama-akatsuki.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-sony-xperia-tama-apollo.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-xiaomi-beryllium-ebbg.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-xiaomi-beryllium-tianma.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-xiaomi-dipper.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-xiaomi-polaris.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm845-shift-axolotl.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm850-huawei-matebook-e-2019.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm850-lenovo-yoga-c630.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdm850-samsung-w737.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= sdx75-idp.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqm-evk.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= shikra-cqs-evk.dtb
-diff --git a/arch/arm64/boot/dts/qcom/sdm845-xiaomi-dipper-common.dtsi b/arch/arm64/boot/dts/qcom/sdm845-xiaomi-dipper-common.dtsi
-new file mode 100644
-index 0000000000000..f461fab994dac
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/sdm845-xiaomi-dipper-common.dtsi
-@@ -0,0 +1,623 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Xiaomi Mi 8 family common device tree source.
-+ * Covers Mi 8 Explorer Edition (equuleus), Mi 8 (dipper), Mi 8 Pro (urza).
-+ *
-+ * Copyright David Heidelberg. All rights reserved.
-+ */
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/arm/qcom,ids.h>
-+#include <dt-bindings/firmware/qcom,scm.h>
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/input/linux-event-codes.h>
-+#include <dt-bindings/interrupt-controller/irq.h>
-+#include <dt-bindings/phy/phy-qcom-qusb2.h>
-+#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
-+#include "sdm845.dtsi"
-+#include "pm8998.dtsi"
-+#include "pmi8998.dtsi"
-+
-+/delete-node/ &adsp_mem;
-+/delete-node/ &cdsp_mem;
-+/delete-node/ &mba_region;
-+/delete-node/ &mpss_region;
-+/delete-node/ &rmtfs_mem;
-+/delete-node/ &slpi_mem;
-+/delete-node/ &spss_mem;
-+/delete-node/ &tz_mem;
-+/delete-node/ &venus_mem;
-+/delete-node/ &wlan_msa_mem;
-+
-+/ {
-+	chassis-type = "handset";
-+
-+	qcom,msm-id = <QCOM_ID_SDM845 0x20001>;
-+
-+	aliases {
-+		serial0 = &uart9;
-+		serial1 = &uart6;
-+	};
-+
-+	chosen {
-+		#address-cells = <2>;
-+		#size-cells = <2>;
-+		ranges;
-+
-+		framebuffer {
-+			compatible = "simple-framebuffer";
-+			memory-region = <&cont_splash_mem>;
-+
-+			vci-supply = <&vreg_panel_vci>;
-+			vddio-supply = <&vreg_panel_vddio>;
-+
-+			width = <1080>;
-+			height = <2248>;
-+			stride = <(1080 * 4)>;
-+			format = "a8r8g8b8";
-+		};
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+		autorepeat;
-+
-+		pinctrl-0 = <&volume_up_gpio>;
-+		pinctrl-names = "default";
-+
-+		key-volume-up {
-+			label = "Volume Up";
-+			linux,code = <KEY_VOLUMEUP>;
-+			gpios = <&pm8998_gpios 6 GPIO_ACTIVE_LOW>;
-+			wakeup-source;
-+			debounce-interval = <15>;
-+		};
-+	};
-+
-+	vreg_panel_vci: regulator-panel-vci {
-+		compatible = "regulator-fixed";
-+		regulator-name = "panel_vci_vreg";
-+
-+		regulator-min-microvolt = <3000000>;
-+		regulator-max-microvolt = <3000000>;
-+
-+		gpio = <&tlmm 35 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+		startup-delay-us = <4000>;
-+		regulator-boot-on;
-+	};
-+
-+	vreg_panel_vddio: regulator-panel-vddio {
-+		compatible = "regulator-fixed";
-+		regulator-name = "panel_vddio_vreg";
-+
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+
-+		gpio = <&tlmm 23 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+		startup-delay-us = <4000>;
-+		regulator-boot-on;
-+	};
-+
-+	reserved-memory {
-+		adsp_mem: memory@8c500000 {
-+			reg = <0 0x8c500000 0 0x1e00000>;
-+			no-map;
-+		};
-+
-+		cont_splash_mem: memory@9d400000 {
-+			reg = <0 0x9d400000 0 0x950000>;
-+			no-map;
-+		};
-+
-+		wlan_msa_mem: memory@8e300000 {
-+			reg = <0 0x8e300000 0 0x100000>;
-+			no-map;
-+		};
-+
-+		mpss_region: memory@8e400000 {
-+			reg = <0 0x8e400000 0 0x7800000>;
-+			no-map;
-+		};
-+
-+		venus_mem: memory@95c00000 {
-+			reg = <0 0x95c00000 0 0x500000>;
-+			no-map;
-+		};
-+
-+		cdsp_mem: memory@96100000 {
-+			reg = <0 0x96100000 0 0x800000>;
-+			no-map;
-+		};
-+
-+		mba_region: memory@96900000 {
-+			reg = <0 0x96900000 0 0x200000>;
-+			no-map;
-+		};
-+
-+		slpi_mem: memory@96b00000 {
-+			reg = <0 0x96b00000 0 0x1400000>;
-+			no-map;
-+		};
-+
-+		spss_mem: memory@97f00000 {
-+			reg = <0 0x97f00000 0 0x100000>;
-+			no-map;
-+		};
-+
-+		rmtfs_mem: memory@f7300000 {
-+			compatible = "qcom,rmtfs-mem";
-+			reg = <0 0xf7300000 0 0x202000>;
-+			qcom,use-guard-pages;
-+			no-map;
-+
-+			qcom,client-id = <1>;
-+			qcom,vmid = <QCOM_SCM_VMID_MSS_MSA>;
-+		};
-+
-+		/* bootloader reserves this range for its own use. */
-+		memory@88f00000 {
-+			reg = <0 0x88f00000 0 0x200000>;
-+			no-map;
-+		};
-+
-+		ramoops@b0000000 {
-+			compatible = "ramoops";
-+			reg = <0 0xb0000000 0 0x00400000>;
-+			record-size = <0x40000>;
-+			console-size = <0x40000>;
-+			ftrace-size = <0x40000>;
-+			pmsg-size = <0x200000>;
-+		};
-+
-+		linux,cma {
-+			compatible = "shared-dma-pool";
-+			alloc-ranges = <0 0x00000000 0 0xffffffff>;
-+			reusable;
-+			alignment = <0 0x400000>;
-+			size = <0 0x2c00000>;
-+			linux,cma-default;
-+		};
-+	};
-+
-+	vph_pwr: regulator-vph-pwr {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vph_pwr";
-+
-+		regulator-min-microvolt = <3700000>;
-+		regulator-max-microvolt = <3700000>;
-+	};
-+
-+	vreg_s4a_1p8: vreg-s4a-1p8 {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vreg_s4a_1p8";
-+
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+		regulator-always-on;
-+		regulator-boot-on;
-+
-+		vin-supply = <&vph_pwr>;
-+	};
-+
-+	wcn3990-pmu {
-+		compatible = "qcom,wcn3990-pmu";
-+
-+		pinctrl-0 = <&sw_ctrl_default>;
-+		pinctrl-names = "default";
-+
-+		vddio-supply = <&vreg_s4a_1p8>;
-+		vddxo-supply = <&vreg_l7a_1p8>;
-+		vddrf-supply = <&vreg_l17a_1p3>;
-+		vddch0-supply = <&vreg_l25a_3p3>;
-+		vddch1-supply = <&vreg_l23a_3p3>;
-+
-+		swctrl-gpios = <&pm8998_gpios 3 GPIO_ACTIVE_HIGH>;
-+
-+		regulators {
-+			vreg_pmu_io: ldo0 {
-+				regulator-name = "vreg_pmu_io";
-+			};
-+
-+			vreg_pmu_xo: ldo1 {
-+				regulator-name = "vreg_pmu_xo";
-+			};
-+
-+			vreg_pmu_rf: ldo2 {
-+				regulator-name = "vreg_pmu_rf";
-+			};
-+
-+			vreg_pmu_ch0: ldo3 {
-+				regulator-name = "vreg_pmu_ch0";
-+			};
-+
-+			vreg_pmu_ch1: ldo4 {
-+				regulator-name = "vreg_pmu_ch1";
-+			};
-+		};
-+	};
-+};
-+
-+&adsp_pas {
-+	firmware-name = "qcom/sdm845/Xiaomi/dipper/adsp.mbn";
-+
-+	status = "okay";
-+};
-+
-+&apps_rsc {
-+	regulators-0 {
-+		compatible = "qcom,pm8998-rpmh-regulators";
-+		qcom,pmic-id = "a";
-+
-+		vdd-s1-supply = <&vph_pwr>;
-+		vdd-s2-supply = <&vph_pwr>;
-+		vdd-s3-supply = <&vph_pwr>;
-+		vdd-s4-supply = <&vph_pwr>;
-+		vdd-s5-supply = <&vph_pwr>;
-+		vdd-s6-supply = <&vph_pwr>;
-+		vdd-s7-supply = <&vph_pwr>;
-+		vdd-s8-supply = <&vph_pwr>;
-+		vdd-s9-supply = <&vph_pwr>;
-+		vdd-s10-supply = <&vph_pwr>;
-+		vdd-s11-supply = <&vph_pwr>;
-+		vdd-s12-supply = <&vph_pwr>;
-+		vdd-s13-supply = <&vph_pwr>;
-+		vdd-l1-l27-supply = <&vreg_s7a_1p025>;
-+		vdd-l2-l8-l17-supply = <&vreg_s3a_1p35>;
-+		vdd-l3-l11-supply = <&vreg_s7a_1p025>;
-+		vdd-l4-l5-supply = <&vreg_s7a_1p025>;
-+		vdd-l6-supply = <&vph_pwr>;
-+		vdd-l7-l12-l14-l15-supply = <&vreg_s5a_2p04>;
-+		vdd-l9-supply = <&vreg_bob>;
-+		vdd-l10-l23-l25-supply = <&vreg_bob>;
-+		vdd-l13-l19-l21-supply = <&vreg_bob>;
-+		vdd-l16-l28-supply = <&vreg_bob>;
-+		vdd-l18-l22-supply = <&vreg_bob>;
-+		vdd-l20-l24-supply = <&vreg_bob>;
-+		vdd-l26-supply = <&vreg_s3a_1p35>;
-+		vin-lvs-1-2-supply = <&vreg_s4a_1p8>;
-+
-+		vreg_s2a_1p125: smps2 {
-+			regulator-min-microvolt = <1100000>;
-+			regulator-max-microvolt = <1100000>;
-+		};
-+
-+		vreg_s3a_1p35: smps3 {
-+			regulator-min-microvolt = <1352000>;
-+			regulator-max-microvolt = <1352000>;
-+		};
-+
-+		vreg_s5a_2p04: smps5 {
-+			regulator-min-microvolt = <1904000>;
-+			regulator-max-microvolt = <2040000>;
-+		};
-+
-+		vreg_s7a_1p025: smps7 {
-+			regulator-min-microvolt = <900000>;
-+			regulator-max-microvolt = <1028000>;
-+		};
-+
-+		vreg_l1a_0p875: ldo1 {
-+			regulator-min-microvolt = <880000>;
-+			regulator-max-microvolt = <880000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l2a_1p2: ldo2 {
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-always-on;
-+		};
-+
-+		vreg_l5a_0p8: ldo5 {
-+			regulator-min-microvolt = <800000>;
-+			regulator-max-microvolt = <800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l7a_1p8: ldo7 {
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l12a_1p8: ldo12 {
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l14a_1p8: ldo14 {
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-boot-on;
-+			regulator-always-on;
-+		};
-+
-+		vreg_l17a_1p3: ldo17 {
-+			regulator-min-microvolt = <1304000>;
-+			regulator-max-microvolt = <1304000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l20a_2p95: ldo20 {
-+			regulator-min-microvolt = <2950000>;
-+			regulator-max-microvolt = <2960000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l22a_2p864: ldo22 {
-+			regulator-min-microvolt = <2864000>;
-+			regulator-max-microvolt = <2864000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l23a_3p3: ldo23 {
-+			regulator-min-microvolt = <3000000>;
-+			regulator-max-microvolt = <3312000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l24a_3p075: ldo24 {
-+			regulator-min-microvolt = <3088000>;
-+			regulator-max-microvolt = <3088000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l25a_3p3: ldo25 {
-+			regulator-min-microvolt = <3300000>;
-+			regulator-max-microvolt = <3312000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l26a_1p2: ldo26 {
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-boot-on;
-+		};
-+
-+		vreg_l28a_3p3: ldo28 {
-+			regulator-min-microvolt = <2856000>;
-+			regulator-max-microvolt = <3008000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_lvs1_1p8: lvs1 {
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1800000>;
-+		};
-+	};
-+
-+	regulators-1 {
-+		compatible = "qcom,pmi8998-rpmh-regulators";
-+		qcom,pmic-id = "b";
-+
-+		vdd-bob-supply = <&vph_pwr>;
-+
-+		vreg_bob: bob {
-+			regulator-min-microvolt = <3312000>;
-+			regulator-max-microvolt = <3600000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_AUTO>;
-+			regulator-allow-bypass;
-+		};
-+	};
-+};
-+
-+&dispcc {
-+	/* Disable for now so simple-framebuffer continues working */
-+	status = "disabled";
-+};
-+
-+&gcc {
-+	protected-clocks = <GCC_QSPI_CORE_CLK>,
-+			   <GCC_QSPI_CORE_CLK_SRC>,
-+			   <GCC_QSPI_CNOC_PERIPH_AHB_CLK>,
-+			   <GCC_LPASS_Q6_AXI_CLK>,
-+			   <GCC_LPASS_SWAY_CLK>;
-+};
-+
-+&gpi_dma0 {
-+	status = "okay";
-+};
-+
-+&gpi_dma1 {
-+	status = "okay";
-+};
-+
-+&gpu {
-+	status = "okay";
-+};
-+
-+&gpu_zap_shader {
-+	firmware-name = "qcom/sdm845/Xiaomi/dipper/a630_zap.mbn";
-+};
-+
-+&ibb {
-+	regulator-min-microvolt = <4600000>;
-+	regulator-max-microvolt = <6000000>;
-+	regulator-over-current-protection;
-+	regulator-pull-down;
-+	regulator-soft-start;
-+};
-+
-+&ipa {
-+	firmware-name = "qcom/sdm845/Xiaomi/dipper/ipa_fws.mbn";
-+
-+	status = "okay";
-+};
-+
-+&lab {
-+	regulator-min-microvolt = <4600000>;
-+	regulator-max-microvolt = <6000000>;
-+	regulator-pull-down;
-+	regulator-soft-start;
-+};
-+
-+&mdss {
-+	/* Disable for now so simple-framebuffer continues working */
-+	status = "disabled";
-+};
-+
-+&mss_pil {
-+	firmware-name = "qcom/sdm845/Xiaomi/dipper/mba.mbn",
-+			"qcom/sdm845/Xiaomi/dipper/modem.mbn";
-+
-+	status = "okay";
-+};
-+
-+&pmi8998_charger {
-+	monitored-battery = <&battery>;
-+
-+	status = "okay";
-+};
-+
-+&pm8998_gpios {
-+	sw_ctrl_default: sw-ctrl-default-state {
-+		pins = "gpio3";
-+		function = "normal";
-+		input-enable;
-+		bias-pull-down;
-+	};
-+
-+	volume_up_gpio: vol-up-active-state {
-+		pins = "gpio6";
-+		function = "normal";
-+		input-enable;
-+		bias-pull-up;
-+		power-source = <0>;
-+	};
-+};
-+
-+&pm8998_resin {
-+	linux,code = <KEY_VOLUMEDOWN>;
-+
-+	status = "okay";
-+};
-+
-+&qupv3_id_0 {
-+	status = "okay";
-+};
-+
-+&qupv3_id_1 {
-+	status = "okay";
-+};
-+
-+&qup_uart9_rx {
-+	drive-strength = <2>;
-+	bias-pull-up;
-+};
-+
-+&qup_uart9_tx {
-+	drive-strength = <2>;
-+	bias-disable;
-+};
-+
-+&i2c5 {
-+	status = "okay";
-+
-+	/* tas2557 @4c */
-+};
-+
-+&i2c14 {
-+	clock-frequency = <400000>;
-+
-+	status = "okay";
-+
-+	/* stmfts5 @49 */
-+};
-+
-+&tlmm {
-+	gpio-reserved-ranges = < 0 4>, /* SPI (Goodix Fingerprint) */
-+			       <81 4>; /* SPI (Synaptics Fingerprint) */
-+};
-+
-+&ufs_mem_hc {
-+	reset-gpios = <&tlmm 150 GPIO_ACTIVE_LOW>;
-+
-+	vcc-supply = <&vreg_l20a_2p95>;
-+	vcc-max-microamp = <600000>;
-+	vccq2-supply = <&vreg_s4a_1p8>;
-+	vccq2-max-microamp = <600000>;
-+
-+	status = "okay";
-+
-+};
-+
-+&ufs_mem_phy {
-+	vdda-phy-supply = <&vreg_l1a_0p875>;
-+	vdda-pll-supply = <&vreg_l26a_1p2>;
-+
-+	status = "okay";
-+};
-+
-+&usb_1 {
-+	qcom,select-utmi-as-pipe-clk;
-+
-+	status = "okay";
-+};
-+
-+&usb_1_dwc3 {
-+	/* Until we have Type C hooked up we'll force this as peripheral. */
-+	dr_mode = "peripheral";
-+
-+	maximum-speed = "high-speed";
-+	phys = <&usb_1_hsphy>;
-+	phy-names = "usb2-phy";
-+};
-+
-+&usb_1_hsphy {
-+	vdd-supply = <&vreg_l1a_0p875>;
-+	vdda-pll-supply = <&vreg_l12a_1p8>;
-+	vdda-phy-dpdm-supply = <&vreg_l24a_3p075>;
-+
-+	qcom,imp-res-offset-value = <8>;
-+	qcom,hstx-trim-value = <QUSB2_V2_HSTX_TRIM_21_6_MA>;
-+	qcom,preemphasis-level = <QUSB2_V2_PREEMPHASIS_5_PERCENT>;
-+	qcom,preemphasis-width = <QUSB2_V2_PREEMPHASIS_WIDTH_HALF_BIT>;
-+
-+	status = "okay";
-+};
-+
-+&uart6 {
-+	pinctrl-0 = <&qup_uart6_4pin>;
-+
-+	status = "okay";
-+
-+	bluetooth {
-+		compatible = "qcom,wcn3990-bt";
-+
-+		/*
-+		 * This path is relative to the qca/
-+		 * subdir under lib/firmware.
-+		 */
-+		firmware-name = "Xiaomi/dipper/crnv21.bin";
-+
-+		vddio-supply = <&vreg_pmu_io>;
-+		vddxo-supply = <&vreg_pmu_xo>;
-+		vddrf-supply = <&vreg_pmu_rf>;
-+		vddch0-supply = <&vreg_pmu_ch0>;
-+
-+		max-speed = <3200000>;
-+	};
-+};
-+
-+&uart9 {
-+	status = "okay";
-+};
-+
-+&wifi {
-+	vdd-0.8-cx-mx-supply = <&vreg_l5a_0p8>;
-+	vdd-1.8-xo-supply = <&vreg_pmu_xo>;
-+	vdd-1.3-rfa-supply = <&vreg_pmu_rf>;
-+	vdd-3.3-ch0-supply = <&vreg_pmu_ch0>;
-+	vdd-3.3-ch1-supply = <&vreg_pmu_ch1>;
-+
-+	qcom,snoc-host-cap-skip-quirk;
-+
-+	status = "okay";
-+};
-diff --git a/arch/arm64/boot/dts/qcom/sdm845-xiaomi-dipper.dts b/arch/arm64/boot/dts/qcom/sdm845-xiaomi-dipper.dts
-new file mode 100644
-index 0000000000000..59393d9a780ef
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/sdm845-xiaomi-dipper.dts
-@@ -0,0 +1,30 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Xiaomi Mi 8 (dipper).
-+ *
-+ * Copyright David Heidelberg. All rights reserved.
-+ */
-+
-+/dts-v1/;
-+
-+#include "sdm845-xiaomi-dipper-common.dtsi"
-+
-+/ {
-+	model = "Xiaomi Mi 8";
-+	compatible = "xiaomi,dipper", "xiaomi,dipper-common", "qcom,sdm845";
-+
-+	qcom,board-id = <55 0>;
-+
-+	battery: battery {
-+		compatible = "simple-battery";
-+
-+		charge-full-design-microamp-hours = <3400000>;
-+		voltage-min-design-microvolt = <3400000>;
-+		voltage-max-design-microvolt = <4400000>;
-+	};
-+
-+};
-+
-+&wifi {
-+	qcom,calibration-variant = "Xiaomi_dipper";
-+};
+diff --git a/drivers/clk/qcom/mmcc-msm8974.c b/drivers/clk/qcom/mmcc-msm8974.c
+index f2e802cf6afc..b04885864baf 100644
+--- a/drivers/clk/qcom/mmcc-msm8974.c
++++ b/drivers/clk/qcom/mmcc-msm8974.c
+@@ -2367,6 +2367,7 @@ static struct gdsc mdss_gdsc = {
+ 	.cxc_count = 2,
+ 	.pd = {
+ 		.name = "mdss",
++		.flags = GENPD_FLAG_NO_STAY_ON,
+ 	},
+ 	.pwrsts = PWRSTS_OFF_ON,
+ };
 
--- 
-2.55.0
+---
+base-commit: 6b8c8af514d739d0335f5579b585e02babe8a727
+change-id: 20260809-msm8974-mmcc-fix-c83b5fa916af
 
+Best regards,
+--  
+With best wishes
+Dmitry
 
