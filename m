@@ -1,122 +1,142 @@
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C72333CE4B2
-	for <linux-arm-msm@vger.kernel.org>; Sun,  9 Aug 2026 15:05:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.173
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 942E937FF66
+	for <linux-arm-msm@vger.kernel.org>; Sun,  9 Aug 2026 16:10:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786287955; cv=none; b=TNFEKOC0RzcdIomNbmr54ShcVY+6PF+ZmPVduiIowg0uhXztMPTe+x4bgyYujcaGhqADRxU4DayZfUXXGO3TfE2esn2J4OSRBjlPjpb0zftCtV47o9ghHxIs8Y359O7iBAg9J0VrFb4pUxdrfPvKRWsYwvCZvEOwZIkl43Ims8A=
+	t=1786291824; cv=none; b=YWdMsugK9yt4B75RZXIrYTmD/IiPAwib+8clORzXy64nh0yqUvAbKiUV7e2RbOblqwERq3SV7AYZR9X1YGovc0WGNyfX+Jo31/aF+MX8qRRgg2OCNZ5NJg2/8+iP63wFD1BX/Ym+rXDshdKSs3xcMT0zNDdL40NBokpehUlkBgA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786287955; c=relaxed/simple;
-	bh=N5EHcxRiFGQHcoZiSsmbsKQuX0XPu4+xUIXYTfGij6I=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=nC1pBVJ2xBoPDIjl/nGmgDUoWegh8FWkhB5M9MxW3UIO5DnFrUp+s+YfI6IK+XjnDBzbwq6/XCOQVY/CmLI/DFtFc4kb3ApPN5nuIHla9km8XvdcycYkR3WeyT/HPwbeT6HPhKngdLU2iCemAG06eThGIOPsmeATwGRi1mdCZ3g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZTZnLmhj; arc=none smtp.client-ip=209.85.215.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+	s=arc-20240116; t=1786291824; c=relaxed/simple;
+	bh=l/ZEGNAFzHMfVmvEPvd+GUW3qDLOebeT6rsXYOA/+FI=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=ldP63jN9DVKGSM2yHb4g/QIEHGT5ATM4G1x7RHiM8GinjayA6xjeSIzs8P341f5iHIJQN8jRWJbIRDfFus/gL+310E2CzfN8YNA9wIHvbM+Q6l/wIS0hmfVhCqFPbgDA5HILZ/cN0eNxIwi1GNKap9ssr3DUQO45iCVWnxOtP/A=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=QarT4dWv; arc=none smtp.client-ip=209.85.128.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZTZnLmhj"
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-c9e7391839cso1020119a12.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 08:05:52 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="QarT4dWv"
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4954dff6536so9191875e9.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 09:10:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786287951; x=1786892751; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:sender:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=0xMkbVk8Vq9ADk/FsQY03JHzIZEPQoL7wUy/e23YhPc=;
-        b=ZTZnLmhjHnJC41sh6cCP/VpheJz2FuqcrOUJSeYxmisz6j8YJoiCpxtGheyzHebrTl
-         6mpQVPCkpsKTi7nnQQsyIEpxBHefvbmPyPqScwMgWvk14Lu2d/99fGeA1U2kHuokBmk6
-         QMA+ogORdNFTNOeq/5901H3/dcn7Q94Td4NLC7TdykALSLeVW+wJkJC/5LsY6vT/dMb9
-         uGWh3ouxJzd7EhP692vaOc/3m6AYKr6oJEWuwgWtdUhqE1B6jNLAdPZsqPd9cjctPlrK
-         ZJq9nT9k6xUsqaCSTPPAR8qV7ilpluD5Mb/OSDIMS5ZszWyamgwgdrihwVmFUc7zFnpd
-         FuSw==
+        d=gmail.com; s=20251104; t=1786291820; x=1786896620; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=nbYtX7IeMY65jB+ZUUL86KrBb5orkg6y9aQT1NrIByY=;
+        b=QarT4dWv4O/TCgXP9Y0p7473UjczdHZCcAQv3NRfcddtK/85XSBdqanpv0qqnCztKQ
+         /hvwqfG3+wD8hgqiTAAWD3z2HyDA7B5BrvlmzG2FZE4AVWDL+YndJQgicRdAUvxY3mbW
+         BL8N6iUT3xDDqV4F9J0oGGrFPM8zjmK6MkmyoVk6Ize5XeyAm4iSVzcI4tVkRD2Eh11m
+         acGNzX2heAC0AM2UGQtKcssQ+MGv+FwCwNrGa1Hd9ub2Jg4IyYgYtxhX4tV+NLvxee97
+         6r2GNjx6OrniMNdIIms1DRI2hHncbaAzTaf7u8HMuUi4FE3/cAKiU5YZaRJ0E1FyloPK
+         jCQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786287951; x=1786892751;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:sender:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=0xMkbVk8Vq9ADk/FsQY03JHzIZEPQoL7wUy/e23YhPc=;
-        b=ZIcDf3upwX46y36/xwfeitbnCJa9V7XtBnhOXEoPCLJ+HAulnTMXwUG/pT5wHbc1NM
-         aTRS5zVJtbyxNHa6PunwOoFx8GenFYbn0GlRAfqGn/TxV5tmHEUVirrz2o94+PsG2/Ji
-         Ah0Ux7bjW7+X+TWWBzvMJj9D6t/EKlZpl+2DcEr5ApqKQBSpSoMe4tW0SiKdrJDjnXez
-         4TbfQA01sDP644VVJzVKEGB/dfMkQPMnIWvciKcPRDPPnLR6br5Q1A7p5HoMYIK338pL
-         zSwt5LQclpln3fErjJueehlvNau1vSMdoG0yiReKnOMGs7+3HQWkAlqZLZ/8LOOQbb3W
-         vTGg==
-X-Forwarded-Encrypted: i=1; AHgh+RpTxOC3e0d8YfcLBzQ5sjJRQGYZZOIdsn539kuU4cAkMmfgjHTuDxIpkzYmIB98ejvWLHr8bpq98jYOlxHX@vger.kernel.org
-X-Gm-Message-State: AOJu0YyASYj/mCf75eItNSdKm2zJnbxrKWZ0yiGif4AnVrCHR4m5jkkX
-	i3gZeJJg9w1FZHEnzO9B0g/HzevUVp/C4/AsjftfWJHprzwB4WwuRoPz
-X-Gm-Gg: AR+sD11cJoQooRfVdsA10YazqsOdawqrwjViI7Bazpj/S857BAzQxUxJuSJVQ06Dscs
-	RWtT/rhS+xl/8g5qzSTrnfQnBpFZfNTBYKFeqRrGmeZqfqY6kFe7zXIwdB6cSupoTcjD7iV5OY1
-	6iSzuBFxQSKCHQxTm59f3cJi+LJL+MzvPQvJcnRkDZnK8sZ1mn4m9CzQEesA/TItBNmVYQ+U7Ly
-	SKsR72WgwL5OPgmuD28qtPNn0a0XinjC4ej1udKTTpK2Boj3wbyaTHmyCz57p34wa38aW5cJaH0
-	jyCyy6qiWKD+IAe6KXdAhoD7O4e0yJ2XsMALxvJGeP311jG6nAtC8wMFDDffAXC9q+nCzgsdWsx
-	BKlUi+jNvDtqjYOjH3SyzIV4DfjYituaD/5TE/M+7txm8d83dUvVeFmyVOIYiCK3G0xJTZlEeK+
-	cLda7e8K+rSmDtaEuCDB+ZuE4HMRpmDND1QYx6vgTNrjuHIEiy8cFNmqldykMCPMvpIGQiCPuL+
-	w==
-X-Received: by 2002:a05:6a20:9f09:b0:3b4:8f57:3205 with SMTP id adf61e73a8af0-3cbc04eb981mr20974725637.36.1786287951463;
-        Sun, 09 Aug 2026 08:05:51 -0700 (PDT)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315beb88413sm54797483eec.18.2026.08.09.08.05.50
+        d=1e100.net; s=20251104; t=1786291820; x=1786896620;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=nbYtX7IeMY65jB+ZUUL86KrBb5orkg6y9aQT1NrIByY=;
+        b=lH6F4OtjHqYMocNKOiVTRETv6+7bJIA7X3QB7+tkyxk9iqBGlqETNt0xHlwgOmpR37
+         LOWtBo3RREZ4B9+L2wV8JsIQLwIs2ASx05KRqf6uyNdgaE+dIQvCIpxEz4hYPrOD6+KH
+         7HnCD63wX3bhwUkra6O1QYwh1QHBJ0nGW3RxMWZvevFZ3jvi+sOS9pGfOPpWapKH5fEq
+         tH2K/KIlf/8nbcUX79GepvRJOVSnrrLnZphbJWI7m7snYmeXeUd5TT/T11MwbUpTzhR2
+         jv8SkN1FlIksBE4S9EvJKnmgO0qbKZCn8tD9qEQKK/H23if249JNRTszpudimLlWIVFK
+         K/sA==
+X-Forwarded-Encrypted: i=1; AHgh+RrYaDsVLbfbjQ1VsBcaVq5qUZMh7VrAg+P/kWzDxRIFVd9lmINY87MdsE3WhXHVkAzPJokr1EirzjrnbEW6@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw+wsMq/JfSE/DfmCR4A0UjJ5DlNZnDTtHdwBlEjBzI2qFt2L6w
+	I/jp1A9CsfshInubvtFL8LEyM7OtVJXpkbtXygXQLRquQUbRDzvHb2Ev
+X-Gm-Gg: AR+sD125gsyLq/PwEsLxozZFziL2d1tegskvGPFm0f8oYX2DrCNZ0Gu91I7L+H5DTbQ
+	2RIF00naivwtPiK2RB1tHWHWeYZ/EsxcAPPjCEj+UZLRlapF3djUPeGFyPdpcvmv8p94ZbB8ycQ
+	6UZy5ponM4Z184RfW9+95493S3hD/0WgXl4I1VQ0wcIFjkawi7fgXezrMt/aMNxSmoLgDUKn+WW
+	TquX8GITN+2bCJPNRvU0Wbf7UNxRg7C0mYK15hZex12sSaFd1GT0dKxJjoofktVQkoYgTWqjdb1
+	UxP2VAxnxbs4n+OqblcGXtIgfQHpjdhAHWzBWFRwgeGKl4wEyOQ8F0AwqhumC46tSi+TlCp64Fa
+	q0jgtj48pmOJw/+P3HK/c+Gw2h6fhsOKyRnw7pnUSZOZtAx9UOTv4/+FRNSOxg3hLPugzf76Oar
+	mqpY+t9q95CMFiuc1I1xXOK4RcB0U5OL71L3Ujjrlqkwv3feHYPXL8ljOPOHGOp3hG4srR3NnOM
+	ZuXAxyzk/0=
+X-Received: by 2002:a05:600c:c4ac:b0:495:48d7:f178 with SMTP id 5b1f17b1804b1-49959e2f17cmr252118915e9.11.1786291820114;
+        Sun, 09 Aug 2026 09:10:20 -0700 (PDT)
+Received: from VivoBook-ASUS-X712UA-M712UA.lan ([2a00:f44:cc3:6030:e52b:e2ed:f4ea:2bfc])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4995bdc433bsm227957375e9.1.2026.08.09.09.10.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Aug 2026 08:05:50 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Sun, 9 Aug 2026 08:05:50 -0700
-From: Guenter Roeck <linux@roeck-us.net>
-To: phucduc.bui@gmail.com
-Cc: Wim Van Sebroeck <wim@linux-watchdog.org>,
-	Joel Stanley <joel@jms.id.au>,
-	Andrew Jeffery <andrew@codeconstruct.com.au>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	linux-arm-msm@vger.kernel.org, linux-mediatek@lists.infradead.org,
-	linux-watchdog@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH 4/4] watchdog: aspeed: Propagate errors from optional IRQ
- lookup
-Message-ID: <1f26fc28-da13-4ca3-990f-676b53d23630@roeck-us.net>
-References: <20260807081652.38692-1-phucduc.bui@gmail.com>
- <20260807081652.38692-4-phucduc.bui@gmail.com>
+        Sun, 09 Aug 2026 09:10:19 -0700 (PDT)
+From: Stanislaw Pal <kuncy7@gmail.com>
+To: Mieczyslaw Nalewaj <namiltd@yahoo.com>,
+	Jie Luo <jie.luo@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Michael Turquette <mturquette@baylibre.com>,
+	Brian Masney <bmasney@redhat.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH] clk: qcom: ipq-cmn-pll: keep the CMN block bus clocks enabled
+Date: Sun,  9 Aug 2026 18:10:12 +0200
+Message-ID: <20260809161012.378743-1-kuncy7@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <fdc4410c-18f3-4f34-8519-deb37862477c@yahoo.com>
+References: <fdc4410c-18f3-4f34-8519-deb37862477c@yahoo.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260807081652.38692-4-phucduc.bui@gmail.com>
+Content-Transfer-Encoding: 8bit
 
-On Fri, Aug 07, 2026 at 03:16:52PM +0700, phucduc.bui@gmail.com wrote:
-> From: bui duc phuc <phucduc.bui@gmail.com>
-> 
-> platform_get_irq_optional() returns a positive IRQ number on success or
-> a negative error code on failure. For an optional IRQ, -ENXIO indicates
-> that no IRQ is available, while other errors should be propagated.
-> 
-> Propagate errors such as -EPROBE_DEFER and -EINVAL instead of continuing
-> probe without the IRQ.
-> 
-> Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
-> ---
->  drivers/watchdog/aspeed_wdt.c | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/drivers/watchdog/aspeed_wdt.c b/drivers/watchdog/aspeed_wdt.c
-> index c9e79851504c..48454ac86074 100644
-> --- a/drivers/watchdog/aspeed_wdt.c
-> +++ b/drivers/watchdog/aspeed_wdt.c
-> @@ -429,6 +429,8 @@ static int aspeed_wdt_probe(struct platform_device *pdev)
->  	if (wdt->cfg->irq_mask) {
->  		int irq = platform_get_irq_optional(pdev, 0);
->  
-> +		if (irq < 0 && irq != -ENXIO)
-> +			return irq;
->  		if (irq > 0) {
+On 8/8/2026 Mieczyslaw Nalewaj wrote:
+> Given the hang is reportedly 100% reproducible pre-userspace, is there
+> a concrete next step to root-cause it, or is v3 the right call for now
+> with a follow-up tracked separately?
 
-This if () is no longer needed.
+There is a concrete step, and I ran it today on a third board - this
+time with no code of mine involved at all.
+
+Hardware: GL.iNet GL-B3000 (IPQ5018), a supported in-tree OpenWrt
+board, running the current bone-stock OpenWrt snapshot (kernel
+6.18.41, which does not carry this patch). Out of the box it boot
+loops: the last line on earlycon is at ~0.39s (the final initcall
+before the driver probes start), then silence and a watchdog reset,
+100% reproducible.
+
+Adding exactly one thing to the kernel command line - no rebuild, no
+patch:
+
+    initcall_blacklist=ipq_cmn_pll_clk_driver_init
+
+makes the same image boot: serial, SPI-NAND, SMEM partitions,
+remoteproc all come up.
+
+Combined with what we already know from the other two boards, this
+isolates the trigger fairly tightly:
+
+  - cmn-pll probe runs, last PM reference dropped (vanilla): dies
+  - cmn-pll probe never runs (blacklist, clocks stay as the
+    bootloader left them, i.e. enabled): boots
+  - cmn-pll probe runs, reference held: boots - verified on this same
+    board today with an image carrying v3 of this patch and nothing
+    else changed; it comes up fully (shell over SSH, NAND, remoteproc),
+    and clk_summary shows the CMN block bus clocks held enabled by the
+    provider device.
+
+The only variable separating the dying case from both surviving ones
+is the AHB/SYS gate after probe. What exactly performs the fatal
+access afterwards is the remaining open question - and this board is
+well suited to answer it, since it has full U-Boot control and can run
+experiment kernels from RAM. I intend to bisect that next (my current
+suspicion is that the CMN block AHB clock also feeds the register path
+of neighbouring blocks in the same region - MDIO at 0x88000/0x90000,
+uniphy at 0x98000, CMN at 0x9b000 - which would explain why the CCF's
+own runtime PM handling around the clk ops cannot help here). I am
+happy to run any experiment Jie would like to see on this hardware.
+
+So to answer the question directly: I believe v3 is the right call now
+- three IPQ5018 boards, including a stock-image one, cannot boot
+without it and the cost of keeping two bus clocks of a small block
+enabled is negligible - with the exact-access root-causing tracked as
+a follow-up. If the follow-up ends up pointing at a cleaner fix (e.g.
+describing the real consumers of these bus clocks in DT), I will
+gladly send it as a successor.
 
 Thanks,
-Guenter
-
->  			ret = devm_request_irq(dev, irq, aspeed_wdt_irq,
->  					       IRQF_SHARED, dev_name(dev),
+Stanislaw
