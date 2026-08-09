@@ -1,88 +1,88 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07C1E3D9048
-	for <linux-arm-msm@vger.kernel.org>; Sun,  9 Aug 2026 20:16:09 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0CAB3D969E
+	for <linux-arm-msm@vger.kernel.org>; Sun,  9 Aug 2026 20:16:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786306572; cv=none; b=leN0cYWGXeZs2K37AJu4a5oC+/Uq7Od2g5MZY8Kg4GNqM8GyFuJmricT6z8aurS5fk+eM3KDWOYDvdpnBXAZnJtrH/WXkUrQLuuAtinXm51k3E7xKnIRTLKH/qL+PiiFxunXpxX0HEmQ4FPP4eaaxgWCyYPJCBjIzq1lPMc8J0s=
+	t=1786306573; cv=none; b=QUF6McqL7uyqa4jYxgPPRNsF++F1dn4Cr9UvIOc7jIA3Yu2qWB9jIimpuT9uzjbCIMekuHBA1FM5Uia73Nkiv2xoHjfhGzq8P0CTd4MOB27XdnSSiFpFOz4A/m1Mz25oOopqNJIikBS2NSG/bj+va9h2tq2H4VrcyXs1pF/PmMs=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786306572; c=relaxed/simple;
-	bh=eWQLDpa3TqCo4a5U/agcUYC2p0tFCZgkGn1lkr3Ubro=;
+	s=arc-20240116; t=1786306573; c=relaxed/simple;
+	bh=08DI3m/g8w//LYUe10gsP5FMXIEvOf1ZW68iQjd9XpE=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=szXBDeVp/9NZpJDhOJaPE7XZBs3uMua4e0XGv1bmLNKsPN5Bwa+80EUUtjiHhd9IoRf6xwYzJ3q/mMYLnWj6yxEDb9B0R/hbj4llLss+Z77XpvyOIiOomT59FY+W6IOH8mmw7CFCbuXm3aZmaD4pW9m76UhvZurVhJWW10kTF/Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Qb6CJz25; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kp6cg1ac; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=Q1BiHNZih1AKTwbE3Vy6skTiYbHgBn6C9Qyogg7l+uKpaFWivwLda7B1OfLp2f+eAUmQgyu3WS4z5PFTz+i4AxhooaiqLSK12PzUofY2eyFpO5GU2HNRzvxRyNfpkmIWqRHWwx3d1TfdgHaKeBrTd7EILog7LX5ySAKJLMJoAaM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VCYWknPt; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=WswLBJMe; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Qb6CJz25";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kp6cg1ac"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 679I9eO13433441
-	for <linux-arm-msm@vger.kernel.org>; Sun, 9 Aug 2026 20:16:09 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VCYWknPt";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="WswLBJMe"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 679I9G3p3974645
+	for <linux-arm-msm@vger.kernel.org>; Sun, 9 Aug 2026 20:16:11 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	niNCsZBrzIAQrp1eBI5we31XmUPx78SVfLUuwrIpCKI=; b=Qb6CJz25S4FQJlTx
-	833BUXomBMUMS14QDTk19YWp88mdoDpnzTB0TVxNpYXS9GClRQi03eM5u6o8rKNz
-	Yg5pxNwz9n9bQbHSBFCa3jmIiSOJGDVOZTvMd1yop7i4W8dk5uaoI7J0k+SgFGXS
-	RqPEHqSVKWQFl4b/y/sNqgdJOWF5Dk/Bgid4X5C+x18VIEYkUOnjmVqWr9KFOFjV
-	+q1QO4cmeMmaGbmcVE1IliunDMNVdCaI+Sng0rm3EQBA2+U4FzJoJGQIJaRCuGhv
-	9oeB3mZUB/KbMl3LeRC610xu6i40GjZANd6GFkT42XulsueMaCiQiEjNt0buOyVn
-	J0FjEg==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwstp3rvt-1
+	+hV7mbrZwx44RLk9dFycUl+f8Z+IiQ1Td63pdUanc1o=; b=VCYWknPtT+DHTuIY
+	tVzaDErKqAENEmh53NdE/F6yPa9Iqqm5VFirSBYIGvRK8vIs3F3NfUyyVYvvFxe2
+	RM7MAUGCrDr3M2lUOYnddzIcxBttrW+m3XswltoqI1vIBsmxFRbnm9EpvcLOpC3R
+	ZBHVxkGzX07GuWc8pg+tfcGuKiqEXqJe7ccprmM8/TSo9cmFZifhv4bhzpYbqmX3
+	WUuX+rLkbW4C8bAgq1XdnESY/tkOe07HZOAawNNkFKApgTbZLAQao4EfQxZocwM5
+	lDtfbXLSCeoo4UfJFPjvoM4YbF3j2SE/7OuzHdGdUSidGvZxbJdci/Jqwn+gZKxs
+	P55U0w==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwudqkjda-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 20:16:08 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-52769fc3f2eso17445781cf.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 13:16:08 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 20:16:11 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c0199faafso15047151cf.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 13:16:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786306568; x=1786911368; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1786306570; x=1786911370; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=niNCsZBrzIAQrp1eBI5we31XmUPx78SVfLUuwrIpCKI=;
-        b=kp6cg1ac47HAw/ob41/TOmAgAuEfmi41cD88S/b45qi/WnHQDYzbqWT8edSI44LbN3
-         zCi+LaQHKW5ji+vBiQt1aTPbxZPHhkD07W5mtvrCrOUHCUpVlhX/nCfNATk8HVrFFKeV
-         qEle9KfDC2BfxYLHJegmyk5L/Vdj+U0bpiDueWRlIM4UrpeYwyAlZW1zzSCQqI4o3MdN
-         0AycpIgZsXFBemYE8q7p1kHCA88wNEMUf+4cupynsi2kf3sdBbHkrd1VXCzld1cfkvvR
-         2oTWhYdE1Tl/uQ6U9G1JGjTHt9x8eP2GPaNMu826pZCeFPBBXOuzGBR9VWXD6rHFhJBW
-         ItvA==
+        bh=+hV7mbrZwx44RLk9dFycUl+f8Z+IiQ1Td63pdUanc1o=;
+        b=WswLBJMekeY2Z1aqjQupOofXVU9ei0nhpoDtBTFr3wPDNBWHdo0Ocg9/XiHNVuoUoR
+         U9yJqAAYv3WeLSM3jZFQc8eDj0uuWBHjy0/iB1IfIQNJKeKvxIOOKTO9GK157kJCDTwx
+         AzPs+10dUaQu4WdhIKGBrJ2FsVkbI7uRsmFq79x9PZAxUnBp8k8af2lq92Y+uaLbe7Uk
+         YaKY4ps3Xe3WEvXtLeb8y8eqv/IF/eYnMa2JNh9GiayZJSDh+inZu43h6YB24T/QEQ7T
+         p0C4zPhU1GcBaD2ZbspxeHuooU7Cmy6tk6SDlcF/JjP3g13K3vPjeMa06XoKbeHi4oxm
+         W4DA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786306568; x=1786911368;
+        d=1e100.net; s=20251104; t=1786306570; x=1786911370;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=niNCsZBrzIAQrp1eBI5we31XmUPx78SVfLUuwrIpCKI=;
-        b=mdkoccYvxttAT+fObGVyBe9vcZ07SwwB7JKTo3pcfmuKWUCRluTIGY/Zso24OktLiw
-         giW0epioSWABvdxYm1UdM+ND8CCdISIc1Rb0EA4MK8FKHE0SecPJnUl/SX+aVbPdjphd
-         o0HXw8I7JkiKrtmZ5E0CD7or04J0Tfae4KugEm2f3RDnRMBMZRwQW9uPs6HqlHDDH6Ha
-         BRVDuX7GcBl0UESZ9ofE2cWzveiYxzEVGlGJ2QmKwKlOJXaOurdC1HDGV3HiPajitygL
-         3ygDPSonS4ELLUoN4AmHu8l2KbTAFeN7ilNVY3B7t4xHJlQf8qNQgi5bGS+A77R5h49T
-         xAQg==
-X-Gm-Message-State: AOJu0YyC+jwb8YY2wG3O6x17qmeVQUs8EhWqNPaqvpIb9DJ14dC+CjbC
-	RM6Ar0/uxaWGXwq8imYu5ER8CINHGsd/lgAZZktgl+IFIS/tVwdYHfz2GvT2QmDk8ezmzaUGvk1
-	CF0yLMUfPdDjTihgTbxS+wOQk1O5DZ5L+Vt479IvUgfPeaVJ/DLYQLQvJhb0dxjO0Ejjh
-X-Gm-Gg: AR+sD12Sbw5ESluZpYeCWFPq+PuMYgfYEbPoaDH1FFSKFp94WPkID/Y63spyxBDEQDn
-	inpSTjHYg34Ua1wCM1tlIyVoLVdaLLGT5clL/Rv79xlJ0w4Kq2xyEp745vHk7/tJjBaNOe454P1
-	16ZPEQUb9g/EflASIycuUXS1w0tal1RYmBqud8vJD2GbEmnP020vi1JbTTRz09mdzCNabCf5jD5
-	0BLJPNsOEATXU7nvmgte/UjChZtN4o7zvqDMhU8mj90mkLS2lUAZ71u+ON0I5XuSCy1F8RD+4do
-	WvQboPVYYUnSOJA4YIiyEFnyR03/ia8OECfkvKJLVu7oSd67G/6wYZUpan69FELzdlm0Zm3gq23
-	MPDxN2jm8NoiNnLschy2ACvsEkUkODSpctqJtIdf3IvDHzun18M5T7DOPE6pgH3y8nXtBp/ifZA
-	PzQelySPEChU0U4w==
-X-Received: by 2002:a05:622a:345:b0:51c:73f:e3a7 with SMTP id d75a77b69052e-52ce6108188mr399320201cf.26.1786306568255;
-        Sun, 09 Aug 2026 13:16:08 -0700 (PDT)
-X-Received: by 2002:a05:622a:345:b0:51c:73f:e3a7 with SMTP id d75a77b69052e-52ce6108188mr399319631cf.26.1786306567794;
-        Sun, 09 Aug 2026 13:16:07 -0700 (PDT)
+        bh=+hV7mbrZwx44RLk9dFycUl+f8Z+IiQ1Td63pdUanc1o=;
+        b=ieUgjiNyc8viRYbqYsFUHhh/p0y63TtSsNv4dgTb9eBdjTegtVunLxRulvoGmsQruT
+         sZA4LhRnAas4Bi+Ri14qf+ELNwHP8Uq9K9EnJcgjgFSTNRd9StYiZ0mt9VHm9BjvdWYq
+         5oMsO629+VlIZciqz6O4ldJorSd4YAdN9qv7abDbu0iJKi84nP8IsGCMWupnVdmuoQKJ
+         5TPYxgGIAdgmkjNHx4FmMslHaSrSz7ZT0pl0HZCISAqvomw+vtfP18ImDxYM1wM+2M+H
+         L6foyJxOf1kEkELkoiGguCCTh+7UaUOad4Pd5Oo9/ZLGMVL+0s5DfB3QQoCR8MAtZxp/
+         +ZSA==
+X-Gm-Message-State: AOJu0YztMDSFI3jxFOohIIQG0b+Z3OAcOa7oc/2d6SklFJQ4zcdphQ8I
+	Bvi6A0u7nEIlU136CxBXqAtW+IMJR+GkoCOPBgdmx3yGGySRvpaw2+KiePaCN8CmDyLbnMW/Id/
+	H2PMVthUYjEnQWeW4DhplW8rxer9tiqpgMlFVdNnkbdkOMA0PkuShQCCuP+d/EEdsPxvW
+X-Gm-Gg: AR+sD10eqti4JRlS9l6XqVfRMbpTvfrdu88+XpGEiv7INSmAzLgRULGt57JFP2Z8cop
+	j6EsNm0/m/FI9SHs4W8o5YoHxXT5SClsIUK4t2BKY2Xgaj8MlsPNf3hcjWor5gyzov5WLHHs8pX
+	0fVWDaWgjLvJbAq4Y8PDwmAPKMOqq2OGeIYsIyae/yLrryD1QIv/4KvCAgHwhYwBHwNqOGSeLas
+	uxTjpuelrQo5SIGuAC/5RvgldaCYFx1vKYSjPMdMa+PF5HMPECXuaHYpQZitTt68SOoc3ao1xOh
+	fyJxzS/YM/7NdbMql4rUJx6MLWo0TGu+mrq3kQConuv4HcB55cwmppHJGOwyDfkzB0fJyYAoGfa
+	8x9jjIT+7e3S3Uk3h4ItIreac8ie0nlu/G9HNpHzEpMtqW7ivtXcMvpDJNuZ0ppL6UAoooe06/N
+	ah3M6MDDOQn4sbag==
+X-Received: by 2002:ad4:596d:0:b0:8ca:268b:13b2 with SMTP id 6a1803df08f44-908813c80aamr450316826d6.32.1786306570124;
+        Sun, 09 Aug 2026 13:16:10 -0700 (PDT)
+X-Received: by 2002:ad4:596d:0:b0:8ca:268b:13b2 with SMTP id 6a1803df08f44-908813c80aamr450316366d6.32.1786306569637;
+        Sun, 09 Aug 2026 13:16:09 -0700 (PDT)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b3055f3cfasm1589259e87.70.2026.08.09.13.16.05
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b3055f3cfasm1589259e87.70.2026.08.09.13.16.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 09 Aug 2026 13:16:05 -0700 (PDT)
+        Sun, 09 Aug 2026 13:16:08 -0700 (PDT)
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Date: Sun, 09 Aug 2026 23:15:47 +0300
-Subject: [PATCH 08/12] iommu: qcom_iommu: halt the micro-MMU while
- programming context banks
+Date: Sun, 09 Aug 2026 23:15:48 +0300
+Subject: [PATCH 09/12] iommu: qcom_iommu: allow faulting transactions to
+ terminate
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260809-msm8974-iommu-upstream-v1-8-87f5cd492560@oss.qualcomm.com>
+Message-Id: <20260809-msm8974-iommu-upstream-v1-9-87f5cd492560@oss.qualcomm.com>
 References: <20260809-msm8974-iommu-upstream-v1-0-87f5cd492560@oss.qualcomm.com>
 In-Reply-To: <20260809-msm8974-iommu-upstream-v1-0-87f5cd492560@oss.qualcomm.com>
 To: "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
@@ -106,153 +106,88 @@ Cc: linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-arm-kernel@lists.infradead.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4172;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1829;
  i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=eWQLDpa3TqCo4a5U/agcUYC2p0tFCZgkGn1lkr3Ubro=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqeN/vrrz5nTKhkhA8RhmCiIASpJNOV07B733ja
- VVfkmPfjWiJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCanjf7wAKCRCLPIo+Aiko
- 1SL5B/91QjVcyjSegd6cf/tLGXyVqJRDRnmGHZ6f//+zYHAc6FdXNDi6ba74FeoxKTtQx+MHzsD
- T33SDClz594ZGavBDNexQ9+LiBrW5qnZCC7hexo59OCPrHqt68x/pBn2s6TT3/X/11zFoeGOkSC
- nQVwW+Ad7yiUkjK/aKaiIeoQiLVeUpCzmgZOX4ofXLznfGr5XuNosJhW7OoHBVAjunRpM5R5KfT
- UN2WBxZhi2bptuWFiLuZjpJCZ2EXtDYI96iMlW0rITgaS42ZC/x8Ol8g1qiMkqeolNzZwPgkxFZ
- TpwaL9hyXttkkGoAUzmaT/tT60KE8ZGtGKXZmICIpVXdsCWm
+ bh=08DI3m/g8w//LYUe10gsP5FMXIEvOf1ZW68iQjd9XpE=;
+ b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBqeN/vhrwXuGhQLdAzY/l2GN/Bhk6G4tkUR0rGB
+ /KpHmvM3nqJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCanjf7wAKCRCLPIo+Aiko
+ 1fwRB/9hb9z5gxrrc2rcIX+BFjYiB6RwxCiQoXWl76sM26ATHSTCxaQbuXacXM28jJeLWK9Jd6R
+ XDfVZ7yWijF4iAIGOC9vZfvp7ilfem4OWuFalZguh2DSShcqwIaeuf4y45ckh7mbxq/KnGt8LvT
+ 8vz5KhQ7Er6Cl+yFvH4Dp3nQd+WtIjBM6frxM0UNsvnlobUVUjT8hdzTHCPXuB2Jh175Lho6LjB
+ LkMTR3AgAo8SNvuEfN8hjQrt9UEb1sCxl6SBoa3zXaaiE2f4oZiQhiEad3O7XGdZEg7SphvYjfM
+ uOvwfPPgZBGXz97OhCyhT1AJs0T70xm6aM2/RcJEouk3hfwB
 X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
  fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Proofpoint-GUID: 43numyCHYhZdM9lUGANDhmykuNOPVjjq
-X-Proofpoint-ORIG-GUID: 43numyCHYhZdM9lUGANDhmykuNOPVjjq
-X-Authority-Analysis: v=2.4 cv=CMEamxrD c=1 sm=1 tr=0 ts=6a78e008 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODA5MDE4MyBTYWx0ZWRfX/ERX1AMtlzgj
+ t9mcxK5jWEfSBhDlVuxVGLrTck6B/IRZtMTlth1tCdJTfVaC8KPQ7kpbKelmSr+AgyqDQRmUXtZ
+ 7NNmMkZlEPqwd+viF7VaATwpHPEcGos=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA5MDE4MyBTYWx0ZWRfXzuDY4XDbuohX
+ vAFJAoKwVK86xnFkikcDMX/gV9D1GGeRO1jFyVSbcviUuvmDoDQ5E8SGdgXAN0DdAce4Ez58fl9
+ pFNZGsvsntzLSHxeE+nVH8hcr4Z/Rp+KxXwiMhAxNVshOQKO/eZG7aXiiaNk7uHM1/NVHQjr6Cd
+ 7Sak0VVpM/6gs1T8m9v+xIYdggOuwULkfX0AoIbEryhMh+ByOt5JmVNhoOLLmHKLE2vaVWpY4IJ
+ QMKu0jksWc4XMLyveyZf3Y/Di2gSzDA5MTMa6RxB2hN/wEm0dLp6op9e98Clin9HQBI+0XX9Zs5
+ mL1q2Pk2UkRBfEXQarMJZ9uf27f8yseeOBqT4700cw5+aJ1nt8zItR1UqGEgqaCGHxUy82HeqQ2
+ yyDQ9D/p8D6i0jffzCmcZ4a6/9sFy5HkChYiPs5HqJ/soLR/8JBkfn8+6lLc8ZN25fs8c5Iycpc
+ vNUIAUodHETz64LaMdQ==
+X-Authority-Analysis: v=2.4 cv=BNCDalQG c=1 sm=1 tr=0 ts=6a78e00b cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=EUspDBNiAAAA:8
- a=3K1L26fHcIV91VHLagoA:9 a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODA5MDE4MyBTYWx0ZWRfX6H/TXr1FoqDG
- JKTfPtnNyFiiAlfVAumt+aWqeRDwt05luljtxtGsq/NyG8hnv6K7+9OFmfXhN/7r2tKwsEbY0d3
- lRFUDfLWj2vYrvbjV0+Kh9sASqd/pRQZygMYnJb0t5toUl64Et//gRR0OrGe5BRuEYeqy3nmBOg
- glNcyNm6uNHKPIIJseHdrXQF/6AI+20B+hKf2BXjD7ehQWOA9R0HDRUS3y0jAZiA9/C44we4x9I
- zTLXdup3ZCJ3qfd1D8OaPpornKxC61SlzHtp+wGSwc5QXDYnB0wygYDrqT5BOQQoUpFG3dRsk/0
- l5H2PIVpPtw2r4w2LUsr3xX6ER9IJ0Stivp17SjaO+SjMVa+xRId6Pw0K12OknA4gU+cTucpDae
- BBc5wpR7AWpFCUFgXDIV2B8u4T79tUJ9EPsTfBlBHzNOkzttVtR+AftlmqVDPv4WIxCpt0NscUW
- /LJb2TydF/kybZdH0yA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODA5MDE4MyBTYWx0ZWRfX5+qoXAunCqvY
- KJHNYtpnFWKmDpxYB/1/spBo9J3dWhBTgcHrayyGMvUGJ7HL894UrmYbBScVdQvEiotDqA653MY
- 45BiLXKDNu0E9xTncC1MElnmXJcux4k=
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=9MEWnGasQQH83fMYMBYA:9 a=QEXdDO2ut3YA:10 a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-ORIG-GUID: SvWSM436IHZxBpEWxRvOmsPA51ILbuym
+X-Proofpoint-GUID: SvWSM436IHZxBpEWxRvOmsPA51ILbuym
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-09_06,2026-08-07_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 clxscore=1015 lowpriorityscore=0 malwarescore=0
- priorityscore=1501 impostorscore=0 bulkscore=0 suspectscore=0 adultscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608090183
+ suspectscore=0 phishscore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0
+ priorityscore=1501 adultscore=0 bulkscore=0 spamscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608090183
 
-The context bank registers are reprogrammed underneath a live translation
-front-end. This happens at attach time, and again on every runtime resume
-for instances that have to replay their context bank state after power
-collapse. Rewriting SCTLR, TTBR0, TCR and the MAIRs while the micro-MMU
-keeps accepting client transactions races the in-flight traffic against
-the new configuration.
+Context banks are programmed with SCTLR.CFCFG, which selects the stall
+model: rather than terminating, a faulting transaction is held pending a
+write to CB_RESUME. Held transactions stop the micro-MMU draining, and
+anything that waits for the front-end to quiesce - the halt handshake, and
+TLBSYNC - waits on exactly that.
 
-The hardware provides a handshake for exactly this: setting HALT_REQ in
-MICRO_MMU_CTRL, at the start of the implementation-defined register
-space, stops new transactions from being accepted and reports IDLE once
-the outstanding ones have retired. Downstream drives it through a
-qcom,iommu-enable-halt property.
+Not every instance wants the stall model, and some cannot tolerate it.
+Add a per-instance no_stall flag that clears CFCFG so faults terminate
+instead. CFRE and CFIE are untouched, so faults are still reported
+through the existing interrupt handler; only the stall goes away, and
+with it the handler's RESUME write becomes a formality.
 
-Add the handshake, under a per-instance flag as the handshake is not
-wanted on every instance, and bound the wait rather than spinning
-forever, so that an unresponsive front-end degrades to a diagnostic
-instead of a hang.
-
-The halt is confined to context bank programming. Applying it around the
-global reset as well resets the SoC before the console comes up,
-reproducibly, on an APQ8074 DragonBoard.
+No instance sets the flag yet.
 
 Assisted-by: Claude:claude-opus-5
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 ---
- drivers/iommu/arm/arm-smmu/qcom_iommu.c | 44 +++++++++++++++++++++++++++++++++
- 1 file changed, 44 insertions(+)
+ drivers/iommu/arm/arm-smmu/qcom_iommu.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
 diff --git a/drivers/iommu/arm/arm-smmu/qcom_iommu.c b/drivers/iommu/arm/arm-smmu/qcom_iommu.c
-index 8e9488c47d5c..f27f8722ee64 100644
+index f27f8722ee64..2b2cf665c39d 100644
 --- a/drivers/iommu/arm/arm-smmu/qcom_iommu.c
 +++ b/drivers/iommu/arm/arm-smmu/qcom_iommu.c
-@@ -37,6 +37,14 @@
- /* GR1 sits one 4K page above GR0 on the msm8974 QSMMU */
- #define QCOM_IOMMU_GR1			0x1000
- 
-+/* The implementation-defined space sits two 4K pages above GR0 */
-+#define QCOM_IOMMU_IMPL_DEF		0x2000
-+
-+/* Micro-MMU control, at the start of the implementation-defined space */
-+#define QCOM_IOMMU_MICRO_MMU_CTRL	(QCOM_IOMMU_IMPL_DEF + 0x000)
-+#define MICRO_MMU_CTRL_HALT_REQ		BIT(2)
-+#define MICRO_MMU_CTRL_IDLE		BIT(3)
-+
- /* Redirect all cacheable requests to the L2 slave port */
- #define QCOM_IOMMU_ACTLR_BPRC		(BIT(28) | BIT(29) | BIT(30))
- 
-@@ -66,6 +74,8 @@ struct qcom_iommu_cfg {
- 	bool				 no_afe;
- 	/* context banks lose their state over GDSC power collapse */
+@@ -76,6 +76,8 @@ struct qcom_iommu_cfg {
  	bool				 ctx_restore;
-+	/* the micro-MMU must be halted while its registers are programmed */
-+	bool				 halt;
+ 	/* the micro-MMU must be halted while its registers are programmed */
+ 	bool				 halt;
++	/* faulting transactions must terminate rather than stall */
++	bool				 no_stall;
  	const struct qcom_iommu_sid	*sids;	/* one SMR slot per entry */
  	unsigned int			 num_sids;
  };
-@@ -339,9 +349,41 @@ static int qcom_iommu_reset_ns(struct qcom_iommu_dev *qcom_iommu)
- 	return 0;
- }
+@@ -500,6 +502,9 @@ static int qcom_iommu_init_domain(struct iommu_domain *domain,
+ 		if (qcom_iommu->cfg && qcom_iommu->cfg->no_afe)
+ 			reg &= ~ARM_SMMU_SCTLR_AFE;
  
-+/*
-+ * Halting the micro-MMU quiesces the translation front-end: it stops new
-+ * client transactions being accepted and waits for the outstanding ones to
-+ * retire, so that the context bank registers can be reprogrammed without
-+ * in-flight traffic racing the change.
-+ */
-+static void qcom_iommu_halt(struct qcom_iommu_dev *qcom_iommu)
-+{
-+	void __iomem *reg = qcom_iommu->global_base + QCOM_IOMMU_MICRO_MMU_CTRL;
-+	u32 val;
++		if (qcom_iommu->cfg && qcom_iommu->cfg->no_stall)
++			reg &= ~ARM_SMMU_SCTLR_CFCFG;
 +
-+	if (!qcom_iommu->cfg || !qcom_iommu->cfg->halt)
-+		return;
-+
-+	writel_relaxed(readl_relaxed(reg) | MICRO_MMU_CTRL_HALT_REQ, reg);
-+
-+	if (readl_poll_timeout(reg, val, val & MICRO_MMU_CTRL_IDLE, 0, 100000))
-+		dev_err(qcom_iommu->dev, "timeout waiting for micro-MMU halt\n");
-+}
-+
-+static void qcom_iommu_unhalt(struct qcom_iommu_dev *qcom_iommu)
-+{
-+	void __iomem *reg = qcom_iommu->global_base + QCOM_IOMMU_MICRO_MMU_CTRL;
-+
-+	if (!qcom_iommu->cfg || !qcom_iommu->cfg->halt)
-+		return;
-+
-+	writel_relaxed(readl_relaxed(reg) & ~MICRO_MMU_CTRL_HALT_REQ, reg);
-+}
-+
- static void qcom_iommu_program_ctx(struct qcom_iommu_dev *qcom_iommu,
- 				   struct qcom_iommu_ctx *ctx)
- {
-+	qcom_iommu_halt(qcom_iommu);
-+
- 	/* Disable context bank before programming */
- 	iommu_writel(ctx, ARM_SMMU_CB_SCTLR, 0);
+ 		ctx->sctlr = reg;
  
-@@ -369,6 +411,8 @@ static void qcom_iommu_program_ctx(struct qcom_iommu_dev *qcom_iommu,
- 
- 	/* SCTLR */
- 	iommu_writel(ctx, ARM_SMMU_CB_SCTLR, ctx->sctlr);
-+
-+	qcom_iommu_unhalt(qcom_iommu);
- }
- 
- static int qcom_iommu_init_domain(struct iommu_domain *domain,
+ 		qcom_iommu_program_ctx(qcom_iommu, ctx);
 
 -- 
 2.47.3
