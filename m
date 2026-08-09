@@ -1,240 +1,105 @@
-Received: from mail-pg1-f174.google.com (mail-pg1-f174.google.com [209.85.215.174])
+Received: from mail-pj1-f48.google.com (mail-pj1-f48.google.com [209.85.216.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1795D35AC16
-	for <linux-arm-msm@vger.kernel.org>; Sun,  9 Aug 2026 14:54:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E611E3CDBAB
+	for <linux-arm-msm@vger.kernel.org>; Sun,  9 Aug 2026 15:02:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786287246; cv=none; b=d/7ez7gdWB2HBleKeeM/OhK7v/QDIrz/BXsKmVGOwDdE+8gVgekvUvntARYgpX8cOeOA2/GygiotY2VDHUh08djwhZ0/6CQcbe6XcWsGMtN2u5ysQfcB8RokM0dh656lCCiCcq9lWBlXtKqts6njJwV36bnpPALfVxvZLbX5zjc=
+	t=1786287768; cv=none; b=K78PcMA8cJMi2XYit16YeqF0sPeUpAA5hcDTPYg8mg9wtoUvyhUJwmtto5VMVspzS6Pe0qwel6JYSTFgKD96WfBeLaY3X9Ibp11dwq+ecaVn9TV86626X8Vva5sfsO0aHBW4+khQ8/Ql6O+VWfMC0CClJ+N8l5h+krIvjiuSC6s=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786287246; c=relaxed/simple;
-	bh=OO72YdKbYqHE9KvojX92nCxwDmER1p79MGU+ioKD91c=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=AMa3LYNmiVgKT9zDWteB4Y3Pn7ttl9UBHBGxnc9hLDRoRXq7H+r9KN4qLsgBX4scDjhdapK4MZKZsA23W1nY+GxNNbkkdqsgG8FNI0ShFg+Z9pHmVapJ+uyAUysJSwUpD1cDHd/MCy9+AMr85EoFJyYgJp9xRlIqp142kycRDQw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Hzfr6XUZ; arc=none smtp.client-ip=209.85.215.174
+	s=arc-20240116; t=1786287768; c=relaxed/simple;
+	bh=9bqcyvf7d0Yh2BRS/ST81Yf9zUfX3VialSXDIsbKkzY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=TyO+QWmsZp6v6khCgpK21zPgZK2+HaamPZwuqBBxolY90r/5zlfDIVW15SSWwh7T92e5HMA0FnNnMAFe4tmrzH5Ijx/0RBTO//CW/H2T2W65209CMt2YSZlmQD9/JaTn7OxG0s+Ld2aPW7sfFrJhmzK74HHnzfrCNB52k0vtKbI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=rL50P6Jh; arc=none smtp.client-ip=209.85.216.48
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Hzfr6XUZ"
-Received: by mail-pg1-f174.google.com with SMTP id 41be03b00d2f7-c9aea40d799so480267a12.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 07:54:04 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="rL50P6Jh"
+Received: by mail-pj1-f48.google.com with SMTP id 98e67ed59e1d1-38de840f2f0so650777a91.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 08:02:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786287244; x=1786892044; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=H/cw6oMGvUHB+hNpkuOSeNVySjC3l8LxiE9FdEJYQLw=;
-        b=Hzfr6XUZ2ji45l6jDZCcNVh8S107BVGcL83VuQXm6tqd/4MFNiPLoux5Ag+8oSmHN+
-         sksmj1uRHyviEXloSuDY8Z0HKTgXLivUSAIwP5oF66j2xgWwiTYf20D/WiCGl2IXnncQ
-         GbNYo+oMfJ18n/iVSJJVop5F2RQ/4imzx9VDG0xY+jktQCRMhgzCfWeVGakvxDb6HAK+
-         H64xamY46CRsvJnKbM0kFMtQ7FAD3bfGn6kVW6n0n/kUnngq4CC5cjTMfVBQDlSH7b67
-         Jq6b6ozhhdb+PIhPqVkn6R2erfQAYau8w91phrRv8+oJ2efs9cTOgP6g3jP1wJyDApQc
-         X65w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786287244; x=1786892044;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
+        d=gmail.com; s=20251104; t=1786287766; x=1786892566; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:sender:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=H/cw6oMGvUHB+hNpkuOSeNVySjC3l8LxiE9FdEJYQLw=;
-        b=AdUufryO/ZgPDEPkaRnkAoea0J4sL2Qw0v1f76g5SzmIolRt+6IxrvmZODA0+JaCOq
-         EDasrLiSoULStbjuV1VwteZr9ViYbVn94+Cl1L45XjaZznm66WurWy2bkcRjmJgJ9U53
-         FJF0z9/KXnLTebtpmTB9ozDeoStqO15eXJsZ/pzmQUBeXpDXVWDr5EPHOSeYulJ4fMVJ
-         RqsVaW1QufVGOytIqXs9TesiePHbIXNx7wQUugCoqO+Owy3D0j4woJek9ZFMnCuwRWP3
-         5LVOZhzZdavPTQmVsKNRrJdVHMPbx9TKw7xVpqzqonI1c3bwhG+wsgSVWgzPoylVOVBT
-         0l/Q==
-X-Forwarded-Encrypted: i=1; AHgh+RqsEX9h4jqUs8Xl4LC28e9SLN4N51gFEhvbp9NN0ByllUAEiRs+iTOPWxiOMulRQ693csKrAINOKBiJVVND@vger.kernel.org
-X-Gm-Message-State: AOJu0YxwDRWg6J7dn7G1oEh4W2Abkak61IzcGSoR2+ueuPTZaUtwIywl
-	GiXStkvEGXKAiXwHnvyXIUD/Jo/9NI9e2WhM2NYwjFtONJ9bvV85D/L3
-X-Gm-Gg: AR+sD10KAQYzBaOh7r/GAUZcpXLeg/3T36mkO33xNDWNIrnxyB/RaTlpwEDZGL+UbGV
-	5hVjbIN/MbUd+A+u6JMxNydrK3Rxft5/R7zivB6WKhDz7yZq/Z6AsBCCpn6G944NTNXm8XxWWrh
-	1/tv48X/pPcxabvFh0br2P7J2RYfxHyW+ea1oj70JJ/ZyJDR4Z1DrgZlUmIgnd4mIvBBOW64HMq
-	RVAYLO4NtXbx8cWjwUif5R2NiiAmmcEvLDhGyNhE7BrX/Op0W1CTKH5luvYwbHONM7YjjiWnjpt
-	krs0Uwl/kGx4JzBRMrBGi4FulK8PZoShaQitVk5K5i/r5FCmAQcnRX8knOsjokYHebqOl8gFL4E
-	banUS1tFB85Y4nxyz499Sx2+UXfxRP5wze23ffaJprxHNJJNiMUw8h0iX0AoHO6rRRjIXeuALFU
-	M+iJCS7y2mDJnPKbAQGR2hdVN1ohYagfCksNW+jYXq9j+LeIE/Yvyp5yNYby5qmZsQa8e4fRQEQ
-	0AzG8UUAcDcrVx4I7PPwGQccUwRu43w3gspQw==
-X-Received: by 2002:a05:6a20:e593:b0:3c3:fb32:a004 with SMTP id adf61e73a8af0-3cbcea16454mr15497371637.34.1786287244292;
-        Sun, 09 Aug 2026 07:54:04 -0700 (PDT)
-Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315be86e90asm31456515eec.3.2026.08.09.07.54.02
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 09 Aug 2026 07:54:03 -0700 (PDT)
+        bh=f2Ph1N2YXDcF/EsJKreKtP+YQA5yS18iu0pKlYJPT7E=;
+        b=rL50P6JhIkZojWGqdsxXPqfNhJfJwVyNJbJmIROJkKwFkM7se2DeRPni/bgUXsMoK8
+         Ghx5zmH0fXc76b6Jtw4cOi9w1g1YV7syq0a8616Ho5H921wpaFirUCHLt3XDF3hcDRtJ
+         jEEygoYvJoeohLn5HtU9XupUHcu6vI3+QLAgNTG0cmM6QHHRCyE9lp4J9gsYyPoftXQa
+         BUrffdUgUPdFsl2IHosF5EH7xD9kN2JPgyjAfw9Cuh8707b8bbg9swsxDVvBC3O1mL0c
+         FhzV6OYOlEFg3pGoned3KW3vpmISJ1pVCnp1Qq/gP9JV7MH3IL4ejH2xH8Ya6SmJYUnJ
+         Okwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786287766; x=1786892566;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:sender:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=f2Ph1N2YXDcF/EsJKreKtP+YQA5yS18iu0pKlYJPT7E=;
+        b=Gp8iwQz0j4aB5XO7ozbIqOyghjoIvWXJsimOa/ZJBZ2YBUxvdfZ0oxqDmlTgIoHlIr
+         9rcCymE+0hBVgQAl+XWvZqfOWwO4nw7YJx4otNrpLBswqTajQsKCY+GSLHkLCsSuSOxp
+         q2Oc3/qOIAWs7OSW87t6LXi+xA80q4HYx3OxXJQ6gO0VRSPnubVWdUwVW504/nUZrAyv
+         0iWUVfMEPptsoQyA66IU4MtEZIwZWzg6Wcat8e4xfxJ2jDsohhVWFMhaYAm2XZXWlS3T
+         d5D1/zVZ/9cpRsbrMg+aZyxcVicO+iJm78v+7zCDB3xqaEQSiAhQT4NSzuda4XH9LSSZ
+         BBQA==
+X-Forwarded-Encrypted: i=1; AHgh+Rp2z+wpWsGG0XAZwlllRpxrGo6LkGcMtGOdkz+9OcyeOXrLrJ+taRs/ZPWb8saXSolQ1vcrnwPD4gaEttUR@vger.kernel.org
+X-Gm-Message-State: AOJu0YxvAjsmsTj7V4mY/iHX4kDzb13oRYx+hP50Z5M7WXVTTbl4db2c
+	8pRZcu7xN1nlhRbKoxng9lvTsiHDIVw0wulCt5BeqlSpJKUX2biIMNX5
+X-Gm-Gg: AR+sD11rNBmJ8Y9GKqg3wlbZiYgA/jCTiAzMtX+hnGkdLZxQnTWH675SJQmymgrhinY
+	s5CdA4w+zGvJqUiHz90yD5PZEsl942z264yH0c2mcIigjEp7rGKukzTqoAIfyWTfWddHsYV5XKV
+	wdWa+TlMRJlSVzOEskTYmKjyQI8CeQ/PSHPDO22e0s/b8plbdZi4ZkYFfMYfojQVRLhVcMZpfYt
+	upg8fDy18H/XmM3d7F+7kLAdm4gHyceD8dxQYQqmlkIaUQqD4L92ttmny3IJsGpOxCta4brYfry
+	En7VBT/urPbqfLZf3TMit/sW6eJ7Q8j7INUlxEO2NjMRfO0J8yIxLzrz5EHlhOFP2us4tajqf8b
+	t7sPtGnBz3/AEE4WoZ04AqkBH0NLjd7gXG4C/aXVGRJMk0RYWZRHDSNR+qYRaJOp9xM86NedRRF
+	v7oVKsl4Mmi0UzSrsqKEYpdqGK6Di+oSLW/greQxfU9UQ/Mzb2KdgDZ7sFkpfeYFse9sog27Q06
+	cfikVANNS4A
+X-Received: by 2002:a17:90b:258f:b0:38e:c232:9d3f with SMTP id 98e67ed59e1d1-39282247ee9mr14215543a91.5.1786287766154;
+        Sun, 09 Aug 2026 08:02:46 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141019b41d9sm25594852c88.5.2026.08.09.08.02.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 09 Aug 2026 08:02:45 -0700 (PDT)
 Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <ccd8fd7d-4555-4ac5-ae73-c16e98b8edc8@roeck-us.net>
-Date: Sun, 9 Aug 2026 07:54:02 -0700
+Date: Sun, 9 Aug 2026 08:02:44 -0700
+From: Guenter Roeck <linux@roeck-us.net>
+To: phucduc.bui@gmail.com
+Cc: Wim Van Sebroeck <wim@linux-watchdog.org>,
+	Joel Stanley <joel@jms.id.au>,
+	Andrew Jeffery <andrew@codeconstruct.com.au>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	linux-arm-msm@vger.kernel.org, linux-mediatek@lists.infradead.org,
+	linux-watchdog@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH 2/4] watchdog: mediatek: Propagate errors from optional
+ IRQ lookup
+Message-ID: <4a875307-19ea-486c-923d-78a362651f60@roeck-us.net>
+References: <20260807081652.38692-1-phucduc.bui@gmail.com>
+ <20260807081652.38692-2-phucduc.bui@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] watchdog: qcom: Propagate errors from optional IRQ
- lookup
-To: Bui Duc Phuc <phucduc.bui@gmail.com>
-Cc: Wim Van Sebroeck <wim@linux-watchdog.org>, Joel Stanley <joel@jms.id.au>,
- Andrew Jeffery <andrew@codeconstruct.com.au>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- linux-arm-msm@vger.kernel.org, linux-mediatek@lists.infradead.org,
- linux-watchdog@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org
-References: <20260807081652.38692-1-phucduc.bui@gmail.com>
- <2eb8b31e-a3c6-4310-b9cc-7acd135b6c99@roeck-us.net>
- <CAABR9nHqKKbxkzBNkENadhFJgC_HuetV+ab7SVsGH+cwbF+OFw@mail.gmail.com>
- <9971b3aa-cb1f-44a9-9d58-4f75f0c6ccea@roeck-us.net>
- <CAABR9nHu4pt-Rg8Aq0B6KfKFHX+C1xQmMk6=j8jq1Zn-MQ0p6Q@mail.gmail.com>
-Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- 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
- np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <CAABR9nHu4pt-Rg8Aq0B6KfKFHX+C1xQmMk6=j8jq1Zn-MQ0p6Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260807081652.38692-2-phucduc.bui@gmail.com>
 
-On 8/9/26 03:01, Bui Duc Phuc wrote:
-> Hi Guenter
+On Fri, Aug 07, 2026 at 03:16:50PM +0700, phucduc.bui@gmail.com wrote:
+> From: bui duc phuc <phucduc.bui@gmail.com>
 > 
-> Thank you for your review .
+> platform_get_irq_optional() returns a positive IRQ number on success or
+> a negative error code on failure. For an optional IRQ, -ENXIO indicates
+> that no IRQ is available, while other errors should be propagated.
 > 
->>>    irq = platform_get_irq_optional(pdev, 0);
->>> +if (irq < 0 && irq != -ENXIO)
->>> +        return irq;
->>
->> This is still wrong. If there is no pretimeout, it does not matter if there is an error.
->>
+> Instead of only checking for -EPROBE_DEFER, propagate all error codes
+> returned by platform_get_irq_optional() other than -ENXIO, so that
+> failures are properly reported to the caller.
 > 
-> If checking data->pretimeout is required here, I'd propose one of the
-> following approaches
-> let me know which one you'd prefer:
-> 
-> Option A (minimal diff, keep existing structure):
-> ---------------
-> irq = platform_get_irq_optional(pdev, 0);
-> if (data->pretimeout && irq > 0) {
->          ret = devm_request_irq(dev, irq, qcom_wdt_isr, 0,
->                                                 "wdt_bark", &wdt->wdd);
->          if (ret)
->                  return ret;
-> 
->          wdt->wdd.info = &qcom_wdt_pt_info;
->          wdt->wdd.pretimeout = 1;
-> } else {
->          if (data->pretimeout && irq < 0 && irq != -ENXIO)
->                  return irq;
-> 
->          wdt->wdd.info = &qcom_wdt_info;
-> }
-> ------------------
-> 
-> Option B (check moved out, before the if/else):
-> 
-> ------------------
-> irq = platform_get_irq_optional(pdev, 0);
-> if (data->pretimeout && irq < 0 && irq != -ENXIO)
->          return irq;
-> 
-> if (data->pretimeout && irq > 0) {
->          ret = devm_request_irq(dev, irq, qcom_wdt_isr, 0,
->                                                 "wdt_bark", &wdt->wdd);
->          if (ret)
->                  return ret;
-> 
->          wdt->wdd.info = &qcom_wdt_pt_info;
->          wdt->wdd.pretimeout = 1;
-> } else {
->          wdt->wdd.info = &qcom_wdt_info;
-> }
-> ----------------------
-> 
-> Option C (default-then-override, only look up the IRQ when pretimeout
-> is supported):
-> 
-> ----------------------
-> wdt->wdd.info = &qcom_wdt_info;
-> 
-> if (data->pretimeout) {
->          irq = platform_get_irq_optional(pdev, 0);
->          if(irq < 0 && irq != -ENXIO)
->                  return irq;
-> 
->          if (irq > 0){
->                  ret = devm_request_irq(dev, irq, qcom_wdt_isr, 0,
->                                                         "wdt_bark", &wdt->wdd);
->                  if(ret)
->                          return ret;
-> 
->                  wdt->wdd.info= &qcom_wdt_pt_info;
->                  wdt->wdd.pretimeout = 1;
->          }
-> }
-> -----------------------
-> 
-> Let me know which one you think fits best, or if you'd prefer something else.
-> 
+> Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
 
-I wpuld probably implement something like
-
-	if (data->pretimeout) {
-		irq = platform_get_irq_optional(pdev, 0);
-		if (irq < 0 && irq != -ENXIO)
-			return irq;
-	        ret = devm_request_irq(dev, irq, qcom_wdt_isr, 0,
-				       "wdt_bark", &wdt->wdd);
-	        if (ret)
-         	        return ret;
-
-	        wdt->wdd.info = &qcom_wdt_pt_info;
-         	wdt->wdd.pretimeout = 1;
-	} else {
-         	wdt->wdd.info = &qcom_wdt_info;
-	}
-
-(which I think would be a combination of B and C) but ultimately it is
-POV and doesn't really matter.
+Applied.
 
 Thanks,
 Guenter
-
