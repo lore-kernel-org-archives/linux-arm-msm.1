@@ -1,178 +1,307 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.13])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 140E23B100A
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 09:39:11 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E716D374E5A;
+	Mon, 10 Aug 2026 09:41:34 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786354755; cv=none; b=VJkDpA83CyFB/vIiUOM64sVUu24hOlFeNuWMkiseiOpx8idV3ZVUB2oID/FlFpX4VMnGbhDplTr9qdQClmMlivFrPPG6Fs01OiO4I6L44+Rv/HNncrP7PoabN+r8N52HxmMnwGygt2baiVB18PM8r/7OFTQVq1s+lYsfDn3U/Oo=
+	t=1786354897; cv=none; b=APCjf7IwPpDgnmGEH3f2MwZrmTy2LLNsnq0mWQE3g7ekdjOBo+2kllP3RPVskmy/QbFnF49nIQ2u/ggxYCgU82dEYA3INsBszZ69OTS/5HVJib2HKenrn22DFmdKQKUs2D2Ct4cUOaStP04sE08ZAvFXlbaEgxAEL4lwLH4eOHc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786354755; c=relaxed/simple;
-	bh=eqFMadOm4jit2zzncliqC9YEpRpOfDr+e9OrdRWC3w8=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=k7nFULiTHozMOOE8vYbIJNUs6zlh3sAC0XKse6FvfKGuocetKMRd6idBewKgMLoPYC/9DqjMRpCKvM1j6PJXX391BYO60xqqwK9eOEFFqlknScrUs+Mm7EcrOS6RMAWJMbTz8DG9quX/FnQETrIvNeM6ZTiLNUCPE7AhNpcBqx0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Onygm/E8; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kWJdJA8B; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1786354897; c=relaxed/simple;
+	bh=cOREWmnPykCUZDl8mbww0QbQDYHQ97pWPJwBTHheYnY=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=PhSfa7wLyKxY/M4IdoAm9d6OeQ5pxSpDJiRwqPGpjXy9xeGVgudq9Jc8kkMAK2ChfFbfIicn/PlYfS9y7UA64MPDwbOYzF2+jsuADLMb+bmb28Npt5dUoLF02Vb8899S4yBzkN5zMaLpLBsAD6/AVXfR4I3ylbY3sPUWCXREYFI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=RrwXAIBB; arc=none smtp.client-ip=192.198.163.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Onygm/E8";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kWJdJA8B"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67A9SACt833544
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 09:39:11 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	id0YzdGW9hCG7H5gqzV2c3+mCG6eyUQG6YtgwUVj7gA=; b=Onygm/E8/11kz1M9
-	QBKITympRL5WBAL62BvV7JGI9xhwj3ctQ/0HbVoyrfdXdisa3LjG3cTc+FEuEKLo
-	wQydJs9wdq1JGuyaNCTd3J37JK0lMX8MRn/P65/do33xqykktbKXaFOYbbo71z31
-	t3/RmQj9DmPAOU0LheGXjv9xbtSwflG1XdicL2Ismh62FGdScIc4eECGndwcT1Xf
-	Y7PmfcTs9gnkJUrMHU38tUgNBK6whc8gSo2fOc9N+4JgghSYa3ZzjQULjbdgR0lQ
-	cOiLFhURpzHpu2MIa7OxcfkK0iinUNihgevLmos8jK9V/vjLNjiNtU7+H/Sr07JC
-	/rhftA==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwwr9n8d1-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 09:39:11 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2cea6a46766so34654195ad.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 02:39:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786354751; x=1786959551; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=id0YzdGW9hCG7H5gqzV2c3+mCG6eyUQG6YtgwUVj7gA=;
-        b=kWJdJA8BLAy4xWhDgPd1SIn+QNu2u8KC2F6s4q0P/1EUNUcyKVnFenZ0fR9V303giZ
-         /IySo0KVoQK2nqtNcQ6JkK5OL9RHI8hkmuj0hfFVuPlk2ieH9b4L57ARAIgI+yNYSZEX
-         336u8a90Q/PcRP12pATMlOHiKNLptykp+yzeQDr4Z3VvxOG2Mj7Cs1J/DH+Cf845ohYz
-         5tZ+4Oef4m+QIDOp5Zt6s+A32aQLnzrpe4u7LW8Z5xWPgniREn2txhvW0oqGcjmlLtrF
-         Dif5TV+W5tTHpOBUljVPoHSbp+WVWrRILNWFc7sysgmmwY93BukG5ERq5RF0GSDoSmI6
-         sxhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786354751; x=1786959551;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=id0YzdGW9hCG7H5gqzV2c3+mCG6eyUQG6YtgwUVj7gA=;
-        b=Prg/LlNzqk/XyM9JcrvcNHz8mLiHM7B/vujypcCTd/0DUqdL/xdAdfXNtS4YuIACJD
-         T048Msu4H0WawxjHpfn6oCQeHSbFGA1FQmNMrqdLb4o8Q2urfvEd9mTl5QRBscc84M0h
-         KI72YMIMpf+jH2xVVcwHaNmvQ6X0NqiMNa0WteJAKHZQ3tdKng3VpcBpa1GzIubqmJXB
-         nJQhbUXDgt1fRqx57eoyqqKuZuA40isbhHZXtM5lN9mJXPMttCsRgts2BMovbY8M7Z+l
-         dRWV3TPV5g0ZWRDwXPOF230rcD9/v6KbQicvcDcFxkQp8cwr1HrHrh3hEPI6isG6aikm
-         qCSw==
-X-Forwarded-Encrypted: i=1; AHgh+RpcJLabg1g0q8vV8kbnBgnSTcrdkHNKfkDa2HzKjiHPRWfmzzafthit69ze32eya/iK2RDLpJ7kZ59Igqfn@vger.kernel.org
-X-Gm-Message-State: AOJu0YySmnUiQL+n+ArYzkQn2sOsnDkiA5+ruwWdvBj+2SF5u3Q2BiRt
-	DxDu8fhWSnqaJXI2mcWeAbxyg0P6uJY6fGH5e7V4EvyAw/eVzgySU50mrOWlgD5p0335cPhALuA
-	tTpw9TrLBMT/40Nj6hsUwOLXj3sMeCD3TdRuCYM0kSO2pNt0G/d0xnH+muocWTZgrjvN3
-X-Gm-Gg: AR+sD10pjgLYf6KfqijK6/klETuL83fjHNGFn6v35rNi95PIle4muosSRbT5ljNuR8k
-	jjY5QhXy6IKnusEb93N4NQRxumTqpNw9JL1MArkhoWQTmea7HeJ20Pf9l2uSwDbDJZUFJaIFvhu
-	W8rYgXokBGoPNV/BSjiQ6U7p2L89jQItaA/f46FZlO6KJmKW7Bzv0i8uaNVrKdE87cl+0rC/vrk
-	v+p8BpFdtV7usESXmOAv1V/TybXi8uvFbq/p00CBj0e1amSqUa8cTCe/E6sY8Zj34Fg/iTSHe2J
-	GeGxIptLqNaXNF9tDCbDfMUfDyJjb5hreePGFBknIogmYZwvXTvYouQUoecl4QpWLfB7SytL0PB
-	iB39Mh7XA2wb/tzHsRjAVIt8v
-X-Received: by 2002:a17:903:1ae3:b0:2ca:481:de45 with SMTP id d9443c01a7336-2d2fffd70damr314155ad.6.1786354750676;
-        Mon, 10 Aug 2026 02:39:10 -0700 (PDT)
-X-Received: by 2002:a17:903:1ae3:b0:2ca:481:de45 with SMTP id d9443c01a7336-2d2fffd70damr313665ad.6.1786354750206;
-        Mon, 10 Aug 2026 02:39:10 -0700 (PDT)
-Received: from [10.64.68.239] ([114.94.8.21])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d14ccad58asm32963465ad.5.2026.08.10.02.39.06
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 10 Aug 2026 02:39:09 -0700 (PDT)
-Message-ID: <34d3cf04-95ea-41ce-a8b6-2169eab2457c@oss.qualcomm.com>
-Date: Mon, 10 Aug 2026 17:39:04 +0800
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="RrwXAIBB"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1786354895; x=1817890895;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=cOREWmnPykCUZDl8mbww0QbQDYHQ97pWPJwBTHheYnY=;
+  b=RrwXAIBBkT+UVQBEJ3CDe1VCsjZPqybGPW20aDQryNUpeRvL+2yzTvDm
+   C5dV9IU6jewo3h6h0NNiFP1dKGbNwHE9N7y1tRLb/DwuV/FGp+g0QUJAQ
+   IJzyWJdFdlI5DKtFpTskd3FOp6pA6htaR/SGvgDofpJBsyNxF3RxYp3gt
+   2mTYFI3dq6nwYqcWuuaBnwDfBwB86uEyxDOShHyFC8plqm2gNfPaUobEp
+   DavFP5fvdVsquZjcUVOdUYy2tLuZjyj2SYzVAd14wJg/HceCbdxS04vDr
+   luJYfwuWmMSFDdG2TqTxDPJnzH9pOg1tBeugRR2ZUehfLzGoL9UnA+JsZ
+   A==;
+X-CSE-ConnectionGUID: pGZpT2EMQQOk0K1jBDwn6g==
+X-CSE-MsgGUID: Zf3CcnZbQ4yvpxJs+GgKdQ==
+X-IronPort-AV: E=McAfee;i="6800,10657,11870"; a="89387736"
+X-IronPort-AV: E=Sophos;i="6.25,215,1779174000"; 
+   d="scan'208";a="89387736"
+Received: from orviesa009.jf.intel.com ([10.64.159.149])
+  by fmvoesa107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Aug 2026 02:41:34 -0700
+X-CSE-ConnectionGUID: KR5OuCjVQT+N3NNT/q2FfQ==
+X-CSE-MsgGUID: 8GqWIe1WQnyFLae702V6Uw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,215,1779174000"; 
+   d="scan'208";a="263607423"
+Received: from ettammin-mobl3.ger.corp.intel.com (HELO kekkonen.fi.intel.com) ([10.245.244.127])
+  by orviesa009-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Aug 2026 02:41:28 -0700
+Received: from kekkonen.localdomain (localhost [IPv6:::1])
+	by kekkonen.fi.intel.com (Postfix) with SMTP id 21C8C11FA5C;
+	Mon, 10 Aug 2026 12:41:27 +0300 (EEST)
+Date: Mon, 10 Aug 2026 12:41:27 +0300
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6 krs, Bertel Jungin Aukio 5, 02600 Espoo
+From: Sakari Ailus <sakari.ailus@linux.intel.com>
+To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Cc: Sang-Heon Jeon <ekffu200098@gmail.com>, Julia.Lawall@inria.fr,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Eugen Hristev <ehristev@kernel.org>,
+	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Niklas =?iso-8859-1?Q?S=F6derlund?= <niklas.soderlund@ragnatech.se>,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	Magnus Damm <magnus.damm@gmail.com>,
+	Sylwester Nawrocki <sylvester.nawrocki@gmail.com>,
+	Michael Krufky <mkrufky@linuxtv.org>,
+	Hans Verkuil <hverkuil@kernel.org>, cocci@inria.fr,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-media@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
+	linux-samsung-soc@vger.kernel.org
+Subject: Re: [PATCH 12/36] media: remove conditional return with no effect
+Message-ID: <anmcxzxwQSzPfXEr@kekkonen.localdomain>
+References: <20260723184538.3888637-1-ekffu200098@gmail.com>
+ <20260723184538.3888637-13-ekffu200098@gmail.com>
+ <20260807122825.GJ2201016@killaraus.ideasonboard.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] dt-bindings: spmi: glymur-spmi-pmic-arb: Add compatible
- for Qualcomm Maili SoC
-To: Fenglin Wu <fenglin.wu@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
-        Stephen Boyd <sboyd@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: David Collins <david.collins@oss.qualcomm.com>,
-        Subbaraman Narayanamurthy <subbaraman.narayanamurthy@oss.qualcomm.com>,
-        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>, kernel@oss.qualcomm.com,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
-References: <20260609-maili-spmi-binding-v1-1-80fc4b6bb80f@oss.qualcomm.com>
-Content-Language: en-US
-From: Yijie Yang <yijie.yang@oss.qualcomm.com>
-In-Reply-To: <20260609-maili-spmi-binding-v1-1-80fc4b6bb80f@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=d73FDxjE c=1 sm=1 tr=0 ts=6a799c3f cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=Uz3yg00KUFJ2y2WijEJ4bw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=KNmlJ2AI_NRoUSMOKEIA:9 a=QEXdDO2ut3YA:10
- a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-ORIG-GUID: a45-KHNIpQEYf5eWOpLdiyNWXWyp2jLz
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEwMDA4MyBTYWx0ZWRfXzyiw03iTHhr+
- PscSW+xN37FUj+C5KO25cRFJR5WISuBXpWuRpN6jTLHdHp+zaMlTkGMd+Ll6gL/04kDunyLL7i5
- ue5QOzOoWjWvqijMaHLGr890eKQRXksmwE8e0B5mM+3yFxBmTzHkaITLz2h61LvHjpy+QMnJ7i3
- gTnQKEaZiiH7AekeUetIfiqsxn1XU0JiyXDMe1K2ZjjgXu23deJWxW0J/JPHcwzNZjlzOSW/bp2
- kKWuZX0OFUd7RYuv+SLJvefv19q5f64Zi30+flvZIRJJ6aQruRGnXl3u+hXxH4GVQEWpDJF+qlg
- uIonCauAcgA9Ve8/yYQOB60NhjA4eKo0SWYL4vWhgPXsBlOoWfRVDukiVeZy9fnTSCJWeRxf3SZ
- f4bj2VhXdV8NUK85j7lWIv7V1/oO9JnE8Eva6PwWDH17lPo+qqTfuc8YmwVM1yKy+CaOWllCZPJ
- J8JV4qFolPDZgrq1ucg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEwMDA4MyBTYWx0ZWRfX940fT+CzQte9
- LvJKxjJ9KWPOPwUM75DeuvqgMPD37REk3OeQOpyaNzilkbl5y3a4hleclhHckTpATbZxlHf3Wyc
- +nddlmuDAs3K/itj4GLQnBTjh7GpEuw=
-X-Proofpoint-GUID: a45-KHNIpQEYf5eWOpLdiyNWXWyp2jLz
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-10_02,2026-08-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 phishscore=0 adultscore=0 malwarescore=0
- spamscore=0 suspectscore=0 clxscore=1015 impostorscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608100083
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260807122825.GJ2201016@killaraus.ideasonboard.com>
 
+Hi Laurent, Sang-Heon,
 
+On Fri, Aug 07, 2026 at 03:28:25PM +0300, Laurent Pinchart wrote:
+> On Fri, Jul 24, 2026 at 03:45:14AM +0900, Sang-Heon Jeon wrote:
+> > Both branches of the check return the same value, so the check has
+> > no effect. Remove it and return the value directly.
+> > 
+> > This is the result of running the Coccinelle script from
+> > scripts/coccinelle/misc/cond_return_no_effect.cocci.
+> > 
+> > Signed-off-by: Sang-Heon Jeon <ekffu200098@gmail.com>
+> > ---
+> >  drivers/media/i2c/mt9p031.c                          |  6 +-----
+> >  .../media/platform/microchip/microchip-sama7g5-isc.c |  7 +------
+> >  drivers/media/platform/qcom/iris/iris_resources.c    |  6 +-----
+> >  drivers/media/platform/qcom/venus/pm_helpers.c       |  7 +------
+> >  drivers/media/platform/renesas/rcar-csi2.c           |  6 +-----
+> >  .../media/platform/samsung/s3c-camif/camif-core.c    |  7 +------
+> >  drivers/media/usb/dvb-usb-v2/mxl111sf.c              | 12 ++----------
+> >  drivers/media/usb/gspca/jl2005bcd.c                  |  7 +------
+> >  8 files changed, 9 insertions(+), 49 deletions(-)
+> > 
+> > diff --git a/drivers/media/i2c/mt9p031.c b/drivers/media/i2c/mt9p031.c
+> > index d21510caf45a..2b09e8315c8e 100644
+> > --- a/drivers/media/i2c/mt9p031.c
+> > +++ b/drivers/media/i2c/mt9p031.c
+> > @@ -452,11 +452,7 @@ static int mt9p031_set_params(struct mt9p031 *mt9p031)
+> >  	ret = mt9p031_write(client, MT9P031_HORIZONTAL_BLANK, hblank - 1);
+> >  	if (ret < 0)
+> >  		return ret;
+> > -	ret = mt9p031_write(client, MT9P031_VERTICAL_BLANK, vblank - 1);
+> > -	if (ret < 0)
+> > -		return ret;
+> > -
+> > -	return ret;
+> 
+> I would have just replaced the last line with a
+> 
+> 	return 0;
+> 
+> as I find it easier to read code that has multiple error paths when all
+> the error paths look the same. It's a small personal preference though
+> (and ths best option would be to convert this driver to the CCI
+> helpers), so I'm OK with this change as-is.
 
-On 6/10/2026 2:29 PM, Fenglin Wu wrote:
-> The PMIC arbiter in the Qualcomm Maili SoC is version v8.5, which
-> is the same with Hawi and compatible with Glymur. Hence, add a string
-> for "qcom,maili-spmi-pmic-arb" as a compatible entry for
-> "qcom,glymur-spmi-pmic-arb".
-> 
-> Signed-off-by: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
-> ---
->   Documentation/devicetree/bindings/spmi/qcom,glymur-spmi-pmic-arb.yaml | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/Documentation/devicetree/bindings/spmi/qcom,glymur-spmi-pmic-arb.yaml b/Documentation/devicetree/bindings/spmi/qcom,glymur-spmi-pmic-arb.yaml
-> index 1593a1183a36..44c864fd5fc7 100644
-> --- a/Documentation/devicetree/bindings/spmi/qcom,glymur-spmi-pmic-arb.yaml
-> +++ b/Documentation/devicetree/bindings/spmi/qcom,glymur-spmi-pmic-arb.yaml
-> @@ -27,6 +27,7 @@ properties:
->             - enum:
->                 - qcom,hawi-spmi-pmic-arb
->                 - qcom,kaanapali-spmi-pmic-arb
-> +              - qcom,maili-spmi-pmic-arb
->             - const: qcom,glymur-spmi-pmic-arb
->         - enum:
->             - qcom,glymur-spmi-pmic-arb
-> 
-> ---
-> base-commit: 3443eec9c55d128064c83225a9111f1a1a37277a
-> change-id: 20260609-maili-spmi-binding-dbecf60b498e
-> 
-> Best regards,
-> --
-> Fenglin Wu <fenglin.wu@oss.qualcomm.com>
-> 
+I wouldn't make an exception here, but obviously CCI is the way to go.
 
-This change can still be applied without conflict.
+> 
+> > +	return mt9p031_write(client, MT9P031_VERTICAL_BLANK, vblank - 1);
+> >  }
+> >  
+> >  static int mt9p031_s_stream(struct v4l2_subdev *subdev, int enable)
+> > diff --git a/drivers/media/platform/microchip/microchip-sama7g5-isc.c b/drivers/media/platform/microchip/microchip-sama7g5-isc.c
+> > index b0302dfc3278..7383341ec51d 100644
+> > --- a/drivers/media/platform/microchip/microchip-sama7g5-isc.c
+> > +++ b/drivers/media/platform/microchip/microchip-sama7g5-isc.c
+> > @@ -598,13 +598,8 @@ static int __maybe_unused xisc_runtime_suspend(struct device *dev)
+> >  static int __maybe_unused xisc_runtime_resume(struct device *dev)
+> >  {
+> >  	struct isc_device *isc = dev_get_drvdata(dev);
+> > -	int ret;
+> > -
+> > -	ret = clk_prepare_enable(isc->hclock);
+> > -	if (ret)
+> > -		return ret;
+> >  
+> > -	return ret;
+> > +	return clk_prepare_enable(isc->hclock);
+> 
+> Here the change looks good, there's a single error paths so a direct
+> return is fine.
+> 
+> Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+> 
+> >  }
+> >  
+> >  static const struct dev_pm_ops microchip_xisc_dev_pm_ops = {
+> > diff --git a/drivers/media/platform/qcom/iris/iris_resources.c b/drivers/media/platform/qcom/iris/iris_resources.c
+> > index 773f6548370a..872bd09656b1 100644
+> > --- a/drivers/media/platform/qcom/iris/iris_resources.c
+> > +++ b/drivers/media/platform/qcom/iris/iris_resources.c
+> > @@ -78,11 +78,7 @@ int iris_enable_power_domains(struct iris_core *core, struct device *pd_dev)
+> >  	if (ret)
+> >  		return ret;
+> >  
+> > -	ret = pm_runtime_get_sync(pd_dev);
+> > -	if (ret < 0)
+> > -		return ret;
+> > -
+> > -	return ret;
+> > +	return pm_runtime_get_sync(pd_dev);
 
-Reviewed-by: Yijie Yang <yijie.yang@oss.qualcomm.com>
+The patch no longer applies after commit
+f87d7eda07fca21efe4b96169ae59007db46e60e .
+
+> >  }
+> >  
+> >  int iris_disable_power_domains(struct iris_core *core, struct device *pd_dev)
+> > diff --git a/drivers/media/platform/qcom/venus/pm_helpers.c b/drivers/media/platform/qcom/venus/pm_helpers.c
+> > index be1cbd5cfe84..e88e66be4f6d 100644
+> > --- a/drivers/media/platform/qcom/venus/pm_helpers.c
+> > +++ b/drivers/media/platform/qcom/venus/pm_helpers.c
+> > @@ -781,7 +781,6 @@ static int decide_core(struct venus_inst *inst)
+> >  	unsigned long max_freq = ULONG_MAX;
+> >  	struct device *dev = core->dev;
+> >  	struct dev_pm_opp *opp;
+> > -	int ret = 0;
+> >  
+> >  	if (legacy_binding) {
+> >  		if (inst->session_type == VIDC_SESSION_TYPE_DEC)
+> > @@ -829,11 +828,7 @@ static int decide_core(struct venus_inst *inst)
+> >  	}
+> >  
+> >  done:
+> > -	ret = hfi_session_set_property(inst, ptype, &cu);
+> > -	if (ret)
+> > -		return ret;
+> > -
+> > -	return ret;
+> > +	return hfi_session_set_property(inst, ptype, &cu);
+> >  }
+> >  
+> >  static int acquire_core(struct venus_inst *inst)
+> > diff --git a/drivers/media/platform/renesas/rcar-csi2.c b/drivers/media/platform/renesas/rcar-csi2.c
+> > index 7305cc4a04cb..6635f5782175 100644
+> > --- a/drivers/media/platform/renesas/rcar-csi2.c
+> > +++ b/drivers/media/platform/renesas/rcar-csi2.c
+> > @@ -2273,11 +2273,7 @@ static int rcsi2_init_phtw_v3u(struct rcar_csi2 *priv,
+> >  			return ret;
+> >  	}
+> >  
+> > -	ret = rcsi2_phtw_write_array(priv, step4, ARRAY_SIZE(step4));
+> > -	if (ret)
+> > -		return ret;
+> > -
+> > -	return ret;
+> > +	return rcsi2_phtw_write_array(priv, step4, ARRAY_SIZE(step4));
+> >  }
+> >  
+> >  /* -----------------------------------------------------------------------------
+> > diff --git a/drivers/media/platform/samsung/s3c-camif/camif-core.c b/drivers/media/platform/samsung/s3c-camif/camif-core.c
+> > index 14eedd1ceb27..bb06847f3a63 100644
+> > --- a/drivers/media/platform/samsung/s3c-camif/camif-core.c
+> > +++ b/drivers/media/platform/samsung/s3c-camif/camif-core.c
+> > @@ -301,7 +301,6 @@ static int camif_media_dev_init(struct camif_dev *camif)
+> >  	struct media_device *md = &camif->media_dev;
+> >  	struct v4l2_device *v4l2_dev = &camif->v4l2_dev;
+> >  	unsigned int ip_rev = camif->variant->ip_revision;
+> > -	int ret;
+> >  
+> >  	memset(md, 0, sizeof(*md));
+> >  	snprintf(md->model, sizeof(md->model), "Samsung S3C%s CAMIF",
+> > @@ -316,11 +315,7 @@ static int camif_media_dev_init(struct camif_dev *camif)
+> >  
+> >  	media_device_init(md);
+> >  
+> > -	ret = v4l2_device_register(camif->dev, v4l2_dev);
+> > -	if (ret < 0)
+> > -		return ret;
+> > -
+> > -	return ret;
+> > +	return v4l2_device_register(camif->dev, v4l2_dev);
+> >  }
+> >  
+> >  static void camif_clk_put(struct camif_dev *camif)
+> > diff --git a/drivers/media/usb/dvb-usb-v2/mxl111sf.c b/drivers/media/usb/dvb-usb-v2/mxl111sf.c
+> > index 870ac3c8b085..6404eb74db32 100644
+> > --- a/drivers/media/usb/dvb-usb-v2/mxl111sf.c
+> > +++ b/drivers/media/usb/dvb-usb-v2/mxl111sf.c
+> > @@ -987,11 +987,7 @@ static int mxl111sf_frontend_attach_atsc_mh(struct dvb_usb_adapter *adap)
+> >  	if (ret < 0)
+> >  		return ret;
+> >  
+> > -	ret = mxl111sf_lg2160_frontend_attach(adap, 2);
+> > -	if (ret < 0)
+> > -		return ret;
+> > -
+> > -	return ret;
+> > +	return mxl111sf_lg2160_frontend_attach(adap, 2);
+> >  }
+> >  
+> >  static int mxl111sf_frontend_attach_mercury(struct dvb_usb_adapter *adap)
+> > @@ -1007,11 +1003,7 @@ static int mxl111sf_frontend_attach_mercury(struct dvb_usb_adapter *adap)
+> >  	if (ret < 0)
+> >  		return ret;
+> >  
+> > -	ret = mxl111sf_lg2161_ep6_frontend_attach(adap, 2);
+> > -	if (ret < 0)
+> > -		return ret;
+> > -
+> > -	return ret;
+> > +	return mxl111sf_lg2161_ep6_frontend_attach(adap, 2);
+> >  }
+> >  
+> >  static int mxl111sf_frontend_attach_mercury_mh(struct dvb_usb_adapter *adap)
+> > diff --git a/drivers/media/usb/gspca/jl2005bcd.c b/drivers/media/usb/gspca/jl2005bcd.c
+> > index a408fcc3a060..4988fbf5005e 100644
+> > --- a/drivers/media/usb/gspca/jl2005bcd.c
+> > +++ b/drivers/media/usb/gspca/jl2005bcd.c
+> > @@ -148,17 +148,12 @@ static int jl2005c_start_new_frame(struct gspca_dev *gspca_dev)
+> >  static int jl2005c_write_reg(struct gspca_dev *gspca_dev, unsigned char reg,
+> >  						    unsigned char value)
+> >  {
+> > -	int retval;
+> >  	u8 instruction[2];
+> >  
+> >  	instruction[0] = reg;
+> >  	instruction[1] = value;
+> >  
+> > -	retval = jl2005c_write2(gspca_dev, instruction);
+> > -	if (retval < 0)
+> > -			return retval;
+> > -
+> > -	return retval;
+> > +	return jl2005c_write2(gspca_dev, instruction);
+> >  }
+> >  
+> >  static int jl2005c_get_firmware_id(struct gspca_dev *gspca_dev)
+> 
 
 -- 
-Best Regards,
-Yijie
+Regards,
 
+Sakari Ailus
