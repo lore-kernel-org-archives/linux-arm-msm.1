@@ -1,172 +1,167 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF19A40BCDA;
-	Mon, 10 Aug 2026 14:59:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 038023101D4;
+	Mon, 10 Aug 2026 15:21:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786373966; cv=none; b=TbHa8ZkW3Xe/n5laJt9nbwuTbfxXqLLYAeqlyejkwZKJB6x0sPyTBM55KxMPmroAFxOUy5pH8yu88SyUAjcRsG++kdUV8Y6PYyN0JZriXdLYhRxILupfnVfVLhACK6xcz7LUv2TEF3T0j2Kpns3Kxjxqpwin4xn/SjAy9P/oHDY=
+	t=1786375312; cv=none; b=VgZl7FPGyxDa5EpsQBskowqMepW42qXKW+Os6DmrbPujpa03GHPzrHYUMxmYN1WTVIhv8sbGG34QYxFPMN2EB/gm2AqHg0hLPH2SZsBXpEBfCUHiBTRZYiDgSxdG8PSyYvL8SXYhcUbly0baBxc4tRTHZWGNhD/LzrmE0cpY6sk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786373966; c=relaxed/simple;
-	bh=IHe+iekkZIpD0neGrMyMer28T5XcL0bxBrC3IQ2O0aQ=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
-	 MIME-Version:Content-Type; b=Ns398NCRt9r5j3TZ/VBUFL7VCJM7FzAbECgEU9EHpOyeULX9QmitUrqIZfgmzl9lxDMFqFDyeRC5shDCbzf5th7iXxnakge0dVizL+sbwIJCWCvWqHsyv6UaqofEe/iAdTqnIfo0KfsDtQvSSgdcc9zt5AkFRucMIwE1hmAb3G4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=V/dYtS6i; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786375312; c=relaxed/simple;
+	bh=iYMWF/J+YvooBs3s5WRm/I45yY/IbX0QrmbEUfp4nac=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=uh7xgGun9nnoj0dM4J5XLy1tDi6yCZthF3hJZ7mYILb3cyV3eJGeEY1bA5ZoMMv9rkQ90dHmLwAj10GRQQScFJGywXbydyPlSNX+hNGqRfOZYHanNCUqgKAmU4mff1+VzrIRzVhZvPEGI7A714WIBrACFkAwcp7zGF8a7QDo07c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JPKtGAjn; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="V/dYtS6i"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A4F81F00A3A;
-	Mon, 10 Aug 2026 14:59:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786373958;
-	bh=ys1aNXfackETLgPvVRA8MSu79rLpecF8Yf/cnO1Gaao=;
-	h=From:To:Cc:Subject:In-Reply-To:References:Date;
-	b=V/dYtS6iJo8senKp13lhrmwlT8xA+1U6HjjlD+//A2SwhejyBOryc4MKyLBwVy9Xu
-	 9lHQ7ilL12qzrI22qBbA7VLP99qhz/lUMAfhciVbEzcnmY/q1QGuvJ91oiUu+mpmBq
-	 09XZBaY5/QCLmCS32t7cEfSMnSM9gQufkR9l8w00PDA1ltynhBlzD2W27mc6TRTTUQ
-	 ZrBaQ/cErqtK68f06py0yUCN2PyRHebV0wbMUMlwF1Oyrvf1C+wH0AAUJJ31pyzzlE
-	 rHjoDImKBk3jAB71tSyFC1oKqRKrjQW/1mDmgfuLo57xTbxVYW2kx/J3r5XMRLC5XI
-	 /7Nd4QNrtSdHw==
-From: Mattijs Korpershoek <mkorpershoek@kernel.org>
-To: Krzysztof Kozlowski <krzk@kernel.org>, Mattijs Korpershoek
- <mkorpershoek@kernel.org>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
- <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
- Philipp Zabel <p.zabel@pengutronix.de>, linux-arm-msm@vger.kernel.org,
- linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/2] dt-bindings: phy: Add sa8255p high-speed USB PHY
-In-Reply-To: <20260804-active-sensible-reindeer-f459a3@quoll>
-References: <20260730-phy-qcom-snps-femto-v2-8255-v1-0-8b8bf5105a68@kernel.org>
- <20260730-phy-qcom-snps-femto-v2-8255-v1-1-8b8bf5105a68@kernel.org>
- <20260804-active-sensible-reindeer-f459a3@quoll>
-Date: Mon, 10 Aug 2026 16:59:15 +0200
-Message-ID: <87a4qu2f98.fsf@kernel.org>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JPKtGAjn"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8CC6AC19425;
+	Mon, 10 Aug 2026 15:21:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1786375311;
+	bh=iYMWF/J+YvooBs3s5WRm/I45yY/IbX0QrmbEUfp4nac=;
+	h=From:Subject:Date:To:Cc:Reply-To:From;
+	b=JPKtGAjnot0uaddai73bDTuB+12IuI1ptW29E+Vhml1jGDbJWBGWSRtPEHrkkQu/o
+	 LXpb5TXUIWFU7zYaN4jJam112pMA3Ag+TZuJkCCjmuCKkWqdQK4ZsTvsKtylSEtdl/
+	 7xZsePz+ZTHjy2khFLy3+vEKg6XfT+G7eLPy2LtBhnGg4RE0UOCd7FqQoNuqO/exiK
+	 qmzA1hY7eBUPGapez9PDOwcIOc+NP2SPm0+y9QcCr8JL17xHS903W/bUVctdmV7zvf
+	 MfuOUef0KyZ1TvxNq8PwlpM4ncBwpGf6mcYqDiFAZ/vz0ZcfZOjHxyV0shsq6KW0zy
+	 Nuua5iD1yAWZw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 75291C5B56A;
+	Mon, 10 Aug 2026 15:21:51 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Subject: [PATCH v5 0/3] Input: support for STM FTS5
+Date: Mon, 10 Aug 2026 17:21:39 +0200
+Message-Id: <20260810-stmfts5-v5-0-0c737d929976@ixit.cz>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/13MSw6CMBSF4a2Qjq1pb1/gyH0YB/QlHQiGEoIS9
+ m7BxKLD097vn1F0fXARnYoZ9W4MMXRtGuJQINPU7c3hYNNGQEASoBzH4e6HKLDmilHqtVUMULp
+ +9M6HaStdrmk3IQ5d/9zCI11fPw1G6LcxUkwwgOGi1FVtZHkOUxiO5oXWwgg7RUVWkJQi2pTMu
+ UpU9FexrDhhWbGkhK2VLI23QP4U36sqK56U5N7J9KWsFlkty/IGitIdUz4BAAA=
+X-Change-ID: 20260214-stmfts5-b47311fbd732
+To: Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
+ Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+ Alexandre Torgue <alexandre.torgue@foss.st.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Henrik Rydberg <rydberg@bitmath.org>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: Petr Hodina <petr.hodina@protonmail.com>, linux-input@vger.kernel.org, 
+ linux-stm32@st-md-mailman.stormreply.com, 
+ linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, 
+ Krzysztof Kozlowski <krzk@kernel.org>, devicetree@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org, 
+ David Heidelberg <david@ixit.cz>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3611; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=iYMWF/J+YvooBs3s5WRm/I45yY/IbX0QrmbEUfp4nac=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqeeyNn0JVtxp4V6UivWU56+kfUvLGZXX0LdUJ1
+ oUZrgfKzC6JAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCannsjQAKCRBgAj/E00kg
+ chjjEACs+WX8zHWsSWUJn3XSYLpe9ViXMTQJS1UzHOStQU3Z0HVKy2f1Wcljt435qihhY24NC09
+ +adKMr3R953WfqiauCqs3o4QERWo6JagGXgwkcSRcpuuslDMW5BlUahygEdyO0D+leerbtVI/io
+ SCgN9jyG1Dvo39KXzNj9aec6ODAy4ZnPdsHL171/4DN5vk42cesLSVmvfLCAhogDpROp4J/w6QJ
+ c8ljH56wjIQAROPjikliyjRxXjJui4QkoREu6fbc9WORQWgaKjwoaQnUmgPUV1saYfIB7OudD3I
+ eEtjJMNko9Mzch+ofnA2UslIx9HwVIpAzVnm0MaNyOKfRudxlUpu0KO/oihC/3j5x+uCIDzCoP6
+ igtfc2jMYN3yZgOAkOxRJslp/HVHBddS1Iqot2jO2G0XfnACaf5XyBzEVzcYUFJM+RPCtx7yVth
+ irx/tYyI9sScIOTK41ZK33WfdEPab4RWS3ucw2F7pB9TdSEqPXiiGfU47PDBLyHbn3SoNO3y57X
+ 8c0ZljpconkjFWvFUG2M1PHU+2kLQf8ySvN71EdVmP7WabjUslF4wSf1LJop2JKwVfihh72norh
+ 3Cz5BGbkBOnj6Sw4apz9D3t2cG7DBynS7Sq7OATGmS0IrPPHpZDgHzwF8R9b1piZAq6fWlla5k6
+ k5eI9vs3dBHk1ug==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-On Tue, Aug 04, 2026 at 10:07, Krzysztof Kozlowski <krzk@kernel.org> wrote:
+Used on various phones. Minimal viable driver.
 
-> On Thu, Jul 30, 2026 at 03:58:14PM +0200, Mattijs Korpershoek wrote:
->> SA8255p platform abstracts resources such as clocks, interconnect and
->> GPIO pins configuration in Firmware. SCMI power protocol is used to
->> request resource configurations.
->> 
->> Two power domains can be requested: transfer and core.
->> transfer controls clocks and interconnects and core controls
->> the GDSC, resets and TLMM (GPIOs).
->> 
->> Add a new binding for the Qualcomm SA8255p Synopsys Femto High-Speed
->> USB PHY V2 found in SA8255P.
->> 
->> Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
->> ---
->>  .../bindings/phy/qcom,sa8255p-usb-hs-phy.yaml      | 52 ++++++++++++++++++++++
->>  1 file changed, 52 insertions(+)
->> 
->> diff --git a/Documentation/devicetree/bindings/phy/qcom,sa8255p-usb-hs-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,sa8255p-usb-hs-phy.yaml
->> new file mode 100644
->> index 000000000000..09f7ca6e7f72
->> --- /dev/null
->> +++ b/Documentation/devicetree/bindings/phy/qcom,sa8255p-usb-hs-phy.yaml
->> @@ -0,0 +1,52 @@
->> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
->> +%YAML 1.2
->> +---
->> +$id: http://devicetree.org/schemas/phy/qcom,sa8255p-usb-hs-phy.yaml#
->> +$schema: http://devicetree.org/meta-schemas/core.yaml#
->> +
->> +title: Qualcomm SA8255p Synopsys Femto High-Speed USB PHY V2
->> +
->> +maintainers:
->> +  - Mattijs Korpershoek <mkorpershoek@kernel.org>
->> +
->> +properties:
->> +  compatible:
->> +    const: qcom,sa8255p-usb-hs-phy
->> +
->> +  reg:
->> +    maxItems: 1
->> +
->> +  "#phy-cells":
->> +    const: 0
->> +
->> +  power-domains:
->> +    maxItems: 2
->> +
->> +  power-domain-names:
->> +    items:
->> +      - const: transfer
->> +      - const: core
->
-> Here and in your other binding you call these 'transfer' and 'core' but
-> all other bindings call them 'power' and 'perf'. Why this difference?
+Includes device-tree enabling touchscreen on Pixel 3.
 
-Thanks for the question. I had to do some digging because I did not know
-the answer to this.
+What is missing:
+ - switching between AP and SLPI mode (to be able to wake up phone by touch)
+ - firmware loading
+ - anything above basic touch
 
-Per my understanding, the SCMI firmware (in my case, gearvm) exposes
-multiple protocols identified by a protocol_id.
+Signed-off-by: David Heidelberg <david@ixit.cz>
+---
+Changes in v5:
+- 3.3V is analog, 1.8V is digital supply. Fix that.
+- Name the error variables "err" (Dmitry)
+- Use scoped_guard() for ->running, and only set it once the scan
+  mode has actually been enabled. (Dmitry)
+- Use i2c_master_send() instead of open-coding a single-message
+  i2c_transfer(). (Dmitry)
+- Drivers may report coordinates outside the declared min/max, so
+  remove the clamping. (Dmitry)
+- BTN_TOUCH and INPUT_PROP_DIRECT are already set up by
+  input_mt_init_slots(..., INPUT_MT_DIRECT). (Dmitry)
+- Let the input core track contacts: drop the touch_id/stylus_id
+  bitmaps and the hand-rolled BTN_TOUCH reporting, and sync the frame
+  once per interrupt with input_mt_sync_frame() instead of calling
+  input_sync() per contact event. The controller pushes contacts one
+  by one into the event FIFO and only resends the ones that changed,
+  so INPUT_MT_DROP_UNUSED is wrong here and is dropped as well. (Dmitry)
+- Restore the FTS4 interrupts accidentally dropped by introduction of
+  FTS5.
+- mode-switch-gpios isn't required with stmfts5. Some designs, such as
+  Xiaomi Mi 8, has no such GPIO connected and is limited to AP mode.
+- Nit: updated example to use interrupts-extended.
+- Nit: (maximum x/y coordinate reported + 1), corrected example.
+- Link to v4: https://lore.kernel.org/r/20260409-stmfts5-v4-0-64fe62027db5@ixit.cz
 
-For example, power domains have protocol_id=0x11 and and performance
-domain have protocol_id=0x13. This is defined in ARM's den0056 spec:
-https://support.arm.com/documentation/den0056/f/
+Changes in v4:
+- Wrap everything below enabling the supplies into stmfts_configure()
+  to avoid bunch of gotos to power off on error (Dmitry T.)
+- Finished chip specific ops and removed is_fts5. (Dmitry T.)
+- Link to v3: https://lore.kernel.org/r/20260403-stmfts5-v3-0-5da768cfd201@ixit.cz
 
-Each USB phy has 2 distinct power domains.
-This can be observed at runtime from linux via:
+Changes in v3:
+- s/touchscreen_pins/touchscreen_irq_n. (Konrad)
+- Use interrupts-extended. (Konrad)
+- Fixed rebase conflict against 8665ceb926ec ("Input: stmfts - use guard notation when acquiring mutex")
+- Rename switch-gpios to mode-switch-gpios.
+- Do not define properties in if:then: branches. (Krzysztof)
+- Link to v2: https://lore.kernel.org/r/20260315-stmfts5-v2-0-70bc83ee9591@ixit.cz
 
-/sys/kernel/debug/pm_genpd # grep 'scmi-power-usb0.*phy.*' pm_genpd_summary
-scmi-power-usb0-ss-phy-pm       off-0                           0
-scmi-power-usb0-ss-phy-rpm      off-0                           0
-scmi-power-usb0-hs-phy-pm       off-0                           0
-scmi-power-usb0-hs-phy-rpm      off-0                           0
+Changes in v2:
+- Fix typo in the binding s/switch-gpio/switch-gpios/.
+- Deduplacate allOf. (Rob yamllint)
+- Add missing S-off-by. (Dmitry B.)
+- Dropped irq-gpios as it's not needed. (Konrad)
+- Correct x and y touchscreen area size. (Konrad)
+- Correct reset introduction commit description. (Krzysztof)
+- Partially implemented chip specific ops. (Dmitry T.)
+- Separeted license naming cleanup into separate commit (Dmitry T.)
+- Link to v1: https://lore.kernel.org/r/20260301-stmfts5-v1-0-22c458b9ac68@ixit.cz
 
-In the case of the other bindings - for example i2c - there is only one
-power domain (0x11) and one perf domain (protocol_id 0x13):
+---
+David Heidelberg (2):
+      dt-bindings: input: touchscreen: st,stmfts: Introduce STM FTS5
+      Input: stmfts - support FTS5
 
-/sys/kernel/debug/pm_genpd # grep i2c0 pm_genpd_summary
-scmi-perf-i2c0_7                on                              0
-scmi-power-i2c0                 off-0                           0
+Petr Hodina (1):
+      arm64: dts: qcom: sdm845-google: Add STM FTS touchscreen support
 
-I hope that explains the naming difference. Please let me know if this
-is still unclear.
+ .../bindings/input/touchscreen/st,stmfts.yaml      |  29 +-
+ .../arm64/boot/dts/qcom/sdm845-google-blueline.dts |  19 +-
+ arch/arm64/boot/dts/qcom/sdm845-google-common.dtsi |   2 +-
+ drivers/input/touchscreen/stmfts.c                 | 430 +++++++++++++++++++--
+ 4 files changed, 436 insertions(+), 44 deletions(-)
+---
+base-commit: 95d6a9ccef99117115e41e9adb271243bd5e985b
+change-id: 20260214-stmfts5-b47311fbd732
 
-> What are these domains responsible for?
+Best regards,
+--  
+David Heidelberg <david@ixit.cz>
 
-If we take the example of the high-speed (hs) phy, we can see that on
-the firmware side, the only difference is the -pm or -rpm suffix.
-When Linux requests scmi-power-usb0-hs-phy-pm (mapped to 'core' in the
-bindings), the SCMI firmware (gearvm) will interact with the reset line,
-the clks and the regulator.
-When requesting scmi-power-usb0-hs-phy-rpms (mapped to 'transfer' in the
-bindings), the SCMI firmware will only interact with the USB clocks
-(reset and regulators remain unchanged).
 
->
-> Commit msg is pretty useless here - repeats the diff. I can read the
-> diff but I still do not understand why such naming.
-
-'core' controls reset, clocks and regulators.
-'transfer' only controls clocks. Putting 'transfer' to 'off' is
-interesting in case of runtime suspend/resume as it cuts the data
-transfer (by disabling usb clock)
-
-Is it more clear that way?
-
->
-> And why core is not the first one? It clearly feels like the power
-> domain thus the main one.
-
-The order is based on how it's defined in the SCMI firmware. It's not a
-problem to put 'core' first as power-domain-names property is only used
-by the linux driver. Only the SCMI channel (in my case 12) and domain
-indices (0,1) matter here.
-
->
-> Best regards,
-> Krzysztof
