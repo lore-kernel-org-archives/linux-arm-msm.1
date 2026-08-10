@@ -1,96 +1,93 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DEEE2377545
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 07:08:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B6FE28CF5D;
+	Mon, 10 Aug 2026 07:27:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.7
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786345719; cv=none; b=SDWph6N1Mv9lazyPgPhkVcyyFkv8ZgIJG1uiMrkQDx8yqRxJDv+KJ4e80QFa4GD4cHIBnbnxHZjqx5vDZTrPnecwj2IKh3IfnCVulKXTsKev7XtQHmEDJD6X3XbNMZdneM0m2xDbtUOM2k9SFhPxczI7NKcGpDiz/A2KCuF/quI=
+	t=1786346868; cv=none; b=mjHHstmDpDUWvvKDeLiCbNLikbvp7UqbMU2gjg+2TfMDkXfbvsKwBYFM3xFJ+4zt96hFQy34cN2Tx8u4pDDm5Tc01JtbCxwJ6uxHuT4S0P31eamEWlQZIagdzYTTguV3eEXBMy1CtMNsWb/dXbPUO94RacqpUEWjrq0kdkUEb2g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786345719; c=relaxed/simple;
-	bh=rfaqo35UnAQbSuq5negAPuaIjHmCU+E7jJcajSKLFPQ=;
+	s=arc-20240116; t=1786346868; c=relaxed/simple;
+	bh=xQLhwS8wv9sFqYFOv/TIN/5z4j31qZTJrUsswVUaMwY=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=VhQCnOBUUKTiZ3pGU5W7QSgt3a9RW2WNLckXifbfkL/vg6k6r52mkKm+SHbrLUeMfI8yk0laaL55A+TeyXLM1whRmlr/OzzPjfmXs2yKl7kGZUcp6TxU4bOZOXCgmxgtuEAjnrUZvkc3ItPVzHELybScdm/n4VyiY1NfIOo9N/Q=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ept3EH9d; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Rx14iRE3; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=mFjliel98VTyg0W7PMoFiZrMutW3OaP+esOCf/1L+ZRVUl50KGdI3ENmbCzacd89AIThR1H6xhGJ7z/dZz+d3e6152/GGQwvDZ+R2MLlTrCd4Y7UT8aaZMKAlmDIdxclUlThkj9J73j2AAYNVCBzXnCY3mSK08DToFFqDWdAH0g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=FG75gnP7; arc=none smtp.client-ip=192.198.163.7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ept3EH9d";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Rx14iRE3"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67A5pdee4149912
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 07:08:37 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=yYsHAZ961X2PVc3jLn/xzL3P
-	CbmTI61pM3ayjaylxrA=; b=ept3EH9dESBFg4pMsxqwWCJMiiibHBPYDePxnKKA
-	Kco8cwZJP6lDxPPK6vE3uEyExlllaAqVgrWXvF1jotglgzAZ9Pk5nhejcz//OoSs
-	gS1lvr6c+dDzJYb4HTYtCZUw2hI98eFMt0qySfSsnnumlQdhAuxjaNX7zRsZwr2h
-	Ke58Hxtrltpl81Bi3aHBVHBt3iVthPsSp1Os00ywMlRWh0zZMOERyQGWfjXqkM25
-	m07tB3ogsWdnlQCE43j5MGkBSV1t0SInYY2HhFuLHpabdTWmOwZIlPCUKU3aoxWe
-	brumCSBWzgV5/lIGSRsCHP/9uBQdb3XFrrJ/zQLMYWwolQ==
-Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fy8v907hd-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 07:08:37 +0000 (GMT)
-Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-51c12e43b98so17311341cf.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 00:08:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786345716; x=1786950516; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=yYsHAZ961X2PVc3jLn/xzL3PCbmTI61pM3ayjaylxrA=;
-        b=Rx14iRE3JGtMGnu6kC3cFO3Z4o/RLPxOPgx2iy/Zm9IfD8EW/beokWE/BJn+By+6CN
-         mdO+5Pacghxb7CaT8r+MGgf0++BcHrY4kcb3N2A6lF4zDzj0hiDlkhy8t6Lw/2/hg93a
-         B5vZ03Hgq/ROj4tBapn5aiF6zADzET1D2PKw57Gk5eMnp2PhtwG/XAIQInUHz9Q7mSWV
-         pG8syJiNMriPMxDf4Pl6kFIoQ2+HthrFl/5RY7dxIyUOi1YLVLzs5pwChed+f/1wyvkp
-         XSzAsQfOVbkYWNoVdD4kvM25BbliBHwZ+bKUuvoboFx8lITzrWYksAU/m3kYjrXc2y4L
-         gX+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786345716; x=1786950516;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=yYsHAZ961X2PVc3jLn/xzL3PCbmTI61pM3ayjaylxrA=;
-        b=E0NRMFOucB0B4P19ZChdcS08RP+bGjia/gZbv6YB5VIV3g+pmtgNXRlYq0JkDWrf3g
-         GqK+AtZVUaEB7cbN1Uye/4iTDN3ox5nYVc2CoofEXB7sEg7MWz6mx3unfSVz7rjnz2T1
-         ns/ZmSh6uTodXBNONEeSmKvhEX5oSsQSsBG8DFwrr9CGn91UGtyQcEdO5zzig7aa2IZX
-         ZqwussVnYi5J5okqGPwQPAAKv/S+ogRnSQvPX50Snsm+0U8bj9YiRZzSpXMt5Es4OXvF
-         r7CTtgYYyX8fr56LGijVR1K2/TPPTmyhb7PxVelLzPre434m8eS7KzdQDMImCbB5pnls
-         kOag==
-X-Forwarded-Encrypted: i=1; AHgh+RooeGNw0++A7lZQ28vS7waiZnJZjjjNj3oktEiLFdy9iLH98W5kHUD5WERq/EihgUa/dLCfDNFErG8UAtoR@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy/kFuANsiLAylPZp18Yol8K/iiHAa29NWz4IfK14xqmRWvzjph
-	ukAr/8xgAbBBvMzFOgmIW43Yk9DLlLkW/UYtJFk3iFdUx18FWknggspEn9iYlYk/+dCerl+feWK
-	Rki7nQXImHBfGKjgAaBWR8NvFFYKn/Wz3lpckjj/FART2SCj/Qij5oVd2t0ArHlWBg7SP
-X-Gm-Gg: AR+sD10mI34KgvSnRut2sZSf697GpTyiAIl1mxoq9RbJAfbVYFKLaMTc9QS8eGptvi8
-	j2MUvwlj8P48R/MTl9S3kJp0LwuPWB8xleJcksIdCcdJ7YI9z+3+ZiD0QqQzRzPiTX/ztYFl/2Y
-	gfbWSJVatBqCOuHGt/e+ehb1IdKM+F3I9vIp4OBBT80YKZ4cIUiAuWlt9e5CeoeucTtUjEu7cZZ
-	Q++VY7kT6DkP0iZR7XJYsoxvaH3eR479laYPLl/jkkmqpnlmu5BgRgPX94prvtn05Z0aZ042dDu
-	WtD4/wZydOv6ISrT2PHApX+LpO6IGUwIvwC5Loq1roZwuZIlC6z0xC99NYZaCkDdXi4lwHJwXyX
-	KzVt63qhwJJmT9SVf340HNGGw5UH0L4YL4Ea8NbIdHrN+cn64eTFpdb5UDItXQrIUKmg9hnAQpQ
-	bhlmpBT1Z4aV2KTg==
-X-Received: by 2002:a05:622a:614:b0:51c:164b:b240 with SMTP id d75a77b69052e-52ce5f61c7fmr410327141cf.4.1786345716154;
-        Mon, 10 Aug 2026 00:08:36 -0700 (PDT)
-X-Received: by 2002:a05:622a:614:b0:51c:164b:b240 with SMTP id d75a77b69052e-52ce5f61c7fmr410326731cf.4.1786345715771;
-        Mon, 10 Aug 2026 00:08:35 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b3055dec76sm1805559e87.50.2026.08.10.00.08.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Aug 2026 00:08:34 -0700 (PDT)
-Date: Mon, 10 Aug 2026 10:08:32 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: kyufie <imkyufie@gmail.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: Add notification LED, vibrator, and
- UART support for Xiaomi Redmi 5A (riva)
-Message-ID: <7jkbomybaykrwzikmnvuy67y3dmabzqkuwjm2djtsnt7qdwkpo@tueelmvqam4f>
-References: <20260810062611.735673-2-imkyufie@gmail.com>
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="FG75gnP7"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1786346867; x=1817882867;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=xQLhwS8wv9sFqYFOv/TIN/5z4j31qZTJrUsswVUaMwY=;
+  b=FG75gnP7rW6eu0m595W1Sd3oeT2R0aMzbWX9W1zCQFqsMlKA0CcV9kUj
+   AXzCPoGefjFBqElLD2PjL6EqoJIU+XbHvzR2/eTE+vHvm4BphqQ3W/qoa
+   tz2qar7gTfUEMaP5/kVdO3QtzKedH5bjaT9Wvnb+Q3GkfKvS6EzvyKJ+E
+   kyo42KMBbf3YwsYX2Q8LQKVHwv3SwcrqTaEK+fFfNvLNo9ByX87PWYfSY
+   1itkPPUM0zC3/BoDwTQX+0Ks5czmbtP20m6KbO/LFc8V5kKFLCS9YFuMl
+   Kw+mvolaiDB6+p5DN9c354GC4dBh7619x93dCQdQI3Jj+r+cA6JOV/eEr
+   w==;
+X-CSE-ConnectionGUID: NPVHzscfQO+doNMdk+QHvA==
+X-CSE-MsgGUID: cCepRIf2TZq0ioTUrdhGXw==
+X-IronPort-AV: E=McAfee;i="6800,10657,11870"; a="112400376"
+X-IronPort-AV: E=Sophos;i="6.25,215,1779174000"; 
+   d="scan'208";a="112400376"
+Received: from orviesa009.jf.intel.com ([10.64.159.149])
+  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Aug 2026 00:27:46 -0700
+X-CSE-ConnectionGUID: fVqcRD4QTWCn0dQ6j9/S5A==
+X-CSE-MsgGUID: 7ZXTFfZuQhmUulcEeVHcvQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.25,215,1779174000"; 
+   d="scan'208";a="263584571"
+Received: from conormcd-mobl2.ger.corp.intel.com (HELO localhost) ([10.245.244.99])
+  by orviesa009-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Aug 2026 00:27:36 -0700
+Date: Mon, 10 Aug 2026 10:27:33 +0300
+From: Andy Shevchenko <andriy.shevchenko@intel.com>
+To: Link Mauve <linkmauve@linkmauve.fr>
+Cc: Srinivas Kandagatla <srini@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Kevin Hilman <khilman@baylibre.com>,
+	Jerome Brunet <jbrunet@baylibre.com>,
+	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+	Sven Peter <sven@kernel.org>, Janne Grunau <j@jannau.net>,
+	Neal Gompa <neal@gompa.dev>, Frank Li <Frank.Li@nxp.com>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Fabio Estevam <festevam@gmail.com>,
+	Vladimir Zapolskiy <vz@mleia.com>,
+	=?iso-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>,
+	Orson Zhai <orsonzhai@gmail.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Chunyan Zhang <zhang.lyra@gmail.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Kalyani Akula <kalyani.akula@amd.com>,
+	Michal Simek <michal.simek@amd.com>,
+	Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
+	Gary Guo <gary@garyguo.net>,
+	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
+	Benno Lossin <lossin@kernel.org>,
+	Andreas Hindborg <a.hindborg@kernel.org>,
+	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
+	Danilo Krummrich <dakr@kernel.org>,
+	Daniel Almeida <daniel.almeida@collabora.com>,
+	Tamir Duberstein <tamird@kernel.org>,
+	Alexandre Courbot <acourbot@nvidia.com>,
+	Onur =?iso-8859-1?Q?=D6zkan?= <work@onurozkan.dev>,
+	Johan Hovold <johan@kernel.org>,
+	Ronald Claveau <linux-kernel-dev@aliel.fr>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	linux-arm-kernel@lists.infradead.org,
+	linux-amlogic@lists.infradead.org, linux-kernel@vger.kernel.org,
+	asahi@lists.linux.dev, imx@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	rust-for-linux@vger.kernel.org
+Subject: Re: [PATCH v4 0/3] nvmem: migrate to const void * in reg_write
+Message-ID: <anl9ZRM0REenBK8t@ashevche-desk.local>
+References: <20260726131724.15299-1-linkmauve@linkmauve.fr>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -99,52 +96,29 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260810062611.735673-2-imkyufie@gmail.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEwMDA1OSBTYWx0ZWRfX67imc/lyS+fH
- MZ43xydTujYc5a5dDgvFR2I0Sqt/EtMX85o6ZeDcgjZVt9UunzNTIxhzuTLsUjAojJ89ulS2TG4
- RVGTipY//aw/WqJqxbbj3XDU9IAQnc4=
-X-Proofpoint-ORIG-GUID: 29-MvXtOwnOmCrowthHwPEqylz7siVlq
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEwMDA1OSBTYWx0ZWRfX5bykJPi1B1Ga
- GZYkrKFi1FSTEQnhmz1tsR6kMafowrbIpT3S97XyikIk9Hpc9J6VbAj/KKn3XnCfH4vO7dTXs9v
- /1xkd+iwF5pvk3/A5O8jHR1wUNPtGoq5/kxEOrgXSVFbr+dDarZvi9Q4J0Di/SpNOx2FyNzc8GG
- RgGVz9y6VcD3mB1PHBvoLeT3qYE6hhjEwpSDjQxDLVEgy3/K72CT3g8cm0noyNNYwpFwfC/X9zF
- GR/2WTlyskCSep6vDYL+ZNHl2/3LdIkFSe9ndw4BxQeDGRKMS3a2bNMnhfVaDudrKV5SaEvqVxL
- ehYraxt4p0dRH5k2J0UaR1UhYk8dimAkZlM3cpNaeMKRundMg5Gl6PYleYDnR/pSnFtz+QXqlHj
- hl0SjqrnzkiMnvQR1rP5mFB3KOyqGgMpj+ePsxfJuecvSRcw8MGjB12ECfJlXISPrOPJXRyYxG2
- kvmsnaUKJYXhHjpgdQg==
-X-Authority-Analysis: v=2.4 cv=T5m8ifKQ c=1 sm=1 tr=0 ts=6a7978f5 cx=c_pps
- a=JbAStetqSzwMeJznSMzCyw==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=sWKEhP36mHoA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=pGLkceISAAAA:8 a=7Ty-B7y6rTR56lQ-UMcA:9 a=CjuIK1q_8ugA:10
- a=uxP6HrT_eTzRwkO_Te1X:22
-X-Proofpoint-GUID: 29-MvXtOwnOmCrowthHwPEqylz7siVlq
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-10_01,2026-08-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 adultscore=0 clxscore=1015 suspectscore=0 phishscore=0
- spamscore=0 malwarescore=0 priorityscore=1501 bulkscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608100059
+In-Reply-To: <20260726131724.15299-1-linkmauve@linkmauve.fr>
+Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
+ krs, Bertel Jungin Aukio 5, 02600 Espoo
 
-On Mon, Aug 10, 2026 at 01:26:12PM +0700, kyufie wrote:
-> This patch adds support for:
-> - Controlling the notification LED.
-> - Controlling the haptic vibrator.
-> - Communicating through serial port exposed as test points at the front and
->   rear side of the phone's PCB.
+On Sun, Jul 26, 2026 at 03:17:18PM +0200, Link Mauve wrote:
+> This callback used to take a mutable void * for no reason, which causes
+> the compiler to be unaware that the val buffer should never be modified
+> by the callback.
 > 
-> Signed-off-by: kyufie <imkyufie@gmail.com>
-
-This should contain your name.
-
-The patch itself LGTM.
-
-> ---
->  .../boot/dts/qcom/msm8917-xiaomi-riva.dts     | 36 +++++++++++++++++++
->  1 file changed, 36 insertions(+)
+> This was found while drafting the nvmem-provider Rust abstraction.
 > 
+> Thanks to the guidance of Andy Shevchenko, this now introduces a new
+> callback and deprecates the existing one, with the goal of renaming the
+> new one into the old one once no user remains in the kernel.
+
+LGTM now, FWIW,
+Reviewed-by: Andy Shevchenko <andriy.shevchenko@intel.com>
+
+But I think you also need to provide a road map of finishing this job (the best
+is to provide a continuation in some of yours public Git trees to point out).
+
 -- 
-With best wishes
-Dmitry
+With Best Regards,
+Andy Shevchenko
+
+
