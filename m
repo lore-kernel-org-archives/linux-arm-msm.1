@@ -1,60 +1,62 @@
 Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EA023A7F50
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 10:53:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10F843BE174
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 10:53:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786359229; cv=none; b=d5g41he2E5f6W9DVRoEv9iH7HGMjNxZPBZmOdxkxNlTt0eRk5kNHnkruTchmxExTDwZF6WAByS++fyHHU1Ivuq2UcringcPOM3yCraVcJYQPwGn36Pkyk6iypxVlM3wno4Gl5jLiShzWlBamR0/y1hL1DRAOHEP4rHYLh5AatwM=
+	t=1786359234; cv=none; b=QxwbQa6bCCFVVfdwGrzkbHGNtddbG6XUfwYz+KmvDl5Rnnrf8Q34XzJqaiucxxvlUgmBL/k5w2J1Jel/47G4qX5u6Oi/YfDqAyVAzfOl/+ta6uQNwzaNPc81P1fKg3NtD2CIiWsmSU8PiRTtXQAC7oqvNHYstCUGxWr6YRSA7hM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786359229; c=relaxed/simple;
-	bh=i1M1E8zijlWdTYpKqBujo4A/2FJRQomdiIDBmP6MVkM=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=XdFdqorpRSk5Xd7i8IWFcH08zrV+4OoDIZmQS7OhU6IlDAxVkbnDWAwdD6GNLk4XlSyQeZ+ukxo+6boyEj6m2ORKDSfpTAhyEdP8a6jwQubEBgyKfIbpnReFyqnWicD76vDaoNZlXF2piMUDbDisDq0sC6P1RljB0h6j8IabtXk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=pPN2QZvY; arc=none smtp.client-ip=209.85.214.169
+	s=arc-20240116; t=1786359234; c=relaxed/simple;
+	bh=RkuPU+szxSRPLV8KTuj8qDOUbDRUGKXjs8KU3FAuvSY=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=MbaP8nQwU9qlf7zRPU9RwfTDkDcfXuIgCls8KquY5fyH7XfOuyEK9gm367CvR1mKxVCa3n84Uxjfw11CSaFhcJu3hf5s24gXxFhy8ATdYE3jgqOGy/JPS2iFOHT7UIuDB0suKABUympAokPAWuL3l3q8AQXtus7ZrgETIY1EihA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=kpjxpqlo; arc=none smtp.client-ip=209.85.214.169
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="pPN2QZvY"
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2cfbbdfa60bso13865965ad.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 03:53:48 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="kpjxpqlo"
+Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2cea3004256so20874085ad.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 03:53:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786359228; x=1786964028; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=NqEE/rlSHqts9Y9z1qNeIyx4k5m9J5U48Lwk2zOBo1Y=;
-        b=pPN2QZvYTBjVd/kn9X7pZbAJXxfpsxl7WbbyWyNeUPiavuj1D+uE8zxuFt96zUqT5U
-         +2BhQJgyGQFJDx2FIoYCGy16bG89v94jwEW6RejbNNqRxwFswRbCcor2NIN89aWUJmot
-         CfUjf7BDDX+FNJIZhF6qC5ClyWCxgzF3BO2PCyUBaySmgyAFjKZelYBKWnSh23+bEOx2
-         LBBKZQCZYk/4vq5buC/taRer84POesAb4aW+iuEskKwFQV4Sl/SOVrJ3y2Zt8OEedHqs
-         kOjBCAclNlc9Q7s98I4COu23nj9P+InxMeNAglq2p+wq9//Lq+Ux6q/u3NLAgHBcM+ij
-         pOgA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786359228; x=1786964028;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20251104; t=1786359232; x=1786964032; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=NqEE/rlSHqts9Y9z1qNeIyx4k5m9J5U48Lwk2zOBo1Y=;
-        b=a6cPEhZfcgGaNpoZEax1ZBYnpIB+a0CaUb0ibodIskHY3ejTVRW6JIQkk4ZnziISs9
-         7aDLOrPFnYBg8H3mECZNTW1+WICe9GVFQRrcklmnjBuXE7S+uAWkLKyh4YRGgOC9iaC5
-         Rw3nNRmhOQuofiEhHCsDt1hWJzQmOOYKWokoWsP2/YpisYx2jlqBmhklxcpws99rFfm1
-         raBFJyRTQRYAwu89t4DgJa0FOfiWBVjI5YI9Z59HQvfYTEiJBNLBiNJaLpuw83KLspf6
-         4BgMSXcCKaiqHRVCrr+Oq0mmRZXffyA1R1R88BMGRZvCbGgd3EVSw59Z1mahQQgaiHMb
-         wiZA==
-X-Gm-Message-State: AOJu0Yzl1C2fqZ1p8AgWDShpJIsMHOR2tpaja5pgO4Mx0paBkk1BNvgO
-	BvxOvPnJ6XWKiB+KLhU2xY5u/Q4cax+4QjR+porC14QukVySnwB+3eIb
-X-Gm-Gg: AR+sD10JfM7rfiOil+gnGa0R93iTw5mquzWBvgDT0jpmBV7nkoeCAPZUw8tSPyWiPAg
-	HYlENkxytuD+WITIOpgNZXCdMd6sNfOjGeYrAirxgItMMZDzSjdpzr/Xg+QSJCyBERAhyHkXB0j
-	tHgJITkw8zgLNa4z9tCxaeFlD6p9Ogk5M6ojHXWyigmnvcm+DxDC6dmqgLJpw4GT6ILFsB8JjqT
-	WMBsTMKvs1aeE0GDGIjWSn0vGfcVNVG8f/8zADy7+kdbcEVckRgq8SKuZJ/TN8oQYCsPp2XcCg1
-	AK0Bwed5a7Ms9g4fFH9tkAThzHPtxBn3IzW5RpDXlgoVokcxpxZNMf1K/8//9vRHe6XI+8fhcL9
-	ARvB3UzmXGAN8ijiJMdITGaeZ3pCq2gxOXCFWIeEGHCoOhYjBDU3pRPMb+bhTHHSGnauUoXKDTY
-	HP7kcuh0t/NaL6BLmjhA/WSB1vc+RBMxestbwYgsAf+flyJ3wvFeM=
-X-Received: by 2002:a17:903:32c5:b0:2ca:ed57:8586 with SMTP id d9443c01a7336-2d2a8fd38b5mr220542295ad.23.1786359227964;
-        Mon, 10 Aug 2026 03:53:47 -0700 (PDT)
+        bh=v/6jA0iwEsO1NI5+qHVdBrDXRWsEHwRKhdyQ9tPIjyM=;
+        b=kpjxpqlo7I3SyUgiwsnXSlaa3DV9tANwR3zoyr4Ota+Z9mw+Sd/4I6XdJ88qSIYiH6
+         sEPZQnFxrlFxgVpwJO9xVfxKHeVgnQT5MsJcRJDqeqndr1qzdDJsfLdHBLW7g2E+DOr9
+         vAJ9m37agKevWFo8a0PG1ePFBXVWTSIVp1Z9RdrssbCFFe5BuxuxrtVLzq2+GMSma9ll
+         Bxn2T4vplLpI2ZWPvRAe6jYeWF9ix9zOGkiYWcHZRdScgXaFATJwFH0gzziB4yywExUe
+         qqHNRfOpKvw7JuEXeqWs7mWU1lquBCS63cDfBFsTuDq2qh8e9BzrTDRNdmwuXVKRKzkk
+         CZWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786359232; x=1786964032;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=v/6jA0iwEsO1NI5+qHVdBrDXRWsEHwRKhdyQ9tPIjyM=;
+        b=Xft7ck6HcNxldiesdBTzrtUoG2HlZKBcyG2mOUw2fDuwLXCbFmD1DVz+p7tVt8NY6T
+         gl0JdXBZu/W1YXWM8MtDmwNA7CvzcgypVgtiTkMLnQ7h73NjEfag2dyrWW5yFN3D1KH2
+         iwAp2qifI0h2VI/P5TQyU7KSvS7BemnLiKNoVEfwrtjTwA9ceiy0CXPrAUhanysHqmQ2
+         ea61g1kreDtcE9gu+gpBvXaI7mD/vCgUdGPAhIyFJXsp8K/NMZ8dP60AJaq2rR7sK8Qf
+         TqSPyol1ql6R+n09Xgp1svi0vxMW7JEVnk4FO8e5swgTkgZMxOH22N45/Md4OZ2FcV+D
+         28dA==
+X-Gm-Message-State: AOJu0YyLDkyAp3Md5DtAPDmz8ramArpCJq1BRBoqyEV1jNUfaP1NTjQK
+	cOdr3o7GAMZLrg+LKIY5LD/Y7903ynofxGMcgMfqcObS9GjqBI1agHgc
+X-Gm-Gg: AR+sD11xXJGfCfH4qqZvfsk5oTF+sFVD9l0NB85figyv+71OPSl4RwCbvdu1xFlaHuf
+	7LRMJe6x856LjB88NDrl20mYxbxEoidpkPAgpneImRl8lBquG5qVOmrEDRi+lV0dLJrONXqUuu+
+	scEShfzQ8FB1xUQQLYE24aHbfeq7WLs3ak0QFeHgOrgSx8R8lRfASY6TZbieI/s/DcQuEjksOf7
+	LWgwrfQHRMrB4mnJ+x50z2BEUXr4zFlvH6NvA8UWIyIbLNZFnNBmWZljNixCHXGBOTz2KCISYWK
+	zb5aBr7xXa3Cx3kDTzho+l0nltXzer0L6UA3PnZOsmm1/zCfiArog00DjtcbVF14GN4WTLiM9H0
+	H4U/dXx3AWR10LCHi70WJ0VtKLaKCvem+MhPWXhJLiN6PalcxVO0z1QnjS4qsuvGGBQx/HWcQ3y
+	am/lu7x3+N7jnFDOVtNvA/wXf6FXVQ0KkB0YM1xlhrmp6U2onT+qY=
+X-Received: by 2002:a17:903:943:b0:2cf:8131:75e8 with SMTP id d9443c01a7336-2d0ca770d5bmr492858775ad.13.1786359232472;
+        Mon, 10 Aug 2026 03:53:52 -0700 (PDT)
 Received: from thefoxflat ([2404:c0:7028:5cc2:57f2:a6e1:6be7:bb30])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d15ebfcb2fsm32890075ad.55.2026.08.10.03.53.43
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d15ebfcb2fsm32890075ad.55.2026.08.10.03.53.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Aug 2026 03:53:47 -0700 (PDT)
+        Mon, 10 Aug 2026 03:53:51 -0700 (PDT)
 From: Reza Kurniawan <imkyufie@gmail.com>
 To: Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>,
@@ -65,10 +67,12 @@ Cc: linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	Reza Kurniawan <imkyufie@gmail.com>
-Subject: [PATCH v2 0/3] arm64: dts: qcom: Refine device support for Xiaomi Redmi 5A
-Date: Mon, 10 Aug 2026 17:53:34 +0700
-Message-ID: <20260810105337.855546-1-imkyufie@gmail.com>
+Subject: [PATCH v2 1/3] arm64: dts: qcom: Add UART support for Xiaomi Redmi 5A (riva)
+Date: Mon, 10 Aug 2026 17:53:35 +0700
+Message-ID: <20260810105337.855546-2-imkyufie@gmail.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260810105337.855546-1-imkyufie@gmail.com>
+References: <20260810105337.855546-1-imkyufie@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -77,31 +81,37 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Thank you for the feedback. This is my first contribution and I'm not
-quite familiar with the process yet, apologies for the mistakes.
+Signed-off-by: Reza Kurniawan <imkyufie@gmail.com>
+---
+ arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-As instructed, I've added my name in the Signed-off-by field. Aside from
-that, since the changes are isolated from each other, the patch is split
-into multiple patches.
-
-Changes in v2:
-- Split the patch into multiple patches.
-- Change name in Signed-off-by field.
-
-v1: https://lore.kernel.org/r/20260810062611.735673-2-imkyufie@gmail.com
-
-Reza Kurniawan (3):
-  arm64: dts: qcom: Add UART support for Xiaomi Redmi 5A (riva)
-  arm64: dts: qcom: Add haptic vibrator support for Xiaomi Redmi 5A
-    (riva)
-  arm64: dts: qcom: Add notification LED support for Xiaomi Redmi 5A
-    (riva)
-
- .../boot/dts/qcom/msm8917-xiaomi-riva.dts     | 36 +++++++++++++++++++
- 1 file changed, 36 insertions(+)
-
-
-base-commit: 6b8c8af514d739d0335f5579b585e02babe8a727
+diff --git a/arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts b/arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts
+index 4ea4fbdb5..abfaae502 100644
+--- a/arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts
++++ b/arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts
+@@ -13,6 +13,10 @@ / {
+ 
+ 	qcom,board-id = <0x1000b 1>, <0x1000b 2>;
+ 
++	chosen {
++		stdout-path = &blsp1_uart2;
++	};
++
+ 	battery: battery {
+ 		compatible = "simple-battery";
+ 		charge-full-design-microamp-hours = <3000000>;
+@@ -25,6 +29,10 @@ battery: battery {
+ 	};
+ };
+ 
++&blsp1_uart2 {
++	status = "okay";
++};
++
+ &blsp2_i2c1 {
+ 	status = "okay";
+ 
 -- 
 2.55.0
 
