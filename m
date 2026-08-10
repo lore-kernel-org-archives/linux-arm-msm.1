@@ -1,133 +1,134 @@
-Received: from mail-pf1-f179.google.com (mail-pf1-f179.google.com [209.85.210.179])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 417B732C942
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 02:42:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.210.179
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786329741; cv=pass; b=HY1m1CKAEiNmIk2qIm2eZLbLJsv5ABUYNzPYzDStkcw5exYGX93n9wlbvdDZLYferNrV+s5le56C2l5LIAtj7Rx0jOkh+HKPEisqp1IDTadAkZCUASeHH3fxGOL35EZs8lPH5VOV2e8urLzkElq1fjBRn0Fwa4WxisNbTjDjYWo=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786329741; c=relaxed/simple;
-	bh=BzgZl9hnAz3VCgWm+BG62xikp5G3ozdTCOWyDjfeqDs=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=mQa7Ssp8iURTMwDO9tpKa7wm0Q3nqOzPb8uIoUrBrW5AamI92PlGsFEO196pm/bcaQrYKcIp9cW7Ntfhs1zE579Z6Obb8f3Qw9epMFECY0gB6lY8MUrP4dxduDyfPXDfzagc5NpQjpOGmpitJexBMhJzOqQCfvOwFEmqtG+clhQ=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nmHuEdKu; arc=pass smtp.client-ip=209.85.210.179
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DAAB78F3A;
+	Mon, 10 Aug 2026 03:10:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786331453; cv=none; b=GI10CAEc/6CcghMDqsttKgn3b1mVhpPV/9dBEAoEE0ZS5bYwAlwaNNnil+kiyXXRZg/GIZtVCQ7Wo83ot4N+aE4s7+ikgPwsurFsrBgT8I761Xsy2/1aeGIynmOoTLU6RuJi/OVlJKREXamWdCBTm4qDDgek9+yBhJmIGS1s1uw=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786331453; c=relaxed/simple;
+	bh=fK8HnBLQx3v6DMX4Nbt5V1DE5h8gdue7NTN/fhuB+I0=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=W+TFm0HMnAR+arcUH/N9XNquZoSd5ralJeQfeaADSg/uC85OKcKqzwqOu3jvn1D/OC6sJzpmsMy/isbdRAv+hJBsWaCSv8L8TiYTRTHslL/FR1Pg3i67si+qe7IYdhnUTZq+4P+TGBpDDH3Z6ik4T0P5cLRDjN1oTy6T52C1DjA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=eAgyLEcX; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nmHuEdKu"
-Received: by mail-pf1-f179.google.com with SMTP id d2e1a72fcca58-84a652535dcso708621b3a.3
-        for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 19:42:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786329739; cv=none;
-        d=google.com; s=arc-20260327;
-        b=GTucLmUlzUU6s/1IyLT3fVhmGPNsJzNN8n5BNS/ZK3QDk6FtDrcHildWf7fUJ8gkpA
-         KHbW7xit/sSscJKpgpgP2GU/3ShxK7AVYSnvkzDrIBw9kcRbKhmOGqwrGs0ewF+4m7g0
-         IzafMoRcZE0ErP69Fb3Rkw4hBxXGCqV38OGJhSM6pvWGImHsZa/th8V7GtPNxRCgSRDN
-         r8t+fO2JXUAeFoGBxL4BChX9Fsva2V8DsilxTWMmhREcfuVKaOgFP3sWQ8Zhmg7NSDb5
-         N5URmLzh0QgPGrr/MNorFD15hSlobeopybxo2C+FgRo5MTa8tBEpaB6TlnJRt00Dura0
-         rpmg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=ujyD7jgd2uYoNISfol1DV4SvsMNF2Ff35/OcJJPtWQ4=;
-        fh=oHDCMcUrRG8CVi59TN13IOJoIg1Gqtof058R6ww9sxY=;
-        b=BikG+KWXoLZ4NWFbp6+ToASuQDwfNgk0hX5A1a/FwR7wfr0PJWs6329YVuG8hQ12jb
-         tJJR/6GE/9ftn0734GBLfb02pw9rstnwgcrzNjpL0mRHI2MfneCOByhIKM4YE7n87/fR
-         8R9+niGAfgTUTzhMXBoCTEQPWF8mGC98l9QdVyhktTYaPWbBnRDk/Aa/kbhQuMIeI0jC
-         0krXRFxZcWQJfuYDxqb6zDdXr6uIhGCdOd/LQ3JwsRTkR3A8EjxEGc8Vph1T4D/biN+z
-         JBlRyHGyksm6Thy4s7Hg0i9RVgitIjln3Hv5e4JSrLJ0CMTpndBUxp4M21A54Qx8T6GD
-         ILsQ==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786329739; x=1786934539; darn=vger.kernel.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ujyD7jgd2uYoNISfol1DV4SvsMNF2Ff35/OcJJPtWQ4=;
-        b=nmHuEdKuNVQtiPLqYT4axDw7CTNkmeptra2fjMs/MeanTMyMZyQbfYfwD0BrTdxoi3
-         zbbzjufvWw1HpFOulkZ/0WLBYMpDrvJzzb1IDeiAAtfqID3QGtqujPcf2vRq790diRnx
-         XKVCFEWRcZszpVuEVrqxf5jKNet/I/0gsJbXO6oo0fQB1BQQMkiY3XIpV6QJk/6kZKhx
-         xgFRvYJ8OCXp/JAVeJ8vJsfIht3O7mvGo4kbXYnLuJ8cnhfZDnuKrT4ku+wDUeWx52av
-         gpoKARbRMQSkRUaYSBpMvdxJcRb0kVRMrXXSgtSOCyHwNmO57U08iWRdu8bOfMuvO4Rv
-         tuww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786329739; x=1786934539;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=ujyD7jgd2uYoNISfol1DV4SvsMNF2Ff35/OcJJPtWQ4=;
-        b=VrGDiJA1WJS5u3XQxjnJN7ccEWtw55iMUcQuq6D3mOXUv9ZtJP7Anp3IqKsNAXO+kQ
-         4HDW4TTo9G9k77B/mZKerL+8uG7gZMQciRWNmIwRAft9UZtLtBzptZK2k5WmP6NusDaL
-         wFIBxDvZ06jPLl1jokK+TlPK8hWqW2GXOLNSUrG3QdMykPrJQ/zBkAtOHgQ9p82LJQsk
-         U7MMYPzuHpbwDsk6AwHWD4DVpYxS/0lqI3V7GGcPkSpEluuPfm3edSGHBG90WTFxHFdQ
-         uimzI4krB4NSjSCj5N92RDFm4PLxisLJGx4Xkv3+0j9VBJgAQLBULfAt/Qygz8o6/ByU
-         02KA==
-X-Forwarded-Encrypted: i=1; AHgh+RqIjaYszBE9BF6vkUi59eQ/lmFTqj2JPmOz4XRhW2infm8uTzcolltaE05fymtnB39LDBHIpCUBzBGijwJF@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz/06IvQoSpZOj2Kg4XAPRgTOCtA92hgZDj2NH7YTQNWm02u7t2
-	xnQoffweHK3paU25hnmfPIINuwarJbeeiYApRZp7P48zM/egOZ5sjoGACR9CQ7Cy4/E70dW6TvD
-	ZiKFDHOvQuk8/ltmAtmVioJpw8KuJwjs=
-X-Gm-Gg: AR+sD12e89jG+OhJVKtawLXOswplmFBhR/0pbHpCuL+dz0vADM4nWOJiLhc5Ht40iUa
-	6H5L8JusqxBLctRuVv9ycZlw1DN2QJvtIcE5o49BIw8wFQYtOApUGLfgRP8/iVQsBL+Hh0uwJDW
-	ejyrcZHyROEy+xu3PlemzeOBTjm5HQsU+SkXMesBr00IAEHB1Zqryr8U0GfSlyjns8eKvZzrcSk
-	glnieQJir+jw5hCxtPBbD5033eTk6PTKt0R09qNvIzl4IzdpAfkPtw3kinfVoFNULvhbpMJliDv
-	41i7iWTyjA3Wat7uaawsHxzmDfzPa9Pxc/CR0LEPDgJzqE9MIs85oz/gQ/bU9BPl0/YESqYumwL
-	qLLM/1X3VOFGUMvCw4thpmwm0sD+rdyiiHFA5zPoaTCSjnlFJP7WMrmmZ
-X-Received: by 2002:a05:6a00:1d9d:b0:848:469b:3d19 with SMTP id
- d2e1a72fcca58-84f69700138mr18901107b3a.29.1786329739493; Sun, 09 Aug 2026
- 19:42:19 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="eAgyLEcX"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 679L8BIQ3050181;
+	Mon, 10 Aug 2026 03:10:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=jqgKkygFwWrQ9kWy4wutoYOIb9aBgOtf65B
+	XVYCP2DA=; b=eAgyLEcXhHHsRY/QXADMuvBOk2lO31r/90qmiGxXx9k5R3GRrfO
+	h4huWaH4bxG6xdmMiP1gaTINvavqT/XTU8hpE3wIfxwhhv8Z7G3eZuhZ6W6rNSed
+	ch7s1SZZHQRQ8fXsKzNItiuj1q3jT0WVwu80SCXGCVTdhICSB/e8ZG77d6Mh+uX5
+	wvfCeQHEGl54w8C8jXAsZhjSGxiGO5/7UplbvfcMFI9QdqQa/gvJ97VUJASBq7Ii
+	zb+CYXeulrtIyhI4HC2pZq3wP44INU8NGy30JPi1KG4+9NyLqL2EOln8VPnvojki
+	bOKnewibugcRSFV9KEDfS1Q/XIEEbiSzOug==
+Received: from aptaippmta02.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwwmgv3cd-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 10 Aug 2026 03:10:39 +0000 (GMT)
+Received: from pps.filterd (APTAIPPMTA02.qualcomm.com [127.0.0.1])
+	by APTAIPPMTA02.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTP id 67A3AbGa019496;
+	Mon, 10 Aug 2026 03:10:37 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by APTAIPPMTA02.qualcomm.com (PPS) with ESMTPS id 4fwwhhsr59-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 10 Aug 2026 03:10:37 +0000 (GMT)
+Received: from APTAIPPMTA02.qualcomm.com (APTAIPPMTA02.qualcomm.com [127.0.0.1])
+	by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 67A3AboV019490;
+	Mon, 10 Aug 2026 03:10:37 GMT
+Received: from cse-cd01-lnx.ap.qualcomm.com (smtphost-taiwan.qualcomm.com [10.249.136.33])
+	by APTAIPPMTA02.qualcomm.com (PPS) with ESMTPS id 67A3AaeC019487
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 10 Aug 2026 03:10:37 +0000 (GMT)
+Received: by cse-cd01-lnx.ap.qualcomm.com (Postfix, from userid 4531182)
+	id 81D3B20C53; Mon, 10 Aug 2026 11:10:35 +0800 (CST)
+From: Le Qi <le.qi@oss.qualcomm.com>
+To: Srinivas Kandagatla <srini@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
+        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, kernel@oss.qualcomm.com,
+        Le Qi <le.qi@oss.qualcomm.com>
+Subject: [PATCH v2] ASoC: qcom: sc8280xp: configure codec sysclk for QCS615
+Date: Mon, 10 Aug 2026 11:10:32 +0800
+Message-Id: <20260810031032.2001053-1-le.qi@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260807081652.38692-1-phucduc.bui@gmail.com> <2eb8b31e-a3c6-4310-b9cc-7acd135b6c99@roeck-us.net>
- <CAABR9nHqKKbxkzBNkENadhFJgC_HuetV+ab7SVsGH+cwbF+OFw@mail.gmail.com>
- <9971b3aa-cb1f-44a9-9d58-4f75f0c6ccea@roeck-us.net> <CAABR9nHu4pt-Rg8Aq0B6KfKFHX+C1xQmMk6=j8jq1Zn-MQ0p6Q@mail.gmail.com>
- <ccd8fd7d-4555-4ac5-ae73-c16e98b8edc8@roeck-us.net>
-In-Reply-To: <ccd8fd7d-4555-4ac5-ae73-c16e98b8edc8@roeck-us.net>
-From: Bui Duc Phuc <phucduc.bui@gmail.com>
-Date: Mon, 10 Aug 2026 09:42:08 +0700
-X-Gm-Features: AUfX_my6zYcbzcH2Wjjxkf8uek_ej0039cVqQTNpkObFSyVFxGT4TjQ-70scvlg
-Message-ID: <CAABR9nEGsisuuQhLwxdcB9i2sEuH=AQb3yaPHPNecya8G_5ieg@mail.gmail.com>
-Subject: Re: [PATCH 1/4] watchdog: qcom: Propagate errors from optional IRQ lookup
-To: Guenter Roeck <linux@roeck-us.net>
-Cc: Wim Van Sebroeck <wim@linux-watchdog.org>, Joel Stanley <joel@jms.id.au>, 
-	Andrew Jeffery <andrew@codeconstruct.com.au>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, linux-arm-msm@vger.kernel.org, 
-	linux-mediatek@lists.infradead.org, linux-watchdog@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-aspeed@lists.ozlabs.org, 
-	linux-arm-kernel@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEwMDAyMyBTYWx0ZWRfXwHS7QxNtUE2K
+ L7fLjMFC9XkJV3BgNUMSqfojTJSyM0HqE0eCsk5L8V30fxd1Rz0byhKSjBI6Hr+uRrKnu8BFApG
+ FYZpUfe43UelT+NERHt4FOlJMT3m7e0=
+X-Authority-Analysis: v=2.4 cv=HodG3UTS c=1 sm=1 tr=0 ts=6a79412f cx=c_pps
+ a=nuhDOHQX5FNHPW3J6Bj6AA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8 a=VgxNshHlH55NMODlW1cA:9
+X-Proofpoint-ORIG-GUID: wZBwX8kKSwO83NWKCeOgSO-J162zBjPs
+X-Proofpoint-GUID: wZBwX8kKSwO83NWKCeOgSO-J162zBjPs
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEwMDAyMyBTYWx0ZWRfX9DzNo0VdMwZE
+ knY5QlQYUvlPp9OBCLefzmWmFKKSkjzPxf0s2OuwmznNqqmiF51hz7uqGD3RBLC/MnHKGfKG0bi
+ ZRjf3EqrWCdwhoZUZHWm2Q1blAg8diCi+3B+Sdu+hW8toFlctU6OtC+YqQcl0c+Rpm6dx5Wor70
+ S7h3A8ZRSIE4y9jKNfUA6wmHLteYwNihRQKEI4wy/Ye7nSqMfYyd11OSJ3MGRci89Eyx6YRui3b
+ w7/1BzTn39NBQHBxO9MP4UHXUxUDrcsJfbgUs74xDbz2WAJAplGGJIcdpFcF8V8bKkVg5eNay8M
+ IAjb4CNBJg3k+yHCuJqdU/eKPi5LjHI70GEOs/JTAetWOaIpXakLbsqyaz/JJhMRnyk1ytFa2Gz
+ 3jEgAkT6u/jtRWuz4njoQ+amJ4Ged0EhcgT78wFcR5oRm74e10zXT6o0MeA3bTgTIXmSXYnzrfb
+ k8NQ4toHOkWQkrmzpFg==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-09_07,2026-08-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 priorityscore=1501 suspectscore=0 spamscore=0 bulkscore=0
+ malwarescore=0 adultscore=0 impostorscore=0 phishscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608100023
 
-Hi Guenter,
+Continuous high-amplitude noise could occur in the DA7213 microphone
+capture path after a Bluetooth out-of-range/reset event followed by
+reconnection. The noise was present in both the raw ALSA capture and
+PipeWire input, confirming that it originated before Bluetooth
+encoding.
 
-Thank you for your feedback.
+The codec already obtains and enables MCLK through its DT clock and
+bias-level handling. However, the machine driver did not explicitly
+configure the codec sysclk during hw_params(). Enable
+codec_sysclk_set for QCS615 so that the DA7213 clock source and rate
+are configured before the codec power-up sequence.
 
->
-> I wpuld probably implement something like
->
->         if (data->pretimeout) {
->                 irq = platform_get_irq_optional(pdev, 0);
->                 if (irq < 0 && irq != -ENXIO)
->                         return irq;
->                 ret = devm_request_irq(dev, irq, qcom_wdt_isr, 0,
->                                        "wdt_bark", &wdt->wdd);
->                 if (ret)
->                         return ret;
->
->                 wdt->wdd.info = &qcom_wdt_pt_info;
->                 wdt->wdd.pretimeout = 1;
->         } else {
->                 wdt->wdd.info = &qcom_wdt_info;
->         }
->
-> (which I think would be a combination of B and C) but ultimately it is
-> POV and doesn't really matter.
->
+Verified on QCS615 Talos with repeated Bluetooth disconnect and
+reconnect cycles. The noise was no longer reproducible.
 
-I'll go with your suggested approach.
+Signed-off-by: Le Qi <le.qi@oss.qualcomm.com>
+---
+v2:
+ - Drop the dependency note as the prerequisite changes are already present.
+ - Rebase onto current code and regenerate the patch.
 
-Best regards,
-Phuc
+ sound/soc/qcom/sc8280xp.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/sound/soc/qcom/sc8280xp.c b/sound/soc/qcom/sc8280xp.c
+index 597c0d887d2f..913ae81be424 100644
+--- a/sound/soc/qcom/sc8280xp.c
++++ b/sound/soc/qcom/sc8280xp.c
+@@ -462,6 +462,7 @@ static const struct qcom_snd_soc_common qcs615_priv_data = {
+ 	.driver_name = "qcs615",
+ 	.dapm_widgets = sc8280xp_dapm_widgets,
+ 	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
++	.codec_sysclk_set = true,
+ };
+ 
+ static const struct qcom_snd_soc_common qcm6490_priv_data = {
+-- 
+2.34.1
+
