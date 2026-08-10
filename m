@@ -1,156 +1,104 @@
-Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+Received: from mail-pl1-f179.google.com (mail-pl1-f179.google.com [209.85.214.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE36035C180
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 03:58:36 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A72B35F5E5
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 04:34:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786334318; cv=none; b=Ru9g0iz3mlN2lYFaY5GTiMPhmH2wf+a8uolTMybQTNrjR0tUToHh3LkLyXdVvetQDOpDYgMUM9Qc64X7SITIWUNphcRacPcQq6Qek9x5/6YGb58g7cpX/QnXkLPe6Tq+P0p7WiOilg4JYBYMsIIomPX89qZaCcrJyVwdIcbZftI=
+	t=1786336488; cv=none; b=UCJvMDae3BAHN11M59M1pXXZ3vs+XYe/kBshtou5U6qhnilDjPRo7OFesFjS3oDaDIrLq6PWCHYgb+4B+N/jnbELVST14XOMnDkBq29S4H4k7gw8nJSNq4TdfQrpwcg/BwUSpjyM2g5JCs4D2kScTk92hgXDcp8eoflwS1BCpl8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786334318; c=relaxed/simple;
-	bh=B3CoMJndgo3NRxCZvw4SLcraJ/a41eFbyD39O4s7wYw=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=n+cPPlMi/oEgNB8dzE3bTDqpUK2LGiwbXCRTl0wJRAc8uoEHxJRpIbO2Too1CcDS5FDQmokHlQSXeirYOsDbm8T6VwnFrCXNgXy5l1+soZ1dgSFxWZ+cet98iqmYNXal0mtR3Sg1gDlrlOPBLc1CVVXSOzAP6bwn+GdQ+TIm+40=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nWabPFVA; arc=none smtp.client-ip=209.85.216.42
+	s=arc-20240116; t=1786336488; c=relaxed/simple;
+	bh=ymf6y+9WLMdu/6Lp/NMkAcayGa6F1B5Eq5ptSGFLOL0=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=GLgTItsR77H/gUsjwwqRT/eTbZlfcSiQPaImdZdGoKlME3V9vuk0oXm5smtn3e70OKb2HPUlhg30YnZZYQcQh5F9hXfyo4BJ33RhSMdqRrAfLZlMoqT+CZx2or4a0pWkzJXG4sDrggVpMeLDNOuGUW3z8EppkhPRwo5KPWjVh+k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=AXD7/PR7; arc=none smtp.client-ip=209.85.214.179
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nWabPFVA"
-Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-38dcbade417so1285670a91.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 20:58:36 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="AXD7/PR7"
+Received: by mail-pl1-f179.google.com with SMTP id d9443c01a7336-2ceaf8a1265so22732585ad.2
+        for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 21:34:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786334316; x=1786939116; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=QEU+pp4CCJstwvmXVbRVK0utyTpf3g/1fbsNABHVlac=;
-        b=nWabPFVA9Hbqhsa9uPstQfLXQ7vyaaUhuOglyGYoEPrv1EYnOdNDASMDVADIrgZwg4
-         ayKcILn2wgNlYAzW8AQRoU0WJZe5fKNGaNKo/PE099FHpGnNDRP4mrrVUAnI13aPJnsV
-         PgmwJF8VkqV3YuQ1UtVgk5lScavn7Vw/SUd5UnUE/yALHvl/0e0BvuK+a7E1W4uenHRQ
-         UNCsXVmAEfhEUHnZsySf2+MNB7It+R+8B2YHFYmqBD8Pn+CqdvXPQdhnjgdYcj3F0G7v
-         Vk/chal6h02EBTlvIsDTYlAq6DT7eybKKtSGgnVueK4wkmCnYFS1anz2x9XDbXj0or/H
-         MRkQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786334316; x=1786939116;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
+        d=gmail.com; s=20251104; t=1786336486; x=1786941286; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:sender:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=QEU+pp4CCJstwvmXVbRVK0utyTpf3g/1fbsNABHVlac=;
-        b=muA+PIAvqlD/HPByPHlX+WzLOJvwrkHFXINX15Su8Y3g1dR7vBlBgE7Ug+kUlde7FT
-         smUjcJjj7V+9TGehl5VlZrpXBOA1IPpbbwkyM/kh3kP1AFRlUJJbeQOysDxgQQkdwcjn
-         T6mPdJo616RSDJ5DoXkpiMlUahNnSPVxFVa7TG8Bgehhf1q6yHMkrKbo2OShbTIGEPoK
-         b3BCoh/Bf4IzsVDuKNiht1f+F8JzOlS75GXkUOvE5hqI+Namyc9bHHfSO0QhbjAdNja5
-         dvs4XWPMzHIJxgpas/yz8RE8t6MNquCO02qkWmIiyn+wF8I1bOkgJdNhI4PJFSJIVSXD
-         WsuA==
-X-Forwarded-Encrypted: i=1; AHgh+RqJFcFT/XnzxrfBN7wMJI/Nmfrh34y/kjf193eODoziqDuVJ+sWo1pwaeTitv7sIoC3u5H48W2gOyydPaaS@vger.kernel.org
-X-Gm-Message-State: AOJu0YxnN8CDb07GrOgC7t6Of7rMgqAJ3A/llZS4pY9f1/xEntNShW1e
-	0K3NfcHihVa9er0d2F5IeZobew4s36Btn3x1H5ETlE0R+WvNNX0iNDbH
-X-Gm-Gg: AR+sD10GTlZ6K8cnX/SvgD7l8B0Q5m+dq4TfHLrUSFqsu+/ysxSdv6H2bSoeB/+r52r
-	a7PIspy/+GQfkh1Rl2r0EgizTm8srfdFaZzoAXp5nrFyWgSwuwxC3nTY6hq2R78+/Mta0HP7qeR
-	d0Rrk6wT0X2q4QmrOb7VhTpwBYoNUe3ila+bvnQ6BvbVbMhwdGwawEBRVC+3H4GobBJOjHLh+Nm
-	wwtTjcMi4BJ6MGe9UCpqpfQqmuKpXcj2e9+LCr/YLix6qgPbD5Lp84H3jloOPrmqBBwi3Kf+411
-	PFSQ2533gBm/XJMJOcf9CPQAPKdSfUdV0mWXUCP+iE4KE2vsxNKkcUX3AcZi6dtGwhv2tS/iaKW
-	fnovrxVcqCWg3sh0GE+slGCfnM58fYK+WHDDWoJSBRzsgdW1/gCO5eD4ELDm0p2rrT/XnxvroKV
-	PFRpdBtBgVk91q/1gBwh6mx7Lbdxib83SNggOxJUb+BM2+y5LizhkF1MCxdpEGmXJNPWNkaa6GK
-	tm3gXQbT0Zts0MHjUktKhaIKXukMi1FylqljUfS5+4OF5orIQ==
-X-Received: by 2002:a17:90b:5244:b0:38e:9eb2:9d43 with SMTP id 98e67ed59e1d1-3903c5b685bmr38481045a91.16.1786334316290;
-        Sun, 09 Aug 2026 20:58:36 -0700 (PDT)
-Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315bebde353sm41638500eec.23.2026.08.09.20.58.34
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 09 Aug 2026 20:58:35 -0700 (PDT)
+        bh=d+3HW+UbDinwr8l0lTIom8vJ4+7ShLxx8WvyQiMaSHk=;
+        b=AXD7/PR7+DWs83Vp4HCoDcNKoa4GtvK9vivXxWfI05X6wGMAgKHa++IqRxyIv4+5V5
+         U75T0IlbkaudoN0e6yLmS+Ec/MuLikXNs/OB49z0nGWuxJC4aI+9PKss6tYaD8ldoWyl
+         UIfN12SIMlOtztq9EXhQwE1S7walfMF/RBfPJvxYIj9okkz0yGuLLHqtK2Xl5LJvYC4H
+         N7pmIv4rRsy7b7hIXqgm93hIYnFdi275QX/+8Zur6Xs7LG6XtUSRIvGw4y7o4xNsXKvi
+         whh7G9MvEdWdsJC/kXbNC2scBJN2L/Ud2NmZVdI+ZCK2sri+8UzrB2zkTr3t2HfAk2RU
+         VDtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786336486; x=1786941286;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:sender:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=d+3HW+UbDinwr8l0lTIom8vJ4+7ShLxx8WvyQiMaSHk=;
+        b=APDpWHGUGTosG/x0PiEg3JGeB0lxSnL7Ix4T69XjNzPwoJpdyshFduxmpeXMNJtinx
+         yKBkeZafx/V0AhMfXobfubrBG/lY2h8h3qVDj93XQgCsF8AfezgOKb851z/ZJ7SvkzZ8
+         Vcp3FlS54A0zvSkQEaZtZrWw+F1zMYb5Enn0uoB2v95PGaefplEWMIKoXAuIT3Z7bXgZ
+         Z+qEy3mwbX3Au6aZ/+A8sfNre02kcE4SxIonH5IKqoihkz1QoQM4mMLH2ngwtIJxgLX/
+         VFcSCJSQ9TW06PzS5MrUQPtl7P2c2yRw9tWsVJzzY3WKsCHHHH74DMSfzH7nRe5qq7i6
+         +j8Q==
+X-Forwarded-Encrypted: i=1; AHgh+Rrkn20pLDMnkvau9Gu7M2gL6wkZCMiQve6a/Y7oQoHygqD5+A70VyohvXL/Dhm1MRf953Oq+7yVCxdtrCj4@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy/fmG9F0kZtFPs+42HiFJo6StfkzwKPp+QiDNTeEwqTunQpKYC
+	RRUhetKgH3ctjeumSgwpOnTpwmAFciqVfTtwLpFGOtSRa7psSQDtjCcwbHL2pA==
+X-Gm-Gg: AR+sD12ywPonwqTptAilhoTb4RE9YY/W4uxUKcpzlXm+REB8FkUEACS6QD5SjsY/tmi
+	ruWRFq2jBe00bpWA81OHArzfs+87NT39eay8U5WuV5XxOTtGywrm+KQEWua6/pqaAbseNdwb6ID
+	Lqrt0F/gFl9yO3uZgYYBiC9MsQDgxdHCZOsGc1nckOwuEvGjVgUWlrdZ/U3swqN0wje25oC67n/
+	yxDhK81RXLd86/fQZ5qkY8EDvJny/7tXn9+CbUF8+bt9ghoNaK+ysnMK8IqpQAFE5Nke+FSY+pO
+	NevXAq6uxJHUaBfthgJofLK8Ps6OENYbbwm3GWZw7lizoWNfBSTBdqiH39oFtNjF4wuikXW5+Zi
+	s/hCR8ND6KCc4CKnYveqfmF88rJ6LKs9eoS6biBZKhcij0v336/rfCExOwZpHKXgF/C4HErgU0z
+	CbQYQ4u1a5l5hQLZ/F5/fd3VsxwXwZL+d+SCjVUL+R61b5iE98UBl1HEoiG1d58l0ybkpIwrtfQ
+	nR2zPNnydwk
+X-Received: by 2002:a17:903:ac4:b0:2cf:a1c0:d4ca with SMTP id d9443c01a7336-2d0ca961ad6mr521823535ad.22.1786336486542;
+        Sun, 09 Aug 2026 21:34:46 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d16c502bbdsm28714455ad.81.2026.08.09.21.34.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 09 Aug 2026 21:34:46 -0700 (PDT)
 Sender: Guenter Roeck <groeck7@gmail.com>
-Message-ID: <3a9b7b85-e6f8-429a-91df-f674479dee58@roeck-us.net>
-Date: Sun, 9 Aug 2026 20:58:33 -0700
+Date: Sun, 9 Aug 2026 21:34:44 -0700
+From: Guenter Roeck <linux@roeck-us.net>
+To: phucduc.bui@gmail.com
+Cc: Wim Van Sebroeck <wim@linux-watchdog.org>,
+	Joel Stanley <joel@jms.id.au>,
+	Andrew Jeffery <andrew@codeconstruct.com.au>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	linux-arm-msm@vger.kernel.org, linux-mediatek@lists.infradead.org,
+	linux-watchdog@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH 4/4] watchdog: aspeed: Propagate errors from optional IRQ
+ lookup
+Message-ID: <443b829d-67f1-4af0-9e07-021e1592bb0e@roeck-us.net>
+References: <20260807081652.38692-1-phucduc.bui@gmail.com>
+ <20260807081652.38692-4-phucduc.bui@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] watchdog: aspeed: Propagate errors from optional IRQ
- lookup
-To: Bui Duc Phuc <phucduc.bui@gmail.com>
-Cc: Wim Van Sebroeck <wim@linux-watchdog.org>, Joel Stanley <joel@jms.id.au>,
- Andrew Jeffery <andrew@codeconstruct.com.au>,
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
- linux-arm-msm@vger.kernel.org, linux-mediatek@lists.infradead.org,
- linux-watchdog@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org
-References: <20260807081652.38692-1-phucduc.bui@gmail.com>
- <20260807081652.38692-4-phucduc.bui@gmail.com>
- <1f26fc28-da13-4ca3-990f-676b53d23630@roeck-us.net>
- <CAABR9nFy=GD4afdDxzsbp31Sq=smGVFf+HvqsrJKh_FjqdUrJA@mail.gmail.com>
-Content-Language: en-US
-From: Guenter Roeck <linux@roeck-us.net>
-Autocrypt: addr=linux@roeck-us.net; keydata=
- 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
- np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
-In-Reply-To: <CAABR9nFy=GD4afdDxzsbp31Sq=smGVFf+HvqsrJKh_FjqdUrJA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260807081652.38692-4-phucduc.bui@gmail.com>
 
-On 8/9/26 19:38, Bui Duc Phuc wrote:
-> Hi Guenter,
+On Fri, Aug 07, 2026 at 03:16:52PM +0700, phucduc.bui@gmail.com wrote:
+> From: bui duc phuc <phucduc.bui@gmail.com>
 > 
-> Thank you for your review.
+> platform_get_irq_optional() returns a positive IRQ number on success or
+> a negative error code on failure. For an optional IRQ, -ENXIO indicates
+> that no IRQ is available, while other errors should be propagated.
 > 
->>> +             if (irq < 0 && irq != -ENXIO)
->>> +                     return irq;
->>>                if (irq > 0) {
->>
->> This if () is no longer needed.
->>
+> Propagate errors such as -EPROBE_DEFER and -EINVAL instead of continuing
+> probe without the IRQ.
 > 
-> If we remove the if (irq > 0) check, irq can be -ENXIO and would be
-> passed to devm_request_irq().
-> I see that the irq argument of devm_request_irq() is an unsigned int.
-> Would it be safe to pass -ENXIO to it in this case?
-> 
-No, sorry, I was wrong.
+> Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
 
+Applied.
+
+Thanks,
 Guenter
-
