@@ -1,440 +1,207 @@
-Received: from AM0PR83CU005.outbound.protection.outlook.com (mail-westeuropeazon11010015.outbound.protection.outlook.com [52.101.69.15])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3AB673DA5AF;
-	Mon, 10 Aug 2026 12:43:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.69.15
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786365816; cv=fail; b=elDwZcQbQxV1JzH81OF/I0Kowd0T7Lq/H6cwgQ7X0mXcYRjqxGS6S+yXWAGXuc/Syx95yBpNRfige/Y1X4rg8YoByx1k886qVcaFRi4GRp+sqEmaIpxCvjVdYoeTvF9PGYbADdcER3/Uv2YWXmNUkVc5rr8YNV7mltxl1UdmgKQ=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786365816; c=relaxed/simple;
-	bh=L1ADpQKeXGL0liuYUxZzasdnRDNYGQT0zf0A9XPeng0=;
-	h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=OlesOLybyyUz7sJMVSl4gMhO65RuYmFv4Ln4G+nRH0JNkkZzs2SF68ASbM6n8XSsoXIGtbSKSqLq0nuNaHIgRkOd7V9Ovvb0dI1ZyCYI9yG/esmRROhadT9zTAVY5af2vMiOR6xPivHSH7arv3vLv2Dl65Tv7s1OVK2LiSvCWXo=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com; spf=pass smtp.mailfrom=nxp.com; dkim=pass (2048-bit key) header.d=nxp.com header.i=@nxp.com header.b=jjJ6bW0v; arc=fail smtp.client-ip=52.101.69.15
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB3093DC871
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 13:03:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786367034; cv=none; b=RoWhRMrUh93tVRn9CBkcKRAu5nG3HM6+zyUqdcIpNkPhPVthHw25Gy0x+7A1glFSv3u9BPQMNxGSznTmeX88neH7L6wOXLgnk2wGyJCzSiR4/HTrb2ds2epJHM0WUT7wE/+D+9oigxChYj5ipGpeYdv0mBG9b4gZ0n1ouEjWz1M=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786367034; c=relaxed/simple;
+	bh=m40Rp3I81B1eyjB2LkQVrAzrBYtU4DsPF+9Y780JXW0=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=CcgKXmsalOwzGWiJvYm38q5+dz14rMy4ck5oVqaYwQgR9RUlJmt8x6sJPvaF1nArvdd8hefYtUlvHViHpKu3Og2Rz8oSmT5BzoX2saSW4f2FLr96D+vgWBjkDJvpj9fdz8JfXefTsGu499sMhssv511lUeq9g2//lQ+uvebc1T4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=G/wQidsP; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=G5isy55x; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=nxp.com header.i=@nxp.com header.b="jjJ6bW0v"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=P+tl+9JzyOz7d3zYwrI7WRGHdCKD2nHP20qZn+VAw2rkZaG30sHLsCIJirt8353wUTXtNqyRO4KY/Q09WVTYIRDqfDG2/xE3HPjEIAmP1X1H8C/nqFt8MCe6B7yVixa8eXT353hFehuLG04FyLdrchb9RNR23GxSGn/k+YWO4K8geISUhdGBj0y8coABEUW58x/vv733DR/maoBltrWGkGK9zdUPav7ZWSt6c46KOEjsMtDVIJ75GxIMitaBCCnocSf3M3Yy3+pEGWBpkvJbfhWAa9/9+E7LBEwLSx1bvlDIkDD1HBPRqqX+OdvvFcONkr3vmXfwFERAZjcrcmkbEg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wuk0mfD52jXS1Cz7cM9gPx5BJJ4Zj+YQ5QxY2V57xZQ=;
- b=EpeXzl1p7a0U/cTAT6DtEzu+5kCXXoL9lD3tay1sbLM2XtfBCo9BE64eYZRSF4lhMr0n9Nx0hSc5AM3xOskljTLn/HjThwjLSk7PTXWq+TSwDdiL5xuPCXN9/30qV1nOMA/FFRfBQLV0MhrvzpQjra+E2mZpPoPfdNGYnH5EQtRF8zMKzmJtIdsG38vwvACtjZeVIVZ5i/+HL+MDzQmisFIYRKp++labyx9lNwW137KMS1mi78dCwVko+9xC1OROn8qNVW89AuCsqW18tWgxFXAD1XS2uACfFY30sB1ixzH2V0HElIDJDruVkAftXKJkoxVPrfS6OmlhDHUAJKJy/w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wuk0mfD52jXS1Cz7cM9gPx5BJJ4Zj+YQ5QxY2V57xZQ=;
- b=jjJ6bW0vUkX5MpxennrFFnF5t/1HgUp6kuwbAnk/3+Vq/w/BCjiegEBkUI3wDNYNyVOIEaglxDQHjDC9ZVxXxEbVscOx8ftuI+oubw2lLFX29SdZcCPfTUXGgzMHLJ8LFfZE6zKmwC/L53jC+8wc1f6IQqL+GugFn11xQZpNz84SMh9kjT/O11X8oVtm2w+gHK4LWskcPjOkmS/H+Z9578gV4jGqgaEcVQT5InWML0bvZTejqo43ON873iELB6IoljhmXTEGu3aDkFp49jFnnzwFcVRNIn3ro1S5zu/4zuNYZ8vQ9BISI36k52Vc4Md15umuFrNYZ2PyOmkaz2aHag==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nxp.com;
-Received: from AM0PR04MB6900.eurprd04.prod.outlook.com (2603:10a6:208:17d::10)
- by VI1PR04MB6861.eurprd04.prod.outlook.com (2603:10a6:803:13c::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.292.25; Mon, 10 Aug
- 2026 12:43:30 +0000
-Received: from AM0PR04MB6900.eurprd04.prod.outlook.com
- ([fe80::7fda:8431:ca1b:b023]) by AM0PR04MB6900.eurprd04.prod.outlook.com
- ([fe80::7fda:8431:ca1b:b023%4]) with mapi id 15.21.0292.024; Mon, 10 Aug 2026
- 12:43:30 +0000
-From: Vladimir Oltean <vladimir.oltean@nxp.com>
-To: linux-pci@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org,
-	linux-omap@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-rockchip@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-riscv@lists.infradead.org,
-	spacemit@lists.linux.dev,
-	linux-tegra@vger.kernel.org,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	=?UTF-8?q?Krzysztof=20Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Vignesh Raghavendra <vigneshr@ti.com>,
-	Siddharth Vadapalli <s-vadapalli@ti.com>
-Subject: [PATCH v9 3/3] PCI: Remove device links to PHY
-Date: Mon, 10 Aug 2026 15:43:15 +0300
-Message-Id: <20260810124315.433448-4-vladimir.oltean@nxp.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260810124315.433448-1-vladimir.oltean@nxp.com>
-References: <20260810124315.433448-1-vladimir.oltean@nxp.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR2P281CA0088.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:9b::13) To AM0PR04MB6900.eurprd04.prod.outlook.com
- (2603:10a6:208:17d::10)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="G/wQidsP";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="G5isy55x"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67ACj5b61343233
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 13:03:52 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=EOgm7v/K3P/qkisr1KlAsK
+	ge9khjyZ+MY1UshzBCdM0=; b=G/wQidsP/zRdjI61YVOxBpyx/B2YBw2H/9cVZ0
+	RiuwhAJ0lc9Q+mwO4M/XJektG275F2PY+GnnD8HnatNlywwcwrqnE+uRjCB4qT/a
+	gqCoc563eOxzzQlMIH1H9b8FNhqX8P8uxZWy+ZjdYuH6mz4rTjCS9P1GaRHPokE6
+	LsixI++IIPyuS8uEGWqI3E1eoJ3Uc3roJQxqQFFyUE6P2ZUD0oQCtwj/2+zD+KaL
+	5FiTj1cAXc3nbDOl7ZN9sg2lr+0yEuLHRkJdDcztmHH3dhuSC7oTpFkjEiGeyJVM
+	qT33PyZLqwPP+utYmO7HHK8OWveHyCDEqQv1bMP3d9ls+Ntg==
+Received: from mail-oo1-f72.google.com (mail-oo1-f72.google.com [209.85.161.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fy8v59jmp-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 13:03:51 +0000 (GMT)
+Received: by mail-oo1-f72.google.com with SMTP id 006d021491bc7-6ae35c7b9a9so353584eaf.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 06:03:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786367030; x=1786971830; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=EOgm7v/K3P/qkisr1KlAsKge9khjyZ+MY1UshzBCdM0=;
+        b=G5isy55xjPYk2GtLisxL//TcI7/VoVUuU2R0L+4pUeHg/5wlPR0hCkLkuDnhKZBy4V
+         /kYETdeJrdnEnbXHwdEOoCKOifNqhFYHSWYVXkPn7f6AXqBKRbIF3Y7LK0KsVT+AV2WU
+         9/hjNLgGqIuCSPg8F3xpFzj+E+pb5qgZyaqL0vt0CZ+1BVZbLxaCblOhesYWIvVKDwhJ
+         oFEyRN94VK9RGVgAJZxIBcyTQ5JAz75ifNs6t0KdIpfnaaucP7qe5pyM/thzrjnkVlQj
+         x3/XUZNO/Ugd4wZiZz1ih9p5UeYwQqbUpO40Ws0/LU+JNiRUBrTs237e3phOE4XPmJNo
+         SucA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786367030; x=1786971830;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=EOgm7v/K3P/qkisr1KlAsKge9khjyZ+MY1UshzBCdM0=;
+        b=k8D/ihwza6z/GMWPtS4hL9D1FjAdX3GSjiw28rnvcwVG0qgmL5aKlo+OgYDV+l5kgK
+         jrIgaMdxKjk6mKzyme4WfCyioqaTM7u8IsGpLOsTjfL5Lwij1ZapGVcPQlfnkrIZkFby
+         W9r6fVndWuj9l5k3Xr2pcn4lVBhpBw/6uIuN1vKgNJz28tGfqm2UM+89O4I+75B0+PZ1
+         R+50boh2ckWmo8ezzkU5UfwCHVx9hH4vAhp6lYaQ66e+1DZqOOxx+SI7bslbtOjZMyK/
+         F9SY62tYlCBDJxNfigHiwp7y/Na8smOmFu/u+dao6dXQEcuWprFC5SFnu9R1ZUANrh1z
+         hKTw==
+X-Forwarded-Encrypted: i=1; AHgh+Rr0QPkJiDkAj2lprfzXKgaMWDpVpD6w9J9rQhcUUXvha4GKP5mQ/wOSy2lVilARVrzLPD4BFtJalnLwpHj2@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx2NeFndnDEnpAMjJAm9WoccvPjPLmOgCtOq/0DH/6Umn2z/BZg
+	ZcQaYrlLs8F3aVlSyWunfbXMLxq0VQjXeUVFpUVgSrS8fKWlBtykgmoH4R/2RIkLpowDy7xAIE0
+	DmdehZ1X02JPTWKTup7iPklf4FWTd6f0uueAXXrLjLK0DEXT6Y39l5kEdqsyawUMQ0fHlyzovQP
+	lr21k=
+X-Gm-Gg: AR+sD12+wuyOCmpAMk7f7eQIfaolcADOyJVLNz3D4x9Z5EVTjCdtBesAqYVHYHr3scA
+	1ucCOKqDXoaVBhfzBH4EtUvs4P98aLDX/NY7vIWqfQBtHyoUBriCKSmGGPbBNPGqk8KRcs3TI1O
+	DHq8ocr5Rz77SRLhhn4ryV4Kude9TMr4AcQa8hZb7tx+c5Ah9Y5CjqGYo9ZbrraOsjo85uJ6Ci3
+	EQid0Z7lhPYkYNiN/D/w4uwX4o6DCIvFjU28p4dEUcyRnvpbITR68uDMhHFXVBjw+e1SK0BNUlM
+	2h1r0RJEmLxzumSiUdMSEct52/GIaWLxwwWCsi4BGkMjdPj8643+cC37POsW2xC02MB3dlzDmtg
+	dqlJt601P5p1Roc09Gj5M8NTzG818nOWg/nlwTziCpc0V89Ga/kiTifHk9MBs8mcq
+X-Received: by 2002:a05:6820:2013:b0:6ae:a9e4:3d25 with SMTP id 006d021491bc7-6b041ee0698mr9998676eaf.3.1786367030492;
+        Mon, 10 Aug 2026 06:03:50 -0700 (PDT)
+X-Received: by 2002:a05:6820:2013:b0:6ae:a9e4:3d25 with SMTP id 006d021491bc7-6b041ee0698mr9998618eaf.3.1786367029818;
+        Mon, 10 Aug 2026 06:03:49 -0700 (PDT)
+Received: from hu-ggarmidi-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-459f1a9e431sm8218971fac.6.2026.08.10.06.03.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Aug 2026 06:03:49 -0700 (PDT)
+From: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
+Subject: [PATCH v2 0/4] arm64: dts: qcom: Add Glymur QCB
+Date: Mon, 10 Aug 2026 06:03:26 -0700
+Message-Id: <20260810-glymur-qcb-v2-0-9e6ea7987b9e@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM0PR04MB6900:EE_|VI1PR04MB6861:EE_
-X-MS-Office365-Filtering-Correlation-Id: 96619bf6-757d-4798-915c-08def6dcfb96
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|1800799024|23010399003|366016|19092799006|56012099006|10067099003|11063799006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	icsor8+uPeiW/AYL9HpqOmmDJ63fl274sPAVbE8+SrQzCglYSAeXsBR5zCsBfPN/H8X89olKnooCJRZpqUMl6Mmb6FK/xiPi00dSfIK/HY2FWVoffOcT4p2KKocPSaNMS/k8vZmpOfs62yLysmd+CnZfeGYzcFqZKvjHAgHuMhHm496ecrFsLldW6F1hd4eAiqNZrZBDm5uuOJv0CXHr74UiHxI8eskr88l/mcefNXPHLCcor4dCXyKz/ABo2qfCwna0fmR/VFyo94cN5XDBOIuMTQcIKBYI02kc0EEY0knNHjwLemfsiMsTgaP4A5Roh53PpDVJaBRv3pLGV74td7efgGA4nIghs++eywKdLfoZ98iUKpNAnnf9+FFtmqytTcV4cdEff0Do1393xDkdhBeUG6Ju+F34Ipv2e0q5XCtmzdOpOGPT+DmVt/Rex3Y1ymNeoL2YWZ8kQ9g+jouftP853o0wv1cm5Ny1o60tYwhL6dPZoXK59YV5DoD7qbnx8aP/xIEFvPqa1XaO+KVcBSlu07tz/lV6UbKuzqclk5sFXvBkTU7izH1XYD2KWlJ7Kfh+uIUQxSvQyS69WKbBIWzYh6tMyHSiOrPtl74ka53zcZDyx0r7LT6LrFdrw2vnf+2wT5w/f5KRMS56UhMJzBE//XFwzX5od63A2MYxB8s=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR04MB6900.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(23010399003)(366016)(19092799006)(56012099006)(10067099003)(11063799006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?LzZJODFRcFBvcDM5Q0o4VVF6YVdhMVlWenhaRXBDT1dWcFhBcDEvb2FEbDF1?=
- =?utf-8?B?Qjc4eWdPM01BdkgxTTRtcm9kT2hIbkhKem1YUnNZdHNweVBpQkpvdEJCVThW?=
- =?utf-8?B?TWo4VWFlemJDUUs1YksvVnlTeFVESTdhMjNyWVVQWEJaNno3RlB0dzZTbTBG?=
- =?utf-8?B?Ly9hZnp0MjNpdGI3dkdRMUduZmUvc3d4bTY5Z1RBQVpSL1RqQk1GditKdjAr?=
- =?utf-8?B?RzR1ZGF5aUlDNkQxRGNoNUROMm5IRlYvOUNGVkNhcnNXVHlvT0JTQXF1RDNO?=
- =?utf-8?B?Zmp2SXJyYjhmN1lPOVcxTU1WZzhyMlN3MXBHNHFnU3dvOTRRVG9mREl0dUJa?=
- =?utf-8?B?aUNhelhyMVhTVWw1UXFJUnVZWDlCRnMzL21zNDZzV3ZsNENxRFdyUnRNZG9N?=
- =?utf-8?B?cjREY2x2eUR5clZlSnh2SHdCVnRTM1duVkhYOFlUMGdYK0tZYkJrZi9sMER3?=
- =?utf-8?B?aG5aK3BzUzZKcExqWVdCWGs0WVVoVEhzZFFpbTZvWUFIeENDZjNmUExQSC9H?=
- =?utf-8?B?bHJRSXBxSXd2SGZ2OGtXVEJpV2lBcWZESXJvWG82QTJPVWhnOTZJRlRSZHNs?=
- =?utf-8?B?Qm9MU3h6T0xzTnlEQ1ZiQ25ocHpZUjQrQ0dIald5Z2NDc1pWR3ZxY0h1YWhz?=
- =?utf-8?B?dFRqUjlvaXdRWndkYVdUTXhrU0dERzJmeW1mNFpCODNZVkYrN1lwbWlScEl6?=
- =?utf-8?B?amRGTHVLSFZSV2JhQWlCMklHZWlSdEhzcW40eFJrS3lDOEE4ZzErcEdEV3hD?=
- =?utf-8?B?ODA5UTlDZDgyMk40WUZoMllvOFlRNkdJUWpmL0FiUGpITFNYYXUrbEZJS1Ra?=
- =?utf-8?B?QWtsT2FHMTFWQ25BWVovZjc3cDdISzJqTUNHNnljaFcyc1Jhbkw2OWFVTVYv?=
- =?utf-8?B?VHJPTldYM0F2WlFzRzdqVXVrRGxpV3lYVisvUDFaaDZ0N3FjQnFPNVJKdEpW?=
- =?utf-8?B?akJHOXE5K2F3UnJLak5JYUIrd0lkTGlXNHppRWRma2hIOTNJSjd1eDJGa3JE?=
- =?utf-8?B?YmV6eXMzNk9qbGRJM2hFTUFGSW9VQi9haEcrUjlIZGxsdU1wQlRNbU1VM24x?=
- =?utf-8?B?RG5Kd1hmcDRTMVZqeVF4UG5YY2g2dmM2d3ZlNFdDZjN1S2xDOFR0QUExaUFX?=
- =?utf-8?B?OG9xaUkydEw1R3RHTVdOMUt3ZEVSaXJBN2JYZU0xclU2cFpoNVpnL3BZaFcy?=
- =?utf-8?B?OUZ2a1lkWjZjdVBuMlRZYldxZEdWZEJBeDZXSk5YRi9JTDRLOU9iK0p1SEs1?=
- =?utf-8?B?K3BEbkF2VTZmRkpEd214ODR1K1UyakdYaUIxSjRMWTdmQnEzMXduTHZBZ2lm?=
- =?utf-8?B?eEdmT2g2OEV6dEU3L2J6ZGxQNU1jR2lzYXd3NGtvajkrOUpHNmJ5N0w3RGhR?=
- =?utf-8?B?Zkd3ZVBjN3lNbVZJV2ZKQUtBUnBxeTBMT0F0a0RwSzdTVmlMV0tYRnRiSlBD?=
- =?utf-8?B?cnh1U2dVOUFSVXFIbXI2Q01KL1Z6VitnVWdaS3RrSkpYaVZ3NktWR3d5Qkps?=
- =?utf-8?B?enh6UC92SGpraGZxVDZ0Q2hOb1RiR2cwZ2hLSjUreG95b3dxNDBYUFR2Wklz?=
- =?utf-8?B?bW9MVm5IVFppNGF6OHpXZXpSL0FJS0xZV2dUS2Q1RDUrU0wwMCtuVGVnQTFa?=
- =?utf-8?B?QnRiSTlNOU9lcEFkU3RMejErVlZNV0d1UGszOGdGK2VSUUJNbFJOM3Z6Z25S?=
- =?utf-8?B?MEdYZVRXQWRGQVdsVkFuekFTd29BN3d4RWhtU3hCZ2pHemFsZjdxTzRsNlpy?=
- =?utf-8?B?YndWVnhsZ2J6bmRROUVxNC9Wck1GTjE3ckovZnIzeitJclA5aWkwS3hldnZL?=
- =?utf-8?B?MXp0aXg4OUF1dXJCV0tMVWpHUitTM2tNQ2xoTWJzU1NJVWtnUzk5NDJsei9i?=
- =?utf-8?B?amxLMDhGUkpBS0VhWEZVMWVmbTZSbVdEK2p3ZThPQ2NQNkZIU0hvSHVITnRu?=
- =?utf-8?B?SzFic3pMekVYaW1BK09JZ053WDNpUjRla3gvWm8zblkvcVc1L3RhYm5ycm52?=
- =?utf-8?B?OFRHNFJrKzdPYjZWejZqS09uSG1NREoybW5VekpRT3V0NnErb2VFSERQUFpv?=
- =?utf-8?B?aUc0MlRTdFB6M0RQT3VVVVhld0pzSWZZVlBKaUJUcDIzbExlaUhzR0p1ejZJ?=
- =?utf-8?B?YkZhNmhVWVY1NGZ5aURQMkJneXdSTHpSdFFHVTZIT1d6RDlFQVJOMVdWV0lQ?=
- =?utf-8?B?cVQ0NDMzSVFSbmFYQmxIS1dBdks0RXUrdFZrZnF5WDdNMDhQQkRqVHkybExS?=
- =?utf-8?B?OVdxQWJTSjlVRjZCRjhqMWRHQ091dDhSZlU3SFNqajBwYnNpaUNqeXBjRlhM?=
- =?utf-8?B?MlFCQnRUTm8zSjg2RWVyeFdUOHN6SkFwTVM0OG9aVGkxaTE4ZEJQdz09?=
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 96619bf6-757d-4798-915c-08def6dcfb96
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB6900.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Aug 2026 12:43:30.8161
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ScSUc1kVhg03FaScWJh+U+Age6dMzR5s7rCqkVS6FkqLTZWwQ2qd2EpxH019+dcOCcw/EwzVfC3IhbXooQI5oA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB6861
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAB7MeWoC/2WP0YrCMBBFf6XMsyNJ7DZaRPyPxYc0nWjANjbTF
+ kX675u2Lizsy8C9w5w79w1M0RNDmb0h0ujZhzYJtcnA3kx7JfR10qCEKoSWEq/3VzNE7GyFklS
+ tKnuQO1dDOnhEcv65wL4vq47UDYnZryY0xGwWZpkdV6Q4/CI5WPvAscAcZeG0UEp/5bo+B+ZtN
+ 5i7DU2zTeM0Z1WGCWfH92XW0rPHz4cFzNE3z32Ir6XWKJfsz17/bTBKFGiMk9a5fW5M9S8MLtM
+ 0/QDTa5bYJgEAAA==
+X-Change-ID: 20260711-glymur-qcb-1e2d2bc913fd
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Anvesh Jain P <anvesh.p@oss.qualcomm.com>,
+        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
+        Pankaj Patil <pankaj.patil@oss.qualcomm.com>,
+        Qiang Yu <qiang.yu@oss.qualcomm.com>
+Cc: Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+        Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>,
+        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786367028; l=2440;
+ i=gopikrishna.garmidi@oss.qualcomm.com; s=20260102;
+ h=from:subject:message-id; bh=m40Rp3I81B1eyjB2LkQVrAzrBYtU4DsPF+9Y780JXW0=;
+ b=lQ+MLSuIQP/2wQ6sSk3eXBL+2yfF/r7V5mKL+TBq8Vnr+0eu2EQnz0IfHMJb8ocx9xYWBrRmR
+ GwohVYglmtvCHMNZWzznTl07PePpFSDnGRDuDf1EKkdvV9NDAprATZf
+X-Developer-Key: i=gopikrishna.garmidi@oss.qualcomm.com; a=ed25519;
+ pk=TkSjNEhrfsj90i3wkABTZtAjLNr2cfYsujaTvyOIDsE=
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEwMDExMiBTYWx0ZWRfX98TLXMuYDpvw
+ tbAPB610aK7MFA9SD5dOWUEY6aJrxhDEenMcZJoiekMm5AMvKkAvry6XUzNxVswG/rV8uL90lQd
+ lE1tdrvxoheKUh1zvifZFwo8mwC/kOc=
+X-Authority-Analysis: v=2.4 cv=J6qaKgnS c=1 sm=1 tr=0 ts=6a79cc37 cx=c_pps
+ a=wURt19dY5n+H4uQbQt9s7g==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=emiPwNz2bb0dLlisEjwA:9 a=QEXdDO2ut3YA:10
+ a=-UhsvdU3ccFDOXFxFb4l:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-GUID: iY-tQXY_qbiTRHnSym4sSzMF5t1yJzgJ
+X-Proofpoint-ORIG-GUID: iY-tQXY_qbiTRHnSym4sSzMF5t1yJzgJ
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEwMDExMiBTYWx0ZWRfX0hSQz6q5nyM7
+ cJDQWdMWcrvJsuMnsBrlsK2kefiEgAY0hDXgKwK8EbVmCQG47wovFq3S6/8daO1E9U1bA6+Jnic
+ iCT+gm+79o1CdrBFAmdDxtZfWoeF1Vs9SUFiHLt8nKgfGoCNAfVBnNF+JqT2dBTz7qrsoax9oSU
+ hwyEttpxdeAerfoPSjpMTTfql3b0tI3aqkL584JGNKEySIgNWe1h7XmghEh0hNOT5NDsQmIbRTS
+ OUJGltidGe6rW6eBPN5aGMHQM2AqMwQRQA+ANCyzys+K3UD8lHx7G3zF0bSIvtVlrx8ku2c39xD
+ snaJntDabXyYhP8Swp/eV8+Ic/se5rnmoyQ+MKs0IhSEw6biOcasddbxXVZMGwAhlcSZ65LNgbp
+ OGJJUtGZKI3R6sr+pWbp4lS9TR+Y9wmoyZS+g9UqQPH3scB6JK7bnwx8HQ679tPogS9fWmzrSK+
+ +GQ/tWqQsuVeT4g76QQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-10_03,2026-08-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501
+ impostorscore=0 clxscore=1015 adultscore=0 bulkscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608100112
 
-This is practically a full revert of commit
-7a4db656a635 ("PCI: dra7xx: Create functional dependency between PCIe and PHY")
-and a partial revert of the device link pieces from commits
-dfb80534692d ("PCI: cadence: Add generic PHY support to host and EP drivers")
-49229238ab47 ("PCI: keystone: Cleanup PHY handling")
+Add initial support for the Glymur QCB (Qualcomm Compute Board), a board
+built on Qualcomm's Glymur SoC.
 
-The trouble with these commits is that they dereference fields inside
-struct phy from a consumer driver, which will become no longer possible.
+Unlike the CRD's closed enclosure, the QCB is an open form factor, suited
+for bring-up and power, signal measurement.
 
-Since commit 987351e1ea77 ("phy: core: Add consumer device link
-support") from 2019, the PHY core also adds a device link to order PHY
-provider and consumer suspend/resume operations. All reverted commits
-are from 2017-2018, and what they do should actually be redundant now.
+The base support boots to shell with rootfs on NVMe.
 
-Signed-off-by: Vladimir Oltean <vladimir.oltean@nxp.com>
-Acked-by: Bjorn Helgaas <bhelgaas@google.com>
-Reviewed-by: Manivannan Sadhasivam <mani@kernel.org>
+This series adds the bindings the board relies on before enabling the
+device tree itself:
+- Document the qcom,glymur-qcb board compatible.
+- Document the qcom,glymur-qcb-ec embedded controller compatible.
+- Allow QSEECOM on the Glymur QCB so efivars and the UEFI-backed RTC work.
+
+Features enabled in the device tree:
+1. Board and sleep clocks
+2. Volume up/down keys
+3. PMIC RPMH regulators (banks 0 - 4) and the NVMe, WWAN and WCN rails
+4. PCIe4/5/6 controllers and PHYs
+5. WCN7850 WiFi on PCIe4 and Bluetooth on UART14
+6. Embedded controller on I2C9
+7. ADSP and CDSP remote processors, with a firmware path for SoCCP
+8. TCSR refgen and QREF reference supplies
+
 ---
-Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>
-Cc: "Krzysztof Wilczyński" <kwilczynski@kernel.org>
-Cc: Manivannan Sadhasivam <mani@kernel.org>
-Cc: Rob Herring <robh@kernel.org>
-Cc: Bjorn Helgaas <bhelgaas@google.com>
-Cc: Vignesh Raghavendra <vigneshr@ti.com>
-Cc: Siddharth Vadapalli <s-vadapalli@ti.com>
+Changes in v2:
+- Add TCSR refgen and QREF reference supplies to the Glymur QCB device tree
+- Rebase on top of the latest linux-next tag
+- Picked up Reviewed-by tags
+- Drop Konrad Dybcio's Reviewed-by tag because the patch has changed
+- Link to v1: https://patch.msgid.link/20260717-glymur-qcb-v1-0-aaf1cff84aab@oss.qualcomm.com
 
-v8->v9: none
-v7->v8: only context change - "return 0" became "return ret" for
-        cdns_plat_pcie_probe()
-v6->v7: none
-v5->v6: collect tag from Manivannan Sadhasivam
-v3->v5: none
-v2->v3:
-- remove dangling set but unused phy_count local variable in
-  cdns_plat_pcie_probe()
-v1->v2:
-- fully remove struct device link **link from struct cdns_pcie and from
-  cdns_plat_pcie_probe() error path
-- collect tag from Bjorn Helgaas
-- adjust commit title
 ---
- .../controller/cadence/pcie-cadence-plat.c    |  4 ---
- drivers/pci/controller/cadence/pcie-cadence.c | 16 +---------
- drivers/pci/controller/cadence/pcie-cadence.h |  2 --
- drivers/pci/controller/dwc/pci-dra7xx.c       | 16 ----------
- drivers/pci/controller/dwc/pci-keystone.c     | 31 +++----------------
- 5 files changed, 5 insertions(+), 64 deletions(-)
+Gopikrishna Garmidi (4):
+      dt-bindings: arm: qcom: Add Glymur QCB
+      dt-bindings: embedded-controller: Add Glymur QCB EC
+      firmware: qcom: scm: Allow QSEECOM on the Glymur QCB
+      arm64: dts: qcom: Add Glymur QCB
 
-diff --git a/drivers/pci/controller/cadence/pcie-cadence-plat.c b/drivers/pci/controller/cadence/pcie-cadence-plat.c
-index 8aed8b4c3e11..13edc6be21f5 100644
---- a/drivers/pci/controller/cadence/pcie-cadence-plat.c
-+++ b/drivers/pci/controller/cadence/pcie-cadence-plat.c
-@@ -41,7 +41,6 @@ static int cdns_plat_pcie_probe(struct platform_device *pdev)
- 	struct pci_host_bridge *bridge;
- 	struct cdns_pcie_ep *ep;
- 	struct cdns_pcie_rc *rc;
--	int phy_count;
- 	bool is_rc;
- 	int ret;
- 
-@@ -122,9 +121,6 @@ static int cdns_plat_pcie_probe(struct platform_device *pdev)
- 	pm_runtime_put_sync(dev);
- 	pm_runtime_disable(dev);
- 	cdns_pcie_disable_phy(cdns_plat_pcie->pcie);
--	phy_count = cdns_plat_pcie->pcie->phy_count;
--	while (phy_count--)
--		device_link_del(cdns_plat_pcie->pcie->link[phy_count]);
- 
- 	return ret;
- }
-diff --git a/drivers/pci/controller/cadence/pcie-cadence.c b/drivers/pci/controller/cadence/pcie-cadence.c
-index a1eada56edba..0ac980249941 100644
---- a/drivers/pci/controller/cadence/pcie-cadence.c
-+++ b/drivers/pci/controller/cadence/pcie-cadence.c
-@@ -222,7 +222,6 @@ int cdns_pcie_init_phy(struct device *dev, struct cdns_pcie *pcie)
- 	struct device_node *np = dev->of_node;
- 	int phy_count;
- 	struct phy **phy;
--	struct device_link **link;
- 	int i;
- 	int ret;
- 	const char *name;
-@@ -238,10 +237,6 @@ int cdns_pcie_init_phy(struct device *dev, struct cdns_pcie *pcie)
- 	if (!phy)
- 		return -ENOMEM;
- 
--	link = devm_kcalloc(dev, phy_count, sizeof(*link), GFP_KERNEL);
--	if (!link)
--		return -ENOMEM;
--
- 	for (i = 0; i < phy_count; i++) {
- 		of_property_read_string_index(np, "phy-names", i, &name);
- 		phy[i] = devm_phy_get(dev, name);
-@@ -249,17 +244,10 @@ int cdns_pcie_init_phy(struct device *dev, struct cdns_pcie *pcie)
- 			ret = PTR_ERR(phy[i]);
- 			goto err_phy;
- 		}
--		link[i] = device_link_add(dev, &phy[i]->dev, DL_FLAG_STATELESS);
--		if (!link[i]) {
--			devm_phy_put(dev, phy[i]);
--			ret = -EINVAL;
--			goto err_phy;
--		}
- 	}
- 
- 	pcie->phy_count = phy_count;
- 	pcie->phy = phy;
--	pcie->link = link;
- 
- 	ret =  cdns_pcie_enable_phy(pcie);
- 	if (ret)
-@@ -268,10 +256,8 @@ int cdns_pcie_init_phy(struct device *dev, struct cdns_pcie *pcie)
- 	return 0;
- 
- err_phy:
--	while (--i >= 0) {
--		device_link_del(link[i]);
-+	while (--i >= 0)
- 		devm_phy_put(dev, phy[i]);
--	}
- 
- 	return ret;
- }
-diff --git a/drivers/pci/controller/cadence/pcie-cadence.h b/drivers/pci/controller/cadence/pcie-cadence.h
-index b4d51adefea5..4a96e1869e53 100644
---- a/drivers/pci/controller/cadence/pcie-cadence.h
-+++ b/drivers/pci/controller/cadence/pcie-cadence.h
-@@ -260,7 +260,6 @@ struct cdns_plat_pcie_of_data {
-  * @is_hpa: indicates if the architecture is HPA
-  * @phy_count: number of supported PHY devices
-  * @phy: list of pointers to specific PHY control blocks
-- * @link: list of pointers to corresponding device link representations
-  * @ops: Platform-specific ops to control various inputs from Cadence PCIe
-  *       wrapper
-  * @cdns_pcie_reg_offsets: Register bank offsets for different SoC
-@@ -276,7 +275,6 @@ struct cdns_pcie {
- 	bool				     is_hpa;
- 	int			             phy_count;
- 	struct phy		             **phy;
--	struct device_link	             **link;
- 	const  struct cdns_pcie_ops          *ops;
- 	const  struct cdns_plat_pcie_of_data *cdns_pcie_reg_offsets;
- 	int				     max_link_speed;
-diff --git a/drivers/pci/controller/dwc/pci-dra7xx.c b/drivers/pci/controller/dwc/pci-dra7xx.c
-index 3fc889944f02..bf6c5b86bb27 100644
---- a/drivers/pci/controller/dwc/pci-dra7xx.c
-+++ b/drivers/pci/controller/dwc/pci-dra7xx.c
-@@ -9,7 +9,6 @@
- 
- #include <linux/clk.h>
- #include <linux/delay.h>
--#include <linux/device.h>
- #include <linux/err.h>
- #include <linux/interrupt.h>
- #include <linux/irq.h>
-@@ -678,7 +677,6 @@ static int dra7xx_pcie_probe(struct platform_device *pdev)
- 	int i;
- 	int phy_count;
- 	struct phy **phy;
--	struct device_link **link;
- 	void __iomem *base;
- 	struct dw_pcie *pci;
- 	struct dra7xx_pcie *dra7xx;
-@@ -726,10 +724,6 @@ static int dra7xx_pcie_probe(struct platform_device *pdev)
- 	if (!phy)
- 		return -ENOMEM;
- 
--	link = devm_kcalloc(dev, phy_count, sizeof(*link), GFP_KERNEL);
--	if (!link)
--		return -ENOMEM;
--
- 	dra7xx->clk = devm_clk_get_optional(dev, NULL);
- 	if (IS_ERR(dra7xx->clk))
- 		return dev_err_probe(dev, PTR_ERR(dra7xx->clk),
-@@ -744,12 +738,6 @@ static int dra7xx_pcie_probe(struct platform_device *pdev)
- 		phy[i] = devm_phy_get(dev, name);
- 		if (IS_ERR(phy[i]))
- 			return PTR_ERR(phy[i]);
--
--		link[i] = device_link_add(dev, &phy[i]->dev, DL_FLAG_STATELESS);
--		if (!link[i]) {
--			ret = -EINVAL;
--			goto err_link;
--		}
- 	}
- 
- 	dra7xx->base = base;
-@@ -851,10 +839,6 @@ static int dra7xx_pcie_probe(struct platform_device *pdev)
- 	pm_runtime_disable(dev);
- 	dra7xx_pcie_disable_phy(dra7xx);
- 
--err_link:
--	while (--i >= 0)
--		device_link_del(link[i]);
--
- 	return ret;
- }
- 
-diff --git a/drivers/pci/controller/dwc/pci-keystone.c b/drivers/pci/controller/dwc/pci-keystone.c
-index e9b012a5ea9a..8085c4f61403 100644
---- a/drivers/pci/controller/dwc/pci-keystone.c
-+++ b/drivers/pci/controller/dwc/pci-keystone.c
-@@ -130,7 +130,6 @@ struct keystone_pcie {
- 	int			num_lanes;
- 	u32			num_viewport;
- 	struct phy		**phy;
--	struct device_link	**link;
- 	struct			device_node *msi_intc_np;
- 	struct irq_domain	*intx_irq_domain;
- 	struct device_node	*np;
-@@ -1130,7 +1129,6 @@ static int ks_pcie_probe(struct platform_device *pdev)
- 	enum dw_pcie_device_mode mode;
- 	struct dw_pcie *pci;
- 	struct keystone_pcie *ks_pcie;
--	struct device_link **link;
- 	struct gpio_desc *gpiod;
- 	struct resource *res;
- 	void __iomem *base;
-@@ -1201,31 +1199,17 @@ static int ks_pcie_probe(struct platform_device *pdev)
- 	if (!phy)
- 		return -ENOMEM;
- 
--	link = devm_kcalloc(dev, num_lanes, sizeof(*link), GFP_KERNEL);
--	if (!link)
--		return -ENOMEM;
--
- 	for (i = 0; i < num_lanes; i++) {
- 		snprintf(name, sizeof(name), "pcie-phy%d", i);
- 		phy[i] = devm_phy_optional_get(dev, name);
- 		if (IS_ERR(phy[i])) {
- 			ret = PTR_ERR(phy[i]);
--			goto err_link;
--		}
--
--		if (!phy[i])
--			continue;
--
--		link[i] = device_link_add(dev, &phy[i]->dev, DL_FLAG_STATELESS);
--		if (!link[i]) {
--			ret = -EINVAL;
--			goto err_link;
-+			goto err;
- 		}
- 	}
- 
- 	ks_pcie->np = np;
- 	ks_pcie->pci = pci;
--	ks_pcie->link = link;
- 	ks_pcie->num_lanes = num_lanes;
- 	ks_pcie->phy = phy;
- 
-@@ -1235,7 +1219,7 @@ static int ks_pcie_probe(struct platform_device *pdev)
- 		ret = PTR_ERR(gpiod);
- 		if (ret != -EPROBE_DEFER)
- 			dev_err(dev, "Failed to get reset GPIO\n");
--		goto err_link;
-+		goto err;
- 	}
- 
- 	/* Obtain references to the PHYs */
-@@ -1250,7 +1234,7 @@ static int ks_pcie_probe(struct platform_device *pdev)
- 
- 	if (ret) {
- 		dev_err(dev, "failed to enable phy\n");
--		goto err_link;
-+		goto err;
- 	}
- 
- 	platform_set_drvdata(pdev, ks_pcie);
-@@ -1337,25 +1321,18 @@ static int ks_pcie_probe(struct platform_device *pdev)
- 	pm_runtime_disable(dev);
- 	ks_pcie_disable_phy(ks_pcie);
- 
--err_link:
--	while (--i >= 0 && link[i])
--		device_link_del(link[i]);
--
-+err:
- 	return ret;
- }
- 
- static void ks_pcie_remove(struct platform_device *pdev)
- {
- 	struct keystone_pcie *ks_pcie = platform_get_drvdata(pdev);
--	struct device_link **link = ks_pcie->link;
--	int num_lanes = ks_pcie->num_lanes;
- 	struct device *dev = &pdev->dev;
- 
- 	pm_runtime_put(dev);
- 	pm_runtime_disable(dev);
- 	ks_pcie_disable_phy(ks_pcie);
--	while (num_lanes--)
--		device_link_del(link[num_lanes]);
- }
- 
- static struct platform_driver ks_pcie_driver = {
--- 
-2.34.1
+ Documentation/devicetree/bindings/arm/qcom.yaml    |   1 +
+ .../embedded-controller/qcom,hamoa-crd-ec.yaml     |   1 +
+ arch/arm64/boot/dts/qcom/Makefile                  |   1 +
+ arch/arm64/boot/dts/qcom/glymur-qcb.dts            | 699 +++++++++++++++++++++
+ drivers/firmware/qcom/qcom_scm.c                   |   1 +
+ 5 files changed, 703 insertions(+)
+---
+base-commit: ce28329fef089fc63dbaadcc4c1fbf9c287e57e0
+change-id: 20260711-glymur-qcb-1e2d2bc913fd
+prerequisite-message-id: <20260709-glymur-soccp-v6-4-16f70227547d@oss.qualcomm.com>
+prerequisite-patch-id: 26f384ecfe96620007cab0ae3dd01db6e2314bc8
+prerequisite-patch-id: 711fb836c2a609ad2f1f07f8785df3e8b72e97a5
+prerequisite-patch-id: e9fe3e572292afc1ea6f98dba6c2176a28183dc7
+prerequisite-patch-id: 5b78db9f6345733d9dce683ec231fa93859a1a0e
+
+Best regards,
+--  
+Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
 
