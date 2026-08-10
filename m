@@ -1,263 +1,189 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 765163B27E7
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 13:18:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBE2E3DA7D3
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 13:47:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786367916; cv=none; b=bnRw+HEsRa6GuIj3R/VoNK3bv7d0AkTiBJEUQJqs8ls1S6odCc2ytL5epmogRIJ6DDrTbOLNhFKbV6lnxz9GdK/hOzc1n7ILWebWsJ6hTbenPF6m4iYjKs9BSabDinrZsZd5WEwznpUIDaEtLasYScVaaC9mIrtMgDhYL4ni0Q8=
+	t=1786369682; cv=none; b=eHrYjpcukkZv2enK45ap1mhE/v3WiS2VMtH3HSqVT3hfKD2mXB5tnPpgxUE0Sn97MlWH3U1aZNTvKPPA3RFWb4DL66N7peqivcfyaZRW3qQBCj0QhlfyLesro3fGXTp0fwh3rVBokHDbMX3irqE6T3c4L6t/g5nDgV3/H4KM3NM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786367916; c=relaxed/simple;
-	bh=rqLb0leokYtiOyN/1dnd6EJFd31J2CbTZT4kf3PL2IQ=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=bKST1rkK05DIYNyPsgljFXzbGAxs/iJOmU+LZIN/5+8I2LZOtEnPWFHwplRto2vw9dBLliXc+wRNCdjT+y+IFRpcyCUyGE9qcVzCCTnIeOWMJdEML6sTad4T0Bfa4Ix7jmsAZOmThvYkBXyU6FbZjQEGG4nIha3/39s3ovw3FKk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=RK37kGTq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=O3reUCi4; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1786369682; c=relaxed/simple;
+	bh=3T05IBmOeKaCJnNraYH/j1ima368bvxG+vKBBAnikBQ=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=B4WDoK2JeYzwwtEOMhD4untEZlnO090Py/bR4LNkWj1Qph8ui50WFB+6jz7+0g0eYnixy9SOp0Bnvi20dn/0dQ/LDQ4WSBUiamu9Vfs5XJIvqP4Sw20YbhKtS+2dHCOx5nOYyjWiRpn3eMOHEwUU+O8LaGGVbFT27F6ITSa5tk0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Bayw5SnG; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="RK37kGTq";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="O3reUCi4"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67ACjAMW915897
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 13:18:35 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=lCRftOPaRKiExM66EvRPfB
-	NvSrEFplSk2TDdjjmFwQc=; b=RK37kGTqDSqTbchU8nESS5egxAaANgyWv6dcdf
-	5SKiQ7CsuPTBoGsNwb6X2LVRVj1xICYcMH5BJttB3l90sXVfUYzDPQ60GEZJEs9Q
-	QTRzKFlXd9+l6xhqYT/q0QY61YaO+uv2UIaT8CtVoWJLpFQwzIlugyQDt1CshnDN
-	+oVA6jjtWU0G6GgLUbsLj8DwrfbTd4g3TD7L5NcLaPny1c+Ntp8QLjy4MSwTfi0o
-	rpTZAAzmk7MeOUDzTzZKzy56VCFQzKCDlVX+XvRjbifTxJMakipgepigiOoAxLaX
-	KPUs6qtMtmmbNboSdGovkCb21VTgnFakfYOfKYhX8jzAY/uA==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fy8v91mut-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 13:18:34 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cce14a21faso31900335ad.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 06:18:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786367914; x=1786972714; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=lCRftOPaRKiExM66EvRPfBNvSrEFplSk2TDdjjmFwQc=;
-        b=O3reUCi414ph57TC9M5NuTHZ9JwiC6wzn2vG0R+JaNjZ+vwUY11FwjbNdAeUg/gh6a
-         k84HYS4WW1QhISDZOSWKH9YbKEU4FlTbSSNYwvdsMo5XSmrZX2ZPJ9dId4XIXM/NUHUo
-         f5vy3PLbUq0Y19UvnVpLKkZvrWhovb5FI01ZnNFZ5CNLqFgvlgHGVVYsyPLryCSYzFQK
-         tb7waotV2vC0AWUTWm1QxK6jNCU/6ujbHdVCqLL67n2khpNJSoamgAVVWFMI7tIZ0bTL
-         s0m6hqpNL8fqJjmGNwzrad3tvM16xWypyPN6KgXIrQVx0cSS1CuZv8B0K0os9iyLOyBZ
-         rmOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786367914; x=1786972714;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=lCRftOPaRKiExM66EvRPfBNvSrEFplSk2TDdjjmFwQc=;
-        b=BrPVlFT4fRueZro1s2M07cdi3N+Uu0zOVOFCp2qCBYiUGu9YcE9yqrkkTNBzZREH4k
-         6CjddGhgLzz/pkggRRB/jgsY/cbtCch3tbtX20MmUgCrfZQzobAr7kblWc7QWsYZ+363
-         iCDd1s8iOBmY7xVFkCc/lQmCjIU5oNj1TVItYl8inv8gibXcZoFVq7J1cOzbBrbL4N2/
-         eUTQTQ2MYsVCUUTmZGUCuYt5GfRhxmH07ThW0hNPthnDT/UClMDKzgvRPKiLFiwNtQRS
-         2xaov5t25EbFc3D484wzkwMUDzxLGZ73bz0Dg+6He4UvW2OLFY2TMRyPRd2lRqYhwkPt
-         1S8w==
-X-Forwarded-Encrypted: i=1; AHgh+Rop9h8Y9l7p3d87QUB9d8OgdmFk7i8qddYnI8ogSNx9lAmbuWoS49TyQ8yxDwm5bfohoGyjfOqNcL2cXLJZ@vger.kernel.org
-X-Gm-Message-State: AOJu0YxqfqCQejAjGRuCNdIc/W1Xn55VDpgMeB5KJNFikUYlQZyhTLGy
-	5SVZGep+dezNCjG7zw3JOg5PAsa8C25p+ZC1a5XZx6wrsIQpTewAE1m/NktUqvhwEl+upyvsHrz
-	/059IXYCvA9CKD6+M7dA5g7yHoxY+0G+hKa3Q7AjNKMeopYOBdQMZLaWST2Mwq70HNARt
-X-Gm-Gg: AR+sD126whDNnR77GxpvPAPgykbe3UXgBkc3P8yWzjHlWCNhd2Bye2hAFKVRVnXFWbD
-	0WiEruzfIXgw3VAeI7NBmSL6XlYp1BAyNU5fT6b5n+8x2BdAqshb9qytCJyy9iE8EsBePXKmJ9C
-	vcNzd33jfAOwiLgOD8veV++3y/S92HHVi5AfXJeUgmz57RWSADE6odxp7E650b5PYEDyToSY596
-	IbGqYlBgyDp/w8Pxh9ol+xWM9CqY8U94UxQCxpozHWcXMhK8/Pn79FRkW7I0tGigGowCJYkaMo4
-	4skmDnleDWKnQ/SujKkHq7Ts5UUgm6ub4LaxB4WfPCb8yLZaKljIeTCAuoZR7NlgdlIFH/gQt4A
-	n5c7Ge7sVsH8iZSF7on0wtlQSKuORols0T4l5QFJz7rFPFK4=
-X-Received: by 2002:a17:902:e747:b0:2cc:89ce:2f07 with SMTP id d9443c01a7336-2d2b2d9468bmr98082245ad.1.1786367913804;
-        Mon, 10 Aug 2026 06:18:33 -0700 (PDT)
-X-Received: by 2002:a17:902:e747:b0:2cc:89ce:2f07 with SMTP id d9443c01a7336-2d2b2d9468bmr98081665ad.1.1786367913148;
-        Mon, 10 Aug 2026 06:18:33 -0700 (PDT)
-Received: from hu-qianyu-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d16c50cfc1sm36768825ad.82.2026.08.10.06.18.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Aug 2026 06:18:32 -0700 (PDT)
-From: Qiang Yu <qiang.yu@oss.qualcomm.com>
-Date: Mon, 10 Aug 2026 06:18:29 -0700
-Subject: [PATCH] PCI: qcom: Block accesses to downstream devices on link
- down
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Bayw5SnG"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 545B51F00A3F
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 13:47:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786369679;
+	bh=Hzi2DppdJujLLI2cEYOf0nPmIJfadXAirGJPaExHRXg=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=Bayw5SnGMra5jWEwZkNChbx/VhqN+bXdlBoADGe1mHL29+vQPqnqclyiA3Db7wPPj
+	 9f2L33zytiWbSVHqtlc6KjaBXZaUIgFVH3BeR+cM7B3PPCcQbtai037rWgiWfVCtYm
+	 DSoiRm6BBVJSjbJGgXWvOcvD/vXc7wbCPUIRu2tBQA6tp/QZ9ONf4LYtaQqM/Sm3Vi
+	 3phUptan/nrN9CA60AmE1ZO1hLAcCTzU4/0vbKAKmES36TYxfmwhZtmWwSBr2pni+/
+	 hi+KrbpsoDg1Wi2lbFQqu/O36gu1XE6vQMjMiwYxJ+WN8xJyjr1gGMcoEXWb6UTYHS
+	 GX4yIxMq0YQqw==
+Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-6a10d02ff43so3025555a12.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 06:47:59 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RobEiqwCt9Jpl3f7jRfYRdNcbmx9RsxvqN0hmvT+SBA3XfSg3202CtVTdttcMv5v40Gs/X7vafXfYjNcdC1@vger.kernel.org
+X-Gm-Message-State: AOJu0YxSPe+k+rxvsfWvyqTbHAGj6p1f9A4ppqnqdu67QUM88xJYouPm
+	/BZQbu5dTKfV1zqO/dQYFpddLtKiF/Uzq2LJY0LKUfDbtHF0yy0r7XAToy/dYk3WuyL/DLsf6Sr
+	49Lmxq5JwdzKoXyuYbxvHVh47cE5gHQ==
+X-Received: by 2002:a17:906:fe4b:b0:c16:6c84:4b8e with SMTP id
+ a640c23a62f3a-c2039cc42bamr2080432866b.14.1786369677159; Mon, 10 Aug 2026
+ 06:47:57 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260810-ecam_blocker-v1-1-e588e07f68d4@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAKTPeWoC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzMDC0MD3dTkxNz4pJz85OzUIt00CwPDJONEA6Ok5BQloJaCotS0zAqwcdG
- xEH5xaVJWanIJyAyl2loAMD7OvnAAAAA=
-X-Change-ID: 20260810-ecam_blocker-f801b3a02bcd
-To: Manivannan Sadhasivam <mani@kernel.org>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
-Cc: linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Qiang Yu <qiang.yu@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1786367912; l=4751;
- i=qiang.yu@oss.qualcomm.com; s=20250513; h=from:subject:message-id;
- bh=rqLb0leokYtiOyN/1dnd6EJFd31J2CbTZT4kf3PL2IQ=;
- b=YhPsVS5OFa870b2bUwMagYVlp0GHhXIZiqrQI2Cu/wj68P9gsbnXDBpkzBKcaOWZgw7/Keh+N
- wvZqF504kUMCOI07yRDlWJxwtvVJpR8oD0IveuK8HHw7q+BggqbUl3Y
-X-Developer-Key: i=qiang.yu@oss.qualcomm.com; a=ed25519;
- pk=Rr94t+fykoieF1ngg/bXxEfr5KoQxeXPtYxM8fBQTAI=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEwMDExNCBTYWx0ZWRfX0ix+H3uyDfvr
- DEt6VY9BNdR2ZgFAp66W9TGBSkwwjnJ7yyHzETMjeVhrtPm5jgsIRzU/5+kcmrhBy+1iop92X5Q
- c60YtgMeCSNMSuoK+ILgMZm5BH1iZIk=
-X-Proofpoint-ORIG-GUID: LmaTifsR2mZH8m1KS3VrMujmuSUgol02
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEwMDExNCBTYWx0ZWRfXyHMw0mEZymhL
- ZbuspEiw4KA+PhOpjrqB6xDURC/r+8niD706RwV7rs9VmbgAFNobLcTYIPn3fe4qTI+hk2e48+4
- Ef6N2Ocn9SXC2noJM06OUMY42oEQKVFG04q7HBfKKW/cBoiu1v41JV0IRGguyusEn9TkyYugVn9
- BC1jmFb1QqaxofgFaL3IsW1D/r0TsaZs1SFHiktoldb8HP/lFWxD5PXkNDZF6+CnZJOKJKvY8bk
- YGl7kWEG9rT/+P7GYSaIujnXxm6DE+GfHRThoqBKAb5p+u64kHOqS6k8U0JpSdNUU7xYtikJS6g
- Kd6bzeGEpslOm93TgzpQWU5j1W4IXAazhW/pXdoHAoXLKaBWym5yU3+Z578dbE46REbwuf6JGa6
- 1dACYkpjn+BJ4PJToayEA/LyPCFRK+XmBr/XitiHvhWuxqvAaVATy6TCX+/+Nl2Ou5SAAb+fSnK
- my3nFFUJqHzhlBl7H4Q==
-X-Authority-Analysis: v=2.4 cv=T5m8ifKQ c=1 sm=1 tr=0 ts=6a79cfaa cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=GUKgOjlLqbvdKOx-lw4A:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-GUID: LmaTifsR2mZH8m1KS3VrMujmuSUgol02
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-10_03,2026-08-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 adultscore=0 clxscore=1015 suspectscore=0 phishscore=0
- spamscore=0 malwarescore=0 priorityscore=1501 bulkscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608100114
+References: <20260807-iris_iova_600mb_fix-v1-0-3996f67e33f9@oss.qualcomm.com>
+ <20260807-iris_iova_600mb_fix-v1-4-3996f67e33f9@oss.qualcomm.com>
+ <ruow4uus64krlpy2gvm3g2d6rq5kgmgxnlhstmecil3gw7lhkd@2golvucd473l>
+ <20260807162405.GA896590-robh@kernel.org> <c3hVumMy_QnRbUmbFTSWGjkfG7lPjGFEcZfPsZeGQ57nWKkhlBL3wgmcDcAgT9cNb8Ju3qZ_sSKgHk8vmow0xQ==@protonmail.internalid>
+ <6ee7f32e-eb6c-e264-6f0d-541555f8fd62@oss.qualcomm.com> <56b3dfcf-b1ad-4192-8199-06c80cc5d124@kernel.org>
+In-Reply-To: <56b3dfcf-b1ad-4192-8199-06c80cc5d124@kernel.org>
+From: Rob Herring <robh@kernel.org>
+Date: Mon, 10 Aug 2026 08:47:45 -0500
+X-Gmail-Original-Message-ID: <CAL_JsqLGOz7Fh=AsM+g84=Uko10YXU4QN1buApD3CJMkOmsebA@mail.gmail.com>
+X-Gm-Features: AUfX_mwrEFk7k3OtcIlR-TAKRB83Tjc8XP94YyTpBVZLF41OPIzQfo4IdSVjMnw
+Message-ID: <CAL_JsqLGOz7Fh=AsM+g84=Uko10YXU4QN1buApD3CJMkOmsebA@mail.gmail.com>
+Subject: Re: [PATCH 04/22] arm64: dts: qcom: hamoa: Reserve low IOVA range for Iris
+To: "Bryan O'Donoghue" <bod@kernel.org>
+Cc: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+	Vikash Garodia <vikash.garodia@oss.qualcomm.com>, 
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, 
+	Mauro Carvalho Chehab <mchehab@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Stanimir Varbanov <stanimir.k.varbanov@gmail.com>, 
+	Sakari Ailus <sakari.ailus@linux.intel.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
+	Stephan Gerhold <stephan.gerhold@linaro.org>, Bjorn Andersson <andersson@kernel.org>, 
+	Stanimir Varbanov <stanimir.varbanov@linaro.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Johan Hovold <johan+linaro@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+	Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, 
+	Mansur Alisha Shaik <mansur@codeaurora.org>, Andy Gross <andy.gross@linaro.org>, 
+	Rob Clark <robin.clark@oss.qualcomm.com>, Stephen Boyd <sboyd@codeaurora.org>, 
+	Yassine Oudjana <y.oudjana@protonmail.com>, Pierre-Hugues Husson <phhusson@freebox.fr>, 
+	Marc Gonzalez <mgonzalez@freebox.fr>, cros-qcom-dts-watchers@chromium.org, 
+	Matthias Kaehlcke <mka@chromium.org>, Douglas Anderson <dianders@chromium.org>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
+	Aniket Masule <amasule@codeaurora.org>, Malathi Gottam <quic_mgottam@quicinc.com>, 
+	Rajendra Nayak <quic_rjendra@quicinc.com>, Jonathan Marek <jonathan@marek.ca>, 
+	Dikshita Agarwal <dikshita@qti.qualcomm.com>, Renjiang Han <quic_renjiang@quicinc.com>, 
+	Krzysztof Kozlowski <krzk@kernel.org>, linux-media@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>, 
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Daniel J Blueman <daniel@quora.org>, 
+	stable@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-After a PCIe link goes down, software may still access the BAR (MMIO)
-space or configuration space of devices behind that link before recovery
-has run. As the link is down, these accesses never complete, resulting in
-a storm of Completion Timeout AERs.
+On Sat, Aug 8, 2026 at 4:55=E2=80=AFAM Bryan O'Donoghue <bod@kernel.org> wr=
+ote:
+>
+> On 08/08/2026 05:37, Vishnu Reddy wrote:
+> >
+> > On 8/7/2026 9:54 PM, Rob Herring wrote:
+> >> On Fri, Aug 07, 2026 at 12:03:50PM +0300, Dmitry Baryshkov wrote:
+> >>> On Fri, Aug 07, 2026 at 01:54:48PM +0530, Vikash Garodia wrote:
+> >>>> From: Daniel J Blueman <daniel@quora.org>
+> >>>>
+> >>>> On X1-family hamoa platforms, the Iris VPU reserves IOVA addresses
+> >>>> below 0x25800000 (600MB), primarily for secure non-pixel buffers. DM=
+A
+> >>>> into that range, from any other stream id would triggers unhandled S=
+MMU
+> >>>> page faults that cause spontaneous device reboots. This is readily
+> >>>> reproduced with one or more browser tabs driving multiple concurrent
+> >>>> video decode streams.
+> >>>>
+> >>>> Add a reserved-memory IOVA reservation node covering [0, 0x25800000]
+> >>>> and reference it from the Iris node so the IOMMU layer keeps DMA
+> >>>> allocations above that boundary.
+> >>>>
+> >>>> Link: https://github.com/qualcomm-linux/kernel-topics/issues/1157#is=
+suecomment-4458933574
+> >>>> Fixes: 9065340ac04d ("arm64: dts: qcom: x1e80100: Add IRIS video cod=
+ec")
+> >>>> Cc: stable@vger.kernel.org
+> >>>> Signed-off-by: Daniel J Blueman <daniel@quora.org>
+> >>>> Signed-off-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+> >>>> ---
+> >>>>   arch/arm64/boot/dts/qcom/hamoa.dtsi | 13 ++++++++++++-
+> >>>>   1 file changed, 12 insertions(+), 1 deletion(-)
+> >>>>
+> >>>> diff --git a/arch/arm64/boot/dts/qcom/hamoa.dtsi b/arch/arm64/boot/d=
+ts/qcom/hamoa.dtsi
+> >>>> index 8a96ea1bdb9c4c409b2af997680d8c13fed0643e..87f424765d513c97b063=
+03bceb75ca9f176d2ace 100644
+> >>>> --- a/arch/arm64/boot/dts/qcom/hamoa.dtsi
+> >>>> +++ b/arch/arm64/boot/dts/qcom/hamoa.dtsi
+> >>>> @@ -666,6 +666,17 @@ smem_mem: smem@ffe00000 {
+> >>>>                    hwlocks =3D <&tcsr_mutex 3>;
+> >>>>                    no-map;
+> >>>>            };
+> >>>> +
+> >>>> +          /*
+> >>>> +           * The Iris VPU reserves IOVA below 0x25800000 (600MB),
+> >>>> +           * primarily for non-pixel buffers using different Stream=
+ IDs.
+> >>>> +           * DMA into that range triggers unhandled SMMU faults and
+> >>>> +           * spontaneous reboots, so reserve it to keep IOMMU
+> >>>> +           * allocations above this boundary.
+> >>>> +           */
+> >>>> +          iris_iova: iris-iova {
+> >>>> +                  iommu-addresses =3D <&iris 0x0 0x0 0x0 0x25800000=
+>;
+> >>>> +          };
+> >>>>    };
+> >>>>
+> >>>>    qup_opp_table_100mhz: opp-table-qup100mhz {
+> >>>> @@ -5439,7 +5450,7 @@ &config_noc SLAVE_VENUS_CFG QCOM_ICC_TAG_ACTIV=
+E_ONLY>,
+> >>>>                    interconnect-names =3D "cpu-cfg",
+> >>>>                                         "video-mem";
+> >>>>
+> >>>> -                  memory-region =3D <&video_mem>;
+> >>>> +                  memory-region =3D <&video_mem>, <&iris_iova>;
+> >>> I don't like the idea of this series, because it _again_ doesn't tell=
+ us
+> >>> the truth about the hardware. This typicall ends up with bigger probl=
+ems
+> >>> later on, when it starts to affect other bits and pieces.
+> >>>
+> >>> I don't want to NAK it, but I'd strongly ask to reconsider it.
+> >> I think this is an abuse of /reserved-memory. reserved-memory is
+> >> reserved *physical* memory. Reserved IOVA is a property on top of that=
+.
+> >> I'm surprised this passes validation. If it does, I may go fix that.
+> >
+> > As per the reserved-memory.yaml schema document, the iommu-addresses
+> > property for IOVA reservation into /reserved-memory is allowed =E2=80=
+=94 it's
+> > documented for IOVA carveout reservations:
+> > https://github.com/devicetree-org/dt-schema/blob/main/dtschema/schemas/=
+reserved-memory/reserved-memory.yaml#L56
+> I think that is an entirely reasonable reading of the text
+>
+> Quote:
+>
+> "If no "reg" property is specified, the "iommu-addresses" property
+>   defines carveout regions in the IOVA space for the given device. This
+>   can be useful if a certain memory region should not be mapped through
+>   the IOMMU."
+>
+> Which is exactly what this series does. Excludes a specific IOVA range
+> from being allocated for this device.
 
-Use the controller's ECAM blocker to drop these accesses to the PCIe
-address space as soon as the link-down interrupt fires, so that Completion
-Timeout AERs are reduced. The blocked range covers the entire address
-space (base 0x0, all-ones limit), since the Root Port's own DBI/iATU
-register space remains accessible regardless.
+But if "iommu-addresses" is the only property of the reserved memory,
+why put this property in reserved-memory rather than directly in the
+device's node? I'm only questioning where is the right place to
+describe a reserved IOVA.
 
-The range is programmed once in the host init path, since the range
-registers are wiped by BCR reset. This leaves only the ECAM_BLOCKER_EN
-bit to be flipped from the link-down IRQ handler, so the blocker can be
-armed with a single fast register write for immediate effect.
-
-The subsequent Root Port reset re-initialises the controller, which clears
-the enable bit and re-programs the range for the fresh link.
-
-Signed-off-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
----
- drivers/pci/controller/dwc/pcie-qcom.c | 54 ++++++++++++++++++++++++++++++++++
- 1 file changed, 54 insertions(+)
-
-diff --git a/drivers/pci/controller/dwc/pcie-qcom.c b/drivers/pci/controller/dwc/pcie-qcom.c
-index b58a607b713f..7005d989f6ff 100644
---- a/drivers/pci/controller/dwc/pcie-qcom.c
-+++ b/drivers/pci/controller/dwc/pcie-qcom.c
-@@ -73,6 +73,23 @@
- #define PARF_BDF_TO_SID_TABLE_N			0x2000
- #define PARF_BDF_TO_SID_CFG			0x2c00
- 
-+/*
-+ * ECAM blocker range registers. The blocked range has a write pair
-+ * (WR_BASE/WR_LIMIT) and a read pair (RD_BASE/RD_LIMIT); each address is
-+ * split into a low (32-bit) and a HI (upper 32-bit) register.
-+ */
-+#define PARF_BLOCK_SLV_AXI_WR_BASE		0x360
-+#define PARF_BLOCK_SLV_AXI_WR_BASE_HI		0x364
-+#define PARF_BLOCK_SLV_AXI_WR_LIMIT		0x368
-+#define PARF_BLOCK_SLV_AXI_WR_LIMIT_HI		0x36c
-+#define PARF_BLOCK_SLV_AXI_RD_BASE		0x370
-+#define PARF_BLOCK_SLV_AXI_RD_BASE_HI		0x374
-+#define PARF_BLOCK_SLV_AXI_RD_LIMIT		0x378
-+#define PARF_BLOCK_SLV_AXI_RD_LIMIT_HI		0x37c
-+
-+#define PARF_ECAM_BASE				0x380
-+#define PARF_ECAM_BASE_HI			0x384
-+
- /* ELBI registers */
- #define ELBI_SYS_CTRL				0x04
- #define ELBI_SYS_STTS				0x08
-@@ -90,6 +107,7 @@
- 
- /* PARF_SYS_CTRL register fields */
- #define MAC_PHY_POWERDOWN_IN_P2_D_MUX_EN	BIT(29)
-+#define ECAM_BLOCKER_EN				BIT(26)
- #define MST_WAKEUP_EN				BIT(13)
- #define SLV_WAKEUP_EN				BIT(12)
- #define MSTR_ACLK_CGC_DIS			BIT(10)
-@@ -1382,6 +1400,37 @@ static void qcom_pcie_configure_ports(struct qcom_pcie *pcie)
- 		dw_pcie_program_t_power_on(pcie->pci, port->l1ss_t_power_on);
- }
- 
-+static void qcom_pcie_init_ecam_blocker(struct qcom_pcie *pcie)
-+{
-+	struct dw_pcie *pci = pcie->pci;
-+
-+	/* ECAM base must match the DBI base address */
-+	writel(lower_32_bits(pci->dbi_phys_addr), pcie->parf + PARF_ECAM_BASE);
-+	writel(upper_32_bits(pci->dbi_phys_addr), pcie->parf + PARF_ECAM_BASE_HI);
-+
-+	writel(0, pcie->parf + PARF_BLOCK_SLV_AXI_WR_BASE);
-+	writel(0, pcie->parf + PARF_BLOCK_SLV_AXI_WR_BASE_HI);
-+	writel(U32_MAX, pcie->parf + PARF_BLOCK_SLV_AXI_WR_LIMIT);
-+	writel(U32_MAX, pcie->parf + PARF_BLOCK_SLV_AXI_WR_LIMIT_HI);
-+
-+	writel(0, pcie->parf + PARF_BLOCK_SLV_AXI_RD_BASE);
-+	writel(0, pcie->parf + PARF_BLOCK_SLV_AXI_RD_BASE_HI);
-+	writel(U32_MAX, pcie->parf + PARF_BLOCK_SLV_AXI_RD_LIMIT);
-+	writel(U32_MAX, pcie->parf + PARF_BLOCK_SLV_AXI_RD_LIMIT_HI);
-+}
-+
-+static void qcom_pcie_enable_ecam_blocker(struct qcom_pcie *pcie)
-+{
-+	u32 sys_ctrl;
-+
-+	sys_ctrl = readl(pcie->parf + PARF_SYS_CTRL);
-+	sys_ctrl |= ECAM_BLOCKER_EN;
-+	writel(sys_ctrl, pcie->parf + PARF_SYS_CTRL);
-+
-+	/* Flush the write so the blocker is enabled before this function returns */
-+	readl(pcie->parf + PARF_SYS_CTRL);
-+}
-+
- static int qcom_pcie_host_init(struct dw_pcie_rp *pp)
- {
- 	struct dw_pcie *pci = to_dw_pcie_from_pp(pp);
-@@ -1422,6 +1471,8 @@ static int qcom_pcie_host_init(struct dw_pcie_rp *pp)
- 
- 	qcom_pcie_configure_ports(pcie);
- 
-+	qcom_pcie_init_ecam_blocker(pcie);
-+
- 	qcom_pcie_perst_deassert(pcie);
- 
- 	if (pcie->cfg->ops->config_sid) {
-@@ -1878,6 +1929,9 @@ static irqreturn_t qcom_pcie_global_irq_thread(int irq, void *data)
- 
- 	if (test_and_clear_bit(INT_ALL_LINK_DOWN, &status)) {
- 		dev_dbg(dev, "Received Link down event\n");
-+
-+		qcom_pcie_enable_ecam_blocker(pcie);
-+
- 		for_each_pci_bridge(port, pp->bridge->bus) {
- 			if (pci_pcie_type(port) == PCI_EXP_TYPE_ROOT_PORT)
- 				pci_host_handle_link_down(port);
-
----
-base-commit: 3de6add8d15430cde96c615fd156216676762bf9
-change-id: 20260810-ecam_blocker-f801b3a02bcd
-
-Best regards,
---  
-Qiang Yu <qiang.yu@oss.qualcomm.com>
-
+Rob
