@@ -1,99 +1,112 @@
-Received: from mail-wm1-f47.google.com (mail-wm1-f47.google.com [209.85.128.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3400839E9BD
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 08:37:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 646CB3A4505
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 08:38:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786351041; cv=none; b=nRNQInQkqGDuBndRYkWY6z0tWof4lfnc18jkcRqLIWqKCqxpCdVRywPZRcwBBoKRlvVm2kLEzUZ8DRpKUBImotOw0hK+0mC8U4m3TMrAEhh3r4dcibNd3NEYhUUtjCqowb2RMQAITfsMbkCQqrRhURIJ3AExFs/xJBu1hEEc440=
+	t=1786351082; cv=none; b=XlwJ4vzYU2GiZqw20hS/LDiRLXPPNpLAMBQBm6LYFIroDlT8a54vxB/W8H2MnqlAMB4MBge92wzy4cDK5V0ia/d/5KEOnZ0HPbdE508IpCkpX9aa5URqp641kIVZv53X8d5PBqT+MLFLLQoPGMVE+qV8mEjJezbPYmBXUtsoFkU=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786351041; c=relaxed/simple;
-	bh=n3M7vDB+4pdqtoiwS0EDbk/4OUWMutfgaBq4ohs9IUo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=V6K0HNxOzC4iJDZjWJa/34xfyc5dm8T6VRW3Q5VApLci44U3uyOaNnJCbOrlUhmZyoXLmF0Cn13Wbu9DAV7YYploVbPKeH1Lik3zS1rB7HNf8jCOjGxzCDc2RdxKh81qexdWZPJp4QAPgste4VnOfE9r0uxaPjFu035KkqIaCs4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=ZG3nsYu4; arc=none smtp.client-ip=209.85.128.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1786351082; c=relaxed/simple;
+	bh=6C2v/w9tNkKa/m89Cb4ma5dRceieAgGMZNWRe2Aazx0=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=CVsofIM7Dh2LKvILj1fYZkGZ847j2jgx300wzv3gr1EPd/VPtfxin5N/ISrmM78PYBclS89xiBpkXB/Q3sIdCso5bkEAjqzJf6uVJ1Q/vZMJI661Wnoz5VKPxBiNGklFwi2e4/8SqSj584Ze6xLrynN52BFT5W7TObzcbjzrncE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kAQii+y0; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="ZG3nsYu4"
-Received: by mail-wm1-f47.google.com with SMTP id 5b1f17b1804b1-4953de5be0aso11614125e9.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 01:37:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1786351038; x=1786955838; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=FkxIlSiaSZQV6q19WHtk3rSh+il/+YXh4ZFHxv/IYH8=;
-        b=ZG3nsYu437UhNB6PZXOEK0tGMK7fETFA7QBJbFsRtkT7ydG+8Ae+jtGTKYUxi59gRJ
-         drqPKKQ/M9vwB2KQnMP67W3PhxHnkt63B7Oazn537nyjwefR8ok/lvT8BoYzKoOhfND+
-         lP9DxPo1N3m7i8NOg33Lf6XEVi4lwcTgT2AnjTYNw1oj9O+gDn23AUjJDhjg+XmyO6yQ
-         jH7sTN0eAHeuwYymOHYxpRZ0lcG01OpOVZyzMbU7MwPTMBTmsjjW3sQZ0OfPzD0Gp3t0
-         SSYhDmw+KS/MOB8a+CLjHKKXce5sntI+rSy6pA1J48U71oPCXmT/z6WJpg7mxQW2QJSu
-         o7ow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786351038; x=1786955838;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=FkxIlSiaSZQV6q19WHtk3rSh+il/+YXh4ZFHxv/IYH8=;
-        b=nh1dcxog3lIqlyorJolzOHPVISihL3hXNui6PnWv3qsJWb1Pe1PJAc0R5Bejl4Bp2P
-         R6cwgbmjugMc5eGpY8St7rg5WH3bFY+I4lXh0SAVBm5ZBrJAsOwo4TSjJ89h8MrTBlu5
-         IG8nLw6lzzO4DsdHzfglYts8WgNKVcj/n6RR6dfmoUFEDtgFqfryfhB8PJ7bAKhE+A/W
-         vfc1c6m/guS0tnKJh4EgSRRJ8/MmGjx4QeX53J9/3jhp7YxSray0Y+hadjJa3iObo59B
-         b//IWUEanNmycgCBRFYonsbV0N3SxZk8dkYNCblb2uONPF72gTm4ruy/SGs9uFwcSRrA
-         Ge5A==
-X-Forwarded-Encrypted: i=1; AHgh+Rr9deToVMGUkGWXaa7fy3ZhRS7hG1fBaF+r0Pot2BpmW1qrGx3ibql53QGXAwh3uffhgBGnMyjxMV9bknsY@vger.kernel.org
-X-Gm-Message-State: AOJu0YwswX+LjxrF9R/RUJZtFFOfq/EeAOL6rD3YA4pXKKEzufq/CFTn
-	PVeKWAqz9yQ+5iGHcVeN2yYwP1oSpzoMgZlQ97pjJnOMXKthzTjJ2gar0X9LGIDfZ2E=
-X-Gm-Gg: AR+sD12W7/mTSe+OnmdCB/trfxWkWY00+sNR9Xu9lm8itCpMa0wG8CyttUZsQo7Evwe
-	2cKeMUK1S11LLOT5KPG4LBMy4Hrkc2rdBjaDI+lc/8eNNnn8kjQTdHXTSMTCGWH2i0P9UaPYH8P
-	OP/vswoYdn3zbAejGBKSDB4nw0Cydyg7Ek08F+ETvrcvduRbOHt8qSLS5VM+6G9UtXlxWUFi/Cc
-	I9B5j4GBbTjCOBregplFNZErNZPPlLzzqwSRD7+6rh9WR9eoNI/1U3xC0cQO1ET3QuqhSbMIAu3
-	vRbFoDri7gsLlgzBcbO39h0XJcksiWxf+XJ1XK/PW5dTqk0ksH9xtgGKWh7vhcFLjSqQvSZkkgX
-	QBDUVSAW9bEKxqA60DalTatexsfSQzJRZyonP+5bBC1Xb4+CFz/7ZKpT6/BcP4K0ht2dNnfa2XQ
-	9d+7j3eJuF7HLEBWhS7u5xL27Ps9PxmXw8rbaP9HtaOk+YsTsYiGWdcnN66RTVx0BpsO8bgLE=
-X-Received: by 2002:a05:600c:35d1:b0:499:5e9e:1f50 with SMTP id 5b1f17b1804b1-4995e9e207dmr298923685e9.4.1786351038298;
-        Mon, 10 Aug 2026 01:37:18 -0700 (PDT)
-Received: from linaro.org ([2a02:2454:ff24:7210:71da:59f:1cf4:ec2e])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4995e9f9424sm241232975e9.8.2026.08.10.01.37.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Aug 2026 01:37:17 -0700 (PDT)
-Date: Mon, 10 Aug 2026 10:37:13 +0200
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
-	Ulf Hansson <ulfh@kernel.org>, linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] clk: qcom: mmcc-msm8974: add GENPD_FLAG_NO_STAY_ON
-Message-ID: <anmNuXoOK7Xn73TZ@linaro.org>
-References: <20260809-msm8974-mmcc-fix-v1-1-50f2dcf18d2e@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kAQii+y0"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0A4DC1F000E9
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 08:38:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786351081;
+	bh=x3lCSlMb3A2BMJf9y7N3DQXr9DovXyPF5YcxwWs0FlY=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=kAQii+y0j9K5Uq00BPYaD3iefNqweUZIkIynSVDjzUF87xpL1KWNGV7eChJUg4aS4
+	 qLGyswG47krcTW+oPswRq+12Y+Z/4zfHXSQBuRH/+wKQqGC9y/ZL/Ec7CF1UhJn2Iu
+	 SZVWSZyTBpqpv8loyi9WYmoJruGtHXK+xlC0xR/i5PBFLh94dpOo0T1Y+wo8oMN2b8
+	 1JMaghWziDcxdgICFewHuJP50eKXso/uMiBBB2xTSybu9Yo6MrAbVKVDyDzCtKuKMz
+	 5oUGpaW9M+EMU7VoOrPUlvqRQlV26LHWXgSP0ly1C3+tfIELPiV/z8lhWyO/C+wx7v
+	 vA1NYk+6+aWnA==
+Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-5b01cb18515so1476369e87.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 01:38:00 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+Ro8bgUlXC6aLQCgO+0ZEQ5u9Y/3CDRAX02FiD6BxOL1nV2vGPHOyINxa/aKIWdpukD1K7s+2ZVBQAKLrJnQ@vger.kernel.org
+X-Gm-Message-State: AOJu0Yyq95hhlONdJSIAS2qk5m0NB1l+QlCcv6MeOhX5mYuhvoi5CQ8u
+	hA2wJfy4TUm+DrDBvOfApTjpdytL2oLzd2xeirGUZ1vJmsTNaAkwX4309BTsm4otGCtcoVr0JzG
+	AesRc5uWybiSbKRYudMksP4HQIan0kK/77qmn9Ye/Kw==
+X-Received: by 2002:a05:6512:1556:b0:5b2:a1fe:5e86 with SMTP id
+ 2adb3069b0e04-5b2f4b803eemr3882764e87.1.1786351079781; Mon, 10 Aug 2026
+ 01:37:59 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 10 Aug 2026 03:37:58 -0500
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 10 Aug 2026 03:37:58 -0500
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <anIGRcBuIKiil36J@baldur>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260809-msm8974-mmcc-fix-v1-1-50f2dcf18d2e@oss.qualcomm.com>
+References: <20260731-qcom-scm-code-shrink-v2-0-4ba76096915f@oss.qualcomm.com>
+ <20260731-qcom-scm-code-shrink-v2-3-4ba76096915f@oss.qualcomm.com> <anIGRcBuIKiil36J@baldur>
+Date: Mon, 10 Aug 2026 03:37:58 -0500
+X-Gmail-Original-Message-ID: <CAMRc=MfZkmqt6w9LFca0OpyK87-oZJA8V24JiUJHSuWnrNx4kg@mail.gmail.com>
+X-Gm-Features: AUfX_mwGn5AHeI6h1LvuaxA8lqUbXvZTq2Xro_utHTyp2P2gxU5KS5TAQ9xWBk8
+Message-ID: <CAMRc=MfZkmqt6w9LFca0OpyK87-oZJA8V24JiUJHSuWnrNx4kg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/4] firmware: qcom: scm: introduce qcom_scm_clk class
+ for clock management
+To: Bjorn Andersson <andersson@kernel.org>
+Cc: Bartosz Golaszewski <brgl@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, 
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
 
-On Sun, Aug 09, 2026 at 09:58:37PM +0300, Dmitry Baryshkov wrote:
-> Commit 13a4b7fb6260 ("pmdomain: core: Leave powered-on genpds on until
-> late_initcall_sync") kept power-domains on longer during boot which is
-> causing DSI clock to get stuck and fail to acquire its configuration on
-> DSI bringup. While this is being investigated, add the flag
-> GENPD_FLAG_NO_STAY_ON for MDSS GDSC on MSM8974 to restore the previous
-> behaviour to fix this.
-> 
-> Fixes: 13a4b7fb6260 ("pmdomain: core: Leave powered-on genpds on until late_initcall_sync")
-> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+On Tue, 4 Aug 2026 17:35:53 +0200, Bjorn Andersson <andersson@kernel.org> said:
+> On Fri, Jul 31, 2026 at 10:00:36AM +0200, Bartosz Golaszewski wrote:
+>> Define DEFINE_CLASS(qcom_scm_clk) that calls qcom_scm_clk_enable() on
+>> construction and automatically calls qcom_scm_clk_disable() at scope exit
+>> *if* the enable succeeded.
+>>
+>> This allows us to convert all call sites to using
+>> CLASS(qcom_scm_clk, clk)() instead of the manual enable/check/disable
+>> pattern and to remove the associated goto labels.
+>>
+>> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+>> Reviewed-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+>> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+>> ---
+>>  drivers/firmware/qcom/qcom_scm.c | 89 +++++++++++++++-------------------------
+>>  1 file changed, 34 insertions(+), 55 deletions(-)
+>>
+>> diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
+>> index 10c79d2e59a14af0532c515d332f65bdfea05621..bb213f64703a7adb9ce413ec00524a7d0a1d3856 100644
+>> --- a/drivers/firmware/qcom/qcom_scm.c
+>> +++ b/drivers/firmware/qcom/qcom_scm.c
+>> @@ -209,6 +209,9 @@ static void qcom_scm_clk_disable(void)
+>>  	clk_disable_unprepare(__scm->bus_clk);
+>>  }
+>>
+>> +DEFINE_CLASS(qcom_scm_clk, int, if (!_T) qcom_scm_clk_disable(),
+>> +	     qcom_scm_clk_enable(), void)
+>> +
+>>  static int qcom_scm_bw_enable(void)
+>>  {
+>>  	int ret = 0;
+>> @@ -509,13 +512,11 @@ static int qcom_scm_disable_sdi(void)
+>>  	};
+>>  	struct qcom_scm_res res;
+>>
+>> -	ret = qcom_scm_clk_enable();
+>> -	if (ret)
+>> -		return ret;
+>> +	CLASS(qcom_scm_clk, clk)();
+>
+> No matter how many times I read this line, it doesn't tell me "clocks
+> will be enabled from here to the end of the scope".
+>
 
-Have you tried adding resets = <&mmcc MDSS_RESET>; to the &mdss node,
-similar to the following patch for msm8916.dtsi?
-https://lore.kernel.org/linux-arm-msm/20250915-msm8916-resets-v1-1-a5c705df0c45@linaro.org/
+Would CLASS(qcom_scm_scoped_clk, clk)(); work for you? Or maybe
+CLASS(qcom_scm_clk_guard, clk_guard)()?
 
-Thanks,
-Stephan
+Bart
