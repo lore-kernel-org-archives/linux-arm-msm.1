@@ -1,111 +1,178 @@
-Received: from linkmauve.fr (linkmauve.fr [82.65.109.163])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ed1-f53.google.com (mail-ed1-f53.google.com [209.85.208.53])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9C7F3ADB89;
-	Mon, 10 Aug 2026 10:03:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=82.65.109.163
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F189F3B6BEE
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 10:16:22 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.53
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786356235; cv=none; b=G/IcSGhNU7uVRF9785At2G+PNKtiJFAPSxGeg/1GS2n2yfNEhaKSMmC+D11gNtoo3tfNl8etxeI7Sr7Me5I916aG4NTNkOj0k4DMFZa/gxCB86/W3pjMbqiEEWskIacT7X9K8EIvR+Nu4d4Ij9yHQvc3HG7+80ikhobcfmTYnjs=
+	t=1786356986; cv=none; b=Siw3SLxRNcgqN3WKPA/ele3XjSPRDwz2lpFdz10hYPUlH4IgbenUcFkiKwhyHHT2lZFtcIb0t7bljeQNdjOWYSukT9TSGmsSzLRI0Vi4RhpNQV6cpMSMkltfisjMSAZvBoFQ8QzRf/DcCKs8DBJNaw+n0n597uiiD96rsZLsOYI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786356235; c=relaxed/simple;
-	bh=/lSWpkgbaFYwGuprUNg21Fj/qhzEtOap45oTOdy7qmU=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=pNWkRbNmoY+8SPvWzp8nguVr7Upm/J1V6Opc9jvZ+SFCS/Cp9kAZQ18iPwk2SB60r+HFkSAM/8MoW9p5NIv6ddNkAd3o+J+zre7Gusqrz49OUt09hzjgj+QuROnnlTh+BDAdUx+ntTEfnTr3JHOJhng3TNE60K9LemXwnuG/Ubw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linkmauve.fr; spf=pass smtp.mailfrom=linkmauve.fr; arc=none smtp.client-ip=82.65.109.163
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linkmauve.fr
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linkmauve.fr
-Received: by linkmauve.fr (Postfix, from userid 1000)
-	id 0C2B470AF95E; Mon, 10 Aug 2026 12:03:45 +0200 (CEST)
-Date: Mon, 10 Aug 2026 12:03:45 +0200
-From: Link Mauve <linkmauve@linkmauve.fr>
-To: Andy Shevchenko <andriy.shevchenko@intel.com>
-Cc: Link Mauve <linkmauve@linkmauve.fr>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Kevin Hilman <khilman@baylibre.com>,
-	Jerome Brunet <jbrunet@baylibre.com>,
-	Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
-	Sven Peter <sven@kernel.org>, Janne Grunau <j@jannau.net>,
-	Neal Gompa <neal@gompa.dev>, Frank Li <Frank.Li@nxp.com>,
-	Sascha Hauer <s.hauer@pengutronix.de>,
-	Pengutronix Kernel Team <kernel@pengutronix.de>,
-	Fabio Estevam <festevam@gmail.com>,
-	Vladimir Zapolskiy <vz@mleia.com>,
-	=?iso-8859-1?Q?Andr=E9?= Draszik <andre.draszik@linaro.org>,
-	Orson Zhai <orsonzhai@gmail.com>,
-	Baolin Wang <baolin.wang@linux.alibaba.com>,
-	Chunyan Zhang <zhang.lyra@gmail.com>,
-	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-	Alexandre Torgue <alexandre.torgue@foss.st.com>,
-	Kalyani Akula <kalyani.akula@amd.com>,
-	Michal Simek <michal.simek@amd.com>,
-	Miguel Ojeda <ojeda@kernel.org>, Boqun Feng <boqun@kernel.org>,
-	Gary Guo <gary@garyguo.net>,
-	=?iso-8859-1?Q?Bj=F6rn?= Roy Baron <bjorn3_gh@protonmail.com>,
-	Benno Lossin <lossin@kernel.org>,
-	Andreas Hindborg <a.hindborg@kernel.org>,
-	Alice Ryhl <aliceryhl@google.com>, Trevor Gross <tmgross@umich.edu>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Daniel Almeida <daniel.almeida@collabora.com>,
-	Tamir Duberstein <tamird@kernel.org>,
-	Alexandre Courbot <acourbot@nvidia.com>,
-	Onur =?iso-8859-1?Q?=D6zkan?= <work@onurozkan.dev>,
-	Johan Hovold <johan@kernel.org>,
-	Ronald Claveau <linux-kernel-dev@aliel.fr>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	linux-arm-kernel@lists.infradead.org,
-	linux-amlogic@lists.infradead.org, linux-kernel@vger.kernel.org,
-	asahi@lists.linux.dev, imx@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org,
-	linux-stm32@st-md-mailman.stormreply.com,
-	rust-for-linux@vger.kernel.org
-Subject: Re: [PATCH v4 0/3] nvmem: migrate to const void * in reg_write
-Message-ID: <anmiAfteOQzPXRqX@desktop>
-References: <20260726131724.15299-1-linkmauve@linkmauve.fr>
- <anl9ZRM0REenBK8t@ashevche-desk.local>
+	s=arc-20240116; t=1786356986; c=relaxed/simple;
+	bh=6/f9wmm2awoewJ0RJjhCNb25rGgSGL053o6mzKpTT4M=;
+	h=Mime-Version:Content-Type:Date:Message-Id:To:Cc:Subject:From:
+	 References:In-Reply-To; b=IJ+GdUQdbgG9BfqcIIiuxBW1DJ8S0eNPQtt8yf+BAFbg1YPNeBaoqlzsIhYjomfRhWzP22DGcSxboOIzQokie906iKu4nqdJlVh7u8IQCqd4pJ5Gku0Kvt91V5Oi/Kwl2HSC97RmKUkf5Z8W7ovZLFatZC8JmwDdJtSvMC5lZv0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com; spf=pass smtp.mailfrom=fairphone.com; dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b=fK8c8oGp; arc=none smtp.client-ip=209.85.208.53
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.b="fK8c8oGp"
+Received: by mail-ed1-f53.google.com with SMTP id 4fb4d7f45d1cf-6a156627e22so5922506a12.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 03:16:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=fairphone.com; s=fair; t=1786356981; x=1786961781; darn=vger.kernel.org;
+        h=in-reply-to:references:from:subject:cc:to:message-id:date
+         :content-type:content-transfer-encoding:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=0DdJ1gMHWzOjplPr4v+9JtrcaHIdGLk0WTVEXhfhPJg=;
+        b=fK8c8oGpIFlqTtRA0txdBW/cTc3vYYR7auns6Dv2Ygd7T8VchqymaRk3esZaMM4dr0
+         fl6qDpx451wKA5s0FoPBbAGePzydjaGh5DpTIZErh1AH6iTTNKgJ/81khcZd5vrHUhQN
+         F7AU3wSAuP694rIqtYQZLjIHL3Fs5ZkNldSMPyTRz5Ftbj8S8oATMk1AGSOkndz6z6xV
+         fT46Uca4zOFrf+ZGXbs4D3agPRqOvn8IQK04zk4exqrR1GTRNkQKb6TChOsaE3PeAcIY
+         OWWqP0TLVPm3zrsrhPU9AuEIFC8yurMUuJzMB7yQ7Su8kbnOKkUQBlwafCwIoR/peiwm
+         NqEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786356981; x=1786961781;
+        h=in-reply-to:references:from:subject:cc:to:message-id:date
+         :content-type:content-transfer-encoding:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=0DdJ1gMHWzOjplPr4v+9JtrcaHIdGLk0WTVEXhfhPJg=;
+        b=o4FwGkNrVLM87OJrT18FJhuLZrgecELK51uW4T0tPOAq3Zo61/reUKXcYepf54YUhm
+         9dCH7u/YSgFxshtauWHsd6YGfO5H5eg14CGjcrlEL/xE0eUOQL3r0s57U9peK6FbuepD
+         5QbhFtn/nZVjts5ueLaPJ4zCWmCGpKtUth5V6zCae3cToX5UICRicLyCz3T9R4kqigWZ
+         5spDQv6rjUs/NpDlU3Se1mlLKNO1RaZ+PNZyCCXAE/208pk7uT/Fr6pzfnkiXzQ20Q9h
+         2TqHDTEHWem0QwSK8UkP1d+YSCoByYSXsWOkG9jtFs7E2WmXPRZGxM8qDajcNqNlX6e5
+         eKiQ==
+X-Gm-Message-State: AOJu0YzPLaiR0Kk2qqUfxkYTjAiTEQ/6BwKhg9sb5BRMw8BSWpYCAjI7
+	EMTsEkxgeVwSoUM/Vc5Fa/SqKJVZyXUU89ST6RjbbSX+0R8DXzUJ7MPubsr+sJ2qwq8=
+X-Gm-Gg: AR+sD12hcEevw2zbvpPCPRTM4I3TyEpMhybQYkWgrzD5zqfp88cqZuF4NMCKZCTuYyB
+	S+hkRAYcgf1JfB6s1Pu93F4rJK4ThiePnL5uR8ZWcMGe5tGUQV4Pt/tFGfK77o6RbmWljEDwaRS
+	hS55JFRPUh4+QUCyfxB+K1DbtCquUETpUb7r8GRT0+8Ft1vvufl+RcbrtHgREsruymeZHZ9FlYQ
+	73djWyTTa7HkP9l1wQCWBlscF50zzUkBrzjbfpQdi94mViUpkx/31EK95+b4j5aJvMBYSd2fnxw
+	iVGZMYFSVl0qsi9TDhj37O7lapPns6e5ePOKg/txMgY/4E1skIK+OZupup5XLVHIJLFraUEZmXR
+	us8o0tp6pfIOmU2XVuV/NvuVj5bOK+QB69TDUptKXXGDyejc7lRwVaX9Jzhm8mY0HVknz3YAkgt
+	yhWJIzTojlipp6f/je3wJ+KwywVe20WkwWuStz25GLGWY8o8pDauqDW5lvGVrm91P9fqLVgVE82
+	g/Mi2w7CdhmVIpeIGEM4UB6nqhUu6fp+Q==
+X-Received: by 2002:a17:907:94cc:b0:c1c:6d29:8a11 with SMTP id a640c23a62f3a-c208d3ec3cdmr919652366b.13.1786356981152;
+        Mon, 10 Aug 2026 03:16:21 -0700 (PDT)
+Received: from localhost (144-178-202-138.static.ef-service.nl. [144.178.202.138])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2080a29a33sm357250966b.2.2026.08.10.03.16.20
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 10 Aug 2026 03:16:20 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <anl9ZRM0REenBK8t@ashevche-desk.local>
-Jabber-ID: linkmauve@linkmauve.fr
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 10 Aug 2026 12:16:19 +0200
+Message-Id: <DKL6P7G0WTM7.UJ6KZERQZDFK@fairphone.com>
+To: "Dmitry Baryshkov" <dmitry.baryshkov@oss.qualcomm.com>, "Joerg Roedel
+ (AMD)" <joro@8bytes.org>, "Will Deacon" <will@kernel.org>, "Robin Murphy"
+ <robin.murphy@arm.com>, "Rob Herring" <robh@kernel.org>, "Krzysztof
+ Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>,
+ "Konrad Dybcio" <konradybcio@kernel.org>, "Rob Clark"
+ <robin.clark@oss.qualcomm.com>, "Bjorn Andersson" <andersson@kernel.org>,
+ "Luca Weiss" <luca.weiss@fairphone.com>
+Cc: <linux-arm-msm@vger.kernel.org>, <iommu@lists.linux.dev>,
+ <devicetree@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+ <linux-arm-kernel@lists.infradead.org>
+Subject: Re: [PATCH 00/12] iommu: qcom_iommu: implement support for
+ instances on MSM8974
+From: "Luca Weiss" <luca.weiss@fairphone.com>
+X-Mailer: aerc 0.21.0-0-g5549850facc2
+References: <20260809-msm8974-iommu-upstream-v1-0-87f5cd492560@oss.qualcomm.com>
+In-Reply-To: <20260809-msm8974-iommu-upstream-v1-0-87f5cd492560@oss.qualcomm.com>
 
-On Mon, Aug 10, 2026 at 10:27:33AM +0300, Andy Shevchenko wrote:
-> On Sun, Jul 26, 2026 at 03:17:18PM +0200, Link Mauve wrote:
-> > This callback used to take a mutable void * for no reason, which causes
-> > the compiler to be unaware that the val buffer should never be modified
-> > by the callback.
-> > 
-> > This was found while drafting the nvmem-provider Rust abstraction.
-> > 
-> > Thanks to the guidance of Andy Shevchenko, this now introduces a new
-> > callback and deprecates the existing one, with the goal of renaming the
-> > new one into the old one once no user remains in the kernel.
-> 
-> LGTM now, FWIW,
-> Reviewed-by: Andy Shevchenko <andriy.shevchenko@intel.com>
-> 
-> But I think you also need to provide a road map of finishing this job (the best
-> is to provide a continuation in some of yours public Git trees to point out).
+Hi Dmitry,
 
-I’ve just pushed these changes here, as usual just build-tested:
-https://github.com/linkmauve/linux/commits/nvmem-v6
+Many thanks for working on this and sending this patch series!
 
-I was planning on working on those after the 7.3 merge window if this
-series indeed goes into 7.3, but I was never worried this would be hard
-to do, it’s a pretty mechanical change.
+On Sun Aug 9, 2026 at 10:15 PM CEST, Dmitry Baryshkov wrote:
+> Qualcomm MSM8974 platform has five SMMU instances, used by display, GPU,
+> Venus, VFE (camera) and JPEG encoder. Each of them follows ARM SMMU v1
+> spec, however they differ from other Qualcomm platforms in the
+> implementation-specific registers and also in interaction with TZ.
+> Venus, MDP and VFE SMMUs are secured and require programming only of
+> CBs, while GPU and JPEG require full programming.
+>
+> This series skips IOMMUs which can't be tested right now (VFE and JPEG),
+> and adds only MDP, GPU and Venus (although untested, it is required for
+> display to work) SMMU instances.
 
-> 
-> -- 
-> With Best Regards,
-> Andy Shevchenko
-> 
-> 
+I do have a patch series (sent years ago to the mailing lists as well)
+for CAMSS so I can definitely test this in the future.
 
--- 
-Link Mauve
+>
+> Note, to get display to work properly one fix is necessary, [1]
+>
+> [1] https://patch.msgid.link/20260809-msm8974-mmcc-fix-v1-1-50f2dcf18d2e@=
+oss.qualcomm.com
+
+I've applied this series on v7.2-rc7, with the extra commits between
+that and linux-next for qcom_iommu.c backported so that your series
+applies without conflicts.
+
+So far I'm stuck with the GPU not being able to probe, adding some
+printk's shows that in msm_iommu_new() the call for
+iommu_attach_device() is failing.
+
+[    5.971154] msm_mdp fd900100.display-controller: failed to load adreno g=
+pu
+[    5.972991] msm_mdp fd900100.display-controller: failed to bind fdb00000=
+.gpu (ops a3xx_ops [msm]): -16
+[    5.974073] msm_mdp fd900100.display-controller: adev bind failed: -16
+[    5.974152] panel-s6d6fa1 fd922800.dsi.0: error -EBUSY: Failed to attach=
+ to DSI host
+[    5.974230] panel-s6d6fa1 fd922800.dsi.0: probe with driver panel-s6d6fa=
+1 failed with error -16
+
+~ # dmesg | grep iommu
+[    0.127014] iommu: Default domain type: Translated
+[    0.127052] iommu: DMA domain TLB invalidation policy: strict mode
+[    0.739899] platform fdb00000.gpu: Adding to iommu group 0
+[    0.741358] qcom-iommu fdc84000.iommu: iommu sec: pgtable size: 90112
+[    6.006877] platform fd900100.display-controller: Adding to iommu group =
+1
+
+Have you seen any issues like this?
+
+Regards
+Luca
+
+>
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> ---
+> Dmitry Baryshkov (12):
+>       dt-bindings: iommu: qcom,iommu: document the MSM8974 IOMMUs
+>       iommu: arm-smmu: add global register definitions used by the QSMMU
+>       iommu: qcom_iommu: extract context bank programming into a helper
+>       iommu: qcom_iommu: support the short-descriptor pagetable format
+>       iommu: qcom_iommu: handle the SMMU global register space
+>       iommu: qcom_iommu: support non-TZ-managed instances
+>       iommu: qcom_iommu: restore context bank state after power collapse
+>       iommu: qcom_iommu: halt the micro-MMU while programming context ban=
+ks
+>       iommu: qcom_iommu: allow faulting transactions to terminate
+>       iommu: qcom_iommu: program BFP (prefetch) settings
+>       iommu: qcom_iommu: add the MSM8974 instances
+>       ARM: dts: qcom: msm8974: add the IOMMUs
+>
+>  .../devicetree/bindings/iommu/qcom,iommu.yaml      |  16 +-
+>  arch/arm/boot/dts/qcom/qcom-msm8974.dtsi           |  85 +++-
+>  drivers/iommu/arm/Kconfig                          |   1 +
+>  drivers/iommu/arm/arm-smmu/arm-smmu.h              |  10 +
+>  drivers/iommu/arm/arm-smmu/qcom_iommu.c            | 445 +++++++++++++++=
+++++--
+>  5 files changed, 517 insertions(+), 40 deletions(-)
+> ---
+> base-commit: 6c5c106bff878247a9cc7255077aab9040df8bf8
+> change-id: 20260809-msm8974-iommu-upstream-144b1e2a15f0
+>
+> Best regards,
+> -- =20
+> With best wishes
+> Dmitry
+
