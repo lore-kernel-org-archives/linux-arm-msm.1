@@ -1,52 +1,55 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 579CC439341;
-	Mon, 10 Aug 2026 18:46:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D24F439917;
+	Mon, 10 Aug 2026 18:46:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786387574; cv=none; b=Ny9RJgrh0YsrsgUycU0zMiBbt8TqDB56yNppx2+Sh+69SSfBp+575NKCzW2nHtLKdWbRDqWhrUlPVIG5b06tN+a+Bw5C5uK/li9BbzPNfjp3+L95BwpqRi/MrH0046dEbq/+MTBWH/zxT6Dj06ev1RDGkbAO3sO/OJQT+k7LDT0=
+	t=1786387574; cv=none; b=OJcugo3zM5MSpOqdbOvEAppX/gKHNvgEzEJHnphFAtsLH0dU1xi+ZnHMhDs6TC3HXMNBK08zCX5+/VJUkek+0Y6vHYLXJmHCZDmVGv3M7or4gNrDPZgQOkkK9RINnStoIEprNp/2K4pNBjAlnJw9on1vmENUBGfWz2gwJUdIxZo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1786387574; c=relaxed/simple;
-	bh=RaeG9XWA7mldLoLxizRmpC0XSwh28u6EiFB5GwkE+Ck=;
+	bh=B4iJAKqHl4+nzDu6M5v92Due6iMY3gTThKpMVYoNOKo=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=VlAUb1h1RTKR54deC88GCDUHHMFjAkWJE4YkTnmC/r4xBQ+03S+nmN472+7pK/u91ZsRlgwzaD4JpKdlsvBEYH+eERKSckeoUcyNB+Vneun7DCPLnHgDIwkmHtmxgP/iV0H1cmtC0gOx/hhhvilbSKm/N6nDbJR6Y+zu2bVvAvA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iWR9T5jd; arc=none smtp.client-ip=100.103.45.18
+	 MIME-Version:Content-Type; b=EF7eqZ2VwKM1bh2grpfPBpSEeRmMNVL3RlfLuS56a9FQfnBzq1vgrtg3Nr7BOy553ZBR2+W5vGWUTWVXerU3oUInMzCDwZHUuqq2isj86zUurdM4vk6QZD6HkIAJAUKllKLjoZ7Csh+Rm/fk4qzfybXXBDv2hxHX4j9Wyet89xk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KJbV+zX6; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iWR9T5jd"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0AA8F1F000E9;
-	Mon, 10 Aug 2026 18:46:09 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KJbV+zX6"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 582031F00ACA;
+	Mon, 10 Aug 2026 18:46:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786387571;
-	bh=2RWgoTvU3gzh2fRnEHOojXiIP4h7W0FRzkSFLMiJgts=;
+	s=k20260515; t=1786387573;
+	bh=MbzK7k9QqNd/yiKuq9Uo1D7PrRgwqev/pKrzCFbaHjE=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=iWR9T5jd9y28wGku0q7mXnNpVTPU/BueuuLZoYBWgANV9Sti6FTtBe6q1vFDFFgO1
-	 1wbLrJbsl0xJHetcRJKx7k0ofsK9742gJ17qte9OZKSsiOxJdz++qgmcHXPWSFhhTx
-	 kF0u9VB4B5W4eWyRf7UG+ngFgs9HA8Kw94YGCSAKlUN3pmEyoCDPaG5tbFqk7KvIX0
-	 VhW2c/VAOimdIjenXauRyIOzjSdlKiGdYMV+uGg4xO4naz5e3mVBiHlo7fX40d6EbJ
-	 pvY8+l4qMih0auWo5KuSepBu9Jjq6CMWonWMl3FrWzO+0OJZjSAVIxGYL34DtcAG0O
-	 tHj2NFQkIXWRg==
+	b=KJbV+zX6LgGnu0vNiF5rn2l1Z0D7qtzg0gfBPsEiQNbrxUBEkSseedTSfgOmLDdRI
+	 rA2to5E3ZethCmhrnquErtIR41+QkLTrL8Muh2U8cb7GtgyQpsJe1sF0yWS01u32D/
+	 j+GwY/HhdSEcsm+VloVOPV4/gPSMt/Bcwohe21lFKOG3K+qg14TMzwmz3W7BDr5aFB
+	 /kJtSbGv9yf5Ika+PEnzfwhKJ5lod0/Ud58MqQfrzYX4JgB+LHMeuILpYN8pWu2Cnr
+	 Lkq8ao+7zxKzUvRSAbQRtZvunDMXvy+bipMKHvPxsm+EGF+fqUiOCzTHWa7WG8OSP9
+	 XMtyyEymIVAAA==
 From: Bjorn Andersson <andersson@kernel.org>
 To: Michael Turquette <mturquette@baylibre.com>,
 	Stephen Boyd <sboyd@kernel.org>,
 	Brian Masney <bmasney@redhat.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Imran Shaik <imran.shaik@oss.qualcomm.com>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
 	Taniya Das <taniya.das@oss.qualcomm.com>,
-	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
+	Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org,
 	linux-clk@vger.kernel.org,
-	devicetree@vger.kernel.org,
+	linux-stm32@st-md-mailman.stormreply.com,
+	linux-arm-kernel@lists.infradead.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/2] clk: qcom: gcc-qcs8300: Add support for TSCSS clocks
-Date: Mon, 10 Aug 2026 13:45:56 -0500
-Message-ID: <178638756038.656675.9099433987894736177.b4-ty@kernel.org>
+Subject: Re: [PATCH] clk: qcom: Fix camera rivian PLL configuration settings
+Date: Mon, 10 Aug 2026 13:45:58 -0500
+Message-ID: <178638756042.656675.10550174478318858559.b4-ty@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260805-qcs8300-tsc-clks-v1-0-e7a5101ed479@oss.qualcomm.com>
-References: <20260805-qcs8300-tsc-clks-v1-0-e7a5101ed479@oss.qualcomm.com>
+In-Reply-To: <20260801-cam-rivian-pll-config-fix-v1-1-6918d58cd823@oss.qualcomm.com>
+References: <20260801-cam-rivian-pll-config-fix-v1-1-6918d58cd823@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -57,19 +60,21 @@ Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 
-On Wed, 05 Aug 2026 22:17:12 +0530, Imran Shaik wrote:
-> This series adds support for the GCC TSCSS clocks required for the
-> Timestamp Counter Subsystem (TSCSS) hardware functionality on Qualcomm
-> QCS8300 SoC.
+On Sat, 01 Aug 2026 01:15:07 +0530, Jagadeesh Kona wrote:
+> clk_alpha_pll_write_config() in the PLL configure function skips writes
+> to PLL registers when the configured value is 0. However, hardware
+> requires USER_CTL_U and CONFIG_CTL_U2 to be explicitly programmed to 0
+> for a few rivian PLLs.
 > 
+> Add a clk_regs_configure() callback to ensure these rivian PLL registers
+> are correctly initialized on Glymur, SM8750, and Kaanapali platforms.
 > 
+> [...]
 
 Applied, thanks!
 
-[1/2] dt-bindings: clock: qcom,qcs8300-gcc: Add TSCSS clocks and resets
-      commit: ac814303be8821722c0c04f396a35298009afdb1
-[2/2] clk: qcom: gcc-qcs8300: Add support for TSCSS clocks and resets
-      commit: ec4ce5a61cfd3aabd7af970021a02887641d29a9
+[1/1] clk: qcom: Fix camera rivian PLL configuration settings
+      commit: c4b84911eac4493f7b6639cb9d109a768f1dd4af
 
 Best regards,
 -- 
