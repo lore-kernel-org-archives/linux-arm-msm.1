@@ -1,138 +1,145 @@
-Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4E243AEF43
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 10:22:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.52
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6F223AE187;
+	Mon, 10 Aug 2026 10:22:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786357323; cv=none; b=RDVD8Sw+NDME/da7bR3Tp/HEG1Lf3YLg3y7DgQ0qe/C6ahLZxxFSYw8wVGMNI3luwWrDZ4C4+33qU673KXylYDFDIQYviciO16/6sumSzA+03y/jke5FmNO1qtVKnGTPulH6FTzIebgvrA0lOtZMYgC+Af8Dj/1jVEcfMHe5umo=
+	t=1786357348; cv=none; b=ZjzqUm/R0+4amnwnpARBs61NcvoGYxH8sw4jlCXeeim5RzznFR1g/mMsCSIgdpAoyPkB3oYH7kRJZhHZUAOM2/KXb5bRs+OqnKxpBIj1AQukSlwJz6HXixUXbwPdnBwGwXJFHFsv0gCqudTeKz41ZERrABE7pDIcWwU7sn0vXL8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786357323; c=relaxed/simple;
-	bh=otBjEI5x5e6oRJAULxGf/ldS0jPIB6uMht/s0aswS60=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=I4eYa33KpCDRnpZUGbfu57cxV0Vy7ETS1Ae2OJ2C/7FASw2VXsZbjRCrS0onDeODpYYt62lY4Midqdlcphxficsfs5Kc/ADcvJkxt4Lzwee5niRgCaodf9yFWOCzXXmp2ZtwFg6MKweFX8kSk09WnOK0HaKkk/HVc8+g+eesuRA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=iYUpi12L; arc=none smtp.client-ip=209.85.216.52
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1786357348; c=relaxed/simple;
+	bh=TrdLOVS+kkSe+xLM9w5zf9ng53kF2srwRIVlxkVKxM0=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=USJ1+9Gkx96jvkhJbkEhnDKGDqxEYycoUZWI8SLnASTk+/4qxmuqvT5OK0r7qjBZjGQn82NxD8uer8OCPwtcp2HWU89tSeV4P2+8cotiQyjg/gX2T04sJSApUcGKEln8LUWAXsQ5fbvlhAkzPshG11+O91B8CDLJw9HcDWOwpJ4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=U+/RWk2T; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="iYUpi12L"
-Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-3900e39d935so1665063a91.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 03:22:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786357321; x=1786962121; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=80/k07EkbH1ecXMl0R5Fs9cFDQBD709H2DM1r3/6dkI=;
-        b=iYUpi12LHsxExBoVbHX8w+E8e/nFEa6eUZSiUhbUL3qdWupnSYfBwGpW0Nmxtb4Sfb
-         wg3DQSSq2O3/SuwJHO3brrLiDsXUo8olxfV9J/ft59EJEajgFIkE+NwraPw2oOFUuMYl
-         9VO8IHgwCqB9zM/E/vamhqiE4wXGh/SAbyD+vOorWaBQCSBq8frCEsRULyctAV9I8Xev
-         I2y5NWrPQmX7o+sLemynLAS+vCDy84FGQzh/8WCt3fAw5bBD/OjQzm+qpaGL9E5xrtum
-         PpdvNIWrbDDVUei8xzxqoZ683JS3LMb2Iw6bI46jsjTvCAFX1J6jvdQmGw3vTSHyD1xJ
-         T8XQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786357321; x=1786962121;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=80/k07EkbH1ecXMl0R5Fs9cFDQBD709H2DM1r3/6dkI=;
-        b=cmLzxSenQo9xR0lKXKp4yKHWSN8pMIocm9k0L1DNk6MDT2dqmL/Mu6uhIMTwZ2VBrC
-         dkrAc3taaAVww5XVK3Xu6vWrpHqCSVbNEB6/cGLWg/psX6EdXZF7X7uY8OqXuPdl4dFY
-         ZyC0UvsueAAQVcb6gBcarq2zuEFT/NsgkNn5CciUavUVruQiNAc058ordLEM9F1juaAl
-         4Dx+42efGtur3UzKuyoHe59tG6hY/3sa9J03FZeiEdfFFOcLJ/H4i7kS0knCBr83m8hX
-         5zgUrV4Dm5ANE99JwuJtuouGI1DHlih50zFYztp8NVyKMo0GLNvsPb2xYJakywYIDXeB
-         krJA==
-X-Gm-Message-State: AOJu0YynSX9OMzpvxz+BlXGIQtmgc93D1Qs2Aqe8Q5wxAEIpmh/h6ylj
-	ECxBLyfRNXOHLiFijcvCKCxlf3IuqNJzgYPrGejt68vpq+G7hM/iHqUk
-X-Gm-Gg: AR+sD12dSMq1UlWlkKlqyfu8i/19MsUZDc7fHTsgd/41SCu2aRofZjNqr/k25qyVUzP
-	B20IhaZQ7XtqyotxJN2kegAZWYKQ6g6Qdl+clNPrjvGj6d4A8iMsY2Z4eJpgYPoEelYyJsTy2cR
-	B1ZnkbFqJ6S7hU/eWk/yyw02jhKw0hAdqvExNM/gWb6GAn1+/5wQkgAAG6gjD0Jl751/SiYkF2b
-	7sQS/cOmpuQIpHOhjo7I7Fnv7pBsAs6oKSHiAa8nrfpSxqMZw0vwURmpuQtS5sF35XFfXUXSLc1
-	C08kvnOpsWAGe9UKh1lDkIxJAMy1ojrLM66X+1bkpduThDZJZfz+Pvb75+Pd5CH0mW41My5eeZU
-	HSTg8OFKG3sI5JGLhUo5cSr7C90YklvhSpTowKc0vzKFsCgOJCxEA7j92Qg+tCc6vWK8fBYaQ9P
-	VeMJdq5Gs1BRkO4Qcvl4vZ5W2kFOCULoCQ4tRICqAvYrrL3NOEOo+QxPpq5kZwh0Z6beP0zyVIX
-	yyuTogDqM/nGz7QkdEgBZDLLMJ3KbGkrONwJcSScDtLiLlma/H/h48DSkzkqZKEGI13FkVwzjnk
-	axapgWIPKVfTzAk=
-X-Received: by 2002:a17:90b:3f8d:b0:38f:de97:b06 with SMTP id 98e67ed59e1d1-392cc9048ccmr260505a91.5.1786357321066;
-        Mon, 10 Aug 2026 03:22:01 -0700 (PDT)
-Received: from phuc-desktop.. ([183.91.15.56])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-390b1573defsm5039831a91.1.2026.08.10.03.21.59
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Aug 2026 03:22:00 -0700 (PDT)
-From: phucduc.bui@gmail.com
-To: Wim Van Sebroeck <wim@linux-watchdog.org>,
-	Guenter Roeck <linux@roeck-us.net>,
-	linux-watchdog@vger.kernel.org
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	bui duc phuc <phucduc.bui@gmail.com>
-Subject: [PATCH v2] watchdog: qcom: Propagate errors from optional IRQ lookup
-Date: Mon, 10 Aug 2026 17:21:44 +0700
-Message-ID: <20260810102144.51663-1-phucduc.bui@gmail.com>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="U+/RWk2T"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 7D977C2BCFA;
+	Mon, 10 Aug 2026 10:22:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1786357348;
+	bh=TrdLOVS+kkSe+xLM9w5zf9ng53kF2srwRIVlxkVKxM0=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=U+/RWk2TGPoDBQOCaZqDrWlMSivrjaPP9p9bza8f3nNeLIVCsDC/pH7EZecUrqKZj
+	 Hq2cdwxrWpSt4QiAFj+cdLAA+q/0A9oBLtU21+m43B8LUNjJ69uxa3L89urRAPPhYd
+	 KClPwAkLUM0VyQaoGHLxOazW/kdxKqekqwH1jSrn+mSviFTgeOBo3UV94V2KhzJhmU
+	 oFzZvEfR5lLShLyfEnpeFvQ0KbPLPNvz0xY8TrkKVNn9GzDwML5QOxy4Fho1eqwX2G
+	 pmRDDUz1NJt+prelCzN0aziNaN5fbDbmjXZnyCPmCvEHSoP+s8iNK6UwcIkZiWjlLy
+	 gW6aI3mtpnfFQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 5B03DC5AC82;
+	Mon, 10 Aug 2026 10:22:28 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Mon, 10 Aug 2026 12:22:23 +0200
+Subject: [PATCH v4 1/2] dt-bindings: media: i2c: dongwoon,dw9714: Document
+ DW9714A and V variant
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260810-dw9714v-v4-1-a227cb1d29bd@ixit.cz>
+References: <20260810-dw9714v-v4-0-a227cb1d29bd@ixit.cz>
+In-Reply-To: <20260810-dw9714v-v4-0-a227cb1d29bd@ixit.cz>
+To: Alexander Martinz <amartinz@shiftphones.com>, 
+ Bjorn Andersson <andersson@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Sakari Ailus <sakari.ailus@linux.intel.com>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, devicetree@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-media@vger.kernel.org, phone-devel@vger.kernel.org, 
+ David Heidelberg <david@ixit.cz>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2393; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=MctnB/YBUlKBkfY6HkmVWzrj67EeGRulizfUpQ/8RY4=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBqeaZiY2wzpx14SQkqY7LkwyJr/qFiF0WFREa+N
+ bXeuGxzqwGJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCanmmYgAKCRBgAj/E00kg
+ chY6EACMnaTvgqtjk+E0ak15UnUP0edb3ducN4jJSU/4iSSp8OpafdurfkvV4tT6Bapr8anetMd
+ XNsy5p2RaOGLa/FWnAOXk2qY1SvkYq7oHZQXEDAtWoljxBMNtxNDlEqi2V19uHH0dxlqA4NpuXI
+ 0fFaloefl8CeT50CWIgoUpRNzCeaV0CflVRLFfoEj4QsD70j2BOmEr0uFLgFuH3A7Wk4BtfFrId
+ FwSdbh0bPjV4ULGT4GuAM+is5UQKiawq4Uji+3KULk6oXn8emrei7fUJoMqOzXm01sav4uFtU/u
+ 7nMquHij2/bDdlVrDArAhpLKTBjRC6QjbBP3JKx7P2f/r12xLyzxDcu6w8KuuVISEAMmp/w/2Pj
+ mAlWJxN9Vlobx+mjEkul8whjbmjGUpkXSHOcjwYw1uzFl3Sf6QtvunHOU1vZst5xwT8nha08qIR
+ pdWniUwG+In4NvbTKJ9GeeU6R33JGKDW8ZnWOGLZVmr4QkhUs6QiLhssXhqqGzsgbR9OGELjX2p
+ lyQqOdKh/6tgd7XuCnW9e6cZz7wyhuVlmqI2grODdScXerruertJLsSpbscmRKH3F3UWUnFlFNu
+ H6U01ODdK6BlOMjD0SEAkg0DsjNLk88Dwku7gcnkVP8MS6O566iD2CMyGVBSNd4LUYxv8iA2axn
+ sV4Ek/IqJJPgRZA==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-From: bui duc phuc <phucduc.bui@gmail.com>
+From: David Heidelberg <david@ixit.cz>
 
-platform_get_irq_optional() returns a positive IRQ number on success or
-a negative error code on failure. For an optional IRQ, -ENXIO indicates
-that no IRQ is available, while other errors should be propagated.
+DW9714A is a successor of DW9714 and DW9714V is a successor of DW9714A.
 
-Instead of only checking for -EPROBE_DEFER, propagate all error codes
-returned by platform_get_irq_optional() other than -ENXIO, so that
-failures are properly reported to the caller.
+All three are compatible in their normal mode: a 10-bit DAC with the same
+Direct/LSC/DLC slew rate control. DW9714V additionally has an "advanced
+mode", which exposes Smart Actuator Control (SAC2/SAC3/SAC3.5/SLSC) and
+soft start/landing. Out of reset the DW9714V comes up in normal mode
+with ringing control disabled, i.e. behaving as a plain DW9714,
+so nothing has to be configured for it to work today.
 
-Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
+Should SAC support be added later, it is board data rather than a userspace
+knob: the mode and the vibration period (SAC_CFG/PRESC/SACT) have to match
+the mechanical tVIB of the actuator and lens assembly of the given camera
+module. Those properties are left out until there is driver support and
+measured values.
+
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: David Heidelberg <david@ixit.cz>
 ---
+ .../devicetree/bindings/media/i2c/dongwoon,dw9714.yaml     | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
 
-Link v1 : 
-https://lore.kernel.org/all/20260807081652.38692-1-phucduc.bui@gmail.com/
-
-Changes in v2 : 
- - Update pretimeout handling based on Guenter's review.
-
- drivers/watchdog/qcom-wdt.c | 22 ++++++++++++----------
- 1 file changed, 12 insertions(+), 10 deletions(-)
-
-diff --git a/drivers/watchdog/qcom-wdt.c b/drivers/watchdog/qcom-wdt.c
-index 49bd04841f0c..9fee18fda750 100644
---- a/drivers/watchdog/qcom-wdt.c
-+++ b/drivers/watchdog/qcom-wdt.c
-@@ -289,18 +289,20 @@ static int qcom_wdt_probe(struct platform_device *pdev)
+diff --git a/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9714.yaml b/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9714.yaml
+index 66229a3dc05d6..7c2769e6c4880 100644
+--- a/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9714.yaml
++++ b/Documentation/devicetree/bindings/media/i2c/dongwoon,dw9714.yaml
+@@ -5,22 +5,30 @@ $id: http://devicetree.org/schemas/media/i2c/dongwoon,dw9714.yaml#
+ $schema: http://devicetree.org/meta-schemas/core.yaml#
  
- 	/* check if there is pretimeout support */
- 	irq = platform_get_irq_optional(pdev, 0);
--	if (data->pretimeout && irq > 0) {
--		ret = devm_request_irq(dev, irq, qcom_wdt_isr, 0,
--				       "wdt_bark", &wdt->wdd);
--		if (ret)
--			return ret;
-+	if (data->pretimeout) {
-+		irq = platform_get_irq_optional(pdev, 0);
-+		if (irq < 0 && irq != -ENXIO)
-+			return irq;
-+		if (irq > 0) {
-+			ret = devm_request_irq(dev, irq, qcom_wdt_isr, 0,
-+					       "wdt_bark", &wdt->wdd);
-+			if (ret)
-+				return ret;
+ title: Dongwoon Anatech DW9714 camera voice coil lens driver
  
--		wdt->wdd.info = &qcom_wdt_pt_info;
--		wdt->wdd.pretimeout = 1;
-+			wdt->wdd.info = &qcom_wdt_pt_info;
-+			wdt->wdd.pretimeout = 1;
-+		}
- 	} else {
--		if (irq == -EPROBE_DEFER)
--			return -EPROBE_DEFER;
--
- 		wdt->wdd.info = &qcom_wdt_info;
- 	}
+ maintainers:
+   - Krzysztof Kozlowski <krzk@kernel.org>
  
+ description:
+-  DW9174 is a 10-bit DAC with current sink capability. It is intended for
+-  driving voice coil lenses in camera modules.
++  10-bit DAC with current sink capability. It is intended for driving
++  voice coil lenses in camera modules.
+ 
+ properties:
+   compatible:
+-    const: dongwoon,dw9714
++    oneOf:
++      - items:
++          - const: dongwoon,dw9714v
++          - const: dongwoon,dw9714a
++          - const: dongwoon,dw9714
++      - items:
++          - const: dongwoon,dw9714a
++          - const: dongwoon,dw9714
++      - const: dongwoon,dw9714
+ 
+   reg:
+     maxItems: 1
+ 
+   powerdown-gpios:
+     description:
+       XSD pin for shutdown (active low)
+ 
+
 -- 
-2.43.0
+2.55.0
+
 
