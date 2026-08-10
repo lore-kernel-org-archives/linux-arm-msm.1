@@ -1,120 +1,172 @@
-Received: from mail-pl1-f174.google.com (mail-pl1-f174.google.com [209.85.214.174])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 671AF3F787F
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 14:24:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.174
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AF19A40BCDA;
+	Mon, 10 Aug 2026 14:59:19 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786371876; cv=none; b=FO/J4ognHEFPjiGHSmvaxrybQf7N7WM6OtPxmVAmzOgAnTykDc83lW2XgK72RHxCcKHJDPmI2qxkUj8oHZrAGGAuaG0ivMlqcEp0W7SSSuDPDx7nAem3aBBBiaj4SZltA8nZx8TusXpCrrMrfUTGPYnYbymHVdLocdxgNG37U+0=
+	t=1786373966; cv=none; b=TbHa8ZkW3Xe/n5laJt9nbwuTbfxXqLLYAeqlyejkwZKJB6x0sPyTBM55KxMPmroAFxOUy5pH8yu88SyUAjcRsG++kdUV8Y6PYyN0JZriXdLYhRxILupfnVfVLhACK6xcz7LUv2TEF3T0j2Kpns3Kxjxqpwin4xn/SjAy9P/oHDY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786371876; c=relaxed/simple;
-	bh=2rVIpemWFwaPQKiWr4TkwbUpEQU4nz0aKH6/AyJYUjk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=TLAg1bIGDYM+qPyTci5eGxEYhEwuP+Y6P55K6KBWFD3ldflZ6Oa/SYjcie3DCUgqxYjKzP9fqTJ8upJZI8Cvcxx/TnLOA/Cx6Afd707o/nKEHZCqs7jm8s+CojogcK5ruaolQNUhtKDWRqJNI7nO2E93GCyCLaLixoqsbeVU2ms=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MDM5DY0t; arc=none smtp.client-ip=209.85.214.174
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1786373966; c=relaxed/simple;
+	bh=IHe+iekkZIpD0neGrMyMer28T5XcL0bxBrC3IQ2O0aQ=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date:Message-ID:
+	 MIME-Version:Content-Type; b=Ns398NCRt9r5j3TZ/VBUFL7VCJM7FzAbECgEU9EHpOyeULX9QmitUrqIZfgmzl9lxDMFqFDyeRC5shDCbzf5th7iXxnakge0dVizL+sbwIJCWCvWqHsyv6UaqofEe/iAdTqnIfo0KfsDtQvSSgdcc9zt5AkFRucMIwE1hmAb3G4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=V/dYtS6i; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MDM5DY0t"
-Received: by mail-pl1-f174.google.com with SMTP id d9443c01a7336-2caea3f742bso31895905ad.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 07:24:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786371875; x=1786976675; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:sender:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=5ax2GIMqI2oJHn6HgwhTWHhHEkIAyr6Rp1OTrqHHWbE=;
-        b=MDM5DY0tl54MM/0Fxiv08gsns8egstqYlh1NZwxOad8GssgrmK01fc/WSWYeoecbN3
-         W/q+0kBhSDfekgrP5FsQgPmqsrFA20YnXq60I+6D9LFwzpBzwHI7HsVECBs6u9zan/At
-         G4wv+x2qScSNhNukN7Y5KLGXKlZPOF/EfGt2QQT0MJtMxKj2YX0r7vHTb3xzeyaRZjkD
-         jSf7U2g5E/PLxhgHU5lyKcBzJuAXBoUUjnfrwGEhmoQDYfBBkwyisIPaQxYAjA8kflQK
-         idPL23vxBOeSbRevowup5zedm1CuyhSWTpdoB+v4ZFHD/do/MokP2MFbQEvOzIUB4lpY
-         pDeA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786371875; x=1786976675;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:sender:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=5ax2GIMqI2oJHn6HgwhTWHhHEkIAyr6Rp1OTrqHHWbE=;
-        b=aj+MdJ1GJDLFR4cZZDEQa1Rl+q8YbnhTkuV+2vGpLj2MFn2tAvm+od+jzVrP/w3Jkv
-         9vznBQCuzWVpXYgUnq9gjkrX0Go4JCEV5AewW/kaaymXWNxrqZxfpNT92p5c22HnTzUq
-         9eI7Zqg1OxNwlQRAHDI75iwqQ4vsJe+vABeZGNIN0fu5Hf7njX3M1fYEo22KaywTkQQ/
-         OT5g+NLsx9yvXpqKj/2V49k0lMILZJosz70pLwVs4BltNjTY7vNtwbvzOq8LNDQv9RVS
-         ftiQ3Hj2aCR6SC+0wRl7uRMeFjShPx+Abuuwasw9QF5p4zZgsHPnsc1E750MSPr1Vyrw
-         uTvA==
-X-Forwarded-Encrypted: i=1; AHgh+RqYK2ABhESzqIp6BelanW85DKDcVKdL5DwenW/KWRkiDT79Tgd+gwOWiCYAjXZDlnv1fYtQT4uZwcdHCkbL@vger.kernel.org
-X-Gm-Message-State: AOJu0YzbjIMqs6CIw/c1DprbqPiAom5JawZQJHeySfFOsS5tvXrPaeEU
-	/hJrO0UtLt9UGRry7asmRHa2RPUpe7QXFSBc9pZapTWQzdL7O/tGzc4d
-X-Gm-Gg: AR+sD12G3eotnXkk53+sl+XyQ+OwBVh2IYDRgRfW9oX6/O/jiHkoRV5cgr4tmoO9/nm
-	YiKfUz9jdFvCF6H9jiZ48s3xYzz2x39KWT0meOzRz8rm5fcbdZ4MxBsohWPd68SgYFCv2lnUJWu
-	JZH1WyOLFc/X1FJFoj0JNNCN3T+wqIhqH3vtAUYfCf7gjfvNzCDJ5mn7FtBB/kwsMK7msxFsJhu
-	ranv5jWX3aI57KBH/F4dysmmo6PMaFB67PegNIl9FazyGiB53OD5fjEe80XU53wSEhSQp2jdLgb
-	NflLCQAkLN9IUZZlNSKI1n50ZM6qLrtp7NEf1X8CdG0xrfoclnPEOc8jcH3l4M2ptXvWYn1mdWP
-	hw3dn9LJbxlZkShqcy+Ip6vTevl9f8e7jiEpbgS5EYq4bf3BFoH9h0lpg1HvX/IPXfGqXXASft2
-	x087qEPWqGXaKv3frCmRBzjvwK6QVnvXOESAe68kCdKvc3D+1h0fKvO7NmFj7IgBXsfMyG57Sww
-	w==
-X-Received: by 2002:a05:6a21:7308:b0:3c3:a1e6:a626 with SMTP id adf61e73a8af0-3cc1a3f1658mr2809036637.32.1786371874643;
-        Mon, 10 Aug 2026 07:24:34 -0700 (PDT)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315be86d3d1sm46551457eec.2.2026.08.10.07.24.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Aug 2026 07:24:33 -0700 (PDT)
-Sender: Guenter Roeck <groeck7@gmail.com>
-Date: Mon, 10 Aug 2026 07:24:32 -0700
-From: Guenter Roeck <linux@roeck-us.net>
-To: Bui Duc Phuc <phucduc.bui@gmail.com>
-Cc: Wim Van Sebroeck <wim@linux-watchdog.org>,
-	Joel Stanley <joel@jms.id.au>,
-	Andrew Jeffery <andrew@codeconstruct.com.au>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	linux-arm-msm@vger.kernel.org, linux-mediatek@lists.infradead.org,
-	linux-watchdog@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org
-Subject: Re: [PATCH 4/4] watchdog: aspeed: Propagate errors from optional IRQ
- lookup
-Message-ID: <01283c69-d5ca-42b0-a75d-6ebb07fee46a@roeck-us.net>
-References: <20260807081652.38692-1-phucduc.bui@gmail.com>
- <20260807081652.38692-4-phucduc.bui@gmail.com>
- <1f26fc28-da13-4ca3-990f-676b53d23630@roeck-us.net>
- <CAABR9nFy=GD4afdDxzsbp31Sq=smGVFf+HvqsrJKh_FjqdUrJA@mail.gmail.com>
- <3a9b7b85-e6f8-429a-91df-f674479dee58@roeck-us.net>
- <CAABR9nFcitFyS_xZUkreHWp822iVsoEg6ONFwU9JwPaBqm2MTQ@mail.gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="V/dYtS6i"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6A4F81F00A3A;
+	Mon, 10 Aug 2026 14:59:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786373958;
+	bh=ys1aNXfackETLgPvVRA8MSu79rLpecF8Yf/cnO1Gaao=;
+	h=From:To:Cc:Subject:In-Reply-To:References:Date;
+	b=V/dYtS6iJo8senKp13lhrmwlT8xA+1U6HjjlD+//A2SwhejyBOryc4MKyLBwVy9Xu
+	 9lHQ7ilL12qzrI22qBbA7VLP99qhz/lUMAfhciVbEzcnmY/q1QGuvJ91oiUu+mpmBq
+	 09XZBaY5/QCLmCS32t7cEfSMnSM9gQufkR9l8w00PDA1ltynhBlzD2W27mc6TRTTUQ
+	 ZrBaQ/cErqtK68f06py0yUCN2PyRHebV0wbMUMlwF1Oyrvf1C+wH0AAUJJ31pyzzlE
+	 rHjoDImKBk3jAB71tSyFC1oKqRKrjQW/1mDmgfuLo57xTbxVYW2kx/J3r5XMRLC5XI
+	 /7Nd4QNrtSdHw==
+From: Mattijs Korpershoek <mkorpershoek@kernel.org>
+To: Krzysztof Kozlowski <krzk@kernel.org>, Mattijs Korpershoek
+ <mkorpershoek@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, Krzysztof
+ Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ Philipp Zabel <p.zabel@pengutronix.de>, linux-arm-msm@vger.kernel.org,
+ linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 1/2] dt-bindings: phy: Add sa8255p high-speed USB PHY
+In-Reply-To: <20260804-active-sensible-reindeer-f459a3@quoll>
+References: <20260730-phy-qcom-snps-femto-v2-8255-v1-0-8b8bf5105a68@kernel.org>
+ <20260730-phy-qcom-snps-femto-v2-8255-v1-1-8b8bf5105a68@kernel.org>
+ <20260804-active-sensible-reindeer-f459a3@quoll>
+Date: Mon, 10 Aug 2026 16:59:15 +0200
+Message-ID: <87a4qu2f98.fsf@kernel.org>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAABR9nFcitFyS_xZUkreHWp822iVsoEg6ONFwU9JwPaBqm2MTQ@mail.gmail.com>
+Content-Type: text/plain
 
-On Mon, Aug 10, 2026 at 04:45:07PM +0700, Bui Duc Phuc wrote:
-> Hi Guenter,
-> 
-> 
-> Thank you for your feedback.
-> 
-> > >>> +                     return irq;
-> > >>>                if (irq > 0) {
-> > >>
-> > >> This if () is no longer needed.
-> > >>
-> > >
-> > > If we remove the if (irq > 0) check, irq can be -ENXIO and would be
-> > > passed to devm_request_irq().
-> > > I see that the irq argument of devm_request_irq() is an unsigned int.
-> > > Would it be safe to pass -ENXIO to it in this case?
-> > >
-> > No, sorry, I was wrong.
-> >
-> 
-> So this means there are no issues with this patch.
-> Patches 2 and 3 have already been applied by you.
-> I will temporarily resend only patch 1:
-> " watchdog: qcom: Propagate errors from optional IRQ lookup "
-> 
-Correct. Note that gmail may swallow this reply, claiming that it is spam.
+On Tue, Aug 04, 2026 at 10:07, Krzysztof Kozlowski <krzk@kernel.org> wrote:
 
-Guenter
+> On Thu, Jul 30, 2026 at 03:58:14PM +0200, Mattijs Korpershoek wrote:
+>> SA8255p platform abstracts resources such as clocks, interconnect and
+>> GPIO pins configuration in Firmware. SCMI power protocol is used to
+>> request resource configurations.
+>> 
+>> Two power domains can be requested: transfer and core.
+>> transfer controls clocks and interconnects and core controls
+>> the GDSC, resets and TLMM (GPIOs).
+>> 
+>> Add a new binding for the Qualcomm SA8255p Synopsys Femto High-Speed
+>> USB PHY V2 found in SA8255P.
+>> 
+>> Signed-off-by: Mattijs Korpershoek <mkorpershoek@kernel.org>
+>> ---
+>>  .../bindings/phy/qcom,sa8255p-usb-hs-phy.yaml      | 52 ++++++++++++++++++++++
+>>  1 file changed, 52 insertions(+)
+>> 
+>> diff --git a/Documentation/devicetree/bindings/phy/qcom,sa8255p-usb-hs-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,sa8255p-usb-hs-phy.yaml
+>> new file mode 100644
+>> index 000000000000..09f7ca6e7f72
+>> --- /dev/null
+>> +++ b/Documentation/devicetree/bindings/phy/qcom,sa8255p-usb-hs-phy.yaml
+>> @@ -0,0 +1,52 @@
+>> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+>> +%YAML 1.2
+>> +---
+>> +$id: http://devicetree.org/schemas/phy/qcom,sa8255p-usb-hs-phy.yaml#
+>> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+>> +
+>> +title: Qualcomm SA8255p Synopsys Femto High-Speed USB PHY V2
+>> +
+>> +maintainers:
+>> +  - Mattijs Korpershoek <mkorpershoek@kernel.org>
+>> +
+>> +properties:
+>> +  compatible:
+>> +    const: qcom,sa8255p-usb-hs-phy
+>> +
+>> +  reg:
+>> +    maxItems: 1
+>> +
+>> +  "#phy-cells":
+>> +    const: 0
+>> +
+>> +  power-domains:
+>> +    maxItems: 2
+>> +
+>> +  power-domain-names:
+>> +    items:
+>> +      - const: transfer
+>> +      - const: core
+>
+> Here and in your other binding you call these 'transfer' and 'core' but
+> all other bindings call them 'power' and 'perf'. Why this difference?
+
+Thanks for the question. I had to do some digging because I did not know
+the answer to this.
+
+Per my understanding, the SCMI firmware (in my case, gearvm) exposes
+multiple protocols identified by a protocol_id.
+
+For example, power domains have protocol_id=0x11 and and performance
+domain have protocol_id=0x13. This is defined in ARM's den0056 spec:
+https://support.arm.com/documentation/den0056/f/
+
+Each USB phy has 2 distinct power domains.
+This can be observed at runtime from linux via:
+
+/sys/kernel/debug/pm_genpd # grep 'scmi-power-usb0.*phy.*' pm_genpd_summary
+scmi-power-usb0-ss-phy-pm       off-0                           0
+scmi-power-usb0-ss-phy-rpm      off-0                           0
+scmi-power-usb0-hs-phy-pm       off-0                           0
+scmi-power-usb0-hs-phy-rpm      off-0                           0
+
+In the case of the other bindings - for example i2c - there is only one
+power domain (0x11) and one perf domain (protocol_id 0x13):
+
+/sys/kernel/debug/pm_genpd # grep i2c0 pm_genpd_summary
+scmi-perf-i2c0_7                on                              0
+scmi-power-i2c0                 off-0                           0
+
+I hope that explains the naming difference. Please let me know if this
+is still unclear.
+
+> What are these domains responsible for?
+
+If we take the example of the high-speed (hs) phy, we can see that on
+the firmware side, the only difference is the -pm or -rpm suffix.
+When Linux requests scmi-power-usb0-hs-phy-pm (mapped to 'core' in the
+bindings), the SCMI firmware (gearvm) will interact with the reset line,
+the clks and the regulator.
+When requesting scmi-power-usb0-hs-phy-rpms (mapped to 'transfer' in the
+bindings), the SCMI firmware will only interact with the USB clocks
+(reset and regulators remain unchanged).
+
+>
+> Commit msg is pretty useless here - repeats the diff. I can read the
+> diff but I still do not understand why such naming.
+
+'core' controls reset, clocks and regulators.
+'transfer' only controls clocks. Putting 'transfer' to 'off' is
+interesting in case of runtime suspend/resume as it cuts the data
+transfer (by disabling usb clock)
+
+Is it more clear that way?
+
+>
+> And why core is not the first one? It clearly feels like the power
+> domain thus the main one.
+
+The order is based on how it's defined in the SCMI firmware. It's not a
+problem to put 'core' first as power-domain-names property is only used
+by the linux driver. Only the SCMI channel (in my case 12) and domain
+indices (0,1) matter here.
+
+>
+> Best regards,
+> Krzysztof
