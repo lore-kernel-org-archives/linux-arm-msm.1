@@ -1,112 +1,113 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f51.google.com (mail-wm1-f51.google.com [209.85.128.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 646CB3A4505
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 08:38:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2F52838886C
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 08:43:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786351082; cv=none; b=XlwJ4vzYU2GiZqw20hS/LDiRLXPPNpLAMBQBm6LYFIroDlT8a54vxB/W8H2MnqlAMB4MBge92wzy4cDK5V0ia/d/5KEOnZ0HPbdE508IpCkpX9aa5URqp641kIVZv53X8d5PBqT+MLFLLQoPGMVE+qV8mEjJezbPYmBXUtsoFkU=
+	t=1786351430; cv=none; b=nPWBSh52AhYkiLtOhx0qyiz2khB93Mxb+OV5J0W6zqIaM2KHGgUIukJat+7bOzBVVA+6xOUBdpu15ZjjdXU24bPghGQC+VqzYbA22hiwkUraWZd41J1Fv1LbuZmkUiYnVLkG6sryL7ENeUvqzE8LckTxcy76JzFU+96pZ1YWlGQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786351082; c=relaxed/simple;
-	bh=6C2v/w9tNkKa/m89Cb4ma5dRceieAgGMZNWRe2Aazx0=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=CVsofIM7Dh2LKvILj1fYZkGZ847j2jgx300wzv3gr1EPd/VPtfxin5N/ISrmM78PYBclS89xiBpkXB/Q3sIdCso5bkEAjqzJf6uVJ1Q/vZMJI661Wnoz5VKPxBiNGklFwi2e4/8SqSj584Ze6xLrynN52BFT5W7TObzcbjzrncE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kAQii+y0; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786351430; c=relaxed/simple;
+	bh=h8lcoDN61XA3VNvVLLwt7QeCeFEM2hzvfdZ5NOd6MrQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=FAWy7orrKKRbU0VHtAc0B5lZQT5ZO/I75NW6TobFTaUgsz/R97m/M9uaWs3RXQvPbMt2UWzWGSzVYPWvvS+UL7DffSZKzYm+Pf1g0vwrSvOOWvI99ZTl9bLBDD+r/dru3tTFizCuiIgxrmp6LoSGWSDcZz/zM7GIsnAH3xcqlbs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=P4Z/Nuh2; arc=none smtp.client-ip=209.85.128.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kAQii+y0"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0A4DC1F000E9
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 08:38:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786351081;
-	bh=x3lCSlMb3A2BMJf9y7N3DQXr9DovXyPF5YcxwWs0FlY=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=kAQii+y0j9K5Uq00BPYaD3iefNqweUZIkIynSVDjzUF87xpL1KWNGV7eChJUg4aS4
-	 qLGyswG47krcTW+oPswRq+12Y+Z/4zfHXSQBuRH/+wKQqGC9y/ZL/Ec7CF1UhJn2Iu
-	 SZVWSZyTBpqpv8loyi9WYmoJruGtHXK+xlC0xR/i5PBFLh94dpOo0T1Y+wo8oMN2b8
-	 1JMaghWziDcxdgICFewHuJP50eKXso/uMiBBB2xTSybu9Yo6MrAbVKVDyDzCtKuKMz
-	 5oUGpaW9M+EMU7VoOrPUlvqRQlV26LHWXgSP0ly1C3+tfIELPiV/z8lhWyO/C+wx7v
-	 vA1NYk+6+aWnA==
-Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-5b01cb18515so1476369e87.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 01:38:00 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Ro8bgUlXC6aLQCgO+0ZEQ5u9Y/3CDRAX02FiD6BxOL1nV2vGPHOyINxa/aKIWdpukD1K7s+2ZVBQAKLrJnQ@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyq95hhlONdJSIAS2qk5m0NB1l+QlCcv6MeOhX5mYuhvoi5CQ8u
-	hA2wJfy4TUm+DrDBvOfApTjpdytL2oLzd2xeirGUZ1vJmsTNaAkwX4309BTsm4otGCtcoVr0JzG
-	AesRc5uWybiSbKRYudMksP4HQIan0kK/77qmn9Ye/Kw==
-X-Received: by 2002:a05:6512:1556:b0:5b2:a1fe:5e86 with SMTP id
- 2adb3069b0e04-5b2f4b803eemr3882764e87.1.1786351079781; Mon, 10 Aug 2026
- 01:37:59 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 10 Aug 2026 03:37:58 -0500
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 10 Aug 2026 03:37:58 -0500
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <anIGRcBuIKiil36J@baldur>
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="P4Z/Nuh2"
+Received: by mail-wm1-f51.google.com with SMTP id 5b1f17b1804b1-49553515a8bso25158565e9.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 01:43:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1786351427; x=1786956227; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=82TRoDvPhYlSGxJG5SsG9eW7+UxHfv5RnYX+401a0Rc=;
+        b=P4Z/Nuh2zYrr/7LY/DhlrLqRaDEb4MKQluc/tw3XfJlO2Es3eNLEDL1byrGKgIqIrh
+         t7XewpBGjYQsdlqrQoxTdatiULwfb+9EB+Ym9zxMCJJ8d1ZgE1QgLy2+whW/JnDg7VPe
+         QEjFVINBYNDgvNhqgbLkLv0h0A7ZKwEV8dGH8rr/2wOx5g52YySUfH6wlkwVNW541d5U
+         AwMVVfEh08o8RW0VIvCZs8Qc7zo2o5x7U4Jp7D3qzM+emm086XftbvlvQiNfqljupRMn
+         rRdhW0paF0OUqiQiHJMER96UfYeb27FyVerRukHWAMpk94wHkPgO6aWwc75Swbr+Ur+C
+         WvSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786351427; x=1786956227;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=82TRoDvPhYlSGxJG5SsG9eW7+UxHfv5RnYX+401a0Rc=;
+        b=X3KHbl/wy4wOpz/L/dwsuZIXPq7OUUykytgrCTDuR0fCk2L16ia12pSt5HL088mnr/
+         +b1cFSYt89kIRfojve6O2FYwGonzC9Gk/2FGxHSeNpggWCLeqcC7NOu/7MiCMg3DjYdJ
+         46yzwo5SzP6YsXHLQGkcr1qYdR7UAjKA2FMB/tvsScbU7Mx4+4Gje5O20AdxLYn1Q4z4
+         +0nvNfK36QLe/FidL/jMKVxlEocVpUBjZeyzb+V0Lia1JxI7l0KAWvYEJJy+PE5iny5C
+         ivO141l7KZZkz5whbMQRmOudo6dZ3UVbf+Tm/2+kaXYnsHvQ8N/iyYEYfDBLEgfY7WYf
+         rgzg==
+X-Forwarded-Encrypted: i=1; AHgh+RqXSQbczqjggJ47tghuo1n3q12TThCgO0MgPS3kyx6J0k5yOgnjRzJ7zCOoifmr3Zb7EQGCcvgK0S89dS7Q@vger.kernel.org
+X-Gm-Message-State: AOJu0YwpWGKXvL5yZEqwD6UjAB6Wxctr5FWuViuMSc/PLKrueonfu395
+	TCuD2Y5h0/fgaEQ3MWK5JP1iC3wAgMEzZP8jK6enZHGZgYPx0lqsqo7+Xcqmm26ZQxE=
+X-Gm-Gg: AR+sD139jM+Rg4mCmtnPqHEeCFlqQdDjqgAbRVAVwkz0nIgWp/0y6TSa4bO1zQDcAgq
+	P37Bqi+JRVC2gLpTf9qoRb4G1X7wF3lR9J3GL0Xo/hsfDbrQkipWcF1U3AQHzLs0lFkdo1XDErW
+	8X0dQSm8IVO79Jt02OZjQkzn/Y3vH7j2anJRPpeRd/bmMl3m1s9u6ZlBaLcgyCCNHQ4cvtJumiv
+	he/NbQY8zHMm41+Mm0CuLZm8EwBQbeZYK5DR8xVqU/K72v8B5JsxTh/A5K2GNwQ+z1wfiBawHRT
+	KEwyyF5BWnkh/cXMj8s+dGSXEOtfTk3XtqfBwGQKma/1LT25N70B223P7P9sN8vhwSRbWixYxnP
+	P8i3xhsSfbGhImkr/qnPQ5TQb23LbsAe+SSHtIp/9SS+4xfZWTWuBtX6gfG2wT9Z5Y4ltS6PT4o
+	9p2QykbTwQiHtfQ5/nIrhoQTbJ2aVu7d2Ve/lLbhJ/+y85v+Z9Xp8dTvjN4iIICgQVxTv+gQg=
+X-Received: by 2002:a05:600c:1992:b0:499:593c:3384 with SMTP id 5b1f17b1804b1-49959e08773mr345474155e9.6.1786351427393;
+        Mon, 10 Aug 2026 01:43:47 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff24:7210:71da:59f:1cf4:ec2e])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-480021506cbsm33710246f8f.14.2026.08.10.01.43.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Aug 2026 01:43:46 -0700 (PDT)
+Date: Mon, 10 Aug 2026 10:43:45 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Hongyan Xu <getshell@seu.edu.cn>
+Cc: Stephan Gerhold <stephan@gerhold.net>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Sergey Ryazanov <ryazanov.s.a@gmail.com>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	Andrew Lunn <andrew+netdev@lunn.ch>, davem@davemloft.net,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH net v2] net: wwan: qcom_bam_dmux: fix TX DMA channel
+ use-after-free
+Message-ID: <anmPQZXKgr5AONMS@linaro.org>
+References: <20260808083457.2023-1-getshell@seu.edu.cn>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260731-qcom-scm-code-shrink-v2-0-4ba76096915f@oss.qualcomm.com>
- <20260731-qcom-scm-code-shrink-v2-3-4ba76096915f@oss.qualcomm.com> <anIGRcBuIKiil36J@baldur>
-Date: Mon, 10 Aug 2026 03:37:58 -0500
-X-Gmail-Original-Message-ID: <CAMRc=MfZkmqt6w9LFca0OpyK87-oZJA8V24JiUJHSuWnrNx4kg@mail.gmail.com>
-X-Gm-Features: AUfX_mwGn5AHeI6h1LvuaxA8lqUbXvZTq2Xro_utHTyp2P2gxU5KS5TAQ9xWBk8
-Message-ID: <CAMRc=MfZkmqt6w9LFca0OpyK87-oZJA8V24JiUJHSuWnrNx4kg@mail.gmail.com>
-Subject: Re: [PATCH v2 3/4] firmware: qcom: scm: introduce qcom_scm_clk class
- for clock management
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Bartosz Golaszewski <brgl@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260808083457.2023-1-getshell@seu.edu.cn>
 
-On Tue, 4 Aug 2026 17:35:53 +0200, Bjorn Andersson <andersson@kernel.org> said:
-> On Fri, Jul 31, 2026 at 10:00:36AM +0200, Bartosz Golaszewski wrote:
->> Define DEFINE_CLASS(qcom_scm_clk) that calls qcom_scm_clk_enable() on
->> construction and automatically calls qcom_scm_clk_disable() at scope exit
->> *if* the enable succeeded.
->>
->> This allows us to convert all call sites to using
->> CLASS(qcom_scm_clk, clk)() instead of the manual enable/check/disable
->> pattern and to remove the associated goto labels.
->>
->> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
->> Reviewed-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
->> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->> ---
->>  drivers/firmware/qcom/qcom_scm.c | 89 +++++++++++++++-------------------------
->>  1 file changed, 34 insertions(+), 55 deletions(-)
->>
->> diff --git a/drivers/firmware/qcom/qcom_scm.c b/drivers/firmware/qcom/qcom_scm.c
->> index 10c79d2e59a14af0532c515d332f65bdfea05621..bb213f64703a7adb9ce413ec00524a7d0a1d3856 100644
->> --- a/drivers/firmware/qcom/qcom_scm.c
->> +++ b/drivers/firmware/qcom/qcom_scm.c
->> @@ -209,6 +209,9 @@ static void qcom_scm_clk_disable(void)
->>  	clk_disable_unprepare(__scm->bus_clk);
->>  }
->>
->> +DEFINE_CLASS(qcom_scm_clk, int, if (!_T) qcom_scm_clk_disable(),
->> +	     qcom_scm_clk_enable(), void)
->> +
->>  static int qcom_scm_bw_enable(void)
->>  {
->>  	int ret = 0;
->> @@ -509,13 +512,11 @@ static int qcom_scm_disable_sdi(void)
->>  	};
->>  	struct qcom_scm_res res;
->>
->> -	ret = qcom_scm_clk_enable();
->> -	if (ret)
->> -		return ret;
->> +	CLASS(qcom_scm_clk, clk)();
->
-> No matter how many times I read this line, it doesn't tell me "clocks
-> will be enabled from here to the end of the scope".
->
+On Sat, Aug 08, 2026 at 04:34:57PM +0800, Hongyan Xu wrote:
+> The modem power-control interrupt can currently call bam_dmux_power_off()
+> and release dmux->tx while the host side still has an active runtime PM
+> vote and is preparing or issuing TX DMA descriptors. Runtime PM prevents
+> the runtime suspend callback from running in that window, but it does not
+> serialize the modem-driven pc interrupt with the command, netdev transmit,
+> or deferred wakeup paths that use dmux->tx.
+> 
+> Serialize power-control state with a mutex and track the host pc vote under
+> that lock. If the modem reports pc=false while the host vote is still
+> active, acknowledge the pc transition but keep the DMA channels allocated.
+> This avoids releasing the TX channel underneath active users and avoids
+> terminating already queued commands such as BAM_DMUX_CMD_OPEN.
+> 
 
-Would CLASS(qcom_scm_scoped_clk, clk)(); work for you? Or maybe
-CLASS(qcom_scm_clk_guard, clk_guard)()?
+Unfortunately, this version won't work in practice because the modem
+will power down the DMA engine as soon as we acknowledge the pc
+transition. We need to release the TX channel (and bring the DMA engine
+into clean reset state) before sending the pc-ack (or refuse sending the
+pc-ack if the modem firmware is broken). The whole state management is
+unfortunately very tricky as I wrote in v1 [1].
 
-Bart
+Thanks,
+Stephan
+
+[1]: https://lore.kernel.org/linux-arm-msm/anSzDNYf0AMW7U9Y@linaro.org/
