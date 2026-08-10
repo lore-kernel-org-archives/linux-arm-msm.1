@@ -1,124 +1,173 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 138103B8BD9
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 11:26:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 910E03BB9ED;
+	Mon, 10 Aug 2026 11:28:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786361171; cv=none; b=QzvD2NN6+OTDW3a9RtgaoUoW7WHunBmrvnwuE3gp4eM46qiki3XH7luW8RNYVjLlb0AVTZ1nmPELQLWD6GSuvq0u6FVxllwe1Z5x1wRsIH/4WkwJnth1S0t8aiIhGWwUwUdCGRflaB+2WE8mwniQ3cEH5PkyprB8Lg9QjRH1GaY=
+	t=1786361285; cv=none; b=sqvAUzBh47s7TrImH0qnme5xW2asQuYKArd/A0OsNd9Y7+Hpidhmcy+AWTYdmUXx8Yvj9WumK2fvR0lIsYWwI3J6zQb4OnLjtGOL8OXf2Gm6RUKkZ/CJ8WtiLsvymq7vOEXRK/bFSzC/fLtglBbn3UCrnxDRa1k0o5xxOers6Q8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786361171; c=relaxed/simple;
-	bh=QwVAnHRHiCemIeYxsEaRGiTsru4MY7geYHkt3gj+mPE=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=uQP2sWCyrvYlQe3acLA4IggtmDfzQ9sz/UU/WFT9XlALh+miE5+JMaJG7TT783w1OssHMmDYbjS3FDFwbcjbMGG7L5Am70WnIIAcW+IrbFTNWXVPFqlIwUy724UtoJEeAcVCLtF809jfUmbIh2I2beRd5OBnzckdfGfArp6wG5c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=TAi5N8oQ; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786361285; c=relaxed/simple;
+	bh=+qn5uvdz54R7OXbPO7SM0CitO63HvTA7YF8rmOzNXoo=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=L4FeGyHNUrSOcdPOkHUH8OVB0iZvgyX+VfKtpsVscx0CFT1br1sPWRBkSJBMlRuUE/En7l8AxCdZo6lRLk1RnsqQ0z0TBeOnjtdcPOKkj2K+HsaivtT8tBL4TUYlLBzEIu1O75+TlSOu5DoxKRPsVHs3dz1/s22NYZzGobanHOA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kzw3aZoN; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="TAi5N8oQ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EE8481F00ADF
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 11:26:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786361170;
-	bh=wZoyj/bcYqq2WaFoOPNolBM0q0on9gdK76aAsSvObhU=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=TAi5N8oQgDU3uxlgGdhWfEn9nNC7rXCuv4yN2uZImZ5Qe473HPVo3p50VUpSWiPHG
-	 IoiTod5iPqxiSXKiITSq8Z8zTmwJc5HZ5uz7xmOpQ3Jkb0fyrve6APE8i9wcqXWbG9
-	 lXGMKZJiKDjBF9o//Mpr0RyCf4KxJ0hU7mN22P+i0Mg5N9bg3iRDxEVPL+nUuBavi3
-	 AGideJY+Jza/asFc16Mup/MjDB2acqh/PegxslqsJ6Ggp5t9N4qp8PgknMdViirGgS
-	 A8bpR8iBlt1Pwb4LwILd9Hw6sRCpa0GAj9fkI0FlOKyQ95A6k8YjbPxxtVg2uxyHNg
-	 fWwlAMzpEDWvA==
-Received: by mail-lf1-f54.google.com with SMTP id 2adb3069b0e04-5b15dcaca31so1638580e87.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 04:26:09 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rolco+g3PSjuSsrlZZYgXTGdC8cygWCi5HLq4KzwtjXA3WlT1LN23M37tur8i4iH2Wed4kRV9ucXhbjYerE@vger.kernel.org
-X-Gm-Message-State: AOJu0Ywe3QI12ifVogTIANSBYpUQb3m9hvlUR8nHdj7BGLQa6+cCwwa3
-	cVbDpNvEtYEKjh439CRMqfB6sd34o2gwY6N3wyaa0EtjDxOBllIx3zmcPgU48C62StqSXR4OXsG
-	WZ/WNafn4AuRBclYlRVwBE3OrXZeZv4CVwahxxEl2qA==
-X-Received: by 2002:ac2:4d18:0:b0:5b0:1b0f:7a60 with SMTP id
- 2adb3069b0e04-5b2f4cc8da0mr3704106e87.32.1786361168649; Mon, 10 Aug 2026
- 04:26:08 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 10 Aug 2026 06:26:07 -0500
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 10 Aug 2026 06:26:07 -0500
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kzw3aZoN"
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67A9SKNt2341903;
+	Mon, 10 Aug 2026 11:27:59 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:in-reply-to:message-id
+	:mime-version:references:subject:to; s=qcppdkim1; bh=H0NKqQtzSnk
+	PjFUMFltWTCYP2upTtwJOXyI49W39z7Q=; b=kzw3aZoNM0eBwLuO203DKz7AUvS
+	SdkYipvOQJQhjpxQ+QybrwJytcrsbOykGnCNzadHktL8qrmh1ss3Ibtp/P9PbqT7
+	B1QXNS+XaUUSS+9ushebus5j9GNToTzx6BfuJSqvKV+vc9QyKSRIPaNEwPKtLv36
+	S3YoIfHK1XX5UoXmLXZYnaiSoTQyN9dVhM6gH9E4SoTfqGRkz6zLBaqdadudFlLu
+	Y4y1gZhZpeEWi3MoRg2dbcZy9lJ3i1IMUyGUE5AcGi7uCp79r/S48P1qeaeUIZHj
+	e5E4CxbVMxP5RKPOSLFQTjjA7VrDvNNytbmUBtbYtl8cu9H0nx3K2PPyD1w==
+Received: from aptaippmta01.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fy19kj87m-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 10 Aug 2026 11:27:58 +0000 (GMT)
+Received: from pps.filterd (APTAIPPMTA01.qualcomm.com [127.0.0.1])
+	by APTAIPPMTA01.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTP id 67ABRu41004196;
+	Mon, 10 Aug 2026 11:27:56 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by APTAIPPMTA01.qualcomm.com (PPS) with ESMTPS id 4fwwhj4wag-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 10 Aug 2026 11:27:56 +0000 (GMT)
+Received: from APTAIPPMTA01.qualcomm.com (APTAIPPMTA01.qualcomm.com [127.0.0.1])
+	by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 67ABRua0004178;
+	Mon, 10 Aug 2026 11:27:56 GMT
+Received: from cse-cd02-lnx.qualcomm.com (smtphost-taiwan.qualcomm.com [10.249.136.33])
+	by APTAIPPMTA01.qualcomm.com (PPS) with ESMTPS id 67ABRtmf004165
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 10 Aug 2026 11:27:56 +0000 (GMT)
+Received: by cse-cd02-lnx.qualcomm.com (Postfix, from userid 4438065)
+	id 800B548E21; Mon, 10 Aug 2026 19:27:54 +0800 (CST)
+From: Ziyue Zhang <ziyue.zhang@oss.qualcomm.com>
+To: Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>
+Cc: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+        Ziyue Zhang <ziyue.zhang@oss.qualcomm.com>,
+        Qiang Yu <qiang.yu@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
+        linux-phy@lists.infradead.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH v1 2/4] phy: qcom: qmp-pcie: Add qref and refgen regulator vote for QCS8300 and SA8775p PHY
+Date: Mon, 10 Aug 2026 19:27:33 +0800
+Message-ID: <20260810112735.1326807-3-ziyue.zhang@oss.qualcomm.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260810112735.1326807-1-ziyue.zhang@oss.qualcomm.com>
+References: <20260810112735.1326807-1-ziyue.zhang@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260801195613.235430-2-krzysztof.kozlowski@oss.qualcomm.com>
-Date: Mon, 10 Aug 2026 06:26:07 -0500
-X-Gmail-Original-Message-ID: <CAMRc=MeiXHL-1i31q-+wuibK5qM1=xV+4qn0z+CWFXjt3CdrCQ@mail.gmail.com>
-X-Gm-Features: AUfX_myd-9E67e5jDYYEWIDd_Fhka4yTI8ar0CZ3ucq5EUGNAu2R2AhAZ0we-FI
-Message-ID: <CAMRc=MeiXHL-1i31q-+wuibK5qM1=xV+4qn0z+CWFXjt3CdrCQ@mail.gmail.com>
-Subject: Re: [PATCH] dt-bindings: Correct white-space style
-To: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
-	Lorenzo Pieralisi <lpieralisi@kernel.org>, Suzuki K Poulose <suzuki.poulose@arm.com>, 
-	Mike Leach <mike.leach@arm.com>, James Clark <james.clark@linaro.org>, Leo Yan <leo.yan@arm.com>, 
-	Damien Le Moal <dlemoal@kernel.org>, Niklas Cassel <cassel@kernel.org>, Jyri Sarha <jyri.sarha@iki.fi>, 
-	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	Matthias Brugger <matthias.bgg@gmail.com>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Linus Walleij <linusw@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Patrice Chotard <patrice.chotard@foss.st.com>, 
-	Andi Shyti <andi.shyti@kernel.org>, Jassi Brar <jassisinghbrar@gmail.com>, 
-	Lee Jones <lee@kernel.org>, Johannes Berg <johannes@sipsolutions.net>, 
-	Jeff Johnson <jjohnson@kernel.org>, Viresh Kumar <vireshk@kernel.org>, Nishanth Menon <nm@ti.com>, 
-	Stephen Boyd <sboyd@kernel.org>, Yangbo Lu <yangbo.lu@nxp.com>, 
-	=?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= <ukleinek@kernel.org>, 
-	Paul Walmsley <pjw@kernel.org>, Samuel Holland <samuel.holland@sifive.com>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Richard Cochran <richardcochran@gmail.com>, 
-	Jens Wiklander <jenswi@kernel.org>, Yuanfang Zhang <yuanfang.zhang@oss.qualcomm.com>, 
-	YC Hung <yc.hung@mediatek.com>, Svyatoslav Ryhel <clamor95@gmail.com>, 
-	Sean Wang <sean.wang@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
-	Peter Ujfalusi <peter.ujfalusi@gmail.com>, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	coresight@lists.linaro.org, linux-arm-msm@vger.kernel.org, 
-	linux-ide@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	linux-mediatek@lists.infradead.org, linux-gpio@vger.kernel.org, 
-	linux-i2c@vger.kernel.org, mfd@lists.linux.dev, 
-	linux-wireless@vger.kernel.org, ath10k@lists.infradead.org, 
-	linux-pm@vger.kernel.org, netdev@vger.kernel.org, linux-pwm@vger.kernel.org, 
-	linux-riscv@lists.infradead.org, linux-usb@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-ORIG-GUID: Dnkk-s0dGM2SP0WcvzMuSj8sYVFmiZ0W
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEwMDEwMSBTYWx0ZWRfX1PMTX4R/p4V2
+ uK6Y9p1gyNksqIJO5i4qr3GLcQbLdfEhmjW2wOI0YNn4Vv6VB+iSAXCPu9RKqODUFNby+6XozZT
+ Q4AB4eX5T8nurqAcYcloUuoNVdPCUiGuFURmGS5UXdFDQhbSN8QF8jMDVeePwxfUNeSHRMu7gVR
+ jqvJpXo6OOWzzeP2WAz6FiOPjvDi32OSHnkmHpj04104VL0FO2BsUf8cAPXwsNGOknKkij8kFlf
+ axFxqboWJx+BPmuSg79lqbUkcggIe/YL78g2WzhIUsvGik3kuydVe1m02iBUBFEdjUSnpr4D2KE
+ qDW4mNJWJ9pR9XrzVFCXt5KfUPUagihJot3I7GDNz0t3Cy7cY27TeKatGWZXAEtcScrtc+w70qa
+ LPqBD4TliHb20zT11t5Y6bgoUWhT3yjoWUMvmcRvu7kr6WJb6mGputlDRxJtrx3mFPblhSY5Rra
+ RH/syAtOsZWK3/bHNNQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEwMDEwMSBTYWx0ZWRfXz5r+YAgbRJl3
+ Q5S8r5/y1DUzZ5b7dHmDLISEFCvad++6P/P6yipAVzcIJv5xr9wBghXZ8G4HUgkxN0ZCBjKFxSw
+ tbbXoU+exE3Mt6XFynHzc29qCfHcGgk=
+X-Proofpoint-GUID: Dnkk-s0dGM2SP0WcvzMuSj8sYVFmiZ0W
+X-Authority-Analysis: v=2.4 cv=abxRWxot c=1 sm=1 tr=0 ts=6a79b5bf cx=c_pps
+ a=nuhDOHQX5FNHPW3J6Bj6AA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8 a=oDW96ipbCRtAeguNJTsA:9
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-10_02,2026-08-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 lowpriorityscore=0 malwarescore=0 suspectscore=0 impostorscore=0
+ priorityscore=1501 spamscore=0 phishscore=0 clxscore=1011 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608100101
 
-On Sat, 1 Aug 2026 21:56:14 +0200, Krzysztof Kozlowski
-<krzysztof.kozlowski@oss.qualcomm.com> said:
-> Correct a few white-space issues, like double space after '=' or before
-> bracket '{' characters, which will be flagged by dt-check-style.  No
-> functional changes.
->
-> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
->
-> ---
->
-> Patch applies on Rob's for-next branch.
-> ---
->  .../arm/firmware/linaro,optee-tz.yaml         |  8 +-
->  .../devicetree/bindings/arm/psci.yaml         | 18 ++--
->  .../bindings/arm/qcom,coresight-tnoc.yaml     |  2 +-
->  .../devicetree/bindings/ata/st,ahci.yaml      | 22 ++---
->  .../bindings/display/ti/ti,am65x-dss.yaml     | 12 +--
->  .../bindings/display/ti/ti,j721e-dss.yaml     | 96 +++++++++----------
->  .../bindings/display/ti/ti,k2g-dss.yaml       | 36 +++----
->  .../bindings/dsp/mediatek,mt8195-dsp.yaml     |  2 +-
->  .../bindings/gpio/st,nomadik-gpio.yaml        |  2 +-
->  .../devicetree/bindings/i2c/st,sti-i2c.yaml   |  2 +-
->  .../bindings/mailbox/st,sti-mailbox.yaml      |  2 +-
->  .../bindings/mfd/maxim,max77620.yaml          |  2 +-
->  .../bindings/net/wireless/qcom,ath10k.yaml    | 34 +++----
->  .../devicetree/bindings/opp/opp-v2.yaml       | 28 +++---
->  .../pinctrl/mediatek,mt7988-pinctrl.yaml      |  2 +-
->  .../devicetree/bindings/ptp/fsl,ptp.yaml      | 12 +--
->  .../devicetree/bindings/pwm/pwm-sifive.yaml   |  2 +-
->  .../bindings/usb/ti,twl4030-usb.yaml          |  2 +-
->  18 files changed, 142 insertions(+), 142 deletions(-)
->
+Add a new sa8775p_qmp_phy_vreg_l that includes vdda-phy, vdda-pll,
+vdda-qref, vdda-refgen and refgen supplies, and use it for QCS8300
+and SA8775p PCIe PHY configurations. This avoids modifying
+sm8550_qmp_phy_vreg_l and breaking SM8550 and SM8650.
 
-For GPIO:
+Note that due to a hardware issue, QREF actually depends on refgen3
+rather than refgen2 as documented; refgen3 is therefore voted manually
+via the refgen supply as a workaround.
 
-Acked-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Fixes: a05b6d5135ec ("phy: qcom-qmp-pcie: add support for sa8775p")
+Fixes: ebf198f17b5a ("phy: qcom-qmp-pcie: add dual lane PHY support for QCS8300")
+Signed-off-by: Ziyue Zhang <ziyue.zhang@oss.qualcomm.com>
+---
+ drivers/phy/qualcomm/phy-qcom-qmp-pcie.c | 16 ++++++++++------
+ 1 file changed, 10 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-pcie.c b/drivers/phy/qualcomm/phy-qcom-qmp-pcie.c
+index 27034bb62d0d..5d6186512c14 100644
+--- a/drivers/phy/qualcomm/phy-qcom-qmp-pcie.c
++++ b/drivers/phy/qualcomm/phy-qcom-qmp-pcie.c
+@@ -4018,6 +4018,10 @@ static const char * const sm8550_qmp_phy_vreg_l[] = {
+ 	"vdda-phy", "vdda-pll", "vdda-qref",
+ };
+ 
++static const char * const sa8775p_qmp_phy_vreg_l[] = {
++	"vdda-phy", "vdda-pll", "vdda-qref", "vdda-refgen", "refgen",
++};
++
+ /* list of resets */
+ static const char * const ipq8074_pciephy_reset_l[] = {
+ 	"phy", "common",
+@@ -4508,8 +4512,8 @@ static const struct qmp_phy_cfg qcs8300_qmp_gen4x2_pciephy_cfg = {
+ 
+ 	.reset_list		= sdm845_pciephy_reset_l,
+ 	.num_resets		= ARRAY_SIZE(sdm845_pciephy_reset_l),
+-	.vreg_list		= qmp_phy_vreg_l,
+-	.num_vregs		= ARRAY_SIZE(qmp_phy_vreg_l),
++	.vreg_list		= sa8775p_qmp_phy_vreg_l,
++	.num_vregs		= ARRAY_SIZE(sa8775p_qmp_phy_vreg_l),
+ 	.regs			= pciephy_v5_regs_layout,
+ 
+ 	.pwrdn_ctrl		= SW_PWRDN | REFCLK_DRV_DSBL,
+@@ -5218,8 +5222,8 @@ static const struct qmp_phy_cfg sa8775p_qmp_gen4x2_pciephy_cfg = {
+ 
+ 	.reset_list		= sdm845_pciephy_reset_l,
+ 	.num_resets		= ARRAY_SIZE(sdm845_pciephy_reset_l),
+-	.vreg_list		= qmp_phy_vreg_l,
+-	.num_vregs		= ARRAY_SIZE(qmp_phy_vreg_l),
++	.vreg_list		= sa8775p_qmp_phy_vreg_l,
++	.num_vregs		= ARRAY_SIZE(sa8775p_qmp_phy_vreg_l),
+ 	.regs			= pciephy_v5_regs_layout,
+ 
+ 	.pwrdn_ctrl		= SW_PWRDN | REFCLK_DRV_DSBL,
+@@ -5259,8 +5263,8 @@ static const struct qmp_phy_cfg sa8775p_qmp_gen4x4_pciephy_cfg = {
+ 
+ 	.reset_list		= sdm845_pciephy_reset_l,
+ 	.num_resets		= ARRAY_SIZE(sdm845_pciephy_reset_l),
+-	.vreg_list		= qmp_phy_vreg_l,
+-	.num_vregs		= ARRAY_SIZE(qmp_phy_vreg_l),
++	.vreg_list		= sa8775p_qmp_phy_vreg_l,
++	.num_vregs		= ARRAY_SIZE(sa8775p_qmp_phy_vreg_l),
+ 	.regs			= pciephy_v5_regs_layout,
+ 
+ 	.pwrdn_ctrl		= SW_PWRDN | REFCLK_DRV_DSBL,
+-- 
+2.43.0
+
