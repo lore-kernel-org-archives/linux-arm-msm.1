@@ -1,189 +1,100 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pg1-f179.google.com (mail-pg1-f179.google.com [209.85.215.179])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBE2E3DA7D3
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 13:47:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C34A637B02D
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 14:16:46 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.179
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786369682; cv=none; b=eHrYjpcukkZv2enK45ap1mhE/v3WiS2VMtH3HSqVT3hfKD2mXB5tnPpgxUE0Sn97MlWH3U1aZNTvKPPA3RFWb4DL66N7peqivcfyaZRW3qQBCj0QhlfyLesro3fGXTp0fwh3rVBokHDbMX3irqE6T3c4L6t/g5nDgV3/H4KM3NM=
+	t=1786371408; cv=none; b=b0R8VFHE7MqfaNmjT0xNszhrDG38gwcjXCrhSncVfyj+FXjqjNVLJcGaa64DxMuqE+ahBsHsnYkftzskPiSnlZbl2RdaN+I+trALmed3KQ0jcH9hJAY0wXeX6IC4s9yD1VZ/pRL2fHdszcCzxE9tKxVl1FVB+PQvz6wyAjQoFmc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786369682; c=relaxed/simple;
-	bh=3T05IBmOeKaCJnNraYH/j1ima368bvxG+vKBBAnikBQ=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=B4WDoK2JeYzwwtEOMhD4untEZlnO090Py/bR4LNkWj1Qph8ui50WFB+6jz7+0g0eYnixy9SOp0Bnvi20dn/0dQ/LDQ4WSBUiamu9Vfs5XJIvqP4Sw20YbhKtS+2dHCOx5nOYyjWiRpn3eMOHEwUU+O8LaGGVbFT27F6ITSa5tk0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Bayw5SnG; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786371408; c=relaxed/simple;
+	bh=EoNxgc9KtzYoR6dP5gz3OiVtQzHtUZBri5ff853Uv4c=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=lUABmUF3WWrJWPZrckp6i15tXQ9Y9w/dLVNGfZCdauroTvMqX7e7pfWCCItNDGOhgHlE6us23zsh6E8M3OceNqPPEAJ3mnP6EUh6FyQ2QgHOmQXVSSHcplq1GMLnKrb2O1As86/eh8fUtlZNGn2Na7CJn4EoYbQcLCnzrtviSfc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=NH8k+AXu; arc=none smtp.client-ip=209.85.215.179
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Bayw5SnG"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 545B51F00A3F
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 13:47:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786369679;
-	bh=Hzi2DppdJujLLI2cEYOf0nPmIJfadXAirGJPaExHRXg=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=Bayw5SnGMra5jWEwZkNChbx/VhqN+bXdlBoADGe1mHL29+vQPqnqclyiA3Db7wPPj
-	 9f2L33zytiWbSVHqtlc6KjaBXZaUIgFVH3BeR+cM7B3PPCcQbtai037rWgiWfVCtYm
-	 DSoiRm6BBVJSjbJGgXWvOcvD/vXc7wbCPUIRu2tBQA6tp/QZ9ONf4LYtaQqM/Sm3Vi
-	 3phUptan/nrN9CA60AmE1ZO1hLAcCTzU4/0vbKAKmES36TYxfmwhZtmWwSBr2pni+/
-	 hi+KrbpsoDg1Wi2lbFQqu/O36gu1XE6vQMjMiwYxJ+WN8xJyjr1gGMcoEXWb6UTYHS
-	 GX4yIxMq0YQqw==
-Received: by mail-ed1-f43.google.com with SMTP id 4fb4d7f45d1cf-6a10d02ff43so3025555a12.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 06:47:59 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RobEiqwCt9Jpl3f7jRfYRdNcbmx9RsxvqN0hmvT+SBA3XfSg3202CtVTdttcMv5v40Gs/X7vafXfYjNcdC1@vger.kernel.org
-X-Gm-Message-State: AOJu0YxSPe+k+rxvsfWvyqTbHAGj6p1f9A4ppqnqdu67QUM88xJYouPm
-	/BZQbu5dTKfV1zqO/dQYFpddLtKiF/Uzq2LJY0LKUfDbtHF0yy0r7XAToy/dYk3WuyL/DLsf6Sr
-	49Lmxq5JwdzKoXyuYbxvHVh47cE5gHQ==
-X-Received: by 2002:a17:906:fe4b:b0:c16:6c84:4b8e with SMTP id
- a640c23a62f3a-c2039cc42bamr2080432866b.14.1786369677159; Mon, 10 Aug 2026
- 06:47:57 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="NH8k+AXu"
+Received: by mail-pg1-f179.google.com with SMTP id 41be03b00d2f7-cbe827e3cb4so2063828a12.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 07:16:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1786371406; x=1786976206; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:sender:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=AyTK6GEN9WOThC9UrKPlxdUe4XgPNPIkc/LonxXL24o=;
+        b=NH8k+AXubTI79PtKjSF8zx+W7ANQM1j90mmboy+rtbAWQBkpZQ88FFccFBClkG1KAa
+         2JAW18aFdKDG/kIwhX7XtR5ic2meOK3hb//3iUHJdqo5aVNEzmsnFFZSNYMAMp4rjq25
+         /XDnhg2utUEDWPQZ31FDO7+A+jQMg0GFMGyTUmpJoxiF0LeZWmFuKOzys3WKjaA2iQFM
+         FJjTDA/1JqXEUNtzaY7hSVDB51FvLCZ2ZlFHeryI1ngEpg8AOcjo8AnCkpE4lJ9seo7y
+         Sawr0c71zP9GiGqrNSXo7r90d6nazpoLTgVPX+vQJR9xkXEgJElcCPA3LkXscTuo8Gui
+         qw6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786371406; x=1786976206;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:sender:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=AyTK6GEN9WOThC9UrKPlxdUe4XgPNPIkc/LonxXL24o=;
+        b=cwRI4oAG2/2MznqvAFdXiXxLLLPgDsqPK5HVgIOpgNuDQvqIaIPE+C/VvWbzMD5V9o
+         wZvlTz0aMP0DNQjGDM9onPSIc5qMIG9EBr2PdOAOp1HMN90BV2Fnz5IjG9RDuz6nsZgB
+         f02TxFFHYG5doFPd6EpfdlGAeQpZ17LePKf7HSscWmVXU10/H8nKjgrvPSJuYnt0JCNW
+         mmVMktxuh59uT/DbfOFLRMoE3NJ6Xuj3cTOgFJ7xo1YVdvg0035rfRShYjDrgPDaVX4C
+         T+jWZdHKryQrPWyVPUIfOStVwzx7f6jCQz8pNtc5/gT3qBKP2u/5lQwoXmtlorkO1KsL
+         ZnGQ==
+X-Forwarded-Encrypted: i=1; AHgh+RoHQmCVrbgpocWurzBpiQ0nNsH6s5FaaJV7QGergzT8AX4Ung5X6GVhbxULfiUnC+TGF8kQEuMyiAnwF9l9@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxu+hO/6/rOYx+lluEJJqJUAPq95lXZa9qy7q7wtEkrjeXiL3RQ
+	pGmyNQgoq0t5JA03nL7BKObET53HhsKfQVMCY9DLW1kReozAqw5I4hlv
+X-Gm-Gg: AR+sD12GwvAVaj0OQX+cpzUmy65ENnZLfsUwHhsLuyvzig3UkCKFAigFBKO6ruKWQ38
+	IpyPYhKVjrHM2/UhiYMVUMWqeP/nmhdbI8emdhRsp7rOvTCpex7PU+L2vsOiFrOsSnWfJWRVEeE
+	JgrdkPuX7Tl2k1bD8CAETEPnwEehd7ILI2iUTt4WsONrAqFgQz2nG0taFD0+YyDGmIftQPMuwsP
+	CfRIzkbEBdE/JD7HcZva4gUWveWJxn8gHSGIMd8eK2rhkQbCl6o7Ky3jMTjFa6nXfXQ6TTVWjw1
+	2ELus6FTwwOpOhQC0ZmaQDLpzJGtW7HThVfVMI6iACUGzfnoyqNziWmeBDcGNhFA30r8ZD+VAnO
+	hVJo5hZqxHI8FrxI+61XVqSoSCeAs+/zyVE41TGs8nK/mdsvkq2l0hUhS+pZsVrOsOrYC5k9jjg
+	i/k2a0fISaVBQ0DtK/pxKkLmahcgpNHfIU3KX0+dMCOf/SXCYZ7ZUdCBtdYsoIFBiPuuLe8xSUL
+	g==
+X-Received: by 2002:a05:6a21:2d8b:b0:3c3:7179:a640 with SMTP id adf61e73a8af0-3cc1a0bc45emr2856624637.3.1786371405704;
+        Mon, 10 Aug 2026 07:16:45 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315bec2ec20sm51806975eec.28.2026.08.10.07.16.44
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Aug 2026 07:16:45 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Date: Mon, 10 Aug 2026 07:16:43 -0700
+From: Guenter Roeck <linux@roeck-us.net>
+To: phucduc.bui@gmail.com
+Cc: Wim Van Sebroeck <wim@linux-watchdog.org>,
+	linux-watchdog@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3] watchdog: qcom: Propagate errors from optional IRQ
+ lookup
+Message-ID: <ed1510c4-7614-4086-9cd7-ecc5640dc714@roeck-us.net>
+References: <20260810105101.55945-1-phucduc.bui@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260807-iris_iova_600mb_fix-v1-0-3996f67e33f9@oss.qualcomm.com>
- <20260807-iris_iova_600mb_fix-v1-4-3996f67e33f9@oss.qualcomm.com>
- <ruow4uus64krlpy2gvm3g2d6rq5kgmgxnlhstmecil3gw7lhkd@2golvucd473l>
- <20260807162405.GA896590-robh@kernel.org> <c3hVumMy_QnRbUmbFTSWGjkfG7lPjGFEcZfPsZeGQ57nWKkhlBL3wgmcDcAgT9cNb8Ju3qZ_sSKgHk8vmow0xQ==@protonmail.internalid>
- <6ee7f32e-eb6c-e264-6f0d-541555f8fd62@oss.qualcomm.com> <56b3dfcf-b1ad-4192-8199-06c80cc5d124@kernel.org>
-In-Reply-To: <56b3dfcf-b1ad-4192-8199-06c80cc5d124@kernel.org>
-From: Rob Herring <robh@kernel.org>
-Date: Mon, 10 Aug 2026 08:47:45 -0500
-X-Gmail-Original-Message-ID: <CAL_JsqLGOz7Fh=AsM+g84=Uko10YXU4QN1buApD3CJMkOmsebA@mail.gmail.com>
-X-Gm-Features: AUfX_mwrEFk7k3OtcIlR-TAKRB83Tjc8XP94YyTpBVZLF41OPIzQfo4IdSVjMnw
-Message-ID: <CAL_JsqLGOz7Fh=AsM+g84=Uko10YXU4QN1buApD3CJMkOmsebA@mail.gmail.com>
-Subject: Re: [PATCH 04/22] arm64: dts: qcom: hamoa: Reserve low IOVA range for Iris
-To: "Bryan O'Donoghue" <bod@kernel.org>
-Cc: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>, 
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
-	Vikash Garodia <vikash.garodia@oss.qualcomm.com>, 
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, 
-	Mauro Carvalho Chehab <mchehab@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Stanimir Varbanov <stanimir.k.varbanov@gmail.com>, 
-	Sakari Ailus <sakari.ailus@linux.intel.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
-	Stephan Gerhold <stephan.gerhold@linaro.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Stanimir Varbanov <stanimir.varbanov@linaro.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Johan Hovold <johan+linaro@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Loic Poulain <loic.poulain@oss.qualcomm.com>, 
-	Jorge Ramirez-Ortiz <jorge.ramirez@oss.qualcomm.com>, 
-	Mansur Alisha Shaik <mansur@codeaurora.org>, Andy Gross <andy.gross@linaro.org>, 
-	Rob Clark <robin.clark@oss.qualcomm.com>, Stephen Boyd <sboyd@codeaurora.org>, 
-	Yassine Oudjana <y.oudjana@protonmail.com>, Pierre-Hugues Husson <phhusson@freebox.fr>, 
-	Marc Gonzalez <mgonzalez@freebox.fr>, cros-qcom-dts-watchers@chromium.org, 
-	Matthias Kaehlcke <mka@chromium.org>, Douglas Anderson <dianders@chromium.org>, 
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
-	Aniket Masule <amasule@codeaurora.org>, Malathi Gottam <quic_mgottam@quicinc.com>, 
-	Rajendra Nayak <quic_rjendra@quicinc.com>, Jonathan Marek <jonathan@marek.ca>, 
-	Dikshita Agarwal <dikshita@qti.qualcomm.com>, Renjiang Han <quic_renjiang@quicinc.com>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, linux-media@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>, 
-	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Daniel J Blueman <daniel@quora.org>, 
-	stable@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260810105101.55945-1-phucduc.bui@gmail.com>
 
-On Sat, Aug 8, 2026 at 4:55=E2=80=AFAM Bryan O'Donoghue <bod@kernel.org> wr=
-ote:
->
-> On 08/08/2026 05:37, Vishnu Reddy wrote:
-> >
-> > On 8/7/2026 9:54 PM, Rob Herring wrote:
-> >> On Fri, Aug 07, 2026 at 12:03:50PM +0300, Dmitry Baryshkov wrote:
-> >>> On Fri, Aug 07, 2026 at 01:54:48PM +0530, Vikash Garodia wrote:
-> >>>> From: Daniel J Blueman <daniel@quora.org>
-> >>>>
-> >>>> On X1-family hamoa platforms, the Iris VPU reserves IOVA addresses
-> >>>> below 0x25800000 (600MB), primarily for secure non-pixel buffers. DM=
-A
-> >>>> into that range, from any other stream id would triggers unhandled S=
-MMU
-> >>>> page faults that cause spontaneous device reboots. This is readily
-> >>>> reproduced with one or more browser tabs driving multiple concurrent
-> >>>> video decode streams.
-> >>>>
-> >>>> Add a reserved-memory IOVA reservation node covering [0, 0x25800000]
-> >>>> and reference it from the Iris node so the IOMMU layer keeps DMA
-> >>>> allocations above that boundary.
-> >>>>
-> >>>> Link: https://github.com/qualcomm-linux/kernel-topics/issues/1157#is=
-suecomment-4458933574
-> >>>> Fixes: 9065340ac04d ("arm64: dts: qcom: x1e80100: Add IRIS video cod=
-ec")
-> >>>> Cc: stable@vger.kernel.org
-> >>>> Signed-off-by: Daniel J Blueman <daniel@quora.org>
-> >>>> Signed-off-by: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-> >>>> ---
-> >>>>   arch/arm64/boot/dts/qcom/hamoa.dtsi | 13 ++++++++++++-
-> >>>>   1 file changed, 12 insertions(+), 1 deletion(-)
-> >>>>
-> >>>> diff --git a/arch/arm64/boot/dts/qcom/hamoa.dtsi b/arch/arm64/boot/d=
-ts/qcom/hamoa.dtsi
-> >>>> index 8a96ea1bdb9c4c409b2af997680d8c13fed0643e..87f424765d513c97b063=
-03bceb75ca9f176d2ace 100644
-> >>>> --- a/arch/arm64/boot/dts/qcom/hamoa.dtsi
-> >>>> +++ b/arch/arm64/boot/dts/qcom/hamoa.dtsi
-> >>>> @@ -666,6 +666,17 @@ smem_mem: smem@ffe00000 {
-> >>>>                    hwlocks =3D <&tcsr_mutex 3>;
-> >>>>                    no-map;
-> >>>>            };
-> >>>> +
-> >>>> +          /*
-> >>>> +           * The Iris VPU reserves IOVA below 0x25800000 (600MB),
-> >>>> +           * primarily for non-pixel buffers using different Stream=
- IDs.
-> >>>> +           * DMA into that range triggers unhandled SMMU faults and
-> >>>> +           * spontaneous reboots, so reserve it to keep IOMMU
-> >>>> +           * allocations above this boundary.
-> >>>> +           */
-> >>>> +          iris_iova: iris-iova {
-> >>>> +                  iommu-addresses =3D <&iris 0x0 0x0 0x0 0x25800000=
->;
-> >>>> +          };
-> >>>>    };
-> >>>>
-> >>>>    qup_opp_table_100mhz: opp-table-qup100mhz {
-> >>>> @@ -5439,7 +5450,7 @@ &config_noc SLAVE_VENUS_CFG QCOM_ICC_TAG_ACTIV=
-E_ONLY>,
-> >>>>                    interconnect-names =3D "cpu-cfg",
-> >>>>                                         "video-mem";
-> >>>>
-> >>>> -                  memory-region =3D <&video_mem>;
-> >>>> +                  memory-region =3D <&video_mem>, <&iris_iova>;
-> >>> I don't like the idea of this series, because it _again_ doesn't tell=
- us
-> >>> the truth about the hardware. This typicall ends up with bigger probl=
-ems
-> >>> later on, when it starts to affect other bits and pieces.
-> >>>
-> >>> I don't want to NAK it, but I'd strongly ask to reconsider it.
-> >> I think this is an abuse of /reserved-memory. reserved-memory is
-> >> reserved *physical* memory. Reserved IOVA is a property on top of that=
-.
-> >> I'm surprised this passes validation. If it does, I may go fix that.
-> >
-> > As per the reserved-memory.yaml schema document, the iommu-addresses
-> > property for IOVA reservation into /reserved-memory is allowed =E2=80=
-=94 it's
-> > documented for IOVA carveout reservations:
-> > https://github.com/devicetree-org/dt-schema/blob/main/dtschema/schemas/=
-reserved-memory/reserved-memory.yaml#L56
-> I think that is an entirely reasonable reading of the text
->
-> Quote:
->
-> "If no "reg" property is specified, the "iommu-addresses" property
->   defines carveout regions in the IOVA space for the given device. This
->   can be useful if a certain memory region should not be mapped through
->   the IOMMU."
->
-> Which is exactly what this series does. Excludes a specific IOVA range
-> from being allocated for this device.
+On Mon, Aug 10, 2026 at 05:51:01PM +0700, phucduc.bui@gmail.com wrote:
+> From: bui duc phuc <phucduc.bui@gmail.com>
+> 
+> platform_get_irq_optional() returns a positive IRQ number on success or
+> a negative error code on failure. For an optional IRQ, -ENXIO indicates
+> that no IRQ is available, while other errors should be propagated.
+> 
+> Instead of only checking for -EPROBE_DEFER, propagate all error codes
+> returned by platform_get_irq_optional() other than -ENXIO, so that
+> failures are properly reported to the caller.
+> 
+> Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
 
-But if "iommu-addresses" is the only property of the reserved memory,
-why put this property in reserved-memory rather than directly in the
-device's node? I'm only questioning where is the right place to
-describe a reserved IOVA.
+Applied.
 
-Rob
+Thanks,
+Guenter
