@@ -1,107 +1,77 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DC2E3C0A14
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 11:16:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F339B3C342B
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 11:24:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786360568; cv=none; b=Qkvsn4+DEO7bUhCgDbCVkC/rnydf3jD7L0GGiG0sUpODbSnxtkOUD2OqIpL5F2HIK+6u1NOd+nU2iBoQIAU3ybx+NCoT3QuvEJOv+RJm2SW7+4cvCyLJk5WfwDRiz+KeoCaLurKmMR4Aw3EIHVDk3MsVwXCEiZrU0Xdh8EXaFMM=
+	t=1786361046; cv=none; b=OYri2x7EvORZu5u9YFvFL9BAPF9Lp8r7nd7bUdGAuh2pA/5j+pOowIrkMesut+5fuk9rW5sHX7+DRKY/dRMaud57jt6BV4DfNS6a+ydoXt5SfzCLwIVCtCHyLYZYWtMEk4x/CK2RXjSJsq79OKHkZBfhkCW3GF32tkIuOTCMjdQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786360568; c=relaxed/simple;
-	bh=P/IEswyLeXqjgrL8ZRHDu6AS4WKKbd2sMTKf9/HtXA8=;
+	s=arc-20240116; t=1786361046; c=relaxed/simple;
+	bh=kNKcpEsxDjfZLHc6s+Y45GOXx7jCtt7UQGsh6xp7mcA=;
 	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=lh8gLcJhyumLTZI1c6Rij4WVHxDOI4hmlcmExkgRBPN9MTkA35cnvqjspvjrievpnvr9HB//OhTl+u4Cu23ax+weZjTdNhGVU4Q+GM0Iqq5ARXXusdQeYpIU4OZ5kq/VQf3HgE+3Mbnvxexg68uR7Gmczgp8kOmX3W6L3ZFuAKw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=mREg9nz3; arc=none smtp.client-ip=100.103.45.18
+	 To:Cc:Content-Type; b=irZ9XbpFVEjr+cSpuB7UqJQILsTisJ30fc/UeNiHc+Nw3R2kCQx669nZeFD/hGiawscN8ioMtvHWgas+Cih2liuojwcevaZz1gZ+QROCz8UF5ieFQFj3tZx8utUZj1XwcZ5WM0Gg1gbg92X7s/nCikPFU9xKrIE8yJQ7muAR+ZQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Cr+O68X/; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="mREg9nz3"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA1321F0155C
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 11:16:03 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Cr+O68X/"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 94E271F00ADB
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 11:24:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786360563;
-	bh=KqqXjK5wKyje470GpH3zQbrt/NfiaPoZDgrm3GDppTI=;
+	s=k20260515; t=1786361043;
+	bh=kNKcpEsxDjfZLHc6s+Y45GOXx7jCtt7UQGsh6xp7mcA=;
 	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=mREg9nz3r8yXiZ3cn0P6ocvo/JVbB8mqbQvjL7/P1HymKkdAbjfs0Q+ylF11Xb8aN
-	 Khj86WXmKiCrXATFwUGqmVsdfcnm+7LpB8XelP6GNs/IE4LyZ59vEThtDEHzcZ8mJI
-	 WmyeJhgkwdDQ82+bP/t3xoBuDwnGcJ99FBXSESdI+K6aRLIrrCpdvQx0fDizqGQkfo
-	 lBgpsUv5Otf9KCniNreoiIufyajjrnxpYYJgSIh8aFW545AyspSbU3RBTOivgj/taA
-	 /vvLzLZ4F9CGXXFl41QZ2qtpVaI3/k9BOlrfsdELf/J2pnsjCH8OhaxvILIlhgHg1e
-	 FjHJnyc8IG2Kg==
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-5b011edaf7dso1868966e87.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 04:16:03 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RoK8xAjwawasfHROrVyW7OedYQXrz5DNf/GwUV1P8WIAnjant4DGGmvKQk4arFNPBWzJPqLvX99XRZuPaY7@vger.kernel.org
-X-Gm-Message-State: AOJu0YzRHTzdxMg6os78RDztg0X2eMgyEBSbQsct28TS9W+RJJF9aUjq
-	yF2DtKIVZXxNjDfvegRhdccf9A1e8AIc/PXiEproGjBSyi9NwL55+cgw6lGSUB9itTMz1ONHgKh
-	AyyRHhs0nE+9s28bv+wel1PTCOjb1zsCqUQ6Zs4Vegw==
-X-Received: by 2002:ac2:5b47:0:b0:5b0:1708:afa6 with SMTP id
- 2adb3069b0e04-5b3181cec8fmr107659e87.43.1786360562682; Mon, 10 Aug 2026
- 04:16:02 -0700 (PDT)
+	b=Cr+O68X/0YJ4cF9M1950Sn/fjVqo+vrdqG2HoX/BrUFEpWrz/Hruwq41Dh88iazOk
+	 U8j6HKNGxlFKcvQ1nDlZcpYkR55NGkryTop6FLmmB75UpoWlZ5s2TGpZXmhN24K/jt
+	 7utgFg8MBPofYNns2sRBgaye79+l+5osdb2S0yeRrv3TkWLbIxL/ROI+roYuYmnYwg
+	 tpACqUSIMAEd0wBMK5c4qZhIXQHrHeVBujs8xYK3IqfCBhpIZ4KJXmvjTbAUtymGGP
+	 HqzOqiWZH14YfWnIe90hTNWcW6QNh7lo18+/1QSmRsJuzGM8WcLXFRCk3Jp0XLLzpf
+	 SAOFbrpCN+vog==
+Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-5b2a22c52c1so1592847e87.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 04:24:03 -0700 (PDT)
+X-Gm-Message-State: AOJu0YyazXaeIK8tNA8JIS4ijw0nCTGDj3/OQSbxEZyCnOB8fx4QPgT4
+	X7KA8ZYzSqCwePtNNG+GvZiU6KzGyUTf2PROX3iJ2qkt6jQkuFcYAIXtyQp5tosI4HrpO5uHkYP
+	UPWHdftFlt7rOSiqHHJSBW5rw1FF6jHAC/oiIXUHUoQ==
+X-Received: by 2002:a05:6512:688f:10b0:5b2:a4bf:a6d2 with SMTP id
+ 2adb3069b0e04-5b3181c8259mr117533e87.39.1786361042263; Mon, 10 Aug 2026
+ 04:24:02 -0700 (PDT)
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 10 Aug 2026 06:16:01 -0500
+ HTTPREST; Mon, 10 Aug 2026 11:24:01 +0000
 Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 10 Aug 2026 06:16:01 -0500
+ HTTPREST; Mon, 10 Aug 2026 11:24:01 +0000
 From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260804-b4-sgmiieth_serdes_regulator-v2-6-c4bc688177dd@oss.qualcomm.com>
+In-Reply-To: <20260802-sm8475-tlmm-v2-1-a93e1d1cb53b@proton.me>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260804-b4-sgmiieth_serdes_regulator-v2-0-c4bc688177dd@oss.qualcomm.com>
- <20260804-b4-sgmiieth_serdes_regulator-v2-6-c4bc688177dd@oss.qualcomm.com>
-Date: Mon, 10 Aug 2026 06:16:01 -0500
-X-Gmail-Original-Message-ID: <CAMRc=McVMyM8vRq2JR8aCVvNKCutV9D+J4R8zizUG2kf7ra1xg@mail.gmail.com>
-X-Gm-Features: AUfX_mxh8nhhV7PpY5aNGc_B2bOST12W9YV58LCffhOyHw53XBZ3qAYQYNo6m1U
-Message-ID: <CAMRc=McVMyM8vRq2JR8aCVvNKCutV9D+J4R8zizUG2kf7ra1xg@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] arm64: dts: qcom: qcs8300-ride: fix SerDes PHY
- regulator supplies
-To: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
-Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
-	linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
-	Krzysztof Kozlowski <krzk@kernel.org>, Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Wasim Nazir <wasim.nazir@oss.qualcomm.com>, 
-	Mohd Ayaan Anwar <quic_mohdayaa@quicinc.com>, Umang Chheda <umang.chheda@oss.qualcomm.com>, 
-	Yijie Yang <quic_yijiyang@quicinc.com>
+References: <20260802-sm8475-tlmm-v2-0-a93e1d1cb53b@proton.me> <20260802-sm8475-tlmm-v2-1-a93e1d1cb53b@proton.me>
+Date: Mon, 10 Aug 2026 11:24:01 +0000
+X-Gmail-Original-Message-ID: <CAMRc=Mf+_3CYbcT79NhBPLz2FBs-xWKA5xZxY_hmHbvYvJxF9g@mail.gmail.com>
+X-Gm-Features: AUfX_mywkhS-dFsDLxXis5hy2lIBxPJP1ka_J4nqpo7r0Qqplm7l3mc5qEJQZng
+Message-ID: <CAMRc=Mf+_3CYbcT79NhBPLz2FBs-xWKA5xZxY_hmHbvYvJxF9g@mail.gmail.com>
+Subject: Re: [PATCH v2 1/4] pinctrl: qcom: sm8450: Remove duplicate reference
+ to gpio81
+To: esteuwu@proton.me
+Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
+	phone-devel@vger.kernel.org, Bjorn Andersson <andersson@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Vinod Koul <vkoul@kernel.org>, 
+	Esteban Urrutia via B4 Relay <devnull+esteuwu.proton.me@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, 3 Aug 2026 21:28:02 +0200, Mohd Ayaan Anwar
-<mohd.anwar@oss.qualcomm.com> said:
-> The SerDes PHY node was configured with 'phy-supply = <&vreg_l5a>',
-> which only covered the 1.2V rail. The 0.9V rail (vreg_l4a) was missing
-> entirely.
+On Sun, 2 Aug 2026 09:30:54 +0200, Esteban Urrutia via B4 Relay
+<devnull+esteuwu.proton.me@kernel.org> said:
+> From: Esteban Urrutia <esteuwu@proton.me>
 >
-> Replace phy-supply with the two named properties vdda-0p9-supply
-> (vreg_l4a) and vdda-1p2-supply (vreg_l5a).
+> gpio81 is referenced twice in prng_rosc_groups.
+> Remove the duplicate reference.
 >
-> Fixes: 787cb3b4c434 ("arm64: dts: qcom: qcs8300-ride: enable ethernet0")
-> Signed-off-by: Mohd Ayaan Anwar <mohd.anwar@oss.qualcomm.com>
+> Signed-off-by: Esteban Urrutia <esteuwu@proton.me>
 > ---
->  arch/arm64/boot/dts/qcom/qcs8300-ride.dts | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/arch/arm64/boot/dts/qcom/qcs8300-ride.dts b/arch/arm64/boot/dts/qcom/qcs8300-ride.dts
-> index 1ff39530ea3deebe454416d70a289e44c2d89e3f..76c34215dbdf07e520fe96d350f52da8c4485c97 100644
-> --- a/arch/arm64/boot/dts/qcom/qcs8300-ride.dts
-> +++ b/arch/arm64/boot/dts/qcom/qcs8300-ride.dts
-> @@ -702,7 +702,9 @@ &remoteproc_gpdsp {
->  };
->
->  &serdes0 {
-> -	phy-supply = <&vreg_l5a>;
-> +	vdda-0p9-supply = <&vreg_l4a>;
-> +	vdda-1p2-supply = <&vreg_l5a>;
-> +
->  	status = "okay";
->  };
->
->
-> --
-> 2.34.1
->
->
 
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Please add the Fixes: tag.
+
+Bart
