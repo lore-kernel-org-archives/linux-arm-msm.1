@@ -1,134 +1,156 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f42.google.com (mail-pj1-f42.google.com [209.85.216.42])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4DAAB78F3A;
-	Mon, 10 Aug 2026 03:10:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE36035C180
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 03:58:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786331453; cv=none; b=GI10CAEc/6CcghMDqsttKgn3b1mVhpPV/9dBEAoEE0ZS5bYwAlwaNNnil+kiyXXRZg/GIZtVCQ7Wo83ot4N+aE4s7+ikgPwsurFsrBgT8I761Xsy2/1aeGIynmOoTLU6RuJi/OVlJKREXamWdCBTm4qDDgek9+yBhJmIGS1s1uw=
+	t=1786334318; cv=none; b=Ru9g0iz3mlN2lYFaY5GTiMPhmH2wf+a8uolTMybQTNrjR0tUToHh3LkLyXdVvetQDOpDYgMUM9Qc64X7SITIWUNphcRacPcQq6Qek9x5/6YGb58g7cpX/QnXkLPe6Tq+P0p7WiOilg4JYBYMsIIomPX89qZaCcrJyVwdIcbZftI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786331453; c=relaxed/simple;
-	bh=fK8HnBLQx3v6DMX4Nbt5V1DE5h8gdue7NTN/fhuB+I0=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=W+TFm0HMnAR+arcUH/N9XNquZoSd5ralJeQfeaADSg/uC85OKcKqzwqOu3jvn1D/OC6sJzpmsMy/isbdRAv+hJBsWaCSv8L8TiYTRTHslL/FR1Pg3i67si+qe7IYdhnUTZq+4P+TGBpDDH3Z6ik4T0P5cLRDjN1oTy6T52C1DjA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=eAgyLEcX; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
+	s=arc-20240116; t=1786334318; c=relaxed/simple;
+	bh=B3CoMJndgo3NRxCZvw4SLcraJ/a41eFbyD39O4s7wYw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=n+cPPlMi/oEgNB8dzE3bTDqpUK2LGiwbXCRTl0wJRAc8uoEHxJRpIbO2Too1CcDS5FDQmokHlQSXeirYOsDbm8T6VwnFrCXNgXy5l1+soZ1dgSFxWZ+cet98iqmYNXal0mtR3Sg1gDlrlOPBLc1CVVXSOzAP6bwn+GdQ+TIm+40=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nWabPFVA; arc=none smtp.client-ip=209.85.216.42
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=roeck-us.net
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="eAgyLEcX"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 679L8BIQ3050181;
-	Mon, 10 Aug 2026 03:10:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=jqgKkygFwWrQ9kWy4wutoYOIb9aBgOtf65B
-	XVYCP2DA=; b=eAgyLEcXhHHsRY/QXADMuvBOk2lO31r/90qmiGxXx9k5R3GRrfO
-	h4huWaH4bxG6xdmMiP1gaTINvavqT/XTU8hpE3wIfxwhhv8Z7G3eZuhZ6W6rNSed
-	ch7s1SZZHQRQ8fXsKzNItiuj1q3jT0WVwu80SCXGCVTdhICSB/e8ZG77d6Mh+uX5
-	wvfCeQHEGl54w8C8jXAsZhjSGxiGO5/7UplbvfcMFI9QdqQa/gvJ97VUJASBq7Ii
-	zb+CYXeulrtIyhI4HC2pZq3wP44INU8NGy30JPi1KG4+9NyLqL2EOln8VPnvojki
-	bOKnewibugcRSFV9KEDfS1Q/XIEEbiSzOug==
-Received: from aptaippmta02.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fwwmgv3cd-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 10 Aug 2026 03:10:39 +0000 (GMT)
-Received: from pps.filterd (APTAIPPMTA02.qualcomm.com [127.0.0.1])
-	by APTAIPPMTA02.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTP id 67A3AbGa019496;
-	Mon, 10 Aug 2026 03:10:37 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
-	by APTAIPPMTA02.qualcomm.com (PPS) with ESMTPS id 4fwwhhsr59-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 10 Aug 2026 03:10:37 +0000 (GMT)
-Received: from APTAIPPMTA02.qualcomm.com (APTAIPPMTA02.qualcomm.com [127.0.0.1])
-	by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 67A3AboV019490;
-	Mon, 10 Aug 2026 03:10:37 GMT
-Received: from cse-cd01-lnx.ap.qualcomm.com (smtphost-taiwan.qualcomm.com [10.249.136.33])
-	by APTAIPPMTA02.qualcomm.com (PPS) with ESMTPS id 67A3AaeC019487
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-	Mon, 10 Aug 2026 03:10:37 +0000 (GMT)
-Received: by cse-cd01-lnx.ap.qualcomm.com (Postfix, from userid 4531182)
-	id 81D3B20C53; Mon, 10 Aug 2026 11:10:35 +0800 (CST)
-From: Le Qi <le.qi@oss.qualcomm.com>
-To: Srinivas Kandagatla <srini@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
-        Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, kernel@oss.qualcomm.com,
-        Le Qi <le.qi@oss.qualcomm.com>
-Subject: [PATCH v2] ASoC: qcom: sc8280xp: configure codec sysclk for QCS615
-Date: Mon, 10 Aug 2026 11:10:32 +0800
-Message-Id: <20260810031032.2001053-1-le.qi@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nWabPFVA"
+Received: by mail-pj1-f42.google.com with SMTP id 98e67ed59e1d1-38dcbade417so1285670a91.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 09 Aug 2026 20:58:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1786334316; x=1786939116; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=QEU+pp4CCJstwvmXVbRVK0utyTpf3g/1fbsNABHVlac=;
+        b=nWabPFVA9Hbqhsa9uPstQfLXQ7vyaaUhuOglyGYoEPrv1EYnOdNDASMDVADIrgZwg4
+         ayKcILn2wgNlYAzW8AQRoU0WJZe5fKNGaNKo/PE099FHpGnNDRP4mrrVUAnI13aPJnsV
+         PgmwJF8VkqV3YuQ1UtVgk5lScavn7Vw/SUd5UnUE/yALHvl/0e0BvuK+a7E1W4uenHRQ
+         UNCsXVmAEfhEUHnZsySf2+MNB7It+R+8B2YHFYmqBD8Pn+CqdvXPQdhnjgdYcj3F0G7v
+         Vk/chal6h02EBTlvIsDTYlAq6DT7eybKKtSGgnVueK4wkmCnYFS1anz2x9XDbXj0or/H
+         MRkQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786334316; x=1786939116;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:sender:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=QEU+pp4CCJstwvmXVbRVK0utyTpf3g/1fbsNABHVlac=;
+        b=muA+PIAvqlD/HPByPHlX+WzLOJvwrkHFXINX15Su8Y3g1dR7vBlBgE7Ug+kUlde7FT
+         smUjcJjj7V+9TGehl5VlZrpXBOA1IPpbbwkyM/kh3kP1AFRlUJJbeQOysDxgQQkdwcjn
+         T6mPdJo616RSDJ5DoXkpiMlUahNnSPVxFVa7TG8Bgehhf1q6yHMkrKbo2OShbTIGEPoK
+         b3BCoh/Bf4IzsVDuKNiht1f+F8JzOlS75GXkUOvE5hqI+Namyc9bHHfSO0QhbjAdNja5
+         dvs4XWPMzHIJxgpas/yz8RE8t6MNquCO02qkWmIiyn+wF8I1bOkgJdNhI4PJFSJIVSXD
+         WsuA==
+X-Forwarded-Encrypted: i=1; AHgh+RqJFcFT/XnzxrfBN7wMJI/Nmfrh34y/kjf193eODoziqDuVJ+sWo1pwaeTitv7sIoC3u5H48W2gOyydPaaS@vger.kernel.org
+X-Gm-Message-State: AOJu0YxnN8CDb07GrOgC7t6Of7rMgqAJ3A/llZS4pY9f1/xEntNShW1e
+	0K3NfcHihVa9er0d2F5IeZobew4s36Btn3x1H5ETlE0R+WvNNX0iNDbH
+X-Gm-Gg: AR+sD10GTlZ6K8cnX/SvgD7l8B0Q5m+dq4TfHLrUSFqsu+/ysxSdv6H2bSoeB/+r52r
+	a7PIspy/+GQfkh1Rl2r0EgizTm8srfdFaZzoAXp5nrFyWgSwuwxC3nTY6hq2R78+/Mta0HP7qeR
+	d0Rrk6wT0X2q4QmrOb7VhTpwBYoNUe3ila+bvnQ6BvbVbMhwdGwawEBRVC+3H4GobBJOjHLh+Nm
+	wwtTjcMi4BJ6MGe9UCpqpfQqmuKpXcj2e9+LCr/YLix6qgPbD5Lp84H3jloOPrmqBBwi3Kf+411
+	PFSQ2533gBm/XJMJOcf9CPQAPKdSfUdV0mWXUCP+iE4KE2vsxNKkcUX3AcZi6dtGwhv2tS/iaKW
+	fnovrxVcqCWg3sh0GE+slGCfnM58fYK+WHDDWoJSBRzsgdW1/gCO5eD4ELDm0p2rrT/XnxvroKV
+	PFRpdBtBgVk91q/1gBwh6mx7Lbdxib83SNggOxJUb+BM2+y5LizhkF1MCxdpEGmXJNPWNkaa6GK
+	tm3gXQbT0Zts0MHjUktKhaIKXukMi1FylqljUfS5+4OF5orIQ==
+X-Received: by 2002:a17:90b:5244:b0:38e:9eb2:9d43 with SMTP id 98e67ed59e1d1-3903c5b685bmr38481045a91.16.1786334316290;
+        Sun, 09 Aug 2026 20:58:36 -0700 (PDT)
+Received: from ?IPV6:2600:1700:e321:62f0:da43:aeff:fecc:bfd5? ([2600:1700:e321:62f0:da43:aeff:fecc:bfd5])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-315bebde353sm41638500eec.23.2026.08.09.20.58.34
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 09 Aug 2026 20:58:35 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Message-ID: <3a9b7b85-e6f8-429a-91df-f674479dee58@roeck-us.net>
+Date: Sun, 9 Aug 2026 20:58:33 -0700
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEwMDAyMyBTYWx0ZWRfXwHS7QxNtUE2K
- L7fLjMFC9XkJV3BgNUMSqfojTJSyM0HqE0eCsk5L8V30fxd1Rz0byhKSjBI6Hr+uRrKnu8BFApG
- FYZpUfe43UelT+NERHt4FOlJMT3m7e0=
-X-Authority-Analysis: v=2.4 cv=HodG3UTS c=1 sm=1 tr=0 ts=6a79412f cx=c_pps
- a=nuhDOHQX5FNHPW3J6Bj6AA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8 a=VgxNshHlH55NMODlW1cA:9
-X-Proofpoint-ORIG-GUID: wZBwX8kKSwO83NWKCeOgSO-J162zBjPs
-X-Proofpoint-GUID: wZBwX8kKSwO83NWKCeOgSO-J162zBjPs
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEwMDAyMyBTYWx0ZWRfX9DzNo0VdMwZE
- knY5QlQYUvlPp9OBCLefzmWmFKKSkjzPxf0s2OuwmznNqqmiF51hz7uqGD3RBLC/MnHKGfKG0bi
- ZRjf3EqrWCdwhoZUZHWm2Q1blAg8diCi+3B+Sdu+hW8toFlctU6OtC+YqQcl0c+Rpm6dx5Wor70
- S7h3A8ZRSIE4y9jKNfUA6wmHLteYwNihRQKEI4wy/Ye7nSqMfYyd11OSJ3MGRci89Eyx6YRui3b
- w7/1BzTn39NBQHBxO9MP4UHXUxUDrcsJfbgUs74xDbz2WAJAplGGJIcdpFcF8V8bKkVg5eNay8M
- IAjb4CNBJg3k+yHCuJqdU/eKPi5LjHI70GEOs/JTAetWOaIpXakLbsqyaz/JJhMRnyk1ytFa2Gz
- 3jEgAkT6u/jtRWuz4njoQ+amJ4Ged0EhcgT78wFcR5oRm74e10zXT6o0MeA3bTgTIXmSXYnzrfb
- k8NQ4toHOkWQkrmzpFg==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-09_07,2026-08-07_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 suspectscore=0 spamscore=0 bulkscore=0
- malwarescore=0 adultscore=0 impostorscore=0 phishscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608100023
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/4] watchdog: aspeed: Propagate errors from optional IRQ
+ lookup
+To: Bui Duc Phuc <phucduc.bui@gmail.com>
+Cc: Wim Van Sebroeck <wim@linux-watchdog.org>, Joel Stanley <joel@jms.id.au>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>,
+ AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+ linux-arm-msm@vger.kernel.org, linux-mediatek@lists.infradead.org,
+ linux-watchdog@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org
+References: <20260807081652.38692-1-phucduc.bui@gmail.com>
+ <20260807081652.38692-4-phucduc.bui@gmail.com>
+ <1f26fc28-da13-4ca3-990f-676b53d23630@roeck-us.net>
+ <CAABR9nFy=GD4afdDxzsbp31Sq=smGVFf+HvqsrJKh_FjqdUrJA@mail.gmail.com>
+Content-Language: en-US
+From: Guenter Roeck <linux@roeck-us.net>
+Autocrypt: addr=linux@roeck-us.net; keydata=
+ xsFNBE6H1WcBEACu6jIcw5kZ5dGeJ7E7B2uweQR/4FGxH10/H1O1+ApmcQ9i87XdZQiB9cpN
+ RYHA7RCEK2dh6dDccykQk3bC90xXMPg+O3R+C/SkwcnUak1UZaeK/SwQbq/t0tkMzYDRxfJ7
+ nyFiKxUehbNF3r9qlJgPqONwX5vJy4/GvDHdddSCxV41P/ejsZ8PykxyJs98UWhF54tGRWFl
+ 7i1xvaDB9lN5WTLRKSO7wICuLiSz5WZHXMkyF4d+/O5ll7yz/o/JxK5vO/sduYDIlFTvBZDh
+ gzaEtNf5tQjsjG4io8E0Yq0ViobLkS2RTNZT8ICq/Jmvl0SpbHRvYwa2DhNsK0YjHFQBB0FX
+ IdhdUEzNefcNcYvqigJpdICoP2e4yJSyflHFO4dr0OrdnGLe1Zi/8Xo/2+M1dSSEt196rXaC
+ kwu2KgIgmkRBb3cp2vIBBIIowU8W3qC1+w+RdMUrZxKGWJ3juwcgveJlzMpMZNyM1jobSXZ0
+ VHGMNJ3MwXlrEFPXaYJgibcg6brM6wGfX/LBvc/haWw4yO24lT5eitm4UBdIy9pKkKmHHh7s
+ jfZJkB5fWKVdoCv/omy6UyH6ykLOPFugl+hVL2Prf8xrXuZe1CMS7ID9Lc8FaL1ROIN/W8Vk
+ BIsJMaWOhks//7d92Uf3EArDlDShwR2+D+AMon8NULuLBHiEUQARAQABzTJHdWVudGVyIFJv
+ ZWNrIChMaW51eCBhY2NvdW50KSA8bGludXhAcm9lY2stdXMubmV0PsLBgQQTAQIAKwIbAwYL
+ CQgHAwIGFQgCCQoLBBYCAwECHgECF4ACGQEFAmgrMyQFCSbODQkACgkQyx8mb86fmYGcWRAA
+ oRwrk7V8fULqnGGpBIjp7pvR187Yzx+lhMGUHuM5H56TFEqeVwCMLWB2x1YRolYbY4MEFlQg
+ VUFcfeW0OknSr1s6wtrtQm0gdkolM8OcCL9ptTHOg1mmXa4YpW8QJiL0AVtbpE9BroeWGl9v
+ 2TGILPm9mVp+GmMQgkNeCS7Jonq5f5pDUGumAMguWzMFEg+Imt9wr2YA7aGen7KPSqJeQPpj
+ onPKhu7O/KJKkuC50ylxizHzmGx+IUSmOZxN950pZUFvVZH9CwhAAl+NYUtcF5ry/uSYG2U7
+ DCvpzqOryJRemKN63qt1bjF6cltsXwxjKOw6CvdjJYA3n6xCWLuJ6yk6CAy1Ukh545NhgBAs
+ rGGVkl6TUBi0ixL3EF3RWLa9IMDcHN32r7OBhw6vbul8HqyTFZWY2ksTvlTl+qG3zV6AJuzT
+ WdXmbcKN+TdhO5XlxVlbZoCm7ViBj1+PvIFQZCnLAhqSd/DJlhaq8fFXx1dCUPgQDcD+wo65
+ qulV/NijfU8bzFfEPgYP/3LP+BSAyFs33y/mdP8kbMxSCjnLEhimQMrSSo/To1Gxp5C97fw5
+ 3m1CaMILGKCmfI1B8iA8zd8ib7t1Rg0qCwcAnvsM36SkrID32GfFbv873bNskJCHAISK3Xkz
+ qo7IYZmjk/IJGbsiGzxUhvicwkgKE9r7a1rOwU0ETofVZwEQALlLbQeBDTDbwQYrj0gbx3bq
+ 7kpKABxN2MqeuqGr02DpS9883d/t7ontxasXoEz2GTioevvRmllJlPQERVxM8gQoNg22twF7
+ pB/zsrIjxkE9heE4wYfN1AyzT+AxgYN6f8hVQ7Nrc9XgZZe+8IkuW/Nf64KzNJXnSH4u6nJM
+ J2+Dt274YoFcXR1nG76Q259mKwzbCukKbd6piL+VsT/qBrLhZe9Ivbjq5WMdkQKnP7gYKCAi
+ pNVJC4enWfivZsYupMd9qn7Uv/oCZDYoBTdMSBUblaLMwlcjnPpOYK5rfHvC4opxl+P/Vzyz
+ 6WC2TLkPtKvYvXmdsI6rnEI4Uucg0Au/Ulg7aqqKhzGPIbVaL+U0Wk82nz6hz+WP2ggTrY1w
+ ZlPlRt8WM9w6WfLf2j+PuGklj37m+KvaOEfLsF1v464dSpy1tQVHhhp8LFTxh/6RWkRIR2uF
+ I4v3Xu/k5D0LhaZHpQ4C+xKsQxpTGuYh2tnRaRL14YMW1dlI3HfeB2gj7Yc8XdHh9vkpPyuT
+ nY/ZsFbnvBtiw7GchKKri2gDhRb2QNNDyBnQn5mRFw7CyuFclAksOdV/sdpQnYlYcRQWOUGY
+ HhQ5eqTRZjm9z+qQe/T0HQpmiPTqQcIaG/edgKVTUjITfA7AJMKLQHgp04Vylb+G6jocnQQX
+ JqvvP09whbqrABEBAAHCwWUEGAECAA8CGwwFAmgrMyQFCSbODQkACgkQyx8mb86fmYHlgg/9
+ H5JeDmB4jsreE9Bn621wZk7NMzxy9STxiVKSh8Mq4pb+IDu1RU2iLyetCY1TiJlcxnE362kj
+ njrfAdqyPteHM+LU59NtEbGwrfcXdQoh4XdMuPA5ADetPLma3YiRa3VsVkLwpnR7ilgwQw6u
+ dycEaOxQ7LUXCs0JaGVVP25Z2hMkHBwx6BlW6EZLNgzGI2rswSZ7SKcsBd1IRHVf0miwIFYy
+ j/UEfAFNW+tbtKPNn3xZTLs3quQN7GdYLh+J0XxITpBZaFOpwEKV+VS36pSLnNl0T5wm0E/y
+ scPJ0OVY7ly5Vm1nnoH4licaU5Y1nSkFR/j2douI5P7Cj687WuNMC6CcFd6j72kRfxklOqXw
+ zvy+2NEcXyziiLXp84130yxAKXfluax9sZhhrhKT6VrD45S6N3HxJpXQ/RY/EX35neH2/F7B
+ RgSloce2+zWfpELyS1qRkCUTt1tlGV2p+y2BPfXzrHn2vxvbhEn1QpQ6t+85FKN8YEhJEygJ
+ F0WaMvQMNrk9UAUziVcUkLU52NS9SXqpVg8vgrO0JKx97IXFPcNh0DWsSj/0Y8HO/RDkGXYn
+ FDMj7fZSPKyPQPmEHg+W/KzxSSfdgWIHF2QaQ0b2q1wOSec4Rti52ohmNSY+KNIW/zODhugJ
+ np3900V20aS7eD9K8GTU0TGC1pyz6IVJwIE=
+In-Reply-To: <CAABR9nFy=GD4afdDxzsbp31Sq=smGVFf+HvqsrJKh_FjqdUrJA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Continuous high-amplitude noise could occur in the DA7213 microphone
-capture path after a Bluetooth out-of-range/reset event followed by
-reconnection. The noise was present in both the raw ALSA capture and
-PipeWire input, confirming that it originated before Bluetooth
-encoding.
+On 8/9/26 19:38, Bui Duc Phuc wrote:
+> Hi Guenter,
+> 
+> Thank you for your review.
+> 
+>>> +             if (irq < 0 && irq != -ENXIO)
+>>> +                     return irq;
+>>>                if (irq > 0) {
+>>
+>> This if () is no longer needed.
+>>
+> 
+> If we remove the if (irq > 0) check, irq can be -ENXIO and would be
+> passed to devm_request_irq().
+> I see that the irq argument of devm_request_irq() is an unsigned int.
+> Would it be safe to pass -ENXIO to it in this case?
+> 
+No, sorry, I was wrong.
 
-The codec already obtains and enables MCLK through its DT clock and
-bias-level handling. However, the machine driver did not explicitly
-configure the codec sysclk during hw_params(). Enable
-codec_sysclk_set for QCS615 so that the DA7213 clock source and rate
-are configured before the codec power-up sequence.
-
-Verified on QCS615 Talos with repeated Bluetooth disconnect and
-reconnect cycles. The noise was no longer reproducible.
-
-Signed-off-by: Le Qi <le.qi@oss.qualcomm.com>
----
-v2:
- - Drop the dependency note as the prerequisite changes are already present.
- - Rebase onto current code and regenerate the patch.
-
- sound/soc/qcom/sc8280xp.c | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/sound/soc/qcom/sc8280xp.c b/sound/soc/qcom/sc8280xp.c
-index 597c0d887d2f..913ae81be424 100644
---- a/sound/soc/qcom/sc8280xp.c
-+++ b/sound/soc/qcom/sc8280xp.c
-@@ -462,6 +462,7 @@ static const struct qcom_snd_soc_common qcs615_priv_data = {
- 	.driver_name = "qcs615",
- 	.dapm_widgets = sc8280xp_dapm_widgets,
- 	.num_dapm_widgets = ARRAY_SIZE(sc8280xp_dapm_widgets),
-+	.codec_sysclk_set = true,
- };
- 
- static const struct qcom_snd_soc_common qcm6490_priv_data = {
--- 
-2.34.1
+Guenter
 
