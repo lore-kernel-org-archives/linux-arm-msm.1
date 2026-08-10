@@ -1,132 +1,143 @@
-Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9E1BC3BD228
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 10:54:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.180
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC0483BC664
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 11:03:29 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786359242; cv=none; b=a9S6OxF5dLj+6A1ppfQhgru0hAJBdd4w56jycJwYzL20a9hDZdXh6DaO4Lacn1Wl5MmgUKhAUlyOd2IKYFpFkPyCOLcFFjXApoLv2qgr0TH6gDaYDljoTqGHqsOzuxFWgADn1hXun7px/cTKF9YHazjpQrZ5vGS6tmkyznj+psU=
+	t=1786359811; cv=none; b=CnB1rvQEjGCjyMJGFEx3nYY/CAHS++rljWwAHqIqDdVSJlUFzjJZ7SgzLZYfJcVA91w62VxZfT/7UJ1TVzSllp5+mIQwl/dCBU02F4EJd5d314tEM2rxtPtkby+iU+upbhKid0S7RCqN3tcjf1IlRZ3gwzF5E2T8JbY4ogWY/no=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786359242; c=relaxed/simple;
-	bh=UY04sXqtgfZuiIRe9CNmz8m46h+7PvdCRxQvkLu8ep4=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=OaNwQzt6G5KzWBkAMzzRrXmeBJ56EWgMiAQT4yqalfloGik8tXaKmDcA+BcZ4JL1jS9ECIUFaw4QJ+wGo5H5NVVazMvtZGpNF5jRociTzfCIlvT9n7RQ/Z8ZFnW/LTWT61tSQd3ZElwVntwlXOJ9LHHGkLE9utuJMiF/Eifz/X0=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=a7uqM297; arc=none smtp.client-ip=209.85.214.180
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1786359811; c=relaxed/simple;
+	bh=p49IchS1moer5f9ixq9X0KkzRurkRwI24S8WQ72LvTw=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=qTO0DuSmYemq/a7Jo6S0HR3OdhcllU1qTp2Mn6ICj8eqCsmPBBpNIuhCjv4NcscxAmGywqcYqCkCTzV7sYE8Jo7A2CZtFdgn9e6+H//7XXMgljwBzfQKPGzjYVw3GaPVAISadhBHEjixP/O+ZooFX3KucwZFlp8lVr9WVKGfJRg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PdWyUmhy; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="a7uqM297"
-Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2cf50c6f235so18037625ad.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 03:54:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786359241; x=1786964041; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=geEdsZdmCC6yete2inWMzdlKXghMwGUV4jpZ5rwFRqI=;
-        b=a7uqM297WYUMzAxpzyB62NLjxNGL2bWrio3KWDLg5TadD1YA4YtrAyLYPS2jZ87rG9
-         vgQFVMcXuQwJb2ofKqKbHA1IUFnY58T81XGy24NxlKMv8MjgyKpkyGtQWFfsncQHtbUJ
-         xoQXZMBhnfYuMnjxot/zabT+IZYNMNbkhIK7stArXPhBPM3V8b2Rx6I7GrHI1ueFYRxg
-         4iUEOGUqAq1CZyZm5c/Z9RR+FVGwDk7+wq1a03TgKWa8A5J11mCZCf5maddzzJntiwpb
-         ME8bFLR1wc7MQILMuumlIRK3j5ZZXATfeCjRVftQ32xniTwyT+h6UInM+LiUPCwW+TKk
-         D3vA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786359241; x=1786964041;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=geEdsZdmCC6yete2inWMzdlKXghMwGUV4jpZ5rwFRqI=;
-        b=JQsjxJIL8ZQqogGCDxr0O7w9fzgXTt3QY4RV5ginLn3j8FfjzI/dq3e/L9BGi9C/Gd
-         3weNsGfXTBvDNVnAYbsN7HaIUwsOvD6NYq66dxKhUEOouXUme9cxK1baQ3WfyBzqmh6M
-         RgdJafCKYqjwAAIi6hXY+ysdGKhj2sVgKbfBs6PZX8NARN5OOtI1cW9SN+V58cDv70Yx
-         1FDll68uKSrshF7TXXJ/gQpptC2AFPsLwDPOc9TK//UsGM9SlwWQSdswOFxaC7vGzxe4
-         jpxMn7Yti3iYXerWsbHlTLhyS+jkVYY+b4IDlENeRGaAB5x4rXQY+6mEByLgZQo1VzVs
-         WD4w==
-X-Gm-Message-State: AOJu0YwwXDDK3010PGQf14JT3GhQoyPLMHXgUN+qZQBxnvuOxPyFdzSO
-	uluQiotV+M5wBGcmfhlQpctwdcPIuL8AsDv8JOqJOoRxzScJeOPe5NJd
-X-Gm-Gg: AR+sD10kbjuPu0ZBXDXBlKE7T7rZ4fsfq3tK/1dsWXG68jYTZz2YtyHCJlhXug7yGhb
-	3VM0ajCDhCJcs3hRqUMIveRVkhf/So5GGeXZopajGSWjB04meKEDbxOoAEp794zjOgGRF4rdmb3
-	5rS9+zwTJmW9LiBc6XFmFXi7yKTLBjUuMxhNaA2QS0J6PgstOsIZzBTX1+6i0Owrgek/5rhakq0
-	v9EeZrXAqtE6pBv2y/MSWtS/s6bC+h8PEDQqeklt+qqr0DY4ZqtbMbvUpCOXXOUgUUHLou8NMgl
-	GZRzf9kW4uNrod9q+YZOfo8ZyWZ1eptVx4yP2ORRx/xQz92FBLZ9q7FPX/iwx8Re7wsQPmMoUrH
-	NhjgtiqZyG7dNUi7aYf9vSsfwud/vFNC19WJeVjuM72UkY7Ji8c685x43BDPqV3x32ScRmcsINb
-	80YVEi4p0uPR8NWmJZJ4++S6EVhIBRqApMznLAc2O5hbgCvo4nLKQ=
-X-Received: by 2002:a17:903:1a67:b0:2ce:8e70:3210 with SMTP id d9443c01a7336-2d0ca82e229mr421183815ad.16.1786359241002;
-        Mon, 10 Aug 2026 03:54:01 -0700 (PDT)
-Received: from thefoxflat ([2404:c0:7028:5cc2:57f2:a6e1:6be7:bb30])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d15ebfcb2fsm32890075ad.55.2026.08.10.03.53.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 10 Aug 2026 03:54:00 -0700 (PDT)
-From: Reza Kurniawan <imkyufie@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Reza Kurniawan <imkyufie@gmail.com>
-Subject: [PATCH v2 3/3] arm64: dts: qcom: Add notification LED support for Xiaomi Redmi 5A (riva)
-Date: Mon, 10 Aug 2026 17:53:37 +0700
-Message-ID: <20260810105337.855546-4-imkyufie@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260810105337.855546-1-imkyufie@gmail.com>
-References: <20260810105337.855546-1-imkyufie@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PdWyUmhy"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8B2BB1F0155A
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 11:03:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786359809;
+	bh=ekwf+Zy2P4O9p1ZEiUBKTIiE5IQ8iZ2Cubn4LVEzpyY=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=PdWyUmhy2AasE+KLSnEw1XSU70YHC5HSdHrKy1otm9Lzgbn9zbYcVShJ4LOzbyAVn
+	 GpCp40kZKFJ696slzMadXDSCfyokg4pWnXY1TCnwGYomnVsi/qbxH9TlR1NSt0IDBs
+	 zjcYwEDHnsC+rmnUTdJ68gbm1a5b/6jZP0g5KbGykg74EhRavTqBTy0dnYw6ojAX0+
+	 665yWOCea3+VPGQReiwpe3jmwm4CyEQ7+smo9LML2nxQPFmzF6Itv4H/mGcWNcxzyS
+	 9crUlqnc0lZm5yxIWBInqSX08UTidePGgYpjGyywZmnNJUb/8eWNKfr1EALiNNQnwy
+	 7IUlzT0KqP4zw==
+Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5b01cb18515so1617004e87.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 04:03:29 -0700 (PDT)
+X-Gm-Message-State: AOJu0Ywy4+ZP/VmOWcbdXR2q2RWs7u+0W/2RNeenrpsaEO17VvzM34/O
+	3DOsRdcjCcgVHxhbh1/NcRcNj+f04NCpEymiGHpJztjL1ogWyI2+VeGThSwBvQ6VIUQPe7Z6l8D
+	EIrFMY1qiB/ti/MdJXwMZdh1j4DN0i5b/mZNL7N2OcA==
+X-Received: by 2002:a05:6512:610:10b0:5b2:9391:40e1 with SMTP id
+ 2adb3069b0e04-5b2f4cdc1a1mr4534940e87.51.1786359808243; Mon, 10 Aug 2026
+ 04:03:28 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 10 Aug 2026 06:03:26 -0500
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 10 Aug 2026 06:03:26 -0500
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260809-kuno-soc-support-v1-9-5e0ede4a0c72@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260809-kuno-soc-support-v1-0-5e0ede4a0c72@oss.qualcomm.com> <20260809-kuno-soc-support-v1-9-5e0ede4a0c72@oss.qualcomm.com>
+Date: Mon, 10 Aug 2026 06:03:26 -0500
+X-Gmail-Original-Message-ID: <CAMRc=MeRNMug6hZ8Jcv7drVfKbLRxG=FG8r9--PkwEpcj5JuCA@mail.gmail.com>
+X-Gm-Features: AUfX_myvx7TjMFh-i1Xu8rFjTgNwvi8c6AXDbCHE0yc0UfXzrx62czbv7eUvtQs
+Message-ID: <CAMRc=MeRNMug6hZ8Jcv7drVfKbLRxG=FG8r9--PkwEpcj5JuCA@mail.gmail.com>
+Subject: Re: [PATCH 09/15] pinctrl: qcom: Add Kuno pinctrl driver
+To: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-pm@vger.kernel.org, 
+	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Ulf Hansson <ulfh@kernel.org>, 
+	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
+	Brian Masney <bmasney@redhat.com>, Taniya Das <quic_tdas@quicinc.com>, 
+	Georgi Djakov <djakov@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, Linus Walleij <linusw@kernel.org>, 
+	Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>, Robert Marko <robimarko@gmail.com>, 
+	Guru Das Srinagesh <linux@gurudas.dev>
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Reza Kurniawan <imkyufie@gmail.com>
----
- .../boot/dts/qcom/msm8917-xiaomi-riva.dts     | 23 +++++++++++++++++++
- 1 file changed, 23 insertions(+)
+On Sun, 9 Aug 2026 09:27:08 +0200, Hardeep Sharma
+<hardeep.sharma@oss.qualcomm.com> said:
+> Add the TLMM pinctrl driver for the Qualcomm Kuno platform, supporting
+> 110 GPIOs and their pin multiplexing, pin configuration and gpiolib
+> interface through the common pinctrl-msm driver.
+>
+> Signed-off-by: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
+> ---
+> +
 
-diff --git a/arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts b/arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts
-index e6e708601..e74433f89 100644
---- a/arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts
-+++ b/arch/arm64/boot/dts/qcom/msm8917-xiaomi-riva.dts
-@@ -5,6 +5,7 @@
- 
- /dts-v1/;
- 
-+#include <dt-bindings/leds/common.h>
- #include "msm8917-xiaomi-wingtech.dtsi"
- 
- / {
-@@ -34,6 +35,28 @@ vibrator {
- 	};
- };
- 
-+&blsp1_i2c2 {
-+	status = "okay";
-+
-+	led-controller@45 {
-+		compatible = "awinic,aw2013";
-+		reg = <0x45>;
-+		vcc-supply = <&pm8937_l10>;
-+		vio-supply = <&pm8937_l5>;
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		status = "okay";
-+
-+		led@0 {
-+			reg = <0>;
-+			led-max-microamp = <5000>;
-+			function = LED_FUNCTION_INDICATOR;
-+			color = <LED_COLOR_ID_WHITE>;
-+		};
-+	};
-+};
-+
- &blsp1_uart2 {
- 	status = "okay";
- };
--- 
-2.55.0
+...
 
+> +static const struct pinfunction kuno_functions[] = {
+> +	MSM_PIN_FUNCTION(gpio),
+
+MSM_GPIO_PIN_FUNCTION() ?
+
+> +	MSM_PIN_FUNCTION(audio_ref_clk),
+> +	MSM_PIN_FUNCTION(coex_uart),
+> +	MSM_PIN_FUNCTION(ebi2_lcd_a),
+> +	MSM_PIN_FUNCTION(ebi2_lcd_cs),
+> +	MSM_PIN_FUNCTION(ebi2_lcd_reset),
+> +	MSM_PIN_FUNCTION(ebi2_lcd_te),
+> +	MSM_PIN_FUNCTION(emac_mdc),
+> +	MSM_PIN_FUNCTION(emac_mdio),
+> +	MSM_PIN_FUNCTION(emac_pps_in),
+> +	MSM_PIN_FUNCTION(emac_ptp_aux),
+> +	MSM_PIN_FUNCTION(emac_ptp_pps),
+> +	MSM_PIN_FUNCTION(gcc_gp1_clk),
+> +	MSM_PIN_FUNCTION(gcc_gp2_clk),
+> +	MSM_PIN_FUNCTION(gcc_gp3_clk),
+> +	MSM_PIN_FUNCTION(mi2s0_data0),
+> +	MSM_PIN_FUNCTION(mi2s0_data1),
+> +	MSM_PIN_FUNCTION(mi2s0_sck),
+> +	MSM_PIN_FUNCTION(mi2s0_ws),
+> +	MSM_PIN_FUNCTION(mi2s1_data0),
+> +	MSM_PIN_FUNCTION(mi2s1_data1),
+> +	MSM_PIN_FUNCTION(mi2s1_sck),
+> +	MSM_PIN_FUNCTION(mi2s1_ws),
+> +	MSM_PIN_FUNCTION(mi2s_mclk),
+> +	MSM_PIN_FUNCTION(nav_gpio),
+
+Possibly here too?
+
+> +	MSM_PIN_FUNCTION(pci_e_rst),
+> +	MSM_PIN_FUNCTION(pcie_clkreq_n),
+> +	MSM_PIN_FUNCTION(pll_bist_sync),
+> +	MSM_PIN_FUNCTION(pll_clk_aux),
+> +	MSM_PIN_FUNCTION(qdss_cti_trig0),
+> +	MSM_PIN_FUNCTION(qdss_cti_trig1),
+> +	MSM_PIN_FUNCTION(qdss_gpio_traceclk),
+> +	MSM_PIN_FUNCTION(qdss_gpio_tracectl),
+> +	MSM_PIN_FUNCTION(qup0_se0),
+> +	MSM_PIN_FUNCTION(qup0_se1),
+> +	MSM_PIN_FUNCTION(qup0_se2),
+> +	MSM_PIN_FUNCTION(qup0_se3_mira),
+> +	MSM_PIN_FUNCTION(qup0_se3_mirb),
+> +	MSM_PIN_FUNCTION(qup0_se4),
+> +	MSM_PIN_FUNCTION(sdc4_clk),
+> +	MSM_PIN_FUNCTION(sdc4_cmd),
+> +	MSM_PIN_FUNCTION(sdc4_data),
+> +	MSM_PIN_FUNCTION(sdc4_tb_trig),
+> +	MSM_PIN_FUNCTION(sgmii_phy_intr),
+> +	MSM_PIN_FUNCTION(spmi_coex_clk),
+> +	MSM_PIN_FUNCTION(spmi_coex_data),
+> +	MSM_PIN_FUNCTION(spmi_vgi_hwevent),
+> +	MSM_PIN_FUNCTION(uim1_clk),
+> +	MSM_PIN_FUNCTION(uim1_data),
+> +	MSM_PIN_FUNCTION(uim1_present),
+> +	MSM_PIN_FUNCTION(uim1_reset),
+> +	MSM_PIN_FUNCTION(usb2phy_ac_en),
+> +};
+> +
+
+Bart
