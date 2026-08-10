@@ -1,123 +1,138 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 629543AE187
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 10:17:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4E243AEF43
+	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 10:22:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.52
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786357024; cv=none; b=kRp5nKppb7jqyoutmIod4IMBRbEX5iJgsJV6uRXdCRJ9lhak2khd+AqHgZJ0rb1dd+ne9SCt4gH4NnjhOPPwLf5RGLoeT+Ux+zzdLwHS4hFb3z8fvkDFAwpr9IH0iVAykj1b1ulj9WAs6JmKJmOc/gRibhZXawZuLHQKHzrpMI8=
+	t=1786357323; cv=none; b=RDVD8Sw+NDME/da7bR3Tp/HEG1Lf3YLg3y7DgQ0qe/C6ahLZxxFSYw8wVGMNI3luwWrDZ4C4+33qU673KXylYDFDIQYviciO16/6sumSzA+03y/jke5FmNO1qtVKnGTPulH6FTzIebgvrA0lOtZMYgC+Af8Dj/1jVEcfMHe5umo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786357024; c=relaxed/simple;
-	bh=A5PL93j3KOVOqui10gjbMhKuEUTfJ/q9/niflbJmhts=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=tCP2pukebAG28q2AnrCwlO01RbHnzWhDM0ybP9AzAtgpCPdXxoiAU7G6SItR+M1UqYFwEwf0tHHp2rWbE16+G42Y6vsvI8YstUZgRXg9apAI0jcj43SuVnAGZDX6IWHbMFHB+LCNz48KDzVVG82Y1Cxv2BYBYTVL3SYcmQEa5OU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XNk3GOY3; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786357323; c=relaxed/simple;
+	bh=otBjEI5x5e6oRJAULxGf/ldS0jPIB6uMht/s0aswS60=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=I4eYa33KpCDRnpZUGbfu57cxV0Vy7ETS1Ae2OJ2C/7FASw2VXsZbjRCrS0onDeODpYYt62lY4Midqdlcphxficsfs5Kc/ADcvJkxt4Lzwee5niRgCaodf9yFWOCzXXmp2ZtwFg6MKweFX8kSk09WnOK0HaKkk/HVc8+g+eesuRA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=iYUpi12L; arc=none smtp.client-ip=209.85.216.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XNk3GOY3"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DDE931F00A3E
-	for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 10:17:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786357022;
-	bh=pueV/Sym5tDCUShri82wnU+nRqu+IAIBKHuGXdc2uHQ=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=XNk3GOY3gjtduVGEkgAc/Sl7wIMST9MCUR+kvUkbOBPiJmlSgon+MCZGla+OEtsdp
-	 /bwW/JszhnwGxUOKGZwmyGYERjdrjOUSUaVEq/UtOCXwD/Zo3Gk8JDbUmagh0443eO
-	 n7z0hUfJiprIRaL2ygK0oatVqQQKIhwU1O0FXBryS2mMr89iLAXbyiuRyDSNd+QjsZ
-	 Av0N9ZC6Tnuf1cPbJTv7DJfGTXH359S2xcBEbegIbBxVZDosvY332cGvWRuDzWz+Em
-	 RCrayIZwOjekGYcgRVThO6L3mENY82avaVATuvoTmdoCjmZzXtyB518vTCXbs3iGk9
-	 7xL4Q0pPPHqrQ==
-Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-5aec201b582so1694167e87.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 03:17:02 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RqtAp4D1tnXrexVpHf+dX/er4nzmgB/VAAk59D2I/O2jL0ONq3tY4CccUxi3D3kpJoFaJX55VtFXFtBbe7U@vger.kernel.org
-X-Gm-Message-State: AOJu0YzwhwF/Zxoz8BhZoQyJ3RKUKUTFj/Fzm0e/Ffx9kM0LG0SuCx/C
-	/U7D0PQ1GBwWWiGXRbnwS8Ht3FFlbioRZW/gDTpEbfOgLs+9liwoH1eMVNcCDw9sfFBQpF2PjkK
-	UnV3esyhZ11IAp/M1Gl35r/uvQJrZD+fvp9uLRBnniw==
-X-Received: by 2002:a05:6512:3993:b0:5b0:1108:c583 with SMTP id
- 2adb3069b0e04-5b3181ca049mr80275e87.30.1786357021596; Mon, 10 Aug 2026
- 03:17:01 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 10 Aug 2026 05:17:00 -0500
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 10 Aug 2026 05:17:00 -0500
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260806112709.4018596-1-mukesh.ojha@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="iYUpi12L"
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-3900e39d935so1665063a91.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 10 Aug 2026 03:22:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1786357321; x=1786962121; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=80/k07EkbH1ecXMl0R5Fs9cFDQBD709H2DM1r3/6dkI=;
+        b=iYUpi12LHsxExBoVbHX8w+E8e/nFEa6eUZSiUhbUL3qdWupnSYfBwGpW0Nmxtb4Sfb
+         wg3DQSSq2O3/SuwJHO3brrLiDsXUo8olxfV9J/ft59EJEajgFIkE+NwraPw2oOFUuMYl
+         9VO8IHgwCqB9zM/E/vamhqiE4wXGh/SAbyD+vOorWaBQCSBq8frCEsRULyctAV9I8Xev
+         I2y5NWrPQmX7o+sLemynLAS+vCDy84FGQzh/8WCt3fAw5bBD/OjQzm+qpaGL9E5xrtum
+         PpdvNIWrbDDVUei8xzxqoZ683JS3LMb2Iw6bI46jsjTvCAFX1J6jvdQmGw3vTSHyD1xJ
+         T8XQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786357321; x=1786962121;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=80/k07EkbH1ecXMl0R5Fs9cFDQBD709H2DM1r3/6dkI=;
+        b=cmLzxSenQo9xR0lKXKp4yKHWSN8pMIocm9k0L1DNk6MDT2dqmL/Mu6uhIMTwZ2VBrC
+         dkrAc3taaAVww5XVK3Xu6vWrpHqCSVbNEB6/cGLWg/psX6EdXZF7X7uY8OqXuPdl4dFY
+         ZyC0UvsueAAQVcb6gBcarq2zuEFT/NsgkNn5CciUavUVruQiNAc058ordLEM9F1juaAl
+         4Dx+42efGtur3UzKuyoHe59tG6hY/3sa9J03FZeiEdfFFOcLJ/H4i7kS0knCBr83m8hX
+         5zgUrV4Dm5ANE99JwuJtuouGI1DHlih50zFYztp8NVyKMo0GLNvsPb2xYJakywYIDXeB
+         krJA==
+X-Gm-Message-State: AOJu0YynSX9OMzpvxz+BlXGIQtmgc93D1Qs2Aqe8Q5wxAEIpmh/h6ylj
+	ECxBLyfRNXOHLiFijcvCKCxlf3IuqNJzgYPrGejt68vpq+G7hM/iHqUk
+X-Gm-Gg: AR+sD12dSMq1UlWlkKlqyfu8i/19MsUZDc7fHTsgd/41SCu2aRofZjNqr/k25qyVUzP
+	B20IhaZQ7XtqyotxJN2kegAZWYKQ6g6Qdl+clNPrjvGj6d4A8iMsY2Z4eJpgYPoEelYyJsTy2cR
+	B1ZnkbFqJ6S7hU/eWk/yyw02jhKw0hAdqvExNM/gWb6GAn1+/5wQkgAAG6gjD0Jl751/SiYkF2b
+	7sQS/cOmpuQIpHOhjo7I7Fnv7pBsAs6oKSHiAa8nrfpSxqMZw0vwURmpuQtS5sF35XFfXUXSLc1
+	C08kvnOpsWAGe9UKh1lDkIxJAMy1ojrLM66X+1bkpduThDZJZfz+Pvb75+Pd5CH0mW41My5eeZU
+	HSTg8OFKG3sI5JGLhUo5cSr7C90YklvhSpTowKc0vzKFsCgOJCxEA7j92Qg+tCc6vWK8fBYaQ9P
+	VeMJdq5Gs1BRkO4Qcvl4vZ5W2kFOCULoCQ4tRICqAvYrrL3NOEOo+QxPpq5kZwh0Z6beP0zyVIX
+	yyuTogDqM/nGz7QkdEgBZDLLMJ3KbGkrONwJcSScDtLiLlma/H/h48DSkzkqZKEGI13FkVwzjnk
+	axapgWIPKVfTzAk=
+X-Received: by 2002:a17:90b:3f8d:b0:38f:de97:b06 with SMTP id 98e67ed59e1d1-392cc9048ccmr260505a91.5.1786357321066;
+        Mon, 10 Aug 2026 03:22:01 -0700 (PDT)
+Received: from phuc-desktop.. ([183.91.15.56])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-390b1573defsm5039831a91.1.2026.08.10.03.21.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 10 Aug 2026 03:22:00 -0700 (PDT)
+From: phucduc.bui@gmail.com
+To: Wim Van Sebroeck <wim@linux-watchdog.org>,
+	Guenter Roeck <linux@roeck-us.net>,
+	linux-watchdog@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	bui duc phuc <phucduc.bui@gmail.com>
+Subject: [PATCH v2] watchdog: qcom: Propagate errors from optional IRQ lookup
+Date: Mon, 10 Aug 2026 17:21:44 +0700
+Message-ID: <20260810102144.51663-1-phucduc.bui@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260806112709.4018596-1-mukesh.ojha@oss.qualcomm.com>
-Date: Mon, 10 Aug 2026 05:17:00 -0500
-X-Gmail-Original-Message-ID: <CAMRc=MffWt7TrSXaQpd6Zo_BHOrDv2tMxBh9cmMvkqem3Q245w@mail.gmail.com>
-X-Gm-Features: AUfX_mziT_NxAveqQ04UHSz9qG87rmgqCuzSzUYVg_6Yi54ZSvNRMivFoK5QMlY
-Message-ID: <CAMRc=MffWt7TrSXaQpd6Zo_BHOrDv2tMxBh9cmMvkqem3Q245w@mail.gmail.com>
-Subject: Re: [PATCH] firmware: qcom: tzmem: Use DO_ONCE_SLEEPABLE() in qcom_tzmem_enable()
-To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Cc: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Marek Szyprowski <m.szyprowski@samsung.com>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Thu, 6 Aug 2026 13:27:09 +0200, Mukesh Ojha
-<mukesh.ojha@oss.qualcomm.com> said:
-> qcom_tzmem_enable() is called from qcom_scm_probe() in a sleepable process
-> context. The helper it wraps, qcom_tzmem_init(), calls
-> qcom_scm_shm_bridge_enable() -> qcom_scm_call(), which invokes
-> might_sleep() and later acquires the qcom_scm_lock mutex via
-> __scm_smc_do().
->
-> DO_ONCE() takes the once_lock spinlock with IRQs disabled, so invoking
-> qcom_tzmem_init() from inside DO_ONCE() runs a sleepable call chain in
-> atomic context. CONFIG_DEBUG_ATOMIC_SLEEP=y catches this on boot:
->
->   BUG: sleeping function called from invalid context at drivers/firmware/qcom/qcom_scm.c:334
->   in_atomic(): 1, irqs_disabled(): 1, non_block: 0, pid: 49, name: kworker/u16:2
->   ...
->    __might_resched+0x148/0x24c
->    __might_sleep+0x48/0x7c
->    qcom_scm_call+0x30/0xc0
->    __qcom_scm_is_call_available+0x98/0x100
->    qcom_scm_shm_bridge_enable+0x60/0xbc
->    qcom_tzmem_enable+0xf8/0x118
->    qcom_scm_probe+0x2d0/0x680
->
->   [ BUG: Invalid wait context ]
->   ...
->   kworker/u16:2/49 is trying to lock:
->   ffffa83e8a485e38 (qcom_scm_lock){....}-{4:4}, at: __scm_smc_do+0x70/0x488
->
-> Switch to DO_ONCE_SLEEPABLE(), which guards the one-shot init with a
-> mutex-style path (__do_once_sleepable_start/done) that is safe to hold
-> across sleeping callees. All callers of qcom_tzmem_enable() are in
-> process context (driver probe), so this is safe.
->
-> Fixes: 9941fe8a04f3 ("firmware: qcom: scm: Fix tzmem state on probe retry")
-> Reported-by: Marek Szyprowski <m.szyprowski@samsung.com>
-> Closes: https://lore.kernel.org/lkml/5ea74dd3-7471-4c7c-9242-c2005312b1ab@samsung.com/
-> Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-> ---
->  drivers/firmware/qcom/qcom_tzmem.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/drivers/firmware/qcom/qcom_tzmem.c b/drivers/firmware/qcom/qcom_tzmem.c
-> index 0fd9581275f1..ebcdee3c5975 100644
-> --- a/drivers/firmware/qcom/qcom_tzmem.c
-> +++ b/drivers/firmware/qcom/qcom_tzmem.c
-> @@ -518,7 +518,7 @@ int qcom_tzmem_enable(struct device *dev)
->  	static int result;
->
->  	qcom_tzmem_dev = dev;
-> -	DO_ONCE(qcom_tzmem_do_init, &result);
-> +	DO_ONCE_SLEEPABLE(qcom_tzmem_do_init, &result);
->  	return result;
->  }
->  EXPORT_SYMBOL_GPL(qcom_tzmem_enable);
-> --
-> 2.53.0
->
->
+From: bui duc phuc <phucduc.bui@gmail.com>
 
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+platform_get_irq_optional() returns a positive IRQ number on success or
+a negative error code on failure. For an optional IRQ, -ENXIO indicates
+that no IRQ is available, while other errors should be propagated.
+
+Instead of only checking for -EPROBE_DEFER, propagate all error codes
+returned by platform_get_irq_optional() other than -ENXIO, so that
+failures are properly reported to the caller.
+
+Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
+---
+
+Link v1 : 
+https://lore.kernel.org/all/20260807081652.38692-1-phucduc.bui@gmail.com/
+
+Changes in v2 : 
+ - Update pretimeout handling based on Guenter's review.
+
+ drivers/watchdog/qcom-wdt.c | 22 ++++++++++++----------
+ 1 file changed, 12 insertions(+), 10 deletions(-)
+
+diff --git a/drivers/watchdog/qcom-wdt.c b/drivers/watchdog/qcom-wdt.c
+index 49bd04841f0c..9fee18fda750 100644
+--- a/drivers/watchdog/qcom-wdt.c
++++ b/drivers/watchdog/qcom-wdt.c
+@@ -289,18 +289,20 @@ static int qcom_wdt_probe(struct platform_device *pdev)
+ 
+ 	/* check if there is pretimeout support */
+ 	irq = platform_get_irq_optional(pdev, 0);
+-	if (data->pretimeout && irq > 0) {
+-		ret = devm_request_irq(dev, irq, qcom_wdt_isr, 0,
+-				       "wdt_bark", &wdt->wdd);
+-		if (ret)
+-			return ret;
++	if (data->pretimeout) {
++		irq = platform_get_irq_optional(pdev, 0);
++		if (irq < 0 && irq != -ENXIO)
++			return irq;
++		if (irq > 0) {
++			ret = devm_request_irq(dev, irq, qcom_wdt_isr, 0,
++					       "wdt_bark", &wdt->wdd);
++			if (ret)
++				return ret;
+ 
+-		wdt->wdd.info = &qcom_wdt_pt_info;
+-		wdt->wdd.pretimeout = 1;
++			wdt->wdd.info = &qcom_wdt_pt_info;
++			wdt->wdd.pretimeout = 1;
++		}
+ 	} else {
+-		if (irq == -EPROBE_DEFER)
+-			return -EPROBE_DEFER;
+-
+ 		wdt->wdd.info = &qcom_wdt_info;
+ 	}
+ 
+-- 
+2.43.0
+
