@@ -1,80 +1,83 @@
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6B145412BEB;
-	Tue, 11 Aug 2026 17:00:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=156.67.10.101
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2343E314B95;
+	Tue, 11 Aug 2026 17:03:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786467654; cv=none; b=shWZajcU+hugYzDPxao4XO404n9Q90HP5E2fgj165uaujl17aN9FWKDMDgW2aViXJY4jPjbYNAlqPb1mK1qm/cH39kQLItsRRKXa7KEmfaM0lqXaOhqndMbQfdrhiQMxJQ0DSSQpMkKQnXO/ZsVgmeNLptgK0EmNc0WZ13LQD38=
+	t=1786467805; cv=none; b=haS7s8D9ivxu1maueT0RaBca5o+h41ake2hAlRKBnn7Qi6vUMHjJb404l+Hf7AgGZb3ollLWh5KuU5hjbc2SPgEFU4UwggO9MHm7s+kN4FTz7K3VfGnYSJFOEQF0Y8Xn3cbZNqEvuHNWkprU/Odin77j0XSO4y7n0jE2JZ2qdFI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786467654; c=relaxed/simple;
-	bh=VWe5e35+3iya4Ome5baAxdPlz3J4KZHUSSRnBuN00QY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=hWwCLDW0zx5RPGMOQBltgPuFffz9VGLHpJaAejllSnq/AkehMMBDU9ZDzL8wFRp7MnioiSeX3JBkQ0KOx5w3eY2+pPaVukgB3flTTVQeaQ1escJPRus0kHbsuk5+FwzyvHKMuKbXdrhyAtWT9v3MHQfGFSizsp7a8THtCLQN7HM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch; spf=pass smtp.mailfrom=lunn.ch; dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b=g2BeTUvi; arc=none smtp.client-ip=156.67.10.101
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+	s=arc-20240116; t=1786467805; c=relaxed/simple;
+	bh=VP9cHkFP8tmLq/cBeJ2nQN57HXTW4Fzb7Ii3ZHYcGyw=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
+	 MIME-Version:Content-Type; b=It+nJEHkwKKEOtM6JG6EHyXp4Z74o9lO7CXNYn5ilqzRmw3D/i8CJ93FItWwLmpNNCRFhE8xgyHK3vgr5eeDlJFgIY6beQ/X43+CzIYQxkA6q2lHV8p9JhUYnToZP4TptBMhLlll3smE0N1+KKf2HhqgagU3eDbnYOo8HanIOww=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=XV7P5E05; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.b="g2BeTUvi"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=KO+GQvTpU4Dc3+Qb0U26Z5L427UcMiAqmtgW7rmBTdc=; b=g2BeTUvik9NjlHPterAuR2rOUg
-	egfqQJPDxuvzH/9QEOFqEtCqi7zfx+0Mr4nEq7o7uAYfDH6MeoDDctIvbAigkRTTK87j/Z/GbZiQI
-	HYbwFkacDo0f93SMBoZLxhfIWs8i6bLNnDJyahrwknChr8kZews9SFEZn/iPJT8Wfcz4=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1wtpqC-00H82l-Aq; Tue, 11 Aug 2026 19:00:40 +0200
-Date: Tue, 11 Aug 2026 19:00:40 +0200
-From: Andrew Lunn <andrew@lunn.ch>
-To: phucduc.bui@gmail.com
-Cc: Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Michal Simek <michal.simek@amd.com>, linux-arm-msm@vger.kernel.org,
-	netdev@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] net: xilinx: axienet: Propagate errors from optional IRQ
- lookup
-Message-ID: <81a38486-d4d8-4ca2-8d22-d3d178c17665@lunn.ch>
-References: <20260811034715.6034-1-phucduc.bui@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="XV7P5E05"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA43D1F00A3A;
+	Tue, 11 Aug 2026 17:03:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786467803;
+	bh=R7+SYlMBF01F6LVt2QHUIxWBhZCgFZwi08xjiut6eoo=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=XV7P5E05kYPlhke/8MmWCKe4LvpoCbUHhX9zWNiK9VPiSpUhjtYNSjUlBlmHdvuHT
+	 uFlgw3MNA+bFgsNn5kPkeqaOehXBDGCmdkPS9C92tTpmaeJYd+LsdXKGAQlEPNKPoE
+	 zZ+1RvsDJ1zte5oy2g7EvobLXLEmSaXnARVfu557n5zLoZ0q3jp3m6G7WOujOqpMqf
+	 7XrKrZieLTEaP8ksXXwk4vTzDksWc3ij12KFYaxHv/YI724WZbS5B5FrthyZQMFZB6
+	 ycLI2e0Rdk9gyEEZIA6NAl71XCGD1l2lRpZ759iPgwiOcJche/XW15E5jF9C3shkR0
+	 jP1V0HcrLyRGg==
+From: Vinod Koul <vkoul@kernel.org>
+To: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, 
+ Philipp Zabel <p.zabel@pengutronix.de>, 
+ Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, 
+ Qiang Yu <qiang.yu@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Manivannan Sadhasivam <mani@kernel.org>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260730-glymur_linkmode_0731-v8-0-a455265ad8bf@oss.qualcomm.com>
+References: <20260730-glymur_linkmode_0731-v8-0-a455265ad8bf@oss.qualcomm.com>
+Subject: Re: (subset) [PATCH v8 0/6] Add QMP PCIe Multi-PHY support
+Message-Id: <178646779847.1081354.9443968795839438752.b4-ty@kernel.org>
+Date: Tue, 11 Aug 2026 22:33:18 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260811034715.6034-1-phucduc.bui@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 
-On Tue, Aug 11, 2026 at 10:47:15AM +0700, phucduc.bui@gmail.com wrote:
-> From: bui duc phuc <phucduc.bui@gmail.com>
+
+On Thu, 30 Jul 2026 22:13:49 -0700, Qiang Yu wrote:
+> Some QMP PCIe PHY hardware blocks can be configured through a link-mode
+> register into different link topologies, such as a single wide link, or
+> multiple independent narrower links (e.g. x8 or x4+x4 mode on the Glymur
+> PCIe3 PHY).
 > 
-> platform_get_irq_optional() returns a positive IRQ number on success or
-> a negative error code on failure. For an optional IRQ, -ENXIO indicates
-> that no optional IRQ is available, while other errors should be propagated.
+> Earlier revisions tried to extend the existing single-instance
+> phy-qcom-qmp-pcie.c driver to cover this hardware. That added a large
+> amount of conditional, multi-PHY logic to a driver whose data model
+> assumes one PHY per node.
 > 
-> Propagate all error codes returned by platform_get_irq_optional() other
-> than -ENXIO.
-> 
-> Another call to platform_get_irq_optional() in the same function already
-> handles the return value this way. Apply the same error handling to this
-> call site for consistency.
+> [...]
 
-> @@ -3047,7 +3051,7 @@ static int axienet_probe(struct platform_device *pdev)
->  		ndev->ethtool_ops = &axienet_ethtool_ops;
->  	}
->  	/* Check for Ethernet core IRQ (optional) */
-> -	if (lp->eth_irq <= 0)
-> +	if (lp->eth_irq < 0)
->  		dev_info(&pdev->dev, "Ethernet core IRQ not defined\n");
+Applied, thanks!
 
-What has this change got to do with what is described in the commit
-message? If you think this is a needed change, please put it in a
-commit of its own, with a good commit message.
+[1/6] dt-bindings: phy: qcom: Add Glymur QMP PCIe multiple link-mode PHY
+      commit: 5619458024925b3a488f9046b3ab26647582b99f
+[2/6] phy: qcom: qmp-pcie: Add QMP PCIe Multi-PHY driver
+      commit: 1781be3c8a5ddf40f5f9e7b9dc32cc577d491062
 
-	Andrew
+Best regards,
+-- 
+~Vinod
+
+
