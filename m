@@ -1,178 +1,252 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from out-189.mta0.migadu.com (out-189.mta0.migadu.com [91.218.175.189])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 18788276038;
-	Tue, 11 Aug 2026 06:18:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D63523451AA
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 06:20:23 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=91.218.175.189
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786429102; cv=none; b=iRXETan45Dy7n4HxWZg4xJmtA5bZCtaDFonhMTvSQ9a4zXjCtJISO6Nu1PoQOdQzw4dt1Su+w3TdDd6AEgZwfPOOwqhEpyFWeQyjzDoTGJf/QkY5L4YNrc4wQFBCmqXE7Hg+ZLHUo7obm1+u/fYvcRfHRoPk23yABLa8c8mSR50=
+	t=1786429225; cv=none; b=VjBgx7W2RFEDlw9sf2BRznFuv/j4ZjLOBSPkCT4wKuJmbuxcVAU5oYWefuWzjjhIJMsHsj7pqBbICIn1mzouaG6JzI+JfDYEUFSjfgchzJ+yfV+QHHShDe5WrxVK0AlZGdXyrO5nZ6e2hls5n/68ikke35eDyh60BdJadDcYMGg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786429102; c=relaxed/simple;
-	bh=Hse8OrdKiaeVNAsQHgOELN+1/U5JCEy6XSg9qioxC8k=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=kMQWdfeoUq/oaw08iJvz3TOOXVmMHCJ/wf3+D0x0gUFHfLdyfcCZt9L6BQMgn4vNYXmz2bBdWcuNIWRI6Zs2+MCCE/YUdFb3hlXnOzNhqAiHLt9/PckjdnGgYR1XFk7trFMm8aUH9ic40Bf/bsC7OvXhk9uxJFiOqVfP8cExTB8=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=E0fqkw5V; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786429225; c=relaxed/simple;
+	bh=nBMYU3qU7s9tQXgvGQEswOG/tx1hWyFpUROlikBh4A4=;
+	h=Content-Type:Mime-Version:Subject:From:In-Reply-To:Date:Cc:
+	 Message-Id:References:To; b=dx11RCu3shKSCk9da6ioEjW/WoBSe8DwV5T+HmoKIhaGCmfWnrWg1FZy8/XflbbYvIG8jz67NM9vVb63Bgu37h0tKAx1o8ElSkToc1b6Cc+Ohe4wHr4+sOcju/n0GrUKPUe9ksBRKvnSEO9eVmU9PbPqRYu2elGNVE3CqwbBwII=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev; spf=pass smtp.mailfrom=linux.dev; dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b=Tdi5Xi3w; arc=none smtp.client-ip=91.218.175.189
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="E0fqkw5V"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7EC9D1F000E9;
-	Tue, 11 Aug 2026 06:18:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786429100;
-	bh=fypE+WJeEIwmW1JOycblonvFMefcQW9eNEyTfiP9ohc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=E0fqkw5VDWriCOcHexkmUZM6UJ6MpPpB0wllgQLkIw1TZ7tmXXY6qZ+zydvb9UnYr
-	 NrvQsxIjT1AY0w4xaGZPzt4kkHBpxuDYEgtwjZkHFHvyVe8hnjpJHyfz6ug0n5l1uP
-	 KqZOtOxFYHYBbKVCUjqIS5GUncQfcCHf/Oo41QKr/cqdI6UM5AJRFgn2IEAY9fKU4y
-	 c1xrRLJRoy4pJXYscWNP7S9ogVgCAHQZ4Nvnseq5PPDMkYnckEIxME4bbNBT2vmL8J
-	 InkNFDdXxsOY4lTcYr6trbp5qZaItLjMhPv8fKxhd0GVWxeCDfOTZ8HWKIKYgJt2+g
-	 EgsBJyRt/JxPw==
-Message-ID: <162bfbf1-f8da-4083-96e9-2557688b0072@kernel.org>
-Date: Tue, 11 Aug 2026 08:18:13 +0200
+	dkim=pass (1024-bit key) header.d=linux.dev header.i=@linux.dev header.b="Tdi5Xi3w"
+Content-Type: text/plain;
+	charset=utf-8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
+	t=1786429211;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=E2wRspdNGSNKevSyuudT8LxlyUn0RkignJpxE+V+MVc=;
+	b=Tdi5Xi3wHJT+V8HosnAAazhpMW2oOpKLS9qWebcUVt8MlEdcpnZD4QfgQdKq+Lj6/zpeVF
+	go6LwEA4zHOG4Amdv/2H1SZF8QM2gKv+o2UU+S/96v1PitVeRUE/CCuwj1N9T4vGw1SctW
+	SnmLJW1Bwtg8/iM4ZzEVJELqqeEmlZM=
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] dt-bindings: phy: Add sa8255p high-speed USB PHY
-To: Mattijs Korpershoek <mkorpershoek@kernel.org>
-Cc: Vinod Koul <vkoul@kernel.org>, Neil Armstrong
- <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Philipp Zabel <p.zabel@pengutronix.de>,
- linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260730-phy-qcom-snps-femto-v2-8255-v1-0-8b8bf5105a68@kernel.org>
- <20260730-phy-qcom-snps-femto-v2-8255-v1-1-8b8bf5105a68@kernel.org>
- <20260804-active-sensible-reindeer-f459a3@quoll> <87a4qu2f98.fsf@kernel.org>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- xsFNBFVDQq4BEAC6KeLOfFsAvFMBsrCrJ2bCalhPv5+KQF2PS2+iwZI8BpRZoV+Bd5kWvN79
- cFgcqTTuNHjAvxtUG8pQgGTHAObYs6xeYJtjUH0ZX6ndJ33FJYf5V3yXqqjcZ30FgHzJCFUu
- JMp7PSyMPzpUXfU12yfcRYVEMQrmplNZssmYhiTeVicuOOypWugZKVLGNm0IweVCaZ/DJDIH
- gNbpvVwjcKYrx85m9cBVEBUGaQP6AT7qlVCkrf50v8bofSIyVa2xmubbAwwFA1oxoOusjPIE
- J3iadrwpFvsZjF5uHAKS+7wHLoW9hVzOnLbX6ajk5Hf8Pb1m+VH/E8bPBNNYKkfTtypTDUCj
- NYcd27tjnXfG+SDs/EXNUAIRefCyvaRG7oRYF3Ec+2RgQDRnmmjCjoQNbFrJvJkFHlPeHaeS
- BosGY+XWKydnmsfY7SSnjAzLUGAFhLd/XDVpb1Een2XucPpKvt9ORF+48gy12FA5GduRLhQU
- vK4tU7ojoem/G23PcowM1CwPurC8sAVsQb9KmwTGh7rVz3ks3w/zfGBy3+WmLg++C2Wct6nM
- Pd8/6CBVjEWqD06/RjI2AnjIq5fSEH/BIfXXfC68nMp9BZoy3So4ZsbOlBmtAPvMYX6U8VwD
- TNeBxJu5Ex0Izf1NV9CzC3nNaFUYOY8KfN01X5SExAoVTr09ewARAQABzSVLcnp5c3p0b2Yg
- S296bG93c2tpIDxrcnprQGtlcm5lbC5vcmc+wsGPBBMBCgA5AhsDBgsJCAcDAgYVCAIJCgsE
- FgIDAQIeAQIXgBYhBJvQfg4MUfjVlne3VBuTQ307QWKbBQJp2mE8AAoJEBuTQ307QWKbeaIP
- /ihHTkTW4KsN/DQ945JJbyu5tI0J80Wue7QyyLPglyKfhgb5cLLNPpOC8cCIJsc7+W3i2P38
- s2c1cOH6CYGE7E9ur3Vfme8NW2S2I/Z8VC7bZnzyS23wT17LrsdS/qCpx4o8U+pt/xdXDKph
- EGRYrIEmMpUWvyYzyYKGIe25FtaayIIKpq8eZYyFcp2f/sG5IkOW5uZzHPMPdcm87jU7fyuQ
- rAU2vx9r+ulUfQ/q9Z2roC/ode3l7t2pN7BCBCsUDp6JCrUyZrtT1e7EbA0ZRP3aOBNk2P2E
- DQOgJGjGdO5Yx2Y9LFtltu6JbsBJHi1syGRX3AtQYOMc4Y1WGoeZJmMlvKj2ZqqXNkcWi2DS
- IQEWB0uW6CqFsBBIMGDa+6OzdaVO/uAVXWDWml02Men3CILdI1MbVjoh8ECqYUY7OQ+JJvNN
- vnliuq5WM3Ghd3jg/LZZrxXjdIginRHFQCjIJYLKpLZWm1/iDFedcfzqRNYmTtqscdCNHW41
- oT3Z7BmO9xwdjuwBS6nmS6JJwkbf5Ot2QR4pB/DRU7ZwjT1qHe+9r9gF32wXVQatHNGK/VVu
- sfwOnkdxCWkp/qb2gdQRmZh+SedStWshigH6sNfuHBloF/q+hjMRc8b2m326OZdrbSHwY1Sz
- vti8Hn7n8NjdHO9LKB7BIdjkA9DA5WsqOuVCzsFNBFVDXDQBEADNkrQYSREUL4D3Gws46JEo
- Z9HEQOKtkrwjrzlw/tCmqVzERRPvz2Xg8n7+HRCrgqnodIYoUh5WsU84N03KlLueMNsWLJBv
- BaubYN4JuJIdRr4dS4oyF1/fQAQPHh8Thpiz0SAZFx6iWKB7Qrz3OrGCjTPcW6eiOMheesVS
- 5hxietSmlin+SilmIAPZHx7n242u6kdHOh+/SyLImKn/dh9RzatVpUKbv34eP1wAGldWsRxb
- f3WP9pFNObSzI/Bo3kA89Xx2rO2roC+Gq4LeHvo7ptzcLcrqaHUAcZ3CgFG88CnA6z6lBZn0
- WyewEcPOPdcUB2Q7D/NiUY+HDiV99rAYPJztjeTrBSTnHeSBPb+qn5ZZGQwIdUW9YegxWKvX
- XHTwB5eMzo/RB6vffwqcnHDoe0q7VgzRRZJwpi6aMIXLfeWZ5Wrwaw2zldFuO4Dt91pFzBSO
- IpeMtfgb/Pfe/a1WJ/GgaIRIBE+NUqckM+3zJHGmVPqJP/h2Iwv6nw8U+7Yyl6gUBLHFTg2h
- YnLFJI4Xjg+AX1hHFVKmvl3VBHIsBv0oDcsQWXqY+NaFahT0lRPjYtrTa1v3tem/JoFzZ4B0
- p27K+qQCF2R96hVvuEyjzBmdq2esyE6zIqftdo4MOJho8uctOiWbwNNq2U9pPWmu4vXVFBYI
- GmpyNPYzRm0QPwARAQABwsF2BBgBCgAgAhsMFiEEm9B+DgxR+NWWd7dUG5NDfTtBYpsFAmna
- YUkACgkQG5NDfTtBYptX+BAApg32CkxwNucNEi8WfWA8oKkW0y8YDuY6ORMo9FWNGiT/OTy0
- vyJrLocrpn86zwfjVp+eCrssPYh8eqJfnWqmYv6ACQtHPYzPZQ3mSo8H97Z01oUxITzCxpXm
- ZkLgPIqtDPcC2E3dPM/fVxcyowM8XsaMA9wcsaUYrta8toOq2b9tKcjleKMfMrm0gQ9u7wUc
- QbLkwj6TCLOwucb07GXzLTNF9PZmaDUpKAZjMjmrW+le+SFvQbhamx0rxLWPR0NWntXpbCn+
- +ACch03p/JyTBVktxFsFyCt7pTPE1kEaeuXBTe/a2D9iQvRxRW19LvuO2e59/u1wYUiH/orz
- wbIC2S4dBsPAPihL3ztOU1yE86GPyQtSE0kU+/7snnLt4QGi6PChf3t5gnNjAzjUUovO8rgI
- c+5yN5heq5loYHgK6OQ9OlHzsPHO9e9MOQcKlFycs1pyijFGzDwdNUm/SchK8iWT2QApTx4A
- K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
- n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
- qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <87a4qu2f98.fsf@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-On 10/08/2026 16:59, Mattijs Korpershoek wrote:
->>> +  power-domain-names:
->>> +    items:
->>> +      - const: transfer
->>> +      - const: core
->>
->> Here and in your other binding you call these 'transfer' and 'core' but
->> all other bindings call them 'power' and 'perf'. Why this difference?
-> 
-> Thanks for the question. I had to do some digging because I did not know
-> the answer to this.
-> 
-> Per my understanding, the SCMI firmware (in my case, gearvm) exposes
-> multiple protocols identified by a protocol_id.
-> 
-> For example, power domains have protocol_id=0x11 and and performance
-> domain have protocol_id=0x13. This is defined in ARM's den0056 spec:
-> https://support.arm.com/documentation/den0056/f/
-> 
-> Each USB phy has 2 distinct power domains.
-> This can be observed at runtime from linux via:
-> 
-> /sys/kernel/debug/pm_genpd # grep 'scmi-power-usb0.*phy.*' pm_genpd_summary
-> scmi-power-usb0-ss-phy-pm       off-0                           0
-> scmi-power-usb0-ss-phy-rpm      off-0                           0
-> scmi-power-usb0-hs-phy-pm       off-0                           0
-> scmi-power-usb0-hs-phy-rpm      off-0                           0
-
-What about perf domains?
+Mime-Version: 1.0 (Mac OS X Mail 16.0 \(3864.600.51.1.1\))
+Subject: Re: [PATCH] mm/memcg: fix NULL nodeinfo[] dereference on late-onlined
+ nodes
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and include these headers.
+From: Muchun Song <muchun.song@linux.dev>
+In-Reply-To: <53e05300-b84c-4a04-a7b4-5022285bcbdc@oss.qualcomm.com>
+Date: Tue, 11 Aug 2026 14:19:49 +0800
+Cc: Johannes Weiner <hannes@cmpxchg.org>,
+ Michal Hocko <mhocko@kernel.org>,
+ Roman Gushchin <roman.gushchin@linux.dev>,
+ Shakeel Butt <shakeel.butt@linux.dev>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Kefeng Wang <wangkefeng.wang@huawei.com>,
+ "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+ linux-arm-msm@vger.kernel.org,
+ cgroups@vger.kernel.org,
+ linux-mm@kvack.org,
+ linux-kernel@vger.kernel.org,
+ stable@vger.kernel.org
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <C2088EE7-69E5-4BCF-B753-47A85B317E01@linux.dev>
+References: <20260810-memcg-nodeinfo-null-guard-v1-1-77a73204d63a@oss.qualcomm.com>
+ <5059A780-9C10-4171-A254-38944464F1AC@linux.dev>
+ <53e05300-b84c-4a04-a7b4-5022285bcbdc@oss.qualcomm.com>
+To: Prakash Gupta <prakash.gupta@oss.qualcomm.com>
+X-Migadu-Flow: FLOW_OUT
 
 
-> 
-> In the case of the other bindings - for example i2c - there is only one
-> power domain (0x11) and one perf domain (protocol_id 0x13):
-> 
-> /sys/kernel/debug/pm_genpd # grep i2c0 pm_genpd_summary
-> scmi-perf-i2c0_7                on                              0
-> scmi-power-i2c0                 off-0                           0
-> 
-> I hope that explains the naming difference. Please let me know if this
-> is still unclear.
-> 
->> What are these domains responsible for?
-> 
-> If we take the example of the high-speed (hs) phy, we can see that on
-> the firmware side, the only difference is the -pm or -rpm suffix.
-> When Linux requests scmi-power-usb0-hs-phy-pm (mapped to 'core' in the
-> bindings), the SCMI firmware (gearvm) will interact with the reset line,
-> the clks and the regulator.
-> When requesting scmi-power-usb0-hs-phy-rpms (mapped to 'transfer' in the
-> bindings), the SCMI firmware will only interact with the USB clocks
-> (reset and regulators remain unchanged).
-> 
->>
->> Commit msg is pretty useless here - repeats the diff. I can read the
->> diff but I still do not understand why such naming.
-> 
-> 'core' controls reset, clocks and regulators.
-> 'transfer' only controls clocks. Putting 'transfer' to 'off' is
-> interesting in case of runtime suspend/resume as it cuts the data
-> transfer (by disabling usb clock)
 
-Either the binding or the commit msg should be clear that these are
-power domains responsible only for power on SA platform, not for perf
-(so a power power domain... ehh :/)
+> On Aug 11, 2026, at 13:16, Prakash Gupta =
+<prakash.gupta@oss.qualcomm.com> wrote:
+>=20
+>=20
+>=20
+> On 8/10/2026 1:28 PM, Muchun Song wrote:
+>>=20
+>>=20
+>>> On Aug 10, 2026, at 13:46, Prakash Gupta =
+<prakash.gupta@oss.qualcomm.com> wrote:
+>>>=20
+>>> memcg->nodeinfo[] entries are allocated only for nodes present at
+>>> css_alloc time. When a node is onlined after a memcg is created its
+>>> nodeinfo[] slot remains NULL. Two call sites dereference these slots
+>>> unconditionally:
+>>=20
+>> I don't think the premise of this patch is correct.
+>>=20
+>> memcg->nodeinfo[] is not allocated only for nodes that are present or
+>> online at css_alloc time. mem_cgroup_alloc() allocates per-node info =
+with
+>> for_each_node(), and for_each_node() iterates N_POSSIBLE nodes:
+>>=20
+>>        for_each_node(node)
+>>                alloc_mem_cgroup_per_node_info(memcg, node);
+>>=20
+>=20
+> You are right. I rechecked and nodeinfo[] is allocated for all =
+possible
+> nodes at mem_cgroup_alloc() time, not just currently online ones.
+>=20
+>> If memcg->nodeinfo[nid] is NULL on your system, that looks like a
+>> violation of this invariant, or possibly a downstream-specific =
+change,
+>> bad nid, allocation/lifetime issue, or memory corruption. I don't =
+think
+>> the generic explanation that "the node was onlined after the memcg =
+was
+>> created" is sufficient.
+>>=20
+> Agreed. I will investigate further before resubmitting that part.
+>=20
+>>>=20
+>>> lruvec_stat_mod_folio() calls mem_cgroup_lruvec() which reads
+>>> memcg->nodeinfo[pgdat->node_id] without a NULL check. On a system
+>>> where a node is onlined after the memcg is created, any folio stat
+>>> update for that node crashes with a NULL pointer dereference:
+>>>=20
+>>> Unable to handle kernel paging request at virtual address =
+ffffffbebf7e1908
+>>> pc : lruvec_stat_mod_folio+0xf0/0x444   [6.18.21-android17-5]
+>>> lr : lruvec_stat_mod_folio+0x88/0x444
+>>> Call trace:
+>>>  lruvec_stat_mod_folio+0xf0/0x444
+>>>  folio_add_new_anon_rmap+0xac/0x2b8
+>>>  do_wp_page+0x768/0xc80
+>>>  handle_mm_fault+0x37c/0x8c4
+>>>  do_page_fault+0x140/0xa1c
+>>>  do_mem_abort+0x54/0x74
+>>>  el0_da+0x48/0x8c
+>>>  el0t_64_sync_handler+0x20/0x130
+>>>  el0t_64_sync+0x1c4/0x1c8
+>>>=20
+>>> __invalidate_reclaim_iterators() iterates for_each_node() and reads
+>>> from->nodeinfo[nid]->iter without checking for NULL. for_each_node()
+>>> visits all possible nodes, so this is reachable whenever a node is
+>>> onlined after the memcg was created.
+>>>=20
+>>> Fix lruvec_stat_mod_folio() by checking nodeinfo[pgdat->node_id]
+>>> directly and falling back to mod_node_page_state() when NULL, =
+mirroring
+>>> the existing !memcg early-return path. The fallback must not go =
+through
+>>> mod_lruvec_state() since that calls mod_memcg_lruvec_state() which =
+uses
+>>> container_of() to recover the mem_cgroup_per_node from the lruvec
+>>> pointer; passing &pgdat->__lruvec there produces a garbage pointer.
+>>> When nodeinfo[nid] is NULL the memcg has no per-node accounting
+>>> structure for that node, so node-level accounting is correct.
+>>>=20
+>>> Fix __invalidate_reclaim_iterators() by skipping NULL nodeinfo[] =
+slots.
+>>>=20
+>>> Also switch lruvec_stat_mod_folio() to folio_memcg_check() which =
+uses
+>>> READ_ONCE() to safely read folio->memcg_data in an unlocked context.
+>>>=20
+>>> Fixes: 6c77b607ee26 ("mm: kill lock|unlock_page_memcg()")
+>>=20
+>> The Fixes tag also seems odd. 6c77b607ee26 ("mm: kill
+>> lock|unlock_page_memcg()") only removed/renamed the lock_page_memcg()
+>> wrappers and does not appear to change nodeinfo[] allocation or =
+memory
+>> hotplug handling. Could you explain how that commit introduced the =
+NULL
+>> nodeinfo condition?
+>>=20
+>=20
+> It did not. It seems I picked up the commit based on git blame on
+> function as there were two related bugs reports that I was conflating
+> into one patch as listed below, will fix that in v2.
+>=20
+> Variant A (missed to mentioned in commit msg) =E2=80=94 NULL =
+dereference:
+>=20
+>    Unable to handle kernel NULL pointer dereference
+>      at virtual address 0000000000000528
+>    ESR =3D 0x0000000096000005 (read fault)
+>    Workqueue: events delayed_fput
+>    pc : lruvec_stat_mod_folio+0x5c/0x444  [6.18.21-android17-5]
+>    lr : lruvec_stat_mod_folio+0x2c/0x444
+>=20
+> As you suggested this may need more investigation.
+>=20
+> Variant B (the crash included in the patch) =E2=80=94 stale pointer:
+>=20
+>    Unable to handle kernel paging request
+>      at virtual address ffffffbebf7e1908
+>    ESR =3D 0x0000000096000045 (write fault)
+>    pc : __lruvec_stat_mod_folio+0xf0/0x444  [6.18.21-android17-5]
+>    lr : __lruvec_stat_mod_folio+0x88/0x444
+>    Call trace:
+>      __lruvec_stat_mod_folio+0xf0/0x444
+>      folio_add_new_anon_rmap+0xac/0x2b8
+>      do_wp_page+0x768/0xc80
+>      handle_mm_fault+0x37c/0x8c4
+>      do_page_fault+0x140/0xa1c
+>=20
+> __lruvec_stat_mod_folio+0xf0 places it after the !memcg NULL =
+check.This
+> is consistent with folio_memcg() returning a stale memcg pointer that
+> passes the NULL check.
+>=20
+> folio_memcg_check() uses READ_ONCE(folio->memcg_data) which seems the
+> correct API for unlocked contexts. folio_memcg_check() has been
+> available since becacb04fdd4 ("mm: memcg: add folio_memcg_check()")
+> but lruvec_stat_mod_folio() was never updated to use it.
+>=20
+> I should also note that this crash is difficult to reproduce in a
+> controlled environment =E2=80=94 the analysis is based on crashdump =
+inspection.
+> I have not been able to construct a reliable reproducer so far.
+>=20
+> let me know your thoughts on this, accordingly I can send a v2 to =
+cover
+> only Variant B fix as explained above.
 
-> 
-> Is it more clear that way?
-> 
->>
->> And why core is not the first one? It clearly feels like the power
->> domain thus the main one.
-> 
-> The order is based on how it's defined in the SCMI firmware. It's not a
+I just want to point out that the Fixes tag you listed here, regardless
+of whether this patch is correct, shouldn't be a commit that introduces
+a bug. Because that commit is purely a code cleanup and the removal of
+redundant interfaces, theoretically it shouldn't have any impact at all,
+yet you cited it anyway, which doesn't make sense. It feels to me like
+you didn't carefully check this.
+
+Muchun,
+Thanks.
+
+>=20
+>>> Cc: stable@vger.kernel.org
+>>> Assisted-by: pi:claude-sonnet-4-5
+>>=20
+>> Given the Assisted-by tag, I assume some of the analysis may have =
+been
+>> tool-assisted. That's fine, but the author still needs to validate =
+the
+>> reasoning against the actual code before submission.
+>>=20
+> Agree, I will be more careful in next submission.
+>=20
+>> Did you confirm that the relevant allocation and hotplug paths were
+>> manually checked against the affected tree? In particular, I wonder
+>> whether this behavior depends on downstream changes around
+>> mem_cgroup_alloc(), for_each_node(), node_possible_map setup, or =
+memory
+>> hotplug nid validation.
+>>=20
+> I checked all four paths against the affected tree
+> (6.18.21-android17-5). Only difference in
+> mem_cgroup_alloc() are cosmetic and do not touch the nodeinfo[]
+> allocation path. The NULL nodeinfo[nid] in Variant A is not explained
+> by any downstream change =E2=80=94 the root cause remain unknown.
+>=20
+> Thank you for the review.
+>=20
+> Thanks,
+> Prakash
 
 
-Then core goes before transfer.
-
-
-Best regards,
-Krzysztof
