@@ -1,87 +1,87 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5C45EEC3
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 12:50:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 456A5435A87
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 12:54:48 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786452612; cv=none; b=HZGOGuvDM7vDWiAMpNVyqtPQfRyR9UNn7pgmEEXNncqgV1G6t0K/Yv8HjnH7cG3pwzYHQe6rTihPK1rkF97YFcGSDfkxYWM0pyyIUz9MT7cisDtydx8Yl9mczKSefk44Yk46Py0GnUDygdP1EhR39Cd6M4qYyoUKOKb+NPd0bOM=
+	t=1786452889; cv=none; b=q4Pr1paAWa/ekqodeeQVhpi7EFnd8s6o7Upt6SP28dHg7j9RzEsLy98WxOTmd/6d2n6cfzWojI8aSY1dYgXFdjjBfDU7JaVSEfSKE6pRagzabMOXyy+2YX4sfEAPvhic8XdTtbPZospJRDPZhNWMg1nQw0Uq02w3WyuQo2Ex3mA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786452612; c=relaxed/simple;
-	bh=2OcAgz33248GamsAfDoB2Iws7P6zHsgqIJllr4DM0+c=;
+	s=arc-20240116; t=1786452889; c=relaxed/simple;
+	bh=WrGtbioOi/SDFuRuNSxOxOV6312aFHRM48aXVi4YmF0=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=EEx8StXMigEpVWIZCr8nJwFArbToGkK2xwt9U4zV/S7aimMV3wnp+6nAtL3RZgJBSUlhEXx4iJLc7nBIGNKdBuyJvWq8MybGpd3u0IKFFYb8wrlvuks2UGQFEborrCGbIh8mSA1ANV5AoJ6SrLZ2Qv74XbI7gnVSXqTxtkv2Q3E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DymhSDYz; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=kh+YQ3J0; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=uihNkFVwqvG1Oi/XfiGeCmHpzL832GVVcdd1jrnIxzoK2so3+x0g1NJus7yUnAOphht9dRV2Va3dqPC+94qXoRm29kZyDz8hxGVr0BHGvlKhQwh6kqFid4nmpR7g+mGD0pqBa38/zWRli7JHqwUgClwzW1nfJYuVYlf89oCDfBg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=X4SXIOo6; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Dn1yd/27; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DymhSDYz";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="kh+YQ3J0"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67BCRPmQ307154
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 12:50:10 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="X4SXIOo6";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Dn1yd/27"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67BCR6JG4058100
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 12:54:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	097edRWsiQ9Z18NqZZRnbThudqXeGVr6Y8SEWPWOcbk=; b=DymhSDYznOeoHwQT
-	viKpMfkGO2bbXtZgPt72DgA1smMz2+d95n7zPw0cDPOGxas0Nkr+kNUyCb8cyAp4
-	bGZrjebuv4jak6F9Cp0zX9T5ScbdgZOJnVS++0UEv81oWwfJxSJewJuVCaujd6yU
-	kUz9VoxiYWkY96MsOrlt24NberrmyjZjShiQU1B9D1V9BvhulWV3BVHUDqVYmlsx
-	hpQ9Dr0nTCs+io6m8LSUXbwg6Ak3hf4cBfqvI0Fh+/0I5jDMrhD0HQgih4UIqSou
-	E2ImRZDLOkjMpsEPzrCaYxksSUlTy0E3Ovf0UypajelTIA6h8kzGpMIoxcHIaBxU
-	vN1C3A==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fyjjsm651-1
+	q2flNnNINmCRt7k82OXXAcPlTbp6zvDLw77zk2/CNIA=; b=X4SXIOo62TvEmWjZ
+	4VtxsL6b5UZqW/pZxZP3sTkge7WMUMg82U4FUS+0WCkw0YMDrhbxDz2xaX6L8R2n
+	JzFK2OQTMvw1rFnDLLvP7D31Xljc3AJFzTYs+vlFrJRXjBf6Y1SUeBQt5TlTXYsH
+	6O52WqoHOCJ4v9lgMj4zrKBfTBWdL7J9kzBf9G50P5uxlRojfHrLYBnHvsj0Abj7
+	S6uqNOR9Mvnk34dp73264nHW6Y6kKwtSe88BiOg7n9h9YjSHOUTWARq8NXD9UO7j
+	Tkyyqcg+VAwXIKH/acpUAlSO7AnQMzXwIWyNReH2QWW55714ec92MtPfnmDYZ9CK
+	ANHu6Q==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fyjk7c519-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 12:50:09 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-84f7002f9afso2950802b3a.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 05:50:09 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 12:54:47 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38ecc48b3c2so5000168a91.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 05:54:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786452609; x=1787057409; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1786452887; x=1787057687; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=097edRWsiQ9Z18NqZZRnbThudqXeGVr6Y8SEWPWOcbk=;
-        b=kh+YQ3J0eEEhq1Mw8NzHcifYATdiFsMQVtOWm8I50iboPqwkNc57hoS4K0Mqw/ATse
-         AGGbDzG/zdhwojL+TSLBeIX5fh7fCRhV8kAv0uz+pazGRWFRopXZZv3aax1IzeAr6ci2
-         BhOm3Bth7xIecGbyRiVUKxrUksDwaIvM5fjKV0NBJFNedGbb0FwNLz6ruNnUb+IEKBLY
-         bq9T7V1dkO+kx+OxwaozCiDnYQ1WkPhvcHaUcH7+V2u8K8/wY6NBRDMAmoRhwAI3QC3d
-         JiGqHZdFCSFGpgsos1i71h6vxE0RDBzxBgq/PfExY2OQ7aXbvvtw7AuYTogWhset2SlI
-         y7Ww==
+        bh=q2flNnNINmCRt7k82OXXAcPlTbp6zvDLw77zk2/CNIA=;
+        b=Dn1yd/27hdA9Sgd+qaNrQlXCSkGfhOG6aHxVyYRSHiK2ZfVLPSJ1WbZRvhVTWu61oh
+         ZnqpeQVi40GkugFIWw6mFOKAxTdask+W7ReUJTrQ+T2eaBaQS2XDQgXJYbH0wapK03js
+         SJXm9MibYOCtvO7m46QIBF3mHngBpavnoaKb+i4u8vloqgGWOObRdIdDZbNS1niOFyhZ
+         4m58ccK57zGZkWiBXpfP51Sg1KEEus6fOUUtbPk6RtnQXafjPGgjYtDgEMOp1xcB0u5f
+         1xcP598yEx9QAF9Zl6NRFQuaKTGskFS4nLTM0TF9B7xWlUKYjI3m0ee4P15Q4CY2sH4e
+         +3bg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786452609; x=1787057409;
+        d=1e100.net; s=20251104; t=1786452887; x=1787057687;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=097edRWsiQ9Z18NqZZRnbThudqXeGVr6Y8SEWPWOcbk=;
-        b=e4VD6aYGHlJH6l2SP1Dnr3NJYQ3PSgwlIfeLjCpV8C5PDsBXMbFkMMTBHt5xGQcD6Z
-         SZMeYxFUhcZH38exm7nFWANywS6RP/Whi//eHAQ9Qd3jKl2dvkOcvu5jmB/+g+XKFWnQ
-         OlodL9Q88GSP5/p9w/MJic2DVd+FKI2ePZQWC30rrUTLZxtF116r7gzSdk5eYMPo+6K2
-         LCFrYGUeaq6+GfukJr+qd0GI72cyApNJTRalFQuJj8Ttw792iwXJBE5xZ0Xles1yMtC8
-         V/658qy027WHMhVbo0802rsSTohrwY2iZUtUUAp8XwcIe6R3rN224h/ROLDJK9daJnWn
-         3Tng==
-X-Gm-Message-State: AOJu0Yx/fsf2qYNF9yym1ag0JtU+z0a1BSB9pOKDIRy5fR9ts5Ov1M7j
-	4fVsDgOINw3hZ/ptIsonrfrhgfTh92BY5sTZg9UdDMIUrcEt+EySbzhoIqogHY/SnakzCohgVFT
-	qnO+7qKCd/BzV7MFL+kS63M9h0sbUQlAa2uZIUYvKw7UMnnDcM5xQtV8fFEhdhWscnHXn
-X-Gm-Gg: AR+sD12sjAr1HbZZb9+E74OsvCQsLMB46j5UMeaveznxo4znq4wQymNqs7tfDKl4Di+
-	xS7owrtCtdAejxtrDF1YGBADocglP+ZXvUk9fEG5+MFSNBmUaJtfbm5DHTPgUlAmc9nDnIwv6sa
-	c3yprrRCYnf8d5FKlau1zmXuSkeLms99Azv91GmoJx82v9zIJqckaK+rPJmbxPiSN1MGeu03YMc
-	JJcjvJfy29eKZumd+rO4xgRhw2TZaKBjY7vM7taHNXvqQGCERsUBeyh6JZT+MlWw8qY9ciQvSm4
-	BeM1azLOodq5Fk60OjnEl2C+oLPqZ1DxyrKV4GwZHa4pg3zQdKnInd4kVjsdEeOpB9m4UBp+XRI
-	D5x/EFBT4GNdl4BYGA3iEdKwYifFQYKCH7e5lcQw9YIxeHAIPqoqNNGI3BdpkITZfUh9Oieyi6X
-	aQSQ9oVSIbw9RnsgAe5c+THksFHZg=
-X-Received: by 2002:a05:6a00:f0e:b0:848:4080:afe8 with SMTP id d2e1a72fcca58-84fa8840175mr3319464b3a.22.1786452609251;
-        Tue, 11 Aug 2026 05:50:09 -0700 (PDT)
-X-Received: by 2002:a05:6a00:f0e:b0:848:4080:afe8 with SMTP id d2e1a72fcca58-84fa8840175mr3319391b3a.22.1786452608686;
-        Tue, 11 Aug 2026 05:50:08 -0700 (PDT)
-Received: from [10.149.81.110] (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84fa959267dsm724538b3a.61.2026.08.11.05.50.04
+        bh=q2flNnNINmCRt7k82OXXAcPlTbp6zvDLw77zk2/CNIA=;
+        b=JqnpQGdw5OeTQC91WLG/2x65Lxx6ukkTwprtedGGNlsyGkaO4iZAXRSGjKxxLLnE+E
+         mmgYlMKhn+YZprNjfQTShIz+HFa4SXoLQqK+w7sX6cv3bUiGCe4wjtlKlHJgelBmZmGD
+         hFkI0z69rZNeil0PLDwEaDGk5laOLAUbtcevtQLmno/pTom2Cg5kcGNFNOjdbxbmnplW
+         F9lVl7qdOPf8zSR6tCgDDxTmIcCig0STwBgPjFk6ev+Uf7Rh3A0WkBMPGvPq5ky7daWt
+         l8FP9DaAFYIjUtYpsBdn8UMspRlXK5rMAzAuFq9xQr0A55mcJcZh9FiLbys639d4Zb6T
+         y6JA==
+X-Forwarded-Encrypted: i=1; AHgh+RrSF16zYrL9kxq2csSQCvxDs/ogv07luIOaR6kGPiJyJdcUJif8CyPwV8Y/RRVJHCebBEBOGLBy7pb3Q0Lb@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx1+95mFQ3YTxAB8b10HV7+tUqFnu5TlB9S7oJ5QEvxZKvbqN0i
+	Gk+hOKxsqrKcnVSGE7TuL1/ZtOviMC0lEo4KuWq9foZOlWP7JsQGNk10bNRYXP4arDHrgMUALjC
+	WrdOn7UFJJh0JXzO1dEhOP0/ZyNQqUphm4mgVR8z+Vg6KD/sAPRafhPCKEIoLUBRjWw6p
+X-Gm-Gg: AR+sD10QtaRuiqQcvzjjoAnhkCaGRlgqAqLrMiem8JEkDfYsf/hsUt1bab4dMskIrkZ
+	HYEpff8hrZSoEnCxr5eomqvjXusM0Ai6apoxqb4wae27c5ZLSkw6ENp2mE6dp/eppBAjIApP1AS
+	x+Y5qC8rm75bKMuzdEzEhEvk6kA/kxt3Ms4pHPiF7FaW7K20cyH940i7IUhxUnhna4hV8nCJ2eS
+	wsk6JJq/AQ2gnpdhnnbXzAVhrOn16GWh2PTleHxntMAtRkcFQuIwbRV4+/2afODv4m6PYMV5os5
+	smi/wO83AVGT8whifUxuetveoeOeatVMGsUAPv1ziPQeHae/Qcz+UQ+1IA0g3QiE1qmXEBxKLXx
+	7JIcelJYdxE3BBwv2+ePjlR2FaINktcTgMYxm/jx0tpVKYVB0VGMzLoKHQxbvMzv7
+X-Received: by 2002:a17:90b:2692:b0:38f:1dc:672f with SMTP id 98e67ed59e1d1-392ec6a78c8mr3427676a91.18.1786452886529;
+        Tue, 11 Aug 2026 05:54:46 -0700 (PDT)
+X-Received: by 2002:a17:90b:2692:b0:38f:1dc:672f with SMTP id 98e67ed59e1d1-392ec6a78c8mr3427620a91.18.1786452886012;
+        Tue, 11 Aug 2026 05:54:46 -0700 (PDT)
+Received: from [10.133.33.35] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-392d534abfasm3860675a91.11.2026.08.11.05.54.43
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 11 Aug 2026 05:50:08 -0700 (PDT)
-Message-ID: <176f58b1-5115-4693-a019-15eb6a9e6c76@oss.qualcomm.com>
-Date: Tue, 11 Aug 2026 18:20:03 +0530
+        Tue, 11 Aug 2026 05:54:45 -0700 (PDT)
+Message-ID: <8248f034-d5a6-4f9c-b6e6-77eeb8ca3ad4@oss.qualcomm.com>
+Date: Tue, 11 Aug 2026 20:54:41 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,158 +89,354 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/3] arm64: dts: qcom: Add HP EliteBook X G2q 14 AI
-To: Jason Pettit <jason.pettit@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        Mahadevan P <mahadevan.p@oss.qualcomm.com>,
-        Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
-        Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-        Ananthu C V <ananthu.cv@oss.qualcomm.com>
-References: <20260809-glymur-send-v3-0-2d1ed10e3a89@oss.qualcomm.com>
- <20260809-glymur-send-v3-2-2d1ed10e3a89@oss.qualcomm.com>
+Subject: Re: [PATCH] clk: qcom: ipq-cmn-pll: keep the CMN block bus clocks
+ enabled
+To: Stanislaw Pal <kuncy7@gmail.com>, Mieczyslaw Nalewaj <namiltd@yahoo.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Brian Masney <bmasney@redhat.com>, linux-arm-msm@vger.kernel.org,
+        linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
+        stable@vger.kernel.org
+References: <fdc4410c-18f3-4f34-8519-deb37862477c@yahoo.com>
+ <20260809161012.378743-1-kuncy7@gmail.com>
 Content-Language: en-US
-From: Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>
-In-Reply-To: <20260809-glymur-send-v3-2-2d1ed10e3a89@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jie Luo <jie.luo@oss.qualcomm.com>
+In-Reply-To: <20260809161012.378743-1-kuncy7@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDEwNiBTYWx0ZWRfXwcdREKqw/Fd2
- L+RvnfpMtXcCn+LYBvuM6VVOMzP/ihub7NxWo1O+5dBhB+Wnqfceia4LxNjgrsR+ZxL9TnFLHR0
- IknDlPuFug66CedPhzjUZXfDbN7zP9c=
-X-Proofpoint-GUID: 4SbZaCPsEUD4AtBe3zs-I1UERjqaL_Ik
-X-Proofpoint-ORIG-GUID: 4SbZaCPsEUD4AtBe3zs-I1UERjqaL_Ik
-X-Authority-Analysis: v=2.4 cv=cfDiaHDM c=1 sm=1 tr=0 ts=6a7b1a81 cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+X-Authority-Analysis: v=2.4 cv=Yus/gYYX c=1 sm=1 tr=0 ts=6a7b1b97 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=M0gveGMr4LHezVfZ8vIA:9 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDEwNiBTYWx0ZWRfX9b0gHIiBf2EQ
- p5vZ0Yg+txlM7ivK/QVhkPUbYv7Ge6vHjwrYGC/S7o3hrMENlAST8u2xkcxLMCat4tm91Gw6I7e
- MqD/FMbDBGybp/AfQiV7jeyl/wrcKaD9trtL1S2a2NtyQuqoH9GqJZ4I25X/GakjVzSJxDKhRxx
- ZJW5qtDFKbOVp/LGGq0CHMDVUPrtVkVxw/q6SDa5EMrmXybO5W2/5Gx5231E71O4pUuNmQvH86s
- E26pYcvWhF59G845E4l4Qx3NpvGdsKzcgkaqoCV07hj8jqQHJB2ZC3tg2u/i3F6ADdPqcTNTWL2
- vfsJDCV/WjLrRho46G/YEDnU1o5+Gw1uLc0HMtPes+atiggSwbsNdnMV5sUPg+v4c4wbgbV6Rwh
- HP5oIAyb8eIW893W2Kxi1jbgdwEzO6yfbR/Z50pW6usts/phEBZsrrDf65+WobaFg6/4arU3tcW
- TappuCXT8lk6zXnAjuw==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=Ki7mIbe9vPJvlQghS2sA:9 a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-ORIG-GUID: toDH9cFIt2JXYTi_bwT0qX-pNWL2T9s1
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDEwNyBTYWx0ZWRfXxEH0QA0myG0+
+ //hlDZWMGWHQF6avtLSUYSicaG++Hn6dhVD0nagRs3PtQFfKv/Epb3v0CBEojakDZksNANmE8n9
+ OVmYiWcL/sswG3/EhXDWHq3OvC6ZF/f6wDC4BNfhWCctgpWo9RmX21G5YweVy/ktTWlzTMk8fIc
+ 2aW/YT+hTZVCf3yGeBy2UumI4vLFgrGRMo8Jz9IOiWEynSUw+NxtnkY+VBxv8TbkSHLGUg7dU/5
+ lJdKP8cCNlrWh55DeJghzljgTR/ZQvRDF6+tuhe6tginYo7NdxwbyYwUxRvTk0RFHknS5WUpxTy
+ oP/Cyvi4nJf2qby+wzuDc12Rw7hKmkPDIuqOZNkIHQ9RJeHb5bSyXTge+5eFbHv+9SD0bwso+CE
+ pHGyrlFoEWKFQC46K3xtpKFHks3XbrNJTVrGBXJRjC7ZXHIQLnMDU9rYaVxjmoQEmw90KgMLhAc
+ tjystMh62Uxk5gpmNjg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDEwNyBTYWx0ZWRfX1YMcPCWEYKX6
+ CmkY9OliWs7J7Kepv1XQqWX1U7KpqVd+izVeWXWN5/NsTqYn+p+U7CPtND8fRYc141xWYtFhieD
+ 9IuiaVjoNGfukwwonLpGHRtKvzWihDo=
+X-Proofpoint-GUID: toDH9cFIt2JXYTi_bwT0qX-pNWL2T9s1
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-11_02,2026-08-10_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 priorityscore=1501 phishscore=0 impostorscore=0 clxscore=1015
- bulkscore=0 spamscore=0 adultscore=0 lowpriorityscore=0 suspectscore=0
+ clxscore=1015 suspectscore=0 adultscore=0 impostorscore=0 bulkscore=0
+ malwarescore=0 lowpriorityscore=0 phishscore=0 priorityscore=1501 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608110106
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608110107
 
 
 
-On 8/10/2026 2:59 AM, Jason Pettit wrote:
-> Add board support for the HP EliteBook X G2q 14" Next Gen AI PC
-> (product SKU C4JG0AV, board 8E91), a Snapdragon X2 Elite (Glymur)
-> laptop, using the "hp,elitebook-x-g2q" / "qcom,glymur" compatible.
+On 8/10/2026 12:10 AM, Stanislaw Pal wrote:
+> On 8/8/2026 Mieczyslaw Nalewaj wrote:
+>> Given the hang is reportedly 100% reproducible pre-userspace, is there
+>> a concrete next step to root-cause it, or is v3 the right call for now
+>> with a follow-up tracked separately?
 > 
-> Enabled by this device tree:
+> There is a concrete step, and I ran it today on a third board - this
+> time with no code of mine involved at all.
 > 
->    - internal eDP panel (samsung,atna33xc20)
->    - 2x USB Type-C with DisplayPort alt-mode and USB
->    - chassis HDMI output
->    - chassis USB-A host port (usb_mp multiport controller)
->    - internal eUSB2 host with the Elan fingerprint reader
->    - NVMe SSD on PCIe5
->    - Wi-Fi and Bluetooth
->    - HID-over-I2C keyboard, touchpad, touchscreen; lid switch
->    - Adreno GPU and GMU (Freedreno GL on Mesa)
->    - audio playback and capture
->    - real-time clock
->    - compute DSP (cDSP)
+> Hardware: GL.iNet GL-B3000 (IPQ5018), a supported in-tree OpenWrt
+> board, running the current bone-stock OpenWrt snapshot (kernel
+> 6.18.41, which does not carry this patch). Out of the box it boot
+> loops: the last line on earlycon is at ~0.39s (the final initcall
+> before the driver probes start), then silence and a watchdog reset,
+> 100% reproducible.
 > 
-> The HDMI jack is driven by a power-only DisplayPort-to-HDMI LSPCON on
-> the usb_2 combo-PHY DP lanes rather than being a third USB-C port; HPD
-> is on gpio126. The LSPCON is on an I/O sub-board with no I2C/AUX control
-> path, so it is modelled with the generic simple-bridge "parade,ps185hdm"
-> compatible used by the in-tree x1e80100 HDMI-bridge boards (the exact
-> bridge part is unconfirmed) and it needs CONFIG_DRM_SIMPLE_BRIDGE.
+> Adding exactly one thing to the kernel command line - no rebuild, no
+> patch:
 > 
-> The &gpu/&gmu enable, the audio nodes and &remoteproc_soccp opt into
-> glymur.dtsi SoC nodes that are still in-flight; those series are
-> declared as prerequisites in the cover letter.
+>     initcall_blacklist=ipq_cmn_pll_clk_driver_init
 > 
-> Assisted-by: Claude:claude-opus-4-8
-> Signed-off-by: Jason Pettit <jason.pettit@oss.qualcomm.com>
-> ---
->   arch/arm64/boot/dts/qcom/Makefile                  |    1 +
->   .../boot/dts/qcom/glymur-hp-elitebook-x-g2q.dts    | 1039 ++++++++++++++++++++
->   2 files changed, 1040 insertions(+)
+> makes the same image boot: serial, SPI-NAND, SMEM partitions,
+> remoteproc all come up.
 > 
-> diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-> index 1c86e7e98f55..146955de4606 100644
-> --- a/arch/arm64/boot/dts/qcom/Makefile
-> +++ b/arch/arm64/boot/dts/qcom/Makefile
-> @@ -18,6 +18,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= eliza-cqs-evk.dtb
->   dtb-$(CONFIG_ARCH_QCOM)	+= eliza-mtp.dtb
->   dtb-$(CONFIG_ARCH_QCOM)	+= glymur-asus-zenbook-a16-ux3607oa.dtb
->   dtb-$(CONFIG_ARCH_QCOM)	+= glymur-crd.dtb
-> +dtb-$(CONFIG_ARCH_QCOM)	+= glymur-hp-elitebook-x-g2q.dtb
->   dtb-$(CONFIG_ARCH_QCOM)	+= hamoa-iot-evk.dtb
->   
->   hamoa-iot-evk-el2-dtbs	:= hamoa-iot-evk.dtb x1-el2.dtbo
-> diff --git a/arch/arm64/boot/dts/qcom/glymur-hp-elitebook-x-g2q.dts b/arch/arm64/boot/dts/qcom/glymur-hp-elitebook-x-g2q.dts
-> new file mode 100644
-> index 000000000000..8d0fe276bf83
-> --- /dev/null
-> +++ b/arch/arm64/boot/dts/qcom/glymur-hp-elitebook-x-g2q.dts
-> @@ -0,0 +1,1039 @@
-> +// SPDX-License-Identifier: BSD-3-Clause
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
-> +/dts-v1/;
-> +
-> +#include "glymur.dtsi"
-> +
-> +#include "pmcx0102.dtsi"        /* SPMI0: SID-2/3 SPMI1: SID-2/3 */
-> +#include "pmh0101.dtsi"         /* SPMI0: SID-1                  */
-> +#include "pmh0110-glymur.dtsi"  /* SPMI0: SID-5/7 SPMI1: SID-5   */
-> +#include "pmh0104-glymur.dtsi"  /* SPMI0: SID-8/9 SPMI1: SID-11  */
-> +#include "pmk8850.dtsi"         /* SPMI0: SID-0                  */
-> +#include "smb2370.dtsi"         /* SPMI2: SID-9/10               */
-> +
-> +#include <dt-bindings/gpio/gpio.h>
-> +#include <dt-bindings/input/gpio-keys.h>
-> +#include <dt-bindings/input/input.h>
-> +#include <dt-bindings/interrupt-controller/irq.h>
-> +#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
-> +#include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
-> +
-> +/ {
-> +	model = "HP EliteBook X G2q 14 AI";
-> +	compatible = "hp,elitebook-x-g2q", "qcom,glymur";
-> +
-> +	aliases {
+> Combined with what we already know from the other two boards, this
+> isolates the trigger fairly tightly:
+> 
+>   - cmn-pll probe runs, last PM reference dropped (vanilla): dies
+>   - cmn-pll probe never runs (blacklist, clocks stay as the
+>     bootloader left them, i.e. enabled): boots
+>   - cmn-pll probe runs, reference held: boots - verified on this same
+>     board today with an image carrying v3 of this patch and nothing
+>     else changed; it comes up fully (shell over SSH, NAND, remoteproc),
+>     and clk_summary shows the CMN block bus clocks held enabled by the
+>     provider device.
+> 
+> The only variable separating the dying case from both surviving ones
+> is the AHB/SYS gate after probe. What exactly performs the fatal
+> access afterwards is the remaining open question - and this board is
+> well suited to answer it, since it has full U-Boot control and can run
+> experiment kernels from RAM. I intend to bisect that next (my current
+> suspicion is that the CMN block AHB clock also feeds the register path
+> of neighbouring blocks in the same region - MDIO at 0x88000/0x90000,
+> uniphy at 0x98000, CMN at 0x9b000 - which would explain why the CCF's
+> own runtime PM handling around the clk ops cannot help here). I am
+> happy to run any experiment Jie would like to see on this hardware.
+> 
+> So to answer the question directly: I believe v3 is the right call now
+> - three IPQ5018 boards, including a stock-image one, cannot boot
+> without it and the cost of keeping two bus clocks of a small block
+> enabled is negligible - with the exact-access root-causing tracked as
+> a follow-up. If the follow-up ends up pointing at a cleaner fix (e.g.
+> describing the real consumers of these bus clocks in DT), I will
+> gladly send it as a successor.
+> 
+> Thanks,
+> Stanislaw
 
-[...]
+I tested the latest linux-next code with the following changes:
 
-> +&smb2370_k_e2_eusb2_repeater {
-> +	vdd18-supply = <&vreg_l15b_e0_1p8>;
-> +	vdd3-supply = <&vreg_l7b_e0_3p1>;
-> +};
-> +
-> +/* SID-11 (smb2370_l) does not enumerate on this board; keep it disabled. */
-> +&smb2370_l_e2 {
-> +	status = "disabled";
-> +};
-Please drop this hunk. smb2370_l_e2 is already disabled.
+Enabled the MDIO interface and added the Ethernet PHY as DTS below.
+Enabled CONFIG_IPQ_CMN_PLL and CONFIG_MDIO_IPQ4019 as kernel modules.
 
-See:
-https://lore.kernel.org/all/20260716-topic-smb2370_port2-v1-1-83d02b2ba4b0@oss.qualcomm.com/
+--- a/arch/arm64/boot/dts/qcom/ipq5018.dtsi
 
--- 
-With best wishes
-Gopikrishna
 
+
++++ b/arch/arm64/boot/dts/qcom/ipq5018.dtsi
+
+
+
+@@ -219,12 +219,11 @@ mdio0: mdio@88000 {
+
+
+
+                              <0x019475c4 0x4>;
+
+
+
+                        #address-cells = <1>;
+
+
+
+                        #size-cells = <0>;
+
+
+
++                       clock-frequency = <6250000>;
+
+
+
+
+
+
+
+                        clocks = <&gcc GCC_MDIO0_AHB_CLK>;
+
+
+
+                        clock-names = "gcc_mdio_ahb_clk";
+
+
+
+
+
+
+
+-                       status = "disabled";
+
+
+
+-
+
+
+
+                        ge_phy: ethernet-phy@7 {
+
+
+
+                                compatible = "ethernet-phy-id004d.d0c0";
+
+
+
+                                reg = <7>;
+
+
+
+@@ -241,11 +240,16 @@ mdio1: mdio@90000 {
+
+
+
+                        reg = <0x00090000 0x64>;
+
+
+
+                        #address-cells = <1>;
+
+
+
+                        #size-cells = <0>;
+
+
+
++                       pinctrl-0 = <&mdio_pins>;
+
+
+
++                       pinctrl-names = "default";
+
+
+
++                       clock-frequency = <6250000>;
+
+
+
+
+
+
+
+                        clocks = <&gcc GCC_MDIO1_AHB_CLK>;
+
+
+
+                        clock-names = "gcc_mdio_ahb_clk";
+
+
+
+
+
+
+
+-                       status = "disabled";
+
+
+
++                       ethernet-phy@1c {
+
+
+
++                               reg = <0x1c>;
+
+
+
++                       };
+
+
+
+                };
+
+
+
+
+
+
+
+                cmn_pll: clock-controller@9b000 {
+
+
+
+@@ -427,6 +431,23 @@ uart1_pins: uart1-state {
+
+
+
+                                drive-strength = <8>;
+
+
+
+                                bias-pull-down;
+
+
+
+                        };
+
+
+
++
+
+
+
++                       mdio_pins: mdio-state {
+
+
+
++                               mdc-pins {
+
+
+
++                                       pins = "gpio36";
+
+
+
++                                       function = "mdc";
+
+
+
++                                       drive-strength = <8>;
+
+
+
++                                       bias-pull-up;
+
+
+
++                               };
+
+
+
++
+
+
+
++                               mdio-pins {
+
+
+
++                                       pins = "gpio37";
+
+
+
++                                       function = "mdio";
+
+
+
++                                       drive-strength = <8>;
+
+
+
++                                       bias-pull-up;
+
+
+
++                               };
+
+
+
++                       };
+
+
+
++
+
+
+
+                };
+
+The board booted successfully on the IPQ5018 RDP platform.
+
+# insmod ipq-cmn-pll.ko
+#
+# devmem 0x1856308
+0x80000000
+# devmem 0x185630c
+0x80000000
+#
+# insmod mdio-ipq4019.ko
+#
+# ls -l /sys/bus/mdio_bus/devices/
+88000.mdio-1:07/  90000.mdio-1:1c/
+# ls -l /sys/bus/mdio_bus/devices/
+total 0
+lrwxrwxrwx    1 root     root             0 Jan  1 00:01 88000.mdio-1:07
+->
+../../../devices/platform/soc@0/88000.mdio/mdio_bus/88000.mdio-1/88000.mdio-1:07
+lrwxrwxrwx    1 root     root             0 Jan  1 00:01 90000.mdio-1:1c
+->
+../../../devices/platform/soc@0/90000.mdio/mdio_bus/90000.mdio-1/90000.mdio-1:1c
 
