@@ -1,442 +1,201 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 456A5435A87
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 12:54:48 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 536FE42FCB5
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 12:57:21 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786452889; cv=none; b=q4Pr1paAWa/ekqodeeQVhpi7EFnd8s6o7Upt6SP28dHg7j9RzEsLy98WxOTmd/6d2n6cfzWojI8aSY1dYgXFdjjBfDU7JaVSEfSKE6pRagzabMOXyy+2YX4sfEAPvhic8XdTtbPZospJRDPZhNWMg1nQw0Uq02w3WyuQo2Ex3mA=
+	t=1786453042; cv=none; b=MBj6vzhkqnEj3isIuW3DBc2utwgsoGHCpxKrSdXSorwmTh2FzM9ZrUe+w6hD9wzXxq5wTqgOpcwN9yLF4yl6goLugBk+afw7vz9vTfMPCIdPnXVmO8nRoW2u0x4/KbOIexkhzhAi9VQKDSCg/Dv3PLZaZ04TM3AnXsMACW2cxOE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786452889; c=relaxed/simple;
-	bh=WrGtbioOi/SDFuRuNSxOxOV6312aFHRM48aXVi4YmF0=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=uihNkFVwqvG1Oi/XfiGeCmHpzL832GVVcdd1jrnIxzoK2so3+x0g1NJus7yUnAOphht9dRV2Va3dqPC+94qXoRm29kZyDz8hxGVr0BHGvlKhQwh6kqFid4nmpR7g+mGD0pqBa38/zWRli7JHqwUgClwzW1nfJYuVYlf89oCDfBg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=X4SXIOo6; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Dn1yd/27; arc=none smtp.client-ip=205.220.168.131
+	s=arc-20240116; t=1786453042; c=relaxed/simple;
+	bh=YhjbS+rkqluLXsQcr/VIExXq5bsjkwKOzy7xfzYo/8Q=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=KYDgbn08u9aL5lCpRTLRigfwDEZEe9/vYOpY1w4P/nbM3u6JOckjJTaMaOXosicZB0czssss03lnffy/2CMrr0YMEuGzQQkzRdMndQqn/juY0ppiIcMsy8eli4BOLzIFu4pDlHvP6his+/I8JWKS1vW7FBwwkz/+qPQeVRI/+sw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZVTg82nD; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=W76qaS/D; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="X4SXIOo6";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Dn1yd/27"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67BCR6JG4058100
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 12:54:47 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZVTg82nD";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="W76qaS/D"
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67BCRFBB939630
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 12:57:20 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	q2flNnNINmCRt7k82OXXAcPlTbp6zvDLw77zk2/CNIA=; b=X4SXIOo62TvEmWjZ
-	4VtxsL6b5UZqW/pZxZP3sTkge7WMUMg82U4FUS+0WCkw0YMDrhbxDz2xaX6L8R2n
-	JzFK2OQTMvw1rFnDLLvP7D31Xljc3AJFzTYs+vlFrJRXjBf6Y1SUeBQt5TlTXYsH
-	6O52WqoHOCJ4v9lgMj4zrKBfTBWdL7J9kzBf9G50P5uxlRojfHrLYBnHvsj0Abj7
-	S6uqNOR9Mvnk34dp73264nHW6Y6kKwtSe88BiOg7n9h9YjSHOUTWARq8NXD9UO7j
-	Tkyyqcg+VAwXIKH/acpUAlSO7AnQMzXwIWyNReH2QWW55714ec92MtPfnmDYZ9CK
-	ANHu6Q==
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fyjk7c519-1
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=6eh3Cvdh9qMOA/Y9U3ygnzv2
+	xsQ7ATnC69ecxt4Avyc=; b=ZVTg82nDkf/9W43C6Tb9Hl6TRyteE6fJvEODFIbs
+	Xlm7kVctgekBkFLp7sK02W0qOcJINdvi7nZtuq5foUrcS88i56bn2YE6LWMrmpvq
+	27HFRQsiBp4x/2HTRGJgAn5K3HfwPfeHK+Q0UV/Sd0156b+TelXBuKJdXJ8nYVs7
+	IWdGB4iul0MO6NMGTuVMZXS5XnjhC5Bu6StfQPGWyi61BgL7qH68kaAPF7QPI2v3
+	QfQOA4OBMzlxSO1k2QgNsSviO0/M8JKkHskpsuVvd/m7vSwRNcojGMoe6FipUcbD
+	EyszTNbo1+vha+N/EiELceh6bSxsvcVlxehCUymCzOus0Q==
+Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fyjyfv260-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 12:54:47 +0000 (GMT)
-Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38ecc48b3c2so5000168a91.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 05:54:47 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 12:57:20 +0000 (GMT)
+Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51c20762d21so39456391cf.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 05:57:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786452887; x=1787057687; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=q2flNnNINmCRt7k82OXXAcPlTbp6zvDLw77zk2/CNIA=;
-        b=Dn1yd/27hdA9Sgd+qaNrQlXCSkGfhOG6aHxVyYRSHiK2ZfVLPSJ1WbZRvhVTWu61oh
-         ZnqpeQVi40GkugFIWw6mFOKAxTdask+W7ReUJTrQ+T2eaBaQS2XDQgXJYbH0wapK03js
-         SJXm9MibYOCtvO7m46QIBF3mHngBpavnoaKb+i4u8vloqgGWOObRdIdDZbNS1niOFyhZ
-         4m58ccK57zGZkWiBXpfP51Sg1KEEus6fOUUtbPk6RtnQXafjPGgjYtDgEMOp1xcB0u5f
-         1xcP598yEx9QAF9Zl6NRFQuaKTGskFS4nLTM0TF9B7xWlUKYjI3m0ee4P15Q4CY2sH4e
-         +3bg==
+        d=oss.qualcomm.com; s=google; t=1786453039; x=1787057839; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=6eh3Cvdh9qMOA/Y9U3ygnzv2xsQ7ATnC69ecxt4Avyc=;
+        b=W76qaS/DnGBSXEnxBuf0G2jgAF6S8+qHjDUKQuBuzciMJz0lytljeqSqTOgItE+4hk
+         a0MRRr+o4OyKvz/WsKK4tWxwIm4hJCyIubaOwjiIsPu7Vq2/cTiosywJoD87Z8Wsw9Ry
+         8q/nPN15duKxClW/VQJWJ48OrIi+RfmY0sp2RDU0mcOVSMBGiz6Nz+FHY7vq+qhd8SUO
+         S465GYXRYBfMYkyiTmupBnsoDN5lNM+Zy7s8b27yxaZA2LarvzG2mm3bHWw04TqHOURs
+         qRMfItsk/SsosXbjhtIkhtLnqUTPfyrB7BOu9eGrKbyFKqijFFmYbuR6TQ7Lybf8FK9Y
+         moGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786452887; x=1787057687;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=q2flNnNINmCRt7k82OXXAcPlTbp6zvDLw77zk2/CNIA=;
-        b=JqnpQGdw5OeTQC91WLG/2x65Lxx6ukkTwprtedGGNlsyGkaO4iZAXRSGjKxxLLnE+E
-         mmgYlMKhn+YZprNjfQTShIz+HFa4SXoLQqK+w7sX6cv3bUiGCe4wjtlKlHJgelBmZmGD
-         hFkI0z69rZNeil0PLDwEaDGk5laOLAUbtcevtQLmno/pTom2Cg5kcGNFNOjdbxbmnplW
-         F9lVl7qdOPf8zSR6tCgDDxTmIcCig0STwBgPjFk6ev+Uf7Rh3A0WkBMPGvPq5ky7daWt
-         l8FP9DaAFYIjUtYpsBdn8UMspRlXK5rMAzAuFq9xQr0A55mcJcZh9FiLbys639d4Zb6T
-         y6JA==
-X-Forwarded-Encrypted: i=1; AHgh+RrSF16zYrL9kxq2csSQCvxDs/ogv07luIOaR6kGPiJyJdcUJif8CyPwV8Y/RRVJHCebBEBOGLBy7pb3Q0Lb@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx1+95mFQ3YTxAB8b10HV7+tUqFnu5TlB9S7oJ5QEvxZKvbqN0i
-	Gk+hOKxsqrKcnVSGE7TuL1/ZtOviMC0lEo4KuWq9foZOlWP7JsQGNk10bNRYXP4arDHrgMUALjC
-	WrdOn7UFJJh0JXzO1dEhOP0/ZyNQqUphm4mgVR8z+Vg6KD/sAPRafhPCKEIoLUBRjWw6p
-X-Gm-Gg: AR+sD10QtaRuiqQcvzjjoAnhkCaGRlgqAqLrMiem8JEkDfYsf/hsUt1bab4dMskIrkZ
-	HYEpff8hrZSoEnCxr5eomqvjXusM0Ai6apoxqb4wae27c5ZLSkw6ENp2mE6dp/eppBAjIApP1AS
-	x+Y5qC8rm75bKMuzdEzEhEvk6kA/kxt3Ms4pHPiF7FaW7K20cyH940i7IUhxUnhna4hV8nCJ2eS
-	wsk6JJq/AQ2gnpdhnnbXzAVhrOn16GWh2PTleHxntMAtRkcFQuIwbRV4+/2afODv4m6PYMV5os5
-	smi/wO83AVGT8whifUxuetveoeOeatVMGsUAPv1ziPQeHae/Qcz+UQ+1IA0g3QiE1qmXEBxKLXx
-	7JIcelJYdxE3BBwv2+ePjlR2FaINktcTgMYxm/jx0tpVKYVB0VGMzLoKHQxbvMzv7
-X-Received: by 2002:a17:90b:2692:b0:38f:1dc:672f with SMTP id 98e67ed59e1d1-392ec6a78c8mr3427676a91.18.1786452886529;
-        Tue, 11 Aug 2026 05:54:46 -0700 (PDT)
-X-Received: by 2002:a17:90b:2692:b0:38f:1dc:672f with SMTP id 98e67ed59e1d1-392ec6a78c8mr3427620a91.18.1786452886012;
-        Tue, 11 Aug 2026 05:54:46 -0700 (PDT)
-Received: from [10.133.33.35] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-392d534abfasm3860675a91.11.2026.08.11.05.54.43
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 11 Aug 2026 05:54:45 -0700 (PDT)
-Message-ID: <8248f034-d5a6-4f9c-b6e6-77eeb8ca3ad4@oss.qualcomm.com>
-Date: Tue, 11 Aug 2026 20:54:41 +0800
+        d=1e100.net; s=20251104; t=1786453039; x=1787057839;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=6eh3Cvdh9qMOA/Y9U3ygnzv2xsQ7ATnC69ecxt4Avyc=;
+        b=VXNCw/Df550/E8df6HbMD3L5wlmmNkcazODlSEGs4JNV2JNXrmWbqEUaC/nHZv0kUo
+         02OO2pMcWdIIP8hbb/jx5/xP1SLlA0upZvVBUOiMZIdZ/eXq1u8QGo8VQQNcJEQJH5gU
+         epAMTeLRBMxIPbUK9GjuDKFfGKvoMxfKodlovPq1BPebthd9YeczL4YQIjeDIAO0N0MV
+         S8KDmQSxvnjhN4p456PHjrViTykLcQy+Daz4zPyJuMvB57j7m43hv58QdFWC0/2tOkXz
+         /SCyPwxHskhHeN8TFNULgbOVUTOipRIwQkJBDrPeypIQg30PVWzQTaF+hWCotgGqV188
+         nndQ==
+X-Forwarded-Encrypted: i=1; AHgh+RomL/3ESk2/NKb/Bh4jUyfrXQPLKRYBQqaq30N/IjBDA9mDyPvdPG5F/aVQUXevPnqaiuLMGcekDAwYRrMV@vger.kernel.org
+X-Gm-Message-State: AOJu0YxbcGMuunFHJKUEbvnwWWg0xrZRcxuAeA1NRj+UrntbsCIwMFaV
+	ROdzxzDiuPKpPkIeoKaz9qLbhf2N2d4xVSxRW1rGpPPp685NKUS8lZDBKw69DXTQ/zm897hqCoc
+	AUY5oP5NzW1RBZwBtVCPUR7QJqVKQdjWvIspC7pIU82unU+x02g1dCZZ+eh7IZjt/tZYG
+X-Gm-Gg: AR+sD11k7xycHCxEAGMm/C2cvqaiYvjJhV3xxQld25lUqUx1ZI6T3xFOhKbs1qpP1L/
+	dYY7+zZxpUNjfhdehYZ5O22GyY6wQpFoCVodc3lDr9ma3+XQ21eKwFp9wl2tgYd+nTlUljKOUPZ
+	ZA+vUfPZo+HueWr+MATkJeNDwoFBHsOaOWkw0a3fEi8d1q8cVQdN09SUdZDN879OvaYUDA9Fs3V
+	O0Q5krW/95sBNqICNAHxQ+nqkC19OsrR+OiRwrHVv9b8cVbxQzaYAMgLJqLiIAbvNujqASTtdga
+	5KndUoIgz2DcSIzNyisWi/WBJxE+HAvZ/2upP+Zjalc4cNfC4T45DtQf1HxsboDa56Heaq/8rbD
+	+Q2T+sNaP3lvPi0wgzd0/YyZaKMMPpLrkclCeZfBT8rNnY6oQXkI3iowHWdsiW14hzq7URXoThJ
+	vEhNpr+xY+G0+1oQ==
+X-Received: by 2002:a05:622a:2612:b0:528:38b1:b54c with SMTP id d75a77b69052e-52d584d42f3mr23286061cf.2.1786453039470;
+        Tue, 11 Aug 2026 05:57:19 -0700 (PDT)
+X-Received: by 2002:a05:622a:2612:b0:528:38b1:b54c with SMTP id d75a77b69052e-52d584d42f3mr23285551cf.2.1786453038956;
+        Tue, 11 Aug 2026 05:57:18 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b448736625sm258787e87.78.2026.08.11.05.57.17
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 11 Aug 2026 05:57:17 -0700 (PDT)
+Date: Tue, 11 Aug 2026 15:57:15 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
+Cc: Bryan O'Donoghue <bod@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Stanimir Varbanov <stanimir.varbanov@linaro.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Stephan Gerhold <stephan.gerhold@linaro.org>,
+        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, stable@vger.kernel.org,
+        Daniel J Blueman <daniel@quora.org>
+Subject: Re: [PATCH v2 01/12] dt-bindings: media: qcom,venus: Add context
+ bank subnodes to common schema
+Message-ID: <bycv2ktnaeyy54z33ehaqtghh4xze2l7fgsth3lldzsy4jxqat@ywqz5kadz3ie>
+References: <8130900b-c9f2-4f5a-80f1-1e8567ee1b72@oss.qualcomm.com>
+ <f252d83f-e0e7-4061-8da8-d2650f1beadf@kernel.org>
+ <ea0f1777-4615-415c-86d2-2a792ea42b3e@linaro.org>
+ <41163185-09e8-47b5-9ece-c6503cb48920@kernel.org>
+ <72b267c5-6490-453a-9900-b196d1cfc5f8@linaro.org>
+ <2tWmEJ8s0nm8efbgvq24Zwo1vkuH4Na_gC6stCr9_O1A9k9JcA2-TFN5qziPoORYrCKyDgjscvGyO64HI6qVqQ==@protonmail.internalid>
+ <72b4edc0-dc80-484d-a2b0-88ea11ae001e@kernel.org>
+ <995779b4-925a-48a1-9288-930e0a10b7c5@kernel.org>
+ <nht5phhqatbc35rh4l4r5lbf5bytgb2zmesv433zjscs5ye7rs@6y4bczl23nao>
+ <353172fa-8acf-4055-a777-021177761fcc@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: qcom: ipq-cmn-pll: keep the CMN block bus clocks
- enabled
-To: Stanislaw Pal <kuncy7@gmail.com>, Mieczyslaw Nalewaj <namiltd@yahoo.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Brian Masney <bmasney@redhat.com>, linux-arm-msm@vger.kernel.org,
-        linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org,
-        stable@vger.kernel.org
-References: <fdc4410c-18f3-4f34-8519-deb37862477c@yahoo.com>
- <20260809161012.378743-1-kuncy7@gmail.com>
-Content-Language: en-US
-From: Jie Luo <jie.luo@oss.qualcomm.com>
-In-Reply-To: <20260809161012.378743-1-kuncy7@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=Yus/gYYX c=1 sm=1 tr=0 ts=6a7b1b97 cx=c_pps
- a=RP+M6JBNLl+fLTcSJhASfg==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=Ki7mIbe9vPJvlQghS2sA:9 a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22
-X-Proofpoint-ORIG-GUID: toDH9cFIt2JXYTi_bwT0qX-pNWL2T9s1
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDEwNyBTYWx0ZWRfXxEH0QA0myG0+
- //hlDZWMGWHQF6avtLSUYSicaG++Hn6dhVD0nagRs3PtQFfKv/Epb3v0CBEojakDZksNANmE8n9
- OVmYiWcL/sswG3/EhXDWHq3OvC6ZF/f6wDC4BNfhWCctgpWo9RmX21G5YweVy/ktTWlzTMk8fIc
- 2aW/YT+hTZVCf3yGeBy2UumI4vLFgrGRMo8Jz9IOiWEynSUw+NxtnkY+VBxv8TbkSHLGUg7dU/5
- lJdKP8cCNlrWh55DeJghzljgTR/ZQvRDF6+tuhe6tginYo7NdxwbyYwUxRvTk0RFHknS5WUpxTy
- oP/Cyvi4nJf2qby+wzuDc12Rw7hKmkPDIuqOZNkIHQ9RJeHb5bSyXTge+5eFbHv+9SD0bwso+CE
- pHGyrlFoEWKFQC46K3xtpKFHks3XbrNJTVrGBXJRjC7ZXHIQLnMDU9rYaVxjmoQEmw90KgMLhAc
- tjystMh62Uxk5gpmNjg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDEwNyBTYWx0ZWRfX1YMcPCWEYKX6
- CmkY9OliWs7J7Kepv1XQqWX1U7KpqVd+izVeWXWN5/NsTqYn+p+U7CPtND8fRYc141xWYtFhieD
- 9IuiaVjoNGfukwwonLpGHRtKvzWihDo=
-X-Proofpoint-GUID: toDH9cFIt2JXYTi_bwT0qX-pNWL2T9s1
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <353172fa-8acf-4055-a777-021177761fcc@oss.qualcomm.com>
+X-Proofpoint-ORIG-GUID: me_4XhXfRSJU2zrzHya2QSGPT0o6kJCz
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDEwOCBTYWx0ZWRfX8FftX25Eg+3+
+ Q2EQxC8R79jvqvO4Su7WWOQxo+X/jlqHUcA+J73A1bLqpkgJz9p8gGk/0/yekuUHck0C2Q0iz33
+ 9U8Q09fmoLzsrA7LZtS5/n7UrjGXkEY=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDEwOCBTYWx0ZWRfX9MNICW8trBHm
+ slr88vnjUfQB5phmRSjW7wRICfQ7tkN1e9AVzzJuDI+Z5nZZxHiq5RFZPFusjX1wpvDjRedgeSc
+ Gtoi0n5v1jedjS0brLkQr1IjsKfKVafaKMjibgpqnVFktPv/FwbyG592FxYfSat1Ou2jEQD9ks8
+ MhxYfSoZNSpBQc8UNxAzSCfAD5aJFwKxpb7xDXtBPtakiNTasNXcQhcQ6YMeJ79rjSOywZRLU+k
+ XtfpGb/+rb18Rgtdm4k3Jxv2KRnvtZiubFaKzDgyWGigEkS+/Uq+aQlSZ1lEWBsWvogff1m3ZVn
+ xyMC+VPbx1EXFbl3rfhP9MqjPH4+ZbEPAkhc30rSlQtRTykasnJIbn6Kq+tvs8lnfxRXI5hwhnn
+ Ywio1m6IribA2jl8+dEJMrVFUoq+tvBiz4dplo8YyjwKqaxaUGcL8z4Aqs3v+RmnlUYqpZZ2x9K
+ Reuu56Y9kmuGZ8uz3ZA==
+X-Proofpoint-GUID: me_4XhXfRSJU2zrzHya2QSGPT0o6kJCz
+X-Authority-Analysis: v=2.4 cv=Zd4t8MVA c=1 sm=1 tr=0 ts=6a7b1c30 cx=c_pps
+ a=WeENfcodrlLV9YRTxbY/uA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22 a=l3kWL9sSGVb21S1R9WEA:9
+ a=CjuIK1q_8ugA:10 a=kacYvNCVWA4VmyqE58fU:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-11_02,2026-08-10_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 suspectscore=0 adultscore=0 impostorscore=0 bulkscore=0
- malwarescore=0 lowpriorityscore=0 phishscore=0 priorityscore=1501 spamscore=0
+ clxscore=1015 impostorscore=0 malwarescore=0 suspectscore=0 adultscore=0
+ priorityscore=1501 spamscore=0 phishscore=0 bulkscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608110107
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608110108
 
-
-
-On 8/10/2026 12:10 AM, Stanislaw Pal wrote:
-> On 8/8/2026 Mieczyslaw Nalewaj wrote:
->> Given the hang is reportedly 100% reproducible pre-userspace, is there
->> a concrete next step to root-cause it, or is v3 the right call for now
->> with a follow-up tracked separately?
+On Thu, Aug 06, 2026 at 05:50:36PM +0530, Vikash Garodia wrote:
 > 
-> There is a concrete step, and I ran it today on a third board - this
-> time with no code of mine involved at all.
+> On 8/6/2026 4:44 PM, Dmitry Baryshkov wrote:
+> > On Thu, Aug 06, 2026 at 11:50:01AM +0100, Bryan O'Donoghue wrote:
+> > > On 06/08/2026 11:32, Krzysztof Kozlowski wrote:
+> > > > > Yes -master.
+> > > > > 
+> > > > > My issue is how long this will take. Several kernel cycles and the
+> > > > > debate is ongoing.
+> > > > > 
+> > > > > Daneil's fix has not been applied which means the replicable system bug
+> > > > > is out there in the wild, not addressed.
+> > > > > 
+> > > > > Daniel's fix could have been applied and rolled out to all users in
+> > > > > mainline and consequently stable.
+> > > > > 
+> > > > > Instead another architectural level fix is still under discussion, which
+> > > > > is of no value to end users whose systems can reset in the meantime.
+> > > > > 
+> > > > > Its just not responsible behaviour. So I feel both of these drivers need
+> > > > > to be marked as BROKEN unless/until a fix lands.
+> > > > > 
+> > > > > I'm hoping the vidc team will come up with something else.
+> > > > I did not object taking a known fix for the problem for the mainline
+> > > > kernel, regardless if the fix is optimal or not. I only objected the
+> > > > reason of taking patches because of something in stable kernels or
+> > > > making backports easier or whatever other semi-expressed reason, which
+> > > > is not the mainline-kernel reason.
+> > > > 
+> > > > Best regards,
+> > > > Krzysztof
+> > > 
+> > > I'm all in favour of rolling out Daniel's fix.
+> > 
+> > The biggest problem with it is that it looks like a hotfix or a hack
+> > rather than a proper description / solution. From this PoV we will land
+> > the fixes for all the boards in mainline and then fix the same issue
+> > _again_.
 > 
-> Hardware: GL.iNet GL-B3000 (IPQ5018), a supported in-tree OpenWrt
-> board, running the current bone-stock OpenWrt snapshot (kernel
-> 6.18.41, which does not carry this patch). Out of the box it boot
-> loops: the last line on earlycon is at ~0.39s (the final initcall
-> before the driver probes start), then silence and a watchdog reset,
-> 100% reproducible.
-> 
-> Adding exactly one thing to the kernel command line - no rebuild, no
-> patch:
-> 
->     initcall_blacklist=ipq_cmn_pll_clk_driver_init
-> 
-> makes the same image boot: serial, SPI-NAND, SMEM partitions,
-> remoteproc all come up.
-> 
-> Combined with what we already know from the other two boards, this
-> isolates the trigger fairly tightly:
-> 
->   - cmn-pll probe runs, last PM reference dropped (vanilla): dies
->   - cmn-pll probe never runs (blacklist, clocks stay as the
->     bootloader left them, i.e. enabled): boots
->   - cmn-pll probe runs, reference held: boots - verified on this same
->     board today with an image carrying v3 of this patch and nothing
->     else changed; it comes up fully (shell over SSH, NAND, remoteproc),
->     and clk_summary shows the CMN block bus clocks held enabled by the
->     provider device.
-> 
-> The only variable separating the dying case from both surviving ones
-> is the AHB/SYS gate after probe. What exactly performs the fatal
-> access afterwards is the remaining open question - and this board is
-> well suited to answer it, since it has full U-Boot control and can run
-> experiment kernels from RAM. I intend to bisect that next (my current
-> suspicion is that the CMN block AHB clock also feeds the register path
-> of neighbouring blocks in the same region - MDIO at 0x88000/0x90000,
-> uniphy at 0x98000, CMN at 0x9b000 - which would explain why the CCF's
-> own runtime PM handling around the clk ops cannot help here). I am
-> happy to run any experiment Jie would like to see on this hardware.
-> 
-> So to answer the question directly: I believe v3 is the right call now
-> - three IPQ5018 boards, including a stock-image one, cannot boot
-> without it and the cost of keeping two bus clocks of a small block
-> enabled is negligible - with the exact-access root-causing tracked as
-> a follow-up. If the follow-up ends up pointing at a cleaner fix (e.g.
-> describing the real consumers of these bus clocks in DT), I will
-> gladly send it as a successor.
-> 
-> Thanks,
-> Stanislaw
-
-I tested the latest linux-next code with the following changes:
-
-Enabled the MDIO interface and added the Ethernet PHY as DTS below.
-Enabled CONFIG_IPQ_CMN_PLL and CONFIG_MDIO_IPQ4019 as kernel modules.
-
---- a/arch/arm64/boot/dts/qcom/ipq5018.dtsi
-
-
-
-+++ b/arch/arm64/boot/dts/qcom/ipq5018.dtsi
-
-
-
-@@ -219,12 +219,11 @@ mdio0: mdio@88000 {
-
-
-
-                              <0x019475c4 0x4>;
-
-
-
-                        #address-cells = <1>;
-
-
-
-                        #size-cells = <0>;
-
-
-
-+                       clock-frequency = <6250000>;
-
-
-
-
-
-
-
-                        clocks = <&gcc GCC_MDIO0_AHB_CLK>;
-
-
-
-                        clock-names = "gcc_mdio_ahb_clk";
-
-
-
-
-
-
-
--                       status = "disabled";
-
-
-
--
-
-
-
-                        ge_phy: ethernet-phy@7 {
-
-
-
-                                compatible = "ethernet-phy-id004d.d0c0";
-
-
-
-                                reg = <7>;
-
-
-
-@@ -241,11 +240,16 @@ mdio1: mdio@90000 {
-
-
-
-                        reg = <0x00090000 0x64>;
-
-
-
-                        #address-cells = <1>;
-
-
-
-                        #size-cells = <0>;
-
-
-
-+                       pinctrl-0 = <&mdio_pins>;
-
-
-
-+                       pinctrl-names = "default";
-
-
-
-+                       clock-frequency = <6250000>;
-
-
-
-
-
-
-
-                        clocks = <&gcc GCC_MDIO1_AHB_CLK>;
-
-
-
-                        clock-names = "gcc_mdio_ahb_clk";
-
-
-
-
-
-
-
--                       status = "disabled";
-
-
-
-+                       ethernet-phy@1c {
-
-
-
-+                               reg = <0x1c>;
-
-
-
-+                       };
-
-
-
-                };
-
-
-
-
-
-
-
-                cmn_pll: clock-controller@9b000 {
-
-
-
-@@ -427,6 +431,23 @@ uart1_pins: uart1-state {
-
-
-
-                                drive-strength = <8>;
-
-
-
-                                bias-pull-down;
-
-
-
-                        };
-
-
-
-+
-
-
-
-+                       mdio_pins: mdio-state {
-
-
-
-+                               mdc-pins {
-
-
-
-+                                       pins = "gpio36";
-
-
-
-+                                       function = "mdc";
-
-
-
-+                                       drive-strength = <8>;
-
-
-
-+                                       bias-pull-up;
-
-
-
-+                               };
-
-
-
-+
-
-
-
-+                               mdio-pins {
-
-
-
-+                                       pins = "gpio37";
-
-
-
-+                                       function = "mdio";
-
-
-
-+                                       drive-strength = <8>;
-
-
-
-+                                       bias-pull-up;
-
-
-
-+                               };
-
-
-
-+                       };
-
-
-
-+
-
-
-
-                };
-
-The board booted successfully on the IPQ5018 RDP platform.
-
-# insmod ipq-cmn-pll.ko
-#
-# devmem 0x1856308
-0x80000000
-# devmem 0x185630c
-0x80000000
-#
-# insmod mdio-ipq4019.ko
-#
-# ls -l /sys/bus/mdio_bus/devices/
-88000.mdio-1:07/  90000.mdio-1:1c/
-# ls -l /sys/bus/mdio_bus/devices/
-total 0
-lrwxrwxrwx    1 root     root             0 Jan  1 00:01 88000.mdio-1:07
-->
-../../../devices/platform/soc@0/88000.mdio/mdio_bus/88000.mdio-1/88000.mdio-1:07
-lrwxrwxrwx    1 root     root             0 Jan  1 00:01 90000.mdio-1:1c
-->
-../../../devices/platform/soc@0/90000.mdio/mdio_bus/90000.mdio-1/90000.mdio-1:1c
-
+> I would call it as un-optimal than a hack, and certainly i can say it would
+> *not* have to be patched again. Its simple enough that it applies one
+> reserve region to all, instead of applying it selectively to specific
+> stream.
+
+Exactly. Which means that it doesn't describe the hardware correctly.
+Which means that it is a band-aid, a hack or something similar rather
+than being a proper patch.
+
+-- 
+With best wishes
+Dmitry
