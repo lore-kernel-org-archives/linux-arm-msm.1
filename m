@@ -1,152 +1,650 @@
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 010483BCD15
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 16:11:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8AF973C09F2
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 16:12:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786464710; cv=none; b=FNWvYm++ZNnu40n8jWqX26WiMA/piRalFIdJGxEpGKZg/n5pZ58c8jllQVa33TiMj0qq3D07Fc3hhC1Kevt/spMWlouCRtkRJa6XDdS2V1BIEPxlyShubdSF/DKrtL2i3Q7Ntp+HwXpLnfPGu0IGktzcmRn+6EKfvpjcGP+YlqA=
+	t=1786464763; cv=none; b=dtlXIAPhH3TS51Hn/Jw1U6Z6I58acuncSdFgSg3NiJBkjnWWUL+j1+og5u9/bMBEwN3vU8cGzshuKEAeEy+YWXTL7PRRYh2Am5TWu/9krvkvgLafnonyrmIsfNo5s78Z3d7EpQR6TMHlT7NmFzHaqrJwYfmjLL8clfkKCyQxpyQ=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786464710; c=relaxed/simple;
-	bh=cHYqSNif0RYDXMYpUZy4sKqIv2xpJlOO4HEM52ZVTJs=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=l3U0qpxSCGvqlbziRSHMSHBwvKuIgz/NFs8N0+uUovaEC1m/t6P/ohbatJa81awdINwS/eJ7S/jOd8nx0lsa+VMkUzq9snllE18dIaQk/hm921CtShD98naPYmypsTAyL9gYaZrBHuADltkZnMwpb03j6UqZoZgp10+valIduSo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=pS1sroGR; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Fp07ETUr; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1786464763; c=relaxed/simple;
+	bh=IoF7WM2BoEUQmn0Zu1Bt76I4sljyLoCivSIbiJCQIVw=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=fdONEeae4s97io0sI8yGo2PXT7A9ppGCdQg4zpfno34IHkKSsv8X+/XAdSEB8sTor5yc9OrqSAllg9kC0j0/Py7UbPKCWivv0bofjbehIKDSV7UwJGDr1zlKVXkCa33hvmBncV4JBVkaosXHJhcXNRlLm8Wl/de0vzatTpnJTmE=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Os5zSREg; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=CSarTKZM; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="pS1sroGR";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Fp07ETUr"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67BDWjPB1090649
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 16:11:47 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Os5zSREg";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="CSarTKZM"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67BDX0uD767094
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 16:12:40 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	cHYqSNif0RYDXMYpUZy4sKqIv2xpJlOO4HEM52ZVTJs=; b=pS1sroGRAGeP5HbR
-	i7kfywaCoDaR2Ske/SRun7p4f1bKQ+1fqjNHIsYoW34cY9dRR1Swu1siKIgIEH+b
-	OB6gBQHCA+E68EM3O0GFv260qUPdQmtD0r7FNfEbaITaqoKujLovxiFhSFENqwTa
-	WY92sG13S48n5LdJsBkpYl7GfNHQVB/J9onfWco/Am88LHbSNH8PonhgylsH1enY
-	Rh0xLIYUGejhqEV+D/TppmrLT35VVA8Q1bCgbCcW+qPfFqDXWJBLLmdbjLVTu9Qv
-	wMjZl0fy8JI400CBzu4w0WycTS48MHLFOw2p3Yyl6zMUWr3nZDDs+DMj6pvJg4sp
-	stnEDQ==
-Received: from mail-pf1-f200.google.com (mail-pf1-f200.google.com [209.85.210.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g049ervm3-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=UvbYGlBQ0+54fqa2nzlVV7
+	veLHHzznEOFsTjsNmU6Uw=; b=Os5zSREgld6zTzTAD8uPPxIS4ctIyYDPkXeis/
+	BBpaXVDNTasDWoe6PQF9OKY3NTO2r/paLBBbQNGYsqrQanlnil20cAYEPmhuFNzz
+	JjN3FoBjXkxY4eMbdphHpTbWkh8LnM6r9MCCGWDDhCfgRnUS7gq0HRIczq/xv2cs
+	c5KBzaG9TZxz3xuVbKw7hjJ11+CfEpEEmGduOMeZpkMrfZN8/gTamJkzL7LV3TUH
+	OJnYRotAI6aFoPtfM73GhRZFuPfQC/eqSllqZvX66WEfCmilPwdlRt5CTF7rk+4n
+	DeDZ7rIe2SPjo7wkNRTkSxdZoxkc9shrpGDOBRunfWzJ0VaQ==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g01q11euv-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 16:11:47 +0000 (GMT)
-Received: by mail-pf1-f200.google.com with SMTP id d2e1a72fcca58-84e13b57b2cso54110b3a.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 09:11:47 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 16:12:40 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38e475f83a2so75864a91.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 09:12:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786464707; x=1787069507; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=cHYqSNif0RYDXMYpUZy4sKqIv2xpJlOO4HEM52ZVTJs=;
-        b=Fp07ETUrIigNxmgnAt5cT4hkPs24lR4XyFh5l238R42VUZ8G23vXyGeU3e+nIW+DMg
-         iP3/JsP+eUaBIr4aKyqcNsi0gSwpUeytTeHp+H3JhPXbGUPMF/xSD1aYacDzPsCoeIyW
-         HkPoKmJehosx+mrZM97UgPj17VzfM+16gI/w69JfC7Tfy4TVzDtavRcZ0HdVXZlmSQsn
-         wTOKCFwPj5ZkfjblHrQlNImj3gEBII+MoTegBmQTc+AYsiGmIzfGLbxsFZYZex0wp0XI
-         KJ/vcNEXlP4ymfzCZv40sKAzcmxgS6O+cKOc9iwb+YEcYBa5WLXBVOhX2U2Nwx3tVh+P
-         Usaw==
+        d=oss.qualcomm.com; s=google; t=1786464759; x=1787069559; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=UvbYGlBQ0+54fqa2nzlVV7veLHHzznEOFsTjsNmU6Uw=;
+        b=CSarTKZMrejovl7oucmB7lvJeydlD0+wl7rCrfvrSnGbej76+oHBQ3NQixr0lOqgSB
+         0EiAfpJ3cRi23cpZGdSTRCrXQu7UN1VgVXXREm5ow2Kw/w5ERFkniKuwXhWEqOR1ApZV
+         sxEj11tG6N9lKXtNNWGj8z6OUft3SR6QIBpqn0xluE55ynhnlzseRtc08n5WiczFmhMH
+         csU9DBnb7KK7SaKERsP6ipo2YWamRUsZaii+Hby6Pc4KL52Qgx5i5TUT0+uHeMfB0nh6
+         jvHeIK0VfccgMv8oP4kmpSFxoXN3pXU4fO6h2R3NMalXnlynQE6xhWFoqbQR6CWsXjXm
+         owJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786464707; x=1787069507;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=cHYqSNif0RYDXMYpUZy4sKqIv2xpJlOO4HEM52ZVTJs=;
-        b=h09yzccMNgcmLf+5EWxK663Af4YoSzkLgDTQcAfu+a7GaEHfmAgenHT8JrRcluaw3n
-         3bmQfoU9g8MAsTSZC1MpnIQgJS30CFtrYXNfQedjA61F/CVY8tzejYWdEPAyDgERJxhL
-         DKPpM1oyS1u2FCUuAaWMae2RqrRl+K/uACwcLJswyuKi6ae/UAEQhkOCVGBGCxeOBrO2
-         RitST1EWc5yukUarOBgG+XhEKngGsguDHDigULKiWIHhAtL9f36UoVPL7e36jky3eIBu
-         Ik0cReCq+FelBH5sztPHq1HKiodume5upagAJ1YhA/ldNodweszuSBDvbY4S9TIWIurf
-         nztA==
-X-Gm-Message-State: AOJu0Yx9KQS4YME4A6eY6N29q3Yy0JDkYKktY6zDHTVtn2foWaPViuGm
-	OtW4eqdppuZht+TnorBboMLTds4h+8ZXjJ3i51+rlwzn6MclxNTe4heVawbz20qJB5VdRYcA3rC
-	j4SoM7EGVNYMQM6wfM9F5Q+iv9O67baah/CMJbprgdA5XRTK4udWboJNRJ3IRWdyc4DaB
-X-Gm-Gg: AR+sD13bhUlc+wszWD8ayUE85rQiLxQ0+YjXCwnNzt0+QITYUp9lU6C97LlvTwpfD5t
-	q43Glv4SqwCnqOy7MUZNMTzsPqRs0NKRrgvq/8OUi8iDIcF4CW988l2F64qqezX1wOlUV3xyzyA
-	dWLikPPDJDFHkMN9GKZcAfZOl6XmAoXA2SGExbVfqqcyj3d0XlwU4SwEKh0j/5N+MWFGKAtQ664
-	qp4mUq1J2WcgZyFKqZbZ3Z/cu/xHcKh+R4FEvPbGQCVO9UJb4J09jAjGbkcCo85/eJl2WdBykjf
-	Vt1rJ6M3fNr4Y5vDn3tZcFlyD5zpFQxUB7U83YNZZ104sohjJDcM1jyrStqxRani6pxjSpgXkEO
-	cxph42I0M+RTkOBPY3si41aTQ9qGUNfwuofCz51CcQson
-X-Received: by 2002:a05:6a00:6087:b0:848:6c9c:4074 with SMTP id d2e1a72fcca58-84faf42b207mr2039691b3a.1.1786464706779;
-        Tue, 11 Aug 2026 09:11:46 -0700 (PDT)
-X-Received: by 2002:a05:6a00:6087:b0:848:6c9c:4074 with SMTP id d2e1a72fcca58-84faf42b207mr2039582b3a.1.1786464706266;
-        Tue, 11 Aug 2026 09:11:46 -0700 (PDT)
-Received: from [192.168.1.9] ([122.164.84.216])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84fb1b73aa6sm45904b3a.0.2026.08.11.09.11.42
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 11 Aug 2026 09:11:45 -0700 (PDT)
-Message-ID: <52332595-04e8-45f0-a4b0-5ca13dbe3270@oss.qualcomm.com>
-Date: Tue, 11 Aug 2026 21:41:40 +0530
+        d=1e100.net; s=20251104; t=1786464759; x=1787069559;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=UvbYGlBQ0+54fqa2nzlVV7veLHHzznEOFsTjsNmU6Uw=;
+        b=TOGuRlb/rnU/d/rbS8D0qrC50J+yTs54LAV565wVzylOk8JQk+BvBmGcu60cN5AzI2
+         mhPqkjv/bgP5kH/UhoP6nm/JS1SSf2epbXo3/VZfGAd5EjkTBnXCg2Xxx6Xx875eqYkP
+         Fp2ZGyedveoF3E54dozk4BELC1dH6R2hX2SZEJ+GxKtmYJJeA2d0IvIHPjZumWSdeW5A
+         anPT/hhdM8kv8L3tj9ODE+2MeaKk+7/FHvp2uZXuicfsVq3y5e0UYHt7G5V5qkD97n3t
+         PbRgHEHvs6KcFqQbtNN10LvDuUd19irx2IfvZjMcki8jBe8/+dvZ9F6E+wwGawBHX9qQ
+         qHxw==
+X-Forwarded-Encrypted: i=1; AHgh+Rry/YlGAVSFAWAqUnB7nxDbGaoCfqECuSEcmbyTsYL+sc5YKB/uwMucAzwssgKjSWitMzm/gYwu4y+Gep1f@vger.kernel.org
+X-Gm-Message-State: AOJu0YxXwiV3JvPFQ/K10WBzA+QQHQt+EXNeqpR//rF3SXLGqX9Cdg7P
+	INEedw6yrR8uymj6kstcTsieV6G4JF4pKBjyW+AeW/OQbmnlWHJ6rKUJYgUeNIAHClN/Vsh5QO+
+	fegfOjugYLQsm+KMxUZgUB6IIhJBFjdmDbgK2XpXNEZsKPGecP6IY0ZIp+s9O3484CORl
+X-Gm-Gg: AR+sD11f+dOY0a4C/aqtP058EesWCRLEgkW3ULUAyQTZEy7zsnklvOjwh/9zfqJQ4EL
+	46oEgreJTXimL47JNQtJ1AhruIHPgXmnFA0QC6QfspA4Nnkf6hugwNulaynGzwIJ5ZoWzjWCrNt
+	dgaicrPaVmmCy7vtNxlNWgFP+ETPA/p6tEADce9/YcTd9CMyHcUahHHmG5r82mgGO7RamI82Q2j
+	pmLJ289TWEg1+MB9VwD5ZIZEGc7hGCIEe1H2tzH8qcNvBDclmMSuHTRR6E06dU1/eCTEmUEmpXr
+	3fbcEhhJiDLXVY3w9UNE1vMDX8D3a6FsgaHTtIIr8qU3fEg+qW04kRwHjKosITBfFS1IDTCWwIE
+	GwnaJIA/CtNB7fJB0vDpv4hkdkGW/Fkp+OUg=
+X-Received: by 2002:a17:90b:17cf:b0:38e:6aa7:68ad with SMTP id 98e67ed59e1d1-392ec33737amr4696174a91.5.1786464759009;
+        Tue, 11 Aug 2026 09:12:39 -0700 (PDT)
+X-Received: by 2002:a17:90b:17cf:b0:38e:6aa7:68ad with SMTP id 98e67ed59e1d1-392ec33737amr4696063a91.5.1786464758336;
+        Tue, 11 Aug 2026 09:12:38 -0700 (PDT)
+Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31cf6d7a3c7sm1300033eec.29.2026.08.11.09.12.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 11 Aug 2026 09:12:37 -0700 (PDT)
+From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+Date: Tue, 11 Aug 2026 21:42:23 +0530
+Subject: [PATCH] PCI: qcom: Add register dump support for PCIe Link Down
+ events
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: dts: qcom: ipq5018: Add pinctrl for MDIO bus
-To: Jie Luo <jie.luo@oss.qualcomm.com>,
-        Bjorn Andersson
- <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260811-qcom_ipq5018_mdio_pinctrl-v1-1-14ae9dc62a3f@oss.qualcomm.com>
- <076b0942-7e1a-4a6c-9293-04a7ff77abcb@oss.qualcomm.com>
- <5a8a773d-5fa8-4e93-8130-2b49997691fc@oss.qualcomm.com>
-Content-Language: en-US
-From: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
-In-Reply-To: <5a8a773d-5fa8-4e93-8130-2b49997691fc@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDEzNSBTYWx0ZWRfX7Vu2BaT7vyey
- GEJqd9Fzfl+tYtEErY9v+hu6K0C7tObjZBfSpxDbDukKubM7d1ui/56VhyZ1gvcLJSBrkl6Im3l
- qVzV3XV5R3mW9p29wH4Rt9rbdIVPeTA=
-X-Authority-Analysis: v=2.4 cv=DoFmPm/+ c=1 sm=1 tr=0 ts=6a7b49c3 cx=c_pps
- a=mDZGXZTwRPZaeRUbqKGCBw==:117 a=0/lRlipvHLU+ZVN6ZkkSUA==:17
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260811-regdump-v1-1-f22db3fb37c2@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAOZJe2oC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzMDC0ND3aLU9JTS3AJdQ0NzQ8s0c9OUVINkJaDqgqLUtMwKsEnRsRB+cWl
+ SVmpyCUi7Um0tAETpwgprAAAA
+X-Change-ID: 20260811-regdump-11719f75de0c
+To: Jingoo Han <jingoohan1@gmail.com>, Manivannan Sadhasivam <mani@kernel.org>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
+Cc: linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786464754; l=17718;
+ i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
+ bh=IoF7WM2BoEUQmn0Zu1Bt76I4sljyLoCivSIbiJCQIVw=;
+ b=fLqvoPr7RRuD7x4X75SGaAoIPJDVt+HYL8dcWN9aSsrlxizgChPLOTRd8MIzEwSVr+eDMTk42
+ dm/7jrwhVhYAQ9V8YqGH/Rh9rP25YEocWet5x/fpgYBiuGvUO4wIPLM
+X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
+ pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
+X-Proofpoint-GUID: yLL4Jr9Y9UI9agm1yDd3OyzA56YzFbSo
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDEzNSBTYWx0ZWRfX78mhOgAqy60d
+ jUecTk+6TrSAUJpSL61Yix6cOf+ErbwgkWENxvwrCCwliiF7pF0B9KtqsQOazD+tUnItsCsJ+nK
+ 7nMtg0vvI2mG2XSgOkbF8ZQTfwi/X3DYtVunzYwKgbHs5MB3bGRTlxT63pUFa+NbKWO5v9YyNJj
+ jiMHxA6UHAWCqd2ApRcffjvTquBlGe6QKD+hBzYY6F5vtB1D2945ES96TRh8tZzNmcoMCV7tx+Y
+ OAES5u9PJs7pEE8qP2+r4X1jIv/Ud6G6Vn5iQPnBwXuTlIoiFcQGAg95qW7EWoK7m1D4yzsDNKK
+ mT8yiArBzBWXjqQKi8KHIn/TGY6igNJiKFEiX2KV76inpi1VRbBKwNtL7TTbqaO4qacEUwZz34n
+ /3oFz1deQqBxNFtUIILujwvifqVyP1/Q0UaM7vDutkPKgZ4gb2NCzQTpkkb8Zb6MxzjwCQDhXkP
+ QNCC65gu3DGMhVdQOFA==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDEzNSBTYWx0ZWRfX872wcsT/zHp6
+ VsqtfgOSISDrWPKfQg5cbS0g64JW+fMnJuPXeMRkMjk0guJOTGrNyBbC/yEDYJXXFH9zHfOqlAF
+ inJOTtGW4wrWFM01+WIlWQ7z+gXeEbk=
+X-Proofpoint-ORIG-GUID: yLL4Jr9Y9UI9agm1yDd3OyzA56YzFbSo
+X-Authority-Analysis: v=2.4 cv=brt8wkai c=1 sm=1 tr=0 ts=6a7b49f8 cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=y_0uHl98WbWs3jSTaL0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=zc0IvFSfCIW2DFIPzwfm:22
-X-Proofpoint-ORIG-GUID: UBuP3jneetZEAH74SJniJXE0KHpu4KLd
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDEzNSBTYWx0ZWRfXwvIjYUZT6YR8
- Ba9PQ7yRPNnRKIaPBPhFVgtUU75gEYOp78VM1RFDgcbPHx9OA7Ivc/+CImhlE8IQAEJy92ic2kP
- frhr6KttuCYnAsjN3Nls6hwmFTmkfAgdie9nWUZVyiSqvy1O/orFjUq6qDTS9Q3tpC+CPGzDz6K
- SiqGXj8EYKRfeaKaNx3BNfn0AIhBSUvuPSGJnKNhOOSIVLcT/708M0dRvRmMk9xJEqizbPP19GJ
- 15422kgBvehUTmUq3TySbdvYvm5OfTLkEE73CX8326XLo+6DOFOJD8uGXRSNTPNNGNu+FyS0c1V
- fPK7tHJqTxsqLqg599PqUlYUsXzOAqI/wTzu+a0Obv2z+SaWYKrzU+bMr3fPIDQSUa/r7JztWZO
- ys9EgWQQDTbODWceKBOcTNZhdxvRd68jLBLCChUG0OY/w1x0D/cDWsNjwvrlS8I6SDDg+Ie0MVh
- tYza0h+I6zC19emhDCg==
-X-Proofpoint-GUID: UBuP3jneetZEAH74SJniJXE0KHpu4KLd
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=D3F8pNBI7PI_tEzsiekA:9 a=QEXdDO2ut3YA:10
+ a=iS9zxrgQBfv6-_F4QbHw:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-11_03,2026-08-10_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 malwarescore=0 priorityscore=1501 phishscore=0 suspectscore=0
- clxscore=1015 bulkscore=0 adultscore=0 lowpriorityscore=0 spamscore=0
+ phishscore=0 malwarescore=0 adultscore=0 clxscore=1015 suspectscore=0
+ impostorscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608110135
 
+When the PCIe link goes down unexpectedly, being able to inspect the
+state of key controller registers at the time of failure is valuable
+for root-causing the issue.
 
-On 8/11/2026 8:54 PM, Jie Luo wrote:
->
-> On 8/11/2026 10:00 PM, Kathiravan Thirumoorthy wrote:
->> On 8/11/2026 7:06 PM, Luo Jie wrote:
->>> The external MDIO bus (mdio1) needs its MDC/MDIO lines configured via
->>> TLMM pinctrl; without this the pins are left in their default state and
->>> the bus does not function on boards that enable it.
->> Should we move the TLMM definitions to the board DTS file rather than
->> keeping it in the SoC DTSI?
-> The MDC/MDIO pin-group definition is SoC-specific. On IPQ5018, only
-> these two TLMM pins support the MDIO interface—one for MDC and one for
-> MDIO—with no alternative pin assignments available. Therefore, the
-> definition can remain in the IPQ5018 pinctrl/SoC DTSI for reuse.
+If a storage endpoint is present downstream, the dump is printed
+directly via dev_err() so it is visible in dmesg immediately, since a
+devcoredump read from userspace could otherwise race with a storage
+failure. Otherwise, the buffer is handed to the devcoredump framework
+so it can be collected from /sys/class/devcoredump/ for offline
+analysis.
 
-Thanks, As discussed, please send this change along with its consumer.
+To keep the dump readable given the number of registers involved,
+entries are packed as "offset: value" pairs, QCOM_PCIE_DUMP_REGS_PER_LINE
+(4) per dmesg line, with a section header ("DBI registers:", "PARF
+registers:", "MHI registers:") identifying each register group.
+
+Also expose the same dump on demand via a new "regdump" debugfs file
+under the existing per-controller debugfs directory, so the register
+state can be inspected without needing an actual Link Down event.
+
+Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+---
+ drivers/pci/controller/dwc/pcie-designware.h |   6 +
+ drivers/pci/controller/dwc/pcie-qcom.c       | 328 +++++++++++++++++++++++++++
+ include/uapi/linux/pci_regs.h                |   2 +
+ 3 files changed, 336 insertions(+)
+
+diff --git a/drivers/pci/controller/dwc/pcie-designware.h b/drivers/pci/controller/dwc/pcie-designware.h
+index 1d2139474157..14d6d441c1a5 100644
+--- a/drivers/pci/controller/dwc/pcie-designware.h
++++ b/drivers/pci/controller/dwc/pcie-designware.h
+@@ -290,6 +290,12 @@
+ 
+ #define PCIE_RAS_DES_EVENT_COUNTER_DATA		0xc
+ 
++/* SD-EQ (Gen5 32 GT/s per-lane pre/post cursor equalization) registers */
++#define PCIE_RAS_DES_SD_EQ_CONTROL1		0xd0
++#define PCIE_RAS_DES_SD_EQ_CONTROL1_LANE_SEL	GENMASK(3, 0)
++#define PCIE_RAS_DES_SD_EQ_STATUS2		0xe4
++#define PCIE_RAS_DES_SD_EQ_STATUS3		0xe8
++
+ /* PTM register definitions */
+ #define PTM_RES_REQ_CTRL		0x8
+ #define PTM_RES_CCONTEXT_VALID		BIT(0)
+diff --git a/drivers/pci/controller/dwc/pcie-qcom.c b/drivers/pci/controller/dwc/pcie-qcom.c
+index b58a607b713f..a9b1d8327c72 100644
+--- a/drivers/pci/controller/dwc/pcie-qcom.c
++++ b/drivers/pci/controller/dwc/pcie-qcom.c
+@@ -12,6 +12,7 @@
+ #include <linux/crc8.h>
+ #include <linux/debugfs.h>
+ #include <linux/delay.h>
++#include <linux/devcoredump.h>
+ #include <linux/gpio/consumer.h>
+ #include <linux/interconnect.h>
+ #include <linux/interrupt.h>
+@@ -44,6 +45,8 @@
+ /* PARF registers */
+ #define PARF_SYS_CTRL				0x00
+ #define PARF_PM_CTRL				0x20
++#define PARF_PM_STTS				0x24
++#define PARF_PM_STTS_1				0x28
+ #define PARF_PCS_DEEMPH				0x34
+ #define PARF_PCS_SWING				0x38
+ #define PARF_PHY_CTRL				0x40
+@@ -62,11 +65,17 @@
+ #define PARF_STATUS				0x230
+ #define PARF_SID_OFFSET				0x234
+ #define PARF_BDF_TRANSLATE_CFG			0x24c
++#define PARF_CLKREQ_OVERRIDE			0x2b0
+ #define PARF_DBI_BASE_ADDR_V2			0x350
+ #define PARF_DBI_BASE_ADDR_V2_HI		0x354
+ #define PARF_SLV_ADDR_SPACE_SIZE_V2		0x358
+ #define PARF_SLV_ADDR_SPACE_SIZE_V2_HI		0x35c
+ #define PARF_NO_SNOOP_OVERRIDE			0x3d4
++#define PARF_CORE_ERRORS			0x3c0
++#define PARF_L1SS_SLEEP_MODE_HANDLER_STATUS	0x4d0
++#define PARF_L1SS_SLEEP_MODE_HANDLER_CFG	0x4d4
++#define PARF_INT_ALL_2_STATUS			0x500
++#define PARF_LINK_DOWN_AXI_ECAM_BLOCK_STATUS	0x630
+ #define PARF_ATU_BASE_ADDR			0x634
+ #define PARF_ATU_BASE_ADDR_HI			0x638
+ #define PARF_DEVICE_TYPE			0x1000
+@@ -83,8 +92,12 @@
+ 
+ /* MHI registers */
+ #define PARF_DEBUG_CNT_PM_LINKST_IN_L2		0xc04
++#define PARF_DEBUG_CNT_PM_LINKST_IN_L1SUB	0xc08
+ #define PARF_DEBUG_CNT_PM_LINKST_IN_L1		0xc0c
+ #define PARF_DEBUG_CNT_PM_LINKST_IN_L0S		0xc10
++#define PARF_DEBUG_CNT_AUX_CLK_APP_REQ_EXIT_L1		0xc14
++#define PARF_DEBUG_CNT_AUX_CLK_APP_READY_ENTER_L23	0xc18
++#define PARF_DEBUG_CNT_AUX_CLK_APP_READY_ENTER_L1	0xc1c
+ #define PARF_DEBUG_CNT_AUX_CLK_IN_L1SUB_L1	0xc84
+ #define PARF_DEBUG_CNT_AUX_CLK_IN_L1SUB_L2	0xc88
+ 
+@@ -188,11 +201,48 @@
+ #define PERST_DELAY_US				1000
+ #define FLUSH_TIMEOUT_US			100
+ 
++/* Dump buffer size for the link-down register dump */
++#define QCOM_PCIE_DUMP_BUF_SIZE			SZ_8K
++
+ #define QCOM_PCIE_CRC8_POLYNOMIAL		(BIT(2) | BIT(1) | BIT(0))
+ 
+ #define QCOM_PCIE_LINK_SPEED_TO_BW(speed) \
+ 		Mbps_to_icc(PCIE_SPEED2MBS_ENC(pcie_get_link_speed(speed)))
+ 
++#define QCOM_PCIE_DUMP_REGS_PER_LINE	4
++
++static const u32 qcom_pcie_parf_dump_regs[] = {
++	PARF_LTSSM,
++	PARF_INT_ALL_STATUS,
++	PARF_SYS_CTRL,
++};
++
++static const u32 qcom_pcie_ext_parf_dump_regs[] = {
++	PARF_PM_STTS,
++	PARF_PM_STTS_1,
++	PARF_INT_ALL_STATUS,
++	PARF_INT_ALL_2_STATUS,
++	PARF_CLKREQ_OVERRIDE,
++	PARF_L1SS_SLEEP_MODE_HANDLER_STATUS,
++	PARF_L1SS_SLEEP_MODE_HANDLER_CFG,
++	PARF_CORE_ERRORS,
++	PARF_LINK_DOWN_AXI_ECAM_BLOCK_STATUS,
++	PARF_STATUS,
++	PARF_SYS_CTRL,
++};
++
++static const u32 qcom_pcie_mhi_dump_regs[] = {
++	PARF_DEBUG_CNT_PM_LINKST_IN_L2,
++	PARF_DEBUG_CNT_PM_LINKST_IN_L1SUB,
++	PARF_DEBUG_CNT_PM_LINKST_IN_L1,
++	PARF_DEBUG_CNT_PM_LINKST_IN_L0S,
++	PARF_DEBUG_CNT_AUX_CLK_APP_REQ_EXIT_L1,
++	PARF_DEBUG_CNT_AUX_CLK_APP_READY_ENTER_L23,
++	PARF_DEBUG_CNT_AUX_CLK_APP_READY_ENTER_L1,
++	PARF_DEBUG_CNT_AUX_CLK_IN_L1SUB_L1,
++	PARF_DEBUG_CNT_AUX_CLK_IN_L1SUB_L2,
++};
++
+ struct qcom_pcie_resources_1_0_0 {
+ 	struct clk_bulk_data *clks;
+ 	int num_clks;
+@@ -275,12 +325,15 @@ struct qcom_pcie_ops {
+   * @override_no_snoop: Override NO_SNOOP attribute in TLP to enable cache
+   * snooping
+   * @firmware_managed: Set if the Root Complex is firmware managed
++  * @has_ext_parf_regs: Set if the PARF block implements the extended
++  * register set used by qcom_pcie_dump_regs().
+   */
+ struct qcom_pcie_cfg {
+ 	const struct qcom_pcie_ops *ops;
+ 	bool override_no_snoop;
+ 	bool firmware_managed;
+ 	bool no_l0s;
++	bool has_ext_parf_regs;
+ };
+ 
+ struct qcom_pcie_perst {
+@@ -1597,12 +1650,14 @@ static const struct qcom_pcie_cfg cfg_1_0_0 = {
+ 
+ static const struct qcom_pcie_cfg cfg_1_9_0 = {
+ 	.ops = &ops_1_9_0,
++	.has_ext_parf_regs = true,
+ };
+ 
+ static const struct qcom_pcie_cfg cfg_1_34_0 = {
+ 	.ops = &ops_1_9_0,
+ 	.override_no_snoop = true,
+ 	.no_l0s = true,
++	.has_ext_parf_regs = true,
+ };
+ 
+ static const struct qcom_pcie_cfg cfg_2_1_0 = {
+@@ -1624,6 +1679,7 @@ static const struct qcom_pcie_cfg cfg_2_4_0 = {
+ 
+ static const struct qcom_pcie_cfg cfg_2_7_0 = {
+ 	.ops = &ops_2_7_0,
++	.has_ext_parf_regs = true,
+ };
+ 
+ static const struct qcom_pcie_cfg cfg_2_9_0 = {
+@@ -1633,6 +1689,7 @@ static const struct qcom_pcie_cfg cfg_2_9_0 = {
+ static const struct qcom_pcie_cfg cfg_sc8280xp = {
+ 	.ops = &ops_1_21_0,
+ 	.no_l0s = true,
++	.has_ext_parf_regs = true,
+ };
+ 
+ static const struct qcom_pcie_cfg cfg_fw_managed = {
+@@ -1760,6 +1817,274 @@ static int qcom_pcie_set_max_opp(struct device *dev)
+ 	return ret;
+ }
+ 
++static int qcom_pcie_has_storage_ep_cb(struct pci_dev *pdev, void *data)
++{
++	bool *found = data;
++
++	if (pdev->class >> 16 == PCI_BASE_CLASS_STORAGE) {
++		*found = true;
++		return 1;
++	}
++
++	return 0;
++}
++
++static bool qcom_pcie_has_storage_ep(struct qcom_pcie *pcie)
++{
++	struct dw_pcie_rp *pp = &pcie->pci->pp;
++	bool found = false;
++
++	pci_walk_bus(pp->bridge->bus, qcom_pcie_has_storage_ep_cb, &found);
++
++	return found;
++}
++
++/*
++ * qcom_pcie_dump_advance_col - advance @col and append a separator to @buf.
++ *
++ * @col tracks the current column within the active section and must be
++ * reset to 0 by the caller at the start of each new section; a newline is
++ * emitted every QCOM_PCIE_DUMP_REGS_PER_LINE entries to keep the dump
++ * compact in dmesg.
++ */
++static size_t qcom_pcie_dump_advance_col(char *buf, size_t buf_size, int *col)
++{
++	*col += 1;
++
++	return scnprintf(buf, buf_size,
++			 (*col % QCOM_PCIE_DUMP_REGS_PER_LINE) ? "  " : "\n");
++}
++
++static size_t qcom_pcie_dump_reg_val(char *buf, size_t buf_size, int *col,
++				     u32 offset, u32 val)
++{
++	size_t len;
++
++	len = scnprintf(buf, buf_size, "0x%03x: 0x%08x", offset, val);
++	len += qcom_pcie_dump_advance_col(buf + len, buf_size - len, col);
++
++	return len;
++}
++
++/* Same as qcom_pcie_dump_reg_val(), but tags the entry with a lane number
++ * since the RAS-DES SD-EQ status registers are read once per lane at a
++ * fixed offset, so the offset alone can't tell entries apart.
++ */
++static size_t qcom_pcie_dump_lane_reg_val(char *buf, size_t buf_size, int *col,
++					  int lane, u32 offset, u32 val)
++{
++	size_t len;
++
++	len = scnprintf(buf, buf_size, "L%d/0x%03x: 0x%08x", lane, offset, val);
++	len += qcom_pcie_dump_advance_col(buf + len, buf_size - len, col);
++
++	return len;
++}
++
++static size_t qcom_pcie_dump_reg_table(void __iomem *base, const u32 *regs,
++				       int nregs, char *buf, size_t buf_size)
++{
++	size_t len = 0;
++	int col = 0;
++	int i;
++
++	for (i = 0; i < nregs; i++)
++		len += qcom_pcie_dump_reg_val(buf + len, buf_size - len, &col,
++					      regs[i], readl_relaxed(base + regs[i]));
++
++	if (col % QCOM_PCIE_DUMP_REGS_PER_LINE)
++		len += scnprintf(buf + len, buf_size - len, "\n");
++
++	return len;
++}
++
++/*
++ * qcom_pcie_fill_dump_buf - fill @buf with key PCIe register values captured
++ * at Link Down time.
++ *
++ * Returns the number of bytes written into @buf.
++ */
++static size_t qcom_pcie_fill_dump_buf(struct qcom_pcie *pcie, char *buf,
++				      size_t buf_size)
++{
++	struct dw_pcie *pci = pcie->pci;
++	u16 exp_cap, aer_cap, l1ss_cap, secpci_cap, pl16gt_cap, pl32gt_cap;
++	size_t len = 0;
++	int col = 0;
++	u32 val;
++
++	len += scnprintf(buf + len, buf_size - len, "DBI registers:\n");
++
++	exp_cap = dw_pcie_find_capability(pci, PCI_CAP_ID_EXP);
++	if (exp_cap) {
++		val = dw_pcie_readl_dbi(pci, exp_cap + PCI_EXP_LNKCAP);
++		len += qcom_pcie_dump_reg_val(buf + len, buf_size - len, &col,
++					     exp_cap + PCI_EXP_LNKCAP, val);
++
++		val = dw_pcie_readl_dbi(pci, exp_cap + PCI_EXP_LNKCTL);
++		len += qcom_pcie_dump_reg_val(buf + len, buf_size - len, &col,
++					     exp_cap + PCI_EXP_LNKCTL, val);
++
++		val = dw_pcie_readl_dbi(pci, exp_cap + PCI_EXP_LNKCTL2);
++		len += qcom_pcie_dump_reg_val(buf + len, buf_size - len, &col,
++					     exp_cap + PCI_EXP_LNKCTL2, val);
++	}
++
++	aer_cap = dw_pcie_find_ext_capability(pci, PCI_EXT_CAP_ID_ERR);
++	if (aer_cap) {
++		val = dw_pcie_readl_dbi(pci, aer_cap + PCI_ERR_UNCOR_STATUS);
++		len += qcom_pcie_dump_reg_val(buf + len, buf_size - len, &col,
++					     aer_cap + PCI_ERR_UNCOR_STATUS, val);
++
++		val = dw_pcie_readl_dbi(pci, aer_cap + PCI_ERR_COR_STATUS);
++		len += qcom_pcie_dump_reg_val(buf + len, buf_size - len, &col,
++					     aer_cap + PCI_ERR_COR_STATUS, val);
++	}
++
++	l1ss_cap = dw_pcie_find_ext_capability(pci, PCI_EXT_CAP_ID_L1SS);
++	if (l1ss_cap) {
++		val = dw_pcie_readl_dbi(pci, l1ss_cap + PCI_L1SS_CTL1);
++		len += qcom_pcie_dump_reg_val(buf + len, buf_size - len, &col,
++					     l1ss_cap + PCI_L1SS_CTL1, val);
++	}
++
++	secpci_cap = dw_pcie_find_ext_capability(pci, PCI_EXT_CAP_ID_SECPCI);
++	if (secpci_cap) {
++		val = dw_pcie_readl_dbi(pci, secpci_cap + PCI_SECPCI_LE_CTRL);
++		len += qcom_pcie_dump_reg_val(buf + len, buf_size - len, &col,
++					     secpci_cap + PCI_SECPCI_LE_CTRL, val);
++
++		val = dw_pcie_readl_dbi(pci, secpci_cap + PCI_SECPCI_LE_CTRL + 4);
++		len += qcom_pcie_dump_reg_val(buf + len, buf_size - len, &col,
++					     secpci_cap + PCI_SECPCI_LE_CTRL + 4, val);
++	}
++
++	pl16gt_cap = dw_pcie_find_ext_capability(pci, PCI_EXT_CAP_ID_PL_16GT);
++	if (pl16gt_cap) {
++		val = dw_pcie_readl_dbi(pci, pl16gt_cap + PCI_PL_16GT_LE_CTRL);
++		len += qcom_pcie_dump_reg_val(buf + len, buf_size - len, &col,
++					     pl16gt_cap + PCI_PL_16GT_LE_CTRL, val);
++
++		val = dw_pcie_readl_dbi(pci, pl16gt_cap + PCI_PL_16GT_STATUS);
++		len += qcom_pcie_dump_reg_val(buf + len, buf_size - len, &col,
++					     pl16gt_cap + PCI_PL_16GT_STATUS, val);
++	}
++
++	pl32gt_cap = dw_pcie_find_ext_capability(pci, PCI_EXT_CAP_ID_PL_32GT);
++	if (pl32gt_cap) {
++		val = dw_pcie_readl_dbi(pci, pl32gt_cap + PCI_PL_32GT_LE_CTRL);
++		len += qcom_pcie_dump_reg_val(buf + len, buf_size - len, &col,
++					     pl32gt_cap + PCI_PL_32GT_LE_CTRL, val);
++
++		val = dw_pcie_readl_dbi(pci, pl32gt_cap + PCI_PL_32GT_STATUS);
++		len += qcom_pcie_dump_reg_val(buf + len, buf_size - len, &col,
++					     pl32gt_cap + PCI_PL_32GT_STATUS, val);
++	}
++
++	/*
++	 * Gen5 (32 GT/s) local/remote pre/post cursor status, read through the
++	 * SD-EQ registers inside the DWC RAS-DES vendor-specific extended
++	 * capability. For each lane, write the lane selector into
++	 * PCIE_RAS_DES_SD_EQ_CONTROL1 then read back
++	 * PCIE_RAS_DES_SD_EQ_STATUS2/3, which carry the local/remote pre/post
++	 * cursor values.
++	 */
++	if (pcie_get_link_speed(pci->max_link_speed) == PCIE_SPEED_32_0GT) {
++		u16 rasdes_cap = dw_pcie_find_rasdes_capability(pci);
++
++		if (rasdes_cap) {
++			int num_lanes = dw_pcie_link_get_max_link_width(pci);
++			int lane;
++
++			for (lane = 0; lane < num_lanes; lane++) {
++				dw_pcie_writel_dbi(pci,
++						   rasdes_cap + PCIE_RAS_DES_SD_EQ_CONTROL1,
++						   lane & PCIE_RAS_DES_SD_EQ_CONTROL1_LANE_SEL);
++
++				val = dw_pcie_readl_dbi(pci,
++							rasdes_cap + PCIE_RAS_DES_SD_EQ_STATUS2);
++				len += qcom_pcie_dump_lane_reg_val(buf + len, buf_size - len, &col,
++							lane,
++							rasdes_cap + PCIE_RAS_DES_SD_EQ_STATUS2,
++							val);
++
++				val = dw_pcie_readl_dbi(pci,
++							rasdes_cap + PCIE_RAS_DES_SD_EQ_STATUS3);
++				len += qcom_pcie_dump_lane_reg_val(buf + len, buf_size - len, &col,
++							lane,
++							rasdes_cap + PCIE_RAS_DES_SD_EQ_STATUS3,
++							val);
++			}
++		}
++	}
++
++	if (col % QCOM_PCIE_DUMP_REGS_PER_LINE)
++		len += scnprintf(buf + len, buf_size - len, "\n");
++
++	len += scnprintf(buf + len, buf_size - len, "\nPARF registers:\n");
++	len += qcom_pcie_dump_reg_table(pcie->parf, qcom_pcie_parf_dump_regs,
++					ARRAY_SIZE(qcom_pcie_parf_dump_regs),
++					buf + len, buf_size - len);
++
++	if (!pcie->mhi)
++		return len;
++
++	len += scnprintf(buf + len, buf_size - len, "\nMHI registers:\n");
++	len += qcom_pcie_dump_reg_table(pcie->mhi, qcom_pcie_mhi_dump_regs,
++					ARRAY_SIZE(qcom_pcie_mhi_dump_regs),
++					buf + len, buf_size - len);
++
++	return len;
++}
++
++/*
++ * qcom_pcie_dump_regs - capture a PCIe register dump on Link Down.
++ *
++ * If a storage endpoint is present downstream, print the dump directly to
++ * dmesg via dev_err() so it is immediately visible even if userspace is not
++ * available to read a devcoredump after a storage failure. Otherwise hand
++ * the buffer to the devcoredump framework so it is accessible under
++ * /sys/class/devcoredump/ for offline analysis.
++ */
++static void qcom_pcie_dump_regs(struct qcom_pcie *pcie)
++{
++	struct device *dev = pcie->pci->dev;
++	bool storage_ep = qcom_pcie_has_storage_ep(pcie);
++	char *buf;
++	size_t len;
++
++	buf = vmalloc(QCOM_PCIE_DUMP_BUF_SIZE);
++	if (!buf)
++		return;
++
++	len = qcom_pcie_fill_dump_buf(pcie, buf, QCOM_PCIE_DUMP_BUF_SIZE);
++
++	if (storage_ep) {
++		dev_err(dev, "PCIe Link Down register dump:\n%s", buf);
++		vfree(buf);
++	} else {
++		dev_coredumpv(dev, buf, len, GFP_KERNEL);
++	}
++}
++
++static int qcom_pcie_regdump_show(struct seq_file *s, void *data)
++{
++	struct qcom_pcie *pcie = (struct qcom_pcie *)dev_get_drvdata(s->private);
++	char *buf;
++	size_t len;
++
++	buf = vmalloc(QCOM_PCIE_DUMP_BUF_SIZE);
++	if (!buf)
++		return -ENOMEM;
++
++	len = qcom_pcie_fill_dump_buf(pcie, buf, QCOM_PCIE_DUMP_BUF_SIZE);
++	seq_write(s, buf, len);
++
++	vfree(buf);
++
++	return 0;
++}
++
+ /*
+  * Qcom PCIe controllers only support one Root Port per controller instance. So
+  * this function ignores the 'pci_dev' associated with the Root Port and just
+@@ -1864,6 +2189,8 @@ static void qcom_pcie_init_debugfs(struct qcom_pcie *pcie)
+ 	pcie->debugfs = debugfs_create_dir(name, NULL);
+ 	debugfs_create_devm_seqfile(dev, "link_transition_count", pcie->debugfs,
+ 				    qcom_pcie_link_transition_count);
++	debugfs_create_devm_seqfile(dev, "regdump", pcie->debugfs,
++				    qcom_pcie_regdump_show);
+ }
+ 
+ static irqreturn_t qcom_pcie_global_irq_thread(int irq, void *data)
+@@ -1878,6 +2205,7 @@ static irqreturn_t qcom_pcie_global_irq_thread(int irq, void *data)
+ 
+ 	if (test_and_clear_bit(INT_ALL_LINK_DOWN, &status)) {
+ 		dev_dbg(dev, "Received Link down event\n");
++		qcom_pcie_dump_regs(pcie);
+ 		for_each_pci_bridge(port, pp->bridge->bus) {
+ 			if (pci_pcie_type(port) == PCI_EXP_TYPE_ROOT_PORT)
+ 				pci_host_handle_link_down(port);
+diff --git a/include/uapi/linux/pci_regs.h b/include/uapi/linux/pci_regs.h
+index facaa324bd86..0e82d89e747a 100644
+--- a/include/uapi/linux/pci_regs.h
++++ b/include/uapi/linux/pci_regs.h
+@@ -1176,12 +1176,14 @@
+ #define PCI_SECPCI_LE_CTRL	0x0c /* Lane Equalization Control Register */
+ 
+ /* Physical Layer 16.0 GT/s */
++#define PCI_PL_16GT_STATUS	0x0c	/* 16.0 GT/s Status Register */
+ #define PCI_PL_16GT_LE_CTRL	0x20	/* Lane Equalization Control Register */
+ #define  PCI_PL_16GT_LE_CTRL_DSP_TX_PRESET_MASK		0x0000000F
+ #define  PCI_PL_16GT_LE_CTRL_USP_TX_PRESET_MASK		0x000000F0
+ #define  PCI_PL_16GT_LE_CTRL_USP_TX_PRESET_SHIFT	4
+ 
+ /* Physical Layer 32.0 GT/s */
++#define PCI_PL_32GT_STATUS	0x0c	/* 32.0 GT/s Status Register */
+ #define PCI_PL_32GT_LE_CTRL	0x20	/* Lane Equalization Control Register */
+ 
+ /* Physical Layer 64.0 GT/s */
+
+---
+base-commit: d55d5a8f3d852baab49dba910dcb04b6d8091b05
+change-id: 20260811-regdump-11719f75de0c
+
+Best regards,
+--  
+Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 
