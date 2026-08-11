@@ -1,157 +1,294 @@
-Received: from mail-oo1-f50.google.com (mail-oo1-f50.google.com [209.85.161.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E56C24219F2
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 22:51:21 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.161.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4814F41F349
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 22:54:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786488683; cv=none; b=TuSl/ypY4hCc0RviVorc+iefxaevvF/FlLvFvSYa5ySYCUkq/YzEkW6eo6ES7GweJuG1zrfLO9zUIdLYyvUW3os87OGbNDzQadxtTZ4IOfsA8jgc8mRIPjCdB5QbzUJX6PUczErtLZH+toYmiR8qlBzotHcQSDV+Nz5QCD1PCUs=
+	t=1786488846; cv=none; b=FVQX36jvCcR3e79RnX/ta+1AmZUQTKjQv5Br+8KSbQzy/wsyDdnorq7Nz6RJOCMbAQTA1cATxnewhOThaW0vhsOVma4EQ4TzS001SKuTJnInZYrBhOfyrn7Bv/lb8WV1Aaqr/kb+lgM2PCTI3AajQu2zwAvK0kROnsLxmRYZrzI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786488683; c=relaxed/simple;
-	bh=vYfhyC4OO8mWaELc8/W/kMF7s3rYjL4xxMKBsGrsZMg=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=mWkiwYleeMx+LNmb/EgdNZxgE9lquHyovRUSEGNCUF+GKBQP/gLoAMzN21dlvS7B4RKw6aks6DEL3vuiJ5ZJAZ7c5jdjlsT7QEcbvORpxyDBC6d8mlMoygt6CHrt8X2keDXMSlnqpaav1QCqlkxi20ArAmJhsPfalEemft+Vuug=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=aSGbXB3j; arc=none smtp.client-ip=209.85.161.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1786488846; c=relaxed/simple;
+	bh=6xJzdVxEIBDxUnIUmQ+uTVaQoRYbXFaslTVZWRJDhLw=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=uVpZVic/dQxXfh8NBFFkqGONFopKpWoOBhJZXWBgwAVYHOBqsHN+UD9XtWXlZqyNma9c8xAYyfggdPSpoyogwjjJ/RR/d2barugBIGanxDSLsdTRbmOsHP3FR+hiqgyJuB/splfHTvKWX6xd6G9g/6i1+4iJq3BM+vEIqcXhL2k=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=lrGNHAHX; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hxW3R52a; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="aSGbXB3j"
-Received: by mail-oo1-f50.google.com with SMTP id 006d021491bc7-6ae9b721927so268440eaf.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 15:51:21 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="lrGNHAHX";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hxW3R52a"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67BLc2wZ1852631
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 22:54:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	bfr3XhR+7EnwRRmn8p/wCANhByzHY69nWMWlM+9FuMQ=; b=lrGNHAHX7ymx/shT
+	ethSghEghCa4kHIKPrccaq7iIFyUsxlnA4M3YsUONXciNhDdACmtvroMsU3QqeGO
+	DyFpVvbE/UeosPu6tzC2YuFeYD12/tO9RJ22/IyhdcTyoYdaL35JIE71ZbgO7sHs
+	h6aPVr5hWDETIpgHTai+aZ8bN9sR89pTsJn2n4391WvTD7JQyDii90uYEL3cw8v2
+	nkhWJa1mKE4pBID8JJmlJs9lWroSonc0Dg/a/vGHR7hKrusP9AYd+wbFeptbPEfJ
+	fCLQdcSuhIYj+iMjqMqKA3YXEor6OcFsttG58kXmR8kScf9gmW+UaBDz1baFUmPv
+	CcLsnQ==
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g01q12ynq-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 22:54:01 +0000 (GMT)
+Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cbedc1899f7so210780a12.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 15:54:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786488681; x=1787093481; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ULj5VW1UWlM8YYUcQzLWByRAMMT/RaKzn22tl/DU+7o=;
-        b=aSGbXB3jdc0hfOzRQW2JKWnAn2r3E2YeT2xVKjtynHyTwMnx1ncVfQWe5CA8kdAU0Z
-         n7xELf3/N+S2OJPgur9UUMli818gtRECX5XadD61i8qmikds0UVDZPvdgxS1P5jbPlem
-         FFcNRmJtrW7FcqYXaZZ++pss7l+Kf/I+gPUQ7Ug5bF5D/m4KQZ2EDp2iQgW6ea+1jpbr
-         fNsqNmpunhGYmbxHM0ljtxWGCfo1Gk4pDCcJrLMakWmkmJ8LOx5Q/i4rgOYECV7ZjbDB
-         CSpdBsabKm898Ephs6Uy2MIJmrE11cP0UvJ69ygyES7r7Z8KvzbV++voiJgMu/O1FIdX
-         uiBg==
+        d=oss.qualcomm.com; s=google; t=1786488841; x=1787093641; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=bfr3XhR+7EnwRRmn8p/wCANhByzHY69nWMWlM+9FuMQ=;
+        b=hxW3R52aml4ex0malZ0hANVgsY2NnEGZOuWZujgkTx89mxSlmJz5rxfOziEBGa2bp7
+         7chmmaIwh2vviWAs4h8GIqy46K7fqC3TF414UL8U9JkpS4LYffZewO+uMJy8cTmoATDt
+         QV4NSkmsTXVZlums4bTllJHQQBvDxAqXFBYnTuX7k9Xy5JmbAydwwPJ3YwKNE65b5UjV
+         mwLg7I8rqOUNHBteSK8x+xKixAzH0YNVz6aqbfVvUqaLsQQ6/84nxKjJn8/knUWSFr2f
+         e0nj0BnUyeEMsg3ggPIZpVXT840VACsVLQRBAbAejqghSo9jJ53I1dfuAGx1d6sLQSdO
+         FlNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786488681; x=1787093481;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ULj5VW1UWlM8YYUcQzLWByRAMMT/RaKzn22tl/DU+7o=;
-        b=o1bmkc0RUOQnpFdIxWcKrs6Zchcjm+7IbBjN1Ef1M19o9h5L+XDEHDFMf6W+m36alZ
-         H8nB+etkJkIE78T6Njn9o6kmw6gj6k8GCAIfoVg6TSMP3dzkfVO/3j3AdDUEHgkzVnIx
-         B2BtvD6a0WXmadHbG9l0MIJB4FhdQ1iF9qr3y7wG6RRmNpuP/gKqsGLpvQwPFTfwBO0s
-         TBbzH+8/l6ZAYHvMVSBet8WVQNRaoIqkmi4IKovSTkVlGisQ/fWi0mtunyk9KpokVS+W
-         63SO4F6a+XMBRx9VZdzc6GFKxG3G7xfgpiiZ/Y8gvFzpz/FkQujdueMbRvA3HPPbpG1P
-         SKFQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rq3Ee5ZRU8HFInQzt93WtmWn6dVSX3oHqGYgTJ/3bP/HmszJk9txQkzj66KvZdOzL7kYnIaqk8LuXM2/DCf@vger.kernel.org
-X-Gm-Message-State: AOJu0Yxkc3sXmS41BX58wzKlMVYm3/mtDbM4YsZ0BRexpMvUjX8ASPrV
-	bstyQcCgE8E50c1UOdnGZQuuz7Ic0jVvr3iDFjjYZN1V0S1Kd35TLZRr
-X-Gm-Gg: AR+sD10DcsOckno23kjoXalS1TgeA0bDLQ4yLYqivfuOJtWNmTFlS9M5J7CrHctOymS
-	7aLdH/kMomIrHc3MJ+paLZ93AN2Y3iLCchDT+akJ5YBljsRQ8GHnuYviJV6vmSDl0rhSacID/La
-	jmkJg3Eg0XdlEyT+0OHsqxRRjvlfDwiahneh8F1zZ25fGpsbq72HEDF41e5V3QBJyXRyZJKjbcf
-	o3oCxT7tunJPUGyJUqU3nUtJu6Li7OO0lB+nkwWGHLunOx/GBbXvFto2rCvXmJehmApiVogm2jL
-	W5e5FvosBHRV/EKNtETY2w22sTK4FfDg3o4vwwCho0HuovuHZpoZykuJAlVKqeAle1iW+KcDQ9l
-	Q9wi2d8x9CJf87PGd3AYDtmRIVBWFtcFusrPyUZm2j4nKwdyg0cONyHAydj/wZEbhgRl7DXAkhR
-	1K1PBbfbKHcSVhPwPSFSOPiTiRUBmbHlMYjUXf91AjMQ+r57LFypSZIHa15l3dyRelCrCxbtO2F
-	lna69AjWs/7RF1Ob0c0tduE+KIITQiBlnTmNPABuWI=
-X-Received: by 2002:a05:6820:3088:b0:6ac:a8ef:9a86 with SMTP id 006d021491bc7-6b0b2673790mr405371eaf.15.1786488680805;
-        Tue, 11 Aug 2026 15:51:20 -0700 (PDT)
-Received: from LAPTOP-DPAKMOI4.it.purdue.edu (pal-210-106-74.itap.purdue.edu. [128.210.106.74])
-        by smtp.gmail.com with ESMTPSA id 46e09a7af769-7f3b3475bf1sm1019766a34.26.2026.08.11.15.51.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Aug 2026 15:51:20 -0700 (PDT)
-From: Yifei Gao <gyf161023@gmail.com>
-To: Srinivas Kandagatla <srini@kernel.org>,
-	Amol Maheshwari <amahesh@qti.qualcomm.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Arnd Bergmann <arnd@arndb.de>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	linaro-mm-sig@lists.linaro.org,
-	linux-kernel@vger.kernel.org,
-	Yifei Gao <gyf161023@gmail.com>,
-	stable@vger.kernel.org
-Subject: [PATCH v2] misc: fastrpc: fix double-free in fastrpc_map_attach() error path
-Date: Tue, 11 Aug 2026 22:51:01 +0000
-Message-ID: <20260811225102.1077841-1-gyf161023@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260806235056.456341-1-gyf161023@gmail.com>
-References: <20260806235056.456341-1-gyf161023@gmail.com>
+        d=1e100.net; s=20251104; t=1786488841; x=1787093641;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=bfr3XhR+7EnwRRmn8p/wCANhByzHY69nWMWlM+9FuMQ=;
+        b=BnpSOYWl3KCPhG7CfX4iN+9FytbSI1fAPSEtxOcSrn1n++vUhYUypjvrHlQ+E9Nwsr
+         5BbhERrJhFqbu3DCUIAdeDIibs27EpFqHdKd2uOdeMKmsGPiVm+zmdrs9+fd2nbXjCNE
+         J5Buwfqtm3JX+XmDVeBHRevlPoLLATc1Kooz00WljX5tO3r903xhkKxOlSHSVsUG45jF
+         5e+viT2pBLwVz+W/mm00uOEl+tOlji96AQ/gOPieqUPS4XZhxtuJLqNhwXTn93zshdEb
+         B24U8Hi0F/NCDKmvvX9d16tgocFiapEXiSSWAi1hP4KAj2QuRWAbB1Kr/LOYHemYdr6S
+         FwcQ==
+X-Forwarded-Encrypted: i=1; AHgh+RqcPbPuDSV5HFoqOkRoxl9TD+0WymQnXzrcfeBRD0r2mAKTrIayY/Udx5jR3ol+wkuk11L09ZHRBwam35uY@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw61wh9uG6RlwqrblK/QIJKBlvqJRty4ulsftS+obk6lJex2Kkd
+	g6qo6rdfxPi0dMIknV6aC9dEEsPID3Od5F7pSGSo0o+l1X3gf1wjjBHXssPzLp+ebk46Tcoiu1l
+	UADzeA9gsGdLBKr+GauX80e+0tR+Nk/XMKRrpRHhffhOhGijx8s+X0RZYL56V2CmvQw/8
+X-Gm-Gg: AR+sD12Ikm2Bgcxjhrw3LUJWvtnD91AJKZZ2decHtq59+soLO+fdG7Y4ngnVpZeOpdg
+	MVWHMvku2o0b6Nri55CVI3HP+wFEYxDCo29Yw88Imsu8GJEB2dh4gb9zG75SPZpzwvoamUXAlrW
+	beW0EAIoOsLlubwI3SCmAUvME8JcKoCk5foi0puAOsd4HfcGL1TwB9zSh7+BS9kgyX81i/kV6q0
+	wh99rU32M4/b/BBYcWeocfyYrS6fQN5nJMix6nobikUlPHgreN571KNZIdroMH+0HoOIBAOxGTv
+	COiokF1hlCR9XIgkmoF/6JVXhXuPyuxmlQILvaaIEupKLQhblp4ESUnplNf9Lj3XJVrdBMOMhJY
+	QyGPbUvJA7OKqBjl6Q82UVyQ=
+X-Received: by 2002:a05:6a21:6f87:b0:3bf:a543:e7f5 with SMTP id adf61e73a8af0-3cc3f53a5aemr385787637.3.1786488840888;
+        Tue, 11 Aug 2026 15:54:00 -0700 (PDT)
+X-Received: by 2002:a05:6a21:6f87:b0:3bf:a543:e7f5 with SMTP id adf61e73a8af0-3cc3f53a5aemr385746637.3.1786488840438;
+        Tue, 11 Aug 2026 15:54:00 -0700 (PDT)
+Received: from [192.168.1.9] ([106.222.233.72])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31cf40f9cfbsm3181641eec.13.2026.08.11.15.53.53
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 11 Aug 2026 15:53:59 -0700 (PDT)
+Message-ID: <471185ea-acb6-4e82-80a3-ac716a1cd8ad@oss.qualcomm.com>
+Date: Wed, 12 Aug 2026 04:23:51 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/6] drm/msm/a8xx: Add support for Adreno 830 GPU
+To: Aaron Kling <webgeek1234@gmail.com>
+Cc: abhinav.kumar@linux.dev, David Airlie <airlied@gmail.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+        Jessica Zhang <jesszhan0024@gmail.com>, jie.zhang@oss.qualcomm.com,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        marijn.suijten@somainline.org, Maxime Ripard <mripard@kernel.org>,
+        Rob Herring <robh@kernel.org>, robin.clark@oss.qualcomm.com,
+        sean@poorly.run, Simona Vetter <simona@ffwll.ch>,
+        Thomas Zimmermann <tzimmermann@suse.de>
+References: <CALHNRZ-yffAy7xZbjVEZOfgVeqFGZ6h9jvNkbtTsNNXGQSgeCQ@mail.gmail.com>
+From: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+Content-Language: en-US
+In-Reply-To: <CALHNRZ-yffAy7xZbjVEZOfgVeqFGZ6h9jvNkbtTsNNXGQSgeCQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: xKaVposJTLGMuqzGnvLshpMbINQpU1Zo
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDE5MSBTYWx0ZWRfX1gIjD1WubjdY
+ lIxgtByvkW4eA6+o1vPP4xWYMFacwRYJQHeiiYuSaiZ1lcQ/fcfIf989i28cXPMxzog8ajJM820
+ abziv5XMV4AhBL+ljm135WbrQbA3peFGvj2WLVl/CINZeiOt0JEArDgWU6S4JtxtoZ1Im7toiEl
+ Coe04VYJXY6Tj7YINNTwmlAmsKH/DzbkfJZh/EoxgZ3EqnuJkkxx1ipl6vsmDeaGaV2Zwcp3Sz/
+ BdX88hkUZTMctzi+Q4Xmhrgmz3FpSCIgQyaMwxcEfGWoq+8gVsvFM6bwAvTABzORYfJlhUdXyR6
+ 7u6XG17GKjQohEdbFWxFQXU/dGHVbs6hsvtEmTpM6egL1Fkf29bqda3jk5S5S4OedpIaus7uDVv
+ jUcxrgTYQGLxTtnwpBNhJvDQfFQv8uQ/KYWWmoUIxKR59eVd2yWS3TPHBU+RlaQ1sBIpfh0NxQl
+ JViYS0tp6a+XryM57MQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDE5MSBTYWx0ZWRfX+SvAFw8YKI8k
+ yK4F8F7B2cwEnhHpEpoxmWiyO04mm24RWYTRvlI+ArdoUTgCICS7Wgxg453svsnmkeGhKHFcDWr
+ xdBZui7oAoYKUg0ei4mkXRhXAj7fpk0=
+X-Proofpoint-ORIG-GUID: xKaVposJTLGMuqzGnvLshpMbINQpU1Zo
+X-Authority-Analysis: v=2.4 cv=brt8wkai c=1 sm=1 tr=0 ts=6a7ba809 cx=c_pps
+ a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=izYkeDe9UoOdVOdgkCo6SQ==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=kWzrzshOWzBPKgCoOEcA:9 a=QEXdDO2ut3YA:10
+ a=3WC7DwWrALyhR5TkjVHa:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-11_05,2026-08-10_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 malwarescore=0 adultscore=0 clxscore=1015 suspectscore=0
+ impostorscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608110191
 
-map->table is assigned right after dma_buf_map_attachment_unlocked()
-succeeds. The two failure checks that follow, the len > map->size test
-and, where subsystem VMIDs are configured, a failed qcom_scm_assign_mem(),
-jump to map_err with map->table already set.
+On 8/11/2026 1:29 PM, Aaron Kling wrote:
+>> From: Jie Zhang <jie.zhang@oss.qualcomm.com>
+>> Add support for the Adreno 830 GPU present in SM8750 SoC. Adreno 830 GPU
+>> belongs to the A8x Gen 1 family and it is architecturally close Adreno 840.
+>> Add a new catalog entry along with the register list to enable support
+>> for this GPU.
+>> Signed-off-by: Jie Zhang <jie.zhang@oss.qualcomm.com>
+>> Signed-off-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+>> ---
+>>  drivers/gpu/drm/msm/adreno/a6xx_catalog.c | 334 ++++++++++++++++++++++++++++++
+>>  drivers/gpu/drm/msm/adreno/a8xx_gpu.c     |   2 +-
+>>  drivers/gpu/drm/msm/adreno/adreno_gpu.h   |   5 +
+>>  3 files changed, 340 insertions(+), 1 deletion(-)
+>> diff --git a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
+>> index 90a0c7ffb3c8..418edde9104e 100644
+>> --- a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
+>> +++ b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
+>> @@ -1693,6 +1693,294 @@ static const struct adreno_info a7xx_gpus[] = {
+>>  };
+>>  DECLARE_ADRENO_GPULIST(a7xx);
+>>
+>> +static const struct adreno_reglist_pipe a830_nonctxt_regs[] = {
+>> + { REG_A8XX_CP_SMMU_STREAM_ID_LPAC, 0x00000101, BIT(PIPE_NONE) },
+>> + { REG_A8XX_GRAS_DBG_ECO_CNTL, 0x00000800, BIT(PIPE_BR) | BIT(PIPE_BV) },
+>> + { REG_A6XX_PC_AUTO_VERTEX_STRIDE, 0x00000001, BIT(PIPE_BR) | BIT(PIPE_BV) },
+>> + { REG_A8XX_PC_VIS_STREAM_CNTL, 0x10010000, BIT(PIPE_BR) | BIT(PIPE_BV) },
+>> + { REG_A8XX_PC_CONTEXT_SWITCH_STABILIZE_CNTL_1, 0x00000002, BIT(PIPE_BR) | BIT(PIPE_BV) },
+>> + { REG_A8XX_PC_CHICKEN_BITS_1, 0x00000003, BIT(PIPE_BR) | BIT(PIPE_BV) },
+>> + { REG_A8XX_PC_CHICKEN_BITS_2, 0x00000200, BIT(PIPE_BR) | BIT(PIPE_BV) },
+>> + { REG_A8XX_PC_CHICKEN_BITS_3, 0x00400000, BIT(PIPE_BR) | BIT(PIPE_BV) },
+>> + { REG_A8XX_PC_CHICKEN_BITS_4, 0x00500050, BIT(PIPE_BR) | BIT(PIPE_BV) },
+>> + /* Configure GBIF GX registers */
+>> + { REG_A8XX_UCHE_GBIF_GX_CONFIG, 0x010240e0, BIT(PIPE_NONE) },
+>> + { REG_A8XX_RBBM_GBIF_CLIENT_QOS_CNTL, 0x22122212, BIT(PIPE_NONE) },
+>> + /* Enable full concurrent resolve and unresolves */
+>> + { REG_A7XX_RB_CCU_CNTL, 0x00000068, BIT(PIPE_BR) },
+>> + /* Partially enable perf clear, Disable DINT to c/z be data forwarding */
+>> + { REG_A7XX_RB_CCU_DBG_ECO_CNTL, 0x00002200, BIT(PIPE_BR) },
+>> + { REG_A8XX_RB_GC_GMEM_PROTECT, 0x0c000000, BIT(PIPE_BR) },
+>> + /* Configure number of outstanding transactions to 32 */
+>> + { REG_A8XX_RB_RESOLVE_PREFETCH_CNTL, 0x00000007, BIT(PIPE_BR) },
+>> + /* Configure UCHE request time out to 16 cycles for CCU/UCHE arbitration */
+>> + { REG_A8XX_RB_CMP_DBG_ECO_CNTL, 0x00004000, BIT(PIPE_BR) },
+>> + { REG_A8XX_RBBM_NC_MODE_CNTL, 0x00000001, BIT(PIPE_NONE) },
+>> + { REG_A8XX_RBBM_SLICE_NC_MODE_CNTL, 0x00000001, BIT(PIPE_NONE) },
+>> + { REG_A8XX_RBBM_WAIT_IDLE_CLOCKS_CNTL, 0x00000030, BIT(PIPE_NONE) },
+>> + { REG_A8XX_RBBM_WAIT_IDLE_CLOCKS_CNTL2, 0x00000030, BIT(PIPE_NONE) },
+>> + { REG_A8XX_RBBM_CGC_P2S_CNTL, 0x00000040, BIT(PIPE_NONE) },
+>> + /* Enable contribution of all shader stages to SP perfcounters */
+>> + { REG_A6XX_SP_PERFCTR_SHADER_MASK, 0x0000003f, BIT(PIPE_NONE) },
+>> + /*
+>> + * BIT(26): Limit the number of wave-slots for Eviction buffer to 1 per ALU GRP
+>> + * BIT(30): Disable LPAC auto-promotion
+>> + */
+>> + { REG_A7XX_SP_CHICKEN_BITS_1, BIT(26) | BIT(30), BIT(PIPE_NONE) },
+>> + /*
+>> + * BIT(22): Disable PS out of order retire
+>> + * BIT(23): Enable half wave mode and MM instruction src&dst is half precision
+>> + */
+>> + { REG_A7XX_SP_CHICKEN_BITS_2, BIT(22) | BIT(23), BIT(PIPE_NONE) },
+>> + { REG_A7XX_SP_CHICKEN_BITS_3, 0x00300000, BIT(PIPE_NONE) },
+>> + { REG_A7XX_SP_HLSQ_TIMEOUT_THRESHOLD_DP, 0x00000080,  BIT(PIPE_NONE) },
+>> + { REG_A6XX_TPL1_DBG_ECO_CNTL, 0x10000000, BIT(PIPE_NONE) },
+>> + /* Enable cubemap small miplevel optimization settings */
+>> + /* BIT(26): Disable final clamp for bicubic filtering */
+>> + { REG_A6XX_TPL1_DBG_ECO_CNTL1, 0x04000724, BIT(PIPE_NONE) },
+>> + /* Disable tag bank id hashing */
+>> + { REG_A6XX_UCHE_MODE_CNTL, 0x00080000, BIT(PIPE_NONE) },
+>> + { REG_A8XX_UCHE_CCHE_MODE_CNTL, 0x00001000, BIT(PIPE_NONE) },
+>> + /* Limit gmem number of ways for GMEM requests in each set */
+>> + { REG_A8XX_UCHE_CCHE_CACHE_WAYS, 0x00000800, BIT(PIPE_NONE)},
+>> + /* Disable write slow pointer in data phase queue */
+>> + { REG_A8XX_UCHE_HW_DBG_CNTL, BIT(8), BIT(PIPE_NONE) },
+>> + /* Configure UCHE to CCU switchthreshold timeout cycles */
+>> + { REG_A8XX_UCHE_VARB_IDLE_TIMEOUT, 0x00000020, BIT(PIPE_NONE) },
+>> + { REG_A7XX_VFD_DBG_ECO_CNTL, 0x00008000, BIT(PIPE_BR) | BIT(PIPE_BV) },
+>> + { REG_A8XX_VFD_CB_BV_THRESHOLD, 0x00500050, BIT(PIPE_BR) | BIT(PIPE_BV) },
+>> + { REG_A8XX_VFD_CB_BR_THRESHOLD, 0x00600060, BIT(PIPE_BR) | BIT(PIPE_BV) },
+>> + { REG_A8XX_VFD_CB_BUSY_REQ_CNT, 0x00200020, BIT(PIPE_BR) | BIT(PIPE_BV) },
+>> + { REG_A8XX_VFD_CB_LP_REQ_CNT, 0x00100020, BIT(PIPE_BR) | BIT(PIPE_BV) },
+>> + { REG_A8XX_VPC_FLATSHADE_MODE_CNTL, 0x00000001, BIT(PIPE_BR) | BIT(PIPE_BV) },
+>> + /* Disable redundant tile data optimization */
+>> + { REG_A8XX_VSC_KMD_DBG_ECO_CNTL, BIT(11), BIT(PIPE_NONE)},
+>> + { },
+>> +};
+>> +
+>> +static const u32 a830_protect_regs[] = {
+>> + A6XX_PROTECT_RDONLY(0x00000, 0x03a3),
+>> + A6XX_PROTECT_RDONLY(0x003b4, 0x008b),
+>> + A6XX_PROTECT_NORDWR(0x00440, 0x001f),
+>> + A6XX_PROTECT_RDONLY(0x00580, 0x005f),
+>> + A6XX_PROTECT_NORDWR(0x005e0, 0x011f),
+>> + A6XX_PROTECT_RDONLY(0x0074a, 0x0005),
+>> + A6XX_PROTECT_RDONLY(0x00759, 0x0026),
+>> + A6XX_PROTECT_RDONLY(0x00789, 0x0000),
+>> + A6XX_PROTECT_RDONLY(0x0078c, 0x0013),
+>> + A6XX_PROTECT_NORDWR(0x00800, 0x0029),
+>> + A6XX_PROTECT_NORDWR(0x00837, 0x00af),
+>> + A6XX_PROTECT_RDONLY(0x008e7, 0x00c9),
+>> + A6XX_PROTECT_NORDWR(0x008ec, 0x00c3),
+>> + A6XX_PROTECT_NORDWR(0x009b1, 0x0250),
+>> + A6XX_PROTECT_RDONLY(0x00ce0, 0x0001),
+>> + A6XX_PROTECT_RDONLY(0x00df0, 0x0000),
+>> + A6XX_PROTECT_NORDWR(0x00df1, 0x0000),
+>> + A6XX_PROTECT_NORDWR(0x00e01, 0x0000),
+>> + A6XX_PROTECT_NORDWR(0x00e03, 0x1fff),
+>> + A6XX_PROTECT_NORDWR(0x03c00, 0x00c5),
+>> + A6XX_PROTECT_RDONLY(0x03cc6, 0x1fff),
+>> + A6XX_PROTECT_NORDWR(0x08600, 0x01ff),
+>> + A6XX_PROTECT_NORDWR(0x08e00, 0x00ff),
+>> + A6XX_PROTECT_RDONLY(0x08f00, 0x0000),
+>> + A6XX_PROTECT_NORDWR(0x08f01, 0x01be),
+>> + A6XX_PROTECT_NORDWR(0x09600, 0x01ff),
+>> + A6XX_PROTECT_RDONLY(0x0981a, 0x02e5),
+>> + A6XX_PROTECT_NORDWR(0x09e00, 0x01ff),
+>> + A6XX_PROTECT_NORDWR(0x0a600, 0x01ff),
+>> + A6XX_PROTECT_NORDWR(0x0ae00, 0x0000),
+>> + A6XX_PROTECT_NORDWR(0x0ae02, 0x0004),
+>> + A6XX_PROTECT_NORDWR(0x0ae08, 0x0006),
+>> + A6XX_PROTECT_NORDWR(0x0ae10, 0x036f),
+>> + A6XX_PROTECT_NORDWR(0x0b600, 0x1fff),
+>> + A6XX_PROTECT_NORDWR(0x0dc00, 0x1fff),
+>> + A6XX_PROTECT_RDONLY(0x0fc00, 0x1fff),
+>> + A6XX_PROTECT_NORDWR(0x18400, 0x003f),
+>> + A6XX_PROTECT_RDONLY(0x18440, 0x013f),
+>> + A6XX_PROTECT_NORDWR(0x18580, 0x1fff),
+>> + A6XX_PROTECT_NORDWR(0x1b400, 0x1fff),
+>> + A6XX_PROTECT_NORDWR(0x1f400, 0x0477),
+>> + A6XX_PROTECT_RDONLY(0x1f878, 0x0787),
+>> + A6XX_PROTECT_NORDWR(0x1f930, 0x0329),
+>> + A6XX_PROTECT_NORDWR(0x20000, 0x1fff),
+>> + A6XX_PROTECT_NORDWR(0x27800, 0x007f),
+>> + A6XX_PROTECT_RDONLY(0x27880, 0x0381),
+>> + A6XX_PROTECT_NORDWR(0x27882, 0x0001),
+>> + A6XX_PROTECT_NORDWR(0x27c02, 0x0000),
+>> +};
+>> +DECLARE_ADRENO_PROTECT(a830_protect, 64);
+> 
+> I have tested this on an AYN Odin 3, which has a CQ8725S SoC with
+> A830. As-is, this change causes the device to fail to boot. Comparing
+> to a different implementation of this support that I used previously,
+> I found the operable difference is the count_max field here. Dropping
+> that from 64 to 15 allows the device to boot and work as intended. I
+> unfortunately don't have uart to see what the actual failure text is
+> and provide any more information than this.
 
-map_err manually calls dma_buf_detach() and dma_buf_put() and then falls
-through to fastrpc_map_put(). Since that change the error path tail is
-fastrpc_map_put() -> fastrpc_free_map(), and fastrpc_free_map() already
-unmaps, detaches and puts the dma-buf whenever map->table is set.
-The two operations therefore run twice: the second dma_buf_put() drops an
-extra reference on map->buf, and dma_buf_unmap_attachment_unlocked()
-dereferences the map->attach already freed by the manual dma_buf_detach().
-kref_init() sets the refcount to 1 with no intervening get, so the final
-fastrpc_map_put() frees the map synchronously and the redundant cleanup is
-deterministic.
+Maybe your stack is missing this patch:
+https://lore.kernel.org/lkml/20260502-adreno-810-v5-5-bc9fd2bb788d@pm.me/
 
-The len > map->size branch is reachable by an unprivileged process via
-FASTRPC_IOCTL_MEM_MAP with an fd whose dma-buf is smaller than the
-requested length, before any DSP invocation.
+-Akhil
 
-Route both map->table-is-set failure branches to get_err instead of
-map_err, so fastrpc_free_map() is the single owner of the
-unmap/detach/put sequence. map_err is retained for the
-dma_buf_map_attachment_unlocked() failure, which is reached with
-map->table still NULL and an attachment that fastrpc_free_map() will not
-clean up, so its dma_buf_detach()/dma_buf_put() must still run manually.
-
-Fixes: 334f1a1cbe03 ("misc: fastrpc: Use fastrpc_map_put in fastrpc_map_create on fail")
-Cc: stable@vger.kernel.org
-Assisted-by: Claude:claude-opus-4-8
-Signed-off-by: Yifei Gao <gyf161023@gmail.com>
----
-v2:
- - Instead of clearing map->table, route the map->table-is-set failure
-   paths (len > map->size and the qcom_scm_assign_mem() failure) to
-   get_err so fastrpc_free_map() is the single owner of the
-   unmap/detach/put sequence. The map_err label is kept for the
-   dma_buf_map_attachment_unlocked() failure, where map->table is still
-   NULL. Suggested by Dmitry Baryshkov.
-
- drivers/misc/fastrpc.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
-index eb6c2a78d3c7..d480a87752a7 100644
---- a/drivers/misc/fastrpc.c
-+++ b/drivers/misc/fastrpc.c
-@@ -881,7 +881,7 @@ static int fastrpc_map_attach(struct fastrpc_user *fl, int fd,
- 		dev_dbg(sess->dev, "Bad size passed len 0x%llx map size 0x%llx\n",
- 				len, map->size);
- 		err = -EINVAL;
--		goto map_err;
-+		goto get_err;
- 	}
- 	map->va = sg_virt(map->table->sgl);
- 	map->len = len;
-@@ -904,7 +904,7 @@ static int fastrpc_map_attach(struct fastrpc_user *fl, int fd,
- 			dev_err(sess->dev,
- 				"Failed to assign memory with dma_addr %pad size 0x%llx err %d\n",
- 				&map->dma_addr, map->len, err);
--			goto map_err;
-+			goto get_err;
- 		}
- 	}
- 	spin_lock(&fl->lock);
--- 
-2.43.0
-
+> 
+> Aaron
+> 
