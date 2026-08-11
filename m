@@ -1,107 +1,136 @@
-Received: from mail-vk1-f181.google.com (mail-vk1-f181.google.com [209.85.221.181])
+Received: from mail-lf1-f48.google.com (mail-lf1-f48.google.com [209.85.167.48])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82C42442FB9
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 12:09:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0EB0442DA23
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 12:10:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.48
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786450184; cv=none; b=CCleH2vHsn+aQYJ0a6t7rcXtcBVmpjbAjXrnOFYDUIerR34DG9QaEuqS60Mxv3ewGIsfMBCMSDC2UXZBdQaA3HvQH2bYvCbIZacjjwhQRZCuvXaz8jLcbaZIAQpcPOWCWmqxNDNwzlTvkscmOGiEYjb0fSVuzy8bH0tcsg+2fC8=
+	t=1786450218; cv=none; b=Gr0P6i+NTJa6a0Zj12zV4/dHTbWuUh+25DgBOr58t4UVH22jOJSYfkEcA9SVVn2xS2R+VGrHDekmuHmzQ7c1SVsavTYwPG6R5ibuZFF6JzSHCj/eOUUXEMQUtEuKNlyeOBvbaiU4tk7g/TThEXyurBfGPMI8OAeR+wOnr3MF+qE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786450184; c=relaxed/simple;
-	bh=jOz8/RKCdao82EWzssvpPQu6MldBuHaOzLydpj3dJ68=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=ZS0aO0V6PIeO1KZZMGw1F+RtQ+OuRW0kxFekw/J8lw2VcZkEu2DF3Nc33uz+OVEbtOQEHw3FM4Tk4VcbUFcZL6KksGEAAe4Pyq0Ywx17Jd5b+M1BpQ3dMi57CgUxsxBU1FqC6Otv87tckq6PzsB8oICvRjePnEfjaHthy/nSBIU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org; spf=pass smtp.mailfrom=gmail.com; arc=none smtp.client-ip=209.85.221.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=linux-m68k.org
+	s=arc-20240116; t=1786450218; c=relaxed/simple;
+	bh=M0klPbpMKSDb83aeDRUr2B8G3YjIwJhy28xYU7z8QLE=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=bEFGMHCs0lm9ms2/ITnxNudGpUqmrcWq23uV2UlaClc32PQA4caSQZA5tWbEeDN0AzqPbXxOP9+E5NQla+Nn558NnvmT03ujfvl1XuWA3RLHB81uu457pHupBYBnTJvMyy52bfnkCrRMfGylybOvZ+gB9hLA528U+XImDLOIyWo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=A3zRSSBr; arc=none smtp.client-ip=209.85.167.48
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Received: by mail-vk1-f181.google.com with SMTP id 71dfb90a1353d-5c38568d9e1so1212832e0c.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 05:09:40 -0700 (PDT)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="A3zRSSBr"
+Received: by mail-lf1-f48.google.com with SMTP id 2adb3069b0e04-5b015532f7bso2831796e87.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 05:10:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1786450214; x=1787055014; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=DJUUpA+u/X+Mw8WGuh26FuT0SdK7L1t8Py4ith47VDM=;
+        b=A3zRSSBriVNhHHC0kVcqmyAKY5sdk+rlxwdl6FoVzDAPXcv1S/a+Dss3LK3UsxT+pQ
+         T0w7R5AncVRO/FaiyZ73sIrs4MqwjE41wc6k1tV5CdHjzmHH2MCvRfl73osAoeorSs04
+         91iHNga5qv4xsU3hOP15zTI7piojNLwi9K0C4lK8m4Mx0VDmrWpmDHS9X5D3/Sszp2NK
+         XDNIr3IdCMfaPpAAK7DKf4GubNZz+pRqksYeMF9gMiz2LiG+t9yW1nCftAH1Wph316Tp
+         iT6l1X948JRzDe5H+ayWnZmrpSe/LqFQwOPwp7Sorq5tJgHDxfNm63egnIzVnSgYVmcV
+         0QQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786450179; x=1787054979;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=uoVTJmbd8yKwYcWWlgS08ZgHIJGke3bvkQlHT1fmSY4=;
-        b=YZBZRuqZtJiTHMc9+7cKSTuqp0LI6ZLgDbHbug0uEMg2gTQLM5uMHhkKYixBHEUD0d
-         C8Q+HXr5ukgQo12umOl0/H/JRTbYkxgdBrjDicwYlHSrFZEwKviktKuXADy7DYUqL9xS
-         3cJWxS7ak4MKWpNTHVCT3J4nmQLuZpYe9LRTPI/K7kTLAHwOOr4O7WMsSS9Ze4CHiwUW
-         Z9EBmiR8gcOI+5G8fnEeHxCBuF6WtLd1xckxhW2DzRz5gZOEtlWUYK8s9uc1xKu1822o
-         tMooysOUE0hxQ/bW6gQjHU1AGfeRy0CwlZN5RViHwmpX0fBrPZoHWOVlMYl/0JwU6KtC
-         Y/yA==
-X-Forwarded-Encrypted: i=1; AHgh+RqMqLFGoiXXd0hUssx833GU9byyENbIeSz3GRUZOc0JUY6Dc3WilxtSQC7kj15p+06xSgE6GWKelE2vLKLH@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz+3tiT0Y1jGMI4O3dgrqR+M3G2FSRFVVGGFbhqDo+8ZhH+q/Q4
-	puJz3fiI1YwHuN4dTnYdUv5gW5ChGXpHNjBLwjGssWDwS66UiQvDlsImxPtpk01L
-X-Gm-Gg: AR+sD10iwX1t3DeIICGjr8s7vZO/oEO3PhmTx0nrxnRmDmdGKxm4OBK17uk5aL7T8UH
-	iGob28PHE0ZxVIeG2jpiLsxLLqZaCmez3PmNw+JrnoPJkbfaFpMDuENt8xRGeDNCL94SfH0YLJ6
-	WFGEslnFprXWu+3O0vs8Sqcd8w4ID+BOrZiW5HKLzY9YMTnnmiuMX9Mnlw6j6c71TTxkmG1LnnV
-	32MEBsC9EoXwLOLP/36UPCyflvHSJ2X5ejXEuXXOghiyklBfuF14lAHHd/9TStA7w6UES7LF/uu
-	6xRI/HCeekQwg5l5Q3XbEzYVQO0UNyydpM13F6kU49/YNlILPMiVOWYa3iDoduWC2lLkbvUpox5
-	h1ImT3pjV1qL7yPQsmDoQvTaDYu/YIUe92dLNI801YSE8MlSkZAfnTqVrgBMWX/KP9pr2DIFiwv
-	M+yNekzi+rC83ox+zRYJMEnHO1BF7DIsde88Ju5154ZWzS6yDVD3EITezvaZZCz7207/HJD/4JR
-	1YeTPff00c+3U8BpSKJmCTaKg==
-X-Received: by 2002:a05:6102:14a5:b0:76a:fc18:29bc with SMTP id ada2fe7eead31-76b559806c5mr614472137.4.1786450178785;
-        Tue, 11 Aug 2026 05:09:38 -0700 (PDT)
-Received: from mail-ua1-f50.google.com (mail-ua1-f50.google.com. [209.85.222.50])
-        by smtp.gmail.com with ESMTPSA id ada2fe7eead31-76b65bb4fedsm429327137.10.2026.08.11.05.09.35
-        for <linux-arm-msm@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 11 Aug 2026 05:09:35 -0700 (PDT)
-Received: by mail-ua1-f50.google.com with SMTP id a1e0cc1a2514c-97a1c419c17so547743241.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 05:09:35 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rod/xvqFVxctMyhUjzmPAeuS+fneWhoGQ3Sz2ywCo0tQ6XSvS8ShYpSGrIrcEcN5W6B4VXPENni8YeTPzbu@vger.kernel.org
-X-Received: by 2002:a05:6102:15a3:b0:738:cdc6:f59a with SMTP id
- ada2fe7eead31-76b573b9e9amr650405137.9.1786450174738; Tue, 11 Aug 2026
- 05:09:34 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1786450214; x=1787055014;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=DJUUpA+u/X+Mw8WGuh26FuT0SdK7L1t8Py4ith47VDM=;
+        b=GsXz/Nzv1E5TeJxa4DVVWPHrwiIQBF9a2ll6SF2dXMFFLghEmMAbYUKDpSKJKwqGH3
+         xZflY2XYGTyrxPDBWjDWVad0Iq21P9iUor/cP3Adieyq/HmIMmjt74XltJbEELGTcoth
+         eNN77ULhlQfvZWTFZCkoMu070EQGxZYiLu3ak9nvXdx7VmgNsx3RJds2pJCPQ/fFf8ng
+         vbhSAiKfCpIJNIFuB/iTRiyMXFohkbQ8gulW65EJ+96NYl4mpjciuwVp+3MHl/v2iYuc
+         WHiwxtw1pmMJV8IrA53YtPaAjqYprrCVJ0XloEqXBZ/eF369nQDC5oKvF6lrz8dpnoAM
+         UWtw==
+X-Forwarded-Encrypted: i=1; AHgh+Rr8rdEXNqLmmDD7FxS5JkKN4hyCdF9W6WNrW+u0aTKtzTvDqAvMNT3hJOuJIWkMQt8VSwhgeX+ov/tw4rop@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxr9m010ahgz73n7EqUZh+m+Q8fN95B9ivcus2X4+KabxHox8d1
+	Nw0T5tSDMW/O7Vj2FdNUHKJUakRybpvpU5QszowXvgnsu+aN9JNgTpgb
+X-Gm-Gg: AR+sD13O7tDMVmutn+/yxOMsxVpWWbmqtRWjC76pmb+h4zlW6wKeKFnVfFrW5pOq1S/
+	WMfubRqvJhijFvj4vHA3zHh/QrE/ziYWWnweuTfOdFSl2D5vJPncRJx33DVIDsSkyYZwVVGkONE
+	fD55iAZsRu+t1q4xvDUkcJjBIZjT4Ld1pDSKaFAYtlf2PNeyMDThhI86r7GfdqaD38yXAr1C0kM
+	HY2YnfqwdQcGYuqG2z0OMKcnjbcB+74ZCDAAJbz2BpO0CUbwRR6lbdn0SWMGerdphclCO3AqNVp
+	UlpiQMkr1ChsRO2HR25hcPtgFf4If4rBlogtB79INGDV2Al6QCpAnNPJ7C3792eWKcukCziv+qq
+	Al3wOiJZKtCm6Ap8DNR4UdM9E6zBzRymvSX/Cyq6heYQ+Z7Ly58/JVGzmaqUtbbHMwSWFzjL8Yr
+	EXhJbdmwNvYOW6IgCxHeAyRmuQJxEwvREZ2xxZKxbAguVD188u/MHMi6Y2Hvuo41nE+wC/tOA=
+X-Received: by 2002:a05:6512:12cc:b0:5b0:1b78:4962 with SMTP id 2adb3069b0e04-5b44866ef23mr489653e87.50.1786450213825;
+        Tue, 11 Aug 2026 05:10:13 -0700 (PDT)
+Received: from hekasnap ([2a00:fd01:82a4:d100:739c:a0f5:97b3:63a7])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b4486c0a14sm238919e87.1.2026.08.11.05.10.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 11 Aug 2026 05:10:13 -0700 (PDT)
+From: Troels Vognbjerg <hekatombe@gmail.com>
+To: kamal.wadhwa@oss.qualcomm.com
+Cc: alexandre.belloni@bootlin.com,
+	andersson@kernel.org,
+	conor+dt@kernel.org,
+	devicetree@vger.kernel.org,
+	konradybcio@kernel.org,
+	krzk+dt@kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-rtc@vger.kernel.org,
+	raryan@qti.qualcomm.com,
+	robh@kernel.org
+Subject: re: [PATCH 0/2] rtc: Add Qualcomm PMIC RTC-GLINK support for Glymur
+Date: Tue, 11 Aug 2026 14:10:12 +0200
+Message-ID: <20260811121012.7046-1-hekatombe@gmail.com>
+X-Mailer: git-send-email 2.54.0
+In-Reply-To: <20260807-rtc-glink-cleanup-v1-0-7801e4d69c4f@oss.qualcomm.com>
+References: <20260807-rtc-glink-cleanup-v1-0-7801e4d69c4f@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260724-clk-provider-simple-clean-v2-0-56f306156d25@baylibre.com>
- <20260724-clk-provider-simple-clean-v2-3-56f306156d25@baylibre.com>
-In-Reply-To: <20260724-clk-provider-simple-clean-v2-3-56f306156d25@baylibre.com>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Tue, 11 Aug 2026 14:09:23 +0200
-X-Gmail-Original-Message-ID: <CAMuHMdW15QrpUhbra1Jg1_8rQWf8CE5TQiE5SUAsqvz5YmEwpQ@mail.gmail.com>
-X-Gm-Features: AUfX_mxAADqzKHeccKVpUAgUM-G2gOwUTpW15Dago95Bl-ey6AOZpFlGkzHgs7Y
-Message-ID: <CAMuHMdW15QrpUhbra1Jg1_8rQWf8CE5TQiE5SUAsqvz5YmEwpQ@mail.gmail.com>
-Subject: Re: [PATCH v2 3/7] clk: renesas: clean-up simple provider misuse of
- the consumer API
-To: Jerome Brunet <jbrunet@baylibre.com>
-Cc: Andrew Lunn <andrew@lunn.ch>, Gregory Clement <gregory.clement@bootlin.com>, 
-	Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>, 
-	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney@redhat.com>, Bjorn Andersson <andersson@kernel.org>, 
-	Heiko Stuebner <heiko@sntech.de>, Prashant Gaikwad <pgaikwad@nvidia.com>, 
-	Thierry Reding <thierry.reding@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>, 
-	Tero Kristo <kristo@kernel.org>, linux-arm-kernel@lists.infradead.org, 
-	linux-clk@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-renesas-soc@vger.kernel.org, 
-	linux-rockchip@lists.infradead.org, linux-tegra@vger.kernel.org, 
-	linux-omap@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Fri, 24 Jul 2026 at 11:04, Jerome Brunet <jbrunet@baylibre.com> wrote:
-> Clock provider should not be using the consumer interface.
-> In other words, a provider should not be dealing with struct clk.
->
-> This change targets occurrences for which the provider uses the
-> consumer interface and corresponding clk_hw interface exist.
->
-> Reviewed-by: Brian Masney <bmasney@redhat.com>
-> Signed-off-by: Jerome Brunet <jbrunet@baylibre.com>
+Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com> wrote on Fri, 07 Aug 2026 02:26:29 +0530:
+> On some targets like Glymur, the permission for receving the RTC
+> alarms is routed to charger firmware running on remote subsystem.
+> 
+> This is because Glymur boards have to  support MSFT's `TAD feature`
+> on the windows OS devices.
+> 
+> So rtc-pm8xxx.c driver cannot recieve RTC alarm IRQs via SPMI on
+> Glymur. So in order to make the IRQ available on the Linux kernel,
+> the PMIC RTC Alarm IRQ must be routed to APPS via remote subsystem.
+> 
+> To implement this, add support for a New Qualcomm PMIC GLINK RTC
+> client, which will request for RTC set/get calls for time/alarm IRQ
+>  via the existing pmic_glink interface to the charger firmware.
+> 
+> Also, add a DT property to explicily support enabling the RTC
+> writes, keep RTC writes disabled by default to align behaviour
+> with the existing rtc-pm8xxx.c driver.
 
-Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
-i.e. will queue in renesas-clk for v7.4.
+You mentioned this patch series applies to targets like Glymur. Does that include
+the ASUS Zenbook A16 UX3607OA, or did ASUS do something different on this
+laptop?
 
-Gr{oetje,eeting}s,
+The reason I am asking is because when I build this as a kernel module,
+I get the following error message:
+[    2.241461] rtc-pm8xxx c426000.spmi:pmic@0:rtc@6100: probe with driver rtc-pm8xxx failed with error -2
+[    2.499556] Modules linked in: rtc_pm8xxx aes_ce_blk ghash_ce gf128mul sm4_ce_gcm sm4_ce_ccm sm4_ce sm4_ce_cipher sm4 qcom_battmgr rtc_qcom_glink(+) simple_bridge display_connector
+[    3.277788] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[    4.318666] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[    4.319085] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: registered as rtc0
+[    5.359404] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[    6.400331] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[    6.400496] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: hctosys: unable to read the hardware clock
+[   25.447761] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[   26.488271] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[   27.517573] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[   28.560114] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[   29.609224] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[   30.638629] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[   31.677524] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[   32.720749] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[   33.757662] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
+[   34.808360] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: all time sources failed
+[   35.837651] rtc_qcom_glink.qcom_pmic_rtc_glink pmic_glink.rtc-glink.0: 0x68 failed (-110), falling back
 
-                        Geert
+And the error message keeps repeating every second or so.
 
--- 
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
-
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
+--
+Troels Vognbjerg
