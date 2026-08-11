@@ -1,88 +1,88 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CED86443ABB
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 13:37:47 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58A95455189
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 13:37:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786455480; cv=none; b=t/khtGXXbmXO7YV18nazjlYeQ+//G1B5PY19VWnV9MKvaMPL//y+Mv8r1WoZtIVHBstifbWvhUYPAMrj+ueebiHJQ51MfzL4yyxtDnAx9ys8eOvwFoAjkM1DhQqbtUk+/6txv2bAzgqYu5AlZYzjAYXiHDcluqTaap5qAXJVpIY=
+	t=1786455482; cv=none; b=cTjGQmR8fjXFDi3D11RzcD0SjxAkUna1UK8TSilEomHu+oFypm8xs9gQQUQSaf/b5uxMMoOh6RJSZwwfvbrwS7W7Oev6nqYDmt6HTAzZ3PHxZJ3xiTUcaKRRo8Yc1+5vvPD8DtPAutaqbzRsCVR/Z4R5ih4gxkQUxK4bDRl9ATI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786455480; c=relaxed/simple;
-	bh=zaBYwdzqKnPLChk0jQdmpN+Gtk81dvYuluYIJGNKYNY=;
+	s=arc-20240116; t=1786455482; c=relaxed/simple;
+	bh=/QMjM8kIgdElOSlo+HE58P/0O+m2y0r6yoGjhktem2E=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=CAyTyD1D8cms8DW0HZFtv8a4JB5GrFNz790G2qwaQR843y+3UfN3Um8lBCu21AS1PeV0mz0hW/hZj/nQUYTEyxtp3DU7TT5X1gktvCedhs3o5Sj+bc7GXFe8JGMbSmrUhU69kRvS0sFBWLW1ajVWGGGp5BPmxRjkjvK5Tsi3t94=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PDczr3y4; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=OEeBB52K; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:To:Cc; b=nHxu6XOLvCdPdJG/7mFWa8qe1ZQzNQYMbeD1Khcc55kNvhrKy3w9XDSDTQrzXgGRgwn6XtnWcsrhSOKqTxlMxHntQlSdhbJkC/7a/8mJjxl5chSwqKJZUe5hm6cVGo0dCECkueBBdFJ2L7NzkoJL4nLN95Fbtel7GgKYlc23TQI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bRuo4s64; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=YtakOkdR; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PDczr3y4";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="OEeBB52K"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67BDWVEt1914062
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 13:37:44 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bRuo4s64";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="YtakOkdR"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67BDYDBA695659
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 13:37:38 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	I4kViRm3sAJ0GJ6v9v6dra4X1/iqxcX9YHvXUBsWd+A=; b=PDczr3y4UfA6V3mF
-	PFx885SU/ZyYi5BkDXvlppu8bxwdcpIIj2sMwbaDr6hf932H6gUKX47rljXynaZy
-	QazBr6mWnvLB7KUIBkTH5MFalUFpCfBTIPA+n45GvRd0JhZb8fFL1W6mrgotaQ8w
-	t45NZ3x8Oe39x53+cI2LrAEoWD3/6Dsmi0NP447K1F2G9I5CmPvsl5+zmn+D469A
-	9ADWL1QZdL+B37znuAySs4iKw5bo/DrJOyFeFQK13z4N0T5JA7+Uc8AOuiDNY9fb
-	yCGoW/E2LdaEcTU334w9+4TjZx0LxYA18/1GdmJsuEaW78eGqJGv8nWQffBsSHm3
-	iKkB2w==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g049br5jw-1
+	xUOv7CaofSadg3VAAhDqr9l7s5Rpo1MskORMDmWB7lw=; b=bRuo4s64WeTRMdD9
+	7oT4flosl/yxL2Tb9565hragWw/8XNWYjl7b4a3X3oe42sAdQGO29cJJCpn1UTmd
+	KAqys3CT8+/r9cXZThpeW07S4TP3xcG95ubNVZYJUYlenS9+MtVqH41BMxI2XIkz
+	qdsRFy3ys/XMr0iZi6lCFJUF3DUGo/aSwt9VkJaPT2c7m1twQhluqHL39RdB0Inc
+	1MQr0cI2xuEhNNgV9j6vuM9T2mfETqWmDHXncBxsvqyWd9geCgq0cBwrwz6/ZC01
+	Trxhb1XxqE+Yw68vF1FLJ7gnz9wUukRYY3661WQdWUOt9kfHgbf/7iwyunrKmnjI
+	qG/1ow==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g049gr69d-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 13:37:43 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38e22137fb3so4561844a91.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 06:37:43 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 13:37:38 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2ccb6823efcso28856485ad.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 06:37:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786455463; x=1787060263; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1786455457; x=1787060257; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=I4kViRm3sAJ0GJ6v9v6dra4X1/iqxcX9YHvXUBsWd+A=;
-        b=OEeBB52KG+l5HFVfhX67guZkfavmFau1XmXLCJFqLXuYa3+Erk1e9KCxJGOn5m5uro
-         B2M1iLzcrQJlK402KI+TukNa8w2MCl5o1+WXSLLm2BNfs4aCu0kNFclivKy4Pqyfu4Po
-         hFuSvZLL43TeGoBMyOiSp1JsZYI6qJyVPu/8pHoYQO4pmNvdtCOEfaLfUzZBr92eVW0d
-         Nv42002bSsR9URlDMN7ToZzV+6UoJxE4GRF9/60f5u4OJtzOrGKanONwnw12494wTSY2
-         WOs6SNJAdAyO62QZJ1TDDvM/Pe56RaUljNBo8iBatU1PeIpVaOm4B1wwH7NF/LeW4HbG
-         3RXw==
+        bh=xUOv7CaofSadg3VAAhDqr9l7s5Rpo1MskORMDmWB7lw=;
+        b=YtakOkdRTdfUMLgIjGoIZx/+gHCnR0kAAP9DJ0Enszb+j+PcMdla5MZSQAam3gO5bU
+         efbT7lOQrbAsKv9xE+0bPKBT7zz6b/NyCggXQqKmMXMJRTEWMAgeGeDnuWoqNA8c2rad
+         6hhGgZUkkIOvgG8CJEAJsrHZD5Xp7DGwxKBtFK6YaJ7TSYfy+zjJ4A4k7kPikDZFG8ok
+         DxCDJUVxRe59faf3D0xN+20DSk3KwxzLVTVh5uxg3cv0tRE8Cya4Bp2b2lBXo+9nIY+r
+         qXtzscGzrZZ2sKOxS2RwAZQdSgqe1xk+WHzyKBe3By7UsO5RDvIQPU+lSoyKGrXH8p5N
+         5cZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786455463; x=1787060263;
+        d=1e100.net; s=20251104; t=1786455457; x=1787060257;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=I4kViRm3sAJ0GJ6v9v6dra4X1/iqxcX9YHvXUBsWd+A=;
-        b=QWy2CY9nDj/RZ4FvduUr2x+y5JymotYHr5yBIn+G3UCcZTQXPc8bV12xaijruHMxA/
-         QvMiQJqyJP5bPk7eL1nWQsGlaWnv3ESPTukHJCkPG9GY0RxP2XiG1BgkaiVr1t41cl2T
-         Bp/N380/aTQLuY2KDN7JPuKMbQPren9KHNdgZtCTpyhCYW/JgrMLMhAiGsHccPdvnfKo
-         Rzn481b9Av/3YvI2nn3c1TvzdlzLxSwPiwxAOfx/i1hvx8I8yoaxnQ19M0xFHFi2dMAf
-         KoON9i/Ctr9D26QBoA/xAgLeTceqhLsGzePmFdubRz3iTPSz1mth0DIrca7TrjHxuFO/
-         paCw==
-X-Gm-Message-State: AOJu0YybX3Z5hBQ/rgfpefC54kTesXzFwdTFYgPc2PTqIsNqeBJNmH9Q
-	+C/3uqHU5MooSespZAUQ0/HQFv7lMxbszOM1/Yj8Rt5q1o0AI5QHbkxt5r4gzBqGmuCr6O4EMwk
-	4yiMKZAmI/oXHffvaA+XXrRt83SknSqb0C3GeEO/0TjnDJKc08lQoyNA4XJ10rk+0yJUuhmQdYW
-	6P
-X-Gm-Gg: AR+sD12+O6Dg4iJVKoQxCoglXZtXZA0nXrHpB2X9Z6aMetc6V4OTD/4i9Yu0k3yWzMX
-	PPRHjObGyOnJJOFSmuGcg8l1cu1lmJB976tOP2Sy0GhG1TQDZNNOdBmxN+sMxJ1NlWc5nawSXgk
-	PhTbF9RqplENsfrZVy4QcU4MeYJ75YGybYdNw3bYYvBnk5uJ3hUgZ2sXKFQ0xYbhSMgh+ZhiNTT
-	VdKNH2fwpH7aoKg8GOn3t+uK7ZFpSxvLBjvdr49HhPnyuck1mktVmjJAmIfwdcuaF5P+qJkaUOW
-	OPJ8f12s2yh2ClgZmT2MSSy13szmbq/+7Txyxp5ylOFFsn9boxjBga6FwIFC9ukbFKKjWPDfKUD
-	9FHtfu/HMUEW7lKjoSuOalqJVTXHh4Y328pIutcUdSWn9DI3zaQwqYWjx
-X-Received: by 2002:a17:90a:d44f:b0:37f:ed7e:7e42 with SMTP id 98e67ed59e1d1-392ec56723cmr3832011a91.14.1786455462837;
-        Tue, 11 Aug 2026 06:37:42 -0700 (PDT)
-X-Received: by 2002:a17:90a:d44f:b0:37f:ed7e:7e42 with SMTP id 98e67ed59e1d1-392ec56723cmr3831909a91.14.1786455462239;
-        Tue, 11 Aug 2026 06:37:42 -0700 (PDT)
+        bh=xUOv7CaofSadg3VAAhDqr9l7s5Rpo1MskORMDmWB7lw=;
+        b=spiwb+3oFUnn2hDPniWMkAHT07eE3Sl6w775Wg0XSb0qpg7g2wmAl4YBp/XRn++FhR
+         ymeb0TOP6WMQPYg5Sx4bYqVdDRX8Lzf28D3Kq/NEQSNYaNYNqjcibMq0UQ+sPfOMOMQw
+         +/Y2HtY6ssKfp76JkUGPU30jhGdRRAFj4qdW5rJqShd3ghpA+CeYT4dQHD1KemKbEeNm
+         viJ+1V9W1NSqO5zwshiktv5aY1pqSJGMO2axsTIeOX1Mc4RYZvIYMH+OGpTdWih8cIM3
+         EXOABTPl/a+i2TttdoT3rfsepf2YrzNOanaArfs6rm55qxZXlRfINz4zhU0WNGKKwi3g
+         NzBg==
+X-Gm-Message-State: AOJu0Yw64IptfzXp/SRsSASV6mJtPrVwzoanyMbI2hP/l4s4MNlSUDow
+	6VPSF8pWfmMYP9M6Cx4sqCG1urwtBVAm3ZRtUS11f0bhmZ+QSKk/hJ/yyCv4vToV5MAcfq8j2Xm
+	NKZTZn15V5hrNkuAEafpnovElQJ8ztlIKA8xobPxwgLP4BsDLREa22+qn+O47z0l2i7z+Lt2eAu
+	jl
+X-Gm-Gg: AR+sD13MxEZteOUNCAXym+F/vp249y9481Dj8jtw81BGp54CFxuq2dkWIbeg1Rv2Gkw
+	wnl+k9YAMAkPm68DUF6zdbWdfcv1qeaZGXLvcqEVyveWABJ9WsJnu+WqaDM//1jfus+UT+kE6r/
+	mSRviL2qyUlBuPDRP1TMPWzy5teOQC7rA+3dhRpFISbJVpvAOPF7YwjFFAs7eAY18hN19LWkZ7d
+	oFvKwMYdmz69KWXMNupLlM8IAeWQjtxK8rxrJaAwIcoPN6sQqITTORDkpm27/pgX/j9jOMMr0wm
+	hGcxYDhfvyonhxwI/xof8OWKkHtUEKVg2WVsbjbA+2mkGbo3kG5DoRW9gPqFfoiCpcuYY5TZNCs
+	y6i2/TcUmKBMWPbml/fM3/K4uTOV1Gb2BejNJlsstj0DjBXEa/Zj1JMTs
+X-Received: by 2002:a17:902:e948:b0:2c9:a5e9:c26e with SMTP id d9443c01a7336-2d3178d4294mr44249745ad.13.1786455456870;
+        Tue, 11 Aug 2026 06:37:36 -0700 (PDT)
+X-Received: by 2002:a17:902:e948:b0:2c9:a5e9:c26e with SMTP id d9443c01a7336-2d3178d4294mr44248795ad.13.1786455456276;
+        Tue, 11 Aug 2026 06:37:36 -0700 (PDT)
 Received: from yli42-gv.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d315f4819dsm8360885ad.37.2026.08.11.06.37.36
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d315f4819dsm8360885ad.37.2026.08.11.06.37.30
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Aug 2026 06:37:41 -0700 (PDT)
+        Tue, 11 Aug 2026 06:37:35 -0700 (PDT)
 From: Yin Li <yin.li@oss.qualcomm.com>
-Date: Tue, 11 Aug 2026 21:30:43 +0800
-Subject: [PATCH RFC 14/15] arm_mpam: Support MSC accessibility derivation
- from RIS nodes
+Date: Tue, 11 Aug 2026 21:30:42 +0800
+Subject: [PATCH RFC 13/15] dt-bindings: arm: Fix MPAM MSC binding schema
+ and examples
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260811-mpam-resctrl-dt-knp-support-v1-14-ea6397bead59@oss.qualcomm.com>
+Message-Id: <20260811-mpam-resctrl-dt-knp-support-v1-13-ea6397bead59@oss.qualcomm.com>
 References: <20260811-mpam-resctrl-dt-knp-support-v1-0-ea6397bead59@oss.qualcomm.com>
 In-Reply-To: <20260811-mpam-resctrl-dt-knp-support-v1-0-ea6397bead59@oss.qualcomm.com>
 To: "Rafael J. Wysocki" <rafael@kernel.org>,
@@ -112,237 +112,194 @@ Cc: linux-arm-msm@vger.kernel.org, ganapatrao.kulkarni@oss.qualcomm.com,
         Huang Yiwei <huang.yiwei@oss.qualcomm.com>, aiqun.yu@oss.qualcomm.com,
         linux-kernel@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1786455330; l=6269;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786455329; l=5185;
  i=yin.li@oss.qualcomm.com; s=20260811; h=from:subject:message-id;
- bh=zaBYwdzqKnPLChk0jQdmpN+Gtk81dvYuluYIJGNKYNY=;
- b=CV39+MeRob0ID7MiE7jf2uDLS4vl9pceQh1lYO3+4YumI0OMEhNB+kgFUsxGLLVZH/eFQ8uUZ
- TwwYwdYH1sRDRup6i6/E7LtiBUJ6IfZkeWEDOEDdh9iGFcT/tsNokle
+ bh=/QMjM8kIgdElOSlo+HE58P/0O+m2y0r6yoGjhktem2E=;
+ b=zHAvC4moxJN8hRDa9ArcM/sZ8ssDY1BUQR/2sHtpgm1ryjno1fmUcd8GWouH89DHPDZIjtyi7
+ gzFWdhCQImsBCq7KbI1yxzYO2OQ4kXv8dCs3BD4up6aRqZhw0aaFIiw
 X-Developer-Key: i=yin.li@oss.qualcomm.com; a=ed25519;
  pk=e/2LM97aSWGBMrxY240URBi9Zi8/kL5hXgB+VHkYvW0=
-X-Proofpoint-GUID: F9ropLuHm37XPtV_KtrYLpQAPuEFiFvu
-X-Authority-Analysis: v=2.4 cv=ENg2FVZC c=1 sm=1 tr=0 ts=6a7b25a7 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDExNCBTYWx0ZWRfX3LS6fDo6Qqty
+ sdmZnzRTJu1g27CXdmM0cqOdcvGka0O9/ciuF1e1y3fbOyOh+a6vX1iJZq1jMEROOyCu6+EYoMy
+ VQ855o8PmOQ8g4/skurwTDF4mvyB588=
+X-Proofpoint-ORIG-GUID: xY05-6N2mnMu3z_JwAS1ZuiRhHFgpz4x
+X-Proofpoint-GUID: xY05-6N2mnMu3z_JwAS1ZuiRhHFgpz4x
+X-Authority-Analysis: v=2.4 cv=cvarVV4i c=1 sm=1 tr=0 ts=6a7b25a2 cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=EUspDBNiAAAA:8 a=DmVZOekaPyhSFRrspXcA:9 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-ORIG-GUID: F9ropLuHm37XPtV_KtrYLpQAPuEFiFvu
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDExNCBTYWx0ZWRfX8F+q/2hlL/x9
- nSWz4RQll6xkHiF8YqvJ2ENc54LMF6xWt5sumMjD7HR8SVv3V231KEWfoZh7R4tnB8Hp99BDcsA
- dcgVAaoTl/2hKQ+fabZawZmaxIFAyPYuiNdwCzIXKPUL859qqRhuchdFv2V2gWZ8jnTFAD1dZJZ
- 2gUqEAU417SCvqNmGf5TgDbpMXh9ZZBdKURdFtaUWZMyfWEGyERkOD+/rhOl1UJZc2BN2UiO1RZ
- zWewA9GAUFuZmSnEsVWialqrkEcM7Ve7zlGAyKuGxfGlkPch1ZS7gcgTuhSCfvDfnu2TZWJ6RK8
- hDXlOZhvm26qC06fyj7PgWsqi2k/2ieLCaNu46+soFoWmxGITm7ROjNYbFld+N68Cj2igJYCU6o
- lm4swYpkivg734lNW34bpkCZmA1EVEufLq0FLWyMKw/0UVuuSE4Ey37lMDhZNhjhmnRyS8t6N6U
- i4C/+oS1FFwvJUngMiQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDExNCBTYWx0ZWRfX5bYnGUSa1vXX
- YoHl8cGW+8xPB8S3+F2R5Owwv4Mg4OQ2k9IXZCLMb1lyffDzojdzOlraow79aANH8fPZgDjDd/E
- Z18aS61dCg74fvRkoRxZkU1M8Wp/Ano=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=gEfo2CItAAAA:8 a=7CQSdrXTAAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8
+ a=d9rEuZw9YcPYe4YaNdcA:9 a=QEXdDO2ut3YA:10 a=1OuFwYUASf3TG4hYMiVC:22
+ a=sptkURWiP4Gy88Gu7hUp:22 a=a-qgeE7W1pNrGK8U0ZQC:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDExNCBTYWx0ZWRfX1VPPUAz1idyy
+ Z1K5bKXnpXQxMGEqp9mY7c5h7qmn1+jhRSgOiFTy/VNLc+BgiJybz1FlZlaHXJ43sEMHSsFbkUq
+ cZEQMBtOcQWRYTaFVvim53u4DwMqlfxMWZMUPUYWpE9pFS/yWNDX54rFE+6UCThOTrYmeYIVwrY
+ 0YFnCsI25IYH0hgNeQFQJnMypWhP0jSWaCoM9gK4lkHQ0Y8zcvZI5yVpR9WQgWAX67I+qCcyqiC
+ B+hj+qV3L4sPKvynaqrHgfzDyShMFWQNHfT2tkXqZETWQsexYTVzpKRNa8qNy2ou82/nYkcvsJv
+ woJeJV37uy8l1uWIjiPiT37AaNx26+bzmCAlO0I8ka94e/IkICSduQoPPOEa3dsQ2Ep56tWR7te
+ b5vTNN0AXg23HpzbCjQ20L0kJVs+j8aCPWH2GUBi+hjvVaGpZvJBMFN2hRvt0CgQtjLhbGGtY19
+ 8X7oLqpkY59fEJ9NyAg==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-11_03,2026-08-10_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 priorityscore=1501 lowpriorityscore=0 phishscore=0
- impostorscore=0 bulkscore=0 clxscore=1015 spamscore=0 adultscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608110114
+ spamscore=0 bulkscore=0 clxscore=1015 suspectscore=0 priorityscore=1501
+ lowpriorityscore=0 malwarescore=0 impostorscore=0 adultscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608110114
 
-The DT accessibility derivation only handled MSCs whose parent node is
-a cache or memory device. When the MSC is placed under a generic
-container (e.g. directly under /soc), the parent gives no affinity hint
-and there is no fallback.
+Fix multiple issues in the MPAM MSC device tree binding:
 
-Add a per-RIS fallback path for when the parent node is not a
-recognised cache or memory device. For each available RIS child node,
-affinity is resolved in two steps: first from an explicit 'cpus'
-phandle-array on the RIS node, then from the 'arm,mpam-device' phandle.
-The final accessibility mask is the union of all RIS masks; if any RIS
-fails to resolve, the mask is cleared and the MSC fails to probe rather
-than come up with a partial affinity.
+Schema fixes:
+- Move maintainers field before description to follow standard field order
+- Change compatible from fixed items list to oneOf to allow both standalone
+  arm,mpam-msc and the two-item arm,mpam-memory-controller-msc +
+  arm,mpam-msc combination
+- Constrain numa-node-id as uint32 with description instead of
+  unconstrained
+- Add phandle-array type constraint to cpus property
+- Fix bracket spacing to pass yamllint
 
-Factor the DT-specific logic into mpam_dt_update_msc_accessibility() so
-that update_msc_accessibility() dispatches cleanly between ACPI and DT
-paths.
+Example fixes:
+- Replace arm,dsu-l3-cache with foo,a-l3-cache (no upstream schema exists)
+- Fix msc@41000 reg address from 0x0 to 0x41000 to match unit-address
+- Fix ris@2 reg value from 0 to 2 to match unit-address
+- Add arm,mpam-device phandle reference and remove TODO comment
+- Remove unnecessary blank lines for consistency
 
 Co-developed-by: Huang Yiwei <huang.yiwei@oss.qualcomm.com>
 Signed-off-by: Huang Yiwei <huang.yiwei@oss.qualcomm.com>
 Signed-off-by: Yin Li <yin.li@oss.qualcomm.com>
 ---
- drivers/resctrl/mpam_devices.c | 146 ++++++++++++++++++++++++++++++++++++-----
- 1 file changed, 131 insertions(+), 15 deletions(-)
+ .../devicetree/bindings/arm/arm,mpam-msc.yaml      | 39 ++++++++++++----------
+ 1 file changed, 21 insertions(+), 18 deletions(-)
 
-diff --git a/drivers/resctrl/mpam_devices.c b/drivers/resctrl/mpam_devices.c
-index d8856864e89a..d0462239deeb 100644
---- a/drivers/resctrl/mpam_devices.c
-+++ b/drivers/resctrl/mpam_devices.c
-@@ -2156,6 +2156,136 @@ static int mpam_msc_setup_error_irq(struct mpam_msc *msc)
- 	return 0;
- }
+diff --git a/Documentation/devicetree/bindings/arm/arm,mpam-msc.yaml b/Documentation/devicetree/bindings/arm/arm,mpam-msc.yaml
+index 53a6fdbbf05f..3c7b13a23ff2 100644
+--- a/Documentation/devicetree/bindings/arm/arm,mpam-msc.yaml
++++ b/Documentation/devicetree/bindings/arm/arm,mpam-msc.yaml
+@@ -6,19 +6,21 @@ $schema: http://devicetree.org/meta-schemas/core.yaml#
  
-+/*
-+ * Resolve a RIS to its CPU affinity from its 'cpus' phandle-array.
-+ * Returns -ENODEV when 'cpus' is absent (the caller may use another source),
-+ * -EINVAL when any phandle is invalid, or 0 on full success.
-+ */
-+static int get_cpumask_from_ris_cpus(struct device_node *ris_np,
-+				     cpumask_t *affinity)
-+{
-+	int i, cpu_phandle_count;
-+
-+	cpu_phandle_count = of_count_phandle_with_args(ris_np, "cpus", NULL);
-+	if (cpu_phandle_count <= 0)
-+		return -ENODEV;
-+
-+	for (i = 0; i < cpu_phandle_count; i++) {
-+		struct device_node *phandle_np __free(device_node) =
-+			of_parse_phandle(ris_np, "cpus", i);
-+		int cpu, matched = -1;
-+
-+		if (phandle_np) {
-+			for_each_possible_cpu(cpu) {
-+				struct device_node *cpu_node __free(device_node) =
-+					of_get_cpu_node(cpu, NULL);
-+
-+				if (phandle_np == cpu_node) {
-+					matched = cpu;
-+					break;
-+				}
-+			}
-+		}
-+
-+		if (matched < 0) {
-+			pr_warn("MPAM: RIS %pOF cpus[%d] (%pOF) is not a possible CPU\n",
-+				ris_np, i, phandle_np);
-+			return -EINVAL;
-+		}
-+
-+		cpumask_set_cpu(matched, affinity);
-+	}
-+
-+	return 0;
-+}
-+
-+/*
-+ * Resolve a RIS to its CPU affinity from its 'arm,mpam-device' phandle.
-+ * Returns -EINVAL when 'arm,mpam-device' is absent or the phandle is invalid.
-+ * 0 on full success.
-+ */
-+static int get_cpumask_from_ris_phandle(struct device_node *ris,
-+					cpumask_t *affinity)
-+{
-+	struct device_node *mpam_device __free(device_node) =
-+		of_parse_phandle(ris, "arm,mpam-device", 0);
-+
-+	if (!mpam_device) {
-+		pr_warn("MPAM: RIS %pOF has neither 'cpus' nor 'arm,mpam-device'\n",
-+			ris);
-+		return -EINVAL;
-+	}
-+
-+	if (of_device_is_compatible(mpam_device, "cache"))
-+		return get_cpumask_from_cache(mpam_device, affinity);
-+
-+	if (of_device_is_compatible(mpam_device, "memory")) {
-+		cpumask_or(affinity, affinity, cpu_possible_mask);
-+		return 0;
-+	}
-+
-+	return -EINVAL;
-+}
-+
-+static int get_cpumask_from_ris(struct device_node *ris, cpumask_t *affinity)
-+{
-+	int err;
-+
-+	err = get_cpumask_from_ris_cpus(ris, affinity);
-+	if (err != -ENODEV)
-+		return err;
-+
-+	return get_cpumask_from_ris_phandle(ris, affinity);
-+}
-+
-+/*
-+ * Returns -ENODEV when the parent is just a container (not a recognised device),
-+ * so the caller falls back to the per-RIS description.
-+ */
-+static int get_cpumask_from_parent(struct mpam_msc *msc, cpumask_t *affinity)
-+{
-+	struct device_node *parent __free(device_node) =
-+		of_get_parent(msc->pdev->dev.of_node);
-+
-+	if (parent == of_root) {
-+		cpumask_copy(affinity, cpu_possible_mask);
-+		return 0;
-+	}
-+
-+	if (of_device_is_compatible(parent, "cache"))
-+		return get_cpumask_from_cache(parent, affinity);
-+
-+	if (of_device_is_compatible(parent, "memory")) {
-+		cpumask_copy(affinity, cpu_possible_mask);
-+		return 0;
-+	}
-+
-+	return -ENODEV;
-+}
-+
-+/*
-+ * An MSC's CPU affinity is described either by its parent node or, when the
-+ * parent is just a container, per-RIS inside the MSC. In the per-RIS case the
-+ * accessibility is the union of the RIS affinities: every RIS must resolve, so
-+ * a single failure clears the mask and stops and the MSC fails to probe rather
-+ * than come up with a partial affinity.
-+ */
-+static void mpam_dt_update_msc_accessibility(struct mpam_msc *msc)
-+{
-+	cpumask_t *affinity = &msc->accessibility;
-+
-+	cpumask_clear(affinity);
-+
-+	if (get_cpumask_from_parent(msc, affinity) == -ENODEV) {
-+		for_each_available_child_of_node_scoped(msc->pdev->dev.of_node, ris) {
-+			if (get_cpumask_from_ris(ris, affinity)) {
-+				cpumask_clear(affinity);
-+				break;
-+			}
-+		}
-+	}
-+}
-+
- /*
-  * An MSC can control traffic from a set of CPUs, but may only be accessible
-  * from a (hopefully wider) set of CPUs. The common reason for this is power
-@@ -2165,8 +2295,6 @@ static int mpam_msc_setup_error_irq(struct mpam_msc *msc)
-  */
- static void update_msc_accessibility(struct mpam_msc *msc)
- {
--	struct device *dev = &msc->pdev->dev;
--	struct device_node *parent;
- 	u32 affinity_id;
- 	int err;
+ title: Arm Memory System Resource Partitioning and Monitoring (MPAM)
  
-@@ -2182,19 +2310,7 @@ static void update_msc_accessibility(struct mpam_msc *msc)
- 		return;
- 	}
++maintainers:
++  - Rob Herring <robh@kernel.org>
++
+ description: |
+   The Arm MPAM specification can be found here:
  
--	/* Where an MSC can be accessed from depends on the path to of_node. */
--	parent = of_get_parent(msc->pdev->dev.of_node);
--	if (parent == of_root) {
--		cpumask_copy(&msc->accessibility, cpu_possible_mask);
--	} else {
--		if (of_device_is_compatible(parent, "cache"))
--			get_cpumask_from_cache(parent, &msc->accessibility);
--		else if (of_device_is_compatible(parent, "memory"))
--			cpumask_copy(&msc->accessibility, cpu_possible_mask);
--		else
--			dev_err_once(dev, "Cannot determine accessibility of MSC.\n");
--	}
--	of_node_put(parent);
-+	mpam_dt_update_msc_accessibility(msc);
- }
+   https://developer.arm.com/documentation/ddi0598/latest
  
- /*
+-maintainers:
+-  - Rob Herring <robh@kernel.org>
+-
+ properties:
+   compatible:
+-    items:
++    oneOf:
+       - const: arm,mpam-msc                   # Further details are discoverable
+-      - const: arm,mpam-memory-controller-msc
++      - items:
++          - const: arm,mpam-memory-controller-msc
++          - const: arm,mpam-msc
+ 
+   reg:
+     maxItems: 1
+@@ -34,7 +36,7 @@ properties:
+   interrupt-names:
+     oneOf:
+       - items:
+-          - enum: [ error, overflow ]
++          - enum: [error, overflow]
+       - items:
+           - const: error
+           - const: overflow
+@@ -44,7 +46,9 @@ properties:
+       accurate after a settings change. For more information, see the
+       Not-Ready (NRDY) bit description in the MPAM specification.
+ 
+-  numa-node-id: true # see NUMA binding
++  numa-node-id:
++    $ref: /schemas/types.yaml#/definitions/uint32
++    description: NUMA node identifier for the memory resource this MSC controls.
+ 
+   '#address-cells':
+     const: 1
+@@ -72,16 +76,17 @@ patternProperties:
+         maximum: 0xf
+ 
+       cpus:
++        $ref: /schemas/types.yaml#/definitions/phandle-array
+         description:
+-          Phandle(s) to the CPU node(s) this RIS belongs to. By default, the parent
+-          device's affinity is used.
++          Phandle(s) to the CPU node(s) this RIS belongs to. By default, the
++          parent device's affinity is used.
+ 
+       arm,mpam-device:
+         $ref: /schemas/types.yaml#/definitions/phandle
+         description:
+           By default, the MPAM enabled device associated with a RIS is the MSC's
+-          parent node. It is possible for each RIS to be associated with different
+-          devices in which case 'arm,mpam-device' should be used.
++          parent node. It is possible for each RIS to be associated with
++          different devices in which case 'arm,mpam-device' should be used.
+ 
+     required:
+       - compatible
+@@ -92,14 +97,14 @@ required:
+   - reg
+ 
+ dependencies:
+-  interrupts: [ interrupt-names ]
++  interrupts: [interrupt-names]
+ 
+ additionalProperties: false
+ 
+ examples:
+   - |
+     L3: cache-controller@30000000 {
+-        compatible = "arm,dsu-l3-cache", "cache";
++        compatible = "foo,a-l3-cache", "cache";
+         cache-level = <3>;
+         cache-unified;
+ 
+@@ -109,7 +114,6 @@ examples:
+ 
+         msc@10000 {
+             compatible = "arm,mpam-msc";
+-
+             reg = <0x10000 0x2000>;
+             interrupts = <1>, <2>;
+             interrupt-names = "error", "overflow";
+@@ -145,7 +149,7 @@ examples:
+ 
+         msc@41000 {
+             compatible = "arm,mpam-msc";
+-            reg = <0 0x1000>;
++            reg = <0x41000 0x1000>;
+             interrupts = <5>, <6>;
+             interrupt-names = "error", "overflow";
+             arm,not-ready-us = <1>;
+@@ -155,8 +159,8 @@ examples:
+ 
+             ris@2 {
+                 compatible = "arm,mpam-cache";
+-                reg = <0>;
+-                // TODO: How to map to device(s)?
++                reg = <2>;
++                arm,mpam-device = <&L3>;
+             };
+         };
+     };
+@@ -173,7 +177,6 @@ examples:
+ 
+         msc@10000 {
+             compatible = "arm,mpam-msc";
+-
+             reg = <0x10000 0x2000>;
+             interrupts = <7>;
+             interrupt-names = "overflow";
 
 -- 
 2.34.1
