@@ -1,68 +1,86 @@
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F99A42E018
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 09:31:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4861843A817
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 09:32:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786440687; cv=none; b=dIGtDU+ob8NCrl4tjnP6XuZD3xp8RRGQG4allS/L6KILeryGr/kBZwiSwEWPZoNzJExZJrsZ9qkL1Z0uNUPcCEn3pvyuss05gA9o8jtesxitTy8UN74op//Q4Q/zsCCJLiYhtXSuVuxYmTJmn/zMwCIS2oP37CiqVzoM86YFw6c=
+	t=1786440724; cv=none; b=bqenpMsq0YUNat1a9RJjdF+si9C10/sz9jgjj9Ykx1Pl9bCVQlRscmPZEPczzc9vRMMrO9EujxfVYeRt9zt/6YoX/jcBsR+NMQjug9y9U/wf52BBHbdfs6EvPVPpQXjbuqHp7Ubn5IZTSsnATzI3/vv5DQBtLuSSnErSS36xWXM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786440687; c=relaxed/simple;
-	bh=8QXwmcpvLOgS2HJEcrVuGl3PSKJiGBxtH2I13j0yeZA=;
-	h=Message-ID:Date:MIME-Version:To:Cc:References:Subject:From:
-	 In-Reply-To:Content-Type; b=iikAJiVjLFx/4cX9bLZwiwOXo/05SogZ09KPpcqo5tNrzd5IQrS5BNyNATlbBBc1CDxyrwedHb9hkfQe7uf/P7EZE3uFGxr8pcg9+slUdZmKjgFWvNwzE2jaQrFYOOIHGTmroaj7BBqKvHTjNd3X2ypVwzU2Inr9SCIZ3SjQ3Hw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=lyk18MWH; arc=none smtp.client-ip=209.85.214.182
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1786440724; c=relaxed/simple;
+	bh=u91ReNtJhgOHizhOctS1mLFRoqetFf5wRo360YEBbww=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=iiECIXWJJiqRzgB9TYDBIZrSe093aNlBpEZgWXbpncdpDw1jn5tC7v9w+Gk32figTC5zCRWXrqJnolqVQcPl5TH5kQMqM/SU5VibN58r1bbMz4vgM67S4q/wvYuL0xHPGa5sxp6ldDcxQ6IMwvlyqtpZad2qIcWTJKYzucQlFPo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=T8HQUYFq; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=jSazOQFM; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="lyk18MWH"
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-2d004f135b1so7378655ad.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 02:31:25 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="T8HQUYFq";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="jSazOQFM"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67B6uXTd2812805
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 09:32:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	aLvgNJF2m8GZrgcuRRob5EYPfrcy3+MhYzQhJ2G0Cco=; b=T8HQUYFqK4YE5JIo
+	xgJGAcFL8L0FvQbqBkwfdjQNTE+zBJNQsDTmSGOfcHeC9ccH7/2VXM/YPN1T/1z2
+	7rUV9RrIkwhzmqZnO1UjbMq6+aKJcD6+PUCXrvt24a6F4I+hEwwDRykIZ4RXpQGD
+	s8CKQZ0B/KuAVql3aY77FjEquSS04/lPmPbkRhaRvUKYM+0gCgNkkCyVK81sZJyr
+	UkoiYe+veQVOYn0nq38J48rKI39UBhVnGskvJ3cYUB+FdKyoBv2vToF77lf4S1W0
+	0xe8hM/KK+yX9ABoF+YziWhyzuqQUgoaNteGl3fnJuDpavmck+tp+XeIVvykRmBY
+	Cv24Sg==
+Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com [209.85.210.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fyxwerm35-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 09:32:02 +0000 (GMT)
+Received: by mail-pf1-f198.google.com with SMTP id d2e1a72fcca58-8485b7e18b4so4952744b3a.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 02:32:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786440685; x=1787045485; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1786440721; x=1787045521; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:subject:references:cc:to:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=24lOYUM9cZxkUEGLRg6JPIJ8J7Sm+k+/AF/RPaqeH9Q=;
-        b=lyk18MWH3cpWuRrJa34S3ofIqp+Sfl4k2izTx9zDN4o0Tkx5V5kKXyAaUtxyKP7nf/
-         KSZlWbU2ZcxU3Uy8AmbXgYuUn5aK6HLDqyKrJROXvzwzgxlaEOphmZyR6InS+5JKd1uL
-         0mAyD2NfhFMEP8Jc/UdIh8LH0dcZwMIoI5vwFCjZW24bXZZ6znSVF6b8peNarhZ00Hng
-         J3o21LzWuQfo0IZcF6FqG9zCSBl5Z2lCYz0Hk/IROCNaA9QdiouqkQfEwgtHLNl1OJ8m
-         MjswBXSo45pACCZnkKE0DpHtOGexSZIvbZdBcHyg2PDBDUx7ao9nFLI0Vl4q/TGh7Gw4
-         1aKQ==
+        bh=aLvgNJF2m8GZrgcuRRob5EYPfrcy3+MhYzQhJ2G0Cco=;
+        b=jSazOQFMDL05xm9b3fLDi1iX1pxiLK1n5ysfeG3Q5vd8b8p5aTLoLqZFlaAgvzDcbX
+         ugTCBDAzw818/p2LHtKOqSjEjBjf7IXZzS8/aO140LwjKdB/Dku7vbhLClsxfJma1by+
+         a68rWXtaurOnTxlb4y2y9X4STd/iiz/jqQrZoyeaOi4GkqUrapyb/MoVPW/LzLXPvyou
+         8UvDtKKCoaylbAowC8Bcg30j5H1n7Dv050V/ogeLxsuma4zyVjWIzBV/2x/5PXC3ESl4
+         fsKDHH1f5kJDamimmj87msRHyQGfmJyPxFyz8wB5H0NM3+ups43Y9gByPpi8CcmeIZmG
+         ppVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786440685; x=1787045485;
+        d=1e100.net; s=20251104; t=1786440721; x=1787045521;
         h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:subject:references:cc:to:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=24lOYUM9cZxkUEGLRg6JPIJ8J7Sm+k+/AF/RPaqeH9Q=;
-        b=VK5u5nX4Sv9xmXgQfks8gQQhvN5OGN3hwNqBqj5GIyHaTsTeYEmrGF1A89T4TOUB6A
-         ZYOwQj8xt/AyLCTjh5CPC+HGmOvnksjSz6r7PtaCsQ50MdBX7N89sKnTPCOkhcTPwCr5
-         Qpm+TSChJTDV/iRcFDYztmQ5LwaFuSMIniFITNrPOdQBtILMq3IjEBzhFI0wNTOa6TWo
-         iF7aoinGzkWF86nfJGXasoo9enmEKXFtPzOFh2kdP9Xs3pY7CexdwFmGR91ZSQAvnrYJ
-         4doX52YnBVYIrAf5rQ8W5pIRxEPMInxaQ4nyp7YW+7WRmoOwKMI3A2Y9RthfrmayMP/A
-         AF1A==
-X-Forwarded-Encrypted: i=1; AHgh+RolfWSh8F9TiE5+ad+d1CgkwYo1qYLBg7oQVE8LsjL2xYklaveJ+6vcaZRyiiohU2yeupGBXVjoILX8J820@vger.kernel.org
-X-Gm-Message-State: AOJu0YwfZ1d6jqjfQ5snc+/0AGj1l82KDuErNc4zZglk5GBPCaBcnAIm
-	mSqR2quwNmT0S073lCueLxcKpz0acADSE5QCyuD/mWJ6Zj48gffzFmIH
-X-Gm-Gg: AR+sD13GiOFjkiZ4N43iH63XDSpMtXeNvKy/vPBZOrLe7CFBZRNLNiAJrP7hF2uXc6r
-	qEITg1l1WLXpBrtKILJDhQstFJYI2ohUa6ocwoELhWCEqu2auWKuizggskuMnVbS0CMzAqOUrPk
-	NGNK43DQDLNilRjW7hzmEMMeGWg3sGxC6y8loXiM7kldGVFAdQFmJlBJM65BUrURSFJ1Hd3hgt4
-	hITTDEmCH5n/dNTwjg9313YJ0g6BAdHreUEwK9RS+dIBvS4PyRkndUIYxFODcpGVY1zN9UGw4RH
-	gSchIxU3ioaWhcSCfy3YdNhTxBB/BkbvihEbrQM3JDQZIDTkYkFWOzO4jTojrypAclhs4nOE3yS
-	2Dry5rRn9u41vpmjGQiRxCSC73LCBr01N1I1s6due1LYU/T/DgnrY7qSEnzqo0lCXKU45AY3610
-	KcxnkrrcL6/RQvl4OMWkY0O40cOvHTcjXJi8Ai8TXBo+ThuvuMIDrElqy42IlA2FZl1z1a3ehtV
-	JW9wHfjJx45AfQrmfbSMk+bUmXqQf/13UILSFd9Oh0=
-X-Received: by 2002:a17:903:944:b0:2bf:9760:b94d with SMTP id d9443c01a7336-2d31792b495mr25426375ad.15.1786440684729;
-        Tue, 11 Aug 2026 02:31:24 -0700 (PDT)
-Received: from [192.168.68.65] (104-12-136-65.lightspeed.irvnca.sbcglobal.net. [104.12.136.65])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d315f3f33csm4781325ad.26.2026.08.11.02.31.23
+        bh=aLvgNJF2m8GZrgcuRRob5EYPfrcy3+MhYzQhJ2G0Cco=;
+        b=QGdJMovfjeE/mHrJefps91IVpUvvEYst4N8Mn7Te/XHjcnF/zkoJiKSqyULfRvVAMn
+         2lfXXUfiCGYh5tmszT8hn3dInPYljfaHCLa+I30S8DNaJ+LHyciArm/m8Leus9FB3HBR
+         GM3fX0Vwb2CuN+5BUUsCP1WTQ+JJYncwIuvOlddE5mDvFufLBL0yOzBdGvDzDon+IFYq
+         2sJFMH/6nLW0BrRvjP4u+Setwqzra0pK+amwZuhrMPMNlZ/E1Sc7rVydX9bBPzIKMd7t
+         YRUOGRXjWioH5G+XFJ0SVlzfpV0ebV4umftc9sOCogMX4JmRItnMFmHI7q2A1B7RVh0u
+         WbWw==
+X-Gm-Message-State: AOJu0YyD41FYEGPGsYU/UCEibCPyENqCJnOHPiUEr6BB5x5GpTKUbP2o
+	oWuvSR/lxWbtt/I0Xxnxdb7EmH0JS1yL4zGflpSOcemtGf1j5ZOjCZ2TyWAvds34x3GgOW1zVwF
+	oLadPxnwyngenFuboZK9/ipNyuHFzBJ7A7tUevMZBa5ergWivM5z1txPHO1hXCXNUl8i6
+X-Gm-Gg: AR+sD12c8UFHVVegxv43K9ZqGX7eQIxYNZw+Rcc64uajMAgTZQ5GzZUni6rm2IWUzyv
+	Zp8q4ds4yP6QYf7TS3KS20UJlpWM2HEdrZYOnkuScG08sNoGCP9CtlOGqmdnCvhBNuugmJbF9/C
+	kry0tNUqIactCo+diWQcDcFvZYTlrtWJ5Uh7BXfFZUDC6ErCI2j+4SplpLbv7TUMImvWUSgg6il
+	ETgpV5S/gr7gnR73Gk5ScMurYenNmJ/JXdX7oswGbjsXVRcAug5NovNJ6DIvMAGMp7P6/FHRzKC
+	okIjVZ3oZer5/+eWgpA/7/X9Mtcudalsl009rfSljeZ7eRhYYa5QTjAJdAcgUhZUZpAJgbo23Er
+	FY8fXf8ynhNbBzaW2AQ/oIvWX66O4vHx8Ww==
+X-Received: by 2002:a05:6a00:234a:b0:842:5da3:9b89 with SMTP id d2e1a72fcca58-84fa888ccacmr1609031b3a.38.1786440721060;
+        Tue, 11 Aug 2026 02:32:01 -0700 (PDT)
+X-Received: by 2002:a05:6a00:234a:b0:842:5da3:9b89 with SMTP id d2e1a72fcca58-84fa888ccacmr1608980b3a.38.1786440720602;
+        Tue, 11 Aug 2026 02:32:00 -0700 (PDT)
+Received: from [10.217.219.92] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84fa9526485sm403122b3a.33.2026.08.11.02.31.57
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 11 Aug 2026 02:31:24 -0700 (PDT)
-Message-ID: <73033a32-4efe-4ed2-9319-ffb205d28719@gmail.com>
-Date: Tue, 11 Aug 2026 02:31:22 -0700
+        Tue, 11 Aug 2026 02:32:00 -0700 (PDT)
+Message-ID: <bd23ec25-52e5-443e-a667-7d78d79de96d@oss.qualcomm.com>
+Date: Tue, 11 Aug 2026 15:01:56 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -70,32 +88,97 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-To: devnull+guptarud.gmail.com@kernel.org
-Cc: andersson@kernel.org, broonie@kernel.org, conor+dt@kernel.org,
- conor.dooley@microchip.com, david@ixit.cz, devicetree@vger.kernel.org,
- guptarud@gmail.com, konrad.dybcio@oss.qualcomm.com, konradybcio@kernel.org,
- krzk+dt@kernel.org, lee@kernel.org, lgirdwood@gmail.com, linusw@kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-leds@vger.kernel.org, pavel@kernel.org, phone-devel@vger.kernel.org,
- robh@kernel.org
-References: <20260527-expressatt_camera_flash-v6-0-de0f150024e4@gmail.com>
-Subject: Re: [PATCH v6 0/3] Samsung Expressatt: Camera Flash
+Subject: Re: [PATCH v2] dmaengine: qcom: gpi: Fix channel cleanup in unwind
+ path
+To: Aniket Randive <aniket.randive@oss.qualcomm.com>,
+        Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, dmaengine@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20260810-gpi_bug_fix-v2-1-60555394cbf9@oss.qualcomm.com>
 Content-Language: en-US
-From: Rudraksha Gupta <guptarud@gmail.com>
-In-Reply-To: <20260527-expressatt_camera_flash-v6-0-de0f150024e4@gmail.com>
+From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
+In-Reply-To: <20260810-gpi_bug_fix-v2-1-60555394cbf9@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: HzytepeOpKGKxq701AnMgpM3egJX1x4O
+X-Authority-Analysis: v=2.4 cv=K8QS2SWI c=1 sm=1 tr=0 ts=6a7aec12 cx=c_pps
+ a=m5Vt/hrsBiPMCU0y4gIsQw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=L926Rc6u3fOPukkFLXgA:9 a=QEXdDO2ut3YA:10
+ a=IoOABgeZipijB_acs4fv:22
+X-Proofpoint-ORIG-GUID: HzytepeOpKGKxq701AnMgpM3egJX1x4O
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDA3OCBTYWx0ZWRfX62a/Hh1LfFWy
+ ZdZ24Sr3P3Js5hoUJK8K7nnTBkRGrLEnfJhvVysFrO5a92EbsdPPsDwIiYeODep8gopcda55/0z
+ pRlrRf0XVWgO3sMABJdgi2mPvgBoNwE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDA3OCBTYWx0ZWRfX/MGh/+8jsJE6
+ +/Nyen1EUJYUiBsiJGuMqW0Sw+K6Nogm9jof/TfXAKSjnXRmy1PBO2KZ1JBHyYhSNuOoZkjI3+o
+ gm8Zoc5izB+E5GeoiN8YzIe/abCuR2f3VOgjwneqHl52sGIOw/VM9xhSmA05vLEjv0xmmJMsYmX
+ sLTV4NjC0O5pBm99KDpUgIu/W0+Lut6a2fk2gkFEaNUUzPHao8s2QENuCUz+VtK3Bm5MuCnpLgD
+ UZwCdU+tWiytAgnXflAVxe8NyFBclZgADn6Yt7ZdypfpsO59wAlfmw/x2rKBcpRbSuUD9tM8UVi
+ Dn1dYtkM1kufQv5vL8vgJhFbIVCiHxMFtqeWETuKEHFmyGk8Hj0U8/KeXPuwmpn0dvHcFS+wp9O
+ B5Mt5Mwje6bkjJLt0fuBX3QLQxZiVb3iJx3p7ydHjJxIHh/fxGNV9O+BhqmJ1Z0Ms1UY6LfmSyM
+ MrrE8fIvS1NqnhQyGPQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-10_06,2026-08-10_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 malwarescore=0 spamscore=0 priorityscore=1501 bulkscore=0
+ clxscore=1015 phishscore=0 impostorscore=0 adultscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608110078
 
-Hello,
 
 
-https://lore.kernel.org/all/20260527-expressatt_camera_flash-v6-0-de0f150024e4@gmail.com/#t
+On 8/10/2026 12:21 PM, Aniket Randive wrote:
+> The gpi_ch_init() error path has three bugs: sibling channels are
+May be instead of three bugs, can actually mention issues
+"start here mentioning  the three problems first in generic way."
+is what i mentioned, not like write numbers :) .
 
-This series seems to have fallen in between the cracks. Should I resend 
-this patch series?
+May be misunderstood.
 
+> not fully reset and deallocated, the event ring pm_state is left
+> stale after being freed, and ch_ring leaks if gpi_ch_init() fails.
+> 
+> Fix the unwind loops in error_start_chan and error_alloc_chan to
+> iterate over gpii->gchan[i] instead of the original gchan pointer,
+> so each sibling channel is properly reset and deallocated.
+> 
+> Restore pm_state to DISABLE_STATE after freeing the event ring, so
+> gpi_free_chan_resources() does not attempt to free an already freed
+> ring or issue a redundant EV_CMD_DEALLOC.
+> 
+> Free ch_ring in gpi_alloc_chan_resources() if gpi_ch_init() fails,
+> since the ring is allocated before the call and would otherwise leak.
+> 
+> Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
+> ---
 
-Thanks,
+Review if below looks fine, you may modify/change if anything wrong.
 
-Rudraksha
+you may wait for other's review and make changes together. Do not upload 
+v3 only for this immediately.
 
+Title: Fix resource leaks in gpi_ch_init() error paths
+
+The gpi_ch_init() unwind paths do not clean up resources correctly when
+channel initialization fails.
+
+The error_start_chan and error_alloc_chan labels iterate over the
+original channel pointer instead of the channels stored in gpii->gchan[].
+As a result, previously initialized sibling channels are not properly
+reset and deallocated.
+
+The event ring PM state is also left unchanged after the ring is freed.
+Subsequent cleanup through gpi_free_chan_resources() may therefore
+attempt to free the already released ring and issue a redundant
+EV_CMD_DEALLOC command.
+
+Additionally, gpi_alloc_chan_resources() allocates ch_ring before
+calling gpi_ch_init(), but does not release it when gpi_ch_init() fails,
+resulting in a memory leak.
+
+Fix the unwind paths to operate on the correct channels, restore the
+event ring PM state after freeing the ring, and release ch_ring when
+channel initialization fails.
