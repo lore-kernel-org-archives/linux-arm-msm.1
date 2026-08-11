@@ -1,132 +1,111 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D8DC43B49C;
-	Tue, 11 Aug 2026 11:29:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6826042847B
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 11:48:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.41
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786447744; cv=none; b=KLLt95KukVSNzlaIsw8IOVHwcNw+ObZk2p/tiAoxeKJqGU19f9psybY7e8dBha7WIiTW6u12pD8yaFub5tFhywCIdbImzmfvXjbqk3fp4nE0PtJEbt3oy5KP/I9mJSpQy8GDM7hARxTlICHBXIQTTt86upZVePVYosguHPYFkEM=
+	t=1786448921; cv=none; b=hFD9WYCsupieXBJbgCTbxJ9E+mxLo9h8WUVbyJMWBiCc8px5NTiPeCpXTa4AE9fFwzHFfmXIyfrs32VyPxkBdYB2hDH9n+Ic05GCaHa6KEGRyoCCk6VQUaxIq2ziP5WPH2GI2w0UadhMNeLN1i3qoz5I9lsPsyBDt3oE1FGpaDA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786447744; c=relaxed/simple;
-	bh=EWJ/ZPvYic+90tEKmMiVj9PRqVQxfWtvUHWmgIqisH4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=MITkKlXPF8Xn/p3QSsxw7dRqy4Vu90FdxsMw8ek5E0xvmeFTrAhEvICWHMzS+dpJxec+pGVVtgIAj3eRjh7Q7tnKhc+PXdwVb030EjPVGTJv+p2FJXiYBVpZfgdzeT00cROwpM0DlKsut1beYZ5eDW3vQCvk1jltZdbse2yIv2k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=eCsUSuF9; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786448921; c=relaxed/simple;
+	bh=+otw1eq6KyhMTfaoPWbIHySEFgArc9xKFqFzMJEX5lg=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=h85gnqnjAvhrBR6w2vrz8KR7IryhMSCKhZfkwF9rgZa8ABMzMpKFXCE4JZFCI/csq9QKleV8sWnXcF/L1dRhqfKroHx1TWyQXkrrY5KAvSHN+aYpUrwKRvVOwlIYOaAYWbAjt0ze8mofkE3Ynw92fzoSX5wN5CigJR1s39ZStcI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=XyNnUwRc; arc=none smtp.client-ip=209.85.128.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="eCsUSuF9"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8B371F00A3D;
-	Tue, 11 Aug 2026 11:29:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786447741;
-	bh=+ReldJ+REYWGNupKfeUWl5cKXnWwXpHp3Exfh7zUEhI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=eCsUSuF9fG9DHiEW/J4WSRSaKMwo4oFhVcQdalX10eEgRCEdMVbjWTFxIUbYRbqky
-	 CviPL+udHDfqP9PRRXQMZdUYFH5Xagzmb+nXkhefIhoZoIm9hfu1MZVLWU55hX5drW
-	 Nbz6VbLWNZitWykJBv+BPL0pMMb8YJ+I1MPYpDUIwbWKByvjALng10Xajjmb75N5qQ
-	 DHDe/Msm6OirBE97dMCDwEowzkVKHBN3Tq2i7zJp3rD2C72bWiActWKa0wVg17K18+
-	 MDmjVa+f9WpHa0xc0BfXbGqiF5dKp/M+pOoVmf6Lbt0MAO0o0tLXNuAvM54jmOUVYy
-	 S4y2FA1puVZUA==
-Date: Tue, 11 Aug 2026 16:58:57 +0530
-From: Vinod Koul <vkoul@kernel.org>
-To: Konrad Dybcio <konradybcio@kernel.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	linux-kernel@vger.kernel.org, linux-phy@lists.infradead.org,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-	usb4-upstream@oss.qualcomm.com,
-	Raghavendra Thoorpu <rthoorpu@qti.qualcomm.com>,
-	Mika Westerberg <westeri@kernel.org>, Sven Peter <sven@kernel.org>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: Re: [PATCH v3 2/5] phy: core: Define TBT phy_mode
-Message-ID: <ansHeYjQASWGiAfT@vaman>
-References: <20260730-topic-usb4phy-v3-0-ccf0f7ea98b5@oss.qualcomm.com>
- <20260730-topic-usb4phy-v3-2-ccf0f7ea98b5@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="XyNnUwRc"
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4996f1ee4a4so16623395e9.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 04:48:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1786448917; x=1787053717; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=7GBaWQ2WYLq6Esgqzdu5T5UPODeDao8xF4/EzY0gw4U=;
+        b=XyNnUwRcChb9TMe3kz01GW5IITe5ts8r9FCC+Whp20teKyu1qMPA4OYSB3n40cyc+h
+         n0Ae6PpM57rDBuStXBk6dEBOs5lLO5fFgnhzmgJHuyqf4BquGmSjOm+LdLXLIijio55j
+         RPe83bTdQXVodtCK6xidqFx+2bgpx3UZC/7gmg9jWG5kEVgizMMFN4wEEZgzsKoOh3s1
+         BgrezF8qeMZaG6lRYYTNUGPIm+RMbJ81HGtFa7zNr/nroA+yqLTfB4RygZikqe/RvKBm
+         m6nipX1Ip/j1xSfa6Dhi6GoN24OxqzkKsfadVxXAxUg9fKPOnbfrseEPjpiDe+1AOGVg
+         VgFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786448917; x=1787053717;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=7GBaWQ2WYLq6Esgqzdu5T5UPODeDao8xF4/EzY0gw4U=;
+        b=MySjh6yxCeaXjIKCCzqfZaVSyY2A+ZPgMWNun1L8Ac5voOg4AjGaajq2HYYQZv8GL3
+         tjY1Q+RV9gwM/GBEobZiu0PhEC+B4myxD18BXen7xklabOLBJwlTYn/Aw/yuo/fHmJqG
+         aQ9wJrUnwAHmu2ohd81kKMovc7EJBwBjfYYn/1a/YZq6lCIV+ag1+fMXV4e/PKAnoqJ9
+         N/g1CtorE9bHLNMTX/kyiP7ZtHYcdAjTxdJqykezge/IvhBQjzsJu0Te24V5RGXhbHUi
+         Pn4xBSfzPPfQQcYMk9q0rZeivB5gbxdEwNMUBZXkIHZQFZXv71roGcCn62tOFKrW/aMH
+         +LFg==
+X-Forwarded-Encrypted: i=1; AHgh+RoNOvzw7pdGMtr7Etakbl+tCSsPUuPEXJ94fzNRcvLKhJ+P9FS1ldDoRrFLWTrZBRBUPTspPV7WlFYRj/6Q@vger.kernel.org
+X-Gm-Message-State: AOJu0Yy70NJtpZS9iL4rDmr2Xm87WJcjR14d31+JZGMvW/eqrTBiu+yO
+	NiKPpPqSd0Q3osZB27Pt2E6mtuyv/P+AUNCeZh1CRzqfCD7LbCtGFUe7
+X-Gm-Gg: AR+sD138flZpj2D2bJJnUv6rCh0aUKh3QyHaWL4jgScv3cVPzwatSontTwpmnsU6q10
+	kxhU7V+vQyQ1cHven2Xb7XK8+zfr7Uax0c3tzE3mnoFV3Su1HBJ7/OILFEwwQGi1mQlVE30ejp4
+	JGlAKUqRnbefxm/iDu9R/xPs8m662+UZc5SSUNJpElLz21egQD9Yl0fKYT8RJTH2PL6DUTVJPbk
+	oz10I2OayvqCSknT1FveaQtBrsxwgTz3oYG5yrP8MxgJ4TClWhBHa7NhYhWAvlXTK3Z/nSAJBJg
+	n1JHL08+q11vQ9QNDgCaD9/4MqxYMViItKYMNYuxGny2cLBs6cG+46r0NJxZoFTTrsyPRS7R3FC
+	zf9l9O5Ph7tELetbxf0OcVkYyYJOQZUBqg7TkdMqKsR8ei6pnO8WZCBFaeR23943jNPxBUJSFbD
+	mslN/w8KYse1NwO6u3PX0MUDdAp7ieXrF7VTfaI3Czy09hiMAQ4EcZOr8W/9ZdPAQdVzrjS3M8O
+	uXhHXl1jE6peifKUFKblg==
+X-Received: by 2002:a05:600c:c4b7:b0:499:4d4a:4990 with SMTP id 5b1f17b1804b1-4997840200bmr41295815e9.3.1786448916394;
+        Tue, 11 Aug 2026 04:48:36 -0700 (PDT)
+Received: from VivoBook-ASUS-X712UA-M712UA.lan ([2a00:f44:cc3:6030:41cd:1906:c1cf:983a])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4814a716833sm3403105f8f.28.2026.08.11.04.48.34
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 11 Aug 2026 04:48:35 -0700 (PDT)
+From: Stanislaw Pal <kuncy7@gmail.com>
+To: Jie Luo <jie.luo@oss.qualcomm.com>,
+	Stephen Boyd <sboyd@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Michael Turquette <mturquette@baylibre.com>,
+	Brian Masney <bmasney@redhat.com>,
+	Mieczyslaw Nalewaj <namiltd@yahoo.com>,
+	Georg Seema <georgseema@gmail.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH v3] clk: qcom: ipq-cmn-pll: keep the CMN block bus clocks enabled
+Date: Tue, 11 Aug 2026 13:48:31 +0200
+Message-ID: <20260811114831.85417-1-kuncy7@gmail.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20260805193638.15327-1-kuncy7@gmail.com>
+References: <20260805193638.15327-1-kuncy7@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260730-topic-usb4phy-v3-2-ccf0f7ea98b5@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
 
-On 30-07-26, 16:19, Konrad Dybcio wrote:
-> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> 
-> There exist OS-accessible USB4 and Thunderbolt PHYs that need specific
-> configuration. Define a new phy_mode for them.
-> 
-> Currently, USB4 and TBT3 are defined as submodes, because they're quite
-> distinct, most visibly in the electrical/analog aspects (slightly
-> different frequencies, timings, etc.). This results in a need to make
-> the PHY aware of the actual mode needed (at least in the Qualcomm
-> implementation, but I believe that'll be a general need).
-> 
-> Newer versions of TBT are basically supersets of USB4 with higher
-> host-side requirements, so these are not defined. This can always be
-> changed as necessary.
-> 
-> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> ---
->  include/linux/phy/phy-tbt.h | 14 ++++++++++++++
+Recording a tag that came in off-list, so it does not get lost: a second
+user hit the same hang independently, on a board neither I nor anyone in
+this thread has touched.
 
-can the file be phy-thunderbolt.h please.
+Georg Seema is bringing up a Cudy P5 (also IPQ5018). Without this patch
+the board hangs during boot; with it applied it boots reliably. He found
+the patch on his own while debugging that hang, and gave the tag on the
+OpenWrt pull request that carries it:
 
->  include/linux/phy/phy.h     |  2 ++
->  2 files changed, 16 insertions(+)
-> 
-> diff --git a/include/linux/phy/phy-tbt.h b/include/linux/phy/phy-tbt.h
-> new file mode 100644
-> index 000000000000..5f48059814e1
-> --- /dev/null
-> +++ b/include/linux/phy/phy-tbt.h
-> @@ -0,0 +1,14 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
-> +
-> +#ifndef __PHY_TBT_H_
-> +#define __PHY_TBT_H_
-> +
-> +enum tbt_phy_submode {
-> +	PHY_SUBMODE_TBT3,
-> +	PHY_SUBMODE_USB4,
-> +};
+  https://github.com/openwrt/openwrt/pull/24653
 
-tbt here is just fine
+Tested-by: Georg Seema <georgseema@gmail.com>
 
-> +
-> +#endif
-> diff --git a/include/linux/phy/phy.h b/include/linux/phy/phy.h
-> index ea47975e288a..26a91c070f8c 100644
-> --- a/include/linux/phy/phy.h
-> +++ b/include/linux/phy/phy.h
-> @@ -20,6 +20,7 @@
->  #include <linux/phy/phy-hdmi.h>
->  #include <linux/phy/phy-lvds.h>
->  #include <linux/phy/phy-mipi-dphy.h>
-> +#include <linux/phy/phy-tbt.h>
->  
->  struct phy;
->  
-> @@ -45,6 +46,7 @@ enum phy_mode {
->  	PHY_MODE_LVDS,
->  	PHY_MODE_DP,
->  	PHY_MODE_HDMI,
-> +	PHY_MODE_TBT,
->  };
->  
->  enum phy_media {
-> 
-> -- 
-> 2.55.0
+That makes three IPQ5018 boards from three vendors - TP-Link Archer AX55
+v1, GL.iNet GL-B3000 and Cudy P5 - where gating the CMN block bus clocks
+after probe kills the boot, and holding the reference fixes it.
 
--- 
-~Vinod
+I am not repeating the earlier arguments here. The bisection of the
+fatal access is still on my list and I will come back with v4 and a
+corrected explanation once I have named the register and the code path,
+rather than before.
+
+Thanks,
+Stanislaw
