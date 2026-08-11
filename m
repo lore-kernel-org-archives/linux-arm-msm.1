@@ -1,33 +1,33 @@
 Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C1E3449B0E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C063431A4C
 	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 17:11:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.97.179.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786468274; cv=none; b=nj3Mz5wCk/sVHW0ZQVZLhfdyXQP2ecVAV59kXNQ6qn14oJlzaxn1hlVmGAPdYBXjno1G4ZhgjE9yLaeQOVgyvj4fR3nifuz1nMXkQjsfJEHvA7bnszKXvmxhvEiV5f6Muma/Rip8d6FMD2JwH6g7ltMXbXKsIfK90AuFua2eTi0=
+	t=1786468274; cv=none; b=eL1pQDbiMfN1apkvQCxI1XS6qaXtMaQIdF+kEQw29jBfKtM7iNIDdo+Wgna8hFx1fFHSKrSK/CJJiuOXDB2n3UDdG1InxJyoCslqjkRZ4GRRnPqlwvjQ1E5A1aXONQq89uf0fQ1XtTtAVDMsPAvNrsth2+0w/Qu7igDyhGJVHRE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1786468274; c=relaxed/simple;
-	bh=VtAEEFGY8zDvT8/TNpG/zsRC8i2e1TO2OcyPM2rlDLA=;
+	bh=Z/WTliNJvLTvOcXydJZI/zrqtG/jf2HyvEojNZ4b3P8=;
 	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=uZRB15wWRk4OJc/xomUxaJ7ci6Lr7T70jnVs+ceH5oqfYK+dlap4FHw6XTuJ6qGJcORxQHtIgiQmHwWICaovu62Btgp0xOOdvr5IA7Ptm+mCNyXFDnrrBW99EAWpyYFundj+BwUty3AK+EdKdwO4zNYChw6vFBIQ4LNOkBT0UA4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com; spf=pass smtp.mailfrom=igalia.com; dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b=mjeSnO0k; arc=none smtp.client-ip=213.97.179.56
+	 MIME-Version; b=tgaw52zHNxp4HazzlhyMuxIoTvY3aHsVHGEa2V14HIKbxdlnlzz14YRDEThYx6kqQh0Hw6F6oTQQLXVw88gCSGArY083KosJbQPXRRppcuiTjG3KfH2xEyvsE51/UUXAnqVy1e6GyTieXSAsieDFLo0dTyYf/txRP+VMYF+3om0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com; spf=pass smtp.mailfrom=igalia.com; dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b=BoR16pZR; arc=none smtp.client-ip=213.97.179.56
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=igalia.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b="mjeSnO0k"
+	dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b="BoR16pZR"
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
 	s=20170329; h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:
-	Cc:To:From:From:Reply-To; bh=aeVLgTc9lZD5on/N87viJZ3GrMBOhpVvY69l77soMIM=; b=
-	mjeSnO0kwHJ1/45i3TDYpAjYfSybU8gEDrTFuzUUHx8l8igaIIwpQXOmZQGsV+jV5JWcNaGU9nmaf
-	gArCchncM2YFzcWUTIVd4d8pM4pBT9HqUzNfbfoqD5gL1+t9Ql/RM4ouJiEe9JtSuEHoJzYCOkjKy
-	4ffy+FzS5wcF0I+1Z2ut241/rorsExv5WxedxABSW6GKWLLk9Q9J4oda1F8TTgt9kRDoSpYyf15WB
-	SgIMeg1Lma+WQeDYZrJMh6f1NkxRlvcMMb2RTucUnHrs2+f0Q50C4KGJgOm9VGiIpcnCCFcLfs7fx
-	V8XKpd85T/NjGaBeuW6mJU03WwCvrwd8+A==;
+	Cc:To:From:From:Reply-To; bh=0R/8QSF9rsUV/I2X2ZO5JMNGHhsVjujX7spy0FNwWEY=; b=
+	BoR16pZRNeh5log75rwHefDmF2Ws3yJfCVs65hGz9E0wCCjGWjsAqT3G3oeId6SVxXSXC8VbDlIgF
+	dDZiUoD/rdC+UR6VSN5QEHKs3guAUEzaAKReYUP/QsrR/fx8EIFk2qBR3+j2WIzda/aBvo+q2DxY5
+	h36fiYfkOyhRr+azUQncUfXEeUWQ9RO40K0ww2oYijmgmuEx3H9sVDyFcM3cG/yDgidpP4+l6odaj
+	nybZzs7HXUVkOzqOlTILAGUbiLQNUYm4Lflf/16xZKOlpoi7cuAWEG9hbasvT9gEvbR+8oVYn59x8
+	6W41kXNdz1QMxAchSm8f+dW7YPYgR9eJIQ==;
 Received: from 154.red-79-147-121.dynamicip.rima-tde.net ([79.147.121.154] helo=killbill.Home)
 	by fanzine2.igalia.com with esmtpsa 
 	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
-	id 1wtpzd-00HH9d-EX; Tue, 11 Aug 2026 19:10:25 +0200
+	id 1wtpze-00HH9d-Lg; Tue, 11 Aug 2026 19:10:26 +0200
 From: Melissa Wen <mwen@igalia.com>
 To: airlied@gmail.com,
 	alexander.deucher@amd.com,
@@ -61,11 +61,10 @@ Cc: Uma Shankar <uma.shankar@intel.com>,
 	freedreno@lists.freedesktop.org,
 	intel-xe@lists.freedesktop.org,
 	intel-gfx@lists.freedesktop.org,
-	Sashiko <sashiko-bot@kernel.org>,
 	dri-devel@lists.freedesktop.org
-Subject: [PATCH v4 05/11] drm/amd/display: only check colorops of an active color pipeline
-Date: Tue, 11 Aug 2026 18:45:54 +0200
-Message-ID: <20260811171011.184964-6-mwen@igalia.com>
+Subject: [PATCH v4 06/11] drm/amd/display: truly bypass plane colorop 3x4 matrix and hdr mult
+Date: Tue, 11 Aug 2026 18:45:55 +0200
+Message-ID: <20260811171011.184964-7-mwen@igalia.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <20260811171011.184964-1-mwen@igalia.com>
 References: <20260811171011.184964-1-mwen@igalia.com>
@@ -77,85 +76,52 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-dm_plane_color_pipeline_active() iterates every colorop state in the
-atomic commit, so colorops of a pipeline that userspace deactivated via
-plane COLOR_PIPELINE are still taken into account, even though their
-BYPASS property is irrelevant once the pipeline is off. Walk the color
-pipeline of the plane state under evaluation instead, falling back to
-the committed colorop state when a colorop isn't in the atomic commit.
+Latent issue as the driver is currently just skipping programming 3x4
+matrix and hdr multiplier blocks on bypass. Reset to default values if
+the bypass property is set true.
 
-Reported-by: Sashiko <sashiko-bot@kernel.org>
-Fixes: d3a549f4df78 ("drm/amd/display: Use overlay cursor when color pipeline is active")
 Acked-by: Harry Wentland <harry.wentland@amd.com>
 Signed-off-by: Melissa Wen <mwen@igalia.com>
-
 ---
+ .../amd/display/amdgpu_dm/amdgpu_dm_color.c    | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
 
-v4:
-- drop the ternary and add just a warn_on since both current callers
-  iterate planes already in the atomic state. (John H.)
-- explain the reason to use commited colorop (John H.)
----
- .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c | 33 ++++++++++++++-----
- 1 file changed, 24 insertions(+), 9 deletions(-)
-
-diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-index d0e612371c8f..384541b9ac9c 100644
---- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-+++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.c
-@@ -6551,9 +6551,9 @@ static int add_affected_mst_dsc_crtcs(struct drm_atomic_commit *state, struct dr
-  * @use_old: if true, inspect the old colorop states; otherwise the new ones
-  *
-  * A color pipeline may be selected (color_pipeline != NULL) but still is
-- * inactive if every colorop in the chain is bypassed.  Only return
-- * true when at least one colorop has bypass == false, meaning the cursor
-- * would be subjected to the transformation in native mode.
-+ * inactive if every colorop in the chain is bypassed. Only return true when at
-+ * least one colorop has bypass == false, meaning the cursor would be subjected
-+ * to the transformation in native mode.
-  *
-  * Return: true if the pipeline modifies pixels, false otherwise.
-  */
-@@ -6561,18 +6561,33 @@ static bool dm_plane_color_pipeline_active(struct drm_atomic_commit *state,
- 					   struct drm_plane *plane,
- 					   bool use_old)
- {
-+	struct drm_plane_state *plane_state = use_old ?
-+					      drm_atomic_get_old_plane_state(state, plane) :
-+					      drm_atomic_get_new_plane_state(state, plane);
- 	struct drm_colorop *colorop;
--	struct drm_colorop_state *old_colorop_state, *new_colorop_state;
--	int i;
-+	struct drm_colorop_state *cstate;
- 
--	for_each_oldnew_colorop_in_state(state, colorop, old_colorop_state, new_colorop_state, i) {
--		struct drm_colorop_state *cstate = use_old ? old_colorop_state : new_colorop_state;
-+	if (drm_WARN_ON(plane->dev, !plane_state))
-+		return false;
- 
--		if (cstate->colorop->plane != plane)
--			continue;
-+	/*
-+	 * A commit may change only some colorops of a pipeline, and only those
-+	 * have old and new states here. Telling whether the pipeline modifies
-+	 * pixels requires every colorop of the selected pipeline, so fall back
-+	 * to the committed state of the untouched ones; it's both their old
-+	 * and new state.
-+	 */
-+	drm_for_each_colorop_in_pipeline(colorop, plane_state->color_pipeline) {
-+		cstate = use_old ?
-+			 drm_atomic_get_old_colorop_state(state, colorop) :
-+			 drm_atomic_get_new_colorop_state(state, colorop);
-+
-+		if (!cstate)
-+			cstate = colorop->state;
- 		if (!cstate->bypass)
- 			return true;
+diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
+index 357c7c5c85cf..450a1469d0fd 100644
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
+@@ -1595,7 +1595,13 @@ __set_dm_plane_colorop_3x4_matrix(struct drm_plane_state *plane_state,
+ 		}
  	}
-+
- 	return false;
- }
  
+-	if (colorop_state && !colorop_state->bypass && colorop->type == DRM_COLOROP_CTM_3X4) {
++	if (colorop_state && colorop->type == DRM_COLOROP_CTM_3X4) {
++		if (colorop_state->bypass) {
++			dc_plane_state->gamut_remap_matrix.enable_remap = false;
++			dc_plane_state->input_csc_color_matrix.enable_adjustment = false;
++			return 0;
++		}
++
+ 		drm_dbg(dev, "3x4 matrix colorop with ID: %d\n", colorop->base.id);
+ 		blob = colorop_state->data;
+ 		if (blob->length == sizeof(struct drm_color_ctm_3x4)) {
+@@ -1634,9 +1640,13 @@ __set_dm_plane_colorop_multiplier(struct drm_plane_state *plane_state,
+ 		}
+ 	}
+ 
+-	if (colorop_state && !colorop_state->bypass && colorop->type == DRM_COLOROP_MULTIPLIER) {
+-		drm_dbg(dev, "Multiplier colorop with ID: %d\n", colorop->base.id);
+-		dc_plane_state->hdr_mult = amdgpu_dm_fixpt_from_s3132(colorop_state->multiplier);
++	if (colorop_state && colorop->type == DRM_COLOROP_MULTIPLIER) {
++		if (colorop_state->bypass) {
++			dc_plane_state->hdr_mult = dc_fixpt_one;
++		} else {
++			drm_dbg(dev, "Multiplier colorop with ID: %d\n", colorop->base.id);
++			dc_plane_state->hdr_mult = amdgpu_dm_fixpt_from_s3132(colorop_state->multiplier);
++		}
+ 	}
+ 
+ 	return 0;
 -- 
 2.53.0
 
