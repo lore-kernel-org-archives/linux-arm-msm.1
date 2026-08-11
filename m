@@ -1,84 +1,106 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9507C456284;
-	Tue, 11 Aug 2026 17:03:46 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C13D43F4C2
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 17:11:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=213.97.179.56
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786467829; cv=none; b=hSyEsG4wxgFtLs6uXF4uaHiPnW90qNmn8Wtxd3jlAdRNhL2pFwUA/JgqcMTZrc8vlJp/LGpIkNOfzwlZJBSs9gjOBwBqXpI216Dp6iofmWE8PcyRZQIfjVIxgC7lT8/ZceDorwTvwApABG05IcGkSW8i+V4t3fNVyf8dpS17kWY=
+	t=1786468272; cv=none; b=gdWEqSbHEvX0NF0nGRDmrDkLZIMRnsMIRZf+nMxRCgyH8tqMueHYkr+Zt3Q37DdMF8FwRh3GunVvLBa6L4XVXpVjPyy1zldIVDZkorqMP9Kex15wxaQM3OJU36/sEQIDTxgi+Mm7M+ieAqeM8TY+45kc2w8ULTf6RRk18o1KHaY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786467829; c=relaxed/simple;
-	bh=w683Gg/LZbWerfcISG4w4728YpQxQpNXzNyDASHShcE=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Message-Id:Date:
-	 MIME-Version:Content-Type; b=dMgjhpNLIKqXCefLvCa1vq0JsPObhlK1NaJloyG5iHenGlWbxVE4DmAnsU3PDlSeQSssvjULJXQoYUYmEVWpBO9F5wQwB9PkuRogTbJ8VpOC8TQOrrRqbFUv1dIS2cpv7WXPngzKNktyZmck1KXwDkA69vwLjRNnxeWJlaMG26E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PC4Mo+Kq; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786468272; c=relaxed/simple;
+	bh=mgZ2TrtH7JQ4ATTCBVz7YkOO/NUYZ6+oVMVfWrLP8FU=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=BOOoS3m4+W8+qtIqJ7AeHae/xw7hMtDFxT9PZy/vHh63mR8QpsRsoITdLcJas58K3EeeGvCxQ5wHeS+AfeTWGkzEs0pIMwdSUela8kdMp9mOVsz6iZywHH5SWRWysppmAhXZsFruyEeAppWaYdrQvcnZ7/4NCudWqBD39w7OtAU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com; spf=pass smtp.mailfrom=igalia.com; dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b=pJJOfwUu; arc=none smtp.client-ip=213.97.179.56
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=igalia.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=igalia.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PC4Mo+Kq"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 03F791F00A3A;
-	Tue, 11 Aug 2026 17:03:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786467824;
-	bh=0BT4ZisNR0PpCyKwJW08nRlJ32F0v3BRiESx6zP347c=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=PC4Mo+KqY+4zTzmkQudd3iCkap3WG23VfQuCeYXBLquC3kckEFPT3JRHCFzwaEHib
-	 exdS2jyX4aPTM+ELrupwPy2Ef0xmUK6gQVagTBspchoXgiS00N647zP9BzTEJJodSR
-	 XVVr1zVhrIRI92symD9QC3OsxLnC71kkT2gTzBUEnjWHcVSTlnNhKWAGJn6BLmIiAe
-	 60Ri0wsOIbnBUFpgSULTjxN1q6jHH9AOh+h+icGs7M2V1EAordwaSanSmy6e1fcT22
-	 kXNNQ7Jqd7VyuBmyz+IWjflXCiPnNAZIQvc6tBd+qZMDMui6tQdeHSaO00MrkxhLNB
-	 VXHEFL60fhZcQ==
-From: Vinod Koul <vkoul@kernel.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, 
- Philipp Zabel <p.zabel@pengutronix.de>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, 
- Qiang Yu <qiang.yu@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Manivannan Sadhasivam <mani@kernel.org>, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- Abel Vesa <abel.vesa@oss.qualcomm.com>
-In-Reply-To: <20260807-glymur_linkmode_0807-v9-0-dd1c7e236e29@oss.qualcomm.com>
-References: <20260807-glymur_linkmode_0807-v9-0-dd1c7e236e29@oss.qualcomm.com>
-Subject: Re: (subset) [PATCH v9 0/6] Add QMP PCIe Multi-PHY support
-Message-Id: <178646781857.1081354.13726226205330576102.b4-ty@kernel.org>
-Date: Tue, 11 Aug 2026 22:33:38 +0530
+	dkim=pass (2048-bit key) header.d=igalia.com header.i=@igalia.com header.b="pJJOfwUu"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; h=Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:
+	Cc:To:From:From:Reply-To; bh=6wxTK7P3jCamLVB45nsIDvg8qPYN9Nhe8EEXCEZBTOE=; b=
+	pJJOfwUuAGtJGShl0Zl/0pSmWoMIdAzezJ2HbK1PG2Zxwj0mJQ3TGuts96EBPGqs10VL0/Oxz9LJO
+	x/CTwBCtVpYwXjVdv0Mg7cHdRVPiRQdp1Xhc8X5ZBVdnJ+Vwv0C1LGFZvf4XnAWlCSgWWMLytB8C/
+	Cs5IQiUZBACjNObKFJNc8GO/huIo3dhJfvLQNZxCR0khxaZg/QYOtM3zLRQ3rDRgP+gkgbn65yIn0
+	voF+lYvNzCW/jj/YUJJDzss3t24k5Icm3zMhnOQXkHu+6lx/47k1cokyDtzIqK8KZWjqvL4+w3D2p
+	Hy1Q7H96aHzjtvCMlRMiHb7cZyKKxBGHog==;
+Received: from 154.red-79-147-121.dynamicip.rima-tde.net ([79.147.121.154] helo=killbill.Home)
+	by fanzine2.igalia.com with esmtpsa 
+	(Cipher TLS1.3:ECDHE_X25519__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+	id 1wtpzh-00HH9d-A0; Tue, 11 Aug 2026 19:10:29 +0200
+From: Melissa Wen <mwen@igalia.com>
+To: airlied@gmail.com,
+	alexander.deucher@amd.com,
+	alex.hung@amd.com,
+	aurabindo.pillai@amd.com,
+	christian.koenig@amd.com,
+	contact@emersion.fr,
+	daniels@collabora.com,
+	harry.wentland@amd.com,
+	louis.chauvet@bootlin.com,
+	maarten.lankhorst@linux.intel.com,
+	mripard@kernel.org,
+	mwen@igalia.com,
+	sebastian.wick@redhat.com,
+	simona@ffwll.ch,
+	siqueira@igalia.com,
+	sunpeng.li@amd.com,
+	tzimmermann@suse.de
+Cc: Uma Shankar <uma.shankar@intel.com>,
+	Chaitanya Kumar Borah <chaitanya.kumar.borah@intel.com>,
+	Xaver Hugl <xaver.hugl@kde.org>,
+	Pekka Paalanen <pekka.paalanen@collabora.com>,
+	Matthew Schwartz <matthew.schwartz@linux.dev>,
+	amd-gfx@lists.freedesktop.org,
+	kernel-dev@igalia.com,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	linux-arm-msm@vger.kernel.org,
+	freedreno@lists.freedesktop.org,
+	intel-xe@lists.freedesktop.org,
+	intel-gfx@lists.freedesktop.org,
+	dri-devel@lists.freedesktop.org
+Subject: [PATCH v4 08/11] drm/amd/display: make blnd bypass mode clearer
+Date: Tue, 11 Aug 2026 18:45:57 +0200
+Message-ID: <20260811171011.184964-9-mwen@igalia.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20260811171011.184964-1-mwen@igalia.com>
+References: <20260811171011.184964-1-mwen@igalia.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Transfer-Encoding: 8bit
 
+If userspace set blnd colorop to bypass, AMD driver just skips blnd
+transfer function configuration. Currently, this is not an issue since
+dc plane state is a reset/default state, but it's not fully correct and
+doesn't mirror shaper tf helper. Make bypass mode setup clear by
+initially set tf->type as BYPASS and let the helper change its type
+according to userspace requests.
 
-On Fri, 07 Aug 2026 02:51:09 -0700, Qiang Yu wrote:
-> Some QMP PCIe PHY hardware blocks can be configured through a link-mode
-> register into different link topologies, such as a single wide link, or
-> multiple independent narrower links (e.g. x8 or x4+x4 mode on the Glymur
-> PCIe3 PHY).
-> 
-> Earlier revisions tried to extend the existing single-instance
-> phy-qcom-qmp-pcie.c driver to cover this hardware. That added a large
-> amount of conditional, multi-PHY logic to a driver whose data model
-> assumes one PHY per node.
-> 
-> [...]
+Acked-by: Harry Wentland <harry.wentland@amd.com>
+Signed-off-by: Melissa Wen <mwen@igalia.com>
+---
+ drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-Applied, thanks!
-
-[1/6] dt-bindings: phy: qcom: Add Glymur QMP PCIe multiple link-mode PHY
-      commit: 5619458024925b3a488f9046b3ab26647582b99f
-[2/6] phy: qcom: qmp-pcie: Add QMP PCIe Multi-PHY driver
-      commit: 1781be3c8a5ddf40f5f9e7b9dc32cc577d491062
-
-Best regards,
+diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
+index ca9e43e81edf..ad67106c6435 100644
+--- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
++++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_color.c
+@@ -1837,6 +1837,7 @@ __set_dm_plane_colorop_blend(struct drm_plane_state *plane_state,
+ 	uint32_t blend_size = 0;
+ 	int i = 0;
+ 
++	tf->type = TF_TYPE_BYPASS;
+ 	dc_plane_state->cm.flags.bits.blend_enable = 0;
+ 
+ 	/* 1D Curve - BLND TF: find state */
 -- 
-~Vinod
-
+2.53.0
 
