@@ -1,509 +1,225 @@
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com [209.85.167.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6424E4052A8
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 07:59:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.167.53
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786435182; cv=pass; b=hpJjwBIb4qlJgiu//ytGneWW17I/lq6p+t3Hw+mub19fvfM/FN5NEif4D/l2/uiuDgCSp6yvSyeD9j5r6Qbe71BE3MSFVpPECAmwhayC0BqagDEPDxdtNDghZ9QIAwTEETDtyvfiGQOk0pkwek0dgdsbVPUnl77KnB6uSOuIAJA=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786435182; c=relaxed/simple;
-	bh=xi9CdUUJOIIBmGBupa2CxmaRQud+N2p9UsWg3iO27+c=;
-	h=MIME-Version:From:Date:Message-ID:Subject:To:Cc:Content-Type; b=DxPWzpjbwXcK6tN3QSema8/P7fRI7O95XZ814NtX8SN27ydQ1f04eNTNBYzzCVGmNzl6ZTblCgoFnHUOywwrjFD+ghd0VI4bv8QNP0TVgEYyulk2OwiRWz1uAlJVsuOJIlHS7UYOKLZTRkiQuOODQko/BPJUA3abAucDma9EGgk=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=MzYY0/vq; arc=pass smtp.client-ip=209.85.167.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E20238758D
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 08:19:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786436347; cv=none; b=nOwMAnOS8medSSzdexmZn9UOBvfvN3XlUxXdA/UNBN6d+oAfU6/ICpYDNTQDIuWqekxdrTv7n7CGZTmaqEBfbOmAwVAkmju38qss8xuOTXGfOf+iy6nU7XF+B6HNSLq9VoA5QB0lHOdTjWvY+TMxayxDGR1hqS6rIhXMJ/vYcmE=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786436347; c=relaxed/simple;
+	bh=9WYPjPnSCqTOYaZfKb+Y6giAEZRt89I5Sq58ekgoyL8=;
+	h=Subject:To:Cc:References:From:Message-ID:Date:MIME-Version:
+	 In-Reply-To:Content-Type; b=S+PLbfxFE81UH3YAcNVY3h6JkdPEbiqOWE7Z0oAV2MTpyx6IHfL9tPvQC20n9qt2P8PIwjjmGI6+o1unwoLvpZ3sSvfZGNxgMYoDIm6QwRnCelaLgo/XztQR9Qf2hWWdfCu1/zej6gJ8HhHcbs06lkoObhzlutYSYViN1wu1eGo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PMRSjrn7; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=U8dRe8iY; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="MzYY0/vq"
-Received: by mail-lf1-f53.google.com with SMTP id 2adb3069b0e04-5aeb59d54b1so2971152e87.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 00:59:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786435178; cv=none;
-        d=google.com; s=arc-20260327;
-        b=hhb7nnOwls6HWj8WTBBn2o7+j7JjIeSMAARpLUVyxfyWuAqX5d612yggaigd2VmdrK
-         TXJAwZe4GwVUycxfXUuNlTgSGVEtqneTJF5Ulajtu4PORuvKty/BhEfhvUtWrOqZOs3E
-         trlouhKV2ysrYGTp1KN6U4IPTgiIoAfgzLV6umfD/FOnKjlDswfJLcU4WjOtQAteox39
-         43kPyxlPPMFYj6V9AUqlMPnMEAXdx9I89swoibyO9Y7ID8P0GgbOdUc5LSYzV39DqqGg
-         YwkeKtIjuiO97Ph0sQOs/9xhl6/42ntvjbYGUYO34RNbfkN3S7gdHw2cFZXQnydRPvM4
-         /Djw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:mime-version:dkim-signature;
-        bh=8Y15Oeu6WD1rVBTcBgZQKalUwtBBzYJ+Q7T1cbfERWw=;
-        fh=GA3bjrg5SJ8aeiFLb4vvnrZeo7mGALbjp5dV0nQ3wQA=;
-        b=KmnRMTmg3qCJZkMFMIakdbfhfhka26Qgr2kTh30bgoP1vucpw0vPZOgcbOg9XWIWH2
-         KsXm7uTmsRn/ot/YYaHyO3uvDjyiqBqLen6yRlexQyKLTIZGoxL9Di+fb/2tWSZJoq0p
-         rsq4CE5SBw1o6vK8hWyyKtJf7o+o5A96aASil1DDcY92mWNyT5toTvTs4CnzB37Z4rd0
-         6zDWDoEHqiF1JaKz9o2N8dDo8/0uyVJ3u4UNpsbDCfJHWgR5oj/mPeoeF8/zalrauTBx
-         tcIKdnHXxFNcDxyoirBQWJJYfP/+7cje5L+dNWizNzFL6Z2C/QLw8NeOlTUtbqRlYxAT
-         9n8Q==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PMRSjrn7";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="U8dRe8iY"
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67B72aFo3008599
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 08:19:05 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	xuTk3uba3lRMIgMoGuctkRArsnjSUfXH8lZvrtACOT8=; b=PMRSjrn7JsGkMM3A
+	cZHzTJh5xWAihqPjFetT90F51SYklRkXgsPLNPU3PenvZatA7Xx//rzZetkTeowH
+	Q/U3xnTnV5osqz2SanZ6tJ4FKwcwFqq4KXUdEKThPn8H2oEwVhXw4UEZk/KrwSf0
+	TVKp+5IyukowhiAYCI/Y7dR4zuBBUjSFLS62D9nE5QP8c6wt/hFtu4fwHn7tXr3Z
+	0A9X7lGmnlH3/EYGkg6BcjQjyJF3iURZWw7wKDK0kzkRBJKF8SRfIQd/FUJzzrFc
+	8eD+6ySrQ4rmhMFMEyohi43JAXnOuE+TJhWRSPnJm/L7x01e5O83w1ngubIuI/uZ
+	6lWI6g==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4fyjjtk3t3-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 08:19:05 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-ca6bd8a190cso4217454a12.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 01:19:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786435178; x=1787039978; darn=vger.kernel.org;
-        h=content-type:cc:to:subject:message-id:date:from:mime-version:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8Y15Oeu6WD1rVBTcBgZQKalUwtBBzYJ+Q7T1cbfERWw=;
-        b=MzYY0/vqdOVDZmHoCPQNEWyhre1nvvlhEzWeUi5MAlLaZwAiLXyYGbJmAHkNow8Vwv
-         FGGja3Lgm9BAi6Y5AKhjWwsux7HkiT1Xu0oitBciiwcvZCw/Ms85VcmU1qwVc54Qczzs
-         RFHVulZpiEIzu8JMbApbBb/Rou6nM1o04Vbnx7s0JYhxEcXRlaGDlFXS1s11liQjqedG
-         aR3bDfypuav/Gh580puuw+Yr22hUo+qw7RYCOSN55NaP0YZaJ9llyUjoUEg8oscqeSXy
-         c8v1SbJeD61fcHmxNvxMJR7xlxozDPEhl07hhADNMdSrX6C6hX+p7JRKNv7xcvRKAJhR
-         38rg==
+        d=oss.qualcomm.com; s=google; t=1786436344; x=1787041144; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-language:content-type:in-reply-to
+         :mime-version:user-agent:date:message-id:from:references:cc:to
+         :subject:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=xuTk3uba3lRMIgMoGuctkRArsnjSUfXH8lZvrtACOT8=;
+        b=U8dRe8iYJHopWh/9YI8SRGHaIw/A+nhhTzXx9Q2oh7eTW0SqaqA0UBUTNLq1wtLmmV
+         N0DE2RCes/SojJmqtofv92WODwJdIOwuSfE6UKfDp1JwfqPD6sGgPzBxKqVohYRXFUKr
+         9puLY1CvMcPVQgWmRdN/IEXKWGfn8I+8KtWTuSNCkvG6IVvQznAGZoqQtWvKIezr53sw
+         DTB/V+lNPetWSC8FvaRv3KiZSeTcadkChdIPGLCIEzeTDpFCG9xyGrHSKqBbalicdpjo
+         YhnPYEAxarqi6BRjqHI2xuJAJjZZ1PDlbClhRn2HWIImCyY8ZjZn5xoAhXcrMPoI2So3
+         pDfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786435178; x=1787039978;
-        h=content-type:cc:to:subject:message-id:date:from:mime-version
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=8Y15Oeu6WD1rVBTcBgZQKalUwtBBzYJ+Q7T1cbfERWw=;
-        b=kKy4gpMEi6I1r7E9yV5jnp3AkoFvXzBXBhkXb/7oMlQvgGHggegy62dWz6ShmbaoXY
-         AV8s77d9AckIl4vndeKSzjkcVC7vTHUjjgPBNyV7La5Y41uLGzdd6KsSUvfjrOICMjVE
-         sNnRmMJIAr3TWtscJRJucLBcGp54gMHvPjxBZ8fmknUXFw+wU/KrQmjFHkbN+rOfoUd8
-         O4dp/vLNCpU95cBqNd3yNz3CSfB4AUQJld1kiedI1YjYSmskngPvKRhYkthpYraY3ebw
-         Lshs34HEK3xkIYJ/A2SJAdY7d0nHQP3vnEtFMgFBQlOXXscTi1jZZaDbcWPT2Y58rgxh
-         a0cQ==
-X-Forwarded-Encrypted: i=1; AHgh+Romqv5X65CR+LHkxarmho0l9GQyBB45QjitIY1MxwHf8Gyv4AgtZITv/HPUNbp1/mA+bEJJB26r4okuAALb@vger.kernel.org
-X-Gm-Message-State: AOJu0YwVtrTCg8yqMDtbEYEz8ScDnxMEj7iMp5QNL819mbb9z5FEn7e+
-	fMLax2H3yhNXCpX8IIctRVPcdIJ38oDo7fEyssij4Nr4jPYzGzGlmGnLWtat5BAAfuM+2ixOzkT
-	WON8tIc1q27/Ja+PRug2hqpI9KLnGqqA=
-X-Gm-Gg: AR+sD13Dduk6LH/LTqZHk+KFgPXZf1vCunUIo89JlyyHW/43l4AVuxv4Zqk8VwLdfYE
-	dNn+oOGvePewLQbhDlXNAzfnO6N4uI7Q1pMf+K7vCqv7zrYjKp1uFPSM2aXLyYMZxQbgCsCqdDj
-	RJdmMqkwVSPvdm/jVhkW3np62xhKHRZueBFCW5LEvAWoSdC7nNFYBFPypwLV3KeWXIEIHyML7RW
-	pLKzid5qSqYed5j/akHqWOCt3iI3Yfyb9TC/WBEd9MsE3nxfJhyzUSh0o9Q4bin8dB9nf9L8AtH
-	TgDJXuM1aMr/zJUxrIONRDTEHBmZPeiXal9YXJY8Tcn8CcW8bnYF9EDPzg5HU92e/s0rrjIkAqH
-	lM/IzUwclO5BbySQDHQYreJKi6E9SAw==
-X-Received: by 2002:a05:6512:33cc:b0:5b1:55a0:f7e0 with SMTP id
- 2adb3069b0e04-5b448641ca1mr242560e87.44.1786435178035; Tue, 11 Aug 2026
- 00:59:38 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1786436344; x=1787041144;
+        h=content-transfer-encoding:content-language:content-type:in-reply-to
+         :mime-version:user-agent:date:message-id:from:references:cc:to
+         :subject:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=xuTk3uba3lRMIgMoGuctkRArsnjSUfXH8lZvrtACOT8=;
+        b=eh8JA0kQOuGM8QjhyGXMobeOPYDFUFKFjqDqiVFyJZIvDwlAZy2Lqnqs0v41mPh+A7
+         1D8H3bH4j9vXHgEp5TaC5pPclnwkX2vMSYI4BUtmBbYE0EFsNZFc1l1uyGL4DF+NwwqP
+         CkWKdO4Vv70C9fLywnlVVwZ5dZ9eccYfxATS93q1WYpCAwYbl9ThakEltAMNhssF+9w+
+         1x+Ky27a/BG2CmqZNkw8XNJSKKfWl3yNb5a9hCguVT84YRkAzcminiYY8yy78QPH+9Ui
+         TziIfwtQdp5l9ogbQFVn/jAerUdPgZYlY2pfafWge+/sDgrZMUKFnONLSKvFS+QcRMiL
+         xzSg==
+X-Forwarded-Encrypted: i=1; AHgh+RqTG0RZGibmOCgnGIGk/bYib3EU3fJRy6zSZORVQEQsm/RvCI+YikHPYXdZ077lW1LMc800VIn6Dy7VXN2g@vger.kernel.org
+X-Gm-Message-State: AOJu0YxaXGQ2zFn3CA8QIQlENIhVAXa1kkF73A+6oIbf4gueYGgYriVe
+	im+2aCl7CTTwO0oAXoMZG+ZBqwJC4IFRRKobhQb3GhFKmsfac4XkgzE7YT3eX9VybiJ0xNeaXVh
+	0O31x6Hlyp5a2SOdMtZM0wXSvvj4Berq2+l+1m9qg+vC1z6atrt7gkvLkDV9+IrsDDx1SFt30PN
+	SP
+X-Gm-Gg: AR+sD13up1vYV2h+FG91TbzxKYbVcGY+xi19VHcDOje5RMQPQiM99p7UqABx6yQBu1K
+	JjxKYH6kSeO3iQywoHxmzRwCQtmMIdnnP4+a9u+ARzpyMjNk9I7YCdNxkF7885FOLUVzmZAizZt
+	QOVpjKXUswTMkykCPg3sHtZnvK3gGs2sTRtKgf7/2G6sT9JCncUKVQEqkZ/PDsCF+vaMAxpPjnP
+	JRz2MtFX+y3b2X7SAWKcxHkmCQlbdvzbI3I168Iqy99retVKcWLySNRwgK45bmraOdM438MU7Sk
+	ljkYfp9oaVdN/3uMKhfKC0n7wTVT7W8yKT+5kK6kD+dV0hZdZ3zbfJ1k/hkS8RrlJaPPuQJQEGy
+	n3NBRJuqLLP+c2y8A1t3QRhSwcwE=
+X-Received: by 2002:a05:6a00:27a0:b0:848:469b:3d19 with SMTP id d2e1a72fcca58-84fa8862242mr1174660b3a.29.1786436343999;
+        Tue, 11 Aug 2026 01:19:03 -0700 (PDT)
+X-Received: by 2002:a05:6a00:27a0:b0:848:469b:3d19 with SMTP id d2e1a72fcca58-84fa8862242mr1174623b3a.29.1786436343523;
+        Tue, 11 Aug 2026 01:19:03 -0700 (PDT)
+Received: from [10.218.4.105] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84fa919482esm319894b3a.12.2026.08.11.01.18.58
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 11 Aug 2026 01:19:02 -0700 (PDT)
+Subject: Re: [PATCH v6 2/2] mmc: sdhci-msm: Use pm ops instead of macro to
+ restore crypto keys
+To: Eric Biggers <ebiggers@kernel.org>
+Cc: ulf.hansson@linaro.org, adrian.hunter@intel.com, quic_dmukhopa@quicinc.com,
+        quic_rampraka@quicinc.com, quic_nitirawa@quicinc.com,
+        quic_sachgupt@quicinc.com, quic_bhaskarv@quicinc.com,
+        quic_gaurkash@quicinc.com, quic_sartgarg@quicinc.com,
+        ram.gupta@oss.qualcomm.com, linux-mmc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
+References: <20260803163123.1802005-1-neeraj.soni@oss.qualcomm.com>
+ <20260803163123.1802005-3-neeraj.soni@oss.qualcomm.com>
+ <20260803201803.GB63318@quark>
+ <abe31a1b-e34c-d5b6-4bc4-3733acc56e98@oss.qualcomm.com>
+ <20260807170007.GA1172969@google.com>
+From: Neeraj Soni <neeraj.soni@oss.qualcomm.com>
+Message-ID: <e8e3a6fe-debc-d412-08fa-04ff000455b6@oss.qualcomm.com>
+Date: Tue, 11 Aug 2026 13:48:57 +0530
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.14.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-From: Aaron Kling <webgeek1234@gmail.com>
-Date: Tue, 11 Aug 2026 02:59:26 -0500
-X-Gm-Features: AUfX_mx4c-GmMXQo4tUspG8Th66IptU81MYj56fCtT6BUir6JEYdopRwXO9FByw
-Message-ID: <CALHNRZ-yffAy7xZbjVEZOfgVeqFGZ6h9jvNkbtTsNNXGQSgeCQ@mail.gmail.com>
-Subject: Re: [PATCH 1/6] drm/msm/a8xx: Add support for Adreno 830 GPU
-To: Akhil P Oommen <akhilpo@oss.qualcomm.com>
-Cc: abhinav.kumar@linux.dev, David Airlie <airlied@gmail.com>, 
-	Bjorn Andersson <andersson@kernel.org>, Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, 
-	Jessica Zhang <jesszhan0024@gmail.com>, jie.zhang@oss.qualcomm.com, 
-	Konrad Dybcio <konradybcio@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Dmitry Baryshkov <lumag@kernel.org>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	marijn.suijten@somainline.org, Maxime Ripard <mripard@kernel.org>, 
-	Rob Herring <robh@kernel.org>, robin.clark@oss.qualcomm.com, sean@poorly.run, 
-	Simona Vetter <simona@ffwll.ch>, Thomas Zimmermann <tzimmermann@suse.de>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <20260807170007.GA1172969@google.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDA2OCBTYWx0ZWRfX9ZPhR4+lpo5O
+ IdUzn37fHrcd/4MR66FlgP/btDWPRiXvzduhir1M+mVOVPxHZelqxEe9npjqvfRGU9hR5nMZRYq
+ YBZUlLBNA6IsBFYuupSv5kAAeGL7/QOxg9Ykm8gplyeRm4n+sTWlXQ2K3JIrmel+653whxFtPwn
+ elE594pWDOxTNtamLjzO+oMj940VcGxRzmNAsX6TGZnYfRzu6fd2S/ifQ8mbl5wWafY5cEulRqW
+ v+DI4oBRUmrHXYDW7kNB9HNG1lZbchVgCXlQz2qPzJMKikTjcIVtZRR/IeEkKYBBbZwloKro3Vt
+ HybN7FbzAbxm8KN0KUTEJRVajsyHp0O5FCgHHe0/qz4LGWcAql7s5qkviff8gGbONI/KKJMFH7r
+ TlPcI+hX89PZJD99DNpzctdqe/E5w8lKJ8PCXMdNpnZJNXucP6CeEHsvKTRQjhQJCYxUBg9Ap+7
+ VKnZzlJ9Et12aFD6h1w==
+X-Proofpoint-ORIG-GUID: 7MVAyEgvBpI5Og_smFsYmgyLO6KdlGlW
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDA2OCBTYWx0ZWRfX52hk2fGmse/p
+ 4ncvCg18Mq5aqaItpaoBGhXjzM/MDzPNnN01yy1I/msMR94xqBzw0pn/RXoobHkHDFsbUuCxjoL
+ l0sCM42b2YRdH6yvcrdfLmDcgdhcfOM=
+X-Proofpoint-GUID: 7MVAyEgvBpI5Og_smFsYmgyLO6KdlGlW
+X-Authority-Analysis: v=2.4 cv=JsHBas4C c=1 sm=1 tr=0 ts=6a7adaf9 cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=COk6AnOGAAAA:8 a=brWs0jRP4jXds20Wf4MA:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-10_06,2026-08-10_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 clxscore=1015 adultscore=0 spamscore=0 suspectscore=0
+ priorityscore=1501 malwarescore=0 phishscore=0 impostorscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608110068
 
-> From: Jie Zhang <jie.zhang@oss.qualcomm.com>
-> Add support for the Adreno 830 GPU present in SM8750 SoC. Adreno 830 GPU
-> belongs to the A8x Gen 1 family and it is architecturally close Adreno 840.
-> Add a new catalog entry along with the register list to enable support
-> for this GPU.
-> Signed-off-by: Jie Zhang <jie.zhang@oss.qualcomm.com>
-> Signed-off-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
-> ---
->  drivers/gpu/drm/msm/adreno/a6xx_catalog.c | 334 ++++++++++++++++++++++++++++++
->  drivers/gpu/drm/msm/adreno/a8xx_gpu.c     |   2 +-
->  drivers/gpu/drm/msm/adreno/adreno_gpu.h   |   5 +
->  3 files changed, 340 insertions(+), 1 deletion(-)
-> diff --git a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
-> index 90a0c7ffb3c8..418edde9104e 100644
-> --- a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
-> +++ b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
-> @@ -1693,6 +1693,294 @@ static const struct adreno_info a7xx_gpus[] = {
->  };
->  DECLARE_ADRENO_GPULIST(a7xx);
->
-> +static const struct adreno_reglist_pipe a830_nonctxt_regs[] = {
-> + { REG_A8XX_CP_SMMU_STREAM_ID_LPAC, 0x00000101, BIT(PIPE_NONE) },
-> + { REG_A8XX_GRAS_DBG_ECO_CNTL, 0x00000800, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A6XX_PC_AUTO_VERTEX_STRIDE, 0x00000001, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A8XX_PC_VIS_STREAM_CNTL, 0x10010000, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A8XX_PC_CONTEXT_SWITCH_STABILIZE_CNTL_1, 0x00000002, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A8XX_PC_CHICKEN_BITS_1, 0x00000003, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A8XX_PC_CHICKEN_BITS_2, 0x00000200, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A8XX_PC_CHICKEN_BITS_3, 0x00400000, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A8XX_PC_CHICKEN_BITS_4, 0x00500050, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + /* Configure GBIF GX registers */
-> + { REG_A8XX_UCHE_GBIF_GX_CONFIG, 0x010240e0, BIT(PIPE_NONE) },
-> + { REG_A8XX_RBBM_GBIF_CLIENT_QOS_CNTL, 0x22122212, BIT(PIPE_NONE) },
-> + /* Enable full concurrent resolve and unresolves */
-> + { REG_A7XX_RB_CCU_CNTL, 0x00000068, BIT(PIPE_BR) },
-> + /* Partially enable perf clear, Disable DINT to c/z be data forwarding */
-> + { REG_A7XX_RB_CCU_DBG_ECO_CNTL, 0x00002200, BIT(PIPE_BR) },
-> + { REG_A8XX_RB_GC_GMEM_PROTECT, 0x0c000000, BIT(PIPE_BR) },
-> + /* Configure number of outstanding transactions to 32 */
-> + { REG_A8XX_RB_RESOLVE_PREFETCH_CNTL, 0x00000007, BIT(PIPE_BR) },
-> + /* Configure UCHE request time out to 16 cycles for CCU/UCHE arbitration */
-> + { REG_A8XX_RB_CMP_DBG_ECO_CNTL, 0x00004000, BIT(PIPE_BR) },
-> + { REG_A8XX_RBBM_NC_MODE_CNTL, 0x00000001, BIT(PIPE_NONE) },
-> + { REG_A8XX_RBBM_SLICE_NC_MODE_CNTL, 0x00000001, BIT(PIPE_NONE) },
-> + { REG_A8XX_RBBM_WAIT_IDLE_CLOCKS_CNTL, 0x00000030, BIT(PIPE_NONE) },
-> + { REG_A8XX_RBBM_WAIT_IDLE_CLOCKS_CNTL2, 0x00000030, BIT(PIPE_NONE) },
-> + { REG_A8XX_RBBM_CGC_P2S_CNTL, 0x00000040, BIT(PIPE_NONE) },
-> + /* Enable contribution of all shader stages to SP perfcounters */
-> + { REG_A6XX_SP_PERFCTR_SHADER_MASK, 0x0000003f, BIT(PIPE_NONE) },
-> + /*
-> + * BIT(26): Limit the number of wave-slots for Eviction buffer to 1 per ALU GRP
-> + * BIT(30): Disable LPAC auto-promotion
-> + */
-> + { REG_A7XX_SP_CHICKEN_BITS_1, BIT(26) | BIT(30), BIT(PIPE_NONE) },
-> + /*
-> + * BIT(22): Disable PS out of order retire
-> + * BIT(23): Enable half wave mode and MM instruction src&dst is half precision
-> + */
-> + { REG_A7XX_SP_CHICKEN_BITS_2, BIT(22) | BIT(23), BIT(PIPE_NONE) },
-> + { REG_A7XX_SP_CHICKEN_BITS_3, 0x00300000, BIT(PIPE_NONE) },
-> + { REG_A7XX_SP_HLSQ_TIMEOUT_THRESHOLD_DP, 0x00000080,  BIT(PIPE_NONE) },
-> + { REG_A6XX_TPL1_DBG_ECO_CNTL, 0x10000000, BIT(PIPE_NONE) },
-> + /* Enable cubemap small miplevel optimization settings */
-> + /* BIT(26): Disable final clamp for bicubic filtering */
-> + { REG_A6XX_TPL1_DBG_ECO_CNTL1, 0x04000724, BIT(PIPE_NONE) },
-> + /* Disable tag bank id hashing */
-> + { REG_A6XX_UCHE_MODE_CNTL, 0x00080000, BIT(PIPE_NONE) },
-> + { REG_A8XX_UCHE_CCHE_MODE_CNTL, 0x00001000, BIT(PIPE_NONE) },
-> + /* Limit gmem number of ways for GMEM requests in each set */
-> + { REG_A8XX_UCHE_CCHE_CACHE_WAYS, 0x00000800, BIT(PIPE_NONE)},
-> + /* Disable write slow pointer in data phase queue */
-> + { REG_A8XX_UCHE_HW_DBG_CNTL, BIT(8), BIT(PIPE_NONE) },
-> + /* Configure UCHE to CCU switchthreshold timeout cycles */
-> + { REG_A8XX_UCHE_VARB_IDLE_TIMEOUT, 0x00000020, BIT(PIPE_NONE) },
-> + { REG_A7XX_VFD_DBG_ECO_CNTL, 0x00008000, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A8XX_VFD_CB_BV_THRESHOLD, 0x00500050, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A8XX_VFD_CB_BR_THRESHOLD, 0x00600060, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A8XX_VFD_CB_BUSY_REQ_CNT, 0x00200020, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A8XX_VFD_CB_LP_REQ_CNT, 0x00100020, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A8XX_VPC_FLATSHADE_MODE_CNTL, 0x00000001, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + /* Disable redundant tile data optimization */
-> + { REG_A8XX_VSC_KMD_DBG_ECO_CNTL, BIT(11), BIT(PIPE_NONE)},
-> + { },
-> +};
-> +
-> +static const u32 a830_protect_regs[] = {
-> + A6XX_PROTECT_RDONLY(0x00000, 0x03a3),
-> + A6XX_PROTECT_RDONLY(0x003b4, 0x008b),
-> + A6XX_PROTECT_NORDWR(0x00440, 0x001f),
-> + A6XX_PROTECT_RDONLY(0x00580, 0x005f),
-> + A6XX_PROTECT_NORDWR(0x005e0, 0x011f),
-> + A6XX_PROTECT_RDONLY(0x0074a, 0x0005),
-> + A6XX_PROTECT_RDONLY(0x00759, 0x0026),
-> + A6XX_PROTECT_RDONLY(0x00789, 0x0000),
-> + A6XX_PROTECT_RDONLY(0x0078c, 0x0013),
-> + A6XX_PROTECT_NORDWR(0x00800, 0x0029),
-> + A6XX_PROTECT_NORDWR(0x00837, 0x00af),
-> + A6XX_PROTECT_RDONLY(0x008e7, 0x00c9),
-> + A6XX_PROTECT_NORDWR(0x008ec, 0x00c3),
-> + A6XX_PROTECT_NORDWR(0x009b1, 0x0250),
-> + A6XX_PROTECT_RDONLY(0x00ce0, 0x0001),
-> + A6XX_PROTECT_RDONLY(0x00df0, 0x0000),
-> + A6XX_PROTECT_NORDWR(0x00df1, 0x0000),
-> + A6XX_PROTECT_NORDWR(0x00e01, 0x0000),
-> + A6XX_PROTECT_NORDWR(0x00e03, 0x1fff),
-> + A6XX_PROTECT_NORDWR(0x03c00, 0x00c5),
-> + A6XX_PROTECT_RDONLY(0x03cc6, 0x1fff),
-> + A6XX_PROTECT_NORDWR(0x08600, 0x01ff),
-> + A6XX_PROTECT_NORDWR(0x08e00, 0x00ff),
-> + A6XX_PROTECT_RDONLY(0x08f00, 0x0000),
-> + A6XX_PROTECT_NORDWR(0x08f01, 0x01be),
-> + A6XX_PROTECT_NORDWR(0x09600, 0x01ff),
-> + A6XX_PROTECT_RDONLY(0x0981a, 0x02e5),
-> + A6XX_PROTECT_NORDWR(0x09e00, 0x01ff),
-> + A6XX_PROTECT_NORDWR(0x0a600, 0x01ff),
-> + A6XX_PROTECT_NORDWR(0x0ae00, 0x0000),
-> + A6XX_PROTECT_NORDWR(0x0ae02, 0x0004),
-> + A6XX_PROTECT_NORDWR(0x0ae08, 0x0006),
-> + A6XX_PROTECT_NORDWR(0x0ae10, 0x036f),
-> + A6XX_PROTECT_NORDWR(0x0b600, 0x1fff),
-> + A6XX_PROTECT_NORDWR(0x0dc00, 0x1fff),
-> + A6XX_PROTECT_RDONLY(0x0fc00, 0x1fff),
-> + A6XX_PROTECT_NORDWR(0x18400, 0x003f),
-> + A6XX_PROTECT_RDONLY(0x18440, 0x013f),
-> + A6XX_PROTECT_NORDWR(0x18580, 0x1fff),
-> + A6XX_PROTECT_NORDWR(0x1b400, 0x1fff),
-> + A6XX_PROTECT_NORDWR(0x1f400, 0x0477),
-> + A6XX_PROTECT_RDONLY(0x1f878, 0x0787),
-> + A6XX_PROTECT_NORDWR(0x1f930, 0x0329),
-> + A6XX_PROTECT_NORDWR(0x20000, 0x1fff),
-> + A6XX_PROTECT_NORDWR(0x27800, 0x007f),
-> + A6XX_PROTECT_RDONLY(0x27880, 0x0381),
-> + A6XX_PROTECT_NORDWR(0x27882, 0x0001),
-> + A6XX_PROTECT_NORDWR(0x27c02, 0x0000),
-> +};
-> +DECLARE_ADRENO_PROTECT(a830_protect, 64);
 
-I have tested this on an AYN Odin 3, which has a CQ8725S SoC with
-A830. As-is, this change causes the device to fail to boot. Comparing
-to a different implementation of this support that I used previously,
-I found the operable difference is the count_max field here. Dropping
-that from 64 to 15 allows the device to boot and work as intended. I
-unfortunately don't have uart to see what the actual failure text is
-and provide any more information than this.
 
-Aaron
+On 8/7/2026 10:30 PM, Eric Biggers wrote:
+> On Fri, Aug 07, 2026 at 07:49:24PM +0530, Neeraj Soni wrote:
+>>
+>>
+>> On 8/4/2026 1:48 AM, Eric Biggers wrote:
+>>> On Mon, Aug 03, 2026 at 10:01:23PM +0530, Neeraj Soni wrote:
+>>>> From: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
+>>>>
+>>>> Inline Crypto Engine (ICE) keys are lost after hibernation entry and this
+>>>> needs to be restored when hibernation exits. ICE keys are re-programmed
+>>>> during sdhci_msm_ice_init() but it may not cover cases where the
+>>>> hibernation image is already restored.
+>>>>
+>>>> Unwrap the pm ops and use directly in driver to add the call to restore
+>>>> Inline Crypto Engine (ICE) keys. This ensures that ICE is brought into
+>>>> same state as before hibernation.
+>>>>
+>>>> Also set MMC_CAP2_CRYPTO_NO_REPROG to indicate that re-programming of ICE
+>>>> keys is not needed during MMC runtime suspend/resume.
+>>>>
+>>>> Signed-off-by: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
+>>>> Signed-off-by: Seshu Madhavi Puppala <quic_spuppala@quicinc.com>
+>>>> Co-developed-by: Ram Prakash Gupta <quic_rampraka@quicinc.com>
+>>>> Signed-off-by: Ram Prakash Gupta <quic_rampraka@quicinc.com>
+>>>> Co-developed-by: Sarthak Garg <quic_sartgarg@quicinc.com>
+>>>> Signed-off-by: Sarthak Garg <quic_sartgarg@quicinc.com>
+>>>> Signed-off-by: Debraj Mukhopadhyay <quic_dmukhopa@quicinc.com>
+>>>> Signed-off-by: Neeraj Soni <neeraj.soni@oss.qualcomm.com>
+>>>> ---
+>>>>  drivers/mmc/host/sdhci-msm.c | 23 ++++++++++++++++++++++-
+>>>>  1 file changed, 22 insertions(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/drivers/mmc/host/sdhci-msm.c b/drivers/mmc/host/sdhci-msm.c
+>>>> index 4aff965f0e2e..f64788a70309 100644
+>>>> --- a/drivers/mmc/host/sdhci-msm.c
+>>>> +++ b/drivers/mmc/host/sdhci-msm.c
+>>>> @@ -1959,6 +1959,7 @@ static int sdhci_msm_ice_init(struct sdhci_msm_host *msm_host,
+>>>>  	}
+>>>>  
+>>>>  	mmc->caps2 |= MMC_CAP2_CRYPTO;
+>>>> +	mmc->caps2 |= MMC_CAP2_CRYPTO_NO_REPROG;
+>>>>  	return 0;
+>>>>  }
+>>>>  
+>>>> @@ -2983,9 +2984,29 @@ static int sdhci_msm_runtime_resume(struct device *dev)
+>>>>  	return ret;
+>>>>  }
+>>>>  
+>>>> +static int sdhci_msm_restore(struct device *dev)
+>>>> +{
+>>>> +	struct sdhci_host *host = dev_get_drvdata(dev);
+>>>> +	int ret;
+>>>> +
+>>>> +	ret = pm_runtime_force_resume(dev);
+>>>> +	if (ret)
+>>>> +		return ret;
+>>>> +
+>>>> +	if (host->mmc->caps2 & MMC_CAP2_CRYPTO)
+>>>> +		blk_crypto_reprogram_all_keys(&host->mmc->crypto_profile);
+>>>> +
+>>>> +	return ret;
+>>>> +}
+>>>
+>>> Sorry, it looks like this actually does need an #ifdef because the
+>>> crypto_profile field is conditional.  It doesn't need to be a new #ifdef
+>>> though, as you could add a function sdhci_msm_ice_restore() within the
+>>> existing CONFIG_MMC_CRYPTO section of this file (along with a no-op stub
+>>> in the !CONFIG_MMC_CRYPTO section), then call it from here.  Similar to
+>>> how the existing sdhci_msm_ice_resume() works, for example.
+>>>
+>> But MMC_CPA2_CRYPTO=0 if !CONFIG_MMC_CRYPTO so crypto_profile field is
+>> not accessed if !CONFIG_MMC_CRYPTO. Does it need encapsulation?
+> 
+> Yes, because 'if (a & 0)' just makes the code under it be optimized out
+> and able to "use" undefined symbols.  It still otherwise has to be valid
+> code and refer to declared symbols and fields.  See my suggestion above.
+> 
+Ack. Will fix in v7.
 
-> +static const u32 a830_pwrup_reglist_regs[] = {
-> + REG_A6XX_UCHE_MODE_CNTL,
-> + REG_A8XX_UCHE_VARB_IDLE_TIMEOUT,
-> + REG_A8XX_UCHE_GBIF_GX_CONFIG,
-> + REG_A8XX_UCHE_CACHE_WAYS,
-> + REG_A8XX_UCHE_CCHE_MODE_CNTL,
-> + REG_A8XX_UCHE_CCHE_CACHE_WAYS,
-> + REG_A8XX_UCHE_CCHE_GC_GMEM_RANGE_MIN,
-> + REG_A8XX_UCHE_CCHE_GC_GMEM_RANGE_MIN + 1,
-> + REG_A8XX_UCHE_CCHE_LPAC_GMEM_RANGE_MIN,
-> + REG_A8XX_UCHE_CCHE_LPAC_GMEM_RANGE_MIN + 1,
-> + REG_A8XX_UCHE_CCHE_TRAP_BASE,
-> + REG_A8XX_UCHE_CCHE_TRAP_BASE + 1,
-> + REG_A8XX_UCHE_CCHE_WRITE_THRU_BASE,
-> + REG_A8XX_UCHE_CCHE_WRITE_THRU_BASE + 1,
-> + REG_A8XX_UCHE_HW_DBG_CNTL,
-> + REG_A8XX_UCHE_WRITE_THRU_BASE,
-> + REG_A8XX_UCHE_WRITE_THRU_BASE + 1,
-> + REG_A8XX_UCHE_TRAP_BASE,
-> + REG_A8XX_UCHE_TRAP_BASE + 1,
-> + REG_A8XX_UCHE_CLIENT_PF,
-> + REG_A8XX_VSC_KMD_DBG_ECO_CNTL,
-> + REG_A8XX_RB_CMP_NC_MODE_CNTL,
-> + REG_A7XX_SP_HLSQ_TIMEOUT_THRESHOLD_DP,
-> + REG_A8XX_SP_HLSQ_GC_GMEM_RANGE_MIN,
-> + REG_A8XX_SP_HLSQ_GC_GMEM_RANGE_MIN + 1,
-> + REG_A7XX_SP_READ_SEL,
-> + REG_A6XX_TPL1_NC_MODE_CNTL,
-> + REG_A6XX_TPL1_DBG_ECO_CNTL,
-> + REG_A6XX_TPL1_DBG_ECO_CNTL1,
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(0),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(1),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(2),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(3),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(4),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(5),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(6),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(7),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(8),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(9),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(10),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(11),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(12),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(13),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(14),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(15),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(16),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(17),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(18),
-> + REG_A8XX_TPL1_BICUBIC_WEIGHTS_TABLE(19),
-> +};
-> +DECLARE_ADRENO_REGLIST_LIST(a830_pwrup_reglist);
-> +
-> +static const u32 a830_ifpc_reglist_regs[] = {
-> + REG_A8XX_RBBM_NC_MODE_CNTL,
-> + REG_A8XX_RBBM_SLICE_INTERFACE_HANG_INT_CNTL,
-> + REG_A8XX_RBBM_SLICE_NC_MODE_CNTL,
-> + REG_A6XX_SP_NC_MODE_CNTL,
-> + REG_A8XX_SP_HLSQ_LPAC_GMEM_RANGE_MIN,
-> + REG_A8XX_SP_HLSQ_LPAC_GMEM_RANGE_MIN + 1,
-> + REG_A7XX_SP_CHICKEN_BITS_1,
-> + REG_A7XX_SP_CHICKEN_BITS_2,
-> + REG_A7XX_SP_CHICKEN_BITS_3,
-> + REG_A6XX_SP_PERFCTR_SHADER_MASK,
-> + REG_A7XX_SP_HLSQ_DBG_ECO_CNTL,
-> + REG_A8XX_CP_INTERRUPT_STATUS_MASK_GLOBAL,
-> + REG_A8XX_RBBM_PERFCTR_CNTL,
-> + REG_A8XX_CP_PROTECT_GLOBAL(0),
-> + REG_A8XX_CP_PROTECT_GLOBAL(1),
-> + REG_A8XX_CP_PROTECT_GLOBAL(2),
-> + REG_A8XX_CP_PROTECT_GLOBAL(3),
-> + REG_A8XX_CP_PROTECT_GLOBAL(4),
-> + REG_A8XX_CP_PROTECT_GLOBAL(5),
-> + REG_A8XX_CP_PROTECT_GLOBAL(6),
-> + REG_A8XX_CP_PROTECT_GLOBAL(7),
-> + REG_A8XX_CP_PROTECT_GLOBAL(8),
-> + REG_A8XX_CP_PROTECT_GLOBAL(9),
-> + REG_A8XX_CP_PROTECT_GLOBAL(10),
-> + REG_A8XX_CP_PROTECT_GLOBAL(11),
-> + REG_A8XX_CP_PROTECT_GLOBAL(12),
-> + REG_A8XX_CP_PROTECT_GLOBAL(13),
-> + REG_A8XX_CP_PROTECT_GLOBAL(14),
-> + REG_A8XX_CP_PROTECT_GLOBAL(15),
-> + REG_A8XX_CP_PROTECT_GLOBAL(16),
-> + REG_A8XX_CP_PROTECT_GLOBAL(17),
-> + REG_A8XX_CP_PROTECT_GLOBAL(18),
-> + REG_A8XX_CP_PROTECT_GLOBAL(19),
-> + REG_A8XX_CP_PROTECT_GLOBAL(20),
-> + REG_A8XX_CP_PROTECT_GLOBAL(21),
-> + REG_A8XX_CP_PROTECT_GLOBAL(22),
-> + REG_A8XX_CP_PROTECT_GLOBAL(23),
-> + REG_A8XX_CP_PROTECT_GLOBAL(24),
-> + REG_A8XX_CP_PROTECT_GLOBAL(25),
-> + REG_A8XX_CP_PROTECT_GLOBAL(26),
-> + REG_A8XX_CP_PROTECT_GLOBAL(27),
-> + REG_A8XX_CP_PROTECT_GLOBAL(28),
-> + REG_A8XX_CP_PROTECT_GLOBAL(29),
-> + REG_A8XX_CP_PROTECT_GLOBAL(30),
-> + REG_A8XX_CP_PROTECT_GLOBAL(31),
-> + REG_A8XX_CP_PROTECT_GLOBAL(32),
-> + REG_A8XX_CP_PROTECT_GLOBAL(33),
-> + REG_A8XX_CP_PROTECT_GLOBAL(34),
-> + REG_A8XX_CP_PROTECT_GLOBAL(35),
-> + REG_A8XX_CP_PROTECT_GLOBAL(36),
-> + REG_A8XX_CP_PROTECT_GLOBAL(37),
-> + REG_A8XX_CP_PROTECT_GLOBAL(38),
-> + REG_A8XX_CP_PROTECT_GLOBAL(39),
-> + REG_A8XX_CP_PROTECT_GLOBAL(40),
-> + REG_A8XX_CP_PROTECT_GLOBAL(41),
-> + REG_A8XX_CP_PROTECT_GLOBAL(42),
-> + REG_A8XX_CP_PROTECT_GLOBAL(43),
-> + REG_A8XX_CP_PROTECT_GLOBAL(44),
-> + REG_A8XX_CP_PROTECT_GLOBAL(45),
-> + REG_A8XX_CP_PROTECT_GLOBAL(46),
-> + REG_A8XX_CP_PROTECT_GLOBAL(47),
-> + REG_A8XX_CP_PROTECT_GLOBAL(48),
-> + REG_A8XX_CP_PROTECT_GLOBAL(49),
-> + REG_A8XX_CP_PROTECT_GLOBAL(50),
-> + REG_A8XX_CP_PROTECT_GLOBAL(51),
-> + REG_A8XX_CP_PROTECT_GLOBAL(52),
-> + REG_A8XX_CP_PROTECT_GLOBAL(53),
-> + REG_A8XX_CP_PROTECT_GLOBAL(54),
-> + REG_A8XX_CP_PROTECT_GLOBAL(55),
-> + REG_A8XX_CP_PROTECT_GLOBAL(56),
-> + REG_A8XX_CP_PROTECT_GLOBAL(57),
-> + REG_A8XX_CP_PROTECT_GLOBAL(58),
-> + REG_A8XX_CP_PROTECT_GLOBAL(59),
-> + REG_A8XX_CP_PROTECT_GLOBAL(60),
-> + REG_A8XX_CP_PROTECT_GLOBAL(61),
-> + REG_A8XX_CP_PROTECT_GLOBAL(62),
-> + REG_A8XX_CP_PROTECT_GLOBAL(63),
-> +};
-> +DECLARE_ADRENO_REGLIST_LIST(a830_ifpc_reglist);
-> +
-> +static const struct adreno_reglist_pipe a830_dyn_pwrup_reglist_regs[] = {
-> + { REG_A8XX_CP_HW_FAULT_STATUS_MASK_PIPE, 0, BIT(PIPE_BR) |
-> + BIT(PIPE_BV) | BIT(PIPE_LPAC) | BIT(PIPE_AQE0) |
-> + BIT(PIPE_AQE1) | BIT(PIPE_DDE_BR) | BIT(PIPE_DDE_BV) },
-> + { REG_A8XX_CP_INTERRUPT_STATUS_MASK_PIPE, 0, BIT(PIPE_BR) |
-> + BIT(PIPE_BV) | BIT(PIPE_LPAC) | BIT(PIPE_AQE0) |
-> + BIT(PIPE_AQE1) | BIT(PIPE_DDE_BR) | BIT(PIPE_DDE_BV) },
-> + { REG_A8XX_CP_PROTECT_CNTL_PIPE, 0, BIT(PIPE_BR) | BIT(PIPE_BV) | BIT(PIPE_LPAC) },
-> + { REG_A8XX_CP_PROTECT_PIPE(15), 0, BIT(PIPE_BR) | BIT(PIPE_BV) | BIT(PIPE_LPAC) },
-> + { REG_A8XX_GRAS_TSEFE_DBG_ECO_CNTL, 0, BIT(PIPE_BV) | BIT(PIPE_BR) },
-> + { REG_A8XX_GRAS_NC_MODE_CNTL, 0, BIT(PIPE_BV) | BIT(PIPE_BR) },
-> + { REG_A8XX_GRAS_DBG_ECO_CNTL, 0, BIT(PIPE_BV) | BIT(PIPE_BR) },
-> + { REG_A7XX_RB_CCU_CNTL, 0, BIT(PIPE_BR) },
-> + { REG_A7XX_RB_CCU_DBG_ECO_CNTL, 0, BIT(PIPE_BR) },
-> + { REG_A8XX_RB_CCU_NC_MODE_CNTL, 0, BIT(PIPE_BR) },
-> + { REG_A8XX_RB_CMP_NC_MODE_CNTL, 0, BIT(PIPE_BR) },
-> + { REG_A8XX_RB_RESOLVE_PREFETCH_CNTL, 0, BIT(PIPE_BR) },
-> + { REG_A8XX_RB_CMP_DBG_ECO_CNTL, 0, BIT(PIPE_BR) },
-> + { REG_A8XX_RB_GC_GMEM_PROTECT, 0, BIT(PIPE_BR) },
-> + { REG_A6XX_RB_CONTEXT_SWITCH_GMEM_SAVE_RESTORE_ENABLE, 0, BIT(PIPE_BR) },
-> + { REG_A8XX_VPC_FLATSHADE_MODE_CNTL, 0, BIT(PIPE_BV) | BIT(PIPE_BR) },
-> + { REG_A8XX_PC_CHICKEN_BITS_1, 0, BIT(PIPE_BV) | BIT(PIPE_BR) },
-> + { REG_A8XX_PC_CHICKEN_BITS_2, 0, BIT(PIPE_BV) | BIT(PIPE_BR) },
-> + { REG_A8XX_PC_CHICKEN_BITS_3, 0, BIT(PIPE_BV) | BIT(PIPE_BR) },
-> + { REG_A8XX_PC_CHICKEN_BITS_4, 0, BIT(PIPE_BV) | BIT(PIPE_BR) },
-> + { REG_A6XX_PC_AUTO_VERTEX_STRIDE, 0, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A8XX_PC_VIS_STREAM_CNTL, 0, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A8XX_PC_CONTEXT_SWITCH_STABILIZE_CNTL_1, 0, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { REG_A8XX_VFD_CB_BV_THRESHOLD, 0, BIT(PIPE_BV) | BIT(PIPE_BR) },
-> + { REG_A8XX_VFD_CB_BR_THRESHOLD, 0, BIT(PIPE_BV) | BIT(PIPE_BR) },
-> + { REG_A8XX_VFD_CB_BUSY_REQ_CNT, 0, BIT(PIPE_BV) | BIT(PIPE_BR) },
-> + { REG_A8XX_VFD_CB_LP_REQ_CNT, 0, BIT(PIPE_BV) | BIT(PIPE_BR) },
-> + { REG_A7XX_VFD_DBG_ECO_CNTL, 0, BIT(PIPE_BR) | BIT(PIPE_BV) },
-> + { },
-> +};
-> +DECLARE_ADRENO_REGLIST_PIPE_LIST(a830_dyn_pwrup_reglist);
-> +
->  static const struct adreno_reglist_pipe x285_nonctxt_regs[] = {
->   { REG_A8XX_CP_SMMU_STREAM_ID_LPAC, 0x00000101, BIT(PIPE_NONE) },
->   { REG_A8XX_GRAS_DBG_ECO_CNTL, 0x00000800, BIT(PIPE_BV) | BIT(PIPE_BR) },
-> @@ -2399,6 +2687,51 @@ DECLARE_ADRENO_REGLIST_PIPE_LIST(a840_dyn_pwrup_reglist);
->
->  static const struct adreno_info a8xx_gpus[] = {
->   {
-> + .chip_ids = ADRENO_CHIP_IDS(0x44050001),
-> + .family = ADRENO_8XX_GEN1,
-> + .fw = {
-> + [ADRENO_FW_SQE] = "gen80000_sqe.fw",
-> + [ADRENO_FW_GMU] = "gen80000_gmu.bin",
-> + [ADRENO_FW_AQE] = "gen80000_aqe.fw",
-> + },
-> + .gmem = 12 * SZ_1M,
-> + .inactive_period = DRM_MSM_INACTIVE_PERIOD,
-> + .quirks = ADRENO_QUIRK_HAS_CACHED_COHERENT |
-> +  ADRENO_QUIRK_HAS_HW_APRIV |
-> +  ADRENO_QUIRK_PREEMPTION |
-> +  ADRENO_QUIRK_IFPC,
-> + .funcs = &a8xx_gpu_funcs,
-> + .a6xx = &(const struct a6xx_info) {
-> + .protect = &a830_protect,
-> + .nonctxt_reglist = a830_nonctxt_regs,
-> + .pwrup_reglist = &a830_pwrup_reglist,
-> + .dyn_pwrup_reglist = &a830_dyn_pwrup_reglist,
-> + .ifpc_reglist = &a830_ifpc_reglist,
-> + .gbif_cx = a840_gbif,
-> + .max_slices = 3,
-> + .gmu_chipid = 0x8000100,
-> + .bcms = (const struct a6xx_bcm[]) {
-> + { .name = "SH0", .buswidth = 16 },
-> + { .name = "MC0", .buswidth = 4 },
-> + {
-> + .name = "ACV",
-> + .fixed = true,
-> + .perfmode = BIT(2),
-> + .perfmode_bw = 10687500,
-> + },
-> + { /* sentinel */ },
-> + },
-> + },
-> + .preempt_record_size = 13536 * SZ_1K,
-> + .speedbins = ADRENO_SPEEDBINS(
-> + { 0,   0 },
-> + { 252, 0 },
-> + { 242, 1 },
-> + { 232, 2 },
-> + { 221, 3 },
-> + { 190, 4 },
-> + ),
-> + }, {
->   .chip_ids = ADRENO_CHIP_IDS(0x44070001),
->   .family = ADRENO_8XX_GEN2,
->   .fw = {
-> @@ -2537,4 +2870,5 @@ static inline __always_unused void __build_asserts(void)
->   BUILD_BUG_ON(a690_protect.count > a690_protect.count_max);
->   BUILD_BUG_ON(a730_protect.count > a730_protect.count_max);
->   BUILD_BUG_ON(a810_protect.count > a810_protect.count_max);
-> + BUILD_BUG_ON(a830_protect.count > a830_protect.count_max);
->  }
-> diff --git a/drivers/gpu/drm/msm/adreno/a8xx_gpu.c b/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
-> index add93c1fa039..62df0569c62b 100644
-> --- a/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
-> +++ b/drivers/gpu/drm/msm/adreno/a8xx_gpu.c
-> @@ -200,7 +200,7 @@ static void a8xx_set_hwcg(struct msm_gpu *gpu, bool state)
->   struct a6xx_gmu *gmu = &a6xx_gpu->gmu;
->   u32 val;
->
-> - if (adreno_is_x285(adreno_gpu) && state)
-> + if ((adreno_is_x285(adreno_gpu) || adreno_is_a830(adreno_gpu)) && state)
->   gpu_write(gpu, REG_A8XX_RBBM_CGC_0_PC, 0x00000702);
->
->   gmu_write(gmu, REG_A6XX_GPU_GMU_AO_GMU_CGC_MODE_CNTL,
-> diff --git a/drivers/gpu/drm/msm/adreno/adreno_gpu.h b/drivers/gpu/drm/msm/adreno/adreno_gpu.h
-> index 114a40f79ef3..338e02271fcc 100644
-> --- a/drivers/gpu/drm/msm/adreno/adreno_gpu.h
-> +++ b/drivers/gpu/drm/msm/adreno/adreno_gpu.h
-> @@ -602,6 +602,11 @@ static inline int adreno_is_x285(struct adreno_gpu *gpu)
->   return gpu->info->chip_ids[0] == 0x44070001;
->  }
->
-> +static inline int adreno_is_a830(struct adreno_gpu *gpu)
-> +{
-> + return gpu->info->chip_ids[0] == 0x44050001;
-> +}
-> +
->  static inline int adreno_is_a840(struct adreno_gpu *gpu)
->  {
->   return gpu->info->chip_ids[0] == 0x44050a01;
-> --
-> 2.54.0
+> - Eric
+> 
+Regards
+Neeraj
