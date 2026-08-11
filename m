@@ -1,88 +1,88 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A472844607E
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 13:37:03 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 50842443E41
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 13:37:05 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786455429; cv=none; b=hdo+LSt/K8APmLikvGEFXaCoSKsk8TDAezyImMl9HX2q6kNdMiUR426Kb+waiYV4DNo+AmEX5Zw9Y7+aiciub429JrE84POBSWSCrH5Aj1kptud7kUmgxJWYaAXjN26xTbDYWrg53/riHeOuvuQiB1DyyJkeH0Z/NwMlwA8H+OE=
+	t=1786455443; cv=none; b=LeWA99TbMpsNc736qTf5q5hG5kZsLtnZs2PD9+HSY32BGdb0TjitepdHb4XbVqKnwSlXuXpGPlqxahLj23Cgp+8pCXGrBvO/0WelSnF5dluRMGURgbYWZM8sCc7yDWdz2vKIt1U76RaHQsKF8J+A8ekfHu5o4Vuyqq3aAc13m84=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786455429; c=relaxed/simple;
-	bh=ymwbh8u44vkobEnUNavx3BKuZvBYr3sz2YSjbnof65Q=;
+	s=arc-20240116; t=1786455443; c=relaxed/simple;
+	bh=nk0+lqmwemEwOq/+VNFwqihY6Bh4+dlMQ4KcgiZ0hnE=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=hgiQdYwrUcECwhZoFiAGhTpseJAInxPlte2YgIDAA5JUf8JdpiGhZshvsdXqYIfsj6bU+KDDc5H7MMPVdpgTe1PRXDEBvffKSfC/dvkCEq5sFqPHWq5SHdkPhYp+vID/Jej+GqoXISisZJbZvADTNAfSPOIgvTO+MTDT+h2jkTs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=iJqiiqhA; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SsRrKGsC; arc=none smtp.client-ip=205.220.180.131
+	 In-Reply-To:To:Cc; b=Y3v4zenA8A8xdsqSAH44+3GorbDQjyE9+QVGKKUTheeXBLetnv2Zqpq3jLhXni3rgS72QtHjkTj7V3VmDxR5I7H7fzP6QVjBlnqY5oUq6vJg23I/Ibw/9MgxdC7V6hVLdJSZCt35gJP5BNd2aTla6TCqJmdz9M+ELyLMXpOOu6s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=mCa8nkAa; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iazF/b0A; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="iJqiiqhA";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SsRrKGsC"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67BDX0vO693991
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 13:36:56 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="mCa8nkAa";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iazF/b0A"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67BDXEFq454957
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 13:37:02 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	7J2v22m35Gt/8OiuOYM3wU1cSpg6q72MrGm4kNkp73Y=; b=iJqiiqhATarmJOw9
-	8iOdpfOpCDy4MN9ECNY9xX7cfNVW4PTiSq9fjvjMkAjNjvZXCknyYTo8d0wd0446
-	uUw88mq8Sie67XW0AVrzls1hq8Ln8pGcizu1PdBXO6oms5x3EXLB6brbWubx0D+O
-	Oadp+fysMKmrgJnE7IK9loaqusH7k8YvpVZVCH7ji86vICnRnCdlcmR0eNJTamL2
-	YBRIzOALqQGjgcG/krptYPubJ7a4qzcBb8xYlpQlRtLTAzpoqqcfYT+xHr1RuLyW
-	AFDn7RpAswJgHtMshAPS+GGWSTGTN0vh/XFynHu1LI8FMN2+hNxS9uZxyJxkdfLt
-	EWkOfw==
+	EjJWRE5UeUGLYrsBjG/4Kbv4uxBHttAzZHuhxxDCelY=; b=mCa8nkAakfH/D80b
+	zyTHpDkqvojSwIXBNnhYZIZI7QdX9dVkgbNXJRUs8vHgsvVN2QROA7gl1btD3r63
+	hY2bi0XwNCzLDst6zKZRfwsTkTm+ydZZyIawmQ5OVtsXiksAqQkF5Uud7kP6j28W
+	1ZLCjhZ73hiAYtSQEiU9jOngRZxlxFvwaFbZ0sz4q4z2NgSZtDct4FraF+l43oQ/
+	OBvorePnQaumb+geYkWDRoaCAvSEUmpH0Nzl1nohK48EnH32MtSxP9L4G9tCejG8
+	WAiB2+ovwgMHO46gZ81ZXKzV6l5P0xpmeskp2ZIKOiQcq4vRITbR3u3ZnzPxXDye
+	z+gMYQ==
 Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g049gr64d-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g049kg5dg-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 13:36:56 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cf1c86963bso8877375ad.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 06:36:56 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 13:37:02 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2cacf17c7e0so43537985ad.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 06:37:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786455416; x=1787060216; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1786455422; x=1787060222; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=7J2v22m35Gt/8OiuOYM3wU1cSpg6q72MrGm4kNkp73Y=;
-        b=SsRrKGsC1b+/vQ00eqcWpIq2tNTfXncFni5eYCsTXbiCI4H5cVMSL4gnkrmLofhEMG
-         hvU5eT5p60r9juUftMRkuukY0xbu8qaDiLZtNd3E33C+9vAehiyot8L/f15kdiLI2/xr
-         fkvwdSyekOLuCQM4njfGNQupsGgp2P21Hgt24+YUMI2Qd55IL9rUj4P6R8w3HfNx7CE+
-         5r5ud+Re6P/voWiYivO/ngjcZoTQYVi8cenByX8TcXLbP5HKG3XNa6b4g5UuUmSfVd1A
-         wPxVqftgdcx0G2Aap1wO8zjr58vnJKnITNnR4LgDskHN4ZdK+X1brb1Yh/tR1wuD7+qh
-         A5Mw==
+        bh=EjJWRE5UeUGLYrsBjG/4Kbv4uxBHttAzZHuhxxDCelY=;
+        b=iazF/b0AaNXkET+Q2lwft1VRyN16EsYehAeYIyav9+mKw3r8VD60sT7tivmvwalwBu
+         XNNAXjNEY14TWGFOy/a2qompXa3mduR/FWLlomwwA8PMKBtEYxArURqWfniUOitxB1T5
+         6OBmcNVJuB5uh80VwpAC4VXd9Vr8OyiLpg8NMqW4IQsFiSgdOvchU3XfOG8FECAiyWGk
+         yOLnR4SiB9NRxTVv+qZHoDVR0YketOz73oKDS9B9+Nab+BqXoITH3U+iB49RDEgPh842
+         yru21AdV1DY9yBIzFg59LVLptMTHAFND3cKsscNaYTHR7MWe4/UbmP43nQ0Tyxd6T3rW
+         9c2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786455416; x=1787060216;
+        d=1e100.net; s=20251104; t=1786455422; x=1787060222;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=7J2v22m35Gt/8OiuOYM3wU1cSpg6q72MrGm4kNkp73Y=;
-        b=fOt8Y1LggmzbM6xyHgpjJA1Ssn70HBqO7M5HALHFJ8tx36nLu/+XuDQjfibmKF/6pZ
-         pSvUmC1ystx2XFPQQH8HbyoEUzkv5mAGMcVeUvqdmNCi3ggkTIHAeGUQ9sl6ft3KMzEZ
-         d8m3lWh6OebZ58si+0wZrujLEeddQUiqIkCGkokH3tmU11bxV1OM3S5mv+ewoRzZJBVS
-         Rwfo6Nj3FyeM3DwKhisn1+4/pHgAFJwOekzHKlVlVasgbbYOQkZ9prAkfnuPw2q5JbxX
-         uEyPWDZfqPJeyzABAtSvZqacn+VFMPw8iqHejFr7x02m7J3QOXDaS1f3alOrD75ECLNa
-         9Lyg==
-X-Gm-Message-State: AOJu0YwEbKkm/9pq22CDJTmVEOK4QSnAlhwgrE3FbzSTOtclgkWsIMVL
-	hi4+mH+TljEicNxAGdlToCzPqOO0L3A2i7EDuUGjbkh4neBH8XbNzCmQg2EDOyOndvfn0M7rvxY
-	7AcVOk0NwYBofxZLokoe4mqanIPnV8ukLTsiSDqhljKdAxdFS85Wk4UUttipa68QOdevdvAnJV0
-	AD
-X-Gm-Gg: AR+sD11bxFNuurXibX7MR6eTy5nCSwxZ9FYBr1AiWQr+IwoaEQMZUBanpaZwYGt15bc
-	HU6SfuYRC/zTMQ+VNq94MPjTG2xwJluUyTrL81XPhmtnGMuHxTqJsS02BpxeMBTdFQQa0fu0hP5
-	Ts5cAczF+nKw6SkzMbbQPoBlVMGhKWvVzAVQiOI98ImYj5WCzz7ejL+/QSC/oD8XsRJgs1qSABK
-	clsvHKOth5O10062Q1JGjR8AEE/V57irk1AaqWT7oQZccgTi6vO67uNOYFjUtEzDZ4NqzyMsRgO
-	1ovCmxGnSIRIePSQPWjddONbLDmo85xSwOcSUX4sMY2+ki39kWFW+Kqon2QiOgNZ1F8XQzzrSO/
-	68fJbCIPf3A5FgTaJuqDgre3zqT3FdL+HRMzsBOf0XLSaPlokGnX1qcAY
-X-Received: by 2002:a17:903:1988:b0:2cf:af20:4254 with SMTP id d9443c01a7336-2d32da51aeamr2670765ad.10.1786455415626;
-        Tue, 11 Aug 2026 06:36:55 -0700 (PDT)
-X-Received: by 2002:a17:903:1988:b0:2cf:af20:4254 with SMTP id d9443c01a7336-2d32da51aeamr2669955ad.10.1786455415094;
-        Tue, 11 Aug 2026 06:36:55 -0700 (PDT)
+        bh=EjJWRE5UeUGLYrsBjG/4Kbv4uxBHttAzZHuhxxDCelY=;
+        b=IqUdJef7NE+NT2jkVh+3x+PjA0ZEyqqCZqDnz0wpRpxkdj/HOzaLArvAHMqdifVwPF
+         05jtZw44ZPoon0DZ1a5eDLggN4JRLd7RdOhlIkRJIPct4qDbp/ZHZxwoqdzCi0i9yFVI
+         7H7n1kKViGf9W6Oq86FZvQqSsed4xM2+uRI0KN8TBoCpiv/J0DhwMaChx5aGFgEpkIsK
+         WiU1vjBewshToaWBWmMtwDoCaE0y2lc4f/jK/1KYgjPiR3nk2XwRGe6zHrfHMcO9ghtE
+         6zP37tGF6rjdBXBDvxaPG3lsaq7fiFnavlUuqSsGqEa/yqsr33xjnGImWPYGZFWnb7+v
+         +qfQ==
+X-Gm-Message-State: AOJu0YwEnfUGKrQOUlFGf9ESB/vdVesZYt2/BfEYASUzDksV2I3d/XxV
+	yGSidovKh1xiIUIKDZTG6W2K7RjUnVXlSKi/Fm46A9DnBGXxgg3vcdk1BDX6bPUR2UxPKXQ8A7D
+	AKM6//g6x3UE3Mozz+muheU5Foj8saB1Y/eEY+wplQ0BzSfMtM31R9q6zk3TwcYbWvvDWwh7kS0
+	fj
+X-Gm-Gg: AR+sD10lsoZPkTLjx0v69dhl/ix0LtZEXHl0PUojSeLCG1ozmf6tagmaMYu6SEp6CSa
+	ydJWgV4qZykhRrPQP2tVDue9RgxIuhNN+zO4JB3k7kARobJsJb4v/1nQuDq+5TVVdHPaPjO1cOJ
+	bK+zdfZTX8sRVxOgg8uGU0pqUr+nqMzIEL8tAMYWCpcDI0Jz7ajhBy/gWgbZCPvI3zLkA85WGH9
+	pqRQnwZpSkPq0gM9EQGd1/RxTa61+eIw5YhFDxGUwoBN5vLxiiFFqIm9zHRbE+SotSQy3IcA9HL
+	dvD/VGQStScKeMnR/apl/qmi4MtbVjtn1TBX5W4qF7xWGAildUljlAVJGbi8I4BIZL97EThEukS
+	zmKUNOPUeCfoaVkEXjB8ROLBPITODyJoSPmZ7BrWNcBnfTplhh+i/ijRt
+X-Received: by 2002:a17:903:1746:b0:2ca:106c:7122 with SMTP id d9443c01a7336-2d3177b197emr43082165ad.9.1786455421563;
+        Tue, 11 Aug 2026 06:37:01 -0700 (PDT)
+X-Received: by 2002:a17:903:1746:b0:2ca:106c:7122 with SMTP id d9443c01a7336-2d3177b197emr43081055ad.9.1786455420948;
+        Tue, 11 Aug 2026 06:37:00 -0700 (PDT)
 Received: from yli42-gv.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d315f4819dsm8360885ad.37.2026.08.11.06.36.49
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d315f4819dsm8360885ad.37.2026.08.11.06.36.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 11 Aug 2026 06:36:54 -0700 (PDT)
+        Tue, 11 Aug 2026 06:37:00 -0700 (PDT)
 From: Yin Li <yin.li@oss.qualcomm.com>
-Date: Tue, 11 Aug 2026 21:30:35 +0800
-Subject: [PATCH RFC 06/15] arm_mpam: Fix cache ID sentinel from ~0UL to
- U32_MAX to match u32 return type
+Date: Tue, 11 Aug 2026 21:30:36 +0800
+Subject: [PATCH RFC 07/15] arm_mpam: Fix the RIS index range check in
+ mpam_ris_create_locked
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,7 +91,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260811-mpam-resctrl-dt-knp-support-v1-6-ea6397bead59@oss.qualcomm.com>
+Message-Id: <20260811-mpam-resctrl-dt-knp-support-v1-7-ea6397bead59@oss.qualcomm.com>
 References: <20260811-mpam-resctrl-dt-knp-support-v1-0-ea6397bead59@oss.qualcomm.com>
 In-Reply-To: <20260811-mpam-resctrl-dt-knp-support-v1-0-ea6397bead59@oss.qualcomm.com>
 To: "Rafael J. Wysocki" <rafael@kernel.org>,
@@ -112,179 +112,64 @@ Cc: linux-arm-msm@vger.kernel.org, ganapatrao.kulkarni@oss.qualcomm.com,
         Huang Yiwei <huang.yiwei@oss.qualcomm.com>, aiqun.yu@oss.qualcomm.com,
         linux-kernel@vger.kernel.org
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1786455322; l=5227;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786455323; l=929;
  i=yin.li@oss.qualcomm.com; s=20260811; h=from:subject:message-id;
- bh=ymwbh8u44vkobEnUNavx3BKuZvBYr3sz2YSjbnof65Q=;
- b=+LZYGi8ewx6eKunxSNDZIGYha1pAL9rpkB9MS92MpHT7MW7vvdt4r3E1WySGSvZ08nniNkj07
- kKFIGeFJdeyC0cDkG+Zk7KdN6XIXAC564d/70sj0l0u9omQoynZwz1D
+ bh=nk0+lqmwemEwOq/+VNFwqihY6Bh4+dlMQ4KcgiZ0hnE=;
+ b=s84p4P01mgVVR1o4H7MeEiKLbGr93oPLw4xXM6u0g3VS553DL2JR22LNajgYTtWXmfoJpDtj5
+ xOTAS8ZQOGyD7Jsl8Seq3hYMSptmsxxLVB2XtBcIikPS2DCj/3HFOD0
 X-Developer-Key: i=yin.li@oss.qualcomm.com; a=ed25519;
  pk=e/2LM97aSWGBMrxY240URBi9Zi8/kL5hXgB+VHkYvW0=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDExNCBTYWx0ZWRfX+HZZ+r3RuC24
- hLd9uVUov2EpqOpvraMGC0eqM0kIYuL5w2tHyTH01XAsWtNtM+bdt+IG+k+MbXDgN1LeUyjj2Yu
- rE2xbsL+bjaZwwt0xYlraEuVWsKOaMc=
-X-Proofpoint-ORIG-GUID: gmRGztYR9EVBhKRTgLnOwCRmYLN9zUuT
-X-Proofpoint-GUID: gmRGztYR9EVBhKRTgLnOwCRmYLN9zUuT
-X-Authority-Analysis: v=2.4 cv=cvarVV4i c=1 sm=1 tr=0 ts=6a7b2578 cx=c_pps
+X-Proofpoint-ORIG-GUID: R9hjfR9BgvnmH8TFKbtIk8s1uKzSd2pW
+X-Authority-Analysis: v=2.4 cv=IO4yzAvG c=1 sm=1 tr=0 ts=6a7b257e cx=c_pps
  a=cmESyDAEBpBGqyK7t0alAg==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=EUspDBNiAAAA:8 a=SLaofbU1Rv5Q4-V7Ds8A:9 a=QEXdDO2ut3YA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=tscwNbPNHAv0RIyyFlgA:9 a=QEXdDO2ut3YA:10
  a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDExNCBTYWx0ZWRfX+taQLYgkmesf
- LnsEsYn439vDuI94SYF8P21B6x/wVrS2w/sOXrzUufg+v2zjMX7WnPgPr3+hk6evTgV5BMSDZ12
- h6cKWZpvDIUBb2r2WMKTmibcVrO5HWVvBy6+QJkZYrpBFHAYULpL9axB/ENxWyLvgWf/q5fyuXQ
- Eo9PMDm3muIPtp4Mg9WklXHdGxJJOcehQuP12Qf8qOyrZQxJbbu4NZHRK3fwNJ3J6Vm61mDoKpu
- hml1uCPSgt3b7MPuWhY5j3/tiJZ4t9ORvQTcVq+gTpdKX3qHEoxj2vceuNFW591PafYj/hpCfEz
- j/fcaLWg/dsVNKp3F4SyKdhX0CRz0NPrVZgu9P1knybGWo8fVmsLXdAaEXLzLuYOCGXMv+O/Mc4
- 5AyJVJj8fN8eHa9cWosPreosHD0v+jruEIWSRkbIK4YPuNqUVYkX1KoIHs/8hHcur3lNyL/t1nk
- KsEZ1EHLNM76VJ4erdw==
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODExMDExNCBTYWx0ZWRfX4eLNMxxNkPC2
+ wUJImQiaWHMNkEGY/uh8aMkS0hZHMV9VteCgHH1etxpy4FwXEgO1i9SrbSY4/btf5BcQ0FRNIXm
+ Uv0dRG1IgzQ8YzKh0OUsODenUbnu0FadIr2FAxVATny7w5MueBuS+kUWFw+cuFs10EU6y7+fYux
+ i8Qe8XGwLrBEflcTwknOUhyUcBmUQapsqeFO19JEfndhm6RfdNV3FXRDWi3IbWsq0QAdcJPMW4T
+ QYn/RPIq6NLqDcfDXClEjlSLLlkGDkTNM7LduzFvcPQIeZ1UeYrUIqGCTh7n5AebxVV2I/lu/qD
+ rFI29mpVXSm38Mv24dE9RjBT6cCBI+pzJk0E/ji66y38cI8dyPFenzLBjTlZgvdim9hg/5mHtRY
+ yuQDT2GgopNIq7ocFqKXBeL90zu4I87eW9wlJ2zmhd6c5Ptsog3SZIFfR673bR4j6nHvfmGt2YG
+ 95UgrJ2OQJA3jsq75+Q==
+X-Proofpoint-GUID: R9hjfR9BgvnmH8TFKbtIk8s1uKzSd2pW
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODExMDExNCBTYWx0ZWRfX8s1SZQdgzXwn
+ N1oVQD8QjPTNWzrJ0w0yFExX5mge8GQyIGemhVi8S1oPT74s7ZCL3yRclxdqTzZXDChMT7FUcu6
+ 5vxs8pz9bkcWSzNpuMvjwuw1Nnw700Y=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-11_03,2026-08-10_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 bulkscore=0 clxscore=1015 suspectscore=0 priorityscore=1501
- lowpriorityscore=0 malwarescore=0 impostorscore=0 adultscore=0 phishscore=0
+ phishscore=0 adultscore=0 priorityscore=1501 clxscore=1015 impostorscore=0
+ suspectscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608110114
 
-cache_of_calculate_id() returns u32, but callers stored the result in
-unsigned long variables and compared against ~0UL. On 64-bit systems,
-U32_MAX (0xffffffff) assigned to unsigned long becomes 0x00000000ffffffff,
-which does not equal ~0UL (0xffffffffffffffff), so invalid cache IDs are
-silently accepted instead of being rejected.
-
-Fix by changing all cache ID and component ID variables that receive the
-return value of cache_of_calculate_id() to u32, and replace all ~0 and
-~0UL sentinel comparisons with U32_MAX.
-
-Also fix the sentinel values in cache_of_calculate_id() itself for
-consistency.
+The RIS selector field is defined as MPAMCFG_PART_SEL_RIS (bits 27:24),
+which is 4 bits wide and gives valid indices 0..15. MPAM_MSC_MAX_NUM_RIS
+is defined as 16, so the check should use >= to reject index 16 and
+above. The previous > check incorrectly accepted index 16 as valid.
 
 Signed-off-by: Yin Li <yin.li@oss.qualcomm.com>
 ---
- drivers/base/cacheinfo.c        |  6 +++---
- drivers/resctrl/mpam_devices.c  | 16 ++++++++--------
- drivers/resctrl/mpam_internal.h |  2 +-
- 3 files changed, 12 insertions(+), 12 deletions(-)
+ drivers/resctrl/mpam_devices.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/base/cacheinfo.c b/drivers/base/cacheinfo.c
-index f75e7f64038b..a4e0d1d47e71 100644
---- a/drivers/base/cacheinfo.c
-+++ b/drivers/base/cacheinfo.c
-@@ -229,7 +229,7 @@ static bool match_cache_node(struct device_node *cpu,
- u32 cache_of_calculate_id(struct device_node *cache_node)
- {
- 	struct device_node *cpu;
--	u32 min_id = ~0;
-+	u32 min_id = U32_MAX;
- 
- 	for_each_of_cpu_node(cpu) {
- 		u64 id = of_get_cpu_hwid(cpu, 0);
-@@ -237,7 +237,7 @@ u32 cache_of_calculate_id(struct device_node *cache_node)
- 		id = arch_compact_of_hwid(id);
- 		if (FIELD_GET(GENMASK_ULL(63, 32), id)) {
- 			of_node_put(cpu);
--			return ~0;
-+			return U32_MAX;
- 		}
- 
- 		if (match_cache_node(cpu, cache_node))
-@@ -252,7 +252,7 @@ static void cache_of_set_id(struct cacheinfo *this_leaf,
- {
- 	u32 id = cache_of_calculate_id(cache_node);
- 
--	if (id != ~0) {
-+	if (id != U32_MAX) {
- 		this_leaf->id = id;
- 		this_leaf->attributes |= CACHE_ID;
- 	}
 diff --git a/drivers/resctrl/mpam_devices.c b/drivers/resctrl/mpam_devices.c
-index 559fa09128b4..ddc15249ec1e 100644
+index ddc15249ec1e..cc9fa1d78925 100644
 --- a/drivers/resctrl/mpam_devices.c
 +++ b/drivers/resctrl/mpam_devices.c
-@@ -166,13 +166,13 @@ static void mpam_free_garbage(void)
+@@ -725,7 +725,7 @@ static int mpam_ris_create_locked(struct mpam_msc *msc, u8 ris_idx,
  
- /* Called recursively to walk the list of caches from a particular CPU */
- static void __mpam_get_cpumask_from_cache_id(int cpu, struct device_node *cache_node,
--					     unsigned long cache_id,
-+					     u32 cache_id,
- 					     u32 cache_level,
- 					     cpumask_t *affinity)
- {
- 	int err;
- 	u32 iter_level;
--	unsigned long iter_cache_id;
-+	u32 iter_cache_id;
- 	struct device_node *iter_node __free(device_node) = of_find_next_cache_node(cache_node);
+ 	lockdep_assert_held(&mpam_list_lock);
  
- 	if (!iter_node)
-@@ -187,7 +187,7 @@ static void __mpam_get_cpumask_from_cache_id(int cpu, struct device_node *cache_
- 	 * during device_initcall(). Use cache_of_calculate_id().
- 	 */
- 	iter_cache_id = cache_of_calculate_id(iter_node);
--	if (iter_cache_id == ~0UL)
-+	if (iter_cache_id == U32_MAX)
- 		return;
+-	if (ris_idx > MPAM_MSC_MAX_NUM_RIS)
++	if (ris_idx >= MPAM_MSC_MAX_NUM_RIS)
+ 		return -EINVAL;
  
- 	if (iter_level == cache_level && iter_cache_id == cache_id)
-@@ -202,7 +202,7 @@ static void __mpam_get_cpumask_from_cache_id(int cpu, struct device_node *cache_
-  * The cacheinfo structures are only populated when CPUs are online.
-  * This helper walks the device tree to include offline CPUs too.
-  */
--int mpam_get_cpumask_from_cache_id(unsigned long cache_id, u32 cache_level,
-+int mpam_get_cpumask_from_cache_id(u32 cache_id, u32 cache_level,
- 				   cpumask_t *affinity)
- {
- 	int cpu;
-@@ -229,7 +229,7 @@ static int get_cpumask_from_cache(struct device_node *cache,
- {
- 	int err;
- 	u32 cache_level;
--	unsigned long cache_id;
-+	u32 cache_id;
- 
- 	err = of_property_read_u32(cache, "cache-level", &cache_level);
- 	if (err) {
-@@ -238,7 +238,7 @@ static int get_cpumask_from_cache(struct device_node *cache,
- 	}
- 
- 	cache_id = cache_of_calculate_id(cache);
--	if (cache_id == ~0UL) {
-+	if (cache_id == U32_MAX) {
- 		pr_err("Failed to calculate cache-id from cache node\n");
- 		return -ENOENT;
- 	}
-@@ -264,7 +264,7 @@ static int mpam_dt_parse_resource(struct mpam_msc *msc, struct device_node *np,
- {
- 	int err = 0;
- 	u32 class_id = 0;
--	unsigned long component_id = 0;
-+	u32 component_id = 0;
- 	struct device *dev = &msc->pdev->dev;
- 	enum mpam_class_types type = MPAM_CLASS_UNKNOWN;
- 	struct device_node *cache __free(device_node) = NULL;
-@@ -308,7 +308,7 @@ static int mpam_dt_parse_resource(struct mpam_msc *msc, struct device_node *np,
- 			return err;
- 		}
- 		component_id = cache_of_calculate_id(cache);
--		if (component_id == ~0) {
-+		if (component_id == U32_MAX) {
- 			dev_err_once(dev, "Failed to calculate cache-id\n");
- 			return -ENOENT;
- 		}
-diff --git a/drivers/resctrl/mpam_internal.h b/drivers/resctrl/mpam_internal.h
-index def0e3a65c23..aa45d00bcd07 100644
---- a/drivers/resctrl/mpam_internal.h
-+++ b/drivers/resctrl/mpam_internal.h
-@@ -470,7 +470,7 @@ int mpam_msmon_read(struct mpam_component *comp, struct mon_cfg *ctx,
- 		    enum mpam_device_features, u64 *val);
- void mpam_msmon_reset_mbwu(struct mpam_component *comp, struct mon_cfg *ctx);
- 
--int mpam_get_cpumask_from_cache_id(unsigned long cache_id, u32 cache_level,
-+int mpam_get_cpumask_from_cache_id(u32 cache_id, u32 cache_level,
- 				   cpumask_t *affinity);
- 
- #ifdef CONFIG_RESCTRL_FS
+ 	if (test_and_set_bit(ris_idx, &msc->ris_idxs))
 
 -- 
 2.34.1
