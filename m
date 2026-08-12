@@ -1,91 +1,154 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from DU2PR03CU002.outbound.protection.outlook.com (mail-northeuropeazon11011062.outbound.protection.outlook.com [52.101.65.62])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88DE9385516;
-	Wed, 12 Aug 2026 15:09:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786547363; cv=none; b=ZjYCJhNQvZ+WO8jEJ0CJGUGNbzrWWOCUdVl+yjrvmZnURNmpXTQL2ipnrpjX7dpaNoBiekLJ14mycmY3MNZw9DkJykUBCcV9Nvp0/rgZYarDjX8apYZRnFPlHykOKbE6sb0p7YQTkLOqwKmTu6/WZP/xB1QBVNXtdZKijjBFi2o=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786547363; c=relaxed/simple;
-	bh=UbkPm/BPWRkunaf40BjjjBdcx9gjROKttINrUWWw26c=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Y4mzgYta/utbltJ63born8QmPRTO/lg2RF84Voe0x1X0xP052ale5B15/xTLy7/ojO49sA7MJsgG0iopFtAw4o6luHhyZDpV6i/azF6iDqdJIFFbAUbLLBR1N2zWXqtSQSA6bz83jRCx+gy7kRz5RWdH/mChFsJSuOkXwBRGu3g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=knX8w7tu; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 758B228033B;
+	Wed, 12 Aug 2026 15:16:16 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=52.101.65.62
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786547777; cv=fail; b=Z+hp6Qd6Hth6s1ZTzX9UHVVGZ9Ah0zT8pJdP/C8x2yqdtG4w2NODwF84QPquEh/U17M/EhDyDl6KZrdV3XK9tmpAvXjWQqdkOYEnnp3EcJmclwoyt/Mh9bEJqzjpPkUoQMkKAIl6yxx5iS1dg8bs5SHvTLY/qs99V10mtG01pJQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786547777; c=relaxed/simple;
+	bh=wDFQ0qwL+IGjYcvFdW1kcj+AExViifEt48vHQFNVn+4=;
+	h=From:To:Cc:Subject:Date:Message-ID:Content-Type:MIME-Version; b=j2jCEgWPa665eLv71tb/O3S00q7y81x/6GSVobKJXc7SWJ1Iwjygv9jzVU5nIFkxDanCZ2LMO6iGNOSLsLt1BKlJ1boOAMVwK6zGWEcneWXYMunUNcUk7fx90n6oGvq0Nkjuc1Hm9IG1Ag4dhjcWf6w35IHR6dBr11gjqm4kYx4=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com; spf=pass smtp.mailfrom=nxp.com; dkim=pass (2048-bit key) header.d=nxp.com header.i=@nxp.com header.b=OLr3KO/q; arc=fail smtp.client-ip=52.101.65.62
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxp.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="knX8w7tu"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4A7161F000E9;
-	Wed, 12 Aug 2026 15:09:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786547362;
-	bh=aaqq2H2JimvVJmpoJx6SRa5PHhNV2698HwqcWY02mTg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=knX8w7tuFaejNzJ612ZhC4U4PMt8qOPH8Y3y6YDnuHGZl7P9z2xfb0BkaQNDANCPm
-	 rai61Ks+jVyMqAl+DHgK/OlTduKSGI5d++w9qaHpR6ZX5VvWVGmuuclQRHJnJyWtXN
-	 XqW8FC5QzVTa1IpcLcL2KUoGeRI+PD3A7XOvgM+RAhYbn97UkquAmKBAKEKHuXNS+J
-	 ggDMlVaRHk4IOThl/4cZjaXH764+2k7y5qTe2oNZkHaqsay6PV4rTdgHH+yKw0guIO
-	 aiLEOj4JumuiFii6f1byHdFOt3q53wTw0oxP4/xto+g3mH3d+6SYt6MCI5kviHSptj
-	 /Zm56nlCIzKzQ==
-Date: Wed, 12 Aug 2026 17:09:13 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>, 
-	Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
-	Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
-	Marijn Suijten <marijn.suijten@somainline.org>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, linux-phy@lists.infradead.org
-Subject: Re: [PATCH v9 2/5] phy: qualcomm: hdmi-28lpm: provide dynamic
- configuration
-Message-ID: <xrkv6tfmaccqbpf2azecbx3kowrqvysgcgvgqpg4avaggb22zv@43uwievfbkzt>
-References: <20260513-fd-hdmi-phy-v9-0-ca98c72f1f9f@oss.qualcomm.com>
- <20260513-fd-hdmi-phy-v9-2-ca98c72f1f9f@oss.qualcomm.com>
- <qxuzipnza3tzoig7xp3653vcqwgubf6zerzbgdmx5h6acof7zm@quy7xzjml7kn>
- <w6mq6a63mjzhjirvvgetcdptutkq3upa5v5kmdcezjke6rhkm3@lctdutlbnbud>
+	dkim=pass (2048-bit key) header.d=nxp.com header.i=@nxp.com header.b="OLr3KO/q"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=OpWHtbkSKxWx9mZRhApjDpjCeUSF5fc6jpoo9R2FqeRZkYnYmGtVeX4Ud7P+vmw/qoq5H1DcsW8IhYgCZaQUDhmvpJuAvY90kdbpRl34IbTGDCFvu/TrUJPKDGvuh0vBm6gqwIHj1aDhBCpPSI6hRfb8ofXqcCuqBTgf9CvKDaJpg0WhzxIMzk+BPitBJnE/jLjPz51clyNZ8RTrp3S0Ro6Rq7BHROypfwg2XPd83G4HXWLHQ0rnA5MSkG2anBh/6hRSbcSoZbrm32p0m0mPuQ3nSR7gef2tFivQlj+lHUAOJDbJBBsJ02TJ3ocHx3R8Lfn5NjZ4VnzwwDcUkBew9w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=TDQBqfrElGzeV0ezJp0CMvh+K/2sFqnix7Teimg9doU=;
+ b=COfzwIkA94CFoAnNJ/KFTDITT1n15wefrJMsSrVjWdhYTikcfBwplMhrxdWVW/fIE86D9cIOr9zrZMGq2QjpLVk1oGayddwMjPVhi1t/zSN91hDBdp/I4RCLa0WikAFAhHnsEQW8wJ92bv+PkkQBR8OwYj7onGkDAdtaISNcx8wXFwusgZXqwy2YrYKN5VfWePkg/mASd5D+tzIXmeNvQ6dG54zlxHGnnz9Z+cPXbchVMdA9s2oanaBeVIN4A0ZvX21WyYNlqtFUW3/fmKlkXHf6x6fdpdyTwfz5pViBVD79Icz0AbpODb9U42gEvwCokwztTv59KzKsXL1yfmwIXQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TDQBqfrElGzeV0ezJp0CMvh+K/2sFqnix7Teimg9doU=;
+ b=OLr3KO/q0YWyz/bI2h8nNNgBYMH6FdDb+G8gBMt/4xhH3KLpOo4XxZMWlXMNOpjEGOnzy4n8Vwq9tVW/+BCa15T+qB1dDbJC21LdxZ11QZRz14vJRiqXETBOMW2akV6mpFt/3wONYaklNCIsTA8zqu5bHO5Kc5kGs2Wt/VRC+n+WTTIM3I3zcXwQ8AKQEzekb7jA3TIO3NhwuNY70JxDfof8wfC5A3X+oX2g8eyuSI3r0YxV4jTViehnuE6jWLixBOrW9QM3wIOQezrFft7DkywVT7mLfKnDvxaJ5sjYy/+uodVsyMsSOYvgjk32t7vpMRoLQt473yqW3jYboTr3yg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+Received: from GVXPR04MB12316.eurprd04.prod.outlook.com (2603:10a6:150:2c6::8)
+ by GV2PR04MB12019.eurprd04.prod.outlook.com (2603:10a6:150:30c::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.13; Wed, 12 Aug
+ 2026 15:16:12 +0000
+Received: from GVXPR04MB12316.eurprd04.prod.outlook.com
+ ([fe80::fc6e:ca22:f065:def4]) by GVXPR04MB12316.eurprd04.prod.outlook.com
+ ([fe80::fc6e:ca22:f065:def4%5]) with mapi id 15.21.0292.024; Wed, 12 Aug 2026
+ 15:16:12 +0000
+From: Daniel Baluta <daniel.baluta@nxp.com>
+To: andersson@kernel.org,
+	konradybcio@kernel.org
+Cc: robin.clark@oss.qualcomm.com,
+	dmitry.baryshkov@oss.qualcomm.com,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	nathan@kernel.org,
+	imx@lists.linux.dev,
+	Daniel Baluta <daniel.baluta@nxp.com>
+Subject: [PATCH v4 0/3] soc: qcom: ubwc: Fix link error
+Date: Wed, 12 Aug 2026 18:19:31 +0300
+Message-ID: <20260812151934.709198-1-daniel.baluta@nxp.com>
+X-Mailer: git-send-email 2.45.2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: AS4P190CA0037.EURP190.PROD.OUTLOOK.COM
+ (2603:10a6:20b:5d1::18) To GVXPR04MB12316.eurprd04.prod.outlook.com
+ (2603:10a6:150:2c6::8)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <w6mq6a63mjzhjirvvgetcdptutkq3upa5v5kmdcezjke6rhkm3@lctdutlbnbud>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12316:EE_|GV2PR04MB12019:EE_
+X-MS-Office365-Filtering-Correlation-Id: 96b675c1-1f90-4af7-d2e2-08def884a541
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|376014|1800799024|23010399003|19092799006|18002099003|11063799006|56012099006|10067099003;
+X-Microsoft-Antispam-Message-Info:
+	qhw+ORsSUJv8V8wVxALfAZMgYFltUguuDZqcJxXdxmP+nET3252gp65AI9mwM3IOgwDL760UdGYmYRBGT57K7TA4EULy2iKvmd4XriuCJjbhMfFaTdG0wSXyTKuAbXaT7V02d6IInUi64dESNOYNURo17cvbIXF9nQbNsbx7jHyuoYnR9S27ExRqzDpsUOIqP0iXgNHLSMindXQ4vseQVI8JUitgm8KA+OYsqwDlgsxQRmkrXUHCXrOVlIdDK7l+eAMQ3pohneRzSpRulnh4824Vh5o1reENkNmdTk9+Ot8CTCQcLwTLHxUljEpxIxdRZF5UMeAQ/uYfYuzQmzOM+ihpGsi3S4SjBLPpJ+hr51RvdQi4d3TmCrylcQHWZmlnqt1NifxxXu9FEG5bcJlAu/gx+mQbkdyfZSDhft6FkRtGPV5qX/hz7OzwNIzriKo/yfEaMblCZTI0tlSYQWqbkqLNn0+0qZVq0Ay5II2ERb+EZMLdeDhyN5lb1aPk8owZdXNSLJC8qqSqG4MRL0rhk+zZrSMEFbTOfsuo8bps8VKpfODMszESBcXhcGHFhIqpFP+x3cHXmM8rIuDsOOXyNETuPBO1MklpRoQvSmMiDpg=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GVXPR04MB12316.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(23010399003)(19092799006)(18002099003)(11063799006)(56012099006)(10067099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?cRTgIfS3p7JYTHoe2mRt54BN6lBC9wBj5+XULHqH6KbyYtygIhVOrQ4WijK+?=
+ =?us-ascii?Q?Vg90ju5cj7JBz28DohlwG0CsZ/5XI0pumFBw2/6T7uHjZm3C4i0T8ZcluBXG?=
+ =?us-ascii?Q?BxWtYOJStis1DWBfzSogqGmWxKJsqyzbmmE3w7S+mx1vRqOjoqoVR7W6t+Hu?=
+ =?us-ascii?Q?QD+H8lsirVOIff8tSDnMzO/QgLEuc3l7ipDP/kSiY8TInOZi3IAFpFF4gMpV?=
+ =?us-ascii?Q?+/8CfcisrIBLxRhgpLS6eknBh7K9LgT5wgBOFN64+B0+2epdt7IEQErqYW5m?=
+ =?us-ascii?Q?rXEVb2MguMzBsp62cUhXvTFFnFZYhPFs+IdlVlgpmBWEcSw7RRkAK153FGMg?=
+ =?us-ascii?Q?A69Z+h6LDUq9Xud/3ABbhmoGMqTMty/b0cd0KkfQC+PQ6MKAt0Qwu4l2bGAW?=
+ =?us-ascii?Q?0dFpHlhXdimQuQYdT59nADBaNgGRjJal5A7U8aMy6NY6T8rsw+6mSmhI7bDU?=
+ =?us-ascii?Q?tYNM19V16SdQ/9ExDgKo2kYJNNbsKKA3BeBkvwBpmuk4TfZD4jfx2lGkN7Z/?=
+ =?us-ascii?Q?7C76zYbsjS2kHnxY4X3Er3ddLOVzbubPb2zo47euevA7C/8bA0wQO+DYELdE?=
+ =?us-ascii?Q?7517Cs5/33HK+/490AMol9hli1rRV4AYOqTVUKIa8y5IsZNF5bZCs1LW/ol8?=
+ =?us-ascii?Q?yJzdohc8m5MNBt46Ox2pZtN8myFYIDNbAX0dSHdiqZfp+eobOU9ZVagVFhYe?=
+ =?us-ascii?Q?M9BGDAl10lT25py5gY2MeI1M9Sni46b34XdGQB9dkncHzC+X75BOonhUyNjl?=
+ =?us-ascii?Q?3c7gv4McL86cDfGVOOsSDzd3sCf6Kg+j5Nbf8i3Zgca9U9Ph1zoMKCQP5tBy?=
+ =?us-ascii?Q?BL9wG9CxiyfSS+iIrl3hN4/AeTwHV3b7bXGyALv7Gs5+OauYXQ85cZC5+AWg?=
+ =?us-ascii?Q?dtVZIMW9Unx083KMXVKhdDYyiOxl7YFwL1/jVt3tHwPc3nyhlwLIFWc8517r?=
+ =?us-ascii?Q?RlDyxLLzxTyegL9S8OiA2cZ/lj7nyqvTGEsNYkCdU4DP6JQyPk33G7HRhKhO?=
+ =?us-ascii?Q?pXMRAJMxj18KD/Pk35GKPeGj3MLQGdi58/ILzhvEFg7hlheZZqzsnGvjJdK9?=
+ =?us-ascii?Q?pf+2QhKMHD1P8jjxULWjqZRztG+g44SgZhWfbJQxA4jKQsBXr2+HS5g/anSm?=
+ =?us-ascii?Q?+bNritfDDmA8fGksPX8SRNWorn0NFBjjfowqqkvRF3Z7AkDU6Vj+Xo5l/M9o?=
+ =?us-ascii?Q?vBYT0sdoq0Adcetn/1HnsvxlepGWxlGOG2qBwmjXerBKwcE5ZdA+l2vnhDeR?=
+ =?us-ascii?Q?iF/w2UjYvBwHXTqqHW2YRst78zCsC9UIyggNp4FGJocn1T94lV+kogxAgHb9?=
+ =?us-ascii?Q?FnVdgBsm2GsVoTyi8kpTMdSswU9xZq01eSxWXRz7loVE3cC33W/EUGi22H3P?=
+ =?us-ascii?Q?EGrNp7EH/M1JXvHOL1ejgcj0DALw2MA6iAjbCI3suqI47FbMt/ZlYGcu87vD?=
+ =?us-ascii?Q?oSLS3jpaUYTpfntruNku792fGdQGyTEzI93zjwTRIqXEBbFMVVeaPwVfk92/?=
+ =?us-ascii?Q?VuXmRQwYPoqrJhCSakR9NskMc8MZJYiPKc+14FdmYtqvGcY0yFJcQP34M81J?=
+ =?us-ascii?Q?bbKrwT8KHyB0ithwMTJ6iqRCj5tcpJyT+mgcbxgTRhRApQeqD04b/wPjDRUR?=
+ =?us-ascii?Q?7JBTNxS+uGoDqSn1I9Ap/DU0wGkYazdLbFUvo1NlNLxOHtNsJ4asgK4e4pQ8?=
+ =?us-ascii?Q?b6PDMAYDb/+qw98pq0C2bXbfLMxFeko02KV32S8+SBjk1jZrr5oBzMt0oiDL?=
+ =?us-ascii?Q?EPqr8HQYMA=3D=3D?=
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 96b675c1-1f90-4af7-d2e2-08def884a541
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12316.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Aug 2026 15:16:12.5997
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: wfI21PHDMwc6fdQY40qjI6J3f5hfO93YuEzMioeIsFbAxVVqD5o9tTlQMSiMJHIUWEgx1RhRe9ZnX2tuL1DrPw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR04MB12019
 
-On Wed, Aug 12, 2026 at 05:28:50PM +0300, Dmitry Baryshkov wrote:
-> On Wed, Aug 12, 2026 at 03:51:16PM +0200, Manivannan Sadhasivam wrote:
-> > On Wed, May 13, 2026 at 09:14:05PM +0300, Dmitry Baryshkov wrote:
-> > > Replace fixed value configuration tables with the values calculated at
-> > > the runtime. In some cases the values might differ from the original
-> > > values. Those were validated on the IFC6410 board.
-> > > 
-> > > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> > 
-> > One nit below. With that fixed,
-> > 
-> > Acked-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
-> > 
-> > > ---
-> > >  drivers/phy/qualcomm/phy-qcom-hdmi-28lpm.c | 325 +++++++++--------------------
-> > >  1 file changed, 104 insertions(+), 221 deletions(-)
-> > > 
-> > > -static const struct pll_rate *qcom_hdmi_8960_pll_find_rate(unsigned long rate)
-> > > +static inline void write16(u16 val, void __iomem *reg)
-> > 
-> > No 'inline' keyword in .c files please.
-> 
-> Why?
-> 
+Fix link error caused by the fact that drivers/soc/qcom/ubwc_config.c
+enabled via QCOM_UBWC_CONFIG uses unconditionally symbols from
+drivers/soc/qcom/smem.c enabled via CONFIG_QCOM_SMEM.
 
-Because the modern compilers are smarter enough to decide whether a specific
-function should be inlined or not. There is no guarantee that the 'inline'
-keyword that you pass will be honored by the compiler also, it is just a hint.
-That's why it is preferred to drop 'inline' keyword from .c files to avoid churn
-and leave the judgement to the compilers.
+Changes since v3:
+- fix issues pointed by sashiko https://sashiko.dev/#/patchset/20260812130421.670527-1-daniel.baluta%40nxp.com
+ - add new patches 2/3 in order to fix unmet dependcy for VIDEO_QCOM_IRIS
+ - Use IS_REACHABLE instead of IS_ENABLED to avoid the situation we use
+   some symbols in builtin kernel but their definitions sits in a
+module.
 
-- Mani
+Remark for Dmitry, at this point I think v1 would have been a better
+option.
+Link to v1:
+-	https://lore.kernel.org/imx/1521da8e-18df-4d7b-a255-5ca133bd5ccc@oss.nxp.com/T/#t
+
+
+
+Daniel Baluta (3):
+  soc: qcom: ubwc: Fix link error when QCOM_SMEM=n
+  media: iris: Fix unmet dependency when QCOM_SMEM=n
+  soc: qcom: ubwc: Use IS_REACHABLE() instead of IS_ENABLED()
+
+ drivers/gpu/drm/msm/Kconfig              | 2 +-
+ drivers/media/platform/qcom/iris/Kconfig | 2 +-
+ drivers/soc/qcom/Kconfig                 | 1 +
+ include/linux/soc/qcom/ubwc.h            | 2 +-
+ 4 files changed, 4 insertions(+), 3 deletions(-)
 
 -- 
-மணிவண்ணன் சதாசிவம்
+2.45.2
+
