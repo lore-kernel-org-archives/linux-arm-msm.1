@@ -1,161 +1,186 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 546AD352027;
-	Wed, 12 Aug 2026 08:19:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2D21397341
+	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 08:31:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786522747; cv=none; b=AOwKdTnppygaiIOrtdahISp5JQWukYoQZNNvu6DV9YqVhOHpGDwC9LJNYRWV7cI+VQbsah/eOG5MNqCOqcJ3uEBXHbkYG7Pi4bE1AqMp+ijMptpNyMyHD/+xI/Hsa8Rkjo3NPtwiK4+K81YCjanSKWRmxLIvesRkmYSOnP5KObI=
+	t=1786523469; cv=none; b=Qup1R9Ug387JE9BptXWyGA/9qq8sdmxW8osiCKRuu4wUHcHEZtaJolqrzsXwFpz4QGFy5gmyRfyL/RL17t/mvRfgdy378GAyeEUG2IofGRqfPImoP+xaoBxBnq01SNwKvDSJG8iQ4wXCWN2tqJMbgSwntHIPaS5kAVFlNn5xHEA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786522747; c=relaxed/simple;
-	bh=UbL3iC09wFptwQM3guce+Y0s7k/vjg+ZL4Ya8Dofdfw=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=SWIDYElpMdRCVsVW2f+SJqFlJ2Kp963eks8LdmtCeS/OJPKNCBbXMMHW5OhJSJQMebBuxuST/iy85DuN+XJQy45BiZpUtRl/UKOUHjKeNWY3c4555R196qeJWwC0fjQ5hPHOHZKcvZT1TfSom6UkjIEFaQgdJH5kt/b2KIDrN/Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Bf1R0GNV; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786523469; c=relaxed/simple;
+	bh=Au4LybUfTiqkTdTHsaRYZAfGKUJf0+c8s4BPVAExPKA=;
+	h=From:Subject:Date:Message-Id:MIME-Version:Content-Type:To:Cc; b=UvpzRRe+E7eBkKsFpaeHXW4dgJkO4lsyDRlxhpV8CP8sljisirImjJ1kmP6VxUAPsWOgf45GSxcB/FWkA5Ui1HE+JOgT9gE2h/lXYqzsZoBE75/Au4JOPCq+NJJ5WKJK5YnTDySmzyBK7nD/Hk6Ixuu2GGSQqJxafc01trfSwFQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hLoXbSrT; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=iRTNpvVx; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Bf1R0GNV"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 256A71F000E9;
-	Wed, 12 Aug 2026 08:18:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786522746;
-	bh=tg2d+uSxSfnEQ+/wwkTn7ftgs1qXWrlfLkCgiC/frqc=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Bf1R0GNVZA16GWAATXUlPxuJ4mfMJXiDCQdYgqoD7y80q/FqN0jKELPlZTl9YTSrq
-	 pLpN5vvXrB/Hpwb2Qie70vFXzOaEtxgUQfwS1VvVVj/ntwWHq8sJ4V7c4wUqra+tJl
-	 Yu7Hd+z0rnMOw9KFYuMF/fE7zPPyOoJJ+gE0mIJ27Q1qkAQ1YstVhugQlPW/8W8DAF
-	 AbLBTUPp2Un1B907c7J1kcG/3mPgE6+afRtmm6eywgjLeY/vvyoDNRVwK1xLJYBz8l
-	 BdoJ382q3izk1A2BvnJTdmKd9ULzUj4G1OsjAwisEQrhF8vecaPPNkpzWjNr7I1jAb
-	 wPgPPC2subyLA==
-Date: Wed, 12 Aug 2026 09:18:56 +0100
-From: Lee Jones <lee@kernel.org>
-To: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	Arnd Bergmann <arnd@arndb.de>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>,
-	Souvik Chakravarty <Souvik.Chakravarty@arm.com>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Andy Yan <andy.yan@rock-chips.com>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	John Stultz <john.stultz@linaro.org>,
-	Moritz Fischer <moritz.fischer@ettus.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Christian Loehle <christian.loehle@arm.com>,
-	Ulf Hansson <ulfh@kernel.org>,
-	Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Sudeep Holla <sudeep.holla@kernel.org>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-	Andre Draszik <andre.draszik@linaro.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
-	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org, mfd@lists.linux.dev,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Subject: Re: [PATCH v24 08/12] mfd: psci-mfd: Add psci-reboot-mode child cell
-Message-ID: <20260812081856.GF1072730@google.com>
-References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
- <20260803-arm-psci-system_reset2-vendor-reboots-v24-8-889281373870@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hLoXbSrT";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="iRTNpvVx"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67C62ab01720806
+	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 08:31:06 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=c1Wnzoct6vCWZ6w6VX0TjA
+	CPZO3HCWQAYpOF7tFvREQ=; b=hLoXbSrTXkxzy2L7izWyUJLxdGurvYvUSMRw+t
+	uNYBRtp+gbLJCk2PKED34dlsMVN957TvZGTWc84sZ+y4oihZZh40cWiyr9R6Ak8Q
+	4Za/8PNVIBRfOe9A5Q6n2gSbhHzrbmEDRxLMSxpRSl7dDsGFrRafIUHm/W2nnJwQ
+	RkseKCHpfS/19tJr0cfDqYpgNpvyLML7kfCZByRorqWRqxGImvmPyndoZ7B2//g9
+	0JfpaiPZRRhl1YD2+ETNqRdYjsDbiVC9UGiXtY5IgtudThPI2DRTCZ+thyZUWMaa
+	ouz3yBPfGyPvlVFUJsPAqzN6sbH5ZK+q72p49qEb6h/4DD1w==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g0hfw0x2m-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 08:31:06 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-38f5ac7354dso1017180a91.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 01:31:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786523465; x=1787128265; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=c1Wnzoct6vCWZ6w6VX0TjACPZO3HCWQAYpOF7tFvREQ=;
+        b=iRTNpvVxGTRN/VgOPZsyAePRuxlemwv903qxQOcOPi/kPZKcoptW6q+6VxkvGtkcwn
+         zCLA3tlha0UkL5EYie/uIYXT8QHsoXBMk2vfdtwpESPpW4fXOS4Tnis1AhzaXER1Iqt3
+         pMwcF1rcy5keOy0egofC/imjy4wo/9D9u79IpwgjIiyIx2xOqecO0NeHoSv0tUr3iAkV
+         ICxI3Lp5auGHIVG1n40B/C0EKFRgSskGUkgjIYBKzK902UkXsba1qpsRnxZFk9DZhLQD
+         hkzzU6guEdM59yLAN2jh6MZCtq8TqESFPr/YDWBnj5rzvjoWpAZlZWMJGuuDnoGNPJAt
+         P2HQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786523465; x=1787128265;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=c1Wnzoct6vCWZ6w6VX0TjACPZO3HCWQAYpOF7tFvREQ=;
+        b=b8gXnlWXmWr/LJdh/7773tGJz1/607Ar8NJicWkjaE/fv/NW1KrS/Qw9EAQvm/erbC
+         H8pxuHD2OAvruQgrt9p5EFAJV3Kt+iK/DUV2p4FzEaMyIhLDZZIS9r1qBBEbYZONhsik
+         74kbq9zy/iY2sHsWg1SegK2JnFnJc0LJ85jvtuU7JBEwy9AUSclXJcWxFw06HaMh/vEw
+         nuh9nz29Fg65x8ip/79gB3TmCNr+OfBDDtpFe+rA2Stju2AKUJeGTBMlMrgUaeicRavX
+         gGqbY8rARTPsLM1s0oCgf5Mh+rXuWTMyQNkwEe0/QVjNXByzcFLG4Cb8eIyTEUyQh9kA
+         vz7Q==
+X-Forwarded-Encrypted: i=1; AHgh+Rp5QtFnVYPL+aIythNbzxfaxM8cTr5R/q2ke8Sj5CNBHpsmH0PNLSoC8DjDjU3zS3+8e7OC6clj6OId4Kv1@vger.kernel.org
+X-Gm-Message-State: AOJu0YwiDfmWavXgJooaLW5wlCnAxK0p+exd8sn40K+8M8SOQAe0H9yR
+	5LvJ0Xpk6dGppc5iWVgobUjQJfpMUSEeXXUhWEFq4aWKzqyb7Zy3p/M3PbBr6YzV5FzxXQEbT1b
+	MdAFEJB84PbdkOUvKrx+cFiSQDbgsNRv1Qi+cdwzl4b20YvtPdTzQnHyjMVtiXqRgWZ4knAsPA7
+	CP
+X-Gm-Gg: AR+sD10q5jFUgbxmGpxeGfwidxfiLkT+8NQZmyNGPjoE3ySaXYELj/5ZgbXpjh5yk2v
+	Nk3Ru9GDjgcdmbwQrw1OIzV3w5H+OAULkYFR7QmWLyi4XUxkCdG9aN7PXRmjWwct8hHwg4Gn1br
+	EZE+wKXKNGAeYQ3e0f1BS45YQc5YX+QecomhrxjqB59rSqlXe6UpjrHcAo3PUvV5uV0Lv6aD2GC
+	7CsLb7hMKms+Lbr6QkVO0wp6bgzal8emE/H5kvu5loYc2hVm0rDdT3lTjDZtFGyFnxx1j6pqOi/
+	tonzZbJS7uQmfPlGNfkChpn5F4GQkci6WyyPZfN1YUVe6mNEwd6A2Ru83kv3oFZGXgVnmprnUTh
+	P/ewfpxpLuLZu58Qj0LjlBV/DjY3oEk6MnYr6eKK1RPnoXtRpxBHGzsuvkQLhQiVEFR7LK4t5no
+	/sBE4BvQQZh7zVXE8rjKxXoCgibYUhzkq62uA=
+X-Received: by 2002:a17:90b:2b45:b0:380:873:49cb with SMTP id 98e67ed59e1d1-39301834f69mr3829731a91.21.1786523465512;
+        Wed, 12 Aug 2026 01:31:05 -0700 (PDT)
+X-Received: by 2002:a17:90b:2b45:b0:380:873:49cb with SMTP id 98e67ed59e1d1-39301834f69mr3829657a91.21.1786523464910;
+        Wed, 12 Aug 2026 01:31:04 -0700 (PDT)
+Received: from hu-kathirav-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141245a9f70sm9942865c88.15.2026.08.12.01.31.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 12 Aug 2026 01:31:03 -0700 (PDT)
+From: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+Subject: [PATCH v2 0/2] I2C SCL counter updates for Qualcomm IPQ5424 SoC
+Date: Wed, 12 Aug 2026 14:00:54 +0530
+Message-Id: <20260812-ipq5424_i2c_scl_updates-v2-0-e09cd39d01d7@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260803-arm-psci-system_reset2-vendor-reboots-v24-8-889281373870@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAD8vfGoC/3WNQQqDMBREryJZN5IEFe2q9ygiyc+3pqjRfJUW8
+ e5V2203Aw9m5q2MMDgkdo1WFnBx5Hy/g7pEDBrdP5A7uzNTQmUiFzl3w5gmKqmcgoqgrebB6gm
+ J1zIrMi3SQtTA9vUQsHav8/lefplm80SYjruj0TiafHif6kUevZ9Fyr+WRXLBjbVgFCAaq2+eK
+ B5n3YLvungPVm7b9gH8J6U/1wAAAA==
+X-Change-ID: 20260808-ipq5424_i2c_scl_updates-f1696a0590fc
+To: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+        Andi Shyti <andi.shyti@kernel.org>,
+        Manikanta Mylavarapu <quic_mmanikan@quicinc.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: Mukesh Kumar Savaliya <quic_msavaliy@quicinc.com>,
+        linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
+        stable@vger.kernel.org
+X-Mailer: b4 0.15.2
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEyMDA2NyBTYWx0ZWRfX7M5k7q5nQhlK
+ NbEnjOd09jxOEqVRjWajjnxfBmtrWxKcdP+DaqA7KNVrMQ4ftJnDCtvUKbfztXMqH0JMQW+AjPL
+ 49dz75dAxt0sxynBeaKJ23Qdgemsw+A=
+X-Proofpoint-GUID: KJATXGIPTyZCZP5Nzx_c_edJKsIHknYp
+X-Authority-Analysis: v=2.4 cv=fpDsol4f c=1 sm=1 tr=0 ts=6a7c2f4a cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=COk6AnOGAAAA:8
+ a=cGTXhytWI82EO-564y4A:9 a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22
+ a=FO4_E8m0qiDe52t0p3_H:22 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-ORIG-GUID: KJATXGIPTyZCZP5Nzx_c_edJKsIHknYp
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEyMDA2NyBTYWx0ZWRfX6WQpLteqjuUx
+ HJN7GbgNgMEPzaksazEjlYV46sZtlu5yxAFSqSjDsq9mK5PmvLtoYH4SOz+UF+3zbXWp6qM/+iW
+ rBhr7qCM2RIwLDZlR/HoM0bz75tC7ruMHCw7FamVAbm033jwzMi18djrkF6op2buxrhcxn1IXxl
+ kykENbvM5qkDH7nU/8ADaWSC9G9Hrvo4woaY4Vl50CtZCEszFNR3n44TDao0QPBLH5cvOAqETu2
+ 707OzPPrJRcs4N0UYcPYyI1JzAF2Ed+g0b4jAfnarv+EkVf9jaswBnCOKeNAnmnI7TmHFvmo/JW
+ PwuqZCWKOdtIjSjsqniFb8KF05MYJQFpPIQ/6+3xieZebmON4XnXApLaxMI2fldqEUORguW6WAa
+ gXA4dGeAJ1JxubdctB5eQKrlj6RPqk6hy7T254myapfsckRK3UBnpdM04CWMZrSQmnGud9rqa8r
+ 8CQbTZ3h0+t5i3YQglw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-12_02,2026-08-10_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 priorityscore=1501 spamscore=0 impostorscore=0
+ lowpriorityscore=0 suspectscore=0 adultscore=0 malwarescore=0 phishscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608120067
 
-On Mon, 03 Aug 2026, Shivendra Pratap wrote:
+To meet the specification requirement in the standard-mode bus frequency,
+update the SCL counters as recommended by the design team.
 
-> The PSCI "reboot-mode" node does not define a compatible because it is a
-> configuration of boot-states provided by the underlying firmware. With
-> the new firmware-node based cells in mfd-core, this node can now be
-> exposed as a proper child cell.
-> 
-> Add the psci-reboot-mode child cell to the psci-mfd driver with a
-> named_fwnode. Add psci-cpuidle-domain cell first to isolate it from
-> reboot-mode failures.
-> 
-> Suggested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-> ---
->  drivers/mfd/psci-mfd.c      | 27 ++++++++++++++++++++++++++-
->  drivers/power/reset/Kconfig |  2 +-
->  2 files changed, 27 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/mfd/psci-mfd.c b/drivers/mfd/psci-mfd.c
-> index 7affd6bb09dd..7befc4fa86f5 100644
-> --- a/drivers/mfd/psci-mfd.c
-> +++ b/drivers/mfd/psci-mfd.c
-> @@ -14,10 +14,35 @@ static const struct mfd_cell psci_cells[] = {
->  	},
->  };
->  
-> +static const struct mfd_cell psci_reboot_mode_cell[] = {
-> +	{
-> +		.name = "psci-reboot-mode",
-> +		.named_fwnode = "reboot-mode",
-> +	},
-> +};
-> +
->  static int psci_mfd_probe(struct platform_device *pdev)
->  {
-> -	return devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO, psci_cells,
-> +	int ret;
-> +
-> +	ret = devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO, psci_cells,
->  				   ARRAY_SIZE(psci_cells), NULL, 0, NULL);
-> +	if (ret)
-> +		goto out;
-> +
-> +	ret = devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO,
-> +				   psci_reboot_mode_cell,
-> +				   ARRAY_SIZE(psci_reboot_mode_cell),
-> +				   NULL, 0, NULL);
-> +	if (ret) {
-> +		if (ret == -ENOMEM)
-> +			goto out;
-> +		dev_warn(&pdev->dev, "reboot-mode child cell failed to add: %d\n", ret);
+IPQ5424 uses 32MHz source clock for the I2C and I2C is supported on both
+RTL-hardened and firmware based SEs. The driver already provides SCL timing
+parameters for a 32 MHz source clock, but the resulting I2C bus frequencies
+do not meet the required specification on firmware-based SEs.
 
-Okay Yoda, but why is this okay?
+As recommended by the hardware design team, use a separate set of SCL
+timing parameters for firmware-based SEs. Introduce a dedicated
+frequency table and select the appropriate table based on the SE type.
 
-Needs a comment.
+Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+---
+Changes in v2:
+- Reworded the commit message to provide more background
+- s/geni_i2c_clk_map_32mhz/geni_i2c_clk_map_32mhz_minicore/
+- Link to v1: https://patch.msgid.link/20260811-ipq5424_i2c_scl_updates-v1-0-bddcb2ceebda@oss.qualcomm.com
 
-> +		ret = 0;
-> +	}
-> +
-> +out:
-> +	return ret;
->  }
->  
->  static const struct of_device_id psci_mfd_of_match[] = {
-> diff --git a/drivers/power/reset/Kconfig b/drivers/power/reset/Kconfig
-> index 143f3260f04a..1810482d52e6 100644
-> --- a/drivers/power/reset/Kconfig
-> +++ b/drivers/power/reset/Kconfig
-> @@ -362,7 +362,7 @@ config NVMEM_REBOOT_MODE
->  
->  config PSCI_REBOOT_MODE
->  	bool "PSCI reboot mode driver"
-> -	depends on ARM_PSCI_FW || COMPILE_TEST
-> +	depends on (ARM_PSCI_FW && MFD_PSCI) || COMPILE_TEST
->  	select REBOOT_MODE
->  	help
->  	  Say y here will enable PSCI reboot mode driver. This gets
-> 
-> -- 
-> 2.34.1
-> 
+To: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>
+To: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
+To: Andi Shyti <andi.shyti@kernel.org>
+To: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+To: Manikanta Mylavarapu <quic_mmanikan@quicinc.com>
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+Cc: Mukesh Kumar Savaliya <quic_msavaliy@quicinc.com>
+Cc: linux-i2c@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
 
--- 
-Lee Jones
+---
+Kathiravan Thirumoorthy (2):
+      i2c: qcom-geni: update frequency table to fix timing parameters
+      i2c: qcom-geni: add I2C frequency table for 32 MHz firmware-based SEs
+
+ drivers/i2c/busses/i2c-qcom-geni.c | 29 ++++++++++++++++++++---------
+ include/linux/soc/qcom/geni-se.h   |  1 +
+ 2 files changed, 21 insertions(+), 9 deletions(-)
+---
+base-commit: 3d08ff75a47a3e7e2ab45a3bcab6723b4d906422
+change-id: 20260808-ipq5424_i2c_scl_updates-f1696a0590fc
+
+Best regards,
+--  
+Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+
