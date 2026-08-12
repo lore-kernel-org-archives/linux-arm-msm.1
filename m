@@ -1,75 +1,70 @@
-Received: from mail-ed1-f42.google.com (mail-ed1-f42.google.com [209.85.208.42])
+Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEC743B2FE4
-	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 08:35:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 360293C5837
+	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 08:35:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.42
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786523728; cv=none; b=mK7o/hki0lAssa8cGfcF8CioviadwkEakruGy749WU84dnmTQV24nYkOKvE+rR1Cdz1/4i4Vk1RZpK72BJjAeWiozcw8k71nwgxRocpAswq87XxhVHfyzMMdJv0w08oh7W/nBXmVp1yY+Q0t43SyxRn47BYGYxFqOmHBB+2Ri+Y=
+	t=1786523729; cv=none; b=JF1D8M6OPms3B8dfdmSxjLq6/EF3h9KkXn/u18XWFB0FkFD6N+/4vkdlJh1OXyFjuaKiduxFjQAyNZeW2IN5lcNXcQAHnhQk4s/AKK3KEaUDstc/hfnqRcjP90l/7wcxfH73nZg5C8gzg8cB3ErHH9K5fnlSslYkGT66AepMgog=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786523728; c=relaxed/simple;
-	bh=cqG43RastOfbvH6w96O4b4xl8uiCleEcq5Xpxvn+9MA=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=rmhBZQGPK9xB0e37Kns8g7Kkbo632h2cwTAaFscrbV1HiW2u9uprESkY5EQHcPj6tdY23q0MSjj6cmwChVnvIqLyUaX49GUgKQzZoKUUxxyaUyfgr0HX4TL6yuyLb1gD/iuiKqlLwgeuaT75PcFNaGo+P7iGPJpvBjih1mPdL9A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ferrisoft.com; spf=pass smtp.mailfrom=ferrisoft.com; dkim=pass (2048-bit key) header.d=ferrisoft-com.20251104.gappssmtp.com header.i=@ferrisoft-com.20251104.gappssmtp.com header.b=Y1++UjdR; arc=none smtp.client-ip=209.85.208.42
+	s=arc-20240116; t=1786523729; c=relaxed/simple;
+	bh=sfM0Q9yvam7vJKzIzBC5V31XobNOFN6MyervKypnVnQ=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=fGr8pqF04M1EM/mXRpBsvx9pFfdND/VwOCYVh91BCbvJI9kevmfHG2mp/z3HcucfyuEjysgwraT/fDCax1Tt9y0V+f6StDSfKp09RN8fTPUgAUsWA07hg//CyJy7dcps+4gtEZC1JCtvmX3Y2H9wEXpJPcbxEzYcjUc1jS6No/s=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ferrisoft.com; spf=pass smtp.mailfrom=ferrisoft.com; dkim=pass (2048-bit key) header.d=ferrisoft-com.20251104.gappssmtp.com header.i=@ferrisoft-com.20251104.gappssmtp.com header.b=aZGu/s1h; arc=none smtp.client-ip=209.85.218.42
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ferrisoft.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ferrisoft.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ferrisoft-com.20251104.gappssmtp.com header.i=@ferrisoft-com.20251104.gappssmtp.com header.b="Y1++UjdR"
-Received: by mail-ed1-f42.google.com with SMTP id 4fb4d7f45d1cf-6a15d54ac95so1209471a12.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 01:35:26 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=ferrisoft-com.20251104.gappssmtp.com header.i=@ferrisoft-com.20251104.gappssmtp.com header.b="aZGu/s1h"
+Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-c20363107f4so65476066b.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 01:35:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ferrisoft-com.20251104.gappssmtp.com; s=20251104; t=1786523725; x=1787128525; darn=vger.kernel.org;
+        d=ferrisoft-com.20251104.gappssmtp.com; s=20251104; t=1786523726; x=1787128526; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=9o2WwbPBuxQI9iQJan0AFCDUf8L9NpbwwZeyQ4c2g8I=;
-        b=Y1++UjdR74kYbbPejrUYC3tQ8Rkp585vszrzaPbBTrug4E4H/OARb984mOXcvn4I4U
-         0zK7fxOoLxVJilZQatkLUOW1MhGg9F2VHasbaHQhYNzDHtw48mn9whGmQ1wbJgPVduMv
-         xkqLssCZaYw9J7w9O0iOQj3k7J0So3xDSKIt16z4015zedUwZq68iI5jgWAwL6DtAhdJ
-         7oEB3CKIcKyOKY3+diRkwGHATpdeiaB7OG9uIrGD3/AmkqMYJgkkIl9e6ccrdGisBStO
-         ou+rUOVmrYmSV6NuMeOpzzw9/oO/eTUf4SUy+La3ffGhCI4hwBdhIU1d0FK4TaHySXMj
-         Ia2Q==
+        bh=SRz8d2LTz7ANuvcE3cpzl7cgImiMYk6eSb5mmpK68cA=;
+        b=aZGu/s1hZDUpURDOYrx2jRYTvrAilWJD+djzQ/NeeX0LdESO9tLlORJmk/qee++11S
+         kH7D9UkrCfm6x+dplwLRucIWr0gCIST3ijto8ZlCEmZXxQm6sZfArYTv6rSlgtbuZbNv
+         GIcpqMG7kFsAurCLQ4a5To0/eyPHeR8ufecDZozs6/rp+NhXoll7nHwSfWUBYe8DMen1
+         5F0zp//EDIcSoyL41uBwgJLsxmLVM8EMajLO4Nwv1ndDFZP9s5kAXYKL1/uPT5JiRdrI
+         h2VIcbZU5LcH1olkoIhp/qVFEfaQG8DqDSltjWTgxt5WxMzjAGGsNnfjbfpOABI8fM54
+         qfbw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786523725; x=1787128525;
+        d=1e100.net; s=20251104; t=1786523726; x=1787128526;
         h=content-transfer-encoding:mime-version:message-id:date:subject:cc
          :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=9o2WwbPBuxQI9iQJan0AFCDUf8L9NpbwwZeyQ4c2g8I=;
-        b=M7Yx6PrK9DktmU837bilZB/Sc82L+G6jD3xi2cOlRcyC0nDZ7NKVkmbpl+N4nync+A
-         XSw15bj+sNr/yr7SVy+X07itecSP9dtKbGb47C9mR/NLwBuEyD+YrZSod486lRsRYNCI
-         vLMIME4WRbigo09162FEsixXL6K/B4xxbZM95y02iLX3tZYRPgkffd4ZosknDopKsWq8
-         Lz1Ftv3ituOUezpKp/c2L1tyuAzMKI1COrm2gxj2o2DV04vROBOkz414CUzLfcrG03+p
-         vbGg+fpp91s1TeVOabSfU1MxvcDxGjKGhbCw0N3es1vj+lkcHtAZ37U2QGG00YAJSvpQ
-         2Pug==
-X-Forwarded-Encrypted: i=1; AHgh+RoMKtkBPi0uhn6lWVqsIZlSPL46ANgp43F8dD2js0JfJgLW0cCioSRR7reURftANrvDGcUedRfgvTxbjuvd@vger.kernel.org
-X-Gm-Message-State: AOJu0YzQKxewu2UNd+jRzGMhjFsjiX1Gjv+72SepcKEY7vhLqgq3SKBV
-	dTH9ME360RiTD+b0ki5W7p6qrsY6C0J8mU1Hjo/8eZAsK12tMiCYNT0x2uvt6MxMhb9u
-X-Gm-Gg: AR+sD10Gc/SWyVd9OP0e2RMjXGx21SQLbpWk2GM6EOGCdMysbusN9ycV0oPLVpTL+iN
-	m+8uVkfOnQo81PEYGEwkQMdVls9/q+1Hyv4Pwn/50WsPMkrnBXhPBz39AT1Vj6BM7eaFrSUjatP
-	QGAf/KmKPpootuh8/UMI6QkRGT6GU2mpkNj0ZahurAZh22RTBMkbb/No0GR2RDrBYJkGPzna9QD
-	cDUCCvJkI2z7YeirKT2Kr+QUf+RIMm2k5GKSy5WMFzZbbL408ixJBwPCO/1UU2Op929dCHh2HN8
-	avARTJtIzTj4FzCxRJ/C/ih1a3QDQuJYxbhAaVetF+D/Fj0icaMTNvsH9eEfB9f6hxnJOnyeLsg
-	FRQuxK4gC1aqdsvBP5jw8PV/0m5CIkNXJocXi3YTToiEkGIRkVt161vdZTQ0zRu9+LgJFtlW++m
-	0fU7B5oxgcGBXVLx+CqIo3QiwMEFlSS2X559V6FNotNmsQqXY0Hwt5Pok+Gd88UNZjMZZt29ZQ/
-	ZuZBd5DQy9pEY3kCCldwA==
-X-Received: by 2002:a05:6402:2425:b0:69f:4c65:86c2 with SMTP id 4fb4d7f45d1cf-6a375ea2e26mr1360779a12.2.1786523724542;
-        Wed, 12 Aug 2026 01:35:24 -0700 (PDT)
+        bh=SRz8d2LTz7ANuvcE3cpzl7cgImiMYk6eSb5mmpK68cA=;
+        b=cPnA+tGco884EQ/3/AVc9S6hz/bsKVrl2sy0JHvpOMZyK0NNGjqalOPXnOLQ+nLJxu
+         fTvCIL0rdBzDYm9hXTtsJIK7l3PWoVhvWtwIgB9mx00M5tQjV6jw69dFgFoykZ5FkwYu
+         H1unm73ge6FreYhXSxYVIfbkFoi/2DnzbHhxL9lS0lRzIdcuUXuqG+rhrQaPmP4wzc0g
+         BK8+f9BLmYUCOZKzAOrDP2Ed7oxWyG2g4OoQuq5oVP/fFBfgUVT4u8YhRGVJ+Z1iprWj
+         BmpwObvrmDWXOooj0VW3l0zWIGhSZ3rPJBMMpKNvnza8uAn4IU0J3V20RVAkmd8uJy12
+         Nv/w==
+X-Forwarded-Encrypted: i=1; AHgh+RpnoAAs6vwW9mSCdb0b4/8rPb46cgczc91qcKPNaEZTOo72428jaVX2yALJ6yTzenskX5sBmSSlkdSUNjAH@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx90/UBiaA2VgXr0hw0e/qgQc9zyK5KByAv0n9XD/KPGZlekGHw
+	H56bRb+749jPDxznCfjhHKJmrPntjHcQWcwDogyKEfCMdxVsbusVEfs9sGAEfug7zIol
+X-Gm-Gg: AR+sD13t6GowLvvTnQiYUosp2H9DyWroFZjhA1b7jk4mA0gtLCOPio2dfHILVdH9A4K
+	TMHh1zfHWWKaj5AUSQePflw7rPB5wnz7dpuOOyZiR1rUA4k1aAiQbgX8istM3N/vvE8Z5PercRJ
+	rqMkElOa6D4O39+YdarL0i6Jbw5lz330Y4NbiKS8NYm9ytj48JYxhlBGKzuigHh71tYWUz6av4B
+	/OjSXQ1tNV15aHAG4E4gNClh/KtmHgSlg5K6whXWrIMLjlArFxgJWTRLRT+En4lkGdv/sf0bB9j
+	bTbhBpuEuWnhsvrrjmayO6rhcb3xR+4YDeUe1LjPDGKVFAVcexc5GhWAGSWw5cmJQrdSDSeIGeA
+	Q3Anp96yvEnpIZbydj7CCQFFkS1YSkR3Dz6o6P+gh6cJZDhiAjg1ywX73mUEGia7Z7SPPOzrtUs
+	fPjGgH5fy53JRjZ6K/uRMw/9V6KHuYsv8yQehZMui6H2LNew1EAAqZOlBye+5rNLTnpyaJQnlVf
+	Uw1nkd04ot8aV+C
+X-Received: by 2002:a17:907:9616:b0:c15:f65a:43a8 with SMTP id a640c23a62f3a-c20f2e63327mr160127766b.12.1786523726105;
+        Wed, 12 Aug 2026 01:35:26 -0700 (PDT)
 Received: from zenbook (45-11-61-69.ip4.greenlan.pl. [45.11.61.69])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a376891e77sm434527a12.5.2026.08.12.01.35.22
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c20f0749337sm64174966b.7.2026.08.12.01.35.25
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2026 01:35:24 -0700 (PDT)
+        Wed, 12 Aug 2026 01:35:25 -0700 (PDT)
 From: Greg Ociepka <greg@ferrisoft.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] arm64: dts: qcom: glymur: Add missing USB clock, power and bandwidth votes
-Date: Wed, 12 Aug 2026 10:35:22 +0200
-Message-ID: <20260812083522.774711-1-greg@ferrisoft.com>
+To: Konrad Dybcio <konradybcio@kernel.org>
+Cc: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	linux-arm-msm@vger.kernel.org
+Subject: glymur/UX3607OA: usb_1 SS root port fails link training with hubs, trains Gen2x1 devices fine
+Date: Wed, 12 Aug 2026 10:35:24 +0200
+Message-ID: <20260812083524.775042-1-greg@ferrisoft.com>
 X-Mailer: git-send-email 2.54.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -79,174 +74,64 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The four USB3 controller nodes on Glymur (usb_0, usb_1, usb_2, usb_mp)
-are missing three property groups that Glymur's own usb_hs node at
-a200000 already carries, and that Hamoa (x1e80100) carries on all five
-of its USB controllers:
+Hi,
 
-  - assigned-clocks / assigned-clock-rates
-  - required-opps
-  - interconnects / interconnect-names
+On the Asus Zenbook A16 (UX3607OA, X2 Elite Extreme), the SuperSpeed
+root port of usb_1 (a800000) cannot bring up a link to any hub, while
+the same port trains a directly attached Gen2x1 device at 10 Gbps
+without a single error. The same hub works fine on usb_0 (a600000).
+Under Windows the port drives the same hub normally.
 
-Without required-opps the controllers place no performance state vote
-on their power domain. Measured on an Asus Zenbook A16 (UX3607OA) with
-a SuperSpeed device enumerated, CX aggregates to SVS while the
-controllers run their master clock at 200 MHz:
+Kernel: next-20260730 plus your A16 series and the three later glymur
+fixes cherry-picked (e78c5e9d79e3, 5ac32106d3c2, 1b0b6ddd0299), plus
+the USB vote patch I just sent separately ("arm64: dts: qcom: glymur:
+Add missing USB clock, power and bandwidth votes").
 
-  $ grep -E "^cx " /sys/kernel/debug/pm_genpd/pm_genpd_summary
-  cx    on    128
+Reproducer (~20 s): plug a USB-C adapter containing a SS hub into each
+Type-C port in turn. Ours enumerates as Terminus 1a40:0101 (USB2 hub) +
+VIA 2109:0817/2817 + Billboard 25a4:9321; a VL817-based dock shows the
+same behaviour. No monitor attached, so all four SS lanes are available
+to USB3 on both ports.
 
-  $ grep "usb30.*master_clk " /sys/kernel/debug/clk/clk_summary
-  gcc_usb30_sec_master_clk   ...  200000000
-  gcc_usb30_prim_master_clk  ...  200000000
-  gcc_usb30_mp_master_clk    ...  200000000
+  usb_0: SS hub + downstream devices at 5 Gbps, clean
+  usb_1: HS half of the hub enumerates fine, SS root port fails
 
-128 is RPMH_REGULATOR_LEVEL_SVS; rpmhpd_opp_nom is 256. With this
-patch applied the same measurement reads 256 while a controller is
-active.
+Interestingly the failure signature depends on the CX performance
+state. Before the vote patch (CX aggregating to SVS), the SS port never
+reaches U0:
 
-Without interconnects, dwc3_qcom_interconnect_init() silently does
-nothing: of_icc_get() returns NULL rather than an error pointer for a
-device without the property, so probe succeeds and icc_set_bw() on a
-NULL path is a no-op. No USB-DDR bandwidth is ever requested.
+  usb usb6-port1: Cannot enable. Maybe the USB cable is bad?  (x8)
 
-Without assigned-clock-rates nothing programs the master clock RCG,
-which keeps whatever the bootloader left behind. On this machine that
-happens to be the correct 200 MHz, but ftbl_gcc_usb30_mp_master_clk_src
-also allows 66.67 and 133.33 MHz, neither of which sustains SuperSpeed.
+With the vote patch applied (CX at NOM while the controller is active),
+link training gets further - the port reaches U0 and the failure moves
+to the first control transfer:
 
-Add all three groups to the four nodes, mirroring usb_hs. The
-interconnect paths follow the provider layout in
-drivers/interconnect/qcom/glymur.c: usb_0/usb_1 sit on aggre4_noc,
-usb_mp on aggre3_noc and usb_2 on aggre2_noc.
+  usb 4-1: Device not responding to setup address.  (x2)
+  usb 4-1: device not accepting address 2, error -71
+  usb usb4-port1: Cannot enable. Maybe the USB cable is bad?
 
-Fixes: 4eee57dd4df9 ("arm64: dts: qcom: glymur: Add USB related nodes")
-Assisted-by: Claude:fable-5
-Signed-off-by: Greg Ociepka <greg@ferrisoft.com>
----
-Note for reviewers: Hamoa additionally marks all five USB controllers
-dma-coherent, while Glymur marks no peripheral DMA master as coherent
-(only the SMMUs, PCIe controllers and remoteprocs). That difference is
-deliberately not touched here since getting it wrong is a silent
-data-corruption class of bug, but it looks like part of the same
-omission. Is USB DMA coherent on Glymur?
+A directly attached SanDisk Extreme SSD trains SuperSpeed Plus Gen 2x1
+on this same port and transfers normally in both configurations, which
+is what makes this odd - a marginal link would be expected to fail the
+faster mode first.
 
---- a/arch/arm64/boot/dts/qcom/glymur.dtsi
-+++ b/arch/arm64/boot/dts/qcom/glymur.dtsi
-@@ -4572,6 +4572,10 @@
- 				      "noc_aggr_north",
- 				      "noc_aggr_south";
- 
-+			assigned-clocks = <&gcc GCC_USB30_PRIM_MOCK_UTMI_CLK>,
-+					  <&gcc GCC_USB30_PRIM_MASTER_CLK>;
-+			assigned-clock-rates = <19200000>, <200000000>;
-+
- 			interrupts-extended = <&intc GIC_SPI 140 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&intc GIC_SPI 371 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&pdc 90 IRQ_TYPE_EDGE_BOTH>,
-@@ -4584,9 +4588,18 @@
- 					  "ss_phy_irq";
- 
- 			power-domains = <&gcc GCC_USB30_PRIM_GDSC>;
-+			required-opps = <&rpmhpd_opp_nom>;
- 			resets = <&gcc GCC_USB30_PRIM_BCR>;
- 
- 			iommus = <&apps_smmu 0x1420 0x0>;
-+
-+			interconnects = <&aggre4_noc MASTER_USB3_0 QCOM_ICC_TAG_ALWAYS
-+					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
-+					<&hsc_noc MASTER_APPSS_PROC QCOM_ICC_TAG_ACTIVE_ONLY
-+					 &config_noc SLAVE_USB3_0 QCOM_ICC_TAG_ACTIVE_ONLY>;
-+			interconnect-names = "usb-ddr",
-+					     "apps-usb";
-+
- 			phys = <&usb_0_hsphy>,
- 			       <&usb_0_qmpphy QMP_USB43DP_USB3_PHY>;
- 			phy-names = "usb2-phy",
-@@ -4647,6 +4660,10 @@
- 				      "noc_aggr_north",
- 				      "noc_aggr_south";
- 
-+			assigned-clocks = <&gcc GCC_USB30_SEC_MOCK_UTMI_CLK>,
-+					  <&gcc GCC_USB30_SEC_MASTER_CLK>;
-+			assigned-clock-rates = <19200000>, <200000000>;
-+
- 			interrupts-extended = <&intc GIC_SPI 875 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&intc GIC_SPI 369 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&pdc 88 IRQ_TYPE_EDGE_BOTH>,
-@@ -4660,9 +4677,17 @@
- 
- 			resets = <&gcc GCC_USB30_SEC_BCR>;
- 			power-domains = <&gcc GCC_USB30_SEC_GDSC>;
-+			required-opps = <&rpmhpd_opp_nom>;
- 
- 			iommus = <&apps_smmu 0x1460 0x0>;
- 
-+			interconnects = <&aggre4_noc MASTER_USB3_1 QCOM_ICC_TAG_ALWAYS
-+					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
-+					<&hsc_noc MASTER_APPSS_PROC QCOM_ICC_TAG_ACTIVE_ONLY
-+					 &config_noc SLAVE_USB3_1 QCOM_ICC_TAG_ACTIVE_ONLY>;
-+			interconnect-names = "usb-ddr",
-+					     "apps-usb";
-+
- 			phys = <&usb_1_hsphy>,
- 			       <&usb_1_qmpphy QMP_USB43DP_USB3_PHY>;
- 			phy-names = "usb2-phy",
-@@ -4723,6 +4748,10 @@
- 				      "noc_aggr_north",
- 				      "noc_aggr_south";
- 
-+			assigned-clocks = <&gcc GCC_USB30_TERT_MOCK_UTMI_CLK>,
-+					  <&gcc GCC_USB30_TERT_MASTER_CLK>;
-+			assigned-clock-rates = <19200000>, <200000000>;
-+
- 			interrupts-extended = <&intc GIC_SPI 871 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&intc GIC_SPI 370 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&pdc 89 IRQ_TYPE_EDGE_BOTH>,
-@@ -4736,9 +4765,17 @@
- 
- 			resets = <&gcc GCC_USB30_TERT_BCR>;
- 			power-domains = <&gcc GCC_USB30_TERT_GDSC>;
-+			required-opps = <&rpmhpd_opp_nom>;
- 
- 			iommus = <&apps_smmu 0x420 0x0>;
- 
-+			interconnects = <&aggre2_noc MASTER_USB3_2 QCOM_ICC_TAG_ALWAYS
-+					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
-+					<&hsc_noc MASTER_APPSS_PROC QCOM_ICC_TAG_ACTIVE_ONLY
-+					 &config_noc SLAVE_USB3_2 QCOM_ICC_TAG_ACTIVE_ONLY>;
-+			interconnect-names = "usb-ddr",
-+					     "apps-usb";
-+
- 			phys = <&usb_2_hsphy>,
- 			       <&usb_2_qmpphy QMP_USB43DP_USB3_PHY>;
- 			phy-names = "usb2-phy",
-@@ -4869,6 +4906,10 @@
- 				      "noc_aggr_north",
- 				      "noc_aggr_south";
- 
-+			assigned-clocks = <&gcc GCC_USB30_MP_MOCK_UTMI_CLK>,
-+					  <&gcc GCC_USB30_MP_MASTER_CLK>;
-+			assigned-clock-rates = <19200000>, <200000000>;
-+
- 			interrupts-extended = <&intc GIC_SPI 132 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&intc GIC_SPI 345 IRQ_TYPE_LEVEL_HIGH>,
- 					      <&intc GIC_SPI 346 IRQ_TYPE_LEVEL_HIGH>,
-@@ -4894,9 +4935,17 @@
- 
- 			resets = <&gcc GCC_USB30_MP_BCR>;
- 			power-domains = <&gcc GCC_USB30_MP_GDSC>;
-+			required-opps = <&rpmhpd_opp_nom>;
- 
- 			iommus = <&apps_smmu 0xda0 0x0>;
- 
-+			interconnects = <&aggre3_noc MASTER_USB3_MP QCOM_ICC_TAG_ALWAYS
-+					 &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
-+					<&hsc_noc MASTER_APPSS_PROC QCOM_ICC_TAG_ACTIVE_ONLY
-+					 &config_noc SLAVE_USB3_MP QCOM_ICC_TAG_ACTIVE_ONLY>;
-+			interconnect-names = "usb-ddr",
-+					     "apps-usb";
-+
- 			phys = <&usb_mp_hsphy0>,
- 			       <&usb_mp_qmpphy0>,
- 			       <&usb_mp_hsphy1>,
+Ruled out by measurement on this machine:
+
+  - master clock rates: all three gcc_usb30_*_master_clk at 200 MHz
+  - TCSR_USB4_1_CLKREF_EN: enabled, hw gate on, 19.2 MHz
+  - swapped vdda-phy/vdda-pll (the glymur-crd issue Mani fixed): this
+    board has them correct (0.91-0.94 V phy, 1.2 V pll)
+  - DP altmode interference: no altmode entered, Billboard shows up on
+    both ports, DP-1/DP-2 disconnected throughout
+  - USB_QUIRK_NO_LPM on the VL817 SS half: the quirk never gets a
+    chance to apply since the SS device never enumerates
+
+The one asymmetry we know of is the QMP PHY reference clock source:
+usb_0_qmpphy takes RPMH_CXO_CLK directly while usb_1_qmpphy takes
+TCSR_USB4_1_CLKREF_EN (per 12c97d1c15f9 that matches the HW design).
+Is there anything else that differs between these two ports on the SiP
+package that would be worth poking at? Happy to test patches or gather
+more data - the machine reproduces this on demand.
+
+Thanks,
+Greg
