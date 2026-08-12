@@ -1,38 +1,38 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1A49140DB37;
-	Wed, 12 Aug 2026 09:34:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B3B540DB4E;
+	Wed, 12 Aug 2026 09:34:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786527285; cv=none; b=tUSSlRu+Ul4B8splHi1GXxwMsuIGW8grrtaDqHw8+t/YSp6bZYjG/u50DBHHgQ5HzmR/e+LzC465byu0P1OVG/vvuXADJwJZbMdfZBPJN823RR1arZ5NCumfyIr+cv+1LzjCE7oXl/hfbWHgZFfg8CjVDVYtoxtbnqol9x74nTs=
+	t=1786527285; cv=none; b=Nz3ToMkpQv5yUmQfe1czs8NMjv+Spd7esmRJCIbhDpWtfzYqzdH0yj++R8FjcrI+O1AddvWNFxPTiW9bF7Y9muVho9lX8/Oh1zPEnA6wdcoa0xsqhENYW2pDzub3+qaxCVaSI9VCk3ehOix73hNBDDkitkVqIIwy0+YOTbfH/Ro=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1786527285; c=relaxed/simple;
-	bh=LSfYikDoqHEoxEu2HqS9POp3ebLZgDBY+1ET9FV+7jA=;
+	bh=XGGg+wneQatG/AQkDerc/plwjABYtPGtPSkFlQvT5xg=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=SE9dsBpG/xV32EJrz6OPBhICF6lS6/K1ZLiNg++zStVMnpvWvl7GVdIydwo3XBnuC6dI34IkaARjH6wj1siWL4i3i3A8Ecg//AtNDAOGzxgLf9E13kBFMfzlAxSqzyq6EmYc2KTpXkxLBGDKmKxIN2k8DHKlqK9+eEPuyHbtuKw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=SlO2V2DX; arc=none smtp.client-ip=10.30.226.201
+	 In-Reply-To:To:Cc; b=EypcxGA8Sd4LHNtLSuR72QAWKPZV94YeNn3pAoUTeZ/EsC0O913llpNP35rfuFl8u9WCw85Gbr0hwuQ0Agr4sFHD5WdU2xU1OfBhO2/m4n1TcNCa6TYNarrOa9alqvjpz1Wnqw6MYJ7ayEEVMf0eJSB7zSBE5sp/JdlipqIKXPU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JPYqgSFR; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="SlO2V2DX"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 9F488C2BCF7;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JPYqgSFR"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id C451CC32781;
 	Wed, 12 Aug 2026 09:34:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1786527284;
-	bh=LSfYikDoqHEoxEu2HqS9POp3ebLZgDBY+1ET9FV+7jA=;
+	bh=XGGg+wneQatG/AQkDerc/plwjABYtPGtPSkFlQvT5xg=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=SlO2V2DXA2WXDdzKd2Zmw2BlmlFZqk0P8voEk7AmA5CHvp1hUq4PtnTyDUMtq0PXr
-	 oXfP993ZNSrjJ8PwjYhXtSajqBIvDw5DJOokgouCMLvkCeBkyuxEmMeuaiyMV2GSik
-	 2nWKwZOje/YzuXdK8GRyLyyJzT14eOgj2wCtd4yU0ygbGH7dVshsqpcj/a1eHnijlW
-	 /na8PIrWDCrgCZSr/OoRF8xamlKrxsVruz3DDfN1aZKFLrjuqq8rhBvIUx6C+XJFa8
-	 NiaaE63HAaQwwlYltLMAzGF6qEtKdFczPL9f6z9k/uSWv+9MNWH4pI8prrjT8DXFZj
-	 R27zH24ylN7Gw==
+	b=JPYqgSFRPN4RWJcYIe9epi6b+3tX5uK7DxEraidISs+195I1IMhI3MdL4qssPUY6x
+	 6Fh5+EWVcLKGQF7DZwDJlypnwK6OBcYr2TJ6Pb9j8j61PtfTOtMrRb/CLFIGUHP/hO
+	 MnfIEn404GILL4oy2ITNCUcmsvNE1zEOU0mKs3hI/Mx1XwUOIKyr5tryc3vTTRfWqG
+	 eU7bNlJZ/2B9MHEfsgdUkGct4M0f6DO+jtA1d8M8+WkOV1bLeRBkOptCS++QqxH9cA
+	 zHZi9xDdZO1UydoKsPKFhAAFNsQDW1VuglhHlfBDVsgXZ2/3UlF+o60PKnkZ2xFhTL
+	 Chg9boJjCRCZg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id 798FDC5B56A;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id A2DD7C5DF60;
 	Wed, 12 Aug 2026 09:34:44 +0000 (UTC)
 From: George Moussalem via B4 Relay <devnull+george.moussalem.outlook.com@kernel.org>
-Date: Wed, 12 Aug 2026 13:34:36 +0400
-Subject: [PATCH v2 01/14] dt-bindings: phy: Document the Qualcomm IPQ5332
- UNIPHY USB Super-speed PHY
+Date: Wed, 12 Aug 2026 13:34:39 +0400
+Subject: [PATCH v2 04/14] arm64: dts: qcom: ipq5332: Flatten usb controller
+ node
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,7 +41,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260812-ipq5018-usb3-v2-1-8f355d7ff0ef@outlook.com>
+Message-Id: <20260812-ipq5018-usb3-v2-4-8f355d7ff0ef@outlook.com>
 References: <20260812-ipq5018-usb3-v2-0-8f355d7ff0ef@outlook.com>
 In-Reply-To: <20260812-ipq5018-usb3-v2-0-8f355d7ff0ef@outlook.com>
 To: Vinod Koul <vkoul@kernel.org>, 
@@ -59,11 +59,11 @@ Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
  devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
  linux-usb@vger.kernel.org, George Moussalem <george.moussalem@outlook.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1786527282; l=3396;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786527282; l=3080;
  i=george.moussalem@outlook.com; s=20250321; h=from:subject:message-id;
- bh=x/XHiKaOymN+lw7axxWZFamZVeggR0D96mkqLpOTeXo=;
- b=QaT7K2ge1/yTg8FOi/whyzpy6jxBvE41hSl6F+6pqHKy/8vz7btgew/2phtKJFFdV+Fzttmge
- L7fDr4dsVtyBWD7XfDRcIHaqb1t+k74biRnYt9B2vq1K+WQCqKTzmfM
+ bh=xMYvxEWuaJgLI2xWvqglKjH2h3PlSr0PrD5R6v8tOEc=;
+ b=uv4AZGj2RWq7I0imlu8xno7WjLPQDByBz6jufaXWzZYASpgXh4mH3jvaIJK7cq+7XM+pyjOkG
+ gI554vDMcP6BMSytgCyy1BE595+REfBeg1S0FzRfmC+DCnT9D3BHcmQ
 X-Developer-Key: i=george.moussalem@outlook.com; a=ed25519;
  pk=/PuRTSI9iYiHwcc6Nrde8qF4ZDhJBlUgpHdhsIjnqIk=
 X-Endpoint-Received: by B4 Relay for george.moussalem@outlook.com/20250321
@@ -71,134 +71,110 @@ X-Endpoint-Received: by B4 Relay for george.moussalem@outlook.com/20250321
 X-Original-From: George Moussalem <george.moussalem@outlook.com>
 Reply-To: george.moussalem@outlook.com
 
-From: Praveenkumar I <quic_ipkumar@quicinc.com>
+From: George Moussalem <george.moussalem@outlook.com>
 
-Document the Qualcomm USB3 22ull UNIPHY present in the IPQ5018 and
-IPQ5332 SoCs.
+Flatten usb controller node and update to using latest bindings and
+flattened driver approach.
 
-Signed-off-by: Praveenkumar I <quic_ipkumar@quicinc.com>
 Signed-off-by: George Moussalem <george.moussalem@outlook.com>
 ---
- .../phy/qcom,ipq5332-uniphy-usb-ss-phy.yaml        | 111 +++++++++++++++++++++
- 1 file changed, 111 insertions(+)
+ arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts |  6 ++--
+ arch/arm64/boot/dts/qcom/ipq5332.dtsi       | 51 +++++++++++++----------------
+ 2 files changed, 24 insertions(+), 33 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/phy/qcom,ipq5332-uniphy-usb-ss-phy.yaml b/Documentation/devicetree/bindings/phy/qcom,ipq5332-uniphy-usb-ss-phy.yaml
-new file mode 100644
-index 000000000000..cc9eccac51dd
---- /dev/null
-+++ b/Documentation/devicetree/bindings/phy/qcom,ipq5332-uniphy-usb-ss-phy.yaml
-@@ -0,0 +1,111 @@
-+# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/phy/qcom,ipq5332-uniphy-usb-ss-phy.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
+diff --git a/arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts b/arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts
+index c224ffc65b08..25a70cd884c0 100644
+--- a/arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts
++++ b/arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts
+@@ -90,11 +90,9 @@ spi_0_cs_pins: spi-0-cs-state {
+ };
+ 
+ &usb {
+-	status = "okay";
+-};
+-
+-&usb_dwc {
+ 	dr_mode = "host";
 +
-+title: Qualcomm UNIPHY USB Super-Speed 22ull PHY
++	status = "okay";
+ };
+ 
+ &usbphy0 {
+diff --git a/arch/arm64/boot/dts/qcom/ipq5332.dtsi b/arch/arm64/boot/dts/qcom/ipq5332.dtsi
+index 74d9de8d7641..83d0377455da 100644
+--- a/arch/arm64/boot/dts/qcom/ipq5332.dtsi
++++ b/arch/arm64/boot/dts/qcom/ipq5332.dtsi
+@@ -493,16 +493,9 @@ qpic_nand: spi@79b0000 {
+ 			status = "disabled";
+ 		};
+ 
+-		usb: usb@8af8800 {
+-			compatible = "qcom,ipq5332-dwc3", "qcom,dwc3";
+-			reg = <0x08af8800 0x400>;
+-
+-			interrupts = <GIC_SPI 62 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 53 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 52 IRQ_TYPE_LEVEL_HIGH>;
+-			interrupt-names = "pwr_event",
+-					  "dp_hs_phy_irq",
+-					  "dm_hs_phy_irq";
++		usb: usb@8a00000 {
++			compatible = "qcom,ipq5332-dwc3", "qcom,snps-dwc3";
++			reg = <0x08a00000 0xe000>;
+ 
+ 			clocks = <&gcc GCC_USB0_MASTER_CLK>,
+ 				 <&gcc GCC_USB0_SLEEP_CLK>,
+@@ -513,31 +506,31 @@ usb: usb@8af8800 {
+ 
+ 			resets = <&gcc GCC_USB_BCR>;
+ 
+-			qcom,select-utmi-as-pipe-clk;
++			interrupts = <GIC_SPI 64 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 62 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 53 IRQ_TYPE_LEVEL_HIGH>,
++				     <GIC_SPI 52 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "dwc_usb3",
++					  "pwr_event",
++					  "dp_hs_phy_irq",
++					  "dm_hs_phy_irq";
+ 
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-			ranges;
+ 			interconnects = <&gcc MASTER_SNOC_USB &gcc SLAVE_SNOC_USB>,
+ 					<&gcc MASTER_SNOC_USB &gcc SLAVE_SNOC_USB>;
+ 			interconnect-names = "usb-ddr", "apps-usb";
+ 
+-			status = "disabled";
++			phys = <&usbphy0>;
++			phy-names = "usb2-phy";
+ 
+-			usb_dwc: usb@8a00000 {
+-				compatible = "snps,dwc3";
+-				reg = <0x08a00000 0xe000>;
+-				clocks = <&gcc GCC_USB0_MOCK_UTMI_CLK>;
+-				clock-names = "ref";
+-				interrupts = <GIC_SPI 64 IRQ_TYPE_LEVEL_HIGH>;
+-				phy-names = "usb2-phy";
+-				phys = <&usbphy0>;
+-				tx-fifo-resize;
+-				snps,is-utmi-l1-suspend;
+-				snps,hird-threshold = /bits/ 8 <0x0>;
+-				snps,dis_u2_susphy_quirk;
+-				snps,dis_u3_susphy_quirk;
+-			};
++			qcom,select-utmi-as-pipe-clk;
 +
-+maintainers:
-+  - Praveenkumar I <quic_ipkumar@quicinc.com>
-+  - Varadarajan Narayanan <quic_varada@quicinc.com>
++			tx-fifo-resize;
++			snps,is-utmi-l1-suspend;
++			snps,hird-threshold = /bits/ 8 <0x0>;
++			snps,dis_u2_susphy_quirk;
++			snps,dis_u3_susphy_quirk;
 +
-+description:
-+  USB Super-Speed UNIPHY found in Qualcomm IPQ5018 & IPQ5332 SoCs.
-+
-+properties:
-+  compatible:
-+    enum:
-+      - qcom,ipq5018-uniphy-usb-ss-phy
-+      - qcom,ipq5332-uniphy-usb-ss-phy
-+
-+  reg:
-+    maxItems: 1
-+
-+  clocks:
-+    minItems: 2
-+    maxItems: 3
-+
-+  resets:
-+    maxItems: 1
-+
-+  vdd-supply:
-+    description:
-+      Phandle to 5V regulator supply to PHY digital circuit.
-+
-+  qcom,phy-usb-mux-sel:
-+    description: |
-+      Mux selection for USB PHY. The USB3 and PCIe PHY pads are muxed and the
-+      mux selection is done via a register in TCSR syscon.
-+    $ref: /schemas/types.yaml#/definitions/phandle-array
-+    items:
-+      - items:
-+          - description: phandle of TCSR syscon
-+          - description: offset of PHY mux selection register
-+
-+  "#clock-cells":
-+    const: 0
-+
-+  "#phy-cells":
-+    const: 0
-+
-+required:
-+  - compatible
-+  - reg
-+  - clocks
-+  - resets
-+  - vdd-supply
-+  - qcom,phy-usb-mux-sel
-+  - "#clock-cells"
-+  - "#phy-cells"
-+
-+additionalProperties: false
-+
-+allOf:
-+  - if:
-+      properties:
-+        compatible:
-+          contains:
-+            enum:
-+              - qcom,ipq5018-uniphy-usb-ss-phy
-+    then:
-+      properties:
-+        clocks:
-+          items:
-+            - description: USB3 PHY CFG AHB clock
-+            - description: USB3 pipe clock
-+
-+  - if:
-+      properties:
-+        compatible:
-+          contains:
-+            enum:
-+              - qcom,ipq5332-uniphy-usb-ss-phy
-+    then:
-+      properties:
-+        clocks:
-+          items:
-+            - description: Shared PCIe/USB3 PHY AHB clock
-+            - description: USB3 PHY CFG AHB clock
-+            - description: USB3 pipe clock
-+
-+examples:
-+  - |
-+    #include <dt-bindings/clock/qcom,ipq5332-gcc.h>
-+
-+    phy@4b0000 {
-+        compatible = "qcom,ipq5332-uniphy-usb-ss-phy";
-+        reg = <0x4b0000 0x800>;
-+
-+        clocks = <&gcc GCC_PCIE3X1_PHY_AHB_CLK>,
-+                 <&gcc GCC_USB0_PHY_CFG_AHB_CLK>,
-+                 <&gcc GCC_USB0_PIPE_CLK>;
-+        resets = <&gcc GCC_USB0_PHY_BCR>;
-+
-+        #clock-cells = <0>;
-+        #phy-cells = <0>;
-+
-+        qcom,phy-usb-mux-sel = <&tcsr 0x10540>;
-+
-+        vdd-supply = <&regulator_fixed_5p0>;
-+    };
++			status = "disabled";
+ 		};
+ 
+ 		intc: interrupt-controller@b000000 {
 
 -- 
 2.53.0
