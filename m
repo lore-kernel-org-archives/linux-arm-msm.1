@@ -1,119 +1,71 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 58372332610;
-	Wed, 12 Aug 2026 13:25:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 52E63332610;
+	Wed, 12 Aug 2026 13:28:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786541142; cv=none; b=kTRSt5WED7T1q7B7L+lItX+BsepZhVEgOXnYvcKfuTvHfv3hBoRQKRv9gq692AahYDGM+mpK6AQM8IDAdRfm0LyJRMgWZC+Srf865iVX92xdzP8cfmCfxtikoA68P83yMYalNmV0q1psbHJ/GQmtaF+DY5pKtzdb+uEd2DSeWlA=
+	t=1786541286; cv=none; b=XVHY6gsP0j6zJ6BTDSDNPpXdWEPmLTKhSQKkRcG0kdZuJF0yp/C+JTSpCxGzs9D/FzJ1xJdcTlYnSpRs3baHV5fzsrwtwAZ3yZH62HHo+26r/9oRr/jg5OMIPfcIi3zwi/rUdjtkTpc/wpy6aBtBHrlc+xRXju0RGLUpH6K+86M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786541142; c=relaxed/simple;
-	bh=iMMr7BVoCnAiNC4c+t+ovPY0rzFvelMbWGxbDS8xn8Y=;
+	s=arc-20240116; t=1786541286; c=relaxed/simple;
+	bh=9RSNJeUWXvmI7haFzvrgMWYH2faOYGZxcHAIPIRNSnA=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=C/qKDbXRyN2xVDL7WEXsxTEAIDz/yKPBtHTO8CZmpezo3VT4JDS4ru058OUhvyClhhjCgl/6ccI+YbluiVQbUcQDylA4gffdchTGgFMjcU1+lCH93Woo66bAEnGf1rSVHKPzSVsBfFYsoyycjA7MyF1vFogswutJwF507A+bs6g=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JkyjbaKQ; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=qXkMXxlsiH+SOTeT34AmIM/pKdgDWWGlH4LmKlSKMYCt4CIZfvIbhByu851Gr4bsvDBcxzfej1ZoOA65ro3ydtRlVLH3NgMIzCDRPR4j6X4rjJQZrXJyZxgX1uaaznrfzrRyxDnV/a8SzovWE8qn825B1SXtbELHdsT2dhGVVcg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gMwHz1Ci; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JkyjbaKQ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2D8BF1F000E9;
-	Wed, 12 Aug 2026 13:25:34 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gMwHz1Ci"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DF6A41F000E9;
+	Wed, 12 Aug 2026 13:27:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786541141;
-	bh=XdWKg3Z14pzkjiIKFnBBxrtOl91QbWJYbzd6e96ktA8=;
+	s=k20260515; t=1786541281;
+	bh=iP7J+rxq0cba/p7N7r8telvnSXwkH9gP5QzM6KxZEmg=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=JkyjbaKQcvZkv8h6FOccIz/vgPW5PWA50Jru9v74xeCJrCWHuwDvkzSZtawDpWsTl
-	 fa3pz2SueGRrasjvZ9rsaVVRPEALCEqUOP6/s1zeKosF6z4kxae8rUOA/AgT5SbqEz
-	 gDPizQVq14lxbVrg9YUbSX6to0qe9QtIbnquZ1XUYh50+qlQlcPCybCohbTHrG0n37
-	 myvuGH2exrgu00cOgcLjIpKmR2DJl8SgB6sLo25rrDEKpOKQSZhppe997YixQRgviL
-	 /2ic0KDVFJ0kQeSEAvXDk3IfI3Dm5UdHJdc+WoV53B853PuyKftMqNl660d1ruqgJB
-	 ZBlLKEUkXXSBg==
-Date: Wed, 12 Aug 2026 14:25:31 +0100
+	b=gMwHz1CigRVWYGCEaYaVjobBjz/ckq3F9khPklRmJMKZXGJvc6CfrsyBd+lsIDoyg
+	 tx0v6O31THd8pfc6tSvYlVv9s4U4cDpxjLUbH/ngnY99YsxDaNnrJXiGGplGvcnUSh
+	 WKu5Alsaxawit21bccwwVi3WX3PbCxkZcl3hBC2CmuzEpwH3dhCw4JJzvNImj1zafw
+	 oNEbUJW1gLZvSRZZS48lK8SPZoOJzuvJ71MqKqxmovTo+X+DGcE0hOTEfRLQDPIOfj
+	 A0BI8KPAyopjBwwIu+i0eizRCV9t4HN2fcr7Obb8rKEyYqD0Lgx1NW7yYYX77RKBCj
+	 W7ZAnaj1qjR3g==
+Date: Wed, 12 Aug 2026 14:27:55 +0100
 From: Lee Jones <lee@kernel.org>
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>,
-	Arnd Bergmann <arnd@arndb.de>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>,
-	Souvik Chakravarty <Souvik.Chakravarty@arm.com>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Andy Yan <andy.yan@rock-chips.com>,
-	Matthias Brugger <matthias.bgg@gmail.com>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	John Stultz <john.stultz@linaro.org>,
-	Moritz Fischer <moritz.fischer@ettus.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Christian Loehle <christian.loehle@arm.com>,
-	Ulf Hansson <ulfh@kernel.org>,
-	Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>,
-	Sudeep Holla <sudeep.holla@kernel.org>,
-	Florian Fainelli <florian.fainelli@broadcom.com>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-	Andre Draszik <andre.draszik@linaro.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
-	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org, mfd@lists.linux.dev,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-	Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-Subject: Re: [PATCH v24 08/12] mfd: psci-mfd: Add psci-reboot-mode child cell
-Message-ID: <20260812132531.GS1072730@google.com>
-References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
- <20260803-arm-psci-system_reset2-vendor-reboots-v24-8-889281373870@oss.qualcomm.com>
- <20260812081856.GF1072730@google.com>
- <CAMRc=Me7Nua8xgKA43rCH9SV2DQoCyAuOqb+KNDTuPxv_H5y9A@mail.gmail.com>
+To: Linus Walleij <linusw@kernel.org>
+Cc: Rudraksha Gupta <guptarud@gmail.com>,
+	devnull+guptarud.gmail.com@kernel.org, andersson@kernel.org,
+	broonie@kernel.org, conor+dt@kernel.org, conor.dooley@microchip.com,
+	david@ixit.cz, devicetree@vger.kernel.org,
+	konrad.dybcio@oss.qualcomm.com, konradybcio@kernel.org,
+	krzk+dt@kernel.org, lgirdwood@gmail.com,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-leds@vger.kernel.org, pavel@kernel.org,
+	phone-devel@vger.kernel.org, robh@kernel.org
+Subject: Re: [PATCH v6 0/3] Samsung Expressatt: Camera Flash
+Message-ID: <20260812132755.GT1072730@google.com>
+References: <20260527-expressatt_camera_flash-v6-0-de0f150024e4@gmail.com>
+ <73033a32-4efe-4ed2-9319-ffb205d28719@gmail.com>
+ <CAD++jLkc953WROweQ0=BVRmyOMUdqx68XSS3VoBmqfyzbGeCdw@mail.gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <CAMRc=Me7Nua8xgKA43rCH9SV2DQoCyAuOqb+KNDTuPxv_H5y9A@mail.gmail.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAD++jLkc953WROweQ0=BVRmyOMUdqx68XSS3VoBmqfyzbGeCdw@mail.gmail.com>
 
-On Wed, 12 Aug 2026, Bartosz Golaszewski wrote:
+On Wed, 12 Aug 2026, Linus Walleij wrote:
 
-> On Wed, 12 Aug 2026 10:18:56 +0200, Lee Jones <lee@kernel.org> said:
-> > On Mon, 03 Aug 2026, Shivendra Pratap wrote:
+> On Tue, Aug 11, 2026 at 11:31 AM Rudraksha Gupta <guptarud@gmail.com> wrote:
+> 
+> > https://lore.kernel.org/all/20260527-expressatt_camera_flash-v6-0-de0f150024e4@gmail.com/#t
 > >
-> >> The PSCI "reboot-mode" node does not define a compatible because it is a
-> >> configuration of boot-states provided by the underlying firmware. With
-> >> the new firmware-node based cells in mfd-core, this node can now be
-> >> exposed as a proper child cell.
-> >>
-> >> Add the psci-reboot-mode child cell to the psci-mfd driver with a
-> >> named_fwnode. Add psci-cpuidle-domain cell first to isolate it from
-> >> reboot-mode failures.
-> >>
-> >> Suggested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-> >> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-> >> ---
+> > This series seems to have fallen in between the cracks. Should I resend
+> > this patch series?
 > 
-> ...
-> 
-> >> +	if (ret) {
-> >> +		if (ret == -ENOMEM)
-> >> +			goto out;
-> >> +		dev_warn(&pdev->dev, "reboot-mode child cell failed to add: %d\n", ret);
-> >
-> > Okay Yoda, but why is this okay?
-> >
-> 
-> Hi Lee,
-> 
-> I'd like to call you out on this because making snarky comments on a non-native
-> English speaker's syntax is really not OK. Please don't do this. As a native
-> speaker you could have just proposed a better sounding version.
+> Let's just gently poke Lee about it and see what he says.
 
-It wasn't supposed to be offensive, it just made me chuckle.
-
-I unreservedly apologise if any offence or ill-feeling that may have occurred.
+Sorry, it had slipped through.  Please submit a [RESEND].
 
 -- 
 Lee Jones
