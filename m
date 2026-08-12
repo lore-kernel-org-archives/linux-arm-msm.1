@@ -1,233 +1,203 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89E813314D2;
-	Wed, 12 Aug 2026 12:29:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7667F357CEA
+	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 12:42:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786537748; cv=none; b=CdqRQvjgOvlcdY1pqXEhJh+lmxtshEacAA0/n8Tj7FbqTM7LDjH8Zz19tgl0m61umOr9yuHW5P8QpUrzbUgQ141UPmASglR4JgZQ31V4ZZsDg2Ix7iIEmLAsIa7Bh8pcmTSFqNnrL+pvPvRv2hKAIB1tKa6PzEae0zdn+iETKl4=
+	t=1786538556; cv=none; b=TbshsIyMv7erbX2U3EA5ofOmrtWe4nX+DVcUrdy4w+YgLRb7vn9GqrGKoeUbfQhs06mY4Tr16DJ8Jzs1nKK8vrlzrrKm20eBHQFSelv6qJYYrVxithu++pefk/6V6QDoqwWynXmcyWvWgQRPgsyXa1+/fCu0sArJ59P2D2QlRZc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786537748; c=relaxed/simple;
-	bh=zktH5kzqXnE1yUNpL4lhK5TTTDphHY3JxNeGiEz4UeQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=DqGrPiy8rhBiF6A6FI7+OrnIIdsTzM0bZMN6jh/uciZ3HhXJN8xudL/aETpoKHCp+uOru6jsxKtLJe5UN/hGirlgTdTkIt/M56h1fWMmr7f751FTKnz0MoiX0XwQw3hheL+R5PrlAXxTlHYmPzVXLceiT1rSmCIHCU/xWFupioo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aSiro+gT; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786538556; c=relaxed/simple;
+	bh=HT6odfgIm31nAJlXlSvWqpoui4IahVtMLX93lrDvz0M=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=u9Y9rby80dWU/RgZBExjXIZCb2v9DZ5YfgtpooMM/Nl9RAOD3bTfVBT9S3Tt+VDelFvSL4WCMdh625Icy1qK/MMOgmkxKbs98njVTV3rsFN0JtRSsSo3wv9W+PrH4DKji25gb97n3pMk0DVDGsmErmhmJX6KPfnTDMWlIFfcgGM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=bu0yGjTw; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=PzIQYkIV; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aSiro+gT"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A8EB81F000E9;
-	Wed, 12 Aug 2026 12:29:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786537747;
-	bh=PmQ4K2ic4ghGx1I4FRHyH1nl1yf3HhRp2tRFCAlUY0w=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=aSiro+gT2LKNTq9dwrWTfs7wn7VmO36o7KhXUITOZbarVxjD9MsMnibvWKqzaXLCX
-	 b1FLVMn5JWoeWz3HmusXkr5JWJJmhs0SvABHWtQBgcufd913t5beUcKqEjWZjx0ib9
-	 VUkoqpbKc4xqg+z+HuUzTaR3jZUTlrpoYicCKP+sg58lGcFUU16c4YbF557H2khVPU
-	 v58vIaaW0qDgHKeOJE1zp4Sfu1vhQdBE6oEEHz7Cf3CRW4jM2ztM/BaA3jxd6PFceL
-	 XPOQynipgLt0H2jqbgToWxfKflv55g9rspS5Eaf1yHYI1+5/OqrLN2mgEXSOcNgDu/
-	 RCL47Hi+nyrgw==
-Date: Wed, 12 Aug 2026 13:29:00 +0100
-From: Lee Jones <lee@kernel.org>
-To: contact@alex-min.fr
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	MyungJoo Ham <myungjoo.ham@samsung.com>,
-	Chanwoo Choi <cw00.choi@samsung.com>,
-	Guru Das Srinagesh <linux@gurudas.dev>,
-	Linus Walleij <linusw@kernel.org>,
-	Rob Clark <robin.clark@oss.qualcomm.com>,
-	Kees Cook <kees@kernel.org>, Tony Luck <tony.luck@intel.com>,
-	"Guilherme G. Piccoli" <gpiccoli@igalia.com>,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org,
-	phone-devel@vger.kernel.org
-Subject: Re: [PATCH v5 4/6] mfd: qcom-pm8xxx: register PM8921 USB ID extcon
-Message-ID: <20260812122900.GQ1072730@google.com>
-References: <20260804-mainline-send-v1-sending-v5-0-149dd4372ac8@alex-min.fr>
- <20260804-mainline-send-v1-sending-v5-4-149dd4372ac8@alex-min.fr>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="bu0yGjTw";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PzIQYkIV"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67CB4Mfg2860276
+	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 12:42:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	xJ9VAtOW4dvyLTFJEa/GHt4ssfJ12G8OyYzymmqsAo4=; b=bu0yGjTwPU+skCKe
+	8BcRSYnznUUuD/6w1Uc8YkK7lL3SaHWK8knn2W8SUaHNt7KJPNtE5VQQD28lODUR
+	/YypukvxjsGI0gq7dWjAZq9sJpdN3vVWZkyM0JUOaP+p2tephTXzXOakodBX2tLK
+	tK+yjGBVqJ0aZ5+m6bnmgAA6A5Wy/gm5HXiH343weEyOKnDfkXVG72LmK6XhtR5t
+	/ALnWf+L8jx+8lqXL5//ACRzkIbzTz85vaZtnOktItKXIIHG9StSIEpBgjl8DWWT
+	wyevSYWfYY1aErU9WjhkeCch0o7cdLNXMeXmLpcwVbnTGXRgKl0UVmmoovb577IM
+	AxtpiQ==
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g0mnd93b8-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 12:42:29 +0000 (GMT)
+Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2cceabd70f5so26346045ad.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 05:42:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786538549; x=1787143349; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=xJ9VAtOW4dvyLTFJEa/GHt4ssfJ12G8OyYzymmqsAo4=;
+        b=PzIQYkIVRgqculSy6QeBlNq3s2VvaB6mrAx6nYh/1xU7WEQSBMcAJKdmDxQjoPkTAA
+         t2SofXHTUL7fRIzyp9Kzn7fFVRVCsGcg/ZFXQeHf6ntZiLIzDsmgZ6ci5xkykD7c0ZGQ
+         G6XhUjYtBIKJl/L4EDzpdzt72Drg5Sef+VceDQdfqv6ZGKapWIInRyM7PnYrcd1iBxpV
+         g9q7g9X0n1SHbxLX4EXWf0rH/UedFMmnKdyNr0qAFnHvQ3fHINrT8COi1s5yaSOKY093
+         iF+yaXc3f2hnwzwCNYqlSQa+c65wfWdvgvmB3uLCXK8CcImptH9VtPsOpKJEsQx4d6Mr
+         Iz3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786538549; x=1787143349;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=xJ9VAtOW4dvyLTFJEa/GHt4ssfJ12G8OyYzymmqsAo4=;
+        b=QpYIlD4Ofg3dIXL0j0KHmDHpQPXnV0lpyFJ3tUzlO/RZGudYV0OSYTvnU0re7n5IdI
+         oplWDUhB9FI01SzaUbztmstx569mwrsreg2CTK0QBLPoXJ1vpsh439G4U2tMuNmsrHPi
+         Oi+YAA+slpOtJKlmzG+8FDHB6ARmV5qMYI+t1BP3BouIKzvt8Vub6ntJdjlyAPKoqKYO
+         fjiY2zRd/wY3ohZPLx+rfUy+dEte2N8rYmA6ATwER+b0Me+uQtwz0LI6SUMe8cH/cf7G
+         EyNSN94dDJXyh9Arw68v2pUHZyJWODpbopiU1jSPBURgCKngErVDin8S14zvyW1NEhpu
+         TIEA==
+X-Forwarded-Encrypted: i=1; AHgh+RqjsKbMto/kxTYBIPtOGV7kmzmSJLDQQGCqVWfWhjTvJ6Id0UD6eQD1Cvy31ACVVgtw/uk4jwiUMmsiJEgD@vger.kernel.org
+X-Gm-Message-State: AOJu0YwFgizIUxPLpFmHLQf4BUPPz5XysSNi0XOzO5K/lhC8ZcsRQZW1
+	WaVAORLQ22JXyuf+ikxY26c85JcHzs451LnbXIGSpn+wC7cDuUi5JoxENH9sh2cb/yoUlPlSPJS
+	FsePGJzZmM/GDo7+J3/J/1zEQ7NtgevYsOsPfQQx2Gg+iWHDoUt1/1PrBwmruQY9/liQe
+X-Gm-Gg: AR+sD12Fx7MsF+s9py3L0UjMNh4EJkhmbJSYJTr6PTbIHmngbQBJSTf8Vam24orsQL1
+	+kYbfS6kCnFOcws9jO90gmU0AqdKjJzU1Kw+X9e4XV0huTY3eeAHGfYkwRl+WrO8dU9ncxLHTai
+	LNiXpIvxLuOfwZX2/45cSnk7C6d2YoIxgU0y9ZPXN+FZqlPTr5WnGNnY/TPC44/L2SkJQFYwVup
+	klbQyraXyLok/eQ693d2V2BhS8iWihQOOTSskEx0qh14XBL8CnrWUjSsDbzOUuQP4ysQySZDSIe
+	W+UztNUhVzJAxjarNovE8TxqVNKr2cqUW0MXmWhush/OzjFP8B60OGLmwlxVIqqt9Znmb+Ln6YE
+	QzlkBigmROYZIK6/ptDKTwTzZKgXTK5I6Y8s/2kzif71h1x9OkjcsRrvzDDIj7Ns5I5A=
+X-Received: by 2002:a17:90b:4b81:b0:36d:b424:4f17 with SMTP id 98e67ed59e1d1-393011b2a20mr4777113a91.1.1786538548612;
+        Wed, 12 Aug 2026 05:42:28 -0700 (PDT)
+X-Received: by 2002:a17:90b:4b81:b0:36d:b424:4f17 with SMTP id 98e67ed59e1d1-393011b2a20mr4777039a91.1.1786538548133;
+        Wed, 12 Aug 2026 05:42:28 -0700 (PDT)
+Received: from [192.168.1.6] ([122.177.240.91])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-392f94adf39sm3478809a91.11.2026.08.12.05.42.23
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 12 Aug 2026 05:42:27 -0700 (PDT)
+Message-ID: <f92cc91e-6e5c-4375-aaa6-f079a165f4b5@oss.qualcomm.com>
+Date: Wed, 12 Aug 2026 18:12:21 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260804-mainline-send-v1-sending-v5-4-149dd4372ac8@alex-min.fr>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm64: dts: qcom: glymur: Add missing USB clock, power
+ and bandwidth votes
+To: Abel Vesa <abel.vesa@oss.qualcomm.com>, Greg Ociepka <greg@ferrisoft.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Wesley Cheng <wesley.cheng@oss.qualcomm.com>
+References: <20260812083522.774711-1-greg@ferrisoft.com>
+ <qsxaqckpbvqlrtpd27fcufrmo3fmrp3zf432a2fn5hpvw57mnq@xekhebfewl4s>
+Content-Language: en-US
+From: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+In-Reply-To: <qsxaqckpbvqlrtpd27fcufrmo3fmrp3zf432a2fn5hpvw57mnq@xekhebfewl4s>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEyMDEwMyBTYWx0ZWRfX7FjsTYaLzR+v
+ wEz4Wq8+TI/NVxvYxcYnyyBJP9g8ju17/G5mkFxSE0hGzd1wYZh/ObKOJ1XUP8tDoS7riK/Rgll
+ Axne6ShbknHyQQmXfWR6hWGkAQ0jN7Y=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEyMDEwMyBTYWx0ZWRfX9y81lNV0TB38
+ kaoQ+6H4NgOjaaPWIUHHTbonhI6ZjOMQL2lNrH7jA7EPq/Uwbv3Sbb2KQB6T64K1NoE3FofzNWa
+ ZCug/ZUsQscxQjDkuUZeRxX6Fd+Z4wm9YzcRrTRamBCnyH7d8mjz+v6r4Ke8lJ7CMROXzxfbSW8
+ tJFlb0s00dK57feKsP5uXD7byb2tvNqL2IoCwv847hVZxCSKYfKv0DcmK+iFsA3pRtKz2yKoEQl
+ PRRNio6ZYgSCQZN9vrGhCueHAA1vG7ciUHiwjF+xV/TEoSuNIAhw2sfUvqyJagAd7dybkUj9OdO
+ 9fKQJ/mJ+RogRmCKY1mQ8Ud2Lkwjnefkblm2Be7vn981YeHCciZv64syknVpO7I0Fp+/afXhdDd
+ wdBvdERBD6IMfYHSA/qgJWHPZgrS2nS7AylJqyLr1QFei3YnnJRjdvwvsKD5wRAVALJ5Ru0i9LJ
+ wXJIfS1kJvchxjjYcXg==
+X-Proofpoint-GUID: oF2m1vbcH1Ix78K8qJg83Xy-7ZRla7Ok
+X-Authority-Analysis: v=2.4 cv=C87ZDwP+ c=1 sm=1 tr=0 ts=6a7c6a35 cx=c_pps
+ a=IZJwPbhc+fLeJZngyXXI0A==:117 a=8gVGPzDiWuseyeRcxd+aqA==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=a8UEx8NLAAAA:8 a=EUspDBNiAAAA:8 a=WuHgnROwf8Ibkt1w3KoA:9 a=QEXdDO2ut3YA:10
+ a=uG9DUKGECoFWVXl0Dc02:22 a=-yeuc7zBjbfZT8aiaP-D:22
+X-Proofpoint-ORIG-GUID: oF2m1vbcH1Ix78K8qJg83Xy-7ZRla7Ok
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-12_03,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 suspectscore=0 phishscore=0 lowpriorityscore=0 spamscore=0
+ clxscore=1015 priorityscore=1501 bulkscore=0 adultscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608120103
 
-On Tue, 04 Aug 2026, Alexandre MINETTE via B4 Relay wrote:
 
-> From: Alexandre MINETTE <contact@alex-min.fr>
+
+On 8/12/2026 3:53 PM, Abel Vesa wrote:
+> On 26-08-12 10:35:22, Greg Ociepka wrote:
+>> The four USB3 controller nodes on Glymur (usb_0, usb_1, usb_2, usb_mp)
+>> are missing three property groups that Glymur's own usb_hs node at
+>> a200000 already carries, and that Hamoa (x1e80100) carries on all five
+>> of its USB controllers:
+>>
+>>    - assigned-clocks / assigned-clock-rates
+>>    - required-opps
+>>    - interconnects / interconnect-names
+>>
+>> Without required-opps the controllers place no performance state vote
+>> on their power domain. Measured on an Asus Zenbook A16 (UX3607OA) with
+>> a SuperSpeed device enumerated, CX aggregates to SVS while the
+>> controllers run their master clock at 200 MHz:
+>>
+>>    $ grep -E "^cx " /sys/kernel/debug/pm_genpd/pm_genpd_summary
+>>    cx    on    128
+>>
+>>    $ grep "usb30.*master_clk " /sys/kernel/debug/clk/clk_summary
+>>    gcc_usb30_sec_master_clk   ...  200000000
+>>    gcc_usb30_prim_master_clk  ...  200000000
+>>    gcc_usb30_mp_master_clk    ...  200000000
+>>
+>> 128 is RPMH_REGULATOR_LEVEL_SVS; rpmhpd_opp_nom is 256. With this
+>> patch applied the same measurement reads 256 while a controller is
+>> active.
+>>
+>> Without interconnects, dwc3_qcom_interconnect_init() silently does
+>> nothing: of_icc_get() returns NULL rather than an error pointer for a
+>> device without the property, so probe succeeds and icc_set_bw() on a
+>> NULL path is a no-op. No USB-DDR bandwidth is ever requested.
+>>
+>> Without assigned-clock-rates nothing programs the master clock RCG,
+>> which keeps whatever the bootloader left behind. On this machine that
+>> happens to be the correct 200 MHz, but ftbl_gcc_usb30_mp_master_clk_src
+>> also allows 66.67 and 133.33 MHz, neither of which sustains SuperSpeed.
+>>
+>> Add all three groups to the four nodes, mirroring usb_hs. The
+>> interconnect paths follow the provider layout in
+>> drivers/interconnect/qcom/glymur.c: usb_0/usb_1 sit on aggre4_noc,
+>> usb_mp on aggre3_noc and usb_2 on aggre2_noc.
+>>
+>> Fixes: 4eee57dd4df9 ("arm64: dts: qcom: glymur: Add USB related nodes")
+>> Assisted-by: Claude:fable-5
+>> Signed-off-by: Greg Ociepka <greg@ferrisoft.com>
 > 
-> PM8921 reports the USB ID pin through interrupt 49 of its interrupt
-> controller. Unlike PM8941, this path has no separate addressable misc
-> block to represent as a devicetree child node.
+> This looks OK to me.
 > 
-> Register a child platform device for the existing Qualcomm USB extcon
-> driver after creating the PMIC IRQ domain. Pass the USB ID interrupt as
-> a named resource and reuse the PM8921 firmware node, allowing consumers
-> to reference the PMIC node directly as their extcon provider.
+> Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
 > 
-> Unregister the child device and dispose of the IRQ mapping when the
-> PMIC is removed or probing fails.
+>> ---
+>> Note for reviewers: Hamoa additionally marks all five USB controllers
+>> dma-coherent, while Glymur marks no peripheral DMA master as coherent
+>> (only the SMMUs, PCIe controllers and remoteprocs). That difference is
+>> deliberately not touched here since getting it wrong is a silent
+>> data-corruption class of bug, but it looks like part of the same
+>> omission. Is USB DMA coherent on Glymur?
 > 
-> Signed-off-by: Alexandre MINETTE <contact@alex-min.fr>
-> ---
->  drivers/mfd/qcom-pm8xxx.c | 78 +++++++++++++++++++++++++++++++++++++++++++++--
->  1 file changed, 76 insertions(+), 2 deletions(-)
+> I think so, but lets see what Wesley thinks.
 > 
-> diff --git a/drivers/mfd/qcom-pm8xxx.c b/drivers/mfd/qcom-pm8xxx.c
-> index 0cf374c015ce..884fc99a1488 100644
-> --- dangerously/mfd/qcom-pm8xxx.c
-> +++ b/drivers/mfd/qcom-pm8xxx.c
-> @@ -7,6 +7,7 @@
->  
->  #include <linux/kernel.h>
->  #include <linux/interrupt.h>
-> +#include <linux/ioport.h>
->  #include <linux/irqchip/chained_irq.h>
->  #include <linux/irq.h>
->  #include <linux/irqdomain.h>
-> @@ -64,12 +65,15 @@
->  
->  struct pm_irq_data {
->  	int num_irqs;
-> +	int usb_id_irq;
->  	struct irq_chip *irq_chip;
->  	irq_handler_t irq_handler;
->  };
->  
->  struct pm_irq_chip {
->  	struct regmap		*regmap;
-> +	struct platform_device	*usb_extcon;
-> +	unsigned int		usb_id_irq;
->  	spinlock_t		pm_irq_lock;
->  	struct irq_domain	*irqdomain;
->  	unsigned int		num_blocks;
-> @@ -492,6 +496,13 @@ static const struct pm_irq_data pm8xxx_data = {
->  	.irq_handler = pm8xxx_irq_handler,
->  };
->  
-> +static const struct pm_irq_data pm8921_data = {
-> +	.num_irqs = PM8XXX_NR_IRQS,
-> +	.usb_id_irq = 49,
+It is dma-coherent.
 
-Magic numbers should be defined.
-
-> +	.irq_chip = &pm8xxx_irq_chip,
-> +	.irq_handler = pm8xxx_irq_handler,
-> +};
-> +
->  static const struct pm_irq_data pm8821_data = {
->  	.num_irqs = PM8821_NR_IRQS,
->  	.irq_chip = &pm8821_irq_chip,
-> @@ -501,11 +512,60 @@ static const struct pm_irq_data pm8821_data = {
->  static const struct of_device_id pm8xxx_id_table[] = {
->  	{ .compatible = "qcom,pm8058", .data = &pm8xxx_data},
->  	{ .compatible = "qcom,pm8821", .data = &pm8821_data},
-> -	{ .compatible = "qcom,pm8921", .data = &pm8xxx_data},
-> +	{ .compatible = "qcom,pm8921", .data = &pm8921_data},
->  	{ }
->  };
->  MODULE_DEVICE_TABLE(of, pm8xxx_id_table);
->  
-> +static int pm8xxx_add_usb_extcon(struct platform_device *pdev,
-> +				 struct pm_irq_chip *chip,
-> +				 unsigned int hwirq)
-> +{
-> +	struct irq_fwspec fwspec = {
-> +		.fwnode = dev_fwnode(&pdev->dev),
-> +		.param_count = 2,
-> +		.param = { hwirq, IRQ_TYPE_EDGE_BOTH },
-> +	};
-> +	struct platform_device_info pdevinfo = {
-> +		.parent = &pdev->dev,
-> +		.fwnode = dev_fwnode(&pdev->dev),
-> +		.of_node_reused = true,
-> +		.name = "qcom-pm8xxx-usb-id",
-> +		.id = PLATFORM_DEVID_NONE,
-> +	};
-> +	struct resource resource;
-> +
-> +	chip->usb_id_irq = irq_create_fwspec_mapping(&fwspec);
-> +	if (!chip->usb_id_irq)
-> +		return -ENXIO;
-> +
-> +	resource = DEFINE_RES_IRQ_NAMED(chip->usb_id_irq, "usb_id");
-> +	pdevinfo.res = &resource;
-> +	pdevinfo.num_res = 1;
-> +
-> +	chip->usb_extcon = platform_device_register_full(&pdevinfo);
-
-Why aren't you using the MFD API for this?
-
-> +	if (IS_ERR(chip->usb_extcon)) {
-> +		int ret = PTR_ERR(chip->usb_extcon);
-> +
-> +		chip->usb_extcon = NULL;
-> +		irq_dispose_mapping(chip->usb_id_irq);
-> +		chip->usb_id_irq = 0;
-> +
-> +		return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static void pm8xxx_remove_usb_extcon(struct pm_irq_chip *chip)
-> +{
-> +	if (chip->usb_extcon)
-> +		platform_device_unregister(chip->usb_extcon);
-> +
-> +	if (chip->usb_id_irq)
-> +		irq_dispose_mapping(chip->usb_id_irq);
-> +}
-
-Why not devm_*
-
->  static int pm8xxx_probe(struct platform_device *pdev)
->  {
->  	const struct pm_irq_data *data;
-> @@ -570,9 +630,22 @@ static int pm8xxx_probe(struct platform_device *pdev)
->  
->  	irq_set_irq_wake(irq, 1);
->  
-> +	if (data->usb_id_irq) {
-> +		rc = pm8xxx_add_usb_extcon(pdev, chip, data->usb_id_irq);
-> +		if (rc)
-> +			goto err_domain;
-> +	}
-> +
->  	rc = of_platform_populate(pdev->dev.of_node, NULL, NULL, &pdev->dev);
->  	if (rc)
-> -		irq_domain_remove(chip->irqdomain);
-> +		goto err_extcon;
-> +
-> +	return 0;
-> +
-> +err_extcon:
-> +	pm8xxx_remove_usb_extcon(chip);
-> +err_domain:
-> +	irq_domain_remove(chip->irqdomain);
->  
->  	return rc;
->  }
-> @@ -582,6 +655,7 @@ static void pm8xxx_remove(struct platform_device *pdev)
->  	struct pm_irq_chip *chip = platform_get_drvdata(pdev);
->  
->  	of_platform_depopulate(&pdev->dev);
-> +	pm8xxx_remove_usb_extcon(chip);
->  	irq_domain_remove(chip->irqdomain);
->  }
->  
-> 
-> -- 
-> 2.43.0
-> 
-> 
-
--- 
-Lee Jones
+Regards,
+Krishna,
