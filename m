@@ -1,87 +1,39 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from ixit.cz (ixit.cz [84.42.129.46])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F7DE430794
-	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 11:11:57 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB049436BC9;
+	Wed, 12 Aug 2026 11:18:47 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786533119; cv=none; b=sbNjS8jNGo4mY/QYlDokiOXLewH9ulADLyqRyvpELwDzr9dcMO/Tfb3pl1vueqUhg3l1WxJSFL/NBJoMfU8/h0Pd5WH8F0cWo//SlDps3e+shF0n2UTNjYevMpld5HHZWft+H6e5H7XGJkvbuJvlpg45aZ0HXmLzmgDIFvITELw=
+	t=1786533530; cv=none; b=FnnWjsDQBtB+zUkSAhHKOyHWuP0hkbIjRCEp/a3hcOw1XMP+ViuTvcUjj99PSO3VHpVp0wYg2/VeExc4Y8yv1+UWwp8dccpzvKhrivhSXjb5adFBMvznu/96fRjRCsaiB6hvQXeU/XucA5cFXQhZ6NBwN+S4+yFLhY/xWg2w+6w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786533119; c=relaxed/simple;
-	bh=PcrQpNv0debNulNrw+/l0fJqHqprwb5hEkIU/oGjK3s=;
+	s=arc-20240116; t=1786533530; c=relaxed/simple;
+	bh=/qWUVu4Bp+xrCFfV5lDFh1FyW63H3CQSlJmq+9G4ii8=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=o3EvJQM0t4R2DctAITOOs1wa57yuhPoo+LDDdnVBdh+vq04+m1C3zLqEAxQKVQe80aD9FTH3O6Kv0xuIjmeObOiYzcGEUnXbq9tZHwEWJIFu+4fdLKWgo9Ex4RTyi+hwxMGv+djUcQ5yRQ+5sC0Ys0S+bsi5+IxX5B3nKZX6jjs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=UDIf2T/Y; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=WRQNKj7u; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=m9qib8dtftm5054WxzWjeCCUKFm0umGsloDEHP+4MH+V/8W4kHVWPOK40m5zpgkZSvqdqM5SKx/Rv1XRmyv9CCRetm3tK4sP1H4bDvHgvzBFdic0lhSY4SlmC8Zw8E7GK74VauoqKwEnpdlq0w1rMEKqFTyYqwMowB5BVQThuK0=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=JDcNvNeN; arc=none smtp.client-ip=84.42.129.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="UDIf2T/Y";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="WRQNKj7u"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67CB4HTx3664708
-	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 11:11:56 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	9ndb2tC+bNrjCtaEv2GcOaQRxLg67meiAfqQFQgJb9M=; b=UDIf2T/YdF5UCB9r
-	oZ2MjTxUAxBMd6zxDRE3PpC/hkOqQLqXGPCZ9yw4UBXsmIES8WaFccZs4nLf1F24
-	ZjwQ0iSmI1ZNMeeChWCVTqdKl37k1e3d8uWE85nRuU2v0nkCFtWOAG7rZ0YzImn2
-	2SCp3x3KRCAEMFN8AFMfOUOB8wYdp89yv2wPDaCWM3UQfa6zU+DXvnJYS4W0DJfg
-	AXcBnlnuHc26FJZ+Z6g06TC31QLV/dJtRVEnaAV19BaEqN3wz2qbWWmWy3kWK4ex
-	QaFDDRhpwSFQ+x3c0Y7HqRQ7WVC6ok44R4X7x8ITy74+vGavO7jkvZaLQhFs7Qnx
-	qfn3Jg==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g0m6rgwcp-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 11:11:56 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2cee894b3d8so16577105ad.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 04:11:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786533116; x=1787137916; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=9ndb2tC+bNrjCtaEv2GcOaQRxLg67meiAfqQFQgJb9M=;
-        b=WRQNKj7uE2l9xN43lopSZuiGfm5rF0H1wxpDIQOBIIXSh0TFG+4l/OILBMDysoLKBi
-         rzt/VrUI2WP2+rb9lSZh3B65XEMHq9hXGrEzhKgBSk1b5OraHWHvoCl6QSdDnN06Qc7A
-         vXTcm8Rp707wAZHpQYAxySH4YXnq6zCHjdg2Pt2yYn/3i9lOEJcJZda1PQ04slRiG8Fz
-         1tZV98MdsXfe9u4DmHLMmOlZqlTf6GSUpeHy6d2jarOmeZUU9em3woShojA6AUFJfzO3
-         yX9yJ0db6tnTmOgLmh9wsWwDiXEerpuXvU8w1ztKeAJS095XZVMiHSfuQ4JXbX0mfVhH
-         1zdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786533116; x=1787137916;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=9ndb2tC+bNrjCtaEv2GcOaQRxLg67meiAfqQFQgJb9M=;
-        b=gJh8gT4b+O2D8Bk+0ncVAgtOF3f2UGGLW6u9jBqV3qMcV5LVdFEaR/CkN6aiGRHshY
-         6bj70P3VJ0nAPW/1PlqnfHIYVG6T3taScpA+mIPwfi6GQMiZkwUKA7mDsnH49Fsnsxe9
-         sufOiF1tZASOnweQM6fHcHhccu0agnUx8R2Mp8RjMk/fAs+0aeFVpTqeWJZ6RvJWGGHZ
-         PkPvm1xT5fS9uVAXKx6ZH/2uCN96JjImpYkMQQi6k1+fDmqcswUGryJd0peLhPyPVyDq
-         2tmf/1rvl+mMAmbLVUw0+blfq498HeLY6rtwg1OVcHbMOUFwY5sVCsfePqOm78HseN5D
-         MVJw==
-X-Forwarded-Encrypted: i=1; AHgh+RqIWMUu0rplIG0oOjSP6jR8A7rea6IJGLLtP05FGUev/A1rDvRWGq929f5IK6zRTzwEYeozKMwyc1E5Msew@vger.kernel.org
-X-Gm-Message-State: AOJu0YxwcnWd1bhfr7WvUWwCIqDiI/DcNU4syl9g3S2YdnTgre1gNSXr
-	pxQ5Bsgb8O83ZW4eYlz3YRlbXv/h9RVstEutsbAijSHxj3gASYwlygcuiIFB8mUA5e8oiOZgVUS
-	xkXd+gQ5yRsmxgOEymTiG5N9Wroi8tnhbcNhydSaBcxY9W1TyidB8LF4ZJRS5QPoAtgXL
-X-Gm-Gg: AR+sD13nwafGJX7JLHN94WK70Hlybm9Wwfhk9UdBzAeEOweA1b8X0mtnOtSpJih3nZp
-	9SWp+YDkeC0PJMwH4BCv70AXyifUGIWVQkK+o45p28Ek5Ml7LCYG4nOmXJHHI2BODtUX7bEh3Yu
-	dMP9aLQTPDE+UUVXJg/go41Qy9vA1X3VWzkTrRld4MMtV9fxqQMB8HyPzFCcxUr6UTXApu640Y6
-	A6lQ+qMd7ZCzOsFUhD90dohgJ59w66ZNM6TzTGYWOt8qLPG0LAlxnfbauhkPvYdq+SqcpA3qStu
-	hQtF/R1GneoErDcgaHMvTgQZ/o5AePEnjjmMGJTezYPcSon4KmejJajsa3FtewuyCkt8lrLOGM3
-	zmmg5CsnQ6jAsPaKDTTu2kYTtar54/O96cw==
-X-Received: by 2002:a17:902:fc8f:b0:2ce:e75f:b713 with SMTP id d9443c01a7336-2d3456f5f5cmr56902515ad.23.1786533115659;
-        Wed, 12 Aug 2026 04:11:55 -0700 (PDT)
-X-Received: by 2002:a17:902:fc8f:b0:2ce:e75f:b713 with SMTP id d9443c01a7336-2d3456f5f5cmr56901585ad.23.1786533115222;
-        Wed, 12 Aug 2026 04:11:55 -0700 (PDT)
-Received: from [10.218.44.82] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d350be1504sm4886065ad.0.2026.08.12.04.11.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 12 Aug 2026 04:11:54 -0700 (PDT)
-Message-ID: <b7b68db4-a3cc-40a4-8748-527abe08934f@oss.qualcomm.com>
-Date: Wed, 12 Aug 2026 16:41:43 +0530
+	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="JDcNvNeN"
+Received: from [172.16.124.192] (unknown [78.44.13.22])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id B3FA053405A5;
+	Wed, 12 Aug 2026 13:18:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1786533525;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=/Ul2jKtraNQpi3ITKUkHD5JY/kubfNpWZjJBe/4vMH8=;
+	b=JDcNvNeNjcGwm6QvtaPVxW0FoYSVQhl0jxg/ENc34e8Rzc3h915cGI2+KfzS+XWtOSk74W
+	PkKsXvtITTEHponJW+2VTYbppgP7TX6wrZCIqRXhC7Qj/Nv714kU1ji2PXydoeSkd4A5us
+	XMCdHIiRuC9GOaWmor3LLWoXw0Eu0x8=
+Message-ID: <e9b0c679-6a50-48ba-8ce8-684bd4b5606b@ixit.cz>
+Date: Wed, 12 Aug 2026 13:18:33 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,144 +41,138 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v24 08/12] mfd: psci-mfd: Add psci-reboot-mode child cell
-To: Lee Jones <lee@kernel.org>
-Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>,
-        Souvik Chakravarty <Souvik.Chakravarty@arm.com>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Andy Yan
- <andy.yan@rock-chips.com>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        John Stultz
- <john.stultz@linaro.org>,
-        Moritz Fischer <moritz.fischer@ettus.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Christian Loehle <christian.loehle@arm.com>,
-        Ulf Hansson <ulfh@kernel.org>,
-        Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Sudeep Holla
- <sudeep.holla@kernel.org>,
-        Florian Fainelli <florian.fainelli@broadcom.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-        Andre Draszik <andre.draszik@linaro.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
-        linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, mfd@lists.linux.dev,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
- <20260803-arm-psci-system_reset2-vendor-reboots-v24-8-889281373870@oss.qualcomm.com>
- <20260812081856.GF1072730@google.com>
+Subject: Re: [PATCH v5 5/6] nfc: s3fwrn5: support the S3NRN4V variant
+To: Jorijn van der Graaf <jorijnvdgraaf@catcrafts.net>,
+ Krzysztof Kozlowski <krzk@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>
+Cc: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
+ Andrew Lunn <andrew+netdev@lunn.ch>, Bjorn Andersson <andersson@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Conor Dooley
+ <conor.dooley@microchip.com>, "David S . Miller" <davem@davemloft.net>,
+ Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>,
+ Luca Weiss <luca.weiss@fairphone.com>, devicetree@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ netdev@vger.kernel.org, oe-linux-nfc@lists.linux.dev
+References: <20260811220135.472380-1-jorijnvdgraaf@catcrafts.net>
+ <20260811220135.472380-6-jorijnvdgraaf@catcrafts.net>
 Content-Language: en-US
-From: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-In-Reply-To: <20260812081856.GF1072730@google.com>
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <20260811220135.472380-6-jorijnvdgraaf@catcrafts.net>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEyMDA5MCBTYWx0ZWRfXyaHaYvqlwa5b
- mVpiYeBl3br2mvtXRV+nCDOymGq6UAg6Te3oMRuSz3xcmT2ra1DdRPAL6udPmvpwD6qad4w7zmB
- vdZ3iVFkhpCLQ7ugwUhToKdvTKi5Q3eCsGjMr5xvw2kg+fY5Aj/ba5X/KBm8E0qrpk7aZxYzPrk
- g84cjxOxKpCymjM7+PI6LBdLv/0xWQLTAI3lUbsVXgdeR0wwSjSulRyOdt3XnEZefS1OWG13ASn
- p1x1C+1OaNEsr5u9zVypxV5UozKpfWg8JKE0lW0VNSt4ZvQDA2X1ohym193bKRqrRGoB10rhVzX
- FtWFvu/hNwixXbLYjyfvtc9sSQxOk/TNkb/hOyqAO2SLZ2ApPk1gijMkb9NcvHvpulKGDM/xeU9
- Q8CHbaKeC8WbBFCjtuKek8pRKA52N35o8DMugMfeUh6X0zCTaNYzp53GXHaO2JNLhCru33PGf+H
- 0oNuZYvAb9oTVviEXVw==
-X-Authority-Analysis: v=2.4 cv=Wb08rUhX c=1 sm=1 tr=0 ts=6a7c54fc cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=Tp_YqcUnzpVuw28kZAUA:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
-X-Proofpoint-GUID: 61mPZ24Jy0Mo93RhtNVnhdtcdqFPAxC9
-X-Proofpoint-ORIG-GUID: 61mPZ24Jy0Mo93RhtNVnhdtcdqFPAxC9
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEyMDA5MCBTYWx0ZWRfX9v8Hjm+r0xzu
- gOwRs2VmHRKWJvJBxMYqr88aDg7nr2tGVv6tLY1nm1agz2dacdpIH5lgfgXE3hZ7rcsQ3sDwRV1
- dBmV0haIT0VhJkU4Ck/Txq0KKMPNbK4=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-12_03,2026-08-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 phishscore=0 lowpriorityscore=0 suspectscore=0
- priorityscore=1501 malwarescore=0 spamscore=0 adultscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608120090
 
-
-
-On 8/12/2026 1:48 PM, Lee Jones wrote:
-> On Mon, 03 Aug 2026, Shivendra Pratap wrote:
+On 12/08/2026 00:01, Jorijn van der Graaf wrote:
+> The S3NRN4V (e.g. on the Fairphone 6, SM7635) is a later part in the
+> Samsung NFC controller line this driver covers. It needs different
+> bring-up, selected with a new samsung,s3nrn4v compatible:
 > 
->> The PSCI "reboot-mode" node does not define a compatible because it is a
->> configuration of boot-states provided by the underlying firmware. With
->> the new firmware-node based cells in mfd-core, this node can now be
->> exposed as a proper child cell.
->>
->> Add the psci-reboot-mode child cell to the psci-mfd driver with a
->> named_fwnode. Add psci-cpuidle-domain cell first to isolate it from
->> reboot-mode failures.
->>
->> Suggested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
->> ---
->>   drivers/mfd/psci-mfd.c      | 27 ++++++++++++++++++++++++++-
->>   drivers/power/reset/Kconfig |  2 +-
->>   2 files changed, 27 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/mfd/psci-mfd.c b/drivers/mfd/psci-mfd.c
->> index 7affd6bb09dd..7befc4fa86f5 100644
->> --- a/drivers/mfd/psci-mfd.c
->> +++ b/drivers/mfd/psci-mfd.c
->> @@ -14,10 +14,35 @@ static const struct mfd_cell psci_cells[] = {
->>   	},
->>   };
->>   
->> +static const struct mfd_cell psci_reboot_mode_cell[] = {
->> +	{
->> +		.name = "psci-reboot-mode",
->> +		.named_fwnode = "reboot-mode",
->> +	},
->> +};
->> +
->>   static int psci_mfd_probe(struct platform_device *pdev)
->>   {
->> -	return devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO, psci_cells,
->> +	int ret;
->> +
->> +	ret = devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO, psci_cells,
->>   				   ARRAY_SIZE(psci_cells), NULL, 0, NULL);
->> +	if (ret)
->> +		goto out;
->> +
->> +	ret = devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO,
->> +				   psci_reboot_mode_cell,
->> +				   ARRAY_SIZE(psci_reboot_mode_cell),
->> +				   NULL, 0, NULL);
->> +	if (ret) {
->> +		if (ret == -ENOMEM)
->> +			goto out;
->> +		dev_warn(&pdev->dev, "reboot-mode child cell failed to add: %d\n", ret);
+>   - It ships with working firmware, and its bootloader reports a
+>     hardware version this driver has no flash base address for, so the
+>     firmware download step is skipped. Its RF calibration data is
+>     loaded with the proprietary DUAL_OPTION command (the HW and SW
+>     blobs merged into a single stream) instead of the
+>     START/SET/STOP_RFREG sequence. The upload is version-gated on
+>     DUAL_OPTION GET_VER, matching the vendor stack: GET_VER reports
+>     the chip's current calibration versions, and the push is skipped
+>     when both match the blobs (each blob carries its version in its
+>     last 16 bytes). post_setup runs on every device-up, so the
+>     gate is what keeps the chip's calibration store from being rewritten
+>     each time NFC is enabled.
 > 
-> Okay Yoda, but why is this okay?
+>   - Its reference clock speed is configured with the single-byte FW_CFG
+>     form, sent from the ->init hook, before CORE_RESET, in the same
+>     order the vendor stack sends it. The vendor HAL uses the
+>     single-byte form for this generation, and its vendor configuration
+>     sets the selector to 0x11, which selects the 19.2 MHz reference.
+>     Without this command the chip completes NCI initialization but
+>     goes silent on RF_DISCOVER -- the command times out unanswered and
+>     polling never starts (verified on hardware).
 > 
-> Needs a comment.
+> The calibration data is requested from a chip-scoped directory,
+> samsung/s3nrn4v/hwreg.bin and samsung/s3nrn4v/swreg.bin, rather than
+> the flat sec_s3fwrn5_rfreg.bin name the older parts use.
+> 
+> The variant is carried as match data by both the OF and the I2C device
+> id tables so the two match paths agree.
+> 
+> Existing S3FWRN5 / S3FWRN82 setups keep the firmware-download path and
+> the legacy rfreg sequence, unchanged.
+> 
+> Assisted-by: Claude:claude-opus-4-8
+> Assisted-by: Claude:claude-fable-5
+> Assisted-by: Claude:claude-opus-5
 
-sure. Will add a comment in code.
+I was going to make a joke about over-assisted stuff with two-lines of 
+Assisted-by before, but... :)
 
-psci-mfd adds two child cells, psci-cpuidle-domain and psci-reboot-mode.
-psci-cpuidle-domain is boot-critical on supported systems.
-psci-reboot-mode is added separately as an optional child. For 
-non-critical failures from psci_reboot_mode_cell, we want to continue 
-the probe of psci-mfd.
+Here's my mental model:
 
-thanks,
-Shivendra
+  - It's good to know that you used an LLM (hence Assisted-by).
+  - Someone may want to reproduce some generated code, so knowing which model was
+    used is useful.
+  - When you put THREE ;-) models there, I think it's getting a bit useless, as
+    we don't know which part was generated or adjusted by which model. At this
+    point, it feels somewhat pointless.
+
+My recommendation would be to keep just one line for the model used for:
+
+a) the majority of the changes
+b) the last model used (at least for notable changes)
+c) the most powerful model doing the generation and/or review
+
+I personally don't mind either approach. There have been discussions about 
+dropping Assisted-by completely, but so far it makes sense to me to keep it, 
+just in moderation.
+
+Also, the patchset is shaping up nicely! :)
+
+Thank you for your work,
+David
+
+[...]
