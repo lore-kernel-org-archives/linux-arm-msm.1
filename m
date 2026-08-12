@@ -1,32 +1,32 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4429E314D1A;
-	Wed, 12 Aug 2026 13:53:19 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9135430F924;
+	Wed, 12 Aug 2026 13:59:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786542800; cv=none; b=HkaXxFZDcuE1xbAemd27s2W+s7v1zGr6h7DMTmB9Ee9cQjeMfQY9leqeGYNofwSTD3vYK0ZwJrGG5UGm5LtdOgz53P9js8+g6aH/cAm3nGyQ+ULNU6o7MhjyQtsV3X8wB6sljZh7JiOEieBSvUwEVOW831rK46KrsOezIdZ4FIY=
+	t=1786543155; cv=none; b=JIsxsJcia6g++U3X8ghHjg6WCDt8UXZOafiMagZJXRbglnp+u5Xbuk3cRXAbtSMyjcGor0cziSs9MYdHy7wgm0SV20MMsGAWv8Agq9EREuL3EsK+83AbNGk89uxALK2H/Yf+mPYMQ+C7yN0y3C4Ec5hRNA4PaodnQ4+T7dJ/m7w=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786542800; c=relaxed/simple;
-	bh=jnddOTaulreO/MesAyh+45bh4qsPQrhEprnkUQblMIM=;
+	s=arc-20240116; t=1786543155; c=relaxed/simple;
+	bh=rhvAFtnrurim52Zf2WMdvPWUANJ9c45AnrjwzgqH8H8=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ir1xD+jQ6yO/avbNqaBv77NJNMCKhVf9urTzoKLyr+Ps4eb5ruqz/Xx2Wju2kJxmNeJ+hdWDpovrjhu54WtTKYIqzWC9wFT0ikpsWafuGIUcivy5qxJvEIJshwtaSXMEza/bGsQqC5hVLXjfCtHiLmcM8s7xyjBzGA9Vog5tsaQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=DsBBYIi4; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=SqdFeCBMOm04ri7hbHYzjeKCRIWD2wjyyLOJA4OGfs8mKvMimXAZIO18yZIttU7CsbohdPx0HiRD+wlKUwuq4TgSlgVKLtwfiKxBG+QSX/KmkaImPEgJhVBPeSGmReP7jZQhXCojau77yXJ0cGiSNEsSyJEMn+xHODegu0Gf9sw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=jDRW8v4w; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="DsBBYIi4"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ABA591F000E9;
-	Wed, 12 Aug 2026 13:53:13 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="jDRW8v4w"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E224E1F000E9;
+	Wed, 12 Aug 2026 13:59:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786542798;
-	bh=lscjbvhu4sZY3Vq6UVhR28UHnVjIyganW1V7Q5v5k50=;
+	s=k20260515; t=1786543154;
+	bh=xWlAAoX4z+1nRZaEJHotnpbuB6N/MbAZxicm0ud2Z5c=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=DsBBYIi4YlKKemyZgZt10pE6owlC543boMsGE/3SZ171NrzLYeKNxXJRB8FfTa9W3
-	 Euae2i4B4rI4SW4nh+JuR8IoIl6iCcgq3dyYPhEgRCQzyZ/s/8K/fHb9l5Zs1La9iu
-	 UHiG9tE41njuRc2Fc594N6amZOW5JLNzTmUaVYvedBS0eaDbB7OevQnbmuEzSzaR2o
-	 AEZqtpF9OVX2gnwhXgtvxUhLDCQBrBfn0nh7Bt/PPWeRCdlM/WLdpI2SpwCdcfx9Fk
-	 0bdAFh75DnI8A9NcHFwTHys5khL9jW/SSnqQkvZX7zf80Zx70n8mq7kpDvpn6hkXnm
-	 pKulT/tkgPYhw==
-Date: Wed, 12 Aug 2026 15:53:09 +0200
+	b=jDRW8v4wNfw2FXPPeT+ZU6O3C8E6xTCUNgfwlSDixfiQYXPjjhDobnAdb4z0fcLPk
+	 IsajS56QCPX/IM4mket556BdoRD/XaPaFdh67VS6M6ViLBXxNFTEj+0fs50lIprOIx
+	 zW71nAZNN8di9CY+TeqJKAvAzaxjajCtUBLjW7hl+EV9BTF6wd2CO+Rl7EpUs3TNGt
+	 cIbE50jfKzEDNCEk2xm2OWcoC5x3El3Zocv9Fay7Ed1vN95T69+dr6ENbJVHGuE0tP
+	 fXmQHIQiu+hKYQAa9GoE97aU0zhrTBkSZr1iDVn8HzlGy0+4KMy/dyAheyoPOvcHjr
+	 wNdIrDF4AyqEw==
+Date: Wed, 12 Aug 2026 15:59:05 +0200
 From: Manivannan Sadhasivam <mani@kernel.org>
 To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 Cc: Rob Clark <robin.clark@oss.qualcomm.com>, 
@@ -36,12 +36,11 @@ Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
 	Simona Vetter <simona@ffwll.ch>, Vinod Koul <vkoul@kernel.org>, 
 	Neil Armstrong <neil.armstrong@linaro.org>, linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
 	dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org, linux-phy@lists.infradead.org, 
-	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-Subject: Re: [PATCH v9 4/5] phy: qcom-uniphy: add more registers from display
- PHYs
-Message-ID: <bhvd4pv765rbog6wnj5i3log7dzqggtlibjnqeakj7rqibk4bg@wu2asltvxsuu>
+	Dmitry Baryshkov <dmitry.baryshkov@linaro.org>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v9 5/5] phy: qualcomm: add MSM8974 HDMI PHY support
+Message-ID: <3nhliv4mf7a7oaupsfsr6cg5nbiyyaftmeseqlgm2urhssayt2@bwc3oyhmmmcs>
 References: <20260513-fd-hdmi-phy-v9-0-ca98c72f1f9f@oss.qualcomm.com>
- <20260513-fd-hdmi-phy-v9-4-ca98c72f1f9f@oss.qualcomm.com>
+ <20260513-fd-hdmi-phy-v9-5-ca98c72f1f9f@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -51,19 +50,229 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260513-fd-hdmi-phy-v9-4-ca98c72f1f9f@oss.qualcomm.com>
+In-Reply-To: <20260513-fd-hdmi-phy-v9-5-ca98c72f1f9f@oss.qualcomm.com>
 
-On Wed, May 13, 2026 at 09:14:07PM +0300, Dmitry Baryshkov wrote:
-> From: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> 
-> Import register definitions from 28nm DSI and HDMI PHYs, adding more UNI
-> PHY registers.
+On Wed, May 13, 2026 at 09:14:08PM +0300, Dmitry Baryshkov wrote:
+> Add support for HDMI PHY on Qualcomm MSM8974 / APQ8074 platforms.
 > 
 > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
-> Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+> Acked-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> ---
+>  drivers/phy/qualcomm/phy-qcom-hdmi-28hpm.c | 282 +++++++++++++++++++++++++++++
+>  1 file changed, 282 insertions(+)
+> 
+> diff --git a/drivers/phy/qualcomm/phy-qcom-hdmi-28hpm.c b/drivers/phy/qualcomm/phy-qcom-hdmi-28hpm.c
+> index 720757f8f393..7d398060b3a3 100644
+> --- a/drivers/phy/qualcomm/phy-qcom-hdmi-28hpm.c
+> +++ b/drivers/phy/qualcomm/phy-qcom-hdmi-28hpm.c
+> @@ -6,10 +6,13 @@
+>   * Author: Rob Clark <robdclark@gmail.com>
+>   */
+>  
+> +#include <linux/bitfield.h>
+>  #include <linux/delay.h>
+>  #include <linux/iopoll.h>
+> +#include <linux/math64.h>
+>  
+>  #include "phy-qcom-hdmi-preqmp.h"
+> +#include "phy-qcom-uniphy.h"
+>  
+>  #define REG_HDMI_8x74_ANA_CFG0					0x00000000
+>  #define REG_HDMI_8x74_ANA_CFG1					0x00000004
+> @@ -31,8 +34,282 @@
+>  #define REG_HDMI_8x74_BIST_PATN3				0x00000048
+>  #define REG_HDMI_8x74_STATUS					0x0000005c
+>  
+> +#define HDMI_8974_VCO_MAX_FREQ 1800000000UL
+> +#define HDMI_8974_VCO_MIN_FREQ  600000000UL
+> +
+> +#define HDMI_8974_COMMON_DIV 5
+> +
+> +static inline void write16(u16 val, void __iomem *reg)
 
-Acked-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Same comment as previous patch. No 'inline' keyword in .c files.
+
+> +{
+> +	writel(val & 0xff, reg);
+> +	writel(val >> 8, reg + 4);
+> +}
+> +
+> +static inline void write24(u32 val, void __iomem *reg)
+> +{
+> +	writel(val & 0xff, reg);
+> +	writel((val >> 8) & 0xff, reg + 4);
+> +	writel(val >> 16, reg + 8);
+> +}
+> +
+> +static inline u32 read24(void __iomem *reg)
+> +{
+> +	u32 val = readl(reg);
+> +
+> +	val |= readl(reg + 4) << 8;
+> +	val |= readl(reg + 8) << 16;
+> +
+> +	return val;
+> +}
+> +
+> +static void qcom_uniphy_setup(void __iomem *base, unsigned int ref_freq,
+> +			      bool sdm_mode,
+> +			      bool ref_freq_mult_2,
+> +			      bool dither,
+> +			      unsigned int refclk_div,
+> +			      unsigned int vco_freq)
+
+Nit: You can align these arguments better.
+
+> +{
+> +	unsigned int int_ref_freq = ref_freq * (ref_freq_mult_2 ? 2 : 1);
+> +	unsigned int div_in_freq = vco_freq / refclk_div;
+> +	unsigned int dc_offset = div_in_freq / int_ref_freq - 1;
+> +	unsigned int sdm_freq_seed;
+> +	unsigned int val;
+> +	u64 tmp = div_in_freq % int_ref_freq;
+> +
+> +	tmp *= 0x10000;
+> +	sdm_freq_seed = div_u64(tmp, int_ref_freq);
+> +
+> +	val = FIELD_PREP(UNIPHY_PLL_REFCLK_DBLR, ref_freq_mult_2) |
+> +	      FIELD_PREP(UNIPHY_PLL_REFCLK_DIV, refclk_div - 1);
+> +	writel(val, base + UNIPHY_PLL_REFCLK_CFG);
+> +
+> +	if (sdm_mode) {
+> +		writel(0, base + UNIPHY_PLL_SDM_CFG0);
+> +		writel(FIELD_PREP(UNIPHY_PLL_SDM_DITHER_EN, dither) | dc_offset,
+> +		       base + UNIPHY_PLL_SDM_CFG1);
+> +		write24(sdm_freq_seed, base + UNIPHY_PLL_SDM_CFG2);
+> +	} else {
+> +		writel(UNIPHY_PLL_SDM_BYP | dc_offset, base + UNIPHY_PLL_SDM_CFG0);
+> +		writel(0, base + UNIPHY_PLL_SDM_CFG1);
+> +		write24(0, base + UNIPHY_PLL_SDM_CFG2);
+> +	}
+> +
+> +	write16(mult_frac(ref_freq, 5, 1000000), base + UNIPHY_PLL_CAL_CFG8);
+> +	write16(vco_freq / 16, base + UNIPHY_PLL_CAL_CFG10);
+> +}
+> +
+> +static unsigned long qcom_uniphy_recalc(void __iomem *base, unsigned long parent_rate)
+> +{
+> +	unsigned long rate;
+> +	u32 refclk_cfg;
+> +	u32 dc_offset;
+> +	u64 fraq_n;
+> +	u32 val;
+> +
+> +	refclk_cfg = readl(base + UNIPHY_PLL_REFCLK_CFG);
+> +	if (refclk_cfg & UNIPHY_PLL_REFCLK_DBLR)
+> +		parent_rate *= 2;
+> +
+> +	val = readl(base + UNIPHY_PLL_SDM_CFG0);
+> +	if (FIELD_GET(UNIPHY_PLL_SDM_BYP, val)) {
+> +		dc_offset = FIELD_GET(UNIPHY_PLL_SDM_BYP_DIV, val);
+> +		fraq_n = 0;
+> +	} else {
+> +		dc_offset = FIELD_GET(UNIPHY_PLL_SDM_DC_OFFSET,
+> +				      readl(base + UNIPHY_PLL_SDM_CFG1));
+> +		fraq_n = read24(base + UNIPHY_PLL_SDM_CFG2);
+> +	}
+> +
+> +	rate = (dc_offset + 1) * parent_rate;
+> +	rate += div_u64(fraq_n * parent_rate, 0x10000);
+> +
+> +	rate *= FIELD_GET(UNIPHY_PLL_REFCLK_DIV, refclk_cfg) + 1;
+> +
+> +	return rate;
+> +}
+> +
+> +static const unsigned int qcom_hdmi_8974_divs[] = {1, 2, 4, 6};
+> +
+> +static unsigned long qcom_hdmi_8974_pll_recalc_rate(struct clk_hw *hw,
+> +						    unsigned long parent_rate)
+> +{
+> +	struct qcom_hdmi_preqmp_phy *hdmi_phy = hw_clk_to_phy(hw);
+> +	u32 div_idx = readl(hdmi_phy->pll_reg + UNIPHY_PLL_POSTDIV1_CFG);
+> +	unsigned long rate = qcom_uniphy_recalc(hdmi_phy->pll_reg, parent_rate);
+> +
+> +	return rate / HDMI_8974_COMMON_DIV / qcom_hdmi_8974_divs[div_idx & 0x3];
+> +}
+> +
+> +static int qcom_hdmi_8974_pll_determine_rate(struct clk_hw *hw,
+> +					     struct clk_rate_request *req)
+> +{
+> +	unsigned long min_freq = HDMI_8974_VCO_MIN_FREQ / HDMI_8974_COMMON_DIV;
+> +	unsigned long max_freq = HDMI_8974_VCO_MAX_FREQ / HDMI_8974_COMMON_DIV;
+> +
+> +	req->rate = clamp(req->rate, min_freq / 6, max_freq);
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct clk_ops qcom_hdmi_8974_pll_ops = {
+> +	.recalc_rate = qcom_hdmi_8974_pll_recalc_rate,
+> +	.determine_rate = qcom_hdmi_8974_pll_determine_rate,
+> +};
+> +
+> +static int qcom_hdmi_msm8974_phy_find_div(unsigned long long pixclk)
+> +{
+> +	unsigned long long min_freq = HDMI_8974_VCO_MIN_FREQ / HDMI_8974_COMMON_DIV;
+> +	int i;
+> +
+> +	if (pixclk > HDMI_8974_VCO_MAX_FREQ / HDMI_8974_COMMON_DIV)
+> +		return -EINVAL;
+> +
+> +	for (i = 0; i < ARRAY_SIZE(qcom_hdmi_8974_divs); i++) {
+> +		if (pixclk >= min_freq / qcom_hdmi_8974_divs[i])
+> +			return i;
+> +	}
+> +
+> +	return -EINVAL;
+> +}
+> +
+> +static int qcom_hdmi_msm8974_phy_pll_set_rate(struct qcom_hdmi_preqmp_phy *hdmi_phy)
+> +{
+> +	unsigned long long pixclk = hdmi_phy->hdmi_opts.tmds_char_rate;
+> +	unsigned long vco_rate;
+> +	unsigned int div;
+> +	int div_idx = 0;
+> +
+> +	div_idx = qcom_hdmi_msm8974_phy_find_div(pixclk);
+> +	if (WARN_ON(div_idx < 0))
+> +		return div_idx;
+> +
+> +	div = qcom_hdmi_8974_divs[div_idx];
+> +	vco_rate = pixclk * HDMI_8974_COMMON_DIV * div;
+> +
+> +	writel(0x81, hdmi_phy->phy_reg + REG_HDMI_8x74_GLB_CFG);
+> +
+> +	writel(0x01, hdmi_phy->pll_reg + UNIPHY_PLL_GLB_CFG);
+> +	writel(0x19, hdmi_phy->pll_reg + UNIPHY_PLL_VCOLPF_CFG);
+> +	writel(0x0e, hdmi_phy->pll_reg + UNIPHY_PLL_LPFR_CFG);
+> +	writel(0x20, hdmi_phy->pll_reg + UNIPHY_PLL_LPFC1_CFG);
+> +	writel(0x0d, hdmi_phy->pll_reg + UNIPHY_PLL_LPFC2_CFG);
+> +
+> +	qcom_uniphy_setup(hdmi_phy->pll_reg, 19200000, true, true, true, 1, vco_rate);
+> +
+> +	writel(0x10, hdmi_phy->pll_reg + UNIPHY_PLL_LKDET_CFG0);
+> +	writel(0x1a, hdmi_phy->pll_reg + UNIPHY_PLL_LKDET_CFG1);
+> +	writel(0x05, hdmi_phy->pll_reg + UNIPHY_PLL_LKDET_CFG2);
+> +
+> +	writel(div_idx, hdmi_phy->pll_reg + UNIPHY_PLL_POSTDIV1_CFG);
+> +
+> +	writel(0x00, hdmi_phy->pll_reg + UNIPHY_PLL_POSTDIV2_CFG);
+> +	writel(0x00, hdmi_phy->pll_reg + UNIPHY_PLL_POSTDIV3_CFG);
+> +	writel(0x01, hdmi_phy->pll_reg + UNIPHY_PLL_CAL_CFG2);
+> +
+> +	writel(0x1f, hdmi_phy->phy_reg + REG_HDMI_8x74_PD_CTRL0);
+> +	udelay(50);
+
+You've added a lot of delays in-between register writes. Delay between register
+writes makes me nervous because there is no guarantee that the previous write
+before delay would've reached the hardware before the next write after delay. So
+the delay might become irrelevant and can cause nasty timing issues if these
+delays need to be honored.
+
+So I'd double check and add a readl() before the delay to flush the previous
+writes.
 
 - Mani
 
