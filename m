@@ -1,168 +1,1052 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from smtp.smtpout.orange.fr (smtp-13.smtpout.orange.fr [80.12.242.13])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E901476066
-	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 16:34:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CC97C47D92D;
+	Wed, 12 Aug 2026 17:10:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=80.12.242.13
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786552498; cv=none; b=F6U+q4gFENA3dBxUDwyn1n9+gLcn6lX4Co+fIZtkl2bVInGoSRAcklzaqpd5Kj6HFbjBd1IFERYkcL3yop7jsBYEnoSTmYyaDSECDqCvPBhsPt6YnXhkB1Edu9xzoyQXopmLSTSZG93CkDUIbLkr2bDL9jAYGWXeYHjf3TYsgBI=
+	t=1786554615; cv=none; b=DlbSByzA1lT/Sk05V82gs5xveeElPvna1ZMHNgZzq4JXuF3fADmjKLQ8Ss61Ju1clgHp7+l+aU+OVdfafFV/nvj5yTmgJD/it89ZgaWNo3tB6wxUUYkP7KNZgmUkQkNEJDzEPZcwpfHLkzxKETAv+aGBvPnUwti3/1UaC0ouO+M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786552498; c=relaxed/simple;
-	bh=gA0lORcd8PzgzQRPjvcSZ8SlhYNfUM2OulIiqvoMyCA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=NHm7AFzXFNHg88XVIthRWghg5h4tWHPIGWXWj9Ry5LEW617bbK8ydlVESxByK3MIEnqzk429QtRnZML96bgGYOZAIWHvbWjWpV6DLCorrihul/yRGitJZG3H/nBcgtTRgrsI0cY7oMyERdZMH/A3XyoLVlhRVhFnFuzVx3z2lx4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DtPhXVz2; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=bCawuyCl; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1786554615; c=relaxed/simple;
+	bh=Ga7SLZ6QerTdFI13h6GOfRV4LDJKUI9xMjNShzkX5rw=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=CGMrW7Thjz6GcAiX58Du+HVi3KdSRlVbUSIodvvib1kgzQKmYcAOZJGyLafhWBX8TdYmUWQH7Ns4JAyEBwMUXruSiLr16T8N8pHQfCyaN8AWo0xz+pVzG/xRGhrx5AC+KgYhpmHP7GEql2lYFYo4NPXMyyPkNtxuUEIKVQ8/VyM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=wanadoo.fr; spf=pass smtp.mailfrom=wanadoo.fr; dkim=pass (2048-bit key) header.d=wanadoo.fr header.i=@wanadoo.fr header.b=HG7pTEmQ; arc=none smtp.client-ip=80.12.242.13
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=wanadoo.fr
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=wanadoo.fr
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DtPhXVz2";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="bCawuyCl"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67CDbuAK3194375
-	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 16:34:54 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=HidDxqccptEjRvOvXtg+GI/B
-	TnjMVm5M30ebJJ0kgIQ=; b=DtPhXVz2+0m/R6csiE0wGrnIsFPodPamlwyUI6pf
-	zhlldQEOuJ7nDYPJKChetqocP+ZHEezY0pFdP5YQ8xqRgyLQy35Rv5PHHcVo/0jH
-	kTzTmvlhPi7xrG85rZ4MvUXQq13X38FVm+ARtlyjUHut8tOJ/ykvGHUxEk82j0GU
-	njjDyif9U6MCd6RJzCAwlJzYseugPR5COfRV4jdrEnReOlc9rHg/YL6S3fWJdMCI
-	OZJUJph4OuCQYU/3XVwN3qniFArxXKV7AUfuTUOA7aXb7PI5FbxWqkIySnT2Oi81
-	psONeFFgEbwA49HBLcfCUbFxdwoSqP1eRugJQMnLQ7b4WA==
-Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g0mnda8wu-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 16:34:53 +0000 (GMT)
-Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c1d137a68so24099971cf.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 09:34:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786552489; x=1787157289; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=HidDxqccptEjRvOvXtg+GI/BTnjMVm5M30ebJJ0kgIQ=;
-        b=bCawuyClVmBDfAKFpA2HNmVTfgohiaQuTzpfFg5HTTY7BaEQqOzsKT6bTX2/AE2B24
-         bcF+lN9n3NeCadetFVoVb1ibkRgEMrtx3OD99w2s/sTUQxEUS0gRehQu9QCa3GAI8YWD
-         oDHFFERK+0dEPlq/5FVnFgrbSPkzkXq22Kotpy2f40y7sksZ5E3rkAJILgcl7XacZMax
-         ReJ4B1GD0S/e1KDMLcUTujpVHM3Up5+kBP/PiOQ8PymOk6uiCP3LQDTqg+f9yfXw/Be/
-         k4SiKDg7k6kpsBGmbT+NrKWZQe4yLzvnsz/TxU7ZvsSbLRP8t0V4MxdRrtTQyfW30mja
-         JtNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786552489; x=1787157289;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=HidDxqccptEjRvOvXtg+GI/BTnjMVm5M30ebJJ0kgIQ=;
-        b=IFiF3bk0woQ7OT9pdmltCsjRSSImlOCvLQuaXq0V/JONhwCNFACGcvANB/x3JXiehn
-         WPseOkYY90Z2gfVhQxckZme5PF1fpylOG4AQHrZVV5KHN1wtz/E1FFmrivt6Xic8Iiha
-         y91obZq87z7e1nNkUEVR0E0RZv9jizdbEcCEutAPGN5HiarXvIaThzYmh87SV0yPZadC
-         1ymzhiWmOYSHwKD6r4uzAloKdMvrgNRFSHu7skxecOPNlsgTGgLtTjVMhREDVg+ZHdoS
-         Rrdp9uzC3ElkkRGmMLaWKckJ/aIFh3+q4+1jMoyxg/MkriUlhxXvDqePmw273lVFIYdc
-         DlRQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rp6nPlfMWHGcSc758yqloCjUSfL/9rMHelz+cStHlu4BKlcSb8J07wRHkZL5KvHWGn7Xl/LsL2G7cYf45lI@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyglh6aSCm7N8YtNJAI3lHAVdXeFJdyUHAtyUL9foRAD8MCUOAu
-	ovZFeGMq4ULhxeXUc4HoDeQzMNBJmZfJLebr743kWBINGpwtQSX+5bUl//OPZ5iarE7e9FFjdo/
-	y5l9RIKTF+dM705RmWieY5LopzLp00BprKqeDefbydNxxxnwtrqcAyyp4te54M69+nDbZ
-X-Gm-Gg: AR+sD10wTAag9aOG+KVVl+spGW8Aud9ydNjj0uGB+WAAVyoyVpNFS0xqE4DNVxNucNW
-	wm7T6zQf+yLgWZbeFnhoOwrJdcc+a8wLavYsOUiDSuLJLoxDsLQErt3+IHMDmfoXD5E4DppKwPb
-	y26IfOpWhYMk7xzzCuVSrzjtn2uw5NoZCvxkoA2JbK7K4g73FRcd7M5CeFt+MMMcJrfRHA8marZ
-	U3v1Dp+zFlLIm51sbUmNLRfyFXQfTErMWAzl13VReBxIifWIbhHsmbKmt1wZ9Wyy/KrGlwZ7RcX
-	qU9ZJ+N6GQRh1Ydv5fLHUx2HgVdhh6/Uy8tmI+V3DgL8eQFLo+Ks0QC3xbUbI04aWO8XE4AOWlz
-	Kc0kawHbexJ3y86eHHriWItkqclz3jK5gdKOM5jh678iCvUqDLOCSLPWtqk1MvcX1gTsjDe/9JA
-	==
-X-Received: by 2002:a05:622a:1349:b0:527:809c:f9cf with SMTP id d75a77b69052e-52d647ed01dmr52950881cf.21.1786552489288;
-        Wed, 12 Aug 2026 09:34:49 -0700 (PDT)
-X-Received: by 2002:a05:622a:1349:b0:527:809c:f9cf with SMTP id d75a77b69052e-52d647ed01dmr52948811cf.21.1786552487064;
-        Wed, 12 Aug 2026 09:34:47 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b44cfb2e5asm609335e87.6.2026.08.12.09.34.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2026 09:34:45 -0700 (PDT)
-Date: Wed, 12 Aug 2026 19:34:44 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Greg Ociepka <greg@ferrisoft.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>,
-        Wesley Cheng <wesley.cheng@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: glymur: Mark USB controllers
- dma-coherent
-Message-ID: <5wnlpg5pt6la5e7fgd35nejmnh6iudemlriiubm2amg4qkdyj5@6p6iakiik4wc>
-References: <20260812154014.123315-1-greg@ferrisoft.com>
+	dkim=pass (2048-bit key) header.d=wanadoo.fr header.i=@wanadoo.fr header.b="HG7pTEmQ"
+Received: from device-101.home ([10.64.95.103])
+	by smtp.orange.fr with ESMTP
+	id uCRnwXtuVUFw4uCRnwhbt1; Wed, 12 Aug 2026 19:08:59 +0200
+Received: from device-101.home ([IPv6:2a01:cb10:785:b00:6128:9b8c:c203:905])
+	by smtp.orange.fr with ESMTPSA
+	id uCRdwygoWAdG7uCRewwjP3; Wed, 12 Aug 2026 19:08:50 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=wanadoo.fr;
+	s=t20230301; t=1786554530;
+	bh=x9grDJF6l/rOjarQIuI0kSaum8t0Sh3hPENxVlSh0h8=;
+	h=From:To:Subject:Date:Message-ID:MIME-Version;
+	b=HG7pTEmQb8QKi930awxizPAHeA1S0HHKnM0oYtkUBqJPmuX6k9yGVsqIqIRrAx452
+	 LUiODqMa5fz2MsoE1IBClUAVs2lZxSoImymgh6weS2MfLrTG2Kw4x+oLnHuzSBUm3t
+	 g+hKI5oCxkpghJOeIamIfh25MwdPHC3SJ3y0QJP9V+kUPcVVA7bw1g6HlUTv9db3pV
+	 wE2s+kOpb4oeWYJjXGnYOZE2PwN2pwYl05WClCnppF5S3wlw/9aaPhIhI85eQ1fLPQ
+	 WOs0Wnj7iWSbqHCRtE3ezyDx9e2DKDXciOSgYHGevdUUvkUK3ALDROIevRXSOyBr72
+	 N1g2H4U4rTZGA==
+X-ME-Helo: device-101.home
+X-ME-Auth: Y2hyaXN0b3BoZS5qYWlsbGV0QHdhbmFkb28uZnI=
+X-ME-Date: Wed, 12 Aug 2026 19:08:50 +0200
+X-ME-IP: 2a01:cb10:785:b00:6128:9b8c:c203:905
+From: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+To: Georgi Djakov <djakov@kernel.org>
+Cc: linux-kernel@vger.kernel.org,
+	kernel-janitors@vger.kernel.org,
+	Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+	linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org
+Subject: [PATCH] interconnect: qcom: Constify struct qcom_icc_qosbox
+Date: Wed, 12 Aug 2026 19:08:42 +0200
+Message-ID: <f9d9ab49e961b3bf3f9bad39f22cf8b06afb2381.1786554463.git.christophe.jaillet@wanadoo.fr>
+X-Mailer: git-send-email 2.55.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260812154014.123315-1-greg@ferrisoft.com>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEyMDEzNCBTYWx0ZWRfX/epi4wr80xpE
- VUVswhukW7gmFpRY8gE8uvLcXyBtgqLLlt5StEDBcp5nlwM0ho9qX8EiOSfSYc9jG7Iux1QCzQr
- cikSNKAD9Yb+7+VlewTbbOAZctIw3KI=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEyMDEzNCBTYWx0ZWRfX2CQFdOOrAwzt
- 8CqKWZ7iVl6eyFjx6b8h4k37IKQtqE2ecumJioKALZuYvxDZjCtvfafsRfgBcnsFPmOfBSUceU6
- UhZLK3M0uNn3DwHtYZ/HqEtI24pN5xATvd2J38bN9GOZAq0o3LqLuGrZw2UtP6iqi/xhXRxDnxF
- MA8K0i+eaK3rAF2Dv12Q27baEJj6rbwzKvlOlYP/09+zWnginBd2Z9coFjLFigMfPJ3vdqgZml7
- ZJsE0VJEuaoY3iyToeDLw8uZEV5DxRZxgLXCX8PmZuMMttwZ7pfs5EMhPYH4o+PL+oPFsuWWBN2
- FGB7FaOV9vmQFJ3HpUN8pKy1gYuxY2L0kbc0Bz8GJIWoFlttBHBYw1Ft19OrK6BhduKHFWT53CZ
- Vcvfu0Id4AgjvDuWWQMo52hzqDaaxOKu3IiL3lBmU7BMUbF+s7pb13erNrI0b8r0VpLM7k8FomX
- DDBD2ZBfj3TjUOkLe/g==
-X-Proofpoint-GUID: yUt7mCoUInh-_aeB4r7YpudOPDhZZIa5
-X-Authority-Analysis: v=2.4 cv=C87ZDwP+ c=1 sm=1 tr=0 ts=6a7ca0ad cx=c_pps
- a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=a8UEx8NLAAAA:8 a=i1Pha25J8sJlEzR877YA:9 a=CjuIK1q_8ugA:10
- a=dawVfQjAaf238kedN5IG:22 a=-yeuc7zBjbfZT8aiaP-D:22
-X-Proofpoint-ORIG-GUID: yUt7mCoUInh-_aeB4r7YpudOPDhZZIa5
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-12_04,2026-08-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 phishscore=0 lowpriorityscore=0 spamscore=0
- clxscore=1015 priorityscore=1501 bulkscore=0 adultscore=0 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608120134
+Content-Transfer-Encoding: 8bit
 
-On Wed, Aug 12, 2026 at 05:40:14PM +0200, Greg Ociepka wrote:
-> All five USB controller nodes on Glymur (usb_0, usb_1, usb_2, usb_hs,
-> usb_mp) are missing the dma-coherent property, which Hamoa carries on
-> all of its USB controllers. Krishna Kurapati confirmed the Glymur USB
-> controllers are dma-coherent [1].
-> 
-> Without the property the kernel treats USB DMA buffers as non-coherent
-> and performs cache maintenance on every transfer, which coherent
-> hardware makes redundant.
-> 
-> Follow-up to the clock/power/bandwidth votes patch [2], kept separate
-> so the already-reviewed patch stands as is.
-> 
-> Tested on an Asus Zenbook A16 (UX3607OA): all controllers enumerate
-> their devices as before and a 64 MiB write plus two O_DIRECT
-> read-backs over USB mass storage produce identical checksums.
-> 
-> [1] https://lore.kernel.org/linux-arm-msm/f92cc91e-6e5c-4375-aaa6-f079a165f4b5@oss.qualcomm.com/
-> [2] https://lore.kernel.org/linux-arm-msm/20260812083522.774711-1-greg@ferrisoft.com/
-> 
-> Fixes: 4eee57dd4df9 ("arm64: dts: qcom: glymur: Add USB related nodes")
-> Signed-off-by: Greg Ociepka <greg@ferrisoft.com>
-> Assisted-by: Claude:fable-5
-> ---
->  arch/arm64/boot/dts/qcom/glymur.dtsi | 10 ++++++++++
->  1 file changed, 10 insertions(+)
-> 
+'struct qcom_icc_qosbox' are not modified in these drivers.
 
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Constifying these structures moves some data to a read-only section, so
+increases overall security.
 
+On a x86_64, with allmodconfig:
+Before:
+======
+   text	   data	    bss	    dec	    hex	filename
+   7807	  18632	      0	  26439	   6747	drivers/interconnect/qcom/eliza.o
+  10027	  20176	      0	  30203	   75fb	drivers/interconnect/qcom/milos.o
+   8768	  22640	      0	  31408	   7ab0	drivers/interconnect/qcom/sm6350.o
+   7626	  22000	      0	  29626	   73ba	drivers/interconnect/qcom/sm8650.o
 
+After:
+=====
+   text	   data	    bss	    dec	    hex	filename
+   8095	  18344	      0	  26439	   6747	drivers/interconnect/qcom/eliza.o
+  11079	  19120	      0	  30199	   75f7	drivers/interconnect/qcom/milos.o
+   9668	  21744	      0	  31412	   7ab4	drivers/interconnect/qcom/sm6350.o
+   8746	  20880	      0	  29626	   73ba	drivers/interconnect/qcom/sm8650.o
+
+Signed-off-by: Christophe JAILLET <christophe.jaillet@wanadoo.fr>
+---
+Compile tested only.
+---
+ drivers/interconnect/qcom/eliza.c  | 18 ++++----
+ drivers/interconnect/qcom/milos.c  | 66 ++++++++++++++--------------
+ drivers/interconnect/qcom/sm6350.c | 56 ++++++++++++------------
+ drivers/interconnect/qcom/sm8650.c | 70 +++++++++++++++---------------
+ 4 files changed, 105 insertions(+), 105 deletions(-)
+
+diff --git a/drivers/interconnect/qcom/eliza.c b/drivers/interconnect/qcom/eliza.c
+index 891e4e6e8ba8..ad03adef79ba 100644
+--- a/drivers/interconnect/qcom/eliza.c
++++ b/drivers/interconnect/qcom/eliza.c
+@@ -451,7 +451,7 @@ static struct qcom_icc_node qns_gem_noc_cnoc = {
+ 	.link_nodes = { &qnm_gemnoc_cnoc },
+ };
+ 
+-static struct qcom_icc_qosbox alm_gpu_tcu_qos = {
++static const struct qcom_icc_qosbox alm_gpu_tcu_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x155000 },
+ 	.prio = 1,
+@@ -468,7 +468,7 @@ static struct qcom_icc_node alm_gpu_tcu = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox alm_sys_tcu_qos = {
++static const struct qcom_icc_qosbox alm_sys_tcu_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x157000 },
+ 	.prio = 6,
+@@ -494,7 +494,7 @@ static struct qcom_icc_node chm_apps = {
+ 			&qns_pcie },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_gpu_qos = {
++static const struct qcom_icc_qosbox qnm_gpu_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x31000, 0xb1000 },
+ 	.prio = 0,
+@@ -511,7 +511,7 @@ static struct qcom_icc_node qnm_gpu = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_lpass_gemnoc_qos = {
++static const struct qcom_icc_qosbox qnm_lpass_gemnoc_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x159000 },
+ 	.prio = 0,
+@@ -538,7 +538,7 @@ static struct qcom_icc_node qnm_mdsp = {
+ 			&qns_pcie },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_mnoc_hf_qos = {
++static const struct qcom_icc_qosbox qnm_mnoc_hf_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x33000, 0xb3000 },
+ 	.prio = 0,
+@@ -555,7 +555,7 @@ static struct qcom_icc_node qnm_mnoc_hf = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_mnoc_sf_qos = {
++static const struct qcom_icc_qosbox qnm_mnoc_sf_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x35000, 0xb5000 },
+ 	.prio = 0,
+@@ -572,7 +572,7 @@ static struct qcom_icc_node qnm_mnoc_sf = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_nsp_gemnoc_qos = {
++static const struct qcom_icc_qosbox qnm_nsp_gemnoc_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x37000, 0xb7000 },
+ 	.prio = 0,
+@@ -590,7 +590,7 @@ static struct qcom_icc_node qnm_nsp_gemnoc = {
+ 			&qns_pcie },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_pcie_qos = {
++static const struct qcom_icc_qosbox qnm_pcie_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x15b000 },
+ 	.prio = 2,
+@@ -688,7 +688,7 @@ static struct qcom_icc_node qnm_lpiaon_noc = {
+ 	.link_nodes = { &qns_lpass_ag_noc_gemnoc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_camnoc_nrt_icp_sf_qos = {
++static const struct qcom_icc_qosbox qnm_camnoc_nrt_icp_sf_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x25000 },
+ 	.prio = 4,
+diff --git a/drivers/interconnect/qcom/milos.c b/drivers/interconnect/qcom/milos.c
+index d010b106728a..8b5b5ee53e3b 100644
+--- a/drivers/interconnect/qcom/milos.c
++++ b/drivers/interconnect/qcom/milos.c
+@@ -137,7 +137,7 @@ static struct qcom_icc_node srvc_pcie_aggre_noc;
+ static struct qcom_icc_node qns_gemnoc_gc;
+ static struct qcom_icc_node qns_gemnoc_sf;
+ 
+-static struct qcom_icc_qosbox qhm_qup1_qos = {
++static const struct qcom_icc_qosbox qhm_qup1_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xc000 },
+ 	.prio = 2,
+@@ -154,7 +154,7 @@ static struct qcom_icc_node qhm_qup1 = {
+ 	.link_nodes = { &qns_a1noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_ufs_mem_qos = {
++static const struct qcom_icc_qosbox xm_ufs_mem_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xf200 },
+ 	.prio = 2,
+@@ -171,7 +171,7 @@ static struct qcom_icc_node xm_ufs_mem = {
+ 	.link_nodes = { &qns_a1noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_usb3_0_qos = {
++static const struct qcom_icc_qosbox xm_usb3_0_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x10000 },
+ 	.prio = 2,
+@@ -188,7 +188,7 @@ static struct qcom_icc_node xm_usb3_0 = {
+ 	.link_nodes = { &qns_a1noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qhm_qdss_bam_qos = {
++static const struct qcom_icc_qosbox qhm_qdss_bam_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x14000 },
+ 	.prio = 2,
+@@ -205,7 +205,7 @@ static struct qcom_icc_node qhm_qdss_bam = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qhm_qspi_qos = {
++static const struct qcom_icc_qosbox qhm_qspi_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x12000 },
+ 	.prio = 2,
+@@ -222,7 +222,7 @@ static struct qcom_icc_node qhm_qspi = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qhm_qup0_qos = {
++static const struct qcom_icc_qosbox qhm_qup0_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x13000 },
+ 	.prio = 2,
+@@ -239,7 +239,7 @@ static struct qcom_icc_node qhm_qup0 = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qxm_crypto_qos = {
++static const struct qcom_icc_qosbox qxm_crypto_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x15000 },
+ 	.prio = 2,
+@@ -256,7 +256,7 @@ static struct qcom_icc_node qxm_crypto = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qxm_ipa_qos = {
++static const struct qcom_icc_qosbox qxm_ipa_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x16000 },
+ 	.prio = 2,
+@@ -273,7 +273,7 @@ static struct qcom_icc_node qxm_ipa = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_qdss_etr_0_qos = {
++static const struct qcom_icc_qosbox xm_qdss_etr_0_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x17000 },
+ 	.prio = 2,
+@@ -290,7 +290,7 @@ static struct qcom_icc_node xm_qdss_etr_0 = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_qdss_etr_1_qos = {
++static const struct qcom_icc_qosbox xm_qdss_etr_1_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x18000 },
+ 	.prio = 2,
+@@ -307,7 +307,7 @@ static struct qcom_icc_node xm_qdss_etr_1 = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_sdc1_qos = {
++static const struct qcom_icc_qosbox xm_sdc1_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x1a000 },
+ 	.prio = 2,
+@@ -324,7 +324,7 @@ static struct qcom_icc_node xm_sdc1 = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_sdc2_qos = {
++static const struct qcom_icc_qosbox xm_sdc2_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x19000 },
+ 	.prio = 2,
+@@ -404,7 +404,7 @@ static struct qcom_icc_node qnm_gemnoc_pcie = {
+ 	.link_nodes = { &xs_pcie_0, &xs_pcie_1 },
+ };
+ 
+-static struct qcom_icc_qosbox alm_gpu_tcu_qos = {
++static const struct qcom_icc_qosbox alm_gpu_tcu_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xf1000 },
+ 	.prio = 1,
+@@ -421,7 +421,7 @@ static struct qcom_icc_node alm_gpu_tcu = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox alm_sys_tcu_qos = {
++static const struct qcom_icc_qosbox alm_sys_tcu_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xf3000 },
+ 	.prio = 6,
+@@ -447,7 +447,7 @@ static struct qcom_icc_node chm_apps = {
+ 		   &qns_pcie },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_gpu_qos = {
++static const struct qcom_icc_qosbox qnm_gpu_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x31000, 0x71000 },
+ 	.prio = 0,
+@@ -464,7 +464,7 @@ static struct qcom_icc_node qnm_gpu = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_lpass_gemnoc_qos = {
++static const struct qcom_icc_qosbox qnm_lpass_gemnoc_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xf5000 },
+ 	.prio = 0,
+@@ -491,7 +491,7 @@ static struct qcom_icc_node qnm_mdsp = {
+ 		   &qns_pcie },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_mnoc_hf_qos = {
++static const struct qcom_icc_qosbox qnm_mnoc_hf_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x33000, 0x73000 },
+ 	.prio = 0,
+@@ -508,7 +508,7 @@ static struct qcom_icc_node qnm_mnoc_hf = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_mnoc_sf_qos = {
++static const struct qcom_icc_qosbox qnm_mnoc_sf_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x35000, 0x75000 },
+ 	.prio = 0,
+@@ -525,7 +525,7 @@ static struct qcom_icc_node qnm_mnoc_sf = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_nsp_gemnoc_qos = {
++static const struct qcom_icc_qosbox qnm_nsp_gemnoc_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x37000, 0x77000 },
+ 	.prio = 0,
+@@ -543,7 +543,7 @@ static struct qcom_icc_node qnm_nsp_gemnoc = {
+ 		   &qns_pcie },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_pcie_qos = {
++static const struct qcom_icc_qosbox qnm_pcie_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xf7000 },
+ 	.prio = 2,
+@@ -560,7 +560,7 @@ static struct qcom_icc_node qnm_pcie = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_snoc_gc_qos = {
++static const struct qcom_icc_qosbox qnm_snoc_gc_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xf9000 },
+ 	.prio = 0,
+@@ -577,7 +577,7 @@ static struct qcom_icc_node qnm_snoc_gc = {
+ 	.link_nodes = { &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_snoc_sf_qos = {
++static const struct qcom_icc_qosbox qnm_snoc_sf_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xfb000 },
+ 	.prio = 0,
+@@ -620,7 +620,7 @@ static struct qcom_icc_node llcc_mc = {
+ 	.link_nodes = { &ebi },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_camnoc_hf_qos = {
++static const struct qcom_icc_qosbox qnm_camnoc_hf_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0xa8000, 0xa9000 },
+ 	.prio = 0,
+@@ -637,7 +637,7 @@ static struct qcom_icc_node qnm_camnoc_hf = {
+ 	.link_nodes = { &qns_mem_noc_hf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_camnoc_icp_qos = {
++static const struct qcom_icc_qosbox qnm_camnoc_icp_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x2a000 },
+ 	.prio = 5,
+@@ -654,7 +654,7 @@ static struct qcom_icc_node qnm_camnoc_icp = {
+ 	.link_nodes = { &qns_mem_noc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_camnoc_sf_qos = {
++static const struct qcom_icc_qosbox qnm_camnoc_sf_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x2b000, 0x2c000 },
+ 	.prio = 0,
+@@ -671,7 +671,7 @@ static struct qcom_icc_node qnm_camnoc_sf = {
+ 	.link_nodes = { &qns_mem_noc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_mdp_qos = {
++static const struct qcom_icc_qosbox qnm_mdp_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xad000 },
+ 	.prio = 0,
+@@ -688,7 +688,7 @@ static struct qcom_icc_node qnm_mdp = {
+ 	.link_nodes = { &qns_mem_noc_hf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_video_qos = {
++static const struct qcom_icc_qosbox qnm_video_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x30000 },
+ 	.prio = 0,
+@@ -737,7 +737,7 @@ static struct qcom_icc_node qsm_pcie_anoc_cfg = {
+ 	.link_nodes = { &srvc_pcie_aggre_noc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_pcie3_0_qos = {
++static const struct qcom_icc_qosbox xm_pcie3_0_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xb000 },
+ 	.prio = 2,
+@@ -754,7 +754,7 @@ static struct qcom_icc_node xm_pcie3_0 = {
+ 	.link_nodes = { &qns_pcie_mem_noc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_pcie3_1_qos = {
++static const struct qcom_icc_qosbox xm_pcie3_1_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xc000 },
+ 	.prio = 2,
+@@ -787,7 +787,7 @@ static struct qcom_icc_node qnm_aggre2_noc = {
+ 	.link_nodes = { &qns_gemnoc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_apss_noc_qos = {
++static const struct qcom_icc_qosbox qnm_apss_noc_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x1c000 },
+ 	.prio = 2,
+@@ -804,7 +804,7 @@ static struct qcom_icc_node qnm_apss_noc = {
+ 	.link_nodes = { &qns_gemnoc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_cnoc_data_qos = {
++static const struct qcom_icc_qosbox qnm_cnoc_data_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x1d000 },
+ 	.prio = 2,
+@@ -821,7 +821,7 @@ static struct qcom_icc_node qnm_cnoc_data = {
+ 	.link_nodes = { &qns_gemnoc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qxm_pimem_qos = {
++static const struct qcom_icc_qosbox qxm_pimem_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x1e000 },
+ 	.prio = 2,
+@@ -838,7 +838,7 @@ static struct qcom_icc_node qxm_pimem = {
+ 	.link_nodes = { &qns_gemnoc_gc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_gic_qos = {
++static const struct qcom_icc_qosbox xm_gic_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x1f000 },
+ 	.prio = 2,
+diff --git a/drivers/interconnect/qcom/sm6350.c b/drivers/interconnect/qcom/sm6350.c
+index c098c608b836..8680d242ccfa 100644
+--- a/drivers/interconnect/qcom/sm6350.c
++++ b/drivers/interconnect/qcom/sm6350.c
+@@ -149,7 +149,7 @@ static struct qcom_icc_node qhm_a1noc_cfg = {
+ 	.link_nodes = { &srvc_aggre1_noc },
+ };
+ 
+-static struct qcom_icc_qosbox qhm_qup_0_qos = {
++static const struct qcom_icc_qosbox qhm_qup_0_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xa000 },
+ 	.prio = 2,
+@@ -165,7 +165,7 @@ static struct qcom_icc_node qhm_qup_0 = {
+ 	.link_nodes = { &qns_a1noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_emmc_qos = {
++static const struct qcom_icc_qosbox xm_emmc_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x7000 },
+ 	.prio = 2,
+@@ -181,7 +181,7 @@ static struct qcom_icc_node xm_emmc = {
+ 	.link_nodes = { &qns_a1noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_ufs_mem_qos = {
++static const struct qcom_icc_qosbox xm_ufs_mem_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x8000 },
+ 	.prio = 4,
+@@ -205,7 +205,7 @@ static struct qcom_icc_node qhm_a2noc_cfg = {
+ 	.link_nodes = { &srvc_aggre2_noc },
+ };
+ 
+-static struct qcom_icc_qosbox qhm_qdss_bam_qos = {
++static const struct qcom_icc_qosbox qhm_qdss_bam_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xb000 },
+ 	.prio = 2,
+@@ -221,7 +221,7 @@ static struct qcom_icc_node qhm_qdss_bam = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qhm_qup_1_qos = {
++static const struct qcom_icc_qosbox qhm_qup_1_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x9000 },
+ 	.prio = 2,
+@@ -236,7 +236,7 @@ static struct qcom_icc_node qhm_qup_1 = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qxm_crypto_qos = {
++static const struct qcom_icc_qosbox qxm_crypto_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x6000 },
+ 	.prio = 2,
+@@ -252,7 +252,7 @@ static struct qcom_icc_node qxm_crypto = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qxm_ipa_qos = {
++static const struct qcom_icc_qosbox qxm_ipa_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x7000 },
+ 	.prio = 2,
+@@ -268,7 +268,7 @@ static struct qcom_icc_node qxm_ipa = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_qdss_etr_qos = {
++static const struct qcom_icc_qosbox xm_qdss_etr_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xc000 },
+ 	.prio = 2,
+@@ -284,7 +284,7 @@ static struct qcom_icc_node xm_qdss_etr = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_sdc2_qos = {
++static const struct qcom_icc_qosbox xm_sdc2_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x18000 },
+ 	.prio = 2,
+@@ -300,7 +300,7 @@ static struct qcom_icc_node xm_sdc2 = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_usb3_0_qos = {
++static const struct qcom_icc_qosbox xm_usb3_0_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xd000 },
+ 	.prio = 2,
+@@ -356,7 +356,7 @@ static struct qcom_icc_node qup1_core_master = {
+ 	.link_nodes = { &qup1_core_slave },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_npu_qos = {
++static const struct qcom_icc_qosbox qnm_npu_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0xf000, 0x11000 },
+ 	.prio = 0,
+@@ -372,7 +372,7 @@ static struct qcom_icc_node qnm_npu = {
+ 	.link_nodes = { &qns_cdsp_gemnoc },
+ };
+ 
+-static struct qcom_icc_qosbox qxm_npu_dsp_qos = {
++static const struct qcom_icc_qosbox qxm_npu_dsp_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x13000 },
+ 	.prio = 0,
+@@ -495,7 +495,7 @@ static struct qcom_icc_node qhm_cnoc_dc_noc = {
+ 			&qhs_gemnoc },
+ };
+ 
+-static struct qcom_icc_qosbox acm_apps_qos = {
++static const struct qcom_icc_qosbox acm_apps_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x2f100, 0x2f000 },
+ 	.prio = 0,
+@@ -512,7 +512,7 @@ static struct qcom_icc_node acm_apps = {
+ 			&qns_gem_noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox acm_sys_tcu_qos = {
++static const struct qcom_icc_qosbox acm_sys_tcu_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x35000 },
+ 	.prio = 6,
+@@ -539,7 +539,7 @@ static struct qcom_icc_node qhm_gemnoc_cfg = {
+ 			&qhs_mdsp_ms_mpu_cfg },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_cmpnoc_qos = {
++static const struct qcom_icc_qosbox qnm_cmpnoc_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x2e000 },
+ 	.prio = 0,
+@@ -556,7 +556,7 @@ static struct qcom_icc_node qnm_cmpnoc = {
+ 			&qns_gem_noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_mnoc_hf_qos = {
++static const struct qcom_icc_qosbox qnm_mnoc_hf_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x30000 },
+ 	.prio = 0,
+@@ -573,7 +573,7 @@ static struct qcom_icc_node qnm_mnoc_hf = {
+ 			&qns_gem_noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_mnoc_sf_qos = {
++static const struct qcom_icc_qosbox qnm_mnoc_sf_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x34000 },
+ 	.prio = 0,
+@@ -590,7 +590,7 @@ static struct qcom_icc_node qnm_mnoc_sf = {
+ 			&qns_gem_noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_snoc_gc_qos = {
++static const struct qcom_icc_qosbox qnm_snoc_gc_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x32000 },
+ 	.prio = 0,
+@@ -606,7 +606,7 @@ static struct qcom_icc_node qnm_snoc_gc = {
+ 	.link_nodes = { &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_snoc_sf_qos = {
++static const struct qcom_icc_qosbox qnm_snoc_sf_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x31000 },
+ 	.prio = 0,
+@@ -622,7 +622,7 @@ static struct qcom_icc_node qnm_snoc_sf = {
+ 	.link_nodes = { &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox qxm_gpu_qos = {
++static const struct qcom_icc_qosbox qxm_gpu_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x33000, 0x33080 },
+ 	.prio = 0,
+@@ -655,7 +655,7 @@ static struct qcom_icc_node qhm_mnoc_cfg = {
+ 	.link_nodes = { &srvc_mnoc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_video0_qos = {
++static const struct qcom_icc_qosbox qnm_video0_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xf000 },
+ 	.prio = 2,
+@@ -671,7 +671,7 @@ static struct qcom_icc_node qnm_video0 = {
+ 	.link_nodes = { &qns_mem_noc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_video_cvp_qos = {
++static const struct qcom_icc_qosbox qnm_video_cvp_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xe000 },
+ 	.prio = 5,
+@@ -687,7 +687,7 @@ static struct qcom_icc_node qnm_video_cvp = {
+ 	.link_nodes = { &qns_mem_noc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qxm_camnoc_hf_qos = {
++static const struct qcom_icc_qosbox qxm_camnoc_hf_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0xa000, 0xb000 },
+ 	.prio = 3,
+@@ -703,7 +703,7 @@ static struct qcom_icc_node qxm_camnoc_hf = {
+ 	.link_nodes = { &qns_mem_noc_hf },
+ };
+ 
+-static struct qcom_icc_qosbox qxm_camnoc_icp_qos = {
++static const struct qcom_icc_qosbox qxm_camnoc_icp_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xd000 },
+ 	.prio = 5,
+@@ -719,7 +719,7 @@ static struct qcom_icc_node qxm_camnoc_icp = {
+ 	.link_nodes = { &qns_mem_noc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qxm_camnoc_sf_qos = {
++static const struct qcom_icc_qosbox qxm_camnoc_sf_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x9000 },
+ 	.prio = 3,
+@@ -735,7 +735,7 @@ static struct qcom_icc_node qxm_camnoc_sf = {
+ 	.link_nodes = { &qns_mem_noc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qxm_mdp0_qos = {
++static const struct qcom_icc_qosbox qxm_mdp0_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xc000 },
+ 	.prio = 3,
+@@ -822,7 +822,7 @@ static struct qcom_icc_node qnm_gemnoc = {
+ 			&xs_qdss_stm },
+ };
+ 
+-static struct qcom_icc_qosbox qxm_pimem_qos = {
++static const struct qcom_icc_qosbox qxm_pimem_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xd000 },
+ 	.prio = 2,
+@@ -839,7 +839,7 @@ static struct qcom_icc_node qxm_pimem = {
+ 			&qxs_imem },
+ };
+ 
+-static struct qcom_icc_qosbox xm_gic_qos = {
++static const struct qcom_icc_qosbox xm_gic_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xb000 },
+ 	.prio = 3,
+diff --git a/drivers/interconnect/qcom/sm8650.c b/drivers/interconnect/qcom/sm8650.c
+index cf3ae734d4c3..1967475b9132 100644
+--- a/drivers/interconnect/qcom/sm8650.c
++++ b/drivers/interconnect/qcom/sm8650.c
+@@ -154,7 +154,7 @@ static const struct regmap_config icc_regmap_config = {
+ 	.fast_io = true,
+ };
+ 
+-static struct qcom_icc_qosbox qhm_qspi_qos = {
++static const struct qcom_icc_qosbox qhm_qspi_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xc000 },
+ 	.prio = 2,
+@@ -171,7 +171,7 @@ static struct qcom_icc_node qhm_qspi = {
+ 	.link_nodes = { &qns_a1noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qhm_qup1_qos = {
++static const struct qcom_icc_qosbox qhm_qup1_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xd000 },
+ 	.prio = 2,
+@@ -196,7 +196,7 @@ static struct qcom_icc_node qxm_qup02 = {
+ 	.link_nodes = { &qns_a1noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_sdc4_qos = {
++static const struct qcom_icc_qosbox xm_sdc4_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xe000 },
+ 	.prio = 2,
+@@ -213,7 +213,7 @@ static struct qcom_icc_node xm_sdc4 = {
+ 	.link_nodes = { &qns_a1noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_ufs_mem_qos = {
++static const struct qcom_icc_qosbox xm_ufs_mem_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xf000 },
+ 	.prio = 2,
+@@ -230,7 +230,7 @@ static struct qcom_icc_node xm_ufs_mem = {
+ 	.link_nodes = { &qns_a1noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_usb3_0_qos = {
++static const struct qcom_icc_qosbox xm_usb3_0_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x10000 },
+ 	.prio = 2,
+@@ -247,7 +247,7 @@ static struct qcom_icc_node xm_usb3_0 = {
+ 	.link_nodes = { &qns_a1noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qhm_qdss_bam_qos = {
++static const struct qcom_icc_qosbox qhm_qdss_bam_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x12000 },
+ 	.prio = 2,
+@@ -264,7 +264,7 @@ static struct qcom_icc_node qhm_qdss_bam = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qhm_qup2_qos = {
++static const struct qcom_icc_qosbox qhm_qup2_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x13000 },
+ 	.prio = 2,
+@@ -281,7 +281,7 @@ static struct qcom_icc_node qhm_qup2 = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qxm_crypto_qos = {
++static const struct qcom_icc_qosbox qxm_crypto_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x15000 },
+ 	.prio = 2,
+@@ -298,7 +298,7 @@ static struct qcom_icc_node qxm_crypto = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox qxm_ipa_qos = {
++static const struct qcom_icc_qosbox qxm_ipa_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x16000 },
+ 	.prio = 2,
+@@ -323,7 +323,7 @@ static struct qcom_icc_node qxm_sp = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_qdss_etr_0_qos = {
++static const struct qcom_icc_qosbox xm_qdss_etr_0_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x17000 },
+ 	.prio = 2,
+@@ -340,7 +340,7 @@ static struct qcom_icc_node xm_qdss_etr_0 = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_qdss_etr_1_qos = {
++static const struct qcom_icc_qosbox xm_qdss_etr_1_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x18000 },
+ 	.prio = 2,
+@@ -357,7 +357,7 @@ static struct qcom_icc_node xm_qdss_etr_1 = {
+ 	.link_nodes = { &qns_a2noc_snoc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_sdc2_qos = {
++static const struct qcom_icc_qosbox xm_sdc2_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x19000 },
+ 	.prio = 2,
+@@ -448,7 +448,7 @@ static struct qcom_icc_node qnm_gemnoc_pcie = {
+ 	.link_nodes = { &xs_pcie_0, &xs_pcie_1 },
+ };
+ 
+-static struct qcom_icc_qosbox alm_gpu_tcu_qos = {
++static const struct qcom_icc_qosbox alm_gpu_tcu_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xbf000 },
+ 	.prio = 1,
+@@ -465,7 +465,7 @@ static struct qcom_icc_node alm_gpu_tcu = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox alm_sys_tcu_qos = {
++static const struct qcom_icc_qosbox alm_sys_tcu_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xc1000 },
+ 	.prio = 6,
+@@ -482,7 +482,7 @@ static struct qcom_icc_node alm_sys_tcu = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox alm_ubwc_p_tcu_qos = {
++static const struct qcom_icc_qosbox alm_ubwc_p_tcu_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xc5000 },
+ 	.prio = 1,
+@@ -508,7 +508,7 @@ static struct qcom_icc_node chm_apps = {
+ 			&qns_pcie },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_gpu_qos = {
++static const struct qcom_icc_qosbox qnm_gpu_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x31000, 0x71000 },
+ 	.prio = 0,
+@@ -525,7 +525,7 @@ static struct qcom_icc_node qnm_gpu = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_lpass_gemnoc_qos = {
++static const struct qcom_icc_qosbox qnm_lpass_gemnoc_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xb5000 },
+ 	.prio = 0,
+@@ -552,7 +552,7 @@ static struct qcom_icc_node qnm_mdsp = {
+ 			&qns_pcie },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_mnoc_hf_qos = {
++static const struct qcom_icc_qosbox qnm_mnoc_hf_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x33000, 0x73000 },
+ 	.prio = 0,
+@@ -569,7 +569,7 @@ static struct qcom_icc_node qnm_mnoc_hf = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_mnoc_sf_qos = {
++static const struct qcom_icc_qosbox qnm_mnoc_sf_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x35000, 0x75000 },
+ 	.prio = 0,
+@@ -586,7 +586,7 @@ static struct qcom_icc_node qnm_mnoc_sf = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_nsp_gemnoc_qos = {
++static const struct qcom_icc_qosbox qnm_nsp_gemnoc_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x37000, 0x77000 },
+ 	.prio = 0,
+@@ -604,7 +604,7 @@ static struct qcom_icc_node qnm_nsp_gemnoc = {
+ 			&qns_pcie },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_pcie_qos = {
++static const struct qcom_icc_qosbox qnm_pcie_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xb7000 },
+ 	.prio = 2,
+@@ -621,7 +621,7 @@ static struct qcom_icc_node qnm_pcie = {
+ 	.link_nodes = { &qns_gem_noc_cnoc, &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_snoc_sf_qos = {
++static const struct qcom_icc_qosbox qnm_snoc_sf_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xbb000 },
+ 	.prio = 0,
+@@ -639,7 +639,7 @@ static struct qcom_icc_node qnm_snoc_sf = {
+ 			&qns_pcie },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_ubwc_p_qos = {
++static const struct qcom_icc_qosbox qnm_ubwc_p_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xc3000 },
+ 	.prio = 1,
+@@ -656,7 +656,7 @@ static struct qcom_icc_node qnm_ubwc_p = {
+ 	.link_nodes = { &qns_llcc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_gic_qos = {
++static const struct qcom_icc_qosbox xm_gic_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xb9000 },
+ 	.prio = 4,
+@@ -705,7 +705,7 @@ static struct qcom_icc_node llcc_mc = {
+ 	.link_nodes = { &ebi },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_camnoc_hf_qos = {
++static const struct qcom_icc_qosbox qnm_camnoc_hf_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x28000, 0x29000 },
+ 	.prio = 0,
+@@ -722,7 +722,7 @@ static struct qcom_icc_node qnm_camnoc_hf = {
+ 	.link_nodes = { &qns_mem_noc_hf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_camnoc_icp_qos = {
++static const struct qcom_icc_qosbox qnm_camnoc_icp_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x2a000 },
+ 	.prio = 4,
+@@ -739,7 +739,7 @@ static struct qcom_icc_node qnm_camnoc_icp = {
+ 	.link_nodes = { &qns_mem_noc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_camnoc_sf_qos = {
++static const struct qcom_icc_qosbox qnm_camnoc_sf_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x2b000, 0x2c000 },
+ 	.prio = 0,
+@@ -756,7 +756,7 @@ static struct qcom_icc_node qnm_camnoc_sf = {
+ 	.link_nodes = { &qns_mem_noc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_mdp_qos = {
++static const struct qcom_icc_qosbox qnm_mdp_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x2d000, 0x2e000 },
+ 	.prio = 0,
+@@ -781,7 +781,7 @@ static struct qcom_icc_node qnm_vapss_hcp = {
+ 	.link_nodes = { &qns_mem_noc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_video_qos = {
++static const struct qcom_icc_qosbox qnm_video_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x30000, 0x31000 },
+ 	.prio = 0,
+@@ -798,7 +798,7 @@ static struct qcom_icc_node qnm_video = {
+ 	.link_nodes = { &qns_mem_noc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_video_cv_cpu_qos = {
++static const struct qcom_icc_qosbox qnm_video_cv_cpu_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x32000 },
+ 	.prio = 4,
+@@ -815,7 +815,7 @@ static struct qcom_icc_node qnm_video_cv_cpu = {
+ 	.link_nodes = { &qns_mem_noc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_video_cvp_qos = {
++static const struct qcom_icc_qosbox qnm_video_cvp_qos = {
+ 	.num_ports = 2,
+ 	.port_offsets = { 0x33000, 0x34000 },
+ 	.prio = 0,
+@@ -832,7 +832,7 @@ static struct qcom_icc_node qnm_video_cvp = {
+ 	.link_nodes = { &qns_mem_noc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_video_v_cpu_qos = {
++static const struct qcom_icc_qosbox qnm_video_v_cpu_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x35000 },
+ 	.prio = 4,
+@@ -873,7 +873,7 @@ static struct qcom_icc_node qsm_pcie_anoc_cfg = {
+ 	.link_nodes = { &srvc_pcie_aggre_noc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_pcie3_0_qos = {
++static const struct qcom_icc_qosbox xm_pcie3_0_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xb000 },
+ 	.prio = 3,
+@@ -890,7 +890,7 @@ static struct qcom_icc_node xm_pcie3_0 = {
+ 	.link_nodes = { &qns_pcie_mem_noc },
+ };
+ 
+-static struct qcom_icc_qosbox xm_pcie3_1_qos = {
++static const struct qcom_icc_qosbox xm_pcie3_1_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0xc000 },
+ 	.prio = 2,
+@@ -923,7 +923,7 @@ static struct qcom_icc_node qnm_aggre2_noc = {
+ 	.link_nodes = { &qns_gemnoc_sf },
+ };
+ 
+-static struct qcom_icc_qosbox qnm_apss_noc_qos = {
++static const struct qcom_icc_qosbox qnm_apss_noc_qos = {
+ 	.num_ports = 1,
+ 	.port_offsets = { 0x1c000 },
+ 	.prio = 2,
 -- 
-With best wishes
-Dmitry
+2.55.0
+
