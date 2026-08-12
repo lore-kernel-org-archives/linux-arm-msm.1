@@ -1,186 +1,124 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mail-m15589.qiye.163.com (mail-m15589.qiye.163.com [101.71.155.89])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBBAD3264C4
-	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 05:46:43 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 060A5282F27;
+	Wed, 12 Aug 2026 05:52:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=101.71.155.89
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786513605; cv=none; b=dG2W1/a5w9ceBcMPGPp01TnwrR/ZXAqBBf3ganufQEHJCzAnUO281TYTGFdHOWZmAyBtrarAvH2bs42ML/Q5zoytTICt/b1e8yzDbA4Xzn0WrSRGOfxUzFs59yqiUtOGnRlbl9m5xD/7+WfVEy+jjpS8iWKPzZTq9/VCaENa7Ko=
+	t=1786513967; cv=none; b=h887pdObihsQ92dXx2v52qGQXJgMrgq1fpbZqXkiOSvPg0Nx6b1bvJYxyv4UmqM2kL9Kh1bDFctLdO8xIyJ8o0xliq8/pl+Idf6GEifOSTtWYq4U+YcEUSHT8SAS7xrFPV/JSnrdAwksNbwpZZPkWH2meIUbK5djGLcsiJwojWA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786513605; c=relaxed/simple;
-	bh=NS8vk08ZDdbMm9k/jRmagXJTF//VZNaWWpx1yMIUGLc=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=pEPoaE6FD7k/v3v6PyRzwhfCw+FtBEd6twApqW2qNWdcYmX6rFwrti/pu4B23FPUcp+ab6z6xk92HeecP5xAvkEs1xNitttOBoWYrlBi4RZu1aMPiEusjyf/H1SUylF3sWN1X+2h8tfWYu76sZWN4JSqqpNPBiHt5ogBzvahqDY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=PssAq2WZ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Lj9iqCWA; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1786513967; c=relaxed/simple;
+	bh=4AUkVZdED8INaKxYXi8vIBzZp+pos8MPvKlYMVmdfpw=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=gcXxVPos4ObnfzkzAGpqcStRpbfZFTQzDAiILRAdqvkSwYLhFL0JI1oP+EsJPk+Sl14QS4KkUFQBaPgHyBcZaVB1UqwSoS4MCdNirE5uKQzLUASNK6dgjlAhnff3YKaPhaGivKhn8Vykg6FaaMdb6V21ckuWEqUzSow3algd9ck=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com; spf=pass smtp.mailfrom=thundersoft.com; dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b=gdTFfhtS; arc=none smtp.client-ip=101.71.155.89
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thundersoft.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="PssAq2WZ";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Lj9iqCWA"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67C5iHxd3463530
-	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 05:46:43 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	k79W5VytlE22NwXQ2D0SB5fCnUEmPnGZW3S60sW/g/0=; b=PssAq2WZHZvQbKSB
-	R8LhQy7O4XrTOn0ad7u8AGoD6sRKmfOpiTH6HT+wr60i815CSQCbqRFKZVER/CTe
-	rC2b30QLsDTHedA0rTPzqfiRgR3Kepsk60Ju9t6kVrOcdenTuf+4JC7vh94G3cn9
-	GVhspJ3Xf8sAMeZSy5ZziOnVsnvhWujTMzf7AsFkj773CzXuqLhVO/S6vOk6FFn5
-	VUYYHc9aOdOVwsJ1LHVZzkm8Lc/q9fqn2cjo+d2MZftQKDivwcSpYlK+ZzNN9fXJ
-	09YzU0MH0fkCRTJ0IJao9IUInF1p5PlItXYxmthJKClF6iPG94LIWjIoEmGta5JZ
-	13xAKA==
-Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g08j5j88m-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 05:46:42 +0000 (GMT)
-Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-38e475f83a2so892919a91.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 11 Aug 2026 22:46:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786513602; x=1787118402; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=k79W5VytlE22NwXQ2D0SB5fCnUEmPnGZW3S60sW/g/0=;
-        b=Lj9iqCWAPtyz7tiSBjwnb2L9RxDEgyIzP0XD608XKNAQ/Y2t2l3JV6+ZcnS+bI8nnZ
-         Xu1Fhp/UksSpVkYgDc3BBFCvRJ605KseNefctO6zN+p1A5nh11NZCvKxXCjuU7dyr279
-         3S7WLGqDHSzHGpk+Y2TmyKEYghPTiGxc2dMOCyH1ozO0eyZSY2Nqe4XrfrY/KDDJx3PT
-         HVWtkT5D7kIPF8GKbetgy4AfpM2i+Dk+yOPqRCyUr7t20F7A7+sGEPX7PPKpRUK7o4pp
-         fqt3g4NmHcGVh2WI+CH07ZajzWALHeK+cwLXVA/gBd+WctldTQcgpsQ3DBP3nviR4zsB
-         MYjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786513602; x=1787118402;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=k79W5VytlE22NwXQ2D0SB5fCnUEmPnGZW3S60sW/g/0=;
-        b=VzM0rHF8UY9mSUlaQo13AvvfyodPhoO7Qjj6OsJMUui6Ihby4p6ASvtrETe5mu9uDE
-         sTTlyEABfylOX0GQUfLfBd1qpoxlQqWqNZTW/9zev60athTYkxyRea/riLW8yGsuZhPc
-         8G721XvVTauTVbyHr8u787AAxCtag9R4XFndrC/9VW4XL7Lv2CZh4VmzLLImhO3TPnZR
-         ILCbDkTPGQnmYNsCdJDnqzeyUJ8Wt51MDfgbP1/3ynRXAVgchL4s3WoGq7EH6U012YBs
-         SYkauXl6bCCw72w+itCZ8b03Ncgyec9Og1K09gC+qH3is2qWLKWVQvj1/WuGq4t0LAOU
-         e45Q==
-X-Gm-Message-State: AOJu0YwU962sYgs14+2EnvHt72SCFC4OhN4YtDpXApxuIiMyUXi3PwoM
-	uikLQchpnxQG9mkT/qaAYg9aT53xmYMakUw/Rjr51N9j1w0qgOD8s0E9B2XN1SP+8tqleRESpD2
-	+fP6VL/D3HagEU4Rv0enHTtCyLkD2oluGEGYstO6Fg4/XBNfwxifvUwJwGPGmcvJ7TQj4
-X-Gm-Gg: AR+sD11RukPsANs1S0j4R5lGud2cKTk2V4e2zbgGdDld3MlyHigteJe/NsEKnUGYevb
-	pJGM5mpU9BWTVJYgxZJelXGd/Ne6HicQ6oVj0A+O8z6IU0w7jYDpVsXXeFKgyMHiCvOoE71zB8Z
-	7p6/mgev3ousCWo9Cp7z1zu1ynCa/Rk9vZqBRKRY3R4BT25etY8xASyZ4DtJGcFV2T88uI8bo6Y
-	JKmjIvAQ3GzhvXS5dAci/fgqsnnfw2FrQwYMtSPhYd4fRDGfrsmMoeFCYr8r9QZuwJBb5JmHy7m
-	woL4U5Q7RbHLsvIxs5J99a0fydi93ZgKSgWLQHn8vQ6MrBfHuXpYsZa7yrvHWb+IOInrEU91qaN
-	CtQwPbLZplngnCFjwdBVyRKISmQqdgXK69w==
-X-Received: by 2002:a17:90b:3943:b0:37f:ed7e:7e42 with SMTP id 98e67ed59e1d1-3930164d6f4mr2498726a91.14.1786513602148;
-        Tue, 11 Aug 2026 22:46:42 -0700 (PDT)
-X-Received: by 2002:a17:90b:3943:b0:37f:ed7e:7e42 with SMTP id 98e67ed59e1d1-3930164d6f4mr2498676a91.14.1786513601574;
-        Tue, 11 Aug 2026 22:46:41 -0700 (PDT)
-Received: from [10.217.219.92] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-392f8896c20sm2208498a91.1.2026.08.11.22.46.38
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 11 Aug 2026 22:46:41 -0700 (PDT)
-Message-ID: <3aaecc8e-6f08-4e69-a24f-f97926fe7079@oss.qualcomm.com>
-Date: Wed, 12 Aug 2026 11:16:37 +0530
+	dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b="gdTFfhtS"
+Received: from [127.0.1.1] (unknown [36.129.139.90])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 49a56c4b7;
+	Wed, 12 Aug 2026 10:23:15 +0800 (GMT+08:00)
+From: Hongyang Zhao <hongyang.zhao@thundersoft.com>
+Date: Wed, 12 Aug 2026 10:22:38 +0800
+Subject: [PATCH v3 1/2] arm64: dts: qcom: qcs6490-rubikpi3: Add 3.3 V
+ output supply
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] spi: qcom-geni: Add panic notifier to suspend
- controller during panic
-To: Praveen Talari <praveen.talari@oss.qualcomm.com>,
-        konrad.dybcio@oss.qualcomm.com, Mark Brown <broonie@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-spi@vger.kernel.org,
-        linux-kernel@vger.kernel.org, chandana.chiluveru@oss.qualcomm.com
-References: <20260805-add-shutdown-and-panic-notifier-for-spi-v1-0-b5db170d491e@oss.qualcomm.com>
- <20260805-add-shutdown-and-panic-notifier-for-spi-v1-2-b5db170d491e@oss.qualcomm.com>
-Content-Language: en-US
-From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
-In-Reply-To: <20260805-add-shutdown-and-panic-notifier-for-spi-v1-2-b5db170d491e@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEyMDA0MyBTYWx0ZWRfX6mpWOP7dU+F7
- QTOc+KS4ghdL8n5yuILobuEwFjdfe73HxvxoBw1dcV8EWWWjOu5YVctROsSmNTNgILQFVzrS8IP
- Igdqv4bOZg+Uz5UVfwlmAniT8YewsLs=
-X-Authority-Analysis: v=2.4 cv=evHvCIpX c=1 sm=1 tr=0 ts=6a7c08c2 cx=c_pps
- a=vVfyC5vLCtgYJKYeQD43oA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=vaKURzcQWfWGSkE7xxoA:9 a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22
-X-Proofpoint-GUID: 4qJcvBbrHgzgdPNz3nG3-MWNYudcWaoQ
-X-Proofpoint-ORIG-GUID: 4qJcvBbrHgzgdPNz3nG3-MWNYudcWaoQ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEyMDA0MyBTYWx0ZWRfX5s6e3klbzjUB
- YN1RTNIFdgOKywWKuO2cBEzre2+cIKB0hXBmKp5yEVx9oD5fMO1gc6VfRnPEvOKRJTpKw/0s3YT
- PwTW80AWYlhrVgMtgVfdgKpyg07fHQBZFHeLw3u9d0HTT0EzwX+1zuwUf4xaHj0s63eKG73iS8D
- InJI4FfiK4Bj+I/g3N5FsRoxn2uFCRzljFaNc7liJr9gYw1hO/jr9U9RSUGrRoYKQ5yJVV7VPqR
- UzK6Dcq/3VORbvxm+e/R++Yw6fawRQjZ+zxB03yeAk31eiXZ91bcCUH0WdelZ9w1OXFIr7NUS8f
- WvqhWXqDUGbNE4vmqU4s6VJyXsRUNPzOJg+lB+Q9o/y01mon/wcG1RmMcb5LMZbj5MRORP2QpjY
- 9V/rLeYEVkIk+PJymMZArUyQgWuhhfbPWhU1L5Cseml447h0zUz/ZAmXN+X359cPUcieDSVY8AI
- NorCQyQ1Zg2UfY1UiPw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-12_01,2026-08-10_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 lowpriorityscore=0 adultscore=0 priorityscore=1501
- bulkscore=0 suspectscore=0 clxscore=1015 phishscore=0 spamscore=0
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608120043
+Message-Id: <20260812-rubikpi-next-20260615-v3-1-06e21232d8e4@thundersoft.com>
+References: <20260812-rubikpi-next-20260615-v3-0-06e21232d8e4@thundersoft.com>
+In-Reply-To: <20260812-rubikpi-next-20260615-v3-0-06e21232d8e4@thundersoft.com>
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
+ Sascha Hauer <s.hauer@pengutronix.de>, 
+ Pengutronix Kernel Team <kernel@pengutronix.de>, 
+ Fabio Estevam <festevam@gmail.com>
+Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Roger Shimizu <rosh@debian.org>, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
+ Hongyang Zhao <hongyang.zhao@thundersoft.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786501394; l=1688;
+ i=hongyang.zhao@thundersoft.com; s=20260127; h=from:subject:message-id;
+ bh=4AUkVZdED8INaKxYXi8vIBzZp+pos8MPvKlYMVmdfpw=;
+ b=olDCzWoPw1qOj+rvq7y1J+YcWz4J6V3EMdvfgrf0OIkb/PiyN7l6OOOM0HZ+hPL7AJDnwX8Zy
+ tCtl9HhN0qNAhEOTFM2dfghvWPMxdVLosYXfbRzTQdQenpkXiVEgQHv
+X-Developer-Key: i=hongyang.zhao@thundersoft.com; a=ed25519;
+ pk=D9yL5W9Zj0lPBDAq9gzY++1849VlXuTWAkROzZ88J/4=
+X-HM-Tid: 0a9ff3c7f48f09d5kunm2a4e641d37f494
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkZGhhKVk0dQkpISR5LThkeHVYVFA
+	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlITVVKSUJVSkhCVUJLWVdZFhoPEhUdFFlBWU9LSFVKS0
+	lPT09LVUpLS1VLWQY+
+DKIM-Signature: a=rsa-sha256;
+	b=gdTFfhtSZs1rFItb+RETNpXpg/EtDqIk+5ctIxKNYFnpOCVOdFkXF7YycykygZzS23ZPgvZgCrrSJsnFPnGL5F1F5nSGTyJaP9nei6uGIFUjThxBLroXhoVA2d4NaNF0fRnsbdKcB1TAeAUuOXc1OJvKAL5S2OAxcNp4UjbgJGs=; c=relaxed/relaxed; s=default; d=thundersoft.com; v=1;
+	bh=KWMwlHvU9gSi7icyvD9gEKtDUM9vFD6hRmzH2Pd6GIg=;
+	h=date:mime-version:subject:message-id:from;
 
+Describe the GPIO-controlled VCC3V3_OUTPUT rail. This board-level rail
+supplies the two camera connectors and the 40-pin expansion header.
 
+Keep the rail enabled because expansion-header consumers are not
+represented in the Device Tree.
 
-On 8/5/2026 4:12 PM, Praveen Talari wrote:
+Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
+---
+ .../boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts | 23 ++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
-[...]
-> @@ -1073,6 +1075,23 @@ static void spi_geni_shutdown(struct platform_device *pdev)
->   	spi_controller_suspend(spi);
->   }
->   
-> +static int spi_geni_panic_notifier(struct notifier_block *nb,
-> +				   unsigned long action, void *data)
-> +{
-> +	struct spi_geni_master *mas = container_of(nb, struct spi_geni_master, panic_nb);
-> +	struct spi_controller *spi = dev_get_drvdata(mas->dev);
-> +
-> +	spi_controller_suspend(spi);
+diff --git a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
+index 13e8e62f6205..0f21777c480b 100644
+--- a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
++++ b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3.dts
+@@ -214,6 +214,22 @@ vreg_usbhub_rest_1v8: regulator-usbhub-rest-1v8 {
+ 		regulator-boot-on;
+ 	};
+ 
++	vreg_vcc3v3_output: regulator-vcc3v3-output {
++		compatible = "regulator-fixed";
++
++		regulator-name = "vcc3v3_output";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++
++		gpio = <&tlmm 14 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&vcc3v3_output_en>;
++		pinctrl-names = "default";
++
++		regulator-always-on;
++	};
++
+ 	vph_pwr: regulator-vph-pwr {
+ 		compatible = "regulator-fixed";
+ 
+@@ -1251,6 +1267,13 @@ usb_eth_power: usb-eth-power-state {
+ 		bias-disable;
+ 	};
+ 
++	vcc3v3_output_en: vcc3v3-output-en-state {
++		pins = "gpio14";
++		function = "gpio";
++		drive-strength = <8>;
++		bias-disable;
++	};
++
+ 	wifi_reset_active: wifi-reset-active-state {
+ 		pins = "gpio16";
+ 		function = "gpio";
 
-Add a line space before return
-
-> +	return NOTIFY_OK;
-> +}
-> +
-> +static void spi_geni_unregister_notifiers(void *data)
-> +{
-> +	struct spi_geni_master *mas = data;
-> +
-> +	atomic_notifier_chain_unregister(&panic_notifier_list, &mas->panic_nb);
-> +}
-> +
->   static int spi_geni_probe(struct platform_device *pdev)
->   {
->   	int ret, irq;
-> @@ -1161,7 +1180,16 @@ static int spi_geni_probe(struct platform_device *pdev)
->   	if (ret)
->   		return ret;
->   
-> -	return devm_spi_register_controller(dev, spi);
-> +	ret = devm_spi_register_controller(dev, spi);
-> +	if (ret)
-Can you add a trace log here and below where ever you get error ?
-Hope that will help in case of issue.
-> +		return ret;
-> +
-> +	mas->panic_nb.notifier_call = spi_geni_panic_notifier;
-> +	ret = atomic_notifier_chain_register(&panic_notifier_list, &mas->panic_nb);
-> +	if (ret)
-same here, add trace log
-> +		return ret;
-> +
-> +	return devm_add_action_or_reset(dev, spi_geni_unregister_notifiers, mas);
->   }
->   
->   static int __maybe_unused spi_geni_runtime_suspend(struct device *dev)
-> 
+-- 
+2.43.0
 
