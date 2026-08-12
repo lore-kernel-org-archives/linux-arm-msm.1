@@ -1,77 +1,362 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-m127170.xmail.ntesmail.com (mail-m127170.xmail.ntesmail.com [115.236.127.170])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BEAF7221F20;
-	Wed, 12 Aug 2026 02:14:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FB8F38B147;
+	Wed, 12 Aug 2026 03:38:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=115.236.127.170
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786500856; cv=none; b=de3TUVXviUXRCTP9n9KlR8jli9TzoIFqixw0cyOKzXJUjF4WMF7aMFymGrxLJ5LtO5a+Ec8GEryrJErIo74rW1b5BNuookaU/MbOx2S7YAyZxXWKHGbOcNXxmOsEgma9VaeVSLvjluoVNk1dw7yaje5a43zYTCGdczEcLXRFTks=
+	t=1786505938; cv=none; b=SUafyLg+LT6rwybxF29FwLHOEP4ep6nSKwXnpH+zs+zMF4pRCpfDGD6Qqq1ycadexmofuOJ33Mm3ogjGeSUWdYJBGMUbvMBpljjklqxXUe013evuCdUEFUbVmqTVg+GOhaiC77stlzjYwXO1p2yuLd31ps+cpy41mEX6DojBalc=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786500856; c=relaxed/simple;
-	bh=cjp5466UPtGsRI1oPPhujznS23m0UTvCNCpSRltINWo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=msAS6/UF0WE73tEfBa30+aSfl+026unWBsR1UFOpT+b/o6qsF3bXeY1PAMcunN+z2IBtmkjl6iAHCf534q0cBv9l6zvYt3x4zhpPB7R8PO8eVNsNMxbBd69fCs5FxloUccqWIQ/SGkVL0yQ84QYzsBcnKkVBx+BZ1HOIoZMYnHc=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kYleE3OX; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786505938; c=relaxed/simple;
+	bh=WvBb4enhOmm2D0QOA844ugJYPtnmrDyFbejX+Dw2N4A=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=Cm/oZagGhc35Px3RhUmvzD0H0401DQj2pwAkEYdLbRkpbg8KUJ+h4hQykpWa9AgQB+4vSIiyS76H+mikYc1hYpZfSXJAvZavFpK2DsLn61BnM1UwB/YrtGfXddaR9kp+rq67W7JgqmYvOgCUTNjh7OD/VPoXfplIBkVnI1OV4aw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com; spf=pass smtp.mailfrom=thundersoft.com; dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b=WwlIp6Bz; arc=none smtp.client-ip=115.236.127.170
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=thundersoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thundersoft.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kYleE3OX"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 764D01F000E9;
-	Wed, 12 Aug 2026 02:14:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786500855;
-	bh=y5ZRVDWon254SFNP+iXzizz1fTYM1I6XRxtfO4wD3RU=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=kYleE3OXKSup0WqEViKSGN+l5FIYFD+IA3b/JkLgQDZnbGJc/8MORzkhmW9Y1tnZR
-	 YpOSGqnIYh2HHs13NJPQcy+v6+JWvF+Lz+puoEkzvVK7QiICr00uzvHM7rYLSuEEff
-	 Sv5auD9hvcC0rv9BNWRCFfzfpJQ3MsrumWW6TvEmbxQMAewblCwjGy5mnakx61ZqPL
-	 UWQstuHi1yYYg+MOk9tsNQpDO2W15l+uzTNva7m2fS2wiqeQAKM0GbgFTON578yzb5
-	 SB2Iv04FwMSOGlvMLmrrQ7B5yALMyre1tZOdLEcPbb0RmRC85NSL1/PejbuhG1Rb/J
-	 4bH2uMX7CxG5g==
-Date: Tue, 11 Aug 2026 21:14:14 -0500
-From: Rob Herring <robh@kernel.org>
-To: Qiang Yu <qiang.yu@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Michael Turquette <mturquette@baylibre.com>,
-	Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Taniya Das <taniya.das@oss.qualcomm.com>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 1/3] dt-bindings: clock: qcom: Move x1e80100 TCSR to
- own binding
-Message-ID: <20260812021414.GA544668-robh@kernel.org>
-References: <20260805-hamoa_tcsr_qref_0805-v2-0-4f1cfb1fcab2@oss.qualcomm.com>
- <20260805-hamoa_tcsr_qref_0805-v2-1-4f1cfb1fcab2@oss.qualcomm.com>
+	dkim=pass (1024-bit key) header.d=thundersoft.com header.i=@thundersoft.com header.b="WwlIp6Bz"
+Received: from [127.0.1.1] (unknown [36.129.139.90])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 49a56c4be;
+	Wed, 12 Aug 2026 10:23:16 +0800 (GMT+08:00)
+From: Hongyang Zhao <hongyang.zhao@thundersoft.com>
+Date: Wed, 12 Aug 2026 10:22:39 +0800
+Subject: [PATCH v3 2/2] arm64: dts: qcom: qcs6490-rubikpi3: Add IMX219
+ camera overlays
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260805-hamoa_tcsr_qref_0805-v2-1-4f1cfb1fcab2@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260812-rubikpi-next-20260615-v3-2-06e21232d8e4@thundersoft.com>
+References: <20260812-rubikpi-next-20260615-v3-0-06e21232d8e4@thundersoft.com>
+In-Reply-To: <20260812-rubikpi-next-20260615-v3-0-06e21232d8e4@thundersoft.com>
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Frank Li <Frank.Li@nxp.com>, 
+ Sascha Hauer <s.hauer@pengutronix.de>, 
+ Pengutronix Kernel Team <kernel@pengutronix.de>, 
+ Fabio Estevam <festevam@gmail.com>
+Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Roger Shimizu <rosh@debian.org>, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ imx@lists.linux.dev, linux-arm-kernel@lists.infradead.org, 
+ Hongyang Zhao <hongyang.zhao@thundersoft.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786501394; l=7609;
+ i=hongyang.zhao@thundersoft.com; s=20260127; h=from:subject:message-id;
+ bh=WvBb4enhOmm2D0QOA844ugJYPtnmrDyFbejX+Dw2N4A=;
+ b=geBxUgCFxyo2pnYhuLw2TG3jUPQTSTDkYeuiQ9/FL1HYDzZlCSZrYLTizp9SSf+G9uAqbysy3
+ ScXM5BETmDpB50+cIfZAuqQ3oyE+EwtoZqzjMVyubxSmoFwGPBCHn7x
+X-Developer-Key: i=hongyang.zhao@thundersoft.com; a=ed25519;
+ pk=D9yL5W9Zj0lPBDAq9gzY++1849VlXuTWAkROzZ88J/4=
+X-HM-Tid: 0a9ff3c7f9f409d5kunm2a4e641d37f4a1
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaTUJNVhpMGRodSkseQxpKGFYVFA
+	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlITVVKSUJVSkhCVUJLWVdZFhoPEhUdFFlBWU9LSFVKS0
+	lPT09IVUpLS1VKQktLWQY+
+DKIM-Signature: a=rsa-sha256;
+	b=WwlIp6BzyTSjvK5yBQHRNpHtUXoXZelY+nIYaNyO2QhAynLmjNo3onxTMlFOv/us2NCfZrEz4cMJaDzP4jHb12rNKomZ2YAwrWQqNbdIlfC/oYLjfhdAC3k5VshvNtqwb7fpPnuw/zh2wMYsQeifJg/u023ZRn+93P9Pr2HU/NI=; c=relaxed/relaxed; s=default; d=thundersoft.com; v=1;
+	bh=77aEx/djcIVNMiFEfEXiQXFN8cf54JEqS+P/6rsE/QY=;
+	h=date:mime-version:subject:message-id:from;
 
-On Wed, Aug 05, 2026 at 10:34:55PM -0700, Qiang Yu wrote:
-> The QREF block supplies reference clocks to PCIe/USB/UFS PHYs and
-> requires dedicated LDO supplies to operate. The digital control
-> interface for QREF (clkref_en registers) resides in TCSR on x1e80100.
-> Since QREF has no dedicated DT node of its own, these supply
-> properties are placed in the TCSR node which acts as the control
-> interface for QREF.
-> 
-> These LDOs are required by QREF to provide a stable reference clock,
-> without which the USB/PCIe/eDP PHYs cannot work properly, so they are
-> marked required even though it breaks ABI.
-> 
-> Add a dedicated binding file for qcom,x1e80100-tcsr and document the
-> supply properties.
-> 
-> Signed-off-by: Qiang Yu <qiang.yu@oss.qualcomm.com>
-> ---
->  .../bindings/clock/qcom,sm8550-tcsr.yaml           |   1 -
->  .../bindings/clock/qcom,x1e80100-tcsr.yaml         | 118 +++++++++++++++++++++
->  2 files changed, 118 insertions(+), 1 deletion(-)
+RUBIK Pi 3 ships without camera sensors, and its two connectors support
+multiple modules. Keep module-specific nodes out of the base board DTS
+and add per-connector overlays for Raspberry Pi Camera Module V2 IMX219
+sensors.
 
-sashiko issue needs to be addressed.
+CAM1 uses CCI1 and CSIPHY1, while CAM2 uses CCI0 and CSIPHY4. Each
+overlay describes the 24 MHz sensor input clock and models the module
+power domain controlled through the connector PWR_EN signal. The
+baseboard supplies VCC3V3_OUTPUT separately and has no per-camera
+regulator.
+
+Describe each connector CAMERA_GPIO signal as a privacy indicator LED
+and associate it with the corresponding sensor. This lets the V4L2 core
+control the LED while the sensor is streaming.
+
+Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Signed-off-by: Hongyang Zhao <hongyang.zhao@thundersoft.com>
+---
+ arch/arm64/boot/dts/qcom/Makefile                  |  15 +++
+ .../qcs6490-thundercomm-rubikpi3-cam1-imx219.dtso  | 115 +++++++++++++++++++++
+ .../qcs6490-thundercomm-rubikpi3-cam2-imx219.dtso  | 115 +++++++++++++++++++++
+ 3 files changed, 245 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+index 1c86e7e98f55..c4afe71436c4 100644
+--- a/arch/arm64/boot/dts/qcom/Makefile
++++ b/arch/arm64/boot/dts/qcom/Makefile
+@@ -186,6 +186,21 @@ dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-rb3gen2-industrial-mezzanine.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-rb3gen2-vision-mezzanine.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-thundercomm-minipc-g1iot.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-thundercomm-rubikpi3.dtb
++
++qcs6490-thundercomm-rubikpi3-cam1-imx219-dtbs := \
++	qcs6490-thundercomm-rubikpi3.dtb \
++	qcs6490-thundercomm-rubikpi3-cam1-imx219.dtbo
++qcs6490-thundercomm-rubikpi3-cam2-imx219-dtbs := \
++	qcs6490-thundercomm-rubikpi3.dtb \
++	qcs6490-thundercomm-rubikpi3-cam2-imx219.dtbo
++qcs6490-thundercomm-rubikpi3-dual-imx219-dtbs := \
++	qcs6490-thundercomm-rubikpi3.dtb \
++	qcs6490-thundercomm-rubikpi3-cam1-imx219.dtbo \
++	qcs6490-thundercomm-rubikpi3-cam2-imx219.dtbo
++
++dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-thundercomm-rubikpi3-cam1-imx219.dtb
++dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-thundercomm-rubikpi3-cam2-imx219.dtb
++dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-thundercomm-rubikpi3-dual-imx219.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcs6490-vicharak-axon-mini.dtb
+ dtb-$(CONFIG_ARCH_QCOM)	+= qcs8300-ride.dtb
+ 
+diff --git a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3-cam1-imx219.dtso b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3-cam1-imx219.dtso
+new file mode 100644
+index 000000000000..b6d7a8235720
+--- /dev/null
++++ b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3-cam1-imx219.dtso
+@@ -0,0 +1,115 @@
++// SPDX-License-Identifier: BSD-3-Clause
++/*
++ * Copyright (c) 2026, Thundercomm All rights reserved.
++ */
++
++/dts-v1/;
++/plugin/;
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/leds/common.h>
++
++&{/} {
++	cam1_imx219_clk: clock-camera1-24m {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		clock-frequency = <24000000>;
++	};
++
++	leds-camera1 {
++		compatible = "gpio-leds";
++
++		pinctrl-0 = <&cam1_privacy_led_state>;
++		pinctrl-names = "default";
++
++		cam1_privacy_led: led-camera1 {
++			function = LED_FUNCTION_INDICATOR;
++			function-enumerator = <1>;
++			gpios = <&tlmm 18 GPIO_ACTIVE_HIGH>;
++			default-state = "off";
++		};
++	};
++
++	/* Camera module power domain controlled through connector PWR_EN. */
++	vreg_cam1_pwr: regulator-camera1-pwr {
++		compatible = "regulator-fixed";
++
++		regulator-name = "vreg_camera1_pwr";
++
++		gpio = <&tlmm 57 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&cam1_pwr_en>;
++		pinctrl-names = "default";
++
++		vin-supply = <&vreg_vcc3v3_output>;
++	};
++};
++
++&camss {
++	vdda-phy-supply = <&vreg_l10c_0p88>;
++	vdda-pll-supply = <&vreg_l6b_1p2>;
++
++	status = "okay";
++
++	ports {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		port@1 {
++			reg = <1>;
++
++			csiphy1_ep: endpoint {
++				data-lanes = <0 1>;
++				remote-endpoint = <&cam1_imx219_ep>;
++			};
++		};
++	};
++};
++
++&cci1 {
++	status = "okay";
++};
++
++&cci1_i2c0 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	camera@10 {
++		compatible = "sony,imx219";
++		reg = <0x10>;
++
++		clocks = <&cam1_imx219_clk>;
++
++		VANA-supply = <&vreg_cam1_pwr>;
++		VDIG-supply = <&vreg_cam1_pwr>;
++		VDDL-supply = <&vreg_cam1_pwr>;
++
++		leds = <&cam1_privacy_led>;
++		led-names = "privacy";
++
++		port {
++			cam1_imx219_ep: endpoint {
++				data-lanes = <1 2>;
++				link-frequencies = /bits/ 64 <456000000>;
++				remote-endpoint = <&csiphy1_ep>;
++			};
++		};
++	};
++};
++
++&tlmm {
++	cam1_privacy_led_state: cam1-privacy-led-state {
++		pins = "gpio18";
++		function = "gpio";
++		drive-strength = <8>;
++		bias-disable;
++	};
++
++	cam1_pwr_en: cam1-pwr-en-state {
++		pins = "gpio57";
++		function = "gpio";
++		drive-strength = <8>;
++		bias-disable;
++	};
++};
+diff --git a/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3-cam2-imx219.dtso b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3-cam2-imx219.dtso
+new file mode 100644
+index 000000000000..ff1ccf965df8
+--- /dev/null
++++ b/arch/arm64/boot/dts/qcom/qcs6490-thundercomm-rubikpi3-cam2-imx219.dtso
+@@ -0,0 +1,115 @@
++// SPDX-License-Identifier: BSD-3-Clause
++/*
++ * Copyright (c) 2026, Thundercomm All rights reserved.
++ */
++
++/dts-v1/;
++/plugin/;
++
++#include <dt-bindings/gpio/gpio.h>
++#include <dt-bindings/leds/common.h>
++
++&{/} {
++	cam2_imx219_clk: clock-camera2-24m {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		clock-frequency = <24000000>;
++	};
++
++	leds-camera2 {
++		compatible = "gpio-leds";
++
++		pinctrl-0 = <&cam2_privacy_led_state>;
++		pinctrl-names = "default";
++
++		cam2_privacy_led: led-camera2 {
++			function = LED_FUNCTION_INDICATOR;
++			function-enumerator = <2>;
++			gpios = <&tlmm 19 GPIO_ACTIVE_HIGH>;
++			default-state = "off";
++		};
++	};
++
++	/* Camera module power domain controlled through connector PWR_EN. */
++	vreg_cam2_pwr: regulator-camera2-pwr {
++		compatible = "regulator-fixed";
++
++		regulator-name = "vreg_camera2_pwr";
++
++		gpio = <&tlmm 58 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++
++		pinctrl-0 = <&cam2_pwr_en>;
++		pinctrl-names = "default";
++
++		vin-supply = <&vreg_vcc3v3_output>;
++	};
++};
++
++&camss {
++	vdda-phy-supply = <&vreg_l10c_0p88>;
++	vdda-pll-supply = <&vreg_l6b_1p2>;
++
++	status = "okay";
++
++	ports {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		port@4 {
++			reg = <4>;
++
++			csiphy4_ep: endpoint {
++				data-lanes = <0 1>;
++				remote-endpoint = <&cam2_imx219_ep>;
++			};
++		};
++	};
++};
++
++&cci0 {
++	status = "okay";
++};
++
++&cci0_i2c0 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++
++	camera@10 {
++		compatible = "sony,imx219";
++		reg = <0x10>;
++
++		clocks = <&cam2_imx219_clk>;
++
++		VANA-supply = <&vreg_cam2_pwr>;
++		VDIG-supply = <&vreg_cam2_pwr>;
++		VDDL-supply = <&vreg_cam2_pwr>;
++
++		leds = <&cam2_privacy_led>;
++		led-names = "privacy";
++
++		port {
++			cam2_imx219_ep: endpoint {
++				data-lanes = <1 2>;
++				link-frequencies = /bits/ 64 <456000000>;
++				remote-endpoint = <&csiphy4_ep>;
++			};
++		};
++	};
++};
++
++&tlmm {
++	cam2_privacy_led_state: cam2-privacy-led-state {
++		pins = "gpio19";
++		function = "gpio";
++		drive-strength = <8>;
++		bias-disable;
++	};
++
++	cam2_pwr_en: cam2-pwr-en-state {
++		pins = "gpio58";
++		function = "gpio";
++		drive-strength = <8>;
++		bias-disable;
++	};
++};
+
+-- 
+2.43.0
+
