@@ -1,75 +1,93 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11CFD3ACEFE
-	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 07:49:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E52503B14CC
+	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 08:07:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786520993; cv=none; b=LBtbB9oRgkvoKyhqjfGdJE37cMP0UR+48hKaIeWtvAzTe95EvnCJ1hiBgXixvdGD555/QgFCjcGbNhFhXSoI9jpKEDlSe82IqC4GTkNK5YyMiO5VrxhKcHjpuAmm++GXsyGeKtoh6g7MVtqSygmLWJjuphzHQdo7oCHPCLEXJC0=
+	t=1786522064; cv=none; b=q1llpIXuv/An5qNyPICp4mgQMnyRdvp5WYJhR7CJwip/K6jH722UljBJGQJGI5h9cir0lUx6+T+sqRslk1ISyvPslpTlyWrAcDiYTGzu+K+SoKIGr/lMZU+Hfs7EwAcBz/2b2FmPLcZCAGFzEUiTyYjrHvm5jM/XceLf0L3iwBo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786520993; c=relaxed/simple;
-	bh=PDi9YKEuXj5UNZ78Pxf7zKsC4r2wiCr1J4LDEslzgVg=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=DYuFcVPzifAIBDti580xLlzw6y/J+gH6ioWOmBTrNHfmT0B+aVpFJOfUeqhGC4P1WfWOtnYESFyQb0aOHPVdxkWYuOY2ioy8c8ndUzzGjVrhTypoEBeCPyLpsZ47shedymYi0clHLJQttF74Wl3Z6o7NOXtyuFQil8ECkhO8Tj4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ub3rkZiz; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786522064; c=relaxed/simple;
+	bh=phtMQBSWxti2FtrLAu7NAAGr5W/iDboRvSWFz940F10=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=RQAJGGNhWRho5qzrweTf99EvruzqvN5YamlGn6ITb5pDdcGfXYrIosEU/E5tDVG/j9ZXgFe/AhRZicOweGU+4EIGDcvl4JfBUzmvgQqBA4xwlXbyXXJhEmBjvI2AhHBqL2OwW1Jg+YTdK0oo4eMPq9pOFpRjayqjsSVdYYkav0Y=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Onedg4SQ; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ub3rkZiz"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1C3E11F00A3E
-	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 07:49:50 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Onedg4SQ"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 882D11F01558
+	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 08:07:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786520990;
-	bh=PDi9YKEuXj5UNZ78Pxf7zKsC4r2wiCr1J4LDEslzgVg=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=Ub3rkZiziZGTWCZIVNcq3S5Pbed3EUD4qwTqC/pIPpXLnuPISYvRr0Rhz9ZfprWeq
-	 brOO65WS36KfFLu3WVciVRSvWYbWFf+YHa/50NGDslWW2uB1/DnQG9nZPKuQTPb55S
-	 TkTG1wcgXoPVF2n4kshs34A6HLV4IeZ6qpoUAEjgT22bJNfdatj80ajPgzyqk3O531
-	 D3ae3DvKjWHYB1EahiXWgYuWhHGvcaRNKNVCyKzrU8E/D6RikDXIi8GZiJyNrkSniO
-	 Qr+WSd8CinDQBrq11DM60O7ITg+GgWenhwZmQvS8jqsO1oP0ievKOdgabmZ+LtnJWs
-	 zFrwZ9vGuJT/g==
-Received: by mail-lj1-f176.google.com with SMTP id 38308e7fff4ca-39c7ef2b1e2so4925281fa.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 00:49:50 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+RpVVavJ0LTkQSbchlaTNVOC7W7O5PrQS0xKSRRjPcHL3BrBC/Oy1aCvIZKoQ5ixvpp4oUb+Yy4ss7S5RZTu@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy6+zn0Cn03uS37X3D6u2r6UNj9JUS5GWr0p0FiWybEDpTlEYy0
-	zQonxEtnXAli6KKalOiJ0F3PAxFTeqUK+WuCrZxbmWjIQtZqtjbJCnr6gWvB54KSNEjxKHfHdY9
-	g48tEqC4VRth7GqDLTzb5xqVzSZY6p7A=
-X-Received: by 2002:a2e:a556:0:b0:397:e391:c0a9 with SMTP id
- 38308e7fff4ca-3a10d4dd322mr2733681fa.10.1786520988930; Wed, 12 Aug 2026
- 00:49:48 -0700 (PDT)
+	s=k20260515; t=1786522062;
+	bh=h8e/6oz7HT3XGeTxfmCmaaxs2u9xqMmsHSHBOLgeCac=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=Onedg4SQJKw0lKgmzutiivqk0laLcNuhJ0JyknizYv2W7tRuCbYj5AL9WCkkWj9uF
+	 G7LSU5Hnoifmg95Ej+miCVwKr2tULhHxbNCySmmjz+zFqOLWGHVodWVbcyC+mVgrJv
+	 yUiPHasDPYRFew8QcAOFj4ciYZH++aRUtJRh9EoiNXp2uqMrJc3DPO8SOitg8sOt+j
+	 +ozOd3EtnZ8PF8eNvGCsHmc/T5U+AAhQNhRVrbFTrbsbIXGChXknN3HXV8q9CQ8CZ7
+	 Z1bl9NIjpmvDuJZiw/hV1IPopbVlJc4mcYjYfAQMgyMp/alVeiNKunj82VdvnO8iQy
+	 68QNNlwmzLlKQ==
+Received: by mail-lj1-f169.google.com with SMTP id 38308e7fff4ca-39f20d19895so5376851fa.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 01:07:42 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+RoGaQ+5JAUFFKlDMCXS5y7bW4+a4+eoPci8VHPRvx1q00gIM6pamblpZyFYBw8ssY3q16uEKoM1tZEYbGcq@vger.kernel.org
+X-Gm-Message-State: AOJu0YzMIvX8Pto31wlBXD2tVPoD2WPt9r3QoRFkTk43HmibIFP5Px1/
+	aTECyPffqLQo6VqnyliYNNA1wwzwQUe6h/kk2z02WgwuYrxD6jx7Dtkl/LlGndrM4IIakfGkLp3
+	Ox0hSL3h8ULFBC8na306d5XYodOCvSUYddy1j5P6RZg==
+X-Received: by 2002:a2e:be94:0:b0:39c:7922:b446 with SMTP id
+ 38308e7fff4ca-3a10d57ffa2mr2776991fa.14.1786522061234; Wed, 12 Aug 2026
+ 01:07:41 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 12 Aug 2026 01:07:40 -0700
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 12 Aug 2026 01:07:40 -0700
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260811224110.GC1905@sol>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260527-expressatt_camera_flash-v6-0-de0f150024e4@gmail.com> <73033a32-4efe-4ed2-9319-ffb205d28719@gmail.com>
-In-Reply-To: <73033a32-4efe-4ed2-9319-ffb205d28719@gmail.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Wed, 12 Aug 2026 09:49:36 +0200
-X-Gmail-Original-Message-ID: <CAD++jLkc953WROweQ0=BVRmyOMUdqx68XSS3VoBmqfyzbGeCdw@mail.gmail.com>
-X-Gm-Features: AUfX_mw4U6C-G9P9EaGKkzSNO-XMtJxNZ4TxODD_mEGcCds37q8U47nyJFp-DAk
-Message-ID: <CAD++jLkc953WROweQ0=BVRmyOMUdqx68XSS3VoBmqfyzbGeCdw@mail.gmail.com>
-Subject: Re: [PATCH v6 0/3] Samsung Expressatt: Camera Flash
-To: Rudraksha Gupta <guptarud@gmail.com>, Lee Jones <lee@kernel.org>
-Cc: devnull+guptarud.gmail.com@kernel.org, andersson@kernel.org, 
-	broonie@kernel.org, conor+dt@kernel.org, conor.dooley@microchip.com, 
-	david@ixit.cz, devicetree@vger.kernel.org, konrad.dybcio@oss.qualcomm.com, 
-	konradybcio@kernel.org, krzk+dt@kernel.org, lgirdwood@gmail.com, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-leds@vger.kernel.org, pavel@kernel.org, phone-devel@vger.kernel.org, 
-	robh@kernel.org
+References: <20260731050838.158825-1-ebiggers@kernel.org> <a28c2903-0976-4559-b870-4de5553ba9ab@kernel.org>
+ <3ba57269-3305-4d80-b3f2-aa82fa59b59d@gmail.com> <b9b655a9-c683-4c4e-ba0d-f98577dd2912@kernel.org>
+ <20260801162900.GA2021@quark> <e7aeec9b-11aa-4635-bde9-fb8c7ca38260@kernel.org>
+ <20260801171242.GA3567@quark> <CAMRc=McL5QQRk8C8zzkHm+FUj-SAVi5PLJr2pXo8eNpaxXuALg@mail.gmail.com>
+ <20260811224110.GC1905@sol>
+Date: Wed, 12 Aug 2026 01:07:40 -0700
+X-Gmail-Original-Message-ID: <CAMRc=MfVqphaVsfcmUXjGmu6m+F6nJYXgAPuTVjZBwFnd48BkA@mail.gmail.com>
+X-Gm-Features: AUfX_mza5iszjfEYHc7a-SULX42xVaS3ZTvYWTguGELO7PtuyXidmfp9nmIXTrA
+Message-ID: <CAMRc=MfVqphaVsfcmUXjGmu6m+F6nJYXgAPuTVjZBwFnd48BkA@mail.gmail.com>
+Subject: Re: [PATCH] crypto: qce - Replace with stub driver
+To: Eric Biggers <ebiggers@kernel.org>
+Cc: Demi Marie Obenour <demiobenour@gmail.com>, linux-crypto@vger.kernel.org, 
+	Herbert Xu <herbert@gondor.apana.org.au>, linux-arm-msm@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org, 
+	Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 11, 2026 at 11:31=E2=80=AFAM Rudraksha Gupta <guptarud@gmail.co=
-m> wrote:
-
-> https://lore.kernel.org/all/20260527-expressatt_camera_flash-v6-0-de0f150=
-024e4@gmail.com/#t
+On Wed, 12 Aug 2026 00:41:10 +0200, Eric Biggers <ebiggers@kernel.org> said:
+> On Tue, Aug 11, 2026 at 08:42:55AM -0500, Bartosz Golaszewski wrote:
 >
-> This series seems to have fallen in between the cracks. Should I resend
-> this patch series?
+>> No, the rationale has never been this. FWIW it can be that it's used for
+>> testing of the crypto module on a supported platform and that is already
+>> enough of a reason to keep it upstream.
+>>
+>> As I've said before: we don't just drop maintained drivers from linux.
+>
+> We definitely do if the drivers are not useful or appropriate for
+> inclusion in the kernel, though the policy varies by subsystem.  Even
+> just last month an entire filesystem got dropped despite someone wanting
+> to maintain it.
+>
 
-Let's just gently poke Lee about it and see what he says.
+I suppose you're talking about EFS? A thing that can't even be tested on real
+hardware? This is a much more extreme case. Here you have several people
+representing the vendor saying they want to keep and maintain it. I'm fine
+having my own tree and sending PRs to Herbert if he agrees and you are of
+course entirely free to disregard any patches targetting it.
 
-Yours,
-Linus Walleij
+Thanks,
+Bartosz
