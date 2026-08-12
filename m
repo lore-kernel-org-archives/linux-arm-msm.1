@@ -1,38 +1,38 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B3B540DB4E;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B0D640DB47;
 	Wed, 12 Aug 2026 09:34:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786527285; cv=none; b=Nz3ToMkpQv5yUmQfe1czs8NMjv+Spd7esmRJCIbhDpWtfzYqzdH0yj++R8FjcrI+O1AddvWNFxPTiW9bF7Y9muVho9lX8/Oh1zPEnA6wdcoa0xsqhENYW2pDzub3+qaxCVaSI9VCk3ehOix73hNBDDkitkVqIIwy0+YOTbfH/Ro=
+	t=1786527285; cv=none; b=a31NFtOQ+Qih6DkmTid4O9bv5klyrCHt4iqT5kbby8jYzv5e8AyPMIKQglY1/6DI8yNl5UV1nL0PS+SpkqAmRkiXKJjfJ369A3re/RVKi/Xb0DVuQUhsP9Drd9B45T4j3zVOFP5svO2LnQXmF0Ot1D9QhRaVe/NmlxqGPo6aetA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
 	s=arc-20240116; t=1786527285; c=relaxed/simple;
-	bh=XGGg+wneQatG/AQkDerc/plwjABYtPGtPSkFlQvT5xg=;
+	bh=fNjCG8oTZvuKNtl9DTuCOUikdq25pVqeeP63+sAdOYA=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=EypcxGA8Sd4LHNtLSuR72QAWKPZV94YeNn3pAoUTeZ/EsC0O913llpNP35rfuFl8u9WCw85Gbr0hwuQ0Agr4sFHD5WdU2xU1OfBhO2/m4n1TcNCa6TYNarrOa9alqvjpz1Wnqw6MYJ7ayEEVMf0eJSB7zSBE5sp/JdlipqIKXPU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=JPYqgSFR; arc=none smtp.client-ip=10.30.226.201
+	 In-Reply-To:To:Cc; b=igBnHOYBLfHCrNtntKrrRyKkZNRvVBy3vTfZ8hjlBH0xlcAxpKQ0PHXsTEHDXStFKr0Rk4TA+IZ8QaaN5nEFOs7rB4XWiVYT2WPdR4edlIgfdurdIg6q2AZgEKe1dtQSaz6Xda5JNhwFWt1M0+mhM1Kn3Ch94/p7wlSuwbyjKgY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IVJcyqBU; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="JPYqgSFR"
-Received: by smtp.kernel.org (Postfix) with ESMTPS id C451CC32781;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IVJcyqBU"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id AB772C2BCF4;
 	Wed, 12 Aug 2026 09:34:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
 	s=k20201202; t=1786527284;
-	bh=XGGg+wneQatG/AQkDerc/plwjABYtPGtPSkFlQvT5xg=;
+	bh=fNjCG8oTZvuKNtl9DTuCOUikdq25pVqeeP63+sAdOYA=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
-	b=JPYqgSFRPN4RWJcYIe9epi6b+3tX5uK7DxEraidISs+195I1IMhI3MdL4qssPUY6x
-	 6Fh5+EWVcLKGQF7DZwDJlypnwK6OBcYr2TJ6Pb9j8j61PtfTOtMrRb/CLFIGUHP/hO
-	 MnfIEn404GILL4oy2ITNCUcmsvNE1zEOU0mKs3hI/Mx1XwUOIKyr5tryc3vTTRfWqG
-	 eU7bNlJZ/2B9MHEfsgdUkGct4M0f6DO+jtA1d8M8+WkOV1bLeRBkOptCS++QqxH9cA
-	 zHZi9xDdZO1UydoKsPKFhAAFNsQDW1VuglhHlfBDVsgXZ2/3UlF+o60PKnkZ2xFhTL
-	 Chg9boJjCRCZg==
+	b=IVJcyqBUJkzmbPFWfMXva2g4F1L15V3oUzwrwCJ6GVhZKCO+1kFpOPf3MDN7Vg1m5
+	 8C9By9qHfGjukBDPZdJ5I7JsyeMSS6MPR1GBg0x9RGZE/fZWs3sykG21pxdxyInk69
+	 JjgDSk5jguNsrv8bLg/lmVyR37fvOnwRdRGMLn5GNVyXluV8SLH2joODvd3fZDgDtx
+	 VnFDPyNQePdO4Fc5DApaB4w1lE786moGAcqSrgiMEkV8xN+nIvr8MQJ6QdyNg7fXXk
+	 UM0ybH4urxp7bRnwRFafR3iidQ19qz7irZMaWoBM+20MOiiIfxjSAnwMFN6wm0Oovw
+	 I5HV3wyyCE8tg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
-	by smtp.lore.kernel.org (Postfix) with ESMTP id A2DD7C5DF60;
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 87425C5CFEB;
 	Wed, 12 Aug 2026 09:34:44 +0000 (UTC)
 From: George Moussalem via B4 Relay <devnull+george.moussalem.outlook.com@kernel.org>
-Date: Wed, 12 Aug 2026 13:34:39 +0400
-Subject: [PATCH v2 04/14] arm64: dts: qcom: ipq5332: Flatten usb controller
- node
+Date: Wed, 12 Aug 2026 13:34:37 +0400
+Subject: [PATCH v2 02/14] phy: qcom: Introduce Qualcomm IPQ5332 Super-Speed
+ USB UNIPHY driver
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -41,7 +41,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260812-ipq5018-usb3-v2-4-8f355d7ff0ef@outlook.com>
+Message-Id: <20260812-ipq5018-usb3-v2-2-8f355d7ff0ef@outlook.com>
 References: <20260812-ipq5018-usb3-v2-0-8f355d7ff0ef@outlook.com>
 In-Reply-To: <20260812-ipq5018-usb3-v2-0-8f355d7ff0ef@outlook.com>
 To: Vinod Koul <vkoul@kernel.org>, 
@@ -59,11 +59,11 @@ Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org,
  devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
  linux-usb@vger.kernel.org, George Moussalem <george.moussalem@outlook.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1786527282; l=3080;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786527282; l=11583;
  i=george.moussalem@outlook.com; s=20250321; h=from:subject:message-id;
- bh=xMYvxEWuaJgLI2xWvqglKjH2h3PlSr0PrD5R6v8tOEc=;
- b=uv4AZGj2RWq7I0imlu8xno7WjLPQDByBz6jufaXWzZYASpgXh4mH3jvaIJK7cq+7XM+pyjOkG
- gI554vDMcP6BMSytgCyy1BE595+REfBeg1S0FzRfmC+DCnT9D3BHcmQ
+ bh=+hWm9CYsEItAJZsaqGjCpdsTf7+SBtFnNoZuZXGKPcs=;
+ b=mVV4i5YUp6deFEY9EshrtrNjE9Z8+TXiOa7SN8KxJMxMpK6WezoBS73yLvCO8hiI7iUYNPb5r
+ 7q03INtUXd0Dc6BrPefHv0DZ2kj0rXnlR54yucJPdEX0YqGyNul4dTg
 X-Developer-Key: i=george.moussalem@outlook.com; a=ed25519;
  pk=/PuRTSI9iYiHwcc6Nrde8qF4ZDhJBlUgpHdhsIjnqIk=
 X-Endpoint-Received: by B4 Relay for george.moussalem@outlook.com/20250321
@@ -71,110 +71,367 @@ X-Endpoint-Received: by B4 Relay for george.moussalem@outlook.com/20250321
 X-Original-From: George Moussalem <george.moussalem@outlook.com>
 Reply-To: george.moussalem@outlook.com
 
-From: George Moussalem <george.moussalem@outlook.com>
+From: Praveenkumar I <quic_ipkumar@quicinc.com>
 
-Flatten usb controller node and update to using latest bindings and
-flattened driver approach.
+Adds Qualcomm 22ull Super-Speed USB UNIPHY driver support which is
+present in Qualcomm IPQ5018 & IPQ5332 SoCs.
 
+This PHY is interfaced with SNPS DWC3 USB and SNPS DWC PCIe. Either one
+of the interface can use the it and selection is done via mux present in
+TCSR register. By default, the PHY is configured for PCIe interface and
+needs this driver to configure the mux for USB.
+
+Signed-off-by: Praveenkumar I <quic_ipkumar@quicinc.com>
 Signed-off-by: George Moussalem <george.moussalem@outlook.com>
 ---
- arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts |  6 ++--
- arch/arm64/boot/dts/qcom/ipq5332.dtsi       | 51 +++++++++++++----------------
- 2 files changed, 24 insertions(+), 33 deletions(-)
+ drivers/phy/qualcomm/Kconfig                       |  10 +
+ drivers/phy/qualcomm/Makefile                      |   1 +
+ .../phy/qualcomm/phy-qcom-uniphy-usb-ss-22ull.c    | 304 +++++++++++++++++++++
+ 3 files changed, 315 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts b/arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts
-index c224ffc65b08..25a70cd884c0 100644
---- a/arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts
-+++ b/arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts
-@@ -90,11 +90,9 @@ spi_0_cs_pins: spi-0-cs-state {
- };
+diff --git a/drivers/phy/qualcomm/Kconfig b/drivers/phy/qualcomm/Kconfig
+index 60a0ead127fa..1ceb04afe1e3 100644
+--- a/drivers/phy/qualcomm/Kconfig
++++ b/drivers/phy/qualcomm/Kconfig
+@@ -158,6 +158,16 @@ config PHY_QCOM_UNIPHY_PCIE_28LP
+ 	  handles PHY initialization, clock management required after
+ 	  resetting the hardware and power management.
  
- &usb {
--	status = "okay";
--};
--
--&usb_dwc {
- 	dr_mode = "host";
++config PHY_QCOM_UNIPHY_USB_22ULL
++	tristate "Qualcomm IPQ5332 UNIPHY USB Super-Speed 22ull driver"
++	depends on USB && (ARCH_QCOM || COMPILE_TEST)
++	select GENERIC_PHY
++	help
++	  Enable this to support the Qualcomm USB Super-Speed UNIPHY transceiver
++	  that is used on Qualcomm IPQ5018 and IPQ5332 SoCs with DWC3 USB core.
++	  It handles PHY initialization, clock management required after
++	  resetting the hardware and power management.
 +
-+	status = "okay";
- };
- 
- &usbphy0 {
-diff --git a/arch/arm64/boot/dts/qcom/ipq5332.dtsi b/arch/arm64/boot/dts/qcom/ipq5332.dtsi
-index 74d9de8d7641..83d0377455da 100644
---- a/arch/arm64/boot/dts/qcom/ipq5332.dtsi
-+++ b/arch/arm64/boot/dts/qcom/ipq5332.dtsi
-@@ -493,16 +493,9 @@ qpic_nand: spi@79b0000 {
- 			status = "disabled";
- 		};
- 
--		usb: usb@8af8800 {
--			compatible = "qcom,ipq5332-dwc3", "qcom,dwc3";
--			reg = <0x08af8800 0x400>;
--
--			interrupts = <GIC_SPI 62 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 53 IRQ_TYPE_LEVEL_HIGH>,
--				     <GIC_SPI 52 IRQ_TYPE_LEVEL_HIGH>;
--			interrupt-names = "pwr_event",
--					  "dp_hs_phy_irq",
--					  "dm_hs_phy_irq";
-+		usb: usb@8a00000 {
-+			compatible = "qcom,ipq5332-dwc3", "qcom,snps-dwc3";
-+			reg = <0x08a00000 0xe000>;
- 
- 			clocks = <&gcc GCC_USB0_MASTER_CLK>,
- 				 <&gcc GCC_USB0_SLEEP_CLK>,
-@@ -513,31 +506,31 @@ usb: usb@8af8800 {
- 
- 			resets = <&gcc GCC_USB_BCR>;
- 
--			qcom,select-utmi-as-pipe-clk;
-+			interrupts = <GIC_SPI 64 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 62 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 53 IRQ_TYPE_LEVEL_HIGH>,
-+				     <GIC_SPI 52 IRQ_TYPE_LEVEL_HIGH>;
-+			interrupt-names = "dwc_usb3",
-+					  "pwr_event",
-+					  "dp_hs_phy_irq",
-+					  "dm_hs_phy_irq";
- 
--			#address-cells = <1>;
--			#size-cells = <1>;
--			ranges;
- 			interconnects = <&gcc MASTER_SNOC_USB &gcc SLAVE_SNOC_USB>,
- 					<&gcc MASTER_SNOC_USB &gcc SLAVE_SNOC_USB>;
- 			interconnect-names = "usb-ddr", "apps-usb";
- 
--			status = "disabled";
-+			phys = <&usbphy0>;
-+			phy-names = "usb2-phy";
- 
--			usb_dwc: usb@8a00000 {
--				compatible = "snps,dwc3";
--				reg = <0x08a00000 0xe000>;
--				clocks = <&gcc GCC_USB0_MOCK_UTMI_CLK>;
--				clock-names = "ref";
--				interrupts = <GIC_SPI 64 IRQ_TYPE_LEVEL_HIGH>;
--				phy-names = "usb2-phy";
--				phys = <&usbphy0>;
--				tx-fifo-resize;
--				snps,is-utmi-l1-suspend;
--				snps,hird-threshold = /bits/ 8 <0x0>;
--				snps,dis_u2_susphy_quirk;
--				snps,dis_u3_susphy_quirk;
--			};
-+			qcom,select-utmi-as-pipe-clk;
+ config PHY_QCOM_M31_EUSB
+ 	tristate "Qualcomm M31 eUSB2 PHY driver support"
+ 	depends on USB && (ARCH_QCOM || COMPILE_TEST)
+diff --git a/drivers/phy/qualcomm/Makefile b/drivers/phy/qualcomm/Makefile
+index b71a6a0bed3f..295e8042e3f4 100644
+--- a/drivers/phy/qualcomm/Makefile
++++ b/drivers/phy/qualcomm/Makefile
+@@ -18,6 +18,7 @@ obj-$(CONFIG_PHY_QCOM_QMP_USB_LEGACY)	+= phy-qcom-qmp-usb-legacy.o
+ obj-$(CONFIG_PHY_QCOM_QUSB2)		+= phy-qcom-qusb2.o
+ obj-$(CONFIG_PHY_QCOM_EUSB2_REPEATER)	+= phy-qcom-eusb2-repeater.o
+ obj-$(CONFIG_PHY_QCOM_UNIPHY_PCIE_28LP)	+= phy-qcom-uniphy-pcie-28lp.o
++obj-$(CONFIG_PHY_QCOM_UNIPHY_USB_22ULL)	+= phy-qcom-uniphy-usb-ss-22ull.o
+ obj-$(CONFIG_PHY_QCOM_USB_HS) 		+= phy-qcom-usb-hs.o
+ obj-$(CONFIG_PHY_QCOM_USB_HSIC) 	+= phy-qcom-usb-hsic.o
+ obj-$(CONFIG_PHY_QCOM_USB_HS_28NM)	+= phy-qcom-usb-hs-28nm.o
+diff --git a/drivers/phy/qualcomm/phy-qcom-uniphy-usb-ss-22ull.c b/drivers/phy/qualcomm/phy-qcom-uniphy-usb-ss-22ull.c
+new file mode 100644
+index 000000000000..089de7cebef0
+--- /dev/null
++++ b/drivers/phy/qualcomm/phy-qcom-uniphy-usb-ss-22ull.c
+@@ -0,0 +1,304 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2026, Qualcomm Innovation Center, Inc. All rights reserved.
++ */
 +
-+			tx-fifo-resize;
-+			snps,is-utmi-l1-suspend;
-+			snps,hird-threshold = /bits/ 8 <0x0>;
-+			snps,dis_u2_susphy_quirk;
-+			snps,dis_u3_susphy_quirk;
++#include <linux/clk.h>
++#include <linux/clk-provider.h>
++#include <linux/delay.h>
++#include <linux/err.h>
++#include <linux/io.h>
++#include <linux/kernel.h>
++#include <linux/mfd/syscon.h>
++#include <linux/module.h>
++#include <linux/of.h>
++#include <linux/phy/phy.h>
++#include <linux/platform_device.h>
++#include <linux/regmap.h>
++#include <linux/regulator/consumer.h>
++#include <linux/reset.h>
 +
-+			status = "disabled";
- 		};
- 
- 		intc: interrupt-controller@b000000 {
++#define SSCG_CTRL_REG_1				0x9c
++#define SSCG_CTRL_REG_2				0xa0
++#define SSCG_CTRL_REG_3				0xa4
++#define SSCG_CTRL_REG_4				0xa8
++#define SSCG_CTRL_REG_5				0xac
++
++#define PCIE_USB_COMBO_PHY_CFG_MISC1		0x214
++#define PCIE_USB_COMBO_PHY_CFG_RX_AFE_2		0x7C4
++#define PCIE_USB_COMBO_PHY_CFG_RX_DLF_DEMUX_2	0x7E8
++
++#define TCSR_USB_MUX_SEL			BIT(0)
++
++struct phy_init_tbl {
++	unsigned int offset;
++	unsigned int val;
++};
++
++struct uniphy_cfg {
++	const struct phy_init_tbl *init_seq;
++	int num_init_seq;
++	u32 pipe_clk_rate;
++};
++
++struct uniphy_usb {
++	struct device		*dev;
++	const struct uniphy_cfg	*cfg;
++	struct phy		*phy;
++	void __iomem		*base;
++	struct clk_bulk_data	*clks;
++	unsigned int		num_clks;
++	struct reset_control	*reset;
++	struct regulator	*vreg;
++	struct regmap		*tcsr;
++	unsigned int		mux_offset;
++};
++
++#define PHY_INIT_CFG(o, v)		\
++	{				\
++		.offset = o,		\
++		.val = v,		\
++	}
++
++static const struct phy_init_tbl ipq5018_usb_uniphy_init_tbl[] = {
++	PHY_INIT_CFG(SSCG_CTRL_REG_4, 0x1cb9),
++	PHY_INIT_CFG(SSCG_CTRL_REG_5, 0x023a),
++	PHY_INIT_CFG(SSCG_CTRL_REG_3, 0xd360),
++	PHY_INIT_CFG(SSCG_CTRL_REG_1, 0x1),
++	PHY_INIT_CFG(SSCG_CTRL_REG_2, 0xeb),
++};
++
++static const struct phy_init_tbl ipq5332_usb_uniphy_init_tbl[] = {
++	PHY_INIT_CFG(PCIE_USB_COMBO_PHY_CFG_RX_AFE_2, 0x1076),
++	PHY_INIT_CFG(PCIE_USB_COMBO_PHY_CFG_RX_DLF_DEMUX_2, 0x3142),
++	PHY_INIT_CFG(PCIE_USB_COMBO_PHY_CFG_MISC1, 0x3),
++};
++
++static const struct uniphy_cfg ipq5018_cfg = {
++	.init_seq	= ipq5018_usb_uniphy_init_tbl,
++	.num_init_seq	= ARRAY_SIZE(ipq5018_usb_uniphy_init_tbl),
++	.pipe_clk_rate	= 250000000,
++};
++
++static const struct uniphy_cfg ipq5332_cfg = {
++	.init_seq	= ipq5332_usb_uniphy_init_tbl,
++	.num_init_seq	= ARRAY_SIZE(ipq5332_usb_uniphy_init_tbl),
++	.pipe_clk_rate	= 250000000,
++};
++
++static int uniphy_usb_init(struct phy *phy)
++{
++	struct uniphy_usb *uniphy = phy_get_drvdata(phy);
++	const struct uniphy_cfg *cfg = uniphy->cfg;
++	const struct phy_init_tbl *tbl = cfg->init_seq;
++	void __iomem *base = uniphy->base;
++	struct device *dev = uniphy->dev;
++	int i, ret;
++
++	ret = regulator_enable(uniphy->vreg);
++	if (ret) {
++		dev_err(dev, "failed to enable regulator: %d\n", ret);
++		return ret;
++	}
++
++	/* Perform phy reset */
++	ret = reset_control_assert(uniphy->reset);
++	if (ret) {
++		dev_err(dev, "Failed to assert reset: %d\n", ret);
++		goto err_disable_regulator;
++	}
++
++	usleep_range(1, 5);
++
++	ret = reset_control_deassert(uniphy->reset);
++	if (ret) {
++		dev_err(dev, "Failed to deassert reset: %d\n", ret);
++		goto err_assert_reset;
++	}
++
++	ret = clk_bulk_prepare_enable(uniphy->num_clks, uniphy->clks);
++	if (ret) {
++		dev_err(dev, "failed to enable clocks: %d\n", ret);
++		goto err_assert_reset;
++	}
++
++	/* phy autoload delay */
++	usleep_range(35, 40);
++
++	for (i = 0; i < cfg->num_init_seq; i++)
++		writel(tbl[i].val, base + tbl[i].offset);
++
++	return 0;
++
++err_assert_reset:
++	/* Assert phy reset */
++	reset_control_assert(uniphy->reset);
++
++err_disable_regulator:
++	regulator_disable(uniphy->vreg);
++
++	return ret;
++}
++
++static int uniphy_usb_shutdown(struct phy *phy)
++{
++	struct uniphy_usb *uniphy = phy_get_drvdata(phy);
++
++	clk_bulk_disable_unprepare(uniphy->num_clks, uniphy->clks);
++
++	/* Assert phy reset */
++	reset_control_assert(uniphy->reset);
++
++	regulator_disable(uniphy->vreg);
++
++	return 0;
++}
++
++static const struct phy_ops uniphy_usb_ops = {
++	.power_on	= uniphy_usb_init,
++	.power_off	= uniphy_usb_shutdown,
++	.owner		= THIS_MODULE,
++};
++
++/*
++ * Register a fixed rate pipe clock.
++ *
++ * The <s>_pipe_clksrc generated by PHY goes to the GCC that gate
++ * controls it. The <s>_pipe_clk coming out of the GCC is requested
++ * by the PHY driver for its operations.
++ * We register the <s>_pipe_clksrc here. The gcc driver takes care
++ * of assigning this <s>_pipe_clksrc as parent to <s>_pipe_clk.
++ * Below picture shows this relationship.
++ *
++ *         +---------------+
++ *         |   PHY block   |<<---------------------------------------+
++ *         |               |                                         |
++ *         |   +-------+   |                   +-----+               |
++ *   I/P---^-->|  PLL  |---^--->pipe_clksrc--->| GCC |--->pipe_clk---+
++ *    clk  |   +-------+   |                   +-----+
++ *         +---------------+
++ */
++static int phy_pipe_clk_register(struct uniphy_usb *uniphy, int id)
++{
++	struct device *dev = uniphy->dev;
++	struct clk_hw *hw;
++	char name[64];
++
++	snprintf(name, sizeof(name), "usbphy%d_pipe_clk_src", id);
++	hw = devm_clk_hw_register_fixed_rate(dev, name, NULL, 0,
++					     uniphy->cfg->pipe_clk_rate);
++	if (IS_ERR(hw))
++		return PTR_ERR(hw);
++
++	return devm_of_clk_add_hw_provider(dev, of_clk_hw_simple_get, hw);
++}
++
++static int qcom_uniphy_usb_mux_select(struct uniphy_usb *uniphy, bool enable)
++{
++	return regmap_update_bits(uniphy->tcsr, uniphy->mux_offset,
++				  TCSR_USB_MUX_SEL,
++				  enable ? TCSR_USB_MUX_SEL : 0);
++}
++
++static int qcom_uniphy_usb_probe(struct platform_device *pdev)
++{
++	struct phy_provider *phy_provider;
++	struct device *dev = &pdev->dev;
++	struct uniphy_usb *uniphy;
++	int ret;
++
++	uniphy = devm_kzalloc(dev, sizeof(*uniphy), GFP_KERNEL);
++	if (!uniphy)
++		return -ENOMEM;
++
++	uniphy->dev = dev;
++
++	uniphy->cfg = of_device_get_match_data(dev);
++	if (!uniphy->cfg)
++		return -EINVAL;
++
++	uniphy->base = devm_platform_ioremap_resource(pdev, 0);
++	if (IS_ERR(uniphy->base))
++		return dev_err_probe(dev, PTR_ERR(uniphy->base),
++				     "failed to map base\n");
++
++	ret = devm_clk_bulk_get_all(dev, &uniphy->clks);
++	if (ret < 0)
++		return dev_err_probe(dev, ret, "failed to get clocks\n");
++
++	uniphy->num_clks = ret;
++
++	uniphy->reset = devm_reset_control_get_exclusive_by_index(dev, 0);
++	if (IS_ERR(uniphy->reset))
++		return dev_err_probe(dev, PTR_ERR(uniphy->reset),
++				     "failed to get reset\n");
++
++	uniphy->vreg = devm_regulator_get(dev, "vdd");
++	if (IS_ERR(uniphy->vreg))
++		return dev_err_probe(dev, PTR_ERR(uniphy->vreg),
++				     "failed to get vreg\n");
++
++	uniphy->tcsr = syscon_regmap_lookup_by_phandle_args(dev->of_node,
++							    "qcom,phy-usb-mux-sel",
++							    1, &uniphy->mux_offset);
++	if (IS_ERR(uniphy->tcsr)) {
++		ret = PTR_ERR(uniphy->tcsr);
++		uniphy->tcsr = NULL;
++		return dev_err_probe(dev, ret, "failed to get regmap\n");
++	}
++
++	/*
++	 * Select the USB position of the phy mux before anything comes out
++	 * of reset. Selecting it later leaves the SuperSpeed pads muxed away
++	 * while the controller resets, and the SS link doesn't train and is
++	 * stuck in Rx.Detect (USB2 is unaffected as it isn't muxed).
++	 */
++	ret = qcom_uniphy_usb_mux_select(uniphy, true);
++	if (ret)
++		return dev_err_probe(dev, ret, "failed to select USB mux\n");
++
++	uniphy->phy = devm_phy_create(dev, NULL, &uniphy_usb_ops);
++	if (IS_ERR(uniphy->phy)) {
++		ret = PTR_ERR(uniphy->phy);
++		return dev_err_probe(dev, ret, "failed to create PHY\n");
++	}
++
++	ret = phy_pipe_clk_register(uniphy, uniphy->phy->id);
++	if (ret)
++		return dev_err_probe(dev, ret, "failed to register pipe clk\n");
++
++	phy_set_drvdata(uniphy->phy, uniphy);
++
++	phy_provider = devm_of_phy_provider_register(dev, of_phy_simple_xlate);
++
++	ret = PTR_ERR_OR_ZERO(phy_provider);
++
++	return ret;
++}
++
++static void qcom_uniphy_usb_remove(struct platform_device *pdev)
++{
++	struct uniphy_usb *uniphy = platform_get_drvdata(pdev);
++
++	qcom_uniphy_usb_mux_select(uniphy, false);
++}
++
++static const struct of_device_id qcom_uniphy_usb_of_match[] = {
++	{ .compatible = "qcom,ipq5018-uniphy-usb-ss-phy", .data = &ipq5018_cfg},
++	{ .compatible = "qcom,ipq5332-uniphy-usb-ss-phy", .data = &ipq5332_cfg},
++	{ },
++};
++MODULE_DEVICE_TABLE(of, qcom_uniphy_usb_of_match);
++
++static struct platform_driver qcom_uniphy_usb_driver = {
++	.probe	= qcom_uniphy_usb_probe,
++	.remove = qcom_uniphy_usb_remove,
++	.driver = {
++		.of_match_table	= qcom_uniphy_usb_of_match,
++		.name  = "qcom,uniphy-usb-ss-phy",
++	}
++};
++module_platform_driver(qcom_uniphy_usb_driver);
++
++MODULE_DESCRIPTION("Qualcomm UNIPHY Super-Speed USB PHY driver");
++MODULE_LICENSE("GPL");
 
 -- 
 2.53.0
