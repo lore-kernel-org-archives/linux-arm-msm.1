@@ -1,137 +1,165 @@
-Received: from mail-ej1-f42.google.com (mail-ej1-f42.google.com [209.85.218.42])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 360293C5837
-	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 08:35:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.42
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 48049331EBB
+	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 08:55:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786523729; cv=none; b=JF1D8M6OPms3B8dfdmSxjLq6/EF3h9KkXn/u18XWFB0FkFD6N+/4vkdlJh1OXyFjuaKiduxFjQAyNZeW2IN5lcNXcQAHnhQk4s/AKK3KEaUDstc/hfnqRcjP90l/7wcxfH73nZg5C8gzg8cB3ErHH9K5fnlSslYkGT66AepMgog=
+	t=1786524918; cv=none; b=bfd5hdUNbnK/e0fDFlfBmIIQLyRDljr/JDYutG8CFEvPNytn1vpF2xIagBEaNJ6OkqAHCnt3lVt4YRN9d7o49/xNETfNX0ez0+Z6jgBsOtn9dhc/ZxQjryuqnbCTYuk8p/rt6yQ8qispfjlAjp1Fvqfqa5y/iI3KxNg7H4eo/w4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786523729; c=relaxed/simple;
-	bh=sfM0Q9yvam7vJKzIzBC5V31XobNOFN6MyervKypnVnQ=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=fGr8pqF04M1EM/mXRpBsvx9pFfdND/VwOCYVh91BCbvJI9kevmfHG2mp/z3HcucfyuEjysgwraT/fDCax1Tt9y0V+f6StDSfKp09RN8fTPUgAUsWA07hg//CyJy7dcps+4gtEZC1JCtvmX3Y2H9wEXpJPcbxEzYcjUc1jS6No/s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ferrisoft.com; spf=pass smtp.mailfrom=ferrisoft.com; dkim=pass (2048-bit key) header.d=ferrisoft-com.20251104.gappssmtp.com header.i=@ferrisoft-com.20251104.gappssmtp.com header.b=aZGu/s1h; arc=none smtp.client-ip=209.85.218.42
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=ferrisoft.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ferrisoft.com
+	s=arc-20240116; t=1786524918; c=relaxed/simple;
+	bh=F7MqsTpvXEhShRZzCrVhWm+SLKO+Vc5RAc23Ul79HmY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=YWv4MtsTH1OtGnP/iG4XCbkZyZsZ4Bud03eewqUCAaExlukXkYFA3oJZFWA8n++SyIUISJbrIB9V6oRSEGuvPyIodhylH7LkjMskPpSxmMtFGfCXiKVz2J4idj8KASkt5LhJK7lRw5Ee9RklL1kYTNyH4o2VCTG5Lw8NRhQoCU8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cL67h0iu; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QfbOGbE1; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=ferrisoft-com.20251104.gappssmtp.com header.i=@ferrisoft-com.20251104.gappssmtp.com header.b="aZGu/s1h"
-Received: by mail-ej1-f42.google.com with SMTP id a640c23a62f3a-c20363107f4so65476066b.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 01:35:28 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cL67h0iu";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QfbOGbE1"
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67C8YpXj3847917
+	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 08:55:14 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	l/9WLhEJTgXWRjhzQHboMAkJhxat9TGdxV61Ba2hGvY=; b=cL67h0iuMunP3Yqn
+	+dKF8mXZ2XFnPGfyvHp1w2Ih1MY1WrOc6GqtrXdddlSD7I0/N47HFrp6Div3gJ4N
+	KSf0k7v4+2I4IDFhcaTepJbDkcoV0eepRY4mCcUExPzizr1RZuCVaqtdzohIYdkq
+	C4aobWj+TeBFiCVxLqNYUQouMenBZeDMXHXsWhzR//tZPW8TUGKKDIB80rQmCA25
+	ZujvmJvrbpJtjiwR12Rs24X/aFvxhZSvEsQO4USZgnlEgX0t2cA5XejgTsQc9YBT
+	Ad1nc5Wr4jv9C01nbuBtwEPSe7UWmUWbuftY/gnXRceX0v2IsDfI8M7CqP12vA+M
+	4zclJw==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g08j5k0pc-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 08:55:14 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38e8fee6af3so932244a91.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 01:55:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ferrisoft-com.20251104.gappssmtp.com; s=20251104; t=1786523726; x=1787128526; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=SRz8d2LTz7ANuvcE3cpzl7cgImiMYk6eSb5mmpK68cA=;
-        b=aZGu/s1hZDUpURDOYrx2jRYTvrAilWJD+djzQ/NeeX0LdESO9tLlORJmk/qee++11S
-         kH7D9UkrCfm6x+dplwLRucIWr0gCIST3ijto8ZlCEmZXxQm6sZfArYTv6rSlgtbuZbNv
-         GIcpqMG7kFsAurCLQ4a5To0/eyPHeR8ufecDZozs6/rp+NhXoll7nHwSfWUBYe8DMen1
-         5F0zp//EDIcSoyL41uBwgJLsxmLVM8EMajLO4Nwv1ndDFZP9s5kAXYKL1/uPT5JiRdrI
-         h2VIcbZU5LcH1olkoIhp/qVFEfaQG8DqDSltjWTgxt5WxMzjAGGsNnfjbfpOABI8fM54
-         qfbw==
+        d=oss.qualcomm.com; s=google; t=1786524914; x=1787129714; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=l/9WLhEJTgXWRjhzQHboMAkJhxat9TGdxV61Ba2hGvY=;
+        b=QfbOGbE1dT4ou/+9LRTPtoNUH8UNZMkDn6xnSeV/pE9QkX4Ue23uAY+ExS9evvb+Kd
+         Jzz9jdosEVxztAA5YkGXoLBG8A7dFoITcxBJutE0Fe34VCuHV40njSjniTPwPym4o94L
+         nTivS27WwQL6OOhaJm/FHjUDOLwhuSclxv/fVdomAs6LRniVUrPj0FcvT1TprseA5AKS
+         HpaXqlRqiMk526WE05YSmu6nxX5b1/c505GE908jb+CVU0xJPVzjlUNQlLBxQAnqZvKB
+         jWSpAhZHbRetdAVodjucv2osdP4avQz6dHnsoSVhVhuHKWSJnQYcDBezx+o+LjJcDSuW
+         JQ5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786523726; x=1787128526;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1786524914; x=1787129714;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=SRz8d2LTz7ANuvcE3cpzl7cgImiMYk6eSb5mmpK68cA=;
-        b=cPnA+tGco884EQ/3/AVc9S6hz/bsKVrl2sy0JHvpOMZyK0NNGjqalOPXnOLQ+nLJxu
-         fTvCIL0rdBzDYm9hXTtsJIK7l3PWoVhvWtwIgB9mx00M5tQjV6jw69dFgFoykZ5FkwYu
-         H1unm73ge6FreYhXSxYVIfbkFoi/2DnzbHhxL9lS0lRzIdcuUXuqG+rhrQaPmP4wzc0g
-         BK8+f9BLmYUCOZKzAOrDP2Ed7oxWyG2g4OoQuq5oVP/fFBfgUVT4u8YhRGVJ+Z1iprWj
-         BmpwObvrmDWXOooj0VW3l0zWIGhSZ3rPJBMMpKNvnza8uAn4IU0J3V20RVAkmd8uJy12
-         Nv/w==
-X-Forwarded-Encrypted: i=1; AHgh+RpnoAAs6vwW9mSCdb0b4/8rPb46cgczc91qcKPNaEZTOo72428jaVX2yALJ6yTzenskX5sBmSSlkdSUNjAH@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx90/UBiaA2VgXr0hw0e/qgQc9zyK5KByAv0n9XD/KPGZlekGHw
-	H56bRb+749jPDxznCfjhHKJmrPntjHcQWcwDogyKEfCMdxVsbusVEfs9sGAEfug7zIol
-X-Gm-Gg: AR+sD13t6GowLvvTnQiYUosp2H9DyWroFZjhA1b7jk4mA0gtLCOPio2dfHILVdH9A4K
-	TMHh1zfHWWKaj5AUSQePflw7rPB5wnz7dpuOOyZiR1rUA4k1aAiQbgX8istM3N/vvE8Z5PercRJ
-	rqMkElOa6D4O39+YdarL0i6Jbw5lz330Y4NbiKS8NYm9ytj48JYxhlBGKzuigHh71tYWUz6av4B
-	/OjSXQ1tNV15aHAG4E4gNClh/KtmHgSlg5K6whXWrIMLjlArFxgJWTRLRT+En4lkGdv/sf0bB9j
-	bTbhBpuEuWnhsvrrjmayO6rhcb3xR+4YDeUe1LjPDGKVFAVcexc5GhWAGSWw5cmJQrdSDSeIGeA
-	Q3Anp96yvEnpIZbydj7CCQFFkS1YSkR3Dz6o6P+gh6cJZDhiAjg1ywX73mUEGia7Z7SPPOzrtUs
-	fPjGgH5fy53JRjZ6K/uRMw/9V6KHuYsv8yQehZMui6H2LNew1EAAqZOlBye+5rNLTnpyaJQnlVf
-	Uw1nkd04ot8aV+C
-X-Received: by 2002:a17:907:9616:b0:c15:f65a:43a8 with SMTP id a640c23a62f3a-c20f2e63327mr160127766b.12.1786523726105;
-        Wed, 12 Aug 2026 01:35:26 -0700 (PDT)
-Received: from zenbook (45-11-61-69.ip4.greenlan.pl. [45.11.61.69])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c20f0749337sm64174966b.7.2026.08.12.01.35.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2026 01:35:25 -0700 (PDT)
-From: Greg Ociepka <greg@ferrisoft.com>
-To: Konrad Dybcio <konradybcio@kernel.org>
-Cc: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	linux-arm-msm@vger.kernel.org
-Subject: glymur/UX3607OA: usb_1 SS root port fails link training with hubs, trains Gen2x1 devices fine
-Date: Wed, 12 Aug 2026 10:35:24 +0200
-Message-ID: <20260812083524.775042-1-greg@ferrisoft.com>
-X-Mailer: git-send-email 2.54.0
+        bh=l/9WLhEJTgXWRjhzQHboMAkJhxat9TGdxV61Ba2hGvY=;
+        b=cXuC2AvUo8ls01j8uUOgG0d4SzGj7B4DU1a0p9/ShRYcvCCaA/mlViY7PlnMK3tG5W
+         PNQ6UbCXhi8cA86RZ1Bc/bK6c14Qtq/TidF9wE5LHSyrOaqCfsmkJn2GrhGJW3P9p3Et
+         fSKb95kn5hqnWVvG2oVtvhgPLpMvPZwho8kIX+lFoAeRNUKSiFHXLSh8tuljpDBD9dR8
+         FgpaTZp8iq1imBkVcDHiIqm02b9nBNQtaEtAsDqATpEVdwX3DBmNu8H4H475h6IsZcEv
+         qaaVrs4hhIdbeeipKG8Nq6BqWp+2MG9KF1QFXqv369J6Sz+9LmOqrfO6WIoYjRvIOhbd
+         JV/Q==
+X-Forwarded-Encrypted: i=1; AHgh+Rr1W8/AOvstJDbH9H2w4QQLNPmB/ieBkuZBKsDhTHniNkn/RC+w1z7s2q6syiH4E7r3A31nNifiORntF3ZQ@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw/TDoOy7UW+xH3+Y706QEiGU7Uwmfr1BDvN/ePgFXovUeNNPFs
+	YKkvM4d1ryx4lfCa+QYMtn4KAWY6aC4AdFmVIUqpFBuMe7uS8q5N9KJ/Fy1gfec/7dP720Np+0X
+	eQFEqI/LOUSkAzNPpBCDta53ZHuhZr6iPU+dkP1lbgbwBpflP7PVwNb7EE9MfRwyUlJKf
+X-Gm-Gg: AR+sD11zZ7lnOE5TZB+lFU60wqP4vyO5cLzvLlSlMO5tyW49jGt6inolGBvEAGYdT3T
+	dqDRrJszVw+xLYfp7g5JL6xL1KkOjnptz7fea4owR4eE+7M6/CtbXI4+DHI1XamuJJDrAz5Rt/0
+	+UtJey/ozAqMirXRBnI+NpfUNImUjoRUTofPQMfCUZQ7Z91S6gaHnFPBvS6g2AdSoAX6cwD9LMM
+	FlNHGeFcF+0LS5iCvW5PEGIebbY08g5NUzm6BIJtiRwei6gIPyDxWn+DklwU3kHRH/hTgpQjCt8
+	AZVVwGBD9yCCcRonCSjGN5VAt2ZmzAtEF3NdNHUgD/tY9WCfFFntp/V4BcwGq2opEeYb159tblB
+	8iZPfjKBQv+sgEzaPmsoyObLIf/fv5Y2iRg==
+X-Received: by 2002:a17:90b:3802:b0:38e:5c6:4db9 with SMTP id 98e67ed59e1d1-39301490a5emr3605683a91.11.1786524913690;
+        Wed, 12 Aug 2026 01:55:13 -0700 (PDT)
+X-Received: by 2002:a17:90b:3802:b0:38e:5c6:4db9 with SMTP id 98e67ed59e1d1-39301490a5emr3605632a91.11.1786524913227;
+        Wed, 12 Aug 2026 01:55:13 -0700 (PDT)
+Received: from [10.217.219.92] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-392f908a82bsm2808212a91.0.2026.08.12.01.55.06
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 12 Aug 2026 01:55:12 -0700 (PDT)
+Message-ID: <de19d0ac-3b3c-494b-a3da-028570989bc7@oss.qualcomm.com>
+Date: Wed, 12 Aug 2026 14:25:04 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/7] soc: qcom: geni-se: Add helper to set SE clock rate
+ via OPP
+To: Praveen Talari <praveen.talari@oss.qualcomm.com>,
+        konrad.dybcio@oss.qualcomm.com, Sudeep Holla <sudeep.holla@kernel.org>,
+        Cristian Marussi <cristian.marussi@arm.com>,
+        Ulf Hansson <ulfh@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jiri Slaby <jirislaby@kernel.org>, Mark Brown <broonie@kernel.org>,
+        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
+        Andi Shyti <andi.shyti@kernel.org>
+Cc: chandana.chiluveru@oss.qualcomm.com, arm-scmi@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-pm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-serial@vger.kernel.org, linux-spi@vger.kernel.org,
+        linux-i2c@vger.kernel.org
+References: <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-0-61171ab1cdce@oss.qualcomm.com>
+ <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-3-61171ab1cdce@oss.qualcomm.com>
+Content-Language: en-US
+From: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
+In-Reply-To: <20260805-derive_clk_perf_tbl_from_perf_domain_opp_table-v1-3-61171ab1cdce@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEyMDA3MCBTYWx0ZWRfXyliI2GYTCZPk
+ krtEz3rIfuPtrKctICHrHx2C/BH989eDGFBEaJQwuJog3f0qLWOBL8rD9mL/UO0jIlzH0qIdomk
+ bZsFzvht5aXgtZWJWdzJYQTK4jvUcSg=
+X-Authority-Analysis: v=2.4 cv=evHvCIpX c=1 sm=1 tr=0 ts=6a7c34f2 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=9aiwZt7zaXvVnErAyWsA:9 a=QEXdDO2ut3YA:10 a=ZXulRonScM0A:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-GUID: I4hgdsjoXxpxGCFpzMDidJo_z_0nwG7D
+X-Proofpoint-ORIG-GUID: I4hgdsjoXxpxGCFpzMDidJo_z_0nwG7D
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEyMDA3MCBTYWx0ZWRfX+c54nQCnnKKN
+ bCBiTz8QI7xpDWPXACNAyTTBSNvfp8aVW8Z0PoYL/kBR8bIjtpQRFmC8scGlQ86mcdPAn3/52kU
+ dzx87lz1hIcd3wca6dYsObE+6B9V+iy1OuA/uQ+FIRSSUkoDzNoWfws3zrl6B5D1vdCYJWCALx/
+ TMyO++xHVOgVNQI2p283l3XTrQ47rw0KfgJzUV1zEOlgGUppEi7c4H5nimOAqE2230sY9gm3Qr8
+ cvbSZxsPV63N+j81GYfUm7zc8G3m4w4ZagEkqPIsHF0T3n8+sEjwtPKZNvV0VYtS9O1y9OpX0TK
+ ulaUPgtrMoeeenpf+V/UCimfr35vne+0Xf1xmC0dIqsFinwA663V6l2qTTefGQQR9LxHV2/rxVd
+ BAIkUtAn/kMPhKI+dwjaHqJ4yeJsWNhs/pJi7CSaNWE9TLIXFJx6yJ9iw216XQXf3orHD51WcH8
+ ySV0Y23QtmaTf4peBnw==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-12_02,2026-08-10_03,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 lowpriorityscore=0 adultscore=0 priorityscore=1501
+ bulkscore=0 suspectscore=0 clxscore=1015 phishscore=0 spamscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608120070
 
-Hi,
 
-On the Asus Zenbook A16 (UX3607OA, X2 Elite Extreme), the SuperSpeed
-root port of usb_1 (a800000) cannot bring up a link to any hub, while
-the same port trains a directly attached Gen2x1 device at 10 Gbps
-without a single error. The same hub works fine on usb_0 (a600000).
-Under Windows the port drives the same hub normally.
 
-Kernel: next-20260730 plus your A16 series and the three later glymur
-fixes cherry-picked (e78c5e9d79e3, 5ac32106d3c2, 1b0b6ddd0299), plus
-the USB vote patch I just sent separately ("arm64: dts: qcom: glymur:
-Add missing USB clock, power and bandwidth votes").
+On 8/5/2026 1:27 AM, Praveen Talari wrote:
+> GENI protocol drivers need a common way to scale the SE source clock
+> through the OPP framework. However, the device that owns the OPP table
+> differs depending on how the SE resources are managed. For Linux clock
+> managed platforms, the OPP table is associated with the SE device,
+> whereas on firmware-managed platforms it is associated with the
+> performance power-domain device. This requires protocol drivers to be
+> aware of the underlying resource management model when requesting
+> frequency changes.
+> 
+> Introduce geni_se_set_rate(), a common helper that abstracts this
+> difference and applies the requested frequency through the appropriate
+> device. The helper automatically selects the performance-domain device
+> when power domains are attached and falls back to the SE device
+> otherwise.
+> 
+> Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
+> ---
 
-Reproducer (~20 s): plug a USB-C adapter containing a SS hub into each
-Type-C port in turn. Ours enumerates as Terminus 1a40:0101 (USB2 hub) +
-VIA 2109:0817/2817 + Billboard 25a4:9321; a VL817-based dock shows the
-same behaviour. No monitor attached, so all four SS lanes are available
-to USB3 on both ports.
-
-  usb_0: SS hub + downstream devices at 5 Gbps, clean
-  usb_1: HS half of the hub enumerates fine, SS root port fails
-
-Interestingly the failure signature depends on the CX performance
-state. Before the vote patch (CX aggregating to SVS), the SS port never
-reaches U0:
-
-  usb usb6-port1: Cannot enable. Maybe the USB cable is bad?  (x8)
-
-With the vote patch applied (CX at NOM while the controller is active),
-link training gets further - the port reaches U0 and the failure moves
-to the first control transfer:
-
-  usb 4-1: Device not responding to setup address.  (x2)
-  usb 4-1: device not accepting address 2, error -71
-  usb usb4-port1: Cannot enable. Maybe the USB cable is bad?
-
-A directly attached SanDisk Extreme SSD trains SuperSpeed Plus Gen 2x1
-on this same port and transfers normally in both configurations, which
-is what makes this odd - a marginal link would be expected to fail the
-faster mode first.
-
-Ruled out by measurement on this machine:
-
-  - master clock rates: all three gcc_usb30_*_master_clk at 200 MHz
-  - TCSR_USB4_1_CLKREF_EN: enabled, hw gate on, 19.2 MHz
-  - swapped vdda-phy/vdda-pll (the glymur-crd issue Mani fixed): this
-    board has them correct (0.91-0.94 V phy, 1.2 V pll)
-  - DP altmode interference: no altmode entered, Billboard shows up on
-    both ports, DP-1/DP-2 disconnected throughout
-  - USB_QUIRK_NO_LPM on the VL817 SS half: the quirk never gets a
-    chance to apply since the SS device never enumerates
-
-The one asymmetry we know of is the QMP PHY reference clock source:
-usb_0_qmpphy takes RPMH_CXO_CLK directly while usb_1_qmpphy takes
-TCSR_USB4_1_CLKREF_EN (per 12c97d1c15f9 that matches the HW design).
-Is there anything else that differs between these two ports on the SiP
-package that would be worth poking at? Happy to test patches or gather
-more data - the machine reproduces this on demand.
-
-Thanks,
-Greg
+Acked-by: Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>
