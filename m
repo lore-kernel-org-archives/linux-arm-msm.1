@@ -1,149 +1,233 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7CA25435504;
-	Wed, 12 Aug 2026 11:40:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89E813314D2;
+	Wed, 12 Aug 2026 12:29:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786534828; cv=none; b=MYR0K2oDmXvpEz/hj+VYkImZvEe56JDzIf9v8HfP9pHnV0fg8+s1yOjPKfY/z2ToXQrfkeyChDAx/qy8D+lA5sTsAsOgOdYQuaohBTgHN3BCOAr5QK4oNmriWsR/62EI5OPL1sFAzYbxZaACNDu9euNE+hoW7C2C/ZXKe7Tgxdc=
+	t=1786537748; cv=none; b=CdqRQvjgOvlcdY1pqXEhJh+lmxtshEacAA0/n8Tj7FbqTM7LDjH8Zz19tgl0m61umOr9yuHW5P8QpUrzbUgQ141UPmASglR4JgZQ31V4ZZsDg2Ix7iIEmLAsIa7Bh8pcmTSFqNnrL+pvPvRv2hKAIB1tKa6PzEae0zdn+iETKl4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786534828; c=relaxed/simple;
-	bh=4h/0oLp2h7IE8pA6uZy4AQLNovG4Wqu1oVEvekedYSA=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=DMtnPU65fDILrYTo06tAmD6FYYIn1zJsAuJnegXnWuziHVXUQid6568tUFVNXgYy95C9ba9qWj4DkiDh5w4Wk33jomaRjzVkLi+qPcPeyTIu1LhxIZAldGbwT9uJ4Yx15P8QrJRiJ3XepybbmGbdWH4i6WvoFrW3a+cArlYqY08=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=GB7ysRj8; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	s=arc-20240116; t=1786537748; c=relaxed/simple;
+	bh=zktH5kzqXnE1yUNpL4lhK5TTTDphHY3JxNeGiEz4UeQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=DqGrPiy8rhBiF6A6FI7+OrnIIdsTzM0bZMN6jh/uciZ3HhXJN8xudL/aETpoKHCp+uOru6jsxKtLJe5UN/hGirlgTdTkIt/M56h1fWMmr7f751FTKnz0MoiX0XwQw3hheL+R5PrlAXxTlHYmPzVXLceiT1rSmCIHCU/xWFupioo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=aSiro+gT; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="GB7ysRj8"
-Received: from [172.16.124.192] (ip-78-44-13-22.bb.vodafone.cz [78.44.13.22])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id B6B8F53401E6;
-	Wed, 12 Aug 2026 13:40:23 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1786534824;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=KArXhTGikECnnXJBaKJQL5HiSiaclLz+gY4N4WdWjRA=;
-	b=GB7ysRj8pn9j8ajPfl9zs1ENqu8qTVII284Qf4FOevTFQfE6k//3GPYoLp5AlMyfiII8KF
-	bmiL05O4Yw4ptY+RPGmR1DHhpv3qai5XeDSN/rTPsAXphZx0FOsSqW7It7FR4+276wuubB
-	XtmhSyiGNND8ETSKmaPTKjjifL1M/ik=
-Message-ID: <cce3fe36-322e-49ed-8928-3aef813faad7@ixit.cz>
-Date: Wed, 12 Aug 2026 13:40:23 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="aSiro+gT"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A8EB81F000E9;
+	Wed, 12 Aug 2026 12:29:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786537747;
+	bh=PmQ4K2ic4ghGx1I4FRHyH1nl1yf3HhRp2tRFCAlUY0w=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=aSiro+gT2LKNTq9dwrWTfs7wn7VmO36o7KhXUITOZbarVxjD9MsMnibvWKqzaXLCX
+	 b1FLVMn5JWoeWz3HmusXkr5JWJJmhs0SvABHWtQBgcufd913t5beUcKqEjWZjx0ib9
+	 VUkoqpbKc4xqg+z+HuUzTaR3jZUTlrpoYicCKP+sg58lGcFUU16c4YbF557H2khVPU
+	 v58vIaaW0qDgHKeOJE1zp4Sfu1vhQdBE6oEEHz7Cf3CRW4jM2ztM/BaA3jxd6PFceL
+	 XPOQynipgLt0H2jqbgToWxfKflv55g9rspS5Eaf1yHYI1+5/OqrLN2mgEXSOcNgDu/
+	 RCL47Hi+nyrgw==
+Date: Wed, 12 Aug 2026 13:29:00 +0100
+From: Lee Jones <lee@kernel.org>
+To: contact@alex-min.fr
+Cc: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	MyungJoo Ham <myungjoo.ham@samsung.com>,
+	Chanwoo Choi <cw00.choi@samsung.com>,
+	Guru Das Srinagesh <linux@gurudas.dev>,
+	Linus Walleij <linusw@kernel.org>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Kees Cook <kees@kernel.org>, Tony Luck <tony.luck@intel.com>,
+	"Guilherme G. Piccoli" <gpiccoli@igalia.com>,
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org, linux-gpio@vger.kernel.org,
+	phone-devel@vger.kernel.org
+Subject: Re: [PATCH v5 4/6] mfd: qcom-pm8xxx: register PM8921 USB ID extcon
+Message-ID: <20260812122900.GQ1072730@google.com>
+References: <20260804-mainline-send-v1-sending-v5-0-149dd4372ac8@alex-min.fr>
+ <20260804-mainline-send-v1-sending-v5-4-149dd4372ac8@alex-min.fr>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/33] Add support for Qualcomm Snapdragon SM7150 SoC and
- Google Pixel 4a
-To: Jens Reidel <adrian@mainlining.org>, Danila Tikhonov
- <danila@jiaxyga.com>, Miro Mraz <mraz.miro@seznam.cz>
-Cc: devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-watchdog@vger.kernel.org, linux-usb@vger.kernel.org,
- linux-phy@lists.infradead.org, linux-mmc@vger.kernel.org,
- netdev@vger.kernel.org, linux-scsi@vger.kernel.org,
- dmaengine@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-i2c@vger.kernel.org, linux-clk@vger.kernel.org,
- linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev,
- linux-remoteproc@vger.kernel.org, dri-devel@lists.freedesktop.org,
- neil.armstrong@linaro.org, linux-hardening@vger.kernel.org,
- linux@mainlining.org, Connor Mitchell <c.dog29@hotmail.com>
-References: <20250422-sm7150-upstream-v1-0-bf9a9081631d@jiaxyga.com>
- <2ca2b774-fd7f-4612-b38d-f60e32ff6f9a@mainlining.org>
- <283096ad-ae1b-42b8-8312-b192f735fc80@linaro.org>
-Content-Language: en-US
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <283096ad-ae1b-42b8-8312-b192f735fc80@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260804-mainline-send-v1-sending-v5-4-149dd4372ac8@alex-min.fr>
 
+On Tue, 04 Aug 2026, Alexandre MINETTE via B4 Relay wrote:
 
-
-On 23/04/2025 09:26, Neil Armstrong wrote:
-> Hi,
+> From: Alexandre MINETTE <contact@alex-min.fr>
 > 
-> On 23/04/2025 00:07, Jens Reidel wrote:
->> Hi everyone,
->>
->> apologies for the mess this created. Danila's mail provider ratelimited him 
->> halfway through sending the series and the attempt to re-try sending the 
->> second half an hour later ended up with a new message ID (I think due to not 
->> using --in-reply-to).
->> He asked me to let you know that this will be resolved later and the whole 
->> series will be re-sent once the problems are resolved.
+> PM8921 reports the USB ID pin through interrupt 49 of its interrupt
+> controller. Unlike PM8941, this path has no separate addressable misc
+> block to represent as a devicetree child node.
 > 
-> The b4 web submission is a great alternative when the mail provider is rate 
-> limited:
-> https://b4.docs.kernel.org/en/latest/contributor/send.html#web-endpoint
+> Register a child platform device for the existing Qualcomm USB extcon
+> driver after creating the PMIC IRQ domain. Pass the USB ID interrupt as
+> a named resource and reuse the PM8921 firmware node, allowing consumers
+> to reference the PMIC node directly as their extcon provider.
+> 
+> Unregister the child device and dispose of the IRQ mapping when the
+> PMIC is removed or probing fails.
+> 
+> Signed-off-by: Alexandre MINETTE <contact@alex-min.fr>
+> ---
+>  drivers/mfd/qcom-pm8xxx.c | 78 +++++++++++++++++++++++++++++++++++++++++++++--
+>  1 file changed, 76 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/mfd/qcom-pm8xxx.c b/drivers/mfd/qcom-pm8xxx.c
+> index 0cf374c015ce..884fc99a1488 100644
+> --- dangerously/mfd/qcom-pm8xxx.c
+> +++ b/drivers/mfd/qcom-pm8xxx.c
+> @@ -7,6 +7,7 @@
+>  
+>  #include <linux/kernel.h>
+>  #include <linux/interrupt.h>
+> +#include <linux/ioport.h>
+>  #include <linux/irqchip/chained_irq.h>
+>  #include <linux/irq.h>
+>  #include <linux/irqdomain.h>
+> @@ -64,12 +65,15 @@
+>  
+>  struct pm_irq_data {
+>  	int num_irqs;
+> +	int usb_id_irq;
+>  	struct irq_chip *irq_chip;
+>  	irq_handler_t irq_handler;
+>  };
+>  
+>  struct pm_irq_chip {
+>  	struct regmap		*regmap;
+> +	struct platform_device	*usb_extcon;
+> +	unsigned int		usb_id_irq;
+>  	spinlock_t		pm_irq_lock;
+>  	struct irq_domain	*irqdomain;
+>  	unsigned int		num_blocks;
+> @@ -492,6 +496,13 @@ static const struct pm_irq_data pm8xxx_data = {
+>  	.irq_handler = pm8xxx_irq_handler,
+>  };
+>  
+> +static const struct pm_irq_data pm8921_data = {
+> +	.num_irqs = PM8XXX_NR_IRQS,
+> +	.usb_id_irq = 49,
+
+Magic numbers should be defined.
+
+> +	.irq_chip = &pm8xxx_irq_chip,
+> +	.irq_handler = pm8xxx_irq_handler,
+> +};
+> +
+>  static const struct pm_irq_data pm8821_data = {
+>  	.num_irqs = PM8821_NR_IRQS,
+>  	.irq_chip = &pm8821_irq_chip,
+> @@ -501,11 +512,60 @@ static const struct pm_irq_data pm8821_data = {
+>  static const struct of_device_id pm8xxx_id_table[] = {
+>  	{ .compatible = "qcom,pm8058", .data = &pm8xxx_data},
+>  	{ .compatible = "qcom,pm8821", .data = &pm8821_data},
+> -	{ .compatible = "qcom,pm8921", .data = &pm8xxx_data},
+> +	{ .compatible = "qcom,pm8921", .data = &pm8921_data},
+>  	{ }
+>  };
+>  MODULE_DEVICE_TABLE(of, pm8xxx_id_table);
+>  
+> +static int pm8xxx_add_usb_extcon(struct platform_device *pdev,
+> +				 struct pm_irq_chip *chip,
+> +				 unsigned int hwirq)
+> +{
+> +	struct irq_fwspec fwspec = {
+> +		.fwnode = dev_fwnode(&pdev->dev),
+> +		.param_count = 2,
+> +		.param = { hwirq, IRQ_TYPE_EDGE_BOTH },
+> +	};
+> +	struct platform_device_info pdevinfo = {
+> +		.parent = &pdev->dev,
+> +		.fwnode = dev_fwnode(&pdev->dev),
+> +		.of_node_reused = true,
+> +		.name = "qcom-pm8xxx-usb-id",
+> +		.id = PLATFORM_DEVID_NONE,
+> +	};
+> +	struct resource resource;
+> +
+> +	chip->usb_id_irq = irq_create_fwspec_mapping(&fwspec);
+> +	if (!chip->usb_id_irq)
+> +		return -ENXIO;
+> +
+> +	resource = DEFINE_RES_IRQ_NAMED(chip->usb_id_irq, "usb_id");
+> +	pdevinfo.res = &resource;
+> +	pdevinfo.num_res = 1;
+> +
+> +	chip->usb_extcon = platform_device_register_full(&pdevinfo);
+
+Why aren't you using the MFD API for this?
+
+> +	if (IS_ERR(chip->usb_extcon)) {
+> +		int ret = PTR_ERR(chip->usb_extcon);
+> +
+> +		chip->usb_extcon = NULL;
+> +		irq_dispose_mapping(chip->usb_id_irq);
+> +		chip->usb_id_irq = 0;
+> +
+> +		return ret;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+> +static void pm8xxx_remove_usb_extcon(struct pm_irq_chip *chip)
+> +{
+> +	if (chip->usb_extcon)
+> +		platform_device_unregister(chip->usb_extcon);
+> +
+> +	if (chip->usb_id_irq)
+> +		irq_dispose_mapping(chip->usb_id_irq);
+> +}
+
+Why not devm_*
+
+>  static int pm8xxx_probe(struct platform_device *pdev)
+>  {
+>  	const struct pm_irq_data *data;
+> @@ -570,9 +630,22 @@ static int pm8xxx_probe(struct platform_device *pdev)
+>  
+>  	irq_set_irq_wake(irq, 1);
+>  
+> +	if (data->usb_id_irq) {
+> +		rc = pm8xxx_add_usb_extcon(pdev, chip, data->usb_id_irq);
+> +		if (rc)
+> +			goto err_domain;
+> +	}
+> +
+>  	rc = of_platform_populate(pdev->dev.of_node, NULL, NULL, &pdev->dev);
+>  	if (rc)
+> -		irq_domain_remove(chip->irqdomain);
+> +		goto err_extcon;
+> +
+> +	return 0;
+> +
+> +err_extcon:
+> +	pm8xxx_remove_usb_extcon(chip);
+> +err_domain:
+> +	irq_domain_remove(chip->irqdomain);
+>  
+>  	return rc;
+>  }
+> @@ -582,6 +655,7 @@ static void pm8xxx_remove(struct platform_device *pdev)
+>  	struct pm_irq_chip *chip = platform_get_drvdata(pdev);
+>  
+>  	of_platform_depopulate(&pdev->dev);
+> +	pm8xxx_remove_usb_extcon(chip);
+>  	irq_domain_remove(chip->irqdomain);
+>  }
+>  
+> 
+> -- 
+> 2.43.0
+> 
 > 
 
-I see people interested in moving Pixel 4a forward, but it seems this was never 
-upstreamed? I looked at sm7150 repository [1] where I see FROMLIST, but these 
-patches never arrived to the list and this series is from 2025.
-
-Should we expect v2 (re)based on recent tree?
-
-Thanks
-David
-
-[1] 
-https://github.com/sm7150-mainline/linux/commit/7ea41523c678e94a7c048936052b5b1b1b109cdd
-
-> Neil
-> 
->>
->> Best regards,
->> Jens
-> 
-> 
+-- 
+Lee Jones
