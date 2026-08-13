@@ -1,201 +1,124 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D40F2D8DA8;
-	Thu, 13 Aug 2026 07:19:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 05BFA86341;
+	Thu, 13 Aug 2026 07:38:43 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786605541; cv=none; b=VzJ42uy1P5P4FS996K+2U0i8cB2z0v1TTGSq27ZAJnYc1G04VIxjaQ+2PfN7u69uo3abRqal9zqEETkjVRNwcv4XuX1sJTWr1uDDeI5ApF3M2B56wmW3LkOWS1B02xZagYsMj05N+eez2sY25Ek4JFqimb4c5NxpvUnqCGC7RdA=
+	t=1786606725; cv=none; b=aXix4tbtSZInsYvIJDJeQ/vxoQLvhudunJGxj4AEryqDkEMMRVhnnLmDsr/RLx5MBoJEuZw27ecVMYH9P4c9o1Sf7k+hv4/6h+0YDaeo9I5aEa3xmt5bO1Hu2y9JlxtPKgAe9fZzJ1amfScslbNU7P/Q4sEjgXVVrujMqdpEfm8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786605541; c=relaxed/simple;
-	bh=QdYe9RJeMNsxpKwZFiURVJVpUDQL5B3dzbulFEKTXUQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=TttE9/kx6ghTlbwMmU2kijcq37Fie1Zp07sq8D17tn66KrBvWtxuCF9IQSlKYtC0akQE0t1Pe68h4EhQcJ3AqlqxjenD+3b1lgxBTF+X/uma6zgf0k94LZeOfQhD87FEyiH7GPAEGY2WNMfIywbvu5LNcS8+NmYJGgooRJpSTEQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=o1Wn/cbM; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786606725; c=relaxed/simple;
+	bh=jjqfLgSm/tvEphSWktt1LCgYmz+hfkDIdd/yDWtLfSY=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=dmJGiBqP//TGEzgrKNVLDaJuh5dnwqjjFR1VHaGIAEC4zVoOTlRZZEhVKII3QYtx29pMp0BH8whMBtK0/TlHnpXKWsbfyCNXtHVA409aZuDVvzit1RtBELcCTIt8aypJ2exY59Kv9FpzirGsOCEtWERTh7TXNc7JY5K9lVck2zQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Hfi5RjAu; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="o1Wn/cbM"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A6501F000E9;
-	Thu, 13 Aug 2026 07:18:56 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Hfi5RjAu"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EFB1D1F000E9;
+	Thu, 13 Aug 2026 07:38:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786605540;
-	bh=qZdbRmYqK/NrvcZBL3tWkYiVhgLDOnhq5mM4HObQAxw=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=o1Wn/cbMNYFQmCUsmbGr3DdlRdbtKgTn11O8kaXLF0Qkoo68sKSVSbjTJO9JrBfaP
-	 3DwLp62nQGHEuHmTwOSbF47l1Tpp8CzAnCdlm5IN15uXiF9xWUBImjCXSvrPnLcCrX
-	 vhNOo1VCg1zYLjOsU+fWnYRTlBY1KBM/QzNTMnK6uHC+NMTeZrm/Ll9NdRsfqM1JG4
-	 sH74IfNAwkn3q0yWImbSf/GfOa6Hx0N6PlxOzwmKtiTK3piMnq/2yxsqG2CYeYIpGb
-	 O30vYFtBTQoDfeeUyizF0NtaBYNCV45wQhWQfACxDmR6wq3kFIccPz6rwLqIG9en36
-	 Hts6eddT+YSZg==
-Date: Thu, 13 Aug 2026 08:18:54 +0100
-From: Sudeep Holla <sudeep.holla@kernel.org>
-To: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-Cc: Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>,
-	Cristian Marussi <cristian.marussi@arm.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	MyungJoo Ham <myungjoo.ham@samsung.com>,
-	Kyungmin Park <kyungmin.park@samsung.com>,
-	Chanwoo Choi <cw00.choi@samsung.com>,
-	Dmitry Osipenko <digetx@gmail.com>,
-	Thierry Reding <thierry.reding@kernel.org>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>,
-	Pankaj Patil <pankaj.patil@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	arm-scmi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	devicetree@vger.kernel.org, linux-pm@vger.kernel.org,
-	linux-tegra@vger.kernel.org
-Subject: Re: [PATCH RFC 01/10] firmware: arm_scmi: Add SCMI QCOM Generic
- Extension Protocol documentation
-Message-ID: <20260813-remarkable-handsome-heron-e99e78@sudeepholla>
-References: <20260724-rfc_v8_scmi_memlat-v1-0-cb732bcff1f4@oss.qualcomm.com>
- <20260724-rfc_v8_scmi_memlat-v1-1-cb732bcff1f4@oss.qualcomm.com>
- <20260724-crouching-starfish-of-apotheosis-d1cdf8@sudeepholla>
- <f39b2be0-b6d6-43a6-a412-44ff433c51f6@oss.qualcomm.com>
+	s=k20260515; t=1786606723;
+	bh=XA0WTTexVy7hVioPZJlKhK3b2/qnw1112cyYu0411r4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=Hfi5RjAuXMEUKgGFd1zAz9jEgika+k/OWvHZrf3Y2/CWKYbnlsoGjC8Hxq9y7RkSc
+	 HEDvZEt8WIQupWsVprgKQMhLExVuiy+Djjv00RNufYyz+4i+1qG3KC7osQKpsuQHvV
+	 zDJApkG0AfDxko9AamCfCghNUAHWD3d1IVvNQuNe4dyjWGuazu6SIcXkHYT80D3gzI
+	 n+i/qgrvjJJwa1Yk7NCyFBlLVP3n8M22PJ8b7Se6CvkahDi3ut9J22XIsjMfyQ4i7V
+	 kKxu1KcSwRZph4FfPKftyvTTlw8izTKHugCbO+Je94Sfgwl6oi5rR3Sy9rxV09HhlK
+	 h8/j0deprQlJw==
+Message-ID: <323c7e9b-0ee4-42e8-bd15-b64c61723130@kernel.org>
+Date: Thu, 13 Aug 2026 09:38:36 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <f39b2be0-b6d6-43a6-a412-44ff433c51f6@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/3] dt-bindings: clock: qcom: Move x1e80100 TCSR to
+ own binding
+To: Qiang Yu <qiang.yu@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+ Michael Turquette <mturquette@baylibre.com>, Stephen Boyd
+ <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Taniya Das
+ <taniya.das@oss.qualcomm.com>, Konrad Dybcio <konradybcio@kernel.org>,
+ linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260812-hamoa_tcsr_qref_0812-v3-0-dc7627169c6d@oss.qualcomm.com>
+ <20260812-hamoa_tcsr_qref_0812-v3-1-dc7627169c6d@oss.qualcomm.com>
+ <20260812-lively-determined-loon-31f65e@quoll>
+ <an1qXeZoTdzrXqVx@hu-qianyu-lv.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <an1qXeZoTdzrXqVx@hu-qianyu-lv.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Aug 04, 2026 at 02:07:28AM +0530, Sibi Sankar wrote:
-> 
-> On 7/24/2026 2:43 PM, Sudeep Holla wrote:
-> > On Fri, Jul 24, 2026 at 12:48:06PM +0530, Pragnesh Papaniya wrote:
-> > > Add System Control Management Interface (SCMI) Qualcomm Generic Extension
-> > > Protocol documentation. It consists of a small set of generic SET/GET/
-> > > START/STOP commands, which is used to turn on/off and configure Qualcomm
-> > > SoC specific algorithms that run on the SCP.
-> > > 
-> > > It currently only supports MEMLAT (memory latency governor) algorithm.
-> > > The immutable pairing of the MEMLAT algorithm string with the supported
-> > > param_ids associated with it are documented here.
-> > > 
-> > > Co-developed-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-> > > Signed-off-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-> > > Signed-off-by: Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>
-> > > ---
-> > >   .../arm_scmi/vendors/qcom/qcom_generic.rst         | 954 +++++++++++++++++++++
-> > >   1 file changed, 954 insertions(+)
-> > > 
-> > > diff --git a/drivers/firmware/arm_scmi/vendors/qcom/qcom_generic.rst b/drivers/firmware/arm_scmi/vendors/qcom/qcom_generic.rst
-> > > new file mode 100644
-> > > index 000000000000..42e327d53841
-> > > --- /dev/null
-> > > +++ b/drivers/firmware/arm_scmi/vendors/qcom/qcom_generic.rst
-> > > @@ -0,0 +1,954 @@
-> > > +.. SPDX-License-Identifier: GPL-2.0
-> > > +.. include:: <isonum.txt>
-> > > +
-> > > +==================================================================================
-> > > +System Control and Management Interface (SCMI) Qualcomm Generic Extension Protocol
-> > > +==================================================================================
-> > > +
-> > > +:Copyright: |copy| Qualcomm Technologies, Inc. and/or its subsidiaries.
-> > > +
-> > > +:Authors:
-> > > +   - Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-> > > +   - Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>
-> > > +
-> > > +System Control and Management Interface Qualcomm Generic Extension Vendor Protocol
-> > > +==================================================================================
-> > > +
-> > > +System Control Management Interface (SCMI) Qualcomm Generic Extension Protocol
-> > > +consists of a small set of generic SET/GET/START/STOP commands, which is used to
-> > > +turn on/off and configure Qualcomm SoC specific algorithms that run on the SCP.
-> > > +Each algorithm is identified through an algorithm string and has an immutable list
-> > > +of param_ids. All supported algorithms (currently just MEMLAT) have their own
-> > > +dedicated section and are listed after the generic commands.
-> > > +
-> 
-> Hey Sudeep,
-> 
-> Will set some context here, this version of the vendor protocol is currently
-> running in the wild on 5 SoCs (Hamoa, Purwa, Glymur, Mahua, Kaanapali).
+On 13/08/2026 08:55, Qiang Yu wrote:
+>>> +required:
+>>> +  - compatible
+>>> +  - clocks
+>>> +  - '#clock-cells'
+>>> +  - '#reset-cells'
+>>
+>> This is unexplained ABI change. When you are asked, you need to address
+>> feedback from LLM, not blindly implement it without checking its
+>> validity.
+>>
+> After adding these two properties to the required list, I ran a dtb
+> check and saw no related errors or warnings. But I overlooked one
+> thing: my dtb check was against the current tree only. This change
+> could make dtb checks fail for historical TCSR DT nodes that did not
+> have these two properties. So to be safe, I don't think they should be
+> added to the required list.
 
-While noted, this does not impact the code quality or review process for an
-entirely new feature. That context would be relevant for a localized fix or
-system quirk, but it is not applicable here.
+Did you change the driver code to fail when DTS is not having these?
 
-> The ABI/Specification that this vendor protocol uses can't be changed in
-> any way since other Os'es like Windows/Android expect it to behave as
-> described in this document and will break userspace.
 
-The current rationale isn't entirely clear to me. Windows historically favors
-ACPI over native SCMI, meaning that supporting a proprietary vendor protocol
-would require non-native workarounds potentially hidden within interfaces like
-PEP. I am skeptical of this architectural direction. Since Android leverages
-the Linux kernel and already manages this through vendor modules, maintaining
-those as modules seems like the optimal path until we agree on the interface
-that can be merged.
-
-> series is meant for the devfreq portion (since it introduces a new devfreq
-> governor) and is not for the vendor protocol. We certainly can take design
-> improvements for future revisions but making changes to this major/minor
-> version of the firmware isn't possible.
->
-
-Given that this patch series has been under discussion for nearly two years,
-please provide a summary of the feedback that has already been incorporated
-to address these concerns just for sake of argument and in your defence.
-
-To clarify, the vendor protocol space is strictly intended for
-platform-specific functionalities that cannot be standardized; it should not
-be used to bypass standardization for convenience. It appears no evaluation
-was done to determine if or why the standard performance protocol was
-insufficient. Had that assessment occurred, I would expect the proposed
-interface to align much more closely with the standard definitions as I
-previously mentioned.
-
-> Plenty of folks running linux on these SoCs would benefit a great deal from
-> this series landing, so please have a bit of patience, take a look at the
-> documentation/series as a whole. I still feel we should be able to land this
-> series in a form that is acceptable to you. However, if you still feel you
-> have
-> to NAK this series regardless of its usefulness to the users, please do list
-> the
-> reasons and we'll try our best to convince you otherwise.
-> 
-
-The core issue here is that the proposed vendor protocol interface has been
-presented as a finished product without open discussion or a willingness to
-iterate based on upstream feedback. This approach bypasses standard
-development processes.
-
-IMO these vendor protocol interfaces must be debated on the mailing list prior
-to finalization, similar to the 'code-first' prototyping model used for new
-ACPI specifications or SCMI early prototyping. If an interface is developed
-in isolation and then submitted with an expectation of immediate acceptance
-without modification, we cannot approve it. I recommend we pivot to an open
-review of the interface design itself.
-
-> > This multiplexer 'N' random algorithn into one single custom SCMI protocol ID
-> > (0x80) seems to go against the general SCMI design principle and this seems
-> 
-> Only the strings documented are allowed by the vendor protocol while the
-> rest are filtered out, so we clearly don't have to worry about this. Also
-> grouping a class of devfreq algorithms into a single vendor protocol should
-> be treated as a SoC vendor design choice.
-> 
-
-This is precisely why I previously suggested defining MEMLAT as its own
-distinct protocol. Doing so maintains architectural consistency and adheres to
-core SCMI principles.
-
-> > like a deliberated attempt to circumvent the standard SCMI protocol template.
-> > Standard SCMI expects distinct features to occupy their own vendor protocol
-> > IDs and utilize standard protocol discovery.
-> > 
-
-^^^ as mentioned above
-
--- 
-Regards,
-Sudeep
+Best regards,
+Krzysztof
