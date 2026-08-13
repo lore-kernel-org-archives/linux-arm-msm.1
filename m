@@ -1,101 +1,71 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F96B35C6BB
-	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 12:24:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4AAB3BD225;
+	Thu, 13 Aug 2026 12:38:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786623875; cv=none; b=sU0yg7k4FpKrr1gPRcP+PkeWKlSdgghoZmPrc/d32tddhLni1YPoQlNItb2M3EKWtHc8xey4BLKGMNiZekHFmE7pjorE4L1s0R0EWCDDQ7gVwiheTy/PfMATwIqYKMSCtt/kcmc00uVdqpcHjWihd+2ldraAyd8T4UlECe8g9kI=
+	t=1786624732; cv=none; b=G3YRrO5YWlopvIYXznvyNUVyrqGd2VhQkCI5794KUg2UkGr8RVd7SpzinG7ZwUNr25hQNCk30+bGGQRxxamqc/9OykKC2WxSj/33SdEz6QxYF7HZppT960XFA/ReJdkO8KeJj1on8Q2qd2O8jf6dauD7sPJfsWBd5gX7VhE9XEw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786623875; c=relaxed/simple;
-	bh=r1lXpgScD7Uj6wGBac1+WChoSNoCqjdK3eocGD3WAGA=;
+	s=arc-20240116; t=1786624732; c=relaxed/simple;
+	bh=l6kqcTsMKzlAtJHGFOG2awd1t7J9zIBNdmxrYPkmxNQ=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Z/fm2L6Joa0BIUy9vU+TX8cvhuCD1ZFEpl1ZXiDUeA9M0JP9HK94pBwK6QBcsiAEu8NWw0MRoUt7176mX4mQ506+p3aYCbj2SxZoM1Ef7GpvlAQrNmDQLCnlULF842o1QP1Fpg8yUaSsbS668NGAyUCNctrmzn5cBJPJQgj+Bvk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fIKk9pXC; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=W3UakjGY; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=PijT8Ye/mdSYaoLN4RuZDxIuQkbApxoqbnBHHuy4NFYrGHS+OyLTX41hywogk6jLhlKnNyg6uBMhM68xOmBZckGW+yKTrcToBcFc/H+UzrkTsjUMyz3sdG8+l/42Ch/spEUAX24DVBKskzihgJsLjMPhotmYQqXX7pvEGFg/fso=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=D/qsNX5x; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fIKk9pXC";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="W3UakjGY"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67DCJuiP3858519
-	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 12:24:33 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=70a5V58Oxb9EFDWPI7wl3gNe
-	YE++PkOpB2yu4Gco1CM=; b=fIKk9pXCRSfzTQ4grazh2SeTE8+pxslz7L/Rb+Mn
-	1Q6XTvd0VerTIPjs2oVnwoYq7zt29nbNIUIsr7eC062SXW4Sfiw9o+CzhaypdLBQ
-	ggE7TX8egPFIYeRbZN8rxvcD691i5yez3ccZEwrQrO1FhNXntTFDVDJ18JCm8Yk9
-	WDp7BtjhgUYq8FLfjxMP+uGV4ldX+U+qclgSFMdZbgN4wEOQYPvu8w9LZY8fwFcJ
-	4KCV3SR+oLG/EVTcTvlffpizXHbTAMmDN5XH42MPKR8VSOJ6g8bMDzDllfXeK7IK
-	4cRbVQ1Iv1o3YVamJPtOUnCMGz1KQR/e6Px4/rGLsplOiQ==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g152ma7jw-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 12:24:33 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2cc86a9ef97so41034175ad.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 05:24:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786623872; x=1787228672; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=70a5V58Oxb9EFDWPI7wl3gNeYE++PkOpB2yu4Gco1CM=;
-        b=W3UakjGYKgismUUC++zAfxyV0YAnkShRJWA/wqQlcxVhRd25XeDFcYb6QgS08kUAfh
-         jcMdTBTMmSJbeHmLtmWOVce7bZ10Bpl3WqQrxnB39KraYptSUStf5445WIra2dFj2s2F
-         Srxtdfa3s0Nu9ilHs4M3dBW7tSGfOZ9yautSVZH1I7FFP0coICLFmjU8jS6Ciue0hY7F
-         NWRAANYsMBj4jw6u6oM5oZXgFd+x4ZdLKnU25LmQbvLW8eF7U53avldcJUzpm3K4fPvN
-         wLgXAD5f8sgMzPlZndzwMBKlG+DcxLuvouxKxFPF+gTO0+VeVCal+jirRFDkFmC9VgbB
-         sOuQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786623872; x=1787228672;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=70a5V58Oxb9EFDWPI7wl3gNeYE++PkOpB2yu4Gco1CM=;
-        b=pvTsHvidv+XBl1/KM52KOCDCi33o0cWEKa5BNtU4LJWm/pqlHI0ZHR87BuP8/Y4kVo
-         N5vkUzV70kOAQ/2CX1QdehviHX2pnN/y+uVAxU20UGG33HOQZgqmgGiUsjJoxdcdNhl+
-         73Bphx0yWy5WEMAZYbkWXqsDsxUM3IeVmHm8E0hj6dmZBS5GkCzItte1oh5+r9cjEp/A
-         /2+VRyyilSLvumFhgfPeAU5tXWnYZp16LhSdl0fX8S8o1YRtu9cNH1Wv+MnhZd/GHumi
-         HObEccYvwRimzKHoBsPVdl3rWGYRkcXx+hoOK3+H6uyhEJ+h5SFi197CIqz1RJLdaSel
-         /WIg==
-X-Forwarded-Encrypted: i=1; AHgh+RpHdgf1T4G1Cp5VwjQjuv779wQkG7iMdfuCI2YXyBxgDgvf12mRCoYxzFpLDUEovXvgnnbZbYiJJ8DAAAlJ@vger.kernel.org
-X-Gm-Message-State: AOJu0YxSRSCE/cXLbs+/8VhxDn9ctoiY1zaSyON5K4R/G8Nhio6eMgfe
-	cuerRZhl/K1RlF+sV2q22UlNwtUWMSG3chTyXKRjQVscOUyMTZ2UTU6pJW5h0+oK3rFABQ/2EtH
-	w8Nb9WigLg3+2vY3QUVpn3X2/WQBpDMdoNJ/2aqBqhF8fzPrLwNMI/J/ti2OFk7shkytr
-X-Gm-Gg: AR+sD11R4ikgeh18xBM7Mh/sagBWetJfTQd0Z2OZLPTaFL048Ynfx4R3FkIbeKFQh5X
-	Tx/AQ4ubNIuaIzlcosi0SfQr5FcckeFBd0oJ9o3Ape7/JHmde8gJSNMjs0zTAJn1CLVsOgGpc8Q
-	+xujR7XWqHVDXZMvtN9LSFzv739hb7fIUByQT8LBir5kbbnAk8v/qnP4oOhJiXYFCSrImQiaR36
-	uRpiz0chOUnVuDkeaXCHraxqVQ3Q7t+RBCwSRIy3iOEZFZEFqS2ftnJ5bEJ8SNOL0pO/EgF8FiU
-	BxjSW55go9Y53eWWnPfLYlfyp/Lfk0WzemQo4kEd+waCi26yh7IRe8kUEoZvJ4AvSP4TAS5o8q2
-	5uITYCeNJ6bcFWE2sS2Ue+JcQ94YgfHpL
-X-Received: by 2002:a17:903:32c5:b0:2c8:4c29:afeb with SMTP id d9443c01a7336-2d37d57a589mr58464995ad.8.1786623872415;
-        Thu, 13 Aug 2026 05:24:32 -0700 (PDT)
-X-Received: by 2002:a17:903:32c5:b0:2c8:4c29:afeb with SMTP id d9443c01a7336-2d37d57a589mr58464085ad.8.1786623871842;
-        Thu, 13 Aug 2026 05:24:31 -0700 (PDT)
-Received: from hu-anantiwa-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d37c49cc32sm8602385ad.63.2026.08.13.05.24.27
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2026 05:24:31 -0700 (PDT)
-Date: Thu, 13 Aug 2026 17:54:25 +0530
-From: Anand Tiwari <anand.tiwari@oss.qualcomm.com>
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        venkata.valluru@oss.qualcomm.com, vishnu.saini@oss.qualcomm.com,
-        Jessica Zhang <jesszhan0024@gmail.com>
-Subject: Re: [PATCH 1/2] arm64: dts: qcom: hamoa-iot-evk: Add eDP display
- overlay
-Message-ID: <an23eZWmtDVbfWEG@hu-anantiwa-hyd.qualcomm.com>
-References: <20260806-edp_overlay_for-next-v1-0-c3aebbc81f38@oss.qualcomm.com>
- <20260806-edp_overlay_for-next-v1-1-c3aebbc81f38@oss.qualcomm.com>
- <anUgxo3BPt74Wx7K@baldur>
- <anWsrXO9RztrF5H4@hu-anantiwa-hyd.qualcomm.com>
- <eblai4d6apohd43uvo4kbm3y6yfkso7rd643ijra2awyguve5l@j7aq2vzzwmj2>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="D/qsNX5x"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 048DF1F000E9;
+	Thu, 13 Aug 2026 12:38:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786624731;
+	bh=LBP1ThiJDiqMaPUW1k9BGd4ceLpbU1ZyA9FI9qbdQ7Q=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=D/qsNX5xklT6SE2DiETI0i94S7g9+6U0xsNx33gQlU6zUQCsgryLjqLfDMnmhYOK0
+	 2bhiDt7foF/iK0glpKcOAc4o423Ry/3L7VJIfn0JWywvQBTEi9bZ5oaTPDO4tLpREj
+	 b4S/5B5/kH41ebLY4v53hDfK4NlYeXuf3Dxf+yJPB9WBdFOgt0TgJk7hf8obw7M97y
+	 6asPwAjuwjFHg7BA9TStZb44VKxrFf1uisjJYptSpigN0bG5dm6XRMFrbUK0ZaiXIO
+	 sKfUjOinvtJiMtcSjBxsRgMjbKnuGCG5kP6FmpQNdBeBug+typBAs53ml0rnrSP2JU
+	 Lc7O/qslA0ouA==
+Date: Thu, 13 Aug 2026 13:38:41 +0100
+From: Lee Jones <lee@kernel.org>
+To: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>,
+	Souvik Chakravarty <Souvik.Chakravarty@arm.com>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Andy Yan <andy.yan@rock-chips.com>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	John Stultz <john.stultz@linaro.org>,
+	Moritz Fischer <moritz.fischer@ettus.com>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Christian Loehle <christian.loehle@arm.com>,
+	Ulf Hansson <ulfh@kernel.org>,
+	Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Sudeep Holla <sudeep.holla@kernel.org>,
+	Florian Fainelli <florian.fainelli@broadcom.com>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
+	Andre Draszik <andre.draszik@linaro.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
+	linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, mfd@lists.linux.dev,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Subject: Re: [PATCH v24 04/12] mfd: psci-mfd: Add PSCI MFD driver for
+ cpuidle-psci-domain cell
+Message-ID: <20260813123841.GC1820248@google.com>
+References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
+ <20260803-arm-psci-system_reset2-vendor-reboots-v24-4-889281373870@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -104,98 +74,224 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <eblai4d6apohd43uvo4kbm3y6yfkso7rd643ijra2awyguve5l@j7aq2vzzwmj2>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEzMDA4NyBTYWx0ZWRfX3j/X9PuP6s0C
- fCTbFtHoYtHkS4PKwMH0gHJtzXqjRkDke85tmaiVYXZKtLzBTWurx4BbwDlXCLFagi2jeKEUUCf
- UPp1KPnQngvo3Yq5/9Jqc5cmuLHf4aY=
-X-Proofpoint-GUID: lq7tEe0Kq_tnkyK1k8p87XNGOb5Iz80Q
-X-Authority-Analysis: v=2.4 cv=D8R37PRj c=1 sm=1 tr=0 ts=6a7db781 cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=VwQbUJbxAAAA:8 a=6pqXqY8CpGGeIA0puCUA:9 a=CjuIK1q_8ugA:10
- a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDA4NyBTYWx0ZWRfX0d5FEzifTq/i
- Rc/72v9O0z5bdsXOpQf5WkN9z5qSXdbR5u/YophIhX1oxe1t1ojDQHlRMCAuzJ+IabivxPSG3LF
- DJ9OIlIISweWeMRUGwqqvK27Bo3OM027jiarts+on8vLt+IVpucqWKHZk3JDjFetTnr7k3b5xNb
- 0S3ByqAmcoAiXr1inK5BR6b8Eg3MmF9fTxV4faTo6jYaRxDGWoVT3dzUtAvLxH9Qs0eeyDPusyT
- OZnkvQOtlrali756XqsWCzqXl0I62SF1slp2lTPJ1wJvslX2X7ZQZsTiOhJ1Ys/DkVm+E+RoCj+
- jRTopk6Tcvdwdt90FrPJTIYCwgPZcT6mYAKxFreA7o2Eq11ab+sTS+qm5mb8hEcy9EqiY3Spa6H
- NWfbXKhxqA2jMYkhXheFQp3fvntN+FKWfbBdK7GomvAB4pP3VKzOkIiAilNIjp1timJegjUVP9C
- 4ZXJE6+yxW4Ef9/B5KA==
-X-Proofpoint-ORIG-GUID: lq7tEe0Kq_tnkyK1k8p87XNGOb5Iz80Q
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-13_04,2026-08-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 clxscore=1015 malwarescore=0 priorityscore=1501
- adultscore=0 phishscore=0 bulkscore=0 spamscore=0 suspectscore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608130087
+In-Reply-To: <20260803-arm-psci-system_reset2-vendor-reboots-v24-4-889281373870@oss.qualcomm.com>
 
-On Mon, Aug 10, 2026 at 12:04:21PM +0300, Dmitry Baryshkov wrote:
-> On Fri, Aug 07, 2026 at 03:30:13PM +0530, Anand Tiwari wrote:
-> > On Thu, Aug 06, 2026 at 07:05:37PM -0500, Bjorn Andersson wrote:
-> > > On Thu, Aug 06, 2026 at 10:01:20PM +0530, Anand Tiwari wrote:
-> > > > Move the eDP panel configuration and related power, backlight, and pinctrl
-> > > > nodes into a separate overlay. Keep the base DTB suitable for headless
-> > > > variants and provide a composite DTB for headed variants.
-> > > 
-> > > To quote:
-> > > https://docs.kernel.org/process/submitting-patches.html#describe-your-changes
-> > > 
-> > > """
-> > > Describe your problem. Whether your patch is a one-line bug fix or 5000
-> > > lines of a new feature, there must be an underlying problem that
-> > > motivated you to do this work. Convince the reviewer that there is a
-> > > problem worth fixing and that it makes sense for them to read past the
-> > > first paragraph.
-> > > """
-> > > 
-> > > In fact, I'm not even able to guess what the problem you're fixing here.
-> > > 
-> > > Regards,
-> > > Bjorn
-> > >
-> > 
-> > The problem is that the base device trees currently describe the eDP
-> > display hardware unconditionally. However, Hamoa and Purwa IoT EVKs
-> > are also available in headless variants without an eDP panel.
-> > 
-> > With current base DTBs, headless variants are not stable where eDP panel is not
-> > physically connected with board and userspace is trying to use it.
+On Mon, 03 Aug 2026, Shivendra Pratap wrote:
+
+> PSCI has multiple kernel consumers, such as cpuidle-psci-domain.
+> Currently, both the PSCI core driver and cpuidle-psci-domain bind
+> directly to the same PSCI node "arm,psci-1.0". Additional consumers, if
+> introduced, would also need to bind in the same way, leading to several
+> drivers attached to a single device node.
 > 
-> Please define "are not stable"
-
-I did not see any crash in this case but in the absence of physical panel 
-logs are flooded with errors, userspace is trying to commit the frames 
-since connector status is always connected:
-
-"
-[   23.499621] panel-simple-dp-aux aux-aea0000.displayport-controller: Prepare 
-timeout after 5 tries
-[   23.508763] panel-simple-dp-aux aux-aea0000.displayport-controller: 
-Couldn't power on panel to ID it; using conservative timings: -110
-[   52.143157] [drm:dpu_kms_wait_for_commit_done:525] [dpu error]wait for 
-commit done returned -110
-[   52.175662] [drm:dpu_encoder_frame_done_timeout:2733] [dpu error]enc40 
-frame done timeout
-[   55.351084] [drm:dpu_encoder_helper_report_irq_timeout [msm]] *ERROR* 
-irq timeout id=40, intf_mode=INTF_MODE_VIDEO intf=5 wb=-1, pp=0, intr=0
-"
- 
-Another issue On Ubuntu with Gnome Desktop is:
-Display's connected with other DP ports are only showing backlight since 
-login UI picked eDP panel connector which is not physically connected.
-
+> Introduce a PSCI MFD driver that binds to "arm,psci-1.0" and registers
+> PSCI child cells. As the first user, register cpuidle-psci-domain as a
+> child cell.
 > 
-> > This series fixes the inaccurate hardware description by keeping the
-> > base DTBs limited to hardware common to both variants and moving the
-> > eDP-specific nodes into separate overlays. The base DTB can therefore
-> > be used for headless variants, while the overlay is selected for
-> > headed variants.
+> Update cpuidle-psci-domain to probe as an MFD child and use the parent
+> PSCI node for power-domain traversal.
+> 
+> Suggested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+> ---
+>  MAINTAINERS                           |  1 +
+>  drivers/cpuidle/Kconfig.arm           |  1 +
+>  drivers/cpuidle/cpuidle-psci-domain.c |  9 +-------
+>  drivers/mfd/Kconfig                   | 12 ++++++++++
+>  drivers/mfd/Makefile                  |  2 ++
+>  drivers/mfd/psci-mfd.c                | 43 +++++++++++++++++++++++++++++++++++
+
+We don't usually allow the use of the term MFD in devices.
+
+What does this do?  Is it a mux?  psci-mux?
+
+If not, think about what it is and call it that instead.
+
+>  6 files changed, 60 insertions(+), 8 deletions(-)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index fe67f7bfa44c..0b6e4f89f319 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -21671,6 +21671,7 @@ L:	linux-arm-kernel@lists.infradead.org (moderated for non-subscribers)
+>  S:	Maintained
+>  F:	Documentation/devicetree/bindings/arm/psci.yaml
+>  F:	drivers/firmware/psci/
+> +F:	drivers/mfd/psci-mfd.c
+>  F:	include/linux/psci.h
+>  F:	include/uapi/linux/psci.h
+>  
+> diff --git a/drivers/cpuidle/Kconfig.arm b/drivers/cpuidle/Kconfig.arm
+> index b88b01aa5829..c5ecca0d7397 100644
+> --- a/drivers/cpuidle/Kconfig.arm
+> +++ b/drivers/cpuidle/Kconfig.arm
+> @@ -36,6 +36,7 @@ config ARM_PSCI_CPUIDLE_DOMAIN
+>  	bool "PSCI CPU idle Domain"
+>  	depends on ARM_PSCI_CPUIDLE
+>  	depends on PM_GENERIC_DOMAINS_OF
+> +	depends on MFD_PSCI
+>  	select DT_IDLE_GENPD
+>  	default y
+>  	help
+> diff --git a/drivers/cpuidle/cpuidle-psci-domain.c b/drivers/cpuidle/cpuidle-psci-domain.c
+> index b9e4ad7d43a3..a2d01810f295 100644
+> --- a/drivers/cpuidle/cpuidle-psci-domain.c
+> +++ b/drivers/cpuidle/cpuidle-psci-domain.c
+> @@ -17,7 +17,6 @@
+>  #include <linux/pm_runtime.h>
+>  #include <linux/psci.h>
+>  #include <linux/slab.h>
+> -#include <linux/string.h>
+>  
+>  #include "cpuidle-psci.h"
+>  #include "dt_idle_genpd.h"
+> @@ -122,14 +121,9 @@ static void psci_pd_remove(void)
+>  	}
+>  }
+>  
+> -static const struct of_device_id psci_of_match[] = {
+> -	{ .compatible = "arm,psci-1.0" },
+> -	{}
+> -};
+> -
+>  static int psci_cpuidle_domain_probe(struct platform_device *pdev)
+>  {
+> -	struct device_node *np = pdev->dev.of_node;
+> +	struct device_node *np = pdev->dev.parent->of_node;
+
+dev_of_node(pdev->dev.parent);
+
+>  	bool use_osi = psci_has_osi_support();
+>  	int ret = 0, pd_count = 0;
+>  
+> @@ -181,7 +175,6 @@ static struct platform_driver psci_cpuidle_domain_driver = {
+>  	.probe  = psci_cpuidle_domain_probe,
+>  	.driver = {
+>  		.name = "psci-cpuidle-domain",
+> -		.of_match_table = psci_of_match,
+>  	},
+>  };
+>  
+> diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
+> index e4fd4572472f..d18655d76172 100644
+> --- a/drivers/mfd/Kconfig
+> +++ b/drivers/mfd/Kconfig
+> @@ -2374,6 +2374,18 @@ config MFD_KHADAS_MCU
+>  	  additional drivers must be enabled in order to use the functionality
+>  	  of the device.
+>  
+> +config MFD_PSCI
+> +	bool "PSCI MFD for psci child cells"
+
+"PSCI mux for registering PSCI component devices" ?
+
+> +	depends on ARM_PSCI_FW
+> +	depends on OF
+> +	select MFD_CORE
+> +	default y
+> +	help
+> +	  PSCI MFD registers PSCI child cells and exposes them as
+> +	  platform devices.
+
+This is what all DT related MFD devices do.
+
+> +       Child drivers are probed only if enabled in the
+> +	  kernel configuration.
+
+Nothing new here either.  This is the norm.
+
+"PSCI Mux is a Linux specific device splitter designed to register
+ multiple PSCI related components via a single Device Tree compatible.
+ Without it, devices would each bind to a single node ... <which causes
+ problems with x, y and z>"
+
+> +       Select this option whenever a supported PSCI
+> +	  child driver is selected.
+> +
+>  config MFD_ACER_A500_EC
+>  	tristate "Support for Acer Iconia Tab A500 Embedded Controller"
+>  	depends on I2C
+> diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
+> index 72d3944b0ad8..f3edfad702ff 100644
+> --- a/drivers/mfd/Makefile
+> +++ b/drivers/mfd/Makefile
+> @@ -24,6 +24,8 @@ obj-$(CONFIG_MFD_EXYNOS_LPASS)	+= exynos-lpass.o
+>  obj-$(CONFIG_MFD_GATEWORKS_GSC)	+= gateworks-gsc.o
+>  obj-$(CONFIG_MFD_MACSMC)	+= macsmc.o
+>  
+> +obj-$(CONFIG_MFD_PSCI)		+= psci-mfd.o
+> +
+>  obj-$(CONFIG_MFD_TI_LP873X)	+= lp873x.o
+>  obj-$(CONFIG_MFD_TI_LP87565)	+= lp87565.o
+>  obj-$(CONFIG_MFD_TI_AM335X_TSCADC)	+= ti_am335x_tscadc.o
+> diff --git a/drivers/mfd/psci-mfd.c b/drivers/mfd/psci-mfd.c
+> new file mode 100644
+> index 000000000000..7affd6bb09dd
+> --- /dev/null
+> +++ b/drivers/mfd/psci-mfd.c
+> @@ -0,0 +1,43 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
+> +
+> +#include <linux/mfd/core.h>
+> +#include <linux/module.h>
+> +#include <linux/of.h>
+> +#include <linux/platform_device.h>
+> +
+> +static const struct mfd_cell psci_cells[] = {
+> +	{
+> +		.name = "psci-cpuidle-domain",
+> +	},
+> +};
+
+MFD_CELL_NAME() ?
+
+MFD drivers have to support more than one device from the get-go.
+Please add your other device here in this patch.
+
+> +static int psci_mfd_probe(struct platform_device *pdev)
+
+No to _mfd_.
+
+> +{
+> +	return devm_mfd_add_devices(&pdev->dev, PLATFORM_DEVID_AUTO, psci_cells,
+> +				   ARRAY_SIZE(psci_cells), NULL, 0, NULL);
+> +}
+> +
+> +static const struct of_device_id psci_mfd_of_match[] = {
+> +	{ .compatible = "arm,psci-1.0" },
+> +	{ }
+> +};
+> +
+> +static struct platform_driver psci_mfd_driver = {
+> +	.probe = psci_mfd_probe,
+> +	.driver = {
+> +		.name = "psci-mfd",
+> +		.of_match_table = psci_mfd_of_match,
+> +	},
+> +};
+> +
+> +static int __init psci_mfd_init(void)
+> +{
+> +	return platform_driver_register(&psci_mfd_driver);
+> +}
+> +
+
+Remove this line.
+
+> +core_initcall(psci_mfd_init);
+
+This is usually a hack.  Why can't you use -EPROBE_DEFER?
+
+> +
+> +MODULE_LICENSE("GPL");
 > 
 > -- 
-> With best wishes
-> Dmitry
+> 2.34.1
+> 
+
+-- 
+Lee Jones
