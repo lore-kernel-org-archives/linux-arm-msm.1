@@ -1,117 +1,85 @@
-Received: from mail-pj1-f50.google.com (mail-pj1-f50.google.com [209.85.216.50])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DAA837E310
-	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 04:20:35 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.50
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1F04F3DFC8C;
+	Thu, 13 Aug 2026 05:32:01 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786594836; cv=none; b=oK0mHKvYoChnLfao5aqCZtQxsduM9ihNDHYQ+M5pqB22xUmEoRWBqBw4YX/STHiIMSYlDWnFkkMFVWvRBDtEInXt/Krb39s3EJfyzv4b9Yb3SLeQWmHonAS+4eA6AV8UuaiBmpgFc/Nu2duSbEjxhiuvUphUtCPpKXri7o3SeTU=
+	t=1786599125; cv=none; b=L9zRTKQA0fN938sNyv6a+k8lu7alUian1Wp5mf3UZiVjZOPdlRUQRO7XD1tpdRimTIwHXl47farIseXtnb774VRF9VNVnk4L0Xpj2hwAlSeSfjvK5pY5b3UY9Cdl9ebi0PW7KQ4XWUChBKtB/Q2FU18sWYryeL8C21BuLXi7x/4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786594836; c=relaxed/simple;
-	bh=jhz6oMwASk0fhspOmlgDfIWbfxvXA9ksWC4tOt4CDM0=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=nWj0e8xHaHc3o8GJgNJRVlwszg2k8TkcLB0QWGJYxkYRGbFyoU7tVQupyFrzIVnv+aJ3E3GXdeSY95/N90Pi0rlKs+9d7uoEBTXqR0ZG7BfuDlmUV62x5WTdkVvUrm0Tm/LY06X7725D9xVfJ2FKlo3nF1ZTAE1Yo08n/zdND8w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hEFDFfTN; arc=none smtp.client-ip=209.85.216.50
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1786599125; c=relaxed/simple;
+	bh=QXvYquWMqcudevGlK7VpC9xkHfIZG9bGPfmBUnbvZ0M=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=MbrkE3PgA4EyklOvCwQlwt2rhgaNC82JU0ui7ZpsMi6eCdpHxg0sbWyXK4zqLkUynFgFEyJ+9HSPPWYgDRlftj39TPdOyiTMUwv7Hc6OsXNNK150QREA4rB7EU0L5A1Ul5b3LRDSJ+Hn7g+5IiAGq9DR+aFL94CTPswZhocPNdk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=AuVc1WpY; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hEFDFfTN"
-Received: by mail-pj1-f50.google.com with SMTP id 98e67ed59e1d1-38e88b60121so297445a91.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 21:20:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786594835; x=1787199635; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=JuAX0QZtIVEwbbkqe3Q0lDnHOIC7HPwgoRkKSD2AJfM=;
-        b=hEFDFfTN0bqwOvFLDsuwxuN6OjES+zKeTW29PWkaCsw+IN38zoaSkoFi5i7LKEiJi6
-         dkBHmffSbqfyMDB4HKmvOf5vIcgt7VgNz9FeJCxWqmevHfcND25+FHqA79pfgsoRD0K9
-         mmj7jp6AL9CwLONqM6sp4kmG3bBkqXThjuXXkwldtA1wfE73lbSHF1eiPGsu3tj4Gved
-         lR9WCRFbmrWPXVniYhKcCzysdrwMhH3RLLv69NHCZNoSNa2FuQ4SOMai3r9B4glQY+O2
-         rtpUtoiF4LAppZ30KohRwFbqhJw0tBLDX4foOX+ja3EFbw7cylzz/elvMct3tticw3eP
-         SnIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786594835; x=1787199635;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=JuAX0QZtIVEwbbkqe3Q0lDnHOIC7HPwgoRkKSD2AJfM=;
-        b=BB5m26RGzErCd2NVVg+VBL9fnqy7aPAQ71KlzIKY+wQCt6xprk3h6qgLBEPhgCmdEb
-         mr7QO2ifjlcvlZThFsntj31j3eRN8+IEaUJeMKUDRK6irN9rqDRpQRRcUR958mIiDwYA
-         eNu4l5f5rOWufD3Vx4LPkAWBF81o8GdTuNjDYN/xruUsDG2jLoavqHiq5J1tMiUYVMJg
-         KIRpCracn7WwGdhL2oekuVuVQMl7vqjl1rKI0m1QIwlQvfFfNz8Ev0iSAc7vXEHlJ5XR
-         dqk8emft8csp4AlelAkz3izD2yvl8TPuNs965f16u0MXqvGObvPe2X88XPoJLXOsrYmX
-         OFTw==
-X-Gm-Message-State: AOJu0Yw4jVLaGJL5XgxhNZNZI2woLAfFR1pfKZC5QqreijcwVN0pvZEE
-	p5jIZCrAxFo+Em6Ip30FrfgBPjQsMR71lFgejG2wPKqv9egc2ljaXz8D
-X-Gm-Gg: AR+sD12P96p4P9iUfLlKSVWbAiNj9cYDMrHQigCVONgZ26Koyb3UcdElW3YW7LntGBz
-	/1EA+5V57JhfoMeE7NekqzU7g7xg9pyWfhX0+nJVysEdfokBE6VaOUpRhC7SaTki54KmBjtBt1n
-	8fjN4+6c4pmUD4JCTAbBdP/pL3GsQ3ub6sBxYUiDTaRVvwRrcLgaE/zFBexpBdKELASyW3PkMVl
-	qfqHZGAXLXKE509UBw4F0jtFnxEChDLb3FIENg8KCBfPTCuwFDNnap0fyGhqDq9meRFbFXOxNcG
-	TKWVSEZCh+Bz7mcI9c7dydz00Js5GeFmJkdvTw2eIS24K9VaN2prqs4oHWq9DtLVwHwoa6hHvGy
-	ALEnoOQ7bwtjnRCFzRLzzraBN49SxGmkC8mjnhIUECvbKEfrqfZc7FYfZqj0Jko3Eq7lAkaJorN
-	ozJtXKqJo9DXCvqle7yMTqMTcRx/gn3EWExOlQoH1Mha33aebb0oxXkR9E8g1TCJfgfcz+Zp1++
-	i+8usIC1NY0hfyLZiFLfThGBmk8rXA5/9pUlt/Bx7wrj7ck6pw5CunpU92kqNAXzTQDtYFDU3O9
-	0m3G
-X-Received: by 2002:a17:90b:3c41:b0:380:7688:fbe9 with SMTP id 98e67ed59e1d1-3931e0393a8mr3833257a91.8.1786594834730;
-        Wed, 12 Aug 2026 21:20:34 -0700 (PDT)
-Received: from phuc-desktop.. ([183.91.15.56])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3931cd468cesm1700084a91.7.2026.08.12.21.20.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2026 21:20:34 -0700 (PDT)
-From: phucduc.bui@gmail.com
-To: Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>,
-	Paolo Abeni <pabeni@redhat.com>,
-	Michal Simek <michal.simek@amd.com>
-Cc: linux-arm-msm@vger.kernel.org,
-	netdev@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org,
-	bui duc phuc <phucduc.bui@gmail.com>
-Subject: [PATCH v2 2/2] net: xilinx: axienet: Handle optional IRQ return value correctly
-Date: Thu, 13 Aug 2026 11:20:12 +0700
-Message-ID: <20260813042012.17631-2-phucduc.bui@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260813042012.17631-1-phucduc.bui@gmail.com>
-References: <20260813042012.17631-1-phucduc.bui@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="AuVc1WpY"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C980D1F000E9;
+	Thu, 13 Aug 2026 05:31:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786599120;
+	bh=DLJfBO2G40OWzLwwxKFSXJTvkr9EzDntk9qp9Ghfjs4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=AuVc1WpY1T6bq/8/8id/AclZBsRPdVWHX4ujGKWhx1kxXft+llsv/lKJ/+HGTUo2z
+	 A1m97hiRB//0h0zPrMSDFwFkzcF/q7FwNr19nJNvEngzQgBtRLXTMOtZgceI+bBh0A
+	 VKu3O7L7vGfYWSXidQaSE6XFLletXB8mH3ClvSsSDYrrZPocLIzgfjVwRocD9I8Jdv
+	 LWsTJTqHh1eh07oWpFRYfihd4vHySqMjRHcJsUXwg+zRfe8FvQPIbzkpCcfrYfH/NW
+	 FLYCEWAWSeSFwpZiymnfJ9YXZ+6e+OLACMsMLOA0M45oj/aBWsYq11BLICrcEk0oY/
+	 //7S+Lr3kyp1w==
+Date: Thu, 13 Aug 2026 07:31:51 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Bartosz Golaszewski <brgl@kernel.org>, 
+	Marcel Holtmann <marcel@holtmann.org>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, linux-pci@vger.kernel.org, linux-pm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org, 
+	devicetree@vger.kernel.org, Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
+Subject: Re: [PATCH v5 03/11] power: sequencing: Add pwrseq_is_controllable()
+ API
+Message-ID: <pacoomcusygcdszbt56scxj7kkdzwmv25pvqulft7scfdshwn4@2dgzce7zvunv>
+References: <20260720-monza-wireless-v5-0-69ec6743543c@oss.qualcomm.com>
+ <20260720-monza-wireless-v5-3-69ec6743543c@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260720-monza-wireless-v5-3-69ec6743543c@oss.qualcomm.com>
 
-From: bui duc phuc <phucduc.bui@gmail.com>
+On Mon, Jul 20, 2026 at 10:04:05AM +0200, Loic Poulain wrote:
+> On some boards a power sequencing target has no host-controllable enable
+> for its function, for instance when the enable line is not wired up to a
+> GPIO and is hardwired to an always-on level. The pcie-m2 "uart" target is
+> one such example: when the M.2 connector does not route the W_DISABLE2#
+> signal to a host GPIO, its enable/disable are no-ops and the consumer
+> cannot gate the Bluetooth function at all or exclusively.
+> 
+> Add a generic pwrseq_is_controllable() helper. It reports whether the
+> target's final unit provides a host-controllable dedicated power actuator.
+> The target can implement a new optional is_controllable() callback,
+> reporting whether that actuator is effective on this target (for example
+> depending on GPIO presence). If the target does not provide the callback,
+> it is assumed to be controllable.
+> 
+> Note this only describes the target's own enable actuator. It does not
+> imply that a power-off reaches an electrical OFF state, since a target may
+> have multiple consumers. It also does not mean that power is uncontrolled
+> for the target's dependencies: those may still be gated on their own. And
+> it does not restrict consumers from calling pwrseq_power_off() either,
+> which remains valid to drop this consumer's vote on the (possibly shared)
+> resources and dependencies of the target.
+> 
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 
-lp->eth_irq is assigned from platform_get_irq_optional(), which returns
-a non-zero interrupt number on success or a negative error number on
-failure. Errors other than -ENXIO are handled before this check,
-so -ENXIO is the only error value that can reach this point.
+Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
-Check for a negative value instead of treating 0 as an undefined IRQ.
+- Mani
 
-Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
----
- drivers/net/ethernet/xilinx/xilinx_axienet_main.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/net/ethernet/xilinx/xilinx_axienet_main.c b/drivers/net/ethernet/xilinx/xilinx_axienet_main.c
-index d23e9796725d..7ef099db1bcf 100644
---- a/drivers/net/ethernet/xilinx/xilinx_axienet_main.c
-+++ b/drivers/net/ethernet/xilinx/xilinx_axienet_main.c
-@@ -3051,7 +3051,7 @@ static int axienet_probe(struct platform_device *pdev)
- 		ndev->ethtool_ops = &axienet_ethtool_ops;
- 	}
- 	/* Check for Ethernet core IRQ (optional) */
--	if (lp->eth_irq <= 0)
-+	if (lp->eth_irq < 0)
- 		dev_info(&pdev->dev, "Ethernet core IRQ not defined\n");
- 
- 	/* Retrieve the MAC address */
 -- 
-2.43.0
-
+மணிவண்ணன் சதாசிவம்
