@@ -1,118 +1,143 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D37F4772A9
-	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 13:06:41 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3BF4369D5E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 13:17:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786626402; cv=none; b=bApiT52ES9q7ukkcYzF/pG9C6PdgE0pk+Dy6BJ/TY76MN1OmBGS3qUhi1nVZJ2lsrq4qMEn0RkBQYeHhUaf9hdmePYKvrQz52Iqwdcd7Ku93E4T6YFuzxDHS5ZZwmmrBorZNPuY7V8f6YhgoXxJvwdribIAsihjKfo+wsVY7h84=
+	t=1786627065; cv=none; b=SUiJylUCd/AgHaVEYPwVCnn+yjdUKnyGaYKY3yY+PNurHh4d8P5Ek3t161q+/ItQqDZYJ6bQfcWggsEAyeGYmtxxh6kcQdukU9r8NGoSVCG/ITyd58sNoZ3tb22R+TeIVioMrcSaeA3aBqBpIztwyURzDVoc1ZfxgjHhIa21Q0Q=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786626402; c=relaxed/simple;
-	bh=RAl0NVbjiiOs/VyeCemRv0TwYR+tlbA9P9uIHNsY6dg=;
-	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=McqTJthdH0y7ZGxhybSNyI0nc1H7q35j57B7o5qSfWtN9WUGV9Rq1mO04nhkEcN9rygGs8MXHHCICs4DgDDEu/heRNEXGnJScEMTjGzk8Qa0VFnxCMeWYO3nvPIkdPswHWYoc4S4j+z+Q4kkAq+1msqgKcaBc0NVVyBGKaEmGOg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UXZVJtg/; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786627065; c=relaxed/simple;
+	bh=CaM6qIrQMavDM/nN4aynYN6SJDtEiDdC3niLVvMkKr8=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=h6PA/AX7p7m93HaBeDIOgcCJuZHEy4yTlx+PQtSK8Ra65ffjKslp430e8p0xESzYmdRjUcWXK22YdWx3iRwV9m/W+rjsYtlgsyeiGoySyHXNef5/6grAeAi5e209+W/fbDXwS47o4f0NliVPOODXvhYaLtppMf5wN2eucVqcigQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kHI0nq0q; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Tvt4/z7G; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UXZVJtg/"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32EA41F00ADF
-	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 13:06:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786626401;
-	bh=yQWzU2idhtJFEfGoc824MA5NHjwICFqfWvq6sgVbqeQ=;
-	h=From:In-Reply-To:References:Date:Subject:To:Cc;
-	b=UXZVJtg/2Rx9ZJDFRk0rV1flaUPuLIwsFB15lmMdTdhvITsZVwhmJRtAnjke2dcPM
-	 EyRKKSNQ46Dic9or1D5n8yp3ruC6CRTB/JD/ODBDLgVK7E1aiovyORp16hMh26KRV0
-	 vSTog3v+nnYt16PpUwy45UrNG4GHKDhwZraJe/dAxnXBz/2P+sZXENL5cs7QkxnZkm
-	 L9pyu9aXIFzSOlfUJrzqIAtd4pkKh4llCsHlijG4RoUesbzNt1DjM706dqp4X6MGYv
-	 Aw2HVGG/ig688WXvWgyVx0jbQPESHqofU2l5ysylFdNzHOHIx9rVqGavvn1L0wQjwM
-	 npFITTaSA+U4A==
-Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-39c7ed5410bso4561131fa.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 06:06:41 -0700 (PDT)
-X-Forwarded-Encrypted: i=1; AHgh+Rog0n1L4LgsKl321/W2nqbYYl06OPjo8AUNmReyawBClVoM3bEfl5DYbDFz1II06WMd7KsBhp7hP5OFMp+m@vger.kernel.org
-X-Gm-Message-State: AOJu0YwjHzw02Ja7fujrLAI+WwXWqkuDSKsPL5haqYXmhxC4Z1ZCugF2
-	qpe/S4fIHG/MyLaWzauJOcSs7L7ZJFQE2mxg/v1Nxs40Gu14dwhbglIfZXukSHMo2CLUiWoWJrq
-	R52XDa97n0rhojNM07GLkpe279b3RZxBxP2ilNeybgA==
-X-Received: by 2002:a05:651c:31cd:b0:39c:7859:a2d8 with SMTP id
- 38308e7fff4ca-3a11a819760mr7294241fa.27.1786626399530; Thu, 13 Aug 2026
- 06:06:39 -0700 (PDT)
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 13 Aug 2026 13:06:38 +0000
-Received: from 969154062570 named unknown by gmailapi.google.com with
- HTTPREST; Thu, 13 Aug 2026 13:06:38 +0000
-From: Bartosz Golaszewski <brgl@kernel.org>
-In-Reply-To: <20260813123841.GC1820248@google.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kHI0nq0q";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Tvt4/z7G"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67DCJjeq2359421
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 13:17:43 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=d4zzu3W/Dezr6dzPPttqVaAN
+	idU18FZHiJeoSetOx/Q=; b=kHI0nq0qLJtfnUQWoKxoPlT2YSZX65GnSnNwYZWm
+	27qfZaP8RU06stMZQIHjF3O7i3yopXwVRCftLdH4mYFznYqaKFi9jdL4EKMQkANe
+	BSBXwHGSULr/+Mh+d7SY2aeMPNZ9gNtPQ+HsrzBtyektpQV0vxVmKcJn5pu089S3
+	dzZ9/JjvWlHptWWUAFfytD72fOAwg351RwLrDi6D2M2kDrS9d9rH2hW5WguR+/gi
+	VdHPK1lKmJqchLhQiLv7LQ9cW4nHwl4ENjolWhjB/IBSUq+RHeRSx9A1mrZds8L5
+	7EKdBcYh2PFqMA5FFj1xa4aoEZQ4XcEJNxHzRGGdwhgLyw==
+Received: from mail-qt1-f200.google.com (mail-qt1-f200.google.com [209.85.160.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g1cb5gkg6-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 13:17:42 +0000 (GMT)
+Received: by mail-qt1-f200.google.com with SMTP id d75a77b69052e-51c01ff996dso32851741cf.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 06:17:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786627062; x=1787231862; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=d4zzu3W/Dezr6dzPPttqVaANidU18FZHiJeoSetOx/Q=;
+        b=Tvt4/z7Go7xmsrDDifYkdsXoVV7mtjrLHOFK9B9rITHeV2DL56RGHKnLkd4UTsg8EB
+         il8j2MmjM/N2uKNM9r0v3VKS0DwsKndx438NP1kGv5zrCpKS06UnH+fezZSIpYxcPkdh
+         ZQgiMpP/lMCDwom+179V86hpsnYqDKcOgjkkMomktUEYPX0+qKh8bInBmkrFeVHyCRAS
+         OiYO0/MoGPpaCv1xmCvGfukg/LI/SoWOXGmuIpR/61GxHm8r5gBqT+kM/1GHFrq79fKc
+         IDyEXwd5kVPU+CP7BWJ88T+kkywiuaRG4hY0b0KPx9FQioLjcpMy1sDsRDa6OLY66TUR
+         HO7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786627062; x=1787231862;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=d4zzu3W/Dezr6dzPPttqVaANidU18FZHiJeoSetOx/Q=;
+        b=ooHxSTus0TIPVl4yie1eCMiwnsAOCT4s230NIZg/SXkF6Zo33ljVrJXAGnuuADLfgZ
+         gd4SkM2OpgZg3Sqzr6ywCgEGEyYHICaWtFWGfam/wpTvxkFNDJSi/FRKZ9UvzQDqvuUo
+         QM0/PS4DEDrsXT4vDkvIRD8tsfgJyxNUVG+bQLOJImCX4eaezW4I7q11Ch35eKBoMxmu
+         hqYg6zBFgxIZLgcUEiNIeEfXO5b9ww2dz1Eq0CHOOs7ymniqWVRpU7iz5Rm5cSfKm5Nb
+         TRpjpHlgYWMDxxA48y59Egw8fV9Kf4UorQPPKz0pMB/PBLJC7618z7wx3ccGKtUXnLXj
+         n+mw==
+X-Forwarded-Encrypted: i=1; AHgh+RoYPOGqr3TqJlaZNUp+dD7sJhnPSSnMNfLXf8bH4NxBCi+SabRFI7L79su42Hkie222Up7Sk0zCgWX4diJt@vger.kernel.org
+X-Gm-Message-State: AOJu0Yz1rn+SfdCxy9+6oQR+3Fqjhpw1aEsfRzMrLHXMqXlH6IfQWLvg
+	qmSX46loEYm0DhaRS6UUX/yu7SEA5Bc8jYgoFgkIxXPWZyljn1i2nW55etY7DcuQZDdxdJP4aLx
+	RUaaAbqm64/v3OYicBMky1BHwAJc5sZI/yUGf0aEo+KgOa+78FmgY4B/bqCAjFmx7Gx4U
+X-Gm-Gg: AR+sD11WbZNO10budru3WUVzKW5Rz+oz7Bk9nJozLvNwReWRLfF/FTXhMJXKxQnFGfr
+	tDqTBKhW7iwZqCst5gq4GGiHPx0rPEbSHdmB9MvzhshTSak+9mfaMx4KpZxWzxOV+G2FkOB1Wdv
+	tHcpRbDvdCGz4CdfLY8nM0HMSzLmM3y+JLJsCkjjCTGqJrQ950SK7HBB3f2ApAcmpEUw2ub1/hi
+	vLryqT37PElbiq7DGBWtLUa3G3k2XGEzDETnnihyPKbkWxKRPsuhXQph6jusGwC7Q/5gZZf1ztW
+	GvAy8kmk2bYRyxkjG0I+ex3ZqT4/t4J2X6ZzhHopstN3h8TaHn/04XQPdZuwYsQrC7WtXWifE09
+	5qsc2yY5QpD4g3mz0pH/+s6pCQjcdd2tPuczGI+cqt6O3NPE2H2IonysCkEx/GpncPQDI/8WqNk
+	VEFo9U1/XgRGnJ
+X-Received: by 2002:ac8:5715:0:b0:52c:dffc:4645 with SMTP id d75a77b69052e-52d73c1e4bbmr53877131cf.7.1786627061856;
+        Thu, 13 Aug 2026 06:17:41 -0700 (PDT)
+X-Received: by 2002:ac8:5715:0:b0:52c:dffc:4645 with SMTP id d75a77b69052e-52d73c1e4bbmr53876191cf.7.1786627061248;
+        Thu, 13 Aug 2026 06:17:41 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b453a54944sm455441e87.46.2026.08.13.06.17.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Aug 2026 06:17:40 -0700 (PDT)
+Date: Thu, 13 Aug 2026 16:17:38 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Robert Eckelmann <longnoserob@gmail.com>
+Cc: vladimir.zapolskiy@linaro.org, andersson@kernel.org, bmasney@redhat.com,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        m.szyprowski@samsung.com, mturquette@baylibre.com, sboyd@kernel.org,
+        val@packett.cool, david@ixit.cz
+Subject: Re: [PATCH] Revert "clk: qcom: dispcc-sm8250: Enable parents for
+ pixel clocks"
+Message-ID: <gwdrtsvqcgdfccyrmyjgstcrr575xv4ltotrdl7ml4lzsfof4b@iv4lae7446yx>
+References: <20260701001147.416518-1-vladimir.zapolskiy@linaro.org>
+ <20260811174822.1f4bcbf8@octoberrain>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
- <20260803-arm-psci-system_reset2-vendor-reboots-v24-4-889281373870@oss.qualcomm.com>
- <20260813123841.GC1820248@google.com>
-Date: Thu, 13 Aug 2026 13:06:38 +0000
-X-Gmail-Original-Message-ID: <CAMRc=MdA_zM_pHCmk7dd7kosqvNmFgA+iXvHS4qpNs9bdsUMCg@mail.gmail.com>
-X-Gm-Features: AUfX_mxLcl-KphrvU6gLOMupiRghMpmm1J92bVQek0OJwjAsSLdXf3P9i5s9MC4
-Message-ID: <CAMRc=MdA_zM_pHCmk7dd7kosqvNmFgA+iXvHS4qpNs9bdsUMCg@mail.gmail.com>
-Subject: Re: [PATCH v24 04/12] mfd: psci-mfd: Add PSCI MFD driver for
- cpuidle-psci-domain cell
-To: Lee Jones <lee@kernel.org>
-Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
-	Bjorn Andersson <andersson@kernel.org>, Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Souvik Chakravarty <Souvik.Chakravarty@arm.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Andy Yan <andy.yan@rock-chips.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
-	Mark Rutland <mark.rutland@arm.com>, Conor Dooley <conor+dt@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, John Stultz <john.stultz@linaro.org>, 
-	Moritz Fischer <moritz.fischer@ettus.com>, "Rafael J. Wysocki" <rafael@kernel.org>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Christian Loehle <christian.loehle@arm.com>, 
-	Ulf Hansson <ulfh@kernel.org>, Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>, 
-	Bartosz Golaszewski <brgl@kernel.org>, Sudeep Holla <sudeep.holla@kernel.org>, 
-	Florian Fainelli <florian.fainelli@broadcom.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
-	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, Andre Draszik <andre.draszik@linaro.org>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>, linux-pm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	mfd@lists.linux.dev, Srinivas Kandagatla <srini@kernel.org>, 
-	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
-	Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260811174822.1f4bcbf8@octoberrain>
+X-Proofpoint-ORIG-GUID: ikGKTBXSoWAPr_tscqHZu7IizmObN5_q
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEzMDA5NCBTYWx0ZWRfX/jBKz6anN7o/
+ 5DNurVbclxzbcxlhfNzS8NDG1iLOMZHeVAySSgFhepDngTJhW5mumldcF1ER1+bOmLXpxym3P5b
+ i1duSMdwBbjTR+WewVUkiG78p7oTcqg=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDA5NCBTYWx0ZWRfX37XAfH9qffFb
+ OX3csIsfHY1pRqytTj4q2EbkMppyPfbrcWbJp1jHjaHMCxxPopYmTK6sTsiPXP1SO5ZWhIMRmRR
+ QQ+X4C/TVe9RvtZ7WapV7qqIwbcVulzl3YHnIIhFpJDu+0pBg5NHcBoI2xZCYxeUmbQd2GCoc03
+ mW4FYFw8grG6XhWPr5CIk64i/jNp+iQ13VCOHYK45DFpKZ6X+itKNMV05ox9m6b9k/7JC2788Pc
+ kes+HWV3bPqIuann2qSyKbZzc5qeWOuMlKdrTm9rnt6+UDCoZ5oV4arDIEZqpT5tAgVYB/WvRkC
+ DmuCrWLGBEuWgfPqE67bp5IlNu19O7fCRZ7h1dJojezOhrGKGr4F9JY0zLCer3i9S0+9T0h2l5o
+ 90kOsvm5qX7I/WTmfE4O+BqPGTiGnL2RUyfBFgKdylpflfEXQGCMmF4lz2q6WvuafZMPIOcuJe7
+ T37CwxtPFW3+JzbzpEQ==
+X-Authority-Analysis: v=2.4 cv=GoNyPE1C c=1 sm=1 tr=0 ts=6a7dc3f7 cx=c_pps
+ a=JbAStetqSzwMeJznSMzCyw==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22 a=_nj0jdx78ndM18lkMxEA:9
+ a=CjuIK1q_8ugA:10 a=uxP6HrT_eTzRwkO_Te1X:22
+X-Proofpoint-GUID: ikGKTBXSoWAPr_tscqHZu7IizmObN5_q
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-13_04,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ lowpriorityscore=0 malwarescore=0 spamscore=0 adultscore=0 bulkscore=0
+ impostorscore=0 phishscore=0 suspectscore=0 clxscore=1015 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608130094
 
-On Thu, 13 Aug 2026 14:38:41 +0200, Lee Jones <lee@kernel.org> said:
-> On Mon, 03 Aug 2026, Shivendra Pratap wrote:
->
->> PSCI has multiple kernel consumers, such as cpuidle-psci-domain.
->> Currently, both the PSCI core driver and cpuidle-psci-domain bind
->> directly to the same PSCI node "arm,psci-1.0". Additional consumers, if
->> introduced, would also need to bind in the same way, leading to several
->> drivers attached to a single device node.
->>
->> Introduce a PSCI MFD driver that binds to "arm,psci-1.0" and registers
->> PSCI child cells. As the first user, register cpuidle-psci-domain as a
->> child cell.
->>
->> Update cpuidle-psci-domain to probe as an MFD child and use the parent
->> PSCI node for power-domain traversal.
->>
->> Suggested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->> Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
->> ---
->>  MAINTAINERS                           |  1 +
->>  drivers/cpuidle/Kconfig.arm           |  1 +
->>  drivers/cpuidle/cpuidle-psci-domain.c |  9 +-------
->>  drivers/mfd/Kconfig                   | 12 ++++++++++
->>  drivers/mfd/Makefile                  |  2 ++
->>  drivers/mfd/psci-mfd.c                | 43 +++++++++++++++++++++++++++++++++++
->
-> We don't usually allow the use of the term MFD in devices.
->
-> What does this do?  Is it a mux?  psci-mux?
->
-> If not, think about what it is and call it that instead.
->
+On Tue, Aug 11, 2026 at 05:48:22PM +0900, Robert Eckelmann wrote:
+> The same problem also exist on sdm845, esp with sdm845-hdk I saw
+> similiar "already unprepared" mesages in dmesg.
+> 
+> Doing the same changes to drivers/clk/qcom/dispcc-sdm845.c, fixed these
+> issues.
+> Can provide a patch for dispcc-sdm845.c if wanted.
 
-My two cents: I'd call it drivers/mfd/arm-psci.c
+Yes, please.
 
-Bartosz
+
+-- 
+With best wishes
+Dmitry
