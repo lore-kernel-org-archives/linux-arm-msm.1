@@ -1,199 +1,258 @@
-Received: from PA4PR04CU001.outbound.protection.outlook.com (mail-francecentralazon11013033.outbound.protection.outlook.com [40.107.162.33])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 040E1379979;
-	Thu, 13 Aug 2026 18:49:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.162.33
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786646968; cv=fail; b=aJNMkm2FJbxvHK/nB9TKwPlauYr6Moam5RVKx7ly/8WtAOXkSaAek9jzdszHR0zevq8jLtlihwV63ONiSR7B9gEXLFgVsEKalvrA7rV1FNHay0kjPAN8dPAik0Y5gwyqdcrQlT0om3YaDE4gaosdgvTlOW2LAQ3HH3tODUAPdwc=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786646968; c=relaxed/simple;
-	bh=zZ6ILbmbD8sJfgDzn5YXO8xmul2JP6tY2wTxawxX3TQ=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:Content-Type:
-	 Content-Disposition:In-Reply-To:MIME-Version; b=mBRsZIBBUeyHrqf4jABWugrvmMqAI6sh4g1+5BDG18qG5dAUXZ5uskuxZpcpp/ZSHAMTqHCTomKam0IGoatfFziIgEsfjIVxaVyO+qV1U0bCnpCarXoJuvUlQErg9s8YeDapT3RmfOlqMHZzrIsJYXmSPqDPvqjWyZlD4Oo0++8=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com; spf=pass smtp.mailfrom=oss.nxp.com; dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b=WZ7XnN64; arc=fail smtp.client-ip=40.107.162.33
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.nxp.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F25BF3F0A8C
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 19:06:07 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786647969; cv=none; b=pMPy/IWCAaP/QGQgVfXmSpPWRptm+BQ1l976TuOQnLNH1iorCBQfDtzC4UZGY7oZ7gYSRq3TMyBH4xCZU1DlEaYAIVxYROXNex45eLzGmfCyV1CodybRBEiTtAY8q1uB9MQl0SAF/u3Co7zvWh0sOu1JWNa3BWuGk/nCmwGCpGU=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786647969; c=relaxed/simple;
+	bh=jS8JkqlizgK4WoSUVO0lzGw9Um3tSM5EfLDcvRh59Hw=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ih3ZycMH893ZpfP3gC+nAhK5GYYN6M1gupuTZIVIwaNtOvApnaovojiCAeCX5LqsQyDqPUF5uSm28GBdYuzug3I2sTtEAVXWyAAQKwGSDvDT31JbhBrENQ5Aq8deqlXIhWzQcnY2tymUMZQ187F8DQY0H6+5t+FzWMQwggFKndQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=LpnB7zj8; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=QEyJ0TaN; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="WZ7XnN64"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=gLJ0A65DXq/5P6NrA2jFyC+9SyRMOprNid9JfHJXGjh+qoM+4llT+RVk9j4kME4ki3cUpCD/XwD+QX6SSRB3yPIkufuvmXZM0ZYtXL3Xnj7P0zElu5yFMz0TTRwzsebEA1+yyMIGCZkNnz4JACd8ixikSc59Gm16qsToK0/XgeVIhhBdPq4MAyzvwvA/ovBHTjH3Kj7k9Ghy9rWwZXSmcFn8E25K0UJMWJfg5pEKWd6mQ4c1k1pJUtnmE92BGVaJFIPd0KcdeIo9tVqNEEsllluH4JQyhNEppGOKlM4R8o3KQRMfcnyjlW2EeADBXueu2YaI5uTPNti1HluEC8kAKg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RJoXzZLaV9CrWqVMRDQ7ngwc3lK41lX6j2Op+4khpZY=;
- b=fs/NFYvw0qSzx8hIopeYKGNXzGCAiFRb9EaKU/ozLrLMX7NYpmU/K2Synrxv+eewA+fw0nbSgsbBeufIHRz+2mLH/3n3IDEgbUAXOCxPF0H2RpuOOnE0Mf00BEi30DRyIEeIZiW7eTgP1i2I+smAujyU+CxiJFb+QmNDSITd/VBRXO6Ylx3LF5o67zo/lg2AxHtyb3q4Rbo3j774qg11p92Ka65mV3cYlqpeL6c+KsABsGnTTaZ/XPcKz/vSorcbTljVo9/EVMHg5MOBrAJJDueh6DUlXt9wB4ZZEOghNPtAWod5FN3n2orywTwNkzWo9Q/agFKFWa+FdOVLuGzERg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com;
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RJoXzZLaV9CrWqVMRDQ7ngwc3lK41lX6j2Op+4khpZY=;
- b=WZ7XnN647b/6QPYLJVQxEYx+syzOkffBeUBB6dz2oQbKTri0GjCdEb3vn1ZwK3arm6QrSY0WORIfPHo/1DaFCgokhjm4sQ1dKBJqCTGld3tRE2eD9F6+8dyP44nzhzlhgQosXwQKUzcBcS35NQZo7/r2eWv5CRrY4EiKZxVqJuXRWbFLBux6kJMPIjj8hk3jvdB/DgL85/yW0iCKpR+w6SQddFDrMQljyXoCJ83gzK4lH5CTLjKt89+deOy9j6snKsS5hHq767wCQcQ56FIMvKfnRToe8UMvh8YEY7JBfnkBxV5uphFQaHCYu7F/Po0ks5zH2AKS22cl2EUUxyb03A==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com (2603:10a6:150:2cf::9)
- by AS5PR04MB10060.eurprd04.prod.outlook.com (2603:10a6:20b:676::13) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.15; Thu, 13 Aug
- 2026 18:49:24 +0000
-Received: from GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c]) by GV2PR04MB11799.eurprd04.prod.outlook.com
- ([fe80::2146:83a2:5329:b7c%7]) with mapi id 15.21.0315.014; Thu, 13 Aug 2026
- 18:49:24 +0000
-Date: Thu, 13 Aug 2026 13:49:16 -0500
-From: Frank Li <Frank.li@oss.nxp.com>
-To: Hans Zhang <18255117159@163.com>
-Cc: bhelgaas@google.com, lpieralisi@kernel.org, kwilczynski@kernel.org,
-	mani@kernel.org, jingoohan1@gmail.com, imx@lists.linux.dev,
-	linuxppc-dev@lists.ozlabs.org, linux-amlogic@lists.infradead.org,
-	linux-rockchip@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-	sophgo@lists.linux.dev, linux-riscv@lists.infradead.org,
-	spacemit@lists.linux.dev, linux-tegra@vger.kernel.org,
-	linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 04/16] PCI: dwc: layerscape-ep: Use cached PCIe
- capability offset
-Message-ID: <an4RrIcV2Q6NtQ1X@SMW015318>
-References: <20260720150619.24733-1-18255117159@163.com>
- <20260720150619.24733-5-18255117159@163.com>
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260720150619.24733-5-18255117159@163.com>
-X-ClientProxiedBy: SA9PR13CA0174.namprd13.prod.outlook.com
- (2603:10b6:806:28::29) To GV2PR04MB11799.eurprd04.prod.outlook.com
- (2603:10a6:150:2cf::9)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="LpnB7zj8";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="QEyJ0TaN"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67DIhWda2370997
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 19:06:07 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=SqtYgCGRvHbqjrphQKjTjd9J
+	al7/lUk67I7fKfQTEOE=; b=LpnB7zj8J15wJ22YF0idbKclmSXSW9MHg3UGbz29
+	/G+yzpRNuN6DmPyvKhIvNriEV36s9c3P6aLxD/zoRVL9Wp58o91CisXIQurbyoax
+	rzZPvnwIO1rdMp+znUEcpyo7CekHTRZmlUC2FgHWCpZSkzin4/RzDA3kDuCNdpJm
+	HT/NQUGOX7FB15B3iFEwVOSYOLlb0SbC72ms/1Hu77beMpeMasTJWfYRqVTM7nT/
+	rOZTKch70qNw2clpScW2sif5V8qjMhGC6Hss4dBBcGEMBJ+WTzeW86nSr9ILin++
+	wivnmdwhQ+kecfJM56y0w39Jnbc8O79nQRpIo4AkxyBRyg==
+Received: from mail-qt1-f198.google.com (mail-qt1-f198.google.com [209.85.160.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g1hgy0qgu-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 19:06:06 +0000 (GMT)
+Received: by mail-qt1-f198.google.com with SMTP id d75a77b69052e-51c0e702df8so3297511cf.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 12:06:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786647964; x=1787252764; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=SqtYgCGRvHbqjrphQKjTjd9Jal7/lUk67I7fKfQTEOE=;
+        b=QEyJ0TaNCHwjmRlrMxJGt8Zi4P7wNT8PPg+z49hurDgOnPLwPmp65wggmGUgaPQQHq
+         hvJyJVi1ITTmot0jbacm2OadUBaQX+VNxIsB873xgdUCr1vcFUWnRg8LFTwkVJVUKA7R
+         X5AtWoKVbKlH0nxJesU2FsUG35TsuVengFdarjTeXXncPMc1eydnKfq5Uglw2Qsg7dT+
+         s5UXMI6WhcwOqw0cYoPdftZWQxoqQQC55hbgMnV7/K9w63pFv7ub3/oXPiaxHPF4Xcu9
+         SmB7gwIbcn0U1nFmSoGwj7qOfkpP8y7Dq3+pFp9UoLZNQnJBxZpfrveptcrSRNPs1V2F
+         qDyg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786647964; x=1787252764;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=SqtYgCGRvHbqjrphQKjTjd9Jal7/lUk67I7fKfQTEOE=;
+        b=TXgSSQf2JYVP0FTGycuuIAu7NyqoR0XEm2sTEIL9fxGdTRRFOo0aOVDWEotg1npqwd
+         x5fl+hEcyx3OJcN0K56Ut04OcdPiRYRXm2B+GVmu4euorht73aun3bMNLqFVAXq7o8Xv
+         lnU5iByXzNvqijnKyGwMSk09iqrt9/OeTvFcb8izSiQQwYvKOY3/PgotqlI7ZQ6vSHZj
+         AToRBUWk2cf5jvBmmExbbwpUHvdYGyD0Dz7fhyFFQCVLK16mr4wFNT1UQPqFbOzefbX2
+         a6HTsgZ03H2gLvmEn6XVx7rQaaPfNuKPBTUUCiVRZ2Fuv31fwA8ptqF9/f64FtcHPJdr
+         nLbw==
+X-Forwarded-Encrypted: i=1; AHgh+RocZ0Y58B4mGBW5vgKkrv0NQOUyEu3/JdWX35/BXErmIbuGJND9miGsEAehAwNZxpqrAHmWK12tY92dbw3J@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxi9ZAbLI24HKKn0QHD4Yf5ENcf8P2sWByYhWwZxqdhNvwVqUdF
+	3JZ3Yu1Lr2XIylZEcF2phbceVQuCPcPQUhfKfrMOEd0jqB91RNFCkkQqMBmZ8PQaaI4AyWXV29f
+	/NQqSW/opHjzpi4dGeMsHw4RbpW54ddJ3b+Keiyz55FILy//pzrIWjiyZJD56ddEBPzaK
+X-Gm-Gg: AR+sD12GZYqJxPMzBs1M5G7k2sxmd6/+/CKBXle6MMlLuLkx5eL8X4+LaPtzpt3eG9K
+	qz3djC2DAKYTK9bSVNMFo5538g2ENoPrZAzh0IvCcaYG/z4+a9nMj4enoQFFXfUQIMRXA7gePCe
+	WUHNUx88AXXXzJw3xPUqGSPUhbYJGlv9QuqWACOixGhQll/JIkU06sJ/E+XWEgZQw6GJZYJqyvt
+	hLE0b0ZKIWipi9BzSrkkARJFwUjEQdpg0LIdyKoCPj/DMqlgGgrBTdllFBXyln8zV+zOp050628
+	qtyXiST7+km8G29abBDqg+mv37js0ZW2YGGIGumGqXoUZQryplLoaYc0o7jqQ1ClvbKYGtGxdcz
+	NuU3GEl6GBlE56o6/asQWP2Klaecyd972458PZdyAgyesFWf9aji7iCjGcpONnSrYw09HmpA9mm
+	bT19RIW9WzrAn3
+X-Received: by 2002:ac8:5f95:0:b0:51c:73f:e3a7 with SMTP id d75a77b69052e-52d85422700mr1954231cf.26.1786647964170;
+        Thu, 13 Aug 2026 12:06:04 -0700 (PDT)
+X-Received: by 2002:ac8:5f95:0:b0:51c:73f:e3a7 with SMTP id d75a77b69052e-52d85422700mr1953281cf.26.1786647963727;
+        Thu, 13 Aug 2026 12:06:03 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b458bedfd8sm57388e87.52.2026.08.13.12.05.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 13 Aug 2026 12:06:01 -0700 (PDT)
+Date: Thu, 13 Aug 2026 22:05:57 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: webgeek1234@gmail.com
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH 3/4] arm64: dts: qcom: Add Retroid Pocket 6
+Message-ID: <pgup5kvjyhz7l7rucduzlqj7hmle2lrcvso6ge34up5am3uukg@3jocblne3lvi>
+References: <20260808-rp-qcs8550-v1-0-a5a365ba3dc5@gmail.com>
+ <20260808-rp-qcs8550-v1-3-a5a365ba3dc5@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: GV2PR04MB11799:EE_|AS5PR04MB10060:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9ca7d326-1ca7-4cff-d591-08def96b97bf
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|1800799024|366016|23010399003|19092799006|6133799003|56012099006|10067099003|11063799006|4143699003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	wcJvH7zpJFzrE1i9zqbBU1P9ATnBOB39jgkZ+Mr48gdLyySS2SJLyRG08czl17pOfAmA7OhGo7ydbjCbXfAoQcdceJyD7NfAMqon9BJxpKtsovALGpaFvedDyGu18QhIz0DR7fR6z/MCJ8bKxAF55zoFb9qBfigdq6+Zkm/wfcW8Pd+LZVDRCj8H9JjhpK/IV9KjzKRdfwuygcf09u8DbVfsaOScdZDpdTXnOWoFl7Ort5knb0AiZEA/OyZeCi0g3Z56+2UmxvhzEHLDxkehNPi+2+zoj2q2dRIHZL47FZ7wqDhgYgE24jZZq9kV+cMU7wYenJ5Bncr+RNlbKfinGRUk70IX7at6zA3qcehEw0Wl9/vTycDuMzhg7J8Wz7F3yle8JF5VFHRw+foVmhtmt6hFTD7MlBrkbda1X5mKfpdij7B/6EDzfkNH7tyJV2dr3JqxGIEZJU4WXQVn2FVj54VZv8c3thiLh4+mMQS/aGyNAHAxpycroT48e/fUNzzZ32B+Drj/BMV6kBqu49ViRCvAHQm3whetErPvOZloXbZiwTTdwYyxARtNA/uIb4cEObYa+wfNVdIlLkVsof6lrnraXxtJ8oC6jKM0K4jddJ2Nc4WCvEeXRmmXJoaIWqsw/WoLFWX2JKcyoEOXBe/5fHUr90cDigyhER3NOrriTvk=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GV2PR04MB11799.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016)(23010399003)(19092799006)(6133799003)(56012099006)(10067099003)(11063799006)(4143699003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?7S4KOFeu+bq1Jsj4N5leCG2q6tO9QWExUi0FsFauCSp47qD4ysbWzNbnD5Al?=
- =?us-ascii?Q?Iw0Aq5DX2tB4yOh6aRWbbzojrBAHGTO/gXpMF9lZzkpgssMgwGQfJS/HmCgN?=
- =?us-ascii?Q?KDbHrFPvDVh8ctAtOF8Fho+ATaPrWRIRnycx0FnDtZwaKkm7acjdai+wYmRo?=
- =?us-ascii?Q?41I7+xw6l7gFDNTGaiZjmgGUVCIG9Y18NknjkcO0q7iKI1+/hsuni7KvbMW8?=
- =?us-ascii?Q?If/E465RcuSDlir5Lu8ZNa9oT8OSRuV+PUxUlIQ5kz1SMNmjDcDPU5wwm+uK?=
- =?us-ascii?Q?B29xKf/QnwasvL3IZfZhfqIQc2hfJkLS2phRmUyupK7RuXnmqQPP/IAXVlvB?=
- =?us-ascii?Q?83ifPQScCAk9Ftvl1O4/U32DKrlmsjpwVTl/vjguOouXbwcqxUq/gakc4xTf?=
- =?us-ascii?Q?gwDlV1NgI3YzZEkzjJJpQeSQcjUTV8cxHosO16yL+RMFgen3sS4HpAqitQOd?=
- =?us-ascii?Q?h9efQ+Ti7Kz/aJ5J+WvHmlvQvx1nrHqfdIb/8PgKh2pai9c2ylEwHF3+nOJI?=
- =?us-ascii?Q?xI/meyt9dAmwCyEVQ/9JTyYCxMomhCKCSa6eGuDeE/Dj64/d2azQnV4nAC3u?=
- =?us-ascii?Q?50A39Sn7MuuenwFa+ZjLj56Rzs36kDhb9RrD6IPSCFpundSvE0KI8PNwr3Ov?=
- =?us-ascii?Q?ipkaDVtyL8xeJda4Fq6xLuWiKtJ0A68WTu3A3HhK9G7lzE6Zl+gWjJPG2t2+?=
- =?us-ascii?Q?TG+i81LSdh7NisGWHQtriSC1M445e2fP5QDPdPs7YvFhV0a+qXDCbRMOZWvW?=
- =?us-ascii?Q?WtS3szbRveenCh2kChSChz4HEQM36qdjaMLfpZlZjX4i0vOqYHQicKfvfluc?=
- =?us-ascii?Q?fMwalbVbPZloKPwnE6PyetYIjYk58tXPQwNwBewaaFhcuOvlAPs5bJU4GV5b?=
- =?us-ascii?Q?EOC9omX1W4KyGVsZOqVIbaKeLSQMZk/OgbWGsnAZMUzGl6iQAGCY9FJ8CcNK?=
- =?us-ascii?Q?KpR6+0zTWNgpd3bcbVaiVqoiEaqENV/BSFr2Fs00fYI96c970utVDDz0v1bR?=
- =?us-ascii?Q?e7O4F1sFrBY/XI3aoCLn6+i9UUXeJRHVdnSShELDtkxm0MBGLEtyJIKhsVBY?=
- =?us-ascii?Q?25zKXSVWbC1ZZqsQN4WOTtHYMAByJpD1EhkqtL5kxQqrHuBf1+es38U0wB6K?=
- =?us-ascii?Q?/+KdHcZfcR3EFkamXOjqbOy7hP/nV5++hqWtNreXBr8lXogvDvIgfY3ZlxxX?=
- =?us-ascii?Q?ni2gul0jTB6Uoa0rSBMCjnSfkupxXRPJyVH5mmPAZ4OoVr0MGatmvHwSqwX1?=
- =?us-ascii?Q?Z4PASfk/0avQPCDBwtk7OMQMyDZD4puqkTWcn7Dz8dlIWLpX50SjqDkBxjN+?=
- =?us-ascii?Q?Wnr5Qo/726p9B+8HR+2NjK3ss4aVHK+mPhb8NFmtP9QYnWrKblphPA6+HN7m?=
- =?us-ascii?Q?EEdcwvmEXrxSnfBk2DjPXpFJKKktG9cL4GGdbUkup7j9HaPwLLeXn6WqUKN7?=
- =?us-ascii?Q?omKcrmoAjaaQpnajalYz0bBztGxoK1BAXssan+55NLRvxp3zNXhSVVgMVFh1?=
- =?us-ascii?Q?fgY/DRgw0i8Ug+rqUYyjE6/7gSMrf+HTpQyF9XtY8SkJoq1DwEBPfcbq1XAS?=
- =?us-ascii?Q?MRkFpmcpfOui4QIykejWUwnQ2+2TsBMrXkzlFmkxHmPHXVMXB5CmSSk2RnsU?=
- =?us-ascii?Q?rBRIK9j8dIJYhroGPEifiz6CpiijiyAYSIvNfClVbsNCsTCgW117oqb4H7js?=
- =?us-ascii?Q?8QkERrzJ7AdLQNc4lZ1oQjwjStPcsF0LYPExCyj+BH6xIA9inD0ov5L96FS6?=
- =?us-ascii?Q?9pcK30ldnmFQjwyIia42eGv+Nql5G3hsiZ4iEBBNZAxk7p312Urs?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9ca7d326-1ca7-4cff-d591-08def96b97bf
-X-MS-Exchange-CrossTenant-AuthSource: GV2PR04MB11799.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Aug 2026 18:49:23.9809
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: u9Dv8/Lv1MQBrrKRUB3oxVsDeFhkGqNyt0J2YNDwcPjbhzccbl5p8PwwNhxPXF0gmhcVP+HJpqvcCEkVB6cEsmUhWD1smqXV06myv5Z3AkOY34rfrDH+C2cRWryOsdaI
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS5PR04MB10060
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260808-rp-qcs8550-v1-3-a5a365ba3dc5@gmail.com>
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDEzOCBTYWx0ZWRfX7r5t7+LUiiFh
+ AU4QVocHeHrRxDBVOZEG/khS/C+KFGs1yjZCv1YbNk8siLrhE2G0WXEEVv4a4IP7yobZsdQyNK0
+ 5mW/fovLBQxFoiLSqPIdo/rAcPl5xIe2nnXgV61/lfuNZlXUcuxefbTGEFeVYJQKplonfyF7rKK
+ 6oFpS6r/wUlZWj1WCEhtjWJNlY8rPqCAihlm41aqhP3DpCtFLOQZ/RMEB/qIfb6a19XM+zf6Pcc
+ ygEJ7x5Oilw3WlmBJQFqJB4t1vPAF8tJtylD/0V8+RSNRY/t7ApWqGMvc00uv0ZfC9RoyTHuFBt
+ XZYQ2jfEMoOmVBHv0SWldgr8JbHFhpJXamuZmJw/S1N1CBgxhW/6Yoaj83KTSujTQN3X5TvC+j+
+ M6olveOeCRh6bm3tuLmeCP0DqSDPgb7ahfhXWYkSzO3F2LCdWCmISnEWM432WIVWYMIiDyBvtch
+ xOrIreg9vc4/7/EVN4A==
+X-Authority-Analysis: v=2.4 cv=AaSB2XXG c=1 sm=1 tr=0 ts=6a7e159e cx=c_pps
+ a=mPf7EqFMSY9/WdsSgAYMbA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=pGLkceISAAAA:8
+ a=x2SIRoQZ2ETBtXEx6nMA:9 a=CjuIK1q_8ugA:10 a=dawVfQjAaf238kedN5IG:22
+X-Proofpoint-ORIG-GUID: cRh0brq9N7wTY-tXO8VAjluWi5v9YbfI
+X-Proofpoint-GUID: cRh0brq9N7wTY-tXO8VAjluWi5v9YbfI
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEzMDEzOCBTYWx0ZWRfX41OEP2I3rx6/
+ yft81Xam7oc2fZbm+ikgk+tl/pl4NAUDvSsPbSSgoSyLZ42DwhMvv57P4n85DRKWRnsPOo2pKsW
+ oLXjIfTCLPtE1W76GJvKhUKvVq9ZUUc=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-13_06,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 malwarescore=0 clxscore=1015 priorityscore=1501 spamscore=0
+ impostorscore=0 suspectscore=0 bulkscore=0 lowpriorityscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608130138
 
-On Mon, Jul 20, 2026 at 11:06:07PM +0800, Hans Zhang wrote:
-> [You don't often get email from 18255117159@163.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
->
-> Replace these with dw_pcie_get_pcie_cap(). The hardware is already enabled
-> by the driver before ls_pcie_ep_probe() and before the interrupt handler
-> runs. dw_pcie_get_pcie_cap() will cache the offset on first call, and
-> subsequent calls (including inside dw_pcie_ep_init) will use the cached
-> value without re-searching.
->
-> Signed-off-by: Hans Zhang <18255117159@163.com>
+On Sat, Aug 08, 2026 at 12:37:57PM -0500, Aaron Kling via B4 Relay wrote:
+> From: Aaron Kling <webgeek1234@gmail.com>
+> 
+> The Retroid Pocket 6 is a high-performance Android-based handheld gaming
+> console powered by the Qualcomm Snapdragon 8 Gen 2 processor featuring a
+> 5.5-inch AMOLED touchscreen.
+> 
+> This is based on the support by ROCKNIX, however their history does not
+> show who the original author was, so direct attributation cannot be
+> given.
+> 
+> Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
 > ---
+>  arch/arm64/boot/dts/qcom/Makefile                  |   1 +
+>  .../boot/dts/qcom/qcs8550-retroidpocket-rp6.dts    | 122 +++++++++++++++++++++
+>  2 files changed, 123 insertions(+)
+> 
+> +
+> +	vdd_disp_1v8: vdd-disp-1v8-regulator {
 
-Reviewed-by: Frank Li <Frank.Li@nxp.com>
+regulator-foo
 
-> In pci-layerscape-ep, dw_pcie_find_capability() is called in:
->
->   ls_pcie_ep_probe()
->     -> offset = dw_pcie_find_capability()
->     -> pcie->lnkcap = dw_pcie_readl_dbi(offset + PCI_EXP_LNKCAP)
->     -> dw_pcie_ep_init()
->     -> ls_pcie_ep_interrupt_init()
->         -> devm_request_irq(..., ls_pcie_ep_event_handler)
->           -> ls_pcie_ep_event_handler()
->             -> dw_pcie_find_capability()
-> ---
->  drivers/pci/controller/dwc/pci-layerscape-ep.c | 9 +++------
->  1 file changed, 3 insertions(+), 6 deletions(-)
->
-> diff --git a/drivers/pci/controller/dwc/pci-layerscape-ep.c b/drivers/pci/controller/dwc/pci-layerscape-ep.c
-> index 8936975ff104..b2d0b51df3c5 100644
-> --- a/drivers/pci/controller/dwc/pci-layerscape-ep.c
-> +++ b/drivers/pci/controller/dwc/pci-layerscape-ep.c
-> @@ -74,7 +74,6 @@ static irqreturn_t ls_pcie_ep_event_handler(int irq, void *dev_id)
->         struct ls_pcie_ep *pcie = dev_id;
->         struct dw_pcie *pci = pcie->pci;
->         u32 val, cfg;
-> -       u8 offset;
->
->         val = ls_pcie_pf_lut_readl(pcie, PEX_PF0_PME_MES_DR);
->         ls_pcie_pf_lut_writel(pcie, PEX_PF0_PME_MES_DR, val);
-> @@ -83,9 +82,6 @@ static irqreturn_t ls_pcie_ep_event_handler(int irq, void *dev_id)
->                 return IRQ_NONE;
->
->         if (val & PEX_PF0_PME_MES_DR_LUD) {
-> -
-> -               offset = dw_pcie_find_capability(pci, PCI_CAP_ID_EXP);
-> -
->                 /*
->                  * The values of the Maximum Link Width and Supported Link
->                  * Speed from the Link Capabilities Register will be lost
-> @@ -93,7 +89,8 @@ static irqreturn_t ls_pcie_ep_event_handler(int irq, void *dev_id)
->                  * that configured by the Reset Configuration Word (RCW).
->                  */
->                 dw_pcie_dbi_ro_wr_en(pci);
-> -               dw_pcie_writel_dbi(pci, offset + PCI_EXP_LNKCAP, pcie->lnkcap);
-> +               dw_pcie_writel_dbi(pci, pci->pcie_cap + PCI_EXP_LNKCAP,
-> +                                  pcie->lnkcap);
->                 dw_pcie_dbi_ro_wr_dis(pci);
->
->                 cfg = ls_pcie_pf_lut_readl(pcie, PEX_PF0_CONFIG);
-> @@ -266,7 +263,7 @@ static int __init ls_pcie_ep_probe(struct platform_device *pdev)
->
->         platform_set_drvdata(pdev, pcie);
->
-> -       offset = dw_pcie_find_capability(pci, PCI_CAP_ID_EXP);
-> +       offset = dw_pcie_get_pcie_cap(pci);
->         pcie->lnkcap = dw_pcie_readl_dbi(pci, offset + PCI_EXP_LNKCAP);
->
->         ret = dw_pcie_ep_init(&pci->ep);
-> --
-> 2.34.1
->
->
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vdd_disp_1v8";
+> +
+> +		regulator-min-microvolt = <1800000>;
+> +		regulator-max-microvolt = <1800000>;
+> +
+> +		gpio = <&tlmm 70 GPIO_ACTIVE_HIGH>;
+> +		enable-active-high;
+> +	};
+> +
+> +	vdd_disp_2v8: vdd-disp-2v8-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "vdd_disp_2v8";
+> +
+> +		regulator-min-microvolt = <2800000>;
+> +		regulator-max-microvolt = <2800000>;
+> +
+> +		gpio = <&tlmm 142 GPIO_ACTIVE_HIGH>;
+> +		enable-active-high;
+> +	};
+> +
+> +	ts_avdd_3v0: regulator-ts-avdd-3v0 {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "ts_avdd_3v0";
+> +
+> +		regulator-min-microvolt = <3000000>;
+> +		regulator-max-microvolt = <3000000>;
+> +
+> +		gpio = <&tlmm 144 GPIO_ACTIVE_HIGH>;
+> +		enable-active-high;
+> +	};
+> +
+> +	ts_vddio_1v8: regulator-ts-vddio-1v8 {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "ts_vddio_1v8";
+> +
+> +		regulator-min-microvolt = <1800000>;
+> +		regulator-max-microvolt = <1800000>;
+> +
+> +		gpio = <&tlmm 102 GPIO_ACTIVE_HIGH>;
+> +		enable-active-high;
+> +	};
+> +};
+> +
+> +&mdss_dsi1 {
+
+Out of place.
+
+> +	status = "disabled";
+
+Isn't this a default? If so, no need to repeat it.
+
+> +};
+> +
+> +&i2c_hub_3 {
+> +	clock-frequency = <100000>;
+> +
+> +	status = "okay";
+> +
+> +	touchscreen@38 {
+> +		compatible = "focaltech,ft5426";
+> +		reg = <0x38>;
+> +
+> +		interrupt-parent = <&tlmm>;
+> +		interrupts = <15 IRQ_TYPE_EDGE_FALLING>;
+> +		reset-gpios = <&tlmm 14 GPIO_ACTIVE_LOW>;
+> +
+> +		vcc-supply = <&ts_avdd_3v0>;
+> +		iovcc-supply = <&ts_vddio_1v8>;
+> +
+> +		pinctrl-0 = <&ts_p_rst_default &ts_p_int_default>;
+> +		pinctrl-1 = <&ts_p_rst_sleep &ts_p_int_sleep>;
+> +		pinctrl-names = "default", "sleep";
+> +
+> +		touchscreen-size-x = <1080>;
+> +		touchscreen-size-y = <1920>;
+> +		touchscreen-swapped-x-y;
+> +	};
+> +};
+> +
+> +&pmk8550_pwm {
+> +	status = "okay";
+> +};
+> +
+> +&remoteproc_adsp {
+> +	firmware-name = "qcom/sm8550/retroidpocket/rp6/adsp.mbn",
+> +			"qcom/sm8550/retroidpocket/rp6/adsp_dtb.mbn";
+> +
+> +	status = "okay";
+> +};
+> +
+> +&spk_amp_l {
+> +	firmware-name = "qcom/sm8550/retroidpocket/rp6/aw883xx_acf.bin";
+> +};
+> +
+> +&spk_amp_r {
+> +	firmware-name = "qcom/sm8550/retroidpocket/rp6/aw883xx_acf.bin";
+> +};
+> 
+> -- 
+> 2.54.0
+> 
+> 
+
+-- 
+With best wishes
+Dmitry
