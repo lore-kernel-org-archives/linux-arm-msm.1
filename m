@@ -1,72 +1,60 @@
-Received: from mail-qv1-f51.google.com (mail-qv1-f51.google.com [209.85.219.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8F6436195D
-	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 07:09:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.219.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D40F2D8DA8;
+	Thu, 13 Aug 2026 07:19:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786604969; cv=none; b=aAfrCdhdzmjZnWielHURoevshTxiRbDun6SINB0++wHTbEKT/526NQHsPEAt9q8PFPJpShzWbnqH5vflq5FPHx3h+TLumunLBmLcwT6t69V5j0rv6exsjXXKZUKU0nXkLhYpT+UmFdl9AIggpda2F9Yfh1C9EXzQPG9nvT5VJYU=
+	t=1786605541; cv=none; b=VzJ42uy1P5P4FS996K+2U0i8cB2z0v1TTGSq27ZAJnYc1G04VIxjaQ+2PfN7u69uo3abRqal9zqEETkjVRNwcv4XuX1sJTWr1uDDeI5ApF3M2B56wmW3LkOWS1B02xZagYsMj05N+eez2sY25Ek4JFqimb4c5NxpvUnqCGC7RdA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786604969; c=relaxed/simple;
-	bh=g4Oc/MET58u7bnkBeWdGiQn7AbTG1XWXh7hiIo63e1M=;
-	h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
-	 Content-Disposition; b=b7Us7ifO86Rj30xfVtiEMB12huaDL+x7Fg6vdyuys6qaEBXM7TpaNKleT7z8dOTKSaqSaiYrlWe7VLnhpDnXDfXAYmawdBY5Y7HRWAaXBoahzp0nVW6MTqeKaxUYkw7IHK/9779jn+al9gAu25gjZdis4UFhfJdf7Uhug9k5MuI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=qtKlC/ID; arc=none smtp.client-ip=209.85.219.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1786605541; c=relaxed/simple;
+	bh=QdYe9RJeMNsxpKwZFiURVJVpUDQL5B3dzbulFEKTXUQ=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=TttE9/kx6ghTlbwMmU2kijcq37Fie1Zp07sq8D17tn66KrBvWtxuCF9IQSlKYtC0akQE0t1Pe68h4EhQcJ3AqlqxjenD+3b1lgxBTF+X/uma6zgf0k94LZeOfQhD87FEyiH7GPAEGY2WNMfIywbvu5LNcS8+NmYJGgooRJpSTEQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=o1Wn/cbM; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="qtKlC/ID"
-Received: by mail-qv1-f51.google.com with SMTP id 6a1803df08f44-8ff20870ac7so10614716d6.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 00:09:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786604967; x=1787209767; darn=vger.kernel.org;
-        h=content-disposition:content-type:mime-version:message-id:subject:cc
-         :to:from:date:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=NZroItyF8XgwHC+4+NtzUTIlcTQFjRyMSooUeMz2hX0=;
-        b=qtKlC/IDW2Vm0X6SNutWuWLKBLqoDtbOmdepgsFpHOCQ7HqfAXQHn5EjJl01JGnEYp
-         voQaMq7wgGzP09y9qM9IpiWFkjei+hjU6a6PRGkmivA61JMsS9SOKBli1ueIDxPEbUNz
-         oZIk2AmlTTRtVDUt/MamSLrjNb/IOtXQ41WPbfWGQ/0wxF9IeiJN5M6aiD+uh63rzRiq
-         KbEN4jIPbVsjUEzc7bX23+KJlwiSZh6zcOT62Naz/q1aaCETO118mRpim7Z9W/cwTefp
-         Gyo2CVGioVQ4GkmHhHgQZlNVAoK6EoBvmN1QZAPsGgVHLcrZDh4XMXfZv6zuOeoawL/U
-         eVLw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786604967; x=1787209767;
-        h=content-disposition:content-type:mime-version:message-id:subject:cc
-         :to:from:date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=NZroItyF8XgwHC+4+NtzUTIlcTQFjRyMSooUeMz2hX0=;
-        b=bbOI79FEFgXFTBsYm0NFR0DYY6cypm4aRk5mMPAW7UQPIG+UdlHIAk86tI0YsQLpKf
-         kMhNxUKoHRZjq+KfTF4bjHPJO7rtrdHj1yWRErA1i9W3/5HIvLFwwS8MQmi6MIJPxeyl
-         oJ9VKnIIvJmZQZPGt5zfeeJOI4sB5I1fhh+frD4LfPaUz4Ro/K/yYArM6Tkk6f8a0tn4
-         d+XW3GpUI1WhfYWjuPGeVZ5d4/3IXVlu0/F1+iiuFsdpw/0i2ntS7oZ8ZEnvstOtV4Cg
-         jbh0ZBIoiJectwvedaD8CaH2ihMYDxfZJLqNAETvaDdQZDdlIB7Pu1V3mMzEL+k65Eqi
-         xi9Q==
-X-Forwarded-Encrypted: i=1; AHgh+Rpx1V6rV/GvLUEO1qgznMpGdJw2A9S/Xx8jDfdn8JSbR+pyjxV7kcvePLXQ28aV12emWk5clAl/urDbsi5p@vger.kernel.org
-X-Gm-Message-State: AOJu0YzLTxN1p3B2k1LERIiAoJ1PE1IK0TvSgKTKQ42t8CKCcvzib5Yf
-	59nNLjdgsEN9SbRdagi2ZAyoDLyowxINBkODTNqY9IsqH73sKoOpZfpk
-X-Gm-Gg: AR+sD11irhtTJAPSYcumSHhNF5s1sdQx+BK80FJ7YarHvlCk9k4LfoPnPu8AM4aDQ/V
-	LCnSo/km29vRaFYalI7wWIDE2H4UJm8GAYRxwSA9PaaUzZViSPhTwWdV4OgsmGoRThzPdbH3QCC
-	ULgXFm1EusqmfPVhWvAKzHn5p5/9bZUWtEJCDUU9ZO7url/+MMRkCrIQuy/cJYmxLg17sqYMoHe
-	hcsCL+yrx/qkX+94wvZ/qLL/Zu9k3x7Gu9/410F4pWq4uQ5xI7O+fBPJwS3tZ8zOjoESkiL0ERS
-	AUZypR3hfb1JpgQTsGVuL6pXVXrkYMYh+mZDyjWEETWSDgwrTqHFFpDTKQcUgoSQAZ71Pix3o2Z
-	BszpKedZDEpn6gjoeKXceam0ehqAPdRHEuuxkZAnDkLac4BmfHo2T4+NYsx5apqnLCh6TBC4bCY
-	/2TROqQShSvCE1q/jl0B2vzxKj1oQJXqT++EgAIZWrpToIum/vGoAM
-X-Received: by 2002:ad4:4ee8:0:b0:907:bf98:c8fe with SMTP id 6a1803df08f44-90a80c5013fmr27517096d6.23.1786604966749;
-        Thu, 13 Aug 2026 00:09:26 -0700 (PDT)
-Received: from localhost ([37.19.206.57])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-90a817bb1a6sm9190316d6.12.2026.08.13.00.09.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2026 00:09:26 -0700 (PDT)
-Date: Thu, 13 Aug 2026 10:09:21 +0300
-From: Dan Carpenter <error27@gmail.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="o1Wn/cbM"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7A6501F000E9;
+	Thu, 13 Aug 2026 07:18:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786605540;
+	bh=qZdbRmYqK/NrvcZBL3tWkYiVhgLDOnhq5mM4HObQAxw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=o1Wn/cbMNYFQmCUsmbGr3DdlRdbtKgTn11O8kaXLF0Qkoo68sKSVSbjTJO9JrBfaP
+	 3DwLp62nQGHEuHmTwOSbF47l1Tpp8CzAnCdlm5IN15uXiF9xWUBImjCXSvrPnLcCrX
+	 vhNOo1VCg1zYLjOsU+fWnYRTlBY1KBM/QzNTMnK6uHC+NMTeZrm/Ll9NdRsfqM1JG4
+	 sH74IfNAwkn3q0yWImbSf/GfOa6Hx0N6PlxOzwmKtiTK3piMnq/2yxsqG2CYeYIpGb
+	 O30vYFtBTQoDfeeUyizF0NtaBYNCV45wQhWQfACxDmR6wq3kFIccPz6rwLqIG9en36
+	 Hts6eddT+YSZg==
+Date: Thu, 13 Aug 2026 08:18:54 +0100
+From: Sudeep Holla <sudeep.holla@kernel.org>
+To: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+Cc: Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>,
+	Cristian Marussi <cristian.marussi@arm.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	MyungJoo Ham <myungjoo.ham@samsung.com>,
+	Kyungmin Park <kyungmin.park@samsung.com>,
+	Chanwoo Choi <cw00.choi@samsung.com>,
+	Dmitry Osipenko <digetx@gmail.com>,
+	Thierry Reding <thierry.reding@kernel.org>,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>,
+	Rajendra Nayak <rajendra.nayak@oss.qualcomm.com>,
+	Pankaj Patil <pankaj.patil@oss.qualcomm.com>,
 	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	kernel-janitors@vger.kernel.org
-Subject: [PATCH next] soc: qcom: smem: Fix signedness bug in smem_dram_parse()
-Message-ID: <an1toQ-acGR0kOWj@stanley.mountain>
+	arm-scmi@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+	devicetree@vger.kernel.org, linux-pm@vger.kernel.org,
+	linux-tegra@vger.kernel.org
+Subject: Re: [PATCH RFC 01/10] firmware: arm_scmi: Add SCMI QCOM Generic
+ Extension Protocol documentation
+Message-ID: <20260813-remarkable-handsome-heron-e99e78@sudeepholla>
+References: <20260724-rfc_v8_scmi_memlat-v1-0-cb732bcff1f4@oss.qualcomm.com>
+ <20260724-rfc_v8_scmi_memlat-v1-1-cb732bcff1f4@oss.qualcomm.com>
+ <20260724-crouching-starfish-of-apotheosis-d1cdf8@sudeepholla>
+ <f39b2be0-b6d6-43a6-a412-44ff433c51f6@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -75,32 +63,139 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-X-Mailer: git-send-email haha only kidding
+In-Reply-To: <f39b2be0-b6d6-43a6-a412-44ff433c51f6@oss.qualcomm.com>
 
-The "ver" variable is type "enum ddr_info_version".  Enum types are
-dependent on the compiler but in practical terms here, "ver" is
-basically an unsigned int.  It needs to be signed for the -EINVAL
-to be handled correctly.
+On Tue, Aug 04, 2026 at 02:07:28AM +0530, Sibi Sankar wrote:
+> 
+> On 7/24/2026 2:43 PM, Sudeep Holla wrote:
+> > On Fri, Jul 24, 2026 at 12:48:06PM +0530, Pragnesh Papaniya wrote:
+> > > Add System Control Management Interface (SCMI) Qualcomm Generic Extension
+> > > Protocol documentation. It consists of a small set of generic SET/GET/
+> > > START/STOP commands, which is used to turn on/off and configure Qualcomm
+> > > SoC specific algorithms that run on the SCP.
+> > > 
+> > > It currently only supports MEMLAT (memory latency governor) algorithm.
+> > > The immutable pairing of the MEMLAT algorithm string with the supported
+> > > param_ids associated with it are documented here.
+> > > 
+> > > Co-developed-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+> > > Signed-off-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+> > > Signed-off-by: Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>
+> > > ---
+> > >   .../arm_scmi/vendors/qcom/qcom_generic.rst         | 954 +++++++++++++++++++++
+> > >   1 file changed, 954 insertions(+)
+> > > 
+> > > diff --git a/drivers/firmware/arm_scmi/vendors/qcom/qcom_generic.rst b/drivers/firmware/arm_scmi/vendors/qcom/qcom_generic.rst
+> > > new file mode 100644
+> > > index 000000000000..42e327d53841
+> > > --- /dev/null
+> > > +++ b/drivers/firmware/arm_scmi/vendors/qcom/qcom_generic.rst
+> > > @@ -0,0 +1,954 @@
+> > > +.. SPDX-License-Identifier: GPL-2.0
+> > > +.. include:: <isonum.txt>
+> > > +
+> > > +==================================================================================
+> > > +System Control and Management Interface (SCMI) Qualcomm Generic Extension Protocol
+> > > +==================================================================================
+> > > +
+> > > +:Copyright: |copy| Qualcomm Technologies, Inc. and/or its subsidiaries.
+> > > +
+> > > +:Authors:
+> > > +   - Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+> > > +   - Pragnesh Papaniya <pragnesh.papaniya@oss.qualcomm.com>
+> > > +
+> > > +System Control and Management Interface Qualcomm Generic Extension Vendor Protocol
+> > > +==================================================================================
+> > > +
+> > > +System Control Management Interface (SCMI) Qualcomm Generic Extension Protocol
+> > > +consists of a small set of generic SET/GET/START/STOP commands, which is used to
+> > > +turn on/off and configure Qualcomm SoC specific algorithms that run on the SCP.
+> > > +Each algorithm is identified through an algorithm string and has an immutable list
+> > > +of param_ids. All supported algorithms (currently just MEMLAT) have their own
+> > > +dedicated section and are listed after the generic commands.
+> > > +
+> 
+> Hey Sudeep,
+> 
+> Will set some context here, this version of the vendor protocol is currently
+> running in the wild on 5 SoCs (Hamoa, Purwa, Glymur, Mahua, Kaanapali).
 
-Fixes: 1d234eeafc56 ("soc: qcom: smem: Expose DDR data from SMEM")
-Signed-off-by: Dan Carpenter <error27@gmail.com>
----
- drivers/soc/qcom/smem_dramc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+While noted, this does not impact the code quality or review process for an
+entirely new feature. That context would be relevant for a localized fix or
+system quirk, but it is not applicable here.
 
-diff --git a/drivers/soc/qcom/smem_dramc.c b/drivers/soc/qcom/smem_dramc.c
-index 63ebe7f6db59..6283e9317f19 100644
---- a/drivers/soc/qcom/smem_dramc.c
-+++ b/drivers/soc/qcom/smem_dramc.c
-@@ -382,7 +382,7 @@ struct dentry *smem_dram_parse(struct qcom_smem *smem, struct device *dev)
- 		return ERR_PTR(-ENODATA);
- 
- 	ver = smem_dram_infer_struct_version(actual_size);
--	if (ver < 0) {
-+	if ((int)ver < 0) {
- 		/* Some SoCs don't provide data that's useful for us */
- 		return ERR_PTR(-ENODATA);
- 	} else if (ver == INFO_UNKNOWN) {
+> The ABI/Specification that this vendor protocol uses can't be changed in
+> any way since other Os'es like Windows/Android expect it to behave as
+> described in this document and will break userspace.
+
+The current rationale isn't entirely clear to me. Windows historically favors
+ACPI over native SCMI, meaning that supporting a proprietary vendor protocol
+would require non-native workarounds potentially hidden within interfaces like
+PEP. I am skeptical of this architectural direction. Since Android leverages
+the Linux kernel and already manages this through vendor modules, maintaining
+those as modules seems like the optimal path until we agree on the interface
+that can be merged.
+
+> series is meant for the devfreq portion (since it introduces a new devfreq
+> governor) and is not for the vendor protocol. We certainly can take design
+> improvements for future revisions but making changes to this major/minor
+> version of the firmware isn't possible.
+>
+
+Given that this patch series has been under discussion for nearly two years,
+please provide a summary of the feedback that has already been incorporated
+to address these concerns just for sake of argument and in your defence.
+
+To clarify, the vendor protocol space is strictly intended for
+platform-specific functionalities that cannot be standardized; it should not
+be used to bypass standardization for convenience. It appears no evaluation
+was done to determine if or why the standard performance protocol was
+insufficient. Had that assessment occurred, I would expect the proposed
+interface to align much more closely with the standard definitions as I
+previously mentioned.
+
+> Plenty of folks running linux on these SoCs would benefit a great deal from
+> this series landing, so please have a bit of patience, take a look at the
+> documentation/series as a whole. I still feel we should be able to land this
+> series in a form that is acceptable to you. However, if you still feel you
+> have
+> to NAK this series regardless of its usefulness to the users, please do list
+> the
+> reasons and we'll try our best to convince you otherwise.
+> 
+
+The core issue here is that the proposed vendor protocol interface has been
+presented as a finished product without open discussion or a willingness to
+iterate based on upstream feedback. This approach bypasses standard
+development processes.
+
+IMO these vendor protocol interfaces must be debated on the mailing list prior
+to finalization, similar to the 'code-first' prototyping model used for new
+ACPI specifications or SCMI early prototyping. If an interface is developed
+in isolation and then submitted with an expectation of immediate acceptance
+without modification, we cannot approve it. I recommend we pivot to an open
+review of the interface design itself.
+
+> > This multiplexer 'N' random algorithn into one single custom SCMI protocol ID
+> > (0x80) seems to go against the general SCMI design principle and this seems
+> 
+> Only the strings documented are allowed by the vendor protocol while the
+> rest are filtered out, so we clearly don't have to worry about this. Also
+> grouping a class of devfreq algorithms into a single vendor protocol should
+> be treated as a SoC vendor design choice.
+> 
+
+This is precisely why I previously suggested defining MEMLAT as its own
+distinct protocol. Doing so maintains architectural consistency and adheres to
+core SCMI principles.
+
+> > like a deliberated attempt to circumvent the standard SCMI protocol template.
+> > Standard SCMI expects distinct features to occupy their own vendor protocol
+> > IDs and utilize standard protocol discovery.
+> > 
+
+^^^ as mentioned above
+
 -- 
-2.53.0
-
+Regards,
+Sudeep
