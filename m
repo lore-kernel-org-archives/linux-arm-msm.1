@@ -1,67 +1,87 @@
-Received: from mail-yx1-f49.google.com (mail-yx1-f49.google.com [74.125.224.49])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3ACD03B71B9
-	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 19:09:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=74.125.224.49
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 728063B5304
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 19:27:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786648196; cv=none; b=Jt8tWuxKFC/fMULR9qWfuPtn+adgGsrnTJxpcUIYCMPnh9hJG7EmqdUnGxiASRvZuZi6CySzxi8+cI8v1j9Zr5PGWOnlMbL/LIBQTthtJ3xJJjeASdF63lmm/Dwv7eEJrNBq3SnB/JVapJ9T+1kQslgfFNQSenKOXZ8X3IF4KMw=
+	t=1786649259; cv=none; b=PbE2F0IXdNYXY6JwQ4Jh4vPOuNgD+4u20w1rEE+zzXDOGAIHqGSXFr7vZy/KsO4ZUeQVj8EkBkClvqOfx8SUavpwmvfv2rCTWb1MBSolK0wZuUQhHWB2MVZYZ7H8e/AhV0ewqU3VtEx2XO0jJqQOMkvwCaXv+7//mXuYIAuF0k4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786648196; c=relaxed/simple;
-	bh=J4JFqcLdedRU7+R6sdj8/jYF9LI6Fz5ZYLh2J12HKzw=;
+	s=arc-20240116; t=1786649259; c=relaxed/simple;
+	bh=7a1morCh66UOrKmTjaHtFdf9M1LSa0tAMfrHTv+Ha3g=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Ghr7UHdKXADcotl6hfl0YqSjUo1Urk4LohjA/hbG3N9RJWOlYC5Vn+YLQv8A8BQm1QEEyLKWknbtsblU428Z4Jf/76IQmtO4ovrElU9+yaZb+0zlh6ZptHJV+ck7TMtUapWE9EiGGEEAn41QI/nYeqbe4l3sSBupqxUNRfb0q4E=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=ZeogDSZV; arc=none smtp.client-ip=74.125.224.49
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	 In-Reply-To:Content-Type; b=tPBPo5rR8vxdPT31q+94t3ZP2CA4H8mMCWmbeJoQg0fmLZGZsaz7yaIMqTEkjLb3Cxz3y9Pu4WfBC4jb9baZRwusiHYBOb1ei8eDaiDY49iOtCtUGVTMFsHx57ZqduY9iQCls/J6W5NpkBV3WxiGUlWquZi/U1RfOc/GBs+/JWY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ATjNJaV5; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=C+SBqRwj; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="ZeogDSZV"
-Received: by mail-yx1-f49.google.com with SMTP id 956f58d0204a3-66c70d1672cso305799d50.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 12:09:55 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ATjNJaV5";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="C+SBqRwj"
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67DIgxJM3619136
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 19:27:36 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	D42vDXjyJMK1PmVkhCovHX+1s2WZnnUYkEVKSg7Oya0=; b=ATjNJaV543iwwvh2
+	j4cDvftJTH6bv1xiwM4jk+19IdUHYpXpIcXjZ9o9ETVAMWeNbcPH36nbDCsXqLze
+	uFjVeCYX49KwGGauVZShNwK7jI8cbNhXbLbAp0Qq1ztGqRe7GKoVi81BeqcTL0OS
+	Lgk2EnN3E/U86eh6YFLV/EkgZa158XpryGxZCeR/TWWrSYTBSmyP5IAG6QZ2H+xF
+	cWmXK96WqDNdM/f8bK6AQ8Iq3zz6zEie1UOd/RCLoPr7Qq5BDGYjVQ/dHz7Q9b4U
+	kVYYdhxICA7xTqRzAowSGE97woYNRUKf0D/X21tQgcEPV7KVrs03LB0hbT/g3Dn7
+	5Cor5g==
+Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g1h1us18m-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 19:27:36 +0000 (GMT)
+Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-c85798977dcso286501a12.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 12:27:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786648194; x=1787252994; darn=vger.kernel.org;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=CH8QJWbiTZSTmOX6SA35bZzI1sSsujgIbdHxX53JqF8=;
-        b=ZeogDSZVs0aJxPAUxTFai42uL6gBJfQOcrZXFfcfyWv++9TXfaev8hCE2NRNj+zE/l
-         C7dMeGOF7fKzRwPTYdzZ5Wo+xiDgNpA9Myl7R0OuVLd7b4le5+FPYQEaelLyQOyMmXZ6
-         mvhuePurCdvcoxQweF5VDYAfpT+L+u2RDJ9DNvt+fkw6w0LlnvQlHOfVgqUBWtdHzxtD
-         RQpB1ILQmqdD4Gdu84kX9YBIrR5XQAIgddZjD96n0UmbC7CvCGyjg67J0DxX16b9xudH
-         DTIhe8FP+oq9PDbbsv2/Ns5BTIl/3ENHpoLNaJ6dfQwRot9rPf0uZzEXU0YzA4FROjY5
-         7nLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786648194; x=1787252994;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1786649255; x=1787254055; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=CH8QJWbiTZSTmOX6SA35bZzI1sSsujgIbdHxX53JqF8=;
-        b=e9yL1diJCJuhE4iEBORNh0gR45nUtOm9+oC71pXIAt5nQlEd4J9s4rIPX6Y0sGS3M9
-         PDvliSHcJ+VpNV14c7vpzCcwxc+mcbsRL5SDLVaVRSibW9/KrlxPw3Ng6frrG5ehgT0M
-         BB66RiGuFMo7AMbh4MTWgQs7YoO/zZxON0HIrT/o95tdXnMqZlyl5VhZIphXVmOd3PvH
-         7RoXt80NzKaGKZCpiamWzkkuLLIIGm512JtuAPXtx+8s1MkPjN/IYbUrOpcFauK3Bu6g
-         76QClBMbjq6U7Zed2Np8VOaboMYWIY/nshMhAonqQcoy6gGg8YeMofrf3Z+idsW+Oeqe
-         393Q==
-X-Forwarded-Encrypted: i=1; AHgh+Rp5UDv/9Qm/mWan/X2SKW61psHEDliG3eq9g9t3v3ee0pExaaBs8suwNpHwFqHcPFIeLzYtlo9kRYqJgObU@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzg9+tbnY6lk3sE8jh35o2mo0zyhDwOshAtwgVQGu13vIoVPAXu
-	oAHfD9ZsqHJ9A3LDJDdLiIX/D/Cs4jXJSfVzNfUP0IaqWh/03fGzF/Dt
-X-Gm-Gg: AR+sD12m/zP/y63rpAXTFcYBUQ3w0Bj50OPnyasuRJ0v3JVgbHobWVQQMOj4koDfnFi
-	W4AYKWk8GFe7aQEbXiQ6h0vtBAlwfrVJM1PNSRA6nPIxsS83ITWr+quoM0H4G+kJSN9QijbzPcL
-	khU9KaWWLJSc6aLib1RKPd0HEcNDSGFaCkh2x8c3GSz9TJhQKVFJXVHyOFf7F826JuEBnsHHaaN
-	YdAJlgOpp4ky9LyVcpb9UvMDQmL+93o9LnVqK0MQwnN0OIrZ4UMX3k2tXN6RMdWu6NKjzYlox0Y
-	AUQt8KojEHHIOKA68t3l/aObz40eIVp557OWF9wV22mZg+0d9P96FG51V7LnMTiKedLkUI8aX6V
-	/QlTfaVnTMYm9DDSAx8UrpoHVVbQx0KeQOsQOqqjtLqdQSiRRgfrsw2oDUP5s8aS8N+9khOw2u+
-	oaSq1tkZggiO3dbEQ4QQK4Qp0NwDPjDcBxeWdMz3of9zfyMh7jDlXtyzr/MnZzkst4IB2eq8Sx4
-	g==
-X-Received: by 2002:a05:690e:d08:b0:66c:2d72:38d9 with SMTP id 956f58d0204a3-66c72b1d9e1mr353282d50.11.1786648193908;
-        Thu, 13 Aug 2026 12:09:53 -0700 (PDT)
-Received: from [10.138.10.6] ([185.98.168.14])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-836c1777930sm3475807b3.31.2026.08.13.12.09.51
+        bh=D42vDXjyJMK1PmVkhCovHX+1s2WZnnUYkEVKSg7Oya0=;
+        b=C+SBqRwjAZWGeqhVD86ZtXNm/hjkJnNunPn/S6Apg2tqwYOEcW4BLWlPGk0qoCHZX1
+         902Ii4EzqD47zabei44S/qs61eVkpCpEjeZE6cEyxAEzfuNr5Xxf+tzReJ1c8tSorNGE
+         zgEDfn/LrZ03GS16tBy/dMSDe/UlXO+GzHErpPHNCwzOmM8LbjEmqfx4+lZRVbhLL4Xs
+         41K6P5qVDI5zrq62fEF+DPFc5UH3lB9SJEXl5i3U7Vap6UGtgokvFQwpJQYJRMekGHe0
+         FRh36vSGZr6N/MInksuK2ztouWAIpfx/Io8oDUWz7O3OVfenVhmVi8tzf9k55v6iGSrj
+         SU6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786649255; x=1787254055;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=D42vDXjyJMK1PmVkhCovHX+1s2WZnnUYkEVKSg7Oya0=;
+        b=QI+13u4b/cM6r+kyKYSo+2umZ9fEAyMfJOYg+yhyVgZjm2QaSfksDcB3aduYv0IsUM
+         cQm3fW9qPwyQ6gxQ5LUgeUb3ZefKaOx2P3zUgNMxmmU5X/YnexwByIefl+F+FSzTekmd
+         OHuVazYqAF1G6j3u5hr1VH4izIUi2ooFJY4br9e9xxyc61HxxSo1ZbgmBsr6SuIEN0dy
+         X3BWOx866T4FiKKsg+0Th6HpzRyPeJYH4iCqjx2tL+hOju2JZioCYrcrShH9svBiMYvM
+         vG8cKPzlMpMGnFnNbxP0SCVl8Bzb66bD8Bqsh/E99Fpocb85efll77A8nv7gea+1kHDi
+         3KYA==
+X-Forwarded-Encrypted: i=1; AHgh+Ro0HZ0qU9+7EWGtXTnisTkkvprHro/O9EkQ2BAac0syDP1PrGwGsKAaKJU14GlKyo6wNZ6AaYq304vccxNo@vger.kernel.org
+X-Gm-Message-State: AOJu0Yzouc1nXmruEJtb/MMfZCKpsxK6iS2ZkV5qj6hBXijNaAeMnHaL
+	+81S79LLxXHa2UR34l7tnPfGZhZqzYDUcPUNXJ/CKTI5r8C4hY6S/LetrqMIS/s/4yhyB3pQFLq
+	MKJveJitrt35VPpbT8PGfFesMdrCeViN94d4F/tGcYqcyoOUjUvMycgZG7/un0LMTzblO
+X-Gm-Gg: AR+sD10CBPGwnhqcEvdaSf7otyObNnjeM7d+M1qKtNf2dwYpiKqKM3GOpLaKHw0Oe/B
+	h4tJ1qYm+wAYJtEZwXVqoorf2lJFwfrGp+CSlHXuV32tscNEyAvqOOSTnlSim1RM/SIKQjULMiC
+	vO07HeVr86bXW1kIUtSqluCfprNR/PK9HwzArOTN6K9Bfkw28GXlwhXO+EMiELMaArEF0FIdHrG
+	mGtZ4GaQqFMMzveRIzVoL8DPxmu71i3p+y+bPYAfrcA/S1XtcXAvIU+oMHUzuQE43vywu7+fm1M
+	JI1r215H6NpyFOMfKo+pnH9O9+xXxJU1At1AopTTlb7imiQW2KmxvxCVUhijMx6sH2qqog/4nM7
+	KbdJCPwuxt0JpnUkIgqKrYZ+ycY2h/MXZ
+X-Received: by 2002:a05:6a20:6a1f:b0:3c6:61b9:917c with SMTP id adf61e73a8af0-3cc71ced6e0mr46773637.11.1786649255148;
+        Thu, 13 Aug 2026 12:27:35 -0700 (PDT)
+X-Received: by 2002:a05:6a20:6a1f:b0:3c6:61b9:917c with SMTP id adf61e73a8af0-3cc71ced6e0mr46684637.11.1786649254456;
+        Thu, 13 Aug 2026 12:27:34 -0700 (PDT)
+Received: from [192.168.2.2] ([49.204.16.42])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-31ec002e857sm11727043eec.23.2026.08.13.12.27.29
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 13 Aug 2026 12:09:52 -0700 (PDT)
-Message-ID: <0d2706c6-79fa-40fc-a24a-6d5ffbf02330@gmail.com>
-Date: Thu, 13 Aug 2026 15:09:36 -0400
+        Thu, 13 Aug 2026 12:27:34 -0700 (PDT)
+Message-ID: <dcb8ee4d-7c01-4de3-8c01-528beaae16bb@oss.qualcomm.com>
+Date: Fri, 14 Aug 2026 00:57:27 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,312 +89,180 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] crypto: qce - Replace with stub driver
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: linux-crypto@vger.kernel.org, Herbert Xu <herbert@gondor.apana.org.au>,
- linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-kernel@vger.kernel.org, Kuldeep Singh
- <kuldeep.singh@oss.qualcomm.com>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Krzysztof Kozlowski <krzk@kernel.org>, Eric Biggers <ebiggers@kernel.org>
-References: <20260731050838.158825-1-ebiggers@kernel.org>
- <a28c2903-0976-4559-b870-4de5553ba9ab@kernel.org>
- <3ba57269-3305-4d80-b3f2-aa82fa59b59d@gmail.com>
- <b9b655a9-c683-4c4e-ba0d-f98577dd2912@kernel.org>
- <20260801162900.GA2021@quark>
- <e7aeec9b-11aa-4635-bde9-fb8c7ca38260@kernel.org>
- <20260801171242.GA3567@quark>
- <CAMRc=McL5QQRk8C8zzkHm+FUj-SAVi5PLJr2pXo8eNpaxXuALg@mail.gmail.com>
- <20260811224110.GC1905@sol>
- <CAMRc=MfVqphaVsfcmUXjGmu6m+F6nJYXgAPuTVjZBwFnd48BkA@mail.gmail.com>
- <bc95e0b0-2cc5-4ad6-a319-ae4e159b92fe@gmail.com>
- <CAMRc=Mcno_F2UuLXZ3ruaVSbYhssVK90m3KM=+dwskLMSp8TXg@mail.gmail.com>
+Subject: Re: [PATCH v2 02/10] hwmon: Add Qualcomm PMIC BCL driver
+To: Guenter Roeck <linux@roeck-us.net>,
+        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-hwmon@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        mfd@lists.linux.dev, Gaurav Kohli <gaurav.kohli@oss.qualcomm.com>
+References: <20260722-qcom-bcl-hwmon-v2-0-febe2805e17b@oss.qualcomm.com>
+ <20260722-qcom-bcl-hwmon-v2-2-febe2805e17b@oss.qualcomm.com>
+ <373bd00e-bfcd-4f6c-b64e-a707af01417c@roeck-us.net>
+ <cdc0fb5c-d277-40b4-8b00-c73eb881c062@oss.qualcomm.com>
+ <4f2d9c51-1059-489c-a469-562ec52015da@roeck-us.net>
+ <24a0ac2f-792e-4296-949c-047d9ce1c1f3@oss.qualcomm.com>
+ <3635cd34-4c11-40fe-a9ff-48b752fb5150@roeck-us.net>
+ <c1db2ca4-ad1c-440f-bff8-eb7660af8021@oss.qualcomm.com>
+ <df2f8d63-4972-4b59-883f-0a919e7cb409@roeck-us.net>
+ <5861906e-2969-4849-b9ec-ff6c7df65dad@oss.qualcomm.com>
+ <66979a1d-d92c-43b2-892d-cd73b6585509@roeck-us.net>
 Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
-Autocrypt: addr=demiobenour@gmail.com; keydata=
- xsFNBFp+A0oBEADffj6anl9/BHhUSxGTICeVl2tob7hPDdhHNgPR4C8xlYt5q49yB+l2nipd
- aq+4Gk6FZfqC825TKl7eRpUjMriwle4r3R0ydSIGcy4M6eb0IcxmuPYfbWpr/si88QKgyGSV
- Z7GeNW1UnzTdhYHuFlk8dBSmB1fzhEYEk0RcJqg4AKoq6/3/UorR+FaSuVwT7rqzGrTlscnT
- DlPWgRzrQ3jssesI7sZLm82E3pJSgaUoCdCOlL7MMPCJwI8JpPlBedRpe9tfVyfu3euTPLPx
- wcV3L/cfWPGSL4PofBtB8NUU6QwYiQ9Hzx4xOyn67zW73/G0Q2vPPRst8LBDqlxLjbtx/WLR
- 6h3nBc3eyuZ+q62HS1pJ5EvUT1vjyJ1ySrqtUXWQ4XlZyoEFUfpJxJoN0A9HCxmHGVckzTRl
- 5FMWo8TCniHynNXsBtDQbabt7aNEOaAJdE7to0AH3T/Bvwzcp0ZJtBk0EM6YeMLtotUut7h2
- Bkg1b//r6bTBswMBXVJ5H44Qf0+eKeUg7whSC9qpYOzzrm7+0r9F5u3qF8ZTx55TJc2g656C
- 9a1P1MYVysLvkLvS4H+crmxA/i08Tc1h+x9RRvqba4lSzZ6/Tmt60DPM5Sc4R0nSm9BBff0N
- m0bSNRS8InXdO1Aq3362QKX2NOwcL5YaStwODNyZUqF7izjK4QARAQABzTxEZW1pIE1hcmll
- IE9iZW5vdXIgKGxvdmVyIG9mIGNvZGluZykgPGRlbWlvYmVub3VyQGdtYWlsLmNvbT7CwXgE
- EwECACIFAlp+A0oCGwMGCwkIBwMCBhUIAgkKCwQWAgMBAh4BAheAAAoJELKItV//nCLBhr8Q
- AK/xrb4wyi71xII2hkFBpT59ObLN+32FQT7R3lbZRjVFjc6yMUjOb1H/hJVxx+yo5gsSj5LS
- 9AwggioUSrcUKldfA/PKKai2mzTlUDxTcF3vKx6iMXKA6AqwAw4B57ZEJoMM6egm57TV19kz
- PMc879NV2nc6+elaKl+/kbVeD3qvBuEwsTe2Do3HAAdrfUG/j9erwIk6gha/Hp9yZlCnPTX+
- VK+xifQqt8RtMqS5R/S8z0msJMI/ajNU03kFjOpqrYziv6OZLJ5cuKb3bZU5aoaRQRDzkFIR
- 6aqtFLTohTo20QywXwRa39uFaOT/0YMpNyel0kdOszFOykTEGI2u+kja35g9TkH90kkBTG+a
- EWttIht0Hy6YFmwjcAxisSakBuHnHuMSOiyRQLu43ej2+mDWgItLZ48Mu0C3IG1seeQDjEYP
- tqvyZ6bGkf2Vj+L6wLoLLIhRZxQOedqArIk/Sb2SzQYuxN44IDRt+3ZcDqsPppoKcxSyd1Ny
- 2tpvjYJXlfKmOYLhTWs8nwlAlSHX/c/jz/ywwf7eSvGknToo1Y0VpRtoxMaKW1nvH0OeCSVJ
- itfRP7YbiRVc2aNqWPCSgtqHAuVraBRbAFLKh9d2rKFB3BmynTUpc1BQLJP8+D5oNyb8Ts4x
- Xd3iV/uD8JLGJfYZIR7oGWFLP4uZ3tkneDfYzsFNBFp+A0oBEAC9ynZI9LU+uJkMeEJeJyQ/
- 8VFkCJQPQZEsIGzOTlPnwvVna0AS86n2Z+rK7R/usYs5iJCZ55/JISWd8xD57ue0eB47bcJv
- VqGlObI2DEG8TwaW0O0duRhDgzMEL4t1KdRAepIESBEA/iPpI4gfUbVEIEQuqdqQyO4GAe+M
- kD0Hy5JH/0qgFmbaSegNTdQg5iqYjRZ3ttiswalql1/iSyv1WYeC1OAs+2BLOAT2NEggSiVO
- txEfgewsQtCWi8H1SoirakIfo45Hz0tk/Ad9ZWh2PvOGt97Ka85o4TLJxgJJqGEnqcFUZnJJ
- riwoaRIS8N2C8/nEM53jb1sH0gYddMU3QxY7dYNLIUrRKQeNkF30dK7V6JRH7pleRlf+wQcN
- fRAIUrNlatj9TxwivQrKnC9aIFFHEy/0mAgtrQShcMRmMgVlRoOA5B8RTulRLCmkafvwuhs6
- dCxN0GNAORIVVFxjx9Vn7OqYPgwiofZ6SbEl0hgPyWBQvE85klFLZLoj7p+joDY1XNQztmfA
- rnJ9x+YV4igjWImINAZSlmEcYtd+xy3Li/8oeYDAqrsnrOjb+WvGhCykJk4urBog2LNtcyCj
- kTs7F+WeXGUo0NDhbd3Z6AyFfqeF7uJ3D5hlpX2nI9no/ugPrrTVoVZAgrrnNz0iZG2DVx46
- x913pVKHl5mlYQARAQABwsFfBBgBAgAJBQJafgNKAhsMAAoJELKItV//nCLBwNIP/AiIHE8b
- oIqReFQyaMzxq6lE4YZCZNj65B/nkDOvodSiwfwjjVVE2V3iEzxMHbgyTCGA67+Bo/d5aQGj
- gn0TPtsGzelyQHipaUzEyrsceUGWYoKXYyVWKEfyh0cDfnd9diAm3VeNqchtcMpoehETH8fr
- RHnJdBcjf112PzQSdKC6kqU0Q196c4Vp5HDOQfNiDnTf7gZSj0BraHOByy9LEDCLhQiCmr+2
- E0rW4tBtDAn2HkT9uf32ZGqJCn1O+2uVfFhGu6vPE5qkqrbSE8TG+03H8ecU2q50zgHWPdHM
- OBvy3EhzfAh2VmOSTcRK+tSUe/u3wdLRDPwv/DTzGI36Kgky9MsDC5gpIwNbOJP2G/q1wT1o
- Gkw4IXfWv2ufWiXqJ+k7HEi2N1sree7Dy9KBCqb+ca1vFhYPDJfhP75I/VnzHVssZ/rYZ9+5
- 1yDoUABoNdJNSGUYl+Yh9Pw9pE3Kt4EFzUlFZWbE4xKL/NPno+z4J9aWemLLszcYz/u3XnbO
- vUSQHSrmfOzX3cV4yfmjM5lewgSstoxGyTx2M8enslgdXhPthZlDnTnOT+C+OTsh8+m5tos8
- HQjaPM01MKBiAqdPgksm1wu2DrrwUi6ChRVTUBcj6+/9IJ81H2P2gJk3Ls3AVIxIffLoY34E
- +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <CAMRc=Mcno_F2UuLXZ3ruaVSbYhssVK90m3KM=+dwskLMSp8TXg@mail.gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------i894QC0fu9NisDOBnbo7myGW"
+From: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
+In-Reply-To: <66979a1d-d92c-43b2-892d-cd73b6585509@roeck-us.net>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: Vf8V6Zbml2JrZCGm6nhX5-6-aYLrKdyt
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDE0MSBTYWx0ZWRfX9ndIFWCz1xUl
+ KxHPF3PyWnI3LEWQ2rzPN+zTDDZu/tCAzQ9WEzZsd5083coOs6WpkQTlVh5I40M6Yhmef8X65gH
+ RN3XIYIkEfWjJ+U8TceFJV3LGbQbzy+fIxzUulrIffqmOmdDR9OiyOTL2/f4jHWZVqFi2oy5SjD
+ C3jqx+K/rgKy6igjaJLNkZFNuYWyTsGQuJPFDJgdgHec1C3U9OICI6JM4sxmcXbiKdS7a9npIk0
+ JuFI8sUwHrI1E7waKmV6kfuu5lovRpxC/YG6SCOGBzLz2SKIlas6acPmG8Mw5qiyCK+dFB+CsfP
+ BSSRNAMK7NobdDeRqmMq46S3rLyMtypHPV3sePLAvaHxOQ5Khs9iEjUD0/ZS57AU4ZPI9DJ1UpR
+ sfTnAxuO3hnCuGBrF1cm51wEojxxLtxp0/ras5+SDrH2L3ce/1LjaV47kZLYgGm1Shc6LGuq2Kk
+ YvbDzmklz037Dedazqg==
+X-Proofpoint-ORIG-GUID: Vf8V6Zbml2JrZCGm6nhX5-6-aYLrKdyt
+X-Authority-Analysis: v=2.4 cv=HMjz0Itv c=1 sm=1 tr=0 ts=6a7e1aa8 cx=c_pps
+ a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=BvtW7Q8lqb1UdYndl6lHrw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=VwQbUJbxAAAA:8 a=_jlGtV7tAAAA:8 a=tUoij1vsQbLQIl3R9WQA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=_Vgx9l1VpLgwpw_dHYaR:22 a=nlm17XC03S6CtCLSeiRr:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEzMDE0MSBTYWx0ZWRfXykfrT6WoR9HI
+ BCI/DO0a+/LeTpWxc5BlA0nYWiK5PQtNihsck0sHX2muOup+gZkPm4m5bxH2OQuZU0gHSB8WqyF
+ la3ytrEjz2syZFxTZ+wYPfMd17W7ux4=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-13_06,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 bulkscore=0 spamscore=0 phishscore=0 priorityscore=1501
+ suspectscore=0 clxscore=1015 impostorscore=0 adultscore=0 lowpriorityscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608130141
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------i894QC0fu9NisDOBnbo7myGW
-Content-Type: multipart/mixed; boundary="------------iw28fzqMn9Gj0JhxTrO2tL3G";
- protected-headers="v1"; hp="clear"
-Message-ID: <0d2706c6-79fa-40fc-a24a-6d5ffbf02330@gmail.com>
-Date: Thu, 13 Aug 2026 15:09:36 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] crypto: qce - Replace with stub driver
-To: Bartosz Golaszewski <brgl@kernel.org>
-Cc: linux-crypto@vger.kernel.org, Herbert Xu <herbert@gondor.apana.org.au>,
- linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- linux-kernel@vger.kernel.org, Kuldeep Singh
- <kuldeep.singh@oss.qualcomm.com>,
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Krzysztof Kozlowski <krzk@kernel.org>, Eric Biggers <ebiggers@kernel.org>
-References: <20260731050838.158825-1-ebiggers@kernel.org>
- <a28c2903-0976-4559-b870-4de5553ba9ab@kernel.org>
- <3ba57269-3305-4d80-b3f2-aa82fa59b59d@gmail.com>
- <b9b655a9-c683-4c4e-ba0d-f98577dd2912@kernel.org>
- <20260801162900.GA2021@quark>
- <e7aeec9b-11aa-4635-bde9-fb8c7ca38260@kernel.org>
- <20260801171242.GA3567@quark>
- <CAMRc=McL5QQRk8C8zzkHm+FUj-SAVi5PLJr2pXo8eNpaxXuALg@mail.gmail.com>
- <20260811224110.GC1905@sol>
- <CAMRc=MfVqphaVsfcmUXjGmu6m+F6nJYXgAPuTVjZBwFnd48BkA@mail.gmail.com>
- <bc95e0b0-2cc5-4ad6-a319-ae4e159b92fe@gmail.com>
- <CAMRc=Mcno_F2UuLXZ3ruaVSbYhssVK90m3KM=+dwskLMSp8TXg@mail.gmail.com>
-Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
-Autocrypt: addr=demiobenour@gmail.com; keydata=
- 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
- +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <CAMRc=Mcno_F2UuLXZ3ruaVSbYhssVK90m3KM=+dwskLMSp8TXg@mail.gmail.com>
+Hi Guenter,
 
---------------iw28fzqMn9Gj0JhxTrO2tL3G
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-On 8/13/26 07:53, Bartosz Golaszewski wrote:
-> On Wed, 12 Aug 2026 18:33:45 +0200, Demi Marie Obenour
-> <demiobenour@gmail.com> said:
->> On 8/12/26 04:07, Bartosz Golaszewski wrote:
->>> On Wed, 12 Aug 2026 00:41:10 +0200, Eric Biggers <ebiggers@kernel.org=
-> said:
->>>> On Tue, Aug 11, 2026 at 08:42:55AM -0500, Bartosz Golaszewski wrote:=
-
+On 7/30/2026 8:47 PM, Guenter Roeck wrote:
+> On 7/30/26 04:48, Daniel Lezcano wrote:
+>> On 7/24/26 02:04, Guenter Roeck wrote:
+>>> On 7/23/26 12:16, Manaf Meethalavalappu Pallikunhi wrote:
+>>>> Hi Guenter,
 >>>>
->>>>> No, the rationale has never been this. FWIW it can be that it's use=
-d for
->>>>> testing of the crypto module on a supported platform and that is al=
-ready
->>>>> enough of a reason to keep it upstream.
+>>>> On 7/23/2026 12:29 AM, Guenter Roeck wrote:
+>>>>> On 7/22/26 11:19, Manaf Meethalavalappu Pallikunhi wrote:
+>>>>>> Hi Guenter,
+>>>>>>
+>>>>>> On 7/22/2026 11:16 PM, Guenter Roeck wrote:
+>>>>>>> On 7/22/26 10:38, Manaf Meethalavalappu Pallikunhi wrote:
+>>>>>>> ...
+>>>>>>>>>
+>>>>>>>>> I am curious: Why not use static initialization and use the 
+>>>>>>>>> is_visible
+>>>>>>>>> function to determine if an attribute is visible or not ?
+>>>>>>>>
+>>>>>>>> ACK. There is already a comment in v1 suggesting the use of 
+>>>>>>>> dynamic allocation based on the available attributes rather than 
+>>>>>>>> static initialization. The intent is to avoid having to perform 
+>>>>>>>> enable flag checks in multiple places.
+>>>>>>>> . >
+>>>>>>>
+>>>>>>> You lost me, sorry. There is only a single is_visible function,
+>>>>>>> and its intent is exactly to handle situations where some sensors
+>>>>>>> are not always available.
+>>>>>>>
+>>>>>>> What would be those "multiple places" ?
+>>>>>>
+>>>>>> Understood, thanks for the clarification. I'll revert to static 
+>>>>>> attribute initialization in the next revision and use is_visible() 
+>>>>>> to control attribute visibility where needed.
+>>>>>>
+>>>>>>>
+>>>>>>>>>  From the earlier exchange I had the impression that there is a 
+>>>>>>>>> large
+>>>>>>>>> number of current and voltage channels, but it looks like there 
+>>>>>>>>> is only
+>>>>>>>>> one each. That doesn't really warrant or need all this dynamic 
+>>>>>>>>> code
+>>>>>>>>
+>>>>>>>> Yes, this hardware only supports one or two channels (voltage 
+>>>>>>>> and current). What we discussed earlier was that each channel 
+>>>>>>>> can have up to three threshold alarms (warning, critical, and 
+>>>>>>>> emergency). However, the hwmon framework currently supports only 
+>>>>>>>> two limit alarms for these sensor types. I have not added 
+>>>>>>>> support for the third alarm threshold in this series to keep the 
+>>>>>>>> initial driver support aligned with the existing hwmon 
+>>>>>>>> capabilities. Once the basic driver support is accepted, I can 
+>>>>>>>> queue a follow-up series to add support for the third limit alarm.
+>>>>>>>>
+>>>>>>>
+>>>>>>> What does that have to do with attribute visibility ?
+>>>>>>
+>>>>>> I was only clarifying that the channel count has always been small 
+>>>>>> (maximum of two channels) and has not changed since v1. The 
+>>>>>> earlier discussion was primarily around the limit alarm 
+>>>>>> attributes. That said, you're right that this is unrelated to 
+>>>>>> attribute visibility.
+>>>>>>
 >>>>>
->>>>> As I've said before: we don't just drop maintained drivers from lin=
-ux.
+>>>>> Feel free to use (and test)
+>>>>> https://lore.kernel.org/linux-hwmon/20260722185749.2313572-1- 
+>>>>> linux@roeck-us.net/T/#u
 >>>>
->>>> We definitely do if the drivers are not useful or appropriate for
->>>> inclusion in the kernel, though the policy varies by subsystem.  Eve=
-n
->>>> just last month an entire filesystem got dropped despite someone wan=
-ting
->>>> to maintain it.
+>>>> Thanks for working on this. I'll use that change as the base, rebase 
+>>>> my series on top of it, and add support for the third alarm level.
+>>>> By the way, for the voltage channel, the hardware monitors 
+>>>> undervoltage conditions and provides three threshold levels. At the 
+>>>> moment, I am mapping:
+>>>>
+>>>> LVL0 → min
+>>>> LVL1 → lcrit
+>>>>
+>>>> For LVL2, would it be possible to introduce a corresponding low- 
+>>>> voltage emergency threshold, such as lemergency (or another more 
+>>>> appropriate name), to represent the third alarm level for voltage 
+>>>> sensors ?
 >>>>
 >>>
->>> I suppose you're talking about EFS? A thing that can't even be tested=
- on real
->>> hardware? This is a much more extreme case. Here you have several peo=
-ple
->>> representing the vendor saying they want to keep and maintain it. I'm=
- fine
->>> having my own tree and sending PRs to Herbert if he agrees and you ar=
-e of
->>> course entirely free to disregard any patches targetting it.
+>>> We can, but I really have no idea how to name it. lcrit is bad enough,
+>>> but lemergency is even worse (or at least I think so). "lemerg" would
+>>> be almost as bad, but at least it would kind of match "lcrit".
+>>> I tried to ask Google AI, but it didn't give me any useful ideas.
+>>> Any other suggestions or ideas ?
 >>
->> Would you be okay with one of these options?
->>
->> 1. Make the stub driver as the default, with
->>    the real driver guarded by an off-by-default Kconfig option.
->>
->> 2. Keep the driver as is (with the power management issue fixed),
->>    but don't register any algorithm implementations with the crypto AP=
-I.
->>
->> 3. Only register algorithm implementations with the crypto API if a
->>    non-default Kconfig option is selected.
->>
->> 4. Only register algorithm implementations with the crypto API if a
->>    non-default module parameter is selected.
->>
->> 5. Move the driver out of drivers/crypto, delete the algorithm
->>    registrations, and then add support for restricted media content
->>    decryption later.
->>
->> The last option would be my preferred one.
->>
->=20
-> I actually have a slightly different spin on the stub driver. I'd like =
-to
-> keep the driver future-proof and avoid all kinds of needless churn when=
- we
-> do get to the secure dma bufs and restricted media playback (and we wil=
-l get
-> there eventually :) ).
->=20
-> Can we make the QCE into an MFD driver with the core binding to the DT =
-node
-> and handling the interconnect bandwidth, while the part handling crypto=
+>> 'lfatal' ?
+>> After thinking about it, I'll stick with "lemergency", reason being that
+> it matches
+>      crit -> lcrit
+>      emergency -> lemergency
 
-> algorithms becomes its cell and is moved into a separate module? This o=
-ne can
-> be disabled in defconfig by default and I don't even mind it being guar=
-ded with
-> CONFIG_EXPERT. The core module would remain in arm64 defconfig.
->=20
-> With that: any future extensions providing support for more functionali=
-ties of
-> this IP can simply be implemented as more MFD cells while we can also k=
-eep
-> chipping away at the existing code and use it for testing the BAM pipe =
-locking.
+I pulled in your patch [1] and extended the implementation to add 
+lemergency support for the in sensor type. I validated the third-limit 
+alarm support for both in and curr sensors.
 
-I'm not familiar with MFD drivers, but this sounds like the best
-of both worlds.  The driver stays upstream, but anyone who doesn't
-explicitly need it can ignore it.
+The resulting sysfs interface now looks as follows:
 
->> Also, if Qualcomm has customers who use the QCE via the crypto API,
->> is Qualcomm aware of _why_ they made that choice?  From Eric's and
->> my perspective, that seems like a very strange decision, unless there
->> are factors that Eric and I are not aware of.
->>
->=20
-> SM8650 with the QCE is FIPS 140-2 certified and apparently this makes
-> a difference. Don't ask me if that makes sense, I don't claim to unders=
-tand
-> the legal aspects of it.
+/sys/class/hwmon/hwmon1# ls
+curr1_crit curr1_emergency_alarm curr1_max device in0_lcrit 
+in0_lemergency in0_min name power uevent
+curr1_crit_alarm curr1_input curr1_max_alarm in0_input in0_lcrit_alarm 
+in0_lemergency_alarm in0_min_alarm of_node subsystem
 
-That sounds like the kind of thing that would cause someone to use
-a worse implementation of cryptographic algorithms =F0=9F=99=82.
+[1] https://lore.kernel.org/all/20260722192547.619281F000E9@smtp.kernel.org/
 
-For what it is worth, many common uses of kernel cryptography can't
-use the QCE.  This notably applies to the CSPRNG (/dev/urandom etc),
-storage encryption, and AF_ALG.  Therefore, I expect that anyone who
-needs FIPS 140 compliance with Linux needs to ensure that the software
-crypto is certified, as that's what actually gets used in most cases.
->> Finally, would you be willing to have a group call to discuss this
->> at some point?  That might be a more suitable venue for this kind of
->> discussion, and could potentially lead to a conclusion faster.  Also,
->> while at least I couldn't sign any NDAs, there might be information th=
-at
->> you could discuss there that you cannot post to a public mailing list.=
+Could you please update your series to add lemergency support for the
+in sensor type as well ?
 
->=20
-> Sure, I'm fine to have a call. If you think about coming to Linux Plumb=
-ers this
-> year, I'll be there all week and it's a good place for such a discussio=
-n too.
->=20
-> FYI I've only been online for a couple days this week and I'm going off=
-line
-> again until the end of August with the exception of August 26th when I'=
-ll be
-> able to chime in again. Any call would too have to happen in September =
-at the
-> earliest.
-That's fine.
---=20
-Sincerely,
-Demi Marie Obenour (she/her/hers)
+Thanks,
+Manaf
 
---------------iw28fzqMn9Gj0JhxTrO2tL3G--
 
---------------i894QC0fu9NisDOBnbo7myGW
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+> 
+> Guenter
+> 
 
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEopQtqVJW1aeuo9/sszaHOrMp8lMFAmp+FnsACgkQszaHOrMp
-8lMIfw/+Kqprcz6oo8QmpcPVroEZnU8mBZm1kTqPFF+gxGc26IAQJGGXHb/yrvfx
-VIidixfHFA26THV6qcQsgygKHEKsJsgboUximTQZoMs3jW2PACfU43CJf+puDbsp
-WeBpYme2gDmPuWONQStHDyUPX8IoIM4H3uu8I8swnmqcFbug6UJ9GHQ2aPbkxMcO
-5SX9AxB9pSoMwPXrdEH5jhGNKxKzmZ6wLoA76JMBzny+/8QvYQPSuAFM/b2FXJO+
-KayMYCXYIodfolW7+jt9kEv5cf33qLDzfvLMiJRjnAG8/amEMTnAHjgCh3w3DqlO
-2Mh+RY6W495XGMU4zTHbZxUENPhd0FB4hs7ZeelA2sHtMjr6/Rc1uEbWFmLSJAmH
-DtX9atgq4cU311LpqAEVxCeGQl9K/Xstvk44ke9p4xDjLM8PVmkt/dBHW5YoCScF
-lCKkyVfVlE+BIIPu6LYs6HMzl10QxI1bDDol5EjUYJDwu5b0phMgrKykxAbz6/Qf
-lQJBbNb6fHX8WAPm9zZN0+GyXARuQrv3zZn3tU8R0S9w5/GvMF/kT1SX999coXmQ
-V/yjzkxwJEaiXq7xb7ulNcR0l+61LMq8daThzyyDLcc0hqMyLTAbYygRiHxNs6Hl
-xdnpw7Zn8UPo4BZ+UkLlVG74V0U4gYzsGLlNcD23vAsfnaI3RTQ=
-=Of7Y
------END PGP SIGNATURE-----
-
---------------i894QC0fu9NisDOBnbo7myGW--
