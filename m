@@ -1,89 +1,250 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 953CF4446F7;
-	Thu, 13 Aug 2026 08:59:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B78F03E6DDD
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 09:05:12 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786611600; cv=none; b=UDUavO2bSOG78Q4vFXdu8FbY25527lw3Wv54ThwCmvJX++nTBPDVPfIy6f3urt0pof5NFxPTCGtBlbLBBh+NZfoTmEBCTDxp5tAJ0DUDRf26FOI9Gu7BpDFVOqBoA7d7qrmCqjZ+G3QCyJnNGqMRg4sk3ceTAhYdwAcRF/O4L74=
+	t=1786611914; cv=none; b=r1U3a/qZ3b6nr178qUpRJfnNiJw5D3MuLxKKPHmgc3r3H14L5Ni7b32/cOMtd2wr/CheHokZ0dVsNSTxZUoBbTj545Egj1gGWIVKj2NV/AHmod3w1IHyXgvmoq6kCoXIx97y/ovi9V4wFDMHtHp8muNGZtvCHtcXmun0CUtYBG0=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786611600; c=relaxed/simple;
-	bh=GdyuVcouelAph5a8W7iYpdcHMMgGGIj8pLf+4ZiB6Ds=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=sl1CEDf0Y+Ol9evfRiVg/P5fExFXxlyhLj4+EUu18pFcfZScOtFS7EsJ31hJ0bqbO4XFymEb5x3hXkd4mzxxEeUU8Dfa+54RlVClfT9FOu+rWtiV3PcFA2RJ0XNEIDn1HSQfuNC5YnsAWySlfL1XeqdA36EvI3iYZKLCEiFxhyA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=bq65PrTl; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786611914; c=relaxed/simple;
+	bh=T0L3tpfGXHSCFKA/MYT8j6LXFVeLB1uzDVoTGvUhPPU=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=qfRJ1xJvxZTe/PLZYXyi/giPztM4KoBh3S9jF3mDqx3WCz1deZ37gA70AgJnmdxGQeaDPZA80aOV6Tb92jj5LY+/IP+f/+u+fA+9n9up2KYcvrcJXa1OlPu3Ze3jXqjufVgUUkk7Y59S5V6Z+XNqWWdLh8hBShfHo1jE2wZ+xlo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=kCR4KQ6Z; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Hi7ulfZ8; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="bq65PrTl"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 875421F00A3A;
-	Thu, 13 Aug 2026 08:59:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786611595;
-	bh=dtGZ81a3jSSuCBgYV0KTzg5fZRnkjFOsncZEdYGS6S4=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=bq65PrTlrpQK5qnE6+gKhwDV8n+44dSRcaQ15A9cQ8w8ugWgWsVHfbcdZSwGUgCFn
-	 1RWLpApt10D2UuocrruxHUY5xj2cx/L8E8KYysNR9ozK3XpX0xql6GzPBgNnuimdmo
-	 xXKq3sjTcri6QXfHtzfdzvwDWqnshiOIBCOx4OxeQYIMrQepZTuRf7Svc/i86ESnOK
-	 P7/MQ69Mw87UW5mWgvo1fOfId3yHTcPm/zjSyqWg4YhgFmkt9fLFpE+txyJbasR0sp
-	 Kn25kcWPvTgPwdvLJy3MJQVNSuMNcWT/EP5w/OtreTZjxFDMr94kQbZ1JY3jXx1A3i
-	 x9R22341btaUg==
-Date: Thu, 13 Aug 2026 10:59:46 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: George Moussalem <george.moussalem@outlook.com>
-Cc: Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Praveenkumar I <quic_ipkumar@quicinc.com>, Varadarajan Narayanan <quic_varada@quicinc.com>, 
-	Philipp Zabel <p.zabel@pengutronix.de>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Wesley Cheng <quic_wcheng@quicinc.com>, linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org
-Subject: Re: [PATCH v2 12/14] arm64: dts: qcom: ipq5332: Enable USB
- Super-Speed PHY
-Message-ID: <20260813-gentle-eel-of-elegance-ccbdbb@quoll>
-References: <20260812-ipq5018-usb3-v2-0-8f355d7ff0ef@outlook.com>
- <20260812-ipq5018-usb3-v2-12-8f355d7ff0ef@outlook.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="kCR4KQ6Z";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Hi7ulfZ8"
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67D922s11979190
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 09:05:12 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	T0L3tpfGXHSCFKA/MYT8j6LXFVeLB1uzDVoTGvUhPPU=; b=kCR4KQ6ZidoXLKJj
+	8bdoJIPbEp0Yh2NEQYDyh/SLC3I3ZiYLrsoHCeKQNI3hHIoqCjw/4q8QBUDNXqbY
+	IkVz+53Lk+4NFz/WaiAZuLN9+mQYfxBEx5krDKFXuvaxB4rXzauBAYTOl6MUS1zT
+	5k/JZcfF21Bht016DV8KrqpnGHm3mmz/8Kvoxf0lTGfk/fOpyfTG0CrpMW0cf62x
+	SLBY23IdL5waqJtl8t8oN3/I4Q8Ojc0A2hODFfIs5CZwkgULaGOOd/vuGwYyz6GS
+	ngaqf8X+ojRzsV0zj6VC/W4yBENsoI4mAjr3fQoVwIrTeXkKaCnRC9ryD9UaX9Ty
+	xlpqcg==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g143hsmn5-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 09:05:11 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-ca124bf0189so608232a12.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 02:05:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786611911; x=1787216711; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=T0L3tpfGXHSCFKA/MYT8j6LXFVeLB1uzDVoTGvUhPPU=;
+        b=Hi7ulfZ8/KJgY87a2tTNAPfkookSstZP39cMCyUrexynnnDpLpBSLfV2SNzU7SOuph
+         EwVd3sxrB92omNaUOgVguWHYQRLQKoBpBhIwQWVcuvjDBueD/Ca3uBaNC12+rNcMUtLQ
+         cGmK2vI8WObQ+ECPozgTfqf5CVx7AhsUEbxWDpOELozQ/1saS6+rgxMfhaXh21PB58/V
+         6kYMOEqIscIzTKWPGkDJXD59+3qQsmM68FHUvXF9rTOHKj/eYX8JRioO8kTpvs2I6jum
+         mjpgvcoPkj+OfkffgJINfp+wKPgkvAXt1t1onif87PPMvD2QHBnnZ+Q5AOIXB2fCUMuu
+         DzDA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786611911; x=1787216711;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=T0L3tpfGXHSCFKA/MYT8j6LXFVeLB1uzDVoTGvUhPPU=;
+        b=rta1qbqJvU6fSrjCqQB397/htWRZPSFoxKpwMHhiG/DyBVah6vQfmCKcS3NU1e6cYI
+         fmqvwjrlPRu8JD7NY87Zu+YAc0ZtDPwN4a754spJ42waQ1uS2LUbu23yUOWhGO3Thz8f
+         PXEKzZTcL8BiPdm91iq25IAgowiuI2T4k+d7I8TU0P+QYaapzT7JEyABItgvArMpJ8x1
+         dyvmpEMPXoN4ANGk8W5zPGtki1VNdJAKzKYVZG6HWmY5HF+thnTZV1+G2vqOXf51aNJs
+         PK0TSXisv+o96e9spwxy05uFNNMv8iHDjn7Op/1AgB2XOfMJ3dIjteMe6pqECJ1giyQ7
+         2U+Q==
+X-Forwarded-Encrypted: i=1; AHgh+RrVqw12DlFpC5EU39hhB9pOH73IcDikAfb1nho8wfnKcZkpip479cpJIUbil0msj+i23SOTRQqldEeyhQD7@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw7A4+BJmO9hINx2W6j7F5FOyyYW62YfTxOWbBcSQd8xcCqeRJ8
+	ULDbYnleghmBnGnpz3w/IPGy0cGcu35NfUcHqmAFmXRGXPP2KHGvKwWOWoSNlT+9ex5DLyymEhS
+	yGytHeAInOl34JYYzt4hrv42XQzqKgQwO+rKj61G/5nb80MZEXJ6e/rysiZUFojyU6oBw
+X-Gm-Gg: AR+sD10u922iS9JywMwUUi09idJWeAJqcrtfmRvZ8/+CVJhS/CzbOLU0QxbIchrtctQ
+	Fr+K5YeA836wmBNYY7KMJ0JGvuaIAWhDIJnvZ9oBnVaOvR3kfHWBtKlbqhPQOcYX4Dp9GS1+jtZ
+	DsBaYaj5n+aSQxBRg8WB+oXFmOFPTdkKKL6Ad91OPhU3SbZIeDNDOUr+4vX+WCvhJJnka+X0Djv
+	bGliQUCjyUvGbPAh3B7XGEITcdp1VECXXDQPQRGmNDv2R4o3CL4BoQu4mGr2DO7gYXW4AAhx6vM
+	1RsN0ae7Lxtq7hx1QGT96Esi2B9txwJoEjgvAiLyz7Rtv4pkKXhYIi/3eHpkcNwIJyM6L2ZwKEa
+	fMl0g0GW94j9MfE194eVJKzB0OrgFaIPQWw==
+X-Received: by 2002:a17:90b:52d0:b0:387:d5bd:622f with SMTP id 98e67ed59e1d1-3931f971fa1mr1668337a91.18.1786611910962;
+        Thu, 13 Aug 2026 02:05:10 -0700 (PDT)
+X-Received: by 2002:a17:90b:52d0:b0:387:d5bd:622f with SMTP id 98e67ed59e1d1-3931f971fa1mr1668311a91.18.1786611910433;
+        Thu, 13 Aug 2026 02:05:10 -0700 (PDT)
+Received: from [10.218.31.237] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3931f44de1esm2177013a91.13.2026.08.13.02.05.03
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 13 Aug 2026 02:05:09 -0700 (PDT)
+Message-ID: <63bae39b-1256-4e19-a9de-840d8752ec69@oss.qualcomm.com>
+Date: Thu, 13 Aug 2026 14:35:01 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260812-ipq5018-usb3-v2-12-8f355d7ff0ef@outlook.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] net: wwan: qcom_bam_dmux: Alloc RX buffers as a
+ single coherent block
+To: Stephan Gerhold <stephan.gerhold@linaro.org>
+Cc: Stephan Gerhold <stephan@gerhold.net>,
+        Andrew Lunn
+ <andrew+netdev@lunn.ch>,
+        "David S. Miller" <davem@davemloft.net>,
+        Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+        Paolo Abeni <pabeni@redhat.com>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Sergey Ryazanov <ryazanov.s.a@gmail.com>,
+        Johannes Berg <johannes@sipsolutions.net>,
+        linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        chris.lew@oss.qualcomm.com,
+        Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+References: <20260714-qcom-bam-dmux-vmid-ext-v1-0-3f29da7cca76@oss.qualcomm.com>
+ <20260714-qcom-bam-dmux-vmid-ext-v1-2-3f29da7cca76@oss.qualcomm.com>
+ <alXm0rp3NK62G3-3@linaro.org>
+ <c8417ff3-db92-446a-acf8-8c73c83b85de@oss.qualcomm.com>
+ <amMxkrW3mu48HIOr@linaro.org>
+Content-Language: en-US
+From: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
+In-Reply-To: <amMxkrW3mu48HIOr@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=R5oz39RX c=1 sm=1 tr=0 ts=6a7d88c7 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
+ a=EUspDBNiAAAA:8 a=J4aCkolXD37Z9lCRw_gA:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDA2MiBTYWx0ZWRfX4xj3TO+vC7lj
+ F0OPzFxbU5m6YKBdk+7LazoZlKBPoS6lmXcnHA52alkTojjKXvATj6R4UWtTR+aJNYe01JqoeB6
+ /dGCyPaSgWSANlCcCJ4y1t2k9+XLhHRr0NejxW0bNxmB7E0OYNPn5ZAqeiqlCvLEjca1cSpKQIg
+ MkizEIBIYgqLWEFoxtuhRJJloHO1zLQr/qGIzAksgmot7WgZGVgx5IlAABwoT0o7f9+24sNL3dU
+ y0E9I6L844VfvVXpxKDnpdzvjjIP6uNG+1c31O5uWTILcputfhJEeP26f3wV8kPQIppydSFxXhb
+ pjcN8xk7REZvF7y7mzrE38cNt6+jKIviF8/QuA+HyXhdV+bXqAQWta+IpOf/D7mVAxWLaRGLv3W
+ RdimK1cB1nqIi7w6L6aA0PbGsuT2u2VsMS6km44vYpw5pGa1Ww6OPW7l2HGkSfa2XP3OwK3ezAI
+ extSdz53jXDxjGMNyWA==
+X-Proofpoint-GUID: yRCI6UDxLZPCmUCHGS38jiqKOQ84_0KX
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODEzMDA2MiBTYWx0ZWRfXx0aZYE8Xbe7S
+ RNiPw6J6ic2gZSfbn/G/7NVNnCnK3tqVPg5FC6DDvow37NQNW2Zk/+b+IB9dMBTNbrMoutnagnM
+ PQQfztKWU4uAPie5MgmZSWwseJv5HmM=
+X-Proofpoint-ORIG-GUID: yRCI6UDxLZPCmUCHGS38jiqKOQ84_0KX
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-13_03,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 suspectscore=0 adultscore=0 clxscore=1015 priorityscore=1501
+ impostorscore=0 phishscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608130062
 
-On Wed, Aug 12, 2026 at 01:34:47PM +0400, George Moussalem wrote:
-> From: Praveenkumar I <quic_ipkumar@quicinc.com>
-> 
-> Enable USB Super-Speed PHY support. The PCIe and USB3 PHYs share the
-> same MMIO address space, so override the compatible string to use the
-> USB3 PHY driver instead of the PCIe PHY driver and set the required
-> properties accordingly.
-> 
-> Signed-off-by: Praveenkumar I <quic_ipkumar@quicinc.com>
-> Signed-off-by: George Moussalem <george.moussalem@outlook.com>
-> ---
->  arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts | 19 +++++++++++++++++++
->  1 file changed, 19 insertions(+)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts b/arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts
-> index 25a70cd884c0..164f9a9a6c75 100644
-> --- a/arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts
-> +++ b/arch/arm64/boot/dts/qcom/ipq5332-rdp468.dts
-> @@ -100,3 +100,22 @@ &usbphy0 {
->  
->  	status = "okay";
->  };
-> +
-> +/* this combo PHY supports PCIe and USB3 */
-> +&pcie0_phy {
-> +	compatible = "qcom,ipq5018-uniphy-usb-ss-phy";
 
-Nope, phy in tjhe SoC does not change per board.
+On 24-07-2026 03:04 pm, Stephan Gerhold wrote:
+> On Fri, Jul 24, 2026 at 10:16:31AM +0530, Vishnu Santhosh wrote:
+>> On 14-07-2026 01:05 pm, Stephan Gerhold wrote:
+>>> On Tue, Jul 14, 2026 at 11:02:32AM +0530, Vishnu Santhosh wrote:
+>>>> On Qualcomm SoCs where the modem (e.g. the mDSP on Shikra, VMID 43 /
+>>>> NAV) is the AXI master for BAM-DMUX RX transfers and the XPU enforces
+>>>> per-region access control, each individually DMA-mapped RX buffer
+>>>> requires its own XPU resource group (RG). With ~16 RGs available, the
+>>>> 32 per-buffer dma_map_single() calls exhaust the table and the first
+>>>> inbound transfer faults with an XPU violation.
+>>>>
+>>>> BAM-DMUX is a singleton (exactly one instance per SoC), so the
+>>>> destination VMID does not need to be a DT property; it is looked up
+>>>> from the compatible string's match data instead. Add struct
+>>>> bam_dmux_data with a single vmid field, and a shikra_data instance
+>>>> hardcoding QCOM_SCM_VMID_NAV for qcom,shikra-bam-dmux.
+>>>>
+>>>> When match data is present, allocate all BAM_DMUX_NUM_SKB RX buffers as
+>>>> a single contiguous dma_alloc_coherent() block and SCM-assign that
+>>>> block to HLOS plus the VMID once at probe. This reduces RG consumption
+>>>> from 32 to 1. The block is never reclaimed across a modem power cycle
+>>>> (bam_dmux_power_off() does not touch it), so the probe-time assignment
+>>>> covers every subsequent restart without re-assigning or reclaiming. It
+>>>> is reclaimed to HLOS only once, at remove or on a probe error, and if
+>>>> that reclaim fails it is leaked rather than returned to the page
+>>>> allocator.
+>>>>
+>>>> Each rx_skbs[] slot is pre-assigned its virtual and DMA address from
+>>>> the block, so no per-buffer mapping is needed at power-on. Because the
+>>>> coherent block is not page-backed, received payload is copied into a
+>>>> regular netdev skb before handoff to the network stack; this is an
+>>>> unavoidable extra copy on the XPU-enforced RX path.
+>>>>
+>>>> Platforms without match data are unaffected: rx_virt stays NULL, no
+>>>> coherent memory is allocated, and the per-buffer dma_map_single() path
+>>>> is unchanged.
+>>>>
+>>>> Co-developed-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+>>>> Signed-off-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
+>>>> Signed-off-by: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
+>>> So how do you handle TX buffers? Right now, they are just passed on from
+>>> the net subsystem. There can be up to 32 TX buffers in progress as well.
+>>>
+>>> Overall, I have mixed feelings about this patch. It looks reasonably
+>>> simple, but fundamentally I don't understand why we need to go back to
+>>> the old days of implementing protection using a highly limited MPU (in
+>>> your case: the xPU).
+>>>
+>>> Why does the setup of BAM-DMUX differ e.g. from the setup for the crypto
+>>> engine? Crypto is also using bam-dma, but it avoids this inflexibility
+>>> by making use of the &apps_smmu. Is BAM-DMUX not covered by the SMMU? Or
+>>> did you just decide to bypass the SMMU in this case? (If so: Why?)
+>> I checked with secure systems team on this. Crypto BAM is
+>> behind apps_smmu, so protection is enforced through the SMMU's Stage-2
+>> page tables.
+>>
+>> A2 BAM (used by BAM-DMUX) is present in secure domain and does not
+>> support Stage-2 translation on this SoC, and there is no IOMMU domain
+>> that can be attached to it. The only protection mechanism available is
+>> the xPU.
+>>
+> Thanks for investigating this!
+>
+> So is this a hardware limitation or something you could change with a
+> firmware update? Could you move the A2 BAM out of the secure domain and
+> protect it via the IOMMU instead of the xPU mechanism? The other modern
+> platforms with IPA do not have this limitation, they can use the IOMMU
+> for this.
+>
+> We can try to support the xPU protection mechanism in the BAM-DMUX
+> driver, but it's pretty bad from a performance and memory usage point of
+> view if you need to copy buffers around multiple times. So if you have
+> some way to change this in the firmware (and there is still time to do
+> so before production boards ship), I would strongly recommend to
+> investigate that.
+>
+> Thanks,
+> Stephan
 
-You have one phy device, already defined in the SoC DTSI. In the board
-you only choose phy type in the consumer node.
+Based on what we confirmed with the Secure Systems team, this is a limitation
+of the current Shikra platform rather than something that can be addressed
+through a firmware-only update.
 
-Best regards,
-Krzysztof
+The A2 BAM used by BAM-DMUX is not connected to an SMMU/IOMMU domain on Shikra,
+which means Stage-2 translation is not available for this path. As a result,
+it is not possible to move this path behind an IOMMU.
+
+Modern IPA-based platforms differ because their data paths are physically routed
+through SMMU interfaces and therefore do not rely on VMID/xPU ownership assignment
+for this type of access control. On Shikra, the A2 BAM path is protected using the
+xPU3 VM-based access-control model, where DDR memory access is restricted and
+granted through the request-based Hypervisor VM assignment framework. In contrast,
+older targets relied on the earlier xPU2 resource-sharing model, in which modem
+access did not require this type of explicit VM ownership configuration. This
+architectural difference explains why the issue does not occur on those older platforms.
+
+So, for this path on Shikra, SCM-driven VMID assignment remains the only practical solution.
+
+Thanks,
+Vishnu
 
