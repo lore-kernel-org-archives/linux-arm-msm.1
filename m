@@ -1,244 +1,118 @@
-Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com [209.85.128.44])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E20A8476692
-	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 12:40:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.128.44
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D37F4772A9
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 13:06:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786624844; cv=none; b=LK4MpC//Pe8YVy2hcfgo67BkYJjXY3OVJC9a2vMf9QJaMARf9wodePqPueyzsRm3bt/RC7iExkD7t6mc0kqGr1gh1qZmB7mXfiDSRGP1a60kIdFFi7Wn2IS/1wcivEKGiFN7aJhp6OMGg4JbUQpLt8DAvA5Gt1+hsUk9pqmL9nk=
+	t=1786626402; cv=none; b=bApiT52ES9q7ukkcYzF/pG9C6PdgE0pk+Dy6BJ/TY76MN1OmBGS3qUhi1nVZJ2lsrq4qMEn0RkBQYeHhUaf9hdmePYKvrQz52Iqwdcd7Ku93E4T6YFuzxDHS5ZZwmmrBorZNPuY7V8f6YhgoXxJvwdribIAsihjKfo+wsVY7h84=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786624844; c=relaxed/simple;
-	bh=WYwkX1yh0Pta1wRluTjZ/jH/1tys5sS0UlkmPOp1EPE=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=XYwW4psZhqROrCRSv1Xy8jc8wTeZgLYZCqhChottzWbLCyn9BnG3u8BmEAHApXeIbKpdkEuoWkq72JuVlMsbWJNlUjnZs7K7THbNuOlsWBz2Ki3NYyEwBvgTacTWZUCpsbIKn2sAHKEy5VC5EizAemQhSD12ibgdGjFOXjbw0UM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=Pzf8go5x; arc=none smtp.client-ip=209.85.128.44
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	s=arc-20240116; t=1786626402; c=relaxed/simple;
+	bh=RAl0NVbjiiOs/VyeCemRv0TwYR+tlbA9P9uIHNsY6dg=;
+	h=From:In-Reply-To:MIME-Version:References:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=McqTJthdH0y7ZGxhybSNyI0nc1H7q35j57B7o5qSfWtN9WUGV9Rq1mO04nhkEcN9rygGs8MXHHCICs4DgDDEu/heRNEXGnJScEMTjGzk8Qa0VFnxCMeWYO3nvPIkdPswHWYoc4S4j+z+Q4kkAq+1msqgKcaBc0NVVyBGKaEmGOg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=UXZVJtg/; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="Pzf8go5x"
-Received: by mail-wm1-f44.google.com with SMTP id 5b1f17b1804b1-4994c49f588so8754355e9.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 05:40:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1786624841; x=1787229641; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=VJPCpNnotx0ECpUt+MKP1Xchlx2xXWGrMhf2UEWt9n0=;
-        b=Pzf8go5xmCnqTVPBvSA1zSC+H6VD7PQdkhX0FU3lLPEStYw3qmZ7+zwju2ag1FzZR6
-         96qq144ifJzdovPioTgA4IdNM/dYk35bU/CEiJs2enSdwYyGyxGh4RBgAXqHff9iVybU
-         HdhSDID2rtQlUGJee4XMdyHCSDOrJTBAyDdVoxDWvGaEGlZPj3wc8rnUDkonOfrRMhMc
-         plkxg4rNAopcy1h0KBGG2Y6H/Z4qG8GDBwMRfVFchTqxvlD3Dofv12CKu1s+jO4nFSXO
-         tkU8lkClPyJ6TyFrX93aSQvYxnxMPBWeIKqza/FbaN0bDlUy6QIY1amV4R6tB7YH+WzN
-         2Gjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786624841; x=1787229641;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=VJPCpNnotx0ECpUt+MKP1Xchlx2xXWGrMhf2UEWt9n0=;
-        b=mBHP8ZuQ7/sCxR+j7akfZusETERg5wmqQ33R6bsqOh+3+0lD0FVoZYyO3nuucibyII
-         lsMqx2iC9l0R13H5XY3qEXx5pii242iSo4El5dodjSAmLvL/yuHbKmgZ5dfEHhlC3Tso
-         5ewCO9Rlzx/NBek9TDQ0xI9FXgighGE7L8a2eMYGaa+f+d5oP9lVjbMxilUE1qS4BV4g
-         VviHZNXZLAHyQh75D5i/tmHMDTZqHOXkDd0AVuHPVOoMhDIJEGQzwfpWYxEO+RimgtZy
-         2JSmS5eXY/Jo2gvurT1oXUufj9wMN3oP4JgbUhTYK6SSsor0sopKAZrer139ZYWByeCS
-         bPBA==
-X-Forwarded-Encrypted: i=1; AHgh+RqFIoft/7IiQ4LBDdfa9GuAEp5szuq5505DF3sfPcxDqdL25zVrMf2cgY7aqaNPTtO/A4ojKfl+CW8AkeXW@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy2qht1n7dRZ02SPV7UVBahSHw0OcEkRTyOdVOdyfMpJxMw44zN
-	HD3lzzR4XQv6dUAiGF/MqfbX2h1/5o6VxZgXrBUubal3+RRJxsNDtt5AHZS3TAKS+YU=
-X-Gm-Gg: AR+sD12iUu/Dh9C0bdokI4RFC2+ywaa8RwTpoRLvSAZ7MtZ2UApmIJIiY8Z2sMty7/A
-	WQCSCeAQ57z4tv8H0krCylYmQkZESxg7HVK4Zpvxki0FmO3FOgVX3smLmFSJjTrX4eoU37ce0VC
-	TiBKOoJwPB/mJObMqnr4zljSbJ7ZiSkT+PWgoZEEw696KznzqgV91q/vZt/NUBgCzUKn8fqvbw5
-	2DSbWBUMAWDkyzYhh5P9Uwd4kWnU7guh+oRW/9RJszi5jbwSJhjPrHYTQZo3pbehcxTT/igjQ+A
-	EhHx6TTL0gJeP7o39bIY10HRsffoMsLaV5pUOjLQUkuRm7XPixSBbdGL7UukIbwboDBdBCCN/MM
-	LN4R/ZF0EGXQJhzyZHgl7f3TNmhfwIQp2WtWj+3S7KUunK/BO5FWCOmmG7wf9JMkTlnXt7Dg60r
-	tY/58wt7CdGErxLy9tXYTQa6H23L0x1V1+2diwqD+Dw9SX2dmc8oAZGPP7LEVpl6J1p9ri19j3
-X-Received: by 2002:a05:600d:6409:10b0:499:84fc:4548 with SMTP id 5b1f17b1804b1-49984fc45c0mr21387325e9.5.1786624840981;
-        Thu, 13 Aug 2026 05:40:40 -0700 (PDT)
-Received: from linaro.org ([2a02:2454:ff24:7210:4e0e:b1ef:ec35:a41b])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-49982121658sm65870555e9.3.2026.08.13.05.40.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 13 Aug 2026 05:40:40 -0700 (PDT)
-Date: Thu, 13 Aug 2026 14:40:29 +0200
-From: Stephan Gerhold <stephan.gerhold@linaro.org>
-To: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
-Cc: Stephan Gerhold <stephan@gerhold.net>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	"David S. Miller" <davem@davemloft.net>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Sergey Ryazanov <ryazanov.s.a@gmail.com>,
-	Johannes Berg <johannes@sipsolutions.net>,
-	linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-	chris.lew@oss.qualcomm.com,
-	Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-Subject: Re: [PATCH 2/2] net: wwan: qcom_bam_dmux: Alloc RX buffers as a
- single coherent block
-Message-ID: <an27PVxkCpD09xSR@linaro.org>
-References: <20260714-qcom-bam-dmux-vmid-ext-v1-0-3f29da7cca76@oss.qualcomm.com>
- <20260714-qcom-bam-dmux-vmid-ext-v1-2-3f29da7cca76@oss.qualcomm.com>
- <alXm0rp3NK62G3-3@linaro.org>
- <c8417ff3-db92-446a-acf8-8c73c83b85de@oss.qualcomm.com>
- <amMxkrW3mu48HIOr@linaro.org>
- <63bae39b-1256-4e19-a9de-840d8752ec69@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="UXZVJtg/"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 32EA41F00ADF
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 13:06:41 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786626401;
+	bh=yQWzU2idhtJFEfGoc824MA5NHjwICFqfWvq6sgVbqeQ=;
+	h=From:In-Reply-To:References:Date:Subject:To:Cc;
+	b=UXZVJtg/2Rx9ZJDFRk0rV1flaUPuLIwsFB15lmMdTdhvITsZVwhmJRtAnjke2dcPM
+	 EyRKKSNQ46Dic9or1D5n8yp3ruC6CRTB/JD/ODBDLgVK7E1aiovyORp16hMh26KRV0
+	 vSTog3v+nnYt16PpUwy45UrNG4GHKDhwZraJe/dAxnXBz/2P+sZXENL5cs7QkxnZkm
+	 L9pyu9aXIFzSOlfUJrzqIAtd4pkKh4llCsHlijG4RoUesbzNt1DjM706dqp4X6MGYv
+	 Aw2HVGG/ig688WXvWgyVx0jbQPESHqofU2l5ysylFdNzHOHIx9rVqGavvn1L0wQjwM
+	 npFITTaSA+U4A==
+Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-39c7ed5410bso4561131fa.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 06:06:41 -0700 (PDT)
+X-Forwarded-Encrypted: i=1; AHgh+Rog0n1L4LgsKl321/W2nqbYYl06OPjo8AUNmReyawBClVoM3bEfl5DYbDFz1II06WMd7KsBhp7hP5OFMp+m@vger.kernel.org
+X-Gm-Message-State: AOJu0YwjHzw02Ja7fujrLAI+WwXWqkuDSKsPL5haqYXmhxC4Z1ZCugF2
+	qpe/S4fIHG/MyLaWzauJOcSs7L7ZJFQE2mxg/v1Nxs40Gu14dwhbglIfZXukSHMo2CLUiWoWJrq
+	R52XDa97n0rhojNM07GLkpe279b3RZxBxP2ilNeybgA==
+X-Received: by 2002:a05:651c:31cd:b0:39c:7859:a2d8 with SMTP id
+ 38308e7fff4ca-3a11a819760mr7294241fa.27.1786626399530; Thu, 13 Aug 2026
+ 06:06:39 -0700 (PDT)
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 13 Aug 2026 13:06:38 +0000
+Received: from 969154062570 named unknown by gmailapi.google.com with
+ HTTPREST; Thu, 13 Aug 2026 13:06:38 +0000
+From: Bartosz Golaszewski <brgl@kernel.org>
+In-Reply-To: <20260813123841.GC1820248@google.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <63bae39b-1256-4e19-a9de-840d8752ec69@oss.qualcomm.com>
+References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
+ <20260803-arm-psci-system_reset2-vendor-reboots-v24-4-889281373870@oss.qualcomm.com>
+ <20260813123841.GC1820248@google.com>
+Date: Thu, 13 Aug 2026 13:06:38 +0000
+X-Gmail-Original-Message-ID: <CAMRc=MdA_zM_pHCmk7dd7kosqvNmFgA+iXvHS4qpNs9bdsUMCg@mail.gmail.com>
+X-Gm-Features: AUfX_mxLcl-KphrvU6gLOMupiRghMpmm1J92bVQek0OJwjAsSLdXf3P9i5s9MC4
+Message-ID: <CAMRc=MdA_zM_pHCmk7dd7kosqvNmFgA+iXvHS4qpNs9bdsUMCg@mail.gmail.com>
+Subject: Re: [PATCH v24 04/12] mfd: psci-mfd: Add PSCI MFD driver for
+ cpuidle-psci-domain cell
+To: Lee Jones <lee@kernel.org>
+Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>, Arnd Bergmann <arnd@arndb.de>, 
+	Bjorn Andersson <andersson@kernel.org>, Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Souvik Chakravarty <Souvik.Chakravarty@arm.com>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Andy Yan <andy.yan@rock-chips.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
+	Mark Rutland <mark.rutland@arm.com>, Conor Dooley <conor+dt@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, John Stultz <john.stultz@linaro.org>, 
+	Moritz Fischer <moritz.fischer@ettus.com>, "Rafael J. Wysocki" <rafael@kernel.org>, 
+	Daniel Lezcano <daniel.lezcano@kernel.org>, Christian Loehle <christian.loehle@arm.com>, 
+	Ulf Hansson <ulfh@kernel.org>, Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Sudeep Holla <sudeep.holla@kernel.org>, 
+	Florian Fainelli <florian.fainelli@broadcom.com>, Krzysztof Kozlowski <krzk@kernel.org>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
+	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>, Andre Draszik <andre.draszik@linaro.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>, linux-pm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	mfd@lists.linux.dev, Srinivas Kandagatla <srini@kernel.org>, 
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
+	Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Aug 13, 2026 at 02:35:01PM +0530, Vishnu Santhosh wrote:
-> On 24-07-2026 03:04 pm, Stephan Gerhold wrote:
-> > On Fri, Jul 24, 2026 at 10:16:31AM +0530, Vishnu Santhosh wrote:
-> > > On 14-07-2026 01:05 pm, Stephan Gerhold wrote:
-> > > > On Tue, Jul 14, 2026 at 11:02:32AM +0530, Vishnu Santhosh wrote:
-> > > > > On Qualcomm SoCs where the modem (e.g. the mDSP on Shikra, VMID 43 /
-> > > > > NAV) is the AXI master for BAM-DMUX RX transfers and the XPU enforces
-> > > > > per-region access control, each individually DMA-mapped RX buffer
-> > > > > requires its own XPU resource group (RG). With ~16 RGs available, the
-> > > > > 32 per-buffer dma_map_single() calls exhaust the table and the first
-> > > > > inbound transfer faults with an XPU violation.
-> > > > > 
-> > > > > BAM-DMUX is a singleton (exactly one instance per SoC), so the
-> > > > > destination VMID does not need to be a DT property; it is looked up
-> > > > > from the compatible string's match data instead. Add struct
-> > > > > bam_dmux_data with a single vmid field, and a shikra_data instance
-> > > > > hardcoding QCOM_SCM_VMID_NAV for qcom,shikra-bam-dmux.
-> > > > > 
-> > > > > When match data is present, allocate all BAM_DMUX_NUM_SKB RX buffers as
-> > > > > a single contiguous dma_alloc_coherent() block and SCM-assign that
-> > > > > block to HLOS plus the VMID once at probe. This reduces RG consumption
-> > > > > from 32 to 1. The block is never reclaimed across a modem power cycle
-> > > > > (bam_dmux_power_off() does not touch it), so the probe-time assignment
-> > > > > covers every subsequent restart without re-assigning or reclaiming. It
-> > > > > is reclaimed to HLOS only once, at remove or on a probe error, and if
-> > > > > that reclaim fails it is leaked rather than returned to the page
-> > > > > allocator.
-> > > > > 
-> > > > > Each rx_skbs[] slot is pre-assigned its virtual and DMA address from
-> > > > > the block, so no per-buffer mapping is needed at power-on. Because the
-> > > > > coherent block is not page-backed, received payload is copied into a
-> > > > > regular netdev skb before handoff to the network stack; this is an
-> > > > > unavoidable extra copy on the XPU-enforced RX path.
-> > > > > 
-> > > > > Platforms without match data are unaffected: rx_virt stays NULL, no
-> > > > > coherent memory is allocated, and the per-buffer dma_map_single() path
-> > > > > is unchanged.
-> > > > > 
-> > > > > Co-developed-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-> > > > > Signed-off-by: Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-> > > > > Signed-off-by: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
-> > > > So how do you handle TX buffers? Right now, they are just passed on from
-> > > > the net subsystem. There can be up to 32 TX buffers in progress as well.
-> > > > 
-> > > > Overall, I have mixed feelings about this patch. It looks reasonably
-> > > > simple, but fundamentally I don't understand why we need to go back to
-> > > > the old days of implementing protection using a highly limited MPU (in
-> > > > your case: the xPU).
-> > > > 
-> > > > Why does the setup of BAM-DMUX differ e.g. from the setup for the crypto
-> > > > engine? Crypto is also using bam-dma, but it avoids this inflexibility
-> > > > by making use of the &apps_smmu. Is BAM-DMUX not covered by the SMMU? Or
-> > > > did you just decide to bypass the SMMU in this case? (If so: Why?)
-> > > I checked with secure systems team on this. Crypto BAM is
-> > > behind apps_smmu, so protection is enforced through the SMMU's Stage-2
-> > > page tables.
-> > > 
-> > > A2 BAM (used by BAM-DMUX) is present in secure domain and does not
-> > > support Stage-2 translation on this SoC, and there is no IOMMU domain
-> > > that can be attached to it. The only protection mechanism available is
-> > > the xPU.
-> > > 
-> >
-> > Thanks for investigating this!
-> > 
-> > So is this a hardware limitation or something you could change with a
-> > firmware update? Could you move the A2 BAM out of the secure domain and
-> > protect it via the IOMMU instead of the xPU mechanism? The other modern
-> > platforms with IPA do not have this limitation, they can use the IOMMU
-> > for this.
-> > 
-> > We can try to support the xPU protection mechanism in the BAM-DMUX
-> > driver, but it's pretty bad from a performance and memory usage point of
-> > view if you need to copy buffers around multiple times. So if you have
-> > some way to change this in the firmware (and there is still time to do
-> > so before production boards ship), I would strongly recommend to
-> > investigate that.
-> > 
-> 
-> Based on what we confirmed with the Secure Systems team, this is a limitation
-> of the current Shikra platform rather than something that can be addressed
-> through a firmware-only update.
-> 
-> The A2 BAM used by BAM-DMUX is not connected to an SMMU/IOMMU domain on Shikra,
-> which means Stage-2 translation is not available for this path. As a result,
-> it is not possible to move this path behind an IOMMU.
-> 
-> Modern IPA-based platforms differ because their data paths are physically routed
-> through SMMU interfaces and therefore do not rely on VMID/xPU ownership assignment
-> for this type of access control. On Shikra, the A2 BAM path is protected using the
-> xPU3 VM-based access-control model, where DDR memory access is restricted and
-> granted through the request-based Hypervisor VM assignment framework. In contrast,
-> older targets relied on the earlier xPU2 resource-sharing model, in which modem
-> access did not require this type of explicit VM ownership configuration. This
-> architectural difference explains why the issue does not occur on those older platforms.
-> 
-> So, for this path on Shikra, SCM-driven VMID assignment remains the only practical solution.
-> 
+On Thu, 13 Aug 2026 14:38:41 +0200, Lee Jones <lee@kernel.org> said:
+> On Mon, 03 Aug 2026, Shivendra Pratap wrote:
+>
+>> PSCI has multiple kernel consumers, such as cpuidle-psci-domain.
+>> Currently, both the PSCI core driver and cpuidle-psci-domain bind
+>> directly to the same PSCI node "arm,psci-1.0". Additional consumers, if
+>> introduced, would also need to bind in the same way, leading to several
+>> drivers attached to a single device node.
+>>
+>> Introduce a PSCI MFD driver that binds to "arm,psci-1.0" and registers
+>> PSCI child cells. As the first user, register cpuidle-psci-domain as a
+>> child cell.
+>>
+>> Update cpuidle-psci-domain to probe as an MFD child and use the parent
+>> PSCI node for power-domain traversal.
+>>
+>> Suggested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+>> Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+>> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
+>> ---
+>>  MAINTAINERS                           |  1 +
+>>  drivers/cpuidle/Kconfig.arm           |  1 +
+>>  drivers/cpuidle/cpuidle-psci-domain.c |  9 +-------
+>>  drivers/mfd/Kconfig                   | 12 ++++++++++
+>>  drivers/mfd/Makefile                  |  2 ++
+>>  drivers/mfd/psci-mfd.c                | 43 +++++++++++++++++++++++++++++++++++
+>
+> We don't usually allow the use of the term MFD in devices.
+>
+> What does this do?  Is it a mux?  psci-mux?
+>
+> If not, think about what it is and call it that instead.
+>
 
-Ok, thanks for looking into this further.
+My two cents: I'd call it drivers/mfd/arm-psci.c
 
-Can you please try the following as alternative for the implementation?
-
-1. Make sure that you have CONFIG_DMA_RESTRICTED_POOL=y.
-2. Define a restricted DMA pool for BAM-DMUX, e.g.:
-
-&{/reserved-memory} {
-        bam_dmux_pool: restricted-dma-pool {
-	    compatible = "restricted-dma-pool";
-            size = <0x40000>;	/* 32*2K*2 = 128K minimum, but 256K might be safer */
-	    alignment = <...>;	/* Check xPU alignment requirements */
-        };
-};
-
-3. Assign to BAM-DMUX together with the qcom,vmid:
-
-&bam_dmux {
-	memory-region = <&bam_dmux_pool>;
-	qcom,vmid = <QCOM_SCM_VMID_NAV>;
-};
-
-4. Extend qcom_bam_dmux.c to look up the DMA pool address and make it
-   accessible using SCM: Call of_reserved_mem_lookup() to get the
-   region, then invoke qcom_scm_assign_mem() with that.
-
-5. Keep RX/TX DMA code paths in qcom_bam_dmux.c unchanged.
-
-6. When testing, make sure the kernel log contains
-   "Reserved memory: created restricted DMA pool at %pa, size %ld MiB"
-
-7. Add memory-region and qcom,vmid as optional in dt-bindings.
-   Add dependency: if qcom,vmid is specified, memory-region must be
-   specified.
-
-In a quick test (without the VMID stuff) this worked quite well for me,
-SWIOTLB should handle the copying behind the scenes without further
-changes to the qcom_bam_dmux driver.
-
-I would prefer that over complicating the driver with two separate ways
-of buffer management. AFAICT, the restricted DMA feature is meant for
-this kind of setup where there is no IOMMU but the firmware can still
-restrict memory accesses to a limited amount of regions, see
-https://lwn.net/Articles/841916/ for a short introduction.
-
-Thanks,
-Stephan
+Bartosz
