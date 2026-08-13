@@ -1,120 +1,125 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f52.google.com (mail-pj1-f52.google.com [209.85.216.52])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CD04184;
-	Thu, 13 Aug 2026 01:35:56 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786584958; cv=none; b=eyW3qR/hX+n32WMEOCaXomBb7TvXJmmg5oRXgCNLrMLBweMwU+6FeziDdBTllLFX9511ARKFkrmsHa3vFQBsE3yO70WqHQisPVyJMwj65LpzL3zzs9j6LXy2Xl6/Yu2BCCncGbtoLWUAIwr0AO2wPO7UGicn42HTw/SPDG+gujA=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786584958; c=relaxed/simple;
-	bh=kEe5zES/rKF7Sczuc218gbRpYp8Z9mbZzJxVYxw2hE8=;
-	h=Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=c/wBVxUf7kkFN6icLyZiTQ9eeTAxtrYJMykKa5VZ+Bm+QSLT/7CD8CuCZKDYAwkOzl2sG+VO1O3m7WEIQza3vlFTv55B7tlZ/LjotWYyUzDjtPwn7D2uqeZA28OMP8OGUCL8rLQjkpjuyEfJzIrKmbpNpFJ+1g6MTloCd1DOfyA=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=i3bq754Z; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 850D032B106
+	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 02:01:30 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.216.52
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786586491; cv=pass; b=iGS4n9uMx9pnNdoGGQJ6M1dn5fHDTdSooU48O5hIr8MP0VC1wmncpRTQUm0+Wskbzky8zaGfkvbgRg/S4mYqbdhMYiyqimmjThhEpA7mFCaMQ7tClLz02ya38zdWj9KTYDFQwMF6dt0jBohHcS4XVT3KGXtc1D6TeGt9Xi81zss=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786586491; c=relaxed/simple;
+	bh=hlqE4YkW5qnrwzgS72oZG+BgbCmAWDd7xaZ3TX+rX00=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=XyIFD50qQh+QYZUp4nkInTtRdF+2GrI3q3WzYrOMTqAHy7NcVWCDkmNHcObsmdxSR/8cPKA9BOMlj3pwDWRGGkVMSQ/ZJUkhNslDltqZt8u9G8PTjjXTN+yuDUm70yQuoWX9PCjq8u1F6B7v9MrcwWNypBE2vUgNYjcDxRrknx0=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=nfI5eyFe; arc=pass smtp.client-ip=209.85.216.52
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="i3bq754Z"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5A64F1F000E9;
-	Thu, 13 Aug 2026 01:35:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786584956;
-	bh=YwEmikoW9GFQgnq5tJLdM51ZbVY05afrgsWGuSYfQww=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=i3bq754ZQN0dpzAEmOUYeFFb9OM2IfcrUsrPEI3SdUEDawL9ac/2cJsT25G/XBo7E
-	 cps+H6sNQZiEsuyqMDs2Mx3YnKEZ0czsXA9RgwiAXfn4xheP+96tJydR7MFQXxfXbz
-	 1yZCkk5fMSj0+AyTDMvQhgsyW9C5Xwu18jh/mT7eMEvwt9JiMrQRLOtPO+2xgD2YIu
-	 EYZCh+iT7sZpYOLsfvE5xpCrDRaCxanHVk8FgLBG3PJ4E1Y4tpgV+5SMthqGieMqyi
-	 Uao2ZVS9uM0HInwCdZQaw+FU44ULziaKsltt4LYzUpoX6EFTih93FuCkDVd0MFgejB
-	 QNsWjrDcBhpZw==
-Date: Thu, 13 Aug 2026 02:35:43 +0100
-From: Jonathan Cameron <jic23@kernel.org>
-To: Nathan Chancellor <nathan@kernel.org>
-Cc: Amit Kucheria <amitk@kernel.org>, Thara Gopinath
- <thara.gopinath@gmail.com>, "Rafael J. Wysocki" <rafael@kernel.org>, Daniel
- Lezcano <daniel.lezcano@kernel.org>, Mark Brown <broonie@kernel.org>, Zhang
- Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
- linux-iio@vger.kernel.org, linux-pm@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- gregkh@linuxfoundation.org
-Subject: Re: [PATCH linux-next] thermal/drivers/qcom-spmi-mbg-tm: Add module
- namespace import for IIO_CONSUMER
-Message-ID: <20260813023543.6936b188@jic23-huawei>
-In-Reply-To: <20260812-qcom-spmi-mbg-tm-ns-modpost-error-v1-1-d849390d2714@kernel.org>
-References: <20260812-qcom-spmi-mbg-tm-ns-modpost-error-v1-1-d849390d2714@kernel.org>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="nfI5eyFe"
+Received: by mail-pj1-f52.google.com with SMTP id 98e67ed59e1d1-38dfe910e9dso1896171a91.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 19:01:30 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786586490; cv=none;
+        d=google.com; s=arc-20260327;
+        b=gaAL60VnA2GzCS8DAoH2/wP+NPDyvmG4qehorV3gaBZxd4gvpOU3cP+09+lv43r2MW
+         0omtxTCkXVhcU9VkvrsxaJk89TDTXNaYu34/LY7PiLbZsbaqAJW9yZHrScuisIKVLGAn
+         NBLtl9fmo7uHFLX8l1lRg/G2Z175lgNp4BZ5nU/ngjiPyNqBDv8iXZstlhSrmVoMKDdC
+         QSrmzh3aaXZufpfuTZpLMw57BI6xgN2zmsqCDvglTMCn/JBCkaHiFfkpe7NuvWLMTf/Z
+         yMR3nfu5XxLpFZ+zbh010HaweiRljaxGPeMX8XGqYLuLoMi2AVvGNrQ7u7Z+ngxVyMCd
+         k0bQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=ga93l35D89aJ2IHV9FDqwS6Op1XlfD1igClEfFwYr1A=;
+        fh=qcRoQvGfYV/VdtHNmBmBD4Y4mn88yTM6AwhLavYJWMM=;
+        b=n2L0fu8hswYeAuH5nCpmL6j0UPwAtK0ROMJ6SnXcuIMCUvozkpcRqwOtHs6+quCMxT
+         QXsDja/pk6EqncLKwrj6ChDGlWM3RETkDRvz43g1cwt+O72IUPLKM0fSfVSn+lzOjcm9
+         NNyleGH1/5vxycnpyEV11ggWuD1wjR6MA55j/M/BB5iPV9FGQUNkkLf9GLqurBpspN/X
+         3atR5DED1sGmpKBoCZOt3gtCLBfwbe3O3M2Ip6/IYv9NXX8tzZCqRvar31amAHoBrtne
+         nnazNOhi4vRSv0PSyQ+Wk7aEDBy5DOsNMeKlAMVyBb4YepQI6SE5pUL7/VdjIrGLT4et
+         rpDQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1786586490; x=1787191290; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=ga93l35D89aJ2IHV9FDqwS6Op1XlfD1igClEfFwYr1A=;
+        b=nfI5eyFeCC8D9jCxCQ+WcwCJ6bTPUaAJSzAOPKgHJHa9KypsKldr0sMogFvrw/Vpl4
+         oW0+sJeX9nUvi2KYBwmEZnqlSkSLzgltaz0wNseM54GpY2lq8J6iowmlLcl8sjETut2l
+         W8LvIPPzDKMWyTCuKz2LJwi+EeThkgIA0VFgU/4p4qwOSGRLlgZdwX2+FrBYurj1tYBu
+         qvn5LDBDV8efAyvf9B5Nl+gTZVX/rLu5aKzAWwb61UVfJy1k2ZxhSBOTrcVetpJvBNS8
+         /kGRuIbw7SM1ju4kH2lBiYXB6iAEKP64r/qXdLUCqch6nFl95JxVxwixL7/HZOIhxjeK
+         H2Cg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786586490; x=1787191290;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ga93l35D89aJ2IHV9FDqwS6Op1XlfD1igClEfFwYr1A=;
+        b=gfrqCg5wdtxSRzln+ZuGdoOqg5mQP55N/pzJxw/xyEquiDDQcMfwoS1hN1heXY9upI
+         v+0WFMaW6v+JzoUDVzSEDAlzN7Zcn/zP2w5n6vGnMCJGUa1HAVlOzhLPMvSGlL9l0fTG
+         lfjR1YYQ7iSDQ6tAMhw5MqFBdFIs9wGOplYLwpP6+Q9QwTJW1sJ4/QZ+o9L+hF+XUk4N
+         RZuHTV1af5/1ITfpKD75f3GJTAA9Cq7TZQqCDZ1jrnKucaJIhOl5y1duh4NkuJYZbAfK
+         IpWX9bS6s0br6iMXa3kwdx8D9ITK6BhMdfc/U20K5ar/IoKD6QNNzo2/PjQi6aiF9t9r
+         QhPg==
+X-Forwarded-Encrypted: i=1; AHgh+RrE7zvRnXcZ6Z2Ybc4cTGY8a05O0MjowAsHpElYY1DLIuFhgzlSjVQzLTXYeRhGFe+jB7GBaKZNwBCrJOVN@vger.kernel.org
+X-Gm-Message-State: AOJu0YxO4AuK8dRh1ByGzKxwDNCawWS/KajxWvWCRJ3FhXwTOALPE3lt
+	B4JF7rz7yPa+C7mtNF1yCR27AMzjbvgriB9G9Lc46/olcWopiv/dA1UHMTQk4/8/wAz9SAWq9Nz
+	zh2u8sdpjJhaGrIGPh6cAXAVyUtCdXGc=
+X-Gm-Gg: AR+sD11J4pOxwNE8oC2QewQnpCAFWo+v7VuJJOX+fkXNBGU8Kb5wq6gBmZqdhun4hWx
+	zCVhIBwhmZUHxUa9mn6TaGLrBMHuaFZGkECZb9D39UcWh3752ZPTcjd9bb8kTX+gk+V6Ih0PMh1
+	l2y7Kr/iOX3bsMk7NVbs6xt+ySB9GzSw7SDCaUb8/CzZeXbJa5Mo5xLb+2+59yFqWx4d0T07iKP
+	cJeNg+xjvVYspsRrNucVKdwdccSHgURa0nOu3Qyg6RgLRjxjaO4GLUhQz83slTGX7QobEci8SQA
+	QdkU9jcwzOrEqj14182p8baasEpkOBT5rgm99d6o3uOCkVIls1KR9Rcr4s+0XBZRcDsAo8YrZhY
+	koDW+oATBPENEpbaNpFI6AenZwnP+WOiy5pAyCFJNjtCzRKYxRvIFuYEw
+X-Received: by 2002:a17:90b:2246:b0:38d:dfd1:7c1 with SMTP id
+ 98e67ed59e1d1-3931dfdcc9emr2607429a91.2.1786586489664; Wed, 12 Aug 2026
+ 19:01:29 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20260811034715.6034-1-phucduc.bui@gmail.com> <81a38486-d4d8-4ca2-8d22-d3d178c17665@lunn.ch>
+ <CAABR9nF4q=eyUbzmo6-Co7NfVcg_bufHnffy8Ho4ZehHFZpqJg@mail.gmail.com> <017b2a0a-0092-4958-b554-45139db50cfd@lunn.ch>
+In-Reply-To: <017b2a0a-0092-4958-b554-45139db50cfd@lunn.ch>
+From: Bui Duc Phuc <phucduc.bui@gmail.com>
+Date: Thu, 13 Aug 2026 09:01:18 +0700
+X-Gm-Features: AUfX_mz6vikeDAWQkBfvSuo0tedoVTQ282pGLuo_TeMhsfWXN6Hkhq6AgPX6zzg
+Message-ID: <CAABR9nHApFe45RCcXoHDiNh6yqnyVLxgD=oFmpYohQ=QT9=wfA@mail.gmail.com>
+Subject: Re: [PATCH] net: xilinx: axienet: Propagate errors from optional IRQ lookup
+To: Andrew Lunn <andrew@lunn.ch>
+Cc: Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+	Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+	Michal Simek <michal.simek@amd.com>, linux-arm-msm@vger.kernel.org, 
+	netdev@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 12 Aug 2026 18:17:22 -0700
-Nathan Chancellor <nathan@kernel.org> wrote:
+Hi Andrew,
 
-> Commit ebf1d03dab96 ("iio: inkern: Use namespaced exports") in the iio
-> tree restricts certain exported core functions that a driver added in
-> commit c3dce117333c ("thermal/drivers/qcom: Add support for Qualcomm MBG
-> thermal monitoring") from the thermal tree uses, causing modpost to
-> warn (or error without CONFIG_MODULE_ALLOW_MISSING_NAMESPACE_IMPORTS):
-> 
->   ERROR: modpost: drivers/thermal/qcom/qcom-spmi-mbg-tm.ko: module uses symbol 'devm_iio_channel_get' from namespace 'IIO_CONSUMER', but does not import it.
->   ERROR: modpost: drivers/thermal/qcom/qcom-spmi-mbg-tm.ko: module uses symbol 'iio_read_channel_processed' from namespace 'IIO_CONSUMER', but does not import it.
-> 
-> Add the IIO_CONSUMER namespace import to clear up the error.
-> 
-> Signed-off-by: Nathan Chancellor <nathan@kernel.org>
+Thanks for the feedback.
 
-Ah. I'd forgotten we had the namespace addition earlier this cycle.
-Too much going on at the moment :(
+> > lp->eth_irq is assigned from platform_get_irq_optional(), which returns=
+ a
+> > positive IRQ number on success or a negative error code on failure.
+> > Therefore, a value of 0 is not possible here, so changing <=3D 0  to  <=
+ 0
+> > is directly related to the error handling described in the commit messa=
+ge.
+>
+> I think this is a separate change. You can then reference the
+> documentation, and its example:
+>
+> https://elixir.bootlin.com/linux/v7.1.8/source/drivers/base/platform.c#L2=
+70
+>
 
-Sorry about that - I should have given you a heads up.  Another
-win for linux-next testing things!
+I=E2=80=99ll split this change into a separate commit.
 
-> ---
-> I am not sure how this should be handled. As far as I can tell, there is
-> no error if this patch is applied to the thermal tree directly but it
-> would leave an "orphaned" module namespace import until the iio and
-> thermal trees are combined, which may not be preferable. Otherwise, it
-> would need to be applied to whatever merge happens second (hence
-> including Mark and Jonathan in this conversation).
-
-I did plan for this being a possible issue:
-
-Ideal is merge 
-https://git.kernel.org/pub/scm/linux/kernel/git/jic23/iio.git #iio-inkern-namespace-ib
-to the thermal tree.  If I'd called that out originally (or a thermal
-rebase is a possibility) it would be cleaner to do this before the
-qcom patch adds another user then squash what you have here in the appropriate
-patch.  Alternative is do it as a merge conflict resolution whilst merging
-in that tree.  If the second, I'd also mention that in the thermal pull request to
-Linus given it's a little unusual.
-
-Jonathan
-
-> ---
->  drivers/thermal/qcom/qcom-spmi-mbg-tm.c | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/drivers/thermal/qcom/qcom-spmi-mbg-tm.c b/drivers/thermal/qcom/qcom-spmi-mbg-tm.c
-> index 0492d5eeca01..a05bb444627a 100644
-> --- a/drivers/thermal/qcom/qcom-spmi-mbg-tm.c
-> +++ b/drivers/thermal/qcom/qcom-spmi-mbg-tm.c
-> @@ -254,3 +254,4 @@ module_platform_driver(mbg_tm_driver);
->  
->  MODULE_DESCRIPTION("PMIC MBG Temperature monitor driver");
->  MODULE_LICENSE("GPL");
-> +MODULE_IMPORT_NS("IIO_CONSUMER");
-> 
-> ---
-> base-commit: 28d012efb4327f9c75d5e042a7c91e9a542efa98
-> change-id: 20260812-qcom-spmi-mbg-tm-ns-modpost-error-fad8be2f985c
-> 
-> Best regards,
-> --  
-> Cheers,
-> Nathan
-> 
-
+Best regards,
+Phuc
