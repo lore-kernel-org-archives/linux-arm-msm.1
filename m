@@ -1,275 +1,94 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57D0A40929D
-	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 05:45:19 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 007E5411FB8;
+	Thu, 13 Aug 2026 06:06:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786599921; cv=none; b=aO5IKixlg3gIAyva/EPv1aHVf4axLB1VR+VEyPh5ghBaX10Y9Lr+k0Wtb8YXIyP8gT06wsvq8xXwYfHBR0zTMY79CFcEp3yYpr3WrrjwiPImJsbSzhMhFR0Cjx5RBQBkebEuDM92e4WpWmlVAy1e07Yw5rGuR3wFasfa9mOcdWE=
+	t=1786601203; cv=none; b=Q7H2PQDiXbKtXMcMxbd4Ta9z/PYQsBgFaLELID3hsjLHUHksZUffzpdmxHdjS6YJ2JJUY7zRSVuBYb8GAYvUyaodHSlc4WAYnroUyInLWE87RrQcZY+C+BosPeHaN6mEKK8Kp+cBbE+XZs3tWqJlGh8bJJd+OnOABPw98AZpX/E=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786599921; c=relaxed/simple;
-	bh=XuNbNdezUta+HaP/HnPqF/Qiyl+9RxcAukqvc3MaBLs=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=CFKLvcxDHkdSPLBgfAfbVnOCUM+PNJVAoRYz6XeebxWXefb4QaBw5dai6wMdh3gX5zpXVZno/nKaPsXPQ1dukRibKdV4wD1s7ozxR/P5x6naJHjcx+Cb5LFHO+Ndd3zxnOABtWhJ3kURoyxBaCpfz+d8oA/bA+DMUbxstLBf6MU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Ad9p+tYK; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=SNSGZjme; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1786601203; c=relaxed/simple;
+	bh=q4VOCvN9so/bl5JTL2R3NK0NEV3t15qu4E+uHTJMXmk=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=HYCB7noDxK6PtSW1txhARE5nb/SbZnSeiJU8dkS+qfeHv5AvpL6tzN12cXN8bZB4lhc3Zi+xkVTqGHhC6Vgq0+8J77W/7E4NJ1RXlpLKNkKrABxjVKqCZO0AVsb9mYg/CXRqgXH3ImhoWq62YAzTysWJeOAYJvK8PQdF/Gf7MZQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WepnVrP8; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ad9p+tYK";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="SNSGZjme"
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67D5g3jR1530056
-	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 05:45:18 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	mU+bqaVAcam260I0995R65cz5gHTBDXU+X7V9XX7Mlw=; b=Ad9p+tYKKl84HWnU
-	+9Hrr6N9TWCM7+PWrYaoG60Rd6D7xCYcW8ICPtGvefa8CElVGvZBRS5HLRX8e3xL
-	BPR0rykWIqu5ZuxTqvbCt7nGtb8A+oOuKS6+LuWiO6KKp1Co3ZWiueEsMUPpy8du
-	4aSb8PdmHWSH9KO3dubVmWKwZizKMZMnZitY9GJZoMjWuOPS4dwChpUvn8dLvVaZ
-	3Y/c2iLNFUubiDWdCp3xk5gXsmEztEjhSsW/KZShgh6UwyV0WB5cPkHtNGfhsqqi
-	GNUXjP/DHIAhwCXbVhdv7Te42TznE/N81NmwhOEbXdLIHrWH+ftooxQPSvWXRg6D
-	raHaWw==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g143hrtk6-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 13 Aug 2026 05:45:18 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-84fb5376cb8so1974827b3a.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 12 Aug 2026 22:45:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786599918; x=1787204718; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=mU+bqaVAcam260I0995R65cz5gHTBDXU+X7V9XX7Mlw=;
-        b=SNSGZjmevQo04rWmX/3GfOaqH8/YqdKSsjwHmg4XUmF9GHF+qLR0WH1YeIZvBNoHVU
-         0LwloRJokqlmOZxjbqJ24GPPX8E70Lv+eLba0np+mPLtldE7QiAJODaQ0lqgUfy1GRWA
-         VY7pKah/3IO+sS+YblYUp0cnVqjJ49hJL/5WMv2MReibN1C3ADDGDQJuwpixL04ZPNZC
-         s3BDT0HVXR8/jZhQK+UQysnaCwSWTZwe2wILl2AcywPQOxXDrDKH8SF+mwDeJ3ngkAm7
-         eU5g3ixsMNMhA91zP4uzfKfiCpDCSnL40tUU4CbzBtzomGxLEnN+KckY7xoGGsdqlDkH
-         j6VQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786599918; x=1787204718;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=mU+bqaVAcam260I0995R65cz5gHTBDXU+X7V9XX7Mlw=;
-        b=TLMbM+TA1OqHn4MmW/JS5Bsg1Hf598BOGn5fOlTyucQQBJySQBvILRHB/ddiRh4pdD
-         aTLVPknlWg0ceMmAB8iOOqn/5Vt7471kkFKQ61n/7MS5H+SIo20CDQRn8QsQ9qRhOQBH
-         qQuRWxo54qTvU1VJTcu9U5FKCIwwPh3607lWsLHaYG4jXJdvblV5NFuEdZcp/v25FPei
-         Hb/JiOciHbdrHeTDc5F8ndAY2RCqOWoIBJfT33jWwxRsI9vNJPokIVI2TnHtgoM47+Ap
-         J1ebnMiGmuPC2wXs+cR/BU8JmuycHVh8DXpVAQtvZQt+RESxUoBL1D8g6fcSLPmWZfne
-         +pfw==
-X-Forwarded-Encrypted: i=1; AHgh+RpbE+KgqbZ/43hJQZekkYGtbN1UsPKIaRq44+hv3CTSvnskfH9DYqO2A10H2/uOfvaM5JUJpUwhLudYl0iK@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyn2lekXN4M8455dTUvOpq432d3BVZTYWmZUtKHCG4te2sZZFwx
-	Z4ac+BGfC52KXE2qoEoqkr+prOXOXAb8lWzjjFF0Uxp/bh4rTlVXTS/YIIX8/s9hpImUl/SnTaG
-	5hZrr8BJhvuR7mVTIp4t44i7eqJWfG8XFP4Ix1oYowWF9KKEMcCkGvuDbWYqnC0Qk026M
-X-Gm-Gg: AR+sD11krzEKIiymmFyOVKdhTZPM2AnQBfO6U9s1SQkaZDO0u52pdhTwRqp39M8ZZXp
-	bUWzJ5x8xQ+BSikQrm4wxD41XOIvy9azconey9SVTQMaqGqARbmG1ONsl5jjPWUskz/jJTzTzvc
-	Js9Q4KR+gKVAUKl81z+XKaQjSU3rB1eE85mzg+amtSeFZs33ZTEKvhUcKLtpoexzStUGm5hB0ZG
-	Xk/y3fgkA6qjX1IGG6oup/zYd9OVVQMsZCjp/21OL0Pqyt2fq6jnLH0iP907gocljD1wU7GCvwD
-	aIrCdqRYFNHqwWfJrIUNMhpW13Qxw2WLU4+AvZqNVeApbsk8kQ0I+30xQB5xYckxtgioORfBC++
-	YZNNBMzXYFx+3RroNANR6pvvzWtwyHMfPRCU=
-X-Received: by 2002:a05:6a00:23d5:b0:837:e9cc:d474 with SMTP id d2e1a72fcca58-84fc6d3d156mr3197893b3a.2.1786599917904;
-        Wed, 12 Aug 2026 22:45:17 -0700 (PDT)
-X-Received: by 2002:a05:6a00:23d5:b0:837:e9cc:d474 with SMTP id d2e1a72fcca58-84fc6d3d156mr3197843b3a.2.1786599917327;
-        Wed, 12 Aug 2026 22:45:17 -0700 (PDT)
-Received: from hu-arandive-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-84fc477e53esm381500b3a.14.2026.08.12.22.45.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 12 Aug 2026 22:45:16 -0700 (PDT)
-From: Aniket Randive <aniket.randive@oss.qualcomm.com>
-Date: Thu, 13 Aug 2026 11:15:03 +0530
-Subject: [PATCH v7 2/2] i2c: qcom-geni: Add dynamic transfer timeout based
- on transfer length and frequency
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WepnVrP8"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E2EA1F000E9;
+	Thu, 13 Aug 2026 06:06:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786601201;
+	bh=2bRU4db2xtFcGOhDIJOKkQ4ShBGU9e2BMEUZzod3loM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=WepnVrP8FwDHztG5a+pL5+vdR+Cg8T4y90PcZBh/rlnZNWLRLfnDWWRxVJvS0+crZ
+	 lh7fpDVlbqh/6qvpmhacKyRBEAArsqvbDDRNZsTZ84+InSYC+LQE/2ApqTgrggsNhH
+	 YhxB5J0+AVZSQsk4LoO4+RjU9GDi4VJ7LjJUaYY3sLwr0c5vz/7/bRPur4asCQDR1r
+	 cNVYLKjWL4z4LWF+Z0JghcCDVi9WN26c7VGLvxJXgFSrnHhF5fGl1dbGiWnRcm8sU1
+	 SI1/W2qha+159VhpFETiKxPs27GXkyYyN7ajSyXNSy7VOA36iIT+UpNy1PI2kQZa1m
+	 WhxFEX5ERcXyQ==
+Date: Thu, 13 Aug 2026 08:06:31 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Hans Zhang <18255117159@163.com>
+Cc: bhelgaas@google.com, lpieralisi@kernel.org, kwilczynski@kernel.org, 
+	jingoohan1@gmail.com, imx@lists.linux.dev, linuxppc-dev@lists.ozlabs.org, 
+	linux-amlogic@lists.infradead.org, linux-rockchip@lists.infradead.org, 
+	linux-arm-msm@vger.kernel.org, sophgo@lists.linux.dev, linux-riscv@lists.infradead.org, 
+	spacemit@lists.linux.dev, linux-tegra@vger.kernel.org, linux-pci@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3 02/16] PCI: dwc: Use cached PCIe capability offset in
+ core
+Message-ID: <ps2qzgcb5lixkoqz2xbofdurkgmsiojg7e5ueqfdhyissqvzf2@tuderrjgzg6b>
+References: <20260720150619.24733-1-18255117159@163.com>
+ <20260720150619.24733-3-18255117159@163.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260813-master-v7-2-3f9010cf9229@oss.qualcomm.com>
-References: <20260813-master-v7-0-3f9010cf9229@oss.qualcomm.com>
-In-Reply-To: <20260813-master-v7-0-3f9010cf9229@oss.qualcomm.com>
-To: Wolfram Sang <wsa+renesas@sang-engineering.com>,
-        Andi Shyti <andi.shyti@kernel.org>,
-        Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-        Dmitry Guzman <Dmitry.Guzman@mobileye.com>
-Cc: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Aniket Randive <aniket.randive@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1786599906; l=5871;
- i=aniket.randive@oss.qualcomm.com; s=20260325; h=from:subject:message-id;
- bh=XuNbNdezUta+HaP/HnPqF/Qiyl+9RxcAukqvc3MaBLs=;
- b=gTI3LtgjT4uUvYl0gMWjqCV8lwTHFV44qD//aj33NDH+uQBGuUfj5aGuU7AEg+RXy0DBZ1Aq7
- JBX1jl8kFtSC7AM1hTTPY+7dmWuR30ILxdMu5Cil+K7pVuB1yx+/f3L
-X-Developer-Key: i=aniket.randive@oss.qualcomm.com; a=ed25519;
- pk=4o37X1ZqGbCO/T2SR8kq/HnWvq0yb1RUlFuNukovbQk=
-X-Authority-Analysis: v=2.4 cv=R5oz39RX c=1 sm=1 tr=0 ts=6a7d59ee cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=S_uJhbi9Giy6tt7Agy8A:9 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODEzMDAzNyBTYWx0ZWRfX7C8Wj7u3g43V
- sePvHFxwFn2wxq/CehvXeAWu8IFbkRkZQsgdt+DJf0/WP3/pV+dlhejIC6WbtclXY/EYcjcHJQh
- d7+K/g9U18B2OTjCsH875pru1DGgtY02t/DiBFE8tsjju5EoBIiS2CTVXv0k0XvJBOACQaV6ZZA
- oKlS7loli98aYpCH2gFOUxQVJGq2Nz5KkgSxEgUnQJTWnr7iuSb9dRTAUXCdN/zu9p4l3cApeP/
- bbvPXvFeRgJ47rHRh/0Hq4jqk/5P0j5Ln/gbGOdFK0S3mQlum70fqjCpzamBrGQD2utWNV1od3s
- di6T0n4/ajlJ2C+QkVmly2ir2YNnlDk51v5jyR02Aoi3/NF0Mr5J0ZYd78PZSgzx6oKMSaap4UF
- 79wkLMvvoeR2x5EqjM43YoI1uGNjDe6cBVibHDsu0VyZgrjsTISWhYQ/Ojckgg87w8C/Q2AaltZ
- jzJnvuR690A+HKeXgQA==
-X-Proofpoint-GUID: N_6Yp1iK5HCzuZgedppBKb3yGeY7RQVu
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODEzMDAzNyBTYWx0ZWRfX84nDUdSs/JkF
- 7d68QXKWMH5vcP9JneaqpfU0fxIgUCfPpySaO3oDGr/3ogISV8ky0KeQXP78tYw1c7RTcsoEe5p
- Ha/hnLnEpbrSgNyEuVDQL6P3IzF+gSw=
-X-Proofpoint-ORIG-GUID: N_6Yp1iK5HCzuZgedppBKb3yGeY7RQVu
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-13_02,2026-08-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 suspectscore=0 adultscore=0 clxscore=1015 priorityscore=1501
- impostorscore=0 phishscore=0 lowpriorityscore=0 spamscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608130037
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260720150619.24733-3-18255117159@163.com>
 
-The driver uses a static XFER_TIMEOUT of HZ (1 second) for all transfers
-regardless of message length or bus frequency, causing unnecessary
-delays on error paths.
+On Mon, Jul 20, 2026 at 11:06:05PM +0800, Hans Zhang wrote:
+> Modify the DWC core functions to use the cached pcie_cap offset instead
+> of calling dw_pcie_find_capability() each time.
+> 
+> In the DWC core, dw_pcie_find_capability() is called at several locations:
+> - dw_pcie_ep_init_non_sticky_registers()
+> - dw_pcie_wait_for_link()
+> - dw_pcie_link_set_max_speed()
+> - dw_pcie_link_get_max_link_width()
+> - dw_pcie_link_set_max_link_width()
+> 
+> The cached offset is initialized after hardware is ready:
+> - In host mode: dw_pcie_host_init() calls pp->ops->host_init() (enables
+>   clocks/resets), then dw_pcie_get_pcie_cap() caches the offset.
+> - In endpoint mode: the core no longer caches automatically. Instead,
+>   drivers must call dw_pcie_get_pcie_cap() after hardware is enabled
+>   (e.g., after PERST# deassert).
 
-Use i2c_update_timeout() from i2c-core to compute the timeout dynamically
-from the message length and the bus frequency, then read adap->timeout at
-each wait site.  For FIFO, SE-DMA, and GPI single-descriptor paths the
-timeout is computed per message using that message's length.  For the GPI
-multi-descriptor path, the maximum message length across the batch is used
-since one completion covers the entire BEI batch and the timeout must
-cover the longest individual message.
+But you didn't modify all DWC EP drivers to call dw_pcie_get_pcie_cap(). This
+can lead to pcie_cap being 0.
 
-A 10x safety margin over the theoretical wire time is applied, with a
-300ms floor to account for I2C clock stretching and other situations where
-a slave may keep SCL asserted for an extended period, including faulty
-devices holding the bus.  Both constants remain private to this driver.
+> dw_pcie_ep_init_non_sticky_registers()
+>   is called after that point, so it can safely use pci->pcie_cap.
+> 
+> dw_pcie_ep_init_non_sticky_registers() now assumes pci->pcie_cap is
+> valid. if not, it prints a warning and skips the operation.
 
-Signed-off-by: Aniket Randive <aniket.randive@oss.qualcomm.com>
----
- drivers/i2c/busses/i2c-qcom-geni.c | 44 ++++++++++++++++++++++++++++++--------
- 1 file changed, 35 insertions(+), 9 deletions(-)
+Where is this warning printed?
 
-diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
-index 658636c1ee0e..c98d9e7b250c 100644
---- a/drivers/i2c/busses/i2c-qcom-geni.c
-+++ b/drivers/i2c/busses/i2c-qcom-geni.c
-@@ -79,9 +79,14 @@ enum geni_i2c_err_code {
- 
- #define ABORT_TIMEOUT		HZ
- #define CANCEL_TIMEOUT		HZ
--#define XFER_TIMEOUT		HZ
- #define RST_TIMEOUT		HZ
- 
-+/* 9 bits per byte (8 data + 1 ACK), 10x safety margin */
-+#define I2C_TIMEOUT_SAFETY_COEFFICIENT	10
-+
-+/* 300ms floor: budget for clock stretching; slave may hold SCL low indefinitely */
-+#define I2C_TIMEOUT_MIN_USEC		300000
-+
- struct geni_i2c_desc {
- 	bool no_dma_support;
- 	unsigned int tx_fifo_depth;
-@@ -513,7 +518,9 @@ static int geni_i2c_rx_one_msg(struct geni_i2c_dev *gi2c, struct i2c_msg *msg,
- 	}
- 
- 	cur = gi2c->cur;
--	time_left = wait_for_completion_timeout(&gi2c->done, XFER_TIMEOUT);
-+	i2c_update_timeout(&gi2c->adap, gi2c->clk_freq_out, len,
-+			   I2C_TIMEOUT_SAFETY_COEFFICIENT, I2C_TIMEOUT_MIN_USEC);
-+	time_left = wait_for_completion_timeout(&gi2c->done, gi2c->adap.timeout);
- 	if (!time_left || (gi2c->err && gi2c->err != gi2c_log[ADDR_NACK].err))
- 		geni_i2c_cancel_xfer(gi2c);
- 
-@@ -555,7 +562,9 @@ static int geni_i2c_tx_one_msg(struct geni_i2c_dev *gi2c, struct i2c_msg *msg,
- 		writel_relaxed(1, se->base + SE_GENI_TX_WATERMARK_REG);
- 
- 	cur = gi2c->cur;
--	time_left = wait_for_completion_timeout(&gi2c->done, XFER_TIMEOUT);
-+	i2c_update_timeout(&gi2c->adap, gi2c->clk_freq_out, len,
-+			   I2C_TIMEOUT_SAFETY_COEFFICIENT, I2C_TIMEOUT_MIN_USEC);
-+	time_left = wait_for_completion_timeout(&gi2c->done, gi2c->adap.timeout);
- 	if (!time_left || (gi2c->err && gi2c->err != gi2c_log[ADDR_NACK].err))
- 		geni_i2c_cancel_xfer(gi2c);
- 
-@@ -633,7 +642,7 @@ static void geni_i2c_gpi_multi_desc_unmap(struct geni_i2c_dev *gi2c, struct i2c_
-  * geni_i2c_gpi_multi_xfer_timeout_handler() - Handles multi message transfer timeout
-  * @dev: Pointer to the corresponding dev node
-  * @multi_xfer: Pointer to the geni_i2c_gpi_multi_desc_xfer
-- * @transfer_timeout_msecs: Timeout value in milliseconds
-+ * @timeout_jiffies: Per-message completion timeout in jiffies
-  * @transfer_comp: Completion object of the transfer
-  *
-  * This function waits for the completion of each processed transfer messages
-@@ -643,18 +652,18 @@ static void geni_i2c_gpi_multi_desc_unmap(struct geni_i2c_dev *gi2c, struct i2c_
-  */
- static int geni_i2c_gpi_multi_xfer_timeout_handler(struct device *dev,
- 						   struct geni_i2c_gpi_multi_desc_xfer *multi_xfer,
--						   u32 transfer_timeout_msecs,
-+						   unsigned long timeout_jiffies,
- 						   struct completion *transfer_comp)
- {
- 	int i;
--	u32 time_left;
-+	unsigned long time_left;
- 
- 	for (i = 0; i < multi_xfer->msg_idx_cnt - 1; i++) {
- 		reinit_completion(transfer_comp);
- 
- 		if (multi_xfer->msg_idx_cnt != multi_xfer->irq_cnt) {
- 			time_left = wait_for_completion_timeout(transfer_comp,
--								transfer_timeout_msecs);
-+								timeout_jiffies);
- 			if (!time_left) {
- 				dev_err(dev, "%s: Transfer timeout\n", __func__);
- 				return -ETIMEDOUT;
-@@ -778,8 +787,22 @@ static int geni_i2c_gpi(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[],
- 		dma_async_issue_pending(gi2c->tx_c);
- 
- 		if ((msg_idx == (gi2c->num_msgs - 1)) || flags & DMA_PREP_INTERRUPT) {
-+			size_t max_len = 0;
-+			int j;
-+
-+			/*
-+			 * Use the longest message as the timeout base: one completion
-+			 * covers the whole BEI batch, so the budget must fit the worst
-+			 * case single-message wire time.
-+			 */
-+			for (j = 0; j < gi2c->num_msgs; j++)
-+				max_len = max_t(size_t, max_len, msgs[j].len);
-+			i2c_update_timeout(&gi2c->adap, gi2c->clk_freq_out, max_len,
-+					   I2C_TIMEOUT_SAFETY_COEFFICIENT,
-+					   I2C_TIMEOUT_MIN_USEC);
- 			ret = geni_i2c_gpi_multi_xfer_timeout_handler(gi2c->se.dev, gi2c_gpi_xfer,
--								      XFER_TIMEOUT, &gi2c->done);
-+								      gi2c->adap.timeout,
-+								      &gi2c->done);
- 			if (ret) {
- 				dev_err(gi2c->se.dev,
- 					"I2C multi write msg transfer timeout: %d\n",
-@@ -899,7 +922,10 @@ static int geni_i2c_gpi_xfer(struct geni_i2c_dev *gi2c, struct i2c_msg msgs[], i
- 
- 		if (!gi2c->is_tx_multi_desc_xfer) {
- 			dma_async_issue_pending(gi2c->tx_c);
--			time_left = wait_for_completion_timeout(&gi2c->done, XFER_TIMEOUT);
-+			i2c_update_timeout(&gi2c->adap, gi2c->clk_freq_out, msgs[i].len,
-+					   I2C_TIMEOUT_SAFETY_COEFFICIENT,
-+					   I2C_TIMEOUT_MIN_USEC);
-+			time_left = wait_for_completion_timeout(&gi2c->done, gi2c->adap.timeout);
- 			if (!time_left) {
- 				dev_err(gi2c->se.dev, "%s:I2C timeout\n", __func__);
- 				gi2c->err = -ETIMEDOUT;
+These are already pointed out by Sashiko. You should go really go through all of
+them (not the pre-existing issues) and comment whether the issues are valid or
+false positive. For a series touching many controller drivers, this is necessary
+to avoid introducing regressions.
+
+I'm not going to merge this series until you fix the real issues Sashiko
+reported or mark them as false positive if not valid.
+
+- Mani
 
 -- 
-2.34.1
-
+மணிவண்ணன் சதாசிவம்
