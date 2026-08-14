@@ -1,65 +1,229 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88B0D3B637C;
-	Fri, 14 Aug 2026 10:34:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 372473B9DA8
+	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 10:57:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786703699; cv=none; b=Yfb2KrGlaUb1t9WGegOxU7cvMvzhH2nzWgvpfKtbm9JxWo/LKZe5zHhirLfO8vo1HKzUieVuIsnRlDyQN5RWowWqAyOfkasy7qcPz0H/l8va5XkyBSoaH5Jwt/fzAYbNOgxmFBNqKi8aGkEPBijPH/IL0HRvNmWQzxp1chJr50U=
+	t=1786705082; cv=none; b=pAfVB1TK+beD1tr6H35/IXHwH4Q3JFPrTRWnw6h6JrSUE6rb2B58uMzS4wUBjRQnGQOOBIdR6/mPgKhaWBGXrxvmozNf2bQWp8wj7WBeO2nmVptS6vmHASNPL5CXQDwbKGCqD0H4UcpKbCyvhrPhCwzzu5GoPn98s3N1hyRq90o=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786703699; c=relaxed/simple;
-	bh=jSgH07T1T1GPvz2qg7Pd/HQPLo9H1ZT4I3dPszGWKXs=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=J+dsY+tyyWYQzODRn5xZ84UArYurMH3NoGTsLLe0GfrmWqCz0ZBain/zsCZlMif0XiC1QVxeR7+lpa4Y3CVYXijZNEPkLSOrPsE1Mxb9iaBqOWT47EH0q9UBs9PqVbzI0Q/MdqvDs/5wJACprSn93TLwBZpuUZY4xCj8s7kn+vQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cMkKl8fZ; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786705082; c=relaxed/simple;
+	bh=/TYIhfOmT8Bb4t2u3FQPduCphwNJftOBmshuMKDdFGs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=eHlAj7dyM/yNPjQz3Eml68O6yMhdJ/AYEy8/2uHiQa4Ql2/qeZzSupB4SWU9+s6T4t9nPpl+63RN6wfg7x54m7VpzrdaTAMbvJEW0Ki5B3xI0XM2T35Mg8RgvQ7AtS1Ep1IMtvzYZMdH80FBVtl0T4GqGm4ZNHIhf2sGWZmy8vQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=pMuxA/yF; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=BVa18ySF; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cMkKl8fZ"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5C0F01F000E9;
-	Fri, 14 Aug 2026 10:34:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786703687;
-	bh=4RIu9UZ9bVZVLDk/aNoSWVU7vQlBGpgluA294lEBvNs=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=cMkKl8fZHQbHiyJDHDx4ntZfVQJyqXZK+F1XzupY/GgrJ6MJ+7aldgS0kpe2m5a97
-	 BYvYvE+yZY6NlBMItJHc4rfWyOESUjWcBOb9ouW9F9Upmsl+FuE6Icdp6QTK8kOqAj
-	 /unLnKbbAzTKR++n5TolvbAXuUMphKjU/zxpAei/XMzEA2VNLBtjxDS4356Rw0F7K/
-	 1KUix4Z8OiDC3jN+njAgEiBh4kYvWs8Vi1ztG6u5Ke0AmPwbfOneuoZkA/xLYgEthu
-	 BQpjuHE2WwjPSp5P3uzBaE5pWqZfz4GrHJsTS3GPihJqz732eW38Ocwr7X2S2J87WM
-	 Ev7wbmP612BIw==
-Date: Fri, 14 Aug 2026 12:34:39 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Adam Skladowski <a39.skl@gmail.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Kees Cook <kees@kernel.org>, 
-	Tony Luck <tony.luck@intel.com>, "Guilherme G. Piccoli" <gpiccoli@igalia.com>, 
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	linux-hardening@vger.kernel.org
-Subject: Re: [PATCH 6/7] dt-bindings: arm: qcom: Document Xiaomi Redmi 9T
-Message-ID: <20260814-amazing-flying-tarsier-9e78ca@quoll>
-References: <20260810-next-patches-v1-0-79a779d76173@gmail.com>
- <20260810-next-patches-v1-6-79a779d76173@gmail.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="pMuxA/yF";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="BVa18ySF"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67EAbkd1663888
+	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 10:57:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	/TYIhfOmT8Bb4t2u3FQPduCphwNJftOBmshuMKDdFGs=; b=pMuxA/yFUdkM4MJv
+	K0VIoROiLJur2rCFAnu78cjniV6U5v3/NEf/CmLTkCU7ymyMhCk9SHCLgNDQ5PX3
+	2cguS68+KpXst3qnhOkksjLHoqJ+RHcTV2bXWoCe9s418oNzfsG5/mDdzKbnyoI7
+	gX98bl8VTjsCpwkpS/D1wV5mBwqJvL96uNqeyi5elV1QlxOcDQ/vWuEVGzmCY8Nz
+	5hcA019liQJvybHv7Tg+fd7E9z+dXCPOpiIGH2o8Fpv37rWAbHR2EQrZJNGz8JHo
+	S7mKmfrj676V3XMeE3ms6SZ1sKybKi6CQuZ7ozyb6ZmZWO/mjsam1Jg2xny6bci1
+	XShUGg==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g1m42k152-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 10:57:50 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cbef7b172easo1767808a12.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 03:57:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786705069; x=1787309869; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=/TYIhfOmT8Bb4t2u3FQPduCphwNJftOBmshuMKDdFGs=;
+        b=BVa18ySFOMbUt4axpJruUkHU8jNjlvv5xDxkfrJUjObE86C108rEnIxwZn9JvPqRlE
+         hphLH8Ucrm6Jfnn2xYSoigxKR1tXeQ7baN9jZUBnAYCoQgzmiO8b/zC6cxf/9OGWH8G6
+         Ec8h05DTB7UIMDIPwXTvLlPVrNs/NxMFMOV8qH+8W7aBuyQAl0tGdAGdsJI89OPWzs6v
+         irQF6rL///ilRMxk0VpJ3Rj9FaISzcrAPT8g+rX/QQEWWkajQxb2STc0KA6ENFTar7dz
+         cD/F2DL+X70OFj+W48tASyzbqhqH2tuXv0qT9iWeG1A+cZJfxV2733+Dcd1gu0hfXaFs
+         qOGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786705069; x=1787309869;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:content-language:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=/TYIhfOmT8Bb4t2u3FQPduCphwNJftOBmshuMKDdFGs=;
+        b=KGxckBjL6038EWpVtotlpY2UTBaV3CP8gy1O4a4PLZpgffdsSNlUqSxOl2/ceEwKWC
+         Wd1cKAwNmfKE+KPPjYUXm7omiYLmbWKCnzXLoQLo5w2JMllrmT9L9x+kP8TdNVGq6wNH
+         7ksjJt8TL4M1AIaCbVmvcE3LtEkGJs54nrmF1tUqOmMhLl+5wwqCSC6J5X/ZYBzrodH0
+         kiQVl9eKWGNu1wEShqS4eMkHEUslXeoE7G413DTqWxP7SeYTqG9wJlAbBpVBMJkvD3bN
+         178P9Wy96V+lG+dnPFaWk160LH7UIzRw3oIhhVi0ncNXsk7YNuCIq7S+2v+EuA61fiw/
+         WaiQ==
+X-Forwarded-Encrypted: i=1; AHgh+RoNx/Sxjpxg45LAbJ1INrYhHWHriFx12Nh5coV32opPQ133zjp/vcsMnwAvjd/qrz5i7mr8LTnaIgaw3/XC@vger.kernel.org
+X-Gm-Message-State: AOJu0YxKQSTeAoA0HY6JnQ8mbPRm9LZ534DgpSabnLNBb3oFsI65KdHf
+	WpxUYkSifsbzgEGLBlBvcpKrIZjbhVUP6LRzKJr7ve205kTVuQggPFn0byma7kqrmMJEa/b3WKo
+	xeTaYIhF9pTCyycIeMeKm1AqZ3EaaxDFdasEHzGOzlIMBTPChOX5HlUILsCtmFCnNZjn4
+X-Gm-Gg: AR+sD11QMSyUXt3ecaLXJEREoCJDezp3XeVe3qSeqeffV36rN3hn6JL6RuNeNgfLPHN
+	hXy1Pb3F4opbzQsjlQzT0NXVOLHiVRzQO3g7v9xewdGWUiOqZnEmYg2qDtedpXa7AN78BNMx41N
+	eOcY1YZppGUwHIGR7j90E4+nIvoELBxHx79m+1k0PRX8aQ/o9qY1LZN7yZEuTkwPpUNjzaqxo6x
+	XWkLvxNeOw6/i16mIk2Q/NG7rG4y5RmpTSZMk32fBw1jnnbXRsvPBUbb718SA/8Ry/fbvvbeQWD
+	EqgNka42i5dXbRBGZ+MF331gb/WTHqYScnz2xRxhDz8hNVRFvvvli5IN3CDQUVVWyeyXMOl1XoV
+	GGuyVZN5By8LDlTn9Aj5xsXrNAA+k0sRp
+X-Received: by 2002:a05:6a21:2d4b:b0:3b2:a809:ffe with SMTP id adf61e73a8af0-3cc71a2d522mr6482131637.14.1786705069487;
+        Fri, 14 Aug 2026 03:57:49 -0700 (PDT)
+X-Received: by 2002:a05:6a21:2d4b:b0:3b2:a809:ffe with SMTP id adf61e73a8af0-3cc71a2d522mr6482065637.14.1786705069058;
+        Fri, 14 Aug 2026 03:57:49 -0700 (PDT)
+Received: from [10.206.101.140] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-320ea2fcfb8sm3392781eec.21.2026.08.14.03.57.42
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 14 Aug 2026 03:57:48 -0700 (PDT)
+Message-ID: <25b990fc-558d-d64b-1a5d-e593f4c8d649@oss.qualcomm.com>
+Date: Fri, 14 Aug 2026 16:27:40 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260810-next-patches-v1-6-79a779d76173@gmail.com>
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Thunderbird/102.8.0
+Subject: Re: [PATCH 2/4] arm64: dts: qcom: sc7280: Add dma-coherent property
+ into venus node
+Content-Language: en-US
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Bryan O'Donoghue <bod@kernel.org>,
+        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley
+ <conor+dt@kernel.org>,
+        Stanimir Varbanov <stanimir.varbanov@linaro.org>,
+        Mansur Alisha Shaik <mansur@codeaurora.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Hans Verkuil <hverkuil@kernel.org>,
+        Stefan Schmidt <stefan.schmidt@linaro.org>,
+        Hans Verkuil <hverkuil+cisco@kernel.org>, linux-media@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, stable@vger.kernel.org
+References: <20260801-iris-fixes-dma-pseq-fint-v1-0-aba0cb22f6ab@oss.qualcomm.com>
+ <20260801-iris-fixes-dma-pseq-fint-v1-2-aba0cb22f6ab@oss.qualcomm.com>
+ <20260813-frisky-augmented-crow-fd5d3d@quoll>
+ <4b34e718-0878-25cc-a5bd-0d8858df5133@oss.qualcomm.com>
+ <30195e14-0dcb-476d-af0d-f85ee57e2aa5@kernel.org>
+ <e287e538-135a-4eb7-1b21-55b475c844e0@oss.qualcomm.com>
+ <26a880b2-5f37-43be-ae8b-2c0c27c777a1@kernel.org>
+ <c03354d1-843c-af24-0e7b-a4c0cfb8e001@oss.qualcomm.com>
+ <ed6c14b1-49b4-44ba-87b1-65b685e6c25c@kernel.org>
+From: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+In-Reply-To: <ed6c14b1-49b4-44ba-87b1-65b685e6c25c@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=I+dVgtgg c=1 sm=1 tr=0 ts=6a7ef4ae cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=axlFovWQs4n-uMMd4hsA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-ORIG-GUID: t94WRBhOd8gl1RNpM379aNhP2Cvj0OWc
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE0MDA4MyBTYWx0ZWRfX74hqTF6ETM1m
+ GdaIW8Uo/IwEqcapQGhquNv0gk2vJ+k5aIOmO/v7VQ9lLr9AIIgiBXbId0hhrloeHQ18zcxpTka
+ lyl7lLAJeLwEff/zACGUx574yUTeF2earC39mOG+zX90rpYdIF/k9YKSFbG6A/+joH5+Nj5CUEP
+ eH6HMB6VYzhZFYCAWA+78jjegPS10q8Ix6/BHDcWkA5TngeIVHa4wNUcXepnO+d8Xo3kaGkieE9
+ opdTGILh9SHvSzKrw9jA5rnOML4evOTUk3lRX8XlnT+ozgFgEdbg2ININx4EaJtNp8bP4L2R3tz
+ VzDwGXzMuX9fTaB1nJ9zUtnknfTIZ2qXPTMo+Zdq0zt9NYdNvVtb3V23W4ip48hP9KD+LrItQyD
+ jsThw+bBiIg+ZW8SUtcM0i9jKEA6vGK4whpjijCaovx4kOiSkgefg7jsHdXp+ZEmNpK6aC1eoRr
+ bvpQZeXlScr7CaFOYMg==
+X-Proofpoint-GUID: t94WRBhOd8gl1RNpM379aNhP2Cvj0OWc
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE0MDA4MyBTYWx0ZWRfX1BAPW62eQmRc
+ cG9qYLpr6cuGw1ojt2Ku1V/7u5bfGAZcZ8PPdkobU9d2A9bkAeaVfvJqU/uBBK+a7T2xKrhIPjo
+ QuImIKJrbd8iRmMLxrwh+MZc0jHdUrA=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-14_04,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 phishscore=0 suspectscore=0 bulkscore=0 adultscore=0
+ clxscore=1015 priorityscore=1501 impostorscore=0 spamscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608140083
 
-On Mon, Aug 10, 2026 at 06:55:39PM +0200, Adam Skladowski wrote:
-> Add compatible for Xiaomi Redmi 9T NFC codename lemon which is one
-> of variants of Xiaomi Citrus lineup based on Snapdragon 662 SoC.
-> 
-> Signed-off-by: Adam Skladowski <a39.skl@gmail.com>
-> ---
->  Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
->  1 file changed, 1 insertion(+)
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+On 8/14/2026 3:56 PM, Krzysztof Kozlowski wrote:
+> On 14/08/2026 12:24, Vishnu Reddy wrote:
+>> On 8/14/2026 3:26 PM, Krzysztof Kozlowski wrote:
+>>> On 14/08/2026 11:49, Vishnu Reddy wrote:
+>>>> On 8/14/2026 12:01 PM, Krzysztof Kozlowski wrote:
+>>>>> On 14/08/2026 07:29, Vishnu Reddy wrote:
+>>>>>> On 8/13/2026 2:49 PM, Krzysztof Kozlowski wrote:
+>>>>>>> On Sat, Aug 01, 2026 at 01:07:28PM +0530, Vishnu Reddy wrote:
+>>>>>>>> While testing with some higher resolution clips, the venus hardware
+>>>>>>>> triggers a fault due to wrong input data being received. Corruption
+>>>>>>>> was also observed in the captured output when the client dumped it
+>>>>>>>> to a file.
+>>>>>>>>
+>>>>>>>> On debugging, this was traced to the venus node not declaring
+>>>>>>>> dma-coherent. As a result, DMA buffers shared between the CPU and the
+>>>>>>>> venus video hardware/controller are not guaranteed to be I/O coherent:
+>>>>>>>> CPU writes to an input buffer can remain in CPU caches without being
+>>>>>>>> visible to the video hardware when it reads the same buffer, so the
+>>>>>>>> hardware receives input data that does not match what the CPU wrote.
+>>>>>>>> Likewise, on the capture path, data written by the video hardware to
+>>>>>>>> the output buffer may not be visible to the CPU, so the client reads
+>>>>>>>> stale or partial data, resulting in corruption.
+>>>>>>>>
+>>>>>>>> Add the dma-coherent property to the venus node so that DMA buffers
+>>>>>>>> shared between the CPU and the video hardware and controller remain
+>>>>>>>> coherent.
+>>>>>>>>
+>>>>>>>> Fixes: 37613aee2179 ("arm64: dts: qcom: sc7280: Add venus DT node")
+>>>>>>> Really does not look like a fix. How skipping a cache sync can fix
+>>>>>>> anything exactly?
+>>>>>> dma-coherent tells the kernel that this device DMA path is hardware-coherent,
+>>>>>> so the SMMU maps its buffers as cacheable. That attribute is what causes the
+>>>>>> coherent interconnect to snoop CPU cache lines on every VPU transaction, so
+>>>>>> hardware keeps CPU caches and VPU-visible memory in sync — which is why the
+>>>>>> dma-coherent property lets us skip the unnecessary cache clean/invalidate.
+>>>>> You just repeated what I wrote. What for?
+>>>>>
+>>>>>> If a device doesn't support I/O coherence, its buffers would instead be mapped
+>>>>>> non-cacheable, no snooping would occur, and the driver would need explicit
+>>>>>> dma_sync_*() calls at each transition. Venus on SC7280 does support I/O
+>>>>>> coherence, so dma-coherent describes that existing hardware capability to
+>>>>>> the DMA subsystem.
+>>>>> How does this anyhow explain your commit msg? Are you saying driver is
+>>>>> buggy that it misses sync calls?
+>>>> No, driver is not buggy here. dma-coherent flag is missed in the dt node.
+>>> Again, no... or explain why. Missing dma-coherent is not a fix, but
+>>> rather optimisation, but you claimed it is a fix. Explain why.
+>> Is the dma-coherent flag only for skipping cache sync?
+>> I might be repeating here — it enables the hardware level snoop between CPU
+>> caches and DMA memory. Without dma-coherent, the CPU cache and the memory
+>> which VPU accesses aren't in sync at the hardware level, which is what
+> They are in sync, because driver explicitly MUST sync it.
 
-Best regards,
-Krzysztof
+No, currently driver is not calling the dma_sync*() explicitly.
+It won't be in sync. That's why dma-coherent flag added to keep the
+CPU cache and DMA memory in sync.
+Will you suggest to sync from the driver explicitly?
 
+If we call dma_sync*() in driver, will you recommend to add the
+dma-coherent flag or not in the dt node?
+
+> You cannot have uncoherent accesses without proper DMA cache syncing
+> operations.
+>
+>> caused the corruption. So dma-coherent is the proper fix here, and that's
+>> why I've mentioned it as a fix. Do you have any opinion on how you'd prefer
+>> to handle this? Please share.
+> As I told you, it is not a fix and provide arguments why.
+>
+>
+> Best regards,
+> Krzysztof
+>
