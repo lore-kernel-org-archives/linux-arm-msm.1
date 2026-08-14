@@ -1,68 +1,158 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from OSPPR02CU001.outbound.protection.outlook.com (mail-norwayeastazon11013022.outbound.protection.outlook.com [40.107.159.22])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E29D35F172;
-	Fri, 14 Aug 2026 14:00:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786716026; cv=none; b=Is0AYtyJN9IbsmNKiQNckWG54y2zPfmblf6yyALd/LbuYq7IjBphWF5VHgCSJdNPJCnIIrUbG2sgFmFdytGtgZltGGVynEN9utdSQ0by5ydoDQNKBxA5AWaKlqQAqvFYpfKmSibZ37pKar/Fix7NNMNl4E0hT90JGikQG0WcrnA=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786716026; c=relaxed/simple;
-	bh=acajLWFvreu0v+67dSUOp6HlDXvVqFbhUHFzPUxeL7I=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=OXHz1NZPKavuredde3HuiVV/fHNeM6Sob/PD3zbw+A5yum0/YE2k4wUa9gJt/ZaN6/e5W1YV1E5s60BPcsDKEAyA0LwMIEfpMslyJya25fczM4CJd1x/LSUW+g8+TiRKdfxw+6Er62p/cmUzBmF0NC5RBASSh0Mwczs9kpoYOQQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=i5zBvcMW; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4AC1C3C4B92;
+	Fri, 14 Aug 2026 14:14:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=40.107.159.22
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786716862; cv=fail; b=OmA4NiJt1Uln7jpqVeAPG/LUyGqbGpH+sviQ1f3RZhjEPfxBYBbqd79PMuhGdC8CtAyTJGqHy5foELHbaH3MmQRN2GBZjpumE71ONp9T3Z3iA/PfomLwpEdOdL0Kfi0f21CeDrY7yLyRY4IcvIvLrhVkzNj5E6BmJVzq94IgQi0=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786716862; c=relaxed/simple;
+	bh=taxNkvyC+3fwdbFIyezoaJ2NtziyVxJirwsKx1z0QCI=;
+	h=From:To:Cc:Subject:Date:Message-ID:Content-Type:MIME-Version; b=DX1pDnHH1li1w0TpxGKggDxAKkyCWqImGydpEhOjjplTozhyqcIEsWnacL/N3JtGYCb4sIGiGRGqDTB4Xv6MISgfKmoK0ocze6HFhN5QxdqbKWip70vOoWMjzPrV4sZkkjaI2FPLfnou2xmJ2lu2/eZPnLtykhqjk/LZo7hAbCg=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com; spf=pass smtp.mailfrom=nxp.com; dkim=pass (2048-bit key) header.d=nxp.com header.i=@nxp.com header.b=RpEsVV9E; arc=fail smtp.client-ip=40.107.159.22
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=nxp.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="i5zBvcMW"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 130561F000E9;
-	Fri, 14 Aug 2026 14:00:19 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786716025;
-	bh=dFwWUyFAOTIzOArd8P3tOkBRHzvOk5ExFxDR/QFXUAM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=i5zBvcMWNZFz2y5n0bpkUtYsa5yvIvqQmD/18F70sem+F1cPnegQ6YE5tkW4oJ92Z
-	 k2wFe/FW7LZKtvJVzMM2egnBmPVmOa57V9iYqlBNN7SSgCk3SiYWzi1oXdJBRCRexd
-	 RD138vkV3Q7X8YdTqe2W2etpiMYb3YgTy/YDfK/85W4arDoHwrqWQP2WOGXBd8IrvC
-	 tVfsRU2x9ffwjk1WmVXDGmfX5TJqJFgiywESSTBd/c0kvIrumzOb4xC8cNhKkE1d6d
-	 1gzAvkb8fo5X4HMfZzvKaEd3XFoYbhGtTa2kcVAhNn/NMXpeJ/JLVaRSop0eldZvkt
-	 xESmQAovyLCSQ==
-Date: Fri, 14 Aug 2026 16:00:15 +0200
-From: Manivannan Sadhasivam <mani@kernel.org>
-To: Sumit Kumar <sumit.kumar@oss.qualcomm.com>
-Cc: Vinod Koul <vkoul@kernel.org>, Frank Li <Frank.Li@kernel.org>, 
-	Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>, 
-	Jeff Hugo <jeff.hugo@oss.qualcomm.com>, Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kwilczynski@kernel.org>, 
-	Kishon Vijay Abraham I <kishon@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, dmaengine@vger.kernel.org, 
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org, mhi@lists.linux.dev, 
-	linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org
-Subject: Re: [PATCH v2 3/5] PCI: epf-mhi: Use a define for the DMA transfer
- timeout
-Message-ID: <v3o72qje3vv44rybwtpswbvo6zr25ngjbhjvdlukrso2blc2ve@4ee2xbwgheot>
-References: <20260803-dma_multi_sg-v2-0-c12bb05e42d6@oss.qualcomm.com>
- <20260803-dma_multi_sg-v2-3-c12bb05e42d6@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=nxp.com header.i=@nxp.com header.b="RpEsVV9E"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=osq3n4e4esbHkoyX1i2nuw8PU0hQHNN275LarEXXztpYzNi+RmEUNd4Jg0ld//xX06lgL5vJ1bAiBK9oew4R04V21XRu5m1Wz3YDF44V+YUphsTmigs9v9l99dP9vaqE+mSt+Aa8e5YGsdeaJFx9Gzn7V81nZCxj8e/OzjMpIZ9PzzG1XKD/YTxKQxS8erif8hFLUb/B12LPB1c17BtOsIjy8ODsfa1b1Tn7yRjh/cjV0ioymKWb+zr7e/927oLgbRKFjpvAm0DKukd+6F2akY56zP35pDXk7WaH7MYVUaoNi8HV8eziaprl0P2VpXG8zLwHapupt3aPPEvcm5Di5g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=86j+VDi+MzCUrC3F1y8Ew662VUFPu1q+FF1D7Fjseho=;
+ b=ac7W541gor3T70vaVl9IzH2jgfjGuQE7zUaFWkcfS/LZNksxvQdIPujxfCg9xBiPgjVN7i65l7Y3dbXH23FgA9vpWGCeh4g0ObMBc4Qm7z6rhl7TB2vCOLwi5A9dw306UOqaQFYFHKs9E/8uInkzowOtpzrDwRYPB9EvynZHfnyxShAxwgfI0hA6fhhOF/umpuojbc/y4iwBxEI+YAWwpzZMzGFTG111NC+bCZ3xAQMSb3BvtwqgAPXm2ThKBxphvDGUzZGCZwjYd9xFnPoh2pLzW8h/etXhONWhSqWY2TGC7FNm0quKrqE7MxnJ6Q+79JDJnDyBnphTo3PYuqZVFw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=86j+VDi+MzCUrC3F1y8Ew662VUFPu1q+FF1D7Fjseho=;
+ b=RpEsVV9EsHdgCUo+zn3YrkVan0ToGiG+TGSXeNdbwQUyzZjwYh59eWUJn/vVbjOHB5d0Z1S3M9mOP/nuXXcl0dcHFOU2KMMEFNUFqEBMrugaFKAGv/LGFMZVRBcwszp30apuB+Xl8Ba0DPoRep2sSxBfBo4kP6Ak1sCUGqOMVwuc3FGDt9nRWOi7RjE1Ta+TmK5Ea244xUmrRWA81OG+BT6OTN3oN3rlCfqBmXDjED6NCGF+7IZJfBjVaCf0/6ZQSIyxYidOYGE6yH2VQ0lBdTOCm7G1V4A5wzjilbBtu6Xqy2h37yiq+4bhD0iWxvogWCQrNbxQrXzzhp8NJ2bcmw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+Received: from GVXPR04MB12316.eurprd04.prod.outlook.com (2603:10a6:150:2c6::8)
+ by PA1PR04MB11531.eurprd04.prod.outlook.com (2603:10a6:102:4df::6) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.16; Fri, 14 Aug
+ 2026 14:14:05 +0000
+Received: from GVXPR04MB12316.eurprd04.prod.outlook.com
+ ([fe80::fc6e:ca22:f065:def4]) by GVXPR04MB12316.eurprd04.prod.outlook.com
+ ([fe80::fc6e:ca22:f065:def4%5]) with mapi id 15.21.0292.024; Fri, 14 Aug 2026
+ 14:14:05 +0000
+From: Daniel Baluta <daniel.baluta@nxp.com>
+To: andersson@kernel.org,
+	konradybcio@kernel.org
+Cc: dmitry.baryshkov@oss.qualcomm.com,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	nathan@kernel.org,
+	imx@lists.linux.dev,
+	Daniel Baluta <daniel.baluta@nxp.com>
+Subject: [PATCH v5 0/3] soc: qcom: ubwc: Fix link error when QCOM_SMEM=n
+Date: Fri, 14 Aug 2026 17:17:21 +0300
+Message-ID: <20260814141724.1006382-1-daniel.baluta@nxp.com>
+X-Mailer: git-send-email 2.45.2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: AS4P195CA0024.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:5d6::11) To GVXPR04MB12316.eurprd04.prod.outlook.com
+ (2603:10a6:150:2c6::8)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260803-dma_multi_sg-v2-3-c12bb05e42d6@oss.qualcomm.com>
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: GVXPR04MB12316:EE_|PA1PR04MB11531:EE_
+X-MS-Office365-Filtering-Correlation-Id: e69ea77e-4ebc-41c6-30e3-08defa0e4ca6
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|19092799006|1800799024|376014|366016|23010399003|6133799003|56012099006|10067099003|11063799006|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	jh8MVvVz4Y8r5koPxHqEcbX1HxuEY/b748lDmEq7ia/plfOZQB3hGuZZ1ZbpmBSJKx0wTwODnTepWMN87Fruiu6/Cd48A64ftLqxrrDtbge1Iel7vZcmauIt4EL1np3lKNsEg83ZsGVGLvO98bFHfVxlHbKhR/FDAxORRoZxMy2zLtMxW54q5uHsfofACNp/2pKg4jvTsNFluJC/w7pVv7NynQTeqZ24kASuxODcA1Va19pZ9m2t/MUx9DDuNUXxREtjmpTJxZashIt0aB03oQHClteu3hBaqgYjvrNuRcS5q8VOHcOGpTiD38drMgVdRFyWW/fP3Ym4qMCBtC/6wR22EbQtD30XfTvXc3kTOUwTZ5pjhLECiaKLDhbQAHO5cCQFaoiCI875mCed6TgaQ4OHLzqfn3osLi0s/65U3Zn+jSk6zjHUKWrlP0eBAaKOTUiI9vUySxcZxgwsZZlvMhfBMSVPte02hSc0EUSl33TjXQ8gbWO/aCEVx2AAeD2rNQp1CDmT28HZc8s0qwJP0UTUwN7ivm29naaNE+cZjXycqpQdushwMlr+ktG81RKa7PZT+8CFQWd+CyilGy2pWIbtTzaJwj3rhJqI5lB0SwwcgnG+79XmNhTiKKiMoS5vLUTnkt82SKYoGk013iBJOdaONgsOY9W0crrGoxNU66M=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GVXPR04MB12316.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(19092799006)(1800799024)(376014)(366016)(23010399003)(6133799003)(56012099006)(10067099003)(11063799006)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?jqGsRDaYQymjtE8y/EQODRy4u0htESeNxrYrPObiKjIsqjYKh4ElFye9JnbG?=
+ =?us-ascii?Q?JRwqUkmCeO7JwEY34h5QiMc8NLQthyGRqC5fvSkeNM35oTeNZzpP9KCrVXKS?=
+ =?us-ascii?Q?nFVaWUpkFgH6dmJUaNjnlGlrkNjLIJyR6kGDhiMRNhKKFX9xElK5T9LwZIvf?=
+ =?us-ascii?Q?u5abJ6q/zzo/rKKHbqVIqJ/QrEsFvvE5a9WuCS5XDfjH7OyRVbvwjTzt9/5d?=
+ =?us-ascii?Q?W/laxRA9Il4BRmTA0EbDfDRAOIP4KQSC5xjXf9gmuYgsi8+hjMZo85IkK6N4?=
+ =?us-ascii?Q?ya1n9qB6CXoVU+NqALD/ZxS9ZN7kPrbIIW7ktXBNL/sUlTuWX9wxFp6nL3ls?=
+ =?us-ascii?Q?ovx/9yHyJn+CmA+frm+q9P2Dlpo3HKwCmxH+oR6AC6uedSDvXFa/5GdMg0fs?=
+ =?us-ascii?Q?bv97zYOG0cjHRUBG58Zto9Y2l3psAG9jC4ZvXc1bHe95ovfdWyfMToACWBlw?=
+ =?us-ascii?Q?vQKRbpmUZ25olC2tJf2L14DHFaafgYK1Cl1hmfrYIqSWBFvTbIXdBuot1J1T?=
+ =?us-ascii?Q?WrxlWYZa0DT7Ijd0ioOVH9xsQJCPHVcCBSdptTFz0N3jKEZeR6hs1+l92Lmn?=
+ =?us-ascii?Q?CjkPMMHJWtXSOJIbQvjowRpbBQoywgrgZJNMb2S4O2feRC/Md0lQkkeU9gg9?=
+ =?us-ascii?Q?NqeN1FnA0b7pVCx2uCczHSfMDijE1P1BJyq5tHqmbFr4a4UZHgl3yHG9Rfdy?=
+ =?us-ascii?Q?lcmgIy8/qoITS7hr3Y3pyUexCZinsSGVYs/Kz4iXrHwqvCQ1YnwdBLSxRtqc?=
+ =?us-ascii?Q?ZHMpCCVctCG6EMSq/HTBiKR3k245p2sVrRhx+Qs8GgpCCneAVZH3+CKGMiuJ?=
+ =?us-ascii?Q?dwBUIQ0B0LmI1ERsv0L+DtUGYEmP0nOumJ0ic9FleRiMfP9zR1GYtSmJYFdQ?=
+ =?us-ascii?Q?oGSv1Zp5k1XYEqWBI4dSjt8AWcj7Jody4Ikk1wxKojTvlMENEsdpk7HnstOJ?=
+ =?us-ascii?Q?yLv5IIOH5U7Qg//MokN/oyvKDPjgXGWe+JezzRAwGnMTAN/9ExTxBEjKePe5?=
+ =?us-ascii?Q?2rQS5iKOfqePJf8gI8nUjX1DSP3CDECz/QjM1EP0GHzKN4NwG1/W2NTWg94n?=
+ =?us-ascii?Q?mlTjQGNMHdknE7DK4o3o3btUWrF9UBOL7Fw57zTGKIB3sqmtKyJitgG/H7Dk?=
+ =?us-ascii?Q?s1s1dqZOHSjBMXwUArp/iCFX0NDJgdVSlK9fVc5yXZmeE/8bDzBJWQ4/Uc60?=
+ =?us-ascii?Q?u/9wo79jgo7o9qx9od03fIwGoN1KyC/Uy+6nEU+4vfXYfEhzqzSk8nharmhq?=
+ =?us-ascii?Q?MLVv7n9TflpPsnVTt4uKEGRGHCwHioAUgIOU2KC0+jP4W3KHPetymwFRrj3V?=
+ =?us-ascii?Q?JtTnn8FU8n/63+qMh5g0l3R0yny7t5bpM4RKAj8+ghtDaSVGj+DgjgrZihQh?=
+ =?us-ascii?Q?gLWEcFAtNOes6qNRwvWw1ZHXyCoywKLC5yjXMFwxxYSX2MuwauxQikwT8XoD?=
+ =?us-ascii?Q?tcieYgmY2QA4x6YFhFgQfEOAaBeJQu+mmL8xowA4BBJ0rnWCaRLDQoCVKOXy?=
+ =?us-ascii?Q?oxnalF4ZLWkypYH0zAWcbI6gq38WUm7ZZ9zcLCa7k9JoqbVgaODyIWiDW5qR?=
+ =?us-ascii?Q?W8HiVU3UrpmpBdpEJDG9DXsmRWd9tfigZh5pjgvExsTCdDzi/+r3EvPdC9TP?=
+ =?us-ascii?Q?ka+Lg9U0yxqYl8VB8fW6wivVhUaezRjyjd/7heq4ulrjZP4wheHWYi9rY5QI?=
+ =?us-ascii?Q?dxeh2cElNcWCcZz4NCN6vAqicNTsZtB4XC2mlKivT88H5Ga+5oEWGJ+YhrbB?=
+ =?us-ascii?Q?LJauZfC6Vw=3D=3D?=
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e69ea77e-4ebc-41c6-30e3-08defa0e4ca6
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR04MB12316.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Aug 2026 14:14:05.6678
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: CSb9oj6NvAZxMk7508lc9qoYVp+WPWaueXqXkygbaYbN5xBQ2Op7dweLbrmvrXqib3iZfS+8C092VR0DwTrtAg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB11531
 
-On Mon, Aug 03, 2026 at 04:01:45PM +0530, Sumit Kumar wrote:
-> The eDMA read and write paths open-code a 1000 ms completion timeout as a
-> msecs_to_jiffies(1000) literal. Replace both with a
-> PCI_EPF_MHI_DMA_TIMEOUT_MS define so the value is named and shared. No
-> functional change.
-> 
-> Signed-off-by: Sumit Kumar <sumit.kumar@oss.qualcomm.com>
+DRM_MSM and VIDEO_QCOM_IRIS select QCOM_UBWC_CONFIG, whose
+ubwc_config.c calls QCOM_SMEM APIs unconditionally. On configs without
+QCOM_SMEM this fails to link, e.g. on SOC_IMX5:
 
-Since this is not strictly related to this series, either this patch should come
-first in the series or you should send this patch separately.
+  arm-linux-gnueabihf-ld: ubwc_config.c:(.text+0x2c): undefined
+      reference to 'qcom_smem_is_available'
 
-- Mani
+Fix it by making the QCOM_SMEM requirement explicit in Kconfig.
+
+Changes since v4: (fixed coments from sashiko bot)
+- Dropped the IS_REACHABLE() patch. As pointed out in review, it did not
+  fix the case where DRM_MSM=y and QCOM_SMEM=m. it only masked the mismatch
+  at build time and turned it into a guaranteed runtime probe failure,
+  since all callers abort when qcom_ubwc_config_get_data() returns an
+  error. Instead the mismatch is now made unconfigurable with
+  'depends on QCOM_SMEM || QCOM_SMEM=n' on both drivers, so the header
+  keeps the plain IS_ENABLED() test.
+- Reordered so the selects are guarded first and the QCOM_SMEM
+  dependency is added to QCOM_UBWC_CONFIG last so that we dont break
+  bisection as pointed by Nathan
+
+Link to v4:
+  - https://lore.kernel.org/imx/20260812151934.709198-1-daniel.baluta@nxp.com/
+
+Daniel Baluta (3):
+  drm/msm: Guard the QCOM_UBWC_CONFIG select with QCOM_SMEM
+  media: iris: Guard the QCOM_UBWC_CONFIG select with QCOM_SMEM
+  soc: qcom: ubwc: Fix link error when QCOM_SMEM=n
+
+ drivers/gpu/drm/msm/Kconfig              | 3 ++-
+ drivers/media/platform/qcom/iris/Kconfig | 3 ++-
+ drivers/soc/qcom/Kconfig                 | 1 +
+ 3 files changed, 5 insertions(+), 2 deletions(-)
 
 -- 
-மணிவண்ணன் சதாசிவம்
+2.45.2
+
