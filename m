@@ -1,34 +1,34 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F0C53612E7
-	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 14:59:35 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4254F3612E7
+	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 14:59:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786719577; cv=none; b=gpZp//0IOXVoqUFAuVaaGtbAfl36qxRxXcqJjUmtsYXi/CisqVcoUF/e/q+2vbbRKD2GZAX5KEnF5Ji/Ac5B3IjuLT6psbxu6RCb167yBR/yOTouP1bvthXGpoCSQKrEyQr+nugx2DoYfc2zJ0F4ygAWB2y9V8zIu0m7eNvrfpw=
+	t=1786719579; cv=none; b=cIDPn5g2DFH+jaicDE+LmmzgHiBUsHRC6yFcWLQwnj9Kwvctl9A86hGNCNbw1L5dLWUeRjAG0dKeGRAc8UltAINPoG344kMeXjZPCU1qDE20Cf0sdEyyFH9x23wNsZ0iCfrjVqId3PvzQX6ijINsDb89XG161/17mcL5+mWPoKM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786719577; c=relaxed/simple;
-	bh=hj+rw2H/qauGbaZLyoLM0VLIQkUzuxTT3q72Ghn0qBY=;
+	s=arc-20240116; t=1786719579; c=relaxed/simple;
+	bh=sWW/yEfOvBDifTqIbyz+k9/X2yobVWz45WbKX8VOod4=;
 	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=Oxk5j5g2733pCXZx/HkM8UpDCIXm2HJNwvabnmdVbsJKlX/XQbmC+ABYpF2/ctmcWoGfwQrl4JE5rts4KIwEFnTpxP1u2I9J+1dcb9JvpRYT5GaewovfjZJ5FU93BNkrOH/3M5Y98EJWa7Wc3MO9NInm3sXMRXgPlQfvE32ybxI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=fPcgvPo+; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:To:Cc; b=V4n6Wwgs7ahF9BLBzDhGHkzLRZagPBTbQojFlw0H2BrneZ66SNX5rKHghOmeN1FsRL5Nf78MhnGRigUDb+2YWcmsJbrvBYMNs/ftmUNi9o/AA0zr3vhJQsOkCkxceo2tQXGCrONnuN/Pjj8odKf2DQ8QdWpwnlE6RHWSFLeknRw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YgXnzl9z; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="fPcgvPo+"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 369261F000E9;
-	Fri, 14 Aug 2026 14:59:35 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YgXnzl9z"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9EF6E1F000E9;
+	Fri, 14 Aug 2026 14:59:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786719575;
-	bh=DkadIlZNcVbnAZ68ZU5tL5FkWdqVj8mjTn8/K0pa6bI=;
+	s=k20260515; t=1786719578;
+	bh=nmvikvZ9DsGgzJdRTDK6gUneIIlYtnVrj1IscZLh0rI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=fPcgvPo+EgaJqc1vkAm9s+ZopeDJISZySGrcNZdwYtkNTIF3GOpj+jAQQWWRpa5z/
-	 uimDk9oHRPuxXa/QypaonHpn7twNp8ucaerujqja447tcl0How/8TJZ4+d6HNXkDpT
-	 NN1Rfdlh9GJYFnn+2j6fPBeiabwyVpmZq50/lwbA3tMU+2+k2D1ySigXsWtL8Mm+UX
-	 e8fz+i98IuzThubhY/9T385QgI4rO++Iy7se+o2nByTzwXgdW2qi+BiRigg5l5Lh/R
-	 bPlcRtpnceS7ziPw0acfPf07uZjP8wsl0DiN8NwKkVP5ZGj5ciNeNbxtIl7A1u5A/D
-	 zCG2f2VO2bqOQ==
+	b=YgXnzl9zZ6qcxKKT7I1TK2pbH4Ht7GUd8YdeG5i5/9wEb6EH5LV9YY4t6HCwxtShN
+	 WTVU0OMt8gcEYw6ipF0YU7vo9JKGThkWsGDRXUaaqjZKZcbjDCeBnnX/8Y+m4mr5L8
+	 kxaPC/G9+SYWRKOuIBrEVsLC97Fq7JhcWZ4FtTuF2LP7s4IxG8sP2758MGJ1YX/c5H
+	 Q1HyDTeSImPEctVIg3bWrpKeN5pOQBi15UaqU02+3M1KpEanj3ogCI39GLvQp/AEJ0
+	 JafwEuE02yrMpd7VwdKlJvK2EqqDdtHXi+IOR7OU05VyQMXSuAD7JNPcnAkMUdgtYE
+	 hNASIzsIGsOXw==
 From: Maxime Ripard <mripard@kernel.org>
-Date: Fri, 14 Aug 2026 16:57:38 +0200
-Subject: [PATCH v2 49/61] drm/msm/dpu1: Convert to atomic_create_state
+Date: Fri, 14 Aug 2026 16:57:39 +0200
+Subject: [PATCH v2 50/61] drm/msm/mdp5: Convert to atomic_create_state
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -37,7 +37,7 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260814-drm-no-more-plane-reset-v2-49-82d2963dd134@kernel.org>
+Message-Id: <20260814-drm-no-more-plane-reset-v2-50-82d2963dd134@kernel.org>
 References: <20260814-drm-no-more-plane-reset-v2-0-82d2963dd134@kernel.org>
 In-Reply-To: <20260814-drm-no-more-plane-reset-v2-0-82d2963dd134@kernel.org>
 To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
@@ -50,12 +50,12 @@ Cc: dri-devel@lists.freedesktop.org, Maxime Ripard <mripard@kernel.org>,
  marijn.suijten@somainline.org, robin.clark@oss.qualcomm.com, 
  sean@poorly.run
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7408; i=mripard@kernel.org;
- h=from:subject:message-id; bh=hj+rw2H/qauGbaZLyoLM0VLIQkUzuxTT3q72Ghn0qBY=;
- b=owGbwMvMwCmsHn9OcpHtvjLG02pJDFn1Oreazsx6ZZt//kkay94b+T3Zj+bHM520burKelPHo
- 7Zkl75Nx1QWBmFOBlkxRZYnMmGnl7cvrnKwX/kDZg4rE8gQBi5OAZjI8WWM9V4iVyx+pZSsdGyf
- euzgkzNzuRd2RZicnv775G1fH6MLi/gqrGJPZy3wavafpa5pmKLwi7HhlGuj8cUio6tnZ2yNunj
- D7OvVmAnld27Vt83uLOLVtuKS52eu2jdb6ULDqvNz96ht0QkHAA==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7187; i=mripard@kernel.org;
+ h=from:subject:message-id; bh=sWW/yEfOvBDifTqIbyz+k9/X2yobVWz45WbKX8VOod4=;
+ b=owGbwMvMwCmsHn9OcpHtvjLG02pJDFn1Ore+xbi1Wbe16Mx5eUr1yBt/9qmNS4rPTjaYtm2RS
+ rYU57SrHVNZGIQ5GWTFFFmeyISdXt6+uMrBfuUPmDmsTCBDGLg4BWAiX9cxNmyM1J5iYH769+7e
+ RRqX3oT78rWELG5/Ws3ebdCv6O/cvv92RX/GmbTDuXVvlVVe+p+6xFinpqtn+izbl99lvXP1LK1
+ VMioiOns2GbXs6vW583v+w4wdX5rWPZjGOFF2GcOzhODiPb0A
 X-Developer-Key: i=mripard@kernel.org; a=openpgp;
  fpr=BE5675C37E818C8B5764241C254BCFC56BF6CE8D
 
@@ -336,69 +336,55 @@ Cc: marijn.suijten@somainline.org
 Cc: robin.clark@oss.qualcomm.com
 Cc: sean@poorly.run
 ---
- drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c | 18 +++++++-----------
- 1 file changed, 7 insertions(+), 11 deletions(-)
+ drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c | 16 ++++++----------
+ 1 file changed, 6 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c
-index 7b92082d35a6..1a471cdf767b 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_plane.c
-@@ -1726,36 +1726,32 @@ static void dpu_plane_atomic_print_state(struct drm_printer *p,
- 		drm_printf(p, "\tdst[%d]=" DRM_RECT_FMT "\n", i,
- 			   DRM_RECT_ARG(&pipe_cfg->dst_rect));
- 	}
+diff --git a/drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c b/drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c
+index 841f444a8d68..7e878c698247 100644
+--- a/drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c
++++ b/drivers/gpu/drm/msm/disp/mdp5/mdp5_plane.c
+@@ -78,23 +78,19 @@ mdp5_plane_atomic_print_state(struct drm_printer *p,
+ 	drm_printf(p, "\tnormalized_zpos=%u\n", pstate->base.normalized_zpos);
+ 	drm_printf(p, "\talpha=%u\n", pstate->base.alpha);
+ 	drm_printf(p, "\tstage=%s\n", stage2name(pstate->stage));
  }
  
--static void dpu_plane_reset(struct drm_plane *plane)
-+static struct drm_plane_state *dpu_plane_create_state(struct drm_plane *plane)
+-static void mdp5_plane_reset(struct drm_plane *plane)
++static struct drm_plane_state *mdp5_plane_create_state(struct drm_plane *plane)
  {
- 	struct dpu_plane *pdpu;
- 	struct dpu_plane_state *pstate;
- 
- 	if (!plane) {
- 		DPU_ERROR("invalid plane\n");
--		return;
-+		return ERR_PTR(-EINVAL);
- 	}
- 
- 	pdpu = to_dpu_plane(plane);
- 	DPU_DEBUG_PLANE(pdpu, "\n");
- 
--	/* remove previous state, if present */
--	if (plane->state) {
--		dpu_plane_destroy_state(plane, plane->state);
--		plane->state = NULL;
--	}
+ 	struct mdp5_plane_state *mdp5_state;
 -
- 	pstate = kzalloc_obj(*pstate);
- 	if (!pstate) {
- 		DPU_ERROR_PLANE(pdpu, "failed to allocate state\n");
+-	if (plane->state)
+-		__drm_atomic_helper_plane_destroy_state(plane->state);
+-
+-	kfree(to_mdp5_plane_state(plane->state));
+-	plane->state = NULL;
+ 	mdp5_state = kzalloc_obj(*mdp5_state);
+ 	if (!mdp5_state)
 -		return;
+-	__drm_atomic_helper_plane_reset(plane, &mdp5_state->base);
 +		return ERR_PTR(-ENOMEM);
- 	}
- 
--	__drm_atomic_helper_plane_reset(plane, &pstate->base);
-+	__drm_atomic_helper_plane_state_init(&pstate->base, plane);
++	__drm_atomic_helper_plane_state_init(&mdp5_state->base, plane);
 +
-+	return &pstate->base;
++	return &mdp5_state->base;
  }
  
- #ifdef CONFIG_DEBUG_FS
- void dpu_plane_danger_signal_ctrl(struct drm_plane *plane, bool enable)
+ static struct drm_plane_state *
+ mdp5_plane_duplicate_state(struct drm_plane *plane)
  {
-@@ -1794,11 +1790,11 @@ static bool dpu_plane_format_mod_supported(struct drm_plane *plane,
+@@ -124,11 +120,11 @@ static void mdp5_plane_destroy_state(struct drm_plane *plane,
  }
  
- static const struct drm_plane_funcs dpu_plane_funcs = {
+ static const struct drm_plane_funcs mdp5_plane_funcs = {
  		.update_plane = drm_atomic_helper_update_plane,
  		.disable_plane = drm_atomic_helper_disable_plane,
--		.reset = dpu_plane_reset,
-+		.atomic_create_state = dpu_plane_create_state,
- 		.atomic_duplicate_state = dpu_plane_duplicate_state,
- 		.atomic_destroy_state = dpu_plane_destroy_state,
- 		.atomic_print_state = dpu_plane_atomic_print_state,
- 		.format_mod_supported = dpu_plane_format_mod_supported,
+-		.reset = mdp5_plane_reset,
++		.atomic_create_state = mdp5_plane_create_state,
+ 		.atomic_duplicate_state = mdp5_plane_duplicate_state,
+ 		.atomic_destroy_state = mdp5_plane_destroy_state,
+ 		.atomic_print_state = mdp5_plane_atomic_print_state,
  };
+ 
 
 -- 
 2.55.0
