@@ -1,73 +1,104 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BA5B45C710;
-	Fri, 14 Aug 2026 17:06:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57359477E31;
+	Fri, 14 Aug 2026 17:49:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786727188; cv=none; b=f6P9L0AUFRt+KmP99LJpF5r6zeOELrtVcgYDLHRBt4GZpEoai0bcZkp1k4zpETC1U7KkP7OcTcyq0RGZuqVu3Y/N3bgab7Lk5xKn8Gua+FClL9CDKjNpPpAjLPcy+leXdKKzISmqQhw/PnkvuEKjzIh4na5+J6cUPQPFADLAa4g=
+	t=1786729749; cv=none; b=V5Sm/52AVDlZquqTO2nhH+xo2QBn38Naxvnr+D8Em8/EVYCPl4uOhi58NFCo313DDelK5b47ENnYFmFgH6MqSQn2Wl1jyiAF7+30cv+6Mh3l8nr4BgF3e8h0EcBnHzwY8qvJUYZfn+z+JgLvF2dDcXrKa3PpZgu3mB3zh+dmuYY=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786727188; c=relaxed/simple;
-	bh=zJ0SoiC1a+gm5ou2jgMz4HmAzZ2zw4DkuNiKEMLhT68=;
+	s=arc-20240116; t=1786729749; c=relaxed/simple;
+	bh=WiMdb59+b31lr74VpZ1vPRs0h/z5NpcPddg6oaeJ/HM=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=qjpM1coc11Qp8tAUNk6n/EFkzIHGpCsP2bE+1m3iiPJDUo+gbJLxYddJsRT5CBSZchMdZ3Spn1cI1kq9FthrFIb3SCF5ECI5ocDv1hCqCnkZDaCoWm6kQAFQ2xzvn59/ZqaD5Cn/1eK4OkUJE0oDMmBxfis5ajqETH1TQA/2l7c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YTjZ4+Xm; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=kzg2KptjuEl3sXnug1xZtkNb5Fq0kdUEbxasc4yvzQBK+1vdf32pfyyIw3WAKjssEGl2L3smjRPl/HebcxRA/i2k44it7/IrzgWjNAuOqPOCtzfjsMHTS6CCppSkj9ZlNfYOetwdqExOKV8FZhxnG73OMGif0KBea0zWRL2cU30=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=WiO5de/2; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YTjZ4+Xm"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD45C1F000E9;
-	Fri, 14 Aug 2026 17:06:24 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="WiO5de/2"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C1D011F000E9;
+	Fri, 14 Aug 2026 17:49:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786727186;
-	bh=o3EKBMGuiyTQLYijetS8Oe22kLuLWv9OK8hBvGDMdqc=;
+	s=k20260515; t=1786729747;
+	bh=vUScZQaDO9LOJUAA7/eGGTWqCSli6iZ/EX6QJoxuS+0=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=YTjZ4+XmpeyK7hFrnDnbsA2lqlTKJCogz1ku4/vfx4ifwEtB4J0aBUi0vF5vHHCqo
-	 NsX4giAAzp+cQ5fymea9Ob7O+GrAiWow4rcjD8GjxfNcJmIWm9KkOeZ86Fb95/XMYW
-	 nSl1c6hr0IzzJ5gCsDmYBUAdEq5LM+ilJCv6MoeaMy61qN8ssSnC2N812l2/kLENgg
-	 bJlkuFnnKnexDK9D4g8wyGqk6NkgMFwYEqenWO4uTefxr0zqF3qohlliB6t7EtHAgS
-	 s2Lv8FBU/DGvlGlLUm782gtRlyNvaaaI59/WSWh2ZwCgsPmoNI/I6T8j2ADHUUG2UV
-	 fxXEMz54kk4ew==
-Date: Fri, 14 Aug 2026 10:06:21 -0700
-From: Nathan Chancellor <nathan@kernel.org>
-To: Daniel Baluta <daniel.baluta@oss.nxp.com>
-Cc: Daniel Baluta <daniel.baluta@nxp.com>, andersson@kernel.org,
-	konradybcio@kernel.org, robin.clark@oss.qualcomm.com,
-	dmitry.baryshkov@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org, imx@lists.linux.dev
-Subject: Re: [PATCH v4 0/3] soc: qcom: ubwc: Fix link error
-Message-ID: <20260814170621.GA532729@ax162>
-References: <20260812151934.709198-1-daniel.baluta@nxp.com>
- <20260813232350.GA312295@ax162>
- <0b9128de-e2d9-4271-97b8-9fa0c7f6fa3c@oss.nxp.com>
+	b=WiO5de/2thRArGyJ9iBATrXsY/4ttOOkENioAGX2qsM7Xe1dCzIpn+CYG85tfRK08
+	 ZftIPiRzngAPGPQMlFzLfadtoZrEFjALLk7BCrPk+eogNNwaNEZXRzwXJO5fdBtvLi
+	 uPlNbAMvuGvBowQ7aPEa3+5i6tvNxawjZhsbFjbFuDsmXWwQHF3AVKrXoA59ZYxVEd
+	 fckTnIMKzNKBP3YG4vMUC+OVDmam2Ib69kZytKUEHKSan1Bbl24ks9s2gJ0v3DmQ6Y
+	 sFvWfIjE2keRNpjUUIPIBTllUsS5/03U1tIEe9bOecO55CP0Cw2MeoLiCgaZ7M/mW4
+	 6fc6h9/mJRxHQ==
+Date: Fri, 14 Aug 2026 12:49:07 -0500
+From: Rob Herring <robh@kernel.org>
+To: Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
+Cc: Bryan O'Donoghue <bod@kernel.org>,
+	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Stanimir Varbanov <stanimir.varbanov@linaro.org>,
+	Mansur Alisha Shaik <mansur@codeaurora.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Hans Verkuil <hverkuil@kernel.org>,
+	Stefan Schmidt <stefan.schmidt@linaro.org>,
+	Hans Verkuil <hverkuil+cisco@kernel.org>,
+	linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH 1/4] dt-bindings: media: qcom,sc7280-venus: Add
+ dma-coherent property
+Message-ID: <20260814174907.GD1981719-robh@kernel.org>
+References: <20260801-iris-fixes-dma-pseq-fint-v1-0-aba0cb22f6ab@oss.qualcomm.com>
+ <20260801-iris-fixes-dma-pseq-fint-v1-1-aba0cb22f6ab@oss.qualcomm.com>
+ <20260811135103.GA2063083-robh@kernel.org>
+ <46af20c8-1182-2db3-0099-63e27903a6f5@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <0b9128de-e2d9-4271-97b8-9fa0c7f6fa3c@oss.nxp.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <46af20c8-1182-2db3-0099-63e27903a6f5@oss.qualcomm.com>
 
-On Fri, Aug 14, 2026 at 09:42:52AM +0300, Daniel Baluta wrote:
-> On 8/14/26 02:23, Nathan Chancellor wrote:
-> >   In file included from drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp_v13.c:7:
-> >   include/linux/soc/qcom/ubwc.h: In function 'qcom_ubwc_config_get_data':
-> >   include/linux/soc/qcom/ubwc.h:45:16: error: implicit declaration of function 'ERR_PTR' [-Wimplicit-function-declaration]
-> >      45 |         return ERR_PTR(-EOPNOTSUPP);
-> >         |                ^~~~~~~
-> >   include/linux/soc/qcom/ubwc.h:45:25: error: 'EOPNOTSUPP' undeclared (first use in this function)
+On Fri, Aug 14, 2026 at 10:58:47AM +0530, Vishnu Reddy wrote:
 > 
-> Hi Nathan,
+> On 8/11/2026 7:21 PM, Rob Herring wrote:
+> > On Sat, Aug 01, 2026 at 01:07:27PM +0530, Vishnu Reddy wrote:
+> >> While testing with some higher resolution clips, the venus hardware
+> >> triggers a fault due to wrong input data being received. Corruption
+> >> was also observed in the captured output when the client dumped it
+> >> to a file.
+> >>
+> >> On debugging, this was traced to the venus node not declaring
+> >> dma-coherent. As a result, DMA buffers shared between the CPU and the
+> >> venus video hardware/controller are not guaranteed to be I/O coherent:
+> >> CPU writes to an input buffer can remain in CPU caches without being
+> >> visible to the video hardware when it reads the same buffer, so the
+> >> hardware receives input data that does not match what the CPU wrote.
+> >> Likewise, on the capture path, data written by the video hardware to
+> >> the output buffer may not be visible to the CPU, so the client reads
+> >> stale or partial data, resulting in corruption.
+> > The only side effect of 'dma-coherent' not being present should be doing 
+> > unnecessary cache flushes. It should still work. Maybe you are missing 
+> > some DMA API sync functions?
 > 
-> This issue is pre-existing and I've sent a separate fix for it:
+> dma-coherent tells the kernel that this device DMA path is hardware-coherent,
+> so the SMMU maps its buffers as cacheable. That attribute is what causes the
+> coherent interconnect to snoop CPU cache lines on every VPU transaction, so
+> hardware keeps CPU caches and VPU visible memory in sync — which is why the
+> dma-coherent property lets us skip the unnecessary cache clean/invalidate.
 > 
-> https://lore.kernel.org/all/5fy7l6o5nfzclsmhsqys562xwoilbo4xv3af65kcqugtitgltd@3fw2w443pw2g/#r
+> If a device doesn't support I/O coherence, its buffers would instead be mapped
+> non-cacheable, no snooping would occur, and the driver would need explicit
+> dma_sync_*() calls at each transition.
 
-Sure, it is a pre-existing issue but it is only exposed by making
-CONFIG_QCOM_UBWC_CONFIG an optional selection for these drivers, so I
-think that patch should be a part of this series. Otherwise, I don't see
-how you could actually trigger such an error.
+The driver should have dma_sync_*() calls regardless. Even if cache 
+flush/invalidate are not needed, IIRC the calls still provide barriers 
+which may be needed.
 
--- 
-Cheers,
-Nathan
+Rob
+
