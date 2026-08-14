@@ -1,88 +1,48 @@
-Received: from mail-pg1-f181.google.com (mail-pg1-f181.google.com [209.85.215.181])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8017F39150E
-	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 19:47:10 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.181
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CB763C1419;
+	Fri, 14 Aug 2026 19:51:02 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786736832; cv=none; b=uA4LF+8Hy1qbuV1gqxV9LXs5Eeux1vvgsqQWoKbyURqevCGDYRVNmU+8+jRUHzHSvNfASQngluVU8Vbxm+0nS/oxxk/V1LhWSF8Ml62Ob6RHZo249mnfjsrp/Td9QNd7i/6Bwm3Sc/32xulr9fn/YdDsxo2oaa25GRaSJnHztHc=
+	t=1786737064; cv=none; b=ZetXq6rToDI0bNac5GWnpDo1GttZXmkuqFiFQsEy5R5yUkPek72OaqUtibW4X4TeugPs8P+3bRQqa+EqyK1f9vrdD+CghDRyzQc+DCmvoEyY3PhzxAshwCkPPyhIadlatT/t7lW08L3ce3dbxGqu17TRB27vL4LEBUM0YoGtR5M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786736832; c=relaxed/simple;
-	bh=U1JoGZnvbz1lmyls1/v3gPQsEpMLAWDBdYn4o9KJ+Yc=;
-	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=j1ybkEk/idTVbQBw4qfkZ5dB+iQ+Ey33+/48fw9u0VZUSvIWU5D/OKgBcz56SiOnDVFVKqFAdhb9Rg7XRERJqCvur8qEx+pvKAobHfbvulqxuTuaYmhufQZnZopwXT+zWwSlke+KbycVlExYimGjqJXd82YNBbsp4aKOcO3ATbE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org; spf=pass smtp.mailfrom=chromium.org; dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b=kazr7Rlq; arc=none smtp.client-ip=209.85.215.181
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+	s=arc-20240116; t=1786737064; c=relaxed/simple;
+	bh=Tg0Hi7FwxeAAVjtZKZfrsawG5Y3Zq69hnHKFs7ojjl8=;
+	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+	 MIME-Version; b=d9cU9Nc2aDZZK7jEJ13pqgEzVnDq1mkfe3TPvYNzF6g7B0FvU3+dznBAH418uhIWiAQQxLm1yQdiI4jWwnRbi2QzqG8OlPfb8OF5G5kRzNUlEPulBzlOto/EN9APc5GZD1LPlkqxV2z5gQmxCA15tehYWQOrMlbiIFlrKw7iPuw=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=g5J2/25z; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.b="kazr7Rlq"
-Received: by mail-pg1-f181.google.com with SMTP id 41be03b00d2f7-cc11a30a259so473909a12.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 12:47:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1786736830; x=1787341630; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=4pFsg5DaBut5RJmYZBe5aOtRtX/aP+9Aa+0P+1l5WK4=;
-        b=kazr7RlqEPdiOEv0GOqS+3z03jFbFKJRHiDQjalQhLdJ5H0QKkmqOpBCRB5JEquP+w
-         pAWkGoaWN4FEPftHcyUnA6kZbLM70rtO9YyXhpQ9G+7NxVc2kj7dvtI0i1FRCfgBEq9E
-         uY4aX/cPooXbamX5vx2OmciH0L46mGCUllsHY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786736830; x=1787341630;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=4pFsg5DaBut5RJmYZBe5aOtRtX/aP+9Aa+0P+1l5WK4=;
-        b=jey5PuF62FAlc0cl6BTv2xKUnRAIvHGV5yQUBXnHwC2TKZF0Xo9xDKzPqrYvtz+uG7
-         JsI/OZwIVf5CrXxSthwoObyRsxUhT+Szj56p4BSRxpKoKUHTbL8NqBLQLjV9NUVpI04C
-         Gbq4dAOhZYBr1dvE9c8+jNgQhe6DEFpH6CNKMPPM4mq91tlEU5gMChq/vzE0G50Lgrzq
-         yU59QydOLZk6fGF9SQiM/bQ7uf9S5FTCwUOzZBy6zb6H4tymx9AjeoKfONYcqY/hDHI8
-         ecpcIKLEbijSEfK8D4Gw46u7cayIbpfWjnuB7dqZhz6KPzYXjQqps/IG8nbLuttODgrt
-         oTpA==
-X-Forwarded-Encrypted: i=1; AHgh+RolMuFNofm1uIIOBH2dKA2qPhJ94nnCuGWTi1rG56GS6e8pYUUsn2DIhFR4Wx6gkcU50cD/ZjqmNcFuCbMD@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy92PT9ZzVIR6N5lRgs/BJGEuUx0FxClhEN3/oM4EuPa0EK7fY4
-	3VOMa1a4aO2EJaHmDYLKLpDSB0Ukr6WOtzTxpkbrfsyX++UXAJHmH77Ep0YBBzOOHg==
-X-Gm-Gg: AR+sD10XHlSvXxwiHBCGbXBY4CFL+7nHQLEOV/SZRpX9Wi54ppE8jIZdmGgWIO9+KEB
-	Q0qgVMSzV4u7NgmcRESSv+Uvcn9gJG3+pgcdapHhYlvrpe1S2X+qYyVpXzGg44szsHNhzghcSAf
-	bdIWqGEw94lLw+kB1/A9WdpSBq16dN5oe6zoTpmLiHP8JJ+pk2XQp1BnjDKFCbFzE7nn2QlOn/r
-	4EnS5X61YCz2UDricaVGYw1EbArNCFCK+K42RU7wzM90xqy2bdOkjfxPQjlkE4FDW/wzLdHuROT
-	4qAopj8NQETF4rI+zkfAs87nxqRdmfBp2gJRjhDt03ddAt2zNKNnlOkHywzJxAvi9hhpn5tezBU
-	mkrof/JoaslOhS9u1tKbK1pn+ZJgmi617NGo/nlvTS25BBkTQeHRBCjWHaWhz8IaS2hvoRU7QbL
-	J/gtgyMJ6Qu4o8/j+KpgDWkZyPBnayMxq29zhU1IAw8qz4eLs/lLY8fwA7UyiPwgQ05b8Ylq8fz
-	wdFi7f7iyjQSx+RRcGxZWTREz6U6QcJ2KshR413ozh8WaQ=
-X-Received: by 2002:a05:6a21:a4a:b0:3c3:9070:96b3 with SMTP id adf61e73a8af0-3cc71af165bmr10151406637.3.1786736829719;
-        Fri, 14 Aug 2026 12:47:09 -0700 (PDT)
-Received: from dianders.sjc.corp.google.com ([2a00:79e0:2e7c:8:dcf8:d626:8503:b94])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141386a039asm11446346c88.0.2026.08.14.12.47.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 12:47:06 -0700 (PDT)
-From: Douglas Anderson <dianders@chromium.org>
-To: Jassi Brar <jassisinghbrar@gmail.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>
-Cc: Douglas Anderson <dianders@chromium.org>,
-	Sudeep Holla <sudeep.holla@kernel.org>,
-	Lee Jones <lee@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Chen-Yu Tsai <wens@kernel.org>,
-	Jernej Skrabec <jernej.skrabec@gmail.com>,
-	Jonathan Hunter <jonathanh@nvidia.com>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Michal Simek <michal.simek@amd.com>,
-	Samuel Holland <samuel@sholland.org>,
-	Sebastian Reichel <sre@kernel.org>,
-	Suman Anna <s-anna@ti.com>,
-	Thierry Reding <thierry.reding@kernel.org>,
-	devicetree@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="g5J2/25z"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AF0EF1F000E9;
+	Fri, 14 Aug 2026 19:51:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786737062;
+	bh=/gmhQQIkmx7gG+7jxdQA4x4beQCkP+wvUQj15igRjCY=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=g5J2/25zG+tKycS4zQ9ONaMmUpLsW5YIDTocUWE+iglXHLGQKuVodGT3qiP3jxT4/
+	 E7zns8pelK8x63iajFJd7xvTb39yE3EjV6wQUaHmNXQLDZdwXc3wECfiJMJZlrVKTI
+	 0JY0DDHQQAWvdfrN8TkOUZEtVxOEOMkSD+soZcw3RMTmCve3LdHTpLL3cOTKbKMXkd
+	 1oapKRmdJDW0QGJG+Lcw7wc8cHmyAYN++nxrlgSkKfa+ftgek50iMXI5H8X+7D4fpq
+	 r00043i5qUxl6G4QGIF3Tw5qI8FsAv1HXKpM7j7cu9ENHrUE5bn0ZaggWkRUhDaduq
+	 U32Rim04R1K9g==
+From: Jakub Kicinski <kuba@kernel.org>
+To: peter.hunt@opengear.com
+Cc: Jakub Kicinski <kuba@kernel.org>,
+	loic.poulain@oss.qualcomm.com,
+	ryazanov.s.a@gmail.com,
+	mani@kernel.org,
+	johannes@sipsolutions.net,
+	netdev@vger.kernel.org,
+	mhi@lists.linux.dev,
 	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	linux-sunxi@lists.linux.dev,
-	linux-tegra@vger.kernel.org
-Subject: [PATCH v2] dt-bindings: mailbox: Delete old 'mailbox.txt' bindings file
-Date: Fri, 14 Aug 2026 12:46:12 -0700
-Message-ID: <20260814124603.v2.1.I8b3ff71c528133e7d6f81fe926fa39e6451d63fd@changeid>
-X-Mailer: git-send-email 2.55.0.691.gc56d675ccc-goog
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH net-next v3 1/3] net: wwan: core: propagate modem control signals to port drivers
+Date: Fri, 14 Aug 2026 12:50:57 -0700
+Message-ID: <20260814195056.3203996-2-kuba@kernel.org>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260807215042.2714442-2-peter.hunt@opengear.com>
+References: <20260807215042.2714442-2-peter.hunt@opengear.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -91,238 +51,218 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-As per mailing-list discussions [1] [2] [3], we want to delete the
-following old file from the device-tree bindings that live in the
-Linux kernel git tree:
-* Documentation/devicetree/bindings/mailbox/mailbox.txt
-
-The old .txt file did have some descriptive text about what some of
-the properties meant. Those have been added to the dt-schema
-repository in a pull request [4].
-
-Also remove dangling references to `mailbox.txt` across all remaining
-device-tree binding documentation files.
-
-Link: https://lore.kernel.org/r/20260722140214.GA548057-robh@kernel.org [1]
-Link: https://lore.kernel.org/r/dc7a2041-50a4-482e-9930-566bb3fd1e72@kernel.org [2]
-Link: https://lore.kernel.org/r/CAL_JsqKVjQ2m-dzMUENQry-f_YE9QrYSOKoH9CPj1gjj8XkPRA@mail.gmail.com [3]
-Link: https://github.com/devicetree-org/dt-schema/pull/202 [4]
-Cc: Sudeep Holla <sudeep.holla@kernel.org>
-Cc: Jassi Brar <jassisinghbrar@gmail.com>
-Cc: Lee Jones <lee@kernel.org>
-Signed-off-by: Douglas Anderson <dianders@chromium.org>
+This is an AI-generated review of your patch. The human sending this
+email has considered the AI review valid, or at least plausible.
 ---
-- v1: https://lore.kernel.org/r/20260804133801.1.I8b3ff71c528133e7d6f81fe926fa39e6451d63fd@changeid
+net: wwan: core: propagate modem control signals to port drivers
 
-Changes in v2:
-- Remove dangling mailbox.txt references as per Sashiko.
+Adds an optional ->dtr_rts(port, on) callback to struct wwan_port_ops so
+port drivers learn when the host raises or drops DTR/RTS. The wwan core
+calls it from the TIOCMSET/TIOCMBIC/TIOCMBIS emulation and also raises the
+lines on first open and drops them on last close of an AT port.
 
- .../firmware/nvidia,tegra186-bpmp.yaml        |  6 +-
- .../mailbox/allwinner,sun6i-a31-msgbox.yaml   |  3 -
- .../bindings/mailbox/altera-mailbox.txt       | 12 ++--
- .../mailbox/hisilicon,hi3660-mailbox.txt      |  2 +-
- .../mailbox/hisilicon,hi6220-mailbox.txt      |  2 +-
- .../devicetree/bindings/mailbox/mailbox.txt   | 60 -------------------
- .../bindings/mailbox/ti,omap-mailbox.yaml     |  3 +-
- .../power/reset/xlnx,zynqmp-power.yaml        |  9 +--
- .../bindings/soc/qcom/qcom,aoss-qmp.yaml      |  2 +-
- 9 files changed, 15 insertions(+), 84 deletions(-)
- delete mode 100644 Documentation/devicetree/bindings/mailbox/mailbox.txt
+A few questions about the new call sites below.
 
-diff --git a/Documentation/devicetree/bindings/firmware/nvidia,tegra186-bpmp.yaml b/Documentation/devicetree/bindings/firmware/nvidia,tegra186-bpmp.yaml
-index 3c44fe607e12..acdc5c1d3d8b 100644
---- a/Documentation/devicetree/bindings/firmware/nvidia,tegra186-bpmp.yaml
-+++ b/Documentation/devicetree/bindings/firmware/nvidia,tegra186-bpmp.yaml
-@@ -18,11 +18,9 @@ description: |
-   which can create the interprocessor communication (IPC) between the
-   CPU and BPMP.
- 
--  This node is a mailbox consumer. See the following files for details
--  of the mailbox subsystem, and the specifiers implemented by the
--  relevant provider(s):
-+  This node is a mailbox consumer. See the following file for details
-+  of the mailbox specifiers implemented by the relevant provider(s):
- 
--    - .../mailbox/mailbox.txt
-     - .../mailbox/nvidia,tegra186-hsp.yaml
- 
-   This node is a clock, power domain, and reset provider. See the
-diff --git a/Documentation/devicetree/bindings/mailbox/allwinner,sun6i-a31-msgbox.yaml b/Documentation/devicetree/bindings/mailbox/allwinner,sun6i-a31-msgbox.yaml
-index 87d31963c1b7..f58b0d412186 100644
---- a/Documentation/devicetree/bindings/mailbox/allwinner,sun6i-a31-msgbox.yaml
-+++ b/Documentation/devicetree/bindings/mailbox/allwinner,sun6i-a31-msgbox.yaml
-@@ -17,9 +17,6 @@ description: |
-   hold four 32-bit messages; when a FIFO is full, clients must wait before
-   attempting more transmissions.
- 
--  Refer to ./mailbox.txt for generic information about mailbox device-tree
--  bindings.
--
- properties:
-   compatible:
-     oneOf:
-diff --git a/Documentation/devicetree/bindings/mailbox/altera-mailbox.txt b/Documentation/devicetree/bindings/mailbox/altera-mailbox.txt
-index c4dd93f1fed2..87749d251f09 100644
---- a/Documentation/devicetree/bindings/mailbox/altera-mailbox.txt
-+++ b/Documentation/devicetree/bindings/mailbox/altera-mailbox.txt
-@@ -31,12 +31,12 @@ Example:
- 
- Mailbox client
- ===============
--"mboxes" and the optional "mbox-names" (please see
--Documentation/devicetree/bindings/mailbox/mailbox.txt for details). Each value
--of the mboxes property should contain a phandle to the mailbox controller
--device node and second argument is the channel index. It must be 0 (hardware
--support only one channel).The equivalent "mbox-names" property value can be
--used to give a name to the communication channel to be used by the client user.
-+The common mailbox binding properties "mboxes" and the optional "mbox-names"
-+can be used. Each value of the mboxes property should contain a phandle to
-+the mailbox controller device node and second argument is the channel index.
-+It must be 0 (hardware support only one channel). The equivalent "mbox-names"
-+property value can be used to give a name to the communication channel to be
-+used by the client user.
- 
- Example:
- 	mclient0: mclient0@400 {
-diff --git a/Documentation/devicetree/bindings/mailbox/hisilicon,hi3660-mailbox.txt b/Documentation/devicetree/bindings/mailbox/hisilicon,hi3660-mailbox.txt
-index 3e5b4537407d..ec2da5c9e647 100644
---- a/Documentation/devicetree/bindings/mailbox/hisilicon,hi3660-mailbox.txt
-+++ b/Documentation/devicetree/bindings/mailbox/hisilicon,hi3660-mailbox.txt
-@@ -35,7 +35,7 @@ Client
- 
- Required properties:
- - compatible		: See the client docs
--- mboxes		: Standard property to specify a Mailbox (See ./mailbox.txt)
-+- mboxes		: Standard property to specify a Mailbox
- 			  Cells must match 'mbox-cells' (See Controller docs above)
- 
- Optional properties
-diff --git a/Documentation/devicetree/bindings/mailbox/hisilicon,hi6220-mailbox.txt b/Documentation/devicetree/bindings/mailbox/hisilicon,hi6220-mailbox.txt
-index 044b17f3a77a..de9fbf722bee 100644
---- a/Documentation/devicetree/bindings/mailbox/hisilicon,hi6220-mailbox.txt
-+++ b/Documentation/devicetree/bindings/mailbox/hisilicon,hi6220-mailbox.txt
-@@ -55,7 +55,7 @@ Mailbox client
- Required properties:
- --------------------
- - compatible:		Many (See the client docs).
--- mboxes:		Standard property to specify a Mailbox (See ./mailbox.txt)
-+- mboxes:		Standard property to specify a Mailbox
- 			Cells must match 'mbox-cells' (See Mailbox Device Node above).
- 
- Optional Properties:
-diff --git a/Documentation/devicetree/bindings/mailbox/mailbox.txt b/Documentation/devicetree/bindings/mailbox/mailbox.txt
-deleted file mode 100644
-index af8ecee2ac68..000000000000
---- a/Documentation/devicetree/bindings/mailbox/mailbox.txt
-+++ /dev/null
-@@ -1,60 +0,0 @@
--* Generic Mailbox Controller and client driver bindings
--
--Generic binding to provide a way for Mailbox controller drivers to
--assign appropriate mailbox channel to client drivers.
--
--* Mailbox Controller
--
--Required property:
--- #mbox-cells: Must be at least 1. Number of cells in a mailbox
--		specifier.
--
--Example:
--	mailbox: mailbox {
--		...
--		#mbox-cells = <1>;
--	};
--
--
--* Mailbox Client
--
--Required property:
--- mboxes: List of phandle and mailbox channel specifiers.
--
--Optional property:
--- mbox-names: List of identifier strings for each mailbox channel.
--- shmem : List of phandle pointing to the shared memory(SHM) area between the
--	  users of these mailboxes for IPC, one for each mailbox. This shared
--	  memory can be part of any memory reserved for the purpose of this
--	  communication between the mailbox client and the remote.
--
--
--Example:
--	pwr_cntrl: power {
--		...
--		mbox-names = "pwr-ctrl", "rpc";
--		mboxes = <&mailbox 0 &mailbox 1>;
--	};
--
--Example with shared memory(shmem):
--
--	sram: sram@50000000 {
--		compatible = "mmio-sram";
--		reg = <0x50000000 0x10000>;
--
--		#address-cells = <1>;
--		#size-cells = <1>;
--		ranges = <0 0x50000000 0x10000>;
--
--		cl_shmem: shmem@0 {
--			compatible = "client-shmem";
--			reg = <0x0 0x200>;
--		};
--	};
--
--	client@2e000000 {
--		...
--		mboxes = <&mailbox 0>;
--		shmem = <&cl_shmem>;
--		..
--	};
-diff --git a/Documentation/devicetree/bindings/mailbox/ti,omap-mailbox.yaml b/Documentation/devicetree/bindings/mailbox/ti,omap-mailbox.yaml
-index 8504ceb64806..7e3b7b68841c 100644
---- a/Documentation/devicetree/bindings/mailbox/ti,omap-mailbox.yaml
-+++ b/Documentation/devicetree/bindings/mailbox/ti,omap-mailbox.yaml
-@@ -53,8 +53,7 @@ description: |
-   ==============
-   A device needing to communicate with a target processor device should specify
-   them using the common mailbox binding properties, "mboxes" and the optional
--  "mbox-names" (please see Documentation/devicetree/bindings/mailbox/mailbox.txt
--  for details). Each value of the mboxes property should contain a phandle to
-+  "mbox-names". Each value of the mboxes property should contain a phandle to
-   the mailbox controller device node and an args specifier that will be the
-   phandle to the intended sub-mailbox child node to be used for communication.
-   The equivalent "mbox-names" property value can be used to give a name to the
-diff --git a/Documentation/devicetree/bindings/power/reset/xlnx,zynqmp-power.yaml b/Documentation/devicetree/bindings/power/reset/xlnx,zynqmp-power.yaml
-index 079ad977b907..60f0882f5381 100644
---- a/Documentation/devicetree/bindings/power/reset/xlnx,zynqmp-power.yaml
-+++ b/Documentation/devicetree/bindings/power/reset/xlnx,zynqmp-power.yaml
-@@ -27,12 +27,9 @@ properties:
-       mailbox controller device node and an args specifier
-       that will be the phandle to the intended sub-mailbox
-       child node to be used for communication. See
--      Documentation/devicetree/bindings/mailbox/mailbox.txt
--      for more details about the generic mailbox controller
--      and client driver bindings. Also see
--      Documentation/devicetree/bindings/mailbox/ \
--      xlnx,zynqmp-ipi-mailbox.txt for typical controller that
--      is used to communicate with this System controllers.
-+      Documentation/devicetree/bindings/mailbox/xlnx,zynqmp-ipi-mailbox.yaml
-+      for typical controller that is used to communicate with
-+      this System controllers.
-     items:
-       - description: tx channel
-       - description: rx channel
-diff --git a/Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml b/Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml
-index 8eaa04431d74..e238f100f8ff 100644
---- a/Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml
-+++ b/Documentation/devicetree/bindings/soc/qcom/qcom,aoss-qmp.yaml
-@@ -69,7 +69,7 @@ properties:
-     maxItems: 1
-     description:
-       Reference to the mailbox representing the outgoing doorbell in APCS for
--      this client, as described in mailbox/mailbox.txt
-+      this client.
- 
-   "#clock-cells":
-     const: 0
+> diff --git a/drivers/net/wwan/wwan_core.c b/drivers/net/wwan/wwan_core.c
+> index ffbcf11e4e68..f8ca9cda3c9a 100644
+> --- a/drivers/net/wwan/wwan_core.c
+> +++ b/drivers/net/wwan/wwan_core.c
+> @@ -759,8 +759,15 @@ static int wwan_port_op_start(struct wwan_port *port)
+>  	if (!port->start_count)
+>  		ret = port->ops->start(port);
+>  
+> -	if (!ret)
+> +	if (!ret) {
+>  		port->start_count++;
+> +		/* Mirror TTY semantics: raise DTR/RTS on first open of an AT port */
+> +		if (port->start_count == 1 && port->type == WWAN_PORT_AT &&
+> +		    port->ops->dtr_rts) {
+> +			port->at_data.mdmbits |= TIOCM_DTR | TIOCM_RTS;
+> +			port->ops->dtr_rts(port, true);
+> +		}
+> +	}
+
+[Severity: Medium]
+Which lock owns port->at_data.mdmbits now?
+
+wwan_port_op_start() and wwan_port_op_stop() do the read-modify-write while
+holding port->ops_lock only, but wwan_port_fops_at_ioctl() reads and updates
+the same field under port->data_lock:
+
+	mutex_lock(&port->data_lock);
+	...
+		if (cmd == TIOCMBIC)
+			port->at_data.mdmbits &= ~mdmbits;
+		else if (cmd == TIOCMBIS)
+			port->at_data.mdmbits |= mdmbits;
+
+The struct comment says that field is covered by data_lock:
+
+	struct mutex data_lock;	/* Port specific data access serialization */
+
+Since a wwan port allows multiple concurrent opens (start_count is a
+counter and exclusivity is opt-in via TIOCEXCL), can a close on one fd and
+a TIOCMBIS on another fd run at the same time and lose one of the two
+updates, leaving TIOCMGET reporting a bitmask that does not match what the
+driver was last told?
+
+Along the same lines, can the two paths deliver the assert and de-assert to
+->dtr_rts in an order inverted relative to the order in which mdmbits was
+committed, for example an ioctl-driven dtr_rts(true) landing after the
+last-close dtr_rts(false)/->stop() sequence has already started?
+
+>  
+>  out_unlock:
+>  	mutex_unlock(&port->ops_lock);
+> @@ -773,6 +780,11 @@ static void wwan_port_op_stop(struct wwan_port *port)
+>  	mutex_lock(&port->ops_lock);
+>  	port->start_count--;
+>  	if (!port->start_count) {
+> +		/* Mirror TTY semantics: drop DTR/RTS on last close of an AT port */
+> +		if (port->ops && port->type == WWAN_PORT_AT && port->ops->dtr_rts) {
+> +			port->at_data.mdmbits &= ~(TIOCM_DTR | TIOCM_RTS);
+> +			port->ops->dtr_rts(port, false);
+> +		}
+
+[Severity: Medium]
+Should the WWAN_PORT_AT filter here also apply to the ioctl call site?
+
+wwan_port_fops_ioctl() dispatches into wwan_port_fops_at_ioctl() for both
+port types:
+
+	if (port->type == WWAN_PORT_AT || port->type == WWAN_PORT_QCDM) {
+		/* AT and QCDM port specific IOCTLs */
+		res = wwan_port_fops_at_ioctl(port, cmd, arg);
+
+The new ioctl handling calls ->dtr_rts() with no type gate, while both the
+raise in wwan_port_op_start() and this drop are gated on WWAN_PORT_AT.
+
+For a QCDM port, is this sequence possible?
+
+	open("/dev/wwan0qcdm0")
+	ioctl(TIOCMSET, &(int){TIOCM_DTR | TIOCM_RTS})  ->  dtr_rts(port, true)
+	close(fd)
+	  wwan_port_op_stop()
+	    /* WWAN_PORT_AT test fails, drop is skipped */
+	    port->ops->stop(port);
+
+That leaves the channel torn down with the lines still asserted and no path
+that ever calls ->dtr_rts(port, false). The MHI driver added later in this
+series has such a port:
+
+	{ .chan = "DIAG", .driver_data = WWAN_PORT_QCDM },
+
+Also, since port->at_data.mdmbits lives in the long-lived wwan_port, does a
+re-open of that QCDM port then report a stale TIOCM_DTR|TIOCM_RTS through
+TIOCMGET even though the core never re-drove ->dtr_rts, because the
+open-time raise is AT-only?
+
+>  		if (port->ops)
+>  			port->ops->stop(port);
+>  		skb_queue_purge(&port->rxq);
+> @@ -1036,6 +1048,10 @@ static long wwan_port_fops_at_ioctl(struct wwan_port *port, unsigned int cmd,
+>  			port->at_data.mdmbits |= mdmbits;
+>  		else
+>  			port->at_data.mdmbits = mdmbits;
+> +		if (port->ops->dtr_rts)
+
+[Severity: High]
+Can port->ops be NULL here?
+
+wwan_remove_port() clears it under ops_lock while file descriptors are
+still open:
+
+	mutex_lock(&port->ops_lock);
+	if (port->start_count) {
+		port->ops->stop(port);
+		port->start_count = 0;
+	}
+	port->ops = NULL; /* Prevent any new port operations (e.g. from fops) */
+	mutex_unlock(&port->ops_lock);
+
+The wwan_port itself survives removal because wwan_port_fops_open() ->
+wwan_port_get_by_minor() -> class_find_device() holds a device reference
+that is only dropped in wwan_port_fops_release(). So a process that keeps
+an fd open on an AT or QCDM chardev across a modem unplug or a driver
+unbind, and then issues TIOCMSET/TIOCMBIC/TIOCMBIS, reaches this
+dereference with ops == NULL.
+
+Every other ops access in the file is guarded, including the new hunk in
+wwan_port_op_stop() above:
+
+	wwan_port_op_start():  if (!port->ops) { ret = -ENODEV; ... }
+	wwan_port_fops_poll(): if (port->ops && port->ops->tx_poll)
+	wwan_port_op_stop():   if (port->ops && port->type == WWAN_PORT_AT && ...
+
+Separately, this call site holds only data_lock, not ops_lock, whose comment
+reads:
+
+	struct mutex ops_lock; /* Serialize ops + protect against removal */
+
+Can ->dtr_rts() therefore run concurrently with, or after, ->stop() and
+driver teardown? With the driver added later in this series,
+wwan_port_get_drvdata() returns NULL once wwan_port_unregister_wwan() has
+done dev_set_drvdata(&port->dev, NULL), so mhi_wwan_ctrl_send_dtr() would
+dereference a NULL mhiwwan as well.
+
+> +			port->ops->dtr_rts(port,
+> +					   !!(port->at_data.mdmbits &
+> +					      (TIOCM_DTR | TIOCM_RTS)));
+
+[Severity: Medium]
+Does this reduction lose the independent state of the two lines?
+
+After first open the core sets mdmbits = TIOCM_DTR|TIOCM_RTS. Consider the
+usual software hangup:
+
+	ioctl(TIOCMBIC, &(int){TIOCM_DTR})
+	  port->at_data.mdmbits &= ~TIOCM_DTR;      /* leaves TIOCM_RTS */
+	  !!(mdmbits & (TIOCM_DTR | TIOCM_RTS))     /* still true */
+	  port->ops->dtr_rts(port, true);
+
+DTR stays asserted at the driver while TIOCMGET reports it clear. In the
+other direction, a TIOCMBIS with TIOCM_RTS alone also yields on = true, and
+the consumer added later in this series maps that to both lines:
+
+	mhi_wwan_ctrl_dtr_rts():  on ? TIOCM_DTR | TIOCM_RTS : 0
+
+so DTR gets asserted without userspace asking for it. TTY routes these
+ioctls to tty_operations->tiocmset(tty, set, clear) with separate masks for
+that reason. Would a set/clear mask pair in the op signature be preferable
+here, given that widening it later is an ops-struct change?
+
+Also, ->dtr_rts is invoked on every TIOCM* command even when the resolved
+boolean is unchanged. Is the redundant driver-side signalling intended?
+
+>  		break;
+>  	}
+>  
+> diff --git a/include/linux/wwan.h b/include/linux/wwan.h
+> index 1e0e2cb53579..a7684950d73b 100644
+> --- a/include/linux/wwan.h
+> +++ b/include/linux/wwan.h
+> @@ -57,6 +57,8 @@ struct wwan_port;
+>   * @tx_blocking: Optional blocking routine that sends WWAN port protocol data
+>   *               to the device.
+>   * @tx_poll: Optional routine that sets additional TX poll flags.
+> + * @dtr_rts: Optional routine that asserts (on=true) or de-asserts (on=false)
+> + *           the DTR and RTS modem control lines.
+
+Related to the previous comment: this text describes both lines moving
+together, but the ioctls permit mixed states, and the caller passes true
+whenever either bit is set. Can the header text and the caller's reduction
+both be correct?
+
+>   *
+>   * The wwan_port_ops structure contains a list of low-level operations
+>   * that control a WWAN port device. All functions are mandatory unless specified.
+> @@ -70,6 +72,7 @@ struct wwan_port_ops {
+>  	int (*tx_blocking)(struct wwan_port *port, struct sk_buff *skb);
+>  	__poll_t (*tx_poll)(struct wwan_port *port, struct file *filp,
+>  			    poll_table *wait);
+> +	void (*dtr_rts)(struct wwan_port *port, bool on);
+>  };
+
+[ ... ]
 -- 
-2.55.0.691.gc56d675ccc-goog
-
+pw-bot: cr
