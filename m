@@ -1,208 +1,155 @@
-Received: from mail-lj1-f172.google.com (mail-lj1-f172.google.com [209.85.208.172])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D7D14963C3
-	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 19:03:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.172
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786734222; cv=pass; b=cXPHm8IUbnx8PqIAA6nq/euNqcQFNObDtHSrePNp0dLNff11BMDWHsIdxfiK3ENk4ct86j2NxGH76V7corlbqASZSSw1xQElzLEgw+Mhj5+eeUEP9xsEvRroXnjxCP0Qm+GSGZjjrFPne1o02kj6Lb2d5fqqORue/4JM8aZQ40I=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786734222; c=relaxed/simple;
-	bh=qQI/JXDVczQ7y8XoDStx4EtR3tJDwfAXTphzlNpcO7g=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=OxS9hUDjYYk38uCw22ogS2ZRJUnSbvdigKb7cVBlsUyynpaqVPc2hhaDc/6/SATck6U1DnlxdZy+WbaA/XcBOVlEt6ntjgseaC3nhxxdvkOf0+60fkr66z3ZRsZs5wd78siDfjSPp1JsIsu1Tl3HH1daop0r3J/lcSopoXC+q8E=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=qvoor54R; arc=pass smtp.client-ip=209.85.208.172
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1C5CD47884D
+	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 19:11:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786734713; cv=none; b=k1Q/jhdqxwqQJtR7HoaDiGEBhkei1uwAtdRASysUvGn6YfZQNBcfT1bfYcOL3EL3QunEnBWzJk7YQO0ob5OOQoyXplN3fjo/OXmQgBc42tStHpm30xk/C0LnLuamNppEIF2vYOkJ6YD3BH8BqyfF6/dvbpGXcgZDjsmTi8qqWnM=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786734713; c=relaxed/simple;
+	bh=BjSeBOcY1P2H+zL9fPW6h1srH2T17qcBy0KkYiQLuDA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=Tn0NRr0bnD7Ur0TQKSjErfCKu+oesfME0gn1e9CcHUehgiE8h0nFcmBCL+mtperHxeBTABdxMllK48o8NnRFlV+S2kqS8DLW+5c3yDkkZqpqWleE04e9NoQcDuqQRgn8Jvm2S95VcC5vYzumEfDQHm6L5weKoKrxBwfvoIETvKU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=aUMRL2p2; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=keC93YY8; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="qvoor54R"
-Received: by mail-lj1-f172.google.com with SMTP id 38308e7fff4ca-39c95395230so11670071fa.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 12:03:40 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786734218; cv=none;
-        d=google.com; s=arc-20260327;
-        b=REfNWvsSl30baAChI/sdAyrQdabwQr3D0e1qEtlUc+cb3xmboGaZ4CVYMEotfN9RI4
-         skWT35MYdfn4xOVvn0YkrCr5MEpBnzbggusebXHELVPCUiikMZXUHTsaM6/darJ7adPi
-         ItUDZgzFCjOj1DgjLzUtQbFQL3S32s/sDDDiGmruHOCQXJr88J00biUwoVcmBqTDb97s
-         cJL+C6/nqITg3BoSQdt+QATxXYxgFAfilKJvZoKBVWXIy+z7z8bvsjlBpQwzAj1teUWr
-         caFICzCWadm7+1Wku0iZfXY6jIxruHQoKhuj+2L7st1Mtz3/ecvkMdzyl1Zzb6e4EcDw
-         BfXA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=tg7eFnXbdlEJOVdwgdnj7Wlcb/VkpASkYOtfHYmgAf8=;
-        fh=t/wqAliX+t7dzEhKIkoFjpGY06WQUe22pdpUYI0XRP0=;
-        b=M671sIN6Nv6YaNjzfiyYBA+q3d47eCXkvRSB6xmHdO6ITUm68wVEzby9FVPPePGJI7
-         nWY1KaQ/EYuvL6/GWVfBuy4ShT6rWyvygy9t7XF9n2AQPSw5Yhcn7GfRAdZhOApZF80Q
-         MvF0sBfsJ/j+NdDQvaCjYIKYXLcYrzhQa0jPs0UL7DcU85fsJdfV2F095Qrs8dvNBR/B
-         0cTt4x2U+o7a/3hMZjZpI4dwJ3DuC/YsX9dH2skJAnj4hZB5BPiHow8aulb2N+rRTGCA
-         VmFsQrHLujVzDT6hywrxJhVThg3rWck7YS5+izOEJUx2iVnRNnZKyXfgYybS7edBevuL
-         hytw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="aUMRL2p2";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="keC93YY8"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67EGhsq11053987
+	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 19:11:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	SohSU0/9k/ZRs0kvdJIY0QMI2ZHWYJ650KSj2jQWXnE=; b=aUMRL2p2KrH9Lln6
+	YWgnODYNOSTHKwJk4s0D+Q9T9QBJd/0Et5NsQH4vXvyLaNcWcjDsUjSVjEko3Nct
+	aUoBqJ3lzVXyEfRdRAMLfbJiJh8U1SmMrgvtyuAdEBVWc+tGJYGbwYX04aBBJRw1
+	3MpReoDBtYWnJKVNqdJh5ERpbyCXiOvpxMN/qMgp9lXhUHhxnZ6HNfYJQtTyGPBO
+	AHVQntelMqHjQLysqwl13XZ7vKZ++K51NVq9txc+GHDQ1ZmhFwjxCj6zSgH4C2+y
+	3agKuVpXftELbHWi36C68kkIsL5XCVybaIIsSNa7BLHgjCwNKmCVXRvyKScIKpOO
+	zOTCBw==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g25ub8u68-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 19:11:50 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-cb5ea36f969so1485568a12.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 12:11:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786734218; x=1787339018; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=tg7eFnXbdlEJOVdwgdnj7Wlcb/VkpASkYOtfHYmgAf8=;
-        b=qvoor54RLzKuPOgyE8jx0snm6L5a0TXzc038AZ0lkTEwl9dHwlVAAszGW+t7CmXi15
-         XbevtDT7LBiZl/3FUCWWzcq45NWYe6TqksLLiFMgypJ4fL/gSvI/4SMBglIisS1oC6il
-         laoemXEG5zdgg0mtmezz4QJj28lX7k2Ivb/rLRTONq6gXfpEIctxJmeBaB7Hw/t6c7Vx
-         Wi5AyGhxGaWn0pr1E7sejT6A/UKuOZr1s5FFFyHCy3d8Y1pG68/JfilP+Mo9RN4p6S/7
-         odSdASDFuSR1JIvekPtu2S3tRE/0twtWoJz6pZ1JuORH4xgJeZzk9WkLbcuXkFm8nsKS
-         0KBA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786734218; x=1787339018;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1786734710; x=1787339510; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=tg7eFnXbdlEJOVdwgdnj7Wlcb/VkpASkYOtfHYmgAf8=;
-        b=YFS7F21wtoz+HTIt0f4MHwla0i9PPuNZRsGr1dMo8b8mDLplUsrPTg7onjX1Ov7+r1
-         wlRuTKH0zcmYeeOpoBSwjPW/j9RCAZXgTzFzFVIBAtx7U0mBa20nO0a0t9CY9NcEXsub
-         le0nvv2o9ZUIOF0vLfCM91YSh7J75kj0EU1ASc8Qwls4dmlw72c/LhlJ0rzJl9nTaWUt
-         reY9taGbxH8WnALh/PjqrIxIsMENumiEHY1GH+dgWMzQdPJxeLEzCy4lhGHljaIBXIQo
-         +gef+ecK0Eu/Uc6kFmSCogEwPGGEFk9+LMfRXsjpNC5YKrQCx772sFJ5cA0q9BoYKIfF
-         Ws6Q==
-X-Forwarded-Encrypted: i=1; AHgh+RpSHOYswNXnLydJuazndvAvhVay4srQNA+OJwDXz/5E8wvbLoW1UDYta0rnK50/BLAIZfT8gcK5wUbohCeY@vger.kernel.org
-X-Gm-Message-State: AOJu0Yy476u1jxZ8pMTkpxa9tychHNAegfS1QpBaRYR5+JEHBzZRNG4j
-	sNMPXH1jb7ZZtNEGXT98CSqIyuetVhFxSFFztkjyD9F4d139he1xQEgZ2E9oOoAHyqPidGC4hgx
-	7XegupPixrTKkahmzpM8GJ7Y/3L+DoPs=
-X-Gm-Gg: AR+sD10YvbBVKRyC9XVEDOhM9xNKvsBKHm5Dw8ydZySA91yTi5yZVYUeaj0+J1QX780
-	wbNn86UPBybwZHXBI54yOcP+KqZyT/NNyCHeeLBkZrhrjukY1rVt+z1teZkDQvT5KMCK16lfj/u
-	BbcGXU3VL03ZqwyRX7lqXS17+dmscVr9VC2YdbI2c0+RiDxDt0A8bC+DNIqrSrCa+wT5nsrlZLy
-	bY4uD9iqGshEM4WV+a0yIciP+OGemCiXe50p1wzWdug0aw2Aedz0ztAPprafvua7ZNVmq9+fXA0
-	AyqbNGB0spHp8toRl4zCEuU4O710xmJ6zpyEunH6YxtMfu0sAnHODBeZcWHx0QtCyQ0GoDt2AGl
-	nDqUU1PtukR8eWB5ToVKPs1YJjl6zsA==
-X-Received: by 2002:a2e:a985:0:b0:39a:da70:2c77 with SMTP id
- 38308e7fff4ca-3a1323afc12mr9160441fa.3.1786734218362; Fri, 14 Aug 2026
- 12:03:38 -0700 (PDT)
+        bh=SohSU0/9k/ZRs0kvdJIY0QMI2ZHWYJ650KSj2jQWXnE=;
+        b=keC93YY8kSd+wKTgUXpr1rlPsUPKxvVbod9CDsgJJ5SeKhwhr0wHVPPEtyD7Ih17rW
+         6G0Xi0eRsiltyt0UsJ09TyjpnLapQVKN2nYIVa3gOjSSpUBgIMS3Voltos/If2WiLj2p
+         YxXJ2D+lHR0iy9aJRdRkb/CpT0tY62my/pjNCuCKwws3H3mvqvQwlxZ8yfEkDwmd2/pG
+         ncUclRC+OBJFGVrpUMoGusfNKqEcJSgKoZujkukmOLHS5skfe7TusrQruAEWxS6IM3qG
+         dvy8ZfbWWMrBsUFYcKf8qBkQS39vTasmqzRBkURoyqYm9t//r+BionWOvcjmc4s/FDi0
+         09Lg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786734710; x=1787339510;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=SohSU0/9k/ZRs0kvdJIY0QMI2ZHWYJ650KSj2jQWXnE=;
+        b=TCbwHqEF2YNKqKUeglxxUJcZlgNW5ujVAJkCqIXYlYqroS5Z/Gp4kAOXFYJTVgOKBd
+         aagKu1bEvmQma0TPkPPEoXu3AWxGJkDkyNGumc1DmuDTOXh60xkhZq+EV8Pt5d7aofpv
+         Iy5acT6fhMufRWDUsEhXErU4V9oWOVgvi+HhfV/8u8+vj5nOpsqhdXdW4f+cinks9NUy
+         6OELSn95S3hov6hZjLLghKV9qF/QqcdfpKmu2mbkOwyVzuEBm7jWCvebRqOspNIP1xmS
+         fo0CgVPn9tNoGOcZurdgQ3yOqSEsHhnMjvMRui7n9jfsyoaCAALxwoKIsSBnHWQ5gSxd
+         sRDg==
+X-Forwarded-Encrypted: i=1; AHgh+RrpMbxi3XbvCFK7XrFJDf7Wiroeyd5RLlpC93YhRN7t9A4aXnKxYeLx7joI64vmaXoghGh6PhwhZiZK9wG/@vger.kernel.org
+X-Gm-Message-State: AOJu0YwtlUupBjEGvPzTeBuYxkp9gENRXEdLm4G9KSrFA71ZgnzQZyDe
+	LRWtDhHXsjnOxQTobZVWo8UAjSqlZI0/yqDXgAz1MvQ3QbgwUqFjQdPR2QVYX/YjnHSkBq8Q+ae
+	NHCXZoIvOB/r09A5u3ydF2Ig+avSuZvzltkMTZ2UiMEZv3tlvFWVEab7CDQV4+4Mphk87
+X-Gm-Gg: AR+sD10rzEJNXx4a0ry5lCTUbFA5s1ZOkUv+aUw/W44Tki4e1dpLZON2TzZzcA6QrOB
+	AH4Wpt7LIrB2FHmtmyJbGQAkP3Rgfou5g//MFCEgr3FW6AEvJSnJu6IKw3/BlWdLiF6KKXjcxcd
+	cUHDLIrwqyAdkxmSZm2ul0yX9ikGmw7ZYN+J+EXmL49RN1gOUgUdaJgM5XLMwm70aoOPMqyvzCH
+	q3h3qs2VZ6zyAOiKzDawxOtplqdiJ6dq/BIJLJjXasACrlSALlI8mrY6CDcIKl9OU/IPqZkG99P
+	JmWKhmPw7XGW38EP6e4QHkMkj0XF2qgrMiiZKolRon0JNHwka61jDzS7C72PFsEp8FFp7MJyqw0
+	TNVRRvKzkbfLCp2/7I2qYltEk99f7Q4yuL+pnPoxc16p+d1f+73XS8w==
+X-Received: by 2002:a05:6a21:7d02:b0:3bf:ba48:ca88 with SMTP id adf61e73a8af0-3cc71bbf3d4mr10521394637.15.1786734709534;
+        Fri, 14 Aug 2026 12:11:49 -0700 (PDT)
+X-Received: by 2002:a05:6a21:7d02:b0:3bf:ba48:ca88 with SMTP id adf61e73a8af0-3cc71bbf3d4mr10521306637.15.1786734708928;
+        Fri, 14 Aug 2026 12:11:48 -0700 (PDT)
+Received: from [10.226.59.182] (i-global254.qualcomm.com. [199.106.103.254])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-320c6be7f6fsm8152663eec.0.2026.08.14.12.11.47
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 14 Aug 2026 12:11:48 -0700 (PDT)
+Message-ID: <96e73102-eced-4937-a622-6f2cb5a32ec1@oss.qualcomm.com>
+Date: Fri, 14 Aug 2026 13:11:46 -0600
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260808-rp-qcs8550-v1-0-a5a365ba3dc5@gmail.com>
- <20260808-rp-qcs8550-v1-4-a5a365ba3dc5@gmail.com> <20260813-private-brass-rhino-81d7a9@quoll>
-In-Reply-To: <20260813-private-brass-rhino-81d7a9@quoll>
-From: Aaron Kling <webgeek1234@gmail.com>
-Date: Fri, 14 Aug 2026 14:03:26 -0500
-X-Gm-Features: AUfX_myLhnVJMTjLABXPnREVf77347qXPc1GGgdYTRAzQmrMSKyYh9ZAhwJ9YqM
-Message-ID: <CALHNRZ8U3BgQJoKiQi-yX8pT+YDdp_BE6NVK7M3v-Jwe1qh3YA@mail.gmail.com>
-Subject: Re: [PATCH 4/4] arm64: dts: qcom: Add Retroid Pocket Nova
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] accel/qaic: Address potential out-of-bounds read in
+ resp_worker()
+To: Youssef Samir <youssef.abdulrahman@oss.qualcomm.com>,
+        carl.vanderlip@oss.qualcomm.com, troy.hanson@oss.qualcomm.com,
+        zachary.mckevitt@oss.qualcomm.com
+Cc: ogabbay@kernel.org, lizhi.hou@amd.com, karol.wachowski@linux.intel.com,
+        ruikai@pwno.io, linux-arm-msm@vger.kernel.org,
+        dri-devel@lists.freedesktop.org
+References: <20260731152344.1905882-1-youssef.abdulrahman@oss.qualcomm.com>
+Content-Language: en-US
+From: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+In-Reply-To: <20260731152344.1905882-1-youssef.abdulrahman@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=EsjiaycA c=1 sm=1 tr=0 ts=6a7f6876 cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=EUspDBNiAAAA:8 a=zd2uoN0lAAAA:8 a=DeEPClqeKu6msZ13zAcA:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE0MDE0NyBTYWx0ZWRfX9JFCz88Sv01H
+ 00q10nXRCNcvzt339YtQJVjkQPMTWEmRlElLuiVNbugK7ZjnafF95/SHjIf7/l7JfcmQZjUlmzL
+ djge2yAm4gadrTaU4gNgodsHcIpQ8FhFt22wV+cNU358ydehEIz6LrSG1n1BGeN0KVUdhwsLRqh
+ 4hep2kuJpzPVaMail32YHtlik7HCDlD5S77QdwnbWR2BUUT/wZ1bL9SssPQ3cKAkdG+zirwT/Xd
+ N0oNJs7hsgBQGPMVCaeJecY72iFLpGjoT8sqyMPcu+dbLwrkwK7GpgcgWmleZa+XIiIE5KLivVr
+ crxEzypF3eadOm23k0fF3Faxc/Qet+ge89krjormOMwbsmUMpS8ws28sHiEotarJB9qy630gVEP
+ IdsrhuJ/fi7shvdgb1OzZTWIaBcG7MDFpi1RNBTlMGXtKMtWilNRjcz9wog6Q5omNvNClkJlXRg
+ YzFdFgKu3n4NDasVnbg==
+X-Proofpoint-GUID: 0n6ki4nW3TrBCArQ0kjjpJXW_k8AsrBg
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE0MDE0NyBTYWx0ZWRfX7ipOQHPsW8b+
+ 4ulN0YCNaV1rCidKTCH1MPTr+kJUudgvjI/mlG9u2bAFyR8GOQ0zdTsw/pTdLX2YlXSP90W6bX2
+ 67RPZaZiko2g6EFQucfiucfWPhsOsXE=
+X-Proofpoint-ORIG-GUID: 0n6ki4nW3TrBCArQ0kjjpJXW_k8AsrBg
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-14_06,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 bulkscore=0 priorityscore=1501 spamscore=0 adultscore=0
+ impostorscore=0 malwarescore=0 clxscore=1015 suspectscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608140147
 
-On Thu, Aug 13, 2026 at 4:24=E2=80=AFAM Krzysztof Kozlowski <krzk@kernel.or=
-g> wrote:
->
-> On Sat, Aug 08, 2026 at 12:37:58PM -0500, Aaron Kling wrote:
-> > The Retroid Pocket Nova is a high-performance Android-based handheld
-> > gaming console powered by the Qualcomm Snapdragon 8 Gen 2 processor
-> > featuring a 4.5-inch 4:3 AMOLED touchscreen.
-> >
-> > Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
-> > ---
-> >  arch/arm64/boot/dts/qcom/Makefile                  |   1 +
-> >  .../boot/dts/qcom/qcs8550-retroidpocket-nova.dts   | 118 +++++++++++++=
-++++++++
-> >  2 files changed, 119 insertions(+)
-> >
-> > diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qc=
-om/Makefile
-> > index 09b3c5b2d9dab..582805e89f4cb 100644
-> > --- a/arch/arm64/boot/dts/qcom/Makefile
-> > +++ b/arch/arm64/boot/dts/qcom/Makefile
-> > @@ -196,6 +196,7 @@ dtb-$(CONFIG_ARCH_QCOM)   +=3D qcs8550-aim300-aiot.=
-dtb
-> >  dtb-$(CONFIG_ARCH_QCOM)      +=3D qcs8550-ayntec-odin2mini.dtb
-> >  dtb-$(CONFIG_ARCH_QCOM)      +=3D qcs8550-ayntec-odin2portal.dtb
-> >  dtb-$(CONFIG_ARCH_QCOM)      +=3D qcs8550-ayntec-thor.dtb
-> > +dtb-$(CONFIG_ARCH_QCOM)      +=3D qcs8550-retroidpocket-nova.dtb
-> >  dtb-$(CONFIG_ARCH_QCOM)      +=3D qcs8550-retroidpocket-rp6.dtb
-> >  dtb-$(CONFIG_ARCH_QCOM)      +=3D qcs8550-rb5gen2.dtb
-> >  dtb-$(CONFIG_ARCH_QCOM)      +=3D qcs9100-ride.dtb
-> > diff --git a/arch/arm64/boot/dts/qcom/qcs8550-retroidpocket-nova.dts b/=
-arch/arm64/boot/dts/qcom/qcs8550-retroidpocket-nova.dts
-> > new file mode 100644
-> > index 0000000000000..10dabb1d51f5a
-> > --- /dev/null
-> > +++ b/arch/arm64/boot/dts/qcom/qcs8550-retroidpocket-nova.dts
-> > @@ -0,0 +1,118 @@
-> > +// SPDX-License-Identifier: BSD-3-Clause
-> > +
-> > +/dts-v1/;
-> > +
-> > +#include <dt-bindings/gpio/gpio.h>
-> > +#include <dt-bindings/interrupt-controller/irq.h>
-> > +#include "qcs8550-ayntec-common.dtsi"
-> > +
-> > +&{/} {
-> > +     model =3D "Retroid Pocket Nova";
-> > +     compatible =3D "retroidpocket,nova", "qcom,qcs8550", "qcom,sm8550=
-";
-> > +
-> > +     backlight: backlight {
-> > +             compatible =3D "pwm-backlight";
-> > +             pwms =3D <&pmk8550_pwm 0 860000>;
-> > +             brightness-levels =3D <1023 0>;
-> > +             num-interpolated-steps =3D <1023>;
-> > +             default-brightness-level =3D <600>;
-> > +             power-supply =3D <&vph_pwr>;
-> > +             enable-gpios =3D <&pmk8550_gpios 5 GPIO_ACTIVE_HIGH>;
-> > +             pinctrl-names =3D "default";
-> > +             pinctrl-0 =3D <&pwm_backlight_default>;
-> > +
-> > +             status =3D "okay";
-> > +     };
-> > +
-> > +     vdd_disp_1v8: vdd-disp-1v8-regulator {
->
-> So foo-regulator?
->
-> > +             compatible =3D "regulator-fixed";
-> > +             regulator-name =3D "vdd_disp_1v8";
-> > +
-> > +             regulator-min-microvolt =3D <1800000>;
-> > +             regulator-max-microvolt =3D <1800000>;
-> > +
-> > +             gpio =3D <&tlmm 70 GPIO_ACTIVE_HIGH>;
-> > +             enable-active-high;
-> > +     };
-> > +
-> > +     vdd_disp_2v8: vdd-disp-2v8-regulator {
-> > +             compatible =3D "regulator-fixed";
-> > +             regulator-name =3D "vdd_disp_2v8";
-> > +
-> > +             regulator-min-microvolt =3D <2800000>;
-> > +             regulator-max-microvolt =3D <2800000>;
-> > +
-> > +             gpio =3D <&tlmm 142 GPIO_ACTIVE_HIGH>;
-> > +             enable-active-high;
-> > +     };
-> > +
-> > +     ts_avdd_3v0: regulator-ts-avdd-3v0 {
->
-> Or regulator-foo?
+On 7/31/2026 9:23 AM, Youssef Samir wrote:
+> Although 'commit 2feec5ae5df7 ("accel/qaic: Handle DBC deactivation if the
+> owner went away")' fixes the scenario it was intended for by walking the
+> message and only decoding QAIC_TRANS_DEACTIVATE_FROM_DEV, if present, it
+> skipped over the bounds checking code that is included in decode_message().
+> This could lead to issues such as reading past the slab allocation's end,
+> infinite loops or kernel panics. For those issues to happen, a malformed
+> wire message is needed to be sent from the device.
+> 
+> Instead of duplicating the bounds checking code already present in
+> decode_message(), use the function inside resp_worker().
+> 
+> Reported-by: Ruikai Peng <ruikai@pwno.io>
+> Fixes: 2feec5ae5df7 ("accel/qaic: Handle DBC deactivation if the owner went away")
+> Reviewed-by: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+> Reviewed-by: Lizhi Hou <lizhi.hou@amd.com>
+> Signed-off-by: Youssef Samir <youssef.abdulrahman@oss.qualcomm.com>
 
-Given that the associated AYN series uses foo-regulator, it makes more
-sense to me to remain consistent with that. The question has been
-raised on the RP6 patch in this series, so I will wait for a response
-there before sending a new revision.
+Applied to drm-misc-fixes.
 
-> Decide and also read:
-> https://web.git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tr=
-ee/Documentation/devicetree/bindings/regulator/fixed-regulator.yaml
-
-Ack.
-
-> Best regards,
-> Krzysztof
-
-Aaron
+-Jeff
