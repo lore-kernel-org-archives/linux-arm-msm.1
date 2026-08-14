@@ -1,44 +1,44 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4932D4398EB;
-	Fri, 14 Aug 2026 09:05:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2ACF3384232;
+	Fri, 14 Aug 2026 09:18:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786698350; cv=none; b=T0HKiGWYLrKHKV+3vi2Ewl2DTheZvUV566wpvEaBqk/5QDG+csn4BLaV9vLhjxmTD/raP6juI/bF1MQNXCzgFSi+WPy0ZLu2aHCnXx5CGe025ngRS9xUmiGzN1wgHNkYkp7EGp6rDghaozOcLNLP6eZMj04zb9d57sgEBnBW3+M=
+	t=1786699117; cv=none; b=PUv38o1+5wK1m5JPxi5yvOra4LnDV8SteYKv/oXMDvgu4xYBU+DXH6cng0HiQPilolt2IB2xBXErK46F0e5T/SKPjfxfP28s3H+1/LUqD7+FV17I/brsQ7auHnGrHvKv97PIqlIbv1Qu/nMSKdims8HJFJs/lmXtkJHTNJ0kpQo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786698350; c=relaxed/simple;
-	bh=RHjun/4S7LLktQHdatf10k19DNwkcsqe6BgKVGaEmIM=;
+	s=arc-20240116; t=1786699117; c=relaxed/simple;
+	bh=MWm1KTHgFdEvYDHb8b3WNpdNZDj/tLLWWxJ9KETkDCM=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=kY6T1A7LZXHcraHwC39S0nGEcPeDNO0j1cH3ToqE9ZoFO+mc0k5ygxl+gA/1ZcsGl5FoLhUxKp3JA5631P/CZwcimiRygiU4unbADmAGjHDPyl3VJAAbQWypoc5pmtS1N2cNUkpWpj6eF1L+lneyezEMKBIXey53JxVdN/egf30=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=kkqLE5b2; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=FLmw3SorFMfDoC17rNGr82bZOctkZtaH0XRvMz/ogo65zW4cU4XR3OcnBXcnGhRy3qURCA2+QZLkLPeoa6ZFd/GmlOULBMzRp+ROe1wYRZpx32xTTOuzUvyQyRktQIy9kp02KUDen1bu50qJGy9M7sLTyRbcTmE9xeYpkHUGqeI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=IBLccQcM; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="kkqLE5b2"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E6F71F000E9;
-	Fri, 14 Aug 2026 09:05:43 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="IBLccQcM"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3752F1F000E9;
+	Fri, 14 Aug 2026 09:18:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786698348;
-	bh=RHjun/4S7LLktQHdatf10k19DNwkcsqe6BgKVGaEmIM=;
+	s=k20260515; t=1786699116;
+	bh=cvRzWMrdw8JpHJQqJon6QPKNit+o5uZcUbJrMK2Xhu4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=kkqLE5b2sPZ7jXgC9Ev8wZ7/v0K6h6opxfARAWlp8KSUVM/SH3LxjzRJ35TzA9mUe
-	 KPjCNxo54A5qeYPmlOy6yNBRDm95j7zik84nICSUcQC6sEUj7l9FDFGU1tgz7Gfl25
-	 bJj0yTDGJ7yBx7nD4jVInacYERTyPrgUezM947QbL+KwccVBzZSUCBZycL/frHfaK2
-	 63Ixb0ubHppOUwwxDgQw4T8FC96bXeXn/7YD+cgF0zOgY1cI++J4h/Q2gUMvt2YWCY
-	 k5hY4/vq10v9boKZxFtDUhqNSMFw/Kc8uMYilzK8ZjmwOxGqyR1GpXVj0Ci58o73DD
-	 3c3jYcmkFwmxA==
-Date: Fri, 14 Aug 2026 11:05:40 +0200
+	b=IBLccQcMMInMF0uEB4olTFIMrkpWCNunyazG1b5pVYMp/mbV7m5QNWKKPUc/kfQUi
+	 79cMiDbH44/lkp4ah0zbl2jVrxnTu2i37mpBr1YJhe4QOn7HEguFDtP4qSpLYEqWuI
+	 yeJpGHUuPNMdXHRcHmXA0p0tVjYUlLA+X+T77+20FwPHG0wWuPmi7nGykwuS8tkm4L
+	 1utaCIqstDuOoB5Uw/iOB1xdjIx0Vcy1oudlt5jmKOEaJZqzFr+O1WQCNNbEgM0V+E
+	 cJ+4xz74CdJhhnlqvNTSIQAEAuPge6kV2KA0auENE1C0/4DvCCO6ucAKyE3IpGMzed
+	 rqrChDyIq1w0w==
+Date: Fri, 14 Aug 2026 11:18:29 +0200
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Mathieu Poirier <mathieu.poirier@linaro.org>, Rob Herring <robh@kernel.org>, 
+To: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
+Cc: Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>, 
+	Andi Shyti <andi.shyti@kernel.org>, Rob Herring <robh@kernel.org>, 
 	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Kumar Patro <bibek.patro@oss.qualcomm.com>, Komal Bajaj <komal.bajaj@oss.qualcomm.com>, 
-	linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-Subject: Re: [PATCH v3] dt-bindings: remoteproc: qcom,shikra-pas: Allow
- bam-dmux subnode
-Message-ID: <20260814-modest-rose-salmon-7bb60b@quoll>
-References: <20260813-shikra-pas-bam-dmux-binding-v3-1-167a3fb50d21@oss.qualcomm.com>
+	linux-arm-msm@vger.kernel.org, linux-i2c@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3 1/2] dt-bindings: i2c: Add Qualcomm I2C target
+ controller
+Message-ID: <20260814-fluorescent-solemn-capybara-f9dadb@quoll>
+References: <20260813-i2c-qcom-slave-v3-0-1d3742e2ad47@oss.qualcomm.com>
+ <20260813-i2c-qcom-slave-v3-1-1d3742e2ad47@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -47,20 +47,26 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260813-shikra-pas-bam-dmux-binding-v3-1-167a3fb50d21@oss.qualcomm.com>
+In-Reply-To: <20260813-i2c-qcom-slave-v3-1-1d3742e2ad47@oss.qualcomm.com>
 
-On Thu, Aug 13, 2026 at 04:55:54PM +0530, Vishnu Santhosh wrote:
-> Allow an optional bam-dmux subnode under qcom,shikra-mpss-pas by
-> referencing qcom,bam-dmux.yaml.
+On Thu, Aug 13, 2026 at 09:22:32PM +0530, Viken Dadhaniya wrote:
+> QDU1000 and related Qualcomm SoCs include a dedicated I2C target
+> controller that operates exclusively in target mode. It is a distinct
+> IP from the Qualcomm I2C master controllers (GENI, QUP) with a
+> different register interface, so it requires its own binding.
+> 
+> Document the MMIO region, interrupt, XO and AHB clocks, interconnect
+> path, and optional pinctrl states for the controller.
+> 
+> Signed-off-by: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>
+> ---
+>  .../bindings/i2c/qcom,qdu1000-i2c-target.yaml      | 75 ++++++++++++++++++++++
+>  1 file changed, 75 insertions(+)
+> 
 
-I still miss the answer why. Last time you said in present tense that
-this node exists there, which I objected. The answer to my objections is
-to provide proper reason why you are adding this, why you are doing it.
-Answer almost never is: repeat what the diff is doing.
+I think comments of Sashiko are wrong.
 
-You change something in the bindings because something exists in the
-hardware and it was missed in initial submission, and you explain the
-impact of that "missing".
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
 Best regards,
 Krzysztof
