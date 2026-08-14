@@ -1,260 +1,153 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 152933839A1;
-	Fri, 14 Aug 2026 19:51:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 22BB13D4121
+	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 19:53:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786737076; cv=none; b=q+81AdGY0Gyyy9clV7/U5cfHa2/8ZVXKZbb6S33XILp5V3x5SNmfxgF2pRYYLLV66pGt4+zINUmV5qd/hckGRta1xYEQhWpIQAy5zWJHmDaJSKjKPWMZ/oMXWIiK9rhILK7qA8SZfkN33guSUFmBqMv2jfRgfuDKYa6OV46cEnw=
+	t=1786737222; cv=none; b=Eovq9VIZYMqCEnGNRyyi0tUOhV2NCEhaM8WTsdgK9RAZ6uoudSenzrWk4Ijq1L/8FvBsCa8/aCFIEjRo9mXckFxObbFN37ro0Pw40WKNQ6xyA7E1XZimvAjKl3D6Hvopm+z67yS9+OLXXdyp/4t2L4wh5jbcws7B1dq9FQlz8vk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786737076; c=relaxed/simple;
-	bh=35Iq1pjSS4rQ8UHa1SL0Ik1fw0Q6aDqlggS9QhyexZI=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=HoMCkTT555qPdEvE6kHVcdy3cTaogUHd/+UKKn1v+OCjXzCTqVGQFXF+GNoZrs0gIKJntgjK+5RgQJw5i4IL23GUc1RkX8952yeoA32d6EPyLYmbO0uZtUfzuhUo9T78vMQuF5ln+YFayi06sToNSacQD05JLk8ewYwIiOGoBBQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lV5bXy/s; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786737222; c=relaxed/simple;
+	bh=6ZFlkT6HMH1EESSA6pydGAzTXgJnBomR45rRAmTbe+E=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=MEc/yAfur8ogjNrvAym9u1RSoiAOA53dyKSiyFekbFcsgFDLmuU2ynMR3YdnL9yEfSgM9+PmL2SqWvW8Iw6GZS0eSriYCSDwdt84AkjlSWcJRTy3E17z98RfYgkCHnzAEh2I2AQ8mGJFy69fWaho1BGOsWDNcMYCAEo3PNZlAUs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=ZFaBlX+M; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=BQLcVpH2; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lV5bXy/s"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A47081F000E9;
-	Fri, 14 Aug 2026 19:51:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786737075;
-	bh=IvU4AEySlf5auKJ9wZHp7KI/XKrB4A0LWFq7SKqgjhs=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=lV5bXy/sXlRZ8HjV2GAI/nVZCr0mIl7JoQ3FDR2moeRgpYnO2UTLkztQvSUnJeVsf
-	 KxgSJ3ted7lC9VXU7f6Sloz/OV/+YYchlf5Y3sHMZQV/T6jV1orVIVpHhm9PrEfvBi
-	 ZX46/6c27bVvy9vvYm+E1O3AmJxsN6Y9pl8f/F8bssRmWSp1XsvDY0R72g5+LJdpjg
-	 s34l5YlCED2ZfwpYvel3oEYBf/V5Sztu38L4jLZ9So+IkffsffcevL1S1xnvssmJDp
-	 GWnpXUqrL41O5qOXd7UK6B66uQaJcklfLmyEuNiKbtK7uw0dc8AsTJytvgBeh3TgK3
-	 0HlpGnZmeFIwA==
-From: Jakub Kicinski <kuba@kernel.org>
-To: peter.hunt@opengear.com
-Cc: Jakub Kicinski <kuba@kernel.org>,
-	loic.poulain@oss.qualcomm.com,
-	ryazanov.s.a@gmail.com,
-	mani@kernel.org,
-	johannes@sipsolutions.net,
-	netdev@vger.kernel.org,
-	mhi@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH net-next v3 3/3] net: wwan: mhi_wwan_ctrl: drive DTR/RTS via the IP_CTRL channel
-Date: Fri, 14 Aug 2026 12:51:04 -0700
-Message-ID: <20260814195103.3204086-2-kuba@kernel.org>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260807215042.2714442-4-peter.hunt@opengear.com>
-References: <20260807215042.2714442-4-peter.hunt@opengear.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="ZFaBlX+M";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="BQLcVpH2"
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67EJhDc01438029
+	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 19:53:40 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	H1O3PoybB02/UOh93Lrjs6E8by2ys+G44a086V6qWPI=; b=ZFaBlX+M3J73p00d
+	UpULt7QRnAvBEmUbeC/Qt/mqkmFG7iAnNlJC/cHqcc+ngiuSuqmPtA92OFjGjf6P
+	WcuSmC5q+oh1itjXPSXvwKinlYz6cXnuYzDTyD8YpKiP0ltfj+K3UDrxBoVnZid8
+	IBLNCWEH4d2uxNBWhmZVQY+NhAi0VE+oxGYz38/rBJAVc9ql+7QqvHshPZ+LUDWu
+	5v6oxZFugCEnHb5gsbGglazYVG3h8dPr2uD6Dd6aleh+Nb3mRz5hik+5QIDdz/i7
+	C22PWMB7Qj/2Ftbtb7Ysj6PnOkMF716va9jiYb/hUBjdQQwGE6qVx6yA6xp+/W7A
+	awbRGA==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g25ub8yu9-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 19:53:39 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-385d2703b64so2463368a91.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 12:53:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786737219; x=1787342019; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=H1O3PoybB02/UOh93Lrjs6E8by2ys+G44a086V6qWPI=;
+        b=BQLcVpH26ohqOJMMvbtEuVB/sd1B1kFq9jUK3rqSHK91GPKO935sz7NAJ4HdkgZ1I2
+         uopDXhrE9p+3HvcHtYyr0186ebh+z8QVhgrymvHLo8qzFfCY9RB1XgPb7kDaTNavlL7z
+         0l/iy8HE7msc5gXwD/ipfj94POa380obrPylUisR6eJ1C2I1z+vJT4e2OK3FK3YgmeU4
+         hE13Ip15bHVgR2A853+438RCWXtN188msm+3CLRHHxkX5oSiWjAvXgPZnpjb29+7FtF3
+         EHsM1t0Ly8UySrIFPg+87dnOC4qVS0jBJngssLgo219sOTJo10cpwXqfWXqvhp8YjBja
+         DypQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786737219; x=1787342019;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=H1O3PoybB02/UOh93Lrjs6E8by2ys+G44a086V6qWPI=;
+        b=WYGKwSxomioiofZwK6UyTlwL1V8b9n3VKEZik/kKswf6wWWDTUE2KMoFxlzMoUieXs
+         clOehhUtEPdo93ZE+mEndCEeUk65l1GnH13aB3khk6qjAIgtWGQ13cylTGuW60NYAMoC
+         AwNffPnYI+wMiSrlQaBlWn2NThR3xoZMeYH/3WVCtoUQviEHuvN7NrMls0pZqINX3IAT
+         y703eSet0UJq6qxTjGmDxujGmpmjCkPzshVOoeZiPo0pt0sYrA1C74ckVkKFvD3Bpuip
+         cg57KZr+gpi8iJyIdMhbUyCK3sq4FIFtqIYjQ68C8/zhkc7gAK35Ff4+LD2bEnnGpF2l
+         gRdA==
+X-Gm-Message-State: AOJu0YzVFAxIf1mqBr0kBdpZ8O7/TcRM9urrVGoAsUPhryuz3zRQ1H7h
+	v24eqQRIC/nVFE6IePLhR0IN98EHJa1rw8CHFxERw1YgfKh+DeHw41RF1jPLWcrQwXi6VyhyfPh
+	AKaU5MZbNrj9qNWd8YCh/h+N/s71Jm1U+NVhpPG+iGrHidaoNZUggLtfzBob2Wus73wNL
+X-Gm-Gg: AR+sD10kX2xGY2b5YKpdwv9pZ5IrOUWLuYQJH0JgS5QfhKvxf9j6LRQzJ1IBAJv0SIU
+	J1yjCQt3j5bVuAoQpaquctWBljIJWKnmYAiTdrqfhS2I1Fi7JbXEf7rGlYS+2DMAd37M+1nMjmi
+	amK0+khE0Hy1dnMCYuxdZC50zH1loSWyiZOD/tDKwfiJPHTzY/hOHSa2csnoRfflSFZmwyZ9Wah
+	hGzAIbfvX9Ti9FnF8G9OO6DDmC+COr0Q9cQ2Tg9kIkX8r+px3G3hxuAZ8xsdl29Vv/jNWNamshA
+	5k5NeTHLfW7Vyi90MGbqenAm6TzC8i6B1a+VcFyRs1OSon9yZ4jcEBslmdFa2u+Tx8r01mqwcWZ
+	NfDWbahgK/clsJ9659sIV4M/sRPV9cQbgqK+V0YnoEVOYWgzehiTYeg==
+X-Received: by 2002:a17:90b:3841:b0:38d:eaed:4adb with SMTP id 98e67ed59e1d1-3931f614141mr12290141a91.20.1786737219044;
+        Fri, 14 Aug 2026 12:53:39 -0700 (PDT)
+X-Received: by 2002:a17:90b:3841:b0:38d:eaed:4adb with SMTP id 98e67ed59e1d1-3931f614141mr12290098a91.20.1786737218563;
+        Fri, 14 Aug 2026 12:53:38 -0700 (PDT)
+Received: from [10.226.59.182] (i-global254.qualcomm.com. [199.106.103.254])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1413889bca5sm17250798c88.12.2026.08.14.12.53.37
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 14 Aug 2026 12:53:38 -0700 (PDT)
+Message-ID: <ee1ba786-03e6-43da-bdf4-cc57673f4681@oss.qualcomm.com>
+Date: Fri, 14 Aug 2026 13:53:36 -0600
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] accel/qaic: reject BO sizes that overflow page count
+To: Hao-Qun Huang <alvinhuang0603@gmail.com>,
+        Carl Vanderlip <carl.vanderlip@oss.qualcomm.com>,
+        Oded Gabbay <ogabbay@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org
+References: <20260708031959.966009-1-alvinhuang0603@gmail.com>
+Content-Language: en-US
+From: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+In-Reply-To: <20260708031959.966009-1-alvinhuang0603@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=EsjiaycA c=1 sm=1 tr=0 ts=6a7f7244 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=pGLkceISAAAA:8 a=EUspDBNiAAAA:8 a=XvhK1WYLh5LTG0QYcLAA:9 a=QEXdDO2ut3YA:10
+ a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE0MDE1MSBTYWx0ZWRfX5LAFUqdvD15Y
+ I9qXuh5pjBN651TA8QiGtEvt2Iorb4d4EHa+9rUpZYeBMfDDuKth3IGSam8rIjXaoISldnfXdYH
+ CIsw6TC0Nyo6mb3dsDL1caI4olOGUXID5vuSA4DhFtbOjudvgaa5H155Jd/z0RTdRXnMWSYsXWS
+ lMVZil0tjyBbX3/+RKcjgp0f1oZqVDQyjgBPwTP9K+K+m67gSgBjTqlejXm8kkWanw+ji92xUz4
+ erNdSrpm+Iw0436vy5WEdU5sXD6N4CmntePCafwnPKYo818cIyttuN0QG4lwT3wQDCjHv8Au9oO
+ MckpBeO80+kO3eSdjoVhNzkYlOlC09Va0QgTpOu2GBQJSP8t8DiQ2JnRncAHO+glUYqPBAUbLaQ
+ XdmfX+jsje7GwHCykiVqBkstp/Wqojrn0owIDsd/Y0C2WL/x8+Gd16Uaa13g/SlxAjYHV4wORkm
+ dzgo4XR6N+qePs08Jxg==
+X-Proofpoint-GUID: DIp9IfXLhlhgZKefghtLBqZv9HrtG_uY
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE0MDE1MSBTYWx0ZWRfX9yjlEWZSv5DY
+ 2wxW8gGSBkl5w3pdsb4o6mOvsVZgspM0BecAjx7tQG+DBpHiLKsFMZ+iu/oMZjsqnVgGbtr8wIH
+ uGBVEbTasG/nhCy+WWJWrYszqDv/DrY=
+X-Proofpoint-ORIG-GUID: DIp9IfXLhlhgZKefghtLBqZv9HrtG_uY
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-14_07,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 bulkscore=0 priorityscore=1501 spamscore=0 adultscore=0
+ impostorscore=0 malwarescore=0 clxscore=1015 suspectscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608140151
 
-This is an AI-generated review of your patch. The human sending this
-email has considered the AI review valid, or at least plausible.
----
-net: wwan: mhi_wwan_ctrl: drive DTR/RTS via the IP_CTRL channel
+On 7/7/2026 9:19 PM, Hao-Qun Huang wrote:
+> create_sgt() receives the BO size as a u64 but stores the number of
+> pages in an int. qaic_create_bo_ioctl() page-aligns the user-supplied
+> size without an upper bound, so DIV_ROUND_UP(size, PAGE_SIZE) can exceed
+> INT_MAX and truncate when assigned to nr_pages.
+> 
+> When the page count wraps to a small positive value (for example a BO
+> larger than 16 TiB on a 4 KiB page kernel), create_sgt() succeeds after
+> allocating only a handful of pages while the GEM object still records
+> the full size, so the request never fails with -ENOMEM. The temporary
+> pages array and the allocation loop both use the truncated count, so the
+> backing SG table ends up smaller than obj->size. Later slice operations
+> validate against obj->size and then clone ranges from this short sgt.
+> 
+> Compute the page count as a u64 and reject sizes that do not fit in
+> nr_pages before the narrowing conversion.
+> 
+> Fixes: ff13be830333 ("accel/qaic: Add datapath")
+> Assisted-by: Claude:claude-fable-5
+> Signed-off-by: Hao-Qun Huang <alvinhuang0603@gmail.com>
 
-This adds a second mhi_driver to mhi_wwan_ctrl that binds the IP_CTRL
-channel and keeps a per-controller registry of those devices, so an AT
-port can push the host DTR/RTS state to its own modem.  A new
-wwan_port_ops->dtr_rts implementation builds a struct mhi_dtr_ctrl_msg
-and queues it on that channel.
-
-A few questions below about the new ->dtr_rts path.
-
-> diff --git a/drivers/net/wwan/mhi_wwan_ctrl.c b/drivers/net/wwan/mhi_wwan_ctrl.c
-> index a31d8540fbb8..3aef90ec2176 100644
-> --- a/drivers/net/wwan/mhi_wwan_ctrl.c
-> +++ b/drivers/net/wwan/mhi_wwan_ctrl.c
-
-[ ... ]
-
-> @@ -14,6 +18,30 @@ enum mhi_wwan_flags {
->  
->  #define MHI_WWAN_MAX_MTU	0x8000
->  
-> +/* IP_CTRL channel message that sets the modem's DTR/RTS control lines */
-> +struct mhi_dtr_ctrl_msg {
-> +	__le32 preamble;
-> +	__le32 msg_id;
-> +	__le32 dest_id;
-> +	__le32 size;
-> +	__le32 msg;
-> +} __packed;
-> +
-> +#define MHI_DTR_CTRL_MAGIC	0x4C525443	/* 'CTRL' */
-> +#define MHI_DTR_MSG_DTR		BIT(0)
-> +#define MHI_DTR_MSG_RTS		BIT(1)
-> +#define MHI_DTR_HOST_STATE	0x10
-
-[ ... ]
-
-> @@ -103,6 +131,56 @@ static void mhi_wwan_ctrl_refill_work(struct work_struct *work)
->  	}
->  }
->  
-> +/* Signal the modem's DTR/RTS lines over its own controller's IP_CTRL channel */
-> +static int mhi_wwan_ctrl_send_dtr(struct mhi_wwan_dev *mhiwwan, unsigned int mdmbits)
-> +{
-> +	struct mhi_controller *cntrl = mhiwwan->mhi_dev->mhi_cntrl;
-> +	struct mhi_device *ctrl_dev = NULL;
-> +	struct mhi_dtr_ctrl_msg *dtr_msg;
-> +	struct mhi_wwan_dtr *dtr;
-> +	u32 msg = 0;
-> +	int ret;
-> +
-> +	guard(mutex)(&mhi_wwan_dtr_lock);
-> +
-> +	list_for_each_entry(dtr, &mhi_wwan_dtr_list, node) {
-> +		if (dtr->cntrl == cntrl) {
-> +			ctrl_dev = dtr->mhi_dev;
-> +			break;
-> +		}
-> +	}
-> +	if (!ctrl_dev)
-> +		return 0; /* IP_CTRL not enumerated; best-effort, not an error */
-
-[Severity: Medium]
-Is it intended that this path is completely silent?
-
-For any MHI modem configuration that does not declare an IP_CTRL channel
-(the Quectel EM1xx, Foxconn SDX55/SDX61 and Telit FN990/FN920c04 DUN
-entries in pci_generic.c, for example) the lookup never finds an entry, so
-every DTR request is accepted and discarded without so much as a dev_dbg().
-The core has already committed port->at_data.mdmbits by then, so TIOCMGET
-reports DTR/RTS asserted while nothing was sent to the modem.
-
-Would a dev_dbg() or a one-time dev_warn() here make the "URCs still not
-arriving" case diagnosable?
-
-> +
-> +	dtr_msg = kzalloc_obj(*dtr_msg);
-> +	if (!dtr_msg)
-> +		return -ENOMEM;
-> +
-> +	if (mdmbits & TIOCM_DTR)
-> +		msg |= MHI_DTR_MSG_DTR;
-> +	if (mdmbits & TIOCM_RTS)
-> +		msg |= MHI_DTR_MSG_RTS;
-> +
-> +	dtr_msg->preamble = cpu_to_le32(MHI_DTR_CTRL_MAGIC);
-> +	dtr_msg->msg_id = cpu_to_le32(MHI_DTR_HOST_STATE);
-> +	dtr_msg->dest_id = cpu_to_le32(mhiwwan->mhi_dev->ul_chan_id);
-> +	dtr_msg->size = cpu_to_le32(sizeof(__le32));
-> +	dtr_msg->msg = cpu_to_le32(msg);
-> +
-> +	ret = mhi_queue_buf(ctrl_dev, DMA_TO_DEVICE, dtr_msg, sizeof(*dtr_msg),
-> +			    MHI_EOT);
-> +	if (ret)
-> +		kfree(dtr_msg);
-> +
-> +	return ret;
-> +}
-> +
-> +static void mhi_wwan_ctrl_dtr_rts(struct wwan_port *port, bool on)
-> +{
-> +	mhi_wwan_ctrl_send_dtr(wwan_port_get_drvdata(port),
-> +			       on ? TIOCM_DTR | TIOCM_RTS : 0);
-> +}
-
-[Severity: Medium]
-Continuing the previous question: the return value of
-mhi_wwan_ctrl_send_dtr() is dropped here, including the -ENOMEM path and
-every mhi_queue_buf() error.  Those are reachable failures rather than dead
-code:
-
-drivers/bus/mhi/host/main.c:mhi_queue() {
-	...
-	if (unlikely(MHI_PM_IN_ERROR_STATE(mhi_cntrl->pm_state)))
-		return -EIO;
-
-	ret = mhi_is_ring_full(mhi_cntrl, tre_ring);
-	if (unlikely(ret))
-		return -EAGAIN;
-	...
-}
-
-and mhi_gen_tre() returns -ENODEV when the channel is not
-MHI_CH_STATE_ENABLED.
-
-So after a modem SYS_ERR, or with a full UL ring, the host-state message is
-dropped with no retry and no message, and the symptom the patch is fixing
-comes back silently.  Since the op returns void the error cannot be
-propagated, but could it at least be logged the way
-mhi_wwan_ctrl_refill_work() logs its queue failure?
-
-[Severity: Medium]
-Can DTR and RTS still be driven independently after this?
-
-mhi_wwan_ctrl_send_dtr() maps each line separately (TIOCM_DTR -> BIT(0),
-TIOCM_RTS -> BIT(1)) and struct mhi_dtr_ctrl_msg carries both bits, but its
-only caller collapses everything into one boolean, so msg can only ever be
-DTR|RTS or 0.  The core side does the same collapse:
-
-drivers/net/wwan/wwan_core.c:wwan_port_fops_at_ioctl() {
-	...
-		if (cmd == TIOCMBIC)
-			port->at_data.mdmbits &= ~mdmbits;
-	...
-		if (port->ops->dtr_rts)
-			port->ops->dtr_rts(port,
-					   !!(port->at_data.mdmbits &
-					      (TIOCM_DTR | TIOCM_RTS)));
-	...
-}
-
-With RTS asserted, ioctl(fd, TIOCMBIC, &(int){TIOCM_DTR}) - the usual way to
-drop DTR so an AT&D1/AT&D2 modem leaves data mode or hangs up - leaves "on"
-true, so DTR is re-asserted on the wire while TIOCMGET reports it cleared.
-Asserting only RTS likewise raises DTR.
-
-The limitation comes from the void dtr_rts(struct wwan_port *, bool)
-signature added in patch 1 rather than from the hardware.  The tty layer
-keeps these separate (ops->tiocmset gets the full bitmask, dtr_rts is only
-used for open/close/hangup) - would passing the mdmbits mask through be
-workable here?
-
-[Severity: Critical]
-Is there anything keeping the port drvdata alive across this callback?
-
-wwan_remove_port() clears port->ops under ops_lock:
-
-drivers/net/wwan/wwan_core.c:wwan_remove_port() {
-	...
-	port->ops = NULL; /* Prevent any new port operations (e.g. from fops) */
-	mutex_unlock(&port->ops_lock);
-	...
-}
-
-but the new TIOCMSET/TIOCMBIC/TIOCMBIS branch in
-wwan_port_fops_at_ioctl() dereferences port->ops holding only data_lock,
-without ops_lock and without the "if (!port->ops) return -ENODEV;" check the
-other fops-reachable op calls (wwan_port_op_tx(), wwan_port_fops_poll()) use.
-
-An fd opened on /dev/wwanXatY stays usable after the device is gone -
-wwan_port_fops_open() takes a device reference via
-wwan_port_get_by_minor() and only wwan_port_fops_release() drops it - so
-after a modem firmware crash, a PCI hot-unplug or rmmod of the controller
-driver, a TIOCMSET on that fd reads port->ops as NULL.
-
-The second half is this driver's remove path:
-
-drivers/net/wwan/mhi_wwan_ctrl.c:mhi_wwan_ctrl_remove() {
-	wwan_remove_port(mhiwwan->wwan_port);
-	kfree(mhiwwan);
-}
-
-If the ioctl thread observed port->ops non-NULL just before the store and is
-inside mhi_wwan_ctrl_dtr_rts() -> mhi_wwan_ctrl_send_dtr(), the lockset
-intersection with wwan_remove_port() is empty (data_lock vs ops_lock), so
-mhiwwan is freed while that thread reads mhiwwan->mhi_dev->mhi_cntrl and
-mhiwwan->mhi_dev->ul_chan_id and then queues a DMA buffer on behalf of the
-removed device.  mhi_wwan_dtr_lock only covers the IP_CTRL registry, not the
-AT port's mhi_wwan_dev.
-
-This patch is the first ->dtr_rts implementer, so it is what makes the
-use-after-free variant reachable; the unguarded call site itself came in with
-patch 1.  Would calling the op under port->ops_lock with the usual NULL check
-close both cases?  A bare NULL test alone would only narrow the window.
+Reviewed-by: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
