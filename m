@@ -1,45 +1,43 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A86C84908B6;
-	Fri, 14 Aug 2026 17:00:18 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BA5B45C710;
+	Fri, 14 Aug 2026 17:06:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786726829; cv=none; b=tbsvWimKCYbJNxiz7TIoqDKV0QKInWMfsxxFO+eOVunEOuaM6CBLQJJw4YLOtp7+xKG+oAhOSbqkphr7RsZAS4pF3zC8b9hqh0BcslHNviHID73mQq09ghbnu8v70eGF/5zkD/r5Ohd5ddVqXv/zPhFBWuk0ZXj7p9d2uWxl7ts=
+	t=1786727188; cv=none; b=f6P9L0AUFRt+KmP99LJpF5r6zeOELrtVcgYDLHRBt4GZpEoai0bcZkp1k4zpETC1U7KkP7OcTcyq0RGZuqVu3Y/N3bgab7Lk5xKn8Gua+FClL9CDKjNpPpAjLPcy+leXdKKzISmqQhw/PnkvuEKjzIh4na5+J6cUPQPFADLAa4g=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786726829; c=relaxed/simple;
-	bh=6RBeCqShFjrmmMLQoKBTpxnQ4vzjHJes+sJbqNicTs4=;
+	s=arc-20240116; t=1786727188; c=relaxed/simple;
+	bh=zJ0SoiC1a+gm5ou2jgMz4HmAzZ2zw4DkuNiKEMLhT68=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=kA/Cn95OwFnNuRr+uFzAdxzAhDjwOU9PB9ZXU4Gc+/Q9lgnOtKugR+as9ufRft2y99K6Xds2vPXoOT813eOhkrmecMEWrT7AGZdfymNzVhOwP+iLuAiwXDDg1SjvdtGmehNJW7v4emPTubz7u3UYkb4+vxg62hEvNJFjdrA1OPM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=iYr4Y5Eh; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=qjpM1coc11Qp8tAUNk6n/EFkzIHGpCsP2bE+1m3iiPJDUo+gbJLxYddJsRT5CBSZchMdZ3Spn1cI1kq9FthrFIb3SCF5ECI5ocDv1hCqCnkZDaCoWm6kQAFQ2xzvn59/ZqaD5Cn/1eK4OkUJE0oDMmBxfis5ajqETH1TQA/2l7c=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YTjZ4+Xm; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="iYr4Y5Eh"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1039E1F000E9;
-	Fri, 14 Aug 2026 17:00:13 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YTjZ4+Xm"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CD45C1F000E9;
+	Fri, 14 Aug 2026 17:06:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786726818;
-	bh=5h8TZyTAoXCJSe2JoTmpCYR1pmYfom6HhzPNs541mqc=;
+	s=k20260515; t=1786727186;
+	bh=o3EKBMGuiyTQLYijetS8Oe22kLuLWv9OK8hBvGDMdqc=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=iYr4Y5Eh/+tycun1pMxUojBy/q6lPiP/keXRcHaBSkCOTsADvBhLlq+k7j88jjymh
-	 DDXubt+0LZkSN6Z13OvJ3eigY9EN1hRhm0cim5eRZrl2weUSwJc/Sb35LlzlPTOOKF
-	 Piycj7xXDFFeH49JTzrBnCtj1kvrd11LTxepjpWutUfA//aO4mCWwS807TwQzvsOOq
-	 S7JaEOBq8CgJ8mrw0eBmcaAr/7wSxTYrVWUjv1yv9JF89Mn2z5yZDKFPsNgusYJsMH
-	 rXsgxwZBSLlIydhx3Np+3edmXbhgfv+Hmg0esZ2rRDRS/VjQuGFDxrgntyW5z8Ld+3
-	 UHJTvK91M4aTA==
-Date: Fri, 14 Aug 2026 18:00:01 +0100
-From: Simon Horman <horms@kernel.org>
-To: phucduc.bui@gmail.com
-Cc: Radhey Shyam Pandey <radhey.shyam.pandey@amd.com>,
-	Andrew Lunn <andrew+netdev@lunn.ch>,
-	Eric Dumazet <edumazet@google.com>,
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-	Michal Simek <michal.simek@amd.com>, linux-arm-msm@vger.kernel.org,
-	netdev@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 1/2] net: xilinx: axienet: Propagate errors from
- optional IRQ lookup
-Message-ID: <20260814170001.GQ265046@horms.kernel.org>
-References: <20260813042012.17631-1-phucduc.bui@gmail.com>
+	b=YTjZ4+XmpeyK7hFrnDnbsA2lqlTKJCogz1ku4/vfx4ifwEtB4J0aBUi0vF5vHHCqo
+	 NsX4giAAzp+cQ5fymea9Ob7O+GrAiWow4rcjD8GjxfNcJmIWm9KkOeZ86Fb95/XMYW
+	 nSl1c6hr0IzzJ5gCsDmYBUAdEq5LM+ilJCv6MoeaMy61qN8ssSnC2N812l2/kLENgg
+	 bJlkuFnnKnexDK9D4g8wyGqk6NkgMFwYEqenWO4uTefxr0zqF3qohlliB6t7EtHAgS
+	 s2Lv8FBU/DGvlGlLUm782gtRlyNvaaaI59/WSWh2ZwCgsPmoNI/I6T8j2ADHUUG2UV
+	 fxXEMz54kk4ew==
+Date: Fri, 14 Aug 2026 10:06:21 -0700
+From: Nathan Chancellor <nathan@kernel.org>
+To: Daniel Baluta <daniel.baluta@oss.nxp.com>
+Cc: Daniel Baluta <daniel.baluta@nxp.com>, andersson@kernel.org,
+	konradybcio@kernel.org, robin.clark@oss.qualcomm.com,
+	dmitry.baryshkov@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org, imx@lists.linux.dev
+Subject: Re: [PATCH v4 0/3] soc: qcom: ubwc: Fix link error
+Message-ID: <20260814170621.GA532729@ax162>
+References: <20260812151934.709198-1-daniel.baluta@nxp.com>
+ <20260813232350.GA312295@ax162>
+ <0b9128de-e2d9-4271-97b8-9fa0c7f6fa3c@oss.nxp.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -48,63 +46,28 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20260813042012.17631-1-phucduc.bui@gmail.com>
+In-Reply-To: <0b9128de-e2d9-4271-97b8-9fa0c7f6fa3c@oss.nxp.com>
 
-On Thu, Aug 13, 2026 at 11:20:11AM +0700, phucduc.bui@gmail.com wrote:
-> From: bui duc phuc <phucduc.bui@gmail.com>
+On Fri, Aug 14, 2026 at 09:42:52AM +0300, Daniel Baluta wrote:
+> On 8/14/26 02:23, Nathan Chancellor wrote:
+> >   In file included from drivers/gpu/drm/msm/disp/dpu1/dpu_hw_sspp_v13.c:7:
+> >   include/linux/soc/qcom/ubwc.h: In function 'qcom_ubwc_config_get_data':
+> >   include/linux/soc/qcom/ubwc.h:45:16: error: implicit declaration of function 'ERR_PTR' [-Wimplicit-function-declaration]
+> >      45 |         return ERR_PTR(-EOPNOTSUPP);
+> >         |                ^~~~~~~
+> >   include/linux/soc/qcom/ubwc.h:45:25: error: 'EOPNOTSUPP' undeclared (first use in this function)
 > 
-> platform_get_irq_optional() returns a positive IRQ number on success or
-> a negative error code on failure. For an optional IRQ, -ENXIO indicates
-> that no optional IRQ is available, while other errors should be propagated.
+> Hi Nathan,
 > 
-> Propagate all error codes returned by platform_get_irq_optional() other
-> than -ENXIO.
+> This issue is pre-existing and I've sent a separate fix for it:
 > 
-> Another call to platform_get_irq_optional() in the same function already
-> handles the return value this way. Apply the same error handling to this
-> call site for consistency.
+> https://lore.kernel.org/all/5fy7l6o5nfzclsmhsqys562xwoilbo4xv3af65kcqugtitgltd@3fw2w443pw2g/#r
 
-It would be useful to explain how this problem was discovered,
-and what testing the patch has seen. Please add an Assisted-by
-tag if appropriate.
+Sure, it is a pre-existing issue but it is only exposed by making
+CONFIG_QCOM_UBWC_CONFIG an optional selection for these drivers, so I
+think that patch should be a part of this series. Otherwise, I don't see
+how you could actually trigger such an error.
 
-Link: https://docs.kernel.org/process/coding-assistants.html
-
-> 
-> Signed-off-by: bui duc phuc <phucduc.bui@gmail.com>
-> ---
->  drivers/net/ethernet/xilinx/xilinx_axienet_main.c | 4 ++++
->  1 file changed, 4 insertions(+)
-> 
-> diff --git a/drivers/net/ethernet/xilinx/xilinx_axienet_main.c b/drivers/net/ethernet/xilinx/xilinx_axienet_main.c
-> index fcf517069d16..d23e9796725d 100644
-> --- a/drivers/net/ethernet/xilinx/xilinx_axienet_main.c
-> +++ b/drivers/net/ethernet/xilinx/xilinx_axienet_main.c
-> @@ -2957,12 +2957,16 @@ static int axienet_probe(struct platform_device *pdev)
->  			lp->tx_irq = irq_of_parse_and_map(np, 0);
->  			of_node_put(np);
->  			lp->eth_irq = platform_get_irq_optional(pdev, 0);
-> +			if (lp->eth_irq < 0 && lp->eth_irq != -ENXIO)
-> +				return lp->eth_irq;
->  		} else {
->  			/* Check for these resources directly on the Ethernet node. */
->  			lp->dma_regs = devm_platform_get_and_ioremap_resource(pdev, 1, NULL);
->  			lp->rx_irq = platform_get_irq(pdev, 1);
->  			lp->tx_irq = platform_get_irq(pdev, 0);
->  			lp->eth_irq = platform_get_irq_optional(pdev, 2);
-> +			if (lp->eth_irq < 0 && lp->eth_irq != -ENXIO)
-> +				return lp->eth_irq;
->  		}
-
-The same check seems to have been added to both arms of the if/else
-condition. So it seems to me that it could be moved out of that condition.
-
-I would suggest placing it below the existing rx_irq/tx_irq condition
-which appears a few lines below this hunk so that those and
-dma_regs errors are still propagated.
-
->  		if (IS_ERR(lp->dma_regs)) {
->  			dev_err(&pdev->dev, "could not map DMA regs\n");
-> -- 
-> 2.43.0
-> 
+-- 
+Cheers,
+Nathan
