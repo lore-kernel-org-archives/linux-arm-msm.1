@@ -1,375 +1,128 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F9BC470136
-	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 12:48:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6480846DFFC;
+	Fri, 14 Aug 2026 12:49:49 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786711721; cv=none; b=qB/g3d1zTMUWpABm5wrAYAPZO76HKGFL9JZSXnl2evjupL06w4VdZJWo4LcOSzG+apPKGeoMOdKZmGUoXWkf95OPfCMnRMAlb2Y4dJ1sOwxoDMpPGe60L/CaVeNvsE5H771tamVIf/pZVW2z78Ik7WasBekUGre7bfPEVhf3V1k=
+	t=1786711795; cv=none; b=hU72iEsCE8wqqF0hQI4YEBCfHMMLC6DA2sTaAecanYJHDFBvMlKeX7QKxDG72DmkY3rlbhdBvrRr4Xt8c2tRFMLvenn8M5SkGSWiwJLYwqwiSUEnzcOQp82GqmlCGNPI7PiEm7uNOts/UeuVO+IxBvwA/0d4xVt+M/Ngr8QxgrE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786711721; c=relaxed/simple;
-	bh=pUoIbUSL+f38DPS2zkKlmAHQL0qngovWZZsCPqhx2Tg=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=m87gs1oQYzTOP1t/s9jMGNL4lrdidJrJSMyET9QEvi00ZG8DwEqWSk84a+L/bfP2ZZ2rz9gacOo91rlHh1pFESxEmGY/UtJJw8a7SDaiR515NXULAoe0tAL1qfN9GNcBOA1bF3KjxtzLHbcvnaV/TlisqD+wIl/m1TO+phxm/fM=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Ye+1BxE/; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=L5Uq7RIo; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1786711795; c=relaxed/simple;
+	bh=N6Wm7zvO1O97Kiw/b6HRbmjzTds561mSYObozWbWlp4=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=QdtxOcSDzDzXR9ITkjL+s0zwxAQmLpLAE98iIODtqPV9FsLa9jQgjvM6x/VxXT/5k0HJ+4j8ngzNxj6GV5uKL+DKNPQk5XBTpRVB0GSzic3TKGkMJCiYMvuH0c3LSC9UHzeFcTqjgeBbSYUPM/sGuQlZZ0ni7/XaEzRSQ6Br3zQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=YWTGi5Q7; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Ye+1BxE/";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="L5Uq7RIo"
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67EAb99I1412972
-	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 12:48:28 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	OhGo6OLomxSK3hqcXnst3JF08gnTATEUDjURuCQlHhk=; b=Ye+1BxE/XbJTy/gg
-	0xdJdgSbpNv21TepeRuMU9pgB1FGNid3dLlT8OJxBHg7Eg2Yo5AAvqH3E9fhQdr/
-	cfxmAyAA6vqaEvcaEhZsYkQxF/bySLls1CqaCKRR3qeWFVdx8hktHjE+JDbpMsKX
-	xbrWzsj9xohXzsrtZ3lK6Ez5/0XZDEopVrBdL5oqQ1xuVjko3IiHdGYdQYNw+Uta
-	1NSnhGrokttFw+4xZLMn8i7ElYrxtBPQptWkPZOR3UWJT4bl/7W93wx+bmBt4M9i
-	JYcdXLUlxrdZUUYbhfT3KXOUt75hJpwqovkqE6Aptftpp6rfLeL+/Lo9uztfIg3L
-	22m3ow==
-Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g20638utc-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 12:48:28 +0000 (GMT)
-Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-848860def2cso763748b3a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 05:48:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786711707; x=1787316507; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=OhGo6OLomxSK3hqcXnst3JF08gnTATEUDjURuCQlHhk=;
-        b=L5Uq7RIoXKfIjwxnOS9kc9X0rmX58fTcZqpS/DG0jDaNzVbH30wlsPQihWdxdGZOqm
-         B2IX2eC7wQxxLjiwU2Clae08YmlmwE+MkS1cBauaBvX2iBc7If2u11vHtUI+b08MU0h9
-         TSs4BYPImTarQ5fmWAtnLvrSTBekoW2C6n5gpEc1HgCA09jVkSGqC5ZIIVND6yerA5cX
-         b5rbOIxjP0lxCILEdxvkzdrP/BiD3LhgYidoMmBoS9JU6cvKw1qNTC0LXOtfIC+Oqb4E
-         5+Z5UsQbabSEU23gtatWDzAgE1dVJphT+26ClEeDwEH9ie+bKnpLshlH6ot/y9JDAtb0
-         l8yg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786711707; x=1787316507;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=OhGo6OLomxSK3hqcXnst3JF08gnTATEUDjURuCQlHhk=;
-        b=ggklDTa42WqXwjIR/nBRYseWz6qv9ynndvwbJ0nNtsOlpmZJ2XHPlpF47tH2bOqAP+
-         dOAGVRTWJSQ3qQLfUGI2u/OtGW64oHkUXgkSElZ5anLs1xJdkwNP44VZe0kG2T5Wh+NL
-         vmZtfuC+1wCcmuwhwDP9jiiDOw4kDTWc8FN97HouqK5whw48cVb8HC9Z17tKhVC3XkpC
-         r8fFLEOaplWeS/T/yPwwrj3f5IFv2OMF6DR4qiWMtKP7yVrSRntVwa2vkHXksRTsYb2h
-         Jf2EZXSAh3T7lFOGfpKm50smvDmYXlkaEnBGkGegQoi51ft2BTfui+fA6kgTSRPHN6qG
-         51ug==
-X-Gm-Message-State: AOJu0YzQoJAZyT4lawXtpr+Lg8GDj3CwgDwuIXZuvSxdbot47FFkStYl
-	lGFls4ToTIy/2AM0aFjxrB/CW1YLr+oEf95UdzuJjJ7vEWolOFEGohT5SByxYDJlmusQOYKxL9G
-	InG064kMOGrLVrcGxWrvmxqOvueRpyU69CMSKvJqK/1J+s/W8adPXSXGCqIO0v2NSzv8h
-X-Gm-Gg: AR+sD11X+nbNPn6q77hrF7pHEmQu93w4vIaoTmyHjtuAqLhHwt+V30KZ5WvzWI6Zd0z
-	KK2Dj7Ia5KUBCEIIwpJV+4conN57TsoYAmGBwCdztX1BBSeZh7wGfPlq5jS+nScQCOS//YzP9Vr
-	DaWaE1aUiJJ3xnCeGaJGLhiOx4xlXwu9bbSYNRjOJ6vjPK7ZLE496MV8FRrBeRtnGCXlT6+kcoi
-	5YPD/E5yk5LpbEHPx6F/1JmJatQpV8KBsr53WAfIx09M0CjTTHf8qkvWaOju89XllU+4hn9Xpge
-	L/1DrgvUFInkFMlnWsBJp5ZhlKFdjCSaGnd+ZVZ7Eekr0616/Ctrng8hfUUhtr9S+SCnNd2N9K9
-	VKrS3Ni4FQhjyAAMhrQEsOUIw0PECnPUbbHcqGqmOE3c=
-X-Received: by 2002:a05:6a00:b8d:b0:847:712d:19ac with SMTP id d2e1a72fcca58-84fde364f64mr5594807b3a.8.1786711707211;
-        Fri, 14 Aug 2026 05:48:27 -0700 (PDT)
-X-Received: by 2002:a05:6a00:b8d:b0:847:712d:19ac with SMTP id d2e1a72fcca58-84fde364f64mr5594733b3a.8.1786711706556;
-        Fri, 14 Aug 2026 05:48:26 -0700 (PDT)
-Received: from hu-luoj-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-8517d26726bsm405934b3a.54.2026.08.14.05.48.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 14 Aug 2026 05:48:26 -0700 (PDT)
-From: Luo Jie <jie.luo@oss.qualcomm.com>
-Date: Fri, 14 Aug 2026 05:48:19 -0700
-Subject: [PATCH v3 09/12] clk: qcom: ipq-cmn-pll: Add clock gate support
- for fixed clocks
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="YWTGi5Q7"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D80B61F000E9;
+	Fri, 14 Aug 2026 12:49:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786711787;
+	bh=/N/HX1GSPPOcqxWY/4dtIRIphxWYu1pio+UkOSgheTs=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=YWTGi5Q7f/pZmJbmyIgbKJXzr77Dl+/MMrgnXHtQhpdZC8lW4AM2lJ29i/13HYRdd
+	 ZQKimYvkaspsstjrhlp1dq/ocDqT+e9aYeFGesZYVmKzima9JfENh95wImTEFhAOOF
+	 InlnEDgETc0DXUW/G9AqEj8peU3XxtQ8u3hD8h31hatop8+Hh8AjZU393+lWriyc/Z
+	 EVITiCpW6A/dgpEBJrpHeJdXAzSOokK69IItB/oZQJMvMjkSmvkKYCrS9oZWm39vIJ
+	 V0pIfa1+uydAKd2dHEyqaNtmy1/312M8sPv1nFW1nNhSKMxOOlcZBEOhOyutdrHw5Y
+	 mPs6QRNcCyzvA==
+Date: Fri, 14 Aug 2026 14:49:31 +0200
+From: Manivannan Sadhasivam <mani@kernel.org>
+To: Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Dmitry Torokhov <dmitry.torokhov@gmail.com>, 
+	manivannan.sadhasivam@oss.qualcomm.com, Rob Herring <robh@kernel.org>, 
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, Jiri Slaby <jirislaby@kernel.org>, 
+	Nathan Chancellor <nathan@kernel.org>, Nicolas Schier <nicolas.schier@linux.dev>, 
+	Hans de Goede <hansg@kernel.org>, Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>, 
+	Mark Pearson <mpearson-lenovo@squebb.ca>, "Derek J. Clark" <derekjohn.clark@gmail.com>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Marcel Holtmann <marcel@holtmann.org>, Luiz Augusto von Dentz <luiz.dentz@gmail.com>, 
+	Bartosz Golaszewski <brgl@bgdev.pl>, Daniel Scally <djrscally@gmail.com>, 
+	Heikki Krogerus <heikki.krogerus@linux.intel.com>, Sakari Ailus <sakari.ailus@linux.intel.com>, 
+	"Rafael J. Wysocki" <rafael@kernel.org>, Danilo Krummrich <dakr@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, linux-serial@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-kbuild@vger.kernel.org, platform-driver-x86@vger.kernel.org, linux-pci@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org, 
+	linux-pm@vger.kernel.org, Stephan Gerhold <stephan.gerhold@linaro.org>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, linux-acpi@vger.kernel.org, 
+	Sui Jingfeng <sui.jingfeng@linux.dev>
+Subject: Re: [PATCH v3 03/14] software node: Implement device_get_match_data
+ fwnode callback
+Message-ID: <ks2nm67zp5i2grzomu7mjb7uhkuwtd7w5stoqp5kri2clpxpsp@ayn42h7meh5l>
+References: <20260110-pci-m2-e-v3-0-4faee7d0d5ae@oss.qualcomm.com>
+ <20260110-pci-m2-e-v3-3-4faee7d0d5ae@oss.qualcomm.com>
+ <aWSpFk9z0zpyKjr6@smile.fi.intel.com>
+ <6l3rs5pv6xnrbygpvqrdxqoqtybjyefsltk5bl4336q56rfoza@ejo3sxuufghe>
+ <aWSwgRiEkT9unYw9@smile.fi.intel.com>
+ <6peb6afhpm4l7opxbdt3b5sx32longevwds5c3dlqji2hr5dlh@kxuvj55jkqgi>
+ <ljqd5ovcsg7t62tdzd77w5mv5buawm3x7xyapy7n7l7azcaorh@tytj46t2lxyb>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260814-qcom_ipq5210_cmnpll-v3-9-21c3db378611@oss.qualcomm.com>
-References: <20260814-qcom_ipq5210_cmnpll-v3-0-21c3db378611@oss.qualcomm.com>
-In-Reply-To: <20260814-qcom_ipq5210_cmnpll-v3-0-21c3db378611@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney@redhat.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Luo Jie <jie.luo@oss.qualcomm.com>,
-        Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        quic_kkumarcs@quicinc.com, quic_linchen@quicinc.com,
-        quic_leiwei@quicinc.com, quic_suruchia@quicinc.com
-X-Mailer: b4 0.16-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1786711693; l=7664;
- i=jie.luo@oss.qualcomm.com; s=20251128; h=from:subject:message-id;
- bh=pUoIbUSL+f38DPS2zkKlmAHQL0qngovWZZsCPqhx2Tg=;
- b=In+v8/zFLi2JIHz9JCYovxykSH0TiHi2kXfMkSCaWBK+L7eJvUYTIuQBxkS0ToazzM9u4EdMR
- XXrtLGKgIssB4qwd+uy9hKLcxigpAqgNIyJx9ZlZfH+3ZbZZZn8R8V9
-X-Developer-Key: i=jie.luo@oss.qualcomm.com; a=ed25519;
- pk=gSsYMDakxtd6UDFYDdA9y9yjIs5Etp5GK/3DoXWPyS0=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE0MDA5NyBTYWx0ZWRfX6CUa3T5h9tNo
- ykhOZ1TtSZjX6Ch5QSGZWViRn5i6ZzVFGglSFeePivSqpaAkTMfaYX5e24NGvdCuxVxnl0DZ5q0
- jFn91FSIYCdyKZ4TCn4Z623NApvaRLM=
-X-Authority-Analysis: v=2.4 cv=Z/Hc2nRA c=1 sm=1 tr=0 ts=6a7f0e9c cx=c_pps
- a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=EUspDBNiAAAA:8 a=iNkdjwxjGt8fguHhLfQA:9 a=QEXdDO2ut3YA:10
- a=2VI0MkxyNR6bbpdq8BZq:22
-X-Proofpoint-ORIG-GUID: zjw_1DQwwuUNBrFMR23mFLrTS13enzpg
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE0MDA5NyBTYWx0ZWRfX34y8058N/Gjz
- xcmyudImrbN4Uuc0+nveYJi6l9Xq+bIDCWiZXTUDw/yeQ0B8iqrh1aR8B91+ZCoGv3Uw127HWSg
- TpiHNyUl6juI5ZzgwUgDhG4sI6iXR5Is7oCen7x7yGkcRHKSPbsG981xRqLZWs5FRtuawdcxMpK
- zDqqs8Myi0AWP35K0i/0EfU7VJ+7D1FaT+g6wyDbbR7dxW09pEzRnZO498DkFZ5mEiVLMVV6RoZ
- 8BM6jvrJk5lih1trFyRw/vcCCS7MTHibASJqEuQYYZn4Ypy5B5898qVcySYGZmjrTgmsunED/l+
- BQvCj5p8HYEBwi0RFOpJZl5J+1Hnzh7OVB9h8tZ27SYi+4vr5NuSQoG6jI1n/TYw2RPgbmzdkGX
- cZrLpgTNo5b3+vx3Ms2U86QgZLl8pjb3a6uheMCHaSip8Hy/TRKQ+95Wpzknn++TtWs8EQx/v4I
- 2JUSnjHnBs986AsmVGw==
-X-Proofpoint-GUID: zjw_1DQwwuUNBrFMR23mFLrTS13enzpg
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-14_04,2026-08-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 priorityscore=1501 adultscore=0
- lowpriorityscore=0 bulkscore=0 malwarescore=0 clxscore=1015 spamscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608140097
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <ljqd5ovcsg7t62tdzd77w5mv5buawm3x7xyapy7n7l7azcaorh@tytj46t2lxyb>
 
-Some CMN PLL output clocks require a hardware gate in addition to a
-fixed rate. The gate control bits reside in the register
-CMN_PLL_OUTPUT_RELATED_1 (0x79c). Each such clock is registered via a
-new struct clk_fixed_gate and clk_fixed_gate_ops, combining a fixed
-rate with enable/disable/is_enabled gate control through the shared
-regmap for CMN_PLL_OUTPUT_RELATED_1.
+On Mon, Jan 12, 2026 at 10:01:23PM +0530, Manivannan Sadhasivam wrote:
+> On Mon, Jan 12, 2026 at 02:32:21PM +0530, Manivannan Sadhasivam wrote:
+> > On Mon, Jan 12, 2026 at 10:27:45AM +0200, Andy Shevchenko wrote:
+> > > On Mon, Jan 12, 2026 at 01:49:54PM +0530, Manivannan Sadhasivam wrote:
+> > > > + Dmitry Torokhov (who was against this patch previously)
+> > > > 
+> > > > On Mon, Jan 12, 2026 at 09:56:06AM +0200, Andy Shevchenko wrote:
+> > > > > On Sat, Jan 10, 2026 at 12:26:21PM +0530, Manivannan Sadhasivam via B4 Relay wrote:
+> > > > > 
+> > > > > > Because the software node backend of the fwnode API framework lacks an
+> > > > > > implementation for the .device_get_match_data function callback.
+> > > > > 
+> > > > > Maybe this is done on purpose. Have you thought about this aspect?
+> > > > 
+> > > > IMO, software nodes were introduced to add sub-properties to the existing
+> > > > firmware nodes, but it has usecase/potential to go beyond that. More below.
+> > > 
+> > > Potential doesn't mean the necessity.
+> > > 
+> > > > > > This makes it difficult to use(and/or test) a few drivers that originates
+> > > > > > from DT world on the non-DT platform.
+> > > > > 
+> > > > > How difficult? DSA implementation went to the way of taking DT overlay
+> > > > > approach. Why that one can't be applied here?
+> > > > 
+> > > > Sometimes you do not have any DT node at all.
+> > > 
+> > > Yes, that is exactly the case I have referred to. The PCI core (in Linux)
+> > > is able to create DT subtree on non-OF based platforms.
+> > > 
+> > 
+> > Maybe I should look into creating dynamic DT node for the device and insert it
+> > to the uart node. Theoretically it should work.
+> > 
+> 
+> It worked flawlessly. So I sent v4 incorporating this design:
+> https://lore.kernel.org/linux-pci/20260112-pci-m2-e-v4-0-eff84d2c6d26@oss.qualcomm.com/
+> 
 
-The enable_bit field is added to struct cmn_pll_fixed_output_clk (set to
--1 for non-gated clocks). The CLK_PLL_OUTPUT_RAW() and CLK_PLL_GATE()
-helper macros are introduced alongside the existing CLK_PLL_OUTPUT().
+Andy, I had to revive this old thread of a merged series as Krzk is not in
+favour of adding DT overlay or dynamic OF nodes for these BT devices [1]. His
+objections are due to the fact that we are just adding BT nodes of a
+discoverable device (M.2 PCIe device) without any resources. So the node just
+contains the compatible to match with the serdev driver and nothing else.
 
-Parent these gated fixed-rate clocks on cmn_pll_div2, like the rest
-of IPQ5210's output clocks, for clock-tree consistency. This is
-functionally identical: clk_fixed_gate_recalc_rate() returns a fixed
-constant rate and never depends on the parent rate.
+And he suggested to use swnodes or other similar mechanisms to plug with the
+serdev driver as that's the only thing we want here, not a true hardware
+description.
 
-Signed-off-by: Luo Jie <jie.luo@oss.qualcomm.com>
----
- drivers/clk/qcom/ipq-cmn-pll.c | 141 +++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 136 insertions(+), 5 deletions(-)
+Since you strongly objected the swnode approach in this series, I wanted to hear
+your opinion before I rework the code.
 
-diff --git a/drivers/clk/qcom/ipq-cmn-pll.c b/drivers/clk/qcom/ipq-cmn-pll.c
-index eadbf6482aa4..d5eddedd01ed 100644
---- a/drivers/clk/qcom/ipq-cmn-pll.c
-+++ b/drivers/clk/qcom/ipq-cmn-pll.c
-@@ -93,9 +93,19 @@
- #define CMN_PLL_DIVIDER_CTRL			0x794
- #define CMN_PLL_DIVIDER_CTRL_FACTOR		GENMASK(9, 0)
- 
-+/* Clock gate enable bits. */
-+#define CMN_PLL_OUTPUT_RELATED_1		0x79c
-+#define CLK25M_EN_BIT				15
-+#define CLK50M_EN_BIT3_BIT			14
-+#define CLK250M_EN_BIT				13
-+#define CLK31P25M_EN_BIT			12
-+#define CLK50M_EN_BIT				11
-+#define CLK50M_EN_BIT2_BIT			10
-+
- /**
-  * enum cmn_pll_clk_type - CMN PLL output clock registration type
-  * @CMN_PLL_CLK_FIXED_RATE: plain fixed rate clock
-+ * @CMN_PLL_CLK_FIXED_GATE: fixed rate clock with a hardware gate
-  * @CMN_PLL_CLK_NSS: NSS clock with configurable divider
-  * @CMN_PLL_CLK_PPE: PPE clock with configurable divider
-  * @CMN_PLL_CLK_PON: PON reference clock
-@@ -103,6 +113,7 @@
-  */
- enum cmn_pll_clk_type {
- 	CMN_PLL_CLK_FIXED_RATE,
-+	CMN_PLL_CLK_FIXED_GATE,
- 	CMN_PLL_CLK_NSS,
- 	CMN_PLL_CLK_PPE,
- 	CMN_PLL_CLK_PON,
-@@ -115,12 +126,15 @@ enum cmn_pll_clk_type {
-  * @name: Clock name to be registered
-  * @type: Clock registration type
-  * @rate: Clock rate
-+ * @enable_bit: Enable bit in CMN_PLL_OUTPUT_RELATED_1 for gate clock,
-+ *              -1 for non-gated clocks.
-  */
- struct cmn_pll_fixed_output_clk {
- 	unsigned int id;
- 	const char *name;
- 	enum cmn_pll_clk_type type;
- 	unsigned long rate;
-+	int enable_bit;
- };
- 
- /**
-@@ -133,6 +147,10 @@ struct cmn_pll_fixed_output_clk {
-  *           plain fixed-rate xo/sleep clocks, which stay on the main
-  *           PLL); other SoCs' output clocks use hardcoded rates that
-  *           never depend on a parent
-+ *
-+ * This structure is used for all CMN PLL-derived clocks including
-+ * the main PLL, NSS clock, PPE clock, PON reference clock, and
-+ * EPHY-RAW clock.
-  */
- struct clk_cmn_pll {
- 	struct regmap *regmap;
-@@ -140,15 +158,41 @@ struct clk_cmn_pll {
- 	struct clk_hw *div2_hw;
- };
- 
--#define CLK_PLL_OUTPUT(_id, _name, _rate) {		\
--	.id =		_id,				\
--	.name =		_name,				\
--	.type =		CMN_PLL_CLK_FIXED_RATE,		\
--	.rate =		_rate,				\
-+/**
-+ * struct clk_fixed_gate - fixed rate clock with a hardware gate
-+ * @regmap: hardware regmap.
-+ * @hw: handle between common and hardware-specific interfaces
-+ * @rate: fixed clock rate.
-+ * @enable_bit: enable bit in CMN_PLL_OUTPUT_RELATED_1, which is shared
-+ *              across multiple gate clocks, but regmap already serializes
-+ *              read-modify-write access to a given register, so no
-+ *              additional locking is needed here.
-+ */
-+struct clk_fixed_gate {
-+	struct regmap *regmap;
-+	struct clk_hw hw;
-+	unsigned long rate;
-+	int enable_bit;
-+};
-+
-+#define CLK_PLL_OUTPUT_RAW(_id, _name, _type, _rate, _bit) {	\
-+	.id =		_id,					\
-+	.name =		_name,					\
-+	.type =		_type,					\
-+	.rate =		_rate,					\
-+	.enable_bit =	_bit,					\
- }
- 
-+#define CLK_PLL_OUTPUT(_id, _name, _rate)	\
-+	CLK_PLL_OUTPUT_RAW(_id, _name, CMN_PLL_CLK_FIXED_RATE, _rate, -1)
-+
-+#define CLK_PLL_GATE(_id, _name, _rate, _bit)	\
-+	CLK_PLL_OUTPUT_RAW(_id, _name, CMN_PLL_CLK_FIXED_GATE, _rate, _bit)
-+
- #define to_clk_cmn_pll(_hw) container_of(_hw, struct clk_cmn_pll, hw)
- 
-+#define to_clk_fixed_gate(_hw) container_of(_hw, struct clk_fixed_gate, hw)
-+
- static const struct regmap_config ipq_cmn_pll_regmap_config = {
- 	.reg_bits = 32,
- 	.reg_stride = 4,
-@@ -711,6 +755,85 @@ static struct clk_hw *ipq_cmn_pll_ephy_raw_register(struct platform_device *pdev
- 	return &ephy_raw_clk->hw;
- }
- 
-+static int clk_fixed_gate_enable(struct clk_hw *hw)
-+{
-+	struct clk_fixed_gate *gate_clk = to_clk_fixed_gate(hw);
-+
-+	return regmap_set_bits(gate_clk->regmap, CMN_PLL_OUTPUT_RELATED_1,
-+			       BIT(gate_clk->enable_bit));
-+}
-+
-+static void clk_fixed_gate_disable(struct clk_hw *hw)
-+{
-+	struct clk_fixed_gate *gate_clk = to_clk_fixed_gate(hw);
-+
-+	regmap_clear_bits(gate_clk->regmap, CMN_PLL_OUTPUT_RELATED_1,
-+			  BIT(gate_clk->enable_bit));
-+}
-+
-+static int clk_fixed_gate_is_enabled(struct clk_hw *hw)
-+{
-+	struct clk_fixed_gate *gate_clk = to_clk_fixed_gate(hw);
-+
-+	return regmap_test_bits(gate_clk->regmap, CMN_PLL_OUTPUT_RELATED_1,
-+				BIT(gate_clk->enable_bit));
-+}
-+
-+static unsigned long clk_fixed_gate_recalc_rate(struct clk_hw *hw,
-+						unsigned long parent_rate)
-+{
-+	struct clk_fixed_gate *gate_clk = to_clk_fixed_gate(hw);
-+
-+	return gate_clk->rate;
-+}
-+
-+static const struct clk_ops clk_fixed_gate_ops = {
-+	.enable = clk_fixed_gate_enable,
-+	.disable = clk_fixed_gate_disable,
-+	.is_enabled = clk_fixed_gate_is_enabled,
-+	.recalc_rate = clk_fixed_gate_recalc_rate,
-+};
-+
-+static struct clk_hw *ipq_cmn_pll_register_fixed_gate(struct device *dev,
-+						      const char *name,
-+						      struct clk_hw *parent_hw,
-+						      struct regmap *regmap,
-+						      unsigned long rate,
-+						      int enable_bit)
-+{
-+	struct clk_parent_data pdata = { .hw = parent_hw };
-+	struct clk_fixed_gate *gate_clk;
-+	struct clk_init_data init = {};
-+	int ret;
-+
-+	gate_clk = devm_kzalloc(dev, sizeof(*gate_clk), GFP_KERNEL);
-+	if (!gate_clk)
-+		return ERR_PTR(-ENOMEM);
-+
-+	init.name = name;
-+	init.parent_data = &pdata;
-+	init.num_parents = 1;
-+	init.ops = &clk_fixed_gate_ops;
-+	/*
-+	 * These gated clocks may be relied on by external hardware or
-+	 * bootloader-enabled paths without an in-kernel client driver.
-+	 * Add CLK_IGNORE_UNUSED so the clock framework does not disable
-+	 * them when no consumer has claimed them.
-+	 */
-+	init.flags = CLK_IGNORE_UNUSED;
-+
-+	gate_clk->hw.init = &init;
-+	gate_clk->regmap = regmap;
-+	gate_clk->rate = rate;
-+	gate_clk->enable_bit = enable_bit;
-+
-+	ret = devm_clk_hw_register(dev, &gate_clk->hw);
-+	if (ret)
-+		return ERR_PTR(ret);
-+
-+	return &gate_clk->hw;
-+}
-+
- static int ipq_cmn_pll_register_clks(struct platform_device *pdev)
- {
- 	const struct cmn_pll_fixed_output_clk *p, *fixed_clk;
-@@ -762,6 +885,14 @@ static int ipq_cmn_pll_register_clks(struct platform_device *pdev)
- 		hw = ERR_PTR(-EINVAL);
- 
- 		switch (fixed_clk[i].type) {
-+		case CMN_PLL_CLK_FIXED_GATE:
-+			hw = ipq_cmn_pll_register_fixed_gate(dev,
-+							     fixed_clk[i].name,
-+							     cmn_pll->div2_hw,
-+							     cmn_pll->regmap,
-+							     fixed_clk[i].rate,
-+							     fixed_clk[i].enable_bit);
-+			break;
- 		case CMN_PLL_CLK_FIXED_RATE: {
- 			struct clk_parent_data pdata = { .hw = cmn_pll_hw };
- 
+- Mani
+
+[1] https://lore.kernel.org/linux-pci/768142f0-2638-41f3-a34f-dc80bb99eb7f@kernel.org
 
 -- 
-2.43.0
-
+மணிவண்ணன் சதாசிவம்
