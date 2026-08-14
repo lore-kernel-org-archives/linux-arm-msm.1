@@ -1,82 +1,82 @@
-Received: from mail-lj1-f171.google.com (mail-lj1-f171.google.com [209.85.208.171])
+Received: from mail-lj1-f179.google.com (mail-lj1-f179.google.com [209.85.208.179])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD2313630B0
-	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 18:40:20 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.171
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 132364A13A4
+	for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 19:00:09 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.208.179
 ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786732822; cv=pass; b=KdmWAQ67TfGBo30BCIZ204ghiLRthnxxyzGHHfXzsiq+otrtbTpxxYciJLL/F/xL/Z9BSMKAep+yH0YG91nBtKajJ6fn6hLnUaAKrPxXPcbW0TBiIg3N0YS+LLASi0K3/k8GxLxWFqwve0xmSXPv7sAL7pjKAY1df4cLA+uB6Bw=
+	t=1786734011; cv=pass; b=XOnc/FGzul1VBxV0+15swfaneFphWQ6rqUxV9NVfzQaponEKhJi+HrYN5aV3mJyktv/yTWr1fknddKB8Io2yHS+BEniXYNe5GrInVKieir6WOjgQ9YVB9oTfVIF5SH0wo8VCSUDXGkBdS/foSNSeQmgnHRKOxrGp0nXD/qx8oD8=
 ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786732822; c=relaxed/simple;
-	bh=8d5fIHcGxiBmuF/sD0uaRboGKU+fIylTceIvjRas9vQ=;
+	s=arc-20240116; t=1786734011; c=relaxed/simple;
+	bh=8UBhrC8HpfupIaiQ3+TwvErJNXgqZnEQxZ8thuF/WZQ=;
 	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=YkK9f35YkpqiHWGPbGVIhxJ1cR3b2v+74N9UpnzQv21CAmdk06XuJnHTN51VsddU/jX1kyWJILs2+aEbrgO4O/rIAV5pRfjo0x3Ccb2xowGAe+eeIvCu9Pc184xG+XTP7TijfOv0bsO1m0Bueq14c/Dg0Ghz/snkf5tsKHsDbD4=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=cyH7j+e2; arc=pass smtp.client-ip=209.85.208.171
+	 To:Cc:Content-Type; b=PBMDnL2k8acpF8V8Ir9feGNNiSp3YS0xz0GuwSxl74SBgpmITyn9MUJluWldkINKD4Eoe+ov8FcmfxpJrrnHe8BKAiqZ0ErZBNuR8a9r+4L+oAs/JUGTtsBqTTxkmQq2BjbpD/PHieOyGoCMaFYppG9uJnYxuCy3Wwvbn97qWXo=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=hZvQ2UWp; arc=pass smtp.client-ip=209.85.208.179
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="cyH7j+e2"
-Received: by mail-lj1-f171.google.com with SMTP id 38308e7fff4ca-3a1321319a9so11287081fa.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 11:40:20 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1786732819; cv=none;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="hZvQ2UWp"
+Received: by mail-lj1-f179.google.com with SMTP id 38308e7fff4ca-39f1ac13687so8763601fa.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 14 Aug 2026 12:00:09 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786734008; cv=none;
         d=google.com; s=arc-20260327;
-        b=q6RRA7AoFfJ6sBomP53elZ+gjoZAPQfd+a7xrVqRxIUEOQhFROr9/e2VWwZh3Nsli/
-         I4VIZB5EOHhXnBHfrX3TdrsyXb0NEe3QgEZpcJ6W+7CoOwOnxeH5g/EeRtYEvQqm9Y58
-         Z6HPNkBPMsAnPY/44HNwQLxgngS0sYvNIW6y8lC0WLUziH1JH4OIfyJ6ZU4708U08ECx
-         ht6FYMo5H9wdcOiM9Cip2JZKO0+JclDRqyF1cCOYcs9GqHkBdohRxwK9U6qJ9Ld0H9qr
-         81Q9sAdC8gA4qc7wdnGW4G6XVSp/8hdmBKGBHkvp7TqHSC7ESET4dPPqB5bOEPgeiB93
-         s4MQ==
+        b=MZi1pLg91dwhR/0269Jueie4BrwQZwqZTzKvhkS3GcPvCeKBCz6+fY5pCr8o/5r1qZ
+         +fNrdGZ08IX0iPGbuEYEZQwPch5x4pJSEo3Lf/PGTDCfI6UD32vtOYGAHBiIRceqdFHD
+         XYV61z+Tgss9rwWsPItIUcopUW3vPvFu/NQXO78UxWl/KwiuVXCmTQLKN/Ah6m2feFsH
+         4URMxdD77uaZ/jrpxS0NL8av4l3BzMMjt7tw9FKpYyOMmSftxCPNoc83rbfp59zD0Ug3
+         nJXDZEw5JFozQlSJeYvhgFtrgNFFY5t8k9w3StrAUy2rgcJ+1EIhmShWoAADp8TjNIer
+         YS8g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=content-transfer-encoding:cc:to:subject:message-id:date:from
          :in-reply-to:references:mime-version:dkim-signature;
-        bh=1ygIoIg7RActdGA1L4Eix3cXFvKMcEifV62JIap/v9w=;
-        fh=UNUNV+3Rgr2p26hylWe/96oGIAb0NTSMds6DDLf8kQ0=;
-        b=ZU6qRKjr70pMUGTQS3c7AE4NWjIb+q8m+mGar28sxouczi+pPhBWjulrVRBQu93nmZ
-         AXmd8P8is91u+OUMr/V6ZJoyYHU3V7Jp7/QEY1+pHZBXNGzduzbw6wOEik2PsMpq24t0
-         d2dMLDEWV7ubswaWvwVTu6MCN9OIFIpqbBqOWdRuo2x0AgrdyZqGrIKCl9IWWEjmHoH2
-         fGoRFVddf/bbR3eBcTOTaGPBsnzN9w4GH05bofVJ4jjAhysOE09duoYwyDS3IubtwJ60
-         c4ye7LuKgYmR1iNGDDm2MHEYqfgGK9U2Q2X79LVM2/r8xcM6l18UXdUD0yB8rXvB5mac
-         NYwA==;
+        bh=rIcL3osXcruiiQ2/mmC3QiYhtHMgSVCol/+yb35Iqlk=;
+        fh=2X+uHksvAVxNeFpr4DI+/m7mXk6xy4DP5ah0IzqIdVs=;
+        b=K//IJTxEiCa1dHqKy3YjNudDlIjIm0Pg2Cp4UkXzLRsgUMRWWOO8qUgtdBOfJQ8R62
+         YxuKERZVwEHXiz6rsG5MjHQ3baFnh7I7jLf7Tjv69F2yCJi7VyAykBoIkrFHmL9w7ebW
+         gOiG+4+iinOof0Lq5M4dC37gB7b2biBG5++5D286TDrsoR6bBa3lILj/DdMYte3woyIh
+         JdyQnhby6S9YT94lpSKVaCKemMwNzorBQf9x43Dbi92NvKzUGwF6cguKqCZ4Nfxvcdlw
+         ZrKjkHPllQkzEByTstDD51xl3cTRMQ+YpLE1WO4lUJKPnAKeaa/P4KJR4CA1jGtnBsR6
+         ADZw==;
         darn=vger.kernel.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786732819; x=1787337619; darn=vger.kernel.org;
+        d=gmail.com; s=20251104; t=1786734008; x=1787338808; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=1ygIoIg7RActdGA1L4Eix3cXFvKMcEifV62JIap/v9w=;
-        b=cyH7j+e290opi1nKETwybhOAbfjV8fZeWVYYMOuytD15EK6ELGXY6HdGHx+IrFWLmm
-         MhxSsOlPPURztOm3bfIIz2zMGjhKkY/76KR/eMoTHWZP69l6lHc9LpNkfnxfq4YmXN0o
-         sUF7DgsmD4w1Ux/xqG4o5QQ5+0sXk40u/+o2PJT10ohhbxZDSZvDhzMB2tUX8kLErDaD
-         aCAC88LepO07iW/zwoWl+QeV5/CEo6UHYpJzieA4zsbmJLJ4RNDJ8u9afnJM4qF/rurB
-         +vvvfiO9DbrYjzvDN2iV55JGICPmM0Gc9fZVePlEEO5xPdu0685+FtNuCDlEyhOtAUTr
-         peGw==
+        bh=rIcL3osXcruiiQ2/mmC3QiYhtHMgSVCol/+yb35Iqlk=;
+        b=hZvQ2UWpAQh5qfAD2DG/55wnJLouRvAM0LR6hwf9A2Sr7a25sJv1gWS+et6t3M1Fl4
+         MmUmDxTf7/gAlch+Gdn19G9KA/dvGmMZUPO1FUwd1tB4gnb0WeLbv7XtxIDzzzz1I/ml
+         7vlhWEWeFiqDZbS6DQ3TdMx4qIONZWeB8Eq+lkl0BXrg69SIZBnJLbJIKQYDL8NkW3vL
+         3rM/JyvRijRpBT8LlhRNU+pSdXSwgDP6JL3k/+3eGZoeyhQj86RPBSA3Hg0TEGFzukqS
+         PTdRyimAA9ICiSe0gJ+px/jQVC/9nk0dHsZfay3TqgKl/XKjY2c4sAhVw3yyKW3tqzzg
+         SYkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786732819; x=1787337619;
+        d=1e100.net; s=20251104; t=1786734008; x=1787338808;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=1ygIoIg7RActdGA1L4Eix3cXFvKMcEifV62JIap/v9w=;
-        b=r16vXzBk8nwTpQSy3+gIiUnV5y+Iz2PQVxk1UbooMab2G5TgxAHd0hWb98+58x00ss
-         nqXJ4xLJYoJxc1LJjsJ0lK4BKoAmkl1J3X3BMZAr5VO8y5qN3mt9ECKECMZTQcQD9bdk
-         uaGnefSS4MsTQXf2zwdItNj2fIPgDVSoytk/NRLeAjiiLMBjaAIcjLohg++xhbdnJQyd
-         +y0QaykXE54gk0fiGB6QouZSs9oV0s1Phn6sq8k5MRu+kGrjVqTQpOCsObAmc0P4DUb3
-         IOSqtvVz/h6SalnmG7hS/+DKmEFdfmRcvqdaITwhP13QhFWPtMmIWtKiye1LN6VIXaNh
-         BKQQ==
-X-Forwarded-Encrypted: i=1; AHgh+Ro/kKcyc1++MT2PuoWeOwEuSWI12AFcOOY76CSKHo5j9X8AsICct55ib7+ylipV6h2mmfh+is0uG/6cmEQe@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw16rSqpcnw9umu6WCFOjzFclX+VMb8ZMDrsJDtj/8Xg5fIHVYx
-	Q+YcOsMq3TDrtNbSy3zUBcu2pfYXdTkxDDkXCjZxIYOTKd2TQ4mvkslh3kYfWX8l3uFo0Fs5YXb
-	d7XWnZ8oN4kAR58QHw7NhyeyEwcZ4C4UsUQ==
-X-Gm-Gg: AR+sD12XTMDCkeq5kY7KG2JU6uGFWra/vsimTwriOsatjlrd/rd+fMLNq12jkNiPpe9
-	2gi5s/R0BBmQNsi0hYkpzoaqLj+ALO58E2GB1jNZrwMxnf92SPemT1lQWqGuSken1uqxYo/Ysjb
-	PMjJ26NL3MaS/KbXZGMJ8uyRZXpYpGwpA7p8oL04v1U9KaoP5Fb6hkUW9PxqMZln7dRkIbWwmQH
-	w/4JQxSdiW1OFM5VZcwhJ3UdEQL0zYUl0ap8/fJqlE0p/cE5xyi5nAZmTyGpu4XNnOL94d9xFu4
-	Rr5ozsdfVA8o9Nj4+hwZbiTW/e3JTuZEO+yFV5S+PnQUf3bkjGnDrH8o4oO4HrwN23ZkatwiZKw
-	G2FA5inmdJZ1C7bFkD550XUV5yVYqsls=
-X-Received: by 2002:a2e:a54f:0:b0:39b:15b4:79ef with SMTP id
- 38308e7fff4ca-3a13249d4afmr7736551fa.17.1786732818596; Fri, 14 Aug 2026
- 11:40:18 -0700 (PDT)
+        bh=rIcL3osXcruiiQ2/mmC3QiYhtHMgSVCol/+yb35Iqlk=;
+        b=Tly/R//bA/fudT4XFg3fZR3LvvMIvRBDcZDwpIPsB8zac8XdJ2AKJgdtST6FHKjZ7M
+         k/mpJC79vu17VYSgWwNIeVlXJWtRi6FWxFZloiu5/BmuAC1SfWuxHdBuGsqC168ntvsF
+         fOcPbd6fkqKCwGRvZlfgK2qKE5BkLgTJQ9lxen6G8Q6pf3LgP2F9ivapWRfFrPD0IIUz
+         xc0rsuMwgNyYpppggawR9PuP5xHLqRDQdx3E8Q1n7gsoxWXsu/oMwxqtMGz/l8578jlT
+         Ww3Q85U52cT2Zzfhu9brqRi5EQU/Yg0LebjyHZ6qBptyTpuwqUni7OvrWWWenyqkNmw9
+         LKkQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrUZZ3/CT6Iw16LMFwSoMRZZYA6xTHMFezVW6C/3cFtQXTlC6IYTFH6m2OEEK8l3NWgUIcUcCpj0Dl+Q+FE@vger.kernel.org
+X-Gm-Message-State: AOJu0YyznlCSK3j9TEWGhEtsuzHFeXTgoJ/NWWayUikcDqFobg7c4oNC
+	fxVETDwP/8PzNotpmCLwIdGbVQc3xL9wZV2MoUl55UCgAIeU2yTdI9EKUdImNN9Z0648dA9R+9d
+	/f191oqlsfuK+wF7vYfJi971p6i417yU=
+X-Gm-Gg: AR+sD11c03NXB43h3UWJlk7276AP2qjUPO1zZ2ksA78RfTznFIPcBno0bg/5fsCko3t
+	srCts2w2BVk2j+0yLsYpRKuSFCQ14btDBILmV6TA95FZibxrcILHlHbdbH+tVmMZpk0n7Gjz6nQ
+	Q+Nr4PJuxyFDyzlHVlErPZ4C3932IBQoZIBJUuZZDPlyVItx6EO2PSTvWifFjzrKA6IiQMH10Ql
+	EGIeaaCvg370spytFoE2aTX7s9h00aTKSuvpUN5wxUH49l9PqFWnu0zcvu6uOyRofXTDHO56g8I
+	910MK+pXvU7kB7Zdla+QV+BnnC0cLzhPNPyhxsKjENYnq+Jn34zYApvwiSyexG5PmJ/cg7utEA5
+	efACU4qln6cs+8EDGLsbxu09NhBq9h8Xj+wb1cETd
+X-Received: by 2002:a05:651c:2121:b0:39f:ef56:65dd with SMTP id
+ 38308e7fff4ca-3a1324cbb22mr7387531fa.24.1786734007812; Fri, 14 Aug 2026
+ 12:00:07 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -84,14 +84,14 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 References: <20260808-rp-qcs8550-v1-0-a5a365ba3dc5@gmail.com>
- <20260808-rp-qcs8550-v1-2-a5a365ba3dc5@gmail.com> <20260813-tuna-of-pastoral-mastery-8ca99c@quoll>
-In-Reply-To: <20260813-tuna-of-pastoral-mastery-8ca99c@quoll>
+ <20260808-rp-qcs8550-v1-3-a5a365ba3dc5@gmail.com> <pgup5kvjyhz7l7rucduzlqj7hmle2lrcvso6ge34up5am3uukg@3jocblne3lvi>
+In-Reply-To: <pgup5kvjyhz7l7rucduzlqj7hmle2lrcvso6ge34up5am3uukg@3jocblne3lvi>
 From: Aaron Kling <webgeek1234@gmail.com>
-Date: Fri, 14 Aug 2026 13:40:07 -0500
-X-Gm-Features: AUfX_mzDUb6yCmFQOqV6Z_Inwx5K-nKduw5VZvYKwLZcIntAcJyWm3qdaFbJMHE
-Message-ID: <CALHNRZ-jfdscwM86cDK3ya4XC5pKVm5y+ZMcdoDYzowDCmF1MQ@mail.gmail.com>
-Subject: Re: [PATCH 2/4] dt-bindings: arm: qcom: Add Retroid Pocket QCS8550 Devices
-To: Krzysztof Kozlowski <krzk@kernel.org>
+Date: Fri, 14 Aug 2026 13:59:55 -0500
+X-Gm-Features: AUfX_mxdr9Sak4hscLfEQL-AM1RV-cvbPThBZrgyITfD6EmLr55pvDtGjrDohKE
+Message-ID: <CALHNRZ9c_+ahDALiQos+H7nWOz7HK8dOfWg3_vnkX+k4=vSp4A@mail.gmail.com>
+Subject: Re: [PATCH 3/4] arm64: dts: qcom: Add Retroid Pocket 6
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
 	Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
 	Konrad Dybcio <konradybcio@kernel.org>, devicetree@vger.kernel.org, 
@@ -99,50 +99,153 @@ Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 13, 2026 at 4:23=E2=80=AFAM Krzysztof Kozlowski <krzk@kernel.or=
-g> wrote:
+On Thu, Aug 13, 2026 at 2:06=E2=80=AFPM Dmitry Baryshkov
+<dmitry.baryshkov@oss.qualcomm.com> wrote:
 >
-> On Sat, Aug 08, 2026 at 12:37:56PM -0500, Aaron Kling wrote:
-> >     Namely:
-> >     * Nova
-> >     * RP6
->
-> Nova what? This is some cut commit msg.
-
-This is the same structure I used for the matching AYN commit. The
-vendor is Retroid Pocket and the product is Nova. It's marketed as the
-Retroid Pocket Nova. The vendor is listed in the subject line and I'm
-listing the product names in the bullet list.
-
+> On Sat, Aug 08, 2026 at 12:37:57PM -0500, Aaron Kling via B4 Relay wrote:
+> > From: Aaron Kling <webgeek1234@gmail.com>
+> >
+> > The Retroid Pocket 6 is a high-performance Android-based handheld gamin=
+g
+> > console powered by the Qualcomm Snapdragon 8 Gen 2 processor featuring =
+a
+> > 5.5-inch AMOLED touchscreen.
+> >
+> > This is based on the support by ROCKNIX, however their history does not
+> > show who the original author was, so direct attributation cannot be
+> > given.
 > >
 > > Signed-off-by: Aaron Kling <webgeek1234@gmail.com>
 > > ---
-> >  Documentation/devicetree/bindings/arm/qcom.yaml | 7 +++++++
-> >  1 file changed, 7 insertions(+)
+> >  arch/arm64/boot/dts/qcom/Makefile                  |   1 +
+> >  .../boot/dts/qcom/qcs8550-retroidpocket-rp6.dts    | 122 +++++++++++++=
+++++++++
+> >  2 files changed, 123 insertions(+)
 > >
-> > diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Document=
-ation/devicetree/bindings/arm/qcom.yaml
-> > index 954be28203017..52ef669d6fe9b 100644
-> > --- a/Documentation/devicetree/bindings/arm/qcom.yaml
-> > +++ b/Documentation/devicetree/bindings/arm/qcom.yaml
-> > @@ -1161,6 +1161,13 @@ properties:
-> >            - const: qcom,qcs8550
-> >            - const: qcom,sm8550
+> > +
+> > +     vdd_disp_1v8: vdd-disp-1v8-regulator {
+>
+> regulator-foo
+
+I see these are inconsistent, I missed that when pulling the support
+in. However, looking at the associated AYN series, all regulators are
+named foo-regulator. Using regulator-foo would make that inconsistent,
+is that really desired?
+
+> > +             compatible =3D "regulator-fixed";
+> > +             regulator-name =3D "vdd_disp_1v8";
+> > +
+> > +             regulator-min-microvolt =3D <1800000>;
+> > +             regulator-max-microvolt =3D <1800000>;
+> > +
+> > +             gpio =3D <&tlmm 70 GPIO_ACTIVE_HIGH>;
+> > +             enable-active-high;
+> > +     };
+> > +
+> > +     vdd_disp_2v8: vdd-disp-2v8-regulator {
+> > +             compatible =3D "regulator-fixed";
+> > +             regulator-name =3D "vdd_disp_2v8";
+> > +
+> > +             regulator-min-microvolt =3D <2800000>;
+> > +             regulator-max-microvolt =3D <2800000>;
+> > +
+> > +             gpio =3D <&tlmm 142 GPIO_ACTIVE_HIGH>;
+> > +             enable-active-high;
+> > +     };
+> > +
+> > +     ts_avdd_3v0: regulator-ts-avdd-3v0 {
+> > +             compatible =3D "regulator-fixed";
+> > +             regulator-name =3D "ts_avdd_3v0";
+> > +
+> > +             regulator-min-microvolt =3D <3000000>;
+> > +             regulator-max-microvolt =3D <3000000>;
+> > +
+> > +             gpio =3D <&tlmm 144 GPIO_ACTIVE_HIGH>;
+> > +             enable-active-high;
+> > +     };
+> > +
+> > +     ts_vddio_1v8: regulator-ts-vddio-1v8 {
+> > +             compatible =3D "regulator-fixed";
+> > +             regulator-name =3D "ts_vddio_1v8";
+> > +
+> > +             regulator-min-microvolt =3D <1800000>;
+> > +             regulator-max-microvolt =3D <1800000>;
+> > +
+> > +             gpio =3D <&tlmm 102 GPIO_ACTIVE_HIGH>;
+> > +             enable-active-high;
+> > +     };
+> > +};
+> > +
+> > +&mdss_dsi1 {
+>
+> Out of place.
+
+Oops.
+
+> > +     status =3D "disabled";
+>
+> Isn't this a default? If so, no need to repeat it.
+
+qcs8550-ayntec-common.dtsi enables this because most of the variants
+have a panel on this connector. So as one of the odd ones out, this
+needs turned back off.
+
+> > +};
+> > +
+> > +&i2c_hub_3 {
+> > +     clock-frequency =3D <100000>;
+> > +
+> > +     status =3D "okay";
+> > +
+> > +     touchscreen@38 {
+> > +             compatible =3D "focaltech,ft5426";
+> > +             reg =3D <0x38>;
+> > +
+> > +             interrupt-parent =3D <&tlmm>;
+> > +             interrupts =3D <15 IRQ_TYPE_EDGE_FALLING>;
+> > +             reset-gpios =3D <&tlmm 14 GPIO_ACTIVE_LOW>;
+> > +
+> > +             vcc-supply =3D <&ts_avdd_3v0>;
+> > +             iovcc-supply =3D <&ts_vddio_1v8>;
+> > +
+> > +             pinctrl-0 =3D <&ts_p_rst_default &ts_p_int_default>;
+> > +             pinctrl-1 =3D <&ts_p_rst_sleep &ts_p_int_sleep>;
+> > +             pinctrl-names =3D "default", "sleep";
+> > +
+> > +             touchscreen-size-x =3D <1080>;
+> > +             touchscreen-size-y =3D <1920>;
+> > +             touchscreen-swapped-x-y;
+> > +     };
+> > +};
+> > +
+> > +&pmk8550_pwm {
+> > +     status =3D "okay";
+> > +};
+> > +
+> > +&remoteproc_adsp {
+> > +     firmware-name =3D "qcom/sm8550/retroidpocket/rp6/adsp.mbn",
+> > +                     "qcom/sm8550/retroidpocket/rp6/adsp_dtb.mbn";
+> > +
+> > +     status =3D "okay";
+> > +};
+> > +
+> > +&spk_amp_l {
+> > +     firmware-name =3D "qcom/sm8550/retroidpocket/rp6/aw883xx_acf.bin"=
+;
+> > +};
+> > +
+> > +&spk_amp_r {
+> > +     firmware-name =3D "qcom/sm8550/retroidpocket/rp6/aw883xx_acf.bin"=
+;
+> > +};
 > >
-> > +      - items:
-> > +          - enum:
-> > +              - retroidpocket,nova
-> > +              - retroidpocket,rp6
+> > --
+> > 2.54.0
+> >
+> >
 >
-> This goes to the existing enum.
-
-Ack.
-
-> > +          - const: qcom,qcs8550
-> > +          - const: qcom,sm8550
->
-> Best regards,
-> Krzysztof
->
+> --
+> With best wishes
+> Dmitry
 
 Aaron
