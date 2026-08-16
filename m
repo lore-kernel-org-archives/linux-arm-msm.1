@@ -1,336 +1,190 @@
-Received: from mail-pg1-f173.google.com (mail-pg1-f173.google.com [209.85.215.173])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from outbound-ip173a.ess.barracuda.com (outbound-ip173a.ess.barracuda.com [209.222.82.41])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 693763DB335
-	for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 09:07:59 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.215.173
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786871281; cv=none; b=tMhRBLdwoYWknu6UAMd5dEB7ZpIBTgT6goQqhKKr4g+7uAfAlCpnMmSzf4+cRDc5mSQiClv9YYwF1XlrnnEpQWegcaRbsXEOvEztELKj47KeSHjDkYOn8Y8EHVwg/yz8aNuxRm2E3/PUEKmJ2dXzBsjaSUC+SLoXde97mCuYIlU=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786871281; c=relaxed/simple;
-	bh=7eoeAnLleGJDi9iZrpFJSVDSWOmv6UZ9H1LLn/MNAJk=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=D/OD4qfagyW6LRiAucGPWQ7eBxENpgoqHbanaGH9nFbWQhBmAbgviG2euT9C+SizKAu0ZA6+HggdNIi9LGdKWQqJxXzbCoDYVpWbAFkJCh2gdZhi9r58TgDfm98k/tXCGG1cje+O/1zslRHHGAKOZfS8PsoW5zX3Z3oa8UWy3Ak=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=FJ96FxIB; arc=none smtp.client-ip=209.85.215.173
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 742A7330D24;
+	Sun, 16 Aug 2026 12:17:33 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=209.222.82.41
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786882670; cv=fail; b=sVEH/9tptybK7EltRVGAZF9jRwH7GUozXbu/QI8H9nfNgfht5yHb5AT7vB8GP5rDdbRYrDHWquW8w7h1WXftTtIsIi5U0zMmFf4ISvfPlSInfFKm+eIrOcwDK9V5z3KB8RGLRaOlKo7tmdyPoAzRRtC6IzeijPKYMJgsr1JUL3Q=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786882670; c=relaxed/simple;
+	bh=FsXbVYNX0hKoGTF2R9+AovbJvY9LMNeWCDhPdjTLru8=;
+	h=From:To:Cc:Subject:Date:Message-ID:Content-Type:MIME-Version; b=KUaqjg2yDsiCACoVTHeuHycVz4vKtiWziJO4swg/Nv8NvgbJZ57+BGZ4RwxbvTI42adR60bb3OxP6FwJT5FT2F1/Nbis6cQ6lHlNYWyJigSINfV0iyp1LihGtYOXs9tFyOkucDXPt7jsT4AECWuMubCecw2vvhuvQCStTCrF55s=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opengear.com; spf=pass smtp.mailfrom=digi.com; dkim=pass (2048-bit key) header.d=opengear.com header.i=@opengear.com header.b=LcfQY8xJ; arc=fail smtp.client-ip=209.222.82.41
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opengear.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=digi.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="FJ96FxIB"
-Received: by mail-pg1-f173.google.com with SMTP id 41be03b00d2f7-ca12086c06eso1778766a12.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 02:07:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786871279; x=1787476079; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=2yMpTq5unBuhd4yogW49pPfsKAXAauMNz+Dz1FC3v6c=;
-        b=FJ96FxIBcu7JbZWHoraY19SxjS/Szc+de7+6toPgYNoqfIx4UWBAYrDIRgefJUeNhB
-         CJ/ULRLqV0/AvE/pXjnVL59GOJp6gzYYEdIiv/bEFBVvAEzE4oITIVeXV+K6gSBR4Try
-         DnOJZ7p58IoFSqQcO/hEMiT3Lmwpx4XHCTFdNgjnMjQc/KBoSg27FzE1PooUxTAqPcOp
-         NAjD8imEkAqyFemrJDdvwz6MuQ6IVZ8emJsRaCTaW3PU3EdYksFzJhmPM0FsqoUWL1+5
-         ROzVrUtzAQnwNuqXCLHEUR0sYt8Tam3C+3Sz6B5vzlyBq1JnAjgngXcn5kXCmJ0pMuaK
-         MXcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786871279; x=1787476079;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2yMpTq5unBuhd4yogW49pPfsKAXAauMNz+Dz1FC3v6c=;
-        b=bbvlxG5Vub6jihKNW36o8n0IoY/dwnd6eOeFX67ir30DwBvGo8GjXhe7KJATZf1KwT
-         NNkiZDKLVaCpcptv+b7e6Ff/tLgCFYMny6Gm9+GabhdhHfoQUNfVQgaDQtrOoXKXhwuW
-         WF4DYqCOOzJBli9ss8LoyALcdjvnYQO8upcbfhD+pxMHmtlph2uNp6RP3ktKsV7/d8o1
-         +ZONuIHeRkHhpjPoFpjJbe/AeZJfN88y5/9ARxAUk0VIlaVPveuXpkZrX/kP/fKF+LTe
-         FWZ1mizg7MGSGh1spkgfmKMEfJqoW0XHGposKBor1mK+u6uun+K19pjZzBuLDFuSzn1H
-         gETg==
-X-Forwarded-Encrypted: i=1; AHgh+Rop0c+XHe/jWZcXxMrWHkkNpHs1ejgN7rEZt5+MKMddasx83DzYuuepKCbUzsWq7+f4NlZV93LWazWYviR2@vger.kernel.org
-X-Gm-Message-State: AOJu0YywrToHtADqjXKY951jgtaDIQ8CROVFZ3LEQ593pFcMMg9RCHKN
-	swoZSPJHLXDGWFZUAZ+UDitnDFwBNEl0d48fFiL/qRbdme4YNHtJ64Wr
-X-Gm-Gg: AR+sD11gmkWNoeH7vVWLg/r8AmBxIS9tGAuGJQZhiqwr1PZKWiA06TkyOHPCHIOPepA
-	GPng/c2cwvVGhWzxKX8hDwY6hqzCa45rxm7vZoQK4ZYQZOtmS1hsKm0eDpIK046CeXhXDgIBWQG
-	Y0H7Ec2aB63tP5lsu1R/a3QB2PNiWKh9wHowefRoJ//B6CL78a3haf26qM2CCykCm6yTkmJVNUT
-	81k1C9IO29TTp6KSEC0ydtZz01gGDi4SOM7UePO9Y1Ed2FeYjBFW+sd2LqjJv3N5GDgIsLxY8uQ
-	N7gRsmJ5LONYBoyKfeOW6Qw259FxaRvJyX+ckO0tP6mos4dbED5mOGb6dGA/rAmZ3rDCWOJaNh8
-	Ouug79UDqiZiJv7gICCUb74VCH5JiStVy+SNukSRsoEcovJgjHR8UEzCTkGsOz9Z4kimmNhd3Rs
-	juLphoq7MfpuigZTE7F8tFOnlsETIdTpw3BtAXupNTF+8yzT98oadq37PUy2wOXsGBdm18zAM5D
-	l9H3uzHxtNd
-X-Received: by 2002:a05:6a21:a4a:b0:3c3:9070:96b3 with SMTP id adf61e73a8af0-3cc71af165bmr20266214637.3.1786871278619;
-        Sun, 16 Aug 2026 02:07:58 -0700 (PDT)
-Received: from localhost.localdomain ([152.58.201.186])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3218d3f398dsm26085321eec.22.2026.08.16.02.07.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 16 Aug 2026 02:07:57 -0700 (PDT)
-From: Sreeshankar K <sreeshankar0910@gmail.com>
-To: andersson@kernel.org,
-	mturquette@baylibre.com,
-	sboyd@kernel.org,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org
-Cc: bmasney@redhat.com,
+	dkim=pass (2048-bit key) header.d=opengear.com header.i=@opengear.com header.b="LcfQY8xJ"
+Received: from CY7PR03CU001.outbound.protection.outlook.com (mail-westcentralusazon11020120.outbound.protection.outlook.com [40.93.198.120]) by mx-outbound46-112.us-east-2c.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Sun, 16 Aug 2026 12:17:16 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=e+LeAvDwfQjgT+EE2v4kEY0vY5hkous8EPod7EHWXBlbs1cTP8+3ITkDwC7+KCdBjm6sJanAWY0r6xwXBItoxzCNqNYizXCHa6AtnBXZOkvJNgTIVBTGSF3tMfUDUs7p37dC9/6rQaE+0yO0eaO1UBdkRrlHQJv1uFND+bPHJjP8QYHyX5/4gAaYlVgDmeFbU5xlB0r5qdg9QDrn5Vt8sndBlLBv+BpkTtukikbTdY3/byJro+GGJOCcglpKSLKsZpVhUD3TrT3W4nDbtowPTKrtWSBmwKqYm9cb3IZYu8nYUbXkHXET5q6fO4rrAtARw2azCBUuzhXX0ubjyI7v1g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SOp0Mt0Zmk55cW3XunHwvYTudUFhQsIDIiTkgHVwKdg=;
+ b=vTceceEA574DFACpuF29FDPS+hznlxDfmO663hoy5Sg2H2yea4qf7Nf5vPj8OwLOYxXknoU7xXwEAsg/SAxevn0X5uAQgpyGCjBzOyK39jIxHSXOyjcFrIFaHrGppxFJ03vNArhZfSrkJWkI7DbTRKUme7lqpCUh2me6qsBcaT5EqjSf9sPkP8sDNGILBlXwF4270a9QkGx2In/pU700OTngknmDVvcaULL4181OPmAd/tS+WWXYbL63Gzwn4fVaFERBHLt5EivsJFAAySVztb/y8vaXTODEDVC+7s1q48J4EwJUlEXFTv3w7f91Yy8d4U+TSHf6QDw2Ci22Nk93PA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=digi.com; dmarc=pass action=none header.from=opengear.com;
+ dkim=pass header.d=opengear.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=opengear.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SOp0Mt0Zmk55cW3XunHwvYTudUFhQsIDIiTkgHVwKdg=;
+ b=LcfQY8xJVl4WRlH+KTzOAgib9fEpSdzzQ2LrZuAXkjgW8XsrUxs9SE69ccr9PG2i4vsqySl/mFIMUBG8D7kV1skIn26xMeKEX3m41CmHYNweEFtok/cGgMYrUBmXbxsmDO/Gx88zf/587z+HONz3QsoMA+Vmk9MJiK5nUE1F13uMV2SCLrZsGaA9BkGr6M3dWkSPKC08NsLVv8aK4JkWYA8oxwsRkc1/SHBdiVm2SyH5OxHRpqBWPiF0OzyDstLrUQFjjU76Hvnbc3hGnkKBaWGBnKQVaC28g4l/1C5uLTP4R+FQZsS1BuN5/YdZphTeLabCoJU8MZXVGuQkvmP4Aw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=opengear.com;
+Received: from DM6PR10MB4139.namprd10.prod.outlook.com (2603:10b6:5:21d::24)
+ by LV3PR10MB7793.namprd10.prod.outlook.com (2603:10b6:408:1b8::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.17; Sun, 16 Aug
+ 2026 12:17:13 +0000
+Received: from DM6PR10MB4139.namprd10.prod.outlook.com
+ ([fe80::19e9:d558:fd6c:8e5a]) by DM6PR10MB4139.namprd10.prod.outlook.com
+ ([fe80::19e9:d558:fd6c:8e5a%6]) with mapi id 15.21.0315.016; Sun, 16 Aug 2026
+ 12:17:12 +0000
+From: Peter Hunt <peter.hunt@opengear.com>
+To: loic.poulain@oss.qualcomm.com,
+	ryazanov.s.a@gmail.com,
+	mani@kernel.org
+Cc: johannes@sipsolutions.net,
+	netdev@vger.kernel.org,
+	mhi@lists.linux.dev,
 	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	devicetree@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
-	Sreeshankar K <sreeshankar0910@gmail.com>
-Subject: [PATCH 2/2] dt-bindings: clock: Add GCC clock bindings for SM7250
-Date: Sun, 16 Aug 2026 09:07:19 +0000
-Message-ID: <20260816090719.892-3-sreeshankar0910@gmail.com>
+	Peter Hunt <peter.hunt@opengear.com>
+Subject: [PATCH net-next v4 0/3] net: wwan: support DTR/RTS on AT ports via MHI IP_CTRL
+Date: Sun, 16 Aug 2026 06:17:02 -0600
+Message-ID: <20260816121705.858013-1-peter.hunt@opengear.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260816090719.892-1-sreeshankar0910@gmail.com>
-References: <20260816090719.892-1-sreeshankar0910@gmail.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: SY5PR01CA0001.ausprd01.prod.outlook.com
+ (2603:10c6:10:1fa::14) To DM6PR10MB4139.namprd10.prod.outlook.com
+ (2603:10b6:5:21d::24)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6PR10MB4139:EE_|LV3PR10MB7793:EE_
+X-MS-Office365-Filtering-Correlation-Id: e977ab48-3edc-4d75-1ca2-08defb904d87
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|366016|1800799024|23010399003|3023799007|18002099003|11063799006|56012099006|10067099003|6133799003;
+X-Microsoft-Antispam-Message-Info:
+	HPVGc9EGkQwSwBmkllA12N+kwFuZC6oAJBMNYAV1AnVB4BJXp+vyCH0iZwErxkLJYGTybrPrLiOIB8QUV+xrv/SY0PVcL0nuSRE6QRaKto43TBRjY7XdDmD/92LbPvwpb+SY43z8rjzW26Hjz+8j06zHTUnT2+Y5HzUjOtuDMXzzoPbtn9sQ4ARkbZRjLFBnOkIRz4gTsiIERPoXT5oW4cHODVGEmms4UiKQRCl9Dn24jbdwy1TiLPJ+lOFo/QJyxKVd4Xvpl4oBdS8jUa7nd+SK2SyrjNO7ddBjcZyi2AqSnrUtOtV/fzlcbSFxAIw2Tcn61oYvjOzQFTwdRSrqLfX3lu5cdBgchkLgIwhjUdKBjzPWQL+sNRujccUlOQ4aytLfZuJdx/FAWjrtC8+h1dSjtISo755kcmqIlqbCWkM8jWU1p4KOk67pvtNDTWuLcFuqq2/kxPwoTack2GizGuepavXuJWzY68tR32IAPP43CLWV2g2iz6maBSY0IZoQUAVwQEoLRxezkqUJgutmk6D8vEFYeTlEJEg1AYkYtF6hp2NUCXlWDwnbZYXMq2fHx5Be6/PYZS6Rn18VyoTKAEhU6BqAVpZ8If3S/+NhspgoyV2Bu2tsmvSpt6j5ASp+aZMELAMvCLIwoWhOpwgMyDVmOeeZdfw91VgVQD2qHf8=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR10MB4139.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(3023799007)(18002099003)(11063799006)(56012099006)(10067099003)(6133799003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?tX3EcBQD6SPGxsKP2q+T+TMJJAK8DCKD4wo3zlqEh3BY4xZ3pGh83ZAXiL8P?=
+ =?us-ascii?Q?ukiB2ufSiChvsv6kdXIS8ZpuN7gebbHdDb+06cDJHDL5v/veAYTYJ9BY7UP9?=
+ =?us-ascii?Q?DHM+2b1v3jYU6q0FeUtWjg0q+wLZfQ39VzWRPzhCuSwBV0inCH3D+IT69+Cl?=
+ =?us-ascii?Q?UhMJMuBVrxf2nS+6aIf83gGA8WO7kbIXCrhtMzXD3pGTOMuJeyPh8HapHop2?=
+ =?us-ascii?Q?LgNSGZsJHy44ZBZIUgN/xMbKqqwrbwYChcAI38IbmuqBIdUIT4ulIWFUvkmZ?=
+ =?us-ascii?Q?HQK10avmMRGs6hsK2YF9x/if/zhXgKsjaUZ9Hvz704zADr1iM7XMlJuVvFYU?=
+ =?us-ascii?Q?6io7e3Oi6a2rr+OB0tM4os0eqxK/ygE+N4YnFNQlz9EJNr1bu3/rc4QpTItX?=
+ =?us-ascii?Q?bfMQc5LwElR8AzARG/AmPgNxaXsLAqX+Wj0nCimdyEAcTk6t/IzIcNmLBSs2?=
+ =?us-ascii?Q?6bW7AXnjd/JIpDyh7T3rQa4X/fwrQBCs4QZj56wevy/ub/RORS8trD1xCe/V?=
+ =?us-ascii?Q?G7G8laGmkV3Ls2Y+d3iuI5ZAPqS6Ybj5nMQCxsZpPSKLaQCN/azSjnZQlcxz?=
+ =?us-ascii?Q?NgafY0uopMPhGhJocpVlDxIvlwhGERg5hEpzdvS+M7XNNiybpGbFa+qPkz1a?=
+ =?us-ascii?Q?u/MpUXqikXEnZe7iI7r4WeoOcIh2RnF+12Ye9yuRzOxUuYZpvsT6PvUVLtVd?=
+ =?us-ascii?Q?Lpe7UAmADKEnAywEpGq2XcJVbCVnNj57LJTQZZWgEO4L6L1mt3n7DwbxlbO1?=
+ =?us-ascii?Q?khXXKSBHIMu6nJLLrm0kD1AzKgUiglKdQWNR/+E56JsrPdVG3ue6e3JPfR0G?=
+ =?us-ascii?Q?w/xn8cJE3VYbiLWc9m2eMnZ10mZOkA5BEUzMQbFlwpKDaQSkHALh84I6j1pz?=
+ =?us-ascii?Q?4hdivLKV6i5UO73PkoLyN/hpsVybiV/T9Oz0CZxhFMwBmYu26WpfQFmVpQD0?=
+ =?us-ascii?Q?oirJrD7CI5oBIPUohK150I0qlxqxA+tLhNsc5724fR8iRyalTnJW5lFQc1ik?=
+ =?us-ascii?Q?MHUo9TsWYocuIxguPAXCWmjjaI2118AFtLQfaZzw30NYGqJdeLgyO0JuWyjF?=
+ =?us-ascii?Q?18y+x6aSKNerYe7Q2d1w6l4Icc3SnX4Y9TegHJdS7Xh6qxskp+iqAQsIs404?=
+ =?us-ascii?Q?g2Lqn1fIVvvj6dcuO4dJOX4PdCBWIH9s8dC4PRv5lcHP+7ihoJov4QrSjQYg?=
+ =?us-ascii?Q?yAe7Gn/MhlW8UWLJShSJI4SH235kEcJQhPkIqMbCMsVSoReFhJsPBDEtt3x4?=
+ =?us-ascii?Q?rMy+znBHkZIYWidi99n92C08dqpFP/t9o/IxMlqeQ8xpD3AKPDl3Ez+V5on6?=
+ =?us-ascii?Q?nM343dYF4jqji6hWl40mEi2ek5k4+rv3rQ3ycdDprZr4ufiM5CZtYyndUABf?=
+ =?us-ascii?Q?zdW/O0naIvaGcmuRll3/BGqMLjvA086wiG8vUOBFoo8+hGyCOnYx82P6teps?=
+ =?us-ascii?Q?BjIqxbVlEeXAt7Vj8sHmaF1Lh7iEbsP1bZqv1LPxD3UG8vSqYsrQCAA09VDt?=
+ =?us-ascii?Q?qBZytVhRlG6YtM1ze5k9Hwb7YTYp8/Ws6tRjwQxw45+OdOiM7Eunlh0kqgnx?=
+ =?us-ascii?Q?rTypaIGJ+epaggYpG5f82PpgfOAO8gy0bWFn0cwIRV8q3L4NpoPJSFPp3z5Q?=
+ =?us-ascii?Q?t8ewFGW+fgdK5cC+g+53mKBgTVCUkUODJ4LT0KbSbihKpRxgWLtlV5OXzSfF?=
+ =?us-ascii?Q?2vIX4a0MScCgsgLhek/THGuHDyNjTgYZSLfmH+FYayHj/pGa?=
+X-Exchange-RoutingPolicyChecked:
+	fiiAqlaGux04bq449emiP7ZPSt+ugCIxhLKhr8/g3Dvb6jYQ/1LEkdN42e3B8rOT/fD0ryEsnskOYpP1vtaJeRlgmlios2dckZnvDZ2eQ9P4J73fnggsgUNp1nh/TPfcktXZiHQ66FGE8cGew/FUwbzBz3LHndl8wcs57E7HKM7U0ROj9OhNjg06T7sz5E1O5OxIuO6lhE1DBfuHExAqHc0s2UhAJumGubrvGN9ErNgM7N+Y/InlIHDO4+aLreOQiG6sDaT5g+SoDAS7TsPH1+W2/0NqgX/+S40IKyiOYSEsEUm2awYSNFI0/vxD++obHBMO2NJtTjf5DjQkiXc8pQ==
+X-OriginatorOrg: opengear.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e977ab48-3edc-4d75-1ca2-08defb904d87
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR10MB4139.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Aug 2026 12:17:12.9039
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /4qid6sFYJIVGOqymgnqiGhwHYm62AgQP/DRBSy2km9u0bHQCqOkgwpzlIoZo+IF
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB7793
+X-BESS-ID: 1786882635-111888-7724-2186-1
+X-BESS-VER: 2019.1_20260804.2006
+X-BESS-Apparent-Source-IP: 40.93.198.120
+X-BESS-Parts: H4sIAAAAAAACA4uuVkqtKFGyUioBkjpK+cVKVkbGZsZAVgZQ0Mgs2dg8NTkpxT
+	I5ydzE0twg1TQ11SzRyDDR0DLJ0NJCqTYWALVKrlZBAAAA
+X-BESS-Outbound-Spam-Score: 0.40
+X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.275424 [from 
+	cloudscan21-75.us-east-2b.ess.aws.cudaops.com]
+	Rule breakdown below
+	 pts rule name              description
+	---- ---------------------- --------------------------------
+	0.40 BSF_SC0_SA085b         META: Custom Rule SA085b 
+	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
+X-BESS-Outbound-Spam-Status: SCORE=0.40 using account:ESS112744 scores of KILL_LEVEL=7.0 tests=BSF_SC0_SA085b, BSF_BESS_OUTBOUND
+X-BESS-BRTS-Status:1
 
-Add device tree bindings for global clock controller on SM7250 SoC.
+Qualcomm/Sierra SDX55/SDX65 modems (e.g. EM9291) withhold unsolicited AT
+result codes until the host asserts DTR.  The in-tree mhi_wwan_ctrl driver
+exposed AT ports but never signalled DTR, so URCs never reached userspace.
 
-Signed-off-by: Sreeshankar K <sreeshankar0910@gmail.com>
----
- .../bindings/clock/qcom,gcc-sm7250.yaml       |  60 +++++++
- include/dt-bindings/clock/qcom,gcc-sm7250.h   | 163 ++++++++++++++++++
- 2 files changed, 223 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/clock/qcom,gcc-sm7250.yaml
- create mode 100644 include/dt-bindings/clock/qcom,gcc-sm7250.h
+Patch 1 extends the wwan core with an optional ->dtr_rts(port, on) port
+op, mirroring tty_port_operations.dtr_rts.  The TIOCM bitmask state is
+tracked entirely in the wwan core; drivers receive only a simple boolean
+assert/de-assert signal reflecting the DTR line.  The core raises DTR/RTS
+on first open of any AT port whose driver implements ->dtr_rts and drops
+them on last close, mirroring TTY semantics.  at_data.mdmbits is
+serialised under data_lock; the ->dtr_rts call is made after releasing
+data_lock and re-acquiring ops_lock so that it is serialised against port
+removal.
 
-diff --git a/Documentation/devicetree/bindings/clock/qcom,gcc-sm7250.yaml b/Documentation/devicetree/bindings/clock/qcom,gcc-sm7250.yaml
-new file mode 100644
-index 000000000..822df7dc1
---- /dev/null
-+++ b/Documentation/devicetree/bindings/clock/qcom,gcc-sm7250.yaml
-@@ -0,0 +1,60 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/clock/qcom,gcc-sm7250.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Qualcomm Global Clock & Reset Controller on SM7250
-+
-+maintainers:
-+  - Bjorn Andersson <andersson@kernel.org>
-+  - Sreeshankar K <sreeshankar0910@gmail.com>
-+
-+description: |
-+  Qualcomm global clock control module provides the clocks, resets and power
-+  domains on SM7250.
-+
-+  See also: include/dt-bindings/clock/qcom,gcc-sm7250.h
-+
-+properties:
-+  compatible:
-+    const: qcom,gcc-sm7250
-+
-+  clocks:
-+    items:
-+      - description: Board XO source
-+      - description: Board active XO source
-+      - description: Sleep clock source
-+
-+  clock-names:
-+    items:
-+      - const: bi_tcxo
-+      - const: bi_tcxo_ao
-+      - const: sleep_clk
-+
-+required:
-+  - compatible
-+  - clocks
-+  - clock-names
-+  - '#power-domain-cells'
-+
-+allOf:
-+  - $ref: qcom,gcc.yaml#
-+
-+unevaluatedProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/clock/qcom,rpmh.h>
-+    clock-controller@100000 {
-+      compatible = "qcom,gcc-sm7250";
-+      reg = <0x00100000 0x1f0000>;
-+      clocks = <&rpmhcc RPMH_CXO_CLK>,
-+               <&rpmhcc RPMH_CXO_CLK_A>,
-+               <&sleep_clk>;
-+      clock-names = "bi_tcxo", "bi_tcxo_ao", "sleep_clk";
-+      #clock-cells = <1>;
-+      #reset-cells = <1>;
-+      #power-domain-cells = <1>;
-+    };
-+...
-diff --git a/include/dt-bindings/clock/qcom,gcc-sm7250.h b/include/dt-bindings/clock/qcom,gcc-sm7250.h
-new file mode 100644
-index 000000000..f50a13173
---- /dev/null
-+++ b/include/dt-bindings/clock/qcom,gcc-sm7250.h
-@@ -0,0 +1,163 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-+/*
-+ * Copyright (c) 2020, The Linux Foundation. All rights reserved.
-+ * Copyright (c) 2026, Sreeshankar K <sreeshankar0910@gmail.com>
-+ */
-+
-+#ifndef _DT_BINDINGS_CLK_QCOM_GCC_SM7250_H
-+#define _DT_BINDINGS_CLK_QCOM_GCC_SM7250_H
-+
-+/* GCC clocks */
-+#define GPLL0							0
-+#define GPLL0_OUT_EVEN						1
-+#define GPLL6							2
-+#define GPLL9							3
-+#define GCC_AGGRE_UFS_PHY_AXI_CLK				4
-+#define GCC_AGGRE_USB3_PRIM_AXI_CLK				5
-+#define GCC_BOOT_ROM_AHB_CLK					6
-+#define GCC_CAMERA_AHB_CLK					7
-+#define GCC_CAMERA_HF_AXI_CLK					8
-+#define GCC_CAMERA_SF_AXI_CLK					9
-+#define GCC_CAMERA_XO_CLK					10
-+#define GCC_CFG_NOC_USB3_PRIM_AXI_CLK				11
-+#define GCC_CPUSS_AHB_CLK					12
-+#define GCC_CPUSS_AHB_CLK_SRC					13
-+#define GCC_CPUSS_GNOC_CLK					14
-+#define GCC_CPUSS_RBCPR_CLK					15
-+#define GCC_DDRSS_GPU_AXI_CLK					16
-+#define GCC_DISP_GPLL0_CLK_SRC					17
-+#define GCC_DISP_AHB_CLK					18
-+#define GCC_DISP_HF_AXI_CLK					19
-+#define GCC_DISP_SF_AXI_CLK					20
-+#define GCC_DISP_XO_CLK						21
-+#define GCC_GP1_CLK						22
-+#define GCC_GP1_CLK_SRC						23
-+#define GCC_GP2_CLK						24
-+#define GCC_GP2_CLK_SRC						25
-+#define GCC_GP3_CLK						26
-+#define GCC_GP3_CLK_SRC						27
-+#define GCC_GPU_CFG_AHB_CLK					28
-+#define GCC_GPU_GPLL0_CLK_SRC					29
-+#define GCC_GPU_GPLL0_DIV_CLK_SRC				30
-+#define GCC_GPU_IREF_CLK					31
-+#define GCC_GPU_MEMNOC_GFX_CLK					32
-+#define GCC_GPU_SNOC_DVM_GFX_CLK				33
-+#define GCC_NPU_AXI_CLK						34
-+#define GCC_NPU_BWMON2_AXI_CLK					35
-+#define GCC_NPU_BWMON_AXI_CLK					36
-+#define GCC_NPU_BWMON_CFG_AHB_CLK				37
-+#define GCC_NPU_CFG_AHB_CLK					38
-+#define GCC_NPU_DMA_CLK						39
-+#define GCC_NPU_GPLL0_CLK_SRC					40
-+#define GCC_NPU_GPLL0_DIV_CLK_SRC				41
-+#define GCC_PDM2_CLK						42
-+#define GCC_PDM2_CLK_SRC					43
-+#define GCC_PDM_AHB_CLK						44
-+#define GCC_PDM_XO4_CLK						45
-+#define GCC_PRNG_AHB_CLK					46
-+#define GCC_QMIP_CAMERA_NRT_AHB_CLK				47
-+#define GCC_QMIP_CAMERA_RT_AHB_CLK				48
-+#define GCC_QMIP_DISP_AHB_CLK					49
-+#define GCC_QMIP_RT_DISP_AHB_CLK				50
-+#define GCC_QMIP_VIDEO_CVP_AHB_CLK				51
-+#define GCC_QMIP_VIDEO_VCODEC_AHB_CLK				52
-+#define GCC_QUPV3_WRAP0_CORE_2X_CLK				53
-+#define GCC_QUPV3_WRAP0_CORE_CLK				54
-+#define GCC_QUPV3_WRAP0_S0_CLK					55
-+#define GCC_QUPV3_WRAP0_S0_CLK_SRC				56
-+#define GCC_QUPV3_WRAP0_S1_CLK					57
-+#define GCC_QUPV3_WRAP0_S1_CLK_SRC				58
-+#define GCC_QUPV3_WRAP0_S2_CLK					59
-+#define GCC_QUPV3_WRAP0_S2_CLK_SRC				60
-+#define GCC_QUPV3_WRAP0_S3_CLK					61
-+#define GCC_QUPV3_WRAP0_S3_CLK_SRC				62
-+#define GCC_QUPV3_WRAP0_S4_CLK					63
-+#define GCC_QUPV3_WRAP0_S4_CLK_SRC				64
-+#define GCC_QUPV3_WRAP0_S5_CLK					65
-+#define GCC_QUPV3_WRAP0_S5_CLK_SRC				66
-+#define GCC_QUPV3_WRAP1_CORE_2X_CLK				67
-+#define GCC_QUPV3_WRAP1_CORE_CLK				68
-+#define GCC_QUPV3_WRAP1_S0_CLK					69
-+#define GCC_QUPV3_WRAP1_S0_CLK_SRC				70
-+#define GCC_QUPV3_WRAP1_S1_CLK					71
-+#define GCC_QUPV3_WRAP1_S1_CLK_SRC				72
-+#define GCC_QUPV3_WRAP1_S2_CLK					73
-+#define GCC_QUPV3_WRAP1_S2_CLK_SRC				74
-+#define GCC_QUPV3_WRAP1_S3_CLK					75
-+#define GCC_QUPV3_WRAP1_S3_CLK_SRC				76
-+#define GCC_QUPV3_WRAP1_S4_CLK					77
-+#define GCC_QUPV3_WRAP1_S4_CLK_SRC				78
-+#define GCC_QUPV3_WRAP1_S5_CLK					79
-+#define GCC_QUPV3_WRAP1_S5_CLK_SRC				80
-+#define GCC_QUPV3_WRAP_0_M_AHB_CLK				81
-+#define GCC_QUPV3_WRAP_0_S_AHB_CLK				82
-+#define GCC_QUPV3_WRAP_1_M_AHB_CLK				83
-+#define GCC_QUPV3_WRAP_1_S_AHB_CLK				84
-+#define GCC_SDCC1_AHB_CLK					85
-+#define GCC_SDCC1_APPS_CLK					86
-+#define GCC_SDCC1_APPS_CLK_SRC					87
-+#define GCC_SDCC1_ICE_CORE_CLK					88
-+#define GCC_SDCC1_ICE_CORE_CLK_SRC				89
-+#define GCC_SDCC2_AHB_CLK					90
-+#define GCC_SDCC2_APPS_CLK					91
-+#define GCC_SDCC2_APPS_CLK_SRC					92
-+#define GCC_SDCC4_AHB_CLK					93
-+#define GCC_SDCC4_APPS_CLK					94
-+#define GCC_SDCC4_APPS_CLK_SRC					95
-+#define GCC_SYS_NOC_CPUSS_AHB_CLK				96
-+#define GCC_UFS_1X_CLKREF_CLK					97
-+#define GCC_UFS_PHY_AHB_CLK					98
-+#define GCC_UFS_PHY_AXI_CLK					99
-+#define GCC_UFS_PHY_AXI_CLK_SRC					100
-+#define GCC_UFS_PHY_ICE_CORE_CLK				101
-+#define GCC_UFS_PHY_ICE_CORE_CLK_SRC				102
-+#define GCC_UFS_PHY_PHY_AUX_CLK					103
-+#define GCC_UFS_PHY_PHY_AUX_CLK_SRC				104
-+#define GCC_UFS_PHY_RX_SYMBOL_0_CLK				105
-+#define GCC_UFS_PHY_RX_SYMBOL_1_CLK				106
-+#define GCC_UFS_PHY_TX_SYMBOL_0_CLK				107
-+#define GCC_UFS_PHY_UNIPRO_CORE_CLK				108
-+#define GCC_UFS_PHY_UNIPRO_CORE_CLK_SRC				109
-+#define GCC_USB30_PRIM_MASTER_CLK				110
-+#define GCC_USB30_PRIM_MASTER_CLK_SRC				111
-+#define GCC_USB30_PRIM_MOCK_UTMI_CLK				112
-+#define GCC_USB30_PRIM_MOCK_UTMI_CLK_SRC			113
-+#define GCC_USB30_PRIM_SLEEP_CLK				114
-+#define GCC_USB3_PRIM_CLKREF_CLK				115
-+#define GCC_USB3_PRIM_PHY_AUX_CLK				116
-+#define GCC_USB3_PRIM_PHY_AUX_CLK_SRC				117
-+#define GCC_USB3_PRIM_PHY_COM_AUX_CLK				118
-+#define GCC_USB3_PRIM_PHY_PIPE_CLK				119
-+#define GCC_VIDEO_AHB_CLK					120
-+#define GCC_VIDEO_AXI_CLK					121
-+#define GCC_VIDEO_XO_CLK					122
-+
-+/* GCC resets */
-+#define GCC_DPM_BCR						0
-+#define GCC_GPU_BCR						1
-+#define GCC_MMSS_BCR						2
-+#define GCC_NPU_BWMON_BCR					3
-+#define GCC_NPU_BCR						4
-+#define GCC_PDM_BCR						5
-+#define GCC_PRNG_BCR						6
-+#define GCC_QUPV3_WRAPPER_0_BCR					7
-+#define GCC_QUPV3_WRAPPER_1_BCR					8
-+#define GCC_QUSB2PHY_PRIM_BCR					9
-+#define GCC_SDCC1_BCR						10
-+#define GCC_SDCC2_BCR						11
-+#define GCC_SDCC4_BCR						12
-+#define GCC_UFS_PHY_BCR						13
-+#define GCC_USB30_PRIM_BCR					14
-+#define GCC_USB3_DP_PHY_PRIM_BCR				15
-+#define GCC_USB3_PHY_PRIM_BCR					16
-+#define GCC_USB3PHY_PHY_PRIM_BCR				17
-+#define GCC_USB_PHY_CFG_AHB2PHY_BCR				18
-+
-+/* GCC power domains */
-+#define UFS_PHY_GDSC						0
-+#define USB30_PRIM_GDSC						1
-+#define HLOS1_VOTE_MMNOC_MMU_TBU_HF0_GDSC			2
-+#define HLOS1_VOTE_MMNOC_MMU_TBU_HF1_GDSC			3
-+#define HLOS1_VOTE_MMNOC_MMU_TBU_SF0_GDSC			4
-+
-+#endif
+Patch 2 enables the IP_CTRL MHI channel in the Sierra PCI table so that
+the IP_CTRL driver (patch 3) is actually bound on those controllers.
+
+Patch 3 adds a second mhi_driver that binds the IP_CTRL channel and
+registers a ->dtr_rts op so that the wwan core's open/close DTR raise/drop
+and userspace TIOCMSET calls both reach the modem.  The existing AT/QMI/MBIM
+data path is untouched.
+
+v3: https://lore.kernel.org/netdev/20260807215042.2714442-1-peter.hunt@opengear.com/
+
+v4:
+- Protect at_data.mdmbits in wwan_port_op_start/stop under data_lock
+- Release data_lock and acquire ops_lock with a NULL check before calling
+  ->dtr_rts from the ioctl path, preventing NULL deref and use-after-free
+  on port removal
+- Gate ioctl ->dtr_rts on WWAN_PORT_AT to match open/close behaviour
+- Reduce TIOCM boolean to TIOCM_DTR only (DTR governs URC gating; RTS is
+  tracked in mdmbits but driven together with DTR on open/close)
+- Add dev_dbg when IP_CTRL is not enumerated and when mhi_queue_buf fails
+- Reword forward reference in patch 2 commit message
+
+Peter Hunt (3):
+  net: wwan: core: propagate modem control signals to port drivers
+  bus: mhi: host: pci_generic: enumerate IP_CTRL channel for Sierra
+    EM919x/EM929x
+  net: wwan: mhi_wwan_ctrl: drive DTR/RTS via the IP_CTRL channel
+
+ drivers/bus/mhi/host/pci_generic.c |   2 +
+ drivers/net/wwan/mhi_wwan_ctrl.c   | 178 ++++++++++++++++++++++++++++-
+ drivers/net/wwan/wwan_core.c       |  31 ++++-
+ include/linux/wwan.h               |   3 +
+ 4 files changed, 212 insertions(+), 2 deletions(-)
+
 -- 
 2.43.0
 
