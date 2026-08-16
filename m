@@ -1,111 +1,241 @@
-Received: from mail-pj1-f47.google.com (mail-pj1-f47.google.com [209.85.216.47])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-1.web.codeaurora.org [10.30.226.201])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19F6D212554
-	for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 13:33:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.47
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23C393A5E7A;
+	Sun, 16 Aug 2026 13:48:37 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=10.30.226.201
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786887197; cv=none; b=tPywV+3AjHgNE5YHDrNTp4imqJTWbloM0aGhsZR2ddDDepe8y2jLdbh4ka6xU/qZmFhi09qZPZ5NTb20ayCyL76pvu0PiiHvJPSAhrPi1tZ2wCDRXolepgWBQ0tSIiGr80dbFHT+V6T+zcn1c9JoiFIDv48VuadwsQ3G5d3cKeM=
+	t=1786888117; cv=none; b=Kh+dhJAiHmnPgfOEdsxasJYJOY8+aGfXvvtp3GsCMNLwjTT4CZtlGb3nRuIy40P4cOIt3/Q+6RL/3TvDksjZVb8wIzv42Esy36/tI9k4Zlg5YdB4LQKCpl52zvejO4/EsLEVsVXLaMd3jq2MEY7y9Dy+5jkKauP7bRrYlmjcM9Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786887197; c=relaxed/simple;
-	bh=S4gVIUWwuoALYuzwzRm82WuAYzYN5KLWtNbqZ/oM/+w=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=juaGpQDRSkPRMGevvuFmimcd/NEgUG0AS/C06iBKBGcZszs/hhXdRvNJFeGUS7f0VAbC5pATSWQpVRMmdcqeYPltpzJ/X98rU1peqN90CxNUGe+WqqqFvwAVewGqMcpgYlO7M5SyuvMYOyEA9Y4DgWzqiNxuRZy/9pMdCI1Bp7w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=mcaeb9n3; arc=none smtp.client-ip=209.85.216.47
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1786888117; c=relaxed/simple;
+	bh=7w/B1xjAdx/UC3LU3fU7GioiGC1vTo7lgWHD3wg9EUI=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
+	 In-Reply-To:To:Cc; b=m2VJtxouMgLkqqGFNFpB083iOJ41p+oDlCb1CS3Baay3wd/FBTX8YhuJMiTXQ7y5pZEFipYyhEg9UsY7WmmST72FZ3oDSuypZDFhqklwUY+WlUGq1hy/EEK1PakeNBxx9XCwiKvBXP834oSQBgIl8+EejhXqhJ8jDiluVMrDhKI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=F3k18j1/; arc=none smtp.client-ip=10.30.226.201
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="mcaeb9n3"
-Received: by mail-pj1-f47.google.com with SMTP id 98e67ed59e1d1-382ef647e20so2362234a91.1
-        for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 06:33:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786887195; x=1787491995; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=g3FdfDbvToHSgtTrj8YFlW83QqqTfihaw6vnLz7PZc8=;
-        b=mcaeb9n3+xo2MEk+eCnuoBR1gdDiPi8BQdDPwhWLePJAdiAJ+LWgQf3FBhP5Denitw
-         CSeU0xcuC9wreGQj8kkC0htSDNxW9pdJfpOgcVYSyiacuLSmzEOmGFIbg/PoizlXEUTF
-         gUQj7K435ko+STLV+bGVBTKWGhADQERyAJh04R1hGgjsdhjDBa+fAhw2VPnxBS9dDT4G
-         CuxL46xSXnINPCNMNpmzQvJ+BTqlmiU2Cm+kDSCv3cuZQongkdLgmcrXLX+baabBhe9W
-         X7BnJHCGu/co789GG39Oi19Et9kzmEEBwLVWDz9nJdz+ilwomWxxNNKSqtls9gsIxQHl
-         xdAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786887195; x=1787491995;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=g3FdfDbvToHSgtTrj8YFlW83QqqTfihaw6vnLz7PZc8=;
-        b=UYXQteuBXZ+RhT01Qg+xAQ5oQdugIXI44HaXiHGgExYv/kPbo1VVILYUFtMvcJPpGw
-         XC8/veDvKED7UqL50R11gSkQSM2s5lJxBlknlqMhUfxLJrouyNY/aqPqoAan2alAnown
-         5P5AhXW+rYrU72QzH1mdn34JanzKjtnk5fiYSL2nETBCA1zx8MsZFFY8eKsnDoKJpaOH
-         7ezhVL7YBeN5TTS9grXRfC2fd1WIQWSErG4P9/oJ8kiMNNBc07sBSNFqAqVYTZwcD71W
-         ijxAxBgJNrKIhGhyh00OPf7jgOeNmHTa21jwUblfOyxTymUqs4NuvxKYmqxKSpCUwYJq
-         ERTw==
-X-Forwarded-Encrypted: i=1; AHgh+RqnoFLMV9FA74MbbnOdrTkwlX5LYoOzBsFvx8rbBJTMoZcTmTdX7qiDSvE0SmLtywkz4oRxp2+A+BxT+74p@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw2bSk4VAVoVmFV4xLUpd02wtib42Iq3t7LCsXk+zB1HRfbx6P4
-	G5rBxymWNUAVjKWIhcilmhHzJdPORdeKg+Wl7F4DC4hvUsOd7G9tdDN5
-X-Gm-Gg: AR+sD1148h3cEMW7lPvgM1ksfLDtuLlNigamOX4Bl66V+rm6g3VqSOhQAC59P2xftU4
-	yAe+b75UFxF54zK7rtHey/VcOYaJB4CmwFlwEYnJGOny+Nfq/3PSMNc/yes33fbToW5vnkbkUW/
-	RbxvGSzX7X9alunLdKxQT7lx/F5FbpvMtYqN5jtAnqJj21zMCgX3b94CEZGZGPLpiXn6Zh80RDG
-	jWj9JNspAR6VmfPnlRCDyd3txbIzGCNKEn/ZPDIxshv+IkF1kVLLDCsm7UgqAyYIml0HYc1LArK
-	EwRjwz/t60VwbeexEBj9zoU3iibIrga8JfeUKoun3QvsLGHSaVuDWRm7UKAYZBdLOfxBNWFj2mm
-	dyVj663WdbvcmKRNvDnhAJfTIcWSX3dGozhocNTZeQ+LSCOHqUlIxfFzBu2z3J/oFQpw1BWoyGl
-	EYj0Gk/ydgXKmcWzqva4p/f3lljCXFkOWNnVOtAHE6FR6hjE5Vn4S+pqHY3HkZSJVkzxxEUTYq7
-	lJONChyUHQ0
-X-Received: by 2002:a17:90b:53cf:b0:381:1c96:829b with SMTP id 98e67ed59e1d1-3933bd204d0mr20550705a91.3.1786887194858;
-        Sun, 16 Aug 2026 06:33:14 -0700 (PDT)
-Received: from localhost.localdomain ([157.51.221.131])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-320ea804233sm23599064eec.26.2026.08.16.06.33.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 16 Aug 2026 06:33:14 -0700 (PDT)
-From: Sreeshankar K <sreeshankar0910@gmail.com>
-To: robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	andersson@kernel.org,
-	konradybcio@kernel.org,
-	tglx@kernel.org
-Cc: lpieralisi@kernel.org,
-	robimarko@gmail.com,
-	linux@gurudas.dev,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	Sreeshankar K <sreeshankar0910@gmail.com>
-Subject: [PATCH 5/5] dt-bindings: interrupt-controller: qcom,pdc: Document SM7250 PDC
-Date: Sun, 16 Aug 2026 13:32:31 +0000
-Message-ID: <20260816133231.10875-6-sreeshankar0910@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260816133231.10875-1-sreeshankar0910@gmail.com>
-References: <20260816133231.10875-1-sreeshankar0910@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="F3k18j1/"
+Received: by smtp.kernel.org (Postfix) with ESMTPS id B16F1C2BCF7;
+	Sun, 16 Aug 2026 13:48:36 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+	s=k20201202; t=1786888116;
+	bh=7w/B1xjAdx/UC3LU3fU7GioiGC1vTo7lgWHD3wg9EUI=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+	b=F3k18j1/IjWZwqC1HZUCN8G20nhzwtAw3hAZqO2D/dBoaDeOOnAC4wHxbotrOJj88
+	 GANSzK4ZneyLqB4YsHuQgRzN0WVCZzJnLRsYATFCDmCpKyZx4QpwNkLA3a0zm1kniY
+	 R2yUfqz4g2YhMD+jxpw9XpfQbnI4hSsN6NLjkhtaRJ0bRwK5Jiq7BfEP2yBOAE4/Io
+	 /DzbNEqDPZGqeJpk54YKetSWjFgMGLdRWYxjXVvRXLptqJyAIdpujLcMZOfjDI4z43
+	 GVHPGmUnk3wObs8ARA9+c8/dmeHKW+qsbxlf9mRVSEOFuYm0xYgrs3wL9icLNF3Uia
+	 DrtlPn2eh0N9w==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org (localhost.localdomain [127.0.0.1])
+	by smtp.lore.kernel.org (Postfix) with ESMTP id 8867EC5B572;
+	Sun, 16 Aug 2026 13:48:36 +0000 (UTC)
+From: Muzaffer Kadir via B4 Relay <devnull+muzafferkadir.mainlining.org@kernel.org>
+Date: Sun, 16 Aug 2026 16:48:30 +0300
+Subject: [PATCH 1/2] dt-bindings: pinctrl: qcom: Add MSM8952 pinctrl
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260816-msm8952-pinctrl-v1-1-a7272bcd2187@mainlining.org>
+References: <20260816-msm8952-pinctrl-v1-0-a7272bcd2187@mainlining.org>
+In-Reply-To: <20260816-msm8952-pinctrl-v1-0-a7272bcd2187@mainlining.org>
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Muzaffer Kadir <muzafferkadir@mainlining.org>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1786888114; l=6507;
+ i=muzafferkadir@mainlining.org; s=20260816; h=from:subject:message-id;
+ bh=2qm3ODzfSZtqD8kFUh1x1Z7la0BunukuZdtiPjANce8=;
+ b=OipONPjKwh8PZYcu/eyeITFBOclj8j8YR/ri8Hd9yeKJ5YQ6hM8j3PycfWKRYC5ncwtDj7HYB
+ EshRWZ3UVjzAKMGIzVMkS2vCkJgbD0h+idvRTQXT/ysImKl/SQ5VgPR
+X-Developer-Key: i=muzafferkadir@mainlining.org; a=ed25519;
+ pk=4zkv4suQ3cYcO4Z7CrV8JSSjEGLBGepUtvQCFjgnYIU=
+X-Endpoint-Received: by B4 Relay for muzafferkadir@mainlining.org/20260816
+ with auth_id=954
+X-Original-From: Muzaffer Kadir <muzafferkadir@mainlining.org>
+Reply-To: muzafferkadir@mainlining.org
 
-Document the PDC block on the SM7250 SoC.
+From: Muzaffer Kadir <muzafferkadir@mainlining.org>
 
-Signed-off-by: Sreeshankar K <sreeshankar0910@gmail.com>
+Add device tree bindings documentation for Qualcomm MSM8952
+pinctrl driver.
+
+Signed-off-by: Muzaffer Kadir <muzafferkadir@mainlining.org>
 ---
- .../devicetree/bindings/interrupt-controller/qcom,pdc.yaml       | 1 +
- 1 file changed, 1 insertion(+)
+ .../bindings/pinctrl/qcom,msm8952-pinctrl.yaml     | 155 +++++++++++++++++++++
+ 1 file changed, 155 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/interrupt-controller/qcom,pdc.yaml b/Documentation/devicetree/bindings/interrupt-controller/qcom,pdc.yaml
-index 8162a49d4..c30b88589 100644
---- a/Documentation/devicetree/bindings/interrupt-controller/qcom,pdc.yaml
-+++ b/Documentation/devicetree/bindings/interrupt-controller/qcom,pdc.yaml
-@@ -50,6 +50,7 @@ properties:
-           - qcom,sdx75-pdc
-           - qcom,sm4450-pdc
-           - qcom,sm6350-pdc
-+          - qcom,sm7250-pdc
-           - qcom,sm8150-pdc
-           - qcom,sm8250-pdc
-           - qcom,sm8350-pdc
+diff --git a/Documentation/devicetree/bindings/pinctrl/qcom,msm8952-pinctrl.yaml b/Documentation/devicetree/bindings/pinctrl/qcom,msm8952-pinctrl.yaml
+new file mode 100644
+index 000000000000..c4ba5169fbaf
+--- /dev/null
++++ b/Documentation/devicetree/bindings/pinctrl/qcom,msm8952-pinctrl.yaml
+@@ -0,0 +1,155 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/pinctrl/qcom,msm8952-pinctrl.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Qualcomm MSM8952 TLMM pin controller
++
++maintainers:
++  - Muzaffer Kadir <muzafferkadir@mainlining.org>
++
++description:
++  Top Level Mode Multiplexer pin controller in Qualcomm MSM8952 SoC.
++
++properties:
++  compatible:
++    const: qcom,msm8952-pinctrl
++
++  reg:
++    maxItems: 1
++
++  interrupts:
++    maxItems: 1
++
++  gpio-reserved-ranges:
++    minItems: 1
++    maxItems: 61
++
++  gpio-line-names:
++    maxItems: 134
++
++patternProperties:
++  "-state$":
++    oneOf:
++      - $ref: "#/$defs/qcom-msm8952-tlmm-state"
++      - patternProperties:
++          "-pins$":
++            $ref: "#/$defs/qcom-msm8952-tlmm-state"
++        additionalProperties: false
++
++$defs:
++  qcom-msm8952-tlmm-state:
++    type: object
++    description:
++      Pinctrl node's client devices use subnodes for desired pin configuration.
++      Client device subnodes use below standard properties.
++    $ref: qcom,tlmm-common.yaml#/$defs/qcom-tlmm-state
++    unevaluatedProperties: false
++
++    properties:
++      pins:
++        description:
++          List of gpio pins affected by the properties specified in this
++          subnode.
++        items:
++          oneOf:
++            - pattern: "^gpio([0-9]|[1-9][0-9]|1[0-2][0-9]|13[0-3])$"
++            - enum: [ qdsd_clk, qdsd_cmd, qdsd_data0, qdsd_data1, qdsd_data2,
++                      qdsd_data3, sdc1_clk, sdc1_cmd, sdc1_data, sdc1_rclk,
++                      sdc2_clk, sdc2_cmd, sdc2_data ]
++        minItems: 1
++        maxItems: 36
++
++      function:
++        description:
++          Specify the alternative function to be configured for the specified
++          pins.
++
++        enum: [ gpio, blsp_uart1, mipi_dsi0, blsp_spi1, smb_int,
++                adsp_ext, blsp_i2c1, prng_rosc, qdss_cti_trig_out_b0, rcm_marker2,
++                qdss_cti_trig_out_a1, blsp_spi2, blsp_uart2, ldo_update, qdss_tracedata_b,
++                pbs1, pwr_modem_enabled_b, blsp_i2c3, gcc_gp2_clk_b, atest_combodac_to_gpio_native,
++                ldo_en, blsp_i2c2, gcc_gp1_clk_b, atest_gpsadc_dtest0_native, blsp_spi3,
++                blsp_uart3, sec_mi2s, pbs0, gcc_gp3_clk_b, blsp_spi4,
++                blsp_uart4, pbs2, pwr_nav_enabled_b, codec_mad, pwr_crypto_enabled_b,
++                blsp_i2c4, nfc_disable, blsp_spi5, blsp_uart5, qdss_traceclk_a,
++                atest_bbrx1, nfc_irq, qdss_tracectl_b, qdss_cti_trig_in_b0, blsp_i2c6,
++                qdss_traceclk_b, atest_wlan0, m_voc, qdss_cti_trig_in_a0, atest_bbrx0,
++                blsp_i2c5, qdss_tracectl_a, atest_gpsadc_dtest1_native, qdss_tracedata_a, blsp_spi6,
++                blsp_uart6, atest_wlan1, mdp_vsync, pri_mi2s_mclk_a, sec_mi2s_mclk_a,
++                cam_mclk, cci_i2c, pwr_modem_enabled_a, flash_strobe, cci_timer0,
++                cci_timer1, cam1_standby, pwr_nav_enabled_a, cam1_rst, pwr_crypto_enabled_a,
++                cam2_standby, cam2_rst, webcam_standby, cci_async, webcam_rst,
++                rcm_marker1, sd_write, qdss_cti_trig_out_a0, accel_int, gcc_gp1_clk_a,
++                alsp_int, gcc_gp2_clk_a, mag_int, gcc_gp3_clk_a, gyro_int,
++                pressure_int, fp_gpio, blsp6_spi, fp_int, qdss_cti_trig_in_b1,
++                uim_batt, qdss_cti_trig_out_b1, uim1_data, uim1_clk, uim1_reset,
++                uim1_present, uim2_data, uim2_clk, uim2_reset, uim2_present,
++                uim3_data, usb_fs, uim3_clk, uim3_reset, uim3_present,
++                us_euro, atest_char3, dbg_out, bimc_dte0, ts_resout,
++                ts_sample, sec_mi2s_mclk_b, pri_mi2s, sdcard_det, atest_char1,
++                ebi_cdc, audio_reset, atest_char0, cdc_pdm0, pri_mi2s_mclk_b,
++                lpass_slimbus, lpass_slimbus0, lpass_slimbus1, codec_int1,
++                codec_int2, wcss_bt, atest_char2, ebi_ch0, wcss_wlan2,
++                wcss_wlan1, wcss_wlan0, wcss_wlan, wcss_fm, ext_lpass,
++                key_volp, key_snapshot, key_focus, gcc_tlmm, key_home,
++                dmic0_clk, dmic0_data, backlight_en, qdss_cti_trig_in_a1, lcd_en,
++                blsp_spi7, blsp_uart7, pri_mi2s_ws, usbc_irq, wsa_io,
++                blsp_i2c7, uim3_ldo, blsp_spi8, blsp_uart8, wsa_irq,
++                blsp_i2c8, gcc_plltest, nav_pps_in_a, pa_indicator,
++                nav_pps_in_b, nav_pps, modem_tsync, nav_tsync, ssbi_wtr1,
++                gsm1_tx, gsm0_tx, atest_char, atest_tsens, bimc_dte1 ]
++
++    required:
++      - pins
++
++allOf:
++  - $ref: /schemas/pinctrl/qcom,tlmm-common.yaml#
++
++required:
++  - compatible
++  - reg
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/interrupt-controller/arm-gic.h>
++
++    msmgpio: pinctrl@1000000 {
++        compatible = "qcom,msm8952-pinctrl";
++        reg = <0x01000000 0x300000>;
++        interrupts = <GIC_SPI 208 IRQ_TYPE_LEVEL_HIGH>;
++        gpio-controller;
++        gpio-ranges = <&msmgpio 0 0 134>;
++        #gpio-cells = <2>;
++        interrupt-controller;
++        #interrupt-cells = <2>;
++
++        blsp1-uart2-sleep-state {
++            pins = "gpio4", "gpio5";
++            function = "gpio";
++
++            drive-strength = <2>;
++            bias-pull-down;
++        };
++
++        spi1-default-state {
++            spi-pins {
++                pins = "gpio0", "gpio1", "gpio3";
++                function = "blsp_spi1";
++
++                drive-strength = <12>;
++                bias-disable;
++            };
++
++            cs-pins {
++                pins = "gpio2";
++                function = "blsp_spi1";
++
++                drive-strength = <2>;
++                bias-disable;
++            };
++        };
++    };
+
 -- 
-2.43.0
+2.54.0
+
 
