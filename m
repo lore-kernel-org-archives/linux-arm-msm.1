@@ -1,336 +1,215 @@
-Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+Received: from mail-vs1-f51.google.com (mail-vs1-f51.google.com [209.85.217.51])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A0073D9DB4
-	for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 08:28:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.182
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786868909; cv=none; b=XIMFLBYR23sXVvIm9fCc87oBoKo0ju03fE2nYLcqG+VGaL+9usjuwE4b8Gzrwzp+pOZtTIUPYZ9T83/mt7kyO2sO95t3Tl3JG81f7IMYwifu2aZn8hcOBjWlraQH1UbDSHNrS0fyshFawdBBdxtJxnXrUgGsCjgBIB/Wp5pOkqI=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786868909; c=relaxed/simple;
-	bh=7eoeAnLleGJDi9iZrpFJSVDSWOmv6UZ9H1LLn/MNAJk=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=QlXqqNa8CYFU7+YZe/9apTM/8jz1d8hT8bIZvTjtM52Rp1RpGmRbFBREU1kwdwafIFFOBWfT/py6R85zsLNultvRIe3JoDw0ez0s2VV2+1RuH6Gv+JKp1KVlS+uXgzCfyxQagev0ttW3RmPMoEy3dEyQjXrhTvXkw3BaPWN9o9A=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=di4toUZJ; arc=none smtp.client-ip=209.85.214.182
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 46CDB3403FF
+	for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 08:59:27 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.217.51
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786870768; cv=pass; b=uBilxDpG1GbI3LK5ffY6wL5hks7iUXAPq+a2Ee/rmp3ZH2wOS2sWWfJaJ+jkZxctgEcUAPOJ/Yh3NkFk1WNnG8N9FEZbbqzMZfVplB0VB9Yefl6SxmPVIjtq1YN7vs4oN2MOTTf+b2+MpO4gNJm9LVRoXQ92YmT345rOvSUwoZQ=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786870768; c=relaxed/simple;
+	bh=MrRkNVXSVcfDkm0x1IqVS/OiN0O0+RNhnY8dYOfvfZ8=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=QF2L2ATX24/9UPEMf5D8QtYklOJfC1+PY4vAt8UTOYeHTkEe+VdNw7bHm4UmXGGSZVAE/NGH6inOxNWiEFgfYfNtr2E0/aP0axf1SiYU/OT8vrgi9Rzt0VhIrkkp+9UQFtnvJguSJi4+xsqP5KZTJu8O2SMbF29SEjtinDIq5mU=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Ik8cqEDm; arc=pass smtp.client-ip=209.85.217.51
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="di4toUZJ"
-Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-2ceaf8a1265so36306545ad.2
-        for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 01:28:27 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Ik8cqEDm"
+Received: by mail-vs1-f51.google.com with SMTP id ada2fe7eead31-74ae4c75b20so1270506137.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 01:59:27 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1786870766; cv=none;
+        d=google.com; s=arc-20260327;
+        b=rz47DLupv/387yimyT2bVnZGK6+qpU8ZIAfVtlDDA+2hMuUVXo50lk05zY0vwzgVu4
+         BQnCe2pqHc/FQtiyvFCV9FT3TDla6DRgId1yR46VGqMuOp/9PNGoTjt6pck32BOoso5B
+         Gk+E+ealbQ0tF4hlhvy++8Jlf1U2M8XD0oGMtb/Gsdca80SIcOc55h3uefFF/2kjwSXi
+         QM3rj/ycO1HOnyMYd8rRyIKeYWRKNhknMTsMZDub3xiYhE6VJejirdKOO0ql87BLPHf3
+         L7SejfiXDpeiJLkIlqClB1EHa+8u0Mb6WildVyw/pR19gNdud250TI5H+p/1QB5loZfB
+         ywcA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=1LmQ4nt2XjP2OgxPqtP/sT+nzVt0sYBaB8O2AA9vv9A=;
+        fh=Zf22DZjgfwAmSfVWT4OsD/2DdjaOw5nYo/FE0l853MM=;
+        b=BCkbG+zLossPF8TrKD4L6Rvt4okYKemysMAsL5ElcXoSUIq3HnOHFGf9wHDSHRsoNK
+         wEQuBBXFuPjSWjricYT3nuvrAINWiXi9jbEO+/zqHq1GRaxe4a06XDUZ8onyk9Pw4UNQ
+         vCZA62a2ilywA5DGrIWT6tZegF8Hsmkfk5qZFCEE0SoJINWXifOXv9h8md8vE0yWfayF
+         xkarfHXYntP5n3ZYAi8xfqokGkRHe7j8Zt1MxTdAX1nrjt0Cr9j0oG77LRH53QMEwDX+
+         +Xi4kUSFMu0fE2eU+MQPPuKzDbir3R3U0mdc8wpz6NpeosFXpyyxNxS3qlM0LR4rAhhO
+         /IuA==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1786868906; x=1787473706; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=2yMpTq5unBuhd4yogW49pPfsKAXAauMNz+Dz1FC3v6c=;
-        b=di4toUZJbG6JPkBj5dd+d33vFCPSlw7m9TNnRmgd0tv0LZWqVUTQ7oqq93ZHBHY9Xe
-         3/h955gbKHErIhAzq6z+v+gZwLrh34oM4jDtKEarwIeq0lkZwNCqgb8ohRKRsIfcbpxo
-         i8PSSIZi6n9V+Je9YxQM4SaJBL+YZSI+uwnBdeMASieT+o8PmdSpUF3ociivlvm2fjlI
-         qT6Zk8uuP8vY/mhQpMbp09C4GsnXDLDyUfLQwc1vsjyQqS5dbTnqkPxdnT+vfH2yYnRm
-         tRJSR7+TA2urBOpj8vy/UdJpwop3rIYmV4VrjT8LbDDhC6EJNE8GYkCdgK6+dXmm6G5a
-         M9wg==
+        d=gmail.com; s=20251104; t=1786870766; x=1787475566; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=1LmQ4nt2XjP2OgxPqtP/sT+nzVt0sYBaB8O2AA9vv9A=;
+        b=Ik8cqEDmdgUqfjohdx0q/g7YAf3AtzikgalaiZ4HZS/EenYixYrNUxzMe2Q6mqxgg7
+         2+vugnwKOvEXjpOLv0l4Pwl7pP2aignd/Xl+xO6XnHEt6Ozi11tqyq2TiKNYCE5pI2hK
+         CNqcptFe6hsCoDf9E0FiO3YXoL3iDN3smR6ngeTHiudR6TpGXkMaB5ZX2CwIHbFnn+Oj
+         mfgLv/kOpN0VlX1A1Vbcm/P8wjpw8TOqP4P8C1CPkyAGUcCuNVx2+SWQkQpYLggUU7DF
+         LkC/Elzv7NC0p01rVwIpTcnHRgTF78t8PYYVO2hNBnu8JuD6aMGucmx13UBq+2wY4B61
+         1I4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786868906; x=1787473706;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2yMpTq5unBuhd4yogW49pPfsKAXAauMNz+Dz1FC3v6c=;
-        b=DFgoG3eYX2+kbIUNKTeE9DX/eF8E4VQgiqPug/SbEMnlYhLF72cZlpXC27qtkZx3nO
-         kHMOhpoM3EvQhS/sR0vMhBKBH3moAMTDm1JWUfF68xKTTXiPtnTL5q6up0bZC/7DoNk/
-         YI0QMIjWC0qBZibTolFQUUh2X7luRXeiu2doAN/gokE8WVhQJb2ilN+6egKvHiLqxZtU
-         ZciwcvOIMPSXKa6jxEA4XXpa9kpdQIrATb65FjNHFV/+MeTGVoROmx5Dd5quNnXqwN+2
-         i0BU8iBo3gqvaUap/5bAVe5DnCrIUJd3U5D+qeZfHdsY949iqQovY+RGQPjBY57KZyJf
-         agTQ==
-X-Forwarded-Encrypted: i=1; AHgh+RrC+VgPfCLhgMqOzbA9w8BP3ZwLAcsk0PXTRWWt/va2J+dIlEuW+lAlS5/NLhKcp6DWzijn+BxAMhYwRvCY@vger.kernel.org
-X-Gm-Message-State: AOJu0YzPsvV7mfGIwz25kHmiEhc6ZX2IhaDaX0o2gyNYcAU3yXhban/m
-	yhpdNxFfCB/7oo3Kwwj+QmLA3GNnt5TBDBgeZ74qSq1DuKRcC78djS7S
-X-Gm-Gg: AR+sD10g5+/SAZvIDygJLCOz339LMAuSkwyU8UUNuxv2oWhzb6lIHnOwUQKU5GgdLNF
-	0zC86YQqqdMAE+RYIS4F4U7ChuEEO9rUgEPbXZR/XSQHsjtVLv/VTYKw6yZme2VzffQIH9U/xxl
-	v1L+mc7K4mVLt7EnohfojxkAg8z+FPM7H7aVPRGFM5UNWB+FhY2CzaDmbXvl3s3pFNLZgGGRstw
-	aD+rr6EHWBnfzylWhFWSWIP2gPS1Rv1qmw1H46AS7hTOI3ewekU6oc7zziMvBBv3JyqT1Q/G5z2
-	HUx49UV+Lk+6t3KAK0WoAmJGGQGXSHOx58xCYcTTF/prDBmgngODe7IqB9eiIZT6qj4f9SsI5cD
-	LrO7dg7w2ohoTovj3d8DufhCegMT//2S3aiVFuHPKP3hXSXHmrk/R6E10WqLqH1uFhOaW+zRNv1
-	CgE3QQVXmQSGpLgluf4DZXEtqPMwzD4nmUpyVzioJJz+Oc/bohKa2qy3Kgm8YhsWRJ1CT8VsvhJ
-	eGP1ftHpoalvSp079QCXzE=
-X-Received: by 2002:a05:6a20:a106:b0:3b4:61f:1fec with SMTP id adf61e73a8af0-3cc71ac37cbmr18576509637.2.1786868906462;
-        Sun, 16 Aug 2026 01:28:26 -0700 (PDT)
-Received: from localhost.localdomain ([152.58.201.186])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1413889bca5sm39510388c88.12.2026.08.16.01.28.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 16 Aug 2026 01:28:25 -0700 (PDT)
-From: Sreeshankar K <sreeshankar0910@gmail.com>
-To: andersson@kernel.org,
-	mturquette@baylibre.com,
-	sboyd@kernel.org,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org
-Cc: bmasney@redhat.com,
-	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Sreeshankar K <sreeshankar0910@gmail.com>
-Subject: [PATCH 2/2] dt-bindings: clock: Add GCC clock bindings for SM7250
-Date: Sun, 16 Aug 2026 08:28:01 +0000
-Message-ID: <20260816082801.5773-3-sreeshankar0910@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260816082801.5773-1-sreeshankar0910@gmail.com>
-References: <20260816082801.5773-1-sreeshankar0910@gmail.com>
+        d=1e100.net; s=20251104; t=1786870766; x=1787475566;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1LmQ4nt2XjP2OgxPqtP/sT+nzVt0sYBaB8O2AA9vv9A=;
+        b=tNd7dZoa0Dfk0Sjyixx/+q8jrVj1ibS1n9KXDfbhOeXHTiSgdlJ/Hlkun9UQxSOWjQ
+         XKjKc9/6PXzBXHx8gEomOKywuXrKq0dsTcLflKcMTxz+qyD1xFv3mc+jvHKf7Y6EQ+rd
+         Dn8yUxcE09KgwmSKNYO/7fCd5b9VyhICQphE5Two+RhDASx5xXQdNzA2wdGB6dJD+o8c
+         pOCkA7ItPEerBC1/+OqCvwnd1jnCDuSkVLDSVpAN+QAi+iaol/E1d6y7sOeh1xz7WQUo
+         rCManmIV30haiA5SC6/kqXObNe9V8f4V2i2pN934T6cNkfSdFmWFWqNFLcrySQgucjUw
+         trFg==
+X-Forwarded-Encrypted: i=1; AHgh+RoKIgvWfVQH6R5Qo5Qw9fBYmHtMO/CMLGeLYaoxlDLndHJQ/wnwcHSGRtnZeZEiY2heGSjSqsv26F4XqSl4@vger.kernel.org
+X-Gm-Message-State: AOJu0Yxij3LjRVl34cQLwic1cFA3YMm78/ZxEmuxVsU77YEFYA6MbM8f
+	nnFG8Do0LfG+955w3UFrRqJMntHiaQoj4wc87+AprecKiK45ypBYXgTMuDpUEngwwI18cMLQGUR
+	6R5Qr4RDd5rxb7/JhO9XLJWjRqNw2mgHLIfzGoJ4=
+X-Gm-Gg: AR+sD10O/JAVBi3KmnwzrZVLvkRftoVtZSXdsx4hew011Hxynmaw9ZpT+LSEaJlmFTk
+	u/lZeRRaur4r0n6wLpYhGaWNxHK7GG3PHO4bQfni574161I489N/Jt6era5tQrV/Yp3KnDhTHRK
+	o8ZhHinjTssXXJI9VYpy6tMMhqy9QVZwzR2KS38wPqrnZbBnEq1PiHMMy9mfWw4DttRIgdn4HrZ
+	CleY1t51aSjRyjOK+ZuDhiOTEvdTxBjOE3WwnRFpEgxeJ40i6k/HC5/2Lw8H7BES0bj3MQTkq88
+	mk44A23uUsxc+oAzkDIVAbN2KqVhCuK58013UaJ3lkLB0HG9CrHzvE4A/5NnLLBd+PHsR92TX9M
+	=
+X-Received: by 2002:a05:6102:3943:b0:760:330:312f with SMTP id
+ ada2fe7eead31-76dd3bc43d6mr2139074137.15.1786870765925; Sun, 16 Aug 2026
+ 01:59:25 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260630042229.277799-1-mitltlatltl@gmail.com>
+ <35f13ab2-cdba-426f-bf4b-36f53ce1d4bb@oss.qualcomm.com> <CAH2e8h7p-i3epbxD6Ks-ru2OP+qY6nYXA+Fm+Luexo3cZ2Eucw@mail.gmail.com>
+ <cbfb770e-0e27-4254-a3c0-6011e8eb37ec@oss.qualcomm.com> <CAH2e8h4ABRuOTe8Qu-iPEk-i6r-Le3bzmwFSEG_c7YmBu1LjCw@mail.gmail.com>
+ <250311af-0860-4a76-9799-c01608b87293@oss.qualcomm.com> <CAH2e8h65xgLnqusTMw1QnAMSmf__YK0PsWY-w0D=32US1d9L2A@mail.gmail.com>
+ <75b423b3-d721-4bff-8d42-603cb5679364@oss.qualcomm.com>
+In-Reply-To: <75b423b3-d721-4bff-8d42-603cb5679364@oss.qualcomm.com>
+From: Pengyu Luo <mitltlatltl@gmail.com>
+Date: Sun, 16 Aug 2026 16:57:36 +0800
+X-Gm-Features: AcwNN1X3_AoqGZg6lT9YwRS-zp_xWQ_uWAXtkWj--hAmpkIidjFcYHLYoqMRULM
+Message-ID: <CAH2e8h60opbaRGjZ_GhY=vboHEBpYUAEcO4SQ0-oTxoRXG3j8w@mail.gmail.com>
+Subject: Re: [PATCH] arm64: dts: qcom: sc8280xp-huawei-gaokun3: Add dsi panel
+ DT node
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Add device tree bindings for global clock controller on SM7250 SoC.
+On Wed, Jul 1, 2026 at 7:45=E2=80=AFPM Konrad Dybcio
+<konrad.dybcio@oss.qualcomm.com> wrote:
+>
+> On 6/30/26 12:41 PM, Pengyu Luo wrote:
+> > On Tue, Jun 30, 2026 at 6:34=E2=80=AFPM Konrad Dybcio
+> > <konrad.dybcio@oss.qualcomm.com> wrote:
+> >>
+> >> On 6/30/26 12:30 PM, Pengyu Luo wrote:
+> >>> On Tue, Jun 30, 2026 at 6:29=E2=80=AFPM Konrad Dybcio
+> >>> <konrad.dybcio@oss.qualcomm.com> wrote:
+> >>>>
+> >>>> On 6/30/26 11:28 AM, Pengyu Luo wrote:
+> >>>>> On Tue, Jun 30, 2026 at 5:18=E2=80=AFPM Konrad Dybcio
+> >>>>> <konrad.dybcio@oss.qualcomm.com> wrote:
+> >>>>>>
+> >>>>>> On 6/30/26 6:22 AM, Pengyu Luo wrote:
+> >>>>>>> DSI panel driver have been added for a while, so add the DT node =
+to
+> >>>>>>> enable it. vdd{a,s}-supply for dsi, dsi_phy are blank since the D=
+SDT
+> >>>>>>> describes the wrong, no impact after manual disabling these wrong
+> >>>>>>> supplies.
+> >>>>>>>
+> >>>>>>> Signed-off-by: Pengyu Luo <mitltlatltl@gmail.com>
+> >>>>>>> ---
+> >>>>>>
+> >>>>>> [...]
+> >>>>>>
+> >>>>>>> +&mdss0_dsi0 {
+> >>>>>>> +     /* real vdda is unknown */
+> >>>>>>> +
+> >>>>>>
+> >>>>>> L3B: DSI core 1.2 V (both?)
+> >>>>>> L6B: DSI0/1 PLL and core 0.9 V
+> >>>>>>
+> >>>>>
+> >>>>> Yes, that is what I saw in the DSDT, however, I can disable them
+> >>>>> safely (hack the regulator driver to add a sysfs to handle these
+> >>>>> regulators), the panel works well.
+> >>>>
+> >>>> L3B additionally powers CSIPHY2/3, EDP0/1, REFGEN (probably why it
+> >>>> ends up being on), UFSPHY and USB1_PHY
+> >>>>
+> >>>> L6B additionally powers the same components, minus refgen and USB
+> >>>>
+> >>>
+> >>> No, I confirmed they are totally disabled, since there is a way to ch=
+eck it now.
+> >>> https://lore.kernel.org/linux-arm-msm/20260420-read-rpmh-v3-v4-0-70c1=
+52e6c958@oss.qualcomm.com/
+> >>
+> >> This presents you with the status of the votes casted by HLOS, not
+> >> the actual hardware state
+> >>
+> >
+> > If so, non-HLOS will vote on some critical regulators to keep them on,
+> > IIRC, once I disabled L9D, system reseted immediately.
+>
+> NHLOS will generally ensure that the hardware that it needs is
+> powered. This does not extend to hardware that *you* may want to
+> access in Linux (or which was left online by UEFI), which I suspect
+> was the case here
+>
+> >> To get the latter, you'd have to dump the SPMI registers
+> >>
+> > I will appreciate it if you provide more information.
+>
+> Take a look at drivers/regulator/qcom_spmi-regulator.c, you can get
+> the actual live value of the enable register and the voltage selector
+> for each regulator
+>
 
-Signed-off-by: Sreeshankar K <sreeshankar0910@gmail.com>
----
- .../bindings/clock/qcom,gcc-sm7250.yaml       |  60 +++++++
- include/dt-bindings/clock/qcom,gcc-sm7250.h   | 163 ++++++++++++++++++
- 2 files changed, 223 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/clock/qcom,gcc-sm7250.yaml
- create mode 100644 include/dt-bindings/clock/qcom,gcc-sm7250.h
+Hi, Konrad. The real case seems to be as you said. After disabling l3b
+and l6b via rpmh,
 
-diff --git a/Documentation/devicetree/bindings/clock/qcom,gcc-sm7250.yaml b/Documentation/devicetree/bindings/clock/qcom,gcc-sm7250.yaml
-new file mode 100644
-index 000000000..822df7dc1
---- /dev/null
-+++ b/Documentation/devicetree/bindings/clock/qcom,gcc-sm7250.yaml
-@@ -0,0 +1,60 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/clock/qcom,gcc-sm7250.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Qualcomm Global Clock & Reset Controller on SM7250
-+
-+maintainers:
-+  - Bjorn Andersson <andersson@kernel.org>
-+  - Sreeshankar K <sreeshankar0910@gmail.com>
-+
-+description: |
-+  Qualcomm global clock control module provides the clocks, resets and power
-+  domains on SM7250.
-+
-+  See also: include/dt-bindings/clock/qcom,gcc-sm7250.h
-+
-+properties:
-+  compatible:
-+    const: qcom,gcc-sm7250
-+
-+  clocks:
-+    items:
-+      - description: Board XO source
-+      - description: Board active XO source
-+      - description: Sleep clock source
-+
-+  clock-names:
-+    items:
-+      - const: bi_tcxo
-+      - const: bi_tcxo_ao
-+      - const: sleep_clk
-+
-+required:
-+  - compatible
-+  - clocks
-+  - clock-names
-+  - '#power-domain-cells'
-+
-+allOf:
-+  - $ref: qcom,gcc.yaml#
-+
-+unevaluatedProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/clock/qcom,rpmh.h>
-+    clock-controller@100000 {
-+      compatible = "qcom,gcc-sm7250";
-+      reg = <0x00100000 0x1f0000>;
-+      clocks = <&rpmhcc RPMH_CXO_CLK>,
-+               <&rpmhcc RPMH_CXO_CLK_A>,
-+               <&sleep_clk>;
-+      clock-names = "bi_tcxo", "bi_tcxo_ao", "sleep_clk";
-+      #clock-cells = <1>;
-+      #reset-cells = <1>;
-+      #power-domain-cells = <1>;
-+    };
-+...
-diff --git a/include/dt-bindings/clock/qcom,gcc-sm7250.h b/include/dt-bindings/clock/qcom,gcc-sm7250.h
-new file mode 100644
-index 000000000..f50a13173
---- /dev/null
-+++ b/include/dt-bindings/clock/qcom,gcc-sm7250.h
-@@ -0,0 +1,163 @@
-+/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
-+/*
-+ * Copyright (c) 2020, The Linux Foundation. All rights reserved.
-+ * Copyright (c) 2026, Sreeshankar K <sreeshankar0910@gmail.com>
-+ */
-+
-+#ifndef _DT_BINDINGS_CLK_QCOM_GCC_SM7250_H
-+#define _DT_BINDINGS_CLK_QCOM_GCC_SM7250_H
-+
-+/* GCC clocks */
-+#define GPLL0							0
-+#define GPLL0_OUT_EVEN						1
-+#define GPLL6							2
-+#define GPLL9							3
-+#define GCC_AGGRE_UFS_PHY_AXI_CLK				4
-+#define GCC_AGGRE_USB3_PRIM_AXI_CLK				5
-+#define GCC_BOOT_ROM_AHB_CLK					6
-+#define GCC_CAMERA_AHB_CLK					7
-+#define GCC_CAMERA_HF_AXI_CLK					8
-+#define GCC_CAMERA_SF_AXI_CLK					9
-+#define GCC_CAMERA_XO_CLK					10
-+#define GCC_CFG_NOC_USB3_PRIM_AXI_CLK				11
-+#define GCC_CPUSS_AHB_CLK					12
-+#define GCC_CPUSS_AHB_CLK_SRC					13
-+#define GCC_CPUSS_GNOC_CLK					14
-+#define GCC_CPUSS_RBCPR_CLK					15
-+#define GCC_DDRSS_GPU_AXI_CLK					16
-+#define GCC_DISP_GPLL0_CLK_SRC					17
-+#define GCC_DISP_AHB_CLK					18
-+#define GCC_DISP_HF_AXI_CLK					19
-+#define GCC_DISP_SF_AXI_CLK					20
-+#define GCC_DISP_XO_CLK						21
-+#define GCC_GP1_CLK						22
-+#define GCC_GP1_CLK_SRC						23
-+#define GCC_GP2_CLK						24
-+#define GCC_GP2_CLK_SRC						25
-+#define GCC_GP3_CLK						26
-+#define GCC_GP3_CLK_SRC						27
-+#define GCC_GPU_CFG_AHB_CLK					28
-+#define GCC_GPU_GPLL0_CLK_SRC					29
-+#define GCC_GPU_GPLL0_DIV_CLK_SRC				30
-+#define GCC_GPU_IREF_CLK					31
-+#define GCC_GPU_MEMNOC_GFX_CLK					32
-+#define GCC_GPU_SNOC_DVM_GFX_CLK				33
-+#define GCC_NPU_AXI_CLK						34
-+#define GCC_NPU_BWMON2_AXI_CLK					35
-+#define GCC_NPU_BWMON_AXI_CLK					36
-+#define GCC_NPU_BWMON_CFG_AHB_CLK				37
-+#define GCC_NPU_CFG_AHB_CLK					38
-+#define GCC_NPU_DMA_CLK						39
-+#define GCC_NPU_GPLL0_CLK_SRC					40
-+#define GCC_NPU_GPLL0_DIV_CLK_SRC				41
-+#define GCC_PDM2_CLK						42
-+#define GCC_PDM2_CLK_SRC					43
-+#define GCC_PDM_AHB_CLK						44
-+#define GCC_PDM_XO4_CLK						45
-+#define GCC_PRNG_AHB_CLK					46
-+#define GCC_QMIP_CAMERA_NRT_AHB_CLK				47
-+#define GCC_QMIP_CAMERA_RT_AHB_CLK				48
-+#define GCC_QMIP_DISP_AHB_CLK					49
-+#define GCC_QMIP_RT_DISP_AHB_CLK				50
-+#define GCC_QMIP_VIDEO_CVP_AHB_CLK				51
-+#define GCC_QMIP_VIDEO_VCODEC_AHB_CLK				52
-+#define GCC_QUPV3_WRAP0_CORE_2X_CLK				53
-+#define GCC_QUPV3_WRAP0_CORE_CLK				54
-+#define GCC_QUPV3_WRAP0_S0_CLK					55
-+#define GCC_QUPV3_WRAP0_S0_CLK_SRC				56
-+#define GCC_QUPV3_WRAP0_S1_CLK					57
-+#define GCC_QUPV3_WRAP0_S1_CLK_SRC				58
-+#define GCC_QUPV3_WRAP0_S2_CLK					59
-+#define GCC_QUPV3_WRAP0_S2_CLK_SRC				60
-+#define GCC_QUPV3_WRAP0_S3_CLK					61
-+#define GCC_QUPV3_WRAP0_S3_CLK_SRC				62
-+#define GCC_QUPV3_WRAP0_S4_CLK					63
-+#define GCC_QUPV3_WRAP0_S4_CLK_SRC				64
-+#define GCC_QUPV3_WRAP0_S5_CLK					65
-+#define GCC_QUPV3_WRAP0_S5_CLK_SRC				66
-+#define GCC_QUPV3_WRAP1_CORE_2X_CLK				67
-+#define GCC_QUPV3_WRAP1_CORE_CLK				68
-+#define GCC_QUPV3_WRAP1_S0_CLK					69
-+#define GCC_QUPV3_WRAP1_S0_CLK_SRC				70
-+#define GCC_QUPV3_WRAP1_S1_CLK					71
-+#define GCC_QUPV3_WRAP1_S1_CLK_SRC				72
-+#define GCC_QUPV3_WRAP1_S2_CLK					73
-+#define GCC_QUPV3_WRAP1_S2_CLK_SRC				74
-+#define GCC_QUPV3_WRAP1_S3_CLK					75
-+#define GCC_QUPV3_WRAP1_S3_CLK_SRC				76
-+#define GCC_QUPV3_WRAP1_S4_CLK					77
-+#define GCC_QUPV3_WRAP1_S4_CLK_SRC				78
-+#define GCC_QUPV3_WRAP1_S5_CLK					79
-+#define GCC_QUPV3_WRAP1_S5_CLK_SRC				80
-+#define GCC_QUPV3_WRAP_0_M_AHB_CLK				81
-+#define GCC_QUPV3_WRAP_0_S_AHB_CLK				82
-+#define GCC_QUPV3_WRAP_1_M_AHB_CLK				83
-+#define GCC_QUPV3_WRAP_1_S_AHB_CLK				84
-+#define GCC_SDCC1_AHB_CLK					85
-+#define GCC_SDCC1_APPS_CLK					86
-+#define GCC_SDCC1_APPS_CLK_SRC					87
-+#define GCC_SDCC1_ICE_CORE_CLK					88
-+#define GCC_SDCC1_ICE_CORE_CLK_SRC				89
-+#define GCC_SDCC2_AHB_CLK					90
-+#define GCC_SDCC2_APPS_CLK					91
-+#define GCC_SDCC2_APPS_CLK_SRC					92
-+#define GCC_SDCC4_AHB_CLK					93
-+#define GCC_SDCC4_APPS_CLK					94
-+#define GCC_SDCC4_APPS_CLK_SRC					95
-+#define GCC_SYS_NOC_CPUSS_AHB_CLK				96
-+#define GCC_UFS_1X_CLKREF_CLK					97
-+#define GCC_UFS_PHY_AHB_CLK					98
-+#define GCC_UFS_PHY_AXI_CLK					99
-+#define GCC_UFS_PHY_AXI_CLK_SRC					100
-+#define GCC_UFS_PHY_ICE_CORE_CLK				101
-+#define GCC_UFS_PHY_ICE_CORE_CLK_SRC				102
-+#define GCC_UFS_PHY_PHY_AUX_CLK					103
-+#define GCC_UFS_PHY_PHY_AUX_CLK_SRC				104
-+#define GCC_UFS_PHY_RX_SYMBOL_0_CLK				105
-+#define GCC_UFS_PHY_RX_SYMBOL_1_CLK				106
-+#define GCC_UFS_PHY_TX_SYMBOL_0_CLK				107
-+#define GCC_UFS_PHY_UNIPRO_CORE_CLK				108
-+#define GCC_UFS_PHY_UNIPRO_CORE_CLK_SRC				109
-+#define GCC_USB30_PRIM_MASTER_CLK				110
-+#define GCC_USB30_PRIM_MASTER_CLK_SRC				111
-+#define GCC_USB30_PRIM_MOCK_UTMI_CLK				112
-+#define GCC_USB30_PRIM_MOCK_UTMI_CLK_SRC			113
-+#define GCC_USB30_PRIM_SLEEP_CLK				114
-+#define GCC_USB3_PRIM_CLKREF_CLK				115
-+#define GCC_USB3_PRIM_PHY_AUX_CLK				116
-+#define GCC_USB3_PRIM_PHY_AUX_CLK_SRC				117
-+#define GCC_USB3_PRIM_PHY_COM_AUX_CLK				118
-+#define GCC_USB3_PRIM_PHY_PIPE_CLK				119
-+#define GCC_VIDEO_AHB_CLK					120
-+#define GCC_VIDEO_AXI_CLK					121
-+#define GCC_VIDEO_XO_CLK					122
-+
-+/* GCC resets */
-+#define GCC_DPM_BCR						0
-+#define GCC_GPU_BCR						1
-+#define GCC_MMSS_BCR						2
-+#define GCC_NPU_BWMON_BCR					3
-+#define GCC_NPU_BCR						4
-+#define GCC_PDM_BCR						5
-+#define GCC_PRNG_BCR						6
-+#define GCC_QUPV3_WRAPPER_0_BCR					7
-+#define GCC_QUPV3_WRAPPER_1_BCR					8
-+#define GCC_QUSB2PHY_PRIM_BCR					9
-+#define GCC_SDCC1_BCR						10
-+#define GCC_SDCC2_BCR						11
-+#define GCC_SDCC4_BCR						12
-+#define GCC_UFS_PHY_BCR						13
-+#define GCC_USB30_PRIM_BCR					14
-+#define GCC_USB3_DP_PHY_PRIM_BCR				15
-+#define GCC_USB3_PHY_PRIM_BCR					16
-+#define GCC_USB3PHY_PHY_PRIM_BCR				17
-+#define GCC_USB_PHY_CFG_AHB2PHY_BCR				18
-+
-+/* GCC power domains */
-+#define UFS_PHY_GDSC						0
-+#define USB30_PRIM_GDSC						1
-+#define HLOS1_VOTE_MMNOC_MMU_TBU_HF0_GDSC			2
-+#define HLOS1_VOTE_MMNOC_MMU_TBU_HF1_GDSC			3
-+#define HLOS1_VOTE_MMNOC_MMU_TBU_SF0_GDSC			4
-+
-+#endif
--- 
-2.43.0
+# cat /sys/kernel/debug/regmap/0-01/registers | grep -E 'c[1-9a]46:'
+c146: 80
+c246: 00
+c346: 80 # l3b en
+c446: 80
+c546: 00
+c646: 80 # l6b en
+c746: 00
+c846: 80
+c946: 00
+ca46: 80
 
+Could you please have a check if this node is available for
+sc8280xp?(I want to write 0 to 0xc346 and 0x0646 to ensure the ldo
+disabling will  turn off the display.) This is copied from sm8350, if
+the fuse register is 0x7820a8 for sc8280xp as well, then it is fused
+as disabled.
+
+        spmi_debug_bus: qcom,spmi-debug@6b12000 {
+                compatible =3D "qcom,spmi-pmic-arb-debug";
+                reg =3D <0 0x06b12000 0 0x60>, <0 0x7820a8 0 0x4>;
+                reg-names =3D "core", "fuse";
+                clocks =3D <&aoss_qmp>;
+                clock-names =3D "core_clk";
+                qcom,fuse-disable-bit =3D <24>;
+                #address-cells =3D <2>;
+                #size-cells =3D <0>;
+                status =3D "okay";
+        }
+
+Best wishes,
+Pengyu
+
+
+> Konrad
