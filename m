@@ -1,277 +1,266 @@
-Received: from outbound-ip173a.ess.barracuda.com (outbound-ip173a.ess.barracuda.com [209.222.82.41])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 925574369A;
-	Sun, 16 Aug 2026 12:52:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=fail smtp.client-ip=209.222.82.41
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786884757; cv=fail; b=BMEWvU80mTdgmjkdJHAPnK+pxCxYmrRzyj8qcNYvnRFWXyLHuMmb7nDArt5iinhgOYUD5r9g1yoU8dbdlvdhsfh2tm2G/E0RwnsHq2hWh5rIejkAEEBjTVpO+rja6LX2+4sutA/kBQoxsGZhypLICLMOk5jab4Ud5pAVNchtSuI=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786884757; c=relaxed/simple;
-	bh=MnPHGXeU8aZreFXAfwFOdC1GRsoGA1PrZ19XLJ58OZU=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 Content-Type:MIME-Version; b=VXG+lRVNMKoBHkUPhYhprjwsngG+vnGtSusZ7hZYoNEU71GAVPKVQznCNGRub5LfbMKEg6ALjRw9TCEy2VoC+eL6rVAnzbp4kd1l0YPUFUF4tUp0t0T2CwX+MUrEZDy2iKLBcYxyiprKLVxi74ZCCFWtt3YoIOy2ZLe28jkLDFc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opengear.com; spf=pass smtp.mailfrom=digi.com; dkim=pass (2048-bit key) header.d=opengear.com header.i=@opengear.com header.b=NYCywF/q; arc=fail smtp.client-ip=209.222.82.41
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=opengear.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=digi.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 571F31D9663
+	for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 12:55:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786884910; cv=none; b=SIBKXeM8RCgOnmGCjLCndrOpP4VB7lhzzs1Nec/2blU+rRP9zKvDA8j1GfCOavqS6sS5JB6Comw2xzBneR1E7CilAijCJ41+QEjPWUjfZNL8NxTGSDtp5tNXpC7xKa64qiXWmyzGv/us+4SMxGbEv+7IHOVFCSVZvtvzh9VfMvg=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786884910; c=relaxed/simple;
+	bh=d8fngDZHzo0mpKnMJAJCjN/ZyJ0og6JVIb4mMebmmFg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=NCFmzLDUKgB/jGGcZHn7BKN/pmS99cglpRLvSZtwfvXMosip6H1zl3JH9hye7ZdhkFF/eyn0ew9SLhHzp5BQhoGdGNzDPZTigYahnTBjup+UJV7pZv9a3OwWwZLdvIxRQClIFMb/AGiHePvb1hi5z0I2N+mMTeGpeBlQr2jMPag=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=h5FIx1ln; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=FCqazqGp; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=opengear.com header.i=@opengear.com header.b="NYCywF/q"
-Received: from DM5PR21CU001.outbound.protection.outlook.com (mail-centralusazon11021120.outbound.protection.outlook.com [52.101.62.120]) by mx-outbound13-51.us-east-2a.ess.aws.cudaops.com (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO); Sun, 16 Aug 2026 12:52:32 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=PsZUMNznrNp8wMZrX9AH+OM34vJVS5+3PKMC+frCBFgKKoyNL4yOSpQYujR3kiZq+8A2HZxXvTPNzdzIH30xSCg/RMsq867s5phVkLjiHNeK4sVUO6gBXzIVr3RmbwKUajYErLCXf47O/7Yxv01k6vFbQ9WgDMdvOfr8IHr8B8eGeFUl/+AOaHnpPOHl5He8NdZU/uc5VjLytiDX0WUlTxSAuoAMS8KWBGLO/R5DzZLn7MGWodT4plyflLjFkvyssPVSb6IDqDI6LL+tFP8xrEfYa9OSNcE9toXKrlgwSM6au4kp3C9fNn8l3bj5x41NGMx4PkKRZQ+144EvSyO5vg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=akmLE8+FHNT9+mVs5xN6u/KuJbg9mzs5z3LoDUsVrd0=;
- b=IMGN70QKLpF1rM3BtpyxFLtG3198ZdG0b2IbQXoGy2dZZb3yuCdShmqXZ3PPRuC/DRbaav1IaZxNMebmpZTParth/DS5RHu6Fb0ZfyCajfNpzZTOBMNl7HbGDeP10q94Y+gVR6/RzmvX4+dXST+pFPWNlbsG2CICKmZGV18n49JdID4Yb2mnzzVl7i9QIp9e/c6VOZ5faJnelJdiWkejWHevH7sX1gx8ElYoOgFgeEyrCkdy0E3V5zxoAMOmVmEKv+ub5djXOc+tf98IqnhdLc0YeDHJXXe+bodhIyQZalcOheqbf3t+j2ZvU4sVNU5Twz1lJ0BeX2VhyeGr6+YeKg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=digi.com; dmarc=pass action=none header.from=opengear.com;
- dkim=pass header.d=opengear.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=opengear.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=akmLE8+FHNT9+mVs5xN6u/KuJbg9mzs5z3LoDUsVrd0=;
- b=NYCywF/qfEtrOcXpuPileMnyMEoFOJjiWPfAbTwWuIMGKNtf+zrJXeKxB4SNPxYZ1VVRJ6jkqXPmh4LiMBaYgUMmbpp8Er/nYNljpYl0EmgxT0m1qCDMijA8EgYvAg2uf4AsDwzboa2m6X5mvlyL/IRcBdiN6FifCC4pt8oSkf3aQxntACmf1F7IlWv0X17S9SVxD+BldIriNShLndXueI3la4nHpduEH7nIBtpqEBVF1PmZn2BPKtptQ6ozT9p6EpCRCew4ZsmYhVbO+2492Km1fsg0iQnbVv1K1cMQgtJJMlwM03o5/J7yex4fyFprsMxH9NHxxcDMHpNsYtYLWQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=opengear.com;
-Received: from DM6PR10MB4139.namprd10.prod.outlook.com (2603:10b6:5:21d::24)
- by LV3PR10MB7793.namprd10.prod.outlook.com (2603:10b6:408:1b8::22) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.315.17; Sun, 16 Aug
- 2026 12:17:19 +0000
-Received: from DM6PR10MB4139.namprd10.prod.outlook.com
- ([fe80::19e9:d558:fd6c:8e5a]) by DM6PR10MB4139.namprd10.prod.outlook.com
- ([fe80::19e9:d558:fd6c:8e5a%6]) with mapi id 15.21.0315.016; Sun, 16 Aug 2026
- 12:17:19 +0000
-From: Peter Hunt <peter.hunt@opengear.com>
-To: loic.poulain@oss.qualcomm.com,
-	ryazanov.s.a@gmail.com,
-	mani@kernel.org
-Cc: johannes@sipsolutions.net,
-	netdev@vger.kernel.org,
-	mhi@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Peter Hunt <peter.hunt@opengear.com>
-Subject: [PATCH net-next v4 1/3] net: wwan: core: propagate modem control signals to port drivers
-Date: Sun, 16 Aug 2026 06:17:03 -0600
-Message-ID: <20260816121705.858013-2-peter.hunt@opengear.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="h5FIx1ln";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="FCqazqGp"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67GAqabH3094421
+	for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 12:55:07 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=pii0aw9ZziwZ2SqRv/VR55lsF7TaTPEUEFu
+	aGcSFswo=; b=h5FIx1lnFCFLzhzrWlmkO1MPncSqKoT4AdPUyGw/DwmXWkODkPb
+	ZkmLVCOrJhoFjcA5bBmyRBfBj2nHRPEtgOkkB20Hku2ml1UJsVUWmzySCEGRlp3E
+	YFzRftOiGZqhiSF+fb3G55JbAqQEMZ3azl2qK0tXmJFW0PU+5/ui0dW2X3TB+4Io
+	glo5WRlQzuFfPpoTzQfYFN57e4KjcXRrabYyJY4+z/7+J0j95oQ67WQsXePonWt8
+	mSy+BlfW1GBzJFEePrTQoVVLDZakM0w5RdQsMGXRnh9via/e2D27FwkC7xpNpDK1
+	mGs2iih2tUwHmFZuNAbLEYhLfvX+jKgDISA==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g2ghk3efa-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 12:55:07 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cb5cc1e139bso1795898a12.3
+        for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 05:55:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786884906; x=1787489706; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=pii0aw9ZziwZ2SqRv/VR55lsF7TaTPEUEFuaGcSFswo=;
+        b=FCqazqGp+XLMhZ4w61wDuD1YwHT5I0Gm1ICUNsYS92c8OQd8d5nGR4z5XtRvCDHU/A
+         AKCVJT+/2rPvhTsJ2X9dvf1aeOdWb6HDr7hUZrZn33/f5tULpAwcaYLjGiZfDkGnHAU/
+         6qtLC2s2n6BrltjsLvzN/il3F9f6KmrfOum7wlbEV/8u7av3e1Tg7GvBIanY0GBtgI3y
+         XtFMm9h2sPgsuDCYCz3bS5qi6SlpGxGPcAI0no8m22oOKCjTk9ebTdiRlLnJ418uvkhT
+         EvWBELh9PTIcVXgwqkhjgDTqErly5sR2RZrFTu7MdWQw+RTCGuXTS6LuJbUcWN80IU46
+         PaUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786884906; x=1787489706;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=pii0aw9ZziwZ2SqRv/VR55lsF7TaTPEUEFuaGcSFswo=;
+        b=eJ2EEW1PQk2xcalj9JT3Trd1J2pWkG9LUw5QJati9iHM7Qh0kYyz0EgGOjVgtTSkvu
+         +YVOwcaiWsRcL75RIVKFC/fFERWaH/JAxHdsxmDo45OETrZcEAKpxKLsy7t6xdKmjWkV
+         hYCowvBAfhNe/yUqnERuLu2LykGiv5EoIM0yF2G1yRT7VWARWEBXGuNtTYeGR3rnv4Is
+         Cte49qqN08khfKhS3rPCgLbb8Ylfeuqtq4lRQWtMFmcCBkpiWrS/hnn/IBd7MwsSnDku
+         NNc/3/zec08AYsetXMx6Zm8h4mOsSKq3tLJKVLufzbmstkMSGas9gBCL8eUct1Fps/2w
+         hx+Q==
+X-Forwarded-Encrypted: i=1; AHgh+RqPNNy1DjUEGtypr1x51N6538Ez6k7zvyn3Z+M2Ufik6Nx8uQtN/8Jl4N6RTf+YLhHfVdJSK8PlcRXFQJoH@vger.kernel.org
+X-Gm-Message-State: AOJu0YzgDwEht2Vws6sgYc6uXOZxJiKqs4G6UvP0PT6kmY0c6fCz4+1u
+	/p8KK6uYYYE5lQHmimyHPK3E/UobpPXRsDgj3YMoVmCORv3o/XsP1pNfHZ07NJbiydkl3HBM3Tn
+	1BpH2wl/zLyKtbo8O8Zj1F3V0ZLyRMNFmZ4BKHEihFHBBy6M1IIcI21zWt5JuTJxs25hy
+X-Gm-Gg: AR+sD11FZMVVMwKoVqTLz6Q5KaptOvAJtYSKruJmueD1+mgPd9GGLZQBX0LtibJiTJ/
+	OZVijt2yY1mPp4HBcc5KL82WX5mZWBPbmZ6Ij+6f7laKvPCy7QvqQLoqoi79rYlioTaPd+W0PbG
+	CfuZDYSREotRzn7I5yJaw/sIV7rm/XsFsDMw6dBpapjHKNQwveBBew9qfeO4UBM00PRAy6zbSwX
+	cJB0So2zCkc3FH36yHzvJH01Xuekk50C+kHjVMMc/vj+61k5exo169MxZs2eJkpPiy8YzHF+eor
+	IEDWLMz1Hy0Dq6AVUwHmj2trIkebFRz6OWOgQ1SVyGcMCimT88aisaQykrMLLRsJ7E3UR9T52kh
+	5JdvYg/d0Kl9ErPYH2RUINQdEu6LHZPx5LjmKoaXW8Ak1gmJ1A7iK3MGP9dQO
+X-Received: by 2002:a05:6a20:430d:b0:3c3:bbe6:95de with SMTP id adf61e73a8af0-3cc71d533c0mr19161911637.6.1786884906094;
+        Sun, 16 Aug 2026 05:55:06 -0700 (PDT)
+X-Received: by 2002:a05:6a20:430d:b0:3c3:bbe6:95de with SMTP id adf61e73a8af0-3cc71d533c0mr19161864637.6.1786884905581;
+        Sun, 16 Aug 2026 05:55:05 -0700 (PDT)
+Received: from QCOM-aGQu4IUr3Y.qualcomm.com (i-global052.qualcomm.com. [199.106.103.52])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-141388bd5a7sm40072703c88.15.2026.08.16.05.55.01
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 16 Aug 2026 05:55:04 -0700 (PDT)
+From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>
+Cc: Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Deepti Jaggi <deepti.jaggi@oss.qualcomm.com>,
+        Mukesh Savaliya <mukesh.savaliya@oss.qualcomm.com>,
+        Yadu M G <yadu.mg@oss.qualcomm.com>,
+        Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+        devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Shawn Guo <shengchao.guo@oss.qualcomm.com>
+Subject: [PATCH v11 0/6] Add initial device trees for Nord platform
+Date: Sun, 16 Aug 2026 20:54:07 +0800
+Message-ID: <20260816125413.1635150-1-shengchao.guo@oss.qualcomm.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260816121705.858013-1-peter.hunt@opengear.com>
-References: <20260816121705.858013-1-peter.hunt@opengear.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SY0PR01CA0009.ausprd01.prod.outlook.com
- (2603:10c6:10:1bb::10) To DM6PR10MB4139.namprd10.prod.outlook.com
- (2603:10b6:5:21d::24)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR10MB4139:EE_|LV3PR10MB7793:EE_
-X-MS-Office365-Filtering-Correlation-Id: ad2219c2-c276-4570-8390-08defb90514b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|366016|1800799024|23010399003|3023799007|22082099003|18002099003|11063799006|56012099006|10067099003|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	wnpbs4LOXfKte4kIQMdW1oe53NbxzaPX3+ELO2mw9LuOPyOtwTUgS/rmPdPOiK60wtxb6aNTBupyAVAWRKa7ev0EVMeCwON+3H9AUxZzVBt+BVIoffpYhvvXw86M2dJ2xtz2teHKpE4nhyRI95QY0Q2nohCCtyaRuFXufasQIuq01ICAYX0R+I+f2/PI/HPWHa3OrSs8rCpWo6QLVLMgQLHwm2JTKD+Izm/Cd2T96ZnRzGhAtVD1EzZS6DOR5ZYS/yoOkMrjtkn0U49LSKO0fvjwHn5tDL3KXRtk3NRMU9nkIKm/27ZX8UZuM599q9iywCGhNUDqAlB3kJ/fmhB/RQzWICJnr4wuO0amC8U8JedqSTN5UOgBAS/ZFInhvkJXJG/V90Yieez4rF6LcYPKLWsCDgWmcl2HSPVPmg9wInJA/8cbTuOGdb9UoQUfotJ9M/P1VePzyWBfWmqlw1piGzYHsCuN+zZBUFZrbbxE0v19da5qOM4Nuj7KR8SiWKjK8rpC4aqlC7uj/ft/POkJh5fNsqSyYAJ86JJTscUBdGQAvS5jv+GrKrY2ZyT58oN6FhKudRLyTugLYXC08R9BfS7zUhCaPWiuswlV+uIiKkd/S7uuMXgMWMDbDkcW6fAu0g7b6QCPvHXKKs45TIJ+Sg8LAGCUmldd/6JAVHsCaVU=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR10MB4139.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(3023799007)(22082099003)(18002099003)(11063799006)(56012099006)(10067099003)(6133799003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?lnZ3lbWxBx8Nu4w8+BughstHO7Ayy5RQ2S+J0ekL35bOECjDbk/WmKraPo07?=
- =?us-ascii?Q?bX084hquGYEashXVSjf49OZJevBjbCeJnYCI9gpqJsr1ua1VyBJ9PLpCuhL7?=
- =?us-ascii?Q?BID7UOCYzQxl8dNikkr11uG8K94ECm8OkwM2sR4GumEffZmHPFWjVRqSA6R8?=
- =?us-ascii?Q?lpdkc+coFHEQD7dD69uyOQkQ/zU4Yc8rjLyzksRj8zj2BFi4pT37vanzaj8Q?=
- =?us-ascii?Q?ytVurnUEh/GdQVoymJpeRPspyvUpIVkNcM6JfYpyeMRpQEi+Vam68wllLFan?=
- =?us-ascii?Q?CtsxNGSHSBekh/o0CVbobIVoUwUbDtmaR8o1G5um5J3Sl7y1+xUfQz5Rfhz5?=
- =?us-ascii?Q?xJT8cS0qvSOI04SAC+eJjiv4J8Rikj5xQah+bBnWo+OpS55+6c3A2XxFkjTF?=
- =?us-ascii?Q?VxLLIPdgkyYieWNVDK3gMPpEyatuBTm5xQHGXkezIH9WQ05s8yhE3HZYFaxJ?=
- =?us-ascii?Q?mFI60owF9PSQ3AbzgCEPhh8eyJVjxuSnqe/Y6TiNA4VVP6YXdulyVT3fAI++?=
- =?us-ascii?Q?qoycJ2qHgIzD/5/N2gkIRALkzDkM2weyja46WjOmyUba1aZDqqq6Dp7a0u2L?=
- =?us-ascii?Q?bwLRTcDJX5MzStbYuu7TyW4o6LICcHI6433Mk+bYiFVvdSMRzGEExerA7Kea?=
- =?us-ascii?Q?sLJGEuPpJljUx6n5J3PQYLBmGJavkHxf/uArldMVUdKPV+xIP9btamIs9H1+?=
- =?us-ascii?Q?8+/nGKN7sMDvCZHCmikZd45pGE3pIt5HSavarkaMw9eWS0iLZ8GTPh7LDh0Z?=
- =?us-ascii?Q?Il5C0lqu/U/Bduc2rschw0jDW4bkbLkRIXNUPXXeC8otyJj8bq0luWce46Y9?=
- =?us-ascii?Q?aibr1ZrXBYjJXCcUFoGo7uShv6FbnsDUz0/SsQWA16c/2wDsaelMYEz/MGwr?=
- =?us-ascii?Q?RJVVuj4xzMrAG1PrVcEiHOxb05iNgRFDjCdS2v344RXjpj0wybhsYS0WRKfg?=
- =?us-ascii?Q?kjrasziwbBx/aQCKRZIQSmijBac4aHwdjdZq1C2o37r0Nz0l0oUnYXknBZHi?=
- =?us-ascii?Q?jaVg2/4dobadJ+MQR5/ydishcI5+pKE+syfE6Kzh4pkvVv28oR4cfbs7D1FX?=
- =?us-ascii?Q?x8hWTdNxn0dky6WtOkL8enHeS8Y+vjGPJn/hVEqLL6PjdXQXYB6JywGpOgDn?=
- =?us-ascii?Q?KGfvdBoQcnPT6cQzWYwdTfRuBbXdxF3RanK/Jl0eKkkuYpFuR1rnKSQFwYk8?=
- =?us-ascii?Q?LBCZhtWPVK1JgRG1hbapXnt59NOOGBk9ujlItAo8pFcXr5tfy69PRal0jfVx?=
- =?us-ascii?Q?qfn3RJGw94y5DAIRp/Qe306gqW8dRrQAgRkuOb5J0ilYf+6Yb4io2vTrqvep?=
- =?us-ascii?Q?4PjhIU9FOvjvd84cV09JpW8fMdABOf7ligMiv+lUzod2BV0aS+4palBK9vnk?=
- =?us-ascii?Q?SPZGndkZMypxAo0ZRcca5sFzZY2lBPsx8/x3UOv8eRGNdJTOT7qGdEMwYSFq?=
- =?us-ascii?Q?ICtzlJnoT9c3OWO0pItYoIQx+jBhgPAyC1J6C4P2uLhs8jxDSuz+ij8bRX/T?=
- =?us-ascii?Q?RQSadbJGMIkH7h1ZpMO5OG3F6k1uH5ZSUT6vBKLPNpFMhAcVuprwGXWvzqsO?=
- =?us-ascii?Q?F9gJCs6YCwrbqEwm+CyO4hVeEZCacaMfcuecp3U5b/gUe7cXHXbmivK3dBhk?=
- =?us-ascii?Q?1uPsIoe83rdLLkflMb7gik3AqQNfe2iaym4AIp1Nx5+DoWDVCmJZQ7dVXA1c?=
- =?us-ascii?Q?4qrgZFQtmxAdxTR9FqWicW9KLrPuS0obWbbL8KlTRXnvyAnY?=
-X-Exchange-RoutingPolicyChecked:
-	pBWDHjXJp53eXkVaUFdG7mhVViJ4tsBJi+DTCVlyuVwQEcdtkbmntjQXsQBcKD7glRw4iu6F4ENzREqHRcyXaOPzvhUJAELYQ4+1WZyygaTX7vPxqiHmIU/T5VQIr8hh7K0lg8xeO9mLwi7UfK51vw87O3THYigspkSGHL0Kwp4YfRfKgSNtE1nYvre0pkHlrmamEVKoArm55PGu4FuXI9GAuHjxM6czz9Fh2q73EL7nST1D45y0KZ9RapM+O5wZniWmSOnDjv4vo8H29wgwXSqfAXl7jcx64DanouOs4Q72ySx9txJZG85MdP5hjzPZPkm4aWjGW5lsAMU4BPgL8g==
-X-MS-Exchange-CrossTenant-Network-Message-Id: ad2219c2-c276-4570-8390-08defb90514b
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR10MB4139.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Aug 2026 12:17:19.2035
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QCtOMHYpZ4nNKhUXPKnPJbpCrIGF8bT90jRKD4aKaaZo0c3Br2xoptfWhRYie2Eq
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR10MB7793
-X-OriginatorOrg: opengear.com
-X-BESS-ID: 1786884752-103379-7726-7591-1
-X-BESS-VER: 2019.1_20260804.2006
-X-BESS-Apparent-Source-IP: 52.101.62.120
-X-BESS-Parts: H4sIAAAAAAACA4uuVkqtKFGyUioBkjpK+cVKVqbGpmZAVgZQ0NDU3NI4NdHc0M
-	IgycQyLcXMIM3IKCnJwDg5OSXR0MJIqTYWACPO17dBAAAA
-X-BESS-Outbound-Spam-Score: 0.00
-X-BESS-Outbound-Spam-Report: Code version 3.2, rules version 3.2.2.275424 [from 
-	cloudscan19-76.us-east-2b.ess.aws.cudaops.com]
-	Rule breakdown below
-	 pts rule name              description
-	---- ---------------------- --------------------------------
-	0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
-X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS112744 scores of KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND
-X-BESS-BRTS-Status:1
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE2MDEwMSBTYWx0ZWRfXxOvHUCUTcwPl
+ f1squeTR6qSWJ2rZprtGDAQHvOGpEtUPDUtk/tAdKH87zJXAfbe0WQB+i+a1NRZhlj0iAIJA8QS
+ c6fLXxu4WxleXWOoOg7MrBVo2PNJ6Dc=
+X-Proofpoint-GUID: lFrJSMW1BRNaH3_BUES-sRgl2DWcidM-
+X-Authority-Analysis: v=2.4 cv=f+14wuyM c=1 sm=1 tr=0 ts=6a81b32b cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=b9+bayejhc3NMeqCNyeLQQ==:17
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=Naiw9UJaHRUbRcGyrnEA:9 a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE2MDEwMSBTYWx0ZWRfX1ukNI3Z7dFVl
+ uA7h2Z05qmcOWmgj2UvJ1O3C4ZNo2dEOlEnZd9ZLhNULeWSe9xY0WF6ylcOfThBcZEcg2yy8Ivg
+ QWpAVox6Okg/qMtJ72zWXcrzVQfFnJbnQtoTSwI6B/9IN79F03r/Y7Wlswt4Qv8xkuBxQ3VyEO+
+ VXJqdNX7RASlYjnGQTSktx74mmsu2ZLGiFRIb3bMbeZrCVTOGK4Yge+03y8BYsi0FkFrnFHqqui
+ ArB5w7OrWn8NRlFZ/5r544HjGYGcTSroGWz2MCRf+y9Yi5XGvatxJtP7ndbJwRVHKhGVNw/nZbT
+ DVwwauzSKtfIVvh6sK/3c/8ogovrSS8JnHtqap2m++UXcBSPMcacn0+9tFXKjDFf+H8vkc9dcrf
+ YeUoEsrbxcFqG1gcwWd71vZTTGAqV9JvaVjEXDnLieu8BdfUoQGw+Anlwhaixe0GU/QaH4/+/iL
+ ip3SBQWFye6o81w/81g==
+X-Proofpoint-ORIG-GUID: lFrJSMW1BRNaH3_BUES-sRgl2DWcidM-
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-16_03,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 spamscore=0 suspectscore=0 bulkscore=0 phishscore=0
+ malwarescore=0 impostorscore=0 lowpriorityscore=0 clxscore=1015 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608160101
 
-The WWAN character device emulates the TTY modem-control ioctls
-(TIOCMGET/TIOCMSET/TIOCMBIC/TIOCMBIS) for AT and QCDM ports, but the
-result is only stored in port->at_data.mdmbits and never reaches the port
-driver. A driver therefore cannot act on the host raising or dropping
-DTR/RTS, even though some modems depend on it (e.g. they withhold
-unsolicited AT result codes until the host asserts DTR).
+This series adds initial device tree support for Qualcomm's Nord SoC
+and the reference design boards, SA8797P RIDE for Automotive and IQ10 RRD
+for Robotics.
 
-Add an optional ->dtr_rts(port, on) operation to struct wwan_port_ops,
-mirroring tty_port_operations.dtr_rts. Drivers that implement it receive
-a simple assert/de-assert signal while the TIOCM bitmask state is tracked
-by the wwan core. TIOCMSET/TIOCMBIC/TIOCMBIS resolve the new bitmask and
-call ->dtr_rts when the driver implements it, gated on WWAN_PORT_AT to
-match the open/close raise/drop behaviour below. The boolean passed
-reflects DTR only, since DTR is the line that governs URC gating on
-modems supporting this signalling; RTS is tracked in mdmbits but driven
-together with DTR on open/close.
+Nord includes two variants, GearVM and Embedded. The GearVM variant has
+platform resources (clocks, regulators, powerdomains, etc.) controlled
+by SCMI server running on a VM. And the Embedded variant has the resources
+directly controlled by the operating system.
 
-Also raise DTR/RTS in wwan_port_op_start on first open of an AT port when
-the driver implements ->dtr_rts, and drop them in wwan_port_op_stop on
-last close. This mirrors TTY semantics (DTR is asserted on open) and means
-individual drivers do not need to implement this themselves.
+SA8797P RIDE board is built on GearVM variant, while IQ10 RRD is built
+on Embedded variant.
 
-at_data.mdmbits is protected by data_lock; the ->dtr_rts call is made
-after releasing data_lock and re-acquiring ops_lock so that it is
-serialised against port removal (which nulls port->ops under ops_lock).
+Tested on next-20260814.
 
-Signed-off-by: Peter Hunt <peter.hunt@opengear.com>
----
-v4: Protect at_data.mdmbits in wwan_port_op_start/stop under data_lock;
-    release data_lock and acquire ops_lock with a NULL check before calling
-    ->dtr_rts from the ioctl path; gate ioctl ->dtr_rts on WWAN_PORT_AT to
-    match open/close behaviour; reduce boolean to TIOCM_DTR only
-v3: Replace ->tiocmget/->tiocmset with ->dtr_rts(port, bool on) modelled
-    on tty_port_operations.dtr_rts; raise/drop DTR/RTS in
-    wwan_port_op_start/stop rather than in the driver (Loic Poulain)
----
- drivers/net/wwan/wwan_core.c | 31 ++++++++++++++++++++++++++++++-
- include/linux/wwan.h         |  3 +++
- 2 files changed, 33 insertions(+), 1 deletion(-)
+Changes for v11:
+- Use hyphen in rpmhpd OPP node names (opp2/opp3 - copy & paste from
+  lemans.dtsi)
+- Link to v10: https://lore.kernel.org/all/20260810114313.776563-1-shengchao.guo@oss.qualcomm.com/
 
-diff --git a/drivers/net/wwan/wwan_core.c b/drivers/net/wwan/wwan_core.c
-index ffbcf11e4e68..90ca85a63b5a 100644
---- a/drivers/net/wwan/wwan_core.c
-+++ b/drivers/net/wwan/wwan_core.c
-@@ -759,8 +759,17 @@ static int wwan_port_op_start(struct wwan_port *port)
- 	if (!port->start_count)
- 		ret = port->ops->start(port);
- 
--	if (!ret)
-+	if (!ret) {
- 		port->start_count++;
-+		/* Mirror TTY semantics: raise DTR/RTS on first open of an AT port */
-+		if (port->start_count == 1 && port->type == WWAN_PORT_AT &&
-+		    port->ops->dtr_rts) {
-+			mutex_lock(&port->data_lock);
-+			port->at_data.mdmbits |= TIOCM_DTR | TIOCM_RTS;
-+			mutex_unlock(&port->data_lock);
-+			port->ops->dtr_rts(port, true);
-+		}
-+	}
- 
- out_unlock:
- 	mutex_unlock(&port->ops_lock);
-@@ -773,6 +782,13 @@ static void wwan_port_op_stop(struct wwan_port *port)
- 	mutex_lock(&port->ops_lock);
- 	port->start_count--;
- 	if (!port->start_count) {
-+		/* Mirror TTY semantics: drop DTR/RTS on last close of an AT port */
-+		if (port->ops && port->type == WWAN_PORT_AT && port->ops->dtr_rts) {
-+			mutex_lock(&port->data_lock);
-+			port->at_data.mdmbits &= ~(TIOCM_DTR | TIOCM_RTS);
-+			mutex_unlock(&port->data_lock);
-+			port->ops->dtr_rts(port, false);
-+		}
- 		if (port->ops)
- 			port->ops->stop(port);
- 		skb_queue_purge(&port->rxq);
-@@ -980,6 +996,8 @@ static long wwan_port_fops_at_ioctl(struct wwan_port *port, unsigned int cmd,
- 				    unsigned long arg)
- {
- 	int ret = 0;
-+	bool call_dtr_rts = false;
-+	bool dtr_on = false;
- 
- 	mutex_lock(&port->data_lock);
- 
-@@ -1036,6 +1054,10 @@ static long wwan_port_fops_at_ioctl(struct wwan_port *port, unsigned int cmd,
- 			port->at_data.mdmbits |= mdmbits;
- 		else
- 			port->at_data.mdmbits = mdmbits;
-+		if (port->type == WWAN_PORT_AT) {
-+			dtr_on = !!(port->at_data.mdmbits & TIOCM_DTR);
-+			call_dtr_rts = true;
-+		}
- 		break;
- 	}
- 
-@@ -1061,6 +1083,13 @@ static long wwan_port_fops_at_ioctl(struct wwan_port *port, unsigned int cmd,
- 
- 	mutex_unlock(&port->data_lock);
- 
-+	if (call_dtr_rts) {
-+		mutex_lock(&port->ops_lock);
-+		if (port->ops && port->ops->dtr_rts)
-+			port->ops->dtr_rts(port, dtr_on);
-+		mutex_unlock(&port->ops_lock);
-+	}
-+
- 	return ret;
- }
- 
-diff --git a/include/linux/wwan.h b/include/linux/wwan.h
-index 1e0e2cb53579..a7684950d73b 100644
---- a/include/linux/wwan.h
-+++ b/include/linux/wwan.h
-@@ -57,6 +57,8 @@ struct wwan_port;
-  * @tx_blocking: Optional blocking routine that sends WWAN port protocol data
-  *               to the device.
-  * @tx_poll: Optional routine that sets additional TX poll flags.
-+ * @dtr_rts: Optional routine that asserts (on=true) or de-asserts (on=false)
-+ *           the DTR and RTS modem control lines.
-  *
-  * The wwan_port_ops structure contains a list of low-level operations
-  * that control a WWAN port device. All functions are mandatory unless specified.
-@@ -70,6 +72,7 @@ struct wwan_port_ops {
- 	int (*tx_blocking)(struct wwan_port *port, struct sk_buff *skb);
- 	__poll_t (*tx_poll)(struct wwan_port *port, struct file *filp,
- 			    poll_table *wait);
-+	void (*dtr_rts)(struct wwan_port *port, bool on);
- };
- 
- /** struct wwan_port_caps - The WWAN port capbilities
+Changes for v10:
+- Fix reg size for ICE to match hardware specification (Thanks Kuldeep!)
+- Link to v9: https://lore.kernel.org/all/20260806081554.448531-1-shengchao.guo@oss.qualcomm.com/
+
+Changes for v9:
+- Re-add UFS support for gearvm variant as the binding dependency is
+  resolved on linux-next
+- Add #cooling-cells for cpus to make cpu cooling devices available for
+  userspace to control
+- Include CTS/RTS into UART17 pinctrl state to ease the Bluetooth
+  enabling
+- Link to v8: https://lore.kernel.org/all/20260729010022.875799-1-shengchao.guo@oss.qualcomm.com/
+
+Changes for v8:
+- Drop UFS support from gearvm variant to clear binding dependency
+- Link to v7: https://lore.kernel.org/all/20260721044005.2882803-1-shengchao.guo@oss.qualcomm.com/
+
+Changes for v7:
+- Do not paste the comment of bootloader updating IRQ number for each of
+  the 64 SCMI instances
+- Correct crypto status to be "okay" in nord-embedded.dtsi
+- Drop scmi15 from nord-ride.dts as there is no consumers
+- Drop unneeded LDO/SMPS regulators comment from nord-rrd.dts
+- Drop regulator ufs_vdd_hba and ufs_vccq2 which do not exist on RRD
+- Drop always-on/boot-on flag for vreg_l3e_1p8 and vreg_l2i_1p2 in
+  nord-rrd.dts
+- Drop untested I2C device and add tested EPSON RX8900 RTC for
+  nord-rrd
+- Restrict nord-rrd UFS PHY regulators as HPM only to avoid potential
+  intermittent failures
+- Link to v6: https://lore.kernel.org/all/20260716142605.2398433-1-shengchao.guo@oss.qualcomm.com/
+
+Changes for v6:
+- Move ufs_mem_hc reg/reg-names from nord-embedded.dtsi into nord.dtsi
+- Enable crypto by default only for nord-embedded variant 
+- Add a comment above each SCMI 'interrupts' property to clarify that
+  the IRQ number is expected to be updated by the bootloader
+- Improve commit log of Embedded variant patch to be "directly controlled
+  by the operating system"
+- Merge two board binding patches into one
+- Rename sa8797p-ride.dts to nord-ride.dts, iq10-rrd.dts to nord-rrd.dts
+- Expand RRD acronym in DTS patch commit log
+- Fix copyright in RRD DTS file
+- Add firmware path for qupv3 nodes
+- Link to v5: https://lore.kernel.org/all/20260709132013.4096850-1-shengchao.guo@oss.qualcomm.com/
+
+Changes for v5:
+- Rename nord-sa8797p.dtsi to nord-gearvm.dtsi
+- Merge scmi-common.dtsi to nord-gearvm.dtsi
+- Drop "qcom,sa8797p" compatible
+- Add Nord Embedded variant and IQ10 RRD board support
+- Link to v4: https://lore.kernel.org/all/20260707123902.3868016-1-shengchao.guo@oss.qualcomm.com/
+
+Changes for v4:
+- Rebase on next-20260706
+- 1/4: Drop useless comments from arm,gic-v3 reg property
+- 1/4: One triple per line for qcom,pdc-ranges
+- 2/4: Improve commit log as suggested by Konrad
+- 4/4: Drop 0 polling-delay as that's the default value
+- 4/4: Name PMIC thermal zones with prefix "pmic" rather than "pm"
+- 4/4: Drop 135 C trip point from PMIC thermal zones as hardware will shutdown
+  at 125 C
+- 4/4: Have trip0 at 105 C as passive and trip1 at 115 C as critical for UFS
+  and SDRAM thermal zones
+- Link to v3: https://lore.kernel.org/all/20260526051300.1669201-1-shengchao.guo@oss.qualcomm.com/
+
+Changes for v3:
+- Rebase on next-20260525 and drop patches/dependencies that hit linux-next
+- Improve commit log of "Document SA8797P Ride board" to explain the need
+  of SA8797P model compatible
+- Fix the real issues reported by sashiko-bot
+  - Fix unit address of pdp0_a2p node
+  - Add missing compatible for i2c15 and spi15
+  - Drop GIC_CPU_MASK_SIMPLE(8) from arch_timer interrupts property
+  - Update commit log of "Add device tree for Nord SA8797P SoC" to match
+    code change
+  - Sort sa8797p-ride thermal trips in ascending order of temperature
+  - Fix sa8797p-ride thermal zones with identical trip0 and trip1
+- Link to v2: https://lore.kernel.org/all/20260519063505.883379-1-shengchao.guo@oss.qualcomm.com/
+
+Changes for v2:
+- Rebase on next-20260518 and drop dependencies that hit linux-next
+- Include SoC ID changes into the series
+- Include ICE binding change into the series as the prerequisite change
+  from Harshal [1] was merged to qcom soc tree instead of crypto
+- Improve commit log of SA8797P Ride binding change
+- Use label in nord-sa8797p.dtsi for referencing nodes defined in
+  the base nord.dtsi
+- Link to v1: https://lore.kernel.org/all/20260427023455.236410-1-shengchao.guo@oss.qualcomm.com/
+
+[1] https://lore.kernel.org/all/20260416-qcom_ice_power_and_clk_vote-v5-1-5ccf5d7e2846@oss.qualcomm.com
+
+Deepti Jaggi (2):
+  arm64: dts: qcom: Add device tree for Nord GearVM variant
+  arm64: dts: qcom: Add device tree for Nord Ride board
+
+Shawn Guo (4):
+  arm64: dts: qcom: Add device tree for Nord SoC series
+  arm64: dts: qcom: Add device tree for Nord Embedded variant
+  dt-bindings: arm: qcom: Document Nord reference boards
+  arm64: dts: qcom: Add device tree for Nord RRD board
+
+ .../devicetree/bindings/arm/qcom.yaml         |    6 +
+ arch/arm64/boot/dts/qcom/Makefile             |    2 +
+ arch/arm64/boot/dts/qcom/nord-embedded.dtsi   | 1726 ++++++
+ arch/arm64/boot/dts/qcom/nord-gearvm.dtsi     | 2848 ++++++++++
+ arch/arm64/boot/dts/qcom/nord-ride.dts        |  236 +
+ arch/arm64/boot/dts/qcom/nord-rrd.dts         |  548 ++
+ arch/arm64/boot/dts/qcom/nord.dtsi            | 4623 +++++++++++++++++
+ 7 files changed, 9989 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/qcom/nord-embedded.dtsi
+ create mode 100644 arch/arm64/boot/dts/qcom/nord-gearvm.dtsi
+ create mode 100644 arch/arm64/boot/dts/qcom/nord-ride.dts
+ create mode 100644 arch/arm64/boot/dts/qcom/nord-rrd.dts
+ create mode 100644 arch/arm64/boot/dts/qcom/nord.dtsi
+
 -- 
 2.43.0
 
