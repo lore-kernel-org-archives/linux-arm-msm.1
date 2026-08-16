@@ -1,101 +1,121 @@
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pl1-f182.google.com (mail-pl1-f182.google.com [209.85.214.182])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A27BC3B0ACE;
-	Sun, 16 Aug 2026 14:09:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=198.175.65.12
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3BD922D8391
+	for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 16:18:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.182
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786889380; cv=none; b=mvLT+QXYcJJxGsFAfQTd+bQfL25uIArPkqjERupogC67MYP//WmMwjmmY3frTq2pSovJ5+gDx9ZEolC67cw25uSp+wM/RYz1jxUwbl9k8RPOA5f3GKlQq9wZHInzn+A4Jn/nFarpeNK17am6w//x9831xMqZ9ZWBdm1HaE4GcfQ=
+	t=1786897106; cv=none; b=pqoPwz7aQA09CIPwH1cEIl1gxM98ip5kXX9GI6U4/Ws4tYXDe7sTc6lVzoi9yg+nLrg0f21dYQbvf66KE1uBeTWoV6dKyRaE6Roj96Suz08DZRLAQA8Z4SATK/8jLzh0uVcrDlFpGRqDhXx1M5OAPPnAEWV0/oJ85+zn5y34UhA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786889380; c=relaxed/simple;
-	bh=ixNKXlfbyvYEDhKHRxomUadDZquNpvGYWGT75yks6FA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=AkWNGYtBzm2LSnFFLhhBHGaBJrM2CdQttX03qASSTTbg4uMuY2uGH+7ARaITXUNI9As7dBOfQ0bi/pfohaWMYvlhAE5YU+ZwVUUIKJBhgGJQ0Rubyaw4B2q3dChT/GHJdrl/fRbUL2j+J76kjl8MZLGab31yLlZG8n5Hgg9f+8U=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=iFyhHGl6; arc=none smtp.client-ip=198.175.65.12
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	s=arc-20240116; t=1786897106; c=relaxed/simple;
+	bh=m4D3uG1yxZU27uoHhenULzJWFMswDjF6+99jhg7rkvg=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=gdFCzrSezSAAGYC/vVaNiXtuCnxKcPQEUuZJO8bG0vZ+GDFVTESEVFOJ2q9cnxUZuXFBmcLYvPuvajG35ZP5tQcPzLlYm4ij8HgN+h5/s382N2v2I+l1YDYse0xIpS65lS3TDy9LeKLmmNdmdd7fKc/QHMOaEIHEbQqOwEJSP78=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=rZ7Kv6ab; arc=none smtp.client-ip=209.85.214.182
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="iFyhHGl6"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1786889378; x=1818425378;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=ixNKXlfbyvYEDhKHRxomUadDZquNpvGYWGT75yks6FA=;
-  b=iFyhHGl6tQ5iB3xURWcpK8WUYMJIWQ1qdoygevVmhhkwEkxi/hP0KSF5
-   Z0e1tHR63rAgHbMB05qNi8uW3JD065158k3oGuQba/a25MNOjryz09RTc
-   01XZOy8FpiZCcMUNtAqhIgeNgNy0Vf3NZMLcI6lSMe5+nimzUHpaEa5/y
-   KWcIsX6wCSTATXkzJP1r2x4RFFOaJsc+ohfza4t2sqqiKelJrlRCM98nm
-   ThFb0pVcsXwjRW0IcZDVphNQq5RYYRN16gbnsmB0Bq3GzjyaMNlKcbpWm
-   0fU4Q8fNSPWwcFYvY6ZMXoAzzucrW3c17I+oIbKx0FsLeRhTQsWGifri3
-   Q==;
-X-CSE-ConnectionGUID: GvMALLKOS8eB6jV49PYBFw==
-X-CSE-MsgGUID: mS9Ql3cGSciUfB17ouzdmA==
-X-IronPort-AV: E=McAfee;i="6800,10657,11876"; a="98901859"
-X-IronPort-AV: E=Sophos;i="6.25,227,1779174000"; 
-   d="scan'208";a="98901859"
-Received: from fmviesa008.fm.intel.com ([10.60.135.148])
-  by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Aug 2026 07:09:37 -0700
-X-CSE-ConnectionGUID: tq0x3LxyQJynKYBgPz5NFg==
-X-CSE-MsgGUID: aXFAyCVHR0qo7eslTE8quQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,227,1779174000"; 
-   d="scan'208";a="262036019"
-Received: from lkp-server01.sh.intel.com (HELO 6eda058d650d) ([10.239.97.150])
-  by fmviesa008.fm.intel.com with ESMTP; 16 Aug 2026 07:09:34 -0700
-Received: from kbuild by 6eda058d650d with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1wvbYJ-00000000cuI-1oGl;
-	Sun, 16 Aug 2026 14:09:31 +0000
-Date: Sun, 16 Aug 2026 22:08:35 +0800
-From: kernel test robot <lkp@intel.com>
-To: code_0002@163.com, andersson@kernel.org
-Cc: oe-kbuild-all@lists.linux.dev, konradybcio@kernel.org, robh@kernel.org,
-	krzk+dt@kernel.org, conor+dt@kernel.org,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, map220v <map220v300@gmail.com>,
-	code002-2 <hiez832670@gmail.com>
-Subject: Re: [PATCH] arm64: dts: qcom: sm8550: add Xiaomi Pad 6S Pro (sheng)
-Message-ID: <202608162115.dXrmXfLt-lkp@intel.com>
-References: <20260721133204.902-1-code_0002@163.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="rZ7Kv6ab"
+Received: by mail-pl1-f182.google.com with SMTP id d9443c01a7336-2d032846c95so38024265ad.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 09:18:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1786897105; x=1787501905; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=ol8hwDPzI85A+yMe6OB7GvosChQst72myTI3oKPR5Iw=;
+        b=rZ7Kv6abMaP7Gqm64LgAywsp0VsQfJbSmkD6Oo8u28aiU4I5nUoQhZ5IG0anqtgNrB
+         TRPgJZCAgPm0peClP04M4zAaToJDJtOA/aHMN2JqdXNVAONNae9ygwN7u5EUPiP80zFw
+         5yqobuF/6YRNgkBjAKkvX/DuwpWFTB28PTg90nlYGpSd7X8kI3D5QsA77B+qEYa4w9Zn
+         E8xw/wZWyCjBfIjcTOpsEY4l+fzLfNK9xY+DYb4TzyYrtA4jfqCnIQPOe5xN9J3JM2uz
+         UOWMV/xGY1PmiS8fLtsdClQ5Nl9xGwSghJOL/7wTbk21tXVou7hAK4V39HjdQi6z7Auw
+         XlQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786897105; x=1787501905;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=ol8hwDPzI85A+yMe6OB7GvosChQst72myTI3oKPR5Iw=;
+        b=MUaf+6kB28RJM0q81fh2V/GfDcsQPbXyfcYqmd0HD5dkp2rORTq2JgPp4AGudHe3Uk
+         EpRSA3wHuyezeGp+BYGyysqxt5Aq6GDPe/ev1RyiNH3yuizbFxe5oJKa5CynjcHVFevW
+         Twr8PJ+VOlwP8HxWdN5yGeN5afCuHcwCxDpvNjwpJzdLtBxI18FLxJ4nBDUYNMjzXiFb
+         ztedtpjJl1GtcVCQNPnz1XYUX1fOX6NNDmVX3GTuZ4wThLA02RWdYal+j+e6EAQyhpFg
+         hxN3tQe/r/Ot/AGWuNvKjMQ02FsuvY4aCkMGWI21fcYTceczDMtNkmKOQQn8AiI9LHqr
+         6ZQw==
+X-Forwarded-Encrypted: i=1; AHgh+RpFx4u30xsngVr12lRpL/jtYXJeTAs9CrFxieOvrx6czNqvGMnpb2hTQ4/gwHSRNEYI1g+5YxN+whLUH9R+@vger.kernel.org
+X-Gm-Message-State: AOJu0YwTEts3gWefBWoCkUNMoFGWaTkXb0ZFtVsArfrxnYULqNXhQoaT
+	WWbhqCJBLrPEgpLG1ncIwuNOTSnuiMmOlY9yF0WpqsH0d7sI3TFeZIoy
+X-Gm-Gg: AR+sD12fnj/oKTOmPw9R1YUJV1nUAitTl401dUXC+OgIqNcT938MmOyO9WtJtNt1Z3p
+	6F6w8lLxYa00FR2HN5UlFo17UXb3FYGTUgs8lp2nWqeHtJLCqUpZh4+RgTFdh+4a1oqxM51jdFw
+	IjTDuW1pKJ+efQjcEquzFS4UAXKyWShhPx05l3xFlYA6MmBaQtu6h4zQxMsuOhVM+lb4AjvBXTX
+	x/wjASHF8UNZcFsxreIugLX5lE1A5O2+j/5i1OYSngUkeUAt4mIMcRpXgZ8QrlGDxyyACP5W9VX
+	dXtQBaGEmS6uhnXjy0XdpVqXeMio/9gWha18WDUspZkLruD4zA7FSZZVd4FTMg4n+GYXNjbvZXs
+	2QvioPh8cXA1Z0UodEwmwCcDk1nyhehTXFShMrn4NSD8puV6wLWLhuL9zzB6mu8I63HWqkJHQjn
+	JOpfGJLR4gfsnlre5qLXwH5q+HKKwqhVES0uLIwjq1uXE1okeOLT9djbsr9ZclPc9yNzaGbTVSe
+	nyqKc0qMGL1
+X-Received: by 2002:a05:6a21:e8b:b0:3cb:eb06:ce09 with SMTP id adf61e73a8af0-3cc71de3b98mr21322781637.25.1786897104544;
+        Sun, 16 Aug 2026 09:18:24 -0700 (PDT)
+Received: from localhost.localdomain ([157.51.221.131])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-320d5bd9679sm28969988eec.3.2026.08.16.09.18.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 16 Aug 2026 09:18:23 -0700 (PDT)
+From: Sreeshankar K <sreeshankar0910@gmail.com>
+To: robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	andersson@kernel.org,
+	konradybcio@kernel.org,
+	tglx@kernel.org
+Cc: lpieralisi@kernel.org,
+	robimarko@gmail.com,
+	linux@gurudas.dev,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	Sreeshankar K <sreeshankar0910@gmail.com>
+Subject: [PATCH v2 0/5] Add SM7250 base dts file
+Date: Sun, 16 Aug 2026 16:18:03 +0000
+Message-ID: <20260816161808.12419-1-sreeshankar0910@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260721133204.902-1-code_0002@163.com>
+Content-Transfer-Encoding: 8bit
 
-Hi,
+Qualcomm SM7250 is known as lito.
 
-kernel test robot noticed the following build errors:
+This patchset add base devicetree file for SM7250 SoC and
+SM7250 MTP platform. This file adds the basic nodes like cpu,
+psci and other required configuration for booting up to the
+serial console.
 
-[auto build test ERROR on robh/for-next]
-[also build test ERROR on linus/master v7.2-rc7 next-20260814]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+v2 - Fixes/Changes:
+#1 [Fix] The `timer@17c20000` node incorrectly configures `#address-cells` and `#size-cells`, leading to broken memory mappings.
+#2 [Fix] The `spmi@c440000` bus node incorrectly sets `#address-cells` and `#size-cells`, breaking SPMI device enumeration.
+#3 [Fix] Missing mandatory properties `cache-level` and `cache-unified` in L2 and L3 cache nodes.
+#4 [Fix] The CPU topology `cpu-map` is entirely missing, breaking cluster-awareness and Energy Aware Scheduling.
+#5 [Fix] The SPMI node name `qcom,spmi@c440000` violates the standard generic node naming requirements.
+#6 [Fix] The memory-mapped `tcsr_mutex` is placed at the root of the device tree rather than within the `soc` simple-bus node.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/code_0002-163-com/arm64-dts-qcom-sm8550-add-Xiaomi-Pad-6S-Pro-sheng/20260815-144756
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/robh/linux.git for-next
-patch link:    https://lore.kernel.org/r/20260721133204.902-1-code_0002%40163.com
-patch subject: [PATCH] arm64: dts: qcom: sm8550: add Xiaomi Pad 6S Pro (sheng)
-config: arm64-randconfig-004-20260816 (https://download.01.org/0day-ci/archive/20260816/202608162115.dXrmXfLt-lkp@intel.com/config)
-compiler: aarch64-linux-gcc (GCC) 10.5.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260816/202608162115.dXrmXfLt-lkp@intel.com/reproduce)
+Sreeshankar K (5):
+  arm64: dts: qcom: Add SM7250 base dts file
+  dt-bindings: arm: cpus: Document Kryo 475 CPUs
+  dt-bindings: arm: qcom: Document SM7250 SoC and boards
+  dt-bindings: firmware: qcom,scm: Document SM7250 SCM
+  dt-bindings: interrupt-controller: qcom,pdc: Document SM7250 PDC
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202608162115.dXrmXfLt-lkp@intel.com/
+ .../devicetree/bindings/arm/cpus.yaml         |   1 +
+ .../devicetree/bindings/arm/qcom.yaml         |   6 +
+ .../bindings/firmware/qcom,scm.yaml           |   1 +
+ .../interrupt-controller/qcom,pdc.yaml        |   1 +
+ arch/arm64/boot/dts/qcom/Makefile             |   1 +
+ arch/arm64/boot/dts/qcom/sm7250-mtp.dts       |  30 ++
+ arch/arm64/boot/dts/qcom/sm7250.dtsi          | 499 ++++++++++++++++++
+ 7 files changed, 539 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/qcom/sm7250-mtp.dts
+ create mode 100644 arch/arm64/boot/dts/qcom/sm7250.dtsi
 
-All errors (new ones prefixed by >>):
+-- 
+2.43.0
 
-   Error: arch/arm64/boot/dts/qcom/sm8550-xiaomi-sheng.dts:947.1-11 Label or path cci1_i2c1 not found
->> FATAL ERROR: Syntax error parsing input tree
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
