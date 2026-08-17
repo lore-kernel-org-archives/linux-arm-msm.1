@@ -1,91 +1,113 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.10])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 44F4418DB1F;
-	Mon, 17 Aug 2026 06:35:16 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.10
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE3FD3B71DB
+	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 06:52:40 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786948518; cv=none; b=JJiX17bw9X3CG1KKksNynJeby0i8uN8svdOSWAId8QIhI9TxOHePz/I9hjQjSgs7SkwbDYkRf3FRDnSFEaqqMhwriXsAUnibaIc4gGNjMj78T3lxlMgLKKb90MjRvzvT+5y76Pjd7AiaC+0UtmqSABUbLmuM7lL4g4E2eCEeYL0=
+	t=1786949564; cv=none; b=uOd/hf7fLz3z/B12Sen53sn3zGftbdSqNrHj+pB2sWzU9oc/UgIrvWa8cEVXbtSe+y3h7KOGpomstnKXkUJhUvajZ9NY3BsTGkzOf8XXYDjBv3LgoOaEaiA8gqd7WLeqaM1uNE4cXuOf1T/2jtxHkv/Q2RK4vCKqE0gjGA//jAg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786948518; c=relaxed/simple;
-	bh=OHb/Ukkl5wYeXcU02S+w/kjomGU6EOUWgSlaJ0dzaLA=;
+	s=arc-20240116; t=1786949564; c=relaxed/simple;
+	bh=yIVHWpmpue7JH9fPpIClnmCzbb9QXKZYSOjH+vcWCJ0=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=gxTToffa/+GnD3RPjl4Rqip1hbCpKThnYg7W8TR835C/zsG7rm3qVQHVN/0DbKh0h5qBNY3ym/mWH8c/DShlBNQUGJdFDuC3ZHsB3Unq+/cVUsHVDcIpsuIaPKHbwkXgo+BdJuwauij4SVYbU5BrVWQD6CBbq9RQbhKavYk6xds=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com; spf=pass smtp.mailfrom=linux.intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=Gt80AMwm; arc=none smtp.client-ip=192.198.163.10
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
+	 Content-Type:Content-Disposition:In-Reply-To; b=LcrDpjzT7mExopj+E6l4FS30/x6rPbkctMLf2OSVJuOfdBXCyvxWApNHbpLLMe8u7z/NJQXMRonBnTLQT50Aq7O2mlybHac0y556TSEpIAKDgnNB5kNfZn7hyDyW8ty7SL37epuyUytuUf9hNqf6VYRSubKftgefIRwwbskyt2U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=VyvxB4hm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=MOzAX7Uj; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="Gt80AMwm"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1786948517; x=1818484517;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=OHb/Ukkl5wYeXcU02S+w/kjomGU6EOUWgSlaJ0dzaLA=;
-  b=Gt80AMwm3dRhwyIlWYe0uwLEBO0GF+ShUN4MLS1uMPOellMpIRM5ZUSI
-   BxHMi+3EFTyGFQ5p1OU1hLrD1xb7k4LNMERy7XBDuFAmryqvzwqA4K29a
-   n5yvb+vtE6EUj5h+IXabgkLqIdkxH/HH2S9VFu5mrfZGaJkBI5jEUegEV
-   kqvFOrYFSwv6MRcFkQwbMiKOjB/tFhC9Km2buQPGP/JltwmjC3nBn139f
-   +oxzFwfU/vkaJWPWlc+4WL3/uXT7Z4Oi+M8u2RWOK0dwsFQ9EU9cbUfDD
-   EEnzYT0PW1YnSou8X++QcnrYgl5PvpVAQVTYQmkK64ZXG7jx2vs9m+IYO
-   Q==;
-X-CSE-ConnectionGUID: bPZdBcAzTtW+ZqWAkUxZqQ==
-X-CSE-MsgGUID: gDw6KLBASFmqNheIplwzFw==
-X-IronPort-AV: E=McAfee;i="6800,10657,11877"; a="98780143"
-X-IronPort-AV: E=Sophos;i="6.25,228,1779174000"; 
-   d="scan'208";a="98780143"
-Received: from orviesa007.jf.intel.com ([10.64.159.147])
-  by fmvoesa104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Aug 2026 23:35:15 -0700
-X-CSE-ConnectionGUID: IhYXXzm8SKWwRseS0Ppuig==
-X-CSE-MsgGUID: LS7+ULQkQqmleKkMf5wgXA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,228,1779174000"; 
-   d="scan'208";a="264865206"
-Received: from klitkey1-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.245.67])
-  by orviesa007-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Aug 2026 23:35:07 -0700
-Date: Mon, 17 Aug 2026 09:35:05 +0300
-From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To: Manivannan Sadhasivam <mani@kernel.org>
-Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-	manivannan.sadhasivam@oss.qualcomm.com,
-	Rob Herring <robh@kernel.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Jiri Slaby <jirislaby@kernel.org>,
-	Nathan Chancellor <nathan@kernel.org>,
-	Nicolas Schier <nicolas.schier@linux.dev>,
-	Hans de Goede <hansg@kernel.org>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Mark Pearson <mpearson-lenovo@squebb.ca>,
-	"Derek J. Clark" <derekjohn.clark@gmail.com>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Marcel Holtmann <marcel@holtmann.org>,
-	Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
-	Bartosz Golaszewski <brgl@bgdev.pl>,
-	Daniel Scally <djrscally@gmail.com>,
-	Heikki Krogerus <heikki.krogerus@linux.intel.com>,
-	Sakari Ailus <sakari.ailus@linux.intel.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Danilo Krummrich <dakr@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>, linux-serial@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-kbuild@vger.kernel.org,
-	platform-driver-x86@vger.kernel.org, linux-pci@vger.kernel.org,
-	devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-bluetooth@vger.kernel.org, linux-pm@vger.kernel.org,
-	Stephan Gerhold <stephan.gerhold@linaro.org>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-	linux-acpi@vger.kernel.org, Sui Jingfeng <sui.jingfeng@linux.dev>
-Subject: Re: [PATCH v3 03/14] software node: Implement device_get_match_data
- fwnode callback
-Message-ID: <aoKrmZzmYsyvRJ-5@ashevche-desk.local>
-References: <20260110-pci-m2-e-v3-0-4faee7d0d5ae@oss.qualcomm.com>
- <20260110-pci-m2-e-v3-3-4faee7d0d5ae@oss.qualcomm.com>
- <aWSpFk9z0zpyKjr6@smile.fi.intel.com>
- <6l3rs5pv6xnrbygpvqrdxqoqtybjyefsltk5bl4336q56rfoza@ejo3sxuufghe>
- <aWSwgRiEkT9unYw9@smile.fi.intel.com>
- <6peb6afhpm4l7opxbdt3b5sx32longevwds5c3dlqji2hr5dlh@kxuvj55jkqgi>
- <ljqd5ovcsg7t62tdzd77w5mv5buawm3x7xyapy7n7l7azcaorh@tytj46t2lxyb>
- <ks2nm67zp5i2grzomu7mjb7uhkuwtd7w5stoqp5kri2clpxpsp@ayn42h7meh5l>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="VyvxB4hm";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="MOzAX7Uj"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67GLCUcP4118160
+	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 06:52:39 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=Ka8mIyw8X4rRBycNGAQC25Zs
+	LU2GjsEt1aqcnQAe8a0=; b=VyvxB4hmXqtUmFbsCK9Tk+LlKIpR+TImY2YHgoDL
+	Y5BVDzO7KOP2RoQ4x0q7pBl+jd250b05a5QFvjv6BmqaiwwssZp+e78JGd3E8mYA
+	Eu3CE77STRlv+T0dA3h3S30SSar14jSKh00WUKtco4Jui2QGlmhtuNCXoh+d/Sy7
+	TWGbVxkTT93VyhJqWHnWeQi6ewHtmURyS26zzun06+wfSvuQA7/B+ntc4b5YmQti
+	4HVwDbWCaRb23RDxar8NkRxxP2DLjjHrBckzrNhkBhs+w9P3qnoBa6ysoH6Zzg3S
+	lExRcPYnjB06Nqq1SxmKwtYYU3lNBu8v6k4qUtu1t7Zyog==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g2ghfdngt-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 06:52:39 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-9349c5af52bso537232785a.0
+        for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 23:52:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786949559; x=1787554359; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Ka8mIyw8X4rRBycNGAQC25ZsLU2GjsEt1aqcnQAe8a0=;
+        b=MOzAX7UjUL7mdP0MRz140FGlgEzqTcEs6obotYEH8/hbX5erBr4SsDmMvm76aYbEx4
+         6pvKk1n4QlUZNmfaujGM7X4L9Vjn/SKRHy4qvragMXS0TDwPwWAcJ+BaZ53mq1LEmr+l
+         riq2sN4IxUQqgBtO5niBGMtlyHPzv3zVLg60rSQ6itfwYV96tN4bqfhkG28TIHxvtaqE
+         x0DnWS4aZSX4oGN3m5C1gVhSUq8sW93294kauP2fFmR/7AwGHbQsi464/mdCoaRYSRYo
+         NSTFpnxWYmHkYbvUS7nyCw+o9WVb+zfX5k79vWIh9Iq30SM8QRHmA690gu8Ks4YeGekD
+         qO0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786949559; x=1787554359;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Ka8mIyw8X4rRBycNGAQC25ZsLU2GjsEt1aqcnQAe8a0=;
+        b=EEKWpfWqDAOHrAJYedia2XBsm3SVz8JZTB0MB3ox46Not/lt1msmcfX4UwQUgaLPFg
+         Lu5y+524dUln86eEfOwcQYefMptk7u1DCY8fH12zRDsTATAC5xv0ya9N+TVNvP7UW3EJ
+         dIDpF5d6LrqiJHE+PC6xsup/MLLYR91KnpqE0hTEe7d3NwakelQar1IoBpT8uG4c64m0
+         q9upV/fA8YhcD59+6NIvdD26C1sxaW+EbDy+C3IcSGe4sWHqy+7f/8OlxnInk5jatk+v
+         2di8X0eMJcZQDuv1yAklmC7C0QIZn9lpUuvc3U30/L65k09Ci/3iUHpiqVs7jhewq5NL
+         rnQQ==
+X-Forwarded-Encrypted: i=1; AHgh+RqiAj/pIaeUG6Mff0edMlKE6uy4R50vH+dT9tjVns8F4ztzEKNrqjqjrs0VgPIn3YBlvHdjs6b6D7o3MCcu@vger.kernel.org
+X-Gm-Message-State: AOJu0YwWrDKIBklqDJY+sqI61QrDRXQRHWfkAozNZO9cLt3OzXk6i6pX
+	80gEr+QGXuxCpDyYW8mGLHS3cdTqmeTMVSUrUKlDqzbt1qXwl/AV9Qr9bEwOLvuyi9QQGj1vFri
+	bQNikl61g/rhm8XEz1pbra9z9JKeyijZEH2oZaKumDLrJy58Eh9qMTdUZnmbUWTkIYQAV
+X-Gm-Gg: AR+sD13miENinODLj3Uf/SEvRhjv/L4vg58B6iaIXSXTSvtOFACPysXk13d5hT4zQhW
+	lFYq/76Uae3+0vwsoGuZYh76YlOgbVj3ZKBgitDRCmyXOxTEWA7cz4SyrPqigIS6iZCUAhe6sHh
+	88jap34MJ+79gDsFSMkDvwisf3QKGjSgDExJ190vCZ1437qX5k0g0bhBywrKcDrGB/7A++WQo4B
+	OyY2yktD42cmVgmEdHUCLPDRPRW+ByGH7NKnvDm82AvyxSgoQyl+D+h+0TI6n/sCkx3yfOcTbfR
+	rf552voCFFIt2KAqFZQQnmVRUQwB+8snSqv494bYXcwlVTDH7O/xhXgW+ZXKsLStlqHHQs5rmBP
+	GvekbcDoeUfWhKPq3rwPrstYmVtOFcHDjRQANeqf/wOS6aVBVCpNfgOWYIyfQz/PRacqHy86IH/
+	bKkUE77iDiwYzn
+X-Received: by 2002:a05:620a:8215:b0:934:a2f0:33c1 with SMTP id af79cd13be357-936d235d4e0mr1735228385a.33.1786949558719;
+        Sun, 16 Aug 2026 23:52:38 -0700 (PDT)
+X-Received: by 2002:a05:620a:8215:b0:934:a2f0:33c1 with SMTP id af79cd13be357-936d235d4e0mr1735223185a.33.1786949558027;
+        Sun, 16 Aug 2026 23:52:38 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3a16b1f23dbsm1912601fa.39.2026.08.16.23.52.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 16 Aug 2026 23:52:36 -0700 (PDT)
+Date: Mon, 17 Aug 2026 09:52:33 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+Cc: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Bill Wendling <morbo@google.com>,
+        Justin Stitt <justinstitt@google.com>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Robin Murphy <robin.murphy@arm.com>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>,
+        Bharath Kumar <quic_bkumar@quicinc.com>,
+        Chenna Kesava Raju <quic_chennak@quicinc.com>,
+        srinivas.kandagatla@oss.qualcomm.com, linux-kernel@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, llvm@lists.linux.dev,
+        iommu@lists.linux.dev, linux-media@vger.kernel.org,
+        linaro-mm-sig@lists.linaro.org
+Subject: Re: [PATCH v2 07/15] accel/qda: Add memory manager for CB devices
+Message-ID: <wt2pdo3m3nlhvyofuvbsqnvggywx75ucs65vjt3dzrxkrpgztz@xwwlhq2iuiun>
+References: <20260817-qda-v2-v2-0-69a02e9090d4@oss.qualcomm.com>
+ <20260817-qda-v2-v2-7-69a02e9090d4@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -94,77 +116,483 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <ks2nm67zp5i2grzomu7mjb7uhkuwtd7w5stoqp5kri2clpxpsp@ayn42h7meh5l>
-Organization: Intel Finland Oy - BIC 0357606-4 - c/o Alberga Business Park, 6
- krs, Bertel Jungin Aukio 5, 02600 Espoo
+In-Reply-To: <20260817-qda-v2-v2-7-69a02e9090d4@oss.qualcomm.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE3MDA1MCBTYWx0ZWRfXzGNUr6wDZxAj
+ FTrpc1QechLJPNkExfVx4bxO1xJW5DRil8PzrgrWCZSZQnl1FtMFNC9MELFrGpe4Sa/06L8XJum
+ 6qLOSoutjgysl2G/pasr1Ywd5Vkjoto=
+X-Proofpoint-ORIG-GUID: Y-zLH_8pT7po8CAg_AThojg26EZ6FTi-
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE3MDA1MCBTYWx0ZWRfXyoS7lDIguL5+
+ T8ejlRt6JvkiWKs7n2EZjrz6xRofyh/lEjFbBurvMBcHcu+p3vCfZ6mvG/CYTQIILyA7GzHBFvH
+ KcC/r1XhXpB0GlZHj8zqIUgoN0YAEWbGlXsJ7Np0J5rsTBJwfcN4yZyGeeAJ8jaAP8nxEZAL/Ej
+ plUn+GLOG0LeAqvHAJkOILqTk30mUlUdmKqFVZfbj+0Li9ajR0E4eViXDal4YYQpN+LOrkkAaU/
+ WijhKHlmEp5NaA/ZtohieMzTYNxf8xXLM/+7qL4oSMJGWrAx/gaCGuTdOgV5Gx2efCvV6HK27BL
+ aVgm7YPF3kKVnaMMrDsOeiHjJqQxyjnOOXRiVDkaCzsPWUbK5rSAWs5FQk0NFIUkVYjp+BS5LLS
+ MsxYGadGAD8xXArEb2EYPHwLDdKr54JVDLQ2ArqzwAa/39cdUP1muhklHVG0ujh17eoIc1ehnbI
+ NLAchoDwuV7mp7Bhl3g==
+X-Proofpoint-GUID: Y-zLH_8pT7po8CAg_AThojg26EZ6FTi-
+X-Authority-Analysis: v=2.4 cv=I/dVgtgg c=1 sm=1 tr=0 ts=6a82afb7 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=EUspDBNiAAAA:8
+ a=k3pNtizIBdZJHqWcwIQA:9 a=CjuIK1q_8ugA:10 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-16_06,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 priorityscore=1501 malwarescore=0 adultscore=0 clxscore=1015
+ suspectscore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608170050
 
-On Fri, Aug 14, 2026 at 02:49:31PM +0200, Manivannan Sadhasivam wrote:
-> On Mon, Jan 12, 2026 at 10:01:23PM +0530, Manivannan Sadhasivam wrote:
-> > On Mon, Jan 12, 2026 at 02:32:21PM +0530, Manivannan Sadhasivam wrote:
-> > > On Mon, Jan 12, 2026 at 10:27:45AM +0200, Andy Shevchenko wrote:
-> > > > On Mon, Jan 12, 2026 at 01:49:54PM +0530, Manivannan Sadhasivam wrote:
-> > > > > + Dmitry Torokhov (who was against this patch previously)
-> > > > > 
-> > > > > On Mon, Jan 12, 2026 at 09:56:06AM +0200, Andy Shevchenko wrote:
-> > > > > > On Sat, Jan 10, 2026 at 12:26:21PM +0530, Manivannan Sadhasivam via B4 Relay wrote:
-> > > > > > 
-> > > > > > > Because the software node backend of the fwnode API framework lacks an
-> > > > > > > implementation for the .device_get_match_data function callback.
-> > > > > > 
-> > > > > > Maybe this is done on purpose. Have you thought about this aspect?
-> > > > > 
-> > > > > IMO, software nodes were introduced to add sub-properties to the existing
-> > > > > firmware nodes, but it has usecase/potential to go beyond that. More below.
-> > > > 
-> > > > Potential doesn't mean the necessity.
-> > > > 
-> > > > > > > This makes it difficult to use(and/or test) a few drivers that originates
-> > > > > > > from DT world on the non-DT platform.
-> > > > > > 
-> > > > > > How difficult? DSA implementation went to the way of taking DT overlay
-> > > > > > approach. Why that one can't be applied here?
-> > > > > 
-> > > > > Sometimes you do not have any DT node at all.
-> > > > 
-> > > > Yes, that is exactly the case I have referred to. The PCI core (in Linux)
-> > > > is able to create DT subtree on non-OF based platforms.
-> > > > 
-> > > 
-> > > Maybe I should look into creating dynamic DT node for the device and insert it
-> > > to the uart node. Theoretically it should work.
-> > > 
-> > 
-> > It worked flawlessly. So I sent v4 incorporating this design:
-> > https://lore.kernel.org/linux-pci/20260112-pci-m2-e-v4-0-eff84d2c6d26@oss.qualcomm.com/
-> > 
+On Mon, Aug 17, 2026 at 10:17:42AM +0530, Ekansh Gupta wrote:
+> Introduce the QDA memory manager (qda_memory_manager) to track the
+> IOMMU devices that back each compute context bank (CB).
 > 
-> Andy, I had to revive this old thread of a merged series as Krzk is not in
-> favour of adding DT overlay or dynamic OF nodes for these BT devices [1]. His
-> objections are due to the fact that we are just adding BT nodes of a
-> discoverable device (M.2 PCIe device) without any resources. So the node just
-> contains the compatible to match with the serdev driver and nothing else.
+> Each CB device registered on the qda-compute-cb bus is wrapped in a
+> qda_iommu_device descriptor recording the device pointer and its stream
+> ID, and stored in the memory manager's registry. Later patches use this
+> registry to resolve the IOMMU device a session should allocate from.
 > 
-> And he suggested to use swnodes or other similar mechanisms to plug with the
-> serdev driver as that's the only thing we want here, not a true hardware
-> description.
+> The registry is a plain array sized to the number of
+> "qcom,fastrpc-compute-cb" nodes present in the device tree: the RPMsg
+> probe counts those nodes and passes the count to qda_init_device(),
+> which allocates the array in qda_memory_manager_init(). The memory
+> manager is created before CB devices are populated and destroyed after
+> they are torn down, so no dangling descriptors remain.
+> 
+> qda_cb_setup_device() is called immediately after a CB device is
+> registered on the bus: it allocates the descriptor, registers it with
+> the memory manager, and stores it as the CB device's driver data so
+> that qda_destroy_cb_device() can unregister and free it during teardown.
+> 
+> Assisted-by: Claude:claude-sonnet-5
+> Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+> ---
+> Changes in v2:
+> - Replace the XArray with a plain array sized to the device tree's CB
+>   node count instead of a fixed 16-entry table (Dmitry Baryshkov)
+> - Fold the init_memory_manager()/cleanup_memory_manager() wrappers into
+>   qda_init_device()/qda_deinit_device() (Dmitry Baryshkov)
+> - Drop the pr_debug() calls (Dmitry Baryshkov)
+> - Use goto labels to unwind probe failures instead of open-coding the
+>   cleanup at each error site (Dmitry Baryshkov)
+> ---
+>  drivers/accel/qda/Makefile             |  1 +
+>  drivers/accel/qda/qda_cb.c             | 39 ++++++++++++++
+>  drivers/accel/qda/qda_drv.c            | 26 +++++++++
+>  drivers/accel/qda/qda_drv.h            |  5 ++
+>  drivers/accel/qda/qda_memory_manager.c | 98 ++++++++++++++++++++++++++++++++++
+>  drivers/accel/qda/qda_memory_manager.h | 55 +++++++++++++++++++
+>  drivers/accel/qda/qda_rpmsg.c          | 23 +++++++-
+>  7 files changed, 246 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/accel/qda/Makefile b/drivers/accel/qda/Makefile
+> index 143c9e4e789e..701fad5ffb50 100644
+> --- a/drivers/accel/qda/Makefile
+> +++ b/drivers/accel/qda/Makefile
+> @@ -8,6 +8,7 @@ obj-$(CONFIG_DRM_ACCEL_QDA)	:= qda.o
+>  qda-y := \
+>  	qda_cb.o \
+>  	qda_drv.o \
+> +	qda_memory_manager.o \
+>  	qda_rpmsg.o
+>  
+>  obj-$(CONFIG_DRM_ACCEL_QDA_COMPUTE_BUS) += qda_compute_bus.o
+> diff --git a/drivers/accel/qda/qda_cb.c b/drivers/accel/qda/qda_cb.c
+> index 9c5ef32f351e..cd32d6df6318 100644
+> --- a/drivers/accel/qda/qda_cb.c
+> +++ b/drivers/accel/qda/qda_cb.c
+> @@ -8,13 +8,40 @@
+>  #include <linux/slab.h>
+>  #include <drm/drm_print.h>
+>  #include "qda_drv.h"
+> +#include "qda_memory_manager.h"
+>  #include "qda_cb.h"
+>  
+> +static int qda_cb_setup_device(struct qda_dev *qdev, struct device *cb_dev, u32 sid)
+> +{
+> +	struct qda_iommu_device *iommu_dev;
+> +	int ret;
+> +
+> +	iommu_dev = kzalloc_obj(*iommu_dev);
+> +	if (!iommu_dev)
+> +		return -ENOMEM;
+> +
+> +	iommu_dev->dev = cb_dev;
+> +	iommu_dev->qdev = qdev;
+> +	iommu_dev->sid = sid;
+> +
+> +	ret = qda_memory_manager_register_device(qdev->iommu_mgr, iommu_dev);
+> +	if (ret) {
+> +		drm_err(&qdev->drm_dev, "Failed to register IOMMU device: %d\n", ret);
+> +		kfree(iommu_dev);
+> +		return ret;
+> +	}
+> +
+> +	dev_set_drvdata(cb_dev, iommu_dev);
+> +
+> +	return 0;
+> +}
+> +
+>  int qda_create_cb_device(struct qda_dev *qdev, struct device_node *cb_node)
+>  {
+>  	struct qda_cb_dev *entry;
+>  	struct device *cb_dev;
+>  	u32 sid = 0;
+> +	int ret;
+>  
+>  	if (of_property_read_u32(cb_node, "reg", &sid))
+>  		drm_info(&qdev->drm_dev, "No stream ID in DT node %pOFn, using 0\n", cb_node);
+> @@ -27,6 +54,12 @@ int qda_create_cb_device(struct qda_dev *qdev, struct device_node *cb_node)
+>  		return PTR_ERR(cb_dev);
+>  	}
+>  
+> +	ret = qda_cb_setup_device(qdev, cb_dev, sid);
+> +	if (ret) {
+> +		device_unregister(cb_dev);
+> +		return ret;
+> +	}
+> +
+>  	entry = kzalloc_obj(*entry);
+>  	if (!entry) {
+>  		qda_destroy_cb_device(cb_dev);
+> @@ -74,8 +107,14 @@ int qda_cb_populate(struct qda_dev *qdev, struct device_node *parent_node)
+>  
+>  void qda_destroy_cb_device(struct device *cb_dev)
+>  {
+> +	struct qda_iommu_device *iommu_dev;
+>  	struct iommu_group *group;
+>  
+> +	iommu_dev = dev_get_drvdata(cb_dev);
+> +	if (iommu_dev && iommu_dev->qdev->iommu_mgr)
 
-SW nodes are not for describing HW from scratch. They are for fixing missing
-pieces. If you can justify your case as a missing piece for the *existing*
-device (which is enumerated using standard mechanisms), you can add a property
-that fills the gap.
+Can either of them be NULL?
 
-Unfortunately I see that there are `PROPERTY_ENTRY_STRING("compatible", ...)`
-cases in the kernel (only 9 drivers so far), and I can't say if they describing
-missing pieces or a SW-made descriptions of the hardware. For the latter the
-DT/ACPI/other means but swnodes should be used.
+> +		qda_memory_manager_unregister_device(iommu_dev->qdev->iommu_mgr,
+> +						     iommu_dev);
+> +
+>  	group = iommu_group_get(cb_dev);
+>  	if (group) {
+>  		iommu_group_remove_device(cb_dev);
+> diff --git a/drivers/accel/qda/qda_drv.c b/drivers/accel/qda/qda_drv.c
+> index 09b6d5ac390b..fdc909facd95 100644
+> --- a/drivers/accel/qda/qda_drv.c
+> +++ b/drivers/accel/qda/qda_drv.c
+> @@ -56,6 +56,32 @@ struct qda_dev *qda_alloc_device(struct device *dev)
+>  	return qdev;
+>  }
+>  
+> +void qda_deinit_device(struct qda_dev *qdev)
+> +{
+> +	if (qdev->iommu_mgr) {
 
-> Since you strongly objected the swnode approach in this series, I wanted to hear
-> your opinion before I rework the code.
+Why?
 
-> [1] https://lore.kernel.org/linux-pci/768142f0-2638-41f3-a34f-dc80bb99eb7f@kernel.org
+> +		qda_memory_manager_exit(qdev->iommu_mgr);
+> +		kfree(qdev->iommu_mgr);
+> +		qdev->iommu_mgr = NULL;
+
+What for? If it's a teardown path, qdev will be destroyed soon.
+
+> +	}
+> +}
+> +
+> +int qda_init_device(struct qda_dev *qdev, int num_cbs)
+> +{
+> +	int ret;
+> +
+> +	qdev->iommu_mgr = kzalloc_obj(*qdev->iommu_mgr);
+
+devm_kzalloc_obj()?
+
+> +	if (!qdev->iommu_mgr)
+> +		return -ENOMEM;
+> +	ret = qda_memory_manager_init(qdev->iommu_mgr, num_cbs);
+> +	if (ret) {
+> +		drm_err(&qdev->drm_dev, "Failed to initialize memory manager: %d\n", ret);
+> +		kfree(qdev->iommu_mgr);
+> +		qdev->iommu_mgr = NULL;
+
+And what is going to read this NULL?
+
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+>  int qda_register_device(struct qda_dev *qdev)
+>  {
+>  	int ret;
+> diff --git a/drivers/accel/qda/qda_drv.h b/drivers/accel/qda/qda_drv.h
+> index 3bd41b9593fa..690a833d732b 100644
+> --- a/drivers/accel/qda/qda_drv.h
+> +++ b/drivers/accel/qda/qda_drv.h
+> @@ -13,6 +13,7 @@
+>  #include <drm/drm_device.h>
+>  #include <drm/drm_drv.h>
+>  #include <drm/drm_file.h>
+> +#include "qda_memory_manager.h"
+>  
+>  /* Driver identification */
+>  #define QDA_DRIVER_NAME "qda"
+> @@ -40,6 +41,8 @@ struct qda_dev {
+>  	struct device *dev;
+>  	/** @cb_devs: Compute context-bank (CB) child devices */
+>  	struct list_head cb_devs;
+> +	/** @iommu_mgr: IOMMU/memory manager instance */
+> +	struct qda_memory_manager *iommu_mgr;
+>  	/** @dsp_name: Name of the DSP domain (e.g. "cdsp", "adsp") */
+>  	const char *dsp_name;
+>  };
+> @@ -59,6 +62,8 @@ static inline struct qda_dev *qda_dev_from_drm(struct drm_device *dev)
+>  struct qda_dev *qda_alloc_device(struct device *dev);
+>  
+>  /* Core device lifecycle */
+> +int qda_init_device(struct qda_dev *qdev, int num_cbs);
+> +void qda_deinit_device(struct qda_dev *qdev);
+>  int qda_register_device(struct qda_dev *qdev);
+>  
+>  #endif /* __QDA_DRV_H__ */
+> diff --git a/drivers/accel/qda/qda_memory_manager.c b/drivers/accel/qda/qda_memory_manager.c
+> new file mode 100644
+> index 000000000000..b1a80ee77c35
+> --- /dev/null
+> +++ b/drivers/accel/qda/qda_memory_manager.c
+> @@ -0,0 +1,98 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +// Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> +
+> +#include <linux/slab.h>
+> +#include "qda_drv.h"
+> +#include "qda_memory_manager.h"
+> +
+> +static void cleanup_all_memory_devices(struct qda_memory_manager *mem_mgr)
+> +{
+> +	int i;
+> +
+> +	for (i = 0; i < mem_mgr->num_devices; i++) {
+> +		struct qda_iommu_device *iommu_dev = mem_mgr->devices[i];
+> +
+> +		if (!iommu_dev)
+> +			continue;
+> +
+> +		mem_mgr->devices[i] = NULL;
+> +		kfree(iommu_dev);
+> +	}
+> +	mem_mgr->num_devices = 0;
+
+What for?
+
+> +}
+> +
+> +/**
+> + * qda_memory_manager_register_device() - Register an IOMMU device
+> + * @mem_mgr: Pointer to memory manager
+> + * @iommu_dev: Pointer to IOMMU device to register
+> + *
+> + * Return: 0 on success, negative error code on failure
+> + */
+> +int qda_memory_manager_register_device(struct qda_memory_manager *mem_mgr,
+> +				       struct qda_iommu_device *iommu_dev)
+> +{
+> +	if (mem_mgr->num_devices >= mem_mgr->max_devices)
+> +		return -ENOSPC;
+> +
+> +	iommu_dev->id = mem_mgr->num_devices;
+> +	mem_mgr->devices[mem_mgr->num_devices++] = iommu_dev;
+> +
+> +	return 0;
+> +}
+> +
+> +/**
+> + * qda_memory_manager_unregister_device() - Unregister an IOMMU device
+> + * @mem_mgr: Pointer to memory manager
+> + * @iommu_dev: Pointer to IOMMU device to unregister
+> + *
+> + * Removes the device from the registry and frees it.
+> + */
+> +void qda_memory_manager_unregister_device(struct qda_memory_manager *mem_mgr,
+> +					  struct qda_iommu_device *iommu_dev)
+> +{
+> +	int i;
+> +
+> +	for (i = 0; i < mem_mgr->num_devices; i++) {
+> +		if (mem_mgr->devices[i] == iommu_dev) {
+> +			mem_mgr->devices[i] = NULL;
+> +			break;
+> +		}
+> +	}
+> +
+> +	kfree(iommu_dev);
+> +}
+> +
+> +/**
+> + * qda_memory_manager_init() - Initialize the memory manager
+> + * @mem_mgr: Pointer to memory manager structure to initialize
+> + * @max_devices: Number of IOMMU context bank devices to make room for
+> + *
+> + * Return: 0 on success, negative error code on failure
+> + */
+> +int qda_memory_manager_init(struct qda_memory_manager *mem_mgr, int max_devices)
+> +{
+> +	if (max_devices <= 0)
+> +		return -EINVAL;
+> +
+> +	mem_mgr->devices = kcalloc(max_devices, sizeof(*mem_mgr->devices), GFP_KERNEL);
+> +	if (!mem_mgr->devices)
+> +		return -ENOMEM;
+> +
+> +	mem_mgr->num_devices = 0;
+> +	mem_mgr->max_devices = max_devices;
+> +
+> +	return 0;
+> +}
+> +
+> +/**
+> + * qda_memory_manager_exit() - Clean up the memory manager
+> + * @mem_mgr: Pointer to memory manager structure to clean up
+> + */
+> +void qda_memory_manager_exit(struct qda_memory_manager *mem_mgr)
+> +{
+> +	cleanup_all_memory_devices(mem_mgr);
+> +
+> +	kfree(mem_mgr->devices);
+> +	mem_mgr->devices = NULL;
+> +	mem_mgr->max_devices = 0;
+> +}
+> diff --git a/drivers/accel/qda/qda_memory_manager.h b/drivers/accel/qda/qda_memory_manager.h
+> new file mode 100644
+> index 000000000000..7e38c8a18284
+> --- /dev/null
+> +++ b/drivers/accel/qda/qda_memory_manager.h
+> @@ -0,0 +1,55 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
+> +
+> +#ifndef __QDA_MEMORY_MANAGER_H__
+> +#define __QDA_MEMORY_MANAGER_H__
+> +
+> +#include <linux/device.h>
+> +
+> +/* Forward declarations */
+> +struct qda_dev;
+> +
+> +/**
+> + * struct qda_iommu_device - IOMMU device instance for memory management
+> + *
+> + * Represents a single IOMMU-enabled device managed by the memory manager.
+> + * Each device can be assigned to a specific process session.
+> + */
+> +struct qda_iommu_device {
+> +	/** @dev: Pointer to the underlying device */
+> +	struct device *dev;
+> +	/** @qdev: Back-pointer to the parent QDA device */
+> +	struct qda_dev *qdev;
+> +	/** @id: Unique identifier assigned by the memory manager */
+> +	u32 id;
+
+What kind of identifier? What is going to use it? I don't see any
+readers in this patch, please don't add useless data.
+
+> +	/** @sid: Stream ID for IOMMU transactions */
+> +	u32 sid;
+
+Do you need to store it?
+
+> +};
+> +
+> +/**
+> + * struct qda_memory_manager - Central memory management coordinator
+> + *
+> + * Coordinates memory management across multiple IOMMU devices. Maintains
+> + * a registry of devices in an array sized to the number of context banks
+> + * described in the device tree.
+> + */
+> +struct qda_memory_manager {
+> +	/** @devices: Array storing registered IOMMU devices */
+> +	struct qda_iommu_device **devices;
+> +	/** @num_devices: Number of registered IOMMU devices */
+> +	int num_devices;
+
+What for? Is devices array to be looped up to num_devices or
+max_devices?
+
+> +	/** @max_devices: Capacity of the @devices array */
+> +	int max_devices;
+> +};
+> +
+> +int qda_memory_manager_init(struct qda_memory_manager *mem_mgr, int max_devices);
+> +void qda_memory_manager_exit(struct qda_memory_manager *mem_mgr);
+> +
+> +int qda_memory_manager_register_device(struct qda_memory_manager *mem_mgr,
+> +				       struct qda_iommu_device *iommu_dev);
+> +void qda_memory_manager_unregister_device(struct qda_memory_manager *mem_mgr,
+> +					  struct qda_iommu_device *iommu_dev);
+> +
+> +#endif /* __QDA_MEMORY_MANAGER_H__ */
+> diff --git a/drivers/accel/qda/qda_rpmsg.c b/drivers/accel/qda/qda_rpmsg.c
+> index 723b3e61bf0a..64bf503106d9 100644
+> --- a/drivers/accel/qda/qda_rpmsg.c
+> +++ b/drivers/accel/qda/qda_rpmsg.c
+> @@ -42,11 +42,25 @@ static void qda_rpmsg_remove(struct rpmsg_device *rpdev)
+>  	drm_dev_unplug(&qdev->drm_dev);
+>  	qdev->rpdev = NULL;
+>  	qda_cb_unpopulate(qdev);
+> +	qda_deinit_device(qdev);
+> +}
+> +
+> +static int qda_count_cb_nodes(struct device_node *parent_node)
+> +{
+> +	struct device_node *child;
+> +	int count = 0;
+> +
+> +	for_each_child_of_node(parent_node, child)
+> +		if (of_device_is_compatible(child, "qcom,fastrpc-compute-cb"))
+> +			count++;
+> +
+> +	return count;
+>  }
+>  
+>  static int qda_rpmsg_probe(struct rpmsg_device *rpdev)
+>  {
+>  	struct qda_dev *qdev;
+> +	int num_cbs;
+>  	int ret;
+>  
+>  	qdev = qda_rpmsg_alloc_and_init_qdev(rpdev);
+> @@ -59,10 +73,15 @@ static int qda_rpmsg_probe(struct rpmsg_device *rpdev)
+>  		return ret;
+>  	}
+>  
+> -	ret = qda_cb_populate(qdev, rpdev->dev.of_node);
+> +	num_cbs = qda_count_cb_nodes(rpdev->dev.of_node);
+> +	ret = qda_init_device(qdev, num_cbs);
+>  	if (ret)
+>  		return ret;
+>  
+> +	ret = qda_cb_populate(qdev, rpdev->dev.of_node);
+> +	if (ret)
+> +		goto err_deinit;
+> +
+>  	ret = qda_register_device(qdev);
+>  	if (ret)
+>  		goto err_unpopulate;
+> @@ -71,6 +90,8 @@ static int qda_rpmsg_probe(struct rpmsg_device *rpdev)
+>  
+>  err_unpopulate:
+>  	qda_cb_unpopulate(qdev);
+> +err_deinit:
+> +	qda_deinit_device(qdev);
+>  	return ret;
+>  }
+>  
+> 
+> -- 
+> 2.34.1
+> 
 
 -- 
-With Best Regards,
-Andy Shevchenko
-
-
+With best wishes
+Dmitry
