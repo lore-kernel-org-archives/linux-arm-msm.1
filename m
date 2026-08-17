@@ -1,220 +1,406 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CB46D275AFD
-	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 17:43:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56BAD45628B
+	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 17:44:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.47
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786988608; cv=none; b=nofftavBWQ2NjDU/bBH4lpuiMl0wOfFtXqmeTHp6GjDVWLTZHoN7KmeOiRTMrh7k3zkGy0ckIUhxZNKTgfWvZ3gUTb7LcBES0pU6w3dkToaEXovTZHY5diKSV3igUzwMDkMbkwW62fCGDTm2uwzFjKQbo9atQ0hXUHXMpAwCa/w=
+	t=1786988701; cv=none; b=LFArGzImAthdBwXwqOytDIsaWX/P1ZHDrKyFih7pRtxEBxy6OMqLtmscCTcCnGZd6tYD4kJPwVlr7iU3tv4S9YfJ3H7hqbg4EozUfYL7JggNMsUyxexPmAONnIrXbNHGdeansZGa26iMzr4TvC+mA8Y0KLzp5hKvylJew/pst8U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786988608; c=relaxed/simple;
-	bh=q8htZKQfqDE/H65M5Dr/6N9CbKrggkq/UqTDMoakUJY=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=INlz0F/GXRBulz2Hw6AeaZrLZMcY52Z9y7sYukBYX6SDYhGQca1JnfQ9df7f8LDH6slc0TLi3SG5PaooFXiDHHc89duLD4TEsy2UPp3quTSahY0XT9GEu4urg0iuJgW9OG+qr/WcwGWWmEh3XsvNqdsG/ofJqKqCa5XQcpIWl4Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=UZ95tZ/n; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=BpBEW5OI; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1786988701; c=relaxed/simple;
+	bh=A/BYLk7bw9Ejae64R/1icJiIkrzaDbooTjrEXUYratA=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=bZcKoz15+z+/hhmwNm+ZHnq7OYpHwFF9cHj5Fl15wa8XlN7l/WQGYQ/MJXzQ4NJ6jKpGHwrYRND1AIcR/Z7/hq9ur8i/W7A2RdCPXlZSr1D2XbGJh+aRP9JRyTBV2Y17Vfa0u69dgsEU344dOWbYZCUEkdo6pW/Nut0L/z24Hjo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=FMCu0xkE; arc=none smtp.client-ip=209.85.221.47
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="UZ95tZ/n";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="BpBEW5OI"
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67HGdthr2874980
-	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 17:43:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	P9M91F8ik4b4OsC2PAZnpCBSh900aFVtQaA3816ZPpU=; b=UZ95tZ/ntjpGX/em
-	gcGL/NLYCHXrA+EqH3PEkeALdKf/a2d+yU8T4Cx1eIFcDwViWdnQWtjBaOKX/v3m
-	s4eqg90J5TYaQ2JC7G3knMfStJGFTPSvP4byCgJF69JRVrESPiGygCM0FWHFHPO+
-	STIGk/HM58HfvMVejrnXQUAcKHgbRGWwQYFVoCXJmmmYqlENlOoNgy2DmV0n/HNp
-	YzCpyXur/ZP+jhzJJA/hlU5GHmqrb5/VLpHR7iErFXIOU+4VEt/PSxgA5LlB5M2q
-	hS/197+UqlPQa0vgy7G0f5u9Y0LfwWkZ9ONFi/X2+XxaGQLcDslaamw7N8zB47Kg
-	zm2dpg==
-Received: from mail-pl1-f199.google.com (mail-pl1-f199.google.com [209.85.214.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4615g8p2-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 17:43:26 +0000 (GMT)
-Received: by mail-pl1-f199.google.com with SMTP id d9443c01a7336-2ce7dff6253so1181195ad.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 10:43:25 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="FMCu0xkE"
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-4813ea321cdso89417f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 10:44:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786988605; x=1787593405; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=P9M91F8ik4b4OsC2PAZnpCBSh900aFVtQaA3816ZPpU=;
-        b=BpBEW5OI/G3mUqKCW2qX3sVNZ5uLg0obDwlqfyjpo0isN44c/YjmRzKX/kXVVXHcVv
-         Szbur7FqQjP1bM32C2vv4ipCir1oUYNV8gkuX0X/4UfqRizONTUbMIs1MCvOUwmmCPBN
-         T778/m/xaCqmUz4+GXi5beM6p2bDXEdsGkyN4ob7aXFlt8MxNDi4ig9Zp6tCvDEte7zM
-         AeFzbxdP1PmIDSURjk9Hct8ODgPVl7PFGo/mURnwxCH4qexe+FqjfaNLkllTsRWQkRDc
-         31GcGvB1y/jpTP32u8qBRtUg8o6KGT2pKVfEeuXZvJsooA0wFu9abMauZTgIYV6yborc
-         M32A==
+        d=linaro.org; s=google; t=1786988697; x=1787593497; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=i6O6VTakhY2h37xUYJTqMZ6cRR1Y8QjlwcHWujcmkns=;
+        b=FMCu0xkEPhq5SUhy1ow2d8CFomUhUHwavQ4f5P7LllaP/Gab4TzFc2pGj10bzYOS5/
+         fMqJZ9BfPPRqgJgLA3uutx62EEnRLlDUtdVNnscGsyZxsavovaQQ7swtWM/BrbF5xvrC
+         h7BGS1RoiAOXf+EhwpCzehi5s6jIo62WCf7Gow3eSwYz+n+Gn+f3HZ7nfAgFSpGVObST
+         uwkr2ykew/1NFsSL0mYeVASAIow845Eoz2DAShEG5RQYiF4gFNkSKLn2yXYDXOc9KxQC
+         BZQvaP3DdXvnIlH1/K7JvEidFrSfTNkC8IXAxqeQ3ID28DQL246UJ1RsVnwRKvhV+onK
+         1Gmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786988605; x=1787593405;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=P9M91F8ik4b4OsC2PAZnpCBSh900aFVtQaA3816ZPpU=;
-        b=VAlZ4A7NpOHqmPY0WmPFK9onmf+ZWidfEeCAy7vmYzd3qQdBB3Ki5kWKAYdYtEIrwn
-         V5F1ZE85RpWIfBu3S2JLkOkOEK3Fv7ElIINxRJyQkOTpnEdY4P+n4fkP1jvxa6mSoa1E
-         hLpChA+NKNupPshy0fpmvMGIfoXvRMmYeayhM5hAksDg1v5FxSnRkFiIss5Yf4sZh2V/
-         e+x8vUedBdMchnjC4wqHcTBEU4FaLJrxwpGh0oTy++5BoZyT2yXpEHjH8x8Tol0LI3f1
-         jaZT3LEwCjMxmauz8G8rMEVMd1CwCJiYeGn6DClr8ihwbogWTo9MP7kLoQ8huICNeqAw
-         VVSg==
-X-Forwarded-Encrypted: i=1; AHgh+RqLc0iE1j9STtaSuWAgWYnt8vQa5O7Iu+PDQxK3zOqtWF7dCAUWBQYAmtu8/ortDVI0WIgd2QdxRNRFvCSW@vger.kernel.org
-X-Gm-Message-State: AOJu0YzpjcsMMuUg6ETEcQ4/RmplBXI0zl3OaVLs5W6LfAHyufhfBzVg
-	mShmCNhFWuz1fejagKg77PPwCYWRKOyQWRa2YcsixPvXVWRt8YAX7GsCIM/mlh60Mk2p1B4x4Pt
-	PWDNKJrvpaPLclyh85/4ly06AXRsT0eYCy8bavt4QViFEaVKkUFcDqQBFpFLsxhXyNqhe
-X-Gm-Gg: AR+sD12T5HdShAdN5XCmezoxgnUOYBRJ1BA4cD8ldihCyo4ewyMB+nO6NRUEpg6trIm
-	nhrySx9ZF1n3KnB3has8A/QVd7q0hfVKBASJGGhivtQtqXtMx+MSQ7Jj1fAQAFS3zDUTp0uL3uE
-	s7311tUaMeagPdwlyb1jt/ulVg7vfwfWRtrhlPWNSLix3/K9trUoKOHPCEeRiGrgjdEhPSLtTer
-	dqWQBmTzfEuVmqqBVReyvy98QpjrhaM2WD9XgqAGj9x4tLHzdWY0ic0EgsDU27fx3oZJ7B/zJIS
-	6UebgW4mSQfC149ZEveeLsdxYxTJcG5aE2jLXYr4nUArV+lsrtmo4e4xv24aziq8Vkx+qf5bQQj
-	h8OFAQ7yqdTocOgr024A5A0o+RW++hW4Jig==
-X-Received: by 2002:a17:902:d490:b0:2c9:97a7:3283 with SMTP id d9443c01a7336-2d5cad94334mr4231905ad.23.1786988605206;
-        Mon, 17 Aug 2026 10:43:25 -0700 (PDT)
-X-Received: by 2002:a17:902:d490:b0:2c9:97a7:3283 with SMTP id d9443c01a7336-2d5cad94334mr4231465ad.23.1786988604481;
-        Mon, 17 Aug 2026 10:43:24 -0700 (PDT)
-Received: from [192.168.1.11] ([122.179.38.192])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d5c1ef0147sm6510425ad.77.2026.08.17.10.43.19
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 17 Aug 2026 10:43:23 -0700 (PDT)
-Message-ID: <e9da1e84-a7a5-44ba-b392-ce098f781dfa@oss.qualcomm.com>
-Date: Mon, 17 Aug 2026 23:13:17 +0530
+        d=1e100.net; s=20251104; t=1786988697; x=1787593497;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=i6O6VTakhY2h37xUYJTqMZ6cRR1Y8QjlwcHWujcmkns=;
+        b=SMbYx4SP8lCgdFo/3o+yGbNedTUpqEuWgfxuTUiPsyGbMcQQAD/TfYJAvysix/JUXu
+         XlE2z6ItGYZ4ioqxSxz5AvoGnuXXPwAnpjuUAJ9RqrB/N+t+A1kg1KMQsUwyM5w1Uu4j
+         LMm4qAvvoosUFflcRTfAgiuzZJrtpKDXK352jLnipQMdJqJJT8q8XDKO/ND9chdY4bUA
+         REe2qMHVZJ8sy7Xb3g9gHFktpZuTe4W6tlpY69SSdxGSXeKPbKZHomqeGBhlUSra+MU1
+         iVU5YBAa0Vu8X7qQdmye+BncVvp/XmX3sPRqVcILfPkFrWHnxzDqfEEw99iJambDcfN+
+         VZZA==
+X-Forwarded-Encrypted: i=1; AHgh+RqzFSpP0BDixjcZ5kZne8bfgL4hPoI2sCSxqaoSPnS9lJ6mSOlkLxajEIGCyc0jClTw3NaZSzcsKGAEFGLh@vger.kernel.org
+X-Gm-Message-State: AOJu0YxbMgvogPLSc0f4RSekJxXnWC1w3NgkRPDf3JwVR6/zboBS5jqW
+	lxkraRXloEbzF1jJ+CmWSBuTa67dSSbVQHNwQHAuyoc+7/cYmSgNYLwB9RWUsxGjPdM=
+X-Gm-Gg: AR+sD10Pjla8TlRyBFE4qcc8PjS4qWgytqVU/NsEVUz+Lo4hWCgroCLoC7BbUWrd7fM
+	mLUXNLumIAJYhgXXVbAdsBqXPQb7VUrWbb9Y3+Xe+gJSv7cpBXKrvo7sr3/J6HZTB3w7GzJU3jh
+	8SSku2AS0SZ8sv+/pIOBzYTFSrgDbwupI1BfRXrN0qMxcX6Vbc9VtKmZQ1QqxsJUunzkFZL3VFI
+	PTwh/fJ45vqVRav7xSaDyIxibaI3G/l+d8a3EJpEJOox/9ZR4A2LbBOgXEjvcsuZvCVyykxLsPJ
+	z0WL6EGWivZdZJXMNx8hNx0oYefKMi8cTISR+X0MQF8zRrlXuNvStAIaNZRRoHbhK2zPJ6b/Kix
+	lXmoUsiSGiUQSiB2wnaoca7dIVTa2zcpahTwmhwXYEYziu3Nb3tDE3So4czkRCbP6JGzqht862S
+	ddEMY7IpQ7XHUDQl7xHO+c3/5C4dtKHh1o6Ts8/LIxxXKJ+Lyah6HuZrJNO8j4mL7OHQYguZ8v
+X-Received: by 2002:a05:600c:34c7:b0:499:8afd:4a9f with SMTP id 5b1f17b1804b1-499a05ac869mr20348795e9.0.1786988697459;
+        Mon, 17 Aug 2026 10:44:57 -0700 (PDT)
+Received: from linaro.org ([2a02:2454:ff24:7210:7281:1989:ca4f:c9c9])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-482a5a7c568sm5614066f8f.18.2026.08.17.10.44.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 17 Aug 2026 10:44:57 -0700 (PDT)
+Date: Mon, 17 Aug 2026 19:44:46 +0200
+From: Stephan Gerhold <stephan.gerhold@linaro.org>
+To: Hongyan Xu <getshell@seu.edu.cn>
+Cc: Stephan Gerhold <stephan@gerhold.net>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	Sergey Ryazanov <ryazanov.s.a@gmail.com>,
+	Johannes Berg <johannes@sipsolutions.net>,
+	Andrew Lunn <andrew+netdev@lunn.ch>, davem@davemloft.net,
+	Eric Dumazet <edumazet@google.com>,
+	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+	netdev@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: Re: [PATCH net v3] net: wwan: qcom_bam_dmux: fix TX DMA channel
+ use-after-free
+Message-ID: <aoNIjgCblcfcxUVI@linaro.org>
+References: <20260815100454.695-1-getshell@seu.edu.cn>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] arm64: dts: qcom: agatti: Add memory-region for audio
- PD
-To: Chris Obbard <chris.obbard@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Bharath Kumar <bkumar@qti.qualcomm.com>,
-        Chenna Kesava Raju <chennak@qti.qualcomm.com>,
-        Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20260807-agatti-audio-v2-1-3959b1ab8059@oss.qualcomm.com>
- <CAPnEM6b49hbfaXKd1y+JmF2FXSv8CAxau4JuUmJRZbX0YTpdpA@mail.gmail.com>
-Content-Language: en-US
-From: Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
-In-Reply-To: <CAPnEM6b49hbfaXKd1y+JmF2FXSv8CAxau4JuUmJRZbX0YTpdpA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-GUID: Vm0llK7nwWzapVLORTgX8tYZ7Gd9Fy_R
-X-Proofpoint-ORIG-GUID: Vm0llK7nwWzapVLORTgX8tYZ7Gd9Fy_R
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE3MDEzNiBTYWx0ZWRfXz0LKQ+QBRX4k
- GdiIV/8kUKxvfoD4sgerBHFWGLvfRKb+sqYvBwVkKfQM7hIGIF4xyI9+DLnD18BgqboAYM/3b6m
- SypyAquFv+afZ89M69l/4Bdc1BnVq1OdfRpBTfDWamrH7HySvb7O96fe3sXCbVdxrQWgMqk0eFc
- rj0WbPUGdUT0zxZhvJ4P1saswQy2dG+wau9CdyolEX00gv2oWLyEX74IlmilHssLatw828TBz7M
- zABvUKA+OFjmK//HH6uzZu0XCKheCoVezZ27yUNwmYsNVPMoLiJnJ+zsHQhTnLK0+ELIvbJS8OS
- VG9tnOvy2M2dAvlBzMblumCf8VUpOimqCHjfR+KSrfzfYQIrZKY99ER4ZL12O6WgdGrJDuMhEYX
- SdNkbFwO4WBpEQhfF5s/qhy5pyeFyLXzxnHktBTLn2A2PIxl+q46o84KjGySADUQs/o6qsB6vW8
- KPFxh6uNfcXrSwIDxGQ==
-X-Authority-Analysis: v=2.4 cv=Ruf16imK c=1 sm=1 tr=0 ts=6a83483e cx=c_pps
- a=JL+w9abYAAE89/QcEU+0QA==:117 a=TVPr0HEZzowgGefiBlzExg==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=NEAV23lmAAAA:8 a=lVFznFW_EhjhjjrtoAIA:9
- a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10 a=324X-CrmTo6CU4MGRt3R:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE3MDEzNiBTYWx0ZWRfX/zq/VHL/5wmR
- jjaMvbSeN9XkU+JRCnJI5eE0V2GVxx9qSVFHxsxdBW+8TwInO8RWCQzZkI3Mr2hbVSJ8HBXlaZ+
- Id2bnCZjybw5ySgPdOhJqXLd6Tle6EE=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-17_02,2026-08-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0 bulkscore=0 impostorscore=0 malwarescore=0
- priorityscore=1501 lowpriorityscore=0 adultscore=0 phishscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608170136
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260815100454.695-1-getshell@seu.edu.cn>
 
-
-
-On 8/15/2026 2:56 AM, Chris Obbard wrote:
-> Hi Vinayak,
+On Sat, Aug 15, 2026 at 06:04:53PM +0800, Hongyan Xu wrote:
+> The modem power-control interrupt can release dmux->tx while the command,
+> netdev transmit, or deferred wakeup paths are preparing and submitting
+> DMA descriptors. A runtime PM reference alone does not order those paths
+> against the modem-driven interrupt.
 > 
-> On Fri, Aug 7, 2026 at 6:51 AM Vinayak Katoch
-> <vinayak.katoch@oss.qualcomm.com> wrote:
->>
->> Reserve memory region for audio PD dynamic loading and remote heap
->> requirements. Add the required VMID list for memory ownership
->> transfers.
->>
->> Signed-off-by: Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
->> ---
->> Changes in v2:
->> - Fixed VMID list alignment.
->> - Link to v1: https://lore.kernel.org/r/20260806-agatti-audio-v1-1-cd6766cc9ccb@oss.qualcomm.com
->> ---
->>  arch/arm64/boot/dts/qcom/agatti.dtsi | 11 +++++++++++
->>  1 file changed, 11 insertions(+)
+> The pc and pc-ack IRQ actions do not encode the modem protocol order. A
+> pc=false edge raised before a new host power vote is acknowledged can
+> therefore be handled after runtime resume observes the acknowledgment and
+> starts using TX. On the other hand, acknowledging a new pc=false transition
+> while the acknowledged host vote remains active lets the modem power down
+> the DMA engine underneath the driver.
 > 
-> Thanks for the patch!
+> Serialize power-control state with a mutex and distinguish a requested host
+> vote from an acknowledged one. Publish each vote acknowledgment and its
+> completion under that lock. Before publishing the host-vote
+> acknowledgment, sample the actual pc line and process any delayed
+> transition. A valid pc=false transition is then handled before runtime
+> resume returns, when no path can submit through TX. The channels are
+> released before pc is acknowledged, and a queued BAM_DMUX_CMD_OPEN remains
+> queued for the new TX channel.
 > 
-> This fixes a boot loop on Qualcomm QRB2210 RB1 and Arduino UNO Q, I
-> wonder if we could add a suitable Fixes tag ?
+> If pc goes low after the host vote was acknowledged, refuse the pc
+> acknowledgment and keep the DMA channels allocated. Remember the pending
+> transition so runtime suspend can first release the channels and only then
+> acknowledge pc=false. This preserves the protocol ordering without exposing
+> a released TX channel or cancelling an OPEN command that already succeeded.
 > 
-> Tested-by: Christopher Obbard <chris.obbard@oss.qualcomm.com>
->
+> Both IRQ handlers can now change the DMA channel state. Keep them
+> inactive until the initial probe state is committed, and disable both
+> before the final remove cleanup and before cleaning up a failed probe.
+> 
+> This issue was found by the author's in-house static analysis tool.
+> The patch was reviewed by the author.
+> 
+> Fixes: 21a0ffd9b38c ("net: wwan: Add Qualcomm BAM-DMUX WWAN network driver")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Hongyan Xu <getshell@seu.edu.cn>
+> ---
+> Changes in v3:
+> - Sample the pc line before publishing a host-vote acknowledgment so a
+>   delayed, valid pc=false transition is completed before runtime resume.
+> - Refuse to acknowledge pc=false after the active host vote was acknowledged.
+> - Complete a refused down transition during runtime suspend, releasing the
+>   DMA channels before acknowledging it.
+> - Serialize the vote acknowledgment and completion with vote changes.
+> - Gate both state IRQ handlers until probe initialization is committed and
+>   quiesce both before probe-error or remove cleanup.
 
-Thanks for testing!
+Thanks for reworking the patch again!
 
-This patch is a feature addition rather than a bug fix, so a Fixes tag
-would not be appropriate here.
+I think this approach could be viable. I need to allocate more time to
+fully understand the changes you are making, but so far it seems
+reasonable given the constraints we have in this driver.
 
-The boot loop on QRB2210 RB1 and Arduino UNO Q was caused by the
-userspace audiopd service file, not a kernel regression. That issue has
-already been addressed in the userspace FastRPC repository:
-https://github.com/qualcomm/fastrpc/commit/cd0c0dbbfef8ae950f9ebb4483a9b0192d8fb6a6
+A few initial comments below, perhaps this will help for my
+understanding.
 
+> 
+> Changes in v2:
+> - Track the host power vote and serialize the power-control paths.
+> 
+> Link: https://lore.kernel.org/netdev/20260808083457.2023-1-getshell@seu.edu.cn/
+> Link: https://lore.kernel.org/netdev/20260806060642.1281-1-getshell@seu.edu.cn/
+> 
+>  drivers/net/wwan/qcom_bam_dmux.c | 192 ++++++++++++++++++++++++++-----
+>  1 file changed, 161 insertions(+), 31 deletions(-)
+> 
+> diff --git a/drivers/net/wwan/qcom_bam_dmux.c b/drivers/net/wwan/qcom_bam_dmux.c
+> index cc6ace8..41928ed 100644
+> --- a/drivers/net/wwan/qcom_bam_dmux.c
+> +++ b/drivers/net/wwan/qcom_bam_dmux.c
+> @@ -12,6 +12,7 @@
+>  #include <linux/if_arp.h>
+>  #include <linux/interrupt.h>
+>  #include <linux/module.h>
+> +#include <linux/mutex.h>
+>  #include <linux/netdevice.h>
+>  #include <linux/platform_device.h>
+>  #include <linux/pm_runtime.h>
+> @@ -67,12 +68,17 @@ struct bam_dmux_skb_dma {
+>  struct bam_dmux {
+>  	struct device *dev;
+>  
+> -	int pc_irq;
+> +	int pc_irq, pc_ack_irq;
+>  	bool pc_state, pc_ack_state;
+>  	struct qcom_smem_state *pc, *pc_ack;
+>  	u32 pc_mask, pc_ack_mask;
+>  	wait_queue_head_t pc_wait;
+>  	struct completion pc_ack_completion;
+> +	struct mutex power_lock; /* Protect power-control state */
+> +	bool pc_vote;
+> +	bool pc_vote_acked;
+> +	bool pc_down_pending;
 
->> diff --git a/arch/arm64/boot/dts/qcom/agatti.dtsi b/arch/arm64/boot/dts/qcom/agatti.dtsi
->> index 590bd2432d85..2064eed01327 100644
->> --- a/arch/arm64/boot/dts/qcom/agatti.dtsi
->> +++ b/arch/arm64/boot/dts/qcom/agatti.dtsi
->> @@ -381,6 +381,14 @@ rmtfs_mem: memory@89b01000 {
->>                         qcom,client-id = <1>;
->>                         qcom,vmid = <QCOM_SCM_VMID_MSS_MSA QCOM_SCM_VMID_NAV>;
->>                 };
->> +
->> +               adsp_rpc_remote_heap_mem: adsp-rpc-remote-heap {
->> +                       compatible = "shared-dma-pool";
->> +                       alloc-ranges = <0x0 0x80000000 0x0 0x80000000>;
->> +                       reusable;
->> +                       alignment = <0x0 0x400000>;
->> +                       size = <0x0 0x800000>;
->> +               };
->>         };
->>
->>         smp2p-adsp {
->> @@ -2348,6 +2356,9 @@ fastrpc {
->>                                         compatible = "qcom,fastrpc";
->>                                         qcom,glink-channels = "fastrpcglink-apps-dsp";
->>                                         label = "adsp";
->> +                                       memory-region = <&adsp_rpc_remote_heap_mem>;
->> +                                       qcom,vmids = <QCOM_SCM_VMID_LPASS
->> +                                                     QCOM_SCM_VMID_ADSP_HEAP>;
->>
->>                                         qcom,non-secure-domain;
->>
->>
->> ---
->> base-commit: 1701fda2f58e345c050f4309971bdc07cd6146ba
->> change-id: 20260806-agatti-audio-357bcd74ae9c
->>
->> Best regards,
->> --
->> Vinayak Katoch <vinayak.katoch@oss.qualcomm.com>
->>
->>
+It's a bit tricky for me to fully understand all combinations of this
+flag. Could we use an enum for these to describe only the states that we
+care about? E.g. something like
 
+enum bam_dmux_pc_vote {
+	BAM_DMUX_PC_VOTE_INACTIVE,      /* pc_vote = false */
+	BAM_DMUX_PC_VOTE_PENDING,       /* pc_vote = true, waiting for ACK */
+	BAM_DMUX_PC_VOTE_ACKED,         /* pc_vote = true, ACK received */
+	BAM_DMUX_PC_VOTE_DOWN_PENDING,  /* pc=false received while host vote active */
+};
+
+> +	bool ready;
+>  
+>  	struct dma_chan *rx, *tx;
+>  	struct bam_dmux_skb_dma rx_skbs[BAM_DMUX_NUM_SKB];
+> [...]
+> @@ -670,25 +694,63 @@ static void bam_dmux_power_off(struct bam_dmux *dmux)
+>  	bam_dmux_free_skbs(dmux->rx_skbs, DMA_FROM_DEVICE);
+>  }
+>  
+> -static irqreturn_t bam_dmux_pc_irq(int irq, void *data)
+> +static bool bam_dmux_handle_pc(struct bam_dmux *dmux, bool new_state)
+>  {
+> -	struct bam_dmux *dmux = data;
+> -	bool new_state = !dmux->pc_state;
+> +	lockdep_assert_held(&dmux->power_lock);
+> +
+> +	if (new_state == dmux->pc_state) {
+> +		if (new_state)
+> +			dmux->pc_down_pending = false;
+> +		return false;
+> +	}
+>  
+>  	dev_dbg(dmux->dev, "pc: %u\n", new_state);
+>  
+>  	if (new_state) {
+> -		if (bam_dmux_power_on(dmux))
+> +		if (dmux->rx || bam_dmux_power_on(dmux))
+
+Do we need this new check, especially given that you added
+if (new_state == dmux->pc_state) above? I would think it should be
+impossible to arrive here with dmux->rx allocated.
+
+>  			bam_dmux_pc_ack(dmux);
+>  		else
+>  			bam_dmux_power_off(dmux);
+> +	} else if (dmux->pc_vote && dmux->pc_vote_acked) {
+> +		/* The modem must keep the DMA engine on until pc is acked. */
+> +		dmux->pc_down_pending = true;
+> +		dev_err_ratelimited(dmux->dev,
+> +				    "refusing pc down while host vote is active\n");
+> +		return false;
+>  	} else {
+>  		bam_dmux_power_off(dmux);
+>  		bam_dmux_pc_ack(dmux);
+>  	}
+>  
+> -	dmux->pc_state = new_state;
+> -	wake_up_all(&dmux->pc_wait);
+> +	dmux->pc_down_pending = false;
+> +	WRITE_ONCE(dmux->pc_state, new_state);
+> +	return true;
+> +}
+> +
+> [...]
+> @@ -724,40 +820,55 @@ static int __maybe_unused bam_dmux_runtime_resume(struct device *dev)
+>  					 BAM_DMUX_REMOTE_TIMEOUT))
+>  		return -ETIMEDOUT;
+>  
+> +	synchronize_irq(dmux->pc_irq);
+> +
+>  	/* Vote for power state */
+> -	bam_dmux_pc_vote(dmux, true);
+> +	bam_dmux_pc_vote_protected(dmux, true);
+>  
+>  	/* Wait for ack */
+>  	if (!wait_for_completion_timeout(&dmux->pc_ack_completion,
+>  					 BAM_DMUX_REMOTE_TIMEOUT)) {
+> -		bam_dmux_pc_vote(dmux, false);
+> +		bam_dmux_runtime_suspend(dev);
+>  		return -ETIMEDOUT;
+>  	}
+>  
+> +	synchronize_irq(dmux->pc_irq);
+> +
+>  	/* Wait until we're up */
+> -	if (!wait_event_timeout(dmux->pc_wait, dmux->pc_state,
+> +	if (!wait_event_timeout(dmux->pc_wait, READ_ONCE(dmux->pc_state),
+>  				BAM_DMUX_REMOTE_TIMEOUT)) {
+> -		bam_dmux_pc_vote(dmux, false);
+> +		bam_dmux_runtime_suspend(dev);
+>  		return -ETIMEDOUT;
+>  	}
+>  
+> +	mutex_lock(&dmux->power_lock);
+
+Personally, I think this function would benefit from using
+
+guard(mutex)(&dmux->power_lock);
+
+to simplify all the error paths.
+
+> +
+>  	/* Ensure that we actually initialized successfully */
+>  	if (!dmux->rx) {
+> -		bam_dmux_pc_vote(dmux, false);
+> +		bam_dmux_pc_vote_locked(dmux, false);
+> +		if (!dmux->pc_state)
+> +			bam_dmux_power_off(dmux);
+> +		mutex_unlock(&dmux->power_lock);
+>  		return -ENXIO;
+>  	}
+>  
+>  	/* Request TX channel if necessary */
+> -	if (dmux->tx)
+> +	if (dmux->tx) {
+> +		mutex_unlock(&dmux->power_lock);
+>  		return 0;
+> +	}
+>  
+>  	dmux->tx = dma_request_chan(dev, "tx");
+>  	if (IS_ERR(dmux->tx)) {
+>  		dev_err(dev, "Failed to request TX DMA channel: %pe\n", dmux->tx);
+>  		dmux->tx = NULL;
+> -		bam_dmux_runtime_suspend(dev);
+> +		bam_dmux_pc_vote_locked(dmux, false);
+> +		if (!dmux->pc_state)
+> +			bam_dmux_power_off(dmux);
+
+I understand that runtime_suspend() is now handling the pending pc
+transition, but why do we need power off handling in runtime_resume()?
+
+Previously, runtime PM was really fully focused around the TX channel
+management, so I'm a bit confused to see this here.
+
+Sashiko is also complaining that the pending state isn't taken into
+account here (which might be correct, but I haven't understood yet why
+this is here at all).
+https://sashiko.dev/#/patchset/20260815100454.695-1-getshell%40seu.edu.cn
+
+> +		mutex_unlock(&dmux->power_lock);
+>  		return -ENXIO;
+>  	}
+> +	mutex_unlock(&dmux->power_lock);
+>  
+>  	return 0;
+>  }
+> @@ -766,8 +877,9 @@ static int bam_dmux_probe(struct platform_device *pdev)
+>  {
+>  	struct device *dev = &pdev->dev;
+>  	struct bam_dmux *dmux;
+> -	int ret, pc_ack_irq, i;
+> +	int ret, i;
+>  	unsigned int bit;
+> +	bool pc_state;
+>  
+>  	dmux = devm_kzalloc(dev, sizeof(*dmux), GFP_KERNEL);
+>  	if (!dmux)
+> @@ -780,9 +892,9 @@ static int bam_dmux_probe(struct platform_device *pdev)
+>  	if (dmux->pc_irq < 0)
+>  		return dmux->pc_irq;
+>  
+> -	pc_ack_irq = platform_get_irq_byname(pdev, "pc-ack");
+> -	if (pc_ack_irq < 0)
+> -		return pc_ack_irq;
+> +	dmux->pc_ack_irq = platform_get_irq_byname(pdev, "pc-ack");
+> +	if (dmux->pc_ack_irq < 0)
+> +		return dmux->pc_ack_irq;
+>  
+>  	dmux->pc = devm_qcom_smem_state_get(dev, "pc", &bit);
+>  	if (IS_ERR(dmux->pc))
+> @@ -799,6 +911,7 @@ static int bam_dmux_probe(struct platform_device *pdev)
+>  	init_waitqueue_head(&dmux->pc_wait);
+>  	init_completion(&dmux->pc_ack_completion);
+>  	complete_all(&dmux->pc_ack_completion);
+> +	mutex_init(&dmux->power_lock);
+
+devm_mutex_init()
+
+>  
+>  	spin_lock_init(&dmux->tx_lock);
+>  	INIT_WORK(&dmux->tx_wakeup_work, bam_dmux_tx_wakeup_work);
+> @@ -817,31 +930,41 @@ static int bam_dmux_probe(struct platform_device *pdev)
+>  	pm_runtime_use_autosuspend(dev);
+>  	pm_runtime_enable(dev);
+>  
+> -	ret = devm_request_threaded_irq(dev, pc_ack_irq, NULL, bam_dmux_pc_ack_irq,
+> -					IRQF_ONESHOT, NULL, dmux);
+> +	ret = devm_request_threaded_irq(dev, dmux->pc_ack_irq, NULL,
+> +					bam_dmux_pc_ack_irq, IRQF_ONESHOT,
+> +					NULL, dmux);
+>  	if (ret)
+>  		goto err_disable_pm;
+>  
+>  	ret = devm_request_threaded_irq(dev, dmux->pc_irq, NULL, bam_dmux_pc_irq,
+>  					IRQF_ONESHOT, NULL, dmux);
+>  	if (ret)
+> -		goto err_disable_pm;
+> +		goto err_disable_pc_ack_irq;
+>  
+> +	mutex_lock(&dmux->power_lock);
+>  	ret = irq_get_irqchip_state(dmux->pc_irq, IRQCHIP_STATE_LINE_LEVEL,
+> -				    &dmux->pc_state);
+> +				    &pc_state);
+>  	if (ret)
+> -		goto err_disable_pm;
+> +		goto err_unlock_disable_irqs;
+>  
+>  	/* Check if remote finished initialization before us */
+> -	if (dmux->pc_state) {
+> -		if (bam_dmux_power_on(dmux))
+> -			bam_dmux_pc_ack(dmux);
+> -		else
+> -			bam_dmux_power_off(dmux);
+> -	}
+> +	bam_dmux_handle_pc(dmux, pc_state);
+> +	dmux->ready = true;
+
+Do we need the ready flag? Can we just leave the interrupts initially
+masked (IRQF_NO_AUTOEN) and then enable them here?
+
+Thanks,
+Stephan
