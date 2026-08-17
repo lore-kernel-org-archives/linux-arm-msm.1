@@ -1,72 +1,97 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C9D7B3B637A;
-	Mon, 17 Aug 2026 07:34:06 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2F6C2264A7
+	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 07:38:17 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.216.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786952047; cv=none; b=dam5ORcGZgXUzRRwyf+5BHHrxSPjDEfTWRGccFrhHkZgBbawVqSn2wkhAPw8s1Si6RJVyVTP/0GK5nQwouPVlqtTM5ogvNU191D1ZtNp7frl5sliA/2XiiaxrLwiMWS5K+XilXoixFU+8eA+6fNRe3pMheIpqMn9+5TUkKvJS8U=
+	t=1786952299; cv=none; b=Mjw2arKW7CDIwe5cHIBTpRjkY3VVdEThHK4MUGaGX79LPF94uBiixrYqw8hIm+ZKiXvuPi2LgVgnnxevCFMs+BWc1s+FgCzYeaLMEy3GIiBfPKBToyn1ng1dfDX5O/n9pxhCCcZ72YgsyOt5BuC5O7CiXtg0TnmwZDFxww5BG7I=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786952047; c=relaxed/simple;
-	bh=Dszy4/9tDthveOtsOy/E1oMsmq6teUORLcUGmmqahnI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=A77/MVxKTzhHTqJxookVib8tcUhbJg0d/CY9a2lvHxLWf5zxNqGKHC8NY3wwNZ08LVi/W94n8taN4FP6Xu4USSErTOVT/2gQGM/skIh3QzPmsc15jQBTniDD5bQ56+eZjxBZ4eaHE+hlwrjGCT6zqSKshQc36StfCdK5WG6JLNU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ZARyJkKy; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1786952299; c=relaxed/simple;
+	bh=h70NX2tPDeIemqmiH4OvRNY2fd98eCZxuoknqCOX6RI=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=Xmg2NGOF9nXFB5N4i60+Kw0aHi5WSFkXDQJNFF1K7Rx/1RuRUPwl5WaJncKU7jskfLkPdGkEnPTHUSFsjCi8BQl0yKsYPCsk+fiGWLwjIUVm6X/KSOM3Fy1lqpvOJ/+Qt5ABBi5QwjNAdubORm9NrwTqYDLwpALWAr+/AbIs5FI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=Nw1c1E8N; arc=none smtp.client-ip=209.85.216.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ZARyJkKy"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4E3C01F000E9;
-	Mon, 17 Aug 2026 07:34:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1786952046;
-	bh=OELdZFUCLGwyaUwNs1yktw4XPR6jAfb0Kxz4TG0SrYo=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=ZARyJkKya+vVkGWpoZI+yyEPlL8TLgY+iOHfKRJSoz1bfrDJTiLZCPyoff6mzVlFW
-	 hDdzwqJZSQZTTGJDkPTo3h+/wx38UH4ILx0bkJ4P3LO5ClxEywQFf63yhCl03Jr7CC
-	 oQrZf6q3+HTsu3lwQ/6/l34cujzlpcz016QabvWY3c8Gvs6H0rqBM4fAcaQidLlisv
-	 BBZCr8FwTmb4AwMO4Xriz0SKQjslyUAhN+i05DEnIhXK7uuXwf3njb/J02YqgLhtMd
-	 zyB6NbL401ORr1ekm3RfuWAdJhtdoV5a/Pgo6q8acEfnJ9lu46Wes+/FxLmjvoMZOS
-	 F++3N1P1PI8fw==
-Date: Mon, 17 Aug 2026 09:34:02 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Ulf Hansson <ulfh@kernel.org>, 
-	Michael Turquette <mturquette@baylibre.com>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney@redhat.com>, Taniya Das <quic_tdas@quicinc.com>, 
-	Georgi Djakov <djakov@kernel.org>, Bartosz Golaszewski <brgl@kernel.org>, 
-	Linus Walleij <linusw@kernel.org>, Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>, 
-	Robert Marko <robimarko@gmail.com>, Guru Das Srinagesh <linux@gurudas.dev>, 
-	linux-arm-msm@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
-	linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, linux-pm@vger.kernel.org, 
-	linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org
-Subject: Re: [PATCH v2 14/15] dt-bindings: arm: qcom: Document Kuno IDP board
-Message-ID: <20260817-authentic-watchful-seagull-fd6e3b@quoll>
-References: <20260814-kuno-soc-support-v2-0-3079794f0f73@oss.qualcomm.com>
- <20260814-kuno-soc-support-v2-14-3079794f0f73@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="Nw1c1E8N"
+Received: by mail-pj1-f45.google.com with SMTP id 98e67ed59e1d1-38e347638adso3726190a91.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 00:38:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1786952297; x=1787557097; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=Pi4vUpszV154rKYux2ZJWc/G1Sxirs0ok7VY9vQ3rG8=;
+        b=Nw1c1E8N2udfiXBQygA0FIHyyxbf6WNKYr2BxHlxdH+AB9NuhYqNpopdH0Vody40lX
+         eKT627OV5qH/elyOIUVSCqXkFLOrr12sAQNkRuj5GDZz7GqqqTm35ZsJJ1yyyIHEtN93
+         iN4augQ/LFarZqJu9aTgKdUVsCI2swO4hxz4xvYMsFGoDsLYovvzb4tLXD+Tw0vDrO12
+         8kzv2k0UXpi2Cd0w8TKQsiox0sZ51Dh9xs3vCGyoH8uFiODLWpSCTkFV9FzmhcdekSU+
+         fJHDHRWbJF+nA0P1PSyWZWV6irh2gzxnjOWRn2bEQ/JKLWiR/L36MlUzyv7hjgsffsHJ
+         avIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786952297; x=1787557097;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Pi4vUpszV154rKYux2ZJWc/G1Sxirs0ok7VY9vQ3rG8=;
+        b=IHgVjjbD9mee7QfB3FJognVMqeUq8yHXkHiqPTdUT9eWBIf3M9j18CIOfs+xCnejPV
+         7StrxnP/nd12CfZXjKVHRkCp5zJSAv3+9DPD8730oqvjqf0og7bKfe5gNYOHA57a9hX8
+         ZALLyBmCNVGapi/dKf7pMJ94sJBfIJfplAFSdS1Q6LkL5KexBHVWIUfj5zYbV22xJpng
+         A8dVwJhszPxwB3SOaAPdp9CRHWdc7CrK5J9i/OLSYLduJgjK+NJUh1w8QOFyqfmav8uc
+         +B1b7x/eTV7Y18LdVRANRkCl0YyOZhgdb7IGk1jWAaLy6FgmijjoAPRVO1v2eU89NlsQ
+         bidQ==
+X-Gm-Message-State: AOJu0Yy32eCgdK9qI3I9HuzRGh68P9n+H7+jzYkPtBZi0Q2CXVR8y2IT
+	9l9eEKXO9znR+92hwtpVqOtQcMqAEwEqXcfpAdLm9+x4AhHnPKSl8qhL
+X-Gm-Gg: AR+sD11p6/vpDQA4zddpqjP0I+ZVwwqeiQoz5KY9xmNUDDGyuJcA4CfcFmCEySGKDKN
+	vYEUrM+wU3SOlaUvZcs3hBmPFDz2h+jWgPQO7P9mBClEd4Q60bEskKql1JJ52QAFaTRgqg9KL52
+	dEZ7tPVgRMlKq5ZzkaZSVnV7jWwbTz6qtQgyrUkBwhJ95A1qSxqT/8rHzv4PpQMb6BLHewDcguM
+	GK7LRRaL/LmpheCSI+91RM9hv5n3gj+M6kLJZa3uaQF3rK+aQxDZUQrSfY3pAoA7heyMiU9Vm04
+	O1DMtIeKCk+m7T4PMLHOJM1PU5MuRbuLfEKuBF7JmHRnZabmcJf+z2hUGtPMEmF6PDbWaY6GXaz
+	rSRqgb5kh4909fpzJ0x1+AoXIFRn9f8qiL/X1RUhC1XWxaMtMWtdBK1TAtgXcrhA43QAEVLNq/U
+	6JQNM6L7waua5PQvPhvU4xbM8GDPKYe64iE8ZtrV80UdhAMzMAAxbXg5OT8FazouYHwzSTWx34S
+	uCbH5d0sSBZ
+X-Received: by 2002:a17:90b:1b05:b0:38e:3fdc:62e5 with SMTP id 98e67ed59e1d1-3933ba9e81bmr22812914a91.19.1786952297087;
+        Mon, 17 Aug 2026 00:38:17 -0700 (PDT)
+Received: from localhost.localdomain ([157.51.221.167])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-3267cc91278sm3359088eec.31.2026.08.17.00.38.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 17 Aug 2026 00:38:16 -0700 (PDT)
+From: Sreeshankar K <sreeshankar0910@gmail.com>
+To: andersson@kernel.org,
+	konradybcio@kernel.org,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org
+Cc: linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	Sreeshankar K <sreeshankar0910@gmail.com>
+Subject: [PATCH v2 0/2] Add Qualcomm SM7250 SoC ID
+Date: Mon, 17 Aug 2026 07:37:53 +0000
+Message-ID: <20260817073755.2087-1-sreeshankar0910@gmail.com>
+X-Mailer: git-send-email 2.43.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260814-kuno-soc-support-v2-14-3079794f0f73@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
 
-On Fri, Aug 14, 2026 at 01:01:45PM +0530, Hardeep Sharma wrote:
-> Document the Qualcomm Kuno IDP board and register the "kuno"
-> codename in the SoC naming convention schema.
-> 
-> Signed-off-by: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
-> ---
->  Documentation/devicetree/bindings/arm/qcom-soc.yaml | 4 ++--
->  Documentation/devicetree/bindings/arm/qcom.yaml     | 5 +++++
->  2 files changed, 7 insertions(+), 2 deletions(-)
+Qualcomm SM7250 SoC is known as lito.
+This patchset add SM7250 SoC ID.
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+v2 - Fixes/Changes
+1. Changed the commit order in patchset (first bindings, then driver).
 
-Best regards,
-Krzysztof
+Sreeshankar K (2):
+  dt-bindings: arm: qcom,ids: Add SoC ID for SM7250
+  soc: qcom: socinfo: Add SM7250 SoC ID
+
+ drivers/soc/qcom/socinfo.c         | 1 +
+ include/dt-bindings/arm/qcom,ids.h | 1 +
+ 2 files changed, 2 insertions(+)
+
+-- 
+2.43.0
 
