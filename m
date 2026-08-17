@@ -1,87 +1,87 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1B59837DEBC
-	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 19:58:58 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5F88F3F7899
+	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 20:14:51 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786996740; cv=none; b=pWQ6SE70xRy3udhsB8m9vv2HGToY9EIIMlLanaxApMrPU+ZAbttRzRdAhnrQoZMUecgFz1L+ehPxQ6dXLr9ohI6qi2jp+M4K7fYWNgglS5YsnnqENahMIS8PbC2QMXgUJhRMH683nKAmRdks5DBXDi9+TrZ3EcNHvCKWHFKCerE=
+	t=1786997694; cv=none; b=GHBrnB97WaMfpRQ7KHB2ValCkdT9pBo8GLOX8qzjbrglGef9bhxLPWTwXuOG6FaIa5E0N7IPnrd0bnY1D4P1FmXDxudQwgwGDhfKLvq4hCRSQkaDxr3wto1iVQy9zdt488WTBjk6io9Zf/Ziml+Wcc0hL2CJjRfwnPDRgTPdBdk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786996740; c=relaxed/simple;
-	bh=X3Y2YsxXZpGBpwVI5sMhB6UkPUPTd3Rx87r5bJPvajI=;
+	s=arc-20240116; t=1786997694; c=relaxed/simple;
+	bh=0p5U2mZ9pFGL+cVxKO+d4T7B5DEZxK2XBgxHmp+6t5Y=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=mw45mRhzb19HOyfE7V0cKUt4lpl/f9/gGUYSAEtl7wvMqnT/y0cNJyYMOhl18qwXqmOIZ8/YCpUCfT7ykSk1L3itxI32mzWF98oi20Y3oLkmuIzwMCU/6pCS2JiSB0UKue7gc5KTCYI/1VRQOnS2fkbB1DjnG0nTcM1jevFhMrg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Q0GJxCkk; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=APM23dqI; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=I5I0pK2MJLqBeQWDcGwqRFJ2ICv0wrhdI2rZcUzZGP+sNzZDvSjlRqNWBD4eYYer7HJs7m/YjzYm0y+kOElsTQId7pE9Sa7gzUKXpEfhUox+CwBQu1oJEmO57T9OIOfHtJdH+JK54AgA/ZNK6a1V/EUWy7EywzsIgiRn6MprS7g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=BNgCGo7U; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=AqMFncfn; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Q0GJxCkk";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="APM23dqI"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67HIR5XF2211196
-	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 19:58:58 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="BNgCGo7U";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="AqMFncfn"
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67HIRKdO2722884
+	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 20:14:50 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	I6KZVUu0NOdGo4+fh3bcS297v312oyXU0yQQKWOUJo8=; b=Q0GJxCkkdLSpHIAP
-	Uv4KfkhkkoUQr+kg/XD/av2u/8ChZ/CgZmzH8if8DEk/XK8FH5giKdPLxMzP2vor
-	LwBJNzb6walivvggEj/tXPZoOeJc2yEa1dKyE7Ri4JroeuoJ6yFVvN3Th/dSLqyn
-	rbEoCcGTJUEQxFAPak1r28oxHe3h2D/NJUQhZKl0ptu53VtremMPbh3vfgAL+keO
-	ocreXMhBmF7KLFCKrGahZTxfFKI6gtvRkrVkuDRx7vh5qQfCHaT7JFeaoA5HVWKZ
-	/xk9yuuW1LL7RyJIDoLu6FJYg7OMEuiCn2dEx+shX9+urJ0wiZWVeoZwicMGhQ4V
-	ED3EYQ==
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com [209.85.214.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g3x30jw75-1
+	u3lGwKZ0pCeF54C056iWA8ghYAbCCtaH8ropmAW0y5A=; b=BNgCGo7Un+ByFUnD
+	5Oh3jF0sPvxVzWUTOqAgr8lHlQSWzmR7ImIeTzz/Nho0YOtfHCnM7uV8UR+hBuxA
+	a2Bp4kO34kUjnQqTZedrFmGGxDGvsmkoINOncJclGFh1126oEZo22C4TOIgq6OXc
+	KRVhMxFy7pQICl4okZ8aVAiwXlklpYs0UZPnD4jZemsYxD5bCpV6lLZGiXel7ARW
+	FbLRowLENdn38C3ZES/C3X9LEvd2tiNg7EKdM4sdecRXR8p0LL7PuPnNAhHFUVE+
+	lQ4yqFGgMx3ePGtuHFIkr6UEzqj2cdev7zawTWqbo+YLsngbcNfHcf3FDrQaMXjr
+	s2kNZA==
+Received: from mail-pg1-f197.google.com (mail-pg1-f197.google.com [209.85.215.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g3xw8jupf-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 19:58:58 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id d9443c01a7336-2d371c85362so10450205ad.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 12:58:58 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 20:14:50 +0000 (GMT)
+Received: by mail-pg1-f197.google.com with SMTP id 41be03b00d2f7-ca8aee88725so5829613a12.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 13:14:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786996737; x=1787601537; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1786997689; x=1787602489; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=I6KZVUu0NOdGo4+fh3bcS297v312oyXU0yQQKWOUJo8=;
-        b=APM23dqInovtkcx2ScGPD7TyseThb4Rj9a4NBtiV753K//araWyzQ8cRz+LWxsiPQ1
-         FpajRnIdcAvEBUmMmGgYi6/GLzrI1vHfAG7hW1IKB68l+iKL0LI34PW213z10fjnhx0F
-         +X41gAPXqlZT8P+r+K6UQuEN8+vvNWycFM54y5dGjnIJWbfxWZqMxclmkHvNeCGzp3ml
-         EjKSKdeE4iAafEMmg9vtgWpMvjkdSpC2avdl32a3L6XVP59ctx0xo6AvaJN1EXhsbqpj
-         9vJ0TaiiLmQBO9Qpl7y5u4MyyT+Lt+w3t34kK32Rc4hiZmgy5Mb0jYAytm5/bF5j19Fj
-         NUbA==
+        bh=u3lGwKZ0pCeF54C056iWA8ghYAbCCtaH8ropmAW0y5A=;
+        b=AqMFncfnFE13t1lgsn6bUhy68YYzCitgKbNeKU7ZjjOPkCTS14WTaLhzV1eKPf48Cc
+         2B3VDViAE9/cvMSiIK4Pe/+U61yUpOX5/CLL8PkrAbRTfH/hb2R9mSLJgFb7KiveGltx
+         7yrQaEWa25MMha1o69oaT5SMuyLbdkBOjAFw+4YgBXmafgQ4Vo4XLadWokQbqUZr/gpA
+         /IGdbfAYIN2byvvzv8hjSU+8qmvSoR7Grj6f7DH7qTstvb6w9EolRghSWJ2zQa0HneY4
+         YFFhIRfP8zXPV9dsiCpFJebOjXnf8eYbCE0gOUKAszy0buf3duZe1aB1BcEbLJhNsZmS
+         oiOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786996737; x=1787601537;
+        d=1e100.net; s=20251104; t=1786997689; x=1787602489;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=I6KZVUu0NOdGo4+fh3bcS297v312oyXU0yQQKWOUJo8=;
-        b=CMej0V1gevQQgydR2aTKPKUf3Xaf7x9p4fIykZbWMkqE0C1OVg4+gEPJdDcVhU/Xeu
-         iNKoVJqUz/IATYmasY051PcQPuUjsR2We6JmtCSRJPgmG7dt4W0H/Sl4HBtUiz/u9X1X
-         34/njKE8kU/KRUwehA0HBgLeGmE9pVlJrQlN7GMi4HMEWsGUT0hNHXrd7rMW9+0vr/lY
-         3JdswQMl0vbJinWKOVmprgqdA0bzd2sHpyYP8txPmnzzi879K4Pl3gVZcJwknWZpKDJ9
-         KLuBRNWo0Jc3gUe35Jc0US3VEErqr2xOphGhhXHjSyF4xrICtYsGxz0+Q/F2K/y9D+BM
-         06Tw==
-X-Forwarded-Encrypted: i=1; AHgh+RoxiubYDmNdg1lAah9ScM5g+lrPOygXZlBTq+hxRPxe4SMV899puzCf8boQFCuC+FP+dh/HWbuP80zyUshq@vger.kernel.org
-X-Gm-Message-State: AOJu0YwiFIIC7HK0oB2Sb2X1zRks85AfytSucXNYJng4X8RYA3ZdDQHj
-	42jstQowyAAUnKc5jnNyr1h553uP72fzztDK2i0EIhuegkUVrqNQbIgpGM0Iy4N7ZBzR0MNwY9x
-	VWjh2ZtwvREeJColctJai8Sb+rWEA5SCDdjU4rn3zXqwBa0p9qwm1KBXBpNXAmBLfzL9o
-X-Gm-Gg: AR+sD10Df8MLTBWsFMFqLXLMGTPQP+/HenKS/bkHE29yJyz+9mwg8H1YXZdXgziuYUS
-	Y545tXetACvc4DyINeOOhG4kfo4bddx6glsBGL8E67qJ9iaxu4GwSobeqTR9o3vLbSi1cNKGAur
-	eR26Ouuf/pssdP9pX0unCXa2x5nJ5o8gs6YFAR5dnQcrpCZp3Qp92rMz7fKLw1QmWeEfGvENEDu
-	vuvqhtXu5p5q2rAnulH3a42qwBS4cHhJZ+3q0jYdcDH5Sx4KH0+hrUlvDV8x6vl7nM6Xv/JoLaH
-	2S3SLZyTstuj4mtAXJYS9TTEe0BIDLhIVpO9iOlq9gvrzbANXBLQVS2i5+Y77A3PLqDgF7x0gij
-	MhMHIOjWUnzPxsIMFHYZaaEv4J9w=
-X-Received: by 2002:a17:902:e54c:b0:2c9:ed4a:c3a4 with SMTP id d9443c01a7336-2d3b0503575mr194099505ad.0.1786996737344;
-        Mon, 17 Aug 2026 12:58:57 -0700 (PDT)
-X-Received: by 2002:a17:902:e54c:b0:2c9:ed4a:c3a4 with SMTP id d9443c01a7336-2d3b0503575mr194098985ad.0.1786996736646;
-        Mon, 17 Aug 2026 12:58:56 -0700 (PDT)
-Received: from [192.168.0.7] ([49.204.29.31])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-326794c0c94sm16896499eec.9.2026.08.17.12.58.50
+        bh=u3lGwKZ0pCeF54C056iWA8ghYAbCCtaH8ropmAW0y5A=;
+        b=P1aTO6Bgkmx1Y8J6zKywoWP6Mk5xtGNEQpT9pQ6vEJW3DY5Hbsp2F3HMTpqvUr2xc8
+         KgJHAqmL4XoU2YukjS2LSPhiurnuB4SONKDPako7X9OMgXtseVWD+yeIP0ZiS0WBJ1nt
+         aj4psDaXVvLo6yx17/KRaRCUnZth9ncgmFu2acgJ0M4reAn3k22VZyIXQFdZfSwVrXr5
+         OhHmtf/w8t+vEEoYyzvOXXrXioWcbIpo/DUk/CLqJdUuwfl46zcEMEcfxNtKTmy6Um8a
+         ODsIwi+l0tFTg2k/eIwpRvfGJLxaNxDr1gy9RZnveXzeVHymmh70FNmebClfV74X0CUI
+         dULA==
+X-Forwarded-Encrypted: i=1; AHgh+RqFMKhoQ4u2J8ZPdednUdV34cFR2xxrOCPOnRLnwfSfqmo4rmBx5UcZDwyseUjjj/UahzYJhfCvabINbzQV@vger.kernel.org
+X-Gm-Message-State: AOJu0Yw2At7lCm8yP1roOG+ayT5+h2iMRXqCnswgftKv7bB1UfF/5O/k
+	SbjEVU+16MIZs2fskgbFSqmZFeBSwYKMB75+sOv+Kad/pj245h05I5NglsD6ClOxkH959uaUzED
+	z2OmDc4VnUxnl9SJ4RzGr/kaAgoc2rntj3IOVdIFtwPK7J9nGSKUw+S5xklILEeWFdzHI
+X-Gm-Gg: AR+sD12psT+Vl4TbcvstlhiV4kaQEQvUTLUtYUP2fwciEYfzwl6L8p5mt+f/TUMd84c
+	JNMfnMr0wv0smUP9GftE6vOs9AQDjgfWHPmxxDrB27dNYfx2Ymle+SATG0KpS90SCAap2tlNljr
+	nlh+0CYJCFaNZ83b86KzA4DrI+Fn4cgCYIBkiiLo2rYbqBxEeX///JSLR3DEvWyJ6CTbZ4ZpP6s
+	spnH4nnlsKidk3gmKx+5GkswNMWc7Mgt+PZGa/5h15PqKkiTg+uv8VIaflZgWPntis6xF6yWBiO
+	wYqPR7N+tqhJs9c0UqmltuHm6frkO1KTAZoEvToq48TXIWwJJPWuu7oAhOrJDff/SLPzlEd9vtx
+	GGJ3KLNAfUiNQeVFqqTxII/z9URGTu2GNxQNc90fdSAcq5f3t3uI6Fw==
+X-Received: by 2002:a05:6a21:3a48:b0:3c3:b57b:6291 with SMTP id adf61e73a8af0-3ccdac00616mr3098082637.18.1786997688768;
+        Mon, 17 Aug 2026 13:14:48 -0700 (PDT)
+X-Received: by 2002:a05:6a21:3a48:b0:3c3:b57b:6291 with SMTP id adf61e73a8af0-3ccdac00616mr3098013637.18.1786997688236;
+        Mon, 17 Aug 2026 13:14:48 -0700 (PDT)
+Received: from [10.226.59.182] (i-global254.qualcomm.com. [199.106.103.254])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1415315900csm9043579c88.11.2026.08.17.13.14.47
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 17 Aug 2026 12:58:56 -0700 (PDT)
-Message-ID: <40a62967-48c6-4327-b6fa-a22f6b86412d@oss.qualcomm.com>
-Date: Tue, 18 Aug 2026 01:28:49 +0530
+        Mon, 17 Aug 2026 13:14:47 -0700 (PDT)
+Message-ID: <1b5301df-3d0a-497b-823d-fe43a34a5ee6@oss.qualcomm.com>
+Date: Mon, 17 Aug 2026 14:14:46 -0600
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,334 +89,251 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/4] dt-bindings: arm: ras: Introduce bindings for ARM
- RAS error sources
-To: Rob Herring <robh@kernel.org>
-Cc: Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Ruidong Tian <tianruidong@linux.alibaba.com>,
-        Tony Luck
- <tony.luck@intel.com>, Borislav Petkov <bp@alien8.de>,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-acpi@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-edac@vger.kernel.org,
-        faruque.ansari@oss.qualcomm.com, avaneesh.dwivedi@oss.qualcomm.com
-References: <20260720081954.1858180-1-umang.chheda@oss.qualcomm.com>
- <20260720081954.1858180-2-umang.chheda@oss.qualcomm.com>
- <20260731203515.GA1619665-robh@kernel.org>
+Subject: Re: [PATCH v5 1/3] bus: mhi: host: clients: Add loopback driver with
+ sysfs interface
+To: Sumit Kumar <sumit.kumar@oss.qualcomm.com>,
+        Manivannan Sadhasivam <mani@kernel.org>
+Cc: mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+References: <20260817-loopback_mhi-v5-0-50efc7360b7f@oss.qualcomm.com>
+ <20260817-loopback_mhi-v5-1-50efc7360b7f@oss.qualcomm.com>
 Content-Language: en-US
-From: Umang Chheda <umang.chheda@oss.qualcomm.com>
-In-Reply-To: <20260731203515.GA1619665-robh@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE3MDE1MiBTYWx0ZWRfX7w7TDMFjcLBM
- 3Tu+/hdbTesuZxZaNV2t/CiDubkzMSajX8GJK9GpGKXwI9bBxZp2dhiusDrJicoGcpJUC0Z2bbS
- 8ZqmmBUYQcgZhrw+CuxpJZbB2H31aRPxi6GFbHzy+OOFgjCr0yC1QXg9uVg07cy7cJtej01ofrr
- QlPNmt3/R+tAzVc0sWgTEw4Jf8t++gkmR/ga7z7EsJ46Ar0oUtHIvoW1RG+1Ur+04xgayrUWlz8
- rfYVC9jOrBTxKCjTnazAxkXLyAOL2law5vgwQKhObPFRwxIuaPPhyl8/A7RVjP4tAMHwJLHg9ov
- jgf9d8s+NzfcP4/5lYeLdOAIpeUgbdTG0hvGepUDwUV1xVMI6NyaPPb39S1dP4Jtax4AdZvvqDx
- XuA+KM3aulFhwwevyadoXl1LjYXpSqnUV3A+IEyn7xsE+flIjh36P14teD09uzlLr2XMlEcBoe1
- hlyqypUj+zyaGupW/iA==
-X-Proofpoint-GUID: 00FLXvIyj45TwahfKhe4fpkR2XkICr-S
-X-Proofpoint-ORIG-GUID: 00FLXvIyj45TwahfKhe4fpkR2XkICr-S
-X-Authority-Analysis: v=2.4 cv=Y9/IdBeN c=1 sm=1 tr=0 ts=6a836802 cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=UpYrFT5SPnpm06h6vIyJ/A==:17
+From: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+In-Reply-To: <20260817-loopback_mhi-v5-1-50efc7360b7f@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-GUID: 9tC5IIL5fuk0UAVcj1zM-doRsn3wT0ip
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE3MDE1NCBTYWx0ZWRfX6B8C/G3Px1d0
+ DVnmQMhqKX77+iAyemYc1glgdDACTfSzKMxjwjXbkMksaahtvcVFndxTZd11d2dT4UkUkT2ofcP
+ qPLt373r/GQCrL7kT6eSL893VaWgD34=
+X-Authority-Analysis: v=2.4 cv=SuCgLvO0 c=1 sm=1 tr=0 ts=6a836bba cx=c_pps
+ a=rz3CxIlbcmazkYymdCej/Q==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=gEfo2CItAAAA:8 a=EUspDBNiAAAA:8 a=0BPv0DUFnjzqbVs4ZvsA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=uG9DUKGECoFWVXl0Dc02:22 a=sptkURWiP4Gy88Gu7hUp:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE3MDE1MiBTYWx0ZWRfX55caK7ikfpF5
- ZhqdwxetbGAFmbSf0bgmIAHtJA97KrdJ27CSfxZFFwofXCl3KrgY9VE6BvoMEY+sHwiPnK7LE/B
- StQPy1vXWJGimOuf1qUS/UtCnzliZJ8=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
+ a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=a58Mu5QqHWmLOZgColsA:9 a=QEXdDO2ut3YA:10
+ a=bFCP_H2QrGi7Okbo017w:22
+X-Proofpoint-ORIG-GUID: 9tC5IIL5fuk0UAVcj1zM-doRsn3wT0ip
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE3MDE1NCBTYWx0ZWRfX+jIfqt0JzQzm
+ RyI9ltAKUBEyBTLAXPhfIatBd4hU172ew3uPMlWV3HITMBturhH47i5ynAJMRFD2wDBTy4pBvuI
+ c3fgIxWSQCp2UhD2kRyl1izhk9mA5LntWsoQB3upkOFdVVOldt9QTz1Sd19EXuZKjj5K5QucECN
+ dYbGEvtrcO7OBETBquO5YIjjsdKfzbxsoUDCt6IY5Mt1teWWfmUvoDj8e27sx8v4oA78018vYwj
+ yITFSOwQkAHa60iikWRqvrC0Mgdeo2/fsLiTpfrTQbv+Rqlg9r8s5sZlB9g7J1pFS+ANDlDbTNL
+ smrmJAY+QnuY//YsnwB2tmGps3aNfzefpB0QCW441Dm3qKlnS3DNclBdR5CEzMCN7lMv6U+vjBO
+ am8k3Nu+zVzul2KuShWtaU5u5mdF5iF+Gaka1TH4SzBtCYmmhlUsfCt8aRzXcJvF/2Ap1p4DvFQ
+ tivmChcIoGMfcH0PvgA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-17_03,2026-08-12_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 adultscore=0 priorityscore=1501 impostorscore=0
- clxscore=1015 bulkscore=0 malwarescore=0 phishscore=0 spamscore=0
- suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608170152
+ malwarescore=0 spamscore=0 priorityscore=1501 phishscore=0 clxscore=1015
+ impostorscore=0 lowpriorityscore=0 suspectscore=0 adultscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608170154
 
-Hello Rob,
-
-Thanks for reviewing the change!
-
-On 8/1/2026 2:05 AM, Rob Herring wrote:
-> On Mon, Jul 20, 2026 at 01:49:51PM +0530, Umang Chheda wrote:
->> ARMv8 and later processors implement the RAS (Reliability,
->> Availability and Serviceability) extensions, exposing hardware
->> error records through a standardised register interface.
->>
->> Add Device Tree bindings to describe RAS error sources.
->>
->> Signed-off-by: Umang Chheda <umang.chheda@oss.qualcomm.com>
->> ---
->>  .../bindings/arm/arm,ras-error-source.yaml    | 330 ++++++++++++++++++
->>  include/dt-bindings/arm/arm-ras.h             |  11 +
->>  2 files changed, 341 insertions(+)
->>  create mode 100644 Documentation/devicetree/bindings/arm/arm,ras-error-source.yaml
->>  create mode 100644 include/dt-bindings/arm/arm-ras.h
->>
->> diff --git a/Documentation/devicetree/bindings/arm/arm,ras-error-source.yaml b/Documentation/devicetree/bindings/arm/arm,ras-error-source.yaml
->> new file mode 100644
->> index 000000000000..add7063a1a62
->> --- /dev/null
->> +++ b/Documentation/devicetree/bindings/arm/arm,ras-error-source.yaml
->> @@ -0,0 +1,330 @@
->> +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
->> +%YAML 1.2
->> +---
->> +$id: http://devicetree.org/schemas/arm/arm,ras-error-source.yaml#
->> +$schema: http://devicetree.org/meta-schemas/core.yaml#
->> +
->> +title: ARM RAS error source
->> +
->> +maintainers:
->> +  - Umang Chheda <umang.chheda@oss.qualcomm.com>
->> +
->> +description: |
->> +  ARMv8 and later processors implement the Reliability, Availability and
->> +  Serviceability (RAS) extensions.  Hardware blocks that support RAS expose
->> +  one or more error records through a standardised register interface.  Each
->> +  error record captures information about a detected hardware error (cache
->> +  ECC fault, TLB parity error, interconnect error, etc.) and can optionally
->> +  signal the OS via an interrupt.
->> +
->> +  Each DT node described by this binding represents one RAS error source —
->> +  a hardware block that exposes a set of error records.  Error records are
->> +  accessed either through system registers (for processor-local resources
->> +  such as L1/L2 caches and TLBs) or through a memory-mapped register window
->> +  (for shared or off-core resources such as L3 caches, SMMUs and GICs).
->> +
->> +properties:
->> +  compatible:
->> +    description:
->> +      Identifies the class of hardware block this error source belongs to.
->> +      arm,ras-processor covers processor error sources (cache, TLB, etc.).
->> +      arm,ras-smmu covers SMMU error sources.
->> +      arm,ras-gic covers GIC error sources.
->> +    enum:
->> +      - arm,ras-processor
->> +      - arm,ras-smmu
->> +      - arm,ras-gic
->> +
->> +  reg:
->> +    description:
->> +      Register windows for this error source.  When absent the error records
->> +      are accessed through system registers (ERRSELR_EL1 + ERX*_EL1).
->> +      When present, the first range is the primary error-record window;
->> +      additional named ranges are identified by reg-names.
->> +    minItems: 1
->> +    maxItems: 4
->> +
->> +  reg-names:
->> +    description:
->> +      Names for the optional additional register windows beyond the primary
->> +      error-record window.  err-group is the error group status register
->> +      window (ERRGSR).  fault-inject is the fault injection register window
->> +      (ERXPFG*).  irq-config is the interrupt routing configuration window.
->> +    minItems: 1
->> +    maxItems: 3
->> +    items:
->> +      enum:
->> +        - err-group
->> +        - fault-inject
->> +        - irq-config
+On 8/17/2026 4:14 AM, Sumit Kumar wrote:
+> The MHI specification defines a LOOPBACK channel. The endpoint firmware
+> echoes back whatever the host sends on this channel. Without a host-side
+> driver, there is no way to exercise this channel to validate MHI data path
+> integrity between host and endpoint.
 > 
-> reg and reg-names must be the same number of entries.
-
-Ack, will fix this in v3.
-
+> Add a host-side loopback driver that binds to the LOOPBACK channel and
+> expose a sysfs interface for data path testing. The sysfs interface allows
+> users to configure TRE buffer size and count, trigger a loopback test, and
+> read the result.
 > 
->> +
->> +  interrupts:
->> +    description:
->> +      Interrupts signalled by this error source.  The first interrupt is the
->> +      Fault Handling Interrupt (FHI), fired when a corrected error counter
->> +      overflows or a deferred error is detected.  The optional second
->> +      interrupt is the Error Recovery Interrupt (ERI), fired when an
->> +      uncorrected recoverable error is detected.
->> +    minItems: 1
->> +    maxItems: 2
+> Co-developed-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+> Signed-off-by: Sumit Kumar <sumit.kumar@oss.qualcomm.com>
+> ---
+>   .../ABI/testing/sysfs-bus-mhi-devices-loopback     |  39 +++
+>   MAINTAINERS                                        |   1 +
+>   drivers/bus/mhi/host/Kconfig                       |   1 +
+>   drivers/bus/mhi/host/Makefile                      |   1 +
+>   drivers/bus/mhi/host/clients/Kconfig               |  17 ++
+>   drivers/bus/mhi/host/clients/Makefile              |   2 +
+>   drivers/bus/mhi/host/clients/loopback.c            | 289 +++++++++++++++++++++
+>   7 files changed, 350 insertions(+)
 > 
-> Replace description with:
-> 
-> minItems: 1
-> items:
->   - description:
->       Fault Handling Interrupt (FHI), fired when a corrected error 
->       counter overflows or a deferred error is detected.
->   - description: 
->       Error Recovery Interrupt (ERI), fired when an uncorrected 
->       recoverable error is detected.
-> 
+> diff --git a/Documentation/ABI/testing/sysfs-bus-mhi-devices-loopback b/Documentation/ABI/testing/sysfs-bus-mhi-devices-loopback
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..1622a146110c2069c8b51e5bdf665c882b853303
+> --- /dev/null
+> +++ b/Documentation/ABI/testing/sysfs-bus-mhi-devices-loopback
+> @@ -0,0 +1,39 @@
+> +What:		/sys/bus/mhi/devices/mhi<N>_LOOPBACK/tre_size
+> +Date:		August 2026
+> +KernelVersion:	7.2
 
-Ack, will fix it as suggested.
+This series missed 7.2, and will miss 7.3 since the merge window is 
+already open.  Next oppertunity is 7.4.
 
-> 
-> Seems backwards to me that corrected errors is required and uncorrected 
-> errors is optional. Should be fine to not care about corrected errors, 
-> but uncorrected errors can't really be ignored.
+> +Contact:	mhi@lists.linux.dev
+> +Description:
+> +		(RW) Size of each Transfer Ring Element (TRE) buffer in bytes
+> +		used for the loopback test. Valid range is 1 to the value
+> +		reported by max_tre_size. Default value is 32 bytes.
+> +
+> +What:		/sys/bus/mhi/devices/mhi<N>_LOOPBACK/max_tre_size
+> +Date:		August 2026
+> +KernelVersion:	7.2
+> +Contact:	mhi@lists.linux.dev
+> +Description:
+> +		(RO) Maximum allowed TRE size in bytes. Reading this file
 
-FHI is the common interrupt mechanism used by RAS error sources to
-notify software of deferred errors (which are kind of un-correctable
-errors) and corrected error counter overflows. This interrupt is also
-fired on the event of an un-correctable error (UE). On occurrence of UE
-error, this interrupt is fired, S/W reads the UE bit set in the ctrl
-register and handles UE error accordingly.
+Entry before this and after this explains the TRE acronym, but this does 
+not.  It probably should, as someone may jump directly to this section 
+and not read the entire document start to finish.
 
-ERI provides an additional notification mechanism for "recoverable"
-uncorrected errors, but its presence is implementation specific and not
-all error sources expose a dedicated ERI signal.
+> +		returns the upper bound for the tre_size attribute.
+> +
+> +What:		/sys/bus/mhi/devices/mhi<N>_LOOPBACK/num_tre
+> +Date:		August 2026
+> +KernelVersion:	7.2
+> +Contact:	mhi@lists.linux.dev
+> +Description:
+> +		(RW) Number of Transfer Ring Elements (TREs) to use per
+> +		loopback test. Must be greater than zero and must not exceed
+> +		the channel ring capacity. Default value is 1.
 
-For this reason the binding currently treats FHI as the mandatory
-interrupt and ERI as an optional second interrupt. I'll clarify this
-rationale in the binding description in the next revision.
+How would I know the channel ring capacity?  Should I just try values 
+until I get an error?
 
-> 
->> +
->> +  interrupt-names:
->> +    description:
->> +      Names identifying the interrupts.  "fhi" is the Fault Handling
->> +      Interrupt; "eri" is the optional Error Recovery Interrupt.
->> +    minItems: 1
->> +    maxItems: 2
->> +    items:
->> +      enum:
->> +        - fhi
->> +        - eri
-> 
-> Define the order.
+> +
+> +What:		/sys/bus/mhi/devices/mhi<N>_LOOPBACK/start
+> +Date:		August 2026
+> +KernelVersion:	7.2
+> +Contact:	mhi@lists.linux.dev
+> +Description:
+> +		(WO) Write any value to trigger a loopback test. The driver
+> +		sends random data to the endpoint using the configured tre_size
 
-Ack, will replace with explicit ordered constants.
+It feels like these kind of interfaces usually give an option to specify 
+a byte pattern as well, but I don't see that option here.  Is random 
+data considered to cover all usecases?
 
-> 
->> +
->> +  arm,group-format:
->> +    description:
->> +      Page granularity of the memory-mapped error record group register
->> +      window.  Determines the ioremap size and the number of error group
->> +      status registers (ERRGSR) available.  Required when reg is present.
-> 
-> Don't state constraints which are expressed as schemas.
+> +		and num_tre parameters, waits for the endpoint to echo it back,
+> +		and verifies the received data matches what was sent.
+> +
+> +		This is a blocking write that returns when the test completes
+> +		or times out after 5 seconds. The write returns an error code
+> +		if the test fails or times out.
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index a4b89bd497ad5051c190025838e0e93d257ed061..098b12692140514da52565a3200801f5e24a43b7 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -17469,6 +17469,7 @@ L:	linux-arm-msm@vger.kernel.org
+>   S:	Maintained
+>   T:	git git://git.kernel.org/pub/scm/linux/kernel/git/mani/mhi.git
+>   F:	Documentation/ABI/stable/sysfs-bus-mhi
+> +F:	Documentation/ABI/testing/sysfs-bus-mhi-devices-loopback
 
-Ack, Will remove "Required when reg is present." from the description in
-v3.
+Commit text says this ABI is stable.  Seems odd its being added to testing.
 
-> 
->> +      Use the ARM_RAS_GROUP_* constants from <dt-bindings/arm/arm-ras.h>.
->> +      0 (ARM_RAS_GROUP_4K) is a 4 KiB window with 1 ERRGSR supporting up
->> +      to 64 records.  1 (ARM_RAS_GROUP_16K) is 16 KiB with 4 ERRGSRs and
->> +      up to 256 records.  2 (ARM_RAS_GROUP_64K) is 64 KiB with 14 ERRGSRs
->> +      and up to 896 records.
->> +    $ref: /schemas/types.yaml#/definitions/uint32
->> +    enum: [0, 1, 2]
->> +
->> +  arm,num-records:
->> +    description:
->> +      Total number of error records in this error source, including both
->> +      implemented and unimplemented slots.
->> +    $ref: /schemas/types.yaml#/definitions/uint32
->> +    minimum: 1
->> +
->> +  arm,record-impl:
->> +    description:
->> +      Bitmap of implemented error records.  Bit N set to 1 means error
->> +      record N is present and active in this error source.  Bit N set to 0
->> +      means record N is not implemented and must be skipped.  The array
->> +      length must equal the number of ERRGSRs implied by arm,group-format
->> +      (1 element for 4K, 4 for 16K, 14 for 64K).  For system-register
->> +      nodes (no reg property) a single u64 element is used.
->> +    $ref: /schemas/types.yaml#/definitions/uint64-array
->> +    minItems: 1
->> +    maxItems: 14
->> +
->> +  arm,status-reporting:
->> +    description:
->> +      Bitmap indicating which implemented error records must be polled
->> +      directly by the OS.  Bit N set to 1 means record N does not report
->> +      through the ERRGSR and must be polled by reading its ERX_STATUS
->> +      register directly in the interrupt handler.  Bit N set to 0 means
->> +      record N reports its status through the ERRGSR and will be discovered
->> +      via the ERRGSR scan path.  For system-register nodes (no reg property)
->> +      there is no ERRGSR, so every implemented record must be polled
->> +      directly; arm,status-reporting must equal arm,record-impl for all
->> +      system-register nodes.  Array length as for arm,record-impl.
->> +    $ref: /schemas/types.yaml#/definitions/uint64-array
->> +    minItems: 1
->> +    maxItems: 14
->> +
->> +  arm,addressing-mode:
->> +    description:
->> +      Bitmap indicating the type of address reported in the error address
->> +      register (ERX_ADDR) for each error record.  Bit N set to 0 means
->> +      record N reports a System Physical Address (SPA) that the OS can use
->> +      directly.  Bit N set to 1 means record N reports a node-specific
->> +      Logical Address (LA) that requires platform-specific translation to
->> +      obtain a SPA.  Array length as for arm,record-impl.
->> +    $ref: /schemas/types.yaml#/definitions/uint64-array
->> +    minItems: 1
->> +    maxItems: 14
->> +
->> +  # Processor error source properties (arm,ras-processor only)
->> +
->> +  cache:
->> +    description:
->> +      Phandle to the cache node (L1, L2, or L3) that this processor error
->> +      source monitors.  The referenced node must have compatible = "cache"
->> +      and a cache-level property identifying the level in the hierarchy.
->> +    $ref: /schemas/types.yaml#/definitions/phandle
->> +
->> +  # SMMU error source properties (arm,ras-smmu only)
->> +
->> +  iommus:
->> +    description:
->> +      Phandle to the SMMU node that this error source monitors.
-> 
-> If the iommu has #iommu-cells >0, then this property must match the cell 
-> size. You can't have your own definition of 'iommus'.
+>   F:	Documentation/mhi/
+>   F:	drivers/bus/mhi/
+>   F:	drivers/pci/endpoint/functions/pci-epf-mhi.c
+> diff --git a/drivers/bus/mhi/host/Kconfig b/drivers/bus/mhi/host/Kconfig
+> index da5cd0c9fc620ab595e742c422f1a22a2a84c7b9..627c57948235aa52348179ae8b2d0826ebaed01e 100644
+> --- a/drivers/bus/mhi/host/Kconfig
+> +++ b/drivers/bus/mhi/host/Kconfig
+> @@ -29,3 +29,4 @@ config MHI_BUS_PCI_GENERIC
+>   	  This driver provides MHI PCI controller driver for devices such as
+>   	  Qualcomm SDX55 based PCIe modems.
+>   
+> +source "drivers/bus/mhi/host/clients/Kconfig"
+> diff --git a/drivers/bus/mhi/host/Makefile b/drivers/bus/mhi/host/Makefile
+> index 859c2f38451c669b3d3014c374b2b957c99a1cfe..2a16008aeb38127494782bbff4e1656428d2b776 100644
+> --- a/drivers/bus/mhi/host/Makefile
+> +++ b/drivers/bus/mhi/host/Makefile
+> @@ -4,3 +4,4 @@ mhi-$(CONFIG_MHI_BUS_DEBUG) += debugfs.o
+>   
+>   obj-$(CONFIG_MHI_BUS_PCI_GENERIC) += mhi_pci_generic.o
+>   mhi_pci_generic-y += pci_generic.o
+> +obj-y += clients/
+> diff --git a/drivers/bus/mhi/host/clients/Kconfig b/drivers/bus/mhi/host/clients/Kconfig
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..312a0b5a8e83b6ad7246453908bd552841a89188
+> --- /dev/null
+> +++ b/drivers/bus/mhi/host/clients/Kconfig
+> @@ -0,0 +1,17 @@
+> +# SPDX-License-Identifier: GPL-2.0
+> +
+> +config MHI_BUS_LOOPBACK
+> +	tristate "MHI LOOPBACK client driver"
+> +	depends on MHI_BUS
+> +	help
+> +	  MHI LOOPBACK client driver that binds to the MHI LOOPBACK channel
+> +	  as defined in the MHI specification. The LOOPBACK channel is
+> +	  implemented by MHI-based devices (modems, WLAN) in the field, where
 
-Ack, The driver only calls of_parse_phandle() on it for identification
-and never uses the IOMMU framework. Will replace iommus with a dedicated
-arm,smmu-ref phandle property, analogous to arm,gic-ref, in v3.
+Are modems, WLAN the only devices that implement this, or are those 
+intended to be examples?  Current reads as a limitation.
 
-> 
->> +    maxItems: 1
->> +
->> +  # GIC error source properties (arm,ras-gic only)
->> +
->> +  arm,gic-ref:
->> +    description:
->> +      Phandle to the GIC node that this error source monitors.
->> +    $ref: /schemas/types.yaml#/definitions/phandle
->> +
->> +required:
->> +  - compatible
->> +  - arm,num-records
->> +  - arm,record-impl
->> +  - arm,status-reporting
->> +
->> +allOf:
->> +  - if:
->> +      required:
->> +        - reg
->> +    then:
->> +      required:
->> +        - arm,group-format
-> 
-> Better expressed as:
-> 
-> dependentRequired:
->   reg: [ 'arm,group-format' ]
-> 
+> +	  the endpoint firmware echoes back whatever the host sends.
+> +
+> +	  This driver exposes a sysfs interface for testing MHI data path
+> +	  integrity between host and endpoint. Users can configure the TRE
+> +	  size and count, and trigger a loopback test.
+> +
+> +	  To compile this driver as a module, choose M here. The module
+> +	  will be called mhi_loopback.
+> diff --git a/drivers/bus/mhi/host/clients/Makefile b/drivers/bus/mhi/host/clients/Makefile
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..3811b6928f42b38f94b1167941cf3b0fe512d32b
+> --- /dev/null
+> +++ b/drivers/bus/mhi/host/clients/Makefile
+> @@ -0,0 +1,2 @@
+> +obj-$(CONFIG_MHI_BUS_LOOPBACK) += mhi_loopback.o
+> +mhi_loopback-y += loopback.o
+> diff --git a/drivers/bus/mhi/host/clients/loopback.c b/drivers/bus/mhi/host/clients/loopback.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..02a952e8e01222cd8cb842c9f9490479df8ea2bd
+> --- /dev/null
+> +++ b/drivers/bus/mhi/host/clients/loopback.c
+> @@ -0,0 +1,289 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+> + */
+> +
+> +#include <linux/atomic.h>
+> +#include <linux/cleanup.h>
+> +#include <linux/completion.h>
+> +#include <linux/errno.h>
+> +#include <linux/mhi.h>
+> +#include <linux/mod_devicetable.h>
 
-Ack, will fix this in v3
+I'm pretty sure this is now incorrect based on cleanups that just 
+occured in tree.
 
-> Rob
+> +#include <linux/module.h>
+> +#include <linux/mutex.h>
+> +#include <linux/random.h>
+> +#include <linux/sizes.h>
+> +#include <linux/slab.h>
+> +#include <linux/string.h>
+> +#include <linux/sysfs.h>
+> +#include <linux/types.h>
+> +
+> +#define MHI_LOOPBACK_DEFAULT_TRE_SIZE	32
+> +#define MHI_LOOPBACK_DEFAULT_NUM_TRE	1
+> +#define MHI_LOOPBACK_TIMEOUT_MS		5000
+> +#define MHI_LOOPBACK_MAX_TRE_SIZE	(SZ_64K - 1)
+> +
+> +struct mhi_loopback {
+> +	struct mhi_device *mdev;
+> +	/* Serializes the sysfs attributes against a running test */
+> +	struct mutex lb_mutex;
+> +	struct completion comp;
+> +	atomic_t tre_pending;
 
-Best Regards,
-Umang
+I'm not really sure I understand what purpose this is serving.
+
+> +	u32 num_tre;
+> +	u32 tre_size;
+
+I'm pretty sure these are the wrong types since they cross kernel 
+boundaries.
+
 
