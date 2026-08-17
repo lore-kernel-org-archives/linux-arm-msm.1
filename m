@@ -1,121 +1,147 @@
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02625376463;
-	Mon, 17 Aug 2026 05:50:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=192.198.163.7
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 57E1F28690;
+	Mon, 17 Aug 2026 06:01:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786945846; cv=none; b=iZiLXjXmGl563OSgr6FuroUSHYZaBmVLg7NQLbs8CVMxvMujbyFCy80OQf2Z6cxK0khNfhHdHhcektueBqoK6v8sgVF7Yg7WYNtTauQG9Q8967kZ+lmm4FxUNM2kL4XjvUnSYNZciaDC3AwwAh86IpsQ//OD4eChAImxTY5+4Fw=
+	t=1786946520; cv=none; b=JTbNTEAtOdakCAL2AR08zrInauatjhDY2fMJyjEbzJtvaCX3u6HjFHXcZXRbcDb7FTC1oMmrLnvSdsQFfku90N56e2BwHX+OZl9g3lG+tmclMylXiBHaGNH+9EjxunGw0BSyiyK6I+nN9/WQ8Ucx+TV4N4+cC87v+UWNGdC2Aq4=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786945846; c=relaxed/simple;
-	bh=Z6xGjeg51aVSBgLKu3+DxbP17VeZxtjDRxxQWkPCdHk=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=Ov49Iwdm9TQl25YinVWkLBKTOhzfCvthoBStc5341JvGncxy9adcCD9TrtL3QWkzcazy1CAzH/a+RpXTFManwlnK/7WIeYJ3G24iMcXSmMtamDD2a6zR8OkM707kGGkjJH8RgiMchCe5+eCIFZOdPuNkHNN8JdmqO51gPlk60oo=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com; spf=pass smtp.mailfrom=intel.com; dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b=LZuFO2nt; arc=none smtp.client-ip=192.198.163.7
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	s=arc-20240116; t=1786946520; c=relaxed/simple;
+	bh=8SfWFjuVt/xrpT4qKnEzg81166JfploqZb0g8yxVRlY=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=WJifbKOJF1r3DRErPtMVarsbUYD5yFMTzl4Z4Wc46zI+7xfVO9KVC0UJUhBc4vMJLgmCylvZhXF36VH+2lsg4tE9eenOY+OSK9U8GElH0Me1pisXLXyEjoRaYAXnNZIsV1WH4l7itZsTW218PJecDuhOLllKzmawM6LI/yBXn4U=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jxbFBkzz; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.b="LZuFO2nt"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1786945843; x=1818481843;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=Z6xGjeg51aVSBgLKu3+DxbP17VeZxtjDRxxQWkPCdHk=;
-  b=LZuFO2ntj2aO8iR/n7apCidOkTGGnDe5msKHymU2R0YSu+57XlQ2E9yN
-   GOkjAoOUK7r41XhLbXj8ariOI0pEDqwoFW/UeKjqICFQWEbGvmy6MgoUD
-   09MaD0Gli/SKiqytjYkovXOhXUrjk+tpNtq8O5HJU9/P2MFysVrife48e
-   ZDJde9HeVZiPzzpz3cundiCjYz6bpluYCG8a/G4VD6IIlxkCw93AFG/bi
-   qqG+NqGTUWJU5/87E6sMCwJzPFo5zHaYZoqRJTR1sQYJxYXgUT4qUsYEe
-   Sut+an3zIXAoj995bSRsJwV1353xUHwLExl6QuI5tUvceN3/icOiJRG+u
-   g==;
-X-CSE-ConnectionGUID: ZAgT5JjASGO5hS2jklnVYQ==
-X-CSE-MsgGUID: xzKbG5N4TBWn+59IwIunFg==
-X-IronPort-AV: E=McAfee;i="6800,10657,11877"; a="112957397"
-X-IronPort-AV: E=Sophos;i="6.25,228,1779174000"; 
-   d="scan'208";a="112957397"
-Received: from orviesa004.jf.intel.com ([10.64.159.144])
-  by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Aug 2026 22:50:32 -0700
-X-CSE-ConnectionGUID: IZkimFl8Tfe9ag03ddeZ7Q==
-X-CSE-MsgGUID: 2ZrNMPsVT5eOBkwuY8cMwQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.25,228,1779174000"; 
-   d="scan'208";a="268664355"
-Received: from lkp-server01.sh.intel.com (HELO 6eda058d650d) ([10.239.97.150])
-  by orviesa004.jf.intel.com with ESMTP; 16 Aug 2026 22:50:30 -0700
-Received: from kbuild by 6eda058d650d with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1wvqEt-00000000dK6-27ij;
-	Mon, 17 Aug 2026 05:50:27 +0000
-Date: Mon, 17 Aug 2026 13:50:07 +0800
-From: kernel test robot <lkp@intel.com>
-To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Elliot Berman <quic_eberman@quicinc.com>,
-	Andrew Halaney <ahalaney@redhat.com>
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-	Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-Subject: Re: [PATCH] firmware: qcom: scm: Fix resource cleanup on probe
- failure
-Message-ID: <202608171329.vdD9aiQC-lkp@intel.com>
-References: <20260625093644.3918184-1-mukesh.ojha@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jxbFBkzz"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67H44HkJ1174971;
+	Mon, 17 Aug 2026 06:01:51 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=UMaAsiCU9rGRmvKP9FMQp/k0FhhvCAevhqp
+	qxSMI6Fk=; b=jxbFBkzzU0OD8P6K9DXRwlwb2jMwtUh1iPcevHNwr2fGFLWjbHK
+	wootmr5lV28KLr5nY1hQaGGDIzZ3NQLsXgzV3GMCQ14FtwdZ9BWK2NHYElCq4p9G
+	qAiVJc2xdNHAwU8UM2XGL4vUMdkBg9oFeKb2cxh5gieT/CVrk9lw/ceh0vHWvG/O
+	tPCFOSyZj/Ebj6fMxX3ZLjt3xzliMqicAFCFbZAkXOubG23Txlc46bGSzHwOpizg
+	j5q7E1kDmd5GDHmaMBo8Aq/Bmi+BjNGuy9YFhOeAynz7KyvnBaovyw3qbTRUnTFj
+	wV33UtWy9rii4qtyfJT8sFbeih09qaiEq1A==
+Received: from aptaippmta02.qualcomm.com (tpe-colo-wan-fw-bordernet.qualcomm.com [103.229.16.4])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g3txy8a1m-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 17 Aug 2026 06:01:51 +0000 (GMT)
+Received: from pps.filterd (APTAIPPMTA02.qualcomm.com [127.0.0.1])
+	by APTAIPPMTA02.qualcomm.com (8.18.1.7/8.18.1.7) with ESMTP id 67H61m0B002660;
+	Mon, 17 Aug 2026 06:01:48 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+	by APTAIPPMTA02.qualcomm.com (PPS) with ESMTPS id 4g2h6hjvak-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 17 Aug 2026 06:01:48 +0000 (GMT)
+Received: from APTAIPPMTA02.qualcomm.com (APTAIPPMTA02.qualcomm.com [127.0.0.1])
+	by pps.reinject (8.18.1.12/8.18.1.12) with ESMTP id 67H61mGm002655;
+	Mon, 17 Aug 2026 06:01:48 GMT
+Received: from shuaz-gv.ap.qualcomm.com (smtphost-taiwan.qualcomm.com [10.249.136.33])
+	by APTAIPPMTA02.qualcomm.com (PPS) with ESMTPS id 67H61mNR002653
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+	Mon, 17 Aug 2026 06:01:48 +0000 (GMT)
+Received: by shuaz-gv.ap.qualcomm.com (Postfix, from userid 4467449)
+	id 1DD07639; Mon, 17 Aug 2026 14:01:47 +0800 (CST)
+From: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
+To: Marcel Holtmann <marcel@holtmann.org>,
+        Luiz Augusto von Dentz <luiz.dentz@gmail.com>
+Cc: linux-bluetooth@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, chejiang@qti.qualcomm.com,
+        quic_chezhou@quicinc.com, wei.deng@oss.qualcomm.com,
+        jinwang.li@oss.qualcomm.com, mengshi.wu@oss.qualcomm.com,
+        Shuai Zhang <shuai.zhang@oss.qualcomm.com>
+Subject: [PATCH v2] Bluetooth: mgmt: reply to cancelled mgmt commands instead of silently dropping
+Date: Mon, 17 Aug 2026 14:01:34 +0800
+Message-Id: <20260817060134.3298439-1-shuai.zhang@oss.qualcomm.com>
+X-Mailer: git-send-email 2.34.1
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260625093644.3918184-1-mukesh.ojha@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+X-QCInternal: smtphost
+X-QCInternal: smtphost
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE3MDA0MyBTYWx0ZWRfX2k23pdP7t2AF
+ /9KzeMfCDVL9sJRhZOOp6zc9So+OxahxTyJB+YwoWgKxWSaocApmhkwG60G87OvUcHDpkEE1l4p
+ /yBrL85IgP3dTEFBchc2xE6hl+EuaHU=
+X-Authority-Analysis: v=2.4 cv=auGCzyZV c=1 sm=1 tr=0 ts=6a82a3cf cx=c_pps
+ a=nuhDOHQX5FNHPW3J6Bj6AA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
+ a=Sv0fKeRqtYgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8 a=Hrnrb0NK-oBN7D_GDdoA:9
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE3MDA0MyBTYWx0ZWRfX0zBDiMA/SmbL
+ 6RQAGE915dHRR0AVEtwNGE14LQzA7pEAifJgot3eRp8/8T6MKGgYLABh35NmeAhSWMOxahoKmIC
+ 2u1ie0YHdZSM6MH/IPGllU4bzGBQba3zoaCwZg4uR8wR8mEObDOMZjaXIAUNReyxj7T+Y94W1qF
+ ukiMsEhq1jLIlNlvCpXvduCmz/pjjfcvQwLtcAe1UkN4cZv/MHighbbUOf3kIDDY+ggC1OEtJLH
+ kJRZFlgrXfraWdi6+oURPulPfyeEMont7mSDl3VuUHRGfW34BWMYn2zkYUw0PJLhCkXR0U1f5kv
+ K/7X8IQ9iLVtt78PX9ciuVVqxp9vPVkwdcTgYMuvD9nVYfl8tEOricqO9MVT3uMXSGVHI7l30ED
+ 0w6n1K3k0EngxsCkgEq27U2PXfIWA5iN7GpNbtJE8rvRtfey5EvEeTBP9ipu51muMALWP4QXU2V
+ N5T63I6gozVZVZnf3bA==
+X-Proofpoint-GUID: 5L0lq2doEPcKKWmZAFxhUqc1DyFKQTSC
+X-Proofpoint-ORIG-GUID: 5L0lq2doEPcKKWmZAFxhUqc1DyFKQTSC
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-16_06,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ spamscore=0 impostorscore=0 adultscore=0 suspectscore=0 bulkscore=0
+ clxscore=1015 lowpriorityscore=0 priorityscore=1501 phishscore=0
+ malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608170043
 
-Hi Mukesh,
+The kernel sets HCI_AUTO_OFF when a controller is first registered and
+starts a 2-second timer. On slower boots bluetoothd and the HCI_AUTO_OFF
+timer can race: hci_power_off() is already queued while bluetoothd is
+still in the middle of its adapter setup sequence. hci_cmd_sync_clear()
+then cancels any pending mgmt commands with -ECANCELED, including the
+MGMT_OP_REMOVE_ADV_MONITOR sent by reset_adv_monitors() early in the
+setup sequence.
 
-kernel test robot noticed the following build errors:
+When auto_off=1, hci_dev_close_sync() skips __mgmt_power_off() entirely,
+so there is no fallback path to reply to the cancelled commands.
+mgmt_remove_adv_monitor_complete() silently returns on -ECANCELED, leaving
+the command with no reply. Since bluez's mgmt queue is strictly serialised,
+this stalls all subsequent commands indefinitely, leaving bluetoothd unable
+to register the adapter.
 
-[auto build test ERROR on linus/master]
-[also build test ERROR on v7.2-rc7]
-[cannot apply to next-20260814]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Fix by mapping -ECANCELED to MGMT_STATUS_CANCELLED in mgmt_errno_status()
+and removing the early return in mgmt_remove_adv_monitor_complete(), so
+bluetoothd receives a reply and can continue normally.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Mukesh-Ojha/firmware-qcom-scm-Fix-resource-cleanup-on-probe-failure/20260815-220308
-base:   linus/master
-patch link:    https://lore.kernel.org/r/20260625093644.3918184-1-mukesh.ojha%40oss.qualcomm.com
-patch subject: [PATCH] firmware: qcom: scm: Fix resource cleanup on probe failure
-config: arm64-randconfig-003-20260817 (https://download.01.org/0day-ci/archive/20260817/202608171329.vdD9aiQC-lkp@intel.com/config)
-compiler: clang version 17.0.6 (https://github.com/llvm/llvm-project 6009708b4367171ccdbf4b5905cb6a803753fe18)
-rustc: rustc 1.96.0 (ac68faa20 2026-05-25)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20260817/202608171329.vdD9aiQC-lkp@intel.com/reproduce)
+Signed-off-by: Shuai Zhang <shuai.zhang@oss.qualcomm.com>
+---
+ net/bluetooth/mgmt.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202608171329.vdD9aiQC-lkp@intel.com/
+diff --git a/net/bluetooth/mgmt.c b/net/bluetooth/mgmt.c
+index ac4864e56..c660bd3cd 100644
+--- a/net/bluetooth/mgmt.c
++++ b/net/bluetooth/mgmt.c
+@@ -301,6 +301,8 @@ static u8 mgmt_errno_status(int err)
+ 		return MGMT_STATUS_ALREADY_CONNECTED;
+ 	case -ENOTCONN:
+ 		return MGMT_STATUS_DISCONNECTED;
++	case -ECANCELED:
++		return MGMT_STATUS_CANCELLED;
+ 	}
+ 
+ 	return MGMT_STATUS_FAILED;
+@@ -5675,9 +5677,6 @@ static void mgmt_remove_adv_monitor_complete(struct hci_dev *hdev,
+ 	struct mgmt_pending_cmd *cmd = data;
+ 	struct mgmt_cp_remove_adv_monitor *cp;
+ 
+-	if (status == -ECANCELED)
+-		return;
+-
+ 	hci_dev_lock(hdev);
+ 
+ 	cp = cmd->param;
+-- 
+2.34.1
 
-All errors (new ones prefixed by >>):
-
->> drivers/firmware/qcom/qcom_tzmem.c:523:2: error: use of undeclared identifier 'qcom_tzmem_using_shm_bridge'
-     523 |         qcom_tzmem_using_shm_bridge = false;
-         |         ^
-   1 error generated.
-
-
-vim +/qcom_tzmem_using_shm_bridge +523 drivers/firmware/qcom/qcom_tzmem.c
-
-   520	
-   521	void qcom_tzmem_disable(struct device *dev)
-   522	{
- > 523		qcom_tzmem_using_shm_bridge = false;
-   524		qcom_tzmem_dev = NULL;
-   525	}
-   526	EXPORT_SYMBOL_GPL(qcom_tzmem_disable);
-   527	
-
---
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
