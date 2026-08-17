@@ -1,71 +1,68 @@
-Received: from mail.8bytes.org (mail.8bytes.org [85.214.250.239])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id F1B663B3C1B;
-	Mon, 17 Aug 2026 07:01:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=85.214.250.239
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786950080; cv=none; b=VZz568ml/olnLqOJezTOBSANlmJpMhkdNGA2/dpS4GVM5tWhmGff4lswulH08+JWNFJ6iy8IRndRxSfqKz7jEXVbXoFDGWajpxgAuvtUNJFE7Az1ZF7AkJo4FoYJ6BmXxwPWewbsGLobe5/PDaLeliGV57g+faxxbss5nO8Dlbg=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786950080; c=relaxed/simple;
-	bh=dqaHMnWvKu7zw1fa/cy9Y6aO3pgK3zqhwjOIgODNyZ4=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=c4olh8kxoHOj4UrPpfrgVOTpnkFf9+J2/ITKDiBOZP0T7knOAWCSk29gdZL20PdmheAg0S37lqDsJL3xF0Lo1ENQdluyaaiKuXWXzZ0A9yeRRf2/BCBeoYqPhoTopkKU3mw/krgISmEnUhWRmR1C2bBJVFTvgkzHgglvY8xSY+Y=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=8bytes.org; spf=pass smtp.mailfrom=8bytes.org; arc=none smtp.client-ip=85.214.250.239
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=8bytes.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=8bytes.org
-Received: from 8bytes.org (p4ffe1d30.dip0.t-ipconnect.de [79.254.29.48])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.8bytes.org (Postfix) with ESMTPSA id 4962B206465;
-	Mon, 17 Aug 2026 09:01:11 +0200 (CEST)
-Date: Mon, 17 Aug 2026 09:01:10 +0200
-From: "Joerg Roedel (AMD)" <joro@8bytes.org>
-To: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
-Cc: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
-	Shuah Khan <skhan@linuxfoundation.org>, Randy Dunlap <rdunlap@infradead.org>, 
-	Nathan Chancellor <nathan@kernel.org>, Nick Desaulniers <ndesaulniers@google.com>, 
-	Bill Wendling <morbo@google.com>, Justin Stitt <justinstitt@google.com>, 
-	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Sumit Semwal <sumit.semwal@linaro.org>, 
-	Christian =?utf-8?B?S8O2bmln?= <christian.koenig@amd.com>, Bharath Kumar <quic_bkumar@quicinc.com>, 
-	Chenna Kesava Raju <quic_chennak@quicinc.com>, srinivas.kandagatla@oss.qualcomm.com, 
-	dmitry.baryshkov@oss.qualcomm.com, linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org, 
-	linux-doc@vger.kernel.org, linux-arm-msm@vger.kernel.org, llvm@lists.linux.dev, 
-	iommu@lists.linux.dev, linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org
-Subject: Re: [PATCH v2 05/15] iommu: Add QDA compute context bank bus to
- iommu_buses
-Message-ID: <aoKxmtgbjmVBTwBS@8bytes.org>
-References: <20260817-qda-v2-v2-0-69a02e9090d4@oss.qualcomm.com>
- <20260817-qda-v2-v2-5-69a02e9090d4@oss.qualcomm.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 803753B47EF;
+	Mon, 17 Aug 2026 07:21:14 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1786951275; cv=none; b=nDa5FoPHzGdXUBZ+vwwQRq01Z1qOuFarJ1CcvbYVfqI9CXB9NRj9IitP8e/VhRJFc+JbndXzyvHj67HXqmlCd6gU+O8ujJW/NGs5qMRrddu+7QTJxELXwB8+ZIVbrEnBgQDO1f+mRzFSxfGq9ac+Pe6XJOD867UB+hOZCsXf7o8=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1786951275; c=relaxed/simple;
+	bh=v5sH07TzaqndK8wB1J08258JDVYnTnoNfOXOWdukTWg=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=ZKlIIdNhYIt9yzQMQ5706ZX5Blu7G3aLhBpeKHqWNczoiFRauAXG9KwlC0ugYy4f4kNIoSaIzyqyb0BLEmLhylnB4DtvYNXxhi/e0kI2ZPsrj+o3NyU0fJ3hhky5HUADCNgnka9HLFbhc6cDO9vgA1Qbo4g/caE0RVnUAB40vgo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Vvhd2pZA; arc=none smtp.client-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Vvhd2pZA"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AD56B1F000E9;
+	Mon, 17 Aug 2026 07:21:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1786951274;
+	bh=P2lBksvn0lgzSL25cOJI/uadjSTHnlaum8EICbKupuo=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Vvhd2pZAhK4IsXz11Iop+rrkPfeizQJ+tvY5/Vypnl9xKuM0LLMXPnmuZJ7JghN+8
+	 wmbZBqW2auyHOQ7f4Uci/zWDVCOJJLRoGYg9joDmnBVPs5ndaG8J+UUT7eUZcVkj+7
+	 Ej1OUBj+utCposjtXPHprrSNoSByoS69BloGnLIF7HkEx4iFULdro31DRcodumh5IC
+	 e7WpvlD0UyhHKqR4gPWik2BHhaDmCIXLDBwKKL1RJxGyvDxTbrety11pfwmwIThs/r
+	 ZMGGwUTZo5G9rXEZ0yWcX6IieLIg75dFSwISOadJz+MKH1CYY95kzBQ2RcFiWPTrxK
+	 RCoPQPSlcx2Qw==
+Date: Mon, 17 Aug 2026 09:21:06 +0200
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Nitin Rawat <nitin.rawat@oss.qualcomm.com>
+Cc: vkoul@kernel.org, krzk+dt@kernel.org, robh@kernel.org, 
+	conor+dt@kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-phy@lists.infradead.org, 
+	Jingyi Wang <jingyi.wang@oss.qualcomm.com>
+Subject: Re: [PATCH V2] dt-bindings: phy: qcom,sc8280xp-qmp-ufs-phy: Add QMP
+ UFS PHY compatible for Maili
+Message-ID: <20260817-brave-wildcat-of-psychology-2ab7ea@quoll>
+References: <20260814070112.1676300-1-nitin.rawat@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20260817-qda-v2-v2-5-69a02e9090d4@oss.qualcomm.com>
+In-Reply-To: <20260814070112.1676300-1-nitin.rawat@oss.qualcomm.com>
 
-On Mon, Aug 17, 2026 at 10:17:40AM +0530, Ekansh Gupta wrote:
-> Register the QDA compute context bank bus (qda-compute-cb) with the
-> IOMMU subsystem by adding it to the iommu_buses[] array.
+On Fri, Aug 14, 2026 at 12:31:12PM +0530, Nitin Rawat wrote:
+> Document the QMP UFS PHY compatible for Qualcomm Maili to support
+> physical layer functionality for UFS found on the SoC. Use fallback to
+> indicate the compatibility of the QMP UFS PHY on the Maili with that on
+> the Hawi.
 > 
-> The QDA driver creates synthetic devices on this bus to represent
-> IOMMU context banks (CBs). Each CB device needs its own IOMMU domain
-> so that the DSP memory manager can enforce per-session address space
-> isolation. Without this registration, the IOMMU subsystem does not
-> probe CB devices for IOMMU groups and of_dma_configure() in the bus
-> dma_configure callback has no IOMMU domain to attach to.
-> 
-> Assisted-by: Claude:claude-sonnet-5
-> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+> Signed-off-by: Jingyi Wang <jingyi.wang@oss.qualcomm.com>
+> Signed-off-by: Nitin Rawat <nitin.rawat@oss.qualcomm.com>
 > ---
->  drivers/iommu/iommu.c | 4 ++++
->  1 file changed, 4 insertions(+)
+> Change from V1:
+> 1. Fixed Signed-off-by chain order.
+> ---
+>  .../devicetree/bindings/phy/qcom,sc8280xp-qmp-ufs-phy.yaml    | 4 ++++
 
-Acked-by: Joerg Roedel <joerg.roedel@amd.com>
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+
+Best regards,
+Krzysztof
 
