@@ -1,86 +1,51 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from relay.yourmailgateway.de (relay.yourmailgateway.de [194.59.206.189])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0BEB540B0E5
-	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 11:40:50 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C595C3DB321;
+	Mon, 17 Aug 2026 11:56:28 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=194.59.206.189
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786966852; cv=none; b=IC8CxEaRGV5VfANuX2fn7KcsM3vV7cLNYeknEMrdwfVW1Wjv5pm/l7BdG2M5dPTcT8gY8aHGFre4FNzrbFrq5c+8PnZ6ZI2/Kv7O9GRkaZB8uSsvn+4kKhp6zX0RFmN93GMAKwmsDH77wBqKCx+6oulERRdv7I3iGKE1Hj1zFKo=
+	t=1786967791; cv=none; b=jtAA4fBsXSFubr/cXuJKPbQUqkMO8zAenSe/HxM+3JmZcfLsE5SfN827yRScTQPK7XSb2s0U3se6Cwsg9I1tCQgY0o1uxEn52Cy8NNATPkyzHvPQWdYTRSbQ0lzmA1+M4bMx5k9D+9qXXAuRi3Rg1yTKnxCI4/85BsSKf30E/XE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786966852; c=relaxed/simple;
-	bh=Y7OjEwilJrsfE9L/92apqI0vRrbbUF+OOklPwF7x+YQ=;
+	s=arc-20240116; t=1786967791; c=relaxed/simple;
+	bh=nIWviEoqVfdHGl2nHooTwDbJaeGi2ImR4FYnhOByGq8=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=hGsbIM0PRYMOR7nB4OUCs7/FNhCE2DfONnoJg0QjPiNhWEVG2hxxdVgcBtbZuIFG6gpEphCGIVUI2X1lBeNIbu12BGFbQn9SkvgNlDyNV8x2uX9srE8GrqBusG2OnE04O534msAKXcxgEs8WaUi3Vs6a/M8g0J47hhGz8SEGwic=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=N2dM5Qvh; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=ChmgoWTX; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=XuqK1aiQw1mCfYDOxErGUlwQNQP8WS+S0p81Ugxm2czatLjQPN8xBuVcul+wUZWqMPKGtNiqkDNk79KpQbBfpUIBLfQ2fBCw3ZpSGllu2d0TotZN2/E+G2QU3vhUNca5h5DFNatOa6GJP5tjDO8WEw0a9fFbyIhUmzV9XmULCJI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info; spf=pass smtp.mailfrom=leemhuis.info; dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b=Ahng1e8K; arc=none smtp.client-ip=194.59.206.189
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=leemhuis.info
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=leemhuis.info
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="N2dM5Qvh";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="ChmgoWTX"
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67H9djU82278909
-	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 11:40:50 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	IGcPbfwzVeaXPPONPxtiLfIGqQcm259ZEgiBE509QLw=; b=N2dM5QvhPUnc1rIt
-	ZtMx3Hnd/cTSmFUgHQirwStzDGxxb9fg/Rx4pPgYjXRoszWu6NEo1+ZEdaOl1Oe4
-	9h4Q9PELZPOALSzhjViddoyVje1I9U6FMNIbMFG4PCxTkFCsIsc+5C0lkm2ty8V8
-	8oemZfMjZAMxe2YRnB0IsPpDPfRahl5MV781bcAIR77yeabKcTugEuRULhLSnaGg
-	1AMj66nIDMumJRt+OTo16D41F3zlPUw1EkxLGBmAdcinA1V4RO7N6ii4p/Hej5Rd
-	9YYtTm+QBVEGiczZzFvozw5snYnGLPF3iOg9r62dlntyv7DVAvUGD80HCm8Qe6zs
-	lhGtyg==
-Received: from mail-qt1-f199.google.com (mail-qt1-f199.google.com [209.85.160.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g3y778mme-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 11:40:49 +0000 (GMT)
-Received: by mail-qt1-f199.google.com with SMTP id d75a77b69052e-51bfa45b280so8349501cf.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 04:40:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1786966849; x=1787571649; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=IGcPbfwzVeaXPPONPxtiLfIGqQcm259ZEgiBE509QLw=;
-        b=ChmgoWTXLCUiiNA8T8jALmrhy3WfO/sC7f+rzNCsWZB9n1sowhRJfNwk9h8vEyeyCs
-         mVT91cRAKELmkAEuHeevXVkd/RZ0dXp1/wVM5kHJQlc5+rWwBLb8wKtP4H5RhaNGCn40
-         NOgIwmLbu2thAal5xI6/GGEXaScTdmtor4BNWcf8bMAbyXKyblteTgO6baqkjmDgZDd7
-         ujC62dvfNxc0m/+A+7yY5okQb3nW8JZMXpB9Y/mLBx4RyXoDcln4eQ9F6kpbXkJ7TfHG
-         uWLvPkD3ndZql0BRy6DKzTWZVed87eZxAjyTbwjZ6EEOg/6MHgQ5za3v1LX9aDFfJfmb
-         3O5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1786966849; x=1787571649;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=IGcPbfwzVeaXPPONPxtiLfIGqQcm259ZEgiBE509QLw=;
-        b=CBWi0XrbeLlexW/59vsKt8Uzqj6XX2OHeXDLH+Qj1Kae6gMnGJ8bgf1IO59ZVH01hE
-         vyodVt6w0gS7qop8DnyuD7+IX27IBZm02AXX9ArJAKEDlLXygV3Va4wkputHqZcoAQJv
-         3511d5Ma8t/9RuPbSIixOZzM5gsA0W5ttxrurzCqCKBCvmzQvlrvPh6jVLj041O9axoR
-         WxkkXqgWW8als1o/aedtgyEgrTIYf5Z56NaIAN87xZbFN3tfPDHfv9anghfBaNulPoQU
-         B/Pv1ISJJdiui1csJ6ZD36CxiIQTvtIF1hqNJZi0cCr/CqH2oi5q5rLvuKggYbO++uXK
-         YdZw==
-X-Gm-Message-State: AOJu0YyP7bVDGiue5+7cgrZvnGvGH8r4tCWrJBwACEnBBZwWflIqlVUC
-	f79AwdalMW22azoSIoXGkidPXZXOlpDUm5C899wqAcjfI4FiDMrFr90Z5HDFTd07Xeep7MmFyJ/
-	SM6r8qUn7UT51rHRTN7mo0etsU75t3C55qkURrqNBjIJzhLN+FmJ1alWkv0pd2UPQaQGu
-X-Gm-Gg: AR+sD10lnU2OS4JPoEJMvk6P2DQzI8nqf6F32s6GpMqEcXnbrLI+9cNi9bliH63S8mN
-	H58FpqZeH2rmKbXpJKXt4M1GoRy+01876jPvDWkXvWFX9mHSgi+ZqXCqVfIfkvjzNinn2gL9QQr
-	ZxI21yBFfMyvm2sC8CK1Or2iR7VkdfjIjIdvn86OaVsyC9Qvex6tqpwykqG4e2ewc0NqIefVeaW
-	oDQvgKiQyui0MJW2mSA4icuSLZ6z2ym2rJR6WRYSxy8FghatUmKH9BqtnZShkem9U4GRVXtSjPp
-	uNuz/CSrox4K4FUWCwQU2wwmbTVHSQnq1SnN3Mfc60bFK3wVa2pTJIB5G5A8JJGtLxPNp8mhcLk
-	VW0turxkqOjBBZ2KosjMnvR8M
-X-Received: by 2002:a05:622a:118f:b0:528:1ea6:eaee with SMTP id d75a77b69052e-52d852b4f2bmr165577541cf.1.1786966849235;
-        Mon, 17 Aug 2026 04:40:49 -0700 (PDT)
-X-Received: by 2002:a05:622a:118f:b0:528:1ea6:eaee with SMTP id d75a77b69052e-52d852b4f2bmr165577101cf.1.1786966848755;
-        Mon, 17 Aug 2026 04:40:48 -0700 (PDT)
-Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6a3d8588499sm543504a12.14.2026.08.17.04.40.44
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 17 Aug 2026 04:40:47 -0700 (PDT)
-Message-ID: <08bc7c0c-4e15-4e76-8ed0-34dbee36a6ce@oss.qualcomm.com>
-Date: Mon, 17 Aug 2026 13:40:43 +0200
+	dkim=pass (2048-bit key) header.d=leemhuis.info header.i=@leemhuis.info header.b="Ahng1e8K"
+Received: from relay02-mors.netcup.net (localhost [127.0.0.1])
+	by relay02-mors.netcup.net (Postfix) with ESMTPS id 4hNrs12lc4z49ys;
+	Mon, 17 Aug 2026 13:56:21 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=leemhuis.info;
+	s=key2; t=1786967781;
+	bh=nIWviEoqVfdHGl2nHooTwDbJaeGi2ImR4FYnhOByGq8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=Ahng1e8KhkhEHQW0DFvBS7iqOWNcUt2BlInR0EkH4XNre9LI8XYxub6caBzR6H63U
+	 x3/ShL6JgCHhNepdPeO8/z0evz/TPTVjrVzIxL6i5pbJHgZeE4Sz9GsXvBWsK4q6IN
+	 WMZChnJkqeVQWxXsqGIhXpk0rnpboL5AWqmvtJgLkiKkke2YqyzZePcouomgAGSVSs
+	 1UevJoJ5W7RGsV0NLhZvH7mQH3yO4w4rU1zrRv/QbAHA5qwX2iB3BQzFuW1PNwuAAQ
+	 OdLLfFI8Y+CZROG7pzWCCQ/skCKnurv5eD0mW2onXp7Mwal60w9b8n5z4bIF2oS+FH
+	 NIcAbmb05JjMQ==
+Received: from policy02-mors.netcup.net (unknown [46.38.225.35])
+	by relay02-mors.netcup.net (Postfix) with ESMTPS id 4hNrs121bWz7wr8;
+	Mon, 17 Aug 2026 13:56:21 +0200 (CEST)
+Received: from mxe9fb.netcup.net (unknown [10.243.12.53])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by policy02-mors.netcup.net (Postfix) with ESMTPS id 4hNrs02TCHz8sb7;
+	Mon, 17 Aug 2026 13:56:20 +0200 (CEST)
+Received: from [IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f] (unknown [IPv6:2a02:8108:8984:1d00:a0cf:1912:4be:477f])
+	by mxe9fb.netcup.net (Postfix) with ESMTPSA id 283235FABE;
+	Mon, 17 Aug 2026 13:56:15 +0200 (CEST)
+Authentication-Results: mxe9fb;
+        spf=pass (sender IP is 2a02:8108:8984:1d00:a0cf:1912:4be:477f) smtp.mailfrom=regressions@leemhuis.info smtp.helo=[IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f]
+Received-SPF: pass (mxe9fb: connection is authenticated)
+Message-ID: <5e5cd4c8-a14e-4a1e-9bb0-155fce40907d@leemhuis.info>
+Date: Mon, 17 Aug 2026 13:56:14 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,83 +53,169 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/12] iommu: qcom_iommu: support non-TZ-managed instances
-To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Luca Weiss <luca.weiss@fairphone.com>
-Cc: linux-arm-msm@vger.kernel.org, iommu@lists.linux.dev,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org
-References: <20260809-msm8974-iommu-upstream-v1-0-87f5cd492560@oss.qualcomm.com>
- <20260809-msm8974-iommu-upstream-v1-6-87f5cd492560@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260809-msm8974-iommu-upstream-v1-6-87f5cd492560@oss.qualcomm.com>
+Subject: Re: [REGRESSION] PCIe/qcom: on-board WCN7850 link stuck in Polling on
+ X1E80100 (Surface Pro 11)
+To: franzelverbier <info@humanlearning.ch>,
+ Manivannan Sadhasivam <mani@kernel.org>,
+ Bartosz Golaszewski <brgl@kernel.org>
+Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>,
+ Krzysztof Wilczynski <kwilczynski@kernel.org>, Rob Herring
+ <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+ regressions@lists.linux.dev, linux-pci@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+References: <20260731122233.18345-1-info@humanlearning.ch>
+From: Thorsten Leemhuis <regressions@leemhuis.info>
+Content-Language: de-DE, en-US
+In-Reply-To: <20260731122233.18345-1-info@humanlearning.ch>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE3MDA4NyBTYWx0ZWRfX/BZmjmnjDxBr
- 6mzNCCIekxyUujBkEcARqyq75BYrtEZ07qHhrTFonOif9Xl/YVbVZn8xB7ClHfoFG4U1iWfL6wZ
- Zzyxsn7sKR9Mlu7CRusereQnZXQ7m7zqmR7p7l8Ucl2AnFV6JAIiaN/ZIHYMcrBOb96jAQLzsNs
- 27TFKMnohxt1Z96qm2RvmOVFjz2eibt9s/R5Yq+D/LSVYsptmZFj5TVAUi79IVVbU4uDeweS0RK
- BwqBzq8MPsXUemX8tUyjeyKydvcsFoAFt0YrZPaaoOFxaQCN4wrcBdtrnowJV1ACHp3ImdW3PfB
- sIb3AcFiUfignfn55Uvo21h/fvMCUyWLA3450Q4r7V8BzA+9J6sqx25iZoHrXtJW4o8H+yLuFsP
- ToQATMuXdtJQ9e8QL8MmFFo3fU2C+yvVrwfMfNNvjExj1/SoWPxk7OX+SV0ZM4DTFsLhAKjyQs5
- 3BIutLqQEFCnU4hNQLQ==
-X-Proofpoint-ORIG-GUID: C0xnOxqGYohPcbqcP1aHxlFZ02Ak9oEJ
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE3MDA4NyBTYWx0ZWRfXwXSCoQrkxpnB
- FdsBuK0W2gW/uyew8bMGeEbKxIs9Y5WqOHn6a8SWhqKS9/QUige3tvfyTEJN6VB+u3eTkz4gtSa
- XUxaCUlUW6T7hZCNhviOWiCmcbW1w10=
-X-Proofpoint-GUID: C0xnOxqGYohPcbqcP1aHxlFZ02Ak9oEJ
-X-Authority-Analysis: v=2.4 cv=WNhPmHsR c=1 sm=1 tr=0 ts=6a82f341 cx=c_pps
- a=WeENfcodrlLV9YRTxbY/uA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=DBckZHbuUVvodCrkklsA:9 a=QEXdDO2ut3YA:10 a=kacYvNCVWA4VmyqE58fU:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-16_06,2026-08-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 spamscore=0 phishscore=0 impostorscore=0 adultscore=0
- malwarescore=0 clxscore=1015 priorityscore=1501 bulkscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608170087
+X-PPP-Message-ID: <178696777569.7059.392972048148323957@mxe9fb.netcup.net>
+X-Rspamd-Server: rspamd-worker-8404
+X-Rspamd-Queue-Id: 283235FABE
+X-NC-CID: v/BpDrIPtEd3eGjh2FQ0WbuG52drth+1EX67iBkhSxDdH9XKVEs=
 
-On 8/9/26 10:15 PM, Dmitry Baryshkov wrote:
-> The GPU on MSM8974 has never been usable upstream because its IOMMU
-> cannot be driven: unlike the MSM8916-style instances this driver
-> supports, where the secure world owns the SMMU global register space
-> and the OS programs just the context banks after a restore_sec_cfg SCM
-> call, the MSM8974 GPU IOMMU is not managed by TZ at all. Nobody sets
-> up its stream mapping, so attaching a domain leaves every transaction
-> unmatched and the GPU faults on its first memory access. Verified on
-> the APQ8074 dragonboard: restore_sec_cfg is only accepted for the
-> secured instances, while the GPU instance exposes its ID registers to
-> the OS (IDR0 0x78034404 / IDR1 0x10000003).
+On 7/31/26 14:22, franzelverbier wrote:
 > 
-> Add a non-secure programming mode, derived from the downstream
-> msm_iommu-v1.c driver. When qcom,iommu-secure-id is absent, reset and
-> program the global space at runtime resume instead of calling into TZ:
-> clear sACR/sCR2 and the global fault state, invalidate the TLB and all
-> SMRs, install the per-instance stream mapping (SMR/S2CR/CBAR, with the
-> downstream MEMATTR/NSCFG/VMID/IRPTNDX values) and enable the SMMU with
-> fault reporting enabled and stalling disabled (sCR0.STALLD, matching
-> the downstream terminate model). The stream ID map is per-instance
-> configuration data since it is not discoverable from the hardware; the
-> SMR index allocation keeps ASID == context bank index, which this
-> hardware requires (downstream msm-3.10 commit 4d92ea10aac3 ("iommu:
-> msm: Use CB index as ASID")). Also set CB_ACTLR to redirect cacheable
-> requests to the L2 slave port, as the downstream driver does for every
-> context on this IP generation - on MSM8916 TZ owns CB_ACTLR, so the
-> driver never needed to touch it before.
+> On a Microsoft Surface Pro 11 (Snapdragon X Elite, X1E80100, board
+> x1e80100-microsoft-denali-oled), the on-board WCN7850 Wi-Fi PCIe link
+> no longer trains on linux-next. It works on 6.17.
+> 
+>   Good: v6.17
+>   Bad:  next-20260721, next-20260723
+> 
+> The device sits behind PCIe controller 1c08000.pci (pcie4,
+> qcom,pcie-x1e80100, gen3x2) and has no PERST# GPIO -- it is
+> power-sequenced via wcn7850-pmu / pwrseq.
 
-At this point, would it make more sense to retrofit this atop
-arm-smmu-qcom.c given all of the differences vs 8916?
+Thx for the report. Nobody replied, so either the right people didn't
+see this or they had no idea what's wrong. So I guess you have to
+recheck if 7.2 and -next are still affected and then bisect.
 
-Konrad
+FWIW, I see quite a few regression reports and none sounded related.
+Only the following one a little bit (there is no fix for it yet afaik)
+-- but I fear I might send you in the wrong direction, so you might want
+to ignore that I mentioned it:
+https://bugzilla.kernel.org/show_bug.cgi?id=221801#c14
+
+Ciao, Thorsten
+
+
+> Symptom
+> =======
+> 
+>   qcom-pcie 1c08000.pci: Device found, but not active
+>   qcom-pcie 1c08000.pci: PCI host bridge to bus 0004:00
+> 
+> dw_pcie_wait_for_link() finds the LTSSM in POLL_ACTIVE/POLL_COMPLIANCE
+> and returns -EIO. The endpoint 0004:01:00.0 is never enumerated, ath12k
+> never probes, and there is no wlan interface. On 6.17 the same
+> controller trains at ~0.6 s and ath12k probes normally.
+> 
+> Ruled out: the chip is powered, and power control is bound
+> ==========================================================
+> 
+> - Bluetooth on the same WCN7850 (UART) comes up fine, so the PMU and
+>   regulators are on.
+> 
+> - pwrseq_qcom_wcn is loaded, and pci-pwrctrl-pwrseq is bound to the
+>   platform device 1c08000.pci:pcie@0:wifi@0 (compatible pci17cb,1107 is
+>   present in pwrseq_pwrctrl_of_match[]). The vddaon-supply
+>   validate_device() check passes.
+> 
+> Ruled out: not a device-tree regression
+> =======================================
+> 
+> The wifi@0, &pcie4 and &pcie4_phy nodes are equivalent between the 6.17
+> and 7.2 device trees -- same supplies, same compatibles. The only
+> difference in wifi@0 is "disable-rfkill;" (6.17), which is
+> post-enumeration ath12k behaviour and cannot affect link training.
+> 
+> What changed
+> ============
+> 
+> qcom_pcie_host_init() was reworked around the pci-pwrctrl framework,
+> and qcom_pcie_start_link() now calls qcom_pcie_common_set_equalization()
+> -- absent in 6.17 -- before enabling the LTSSM.
+> 
+> Finding 1: Gen3 equalization prevents link training
+> ===================================================
+> 
+> Forcing the port to Gen1 makes the link train and ath12k probe:
+> 
+>   &pcie4 { max-link-speed = <1>; status = "okay"; };
+> 
+>   qcom-pcie 1c08000.pci: PCIe Gen.1 x2 link up
+>   ath12k_wifi7_pci 0004:01:00.0: Wi-Fi 7 Hardware name: wcn7850 hw2.0
+> 
+> qcom_pcie_common_set_equalization() only programs GEN3_EQ_* for speeds
+>> = 8GT, so max-link-speed=<1> skips it entirely, reproducing the 6.17
+> behaviour of no EQ programming.
+> 
+> Note this is not a wrong preset value. The presets come from DT via
+> of_pci_get_equalization_presets() and are applied by the DWC host core.
+> In hamoa.dtsi:
+> 
+>   pcie4  (pci@1c08000, gen3x2, on-board WCN7850)
+>     eq-presets-8gts = /bits/ 16 <0x5555 0x5555>;
+> 
+>   pcie6a (pci@1bf8000, NVMe, gen4x4)
+>     eq-presets-8gts = /bits/ 16 <0x5555 0x5555 0x5555 0x5555>;
+> 
+> Both use the same per-lane preset 0x5555. The NVMe port trains at Gen4
+> fine; only the WCN7850 port fails. So the WCN7850 endpoint specifically
+> cannot complete Gen3 equalization with these presets on this
+> controller, while an NVMe SSD on the same SoC can.
+> 
+> The board DTS (x1-microsoft-denali.dtsi, also in mainline) leaves
+> &pcie4 as status = "okay" with no per-port override, so it inherits the
+> SoC preset.
+> 
+> Finding 2: an LTSSM re-kick does not recover the link
+> =====================================================
+> 
+> Even at Gen1, the link does not train on the first attempt at boot
+> (~4 s); in one instance it only came up much later via a pciehp slot
+> event. An experimental retry in qcom_pcie_start_link() toggling
+> PARF_LTSSM.LTSSM_EN (clear/set) for up to 30 s never recovered the
+> link.
+> 
+> That suggests the endpoint needs a full power/reset re-sequence
+> (pwrseq) to leave the failed state, not just an LTSSM restart -- i.e.
+> the pwrseq power-on may be racing link bring-up at boot for PERST-less
+> on-board devices.
+> 
+> When the link does come up late (fragmented CMA, tight PCI windows),
+> secondary symptoms appear that are absent on a clean boot-time
+> bring-up:
+> 
+>   ath12k ... qmi dma allocation failed
+>   BAR 0 ... failed to assign
+>   rfkill ... Hard blocked: yes
+> 
+> Questions
+> =========
+> 
+> 1. Are the qcom_pcie_common_set_equalization() Gen3 EQ presets expected
+>    to be safe for a gen3x2 PHY driving an on-board WCN7850? They
+>    prevent link training here, and skipping them (Gen1) works.
+> 
+> 2. Is pci-pwrctrl/pwrseq power-on racing link training at boot for
+>    on-board devices with no PERST# GPIO, such that the endpoint is not
+>    ready on the first LTSSM attempt and cannot be recovered by an LTSSM
+>    re-kick?
+> 
+> I have not bisected to a single commit yet -- the range above is v6.17
+> to next-20260721. I am happy to bisect, test patches, or dump any
+> register on this hardware; rebuilding is a short loop here.
+> 
+> Environment
+> ===========
+> 
+> linux-next next-20260723, CONFIG_PCIE_QCOM=y, CONFIG_CMA_SIZE_MBYTES=128,
+> ath12k, board x1e80100-microsoft-denali-oled, Arch Linux ARM (aarch64).
+> 
+> Thanks,
+> franzelverbier
+> 
+
