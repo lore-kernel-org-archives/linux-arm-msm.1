@@ -1,57 +1,492 @@
-Received: from mail-43102.protonmail.ch (mail-43102.protonmail.ch [185.70.43.102])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 804611DE8BF
-	for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 21:09:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=185.70.43.102
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D948D21767D
+	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 01:12:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1786914579; cv=none; b=pzmhUJXT5MTwoHe054m2JLIKKvQAelW5zEX60v1H1vaW4VFsN0XggzYK4y/IOcrFrQgXj4FS/pb2rZq3n+H5nh4qvKl+d/0u0mL6DDOVUdzN2r7xjfJ4w71kXraZdk9vig4RcHy7/qNKsf/haJ3i0M2NvwdwJ4zjVZLhNINWFhg=
+	t=1786929130; cv=none; b=K+Aw/0BiP6gzF55e+JDVyFw0iw447DgyniAhiI+D1MwhuXzvCQwxrCCVAnEdhaXw+TVtGpWCDAT+ZM0D8cmoU/LoRk2sXZwLXYoFUBzlI4xt0/jUnNEZTcE98MWULR0hJpAHHMfSusKxU+lLvsB7ZGPq2PonsfTToeVw65SEqSg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1786914579; c=relaxed/simple;
-	bh=Uj/dU++QgsXJZiCHN91cmenO1QUkSucty5TYoC27qhA=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=Wg5dlhPewRVBgawytKJGWcmswAm6PkYQCogphn1uhsWd2MnKfcAKIRTVHejTkTfzKL+09R/WEd7OsdOLi6QhPu2QxMovXSrVRL9A3E4UbuQF/C7wvHVt8FVtKg47Uz340NtWa0xunUKbCWjPkDv4shdz/pFER1aKaSc49RWUs+M=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=RpTEfKed; arc=none smtp.client-ip=185.70.43.102
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proton.me
+	s=arc-20240116; t=1786929130; c=relaxed/simple;
+	bh=8liI0C/dxeSCExDf1H/aog4zqnD6SFGcIl1q/dv30/U=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=i/0qylF4Ffg78yQOF01YrU05CqxOIo5U6wtdt/GGjd+0pStpNPOA8hz1ek18nXUSHUCxzIEZkW3vbMmGd14pYgtiq+jhoBdHsfl+fqiZx+vpUxs7IlYDRtgC5yDXFoLpwTidmxn73bsKPm223L1z8wKZwL+OGoFf19P0tU8qUSQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=JRdv45qs; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Bx5y0VXK; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="RpTEfKed"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1786914564; x=1787173764;
-	bh=Uj/dU++QgsXJZiCHN91cmenO1QUkSucty5TYoC27qhA=;
-	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
-	 Message-ID:BIMI-Selector;
-	b=RpTEfKedUI8QgMpvHxLemEHZ2aJQ2yFkiJt+j3twPmxFMUa3xYa2ITcR7IrDleB5q
-	 juS0gtoyu9WqkVmoWpZtEW6dA7YZ1FJVEPWZxy5oztugNjJHhteF1bMbC+PND8EP5F
-	 8gzNjoqDDoRi4/y0zxot6exOoqjRrEhxHNMtbX8pwLkncnkys5dCWtjGmhUKNvY9rN
-	 Pb7VfoU5ctdozr+DR/cY+YV0FrbPaomLU73oCH1jNxi6gWVdj3Epv5BVzbrrKv+b8g
-	 ZTcc+Ey+Vvqslw4KGptkQZdQSrOvsaFBjkbejcvHLNqKG1+9IMoOWXtEFi3RmOozDd
-	 C4ZivekBkMA2g==
-Date: Sun, 16 Aug 2026 21:09:19 +0000
-To: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
-From: Esteban Urrutia <esteuwu@proton.me>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org
-Subject: Re: [PATCH v3] dt-bindings: soc: qcom: qcom,pmic-glink: Add compatible string for SM8475
-Message-ID: <63ddcd44-23fd-45e5-be71-e4a13a4deff3@proton.me>
-In-Reply-To: <20260802-sm8475-pmic-glink-v3-1-45216e6ec572@proton.me>
-References: <20260802-sm8475-pmic-glink-v3-1-45216e6ec572@proton.me>
-Feedback-ID: 147889766:user:proton
-X-Pm-Message-ID: e41530e26a7b9c512048acb291e820bd92ae546d
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="JRdv45qs";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Bx5y0VXK"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67GLDPdW322088
+	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 01:12:08 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=0FL/S1tmx6uFpaBYQVY6ueYj
+	6jzB1S9NDWg3B1AEHIU=; b=JRdv45qszVvcY66lnTQeSQvQd2d45iItDPkc3d/W
+	PE+ZXUhCgH2MBoAACRJttEwZWS/qQethOvyUJ9ZBSGqpXax9X7ik4G+ZrQkYSDAo
+	d6DuxBdm/pUlGzog9/cTJ/xlj4gn26GdVN3220yIZe9vWons44CWzSVFHXl9mWjq
+	MkQWxr6CUtms00u9hq/ITFV0UiPBTWMZgExtKfPYMSmNB1sGD58TZcTYpwrj/s1S
+	9kBD99EqlBuKGerIAHDevou2AeQrJzX8DbwRtIKurZg24UD+5VyitHTy4HHUj4Zg
+	vWYjlLkB4KN7ZYQcbB2B5Vo/k7irZi+r6F7VnMhSUmh6mw==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g2ghfvmjm-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 01:12:08 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-92e8004d60eso522775085a.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 16 Aug 2026 18:12:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1786929127; x=1787533927; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=0FL/S1tmx6uFpaBYQVY6ueYj6jzB1S9NDWg3B1AEHIU=;
+        b=Bx5y0VXKSGrxf9i8UAViRozAfAdUO8XvFctMWF5VFH/GwsutiEjji1YkrczYHqwcn3
+         HZewE9AOtfqicXO9VGjUL5LP79wl4mpfuONMZo78VvHHgr4OI1GF48j3zxlIY1/dO42+
+         b3OMDjZ3QTuq0lnI6VJ66jgzwHfcKm11i9NJmqHMGty9TOswWx9Xy24RYcls9qFSnfQb
+         6XMt9raMxEa/lxoaOaT/1KYmv1nMPVrKJhAXDSjVxvgzIrF28/sNCxWD2oGt3NDFD8Ot
+         yfLTVeNFd2E7A2lRYToj1i+XOwZPFH6jhZ1cFOGNj8fqw46xEllE+TkvFTpM3V5UDlFD
+         Dy6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1786929127; x=1787533927;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=0FL/S1tmx6uFpaBYQVY6ueYj6jzB1S9NDWg3B1AEHIU=;
+        b=BqcPXTnZ4rCt9fB3PrhW1MNSB7tnmMME3uBVy90SqpiwztuGa5l1LHnsdGRU4iG4OD
+         9O29dMZ8gp0pc7id1u2NJQXvrb3qpkeLaFUrPoQFR7csKP5H+okC+s9K32m9DXnp/A+E
+         AnVH4lep0pN342sZ1wiKAU3OPQHBC8oOaIwp6jk6WbVSqplsDXRluY7Bx8oQpCTetd36
+         HsjrN+0Y7MPLnRdfBvAAkqjUqH8Kb5Z3X4t3cs4dlxGQiuRBcQNd8BtftUHZRoLIIZ5m
+         S5UXdONlw19axnCULCCUjXS59SUQaprrddYCQVLRaY4iX3uX11tTNbZxNGWx761TMafC
+         pOlw==
+X-Forwarded-Encrypted: i=1; AHgh+RosSiSEKpd7iACvJNmUefXLGjgpCVID7AJ8OxRyBcsCnPGn90TCli4TlMaQ4Y9rd+rGZhNFp0/Z2tPvgO0h@vger.kernel.org
+X-Gm-Message-State: AOJu0YyH4LyNAzbm3PZzicCn5TGD3dXyBpKcLE979W4pm2FlwFHqVDfx
+	8qwanh5kjdfOQ+9MJFGYT0NgvaEgp7LkYAr6eauqF+qp6JU6bLuJ1iCu+oZmmjwhfHxWEJb769y
+	GH/IGT4IUk9rVCIjl/P2QjsLkFGO0qzqAMm/3AkDG6eNa3F14yrspAzVztaVcWjbXY2rJ
+X-Gm-Gg: AR+sD11fY5JI4/pnjPUeJEhU3TU3Rrsp7MMo7VtQy6o8zgSXVufhC62XqaLnrZ2SVbc
+	kNkvf30OEUZLU0bxPgwZGIF0Mzb74El8oWis5j0lN6+s6r+STePEAjQfelTHZhTCEUjKIjk4mcH
+	dHRArMuGKzHbwfcEAWWQRAeKyjGwsgIxTsAM/yVp9wLodQU6OwWsKvdtbEM4bdz5QcweQnzoAk+
+	WDHSSspTTtXTl0cCVSJpCfW/5nXHn5+r9+x8QJ4IasrbrZy0jaO2ahfVgHkKQAU0xiMplABpNrf
+	RmsXS5qtlloJFPtdCsZCGHFvSJVda2YgIBvcaFyESnj4M+kQ60B+b7kXNFEN0Vn5Yvg1ZLTau6l
+	hga05XZOWrnGSiZAIjBkpK5u7t3QdyCa9q+jdJy+3IcKSHzE+GgAop1QQHPd3wcurN1tflKvtaE
+	89E1JO6nbPjP0h
+X-Received: by 2002:a05:620a:4492:b0:936:583a:dd75 with SMTP id af79cd13be357-936d212c6fdmr2016201585a.17.1786929126968;
+        Sun, 16 Aug 2026 18:12:06 -0700 (PDT)
+X-Received: by 2002:a05:620a:4492:b0:936:583a:dd75 with SMTP id af79cd13be357-936d212c6fdmr2016197685a.17.1786929126410;
+        Sun, 16 Aug 2026 18:12:06 -0700 (PDT)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b458baa6acsm2133694e87.34.2026.08.16.18.12.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 16 Aug 2026 18:12:05 -0700 (PDT)
+Date: Mon, 17 Aug 2026 04:12:03 +0300
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Sreeshankar K <sreeshankar0910@gmail.com>
+Cc: robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+        andersson@kernel.org, konradybcio@kernel.org, tglx@kernel.org,
+        lpieralisi@kernel.org, robimarko@gmail.com, linux@gurudas.dev,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH v2 1/5] arm64: dts: qcom: Add SM7250 base dts file
+Message-ID: <5rwvkw76ytwe2ip2vsfgxopp7cp5gryzm67cfvjsywscjrgpwv@hydeqoqnlg67>
+References: <20260816161808.12419-1-sreeshankar0910@gmail.com>
+ <20260816161808.12419-2-sreeshankar0910@gmail.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260816161808.12419-2-sreeshankar0910@gmail.com>
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE3MDAwNyBTYWx0ZWRfXyTKNzUg9NyCe
+ G9K7eA3ZHPfONhiyiow3im3y16UrQW0Lp+hd6se5rooHoTIU0uWxLVg+KPsT3Bp6/uW1KL/akkq
+ T1Qnb19zG0oyahxKK6+TkjEUCOvqkbc=
+X-Proofpoint-ORIG-GUID: 3zz2wk1dvSYsKCYkmUyT-QG2kp4mM_r0
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE3MDAwNyBTYWx0ZWRfX8hvA3lrv6R0T
+ 1dGBixBbS7qGfqQXMhjC9Cy+mqaOTgCYfWCWQ1S58Q1fYTvquprnRXfqXQzd512ST/KBpWC2mdh
+ r9ofneFqqKRzHdimfEvvQCV+qP6TuJ+dEY9V5uv0OM3dDn8rmkRfRbCiileyJlyXDIB1jGSssNj
+ Ce5rHdFHBXnccZGY9bcIImLl5+yTroa72q01M292qygBrFM9hoFAtfu4HfMICbhW1tlQuSA+4fB
+ B++9ToyjfLTmCvsZI0mAlK4bOe+ywRzRWjO8gxW57i8xysXCmNz7Zt6Ht+0tGAg/IDG7JkIa0Oa
+ JT1NfPWdW+BwRd8djAP4w8ERWVv+Y4jE3gz5ZFl1zBbXzIeubK6GwlQTOxpW0kZyzfq09EM7avF
+ nCN+3Xeh1Rma9GlO09cp2F4dihK21Kf43UjiVzKNzGUimTYB34Fq/YnSY5QjaV8MRlWMeWzEDV7
+ E3lw5VmYSKgvbSxwPDg==
+X-Authority-Analysis: v=2.4 cv=TMJ1jVla c=1 sm=1 tr=0 ts=6a825fe8 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=pGLkceISAAAA:8
+ a=w6DgJsjFCm0bfvo_ST4A:9 a=CjuIK1q_8ugA:10 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-GUID: 3zz2wk1dvSYsKCYkmUyT-QG2kp4mM_r0
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-16_06,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 adultscore=0 phishscore=0 clxscore=1015 bulkscore=0
+ spamscore=0 suspectscore=0 impostorscore=0 priorityscore=1501
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608170007
 
-On 8/2/26 2:39 AM, Esteban Urrutia via B4 Relay wrote:
-> SM8475 is compatible with SM8450 with respect to pmic-glink support.
-> Add a compatible string for SM8475 using SM8450 as a fallback.
-Any chance on this commit being picked?
+On Sun, Aug 16, 2026 at 04:18:04PM +0000, Sreeshankar K wrote:
+> Add devicetree file for SM7250 SoC and SM7250 MTP platform.
+> This file adds the basic nodes like cpu, psci and other required
+> configuration for booting up to the serial console.
+> 
+> Signed-off-by: Sreeshankar K <sreeshankar0910@gmail.com>
+> ---
+>  arch/arm64/boot/dts/qcom/Makefile       |   1 +
+>  arch/arm64/boot/dts/qcom/sm7250-mtp.dts |  30 ++
+>  arch/arm64/boot/dts/qcom/sm7250.dtsi    | 499 ++++++++++++++++++++++++
+>  3 files changed, 530 insertions(+)
+>  create mode 100644 arch/arm64/boot/dts/qcom/sm7250-mtp.dts
+>  create mode 100644 arch/arm64/boot/dts/qcom/sm7250.dtsi
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
+> index 6f33c4e2f..4b68ed17f 100644
+> --- a/arch/arm64/boot/dts/qcom/Makefile
+> +++ b/arch/arm64/boot/dts/qcom/Makefile
+> @@ -347,6 +347,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= sm6375-sony-xperia-murray-pdx225.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)	+= sm7125-xiaomi-curtana.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)	+= sm7125-xiaomi-joyeuse.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)	+= sm7225-fairphone-fp4.dtb
+> +dtb-$(CONFIG_ARCH_QCOM) += sm7250-mtp.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)	+= sm7325-motorola-dubai.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)	+= sm7325-nothing-spacewar.dtb
+>  dtb-$(CONFIG_ARCH_QCOM)	+= sm8150-hdk.dtb
+> diff --git a/arch/arm64/boot/dts/qcom/sm7250-mtp.dts b/arch/arm64/boot/dts/qcom/sm7250-mtp.dts
+> new file mode 100644
+> index 000000000..062b5958e
+> --- /dev/null
+> +++ b/arch/arm64/boot/dts/qcom/sm7250-mtp.dts
+> @@ -0,0 +1,30 @@
+> +// SPDX-License-Identifier: BSD-3-Clause
+> +/*
+> + * Copyright (c) 2020, The Linux Foundation. All rights reserved.
+> + * Copyright (c) 2026, Sreeshankar K <sreeshankar0910@gmail.com>
+> + */
+> +
+> +/dts-v1/;
+> +
+> +#include "sm7250.dtsi"
 
-Regards,
-Esteban
+If you have declared SPMI node, you can include PMIC files here.
 
+> +
+> +/ {
+> +	model = "Qualcomm Technologies, Inc. SM7250 MTP";
+> +	compatible = "qcom,sm7250-mtp", "qcom,sm7250";
+> +
+> +	aliases {
+> +		serial0 = &uart2;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +};
+> +
+> +&qupv3_id_1 {
+> +	status = "okay";
+> +};
+> +
+> +&uart2 {
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm64/boot/dts/qcom/sm7250.dtsi b/arch/arm64/boot/dts/qcom/sm7250.dtsi
+> new file mode 100644
+> index 000000000..f942eb230
+> --- /dev/null
+> +++ b/arch/arm64/boot/dts/qcom/sm7250.dtsi
+> @@ -0,0 +1,499 @@
+> +// SPDX-License-Identifier: BSD-3-Clause
+> +/*
+> + * Copyright (c) 2020, The Linux Foundation. All rights reserved.
+> + * Copyright (c) 2026, Sreeshankar K <sreeshankar0910@gmail.com>
+> + */
+> +
+> +#include <dt-bindings/clock/qcom,rpmh.h>
+> +#include <dt-bindings/clock/qcom,gcc-sm7250.h>
+> +#include <dt-bindings/interrupt-controller/arm-gic.h>
+> +#include <dt-bindings/soc/qcom,rpmh-rsc.h>
+> +
+> +/ {
+> +	interrupt-parent = <&intc>;
+> +	#address-cells = <2>;
+> +	#size-cells = <2>;
+> +
+> +	clocks {
+> +		xo_board: xo-board {
+> +			compatible = "fixed-clock";
+> +			#clock-cells = <0>;
+> +			clock-frequency = <38400000>;
+> +			clock-output-names = "xo_board";
+> +		};
+> +
+> +		sleep_clk: sleep-clk {
+> +			compatible = "fixed-clock";
+> +			#clock-cells = <0>;
+> +			clock-frequency = <32000>;
+> +		};
+
+Please move these clocks to the board DT. You an keep referencing them
+from the DTSI (see for example, sm8750.dtsi).
+
+> +	};
+> +
+> +	cpus {
+> +		#address-cells = <2>;
+> +		#size-cells = <0>;
+> +
+> +		cpu0: cpu@0 {
+> +			device_type = "cpu";
+> +			compatible = "qcom,kryo475";
+> +			reg = <0x0 0x0>;
+> +			enable-method = "psci";
+> +			next-level-cache = <&l2_0>;
+> +			l2_0: l2-cache {
+
+empty lines between each subnode (here and further).
+
+> +				compatible = "cache";
+> +				cache-level = <2>;
+> +				cache-size = <0x20000>;
+> +				cache-unified;
+> +				next-level-cache = <&l3_0>;
+> +				l3_0: l3-cache {
+> +					compatible = "cache";
+> +					cache-level = <3>;
+> +					cache-size = <0x200000>;
+> +					cache-unified;
+> +				};
+> +			};
+> +		};
+> +
+
+[..]
+
+> +
+> +	reserved_memory: reserved-memory {
+> +		#address-cells = <2>;
+> +		#size-cells = <2>;
+> +		ranges;
+> +
+> +		hyp_mem: memory@80000000 {
+
+Don't use just memory@. Add more descriptive node names (again,
+sm8750.dtsi).
+
+> +			reg = <0x0 0x80000000 0x0 0x600000>;
+> +			no-map;
+> +		};
+> +
+> +		xbl_aop_mem: memory@80700000 {
+> +			reg = <0x0 0x80700000 0x0 0x160000>;
+> +			no-map;
+> +		};
+> +
+> +		cmd_db: memory@80860000 {
+> +			compatible = "qcom,cmd-db";
+> +			reg = <0x0 0x80860000 0x0 0x20000>;
+> +			no-map;
+> +		};
+> +
+> +		smem_mem: memory@80900000 {
+> +			reg = <0x0 0x80900000 0x0 0x200000>;
+> +			no-map;
+> +		};
+> +
+> +		removed_mem: memory@80b00000 {
+> +			reg = <0x0 0x80b00000 0x0 0x1300000>;
+> +			no-map;
+> +		};
+> +
+> +		camera_mem: memory@86000000 {
+> +			reg = <0x0 0x86000000 0x0 0x500000>;
+> +			no-map;
+> +		};
+> +
+> +		gpu_mem: memory@8bc15400 {
+> +			reg = <0x0 0x8bc15400 0x0 0x2000>;
+> +			no-map;
+> +		};
+> +
+> +		npu_mem: memory@86500000 {
+> +			reg = <0x0 0x86500000 0x0 0x500000>;
+> +			no-map;
+> +		};
+> +
+> +		video_mem: memory@86a00000 {
+> +			reg = <0x0 0x86a00000 0x0 0x500000>;
+> +			no-map;
+> +		};
+> +
+> +		wlan_mem: memory@8ba00000 {
+> +			reg = <0x0 0x8ba00000 0x0 0x200000>;
+> +			no-map;
+> +		};
+> +
+> +		ipa_fw_mem: memory@8bc00000 {
+> +			reg = <0x0 0x8bc00000 0x0 0x10000>;
+> +			no-map;
+> +		};
+> +
+> +		ipa_gsi_mem: memory@8bc10000 {
+> +			reg = <0x0 0x8bc10000 0x0 0x5400>;
+> +			no-map;
+> +		};
+> +
+> +		cdsp_mem: memory@87400000 {
+> +			reg = <0x0 0x87400000 0x0 0x1e00000>;
+> +			no-map;
+> +		};
+> +
+> +		adsp_mem: memory@89200000 {
+> +			reg = <0x0 0x89200000 0x0 0x2800000>;
+> +			no-map;
+> +		};
+> +
+> +		modem_mem: memory@8c000000 {
+> +			reg = <0x0 0x8c000000 0x0 0xf800000>;
+> +			no-map;
+> +		};
+> +
+> +		cdsp_sec_mem: memory@9f400000 {
+> +			reg = <0x0 0x9f400000 0x0 0xc00000>;
+> +			no-map;
+> +		};
+> +	};
+> +
+> +	smem: qcom,smem {
+
+Don't use qcom, in node names. the label is unused. Also you can just
+move it to the reserved-memory and drop memory-region.
+
+> +		compatible = "qcom,smem";
+> +		memory-region = <&smem_mem>;
+> +		hwlocks = <&tcsr_mutex 3>;
+> +	};
+> +
+> +	soc: soc@0 {
+> +		#address-cells = <2>;
+> +		#size-cells = <2>;
+> +		ranges = <0 0 0 0 0x10 0>;
+> +		dma-ranges = <0 0 0 0 0x10 0>;
+> +		compatible = "simple-bus";
+> +
+> +		gcc: clock-controller@100000 {
+> +			compatible = "qcom,gcc-sm7250";
+
+qcom,sm7250-gcc. Where are the bindings, BTW?
+
+> +			reg = <0x0 0x00100000 0x0 0x1f0000>;
+> +			#clock-cells = <1>;
+> +			#reset-cells = <1>;
+> +			#power-domain-cells = <1>;
+> +			clock-names = "bi_tcxo",
+> +				      "bi_tcxo_ao",
+> +				      "sleep_clk";
+> +			clocks = <&rpmhcc RPMH_CXO_CLK>,
+> +				 <&rpmhcc RPMH_CXO_CLK_A>,
+> +				 <&sleep_clk>;
+> +		};
+> +
+> +		qupv3_id_1: geniqup@9c0000 {
+> +			compatible = "qcom,geni-se-qup";
+> +			reg = <0x0 0x009c0000 0x0 0x6000>;
+> +			clock-names = "m-ahb", "s-ahb";
+> +			clocks = <&gcc GCC_QUPV3_WRAP_1_M_AHB_CLK>,
+> +				 <&gcc GCC_QUPV3_WRAP_1_S_AHB_CLK>;
+> +			#address-cells = <2>;
+> +			#size-cells = <2>;
+> +			ranges;
+> +			status = "disabled";
+> +
+> +			uart2: serial@988000 {
+> +			compatible = "qcom,geni-debug-uart";
+
+Wring indentation.
+
+> +				reg = <0 0x00988000 0 0x4000>;
+> +				clock-names = "se";
+> +				clocks = <&gcc GCC_QUPV3_WRAP1_S2_CLK>;
+> +				interrupts = <GIC_SPI 355 IRQ_TYPE_LEVEL_HIGH>;
+> +				status = "disabled";
+> +			};
+> +		};
+> +
+> +		intc: interrupt-controller@17a00000 {
+> +			compatible = "arm,gic-v3";
+> +			reg = <0x0 0x17a00000 0x0 0x10000>,     /* GICD */
+> +			      <0x0 0x17a60000 0x0 0x100000>;    /* GICR * 8 */
+> +			#interrupt-cells = <3>;
+> +			interrupt-controller;
+> +			interrupts = <GIC_PPI 8 IRQ_TYPE_LEVEL_HIGH>;
+> +		};
+> +
+> +		pdc: interrupt-controller@b220000 {
+> +			compatible = "qcom,sm7250-pdc", "qcom,pdc";
+> +			reg = <0 0xb220000 0 0x30000>, <0 0x17c000f0 0 0x60>;
+> +			qcom,pdc-ranges = <0 480 42>, <42 612 28>,
+> +					  <70 63 1>, <71 640 15>, <86 522 52>;
+> +			#interrupt-cells = <2>;
+> +			interrupt-parent = <&intc>;
+> +			interrupt-controller;
+> +		};
+> +
+> +		spmi_bus: spmi@c440000 {
+> +			compatible = "qcom,spmi-pmic-arb";
+> +			reg = <0x0 0x0c440000 0x0 0x0001100>,
+> +			      <0x0 0x0c600000 0x0 0x2000000>,
+> +			      <0x0 0x0e600000 0x0 0x0100000>,
+> +			      <0x0 0x0e700000 0x0 0x00a0000>,
+> +			      <0x0 0x0c40a000 0x0 0x0026000>;
+> +			reg-names = "core", "chnls", "obsrvr", "intr", "cnfg";
+> +			interrupt-names = "periph_irq";
+> +			interrupts-extended = <&pdc 1 IRQ_TYPE_LEVEL_HIGH>;
+> +			qcom,ee = <0>;
+> +			qcom,channel = <0>;
+> +			#address-cells = <2>;
+> +			#size-cells = <0>;
+> +			interrupt-controller;
+> +			#interrupt-cells = <4>;
+> +		};
+> +
+> +		apps_rsc: rsc@18200000 {
+> +			label = "apps_rsc";
+
+Move label further down. The typical order is: compatible,
+reg+reg-names, then everything else.
+
+> +			compatible = "qcom,rpmh-rsc";
+> +			reg = <0x0 0x18200000 0x0 0x10000>,
+> +			      <0x0 0x18210000 0x0 0x10000>,
+> +			      <0x0 0x18220000 0x0 0x10000>;
+> +			reg-names = "drv-0", "drv-1", "drv-2";
+> +			interrupts = <GIC_SPI 3 IRQ_TYPE_LEVEL_HIGH>,
+> +				     <GIC_SPI 4 IRQ_TYPE_LEVEL_HIGH>,
+> +				     <GIC_SPI 5 IRQ_TYPE_LEVEL_HIGH>;
+> +			qcom,tcs-offset = <0xd00>;
+> +			qcom,drv-id = <2>;
+> +			qcom,tcs-config = <ACTIVE_TCS  2>, <SLEEP_TCS   3>,
+> +					  <WAKE_TCS    3>, <CONTROL_TCS 1>;
+> +
+> +			rpmhcc: clock-controller {
+> +				compatible = "qcom,sm7250-rpmh-clk";
+
+Missing schema and a driver update.
+
+> +				#clock-cells = <1>;
+> +				clock-names = "xo";
+> +				clocks = <&xo_board>;
+> +			};
+
+While you are at it, please add rpmhpd here. Most likely gcc needs to
+use RPMHPD_CX as as power-domain.
+
+> +		};
+> +
+
+-- 
+With best wishes
+Dmitry
