@@ -1,55 +1,55 @@
-Received: from mail-106118.protonmail.ch (mail-106118.protonmail.ch [79.135.106.118])
+Received: from mail-24418.protonmail.ch (mail-24418.protonmail.ch [109.224.244.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 80354336884
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 21:00:07 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=79.135.106.118
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 002BF348C5D
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 21:00:13 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=109.224.244.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787086811; cv=none; b=AikUVudkZkR7xFNgB/5MkmG5W/+JRgwEmW/UHuKorZPRszy4guxFkRjH87Ceqosgr1XSl2rW6f/4TMhJ0DC3/U297HLiqvwMzXUX4Y+CqF+wHOAyeZERQ1O5AePxUqw/j2PGKD2e/caObuh3m3dgR3hcwH/2NMqOzUYsWihHcMs=
+	t=1787086817; cv=none; b=mGAHikrUMiLdD5wUe45wYTLr1bb8Kzi7v3KNqgnEPWgJ9f7cg63ljtvggnGIj/w5+jqDwJHGEbDmOOPAXfLz9DOgnBZCnev2RLAABp5HH7VW/FExhRov2bG1CwiqmEGQXJTUxze8N1aXfPiYDm1cAogCwWW0m+3bMMXGF8SkSRk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787086811; c=relaxed/simple;
-	bh=9pGqU61ItbXfoCDgTIv4Xbkixc9KWLSXJv2atH7AfSo=;
+	s=arc-20240116; t=1787086817; c=relaxed/simple;
+	bh=soUao1BPJ3E2l2Vtxuv3vxgh2KPFygJkkPJZsMLJNuo=;
 	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
-	 MIME-Version:Content-Type; b=odWnaEO+pHWj6Ef8ETdYpR/fQLx155YvhGlzQTsEsJM/lrHkmN6BBOK1Wit94SjDonASiJx4lcYnT2nFs3Xs9bBXGk52Ty3dFW7aXgNqjliRU9sL3t7br9rZ+pxY6oVTPLMpiQHCgkOdde5WEPnhH+e2mCE+0e+Y/ub92FmZm4k=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=mhSYWzGd; arc=none smtp.client-ip=79.135.106.118
+	 MIME-Version:Content-Type; b=Vad7/alwik+p7r9K9Mnp1N1ao0szZlL5BQYttw32tbFvTb/hRLKwW/MbnGJH4KKvjtc+fN1wJ0z6L201dUgwCQayOjIFpKpUw2spIMhWHhWkvkvN3PBW9L55rFDSKWd7jM4Xm62DN7p7oq7bOFFwS8TolCT9A3WynvyvulFy4Qc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=UrdWGTzB; arc=none smtp.client-ip=109.224.244.18
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proton.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="mhSYWzGd"
+	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="UrdWGTzB"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=protonmail; t=1787086799; x=1787345999;
-	bh=NkVgtw1kJ6MqPpD5arjOh9k8jZTXo2lx3VWAOsobngE=;
+	s=protonmail; t=1787086805; x=1787346005;
+	bh=rlxiW4Zkiar6zCrx9sKjEy5CevBL/iRiXlE1KEfcb9I=;
 	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
 	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
 	 Message-ID:BIMI-Selector;
-	b=mhSYWzGd2cXpUpuqKP7v58nkIER5vaYXHR/cisXCeZpKTuZr5qsSPKV3CeNADxRDD
-	 LaTCGIYMfwOuu+GCuN1YqeEdkr0pUbdqhJkfEKeGXNQC6eBwSm+SDIz0f6yzGklFjb
-	 v1RSZhSy8CbYq7PAoIrrdVZz/N3A/JO1l2Y5Gnx8ZyHm1t+EtDTwJnb4LqOQ/xeC/j
-	 p2Qde/XAMJWrYPGvQUdV53R681CxyAxpZZFRoHanO/M3Gjn3vefWzgPmxofvXFvZ4o
-	 5N/oLkuZsHYVcoVod+uOunlhI+2kB9vQGPVZWAjKQknCjsRIbpiqqjS2wrIxnZ4G3s
-	 guLFA+zEiYJoA==
-Date: Tue, 18 Aug 2026 20:59:56 +0000
+	b=UrdWGTzB7kU3qSRvox/Cvpggn6YPdsazdVu9zP4V0PFiEiVWqhKmM0HfOLSxVbkc9
+	 FwdaqW4p+hQUQATeb1ACxSUnmDJDk+7ZGfgRYeJyqIscQbgr3C0Afe1umyqMJf6wvZ
+	 QKnAHGsMmjFHOt5XyqFBc7cotxtRt9FMWGgqSDAkMfLoBq9nLPiMyqqyQ9JUeBO+Bt
+	 QN/1kMUUmed+LgHoQlxdmgIRYE7cqwMFaotmq79aYR+iSlbUtUM2qDAz8puRh2uHiU
+	 BBEF/2v02dfKb7tqGed06JeFdOEFZsQoLNF96gqGHtA6GJt9w/LzjdMT0H5sj+3ENm
+	 CbilFuEdHy1KA==
+Date: Tue, 18 Aug 2026 21:00:02 +0000
 To: oe-linux-nfc@lists.linux.dev
 From: Kristian Brox <isyourbrainfoss@proton.me>
 Cc: david+nfc@ixit.cz, krzysztof.kozlowski@linaro.org, luca.weiss@fairphone.com, linux-arm-msm@vger.kernel.org, Kristian Brox <isyourbrainfoss@proton.me>
-Subject: [PATCH 1/3] dt-bindings: net: nfc: add st,st21nfcd-i2c
-Message-ID: <20260818205940.1973944-2-isyourbrainfoss@proton.me>
+Subject: [PATCH 3/3] arm64: dts: qcom: qcm6490-fairphone-fp5: add ST21NFCD NFC
+Message-ID: <20260818205940.1973944-4-isyourbrainfoss@proton.me>
 In-Reply-To: <20260818205940.1973944-1-isyourbrainfoss@proton.me>
 References: <20260818205940.1973944-1-isyourbrainfoss@proton.me>
 Feedback-ID: 203906395:user:proton
-X-Pm-Message-ID: 2e4fbc4366b6b90ede0efb52cc59d40556f71d7b
+X-Pm-Message-ID: f4d78f3257736910410fb47c707789cbc728c725
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; protocol="application/pgp-signature"; micalg=pgp-sha256; boundary="------09b1762d2f5a8de4e1bc2ea2f3097d8948188062ab807c4c415bb583a4fc9d31"; charset=utf-8
+Content-Type: multipart/signed; protocol="application/pgp-signature"; micalg=pgp-sha256; boundary="------ac8cebf76cc1a65a6236cfda853955e800f0ddea014ff94d2aadce5300a58944"; charset=utf-8
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------09b1762d2f5a8de4e1bc2ea2f3097d8948188062ab807c4c415bb583a4fc9d31
+--------ac8cebf76cc1a65a6236cfda853955e800f0ddea014ff94d2aadce5300a58944
 Content-Type: multipart/mixed;
- boundary=8fd759cc22b3885906fd3d968f0062459f264dc140b14c3bbded1f1cb830
+ boundary=03531655d452a23f3d2b42a26f8811442dde937d3483b851835f9576f9bb
 From: Kristian Brox <isyourbrainfoss@proton.me>
 To: oe-linux-nfc@lists.linux.dev
 Cc: david+nfc@ixit.cz,
@@ -57,83 +57,46 @@ Cc: david+nfc@ixit.cz,
 	luca.weiss@fairphone.com,
 	linux-arm-msm@vger.kernel.org,
 	Kristian Brox <isyourbrainfoss@proton.me>
-Subject: [PATCH 1/3] dt-bindings: net: nfc: add st,st21nfcd-i2c
-Date: Tue, 18 Aug 2026 22:59:38 +0200
-Message-ID: <20260818205940.1973944-2-isyourbrainfoss@proton.me>
+Subject: [PATCH 3/3] arm64: dts: qcom: qcm6490-fairphone-fp5: add ST21NFCD NFC
+Date: Tue, 18 Aug 2026 22:59:40 +0200
+Message-ID: <20260818205940.1973944-4-isyourbrainfoss@proton.me>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260818205940.1973944-1-isyourbrainfoss@proton.me>
 References: <20260818205940.1973944-1-isyourbrainfoss@proton.me>
 MIME-Version: 1.0
 
---8fd759cc22b3885906fd3d968f0062459f264dc140b14c3bbded1f1cb830
+--03531655d452a23f3d2b42a26f8811442dde937d3483b851835f9576f9bb
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The ST21NFCD (e.g. Fairphone 5) speaks raw NCI on I2C. Existing
-st,st21nfcb-* and st,st21nfcc-i2c compatibles stay NDLC. Add a
-separate compatible so those boards are not switched to the wrong
-framing.
-
-Also document the difference and add an I2C example without
-ese-present / uicc-present.
+Enable the ST21NFCD on i2c9 (0x08), IRQ TLMM 41, reset TLMM 38
+active-high. Compatible is st,st21nfcd-i2c (raw NCI). ese-present and
+uicc-present are unset; those links are unproven on this board.
 
 Signed-off-by: Kristian Brox <isyourbrainfoss@proton.me>
 ---
-diff --git a/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml b/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml
-index 1dcbddbc5..3523a8df0 100644
---- a/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml
-+++ b/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml
-@@ -11,10 +11,14 @@ maintainers:
+diff --git a/arch/arm64/boot/dts/qcom/qcm6490-fairphone-fp5.dts b/arch/arm64/boot/dts/qcom/qcm6490-fairphone-fp5.dts
+index d48cf38b7..a485edd24 100644
+--- a/arch/arm64/boot/dts/qcom/qcm6490-fairphone-fp5.dts
++++ b/arch/arm64/boot/dts/qcom/qcm6490-fairphone-fp5.dts
+@@ -1006,7 +1006,14 @@ redriver_ss_in: endpoint {
+ &i2c9 {
+ 	status = "okay";
  
- properties:
-   compatible:
-+    description: |
-+      st,st21nfcb-* and st,st21nfcc-i2c use NDLC on the wire.
-+      st,st21nfcd-i2c is ST21NFCD with raw NCI (no NDLC PCB).
-     enum:
-       - st,st21nfcb-i2c
-       - st,st21nfcb-spi
-       - st,st21nfcc-i2c
-+      - st,st21nfcd-i2c
+-	/* ST21NFC NFC @ 28 */
++	nfc@8 {
++		compatible = "st,st21nfcd-i2c";
++		reg = <0x08>;
++		interrupt-parent = <&tlmm>;
++		interrupts = <41 IRQ_TYPE_LEVEL_HIGH>;
++		reset-gpios = <&tlmm 38 GPIO_ACTIVE_HIGH>;
++	};
++
+ 	/* VL53L3 ToF @ 29 */
+ };
  
-   reset-
-gpios:
-     description: Output GPIO pin used for resetting the controller
-@@ -49,6 +53,7 @@ if:
-         enum:
-           - st,st21nfcb-i2c
-           - st,st21nfcc-i2c
-+          - st,st21nfcd-i2c
- then:
-   properties:
-     spi-max-frequency: false
-@@ -81,6 +86,24 @@ examples:
-         };
-     };
- 
-+  - |
-+    #include <dt-bindings/gpio/gpio.h>
-+    #include <dt-bindings/interrupt-controller/irq.h>
-+
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        nfc@8 {
-+            compatible = "st,st21nfcd-i2c";
-+            reg = <0x08>;
-+
-+            interrupt-parent = <&gpio5>;
-+            interrupts = <2 IRQ_TYPE_LEVEL_HIGH>;
-+            reset-gpios = <&gpio5 29 GPIO_ACTIVE_HIGH>;
-+        };
-+    };
-+
-   - |
-     #include <dt-bindings/gpio/gpio.h>
-     #include <dt-bindings/interrupt-controller/irq.h>
 
---8fd759cc22b3885906fd3d968f0062459f264dc140b14c3bbded1f1cb830
+--03531655d452a23f3d2b42a26f8811442dde937d3483b851835f9576f9bb
 Content-Transfer-Encoding: base64
 Content-Disposition: attachment; filename="publickey -
  isyourbrainfoss@proton.me - 0x99222460.asc"; name="publickey -
@@ -158,9 +121,9 @@ NXZjbWNVbzFQNFhTZExyNEpzRlRBaThTcUVDSERDa2thdTBtTmthSk5aaWFjU2p3S2JEQlloQkpr
 aQpKR0RUSS9ieEpVU2dhNmtIdWdoOTQ4S29BQUQrZndEK0lLcStqbUFKZytYbmVXT09YNHA4eTFX
 K0dYN3FTQzFCCnE4aUFYUWJpa2VNQkFLdHc0aStPZ2VHTWMyOUxHSnNIellXbVJhRU9nS0JvOEcr
 UklhK0ZUa29GCj1rbmFrCi0tLS0tRU5EIFBHUCBQVUJMSUMgS0VZIEJMT0NLLS0tLS0=
---8fd759cc22b3885906fd3d968f0062459f264dc140b14c3bbded1f1cb830--
+--03531655d452a23f3d2b42a26f8811442dde937d3483b851835f9576f9bb--
 
---------09b1762d2f5a8de4e1bc2ea2f3097d8948188062ab807c4c415bb583a4fc9d31
+--------ac8cebf76cc1a65a6236cfda853955e800f0ddea014ff94d2aadce5300a58944
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
@@ -168,13 +131,13 @@ Content-Disposition: attachment; filename="signature.asc"
 -----BEGIN PGP SIGNATURE-----
 Version: ProtonMail
 
-wqsEARYIAF0FgmqEx8wJEKkHugh948KoNRQAAAAAABwAEHNhbHRAbm90YXRp
-b25zLm9wZW5wZ3Bqcy5vcmcBweDJ4Odqv8PWqj4zPufbFiEEmSIkYNMj9vEl
-RKBrqQe6CH3jwqgAAEk5AQCVYJPy1a46Rl+0t/RSDbNQwilDnppi/c1Ek3EA
-9hHBuAD9Ek73UoIqeFYN5M58t9IKwHM4TgsBizmHTV4hvbYhhQ0=
-=sxVY
+wqsEARYIAF0FgmqEx9IJEKkHugh948KoNRQAAAAAABwAEHNhbHRAbm90YXRp
+b25zLm9wZW5wZ3Bqcy5vcmcjY7Yg4g4nT38AOeijBlwhFiEEmSIkYNMj9vEl
+RKBrqQe6CH3jwqgAAIA7AQDkpXMF+oZx3gxUXV9vhJ//hjJnMzDxT9WZhLOq
+YJC3kgD8D8h3vJBLznju/XWKeyL8TBA66YC0Jdi3UQt7PmZrSQo=
+=rcnS
 -----END PGP SIGNATURE-----
 
 
---------09b1762d2f5a8de4e1bc2ea2f3097d8948188062ab807c4c415bb583a4fc9d31--
+--------ac8cebf76cc1a65a6236cfda853955e800f0ddea014ff94d2aadce5300a58944--
 
