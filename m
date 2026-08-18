@@ -1,153 +1,254 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mail-m1973192.qiye.163.com (mail-m1973192.qiye.163.com [220.197.31.92])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C9E82D3EEB
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 01:03:01 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABE9C4207A;
+	Tue, 18 Aug 2026 02:21:00 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=220.197.31.92
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787014984; cv=none; b=T/8dP21+uhOhNdztqsafqD3PffbakgDeYM7nu8GgdLS/upNBUgYSmgxIR1+F1PaabU+h3yeNqsj2OmWJ5lT3Xvt9Mt98gr3oWm0wo0ezYKqTJA6dxUH97hKKgwtiFGH5uZiUun0sx5p2ZLLM3XmueMybR9UE9aD8F+mdD/+HQ9o=
+	t=1787019665; cv=none; b=BcbktlrWZoosorb1T2Coevswq1mGjI/RGCdQWyY0paWCNS0Bm8G/DMW8+sqbpfzlyP+TMkbjjoCf810oQpyqHcgN/o42YJ0WGAXIr9GnFVMRuYKWSeoCzQzqPqTAaqIEcIFhvaqcGRMeegTKivTlgpdbkjq6TSV25LDuZg85Hfw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787014984; c=relaxed/simple;
-	bh=mfyD1rtsfWwWtpBpzq6/KqrwDENReA0Q9JY7YjYd6lY=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=fbIfJqnPnbt/u6p3HmMe4k+VrZikX+bq9Re08tjRwoc2SwWX5ojN9tL1d66YrlHt1UdtgFWDor1VcUeuoeiId+C3mOK/HI04iedhZAL8k/V81gnQ+S9RBRK2eUXbhuIhYyWSTmAF8WA89Ph/8iz0La1LLnPZzy7QJvLld/LqUi4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=fU4p4VXM; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Jna3Pkya; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1787019665; c=relaxed/simple;
+	bh=OZ+qvzR6gYQZRIJghB3ByyLGo/x60syJpLT+n4/YYkA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ZmG7X7YTEmRzVMJ/aS7Ml2gcXF6ZjeYI8XgUixiIWF89js2fRyWXJTgRpsd63ucI7YJLg9N1yUX7JdR5A2m2h9QaV/kMAV61JlerKvH3Ce+ANa9RHjx6VSWDfvpyizvDtgh4mIMLbCRuuYh3FxiU9crc5ICn9njIB6NQdfbDeBM=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com; spf=pass smtp.mailfrom=rock-chips.com; dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b=dFywGsdB; arc=none smtp.client-ip=220.197.31.92
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=rock-chips.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="fU4p4VXM";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Jna3Pkya"
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67HLkiaG3370359
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 01:02:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=BRdYqDpXtU3ICy18QUcE/Vec
-	i8R0rHUVNRiP/8/gXeY=; b=fU4p4VXMTSHntnmxTUSrPuD0JapwYq7iYCC1pHhM
-	gCK4e5+Q9YDsF59ZIySjQ2km+RH0aQr7JAUNaBAzBbXTq0S0z4HzWt/XeiEGP/4Z
-	4j8pjuWLap+LBV0/J9KGtfJxdXsyTV65l4TF3e+nH7j9X0EmoNjzSodqKl5mLc/g
-	3IGo/9cDbulmoMIfxnA7YU6bIJdCW6YnJEWohVzQ0fB+B5a2XsQC6DCkkC5poYF6
-	v3PIVAiJ/I3Qum+dCO+UBIgsL222dPx6ZfpFXoDhfegnsCAkjfKLG4MvxyBQSSCh
-	FF6y8sKLJg4CLjG/l7B2pXbji8TmnNsOJqkdzF/cIdCw3w==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g3xykbrxu-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 01:02:59 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-9349c5af52bso676226685a.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 18:02:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787014979; x=1787619779; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=BRdYqDpXtU3ICy18QUcE/Veci8R0rHUVNRiP/8/gXeY=;
-        b=Jna3Pkya7/CecSRuUeO7sy/CLIzp8Xq3SUT+MF8RHJXY3PtnWBjpPx/+8d5kGVNzql
-         HH2+cRxNJXLb7zd72qINySrOFZb5cCT4s141NJsENpzS8yrTP9fk9ORKmNT2WV+CHkhr
-         C4gIqmo2yj2uNSmirXNij7tDCCz6M9yIXFLtema8u1a8TB2q3kKkAp0psIdfm7Ir2QGc
-         1hfszOYITCBaKbSTt9RxuPCVlzRTNCUyIzcBH3ibJuptxJH1iPD4cL5qKmAhFbTE4iT7
-         001425igoeGRDLjxiixmRML/MLyBmvvLLFCNZ3JOfZLLlW8CZ671mWjcBVv4WTP3JeLi
-         bVCA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787014979; x=1787619779;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=BRdYqDpXtU3ICy18QUcE/Veci8R0rHUVNRiP/8/gXeY=;
-        b=IQI/m3eVoxsgmN+uAfny2eWlYKZJHA1t+vzicy+whXzyu0UwCGgYy/BOMmyzsXS5hh
-         pS49CksH0rXOPF+2cpXcdAXMeAC7gkwnuJjvKspOG1kjhxJ4qdLF7Ygz8PAZVjfAPC3d
-         t0H7t5Dh2Ofp3UA/7GYl3tBvQjFtFpB+iMolASCCRSNXtAfB93VLJfe7EMAi9wnpjmQa
-         3TNk1yniz/Hq6ilPUzXWbrlIOGBDqCpTSl7QLCM56YFZCRpjFMG6Gsmky7lyWtd946Dd
-         5oVv43E6QVw6qJM+qNd92CgO6MybHHxv8a5/slTBV4LVyjOwdPuZlZxoqvqJNIkmEvVw
-         4hcQ==
-X-Forwarded-Encrypted: i=1; AHgh+Rp0l6af7zF0BqHx/9lUgRbzdDjZzncG8+eOqfIzMGzory1Ea4ds8PRK1/LghgguH9fRqQ6EAh9k9YT+3XCK@vger.kernel.org
-X-Gm-Message-State: AOJu0YxHEyt21NfCapVGsEb0XbLJ49ssTx+ix6RwJCqqy9walTv3uDfO
-	XVROY6L0Mp3ooHnqhWFNtjVIleETC54x4dWFwXF4N81XGNl4Xuqb257b8UZs+kAUXtTleNize3H
-	GSK9V9MCvthBjJxT/NAxS343juANjs96z9KALIG8hRNMLHf9nJPdvYr/Iebq0oH84cHTt
-X-Gm-Gg: AR+sD11FD8shx8Q5A+4zMjmnq3RuyNxTIu9ADQxt+usMcKEK2yTF9eAaEVOKjI54PBA
-	D6ave7vwFcnU8JavbugalEkirILhfz80I+VxxtuTBbz2EULisuUDiSvQs05Tu76mjletwz5tW7d
-	I1gsC9QuGjwZNIm3WwhzMdXKDHC76eDfS0v9MsjHAg0G3mNhRCci46kUfK5JpCCyo8360VlPT/X
-	fdaAHsvH165wFka+WInt4KA3KPkJix9gt1nEF53WwntOVBuFSSWHXDwFoxVjQj99UeZLjilHKCT
-	kQakiJvBoAGedXHDXtVipjeXIxQtun+Qh/fkcb0FZtRNbIWcNS6JWLaMn0Vq2unAgjX1oJy9iNJ
-	wpDKPYuBamsGcMAAUxiCEd+1Dhq3K3lEmjVFP0v46WskPRELTHVvoaYTDdoZ+HqWw+U4CYzjfwB
-	lKgmla+r5Pnavm
-X-Received: by 2002:a05:620a:28d4:b0:922:d336:1990 with SMTP id af79cd13be357-936d2284f21mr2770801585a.18.1787014978723;
-        Mon, 17 Aug 2026 18:02:58 -0700 (PDT)
-X-Received: by 2002:a05:620a:28d4:b0:922:d336:1990 with SMTP id af79cd13be357-936d2284f21mr2770796485a.18.1787014978281;
-        Mon, 17 Aug 2026 18:02:58 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b46cf95803sm772558e87.1.2026.08.17.18.02.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 Aug 2026 18:02:57 -0700 (PDT)
-Date: Tue, 18 Aug 2026 04:02:54 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Daniel Baluta <daniel.baluta@nxp.com>
-Cc: andersson@kernel.org, konradybcio@kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        imx@lists.linux.dev, nathan@kernel.org,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v6 3/4] soc: qcom: ubwc: Fix link error when QCOM_SMEM=n
-Message-ID: <fk4na2wxwpgqdpy4atzswkovvf6zzthylhvndrc2qqkegfi272@hnydvrjvms57>
-References: <20260817123542.48475-1-daniel.baluta@nxp.com>
- <20260817123542.48475-4-daniel.baluta@nxp.com>
+	dkim=pass (1024-bit key) header.d=rock-chips.com header.i=@rock-chips.com header.b="dFywGsdB"
+Received: from [172.16.12.90] (unknown [61.154.14.86])
+	by smtp.qiye.163.com (Hmail) with ESMTP id 4a55d3d6b;
+	Tue, 18 Aug 2026 10:05:32 +0800 (GMT+08:00)
+Message-ID: <364f223e-15c6-44c4-a909-134754cfd0e1@rock-chips.com>
+Date: Tue, 18 Aug 2026 10:05:30 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260817123542.48475-4-daniel.baluta@nxp.com>
-X-Proofpoint-GUID: ekwLRUdgU6muFscMyQDTW-S26r2s03p3
-X-Proofpoint-ORIG-GUID: ekwLRUdgU6muFscMyQDTW-S26r2s03p3
-X-Authority-Analysis: v=2.4 cv=dLaWXuZb c=1 sm=1 tr=0 ts=6a83af43 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
- a=8AirrxEcAAAA:8 a=czfsfouh4VKptltzzNsA:9 a=CjuIK1q_8ugA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22 a=ST-jHhOKWsTCqRlWije3:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDAwNCBTYWx0ZWRfX/NiwqEflrP6d
- mwxqseB0tzkPUMisPhojJpuLZrdcnPeSWmdwA2+zzXIwa5ZGZNtMaQNx1RxYZiXfDQ6kHKiWcb2
- 7YkRE0XJKTtb98psWFTg1IqGhrqo+gQ9sx/fjvbzBjP3n1qV6ZJZQiGO2eemZr2AXbf4fmpGzzg
- yz8c615GzAWKbkZDTRSIE2evl/15S9CaK24b1O4Ln5SkY2aLcwiF1ihYamIjFm5KCPTNZNjNNgf
- tqzMJyN1okWxkTTOeHZU6tMvn9ru6bx1W758vCJOlyhSrDQEp5isGQb2wU50cjj0cl5m/ovPMz9
- fzbuAqIkD3E67tq1jJdUBnpJS6ffn1aShD6hCfqS26C/lAdLQTpnol12h0GAdto2vCpiVhAWHqN
- GXN6SsdNAAYaylDw+G3McJsLwsjjOwhWXO02xWtKpkdStOoZdp+i/e4BTFt7CxEjydZHHpE4pkf
- TcokyWDNiHEXk18qTSA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDAwNCBTYWx0ZWRfXwupS4wlr1SwF
- B6LoC7dOy9a8XNGus9EZouBe1/epNixo/Uemc6hLrezRRU94onO8P1e5cvsKDsasKymlxuqwIHo
- +6Omw9HRtQSuNZ2w+5+JU+V+3Ugp2ak=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-17_04,2026-08-12_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 spamscore=0 lowpriorityscore=0
- priorityscore=1501 bulkscore=0 suspectscore=0 adultscore=0 malwarescore=0
- clxscore=1015 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
- definitions=main-2608180004
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/5] drm/bridge: allow hpd_notify() to suppress connector
+ hotplug events
+To: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
+Cc: Andrzej Hajda <andrzej.hajda@intel.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Robert Foss <rfoss@kernel.org>,
+ Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Luca Ceresoli <luca.ceresoli@bootlin.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Kevin Hilman <khilman@baylibre.com>, Jerome Brunet <jbrunet@baylibre.com>,
+ Martin Blumenstingl <martin.blumenstingl@googlemail.com>,
+ Rob Clark <robin.clark@oss.qualcomm.com>, Dmitry Baryshkov
+ <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+ Marijn Suijten <marijn.suijten@somainline.org>,
+ Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, dri-devel@lists.freedesktop.org,
+ linux-kernel@vger.kernel.org, linux-amlogic@lists.infradead.org,
+ linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+ freedreno@lists.freedesktop.org
+References: <20260629-msm-dp-msttypec-v1-0-646a10256233@oss.qualcomm.com>
+ <20260629-msm-dp-msttypec-v1-1-646a10256233@oss.qualcomm.com>
+Content-Language: en-US
+From: Chaoyi Chen <chaoyi.chen@rock-chips.com>
+In-Reply-To: <20260629-msm-dp-msttypec-v1-1-646a10256233@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-HM-Tid: 0aa0129de44003a7kunmc0fc8708438ed0
+X-HM-MType: 1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkZSktKVh9PTxlCTx4ZSExIGVYVFA
+	kWGhdVEwETFhoSFyQUDg9ZV1kYEgtZQVlNSlVKTk9VSk9VQ01ZV1kWGg8SFR0UWUFZT0tIVUpLSE
+	pKQkxVSktLVUpCS0tZBg++
+DKIM-Signature: a=rsa-sha256;
+	b=dFywGsdBtvZRVJemi0N+HjQrvA6VMmVIb18ZLdmsL3Ic4tBAFCATiNU/Da+GZgXDhVSIz8U03oEwrpR2JOwTUMa86YCerIdWVCjLHaFxL6qKBFk7HX5dLjWzoHtrTg669GS8iIuCxS7iYK64SHSLCH8Bhi513UXjUValaG6NxLo=; s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
+	bh=QuPkMCmr0GH+tbEEJBOzYqXRVTh/Jjq7Xd3/Zg44YS0=;
+	h=date:mime-version:subject:message-id:from;
 
-On Mon, Aug 17, 2026 at 03:35:40PM +0300, Daniel Baluta wrote:
-> ubwc_config.c calls qcom_smem_is_available() and qcom_smem_dram_get_hbb()
-> unconditionally, so QCOM_UBWC_CONFIG=y with QCOM_SMEM=n fails to link:
+Hello Yongxing,
+
+On 6/29/2026 10:48 PM, Yongxing Mou wrote:
+> The bridge connector framework currently invokes all bridge
+> hpd_notify() callbacks and unconditionally emits a connector hotplug
+> event afterwards.
 > 
->   arm-linux-gnueabihf-ld: ubwc_config.c:(.text+0x2c): undefined
->       reference to 'qcom_smem_is_available'
+> However, not every HPD notification requires a userspace hotplug event.
 > 
-> Add the missing 'depends on QCOM_SMEM'.
+> In particular, DP MST bridges may use hpd_notify() to propagate HPD and
+> IRQ notifications through the bridge chain while the actual hotplug
+> handling is performed by the DRM DP MST core. Connector creation,
+> removal and userspace hotplug events are already managed by the MST
+> topology framework.
 > 
-> Fixes: 1b445022d1d0 ("soc: qcom: ubwc: Get HBB from SMEM")
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Signed-off-by: Daniel Baluta <daniel.baluta@nxp.com>
+> Allow hpd_notify() implementations to suppress the bridge connector
+> hotplug event by introducing a bool *send_hotplug parameter. Drivers
+> can clear this flag when HPD processing should not result in a
+> connector hotplug notification.
+> 
+> A NULL pointer indicates that hotplug suppression is not supported by
+> the caller, such as the connector detect polling path.
+>
+
+Should we add an API to distinguish between regular HPD events and
+the IRQ-only notifications you mentioned?
+
+I've recently seen similar approaches. For example, this patch[0] adds
+handling for internal events, which I think is somewhat similar to the
+IRQ-only notification here.
+
+[0]: https://lore.kernel.org/all/20260806-synopsys-dw-dp-improvements-v11-11-0d508505f383@collabora.com/
+
+> Signed-off-by: Yongxing Mou <yongxing.mou@oss.qualcomm.com>
 > ---
->  drivers/soc/qcom/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
+>  drivers/gpu/drm/bridge/lontium-lt9611uxc.c     |  3 ++-
+>  drivers/gpu/drm/display/drm_bridge_connector.c | 15 +++++++++------
+>  drivers/gpu/drm/meson/meson_encoder_hdmi.c     |  3 ++-
+>  drivers/gpu/drm/msm/dp/dp_display.c            |  3 ++-
+>  drivers/gpu/drm/msm/dp/dp_drm.h                |  3 ++-
+>  drivers/gpu/drm/omapdrm/dss/hdmi4.c            |  3 ++-
+>  include/drm/drm_bridge.h                       |  3 ++-
+>  7 files changed, 21 insertions(+), 12 deletions(-)
 > 
-
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-
+> diff --git a/drivers/gpu/drm/bridge/lontium-lt9611uxc.c b/drivers/gpu/drm/bridge/lontium-lt9611uxc.c
+> index 8cb17bd0e238..42e1cadcd3fb 100644
+> --- a/drivers/gpu/drm/bridge/lontium-lt9611uxc.c
+> +++ b/drivers/gpu/drm/bridge/lontium-lt9611uxc.c
+> @@ -430,7 +430,8 @@ static const struct drm_edid *lt9611uxc_bridge_edid_read(struct drm_bridge *brid
+>  static void lt9611uxc_bridge_hpd_notify(struct drm_bridge *bridge,
+>  					struct drm_connector *connector,
+>  					enum drm_connector_status status,
+> -					enum drm_connector_status_extra extra_status)
+> +					enum drm_connector_status_extra extra_status,
+> +					bool *send_hotplug)
+>  {
+>  	const struct drm_edid *drm_edid;
+>  
+> diff --git a/drivers/gpu/drm/display/drm_bridge_connector.c b/drivers/gpu/drm/display/drm_bridge_connector.c
+> index 8f7075fd2aa5..5edca47a025f 100644
+> --- a/drivers/gpu/drm/display/drm_bridge_connector.c
+> +++ b/drivers/gpu/drm/display/drm_bridge_connector.c
+> @@ -142,7 +142,8 @@ struct drm_bridge_connector {
+>  
+>  static void drm_bridge_connector_hpd_notify(struct drm_connector *connector,
+>  					    enum drm_connector_status status,
+> -					    enum drm_connector_status_extra extra_status)
+> +					    enum drm_connector_status_extra extra_status,
+> +					    bool *send_hotplug)
+>  {
+>  	struct drm_bridge_connector *bridge_connector =
+>  		to_drm_bridge_connector(connector);
+> @@ -150,13 +151,14 @@ static void drm_bridge_connector_hpd_notify(struct drm_connector *connector,
+>  	/* Notify all bridges in the pipeline of hotplug events. */
+>  	drm_for_each_bridge_in_chain_scoped(bridge_connector->encoder, bridge) {
+>  		if (bridge->funcs->hpd_notify)
+> -			bridge->funcs->hpd_notify(bridge, connector, status, extra_status);
+> +			bridge->funcs->hpd_notify(bridge, connector, status,
+> +						  extra_status, send_hotplug);
+>  	}
+>  }
+>  
+>  static void drm_bridge_connector_handle_hpd(struct drm_bridge_connector *drm_bridge_connector,
+> -					    enum drm_connector_status status,
+> -					    enum drm_connector_status_extra extra_status)
+> +	enum drm_connector_status status,
+> +	enum drm_connector_status_extra extra_status)
+>  {
+>  	struct drm_connector *connector = &drm_bridge_connector->base;
+>  	struct drm_device *dev = connector->dev;
+> @@ -165,7 +167,7 @@ static void drm_bridge_connector_handle_hpd(struct drm_bridge_connector *drm_bri
+>  	connector->status = status;
+>  	mutex_unlock(&dev->mode_config.mutex);
+>  
+> -	drm_bridge_connector_hpd_notify(connector, status, extra_status);
+> +	drm_bridge_connector_hpd_notify(connector, status, extra_status, NULL);
+>  
+>  	drm_kms_helper_connector_hotplug_event(connector);
+>  }
+> @@ -227,7 +229,8 @@ drm_bridge_connector_detect(struct drm_connector *connector, bool force)
+>  		if (hdmi)
+>  			drm_atomic_helper_connector_hdmi_hotplug(connector, status);
+>  
+> -		drm_bridge_connector_hpd_notify(connector, status, DRM_CONNECTOR_NO_EXTRA_STATUS);
+> +		drm_bridge_connector_hpd_notify(connector, status,
+> +						DRM_CONNECTOR_NO_EXTRA_STATUS, NULL);
+>  	} else {
+>  		switch (connector->connector_type) {
+>  		case DRM_MODE_CONNECTOR_DPI:
+> diff --git a/drivers/gpu/drm/meson/meson_encoder_hdmi.c b/drivers/gpu/drm/meson/meson_encoder_hdmi.c
+> index 4aecf0ffcf75..a67e7b365c5b 100644
+> --- a/drivers/gpu/drm/meson/meson_encoder_hdmi.c
+> +++ b/drivers/gpu/drm/meson/meson_encoder_hdmi.c
+> @@ -324,7 +324,8 @@ static int meson_encoder_hdmi_atomic_check(struct drm_bridge *bridge,
+>  static void meson_encoder_hdmi_hpd_notify(struct drm_bridge *bridge,
+>  					  struct drm_connector *connector,
+>  					  enum drm_connector_status status,
+> -					  enum drm_connector_status_extra extra_status)
+> +					  enum drm_connector_status_extra extra_status,
+> +					  bool *send_hotplug)
+>  {
+>  	struct meson_encoder_hdmi *encoder_hdmi = bridge_to_meson_encoder_hdmi(bridge);
+>  
+> diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
+> index fcfee26f0078..6835c68fe510 100644
+> --- a/drivers/gpu/drm/msm/dp/dp_display.c
+> +++ b/drivers/gpu/drm/msm/dp/dp_display.c
+> @@ -1763,7 +1763,8 @@ void msm_dp_bridge_hpd_disable(struct drm_bridge *bridge)
+>  void msm_dp_bridge_hpd_notify(struct drm_bridge *bridge,
+>  			      struct drm_connector *connector,
+>  			      enum drm_connector_status status,
+> -			      enum drm_connector_status_extra extra_status)
+> +			      enum drm_connector_status_extra extra_status,
+> +			      bool *send_hotplug)
+>  {
+>  	struct msm_dp_bridge *msm_dp_bridge = to_dp_bridge(bridge);
+>  	struct msm_dp *msm_dp_display = msm_dp_bridge->msm_dp_display;
+> diff --git a/drivers/gpu/drm/msm/dp/dp_drm.h b/drivers/gpu/drm/msm/dp/dp_drm.h
+> index f6b96c27408a..07ddcd055962 100644
+> --- a/drivers/gpu/drm/msm/dp/dp_drm.h
+> +++ b/drivers/gpu/drm/msm/dp/dp_drm.h
+> @@ -32,6 +32,7 @@ void msm_dp_bridge_hpd_disable(struct drm_bridge *bridge);
+>  void msm_dp_bridge_hpd_notify(struct drm_bridge *bridge,
+>  			      struct drm_connector *connector,
+>  			      enum drm_connector_status status,
+> -			      enum drm_connector_status_extra extra_status);
+> +			      enum drm_connector_status_extra extra_status,
+> +			      bool *send_hotplug);
+>  
+>  #endif /* _DP_DRM_H_ */
+> diff --git a/drivers/gpu/drm/omapdrm/dss/hdmi4.c b/drivers/gpu/drm/omapdrm/dss/hdmi4.c
+> index d02d432abde4..ad659cef16f5 100644
+> --- a/drivers/gpu/drm/omapdrm/dss/hdmi4.c
+> +++ b/drivers/gpu/drm/omapdrm/dss/hdmi4.c
+> @@ -430,7 +430,8 @@ static void hdmi4_bridge_disable(struct drm_bridge *bridge,
+>  static void hdmi4_bridge_hpd_notify(struct drm_bridge *bridge,
+>  				    struct drm_connector *connector,
+>  				    enum drm_connector_status status,
+> -				    enum drm_connector_status_extra extra_status)
+> +				    enum drm_connector_status_extra extra_status,
+> +				    bool *send_hotplug)
+>  {
+>  	struct omap_hdmi *hdmi = drm_bridge_to_hdmi(bridge);
+>  
+> diff --git a/include/drm/drm_bridge.h b/include/drm/drm_bridge.h
+> index 9c4c88024cc5..e6de665ce8f6 100644
+> --- a/include/drm/drm_bridge.h
+> +++ b/include/drm/drm_bridge.h
+> @@ -616,7 +616,8 @@ struct drm_bridge_funcs {
+>  	void (*hpd_notify)(struct drm_bridge *bridge,
+>  			   struct drm_connector *connector,
+>  			   enum drm_connector_status status,
+> -			   enum drm_connector_status_extra extra_status);
+> +			   enum drm_connector_status_extra extra_status,
+> +			   bool *send_hotplug);
+>  
+>  	/**
+>  	 * @hpd_enable:
+> 
 
 -- 
-With best wishes
-Dmitry
+Best, 
+Chaoyi
