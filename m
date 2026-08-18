@@ -1,190 +1,170 @@
-Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178])
+Received: from mail-yw1-f169.google.com (mail-yw1-f169.google.com [209.85.128.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11B274854E3
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 17:58:12 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.178
-ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787075894; cv=none; b=F4efY66oF6krP13pRuvUItUWJM15ci59B+mq6Pcbjv5/s/TNY57MwDdjV5RZ67IyrDHJzOwv9skXVHBqWzVgMyxGUKqAZzyQr/hSeCIwv2xGI3R1QiYBp/8rR9aCF0qRUifRZXm/9cXCc7j9xLlKKa/fj0CmbY7VVmGLq7BB8xE=
-ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787075894; c=relaxed/simple;
-	bh=PteXAD1DPggMcw8dT/xS22YuwTISejXEqBeq+NyzCoM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=lEnxcDNwoAIxiIDyJXGwrRuIysm/XboDpJ4Ey8srPT3vkJ3QXDc72Ea1ex4pZfEiEqHenF+2rr+UA/US742ppHr2Zzjxd3aeva5VqesMZkT83+ooudemT8XWCUQMXelEl6nkqc7DDqBpjzAofCr6/e9DMFU+SeOEUphhIRwmKfE=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=PmUmLlRg; arc=none smtp.client-ip=209.85.214.178
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 920233DB33F
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 18:02:03 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.128.169
+ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787076125; cv=pass; b=Ph4T2WZ9P+zGpe7M4DHWgjbmw1D2OZ6IxOZRYhvHz57nXu3Eh9+8p7nvdb7by2+8WcHLRMLXdKh3HYj5pR1NgPRzvDSlgcWpnFzQ6OmJSvepXRKgAbTUFKFCLOjUDEFvRgz633GRWU9bubDacYdP+B9f/cc31LpfO+LBEJGbQI0=
+ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787076125; c=relaxed/simple;
+	bh=IgBGeJCDKiYKLE0gQ0v9DR22201l/v7euRFWqtsNNyc=;
+	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+	 To:Cc:Content-Type; b=ZjkaU9s3LtQ5uBWvHswmoJWXMTEyW0EAWU7NrH8Jt37vuXKl/eZZMi0giVDB4pTyBKy6duF05AonKNmcmwNiQZU0Ag3i4vwFKIQANM6NPbELaWh8Q/pPXWVeP7EQiAeDq/EZ2Ip0bQmcxjVsq2yRAlttfW223mZ5DDGjAOx9jBY=
+ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=DIfzexSO; arc=pass smtp.client-ip=209.85.128.169
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PmUmLlRg"
-Received: by mail-pl1-f178.google.com with SMTP id d9443c01a7336-2d530328efbso1133785ad.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 10:58:12 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="DIfzexSO"
+Received: by mail-yw1-f169.google.com with SMTP id 00721157ae682-836c8bde2dcso3036507b3.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 11:02:03 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1787076122; cv=none;
+        d=google.com; s=arc-20260327;
+        b=ZUM4uBFw6BhStVPhQ+mbh/6O9iBoCWEzLOJqBIEmrx95uEw+Q0aYnyF9rKVTbrlW8u
+         DfZwgTZ7WjaBfMtqz+iViBP+NdooD/7JvFqpf5A0XXDQDbJcpOFSzPp9uSzgSd3g+jFn
+         AfERH8m8+5KdV5tk+37Y3+/zxseVmIf0tCDBDKRi5Ru//uuiswMJXNbGntN47uCBlB4C
+         57JLwL8Dp40mIohqd4G0PvGpYK7R8mrZ5O5RmcdNftFDUKycjQaNr6wO5VkNqvh/wP3e
+         gulfrdB7NdKsQBbzFjdiWRjqT1cblUmQsl3Jb9QEjzl0ctXw85h7wHQGpEqk6fvR72P/
+         +S1g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=JnRPUTV0z7CVyIrMTRkfaLJ+Iek7vpJVoTQfaBHHeDA=;
+        fh=8ItUCFntPi6UEKB3SfRyWL+ehqI8IjrQUy02tR7oo9M=;
+        b=Ws5SWqo5NRrURGSj7c16VWJuD+qzEiUqhddAPwsCa92zVv+yN5U0RNw+9UDdHbNRzY
+         2EpieX3reWtAfxziOYO5H9AS+4oYuYMZovV2Q5DkUyMNARc5kSH0QqKq/EdWLCg18oJX
+         pSVtrHi36DnWo7vH3eqoU08V7c3Wg+82GO++CDXMB1n8xOqzj+BGamMOH69LFVovtSFn
+         DA+IRVkfZrCUrtxK9TDeEzkP4vkz6dci1d4w2Y+IutHwQI4FHfZr4zDHTe0HZ/pJhrG5
+         BwdcQ8cbubVqY9ASseXNarIe8X+iDDr/IP92jSKtW9HG81L1Pr+4VLhQdR4+q/PMZiuq
+         MyzQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787075892; x=1787680692; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=OVwPxM1zwUuisKDv++BvBZsLlEbaJx1tUb1t0BisU8Y=;
-        b=PmUmLlRgrMph6z6p9pYvFXEd3ULNL50PI0qWEnDIn9tFCOi7Sx9wGh9iBvhEVGm1E+
-         Y4/LofSomCbm/St59kMy3GoYfvUjDDIlvLKUTuOn9GxUW1m2GFd4K98ko64aMPpzwEPw
-         8lIF7zGTeqDTL+aTtYCyV3LLswH7ps6RPpmJwcPr3rzBdnm5jbYR+YXJ+rrNQW57ZbH5
-         /d83208+aKZoKucfZTF270FF/FJbWtynkGcsDMcFKqazS04QcHxM2TAmSl9wcEFVrfpv
-         azvexelKerHh/67vfLa5PxCdKgH/c1KpreXyd+KIU96C6A272WuRcXQPpt368snsrDjF
-         1spA==
+        d=gmail.com; s=20251104; t=1787076122; x=1787680922; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=JnRPUTV0z7CVyIrMTRkfaLJ+Iek7vpJVoTQfaBHHeDA=;
+        b=DIfzexSOYLQlik42YYH/zhzOl9u6/O5H/X8M4FfRYipyTqsaBGpqGKqxJKAbFBqJ8g
+         8EQBeaSrw+alMuxq2SeL+yfB6hifbqg5pFg1eafwKHy94SBi5WNz/nwDIsnQLbfMzLNX
+         qZS4TZ56sDZAI9MW29lgTdGUE4aumNRQf5CIPEhojPsy47Yu9VJ7lqM4WZnk1IXCWYHL
+         7piiWKw1TTP0WPsJ0IVbWrBJ7F9u9QCBMcrKa6rFT9Ukj7jEhsI7cNJzEdMwehzBu7wA
+         svSvlQXTFnRfOXVb0NAIWZmEbm6eMeR9Z188N+5NxZ8RLNMUq+YQUyPJJG7w2Mju7YFF
+         DGfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787075892; x=1787680692;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=OVwPxM1zwUuisKDv++BvBZsLlEbaJx1tUb1t0BisU8Y=;
-        b=hqM8rMmwrB0OdsD2vpvycRrPjGYDJfweZoIH3De/PyKP41RNadtErke95Xg6Ylz/Cy
-         aFWcutA8Nr9hBZG7+qZ3v8elCTGsYhkfPt4uavjHH+zlzKaY9Mbu8pNE0pmnntn/TWA1
-         BtQ0ozn6HWO/BDKBjCxt+DaX0J01PawBG+kl06yuwBucxII3I+iWWQ9v7ENmSlYIPKXv
-         ViL11xyIa9Kt4Bk5beGupeiUaKc86Vef8f1tUZJ37SeKOYB/QNWR4k++O2F8PJy3+6AW
-         uSYkNX4gTXna221lgMfwSb3UolJ+FlWOE86124uu7eWyWItL87tRAtcB2V1bgFeMsqY7
-         vAoA==
-X-Forwarded-Encrypted: i=1; AHgh+RqopRka6Qu2+BSIu2HwOp9RSC8PeAmcgiZQkrK08n6cEe7N+SuxYx7efrCP6pz10TaViAHvC6jbrcyNnHh1@vger.kernel.org
-X-Gm-Message-State: AOJu0YyOILthw8WDQOU5CauaJ6iwFcl7roblVrNCD12kbK8B2QQWJVR4
-	kfLeBgfVyP106xL2kqOAzqOZRlbT5igy3kvzbDupfr/BhmqWyZUR7g0tfqPdeoLgbSSoZw==
-X-Gm-Gg: AR+sD11ALKM0VHy8ZAg4HYxX/cz13fLQEZCtP9udnqhWhXQ8yG0q0Ef2Gum2Ywjl0lH
-	y+CZNfDUKkzMcNf5oxaS4Vd2EaMHTIX50UIUarM/pTDbemb/wGPgybigNIPf2ZPnOeDXjzSXGxi
-	4rnPRWteDstOn2D80B60WZ1ztKeAco6QTS5ts3mydNQh1W5yXKmyCMcR8bEwIDfgMxovpFo5x0X
-	VNH3KxOpbJnEe0OzqcrVlgGGDnUwa83+ENO1Yv1wuoPtC9+OGSS9wpBOCOxFMEx3lz18Wzs+LcW
-	TJGUiTVqACUwO5T/ZLkFrVaZER0DMcd95IQrCQfaC8DWO0WgmYwzBE5lAfhdTgnEs/NL+hZGunV
-	Go6z3JEEU/yVVmFOM6R2vTpG0OQcq6Sh2NVKtHSIrmaElF9/0jjrpaD0uCFnQXMp61hShBS8aPP
-	Ec+JYvTsDpwSPt2ta2UsTYoqpHwoc3ZU3kTGajCzX0OjZ9AviDatbYCNAWCBZOtTuD0dgYr81o/
-	b+iXwpNH3pgTeGZt/HLfb8SCWQ=
-X-Received: by 2002:a17:903:388b:b0:2d0:401c:2ebb with SMTP id d9443c01a7336-2d5c4ee9c5dmr151317545ad.4.1787075891614;
-        Tue, 18 Aug 2026 10:58:11 -0700 (PDT)
-Received: from localhost.localdomain ([240a:4282:4801:1b98:2558:3176:8229:fc85])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2d5c1e8dc12sm17420645ad.56.2026.08.18.10.58.05
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Tue, 18 Aug 2026 10:58:10 -0700 (PDT)
-From: Liu Zhenlong <dragonliu2018@gmail.com>
-To: linux-i2c@vger.kernel.org
-Cc: konrad.dybcio@oss.qualcomm.com,
-	stable@vger.kernel.org,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Robert Foss <rfoss@kernel.org>,
-	Andi Shyti <andi.shyti@kernel.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Wolfram Sang <wsa@kernel.org>,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v2] i2c: qcom-cci: fix device_node refcount leak in cci_probe()/cci_remove()
-Date: Wed, 19 Aug 2026 01:57:50 +0800
-Message-ID: <20260818175750.4205-1-dragonliu2018@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260815140931.53297-1-dragonliu2018@gmail.com>
-References: <20260815140931.53297-1-dragonliu2018@gmail.com>
+        d=1e100.net; s=20251104; t=1787076122; x=1787680922;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=JnRPUTV0z7CVyIrMTRkfaLJ+Iek7vpJVoTQfaBHHeDA=;
+        b=GP+bCf6HOJAzEU3jq6zQjIjv1ZZ4C4Bln9CyZnf0w+5vjuipb9lUieMO6G5K91b4Gr
+         JHC9JEkYyO9a7j75DNmFDIefqceCCRWmrGKWSkXSFXYych1YmG6EQl0Nn4Zs5sjDjL9w
+         CZuBFyBzye1TKSsYZLPgKmGAUjvM2ABaiSmuod5PdIsiZUxXL2M/9B3BTjTvwv7LLL/H
+         vxLRIliA1y+5XfwctdvwjZNjF+JAtWRLpElz2BQ8VWZFvDeknf7spDWMip/sAluBohmV
+         2bzCLNQwcNlkhp3l+/6yC/c/9xgVa7uDrMKgDz/aqfjjz4o95osxdnZDMfOnMBLkZJB8
+         AWOQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrkYqr0FBZzhDKgy2AwBOiavJRrqyZrmW4LBKZzG8neG82hD7QLJSST6bwP5v0ppQ5k/Ovipg6myf4W804o@vger.kernel.org
+X-Gm-Message-State: AOJu0YzLA0gYiFTkGkFAcolDfQYMOSltsCXmof2vEA+MzvRk6q1T7v1X
+	zLytuRukjarmuLIEAZZRUOM95fW9VqN18drqnXGcvvg95TOM4Hq0o1YK1tFxfYUCXMTHxC3iN5u
+	G/aB5+zo+fr8G5VfCyjL0dgz8a9eAXdA=
+X-Gm-Gg: AR+sD12iP6GrIcSA54RRa0KctbzDujZhZZihhTZW6UGpC+0hb+ik6kRp6N9X79CufBc
+	DnG3a+w8+b6yRfQiUwGQYTaUoNcVB/3XD9NmJ2UqXskceh+hRluYMnl6Nu7jL7ajWAjPN9jeUli
+	zv42sBKMZ8UkzLzD6OJ4WbmbM8jBHxdAakmKDfUnJ/atZVvhiBxtlqR3w3MTnz4pic8WPD3fR52
+	2I7A618JP2v5cxwe11rs1YNFuucVZuak9fiLamDIhigVWpa8G4W+kg9oHaYXLy/RcerblAwmbal
+	jUoU8SLkKHWFiUGJpXYkJIG9OE8oZfkWxacl/rYYQ01jffqXBYuK1RegKtVrmkjbtwadjiv5igq
+	tQEvW8P/WfTpB7cIS0l3XIv3fvXHhDbg=
+X-Received: by 2002:a05:690c:7003:b0:80b:9114:3b85 with SMTP id
+ 00721157ae682-83706f4684bmr152551277b3.0.1787076122204; Tue, 18 Aug 2026
+ 11:02:02 -0700 (PDT)
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20260817205017.56524-1-johannes.goede@oss.qualcomm.com> <20260817205017.56524-2-johannes.goede@oss.qualcomm.com>
+In-Reply-To: <20260817205017.56524-2-johannes.goede@oss.qualcomm.com>
+From: Luiz Augusto von Dentz <luiz.dentz@gmail.com>
+Date: Tue, 18 Aug 2026 14:01:51 -0400
+X-Gm-Features: AcwNN1VwTn1hJ-am2OMW-FOMoM3ME9dN1GaV9yIHvOeEU0lqJnAdL3_Oyb6_pDY
+Message-ID: <CABBYNZ+Bhhx3rtq8i_FGu2a_oFyWquo_gTRcmPyM6HcFC3pkVg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] Bluetooth: hci_core: Handle skb_clone() failure in hci_send_cmd_sync()
+To: Hans de Goede <johannes.goede@oss.qualcomm.com>
+Cc: Marcel Holtmann <marcel@holtmann.org>, Ibrahim Abdelkader <iabdelka@qti.qualcomm.com>, 
+	linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-The of_node_put() matching of_node_get() runs after i2c_del_adapter(),
-whose trailing memset() zeroes adap->dev and thus adap->dev.of_node,
-making the put a no-op and leaking the node on every adapter removal
-and error cleanup.
+Hi Hans, Ibrahim,
 
-Use a devm action: the pointer is captured at registration, out of
-reach of that memset(), and devres runs the put once on probe failure
-and detach, replacing the three manual of_node_put() calls.  The
-setup loop uses the scoped iterator form so the child node is released
-automatically if devm_add_action_or_reset() fails mid-loop.
+On Mon, Aug 17, 2026 at 4:50=E2=80=AFPM Hans de Goede
+<johannes.goede@oss.qualcomm.com> wrote:
+>
+> From: Ibrahim Abdelkader <iabdelka@qti.qualcomm.com>
+>
+> hci_send_cmd_sync() does not handle the second skb_clone() failure as it
+> does the first one. At that point the command has already been sent and
+> HCI_CMD_PENDING is set, so an allocation failure leaves the flag set with
+> req_skb NULL. The response then matches nothing and the caller blocks for
+> HCI_INIT_TIMEOUT before getting -ETIMEDOUT, reporting a memory shortage a=
+s
+> a controller timeout.
+>
+> Clear the flag, cancel the pending request with -ENOMEM so the caller fai=
+ls
+> immediately instead of waiting out the timeout, and return -ENOMEM so
+> hci_cmd_work() does not arm cmd_timer for a request that no longer exists=
+.
+>
+> Clearing HCI_CMD_PENDING here is safe: all code touching that flag runs
+> from hdev->workqueue, which is an ordered workqueue, so those paths are
+> serialised and cannot race. The one exception is the cleanup added by
+> commit ed516e3f1aa6 ("Bluetooth: hci_sync: Clear HCI_CMD_PENDING when
+> dropping the last request"), which runs on hci_dev_open_sync() failure an=
+d
+> from hci_dev_close_sync(), and the workqueue is stopped before that runs.
+>
+> Fixes: 2615fd9a7c25 ("Bluetooth: hci_sync: Fix overwriting request callba=
+ck")
+> Signed-off-by: Ibrahim Abdelkader <iabdelka@qti.qualcomm.com>
+> Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+> ---
+>  net/bluetooth/hci_core.c | 5 +++++
+>  1 file changed, 5 insertions(+)
+>
+> diff --git a/net/bluetooth/hci_core.c b/net/bluetooth/hci_core.c
+> index 8aeb3024428b..9585b42e7970 100644
+> --- a/net/bluetooth/hci_core.c
+> +++ b/net/bluetooth/hci_core.c
+> @@ -4092,6 +4092,11 @@ static int hci_send_cmd_sync(struct hci_dev *hdev,=
+ struct sk_buff *skb)
+>             !hci_dev_test_and_set_flag(hdev, HCI_CMD_PENDING)) {
+>                 kfree_skb(hdev->req_skb);
+>                 hdev->req_skb =3D skb_clone(hdev->sent_cmd, GFP_KERNEL);
+> +               if (!hdev->req_skb) {
+> +                       hci_dev_clear_flag(hdev, HCI_CMD_PENDING);
+> +                       hci_cmd_sync_cancel_sync(hdev, ENOMEM);
+> +                       err =3D -ENOMEM;
+> +               }
 
-Suggested-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Fixes: 02a4a69667a2 ("i2c: qcom-cci: don't put a device tree node before i2c_add_adapter()")
-Cc: stable@vger.kernel.org
-Assisted-by: Claude:claude-opus-5
-Signed-off-by: Liu Zhenlong <dragonliu2018@gmail.com>
----
-Changes in v2:
-- Rework the fix to use a devm action (cci_put_of_node) instead of
-  caching the pointer before i2c_del_adapter(), per Konrad Dybcio.
-  The pointer is captured at registration, out of reach of the
-  memset() in i2c_del_adapter(); the three manual of_node_put() calls
-  are removed.
-- Use for_each_available_child_of_node_scoped() so the child
-  reference is released if devm_add_action_or_reset() fails mid-loop.
+Sashiko flagged a problem with this change:
 
- drivers/i2c/busses/i2c-qcom-cci.c | 20 +++++++++++---------
- 1 file changed, 11 insertions(+), 9 deletions(-)
+https://sashiko.dev/#/patchset/20260817205017.56524-1-johannes.goede%40oss.=
+qualcomm.com
 
-diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c-qcom-cci.c
-index bdeda3979c48..d3528c7d15bd 100644
---- a/drivers/i2c/busses/i2c-qcom-cci.c
-+++ b/drivers/i2c/busses/i2c-qcom-cci.c
-@@ -497,10 +497,14 @@ static const struct dev_pm_ops qcom_cci_pm = {
- 	SET_RUNTIME_PM_OPS(cci_suspend_runtime, cci_resume_runtime, NULL)
- };
- 
-+static void cci_put_of_node(void *data)
-+{
-+	of_node_put(data);
-+}
-+
- static int cci_probe(struct platform_device *pdev)
- {
- 	struct device *dev = &pdev->dev;
--	struct device_node *child;
- 	struct resource *r;
- 	struct cci *cci;
- 	int ret, i;
-@@ -516,7 +520,7 @@ static int cci_probe(struct platform_device *pdev)
- 	if (!cci->data)
- 		return -ENOENT;
- 
--	for_each_available_child_of_node(dev->of_node, child) {
-+	for_each_available_child_of_node_scoped(dev->of_node, child) {
- 		struct cci_master *master;
- 		u32 idx;
- 
-@@ -537,6 +541,9 @@ static int cci_probe(struct platform_device *pdev)
- 		master->adap.algo = &cci_algo;
- 		master->adap.dev.parent = dev;
- 		master->adap.dev.of_node = of_node_get(child);
-+		ret = devm_add_action_or_reset(dev, cci_put_of_node, child);
-+		if (ret)
-+			return ret;
- 		master->master = idx;
- 		master->cci = cci;
- 
-@@ -604,10 +611,8 @@ static int cci_probe(struct platform_device *pdev)
- 			continue;
- 
- 		ret = i2c_add_adapter(&cci->master[i].adap);
--		if (ret < 0) {
--			of_node_put(cci->master[i].adap.dev.of_node);
-+		if (ret < 0)
- 			goto error_i2c;
--		}
- 	}
- 
- 	return 0;
-@@ -617,10 +622,8 @@ static int cci_probe(struct platform_device *pdev)
- 	pm_runtime_dont_use_autosuspend(dev);
- 
- 	for (--i ; i >= 0; i--) {
--		if (cci->master[i].cci) {
-+		if (cci->master[i].cci)
- 			i2c_del_adapter(&cci->master[i].adap);
--			of_node_put(cci->master[i].adap.dev.of_node);
--		}
- 	}
- disable_clocks:
- 	cci_disable_clocks(cci);
-@@ -636,7 +639,6 @@ static void cci_remove(struct platform_device *pdev)
- 	for (i = 0; i < cci->data->num_masters; i++) {
- 		if (cci->master[i].cci) {
- 			i2c_del_adapter(&cci->master[i].adap);
--			of_node_put(cci->master[i].adap.dev.of_node);
- 			cci_halt(cci, i);
- 		}
- 	}
--- 
-2.55.0
+Im with the opinion that this shouldn't cancel the request, because at
+this point it may already been sent to the hardware so maybe we should
+flag it somehow that req_skb wasn't able to be allocated, or something
+like that, but the command is still outstanding.
 
+>         }
+>
+>         return err;
+> --
+> 2.55.0
+>
+
+
+--=20
+Luiz Augusto von Dentz
