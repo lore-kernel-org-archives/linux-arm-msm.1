@@ -1,86 +1,86 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A752543E9DF
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 08:55:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D30CB43F0B8
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 08:57:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787043362; cv=none; b=NqMuRjs0TQoeGgYE+aP3he0N0vLOukhYsN6tuOLXtBp9umjsuDmksnaC1AxvHTw6plquUmbWuU1lYCdOEY++6qsZITS8SQQlGzw4lNbdfvXiqPZ01lMLp9TCDLPY4hdWdJyDriFSWXQsUOiLgEtN04T5P1EJl0BINmGCurM1Jg8=
+	t=1787043452; cv=none; b=MsmD2qMEvHW0U/1W7o89VKpWsukSPBa190J2r6kiGXp6lwyFUJZVIM7yk+xl/oD3IkKSqf3WpfMGBa8Lzcp9ib4EACX1Nn8GTjHWfGCinbe5yJk+8yfYRAPGfrFoO5/MU8CvKEwVaAQ3E8DK2moiPU0PIRxTUBCPnjuwa1uj6Mk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787043362; c=relaxed/simple;
-	bh=jdXUg6ge+CkuqPJatY4gmfdrXLXrsfR5VvZfoquwTog=;
+	s=arc-20240116; t=1787043452; c=relaxed/simple;
+	bh=v69QcsW2mOGfUzf1hWEyuWqfUsnkP86q/3Zcf5zRAjk=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=aQft6AV12PCsp9lTPuxbJ6+ux4I9ePhpb635qbRP6NTEAFPuaXsPzmItTKFQVsgQRZTL2Lj4OxixrfNJ/T/zM/w6/Cxs4f96tcEo6NKSXg/jtlEcWE2JEKt4+bVWtfngDJHxTt5hClQolewoWvX8ekMzuBuaP+/+OwBWuKBNj5w=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=llLLalVu; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=We/mdQ/K; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=HANQs9WxyuUPMa1YoY7/tUd/WZk7aOnd850jg7uMRGJryFeInxrR6U2T6ciGoBw4qIlWs+6LRyQmzsPZywXGGHNv2jxca5rqsGiUoG8uL+9zGcF+MY5R/qfC8EPQY30Ts2t8RlPvIBo1Nf8HlRmlQKOBGJiD0AfnW3Jw29gFjiQ=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=h1YXZb/a; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=Rr8DXtYu; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="llLLalVu";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="We/mdQ/K"
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67I8BLri3991126
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 08:55:56 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="h1YXZb/a";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="Rr8DXtYu"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67I8BLTV243135
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 08:57:30 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	5XpOqc5E/x3j21BWFeP0v8ytaBSccBnOmabQ+CpqYvE=; b=llLLalVu0NRbDmfe
-	/V10Tdhur2wSfmzs2NdTbXiVbs0u2xWQRvvwMtIm501Xle5gwGHobaaC413KYLJ6
-	zRGO7V2aJqlNsQc2AtMAk5RTICkrKgKpY8T6NDcnlUZ5Au+nhYU2OU+e8C/9KuvI
-	Qgs3iYeFKxYJKAvBGYbSF1zv9TklNA7uKkMufdX9hpBVUQyjs+PUfStWyLwAE1Hg
-	wc7pPm9FkVJsVxeq3LxUIkPkSX6vENOLUjMPanm7x5NHRd+2ruwvToHMtajeWsId
-	0qdmFHM5X/ogKCdY8IgqzV2aRIbAXa7m6h2YIcTTo4lb2bmZjLHvFn9oFF5KpOQ2
-	T9B4fw==
-Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4f5pscff-1
+	LWoV3r+YPiscKAy3H5JzA7RjIekZzVMMLL5OXDd1iD0=; b=h1YXZb/apjm+o+yj
+	D6/wwFQ+XyMLCBzqrCPZ89IVFPd0h+hrIPReUhWaX1Y9ILspzdYjczNngWvafd4A
+	jHJ8MQl0iaTXzw4mqPw+LQfgjdr4EaawzIRYNaiEPGf59azu2DG+PIEzWs2xbadP
+	jFiWIxXRm4EsKbaySytz1alkgyPbnS/u79oYPeDDcRnK+fhnHoFeI0nIT2BUXSgB
+	8t2sC2j+YV7BoKTCwq6YUoAPoO2+HrrDlGTcu1EnEr1d8WNyrXDty1rLmmrNjjb6
+	LscySl1vtsb1GVd0BzojtT+Ai/eZQfWIRi3UnEZel0Ovrg3wSRQOszTZqdRY8PWn
+	b2TvRQ==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4ea2hn9u-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 08:55:55 +0000 (GMT)
-Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-8fd356ee3a4so611476d6.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 01:55:55 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 08:57:29 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-936bd9b045fso2926285a.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 01:57:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787043355; x=1787648155; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1787043449; x=1787648249; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=5XpOqc5E/x3j21BWFeP0v8ytaBSccBnOmabQ+CpqYvE=;
-        b=We/mdQ/KzJwbg9pfbzAzox2t4ZWCYdp6RyBjsk3G9SwXL43whQAkS4kyBB2jendlhd
-         iN9MIthUlSX8jHOYD2UKCRojK0SEpEppUibEqzK2c+VtRzxRJmZdHO30vUjYw9W0uPn7
-         tSU3TnFNft9xB5L2I0PBfvYaOMxQkoAjKZZKa8i0R+EG0nXukGyc/X7fAo6kd/SOoKZL
-         +Ua79SN0JMlsHttHi6YAU/QgOaQFJDtWHmcFBs1VcwhJ8cmHzhEEqfBiiUJ8ytjMzPXP
-         v6PWQPz59vZx7qefxH5CPHolS4bVLEXiy3FgGBTEUNmRxKeRHGxd4UWV/n9CKgNLZ4bk
-         hH9w==
+        bh=LWoV3r+YPiscKAy3H5JzA7RjIekZzVMMLL5OXDd1iD0=;
+        b=Rr8DXtYubw8KGhDyHXleT2bKC6PMethFt4mZyezLWuQ2jkM7Pmrl051N3UKlNweT+p
+         sCLutcZVPxkzGBuQSIAWSLkGlgr1h9bg81m2B+eeXsdlu+QHf1glnr7rnsVpV20TTwPu
+         TFYdg6VT44IqmA2phGQ3Dboz/QGaq3SdSNSKDaerCCITXtJmfNRY1oqAq/KMd37tSiex
+         eJ2IHqVXNjOvFMewHCgrplbBbJXXmzJiVlH2kRPs0cp+lAstYUiHqNPxEWi2fCh/7k1V
+         1otB0Mq8rHLocgludIjIGywT2LPSYsGhSkvBr5eaaDxO18Tqa794YzUt7/SkpBOBxQLE
+         vtEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787043355; x=1787648155;
+        d=1e100.net; s=20251104; t=1787043449; x=1787648249;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=5XpOqc5E/x3j21BWFeP0v8ytaBSccBnOmabQ+CpqYvE=;
-        b=Mr+5ZjJ+E1pkqI+mboCShnGZu5nyrL/NYR+ccFQZDPB5ptHKJuYmmBPntLz98cqL5W
-         C6kunyZ3F6EeizAQ4KXaazPOeVLNVouGuznH0lF8fw8GCmPat0lX4+BlldYDUJJT3qMU
-         eWhVhbn5v3BBHrRxAELoKiwRESTcQljCC6LRQttDx8wxfPNEDH2xg1spjpYgzandMVXs
-         1kGgLdQbTOOLIPIj6HWqYjoOfIzDn02Xm23Ox85xV2XDzod3y/lMXyjioQXN2YYNt4uS
-         wFUrl+nG5eRXIYltswOr+Vr0PauLQpnLP630jNjZGCV5sr+caquflFRXabNUROQ2jBlL
-         I1CA==
-X-Gm-Message-State: AOJu0YwGIFzzfIDeVKKztTnUgJc3M1+Ia+8/ZkvBmgTz8aeCjk6Qgh9b
-	ts11zDJ+uTFt+Gac5iq69jOPE4ockrc+IkHWRrp0SJV9adnqIr0vw3SzyZv/oHS0Ip7hEMysJua
-	SmW4N59rBH0e37hzXZDi7yLuGzsYwfBaWB96oh4yzp4szQzWV3wBtytweU/7+fOdGBOe7
-X-Gm-Gg: AR+sD12e44v4j+K0TS/7qmX6qcA82rEgfxABMtIReS3MGHoBqcMwlzgLzPstKA/+vDM
-	c3MsZr88sNyeBFJJgza2gxYy5jqpjwQCAQZ07Vx2d7Us2A/lr93/HRvUSBZ1pE8o3H+zYQY+pSz
-	j9WDdXYTwKIiWJdclQ6ux4FASsJlGB4gpQOkOwn+K1Y2fsW8CsKx/c15824TuKM3jmOoJkg6mdJ
-	P694Cvu5PCYX0FfqJpmaO8L6W1womf19kbD6caijM92D/IkFu7kzDFYbk+mSX/+ilNZ0654Mv0c
-	ZbmsBjzFK912hSN19nwfn2EUxut0GA+dWK8EdYGz7x4w7uIWk5iPx0bTJ1Vr4DvxMuK6E3ZC8Of
-	x6pkVHGvJLCIKNtmxkeMCMW9/
-X-Received: by 2002:ad4:5aa5:0:b0:8f1:507a:ed6c with SMTP id 6a1803df08f44-90a91e84256mr216308776d6.5.1787043354999;
-        Tue, 18 Aug 2026 01:55:54 -0700 (PDT)
-X-Received: by 2002:ad4:5aa5:0:b0:8f1:507a:ed6c with SMTP id 6a1803df08f44-90a91e84256mr216308486d6.5.1787043354537;
-        Tue, 18 Aug 2026 01:55:54 -0700 (PDT)
+        bh=LWoV3r+YPiscKAy3H5JzA7RjIekZzVMMLL5OXDd1iD0=;
+        b=S4aVo/XgbjewEuUhJ9YeoiADzP4uzQiMOZuMcVuYUl1C35Ch4iMGESsINlF25W2VVq
+         BryJcINRus5ft/NdoUhaFfIKT7z3PKfzKPgtcMjVU34F/OtZwST+JxDsyICT6wawL/m+
+         qUWlDlunVxTSR36R11VQkZZKgVTeq8FdCGfzwEdzNaNWzMmP7N+DDsRRY3Rn+OKb4c9C
+         aFXvN9ZftTBGvKCjH4tOpg4wzePlmIm7k7fqAQg19fEtTMTZdwgbCwSFKhFnTcXIAgeL
+         lUWt8a3V9/sMX/r4ouN9TsGYv/zQiYPYXgQbj7/9typJfWC9B5bZtIjulOis5NbNIijB
+         nUCw==
+X-Gm-Message-State: AOJu0YyTgWSNPUgW4UKVtD278fOf22V3zFMEs+T6ahLqG/42XTwSM3Rz
+	F9UnSZReOINaDs9TNbzsb1Kwc6CzdObj0LCWOF+wFzbRFyS16D5ccxcOYVxzn/zk1CwgKDOl5u+
+	QI9KXlsfnbQqeL+N3JL4nNkrE6Yws4joV5WloaIONAIZoQYJOPcnVdIP+w9gdWl6R8Pc5
+X-Gm-Gg: AR+sD11p4iF1Od7AhsFOcnbZPWX9caZ4SXPTOlC4iwg8PlOW9nICEZpNA8d1iprlr+3
+	oNmAj9zS/zF/B4li1FyyP8aweCGxhVmDjyQtG4nsfDurL+NkYLCCB6gY8yPK3nvn3IloLYiJAXu
+	jutv1sQ7alEJIXUnEYuOWb7hgjrnowV9/0xNaItItTZHu3PqJWTNYcoHOc2uet1dcpOoLkCY+hK
+	90+i97rZ+4sUuqBGneys99AptT0l4TbOeF8HwdIRY8W14hFZaaJrkxGfs7OXQmlnRPOWCVdWOJH
+	aGa3zKKtgR6/CZ4aNZkFa5klu2+S7DDA4Kf86UZvOC6cnIiGYCflxlpn/6M34MRTfkDZbsy7G+O
+	WBx1Mf3RpT+OkcFl6+g5N8wIT
+X-Received: by 2002:a05:620a:45a8:b0:92b:7420:bd58 with SMTP id af79cd13be357-936d1ed8aa2mr2213170885a.0.1787043448937;
+        Tue, 18 Aug 2026 01:57:28 -0700 (PDT)
+X-Received: by 2002:a05:620a:45a8:b0:92b:7420:bd58 with SMTP id af79cd13be357-936d1ed8aa2mr2213169285a.0.1787043448574;
+        Tue, 18 Aug 2026 01:57:28 -0700 (PDT)
 Received: from [192.168.120.193] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c217fed68f9sm154596166b.27.2026.08.18.01.55.52
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c2185bc9a35sm117355966b.63.2026.08.18.01.57.26
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 18 Aug 2026 01:55:53 -0700 (PDT)
-Message-ID: <eb7b528a-6d5d-46af-b0d7-410bd9acfc0b@oss.qualcomm.com>
-Date: Tue, 18 Aug 2026 10:55:50 +0200
+        Tue, 18 Aug 2026 01:57:27 -0700 (PDT)
+Message-ID: <17cbf5f8-c23f-4b97-b971-6b6f4f3226c7@oss.qualcomm.com>
+Date: Tue, 18 Aug 2026 10:57:25 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -88,7 +88,8 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/10] phy: qcom-ipq806x-usb: add MSM8974 HS PHY support
+Subject: Re: [PATCH 05/10] phy: qcom-ipq806x-usb: fix the SS PHY
+ TEST_POWERDOWN bit
 To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         Rob Herring <robh@kernel.org>,
@@ -105,141 +106,52 @@ Cc: linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-phy@lists.infradead.org
 References: <20260810-msm8974-usb3-v1-0-1a47e1185524@oss.qualcomm.com>
- <20260810-msm8974-usb3-v1-4-1a47e1185524@oss.qualcomm.com>
+ <20260810-msm8974-usb3-v1-5-1a47e1185524@oss.qualcomm.com>
 Content-Language: en-US
 From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20260810-msm8974-usb3-v1-4-1a47e1185524@oss.qualcomm.com>
+In-Reply-To: <20260810-msm8974-usb3-v1-5-1a47e1185524@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=S+/pBosP c=1 sm=1 tr=0 ts=6a841e1b cx=c_pps
- a=oc9J++0uMp73DTRD5QyR2A==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDA2NSBTYWx0ZWRfXwALqoqDi2S1e
+ 9xKnlfhRddyjtvQjDIXPzKZOD7jTgNGL+O7XicjdNJzIbQWFoYCnDHGyMPf9obmctlCKoJUsesR
+ CGxJQcYW6dc9jdv7hZSsSMGsacqC2wNANhAPife2xQczhPOtVZ5emJeCsGb1FwVCpfV3BJNmNp2
+ AXAfS2ynBer4m//514ZQl8FaeYR32GHciBO8dn4eM7thZNCbMo3FfqnPoLNFa7HnG8jpDU1HkTM
+ ai4Wwm//xw4/lMW6OOO61m0dMUDI5Q5y95iYfX1Rjda38byoBqLxAUV/5M88v/bN4eiqlbvbsQ/
+ n580uVaC7Q+1oQAp9xMx4aaMc6OBF+cZUJcEFZs6StuLqxsf4iXgPvG7gFBaFpaTxUtUIUrpyeF
+ G5ukJP79oKTefCJEMXvxFKyyuCgPDzHOHgS8/8qbnGZM//4Ng7xvwDV/41eH3ZLhxf5idQpY9zQ
+ t3v+B3WLZbChQf3TJLw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDA2NSBTYWx0ZWRfX8jA3RkaKovZn
+ V+yoE8aK2DvYCIqp5ACoxbmoXqzJcoFVGXv9dXemI08GKcmPwjE99VqsYqI85VQxO0zEC87At6G
+ QQTuFXIWX+aYOkN0Y79mNHtGdc+ohbo=
+X-Authority-Analysis: v=2.4 cv=XtfK/1F9 c=1 sm=1 tr=0 ts=6a841e79 cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=HI9WjpCpug938Zx-P8EA:9 a=QEXdDO2ut3YA:10
- a=iYH6xdkBrDN1Jqds4HTS:22
-X-Proofpoint-GUID: 3qhN0znAphKyDHza_Ra8e4z4AjQibf0F
-X-Proofpoint-ORIG-GUID: 3qhN0znAphKyDHza_Ra8e4z4AjQibf0F
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDA2NSBTYWx0ZWRfX0MaNpFpiE62f
- OvPXWHaLxp/SIePzVM10l/pQEnJMOD/TpeAY8ZMiXftOSPyXfbrkKVedq7HeewPvH5c1b2zVdfK
- vZiqnK+lIpwgOnJgpWyTxiw8jGqwurejqFnjIJek64RpLnVWdi5a/D8aUZjQ61zgX+8qfA3NJMg
- 52W4nVpWW75X5dJfOtua8jji+w/zyRK9OR0VfqQ0IRiONYrS5+OSwQiKNtboLIb0a9PnGpXiT5Q
- PbycWQWgVVGRPmJJBqOi7TdhhxF+AjfkDfJV7nmGfPXhKWpt5pL3J+QFIUulPc50R2dAPGOCT+s
- Hv7qtmH/WRsLUIMoZeongbuK1Huf3oUuwEgjJu/j4f/YB3XCPQl5sh4a2ka3FhGA5MVS+y08HOh
- N/Sn+MKbjEM5hXi/6SJkzY3u0VUbVFmwyOjsJxuPFy2/FTQDdaJpzDxPJXVQNvpqk1KW5s3v9fS
- lpJ84PjW83xk6utlNug==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDA2NSBTYWx0ZWRfXy5umGSKQZkM+
- 5ZG7Fb35De2BIiiLzQtfzAjvtdowfgdY4R31zVXCCY1T6iEYFqRMGZlB8Q0fplacPcqpfGZphJi
- Ji7/TsukQIHr7ZUi9YClERgZqeBc354=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=zhQxU6SgEyqCUrVtDRsA:9 a=QEXdDO2ut3YA:10
+ a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-ORIG-GUID: os1PkwP2lBcmhlF4jYV0CJ0-E3TbFYid
+X-Proofpoint-GUID: os1PkwP2lBcmhlF4jYV0CJ0-E3TbFYid
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-17_04,2026-08-12_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 phishscore=0 malwarescore=0 spamscore=0 lowpriorityscore=0
- clxscore=1015 bulkscore=0 impostorscore=0 adultscore=0 priorityscore=1501
+ priorityscore=1501 bulkscore=0 impostorscore=0 spamscore=0 lowpriorityscore=0
+ phishscore=0 clxscore=1015 suspectscore=0 malwarescore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608180065
 
 On 8/10/26 1:42 PM, Dmitry Baryshkov wrote:
-> The MSM8974 DWC3 wrapper embeds the same generation of QSCRATCH
-> controlled Synopsys 28nm HS PHY as IPQ806x, but the driver only knows
-> the IPQ806x variants, so on MSM8974 the controller runs on whatever
-> PHY state the bootloader left behind.
+> The SS PHY exit sequence tries to put the PHY into retention via the
+> TEST_POWERDOWN bit of SS_PHY_CTRL, but defines that bit as BIT(27). In
+> the DWC3 QSCRATCH SS_PHY_CTRL register TEST_POWERDOWN is bit 26 (see
+> the downstream phy-msm-ssusb driver for the same IP generation), so the
+> sequence pokes an unrelated bit and the PHY is never powered down.
 > 
-> Add the qcom,msm8974-usb-phy-hs compatible with its own init
-> sequence: unlike the IPQ806x one, it must not overwrite the whole
-> PHY_CTRL register, as the power-on values of the reference frequency
-> selection straps have to be preserved. Only enable the UTMI clock and
-> the DP/DM MPM clamps, signal VBUS valid towards the link, and disable
-> retention.
-> 
+> Fixes: ef19b117b834 ("phy: qualcomm: add qcom ipq806x dwc usb phy driver")
 > Assisted-by: Claude:claude-fable-5
 > Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 > ---
->  drivers/phy/qualcomm/phy-qcom-ipq806x-usb.c | 35 +++++++++++++++++++++++++++--
->  1 file changed, 33 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/phy/qualcomm/phy-qcom-ipq806x-usb.c b/drivers/phy/qualcomm/phy-qcom-ipq806x-usb.c
-> index f22c0000479f..21b59d4ca8d2 100644
-> --- a/drivers/phy/qualcomm/phy-qcom-ipq806x-usb.c
-> +++ b/drivers/phy/qualcomm/phy-qcom-ipq806x-usb.c
-> @@ -17,6 +17,7 @@
->  #define HSUSB_PHY_CTRL_REG		(0x10)
->  
->  /* PHY_CTRL_REG */
-> +#define HSUSB_CLAMP_MPM_DPSE_DMSE_EN_N	BIT(26)
->  #define HSUSB_CTRL_DMSEHV_CLAMP		BIT(24)
->  #define HSUSB_CTRL_USB2_SUSPEND		BIT(23)
->  #define HSUSB_CTRL_UTMI_CLK_EN		BIT(21)
-> @@ -27,9 +28,13 @@
->  #define HSUSB_CTRL_ID_HV_CLAMP		BIT(9)
->  #define HSUSB_CTRL_OTGSESSVLD_CLAMP	BIT(8)
->  #define HSUSB_CTRL_CLAMP_EN		BIT(7)
-> +#define HSUSB_CTRL_CLAMP_MPM_DPSE_DMSE	BIT(26)
 
-leftover?
-
->  #define HSUSB_CTRL_RETENABLEN		BIT(1)
->  #define HSUSB_CTRL_POR			BIT(0)
->  
-> +/* PHY parameter override register (eye diagram tuning) */
-> +#define HSUSB_PARAMETER_OVERRIDE_X_REG	(0x14)
-> +
->  /* QSCRATCH_GENERAL_CFG */
->  #define HSUSB_GCFG_XHCI_REV		BIT(2)
->  
-> @@ -115,6 +120,8 @@
->  #define LATCH_SLEEP				40
->  #define LATCH_TIMEOUT				100
->  
-> +struct phy_drvdata;
-
-Can you just move the declaration here?
-
-> +
->  struct usb_phy {
->  	void __iomem		*base;
->  	struct device		*dev;
-> @@ -123,11 +130,14 @@ struct usb_phy {
->  	u32			rx_eq;
->  	u32			tx_deamp_3_5db;
->  	u32			mpll;
-> +	const struct phy_drvdata *drvdata;
->  };
->  
->  struct phy_drvdata {
->  	struct phy_ops	ops;
->  	u32		clk_rate;
-> +	u32		hs_tune_val;
-> +	u32		fsel;
->  };
->  
->  /**
-> @@ -273,7 +283,8 @@ static int qcom_ipq806x_usb_hs_phy_init(struct phy *phy)
->  		HSUSB_CTRL_RETENABLEN  | HSUSB_CTRL_COMMONONN |
->  		HSUSB_CTRL_OTGSESSVLD_CLAMP | HSUSB_CTRL_ID_HV_CLAMP |
->  		HSUSB_CTRL_UTMI_OTG_VBUS_VALID | HSUSB_CTRL_UTMI_CLK_EN |
-> -		HSUSB_CTRL_CLAMP_EN | 0x70;
-> +		HSUSB_CTRL_CLAMP_EN | HSUSB_CLAMP_MPM_DPSE_DMSE_EN_N |
-
-This will *disable* (_N suffix) the clamp on ipq806x too - is that intended?
-
-
-> +		phy_dwc3->drvdata->fsel;
->  
->  	/* use core clock if external reference is not present */
->  	if (!phy_dwc3->xo_clk)
-> @@ -282,9 +293,14 @@ static int qcom_ipq806x_usb_hs_phy_init(struct phy *phy)
->  	writel(val, phy_dwc3->base + HSUSB_PHY_CTRL_REG);
->  	usleep_range(2000, 2200);
->  
-> -	/* Disable (bypass) VBUS and ID filters */
-> +	/* Set XHCI_REV bit (2) to 1 - XHCI version 1.0 */
->  	writel(HSUSB_GCFG_XHCI_REV, phy_dwc3->base + QSCRATCH_GENERAL_CFG);
->  
-> +	if (phy_dwc3->drvdata->hs_tune_val)
-> +		usb_phy_write_readback(phy_dwc3, HSUSB_PARAMETER_OVERRIDE_X_REG,
-> +				       0x03ffffff,
-
-GENMASK(25, 0)
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
 Konrad
