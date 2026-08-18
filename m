@@ -1,219 +1,96 @@
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF92036B061;
-	Tue, 18 Aug 2026 09:38:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 70879416875;
+	Tue, 18 Aug 2026 09:41:53 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787045908; cv=none; b=nYyHQJr1moJ9kTkquiZgfmP9mdNAo1CnexNzcXQksR67Pstiq4tg5kLOsFm3TF4Oe1NdMccbfNlRYqHdw80GsZU1hy2gNr86lFDQjZyjreKIjw38zIFCYM18kn9UbnleSIin6PfpPQR/FUvsEfyA9hbE/wYp5z8l5lvbWcUTZnE=
+	t=1787046114; cv=none; b=G+wHOZnCzaa+aLh1ouEpXA4di0Y5qIhYKPVBY8ULpoEOsOO4kG6vArm90IOtYrZQjytj/mYVLwpum/m2UclRN7g3GeaXHkh+z30xe3BRNkDhSkgL4QFsb0DZIM0Ps1T6ov9uDVmnx7crED/6GXyFdFtOlaOAnNNrKpQvRG6AO0Y=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787045908; c=relaxed/simple;
-	bh=RmQfg3PjUCkZnzqUhqE/7wclxqioVaYIqLTjTpRu2WI=;
-	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=sooxYLdtMjpYvc21+xBMOUC9j2lMwAhHo63qox7DlCz/Jtl3fI5D21vXQqpwRodJiIglIQBcBbaiCjQY+yn4d9zvZp1+g3HwDu1N+DZ/2zTUe6q+7mWyjyqPv2AAGzcvcahqZyIbd1B9XerqMYwz8JxcoEbIFS09db/dN7V780s=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=ZlIojXY5; arc=none smtp.client-ip=84.42.129.46
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	s=arc-20240116; t=1787046114; c=relaxed/simple;
+	bh=msJS/BfkucL/UQowOG12tXwi1tKcZ6MfhdI8/gbN74I=;
+	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=t2gZUY2X7FscS/bX2F7BQlWu12eNradSzRE80cWWTfEvG58dUnL+oRz2+l2rGWIm/PlCyB7ZnV51J+3uI7wdd88bCpXYeG5/hdOD5JNC1poGICWfQpiR4rVTXcoAjOM82YRZj0SqICbbxBR3wUkjYRtTIyzVQSyhFo30AghsA4I=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Ifqx4YUb; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="ZlIojXY5"
-Received: from [172.16.124.192] (ip-78-44-13-22.bb.vodafone.cz [78.44.13.22])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 00B7B53403EB;
-	Tue, 18 Aug 2026 11:38:23 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1787045904;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=QX318SWwSa/mu0rKh+wB1ItXnLgbKSxu2tQxkvWzGZs=;
-	b=ZlIojXY5/A7SrZf7BFhQld1gUJ8e97X0W/Km1UYmjHOKfDjBOUrVLoQyxCtwM2xtfQ6FEQ
-	lMCsrgq0abRtF9BhtZNBKxIAlE8m2p6xMg1jJ40GcefXyc78Wiq8jAYm+n0h/KCNJbTjT3
-	/UdG53fjDdAWTPHGPBIL7GzuXs+LbfU=
-Message-ID: <b8cb7327-1e1b-4a44-ac97-dec9b6c32e9e@ixit.cz>
-Date: Tue, 18 Aug 2026 11:38:23 +0200
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Ifqx4YUb"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5E6021F000E9;
+	Tue, 18 Aug 2026 09:41:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787046113;
+	bh=nWYBGvQx/kZJboElef64r83FDezGbcoiuWoTxQ+0x6U=;
+	h=From:To:Cc:Subject:Date;
+	b=Ifqx4YUbwYrd8hUIPl/ImLt2UmuT6e0YZZmrvfd6A0bFfw6USxQoIdA0wS1fQsMEq
+	 urByW93jDMN7wFwBum99oHpUXTaXz1A5ijGxHkptctGR7FYl4lDoNxo6bKNWASXsFY
+	 qiAso0ZblFoDL7DfaeDkDrvjA2PeF0iUJJqC34+KoRISK13kdgaTqKzDmlQdE9DVCN
+	 6125EpysqSbGxvuj0a2/RmE3x3mJ9hjHWIRoCQpMoQmbJrsLdkraC05/KOYdriJE33
+	 joUc/1zes5aHUBQRNOwivfF2MGBuOCz131h38AOPl5jCTqvbvFB8/560u/dMvijJRc
+	 2KHE+bmgVlAKQ==
+From: Arnd Bergmann <arnd@kernel.org>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Cc: Arnd Bergmann <arnd@arndb.de>,
+	Daniel Baluta <daniel.baluta@nxp.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] soc: qcom: make QCOM_PDR_MSG selectable
+Date: Tue, 18 Aug 2026 11:41:41 +0200
+Message-Id: <20260818094148.3838539-1-arnd@kernel.org>
+X-Mailer: git-send-email 2.39.5
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm64: dts: qcom: add Xiaomi Mi 8 (dipper)
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Kees Cook <kees@kernel.org>,
- Tony Luck <tony.luck@intel.com>, "Guilherme G. Piccoli" <gpiccoli@igalia.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org
-References: <20260809-dipper-v1-0-eb4d501e85df@ixit.cz>
- <20260809-dipper-v1-2-eb4d501e85df@ixit.cz>
- <8f05bf47-183f-4586-8ed2-eb2277f15c98@oss.qualcomm.com>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <8f05bf47-183f-4586-8ed2-eb2277f15c98@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 18/08/2026 11:27, Konrad Dybcio wrote:
-> On 8/9/26 6:48 PM, David Heidelberg via B4 Relay wrote:
->> From: David Heidelberg <david@ixit.cz>
->>
->> Initial submission for one member of the prime Xiaomi Mi 8 family.
->> Mi 8 Pro (equuleus) and Mi 8 Explorer (ursa) are nearly identical.
->> Known differences are battery capacity and fingerprint sensor placement.
->> This submission includes basic abstraction for other developers to be
->> able easily extend it to support other variants.
-> 
-> I had one of those. IIRC the Pro had a 3d IR scanner (vide face id)
-> whereas the base one had a normal IR cam
-> 
-> [...]
-> 
->> +	reserved-memory {
->> +		adsp_mem: memory@8c500000 {
-> 
-> adsp@ etc. and drop labels where unused
-> 
-> [...]
-> 
->> +		linux,cma {
->> +			compatible = "shared-dma-pool";
->> +			alloc-ranges = <0 0x00000000 0 0xffffffff>;
->> +			reusable;
->> +			alignment = <0 0x400000>;
->> +			size = <0 0x2c00000>;
->> +			linux,cma-default;
->> +		};
-> 
-> Is this necessary?
-> 
->> +	};
->> +
->> +	vph_pwr: regulator-vph-pwr {
-> 
-> This is out of order
-> 
-> [...]
-> 
-> 
->> +&adsp_pas {
->> +	firmware-name = "qcom/sdm845/Xiaomi/dipper/adsp.mbn";
-> 
-> Would you know whether the FWs are common across the SKUs?
+From: Arnd Bergmann <arnd@arndb.de>
 
-I don't, I have only one device (the dipper) available.
+Selecting QCOM_PDR_HELPERS from outside of a CONFIG_QCOM_SOC
+block causes a build warning:
 
-I'll see if I quickly figure out, if not, as no-one else having Mi8 family 
-volunteer to test, I would move it to dipper specific for now and can be moved 
-to common later.
+WARNING: unmet direct dependencies detected for QCOM_PDR_MSG
+  Depends on [n]: QCOM_SOC [=n]
+  Selected by [y]:
+  - QCOM_PDR_HELPERS [=y] && NET [=y]
 
-> 
-> And more importantly, regulator settings? FWIW it's easiest to compare
-> compiled DTBs (or even better, ones pulled from sysfs on a running
-> system)
-> 
-> [...]
-> 
->> +&tlmm {
->> +	gpio-reserved-ranges = < 0 4>, /* SPI (Goodix Fingerprint) */
-> 
-> odd space after <
+Avoid this by allowing QCOM_PDR_MSG to be selected as well.
 
-I call it alignment, but sure :)>
->> +			       <81 4>; /* SPI (Synaptics Fingerprint) */
-> 
-> No NFC eSE reservation?
+Fixes: f2866e6a27f7 ("soc: qcom: Hide all drivers behind selectable menu")
+Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+---
+I noticed this after some last minute testing and would like
+to include it in my pull request for 7.3 to have fewer regression
+fixes.
+---
+ drivers/soc/qcom/Kconfig | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-It seems that vendor used different combinations of Goodix / Synaptics across 
-these ranges. Not even depending on the model. Same model can have different 
-wiring, but always honoring position 0:4, 81:4 as far goes my understanding. >
-> [...]
-> 
->> +&usb_1_dwc3 {
->> +	/* Until we have Type C hooked up we'll force this as peripheral. */
-> 
-> Should be fairly trivial on 845, no?
-> 
->> +	dr_mode = "peripheral";
->> +
->> +	maximum-speed = "high-speed";
->> +	phys = <&usb_1_hsphy>;
->> +	phy-names = "usb2-phy";
-> 
-> No SS?
-
-Haven't thought about it, for now my goal is upstream basic telnet/ssh + FB. 
-Then display and touch - e.g. minimal u-boot and kernel development features and 
-then bring the rest.
-
-> 
-> [...]
-> 
->> +	bluetooth {
->> +		compatible = "qcom,wcn3990-bt";
->> +
->> +		/*
->> +		 * This path is relative to the qca/
->> +		 * subdir under lib/firmware.
->> +		 */
-> 
-> Let's drop this comment, not very useful
-
-Sure.
-
-Then I'll also drop these from whole sdm845 in follow-up commit.
-
-I'll address also the rest of the comments in the next version :)
-
-Thanks for the review
-David>
-> Konrad
+diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
+index e0629e9328c8..2b524154d9fb 100644
+--- a/drivers/soc/qcom/Kconfig
++++ b/drivers/soc/qcom/Kconfig
+@@ -90,9 +90,6 @@ config QCOM_PD_MAPPER
+ 	  implementation of the service. It is a simpler alternative to the
+ 	  userspace daemon.
+ 
+-config QCOM_PDR_MSG
+-	tristate
+-
+ config QCOM_PMIC_PDCHARGER_ULOG
+ 	tristate "Qualcomm PMIC PDCharger ULOG driver"
+ 	depends on RPMSG
+@@ -315,6 +312,9 @@ config QCOM_PDR_HELPERS
+ 	select QCOM_PDR_MSG
+ 	depends on NET
+ 
++config QCOM_PDR_MSG
++	tristate
++
+ config QCOM_QMI_HELPERS
+ 	tristate
+ 	depends on NET
+-- 
+2.39.5
 
