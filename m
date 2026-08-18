@@ -1,257 +1,109 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEB4D48124E;
-	Tue, 18 Aug 2026 17:09:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 605943A5436;
+	Tue, 18 Aug 2026 17:12:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787072971; cv=none; b=GKDReKBuXwIdhN/kXqb/9IbQ4dPmFBNpwid71pl1JFroxJVzTpGcoNKJ8XjJQ8IMRotk47y7ohErhrMwY1SZkVOCaOinIQiF8aMwMYk0gRyKpfoPnqMl74aDly/mfDp1zM8FsDqs7rksPn76zObaCp+JDOghN0MrOHM6GL6m7bA=
+	t=1787073151; cv=none; b=X/f+p2UGjaK/TbsYliUYkOpPDlWQvY+j9DoMK9Rt04RQYFJMZENFflZHBvmnGLAhOfePkfPls1wEwAF5Jx2lCJrX+X/g683LLmtrL9/JI4lIf6SUfH7rppm6J4SUWsQVQFUIzNo3An7I3l6H9G62qP/OkApbFIrlEWqKIMLJ1TE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787072971; c=relaxed/simple;
-	bh=guuT85ErYf9UpzLluGIAzNGBLyxCuEg1Z95LSytC99o=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=IwiYTqsPetJVCSnAiLNPwYMSe15HExBeaGWU50eRqRCT4zOxINUWEtUzGs2WprEnaE8CpZlPIQVexsNpZupqIl00dGT56eEpoabYOqL+0xPd1vvyOZrDvH2hZo7yBdnZBu4ihXd4uQyS+3s/5x+MTcEaljvO6ZlNexTDe+g/RU4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=BY38lQVg; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787073151; c=relaxed/simple;
+	bh=km+06z1zZjsvET193diCdp1XZYNW91zhvBs+rcinbOs=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=lfCe8q2hsYvj7V8ISg4FSSj8m0GnlXEBX7nfHlEb1u4ktk+cq6Ij+JBRsfgDiMTEDETSglGodmyma03CBU5zvaC3VfiCYtmUvB4IZjtiEqruHSmoplKmuYK1IcFYfOoi3SNr2TlMhYZRt/qHrECPDdNEKfiMnSim0enTqYD5moY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=csgiEA5v; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="BY38lQVg"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DD3E01F00A3A;
-	Tue, 18 Aug 2026 17:09:28 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="csgiEA5v"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4C6E31F000E9;
+	Tue, 18 Aug 2026 17:12:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787072969;
-	bh=FKXQz9j5Q9PPhTu4Are2ufwUKwVcc4+rdCmtu6MgkhQ=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=BY38lQVgIzkiBaSa7Ki5T1B52VExTWW1Cgk1Y6grXm9i7NRcW0D05aJaZlUvJU2BZ
-	 +mWa+xD2XmbMJYRD4IPAii3hnCrE8btD4T/KJhFa0k2py3ggrPfq8AnanqsVylmWjT
-	 iElkFzNozpqrMROph/7+oQt6DwPqezjOHtqcTYjlK6lvbs9+HtzdEeNZC/bL/sUIpE
-	 4T3+awR8yckvU1rzrBZglhxBWe89ghx6r7B0zGpKhi42duFhxqZ/YxHdcwpYP4bLpf
-	 5zA4WwCn2S9lFw2yU26df63/36OvW73Xr2PJPvXYLFQBaQYv9WXme+XBDzidJrtQv1
-	 PlteOTGUMwJVA==
-From: Jakub Kicinski <kuba@kernel.org>
-To: peter.hunt@opengear.com
-Cc: Jakub Kicinski <kuba@kernel.org>,
-	loic.poulain@oss.qualcomm.com,
-	ryazanov.s.a@gmail.com,
-	mani@kernel.org,
-	johannes@sipsolutions.net,
-	netdev@vger.kernel.org,
-	mhi@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH net-next v4 3/3] net: wwan: mhi_wwan_ctrl: drive DTR/RTS via the IP_CTRL channel
-Date: Tue, 18 Aug 2026 10:09:28 -0700
-Message-ID: <20260818170928.4019460-1-kuba@kernel.org>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260816121705.858013-4-peter.hunt@opengear.com>
-References: <20260816121705.858013-4-peter.hunt@opengear.com>
+	s=k20260515; t=1787073150;
+	bh=EXKaeMDyyG/3gBUL3UZXwLwdxbFaiuHU+n74julUvzY=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=csgiEA5vB0v0U8I95W4nxOSeWR6T9rEZ5p3S3kNm6tDswwmkDzKejewdZzYi5n+Di
+	 Q4k4wb+QofhyDz1WFkrBJfXeEsjK/bNl3Xc3Srb/uBtyeks5NMpsI2sUonRyoGiYs/
+	 m9MZ3qx4iV1b92U4KIPbbPM14NcOfq6nehavrGFhwezpMtteHqB612yzzD1xNZ2sjp
+	 zTHviQ764LGwzP+dcTXYyV1rvmVsCtnwl2ATqJfwM62UO2zrPuHG+ROcN9CDdTfXfI
+	 uPv68bNz/yZSqhIjSA/r1/y91Q1MjdlZnE7dFGV9/gM6ODlqtR/jjoSmHcfCjQ+sO9
+	 /JF4uOF/7iWzw==
+Date: Tue, 18 Aug 2026 10:12:27 -0700
+From: Eric Biggers <ebiggers@kernel.org>
+To: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
+Cc: Neeraj Soni <neeraj.soni@oss.qualcomm.com>, ulf.hansson@linaro.org,
+	adrian.hunter@intel.com, quic_dmukhopa@quicinc.com,
+	quic_rampraka@quicinc.com, quic_nitirawa@quicinc.com,
+	quic_sachgupt@quicinc.com, quic_bhaskarv@quicinc.com,
+	quic_gaurkash@quicinc.com, quic_sartgarg@quicinc.com,
+	linux-mmc@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH v7 2/2] mmc: sdhci-msm: Use pm ops instead of macro to
+ restore crypto keys
+Message-ID: <20260818171227.GA2249@quark>
+References: <20260811151759.1258525-1-neeraj.soni@oss.qualcomm.com>
+ <20260811151759.1258525-3-neeraj.soni@oss.qualcomm.com>
+ <20260811190851.GC2895176@google.com>
+ <877c20e3-625c-4ba8-beed-305393b18cfe@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <877c20e3-625c-4ba8-beed-305393b18cfe@oss.qualcomm.com>
 
-This is an AI-generated review of your patch. The human sending this
-email has considered the AI review valid, or at least plausible.
----
-net: wwan: mhi_wwan_ctrl: drive DTR/RTS via the IP_CTRL channel
+On Tue, Aug 18, 2026 at 01:00:21PM +0530, Ram Prakash Gupta wrote:
+> 
+> 
+> On 8/12/2026 12:38 AM, Eric Biggers wrote:
+> > On Tue, Aug 11, 2026 at 08:47:59PM +0530, Neeraj Soni wrote:
+> >> From: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
+> >>
+> >> Inline Crypto Engine (ICE) keys are lost after hibernation entry and this
+> >> needs to be restored when hibernation exits. ICE keys are re-programmed
+> >> during sdhci_msm_ice_init() but it may not cover cases where the
+> >> hibernation image is already restored.
+> >>
+> >> Unwrap the pm ops and use directly in driver to add the call to restore
+> >> Inline Crypto Engine (ICE) keys. This ensures that ICE is brought into
+> >> same state as before hibernation.
+> >>
+> >> Also set MMC_CAP2_CRYPTO_NO_REPROG to indicate that re-programming of ICE
+> >> keys is not needed during MMC runtime suspend/resume.
+> >>
+> >> Signed-off-by: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
+> >> Signed-off-by: Seshu Madhavi Puppala <quic_spuppala@quicinc.com>
+> >> Co-developed-by: Ram Prakash Gupta <quic_rampraka@quicinc.com>
+> >> Signed-off-by: Ram Prakash Gupta <quic_rampraka@quicinc.com>
+> >> Co-developed-by: Sarthak Garg <quic_sartgarg@quicinc.com>
+> >> Signed-off-by: Sarthak Garg <quic_sartgarg@quicinc.com>
+> >> Signed-off-by: Debraj Mukhopadhyay <quic_dmukhopa@quicinc.com>
+> >> Signed-off-by: Neeraj Soni <neeraj.soni@oss.qualcomm.com>
+> >> ---
+> >>  drivers/mmc/host/sdhci-msm.c | 32 +++++++++++++++++++++++++++++++-
+> >>  1 file changed, 31 insertions(+), 1 deletion(-)
+> > 
+> > So with this patch, resume from hibernation will be the *only* time that
+> > ICE keys are reprogrammed.  Are you absolutely sure that is enough on
+> > every SoC this driver supports?  What about resume from suspend-to-RAM?
+> > CQE error recovery?  What if the hibernation image fails to be created?
+> > 
+> > - Eric
+> 
+> Hi Eric,
+> 
+> There are two scenarios where key would be required to reprogram, first is when
+> rail powering the ICE goes off or SDCC does BCR reset.
+> 
+> now during suspend-to-RAM, rail powering the ice wont go off, so key would not
+> be required to reprogram. During CQE recovery, key would be only lost when BCR
+> reset is performed but that is not happening right now, to be taken up once its
+> fixed as part of recovery flow. And in case hibernation image fails to create
+> then device boots from normal flow where there is no need to reprogram the keys.
+> 
 
-This adds a second mhi_driver in mhi_wwan_ctrl that binds the IP_CTRL
-channel, keeps a per-controller registry of those devices, and implements
-the new wwan_port_ops->dtr_rts callback by queueing a host serial-state
-message on the IP_CTRL channel of the AT port's own controller.
+Okay this patch should be okay then.  Seems that the commit message
+needs some work though to properly explain this.
 
-A few questions below about the DTR/RTS state handling.
-
-> diff --git a/drivers/net/wwan/mhi_wwan_ctrl.c b/drivers/net/wwan/mhi_wwan_ctrl.c
-> index a31d8540fbb85..a917df9bb17b8 100644
-> --- a/drivers/net/wwan/mhi_wwan_ctrl.c
-> +++ b/drivers/net/wwan/mhi_wwan_ctrl.c
-
-[ ... ]
-
-> @@ -14,6 +18,30 @@ enum mhi_wwan_flags {
->  
->  #define MHI_WWAN_MAX_MTU	0x8000
->  
-> +/* IP_CTRL channel message that sets the modem's DTR/RTS control lines */
-> +struct mhi_dtr_ctrl_msg {
-> +	__le32 preamble;
-> +	__le32 msg_id;
-> +	__le32 dest_id;
-> +	__le32 size;
-> +	__le32 msg;
-> +} __packed;
-> +
-> +#define MHI_DTR_CTRL_MAGIC	0x4C525443	/* 'CTRL' */
-> +#define MHI_DTR_MSG_DTR		BIT(0)
-> +#define MHI_DTR_MSG_RTS		BIT(1)
-> +#define MHI_DTR_HOST_STATE	0x10
-
-[ ... ]
-
-> @@ -103,6 +131,62 @@ static void mhi_wwan_ctrl_refill_work(struct work_struct *work)
->  	}
->  }
->  
-> +/* Signal the modem's DTR/RTS lines over its own controller's IP_CTRL channel */
-> +static int mhi_wwan_ctrl_send_dtr(struct mhi_wwan_dev *mhiwwan, unsigned int mdmbits)
-> +{
-> +	struct mhi_controller *cntrl = mhiwwan->mhi_dev->mhi_cntrl;
-> +	struct mhi_device *ctrl_dev = NULL;
-> +	struct mhi_dtr_ctrl_msg *dtr_msg;
-> +	struct mhi_wwan_dtr *dtr;
-> +	u32 msg = 0;
-> +	int ret;
-> +
-> +	guard(mutex)(&mhi_wwan_dtr_lock);
-
-[Severity: Medium]
-Can two concurrent modem-control requests reach the modem in the opposite
-order to the recorded mdmbits?
-
-In wwan_port_fops_at_ioctl() the mdmbits update and the dtr_on snapshot
-happen under port->data_lock, but the callback is invoked after that lock
-is dropped, under port->ops_lock:
-
-	mutex_unlock(&port->data_lock);
-
-	if (call_dtr_rts) {
-		mutex_lock(&port->ops_lock);
-		if (port->ops && port->ops->dtr_rts)
-			port->ops->dtr_rts(port, dtr_on);
-		mutex_unlock(&port->ops_lock);
-	}
-
-wwan_port_op_start() does the same split for the first-open path:
-
-		if (port->start_count == 1 && port->type == WWAN_PORT_AT &&
-		    port->ops->dtr_rts) {
-			mutex_lock(&port->data_lock);
-			port->at_data.mdmbits |= TIOCM_DTR | TIOCM_RTS;
-			mutex_unlock(&port->data_lock);
-			port->ops->dtr_rts(port, true);
-		}
-
-So an ioctl thread that clears TIOCM_DTR (dtr_on = false) can block on
-ops_lock while an opener sets mdmbits |= TIOCM_DTR | TIOCM_RTS and signals
-DTR high, then resume and signal DTR low with its stale snapshot.
-
-mhi_wwan_ctrl_send_dtr() queues the IP_CTRL message in the order it takes
-mhi_wwan_dtr_lock, so the modem ends up with DTR de-asserted while TIOCMGET
-reports it asserted, and that sticks until the next transition.
-
-Would committing the mdmbits update and the ->dtr_rts() call inside one
-critical section (for example taking ops_lock around the TIOCM* mdmbits
-update) avoid this?
-
-> +
-> +	list_for_each_entry(dtr, &mhi_wwan_dtr_list, node) {
-> +		if (dtr->cntrl == cntrl) {
-> +			ctrl_dev = dtr->mhi_dev;
-> +			break;
-> +		}
-> +	}
-> +	if (!ctrl_dev) {
-> +		dev_dbg(&mhiwwan->mhi_dev->dev,
-> +			"IP_CTRL not enumerated; DTR/RTS not signalled to modem\n");
-> +		return 0;
-> +	}
-> +
-> +	dtr_msg = kzalloc_obj(*dtr_msg);
-> +	if (!dtr_msg)
-> +		return -ENOMEM;
-> +
-> +	if (mdmbits & TIOCM_DTR)
-> +		msg |= MHI_DTR_MSG_DTR;
-> +	if (mdmbits & TIOCM_RTS)
-> +		msg |= MHI_DTR_MSG_RTS;
-> +
-> +	dtr_msg->preamble = cpu_to_le32(MHI_DTR_CTRL_MAGIC);
-> +	dtr_msg->msg_id = cpu_to_le32(MHI_DTR_HOST_STATE);
-> +	dtr_msg->dest_id = cpu_to_le32(mhiwwan->mhi_dev->ul_chan_id);
-> +	dtr_msg->size = cpu_to_le32(sizeof(__le32));
-> +	dtr_msg->msg = cpu_to_le32(msg);
-> +
-> +	ret = mhi_queue_buf(ctrl_dev, DMA_TO_DEVICE, dtr_msg, sizeof(*dtr_msg),
-> +			    MHI_EOT);
-> +	if (ret) {
-> +		dev_dbg(&mhiwwan->mhi_dev->dev,
-> +			"failed to queue DTR/RTS signal: %d\n", ret);
-> +		kfree(dtr_msg);
-> +	}
-> +
-> +	return ret;
-> +}
-
-[Severity: Medium]
-Is the error code computed here ever acted on?
-
-mhi_wwan_ctrl_send_dtr() can return -ENOMEM from kzalloc_obj(), and
-mhi_queue() can return -EIO when MHI_PM_IN_ERROR_STATE(pm_state) is true,
--EAGAIN when the IP_CTRL uplink ring is full, or -ENODEV when the channel
-is not in MHI_CH_STATE_ENABLED.
-
-The only caller, mhi_wwan_ctrl_dtr_rts(), is void and drops the value, and
-wwan_port_ops->dtr_rts is itself void, so wwan_port_fops_at_ioctl() returns
-its precomputed status:
-
-	if (call_dtr_rts) {
-		mutex_lock(&port->ops_lock);
-		if (port->ops && port->ops->dtr_rts)
-			port->ops->dtr_rts(port, dtr_on);
-		mutex_unlock(&port->ops_lock);
-	}
-
-	return ret;
-
-Nothing re-drives the requested state either: mhi_wwan_dtr_ul_xfer_cb()
-only frees the buffer, and the core calls ->dtr_rts only on first open,
-last close, or an explicit ioctl.
-
-So TIOCMSET/TIOCMBIS/TIOCMBIC report success while no host-state message
-reached the modem, leaving the port in the same "URCs never arrive" state
-this change is meant to fix, with only a dev_dbg to show it. Should
-->dtr_rts return an int so the failure can be propagated, or should the
-desired state be re-queued from the uplink completion callback?
-
-> +
-> +static void mhi_wwan_ctrl_dtr_rts(struct wwan_port *port, bool on)
-> +{
-> +	mhi_wwan_ctrl_send_dtr(wwan_port_get_drvdata(port),
-> +			       on ? TIOCM_DTR | TIOCM_RTS : 0);
-> +}
-
-[Severity: Medium]
-Does driving RTS from the DTR bit invert userspace-requested RTS states?
-
-struct mhi_dtr_ctrl_msg carries MHI_DTR_MSG_DTR and MHI_DTR_MSG_RTS as
-independent bits, but mhi_wwan_ctrl_dtr_rts() fabricates both from the
-single bool, and in wwan_port_fops_at_ioctl() that bool is derived from
-TIOCM_DTR only:
-
-		if (port->type == WWAN_PORT_AT) {
-			dtr_on = !!(port->at_data.mdmbits & TIOCM_DTR);
-			call_dtr_rts = true;
-		}
-
-Two cases that follow from that:
-
-TIOCMSET with only TIOCM_RTS set leaves mdmbits = TIOCM_RTS, computes
-dtr_on = false, and sends msg = 0, so RTS goes low at the modem while
-TIOCMGET reports it set.
-
-TIOCMBIC(TIOCM_RTS) while DTR is set computes dtr_on = true and sends
-MHI_DTR_MSG_DTR | MHI_DTR_MSG_RTS, so RTS is re-asserted on the wire while
-TIOCMGET reports it cleared.
-
-Patch 1 documents the DTR-only boolean for the open/close paths, but the
-ioctl path here appears to make TIOCMGET disagree with what was signalled.
-Would passing the modem-bit mask (or separate dtr/rts arguments) to
-->dtr_rts keep the two lines independent?
-
-[ ... ]
-
-Cross-instance finding from sashiko-gemini (b336eac424601552df7b2a5a6930f6f1777d59223ded79ac6c93f05fff648f90):
-[Severity: High]
-The driver starts the IP_CTRL downlink channel but fails to queue any RX buffers for it, which will stall the modem's MHI transmit path when it attempts to send serial state updates.
+- Eric
