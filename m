@@ -1,87 +1,87 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 437FF3839A8
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 05:44:33 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 53DEF3CC310
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 05:52:08 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787031875; cv=none; b=PvGB2qyXaogTsqptse0aFIRUa7ukU+ipkEd/OFnapsjp3baE4AG+jCTtNUIx9I3FGn7pEw/F5+ohR8Lj1A3ZteFzS5fXoQ/68afjACWLkZP60Pgt2+inNFbXbL9Y8JmryJEuSev0PCqEYFiWvZMm2R79WC/nqbGCUYfcJpZ6ngY=
+	t=1787032329; cv=none; b=IYZ+jGlNNri55wliQcxMFjRr2hD93rVCqB12PaDBfRTrV3STJCz20z32vidTXK3R1HB71x42Gdpt60TVVkSzpqLAILnEX4f6hnliaUZiwafGf49zlO8LpNlFwRq9ySJgCmnGwS5wwRKpF7C9drF2hHTvUReF8E9S/KEjW4a2qMg=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787031875; c=relaxed/simple;
-	bh=sHE07R+E3ock5k80GQbOzo7oDqEzd7hmLX9F51ZOOTA=;
+	s=arc-20240116; t=1787032329; c=relaxed/simple;
+	bh=t7zqK2kfTIdM7DeJsFj7PjMFIgkgpjQMOw5BoqQOa/s=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=hXZL2WGkVLcDfoZIu4N6batPArXm38oBnslaejc6WBHOORmS1IyfK4YF6IZcOLGu+fssRwZrpFlSJxLKTT0+l85UIbhRqkr8K6Tdkn4wuqQv1oGt2Ij1bpSTN3zIsUyEbWM1YXSe7J3JYUsfetde8pf3hy7/XBQjB9UbF0Plw1c=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=MdB/aI7g; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=PpE7smxM; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=MxV3bbr340l6XGO6D7CvSgLlQIacZbUFrzXLkI2TspWkW1chKDQRLd0C3ZbZan8Nzztr9BRcZS4/KKB3KV/RN52S8hfw+ECywq4mBN45Twu2KdM7qdoyIXFKbCQ8p1vxJPcrFhiclqCiEOVRy+/mT5GKfFgDcnViAwLYjIkU/V8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=DMcr0RWQ; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=a5HEC0BG; arc=none smtp.client-ip=205.220.180.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="MdB/aI7g";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="PpE7smxM"
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67I12W2g297868
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 05:44:32 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="DMcr0RWQ";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="a5HEC0BG"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67I465Js4187349
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 05:52:07 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	HW+t7QxvsT7H1vLeb9Eb6FkDCG/wQu3JC9K2ceXpNaY=; b=MdB/aI7g6QOpoB7e
-	XQ8yNtedTszSMN80FoDCnb7nzxWD/v4NxGfy3NpSMA5Cww2bz8x7C3oKErZq9zdT
-	Y3WooUHeVCEmD8oy7ifT00mCoUpvQZMmouRctZGKWrxg66I/DB1KjYWrRo2M5B79
-	S/TaPRBwEeSHkQKiXsKbwyRSBjsYN3mWAcHX+3Fac9mVYVWFQcfrdDz2LRwzK7bt
-	df12+VM46x4g8aUyCqSf3SXcUWjCAVY5FMWSS+lgkz8hOGlEPPfEzCD+C01LNZL8
-	ZJhLgzns1iSxqdc1pxS7ia5zwTAPKMQqxzkHgpc5CBiQC8BMG0EuFEWBR2Knafc3
-	53DXmw==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4dcn11gr-1
+	9MGPW6/DK7pn6fKMqjuLg89wJJuJK8oCiXQggTwY6zk=; b=DMcr0RWQv+aJkxOq
+	gUbCjFe3NzYI3OjesOMkpzJTRXBjrRxwtH6VVpZBWH95TK5T4AdoohWTSaY/Pe+J
+	7tE2qg49EPqjakmV9X+lzItNlEm7Ty55bS8kqEOEnwYgmz+Q+l/A0UzCX8B3sPM9
+	sDLkI41D8h8nuCTY9rYTbpOgu6mrJUSjA2Qvflpzd0evQ7B++9d1DY/3qUvCF6bu
+	zrx997uDw6q4U81ym76aIR6FRJo8UnMBeBbxrACpSQDKGrchomzeg+g28RME5jk8
+	9ksRJuowsPPRozywktrveZAJuq887VPVTCAA2SLmyqcwqlWkg94kKRxXskHAGgDH
+	aayzoQ==
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com [209.85.210.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4g2p0eja-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 05:44:32 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-38f5ac7354dso4859428a91.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 22:44:32 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 05:52:07 +0000 (GMT)
+Received: by mail-pf1-f197.google.com with SMTP id d2e1a72fcca58-84f7002f9afso3697382b3a.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 22:52:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787031872; x=1787636672; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1787032326; x=1787637126; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=HW+t7QxvsT7H1vLeb9Eb6FkDCG/wQu3JC9K2ceXpNaY=;
-        b=PpE7smxM28GIyE3icKJjFJBGzgGcImxeNo8oQUw05qIgAk0z7/4jKPitCSacgKWW4P
-         7FaIn6f77HYcbG81kcdDOreyRA0SwXg1bcQe/+Z9h19auyBNGF4HP94EYDK/6xpS8s+U
-         gwuVT+vMuk8LAEFTuM6yDQXbGiaDOAB9bu3r/pA8TrYdq7+PWsRmhkEnjdAWwu1jUsby
-         aCH5M3inbymNNmRvgByGXMz4hyIRNaM8NP2swGQv4ZJal2woxHd/N4LSMhXKQHRY5XTz
-         f4sroFWo/+ZM/tFtAi1iV7fMBSxMKKvdTm+5F6kDAAjpj8vOzq4djLpw3aarZSTpnNRF
-         po2A==
+        bh=9MGPW6/DK7pn6fKMqjuLg89wJJuJK8oCiXQggTwY6zk=;
+        b=a5HEC0BGcsVO+fnXI/jcgLBZ1rKBMbq2EGj6+HQ9x6LICKHMO8CqS3nPi8M/g7tFb1
+         4ma6ePhK5NWSrgxqOxuTZGC/pjzKefPEwI4biag6nYD0s/2sy8IUPX5kKl3EJs+NWU24
+         cHg2csMR9JZGaBahSFruylxq9fK/l0BU1vHyj2jQibTz9/M+tGgJxgOxMyDeQr4rLuZO
+         HoYjH5kC+m0pn8hfsTkjDXN8Yn53SECQr/3T73B/2reo4Mw3NyQKbbk7LApaibxAb9ST
+         TTpVGe8acvC3Ik4Q3UUvlcYFSlIUs51s5qbBd7oT25735zxxB8k2oJ8zuGUNz98qPPfE
+         fxoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787031872; x=1787636672;
+        d=1e100.net; s=20251104; t=1787032326; x=1787637126;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=HW+t7QxvsT7H1vLeb9Eb6FkDCG/wQu3JC9K2ceXpNaY=;
-        b=L6xv4Hm4X8ldKyChC7amWrGVSb7wzKm/QDHP+g0YFx/PKci2pRy0sijnZZ0ZGy4BuP
-         ShsFy9o/F0tGsMidxaKuzoRg5p8VAEcWuf/3kYvAffp1auLSRjHz8SstLslwFX7cMjMI
-         wUqiIwbHamPQI1hGN5Pi8L9eiZSvSJV9UrIGhwVONKYGWg42Na+M0I6xenRSvWm7HAZJ
-         vZ4B/AM1XU5auqNuzF0cy9Au96fIVASpEEy0sR106IocfuuMocrntkdUgcPcoWIzm077
-         TZbaHBCYB0eFtnafn2yc9SW3Ou9jV91tpTgLN5dpiTWPNzNfGRevbhUFhfSguacERvT9
-         4V7g==
-X-Forwarded-Encrypted: i=1; AHgh+RrtcGgtws43Oio2J1E/hKx52Tor3oHYbSanqI8T6NLpgbt8P9srnwS9rJM3CFKsYSG1xDIFpgRgJ18tipY8@vger.kernel.org
-X-Gm-Message-State: AOJu0Yyo+tWt23hcxvG1RWc934PsfslmjJEz759mQgtzqIXMx9OTtl5q
-	6uJhwu8OI/C/CG8bvcvvfLSduojDyzixqwAgon3pYGbDbFZkT/7LIIZrAbCzEk2NjwYyvRTECOO
-	L1ODT+5iYoIBiQWveFuXm+vmvAk1cvAjF3ZcQXpYHaWvHWkW4sucx1e6EqGCjTxKZl9l9
-X-Gm-Gg: AR+sD10lo10KBMdKtke/e4ov0mmaak4J8MiMaEx9CebkcErpu0Tif/b7wtLqzaSqj7Z
-	NkSp+MrijFE54g/D/sMf5BSvSQSO8mW4R4AxVIxA57UWXaHA+U4agddwOcBanuNWdN7tsMAXCEx
-	EiKgmqIsxeQKnFalLkQ0x4CqZB7zD+VLB9skF9N0+j94xSowzK66lPGwNqciOFG9+goKkiD3jeO
-	HBmv4H7uw53+zpVhQcGbE/pEzlJtCC8uVbUnBzSqxysWs9Uq+lHVHYRt4MpyWmjyuMXtpOcHCjD
-	7BXOM7d3F2PBRvwkFivBSVHE/iNO+28/S49Nk3q4og/W/WTbXvtYG1MqOkYGSYzLuIL93lQASut
-	JYazPxkm999kPFoB78rnK8JqyQphLIVBHJsI=
-X-Received: by 2002:a17:90b:1641:b0:38e:63de:730d with SMTP id 98e67ed59e1d1-3955a3daf70mr5813246a91.3.1787031871751;
-        Mon, 17 Aug 2026 22:44:31 -0700 (PDT)
-X-Received: by 2002:a17:90b:1641:b0:38e:63de:730d with SMTP id 98e67ed59e1d1-3955a3daf70mr5813168a91.3.1787031871167;
-        Mon, 17 Aug 2026 22:44:31 -0700 (PDT)
-Received: from [192.168.29.31] ([49.36.209.30])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-39531fbb41esm7223248a91.10.2026.08.17.22.44.19
+        bh=9MGPW6/DK7pn6fKMqjuLg89wJJuJK8oCiXQggTwY6zk=;
+        b=OzZaDCMcqCqsNboBgGLLwihvzFv7Gl+4INjALUovGPeDYR7iVToSXk0MDDQEa7AqVa
+         W7Q7NtOfNqX72OZNlwh0c4pBIz7PzdTaFn1DpZkLRKPoPPLz2HYOz7pbGp0g8QsOS2cn
+         6/cgmtKaO86htxYToYFnW50SDn8HRojgmQ8baDq0uBYoGZcxSILZhWAAIax4kZIr13oi
+         jNl15XkXOz3Z8qYDZd12FseTuEDSVTawe9Dkm3jZoN3CaB0n4ACibV2adSE4PnB4oIRB
+         55G9KqULOGV4lx459mR/F36RTlEFlee/u21nZdIHfXQOFNNdAVz67/JtwyPeVNdDrxXi
+         8RIg==
+X-Forwarded-Encrypted: i=1; AHgh+RrIC5fLJ2dUOXw04/I+G72qEYJfFENHU6pJqQGi0dSoVX5I8qq87hjXrrHYoh2s5zEJGfuQ4W0L4EO3kicG@vger.kernel.org
+X-Gm-Message-State: AOJu0YylZT6m7FHcGaFPttN0snnVhDocvykNRd8nyOZiZTU+Z7mXsJDD
+	TzKsUiYTfAmFuji8UScVAfDMVa35PxTN8pMljOgpej495Aam+B/9BgxFdlLLethYoMb5o5BzkXL
+	h9K8WJE2iNyxZZ/1QvZe6zz5ybFOf7WnJa+YJH4ZS3u/VhuuP65PPEwzeO3qW7G05qtb+
+X-Gm-Gg: AR+sD10QWd7z6tm6C2xWQ8HHaMO/SSqZjPPh3p9rk9BAikj68PImhfbW5bJ7PTBhFS7
+	IReVMrA3+SR1u99+n5J4ePGmYm7HR66R8nhQZql6pTnqgiCq451uvCgLeMWJE0U5QQHAUkqSErO
+	A83LvDRiVpagmjwhRP9F17LzzvCobrrmFTilBCsw7iKl0GknBUC/XZCODopjmmoYBpmXduDVPok
+	zhWxjrGargFAf5zRvld1Fu+wfkLT7UlLhpyzAAcYie2fsJfVkbuy9/Ga3yke4uzBCydnQogObvE
+	EYdlrDqJbGVH8mAsoSpVcAZ3mUZkantTGh0Qc3SmbJZq+t8p62JgpvBZcNpUg9OWkLgnGtJMiT6
+	mnGDIW4r9e2zmqGtM9JH/jSEE/0Jq/Q==
+X-Received: by 2002:a05:6a00:4395:b0:845:31a6:d84d with SMTP id d2e1a72fcca58-84fde14ffecmr33705026b3a.7.1787032325955;
+        Mon, 17 Aug 2026 22:52:05 -0700 (PDT)
+X-Received: by 2002:a05:6a00:4395:b0:845:31a6:d84d with SMTP id d2e1a72fcca58-84fde14ffecmr33704931b3a.7.1787032325493;
+        Mon, 17 Aug 2026 22:52:05 -0700 (PDT)
+Received: from [10.219.56.166] ([202.46.23.19])
+        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-851b4072c39sm1284034b3a.26.2026.08.17.22.51.57
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 17 Aug 2026 22:44:30 -0700 (PDT)
-Message-ID: <359e5cf6-c30e-4cdb-a6b2-baa2aa21c4e0@oss.qualcomm.com>
-Date: Tue, 18 Aug 2026 11:14:17 +0530
+        Mon, 17 Aug 2026 22:52:04 -0700 (PDT)
+Message-ID: <2d092339-a691-4539-8419-c9606ea35f68@oss.qualcomm.com>
+Date: Tue, 18 Aug 2026 11:21:55 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,118 +89,146 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v24 04/12] mfd: psci-mfd: Add PSCI MFD driver for
- cpuidle-psci-domain cell
-To: Bartosz Golaszewski <brgl@kernel.org>, Lee Jones <lee@kernel.org>
-Cc: Lorenzo Pieralisi <lpieralisi@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>,
-        Souvik Chakravarty <Souvik.Chakravarty@arm.com>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Andy Yan
- <andy.yan@rock-chips.com>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        John Stultz
- <john.stultz@linaro.org>,
-        Moritz Fischer <moritz.fischer@ettus.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Christian Loehle <christian.loehle@arm.com>,
-        Ulf Hansson <ulfh@kernel.org>,
-        Pavan Kondeti <pavan.kondeti@oss.qualcomm.com>,
-        Sudeep Holla <sudeep.holla@kernel.org>,
-        Florian Fainelli <florian.fainelli@broadcom.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-        Andre Draszik <andre.draszik@linaro.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>,
-        linux-pm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, mfd@lists.linux.dev,
-        Srinivas Kandagatla <srini@kernel.org>,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-References: <20260803-arm-psci-system_reset2-vendor-reboots-v24-0-889281373870@oss.qualcomm.com>
- <20260803-arm-psci-system_reset2-vendor-reboots-v24-4-889281373870@oss.qualcomm.com>
- <20260813123841.GC1820248@google.com>
- <CAMRc=MdA_zM_pHCmk7dd7kosqvNmFgA+iXvHS4qpNs9bdsUMCg@mail.gmail.com>
+Subject: Re: [PATCH v2 09/15] accel/qda: Add DMA-backed GEM objects and memory
+ manager integration
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Randy Dunlap
+ <rdunlap@infradead.org>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Bill Wendling
+ <morbo@google.com>,
+        Justin Stitt <justinstitt@google.com>,
+        "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+        Robin Murphy <robin.murphy@arm.com>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+        Bharath Kumar <quic_bkumar@quicinc.com>,
+        Chenna Kesava Raju <quic_chennak@quicinc.com>,
+        srinivas.kandagatla@oss.qualcomm.com, linux-kernel@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, llvm@lists.linux.dev,
+        iommu@lists.linux.dev, linux-media@vger.kernel.org,
+        linaro-mm-sig@lists.linaro.org
+References: <20260817-qda-v2-v2-0-69a02e9090d4@oss.qualcomm.com>
+ <20260817-qda-v2-v2-9-69a02e9090d4@oss.qualcomm.com>
+ <g3dkltejtlzrrelv77kjteqbkny6vhedyuet7d6b2p7yfix3ys@sop7vjvpdvzb>
 Content-Language: en-US
-From: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
-In-Reply-To: <CAMRc=MdA_zM_pHCmk7dd7kosqvNmFgA+iXvHS4qpNs9bdsUMCg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+In-Reply-To: <g3dkltejtlzrrelv77kjteqbkny6vhedyuet7d6b2p7yfix3ys@sop7vjvpdvzb>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: DZfatgsS_CS8Gm_N_DXPBsiMBULohO5J
-X-Authority-Analysis: v=2.4 cv=Gs5yPE1C c=1 sm=1 tr=0 ts=6a83f140 cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=LF1w/1kWa9VLj9Mif7fHrg==:17
+X-Proofpoint-GUID: FekZW6mITVvytsqQQmhXUpwM8af4Bi38
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDA0MiBTYWx0ZWRfX689OLZP6aAQb
+ c6uvsRBGjH3xU3gNWOd+AYBT/5yqn+P4fTfG9ZAYMLewLl76K9C7yaowUIz5hsfvPS3g7tSaUto
+ jmnXxG2iMdf9EpD5RZT70fM2YmSY4iU=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDA0MiBTYWx0ZWRfX3eIhcY5ffEnl
+ Ogt/7WtTp2OrSVpZsXCBBvLMu6tT1pgEil41rC8Y43PUNNIil9mX1KyNWKKfsoK9F+61K93Iyzk
+ NgzsJQv6GdwAiHVGi9/PNs/IN6iiKRehsopHFcKAhTNlnUWfDGlv3pip+BxPT8vPaau4iloF7JH
+ w8tahAMdilMLt2pBYKDJrCR6NOpTdBs5J3VX1gdERgpT/WdBkeK6DhEDWhe6Cgom0MX890heHQp
+ MSGNFDKUGXMkVNmRoVbVyjeowzg4QTd6jHx4JBtb+VO1vyXeFd4m0aX9YBpYzJVa6LVZsv5Cvk/
+ O9Fn/ilPBj9LvKTptZ7xAotC7MusStwDlujEjUajUJxVXZZjUpeOhHdH0oxtTrpgjZV/+0DzxaL
+ lR4iYmUVLHddRLKUMUDX/WlRUue1yJJISxNkWQnsuuFLjLw2A16aXWWOFvOyw0mZ9gBmheuNo5y
+ 6JZYoQ1SP7rM9QQ2ntw==
+X-Proofpoint-ORIG-GUID: FekZW6mITVvytsqQQmhXUpwM8af4Bi38
+X-Authority-Analysis: v=2.4 cv=bfRbluPB c=1 sm=1 tr=0 ts=6a83f307 cx=c_pps
+ a=rEQLjTOiSrHUhVqRoksmgQ==:117 a=j4ogTh8yFefVWWEFDRgCtg==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=5DcdI_qaGnyFb-cuGoAA:9 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-GUID: DZfatgsS_CS8Gm_N_DXPBsiMBULohO5J
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDA0MSBTYWx0ZWRfX/VO0Mik/LCw6
- 5CNLMKV5ilzQ3N5BKbByDlgcshZK0ROmp0oYTt+MwRWKOuI414BcQCUUTfmD6zr2sJa9UD1zZUD
- 4RBgZjrK7XRY1ODJx86scxzvkKnIryLJLIr9H7+miPIoj0+8k6yMRHhDc/vm/ICHninCW/8eI+X
- JG2O9Y5hju7Tv83drpZih3M+p4FTlhjtoKAKr4L53IW5hcCpo5ExnOuY7/LIoJmcR2ViYzdsbJa
- A1prDjeadLoGtNFaIKCbIqkfrl4ynYzOQXweD5Kt2eatN26WaWAY9WCTLstyCJR/SKJGcT+h95j
- sd9q0l9O9B4mD+Ar11WVFogdrwJ2f/O/qzwKm94jf1nfzSxSP2Ifatk9JAQK86r9vWHTEpyPHDU
- SZAcTPYCFUU6a+u//MlmXDmMOolvtkvU6sFPmV8NEOrl2Jdcr1vqAIw1S9QlR/CwCKdpvdqRojw
- sDbyazQjcofPweZetkw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDA0MSBTYWx0ZWRfXyryhf/Uut4bd
- +NHWo++1HGC/8MmPq4iwujaiuT38yx67BODcqVDO1Tojzx8w0X78iik7mFZdKP/YB9UMxZ8wCV/
- E7QzoNTCuGYQwLIR/QRpXBvLCYye88g=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=EUspDBNiAAAA:8 a=U_ymhupkC0DnaqHl0NQA:9 a=QEXdDO2ut3YA:10
+ a=2VI0MkxyNR6bbpdq8BZq:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-17_04,2026-08-12_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 bulkscore=0 priorityscore=1501 clxscore=1015 suspectscore=0
- phishscore=0 adultscore=0 impostorscore=0 spamscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608180041
+ clxscore=1015 priorityscore=1501 malwarescore=0 lowpriorityscore=0
+ phishscore=0 impostorscore=0 bulkscore=0 spamscore=0 adultscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608180042
 
+On 18-08-2026 09:12, Dmitry Baryshkov wrote:
+> On Mon, Aug 17, 2026 at 10:17:44AM +0530, Ekansh Gupta wrote:
+>> Introduce DMA-coherent buffer management for the QDA driver, wiring
+>> together the GEM subsystem, the IOMMU memory manager, and a DMA
+>> allocation backend.
+>>
+>> qda_gem.c / qda_gem.h
+>>   Implements the GEM object lifecycle for QDA buffers. Each buffer is
+>>   represented by a qda_gem_obj which embeds a drm_gem_object and
+>>   carries the kernel virtual address, DMA address, and a pointer to
+>>   the IOMMU device that performed the allocation. The .free callback
+>>   delegates to the memory manager, and the .mmap callback uses
+>>   dma_mmap_coherent() via the DMA backend.
+>>
+>> qda_memory_dma.c / qda_memory_dma.h
+>>   DMA coherent allocation backend. qda_dma_alloc() calls
+>>   dma_alloc_coherent() on the CB device and encodes the stream ID
+>>   (SID) in the upper 32 bits of the returned DMA address, following
+>>   the Qualcomm FastRPC convention for IOMMU address space tagging.
+>>   qda_dma_free() strips the SID prefix before calling
+>>   dma_free_coherent().
+>>
+>> qda_memory_manager.c
+>>   Adds process-to-device assignment: each DRM file (process) is
+>>   assigned one IOMMU context bank device for the lifetime of the
+>>   session. qda_memory_manager_assign_device() first checks whether
+>>   the process already has a device (reusing it with a refcount
+>>   increment), then falls back to claiming an unassigned device.
+>>   qda_memory_manager_alloc() and qda_memory_manager_free() delegate
+>>   to the DMA backend after resolving the correct CB device for the
+>>   calling process.
+>>
+>> qda_drv.c / qda_drv.h
+>>   qda_file_priv gains an assigned_iommu_dev pointer and a pid field.
+>>   The .postclose callback decrements the IOMMU device refcount and
+>>   clears the process assignment when the last reference is dropped.
+> 
+> This provides a nice summary of the patch, which is pretty useless.
+I'll fix this for all patches.> Please teach your AI instead to describe
+the reasons and the design
+> decisions instead of just assessing what the code does. Why do you need
+> memory manager? Why can't you use existing GEM helpers?
+I'll add more details for this in commit message:
+The DSP requires each buffer's DMA address to carry the stream ID of the
+context bank that owns it (SID << 32 | IOVA). The memory manager tracks
+which CB is assigned to which process and ensures all allocations for a
+process go through that device.
 
+`drm_gem_dma_create()` and friends allocate from `dev`, the DRM device
+itself. QDA needs to allocate from one of N child CB devices (each with
+its own IOMMU domain), selected per-process. There's no existing GEM
+helper that takes a per-allocation device argument.
 
-On 8/13/2026 6:36 PM, Bartosz Golaszewski wrote:
-> On Thu, 13 Aug 2026 14:38:41 +0200, Lee Jones <lee@kernel.org> said:
->> On Mon, 03 Aug 2026, Shivendra Pratap wrote:
+//Ekansh
+> 
 >>
->>> PSCI has multiple kernel consumers, such as cpuidle-psci-domain.
->>> Currently, both the PSCI core driver and cpuidle-psci-domain bind
->>> directly to the same PSCI node "arm,psci-1.0". Additional consumers, if
->>> introduced, would also need to bind in the same way, leading to several
->>> drivers attached to a single device node.
->>>
->>> Introduce a PSCI MFD driver that binds to "arm,psci-1.0" and registers
->>> PSCI child cells. As the first user, register cpuidle-psci-domain as a
->>> child cell.
->>>
->>> Update cpuidle-psci-domain to probe as an MFD child and use the parent
->>> PSCI node for power-domain traversal.
->>>
->>> Suggested-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->>> Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
->>> Signed-off-by: Shivendra Pratap <shivendra.pratap@oss.qualcomm.com>
->>> ---
->>>   MAINTAINERS                           |  1 +
->>>   drivers/cpuidle/Kconfig.arm           |  1 +
->>>   drivers/cpuidle/cpuidle-psci-domain.c |  9 +-------
->>>   drivers/mfd/Kconfig                   | 12 ++++++++++
->>>   drivers/mfd/Makefile                  |  2 ++
->>>   drivers/mfd/psci-mfd.c                | 43 +++++++++++++++++++++++++++++++++++
->>
->> We don't usually allow the use of the term MFD in devices.
->>
->> What does this do?  Is it a mux?  psci-mux?
->>
->> If not, think about what it is and call it that instead.
+>> Assisted-by: Claude:claude-sonnet-5
+>> Signed-off-by: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+>> ---
+>> Changes in v2:
+>> - Adapt to the dynamically-sized device array introduced in patch 07
+>>   (kcalloc'd from DT node count, replaces fixed QDA_IOMMU_DEVICES_MAX)
+>> - Protect register/unregister with the process_assignment_lock mutex so
+>>   the device-assignment and device-registration paths are serialised
+>> - No functional changes requested by reviewers on this patch
+>> ---
+>>  drivers/accel/qda/Makefile             |   2 +
+>>  drivers/accel/qda/qda_drv.c            |   4 +
+>>  drivers/accel/qda/qda_drv.h            |   4 +
+>>  drivers/accel/qda/qda_gem.c            | 134 ++++++++++++++++++
+>>  drivers/accel/qda/qda_gem.h            |  52 +++++++
+>>  drivers/accel/qda/qda_memory_dma.c     |  82 +++++++++++
+>>  drivers/accel/qda/qda_memory_dma.h     |  17 +++
+>>  drivers/accel/qda/qda_memory_manager.c | 239 ++++++++++++++++++++++++++++++++-
+>>  drivers/accel/qda/qda_memory_manager.h |  30 +++++
+>>  9 files changed, 559 insertions(+), 5 deletions(-)
 >>
 > 
-> My two cents: I'd call it drivers/mfd/arm-psci.c
 
-Ack.
-
-thanks,
-Shivendra
