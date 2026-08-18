@@ -1,67 +1,39 @@
-Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from ixit.cz (ixit.cz [84.42.129.46])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CDB9384CD6
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 23:18:04 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.51
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2BC452BE621;
+	Tue, 18 Aug 2026 23:22:41 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=84.42.129.46
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787095086; cv=none; b=nv9Ds50wAzq+NL+G5PtGtsGY6/STX3Q0njmOnMAfSAY1+N3VgNT6YJe5uMMZdBR05hAQrbrR2bgeie7bK9dPf5mA5eXdOsk9L529WBBwM87RKY++T7cpWpc8t4Aa8eo/ijTKPLqiL7LZdmvzLVwzEEUzxeWcHGQHNozNvRc6+UI=
+	t=1787095362; cv=none; b=gTfNAS5OVkJxGYpxe6bL0I79cfNE6gOQLy75sK7KJE7JeBzfDjQA+0lXQElxU0UMH7n7RURQeC0pCRPMStUTr+X25HkACaG2n6+abrgU1UchaMA2xzYvHQyeUqY7EwcRfdCN+UGDjJFc96PJ3ZMOziRH1RQAnO+Il+UdcIhpnCM=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787095086; c=relaxed/simple;
-	bh=a8IOTYHpzARDBkDXw7Oai/tzL+r3gsDh+8SANcfGXjg=;
+	s=arc-20240116; t=1787095362; c=relaxed/simple;
+	bh=Di+Untc5QDv2uGNXQYM+e5ElnCl0AEfACepIPVd8i64=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=ZfUrZJMsOnHgxPB31luhfuepPVI3LXdHvXPF7pWOoWGecrfWpibg2r3/dwPniiieSJbWcMSNHNNG0sNuVZaexuSn8brhqMb3CNgVfqjGCRVjL2Y8xLA8yboBkEFMQtOqbBzsZoJbm5aaRiIxzHz4G5FHdiGJWn09eIOcuHD7EIs=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=CGNmYkqK; arc=none smtp.client-ip=209.85.167.51
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	 In-Reply-To:Content-Type; b=rGaI1zfgUIuj8H1zo/2B6PQufodOlJR3z97At8jpdwayavOb8mIk6Y3mV0Dt0lLUaBwlN168/i6Q+TrmPF2+lR+PHlvzl8Oqvl/ioC3Yf5QTnyKGWCjn++1NxhpH8BIj0nuDaXnp45LnDdVltq7l3heURKnxyD1u2B5f7RHkv9g=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz; spf=pass smtp.mailfrom=ixit.cz; dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b=c+uZXVtk; arc=none smtp.client-ip=84.42.129.46
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="CGNmYkqK"
-Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-5aeb72b0af1so51550e87.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 16:18:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1787095082; x=1787699882; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=azicBGUhuLKBlVAXIqSFD4EKWplTYg8gpsiCO/t2g/Q=;
-        b=CGNmYkqKQWoKGH41Id2BAn7W9SO5PFWE/QIFxaclbUx3fZJiZSciMddLrVApf7/nYo
-         EZZV7oqBqEUhXu2Y/lL5n3uqw8ByTxjAmT19Hs9+6+glt7zKHN2BbJxjywX+YcsrXLBr
-         csA+Xt5xDYlCM8I6U0FpLBmLaE6PC/xj+9ZuFGVT9YQNE5MQsYioFvS44VoVoQIadBox
-         ME0IslyHnd1Uv46o0LGmFerfwZSJ805gDaKuwfvITN4Gj37z8kLNs5Ba6hBDEuu3AtzG
-         lhHFNi/eaZZ7RzpPGlAz0UXgPsGgPz6wgL+eJR4ioLfFbsjoiv2frOAlq0czNsrgsNBd
-         /inA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787095082; x=1787699882;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=azicBGUhuLKBlVAXIqSFD4EKWplTYg8gpsiCO/t2g/Q=;
-        b=b4I/wzkkXEmeL5aheigrOYV5PjsxcQrgz1Lqo0BuIhudX18YjowES3URPIzqbyviuH
-         O/Bd7S0t+EMcKREk0Hc+eI+zuwE6ujXF3gOuedmyIEyQBL3hcTmcz8ua4FZUkhnNcrxw
-         feefrpOsAStq2l0NCqoVi1OUfhaBtOmYQSb11kgMHqAeZji9ih98GseRXwqG1d77EpkP
-         Lw1jT+gdsNQko8nXUbKnkDPlABV+HDd3u3MA+XjZCs8RVPUOaL8XhNBI4JS7tuDmkxwj
-         1lTv202J+t7zI9j3Q24PQIJI7n90F2DMmCNRqHpeMR6HLjojhox3GxXrY9yC7ae5Mz71
-         WC3A==
-X-Forwarded-Encrypted: i=1; AHgh+RqyzYLnlj7xbSBZeTMuFG7UnsnbL6gH1UoRmTXDFNwJEdRGDIz4ikeBzqPXnHvHcaTl/KkfisdoWx9dwrm4@vger.kernel.org
-X-Gm-Message-State: AOJu0YxyioH4ZH3VQ/htG6TPvddkYUxB/m8ovuxCglqULJmQNFfwMGkk
-	bsMLNxIrvqrWj7CDYqI5UM+p4NJlxldG/m5Ho6mV8f9PfvzX5J8hlYrMXNVpQEeBUYA=
-X-Gm-Gg: AR+sD100Obnp/sir5m6sZTQy/26ps+0BJ5C6u7v/ZEuZGrUG+dM42SpvclViAp3RPt2
-	4fF06GmfN8t4Fird+d/8wzj382nlGvOvRXlQEVsXFm/Cemxo6u+9Eb47+9dOc6IyFOBPTXk+J3L
-	WjYWLSmAYkJe+76Y1JLFD3iyQeDdjIaQmrI/lH6qtqCrYYUgMcbQtcuzFRP8W+7zhaseZJXkjyq
-	AilutHyWlfIW+swPdUSaSYt3MasXf2e88CG7A3oHXCxo6p2frIzYu6gfGZ8A/g02VkA+40ZDSBJ
-	tkgmWN/Z/ecfuU0xkjQYmmjbP/7YLgON/Kwae0y+59BM950RNDTBGPk63Gn5Ljd5EL+ztAG8DYA
-	duRABt1LvWDaDd4Goz07jw7wlQ+PVNRO2/AcHMDkLoPVvz4dH6QCO5QsrsTxrTCRNwPBI56pYK9
-	Rh1YTuhAvxH3/U2UoTyrlqFicxL/xNTH5GjZd3nOOS0c9rcrIkyelNz7A3tFhM8A+udKk4fjUvF
-	ygak7wGvenFOf5Cydt0ilyVSzEswphPBbGvpHkoPQ==
-X-Received: by 2002:a05:6512:31cf:b0:5ae:cfd3:4753 with SMTP id 2adb3069b0e04-5b478bdf314mr34845e87.3.1787095082233;
-        Tue, 18 Aug 2026 16:18:02 -0700 (PDT)
-Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b47885ac3esm59601e87.28.2026.08.18.16.18.00
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 18 Aug 2026 16:18:01 -0700 (PDT)
-Message-ID: <db94c578-2bfb-4297-9955-fba690ecfe39@linaro.org>
-Date: Wed, 19 Aug 2026 02:18:00 +0300
+	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.b="c+uZXVtk"
+Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id BBD2E5340BE6;
+	Wed, 19 Aug 2026 01:22:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1787095351;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=lJi1R7blbBTWLpX63ppzRZGExWfW5lcs2UkIXrQQpII=;
+	b=c+uZXVtkPwjYWtLqZ8BW+84EeUXg0JDMz/vWaUalRnKOLvXLJX7BFRIrAQ6NCBlkaZ0/ek
+	Y6E8G8BBVuLUZ8C+Xqk9S1YG1RnII7aMmXvjC3pe8oLO76TcoMGzhBcwTfv/YPE+tBJZ4V
+	chWPoVa3Mo1+YaVvBJbY6KEbEmMepfo=
+Message-ID: <babb5c20-1b95-481a-b0af-1d581425d37b@ixit.cz>
+Date: Wed, 19 Aug 2026 01:22:31 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,97 +41,103 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] i2c: qcom-cci: fix device_node refcount leak in
- cci_probe()/cci_remove()
-To: Liu Zhenlong <dragonliu2018@gmail.com>, linux-i2c@vger.kernel.org
-Cc: konrad.dybcio@oss.qualcomm.com, stable@vger.kernel.org,
- Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss
- <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
- Bjorn Andersson <andersson@kernel.org>, Wolfram Sang <wsa@kernel.org>,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20260815140931.53297-1-dragonliu2018@gmail.com>
- <20260818175750.4205-1-dragonliu2018@gmail.com>
-From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-In-Reply-To: <20260818175750.4205-1-dragonliu2018@gmail.com>
+Subject: Re: [PATCH 1/3] dt-bindings: net: nfc: add st,st21nfcd-i2c
+To: Kristian Brox <isyourbrainfoss@proton.me>, oe-linux-nfc@lists.linux.dev
+Cc: krzysztof.kozlowski@linaro.org, luca.weiss@fairphone.com,
+ linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org
+References: <20260818205940.1973944-1-isyourbrainfoss@proton.me>
+ <20260818205940.1973944-2-isyourbrainfoss@proton.me>
+Content-Language: en-US, cs-CZ
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <20260818205940.1973944-2-isyourbrainfoss@proton.me>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi Liu.
-
-On 8/18/26 20:57, Liu Zhenlong wrote:
-> The of_node_put() matching of_node_get() runs after i2c_del_adapter(),
-> whose trailing memset() zeroes adap->dev and thus adap->dev.of_node,
-> making the put a no-op and leaking the node on every adapter removal
-> and error cleanup.
+On 18/08/2026 22:59, Kristian Brox wrote:
+> The ST21NFCD (e.g. Fairphone 5) speaks raw NCI on I2C. Existing
+> st,st21nfcb-* and st,st21nfcc-i2c compatibles stay NDLC. Add a
+> separate compatible so those boards are not switched to the wrong
+> framing.
 > 
-> Use a devm action: the pointer is captured at registration, out of
-> reach of that memset(), and devres runs the put once on probe failure
-> and detach, replacing the three manual of_node_put() calls.  The
-> setup loop uses the scoped iterator form so the child node is released
-> automatically if devm_add_action_or_reset() fails mid-loop.
+> Also document the difference and add an I2C example without
+> ese-present / uicc-present.
 > 
-> Suggested-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Fixes: 02a4a69667a2 ("i2c: qcom-cci: don't put a device tree node before i2c_add_adapter()")
-> Cc: stable@vger.kernel.org
-> Assisted-by: Claude:claude-opus-5
-> Signed-off-by: Liu Zhenlong <dragonliu2018@gmail.com>
+> Signed-off-by: Kristian Brox <isyourbrainfoss@proton.me>
 > ---
-> Changes in v2:
-> - Rework the fix to use a devm action (cci_put_of_node) instead of
->    caching the pointer before i2c_del_adapter(), per Konrad Dybcio.
->    The pointer is captured at registration, out of reach of the
->    memset() in i2c_del_adapter(); the three manual of_node_put() calls
->    are removed.
-> - Use for_each_available_child_of_node_scoped() so the child
->    reference is released if devm_add_action_or_reset() fails mid-loop.
-> 
->   drivers/i2c/busses/i2c-qcom-cci.c | 20 +++++++++++---------
->   1 file changed, 11 insertions(+), 9 deletions(-)
-> 
-> diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c-qcom-cci.c
-> index bdeda3979c48..d3528c7d15bd 100644
-> --- a/drivers/i2c/busses/i2c-qcom-cci.c
-> +++ b/drivers/i2c/busses/i2c-qcom-cci.c
-> @@ -497,10 +497,14 @@ static const struct dev_pm_ops qcom_cci_pm = {
->   	SET_RUNTIME_PM_OPS(cci_suspend_runtime, cci_resume_runtime, NULL)
->   };
+> diff --git a/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml b/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml
+> index 1dcbddbc5..3523a8df0 100644
+> --- a/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml
+> +++ b/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml
+> @@ -11,10 +11,14 @@ maintainers:
 >   
-> +static void cci_put_of_node(void *data)
-> +{
-> +	of_node_put(data);
-> +}
-> +
->   static int cci_probe(struct platform_device *pdev)
->   {
->   	struct device *dev = &pdev->dev;
-> -	struct device_node *child;
->   	struct resource *r;
->   	struct cci *cci;
->   	int ret, i;
-> @@ -516,7 +520,7 @@ static int cci_probe(struct platform_device *pdev)
->   	if (!cci->data)
->   		return -ENOENT;
->   
-> -	for_each_available_child_of_node(dev->of_node, child) {
-> +	for_each_available_child_of_node_scoped(dev->of_node, child) {
->   		struct cci_master *master;
->   		u32 idx;
->   
-> @@ -537,6 +541,9 @@ static int cci_probe(struct platform_device *pdev)
->   		master->adap.algo = &cci_algo;
->   		master->adap.dev.parent = dev;
->   		master->adap.dev.of_node = of_node_get(child);
-> +		ret = devm_add_action_or_reset(dev, cci_put_of_node, child);
+>   properties:
+>     compatible:
+> +    description: |
+> +      st,st21nfcb-* and st,st21nfcc-i2c use NDLC on the wire.
+> +      st,st21nfcd-i2c is ST21NFCD with raw NCI (no NDLC PCB).
+>       enum:
+>         - st,st21nfcb-i2c
+>         - st,st21nfcb-spi
+>         - st,st21nfcc-i2c
+> +      - st,st21nfcd-i2c
 
-I believe the new cci_put_of_node() and the original of_node_put() functions
-are type compatible, therefore a function type cast could be sufficient here:
+Hello Kristian.
 
-    (void (*)(void *))of_node_put
+Thank you for your patches!
 
-In any case the change seems to correct, thank you for the fix!
+Before I do full review, for next revision, definitely the compatible should 
+omit -i2c suffix, thus only `st,st21nfcd`.
 
-Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+If possible, send next revision with b4 (thou you don't have to, it's usually 
+more fancy and convenient for both parties, takes care about CCing the right 
+people, checkpatch etc.) [1].
 
--- 
-Best wishes,
-Vladimir
+Thanks
+David
+
+[1] https://b4.docs.kernel.org/en/latest/contributor/overview.html
+
+[...]
