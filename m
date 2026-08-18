@@ -1,146 +1,245 @@
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5538C3C9EE4
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 08:53:40 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.221.53
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A752543E9DF
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 08:55:58 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787043221; cv=none; b=AM4rjoSTS0kob4NgrMpMuOzhfxHGutr6zBj/KgESvkv8HqA3/xwFcpPvLZcZnlJ9VUe+jXxis+i6BQsuSnMoxJHV35MpPyNBEDNy242mHU/qaknELwfVXErf6BPrdlG2+4n8pZdwpWKUP+zB6/Muk+mijT3nU03iiND+HfOOTrk=
+	t=1787043362; cv=none; b=NqMuRjs0TQoeGgYE+aP3he0N0vLOukhYsN6tuOLXtBp9umjsuDmksnaC1AxvHTw6plquUmbWuU1lYCdOEY++6qsZITS8SQQlGzw4lNbdfvXiqPZ01lMLp9TCDLPY4hdWdJyDriFSWXQsUOiLgEtN04T5P1EJl0BINmGCurM1Jg8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787043221; c=relaxed/simple;
-	bh=79RYIFF913FaQlkxpRypw1VybVy1tpFdCTmdzw/Dx70=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=BP3u7QJdFue49GlpZR8rIgjf/GCgm+woLDGKLc3Z37LUvuQosWoVLKuR6yOoGDd1E8CG90E9PT1qwJLu04hdI/X2OSUqygVZEcPj1geE+sQan9o2uzCZfOx7ZbU6AhkNJb9G05MAQPfPXNC12kZY/rGa3LLCelU3HS3xAVGXsHY=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com; spf=pass smtp.mailfrom=baylibre.com; dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b=a4oq1j/X; arc=none smtp.client-ip=209.85.221.53
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
+	s=arc-20240116; t=1787043362; c=relaxed/simple;
+	bh=jdXUg6ge+CkuqPJatY4gmfdrXLXrsfR5VvZfoquwTog=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=aQft6AV12PCsp9lTPuxbJ6+ux4I9ePhpb635qbRP6NTEAFPuaXsPzmItTKFQVsgQRZTL2Lj4OxixrfNJ/T/zM/w6/Cxs4f96tcEo6NKSXg/jtlEcWE2JEKt4+bVWtfngDJHxTt5hClQolewoWvX8ekMzuBuaP+/+OwBWuKBNj5w=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=llLLalVu; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=We/mdQ/K; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.b="a4oq1j/X"
-Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-47fe377a217so2956478f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 01:53:40 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="llLLalVu";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="We/mdQ/K"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67I8BLri3991126
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 08:55:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	5XpOqc5E/x3j21BWFeP0v8ytaBSccBnOmabQ+CpqYvE=; b=llLLalVu0NRbDmfe
+	/V10Tdhur2wSfmzs2NdTbXiVbs0u2xWQRvvwMtIm501Xle5gwGHobaaC413KYLJ6
+	zRGO7V2aJqlNsQc2AtMAk5RTICkrKgKpY8T6NDcnlUZ5Au+nhYU2OU+e8C/9KuvI
+	Qgs3iYeFKxYJKAvBGYbSF1zv9TklNA7uKkMufdX9hpBVUQyjs+PUfStWyLwAE1Hg
+	wc7pPm9FkVJsVxeq3LxUIkPkSX6vENOLUjMPanm7x5NHRd+2ruwvToHMtajeWsId
+	0qdmFHM5X/ogKCdY8IgqzV2aRIbAXa7m6h2YIcTTo4lb2bmZjLHvFn9oFF5KpOQ2
+	T9B4fw==
+Received: from mail-qv1-f70.google.com (mail-qv1-f70.google.com [209.85.219.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4f5pscff-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 08:55:55 +0000 (GMT)
+Received: by mail-qv1-f70.google.com with SMTP id 6a1803df08f44-8fd356ee3a4so611476d6.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 01:55:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=baylibre.com; s=google; t=1787043219; x=1787648019; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=5mBjzB8/1EWlBo8ixiwD3uUsZbNFlGOVh/ZsCswiezY=;
-        b=a4oq1j/XeFtB+7f6ISzrlS8MVOY869YfpT2sOXji16Jm9pdJsAFMO7siGgQwjsPcPF
-         roS2bWTA/n6rbGrpijUbfrNkPCX883N9lsCIRXWvDdNxev9MyvZ9LYy+q3cl45WXxj/7
-         YXgFBc3RTnEIR9qXfTr5zFammv/bKeU0gbPqLZiTpC38RQ69PfX2jV1tJBF8G0qr6874
-         OFX+qnaZEQKDrB5RmtliIz5hysrnuXV2LQbwi0T9Zuj2LGqK3yK1A7obCu60ttX86d8H
-         z0EYuPIkkGrS21tBkqL1cSVj0tH3ajzi17Yg0DYaoDHGe+ZPfzLTbCvDgj64+r5+e5F1
-         VTZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787043219; x=1787648019;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1787043355; x=1787648155; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=5mBjzB8/1EWlBo8ixiwD3uUsZbNFlGOVh/ZsCswiezY=;
-        b=EPgMXFaaOcDCcAhUPU+z/iZAK7aSpG+jda8KExrRBuSJci4wLwGnZZ1kOkRe22Cske
-         br9qOIsCXVqhBezSkPc2z+A4N6mcMW5c1298TN0iaw330grDKfP4kLUPJVhxuu/zzS0o
-         AVrM4QRYrfvAP7RKoeO/pLDe/5osZADMtgl6u4FEh26AJ88HpVEmyIT5IqOGv8T2Htkg
-         NBjiDLtv3rOoF9ZDbnH46hPKqY0oEiyR/3ftEvJG7vRleF2RlndyBFqM9brtXD93RSfi
-         L4kFTXt9qKdlMjTslPntV0O6lVdMCbCwJwedPzqjlWe9VONfAqAZrgYaiY6IwvIjlwzZ
-         n7WA==
-X-Forwarded-Encrypted: i=1; AHgh+RrHJp/3A9So0KwzTHJKx3siVWVMLbuw4LJ79hhnMYDgvx/vZy8Wh+jwRCh3INTbqB2odolkI2ybYigj03Lz@vger.kernel.org
-X-Gm-Message-State: AOJu0Yx2UClpFPQ24yrPV6f+joAoXNJVXj/cxvv2mWZRaa1jmYyeXUUH
-	ciBp1oOp945iT5eCd8oPSBXH+CiaCwmuz2zvTKw+tgT+Y4gbCeHWvZ9OSKSbFJSfEms=
-X-Gm-Gg: AR+sD10+fgiyfm8tgVJ5qr29JUii308ozHQOXg5x655ttO7ySDZtNy94adSzn0kKEFs
-	orkwyvb1xxZ6pO1RcosuzYIE7ignSmlqwhiBQWMj89S7bVkADpseM2vGx4/nEIM1PJ1BFCrwIUj
-	ITtBnCv8gUCEdUG9atITBY/bsnWpuFJcbzL0ptOeraHHM1WoplLEEqqcfDF3HTGppdAwn/Uf2nF
-	NoT35kDL+ryo7peMRDM1+Xm/aoCxOzm9bJ6Oez1VX0Eb4r4NF2IWA4DXp3aC38VpPo+huSIu5UC
-	wLhYgE41b3nJzlIlk7GL8boMP8i+4kG4h5GWUmcrQrOOhRuUdIm0WmnHVXl/eAkKCRQsYOCjk+U
-	+YNFSa3I+/bLC7ww9N5H5fJojKSbZoPY7LFyr+6FyjhDtyN8uQggeHiXOOVhJyKN0jVKSkkvLqd
-	zEImwnXF3kWakaeQXuy0c4mlPpfrw8kBzpm3n4DzhWCJf82fbyfBV04gNj6Ere5eANuWLxhtTlF
-	RIn+okRrP8No/IJuqgVJVQGyZofQ2dlzxtmjudVtO1l0kx8f1TOWD3tC3Yalvo=
-X-Received: by 2002:a05:6000:40da:b0:481:5003:c654 with SMTP id ffacd0b85a97d-482a8ff6003mr10697063f8f.7.1787043218545;
-        Tue, 18 Aug 2026 01:53:38 -0700 (PDT)
-Received: from localhost (p200300f65f01710416869d85a644e839.dip0.t-ipconnect.de. [2003:f6:5f01:7104:1686:9d85:a644:e839])
-        by smtp.gmail.com with UTF8SMTPSA id ffacd0b85a97d-482a5b77f41sm9680514f8f.27.2026.08.18.01.53.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Aug 2026 01:53:37 -0700 (PDT)
-Date: Tue, 18 Aug 2026 10:53:36 +0200
-From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
-To: Sumit Kumar <sumit.kumar@oss.qualcomm.com>
-Cc: Manivannan Sadhasivam <mani@kernel.org>, 
-	Jeff Hugo <jeff.hugo@oss.qualcomm.com>, mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org, Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Subject: Re: [PATCH v5 3/3] bus: mhi: ep: clients: Add loopback driver for
- data path testing
-Message-ID: <aoQc2aVZ5MR5OKje@monoceros>
-References: <20260817-loopback_mhi-v5-0-50efc7360b7f@oss.qualcomm.com>
- <20260817-loopback_mhi-v5-3-50efc7360b7f@oss.qualcomm.com>
+        bh=5XpOqc5E/x3j21BWFeP0v8ytaBSccBnOmabQ+CpqYvE=;
+        b=We/mdQ/KzJwbg9pfbzAzox2t4ZWCYdp6RyBjsk3G9SwXL43whQAkS4kyBB2jendlhd
+         iN9MIthUlSX8jHOYD2UKCRojK0SEpEppUibEqzK2c+VtRzxRJmZdHO30vUjYw9W0uPn7
+         tSU3TnFNft9xB5L2I0PBfvYaOMxQkoAjKZZKa8i0R+EG0nXukGyc/X7fAo6kd/SOoKZL
+         +Ua79SN0JMlsHttHi6YAU/QgOaQFJDtWHmcFBs1VcwhJ8cmHzhEEqfBiiUJ8ytjMzPXP
+         v6PWQPz59vZx7qefxH5CPHolS4bVLEXiy3FgGBTEUNmRxKeRHGxd4UWV/n9CKgNLZ4bk
+         hH9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787043355; x=1787648155;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=5XpOqc5E/x3j21BWFeP0v8ytaBSccBnOmabQ+CpqYvE=;
+        b=Mr+5ZjJ+E1pkqI+mboCShnGZu5nyrL/NYR+ccFQZDPB5ptHKJuYmmBPntLz98cqL5W
+         C6kunyZ3F6EeizAQ4KXaazPOeVLNVouGuznH0lF8fw8GCmPat0lX4+BlldYDUJJT3qMU
+         eWhVhbn5v3BBHrRxAELoKiwRESTcQljCC6LRQttDx8wxfPNEDH2xg1spjpYgzandMVXs
+         1kGgLdQbTOOLIPIj6HWqYjoOfIzDn02Xm23Ox85xV2XDzod3y/lMXyjioQXN2YYNt4uS
+         wFUrl+nG5eRXIYltswOr+Vr0PauLQpnLP630jNjZGCV5sr+caquflFRXabNUROQ2jBlL
+         I1CA==
+X-Gm-Message-State: AOJu0YwGIFzzfIDeVKKztTnUgJc3M1+Ia+8/ZkvBmgTz8aeCjk6Qgh9b
+	ts11zDJ+uTFt+Gac5iq69jOPE4ockrc+IkHWRrp0SJV9adnqIr0vw3SzyZv/oHS0Ip7hEMysJua
+	SmW4N59rBH0e37hzXZDi7yLuGzsYwfBaWB96oh4yzp4szQzWV3wBtytweU/7+fOdGBOe7
+X-Gm-Gg: AR+sD12e44v4j+K0TS/7qmX6qcA82rEgfxABMtIReS3MGHoBqcMwlzgLzPstKA/+vDM
+	c3MsZr88sNyeBFJJgza2gxYy5jqpjwQCAQZ07Vx2d7Us2A/lr93/HRvUSBZ1pE8o3H+zYQY+pSz
+	j9WDdXYTwKIiWJdclQ6ux4FASsJlGB4gpQOkOwn+K1Y2fsW8CsKx/c15824TuKM3jmOoJkg6mdJ
+	P694Cvu5PCYX0FfqJpmaO8L6W1womf19kbD6caijM92D/IkFu7kzDFYbk+mSX/+ilNZ0654Mv0c
+	ZbmsBjzFK912hSN19nwfn2EUxut0GA+dWK8EdYGz7x4w7uIWk5iPx0bTJ1Vr4DvxMuK6E3ZC8Of
+	x6pkVHGvJLCIKNtmxkeMCMW9/
+X-Received: by 2002:ad4:5aa5:0:b0:8f1:507a:ed6c with SMTP id 6a1803df08f44-90a91e84256mr216308776d6.5.1787043354999;
+        Tue, 18 Aug 2026 01:55:54 -0700 (PDT)
+X-Received: by 2002:ad4:5aa5:0:b0:8f1:507a:ed6c with SMTP id 6a1803df08f44-90a91e84256mr216308486d6.5.1787043354537;
+        Tue, 18 Aug 2026 01:55:54 -0700 (PDT)
+Received: from [192.168.120.193] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c217fed68f9sm154596166b.27.2026.08.18.01.55.52
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 18 Aug 2026 01:55:53 -0700 (PDT)
+Message-ID: <eb7b528a-6d5d-46af-b0d7-410bd9acfc0b@oss.qualcomm.com>
+Date: Tue, 18 Aug 2026 10:55:50 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="7oc3zz2p7n6vaxev"
-Content-Disposition: inline
-In-Reply-To: <20260817-loopback_mhi-v5-3-50efc7360b7f@oss.qualcomm.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 04/10] phy: qcom-ipq806x-usb: add MSM8974 HS PHY support
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Wesley Cheng <quic_wcheng@quicinc.com>, Vinod Koul <vkoul@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Christian Marangi <ansuelsmth@gmail.com>,
+        Andy Gross
+ <agross@codeaurora.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-usb@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-phy@lists.infradead.org
+References: <20260810-msm8974-usb3-v1-0-1a47e1185524@oss.qualcomm.com>
+ <20260810-msm8974-usb3-v1-4-1a47e1185524@oss.qualcomm.com>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20260810-msm8974-usb3-v1-4-1a47e1185524@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=S+/pBosP c=1 sm=1 tr=0 ts=6a841e1b cx=c_pps
+ a=oc9J++0uMp73DTRD5QyR2A==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=EUspDBNiAAAA:8 a=HI9WjpCpug938Zx-P8EA:9 a=QEXdDO2ut3YA:10
+ a=iYH6xdkBrDN1Jqds4HTS:22
+X-Proofpoint-GUID: 3qhN0znAphKyDHza_Ra8e4z4AjQibf0F
+X-Proofpoint-ORIG-GUID: 3qhN0znAphKyDHza_Ra8e4z4AjQibf0F
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDA2NSBTYWx0ZWRfX0MaNpFpiE62f
+ OvPXWHaLxp/SIePzVM10l/pQEnJMOD/TpeAY8ZMiXftOSPyXfbrkKVedq7HeewPvH5c1b2zVdfK
+ vZiqnK+lIpwgOnJgpWyTxiw8jGqwurejqFnjIJek64RpLnVWdi5a/D8aUZjQ61zgX+8qfA3NJMg
+ 52W4nVpWW75X5dJfOtua8jji+w/zyRK9OR0VfqQ0IRiONYrS5+OSwQiKNtboLIb0a9PnGpXiT5Q
+ PbycWQWgVVGRPmJJBqOi7TdhhxF+AjfkDfJV7nmGfPXhKWpt5pL3J+QFIUulPc50R2dAPGOCT+s
+ Hv7qtmH/WRsLUIMoZeongbuK1Huf3oUuwEgjJu/j4f/YB3XCPQl5sh4a2ka3FhGA5MVS+y08HOh
+ N/Sn+MKbjEM5hXi/6SJkzY3u0VUbVFmwyOjsJxuPFy2/FTQDdaJpzDxPJXVQNvpqk1KW5s3v9fS
+ lpJ84PjW83xk6utlNug==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDA2NSBTYWx0ZWRfXy5umGSKQZkM+
+ 5ZG7Fb35De2BIiiLzQtfzAjvtdowfgdY4R31zVXCCY1T6iEYFqRMGZlB8Q0fplacPcqpfGZphJi
+ Ji7/TsukQIHr7ZUi9YClERgZqeBc354=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-17_04,2026-08-12_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 phishscore=0 malwarescore=0 spamscore=0 lowpriorityscore=0
+ clxscore=1015 bulkscore=0 impostorscore=0 adultscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608180065
 
+On 8/10/26 1:42 PM, Dmitry Baryshkov wrote:
+> The MSM8974 DWC3 wrapper embeds the same generation of QSCRATCH
+> controlled Synopsys 28nm HS PHY as IPQ806x, but the driver only knows
+> the IPQ806x variants, so on MSM8974 the controller runs on whatever
+> PHY state the bootloader left behind.
+> 
+> Add the qcom,msm8974-usb-phy-hs compatible with its own init
+> sequence: unlike the IPQ806x one, it must not overwrite the whole
+> PHY_CTRL register, as the power-on values of the reference frequency
+> selection straps have to be preserved. Only enable the UTMI clock and
+> the DP/DM MPM clamps, signal VBUS valid towards the link, and disable
+> retention.
+> 
+> Assisted-by: Claude:claude-fable-5
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+> ---
+>  drivers/phy/qualcomm/phy-qcom-ipq806x-usb.c | 35 +++++++++++++++++++++++++++--
+>  1 file changed, 33 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/phy/qualcomm/phy-qcom-ipq806x-usb.c b/drivers/phy/qualcomm/phy-qcom-ipq806x-usb.c
+> index f22c0000479f..21b59d4ca8d2 100644
+> --- a/drivers/phy/qualcomm/phy-qcom-ipq806x-usb.c
+> +++ b/drivers/phy/qualcomm/phy-qcom-ipq806x-usb.c
+> @@ -17,6 +17,7 @@
+>  #define HSUSB_PHY_CTRL_REG		(0x10)
+>  
+>  /* PHY_CTRL_REG */
+> +#define HSUSB_CLAMP_MPM_DPSE_DMSE_EN_N	BIT(26)
+>  #define HSUSB_CTRL_DMSEHV_CLAMP		BIT(24)
+>  #define HSUSB_CTRL_USB2_SUSPEND		BIT(23)
+>  #define HSUSB_CTRL_UTMI_CLK_EN		BIT(21)
+> @@ -27,9 +28,13 @@
+>  #define HSUSB_CTRL_ID_HV_CLAMP		BIT(9)
+>  #define HSUSB_CTRL_OTGSESSVLD_CLAMP	BIT(8)
+>  #define HSUSB_CTRL_CLAMP_EN		BIT(7)
+> +#define HSUSB_CTRL_CLAMP_MPM_DPSE_DMSE	BIT(26)
 
---7oc3zz2p7n6vaxev
-Content-Type: text/plain; protected-headers=v1; charset=us-ascii
-Content-Disposition: inline
-Subject: Re: [PATCH v5 3/3] bus: mhi: ep: clients: Add loopback driver for
- data path testing
-MIME-Version: 1.0
+leftover?
 
-Hello,
-
-On Mon, Aug 17, 2026 at 03:44:36PM +0530, Sumit Kumar wrote:
-> diff --git a/drivers/bus/mhi/ep/clients/loopback.c b/drivers/bus/mhi/ep/clients/loopback.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..18a92d6a40e0f7de277d155cdb5495d14a60c19d
-> --- /dev/null
-> +++ b/drivers/bus/mhi/ep/clients/loopback.c
-> @@ -0,0 +1,130 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-> + */
+>  #define HSUSB_CTRL_RETENABLEN		BIT(1)
+>  #define HSUSB_CTRL_POR			BIT(0)
+>  
+> +/* PHY parameter override register (eye diagram tuning) */
+> +#define HSUSB_PARAMETER_OVERRIDE_X_REG	(0x14)
 > +
-> +#include <linux/mhi_ep.h>
-> +#include <linux/mod_devicetable.h>
+>  /* QSCRATCH_GENERAL_CFG */
+>  #define HSUSB_GCFG_XHCI_REV		BIT(2)
+>  
+> @@ -115,6 +120,8 @@
+>  #define LATCH_SLEEP				40
+>  #define LATCH_TIMEOUT				100
+>  
+> +struct phy_drvdata;
 
-Similar as with my feedback for patch #1, please don't use
-<linux/mod_devicetable.h>. Either rely on <linux/mhi_ep.h> ->
-<linux/mhi.h> -> <linux/device-id/mhi.h>, or explicitly include one of
-the these headers but not <linux/mod_devicetable.h>.
+Can you just move the declaration here?
 
-> +#include <linux/module.h>
-> +#include <linux/string.h>
 > +
-> [...]
-> +static const struct mhi_device_id mhi_ep_loopback_id_table[] = {
-> +	{ .chan = "LOOPBACK"},
-> +	{}
+>  struct usb_phy {
+>  	void __iomem		*base;
+>  	struct device		*dev;
+> @@ -123,11 +130,14 @@ struct usb_phy {
+>  	u32			rx_eq;
+>  	u32			tx_deamp_3_5db;
+>  	u32			mpll;
+> +	const struct phy_drvdata *drvdata;
+>  };
+>  
+>  struct phy_drvdata {
+>  	struct phy_ops	ops;
+>  	u32		clk_rate;
+> +	u32		hs_tune_val;
+> +	u32		fsel;
+>  };
+>  
+>  /**
+> @@ -273,7 +283,8 @@ static int qcom_ipq806x_usb_hs_phy_init(struct phy *phy)
+>  		HSUSB_CTRL_RETENABLEN  | HSUSB_CTRL_COMMONONN |
+>  		HSUSB_CTRL_OTGSESSVLD_CLAMP | HSUSB_CTRL_ID_HV_CLAMP |
+>  		HSUSB_CTRL_UTMI_OTG_VBUS_VALID | HSUSB_CTRL_UTMI_CLK_EN |
+> -		HSUSB_CTRL_CLAMP_EN | 0x70;
+> +		HSUSB_CTRL_CLAMP_EN | HSUSB_CLAMP_MPM_DPSE_DMSE_EN_N |
 
-Again, please add spaces before the closing }.
+This will *disable* (_N suffix) the clamp on ipq806x too - is that intended?
 
-> +};
-> +MODULE_DEVICE_TABLE(mhi, mhi_ep_loopback_id_table);
 
-Best regards
-Uwe
+> +		phy_dwc3->drvdata->fsel;
+>  
+>  	/* use core clock if external reference is not present */
+>  	if (!phy_dwc3->xo_clk)
+> @@ -282,9 +293,14 @@ static int qcom_ipq806x_usb_hs_phy_init(struct phy *phy)
+>  	writel(val, phy_dwc3->base + HSUSB_PHY_CTRL_REG);
+>  	usleep_range(2000, 2200);
+>  
+> -	/* Disable (bypass) VBUS and ID filters */
+> +	/* Set XHCI_REV bit (2) to 1 - XHCI version 1.0 */
+>  	writel(HSUSB_GCFG_XHCI_REV, phy_dwc3->base + QSCRATCH_GENERAL_CFG);
+>  
+> +	if (phy_dwc3->drvdata->hs_tune_val)
+> +		usb_phy_write_readback(phy_dwc3, HSUSB_PARAMETER_OVERRIDE_X_REG,
+> +				       0x03ffffff,
 
---7oc3zz2p7n6vaxev
-Content-Type: application/pgp-signature; name="signature.asc"
+GENMASK(25, 0)
 
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmqEHY0ACgkQj4D7WH0S
-/k7YBwgAmrxBnCENBhtnqeEuJ1yhX/F/+5dP+2pviuRThhUBDMwsNGw27KtBZEaU
-S5y/S3T7dEbOQyqg9rGireCNBBpuLilhdPhSU/srmyf6MbjL+KrYL1apHKMzEGF6
-mO18Q3h9zTatfoUDTQY8ahqDTX4CoOgBzcEfK8Dc9r/GfkT2CVQhC4EkgqVDJN+T
-vnlXq8KecLz5ynZM2OVGfHuMCPZi4OGzM8FEzqU1116/67AGYEXhlKbpQfybK0wZ
-tNVLfVNkoYRmu67Nlu4aC9vvhj27pNkQ8QvvIYViPhA+Qd3VZL8nBcE74WSWB9AR
-rsjBXwRj1qpzw7VK2WnW4MFO8mKvSg==
-=0Wif
------END PGP SIGNATURE-----
-
---7oc3zz2p7n6vaxev--
+Konrad
