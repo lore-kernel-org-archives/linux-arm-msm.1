@@ -1,149 +1,165 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lf1-f51.google.com (mail-lf1-f51.google.com [209.85.167.51])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5666F335064
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 23:07:53 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3CDB9384CD6
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 23:18:04 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.51
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787094474; cv=none; b=bMbkqjBiwTgnAPD502VFP2WhGVnE67Jw+EaFSad48DqhxIHpiI5DQVDratgdcwiy9LoPaHlIjYoadiyWkrVQ5e1fogDvBJx1GUEb0i3B0moEktuNZXFjBu9gH7rjq16ScJbo/seHlGNyaABfQGwx3GJH71+aqCk4n+0k/AaAXWg=
+	t=1787095086; cv=none; b=nv9Ds50wAzq+NL+G5PtGtsGY6/STX3Q0njmOnMAfSAY1+N3VgNT6YJe5uMMZdBR05hAQrbrR2bgeie7bK9dPf5mA5eXdOsk9L529WBBwM87RKY++T7cpWpc8t4Aa8eo/ijTKPLqiL7LZdmvzLVwzEEUzxeWcHGQHNozNvRc6+UI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787094474; c=relaxed/simple;
-	bh=sCcVrnoH3hv7vhxeNYX3jXxDbZO+Fqq8DDR0TUdFeKo=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=uQMudSCbUCRVMaCOQezlVo8YL2KwG659KAqVzKoWAO183CuEdh4q4ltEfec1CBFwwh5gp6zySc4mu1GCdGmsZ0jtnXRAUejcONwUrY1fcMPzp9Wq8c3dLNA0shJ+DdtzYQS+i4/xj5sOg+KSMMS1rhKGQkcNMp+VK2AVkWBhUlQ=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=nwGqZC9A; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=EvGNoi4w; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1787095086; c=relaxed/simple;
+	bh=a8IOTYHpzARDBkDXw7Oai/tzL+r3gsDh+8SANcfGXjg=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=ZfUrZJMsOnHgxPB31luhfuepPVI3LXdHvXPF7pWOoWGecrfWpibg2r3/dwPniiieSJbWcMSNHNNG0sNuVZaexuSn8brhqMb3CNgVfqjGCRVjL2Y8xLA8yboBkEFMQtOqbBzsZoJbm5aaRiIxzHz4G5FHdiGJWn09eIOcuHD7EIs=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=CGNmYkqK; arc=none smtp.client-ip=209.85.167.51
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="nwGqZC9A";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="EvGNoi4w"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67ILb7qf2105653
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 23:07:52 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=EnZ5GRyuc5JsCaRheFHmyJk8
-	ikA2pyS+nnM/VpnIbsc=; b=nwGqZC9AMzECgdZoq5NVCiTHycEoBKLUN//HySnf
-	sa0Add5FNG1BrTYFQSMT4AEZCjfND/JI9jF7DNEgBOCEYbtJuVuI2fSrqapb18zr
-	aT6YCg3vQfOa1WKSS04R4oCaBUi9InfXTHtlCdNkttR7QpXXQuf+YsD9DrMYK54B
-	Viqej3Xrw67f9ByYUBnzfMPdjNLeu+fbDKe60K2iTSYtIRv4tb1npYQIm9BB0Ml3
-	IwdXyH38Ij57jQkguNJ9x+Ahd6alWche94ZcP0InikLnnkCRiEAb7DYhPcsNWfY7
-	k5tD/uRvFp0SmscNgxH067FVHxis3CLPgbf8ziPd80Phug==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4yffg9n2-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 23:07:52 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-936e393061dso45174385a.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 16:07:52 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="CGNmYkqK"
+Received: by mail-lf1-f51.google.com with SMTP id 2adb3069b0e04-5aeb72b0af1so51550e87.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 16:18:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787094471; x=1787699271; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=EnZ5GRyuc5JsCaRheFHmyJk8ikA2pyS+nnM/VpnIbsc=;
-        b=EvGNoi4wTXamQVWRLGP2mYq5RQd81Atl027HtiqgQ4HHfZM4eLFTUs7frbbHeI+LO5
-         5GTr6e78w0Gq8lYXntAJ9MNcCVjudf4Dbwy7Or4eK8xWM2hja9G6hHJlAfM+rG93kTSY
-         +gX5qAdXZ9LLLIxBJ9de8WWOctd5N5r/A0Uw/X3SQFN8LdPsNXcrfZ2aTB5iVzLpqaBq
-         6PFMB+8bee5bakcQU1+5a2o1nULF5hLVgZ/AkVNTZJdmFRZv9XmyRn+Nbfw8KRlxkGXX
-         R24UOuLiwnwKuFKbZkJ4Wpnixss5wXctukAyGcOynBVMCFAnQ53voyQ2nnh2zhdmTJ8D
-         ZSYA==
+        d=linaro.org; s=google; t=1787095082; x=1787699882; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=azicBGUhuLKBlVAXIqSFD4EKWplTYg8gpsiCO/t2g/Q=;
+        b=CGNmYkqKQWoKGH41Id2BAn7W9SO5PFWE/QIFxaclbUx3fZJiZSciMddLrVApf7/nYo
+         EZZV7oqBqEUhXu2Y/lL5n3uqw8ByTxjAmT19Hs9+6+glt7zKHN2BbJxjywX+YcsrXLBr
+         csA+Xt5xDYlCM8I6U0FpLBmLaE6PC/xj+9ZuFGVT9YQNE5MQsYioFvS44VoVoQIadBox
+         ME0IslyHnd1Uv46o0LGmFerfwZSJ805gDaKuwfvITN4Gj37z8kLNs5Ba6hBDEuu3AtzG
+         lhHFNi/eaZZ7RzpPGlAz0UXgPsGgPz6wgL+eJR4ioLfFbsjoiv2frOAlq0czNsrgsNBd
+         /inA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787094471; x=1787699271;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
+        d=1e100.net; s=20251104; t=1787095082; x=1787699882;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=EnZ5GRyuc5JsCaRheFHmyJk8ikA2pyS+nnM/VpnIbsc=;
-        b=Wu/ichDb5vxf9W7XkrrXt0ShdzzYydkbsePiuc81nvcF956/jpcLpafi8Kd6e8EeIH
-         cg/nwXByxmMD4ZhkagXQ0mNVcujLZP8LQRnlBe3bPwr/+Uo9BiNM6y4GorzLtk1SVQqz
-         PvwsYHGmUBIidEKCfVvAvwUY8bII4LuRYb3QWq2cjo+QPJSV5M6opBZufCfPAfwcVwnm
-         NapdgHK2zjBmK3N/zBDfYepAYAtrKtTdyj94R4lhSi6W0t2ev5qUTzJd8ckGKvV5eERl
-         r0A0NTg5cruaZ5XVpGW8iYdr/J5DIWm1oRzzXrA9MFtN/giXDl3Pgn1/2m4BbxTDwkkL
-         miQA==
-X-Forwarded-Encrypted: i=1; AHgh+RpAjZ+E+eayI7rjvccAVMsSW3LhuTB68YN1w1OEq4Bklv79QOQ8UaOocLuTWwVA3casfBV+6GqbbX+ytkXQ@vger.kernel.org
-X-Gm-Message-State: AOJu0YxtT/sftv0jidPI2jHjDNbAMB2K3sXirooMBBCFR+5h1905pm1J
-	2jtRBcdWAdOuOyip6RpwYPgYzCs/MQX59ncZREme5Bi0BmOgISrghdR7cTau43K8q1sfDP0ORAq
-	lidCKujSG8gEIAaIvUo7bn/cU+OYpICv9f4eJJpGeNSMKsYkyXSsWqQmkOpC6mGUX/t0/
-X-Gm-Gg: AR+sD10d+3yNOSjR3UqrOHYHHh+3Y6616pqd0ueNACbtWDoMQCOSFanKKo3BmC2LNbG
-	1odkVTXReKxTvT4dE54TRB88nU+rn+mNLyoTN16AkXW2Zyn44un2NWJna8I8BErJ6J7k3ekfjvN
-	FsoZix5gnbS5n0sGz8fTHPaS5y2xt+NX9rMrzmV6hw6WVtA74RCpk8+Jp6fpzwmBemVYQ2x2Hqc
-	zf0Vf4ZHqGNBIxDJsGPpNXg7TvA6HCO2cEF8FACxEyHzbLVgo+ErR2WiA0INu/EkLHl3IpyC/7X
-	fwiYXN/tuc9qscONsC04nzyU7KYvedx5wQjwRudkEYCNuJPzuLI/i0riubdEc2fQ0iXp+UL7ReZ
-	tdTrptoDU8sDS14nmt8DjvstEF7JD/KISe5D1xd3lS2/FVZYfqbwc7GPYYNSGamaJwn6NtYX9em
-	epIFrCCXjadNoa
-X-Received: by 2002:a05:620a:178b:b0:92e:d7c7:7de9 with SMTP id af79cd13be357-9371e1e26edmr95062385a.8.1787094471331;
-        Tue, 18 Aug 2026 16:07:51 -0700 (PDT)
-X-Received: by 2002:a05:620a:178b:b0:92e:d7c7:7de9 with SMTP id af79cd13be357-9371e1e26edmr95058885a.8.1787094470881;
-        Tue, 18 Aug 2026 16:07:50 -0700 (PDT)
-Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b4788f58a6sm42251e87.72.2026.08.18.16.07.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 18 Aug 2026 16:07:49 -0700 (PDT)
-Date: Wed, 19 Aug 2026 02:07:48 +0300
-From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-To: Kristian Brox <isyourbrainfoss@proton.me>
-Cc: oe-linux-nfc@lists.linux.dev, david+nfc@ixit.cz,
-        krzysztof.kozlowski@linaro.org, luca.weiss@fairphone.com,
-        linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH 1/3] dt-bindings: net: nfc: add st,st21nfcd-i2c
-Message-ID: <np7x2fgerwo4timehrkgfb5esaia6aowxufbyqapfcn3ubteqh@7um7soe3k4zt>
-References: <20260818205940.1973944-1-isyourbrainfoss@proton.me>
- <20260818205940.1973944-2-isyourbrainfoss@proton.me>
+        bh=azicBGUhuLKBlVAXIqSFD4EKWplTYg8gpsiCO/t2g/Q=;
+        b=b4I/wzkkXEmeL5aheigrOYV5PjsxcQrgz1Lqo0BuIhudX18YjowES3URPIzqbyviuH
+         O/Bd7S0t+EMcKREk0Hc+eI+zuwE6ujXF3gOuedmyIEyQBL3hcTmcz8ua4FZUkhnNcrxw
+         feefrpOsAStq2l0NCqoVi1OUfhaBtOmYQSb11kgMHqAeZji9ih98GseRXwqG1d77EpkP
+         Lw1jT+gdsNQko8nXUbKnkDPlABV+HDd3u3MA+XjZCs8RVPUOaL8XhNBI4JS7tuDmkxwj
+         1lTv202J+t7zI9j3Q24PQIJI7n90F2DMmCNRqHpeMR6HLjojhox3GxXrY9yC7ae5Mz71
+         WC3A==
+X-Forwarded-Encrypted: i=1; AHgh+RqyzYLnlj7xbSBZeTMuFG7UnsnbL6gH1UoRmTXDFNwJEdRGDIz4ikeBzqPXnHvHcaTl/KkfisdoWx9dwrm4@vger.kernel.org
+X-Gm-Message-State: AOJu0YxyioH4ZH3VQ/htG6TPvddkYUxB/m8ovuxCglqULJmQNFfwMGkk
+	bsMLNxIrvqrWj7CDYqI5UM+p4NJlxldG/m5Ho6mV8f9PfvzX5J8hlYrMXNVpQEeBUYA=
+X-Gm-Gg: AR+sD100Obnp/sir5m6sZTQy/26ps+0BJ5C6u7v/ZEuZGrUG+dM42SpvclViAp3RPt2
+	4fF06GmfN8t4Fird+d/8wzj382nlGvOvRXlQEVsXFm/Cemxo6u+9Eb47+9dOc6IyFOBPTXk+J3L
+	WjYWLSmAYkJe+76Y1JLFD3iyQeDdjIaQmrI/lH6qtqCrYYUgMcbQtcuzFRP8W+7zhaseZJXkjyq
+	AilutHyWlfIW+swPdUSaSYt3MasXf2e88CG7A3oHXCxo6p2frIzYu6gfGZ8A/g02VkA+40ZDSBJ
+	tkgmWN/Z/ecfuU0xkjQYmmjbP/7YLgON/Kwae0y+59BM950RNDTBGPk63Gn5Ljd5EL+ztAG8DYA
+	duRABt1LvWDaDd4Goz07jw7wlQ+PVNRO2/AcHMDkLoPVvz4dH6QCO5QsrsTxrTCRNwPBI56pYK9
+	Rh1YTuhAvxH3/U2UoTyrlqFicxL/xNTH5GjZd3nOOS0c9rcrIkyelNz7A3tFhM8A+udKk4fjUvF
+	ygak7wGvenFOf5Cydt0ilyVSzEswphPBbGvpHkoPQ==
+X-Received: by 2002:a05:6512:31cf:b0:5ae:cfd3:4753 with SMTP id 2adb3069b0e04-5b478bdf314mr34845e87.3.1787095082233;
+        Tue, 18 Aug 2026 16:18:02 -0700 (PDT)
+Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b47885ac3esm59601e87.28.2026.08.18.16.18.00
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 18 Aug 2026 16:18:01 -0700 (PDT)
+Message-ID: <db94c578-2bfb-4297-9955-fba690ecfe39@linaro.org>
+Date: Wed, 19 Aug 2026 02:18:00 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260818205940.1973944-2-isyourbrainfoss@proton.me>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDE3MCBTYWx0ZWRfX8x5eUpudjn+a
- 6+cWzc4jLTZ9bF/4QOvevD0rkjlnIeWRE84Sb0ZNM+c/IzelrPdFpdmAlQQ7JW9PEDiaXmP5QEM
- /rFrF+NwAM4BKSmUREaWzYWpHVD4P/k=
-X-Authority-Analysis: v=2.4 cv=H5PrBeYi c=1 sm=1 tr=0 ts=6a84e5c8 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
- a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=AMhAXE7b00SPKp7YA6cA:9
- a=CjuIK1q_8ugA:10 a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-ORIG-GUID: joqZ8MUpQG4HckcTUXGDDSJLWcwFzzhX
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDE3MCBTYWx0ZWRfX7Yph6L8MltQ8
- ScDwBSSNyJpcltGfi7TgPgfkcyzSzpYfzRVgndpBxXtCciTPZXc/xambwCZ9SrLwY//xQTWB1Wj
- 3VJ6p+k6AdMsGVKRdUDIjoYFsGoLTZ1NBJz6+x9xybrcGx4l3J0XhqRpn0I8435v6rkAobLSGdH
- 7F4EVcciwurv7yOga1AcnESHVf8l6xBkuYdKhYqg68XK2+BeS/Y2D6t3CHT3FfYP18mzuCZyPro
- y/MRaYfLdtQPGkVGHz0OoDoj7ZLZro9Wqs33yzwflFl5QwyMdmqJ58OZE3LXlzR+s0XIe/QsuMs
- V1z5i5TUTPtcTLjMcWdDXfcXXUD/xT0yHfwwVDHZQ1BuBK9PpANd44T+uVR/20OvQVFjy7iQ3QK
- OU/1QLCxLAieXxyPvyWvQqgeFHhUigyiBNIzAyqS1Hmmd8bonXqVuofrF915DR618oM3sljY6Sl
- 617n7fuI7TDlY/pPT9Q==
-X-Proofpoint-GUID: joqZ8MUpQG4HckcTUXGDDSJLWcwFzzhX
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-18_04,2026-08-18_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 bulkscore=0 impostorscore=0 adultscore=0
- suspectscore=0 lowpriorityscore=0 phishscore=0 malwarescore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608180170
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] i2c: qcom-cci: fix device_node refcount leak in
+ cci_probe()/cci_remove()
+To: Liu Zhenlong <dragonliu2018@gmail.com>, linux-i2c@vger.kernel.org
+Cc: konrad.dybcio@oss.qualcomm.com, stable@vger.kernel.org,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss
+ <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>, Wolfram Sang <wsa@kernel.org>,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20260815140931.53297-1-dragonliu2018@gmail.com>
+ <20260818175750.4205-1-dragonliu2018@gmail.com>
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+In-Reply-To: <20260818175750.4205-1-dragonliu2018@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Aug 18, 2026 at 08:59:56PM +0000, Kristian Brox wrote:
-> The ST21NFCD (e.g. Fairphone 5) speaks raw NCI on I2C. Existing
-> st,st21nfcb-* and st,st21nfcc-i2c compatibles stay NDLC. Add a
-> separate compatible so those boards are not switched to the wrong
-> framing.
+Hi Liu.
+
+On 8/18/26 20:57, Liu Zhenlong wrote:
+> The of_node_put() matching of_node_get() runs after i2c_del_adapter(),
+> whose trailing memset() zeroes adap->dev and thus adap->dev.of_node,
+> making the put a no-op and leaking the node on every adapter removal
+> and error cleanup.
 > 
-> Also document the difference and add an I2C example without
-> ese-present / uicc-present.
+> Use a devm action: the pointer is captured at registration, out of
+> reach of that memset(), and devres runs the put once on probe failure
+> and detach, replacing the three manual of_node_put() calls.  The
+> setup loop uses the scoped iterator form so the child node is released
+> automatically if devm_add_action_or_reset() fails mid-loop.
 > 
-> Signed-off-by: Kristian Brox <isyourbrainfoss@proton.me>
+> Suggested-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> Fixes: 02a4a69667a2 ("i2c: qcom-cci: don't put a device tree node before i2c_add_adapter()")
+> Cc: stable@vger.kernel.org
+> Assisted-by: Claude:claude-opus-5
+> Signed-off-by: Liu Zhenlong <dragonliu2018@gmail.com>
 > ---
-> diff --git a/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml b/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml
-> index 1dcbddbc5..3523a8df0 100644
-> --- a/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml
-> +++ b/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml
-> @@ -11,10 +11,14 @@ maintainers:
+> Changes in v2:
+> - Rework the fix to use a devm action (cci_put_of_node) instead of
+>    caching the pointer before i2c_del_adapter(), per Konrad Dybcio.
+>    The pointer is captured at registration, out of reach of the
+>    memset() in i2c_del_adapter(); the three manual of_node_put() calls
+>    are removed.
+> - Use for_each_available_child_of_node_scoped() so the child
+>    reference is released if devm_add_action_or_reset() fails mid-loop.
+> 
+>   drivers/i2c/busses/i2c-qcom-cci.c | 20 +++++++++++---------
+>   1 file changed, 11 insertions(+), 9 deletions(-)
+> 
+> diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c-qcom-cci.c
+> index bdeda3979c48..d3528c7d15bd 100644
+> --- a/drivers/i2c/busses/i2c-qcom-cci.c
+> +++ b/drivers/i2c/busses/i2c-qcom-cci.c
+> @@ -497,10 +497,14 @@ static const struct dev_pm_ops qcom_cci_pm = {
+>   	SET_RUNTIME_PM_OPS(cci_suspend_runtime, cci_resume_runtime, NULL)
+>   };
+>   
+> +static void cci_put_of_node(void *data)
+> +{
+> +	of_node_put(data);
+> +}
+> +
+>   static int cci_probe(struct platform_device *pdev)
+>   {
+>   	struct device *dev = &pdev->dev;
+> -	struct device_node *child;
+>   	struct resource *r;
+>   	struct cci *cci;
+>   	int ret, i;
+> @@ -516,7 +520,7 @@ static int cci_probe(struct platform_device *pdev)
+>   	if (!cci->data)
+>   		return -ENOENT;
+>   
+> -	for_each_available_child_of_node(dev->of_node, child) {
+> +	for_each_available_child_of_node_scoped(dev->of_node, child) {
+>   		struct cci_master *master;
+>   		u32 idx;
+>   
+> @@ -537,6 +541,9 @@ static int cci_probe(struct platform_device *pdev)
+>   		master->adap.algo = &cci_algo;
+>   		master->adap.dev.parent = dev;
+>   		master->adap.dev.of_node = of_node_get(child);
+> +		ret = devm_add_action_or_reset(dev, cci_put_of_node, child);
 
-Please don't use PGP signatures when sending patches.
+I believe the new cci_put_of_node() and the original of_node_put() functions
+are type compatible, therefore a function type cast could be sufficient here:
+
+    (void (*)(void *))of_node_put
+
+In any case the change seems to correct, thank you for the fix!
+
+Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 
 -- 
-With best wishes
-Dmitry
+Best wishes,
+Vladimir
