@@ -1,71 +1,134 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-05.mail-europe.com (mail-05.mail-europe.com [85.9.206.169])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8A52823ED5B;
-	Tue, 18 Aug 2026 20:04:17 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF8193644C7
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 21:00:06 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=85.9.206.169
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787083458; cv=none; b=Xo9khooH/jVCuJL36/DUgRZeD8ptKa1D/P1CNXi4xUkzO/RkeFe+XFi2IbALTy4yUCMUur15Zh3MbjhnFk8KSM4341QviV/AbL3sR09aYwVaAzbAwbUlIHZg7toy3S7bXfac1RPVVMjhhStlbXrNb9YaPKS9M0R//TmMmDwVwXk=
+	t=1787086810; cv=none; b=MBHhRLM3hzF0ZVR8EzY5+0DN8N0BI2stgOq7wvX3xZuNVA5+fTjepLjFivmhe6fbHits2eU/j7mvP6ciF24eQXIxsoVO5wWyk28vWkicoQDpIPBHppFZPy9TDbAQMAK5k5CD2UToWaknsFxAQGvF/1CTJUsWvPMJvtjp5Km/o1M=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787083458; c=relaxed/simple;
-	bh=6OLBomFgelmWW5r4RjB9m6Uc5j5amy8Z6krLxGVm+5k=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=bvHqo5h2+qoJn05r5AmX6awlHF7xcRa9DpUrS8YMPp97Gf3Kv39NG/0exH17BlthNtm1hcmyfui24sGeqFh+YyfOBJaik5S6CsEUfMl+kzZtpYcYb7TnHvsjd2oA6djRYkIG8Dlyp+DBW1IEFRF2p8pZA60KzJs5moj2Oi+lD00=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=cWmTOARW; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787086810; c=relaxed/simple;
+	bh=fqB1mcpcPDlHbYquV+um9VZmei4KCKo+BkD8zH5eNeE=;
+	h=Date:To:From:Cc:Subject:Message-ID:MIME-Version:Content-Type; b=rOfDWfRRr6Rj7v4J5nwq/Hc45M3uwrIZyCej3j4+jpujZ9TYGWqvPqXsRBVE/21GfyQO+q5qIGGPGAPW9HiapoI4ujjLIERouRkfChx2M3oAlUhEmudY349P71OptGaJESBJvrc+vqDd5RelFzC7hrd4Ok783/Wr8Hn2a82RKGg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=AZ45HoTI; arc=none smtp.client-ip=85.9.206.169
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proton.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="cWmTOARW"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E5F6C1F000E9;
-	Tue, 18 Aug 2026 20:04:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787083457;
-	bh=vOaE2p4C56CWWbYQHaNxAJOhQcBgawoA3CrZB5lnwS0=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=cWmTOARW+eBAQ2o1Jd68lOcsLTmoZ4YFAnoWYLN18bccGnmoObzjSTzBkJOWjuXqb
-	 Qu3MYyPnTm3gfWmmIaFa+CjgryI1E/+O3+j0krSznvnY3FiP7VLqdxhSEmAMEJ1zQb
-	 YH2/qXTdomx2qHxq4mC4NpqTfHPsFvSxFbmTo3jQkBOgM/TxdxX/ougjGaOc99k1D6
-	 GKAjYtRvzySXSN2lnMHsvnVRx1EehewgyQ5sYutTgxvtqiYDaJ2UkEzS2dteZA6YPs
-	 dpKFtO4zYYk972kPykCwqB5O2E7COqt0tiWnn2Rmq7Vfyg5eRWoiKNaXidfSSsfZai
-	 wCqJFYLZy3gsA==
-Date: Tue, 18 Aug 2026 22:04:12 +0200
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Jingyi Wang <jingyi.wang@oss.qualcomm.com>
-Cc: Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Wesley Cheng <quic_wcheng@quicinc.com>, 
-	aiqun.yu@oss.qualcomm.com, tingwei.zhang@oss.qualcomm.com, trilok.soni@oss.qualcomm.com, 
-	yijie.yang@oss.qualcomm.com, linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-Subject: Re: [PATCH v2 2/2] dt-bindings: phy: qcom,sc8280xp-qmp-usb43dp-phy:
- Add Maili QMP Phy
-Message-ID: <20260818-solid-nocturnal-hamster-b46cec@quoll>
-References: <20260817-maili-usb-v2-0-97d7317f64b3@oss.qualcomm.com>
- <20260817-maili-usb-v2-2-97d7317f64b3@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="AZ45HoTI"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=protonmail; t=1787086796; x=1787345996;
+	bh=a/d0gdHC3JHl+v3conG40AKrY3tvoYd+mOn+0iwPFcQ=;
+	h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=AZ45HoTIm685IvVQtkdx9YHoLQ7sVrv51QNpjYpg9D1+T9B1YClMZMKsjmSXwqzYR
+	 5Ej0HygJvnB4+7xJxI36BSU0uCVpIEm4ZFIhbrEm1wjO5IokNOFaqd7Is4pGldIWQ6
+	 IqMZHg7R2+KhirfYeSMMlDI+2GwFrF5rWSN//2cm7eHxrYuHBIIb5C66XpXoEVQWhN
+	 jOn1b0WkCyfMHq1u1tikIxXtNhA74WJmm5yYC3TebxtqF3VlCoz6pD9eVfIFEDOBYY
+	 Ib062RAhsiEyNtsTrU2AltwvAtaDAovVBXabFSrnY9srNSCJcuDZns3b+sxe1jc1EX
+	 yvUP9kMW5wNKw==
+Date: Tue, 18 Aug 2026 20:59:52 +0000
+To: oe-linux-nfc@lists.linux.dev
+From: Kristian Brox <isyourbrainfoss@proton.me>
+Cc: david+nfc@ixit.cz, krzysztof.kozlowski@linaro.org, luca.weiss@fairphone.com, linux-arm-msm@vger.kernel.org, Kristian Brox <isyourbrainfoss@proton.me>
+Subject: [PATCH 0/3] nfc: st-nci: Fairphone 5 NFC bring-up (ST21NFCD)
+Message-ID: <20260818205940.1973944-1-isyourbrainfoss@proton.me>
+Feedback-ID: 203906395:user:proton
+X-Pm-Message-ID: 2a3e54da19a9ae269d925831446a90226a303f9d
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20260817-maili-usb-v2-2-97d7317f64b3@oss.qualcomm.com>
+Content-Type: multipart/signed; protocol="application/pgp-signature"; micalg=pgp-sha256; boundary="------0aa340d17dba3449f6fcb41707e84decdc743592263e35cfa4e68278c64a61f0"; charset=utf-8
 
-On Mon, Aug 17, 2026 at 11:16:06PM -0700, Jingyi Wang wrote:
-> From: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-> 
-> Document the QMP PHY for Maili which handles the USB3 path. Use fallback
-> to indicate the compatibility of the QMP PHY on Maili with that on Hawi.
-> 
-> Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-> Signed-off-by: Jingyi Wang <jingyi.wang@oss.qualcomm.com>
-> ---
->  .../devicetree/bindings/phy/qcom,sc8280xp-qmp-usb43dp-phy.yaml        | 4 ++++
->  1 file changed, 4 insertions(+)
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------0aa340d17dba3449f6fcb41707e84decdc743592263e35cfa4e68278c64a61f0
+Content-Type: multipart/mixed;
+ boundary=2d029f8b5c7f674dea4253693ea48a087b1c894401a91649da8fc8612d60
+From: Kristian Brox <isyourbrainfoss@proton.me>
+To: oe-linux-nfc@lists.linux.dev
+Cc: david+nfc@ixit.cz,
+	krzysztof.kozlowski@linaro.org,
+	luca.weiss@fairphone.com,
+	linux-arm-msm@vger.kernel.org,
+	Kristian Brox <isyourbrainfoss@proton.me>
+Subject: [PATCH 0/3] nfc: st-nci: Fairphone 5 NFC bring-up (ST21NFCD)
+Date: Tue, 18 Aug 2026 22:59:37 +0200
+Message-ID: <20260818205940.1973944-1-isyourbrainfoss@proton.me>
+X-Mailer: git-send-email 2.55.0
+MIME-Version: 1.0
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+--2d029f8b5c7f674dea4253693ea48a087b1c894401a91649da8fc8612d60
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Best regards,
-Krzysztof
+This adds NFC on the Fairphone 5 (qcm6490). The board uses an ST21NFCD
+on I2C. That part speaks raw NCI; the current st-nci driver always
+wraps NDLC, so using st,st21nfcb-i2c leaves the adapter unusable.
+
+The series adds a st,st21nfcd-i2c compatible for the raw-NCI path and
+the Fairphone 5 DT node. Boards that already use st21nfcb / st21nfcc
+keep the NDLC path.
+
+Tested on a Fairphone 5 running postmarketOS, with these changes as
+modules on a 7.1.2 sc7280 kernel:
+
+- nfctool: Powered: Yes
+- initiator poll / neard: NTAG 215, NDEF URI read OK
+
+ese-present and uicc-present are left unset.
+
+Kristian Brox (3):
+  dt-bindings: net: nfc: add st,st21nfcd-i2c
+  nfc: st-nci: add raw NCI path for ST21NFCD
+  arm64: dts: qcom: qcm6490-fairphone-fp5: add ST21NFCD NFC
+
+Signed-off-by: Kristian Brox <isyourbrainfoss@proton.me>
+---
+
+--2d029f8b5c7f674dea4253693ea48a087b1c894401a91649da8fc8612d60
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="publickey -
+ isyourbrainfoss@proton.me - 0x99222460.asc"; name="publickey -
+ isyourbrainfoss@proton.me - 0x99222460.asc"
+Content-Type: application/pgp-keys; filename="publickey -
+ isyourbrainfoss@proton.me - 0x99222460.asc"; name="publickey -
+ isyourbrainfoss@proton.me - 0x99222460.asc"
+
+LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tCkNvbW1lbnQ6IGh0dHBzOi8vZ29w
+ZW5wZ3Aub3JnClZlcnNpb246IEdvcGVuUEdQIDIuMTAuMAoKeGpNRWFqR1U0UllKS3dZQkJBSGFS
+dzhCQVFkQVJkaFRsODdNUnJZNlJsOC9FeUhRdmJjVWtqWXBEcmptcmZBRwoxNzV5djR2Tk5XbHpl
+VzkxY21KeVlXbHVabTl6YzBCd2NtOTBiMjR1YldVZ1BHbHplVzkxY21KeVlXbHVabTl6CmMwQndj
+bTkwYjI0dWJXVSt3c0FSQkJNV0NnQ0RCWUpxTVpUaEF3c0pCd2tRcVFlNkNIM2p3cWhGRkFBQUFB
+QUEKSEFBZ2MyRnNkRUJ1YjNSaGRHbHZibk11YjNCbGJuQm5jR3B6TG05eVo2bTkwZmNOZ2Q0cVp6
+NWFnV05OTmorbwpyTjkrOHc2TUVRZ0J4MElqR0NPcUF4VUtDQVFXQUFJQkFoa0JBcHNEQWg0QkZp
+RUVtU0lrWU5Najl2RWxSS0JyCnFRZTZDSDNqd3FnQUFCcHVBUUNiUmgxb3VRMUVhQmlHWGtYeVhS
+bjZkWTNaVjUzdXkrWHRRWGhtOWtpSFJBRDkKRkxROWtzdGJyVmx3WGlrUkl5OVpINUQ0R1VXS292
+ZXJIdlpWbzd5RFpnM09PQVJxTVpUaEVnb3JCZ0VFQVpkVgpBUVVCQVFkQUdHZDhVMnJyaldxMVBa
+YmhsQUFPUE1KanJEeTVkSjdMbnQ3ZHE1Q21VUWdEQVFnSHdyNEVHQllLCkFIQUZnbW94bE9FSkVL
+a0h1Z2g5NDhLb1JSUUFBQUFBQUJ3QUlITmhiSFJBYm05MFlYUnBiMjV6TG05d1pXNXcKWjNCcWN5
+NXZjbWNVbzFQNFhTZExyNEpzRlRBaThTcUVDSERDa2thdTBtTmthSk5aaWFjU2p3S2JEQlloQkpr
+aQpKR0RUSS9ieEpVU2dhNmtIdWdoOTQ4S29BQUQrZndEK0lLcStqbUFKZytYbmVXT09YNHA4eTFX
+K0dYN3FTQzFCCnE4aUFYUWJpa2VNQkFLdHc0aStPZ2VHTWMyOUxHSnNIellXbVJhRU9nS0JvOEcr
+UklhK0ZUa29GCj1rbmFrCi0tLS0tRU5EIFBHUCBQVUJMSUMgS0VZIEJMT0NLLS0tLS0=
+--2d029f8b5c7f674dea4253693ea48a087b1c894401a91649da8fc8612d60--
+
+--------0aa340d17dba3449f6fcb41707e84decdc743592263e35cfa4e68278c64a61f0
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: ProtonMail
+
+wqsEARYIAF0FgmqEx8gJEKkHugh948KoNRQAAAAAABwAEHNhbHRAbm90YXRp
+b25zLm9wZW5wZ3Bqcy5vcmc3RZpaRT8x6nMLnBOqwvvLFiEEmSIkYNMj9vEl
+RKBrqQe6CH3jwqgAAPIrAQDb6+ibZm2eDGdYHxruoQba3uj2EvwTRXAlGefX
+WTeaRAEAvCIP+ytB0KbicIc+/evGs5+Z8KiBegYHXwp4yXjNqgU=
+=xwSe
+-----END PGP SIGNATURE-----
+
+
+--------0aa340d17dba3449f6fcb41707e84decdc743592263e35cfa4e68278c64a61f0--
 
