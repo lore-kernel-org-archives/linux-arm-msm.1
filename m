@@ -1,87 +1,88 @@
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C5B1A35C197
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 07:30:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C733B38B124
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 07:30:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787038231; cv=none; b=OQSwjekSQJmlsibpPqFJE+qkFUiyYpDLu20waTz+7ArxOYm3fIyzWypw3VKf+5Ey32Yny4w4BNf9NJXUypZFC3rP25rjrX5nd11jvkSEQoRe5pV+JYIreP92PdlHzcSvOc4JiA/cP57NVlexDsnuFe7Hu+3Q+My3e33USeFjpb0=
+	t=1787038235; cv=none; b=EhJzRsT3/VnnrD3iTNuJnZdyGVoGFzaL5WPC4LRqNpzpw+WFOjUFKt4vNhl5ftskow/OZ3Tx7aCD66c0t5DnoNp5wjyFNtyz4q9oAfDMz8/PtEfuRMn+HtNhoH96s/oQ9ZexL0IuvCbcKTNY6bP+ddlOYt/CZUq+9EddpERPiFk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787038231; c=relaxed/simple;
-	bh=E04EyvSx6Gt8qf83NiF6Y2/tkcCyg0zyaZ0LjYr7o0s=;
+	s=arc-20240116; t=1787038235; c=relaxed/simple;
+	bh=CqYR+LdPJ7uDeC5NDydUyDftPqYWNTyqsZ769uFb3Pk=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=lf+tgp11Yh2OpZliZAaUWvhQOiKeChzbV4nENl1sWjz/eueYBpI96E+ES1dIAjf/nm/DJQGg6YulB2fqsuglWUbexRJVLyRMkDNygikE8AEmgTXwuzsj2TTmX/b0gMvXetpxxvxqF6l3VJpPFZTL5dUm+QL2Ev771UZfs7nSb2I=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=iBK1IlHV; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=TNvFnYxX; arc=none smtp.client-ip=205.220.168.131
+	 In-Reply-To:Content-Type; b=ff7CgofdHjm8i2DbVOzmn2JhfzqPhL4N1WCkpjGUsDdv9m0mA97IK4d5UW7nigOi1bXyWH/p9h4DVNmB5HfJc9rUrLe00+we/S8Wsdq6ZKdPnrttdtlSBi5yNm129FieivWVj8OsSXdg8XeSsgmdmeXBjPLhk8+0/JVKndZArfY=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Bt7D/mh3; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=eqv3sewI; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="iBK1IlHV";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="TNvFnYxX"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67I7E5LH112459
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 07:30:29 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Bt7D/mh3";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="eqv3sewI"
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67I7E54G589750
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 07:30:33 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	4CAQwC+qFupWfe9HEizdVYgSXCg1lT2JkrfLxqsqX08=; b=iBK1IlHVuFJHKvYS
-	E3KNYFgjeI5JBl7t9Qbbus7z13NIgwGCgMwPsDetH8vuh29RtjfTOEQq1OcC+uz4
-	v86mgJk1hSQzhK4KklTMZkpBbTMiO4hJL3N3d0BTstGb6iVTMnIncL5N/fnajvj5
-	QCXRXVhdI9bzC++f2RpvjPo7mouT2RCULvwQ7gcXAaOVAzL0U4MofV+kQ1VZYTJ7
-	B5Z3DQx2bPrrDTrtOM0RaJdFtZUluIsAjPAo+l9Oi7zdpVyoqwI9h0vm6s85EpBn
-	OYyVm3Ys4eikPBO2gNWTiQxsgt3JAaBvliQ3m3zV0S+G033nD0qU4e7l145vLhqM
-	1ysOZw==
+	lvZj1WvV11EikVxvMvuBnAJt5d4ZRcWuj+qixzy+WfM=; b=Bt7D/mh3VgBgzgY1
+	m9e1hYTTkC94A/KDrRm1IzL427QpZKQfqLM1EGIBg0ylTCS2bnH1BBjQjtdntbpZ
+	xVICJLCJDWXwSrdvtVvjDKM/W8czxLMhh3ArngZDJUuqOAXEfBC3Utoe4j7e5wnH
+	qtdD8OiMMxAMLlv8DE0hbMAcMsGXk3RyePU6Mi2femRark6ly1l1WKPnhowmNrgG
+	yWsiqtCdioxOkab1qQE5zRcQke9MFwa3mWuVVVJQAuOBY8Iub+KeBDETSKZB91Cd
+	DaBTeRV20B8WNiYtvKIOKdQF6qMqzfJQhNOQVm8gau/lXLs2b9txyeeuSrv7nMYZ
+	YTQyOg==
 Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4ea2h9u5-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4615k7ts-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 07:30:29 +0000 (GMT)
-Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38e11baa66eso5086987a91.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 00:30:28 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 07:30:32 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38f97b3f853so6781250a91.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 00:30:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787038228; x=1787643028; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1787038232; x=1787643032; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=4CAQwC+qFupWfe9HEizdVYgSXCg1lT2JkrfLxqsqX08=;
-        b=TNvFnYxXk1h9v0jPVRrk38+VQq84nRPPkAIunQwPAYSxFZ0bODThO79fFaZL6ElYRn
-         qh0kYsHRgb+TEhryGdt4ZHC0lnjqRQ0SjWJJrdnBnVZuTPkZwoqZbaS95ApAKPnGQHRR
-         uLUCXUsQNFMhxI2I25mpLqq+HrBddw4YQelm5Tj64fwLDmiuPxPmNzhqLpjvlAjdT2kh
-         Ex3PdcaSBrv816/fvUVxXunf954qOXNRxfZu1FDp9u4B8CsUPQFy5drNFkZm4IJbAa6e
-         azWSMGhjVxfGg5o49pRtd9OWo3RD+vga42Mxh2xriKjWb0ZbYmLde6lKE1beH81VCUlp
-         1KCA==
+        bh=lvZj1WvV11EikVxvMvuBnAJt5d4ZRcWuj+qixzy+WfM=;
+        b=eqv3sewI4zam9xH3dCDFHKANVdCjfoTI41UquBNQclHkFKuxwwy6O8J4/zvg4qHLX4
+         T1B7WKlDJcYnW6DSHy2F6Nwo/c2a7xDvmyIDmqjBMxuxAg1u/1MgkTGa+esOOLZSHDBg
+         GphXjiMxseF71XhKQAil94cByhah+1kUBzG0stmkr8TQX0HnLbx9ycSVxPAtP06Qgbwh
+         FoE+a9HydjpE3Udy07x+l67Vg/6DdKA+kX811yM2aU098/eqmsGoAqREAWch/AvWyFZO
+         MT0eq0AsN+6GKE3jb0Qvk8NF8IDBLEycJDzNh84lQ38/lXumgX5KtrPEWw4LtZJPZcv+
+         KHXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787038228; x=1787643028;
+        d=1e100.net; s=20251104; t=1787038232; x=1787643032;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4CAQwC+qFupWfe9HEizdVYgSXCg1lT2JkrfLxqsqX08=;
-        b=UflxEE52qq41iXmOlEU1N1VOkyYOyGj1jp5P5p6eAr7tRcLQcKYxts863IkYqEWiCw
-         pxqIBZ2rOyfGlBdrp/Fg6ipa7qgMfc1DzoMjus3MEDfJz5D9m45Klc6wsDEBEXTy0Wm0
-         liClQJFHpJdSe4o2tuVE0J8EZTlpGWzOFmgQGdBywBUhqsjZbKMNszCIEdFK1iOFxk4H
-         u9+aD+Y35JYnL26bJ+gBupU8NOtYbBn3/X77ahhFEm87qK0sUf8Dt6ZNuzDLTZ/0hImF
-         Y1XQjt/sbqH4mxXZ/TTksV9wdrYpj1pMipR2uji9EY+EiVeREskV5evKEEO/KtrssFPe
-         xfJA==
-X-Forwarded-Encrypted: i=1; AHgh+RoowN1OPaworaA9Yn0Ne5ioakDO+b1FQXfZYPxHMc+lin7VCetT+WG9aOzahdjLBRfDd1bEKnxIy4yIZxPQ@vger.kernel.org
-X-Gm-Message-State: AOJu0Yzs/AY9BnsN4Z0qFUcVL33QxPyAG9O3Cw/I9vyOYot+oUxsiF4N
-	Akk7o4LdbZc/XL623oablfT+hlKezVAY5YCCeGusUIGdRPUOcOq44kL4FfXKOurQBo1oVqV+0qX
-	w+Nff/ZmGru8RLiEgIN3wTZKMTK/u04VLGwa7GPEU++PdY09OYjduF4z+KTEWyyUIOeI=
-X-Gm-Gg: AR+sD11soSHbq43E7spjmfTZ53RM11N/xpO+piLbgT5xyeCwML7aJZPMpR0SPqTKjIe
-	usyHM5H1S5q98bt1Zqvzs7CYrfihmnBCMkiHLUvCieD33nK+LwQU8dlgsLL4dEboEiYwz1GcDMv
-	mdDT4fDhXZjGphJPlXXojl6ZgNexAU/OIy9DZLedHA2ufgEp8+xTxQM9X4c7LC5xrpK3gGguFYU
-	SHRpL7xdaUMq7FTZsFMK4pKOGRs/tuMtwsXt6fogxE+yNicaBdiG8F3qJRqeWERUjMzsFF/P2j3
-	sM+wR+c/HwUPkdxpN2x91CmAa0deJ+LHqgHlsMGp2ZhsqaiEAuVfx2+hSheTIgjE7FXjjLqZt4I
-	U4K2kjq2OjTSdNTMuZ47iH0WU
-X-Received: by 2002:a17:90b:3d48:b0:381:528a:808c with SMTP id 98e67ed59e1d1-3933b8939dfmr33889831a91.12.1787038228231;
-        Tue, 18 Aug 2026 00:30:28 -0700 (PDT)
-X-Received: by 2002:a17:90b:3d48:b0:381:528a:808c with SMTP id 98e67ed59e1d1-3933b8939dfmr33889664a91.12.1787038227557;
-        Tue, 18 Aug 2026 00:30:27 -0700 (PDT)
-Received: from [10.217.216.18] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3954d38bbdasm5117597a91.11.2026.08.18.00.30.22
+        bh=lvZj1WvV11EikVxvMvuBnAJt5d4ZRcWuj+qixzy+WfM=;
+        b=sN9EaWzNyjjlBMVDTpT3lUUMsujWOJLQSNPDg3JojzT1xBivFvWlz+XxbgxEsaqDks
+         d2zhgEeUpWX/rq7i4SFQmY9ZLkIDkMxbWuvhlYK2MULod3X8WSHoQFs44UJc6i1z17u/
+         MYrku3+CJAmpSsH/S8T5JFn5JUpIgC5pvztE+xU2/y/61UM2NpKUqAmJyjAmiBXSnxO4
+         jqsG5EeXT7KsHPrUvAxtXDax9quynhnNQjQbHn3IJmC1rhNofNHqNFT9OXVwRqMr5gye
+         Zy/guvlI3BwIlLMvkLWyrLLMJoXzA+lEsCHvy/1uGyGw44tOhvd+icDvXcm+poIEicnT
+         IRLQ==
+X-Forwarded-Encrypted: i=1; AHgh+Ro+em3rUlvO0SmN9yZJY9WaUJCK6VDlf6jaV2cUZPcvhJTB7mWfGFi8GhGXclvg1qDaSlH6EwjYWoJJR7JR@vger.kernel.org
+X-Gm-Message-State: AOJu0Yx0BxOvIZvjQab3ig4pQyn4TReYNwaiDrrY+Q8Xf/C8mz53uNZm
+	Ce3tmF7pM6GQ7eEZ4M/Fx2THUNz+HMCHZDVJ8mevtTp63F4YOEPja9OSfisoZBnGVvdAPWTNGb5
+	LTXxcQ86p4BKL3uiNU2po1dxiGXaK9rIAwFb3Oq1TL5QO7nm+y1fIqcgNOaJrVTzWN29UwQ4Zj4
+	8WlhE=
+X-Gm-Gg: AR+sD12beyvIYeU8emzwL7tfpFzmfvTTNHwtdHjmShgbJMuV6Ubott9HBG/i/YHFDVn
+	yLlc5Yehm6LFjKO1b0/GY/k8aCKXEiMM2FzkOe1AG4Sy7aE5fVX8iVNZlGsHdXoZL5p69yOA3m1
+	0bGTDXJ2Low5e/merVaAwJe2ss2jXyIegcmJNzYUea1UH9YtiNAhvuC5Jnzl2itu0objfqHN1I3
+	OH+58SSsLWApIR+oJsMEuLcCetIrGb1x+eXZl2f7Ml/4pZOlFn6yqmUS/3iPP7R7lIlDhEayzY9
+	/VaSBADE+AdR+5KRtVN9L9CQY9pTLmyNJscccJuYDv1ljDsXhUTkLrvntNR6ApgknoJ7hKOiCgF
+	SdaA9pQKvq2E/xjGQBAtxihITp6/Mp4rQwfkcc1XwoHd9Um+P4kQ0mw==
+X-Received: by 2002:a17:90a:6c96:b0:395:4de4:92c8 with SMTP id 98e67ed59e1d1-3954de49a7bmr7377650a91.15.1787038232223;
+        Tue, 18 Aug 2026 00:30:32 -0700 (PDT)
+X-Received: by 2002:a17:90a:6c96:b0:395:4de4:92c8 with SMTP id 98e67ed59e1d1-3954de49a7bmr7377570a91.15.1787038231695;
+        Tue, 18 Aug 2026 00:30:31 -0700 (PDT)
+Received: from [10.110.9.3] (i-global254.qualcomm.com. [199.106.103.254])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3954d3d2adcsm5010349a91.17.2026.08.18.00.30.27
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 18 Aug 2026 00:30:27 -0700 (PDT)
-Message-ID: <877c20e3-625c-4ba8-beed-305393b18cfe@oss.qualcomm.com>
-Date: Tue, 18 Aug 2026 13:00:21 +0530
+        Tue, 18 Aug 2026 00:30:31 -0700 (PDT)
+Message-ID: <60b775b0-5482-4b95-b37e-ba5764efc0cf@oss.qualcomm.com>
+Date: Tue, 18 Aug 2026 15:30:26 +0800
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,100 +90,133 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 2/2] mmc: sdhci-msm: Use pm ops instead of macro to
- restore crypto keys
-To: Eric Biggers <ebiggers@kernel.org>,
-        Neeraj Soni <neeraj.soni@oss.qualcomm.com>
-Cc: ulf.hansson@linaro.org, adrian.hunter@intel.com, quic_dmukhopa@quicinc.com,
-        quic_rampraka@quicinc.com, quic_nitirawa@quicinc.com,
-        quic_sachgupt@quicinc.com, quic_bhaskarv@quicinc.com,
-        quic_gaurkash@quicinc.com, quic_sartgarg@quicinc.com,
-        linux-mmc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org
-References: <20260811151759.1258525-1-neeraj.soni@oss.qualcomm.com>
- <20260811151759.1258525-3-neeraj.soni@oss.qualcomm.com>
- <20260811190851.GC2895176@google.com>
+Subject: Re: [PATCH v2 2/3] soc: qcom: ice: Enable PM runtime for ICE driver
+To: Krzysztof Kozlowski <krzk@kernel.org>, Rob Herring <robh@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: Herbert Xu <herbert@gondor.apana.org.au>,
+        "David S . Miller" <davem@davemloft.net>, devicetree@vger.kernel.org,
+        linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Neeraj Soni <neeraj.soni@oss.qualcomm.com>,
+        Deepti Jaggi <deepti.jaggi@oss.qualcomm.com>,
+        bjorn.andersson@oss.qualcomm.com
+References: <20260512033750.3393050-1-linlin.zhang@oss.qualcomm.com>
+ <20260512033750.3393050-3-linlin.zhang@oss.qualcomm.com>
+ <b07a3634-a7a6-4f28-994b-fc900be26879@kernel.org>
+ <01578e6a-d10a-46df-bb32-fd45ecb365d7@oss.qualcomm.com>
+ <f0b90edc-6584-4b30-a2d1-e72139983fdb@kernel.org>
 Content-Language: en-US
-From: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
-In-Reply-To: <20260811190851.GC2895176@google.com>
+From: Linlin Zhang <linlin.zhang@oss.qualcomm.com>
+In-Reply-To: <f0b90edc-6584-4b30-a2d1-e72139983fdb@kernel.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDA1NCBTYWx0ZWRfX+z4n51mdjyvF
- Be6p58BhQRYQtwFSLAlm8u+/pVQWIPncNon/ESrVsxRKQ8avRoVvkPHqK+k0NtS2Efz37d5r+QB
- p2yBi2AfJyHqzX8MunzsZzGJq0n4f9iohakqtKLXCfoQuC4cAIDGQ2YiVk7Xd1sXfWvOb6vGqyW
- YhpeN44Lk/rayW45Yho1Mfu5G038DFjZgTRmrQjkHlFhuZ07wtIItzn2QW/3PEKs8vrktPOSf8I
- T5Z2yN2c3qoHuetOYZ+OPkEzVUswgiCtCAFJFyc1F106SdPp1VoU6+SCW8lnP2mKuEes2UDI50a
- +7zeuhI4cZF0m4J8ORBjHFjXeaRR7BgQQzUEoq4Mr+v2Cou7Ere6ly9MrW6wAbgnRMBfj7QKzRQ
- xHZ048aZ/B398JqXDgf5Pep4nJEdhjxQV8Wt09t/V03KoK4r7EikmrDDjqo1WXTjw2cWxy6DzMa
- nUb55zngrj7Yjznsdpw==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDA1NCBTYWx0ZWRfX+1LeR4DhiuNb
- BHpv+OE4VySnJonH5lyvqp2gc4TSz2ErdvqxBBtOBIc40Hsq0FHtI2xUgC1enV6EG8tAWQwcQTp
- GvdzC5W/e8+F7pamHu7qDPsaupm/w/8=
-X-Authority-Analysis: v=2.4 cv=XtfK/1F9 c=1 sm=1 tr=0 ts=6a840a15 cx=c_pps
- a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-GUID: WFpDR16mtDw8K2-thK3BstyXmsCaLjVr
+X-Proofpoint-ORIG-GUID: WFpDR16mtDw8K2-thK3BstyXmsCaLjVr
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDA1NCBTYWx0ZWRfX9s3GX2Av2dBe
+ WwNKyXMrJQz3b9nPfFYynzKbRbMjlSqTAz3rC6gExmZVtUgYKuLu4h5uNFPn7pkDgcne7V2PrRG
+ CChMJkYSlYNHKuoHmDwnkN0dDXW8ZhE99JDYvxfrk9rgVHF9x8Ih7vqoD+gbD5XOZcbJWq/gob7
+ LNjUY4Qgjzl6wGbOftzjWxOp8t8NA87PE7In2ISM8L+x/SnSeNazd7qIg73IvOw79r/fDTT+Eb5
+ tRFXRXvKsvYjYvCcVTn2Usej54MmeNBnpF0VEwHUBiIlwGcPb58VqUjBxFkR7XAM5VAeGoQBNOk
+ ia4vCqs4LHPuMzaeBe5AF3MHeqTGHPDfptZGG8oDZ0fyuSqEoVxmr3tGs0SIsuU34X5qvC3Pc9t
+ EMwfweUXZVAljmZ+wbLJllLqUWAcWAg7dnuKCOCGd7+lGyz5VV5cHuXlP0+ateS8xG2xT+d9osQ
+ FJzB9Lt32t7/UAKgTEQ==
+X-Authority-Analysis: v=2.4 cv=Ruf16imK c=1 sm=1 tr=0 ts=6a840a19 cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=COk6AnOGAAAA:8 a=j5mz3ktRbTo_uisptNEA:9 a=QEXdDO2ut3YA:10
- a=uKXjsCUrEbL0IQVhDsJ9:22 a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-ORIG-GUID: rKqjtLqDxgDIY1IMFN1E_6pgpaREXxes
-X-Proofpoint-GUID: rKqjtLqDxgDIY1IMFN1E_6pgpaREXxes
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=95qGNFLDXz8gbe9eW3MA:9 a=QEXdDO2ut3YA:10 a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDA1NCBTYWx0ZWRfX2RIKi4WqxJCU
+ Ig+F9neoYSc66LYRG8w7aMjOx64eNU9ENRFs0dpiN6CJ2VFy/Ep1ndVAmlIHDLMayfz4Ay/iMeM
+ wWcfV5kJCNse769rUeqtoGa7PSlW6Js=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-17_04,2026-08-12_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 bulkscore=0 impostorscore=0 spamscore=0 lowpriorityscore=0
- phishscore=0 clxscore=1015 suspectscore=0 malwarescore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608180054
+ clxscore=1011 spamscore=0 bulkscore=0 impostorscore=0 malwarescore=0
+ priorityscore=1501 lowpriorityscore=0 adultscore=0 phishscore=0
+ suspectscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608180054
 
 
 
-On 8/12/2026 12:38 AM, Eric Biggers wrote:
-> On Tue, Aug 11, 2026 at 08:47:59PM +0530, Neeraj Soni wrote:
->> From: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
+On 5/15/2026 10:48 PM, Krzysztof Kozlowski wrote:
+> On 15/05/2026 16:22, Linlin Zhang wrote:
 >>
->> Inline Crypto Engine (ICE) keys are lost after hibernation entry and this
->> needs to be restored when hibernation exits. ICE keys are re-programmed
->> during sdhci_msm_ice_init() but it may not cover cases where the
->> hibernation image is already restored.
+>> Hi Krzysztof,
 >>
->> Unwrap the pm ops and use directly in driver to add the call to restore
->> Inline Crypto Engine (ICE) keys. This ensures that ICE is brought into
->> same state as before hibernation.
+>> Thanks for the review.
 >>
->> Also set MMC_CAP2_CRYPTO_NO_REPROG to indicate that re-programming of ICE
->> keys is not needed during MMC runtime suspend/resume.
+>> For the SCMI-based platforms (e.g. sa8255p), the ICE resources such as
+>> clocks are not controlled directly by the ICE driver. Instead, they are
+>> managed by remote firmware and exposed to Linux via power domains. As a
+>> result, the ICE driver cannot use clk_prepare_enable() directly to
+>> control the hardware clock.
 >>
->> Signed-off-by: Ram Prakash Gupta <ram.gupta@oss.qualcomm.com>
->> Signed-off-by: Seshu Madhavi Puppala <quic_spuppala@quicinc.com>
->> Co-developed-by: Ram Prakash Gupta <quic_rampraka@quicinc.com>
->> Signed-off-by: Ram Prakash Gupta <quic_rampraka@quicinc.com>
->> Co-developed-by: Sarthak Garg <quic_sartgarg@quicinc.com>
->> Signed-off-by: Sarthak Garg <quic_sartgarg@quicinc.com>
->> Signed-off-by: Debraj Mukhopadhyay <quic_dmukhopa@quicinc.com>
->> Signed-off-by: Neeraj Soni <neeraj.soni@oss.qualcomm.com>
->> ---
->>  drivers/mmc/host/sdhci-msm.c | 32 +++++++++++++++++++++++++++++++-
->>  1 file changed, 31 insertions(+), 1 deletion(-)
+>> The intention of moving the clock handling into runtime PM callbacks is
+>> to align the ICE driver with the power domain framework used on these
+>> platforms. When the ICE device is attached to a power domain, invoking
+>> pm_runtime_resume_and_get() will trigger the provider (remote firmware
+>> via SCMI) to power up the device, which in turn enables the underlying
+>> clock and other resources.
+>>
+>> This design follows the guidance where the runtime PM framework is
+>> used as the common mechanism to abstract both:
+>>   - direct clock control on non-SCMI platforms, and
+>>   - firmware-controlled resources via power domains on SCMI platforms.
+>>
+>> In both cases, the runtime PM callbacks are responsible for performing
+>> the actual resource enable/disable:
+>>   - for legacy platforms: clk_prepare_enable()/disable_unprepare()
+>>   - for SCMI platforms: power domain on/off handled by firmware
+>>
+>> So while it may look like an additional layer on legacy platforms, this
+>> approach provides a unified mechanism without requiring separate driver
+>> entry points or special handling in the upper layers (e.g. UFS driver).
+>>
+>> That said, I understand your concern that introducing runtime PM solely
+>> for clock gating can be seen as unnecessary overhead on existing
+>> platforms. I will revisit the implementation to ensure that:
+>>   - the runtime PM integration does not introduce regressions for legacy
+>>     platforms, and
+>>   - the design clearly justifies the common abstraction for both SCMI
+>>     and non-SCMI cases.
+>>
+>> In addition, I rewrite the commit message as the following to make the
+>> intention more clear.
+>>
+>>   On some platforms the ICE device is placed in a firmware-managed power
+>>   domain. In those cases the ICE core resources (including the clock) are
+>>   not directly controllable by Linux and are instead toggled by the power
+>>   domain provider (e.g. remote firmware via SCMI).
+>>
+>>   Wire the ICE device into runtime PM so that a single pm_runtime
+>>   transition is used to bring the ICE device up/down. When the device is
+>>   attached to a PM domain, pm_runtime_resume_and_get()/pm_runtime_put_sync()
+>>   will invoke the PM domain callbacks and let the provider manage the
+>>   resources. On platforms without a PM domain the runtime PM callbacks
+>>   continue to perform the existing clock enable/disable locally.
+>>
+>>   No functional change is intended for non-firmware-managed platforms; the
+>>   change provides a common control point that allows ICE to operate when
+>>   resources are owned by a PM domain provider.
+>>
 > 
-> So with this patch, resume from hibernation will be the *only* time that
-> ICE keys are reprogrammed.  Are you absolutely sure that is enough on
-> every SoC this driver supports?  What about resume from suspend-to-RAM?
-> CQE error recovery?  What if the hibernation image fails to be created?
 > 
-> - Eric
+> Nothing here resolves the comments. Also, it's top posted. Honestly, I
+> won't be talking through you with LLM, so consider patch NAKed.
+> 
+> Best regards,
+> Krzysztof
 
-Hi Eric,
+Sorry for the late due to personal matters. 
 
-There are two scenarios where key would be required to reprogram, first is when
-rail powering the ICE goes off or SDCC does BCR reset.
+At that time, I reviewed your comments one by one and provided answers, then
+let AI polish the answer.
 
-now during suspend-to-RAM, rail powering the ice wont go off, so key would not
-be required to reprogram. During CQE recovery, key would be only lost when BCR
-reset is performed but that is not happening right now, to be taken up once its
-fixed as part of recovery flow. And in case hibernation image fails to create
-then device boots from normal flow where there is no need to reprogram the keys.
+I'll add new replies after your comments point by point.
 
-Thanks,
-Ram
+Thanks for the review.
 
