@@ -1,41 +1,47 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 826DD2C15AB;
-	Tue, 18 Aug 2026 13:02:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C77212C236B;
+	Tue, 18 Aug 2026 13:02:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787058128; cv=none; b=pOFN7W/VFRBU2iaupPCGSEQIwMDk+G/sr7B8y3wRpLYQ9qOaU06hC7e6s7fr5HtVqLKApIz/BxEzz1O7N5fLND/gDn+u0ZdviqweHO6jLXgmqjg0fVQ5cOnQoTnKcKNPa4xQa6aCvDnQQxZEeEsGfLRGUykMvPNGyBYSjMQYFzU=
+	t=1787058162; cv=none; b=eApQ1v46ByoBUGSR1LH2kDqxtlBTlPwmK/FzAW59xxXa0X2FmJ7b0Qkg9VDFGr5n74hxsHT7+n+KUVE+h8o8PigqprMtNpTI8dDJsl/rkryCEYFYrjfGhbbboLVzQWM20/uQMDVJgfySxZfoCv2Gk2z9SVvIKAPMl5I4fxt0BFI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787058128; c=relaxed/simple;
-	bh=HNHH/4IyUACffgLs8fjtH7lkK2cGElZU/Dw8wCOUOxg=;
+	s=arc-20240116; t=1787058162; c=relaxed/simple;
+	bh=gsDG2ZEhTSKxotaTyIt79VItpmcCAw2qC1XbXBLPJIM=;
 	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=NuvpY1RJi2+D3TPp3Lolg7E1Yhu0McIpO5nb/enDIAwju5IEyredFnqHe33cZ0jbHa4rk/OAT/lER042nD7084eJSlEYQ6H6MDErYhBTy5s/6FTZbHBDPBKvsFLs9AnJByDwnzi/DKUGgh4ohmc7KU/AHIkfURjnP9j/5Rf+m48=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=j3ofqNQk; arc=none smtp.client-ip=100.103.45.18
+	 Content-Type:Content-Disposition:In-Reply-To; b=KMVkOyLdNTsqxLekKMb8Ypj6FBh96QVCNO5+8yWIr+GmKqbH8o4X88NVa79gtVaEXrCk3zpUiH/eUWA2c1Tl7ISXlE9dQgS5DWX8Flw0n4J4kNiZIxCSOdZRGRlE4N7XfEVk643wflYfS8C9XfwEpP74BdYVaiSp/Adu71EwvWA=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Et+vmGFm; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="j3ofqNQk"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B31741F00A3F;
-	Tue, 18 Aug 2026 13:02:05 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Et+vmGFm"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C2B561F000E9;
+	Tue, 18 Aug 2026 13:02:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787058127;
-	bh=HNHH/4IyUACffgLs8fjtH7lkK2cGElZU/Dw8wCOUOxg=;
+	s=k20260515; t=1787058161;
+	bh=gsDG2ZEhTSKxotaTyIt79VItpmcCAw2qC1XbXBLPJIM=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=j3ofqNQksTuAzXBkn7Y0dAM5dr+l84wFwA4xBrmjnpspbl+QK86wesZ/jVGsESVAu
-	 xD/ErqJJsRh9J8pS8zAw72LauSVXtUz//zvCG0OHHRqWEmyG4DYdQdexvNzx1xbFA1
-	 +r31bvn3UPLFb+g8UIsLs6DJSkh0E+wKWE3ahzfunijYSsCaZYkZJNOWuPXHQ+2BMr
-	 vRh5QmZFO+8HrIP05fsJqYImsZmyt7kq7OAftdSJnoGylH8+JqPMaRrWQgQmUB5TQ+
-	 1yOyqsaZERd0qGmKNqJ792S1deTNUyfCLwF6ABmJyG2OrdAv7ckhTEzCKqVETyuc9w
-	 74SOU8ecqYkIQ==
-Date: Tue, 18 Aug 2026 14:02:03 +0100
+	b=Et+vmGFmE04RUDfQomb//6HmHxepNOdekuJlwiM7y64r8NaMM4cp2Ek/yDsGWkUrH
+	 qSt0L9HFJbuhVzo4UUwFcTrbTqpdEft0VfdZDZ1tl9lFgtmB5EXV9I/gpWdXoHpZpB
+	 xLlKmxHgEIX64JwWdZ68VloZe/mJAcjslplkVtKb8JjKIH9JYulrM50tFnIt7Y0vBX
+	 HYstkJ0FL+ZrKlNP4RPGyDVVn36tOgzFrrfZiGqfMIOgl//3nDGoviz+Ifydp8i8gX
+	 p74YQkDS3vNJEUIvvQVoa5n6lBiCqh+o5nDY6XJPI+hzIII1B/A9oCNl4IzH8C5gxa
+	 9Srfx0OTGzIkQ==
+Date: Tue, 18 Aug 2026 14:02:36 +0100
 From: Mark Brown <broonie@kernel.org>
-To: Praveen Talari <praveen.talari@oss.qualcomm.com>
-Cc: konrad.dybcio@oss.qualcomm.com, mukesh.savaliya@oss.qualcomm.com,
-	linux-arm-msm@vger.kernel.org, linux-spi@vger.kernel.org,
-	linux-kernel@vger.kernel.org, chandana.chiluveru@oss.qualcomm.com
-Subject: Re: [PATCH v2 0/2] spi: qcom-geni: Add shutdown and panic notifier
- support
-Message-ID: <7603533a-92e1-44b0-a301-dac79dd27923@sirena.org.uk>
-References: <20260818-add-shutdown-and-panic-notifier-for-spi-v2-0-eb25d56634a0@oss.qualcomm.com>
+To: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
+Cc: Liam Girdwood <lgirdwood@gmail.com>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Sashiko <sashiko-bot@kernel.org>
+Subject: Re: [PATCH v2 1/4] dt-bindings: sound: qcom,q6dsp-lpass-ports:
+ Rename QAIF clock IDs
+Message-ID: <8d693df4-74e8-4b9f-8474-2f753195388f@sirena.org.uk>
+References: <20260818084655.3240284-1-prasad.kumpatla@oss.qualcomm.com>
+ <20260818084655.3240284-2-prasad.kumpatla@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -43,39 +49,40 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="7OnN4c4Ovz95NXMs"
+	protocol="application/pgp-signature"; boundary="eTKmSpxltYM/Byu9"
 Content-Disposition: inline
-In-Reply-To: <20260818-add-shutdown-and-panic-notifier-for-spi-v2-0-eb25d56634a0@oss.qualcomm.com>
+In-Reply-To: <20260818084655.3240284-2-prasad.kumpatla@oss.qualcomm.com>
 X-Cookie: Smile!  You're on Candid Camera.
 
 
---7OnN4c4Ovz95NXMs
+--eTKmSpxltYM/Byu9
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Tue, Aug 18, 2026 at 04:15:53PM +0530, Praveen Talari wrote:
-> On VM-based platforms, if an SPI DMA transfer is in progress when the
-> guest is torn down (via reboot/shutdown or a panic/crash), the DMA
-> engine can keep issuing transactions to IOVAs that have already been
-> invalidated as part of teardown. The SMMU then raises context faults,
-> which can affect other VMs sharing the same SMMU instance and obscure
-> the real root cause of the crash.
+On Tue, Aug 18, 2026 at 02:16:52PM +0530, Prasad Kumpatla wrote:
+> The QAIF clock IDs were introduced with a LAPSS prefix typo. Rename
+> them to use the existing LPASS naming convention and update all
+> corresponding in-tree users.
 
-This doesn't apply against current code, please check and resend.
+Please submit patches using subject lines reflecting the style for the
+subsystem, this makes it easier for people to identify relevant patches.
+Look at what existing commits in the area you're changing are doing and
+make sure your subject lines visually resemble what they're doing.
+There's no need to resubmit to fix this alone.
 
---7OnN4c4Ovz95NXMs
+--eTKmSpxltYM/Byu9
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqEV8oACgkQJNaLcl1U
-h9C9Zwf+K0069U7xnVdkmj+9ormsD+ZIVwtZiiQndjHqPCYfbj/pDUbS98P5GEDS
-czpBslllmUIViB2HXG7b0y+9h/EwQOmgZ6pBSZdlLBDSmBnJXZl1LsmTfNPjInlg
-fBRZIxxyYz6cnZbSKhVWs+UmIRnH18EYLiJgtU0UoMEuIyCmfRl7t72vnETKBGjw
-4kEwCzBs2UJ9cYt8KHD3wffRDuxjzU3GhNg7aMFT6Nw0Edz4DWUroFFrwB/l92Xb
-LBSs/IvLsS5pHBY6S+9bzxe2tdnbTQSamV406NLxtDtSBAXTmM10Sy77ri8jd+00
-t6BfDK5cvsS2FlqjCSGESD0JoZDPkw==
-=XgsM
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmqEV+sACgkQJNaLcl1U
+h9Arcgf/W7KMwn9JJn2+Fp+Bs8M15pQWARYvfICwaXU358K7gMa9c0V4CTmAIQU1
+bFvakWmwnPxQeXzLAKCHE8mhQm9ncqiIOWd7MLE5lLLW5k3WG1FNQV6MocDdY4ft
+WtPJDcjHavBWrZ0XOmz+tCQIAyR6Fd3nRveJinzdPtn2xkKvAfL1JDNN0TNQ/gqq
+sD6vFuUI/RMHWZQby4p2/xDvVLEkct7DMh3d53C4LjEjqDNVCbyfGJ8xdumxvHJV
+TF7sOvlRsytBV2dvDah8GkkH4aVjJWAhvf9UJ+w9J+UvY0Q+vHEiWyezCU5hX98M
++a0h7sCKsL1ZnEjzXjKKdI0jTqN7dA==
+=zVTM
 -----END PGP SIGNATURE-----
 
---7OnN4c4Ovz95NXMs--
+--eTKmSpxltYM/Byu9--
