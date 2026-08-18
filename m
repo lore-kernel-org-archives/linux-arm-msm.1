@@ -1,227 +1,550 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F45F2D9484
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 05:01:31 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F3792FF641
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 05:03:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787029293; cv=none; b=A8fIDVcelx8Qjx4RpNzp1YOly+srmjP+/VNVxBRYxw4KgseAo/sgKd/T48oXq1hBOu5bYwINpGCPLe5RMHirybCdWpPl+8kOY+8os8RBtJuqZ7+fd8o/4ZJve/PObn24c7yYBQ+78InUsx8OuwyM3chpg1OwiF9kZSCzvklrxSE=
+	t=1787029392; cv=none; b=QqoZGAfpAMxyz8zHx4lQ2wul7MzMO5DzcGFw6XX/AggQN6W7MKzw++OQgiGwA+8AcZutxZ+PgkeEZXlEhwIEXa/QxUvTDSUsTqzjbQXqMgHrySwezopTYQKnX2wXsV3EtccBuCxeRkmG2ew78Uqe2BT6Euy+xUGJzT3mU7zYDPk=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787029293; c=relaxed/simple;
-	bh=nWVWXo8PeGEpgHZRaEwwycO9V5CYo0ghXOEjdfrH9GU=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:References:
-	 In-Reply-To:To:Cc; b=cjw7EyHec1PyZezGyxgz5b5T5zkjwyOgvh3BQmz4CCz9GAXRyxSrcOWFB0LKenPRPQ0DOS1RZJRsfut0vXpKght1sDqppyDyPJErBErjs+IdZJJCTv9KGt6KGdpzpKdKw4XML+GbSZhMx7jEajvJcuRQpGdFOLTWHx7ptMQNOuI=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=Y0u9Znq7; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=hmw/qbqX; arc=none smtp.client-ip=205.220.180.131
+	s=arc-20240116; t=1787029392; c=relaxed/simple;
+	bh=zIsxOf2W76FHiDrSPNWiehPoFgsf+wBLveoE5AIM+vs=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=jHzG0CI3i5WmTVgTeSv7IRTB0GxKhM/zrGE32UMQZj9mWWjs2USQ85DP6hFUT9kkcXsh7nngAhY/PuX51FMvRF8/0uGiw/En6Z3zTpCWhd4lev9mQ+uoaVMXU5DnhLIv77yKCLK0r0WK06/S8NX0H2O7CgXJgPSsFCybX9APimg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=cFk9JOev; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=cVUur9qT; arc=none smtp.client-ip=205.220.168.131
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="Y0u9Znq7";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="hmw/qbqX"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67I2YPeN3761843
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 05:01:30 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="cFk9JOev";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="cVUur9qT"
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67I252VN3602878
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 05:03:10 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	eUvixyY9G/lT9AeLA6BxhhEw+FAfIWOYlEArceVOqRc=; b=Y0u9Znq7GI9C6nS1
-	qYy9nlISszDbGq0eSjPmMw1GBRJVmBcYdbn/RqKywQAswy5zCUMa+1DCJWIx5bi6
-	70VPmezBUmsIKbCeMF2Q9MPAjax2sV12jawNPcxYgH9HVwxiMJf0JP9g3PhxTdjX
-	uAG3GD4qUz5JDANcAAEWOiyzpSPZ/RGZGE9kz4Jg2JV/7k7QT7SAw8eyW9tdp7tY
-	uqdZrqNlyDzl4h/3f0CsXiguIru+poJqzTU1cvBXCgJlQmT7uK7ElY5s95R2Z4BE
-	/aWCZgN1Rs5/KhshLPa2pJn+o51avxAD4hjIw/lonLhWEZvS32Kdh0AY7e/hMN5o
-	7CmArg==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4eqtrgn4-1
+	Lk3kYnjvSJgDQ5vPgnZxa9e3E35X4pqPerDxw7hqB1A=; b=cFk9JOev29rXrDdF
+	X5YXl3PCw1BL2/F3d0lzdmc0lvMDhJvedNT+bIf9/mX+r1x35DYQ7TdcK/fw4X8G
+	RaHS/OzS0YiSaKxcuv+i+kbfAH1WbWpODiwg7ZWlSqj7GMCp4ITDU76g4hcIKiXl
+	aF9GZwzD5OTlqcJ6kaKqT79UffFu/n3hDk4W2M57IReVx8sFfnBgIR225AwXrXTb
+	F35v3tGCOG9LU/40z7F8xo3725uE1/fv74oogLAZcFrGYXt/+BFeafQzwnL8uzt0
+	vh7ZTJIPtJWrJvb79dldUX5n1l53oLwBehecDKUQww4OjtCWjjPUJPtGPLgW9Sii
+	IvY1vA==
+Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com [209.85.216.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4ea2gnmf-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 05:01:30 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-cbedfa3898aso4079683a12.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 22:01:30 -0700 (PDT)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 05:03:09 +0000 (GMT)
+Received: by mail-pj1-f71.google.com with SMTP id 98e67ed59e1d1-38e25e4b41cso4527443a91.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 17 Aug 2026 22:03:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787029289; x=1787634089; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=eUvixyY9G/lT9AeLA6BxhhEw+FAfIWOYlEArceVOqRc=;
-        b=hmw/qbqX8pu/ngBcNq3js4/J5WB+uJbjOPfiGohoDMRa7R3ItYl81S3mdFM634/gj5
-         GL/NYrie3jy37kylhJdXFEuBBRDzVOmPWkk6LdeTydXT1YRXt8jyzdU9Wxjx98LHLEMA
-         mxlB24Vv7HaGxdVpHBCUgKE+T7ldUFOu7sVVHMCi9Ksl4zXpvAF6p6J5QPLL2MYwyHPu
-         5cl3DiSNToDpt5Dpii8AIUKCeyrhkydN3gGRMHMq0+17r1k3c8AkNWdSfM+AdKkE0clK
-         ePchjfZuNfDl8lj57nhJcswfNoSojV3k11YKnD32XTRYFjMOK2OYQio6bZe/vadl5dH7
-         tpYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787029289; x=1787634089;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1787029389; x=1787634189; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=eUvixyY9G/lT9AeLA6BxhhEw+FAfIWOYlEArceVOqRc=;
-        b=FUMSIlhR1h6a4VLeoZPuEATCglHKSGrb8vSlG3QTTKU+8FPB6yBtZQxWTIp2ar8IxW
-         GjKri61dvG43x4DMHe4mSPZTzu9v/HZnoECJH3abzKk65FyX2IPHU514PUplEYLGTRGX
-         kHWh7HBlx5gKoDwFIdOkddkG0xXM6m88wD2ML8E6K63lf8ngnS+jnzNDOp/PfFIgUvkn
-         ojCzqFvwrfR7iHEd6LLtQ049klwo+qp33B2mPJ9+Amo8VY6Y/cGBft7r21aEv6Qgsspt
-         LuBOF5+SQGlEV0xcB7GTLNHuNFTdM+5T3aHVnj8Fp3v0ywGgTxC88FF3zmzUEN/YonW/
-         Z0+w==
-X-Forwarded-Encrypted: i=1; AHgh+RreNChk7pCIYtLRD5SdJlqMZCL9bihkHKLY0yqPnTdJD3ZbQck+KAA8WFyOSLM/bnwIuJ8EDaQs8/gcy//g@vger.kernel.org
-X-Gm-Message-State: AOJu0YxP8B/BzvSGAfXOrFdztNRhkJxTqqh/iWAWCqkao5V0Px78VWMm
-	el0O9RT69Rb/rQi1VOEHwnuzzuH0U+bEDfHvTzUf0cmKdI5dKB6uV3fPN/kLeE2tH5YxWrVEWv/
-	Oz8ebPCS8G6DgLy7v5DZNKkUaIN+gFI7pLmj1cWblxhbV2sdiKeYbac9eJzy/zARBBGrP
-X-Gm-Gg: AR+sD109AR+EylL0kLRkmxZfo4TzeMUlG9DlSGlZSv1BevN4hHakscW59mNXB4sud+4
-	9x5OdsO3vbUgiDeeSKDsrEffHCXsqrtHYQonWsrxDvUP2FH9AQ56+EUbe3AC5um8HbkN96FHhr0
-	ZMJN8lrDEMJ1GyUsg/xKxcF3Dg4yCwBaRuOjLleClsgO64hssibUP+GvC0SAGQKPGrfgynT91cx
-	aWuEl7/cG/UZXQZPa14zFtXcKd0Poz4qcOhiUBEl2VzGngXUitqQfazyujjaTGR6IJc9HrPupoU
-	CgmGlRwrXo66l+otQXOIdqUjGVSlntrkghGwX+UkUMaDKqfMbt05yBJSyUTJFpkp/nBVUFdGI9v
-	bt+clYiMnbshR0nQlTd7iPrI7D43PG4B2fw==
-X-Received: by 2002:a05:6a00:2446:b0:84f:77cc:63cd with SMTP id d2e1a72fcca58-84fde13bf81mr28327327b3a.17.1787029289349;
-        Mon, 17 Aug 2026 22:01:29 -0700 (PDT)
-X-Received: by 2002:a05:6a00:2446:b0:84f:77cc:63cd with SMTP id d2e1a72fcca58-84fde13bf81mr28327216b3a.17.1787029288810;
-        Mon, 17 Aug 2026 22:01:28 -0700 (PDT)
-Received: from hu-ptalari-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id d2e1a72fcca58-851b6fc0158sm1028876b3a.40.2026.08.17.22.01.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 17 Aug 2026 22:01:28 -0700 (PDT)
-From: Praveen Talari <praveen.talari@oss.qualcomm.com>
-Date: Tue, 18 Aug 2026 10:31:18 +0530
-Subject: [PATCH 2/2] i2c: qcom-geni: Add panic notifier to prevent
- transfers during panic
+        bh=Lk3kYnjvSJgDQ5vPgnZxa9e3E35X4pqPerDxw7hqB1A=;
+        b=cVUur9qT04ePbxE01HnZ7gpjVH6V1PmK/IB3bZ+ZPbfFRBdNKFiud9fYzFfl+aEc1J
+         9QjnbUy26zKaJ8e2ofLwQYOMS8aucThQtMStxk4IfGDKJM/uJO9UgYpAH4bxE2WSrvj4
+         3JMiTy3MdwsouMzgHlPpYuY9dm1ay824nLjYVr6Zs7aTGD0YAwKyRF2tqxRioRIHOmo6
+         XHjZcJo1RbU0v2CUqDqnKXKwpx7fJGuNYZbivRy/uWVQbjw5aUQ/MzZqGmmGt/43A+oM
+         Zd2v2p+VVDahdU2BQVHwfYZv4Yg9UIhc6+rx2yxMsc19I0yPVlrm1Msv/mtuVMhitXEU
+         TNfA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787029389; x=1787634189;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Lk3kYnjvSJgDQ5vPgnZxa9e3E35X4pqPerDxw7hqB1A=;
+        b=Tk3yUlueoZaX+xrOtFK+L/lDNAy/Gc5zDpu1H9DnbeC6ct04tdfknw4TeCnBI95teG
+         OAja40KAMpjltia747TguXT3VVJ+65tCIHTXM3nXX0TUM+fAv6QX/jaqXsAfFQMCI1wG
+         337gI6UybGtU/oxe/szge2KVJhpXOo7kgTVQVvZBJXKHLL8gTlidV6ebgfgmjSTvRkWc
+         mK7697oJ0/gqAIPX9ubFc6pwlc1U1kF9K+78825gpshglAfc/wgtJ3Bm096yaGdfoCWw
+         JqKvKd0g9o3RNid1gt71gvRnIGAgEdwRfIP4Unu2NZTZpjgDJANq/ZHlkFZRBhVRg6uM
+         z0Ng==
+X-Forwarded-Encrypted: i=1; AHgh+RqTF0+ejZjWYsTjaQsNlj1v8CdMrCqI4l7/To5WW8p/om4QnBVJNzpVMdVVKu/WIq8Xj9uW1izeJp9q0w4j@vger.kernel.org
+X-Gm-Message-State: AOJu0YxvThOoKHkrXT7wBT69aOMsSxQ2p8ObePZy2vXCbvNLNKONcqx3
+	1gf4yeVHk7uB+Ndio8btO2I3vL9k9jqnni9l6Wap44s4SdcOG8oybn5Wb8k3dJHQ7zcHOCJTvoD
+	4hZ2xpbkUeR/V0PGlPpAUPX8VSXcovMgEIB1U1R0Eb5gFmREBqXIPchvNK598b/jK2+l7
+X-Gm-Gg: AR+sD13KQCZksfqMtTrOSHsxnRKWhnOechpKFib7xq5vgDuF7NYoBu+ReSJuCBPI40X
+	+eEESU8718CawbISSmoPj6Uw98Yf0mrQRfqHV8R5SCG/mAsMln4vhKXqMbb8ZGoBcPszMKZhpEt
+	8SQ7BYmo9JScQ/Zf3Yr5v8ZNfk+FEM05sSegj+d7DfJeo2L9fEwqM2BR6ZL7BWOyVv0rhN0BcH/
+	TljLRq5d28ITujW9ETN1D/6AuFK0GX+KnMnMYz3SWcH8IQk/WGmzf4IIwrEqSo6wMNsVXU2m+ZE
+	KvMYiSIxbIoYnhxKqSR7vQFHjlJVo8tKZGY/FzBwlChOcOw9HF5newJWHsvhIm1RPSr31Oc1UQB
+	mx8M8Ffm9exxbdV8kzGy9pb9d9WqFrPt3QsDxUg==
+X-Received: by 2002:a17:90b:33c2:b0:38f:bbc:6a0f with SMTP id 98e67ed59e1d1-3933bd0c033mr27387870a91.1.1787029388435;
+        Mon, 17 Aug 2026 22:03:08 -0700 (PDT)
+X-Received: by 2002:a17:90b:33c2:b0:38f:bbc:6a0f with SMTP id 98e67ed59e1d1-3933bd0c033mr27387773a91.1.1787029387719;
+        Mon, 17 Aug 2026 22:03:07 -0700 (PDT)
+Received: from [10.217.238.175] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3954d3b4383sm4518837a91.15.2026.08.17.22.03.04
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 17 Aug 2026 22:03:07 -0700 (PDT)
+Message-ID: <ca9c56cb-4714-4f80-b993-0c990091ee1a@oss.qualcomm.com>
+Date: Tue, 18 Aug 2026 10:32:51 +0530
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] net: qrtr: Send HELLO message on endpoint register
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: mani@kernel.org, davem@davemloft.net, edumazet@google.com,
+        pabeni@redhat.com, horms@kernel.org, linux-arm-msm@vger.kernel.org,
+        netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+        christopher.lew@oss.qualcomm.com, deepak.singh@oss.qualcomm.com
+References: <20260807-qrtr-hello-on-ep-register-v2-1-a7f265a42f7e@oss.qualcomm.com>
+ <20260813013213.2315080-1-kuba@kernel.org>
+Content-Language: en-US
+From: Pranav Mahesh Phansalkar <pranav.phansalkar@oss.qualcomm.com>
+In-Reply-To: <20260813013213.2315080-1-kuba@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260818-add-shutdown-and-panic-notifier-for-i2c-v1-2-9f31b5fae5f6@oss.qualcomm.com>
-References: <20260818-add-shutdown-and-panic-notifier-for-i2c-v1-0-9f31b5fae5f6@oss.qualcomm.com>
-In-Reply-To: <20260818-add-shutdown-and-panic-notifier-for-i2c-v1-0-9f31b5fae5f6@oss.qualcomm.com>
-To: konrad.dybcio@oss.qualcomm.com,
-        Mukesh Kumar Savaliya <mukesh.savaliya@oss.qualcomm.com>,
-        Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
-        Andi Shyti <andi.shyti@kernel.org>
-Cc: chandana.chiluveru@oss.qualcomm.com, linux-i2c@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Praveen Talari <praveen.talari@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787029278; l=2967;
- i=praveen.talari@oss.qualcomm.com; s=20251114; h=from:subject:message-id;
- bh=nWVWXo8PeGEpgHZRaEwwycO9V5CYo0ghXOEjdfrH9GU=;
- b=kkAOSSChSPsRli6fSAY7aHJoXw+gU5iaIqRTDtnKirCM68KsPd9obx16vItbDAhwi47TTWE9i
- wOFWPk+nLqWCmy7OY1TDXHpV34uTgi9PkxUdhrbgP5EfERhEg2djduO
-X-Developer-Key: i=praveen.talari@oss.qualcomm.com; a=ed25519;
- pk=NGK/88fjyHXgfhIKwag7+uIytOmyOypvZ/hDFaYPEss=
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDAzNSBTYWx0ZWRfX55mcDbWv6Lie
- QUJP4bJI5ytONg506bnShnDcVw/G1oj+j8dx+SglEyvq6PdzFA9xIpJlMuOHtH/iNnV2f2EmW3+
- Lz4WGU3octLDYaPjYcR8XcTLf/tWtXk=
-X-Proofpoint-ORIG-GUID: CbPctu1-3nEhZmop6FzAcZpo_FIwwqZj
-X-Authority-Analysis: v=2.4 cv=UfFhjqSN c=1 sm=1 tr=0 ts=6a83e72a cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDAzNSBTYWx0ZWRfX9nJPPeskVLXC
+ VW9HnODTkw2BOdV355ScE5knNMEc5diIl5yuEH+1aqySzpmOYAisexq5XC921UawV7iWDNg+2PC
+ wTYsg4lUhJ6F4K/VSuSjz9vtohb5ANKZiBbe1xIOm3oJOIxj+45dX/rBUjCXE3cZpjGWOVNIl4/
+ hhqzPJSx6+MAAVMs1mOPfUdFzq+dvhvYuKvt3EJEZcMKiiPAAcSktdbgByXtlm61MY1EO7nqXAJ
+ q/IHydSONrQPTue8v8l7Lcz+7JJrfn7fFbaPNgQ0MxuP7/+cgUu0ysjLSQa9bHUZyzK54nMgqMv
+ uhY5r/p61aDFl3bK+JjUvhWL+sdqBm9UlSMbxg5wxhyjKjDvnY//EjqWZMNwcyC8VzLE6yNxLIa
+ Skjibyf7QbFT5cvgMjHL4KMkuTC5CW3iIwbVDH2+dP/yo3HfAng8spvbM86CZKUH+jzXFKuKaDH
+ AmNgeTNScKQO93IDkBQ==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE4MDAzNSBTYWx0ZWRfX/V4EfLbEwtTr
+ opez7UZokb90/O76uxq9+sZSd3iKLBtzisSNg+9Pvu+En/8j3lvxtIys2r3MJOHMRwI3V/vXa2P
+ X0aDqDwizcJIJVomL4vo5rCMTKDV4L8=
+X-Authority-Analysis: v=2.4 cv=XtfK/1F9 c=1 sm=1 tr=0 ts=6a83e78d cx=c_pps
+ a=UNFcQwm+pnOIJct1K4W+Mw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=EUspDBNiAAAA:8 a=0wxbfleT6UKSQBY2OSAA:9 a=QEXdDO2ut3YA:10
- a=_Vgx9l1VpLgwpw_dHYaR:22
-X-Proofpoint-GUID: CbPctu1-3nEhZmop6FzAcZpo_FIwwqZj
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE4MDAzNSBTYWx0ZWRfX66HxLSyhusNm
- xfzikG20JkhhGkMtXpTTsIjSqPPv6DMNb7ohbCqE71yM37Yb/2HcHb3hV15bs1pJzRLflbK9GHF
- bxRLTR5ibkZk3wn8wQ3ACBxx3yW55k6ncpNt8hNRu8VambYR9bkJ0DWL6AKdukBoHeyI8TCODFD
- obvKbxAk37I9qF222lfx7sILgciuStNaLq5kahbMi7NyoA8PSYbF052H8IulXNStUuuqNlAVyLu
- KW3vxvt1kaeHS9HNTMxgpRvnqLKX4D1AjTSjDru1JQMu3o23wsVfgHB0vO2oO1LaSV3ctFjI741
- CXxCBgU727eI03OXjiRSOZQ1Bh7ZltcBBX7g3JaIMeEm89qU6h+wh49+C6FK5skApmAHPKEplhs
- HEHCphb2PlQptjC08Bl8WOYQQbG8aPy2m82jwGAM19k5hdikR7HwGL8NoU+If43Wt5BCvwxRyIY
- 0KoPT41MQ8OoVZHMqGg==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=aNK4TDJwnBqDbeh6N-8A:9 a=QEXdDO2ut3YA:10
+ a=uKXjsCUrEbL0IQVhDsJ9:22
+X-Proofpoint-ORIG-GUID: f0oJ-jx81_EhiYH4vPUJ_mqei2HdrFKk
+X-Proofpoint-GUID: f0oJ-jx81_EhiYH4vPUJ_mqei2HdrFKk
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-08-17_04,2026-08-12_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 malwarescore=0 impostorscore=0 suspectscore=0 adultscore=0
- spamscore=0 priorityscore=1501 clxscore=1015 phishscore=0 lowpriorityscore=0
+ priorityscore=1501 bulkscore=0 impostorscore=0 spamscore=0 lowpriorityscore=0
+ phishscore=0 clxscore=1015 suspectscore=0 malwarescore=0 adultscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608180035
 
-When a VM crashes with an active I2C DMA transfer in progress, the
-SMMU raises context faults as the DMA engine continues to access IOVAs
-that are invalidated when the VM's memory context is torn down. These
-faults can affect other VMs sharing the same SMMU instance.
+On 8/13/2026 7:02 AM, Jakub Kicinski wrote:
+> This is an AI-generated review of your patch. The human sending this
+> email has considered the AI review valid, or at least plausible.
+> ---
+> net: qrtr: Send HELLO message on endpoint register
+>
+> This moves ownership of the QRTR HELLO handshake from the name server into
+> the core layer by scheduling a work item at endpoint registration time.
+> Non-HELLO packets are dropped until a HELLO has been transmitted, tracked by
+> a new node->hello_sent flag under ep_lock, and the name server no longer
+> sends a HELLO in reply to an inbound one.
+>
+> Link: https://lore.kernel.org/r/20260731-qrtr-hello-on-ep-register-v1-1-ddee5b1bfaec@oss.qualcomm.com
+>
+>> diff --git a/net/qrtr/af_qrtr.c b/net/qrtr/af_qrtr.c
+>> index d02ef9a74c3c..7adc0a053125 100644
+>> --- a/net/qrtr/af_qrtr.c
+>> +++ b/net/qrtr/af_qrtr.c
+> [ ... ]
+>
+>> @@ -341,6 +349,14 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
+>>   	size_t len = skb->len;
+>>   	int rc, confirm_rx;
+>>   
+>> +	mutex_lock(&node->ep_lock);
+>> +	if (!node->hello_sent && type != QRTR_TYPE_HELLO) {
+>> +		mutex_unlock(&node->ep_lock);
+>> +		kfree_skb(skb);
+>> +		return 0;
+>> +	}
+>> +	mutex_unlock(&node->ep_lock);
+>> +
+> [Severity: High]
+> Should this gate return 0 after freeing the skb?  A few lines further down in
+> the same function, the semantically identical "peer is gone" case reports an
+> error instead:
+>
+> 	mutex_lock(&node->ep_lock);
+> 	rc = -ENODEV;
+> 	if (node->ep)
+> 		rc = node->ep->xmit(node->ep, skb);
+> 	else
+> 		kfree_skb(skb);
+>
+> qrtr_sendmsg() then translates the new 0 into a full-length success:
+>
+> 	rc = enqueue_fn(node, skb, type, &ipc->us, addr);
+> 	if (rc >= 0)
+> 		rc = len;
+>
+> so userspace is told the payload went out while the skb was discarded, with
+> no way to retry.  Would -EAGAIN or -ENETDOWN be more honest here?
 
-Register a panic notifier that calls the same geni_i2c_quiesce()
-helper used by the shutdown path. This marks the I2C adapter
-suspended, preventing new transfers from being initiated, and
-cancels/aborts any transfer already in flight, limiting the window
-during which the DMA engine can access IOVAs that are about to be
-invalidated.
+Agreed, this will return -EAGAIN in the next version.
 
-Signed-off-by: Praveen Talari <praveen.talari@oss.qualcomm.com>
----
- drivers/i2c/busses/i2c-qcom-geni.c | 26 +++++++++++++++++++++++++-
- 1 file changed, 25 insertions(+), 1 deletion(-)
+>
+> The ns.c senders are affected the same way.  They only distinguish negative
+> errnos (-ENODEV versus other), so NEW_SERVER/DEL_SERVER/BYE/DEL_CLIENT and
+> the announce_servers() reply to an inbound HELLO are all recorded as
+> delivered and never retried or logged.
+>
+> The case that looks least recoverable is QRTR_TYPE_RESUME_TX.  Inbound data
+> does not depend on our own HELLO having been sent, so this path can run
+> while hello_sent is still false:
+>
+> qrtr_recvmsg() -> qrtr_send_resume_tx() -> qrtr_node_enqueue(..., QRTR_TYPE_RESUME_TX, ...)
+>
+> The RESUME_TX is dropped and ret is 0.  Since the peer only clears its
+> flow->pending when it receives a RESUME_TX, and there is no timeout or
+> retransmission, does its transmitter stall permanently once it hits
+> QRTR_TX_FLOW_HIGH?
+>
+> Note also that this drop path skips the qrtr_tx_flow_failed() compensation
+> that the other drop paths in this function perform.
 
-diff --git a/drivers/i2c/busses/i2c-qcom-geni.c b/drivers/i2c/busses/i2c-qcom-geni.c
-index 10c6a4b0b825..2f8237c232e1 100644
---- a/drivers/i2c/busses/i2c-qcom-geni.c
-+++ b/drivers/i2c/busses/i2c-qcom-geni.c
-@@ -16,6 +16,7 @@
- #include <linux/iopoll.h>
- #include <linux/module.h>
- #include <linux/of.h>
-+#include <linux/panic_notifier.h>
- #include <linux/platform_device.h>
- #include <linux/pm_runtime.h>
- #include <linux/soc/qcom/geni-se.h>
-@@ -139,6 +140,7 @@ struct geni_i2c_dev {
- 	u32 num_msgs;
- 	struct geni_i2c_gpi_multi_desc_xfer i2c_multi_desc_config;
- 	const struct geni_i2c_desc *dev_data;
-+	struct notifier_block panic_nb;
- };
- 
- struct geni_i2c_err_log {
-@@ -1082,6 +1084,19 @@ static void geni_i2c_quiesce(struct geni_i2c_dev *gi2c)
- 	}
- }
- 
-+static int geni_i2c_panic_notifier(struct notifier_block *nb,
-+				   unsigned long action, void *data)
-+{
-+	struct geni_i2c_dev *gi2c = container_of(nb, struct geni_i2c_dev, panic_nb);
-+
-+	/* Make client i2c transfers start failing */
-+	i2c_mark_adapter_suspended(&gi2c->adap);
-+
-+	geni_i2c_quiesce(gi2c);
-+
-+	return NOTIFY_OK;
-+}
-+
- static int geni_i2c_init(struct geni_i2c_dev *gi2c)
- {
- 	u32 proto, tx_depth;
-@@ -1236,9 +1251,16 @@ static int geni_i2c_probe(struct platform_device *pdev)
- 	if (ret < 0)
- 		return ret;
- 
--	ret = i2c_add_adapter(&gi2c->adap);
-+	gi2c->panic_nb.notifier_call = geni_i2c_panic_notifier;
-+	ret = atomic_notifier_chain_register(&panic_notifier_list, &gi2c->panic_nb);
- 	if (ret)
-+		return dev_err_probe(dev, ret, "Error registering panic notifier\n");
-+
-+	ret = i2c_add_adapter(&gi2c->adap);
-+	if (ret) {
-+		atomic_notifier_chain_unregister(&panic_notifier_list, &gi2c->panic_nb);
- 		return dev_err_probe(dev, ret, "Error adding i2c adapter\n");
-+	}
- 
- 	dev_dbg(dev, "Geni-I2C adaptor successfully added\n");
- 
-@@ -1249,6 +1271,8 @@ static void geni_i2c_remove(struct platform_device *pdev)
- {
- 	struct geni_i2c_dev *gi2c = platform_get_drvdata(pdev);
- 
-+	atomic_notifier_chain_unregister(&panic_notifier_list, &gi2c->panic_nb);
-+
- 	i2c_del_adapter(&gi2c->adap);
- 	release_gpi_dma(gi2c);
- }
+We are not exempting RESUME_TX from the gate. Doing so would let a
+non-HELLO packet reach the wire before our own HELLO, which is exactly
+the invariant this patch establishes, and would violate the protocol.
+It also would not buy any real recovery: qrtr_recvmsg() already
+discards qrtr_send_resume_tx()'s return value unconditionally, so the
+RESUME_TX is dropped by the caller either way. For a peer to have hit
+its own flow-control watermark against us, enough DATA must already
+have flowed that our HELLO has almost certainly completed already; the
+residual window is the same "transport is stuck" case we are already
+treating as a bug elsewhere, so we would rather not special-case it
+here.
 
--- 
-2.34.1
+>
+>>   	confirm_rx = qrtr_tx_wait(node, to->sq_node, to->sq_port, type);
+>>   	if (confirm_rx < 0) {
+>>   		kfree_skb(skb);
+> [ ... ]
+>
+>> @@ -372,6 +388,8 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
+>>   			rc = node->ep->xmit(node->ep, skb);
+>>   		else
+>>   			kfree_skb(skb);
+>> +		if (!rc && type == QRTR_TYPE_HELLO)
+>> +			node->hello_sent = true;
+>>   		mutex_unlock(&node->ep_lock);
+>>   	}
+> [Severity: Medium]
+> Is rc == 0 from ep->xmit() strong enough to latch hello_sent?
+>
+> For MHI, qcom_mhi_qrtr_send() returning 0 only means mhi_queue_skb() placed
+> the skb in the UL transfer ring.  Actual consumption is reported later via
+> qcom_mhi_qrtr_ul_callback()/mhi_result->transaction_status, and a channel
+> reset discards still-queued ring elements.
+>
+> hello_sent has exactly one initialiser (qrtr_endpoint_register()) and this
+> one setter, so there is no way to re-arm it.  net/qrtr/mhi.c resets and
+> re-prepares the channels across suspend/resume without unregistering the
+> endpoint:
+>
+> qcom_mhi_qrtr_pm_suspend_late()
+> 	mhi_unprepare_from_transfer(mhi_dev);
+>
+> qcom_mhi_qrtr_pm_resume_early()
+> 	mhi_prepare_for_transfer(mhi_dev);
+> 	qcom_mhi_qrtr_queue_dl_buffers(mhi_dev);
+>
+> The qrtr_node therefore survives a full channel reset with hello_sent still
+> true and say_hello never rescheduled.  Does the freshly re-armed channel
+> then never see a HELLO, leaving the peer in the same wait-for-HELLO state
+> this patch exists to break?
+
+We are not adding ul_xfer_cb/transaction_status-based confirmation.
+rc == 0 from ep->xmit() is already treated as delivery for every QRTR
+packet type, not just HELLO; giving HELLO a stronger guarantee than
+DATA/CTRL traffic on the same channel would introduce an inconsistency
+rather than fix one, since the same exposure would remain for those
+other types.
+
+>
+>>   	/* Need to ensure that a subsequent message carries the otherwise lost
+>> @@ -379,6 +397,9 @@ static int qrtr_node_enqueue(struct qrtr_node *node, struct sk_buff *skb,
+>>   	if (rc && confirm_rx)
+>>   		qrtr_tx_flow_failed(node, to->sq_node, to->sq_port);
+>>   
+>> +	if (rc && type == QRTR_TYPE_HELLO)
+>> +		schedule_work(&node->say_hello);
+>> +
+> [Severity: High]
+> Can this become a tight self-requeuing loop?  qrtr_hello_work() is itself
+> the caller of this enqueue, and there is no delayed_work, no retry counter
+> and no backoff:
+>
+> qrtr_hello_work()
+> 	alloc_skb(GFP_KERNEL)
+> 	qrtr_node_enqueue(node, skb, QRTR_TYPE_HELLO, ...)
+> 		mutex_lock(&node->ep_lock)
+> 		node->ep->xmit() fails
+> 		schedule_work(&node->say_hello)   /* same work, zero delay */
+>
+> Persistent failures look reachable:
+>
+> drivers/bus/mhi/host/main.c:mhi_queue() {
+> 	...
+> 	if (unlikely(MHI_PM_IN_ERROR_STATE(mhi_cntrl->pm_state)))
+> 		return -EIO;
+> 	...
+> }
+>
+> so a crashed or wedged modem link gives -EIO forever.  qcom_smd_qrtr_send()
+> propagates rpmsg_send() errors, skb_put_padto() can return -ENOMEM, and
+> after qrtr_endpoint_unregister() sets node->ep = NULL the enqueue returns
+> -ENODEV for as long as a node reference is outstanding.
+>
+> qrtr_tx_wait() returns 0 immediately for non-DATA types, so nothing in the
+> loop rate limits it.  Does this spin a worker on system_percpu_wq and hammer
+> the skb allocator until the transport recovers or the last node reference
+> drops and __qrtr_node_release() runs cancel_work_sync()?
+
+In the next version, say_hello becomes a delayed_work, and
+the retry fires only when ep->xmit() returns -EAGAIN, with a 100 ms
+backoff. In-tree transport's xmit path, -EAGAIN is the only failure
+any of them returns that is transient and self-clearing; -EIO, -ENODEV,
+-EINVAL and allocation failure are all terminal there and will no
+longer be requeued.
+
+>
+>>   	return rc;
+>>   }
+>>   
+> [ ... ]
+>
+>> @@ -570,6 +591,35 @@ static struct sk_buff *qrtr_alloc_ctrl_packet(struct qrtr_ctrl_pkt **pkt,
+>>   	return skb;
+>>   }
+>>   
+>> +static void qrtr_hello_work(struct work_struct *work)
+>> +{
+>> +	struct sockaddr_qrtr from = {AF_QIPCRTR, 0, QRTR_PORT_CTRL};
+>> +	struct sockaddr_qrtr to = {AF_QIPCRTR, 0, QRTR_PORT_CTRL};
+>> +	struct qrtr_ctrl_pkt *pkt;
+>> +	struct qrtr_node *node;
+>> +	struct qrtr_sock *ctrl;
+>> +	struct sk_buff *skb;
+>> +
+>> +	node = container_of(work, struct qrtr_node, say_hello);
+>> +
+>> +	/* NS must be bound before we can send */
+>> +	ctrl = qrtr_port_lookup(QRTR_PORT_CTRL);
+>> +	if (!ctrl)
+>> +		return;
+>> +
+>> +	skb = qrtr_alloc_ctrl_packet(&pkt, GFP_KERNEL);
+>> +	if (!skb) {
+>> +		qrtr_port_put(ctrl);
+>> +		return;
+>> +	}
+>> +
+> [Severity: High]
+> Do these two early returns abandon the handshake for good?
+>
+> The changelog says the work item sends a HELLO "once the name server is
+> bound, retrying on failure", but the only retry is the schedule_work() in
+> the rc-failure branch of qrtr_node_enqueue().  Neither of these returns
+> reaches it, and neither leaves a pending work item, timer or wakeup.
+> node->hello_sent stays false, and nothing else in the tree sets it.
+>
+> For the allocation case the trigger is just a failed GFP_KERNEL alloc_skb()
+> under memory pressure:
+>
+> qrtr_endpoint_register()
+> 	schedule_work(&node->say_hello)
+> 		qrtr_hello_work()
+> 			qrtr_alloc_ctrl_packet(&pkt, GFP_KERNEL) == NULL
+> 			return    /* no re-arm */
+>
+>  From then on, does the new gate in qrtr_node_enqueue() free every
+> DATA/RESUME_TX/BYE/DEL_CLIENT/NEW_SERVER packet for that node for the rest
+> of its lifetime, even though the transport probe reported success?
+>
+> The name-server broadcast HELLO cannot rescue it either, because the same
+> patch makes qrtr_bcast_enqueue() skip nodes with nid == QRTR_EP_NID_AUTO,
+> which is the state of every freshly registered in-tree endpoint (mhi, smd
+> and tun all pass QRTR_EP_NID_AUTO).
+>
+> The comment "NS must be bound before we can send" describes a wait that
+> does not seem to be implemented - there is no retry or wakeup when the CTRL
+> port later appears.  In-tree this is unlikely to fire because qrtr_ns_init()
+> binds QRTR_PORT_CTRL from qrtr_proto_init() before any transport can
+> register, but the consequence is the same as the allocation failure.
+
+In the next version, both early-return paths reschedule
+themselves (with the same 100 ms backoff) instead of abandoning the
+handshake, so neither a transient allocation failure nor the NS not
+yet being bound leaves hello_sent stuck at false.
+
+>
+>> +	pkt->cmd = cpu_to_le32(QRTR_TYPE_HELLO);
+>> +	from.sq_node = qrtr_local_nid;
+>> +	to.sq_node = node->nid;
+>> +	qrtr_node_enqueue(node, skb, QRTR_TYPE_HELLO, &from, &to);
+>> +	qrtr_port_put(ctrl);
+>> +}
+>> +
+> [ ... ]
+>
+>> @@ -605,6 +658,9 @@ int qrtr_endpoint_register(struct qrtr_endpoint *ep, unsigned int nid)
+>>   	mutex_unlock(&qrtr_node_lock);
+>>   	ep->node = node;
+>>   
+>> +	/* Initiate HELLO handshake from the core layer */
+>> +	schedule_work(&node->say_hello);
+>> +
+> [Severity: Medium]
+> Is it safe for registration itself to trigger a hardware transmit before the
+> registering transport driver has finished bringing its channels up?
+>
+> net/qrtr/mhi.c probes in this order:
+>
+> qcom_mhi_qrtr_probe()
+> 	mhi_prepare_for_transfer(mhi_dev);
+> 	rc = qrtr_endpoint_register(&qdev->ep, QRTR_EP_NID_AUTO);
+> 	if (rc)
+> 		goto err_unprepare;
+> 	rc = qcom_mhi_qrtr_queue_dl_buffers(mhi_dev);
+>
+> The work runs on system_percpu_wq and can execute on another CPU
+> concurrently with the rest of the probe, so qrtr_hello_work() ->
+> qrtr_node_enqueue() -> qcom_mhi_qrtr_send() -> mhi_queue_skb() can ring the
+> UL doorbell while the DL ring still holds zero host-posted, device-writable
+> buffers.
+>
+> Can the modem's HELLO/control reply be lost in that window?  With the name
+> server no longer replying to an inbound HELLO and hello_sent latched on the
+> UL enqueue, there does not appear to be a way to recover from a lost reply.
+> If qcom_mhi_qrtr_queue_dl_buffers() then fails, the probe unwinds with
+> qrtr_endpoint_unregister() and mhi_unprepare_from_transfer() after a HELLO
+> has already been put on the wire.
+
+The UL and DL channels are independent; an inbound reply arriving before
+qcom_mhi_qrtr_queue_dl_buffers() populates the DL ring would be lost
+regardless of packet type, and regardless of whether HELLO is sent
+from the core layer or the previous NS-driven path. This is a
+pre-existing window in qcom_mhi_qrtr_probe()'s ordering, not something
+introduced by this patch.
+
+>
+>>   	return 0;
+>>   }
+>>   EXPORT_SYMBOL_GPL(qrtr_endpoint_register);
+>> @@ -879,6 +935,11 @@ static int qrtr_bcast_enqueue(struct qrtr_node *node, struct sk_buff *skb,
+>>   
+>>   	mutex_lock(&qrtr_node_lock);
+>>   	list_for_each_entry(node, &qrtr_all_nodes, item) {
+>> +		/* Skip nodes whose node ID is not yet known; they cannot
+>> +		 * receive broadcast packets before the HELLO handshake.
+>> +		 */
+>> +		if (node->nid == QRTR_EP_NID_AUTO)
+>> +			continue;
+> [Severity: Low]
+> The comment talks about the HELLO handshake, but the test is on node->nid
+> rather than the new node->hello_sent flag.  The two are independent.
+>
+> node->nid only leaves QRTR_EP_NID_AUTO in qrtr_node_assign(), i.e. from a
+> driver-supplied nid (mhi, smd and tun all pass QRTR_EP_NID_AUTO) or from the
+> src_node of a received packet.  hello_sent is set after a successful HELLO
+> xmit.
+>
+> So a node can have hello_sent == true with nid still QRTR_EP_NID_AUTO (we
+> greeted it but it has not sent us anything yet) and be excluded from every
+> broadcast (NEW_SERVER/DEL_SERVER/BYE/DEL_CLIENT and the ns.c HELLO)
+> indefinitely, even though the handshake the comment refers to completed.
+>
+> Conversely, a node with a known nid but hello_sent == false passes this
+> filter and is then dropped by the gate in qrtr_node_enqueue().  Could the
+> comment be reworded to describe the nid condition it actually implements?
+>
+> [Severity: Low]
+> Should this read of node->nid be annotated?  It is written under a
+> spinlock:
+>
+> qrtr_node_assign() {
+> 	spin_lock_irqsave(&qrtr_nodes_lock, flags);
+> 	radix_tree_insert(&qrtr_nodes, nid, node);
+> 	if (node->nid == QRTR_EP_NID_AUTO)
+> 		node->nid = nid;
+> 	spin_unlock_irqrestore(&qrtr_nodes_lock, flags);
+> }
+>
+> but the new readers hold only qrtr_node_lock here, and no lock at all in
+> qrtr_hello_work() ("to.sq_node = node->nid;"), so the lockset intersection
+> for node->nid is empty.
+>
+> This turns a racy value into a control-flow decision: qrtr_endpoint_post()
+> -> qrtr_node_assign() on another CPU can give the node a valid nid right
+> after the check, and the broadcast is then silently skipped for that node
+> with no retransmission.  qrtr_hello_work() may likewise build the HELLO with
+> a stale QRTR_EP_NID_AUTO destination.  Taking qrtr_nodes_lock would not
+> close the check/act window, so would a READ_ONCE() plus a note about the
+> race be the intent here?
+
+Agreed, both will be fixed in the next version. The comment will be
+reworded to describe the check it actually performs (node ID
+availability, needed to build the packet header) rather than implying
+it tracks the HELLO handshake, which is the separate hello_sent flag.
+The reads of node->nid in qrtr_bcast_enqueue() and qrtr_hello_work()
+will be wrapped in READ_ONCE().
+
+>
+>>   		skbn = pskb_copy(skb, GFP_KERNEL);
+>>   		if (!skbn)
+>>   			break;
+>> diff --git a/net/qrtr/ns.c b/net/qrtr/ns.c
+>> index b3f9bbcf9ab9..14262623d2dd 100644
+>> --- a/net/qrtr/ns.c
+>> +++ b/net/qrtr/ns.c
+> [ ... ]
+>
+>> @@ -349,15 +350,8 @@ static int say_hello(struct sockaddr_qrtr *dest)
+>>   	return ret;
+>>   }
+>>   
+>> -/* Announce the list of servers registered on the local node */
+>>   static int ctrl_cmd_hello(struct sockaddr_qrtr *sq)
+>>   {
+>> -	int ret;
+>> -
+>> -	ret = say_hello(sq);
+>> -	if (ret < 0)
+>> -		return ret;
+>> -
+>>   	return announce_servers(sq);
+>>   }
+> [Severity: Medium]
+> With this removal, is there anything left in the kernel that emits a HELLO
+> in response to an inbound HELLO?  say_hello() now has qrtr_ns_init() as its
+> only caller, and qrtr_endpoint_post() has no HELLO handling of its own - it
+> just forwards control packets to the NS socket.
+>
+> The core layer sends exactly one HELLO per endpoint registration and latches
+> node->hello_sent = true as soon as ep->xmit() returns 0.  If that single
+> HELLO is accepted by the transport but not consumed by the remote QRTR
+> stack, no further HELLO is generated, not even when the remote later sends
+> its own.  Is that not the same stall class the patch sets out to fix?
+>
+> While hello_sent is still false, an inbound HELLO cannot bootstrap the link
+> either, since the announce_servers() reply is discarded by the new gate in
+> qrtr_node_enqueue().
+>
+> The changelog describes this hunk as pure de-duplication:
+>
+>      - Remove say_hello() from the name server's ctrl_cmd_hello() handler;
+>        the core layer is now the sole sender of the outbound HELLO.
+>
+> Could it also mention that the reply-on-receive recovery behaviour is being
+> removed?
+
+The only source of the outbound HELLO is now the single schedule_delayed_work() call in
+qrtr_endpoint_register(), retried solely on -EAGAIN from the transport.
+Also, will update the change log.
+
+Thanks,
+Pranav
 
