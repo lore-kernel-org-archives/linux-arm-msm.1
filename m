@@ -1,97 +1,117 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-ej1-f45.google.com (mail-ej1-f45.google.com [209.85.218.45])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 204A2175A6C;
-	Tue, 18 Aug 2026 14:18:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0EFA37CD21
+	for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 15:10:43 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.218.45
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787062697; cv=none; b=k2Ord1pCR2A61tVFoWYl3nZN8CvY0pfCifBXnK/yyCyC68EQWHj4mpbWFcuky0sXqx6kunY6ROCjEXwwnLD3ZIMPVoAeigD8I/JL9YVCZpgCXp+Di/e/te6y7g6cUQlltgQPWPD7jKToigzyNnGqiDzYbDJxqQQetrFqXsqQ1O8=
+	t=1787065845; cv=none; b=V81Yg3SYj3uTzlgZy9mRkgA00K87EYDRy2gNkYgEKZnR0FeVt6aCFCdRkhh1bZbQnnqDT4fOJLD6R7wIEVZ2DSohyqBwJE+ZDKTkm6F9CBhqJbAdk9SeSqyHldv6Zj6/SuDUU6E6qYkgYzJKmAPHyOfplNZTEaeEjVq2TIgDXtE=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787062697; c=relaxed/simple;
-	bh=hn9aaL5Np2ACP5XCRxe2C3j1w0sc3rI8cw0YAsemNrE=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=MsvMgdrMFaKEGWPzKjN0D9Yg/Egk70DiBTyrkUxPnaFWuMkoJcvYt7u1a6aS92d+AlnyiB6TfQznrt7Feec6hE4dHmyM0DocbIdDNN6Zn0hZQU5FATajrgALC0Ierr+9CFHAdDkVVx2NAtkadVdxeJDFRMm6TLhm/MhbHRmfT10=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=PXaTOLs4; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787065845; c=relaxed/simple;
+	bh=XZ4hAV9fFse8n9VMFwqhdJ52136MQa8txkIr3VvJTkU=;
+	h=From:To:Cc:Subject:Date:Message-ID:MIME-Version; b=OEjidEtTIMd1U5GrvzkGlNSEW1uaUukVF/do3iz7uOS4tAB6QRQsvJxTiI9h49pR/p3ibsSE/ct8h3X+QUUQPqMIIrLjAv21C3FbzggI0mj+JRbkQM4yf8eHAGjmjOaFHZgQhUCVVB5P+gvsmx0dm2q2S4yDMVauRKGSc83etpo=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=D/DGuEHe; arc=none smtp.client-ip=209.85.218.45
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="PXaTOLs4"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6DFDC1F000E9;
-	Tue, 18 Aug 2026 14:18:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787062695;
-	bh=lQ6MrCiZZT+mrxVJ80G2HBuj1g1N4krSlsCJ3uFi1lU=;
-	h=From:Date:Subject:To:Cc;
-	b=PXaTOLs4QP1ETyrbCkYkAqwieCM8YPMFNlGLPwEcBl7Xrr1lMw19LbgeqjzSomGiJ
-	 QWT5b67+V4Y9ADg+HRdHhja6RhW9HTkJzqVswxiMx1o83XatOExC8TvKIo8X2VgZeG
-	 SKViHWCTPZawQFf/CGyNQhtQu4GTGV46MPkjo81E7dL+VJHdIcFsiEqOWQRCwIvL0I
-	 F45EDhyi+pa76mpQdvzWwyhBFDaZij1bmUIxPozq08un9KWuMQlrUAWnWvSj9jcf1m
-	 JF/DLQ4a2a/NfL3wimKzWXt7D1z7d0As92I0ua1oTpXsC54PGCYuAqg8KVlSD0YiVM
-	 dO6bpaMRMt2UA==
-From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Tue, 18 Aug 2026 16:18:10 +0200
-Subject: [PATCH] arm64: dts: qcom: msm8953-flipkart-rimob: Fix panel
- compatible
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="D/DGuEHe"
+Received: by mail-ej1-f45.google.com with SMTP id a640c23a62f3a-c2074710751so756141566b.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 18 Aug 2026 08:10:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1787065842; x=1787670642; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=teOP2uP44OhR2SoM/Oy3bMAWk99Bs5sno8zRbiNQZ5Y=;
+        b=D/DGuEHeO+ZGhi3uUHyS3stYHnY8PbRP4mDb0E4410URH5OUkNPY2cJXLOB/nkMtyh
+         v4XM/9Ezio7l9MTHzX7etGgJMFY5FxwaarzcJJWykYPCO7HfmI8KRdnJjW8wqoLkbvbz
+         WAHI0HJ12qSvf4Bi9iSHTunEs3ZvgNwCWedvZGLREmJQ+HUnP7V5vMRDfBgV1S3dAMeS
+         Ttf3HE8/+bGSQE9zk/MYjNuCD8cSP8S8ufFQMbe7lZgwJLkbatiGncJyia6ht5JAzaVh
+         tFb71yWSHh78h4sJffcVlXu5ufV4l2To0uRyh8CdZwdbPSihNoUXnvwSlcYGk21fEwSn
+         hUOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787065842; x=1787670642;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=teOP2uP44OhR2SoM/Oy3bMAWk99Bs5sno8zRbiNQZ5Y=;
+        b=fsedORfeoX1uvgZeUQigzcXRxrAGSsrwrcS+CMX1bLw6EKYaLanlbEBw98LY6gCpKc
+         hCATVg8crDqf0KSH9QAHMIEivsJ7VWzrv+a6e6Ul3hnJ0fFmcGlQLrfIwjRw1lMpYWZM
+         EOVtgNzGSnGZ6dpnpGHGbPstNqDGqzdJ/vlmUCa+NGG9VBmQnMslveGEZd3IZVnunhBg
+         KMQi/Tnl/Gacpyyo8rAiHo86uGd6lZa7LIbsak7d6e1IaYfJktUXAXJahV3kAGNwqkQU
+         4Fp/WOVVmAylpE464HdnCb+s8lhU/AuME6HxeblA/4Jq/+ax85OdlKmCEVrf4Hhn55iF
+         Ao6w==
+X-Gm-Message-State: AOJu0YyyeHIkS3pIV6gJQRyUyknaaqpdLvm+WaCjQdab5dHMG4Fo2rZl
+	tqbU6pXj8ga0onUp5mtt3ZRhtMwI7+rt/VgZWK676KM0Z6k5F1dr7QDb
+X-Gm-Gg: AR+sD136Slj727SUf4xd12xKGglzrskPkZWNs4OuzYpUhfDBDiYDUAc/CVdHzmTo4q0
+	XiqrZJ84Zy9sHyqLlWZ4LlAjRlwFC1EULIZyxK6talXKmiIeYiq+nFOFEBM9syVJvZTTYWsdr/Y
+	8aYd+nux7WJqdFy+oXE8Lj9oOmBlTitDVeI0Hn8J9hr1ZA0OV+Ct3nmaEvmHxmtWpNfnVx/Kg+6
+	4pW3HRyVAVpH+rvRGgOYsTjtnajAJHRnysTGzQhnE7Sn0S3tc2lz7xhNuYSsZ7VkvcrH79LtfbP
+	ndeLUQSFB4M1jhr37HX6jJ/XVM+oQghDGRsS+k/KSuTob678HYgFBAF/JxWEiIGlffundTeg8Ma
+	r8Uy+x1zi0G8GXfV0nujnvrYXO3QggFz/8hHbx6tCaMJr8L1ICjuSDplqiGqFl+I/b+W6uTPU//
+	C9116uSkwTAvQGYrqQXpDnUnye28jEWmojnOWIV4M3zk+QaObtjNj8dbo4iAazGKoZAhNfjqAg5
+	wWEtZyLNv/r6dM1xp8cdQ==
+X-Received: by 2002:a17:907:928c:b0:bf0:b39:dcc8 with SMTP id a640c23a62f3a-c212a1da2bamr1864248066b.26.1787065841859;
+        Tue, 18 Aug 2026 08:10:41 -0700 (PDT)
+Received: from workstation (161-53-210-87.ftth.glasoperator.nl. [87.210.53.161])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c217fe69cf4sm205772266b.3.2026.08.18.08.10.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 18 Aug 2026 08:10:41 -0700 (PDT)
+From: "user.email" <zstaseg@gmail.com>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Sebastian Reichel <sre@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	Stanislav Zaikin <zstaseg@gmail.com>
+Subject: [RFC PATCH v2 0/3] Add Xiaomi 12 Lite 5G (taoyao) battery support
+Date: Tue, 18 Aug 2026 17:10:36 +0200
+Message-ID: <20260818151039.409767-1-zstaseg@gmail.com>
+X-Mailer: git-send-email 2.53.0
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260818-topic-more_dt_warn_fixes-v1-1-609d283502cb@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMWwqDMBCF4a3IPBvQUELsVoqEOI52Ck1kJr2Au
- Pem7ePH4T87KAmTwrnZQejJyjlV9G0DeI1pJcNzNdjOus733pS8MZp7FgpzCa8oKSz8JjUWMXo
- 3uNNEA9R8E/oNtb6Mf+tjuhGW7x8cxwfkLNCxfAAAAA==
-X-Change-ID: 20260818-topic-more_dt_warn_fixes-2cca86964be9
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- Cristian Cozzolino <cristian_ci@protonmail.com>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1787062692; l=1159;
- i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=QQP5idsajnfjQE8/05vaaEFp4cxcOh8wYTXgUqm17G4=;
- b=GK7A1UAaqYTWosQfxbI0q/Qjlq+GOWSfVu5w/NqZjo33j7Oqp46P2HOPPkO8i3Xjk/X7hLKDf
- J2VdWyGIDyoAQJLGF2NdxLuQKmyCQY056LbzLsZJlWLBke3RiVxIIus
-X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
- pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
+Content-Transfer-Encoding: 8bit
 
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+From: Stanislav Zaikin <zstaseg@gmail.com>
 
-During the review process, the bindings have changed, but the DT has
-not been updated to match. Fix it to prevent a "compatible too short"
-DT warning.
+Xiaomi 12 Lite 5G (taoyao) has an additional property with ID 12 that
+breaks the parsing in qcom_battmgr. Fix that by introducing separate
+maps for lookups properties in both directions.
 
-Fixes: a8c0bd4233a9 ("arm64: dts: qcom: msm8953-flipkart-rimob: Enable display and GPU")
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/msm8953-flipkart-rimob.dts | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+The other approach that I tried is manual shifting properties:
 
-diff --git a/arch/arm64/boot/dts/qcom/msm8953-flipkart-rimob.dts b/arch/arm64/boot/dts/qcom/msm8953-flipkart-rimob.dts
-index 978820348fa5..07f9ee868105 100644
---- a/arch/arm64/boot/dts/qcom/msm8953-flipkart-rimob.dts
-+++ b/arch/arm64/boot/dts/qcom/msm8953-flipkart-rimob.dts
-@@ -147,7 +147,8 @@ &mdss_dsi0 {
- 	status = "okay";
- 
- 	panel: panel@0 {
--		compatible = "flipkart,rimob-panel-nt35532-cs";
-+		compatible = "flipkart,rimob-panel-nt35532-cs",
-+			     "novatek,nt35532";
- 		reg = <0>;
- 
- 		backlight = <&pmi8950_wled>;
++	if (battmgr->variant == QCOM_BATTMGR_TAOYAO && prop > BATT_CHG_CTRL_LIM_MAX)
++		prop++;
+...
++		if (battmgr->variant == QCOM_BATTMGR_TAOYAO && property > BATT_CHG_CTRL_LIM_MAX + 1)
++			property--;
 
----
-base-commit: e6664f2b33db9b6811eb4cec109f06cb2b4f458d
-change-id: 20260818-topic-more_dt_warn_fixes-2cca86964be9
+But I found that more obscure.
 
-Best regards,
---  
-Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Will be happy to switch if the maintainers prefer this one.
 
+Changes in v2:
+- Keep the qcom,sm7325-pmic-glink SoC fallback in the compatible chain
+  of the taoyao pmic-glink node (review feedback, patch #1 and #3)
+
+Stanislav Zaikin (3):
+  dt-bindings: soc: qcom: add xiaomi,taoyao-pmic-glink compatible
+  power: supply: qcom_battmgr: add Xiaomi taoyao support
+  arm64: dts: qcom: sm7325-xiaomi-taoyao: switch to device-specific
+    pmic-glink compatible
+
+ .../bindings/soc/qcom/qcom,pmic-glink.yaml    |  5 ++
+ .../boot/dts/qcom/sm7325-xiaomi-taoyao.dts    |  3 +-
+ drivers/power/supply/qcom_battmgr.c           | 86 ++++++++++++++++++-
+ 3 files changed, 89 insertions(+), 5 deletions(-)
+
+-- 
+2.53.0
