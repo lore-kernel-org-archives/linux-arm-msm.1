@@ -1,120 +1,269 @@
-Received: from zg8tmtyylji0my4xnjqumte4.icoremail.net (zg8tmtyylji0my4xnjqumte4.icoremail.net [162.243.164.118])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 02A23489894;
-	Wed, 19 Aug 2026 16:21:22 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=162.243.164.118
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 083FA485CF9
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 16:23:36 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787156490; cv=none; b=j4ii69pmVQKQJ9SvAMj1LZT0WTGYlqV5OsnkUg2VyKUkt/0PclBNybxsm+DQIlSuQqwo4MW9EC81AZikin6xQgzbgjDyy4NGc5EzyxxYl5HgI3MNRjuLFj6JLDF5CA0Ow9aw8UNgFOhGQcahnCJgnHpo8I6Go0MErxGBPWcosjw=
+	t=1787156618; cv=none; b=em3Ma04XoTCJfaHtgd28B4BsfFFGIjjMJ9hNAYqUuk3F+8q3gdNqIskx3FqcHkwmjPdPIKQst25CG0I0CcRhI7rhq3MxAGYZ2bs0Xrsod/FnfX8Bx5nlBKo/vD2WCEmsCcYoB8XoFQXae/Kpuqopm2/AyN6L+Jb5WeFzWiyQtm8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787156490; c=relaxed/simple;
-	bh=PpZFtuIoTKyDwxjHax5jjMkVxp4w90jeEEsNoliWSa0=;
-	h=From:To:Cc:Subject:Date:Message-Id:MIME-Version; b=PlmOJZCgu407UEHAw1IT7iTw9maMJJ3o0GbxQKl48RA2dh+LrtC/wA0KumYZRoR2iAqvgOUx2zfA2mmpoWJjuKbBmMm9ziOA1SSQmanYLrmsVLJMv141HVBJhZ/ELX89Ogp/VmhrnImjWi9NG7c0UEgW22OLRMq3BdLPK0GkOhk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=zju.edu.cn; spf=pass smtp.mailfrom=zju.edu.cn; arc=none smtp.client-ip=162.243.164.118
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=zju.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=zju.edu.cn
-Received: from zju.edu.cn (unknown [10.98.66.117])
-	by mtasvr (Coremail) with SMTP id _____wCHUX3_14VqJoapAA--.2143S3;
-	Thu, 20 Aug 2026 00:21:19 +0800 (CST)
-Received: from localhost.localdomain (unknown [10.98.66.117])
-	by mail-app4 (Coremail) with SMTP id zi_KCgBXijH+14VqXrFQAw--.34652S2;
-	Thu, 20 Aug 2026 00:21:18 +0800 (CST)
-From: Fan Wu <fanwu01@zju.edu.cn>
-To: linux-usb@vger.kernel.org
-Cc: bryan.odonoghue@linaro.org,
-	heikki.krogerus@linux.intel.com,
-	gregkh@linuxfoundation.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org,
-	Fan Wu <fanwu01@zju.edu.cn>
-Subject: [PATCH] usb: typec: qcom-pmic-typec: disable cc_debounce_dwork on stop
-Date: Wed, 19 Aug 2026 16:19:50 +0000
-Message-Id: <20260819161950.77858-1-fanwu01@zju.edu.cn>
-X-Mailer: git-send-email 2.34.1
+	s=arc-20240116; t=1787156618; c=relaxed/simple;
+	bh=hp6/cFeM6i1dHXzM07Et7ijahxhEQwtsKNEdDTmvoFI=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=RhBgRrQPQEmMGwhJz0v4LcwT3bh/tu28wmgeSA8XwHSXmXEpSgIW9pSoQEsuN3UDRPwNdbGF1v9LPzFry4UNbqwtIMjZw/PY81yGrSy4cwey9YMv8/GuUCD14c6z7gNiSKGVm9qIBoByryrmt1l2ZMBQOdHasqSzHxj/hjRLj5Q=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=dqfeYPkc; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XvKjJR8E; arc=none smtp.client-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="dqfeYPkc";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XvKjJR8E"
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67JF1vGx444880
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 16:23:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=hor90yOQ3YR/AK+0CB8L2l
+	uJ6GFiPf9WZ/Sn6QF2aPE=; b=dqfeYPkc9f4cKL1FZyYXw1iZj/VbYklqnLBVPe
+	uKJ9/Z70O4+LFCplTNQIJvHVyml9yBO0zrYyUd2H3VLkdF+Md+vMITK0PR2siQy6
+	5teKVD3zhy0pd6uTgY3paEWZD6MjKsFOw2o3+ue3ysTQVaJv845bWhLBLqU//jb/
+	qyCGcigFt6+6IpBWArLtTeoRsJTKs69yvWH5/NKzv+4CkfebRMnY8Ld0SFzr5s8s
+	MtE+OfQE5jIijTzWEaabX9/NlHrc4dU/AQDNtlivaUUY9B5Sx4B2dW+jZvz3hjHM
+	R/Y3Od4mPL5btPDVWC6zn8B+a+BDR9Lz05eHCgfMCva5B/eg==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5es60e77-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 16:23:35 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-395543dc382so1589513a91.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 09:23:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1787156614; x=1787761414; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=hor90yOQ3YR/AK+0CB8L2luJ6GFiPf9WZ/Sn6QF2aPE=;
+        b=XvKjJR8EJaPk4eWFzjCCOriYmdENNIWy2YAd6jm8zyY+f4fWg/3OoFwSvViBZsru+a
+         Dk2DIAIaD+u3ANBEXA9ZWR7PtRlfMtp/OhvKccS4uQK+9gGG/cn1MAboE6fqVPmwF0wu
+         nUydTTVr93rfJtHSmEeg48UNUTZ/NL1tTTjMs18hnuVCi5XDP+XSeESSKkzI/PA1ghTD
+         U+1W8Bn4I/f29v6J8dnzf9CJ4npu9Z9rfrFCFTwp6hQ4RvKpCpnzFFJnSm0OKViolhco
+         AAzcTEFd/m/dxW1UTcmV0qAHhh6SJSB7gL3jwDyW7sLdG8R8BLS9PzOOKDBZXkfOQlit
+         4yGA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1787156614; x=1787761414;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=hor90yOQ3YR/AK+0CB8L2luJ6GFiPf9WZ/Sn6QF2aPE=;
+        b=BDW9GZjbon0V1NQ0RRCnKRtq+K6N9GZVY4+nHtrPZs8BgfCvG05765VccwF6m87nQC
+         MpsOqsSHsvD4Bqi4A5XRwoKjJI83eJX9ImZ9pN9f39nVOKfxYaoOUCU61xjmnVrXcgM5
+         rGJBGlOWdHs1jUPV0HIOx6HE+LHIcy9QryVcRmvO+/0tHCyWloIBjYq9HepU1VrqCjjP
+         1aX9tEpkVeIqdS5EgRTuZ6P9ZMFFDaOjjX3jKoyGbGQb5sbH2FcpYfKjPdD3a0iG03mR
+         cDAXK7HdrSDgAI8rL9JrqXWXaE/SFBc5z84ZxBgoSoPx97P15wR1vXM/36SGFDnC1kOW
+         CIeQ==
+X-Gm-Message-State: AFuF++nTxYcPb73ZVnkTM83xlm5MaGcjg6GI8xbr3XOHa5XWLvpWGlpP
+	xn+rcr/Sg9xumeEzzftinGddmcFuqd7yj9USRLXFX35XggJxpjKp/qM68kt8cF/6hbHSdz55EKB
+	0Yp/6aMJRSpk9qCWRMrLMyEFQw6WU6gC0Te058fdevWSFIAfUTCVOcMlPtBM2CW0rVavwXGmk1W
+	F0
+X-Gm-Gg: AR+sD12VmWPKycRiXsAUa2ZKctyZV4EMqm367MSlaWJElLlfN3iu9Jp6X8Jnhk7/dnh
+	xLX9wVgwX6eomi39rJJbFK8cLtNtkHfob958tZ+onMkPAr/AbNFMefc+HY1KtV2jGph2qlrfV/Z
+	mqf4kePNU7m5czIG1V6xMHp9XImNLHNGF7zKhCsRxp40Znr67uNzByQn2a4Bd7Xp0/2ax86DWKC
+	EjsYaRlV7R5ZTyKL2Oz1+T7jQvQKUCLDprsanwfxqOMU46Rc5bFVipu+pOQXceTor1JTr7xTJqf
+	twBGHAnOtqpOCWKwECSd+7EvDz+Ct5XxQhhV49+Y3JqvR5jZnr9Z41vZNnZq1vPbiEv0j4pmCdL
+	OU62hzcg9kjslOHt3Agt+BRBfqqy9s8JtDz5pI1Lp6xFhaBAuRA5XmjYUpMnFIACcj5757kExJe
+	7kVJTD0tu6wpDwxKLz89Xboiie4zeE4vgQnt0=
+X-Received: by 2002:a17:90b:4a46:b0:37f:e326:6557 with SMTP id 98e67ed59e1d1-3958083fc60mr10734466a91.4.1787156614309;
+        Wed, 19 Aug 2026 09:23:34 -0700 (PDT)
+X-Received: by 2002:a17:90b:4a46:b0:37f:e326:6557 with SMTP id 98e67ed59e1d1-3958083fc60mr10734369a91.4.1787156613670;
+        Wed, 19 Aug 2026 09:23:33 -0700 (PDT)
+Received: from hu-kathirav-blr.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-327bef77fc0sm15899709eec.8.2026.08.19.09.23.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 19 Aug 2026 09:23:32 -0700 (PDT)
+From: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+Date: Wed, 19 Aug 2026 21:53:27 +0530
+Subject: [PATCH v3] soc: qcom: llcc: Update the SCT table for IPQ5424
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:zi_KCgBXijH+14VqXrFQAw--.34652S2
-X-CM-SenderInfo: qrstjiaswqq6lmxovvfxof0/
-X-CM-DELIVERINFO: =?B?75XOIgXKKxbFmtjJiESix3B1w3vZ3A9ovKVTomAyoQazvoRs/NHSP8GI2EvgeEEW7R
-	sfnXz+g1OQfMo27QHy5TwQyZw9aOy/B7Vzi9F2BqiMai8zX9QFBDONEy5cQTGhGfC78tFp
-	zTnTfYHlKbj98dYeW/XN5RPxYw6l01w8CbPzC/8w
-X-Coremail-Antispam: 1Uk129KBj93XoWxWFyfGw1UtF18AFyDCw1Utwc_yoW5GryDpa
-	98trZrGrykGa9rXr9xtFsFvF4jga17Ar9rJ3y2g343tF1qqw1jyrWUtFyI9F15CFWxJFy3
-	tr43XFy3A3Z8WFcCm3ZEXasCq-sJn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7KY7ZEXa
-	sCq-sGcSsGvfJ3Ic02F40EFcxC0VAKzVAqx4xG6I80ebIjqfuFe4nvWSU5nxnvy29KBjDU
-	0xBIdaVrnRJUUU9lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2
-	IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48v
-	e4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI
-	0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26r1j6r4UM28EF7xvwVC2z280aVCY1x0267AK
-	xVWUJVW8JwAac4AC62xK8xCEY4vEwIxC4wAS0I0E0xvYzxvE52x082IY62kv0487Mc804V
-	CY07AIYIkI8VC2zVCFFI0UMc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AK
-	xVWUXVWUAwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48Icx
-	kI7VAKI48JM4x0Y48IcxkI7VAKI48G6xCjnVAKz4kxMxAIw28IcxkI7VAKI48JMxC20s02
-	6xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_Jr
-	I_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v2
-	6r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj4
-	0_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8
-	JbIYCTnIWIevJa73UjIFyTuYvjxU7rcfUUUUU
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260819-ipq5424_llcc_updates-v3-1-42b48451481d@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAH7YhWoC/3WN3QqCMBiGbyV23MRNN1dH3UeE6H5yoU43HYV47
+ 21G0IHxwQcvvO/zLMBJq6UD58MCrPTaadOHkB0PgDdVf5dQi5ABTjFNWUqhHkaS47xsW87LeRD
+ VJB1UJ0aQoKJmjIIwHaxU+rlhr7dPdnP9kHyKrNhotJuMfW1ej2Lvqyj2FR7BcIrQjGKlKCsux
+ rlknKuWm65LwgPR5PEPC6E/LBxZMs9IShihBdphrev6Bn8cd34dAQAA
+X-Change-ID: 20260806-ipq5424_llcc_updates-f9851d6db886
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Authority-Analysis: v=2.4 cv=E5/9Y6dl c=1 sm=1 tr=0 ts=6a85d887 cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+ a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=bC-a23v3AAAA:8 a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=YbsbOWGNU04IRjVF4icA:9
+ a=QEXdDO2ut3YA:10 a=rl5im9kqc5Lf4LNbBjHf:22 a=FO4_E8m0qiDe52t0p3_H:22
+X-Proofpoint-GUID: 5_692Yt9L1W5tozh82oPGts2266iwa0v
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE5MDEyNyBTYWx0ZWRfX7yiieqcKcY3a
+ nxQek8nK1jSYsGXImxkCOtpVrexPrVHVSyZIsAdMtg+l8amXTDhfSx7YpgAoEAjcUIXclk7cGc1
+ yx8XVCUjXc0yKd9g2+P1S7YVxNWKWSOqTv1BH/Zk+NPRS/ixenfUFxY31E+Sn/TJPQ16h/WGL1R
+ wBluRsiuFCJmQH5f7lXc09+m8jrElyY1oJZOuPqmk7JsZXOUsgYIUT0mTbUqnc/9fjKrqiOxXrw
+ ioDTo7S1bj1hI0/EnM+qH7SNmoO96kKuG/czGXPy5tcjDW3FZwnaqQsKYT/X0943d/ULlDKltUf
+ w79eTrl+ZjkWZwZP7tDdxzYWlIBjbSe4ZAofLAZsYJoF7Z6wqkxNYob/a0Ko9Ch8H63JUxqCN9D
+ 1jkGnnuua3sxWcblfKCt5BCGPyp9JRS2dzSNSmTfUPKG8ksdBxja3YcPrI35HHwqR7HLmDHkrqG
+ uOtj54uERkK2OOle5Bg==
+X-Proofpoint-ORIG-GUID: 5_692Yt9L1W5tozh82oPGts2266iwa0v
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE5MDEyNyBTYWx0ZWRfX7xaUoByVItBM
+ mo19vbuM3tU7EmkMravxPRl7rTuGWYrbpZvIZqebzfg+vtB09BS/tIVbdj2F56J50x+K5JDWrGB
+ bHhiInRcXQXkQuc3Nb1GAzMgqJz7FTk=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-19_04,2026-08-19_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 clxscore=1015 adultscore=0 priorityscore=1501 suspectscore=0
+ phishscore=0 bulkscore=0 malwarescore=0 lowpriorityscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608190127
 
-cc_debounce_dwork lives on the system workqueue but is armed from
-tcpm callbacks (set_cc/start_toggling).  Those callbacks run on tcpm's
-kthread worker which is only destroyed by tcpm_unregister_port(), after
-port_stop() has already returned, opening a potential race window where
-tcpm's worker flush re-arms the work.
+Update the IPQ5424 LLCC slice configuration table to give the PPE
+and Wi-Fi datapaths dedicated slices.
 
-Use disable_delayed_work_sync() in port_stop() to cancel any pending
-instance and prevent future schedule_delayed_work() calls from
-succeeding.  Also unwind a failed port_start() through port_stop(),
-which otherwise jumps straight to tcpm_unregister_port() and leaves
-the same window open after a failed probe.
+Assign slice IDs 1 and 5 to the PPE RX descriptor and RX fill use cases,
+slice IDs 6 and 7 to the Wi-Fi radios connected over PCIe, and slice ID
+2 to the CPU subsystem. Adjust the corresponding capacities, priorities,
+and way masks for these consumers.
 
-This issue was found by an in-house static analysis tool.
+These slice assignments are based on recommendations from the
+performance team, following throughput measurements on IPQ5424.
+Having the dedicated slice configuration for each of these use cases
+helps to improve the networking throughput by more than 1 Gbps.
 
-Fixes: a4422ff22142 ("usb: typec: qcom: Add Qualcomm PMIC Type-C driver")
-Cc: stable@vger.kernel.org # v6.10+
-Assisted-by: Codex:gpt-5.6
-Signed-off-by: Fan Wu <fanwu01@zju.edu.cn>
+Rename the usecase IDs for slice IDs 1 and 2 because LLCC_CPUSS and
+LLCC_VIDSC0 do not describe the actual users of those slices.
+
+Assisted-by: LLM
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Signed-off-by: Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
 ---
- drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c      | 3 +--
- drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c | 2 ++
- 2 files changed, 3 insertions(+), 2 deletions(-)
+Changes in v3:
+- Add more context to the commit message
+- Pick up the R-b tag
+- Link to v2: https://patch.msgid.link/20260811-ipq5424_llcc_updates-v2-1-1e4350585671@oss.qualcomm.com
 
-diff --git a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c
-index 35320f89d..f42c9e65f 100644
---- a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c
-+++ b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec.c
-@@ -101,7 +101,7 @@ static int qcom_pmic_typec_probe(struct platform_device *pdev)
+Changes in v2:
+- Updated the commit message decribing why the change is needed.
+- Link to v1: https://patch.msgid.link/20260807-ipq5424_llcc_updates-v1-1-1f56362ff687@oss.qualcomm.com
+
+To: Bjorn Andersson <andersson@kernel.org>
+To: Konrad Dybcio <konradybcio@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+---
+ drivers/soc/qcom/llcc-qcom.c       | 56 ++++++++++++++++++++++++++++++++------
+ include/linux/soc/qcom/llcc-qcom.h |  4 +++
+ 2 files changed, 52 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/soc/qcom/llcc-qcom.c b/drivers/soc/qcom/llcc-qcom.c
+index 733999867bbf..d60431ace50f 100644
+--- a/drivers/soc/qcom/llcc-qcom.c
++++ b/drivers/soc/qcom/llcc-qcom.c
+@@ -626,11 +626,11 @@ static const struct llcc_slice_config glymur_data[] = {
  
- 	ret = tcpm->port_start(tcpm, tcpm->tcpm_port);
- 	if (ret)
--		goto port_unregister;
-+		goto port_stop;
+ static const struct llcc_slice_config ipq5424_data[] =  {
+ 	{
+-		.usecase_id = LLCC_CPUSS,
++		.usecase_id = LLCC_PPE_RXDESC,
+ 		.slice_id = 1,
+-		.max_cap = 768,
+-		.priority = 1,
+-		.bonus_ways = 0xFFFF,
++		.max_cap = 128,
++		.priority = 3,
++		.bonus_ways = 0x0FFF,
+ 		.retain_on_pc = true,
+ 		.activate_on_init = true,
+ 		.write_scid_cacheable_en = true,
+@@ -642,12 +642,52 @@ static const struct llcc_slice_config ipq5424_data[] =  {
+ 		.vict_prio = true,
+ 	},
+ 	{
+-		.usecase_id = LLCC_VIDSC0,
++		.usecase_id = LLCC_CPUSS,
+ 		.slice_id = 2,
+-		.max_cap = 256,
+-		.priority = 2,
++		.max_cap = 768,
++		.priority = 1,
+ 		.fixed_size = true,
+-		.bonus_ways = 0xF000,
++		.bonus_ways = 0x0FFF,
++		.retain_on_pc = true,
++		.activate_on_init = true,
++		.write_scid_cacheable_en = true,
++		.stale_en = true,
++		.stale_cap_en = true,
++	},
++	{
++		.usecase_id = LLCC_PPE_RXFILL,
++		.slice_id = 5,
++		.max_cap = 128,
++		.priority = 3,
++		.bonus_ways = 0x0FFF,
++		.retain_on_pc = true,
++		.activate_on_init = true,
++		.write_scid_cacheable_en = true,
++		.stale_en = true,
++		.stale_cap_en = true,
++		.alloc_oneway_en = true,
++		.ovcap_en = true,
++		.ovcap_prio = true,
++		.vict_prio = true,
++	},
++	{
++		.usecase_id = LLCC_WLAN_5G,
++		.slice_id = 6,
++		.max_cap = 128,
++		.priority = 3,
++		.bonus_ways = 0xC000,
++		.retain_on_pc = true,
++		.activate_on_init = true,
++		.write_scid_cacheable_en = true,
++		.stale_en = true,
++		.stale_cap_en = true,
++	},
++	{
++		.usecase_id = LLCC_WLAN_6G,
++		.slice_id = 7,
++		.max_cap = 128,
++		.priority = 3,
++		.bonus_ways = 0x3000,
+ 		.retain_on_pc = true,
+ 		.activate_on_init = true,
+ 		.write_scid_cacheable_en = true,
+diff --git a/include/linux/soc/qcom/llcc-qcom.h b/include/linux/soc/qcom/llcc-qcom.h
+index f3ed63e475ab..1ccc429401e8 100644
+--- a/include/linux/soc/qcom/llcc-qcom.h
++++ b/include/linux/soc/qcom/llcc-qcom.h
+@@ -86,6 +86,10 @@
+ #define LLCC_CPUSS_HEU	 94
+ #define LLCC_PCIE_TCU	 97
+ #define LLCC_MDM_PNG_FIXED	 100
++#define LLCC_PPE_RXDESC		 101
++#define LLCC_PPE_RXFILL		 102
++#define LLCC_WLAN_5G		 103
++#define LLCC_WLAN_6G		 104
  
- 	ret = tcpm->pdphy_start(tcpm, tcpm->tcpm_port);
- 	if (ret)
-@@ -117,7 +117,6 @@ static int qcom_pmic_typec_probe(struct platform_device *pdev)
- 	tcpm->pdphy_stop(tcpm);
- port_stop:
- 	tcpm->port_stop(tcpm);
--port_unregister:
- 	tcpm_unregister_port(tcpm->tcpm_port);
- fwnode_remove:
- 	fwnode_handle_put(tcpm->tcpc.fwnode);
-diff --git a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
-index 429bd42a0..fdc379fc4 100644
---- a/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
-+++ b/drivers/usb/typec/tcpm/qcom/qcom_pmic_typec_port.c
-@@ -694,6 +694,8 @@ static void qcom_pmic_typec_port_stop(struct pmic_typec *tcpm)
- 
- 	for (i = 0; i < pmic_typec_port->nr_irqs; i++)
- 		disable_irq(pmic_typec_port->irq_data[i].irq);
-+
-+	disable_delayed_work_sync(&pmic_typec_port->cc_debounce_dwork);
- }
- 
- int qcom_pmic_typec_port_probe(struct platform_device *pdev,
+ /**
+  * struct llcc_slice_desc - Cache slice descriptor
+
+---
+base-commit: 6a746cd265aed59107ebdaa9ce039bb832922969
+change-id: 20260806-ipq5424_llcc_updates-f9851d6db886
+
+Best regards,
+--  
+Kathiravan Thirumoorthy <kathiravan.thirumoorthy@oss.qualcomm.com>
 
