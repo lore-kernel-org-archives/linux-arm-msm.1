@@ -1,87 +1,67 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+Received: from mail-lj1-f180.google.com (mail-lj1-f180.google.com [209.85.208.180])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C9DC4582E1
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 11:23:44 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDD32330B15
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 11:24:38 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.208.180
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787138625; cv=none; b=hgi43Nt+DkIqfrgKdp/E0Fz3jba69Xc3BaJulQngKglutbmg3Bt6EiRnrtJ/2z5GmX1jNjvCHGyi3shfOnK1AQf6/gTJ0oKRJRhEbZ0VSSV676poUzqUDIJIx3l89nDqmBSt52fGa25C16Rbr28y7nS3H51hKBx4i+hCW9n7D2I=
+	t=1787138680; cv=none; b=opNrlttltWM0+bTdbP0RvTaILPO1tOdFvJW5DLKMMZjZ4i0zVclMMFAFUgzrAS3arIujYjfxEvhJs/+CiaC5a2VDiKYZJh2D+MFVVl4DwSheE7DulDiSMAcIFizJsQnwPo2sn0JxziNyZhKMaB4EvOpf2ORDmypSEl3K/AmXvVo=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787138625; c=relaxed/simple;
-	bh=9jYq2QOUqVO0jptGzj/ZGiacKARCDAofE/opIhkiADA=;
+	s=arc-20240116; t=1787138680; c=relaxed/simple;
+	bh=1sfpKPZtvuWNFEL61LYlP3tOtYRbwIF+Shb3KbCktNk=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=DbJOmrNNm9lnlK6fWbC3IT89yIEBuUyI6IuuiVVOqMnnF8YIPADkQEJmfbZW3qb/ZLhzPMRLJyffMBtgOWZn84disxPo2ADJZAg47WTGRR0uI9owF+ah2u3cQowy2RhwkDLOlcbnnx1uCTuzuGKec2QN+8VXPqd5dHUqAR02+hg=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=jCLK/Hbg; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=XANhDWTY; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	 In-Reply-To:Content-Type; b=iY83hrjjXCysc9V974TT4jrWW8fiv5ne0DlPMWAK/efQON2kfYois8LVnMW8/HWENN+LTJ/aGMdgfERBzP+V3lgI4C5d9iSUb6qLtCHtok3NLyPf+6YJrrF7EsuI0NJQuzRu6lOcT0qnFbUIasa4zWQtjZpbKUUhrT7DzqiY1U4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=ORYr2HI7; arc=none smtp.client-ip=209.85.208.180
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="jCLK/Hbg";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="XANhDWTY"
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67JA7bcr3660912
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 11:23:44 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	9jYq2QOUqVO0jptGzj/ZGiacKARCDAofE/opIhkiADA=; b=jCLK/HbgkdosKVXY
-	8w0nQREHfGx7bIMDkPKncmyL8DkZVRNLfHr6gbGlXrlOAKjFVIDSLAmQHpUPm1di
-	xe1TB4vuXxukQbZNvYArOLKV8GumWTeka2jfHu0WzTGvLZ0n+5Tbdvya5Qbz+2ww
-	lDZ8GDaaP/Mu+VyZAM91TsdCofPTEq0kaHitF5yCfmIWawQ/gqBzb/ADk+QRzmmN
-	TQ+UkLH71PepT8JU8mtyVFaeDmtx3xBZfabo6aSZmhgFddYRQXk7yqjWgxkdOkeQ
-	Hv2E1lulc6I3saNizbILMQYxY+KqdMeBJ2X+OQYSDlWxvCgr0+UJSDDK2PdIipoY
-	923n0w==
-Received: from mail-pg1-f199.google.com (mail-pg1-f199.google.com [209.85.215.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4yfkjyaq-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 11:23:43 +0000 (GMT)
-Received: by mail-pg1-f199.google.com with SMTP id 41be03b00d2f7-cb5cc1e139bso552696a12.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 04:23:43 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="ORYr2HI7"
+Received: by mail-lj1-f180.google.com with SMTP id 38308e7fff4ca-39c805fec2cso293761fa.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 04:24:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787138623; x=1787743423; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=9jYq2QOUqVO0jptGzj/ZGiacKARCDAofE/opIhkiADA=;
-        b=XANhDWTY2URs3Py5hBaqUcKkSQGrtT6lPUzH/RB28a8gVjAwDb0HZtvhIUhHo+vyDf
-         fvm3LR7aTibztL+EyhLrmfGJS77lSdK3x1suVm4CUDS4eTnsnFfAd3dyjwhj2W9SKvnc
-         74zTnyQoqrY1NiP3oYXW/R64KqK41FWx7xOB2aenxdqN65qUwe6AvWZJ0J33nx9NHJUi
-         AQffys8W9oF7qrByTSuTEnVoauDW7X+nfhDqe87klRPxHm6xIbuXBRYY6lcVUkwGaSU7
-         O3d6w64WZOx8DTjqgYMBvGZZX3/a5U/iBdb8TcbwgmHVX7wgjMNdEfDyylv5yG2/MiHd
-         rwdA==
+        d=linaro.org; s=google; t=1787138677; x=1787743477; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=0G6VuxN53FrfI+XH1oRu2wukNNPe2Cq3ouDUGXs612Y=;
+        b=ORYr2HI7r5qnERzmAdANiTvSJY1JEi/I82OfFWkWZxwA3DepG3gHiUcPYgJTj2vUIT
+         yzKJGjxIXdgvJ1NKIz1C5S4JsUTNX/PZ51EEscNZhFWmEo/RYuRci5ArIJy74EzMilp+
+         rCwVQl2q13sMHH28Sl+YsIdZcM6BlP8JhfKwsXl40xLFvCqZgITGwsWIYEeddNCcmdAj
+         xs2LTTL/mgpcg4CVmCSCPSjnseVETNiTv0kPFC5lI50dhHr4bqCW5aP83v8d2qJViJUS
+         LDNyXcsOKQ7d3SZ1XurBUBH7jQcq2KbR1fHlTvN1X+vtXyjW04DKdnbpF9mT8rcxCZLT
+         Y9WA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787138623; x=1787743423;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=9jYq2QOUqVO0jptGzj/ZGiacKARCDAofE/opIhkiADA=;
-        b=dXza8Ji7eqacWun2vv38xE+89S5oQlsmFwanyJMisapFuxG/KKzhKRRQH7djm5CL4O
-         k7MEwdLu5pB4e3QnDpBQnoAb1V9ZD9XwcRXMwiX1xfyxNv0GntsmrgLr6QbVAPtTteVX
-         YYa2NalDK0GZJiU9qHcBSe9AFHQ2FFLobquKwzG5qIdNW+NjEwR4o7Rq09TCQxbUIACn
-         PiENiFRsOt2olwk9QeWxlGaPoBRldB4P+82wjM7A69oF+r6C0lbqwNR7i6J39R8yFEO6
-         YR7waQmdKPLaOlvxtuU1LHum4dGtfGM0GNITKkFbc5JystQ1N/BmnOlf0DjrRIU61lSx
-         nlag==
-X-Forwarded-Encrypted: i=1; AHgh+RoyKgcDZqU3kVv/YHBDsyUNss8Cm/R+373wIc2Swk6nqIHBDqUJ2GX4NXuuiAlu/Sizhl8gyCbqfADZfnQd@vger.kernel.org
-X-Gm-Message-State: AOJu0Yz8xqJFNWxhh+zZ6PGdtLHolKv8Z/f6qyp0t0TQkA6UBunfrfLC
-	2tv98hVCZPpQn7688pS/V3152mMu4XHyCAItL9QWKUozhTP4PnOnWibD+YRmD3jQIhTCKHDm407
-	GYiCeaHttXh5oHRtg1PFhV8DmEIC9bn2u9ZhLRsyrakcgxXQDqCsmH/DTHjpqYirSo6cb
-X-Gm-Gg: AR+sD120fh1d9LWreKqAVJUti4GuX3LIacU4RKqNFNnICq2+zCdH2ju1ueqfWIeLyRn
-	3TfH3l8xkKz1Tc0Kyw1zBtXnI47Q/qZ/4nvvdMqC5eEiIXTY4YR4/A3KB3MufPhcA0zgB4GWgnd
-	CDjeYwp8VXHHhYU+hg9tEodiuBBZU2wYfcqofS5ab5OObE6a5i6Na42xROSxI3s+YL93PSG3utj
-	7G6vdZzVLm09hBJK9R++iszaeo62mDcUJdZehlADYQDRC62j1pwgDaBWPx+Uj2cJo5uv1xEGr5I
-	ml5e6mxZDMqe1fLE+LV75f4qTcoCGDvElfBq/x/6h54IxkfSgvPrUbyGx7S0DcbbaQ2/WEn98L3
-	wlTdGH4sg8OPZJESHO3YWX2Xsu0qcRFcFXg==
-X-Received: by 2002:a05:6a21:6e88:b0:3bf:a543:e7f5 with SMTP id adf61e73a8af0-3cd016b15bdmr8241843637.3.1787138622964;
-        Wed, 19 Aug 2026 04:23:42 -0700 (PDT)
-X-Received: by 2002:a05:6a21:6e88:b0:3bf:a543:e7f5 with SMTP id adf61e73a8af0-3cd016b15bdmr8241752637.3.1787138622509;
-        Wed, 19 Aug 2026 04:23:42 -0700 (PDT)
-Received: from [10.217.222.20] ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-327bf10d497sm10823348eec.14.2026.08.19.04.23.38
+        d=1e100.net; s=20251104; t=1787138677; x=1787743477;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=0G6VuxN53FrfI+XH1oRu2wukNNPe2Cq3ouDUGXs612Y=;
+        b=o9QwXlWPLYMmRQafcF9nXM4wKS2uQNmNh9DN/O9p9aHM16nzq7Tleg7bAqVT3Lb2Jr
+         PLt7CEyd3qGGU9kWxiRfGESVon1612XDdiaLCUSSihRO1gej1iqyJMlnM4XBVIbw0hgk
+         tNaHvBWN5o7IbdgTSjDTiOcbciJEV7Rvfk8K2n3TTn9maWHMKbVLsPA1FAPqniPhYtaa
+         E6w7b+Njs/NntdxlAdaGCLpFDY5+mn96HQydoQ9oL7JvqbCGLCUbusyRgSvQEYqrlLRh
+         1cx+VyvbYlimzAkmUyO/AHdvUmV9SkXzi6DifopzTjoN6IdSYiMHzwyl/JFE8HWoC7Y2
+         kytg==
+X-Forwarded-Encrypted: i=1; AHgh+RpqdIHQE95QNoxVsBSLRBnrQNO/Y5Ve9ft7h3dJcpMw/dzAsq3Tsmg9RC+n5SZS8yUoeokHB9ZiEgurC2vD@vger.kernel.org
+X-Gm-Message-State: AOJu0YxX4d3Nj1w/WbnJq7B3GSJC245ez6HeunLfR2JMYa9sSmPCMElo
+	cjbperIRJ00/LdeOHgRwPdwCrbCkQAL+gW4xFbFXPSGeZ3MHpRfbqFMFbqT8YzFOboM=
+X-Gm-Gg: AR+sD12vIJ3CYCwX7PjwR5jJyzFP0Y4Shzr2z4lqK6io6GEJP0DN8IJo8N0hs8Azn5C
+	v1kDIpJsLiAx/o5CtXazdh9KJy56Oi35kx6tfaLwrPk8EzSeFfqg5kDMqteys+rXcd+dba6hr3u
+	TwYWkvlLsSUcQe+b1Zz5SwX7DI0zg1jFPf31B+80aS/doVIQu0v07b6eZngVdvwGulas6Tv565v
+	YvAgHHG7fjMCutZ6NTms8Xb6x23cuBsEEc5vHSv4idNys+CpugOGsgRAxVVTOVb+dNF/7bbMHEE
+	/0kBhPkLFRQo8rnZCZqsMrmi7/WORDv3z15pG6Gn2zcOnFLtWfCFLl3pA3yCUqtzVnSh8uysXvb
+	y8gy3SMsGTXjTuEZ2/0BkNRC0uRnznwgU0JDfK2y8nTxt0VgKSRiwGmc3boFofUJNIW4pMQ3kuS
+	Nuuu9eTIfWsh/1TOUO5fZi3TbE5gKFsEPnRc8iqDaDMaxosid0HNjPoG0p7PfFobX8x57124xNU
+	9Na3Cx4LjDU6V0LJqJU4dVIcVVEF8o9357cUzTQqg==
+X-Received: by 2002:a05:6512:68f:b0:5b4:59a3:c67 with SMTP id 2adb3069b0e04-5b478d15f12mr711510e87.3.1787138676767;
+        Wed, 19 Aug 2026 04:24:36 -0700 (PDT)
+Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b4788dafd9sm452822e87.51.2026.08.19.04.24.35
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 19 Aug 2026 04:23:42 -0700 (PDT)
-Message-ID: <b523b910-c645-44b1-9e76-1d25fac16468@oss.qualcomm.com>
-Date: Wed, 19 Aug 2026 16:53:36 +0530
+        Wed, 19 Aug 2026 04:24:36 -0700 (PDT)
+Message-ID: <2d1760c2-f368-4d50-b341-f3febb40ccc2@linaro.org>
+Date: Wed, 19 Aug 2026 14:24:35 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -89,95 +69,250 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] dt-bindings: remoteproc: qcom,shikra-pas: Allow
- bam-dmux subnode
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley
- <conor+dt@kernel.org>,
-        Kumar Patro <bibek.patro@oss.qualcomm.com>,
-        Komal Bajaj <komal.bajaj@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>
-References: <20260813-shikra-pas-bam-dmux-binding-v3-1-167a3fb50d21@oss.qualcomm.com>
- <20260814-modest-rose-salmon-7bb60b@quoll>
-Content-Language: en-US
-From: Vishnu Santhosh <vishnu.santhosh@oss.qualcomm.com>
-In-Reply-To: <20260814-modest-rose-salmon-7bb60b@quoll>
+Subject: Re: [PATCH v4 2/5] i2c: qcom-cci: Support per-mode CCI clock rates
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+ Wolfram Sang <wsa+renesas@sang-engineering.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Luca Weiss <luca@lucaweiss.eu>
+Cc: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, konradybcio@kernel.org,
+ stephan.gerhold@linaro.org
+References: <20260801-cci-clk-fix-v4-0-e1d80da54e01@oss.qualcomm.com>
+ <20260801-cci-clk-fix-v4-2-e1d80da54e01@oss.qualcomm.com>
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+In-Reply-To: <20260801-cci-clk-fix-v4-2-e1d80da54e01@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=NoPhtcdJ c=1 sm=1 tr=0 ts=6a85923f cx=c_pps
- a=Oh5Dbbf/trHjhBongsHeRQ==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=xR3Y2up12dx3HEdxvAEA:9 a=QEXdDO2ut3YA:10
- a=_Vgx9l1VpLgwpw_dHYaR:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: SV0OESK1VC8QEjhnwVG457gmKVOrJvrq
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE5MDA4OCBTYWx0ZWRfX/I3jCtkLl8L6
- rizgybutKAiqeiu25zalkgrdj1GoDoMhCsP9Oc3zeAQAP/Bx3n7Hmf0rp9b6O30bO8B4V+RresV
- sHRwXsFKO8j2y+j+gKsIJn+Puom1q6E=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE5MDA4OCBTYWx0ZWRfX3mBFVOt7ezyO
- fBOpMAWnAurs1OzpL8qiqu1SmHYuAFhMSl4E3oHwL09hV44irh4yaD6gM/dxtsclfc+muU06z8s
- jQ3EzNfeQJEIzjFq9V3svr9YuUwpOYQ0y5k/YgbFebDuWZVrsodsaDc0aKwvxLafbt9VqwDnxf/
- d2HI5SpxHHyXyX/7Hgl96tPDIPaDdUMH6chSlX7LwOV+BTcA8CZrSvW/Wbu/nC5f0Y3oP1vgl9A
- pgLJ6GChNvr3i0qkWBjg7Sqg2+20a9kFtyyIwyOlL5P45kCs8rj983fGFqFNR9UIjSINzLjDeUU
- NrATZHixSmcPghLFZaJN6X9st4feJnZnimil7BkjcwM5bfPt+3GSfOjARBXv7YImPcFvaiuIG8G
- lSlFufpSp2g32I8LLyA56t2zqVZErc79zTkWt++tnE4UJBRkNbE3Lgnru5CGVAeo20SORiQ47RY
- kecFaydA2DaJC/9uGcg==
-X-Proofpoint-GUID: SV0OESK1VC8QEjhnwVG457gmKVOrJvrq
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-19_03,2026-08-18_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 clxscore=1015 adultscore=0 priorityscore=1501 phishscore=0
- spamscore=0 malwarescore=0 lowpriorityscore=0 impostorscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608190088
 
+On 8/1/26 23:10, Loic Poulain wrote:
+> The CCI hw_params timing values (thigh, tlow, etc.) are expressed in
+> clock ticks and are only valid at the specific CCI clock rate they were
+> calibrated for. Different I2C modes may be calibrated for different
+> rates, and the single CCI clock is shared by all masters.
+> 
+> Turn the timing table into a two-dimensional [rate][mode] matrix so a
+> given rate can carry timing sets for each mode, and select the entry
+> matching the currently running clock rate at init time. The existing
+> per-variant values are moved under their calibrated rate (19.2 MHz for
+> v1/v1.5, 37.5 MHz for v2), no timing values are changed.
+> 
+> At this stage the driver only validates the running rate against the
+> table, the timings are only valid at the exact rate they were calibrated
+> for, so if the current rate has no matching entry for a master's mode,
+> fail initialization rather than program incorrect timings. A following
+> patch actively enforces the required rate so this becomes a safety net.
+> 
+> Suggested-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> ---
+>   drivers/i2c/busses/i2c-qcom-cci.c | 74 +++++++++++++++++++++++++++++++--------
+>   1 file changed, 59 insertions(+), 15 deletions(-)
+> 
+> diff --git a/drivers/i2c/busses/i2c-qcom-cci.c b/drivers/i2c/busses/i2c-qcom-cci.c
+> index 0a216c4d08114f267c8441925e8811ca64f1a909..1092ce0371429ef64c7cc44cc23a42ba4c135af5 100644
+> --- a/drivers/i2c/busses/i2c-qcom-cci.c
+> +++ b/drivers/i2c/busses/i2c-qcom-cci.c
+> @@ -82,6 +82,13 @@ enum {
+>   	I2C_MODE_STANDARD,
+>   	I2C_MODE_FAST,
+>   	I2C_MODE_FAST_PLUS,
+> +	NUM_I2C_MODES,
+> +};
+> +
+> +enum {
+> +	CCI_CLK_RATE_19_2MHZ,
+> +	CCI_CLK_RATE_37_5MHZ,
+> +	NUM_CCI_CLK_RATES,
+>   };
+>   
+>   enum cci_i2c_queue_t {
+> @@ -117,7 +124,7 @@ struct cci_data {
+>   	unsigned int num_masters;
+>   	struct i2c_adapter_quirks quirks;
+>   	u16 queue_size[NUM_QUEUES];
+> -	struct hw_params params[3];
+> +	struct hw_params params[NUM_CCI_CLK_RATES][NUM_I2C_MODES];
+>   };
+>   
+>   struct cci {
+> @@ -127,6 +134,7 @@ struct cci {
+>   	const struct cci_data *data;
+>   	struct clk_bulk_data *clocks;
+>   	int nclocks;
+> +	struct clk *cci_clk;
+>   	struct cci_master master[NUM_MASTERS];
+>   };
+>   
+> @@ -225,7 +233,34 @@ static int cci_halt(struct cci *cci, u8 master_num)
+>   	return 0;
+>   }
+>   
+> -static void cci_init(struct cci *cci)
+> +static const unsigned long cci_clk_rates[NUM_CCI_CLK_RATES] = {
+> +	[CCI_CLK_RATE_19_2MHZ] = 19200000,
+> +	[CCI_CLK_RATE_37_5MHZ] = 37500000,
+> +};
+> +
+> +static int cci_clk_rate_idx(unsigned long rate)
+> +{
+> +	int i;
+> +
+> +	for (i = 0; i < NUM_CCI_CLK_RATES; i++)
+> +		if (cci_clk_rates[i] == rate)
+> +			return i;
+> +
+> +	return -EINVAL;
+> +}
+> +
+> +static const struct hw_params *cci_get_hw_params(struct cci *cci, int mode)
+> +{
+> +	unsigned long rate = clk_get_rate(cci->cci_clk);
+> +	int ri = cci_clk_rate_idx(rate);
+> +
+> +	if (ri >= 0 && cci->data->params[ri][mode].thigh)
+> +		return &cci->data->params[ri][mode];
+> +
+> +	return NULL;
+> +}
+> +
+> +static int cci_init(struct cci *cci)
+>   {
+>   	u32 val = CCI_IRQ_MASK_0_I2C_M0_RD_DONE |
+>   			CCI_IRQ_MASK_0_I2C_M0_Q0_REPORT |
+> @@ -249,7 +284,12 @@ static void cci_init(struct cci *cci)
+>   		if (!cci->master[i].cci)
+>   			continue;
+>   
+> -		hw = &cci->data->params[mode];
+> +		hw = cci_get_hw_params(cci, mode);
+> +		if (!hw) {
+> +			dev_err(cci->dev, "no timing for mode %d at CCI clock %lu Hz\n",
+> +				mode, clk_get_rate(cci->cci_clk));
+> +			return -EOPNOTSUPP;
+> +		}
+>   
+>   		val = hw->thigh << 16 | hw->tlow;
+>   		writel(val, cci->base + CCI_I2C_Mm_SCL_CTL(i));
+> @@ -266,6 +306,8 @@ static void cci_init(struct cci *cci)
+>   		val = hw->scl_stretch_en << 8 | hw->trdhld << 4 | hw->tsp;
+>   		writel(val, cci->base + CCI_I2C_Mm_MISC_CTL(i));
+>   	}
+> +
+> +	return 0;
+>   }
+>   
+>   static int cci_reset(struct cci *cci)
+> @@ -283,9 +325,7 @@ static int cci_reset(struct cci *cci)
+>   		return -ETIMEDOUT;
+>   	}
+>   
+> -	cci_init(cci);
+> -
+> -	return 0;
+> +	return cci_init(cci);
+>   }
+>   
+>   static int cci_run_queue(struct cci *cci, u8 master, u8 queue)
+> @@ -488,8 +528,7 @@ static int __maybe_unused cci_resume_runtime(struct device *dev)
+>   	if (ret)
+>   		return ret;
+>   
+> -	cci_init(cci);
+> -	return 0;
+> +	return cci_init(cci);
+>   }
+>   
+>   static const struct dev_pm_ops qcom_cci_pm = {
+> @@ -570,6 +609,11 @@ static int cci_probe(struct platform_device *pdev)
+>   		return dev_err_probe(dev, -EINVAL, "not enough clocks in DT\n");
+>   	cci->nclocks = ret;
+>   
+> +	cci->cci_clk = devm_clk_get(dev, "cci");
+> +	if (IS_ERR(cci->cci_clk))
+> +		return dev_err_probe(dev, PTR_ERR(cci->cci_clk),
+> +				     "failed to get CCI clock\n");
+> +
+>   	ret = cci_enable_clocks(cci);
+>   	if (ret < 0)
+>   		return ret;
+> @@ -652,7 +696,7 @@ static const struct cci_data cci_v1_data = {
+>   		.max_write_len = 10,
+>   		.max_read_len = 12,
+>   	},
+> -	.params[I2C_MODE_STANDARD] = {
+> +	.params[CCI_CLK_RATE_19_2MHZ][I2C_MODE_STANDARD] = {
+>   		.thigh = 78,
+>   		.tlow = 114,
+>   		.tsu_sto = 28,
+> @@ -664,7 +708,7 @@ static const struct cci_data cci_v1_data = {
+>   		.trdhld = 6,
+>   		.tsp = 1
+>   	},
+> -	.params[I2C_MODE_FAST] = {
+> +	.params[CCI_CLK_RATE_19_2MHZ][I2C_MODE_FAST] = {
+>   		.thigh = 20,
+>   		.tlow = 28,
+>   		.tsu_sto = 21,
+> @@ -685,7 +729,7 @@ static const struct cci_data cci_v1_5_data = {
+>   		.max_write_len = 10,
+>   		.max_read_len = 12,
+>   	},
+> -	.params[I2C_MODE_STANDARD] = {
+> +	.params[CCI_CLK_RATE_19_2MHZ][I2C_MODE_STANDARD] = {
+>   		.thigh = 78,
+>   		.tlow = 114,
+>   		.tsu_sto = 28,
+> @@ -697,7 +741,7 @@ static const struct cci_data cci_v1_5_data = {
+>   		.trdhld = 6,
+>   		.tsp = 1
+>   	},
+> -	.params[I2C_MODE_FAST] = {
+> +	.params[CCI_CLK_RATE_19_2MHZ][I2C_MODE_FAST] = {
+>   		.thigh = 20,
+>   		.tlow = 28,
+>   		.tsu_sto = 21,
+> @@ -718,7 +762,7 @@ static const struct cci_data cci_v2_data = {
+>   		.max_write_len = 11,
+>   		.max_read_len = 12,
+>   	},
+> -	.params[I2C_MODE_STANDARD] = {
+> +	.params[CCI_CLK_RATE_37_5MHZ][I2C_MODE_STANDARD] = {
+>   		.thigh = 201,
+>   		.tlow = 174,
+>   		.tsu_sto = 204,
+> @@ -730,7 +774,7 @@ static const struct cci_data cci_v2_data = {
+>   		.trdhld = 6,
+>   		.tsp = 3
+>   	},
+> -	.params[I2C_MODE_FAST] = {
+> +	.params[CCI_CLK_RATE_37_5MHZ][I2C_MODE_FAST] = {
+>   		.thigh = 38,
+>   		.tlow = 56,
+>   		.tsu_sto = 40,
+> @@ -742,7 +786,7 @@ static const struct cci_data cci_v2_data = {
+>   		.trdhld = 6,
+>   		.tsp = 3
+>   	},
+> -	.params[I2C_MODE_FAST_PLUS] = {
+> +	.params[CCI_CLK_RATE_37_5MHZ][I2C_MODE_FAST_PLUS] = {
+>   		.thigh = 16,
+>   		.tlow = 22,
+>   		.tsu_sto = 17,
+> 
 
-On 14-08-2026 02:35 pm, Krzysztof Kozlowski wrote:
-> On Thu, Aug 13, 2026 at 04:55:54PM +0530, Vishnu Santhosh wrote:
->> Allow an optional bam-dmux subnode under qcom,shikra-mpss-pas by
->> referencing qcom,bam-dmux.yaml.
-> I still miss the answer why. Last time you said in present tense that
-> this node exists there, which I objected. The answer to my objections is
-> to provide proper reason why you are adding this, why you are doing it.
-> Answer almost never is: repeat what the diff is doing.
->
-> You change something in the bindings because something exists in the
-> hardware and it was missed in initial submission, and you explain the
-> impact of that "missing".
->
-> Best regards,
-> Krzysztof
+To my taste it brings the avoidable complexity in the logic, which
+is then rightfully removed in the 4/5 change.
 
-Understood. The reason is not that there is already an in-tree DTS that
-fails validation today. Rather, it is driven by the intended Shikra MPSS
-topology.
+Eventually struct hw_params params should be removed from all
+platform data instances, while here its diffusion becomes even
+deeper, can you please consider to reorder the changes by popping
+4/5 up?..
 
-In the earlier Shikra BAM-DMUX DTS posting, the bam-dmux node was initially
-placed outside the modem remoteproc node. Based on review feedback from
-Stephan [1], it was requested that bam-dmux be moved under the modem remoteproc
-node instead. The rationale was that placing the bam-dmux node at the top level
-makes it impossible for userspace to associate it with a remoteproc instance
-(in this case, the modem). This binding change therefore exists to describe
-the intended Shikra MPSS child-node topology.
+Apart of this concern, I do not see any technical flaws, to move on
 
-The DTS user of this binding has not been merged yet. Its next revision is being
-held until a separate discussion regarding an XPU violation is concluded. Our
-intention is to get the required binding changes merged first so that the DT patch
-can be sent once those discussions are complete.
+Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 
-Please let me know if adding the above context to the commit message is what you
-are expecting.
-
-[1] https://lore.kernel.org/all/airpBYZ2pRdNaE1v@linaro.org/
-
-Thanks,
-Vishnu
-
->
+-- 
+Best wishes,
+Vladimir
