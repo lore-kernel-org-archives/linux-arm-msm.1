@@ -1,149 +1,222 @@
-Received: from mail-pl1-f176.google.com (mail-pl1-f176.google.com [209.85.214.176])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DFF52EF67A
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 20:00:34 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=pass smtp.client-ip=209.85.214.176
-ARC-Seal:i=2; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787169636; cv=pass; b=NAg4xRLGYwI7uD/3Vjkl7j/HXkNsmJ67A5mQcnXXN3JIGnWAGVuTl/Ua1wLHY72TXYcq6KdDqzVi3Bj3DlrVbEqJB38DwZgKU6F/HAbPtT8fqhvp5jx6cGa2E+YO1HTWdyqeQihlBafcCgfeo0QVktu4b1YOKuL/P76tBO4Yrb8=
-ARC-Message-Signature:i=2; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787169636; c=relaxed/simple;
-	bh=vIDvQ1BYL5+L/acX8gVrRxrqnuz1ZgyTKSzf8gbt7No=;
-	h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
-	 To:Cc:Content-Type; b=Z/e/mFrN5mJRgxabN0XFQB3Jsy8U6g9Ma5QSbC19JLxN0AmGAFkl9BPD3JIY+W5kCvt0uujAYG0AzihI3KgNZyV/epvuN/HRdX7YLCGB719eGMHRlRkpTzghzGJ+waFrsHdWiv0DBdSi0/nfpjqmMQ9Vc/bMtIeG3u/tFzFPtPc=
-ARC-Authentication-Results:i=2; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=rbJy4Lw0; arc=pass smtp.client-ip=209.85.214.176
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D2D742853E0
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 20:01:11 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
+	t=1787169673; cv=none; b=FoVpMhj59XArs6bUE9bBe4u8xJsZtXNXR76BA8E2wgp10uoqJ/E5cH3uA1QyEQqmXqwnNTyPdWfzr+DH+5FvaK+FuiwE2/OGyItRvVk1UvaL69yiSW2dD8AaGyJu25RUgnMKZhcCC3U6kpe62nY4KJRRhP7BeO9Dk0Ij3NslWHs=
+ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
+	s=arc-20240116; t=1787169673; c=relaxed/simple;
+	bh=bZq5ZcH/fW6m7Eu4oDlKkeiEGJ/mM3aqzsUp69XY2cM=;
+	h=Message-ID:Date:MIME-Version:From:Subject:To:Cc:References:
+	 In-Reply-To:Content-Type; b=iccREefxtUNNgJNBec5V78U0MPl0gybSueUOxvq95PVA6bmMVgzaEzKU4Mc4zKrOpXokbgkcjMLL+cmuQnejXVOICmq8cSLEW1bi4rW9LuOar7+yOu3BH5ijU3A5JQr6DUcw9uyJGM8O4LLFY9geTPoID9TgqY60pZ393uT0ouU=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=hnaknzbG; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=gitoms8W; arc=none smtp.client-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="rbJy4Lw0"
-Received: by mail-pl1-f176.google.com with SMTP id d9443c01a7336-2ceab75934dso17080465ad.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 13:00:34 -0700 (PDT)
-ARC-Seal: i=1; a=rsa-sha256; t=1787169633; cv=none;
-        d=google.com; s=arc-20260327;
-        b=i+EguiJlUKMV8SD4ixM2Zp6zym9gno4g6LL414EBecuwI4SNJDFa4VnTWe/Moasf90
-         5A/mO2L5JtSiWCctU4cgtJt0qYc9iqiXZ+XwbQ54qmugD5D2al4kfFNFNDc8j1wJ8V/X
-         2koJjhFpY9aoptR7pitk/M17F90GbLXxRde2UgYWxfLLAjMvz95F7pUv/xD/Rr+D93We
-         pMlFy6b2Ew3Enn1nHrCqHjYSgWvFkQ+q/wVUd7O58HGlTMq03K32dr8B64c3XUCSkJkV
-         d7oGf7liErO+zAPNbYaQIMVFCR0hag8zA8d9CB4QjPAUyr/kySgrrFFakl6587g7pBkm
-         IqwQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=vIDvQ1BYL5+L/acX8gVrRxrqnuz1ZgyTKSzf8gbt7No=;
-        fh=p+YeH/lS0H6rdkFYTGFlVScXSfC5L7qmWtGt6Y9CF4k=;
-        b=Ooj0OQAJCUNxAwIEzsOCC3VA2Dub+wd1PcX7xhz+xBedH2eW5UJn30jiLN4ks46d58
-         nt3lmnyMHx8qxVC1bkJf5GpyggQLJ0FePrgWyGKDE5kxaRPhicTkU1It/GaMER5X6BLW
-         BWMMSA5/xSDpzFX1Qu8z2vz8pleceB/DcNkULOVdFnmgm3CpXV9FkMH0U0M3LQP6lqIS
-         syysu14QoovafRBk0Zf8v3YETP5N/Dc25mw1n8dPaRtla0Gji7rjTWJkZIJ8vfr8WWRj
-         BZSQ48cQrINsZ/lXFjmHc12/VHaXFR5Drvt6aGmozRO8GNoKxdAWropkVM2+s3uGlmlz
-         pikg==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="hnaknzbG";
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="gitoms8W"
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67JHq0TX062666
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 20:01:11 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	LnNtRkW6ywP+UGkiJuiejeqtLP3y4FyEqStN/dizZpo=; b=hnaknzbG96+8k3HY
+	0y0I/03yzpJhIB/1es0vZ/m1+AhMihbTWMc7hjx7N5OOyBdKnLtTCRLfCUTpCCC1
+	sPWXKZUbLvXO+Us2NnN8Ai2WOyGTm915jhEHy5AM82moSuy64fBAsVmscEfG0NzY
+	ZUDHRY9CMnhUIlmkGz0Kn1U/hbq2GyJHBZyGlztKnk1NkSw4gkmaZHjp5AfH/rWq
+	XCbvaYHqRy6qjSso82rqjZdTNR/iZlJf4VVRqGNM9RCCTe/sg/AMdBibxb0ahaMA
+	lKBoDFtaakuBtOFeOiGaUDIrLc/orblX0OKWwj9vPV7RCyXxNMHHUPEuhqXqZiKR
+	lrZlBQ==
+Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5ervhddp-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 20:01:10 +0000 (GMT)
+Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-51c0e702df8so19711261cf.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 13:01:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787169633; x=1787774433; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=vIDvQ1BYL5+L/acX8gVrRxrqnuz1ZgyTKSzf8gbt7No=;
-        b=rbJy4Lw09luyWlanWq83oUmHIwLTligubcgNkiIg5b7JBQ7pwRo2pEnpUeWNSSOZlK
-         Ri8ctUAFaPYqPDnwC5ITb/zpWolF8DsZ9szway+6KcPjqxjNIamysQoxbOKm880jW5jp
-         j+d/ybpp8RF8Hv7AzEA57DZ30VBRcaNx0wnnOYSKWWBIJhQXjknDZBvTtskQV/T+Fubo
-         EQumn5D/+hSd/U3uw/5qJtlmGqa3nazt15u8SmiJ6gZnk609e8DmFGXWLxjYXDUU94X8
-         WxU5od6WI0bdNzxxuDcmYhzZp+6f6X4KqjP5m9/V/u1BC9rH7SGy/8SnpQEJDXSk7NTU
-         Kg/Q==
+        d=oss.qualcomm.com; s=google; t=1787169670; x=1787774470; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=LnNtRkW6ywP+UGkiJuiejeqtLP3y4FyEqStN/dizZpo=;
+        b=gitoms8WS1XfzdTcR0ZUacdA8k6Balrgu2cXNBG/GLrCvvGgGhy9MQEHKTg4e1snKp
+         laIFcvXtbnVUIOmGOfH7a0wzcD3eeYwKnxdDbbE2ZFlFmUOReLAzR5M1yMHjGrfAyv/1
+         rOdra0GVFgukmEEMvBZ0fZ0YS+tPtSmZaa1PikS7pFMjcntptTRrvzHR21/RLQMeAvG1
+         E2kDrteOHqxvzJKyxcRjVHF8S5Wy3CdUiIjMs3zi/rHGCgxpUgbfM43E/FTpMHQGgPi0
+         E4sQnzeStZwTZA8nlJYv871w/JQ0pc4mbIeKcjO87STWaZ1rpWLAZngmpi2U4rLC9clN
+         cJ6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787169633; x=1787774433;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=vIDvQ1BYL5+L/acX8gVrRxrqnuz1ZgyTKSzf8gbt7No=;
-        b=DtOHvv2zXEal8QbceWfPrHklA7DH4xU6ehnTdhAuhYDx6/9RZIYbfGiIJ8BHBQ5mzM
-         7owwTz0u174kjeGep5MO+Wt0zAvVDqWRU/jC5bGoWOrefIhNp4In65Xd8Kdsre1w9AS3
-         XSl8bUqPPQQrzi3pgJegErLosUxUazLyEu8oSP/sFV/X2N010y/+FNJfPel0Nh9aCudu
-         ClsGqjj6vKT+A1DcmaDKvTbIDMtDOnqzyNp9THoRtlc0bQPMAOtr9+khgYntS1fD/34a
-         cfsgUQ/F/3zs15cTeg2dM5SPqxglZrHZDy+xif7T+7edMoHbAWiYLDoEEJLCvoVERtoh
-         L/ag==
-X-Forwarded-Encrypted: i=1; AHgh+Roc7PQGvvySObvZn7Yti6XR9c5PD3LtCGMRio8TSNNCgYm3Dr7DALUa7rV6bO9LtGu52KUiLtBrCGr3ZtL4@vger.kernel.org
-X-Gm-Message-State: AFuF++mnZB2YBQn7rWho98MotNiN0tWAukAnk3tyiAHVT+AdsKd81NnA
-	nC1J3c0mtG8kCB8Xwd6c48ArY6v/rswkCjVRbfQUCiC0LHBbtbEvrvRU485RLus0zrKREteXhg8
-	+jcR3bwwkd1bCOOXdwt9SLMkfMTN08Tg=
-X-Gm-Gg: AR+sD12+03IXKL6jjE5+n4feJtEc7PUo4wbghyRIMSBkLnIFoufSatPEI8gkWF++KyA
-	1Ob2Rt5UaxmXajkA6vuX9horjKf7SN4+p5N9k4t4SAazKAAzdruvm4bRzX5Pgl6YqvcpWUUfvIR
-	CFXOMa8HLwKS4DKTEvFSRPLk9IIThmUTqAUxoZRd6MVUXR1RuwjkvYJSQLrcOi6zMhQUg6VMMxm
-	YZnKVHDyVakguk1rN9W6SN6Atie/2xmd1dVeWxmUMcyemTXNSDQj14MWY2rtKAXmwhYkL6wRRY+
-	vfxcKFFDSmbK2kElO9U4B+NYQ0vDyiWMvdJKaBub/SJtH856rSpuGEqfX9fbPXHD3jkjD27991l
-	41AukI7Cpbu/7GqscplhpIsZVISy6ah7lF5HBhJfOux3xFRxlW9Uy5OJUnpNIpvM=
-X-Received: by 2002:a17:902:e541:b0:2ca:ecf6:910e with SMTP id
- d9443c01a7336-2d5fd38fcffmr113795575ad.0.1787169633345; Wed, 19 Aug 2026
- 13:00:33 -0700 (PDT)
+        d=1e100.net; s=20251104; t=1787169670; x=1787774470;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :references:cc:to:subject:from:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=LnNtRkW6ywP+UGkiJuiejeqtLP3y4FyEqStN/dizZpo=;
+        b=FEKNOpXoBwucGM7NkvJU5bVgw8E5a03BBG4fKvh+gyQcT7EP5gCHQwTtm/hdXyJ4V4
+         xGxu4PFa5EYdgStRS5duIg4Uo/ssDacVEfEbChjOFJrOqrXSVri5XrDOm8Wose+7cIZ7
+         Jq/UbP0Vq1H5g/hz1QifCydNc3DkLGxJXqpO5h+hHIv8oZTyapUUCjSeZp/jK4umb+DI
+         JGfqHt5c/VuJHknzKK/nyPib4jvO/Fd6JqN7Hw5m/NQhroQa67trXHmM5iapUC/29Hg/
+         qCIKffMlC7X+n0/6m5TFvMs5zWwcsIvh+bS5v0oAcapAf5Pwkk/8hXXJjxOzxa5pci9/
+         ILaQ==
+X-Forwarded-Encrypted: i=1; AHgh+RrHBZeMExM3zZBrN+Y2UKGuuRgiyCMNGpknYfFB5imALZ9i1Sz2zlHrbUghmgsC56OZThEiMXTWD/vON1ZY@vger.kernel.org
+X-Gm-Message-State: AOJu0YyzICdvwmNA51ABHQ0wgHluIArqf+25i5xCNo/DJ8qGFbCt7+47
+	G9Ag5SfCYZesAY5YCaqgz8y4Xss+Mn1qtmhjzI+XpP+5sNuUjsHhIdRSPsDfiyqvNzFG+iX6/pS
+	xVAdrfGvCmkJsfvVYXMIpLf6LI6rMSW0DT4xIo5dhA2gnYU2GMMhq4lnwICW3lW30g3m8
+X-Gm-Gg: AR+sD11NEGJ2leXi4H06iR3pfzgQ6o2BsFEPd61dvYmCX0qsHXKOnNDY+JaJl6Zqsf4
+	sFrMSmfiSlnJkLlHxE7sQKzpcK3lZSP+nkh8dHSJ1gqD1+J7UzXxTuL7bQwrFDFbR30Fwqouw9z
+	NjldRQE9mi/jyHF7ahE/NgQve0BGS97M3ZhR9obIokgVLiBqTUrLKdU5Pjwz/j3ZKfPu9OxCJ4H
+	WTUM6J7GXsCEMn5/j4CIhMiIZ+qK2L6Ho6nfNwkIi76LLp54KOHE65tPRRLx4V/iiEvWsYe8rkY
+	xfd6jCDC6l45Ut4Ebl3rA5zy998i8QuB3YcrE7sqPOxXMcT1nrp+tYZzl2nCmBtgmKp4t61Y4ED
+	OJ2nFC8b+lgBMxX+Z0t/tsKugohoCHouXm9fUdWeArLrlall4IY3afuqBi+Rla2StHmJ/yzDbSU
+	/UC6dpxBDiKneufg9Mmx27n3GEP8Fq3uYZkgK72wl/uKeZ+7Mn1zVgF48PaX+X0s+xDeo=
+X-Received: by 2002:a05:622a:22a2:b0:51b:fde4:cd4f with SMTP id d75a77b69052e-52dd5cd6e94mr74141231cf.30.1787169668359;
+        Wed, 19 Aug 2026 13:01:08 -0700 (PDT)
+X-Received: by 2002:a05:622a:22a2:b0:51b:fde4:cd4f with SMTP id d75a77b69052e-52dd5cd6e94mr74139461cf.30.1787169667556;
+        Wed, 19 Aug 2026 13:01:07 -0700 (PDT)
+Received: from ?IPV6:2001:1c00:c32:7800:5bfa:a036:83f0:f9ec? (2001-1c00-0c32-7800-5bfa-a036-83f0-f9ec.cable.dynamic.v6.ziggo.nl. [2001:1c00:c32:7800:5bfa:a036:83f0:f9ec])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c243c8ddf0bsm117296766b.4.2026.08.19.13.01.06
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 19 Aug 2026 13:01:06 -0700 (PDT)
+Message-ID: <0f0ba112-f096-47f7-aefc-755bb56a854b@oss.qualcomm.com>
+Date: Wed, 19 Aug 2026 22:01:05 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-References: <20260808171321.133028-1-jesse.casco@gmail.com> <9fab8686-d0fa-40df-a6d0-75349861d78a@oss.qualcomm.com>
-In-Reply-To: <9fab8686-d0fa-40df-a6d0-75349861d78a@oss.qualcomm.com>
-From: Jesse Casco <jesse.casco@gmail.com>
-Date: Wed, 19 Aug 2026 16:00:21 -0400
-X-Gm-Features: AcwNN1VvGTpq-Un825CS9Bo5iwfRmFgQWXNI8QlDt_2Z2tzb9vZb1doA9jCY3Ms
-Message-ID: <CAEaxeoRkYMQagxz84zNL+L4iO3s-KZFDOQ=LLU9UmPnO4o4hhQ@mail.gmail.com>
-Subject: Re: glymur eDP PHY (v8): link trains only at HBR3, all lower rates fail
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Abel Vesa <abel.vesa@linaro.org>, Abel Vesa <abel.vesa@oss.qualcomm.com>, 
-	Yongxing Mou <yongxing.mou@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, 
-	Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Rob Clark <robin.clark@oss.qualcomm.com>, Abhinav Kumar <abhinav.kumar@linux.dev>, 
-	linux-phy@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+From: Hans de Goede <johannes.goede@oss.qualcomm.com>
+Subject: Re: [PATCH 2/2] Bluetooth: hci_core: Handle skb_clone() failure in
+ hci_send_cmd_sync()
+To: Luiz Augusto von Dentz <luiz.dentz@gmail.com>
+Cc: Marcel Holtmann <marcel@holtmann.org>,
+        Ibrahim Abdelkader <iabdelka@qti.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-bluetooth@vger.kernel.org
+References: <20260817205017.56524-1-johannes.goede@oss.qualcomm.com>
+ <20260817205017.56524-2-johannes.goede@oss.qualcomm.com>
+ <CABBYNZ+Bhhx3rtq8i_FGu2a_oFyWquo_gTRcmPyM6HcFC3pkVg@mail.gmail.com>
+ <73afb7ba-53c8-423e-81a2-7e923896c995@oss.qualcomm.com>
+ <CABBYNZJrTSPya+-vwLTpC8iMYj_bygRwZm-Nzk_Fv-WH+FRo-A@mail.gmail.com>
+Content-Language: en-US, nl
+In-Reply-To: <CABBYNZJrTSPya+-vwLTpC8iMYj_bygRwZm-Nzk_Fv-WH+FRo-A@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-GUID: WmQnh9VsurW6NPzGeYH49w8ve-Rm_yRm
+X-Authority-Analysis: v=2.4 cv=VZ3H+lp9 c=1 sm=1 tr=0 ts=6a860b86 cx=c_pps
+ a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=c92rfblmAAAA:8
+ a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=EIXI2P5-5ktP_Jc0aAEA:9 a=3ZKOabzyN94A:10
+ a=QEXdDO2ut3YA:10 a=a_PwQJl-kcHnX1M80qC6:22 a=GvGzcOZaWPEFPQC_NcjD:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE5MDE1NSBTYWx0ZWRfX8rPW/AQvsMbV
+ PosC1gRkN6JMPTWVIF0PBZ5K0kaMTZV159OSpOyCNYhZNO35hR54b66Q6LifLI7GwwL8wcMUjFp
+ TEFebSZKrnbsJuxoFGpXg4+QVapXZulBL7+AAz6rSR9DUmG1dfGSlcYRHVGB73kcxRac8yXVK8G
+ 2sAhklpjhzv6XDeevTi1OHT7/heWwsDhIvdpnAYd+U+X8/CcxlxD5BZWWjQp4jpoYmxgFgjS9As
+ 904uLVJXhMIgEwzT7NEA5HYfHfjFt6CMWsPLrzHVH5WXPbAD5H+coqxMeyCspZMbJbZEUakPQpy
+ UvAuxg7s/B2S33d+Qk9qLDwEtbdNBrU7zLY8tyTfsYRYYhRZvU4oHNaYM4/AAx++SPIaWOy4mUh
+ aleYXsQ4RuhLyI57+l0JQPE6y/0l6q/iK1AR4po60X47LMDWXon3oT4e1DSFgy8zq2pVB8tFtWj
+ fs5cVU6qToZrsQiyKBQ==
+X-Proofpoint-ORIG-GUID: WmQnh9VsurW6NPzGeYH49w8ve-Rm_yRm
+X-Proofpoint-Spam-Info: AW1haW4tMjYwODE5MDE1NSBTYWx0ZWRfX1qE/l7C/3Y30
+ 2G6XPrSIzi/mQqKU7QyCy7VyM9Y5XASs20ytkHB7j+FFaSTjYPYMR6FAe6A1xp5kcvVmb3BKsCB
+ iGmF5JNESxNZF6thTXOELo4mMdVJU1c=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-08-19_05,2026-08-19_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 suspectscore=0 spamscore=0 adultscore=0 clxscore=1015
+ lowpriorityscore=0 phishscore=0 bulkscore=0 priorityscore=1501
+ impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2606150000
+ definitions=main-2608190155
 
-Confirmed working. Applied patch on top of next-20260819, panel
-trained natively:
+Hi,
 
-DPCD 0x2201 ext MAX_LINK_RATE =3D 0x14 (HBR2, the panel's actual advertised=
- max)
-live link: rate=3D540000, num_lanes=3D4, bw_code=3D0x14
-2880x1800 @ 120Hz, 24bpp, pixel clock 709.633 MHz
+On 19-Aug-26 18:42, Luiz Augusto von Dentz wrote:
+> Hi Hans,
+> 
+> On Wed, Aug 19, 2026 at 8:38 AM Hans de Goede
+> <johannes.goede@oss.qualcomm.com> wrote:
+>>
+>> Hi Luiz,
+>>
+>> On 18-Aug-26 20:01, Luiz Augusto von Dentz wrote:
+>>> Hi Hans, Ibrahim,
+>>>
+>>> On Mon, Aug 17, 2026 at 4:50 PM Hans de Goede
+>>> <johannes.goede@oss.qualcomm.com> wrote:
+>>>>
+>>>> From: Ibrahim Abdelkader <iabdelka@qti.qualcomm.com>
+>>>>
+>>>> hci_send_cmd_sync() does not handle the second skb_clone() failure as it
+>>>> does the first one. At that point the command has already been sent and
+>>>> HCI_CMD_PENDING is set, so an allocation failure leaves the flag set with
+>>>> req_skb NULL. The response then matches nothing and the caller blocks for
+>>>> HCI_INIT_TIMEOUT before getting -ETIMEDOUT, reporting a memory shortage as
+>>>> a controller timeout.
+>>>>
+>>>> Clear the flag, cancel the pending request with -ENOMEM so the caller fails
+>>>> immediately instead of waiting out the timeout, and return -ENOMEM so
+>>>> hci_cmd_work() does not arm cmd_timer for a request that no longer exists.
+>>>>
+>>>> Clearing HCI_CMD_PENDING here is safe: all code touching that flag runs
+>>>> from hdev->workqueue, which is an ordered workqueue, so those paths are
+>>>> serialised and cannot race. The one exception is the cleanup added by
+>>>> commit ed516e3f1aa6 ("Bluetooth: hci_sync: Clear HCI_CMD_PENDING when
+>>>> dropping the last request"), which runs on hci_dev_open_sync() failure and
+>>>> from hci_dev_close_sync(), and the workqueue is stopped before that runs.
+>>>>
+>>>> Fixes: 2615fd9a7c25 ("Bluetooth: hci_sync: Fix overwriting request callback")
+>>>> Signed-off-by: Ibrahim Abdelkader <iabdelka@qti.qualcomm.com>
+>>>> Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+>>>> ---
+>>>>  net/bluetooth/hci_core.c | 5 +++++
+>>>>  1 file changed, 5 insertions(+)
+>>>>
+>>>> diff --git a/net/bluetooth/hci_core.c b/net/bluetooth/hci_core.c
+>>>> index 8aeb3024428b..9585b42e7970 100644
+>>>> --- a/net/bluetooth/hci_core.c
+>>>> +++ b/net/bluetooth/hci_core.c
+>>>> @@ -4092,6 +4092,11 @@ static int hci_send_cmd_sync(struct hci_dev *hdev, struct sk_buff *skb)
+>>>>             !hci_dev_test_and_set_flag(hdev, HCI_CMD_PENDING)) {
+>>>>                 kfree_skb(hdev->req_skb);
+>>>>                 hdev->req_skb = skb_clone(hdev->sent_cmd, GFP_KERNEL);
+>>>> +               if (!hdev->req_skb) {
+>>>> +                       hci_dev_clear_flag(hdev, HCI_CMD_PENDING);
+>>>> +                       hci_cmd_sync_cancel_sync(hdev, ENOMEM);
+>>>> +                       err = -ENOMEM;
+>>>> +               }
+>>>
+>>> Sashiko flagged a problem with this change:
+>>>
+>>> https://sashiko.dev/#/patchset/20260817205017.56524-1-johannes.goede%40oss.qualcomm.com
+>>>
+>>> Im with the opinion that this shouldn't cancel the request, because at
+>>> this point it may already been sent to the hardware so maybe we should
+>>> flag it somehow that req_skb wasn't able to be allocated, or something
+>>> like that, but the command is still outstanding.
+>>
+>> Ok, so maybe we should move the hdev->req_skb = skb_clone(hdev->sent_cmd, ...);
+>> to above hci_send_frame() ?  I don't really see a reason why that cannot
+>> be done first.
+>>
+>> And then the hdev->req_skb = skb_clone(hdev->sent_cmd, ...) and
+>> hci_send_frame() error handling could share a common err path both
+>> calling hci_cmd_sync_cancel_sync() ?
+> 
+> Looks like we found a much better alternative which is to use skb_get
+> rather then skb_clone for req_skb:
+> 
+> https://patchwork.kernel.org/project/bluetooth/patch/20260819135321.1444185-1-xin.chen2@oss.qualcomm.com/
 
-Thank you for this! Happy to test anything else if it helps.
+Nice, ok this patch can be dropped from the queue then.
 
-Jesse
+Regards,
 
-On Tue, Aug 18, 2026 at 6:39=E2=80=AFAM Konrad Dybcio
-<konrad.dybcio@oss.qualcomm.com> wrote:
->
-> On 8/8/26 7:13 PM, Jesse Casco wrote:
-> > Hi Abel,
-> >
-> > On an ASUS Zenbook A16 (UX3607OA, Snapdragon X2 Elite Extreme) the inte=
-rnal
-> > eDP panel never comes up on mainline. It is the link rate: the v8 eDP P=
-HY
-> > appears to bring up a usable link only at HBR3.
-> >
-> > Tested on linux-next next-20260713, next-20260803 and next-20260807, wh=
-ere
-> > phy-qcom-edp.c is byte-identical -- so not a recent regression, and the=
- May
-> > 2026 series (eDP low-vdiff LDO config, unified swing/pre-emphasis table=
-s,
-> > eDP/DP mode switch) is present in the tree tested here. The sweep below=
- is
-> > from next-20260803; the machine has since run next-20260807 as its dail=
-y
-> > driver, where HBR3 still trains every boot.
->
-> I mentioned in my submission that this series is required on top:
->
-> https://lore.kernel.org/linux-arm-msm/20260622-glymur-edp-phy-v1-0-814b45=
-089ac9@oss.qualcomm.com/
->
-> Konrad
+Hans
 
 
-
---=20
-Jesse Casco
