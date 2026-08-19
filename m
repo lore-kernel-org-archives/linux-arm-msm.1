@@ -1,160 +1,144 @@
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15B0C48B389
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 16:46:26 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.180.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7BA5748A2A9;
+	Wed, 19 Aug 2026 16:46:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787157988; cv=none; b=NKlqDfkoC+HIRViNJ8QWxVX4C2fNenncbgwfsz5n5chSGlRsDIw1TBy7yVsbsKFrs4P0NWOqqQcYp9adTC3+AgclbFgiTiNQ1laxEOy9qIGRMvZraCIVUCgSLhliH7k4vi9gZWUyxUKdVwTRXAh+ggzYAb4SGzDvWHE+v/xvewI=
+	t=1787158017; cv=none; b=XkxNnLkXGa22Bq+OR0SAlkulTXlQQP3QbxIVvj83MVq3jvWTLywJyOk5JRIWOHlum9yAY0W/qr/LcYAOVVqyiSM1JRsbRNIvnYUngZl1yFhhoaIjnBu6D9myTRuNf1qxhdMii9olQ/l9hx37hMSL6mFncNP5Q0Xdwy7jgDpxebA=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787157988; c=relaxed/simple;
-	bh=YiTvsfFB7bNds/Z7SfqqQe//GOmHOJ7p3LWjA/KuCSI=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=j+w1LTQLo8yggjy+Rq77+R3f0eBLK5ddFMKHeUHVWpDhLJU1Vq07VwZDhL1UugJna6UIEIBlBRLg1KPuMAiJBzjx7gIsojWgaFzfxFQoyKHIMvZ/TW6K2PrG3nUuFfMfk8NQZQlzpNLLYRzHKdFYFUUCkZpotfgqMtHw47YAYC4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=OIkjmvRm; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=NYD2lw+F; arc=none smtp.client-ip=205.220.180.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1787158017; c=relaxed/simple;
+	bh=t4WY1SZyOjTB00Qv3JqSZhT4hew4iMx4qlIkKMqCixg=;
+	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=i2r7qnNa/8msf1GA3KPt5OHVKKi0XYn8FW9dq5cDrMRoYoJyRh68FBuam5sUJpcCPAtsIXAIavKS+4NcHoJrSHehA4B4KpBy1zVbt68L0zutYpWj71Fjh3IhHxzTqURxlJ28O2jrgRIWZTDC87hjZs2Reo6KHuxdb2kawTAdnEg=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=Q3s6Y90T; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="OIkjmvRm";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="NYD2lw+F"
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67JF1g8a212231
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 16:46:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=YWfB7Q5tO41La60/0zJuXCpM
-	Dt5Vkv3MtkfEPltGlWw=; b=OIkjmvRm49YWv1pNRWsrCxlS4N8xG+AG/vKnxjPJ
-	1A2l8ADC3//jXZ47rV+n/EM8Yy9ireHqLuu8FOO08sqGGrHM0I4rCSjw2LXHU+Hy
-	apaxs312Pif3Z06rYm7WNsHYfJr57t8iGhr/SOeByClmYvWxvcMFMJ74KrbHS9wt
-	WJq2erG9BEDOEVMPYKT/CohgYaCAxYhFufVK2vDw4CypW+1oeS40dh1o6jeUiqaN
-	HAQA9n+eBNUl1PUbRmlQFnUmUVu2tMQf4i+Nt2vJe8X/UkUf9hWAHdbX8cD6ywum
-	WQ3TAKUDVH8Ifb/MSZAHpPiBv7e/528ME8g/O9+mM24CQw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g5es4gkas-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 16:46:25 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-9308eafb465so256427385a.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 09:46:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787157985; x=1787762785; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=YWfB7Q5tO41La60/0zJuXCpMDt5Vkv3MtkfEPltGlWw=;
-        b=NYD2lw+FFHDNww/GJD8I5H9sGJPDS1qqq/rXQt4O4eMKMoKJBkNvJ8YDw/v2diobzN
-         QoAT5HJu0yjBHztxhOp3OFQi6LMgz1X68TZTBSNT503qL+Mk9AV5vNgzcOWmEdrk24kk
-         8yhP8re1ZgoEcVJa/CQVjTAfzLrjZBHcsGuTrH4vWtY5zh5ZAl/YX9CI0MuVhDcL7kY3
-         z0lgLPqvuPyhmFOHwLiS4JWjAcWgtxwUgEijrpY4P03lIreulcMGx5VcbXk2btZjYH8h
-         nTZ2ibk6QQ1pl8q0N3s2wQRVwAYv6pxpegONJL41ys5xTlrywgQBbQ+pd94pNDNIHXH7
-         PgCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787157985; x=1787762785;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=YWfB7Q5tO41La60/0zJuXCpMDt5Vkv3MtkfEPltGlWw=;
-        b=RzXDomhyR6UlGsE1QF/SILc3fp7cCkNyefIF5F2I5Ibnsb9uUXA+f8Ub+xHaLA0+D0
-         3zmI+SoGnxPZdK4nulyf4dGhSREtGR92LcFDCLD82SdSl0DKiv6UM+enVGrRZ//SiaJi
-         vCwZdBtvPnPecqRRPA0DHs430wjuXwrHkQJKnnIUeUuyXcPfYX0vvawtMEU7AUtSEcLj
-         3uhgupEvuXjgkVb/SGEdHrsD7KlDiK8tgLfHp41wlRX9GxMs2q8kXetivftX2lQpuiol
-         IZKLLUFivvmakTk0ldbZHlL7YSsBag5edG3Q5xpap2HcQb43axG1fqxSJ5tJcYOKvMJh
-         Wz5Q==
-X-Forwarded-Encrypted: i=1; AHgh+RoiNyNrQNZcskpeFhZFJGWPo6zRK5zN9THZa29AKgk6iJgF2bGoCVPQlmrKjq0egqQvcT4NrhqGQRDfuusT@vger.kernel.org
-X-Gm-Message-State: AOJu0YwylnZ+CgQB5urBj5bcX5GWoQKpdoSMDCWF5munGgroQOaSZoqk
-	K3nhzKw2bfIV81Mog9AoWhieE+27Kvv85vZZ4myxwCa4bxm+xRFNpaUMvUPsyONJxwBSgOWxrh9
-	LaTKTkDbkwl0VXg2FLVWT0rS5f+/vMquEvV1cEtfIr9fu61qd/N06efMd2eIyXKNyRcfS
-X-Gm-Gg: AR+sD10QUXIgxfpGIHhTLajl2yZulxSEYDjQMddhvh4/jzXqqSrtdrhYVE9lsbMUvyU
-	T6nzpZA9Qr9UdAlC3BzaHS1Q8esoFLIbSs96PaZpg1IhlUqU4CHIKUYFFTUCdHd3jfhxCJxsz8y
-	0raCPaPZoV1B3NIxcIIoKoF047hVtvLuF61YgkEnw8upjeV7Xj8Y5BDZL/mpdKdRM6HqafOonwW
-	VGjvvcQ6k/Oan8eyKdPjDU79RZJb4powmf6/yJik5MKa3c6dIug7Hq7MPM+cVh399WUQjqJoURC
-	v32wgtKZ0zJ4R21BXLicGRmWvnBcCJWadmD3l9qZnY2Cfh9MjSppS7DbKQ4szUKdAYzr/l9jl51
-	XytSUfrHkMfRQj4g=
-X-Received: by 2002:a05:620a:1712:b0:933:a17:c0c4 with SMTP id af79cd13be357-9371e1de2bemr523838885a.9.1787157985078;
-        Wed, 19 Aug 2026 09:46:25 -0700 (PDT)
-X-Received: by 2002:a05:620a:1712:b0:933:a17:c0c4 with SMTP id af79cd13be357-9371e1de2bemr523833685a.9.1787157984458;
-        Wed, 19 Aug 2026 09:46:24 -0700 (PDT)
-Received: from oss.qualcomm.com ([188.27.161.240])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-482b1441748sm6914497f8f.8.2026.08.19.09.46.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Aug 2026 09:46:23 -0700 (PDT)
-Date: Wed, 19 Aug 2026 19:46:21 +0300
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-        Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Taniya Das <taniya.das@oss.qualcomm.com>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Tengfei Fan <tengfei.fan@oss.qualcomm.com>,
-        Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH 01/16] clk: qcom: gcc-sm8250: Tie the CX power domain to
- controller
-Message-ID: <na3brywyym7r7rnhbu4gs7z42n5gy55l5u6qmaimvvc5cguofb@ggjp36237nf6>
-References: <20260819-qcom-tie-cx-to-gcc-v1-0-840034124e73@oss.qualcomm.com>
- <20260819-qcom-tie-cx-to-gcc-v1-1-840034124e73@oss.qualcomm.com>
- <cb3424fd-15f6-4ab7-9ff5-d82e42a13bf3@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="Q3s6Y90T"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7DD2C1F000E9;
+	Wed, 19 Aug 2026 16:46:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787158016;
+	bh=gDwETqbehTA+WSxsmLNqku3KFpowN3JsHqzKFU+pEy0=;
+	h=From:Date:Subject:To:Cc;
+	b=Q3s6Y90ThXWXCDzJdGlQyDIFtju+A/MHb+Xgs1OX8e4ZYCmdlfBPVFoQPjjUZL538
+	 0uMo/4Re0Z0Eeq0ZFe7SwGRkG39gg4GOu/xtp1l81IJDydVnkT9s+uKxn1SCNgABQl
+	 5gANFOZxeWwNDnwS1YtODR/KC3PhboelKCJWn9wBVLduz1b6lnWlcmtT19QTaVRXTy
+	 Ak/74EEyNWnOjlKVXcbNG0AaW7Yv7TovUiauHxxFVncJb0cNDCmSm6H9mF4M6bBFPl
+	 KW9zeKFfFhbABxB70XdbFkmxp+2SIqwUkpcyzaYQMKgTcB6axFTR/3aVoZH3pQesYh
+	 f82h0mZO2Yy7Q==
+From: Konrad Dybcio <konradybcio@kernel.org>
+Date: Wed, 19 Aug 2026 18:46:47 +0200
+Subject: [PATCH] serial: qcom-geni: keep registered console runtime active
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cb3424fd-15f6-4ab7-9ff5-d82e42a13bf3@oss.qualcomm.com>
-X-Proofpoint-GUID: sOTRu0iQdPrR9-yxd4Xz01ODrkWcbrHY
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE5MDEzMCBTYWx0ZWRfXzAVZmWTRv2li
- D1nSs/sQ3FDTORUhH4gNgZQ5Hd5D9KTH50GtSH2LfcxsgRJ+f7nw0GqfBVGN1ir0ZAlIDeES1NF
- OjaPKVduRUoIiXQAzLJq1XUnA1yCzdQCFqwOf8JZDDK0xDtMHxpTFyofpGLuylgCEF5oZUTg90g
- wHJ/nAOr3Gk1YoZ7ypnvATlaIoGaUWUOVfG89wpWqsTZvBdFungKW7Qblkn/UOE0IDnNRXumnTR
- 3QA5GbjAvhNWIsBe1XW5gtroiZoJqSV9EWdQkalRksJMDAZpJn5Q43QcYfdc4Fuadz/nMR3o/m6
- GT0X7hqgywSRj3Pm6eU7wT93WWz14zf2r0nuEVm+vnATx3MfosZBvyRptwK96mXYdg9Bg6HTXKo
- jIIVJAq3LxNwlgx0ElFoe63gq+Hc6q94BZIPDvotN0GMA7UR2iXOP7VjoadyxdZL77JDdAYbxd0
- AU0PqKIfiZOnn3n9JKA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE5MDEzMCBTYWx0ZWRfXzDv205jCNYa1
- 7p3676T0GyhzorIcehpizL5t50gjLaY/7tI1lh8FQwCsqTximRltakCOLmuJehk/OZ6XzY9UHNt
- HZQD4+g3Is0kbJPFtiwAx8s2wM5wbZE=
-X-Authority-Analysis: v=2.4 cv=CN8amxrD c=1 sm=1 tr=0 ts=6a85dde1 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=wUpz7uCjLrEXi01cjX+DLw==:17
- a=kj9zAlcOel0A:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=fSiQ1cC45zYv09qsNKgA:9 a=CjuIK1q_8ugA:10 a=IoWCM6iH3mJn3m4BftBB:22
-X-Proofpoint-ORIG-GUID: sOTRu0iQdPrR9-yxd4Xz01ODrkWcbrHY
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-19_04,2026-08-19_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 bulkscore=0 clxscore=1015 spamscore=0
- adultscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608190130
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260819-topic-geni_console_poweredoff-v1-1-7f7bb3aad8da@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQrCMBAG0KuUWRtI4l/0KiLFpl/qiGRCUluh9
+ O5GXb7NW6ggMwqdm4UyJi4sscJsGvL3WxyguK8mq+1BO3NSoyT2akDk1kss8kSbZEZGLyGocNx
+ 2O2f2zmpQPVJG4Pfvv1z/Lq/uAT9+U1rXDw6VAeyBAAAA
+X-Change-ID: 20260819-topic-geni_console_poweredoff-f73b4815820e
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+ Jiri Slaby <jirislaby@kernel.org>, 
+ Praveen Talari <praveen.talari@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-serial@vger.kernel.org, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1787158014; l=2948;
+ i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
+ bh=vTBGxYlsnzN7flm5ABJf0KVHH4ytKurSM1HT+V9rNIE=;
+ b=JkN/sjSz+tAJP+wK9ebIZQbHL7BDRVcfn6vRQ7MkJe43kWzynY5g858yE4o80ZY/EBXoBk/JM
+ 6NH5l/QxMziAKjh7VF1H9Q+Blesoe6SUYJ80ays1+mpUYjJxW0xW98q
+X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
+ pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
 
-On 26-08-19 17:25:57, Konrad Dybcio wrote:
-> On 8/19/26 2:51 PM, Abel Vesa wrote:
-> > Enable runtime PM for the controller so the common GCC probe path resumes
-> > the attached domain while registering clocks, resets and GDSCs.
-> > 
-> > This lets GDSC consumers propagate their votes through the GCC provider to
-> > the CX parent domain.
-> 
-> Not really, this is rather taken care of by the special-cased
-> single-power-domain automatic attachment somewhere in the pm core
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-Right, my wording was poor. The PM core's automatic attachment creates
-the CX-to-GDSC parent-child relationship. Without runtime PM, however,
-the GCC provider remains active and prevents CX from powering down.
+Commit aee1f94dab13 ("serial: qcom-geni: remove .pm callback, use
+runtime PM in startup/shutdown") moved runtime PM references from the
+serial-core PM callback to the port startup and shutdown callbacks.
 
-I'll respin with:
+The serial core used to leave the console port powered after
+registration, but after the callback was removed the temporary probe
+reference is always released. Console writes are not tied to an open TTY
+and can run from contexts which cannot resume the device, so a
+runtime-suspended console can stall. This was observed on a Qualcomm
+X1E80100 CRD device, as the boot console became flakey across boots.
 
-Enable runtime PM for the controller, allowing CX to be powered down
-once all GCC consumers have released their clocks and GDSCs.
+Acquire a runtime PM reference when the console is set up and release it
+through the console exit callback. This keeps the device active only
+while the console is registered and balances the reference when the
+console is disabled or re-enabled through sysfs.
 
-Thanks for reviewing.
+Fixes: aee1f94dab13 ("serial: qcom-geni: remove .pm callback, use runtime PM in startup/shutdown")
+Assisted-by: LLM
+Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+---
+ drivers/tty/serial/qcom_geni_serial.c | 26 ++++++++++++++++++++++++--
+ 1 file changed, 24 insertions(+), 2 deletions(-)
 
-Abel
+diff --git a/drivers/tty/serial/qcom_geni_serial.c b/drivers/tty/serial/qcom_geni_serial.c
+index 3633723acef8..92858bcdebc7 100644
+--- a/drivers/tty/serial/qcom_geni_serial.c
++++ b/drivers/tty/serial/qcom_geni_serial.c
+@@ -1625,16 +1625,37 @@ static int qcom_geni_console_setup(struct console *co, char *options)
+ 	if (unlikely(!uport->membase))
+ 		return -ENXIO;
+ 
++	ret = pm_runtime_resume_and_get(uport->dev);
++	if (ret < 0)
++		return ret;
++
+ 	if (!port->setup) {
+ 		ret = qcom_geni_serial_port_setup(uport);
+-		if (ret)
++		if (ret) {
++			pm_runtime_put_sync(uport->dev);
+ 			return ret;
++		}
+ 	}
+ 
+ 	if (options)
+ 		uart_parse_options(options, &baud, &parity, &bits, &flow);
+ 
+-	return uart_set_options(uport, co, baud, parity, bits, flow);
++	ret = uart_set_options(uport, co, baud, parity, bits, flow);
++	if (ret)
++		pm_runtime_put_sync(uport->dev);
++
++	return ret;
++}
++
++static int qcom_geni_console_exit(struct console *co)
++{
++	struct qcom_geni_serial_port *port;
++
++	port = get_port_from_line(co->index, true, NULL);
++	if (IS_ERR(port))
++		return PTR_ERR(port);
++
++	return pm_runtime_put_sync(port->uport.dev);
+ }
+ 
+ static void qcom_geni_serial_earlycon_write(struct console *con,
+@@ -1751,6 +1772,7 @@ static struct console cons_ops = {
+ 	.device_unlock = qcom_geni_serial_console_device_unlock,
+ 	.device = uart_console_device,
+ 	.setup = qcom_geni_console_setup,
++	.exit = qcom_geni_console_exit,
+ 	.flags = CON_PRINTBUFFER | CON_NBCON,
+ 	.index = -1,
+ 	.data = &qcom_geni_console_driver,
+
+---
+base-commit: 6a746cd265aed59107ebdaa9ce039bb832922969
+change-id: 20260819-topic-geni_console_poweredoff-f73b4815820e
+
+Best regards,
+--  
+Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+
