@@ -1,67 +1,67 @@
-Received: from mail-lf1-f45.google.com (mail-lf1-f45.google.com [209.85.167.45])
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BF4F3B8944
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 11:03:42 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.45
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06B5246D540
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 11:10:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.167.50
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787137423; cv=none; b=p+/nc0Mes9XDwthK/jMLfA1LWBpRznffDP7gJ0LSWzDgBMWSsCynq/ydD2/63QfdPPSadnIZ1SygIwvGGylUhtFS5B3fQJ4vw9I3I0g7WbeM7LAuwvGtBu+NGzIhXDznSabjy2VkcpvQTOwOjlKdqx7N6LFXGBA60NRCGabmsEU=
+	t=1787137860; cv=none; b=LVMLm3X50ijoubapee8P+0bdKB7w4awAvir1/jT4mF+V9f2DjYdxJG5ZiVZe8/Cs/9ItOtDFNl4BfAfr8mlUG+WO0/K/WGfPqn/zG9FouL4gPTVlMG7Cl2RKUPaMZ6xA/C6Mt7sXSRj+1LBx65FDsZBKI78UwglKEH3GpqzBI7U=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787137423; c=relaxed/simple;
-	bh=QBojQsi8wY+kAhHZS4n4dE92YBUTLKJtOxmkrL4V4pY=;
+	s=arc-20240116; t=1787137860; c=relaxed/simple;
+	bh=T8G0ZcWK/K84AczPHDRHSzzAJA9uLSt710Kf5KRx7gc=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=GVO98LmU0KysYSEBLWDR07xIZeoWmHRyC2vOLdGx+ylys18pWq7FHppj+24ySQwdihm+19sk2sSN4+86IGUUnlpxGSFDbt2Uq8zF2Wo4ohQRGh2WV0kSi01Ts0rmCUAmTPyeimf8Hv1x7JCaxH4nhUJof+dSER9PC3m3B7oWUd4=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=pg2z3eWx; arc=none smtp.client-ip=209.85.167.45
+	 In-Reply-To:Content-Type; b=Bp5l2CnOjexnGbXSGOsi5GaD1rdHFZFODbqcqkoyKpcx6j4yScCp5ZkfaEjLXlJ4gVcPj3YqcN/DOpuv7enDTvRLfvYassg9OtqZTc2NKL5sjXcXU+LS7VqYgnevV/KsTYP4a/33PodvQUl8V5pqq/kkCcvX9bnaibdZ+OZKjFk=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org; spf=pass smtp.mailfrom=linaro.org; dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b=Jrda/MTn; arc=none smtp.client-ip=209.85.167.50
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="pg2z3eWx"
-Received: by mail-lf1-f45.google.com with SMTP id 2adb3069b0e04-5aeb72b0af1so131546e87.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 04:03:42 -0700 (PDT)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.b="Jrda/MTn"
+Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-5b2960ea2fbso152332e87.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 04:10:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1787137420; x=1787742220; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1787137854; x=1787742654; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from:references
          :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=A4ELa6x+Yb5HCgORI6eX8lid0seyZkrG1l18lRvxugE=;
-        b=pg2z3eWxK7eWErztV+PPmYVcQa3PCKvlEAE+KVuS6Hw9VpalQcpiPtIr9ueHzNZHZc
-         zeeoDDcITYKYRILPgfe82rXRMvcULtYKFMaNIo8I1NE7xdOwFQ7x3D85S2mSNM1q3lzK
-         nBFoG9hjmH9xFG8M8UAbW0I2tZuNYXp3+nB6ooO9M8ypah5QQ1FYDx+fTALdkkCRdUtg
-         tzCkAkS8yz1ZzK6ZjU0177qb0yY2o/SVP2BgWlkhNmHDpcNEx2ShiAPynA218hLpq26h
-         wb8s2m2bU8+bdK7Rc7I8fQufXbvHKpp91sqzoQONqLERsAvBX4mVTZp4FLetUw7Y3qox
-         KFTQ==
+        bh=MHM+2qgBqc21q4hkz2G6UjCV2/ZpXTwtrV94xxu9kWA=;
+        b=Jrda/MTnlQALPEJSlfv8bjyXT0hAyNcBr2EIVHbFG1G907aMrSl+BCIvo4nhAu/6US
+         SaULGUGaFI0DwNk71wkl96dB3XOIylvx4ORl2D1G1qquBebUPkrKRIjfUqhZgtma+vl+
+         YH/IC5yXorE6YbsYxe7fr1U3PVgtdtJZhByxaxlsjt+PQkmuKSs5ZKHZIDn0xzySTIaf
+         wQ0n92dViXPpfM4afSOfxwkvlYtI3yYKPUezpeQgnnd9u5n/XBxTiSY0GY1GjgE8U/u4
+         RL2IN2aGznaypEtAx05iR0lDlKm2KZgHDFns27GgD1+chxuS4YvUVZ77w0gxvm1/xvDQ
+         VQuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787137420; x=1787742220;
+        d=1e100.net; s=20251104; t=1787137854; x=1787742654;
         h=content-transfer-encoding:content-type:in-reply-to:from:references
          :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=A4ELa6x+Yb5HCgORI6eX8lid0seyZkrG1l18lRvxugE=;
-        b=mug3AGhe4+VAyTLlKCEHMOoGNNQDCj2qXu29GJV+x+kZsMnHGATtv0VXaisl/HzVpC
-         5JTaJRwnI/bxU+vHMWb4bkxCgD4v5ao84rbOPg5UU29Ii1rO+F1wrUsj0dD45KmpG9ZN
-         XSGSvuxQnsifE1746hfe9GBoQBJ9TTE6NDg+3nKgGIcV3R5PynLIqjM9jQQ0V6KqUfqq
-         11oXtt8wSLRwCRaU8kKeaOMZS8ZrycuN5dqHj5Bd+u/lTIdV0jT05efEwbOsnpbV7PkP
-         5QLxkL7WQXHKHlCZucnAqynoAEQpeGWNcSkwPwcbGXe6bhymHIWkkNmtJdemZT8GvH6q
-         JE9A==
-X-Forwarded-Encrypted: i=1; AHgh+RqeYFDPAWTAcoBZl+QlDQlMfUNJjet6dDngfhExP0y+HygHFCe7JUySptkStmzIi9H7Wq/mNOpDwIGUlAwt@vger.kernel.org
-X-Gm-Message-State: AOJu0YxOL5158+BXbsxCcvcVvBJXI+QhsmhqJEwssVJhdSIKQImKIf7O
-	rgMByYkLrwfmmILRDO1/oIamJSy9IZvvUV36mXcttjz6q3qYt4wT+kHuBGtTRErfg1k=
-X-Gm-Gg: AR+sD13iGwPA4tfMun41nknEeCR5zlzYH3h367DX/+sq0/Me44hy2YcUbDOZXC3JjQo
-	3P+VnyksLfU4nzO+fu5Dbh6NFRlQSP9md4CEHuNh9P3jO+sPCdQZzmBb7VAff/UjjPQFZToSjlC
-	6EngAU97k93fDBfnBZ7KXxRcska6gs89NVCn02IwqCboPxagFKJQT7MqOg9W6C66WPcrVSongEI
-	D+57X5IPZapOOueonHHaTEANf2zg9hQqRGLs9uR0fIIilcGHlT4XYbnMWMOIxf8L44rNdkmS/cQ
-	UIWErtfVd9cM8zXGHyP9ZFGB7XaVGwANY8LysgBYpmurh/Yvpg3d2I/S37amXpXVAQmPn5VIcjo
-	slisLwUTmm0fB65ZsuFLREgiwsmRVfJFWwoIxtwv5+57YyKJBrCrBls9+79h7ecywColdMzK5Qa
-	8kdLeLK1KnIGELofqqimgXzWH1xKfv6Sro8/LTlXIgvfXp8LDGB0nad6aRAaxBMhuuwpg+uCYQg
-	YI2V2S3pPJ83i+i0mqhd90yw54+Mh1BxXy2Hnjolw==
-X-Received: by 2002:a05:6512:3c8f:b0:5ae:b2df:c11a with SMTP id 2adb3069b0e04-5b4788fa611mr702473e87.0.1787137420382;
-        Wed, 19 Aug 2026 04:03:40 -0700 (PDT)
+        bh=MHM+2qgBqc21q4hkz2G6UjCV2/ZpXTwtrV94xxu9kWA=;
+        b=oj/pO1QjRWWxidzkyxoDZAHv/A0k2moMlSfTyuAZjbHjrBbwnkAMAzBoE9giZDTkwz
+         KVnIVSbpX0f/crwjaQSZnEJZPC3vQeG/Mcplh9Kl/Z5dByGZ8DrEFleNzMdsPudxmjGD
+         beKaHBCaiGOXY0Xb1SnG1FOfM4TjeHTSvUB8ZAV1UKJlBQh0YpWHKqs3b7MZ7mpp7hFp
+         H3csbFYIFyVQdtgnx2dHxmmKM5I8eM3Cec+LDxEo3gVRt69Yh2EzQxzztnTqFiLkOQNH
+         /Xx5eYSqOD4CZnZYNiOsJAXsxLJxnWwUlAIBMwNk6b9/L+Ex3Lpm7Q0xM1Y2FqPZEkPc
+         zeoA==
+X-Forwarded-Encrypted: i=1; AHgh+RoxNFriwH7NcoSpeGUk7Jqae4SiC0OuttJK2hTU75DBhdTjEHHDOi+Gj5OLX+aDHSsjTKCJnxwyjlbi1XN7@vger.kernel.org
+X-Gm-Message-State: AOJu0YxDUQg/AwiQFe3AmRLU++6lrDajNPyrkV7d4cp6j5NQs/TqHLeB
+	uFLcN6zJhc5ARhteZ0KeREqcJmVFT4kf6x2wK6rM7Tjl0IPzmHrkC46LezvfZfcCZzc=
+X-Gm-Gg: AR+sD11ADz7kUCjRhHgrGDryS8IbAkrmqnBT9oCQ+/NCF+j8v/KjC9bYNXku0T3CGxa
+	GySvsJU+8JM7X51gz/7qqFihr8Wd3X0b6RBKB8jZnryJFoS3KzfJL96P4zBi1mF7p82QDPo19y/
+	RDehR0+0d54RJSWPZHjobaIu3NmHZBjfFQtdxo+bWQM9jAy9aRqgLNgb3W70+SxJT2kB0UhygSh
+	U0653DJD1yrq3pR2s2bHWSeTtDHxXL/md315MHlUzgKlo6EeOshvsTQNv5a+d483ESuEuEGMsum
+	cVYG4nsystc2y2bZpI2kxzPgXKC0OZFsg/KsLKtsCjap6E/YZonCqkay3b5oXKC8k0XUN3eTt27
+	ZmCSmmjpjiHCOgKQSTPHDxez0SRsE1i8msnFN9XjpXfHG8ya8JnAoUk3mwdS/EzjEsEoXmd/xvb
+	f3IxPMGbRWkDgWFtTPml0xbEK0Jx6UYmjCi1baSStkucoRRQF6XrJjML/SrcHWRWNkzOEvvI5WF
+	Mv2bOL1i8zr4nENdhQSo7HA0DTEPJWHKqJOvnL9HQ==
+X-Received: by 2002:a05:6512:68f:b0:5b4:59a3:c67 with SMTP id 2adb3069b0e04-5b478d15f12mr694543e87.3.1787137854067;
+        Wed, 19 Aug 2026 04:10:54 -0700 (PDT)
 Received: from [192.168.1.100] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b4788eb02csm430814e87.68.2026.08.19.04.03.39
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5b4788fa30bsm433544e87.82.2026.08.19.04.10.53
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 19 Aug 2026 04:03:39 -0700 (PDT)
-Message-ID: <440f21a9-4564-4f89-bbef-4095414e486e@linaro.org>
-Date: Wed, 19 Aug 2026 14:03:38 +0300
+        Wed, 19 Aug 2026 04:10:53 -0700 (PDT)
+Message-ID: <62bf3468-a485-4255-80e5-76997398431f@linaro.org>
+Date: Wed, 19 Aug 2026 14:10:52 +0300
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -69,42 +69,41 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] i2c: qcom-cci: fix autosuspend cleanup
-To: Guangshuo Li <lgs201920130244@gmail.com>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>, Robert Foss
- <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
- Todor Tomov <todor.too@gmail.com>, Wolfram Sang <wsa@kernel.org>,
- Vinod Koul <vkoul@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Cc: stable@vger.kernel.org
-References: <20260812094425.3515179-1-lgs201920130244@gmail.com>
+Subject: Re: [PATCH v4 1/5] i2c: qcom-cci: Switch msm8953 to the CCI v2
+ timing/rate config
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Robert Foss <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+ Wolfram Sang <wsa+renesas@sang-engineering.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Luca Weiss <luca@lucaweiss.eu>
+Cc: linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, konradybcio@kernel.org,
+ stephan.gerhold@linaro.org
+References: <20260801-cci-clk-fix-v4-0-e1d80da54e01@oss.qualcomm.com>
+ <20260801-cci-clk-fix-v4-1-e1d80da54e01@oss.qualcomm.com>
 From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-In-Reply-To: <20260812094425.3515179-1-lgs201920130244@gmail.com>
+In-Reply-To: <20260801-cci-clk-fix-v4-1-e1d80da54e01@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 8/12/26 12:44, Guangshuo Li wrote:
-> cci_probe() calls pm_runtime_use_autosuspend(), but the remove path
-> does not call the matching pm_runtime_dont_use_autosuspend() before
-> disabling runtime PM.
+On 8/1/26 23:10, Loic Poulain wrote:
+> The msm8953 CCI timing table is internally inconsistent. Its Standard
+> and Fast timings match v1/v1.5, which are calibrated for a 19.2 MHz CCI
+> clock, but its Fast+ timings are essentially the v2 values, which are
+> calibrated for 37.5 MHz. Since all masters share a single CCI clock,
+> no single rate can satisfy all three modes with the current table, and
+> the DT assigns 19.2 MHz, so Fast+ timings are wrong.
 > 
-> If the autosuspend delay is set to a negative value while autosuspend
-> is enabled, the runtime PM core increments usage_count to prevent
-> runtime suspend. Without undoing the autosuspend setting during
-> teardown, this reference is not dropped and usage_count remains
-> unbalanced.
+> The msm8953 CCI is the same hardware version as msm8996/sdm630, which
+> already use the cci_v2_data config (37.5 MHz). 37.5 MHz is supported by
+> the msm8953 CCI RCG, so reuse cci_v2_data for msm8953 as well and drop
+> the redundant, inconsistent standalone table. This makes all three I2C
+> modes self-consistent under a single clock rate.
 > 
-> Use devm_pm_runtime_set_active_enabled() to manage the runtime PM
-> state. Its managed cleanup disables autosuspend and runtime PM and
-> restores the suspended state on probe failure and driver removal.
-> Remove the now redundant manual runtime PM cleanup.
+> Note this requires the CCI clock to run at 37.5 MHz, the driver selects
+> and enforces the proper rate in following patches.
 > 
-> This issue was found by manual code inspection.
-> 
-> Fixes: e517526195de ("i2c: Add Qualcomm CCI I2C driver")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Guangshuo Li <lgs201920130244@gmail.com>
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 
 Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 
