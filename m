@@ -1,60 +1,133 @@
-Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+Received: from mail-10628.protonmail.ch (mail-10628.protonmail.ch [79.135.106.28])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBB992EEE66;
-	Wed, 19 Aug 2026 20:13:05 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9761E1DF736
+	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 21:09:31 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=79.135.106.28
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787170386; cv=none; b=XRuJ9KD8X2hNm33JWYzTNb+DN8FGdLca7xDi3gmvL8oISknrv8a3MuAvWyeK4pzuKothCe5mOJqcoAVIwUx+Dhptya4FDPY1Vf73igmBH7VIS5H8Enhrg4RCfa3hbBucrSSs62zGx9jepXaxOf9eh7yxuDBRXLUtWBXvpu0yYAo=
+	t=1787173774; cv=none; b=Ae0lrmXVMjE78EJMMsHDTue5HeFf+6vE21ozhgKTbKjtlHrYU+Jdlben5qhXmZqJ2Jry1NkLQy9kaevUhqw25NIxjAUQOw6AKDSdu41Q+WP5FB+9lpXw15joBPFSmW1TjtL1xxFLl+qmIoU8O7PN1kvzTD3nJWhzFieOL9Y1oak=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787170386; c=relaxed/simple;
-	bh=8ez+qKirDM6VniJHUT7jJju4YM5DmduIl4wmXDfMROA=;
-	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To; b=ItBjNZiqHpNCK6Pwf61knXAnkYansbzUxddWGc0YrsJ/qq2xPX8DB65Uhig55eMuwxo75ujLa7T6MCS4b9tVLo7/X0We/bjrX4uiAleVhyfwOhMlo68lBoY1+Mm8lfRuin+nvCzZP0HGESULqQT/t3NPbe9MHvtcAxJtg5urj3o=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=ez5vr7uX; arc=none smtp.client-ip=100.103.45.18
+	s=arc-20240116; t=1787173774; c=relaxed/simple;
+	bh=HFDjAeI1SlPSqSFJRHxxd9HmnMr4li6oEcHHGxNMi3g=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 MIME-Version:Content-Type; b=StosdOxJ62zE1bpInkqyvfBYFj84a4L9MJVhPZxx+J2zAPtzpZthJEyNFQlirad8M1q3AMejBSvE0radnWhIpfMecp1KS5822g3Y53me9UdBLv7WOV7fAGFY6f+h7J1cC8Vz2ebNmMxA6VITgBm3uZ7A9e/Lan5pQ4g/adWGIF8=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me; spf=pass smtp.mailfrom=proton.me; dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b=LjfMJ0eC; arc=none smtp.client-ip=79.135.106.28
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=proton.me
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=proton.me
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="ez5vr7uX"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6EA2F1F000E9;
-	Wed, 19 Aug 2026 20:13:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787170385;
-	bh=jfPhFrAlZ1QN5eRyTMyV/+u4CPeWu9l/un3pn+goY5E=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=ez5vr7uX1hXfbbKcu6/lvVEzhXj/ZfWp/LSyIwcFp2d8yEp8jY2On3udJmTEGcUp1
-	 XQqpopBOGr+WQyAeeHxPsTGCjTbMRnFU7cSq9EKlDQ+r7x+59gVzXAiNhtAxU9NV1L
-	 KWn/E3om3TDFg73my/Xi5ri9WHDO50cQhEs/e4R05EURFSrZb7ZrQbauKnMD07ZSRR
-	 ZP3CpZq2SFuycnz5DBxXPdcqTB6uQoHs+shrDF28r5rVDRWdOEJoY2yd61UOa/FijL
-	 NGlMzP1JUQJ1+mjWqyRyl9PpBANdpGjxPI2Dd0AjBISnVbtJ1Fu75laawjUedV6zkX
-	 MIZ84WIc97T8Q==
-Date: Wed, 19 Aug 2026 20:13:03 +0000
-From: Eric Biggers <ebiggers@kernel.org>
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, linux-arm-msm@vger.kernel.org,
-	linux-crypto@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] MAINTAINERS: Add Qualcomm Inline Crypto Engine entry
-Message-ID: <20260819201303.GA164716@google.com>
-References: <20260819-qcom-ice-add-maintainer-entry-v1-1-60fd2a7ccae7@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=proton.me header.i=@proton.me header.b="LjfMJ0eC"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
+	s=protonmail; t=1787173769; x=1787432969;
+	bh=psaydAglEa987Ndncl1FJjbuOqgMOJX4W/AhcRb6IQM=;
+	h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+	 Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+	 Message-ID:BIMI-Selector;
+	b=LjfMJ0eCt+XlEpwNbkP0jmwpcu6SbnZabUj8gHrDT7oRoKC8ORSLdHTIV9bpDtQr7
+	 54QQAnxIRsEgjkskQ6DlZenmr39jq99SKO5BYPm0U9Db59n+/nJRbBA8xwN+d9gzAa
+	 2ClXilZVerhKcpv4uFG6ZnZaWlrh26lv0GDvRGga6Ay2P+86Izv82bV+/F6DUy5tnP
+	 qp+6XBpUyt2eGp0srK0cvPIu5QVUD47GGZ8ZW7a8KONpFCr4ItmwcReIECbVfNjx70
+	 q07IFzZnM4PmfelgbYm7/gavARg21sx365vcwXO3PUtLXzep1zVAGEwrKpQU8Jw0UO
+	 yrJ8+aMHOb9Yw==
+Date: Wed, 19 Aug 2026 21:09:26 +0000
+To: oe-linux-nfc@lists.linux.dev
+From: Kristian Brox <isyourbrainfoss@proton.me>
+Cc: david@ixit.cz, krzk+dt@kernel.org, devicetree@vger.kernel.org, dmitry.baryshkov@oss.qualcomm.com, luca.weiss@fairphone.com, linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org
+Subject: [PATCH v2 1/3] dt-bindings: net: nfc: add st,st21nfcd
+Message-ID: <20260819210906.2500789-2-isyourbrainfoss@proton.me>
+In-Reply-To: <20260819210906.2500789-1-isyourbrainfoss@proton.me>
+References: <20260818205940.1973944-1-isyourbrainfoss@proton.me> <20260819210906.2500789-1-isyourbrainfoss@proton.me>
+Feedback-ID: 203906395:user:proton
+X-Pm-Message-ID: 56e2fb79c5845bdefa25f9a8661359ce9d430825
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260819-qcom-ice-add-maintainer-entry-v1-1-60fd2a7ccae7@oss.qualcomm.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 19, 2026 at 10:59:02PM +0300, Abel Vesa wrote:
-> Add an entry for the Qualcomm Inline Crypto Engine driver and
-> its device tree bindings.
-> 
-> List myself as maintainer to keep an eye on it.
-> 
-> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-> ---
->  MAINTAINERS | 9 +++++++++
->  1 file changed, 9 insertions(+)
+The ST21NFCD (e.g. Fairphone 5) speaks raw NCI on I2C. Existing
+st,st21nfcb-* and st,st21nfcc-i2c compatibles stay NDLC. Add a
+separate compatible so those boards are not switched to the wrong
+framing.
 
-Acked-by: Eric Biggers <ebiggers@kernel.org>
+Also document the optional SYS_CLK (clocks) and VPS_IO (vdd-io-supply)
+used on Fairphone 5, and add an I2C example.
 
-- Eric
+Signed-off-by: Kristian Brox <isyourbrainfoss@proton.me>
+---
+diff --git a/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml b/Doc=
+umentation/devicetree/bindings/net/nfc/st,st-nci.yaml
+index 1dcbddb..4bdbb36 100644
+--- a/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml
++++ b/Documentation/devicetree/bindings/net/nfc/st,st-nci.yaml
+@@ -11,10 +11,14 @@ maintainers:
+=20
+ properties:
+   compatible:
++    description: |
++      st,st21nfcb-* and st,st21nfcc-i2c use NDLC on the wire.
++      st,st21nfcd is ST21NFCD with raw NCI (no NDLC PCB).
+     enum:
+       - st,st21nfcb-i2c
+       - st,st21nfcb-spi
+       - st,st21nfcc-i2c
++      - st,st21nfcd
+=20
+   reset-gpios:
+     description: Output GPIO pin used for resetting the controller
+@@ -36,6 +40,15 @@ properties:
+       Specifies that the uicc swp signal can be physically connected to th=
+e
+       controller
+=20
++  clocks:
++    maxItems: 1
++    description:
++      External reference clock connected to SYS_CLK.
++
++  vdd-io-supply:
++    description:
++      Digital I/O supply (VPS_IO).
++
+ required:
+   - compatible
+   - interrupts
+@@ -49,6 +62,7 @@ if:
+         enum:
+           - st,st21nfcb-i2c
+           - st,st21nfcc-i2c
++          - st,st21nfcd
+ then:
+   properties:
+     spi-max-frequency: false
+@@ -81,6 +95,27 @@ examples:
+         };
+     };
+=20
++  - |
++    #include <dt-bindings/gpio/gpio.h>
++    #include <dt-bindings/interrupt-controller/irq.h>
++
++    i2c {
++        #address-cells =3D <1>;
++        #size-cells =3D <0>;
++
++        nfc@8 {
++            compatible =3D "st,st21nfcd";
++            reg =3D <0x08>;
++
++            interrupt-parent =3D <&gpio5>;
++            interrupts =3D <2 IRQ_TYPE_LEVEL_HIGH>;
++            reset-gpios =3D <&gpio5 29 GPIO_ACTIVE_HIGH>;
++
++            clocks =3D <&clk>;
++            vdd-io-supply =3D <&vdd_io>;
++        };
++    };
++
+   - |
+     #include <dt-bindings/gpio/gpio.h>
+     #include <dt-bindings/interrupt-controller/irq.h>
+
