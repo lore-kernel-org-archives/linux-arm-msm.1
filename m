@@ -1,33 +1,33 @@
 Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BA9213C3432;
-	Wed, 19 Aug 2026 06:11:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03F79331ED7;
+	Wed, 19 Aug 2026 06:18:52 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787119877; cv=none; b=HZoxVA8zuIn5OLJwhYV2menDaenjm4ICTuzfEAJoCzIHS8x+ojCEzg8tvL9G1YpJnEewYo9Nx6510+lzpU+I7TSSSk8JzkjFBR+XHipF26BLui97BA8doz1XOlTQzTgOGp5vOocyX9CVGibQLmW7wFzyYPG+1eWPJLxCdC1v2PY=
+	t=1787120333; cv=none; b=NZ8h0A/sZWHKzqrkDVfFU1tDTbQztY7BWBhvDECP/5WnicMqBx8riNvQTHWbMQcNhTZZsrPC5U/yBfP8dauKA9OQr8KB3KKL/ernJiupQEbeYhSiif4CydNXhfbWFPj+3W4WgHfDjDJv3xhmhmr1MnHCa0Pv5/ShyLUOy8Pp6LI=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787119877; c=relaxed/simple;
-	bh=pg1KjDw4F6dQpId4Mc1Wd8x1YNkmEuXU4RC0vvkhs2g=;
+	s=arc-20240116; t=1787120333; c=relaxed/simple;
+	bh=w9xkFzvdncQZlPhilVHc2CXicumUZsPnpW50/JkKHk0=;
 	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
-	 In-Reply-To:Content-Type; b=Qtc4ppP8wYrZJoEMkGba0ms/u+xYemip7rM8032CTOGSNoIAI+Le5GBYFLrb4E0TD/UWWR1ftYILzM2mjmETlEX2Na9Xk1oxb4IJ1SFfW4tKTegnWZ7ChbvaMmsfsEOqhOwyb1Ad3tfT1ORxmwdtM9gpH47PnuqDTayGzPGAbEw=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=D1/nJq/J; arc=none smtp.client-ip=100.103.45.18
+	 In-Reply-To:Content-Type; b=rORtF7Q1EEsxQEgyzqng+e+NCOYav703XuELyMVT/WITtAgk45Zq5bJLBEP2HqPl16Aq0bVmPJp2vym1B5mmw2MdnGW2HBnbGeHQP/K8T1ZG/MKV7/BZOV1P4HmeMNolh5PS08JVLbKKNSRhjjmJMxJeTcacNZq7WIrQBaMtaQ4=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=lhvCgviU; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="D1/nJq/J"
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 23A4E1F000E9;
-	Wed, 19 Aug 2026 06:11:11 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="lhvCgviU"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D56431F000E9;
+	Wed, 19 Aug 2026 06:18:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1787119876;
-	bh=xB9M143zDCvoZXHQB+ollC1aPdCSzjMJbq8yWDJEZ5M=;
+	s=k20260515; t=1787120331;
+	bh=QNVwnamZ/7cmOP2/HAn3KuBxJDTQ8UvecelRH4hzTxM=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=D1/nJq/J7H+BEAyzDZUUfCZcCJz5PEaNDORbv74kblqT7Qgp8rn26fpE8wXlJeoM/
-	 0VEfyjW45GRdLhGlVeVVpNXsz5EDZ57owZaV8e+zVSB1olx/NRuxjF6dES0vRcWTNh
-	 GTVvzlJY3dsSkfbIKL6Mbmy36FUWoNfjBPd1TVSrxYHHiQjs5/aNLYtmyMb1UWNQOV
-	 RzFy1ByA4guy8+AOA/WSBJcKhM9DoH1yRSZuLVQ5jT59r/dzEU7Vk3b49SB/6pu7FI
-	 pjkKLZTBR4J7F3eH/FLNFGD2Vdvdu/vPInLGMAKi763gqoClD2U+jh3K/JkqrH3zhs
-	 FvkXQd9nvXNlg==
-Message-ID: <ddf88af6-c947-478d-81ab-bff4aa27d2cc@kernel.org>
-Date: Wed, 19 Aug 2026 08:11:10 +0200
+	b=lhvCgviUllZChy5IriBGTB9QUkbs4XzHtfkOnWA5CfHN3Q9Mh141mGFtm7Mn3MEhs
+	 nQH+SNOKEL7b0LlwkQoC2MX7ZAgAvW5IR5RVP669DCWuPfDqKJH26dl/JtFkVkXCkA
+	 TeFsq5pWmlbVkWwAr5aGO0c0yZqh/xNug0bZN0bjO0P4I/ZCXXit4e/gtemp+sIyeB
+	 fTI+qa3EbD5CwfhRoZK2nby3DZYOvVjMHJmUAJfnh821OmBn8bKaTB8ZktjRy+TiKd
+	 jDA6wwPoAsPHn0JyxiaxsT9ZcbbMT1YH8lzUApWsVzKj+XP4fK06XKKjtMCQjeJwYU
+	 O1GmVGKOnnk4A==
+Message-ID: <4293b936-c3ea-4b5a-9c35-697c4cdb7841@kernel.org>
+Date: Wed, 19 Aug 2026 08:18:47 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -35,16 +35,12 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 2/2] soc: qcom: pd-mapper: Add support for Maili SoC
-To: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, Yijie Yang <yijie.yang@oss.qualcomm.com>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-References: <20260819054203.61385-1-prasad.kumpatla@oss.qualcomm.com>
- <20260819054203.61385-3-prasad.kumpatla@oss.qualcomm.com>
+Subject: Re: [PATCH 1/3] dt-bindings: net: nfc: add st,st21nfcd-i2c
+To: Kristian Brox <isyourbrainfoss@proton.me>, oe-linux-nfc@lists.linux.dev
+Cc: david+nfc@ixit.cz, krzysztof.kozlowski@linaro.org,
+ luca.weiss@fairphone.com, linux-arm-msm@vger.kernel.org
+References: <20260818205940.1973944-1-isyourbrainfoss@proton.me>
+ <20260818205940.1973944-2-isyourbrainfoss@proton.me>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -90,36 +86,44 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20260819054203.61385-3-prasad.kumpatla@oss.qualcomm.com>
+In-Reply-To: <20260818205940.1973944-2-isyourbrainfoss@proton.me>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 19/08/2026 07:42, Prasad Kumpatla wrote:
-> Add support for the Qualcomm Maili SoC to the protection
-> domain mapper. Maili shares the same protection domain
-> configuration as Kaanapali, so reuse the existing
-> Kaanapali domain data.
+On 18/08/2026 22:59, Kristian Brox wrote:
+> The ST21NFCD (e.g. Fairphone 5) speaks raw NCI on I2C. Existing
+> st,st21nfcb-* and st,st21nfcc-i2c compatibles stay NDLC. Add a
+> separate compatible so those boards are not switched to the wrong
+> framing.
 > 
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Signed-off-by: Prasad Kumpatla <prasad.kumpatla@oss.qualcomm.com>
-> ---
->  drivers/soc/qcom/qcom_pd_mapper.c | 1 +
->  1 file changed, 1 insertion(+)
+> Also document the difference and add an I2C example without
+> ese-present / uicc-present.
 > 
-> diff --git a/drivers/soc/qcom/qcom_pd_mapper.c b/drivers/soc/qcom/qcom_pd_mapper.c
-> index 64ca99d7fad9..3376423d237f 100644
-> --- a/drivers/soc/qcom/qcom_pd_mapper.c
-> +++ b/drivers/soc/qcom/qcom_pd_mapper.c
-> @@ -626,6 +626,7 @@ static const struct of_device_id qcom_pdm_domains[] __maybe_unused = {
->  	{ .compatible = "qcom,hawi", .data = kaanapali_domains, },
->  	{ .compatible = "qcom,kaanapali", .data = kaanapali_domains, },
->  	{ .compatible = "qcom,mahua", .data = glymur_domains, },
-> +	{ .compatible = "qcom,maili", .data = kaanapali_domains, },
+> Signed-off-by: Kristian Brox <isyourbrainfoss@proton.me>
 
-This patchset makes no sense. Early upstreaming of unreleased SoC does
-not mean you send everything except DTS. You send things earlier to
-speed up merging, but such trivialities targeting Qcom SoC should be
-sent with the SoC DTS. It brings no value to send it earlier.
+Please use scripts/get_maintainers.pl to get a list of necessary people
+and lists to CC. It might happen, that command when run on an older
+kernel, gives you outdated entries. Therefore please be sure you base
+your patches on recent Linux kernel.
+
+Tools like b4 or scripts/get_maintainer.pl provide you proper list of
+people, so fix your workflow. Tools might also fail if you work on some
+ancient tree (don't, instead use mainline) or work on fork of kernel
+(don't, instead use mainline). Just use b4 and everything should be
+fine, although remember about `b4 prep --auto-to-cc` if you added new
+patches to the patchset.
+
+You missed at least devicetree list (maybe more), so this won't be
+tested by automated tooling. Performing review on untested code might be
+a waste of time.
+
+Please kindly resend and include all necessary To/Cc entries.
+
+You CC-ed an address, which suggests you do not work on mainline kernel
+or you do not use get_maintainers.pl/b4/patman. Please rebase and always
+work on mainline or start using mentioned tools, so correct addresses
+will be used.
+
 
 Best regards,
 Krzysztof
