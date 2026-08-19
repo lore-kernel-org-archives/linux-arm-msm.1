@@ -1,158 +1,162 @@
-Received: from mail-pl1-f169.google.com (mail-pl1-f169.google.com [209.85.214.169])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E46B5480DC5
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 15:27:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=209.85.214.169
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E69A3806B0;
+	Wed, 19 Aug 2026 15:27:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787153237; cv=none; b=PiuMKqj+lRhYf/viiaU1JK2ixd0h/+/FDapAnJNW42zkk3mPl2qpZQDhpIFadw6eD8GiG2oNwIJ+36WjI4xzRkpdmRdl/2Bvc19UPWhYc0FoQSBKNKe2QyES0F2WAN2KC/QiGUDw07um5hpO7+e8YnZKb8gnl4DibPNWBZ8sDXA=
+	t=1787153246; cv=none; b=FU54uiPFUlGFUWWI4K+RjykNHDa1xzvrfpXaXIXPVC3YRjbtLkojEf0AMa2mxBf5B0ROBRpHGmqqe5/0pWdncVpPZyPYSS+1GAKzxusIkQZ7IWKS/Pq9PivJONYztQELmVtrJ9X1D+dFphjw2bnEjASbgg1Tj5SJSd6h5LLgavw=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787153237; c=relaxed/simple;
-	bh=r2L4kMqfhwIbUzsmf8wdDtYuSEy+RrrvfwHFtyC9iAM=;
-	h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
-	 MIME-Version; b=qhWHAXdE7OB7YIJ+nfS2S86ZDmF1PwQgZXLbw9O+4Pj1bcrB/HJmul4ao3E22jwp1acULtNm4GLxUu1aSlJLDn6v5td+vvqxin2zOaUhx1teTvJ5yXDXOBYiO2feLzXNfDeBr/hiVqQHGh1Mzm96Tc3lar8bZBJvQLQICN3P5Wk=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com; spf=pass smtp.mailfrom=gmail.com; dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b=PCFBLsi8; arc=none smtp.client-ip=209.85.214.169
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	s=arc-20240116; t=1787153246; c=relaxed/simple;
+	bh=BBU4ww3GBoRIjHBCLIfmcjj7fdNplX+AhVW7f2j3WoA=;
+	h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type; b=B3wc/edZWm/qTmlM3W+Btfb1jToKD+b4SQ/lzvUWoLMWq1IBvWMfC8W2rAa1JJzErw9VpfNRq344p/ZyorX5ySip3hWWRTh9GsAHeFteiYK4HynGO45Mf8RZTRM8eBDJ7MC5oaB167KALgcoM2QxudmUSl5gJlHWJsPUoFTl9RI=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=gmyP5u5v; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.b="PCFBLsi8"
-Received: by mail-pl1-f169.google.com with SMTP id d9443c01a7336-2cee9b74ee1so8247155ad.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 08:27:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1787153235; x=1787758035; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=bnjRied0UBQQezXmJ0yRlrcVs3eu3/u9Ou72/egKxFo=;
-        b=PCFBLsi8awi6Q8j44NLojEz4aVqQD88/ZtO0jSHG0DerV8n4qT/SmRYISk/KmwybZc
-         EANW5HV1jwHUi8238ne/cXMQiOW4XjPa2mkcIfZ0mToNXaYWXin5PiikRYIxit9flOlz
-         ftmdzXiGWeN/tkigKbxaRLkmSlCFdB3hkc3AilxriJTiD2RJJ5dpHyucFN2Z9pVNuMk5
-         d2jByGd/kjfwRooDjYxWPqOQwWXAGygIYNBJ54IPQ3qC1oXkkAx3GZaMvWtA75k5sVWV
-         2Vws1jsaaH/jtQXEVkRrjy16EORdoqXLP9YZWaF5OsGc/LJhm1cyZxhgbtIfUDIy3NuF
-         8a6g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787153235; x=1787758035;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=bnjRied0UBQQezXmJ0yRlrcVs3eu3/u9Ou72/egKxFo=;
-        b=GCea4O51RjvlH4OQewcS8Hmhj+h1Rc+1TcGrCNZdd9vr2kVOs3SpS5gAwflcsPxnXT
-         7xd70pzeC0hULhBU9tImmEA2FY+VlZCBaGkehQ4lkzjNEIR1KUZhKL7rp3OLNfK/NmeT
-         R9aw5TDO5F1562u+O3DH/ms5W9Mok0J/UukFpB2BAbxzaaQXtLaZyox74LXaWDXUzpt7
-         MnYrVOweMtjldKIy0QgtY5MdffZD3lp/EmIm/576EQftl+VL8FNmL3E6+nopBJiBHGCz
-         iV3tqecaqxXLII6BAThw+Eoqt6BLPsXi9k1PUIx2OlFg3wTs2nY9Hm3fvbbLuGPfuo4y
-         3Sig==
-X-Forwarded-Encrypted: i=1; AHgh+RoZ/Q0X5bWa3F5kBcWeeFEXRh/wyEjnES6kxMrrkNxwVm2BINjYcqe7LfDEVPgjGFC8z09DSarNsK/2PcC6@vger.kernel.org
-X-Gm-Message-State: AFuF++kOQvQh74PxEhAac0PbDvKZ/WNWjdsOcU6mszaqwiWAvmTDlWkA
-	zb9keB/4WGkEIkqv2oY2v1L7VnJPiSpsd31Mu9M2Tcbxd9R+CLVY1jkR
-X-Gm-Gg: AR+sD114pG0kDK181LExw9SZ++8fdiQleYokSzNCcrThIEXGl6rnJhqoJwKf7TaV0TE
-	+AMEbbOzqfVaem+ZO0OOm5AIaPoNKEwOBIvP1MqeOX2DawD1ZqrXnpnm/u+CAndfsD8jkl+fG6R
-	iYfQepMAzmozdrSu40rQA+EWijkld7V3lWbi4NyFhlkTuyKMQDi5+PMJkx/cF1v+mhjeAfaYKk+
-	Rtc/1UNWfAJNmoFC1sYlrwj0kC4teQd2Dw7f78y0BU0D8QuZzt7DPoYf61stXjbuM52eSHpI4Wa
-	2ZRmKoiyxQb8gI7fVgDPvB1j9R8yZvIHbeC4fxfkyjK1BXZQeZSD4eSNycJq5T2WkUSfqCg5BV4
-	BG0nq842fgolwhJ+ddL6/eqTW+dNxNyKzYhDITFTenwDgfe5aggSNFUkyyyWM0CO15L4rwEBQia
-	S1POswCbMMLInYsblnd1QaXffYz7aQ1Q/xXeIi2bYPvJb17I5vIQjzjHb9xnTSPDSVCGRfFF5Bt
-	X+Bbhr2lRk=
-X-Received: by 2002:a17:903:2f92:b0:2cf:47c4:3d1a with SMTP id d9443c01a7336-2d5fd59f9e4mr96094215ad.3.1787153235048;
-        Wed, 19 Aug 2026 08:27:15 -0700 (PDT)
-Received: from localhost.localdomain ([152.58.217.90])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-327bf14376asm8232838eec.24.2026.08.19.08.27.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Aug 2026 08:27:14 -0700 (PDT)
-From: Sreeshankar K <sreeshankar0910@gmail.com>
-To: robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	andersson@kernel.org,
-	mturquette@baylibre.com,
-	sboyd@kernel.org,
-	rafael@kernel.org,
-	viresh.kumar@linaro.org,
-	konradybcio@kernel.org,
-	tglx@kernel.org,
-	ulfh@kernel.org
-Cc: bmasney@redhat.com,
-	radu@rendec.net,
-	abel.vesa@oss.qualcomm.com,
-	lpieralisi@kernel.org,
-	quic_tdas@quicinc.com,
-	danila@mainlining.org,
-	davidwronek@gmail.com,
-	mani@kernel.org,
-	robimarko@gmail.com,
-	linux@gurudas.dev,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	Sreeshankar K <sreeshankar0910@gmail.com>,
-	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: [PATCH v2 06/13] clk: qcom: rpmh: Add SM7250 rpmh clocks
-Date: Wed, 19 Aug 2026 15:25:35 +0000
-Message-ID: <20260819152545.3934-7-sreeshankar0910@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260819152545.3934-1-sreeshankar0910@gmail.com>
-References: <20260819152545.3934-1-sreeshankar0910@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="gmyP5u5v"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2869B1F000E9;
+	Wed, 19 Aug 2026 15:27:13 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787153245;
+	bh=MsJdRaS+WVPtAUMCkn9lJWDQpvDTryfwaC+o4Hyk0KM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=gmyP5u5vmT5YiY5yF0z9wfJYdXT3eE/7czKjfJSlVQ6GjZFj4oXQIYgjSCFxFnJV6
+	 hAlElbANu6r5JUYBQo1OXFyIBYM+6vRD0+7Y2+w1gt+AlPDPbKMzg+8REOi2oSrV+b
+	 93ko0FfcVyDOw9778Ixj7lwl4fktV4rMYHOzz75DtkTjioxiIVHd8Q0BZld4YjDW3N
+	 5AOZKKWNcaXYhW0i2NHPlX3Cqw6qbzXusuA2X6pEN1ZJQfPbOoM+ETmSOS6AkuAhR6
+	 iTOFgDg1DGSaBNDVxXSbysVhkojonxzeXASBUtULmHKifbIVwCfDy2pkvZnO1k0iDp
+	 5+GWhPFjuRlIw==
+Message-ID: <fb834ae5-7113-4a86-bb84-ca5115c8d7ff@kernel.org>
+Date: Wed, 19 Aug 2026 17:27:09 +0200
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 00/15] accel/qda: Qualcomm DSP Accelerator driver
+To: rob.clark@oss.qualcomm.com
+Cc: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+ Oded Gabbay <ogabbay@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Shuah Khan <skhan@linuxfoundation.org>, Randy Dunlap
+ <rdunlap@infradead.org>, Nathan Chancellor <nathan@kernel.org>,
+ Nick Desaulniers <ndesaulniers@google.com>, Bill Wendling
+ <morbo@google.com>, Justin Stitt <justinstitt@google.com>,
+ "Joerg Roedel (AMD)" <joro@8bytes.org>, Will Deacon <will@kernel.org>,
+ Robin Murphy <robin.murphy@arm.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ Sumit Semwal <sumit.semwal@linaro.org>,
+ =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+ Bharath Kumar <quic_bkumar@quicinc.com>,
+ Chenna Kesava Raju <quic_chennak@quicinc.com>,
+ srinivas.kandagatla@oss.qualcomm.com, dmitry.baryshkov@oss.qualcomm.com,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ linux-doc@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ llvm@lists.linux.dev, iommu@lists.linux.dev, linux-media@vger.kernel.org,
+ linaro-mm-sig@lists.linaro.org
+References: <20260817-qda-v2-v2-0-69a02e9090d4@oss.qualcomm.com>
+ <3322b42b-3755-45ec-ad55-345125f0d488@kernel.org>
+ <10349e29-b583-403f-a89a-9a00c73666bc@oss.qualcomm.com>
+ <87dca76c-851e-4cc3-ab91-68949d283b79@kernel.org>
+ <CACSVV01eYr6FyA6XBG0xw0yv2dydvTEhcY-WUy07mxM8WwkZcg@mail.gmail.com>
+ <318f14c2-0e87-4e07-8173-1511dca67d78@kernel.org>
+ <CACSVV01T=ytVJKM7NRoBTAJm7vH+JPJNT9Tftu5X9YskGXerwg@mail.gmail.com>
+ <e7b4eceb-cb3a-49ea-bed9-728c958594b0@kernel.org>
+ <CACSVV03ypjBYkhRpt=TyDwOKhejKKke3x=Fi_TvxXN-5U_rCsw@mail.gmail.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <CACSVV03ypjBYkhRpt=TyDwOKhejKKke3x=Fi_TvxXN-5U_rCsw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Add the RPMH clocks present in SM7250 SoC.
+On 19/08/2026 17:23, Rob Clark wrote:
+>>>>
+>>>> Growing old driver does not look complicated itself. The only a bit
+>>>> tricky thing is to present somehow exclusive interface to user-space,
+>>>> like usage of one disables the second etc. Depending on actual
+>>>> differences in that interface.
+>>>>
+>>>> But having a duplicated driver is a clear no go and it is well known
+>>>> upstream requirement. Nothing new here.
+>>>
+>>> Would it be acceptable as a first step to, by default (ie. when no
+>>> cmdline override/etc) for the new driver to bind to new compatibles
+>>
+>> You have one compatible.
+>>
+>>> and the existing driver to old?  Ie. have both drivers but only one
+>>> binds on a given platform?
+>>
+>> I don't see how is it possible to write such DTS, because - repeating my
+>> question - how many hardware blocks is there? I believe only one per
+>> given DSP, so how could you have two device nodes?
+> 
+> Maybe I'm misunderstanding something here.. I don't see any new
+> bindings with this series so my assumption is that the bindings are
+> the same.  What I meant was something more like "qcom,glymur-fastrpc"
+> would bind to new driver but "qcom,fastrpc" (which seems to be what is
+> used on older platforms) would bind to the old driver.
+> 
+> So single dts node, but different compatible strings picking which
+> driver is used.
 
-Signed-off-by: Sreeshankar K <sreeshankar0910@gmail.com>
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
----
- drivers/clk/qcom/clk-rpmh.c | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+Glymur is already done, so imagining we talk about next/future SoC then
+we would be at point of duplicating drivers for the same hardware. So
+back to square one of my comments.
 
-diff --git a/drivers/clk/qcom/clk-rpmh.c b/drivers/clk/qcom/clk-rpmh.c
-index 6367b2a5a..f4cafa274 100644
---- a/drivers/clk/qcom/clk-rpmh.c
-+++ b/drivers/clk/qcom/clk-rpmh.c
-@@ -1011,6 +1011,29 @@ static const struct clk_rpmh_desc clk_rpmh_hawi = {
- 	.num_clks = ARRAY_SIZE(hawi_rpmh_clocks),
- };
- 
-+static struct clk_hw *sm7250_rpmh_clocks[] = {
-+	[RPMH_CXO_CLK]		= &clk_rpmh_bi_tcxo_div2.hw,
-+	[RPMH_CXO_CLK_A]	= &clk_rpmh_bi_tcxo_div2_ao.hw,
-+	[RPMH_LN_BB_CLK2]	= &clk_rpmh_ln_bb_clk2_a2.hw,
-+	[RPMH_LN_BB_CLK2_A]	= &clk_rpmh_ln_bb_clk2_a2_ao.hw,
-+	[RPMH_LN_BB_CLK3]	= &clk_rpmh_ln_bb_clk3_a2.hw,
-+	[RPMH_LN_BB_CLK3_A]	= &clk_rpmh_ln_bb_clk3_a2_ao.hw,
-+	[RPMH_RF_CLK1]		= &clk_rpmh_rf_clk1_d.hw,
-+	[RPMH_RF_CLK1_A]	= &clk_rpmh_rf_clk1_d_ao.hw,
-+	[RPMH_RF_CLK2]		= &clk_rpmh_rf_clk2_d.hw,
-+	[RPMH_RF_CLK2_A]	= &clk_rpmh_rf_clk2_d_ao.hw,
-+	[RPMH_RF_CLK3]		= &clk_rpmh_rf_clk3_d.hw,
-+	[RPMH_RF_CLK3_A]	= &clk_rpmh_rf_clk3_d_ao.hw,
-+	[RPMH_RF_CLK4]		= &clk_rpmh_rf_clk4_d.hw,
-+	[RPMH_RF_CLK4_A]	= &clk_rpmh_rf_clk4_d_ao.hw,
-+	[RPMH_IPA_CLK]		= &clk_rpmh_ipa.hw,
-+};
-+
-+static const struct clk_rpmh_desc clk_rpmh_sm7250 = {
-+	.clks = sm7250_rpmh_clocks,
-+	.num_clks = ARRAY_SIZE(sm7250_rpmh_clocks),
-+};
-+
- static struct clk_hw *of_clk_rpmh_hw_get(struct of_phandle_args *clkspec,
- 					 void *data)
- {
-@@ -1120,6 +1143,7 @@ static const struct of_device_id clk_rpmh_match_table[] = {
- 	{ .compatible = "qcom,sdx75-rpmh-clk",  .data = &clk_rpmh_sdx75},
- 	{ .compatible = "qcom,sm4450-rpmh-clk", .data = &clk_rpmh_sm4450},
- 	{ .compatible = "qcom,sm6350-rpmh-clk", .data = &clk_rpmh_sm6350},
-+	{ .compatible = "qcom,sm7250-rpmh-clk", .data = &clk_rpmh_sm7250},
- 	{ .compatible = "qcom,sm8150-rpmh-clk", .data = &clk_rpmh_sm8150},
- 	{ .compatible = "qcom,sm8250-rpmh-clk", .data = &clk_rpmh_sm8250},
- 	{ .compatible = "qcom,sm8350-rpmh-clk", .data = &clk_rpmh_sm8350},
--- 
-2.43.0
+The rule of usptream development is that we do not accept duplicated
+code, just because a vendor wants to write something new. This is
+basically the concept applied all over the drivers tree, where we pushed
+back against all sorts of duplications all over the vendors.
 
+What I miss in this thread is why would there be any exception here. We
+do not grant exceptions from standard practices on "I want" reasons.
+
+Best regards,
+Krzysztof
