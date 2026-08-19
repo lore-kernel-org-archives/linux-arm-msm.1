@@ -1,265 +1,119 @@
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+Received: from smtp.kernel.org (aws-us-west-2-korg-mail-alma10-1.taild15c8.ts.net [100.103.45.18])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D1B13D566E
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 07:23:52 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=205.220.168.131
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6253D3C81B5;
+	Wed, 19 Aug 2026 07:28:57 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.client-ip=100.103.45.18
 ARC-Seal:i=1; a=rsa-sha256; d=subspace.kernel.org; s=arc-20240116;
-	t=1787124234; cv=none; b=QGxyrQe9CcA64oFPk22DdpemLp/2LJo+nnqNHOkAnJ8EzBg2Dxk0+xRiUE1ZaSQNoBGdTQBQDCSncK+e9I0Nssey2ylf8yWnSJGzQhFGK+hjo0RpybKMECtQ2bkRMlndHRG/WpdJUGoOJbkDf3eFjZD7YXDN/JjIKQsCyOemENI=
+	t=1787124538; cv=none; b=JpgyBoNrSp5pQ4nkorx2ylS9o/08HzznbAToe8Dkw2MpImVHowXtFSQKpPjYgixX8GygbVtsznne0baZKOIO4VaJTApmtnntYf52QFKdUQ6TykqYOlcOZIlOvy0k+P5PR8ffPOBiFwArTKkZoOnjEuJU8F5JpnKxtxNb2KKSZE8=
 ARC-Message-Signature:i=1; a=rsa-sha256; d=subspace.kernel.org;
-	s=arc-20240116; t=1787124234; c=relaxed/simple;
-	bh=pDEyC8yg/6PuLQPU3KAOde5jSjKdXzhA+xDS/oZrXQ0=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc; b=qs5/K983wgRZtyfL/FojUuQTKalvC+EKTWVu+4IdjZe7Ax9xvyMMhLQkkJ82H2RCohw5XGerCE9ejMszXortkq8LldD15W6Ic5MoZOvtEW2NOOe5nBHPDZ8JtmuP9DoKrYqRgrzuODXYTLJ6TJEbtA8zVootPqspobJmK8kYHZU=
-ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com; spf=pass smtp.mailfrom=oss.qualcomm.com; dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b=J8yD4lUM; dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b=E4aOuZA/; arc=none smtp.client-ip=205.220.168.131
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	s=arc-20240116; t=1787124538; c=relaxed/simple;
+	bh=KvPwAk2TY4MSM1WnmG6/LrViwMvQr9kYyXkS6271FQI=;
+	h=Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To; b=MjYPJvs2uj2/kzCaQha8BnKOuQyFOF983+/xH8o9ZGuQqUryu/5Dem3FdeCNET1cVOx+hNMay6/WTZeYQKv5fpH3UHSnL4WNeOkr3kghSAUPiYeNtaGfEZaEawVsif5b1tdb36EQqzP5G4w5TTuw+CbsBgo0iHjnwtiYLlYPCqc=
+ARC-Authentication-Results:i=1; smtp.subspace.kernel.org; dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b=KicRI9RG; arc=none smtp.client-ip=100.103.45.18
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.b="J8yD4lUM";
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.b="E4aOuZA/"
-Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 67J6ZWXb534532
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 07:23:52 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=as6Mr7PNRNvWHpLUhs1CPs
-	1ku7dFM3XvF7EJEYN0mUs=; b=J8yD4lUME+ttkvvAOQV5fIoFv2l8NeyojkHBHB
-	b4MrBB8BrUlEsB5NxfMKq8obTCK37r4rQQ5tcCXKU1glAGav3pYWEx9EdTJIQtHc
-	aH20mIxXj5NGVjFEh5FUlqq+UM2KUm3w2ym6ZehdXqired9JDiwtzLl9gF3NKnRg
-	fc0Xq6NmuN5eV43K1wd6ykz1UharDnZ8T+J53FgzOEYkh9z2WlgKyw+Los4XfrYH
-	lnr42H8QsvyAPi4dpKuHJN1TARncPitQbckAcsVO8JRirjlRuCwuaQ/pfw1Bueno
-	+0bD2sr/PwGiaiGUzTbnpM2yev3dOi/TEBiycIXRcpjSjJHg==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4g4yfm1wvg-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 07:23:52 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-92efd2ca21aso137069685a.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 19 Aug 2026 00:23:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1787124231; x=1787729031; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=as6Mr7PNRNvWHpLUhs1CPs1ku7dFM3XvF7EJEYN0mUs=;
-        b=E4aOuZA/EUMSjYdgc1FbDZMcj/hl8SJx+68XrUsUfJ4+6iEt66mVewDq7dUziZOzgd
-         EcB8TXJjWcZNQzlK8vU3703Oap0AkN4ICXvHIxrfamF/VFM5z678n2NyQwCiYupQq0Np
-         1yjzHJ4ntx9mRSS/FZJb6Gdxi78ClB1+hLWbOQCAqBQhcjUai8Gle20TReH6Kdj4Cgle
-         FwaV1bmMJMLOcMX2ECFCY2k3PrS4g+LVdXJ9FAoC+S6/kdaM5guS3Xj0qsNyycL5+HZD
-         NSIMG4NAhlKQ6DxoEdfv5xBOEXHQ45yeCvU6rdK3/EK/J7z7UIlojAiczIE+g8k6Q2Yd
-         ImdA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1787124231; x=1787729031;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=as6Mr7PNRNvWHpLUhs1CPs1ku7dFM3XvF7EJEYN0mUs=;
-        b=WsiKSdsYhYQTRX7NwkigJ7ALDzt/Bu+d3zdtdqrVR5ytAgQrP4A5hjncZxAPfORNsN
-         AYCy4wxIvhHdocJAPsVNIhunFLMMdAAHcrDKp+DSIIU3U5MloBWtUMJ/SDFNEaAFKxtv
-         gi35S5sm01TkGM2KBaJfkKsLlZenen0B5osD36TMDeWQxv0qzTCSvK5PLRayCaC2ypHV
-         VIGUqjs6SKbMP40PzGV3msdvKJY60VH15kRhW4pI/9jH8/olvUYsDf08FXI/0w4IAB/t
-         FkqlBS0/hOUXjjIBOud/uHocIAvpy9vzeYxlMXn4X3+8Rdao+RwX6AfJr6R/b4QWAK6p
-         o+gQ==
-X-Forwarded-Encrypted: i=1; AHgh+RqncNW4z9ZJVlTxrzJEpWdnW33+ZK9ZvmwGcDsXAB14DUwXNYY3s3CXGbNQYhDAnatl/LFZPpoctuq7ozwB@vger.kernel.org
-X-Gm-Message-State: AOJu0Yw4ZVPWhmTcvcv/GZD1IOCTR7CeNmoZQHOSG/5g4TPUeK3vxaH7
-	Nw2IuWpjijw3fS2AW3usPeFgE+RDbxmo1CY935RY6A61jrfigBaPh1Q0TdyfUIKM+MCf7OL4/aw
-	CMNfuzMwAuQKpyAMP0n3iPsGzctGFe3KBi3pH9FygCgKd3jfyEouywfuE85Utjc2IdMri
-X-Gm-Gg: AR+sD122G11l88IrTiRB8kW+Qi68QC1lVtw8j5k1sdjH19E5X23O9l4f8o99MFpZf6Q
-	zDyed/wtlQqmdgspg4/smSdBrS9NRQRGFdMVppBox9B200dph6QBe2OT5Lanehnr/L5lzfWvG61
-	PkerYr9hfKhCziVUOdIAHpYXg2L9+0WXFUyGsJFQ1MoYQZOTxH1EpBc4u4aUb59Pk+wG9y89ZSc
-	7NTs27jY15JHy4Gt9t/RMjXPtHHY6ZwafHRHDs4byEhr3S4CkUfn1GSPfESwqY/P3kDeL7rGtUP
-	GVmGzjIEx4de1E6Ee+deErzEd6r4Zb/H1lgF4qD2T9EewZ8ls52+YXzNIxodk2jrgU2HxknL7Pf
-	AYjEi/x27
-X-Received: by 2002:a05:620a:2590:b0:936:ea0d:ffc3 with SMTP id af79cd13be357-9371e2e6e9bmr235779185a.22.1787124230996;
-        Wed, 19 Aug 2026 00:23:50 -0700 (PDT)
-X-Received: by 2002:a05:620a:2590:b0:936:ea0d:ffc3 with SMTP id af79cd13be357-9371e2e6e9bmr235776785a.22.1787124230379;
-        Wed, 19 Aug 2026 00:23:50 -0700 (PDT)
-Received: from [127.0.1.1] ([188.27.161.240])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-499a9dff4c1sm30155695e9.3.2026.08.19.00.23.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 19 Aug 2026 00:23:49 -0700 (PDT)
-From: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Date: Wed, 19 Aug 2026 10:23:28 +0300
-Subject: [PATCH v3] soc: qcom: pmic_glink: Fix device access from worker
- during suspend
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.b="KicRI9RG"
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02BEF1F000E9;
+	Wed, 19 Aug 2026 07:28:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1787124537;
+	bh=+c4hxv5iAZoAl6x2Vsz/LzNf0z4N+7E+7ULYEPv6Crw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=KicRI9RGqR/qCu1MkdulTJy84Fb4AkP/xipZO2cpfo3I7e6tfyKokUDLhAh/XBKCw
+	 jj/e9/Z8fAr9XTlSURXYW75ag1DZoU5eHVGKztMlL1JN9XA58o4C0glgmYD7lWKTh/
+	 opmBGNch3Cp/opPlU/bv4dqToYYRnvENSso2o+fjLkPfLP3Mal8vncsCHL27uU4iBI
+	 TfEGx7co+XwL26ILXaFHc1NViD4MQxMG+jkrXHH9NgwwHgggA57W/8opNpJ9Vz6GMj
+	 ZKE8t39AUkdiv4/rXy3r0TyHSbOsvLAwdMxznYw4Wy/zDbBNts5MJwUq2e3r0i59ia
+	 Z1lwBjtNRMVsw==
+Date: Wed, 19 Aug 2026 00:28:54 -0700
+From: Peter Chen <peter.chen@kernel.org>
+To: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+Cc: Bartosz Golaszewski <brgl@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Xu Yang <xu.yang_2@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+	Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Pavankumar Kondeti <quic_pkondeti@quicinc.com>,
+	Stephen Boyd <stephen.boyd@linaro.org>,
+	Konrad Dybcio <konradybcio@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+	linux-usb@vger.kernel.org, linux-phy@lists.infradead.org,
+	Greg Kroah-Hartman <gregkh@suse.de>,
+	Peter Chen <peter.chen@nxp.com>
+Subject: Re: [PATCH 08/10] usb: chipidea: host: calibrate the PHY after
+ starting the host
+Message-ID: <aoVbNp0J2feQ3ezX@hu-petche-lv.qualcomm.com>
+References: <20260810-msm8974-usb-hsic-v1-0-e5f93ea76ffa@oss.qualcomm.com>
+ <20260810-msm8974-usb-hsic-v1-8-e5f93ea76ffa@oss.qualcomm.com>
 Precedence: bulk
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260819-b4-soc-qcom-pmic-glink-fix-device-access-on-worker-while-suspended-v3-1-169b00e0d9d4@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAO9ZhWoC/yWOQQ6CMBAAv0L27CZQkIhfMR5gu8AKtNAVMSH83
- arHOUxmdlAOwgrXZIfAL1HxLkJ+SoD62nWMYiODSU2ZXrIKmwLVEy7kJ5wnIexGcQO28kYbfWK
- siVgVvcPNh4EDbr2MjLrqzM6yxepcF63JuCxzAzE0B476b+J2/7OuzYPp+S3DcXwAOl9St6YAA
- AA=
-X-Change-ID: 20260819-b4-soc-qcom-pmic-glink-fix-device-access-on-worker-while-suspended-95a4f21e6632
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Johan Hovold <johan@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Johan Hovold <johan+linaro@kernel.org>,
-        stable@vger.kernel.org, Abel Vesa <abel.vesa@oss.qualcomm.com>,
-        Abel Vesa <abelvesa@kernel.org>,
-        Casey Connolly <casey.connolly@linaro.org>
-X-Mailer: b4 0.16-dev-0e65f
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5200;
- i=abel.vesa@oss.qualcomm.com; h=from:subject:message-id;
- bh=HeQpy8inBozBcb45Bnj54ZLHMUDA77B/OCwmkkTxCEk=;
- b=owEBbQKS/ZANAwAKARtfRMkAlRVWAcsmYgBqhVoCPscWPALk4ZzqGC3K7Fj55ezvXO22xJcSi
- 2Omj268KwGJAjMEAAEKAB0WIQRO8+4RTnqPKsqn0bgbX0TJAJUVVgUCaoVaAgAKCRAbX0TJAJUV
- Vs0iEADAvLOzIocBkBFLtMofop/V/RDIUyCEGHVRwJXpRNwWSRY2j4jqG0bD7taQ9TkMs3Dav9k
- brbY3dHWziUG/pZruAoCTc9E0Plf3rwpwZ92OoeVOFxR36JVixiXrL1v1fBzhQnXIOyPVO8d8Ue
- Nyc7UV3qcYsd3IUNc01WmhZ0o98uQFRoLdqpe3zYpmFgaEgCRkn+ITRDZxJNIXRCBLOhE7IjcyH
- G7d6jvaDwpOBV568Di26uibwjZHnlMcak6eFTmAuMeXjXJegBRvFnj0KDuyTaLiEuUEFpadBYnc
- Uk45mb1nwKO8n5uFMObeBMi9sZ7+1kLEWh1aM8raeilRjj4xqJI7QUg5PWNcdoExBPN2tsaomVE
- GH4/ENjW+NYBR7RhoiBteR3pffi8nxL5rxZzbEod13qNVXVNMNbBWmXW4T03fCRdb9l2LvTo++m
- E6wV4rWhzmvTG6MQd8vHbC4uYZsOiBD5W+MIuW9TtMl5vGw8TeMoEl2/DP0AR7bikgvAU6gzYUr
- /PxAYxQLm3suw5GwOjF5QydYEgYppMwKfasnszgy3uH0cOgFweb6EGMXD3aqj1M3t0TUVKkTbYI
- Aw+ZLwao6xFFpkW0Ahx1H99VaLuKJqZvyCyelvYxSSAuvxJlkieHnM+42lZ7fj8m9X4zJf+J/DS
- X0NlVyMoOHmTMgg==
-X-Developer-Key: i=abel.vesa@oss.qualcomm.com; a=openpgp;
- fpr=6AFF162D57F4223A8770EF5AF7BF214136F41FAE
-X-Proofpoint-Spam-Info: AW1haW4tMjYwODE5MDA1NCBTYWx0ZWRfX1w8BsbKtH/03
- qxo+vzPTGFEqMdIQDUJP5ouq6qvWjSubJ66z5gL5p4A6xTuZn4P5y6cFGLvXbGRugCek9smD/Id
- nAWajPBy9kpkpUpEihlgzEdnb+S+VDA=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwODE5MDA1NCBTYWx0ZWRfX12sAJ88OeEzV
- lsVb6kNlwDl4xi5iBwxAWnH8qsKxzf6B5sIHe6TwUn2JMXozE2vrJ2NF4vuxM4boAgChCncVa2u
- tuPma636AJE2OKX8CCw2FfL3Y2RTbhg+hLesvVaN0qasYcDeXdIcSoU2RSbBWH8i/HPX3rPPz2V
- wSCUqQ+y2/E3iEFfqRLmyo5S1OjEEQo+rkBsX3KmfLzYXRVT4OtOrOyJegCLytCPLR0Zr7j60Pr
- +Undjz0mTe/NqTfPFhQ2f11TlAiBmQP47dKIb/sDRpWgu33viUN/APrjgnXRUhgfj8+DN+FQ4EF
- R7jVlFXInCoI9TL91B7ewmNWlYr4mOTfrXXJTElNnZ6ap9J3Zq0JJ3Bd6z5aDaF9xVA5HjayTUT
- Id8AFCY2/l4iGLlD6qveFYShJ2BhY45BbwklTvQB7lV47nxHlVknynPMuJChWGiXjisznu0FMVG
- +WJLCoKEys+o1JF42Rg==
-X-Proofpoint-ORIG-GUID: ALlKluodVKh_fdIgS6ChB2j3a5tI4Owk
-X-Authority-Analysis: v=2.4 cv=bN0m5v+Z c=1 sm=1 tr=0 ts=6a855a08 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=wUpz7uCjLrEXi01cjX+DLw==:17
- a=IkcTkHD0fZMA:10 a=Sv0fKeRqtYgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
- a=VwQbUJbxAAAA:8 a=zitRP-D0AAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
- a=wcTf6FotWcWifOkf-SoA:9 a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
- a=xwnAI6pc5liRhupp6brZ:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-GUID: ALlKluodVKh_fdIgS6ChB2j3a5tI4Owk
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-08-19_02,2026-08-18_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 phishscore=0 priorityscore=1501 clxscore=1015 adultscore=0
- impostorscore=0 lowpriorityscore=0 suspectscore=0 malwarescore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2606150000 definitions=main-2608190054
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260810-msm8974-usb-hsic-v1-8-e5f93ea76ffa@oss.qualcomm.com>
 
-From: Abel Vesa <abel.vesa@linaro.org>
+On 26-08-10 18:42:12, Dmitry Baryshkov wrote:
+> Some PHYs need a final programming step after the host controller is
+> up: the Qualcomm HSIC PHY latches the device connect at the moment
+> HSIC mode is engaged, so that write must happen with the root port
+> already running, or an already-connected HSIC device (the strobe/data
+> lines have no hotplug) is never seen. The generic PHY framework
+> provides phy_calibrate() for exactly this kind of post-init fixup and
+> dwc3 already calls it; the chipidea host does not, leaving no place
+> for such PHY work.
+> 
+> Call phy_calibrate() once the HCD has been added, next to the existing
+> i.MX HSIC active-event hook which serves the same purpose. PHYs
+> without a calibrate op are unaffected.
+> 
+> Assisted-by: Claude:claude-fable-5
+> Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 
-For historical reasons, the GLINK smem interrupt is registered with
-IRRQF_NO_SUSPEND flag set, which is the underlying problem here, since the
-incoming messages can be delivered during late suspend and early
-resume.
+Acked-by: Peter Chen <peter.chen@kernel.org>
 
-In this specific case, the pmic_glink_altmode_worker() currently gets
-scheduled on the system_wq which can be scheduled to run while devices
-are still suspended. This proves to be a problem when a Type-C retimer,
-switch or mux that is controlled over a bus like I2C, because the I2C
-controller is suspended.
+Peter
+> ---
+>  drivers/usb/chipidea/host.c | 4 ++++
+>  1 file changed, 4 insertions(+)
+> 
+> diff --git a/drivers/usb/chipidea/host.c b/drivers/usb/chipidea/host.c
+> index ced6076a8248..62bb2999edb6 100644
+> --- a/drivers/usb/chipidea/host.c
+> +++ b/drivers/usb/chipidea/host.c
+> @@ -15,6 +15,7 @@
+>  #include <linux/regulator/consumer.h>
+>  #include <linux/string_choices.h>
+>  #include <linux/pinctrl/consumer.h>
+> +#include <linux/phy/phy.h>
+>  
+>  #include "../host/ehci.h"
+>  
+> @@ -192,6 +193,9 @@ static int host_start(struct ci_hdrc *ci)
+>  			(ci->platdata->flags & CI_HDRC_IMX_IS_HSIC))
+>  			ci->platdata->notify_event
+>  				(ci, CI_HDRC_IMX_HSIC_ACTIVE_EVENT);
+> +
+> +		if (ci->phy)
+> +			phy_calibrate(ci->phy);
+>  	}
+>  
+>  	return ret;
+> 
+> -- 
+> 2.47.3
+> 
 
-This has been proven to be the case on the X Elite boards where such
-retimers (ParadeTech PS8830) are used in order to handle Type-C
-orientation and altmode configuration. The following warning is thrown:
+-- 
 
-[   35.134876] i2c i2c-4: Transfer while suspended
-[   35.143865] WARNING: CPU: 0 PID: 99 at drivers/i2c/i2c-core.h:56 __i2c_transfer+0xb4/0x57c [i2c_core]
-[   35.352879] Workqueue: events pmic_glink_altmode_worker [pmic_glink_altmode]
-[   35.360179] pstate: 61400005 (nZCv daif +PAN -UAO -TCO +DIT -SSBS BTYPE=--)
-[   35.455242] Call trace:
-[   35.457826]  __i2c_transfer+0xb4/0x57c [i2c_core] (P)
-[   35.463086]  i2c_transfer+0x98/0xf0 [i2c_core]
-[   35.467713]  i2c_transfer_buffer_flags+0x54/0x88 [i2c_core]
-[   35.473502]  regmap_i2c_write+0x20/0x48 [regmap_i2c]
-[   35.478659]  _regmap_raw_write_impl+0x780/0x944
-[   35.483401]  _regmap_bus_raw_write+0x60/0x7c
-[   35.487848]  _regmap_write+0x134/0x184
-[   35.491773]  regmap_write+0x54/0x78
-[   35.495418]  ps883x_set+0x58/0xec [ps883x]
-[   35.499688]  ps883x_sw_set+0x60/0x84 [ps883x]
-[   35.504223]  typec_switch_set+0x48/0x74 [typec]
-[   35.508952]  pmic_glink_altmode_worker+0x44/0x1fc [pmic_glink_altmode]
-[   35.515712]  process_scheduled_works+0x1a0/0x2d0
-[   35.520525]  worker_thread+0x2a8/0x3c8
-[   35.524449]  kthread+0xfc/0x184
-[   35.527749]  ret_from_fork+0x10/0x20
-
-The proper solution here should be to not deliver these kind of messages
-during system suspend at all, or at least make it configurable per glink
-client. But simply dropping the IRQF_NO_SUSPEND flag entirely will break
-other clients. The final shape of the rework of the pmic glink driver in
-order to fulfill both the filtering of the messages that need to be able
-to wake-up the system and the queueing of these messages until the system
-has properly resumed is still being discussed and it is planned as a
-future effort.
-
-Meanwhile, the stop-gap fix here is to schedule the pmic glink altmode
-worker on the system_freezable_wq instead of the system_wq. This will
-result in the altmode worker not being scheduled to run until the
-devices are resumed first, which will give the controllers like I2C a
-chance to resume before the transfer is requested.
-
-Reported-by: Johan Hovold <johan+linaro@kernel.org>
-Closes: https://lore.kernel.org/lkml/Z1CCVjEZMQ6hJ-wK@hovoldconsulting.com/
-Fixes: 080b4e24852b ("soc: qcom: pmic_glink: Introduce altmode support")
-Cc: stable@vger.kernel.org    # 6.3
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-Reviewed-by: Bjorn Andersson <andersson@kernel.org>
-Signed-off-by: Abel Vesa <abel.vesa@linaro.org>
-Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
----
-Reviving this old patch since it is still an unsolved problem and the
-conversation about it stopped. The hope was that this would be fixed
-in some other way, but none of the solutions discussed off-list seemed
-to surface. So maybe this can be merged as a stop-gap for now.
-
-I've been running with this patch (and the ucsi generic one) on my Hamoa
-laptop ever since and the USB plug/unplug during suspend issue has went
-away for good.
-
-I intend respin the UCSI generic patch as well.
-
-Changes in v3:
-- Rebased on next-20260818.
-- Picked up Bjorn's R-b tag.
-- Dropped the RFC prefix, sent as proper patch.
-- Link to v2: https://lore.kernel.org/all/20250129-soc-qcom-pmic-glink-fix-device-access-on-worker-while-suspended-v2-1-de2a3eca514e@linaro.org/
----
- drivers/soc/qcom/pmic_glink_altmode.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/soc/qcom/pmic_glink_altmode.c b/drivers/soc/qcom/pmic_glink_altmode.c
-index 13c434f8d03a..465e5d2316a0 100644
---- a/drivers/soc/qcom/pmic_glink_altmode.c
-+++ b/drivers/soc/qcom/pmic_glink_altmode.c
-@@ -451,7 +451,7 @@ static void pmic_glink_altmode_sc8180xp_notify(struct pmic_glink_altmode *altmod
- 	alt_port->mode = mode;
- 	alt_port->hpd_state = hpd_state;
- 	alt_port->hpd_irq = hpd_irq;
--	schedule_work(&alt_port->work);
-+	queue_work(system_freezable_wq, &alt_port->work);
- }
- 
- #define SC8280XP_DPAM_MASK	0x3f
-@@ -502,7 +502,7 @@ static void pmic_glink_altmode_sc8280xp_notify(struct pmic_glink_altmode *altmod
- 		alt_port->tbt_data = *tbt;
- 	}
- 
--	schedule_work(&alt_port->work);
-+	queue_work(system_freezable_wq, &alt_port->work);
- }
- 
- static void pmic_glink_altmode_callback(const void *data, size_t len, void *priv)
-
----
-base-commit: 5453bc3279e9f8578ac3e534d476240e40c879e1
-change-id: 20260819-b4-soc-qcom-pmic-glink-fix-device-access-on-worker-while-suspended-95a4f21e6632
-
-Best regards,
---  
-Abel Vesa <abel.vesa@oss.qualcomm.com>
-
+Thanks,
+Peter Chen
